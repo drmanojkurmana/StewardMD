@@ -7,6 +7,9 @@
  *                                  30s resend throttle), emails it via Resend to the TOKEN's email.
  *   POST /api/auth/verify-otp   body { code } -> checks code/expiry/attempts; on success clears the
  *                                  code, best-effort sets the `emailVerified` custom claim, returns ok.
+ *   POST /api/auth/phone-start  body { phone, channel? } -> 6-digit code over WhatsApp, SMS backup
+ *                                  (functions/_phone_otp.js). Returns { ok, channel, to (masked) }.
+ *   POST /api/auth/phone-verify body { code } -> sets the `phoneVerified` claim + lifecycle stamp.
  *
  * The OTP is keyed by uid and sent only to the email inside the verified token, so a token can't be
  * used to spam codes to arbitrary addresses. Storage: CASES_KV (falls back to GHIS_KV), same as the
@@ -15,6 +18,8 @@
 import { verifyFirebaseToken } from "../../_fbauth.js";
 import { mergeUserClaims, lookupUidByEmail, setUserPassword } from "../../_fbadmin.js";
 import { emailOtp, emailResetCode, emailTempPassword } from "../../_email.js";
+import { phoneStart, phoneVerify, deliverOtp, phoneVerifyEnabled } from "../../_phone_otp.js";
+import { markPhoneVerified } from "../../_lifecycle.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const TTL = 600;            // 10 minutes
@@ -89,6 +94,21 @@ async function handle(context) {
   if (action === "anchor-verify") {
     var r2 = await anchorVerify(who, await request.json().catch(() => ({})), store, () => mergeUserClaims(env, who.uid, { anchorVerified: true }));
     return json(r2, r2.status || 200);
+  }
+
+  // Mobile-number verification (2026-09-19): WhatsApp code, SMS as backup. Keyed otp:phone:<uid>.
+  // Sits BEFORE the email gate: an Apple "Hide My Email" account has a phone to verify too.
+  if (action === "phone-start" || action === "phone-verify") {
+    if (!phoneVerifyEnabled(env)) return json({ ok: false, error: "off" });
+    var pb = await request.json().catch(function () { return {}; });
+    var pr = action === "phone-start"
+      ? await phoneStart(who, pb, { store: store, defaultCc: env.FOLLOWCARE_DEFAULT_CC, deliver: function (phone, code, name, channel) { return deliverOtp(env, { phone: phone, code: code, name: name, channel: channel }); } })
+      : await phoneVerify(who, pb, { store: store, onVerified: async function (phone) {
+          try { await mergeUserClaims(env, who.uid, { phoneVerified: true }); } catch (e) {}
+          try { await markPhoneVerified(env, who.uid, phone); } catch (e) {}
+        } });
+    var ps = pr.status || 200; delete pr.status;
+    return json(pr, ps);
   }
 
   if (!who.email) return json({ ok: false, error: "no-email-on-account" }, 400);

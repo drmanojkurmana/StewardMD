@@ -3,15 +3,20 @@
  * Stored in KV (MAIK_KV, falling back to GHIS_KV/UPDATES_KV), keyed by Firebase uid. Holds ONLY
  * the fields the email sweeps need — email, display name, and a few timestamps. NEVER any PHI.
  *
- *   lifecycle:u:<uid> -> { email, name, firstSeen, verifiedAt?, upsellAt? }
+ *   lifecycle:u:<uid> -> { email, name, firstSeen, verifiedAt?, upsellAt?, unsubscribedAt?,
+ *                          promoIdx?, promoAt?, phone?, phoneVerifiedAt? }
  *
  * - firstSeen is idempotent (never reset) so the day-3 sweep measures from the true first sign-in.
  * - upsellAt is the send-once guard shared by the on-verify and day-3 Pro-email paths.
- * The `firstSeen` + `upsellAt` markers are also mirrored into the KV entry's metadata so the nightly
- * sweep can filter from list() alone, without a get() per user.
+ * - unsubscribedAt (2026-09-19) is the marketing opt-out from /api/unsubscribe. It silences the Pro
+ *   upsell and the promotional series ONLY; account notices (codes, the removal warning) still go.
+ * - promoIdx / promoAt drive the promotional series: the next edition to send and when the last went.
+ * The sweep-relevant markers are mirrored into the KV entry's metadata so the nightly sweep can
+ * filter from list() alone, without a get() per user.
  */
 
 import { emailProUpsell } from "./_email.js";
+import { emailPromo, PROMO_EDITIONS } from "./_promo.js";
 import { promoActive, promoUntil } from "./_entitlement.js";
 import { getUserClaims } from "./_fbadmin.js";
 import { fsGet, fsCommit, wDelete } from "./_fbfirestore.js";
@@ -33,8 +38,29 @@ async function putLifecycle(env, uid, rec) {
   const kv = lcKv(env); if (!kv || !uid) return;
   // Mirror the sweep-relevant fields into metadata so list() can filter without reading each value.
   const metadata = { firstSeen: rec.firstSeen || 0, upsellAt: rec.upsellAt || 0, verifiedAt: rec.verifiedAt || 0,
-                     purgeWarnedAt: rec.purgeWarnedAt || 0, purgedAt: rec.purgedAt || 0 };
+                     purgeWarnedAt: rec.purgeWarnedAt || 0, purgedAt: rec.purgedAt || 0,
+                     unsubscribedAt: rec.unsubscribedAt || 0, promoIdx: rec.promoIdx || 0, promoAt: rec.promoAt || 0 };
   try { await kv.put(KEY(uid), JSON.stringify(rec), { metadata }); } catch (e) {}
+}
+
+// Marketing opt-out (from /api/unsubscribe). `on` false re-subscribes. Never touches anything else.
+export async function markUnsubscribed(env, uid, on) {
+  if (!lcKv(env) || !uid) return null;
+  const rec = (await getLifecycle(env, uid)) || { firstSeen: Date.now() };
+  if (on === false) delete rec.unsubscribedAt; else rec.unsubscribedAt = Date.now();
+  await putLifecycle(env, uid, rec);
+  return rec;
+}
+export function isUnsubscribed(rec) { return !!(rec && rec.unsubscribedAt); }
+
+// Phone verified over WhatsApp/SMS OTP (functions/api/auth phone-otp). Stores the number the code
+// was delivered to, so support can see which number is on the account. Not PHI: it is the doctor's.
+export async function markPhoneVerified(env, uid, phone) {
+  if (!lcKv(env) || !uid) return null;
+  const rec = (await getLifecycle(env, uid)) || { firstSeen: Date.now() };
+  rec.phone = String(phone || ""); rec.phoneVerifiedAt = Date.now();
+  await putLifecycle(env, uid, rec);
+  return rec;
 }
 
 // Record first sign-in (idempotent — never resets firstSeen). Fills email/name if newly known.
@@ -80,18 +106,62 @@ export async function sendProUpsellOnce(env, uid, { email, name } = {}) {
   if (email && !rec.email) rec.email = email;
   if (name && !rec.name) rec.name = name;
   if (rec.upsellAt) { await putLifecycle(env, uid, rec); return { sent: false, reason: "already" }; }
+  // An opt-out is honoured before anything else: not stamped as sent, so a re-subscribe gets it later.
+  if (isUnsubscribed(rec)) { await putLifecycle(env, uid, rec); return { sent: false, reason: "unsubscribed" }; }
   // Don't upsell someone who already bought / was granted Pro (the real claim, not the promo).
   try { const c = await getUserClaims(env, uid); if (c && c.pro === true) { rec.upsellAt = Date.now(); await putLifecycle(env, uid, rec); return { sent: false, reason: "already-pro" }; } } catch (e) {}
   const to = email || rec.email || "";
   if (!to) { await putLifecycle(env, uid, rec); return { sent: false, reason: "no-email" }; }
   let ok = false;
   try {
-    const r = await emailProUpsell(env, { email: to, name: name || rec.name || "", promoActive: promoActive(env), promoUntilStr: promoUntilStr(env) });
+    const r = await emailProUpsell(env, { email: to, name: name || rec.name || "", uid, promoActive: promoActive(env), promoUntilStr: promoUntilStr(env) });
     ok = !!(r && r.ok);
   } catch (e) {}
   if (ok) rec.upsellAt = Date.now();
   await putLifecycle(env, uid, rec);
   return { sent: ok };
+}
+
+/* ── Promotional series (2026-09-19) ─────────────────────────────────────────────────────────────
+ * Seven editions (functions/_promo.js), one every PROMO_EVERY_DAYS (default 4), starting
+ * PROMO_START_DAYS (default 5) after first sign-in so it never collides with the day-3 upsell.
+ * OFF unless PROMO_SERIES_ON=1 (owner decision: marketing cadence is theirs to switch on). Skips
+ * anyone unsubscribed, anyone holding a real Pro claim (series marked complete), and never sends the
+ * same edition twice. */
+export function promoSeriesEnabled(env) { const v = env && env.PROMO_SERIES_ON; return String(v) === "1" || String(v) === "true"; }
+export function promoEveryDays(env) { const n = +(env && env.PROMO_EVERY_DAYS); return Number.isFinite(n) && n > 0 ? n : 4; }
+export function promoStartDays(env) { const n = +(env && env.PROMO_START_DAYS); return Number.isFinite(n) && n > 0 ? n : 5; }
+
+// PURE: should this record get an edition now? -> { send:boolean, reason, edition? }
+export function decidePromo(env, rec, claims, now) {
+  now = now || Date.now();
+  const r = rec || {}, c = claims || {};
+  const idx = r.promoIdx || 0;
+  if (isUnsubscribed(r)) return { send: false, reason: "unsubscribed" };
+  if (r.purgedAt) return { send: false, reason: "purged" };
+  if (idx >= PROMO_EDITIONS.length) return { send: false, reason: "done" };
+  if (c.pro === true && (!c.proExp || +c.proExp > now)) return { send: false, reason: "paying" };
+  if (!r.email) return { send: false, reason: "no-email" };
+  if (!r.firstSeen || now - r.firstSeen < promoStartDays(env) * 86400000) return { send: false, reason: "too-young" };
+  if (r.promoAt && now - r.promoAt < promoEveryDays(env) * 86400000) return { send: false, reason: "too-soon" };
+  return { send: true, reason: "due", edition: PROMO_EDITIONS[idx] };
+}
+
+// Send the next edition to one user if due. Stamps only on a real send.
+export async function sendPromoNext(env, uid, now) {
+  if (!lcKv(env) || !uid) return { sent: false, reason: "no-kv" };
+  const rec = (await getLifecycle(env, uid)) || {};
+  let claims = {};
+  try { claims = (await getUserClaims(env, uid)) || {}; } catch (e) { return { sent: false, reason: "claims-failed" }; }
+  const d = decidePromo(env, rec, claims, now);
+  if (!d.send) {
+    if (d.reason === "paying" && (rec.promoIdx || 0) < PROMO_EDITIONS.length) { rec.promoIdx = PROMO_EDITIONS.length; await putLifecycle(env, uid, rec); }
+    return { sent: false, reason: d.reason };
+  }
+  let ok = false;
+  try { const r = await emailPromo(env, { email: rec.email, name: rec.name || "", uid, edition: d.edition }); ok = !!(r && r.ok); } catch (e) {}
+  if (ok) { rec.promoIdx = (rec.promoIdx || 0) + 1; rec.promoAt = now || Date.now(); await putLifecycle(env, uid, rec); }
+  return { sent: ok, edition: d.edition };
 }
 
 /* ── Unverified-account sweep (owner decision, 2026-08-27) ────────────────────────────────────

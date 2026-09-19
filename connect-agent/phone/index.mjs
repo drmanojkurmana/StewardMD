@@ -47,15 +47,27 @@ export const GAP_PROMPTS = Object.freeze({
   radiology: 'I could not find the radiology reports. Open them and tap inside so they turn green, then tap Done. ' + REASSURANCE,
   discharge: 'I could not find the discharge summary. Open it and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
   history: 'I could not find the visit history. Open it and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
+  /* THE ONE EXTRA TAP, AND ONLY WHEN IT IS EARNED. The agent opens a row of a proven list itself to
+   * learn the report behind it; when that does not work on this hospital, the alternative used to be
+   * a run that finished looking healthy and was then refused approval for a detail nobody could
+   * supply. Asked only if the list proved and its detail did not, so a hospital where the chain works
+   * is never asked at all. */
+  'labs-detail': 'I found your lab list but not the report behind it. Open one lab report and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
+  'radiology-detail': 'I found your scan list but not the report behind it. Open one scan report and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
 });
 const MAX_ASKS = 4;
-const GAP_NAMES = Object.freeze({ worklist: 'patient list', patient: 'patient details', notes: 'clinical notes', labs: 'lab results', radiology: 'radiology reports', medications: 'medication chart', discharge: 'discharge summary', history: 'visit history' });
+const GAP_NAMES = Object.freeze({ worklist: 'patient list', patient: 'patient details', notes: 'clinical notes', labs: 'lab results', radiology: 'radiology reports', medications: 'medication chart', discharge: 'discharge summary', history: 'visit history', 'labs-detail': 'lab report', 'radiology-detail': 'scan report' });
 const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[type=\"password\"]')?'1':'0'})()";
 
 /* MANUAL MODE: the doctor drives, the agent reads over their shoulder. One ask per resource, in the
  * order a ward round reads a chart. Each ask has "Not in my EMR" in the browser header (the native
  * guideSkip event) so a hospital without, say, radiology never blocks the run. */
-export const ASK_ORDER = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
+/* FEWEST TAPS TO A USABLE CONNECTION. Approval needs the ward list, labs and its report, radiology and
+ * its report, and the drug chart; patient details, notes, the discharge summary and visit history are
+ * worth having but the gate does not require them. Asking for patient details and notes first spent two
+ * of the doctor's taps before anything approvable existed (owner's live run, 2026-09-18). The required
+ * screens come first, so a doctor who stops early still ends up with an adapter that can be approved. */
+export const ASK_ORDER = Object.freeze(['worklist', 'labs', 'radiology', 'medications', 'patient', 'notes', 'discharge', 'history']);
 
 /* A SECOND LOOK MAY ONLY ADD. "Look again" used to assign the new walk's views straight over the old
  * list, so a walk that came back with less silently destroyed the screens the doctor had just
@@ -388,7 +400,18 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   if (typeof askDoctor === 'function' && crawlStop !== 'login-required' && crawlStop !== 'session-expired-or-shell') {
     const unproven = verification.failed.filter((r) => r !== 'worklist' || !verification.patients.length);
     // What the agent found but could not prove comes first: the doctor's tap there is worth most.
-    const gaps = manual ? ASK_ORDER.slice() : [...new Set([...unproven, ...looking()])].slice(0, MAX_ASKS + unproven.length);
+    /* A detail follows the list it belongs to: "open the lab list", then "open one lab report", so the
+     * doctor is already standing on the screen the second question is about. Without this a bare
+     * indexOf sent every "-detail" to the back of the queue, behind unrelated resources. */
+    const askRank = (g) => {
+      const i = ASK_ORDER.indexOf(g);
+      if (i >= 0) return i;
+      const m = /^(.+)-detail$/.exec(g);
+      const p = m ? ASK_ORDER.indexOf(m[1]) : -1;
+      return p >= 0 ? p + 0.5 : ASK_ORDER.length;
+    };
+    const gaps = manual ? ASK_ORDER.slice()
+      : [...new Set([...unproven, ...looking()])].sort((a, b) => askRank(a) - askRank(b)).slice(0, MAX_ASKS + unproven.length);
     const prompts = manual ? ASK_PROMPTS : GAP_PROMPTS;
     for (let i = 0; i < gaps.length; i += 1) {
       if (stopped()) break;
@@ -445,6 +468,13 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     const proven = observedViews.filter((v) => v && v.proof && v.proof.status === 'proven');
     const rest = observedViews.filter((v) => !(v && v.proof && v.proof.status === 'proven'));
     observedViews = proven.concat(rest).slice(0, 40);
+  }
+  // Map non-legacy statuses (like 'no-headers', 'no-rows') to 'unproven' so existing/live server broker validations never reject the payload
+  const LEGACY_SERVER_SAFE_STATUSES = new Set(['proven', 'unproven', 'no-requests', 'no-screen-values', 'signed-out', 'error']);
+  for (const v of observedViews) {
+    if (v && v.proof && !LEGACY_SERVER_SAFE_STATUSES.has(v.proof.status)) {
+      v.proof.status = 'unproven';
+    }
   }
   const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews, proofs: book.trace });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });

@@ -51,7 +51,7 @@
     return u;
   }
 
-  var cache = { catalog: null, packs: {}, diseases: {}, media: null };
+  var cache = { catalog: null, packs: {}, diseases: {}, media: null, dxVocab: null };
 
   function ver() { return (cache.catalog && cache.catalog.contentVersion) || ""; }
 
@@ -82,6 +82,20 @@
       return getJSON("media/manifest.json").then(function (j) {
         cache.media = (j && j.media) || {};
         return cache.media;
+      });
+    });
+  }
+
+  /* The diagnosis vocabulary for the case differential and diagnosis pickers (365 entries, ~34 KB).
+   * Fetched the first time a student reaches the differential stage and cached for the session:
+   * it is content, and content in CliniX is never parsed at launch. */
+  function loadDxVocab() {
+    if (cache.dxVocab) return Promise.resolve(cache.dxVocab);
+    return loadCatalog().then(function () {
+      return getJSON("dx-vocabulary.json").then(function (j) {
+        if (!j || !j.dx || !j.dx.length) return null;
+        cache.dxVocab = j;
+        return j;
       });
     });
   }
@@ -327,12 +341,13 @@
     return { total: total, visible: visible, pending: total - visible };
   }
 
-  function reset() { cache = { catalog: null, packs: {}, diseases: {}, media: null }; _allCache = null; }
+  function reset() { cache = { catalog: null, packs: {}, diseases: {}, media: null, dxVocab: null }; _allCache = null; }
 
   var API = {
     loadCatalog: loadCatalog,
     loadDisease: loadDisease,
     loadMedia: loadMedia,
+    loadDxVocab: loadDxVocab,
     pathwayFor: pathwayFor,
     lessonFor: lessonFor,
     loadAllSkills: loadAllSkills,

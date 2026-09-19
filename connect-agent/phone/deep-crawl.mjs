@@ -953,7 +953,11 @@ function CRAWL_CLICK_CONTROL(idx, query) {
 // class, redacted label) into window.__smdGuidePath so the pattern can be replayed later. Values never
 // recorded: only the control's own short label with digit runs replaced.
 function CRAWL_ARM_GUIDE() {
-  window.__smdGuidePath = [];
+  /* KEEP THE TAPS ALREADY RECORDED. This is re-applied every couple of seconds while a question is on
+   * screen, so the capture survives a page load; clearing the path on every call wiped the doctor's
+   * walk continuously and left view.guidedPath empty at Done, which defeats the detail chain for a list
+   * they showed. CRAWL_GUIDE_PATH nulls it when the answer is read, so the next question starts fresh. */
+  if (!Array.isArray(window.__smdGuidePath)) window.__smdGuidePath = [];
   if (window.__smdGuideOff) { try { window.__smdGuideOff(); } catch (e) { /* ignore */ } }
   var handler = function (ev) {
     var el = ev.target && ev.target.nodeType === 1 ? ev.target : null;
@@ -1003,20 +1007,50 @@ const DOCS_SRC = String(CRAWL_DOCS);
  * walks frames is handed its walker in the same expression. */
 export const withDocs = (fnSrc, args = '') => `(function(){ var CRAWL_DOCS = ${DOCS_SRC}; return (${fnSrc})(${args}); })()`;
 const PAGE_STATE_SRC = String(CRAWL_PAGE_STATE);
+/* A DISCLOSURE HIDES THE CHART MENU. On the live GHIS a patient record shows a handful of controls
+ * until "More.." is tapped; the whole clinical menu (Lab reports, Medications, Patient profile,
+ * Initial assessment) is behind it, so the crawl enumerated only what it could see and medications and
+ * labs stayed invisible - every run had to ask the doctor for them (owner's iPhone, runs 1-4,
+ * 2026-09-18). Only a pure show-more control matches: it must be the WHOLE label, so "More Medicines"
+ * and anything on the destructive list never do. */
+export const DISCLOSURE_LABEL = /^\s*(more|show\s+more|see\s+more|view\s+all|show\s+all)\s*\.{0,3}\s*$/i;
+
+function CRAWL_EXPAND_DISCLOSURES(reSrc, max) {
+  var body = String(reSrc);
+  var re = new RegExp(body.slice(body.indexOf('/') + 1, body.lastIndexOf('/')), 'i');
+  var all = [].slice.call(document.querySelectorAll('a,button,span,div,li,[onclick]'));
+  var opened = 0;
+  for (var i = 0; i < all.length && opened < max; i++) {
+    var el = all[i];
+    if (!el.getClientRects || !el.getClientRects().length) continue;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!txt || txt.length > 20 || !re.test(txt)) continue;
+    try { el.click(); opened++; } catch (e) { /* ignore */ }
+  }
+  return String(opened);
+}
+const EXPAND_DISCLOSURES_SRC = String(CRAWL_EXPAND_DISCLOSURES);
+
 const FIND_PATIENT_ROW_SRC = String(CRAWL_FIND_PATIENT_ROW);
 const CLICK_ROW_SRC = String(CRAWL_CLICK_ROW);
 
-/* Click the first data row of a captured list (its first link when it has one, else the row itself)
- * so the call that opens a single report or result is observed. Page realm; returns what it did. */
+/* Click the first data row of a captured list (its report/print action when it has one, else its
+ * first link, else the row itself) so the call that opens a single report or result is observed.
+ * A GHIS lab order opens its report only through a print/report icon: clicking an arbitrary link in
+ * the row misses it, so action elements win over a generic link. Page realm; returns what it did. */
 function CRAWL_CLICK_FIRST_ROW(selector) {
   try {
     var rows = document.querySelectorAll(selector);
+    var PRIORITY = ['[onclick*="print" i]', '[onclick*="report" i]', '[onclick*="result" i]', '[class*="print" i]', '[title*="print" i]', '[title*="report" i]', '[value*="print" i]', 'a[href]:not([href^="#"])', 'a[onclick]', 'button', '[onclick]'];
     for (var i = 0; i < rows.length; i++) {
       var row = rows[i];
       var tds = row.querySelectorAll ? row.querySelectorAll('td') : [];
       if (tds.length < 2) continue;
-      var a = row.querySelector('a[href]:not([href^="#"]), a[onclick], button, [onclick]');
-      if (a) { a.click(); return 'link'; }
+      for (var p = 0; p < PRIORITY.length; p++) {
+        var a = null;
+        try { a = row.querySelector(PRIORITY[p]); } catch (x) { a = null; }
+        if (a) { a.click(); return 'link'; }
+      }
       row.click();
       return 'row';
     }
@@ -1581,6 +1615,13 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   const hub = await captureView({ client, resourceHint: 'patient', blockOnly: true });
   if (book && hub) await book.prove({ client, view: hub, label: 'open one patient from the list' });
   record(hub);
+
+  /* Open any "More.." style disclosure on the record before enumerating: on GHIS the clinical menu
+   * lives behind one, and without this the walk never sees labs or medications at all. */
+  try {
+    await client.evaluate({ expression: withDocs(EXPAND_DISCLOSURES_SRC, JSON.stringify(String(DISCLOSURE_LABEL)) + ',3') });
+    await client.wait({ ms: Math.min(waitMs, 1500) });
+  } catch { /* best effort: the walk still runs on what is visible */ }
 
   // 2/3. Walk EVERY control under the record, clinical keywords first, dedup by redacted label, until a
   // cap is hit. The observer is armed before each click so the capture can attribute the table or block

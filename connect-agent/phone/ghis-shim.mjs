@@ -68,6 +68,31 @@ function pick(row, roles, role, re, not) {
 function looksLikeResultTable(rows, roles) {
   return rows.some((r) => pick(r, roles, 'result', RX.result) && (pick(r, roles, 'unit', RX.units) || pick(r, roles, 'reference', RX.range) || pick(r, roles, 'testName', RX.name)));
 }
+/* ORDER DATES, NOT ORDER NOISE. GHIS rows carry the date under several keys (OrderDate, order_date,
+ * date, reported, reg_date, Reported On, ResultDate); the generic date regex can also match a
+ * non-date column first, and a status word ("Final", "Reported") must never file as the order's
+ * date on the drawer card. The known keys are checked first, then the learned/fuzzy fallback, and
+ * only a value that reads as a date is accepted. */
+const ORDER_DATE_KEYS = new Set(['orderdate', 'date', 'reported', 'regdate', 'reportedon', 'resultdate', 'collectiondate', 'collectedon', 'orderdatetime', 'testdate']);
+function looksLikeDate(v) {
+  const s = String(v == null ? '' : v).trim();
+  if (!s || s.length > 64 || !/\d/.test(s)) return false;
+  return /[\/\-:.]/.test(s) || /(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(s);
+}
+function orderDateOf(row, roles) {
+  if (row) {
+    for (const k of Object.keys(row)) {
+      if (ORDER_DATE_KEYS.has(String(k).toLowerCase().replace(/[^a-z]/g, ''))) {
+        const v = String(row[k] == null ? '' : row[k]).trim();
+        if (v && looksLikeDate(v)) return v;
+      }
+    }
+  }
+  const learned = roles && roles.date && row && row[roles.date] != null ? String(row[roles.date]).trim() : '';
+  if (learned && looksLikeDate(learned)) return learned;
+  const fuzzy = col(row, RX.date);
+  return looksLikeDate(fuzzy) ? fuzzy : '';
+}
 
 /** GET /lab -> { orders } and GET /lab-detail -> { group, tests } from the adapter's labs view. */
 export function labOrders(sections, patient) {
@@ -81,8 +106,8 @@ export function labOrders(sections, patient) {
     // its rows as tests. GHIS style two-level (order list -> detail) collapses to that.
     const groups = new Map();
     rows.forEach((r) => {
-      const key = pick(r, roles, 'department', RX.dept) + '|' + pick(r, roles, 'date', RX.date);
-      if (!groups.has(key)) groups.set(key, { key, date: pick(r, roles, 'date', RX.date), dept: pick(r, roles, 'department', RX.dept), rows: [], roles });
+      const key = pick(r, roles, 'department', RX.dept) + '|' + orderDateOf(r, roles);
+      if (!groups.has(key)) groups.set(key, { key, date: orderDateOf(r, roles), dept: pick(r, roles, 'department', RX.dept), rows: [], roles });
       groups.get(key).rows.push(r);
     });
     const orders = [...groups.values()].map((g, i) => ({
@@ -93,7 +118,7 @@ export function labOrders(sections, patient) {
     return { orders, detailOf: (renderId) => detailFor([...groups.values()][Number(String(renderId).slice(1))] || null) };
   }
   const orders = rows.map((r, i) => ({
-    serviceName: pick(r, roles, 'testName', RX.name, /\bid\b|code/i) || pick(r, roles, 'title') || firstText(r), orderDate: pick(r, roles, 'date', RX.date), department: pick(r, roles, 'department', RX.dept),
+    serviceName: pick(r, roles, 'testName', RX.name, /\bid\b|code/i) || pick(r, roles, 'title') || firstText(r), orderDate: orderDateOf(r, roles), department: pick(r, roles, 'department', RX.dept),
     status: col(r, RX.status), renderId: 'a' + i, episodeId, orderId: 'a' + i, valueType: '',
   }));
   /* The proven chain (runtime readPatientDetails): each order's own result rows, read through the
@@ -108,7 +133,7 @@ export function labOrders(sections, patient) {
     const title = pick(r, roles, 'testName', RX.name, /\bid\b|code/i) || firstText(r);
     const byIndex = detailRows.filter((d) => d._rowIndex === i);
     const own = byIndex.length ? byIndex : detailRows.filter((d) => d._of === title);
-    return detailFor({ dept: pick(r, roles, 'department', RX.dept), date: pick(r, roles, 'date', RX.date), rows: own.length ? own : [r], roles: own.length ? droles : roles });
+    return detailFor({ dept: pick(r, roles, 'department', RX.dept), date: orderDateOf(r, roles), rows: own.length ? own : [r], roles: own.length ? droles : roles });
   } };
 }
 /* ANALYTE NORMALIZATION. Hospitals label the same test many ways ("Hb", "HB%", "PLT",

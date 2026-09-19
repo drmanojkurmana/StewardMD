@@ -1,0 +1,138 @@
+{
+  "id": "peds-neuroblastoma-anbl0531",
+  "diseaseId": "neuroblastoma",
+  "name": "COG ANBL0531: Carboplatin + Etoposide + Cyclophosphamide + Doxorubicin (Intermediate-Risk Neuroblastoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pediatric Neuroblastoma v2.2026",
+    "textbook": "Principles and Practice of Pediatric Oncology, 8th ed."
+  },
+  "institution": {
+    "provenance": "COG ANBL0531 Phase III Study for Intermediate-Risk Neuroblastoma (Twist et al. J Clin Oncol 2019)",
+    "approval": null
+  },
+  "stage": [
+    "intermediate-risk",
+    "L2",
+    "M"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "induction"
+  ],
+  "histology": "neuroblastoma (intermediate-risk, non-MYCN amplified)",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "0.15 mg/kg IV (max 16 mg)",
+      "notes": "Administer 30 minutes prior to chemotherapy"
+    },
+    {
+      "name": "Dexamethasone",
+      "dose": "0.15 mg/kg IV (max 10 mg)",
+      "notes": "Administer with antiemetic premedication"
+    },
+    {
+      "name": "Mesna",
+      "dose": "200 mg/m2 IV at hr 0, 4, 8 of cyclophosphamide",
+      "notes": "Mandatory uroprotection against hemorrhagic cystitis"
+    }
+  ],
+  "supportiveCare": [
+    "Pre- and post-hydration with D5 0.45% NS + 20 mEq KCl/L at 125-150 mL/m2/hr",
+    "Filgrastim (G-CSF) 5 mcg/kg/day SC starting 24-48 hours after chemotherapy until ANC > 1500/mcL post-nadir",
+    "Audiometry baseline and post-cycle 2 and 4 to monitor carboplatin ototoxicity"
+  ],
+  "monitoring": [
+    "CBC with differential twice weekly during nadir",
+    "Comprehensive metabolic panel (BUN, creatinine, electrolytes, LFTs) prior to each cycle",
+    "Echocardiogram (LVEF / shortening fraction) baseline and after 150 mg/m2 cumulative doxorubicin",
+    "Urine HVA/VMA and tumor imaging (CT/MRI + MIBG) every 2 cycles"
+  ],
+  "clearanceChecks": [
+    "ANC >= 1000/mcL, Platelets >= 100,000/mcL",
+    "Serum creatinine normal for age or GFR >= 70 mL/min/1.73m2",
+    "Total bilirubin <= 1.5x ULN, AST/ALT <= 3x ULN"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "Ototoxicity Brock grade >= 2",
+      "action": "reduce carboplatin",
+      "text": "Reduce carboplatin dose by 25% or substitute with alternate non-ototoxic agent per pediatric oncology tumor board."
+    },
+    {
+      "condition": "Prolonged myelosuppression (>28 days to recover counts)",
+      "action": "dose reduction",
+      "text": "Reduce etoposide and carboplatin doses by 20% for subsequent cycles."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "Carboplatin",
+      "basis": "bsa",
+      "dosePerUnit": 560,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Carboplatin 560 mg/m2 IV in D5W or NS over 1 hour on Day 1. In infants <12 kg or <12 months, dose per weight at 18.7 mg/kg."
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 120,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "notes": "Etoposide 120 mg/m2/day IV over 2 hours on Days 1-3. In infants <12 kg, dose per weight at 4 mg/kg/day."
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Cyclophosphamide 1000 mg/m2 IV over 1 hour on Day 1 with Mesna uroprotection. In infants <12 kg, dose per weight at 33.3 mg/kg."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 30,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 250,
+          "hard": 350,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "DOXOrubicin 30 mg/m2 IV push or short infusion on Day 1. Lifetime pediatric cumulative anthracycline cap applied (warn 250 mg/m2, hard 350 mg/m2). In infants <12 kg, dose per weight at 1 mg/kg."
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "id": "rare-dfsp-imatinib",
+  "diseaseId": "dfsp",
+  "name": "Imatinib 800 mg (Dermatofibrosarcoma Protuberans - COL1A1::PDGFB Targeted)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "disease-control",
+    "neoadjuvant"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "drug",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Dermatofibrosarcoma Protuberans v1.2026"
+  },
+  "stage": [
+    "locally-advanced",
+    "unresectable",
+    "metastatic",
+    "fibrosarcomatous"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "first-line"
+  ],
+  "histology": "dermatofibrosarcoma protuberans (DFSP / FS-DFSP)",
+  "premedications": [],
+  "supportiveCare": [
+    "Administer with meals and plenty of water to prevent GI intolerance"
+  ],
+  "monitoring": [
+    "CBC, CMP, LFTs monthly",
+    "Tumor dimensional response by MRI/CT"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "imatinib",
+      "name": "Imatinib",
+      "basis": "flat",
+      "dosePerUnit": 400,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "notes": "Imatinib 400 mg PO twice daily (total 800 mg/day) continuously for unresectable or metastatic DFSP harboring t(17;22) COL1A1::PDGFB fusion."
+    }
+  ]
+}

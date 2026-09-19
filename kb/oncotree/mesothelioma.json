@@ -45,7 +45,10 @@
       "section": "Workup",
       "description": "Step 1: Complete the diagnostic workup before anatomic and histologic routing. Confirm tissue diagnosis with mesothelial IHC and ancillary molecular testing, establish systemic extent, and obtain multidisciplinary surgical evaluation.",
       "path": "Mesothelioma / Workup",
-      "pills": ["mesothelioma", "workup"],
+      "pills": [
+        "mesothelioma",
+        "workup"
+      ],
       "required": true,
       "bullets": [
         "Complete history including detailed asbestos exposure history (occupational and environmental fiber exposure, latency, smoking history), full review of systems, and performance status (ECOG) with weight, comorbidity, and cardiopulmonary baseline.",
@@ -58,7 +61,7 @@
       "options": [
         {
           "id": "continue",
-          "label": "Diagnostic Workup Reviewed \u2014 Proceed to Anatomic Site & Histology",
+          "label": "Diagnostic Workup Reviewed — Proceed to Anatomic Site & Histology",
           "setsValue": null
         }
       ]
@@ -74,7 +77,10 @@
       "section": "Staging",
       "description": "Workup complete. Classify disease by anatomic site of origin; pleural and peritoneal mesothelioma follow distinct staging, surgical, and systemic pathways.",
       "path": "Mesothelioma / Anatomic Site",
-      "pills": ["mesothelioma", "site"],
+      "pills": [
+        "mesothelioma",
+        "site"
+      ],
       "required": true,
       "bullets": [
         "Malignant pleural mesothelioma (MPM): primary arising from parietal, visceral, or diaphragmatic pleura; management hinges on epithelioid versus non-epithelioid histology and thoracic resectability.",
@@ -85,14 +91,24 @@
         {
           "id": "pleural",
           "label": "Malignant Pleural Mesothelioma (MPM)",
-          "sets": { "site": "pleural" },
-          "pills": ["MPM", "pleural"]
+          "sets": {
+            "site": "pleural"
+          },
+          "pills": [
+            "MPM",
+            "pleural"
+          ]
         },
         {
           "id": "peritoneal",
           "label": "Malignant Peritoneal Mesothelioma (PeM)",
-          "sets": { "site": "peritoneal" },
-          "pills": ["PeM", "peritoneal"]
+          "sets": {
+            "site": "peritoneal"
+          },
+          "pills": [
+            "PeM",
+            "peritoneal"
+          ]
         }
       ]
     },
@@ -107,9 +123,15 @@
       "section": "Staging",
       "description": "Stratify pleural disease by histologic subtype on adequate VATS biopsy; histology determines surgical candidacy and the magnitude of benefit from dual checkpoint blockade.",
       "path": "Mesothelioma / Pleural / Histology",
-      "pills": ["MPM", "histology"],
+      "pills": [
+        "MPM",
+        "histology"
+      ],
       "required": true,
-      "footnotes": ["a", "b"],
+      "footnotes": [
+        "a",
+        "b"
+      ],
       "bullets": [
         "Epithelioid histology: polygonal cells with the most favorable prognosis; the only pleural subtype routinely considered for maximal cytoreductive surgery within multimodality therapy.",
         "Non-epithelioid histology (sarcomatoid or biphasic): spindle-cell or mixed patterns with aggressive behavior and poor chemotherapy response; surgery is generally contraindicated and frontline dual checkpoint blockade is preferred.",
@@ -119,14 +141,24 @@
         {
           "id": "epithelioid",
           "label": "Epithelioid Histology",
-          "sets": { "histology": "epithelioid" },
-          "pills": ["MPM", "epithelioid"]
+          "sets": {
+            "histology": "epithelioid"
+          },
+          "pills": [
+            "MPM",
+            "epithelioid"
+          ]
         },
         {
           "id": "non_epithelioid",
           "label": "Non-Epithelioid (Sarcomatoid or Biphasic)",
-          "sets": { "histology": "non-epithelioid" },
-          "pills": ["MPM", "non-epithelioid"]
+          "sets": {
+            "histology": "non-epithelioid"
+          },
+          "pills": [
+            "MPM",
+            "non-epithelioid"
+          ]
         }
       ]
     },
@@ -141,7 +173,11 @@
       "section": "Treatment",
       "description": "For epithelioid pleural disease, determine clinical resectability and operative fitness; resectable disease enters multimodality therapy and unresectable disease enters first-line systemic therapy.",
       "path": "Mesothelioma / Pleural / Epithelioid / Resectability",
-      "pills": ["MPM", "epithelioid", "resectability"],
+      "pills": [
+        "MPM",
+        "epithelioid",
+        "resectability"
+      ],
       "required": true,
       "bullets": [
         "Clinically resectable: generally cT1-3, N0-1, M0 disease that is technically removable by pleurectomy/decortication, in a patient medically fit by PFTs with DLCO, quantitative V/Q scan, echocardiogram, and mediastinal nodal staging (EBUS or mediastinoscopy).",
@@ -152,14 +188,22 @@
         {
           "id": "resectable",
           "label": "Clinically Resectable (cT1-3, N0-1, M0, medically fit)",
-          "sets": { "resectable": "yes" },
-          "pills": ["resectable"]
+          "sets": {
+            "resectable": "yes"
+          },
+          "pills": [
+            "resectable"
+          ]
         },
         {
           "id": "unresectable",
           "label": "Unresectable / Inoperable / Medically Unfit",
-          "sets": { "resectable": "no" },
-          "pills": ["unresectable"]
+          "sets": {
+            "resectable": "no"
+          },
+          "pills": [
+            "unresectable"
+          ]
         }
       ]
     },
@@ -174,10 +218,18 @@
       "section": "Treatment",
       "description": "Frontline systemic therapy for non-epithelioid (sarcomatoid or biphasic) malignant pleural mesothelioma; dual checkpoint blockade is Category 1 preferred with the largest survival gain in this subgroup, and surgery is generally contraindicated.",
       "path": "Mesothelioma / Pleural / Non-Epithelioid / Systemic Therapy",
-      "pills": ["MPM", "non-epithelioid", "immunotherapy"],
+      "pills": [
+        "MPM",
+        "non-epithelioid",
+        "immunotherapy"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
         "Frontline nivolumab 360 mg IV every 3 weeks plus ipilimumab 1 mg/kg IV every 6 weeks (CheckMate 743 regimen), Category 1 preferred; the non-epithelioid subgroup showed a dramatic overall-survival benefit (median OS about 18.1 versus 8.8 months with chemotherapy, HR about 0.46).",
         "Surgery is generally contraindicated for sarcomatoid or biphasic histology given aggressive biology and poor surgical outcomes; do not route these patients to pleurectomy/decortication or extrapleural pneumonectomy.",
@@ -185,7 +237,9 @@
         "Assess response with contrast chest CT every 6-9 weeks on therapy; continue effective checkpoint blockade until progression or unacceptable toxicity, and manage immune-related adverse events with treatment hold plus corticosteroids and specialty input per severity.",
         "Prioritize clinical trial enrollment at every line; reassess checkpoint eligibility before committing to chemotherapy-only sequencing."
       ],
-      "protocolRefs": ["meso-nivo-ipi"]
+      "protocolRefs": [
+        "meso-nivo-ipi"
+      ]
     },
     {
       "id": "n_tx_mpm_resectable",
@@ -198,17 +252,28 @@
       "section": "Treatment",
       "description": "Multimodality therapy for clinically resectable epithelioid malignant pleural mesothelioma: induction systemic chemotherapy, then lung-sparing pleurectomy/decortication, then adjuvant radiation in selected patients.",
       "path": "Mesothelioma / Pleural / Epithelioid / Resectable / Multimodality",
-      "pills": ["MPM", "epithelioid", "resectable", "surgery"],
+      "pills": [
+        "MPM",
+        "epithelioid",
+        "resectable",
+        "surgery"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "bullets": [
         "Induction chemotherapy: cisplatin 75 mg/m2 plus pemetrexed 500 mg/m2 every 3 weeks (with folic acid, vitamin B12, and dexamethasone support); substitute carboplatin for cisplatin in renal insufficiency; restage with contrast CT and PET-CT after induction.",
         "Maximal cytoreductive surgery: lung-sparing pleurectomy/decortication (P/D) is preferred over extrapleural pneumonectomy (EPP), which carries excess morbidity and mortality per the MARS trials; operate only at experienced mesothelioma centers after multidisciplinary board confirmation.",
         "Adjuvant hemithoracic radiation in selected patients with high-risk features (close or positive margins, nodal involvement) after P/D; plan fields with thoracic radiation oncology given ipsilateral lung tolerance constraints.",
         "Surveillance after multimodality therapy: contrast chest CT every 3-4 months for 2 years then every 6 months, with prompt PET-CT and VATS re-biopsy for suspected recurrence; discuss adjuvant systemic options and trials at progression."
       ],
-      "protocolRefs": ["meso-cis-pemetrexed"]
+      "protocolRefs": [
+        "meso-cis-pemetrexed"
+      ]
     },
     {
       "id": "n_tx_mpm_unresectable",
@@ -221,17 +286,28 @@
       "section": "Treatment",
       "description": "First-line systemic therapy for unresectable, inoperable, or medically unfit malignant pleural mesothelioma: dual checkpoint blockade (Category 1 preferred) or platinum-pemetrexed chemotherapy with or without bevacizumab.",
       "path": "Mesothelioma / Pleural / Unresectable / Systemic Therapy",
-      "pills": ["MPM", "unresectable", "systemic"],
+      "pills": [
+        "MPM",
+        "unresectable",
+        "systemic"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["1"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "bullets": [
         "Preferred: nivolumab 360 mg IV every 3 weeks plus ipilimumab 1 mg/kg IV every 6 weeks (CheckMate 743 regimen), Category 1 preferred for unresectable disease across histologies.",
         "Alternative Category 1 chemotherapy backbone: cisplatin 75 mg/m2 plus pemetrexed 500 mg/m2 every 3 weeks, with or without bevacizumab 15 mg/kg every 3 weeks in fit patients without contraindications; substitute carboplatin plus pemetrexed for renal insufficiency.",
         "Select between checkpoint doublet and chemotherapy by histology, autoimmune history, performance status, renal function, bleeding or cardiovascular risk (for bevacizumab), and patient preference after shared decision-making.",
         "Assess response with contrast chest CT every 6-9 weeks; continue effective therapy until progression or unacceptable toxicity, manage immune-related and chemotherapy toxicities per severity, and prioritize clinical trial enrollment at progression."
       ],
-      "protocolRefs": ["meso-nivo-ipi", "meso-cis-pemetrexed"]
+      "protocolRefs": [
+        "meso-nivo-ipi",
+        "meso-cis-pemetrexed"
+      ]
     },
     {
       "id": "n_peritoneal_resectability",
@@ -244,7 +320,10 @@
       "section": "Treatment",
       "description": "For peritoneal disease, determine CRS-HIPEC candidacy from histology, peritoneal cancer index (PCI), and operative fitness; favorable epithelioid low-PCI disease goes to experienced-center surgery and all other presentations go to systemic therapy.",
       "path": "Mesothelioma / Peritoneal / Resectability",
-      "pills": ["PeM", "resectability"],
+      "pills": [
+        "PeM",
+        "resectability"
+      ],
       "required": true,
       "bullets": [
         "Resectable: epithelioid histology with low peritoneal cancer index (PCI), no extra-abdominal metastases, and complete cytoreduction judged feasible on contrast CT plus diagnostic laparoscopy, in a medically fit patient at an experienced CRS-HIPEC center.",
@@ -255,14 +334,24 @@
         {
           "id": "resectable",
           "label": "Resectable Epithelioid / Low PCI (CRS-HIPEC candidate)",
-          "sets": { "resectable": "yes" },
-          "pills": ["resectable", "low PCI"]
+          "sets": {
+            "resectable": "yes"
+          },
+          "pills": [
+            "resectable",
+            "low PCI"
+          ]
         },
         {
           "id": "unresectable",
           "label": "Unresectable / Sarcomatoid / High PCI",
-          "sets": { "resectable": "no" },
-          "pills": ["unresectable", "high PCI"]
+          "sets": {
+            "resectable": "no"
+          },
+          "pills": [
+            "unresectable",
+            "high PCI"
+          ]
         }
       ]
     },
@@ -277,17 +366,29 @@
       "section": "Treatment",
       "description": "Complete cytoreductive surgery (CRS) plus hyperthermic intraperitoneal chemotherapy (HIPEC) with cisplatin and doxorubicin for resectable low-PCI epithelioid peritoneal mesothelioma at an experienced center.",
       "path": "Mesothelioma / Peritoneal / Resectable / CRS-HIPEC",
-      "pills": ["PeM", "epithelioid", "resectable", "surgery", "HIPEC"],
+      "pills": [
+        "PeM",
+        "epithelioid",
+        "resectable",
+        "surgery",
+        "HIPEC"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Complete cytoreductive surgery (CRS) with the goal of no visible residual disease, followed by hyperthermic intraperitoneal chemotherapy (HIPEC) with cisplatin and doxorubicin; perform only at experienced peritoneal-surface centers (Category 1 preferred approach for this subgroup).",
         "Reported median overall survival exceeds 50 months after complete CRS-HIPEC for favorably selected epithelioid low-PCI disease, supporting aggressive locoregional management when complete cytoreduction is feasible.",
         "Systemic cisplatin plus pemetrexed may be given as neoadjuvant or adjuvant therapy around CRS-HIPEC per multidisciplinary board decision, particularly for borderline PCI or nodal involvement.",
         "Surveillance after CRS-HIPEC: contrast CT of abdomen/pelvis every 3-4 months for 2 years then every 6 months, with tumor markers and diagnostic laparoscopy for suspected recurrence; route recurrence to systemic therapy."
       ],
-      "protocolRefs": ["rare-meso-peritoneal-cis-pemetrexed"]
+      "protocolRefs": [
+        "rare-meso-peritoneal-cis-pemetrexed"
+      ]
     },
     {
       "id": "n_tx_pem_systemic",
@@ -300,17 +401,29 @@
       "section": "Treatment",
       "description": "Systemic therapy for unresectable, sarcomatoid, or high-PCI peritoneal mesothelioma: dual checkpoint blockade or platinum-pemetrexed chemotherapy, mirroring the pleural systemic options.",
       "path": "Mesothelioma / Peritoneal / Unresectable / Systemic Therapy",
-      "pills": ["PeM", "unresectable", "systemic"],
+      "pills": [
+        "PeM",
+        "unresectable",
+        "systemic"
+      ],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
-      "footnotes": ["c", "e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "e"
+      ],
       "bullets": [
         "Systemic immunotherapy: nivolumab 360 mg IV every 3 weeks plus ipilimumab 1 mg/kg IV every 6 weeks (CheckMate 743 regimen extrapolated to peritoneal disease), preferred where checkpoint therapy is feasible.",
         "Systemic chemotherapy: cisplatin 75 mg/m2 plus pemetrexed 500 mg/m2 every 3 weeks (with folic acid, vitamin B12, and dexamethasone support); substitute carboplatin plus pemetrexed for renal insufficiency.",
         "Reassess surgical candidacy if major response converts high-PCI disease to potentially resectable; refer any conversion candidate back to the multidisciplinary board and an experienced CRS-HIPEC center.",
         "Assess response with contrast abdominal CT every 6-9 weeks; continue effective therapy until progression or unacceptable toxicity, and prioritize clinical trial enrollment at every line."
       ],
-      "protocolRefs": ["meso-nivo-ipi", "meso-cis-pemetrexed"]
+      "protocolRefs": [
+        "meso-nivo-ipi",
+        "meso-cis-pemetrexed"
+      ]
     }
   ],
   "links": [
@@ -319,63 +432,86 @@
       "from": "n_workup",
       "to": "n_anatomic_site",
       "linkCategory": "conditional",
-      "fromOptions": ["continue"]
+      "fromOptions": [
+        "continue"
+      ]
     },
     {
       "id": "l_site_pleural",
       "from": "n_anatomic_site",
       "to": "n_pleural_histology",
       "linkCategory": "conditional",
-      "fromOptions": ["pleural"]
+      "fromOptions": [
+        "pleural"
+      ]
     },
     {
       "id": "l_site_peritoneal",
       "from": "n_anatomic_site",
       "to": "n_peritoneal_resectability",
       "linkCategory": "conditional",
-      "fromOptions": ["peritoneal"]
+      "fromOptions": [
+        "peritoneal"
+      ]
     },
     {
       "id": "l_hist_epi",
       "from": "n_pleural_histology",
       "to": "n_pleural_resectability",
       "linkCategory": "conditional",
-      "fromOptions": ["epithelioid"]
+      "fromOptions": [
+        "epithelioid"
+      ]
     },
     {
       "id": "l_hist_nonepi",
       "from": "n_pleural_histology",
       "to": "n_tx_mpm_nonepithelioid",
       "linkCategory": "conditional",
-      "fromOptions": ["non_epithelioid"]
+      "fromOptions": [
+        "non_epithelioid"
+      ]
     },
     {
       "id": "l_pres_res",
       "from": "n_pleural_resectability",
       "to": "n_tx_mpm_resectable",
       "linkCategory": "conditional",
-      "fromOptions": ["resectable"]
+      "fromOptions": [
+        "resectable"
+      ]
     },
     {
       "id": "l_pres_unres",
       "from": "n_pleural_resectability",
       "to": "n_tx_mpm_unresectable",
       "linkCategory": "conditional",
-      "fromOptions": ["unresectable"]
+      "fromOptions": [
+        "unresectable"
+      ]
     },
     {
       "id": "l_pem_res",
       "from": "n_peritoneal_resectability",
       "to": "n_tx_pem_crs_hipec",
       "linkCategory": "conditional",
-      "fromOptions": ["resectable"]
+      "fromOptions": [
+        "resectable"
+      ]
     },
     {
       "id": "l_pem_unres",
       "from": "n_peritoneal_resectability",
       "to": "n_tx_pem_systemic",
       "linkCategory": "conditional",
-      "fromOptions": ["unresectable"]
+      "fromOptions": [
+        "unresectable"
+      ]
     }
+  ],
+  "protocolRefs": [
+    "meso-cis-pemetrexed",
+    "meso-nivo-ipi",
+    "rare-meso-peritoneal-cis-pemetrexed"
   ]
 }

@@ -199,7 +199,20 @@ export const PROVE_SOURCES = Object.freeze({
 
 /* ---- pure: verify ------------------------------------------------------------------------------- */
 
-export function norm(s) { return String(s == null ? '' : s).toLowerCase().replace(/&nbsp;|&amp;/g, ' ').replace(/[^a-z0-9]/g, ''); }
+/* NUMERIC ENTITIES ARE NEWLINES, NOT TEXT. GHIS returns every newline as &#xA; and a middot as
+ * &#xB7;: without decoding, a value read back never string-matched what the screen showed and the
+ * overlap guard never fired (the documented &#xA; newline trap). Decoded before norm() so text
+ * containing numeric entities matches raw screen text faithfully. */
+export function decodeEntities(s) {
+  return String(s == null ? '' : s)
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => { try { return String.fromCodePoint(parseInt(h, 16)); } catch { return _; } })
+    .replace(/&#(\d+);/g, (_, d) => { try { return String.fromCodePoint(parseInt(d, 10)); } catch { return _; } })
+    .replace(/&nbsp;/gi, ' ').replace(/&ndash;/gi, '-').replace(/&mdash;/gi, '-')
+    .replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'").replace(/&amp;/gi, '&');
+}
+
+export function norm(s) { return decodeEntities(String(s == null ? '' : s)).toLowerCase().replace(/[^a-z0-9]/g, ''); }
 
 const FILLER = /^(yes|no|nil|null|none|na|nan|true|false|active|pending|done|normal|male|female|select|view|open|more|details?)$/;
 /** The screen values worth matching: distinct, with a letter and 3+ characters, or a 5+ digit number. */
@@ -752,7 +765,32 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     hits.push({ e, resp, kind, o, rows, role: r.role === 'shell' ? 'data' : r.role });
   }
   const hit = hits.slice().sort((a, b) => specificity(b, shown.length) - specificity(a, shown.length))[0] || null;
-  if (!hit) return done('unproven');
+  if (!hit) {
+    /* DIRECT ENTITY CHAINING. The report can render off-screen (GHIS lab result into a print frame):
+     * standard cell overlap then finds nothing, but the call is still the row's own. When proving a
+     * detail view (labs-detail, radiology-detail), a candidate whose parameters trace to parent row
+     * fields (Render_ID from labs.ServiceRenderId, Episode_Id from episode_id) and whose replay
+     * answers rows is accepted directly, without requiring DOM matching. */
+    if (view.detailOf && parents.length) {
+      for (const e of entries.slice().reverse()) {
+        const p = paramsOf(e, parents);
+        if (!chained(p)) continue;
+        const resp = await evalJson(client, PROVE_SOURCES.exec(e.seq), null);
+        const kind = responseKind(resp);
+        if (kind === 'login') return done('signed-out');
+        if (kind !== 'json' && kind !== 'html') continue;
+        const rows = rowsForChain(resp.text, resp.contentType);
+        if (!rows.length) continue;
+        trace.tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: 'data', kind, hits: 0, ratio: 0, chained: true });
+        const [red] = redactEndpoints([{ method: e.method, url: e.url, bodyKeys: candidateStructure(e).bodyKeys, requestKind: /json/i.test(e.reqCt) ? 'json' : (e.body ? 'form' : undefined), xhr: e.xhr }], e.url);
+        if (!red) continue;
+        view.endpoints = [Object.assign(red, { role: 'data', params: safeParams(p), proof: { kind, hits: 0, cells: 0, overlap: 0, rows: rows.length, chained: true } })];
+        view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: 0, hits: 0, cells: 0, kind, population: rows.length, chained: true }, trace.model ? { model: trace.model } : {});
+        return { proven: { label: view.resourceHint, rows }, trace };
+      }
+    }
+    return done('unproven');
+  }
 
   /* VERIFY THE POPULATION, NOT JUST THE SCREEN. The screen can be a filtered view of the ward, so the
    * request that matches it can still be a subset. The same call with its untraceable filters emptied

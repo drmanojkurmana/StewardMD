@@ -95,6 +95,10 @@
     // presentation "pseudomembranous colitis" — none of which match "Clostridioides" in the body
     // text, so without these aliases the query mis-routed to web / to a wrong colitis entry.
     C_DIFF: "clostridium clostridioides difficile cdiff diff pseudomembranous colitis",
+    // Upper GI bleeding presents by its signs; the KB indexes it under peptic ulcer disease. Without
+    // these, "melena" fuzzy-resolved to "Mal de Meleda" (edit distance 1) and "melena workup" to a
+    // dermatitis entry (owner screenshot, 2026-09-18).
+    peptic_ulcer: "melena melaena malena hematemesis haematemesis ugib coffee ground vomitus black stool tarry stool tarry stools",
     aortic_dissection: "tearing ripping interscapular dissection",
     atrial_fib: "af afib rvr palpitations arrhythmia fibrillation",
     hypoglycemia: "hypo hypoglycaemia neuroglycopenia",
@@ -203,7 +207,13 @@
   }
 
   // Stopwords / framing words / connectors that must NOT count as clinical topic identity
-  var GENERIC_TOPIC = { treatment:1,treat:1,treating:1,management:1,manage:1,managing:1,therapy:1,approach:1,protocol:1,regimen:1,empiric:1,initial:1,signs:1,sign:1,symptoms:1,symptom:1,diagnosis:1,diagnose:1,poisoning:1,poison:1,toxicity:1,toxic:1,overdose:1,syndrome:1,disease:1,disorder:1,infection:1,fever:1,dose:1,dosing:1,drug:1,drugs:1,acute:1,chronic:1,severe:1,about:1,information:1,info:1,what:1,which:1,when:1,how:1,why:1,does:1,with:1,from:1,the:1,and:1,for:1,of:1,
+  var GENERIC_TOPIC = {
+    // Question-frame words that must never count as a NAME hit (owner, 2026-09-18): "melena workup"
+    // routed CONFIDENTLY to "Exfoliative dermatitis (erythroderma workup)" because "workup" is in
+    // that disease's display name and the KB has no melena entry, so it was the only token that hit.
+    workup:1,workups:1,evaluation:1,evaluate:1,evaluating:1,assessment:1,assess:1,assessing:1,algorithm:1,algorithms:1,
+    criteria:1,investigation:1,investigations:1,investigate:1,differential:1,differentials:1,causes:1,cause:1,
+    treatment:1,treat:1,treating:1,management:1,manage:1,managing:1,therapy:1,approach:1,protocol:1,regimen:1,empiric:1,initial:1,signs:1,sign:1,symptoms:1,symptom:1,diagnosis:1,diagnose:1,poisoning:1,poison:1,toxicity:1,toxic:1,overdose:1,syndrome:1,disease:1,disorder:1,infection:1,fever:1,dose:1,dosing:1,drug:1,drugs:1,acute:1,chronic:1,severe:1,about:1,information:1,info:1,what:1,which:1,when:1,how:1,why:1,does:1,with:1,from:1,the:1,and:1,for:1,of:1,
     // conversational fillers/lead-ins (4+ chars) — must NOT count as the topic, else
     // "tell"/"hello"/"please" break the exact-match gate ("no entry for tell diabetic ketoacidosis").
     tell:1,tells:1,told:1,telling:1,hello:1,hey:1,hi:1,please:1,kindly:1,could:1,would:1,should:1,shall:1,can:1,you:1,your:1,give:1,gives:1,giving:1,want:1,wants:1,need:1,needs:1,know:1,knows:1,explain:1,explaining:1,describe:1,help:1,helps:1,share:1,provide:1,list:1,discuss:1,okay:1,sure:1,here:1,there:1,also:1,some:1,more:1,this:1,that:1,these:1,those:1,understand:1,regarding:1,concerning:1,briefly:1,quickly:1,detail:1,details:1,
@@ -267,12 +277,17 @@
   // Typo tolerance scales with token length: short tokens are exact-only (fuzzing them is unsafe).
   function fuzzThreshold(len) { return len >= 8 ? 2 : (len >= 5 ? 1 : 0); }
   // Resolve distinctive query tokens to the nearest KB disease id, or null when nothing is close.
+  var _aliasTokSet = null;
   function fuzzyResolve(distinctive) {
     if (!_tokIdx || !distinctive || !distinctive.length) return null;
     var score = {};
+    // A real clinical word is never a typo of a disease name: "melena" is not "Meleda". Any token
+    // that a curated alias already names is exact-only here (2026-09-18).
+    if (!_aliasTokSet) { _aliasTokSet = {}; Object.keys(SMD_ALIASES).forEach(function (aid) { String(SMD_ALIASES[aid]).toLowerCase().split(" ").forEach(function (t) { if (t.length >= 4) _aliasTokSet[t] = 1; }); }); }
     distinctive.forEach(function (q) {
       if (q.length < 4) return;
       if (_tokIdx[q]) _tokIdx[q].forEach(function (id) { score[id] = (score[id] || 0) + 2; });   // exact = strong
+      if (_aliasTokSet[q]) return;
       var thr = fuzzThreshold(q.length); if (thr <= 0) return;
       var bestTok = null, bestEd = thr + 1;
       for (var i = 0; i < _uniqToks.length; i++) {
@@ -473,6 +488,15 @@
         // let a body-coverage match on a LOWER-ranked disease win (e.g. HF-management mentions many
         // electrolytes) → mis-routes. The multi-candidate POOL evaluation belongs to the fused
         // vector phase below, where the semantic arm actually justifies considering rank>0.
+        // ALIAS-SEEDED candidate (2026-09-18): a curated alias in the query names its disease outright
+        // ("melena" -> peptic_ulcer) even when the lexical index has no row for the word, so the
+        // aliased disease is evaluated FIRST instead of falling through to the typo resolver.
+        Object.keys(SMD_ALIASES).some(function (aid) {
+          var toks = String(SMD_ALIASES[aid]).toLowerCase().split(" ").filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
+          if (!toks.some(function (t) { return qHay.indexOf(" " + t + " ") >= 0; })) return false;
+          if (lexIds[0] !== aid) { var ix = lexIds.indexOf(aid); if (ix >= 0) lexIds.splice(ix, 1); lexIds.unshift(aid); }
+          return true;
+        });
         var chosen = pick(lexIds.slice(0, 1));
         // Phase 2 — SEMANTIC fallback. Skip the Vectorize hop ONLY when the lexical pick is a NAME-level
         // match (disease name matches the query topic) or there's no distinctive term to disambiguate.

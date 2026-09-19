@@ -104,7 +104,7 @@ test('manual mode asks for every resource in order, never clicks on its own, rec
   assert.deepEqual(calls.discovery.steps, []);
   const asking = progress.filter((p) => p.phase === 'ASKING');
   assert.equal(asking.length, asks.length);
-  assert.equal(asking.find((a) => a.gap === 'notes')?.step, 3);
+  assert.equal(asking.find((a) => a.gap === 'notes')?.step, 6);
   assert.ok(progress.some((p) => p.phase === 'CAPTURED' && p.gap === 'worklist'));
   for (const [, p] of brainCalls) assert.ok(!JSON.stringify(p).includes('SECRET'), 'no onclick argument reaches the brain');
 });

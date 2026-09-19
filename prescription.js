@@ -2884,7 +2884,8 @@
    * straight through the QR and left half of one on each page, and only the LAST page carried it at
    * all - so page 1 of a two-page prescription was unverifiable paper. */
   function rxQrStamp(rec){
-    if(!rec || !rec.code || !window.html2canvas) return Promise.resolve(null);
+    if(!rec || !rec.code) return Promise.resolve(null);
+    if(!window.html2canvas) return Promise.resolve(null);   // exportRx ensured the engines; absent => fail open, no QR
     var n=document.createElement("div");
     n.style.cssText="position:fixed;left:-9999px;top:0;width:700px;background:#fff;z-index:-1";
     n.innerHTML=rxDocQrBlock(rec, true);

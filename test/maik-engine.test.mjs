@@ -701,5 +701,42 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   ok("no local webAnswer -> a structured refusal, not a silent cloud call", rnw.error === "LOCAL_CAPABILITY_REQUIRED" && !locNoWeb.calls.some((c) => c[0] === "research"));
 }
 
+// ── DOSE SHORT-CIRCUIT (owner, 2026-09-18): "dose of X" is answered from the drug database, so no
+// model call leaves at all - on ANY engine, cloud included - and a dose can never be invented. ─────
+{
+  const { createRequire } = await import("node:module");
+  const req = createRequire(import.meta.url);
+  // In the browser the module reads window.MEDAPI itself; under node it takes them as deps, so the
+  // engine sees the same { intent, answer } surface it calls in production.
+  const D0 = req("../kb/ai/drug-dose.js"), FZ = req("../kb/ai/drug-fuzzy.js");
+  const MEDAPI = {
+    searchCompositions: async (q) => ({ results: /^ondan|^onda|^ond/i.test(q) ? [{ composition: "Ondansetron" }] : [] }),
+    searchBrands: async () => ({ results: [] }),
+    structured: async (n) => (/ondansetron/i.test(n) ? { found: true, data: { adult_dose: "8 mg IV 8-hourly." } } : { found: false })
+  };
+  const DOSE = { intent: D0.intent, answer: (q) => D0.answer(q, { MEDAPI, DrugFuzzy: FZ }) };
+  const cloud = load({ gate: true, runtime: true, pack: true });
+  cloud.win.SMD_DOSE = DOSE;
+  const d = await cloud.win.SMD_AI.explainGrounded({ question: "dose of ondansetron" }, {});
+  ok("cloud engine: a dose question is answered from the drug database, with NO model call",
+     d.engine === "drugdb" && /8 mg IV 8-hourly/.test(d.text) && !cloud.calls.some((c) => c[0] === "explainGrounded"));
+
+  // Fails OPEN: a dose question the database cannot answer must still reach the normal engine.
+  const miss = load({ gate: true, runtime: true, pack: true });
+  miss.win.SMD_DOSE = DOSE;
+  const m = await miss.win.SMD_AI.explainGrounded({ question: "dose of zzzqqxdrug" }, {});
+  ok("a dose the database cannot answer falls through to the normal answer", m.text === "CLOUD grounded" && miss.calls.some((c) => c[0] === "explainGrounded"));
+
+  // And on device: same short-circuit, so the on-device model is never asked to recall a number.
+  const loc = load({ gate: true, runtime: true, pack: true });
+  loc.win.SMD_DOSE = DOSE;
+  loc.ls.setItem("stewardmd.maikEngine", "local");
+  const ld = await loc.win.SMD_AI.explainGrounded({ question: "dose of ondansetron" }, {});
+  ok("local engine: the same database answer, the on-device model is not asked for the number",
+     ld.engine === "drugdb" && !loc.calls.some((c) => c[0] === "local"));
+  const lq = await loc.win.SMD_AI.explainGrounded({ question: "treatment of pneumonia" }, {});
+  ok("a non-dose question is untouched by the dose router", lq.text === "LOCAL answer" && loc.calls.some((c) => c[0] === "local"));
+}
+
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

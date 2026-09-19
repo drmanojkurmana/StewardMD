@@ -40,6 +40,18 @@ stony dullness". That indirection is what makes the fourth disease cheap.
   interactive percussion map). The one media kind that can always be cleared.
 - `clinix-screens.js` — router + **the lesson runner** (the product). `clinix.js` — flag gate +
   `#clinixRoot`. `clinix.css` — everything under `#clinixRoot` / `.cx-*`.
+- `clinix-lexicon.js` — **how the simulated patient understands a student.** Canonicalises a typed
+  question (contractions, ~320 Indian-English and lay phrases, synonyms, stemming, bounded fuzzy
+  snapping), scores it against the case's own topics with a document-frequency rarity tiebreak, and
+  answers only above `ANSWER_AT`; between `SUGGEST_AT` and `ANSWER_AT` it offers a did-you-mean
+  instead of guessing. `clinix-model.js` falls back to the original literal-cue matcher when the
+  lexicon is absent, so the module is optional.
+- `clinix-dx.js` + `clinix/dx-vocabulary.json` — the 365-diagnosis picker (17 systems, synonyms),
+  the graded hint ladder, differential/diagnosis marking (by CONCEPT, so "heart failure" / "CCF" /
+  "cardiac failure" count once) and the management MCQ with its harmful distractors.
+- `clinix-physiology.js` — the sandbox engine. Ventricular-arterial coupling for the cardiovascular
+  half, content-based gas exchange for the respiratory half, plus SVG waveform generators and the
+  20 teaching presets. Pure, deterministic, `node --test`-able.
 - `clinix/**` — content as data. `manifest.json` (catalog) · `skills/core.json` (shared approach +
   general exam) · `skills/respiratory.json` · `diseases/copd.json` · `media/manifest.json` (the
   licence gate).
@@ -159,6 +171,60 @@ the SPUTUM topic via a bare `colour` cue. Fixed twice over: cues now match whole
 scored by matched-cue LENGTH (so "how much can you do" beats "how much"), and the genuinely
 ambiguous cues were tightened. Regression test: `test/clinix-case.test.mjs`.
 
+### Phase 9 (2026-09-19): the three things the owner said were not up to the mark
+Owner: *"each student talk english differently how will he ask exact question as we programmed? Fix
+that and in ddx, dx give him 100s of diagnosis and he will pickup one and give hints too, and plan
+also give mcq options so he will select. Improve all case stimulatios, physiology sandbox doesnt work
+its 1/10 make it 10/10."*
+
+1. **Lay language.** `clinix-lexicon.js`. "kya takleef hai", "how many pillows u sleep with", "sob on
+   exertion", "loose motions", "burning micturition" all reach the right topic; small talk still
+   matches NOTHING and is not even offered a suggestion. See `test/clinix-lexicon.test.mjs`, which
+   runs against the REAL shipped cases, and the ownership rule (asking about the family is not
+   asking about the patient's own habit).
+2. **Differential / diagnosis as pickers.** Searchable 365-entry vocabulary, opens filtered to the
+   case's own system so the box is never empty, picks kept as chips, a three-level hint ladder that
+   never states the diagnosis. Marking counts PICKS, not accept terms, and flags a shotgun list
+   (8+ picks, or unsupported guesses outnumbering supported ones) as a fail even when the right
+   answer is in there.
+3. **Management as select-all-that-apply.** `planOptions()` = up to 6 of the author's own actions
+   plus 5 seeded distractors, some flagged `harm`. Choosing a harmful option is DISQUALIFYING, not a
+   deduction, and the result names it. A case whose model answer is keyword fragments rather than
+   actions ("b12", "treatable", "88") keeps the written plan instead of being forced into an
+   unanswerable stub: `ataxia` is currently the only one.
+
+## Phase 9: the physiology sandbox, rebuilt
+It was reported as 1/10 and it was right to be. Two independent defects:
+
+- **It was uncalibrated.** At the nominal sliders the old model returned 70/46 with a cardiac output
+  of 3.0, and the Hill denominator was `26.6 * 1000` instead of `Math.pow(26.6, 2.7)`, so a PaO2 of
+  88 read as 87%. The old test file PINNED both as "observed", which is how they survived.
+- **The sliders did not work.** `onInput` called `repaint()`, which rewrote the whole stage and so
+  replaced the `<input type=range>` the student had their thumb on. The drag was cancelled on the
+  first input event. This is a DOM-identity bug: invisible to a model test, obvious the moment you
+  check whether the element survives. The same defect class would have killed the new diagnosis
+  search box; both are now covered in `test/run-clinix-case-ui.mjs`.
+
+The engine is now physiology rather than fudge:
+- **Cardiovascular: ventricular-arterial coupling** (Sagawa). `SV = (EDV - V0) * Ees / (Ees + Ea)`,
+  `MAP = RAP + SVR * CO`, `PP = SV / Ca`, `SBP = MAP + 2PP/3`. At the nominal inputs this returns
+  SV 70, CO 5.0, 120/80, MAP 93, EF 58%, JVP +3. Coupling is the only way the sliders stay honest
+  against each other: raising afterload has to lower SV *and* raise MAP by the right amounts.
+- **Respiratory: solved by OXYGEN CONTENT, not by an additive A-a offset.** That is what makes a
+  shunt behave like a shunt: at 45% shunt, winding FiO2 to 1.0 barely moves the saturation. An
+  additive gradient cannot reproduce that, and it is the whole teaching point of the tab.
+  Ventilation is solved as a fixed point (the chemoreflex line against the CO2 hyperbola) with a
+  mechanical ceiling, so "a normal CO2 in acute severe asthma" emerges from fatigue rather than
+  being hand-set, and oxygen given to an obstructed chest widens dead space and retains CO2.
+- **Waveforms** (ECG, arterial, JVP, capnograph, flow-volume loop) are generated as plain SVG path
+  data with a seeded PRNG, so the screen draws with no canvas and a repaint never reshuffles a trace.
+- **20 presets**, each with a teaching note, and a "why the numbers moved" panel.
+- The respiratory tab is fed the cardiac output from the cardiovascular tab, so a low output lowers
+  mixed venous saturation and deepens any shunt.
+
+`test/clinix-physiology.test.mjs` (39 tests) now asserts the TEXTBOOK values and would fail the old
+model on its first assertion.
+
 ## Phase 8: the second disease, and the measured claim
 Pleural effusion was added to prove the architecture rather than to double the content. It is the
 strongest possible contrast to COPD because it drives every shared respiratory skill to the OPPOSITE
@@ -187,7 +253,8 @@ The per-disease content tests now loop over every disease in the manifest, so a 
 the moment it is listed.
 
 ## Status
-- **Phases 1, 2, 3, 5, 6, 7 and 8 built.** 117 unit tests + 64 real-browser checks green. Full suite:
+- **Phases 1, 2, 3, 5, 6, 7, 8 and 9 built.** 357 CliniX unit tests green, plus two real-browser
+  harnesses (`test/run-clinix-ui.mjs` and `test/run-clinix-case-ui.mjs`). Full suite:
   104 failures before and after, identical set (zero regression, verified against `pre-clinix` in a
   clean worktree).
 - **Content: `ai_drafted`, NOT approved.** Drafted against Harrison 22e p.2249-2259 via

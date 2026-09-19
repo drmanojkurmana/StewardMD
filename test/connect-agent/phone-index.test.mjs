@@ -87,7 +87,7 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   // Crawl found worklist + labs; the engine asked for the rest in canonical order, capped at 4.
   // The worklist was found but its read proved nothing against this fake page, so it is asked FIRST.
   // Radiology was shown but nothing on this fake page could be proven, so the doctor was asked again.
-  assert.deepEqual([...new Set(asks)], ['worklist', 'labs', 'patient', 'notes', 'radiology', 'medications']);
+  assert.deepEqual([...new Set(asks)], ['worklist', 'labs', 'radiology', 'medications', 'patient', 'notes']);
   assert.ok(asks.filter((a) => a === 'radiology').length >= 2, asks.join(','));
   assert.ok(phases.includes('CRAWLING') && phases.includes('ASKING') && phases.includes('DONE'), phases.join(','));
 
@@ -115,7 +115,7 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   assert.ok(!JSON.stringify(views).includes('SECRET'));
 
   assert.deepEqual(result.found.sort(), ['labs', 'radiology', 'worklist']);
-  assert.deepEqual(result.asked, ['worklist', 'labs', 'patient', 'notes', 'radiology', 'medications']);
+  assert.deepEqual(result.asked, ['worklist', 'labs', 'radiology', 'medications', 'patient', 'notes']);
   assert.ok(result.verification && Array.isArray(result.verification.checks));
 });
 
@@ -440,4 +440,36 @@ test('askOne: an empty list gets a "this patient has no ... yet" re-ask, not a f
   assert.ok(prompts.length >= 2, 'the doctor was not asked again: ' + JSON.stringify(prompts));
   assert.match(prompts[1], /^This patient has no radiology reports yet\. Open the radiology reports of a patient who has some/, prompts[1]);
   assert.equal(proves, 0, 'an empty list must not be sent to the proof');
+});
+
+
+/* FEWEST TAPS TO A USABLE CONNECTION. Approval needs the ward list, labs and its report, radiology and
+ * its report, and the drug chart. Patient details, notes, the discharge summary and visit history are
+ * worth having but the gate does not require them - yet the doctor was asked for patient details and
+ * notes FIRST, spending two of their taps before anything that could be approved (owner's live run,
+ * 2026-09-18). The required screens come first so a doctor who stops early still has a usable adapter. */
+test('ASK_ORDER asks for what approval needs first', async () => {
+  const { ASK_ORDER } = await import('../../connect-agent/phone/index.mjs');
+  const REQUIRED = ['worklist', 'labs', 'radiology', 'medications'];
+  const OPTIONAL = ['patient', 'notes', 'discharge', 'history'];
+  const lastRequired = Math.max(...REQUIRED.map((r) => ASK_ORDER.indexOf(r)));
+  const firstOptional = Math.min(...OPTIONAL.map((r) => ASK_ORDER.indexOf(r)));
+  assert.ok(lastRequired < firstOptional, 'every gate resource is asked before any optional one: ' + ASK_ORDER.join(','));
+  assert.equal(ASK_ORDER[0], 'worklist', 'the ward list is still first');
+  for (const r of REQUIRED.concat(OPTIONAL)) assert.ok(ASK_ORDER.includes(r), 'still asks for ' + r);
+});
+
+
+/* THE DETAIL NOBODY COULD SUPPLY. Run 6 finished looking healthy - 763 real patients, five of the six
+ * gate resources proven - and was then refused approval: "no proven backend request for labs-detail".
+ * The doctor could not have fixed it even if they had wanted to, because labs-detail had no prompt and
+ * is not in ASK_ORDER, so it could never be asked. The agent opening the row itself stays the primary
+ * path; this is the one extra tap, spent only when that path did not work on this hospital. */
+test('a detail the agent could not chain is a question the doctor can answer', () => {
+  for (const res of ['labs-detail', 'radiology-detail']) {
+    assert.ok(GAP_PROMPTS[res], res + ' must be askable, or the run is refused for something nobody can supply');
+    assert.match(GAP_PROMPTS[res], /tap Done/, res + ' prompt follows the same shape as every other ask');
+    assert.ok(!/—/.test(GAP_PROMPTS[res]), 'no em-dash in app-facing text');
+  }
+  assert.match(GAP_PROMPTS['labs-detail'], /one lab report/i, 'it asks for ONE report, not the whole list again');
 });

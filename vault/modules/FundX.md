@@ -1,7 +1,7 @@
 ---
 tags: [module, ai, imaging]
-status: staged
-flag: smd_fundx (default OFF)
+status: live for every user (flag ON); on-device + clinical validation still outstanding
+flag: smd_fundx (def:true — ON)
 ---
 # FundX
 

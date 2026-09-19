@@ -127,6 +127,7 @@ import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMe
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
+import { findFigures } from "../../_figures.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
 import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
@@ -1310,6 +1311,20 @@ export async function onRequest(context) {
     });
   }
   if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
+
+  // Related figures under a MaiK answer (owner, 2026-09-18): a SEARCH step, not a model call.
+  // TinyFish finds trusted pages for the topic, functions/_figures.js picks the figure each page is
+  // built around, and the phone loads that image from the source with the link below it - like a
+  // Google result. Nothing is hosted, cached or regenerated here; zero tokens; [] on any failure.
+  if (seg === "figures") {
+    const fu = new URL(request.url);
+    const fq = String(fu.searchParams.get("q") || "").slice(0, 200);
+    if (!fq || firewallBlock(fq)) return json({ figures: [] });
+    const fdebug = fu.searchParams.get("debug") === "1";   // per-page fetch/pick trace; public pages only
+    let figures = [];
+    try { figures = await findFigures(env, fq, 3, { debug: fdebug }); } catch (e) { figures = []; }
+    return json(fdebug ? { figures: figures, debug: figures._debug || [] } : { figures: figures });
+  }
 
   const _hm = {};   // sub-stage marks inside the "head" region, so its ~1.1s is attributable
   let body = {};

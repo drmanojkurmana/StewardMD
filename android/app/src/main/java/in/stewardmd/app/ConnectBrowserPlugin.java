@@ -79,9 +79,13 @@ public class ConnectBrowserPlugin extends Plugin {
     private String mode = "login";
     private boolean compact = false;
     private boolean hidden = false;
+    private View rootLayout; // dialog root, kept so hidden mode can take its alpha to 0 (see applyWindowLayout)
     // Automatic sign-in detection state (see maybeAutoLoggedIn). Reset with every browser open.
     private boolean sawPasswordField = false;
     private boolean autoLoginNotified = false;
+    private int signedInTicks = 0; // consecutive polls that looked signed in; two are needed
+    private String openedURL = ""; // the address the browser was opened at; still there = not signed in
+    private String loginOrigin = ""; // origin the browser was opened at; landing elsewhere = signed in
     /* A SIGN-IN IS NOT ALWAYS A NAVIGATION. maybeAutoLoggedIn ran only from onPageFinished, which
      * misses the EMR that signs the doctor in on the same page and swaps the body in place (no later
      * onPageFinished ever arrives, so the "password field is gone" second look never happens and the
@@ -155,6 +159,9 @@ public class ConnectBrowserPlugin extends Plugin {
                 hidden = call.getBoolean("hidden", false);
                 sawPasswordField = false;
                 autoLoginNotified = false;
+                signedInTicks = 0;
+                openedURL = urlStr;
+                loginOrigin = originOf(Uri.parse(urlStr));
                 hostTitle = title != null ? title : hostOf(urlStr);
                 synchronized (requestLog) {
                     requestLog.clear();
@@ -456,6 +463,7 @@ public class ConnectBrowserPlugin extends Plugin {
         root.setOrientation(LinearLayout.VERTICAL);
         root.setBackgroundColor(Color.WHITE);
         root.setFitsSystemWindows(true);
+        rootLayout = root;
 
         int pad = dp(activity, 12);
 
@@ -480,6 +488,7 @@ public class ConnectBrowserPlugin extends Plugin {
 
         TextView titleLabel = new TextView(activity);
         titleLabel.setText(hostTitle);
+        titleLabel.setTextColor(Color.parseColor("#14202B"));
         titleLabel.setTextSize(15);
         titleLabel.setTypeface(null, Typeface.BOLD);
         titleLabel.setGravity(Gravity.CENTER);
@@ -488,7 +497,7 @@ public class ConnectBrowserPlugin extends Plugin {
 
         subtitleLabel = new TextView(activity);
         subtitleLabel.setTextSize(11);
-        subtitleLabel.setTextColor(Color.DKGRAY);
+        subtitleLabel.setTextColor(Color.parseColor("#5A7184"));
         subtitleLabel.setGravity(Gravity.CENTER);
 
         titleBox.addView(titleLabel);
@@ -549,19 +558,28 @@ public class ConnectBrowserPlugin extends Plugin {
         LinearLayout banner = new LinearLayout(activity);
         banner.setOrientation(LinearLayout.HORIZONTAL);
         banner.setGravity(Gravity.CENTER_VERTICAL);
-        banner.setBackgroundColor(Color.parseColor("#FF9500"));
-        banner.setPadding(pad, dp(activity, 6), pad, dp(activity, 6));
+        banner.setBackgroundColor(Color.parseColor("#0E7C66"));
+        banner.setPadding(pad, dp(activity, 8), pad, dp(activity, 8));
         banner.setVisibility(View.GONE);
         bannerView = banner;
 
         bannerLabel = new TextView(activity);
         bannerLabel.setTextColor(Color.WHITE);
         bannerLabel.setTextSize(13);
+        bannerLabel.setTypeface(null, Typeface.BOLD);
 
         Button stopButton = new Button(activity);
         stopButton.setText("Stop");
         stopButton.setTextColor(Color.WHITE);
-        stopButton.setBackgroundColor(Color.TRANSPARENT);
+        stopButton.setTextSize(12);
+        stopButton.setTypeface(null, Typeface.BOLD);
+        android.graphics.drawable.GradientDrawable stopBg = new android.graphics.drawable.GradientDrawable();
+        stopBg.setColor(Color.parseColor("#AB1C2C"));
+        stopBg.setCornerRadius(dp(activity, 14));
+        stopButton.setBackground(stopBg);
+        stopButton.setPadding(dp(activity, 14), dp(activity, 4), dp(activity, 14), dp(activity, 4));
+        stopButton.setMinWidth(0);
+        stopButton.setMinimumWidth(0);
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -669,8 +687,16 @@ public class ConnectBrowserPlugin extends Plugin {
             window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             window.setDimAmount(0f);
             window.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(Color.TRANSPARENT));
+            /* DECOR ALPHA IS NOT ENOUGH. A Dialog on Theme_Black_NoTitleBar_Fullscreen keeps an opaque
+             * SurfaceFlinger window on Android 14/15 (Pixel 9): fading the decor view still left the
+             * full-screen browser over the live dashboard. The window attributes' own alpha is what
+             * makes the surface transparent; the white root layout is faded too. */
+            android.view.WindowManager.LayoutParams lp = window.getAttributes();
+            lp.alpha = 0f;
+            window.setAttributes(lp);
             View decor = window.getDecorView();
             if (decor != null) decor.setAlpha(0f);
+            if (rootLayout != null) rootLayout.setAlpha(0f);
             return;
         }
         /* LEAVING HIDDEN MODE IS UNCONDITIONAL. The dialog and its window are reused across opens, so
@@ -679,6 +705,10 @@ public class ConnectBrowserPlugin extends Plugin {
          * Never guard this on the current alpha - always restore before laying the window out. */
         View decor = window.getDecorView();
         if (decor != null) decor.setAlpha(1f);
+        if (rootLayout != null) rootLayout.setAlpha(1f);
+        android.view.WindowManager.LayoutParams lp = window.getAttributes();
+        lp.alpha = 1f;
+        window.setAttributes(lp);
         window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         Activity activity = getActivity();
@@ -782,9 +812,10 @@ public class ConnectBrowserPlugin extends Plugin {
      *
      * The signal is the password field itself: a login page has one, the screen after sign-in does
      * not. Once this browser has seen a password field and a later page has none, sign-in happened.
-     * Fires at most once per session, only in login mode, and the Done button still works for the
-     * EMR that keeps a password field on every page. No credential is read - only whether such a
-     * field EXISTS. */
+     * A stored session or SSO may never show a password box at all, so landing on another origin or
+     * another finished page with no visible password box counts too (mirrors iOS). Fires at most
+     * once per session, only in login mode, and the Done button still works for the EMR that keeps
+     * a password field on every page. No credential is read - only whether such a field EXISTS. */
     /** Watch for a sign-in that never fires onPageFinished. Stops at the first answer, or with the browser. */
     private void startLoginPoll(final WebView view) {
         stopLoginPoll();
@@ -810,19 +841,41 @@ public class ConnectBrowserPlugin extends Plugin {
     private void maybeAutoLoggedIn(final WebView view, final String url) {
         if (autoLoginNotified || !"login".equals(mode) || view == null) return;
         try {
+            /* SIGNED IN = a finished page with no VISIBLE password box. Hidden password inputs
+             * (change-password modals, re-auth forms) used to count and could hold the poll at
+             * "still signing in" forever. Mirrors ConnectBrowserPlugin.swift. */
             view.evaluateJavascript(
-                "(function(){try{return document.querySelector('input[type=\"password\"]')?'1':'0'}catch(e){return 'e'}})()",
+                "(function(){try{if(document.readyState!=='complete')return 'loading';var all=document.querySelectorAll('input[type=\"password\"]');for(var i=0;i<all.length;i++){var e=all[i];var r=e.getBoundingClientRect();if(r.width>0&&r.height>0&&e.offsetParent)return '1'}return '0'}catch(e){return 'e'}})()",
                 new android.webkit.ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String value) {
-                        boolean hasPassword = value != null && value.contains("1");
-                        if (hasPassword) { sawPasswordField = true; return; }
-                        if (value == null || value.contains("e")) return;   // could not tell: say nothing
-                        if (!sawPasswordField || autoLoginNotified) return;
+                        if (value != null && value.contains("1")) {
+                            sawPasswordField = true;
+                            signedInTicks = 0;
+                            return;
+                        }
+                        if (value == null || !value.contains("0")) { signedInTicks = 0; return; } // loading / could not tell: say nothing
+                        /* THREE WAYS TO KNOW. (1) The doctor typed into a password box and it is gone.
+                         * (2) COOKIE AUTO-LOGIN onto another allowed origin (sign-in host -> data host).
+                         * (3) COOKIE AUTO-LOGIN ON THE SAME ORIGIN: the browser was opened at the sign-in
+                         * address and now sits on a different, finished page with no password box - the
+                         * module picker after a stored session. (2) and (3) were missing, so a doctor
+                         * whose session was still valid sat on a signed-in page with the app waiting for
+                         * a password field that would never appear (Pixel 9, 2026-09-18). Two consecutive
+                         * ticks so a page that has not drawn its form yet is not mistaken for one. */
+                        String current = view.getUrl() != null ? view.getUrl() : (url != null ? url : "");
+                        String landed = "";
+                        try { landed = originOf(Uri.parse(current)); } catch (Exception ignored) {}
+                        boolean isHttps = current.startsWith("https://");
+                        boolean movedOff = isHttps && loginOrigin != null && !loginOrigin.isEmpty() && !landed.equals(loginOrigin);
+                        boolean movedOn = isHttps && openedURL != null && !openedURL.isEmpty() && !current.equals(openedURL);
+                        if (!(sawPasswordField || movedOff || movedOn)) { signedInTicks = 0; return; }
+                        signedInTicks++;
+                        if (signedInTicks < 2 || autoLoginNotified) return;
                         autoLoginNotified = true;
                         stopLoginPoll();
                         JSObject data = new JSObject();
-                        data.put("url", url == null ? "" : url);
+                        data.put("url", current);
                         data.put("auto", true);
                         notifyListeners("loggedIn", data);
                     }
@@ -866,6 +919,7 @@ public class ConnectBrowserPlugin extends Plugin {
         doneButton = null;
         bannerView = null;
         touchBlockerView = null;
+        rootLayout = null;
         pendingLateInitScript = null;
         for (Integer id : new ArrayList<>(pendingEvals.keySet())) {
             Runnable timeout = pendingEvalTimeouts.remove(id);
