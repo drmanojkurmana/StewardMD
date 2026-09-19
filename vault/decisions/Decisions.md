@@ -8762,3 +8762,50 @@ what will catch the two scorers drifting, and the plan requires it to beat the b
 **Unchanged:** the real data gate. A public dataset proves the pipeline; it does not make a US ICU
 model a predictor for an Indian ward, and nothing reaches a clinician without local revalidation and
 a named approver.
+
+## 2026-09-19 — Medical Core shadow is built and has nothing to run, which is the correct state
+
+Step 18 of [[Medical Core]]. `medcore/medcore-shadow.js` attaches to a real `ClinicalEventBus`,
+debounces 60 s per patient, runs the full decision path and records the result where nobody can see
+it. Five properties, in the order they matter: it reaches nobody (no DOM, no network, no prompt, no
+store, nothing emitted back onto the bus); it cannot throw into the app (failures are counted,
+because a shadow that silently stopped observing reports "nothing went wrong" while looking at
+nothing, a mistake made here once already in `wardsynq-shadow-boot.js`); it is installed from
+outside onto a bus it is handed; it uses wall time for the debounce and NEVER for the decision's
+`asOf`, which stays the caller's leakage control; and its buffer keeps statuses, reasons and a
+probability decile, never a clinical value and never an identifier.
+
+**Today it records nothing but abstentions, and that is the point.** Every artifact in the
+repository is synthetic, `medcore-models.js` refuses them all, so the full chain from bus event to
+buffer produces ABSTAIN / MODEL_UNAVAILABLE with the artifact refusal attached. A probability
+appearing in a shadow buffer right now would mean the refusal had been bypassed somewhere, so the
+test asserts its absence rather than asserting a happy path that does not exist.
+
+**A real bug this found.** The observer first passed the handler's argument straight to the state
+adapter. `ClinicalEventBus` delivers a WRAPPED event (`{id, type, payload, vectorClock, ...}`), not
+the bare payload, so every observation looked like an event with no state - which counts as
+"nothing to do" and reads exactly like "nothing went wrong". Found by testing against the real bus
+rather than a stub, which is the whole reason for doing so.
+
+Step 19 is wired in the same file: an OK decision is handed to `wardsynq-mlops.js`
+`recordShadowPrediction`, and an abstention is never recorded as a prediction, because there is no
+prediction to record.
+
+## 2026-09-19 — The calibration-slope gate stays on the point estimate (status quo, owner may revisit)
+
+**Decision: no change.** The gate remains `0.9 <= slope <= 1.1` on the point estimate. Nothing was
+loosened to make a model pass, and this is recorded so the question is not silently re-opened later
+by whoever next sees a model fail by a rounding error.
+
+**Why it came up.** A model sat at slope 0.8996 against the 0.9 floor - a difference of 0.0004 on an
+estimate whose bootstrap interval was two orders of magnitude wider. The point-estimate gate will
+occasionally reject an adequate model for reasons indistinguishable from noise.
+
+**The alternative, if the owner or the committee wants it:** gate on the bootstrap interval
+overlapping [0.9, 1.1] rather than the point estimate. That is standard practice and it is a
+LOOSENING, so it is a clinical-governance decision rather than an engineering one and needs their
+signature, not ours.
+
+**Why it is not urgent.** With the GBM the slope is 0.926 (95% CI 0.861 to 1.010) and clears the
+point-estimate gate outright. The interval is reported beside every slope either way, so nobody has
+to infer the precision.
