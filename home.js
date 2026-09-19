@@ -4458,6 +4458,31 @@
     box.setAttribute("aria-hidden", "true");
     box.innerHTML = '<div class="mkdoc-sh"></div><div class="mkdoc-a">' + svg + "</div>";
     cmp.appendChild(box);
+    /* Swipe the buddy away (owner, 2026-09-19: "maybe disturbing for some"). Drag or flick him LEFT
+     * to dismiss; a slim tab stays at the left edge, and tapping it (or flicking it right) brings
+     * him back. The choice persists. */
+    (function () {
+      var tab = cmp.querySelector(".mkdoc-tab");
+      if (!tab) { tab = document.createElement("button"); tab.type = "button"; tab.className = "mkdoc-tab"; tab.setAttribute("aria-label", "Show the MaiK buddy"); tab.innerHTML = "›"; cmp.appendChild(tab); }
+      function off() { try { return localStorage.getItem("smd_maik_doc_off") === "1"; } catch (e) { return false; } }
+      function apply(hide, animate) {
+        box.classList.toggle("mkdoc-hidden", !!hide);
+        box.style.transition = animate ? "transform .22s ease, opacity .22s ease" : "";
+        tab.classList.toggle("on", !!hide);
+        try { localStorage.setItem("smd_maik_doc_off", hide ? "1" : "0"); } catch (e) {}
+      }
+      apply(off(), false);
+      var sx = 0, dx = 0, drag = false;
+      box.addEventListener("pointerdown", function (e) { drag = true; sx = e.clientX; dx = 0; box.style.transition = ""; });
+      box.addEventListener("pointermove", function (e) { if (!drag) return; dx = e.clientX - sx; if (dx < 0) box.style.transform = "translateX(" + dx + "px)"; });
+      function end() { if (!drag) return; drag = false; box.style.transform = ""; if (dx < -56) apply(true, true); }
+      box.addEventListener("pointerup", end);
+      box.addEventListener("pointercancel", end);
+      tab.addEventListener("click", function () { apply(false, true); });
+      var tsx = 0;
+      tab.addEventListener("pointerdown", function (e) { tsx = e.clientX; });
+      tab.addEventListener("pointerup", function (e) { if (e.clientX - tsx > 24) apply(false, true); });
+    })();
     var actor = box.querySelector(".mkdoc-a"), sh = box.querySelector(".mkdoc-sh");
     var groups = box.querySelectorAll(".mkdoc-svg > g");
     var WALK_V = 38, RUN_V = 120, JUMP_H = 20, JUMP_MS = 620, FLIP_MS = 760;
@@ -4903,10 +4928,38 @@ body.dark .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .maik-figs-h{font:600 10.5px 'Inter';color:var(--mk-teal);margin-bottom:6px}
 .maik-figs-row{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .maik-figs-row::-webkit-scrollbar{display:none}
-.maik-fig{flex:0 0 auto;width:220px;max-width:80%;display:block;text-decoration:none;color:inherit;border:1px solid var(--mk-bd);border-radius:10px;overflow:hidden;background:var(--panel,#fff)}
-.maik-fig img{display:block;width:100%;height:140px;object-fit:cover;background:#f1f5f4}
-.maik-fig-cap{display:block;padding:6px 8px;font:500 11px/1.35 'Inter';color:var(--slate-soft,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* A clinical figure is the content, not a thumbnail: letterboxed so a flowchart is never cropped,
+   and full width when it is the only one (owner, 2026-09-19). */
+.maik-fig{flex:0 0 auto;width:min(340px,86%);display:block;text-align:left;padding:0;cursor:zoom-in;color:inherit;border:1px solid var(--mk-bd);border-radius:12px;overflow:hidden;background:var(--panel,#fff);transition:transform .12s ease,box-shadow .16s ease}
+.maik-fig:active{transform:scale(.985)}
+.maik-fig img{display:block;width:100%;height:210px;object-fit:contain;background:#fbfcfc}
+.maik-figs.one .maik-fig{width:100%}
+.maik-figs.one .maik-fig img{height:260px}
+.maik-fig-cap{display:block;padding:7px 9px;font:500 11.5px/1.35 'Inter';color:var(--slate-soft,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid var(--mk-bd)}
 .maik-fig-cap b{color:var(--mk-teal);font-weight:700}
+/* full-size viewer */
+body.maik-lb-on{overflow:hidden}
+.maik-lb{position:fixed;inset:0;z-index:3000;background:rgba(9,17,22,.94);display:flex;flex-direction:column;animation:mkLbIn .16s ease}
+@keyframes mkLbIn{from{opacity:0}to{opacity:1}}
+.maik-lb-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;color:#e8f1ef;font:700 12px/1 'Inter'}
+.maik-lb-x{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:32px;height:32px;font-size:15px;cursor:pointer}
+.maik-lb-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 10px;overflow:auto}
+.maik-lb-wrap img{max-width:100%;max-height:100%;object-fit:contain;background:#fff;border-radius:10px;cursor:pointer}
+.maik-lb-foot{padding:10px 16px calc(14px + env(safe-area-inset-bottom));color:#b9cbc7;font:500 12px/1.45 'Inter';text-align:center}
+.maik-lb-foot span{display:block;margin-top:3px;color:#7fd6c4;font-weight:700}
+/* Research: one primary action, visibly not a chip */
+.maik-chip.maik-research{background:var(--mk-teal,#0e6e63);color:#fff;border-color:transparent;font-weight:700;letter-spacing:.01em;box-shadow:0 1px 2px rgba(14,110,99,.25)}
+.maik-chip.maik-research .smd-ico{opacity:.95}
+.maik-chip.maik-research:active{transform:translateY(1px)}
+/* action buttons confirm in place */
+.maik-act{transition:background .12s ease,color .12s ease,transform .1s ease}
+.maik-act:active{transform:translateY(1px)}
+.maik-act.done{background:var(--mk-teal,#0e6e63);color:#fff;border-color:transparent}
+/* buddy: swipe left to dismiss, edge tab to bring back */
+.mkdoc{touch-action:pan-y}
+.mkdoc.mkdoc-hidden{transform:translateX(-140%);opacity:0;pointer-events:none}
+.mkdoc-tab{display:none;position:absolute;left:0;bottom:6px;z-index:4;width:22px;height:34px;border:1px solid var(--mk-bd);border-left:0;border-radius:0 10px 10px 0;background:var(--panel,#fff);color:var(--mk-teal,#0e6e63);font:700 15px/1 'Inter';cursor:pointer;opacity:.85}
+.mkdoc-tab.on{display:block}
 .maik-followups{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
 .maik-fu{font:600 12px/1 'Inter';color:var(--mk-ink);background:var(--mk-bg);border:1px solid var(--mk-bd);border-radius:11px;padding:8px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .14s ease,border-color .14s,box-shadow .14s,background .14s,color .14s}
 .maik-fu:hover{border-color:var(--mk-teal);color:var(--mk-teal);box-shadow:0 5px 16px var(--mk-glow);transform:translateY(-1px)}
@@ -5764,7 +5817,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).catch(function () { _fsResumeW(); _webFail(); });
     }
     function maikWebChipEl(q) {
-      var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research on the web";
+      var rb = document.createElement("button"); rb.className = "maik-chip maik-research"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research";
       rb.addEventListener("click", function () { maikRunWeb(rb.parentNode || body, q, rb); });
       return rb;
     }
@@ -5987,6 +6040,24 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!chips.length) return "";
       return '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' + chips.slice(0, 2).join("") + '</div>';
     }
+    // Full-size figure viewer: pinch/scroll the image, tap it to open the source page, tap the
+    // backdrop or Close to dismiss (owner, 2026-09-19: "on press image displayed big, then someone
+    // clicks on it it takes to web").
+    function maikFigLightbox(img, page, site, title) {
+      if (!img) return;
+      var ov = document.createElement("div"); ov.className = "maik-lb";
+      ov.innerHTML = '<div class="maik-lb-bar"><span class="maik-lb-src">' + maikEscH(site || "") + '</span>' +
+        '<button type="button" class="maik-lb-x" aria-label="Close">✕</button></div>' +
+        '<div class="maik-lb-wrap"><img src="' + maikEscH(img) + '" alt="' + maikEscH(title || "") + '" referrerpolicy="no-referrer"></div>' +
+        '<div class="maik-lb-foot">' + maikEscH((title || "").slice(0, 120)) + '<span>Tap the figure to open ' + maikEscH(site || "the source") + ' ↗</span></div>';
+      function close() { try { ov.remove(); document.body.classList.remove("maik-lb-on"); } catch (e) {} }
+      ov.addEventListener("click", function (e) {
+        if (e.target.closest(".maik-lb-x") || e.target === ov || e.target.closest(".maik-lb-bar") === null && e.target === ov) { close(); return; }
+        if (e.target.tagName === "IMG" && page) { try { window.open(page, "_blank", "noopener"); } catch (e2) {} }
+      });
+      document.body.appendChild(ov); document.body.classList.add("maik-lb-on");
+      try { ov.querySelector(".maik-lb-x").focus(); } catch (e) {}
+    }
     function maikFiguresOn() { try { return localStorage.getItem("smd_maik_figures") !== "0"; } catch (e) { return true; } }
     function maikFiguresStrip(bubble, topic) {
       if (!maikFiguresOn() || !topic || !(window.SMD_AI && SMD_AI.figures)) return;
@@ -5996,13 +6067,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var figs = (res && res.figures) || [];
         if (!figs.length || !bubble || !bubble.isConnected) return;
         var cards = figs.filter(function (f) { return f && /^https:\/\//.test(f.img || "") && /^https:\/\//.test(f.page || ""); }).slice(0, 3).map(function (f) {
-          return '<a class="maik-fig" href="' + maikEscH(f.page) + '" target="_blank" rel="noopener noreferrer">' +
+          // Tap opens the figure FULL SIZE in a lightbox; tapping it there goes to the source page
+          // (owner, 2026-09-19). A flowchart must not be cropped, so the card letterboxes it.
+          return '<button type="button" class="maik-fig" data-fig-img="' + maikEscH(f.img) + '" data-fig-page="' + maikEscH(f.page) + '" data-fig-site="' + maikEscH(f.site || "") + '" data-fig-title="' + maikEscH(f.title || "") + '">' +
             '<img src="' + maikEscH(f.img) + '" alt="' + maikEscH(f.title || f.site || "") + '" loading="lazy" referrerpolicy="no-referrer">' +
-            '<span class="maik-fig-cap"><b>' + maikEscH(f.site || "") + '</b> ' + maikEscH((f.title || "").slice(0, 80)) + ' \u2197</span></a>';
+            '<span class="maik-fig-cap"><b>' + maikEscH(f.site || "") + '</b> ' + maikEscH((f.title || "").slice(0, 80)) + '</span></button>';
         }).join("");
         if (!cards) return;
-        var strip = document.createElement("div"); strip.className = "maik-figs";
+        var strip = document.createElement("div"); strip.className = "maik-figs" + (figs.length === 1 ? " one" : "");
         strip.innerHTML = '<div class="maik-figs-h">Related figures from trusted sources</div><div class="maik-figs-row">' + cards + '</div>';
+        strip.addEventListener("click", function (e) {
+          var b = e.target && e.target.closest ? e.target.closest(".maik-fig") : null;
+          if (b) maikFigLightbox(b.getAttribute("data-fig-img"), b.getAttribute("data-fig-page"), b.getAttribute("data-fig-site"), b.getAttribute("data-fig-title"));
+        });
         // A hotlink the source blocks removes its own card; an empty strip removes itself.
         strip.querySelectorAll("img").forEach(function (im) {
           im.addEventListener("error", function () { var a = im.closest(".maik-fig"); if (a) a.remove(); if (!strip.querySelector(".maik-fig")) strip.remove(); _persist(); });
@@ -6574,7 +6651,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               }
               // Assistant table stakes (owner battery, 2026-09-04): copy the answer, regenerate it, or
               // edit the question and resend. Quiet text actions on the same row as the rating.
-              function act(label, fn) { var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b maik-act"; b.textContent = label; b.addEventListener("click", fn); return b; }
+              // Owner, 2026-09-19: "Copy doesn't feel like a button, no feedback." Every action button
+              // now confirms in place (label swaps for 1.2 s) on top of the CSS press state.
+              function act(label, fn) {
+                var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b maik-act"; b.textContent = label;
+                b.addEventListener("click", function (e) {
+                  fn(e);
+                  if (b.dataset.busy) return;
+                  b.dataset.busy = "1"; var was = b.textContent;
+                  b.textContent = (label === "Copy" ? "Copied ✓" : label + " ✓"); b.classList.add("done");
+                  setTimeout(function () { b.textContent = was; b.classList.remove("done"); delete b.dataset.busy; }, 1200);
+                  try { if (navigator.vibrate) navigator.vibrate(8); } catch (e2) {}
+                });
+                return b;
+              }
               var acts = document.createElement("span"); acts.className = "maik-acts";
               acts.appendChild(act("Copy", function () {
                 var txt = "";
