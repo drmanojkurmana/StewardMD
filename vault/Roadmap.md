@@ -104,3 +104,12 @@ Engineering that is deliberately NOT started:
 ## On-device engine concurrency (2026-09-11, from a real consult)
 - [ ] The 4B packs take tens of seconds per structured pass on an iPhone 15 Pro. Measure Scribe refine latency on device and consider raising refineEveryChunks (or drafting only on Stop) for packs above ~2 GB
 - [ ] MedGemma 4B returned prose instead of JSON for a Telugu Scribe dictation in at least one run; measure the JSON-adherence rate per pack and record it as a caps.json score rather than the current 0/1/2 guess
+
+## MaiK Scribe quota accounting (2026-09-19, server side landed)
+- [ ] **opd-emr.js must send `sec`** on the opd-scribe refine: `p.opts.sec = (now() - lastChargedAt)/1000`
+      (seconds of NEW audio since the previous refine that was actually sent, NOT total elapsed;
+      `SMD_AI.extract` merges an options object into the body as-is). Until it does, the server falls
+      back to a 45s-per-call floor that deliberately UNDER-charges, so the 30 min/day cap is loose.
+- [ ] `assessment` (assessLLM) currently charges 0 because it re-reads the same ambient audio the
+      opd-scribe refine already charged. If it ever runs standalone, it must send its own `sec`.
+- [ ] No client reads the new `contradictions` array in the opd-scribe response yet.

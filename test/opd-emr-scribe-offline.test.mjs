@@ -71,24 +71,27 @@ test("_scribeOfflineDraftOn: '0' turns it off; any other value leaves it on", ()
 });
 
 // ---- (a) wiring: doRefine only falls back on a connectivity failure, gated on the flag -------------
-test("doRefine: the resolved-error branch checks the flag AND _isUnreachableError before falling back", () => {
+test("doRefine: the resolved-error branch checks the flag AND the narrowed fallback rule (see opd-emr-scribe-refine.test.mjs)", () => {
   const refine = SRC.slice(SRC.indexOf("function doRefine"), SRC.indexOf("function applyScribeResult"));
-  assert.match(refine, /scribeOfflineDraftOn\(\)\s*&&\s*isUnreachableError\(r && r\.error\)/);
-  assert.match(refine, /return offlineScribeFallback\(transcript\);/);
+  assert.match(refine, /_shouldOfflineFallback\(r && r\.error, \{ flagOn: scribeOfflineDraftOn\(\), isFinal: isFinal, offline: isOfflineNow\(\) \}\)/);
+  assert.match(refine, /return offlineScribeFallback\(transcript, ticket, isFinal\);/);
 });
 
-test("doRefine: the promise-rejection (.catch) branch is ALSO treated as no-network and falls back", () => {
+test("doRefine: the promise-REJECTION handler is attached to the network call only, and still falls back", () => {
   const refine = SRC.slice(SRC.indexOf("function doRefine"), SRC.indexOf("function applyScribeResult"));
-  const dotCatch = refine.slice(refine.indexOf(").catch(function"));
-  assert.match(dotCatch, /scribeOfflineDraftOn\(\)/, "the .catch branch respects the same flag");
-  assert.match(dotCatch, /offlineScribeFallback\(transcript\)/);
+  // Second argument of .then(onResult, onNetworkFailure) - NOT a .catch chained after the success
+  // handler, which would also swallow a throw out of applyScribeResult (see FIX 3).
+  assert.ok(!/\)\.catch\(function/.test(refine), "no .catch after the success handler");
+  const onReject = refine.slice(refine.indexOf("}, function (e) {"));
+  assert.match(onReject, /_shouldOfflineFallback\(String\(\(e && e\.message\) \|\| "network"\)/);
+  assert.match(onReject, /offlineScribeFallback\(transcript, ticket, isFinal\)/);
 });
 
 test("doRefine: the deliberate-refusal branches (quota / LOCAL_CAPABILITY_REQUIRED / kb-only) return before the fallback check ever runs", () => {
   const refine = SRC.slice(SRC.indexOf("function doRefine"), SRC.indexOf("function applyScribeResult"));
   const quotaIdx = refine.indexOf('r.error === "quota"');
   const capIdx = refine.indexOf('LOCAL_CAPABILITY_REQUIRED');
-  const fallbackIdx = refine.indexOf("isUnreachableError(r && r.error)");
+  const fallbackIdx = refine.indexOf("_shouldOfflineFallback(r && r.error");
   assert.ok(quotaIdx > -1 && capIdx > -1 && fallbackIdx > -1);
   assert.ok(quotaIdx < fallbackIdx && capIdx < fallbackIdx, "quota/LOCAL_CAPABILITY_REQUIRED are handled (and return) before the network check");
 });
@@ -101,7 +104,9 @@ test("offlineScribeFallback: refuses cleanly (no throw) when no on-device model 
 
 test("offlineScribeFallback: a successful on-device draft is applied with offline:true (item 13b wiring)", () => {
   const src = SRC.slice(SRC.indexOf("function offlineScribeFallback"), SRC.indexOf("function doRefine"));
-  assert.match(src, /applyScribeResult\(r, transcript, true\)/);
+  // applyIfFresh is applyScribeResult behind the stale-result guard (FIX 1); offline = true.
+  assert.match(src, /applyIfFresh\(ticket, r, transcript, true\)/);
+  assert.match(SRC, /function applyIfFresh\(ticket, r, transcript, offline\) \{[\s\S]{0,200}applyScribeResult\(r, transcript, offline\);/);
 });
 
 test("applyScribeResult: passes the offline flag straight into _applyRefine's offlineDraft", () => {

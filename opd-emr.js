@@ -34,8 +34,13 @@
   // tab). This banner sits between the header and the tab bar - visible on EVERY tab - whenever
   // capture is live and not paused, with its own elapsed timer (tickElapsed keeps #oeRecTimer in
   // sync the same way it already does #oeElapsed).
+  // Kill switch (item 18): DEFAULT ON; localStorage.setItem("smd_scribe_banner","off") removes the
+  // banner entirely, restoring the pre-item-18 screen (the Assessment-tab orb as the only indicator).
+  // Checked AFTER the capture-state guard so an idle repaint never touches localStorage.
+  function scribeBannerOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_banner") === "off") return false; } catch (e) {} return true; }
   function recordingBanner(st) {
     if (!st.voiceOn || st.voicePaused) return "";
+    if (!scribeBannerOn()) return "";
     return '<div class="oe-rec-banner" role="status" aria-live="polite">' +
       '<span class="oe-rec-dot" aria-hidden="true"></span>' +
       '<span class="oe-rec-txt">Recording this consultation</span>' +
@@ -912,9 +917,14 @@
   // Shown once the consult has actually finished (not while still listening/finishing up) and there is
   // at least one scribe-filled field left to look at. Collapses naturally as rows resolve to a done
   // state; never re-shows a row that has already been Accepted/Edited/Removed.
+  // Kill switch (item 14): DEFAULT ON; localStorage.setItem("smd_scribe_review","off") removes the
+  // panel entirely, restoring the previous post-consult screen. Checked after the cheap state guards
+  // so a repaint with nothing scribe-filled never touches localStorage.
+  function scribeReviewOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_review") === "off") return false; } catch (e) {} return true; }
   function reviewPanel(st) {
     if (!st.scribeFilledFields || !st.scribeFilledFields.length) return "";
     if (st.voiceOn || st.voiceProcessing) return "";
+    if (!scribeReviewOn()) return "";
     var rows = _buildReviewRows(st.scribeFilledFields, st.assessVals, st.assessTouched, st.scribeGround);
     if (!rows.length) return "";
     var review = st.scribeReview || {};
@@ -1444,7 +1454,9 @@
       // Item 15: the FIRST manual edit of a field the scribe filled is a correction signal worth
       // logging (field key + action only - see logScribeFeedback). Gated on the touched flag not yet
       // being set, so this fires once per field per consult, not once per keystroke.
-      var wasScribeFilled = !st.assessTouched[an] && st.scribeFilledFields && st.scribeFilledFields.indexOf(an) >= 0;
+      // scribeFeedbackOn() is LAST in the chain on purpose: off means off (no st.scribeReview write
+      // either), without reading localStorage on every keystroke in every field.
+      var wasScribeFilled = !st.assessTouched[an] && !!st.scribeFilledFields && st.scribeFilledFields.indexOf(an) >= 0 && scribeFeedbackOn();
       st.assessTouched[an] = true;
       if (wasScribeFilled) {
         st.scribeReview = st.scribeReview || {};
@@ -2748,6 +2760,10 @@
   // remembers the LAST _lastSpeechAt an idle-refine already fired for, so one silence stretch only
   // ever triggers one extra refine (it re-arms once new speech moves _lastSpeechAt forward again).
   var _lastSpeechAt = 0, _idleRefinedAt = 0, _lastLiveRefineAt = 0;
+  // smd_scribe_live resolved ONCE per capture session (startVoice), not per tick: tickElapsed calls
+  // maybeIdleRefine every second for the whole consult, and a localStorage read per second is a real
+  // cost on a phone. Null until a session starts, which also keeps maybeIdleRefine inert before one.
+  var _liveOnSession = null;
   var LIVE_IDLE_MS = 4000;
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
   function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } _finishPending = false; if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
@@ -2773,7 +2789,7 @@
   // is a no-op, so the legacy chunkMs/refineEveryChunks cadence is byte-identical). Fires at most once
   // per silence stretch and is still subject to gatedRefine's own cost guard.
   function maybeIdleRefine() {
-    if (!scribeLiveOn() || !st.voiceOn || st.voicePaused || st.voiceProcessing) return;
+    if (!_liveOnSession || !st.voiceOn || st.voicePaused || st.voiceProcessing) return;   // cached flag: tickElapsed runs this EVERY SECOND
     if (!_lastSpeechAt) return;                                    // nothing said yet this session
     var t = now();
     if ((t - _lastSpeechAt) < LIVE_IDLE_MS) return;                // still mid-utterance
@@ -3454,31 +3470,78 @@
   // LOCAL engine's OWN timeout (only reachable once the policy already routed to local), not a
   // connectivity failure, and already has its own message below; matching it here would retry local
   // work with more local work and mislabel a slow model as "no internet".
-  function isUnreachableError(msg) {
-    return /fetch|network|internet|unreachable|no connection|\bdns\b|resolve host|\btimeout\b|econnrefused|econnreset|enotfound|eai_again/i.test(String(msg || ""));
+  var NET_ERR_RE = /fetch|network|internet|unreachable|no connection|\bdns\b|resolve host|econnrefused|econnreset|enotfound|eai_again/i;
+  function isUnreachableError(msg) { var s = String(msg || ""); return NET_ERR_RE.test(s) || /\btimeout\b/i.test(s); }
+  // Does the DEVICE say it has no network right now? Airplane mode / no carrier / Wi-Fi down all set
+  // navigator.onLine false; a working-but-slow connection leaves it true.
+  function isOfflineNow() { try { return !!(G.navigator && G.navigator.onLine === false); } catch (e) { return false; } }
+  // PURE: should ONE failed cloud refine be retried on-device? Exposed for tests.
+  //   flagOn  - smd_scribe_offline_draft.
+  //   isFinal - the doctor tapped Pause/Stop. A BACKGROUND tick never starts a multi-window llama.cpp
+  //             generation: the next tick re-tries the cloud, and the authoritative refine still runs
+  //             on Stop. Before this, one bad minute of signal cost a full local generation per tick.
+  //   offline - navigator.onLine === false at the moment of the failure.
+  // A named network/DNS error is a genuine connectivity failure on its own. A bare "timeout" is NOT:
+  // SMD_AI.extract resolves { error: "timeout" } after 45s, which on a working-but-slow connection is
+  // only a slow server - so that case additionally requires the device to report itself offline.
+  // Airplane mode still drafts on-device: fetch fails there with "Failed to fetch" (a named network
+  // error), and navigator.onLine is false anyway. ("timed out" never matches - that is the LOCAL
+  // engine's own timeout, see isUnreachableError above.)
+  function _shouldOfflineFallback(msg, opts) {
+    opts = opts || {};
+    if (!opts.flagOn || !opts.isFinal) return false;
+    var s = String(msg || "");
+    if (NET_ERR_RE.test(s)) return true;
+    if (/\btimeout\b/i.test(s)) return !!opts.offline;
+    return false;
+  }
+  // ---- FIX 1 (overlapping refines): ticket per refine, newest-applied wins --------------------
+  // The live cadence floor (45s) and extract()'s own 45s timeout are the same order, so two refines
+  // CAN be in flight at once. Every doRefine takes a ticket; a result whose ticket is OLDER than the
+  // newest one already applied is discarded, so a slow early refine can never overwrite a newer
+  // draft (emrFields, the English transcript, st.scribeOfflineDraft). A doctor-initiated finish is
+  // never dropped by this: nothing starts a refine after Pause/Stop (maybeIdleRefine is gated on
+  // st.voiceProcessing and the engine is torn down), so a final always carries the newest ticket.
+  // Never reset - a monotonic counter also discards a refine left in flight by a previous session.
+  var _refineSeq = 0, _appliedSeq = 0;
+  function _refineStale(ticket, appliedSeq) { return ticket < appliedSeq; }   // PURE, exposed for tests
+  function applyIfFresh(ticket, r, transcript, offline) {
+    if (_refineStale(ticket, _appliedSeq)) return false;
+    _appliedSeq = ticket;
+    applyScribeResult(r, transcript, offline);
+    return true;
+  }
+  // FIX 3: a throw out of applyScribeResult (the rx / safety / ICD wiring, the grounder) is a BUG in
+  // this client, never a network failure - it must not be laundered into "no internet" and answered
+  // with an on-device generation. Always logged where the owner can see it; toasted only on a
+  // doctor-initiated finish, because a mid-consult tick must not nag.
+  function refineBug(e, isFinal) {
+    try { if (G.console && G.console.error) G.console.error("[opd-scribe] refine failed", e); } catch (x) {}
+    try { if (G.SMD_logError) G.SMD_logError("opd-scribe refine failed: " + ((e && e.message) || e), (e && e.stack) || ""); } catch (x) {}
+    if (isFinal) { try { toast("Something went wrong while drafting the note - the transcript is kept, tap Stop again."); } catch (x) {} }
   }
   // Retry ONE cloud-refine failure on-device instead of leaving the doctor with only a toast. Mirrors
   // the 2026-09-11 hard Local AI policy in reverse (cloud unreachable -> on-device stands in) and must
   // be equally explicit: a successful fallback is marked offline (item 13b) via applyScribeResult's
   // `offline` flag, never silently presented as the full-quality cloud draft.
-  function offlineScribeFallback(transcript) {
+  function offlineScribeFallback(transcript, ticket, isFinal) {
     if (!(G.SMD_MAIK_LOCAL && G.SMD_MAIK_LOCAL.available && G.SMD_MAIK_LOCAL.available() && G.SMD_MAIK_LOCAL.scribeFill)) {
-      if (_finishPending) { try { toast("No internet connection, and no on-device model is ready to draft here. The transcript is kept - try again once you are online."); } catch (e) {} }
+      if (isFinal) { try { toast("No internet connection, and no on-device model is ready to draft here. The transcript is kept - try again once you are online."); } catch (e) {} }
       return;
     }
     return G.SMD_MAIK_LOCAL.scribeFill(transcript).then(function (r) {
       if (!r || r.error) {
-        if (_finishPending) {
+        if (isFinal) {
           var why = (r && r.error === "draft-unparsed" && r.message) ? r.message
             : "No internet connection, and the on-device draft did not work either. The transcript is kept - try again.";
           try { toast(why); } catch (e) {}
         }
         return;
       }
-      if (_finishPending) { try { toast("No internet. This note was drafted on your phone instead - check it carefully before you save."); } catch (e) {} }
-      applyScribeResult(r, transcript, true);
+      if (isFinal) { try { toast("No internet. This note was drafted on your phone instead - check it carefully before you save."); } catch (e) {} }
+      applyIfFresh(ticket, r, transcript, true);
     }, function () {
-      if (_finishPending) { try { toast("No internet connection, and the on-device draft did not work either. The transcript is kept - try again."); } catch (e) {} }
+      if (isFinal) { try { toast("No internet connection, and the on-device draft did not work either. The transcript is kept - try again."); } catch (e) {} }
     });
   }
   // `scribeSendPrep` (flag smd_scribe_clinical) decides what is actually SENT: the transcript with
@@ -3492,12 +3555,10 @@
     if (!(G.SMD_AI && G.SMD_AI.extract)) { refineFail("Note drafting is unavailable on this build."); return; }
     if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine — genuinely nothing to say
     _lastRefinedTranscript = transcript;
+    var ticket = ++_refineSeq, isFinal = _finishPending;   // captured at CALL time (see applyIfFresh)
     var p = scribeSendPrep(transcript);
-    G.SMD_AI.extract(p.text, "opd-scribe", p.opts).then(function (r) {
+    return G.SMD_AI.extract(p.text, "opd-scribe", p.opts).then(function (r) {
       if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
-      // The engine refused for a named reason (Local mode, model lacks the capability): say it ONCE
-      // per session rather than on every refine tick, and keep dictating (the deterministic vitals
-      // extractor and the transcript are unaffected).
       // A named refusal (Local mode, model lacks the capability): say it once per distinct reason.
       // It used to be once per SESSION, so every later refine fell through to the generic message
       // below and the actual reason was never seen again (owner report, 2026-09-11).
@@ -3510,12 +3571,9 @@
       // engine runs one generation at a time, so a refine landing on a busy engine reported "busy"
       // and the doctor was told only that drafting failed).
       if (!r || r.error) {
-        // Item 13a: a cloud call that failed because the network is unreachable (dropped connection,
-        // DNS, timeout) is not a refusal - retry once on-device rather than just toasting. "busy" /
-        // low-memory / draft-unparsed above are the LOCAL engine's OWN refusals (reached only when the
-        // policy already routed to local), never a connectivity failure, so they never match here.
-        if (scribeOfflineDraftOn() && isUnreachableError(r && r.error)) return offlineScribeFallback(transcript);
-        if (_finishPending) {
+        // Item 13a, narrowed: genuine connectivity failure + doctor-initiated finish only.
+        if (_shouldOfflineFallback(r && r.error, { flagOn: scribeOfflineDraftOn(), isFinal: isFinal, offline: isOfflineNow() })) return offlineScribeFallback(transcript, ticket, isFinal);
+        if (isFinal) {
           var e0 = String((r && r.error) || "");
           var why = (r && r.error === "draft-unparsed" && r.message) ? r.message
             : /busy|already running/i.test(e0) ? "MaiK was still drafting the previous part. Tap Stop again in a moment."
@@ -3527,14 +3585,15 @@
         }
         return;
       }
-      applyScribeResult(r, transcript, false);
-    }).catch(function () {
-      // Was silently swallowed: a dropped connection mid-consult looked exactly like a working Stop
-      // that produced nothing. Item 13a: this IS the no-network case (extract() rejecting rather than
-      // resolving with an error), so retry on-device the same as the resolved-error branch above.
-      if (scribeOfflineDraftOn()) return offlineScribeFallback(transcript);
-      if (_finishPending) { try { toast("Could not reach MaiK to draft the note - check your connection, your transcript is safe."); } catch (e) {} }
-    }).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
+      applyIfFresh(ticket, r, transcript, false);
+    }, function (e) {
+      // FIX 3: the REJECTION handler of the network call ONLY. It used to be a .catch chained AFTER
+      // the handler above, so a throw inside applyScribeResult (a bug in the rx/safety/ICD wiring)
+      // was read as a dropped connection and answered with an on-device generation. extract() normally
+      // resolves { error: ... }; rejecting means the transport itself failed.
+      if (_shouldOfflineFallback(String((e && e.message) || "network"), { flagOn: scribeOfflineDraftOn(), isFinal: isFinal, offline: isOfflineNow() })) return offlineScribeFallback(transcript, ticket, isFinal);
+      if (isFinal) { try { toast("Could not reach MaiK to draft the note - check your connection, your transcript is safe."); } catch (e2) {} }
+    }).then(finishProcessing, function (e) { finishProcessing(); refineBug(e, isFinal); });   // clear the "Finishing…" state whether it succeeded or not
   }
   // The successful-refine tail, shared by the cloud path and the item-13 offline fallback. `offline`
   // (item 13b) marks the draft as on-device so _applyRefine can flag it for the UI - a doctor must
@@ -3592,11 +3651,16 @@
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
     // Preserve any prior transcript so restarting after Stop APPENDS ("record more") instead of wiping it.
     _priorTranscript = (st.voiceTranscript || "").trim() ? ((st.voiceTranscript || "").trim() + "\n") : "";
-    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceModel = ""; _lastFullTranscript = st.voiceTranscript || ""; _lastRefinedTranscript = ""; _lastLiveRefineAt = 0; _lastSpeechAt = 0; _idleRefinedAt = 0; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
+    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceModel = ""; _lastFullTranscript = st.voiceTranscript || ""; _lastRefinedTranscript = ""; _lastLiveRefineAt = 0; _liveOnSession = scribeLiveOn(); _lastSpeechAt = 0; _idleRefinedAt = 0; _lastScribeSentAt = 0; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
     if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
       language: st.voiceLang || "auto",                     // en | auto | te — multilingual Whisper decodes Telugu + code-switch
+      // Remembers this visit's detected language across a Stop-then-record-more, so the Auto probe
+      // (and the model load behind it) is paid once per consult, not once per restart. Keyed per
+      // visit on purpose: carrying one patient's language into the next would decode the next
+      // consult on the wrong model. Falls back to a fresh probe when there is no id to key on.
+      sessionId: st.visitId || st.episodeId || st.ticketId || (st.patient && st.patient.mrn) || "",
       // refineEveryChunks: flag OFF keeps the original ~2 min cadence (8 * 15s) byte-identical; flag ON
       // (default) drops to every 2 chunks (~30s) so the draft visibly fills in as the consult goes.
       // Either way the full authoritative extraction still runs on Stop, so the final EMR is identical —
@@ -4089,8 +4153,21 @@
   // (module 1) and the chosen specialty's prompt lines attached (module 6). The transcript the doctor
   // reads is never touched - only this copy. Flag off, or either module absent, returns the
   // transcript unchanged with no extra body key, so the request is identical to the pre-wiring one.
+  // Seconds of NEW dictation since the last refine we actually sent. The server meters the scribe by
+  // audio captured, not by how often we call it (functions/_ai_usage.js scribeChargeSec), so this must
+  // be the DELTA: every refine resends the whole growing transcript, and billing that in full would
+  // charge the same minute again on every pass. Stamped only when a call is really sent.
+  var _lastScribeSentAt = 0;
+  function scribeSec() {
+    var t = now();
+    var prev = _lastScribeSentAt || st.voiceStartedAt || t;
+    _lastScribeSentAt = t;
+    var sec = Math.round((t - prev) / 1000);
+    return (sec > 0 && sec < 3600) ? Math.min(sec, 300) : 0;   // the server clamps too; 0 = let it use its floor
+  }
+
   function scribeSendPrep(transcript) {
-    var out = { text: transcript, opts: null };
+    var out = { text: transcript, opts: { sec: scribeSec() } };
     if (!scribeClinicalOn()) return out;
     if (G.SMD_SCRIBEDRUGFIX && G.SMD_SCRIBEDRUGFIX.correct) {
       try {
@@ -4102,7 +4179,7 @@
     }
     if (G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.get) {
       var sp = _specialtyPrompt(G.SMD_SCRIBETPL.get(scribeSpecialtyId()));
-      if (sp) out.opts = { specialtyPrompt: sp };   // SMD_AI.extract merges an options OBJECT into the body as-is
+      if (sp) out.opts.specialtyPrompt = sp;        // SMD_AI.extract merges an options OBJECT into the body as-is
     }
     return out;
   }
@@ -4142,18 +4219,26 @@
 
   // ---- Item 18: recording consent, remembered PER VISIT (not per app, not permanently per patient) --
   // Store shape: { "<visitKey>": "granted" | "declined" }.
-  // ponytail: one key per visit, never evicted - a JSON blob of true/false-ish strings, so even
-  // thousands of visits stay a few tens of KB on-device. Add an LRU trim if that ever matters.
-  var SCRIBE_CONSENT_KEY = "smd_scribe_consent_visits";
+  // Capped like the feedback ring buffer (FIX 4): one key per visit was never evicted, and every
+  // consent check parses the whole blob. Oldest-inserted keys are dropped first; re-deciding an
+  // existing visit keeps its original position (an eviction heuristic, not an LRU - a doctor who has
+  // seen 200 visits since is not coming back to that one, and the worst case is one extra prompt).
+  var SCRIBE_CONSENT_KEY = "smd_scribe_consent_visits", SCRIBE_CONSENT_CAP = 200;
   function scribeConsentFlagOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_consent") === "off") return false; } catch (e) {} return true; }
   // PURE: consent state machine. `store` is a plain {visitKey: "granted"|"declined"} map; returns a
   // NEW store, never mutates the one it was given. Exposed for tests.
-  function _consentReducer(store, visitKey, action) {
+  function _consentReducer(store, visitKey, action, cap) {
     store = store || {};
     if (!visitKey || (action !== "grant" && action !== "decline")) return store;
-    var next = {}; for (var k in store) if (store.hasOwnProperty(k)) next[k] = store[k];
+    var next = {}, keys = [], k;
+    for (k in store) if (store.hasOwnProperty(k)) { next[k] = store[k]; keys.push(k); }
+    if (!next.hasOwnProperty(visitKey)) keys.push(visitKey);
     next[visitKey] = action === "grant" ? "granted" : "declined";
-    return next;
+    cap = cap || SCRIBE_CONSENT_CAP;
+    if (keys.length <= cap) return next;
+    var out = {}, keep = keys.slice(keys.length - cap);          // newest `cap` keys, oldest dropped
+    for (var i = 0; i < keep.length; i++) out[keep[i]] = next[keep[i]];
+    return out;
   }
   // PURE: "granted" | "declined" | "unknown" (no decision recorded for this visit yet). Exposed for tests.
   function _consentStatus(store, visitKey) { return (store && visitKey && store[visitKey]) || "unknown"; }
@@ -4162,7 +4247,17 @@
   // Keyed by the visit, not the patient or the app: the same GHIS episode/visit never re-asks once
   // decided; a NEW visit for the same patient (or no visit id at all, e.g. a fresh unsaved profile)
   // always does.
-  function visitConsentKey() { return String((st.episodeId || st.visitId || st.ticketId || (st.patient && st.patient.mrn) || "")); }
+  // A personal-clinic patient can have NO episode/visit/ticket id and no MR number at all. That used
+  // to key to "", so setConsent stored nothing and the doctor was asked again on every single start.
+  // Such a consult falls back to one random key per app session: it identifies nothing (no patient
+  // id is invented, nothing identifying is written), it is stable for the session so the prompt comes
+  // once, and it is gone on relaunch. The cap above evicts these like any other key.
+  var _sessionConsentKey = "";
+  function sessionConsentKey() {
+    if (!_sessionConsentKey) _sessionConsentKey = "s:" + Math.random().toString(36).slice(2, 10) + now().toString(36);
+    return _sessionConsentKey;
+  }
+  function visitConsentKey() { return String((st.episodeId || st.visitId || st.ticketId || (st.patient && st.patient.mrn) || "")) || sessionConsentKey(); }
   function consentStatus() { var k = visitConsentKey(); if (!k) return "unknown"; return _consentStatus(consentStoreRead(), k); }
   function setConsent(action) { var k = visitConsentKey(); if (!k) return; consentStoreWrite(_consentReducer(consentStoreRead(), k, action)); }
   // Gate for the FIRST recording of a visit: already granted -> start immediately, no re-ask. Anything
@@ -4424,6 +4519,6 @@
   // support/debug screen) can read or wipe it without reaching into OPDEMR internals.
   G.SMD_SCRIBE_FEEDBACK = { list: scribeFeedbackRead, clear: function () { scribeFeedbackWrite([]); } };
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep };
 })();

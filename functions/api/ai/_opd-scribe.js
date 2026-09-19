@@ -217,3 +217,83 @@ export function flagContradictions(transcript, sanitized) {
   });
   return out;
 }
+
+/* ── truncation-tolerant parse ──────────────────────────────────────────────────────────────────
+ * The handler's parseJsonLoose takes the first "{" through the LAST "}" and JSON.parse's it. A reply
+ * cut off by the output cap has no matching closer, so it returned null and the doctor lost the
+ * ENTIRE extraction rather than its tail -- on the FINAL refine, the authoritative one that produces
+ * the EMR. Close what is still open instead, and tell the caller the reply was incomplete: grounding
+ * computed from a half-written "sources" map is worse than no grounding at all.
+ *
+ * Returns { parsed, truncated }. `truncated` is true whenever the text had to be repaired, which is
+ * a stronger signal than the provider's finishReason (that is a module-level global shared by
+ * concurrent requests; this is derived from the bytes of THIS reply).
+ *
+ * ponytail: rewinds to the last completed key/value pair rather than reconstructing the partial one.
+ * Ceiling: the field being written when the cap hit is dropped. Raise SCRIBE_MAX_OUTPUT_TOKENS if
+ * that ever fires in practice -- repair is the floor, not the plan. */
+function closeOpenJson(s) {
+  const stack = [];
+  let inStr = false, esc = false, cut = -1, closers = null;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (c === "\\") esc = true;
+      else if (c === '"') inStr = false;
+      continue;
+    }
+    if (c === '"') { inStr = true; continue; }
+    if (c === "{" || c === "[") { stack.push(c === "{" ? "}" : "]"); continue; }
+    if (c === "}" || c === "]") { stack.pop(); cut = i + 1; closers = stack.slice(); continue; }
+    // a comma at container level means every key/value before it is complete
+    if (c === ",") { cut = i; closers = stack.slice(); }
+  }
+  if (cut < 0 || !closers) return null;
+  return s.slice(0, cut) + closers.reverse().join("");
+}
+export function parseScribeJson(text) {
+  const s = String(text || "");
+  const i = s.indexOf("{");
+  if (i === -1) return { parsed: null, truncated: false };
+  const body = s.slice(i);
+  const last = body.lastIndexOf("}");
+  if (last > -1) { try { return { parsed: JSON.parse(body.slice(0, last + 1)), truncated: false }; } catch (e) {} }
+  const repaired = closeOpenJson(body);
+  if (repaired) { try { return { parsed: JSON.parse(repaired), truncated: true }; } catch (e) {} }
+  return { parsed: null, truncated: true };
+}
+
+/* ── the grounding signal the client actually reads ─────────────────────────────────────────────
+ * opd-emr.js treats the `sources` map as authoritative: once it is present at all, a populated field
+ * MISSING from it is badged "not found in the recording". So an INCOMPLETE map turns correctly
+ * extracted fields into apparent fabrications -- a false safety signal pointing the wrong way, which
+ * is worse than showing nothing. The rule here is therefore trustworthy-or-absent:
+ *
+ *   • reply repaired / truncated, or the model cited fewer than GROUND_MIN_COVERAGE of the populated
+ *     fields  -> withhold BOTH `sources` and `ungroundedFields`. The client falls back to
+ *                supported() === null, i.e. "unknown support", and draws no badge.
+ *   • otherwise -> run verifySources (does each cited sentence really appear in the transcript?) and
+ *                  flagContradictions, and return their results. These were exported and never
+ *                  imported by the handler, so nothing checked the citations the model is paying
+ *                  output tokens to produce.
+ *
+ * Never DROPS a field: a bad citation is not proof the fact is wrong, and the doctor is the one
+ * reading the transcript. */
+export const GROUND_MIN_COVERAGE = 0.8;
+export function attachGrounding(transcript, sanitized, opts) {
+  const out = sanitized || {};
+  const truncated = !!(opts && opts.truncated);
+  if (truncated) out.truncated = true;
+  const ef = out.emrFields || {};
+  const sources = out.sources || null;
+  const populated = EMR_FIELD_KEYS.filter(k => typeof ef[k] === "string" && ef[k]);
+  const cited = sources ? populated.filter(k => typeof sources[k] === "string" && sources[k]).length : 0;
+  const trustworthy = !!sources && !truncated && !(opts && opts.disabled) &&
+    populated.length > 0 && (cited / populated.length) >= GROUND_MIN_COVERAGE;
+  if (!trustworthy) { delete out.sources; return out; }
+  out.ungroundedFields = verifySources(transcript, out).ungrounded;
+  const contradictions = flagContradictions(transcript, out);
+  if (contradictions.length) out.contradictions = contradictions;
+  return out;
+}

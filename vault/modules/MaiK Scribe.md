@@ -17,6 +17,10 @@ Whisper only; consultation audio never leaves the phone.
   scribe: drug-name corrections, structured medicines to the prescription pad, ICD candidates on an
   accepted diagnosis, the medicine safety check, speaker labelling and the specialty picker. OFF
   restores the pre-2026-09-19 behaviour.
+- `smd_scribe_review` / `smd_scribe_banner` — DEFAULT ON, localStorage only. The post-consult review
+  panel and the persistent recording indicator. Added after the 2026-09-19 audit found both rendering
+  unconditionally, so a doctor who wants the previous screen back has a way to get it. OFF restores it
+  exactly. `smd_scribe_consent` is deliberately NOT part of this: consent stays.
 - `smd_scribe_offline_draft` — DEFAULT ON, localStorage only. No network means the note is drafted by
   the on-device engine and badged "Drafted on this phone" instead of failing.
 - `smd_voice_lang_probe` — DEFAULT ON. Auto mode probes the first window on the multilingual weights
@@ -130,7 +134,22 @@ style like `voice-scribe-ground.js`: `scribe-drugfix.js` (unambiguous drug-name 
 
 Server (`_opd-scribe.js`): a `sources` map quoting the transcript sentence behind every field, plus
 `verifySources` and `flagContradictions`, and prompt rules for negation and time. The review panel
-never auto-accepts a field the recording does not support. The negation and time rules are ported
+never auto-accepts a field the recording does not support.
+
+`verifySources`/`flagContradictions` now RUN in the handler (`attachGrounding`), and the response
+carries `ungroundedFields` (+ `contradictions`, which no client reads yet). Grounding is
+trustworthy-or-absent: if the reply was truncated, or the model cited fewer than
+`GROUND_MIN_COVERAGE` (0.8) of the populated fields, BOTH `sources` and `ungroundedFields` are
+withheld, because opd-emr.js reads a field missing from `sources` as "not found in the recording"
+and an incomplete map would badge good fields as fabricated. `SCRIBE_GROUND="0"` disables the whole
+signal (default on). The opd-scribe reply is generated under `SCRIBE_MAX_OUTPUT_TOKENS` (default
+6000), not the 1100-token chat budget that was truncating the final refine, and `parseScribeJson`
+keeps the completed fields when a reply is cut instead of returning null.
+
+Quota: a scribe call charges `scribeChargeSec` (`functions/_ai_usage.js`) — `body.sec`, the seconds
+of NEW audio since the caller's previous charged call, clamped to 300; absent, a per-kind floor
+(`opd-scribe` 45, `assessment` 0, `translate` 15) that can only under-charge. **opd-emr.js does not
+send `sec` yet** — see `vault/Roadmap.md`. The negation and time rules are ported
 into `maik-local.js` `SCRIBE_SYS`; the `sources` map is NOT ported (the rolling-window merge there
 has no equivalent) — that is the open follow-up for on-device drafts.
 
@@ -142,3 +161,41 @@ and guarded more. Run it before enabling the device-gated flags.
 i18n: the 24 new ward and discharge scribe strings are registered in the EN catalog and listed in
 `docs/wardsynq/i18n-english-fallbacks.json` for all 8 languages. They show English until the
 translation pipeline runs over them.
+
+
+## 2026-09-19 audit and the fixes it forced
+
+A performance and safety audit of the branch above found the work was NOT zero-loss. What it caught,
+and what was done, all of it measured rather than argued:
+
+1. **A symptom was being deleted from the note.** `scribe-drugfix` rewrote "no vomiting" to
+   "no Ondansetron": "vomiting" is 2 edits from the brand "Vomikind", which resolves unambiguously to
+   Ondansetron, so the ambiguity guard never fired. Indian brands are coined from the conditions they
+   treat, so this class of collision is structural, not a one-off. Fixed two ways: clinical words are
+   never candidates, and an INEXACT match is now accepted only inside a prescribing sentence (a form
+   word before, or a dose, unit or frequency after). An exact hit in the app's own table still stands
+   alone. Regression test uses the exact failing sentence.
+2. **The corrector was 2.8 s of blocking work per refine** on a long consult (O(words x vocabulary),
+   vocabulary rebuilt per call). Now cached by list identity, length-bucketed, and memoised across
+   refines: 8.3x faster at 15000 words, and proven identical on 160 random transcripts.
+3. **The scribe exhausted its own quota and killed the recording.** A flat 120 s per call was
+   calibrated to the old 120 s cadence; at the new cadence a 10 minute consult charged 1680 s of an
+   1800 s daily cap. Now metered on audio captured (`scribeChargeSec` + the client's `sec` delta):
+   10 minutes bills about 600 s, the same as before the cadence changed.
+4. **A truncated reply used to lose the ENTIRE extraction** (the loose JSON parser needed a matching
+   closing brace), most likely on the authoritative final refine. `parseScribeJson` now salvages every
+   completed field, and the output budget was raised so the sources map does not cause the truncation.
+5. **Two refines could overlap** at the new cadence and a slower older one could overwrite a newer
+   result. Now sequenced; stale results are discarded.
+6. **A slow connection counted as offline**, starting a full on-device generation every refine. Now
+   only a genuine connectivity failure, and only on a doctor-initiated finish.
+7. **A client bug was caught as a network error** and hidden behind that same fallback. The handler
+   now sees only transport failures; a code error is logged and surfaced.
+8. **The Auto probe threw away the first 4 seconds** of a non-English consult and forced a second
+   252 MB model load. Now 1.5 s, and remembered per visit so a restart re-probes nothing.
+9. Also: the ward screen closing mid-recording left the mic on; the consent store grew without bound
+   and re-prompted clinic patients every time; `smd_scribe_live` read localStorage every second with
+   the flag OFF; `smd_scribe_feedback` OFF still wrote review state.
+
+The audit's own caveat stands: the 5-10x low-end-Android multiplier behind item 2 is an estimate from
+a Mac baseline, not a device measurement. Confirm on hardware.

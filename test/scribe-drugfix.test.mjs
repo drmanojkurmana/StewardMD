@@ -77,6 +77,44 @@ test("multi-word generic reached through its brand", () => {
   assert.equal(F.correct("inj trapic 1 g", O).text, "inj Tranexamic acid 1 g");
 });
 
+/* Regressions found by the 2026-09-19 performance and safety audit of this branch. */
+
+test("SAFETY: a symptom word is never corrected into the brand it resembles", () => {
+  // Measured against the real drugs.js: "vomiting" is 2 edits from the brand "Vomikind", which
+  // resolves unambiguously to Ondansetron. Every earlier guard passed, so "no vomiting" became
+  // "no Ondansetron" in the text sent for structuring, deleting the symptom AND its negation.
+  const drugs = DRUGS.concat([{ generic: "Ondansetron", brands: ["vomikind", "emeset", "ondem"], dose: "4 mg" }]);
+  const r = F.correct("patient has no vomiting and no loose motions", { drugs });
+  assert.equal(r.text, "patient has no vomiting and no loose motions");
+  assert.deepEqual(r.corrections, []);
+});
+
+test("SAFETY: a near-miss outside a prescribing sentence is left alone", () => {
+  // No form word before it, no dose, unit or frequency after it: prose, not a prescription.
+  const r = F.correct("she mentioned atorvastain somewhere in the letter", O);
+  assert.equal(r.text, "she mentioned atorvastain somewhere in the letter");
+  assert.deepEqual(r.corrections, []);
+});
+
+test("a near-miss IS corrected when the sentence is prescribing", () => {
+  assert.equal(F.correct("tab atorvastain at night", O).text, "tab Atorvastatin at night");   // form word before
+  assert.equal(F.correct("atorvastain 20 mg", O).text, "Atorvastatin 20 mg");                 // dose after
+  assert.equal(F.correct("atorvastain BD", O).text, "Atorvastatin BD");                       // frequency after
+});
+
+test("an exact brand needs no prescribing context", () => {
+  // It is a name out of the app's own drug table, not a guess.
+  assert.equal(F.correct("she takes pan every morning", O).text, "she takes Pantoprazole every morning");
+});
+
+test("repeated calls over a growing transcript stay correct (the cross-call memo)", () => {
+  const a = F.correct("tab pan 40", O);
+  const b = F.correct("tab pan 40 and atorvastain 20 mg", O);
+  assert.equal(a.text, "tab Pantoprazole 40");
+  assert.equal(b.text, "tab Pantoprazole 40 and Atorvastatin 20 mg");
+  assert.equal(b.corrections.length, 2);
+});
+
 test("empty input and a missing drug list degrade quietly", () => {
   assert.deepEqual(F.correct("", O), { text: "", corrections: [] });
   assert.deepEqual(F.correct(null, O), { text: "", corrections: [] });

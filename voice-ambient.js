@@ -20,10 +20,16 @@
  * any build without it. See local-plugins/capacitor-whisper/README.md + README-ANDROID.md.
  *
  * AUTO LANGUAGE PROBE (flag `smd_voice_lang_probe`, DEFAULT ON): in Auto the first window is a SHORT
- * detection-only pass on the multilingual weights, and the session routes by what it read.
+ * (~1.5s) detection-only pass on the multilingual weights, and the session routes by what it read. A
+ * Latin-script probe is a clean transcript and is KEPT, folded into the transcript like any other
+ * chunk — nothing captured is ever thrown away. Any other script still has to be discarded (see
+ * onChunkFinal): the multilingual weights render real Telugu as garbage Devanagari too, so the text
+ * alone can't tell that apart from genuine Hindi. `opts.sessionId`, if passed, remembers the probe's
+ * answer across a Stop-then-restart ("record more") within the SAME encounter so the 252MB
+ * probe-model load + decode + discard + specialist-load cycle is not paid twice for one consult.
  *
  *   SMD_AMBIENT.start({ speaker, getState, onUpdate, onTranscript, onState, onError,
- *                       language, model, llmExtract, chunkMs, refineEveryChunks, onRefine })
+ *                       language, model, llmExtract, chunkMs, refineEveryChunks, onRefine, sessionId })
  *     → { stop, pause, resume }
  *
  * Pure, exported helpers (Node-testable, no timers/DOM):
@@ -137,12 +143,28 @@
   // pins the specialist for the rest of the session.
   // Anything else => "" (no decision, keep today's behaviour). MEASURED: the multilingual weights
   // render real Telugu as garbage DEVANAGARI, so a non-Latin probe cannot tell Telugu from Hindi and
-  // must not try — the specialist is already the right opening for both.
+  // must not try — the specialist is already the right opening for both. This is a ROUTING decision
+  // only; whether the probe's TEXT is kept or discarded is decided separately in onChunkFinal (kept
+  // when this returns "en", discarded otherwise — see the AUTO LANGUAGE PROBE header comment).
   function probeRoute(text) { return detectScript(text) === "en" ? "en" : ""; }
   // A benign "the speaker just paused" endpoint, not a real failure — iOS SFSpeech reports these on
   // every silence gap ("No speech detected"/"No match"/"Retry"). Kept separate from hard errors
   // (recording-failure, transcription-failed, mic-denied) which SHOULD count toward the breaker.
   function isSilence(e) { var s = String(e || "").toLowerCase(); return s.indexOf("no speech") >= 0 || s.indexOf("no match") >= 0 || s.indexOf("nomatch") >= 0 || s.indexOf("retry") >= 0 || s.indexOf("1110") >= 0 || s.indexOf("203") >= 0; }
+
+  // Cross-restart probe memory, OPT-IN via opts.sessionId. `probeDone`/`detectedLang` used to live only
+  // inside start()'s closure, so Stop then "record more" (a caller calling start() again) forgot the
+  // probe ever ran and paid the whole cost again: 252MB multilingual load, decode, discard, free, THEN
+  // the 252MB specialist load. Keyed by sessionId so two different encounters never share a language —
+  // stale cross-consult routing is exactly the bug this module exists to avoid (real Telugu decoded on
+  // the wrong model renders as garbage). No sessionId => today's behaviour, byte-for-byte: a fresh probe
+  // every start() call, same as every caller that hasn't opted in yet.
+  var langSessions = {};
+  function getLangSession(id) {
+    if (!id) return null;
+    if (!langSessions[id]) langSessions[id] = { probeDone: false, detectedLang: null };
+    return langSessions[id];
+  }
 
   function start(opts) {
     opts = opts || {};
@@ -165,16 +187,24 @@
     // device/build (Android ships no Whisper build; iOS model download can fail), fall back ONCE to
     // the phone's built-in on-device STT so autofill still works. Telugu accuracy still wants Whisper.
     var engine = opts.engine || "clinical", clinicalErrs = 0, errStreak = 0, rearmTimer = null, silenceStreak = 0;
+    // Cross-restart memory for THIS encounter (see getLangSession() above) — undefined/null sessionId
+    // just means no memory, i.e. today's behaviour.
+    var langSession = getLangSession(opts.sessionId);
     // Auto-mode adaptive routing: the language observed in the last chunk picks the model for the next
-    // one (Telugu → specialist, en/hi → the multilingual/turbo). null until the first chunk lands.
-    var detectedLang = null;
+    // one (Telugu → specialist, en/hi → the multilingual/turbo). null until the first chunk lands
+    // (or seeded from a prior start() in the same session — see langSession above).
+    var detectedLang = langSession ? langSession.detectedLang : null;
+    function setDetectedLang(v) { detectedLang = v; if (langSession) langSession.detectedLang = v; }
     // Continuous capture (flag OFF by default): flush the mic buffer instead of stopping it at each
     // window boundary. Read once per session so a mid-consult flag change can't half-switch the loop.
     var continuous = flagOn("smd_voice_continuous");
-    // Auto first-chunk language probe (flag ON by default) — see probeRoute() above.
+    // Auto first-chunk language probe (flag ON by default) — see probeRoute() above. SHORT: a detection
+    // pass, not a consultation chunk — kept short so that even a discarded (non-Latin, see onChunkFinal)
+    // probe window loses only a fraction of a second, not the 4s a longer probe would cost.
     var probeEnabled = !flagOff("smd_voice_lang_probe");
-    var probeMs = opts.probeMs || 4000;         // SHORT: a detection pass, not a consultation chunk
-    var probing = false, probeDone = false;
+    var probeMs = opts.probeMs || 1500;
+    var probing = false, probeDone = langSession ? langSession.probeDone : false;
+    function setProbeDone(v) { probeDone = v; if (langSession) langSession.probeDone = v; }
 
     function apply(transcript) {
       lastTranscript = transcript;
@@ -341,7 +371,7 @@
     function foldChunk(chunkText) {
       errStreak = 0; clinicalErrs = 0; silenceStreak = 0;   // a good window means the current engine works
       // Auto mode: adapt the model for the next chunk to THIS chunk's detected language.
-      if ((opts.language || "auto") === "auto") { var d = detectScript(chunkText); if (d) detectedLang = d; }
+      if ((opts.language || "auto") === "auto") { var d = detectScript(chunkText); if (d) setDetectedLang(d); }
       chunkN++;
       fullTranscript = accumulate(fullTranscript, chunkText);
     }
@@ -353,14 +383,17 @@
       // AUTO LANGUAGE PROBE: this window was a detection-only pass on the multilingual weights.
       var wasProbe = probing;
       if (wasProbe) {
-        probing = false; probeDone = true;
+        probing = false; setProbeDone(true);
         var routed = probeRoute(chunkText);
         dbg("probe", "routed=" + (routed || "(none, keeping today's route)"));
-        if (routed) detectedLang = routed;
-        // DISCARD the probe text unless it read as English. On Telugu the multilingual weights emit
-        // garbage (measured: repeated-syllable Devanagari) that is perfectly valid UTF-8, so
-        // isGarbled() cannot catch it — folding it in would poison the transcript AND the LLM extract.
-        else chunkText = "";
+        // Latin script => English: a clean, usable transcript, so it is KEPT and folded in below —
+        // nothing captured is thrown away. Anything else (including Devanagari) still has to be
+        // DISCARDED: the multilingual weights render real Telugu as garbage Devanagari too (measured:
+        // repeated-syllable nonsense), it is perfectly valid UTF-8 so isGarbled() cannot catch it, and
+        // there is no way from the text alone to tell that apart from genuine Hindi — folding it in
+        // would risk poisoning the transcript AND the LLM extract. probeMs is kept short (above) so
+        // this unavoidable discard costs a fraction of a second, not the 4s it used to.
+        if (routed) { setDetectedLang(routed); } else { chunkText = ""; }
       }
       if (!wasProbe || chunkText) foldChunk(chunkText);
       else { errStreak = 0; clinicalErrs = 0; silenceStreak = 0; }   // the probe window still proves the engine works

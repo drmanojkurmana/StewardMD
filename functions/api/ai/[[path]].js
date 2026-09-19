@@ -112,7 +112,7 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR } from "../../_credits.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
@@ -129,7 +129,7 @@ import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/ho
 import { tinyfishSearch } from "../../_search.js";
 import { findFigures } from "../../_figures.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
-import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
+import { scribeExtractPrompt, sanitizeScribeOutput, parseScribeJson, attachGrounding } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
 import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
@@ -2036,10 +2036,13 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       // ---- MaiK Scribe policy: cheaper model (env.SCRIBE_MODEL) always; Pro-only + time caps when env.SCRIBE_CAPS="1".
-      // SCRIBE_KINDS values = seconds of dictation charged per call when the client doesn't send body.sec
-      // (the OPD scribe loop refines every refineEveryChunks*chunkMs = 60s; the field mic is a short one-shot).
-      const SCRIBE_KINDS = { assessment: 120, "opd-scribe": 120, translate: 15 };   // seconds charged per call (refine cadence = refineEveryChunks*chunkMs = 120s); field-mic translate is a short one-shot
-      const _isScribe = Object.prototype.hasOwnProperty.call(SCRIBE_KINDS, body.kind);
+      // How many dictation seconds ONE call charges now lives in _ai_usage.js scribeChargeSec:
+      // body.sec (seconds of NEW audio since this caller's previous charged call, clamped to 300)
+      // when the client sends it, else a per-kind floor that can only under-charge. It used to be a
+      // flat 120s per call -- a constant calibrated to a refine cadence the client no longer uses,
+      // which charged a 10-minute consult ~1680s of the 1800s daily budget and then stopped the
+      // recording mid-consultation.
+      const _isScribe = isScribeKind(body.kind);
       const _scribeOpts = (_isScribe && scribeModel(env)) ? { model: scribeModel(env) } : undefined;
       let _scribeStore = null, _scribeUid = null;
       if (_isScribe && String(env && env.SCRIBE_CAPS) === "1") {
@@ -2053,8 +2056,8 @@ export async function onRequest(context) {
             message: tb.reason === "scribe-weekly" ? "You've reached this week's MaiK Scribe limit (1 hour/week)." : "You've reached today's MaiK Scribe limit (30 minutes/day)." }, 429);
         }
       }
-      // charge this call's dictation seconds (body.sec if the client sends real elapsed, else the per-kind estimate)
-      const _chargeScribe = () => addScribeTime(_scribeStore, _scribeUid, Number(body.sec) > 0 ? Math.min(Number(body.sec), 300) : SCRIBE_KINDS[body.kind], Date.now());
+      // charge this call's dictation seconds (see scribeChargeSec: the body.sec delta when sent, else the floor)
+      const _chargeScribe = () => addScribeTime(_scribeStore, _scribeUid, scribeChargeSec(body.kind, body.sec), Date.now());
       if (body.kind === "reasoning") {
         const catalog = Array.isArray(body.catalog) ? body.catalog.slice(0, 500) : [];
         const prompt = reasoningExtractPrompt(transcript, catalog).slice(0, MAX_IN_CHARS + 12000);
@@ -2098,12 +2101,29 @@ export async function onRequest(context) {
         // capped defensively since it comes from the request body.
         const specialtyPrompt = typeof body.specialtyPrompt === "string" ? body.specialtyPrompt.slice(0, 4000) : "";
         const prompt = scribeExtractPrompt(transcript, specialtyPrompt ? { specialtyPrompt } : undefined);
+        // OUT_BASE (1100) is calibrated for a CHAT answer. This reply is not one: it must carry a
+        // faithful English translation of the WHOLE transcript ("en", ~1 token per 4 transcript
+        // chars), PLUS every emrFields value, PLUS a verbatim source sentence for each populated
+        // field, PLUS the suggestion lists. A 10-minute consult overran 1100 on "en" alone, the
+        // reply was cut mid-token, and the whole EMR extraction was lost. maxOutputTokens is a
+        // CEILING, not a spend -- a reply that already fitted costs exactly what it cost before.
+        // Sized against the hard input cap (MAX_IN_CHARS chars -> "en" and the quoted sources are
+        // both bounded by it). Tune with SCRIBE_MAX_OUTPUT_TOKENS.
+        const SCRIBE_OUT = Math.max(OUT_BASE, Math.min(8192, Number(env.SCRIBE_MAX_OUTPUT_TOKENS) || 6000));
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
+        try { text = await callGemini(env, [{ text: prompt }], SCRIBE_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         await _chargeScribe();
-        const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
+        // Truncation-tolerant parse (keeps the completed fields instead of returning nothing), then
+        // the grounding pass the client's "not found in the recording" badge depends on. Grounding
+        // is withheld whenever it would be incomplete -- see attachGrounding. SCRIBE_GROUND="0"
+        // (default ON) turns the whole signal off without touching the prompt.
+        const _parsed = parseScribeJson(text);
+        const sanitized = attachGrounding(transcript, sanitizeScribeOutput(_parsed.parsed), {
+          truncated: _parsed.truncated || /MAX_TOKENS/i.test((_lastGenMeta && _lastGenMeta.finishReason) || ""),
+          disabled: String(env && env.SCRIBE_GROUND) === "0",
+        });
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
       }
       if (body.kind === "surgx-note") {

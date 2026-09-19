@@ -2402,6 +2402,10 @@
     st.wardScribeStatus = wT("ward.scribe-starting", "Starting…"); paint();
     st.wardScribeCapture = G.SMD_AMBIENT.start({
       speaker: "doctor", language: "auto", chunkMs: 15000, refineEveryChunks: 8,
+      // Encounter-scoped: a Stop then "record more" on the SAME patient reuses the Auto language
+      // probe's answer instead of paying its model-load cost again (voice-ambient.js, getLangSession).
+      // Falsy when nothing is selected -> undefined -> today's behaviour (a fresh probe every start()).
+      sessionId: st.sel && st.sel.encounterId,
       getState: function () { return {}; },
       onTranscript: function (t) { st.wardScribeTranscript = t || ""; },
       onState: function (s) {
@@ -16477,6 +16481,9 @@
   }
   function close() {
     closeSummaryLayer();
+    // Closing mid-recording must stop the mic too, else SMD_AMBIENT keeps chunking and paint() keeps
+    // firing into a screen that no longer exists. Same shape as discharge.js's close() -> stopScribe().
+    if (st.wardScribeCapture) stopWardScribe();
     st.dc = null; st.fu = null; st.ask = null;
     var el = root(); el.classList.remove("on"); el.innerHTML = "";
     try { document.removeEventListener("keydown", onKey); } catch (e) {}

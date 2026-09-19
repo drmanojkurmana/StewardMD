@@ -154,3 +154,101 @@ test("a probe that returns nothing still leaves the loop running on today's rout
   assert.equal(h.calls.length, 2);
   assert.equal(h.calls[1].opts.model, TELUGU_SPECIALIST);
 });
+
+// AUDIT FIX: probeDone/detectedLang used to live only inside start()'s closure, so a Stop then
+// "record more" (a NEW start() call) forgot the probe ever ran and paid the whole cost again --
+// 252MB multilingual load, decode, discard, free, then the 252MB specialist load. opts.sessionId
+// lets a caller carry that answer across a restart within the same encounter.
+test("sessionId: a restart within the same session does NOT re-probe (English answer remembered)", async () => {
+  const h = boot();
+  const seen = { transcripts: [] };
+  const base = {
+    speaker: "doctor", language: "auto", chunkMs: 100000, probeMs: 20, refineEveryChunks: 999,
+    getState: () => ({}), llmExtract: null, onUpdate() {}, onRefine() {}, onState() {}, onError() {},
+    onTranscript: (t) => seen.transcripts.push(t), sessionId: "enc-1",
+  };
+  const s1 = h.root.SMD_AMBIENT.start(base);
+  h.calls[0].opts.onState("listening");
+  h.calls[0]._say = "patient has fever and cough since three days";
+  await delay(60);
+  assert.equal(h.calls.length, 2, "probe ran once, real capture armed");
+  assert.equal(h.calls[1].opts.model, MULTILINGUAL, "routed to English");
+  s1.stop();                                          // "Stop"
+
+  const s2 = h.root.SMD_AMBIENT.start(base);           // "record more" -- a BRAND NEW start() call
+  assert.equal(h.calls.length, 3, "no probe window armed on restart");
+  assert.equal(h.calls[2].opts.model, MULTILINGUAL, "the remembered English route is used immediately");
+  // Distinguish "used the remembered route directly" from "re-probed and happened to land on the same
+  // model": a probe's chunk timer fires at probeMs (20ms here); a real routed chunk's fires at chunkMs
+  // (100000ms). If this had re-probed, that timer would close the window and cascade into a THIRD
+  // listen() call well within 60ms.
+  h.calls[2].opts.onState("listening");
+  await delay(60);
+  assert.equal(h.calls.length, 3, "no cascade -- this was never a probe window");
+  s2.stop();
+});
+
+test("sessionId: a restart remembers a NON-Latin session too (stays on the specialist, no re-probe)", async () => {
+  const h = boot();
+  const base = {
+    speaker: "doctor", language: "auto", chunkMs: 100000, probeMs: 20, refineEveryChunks: 999,
+    getState: () => ({}), llmExtract: null, onUpdate() {}, onRefine() {}, onState() {}, onError() {},
+    onTranscript() {}, sessionId: "enc-2",
+  };
+  const s1 = h.root.SMD_AMBIENT.start(base);
+  h.calls[0].opts.onState("listening");
+  h.calls[0]._say = TELUGU_ON_MULTILINGUAL;
+  await delay(60);
+  assert.equal(h.calls.length, 2);
+  assert.equal(h.calls[1].opts.model, TELUGU_SPECIALIST);
+  s1.stop();
+
+  h.root.SMD_AMBIENT.start(base);
+  assert.equal(h.calls.length, 3, "restart re-armed once, without a fresh probe window");
+  assert.equal(h.calls[2].opts.model, TELUGU_SPECIALIST, "still routed to the specialist, remembered");
+  h.calls[2].opts.onState("listening");
+  await delay(60);
+  assert.equal(h.calls.length, 3, "no cascade -- this was never a probe window");
+});
+
+test("sessionId: a DIFFERENT session (new patient) still gets its own fresh probe", async () => {
+  const h = boot();
+  const base = {
+    speaker: "doctor", language: "auto", chunkMs: 100000, probeMs: 20, refineEveryChunks: 999,
+    getState: () => ({}), llmExtract: null, onUpdate() {}, onRefine() {}, onState() {}, onError() {},
+    onTranscript() {},
+  };
+  const s1 = h.root.SMD_AMBIENT.start(Object.assign({}, base, { sessionId: "enc-A" }));
+  h.calls[0].opts.onState("listening");
+  h.calls[0]._say = "patient has fever and cough since three days";
+  await delay(60);
+  s1.stop();
+
+  h.root.SMD_AMBIENT.start(Object.assign({}, base, { sessionId: "enc-B" }));
+  assert.equal(h.calls[2].opts.model, MULTILINGUAL, "the SECOND encounter still opens on the probe");
+  assert.equal(h.calls[2].opts.language, "auto", "a real probe window, not a remembered route");
+});
+
+test("no sessionId: today's behaviour, byte-for-byte -- every restart re-probes", async () => {
+  const { h } = startSession();
+  h.calls[0]._say = "patient has fever and cough since three days";
+  await delay(60);
+  assert.equal(h.calls.length, 2);
+  const { h: h2 } = startSession();                    // a second, independent start() with no sessionId
+  assert.equal(h2.calls[0].opts.language, "auto", "still a probe window, unchanged for callers who opt in to nothing");
+  assert.equal(h2.calls[0].opts.model, MULTILINGUAL);
+});
+
+test("the default probe window is short -- well under the old 4s, so a discard costs a fraction of a second", () => {
+  const delays = [];
+  const real = globalThis.setTimeout;
+  globalThis.setTimeout = function (fn, ms) { delays.push(ms); const t = real(fn, ms); if (t && t.unref) t.unref(); return t; };
+  try {
+    startSession(undefined, { probeMs: undefined, chunkMs: 100000 });   // no probeMs -> the module default
+  } finally { globalThis.setTimeout = real; }
+  // armChunk always schedules a fixed 2500ms fallback timer too; exclude it to isolate the real window
+  // timer (probing ? probeMs : chunkMs). chunkMs is 100000 here, so anything else under that is the probe's.
+  const windowDelay = Math.min.apply(null, delays.filter((d) => d < 100000 && d !== 2500));
+  assert.ok(windowDelay < 4000, "default probe window must be well under the old 4000ms: was " + windowDelay);
+  assert.ok(windowDelay > 0);
+});
