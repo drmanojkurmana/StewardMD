@@ -2059,3 +2059,48 @@ Known gaps for a v3 pass (do not re-discover): the think habit is reduced, not e
 robust fix is a <think>-token ban at the native sampler (both platforms) or more discipline data;
 scope-refusal is enforced by the Intent Firewall (maik-scope.js) upstream, NOT by the model, which
 answered a football question in bare-model probes.
+
+## 2026-09-19 — One email template (premium, single column), unsubscribe everywhere it must be, promo series OFF, phone verified over WhatsApp
+
+**Email.** `functions/_email.js` is now a component kit (`headline`, `hero`, `tile`, `ctaRow`,
+`codeBox`, `facts`, `note`) plus one `renderEmail()` shell: soft grey page, white 600px column, the
+SD mark alone at the top, one big headline, one line, one pill button, tiles that make one point each,
+quiet footer. Every existing template (OTP, reset, temp password, verified, reminder, Pro, failed,
+welcome, upsell) was rewritten on it; no em-dash anywhere (pinned by test). `sendBranded(env, opts)`
+takes `kind:"marketing"` + `uid`: it then signs an unsubscribe token (`_unsub.js`, HMAC under
+`UNSUB_SECRET` falling back to `RESEND_API_KEY`), adds the footer Unsubscribe button + link and the
+RFC 8058 `List-Unsubscribe` / `List-Unsubscribe-Post: One-Click` headers. `/api/unsubscribe` (GET link,
+POST one-click, `resub=1` to undo) flips `unsubscribedAt` on the lifecycle record ONLY. Account notices
+(codes, verification, the day-5 removal warning) are transactional and deliberately never suppressed:
+nobody may lose an account because they unsubscribed from offers. Welcome + Pro upsell are marketing
+(unsubscribable); `sendProUpsellOnce` honours the opt-out without stamping `upsellAt`.
+
+**Prices in copy come from `_pricing.js`**, which reads the same `cfgPrice` the paywall reads (KV
+override > env > default) and rounds per-day figures UP, so a price change can never make an email
+understate the cost. Today: Pro 599/mo = 20/day, annual 4999 = 14/day, trainee 199 = 7/day.
+
+**Promo series** (`_promo.js`): seven editions, 2-3 features each, one hero figure, per-day price
+against a chai / bottle of water / pastry. `PROMO_SERIES_ON` is OFF: the nightly `/api/lifecycle/run`
+reports candidates but sends nothing until the owner turns it on. Starts day 5 (after the day-3
+upsell), one edition every 4 days, never to opt-outs or paying accounts. Owner preview:
+`GET /api/email-preview?kind=promo:maik` (owner auth), `POST` sends a real copy.
+
+**Phone verification** (owner: "ask every signup phone number verified by WhatsApp with backup
+SMS"). Server `_phone_otp.js` + `/api/auth/phone-start|phone-verify`, keyed `otp:phone:<uid>`, same
+rules as the email OTP (10-min TTL, 30 s throttle, 5 tries then the code burns) plus a per-number
+daily cap of 6 so our account cannot be used to SMS-bomb a number. Delivery reuses the FollowCare
+senders: WhatsApp first when a provider is configured, else SMS; 2Factor goes through its dedicated
+OTP API (pre-approved DLT OTP template), other providers through `sendSms`. A same-window resend
+by SMS carries the SAME code. Success sets the `phoneVerified` claim and stamps the lifecycle record.
+Client `phone-verify.js` asks after `profile-setup.js` saves (listens for `smd:profile-saved`), never
+stacks on the registration gate (`#verifyGate`, polls until hidden), "Later" snoozes per app-open.
+Nothing is gated on it yet; it is an ask, not a wall. Kill switches: `smd_phone_verify=0` (client),
+`PHONE_VERIFY_ON=0` (server).
+
+**Not done, deliberately:** an in-app "marketing emails" toggle (the email button + header suffice for
+now); `mark-teal.png` is in the repo but 404s on the live site, so the template uses `logo.png`.
+
+Tests: `test/email-template.test.mjs` (16), `test/phone-otp.test.mjs` (17),
+`test/run-phone-verify-ui.mjs` (35 in a real browser), `test/render-emails.mjs` renders every email
+to PNG for a human look. Guide: the Clinical UX Guide canvas (10 boards) was produced the same day.
+

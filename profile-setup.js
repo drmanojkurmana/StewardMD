@@ -222,7 +222,11 @@
       if (!ref) { toast("You are offline. Try again once you are connected."); return; }
       var btn = el.querySelector("#pfsSave"); btn.disabled = true; btn.textContent = "Saving…";
       ref.set({ phone: draft.phone, hospital: draft.hospital, degree: draft.degree, speciality: draft.speciality }, { merge: true })
-        .then(function () { close(); toast("Profile saved"); })
+        .then(function () {
+          close(); toast("Profile saved");
+          // phone-verify.js waits for this to ask for the code, so the two sheets never stack.
+          try { document.dispatchEvent(new CustomEvent("smd:profile-saved", { detail: { phone: draft.phone } })); } catch (e) {}
+        })
         .catch(function () { btn.disabled = false; btn.textContent = "Save"; toast("Couldn't save. Check your connection."); });
     });
     return el;
