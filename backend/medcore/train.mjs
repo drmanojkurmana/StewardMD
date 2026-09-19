@@ -27,6 +27,7 @@ import { fileURLToPath } from "node:url";
 import { fitLogistic, scoreLogistic, fitCalibrator, applyCalibration, fitOod, oodDistance, selectFeatures, tuneL2 } from "./learn.mjs";
 import { auroc, auprc, brier, ece, calibrationCurve, selectiveRisk, atThreshold, thresholdForAlertBudget, round4 } from "./metrics.mjs";
 import { fitGbm, scoreGbm } from "./gbm.mjs";
+import { resolvePath, resolveOut } from "./paths.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 
@@ -85,7 +86,7 @@ export function thresholdBaseline(v) {
 }
 
 function load(path) {
-  return readFileSync(join(ROOT, path), "utf8").trim().split("\n").map((l) => JSON.parse(l));
+  return readFileSync(resolvePath(ROOT, path), "utf8").trim().split("\n").map((l) => JSON.parse(l));
 }
 const bySplit = (rows, s) => rows.filter((r) => r.split === s);
 const pairs = (rows, score) => rows.map((r) => ({ y: r.label, p: score(r) }));
@@ -237,8 +238,7 @@ if (import.meta.url === "file://" + process.argv[1]) {
   const rows = load(String(arg("in", "backend/medcore/out/matrix.jsonl")));
   const res = run({ rows, outcome: String(arg("outcome", "MC-3")), alertRate: Number(arg("alert-rate", 0.15)) });
   const outDir = String(arg("out-dir", "backend/medcore/out"));
-  mkdirSync(join(ROOT, outDir), { recursive: true });
-  writeFileSync(join(ROOT, outDir, "report.json"), JSON.stringify(res, null, 2));
+  writeFileSync(resolveOut(ROOT, join(outDir, "report.json")), JSON.stringify(res, null, 2));
 
   console.log(`\n=== Medical Core ${res.outcome} ===`);
   if (res.synthetic) console.log("*** SYNTHETIC DATA. Every number below is a statement about the PIPELINE, not about patients. ***");

@@ -32,11 +32,13 @@ import { fileURLToPath } from "node:url";
 import { buildState } from "../../medcore/medcore-state.js";
 import { features } from "../../medcore/medcore-features.js";
 import { askable, dropBlanked, NOT_ASKABLE } from "../../medcore/medcore-outcomes.js";
+import { resolvePath, resolveOut } from "./paths.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 const HOUR = 3600000;
 
 export function loadPacks() {
+  // Repo-internal packs, never a caller argument, so these are joined rather than resolved.
   const j = (p) => JSON.parse(readFileSync(join(ROOT, p), "utf8"));
   return {
     unitTable: j("medcore/data/units.json"),
@@ -185,7 +187,7 @@ if (import.meta.url === "file://" + process.argv[1]) {
   const outcome = String(arg("outcome", "MC-3"));
   const gridHours = Number(arg("grid", 4));
   const packs = loadPacks();
-  const encounters = readFileSync(join(ROOT, inPath), "utf8").trim().split("\n").map((l) => JSON.parse(l));
+  const encounters = readFileSync(resolvePath(ROOT, inPath), "utf8").trim().split("\n").map((l) => JSON.parse(l));
 
   const rowsByEnc = new Map();
   const excluded = [];
@@ -195,8 +197,7 @@ if (import.meta.url === "file://" + process.argv[1]) {
     excluded.push(...r.excluded);
   }
   const rows = split(encounters, rowsByEnc, {});
-  mkdirSync(dirname(join(ROOT, outPath)), { recursive: true });
-  writeFileSync(join(ROOT, outPath), rows.map((r) => JSON.stringify(r)).join("\n") + "\n");
+  writeFileSync(resolveOut(ROOT, outPath), rows.map((r) => JSON.stringify(r)).join("\n") + "\n");
 
   const by = (s) => rows.filter((r) => r.split === s);
   const rate = (a) => a.length ? (100 * a.filter((r) => r.label === 1).length / a.length).toFixed(2) + "%" : "n/a";

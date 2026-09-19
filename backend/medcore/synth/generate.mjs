@@ -32,8 +32,10 @@
  * USAGE: node backend/medcore/synth/generate.mjs --n 400 --seed 20260919 --out backend/medcore/out/synth.jsonl
  */
 
-import { writeFileSync, mkdirSync } from "node:fs";
-import { dirname } from "node:path";
+import { writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { resolveOut } from "../paths.mjs";
 
 const HOUR = 3600000, MIN = 60000;
 
@@ -232,8 +234,8 @@ if (import.meta.url === "file://" + process.argv[1]) {
   };
   const outPath = String(arg("out", "backend/medcore/out/synth.jsonl"));
   const { encounters } = generate(opt);
-  mkdirSync(dirname(outPath), { recursive: true });
-  writeFileSync(outPath, encounters.map((e) => JSON.stringify(e)).join("\n") + "\n");
+  const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../../..");
+  writeFileSync(resolveOut(ROOT, outPath), encounters.map((e) => JSON.stringify(e)).join("\n") + "\n");
   const ev = encounters.filter((e) => e.events.length).length;
   const prev = encounters.filter((e) => e._truth.prevalent).length;
   const resc = encounters.filter((e) => e._truth.rescued).length;
