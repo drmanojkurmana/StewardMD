@@ -25,7 +25,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fitLogistic, scoreLogistic, fitCalibrator, applyCalibration, fitOod, oodDistance, selectFeatures, tuneL2 } from "./learn.mjs";
-import { auroc, auprc, brier, ece, calibrationCurve, selectiveRisk, atThreshold, thresholdForAlertBudget, round4 } from "./metrics.mjs";
+import { auroc, auprc, brier, ece, calibrationCurve, selectiveRisk, atThreshold, thresholdForAlertBudget, confidenceBands, round4 } from "./metrics.mjs";
 import { fitGbm, scoreGbm } from "./gbm.mjs";
 import { resolvePath, resolveOut } from "./paths.mjs";
 
@@ -148,6 +148,9 @@ export function run(opts) {
 
   const rawVal = pairs(val, (r) => rawScore(r.values));
   const calibration = fitCalibrator(rawVal);
+  /* Confidence comes from VALIDATION, like the calibration itself: it is how much that split can
+   * justify at each probability, not a second opinion the model has about one patient. */
+  const bands = confidenceBands(rawVal.map((r) => ({ y: r.y, p: applyCalibration(calibration, r.p) })), 10);
   const ood = fitOod(lrModel, train);      // the OOD distance stays on the standardised linear space
   const score = (r) => applyCalibration(calibration, rawScore(r.values));
   const modelPairs = pairs(test, score);
@@ -223,7 +226,7 @@ export function run(opts) {
     probe: { kind: "frequency-only", auroc: round4(probeAuroc) },
     subgroups: sub, selectiveRisk: sel, reliability: cal.table,
     gates, allPass,
-    artifact: { model, calibration, ood, linear: lrModel }
+    artifact: { model, calibration, ood, linear: lrModel, confidenceBands: bands }
   };
 }
 

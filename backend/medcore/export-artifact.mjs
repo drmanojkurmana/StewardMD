@@ -27,7 +27,7 @@ import { resolvePath, resolveOut } from "./paths.mjs";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 
 export function buildArtifact(res, rows, meta) {
-  const { model, calibration, ood, linear } = res.artifact;
+  const { model, calibration, ood, linear, confidenceBands } = res.artifact;
   const raw = model.kind === "gbm" ? (v) => scoreGbm(model, v) : (v) => scoreLogistic(model, v);
   const sample = rows.filter((r) => r.split === "val").slice(0, 100);
   /* Parity vectors carry the FULL feature values, not just the model's own ids: a tree routes on
@@ -46,7 +46,7 @@ export function buildArtifact(res, rows, meta) {
     outcome: res.outcome,
     featureSet: rows[0].featureSet,
     createdAt: (meta && meta.createdAt) || new Date().toISOString(),
-    model, calibration, ood, linear: linear || null,
+    model, calibration, ood, linear: linear || null, confidenceBands: confidenceBands || null,
     gates: res.gates,
     allGatesPass: res.allPass,
     metrics: {
