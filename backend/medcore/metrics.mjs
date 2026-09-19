@@ -210,3 +210,41 @@ export function thresholdForAlertBudget(pairs, budget) {
 
 function round4(n) { return n === null || n === undefined ? null : Math.round(n * 10000) / 10000; }
 export { round4 };
+
+
+/**
+ * Confidence bands: for each decile of predicted probability, the observed event rate on VALIDATION
+ * and a Wilson interval around it.
+ *
+ * WHAT THE INTERVAL IS AND IS NOT. It is the uncertainty in the CALIBRATION at this probability -
+ * "of the validation patients who scored around 0.3, between 22% and 38% had the event". It is not
+ * a posterior over one patient's risk and must never be shown as one. A model reporting 0.30 with a
+ * band of 0.22 to 0.38 is saying its own 0.30 is worth about that much, which is a property of how
+ * much validation data sat in that decile, and nothing else.
+ *
+ * Wilson rather than the normal approximation because the deciles at the ends hold few rows and few
+ * events, which is exactly where the normal interval goes outside [0,1] and stops meaning anything.
+ */
+export function confidenceBands(pairs, bins) {
+  const B = bins || 10;
+  const out = [];
+  for (let b = 0; b < B; b++) {
+    const lo = b / B, hi = (b + 1) / B;
+    const inBin = pairs.filter((r) => (b === B - 1 ? r.p >= lo && r.p <= hi : r.p >= lo && r.p < hi));
+    const n = inBin.length;
+    if (!n) { out.push({ lo: round4(lo), hi: round4(hi), n: 0, observed: null, ci: null }); continue; }
+    const k = inBin.filter((r) => r.y === 1).length;
+    out.push({ lo: round4(lo), hi: round4(hi), n, observed: round4(k / n), ci: wilson(k, n) });
+  }
+  return out;
+}
+
+/** Wilson score interval for a binomial proportion at 95%. */
+export function wilson(k, n, z) {
+  const Z = z || 1.959964;
+  if (!n) return null;
+  const p = k / n, d = 1 + (Z * Z) / n;
+  const centre = (p + (Z * Z) / (2 * n)) / d;
+  const half = (Z * Math.sqrt((p * (1 - p)) / n + (Z * Z) / (4 * n * n))) / d;
+  return { lo: round4(Math.max(0, centre - half)), hi: round4(Math.min(1, centre + half)) };
+}
