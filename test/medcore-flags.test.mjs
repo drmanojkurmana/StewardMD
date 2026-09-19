@@ -50,10 +50,14 @@ test("flags: the registry has no side effects beyond its own export", () => {
   assert.ok(!/require\(|^import /m.test(src), "the registry must not depend on any other module");
 });
 
-test("inert: nothing in the app reads the Medical Core flags yet", () => {
-  // When a later step wires medcore-boot.js this list stops being empty. Update it in THAT commit,
-  // deliberately, naming the consumer - never by deleting this test.
-  const ALLOWED = new Set(["medcore-flags.js"]);
+test("inert: only the named consumers read the Medical Core flags", () => {
+  // This list was empty when the registry was created; it grows only in the commit that wires a
+  // consumer, deliberately, naming it - never by deleting this test.
+  //   medcore-boot.js  reads smd_medcore and returns immediately when it is off (Phase 1, step 6)
+  //   icu.js           renders the deterministic panel only when the flag is on AND the boot module
+  //                    installed window.SMD_MEDCORE (Phase 1, step 6)
+  //   index.html       loads the two files; the boot module is inert with the flag off
+  const ALLOWED = new Set(["medcore-flags.js", "medcore-boot.js", "icu.js", "index.html"]);
   const SKIP_DIRS = new Set([
     "node_modules", ".git", "ios", "android", "www", "_site", "archive", "vault", "test",
     "docs", "qa-report", "Packages", "patches", "vendor", "licenses", "store-assets"
@@ -73,4 +77,24 @@ test("inert: nothing in the app reads the Medical Core flags yet", () => {
     }
   })(ROOT);
   assert.deepEqual(hits, [], "unexpected Medical Core flag consumers: " + hits.join(", "));
+});
+
+test("inert: every named consumer checks the flag before it does anything", () => {
+  const boot = readFileSync(join(ROOT, "medcore-boot.js"), "utf8");
+  // The flag test must come before the first fetch and the first dynamic import, or "off" is only
+  // off after the network has already been used.
+  const flagAt = boot.indexOf("flagOn()");
+  const guardAt = boot.indexOf("if (!flagOn()) return;");
+  assert.ok(flagAt > -1 && guardAt > -1, "medcore-boot must have a flag guard");
+  assert.ok(guardAt < boot.indexOf("import("), "the guard must precede the first dynamic import");
+  assert.ok(guardAt < boot.indexOf("await loadPacks"), "the guard must precede the first fetch");
+  assert.ok(/window\.SMD_MEDCORE\s*=/.test(boot), "it installs exactly one global");
+  assert.equal((boot.match(/window\.SMD_MEDCORE\s*=/g) || []).length, 1);
+
+  const icu = readFileSync(join(ROOT, "icu.js"), "utf8");
+  assert.ok(/function medCoreOn\(\)/.test(icu), "icu.js guards on its own helper");
+  assert.ok(/if \(!medCoreOn\(\)\) return null;/.test(icu), "the guard returns before any work");
+  // The panel must never be able to write to the chart or raise anything.
+  const panel = icu.slice(icu.indexOf("function medCorePanel()"), icu.indexOf("function fmtMins("));
+  assert.ok(!/ingest|save|alerts\.push|notify|escalat/i.test(panel), "the panel only renders");
 });

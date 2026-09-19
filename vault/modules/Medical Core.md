@@ -1,9 +1,35 @@
 ---
 tags: [module, clinical, ai]
-status: planned
-flag: smd_medcore + smd_medcore_shadow (both default OFF; registry created 2026-09-19, no consumer yet)
+status: phase-1-built
+flag: smd_medcore + smd_medcore_shadow (both default OFF)
 ---
 # Medical Core — Final Implementation Plan
+
+## Status (2026-09-19)
+
+Steps 1 to 7 of the Implementation Order are DONE. The work can go no further than step 12, the data gate.
+
+| Step | State | What exists |
+|---|---|---|
+| 1 flags | done | `medcore-flags.js`, both flags OFF, tag `medcore-pre-integration` (local; the tag push is 403 on this credential) |
+| 2 units | done | `medcore/data/units.json` (29 params) + `medcore/medcore-units.js`. HAZ-ML-03 |
+| 3 state | done | `medcore/data/freshness.json` + `medcore/medcore-state.js` (`fromIcuState`). `asOf` leakage control, HAZ-ML-04 |
+| 4 missing | done | `medcore/medcore-missing.js`, unioned with `icu-autoscores.js` `{__missing:[...]}` |
+| 5 changes | done | `medcore/data/change-bands.json` + `medcore/medcore-changes.js` |
+| 6 panel | done | `medcore-boot.js`, one flag-gated card in `icu.js`, `index.html`, `scripts/build-www.sh`, `test/run-medcore-ui.mjs` (19 browser assertions) |
+| 7 Phase 1 ships | done | this note, `vault/Home.md`, `vault/Flags.md`, `vault/decisions/Decisions.md` |
+| 8 WardSynQ adapter | pending | `fromWardSynQ()` reading through `wardsynq-temporal.js` |
+| 9 features | pending | `medcore/medcore-features.js` + the banned-feature list. HAZ-ML-01 |
+| 10 hazards | pending | HAZ-ML-01..04 in `wardsynq/wardsynq-safety-case.js`, cross-referenced by `scripts/wardsynq-assurance.mjs` |
+| 11 outcomes | pending | `medcore/data/outcomes.json` (5 outcomes, unapproved) + `test/medcore-labels.test.mjs`. HAZ-ML-02 |
+| 12 DATA GATE | **BLOCKED** | No dataset, no access approval, no adjudication, no named clinical approver. Nothing past here is an engineering task |
+| 13 to 21 | not started | Everything from dataset construction onward waits on step 12 |
+
+**What a clinician gets today, with the flag on:** two deterministic lists on the ICU overview,
+"what changed" and "missing information". No probability, no alert, no prediction, nothing written.
+
+**What is NOT true today:** there is no model, no training data, no calibrated probability, no
+outcome anybody has approved, and no Medical Core signal reaches any alert, prompt or notification.
 
 Supersedes the external "StewardMD + MAiK Medical Core" plan. Written against the repo as it exists
 on 2026-09-19; the gap analysis that produced it is `MEDICAL_CORE_PLAN_REVIEW.md`.

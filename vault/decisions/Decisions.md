@@ -8678,3 +8678,45 @@ keyboard offers it), inline SVG icons only, light and dark, reduced motion honou
 input is a hidden `#phvCode` over the slots (so the harness and the keyboard both drive it). It also
 waits for the first-launch guided tour, not just the registration gate, before asking.
 
+
+## 2026-09-19 — Medical Core Phase 1: deterministic first, on the device, no model
+
+**Decision.** The Medical Core ML layer is built in the order deterministic → baseline → model, and
+Phase 1 ships the deterministic part alone, behind `smd_medcore` (default OFF). What a clinician
+sees today is two lists on the ICU overview: "what changed" and "missing information". There is no
+probability in the product and no training data in the repository.
+
+**Why this order.** The two lists are the parts of the proposed AI panel that need no model at all,
+and building them first produces the feature pipeline a model would later consume, so nothing is
+thrown away if the data never arrives. `icu-autoscores.js` already returned `{__missing:[...]}` per
+score and that knowledge was spent greying out cards; it is now answered per PARAMETER, because a
+clinician chases a test, not a card ("GCS - needed by qSOFA, NEWS2 and SOFA" is one line).
+
+**Inference runs on the device.** Model artifacts, when they exist, will be versioned JSON
+(coefficients, tree ensembles, calibration maps) fetched from R2 like the MaiK Lite and KardiQ X
+packs and evaluated in plain JS. There is no Medical Core service and no `patient_id` payload, so
+O3 (thin push, no PHI) and the de-identified MaiK posture hold by construction rather than by
+policy. This also bounds the model size, which is the point: the size falls out of what a phone can
+run and what the dataset supports, not out of a plan.
+
+**`asOf` is an argument, never a default.** `medcore-state.js` reads no clock. A training replay
+passes the historical instant and gets exactly what the bedside would have had. That single
+property is the leakage control, and the test for it greps the file.
+
+**Features are implemented once, in JS.** The trainer will call the shipped `medcore-features.js`
+through `backend/medcore/featurize.mjs` rather than reimplementing anything in Python, so train/serve
+skew stops being a class of bug. Artifacts ship with parity vectors and cannot be loaded without them.
+
+**Normalisation finally happens somewhere a clinician can read.** `wardToSI` in icu.js converts an
+SI-labelled ward result BACK to conventional units, so the GHIS adapter refuses to normalise at all.
+`medcore/data/units.json` is the allow-list, with plausibility bounds as a second net: a creatinine
+measured in umol/L but LABELLED mg/dL passes the allow-list and is caught at 180 > 25 mg/dL.
+
+**Not re-litigated, and not to be:** Medical Core owns no alerting, escalation, deduplication,
+scoring, rules or notification. All of it already exists in `wardsynq/` and stays there. The panel
+carries no status colour, because "what changed" is an observation and "missing information" is a
+to-do list, and status colour is reserved for status.
+
+**Blocked, and not on code:** there is no dataset, no access approval, no adjudication process and
+no named clinician who can approve an outcome. Steps 13 onward of the plan cannot start until there
+is. See [[Medical Core]].
