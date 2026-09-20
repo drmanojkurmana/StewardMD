@@ -172,36 +172,56 @@ export function run(opts) {
   const missedReduction = baseAt.missed ? (baseAt.missed - modelAt.missed) / baseAt.missed : null;
   const probeAuroc = auroc(probePairs);
 
+  /* CAN THIS RUN BE EVALUATED AT ALL? A test split with no events cannot produce discrimination,
+   * calibration or subgroup evidence - AUROC is undefined, every probability is "correct" because
+   * nothing happened, and the calibration slope describes noise. An earlier version reported gates
+   * anyway and three of them PASSED on a split containing zero positives, which is the same bug as
+   * the slope estimator that reported a number over the 40% of rows it had not discarded: a gate
+   * passing on a measurement nobody could make. The check is up front, and an unevaluable run fails
+   * every gate that depends on the missing evidence rather than quietly clearing them. */
+  const testPos = test.filter((r) => r.label === 1).length;
+  const testNeg = test.length - testPos;
+  const evaluable = { ok: testPos > 0 && testNeg > 0, testPositives: testPos, testNegatives: testNeg };
+  if (!evaluable.ok) {
+    evaluable.reason = testPos === 0
+      ? "the test split contains no events, so discrimination and calibration cannot be measured"
+      : "the test split contains only events";
+  }
+  const evidenceGate = (pass, value) => evaluable.ok
+    ? { pass, value }
+    : { pass: false, value: { unevaluable: evaluable.reason, testPositives: testPos } };
+
   const gates = {
-    missedEventsReduced25: { pass: missedReduction !== null && missedReduction >= 0.25, value: round4(missedReduction) },
-    ece: { pass: cal.ece !== null && cal.ece <= 0.05, value: cal.ece },
+    missedEventsReduced25: evidenceGate(missedReduction !== null && missedReduction >= 0.25, round4(missedReduction)),
+    ece: evidenceGate(cal.ece !== null && cal.ece <= 0.05, cal.ece),
     /* A refused slope FAILS. A measurement that declined to be made is not a pass, and the
      * refusal reason travels so the next person sees why rather than a bare null. */
-    calibrationSlope: {
-      pass: curve.usable === true && curve.slope >= 0.9 && curve.slope <= 1.1,
-      value: curve.usable ? curve.slope : { refusal: curve.refusal, excludedFraction: curve.excludedFraction }
-    },
+    calibrationSlope: evidenceGate(
+      curve.usable === true && curve.slope >= 0.9 && curve.slope <= 1.1,
+      curve.usable ? curve.slope : { refusal: curve.refusal, excludedFraction: curve.excludedFraction }
+    ),
     /* Added after the first real run: at 2.4 events per variable the model memorised the training
      * set and the calibration gate caught it only afterwards, as overconfidence. This catches the
      * precondition directly, before the result has to be interpreted. */
     eventsPerVariable: { pass: epv >= 10, value: round4(epv) },
-    noSubgroupCollapse: {
-      pass: !worstSub || (overall - worstSub[1].auroc) <= 0.10,
-      value: worstSub ? { subgroup: worstSub[0], auroc: worstSub[1].auroc, overall: round4(overall) } : null
-    },
-    selectiveRiskFalls: {
-      pass: sel[sel.length - 1].error <= sel[0].error,
-      value: { at100: sel[0].error, at50: sel[sel.length - 1].error }
-    },
-    beatsFrequencyProbe: {
-      pass: probeAuroc !== null && (overall - probeAuroc) >= 0.05,
-      value: { model: round4(overall), probe: round4(probeAuroc), margin: round4(overall - probeAuroc) }
-    }
+    /* A worst subgroup that could not be computed is not "no collapse", it is no evidence. */
+    noSubgroupCollapse: evidenceGate(
+      !!worstSub && overall !== null && (overall - worstSub[1].auroc) <= 0.10,
+      worstSub ? { subgroup: worstSub[0], auroc: worstSub[1].auroc, overall: round4(overall) } : { unmeasured: "no subgroup had enough rows" }
+    ),
+    selectiveRiskFalls: evidenceGate(
+      sel[sel.length - 1].error <= sel[0].error,
+      { at100: sel[0].error, at50: sel[sel.length - 1].error }
+    ),
+    beatsFrequencyProbe: evidenceGate(
+      probeAuroc !== null && overall !== null && (overall - probeAuroc) >= 0.05,
+      { model: round4(overall), probe: round4(probeAuroc), margin: overall !== null && probeAuroc !== null ? round4(overall - probeAuroc) : null }
+    )
   };
   const allPass = Object.values(gates).every((g) => g.pass);
 
   return {
-    outcome: opts.outcome, synthetic,
+    outcome: opts.outcome, synthetic, evaluable,
     counts: {
       train: train.length, val: val.length, test: test.length,
       trainPositives: train.filter((r) => r.label === 1).length,
@@ -244,6 +264,7 @@ if (import.meta.url === "file://" + process.argv[1]) {
   writeFileSync(resolveOut(ROOT, join(outDir, "report.json")), JSON.stringify(res, null, 2));
 
   console.log(`\n=== Medical Core ${res.outcome} ===`);
+  if (!res.evaluable.ok) console.log(`*** NOT EVALUABLE: ${res.evaluable.reason} (test positives ${res.evaluable.testPositives}, negatives ${res.evaluable.testNegatives}) ***`);
   if (res.synthetic) console.log("*** SYNTHETIC DATA. Every number below is a statement about the PIPELINE, not about patients. ***");
   console.log(`points train ${res.counts.train} / val ${res.counts.val} / test ${res.counts.test}`);
   console.log(`positives train ${res.counts.trainPositives}, test ${res.counts.testPositives}, events per variable ${res.counts.eventsPerVariable}`);

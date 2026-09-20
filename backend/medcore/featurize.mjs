@@ -207,5 +207,6 @@ if (import.meta.url === "file://" + process.argv[1]) {
   console.log(`  outcome ${outcome}, grid ${gridHours}h, features ${Object.keys(rows[0].values).length}`);
   console.log(`  points  train ${by("train").length} (${rate(by("train"))}), val ${by("val").length} (${rate(by("val"))}), test ${by("test").length} (${rate(by("test"))})`);
   console.log(`  excluded from the risk set: ${excluded.length} ${JSON.stringify(reasons)}`);
-  console.log(`  synthetic: ${rows.every((r) => r.synthetic) ? "EVERY ROW" : "mixed - check the extract"}`);
+  const synth = rows.filter((r) => r.synthetic).length;
+  console.log(`  provenance: ${synth === rows.length ? "SYNTHETIC on every row" : synth === 0 ? "real on every row" : "MIXED (" + synth + " synthetic of " + rows.length + ") - check the extract"}`);
 }

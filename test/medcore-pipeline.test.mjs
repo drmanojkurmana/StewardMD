@@ -206,3 +206,57 @@ test("baseline: the threshold incumbent is named honestly and is not NEWS2", () 
   assert.ok(sick <= 1 && well >= 0);
   assert.equal(thresholdBaseline({}), 0, "no inputs is no score, not a low one");
 });
+
+/* ------------------------------------------------- unevaluable runs (found by real data, 2026-09-20) */
+
+test("pipeline: a test split with no events FAILS every gate that needs evidence", () => {
+  // The MIMIC-IV demo produced exactly this: 140 real ICU stays, 36 with a pressor start, and a
+  // temporal test split containing none of them. An earlier version reported gates anyway and
+  // three of them PASSED on a split with zero positives - a gate clearing on a measurement nobody
+  // could make, which is the same bug as a calibration slope computed over the rows it had not
+  // discarded. A model cannot be shown safe by an absence of events.
+  const rows = [];
+  for (let i = 0; i < 300; i++) {
+    const split = i < 180 ? "train" : i < 240 ? "val" : "test";
+    // Positives exist in train and val, and none at all in test.
+    const label = (split !== "test" && i % 7 === 0) ? 1 : 0;
+    const values = {};
+    for (const id of coreFeatureIds()) values[id] = 1 + (i % 5) * 0.1 + (label ? 0.5 : 0);
+    rows.push({
+      encounterId: "e" + i, t0: new Date(Date.UTC(2026, 0, 1) + i * 3600000).toISOString(),
+      outcome: "MC-3", label, split, featureSet: "medcore-features@1.0.0", values,
+      probe: { obs_count_24h: 10, distinct_rounds_24h: 4, mean_interval_min: 120, minutes_since_last: 10 },
+      strata: { ageBand: "65-79", sex: "M", completeness: "q4" }, synthetic: false
+    });
+  }
+  const res = run({ rows, outcome: "MC-3" });
+  assert.equal(res.evaluable.ok, false);
+  assert.equal(res.evaluable.testPositives, 0);
+  assert.match(res.evaluable.reason, /no events/);
+  for (const [name, g] of Object.entries(res.gates)) {
+    if (name === "eventsPerVariable") continue;          // that one is about TRAIN and stays real
+    assert.equal(g.pass, false, name + " must not pass on a split with no events");
+    assert.ok(g.value && g.value.unevaluable, name + " must say why it could not be judged");
+  }
+  assert.equal(res.allPass, false);
+});
+
+test("pipeline: an evaluable run still reports real gate values, not the refusal", () => {
+  const rows = [];
+  for (let i = 0; i < 400; i++) {
+    const split = i < 240 ? "train" : i < 320 ? "val" : "test";
+    const label = i % 6 === 0 ? 1 : 0;
+    const values = {};
+    for (const id of coreFeatureIds()) values[id] = 1 + (label ? 0.8 : 0) + (i % 3) * 0.05;
+    rows.push({
+      encounterId: "e" + i, t0: new Date(Date.UTC(2026, 0, 1) + i * 3600000).toISOString(),
+      outcome: "MC-3", label, split, featureSet: "medcore-features@1.0.0", values,
+      probe: { obs_count_24h: 10, distinct_rounds_24h: 4, mean_interval_min: 120, minutes_since_last: 10 },
+      strata: { ageBand: "65-79", sex: "M", completeness: "q4" }, synthetic: false
+    });
+  }
+  const res = run({ rows, outcome: "MC-3" });
+  assert.equal(res.evaluable.ok, true);
+  assert.ok(res.evaluable.testPositives > 0);
+  assert.ok(!res.gates.ece.value || !res.gates.ece.value.unevaluable);
+});

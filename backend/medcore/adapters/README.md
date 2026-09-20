@@ -5,15 +5,36 @@ One file per data source, each exporting `async function* encounters(opts)` yiel
 
 `../synth/generate.mjs` is the reference implementation.
 
-## Writing the MIMIC-IV / eICU adapter
+## `mimic-iv-demo.mjs` — BUILT 2026-09-20, and a correction
 
-The owner chose (2026-09-19) to build the pipeline on a credentialed public ICU dataset alongside
-the synthetic cohort. That work is an adapter and nothing else. What it must do:
+The MIMIC-IV **Clinical Database Demo** (100 patients, ODbL v1.0) needs **no credentialing**. An
+earlier version of this file reasoned that public ICU datasets are credentialed and need a data use
+agreement nobody here can sign, which is true of full MIMIC-IV and false of the demo. The demo was
+available the whole time and the pipeline ran on synthetic data for longer than it needed to.
 
-1. **Access first, code second.** These datasets are credentialed: PhysioNet account, the required
-   human-subjects training, and a signed data use agreement, all in place before any download.
-   Verify the current requirements on the source's own site rather than trusting this file or any
-   model's recollection of them.
+Fetch it with `./download.sh`. The data is gitignored: it is licensed, and redistributing it through
+a git history is not ours to do.
+
+**What one run on 140 real ICU stays found that synthetic data never could:**
+
+| Finding | Why synthetic could not surface it |
+|---|---|
+| 13,913 respiratory rates REFUSED, unit `insp/min` | The synthetic generator emitted the unit strings the unit table already knew. A real hospital writes `insp/min`, and the most important vital for deterioration was being dropped in silence. |
+| 1,013 pH results refused, unit `units` | Same: a real lab labels pH as "units". |
+| 78 values refused IMPLAUSIBLE out of ~106,500 (0.07%) | Real artefact, caught at a believable rate. Synthetic noise was drawn inside the bounds by construction. |
+| Three gates PASSED on a test split with zero events | The synthetic cohort always has events in every split. Real temporal splitting put all 36 pressor starts outside the test period, and the gates cleared on an absence of evidence. Fixed: an unevaluable run now FAILS every gate that depends on the missing evidence. |
+
+The demo is far too small to train on - 36 events over 140 stays, 5 events per variable - and the
+gates refuse it, correctly. Its value is that the adapter, the unit table and the gates have now met
+real ITEMIDs, real unit strings, real timestamps and real missingness.
+
+## Writing the full MIMIC-IV / eICU adapter
+
+Full MIMIC-IV and eICU **are** credentialed, and that part stands:
+
+1. **Access first, code second.** PhysioNet account, the required human-subjects training, and a
+   signed data use agreement, all in place before any download. Verify the current requirements on
+   the source's own site rather than trusting this file or any model's recollection of them.
 2. **Map to the schema, refuse what does not map.** ITEMIDs to the parameters in
    `medcore/data/units.json`, units to that table's allow-list. A code you cannot map with certainty
    is LEFT OUT and counted in the dataset card. Guessing an ITEMID into the wrong parameter is
