@@ -1490,13 +1490,14 @@
         if (kb.disabled) return;                 // cloud / KB-only are always grounded
         setRagLinked(!ragLinked());
         repaintKb();
-        try { if (window.SMD_HAPTICS && SMD_HAPTICS.tap) SMD_HAPTICS.tap(); } catch (e2) {}
+        try { if (window.SMD_HAPTICS && SMD_HAPTICS.selection) SMD_HAPTICS.selection(); } catch (e2) {}
         return;
       }
       var btn = e.target && e.target.closest ? e.target.closest("[data-mk-pick]") : null;
       if (!btn) { if (e.target === ov || (e.target.closest && e.target.closest("[data-mk-close]"))) closePicker(); return; }
       var optId = btn.getAttribute("data-mk-pick");
       var chosen = options().filter(function (x) { return x.id === optId; })[0];
+      try { if (window.SMD_HAPTICS && SMD_HAPTICS.selection) SMD_HAPTICS.selection(); } catch (e2) {}
       selectOption(optId);
       // Picking an on-device model that is not downloaded starts the download right here.
       if (chosen && chosen.needsDownload && chosen.pack) {
