@@ -347,7 +347,7 @@
    * losing continuity yields a generic answer, while bleeding topics yields a confidently wrong one.
    */
   var FILLER = /^(what|whats|what's|how|why|and|but|so|about|of|for|the|a|an|in|on|to|is|are|it|its|it's|this|that|them|those|these|same|any|other|more|also|then|ok|okay|please|tell|me|us|give|show)$/;
-  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease)$/;
+  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease|drug|drugs|medication|medications|medicine|medicines|antibiotic|antibiotics|therapy|treatment|management|investigation|investigations|workup|test|tests|cause|causes|symptom|symptoms|sign|signs|diagnosis|differential|prevention|prophylaxis|definition|criteria|staging|grading)$/;   // bare nouns a doctor asks alone ("Drugs?", "Causes?") - owner transcript 2026-09-21
 
   /** An aspect-only question: every token is filler or an aspect word, so it has no subject of its
    *  own and is only answerable against the previous turn. "Side effects?" yes; "Polycystic Kidney
@@ -424,7 +424,10 @@
     var hist = histTurns(pkg.history);
     if (continues(question, hist)) {
       L.push("Recent conversation:");
-      var turns = hist.slice(-HISTORY_TURNS * 2);
+      // An aspect-only follow-up ("Drugs?", "side effects?") is about the answer just given. Showing
+      // the exchange before it too made "Drugs?" after a CFS answer come back about carvedilol from the
+      // varices turn (owner transcript, 2026-09-21). Corrections and named subjects keep both turns.
+      var turns = hist.slice(subjectTokens(question).length ? -HISTORY_TURNS * 2 : -2);
       turns.forEach(function (h, i) {
         var isA = h.role === "assistant", lastA = isA && i === turns.length - 1 - (turns[turns.length - 1].role === "assistant" ? 0 : 1);
         L.push((isA ? "MaiK: " : "Doctor: ") + (lastA ? carry(h.text || h.content) : clip(h.text || h.content, HISTORY_CLIP)));
@@ -960,7 +963,10 @@
                 : !images.length ? (pk.system || systemFor(pkg && pkg.question))
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
-          nPredict: pk.nPredict || 512,
+          // "tell me in detail" ran on the pack's default 512 and stopped mid-sentence ("continued for at
+          // least 48 hours post", owner transcript 2026-09-21). Detailed depth gets 1024; the worst-case
+          // prompt is ~1300 tokens, so it still fits a 4096 context.
+          nPredict: (opts && opts.depth === "detailed") ? Math.max(pk.nPredict || 512, 1024) : (pk.nPredict || 512),
           // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
           // byte for byte, so a regenerate request gets a little sampling jitter.
           temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : ((opts && opts.regen) ? 0.4 : 0),

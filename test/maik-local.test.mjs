@@ -104,6 +104,24 @@ const { L } = load();
   ok("prompt stays tiny (this IS the latency)", p.length < 250);
 
   // conversation history IS kept - it is the clinician's own turns, not a StewardMD resource
+  // Owner transcript 2026-09-21: "Drugs?" after a CFS answer came back about carvedilol from the turn
+  // before. A bare follow-up now sees ONLY the last exchange; a named subject still sees both.
+  {
+    const two = [{ q: "carvedilol vs propranolol in varices", a: "Carvedilol is preferred over propranolol." },
+                 { q: "Treatment of chronic fatigue syndrome", a: "No specific drug is proven; individualise." }];
+    const bare = L.buildPrompt({ question: "Drugs?", history: two });
+    ok("bare follow-up: only the last exchange is shown", /chronic fatigue/i.test(bare) && !/carvedilol/i.test(bare));
+    const named = L.buildPrompt({ question: "carvedilol dose for varices?", history: two });
+    ok("a named subject still gets the fuller window", /carvedilol/i.test(named));
+  }
+  {
+    const w = load({ tokens: ["ok"] });
+    await w.L.answer({ question: "Treatment of STEMI" }, { pack: "maik-lite", depth: "detailed" });
+    ok("detailed depth raises the token budget to at least 1024", w.calls.generate[0].nPredict >= 1024);
+    const c = load({ tokens: ["ok"] });
+    await c.L.answer({ question: "Treatment of STEMI" }, { pack: "maik-lite" });
+    ok("concise keeps the pack default", c.calls.generate[0].nPredict <= 768);
+  }
   const hist = L.buildPrompt({ question: "and the dose?", history: [
     { role: "user", text: "meropenem in meningitis" }, { role: "assistant", text: "Meropenem is used for..." }] });
   ok("history kept so bare follow-ups work", /meropenem in meningitis/.test(hist) && /and the dose\?/.test(hist));
