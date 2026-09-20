@@ -833,7 +833,7 @@
       card1.style.cssText = "background:var(--panel,#fff);border:1.5px solid var(--teal,#0e6e63);border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 4px 16px rgba(14,110,99,0.08);position:relative";
       card1.innerHTML =
         '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
-          '<span style="background:var(--teal,#0e6e63);color:#fff;font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">RECOMMENDED &middot; ZERO IT SETUP</span>' +
+          '<span style="background:var(--teal,#0e6e63);color:#fff;font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">RECOMMENDED &middot; NO EMR CHANGES</span>' +
           '<span style="font:600 12px var(--sans,sans-serif);color:var(--slate,#64748b);margin-left:auto">Doctor Self-Service</span>' +
         '</div>' +
         '<div style="font:800 18px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.01em;display:flex;align-items:center;gap:8px">' +
@@ -841,7 +841,7 @@
         '</div>' +
         '<div style="font:600 13.5px var(--sans,sans-serif);color:var(--teal,#0e6e63);margin:4px 0 10px">Sign in to your hospital portal &mdash; AI agent does the rest</div>' +
         '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--ink,#334155);line-height:1.55;margin-bottom:14px">' +
-          'Sign in to your hospital\'s web portal or HIS in a private, encrypted in-app browser. Our AI agent autonomously explores your hospital screens, discovers patient rosters and lab results, and creates a verified read-only adapter tailored to your hospital. Zero changes to your hospital\'s EMR and no IT approvals required.' +
+          'Sign in to your hospital\'s web portal or HIS in a private, encrypted in-app browser. Our AI agent autonomously explores your hospital screens, discovers patient rosters and lab results, and creates a verified read-only adapter tailored to your hospital. It makes no changes to your hospital\'s EMR &mdash; you sign in with your own credentials and read only what your account is already permitted to see. Use it in line with your hospital\'s IT and information-governance policy.' +
         '</div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:16px">' +
           '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> 100% Private In-App Login</div>' +
