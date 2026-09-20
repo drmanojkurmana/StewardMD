@@ -5742,8 +5742,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (t.ts && (Date.now() - t.ts) > 30 * 60 * 1000) { _maikTopic = null; return null; }   // session continuity only
       q = maikDeslang(q);   // "wat iz da treatment doze?" → "what is the treatment dose?" so the branches below match
       var n = maikNorm(q), wc = n.split(" ").filter(Boolean).length;
-      if (/(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/.test(n) || /^(more|detail|details|elaborate|expand|continue)\b/.test(n)) {
-        return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
+      var DETAIL_RE = /(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/, DETAIL_START_RE = /^(more|detail|details|elaborate|expand|continue)\b/;
+      if (DETAIL_RE.test(n) || DETAIL_START_RE.test(n)) {
+        // Owner transcript 2026-09-21: "How to treat Covid 19 tell me in detail" matched "in detail" and
+        // was rewritten to a detailed STEMI answer. The detail phrase only continues the topic when
+        // what is LEFT is generic ("tell me in detail", "more detail please"); a message that still
+        // names a subject after the phrase is a NEW question, asked in detail (see the caller).
+        var restD = n.replace(DETAIL_RE, " ").replace(DETAIL_START_RE, " ").replace(/\?/g, " ").split(" ").filter(Boolean);
+        if (!restD.length || restD.every(function (w) { return GENERIC_FU.test(w); })) {
+          return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
+        }
+        return null;
       }
       if (/(antibiotic|antibiotics|abx|antimicrobial|drug of choice|which agent)/.test(n) && wc <= 7) {
         return { question: "Empiric antimicrobial therapy for " + t.topic + " — agent/class choice, severity and host adjustment, and culture-directed de-escalation principles.", depth: "concise", topic: "antibiotics for " + t.topic, retrieval: t.topic + " empiric antibiotics antimicrobial therapy de-escalation" };
@@ -7042,7 +7051,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
-      if (_researchMode) { maikRunResearch(q); return; }
+      if (_researchMode) {
+        // Evidence Review is a cloud feature. With an on-device engine selected the old path refused
+        // ("Evidence Review is a MaiK Cloud feature") and answered nothing; owner transcript 2026-09-21,
+        // "Which is better in Esophageal Varices". Answer it on-device instead, and say why once.
+        var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.effective ? SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
+        if (!_eff || _eff === "cloud") { maikRunResearch(q); return; }
+        try { toast("Evidence Review needs MaiK Cloud. Answering on-device."); } catch (e) {}
+      }
       var active = maikActiveCase();
       _maikUserQ = q; _maikFollowUp = false;
       if (maikV2()) {

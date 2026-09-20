@@ -27,3 +27,31 @@ test("naming a new condition routes fresh (NOT a follow-up)", () => {
     assert.equal(isFollowup(q), false, "expected new topic: " + q);
   });
 });
+
+/* Owner transcript 2026-09-21: "How to treat Covid 19 tell me in detail" was answered about STEMI. The
+ * detail branch now continues the topic ONLY when what is left after the detail phrase is generic. */
+const DETAIL_RE = /(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/;
+const DETAIL_START_RE = /^(more|detail|details|elaborate|expand|continue)\b/;
+function detailContinues(q) {
+  const n = norm(q);
+  if (!DETAIL_RE.test(n) && !DETAIL_START_RE.test(n)) return null;
+  const rest = n.replace(DETAIL_RE, " ").replace(DETAIL_START_RE, " ").replace(/\?/g, " ").split(" ").filter(Boolean);
+  return !rest.length || rest.every((w) => GENERIC_FU.test(w));
+}
+test("a detail phrase with no subject of its own continues the current topic", () => {
+  ["tell me in detail", "more detail please", "in depth", "elaborate", "explain more", "give the treatment in detail"].forEach((q) => {
+    assert.equal(detailContinues(q), true, "expected continuation: " + q);
+  });
+});
+test("a detail phrase that still names a subject is a NEW question (COVID after STEMI)", () => {
+  ["How to treat Covid 19 tell me in detail", "dengue management in detail", "explain more about meningitis"].forEach((q) => {
+    assert.equal(detailContinues(q), false, "expected new topic: " + q);
+  });
+});
+test("the source implements exactly that: a non-generic remainder returns null from the detail branch", () => {
+  const i = SRC.indexOf("var DETAIL_RE = ");
+  assert.ok(i > 0);
+  const blk = SRC.slice(i, i + 1400);
+  assert.match(blk, /restD\.every\(function \(w\) \{ return GENERIC_FU\.test\(w\); \}\)/);
+  assert.match(blk, /return null;/);
+});
