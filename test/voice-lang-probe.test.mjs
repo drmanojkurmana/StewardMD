@@ -1,4 +1,10 @@
-/* test/voice-lang-probe.test.mjs — Auto first-chunk language probe (smd_voice_lang_probe, DEFAULT ON).
+/* test/voice-lang-probe.test.mjs — Auto first-chunk language probe (smd_voice_lang_probe, DEFAULT OFF).
+ *
+ * DEFAULT FLIPPED 2026-09-20 (owner report, real iPhone: "live transcription no longer appears as I
+ * speak"). The probe opens the consult on the MULTILINGUAL weights while Auto's normal route is the
+ * Telugu specialist, so the first window pays a SECOND 252MB model load — a download, not a swap, on
+ * a phone that does not already hold those weights. Every behavioural test below therefore opts IN
+ * (PROBE_ON); the two default tests assert the default itself.
  *
  * THE BUG (vault/modules/"MaiK Scribe".md, "Known remaining limitation"): in Auto, whisperModel()
  * opens on the Telugu specialist, so an ENGLISH consult decodes as English transliterated into Telugu
@@ -25,6 +31,7 @@ const _setTimeout = globalThis.setTimeout;
 globalThis.setTimeout = function (fn, ms) { const t = _setTimeout(fn, ms); if (t && typeof t.unref === "function") t.unref(); return t; };
 const delay = (ms) => new Promise((r) => _setTimeout(r, ms));
 
+const PROBE_ON = { smd_voice_lang_probe: "1" };
 const TELUGU_SPECIALIST = "telugu-small-q8_0";
 const MULTILINGUAL = "small-q8_0";
 // What the multilingual weights actually produced on real Telugu audio (measured, see the vault).
@@ -50,7 +57,7 @@ function boot(store) {
 }
 
 function startSession(store, opts) {
-  const h = boot(store);
+  const h = boot(store || PROBE_ON);
   const seen = { transcripts: [], models: [] };
   const session = h.root.SMD_AMBIENT.start(Object.assign({
     speaker: "doctor", language: "auto", chunkMs: 100000, probeMs: 20, refineEveryChunks: 999,
@@ -76,7 +83,15 @@ test("probeRoute: anything else makes NO decision (today's route stands)", () =>
   assert.equal(AMB.probeRoute(null), "");
 });
 
-test("DEFAULT ON: the first Auto window decodes on the MULTILINGUAL weights, never the specialist", () => {
+test("DEFAULT OFF: Auto opens straight on the specialist — no second model load at the start of a consult", () => {
+  const h = boot({});
+  h.root.SMD_AMBIENT.start({ speaker: "doctor", language: "auto", chunkMs: 100000, probeMs: 20, refineEveryChunks: 999,
+    getState: () => ({}), llmExtract: null, onUpdate() {}, onTranscript() {}, onRefine() {}, onState() {}, onError() {} });
+  assert.equal(h.calls[0].opts.model, TELUGU_SPECIALIST, "the pre-branch capture path, byte-for-byte");
+  assert.equal(h.calls[0].opts.language, "auto");
+});
+
+test("flag ON: the first Auto window decodes on the MULTILINGUAL weights, never the specialist", () => {
   const { h } = startSession();
   assert.equal(h.calls[0].opts.model, MULTILINGUAL);
   assert.equal(h.calls[0].opts.language, "auto", "auto is only ever safe on the multilingual weights");
@@ -127,7 +142,7 @@ test("the probe runs once per session — later chunks go back to per-chunk scri
   assert.equal(h.calls[2].opts.model, TELUGU_SPECIALIST, "detectScript re-routes exactly as before");
 });
 
-test("flag OFF: today's behaviour byte-for-byte — the first Auto window opens on the specialist", () => {
+test("flag explicitly OFF: today's behaviour byte-for-byte — the first Auto window opens on the specialist", () => {
   const { h } = startSession({ smd_voice_lang_probe: "0" });
   assert.equal(h.calls[0].opts.model, TELUGU_SPECIALIST);
 });
@@ -160,7 +175,7 @@ test("a probe that returns nothing still leaves the loop running on today's rout
 // 252MB multilingual load, decode, discard, free, then the 252MB specialist load. opts.sessionId
 // lets a caller carry that answer across a restart within the same encounter.
 test("sessionId: a restart within the same session does NOT re-probe (English answer remembered)", async () => {
-  const h = boot();
+  const h = boot(PROBE_ON);
   const seen = { transcripts: [] };
   const base = {
     speaker: "doctor", language: "auto", chunkMs: 100000, probeMs: 20, refineEveryChunks: 999,
@@ -189,7 +204,7 @@ test("sessionId: a restart within the same session does NOT re-probe (English an
 });
 
 test("sessionId: a restart remembers a NON-Latin session too (stays on the specialist, no re-probe)", async () => {
-  const h = boot();
+  const h = boot(PROBE_ON);
   const base = {
     speaker: "doctor", language: "auto", chunkMs: 100000, probeMs: 20, refineEveryChunks: 999,
     getState: () => ({}), llmExtract: null, onUpdate() {}, onRefine() {}, onState() {}, onError() {},
@@ -212,7 +227,7 @@ test("sessionId: a restart remembers a NON-Latin session too (stays on the speci
 });
 
 test("sessionId: a DIFFERENT session (new patient) still gets its own fresh probe", async () => {
-  const h = boot();
+  const h = boot(PROBE_ON);
   const base = {
     speaker: "doctor", language: "auto", chunkMs: 100000, probeMs: 20, refineEveryChunks: 999,
     getState: () => ({}), llmExtract: null, onUpdate() {}, onRefine() {}, onState() {}, onError() {},
@@ -239,12 +254,12 @@ test("no sessionId: today's behaviour, byte-for-byte -- every restart re-probes"
   assert.equal(h2.calls[0].opts.model, MULTILINGUAL);
 });
 
-test("the default probe window is short -- well under the old 4s, so a discard costs a fraction of a second", () => {
+test("with the flag on, the probe window is short -- well under the old 4s, so a discard costs a fraction of a second", () => {
   const delays = [];
   const real = globalThis.setTimeout;
   globalThis.setTimeout = function (fn, ms) { delays.push(ms); const t = real(fn, ms); if (t && t.unref) t.unref(); return t; };
   try {
-    startSession(undefined, { probeMs: undefined, chunkMs: 100000 });   // no probeMs -> the module default
+    startSession(PROBE_ON, { probeMs: undefined, chunkMs: 100000 });   // no probeMs -> the module default
   } finally { globalThis.setTimeout = real; }
   // armChunk always schedules a fixed 2500ms fallback timer too; exclude it to isolate the real window
   // timer (probing ? probeMs : chunkMs). chunkMs is 100000 here, so anything else under that is the probe's.

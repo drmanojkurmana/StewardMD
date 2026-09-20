@@ -509,6 +509,8 @@
   // opd-emr omits because their GHIS write-names aren't captured — those are DROPPED, never guessed.
   var OPD_KIND = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { OPD_KIND[f.n] = f.k; }); });
   var OPD_LABEL = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { OPD_LABEL[f.n] = f.l; }); });
+  // The option list of every <select> field, so a spoken value can be snapped to a real option.
+  var OPD_OPTS = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { if (f.opts && f.opts.length) OPD_OPTS[f.n] = f.opts; }); });
   function fieldLabel(n) { return OPD_LABEL[n] || n; }
   var VOICE_MAP = {
     cc: "Chief_complaints_duration", presentHx: "History_present_illness", pastHx: "History_past_illness",
@@ -549,7 +551,28 @@
     allergies: "Known_allergies_details",
     habits: "Habitat_addiction_yesno", habitsDetails: "Habitat_addiction_others",
     alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
-    recDrug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco"
+    recDrug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco",
+    // ---- 2026-09-20: the rest of the form a doctor actually dictates ---------------------------
+    // Every name below is a real ASSESS_SCHEMA field that had NO path from speech: absent from
+    // VOICE_MAP, or present here but with no extractor on either side able to produce it. Each is
+    // plain text, a yes/no, or a select the coercion above snaps to a real option — nothing numeric
+    // is inferred and nothing is filled unless it was said (see the RULES line in _opd-scribe.js).
+    priorInvestigations: "val.investigation_desc",
+    maritalStatus: "Single_married", childrenCount: "No_of_children", consanguinity: "Consanguinity",
+    appetite: "Appetite", bowels: "Bowels", micturition: "Micturition", micturitionDetails: "Mic_abnorml_details",
+    familyPsych: "Family_history_psych", familyOther: "Family_history_others",
+    menstrualHistory: "menstrual_history_y_n", menstrualDetails: "Others",
+    obstetricHistory: "obstetric_history_yes_no", pregnancyComplications: "pregnancy_comlications",
+    contraception: "contracception", lactating: "lactating", dysmenorrhoea: "dysmenorrhoea",
+    breastFeeding: "breast_feeding", feedingDuration: "feeding_duration",
+    cranialNerves: "cranial_nerves", motorSystem: "motor_sys", sensorySystem: "sensory_sys",
+    reflexes: "reflexes", plantars: "plantar", gait: "gait", speech: "speech",
+    cerebellar: "cerebellar_sign", jvp: "JVP", skin: "skin", entExam: "ENT_exam",
+    musculoskeletal: "musculo_skeletal_system", breastExam: "breast_exam",
+    teethExam: "teeth_exam", headNeckExam: "head_neck_exam",
+    hernialOrifices: "hernial_orifices", hernialOrificesDetails: "hernial_orifices_details",
+    genitalExam: "genital", perinealExam: "external_genitilia_perineum", perRectalExam: "examination",
+    differentialDx: "differential_diagnosis", referral: "refered_management_plan"
   };
   // Live BMI (kg/m^2) and Mosteller BSA (m^2):
   // BMI = weight / (height/100)^2; BSA = sqrt((height * weight) / 3600). Returns null if either invalid.
@@ -630,6 +653,23 @@
     });
     return out;
   }
+  // PURE: map a spoken/extracted value onto one of a select's own option strings, or "" for no match.
+  // Exact (case/punctuation-insensitive) first; then a UNIQUE option that starts with what was said or
+  // contains it as a whole word, so "Sick" reaches "Sick / Poor" and "non consanguineous" reaches
+  // "Non-consanguineous". Two candidates = ambiguous = nothing. Exposed for tests.
+  function _snapOption(opts, value) {
+    var s = String(value == null ? "" : value).trim(); if (!s) return "";
+    function nrm(x) { return String(x == null ? "" : x).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
+    var want = nrm(s), i, o;
+    if (!want) return "";
+    for (i = 0; i < opts.length; i++) { if (opts[i] && nrm(opts[i]) === want) return opts[i]; }
+    var hit = "", n = 0;
+    for (i = 0; i < opts.length; i++) {
+      o = nrm(opts[i]); if (!o) continue;
+      if (o.indexOf(want + " ") === 0 || (" " + o + " ").indexOf(" " + want + " ") >= 0) { hit = opts[i]; n++; }
+    }
+    return n === 1 ? hit : "";
+  }
   // coerce the engine's value to this form's wire value for the target field kind. null = don't set.
   function voiceCoerce(name, value) {
     var k = OPD_KIND[name];
@@ -637,6 +677,12 @@
       : (value === false || value === "false" || value === "No" || value === "N") ? "false" : null;
     if (k === "yesno") return (value === "Yes" || value === true || value === "Y") ? "Y"
       : (value === "No" || value === false || value === "N") ? "N" : null;
+    // A <select> only holds one of its own option strings: putVoiceDom assigns el.value, and a browser
+    // silently DROPS a value no <option> carries. So "vegetarian" for Diet, or "sick" for General
+    // condition, used to blank the field instead of filling it — the extractor had said the right
+    // thing and the form showed nothing. Snap to a real option; a value that matches none, or more
+    // than one, sets NOTHING (an absent statement must leave the field empty — never a guess).
+    if (k === "select" && OPD_OPTS[name]) { var picked = _snapOption(OPD_OPTS[name], value); return picked || null; }
     // null = don't set. Treat empty/whitespace as "no value" too, so a later empty extraction can't
     // silently BLANK a field the doctor already voice-filled (voice writes aren't marked 'touched').
     if (value == null) return null;
@@ -718,7 +764,7 @@
         '<button class="oe-vc-vt' + (qa ? " on" : "") + '" data-oe-act="notes-view:qa">Q&amp;A</button></span>' : "";
       var acts = tx ? '<span class="oe-vc-notes-acts">' +
         (edit ? '<button class="oe-vc-nbtn" data-oe-act="notes-copy" aria-label="Copy VoiceNote">' + ms("content_copy") + "Copy</button>" +
-                '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save to Present history">' + ms("save") + "Save</button>" : "") +
+                '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save transcript to Present history">' + ms("save") + "Save transcript</button>" : "") +
         '<button class="oe-vc-nbtn danger" data-oe-act="notes-clear" aria-label="Clear VoiceNote">' + ms("delete") + "Clear</button></span>" : "";
       // Item 13b: a doctor must never mistake a no-network on-device draft for the full-quality
       // cloud one, so it carries a plain-English badge wherever the note itself is shown.
@@ -1679,7 +1725,7 @@
     st.scribeFilledFields = []; st.scribeGround = null; st.scribeOfflineDraft = false; st.scribeReview = {};
     st.scribeDrugFixes = []; st.scribeDrugFixUndone = {}; st.scribeDrugFixSrc = ""; st.scribeRx = null; st.scribeSafety = null; st.scribeIcd = null; st.scribeSpeakerFix = {};
     st.scribeDraft = null;                                   // and the delta refine starts from zero again
-    try { _lastFullTranscript = ""; _priorTranscript = ""; _lastRefinedTranscript = ""; _sentUpTo = 0; _sentCovered = ""; } catch (e) {}
+    try { _lastFullTranscript = ""; _priorTranscript = ""; _lastRefinedTranscript = ""; _lastFullRefined = ""; _sentUpTo = 0; _sentCovered = ""; } catch (e) {}
     st.notesView = "raw";
     paint();
     try { toast("VoiceNote cleared"); } catch (e) {}
@@ -3425,6 +3471,22 @@
   // main double-call-on-Stop fix is in stopVoice(), which no longer races its own stale call
   // against the teardown flush's onRefine).
   var _lastRefinedTranscript = "";
+  // The transcript the last FULL (whole-transcript) send covered — NOT the same thing as the last send.
+  // OWNER BUG 2026-09-20 ("autofill is broken"): the dedupe guard above compares against the last send
+  // of ANY kind, so the authoritative final pass was skipped whenever the transcript had not grown
+  // since the previous background refine. That is the COMMON case, not a corner: the idle-refine
+  // (LIVE_IDLE_MS, 4 s of silence) fires exactly when the doctor stops talking, and the last 15 s
+  // window before the Stop tap is usually that same silence — so the transcript at Stop equals the
+  // transcript already refined. Harmless while every refine was a full pass; with `smd_scribe_delta`
+  // on it meant the WHOLE consult was only ever read 45 seconds at a time and the one pass that reads
+  // it end to end never ran. A final now dedupes against the last FULL pass only.
+  var _lastFullRefined = "";
+  // PURE: is there genuinely nothing new to say? Exposed for tests. A background tick may be skipped
+  // when the last send already covered this text; a doctor-initiated FINAL only when a FULL pass did.
+  function _dedupeSkip(transcript, isFinal, lastSent, lastFull) {
+    if (arguments.length < 3) { lastSent = _lastRefinedTranscript; lastFull = _lastFullRefined; }
+    return String(isFinal ? lastFull : lastSent).indexOf(transcript) === 0;
+  }
   // True between a doctor-initiated Pause/Stop and the moment the note is drafted. Every failure path
   // in doRefine is SILENT by design during background ticks (a mid-consult hiccup must not nag), but
   // when the doctor has explicitly finished, silence is indistinguishable from "MaiK Scribe is broken":
@@ -3552,8 +3614,14 @@
   // APPLIED, plus the draft so far — which is bounded by the field list, not by consult length.
   // The FINAL refine (Pause/Stop) is deliberately untouched: whole transcript, no prior draft, a
   // fresh authoritative extraction. That is the safety net that makes the delta path acceptable.
-  // OFF restores today's full-transcript-every-time behaviour exactly.
-  function scribeDeltaOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_delta") === "off") return false; } catch (e) {} return true; }
+  //
+  // DEFAULT OFF since 2026-09-20 (owner report, real iPhone: "autofill into the OPD Assessment form is
+  // broken"). The delta wire needs the SERVER half (the `delta` / `priorDraft` branch in
+  // functions/api/ai/[[path]].js), and that is not deployed yet: against the live worker a delta is
+  // just a 45-second fragment with no context, so each background refine fills a handful of fields
+  // instead of the note. Turn it on — localStorage.setItem("smd_scribe_delta","on") — only once the
+  // worker carrying mergeScribeDraft is live.
+  function scribeDeltaOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_delta") === "on") return true; } catch (e) {} return false; }
   var _sentUpTo = 0, _sentCovered = "";   // chars of the PREPARED text already extracted AND applied
   // PURE: what this refine should send. Falls back to the whole text whenever anything is off — a
   // failed/stale/never-applied call leaves _sentUpTo where it was, so the speech it covered is
@@ -3611,10 +3679,12 @@
   function doRefine(transcript) {
     if (!transcript) { refineFail("Nothing was transcribed - check the microphone and try again."); return; }
     if (!(G.SMD_AI && G.SMD_AI.extract)) { refineFail("Note drafting is unavailable on this build."); return; }
-    if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine — genuinely nothing to say
+    var isFinal = _finishPending;                          // captured at CALL time (see applyIfFresh)
+    if (_dedupeSkip(transcript, isFinal)) { finishProcessing(); return; }   // nothing new to say
+    var ticket = ++_refineSeq;
     _lastRefinedTranscript = transcript;
-    var ticket = ++_refineSeq, isFinal = _finishPending;   // captured at CALL time (see applyIfFresh)
     var p = scribeSendPrep(transcript), pl = _deltaPrep(p, isFinal);
+    if (!pl.delta) _lastFullRefined = transcript;          // this send reads the whole transcript
     if (pl.delta && !pl.text.trim()) { _unsendScribeSec(); finishProcessing(); return; }
     return G.SMD_AI.extract(pl.text, "opd-scribe", p.opts).then(function (r) {
       if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
@@ -3678,12 +3748,16 @@
     // Multilingual VITALS: the deterministic extractor (voice-vitals) is English-regex only, so a
     // Telugu/Hindi consult (native-script transcript) never matched "BP 120/80" etc. Re-run the SAME
     // deterministic extractor on the LLM's faithful English translation — still no LLM-invented numbers.
-    var enText = (r && r.en) || transcript;
+    // Full pass: `en` is the whole transcript translated, so it replaces (today's behaviour).
+    // Delta pass: `en` covers ONLY this delta's speech, so it is APPENDED — replacing would throw
+    // away the earlier translation the Q&A view and the vitals extractor both read.
+    if (r && r.en) st.voiceTranscriptEn = isDelta ? _enAccum(st.voiceTranscriptEn, r.en) : r.en;
+    // Run the extractor over the ACCUMULATED translation, not just this pass's `en`. A vital spoken
+    // either side of a delta boundary ("BP one forty" / "by ninety") is invisible to each fragment on
+    // its own; the joined text has it whole. Idempotent by construction — extract() dedupes per field
+    // and _voiceMerge only ever adds — so re-reading earlier speech costs nothing and invents nothing.
+    var enText = (r && r.en) ? (st.voiceTranscriptEn || r.en) : transcript;
     if (enText) {
-      // Full pass: `en` is the whole transcript translated, so it replaces (today's behaviour).
-      // Delta pass: `en` covers ONLY this delta's speech, so it is APPENDED — replacing would throw
-      // away the earlier translation the Q&A view and the vitals extractor both read.
-      if (r && r.en) st.voiceTranscriptEn = isDelta ? _enAccum(st.voiceTranscriptEn, r.en) : r.en;
       var reducer = (G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) ? G.SMD_AMBIENT.reduce
         : ((G.SMD_VVITALS && G.SMD_EMRMAP) ? function (t, o) { return G.SMD_EMRMAP.merge(G.SMD_VVITALS.extract(t), o); } : null);
       if (reducer) {
@@ -3719,7 +3793,7 @@
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
     // Preserve any prior transcript so restarting after Stop APPENDS ("record more") instead of wiping it.
     _priorTranscript = (st.voiceTranscript || "").trim() ? ((st.voiceTranscript || "").trim() + "\n") : "";
-    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceModel = ""; _lastFullTranscript = st.voiceTranscript || ""; _lastRefinedTranscript = ""; _lastLiveRefineAt = 0; _liveOnSession = scribeLiveOn(); _lastSpeechAt = 0; _idleRefinedAt = 0; _lastScribeSentAt = 0; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
+    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceModel = ""; _lastFullTranscript = st.voiceTranscript || ""; _lastRefinedTranscript = ""; _lastFullRefined = ""; _lastLiveRefineAt = 0; _liveOnSession = scribeLiveOn(); _lastSpeechAt = 0; _idleRefinedAt = 0; _lastScribeSentAt = 0; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
     if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
@@ -3972,7 +4046,7 @@
     var k = c.from + ">" + c.to;
     if (st.scribeDrugFixUndone[k]) delete st.scribeDrugFixUndone[k]; else st.scribeDrugFixUndone[k] = true;
     var src = st.scribeDrugFixSrc || _lastFullTranscript || st.voiceTranscript || "";
-    _lastRefinedTranscript = "";
+    _lastRefinedTranscript = ""; _lastFullRefined = "";
     if (src) { _finishPending = true; st.voiceProcessing = true; paint(); doRefine(src); return; }
     paint();
   }
@@ -4590,6 +4664,6 @@
   // support/debug screen) can read or wipe it without reaching into OPDEMR internals.
   G.SMD_SCRIBE_FEEDBACK = { list: scribeFeedbackRead, clear: function () { scribeFeedbackWrite([]); } };
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript };
 })();

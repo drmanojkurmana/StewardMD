@@ -221,3 +221,68 @@ test("new scribe-UX copy has no emoji and no em dash", () => {
   ];
   strings.forEach((s) => { assert.ok(!NO_EMOJI.test(s), s); assert.ok(!NO_EMDASH.test(s), s); });
 });
+
+// ---- UI fix: History savebar action row (0/8, Clear, Summary, Save[, Authorise]) must never clip
+// or overlap on a narrow phone (reported from an iPhone 15 Pro: "Save to My Cli..." cut off at the
+// screen edge, overlapping Summary). Fixed with CSS only (flex-wrap + Save/Authorise on their own
+// full-width row) - assert the structure the CSS keys off, not layout math. ---------------------
+const assessBase = { patient: { name: "A", mrn: "1" }, tab: "assess", writeOn: true, assessLoaded: true, assessVals: {}, labs: [], radiology: [], medications: [], source: "local", emrLabel: "My Clinic" };
+
+test("History savebar: Clear, Summary and Save all render with non-empty labels and their handlers", () => {
+  const OE = load();
+  OE._state().assessDocId = "";   // no saved record yet -> no Authorise button
+  const html = OE._render(assessBase);
+  assert.match(html, /oe-savebar/);
+  assert.match(html, /data-oe-act="assess-clear"[\s\S]*?<\/span>Clear<\/button>/, "Clear has a real label");
+  assert.match(html, /data-oe-act="rx-summary"[\s\S]*?<\/span>Summary<\/button>/, "Summary has a real label");
+  assert.match(html, /class="oe-btn primary" data-oe-act="assess-save"[\s\S]*?<\/span>Save to My Clinic<\/button>/, "Save is the primary action and names the destination");
+  assert.ok(!/data-oe-act="consult-authorise"/.test(html), "no Authorise before the record is ever saved");
+});
+
+test("History savebar: once a record exists, Save and Authorise both get their own full-width row (oe-btn.primary / oe-btn.authorise), never squeezed onto the Clear/Summary row", () => {
+  const OE = load();
+  OE._state().assessDocId = "884211";   // a real saved record -> Authorise appears alongside Save
+  const html = OE._render(Object.assign({}, assessBase, { noStore: false }));
+  assert.match(html, /class="oe-btn primary" data-oe-act="assess-save"/);
+  assert.match(html, /class="oe-btn authorise" data-oe-act="consult-authorise"[\s\S]*?<\/span>Authorise<\/button>/);
+  // Save comes before Authorise in the markup so CSS flex-basis:100% stacks Authorise under it.
+  assert.ok(html.indexOf('data-oe-act="assess-save"') < html.indexOf('data-oe-act="consult-authorise"'));
+});
+
+test("History savebar: the required-fields counter is a real N/M readout, not blank", () => {
+  const OE = load();
+  OE._state().assessDocId = "";
+  const html = OE._render(assessBase);
+  assert.match(html, /<span>\d+\/\d+<\/span>/);
+});
+
+// ---- Save transcript: the MaiK Scribe VoiceNote box already has the storage path (fold the
+// transcript into Present history, same as saveNotesToHistory always did) - this only makes the
+// existing "Save" button read as the explicit action the owner asked for, so there is no duplicate
+// control. Requires SMD_AMBIENT (consultBar only renders when the ambient engine is loaded). --------
+const voiceBase = { patient: { name: "A", mrn: "1" }, tab: "assess", writeOn: true, assessLoaded: true, assessVals: {}, labs: [], radiology: [], medications: [], voiceOn: false, voicePaused: false, voiceProcessing: false, voiceTranscript: "fever three days" };
+
+test("Save transcript: idle-after-stop VoiceNote box exposes it via the existing notes-save handler (not a duplicate control)", () => {
+  const OE = load();
+  const html = OE._render(voiceBase);
+  assert.match(html, /class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save transcript to Present history"[\s\S]*?<\/span>Save transcript<\/button>/);
+  assert.match(html, /data-oe-act="notes-copy"/, "Copy stays alongside it");
+  assert.match(html, /data-oe-act="notes-clear"/, "Clear stays alongside it");
+  // Same storage path as before: notes-save routes to saveNotesToHistory, which folds the transcript
+  // into Present illness history - verified directly against the exposed pure merge function.
+  const m = OE._mergeNoteIntoHistory("", "", voiceBase.voiceTranscript);
+  assert.equal(m.text, "fever three days");
+});
+
+test("Save transcript: absent while still dictating or with no transcript yet (never saves without a tap, never a blank save)", () => {
+  const OE = load();
+  const listening = OE._render(Object.assign({}, voiceBase, { voiceOn: true, voiceStartedAt: 0, _now: 1000 }));
+  assert.ok(!/data-oe-act="notes-save"/.test(listening), "still recording - nothing to save yet");
+  const empty = OE._render(Object.assign({}, voiceBase, { voiceTranscript: "" }));
+  assert.ok(!/data-oe-act="notes-save"/.test(empty), "no transcript - no save action offered");
+});
+
+test("new UI-fix copy (savebar + Save transcript) has no emoji and no em dash", () => {
+  const strings = ["Clear", "Summary", "Save to My Clinic", "Authorise", "Save transcript", "Save transcript to Present history"];
+  strings.forEach((s) => { assert.ok(!NO_EMOJI.test(s), s); assert.ok(!NO_EMDASH.test(s), s); });
+});

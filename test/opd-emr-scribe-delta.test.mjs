@@ -8,7 +8,12 @@
  *     stale-discarded call's speech is resent by the next call (losing speech is worse);
  *   - `en` ACCUMULATES across deltas (a delta's translation covers its own speech only);
  *   - the FINAL (Pause/Stop) refine still sends the WHOLE transcript with no prior draft;
- *   - smd_scribe_delta=off restores full-transcript-every-time.
+ *   - smd_scribe_delta is DEFAULT OFF (full transcript every time) until the server half ships.
+ *
+ * DEFAULT FLIPPED 2026-09-20 (owner report, real iPhone: "autofill into the OPD Assessment form is
+ * broken"). The delta wire needs the `delta`/`priorDraft` branch in functions/api/ai/[[path]].js,
+ * which is not deployed: against the live worker a delta is a 45-second fragment with no context.
+ * Every behavioural test below therefore opts IN (DELTA_ON).
  *
  * node --test test/opd-emr-scribe-delta.test.mjs
  */
@@ -25,6 +30,7 @@ function makeDoc() {
   return { getElementById: () => null, createElement: el, body: { appendChild() {} }, activeElement: null };
 }
 
+const DELTA_ON = { smd_scribe_delta: "on" };
 function load(ls0) {
   const win = {};
   const store = Object.assign({}, ls0);
@@ -79,7 +85,7 @@ test("_draftAccum: ADD/UPDATE only — an absent or empty key never clears a cap
 
 // ── the wire ───────────────────────────────────────────────────────────────────────────────────
 test("the FIRST refine is full; the next background refine sends only the NEW speech plus the draft", async () => {
-  const h = load();
+  const h = load(DELTA_ON);
   h.queue.push({ emrFields: { cc: "Fever x 3 days" }, en: "Fever for three days." });
   await bg(h, "doctor: fever since three days. ");
   await tick();
@@ -97,7 +103,7 @@ test("the FIRST refine is full; the next background refine sends only the NEW sp
 });
 
 test("`en` ACCUMULATES across deltas instead of being replaced by the last delta's translation", async () => {
-  const h = load();
+  const h = load(DELTA_ON);
   h.queue.push({ emrFields: { cc: "Fever" }, en: "Fever for three days." });
   await bg(h, "T1 "); await tick();
   assert.equal(h.st.voiceTranscriptEn, "Fever for three days.");
@@ -108,7 +114,7 @@ test("`en` ACCUMULATES across deltas instead of being replaced by the last delta
 });
 
 test("a FAILED call's speech is included in the next call (the offset only moves on an applied result)", async () => {
-  const h = load();
+  const h = load(DELTA_ON);
   h.queue.push({ emrFields: { cc: "Fever" } });
   await bg(h, "A "); await tick();
   h.queue.push({ error: "server" });                       // the delta covering "B " is lost
@@ -120,7 +126,7 @@ test("a FAILED call's speech is included in the next call (the offset only moves
 });
 
 test("a STALE result (overtaken by a newer refine) neither lands nor advances the offset", async () => {
-  const h = load();
+  const h = load(DELTA_ON);
   h.queue.push({ emrFields: { cc: "Fever" } });
   await bg(h, "A "); await tick();
 
@@ -146,7 +152,7 @@ test("a STALE result (overtaken by a newer refine) neither lands nor advances th
 });
 
 test("the FINAL refine still sends the WHOLE transcript with no prior draft", async () => {
-  const h = load();
+  const h = load(DELTA_ON);
   h.queue.push({ emrFields: { cc: "Fever" }, en: "one." });
   await bg(h, "A "); await tick();
   h.queue.push({ emrFields: { presentHx: "x" }, en: "two." });
@@ -162,9 +168,9 @@ test("the FINAL refine still sends the WHOLE transcript with no prior draft", as
     "a full pass replaces `en` exactly as it does today");
 });
 
-test("smd_scribe_delta=off restores full-transcript-every-time", async () => {
-  const h = load({ smd_scribe_delta: "off" });
-  assert.equal(h.OE._scribeDeltaOn(), false);
+test("DEFAULT OFF: full-transcript-every-time until the server half is deployed", async () => {
+  const h = load();
+  assert.equal(h.OE._scribeDeltaOn(), false, "the delta wire is opt-in");
   h.queue.push({ emrFields: { cc: "Fever" }, en: "one." });
   await bg(h, "A "); await tick();
   h.queue.push({ emrFields: { presentHx: "x" }, en: "two." });
@@ -177,7 +183,7 @@ test("smd_scribe_delta=off restores full-transcript-every-time", async () => {
 });
 
 test("a background refine with no new speech at all sends nothing", async () => {
-  const h = load();
+  const h = load(DELTA_ON);
   h.queue.push({ emrFields: { cc: "Fever" } });
   await bg(h, "A "); await tick();
   await bg(h, "A  ");                                      // only whitespace added
@@ -188,7 +194,7 @@ test("a background refine with no new speech at all sends nothing", async () => 
 test("an abandoned delta does not eat the seconds meter's clock", async () => {
   // scribeSendPrep stamps the meter when it prepares a send. A delta that turns out to have nothing
   // new is never sent, so those seconds must ride on the NEXT call instead of being billed to nobody.
-  const h = load();
+  const h = load(DELTA_ON);
   const t0 = Date.now();
   const real = Date.now;
   try {
@@ -209,7 +215,7 @@ test("an abandoned delta does not eat the seconds meter's clock", async () => {
 });
 
 test("the delta draft never blanks an EMR field the doctor already has (an absent key is inert)", async () => {
-  const h = load();
+  const h = load(DELTA_ON);
   h.queue.push({ emrFields: { cc: "Fever x 3 days" } });
   await bg(h, "A "); await tick();
   const ccKey = Object.keys(h.st.assessVals).find((k) => /complaint/i.test(k) || h.st.assessVals[k] === "Fever x 3 days");

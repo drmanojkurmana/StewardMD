@@ -23,8 +23,12 @@ Whisper only; consultation audio never leaves the phone.
   exactly. `smd_scribe_consent` is deliberately NOT part of this: consent stays.
 - `smd_scribe_offline_draft` — DEFAULT ON, localStorage only. No network means the note is drafted by
   the on-device engine and badged "Drafted on this phone" instead of failing.
-- `smd_voice_lang_probe` — DEFAULT ON. Auto mode probes the first window on the multilingual weights
-  and routes by what it read, instead of opening on the Telugu specialist and staying there.
+- `smd_voice_lang_probe` — **DEFAULT OFF** (was ON; flipped 2026-09-20 by the owner's real-iPhone
+  report). Auto mode probes the first window on the multilingual weights and routes by what it read,
+  instead of opening on the Telugu specialist and staying there. OFF restores the pre-branch capture
+  path exactly. Why off: Auto's normal route IS the Telugu specialist, so the probe makes the start
+  of every consult pay a SECOND 252MB model load — and on a phone that does not already hold the
+  multilingual weights that is a download, not a swap. `localStorage.setItem("smd_voice_lang_probe","1")`.
 - `smd_voice_continuous` — DEFAULT OFF, needs a device. Native `flushTranscribe` transcribes without
   stopping the mic, so no audio is lost at a chunk seam. Inert on any binary built before it.
 - `smd_voice_hi_model` — DEFAULT OFF. Hindi specialist route. FAILS CLOSED: the weights are not
@@ -200,7 +204,7 @@ and what was done, all of it measured rather than argued:
 The audit's own caveat stands: the 5-10x low-end-Android multiplier behind item 2 is an estimate from
 a Mac baseline, not a device measurement. Confirm on hardware.
 
-## 2026-09-20 — the cloud refine became incremental (`smd_scribe_delta`, DEFAULT ON)
+## 2026-09-20 — the cloud refine became incremental (`smd_scribe_delta`, **DEFAULT OFF**)
 
 Every refine used to resend the WHOLE growing transcript, so a consult's INPUT cost grew with the
 SQUARE of its length. A BACKGROUND refine now sends only the speech since the last call whose result
@@ -208,7 +212,14 @@ was actually applied, plus the draft so far (bounded by the field list, not by c
 
 **The FINAL refine (Pause/Stop) is deliberately unchanged**: whole transcript, no prior draft, a fresh
 authoritative extraction. That is the safety net that makes the delta path acceptable — do not
-"optimise" it. `smd_scribe_delta="off"` (localStorage only) restores full-transcript-every-time.
+"optimise" it.
+
+**DEFAULT OFF since 2026-09-20.** The client half shipped without the SERVER half being deployed:
+origin/main's worker has no `delta`/`priorDraft` branch, so against the live API a delta is just a
+45-second fragment with no context and each background refine fills a handful of fields instead of
+the note. That is what the owner saw as "autofill into the OPD Assessment form is broken".
+`localStorage.setItem("smd_scribe_delta","on")` turns it on — do that only once the worker carrying
+`mergeScribeDraft` is live.
 
 Wire (`/api/ai/extract`, kind `opd-scribe`):
 - FULL (unchanged): `{ transcript: <whole>, sec, specialtyPrompt? }` -> `{ en, emrFields, sources?,
@@ -241,7 +252,57 @@ saving is smaller — 2% / 15% / 27% — because the ~5,200-char instruction pre
 call in both modes. That preamble is now the dominant input cost and is the next lever.
 
 Known, accepted: a sentence split across a delta boundary is seen only in its second half by the LIVE
-draft (no overlap is sent); the final full pass reads it whole. `SMD_AI.extract` still slices the
+draft (no overlap is sent); the final full pass reads it whole. The deterministic VITALS run is no
+longer affected by that seam — `applyScribeResult` re-extracts over the ACCUMULATED
+`st.voiceTranscriptEn`, not over the one delta's `en`, so "BP is 140" / "by 90" arriving in two
+replies still fills BP (test/opd-emr-scribe-live.test.mjs). `SMD_AI.extract` still slices the
 transcript to 8000 chars, so the FINAL refine of a consult longer than ~11 minutes sees only its first
 8000 characters — that is pre-existing (reasoning.js) and unchanged here, but it is now the biggest
 remaining loss in the path. Tests: `test/opd-scribe-delta.test.mjs`, `test/opd-emr-scribe-delta.test.mjs`.
+
+## 2026-09-20 — the owner's iPhone report, and what actually broke
+
+Three symptoms off one device: autofill into the Assessment form broken, no live transcription while
+speaking, no live English translation. Two defaults flipped and two real bugs fixed; both flags still
+work when switched on and both keep their tests (opted in).
+
+1. **`smd_scribe_delta` -> OFF** (above). The client wire shipped ahead of the worker. Autofill.
+2. **`smd_voice_lang_probe` -> OFF** (above). A second 252MB model load at the start of every Auto
+   consult. Live transcription. NOT reproducible in Node — the cost is the model load itself, which
+   only exists on a device; the code path is correct, it is the price that is wrong.
+3. **The authoritative final refine could be silently skipped.** `doRefine`'s dedupe guard compared
+   against the last send of ANY kind, so a Pause/Stop whose transcript had not grown since the previous
+   background refine returned without calling the server. That is the COMMON case, not a corner: the
+   idle-refine (`LIVE_IDLE_MS`, 4 s of silence) fires exactly when the doctor stops talking, and the
+   last 15 s capture window before the Stop tap is usually that same silence. Harmless while every
+   refine was a full pass — with `smd_scribe_delta` on it meant no pass EVER read the consult whole.
+   Fixed with `_lastFullRefined` + the pure `_dedupeSkip(transcript, isFinal, lastSent, lastFull)`: a
+   background tick still dedupes against the last send, a final only against the last FULL pass.
+4. **A probe window that ERRORED never set `probeDone`**, so the next window probed again — and again
+   — on weights that were failing to load, until the 2-strike clinical breaker dropped the whole
+   consult to device STT. `onChunkError` now closes the probe whatever its outcome.
+
+### Autofill completeness (the owner's bar: "EVERY DETAIL ... MUST BE AUTOFILLED")
+- `EMR_FIELD_KEYS` grew from 64 to 107 keys and every one of them now has a `VOICE_MAP` target
+  (asserted in test/opd-emr-scribe-live.test.mjs, both directions). What was added: `genCondition`,
+  the personal-history selects (`maritalStatus`, `childrenCount`, `consanguinity`, `appetite`,
+  `bowels`, `micturition` + details), `priorInvestigations`, `familyPsych`/`familyOther`, the
+  menstrual/obstetric text fields (`menstrualHistory`, `menstrualDetails`, `obstetricHistory`,
+  `pregnancyComplications`, `contraception`, `lactating`, `dysmenorrhoea`, `breastFeeding`,
+  `feedingDuration`), the dictated examination fields (`cranialNerves`, `motorSystem`,
+  `sensorySystem`, `reflexes`, `plantars`, `gait`, `speech`, `cerebellar`, `jvp`, `skin`, `entExam`,
+  `musculoskeletal`, `breastExam`, `teethExam`, `headNeckExam`, `genitalExam`, `perinealExam`,
+  `perRectalExam`, `hernialOrifices` + details), and `differentialDx` / `referral` / `lifestyleAdvice`.
+- **`<select>` fields used to silently blank.** `putVoiceDom` assigns `el.value`, and a browser drops
+  a value no `<option>` carries — so "vegetarian" for Diet, or "sick" for General condition, filled
+  NOTHING even though the extractor had said the right thing. `_snapOption` now maps a spoken value
+  onto a real option (exact, then a UNIQUE prefix/whole-word match: "Sick" -> "Sick / Poor"). No match
+  or two matches = the field stays empty. Never a guess.
+- **Deliberately NOT mapped**, with the reason: the obstetric counts, ages and dates
+  (`no_of_abortions`, `children_living`, `children_died`, `age_menarche`, `age_menopause`,
+  `age_marriage`, `first_delivery_age`, `last_delivery_age`, `LCB`, `IUD`, `still_birth`,
+  `neonatal_death`, `molar_pregnancy`, `sterilization`) and the pre-admission dates/hospital — a
+  mis-heard number in an obstetric count is a clinical error and the model has no way to say it is
+  unsure; `informany_attendant` / `informant_relation` — a person's name, mis-attribution is worse
+  than blank; `BMI` / `bsa` — computed from height and weight, never extracted; `waist_cm` /
+  `muac_cm` — these need regexes in `voice-vitals.js`, which was outside this session's ownership.

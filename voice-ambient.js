@@ -19,7 +19,8 @@
  * few hundred ms lost at every re-arm seam are not lost at all. Falls back to the chunking above on
  * any build without it. See local-plugins/capacitor-whisper/README.md + README-ANDROID.md.
  *
- * AUTO LANGUAGE PROBE (flag `smd_voice_lang_probe`, DEFAULT ON): in Auto the first window is a SHORT
+ * AUTO LANGUAGE PROBE (flag `smd_voice_lang_probe`, DEFAULT OFF — it cost the opening of a consult a
+ * second 252MB model load on a real iPhone): when on, in Auto the first window is a SHORT
  * (~1.5s) detection-only pass on the multilingual weights, and the session routes by what it read. A
  * Latin-script probe is a clean transcript and is KEPT, folded into the transcript like any other
  * chunk — nothing captured is ever thrown away. Any other script still has to be discarded (see
@@ -198,10 +199,16 @@
     // Continuous capture (flag OFF by default): flush the mic buffer instead of stopping it at each
     // window boundary. Read once per session so a mid-consult flag change can't half-switch the loop.
     var continuous = flagOn("smd_voice_continuous");
-    // Auto first-chunk language probe (flag ON by default) — see probeRoute() above. SHORT: a detection
+    // Auto first-chunk language probe (flag OFF by default) — see probeRoute() above. SHORT: a detection
     // pass, not a consultation chunk — kept short so that even a discarded (non-Latin, see onChunkFinal)
     // probe window loses only a fraction of a second, not the 4s a longer probe would cost.
-    var probeEnabled = !flagOff("smd_voice_lang_probe");
+    // DEFAULT OFF since 2026-09-20 (owner report, real iPhone: "live transcription no longer appears as
+    // I speak"). The probe decodes the first window on the MULTILINGUAL weights while Auto's normal
+    // route is the Telugu specialist, so the opening of a consult pays a SECOND 252MB model load — and
+    // a first load on a phone that does not already hold those weights is a download, not a swap.
+    // Nothing downstream needs it: detectScript() on the first real chunk already routes the session.
+    // Turn it on per device with localStorage.setItem("smd_voice_lang_probe","1").
+    var probeEnabled = flagOn("smd_voice_lang_probe");
     var probeMs = opts.probeMs || 1500;
     var probing = false, probeDone = langSession ? langSession.probeDone : false;
     function setProbeDone(v) { probeDone = v; if (langSession) langSession.probeDone = v; }
@@ -333,6 +340,12 @@
     function onChunkError(err) {
       dbg("chunkError", err, "engine=" + engine);
       curSession = null;
+      // The probe is a ONE-SHOT detection pass whatever its outcome. probeDone used to be set only in
+      // onChunkFinal, so a probe window that ERRORED (the classic case: the multilingual weights are
+      // not on this phone, so the probe's model load fails) left probeDone false and the NEXT window
+      // probed again — and again — burning every window on a model that will never load until the
+      // 2-strike clinical breaker finally dropped the whole consult to device STT.
+      if (probing) { probing = false; setProbeDone(true); }
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
       if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
       // BUGFIX: on Stop, if the flushed chunk ERRORS (vs finalizes), still run the promised final refine

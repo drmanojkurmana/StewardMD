@@ -20,7 +20,22 @@ export const EMR_FIELD_KEYS = [
   "allergies", "diet", "sleep", "lmp", "immunization", "nutrition", "hydration",
   "systemicExam", "respiratoryExam", "cvsExam", "abdoExam", "localExam",
   "tenderness", "tendernessDetails", "abdoMass", "abdoMassDetails",
-  "provisionalDx", "managementPlan", "advice"
+  "provisionalDx", "managementPlan", "advice",
+  // 2026-09-20 — the rest of the GHIS Initial Assessment a doctor actually dictates. Every key here
+  // has a real field waiting for it in opd-emr.js VOICE_MAP; before this they had no path from speech
+  // at all. Plain text / Yes-No / one-of-a-list only: nothing numeric is inferred (see the obstetric
+  // counts deliberately left out, vault/modules/MaiK Scribe.md).
+  "genCondition", "maritalStatus", "childrenCount", "consanguinity",
+  "appetite", "bowels", "micturition", "micturitionDetails", "priorInvestigations",
+  "familyPsych", "familyOther",
+  "menstrualHistory", "menstrualDetails", "obstetricHistory", "pregnancyComplications",
+  "contraception", "lactating", "dysmenorrhoea", "breastFeeding", "feedingDuration",
+  "cranialNerves", "motorSystem", "sensorySystem", "reflexes", "plantars", "gait", "speech",
+  "cerebellar", "jvp", "skin", "entExam", "musculoskeletal",
+  "breastExam", "teethExam", "headNeckExam",
+  "hernialOrifices", "hernialOrificesDetails",
+  "genitalExam", "perinealExam", "perRectalExam",
+  "differentialDx", "referral", "lifestyleAdvice"
 ];
 
 const YES_NO_KEYS = new Set([
@@ -29,7 +44,8 @@ const YES_NO_KEYS = new Set([
   "habits", "alcohol", "smoking", "recDrug", "tobacco",
   "familyHistory", "familyDiabetes", "familyHtn", "familyHeart",
   "familyCancer", "familyTb", "familyAsthma",
-  "tenderness", "abdoMass"
+  "tenderness", "abdoMass",
+  "familyPsych", "familyOther", "menstrualHistory", "obstetricHistory", "hernialOrifices"
 ]);
 
 export function scribeExtractPrompt(transcript, opts) {
@@ -79,8 +95,27 @@ export function scribeExtractPrompt(transcript, opts) {
     "- abdoMass: 'Yes'/'No' for abdominal mass; abdoMassDetails if described\n" +
     "- habits: alcohol, smoking, recDrug, tobacco as 'Yes'/'No' (only when explicitly stated). Set habits='Yes' if any affirmed; habitsDetails for other habits.\n" +
     "  Add top-level \"alcoholDetail\" with exact amount + type stated (e.g. '60 ml whisky daily').\n" +
+    "- genCondition: general condition IF the doctor states it — exactly one of Good / Fair / Sick / Moribund\n" +
+    "- appetite (Normal|Reduced|Increased), bowels (Regular|Constipated|Loose stools), micturition " +
+    "(Normal|Dysuria|Frequency|Hesitancy) with micturitionDetails; maritalStatus (Single|Married|Widowed|Divorced), " +
+    "childrenCount, consanguinity (Non-consanguineous|1st degree|2nd degree) — ONLY when stated, using those exact words\n" +
+    "- priorInvestigations: investigations ALREADY DONE that were reported in the consult (outside reports, " +
+    "previous scans) — never the tests being ordered today, those belong in managementPlan\n" +
+    "- familyPsych / familyOther: 'Yes'/'No' for a psychiatric illness or any other condition in the family\n" +
+    "- menstrualHistory: 'Yes'/'No' if menstrual history was discussed, with menstrualDetails for what was said; " +
+    "obstetricHistory: 'Yes'/'No' if obstetric history was discussed, with pregnancyComplications, contraception " +
+    "and lactating for what was stated, plus dysmenorrhoea, breastFeeding and feedingDuration where the " +
+    "consult covers them. NEVER infer a count, an age or a date that was not spoken.\n" +
+    "- Examination findings the doctor dictates, each verbatim clinical English and ONLY if examined aloud: " +
+    "cranialNerves, motorSystem, sensorySystem, reflexes, plantars, gait, speech, cerebellar, jvp, skin, " +
+    "entExam, musculoskeletal, breastExam, teethExam, headNeckExam, genitalExam, perinealExam, perRectalExam; " +
+    "hernialOrifices is 'Yes'/'No' for hernial orifices NORMAL, with hernialOrificesDetails\n" +
     "- provisionalDx: ONLY if the clinician explicitly stated their own diagnosis assessment.\n" +
+    "- differentialDx: ONLY the differential the CLINICIAN themself stated aloud (not your own suggestion — " +
+    "that belongs in suggestions.ddx).\n" +
     "- managementPlan: doctor's stated treatment advice or prescription plan.\n" +
+    "- referral: who the patient is being referred to and why, if stated. lifestyleAdvice: stated diet / " +
+    "lifestyle advice, kept separate from advice (follow-up instructions).\n" +
     (specialtyPrompt ? specialtyPrompt + "\n" : "") +
     "NEGATION AND TIME — CRITICAL: a symptom or condition the patient or doctor explicitly DENIES (e.g. 'no fever', " +
     "'denies vomiting', 'not diabetic') must NEVER be written as present anywhere in emrFields; record it as a pertinent " +
