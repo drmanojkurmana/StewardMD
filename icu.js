@@ -2223,14 +2223,17 @@
     spo2: { label: "SpO₂", unit: "%", good: "up", src: "vital", ref: [92, 100] },
     rr:   { label: "Resp rate", unit: "/min", good: null, src: "vital" },
     temp: { label: "Temperature", unit: "°C", good: null, src: "vital" },
-    uop:  { label: "Urine output", unit: "mL/h", good: "up", src: "vital" }
+    uop:  { label: "Urine output", unit: "mL/h", good: "up", src: "vital" },
+    /* GCS was charted by ingestMonitor and consumed by qSOFA/NEWS2/SOFA/APACHE, but had no trend
+     * entry, so it never appeared as a vitals column and could not be reviewed over time. */
+    gcs:  { label: "GCS", unit: "/15", good: "up", src: "vital", ref: [15, 15], crit: function (v) { return v <= 8; }, note: "≤8 — airway at risk" }
   };
   var TREND_GROUPS = [
     { id: "cbc", name: "CBC / Haematology", keys: ["hb", "hct", "wbc", "neut", "plt"] },
     { id: "renal", name: "Renal / Electrolytes", keys: ["creat", "urea", "na", "k", "cl", "hco3", "ca", "ica", "mg", "po4"] },
     { id: "liver", name: "Liver / Coagulation", keys: ["bili", "bili_d", "ast", "alt", "alp", "alb", "inr"] },
     { id: "panc", name: "Pancreatic / Metabolic", keys: ["amylase", "lipase", "glu", "lactate", "crp", "pct"] },
-    { id: "vitals", name: "Vitals / Haemodynamics", keys: ["hr", "map", "spo2", "rr", "temp", "uop"] }
+    { id: "vitals", name: "Vitals / Haemodynamics", keys: ["hr", "map", "spo2", "rr", "temp", "uop", "gcs"] }
   ];
   function trendSeriesFor(key, win) { var m = TREND_INTERP[key]; if (!m) return []; return m.src === "map" ? mapSeries(win) : m.src === "vital" ? vitalSeries(key, win) : labSeries(key, win); }
   function fmtDur(ms) { var h = Math.round(ms / 36e5); if (h < 1) return "<1 h"; if (h < 48) return h + " h"; var dd = Math.round(h / 24); return dd + " day" + (dd === 1 ? "" : "s"); }
@@ -6110,6 +6113,7 @@
       { k: "hr", l: "Heart rate", t: "number" }, { k: "sbp", l: "Systolic BP", t: "number" }, { k: "dbp", l: "Diastolic BP", t: "number" }, { k: "map", l: "MAP (optional)", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "spo2", l: "SpO₂ %", t: "number" }, { k: "temp", l: "Temp °C", t: "number" }, { k: "uop", l: "Urine mL/h", t: "number" },
       { k: "lactate", l: "Lactate mmol/L", t: "number" }, { k: "cvp", l: "CVP mmHg", t: "number" }, { k: "etco2", l: "EtCO₂ mmHg", t: "number" },
+      { k: "gcs", l: "GCS total (3-15)", t: "number" },
       { k: "o2", l: "On supplemental O₂?", t: "select", opts: ["", "No", "Yes"] } ] },
     labs: { title: "Laboratory values", ingest: ingestLabs, fields: [
       { k: "na", l: "Na mEq/L", t: "number" }, { k: "k", l: "K mEq/L", t: "number" }, { k: "cl", l: "Cl mEq/L", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" },
