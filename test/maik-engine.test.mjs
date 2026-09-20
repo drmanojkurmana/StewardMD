@@ -416,6 +416,13 @@ function load(env = {}) {
                     state: { downloading: true, frac: 0.37, done: false, err: null } });
   dl.E.setPref("local");
   ok("chip shows download progress instead of pretending", /\(37%\)/.test(dl.E.chipLabel()));
+
+  // Owner, 2026-09-20: with the Pro gate shut, options() hides every pack, so the chip fell back to
+  // "MaiK Cloud (not ready)" for a LOCAL preference - read as Cloud being broken. Name the pack.
+  const gated = load({ gate: false, runtime: true, pack: true, active: "maik-horizon",
+                       state: { downloading: false, frac: 1, done: true, err: null } });
+  gated.E.setPref("local");
+  ok("chip names the selected pack even while the gate hides it", /MAiK Horizon \(not ready\)/.test(gated.E.chipLabel()) && !/Cloud/.test(gated.E.chipLabel()));
 }
 
 // the "no answer" message must name the real reason, not claim KB-only mode
