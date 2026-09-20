@@ -130,10 +130,11 @@ async function patientFlow(request, env, ctx) {
 
   const nowIso = str(ctx.now) || new Date().toISOString();
   const nowMs = Date.parse(nowIso) || Date.now();
-  // false = the stated dates could not be read: overdue is then unknown, never zero.
-  const edds = await expectedDischargeMap(svc).catch(() => false);
-  const today = hospitalToday(nowMs, ctx.clock);
   const openStays = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN);
+  // false = the stated dates could not be read: overdue is then unknown, never zero.
+  // R7-2: by stay id, so this costs the open stays rather than every date the hospital ever stated.
+  const edds = await expectedDischargeMap(svc, openStays.map((e) => e.id)).catch(() => false);
+  const today = hospitalToday(nowMs, ctx.clock);
 
   const stays = openStays.map((e) => {
     const myOrders = (orders || []).filter((o) => o && o.encounterId === e.id);

@@ -38,6 +38,11 @@
  *   pageByIdPrefix(tenantId, resourceType, prefix, {limit, before}) -> {records, next}   OPTIONAL, latest per id
  *                                                                           whose id starts with prefix, newest first,
  *                                                                           one page; next is the cursor for the page after
+ *   latestByIds(tenantId, resourceType, ids)         -> record[]            OPTIONAL, the latest version of each
+ *                                                                           NAMED id, in one read; ids the store does
+ *                                                                           not hold are absent. service.js getMany
+ *                                                                           falls back to one latest() per id without
+ *                                                                           it, which is a round trip per id.
  *   patientsByIdentifier(tenantId, keys)             -> Patient[]           an INDEX SEEK, not a scan
  *   append(tenantId, records, ctx)                   -> {seq}               ATOMIC; see below
  *   changes(tenantId, sinceSeq, limit)               -> {records, cursor}   ascending by seq
@@ -275,6 +280,26 @@ class MemoryRepository {
     const rows = [...byId.values()];
     if (opts && opts.newest) rows.sort((a, b) => b.seq - a.seq);
     return rows.slice(0, max).map((r) => clone(r.body));
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): the latest version of each of these ids, in ONE read.
+   *
+   * R7-2. The ward list used to ask for a hundred patients one at a time because the port had no way
+   * to ask for a known set: the only reads were "this one id" and "a roster of the whole type". A
+   * roster is the wrong shape for a ward (it answers with whoever was written most recently, which is
+   * not who is in the beds) and one-at-a-time is a round trip per bed. Ids the store does not hold are
+   * simply absent from the answer, exactly as a missing id is null from latest().
+   */
+  async latestByIds(tenantId, resourceType, ids) {
+    const want = new Set((ids || []).map((x) => String(x)).filter(Boolean));
+    if (!want.size) return [];
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType || !want.has(r.id)) continue;
+      byId.set(r.id, r);                       // rows are in seq order, so the last wins
+    }
+    return [...byId.values()].map((r) => clone(r.body));
   }
 
   /**

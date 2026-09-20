@@ -40,6 +40,13 @@ NABH: 30 of 32 indicators compute.
    `/ward/registries`. The last route without a screen; the reachability gate is now at zero on both lists
    (`knownGaps` is empty) and `test/ward-recall-register-view.test.mjs` pins it.
 
+8. Ward list latency (2026-09-20): the list cost one read per patient plus one audit chain write per
+   read (249 store calls for a 120-bed ward, ~370 D1 round trips, 5-8s on screen). Now 7 store calls:
+   `latestByIds` on the port (memory + D1/SQLite), `RecordService.getMany` (one audit row per chart
+   still, written in batches), patients and stated discharge dates read by id, and `/ward/list` wrapped
+   in `bufferReadAudits`. Pinned by `test/wardsynq-ward-list-round-trips.test.mjs`, which counts round
+   trips rather than timing anything. The ED board shares `patientsFor`, so it gained the same fix.
+
 ## Open work that does NOT need the owner
 
 - Nothing. Every route has a screen and a test (`node scripts/wardsynq-reachability.mjs`).

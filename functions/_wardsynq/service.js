@@ -809,6 +809,55 @@ class RecordService {
     return rec;
   }
 
+  /**
+   * R7-2. The latest version of each NAMED id, in one read instead of one per id.
+   *
+   * WHY IT EXISTS. The ward list needed a hundred patients by id and the service could only offer
+   * `get` (one round trip each, each with its own audit row taking the hospital's chain lock) or
+   * `list` (a roster of whoever was written most recently, which is not who is in the beds). A
+   * hundred beds came to roughly two hundred round trips and five to eight seconds on screen.
+   *
+   * THE AUDIT TRAIL DOES NOT SHRINK. One `record.read` event per id, the same shape `get` writes, so
+   * "who has read my record" still answers with every chart that was opened; what changes is that
+   * they are written together (bufferReadAudits) instead of one chain extension at a time. Collapsing
+   * them into a single row would have been faster still and would have quietly cost a patient the
+   * ability to see who read their chart.
+   *
+   * Governance is the same as every other read: a type-level scope check, exactly as list() does.
+   * A store without latestByIds falls back to one get per id, so no deployment loses the feature.
+   * @returns {Promise<Map<string, object>>} id -> record, ids the store does not hold left out.
+   */
+  async getMany(resourceType, ids) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const want = [...new Set((ids || []).map((x) => (x == null ? "" : String(x))).filter(Boolean))];
+    const byId = new Map();
+    if (!want.length) return byId;
+
+    if (typeof this.repository.latestByIds === "function") {
+      const rows = await this.repository.latestByIds(this.tenantId, resourceType, want);
+      for (const r of rows || []) if (r && r.id != null) byId.set(String(r.id), r);
+    } else {
+      // No batched read on this store: the old cost, kept so the port stays optional.
+      for (const id of want) {
+        const r = await this.governed.get(this.actor, resourceType, id);
+        if (r) byId.set(id, r);
+      }
+    }
+
+    const events = [];
+    for (const id of want) {
+      const rec = byId.get(id) || null;
+      events.push(await this._audit("record.read", {
+        scope: { resourceType, id, found: !!rec, batched: true },
+        patientId: rec && (rec.patientId || (resourceType === "Patient" ? rec.id : null)),
+      }));
+    }
+    if (typeof this.repository.auditMany === "function") await this.repository.auditMany(this.tenantId, events);
+    else for (const e of events) await this.repository.auditOnly(this.tenantId, e);
+    return byId;
+  }
+
   async history(resourceType, id) {
     this._assertType(resourceType);
     const rows = await this.governed.history(this.actor, resourceType, id);

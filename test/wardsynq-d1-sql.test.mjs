@@ -311,6 +311,29 @@ test("waiting outbox events are read by status on real SQL: an old pending row b
   assert.equal((await sql.latestByStatus("t1", TYPE, waiting, 200)).length, 0);
 });
 
+test("R7-2 latestByIds: the named ids only, latest version each, identical on memory and real SQL", { skip: DatabaseSync ? false : SKIP }, async () => {
+  const mem = new MemoryRepository();
+  const sql = new D1Repository(d1(freshDb()));
+  const p = (id, name, version) => ({ resourceType: "Patient", id, version: version || 1, name, meta: { recordedAt: "2026-09-19T00:00:00.000Z" }, writtenBy: { id: "seed", kind: "human" } });
+  for (const repo of [mem, sql]) {
+    for (let i = 0; i < 30; i++) await repo.append("t1", [p(`pat-${i}`, `Patient ${i}`)]);
+    await repo.append("t1", [p("pat-3", "Renamed After Marriage", 2)]);   // a second version
+    await repo.append("t2", [p("pat-1", "Another Hospital's Patient", 1)]);
+  }
+  for (const repo of [mem, sql]) {
+    const got = await repo.latestByIds("t1", "Patient", ["pat-1", "pat-3", "pat-29", "pat-nope"]);
+    assert.deepEqual(got.map((r) => r.id).sort(), ["pat-1", "pat-29", "pat-3"], "an id the store does not hold is simply absent");
+    assert.equal(got.find((r) => r.id === "pat-3").name, "Renamed After Marriage", "the LATEST version, not the first");
+    assert.deepEqual(await repo.latestByIds("t1", "Patient", []), [], "no ids, no read");
+    // Tenancy is enforced in the read itself, not by the caller remembering to filter.
+    assert.equal((await repo.latestByIds("t1", "Patient", ["pat-1"]))[0].name, "Patient 1");
+    assert.equal((await repo.latestByIds("t2", "Patient", ["pat-1"]))[0].name, "Another Hospital's Patient");
+    // Past one chunk of bound parameters (200 on D1), so a ward bigger than a chunk still answers whole.
+    const many = Array.from({ length: 30 }, (_, i) => `pat-${i}`).concat(Array.from({ length: 250 }, (_, i) => `pat-absent-${i}`));
+    assert.equal((await repo.latestByIds("t1", "Patient", many)).length, 30, "chunked reads are one answer, not one per chunk");
+  }
+});
+
 test("G8 pageByIdPrefix: one owner's rows as an index range, newest first, paged, identical on memory and real SQL", { skip: DatabaseSync ? false : SKIP }, async () => {
   const mem = new MemoryRepository();
   const sql = new D1Repository(d1(freshDb()));

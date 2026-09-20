@@ -2515,7 +2515,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "list" && method === "GET") {
-        const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
+        /* R7-2: the ward list's reads are audited in ONE chain extension, not one per read. Every
+         * audited read takes the hospital's chain lock, reads the head and inserts, so a screen that
+         * reads the census, the names and the stated dates was paying three serialised round trips
+         * per read before it could answer - the same fix, and the same reason, as nurse-worklist
+         * below. The rows themselves are unchanged: one per chart read, written together. */
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const wdeps = { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository } };
+        const r = await listWard(request, env, { ...wdeps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
+        await audits.flush().catch(() => {});
         // P2.4: how long a device may show an offline copy of a chart. Hospital config, 1-72 hours, default 12.
         if (r.ok) { const h = Number(wsqCfg && wsqCfg.offlineCacheHours); r.offlineCacheHours = Number.isFinite(h) && h >= 1 && h <= 72 ? h : 12; }
         // The hospital's label sizes (Admin > Hospital), for the labels printed from any ward screen.
