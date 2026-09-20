@@ -6272,7 +6272,7 @@
       '<div class="icu-steps">' + steps.map(function (s, i) {
         return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + ico(s[3], s[0]) + " Capture " + s[1] + "</div>" +
           (canSnap
-            ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">' + ico("camera", "📷") + ' Capture / upload<input type="file" accept="image/*" capture="environment" data-snap="' + s[2] + '" style="display:none"></label><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ' + ico("edit", "✎") + ' enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
+            ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">' + ico("camera", "📷") + ' Capture / upload<input type="file" accept="image/*" capture="environment" data-snap="' + s[2] + '" style="display:none"></label><button type="button" class="icu-btn ghost" data-snapfile="' + s[2] + '" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px">📄 PDF / file</button><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ' + ico("edit", "✎") + ' enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
             : '<span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">' + ico("edit", "✎") + ' Enter manually for now</span>') +
           "</div></div>";
       }).join("") + "</div>" +
@@ -6356,6 +6356,21 @@
             }).catch(function () { if (out) out.textContent = ""; });
           });
         });
+        /* pickImage is camera/photos only, so a PDF ABG or lab report could not be imported from
+         * the Snapshot sheet at all. Route those through the SAME native document picker and
+         * handleImportFile() pipeline the main Import button already uses (pdf.js renders the
+         * pages, then the usual review sheet). */
+        modalEl.querySelectorAll("[data-snapfile]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var kind = btn.getAttribute("data-snapfile");
+            var out = modalEl.querySelector('[data-out="' + kind + '"]');
+            if (!window.SMD_NATIVE.pickFile) { if (out) out.textContent = "File picker unavailable on this device — use Capture, or ✎ enter manually."; return; }
+            if (out) out.textContent = "Opening files…";
+            window.SMD_NATIVE.pickFile({ types: ["application/pdf", "image/*"] })
+              .then(function (blob) { if (out) out.textContent = ""; if (blob) handleImportFile(kind, blob); })
+              .catch(function () { if (out) out.textContent = ""; });
+          });
+        });
       } else {
         modalEl.querySelectorAll("input[data-snap]").forEach(function (inp) {
           inp.addEventListener("change", function () {
@@ -6364,6 +6379,17 @@
             // Compress before sending to vision (was sending the raw full-res image → wasted
             // AI tokens). compressImage downscales to ~1024px / q0.6.
             compressImage(f, function (dataUrl) { runSnap(kind, out, dataUrl); });
+          });
+        });
+        // Web: same PDF/file affordance, through the shared handleImportFile pipeline.
+        modalEl.querySelectorAll("[data-snapfile]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var kind = btn.getAttribute("data-snapfile");
+            var inp = document.createElement("input");
+            inp.type = "file"; inp.accept = "application/pdf,image/*"; inp.style.display = "none";
+            document.body.appendChild(inp);
+            inp.addEventListener("change", function () { var f = inp.files && inp.files[0]; if (f) handleImportFile(kind, f); inp.remove(); });
+            inp.click();
           });
         });
       }
