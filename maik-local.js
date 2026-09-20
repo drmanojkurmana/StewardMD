@@ -1401,25 +1401,35 @@
     }).join("\n\n");
     var evidenceText = list.map(function (s, i) { return "[" + (i + 1) + "] " + String(s.title || "") + ". " + String(s.snippet || ""); }).join("\n");
     var prompt = "Question: " + q + "\n\nWeb results:\n" + ctx;
-    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
-      if (!text) return { error: "no-answer" };
-      var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+    var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+    function gateOf(text) {
       try {
         var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
-        if (RAG && RAG.evidenceGate) {
-          var gate = RAG.evidenceGate(text, evidenceText, q);
-          if (!gate.ok) {
-            var top = list[0];
-            var shown = String(top.title || "") + (top.snippet ? "\n" + top.snippet : "") + (top.url ? "\n" + top.url : "");
-            return {
-              text: "The on-device model's answer could not be verified against the web results it found " +
-                "(it stated a figure or drug not in them). Showing the top result instead:\n\n" + shown,
-              sources: srcOut, engine: "local", mode: "web-local"
-            };
-          }
-        }
+        if (RAG && RAG.evidenceGate) return RAG.evidenceGate(text, evidenceText, q).ok;
       } catch (e) {}
-      return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+      return true;
+    }
+    /* Owner, 2026-09-21 ("even we search dont show whole topic in detail"): a failed gate used to
+     * throw the whole answer away and print ONE snippet. Now: retry once with a sources-only
+     * prompt at temperature 0; if that fails too, show EVERY result in full, so the clinician still
+     * gets the topic, just quoted rather than written. */
+    function digest() {
+      return "The on-device model's answer could not be verified against the web results, so here are the " +
+        "results themselves:\n\n" + list.map(function (s, i) {
+          return "**" + (i + 1) + ". " + String(s.title || s.site || "Source").trim() + "**" +
+            (s.snippet ? "\n" + String(s.snippet).trim() : "") + (s.url ? "\n" + String(s.url) : "");
+        }).join("\n\n");
+    }
+    var STRICT = WEB_SYS + "\nSTRICT MODE: use ONLY facts, figures and drug names that appear in the numbered WEB RESULTS. " +
+      "Cite [n] after each. If the results do not cover a point, say so instead of supplying it.";
+    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
+      if (!text) return { error: "no-answer" };
+      if (gateOf(text)) return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+      var o2 = {}; for (var k in (opts || {})) o2[k] = opts[k]; o2.temperature = 0;
+      return generateText(prompt, STRICT, WEB_MAX, o2).then(function (t2) {
+        if (t2 && gateOf(t2)) return { text: emphasize(t2), sources: srcOut, engine: "local", mode: "web-local" };
+        return { text: digest(), sources: srcOut, engine: "local", mode: "web-local" };
+      }, function () { return { text: digest(), sources: srcOut, engine: "local", mode: "web-local" }; });
     });
   }
   function generateJSON(prompt, system, nPredict, opts) {

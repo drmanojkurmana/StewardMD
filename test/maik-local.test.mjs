@@ -636,12 +636,12 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
 // TinyFish's raw sources instead of Gemini. Uses the REAL kb/ai/maik-lite-rag.js evidenceGate (not
 // loadWithRag's book-specific "amoxicillin only" stub), because a web answer's evidence is arbitrary
 // search-snippet text, not the book, and the gate must genuinely catch an unsupported drug in it. ──
-function loadForWeb({ tokens }) {
+function loadForWeb({ tokens, replies }) {   // replies: one string per generate() call (retry tests)
   const calls = { generate: [] };
   const Llama = {
     available: async () => ({ available: true, loaded: true }),
     load: async () => ({ loaded: true }),
-    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    generate: async (o) => { calls.generate.push(o); return { text: replies ? replies[Math.min(calls.generate.length - 1, replies.length - 1)] : tokens.join(""), ms: 500 }; },
     cancel: async () => ({}), release: async () => ({ released: true }),
     addListener: () => ({ remove: () => {} })
   };
@@ -669,6 +669,14 @@ function loadForWeb({ tokens }) {
   const bad = loadForWeb({ tokens: ["Use azithromycin 250 mg once daily instead."] });
   const rb = await bad.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
   ok("a drug not in the web results is caught by the SAME evidence gate the book RAG uses", /could not be verified against the web results/.test(rb.text) && /CDC pneumonia treatment guidance/.test(rb.text));
+  // Owner, 2026-09-21 ("even we search dont show whole topic in detail"): a failed gate retries once,
+  // sources-only at temperature 0; if that fails too, EVERY result is shown in full, not one snippet.
+  ok("a failed gate retries once in STRICT mode at temperature 0", bad.calls.generate.length === 2 && /STRICT MODE: use ONLY facts/.test(bad.calls.generate[1].system) && bad.calls.generate[1].temperature === 0);
+  ok("two failures show every result in full (all titles, snippets, urls)", sources.every((x) => rb.text.indexOf(x.title) >= 0 && rb.text.indexOf(x.snippet) >= 0 && rb.text.indexOf(x.url) >= 0));
+  ok("...and never the old single-snippet text", !/Showing the top result instead/.test(rb.text));
+  const fixed = loadForWeb({ replies: ["Use azithromycin 250 mg once daily instead.", "Amoxicillin 500 mg three times daily [1]; doxycycline for penicillin allergy [2]."] });
+  const rf = await fixed.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
+  ok("a passing STRICT retry is returned as the answer", fixed.calls.generate.length === 2 && /Amoxicillin\*{0,2} \*{0,2}500 mg/.test(rf.text) && !/could not be verified/.test(rf.text));   // emphasize() bolds drug and dose
 
   ok("no question is refused before any generation", (await w.L.webAnswer("", sources)).error === "no-question");
   ok("no sources is an honest no-results, never a hallucinated web answer", (await w.L.webAnswer("Treatment of CAP", [])).error === "no-results");
