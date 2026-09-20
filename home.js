@@ -4157,6 +4157,8 @@
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
   var _maikSkipCalc = false;          // set true for ONE send by "Ask MaiK anyway" on a calculator card → bypass the zero-token calculator route once
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
+  var _maikUserQ = null;          // the text the clinician actually typed for the send in flight (Edit/Regenerate must reuse THIS, never the topic-prefixed rewrite)
+  var _maikFollowUp = false;      // true when the send in flight was resolved as a follow-up on _maikTopic; false = a new question (pkg.newTopic tells the server)
   // Factors the clinician has ALREADY answered in this conversation. The model re-emits its
   // @@REFINE@@ line on every answer, so after "renal function: creatinine 1.2" the next answer
   // asked for "renal impairment" again — the reported "it asks me to specify what I just
@@ -5630,6 +5632,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var isShort = toks.length <= 4;
       if (!n || /^[?.\s]+$/.test(n)) return { kind: "clarify" };                       // empty / punctuation-only
       if (/^(dose|doses|dosage|what dose|which dose|drug|drugs|which drug|what drug)\??$/.test(n)) return { kind: "clarify" };  // bare dose/drug with no drug named
+      if (/\b(your name|why (are|r) (you|u) (called|named)|why (called|named) maik|who named you|what does maik (mean|stand for)|meaning of maik|full form of maik|maik stands? for)\b/.test(n)) return { kind: "casual", reply: "MaiK stands for Medical AI Knowledge. I\u2019m StewardMD\u2019s clinical assistant: ask me about a disease, a drug, a dose, an ECG or a workup and I\u2019ll help." };
       if (/\b(weather|joke|jokes|funny|movie|movies|song|songs|music|sport|sports|cricket|football|news|poem|story|stories|recipe|cook|game|games|stock|horoscope|who won|what time|time is it|date today|your name)\b/.test(n) && !/(treat|manage|dose|drug|patient|symptom|sign|diagnos|infection|fever|pain|therapy|antibiotic|disease|syndrome|management|shock|sepsis|poison)/.test(n)) return { kind: "casual", reply: "I\u2019m MaiK. I focus on clinical knowledge, drug information, calculators, and patient assessment. Ask me a medical question and I\u2019ll help." };
       // A/B casual conversation — fuzzy (typo-tolerant) match on the FIRST token / short phrase
       var casualHit = MAIK_CASUAL.some(function (w) { return first === w || maikLev(first, w) <= 1; })
@@ -5675,11 +5678,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (/\b(why (are|is|did|didn'?t|do|does|doesn'?t|would|wouldn'?t) you\b|you already know|missing continuity|you'?re wrong|you are wrong|that'?s wrong|that is wrong|not what i asked)\b/i.test(n)) {
         return { kind: "casual", reply: "Sorry about that. Could you ask the question again, in one line? I'll stay on that topic this time." };
       }
-      // Thanks and acknowledgements: same reasoning, same split.
-      if (isShort && /^(thanks|thank you|thankyou|thx|ty|ok|okay|got it|cool|great)\b/.test(n)) {
-        var _eng2 = "cloud";
-        try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective) _eng2 = window.SMD_MAIK_ENGINE.effective(); } catch (e) {}
-        if (_eng2 !== "local") return { kind: "casual", reply: "Anytime." };
+      // Thanks and acknowledgements. On-device used to be exempted here too, and "Thank you maik" then
+      // fell through to the follow-up resolver and came back as another paragraph about DKA potassium
+      // (owner transcript, 2026-09-20). A thank-you is never worth a model call on any engine. Only a
+      // message that is NOTHING but thanks matches: "ok tell me the dose" keeps its question.
+      if (isShort && /^(thanks|thank you|thankyou|thx|ty|ok|okay|got it|cool|great)\b/.test(n) &&
+          !n.replace(/\b(thanks|thank you|thankyou|thx|ty|ok|okay|got it|cool|great|nice|perfect|good|awesome|fine|alright|maik|so much|a lot|very much|dear|bro|doc|doctor|sir|madam|bye)\b/g, "").replace(/[^a-z]/g, "")) {
+        return { kind: "casual", reply: "Anytime." };
       }
       // B product/help
       if (/what (can|do) you do|what is maik|who are you|how (do i|to) use|how (do i|to) start|how does this work|where('?s| is)? (the )?(drug|calculator|calc|ward|icu|dx)/.test(n)) return { kind: "help" };
@@ -5726,6 +5731,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       t = t.replace(/\b(management|treatment)\b/gi, "").replace(/\s+/g, " ").trim();
       return t || String(q || "").trim();
     }
+    // Generic clinical/request words: a message made ONLY of these has no subject of its own and is a
+    // follow-up on the current topic. Shared by maikResolveFollowup() and maikNovelTokens().
+    var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|it|them|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|medicine|medicines|med|meds|recommend|recommended|suggest|suggested|suggestion|suggestions|prescribe|prescribed|prescription|write|writing|should|shall|can|could|would|will|you|we|i|need|use|used|using|which|when|why|how|better|safe|safer|safety|alternative|alternatives|avoid|contraindication|contraindications|interaction|interactions|side|effect|effects|adverse|acute|chronic|severe|mild|moderate|start|starting|begin|prefer|preferred|do|does|to|with|on|or|as|at|than|vs|any|renal|hepatic|kidney|liver|pregnancy|pregnant|elderly|adult|child|children|paediatric|pediatric|neonatal|neonate|geriatric|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|diagnose|diagnosed|diagnostic|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
     function maikResolveFollowup(q) {
       var t = _maikTopic; if (!t || !t.topic) return null;
       if (t.ts && (Date.now() - t.ts) > 30 * 60 * 1000) { _maikTopic = null; return null; }   // session continuity only
@@ -5780,7 +5788,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // forms - only the noun "diagnosis" was covered) added after the owner report (2026-09-11):
       // "How to diagnose it" failed every token here ("diagnose" and "it" both unmatched), so it was
       // treated as a brand-new topic-less query and drifted onto an unrelated malnutrition chapter.
-      var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|it|them|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|medicine|medicines|med|meds|recommend|recommended|suggest|suggested|suggestion|suggestions|prescribe|prescribed|prescription|write|writing|should|shall|can|could|would|will|you|we|i|need|use|used|using|which|when|why|how|better|safe|safer|safety|alternative|alternatives|avoid|contraindication|contraindications|interaction|interactions|side|effect|effects|adverse|acute|chronic|severe|mild|moderate|start|starting|begin|prefer|preferred|do|does|to|with|on|or|as|at|than|vs|any|renal|hepatic|kidney|liver|pregnancy|pregnant|elderly|adult|child|children|paediatric|pediatric|neonatal|neonate|geriatric|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|diagnose|diagnosed|diagnostic|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
       if (wc <= 7) {
         var toksF = n.replace(/\?/g, "").split(" ").filter(Boolean);   // maikNorm keeps '?' — drop it for token matching
         if (toksF.length && toksF.every(function (w) { return GENERIC_FU.test(w); })) {
@@ -5790,6 +5797,62 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         }
       }
       return null;
+    }
+    /* IS THIS MESSAGE ABOUT THE TOPIC WE ARE ON, OR A NEW QUESTION? (owner transcripts, 2026-09-20)
+     *
+     * The old rule was "any short clinical message while a topic is live is a follow-up unless the KB
+     * resolver is CONFIDENT it names its own disease". Acronyms and non-disease topics never clear
+     * that bar, so "Afib Ecg" after a hematuria answer was sent as "Hematuria Workup: Afib Ecg" and
+     * answered as "hematuria in a patient who also has AF"; "WHAT IS SLE EXPLAIN ME LIKE IM DUMB" after
+     * DKA came back about DKA potassium. The owner's summary: "it doesn't even understand when the
+     * user is asking an individual question or a connected question."
+     *
+     * The rule is now the one a colleague uses: a message CONTINUES the thread only when it brings no
+     * new subject of its own. Every content token is either generic ("dose", "investigations",
+     * "explain"), or already present in the thread (the topic, the last question, the last answer).
+     * One token the thread has never seen ("afib", "sle", "scrub") means a new question, and it is
+     * asked as one. Continuity still works where it should: "how to diagnose it", "and the dose?",
+     * "just tell me which investigations should I send? in one line", "insulin infusion" straight
+     * after an answer that discussed insulin infusion.
+     *
+     * Prefix matching (first 6 letters) is deliberate, the same as maik-local.js continues(): it lets
+     * "doses" match "dose" and "anticoagulation" match "anticoagulant" without a stemmer. Cloud still
+     * receives the recent turns either way; this decides only whether the topic is GLUED onto the
+     * question, and it sets pkg.newTopic so the server prompt does not merge the two subjects.
+     */
+    var MAIK_FU_FILLER = /^(just|only|please|pls|kindly|tell|me|us|give|show|explain|describe|elaborate|like|im|i'?m|am|dumb|layman|simple|simply|simpler|brief|briefly|short|shortly|quick|quickly|one|two|line|lines|word|words|sentence|sentences|point|points|send|order|need|needed|want|wanted|know|mean|meant|say|said|again|also|too|more|less|now|then|here|there|what|whats|which|when|where|why|how|much|many|is|are|was|were|be|been|can|could|should|would|will|shall|may|might|must|about|for|of|in|on|at|to|with|from|by|and|or|but|if|so|not|no|yes|ok|okay|it|its|this|that|these|those|they|them|their|he|she|his|her|we|our|you|your|my|mine|maik|doctor|doc|sir|madam|regarding|same|above|earlier|previous|previously|before|next|other|another|any|some|all|each|every|both|either|neither|such|per|as|than|very|really|actually|exactly|exact|detail|details|detailed|depth|expand|continue|go|ahead|sure|right|correct|wrong|instead|rather|else|anything|something|nothing|everything|thing|things|stuff|info|information|answer|answers|question|questions|reply|response|version|format|table|list|bullet|bullets|summary|summarise|summarize|the|a|an|does|did|do|done|get|got|make|made|take|taken|put|use|used|using|given|start|started|stop|stopped|wait|till|until|beyond|below|greater|lower|higher|level|levels|value|values|normal|high|low|via|through|patient|patients|case|safest|impairment|impaired|insufficiency|dysfunction|adjustment|adjusted|adjust|elderly|children|adults|neonates|infants|compare|compared|comparison|difference|differences|between|versus|timing|time|times|schedule|interval|intervals|frequency|duration|urgency|urgent|priority|role|indication|indications|indicated|contraindicated|preferred|preferable|recommendation|recommendations)$/;
+    // Uppercase tokens that are notation, not a topic ("IV", "BD", "ICU"), so they never count as a new subject.
+    var MAIK_ACRO_OK = /^(OK|IV|IM|PO|SC|SL|PR|BD|TDS|TID|OD|QID|HS|ICU|ER|ED|OPD|IPD|MG|ML|KG|HR|BP|RR|CT|MRI|USG|CXR|CBC|ABG|LFT|RFT|KFT|TFT|ECG|EKG|PRN|SOS|STAT|RX|MX|DX|DDX|HX|PT|ASAP|FYI|MEQ|MMOL|DL|IU|GM|MCG|HRS|MIN|VS)$/;
+    function maikThreadBag() {
+      var s = "";
+      try {
+        if (_maikTopic) s += " " + (_maikTopic.topic || "") + " " + (_maikTopic.question || "");
+        _maikTurns.slice(-2).forEach(function (t) { s += " " + (t.q || "") + " " + (t.a || ""); });
+      } catch (e) {}
+      return s.toLowerCase();
+    }
+    /** Content tokens of q that the current thread has never mentioned. Empty = a follow-up. */
+    function maikNovelTokens(q) {
+      var raw = String(q || ""), bag = maikThreadBag(), out = [], caps = {};
+      // Acronyms ("SLE", "MI", "AF") are subjects even at 2-3 letters, but only in a normally-cased
+      // message: a SHOUTED message ("TELL ME DOSES") has no acronym signal at all.
+      var letters = raw.replace(/[^A-Za-z]/g, ""), upper = letters.replace(/[^A-Z]/g, "");
+      var shouting = letters.length >= 8 && upper.length / letters.length > 0.6;
+      if (!shouting) raw.replace(/\b[A-Z][A-Z0-9]{1,5}\b/g, function (w) { caps[w.toLowerCase()] = w; return w; });
+      var toks = maikNorm(maikDeslang(raw)).replace(/\?/g, "").split(" ").filter(Boolean);
+      toks.forEach(function (w) {
+        var isAcro = !!caps[w] && !MAIK_ACRO_OK.test(caps[w]);
+        if (!isAcro) {
+          if (w.length < 3 || /^\d/.test(w)) return;
+          if (GENERIC_FU.test(w) || MAIK_FU_FILLER.test(w)) return;
+        }
+        // Word-start match: "doses" finds "dose", "anticoagulants" finds "anticoagulant". A raw substring
+        // search let "MI" hide inside "immediately"; 2-3 letter tokens must match a whole word.
+        var stem = w.slice(0, Math.min(w.length, 6)).replace(/[^a-z0-9]/g, "");
+        if (stem && new RegExp("\\b" + stem + (w.length <= 3 ? "\\b" : "")).test(bag)) return;
+        out.push(w);
+      });
+      return out;
     }
     // Phase 2 — streaming is ON by default (self-falls-back on any failure); set localStorage
     // smd_maik_stream="0" to force the classic non-stream path.
@@ -6289,7 +6352,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
        * an id was actually captured, so it can never promise a page that does not exist.
        */
       try {
-        if (_maikKbId) {
+        // Only offer the page when one actually exists: 5% of disease ids have no curated record,
+        // and a chip that opens a slug-titled stub is worse than no chip at all.
+        var _kbOk = _maikKbId && !(window.SMD_REASON && SMD_REASON.hasDiseaseRef)
+          ? false                                  // cannot verify -> do not promise
+          : !!(_maikKbId && SMD_REASON.hasDiseaseRef(_maikKbId));
+        if (_kbOk) {
           var _kbNm = _maikKbName || topicLabel || "this topic";
           think.insertAdjacentHTML("beforeend",
             '<button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(_maikKbId) + '">' +
@@ -6379,6 +6447,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { scroll(); } catch (e) {}
     }
     function runClinical(question, retrieval, depth, active, topicLabel) {
+      var userQ = _maikUserQ || question; _maikUserQ = null;   // what the clinician typed, before any topic prefix
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; maikSetSendMode(true);
@@ -6564,6 +6633,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             return;
           }
           if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4);
+          // The recent turns still travel (a colleague remembers the conversation), but a NEW question must
+          // not be merged with the previous condition. The server prompt reads this flag.
+          if (pkg && pkg.history && pkg.history.length && !_maikFollowUp) pkg.newTopic = true;
           // ASSUME tier: partial KB match → answer the NEAREST topic (grounding already scoped to it)
           // under a STATED assumption; maikRenderAnswer prints the banner + refine chips. Same single
           // grounded call as the confident path — no extra tokens, we just stopped dead-ending.
@@ -6781,13 +6853,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(okMsg, okMsg); else okMsg(); } catch (e) { okMsg(); }
               }));
               acts.appendChild(act("Regenerate", function () {
-                // Drop the cached render for this question, ask for sampling jitter, and resend.
+                // Drop the cached render for this question, ask for sampling jitter, and re-run the SAME
+                // resolved call. It used to put `question` back in the composer and send(): `question` is
+                // the topic-prefixed rewrite, so the clinician's own bubble reappeared as "IRIS: Iris in
+                // aids", got prefixed AGAIN on the way through ("IRIS: IRIS: Iris in aids"), and the
+                // answer drifted further each time (owner transcript, 2026-09-20).
                 try { delete _maikCache[maikNorm(question) + (maikActiveCase() ? "|case" : "")]; } catch (e) {}
+                if (_maikBusy) return;
                 _maikRegen = true;
-                try { qEl.value = question; } catch (e) {}
-                send();
+                runClinical(question, retrieval, depth, active, topicLabel);
               }));
-              acts.appendChild(act("Edit", function () { try { qEl.value = question; qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); } catch (e) {} }));
+              acts.appendChild(act("Edit", function () { try { qEl.value = userQ; qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); } catch (e) {} }));
               w.appendChild(acts);
               var up = mk("Yes", "up"), dn = mk("No", "down");
               w.appendChild(up); w.appendChild(dn); host.appendChild(w);
@@ -6965,25 +7041,29 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
       if (_researchMode) { maikRunResearch(q); return; }
       var active = maikActiveCase();
+      _maikUserQ = q; _maikFollowUp = false;
       if (maikV2()) {
         var fu = maikResolveFollowup(q);
         if (fu && fu.clarify) { bubble("ai", '<div class="maik-welcome">' + maikEscH(fu.clarify) + '</div>'); return; }
-        if (fu) { runClinical(fu.question, fu.retrieval, fu.depth, active, fu.topic); return; }
+        if (fu) { _maikFollowUp = true; runClinical(fu.question, fu.retrieval, fu.depth, active, fu.topic); return; }
       }
       var route = maikRoute(q, active);
       if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
       if (route.kind === "calculator") { bubble("ai", maikCalcHTML(route.calc, q)); try { scroll(); } catch (e) {} return; }
       // CONTINUITY on every engine (owner, 2026-09-19: "no one should feel every question is a new
       // question"). maikResolveFollowup() knows the common follow-up shapes; anything else that arrives
-      // while a topic is live, is short, and names no KB topic of its own ("Just tell me which
-      // investigations should I send? In one line") is a follow-up on that topic: the topic goes into
-      // the question the model sees AND into retrieval, so the KB passage is about hematuria, not about
-      // whichever chapter happens to contain the word "send".
+      // while a topic is live, is short, and BRINGS NO NEW SUBJECT (see maikNovelTokens: "Just tell me
+      // which investigations should I send? In one line") is a follow-up on that topic: the topic goes
+      // into the question the model sees AND into retrieval, so the KB passage is about hematuria, not
+      // about whichever chapter happens to contain the word "send". A message with a subject the thread
+      // has never mentioned ("Afib Ecg", "what is SLE", "scrub typhus") is a new question and is asked
+      // as one (owner transcripts, 2026-09-20).
       if (maikV2() && route.kind === "clinical" && _maikTopic && _maikTopic.topic && (!_maikTopic.ts || (Date.now() - _maikTopic.ts) < 30 * 60 * 1000)) {
         var _fwc = maikNorm(q).split(" ").filter(Boolean).length;
         var _own = false;
         try { if (window.MaiKKB && MaiKKB.resolveTarget) { var _t = MaiKKB.resolveTarget(maikNorm(q), { question: maikNorm(q), grounding: [], topicMatch: { matched: false } }); _own = !!(_t && _t.confident); } } catch (e) {}
-        if (!_own && _fwc <= 14) {
+        if (!_own && _fwc <= 14 && !maikNovelTokens(q).length) {
+          _maikFollowUp = true;
           var _fq = _maikTopic.topic + ": " + q.replace(/\?+$/, "").trim();
           var _fdepth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
           runClinical(_fq, _maikTopic.topic + " " + q, _fdepth, active, _maikTopic.topic); return;
@@ -7003,6 +7083,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // timing") is about the topic we are on, not a new question with a missing subject. Ask it in
         // that context instead of asking the doctor what they meant (owner screenshot, 2026-09-18).
         if (maikV2() && _maikTopic && _maikTopic.topic && (!_maikTopic.ts || (Date.now() - _maikTopic.ts) < 30 * 60 * 1000)) {
+          // A bare acronym ("SLE", "MI") or a word the thread never mentioned is a new subject, not a
+          // vague reference to the topic. Ask it fresh; the model knows what SLE is even when the
+          // scope classifier does not. Only a phrase with no subject of its own stays on the topic.
+          if (/^[A-Z][A-Z0-9]{1,5}\??$/.test(q.trim()) || maikNovelTokens(q).length) {
+            runClinical(q, q, "concise", active, maikCanonTopic(q)); return;
+          }
+          _maikFollowUp = true;
           var _cq = _maikTopic.topic + ": " + q.replace(/\?+$/, "").trim();
           runClinical(_cq, _maikTopic.topic + " " + q, "concise", active, _maikTopic.topic); return;
         }
@@ -7023,6 +7110,24 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
     try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.wireChip) SMD_MAIK_ENGINE.wireChip(sheet); } catch (e) {}
     // ── Export conversation (Copy / Text / PDF) ───────────────────────────
+    /* textContent flattens "<li>Paclitaxel</li><li>Pomalidomide</li>" to "PaclitaxelPomalidomide" and
+     * "<sup>3</sup>Fluids" to "3Fluids" (owner PDF export, 2026-09-20). Put a line break at every block
+     * boundary, a dash on list items, a pipe between table cells and brackets round citation marks. */
+    function maikBubbleText(el) {
+      try {
+        var c = el.cloneNode(true);
+        Array.prototype.forEach.call(c.querySelectorAll("sup"), function (x) { x.textContent = " [" + (x.textContent || "").trim() + "] "; });
+        Array.prototype.forEach.call(c.querySelectorAll("br"), function (x) { x.insertAdjacentText("afterend", "\n"); });
+        Array.prototype.forEach.call(c.querySelectorAll("td,th"), function (x) { x.insertAdjacentText("beforeend", " | "); });
+        Array.prototype.forEach.call(c.querySelectorAll("li,p,div,h1,h2,h3,h4,h5,h6,tr,blockquote,pre,details,summary"), function (b) {
+          b.insertAdjacentText("afterbegin", b.tagName === "LI" ? "\n- " : "\n");
+          b.insertAdjacentText("beforeend", "\n");
+        });
+        return (c.textContent || "").replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n").replace(/\n\n(- )/g, "\n$1").trim();
+      } catch (e) {
+        return (el.textContent || "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
+      }
+    }
     function maikTranscript() {
       var out = [], parts = [];
       var nodes = body ? body.querySelectorAll(".maik-b") : [];
@@ -7033,7 +7138,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // sources and the per-bubble disclaimer are UI (owner PDF export, 2026-09-19, read
         // "Know more →℞ Create prescription ... CopyRegenerateEditYesNo⏱ first token 7.2s").
         if (!you) { try { el = n.cloneNode(true); Array.prototype.forEach.call(el.querySelectorAll(".maik-attr,.maik-refine,.maik-followups,.maik-tools,.maik-fb,.maik-src,.maik-edu,.maik-know,.maik-more,.maik-perf,.maik-figs,.maik-chip,.maik-fu,.maik-webbusy,button"), function (x) { x.remove(); }); } catch (e) { el = n; } }
-        var t = (el.textContent || "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
+        var t = maikBubbleText(el);
         if (!t) return;
         out.push(who + ": " + t);
         parts.push('<div class="q">' + who + '</div><div class="a">' + maikEscH(t) + '</div>');
@@ -7367,12 +7472,30 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
        * than doing nothing, because a dead control is worse than an honest one. */
       var kbm = ev.target && ev.target.closest ? ev.target.closest("[data-kb-more]") : null;
       if (kbm) {
+        ev.preventDefault();
         var _kbid = kbm.getAttribute("data-kb-more");
         try { if (window.SMD_HAPTICS && SMD_HAPTICS.tap) SMD_HAPTICS.tap(); } catch (e) {}
-        try {
-          if (window.SMD_REASON && SMD_REASON.openDiseaseRef && _kbid) SMD_REASON.openDiseaseRef(_kbid);
-          else toast("Knowledge Base reference is not available here.");
-        } catch (e) { toast("Could not open that Knowledge Base page."); }
+        /* CLOSE MaiK FIRST, then open the reference — the same trap the copilot tool chips above
+         * document. #maikSheet is z-index 999 and .dx-overlay is 850, so opening the disease page
+         * with the sheet still up renders it BEHIND MaiK: fully working, completely invisible,
+         * which is exactly what "the chip doesn't do anything" looks like (owner, 2026-09-20).
+         *
+         * And it must be openRef(), not openDiseaseRef(). openDiseaseRef() writes into `root`
+         * (#dxOverlay) assuming the reasoning workspace is already built and on screen; called cold
+         * from the MaiK sheet `root` is still null, so it throws before rendering anything.
+         * openRef() is the documented entry point for exactly this - "open ANY disease's reference
+         * panel from outside the reasoning workspace" - and does ensureRoot() plus the
+         * dx-reference-mode/on/dx-lock classes that actually make the panel visible.
+         */
+        if (!(window.SMD_REASON && SMD_REASON.openRef && _kbid)) {
+          toast("Knowledge Base reference is not available here.");
+          return;
+        }
+        try { close(); } catch (e) {}
+        setTimeout(function () {
+          try { SMD_REASON.openRef(_kbid, { from: "maik" }); }
+          catch (e) { toast("Could not open that Knowledge Base page."); }
+        }, 180);
         return;
       }
       var know = ev.target && ev.target.closest ? ev.target.closest(".maik-know") : null;
@@ -7780,7 +7903,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →";
         var raw = (r && r.findings) || [];
         var keys = raw.map(function (f) { return typeof f === "string" ? f : (f && f.key); }).filter(Boolean);
-        if (!keys.length) { bubble("ai", '<div class="maik-welcome">I couldn’t map that to any findings in StewardMD’s catalog. Try naming the symptoms, signs, or labs explicitly — e.g. “fever, neck stiffness, photophobia”.</div>'); return; }
+        // A toast, not a bubble: this is a tool result, not something MaiK said. As a bubble it landed in
+        // the transcript as two orphan MaiK turns under a finished answer (owner PDF, 2026-09-20).
+        if (!keys.length) { toast("Couldn\u2019t map that to StewardMD findings. Name the symptoms, signs or labs explicitly, e.g. fever, neck stiffness, photophobia."); return; }
         try { DX.addFindings(keys); } catch (e) {}
         var labelOf = {}; catalog.forEach(function (c) { labelOf[c.key] = c.label || c.key; });
         var names = keys.map(function (k) { return labelOf[k] || k; });

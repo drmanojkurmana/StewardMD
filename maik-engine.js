@@ -1266,6 +1266,10 @@
         ? "On-device \u00b7 StewardMD knowledge base, verify independently"
         : "On-device \u00b7 AI-generated, no sources, verify independently";
     }
+    // Pref is on-device but the pack cannot answer yet, so KB only is standing in. Say so: the KB
+    // switch reads "disconnected" while this footer names the knowledge base, and without the
+    // reason that looks like the footer ignoring the switch (owner, 2026-09-20).
+    if (e === "rag" && getPref() === "local") return "Knowledge base (on-device model not ready) \u00b7 verify independently";
     if (e === "rag") return "StewardMD knowledge base \u00b7 verify independently";
     return "Grounded \u00b7 AI-generated, verify independently";
   }
