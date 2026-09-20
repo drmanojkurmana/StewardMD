@@ -7055,7 +7055,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // Evidence Review is a cloud feature. With an on-device engine selected the old path refused
         // ("Evidence Review is a MaiK Cloud feature") and answered nothing; owner transcript 2026-09-21,
         // "Which is better in Esophageal Varices". Answer it on-device instead, and say why once.
-        var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.effective ? SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
+        var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective ? window.SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
         if (!_eff || _eff === "cloud") { maikRunResearch(q); return; }
         try { toast("Evidence Review needs MaiK Cloud. Answering on-device."); } catch (e) {}
       }
