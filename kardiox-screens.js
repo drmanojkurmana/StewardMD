@@ -863,7 +863,7 @@
           '<button class="kx-btn kx-btn-primary" type="button" data-act="kxnav:export">' + ic("picture_as_pdf") + 'Export</button>' +
           '<button class="kx-btn kx-btn-secondary" type="button" data-act="kxnav:compare">' + ic("compare_arrows") + 'Compare</button>' +
         '</div>' +
-        '<div class="kx-disc">' + ic("info") + 'AI-generated · advisory only (beta). Not a diagnosis; confirm clinically. Not liable for any clinical decision or outcome.</div>' +
+        '<div class="kx-disc">' + ic("info") + 'Beta, in active development. It may not perform to the mark, so check every result yourself. AI-generated, advisory only. Not a diagnosis; confirm clinically. Not liable for any clinical decision or outcome.</div>' +
       '</div>';
   
     host.innerHTML = head + body;

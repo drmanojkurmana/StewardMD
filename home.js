@@ -1895,19 +1895,39 @@
     return '<button class="rnav-tile" data-act="' + act + '" aria-label="' + tt + '">' + ric(icon) +
       '<span class="rnav-tile-tt">' + tt + '</span><span class="rnav-tile-sub">' + sub + '</span></button>';
   }
+  /* Experimental imaging-AI tile gate (ThoreX / KardiQ X / SknX / FundX). Order is deliberate:
+   *   1. the module's own isOn() (the access-code / tester path)   — unchanged
+   *   2. ?thorex=1 / ?thorex=0 style query param                   — unchanged, still authoritative
+   *   3. localStorage "1" = on, any other explicit value = off     — unchanged, a tester's "0" wins
+   *   4. only when NOTHING above decided: Physician Pro early access (owner decision 2026-09-18).
+   * So a non-physicianpro account with no flag still sees no tile and fetches nothing, and a tester
+   * who deliberately turned a module off keeps it off. */
+  function earlyAccessTier() { try { return !!(window.SMD_PRO && window.SMD_PRO.tierSync) && window.SMD_PRO.tierSync() === "physicianpro"; } catch (e) { return false; } }
+  function expTileOn(lsKey, param, modName) {
+    try {
+      var mod = modName && window[modName];
+      if (mod && mod.isOn && mod.isOn()) return true;
+      var q = (location.search.match(new RegExp("[?&]" + param + "=([^&]+)")) || [])[1];
+      if (q != null) return (q === "1" || q === "on" || q === "true");
+      var v = localStorage.getItem(lsKey);
+      if (v === "1") return true;
+      if (v != null) return false;                 // tester turned it off explicitly
+      return earlyAccessTier();
+    } catch (e) { return false; }
+  }
   // ---- Home "Clinical tools" registry (data-driven so users can customise the grid) ----------
   // eligible(): flag/entitlement gate — a locked/off tool never shows and never appears in Customize.
   // defOn: shown by default; users show/hide via the "Add Tool" -> Customize sheet (saved on device,
   // key smd_home_tools). feat: dark "signature" badge. Icons are Material Symbols (ric).
   var HOME_TOOLS = [
-    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, anim: "eye",
-      eligible: function () { try { var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_fundx") === "1"); } catch (e) { return false; } } },
-    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG", feat: true, anim: "ecg",
-      eligible: function () { try { if (window.KARDIOX && KARDIOX.isOn) return KARDIOX.isOn(); var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") === "1"); } catch (e) { return false; } } },
-    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray", feat: true, anim: "cxr",
-      eligible: function () { try { if (window.THOREX && THOREX.isOn) return THOREX.isOn(); var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); } catch (e) { return false; } } },
-    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, anim: "derm",
-      eligible: function () { try { if (window.SKNX && SKNX.isOn) return SKNX.isOn(); var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") === "1"); } catch (e) { return false; } } },
+    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, beta: true, anim: "eye",
+      eligible: function () { return expTileOn("smd_fundx", "fundx", null); } },
+    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG", feat: true, beta: true, anim: "ecg",
+      eligible: function () { return expTileOn("smd_kardiox", "kardiox", "KARDIOX"); } },
+    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray", feat: true, beta: true, anim: "cxr",
+      eligible: function () { return expTileOn("smd_thorex", "thorex", "THOREX"); } },
+    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, beta: true, anim: "derm",
+      eligible: function () { return expTileOn("smd_sknx", "sknx", "SKNX"); } },
     { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
       eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") === "1"); } catch (e) { return false; } } },
     // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
@@ -2098,8 +2118,11 @@
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
-    return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + '">' +
+    // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
+    // that renders it (access code, tester flag, Physician Pro early access). Not dismissible.
+    return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + (t.beta ? ', beta' : '') + '">' +
       '<span class="rnav-badge">' + icon + '</span>' +
+      (t.beta ? '<span class="rnav-tile-beta">BETA</span>' : '') +
       '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
@@ -2109,6 +2132,9 @@
       '<span class="rnav-badge">' + ric("add") + '</span><span class="rnav-tile-tt">Add Tool</span><span class="rnav-tile-sub">Customize</span></button>';
     return html;
   }
+  // The tier verdict arrives from /api/billing/status after first paint, so a Physician Pro on a
+  // fresh device would otherwise not see the early-access tiles until the next launch.
+  try { window.addEventListener("smd:tier", function () { var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid(); }); } catch (e) {}
   function openToolsCustomize() {
     var rows = "", TOOLS = orderedHomeTools();
     for (var i = 0; i < TOOLS.length; i++) {
@@ -4125,6 +4151,9 @@
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
+  // The KB disease this answer was grounded on, captured in send() before maik-local.js strips
+  // pkg.grounding. Drives the "Read more in StewardMD KB" chip under the answer.
+  var _maikKbId = null, _maikKbName = "";
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
   var _maikSkipCalc = false;          // set true for ONE send by "Ask MaiK anyway" on a calculator card → bypass the zero-token calculator route once
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
@@ -4768,7 +4797,7 @@
           // IMAGE, on-device engines only. Rendered hidden and revealed by maikSyncImageBtn() once
           // the selected engine is on-device AND that pack can see AND its projector is downloaded.
           // Cloud/KB answers have no image path, so showing it there would be a dead button.
-          '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
+          '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image or PDF offline" aria-label="Read an image or PDF with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
           '<input type="file" id="maikImgFile" accept="image/*,application/pdf" hidden>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask MaiK…"></textarea>' +
           '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
@@ -4947,10 +4976,11 @@ body.maik-lb-on{overflow:hidden}
 .maik-lb-wrap img{max-width:100%;max-height:100%;object-fit:contain;background:#fff;border-radius:10px;cursor:pointer}
 .maik-lb-foot{padding:10px 16px calc(14px + env(safe-area-inset-bottom));color:#b9cbc7;font:500 12px/1.45 'Inter';text-align:center}
 .maik-lb-foot span{display:block;margin-top:3px;color:#7fd6c4;font-weight:700}
-/* Research: one primary action, visibly not a chip */
-.maik-chip.maik-research{background:var(--mk-teal,#0e6e63);color:#fff;border-color:transparent;font-weight:700;letter-spacing:.01em;box-shadow:0 1px 2px rgba(14,110,99,.25)}
-.maik-chip.maik-research .smd-ico{opacity:.95}
-.maik-chip.maik-research:active{transform:translateY(1px)}
+/* Research: one primary action, visibly not a chip. Own class, because .maik-research is the
+   composer's fixed 36/44px round icon button and would collapse this label. */
+.maik-chip.maik-webchip{background:var(--mk-teal,#0e6e63);color:#fff;border-color:transparent;font-weight:700;letter-spacing:.01em;box-shadow:0 1px 2px rgba(14,110,99,.25)}
+.maik-chip.maik-webchip .smd-ico{opacity:.95}
+.maik-chip.maik-webchip:active{transform:translateY(1px)}
 /* action buttons confirm in place */
 .maik-act{transition:background .12s ease,color .12s ease,transform .1s ease}
 .maik-act:active{transform:translateY(1px)}
@@ -5190,12 +5220,33 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-src li{margin:2px 0}
 .maik-more{background:none;border:none;color:var(--mk-teal);font:700 12px 'Inter';cursor:pointer;padding:4px 0}
 /* Concise-first "Know more →" pill + the revealed tier-2 detail. */
-.maik-know{display:inline-flex;align-items:center;gap:5px;margin:11px 0 2px;padding:8px 15px;border:1px solid var(--mk-teal);background:var(--mk-tsoft);color:var(--mk-teal);border-radius:999px;font:700 12.5px 'Inter';cursor:pointer;transition:background .15s,color .15s}
+.maik-know{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;max-width:100%;white-space:nowrap;margin:11px 0 2px;padding:8px 15px;border:1px solid var(--mk-teal);background:var(--mk-tsoft);color:var(--mk-teal);border-radius:999px;font:700 12.5px 'Inter';cursor:pointer;transition:background .15s,color .15s}
 .maik-know:hover{background:var(--mk-teal);color:#fff}
+/* "Read more in StewardMD KB" — the free, curated, offline route out of a generated answer.
+   It GLOWS (owner's word) because it has to win attention against the refine chips below it, which
+   look similar and cost tokens. The pulse runs three times and stops: a control that never stops
+   moving becomes furniture, and an indefinite animation next to clinical text is a distraction.
+   prefers-reduced-motion drops the animation and keeps the ring, so the emphasis survives. */
+.maik-kbmore{display:inline-flex;align-items:center;gap:9px;max-width:100%;margin:12px 0 2px;padding:10px 14px;
+ border:1px solid var(--mk-teal,#0e6e63);border-radius:13px;background:var(--mk-tsoft,#e6f4f1);
+ color:var(--mk-teal,#0e6e63);font:700 13px/1.25 var(--sans,system-ui);cursor:pointer;text-align:left;
+ box-shadow:0 0 0 0 rgba(14,110,99,.45);animation:maikKbGlow 2.1s ease-out 3}
+.maik-kbmore .maik-kbmore-ic{display:inline-flex;flex:0 0 auto;opacity:.95}
+.maik-kbmore .maik-kbmore-sub{display:block;font:600 11px/1.35 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:2px;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:210px}
+.maik-kbmore .maik-kbmore-go{flex:0 0 auto;margin-left:auto;padding-left:6px;font-weight:800}
+.maik-kbmore:active{transform:scale(.985)}
+.maik-kbmore:focus-visible{outline:2px solid var(--mk-teal,#0e6e63);outline-offset:2px}
+@keyframes maikKbGlow{0%{box-shadow:0 0 0 0 rgba(14,110,99,.45)}70%{box-shadow:0 0 0 9px rgba(14,110,99,0)}100%{box-shadow:0 0 0 0 rgba(14,110,99,0)}}
+@media (prefers-reduced-motion:reduce){.maik-kbmore{animation:none;box-shadow:0 0 0 3px rgba(14,110,99,.16)}}
+body.dark .maik-kbmore,body.v3-dark .maik-kbmore{background:rgba(14,110,99,.16)}
 .maik-detail{margin-top:6px;padding-top:10px;border-top:1px dashed var(--mk-bd)}
 .maik-detail[hidden]{display:none}
 /* generic chips still used by web-research / Rx / help / patient / extract replies */
-.maik-chip{background:var(--mk-tsoft);border:1px solid var(--mk-tsoft);border-radius:999px;padding:6px 11px;font:600 11.5px 'Inter';color:var(--mk-teal);cursor:pointer}
+.maik-chip{display:inline-flex;align-items:center;justify-content:center;gap:5px;vertical-align:middle;flex:0 0 auto;min-width:0;max-width:100%;width:auto;height:auto;white-space:nowrap;background:var(--mk-tsoft);border:1px solid var(--mk-tsoft);border-radius:999px;padding:6px 11px;font:600 11.5px 'Inter';color:var(--mk-teal);cursor:pointer}
+/* Action chips sit loose in the answer bubble (no flex/gap parent): space them, and let the row
+   break between whole chips on a narrow screen. */
+.maik-b>.maik-chip,.maik-b>.maik-know{margin-right:6px}
 .maik-chip:hover{border-color:var(--mk-teal)}
 .maik-chip:active{transform:scale(.96)}
 /* status / helper note bubbles */
@@ -5817,7 +5868,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).catch(function () { _fsResumeW(); _webFail(); });
     }
     function maikWebChipEl(q) {
-      var rb = document.createElement("button"); rb.className = "maik-chip maik-research"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research";
+      var rb = document.createElement("button"); rb.className = "maik-chip maik-webchip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research";
       rb.addEventListener("click", function () { maikRunWeb(rb.parentNode || body, q, rb); });
       return rb;
     }
@@ -6224,6 +6275,30 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // deterministic contextual follow-ups (0 tokens) — appended into the cached HTML; a single
       // delegated listener on the chat body handles taps even after cache restore.
       // UpToDate-style LLM refinement chips first (primary), then the KB-derived follow-ups.
+      /* READ MORE IN THE StewardMD KB (owner, 2026-09-20: "once i ask Myocardial Infarction why not
+       * show read more in StewardMD KB chip glowing below?").
+       *
+       * When the answer was grounded on a disease we hold a full curated record for, offer that
+       * record. This is the cheapest good answer in the app: openDiseaseRef() is local, instant,
+       * costs no tokens and works with no network, and for a named-disease question it is usually
+       * MORE complete than the generated prose above it - management brief, investigations,
+       * disposition, mimics, red flags, all curated rather than synthesised.
+       *
+       * Placed BEFORE the refine chips deliberately: those spend tokens, this does not, so the free
+       * and more authoritative route is the one under the reader's thumb first. It only renders when
+       * an id was actually captured, so it can never promise a page that does not exist.
+       */
+      try {
+        if (_maikKbId) {
+          var _kbNm = _maikKbName || topicLabel || "this topic";
+          think.insertAdjacentHTML("beforeend",
+            '<button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(_maikKbId) + '">' +
+              '<span class="maik-kbmore-ic">' + MK.spark + '</span>' +
+              '<span>Read more in StewardMD KB<span class="maik-kbmore-sub">' + maikEscH(_kbNm) + '</span></span>' +
+              '<span class="maik-kbmore-go" aria-hidden="true">→</span>' +
+            '</button>');
+        }
+      } catch (e) {}
       var refineHTML = maikRefineHTML(question, _refine.chips);
       if (refineHTML) think.insertAdjacentHTML("beforeend", refineHTML);
       // Related figures (owner, 2026-09-18): the search-result image from a trusted medical page with
@@ -6433,7 +6508,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // "MaiK took too long" hang that hit every signed-in account except the already-warm ones.
           // If grounding doesn't finish in time, send the question WITHOUT KB grounding (the server's
           // general-knowledge mode still answers) so the clinician always gets a reply instead of a hang.
-          var groundP = window.StewardRAG
+          /* RAG DISCONNECTED: don't build a package nobody will read (owner, 2026-09-20).
+           *
+           * With the Knowledge Base unlinked the on-device engine grounds on nothing, so
+           * StewardRAG.ready() + buildPackage() is pure cost: it warms a 20 MB disease index and
+           * makes a /api/retrieve round trip whose result is then discarded. Worse, it is cost on
+           * the ONE path that is supposed to be fastest and to work with no network.
+           *
+           * The stand-in is the SAME shape the timeout/reject arms already return, so nothing
+           * downstream needs to know. topicMatch stays absent, which matters: the web-research
+           * tier below fires on `tm && tm.matched === false`, so a null topicMatch skips it rather
+           * than sending an offline clinician to a tier that needs the network.
+           */
+          var _ragOff = false;
+          try {
+            var _E = window.SMD_MAIK_ENGINE;
+            _ragOff = !!(_E && _E.effective && _E.effective() === "local" && _E.ragLinked && !_E.ragLinked());
+          } catch (e) {}
+          var groundP = _ragOff
+            ? Promise.resolve({ question: question, grounding: [] })
+            : window.StewardRAG
             ? Promise.resolve(StewardRAG.ready()).then(function () { return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question }); })
             : Promise.reject(new Error("no-kb"));
           return Promise.race([
@@ -6443,6 +6537,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         })
         .then(function (pkg) {
           if (pkg && question) pkg.question = question;
+          /* CAPTURE THE KB DISEASE ID HERE, while the package still has one.
+           *
+           * The "Read more in StewardMD KB" chip needs the disease id, and this is the last point
+           * every engine still carries it: maik-local.js deliberately strips pkg.grounding before an
+           * on-device answer renders (an engine that read none of the KB must not display its
+           * citations), so reading it at render time would work on Cloud and silently never appear
+           * offline - the exact place the chip is most useful, because offline there is no web tier
+           * to fall back on.
+           */
+          try {
+            var _g0 = pkg && pkg.grounding && pkg.grounding[0];
+            _maikKbId = (_g0 && _g0.diseaseId) || null;
+            _maikKbName = (_g0 && _g0.diseaseName) || (_g0 && _g0.name) || "";
+          } catch (e) { _maikKbId = null; _maikKbName = ""; }
           var tm = (pkg && pkg.topicMatch) || null;
           // NONE tier: topic genuinely absent from the KB. MaiK answers every question, so
           // instead of dead-ending we AUTO-RUN web research (Google-grounded, clearly labelled
@@ -6668,7 +6776,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               var acts = document.createElement("span"); acts.className = "maik-acts";
               acts.appendChild(act("Copy", function () {
                 var txt = "";
-                try { var cl = host.cloneNode(true); Array.prototype.forEach.call(cl.querySelectorAll(".maik-fb,.maik-followups,.maik-tools,.maik-refine,.maik-chip,.maik-src,.maik-attr,.maik-edu,.maik-know,.maik-perf,.maik-webbusy"), function (x) { x.remove(); }); txt = cl.innerText.trim(); } catch (e) { try { txt = host.innerText; } catch (e2) {} }
+                try { var cl = host.cloneNode(true); Array.prototype.forEach.call(cl.querySelectorAll(".maik-fb,.maik-followups,.maik-tools,.maik-refine,.maik-chip,.maik-src,.maik-attr,.maik-edu,.maik-know,.maik-perf,.maik-webbusy,.maik-kbmore"), function (x) { x.remove(); }); txt = cl.innerText.trim(); } catch (e) { try { txt = host.innerText; } catch (e2) {} }
                 var okMsg = function () { try { toast("Copied"); } catch (e) {} };
                 try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(okMsg, okMsg); else okMsg(); } catch (e) { okMsg(); }
               }));
@@ -6907,7 +7015,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask MaiK…"; qEl.focus(); } }
@@ -7253,6 +7361,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // from cache), so it keeps working when a saved conversation is reopened.
       // "Know more →": lazy mode fetches the tier-2 detail on demand; concise-first mode reveals the
       // detail already in the bubble. Delegated so it survives a cache-restored thread.
+      /* "Read more in StewardMD KB". Delegated like every other chip so it survives a thread being
+       * rebuilt from cache. Opens the curated disease reference: local, instant, no tokens, works
+       * offline. If reasoning.js is not loaded (it is lazy on some routes) the chip says so rather
+       * than doing nothing, because a dead control is worse than an honest one. */
+      var kbm = ev.target && ev.target.closest ? ev.target.closest("[data-kb-more]") : null;
+      if (kbm) {
+        var _kbid = kbm.getAttribute("data-kb-more");
+        try { if (window.SMD_HAPTICS && SMD_HAPTICS.tap) SMD_HAPTICS.tap(); } catch (e) {}
+        try {
+          if (window.SMD_REASON && SMD_REASON.openDiseaseRef && _kbid) SMD_REASON.openDiseaseRef(_kbid);
+          else toast("Knowledge Base reference is not available here.");
+        } catch (e) { toast("Could not open that Knowledge Base page."); }
+        return;
+      }
       var know = ev.target && ev.target.closest ? ev.target.closest(".maik-know") : null;
       if (know) {
         var kbub = know.closest(".maik-b.ai"); var kdet = kbub && kbub.querySelector(".maik-detail");
@@ -7481,11 +7603,49 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       });
     }
 
+    /* LOAD pdf.js ON DEMAND (owner, 2026-09-20: "picture upload button also accept pdf files").
+     *
+     * PDF staging was already written, but this function only ever READ window.pdfjsLib and gave up
+     * if it was absent - and nothing in the MaiK path ever loads it. pdf.js is lazy-loaded by icu.js
+     * and medlist.js, so attaching a PDF here worked ONLY if the clinician happened to have opened
+     * ICU or MedList earlier in the same session, and otherwise failed with "Could not read that
+     * PDF." That is why the button looked like it did not accept PDFs at all.
+     *
+     * Same loader the other two use: the LOCAL vendor copy first (offline is the whole point of the
+     * on-device model), CDN only as a fallback for a web session where the bundle is absent. Cached
+     * on window so a second PDF in the same session costs nothing.
+     */
+    var PDFJS_L = "/vendor/pdfjs/pdf.min.js", PDFJS_LW = "/vendor/pdfjs/pdf.worker.min.js";
+    var PDFJS_C = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+    var PDFJS_CW = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    function maikLoadPdfJs() {
+      if (window.pdfjsLib) {
+        try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_LW; } catch (e) {}
+        return Promise.resolve(window.pdfjsLib);
+      }
+      return new Promise(function (res, rej) {
+        function load(src, worker, next) {
+          var s = document.createElement("script");
+          s.src = src;
+          s.onload = function () {
+            try {
+              var lib = window.pdfjsLib;
+              if (!lib) throw new Error("pdf-empty");
+              lib.GlobalWorkerOptions.workerSrc = worker;
+              res(lib);
+            } catch (e) { if (next) next(); else rej(e); }
+          };
+          s.onerror = function () { if (next) next(); else rej(new Error("pdf-load")); };
+          document.head.appendChild(s);
+        }
+        load(PDFJS_L, PDFJS_LW, function () { load(PDFJS_C, PDFJS_CW, null); });
+      });
+    }
+
     /** Rasterise page 1 of a PDF to a JPEG data URL, since the vision encoder needs pixels. */
     function maikPdfFirstPageDataUrl(file) {
-      var lib = window.pdfjsLib || null;
-      if (!lib) return Promise.reject(new Error("no pdf renderer"));
-      return file.arrayBuffer().then(function (buf) {
+      var lib = null;
+      return maikLoadPdfJs().then(function (l) { lib = l; return file.arrayBuffer(); }).then(function (buf) {
         return lib.getDocument({ data: new Uint8Array(buf) }).promise;
       }).then(function (doc) { return doc.getPage(1); }).then(function (page) {
         // ~1600 px on the long edge: enough for the model to read printed lab values, small enough

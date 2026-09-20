@@ -32,6 +32,8 @@ import * as PATHWAYS from "../../_pathways_store.js";
 import { submitFormResponse, patientFormResponses, intakeResponses, reviewIntake, intakeSettings } from "../../_wardsynq/form-response.js";
 import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
 import { notifyTimeline } from "../../_queue_notify.js";
+import { msgRefusalIfOut } from "../../_quota.js";
+import { getEntitlement as msgEntitlement } from "../../_entitlements.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { selfCreateTenant } from "../../_connect/enterprise/org.js";
@@ -6173,7 +6175,16 @@ export async function onRequest(context) {
       const sess = await Q.getOrCreateRoomSession(env, org, rm, url.searchParams.get("date") || "");
       await Q.recompute(env, sess);   // refresh ETAs/positions, then return only the LIVE queue (no terminal/checked-out)
       const active = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1);
-      return json({ ok: true, resolved: true, room: { id: rm.id, name: rm.name, number: rm.number, department: rm.department }, session: sess, tickets: await ticketView(env, orderRoomView(active)) }, 200, request);
+      /* Clinic Messaging: null unless the meter is on AND this doctor's allowance is spent, in which
+       * case the client pops the top-up sheet. The queue itself is unaffected either way.
+       * The entitlement must be read here: the allowance is included + whatever Clinic Messaging
+       * subscription the doctor holds, and without it a subscriber would be told they are out. */
+      let msgQuota = null;
+      try {
+        const ment = sess.doctorUid ? await msgEntitlement(env, sess.doctorUid) : null;
+        msgQuota = await msgRefusalIfOut(env, sess.doctorUid, { role: ment && ment.role, msgTier: ment && ment.msgTier, msgTierExp: ment && ment.msgTierExp });
+      } catch (e) { msgQuota = null; }
+      return json(Object.assign({ ok: true, resolved: true, room: { id: rm.id, name: rm.name, number: rm.number, department: rm.department }, session: sess, tickets: await ticketView(env, orderRoomView(active)) }, msgQuota ? { msgQuota } : {}), 200, request);
     }
     // Owner/admin mints the login-free wall-display link for a waiting-room screen (90-day, regenerable).
     if (method === "POST" && seg === "display-link") {

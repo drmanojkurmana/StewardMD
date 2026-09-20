@@ -3783,6 +3783,10 @@
       try { return window.SMD_REASON.assess(findings).infectious.some(function (x) { return x.matched; }); } catch (e) { return false; }
     },
     mimicsFor: mimicsFor,
+    // Open the curated KB reference for a disease id. Exported for home.js's "Read more in
+    // StewardMD KB" chip under a MaiK answer - the same screen the Knowledge Library opens, so
+    // there is one disease page in the app rather than a second, drifting copy of it.
+    openDiseaseRef: openDiseaseRef,
     flag: reasonV2,
     setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} },
     // specificity-aware ranking flag (smd_rank_v2, default ON) — instantly reversible.

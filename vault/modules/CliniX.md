@@ -5,6 +5,12 @@ flag: smd_clinix (client, def:TRUE since 2026-08-23 owner decision, ?clinix=1) +
 ---
 # CliniX
 
+**Pro lock (2026-09-17, owner):** Respiratory is free (`free: true` in `clinix/manifest.json`); the
+other systems need Pro. Rule lives in `clinix-model.js` (`systemLocked`, `openPackIds`), enforced in
+`clinix-screens.js` at the system card, `openDisease()`, `resume()`, and via `loadAllSkills(pro)`.
+Locked systems are shown with a "Pro" badge, never hidden. Asserted both ways in
+`test/run-clinix-ui.mjs` ("Pro lock"). See [[Decisions]].
+
 Clinical learning for medical students: patient approach → history → examination → reasoning →
 investigations → diagnosis → treatment → case → OSCE → viva. Design spec:
 `docs/superpowers/specs/2026-08-22-clinix-design.md`. Recovery point: tag `pre-clinix` (b2b1bdc).

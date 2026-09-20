@@ -38,9 +38,35 @@
   // rug from under the model currently answering. That exact confusion presented as "no answer".
   var KEY_PENDING = "stewardmd.maikPackPending";
 
+  /* RAG LINK (owner, 2026-09-19: "give option to link and unlink RAG to model").
+   *
+   * Whether a capable on-device pack reads the StewardMD book before answering. ON (default) is the
+   * shipped behaviour: retrieve, then check the answer claim by claim. OFF disconnects retrieval and
+   * the model answers from its own weights alone.
+   *
+   * DEFAULT ON, and it must stay that way. Unlinked is faster - retrieval adds ~393 prompt tokens,
+   * which is the whole on-device latency story - but an ungrounded 1.7B states a wrong regimen with
+   * total confidence. Speed is the clinician's call to make deliberately, never the default.
+   *
+   * This is a LINK switch, not a gate weakener: when RAG is connected the evidence gate still runs
+   * exactly as before. Disconnecting does not loosen grounding, it removes it, and discLabel() says
+   * so in the sheet header so the answer is never labelled with sources it did not read.
+   */
+  var KEY_RAG_LINK = "smd_maik_rag_linked";
+
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function lrem(k) { try { localStorage.removeItem(k); } catch (e) {} }
+
+  // ── RAG link (see KEY_RAG_LINK) ──
+  /** Is the Knowledge Base connected to the on-device model? Absent key = connected. */
+  function ragLinked() { return lget(KEY_RAG_LINK) !== "0"; }
+  /** Connect (true) or disconnect (false) the book. Returns the new state. */
+  function setRagLinked(on) {
+    if (on) lrem(KEY_RAG_LINK); else lset(KEY_RAG_LINK, "0");
+    try { syncDisc(); } catch (e) {}   // the header disclaimer changes meaning with this switch
+    return ragLinked();
+  }
 
   // ── preference ──
   function getPref() { var v = lget(KEY_ENGINE); return ENGINES[v] ? v : "cloud"; }
@@ -697,7 +723,26 @@
       '" style="margin:0;flex:1">' + label + '</button>';
   }
 
+  /* Styles for the grouped model list. Inline styles cannot reach ::-webkit-details-marker or an
+   * [open] state, so these four rules need a stylesheet; injected once, id-guarded, and scoped to
+   * .mk-grp so nothing else in Settings is touched. */
+  function injectGroupCSS() {
+    try {
+      if (typeof document === "undefined" || document.getElementById("mk-grp-css")) return;
+      var s = document.createElement("style");
+      s.id = "mk-grp-css";
+      s.textContent =
+        ".mk-grp>summary::-webkit-details-marker{display:none}" +
+        ".mk-grp>summary::marker{content:''}" +
+        ".mk-grp[open]>summary .mk-grp-cv{transform:rotate(90deg)}" +
+        ".mk-grp>summary .mk-grp-cv{display:inline-block;transition:transform .15s ease}" +
+        ".mk-grp>summary:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:-2px}";
+      (document.head || document.documentElement).appendChild(s);
+    } catch (e) {}
+  }
+
   function modelRowHTML() {
+    injectGroupCSS();
     var M = window.SMD_MAIK_MODELS;
     // Defensive: this renders inside the Settings panel, so a missing/older model module must
     // degrade to "no section" rather than throw and blank every setting below it.
@@ -706,7 +751,7 @@
     var ids = (M.packIds ? M.packIds() : Object.keys(M.PACKS));
     if (!ids.length) return "";
 
-    var rows = ids.map(function (id, i) {
+    function rowFor(id, i) {
       var p = M.PACKS[id];
       var on = id === active;
       var have = M.installedCached(id);
@@ -751,6 +796,68 @@
         // spending 851 MB on a projector for a model you do not have is not a choice worth offering.
         visionRowHTML(id, have) +
       '</div>';
+    }
+
+    /* CATEGORISED, NOT A LONGER LIST (owner, 2026-09-20: "categorise and sub categorise, keep info
+     * in sub categories", "without deleting any info").
+     *
+     * Ten packs in one flat column is a wall: every row carries a label, a status line, a progress
+     * bar, two buttons and sometimes a vision sub-row, so the clinician scrolls past ~8 screens of
+     * equally-weighted choices to find the one they want. Nothing is removed here - the same rows,
+     * the same statuses, the same actions - they are grouped by the question the clinician is
+     * actually asking, and every group but the first is collapsed so the page opens short.
+     *
+     * The grouping is DERIVED from the registry (own / caps.medical / the bonsai family), never a
+     * hand-kept list: a pack added to maik-models.js lands in the right group without touching this
+     * file, and cannot silently vanish - UNGROUPED catches anything that matches no rule.
+     *
+     * <details> rather than a JS accordion: it is keyboard- and screen-reader-correct for free,
+     * survives a re-render without state wiring, and the open/closed state is one attribute.
+     */
+    function capsOf(id) { try { return (M.caps && M.caps(id)) || {}; } catch (e) { return {}; } }
+    var GROUPS = [
+      { key: "own", title: "StewardMD's own", open: true,
+        note: "Trained by us on the StewardMD Knowledge Base.",
+        test: function (id) { return !!(M.PACKS[id] && M.PACKS[id].own); } },
+      { key: "medical", title: "Medically tuned", open: false,
+        note: "Third-party models fine-tuned on medical material.",
+        test: function (id) { return !!capsOf(id).medical; } },
+      { key: "bonsai", title: "Bonsai (ternary)", open: false,
+        note: "PrismML ternary builds - large models at a fraction of the memory.",
+        test: function (id) { return /bonsai/i.test(id); } },
+      { key: "general", title: "General purpose", open: false,
+        note: "Not medically tuned. Broader world knowledge, weaker clinical detail.",
+        test: function () { return true; } },
+    ];
+    var taken = {}, grouped = GROUPS.map(function (g) {
+      var mine = ids.filter(function (id) { return !taken[id] && g.test(id); });
+      mine.forEach(function (id) { taken[id] = 1; });
+      return { g: g, ids: mine };
+    });
+    // Nothing may be dropped by a rule change: anything unclaimed still gets a home.
+    var leftovers = ids.filter(function (id) { return !taken[id]; });
+    if (leftovers.length) grouped.push({ g: { key: "other", title: "Other", open: false, note: "" }, ids: leftovers });
+
+    var idx = 0;
+    var rows = grouped.filter(function (b) { return b.ids.length; }).map(function (b) {
+      var installed = b.ids.filter(function (id) { return M.installedCached(id); }).length;
+      var hasActive = b.ids.indexOf(active) !== -1;
+      // The group holding the answering model is always open, whatever its default: the clinician
+      // must be able to see what is answering without hunting for it.
+      var open = b.g.open || hasActive;
+      var body = b.ids.map(function (id) { return rowFor(id, idx++); }).join("");
+      return '<details class="mk-grp" data-mk-grp="' + b.g.key + '"' + (open ? " open" : "") + '>' +
+        '<summary style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;' +
+          'font:700 12.5px/1.3 var(--sans,system-ui);color:var(--ink,#14202b);background:var(--paper,#f6f7f5);' +
+          'border-bottom:1px solid var(--line,#e2e8f0)">' +
+          '<span class="mk-grp-cv" aria-hidden="true" style="color:var(--slate-soft,#5a7184);font-size:10px">▸</span>' +
+          '<span style="flex:1;min-width:0">' + esc(b.g.title) +
+            (b.g.note ? '<span style="display:block;font:500 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + esc(b.g.note) + '</span>' : "") +
+          '</span>' +
+          '<span style="flex:0 0 auto;font:700 10px/1 var(--sans,system-ui);color:var(--slate-soft,#5a7184);' +
+            'background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:3px 7px">' +
+            (installed ? installed + " of " + b.ids.length + " ready" : b.ids.length) + '</span>' +
+        '</summary>' + body + '</details>';
     }).join("");
 
     return '<div class="smd-nav-lbl" style="margin:14px 0 6px">On-device model</div>' +
@@ -759,8 +866,39 @@
       deviceWarnHTML() +
       '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff)">' + rows + '</div>' +
       '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
+      ragLinkHTML() +
       '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
       guideHTML();
+  }
+
+  /**
+   * Knowledge Base group for the on-device model: connect or disconnect the book.
+   *
+   * FIRST row in its own group on purpose (owner: "keep option above grounded on off toggle"), so a
+   * grounding switch lands underneath it rather than above. Reuses the app's .smd-nav-row / .smd-nav-sw
+   * switch markup so it is the same control the rest of Settings uses - same size, same 44px target,
+   * same role="switch" semantics - rather than a second bespoke toggle style.
+   *
+   * The sub-label states the trade in the clinician's terms and names the real cost of each side,
+   * because "RAG" is not a word at the bedside and the speed gain is genuine.
+   */
+  function ragLinkHTML() {
+    var on = ragLinked();
+    return '<div class="smd-nav-lbl" style="margin:16px 0 6px">Knowledge Base</div>' +
+      '<div style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);padding:2px 12px">' +
+        '<div class="smd-nav-row">' +
+          '<div class="smd-nav-rl">' +
+            '<div class="smd-nav-lbl">' + (on ? "Connected" : "Disconnected") + '</div>' +
+            '<div class="smd-nav-sub">' + (on
+              ? "The model reads the StewardMD Knowledge Base before answering and every claim is checked against it. Slower, and the safer default."
+              : "The model answers from its own training only. Faster, but nothing is checked against the Knowledge Base and no sources are shown.") +
+            '</div>' +
+          '</div>' +
+          '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-rag="1" role="switch" aria-checked="' + on + '"' +
+            ' aria-label="Connect the Knowledge Base to the on-device model"><span></span></button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="smd-nav-note" style="margin-top:6px">Applies to on-device models that can read the Knowledge Base. MaiK Cloud and KB only are always grounded.</div>';
   }
 
   /**
@@ -945,6 +1083,14 @@
         rerender(b, root);
       });
     });
+    // Knowledge Base link. rerender() redraws the row so the label flips Connected/Disconnected and
+    // the sub-label swaps with it; setRagLinked() already re-syncs the sheet header disclaimer.
+    root.querySelectorAll("[data-me-rag]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        setRagLinked(!ragLinked());
+        rerender(b, root);
+      });
+    });
     // Capability-panel upgrade: the tap IS the approval. A "May run slowly" pack asks once more with
     // its limitation spelled out; a "Not for this phone" pack has no button at all.
     root.querySelectorAll("[data-me-upgrade]").forEach(function (b) {
@@ -1112,7 +1258,14 @@
   /** Header disclaimer text for the engine that will actually answer. */
   function discLabel() {
     var e = effective();
-    if (e === "local") return "On-device \u00b7 AI-generated, no sources, verify independently";
+    // On-device splits by the RAG link. The "no sources" wording was written when on-device was
+    // ungrounded by design; saying it while the pack IS reading the book understates the answer just
+    // as badly as claiming sources it never read would overstate it.
+    if (e === "local") {
+      return ragLinked()
+        ? "On-device \u00b7 StewardMD knowledge base, verify independently"
+        : "On-device \u00b7 AI-generated, no sources, verify independently";
+    }
     if (e === "rag") return "StewardMD knowledge base \u00b7 verify independently";
     return "Grounded \u00b7 AI-generated, verify independently";
   }
@@ -1194,8 +1347,51 @@
     ov.id = "maikModelPicker";
     ov.style.cssText = "position:fixed;inset:0;z-index:100000;display:flex;align-items:flex-end;background:rgba(11,17,22,.45)";
 
+    /* The picker groups too (owner, 2026-09-20: "polish whole maik ai models selection section").
+     *
+     * Twelve equally-weighted rows is a scroll, not a choice. Cloud and KB-only are the two hosted
+     * answers and stay at the top unlabelled - they are what most clinicians pick. The on-device
+     * packs below get the SAME category names as Settings, so the two surfaces teach one vocabulary
+     * instead of two. Headings only: the rows are unchanged and nothing is collapsed here, because a
+     * picker that hides the thing you came to tap is worse than a long one.
+     */
+    function pickerGroupOf(o) {
+      if (!o.pack) return "";
+      try {
+        var M = window.SMD_MAIK_MODELS;
+        if (M && M.PACKS && M.PACKS[o.pack] && M.PACKS[o.pack].own) return "StewardMD's own";
+        if (/bonsai/i.test(o.pack)) return "Bonsai (ternary)";
+        var c = (M && M.caps) ? M.caps(o.pack) : null;
+        if (c && c.medical) return "Medically tuned";
+      } catch (e) {}
+      return "General purpose";
+    }
+    function groupHeadHTML(title) {
+      return '<div style="font:700 10.5px/1.2 var(--sans,system-ui);letter-spacing:.05em;text-transform:uppercase;' +
+        'color:var(--mk-mut,#5a7184);background:var(--mk-bg,#fff);padding:12px 16px 5px">' + esc(title) + '</div>';
+    }
+    // Category order for the picker. Registry order interleaves them (Horizon sits between Neural
+    // and Apex), which printed "Medically tuned" twice - a heading that repeats reads as a bug, so
+    // the rows are bucketed into a fixed order and only their ORDER WITHIN a bucket is the
+    // registry's. "" is the hosted pair (Cloud, KB only), which stays first and unlabelled.
+    var PICKER_ORDER = ["", "StewardMD's own", "Medically tuned", "Bonsai (ternary)", "General purpose"];
     function rowsHTML() {
-      return options().map(function (o) {
+      var all = options(), bucket = {}, extra = [];
+      all.forEach(function (o) {
+        var g = pickerGroupOf(o);
+        if (PICKER_ORDER.indexOf(g) === -1) { extra.push(g); }
+        (bucket[g] = bucket[g] || []).push(o);
+      });
+      // Any group a rule change invents still renders, after the known ones - never dropped.
+      var order = PICKER_ORDER.concat(extra.filter(function (g, i) { return extra.indexOf(g) === i; }));
+      return order.map(function (g) {
+        var rows = bucket[g];
+        if (!rows || !rows.length) return "";
+        return (g ? groupHeadHTML(g) : "") + rows.map(oneRowHTML).join("");
+      }).join("");
+    }
+    function oneRowHTML(o) {
+      return [o].map(function (o) {
         var on = o.id === cur;
         return '<button type="button" data-mk-pick="' + o.id + '" role="option" aria-selected="' + on + '" ' +
           'style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;border:0;' +
@@ -1209,13 +1405,51 @@
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:18px;text-align:center;color:var(--mk-teal,#0e6e63);font-size:15px;font-weight:800;opacity:' + (on ? "1" : "0") + '">\u2713</span>' +
           '</button>';
-      }).join('<div style="height:1px;background:var(--mk-bd,#e2e8f0);margin-left:16px"></div>');
+      // One row in, one row out. The hairline that used to be the join separator now hangs off the
+      // row itself, so a group heading can sit between rows without inheriting a stray divider.
+      }).join("") + '<div style="height:1px;background:var(--mk-bd,#e2e8f0);margin-left:16px"></div>';
+    }
+
+    /* KNOWLEDGE BASE, BESIDE THE MODEL (owner, 2026-09-20: "make Knowledge Base Button in MaiK
+     * assistant side by model selection as toggle").
+     *
+     * It belongs here and not only in Settings because it is part of the same decision: the chip
+     * says what will answer, and this says what it will read. Choosing MaiK Lite and choosing
+     * whether MaiK Lite opens the book are one thought, and splitting them across two screens is
+     * what made the switch invisible.
+     *
+     * Cloud and KB-only are always grounded server-side, so the row shows as locked-on rather than
+     * hidden: disappearing controls teach a clinician that the app is inconsistent, a stated "always
+     * on" teaches them the rule.
+     */
+    function kbRowHTML() {
+      var localSel = String(cur || "").indexOf("local:") === 0;
+      var on = localSel ? ragLinked() : true;
+      var sub = !localSel
+        ? "Always on for this engine - it answers from the Knowledge Base."
+        : on ? "Reads the StewardMD Knowledge Base, then checks every claim against it."
+             : "Off - the model answers from its own training. Faster, nothing checked, no sources.";
+      return '<div style="height:1px;background:var(--mk-bd,#e2e8f0);margin:6px 0 0"></div>' +
+        '<div style="display:flex;align-items:center;gap:12px;padding:13px 16px 4px">' +
+          '<span style="flex:1;min-width:0">' +
+            '<span style="display:block;font:600 14px/1.25 var(--sans,system-ui);color:var(--mk-ink,#14202b)">Knowledge Base</span>' +
+            '<span data-mk-kbsub style="display:block;font:500 12px/1.4 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:3px">' + esc(sub) + '</span>' +
+          '</span>' +
+          '<button type="button" data-mk-kb="1" role="switch" aria-checked="' + on + '"' +
+            (localSel ? "" : ' disabled aria-disabled="true"') +
+            ' aria-label="Connect the Knowledge Base to the on-device model"' +
+            ' style="flex:0 0 auto;position:relative;width:40px;height:23px;border:none;border-radius:999px;cursor:' + (localSel ? "pointer" : "default") + ';' +
+            'background:' + (on ? "var(--mk-teal,#0e6e63)" : "var(--mk-bd,#d7dee3)") + ';opacity:' + (localSel ? "1" : ".55") + ';transition:background .15s">' +
+            '<span style="position:absolute;top:3px;left:' + (on ? "20px" : "3px") + ';width:17px;height:17px;border-radius:50%;background:#fff;transition:left .15s"></span>' +
+          '</button>' +
+        '</div>';
     }
 
     ov.innerHTML = '<div id="maikModelSheetInner" style="width:100%;background:var(--mk-bg,#fff);border-radius:18px 18px 0 0;padding:8px 0 max(14px,env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.28)">' +
       '<div style="width:38px;height:4px;border-radius:2px;background:var(--mk-bd,#dbe3ee);margin:6px auto 10px"></div>' +
       '<div style="font:700 13px/1.2 var(--sans,system-ui);color:var(--mk-mut,#5a7184);padding:0 16px 8px">Answer with</div>' +
       '<div id="maikModelRows" role="listbox">' + rowsHTML() + '</div>' +
+      '<div id="maikKbRow">' + kbRowHTML() + '</div>' +
       '</div>';
     document.body.appendChild(ov);
 
@@ -1234,7 +1468,22 @@
       }
     } catch (e) {}
 
+    function repaintKb() {
+      var host = ov.querySelector("#maikKbRow");
+      if (host) host.innerHTML = kbRowHTML();
+    }
+
     ov.addEventListener("click", function (e) {
+      // Knowledge Base switch. Does NOT close the sheet: the clinician is comparing engines, and
+      // the sub-label under the switch is the feedback that the flip registered.
+      var kb = e.target && e.target.closest ? e.target.closest("[data-mk-kb]") : null;
+      if (kb) {
+        if (kb.disabled) return;                 // cloud / KB-only are always grounded
+        setRagLinked(!ragLinked());
+        repaintKb();
+        try { if (window.SMD_HAPTICS && SMD_HAPTICS.tap) SMD_HAPTICS.tap(); } catch (e2) {}
+        return;
+      }
       var btn = e.target && e.target.closest ? e.target.closest("[data-mk-pick]") : null;
       if (!btn) { if (e.target === ov) closePicker(); return; }
       var optId = btn.getAttribute("data-mk-pick");
@@ -1250,6 +1499,7 @@
         cur = currentOptionId();
         var rows = ov.querySelector("#maikModelRows");
         if (rows) rows.innerHTML = rowsHTML();
+        repaintKb();   // the selection just became on-device: the switch stops being locked-on
         return;   // keep the sheet open so the clinician sees the download start
       }
       closePicker();
@@ -1297,6 +1547,8 @@
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
     discLabel: discLabel, syncDisc: syncDisc,
+    // RAG link: maik-local.js reads ragLinked() in ragEligible() to decide whether to retrieve.
+    KEY_RAG_LINK: KEY_RAG_LINK, ragLinked: ragLinked, setRagLinked: setRagLinked, ragLinkHTML: ragLinkHTML,
     warmIfLocal: warmIfLocal,
     // hard Local/Cloud policy + capability matcher (2026-09-11)
     KEY_HARD: KEY_HARD, hardLocal: hardLocal, policy: policy, policyReason: policyReason, cloudAllowed: cloudAllowed, REQ: REQ, LOCAL_IMPL: LOCAL_IMPL, FEATURE_LABEL: FEATURE_LABEL,
