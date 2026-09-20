@@ -349,8 +349,8 @@
       "bullets": [
         "Standard 7+3 induction backbone: Cytarabine 100-200 mg/m2 continuous IV infusion daily x 7 days + Daunorubicin 60-90 mg/m2 (or Idarubicin 12 mg/m2) daily x 3 days.",
         "FLT3 Inhibitor options:",
-        "\u2022 Midostaurin: 50 mg PO BID on days 8-21 of induction and consolidation (approved for both FLT3-ITD and FLT3-TKD mutations, RATIFY trial).",
-        "\u2022 Quizartinib: 35.5 mg PO daily on days 8-21 (approved for FLT3-ITD mutations, QuANTUM-First trial; requires ECG QTc monitoring).",
+        "• Midostaurin: 50 mg PO BID on days 8-21 of induction and consolidation (approved for both FLT3-ITD and FLT3-TKD mutations, RATIFY trial).",
+        "• Quizartinib: 35.5 mg PO daily on days 8-21 (approved for FLT3-ITD mutations, QuANTUM-First trial; requires ECG QTc monitoring).",
         "Bone marrow biopsy at day 14-21 to assess blast clearance (hypocellular marrow with <5% blasts); reinduce if significant residual leukemia.",
         "Evaluate for consolidative allogeneic HCT in first remission (CR1), particularly for FLT3-ITD with adverse co-mutations or persistent MRD."
       ],
@@ -593,6 +593,10 @@
         "If transplant-ineligible or no donor: high-dose cytarabine-based consolidation",
         "MRD status and comorbidity refine the decision; bridge with consolidation while a donor is identified",
         "Then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -622,6 +626,10 @@
         "Post-remission oral azacitidine maintenance for patients not proceeding to transplant",
         "FLT3-inhibitor maintenance after transplant for FLT3-mutated disease where used",
         "Prioritize clinical-trial enrollment; then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -649,7 +657,11 @@
         "Survivorship: cardiac follow-up after anthracyclines, vaccination, secondary-malignancy awareness"
       ],
       "linkTo": "n_relapsed",
-      "linkLabel": "If relapse is detected: go to the relapsed/refractory pathway"
+      "linkLabel": "If relapse is detected: go to the relapsed/refractory pathway",
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
+      ]
     },
     {
       "id": "n_unfit_target",
@@ -1304,6 +1316,10 @@
         "No cytotoxic maintenance is required after ATRA + arsenic trioxide for low/intermediate-risk disease",
         "Serial PML-RARA PCR monitoring for the first 2-3 years; higher-risk disease is monitored more closely",
         "Then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -1443,6 +1459,10 @@
         "Refer for allogeneic transplant evaluation - persistent MRD reclassifies a favorable patient toward higher relapse risk",
         "Add or continue the matched targeted agent (e.g. FLT3 inhibitor) where applicable",
         "Enroll on an MRD-directed clinical trial where available; then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -1515,6 +1535,10 @@
         "Give post-transplant FLT3-inhibitor maintenance for FLT3-mutated disease where used",
         "Continue donor search and transplant work-up in parallel with the FLT3 inhibitor",
         "Then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -2015,5 +2039,19 @@
       "linkCategory": "conditional"
     }
   ],
-  "matchDisease": false
+  "matchDisease": false,
+  "protocolRefs": [
+    "aml-7-3",
+    "aml-7-3-gemtuzumab",
+    "aml-7-3-midostaurin",
+    "aml-atra-ato",
+    "aml-aza-venetoclax",
+    "aml-azacitidine",
+    "aml-cpx-351",
+    "aml-enasidenib",
+    "aml-flag-ida",
+    "aml-gilteritinib",
+    "aml-hidac",
+    "aml-ivosidenib"
+  ]
 }

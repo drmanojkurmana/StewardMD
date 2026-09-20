@@ -438,10 +438,10 @@
         "Definition of BCG-Unresponsive: Persistent or recurrent high-grade Ta/T1 disease within 6 months or persistent CIS within 12 months despite adequate BCG induction and maintenance.",
         "Radical Cystectomy (Standard of Care): Recommended in surgically eligible patients given the ~30-50% risk of progression to muscle-invasive disease.",
         "Bladder-Preserving / Salvage Options for Non-Cystectomy Candidates:",
-        "\u2022 N-803 (Nogapendekin alfa inbakicept-pmln) + BCG: IL-15 receptor agonist combined with intravesical BCG; high CR rate (~71% in CIS) with durable response (QUILT-3.032 trial).",
-        "\u2022 Nadofaragene firadenovec-vncg: Intravesical non-replicating adenoviral vector-based gene therapy delivering human IFN-alpha2b instilled once every 3 months.",
-        "\u2022 Pembrolizumab: 200 mg IV q3w or 400 mg IV q6w (systemic immunotherapy for BCG-unresponsive high-risk NMIBC with CIS).",
-        "\u2022 Intravesical sequential Gemcitabine + Docetaxel: Highly active doublet regimen with 2-year recurrence-free survival ~50-60%."
+        "• N-803 (Nogapendekin alfa inbakicept-pmln) + BCG: IL-15 receptor agonist combined with intravesical BCG; high CR rate (~71% in CIS) with durable response (QUILT-3.032 trial).",
+        "• Nadofaragene firadenovec-vncg: Intravesical non-replicating adenoviral vector-based gene therapy delivering human IFN-alpha2b instilled once every 3 months.",
+        "• Pembrolizumab: 200 mg IV q3w or 400 mg IV q6w (systemic immunotherapy for BCG-unresponsive high-risk NMIBC with CIS).",
+        "• Intravesical sequential Gemcitabine + Docetaxel: Highly active doublet regimen with 2-year recurrence-free survival ~50-60%."
       ],
       "protocolRefs": [
         "uro-intravesical-gem-docetaxel",
@@ -580,6 +580,10 @@
         "Proceed directly to definitive local therapy (next step)",
         "Reassess for adjuvant nivolumab after cystectomy for high-risk pathology",
         "Clinical-trial enrollment (e.g. neoadjuvant immunotherapy) where available"
+      ],
+      "protocolRefs": [
+        "uro-intravesical-mitomycin",
+        "uro-bcg-induction"
       ]
     },
     {
@@ -646,6 +650,10 @@
         "Urinary diversion (ileal conduit or continent / orthotopic neobladder)",
         "Send full pathology (ypT/pT, nodes, margins) to guide adjuvant therapy (next step)",
         "Enhanced-recovery peri-operative care"
+      ],
+      "protocolRefs": [
+        "uro-intravesical-mitomycin",
+        "uro-bcg-induction"
       ]
     },
     {
@@ -812,6 +820,10 @@
       "bullets": [
         "No adjuvant systemic therapy for organ-confined (<= pT2), node-negative, margin-negative disease",
         "Structured post-cystectomy surveillance (see follow-up)"
+      ],
+      "protocolRefs": [
+        "uro-intravesical-mitomycin",
+        "uro-bcg-induction"
       ]
     },
     {
@@ -919,10 +931,10 @@
         "Category 1 Preferred First-Line Standard (EV-302 trial): Enfortumab vedotin (Nectin-4 ADC, 1.25 mg/kg IV days 1 and 8) + Pembrolizumab (200 mg IV day 1) every 21 days.",
         "Demonstrated dramatic superiority over platinum-based chemotherapy: median overall survival extended to 31.5 months vs 16.1 months (HR 0.47, p < 0.0001); approved regardless of cisplatin eligibility status.",
         "Toxicity Monitoring & Dose Modification:",
-        "\u2022 Severe cutaneous adverse reactions (SCAR / SJS / TEN): Withhold at earliest sign of progressive rash.",
-        "\u2022 Peripheral neuropathy: Monitor for sensory and motor neuropathy; dose reduce or hold for grade >=2.",
-        "\u2022 Hyperglycemia: Monitor blood glucose closely, particularly in patients with diabetes or elevated BMI.",
-        "\u2022 Immune-related adverse events (irAEs): Manage with corticosteroids per institutional immunotherapy guidelines."
+        "• Severe cutaneous adverse reactions (SCAR / SJS / TEN): Withhold at earliest sign of progressive rash.",
+        "• Peripheral neuropathy: Monitor for sensory and motor neuropathy; dose reduce or hold for grade >=2.",
+        "• Hyperglycemia: Monitor blood glucose closely, particularly in patients with diabetes or elevated BMI.",
+        "• Immune-related adverse events (irAEs): Manage with corticosteroids per institutional immunotherapy guidelines."
       ],
       "protocolRefs": [
         "gu-uro-enfortumab-vedotin"
@@ -1450,6 +1462,10 @@
         "Intensive cystoscopy + cytology surveillance, with upper-tract and cross-sectional imaging",
         "Low threshold for salvage cystectomy on muscle-invasive recurrence",
         "Manage non-muscle-invasive recurrence with intravesical therapy where appropriate"
+      ],
+      "protocolRefs": [
+        "uro-intravesical-mitomycin",
+        "uro-bcg-induction"
       ]
     },
     {
@@ -1477,6 +1493,10 @@
         "Higher peri-operative morbidity than primary cystectomy - optimize with enhanced-recovery care",
         "Send full pathology to guide adjuvant assessment (next step)",
         "Consider adjuvant nivolumab for high-risk residual pathology"
+      ],
+      "protocolRefs": [
+        "uro-intravesical-mitomycin",
+        "uro-bcg-induction"
       ]
     },
     {
@@ -1609,6 +1629,10 @@
         "Clinical-trial enrollment for novel agents or combinations",
         "Integrate palliative and best supportive care; manage symptoms and performance status",
         "Reassess goals of care at each progression"
+      ],
+      "protocolRefs": [
+        "uro-intravesical-mitomycin",
+        "uro-bcg-induction"
       ]
     },
     {
@@ -1633,7 +1657,11 @@
         "Investigate new symptoms; biopsy-proven muscle-invasive or metastatic recurrence enters the metastatic pathway"
       ],
       "linkTo": "n_met_workup",
-      "linkLabel": "If metastatic recurrence is detected: go to the metastatic pathway"
+      "linkLabel": "If metastatic recurrence is detected: go to the metastatic pathway",
+      "protocolRefs": [
+        "uro-intravesical-mitomycin",
+        "uro-bcg-induction"
+      ]
     }
   ],
   "links": [
@@ -2102,5 +2130,24 @@
       "to": "n_surveillance",
       "linkCategory": "conditional"
     }
+  ],
+  "protocolRefs": [
+    "gu-uro-avelumab-maintenance",
+    "gu-uro-ddmvac",
+    "gu-uro-enfortumab-vedotin",
+    "gu-uro-gem-cisplatin",
+    "uro-bcg-induction",
+    "uro-bcg-maintenance",
+    "uro-carbo-gemcitabine",
+    "uro-erdafitinib",
+    "uro-intravesical-gem-docetaxel",
+    "uro-intravesical-mitomycin",
+    "uro-nivolumab-adjuvant",
+    "uro-pembrolizumab",
+    "uro-sacituzumab",
+    "uro-tmt-cisplatin",
+    "uro-tmt-gemcitabine",
+    "uro-tmt-mmc-5fu",
+    "uro-trastuzumab-deruxtecan"
   ]
 }

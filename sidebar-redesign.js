@@ -57,11 +57,12 @@
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
-    // Connect Hospital: the doctor onboards their own hospital by signing in to its EMR themselves.
+    // AgentConnect: unified hospital onboarding hub
     agentconnect: function () {
+      if (window.SMD_openAgentConnect) return window.SMD_openAgentConnect();
       var b = window.SMD_CONNECT_AGENT_BOOT;
-      if (b && b.open) b.open().catch(function (e) { toast("Connect Hospital unavailable: " + (e && e.message ? e.message : "load failed")); });
-      else toast("Connect Hospital is not enabled");
+      if (b && b.open) b.open().catch(function (e) { toast("AgentConnect unavailable: " + (e && e.message ? e.message : "load failed")); });
+      else toast("AgentConnect is not enabled");
     },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     tour: function () { if (window.SMD_TOUR && SMD_TOUR.start) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); },
@@ -464,7 +465,7 @@
       row("drugs", "pills", "Drugs Database") +
       row("interactions", "interact", "Interaction Checker") +
       row("calculators", "calc", "Calculators") +
-      row("agentconnect", "steth", "Connect Hospital") +
+      row("agentconnect", "steth", "AgentConnect") +
       (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
       '<div class="sbr-sec">Reference &amp; Help</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +

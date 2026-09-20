@@ -1,0 +1,63 @@
+{
+  "id": "gyn-vaginal-cisplatin-rt",
+  "diseaseId": "vaginal",
+  "name": "Concurrent Cisplatin Chemoradiotherapy (Vaginal Cancer)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 7,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Vaginal Cancer v1.2026"
+  },
+  "stage": [
+    "II",
+    "III",
+    "IVa"
+  ],
+  "treatmentSetting": [
+    "concurrent-chemoradiotherapy"
+  ],
+  "histology": "vaginal squamous cell carcinoma / adenocarcinoma",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "8-16 mg IV",
+      "notes": "Prior to cisplatin"
+    }
+  ],
+  "supportiveCare": [
+    "Pre- and post-hydration with 1 L normal saline",
+    "Magnesium and potassium supplementation"
+  ],
+  "monitoring": [
+    "CBC weekly",
+    "Serum creatinine, BUN, electrolytes weekly before cisplatin"
+  ],
+  "clearanceChecks": [
+    "ANC >= 1500/mcL, Platelets >= 100,000/mcL",
+    "Serum creatinine <= 1.5 mg/dL"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 40,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 70
+      },
+      "notes": "CISplatin 40 mg/m2 (cap 70 mg) IV weekly concurrently with external beam radiation therapy."
+    }
+  ]
+}

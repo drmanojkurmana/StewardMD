@@ -3783,6 +3783,10 @@
       try { return window.SMD_REASON.assess(findings).infectious.some(function (x) { return x.matched; }); } catch (e) { return false; }
     },
     mimicsFor: mimicsFor,
+    // Open the curated KB reference for a disease id. Exported for home.js's "Read more in
+    // StewardMD KB" chip under a MaiK answer - the same screen the Knowledge Library opens, so
+    // there is one disease page in the app rather than a second, drifting copy of it.
+    openDiseaseRef: openDiseaseRef,
     flag: reasonV2,
     setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} },
     // specificity-aware ranking flag (smd_rank_v2, default ON) — instantly reversible.
@@ -4909,6 +4913,24 @@
   function maikMarkdown(md) {
     function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
     function inline(t) {
+      // LaTeX leak (owner screenshot, 2026-09-19): models wrap inequalities and units in math
+      // delimiters, so the bubble read "patients $>35$ years old" and "defined as $\ge 3$". We do not
+      // render maths; unwrap $…$ / \(…\) and turn the handful of operators clinicians actually see
+      // into their characters, BEFORE escaping.
+      t = String(t)
+        .replace(/\\[()\[\]]/g, "")
+        // Only MATH gets unwrapped: short, and starting with an operator, backslash, paren or digit.
+        // "$40 and the assay costs $60" must survive intact, so a prose span between two prices can
+        // never be mistaken for a formula.
+        .replace(/\$\$?([^$\n]{1,40}?)\$\$?/g, function (m, inner) {
+          return (/^\s*[\\<>=(≤≥]/.test(inner) || /^\s*\d/.test(inner)) && (inner.match(/ /g) || []).length <= 3 ? inner : m;
+        })
+        .replace(/\\(?:ge|geq)\b\s*/g, "≥").replace(/\\(?:le|leq)\b\s*/g, "≤")
+        .replace(/\\(?:times)\b\s*/g, "×").replace(/\\(?:approx)\b\s*/g, "≈")
+        .replace(/\\(?:pm)\b\s*/g, "±").replace(/\\(?:mu)\b\s*/g, "µ")
+        .replace(/\\(?:gt|greater)\b\s*/g, ">").replace(/\\(?:lt|less)\b\s*/g, "<")
+        .replace(/\\(?:text|mathrm|mathit|mbox)\{([^}]*)\}/g, "$1")
+        .replace(/\\,|\\;|\\!|\\quad|\\qquad/g, " ");
       t = esc(t);
       t = t.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/__([^_]+)__/g, "<b>$1</b>");
       t = t.replace(/(^|[^*])\*(?!\s)([^*]+?)\*/g, "$1<i>$2</i>");

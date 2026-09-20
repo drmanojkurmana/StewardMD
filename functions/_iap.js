@@ -44,9 +44,21 @@ async function signJwt(header, claim, pem, alg, subtle) {
   return signingInput + "." + b64url(new Uint8Array(sig));
 }
 
+// One JSON secret {key,keyId,issuer,bundleId} keeps Cloudflare Pages under its 128-text-binding cap
+// (4 separate APPLE_* vars pushed production deploys over it); the separate vars still work as fallback.
+export function appleCfg(env) {
+  try {
+    if (env && env.APPLE_ASC_JSON) {
+      const j = JSON.parse(env.APPLE_ASC_JSON);
+      return { key: j.key, keyId: j.keyId, issuer: j.issuer, bundleId: j.bundleId || "in.stewardmd.app" };
+    }
+  } catch (e) {}
+  return env ? { key: env.APPLE_ASC_KEY, keyId: env.APPLE_ASC_KEY_ID, issuer: env.APPLE_ASC_ISSUER, bundleId: env.APPLE_BUNDLE_ID } : {};
+}
+
 export function iapConfigured(env, platform) {
   if (platform === "google") return !!(env && env.GOOGLE_PLAY_SA_JSON && env.GOOGLE_PLAY_PACKAGE);
-  if (platform === "apple") return !!(env && env.APPLE_ASC_KEY && env.APPLE_ASC_KEY_ID && env.APPLE_ASC_ISSUER && env.APPLE_BUNDLE_ID);
+  if (platform === "apple") { const a = appleCfg(env); return !!(a.key && a.keyId && a.issuer && a.bundleId); }
   return false;
 }
 
@@ -107,10 +119,11 @@ async function verifyAppStore(env, purchase, fetchFn) {
   if (!txId) return { configured: true, valid: false, reason: "no-transaction-id" };
   const nowS = Math.floor(Date.now() / 1000);
   // Sign the App Store Server API token (ES256, aud appstoreconnect-v1, bundle id in `bid`).
+  const a = appleCfg(env);
   const jwt = await signJwt(
-    { alg: "ES256", kid: env.APPLE_ASC_KEY_ID, typ: "JWT" },
-    { iss: env.APPLE_ASC_ISSUER, iat: nowS, exp: nowS + 1800, aud: "appstoreconnect-v1", bid: env.APPLE_BUNDLE_ID },
-    env.APPLE_ASC_KEY, "ES256");
+    { alg: "ES256", kid: a.keyId, typ: "JWT" },
+    { iss: a.issuer, iat: nowS, exp: nowS + 1800, aud: "appstoreconnect-v1", bid: a.bundleId },
+    a.key, "ES256");
   // Production host first; on 404 (transaction unknown there) retry sandbox — matches Apple's guidance.
   const hosts = ["https://api.storekit.itunes.apple.com", "https://api.storekit-sandbox.itunes.apple.com"];
   let sd = null, okHost = false;

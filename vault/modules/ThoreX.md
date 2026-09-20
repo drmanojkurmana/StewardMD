@@ -1,7 +1,7 @@
 ---
 tags: [module, ai, imaging]
-status: staged
-flag: thorex_llm (FEATURES_ON)
+status: live for every user (smd_thorex ON); the read is unvalidated, the in-module wording saying so must stay
+flag: smd_thorex (def:true — ON) · thorex_llm (FEATURES_ON) for the text explainer
 ---
 # ThoreX
 

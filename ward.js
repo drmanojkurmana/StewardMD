@@ -776,6 +776,9 @@
       "<button class=\"w-btn ghost\" data-w-act=\"integration\" title=\"" + wTA("ward.feeds-in-and-out-what-is", "Feeds in and out: what is held, what is stuck, who may push, where this hospital sends") + "\">" + ms("hub") + wTH("ward.integration", "Integration") + "</button>" +
       // P1.14: quality and safety measures with the case list behind each number (analytics.view, server-checked).
       "<button class=\"w-btn ghost\" data-w-act=\"qualityview\" title=\"" + wTA("ward.quality-and-safety-measures-each-with", "Quality and safety measures, each with its case list") + "\">" + ms("query_stats") + wTH("ward.quality-and-safety", "Quality and safety") + "</button>" +
+      /* R7-1: the recall register (emr.view, server-checked). Hospital-wide like the rest of this column - a
+       * cohort is not one ward's business, and the patient overdue a review is usually on nobody's ward. */
+      "<button class=\"w-btn ghost\" data-w-act=\"recallview\" title=\"" + wTA("ward.patients-in-a-cohort-who-are", "Patients in a cohort who are overdue a review") + "\">" + ms("how_to_reg") + wTH("ward.recall-register", "Recall register") + "</button>" +
       "<button class=\"w-btn ghost\" data-w-act=\"downtime\" title=\"" + wTA("ward.printable-sheet-for-when-the-system", "Printable sheet for when the system is unavailable") + "\">" + ms("print") + wTH("ward.downtime-pack", "Downtime pack") + "</button></div></div>" +
       xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
 
@@ -9588,6 +9591,67 @@
         (c.day ? " &middot; " + esc(c.day) : "") + (c.stage ? " &middot; " + wTH("ward.stage2", "stage {stage}", { stage: esc(c.stage) }, "stage") : "") + "</div></li>";
     }).join("") + "</ul>";
   }
+  /* R7-1 RECALL REGISTER (functions/_wardsynq/registry.js). The one screen in WardSynQ that NAMES PATIENTS
+   * in a cohort, which is the whole point: "which of my diabetics has not had an HbA1c this year" is not a
+   * number, it is a list somebody has to ring. So it is gated on the authority to read a chart, and a refused
+   * read says so - an empty cohort here would read as nobody overdue, which is the failure this screen exists
+   * to prevent. Membership comes from the problem list, never a separate flag. "Never reviewed" is its own
+   * state and sorts first: that patient is the most overdue person on the list, not the least. */
+  function recallState(r) {
+    if (r.state === "never") return '<span class="w-st overdue">' + wTH("ward.never-reviewed-state", "Never reviewed") + "</span>";
+    if (r.state === "overdue") return '<span class="w-st overdue">' + wTH("ward.overdue-by-days", "Overdue by {d} days", { d: esc(r.overdueDays == null ? 0 : r.overdueDays) }, "d") + "</span>";
+    if (r.state === "current") return '<span class="w-st done">' + wTH("ward.up-to-date", "Up to date") + "</span>";
+    return '<span class="w-st">' + wTH("ward.no-review-interval-set", "No review interval") + "</span>";
+  }
+  function recallMemberRow(m) {
+    var r = m.review || {}, last = String(r.lastReview || "").slice(0, 10), due = String(r.dueAt || "").slice(0, 10);
+    return '<li class="w-mini-row"><div><h4>' + escOr(m.mrn || m.patientId) + "</h4><small>" +
+      (m.because ? esc(m.because) + " &middot; " : "") + recallState(r) +
+      (last ? " &middot; " + wTH("ward.last-review-on", "last review {d}", { d: esc(last) }, "d") : "") +
+      (due && r.state === "overdue" ? " &middot; " + wTH("ward.was-due-on", "was due {d}", { d: esc(due) }, "d") : "") +
+      "</small></div></li>";
+  }
+  function recallRegistryCard(reg, overdueOnly) {
+    var counts = wTH("ward.in-the-cohort", "{n} in the cohort", { n: esc(reg.total) }, "n") + " &middot; " +
+      wTH("ward.never-reviewed-count", "{n} never reviewed", { n: esc(reg.neverReviewed) }, "n") + " &middot; " +
+      wTH("ward.overdue-count", "{n} overdue", { n: esc(reg.overdue) }, "n") +
+      (reg.reviewEveryMonths ? " &middot; " + wTH("ward.reviewed-every-months", "reviewed every {n} months", { n: esc(reg.reviewEveryMonths) }, "n") : "");
+    var members = (reg.members || []).map(recallMemberRow).join("");
+    /* An empty list here is only ever "nobody matched the filter you asked for". Every way the list could be
+     * SHORT for another reason - a failed read, a truncated read, an unusable definition - is reported by the
+     * screen above, before any registry is drawn. */
+    var empty = reg.total === 0 ? wTH("ward.nobody-is-in-this-cohort", "Nobody is in this cohort.")
+      : overdueOnly ? wTH("ward.nobody-in-this-cohort-is-overdue", "Nobody in this cohort is overdue.")
+      : wTH("ward.no-members-to-show", "No members to show.");
+    return '<div class="w-sub"><h4>' + esc(reg.name) + '</h4><p class="w-dt-times">' + counts + "</p>" +
+      (reg.recall === null ? '<p class="w-hint">' + ms("info") + wTH("ward.no-review-interval-configured-so-nobody", "No review interval is configured for this registry, so nobody is shown as overdue.") + "</p>" : "") +
+      (members ? '<ul class="w-mini">' + members + "</ul>" : '<p class="w-empty">' + empty + "</p>") + "</div>";
+  }
+  function recallView(state) {
+    var q = state.recall, overdueOnly = !!state.recallOverdue;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("how_to_reg") + "<h3>" + wTH("ward.recall-register", "Recall register") + "</h3>" +
+      '<button class="w-ic" data-w-act="recallload" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>" +
+      '<div class="w-tools"><button class="w-btn ' + (overdueOnly ? "" : "ghost ") + 'sm" data-w-act="recallfilter:1">' + wTH("ward.overdue-only", "Overdue only") + "</button>" +
+      '<button class="w-btn ' + (overdueOnly ? "ghost " : "") + 'sm" data-w-act="recallfilter:0">' + wTH("ward.everyone-in-the-cohort", "Everyone in the cohort") + "</button></div>";
+    if (!q || q.busy) return head + '<p class="w-empty">' + wTH("ward.loading-the-recall-register", "Loading the recall register&hellip;") + "</p></div>";
+    if (!q.ok) {
+      return head + '<p class="w-hint warn">' + ms("error") + (q.status === 403
+        ? wTH("ward.your-role-cannot-read-the-recall", "Your role cannot read the recall register (the authority to read a chart is needed).")
+        : wTH("ward.the-recall-register-could-not-be", "The recall register could not be loaded. Do not read this as nobody overdue.", null, "", 1)) + "</p></div>";
+    }
+    if (q.skipped) return head + '<p class="w-hint">' + ms("info") + wTH("ward.the-wardsynq-record-is-not-switched", "The WardSynQ record is not switched on for this hospital, so there is nothing to measure.") + "</p></div>";
+    var warn = "";
+    // Every way the list can be SHORT is said in the words "do not read this as nobody overdue": a record type
+    // that would not load, a read past the limit, or a registry definition the hospital cannot use.
+    if (q.unreadable && q.unreadable.length) warn += '<p class="w-hint warn">' + ms("error") + wTH("ward.some-records-could-not-be-read2", "Some records could not be read, so this list may be short. Do not read it as nobody overdue.", null, "", 1) + "</p>";
+    if (q.truncated) warn += '<p class="w-hint warn">' + ms("warning") + wTH("ward.past-the-read-limit-the-oldest", "Past the read limit the oldest records were not read. The newest are here.") + "</p>";
+    if (q.problems && q.problems.length) warn += '<p class="w-hint warn">' + ms("warning") + wTH("ward.registry-definitions-could-not-be-used", "{n} registry definitions could not be used, so their cohorts are missing.", { n: esc(q.problems.length) }, "n") + "</p>";
+    var regs = q.registries || [];
+    if (!regs.length) return head + warn + '<p class="w-hint">' + ms("info") + wTH("ward.no-registries-are-configured-an-administrator", "No registries are configured. An administrator defines them in clinical settings.") + "</p></div>";
+    return head + '<p class="w-hint">' + ms("info") + wTH("ward.membership-comes-from-the-problem-list", "Membership comes from the problem list, so resolving a diagnosis removes the patient from the cohort. Nothing here decides who is due; the review interval is the hospital's.") + "</p>" +
+      warn + regs.map(function (r) { return recallRegistryCard(r, overdueOnly); }).join("") + "</div>";
+  }
+
   function qualitySafetyView(state) {
     var q = state.qs, days = state.qsDays || 30;
     var head = '<div class="w-card"><div class="w-card-h">' + ms("query_stats") + "<h3>" + wTH("ward.quality-and-safety", "Quality and safety") + "</h3>" +
@@ -9914,6 +9978,7 @@
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
         : state.view === "qualitysafety" ? qualitySafetyView(state)
+        : state.view === "recall" ? recallView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "discharge" ? dischargeView(state)
@@ -14712,6 +14777,23 @@
       .then(function (r) { st.qs = r && r.ok ? r : { ok: false, status: r && r.__status, error: r && r.error }; if (r && (r.error === "permission" || r.error === "forbidden")) st.qs.status = 403; paint(); })
       .catch(function () { st.qs = { ok: false }; paint(); });
   }
+  /* The registry is read whole, not by ward: a cohort is not a ward list, and the patient nobody has seen for
+   * two years is exactly the one no ward holds. `overdue=1` is applied by the SERVER, so the filter narrows the
+   * list a clinician reads, never the counts it is judged by (those come back for the whole cohort either way). */
+  function loadRecall(overdueOnly) {
+    st.view = "recall";
+    if (overdueOnly !== undefined) st.recallOverdue = !!overdueOnly;
+    st.recall = { busy: true }; paint();
+    return apiGet("/ward/registries?orgId=" + encodeURIComponent(st.orgId) + (st.recallOverdue ? "&overdue=1" : ""))
+      .then(function (r) {
+        // A refusal is SHOWN here, unlike the secondary panels on the bed board: an empty recall register that
+        // failed silently reads as nobody overdue, which is the one thing this screen must never say by accident.
+        st.recall = r && r.ok ? r : { ok: false, status: r && r.__status, error: r && r.error };
+        if (r && (r.error === "permission" || r.error === "forbidden")) st.recall.status = 403;
+        paint();
+      })
+      .catch(function () { st.recall = { ok: false }; paint(); });
+  }
   function incidentConfirm(id) {
     var outcome = val("wIncOutcome_" + id), reason = val("wIncConfReason_" + id), category = val("wIncConfCat_" + id), dup = val("wIncDupOf_" + id);
     if (!outcome) { st.err = wT("ward.pick-a-decision", "Pick a decision."); paint(); return; }
@@ -15684,6 +15766,7 @@
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "qualitysafety") { st.qs = null; st.qsOpen = null; st.view = "list"; paint(); return; }
+      if (st.view === "recall") { st.recall = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
@@ -16033,6 +16116,9 @@
     if (cmd === "rptcsv") { reportCsv(arg); return; }
     if (cmd === "incidents") { incidentsOpen(); return; }
     if (cmd === "qualityview") { st.qsOpen = null; loadQualitySafety(); return; }
+    if (cmd === "recallview") { loadRecall(st.recallOverdue === undefined ? true : st.recallOverdue); return; }
+    if (cmd === "recallload") { loadRecall(); return; }
+    if (cmd === "recallfilter") { loadRecall(arg === "1"); return; }
     if (cmd === "qsdays") { loadQualitySafety(Number(arg) || 30); return; }
     if (cmd === "qscases") { st.qsOpen = st.qsOpen === arg ? null : arg; paint(); return; }
     if (cmd === "timelinefilter") { st.timelineFilter = arg === "all" ? "" : arg; paint(); return; }
@@ -16463,7 +16549,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "dcboard", "tcentre", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview", "claimsdesk"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "dcboard", "tcentre", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview", "recallview", "claimsdesk"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open

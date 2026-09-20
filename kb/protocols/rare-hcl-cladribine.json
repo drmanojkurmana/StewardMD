@@ -1,0 +1,64 @@
+{
+  "id": "rare-hcl-cladribine",
+  "diseaseId": "hcl",
+  "name": "Cladribine (2-CdA) (Hairy Cell Leukemia)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hairy Cell Leukemia v1.2026"
+  },
+  "stage": [
+    "symptomatic"
+  ],
+  "treatmentSetting": [
+    "first-line"
+  ],
+  "histology": "hairy cell leukemia",
+  "premedications": [
+    {
+      "name": "Allopurinol",
+      "dose": "300 mg PO daily",
+      "notes": "TLS prophylaxis"
+    }
+  ],
+  "supportiveCare": [
+    "PJP prophylaxis with Bactrim DS 3x/week for at least 6 months post-therapy",
+    "Acyclovir 400 mg PO BID for VZV prophylaxis",
+    "Irradiated blood products mandatory to prevent transfusion-associated GVHD"
+  ],
+  "monitoring": [
+    "CBC weekly",
+    "CD4+ T-cell count recovery",
+    "Renal and liver panels"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "cladribine",
+      "name": "Cladribine",
+      "basis": "mgkg",
+      "dosePerUnit": 0.14,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "notes": "Cladribine 0.14 mg/kg/day IV over 2 hours on Days 1-5 (single 5-day course yields >90% overall response and ~80% complete response)."
+    }
+  ]
+}

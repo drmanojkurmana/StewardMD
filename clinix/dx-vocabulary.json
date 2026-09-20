@@ -1,0 +1,2504 @@
+{
+ "version": "dx1",
+ "_comment": "Diagnosis vocabulary for the CliniX case differential and diagnosis pickers. Curated for an Indian MBBS/PG curriculum. Lazily fetched on first use; never parsed at launch.",
+ "systems": [
+  {
+   "id": "cvs",
+   "name": "Cardiovascular"
+  },
+  {
+   "id": "resp",
+   "name": "Respiratory"
+  },
+  {
+   "id": "gi",
+   "name": "Gastrointestinal"
+  },
+  {
+   "id": "hepbil",
+   "name": "Hepatobiliary"
+  },
+  {
+   "id": "renal",
+   "name": "Renal and genitourinary"
+  },
+  {
+   "id": "neuro",
+   "name": "Neurology"
+  },
+  {
+   "id": "endo",
+   "name": "Endocrine and metabolic"
+  },
+  {
+   "id": "heme",
+   "name": "Haematology"
+  },
+  {
+   "id": "id",
+   "name": "Infectious disease"
+  },
+  {
+   "id": "rheum",
+   "name": "Rheumatology and immunology"
+  },
+  {
+   "id": "onc",
+   "name": "Oncology"
+  },
+  {
+   "id": "derm",
+   "name": "Dermatology"
+  },
+  {
+   "id": "psych",
+   "name": "Psychiatry"
+  },
+  {
+   "id": "obgy",
+   "name": "Obstetrics and gynaecology"
+  },
+  {
+   "id": "paeds",
+   "name": "Paediatrics"
+  },
+  {
+   "id": "emerg",
+   "name": "Emergency and critical care"
+  },
+  {
+   "id": "misc",
+   "name": "General and multisystem"
+  }
+ ],
+ "dx": [
+  {
+   "n": "Congestive cardiac failure",
+   "s": "cvs",
+   "syn": [
+    "ccf",
+    "heart failure",
+    "cardiac failure",
+    "chf"
+   ]
+  },
+  {
+   "n": "Heart failure with reduced ejection fraction",
+   "s": "cvs",
+   "syn": [
+    "hfref",
+    "systolic heart failure"
+   ]
+  },
+  {
+   "n": "Heart failure with preserved ejection fraction",
+   "s": "cvs",
+   "syn": [
+    "hfpef",
+    "diastolic heart failure"
+   ]
+  },
+  {
+   "n": "Acute decompensated heart failure",
+   "s": "cvs",
+   "syn": [
+    "adhf",
+    "acute heart failure"
+   ]
+  },
+  {
+   "n": "Acute coronary syndrome",
+   "s": "cvs",
+   "syn": [
+    "acs"
+   ]
+  },
+  {
+   "n": "ST elevation myocardial infarction",
+   "s": "cvs",
+   "syn": [
+    "stemi",
+    "anterior wall mi",
+    "inferior wall mi"
+   ]
+  },
+  {
+   "n": "Non ST elevation myocardial infarction",
+   "s": "cvs",
+   "syn": [
+    "nstemi"
+   ]
+  },
+  {
+   "n": "Unstable angina",
+   "s": "cvs",
+   "syn": [
+    "ua"
+   ]
+  },
+  {
+   "n": "Stable angina pectoris",
+   "s": "cvs",
+   "syn": [
+    "angina",
+    "exertional angina"
+   ]
+  },
+  {
+   "n": "Ischaemic heart disease",
+   "s": "cvs",
+   "syn": [
+    "ihd",
+    "coronary artery disease",
+    "cad"
+   ]
+  },
+  {
+   "n": "Hypertensive heart disease",
+   "s": "cvs"
+  },
+  {
+   "n": "Systemic hypertension",
+   "s": "cvs",
+   "syn": [
+    "hypertension",
+    "high bp",
+    "htn"
+   ]
+  },
+  {
+   "n": "Hypertensive emergency",
+   "s": "cvs",
+   "syn": [
+    "malignant hypertension",
+    "hypertensive crisis"
+   ]
+  },
+  {
+   "n": "Pulmonary arterial hypertension",
+   "s": "cvs",
+   "syn": [
+    "pah",
+    "pulmonary hypertension"
+   ]
+  },
+  {
+   "n": "Cor pulmonale",
+   "s": "cvs",
+   "syn": [
+    "right heart failure"
+   ]
+  },
+  {
+   "n": "Rheumatic heart disease",
+   "s": "cvs",
+   "syn": [
+    "rhd"
+   ]
+  },
+  {
+   "n": "Mitral stenosis",
+   "s": "cvs",
+   "syn": [
+    "ms"
+   ]
+  },
+  {
+   "n": "Mitral regurgitation",
+   "s": "cvs",
+   "syn": [
+    "mr",
+    "mitral incompetence"
+   ]
+  },
+  {
+   "n": "Aortic stenosis",
+   "s": "cvs",
+   "syn": [
+    "as"
+   ]
+  },
+  {
+   "n": "Aortic regurgitation",
+   "s": "cvs",
+   "syn": [
+    "ar",
+    "aortic incompetence"
+   ]
+  },
+  {
+   "n": "Tricuspid regurgitation",
+   "s": "cvs",
+   "syn": [
+    "tr"
+   ]
+  },
+  {
+   "n": "Mitral valve prolapse",
+   "s": "cvs",
+   "syn": [
+    "mvp"
+   ]
+  },
+  {
+   "n": "Infective endocarditis",
+   "s": "cvs",
+   "syn": [
+    "ie",
+    "bacterial endocarditis",
+    "sabe"
+   ]
+  },
+  {
+   "n": "Acute rheumatic fever",
+   "s": "cvs",
+   "syn": [
+    "arf",
+    "rheumatic fever"
+   ]
+  },
+  {
+   "n": "Pericardial effusion",
+   "s": "cvs"
+  },
+  {
+   "n": "Cardiac tamponade",
+   "s": "cvs",
+   "syn": [
+    "tamponade"
+   ]
+  },
+  {
+   "n": "Acute pericarditis",
+   "s": "cvs",
+   "syn": [
+    "pericarditis"
+   ]
+  },
+  {
+   "n": "Constrictive pericarditis",
+   "s": "cvs"
+  },
+  {
+   "n": "Dilated cardiomyopathy",
+   "s": "cvs",
+   "syn": [
+    "dcm"
+   ]
+  },
+  {
+   "n": "Hypertrophic cardiomyopathy",
+   "s": "cvs",
+   "syn": [
+    "hcm",
+    "hocm"
+   ]
+  },
+  {
+   "n": "Restrictive cardiomyopathy",
+   "s": "cvs",
+   "syn": [
+    "rcm"
+   ]
+  },
+  {
+   "n": "Peripartum cardiomyopathy",
+   "s": "cvs",
+   "syn": [
+    "ppcm"
+   ]
+  },
+  {
+   "n": "Myocarditis",
+   "s": "cvs"
+  },
+  {
+   "n": "Atrial fibrillation",
+   "s": "cvs",
+   "syn": [
+    "af",
+    "afib"
+   ]
+  },
+  {
+   "n": "Atrial flutter",
+   "s": "cvs"
+  },
+  {
+   "n": "Supraventricular tachycardia",
+   "s": "cvs",
+   "syn": [
+    "svt",
+    "psvt"
+   ]
+  },
+  {
+   "n": "Ventricular tachycardia",
+   "s": "cvs",
+   "syn": [
+    "vt"
+   ]
+  },
+  {
+   "n": "Complete heart block",
+   "s": "cvs",
+   "syn": [
+    "chb",
+    "third degree av block"
+   ]
+  },
+  {
+   "n": "Sick sinus syndrome",
+   "s": "cvs"
+  },
+  {
+   "n": "Deep vein thrombosis",
+   "s": "cvs",
+   "syn": [
+    "dvt"
+   ]
+  },
+  {
+   "n": "Peripheral arterial disease",
+   "s": "cvs",
+   "syn": [
+    "pad",
+    "peripheral vascular disease"
+   ]
+  },
+  {
+   "n": "Aortic dissection",
+   "s": "cvs",
+   "syn": [
+    "dissecting aneurysm"
+   ]
+  },
+  {
+   "n": "Abdominal aortic aneurysm",
+   "s": "cvs",
+   "syn": [
+    "aaa"
+   ]
+  },
+  {
+   "n": "Atrial septal defect",
+   "s": "cvs",
+   "syn": [
+    "asd"
+   ]
+  },
+  {
+   "n": "Ventricular septal defect",
+   "s": "cvs",
+   "syn": [
+    "vsd"
+   ]
+  },
+  {
+   "n": "Patent ductus arteriosus",
+   "s": "cvs",
+   "syn": [
+    "pda"
+   ]
+  },
+  {
+   "n": "Tetralogy of Fallot",
+   "s": "cvs",
+   "syn": [
+    "tof"
+   ]
+  },
+  {
+   "n": "Coarctation of the aorta",
+   "s": "cvs"
+  },
+  {
+   "n": "Eisenmenger syndrome",
+   "s": "cvs"
+  },
+  {
+   "n": "Postural orthostatic hypotension",
+   "s": "cvs",
+   "syn": [
+    "orthostatic hypotension"
+   ]
+  },
+  {
+   "n": "Vasovagal syncope",
+   "s": "cvs",
+   "syn": [
+    "neurocardiogenic syncope"
+   ]
+  },
+  {
+   "n": "Chronic obstructive pulmonary disease",
+   "s": "resp",
+   "syn": [
+    "copd",
+    "chronic bronchitis",
+    "emphysema"
+   ]
+  },
+  {
+   "n": "Acute exacerbation of COPD",
+   "s": "resp",
+   "syn": [
+    "aecopd",
+    "copd exacerbation"
+   ]
+  },
+  {
+   "n": "Bronchial asthma",
+   "s": "resp",
+   "syn": [
+    "asthma"
+   ]
+  },
+  {
+   "n": "Acute severe asthma",
+   "s": "resp",
+   "syn": [
+    "status asthmaticus",
+    "severe asthma"
+   ]
+  },
+  {
+   "n": "Community acquired pneumonia",
+   "s": "resp",
+   "syn": [
+    "cap",
+    "pneumonia"
+   ]
+  },
+  {
+   "n": "Hospital acquired pneumonia",
+   "s": "resp",
+   "syn": [
+    "hap",
+    "nosocomial pneumonia"
+   ]
+  },
+  {
+   "n": "Ventilator associated pneumonia",
+   "s": "resp",
+   "syn": [
+    "vap"
+   ]
+  },
+  {
+   "n": "Aspiration pneumonia",
+   "s": "resp"
+  },
+  {
+   "n": "Pulmonary tuberculosis",
+   "s": "resp",
+   "syn": [
+    "pulmonary tb",
+    "ptb",
+    "koch"
+   ]
+  },
+  {
+   "n": "Miliary tuberculosis",
+   "s": "resp",
+   "syn": [
+    "miliary tb"
+   ]
+  },
+  {
+   "n": "Multidrug resistant tuberculosis",
+   "s": "resp",
+   "syn": [
+    "mdr tb"
+   ]
+  },
+  {
+   "n": "Pleural effusion",
+   "s": "resp"
+  },
+  {
+   "n": "Empyema thoracis",
+   "s": "resp",
+   "syn": [
+    "empyema"
+   ]
+  },
+  {
+   "n": "Pneumothorax",
+   "s": "resp"
+  },
+  {
+   "n": "Tension pneumothorax",
+   "s": "resp"
+  },
+  {
+   "n": "Bronchiectasis",
+   "s": "resp"
+  },
+  {
+   "n": "Interstitial lung disease",
+   "s": "resp",
+   "syn": [
+    "ild",
+    "pulmonary fibrosis"
+   ]
+  },
+  {
+   "n": "Idiopathic pulmonary fibrosis",
+   "s": "resp",
+   "syn": [
+    "ipf"
+   ]
+  },
+  {
+   "n": "Hypersensitivity pneumonitis",
+   "s": "resp",
+   "syn": [
+    "extrinsic allergic alveolitis"
+   ]
+  },
+  {
+   "n": "Occupational lung disease",
+   "s": "resp",
+   "syn": [
+    "pneumoconiosis",
+    "silicosis",
+    "asbestosis"
+   ]
+  },
+  {
+   "n": "Pulmonary embolism",
+   "s": "resp",
+   "syn": [
+    "pe",
+    "pulmonary thromboembolism"
+   ]
+  },
+  {
+   "n": "Acute respiratory distress syndrome",
+   "s": "resp",
+   "syn": [
+    "ards"
+   ]
+  },
+  {
+   "n": "Obstructive sleep apnoea",
+   "s": "resp",
+   "syn": [
+    "osa",
+    "sleep apnea"
+   ]
+  },
+  {
+   "n": "Lung abscess",
+   "s": "resp"
+  },
+  {
+   "n": "Allergic bronchopulmonary aspergillosis",
+   "s": "resp",
+   "syn": [
+    "abpa"
+   ]
+  },
+  {
+   "n": "Upper respiratory tract infection",
+   "s": "resp",
+   "syn": [
+    "urti",
+    "common cold"
+   ]
+  },
+  {
+   "n": "Acute bronchitis",
+   "s": "resp"
+  },
+  {
+   "n": "Type 1 respiratory failure",
+   "s": "resp",
+   "syn": [
+    "hypoxaemic respiratory failure"
+   ]
+  },
+  {
+   "n": "Type 2 respiratory failure",
+   "s": "resp",
+   "syn": [
+    "hypercapnic respiratory failure"
+   ]
+  },
+  {
+   "n": "Peptic ulcer disease",
+   "s": "gi",
+   "syn": [
+    "pud",
+    "gastric ulcer",
+    "duodenal ulcer"
+   ]
+  },
+  {
+   "n": "Gastro oesophageal reflux disease",
+   "s": "gi",
+   "syn": [
+    "gerd",
+    "reflux",
+    "gord"
+   ]
+  },
+  {
+   "n": "Upper gastrointestinal bleed",
+   "s": "gi",
+   "syn": [
+    "ugi bleed",
+    "haematemesis"
+   ]
+  },
+  {
+   "n": "Lower gastrointestinal bleed",
+   "s": "gi",
+   "syn": [
+    "lgi bleed"
+   ]
+  },
+  {
+   "n": "Acute gastroenteritis",
+   "s": "gi",
+   "syn": [
+    "age",
+    "gastroenteritis",
+    "food poisoning"
+   ]
+  },
+  {
+   "n": "Acute pancreatitis",
+   "s": "gi"
+  },
+  {
+   "n": "Chronic pancreatitis",
+   "s": "gi"
+  },
+  {
+   "n": "Inflammatory bowel disease",
+   "s": "gi",
+   "syn": [
+    "ibd"
+   ]
+  },
+  {
+   "n": "Ulcerative colitis",
+   "s": "gi",
+   "syn": [
+    "uc"
+   ]
+  },
+  {
+   "n": "Crohn disease",
+   "s": "gi",
+   "syn": [
+    "crohns"
+   ]
+  },
+  {
+   "n": "Irritable bowel syndrome",
+   "s": "gi",
+   "syn": [
+    "ibs"
+   ]
+  },
+  {
+   "n": "Coeliac disease",
+   "s": "gi",
+   "syn": [
+    "celiac",
+    "gluten enteropathy"
+   ]
+  },
+  {
+   "n": "Intestinal obstruction",
+   "s": "gi",
+   "syn": [
+    "bowel obstruction"
+   ]
+  },
+  {
+   "n": "Acute appendicitis",
+   "s": "gi",
+   "syn": [
+    "appendicitis"
+   ]
+  },
+  {
+   "n": "Acute intestinal perforation",
+   "s": "gi",
+   "syn": [
+    "hollow viscus perforation"
+   ]
+  },
+  {
+   "n": "Mesenteric ischaemia",
+   "s": "gi"
+  },
+  {
+   "n": "Abdominal tuberculosis",
+   "s": "gi",
+   "syn": [
+    "intestinal tb",
+    "abdominal koch"
+   ]
+  },
+  {
+   "n": "Amoebic liver abscess",
+   "s": "hepbil",
+   "syn": [
+    "liver abscess",
+    "amoebiasis"
+   ]
+  },
+  {
+   "n": "Chronic liver disease",
+   "s": "hepbil",
+   "syn": [
+    "cld",
+    "cirrhosis",
+    "decompensated liver disease"
+   ]
+  },
+  {
+   "n": "Alcoholic liver disease",
+   "s": "hepbil",
+   "syn": [
+    "ald",
+    "alcoholic hepatitis"
+   ]
+  },
+  {
+   "n": "Non alcoholic fatty liver disease",
+   "s": "hepbil",
+   "syn": [
+    "nafld",
+    "fatty liver",
+    "nash"
+   ]
+  },
+  {
+   "n": "Acute viral hepatitis",
+   "s": "hepbil",
+   "syn": [
+    "hepatitis a",
+    "hepatitis e",
+    "viral hepatitis"
+   ]
+  },
+  {
+   "n": "Chronic hepatitis B",
+   "s": "hepbil",
+   "syn": [
+    "hbv"
+   ]
+  },
+  {
+   "n": "Chronic hepatitis C",
+   "s": "hepbil",
+   "syn": [
+    "hcv"
+   ]
+  },
+  {
+   "n": "Acute liver failure",
+   "s": "hepbil",
+   "syn": [
+    "fulminant hepatic failure",
+    "alf"
+   ]
+  },
+  {
+   "n": "Hepatic encephalopathy",
+   "s": "hepbil",
+   "syn": [
+    "he",
+    "portosystemic encephalopathy"
+   ]
+  },
+  {
+   "n": "Portal hypertension",
+   "s": "hepbil"
+  },
+  {
+   "n": "Spontaneous bacterial peritonitis",
+   "s": "hepbil",
+   "syn": [
+    "sbp"
+   ]
+  },
+  {
+   "n": "Hepatorenal syndrome",
+   "s": "hepbil",
+   "syn": [
+    "hrs"
+   ]
+  },
+  {
+   "n": "Obstructive jaundice",
+   "s": "hepbil",
+   "syn": [
+    "surgical jaundice"
+   ]
+  },
+  {
+   "n": "Choledocholithiasis",
+   "s": "hepbil",
+   "syn": [
+    "cbd stone"
+   ]
+  },
+  {
+   "n": "Acute cholecystitis",
+   "s": "hepbil",
+   "syn": [
+    "cholecystitis"
+   ]
+  },
+  {
+   "n": "Cholelithiasis",
+   "s": "hepbil",
+   "syn": [
+    "gallstones"
+   ]
+  },
+  {
+   "n": "Ascending cholangitis",
+   "s": "hepbil",
+   "syn": [
+    "cholangitis"
+   ]
+  },
+  {
+   "n": "Wilson disease",
+   "s": "hepbil"
+  },
+  {
+   "n": "Autoimmune hepatitis",
+   "s": "hepbil"
+  },
+  {
+   "n": "Haemochromatosis",
+   "s": "hepbil",
+   "syn": [
+    "hemochromatosis"
+   ]
+  },
+  {
+   "n": "Acute kidney injury",
+   "s": "renal",
+   "syn": [
+    "aki",
+    "acute renal failure",
+    "arf"
+   ]
+  },
+  {
+   "n": "Chronic kidney disease",
+   "s": "renal",
+   "syn": [
+    "ckd",
+    "chronic renal failure",
+    "crf"
+   ]
+  },
+  {
+   "n": "Diabetic nephropathy",
+   "s": "renal",
+   "syn": [
+    "diabetic kidney disease"
+   ]
+  },
+  {
+   "n": "Nephrotic syndrome",
+   "s": "renal"
+  },
+  {
+   "n": "Nephritic syndrome",
+   "s": "renal",
+   "syn": [
+    "acute glomerulonephritis",
+    "agn"
+   ]
+  },
+  {
+   "n": "IgA nephropathy",
+   "s": "renal"
+  },
+  {
+   "n": "Lupus nephritis",
+   "s": "renal"
+  },
+  {
+   "n": "Urinary tract infection",
+   "s": "renal",
+   "syn": [
+    "uti",
+    "cystitis"
+   ]
+  },
+  {
+   "n": "Acute pyelonephritis",
+   "s": "renal",
+   "syn": [
+    "pyelonephritis"
+   ]
+  },
+  {
+   "n": "Renal calculi",
+   "s": "renal",
+   "syn": [
+    "nephrolithiasis",
+    "kidney stone",
+    "ureteric colic"
+   ]
+  },
+  {
+   "n": "Benign prostatic hyperplasia",
+   "s": "renal",
+   "syn": [
+    "bph",
+    "prostatomegaly"
+   ]
+  },
+  {
+   "n": "Acute urinary retention",
+   "s": "renal"
+  },
+  {
+   "n": "Polycystic kidney disease",
+   "s": "renal",
+   "syn": [
+    "pkd",
+    "adpkd"
+   ]
+  },
+  {
+   "n": "Renal tubular acidosis",
+   "s": "renal",
+   "syn": [
+    "rta"
+   ]
+  },
+  {
+   "n": "Rhabdomyolysis",
+   "s": "renal"
+  },
+  {
+   "n": "Ischaemic stroke",
+   "s": "neuro",
+   "syn": [
+    "cerebral infarction",
+    "cva",
+    "stroke"
+   ]
+  },
+  {
+   "n": "Haemorrhagic stroke",
+   "s": "neuro",
+   "syn": [
+    "intracerebral haemorrhage",
+    "ich",
+    "hemorrhagic stroke"
+   ]
+  },
+  {
+   "n": "Subarachnoid haemorrhage",
+   "s": "neuro",
+   "syn": [
+    "sah"
+   ]
+  },
+  {
+   "n": "Transient ischaemic attack",
+   "s": "neuro",
+   "syn": [
+    "tia"
+   ]
+  },
+  {
+   "n": "Cerebral venous sinus thrombosis",
+   "s": "neuro",
+   "syn": [
+    "cvst",
+    "cortical vein thrombosis"
+   ]
+  },
+  {
+   "n": "Bacterial meningitis",
+   "s": "neuro",
+   "syn": [
+    "pyogenic meningitis",
+    "meningitis"
+   ]
+  },
+  {
+   "n": "Tuberculous meningitis",
+   "s": "neuro",
+   "syn": [
+    "tbm"
+   ]
+  },
+  {
+   "n": "Viral encephalitis",
+   "s": "neuro",
+   "syn": [
+    "encephalitis",
+    "herpes encephalitis"
+   ]
+  },
+  {
+   "n": "Brain abscess",
+   "s": "neuro"
+  },
+  {
+   "n": "Space occupying lesion",
+   "s": "neuro",
+   "syn": [
+    "sol",
+    "brain tumour"
+   ]
+  },
+  {
+   "n": "Seizure disorder",
+   "s": "neuro",
+   "syn": [
+    "epilepsy",
+    "convulsive disorder"
+   ]
+  },
+  {
+   "n": "Status epilepticus",
+   "s": "neuro"
+  },
+  {
+   "n": "Guillain Barre syndrome",
+   "s": "neuro",
+   "syn": [
+    "gbs",
+    "aidp"
+   ]
+  },
+  {
+   "n": "Myasthenia gravis",
+   "s": "neuro",
+   "syn": [
+    "mg"
+   ]
+  },
+  {
+   "n": "Peripheral neuropathy",
+   "s": "neuro",
+   "syn": [
+    "polyneuropathy"
+   ]
+  },
+  {
+   "n": "Diabetic peripheral neuropathy",
+   "s": "neuro",
+   "syn": [
+    "diabetic neuropathy"
+   ]
+  },
+  {
+   "n": "Multiple sclerosis",
+   "s": "neuro",
+   "syn": [
+    "ms",
+    "demyelinating disease"
+   ]
+  },
+  {
+   "n": "Parkinson disease",
+   "s": "neuro",
+   "syn": [
+    "parkinsonism",
+    "parkinsons"
+   ]
+  },
+  {
+   "n": "Motor neurone disease",
+   "s": "neuro",
+   "syn": [
+    "mnd",
+    "als",
+    "amyotrophic lateral sclerosis"
+   ]
+  },
+  {
+   "n": "Spinal cord compression",
+   "s": "neuro",
+   "syn": [
+    "cord compression",
+    "myelopathy"
+   ]
+  },
+  {
+   "n": "Transverse myelitis",
+   "s": "neuro"
+  },
+  {
+   "n": "Cerebellar ataxia",
+   "s": "neuro",
+   "syn": [
+    "ataxia"
+   ]
+  },
+  {
+   "n": "Wernicke encephalopathy",
+   "s": "neuro"
+  },
+  {
+   "n": "Cranial nerve palsy",
+   "s": "neuro",
+   "syn": [
+    "facial palsy",
+    "bells palsy",
+    "third nerve palsy"
+   ]
+  },
+  {
+   "n": "Migraine",
+   "s": "neuro"
+  },
+  {
+   "n": "Tension type headache",
+   "s": "neuro",
+   "syn": [
+    "tension headache"
+   ]
+  },
+  {
+   "n": "Trigeminal neuralgia",
+   "s": "neuro"
+  },
+  {
+   "n": "Normal pressure hydrocephalus",
+   "s": "neuro",
+   "syn": [
+    "nph"
+   ]
+  },
+  {
+   "n": "Dementia",
+   "s": "neuro",
+   "syn": [
+    "alzheimer",
+    "alzheimers disease"
+   ]
+  },
+  {
+   "n": "Delirium",
+   "s": "neuro",
+   "syn": [
+    "acute confusional state"
+   ]
+  },
+  {
+   "n": "Type 2 diabetes mellitus",
+   "s": "endo",
+   "syn": [
+    "t2dm",
+    "diabetes",
+    "dm"
+   ]
+  },
+  {
+   "n": "Type 1 diabetes mellitus",
+   "s": "endo",
+   "syn": [
+    "t1dm",
+    "iddm"
+   ]
+  },
+  {
+   "n": "Diabetic ketoacidosis",
+   "s": "endo",
+   "syn": [
+    "dka"
+   ]
+  },
+  {
+   "n": "Hyperosmolar hyperglycaemic state",
+   "s": "endo",
+   "syn": [
+    "hhs",
+    "honk"
+   ]
+  },
+  {
+   "n": "Hypoglycaemia",
+   "s": "endo",
+   "syn": [
+    "low sugar"
+   ]
+  },
+  {
+   "n": "Hypothyroidism",
+   "s": "endo",
+   "syn": [
+    "myxoedema"
+   ]
+  },
+  {
+   "n": "Hyperthyroidism",
+   "s": "endo",
+   "syn": [
+    "thyrotoxicosis",
+    "graves disease"
+   ]
+  },
+  {
+   "n": "Thyroid storm",
+   "s": "endo",
+   "syn": [
+    "thyrotoxic crisis"
+   ]
+  },
+  {
+   "n": "Multinodular goitre",
+   "s": "endo",
+   "syn": [
+    "goitre",
+    "goiter"
+   ]
+  },
+  {
+   "n": "Cushing syndrome",
+   "s": "endo",
+   "syn": [
+    "hypercortisolism"
+   ]
+  },
+  {
+   "n": "Addison disease",
+   "s": "endo",
+   "syn": [
+    "adrenal insufficiency",
+    "primary hypoadrenalism"
+   ]
+  },
+  {
+   "n": "Phaeochromocytoma",
+   "s": "endo",
+   "syn": [
+    "pheochromocytoma"
+   ]
+  },
+  {
+   "n": "Acromegaly",
+   "s": "endo"
+  },
+  {
+   "n": "Hyperprolactinaemia",
+   "s": "endo",
+   "syn": [
+    "prolactinoma"
+   ]
+  },
+  {
+   "n": "Primary hyperparathyroidism",
+   "s": "endo",
+   "syn": [
+    "hyperparathyroidism"
+   ]
+  },
+  {
+   "n": "Hypoparathyroidism",
+   "s": "endo"
+  },
+  {
+   "n": "Osteomalacia",
+   "s": "endo",
+   "syn": [
+    "vitamin d deficiency"
+   ]
+  },
+  {
+   "n": "Osteoporosis",
+   "s": "endo"
+  },
+  {
+   "n": "Metabolic syndrome",
+   "s": "endo"
+  },
+  {
+   "n": "Obesity",
+   "s": "endo"
+  },
+  {
+   "n": "Dyslipidaemia",
+   "s": "endo",
+   "syn": [
+    "hyperlipidaemia"
+   ]
+  },
+  {
+   "n": "Hyponatraemia",
+   "s": "endo",
+   "syn": [
+    "low sodium"
+   ]
+  },
+  {
+   "n": "Hypernatraemia",
+   "s": "endo",
+   "syn": [
+    "high sodium"
+   ]
+  },
+  {
+   "n": "Hypokalaemia",
+   "s": "endo",
+   "syn": [
+    "low potassium"
+   ]
+  },
+  {
+   "n": "Hyperkalaemia",
+   "s": "endo",
+   "syn": [
+    "high potassium"
+   ]
+  },
+  {
+   "n": "Hypercalcaemia",
+   "s": "endo"
+  },
+  {
+   "n": "Hypocalcaemia",
+   "s": "endo"
+  },
+  {
+   "n": "Metabolic acidosis",
+   "s": "endo"
+  },
+  {
+   "n": "Metabolic alkalosis",
+   "s": "endo"
+  },
+  {
+   "n": "Iron deficiency anaemia",
+   "s": "heme",
+   "syn": [
+    "ida",
+    "iron deficiency",
+    "microcytic anaemia"
+   ]
+  },
+  {
+   "n": "Megaloblastic anaemia",
+   "s": "heme",
+   "syn": [
+    "b12 deficiency",
+    "folate deficiency",
+    "macrocytic anaemia"
+   ]
+  },
+  {
+   "n": "Anaemia of chronic disease",
+   "s": "heme",
+   "syn": [
+    "acd"
+   ]
+  },
+  {
+   "n": "Aplastic anaemia",
+   "s": "heme"
+  },
+  {
+   "n": "Autoimmune haemolytic anaemia",
+   "s": "heme",
+   "syn": [
+    "aiha",
+    "haemolytic anaemia"
+   ]
+  },
+  {
+   "n": "Sickle cell disease",
+   "s": "heme",
+   "syn": [
+    "sickle cell anaemia"
+   ]
+  },
+  {
+   "n": "Thalassaemia major",
+   "s": "heme",
+   "syn": [
+    "thalassemia",
+    "beta thalassaemia"
+   ]
+  },
+  {
+   "n": "G6PD deficiency",
+   "s": "heme"
+  },
+  {
+   "n": "Hereditary spherocytosis",
+   "s": "heme"
+  },
+  {
+   "n": "Immune thrombocytopenic purpura",
+   "s": "heme",
+   "syn": [
+    "itp"
+   ]
+  },
+  {
+   "n": "Thrombotic thrombocytopenic purpura",
+   "s": "heme",
+   "syn": [
+    "ttp"
+   ]
+  },
+  {
+   "n": "Disseminated intravascular coagulation",
+   "s": "heme",
+   "syn": [
+    "dic"
+   ]
+  },
+  {
+   "n": "Haemophilia",
+   "s": "heme",
+   "syn": [
+    "hemophilia",
+    "factor viii deficiency"
+   ]
+  },
+  {
+   "n": "Von Willebrand disease",
+   "s": "heme",
+   "syn": [
+    "vwd"
+   ]
+  },
+  {
+   "n": "Acute lymphoblastic leukaemia",
+   "s": "heme",
+   "syn": [
+    "all"
+   ]
+  },
+  {
+   "n": "Acute myeloid leukaemia",
+   "s": "heme",
+   "syn": [
+    "aml"
+   ]
+  },
+  {
+   "n": "Chronic myeloid leukaemia",
+   "s": "heme",
+   "syn": [
+    "cml"
+   ]
+  },
+  {
+   "n": "Chronic lymphocytic leukaemia",
+   "s": "heme",
+   "syn": [
+    "cll"
+   ]
+  },
+  {
+   "n": "Hodgkin lymphoma",
+   "s": "heme",
+   "syn": [
+    "hodgkins"
+   ]
+  },
+  {
+   "n": "Non Hodgkin lymphoma",
+   "s": "heme",
+   "syn": [
+    "nhl"
+   ]
+  },
+  {
+   "n": "Multiple myeloma",
+   "s": "heme",
+   "syn": [
+    "myeloma"
+   ]
+  },
+  {
+   "n": "Myelodysplastic syndrome",
+   "s": "heme",
+   "syn": [
+    "mds"
+   ]
+  },
+  {
+   "n": "Polycythaemia vera",
+   "s": "heme",
+   "syn": [
+    "polycythemia"
+   ]
+  },
+  {
+   "n": "Pancytopenia",
+   "s": "heme"
+  },
+  {
+   "n": "Splenomegaly",
+   "s": "heme"
+  },
+  {
+   "n": "Enteric fever",
+   "s": "id",
+   "syn": [
+    "typhoid",
+    "typhoid fever",
+    "salmonella"
+   ]
+  },
+  {
+   "n": "Malaria",
+   "s": "id",
+   "syn": [
+    "falciparum malaria",
+    "vivax malaria"
+   ]
+  },
+  {
+   "n": "Dengue fever",
+   "s": "id",
+   "syn": [
+    "dengue",
+    "dengue haemorrhagic fever"
+   ]
+  },
+  {
+   "n": "Chikungunya",
+   "s": "id"
+  },
+  {
+   "n": "Scrub typhus",
+   "s": "id",
+   "syn": [
+    "rickettsial fever"
+   ]
+  },
+  {
+   "n": "Leptospirosis",
+   "s": "id"
+  },
+  {
+   "n": "Kala azar",
+   "s": "id",
+   "syn": [
+    "visceral leishmaniasis"
+   ]
+  },
+  {
+   "n": "Sepsis",
+   "s": "id",
+   "syn": [
+    "septicaemia",
+    "bacteraemia"
+   ]
+  },
+  {
+   "n": "Septic shock",
+   "s": "id"
+  },
+  {
+   "n": "HIV infection",
+   "s": "id",
+   "syn": [
+    "hiv",
+    "aids",
+    "retroviral disease"
+   ]
+  },
+  {
+   "n": "Tetanus",
+   "s": "id"
+  },
+  {
+   "n": "Rabies",
+   "s": "id"
+  },
+  {
+   "n": "Cellulitis",
+   "s": "id"
+  },
+  {
+   "n": "Necrotising fasciitis",
+   "s": "id"
+  },
+  {
+   "n": "Osteomyelitis",
+   "s": "id"
+  },
+  {
+   "n": "Septic arthritis",
+   "s": "id",
+   "syn": [
+    "pyogenic arthritis"
+   ]
+  },
+  {
+   "n": "Infectious mononucleosis",
+   "s": "id",
+   "syn": [
+    "ebv",
+    "glandular fever"
+   ]
+  },
+  {
+   "n": "COVID-19",
+   "s": "id",
+   "syn": [
+    "covid",
+    "sars cov 2"
+   ]
+  },
+  {
+   "n": "Influenza",
+   "s": "id",
+   "syn": [
+    "flu",
+    "h1n1"
+   ]
+  },
+  {
+   "n": "Measles",
+   "s": "id",
+   "syn": [
+    "rubeola"
+   ]
+  },
+  {
+   "n": "Chickenpox",
+   "s": "id",
+   "syn": [
+    "varicella"
+   ]
+  },
+  {
+   "n": "Mumps",
+   "s": "id"
+  },
+  {
+   "n": "Diphtheria",
+   "s": "id"
+  },
+  {
+   "n": "Pertussis",
+   "s": "id",
+   "syn": [
+    "whooping cough"
+   ]
+  },
+  {
+   "n": "Amoebiasis",
+   "s": "id",
+   "syn": [
+    "amoebic dysentery"
+   ]
+  },
+  {
+   "n": "Filariasis",
+   "s": "id",
+   "syn": [
+    "lymphatic filariasis"
+   ]
+  },
+  {
+   "n": "Leprosy",
+   "s": "id",
+   "syn": [
+    "hansen disease"
+   ]
+  },
+  {
+   "n": "Rheumatoid arthritis",
+   "s": "rheum",
+   "syn": [
+    "ra"
+   ]
+  },
+  {
+   "n": "Systemic lupus erythematosus",
+   "s": "rheum",
+   "syn": [
+    "sle",
+    "lupus"
+   ]
+  },
+  {
+   "n": "Ankylosing spondylitis",
+   "s": "rheum",
+   "syn": [
+    "as"
+   ]
+  },
+  {
+   "n": "Psoriatic arthritis",
+   "s": "rheum"
+  },
+  {
+   "n": "Reactive arthritis",
+   "s": "rheum",
+   "syn": [
+    "reiter syndrome"
+   ]
+  },
+  {
+   "n": "Gout",
+   "s": "rheum",
+   "syn": [
+    "gouty arthritis"
+   ]
+  },
+  {
+   "n": "Pseudogout",
+   "s": "rheum",
+   "syn": [
+    "cppd"
+   ]
+  },
+  {
+   "n": "Osteoarthritis",
+   "s": "rheum",
+   "syn": [
+    "oa",
+    "degenerative joint disease"
+   ]
+  },
+  {
+   "n": "Systemic sclerosis",
+   "s": "rheum",
+   "syn": [
+    "scleroderma"
+   ]
+  },
+  {
+   "n": "Sjogren syndrome",
+   "s": "rheum"
+  },
+  {
+   "n": "Polymyositis",
+   "s": "rheum",
+   "syn": [
+    "dermatomyositis",
+    "inflammatory myopathy"
+   ]
+  },
+  {
+   "n": "Vasculitis",
+   "s": "rheum",
+   "syn": [
+    "anca vasculitis"
+   ]
+  },
+  {
+   "n": "Henoch Schonlein purpura",
+   "s": "rheum",
+   "syn": [
+    "hsp",
+    "iga vasculitis"
+   ]
+  },
+  {
+   "n": "Takayasu arteritis",
+   "s": "rheum"
+  },
+  {
+   "n": "Giant cell arteritis",
+   "s": "rheum",
+   "syn": [
+    "temporal arteritis"
+   ]
+  },
+  {
+   "n": "Polymyalgia rheumatica",
+   "s": "rheum",
+   "syn": [
+    "pmr"
+   ]
+  },
+  {
+   "n": "Antiphospholipid syndrome",
+   "s": "rheum",
+   "syn": [
+    "apla",
+    "aps"
+   ]
+  },
+  {
+   "n": "Fibromyalgia",
+   "s": "rheum"
+  },
+  {
+   "n": "Sarcoidosis",
+   "s": "rheum"
+  },
+  {
+   "n": "Carcinoma of the lung",
+   "s": "onc",
+   "syn": [
+    "lung cancer",
+    "bronchogenic carcinoma"
+   ]
+  },
+  {
+   "n": "Carcinoma of the breast",
+   "s": "onc",
+   "syn": [
+    "breast cancer"
+   ]
+  },
+  {
+   "n": "Carcinoma of the stomach",
+   "s": "onc",
+   "syn": [
+    "gastric cancer"
+   ]
+  },
+  {
+   "n": "Colorectal carcinoma",
+   "s": "onc",
+   "syn": [
+    "colon cancer",
+    "rectal cancer"
+   ]
+  },
+  {
+   "n": "Hepatocellular carcinoma",
+   "s": "onc",
+   "syn": [
+    "hcc",
+    "liver cancer"
+   ]
+  },
+  {
+   "n": "Carcinoma of the pancreas",
+   "s": "onc",
+   "syn": [
+    "pancreatic cancer"
+   ]
+  },
+  {
+   "n": "Carcinoma of the oesophagus",
+   "s": "onc",
+   "syn": [
+    "oesophageal cancer",
+    "esophageal cancer"
+   ]
+  },
+  {
+   "n": "Carcinoma of the cervix",
+   "s": "onc",
+   "syn": [
+    "cervical cancer"
+   ]
+  },
+  {
+   "n": "Carcinoma of the ovary",
+   "s": "onc",
+   "syn": [
+    "ovarian cancer"
+   ]
+  },
+  {
+   "n": "Carcinoma of the prostate",
+   "s": "onc",
+   "syn": [
+    "prostate cancer"
+   ]
+  },
+  {
+   "n": "Renal cell carcinoma",
+   "s": "onc",
+   "syn": [
+    "rcc",
+    "kidney cancer"
+   ]
+  },
+  {
+   "n": "Carcinoma of the urinary bladder",
+   "s": "onc",
+   "syn": [
+    "bladder cancer"
+   ]
+  },
+  {
+   "n": "Carcinoma of the thyroid",
+   "s": "onc",
+   "syn": [
+    "thyroid cancer"
+   ]
+  },
+  {
+   "n": "Head and neck carcinoma",
+   "s": "onc",
+   "syn": [
+    "oral cancer",
+    "laryngeal carcinoma"
+   ]
+  },
+  {
+   "n": "Malignant pleural effusion",
+   "s": "onc"
+  },
+  {
+   "n": "Metastatic carcinoma of unknown primary",
+   "s": "onc",
+   "syn": [
+    "cup",
+    "metastasis"
+   ]
+  },
+  {
+   "n": "Superior vena cava obstruction",
+   "s": "onc",
+   "syn": [
+    "svc obstruction"
+   ]
+  },
+  {
+   "n": "Tumour lysis syndrome",
+   "s": "onc",
+   "syn": [
+    "tls"
+   ]
+  },
+  {
+   "n": "Febrile neutropenia",
+   "s": "onc",
+   "syn": [
+    "neutropenic sepsis"
+   ]
+  },
+  {
+   "n": "Psoriasis",
+   "s": "derm"
+  },
+  {
+   "n": "Atopic dermatitis",
+   "s": "derm",
+   "syn": [
+    "eczema"
+   ]
+  },
+  {
+   "n": "Contact dermatitis",
+   "s": "derm"
+  },
+  {
+   "n": "Urticaria",
+   "s": "derm",
+   "syn": [
+    "hives"
+   ]
+  },
+  {
+   "n": "Scabies",
+   "s": "derm"
+  },
+  {
+   "n": "Tinea corporis",
+   "s": "derm",
+   "syn": [
+    "ringworm",
+    "dermatophytosis"
+   ]
+  },
+  {
+   "n": "Pemphigus vulgaris",
+   "s": "derm"
+  },
+  {
+   "n": "Stevens Johnson syndrome",
+   "s": "derm",
+   "syn": [
+    "sjs",
+    "toxic epidermal necrolysis"
+   ]
+  },
+  {
+   "n": "Erythema nodosum",
+   "s": "derm"
+  },
+  {
+   "n": "Lichen planus",
+   "s": "derm"
+  },
+  {
+   "n": "Vitiligo",
+   "s": "derm"
+  },
+  {
+   "n": "Acne vulgaris",
+   "s": "derm",
+   "syn": [
+    "acne"
+   ]
+  },
+  {
+   "n": "Herpes zoster",
+   "s": "derm",
+   "syn": [
+    "shingles"
+   ]
+  },
+  {
+   "n": "Drug rash",
+   "s": "derm",
+   "syn": [
+    "drug eruption",
+    "dress"
+   ]
+  },
+  {
+   "n": "Major depressive disorder",
+   "s": "psych",
+   "syn": [
+    "depression"
+   ]
+  },
+  {
+   "n": "Generalised anxiety disorder",
+   "s": "psych",
+   "syn": [
+    "anxiety"
+   ]
+  },
+  {
+   "n": "Bipolar affective disorder",
+   "s": "psych",
+   "syn": [
+    "bipolar",
+    "mania"
+   ]
+  },
+  {
+   "n": "Schizophrenia",
+   "s": "psych"
+  },
+  {
+   "n": "Alcohol withdrawal syndrome",
+   "s": "psych",
+   "syn": [
+    "delirium tremens",
+    "dt"
+   ]
+  },
+  {
+   "n": "Alcohol dependence syndrome",
+   "s": "psych",
+   "syn": [
+    "alcoholism"
+   ]
+  },
+  {
+   "n": "Somatoform disorder",
+   "s": "psych"
+  },
+  {
+   "n": "Panic disorder",
+   "s": "psych"
+  },
+  {
+   "n": "Obsessive compulsive disorder",
+   "s": "psych",
+   "syn": [
+    "ocd"
+   ]
+  },
+  {
+   "n": "Pre eclampsia",
+   "s": "obgy",
+   "syn": [
+    "preeclampsia",
+    "pih"
+   ]
+  },
+  {
+   "n": "Eclampsia",
+   "s": "obgy"
+  },
+  {
+   "n": "HELLP syndrome",
+   "s": "obgy"
+  },
+  {
+   "n": "Gestational diabetes mellitus",
+   "s": "obgy",
+   "syn": [
+    "gdm"
+   ]
+  },
+  {
+   "n": "Ectopic pregnancy",
+   "s": "obgy"
+  },
+  {
+   "n": "Abortion",
+   "s": "obgy",
+   "syn": [
+    "miscarriage",
+    "threatened abortion"
+   ]
+  },
+  {
+   "n": "Antepartum haemorrhage",
+   "s": "obgy",
+   "syn": [
+    "aph",
+    "placenta praevia",
+    "abruptio placentae"
+   ]
+  },
+  {
+   "n": "Postpartum haemorrhage",
+   "s": "obgy",
+   "syn": [
+    "pph"
+   ]
+  },
+  {
+   "n": "Polycystic ovarian syndrome",
+   "s": "obgy",
+   "syn": [
+    "pcos",
+    "pcod"
+   ]
+  },
+  {
+   "n": "Dysfunctional uterine bleeding",
+   "s": "obgy",
+   "syn": [
+    "dub",
+    "abnormal uterine bleeding"
+   ]
+  },
+  {
+   "n": "Pelvic inflammatory disease",
+   "s": "obgy",
+   "syn": [
+    "pid"
+   ]
+  },
+  {
+   "n": "Fibroid uterus",
+   "s": "obgy",
+   "syn": [
+    "leiomyoma",
+    "myoma"
+   ]
+  },
+  {
+   "n": "Endometriosis",
+   "s": "obgy"
+  },
+  {
+   "n": "Hyperemesis gravidarum",
+   "s": "obgy"
+  },
+  {
+   "n": "Neonatal jaundice",
+   "s": "paeds",
+   "syn": [
+    "physiological jaundice"
+   ]
+  },
+  {
+   "n": "Neonatal sepsis",
+   "s": "paeds"
+  },
+  {
+   "n": "Respiratory distress syndrome of the newborn",
+   "s": "paeds",
+   "syn": [
+    "hyaline membrane disease",
+    "rds"
+   ]
+  },
+  {
+   "n": "Birth asphyxia",
+   "s": "paeds",
+   "syn": [
+    "hypoxic ischaemic encephalopathy",
+    "hie"
+   ]
+  },
+  {
+   "n": "Bronchiolitis",
+   "s": "paeds",
+   "syn": [
+    "rsv bronchiolitis"
+   ]
+  },
+  {
+   "n": "Croup",
+   "s": "paeds",
+   "syn": [
+    "acute laryngotracheobronchitis"
+   ]
+  },
+  {
+   "n": "Severe acute malnutrition",
+   "s": "paeds",
+   "syn": [
+    "sam",
+    "marasmus",
+    "kwashiorkor"
+   ]
+  },
+  {
+   "n": "Protein energy malnutrition",
+   "s": "paeds",
+   "syn": [
+    "pem"
+   ]
+  },
+  {
+   "n": "Rickets",
+   "s": "paeds",
+   "syn": [
+    "nutritional rickets"
+   ]
+  },
+  {
+   "n": "Febrile seizure",
+   "s": "paeds",
+   "syn": [
+    "febrile convulsion"
+   ]
+  },
+  {
+   "n": "Nephrotic syndrome of childhood",
+   "s": "paeds",
+   "syn": [
+    "minimal change disease"
+   ]
+  },
+  {
+   "n": "Acute post streptococcal glomerulonephritis",
+   "s": "paeds",
+   "syn": [
+    "apsgn"
+   ]
+  },
+  {
+   "n": "Congenital hypothyroidism",
+   "s": "paeds",
+   "syn": [
+    "cretinism"
+   ]
+  },
+  {
+   "n": "Intussusception",
+   "s": "paeds"
+  },
+  {
+   "n": "Pyloric stenosis",
+   "s": "paeds",
+   "syn": [
+    "infantile hypertrophic pyloric stenosis"
+   ]
+  },
+  {
+   "n": "Kawasaki disease",
+   "s": "paeds"
+  },
+  {
+   "n": "Cardiogenic shock",
+   "s": "emerg"
+  },
+  {
+   "n": "Hypovolaemic shock",
+   "s": "emerg",
+   "syn": [
+    "haemorrhagic shock"
+   ]
+  },
+  {
+   "n": "Distributive shock",
+   "s": "emerg",
+   "syn": [
+    "vasodilatory shock"
+   ]
+  },
+  {
+   "n": "Anaphylaxis",
+   "s": "emerg",
+   "syn": [
+    "anaphylactic shock"
+   ]
+  },
+  {
+   "n": "Organophosphate poisoning",
+   "s": "emerg",
+   "syn": [
+    "op poisoning",
+    "insecticide poisoning"
+   ]
+  },
+  {
+   "n": "Snake bite",
+   "s": "emerg",
+   "syn": [
+    "snakebite",
+    "viper bite"
+   ]
+  },
+  {
+   "n": "Paracetamol poisoning",
+   "s": "emerg",
+   "syn": [
+    "acetaminophen overdose"
+   ]
+  },
+  {
+   "n": "Alcohol intoxication",
+   "s": "emerg",
+   "syn": [
+    "acute alcohol poisoning"
+   ]
+  },
+  {
+   "n": "Carbon monoxide poisoning",
+   "s": "emerg"
+  },
+  {
+   "n": "Heat stroke",
+   "s": "emerg"
+  },
+  {
+   "n": "Drowning",
+   "s": "emerg",
+   "syn": [
+    "near drowning"
+   ]
+  },
+  {
+   "n": "Burns",
+   "s": "emerg",
+   "syn": [
+    "thermal injury"
+   ]
+  },
+  {
+   "n": "Polytrauma",
+   "s": "emerg",
+   "syn": [
+    "multiple injuries"
+   ]
+  },
+  {
+   "n": "Head injury",
+   "s": "emerg",
+   "syn": [
+    "traumatic brain injury",
+    "tbi"
+   ]
+  },
+  {
+   "n": "Acute abdomen",
+   "s": "emerg"
+  },
+  {
+   "n": "Cardiac arrest",
+   "s": "emerg"
+  },
+  {
+   "n": "Pyrexia of unknown origin",
+   "s": "misc",
+   "syn": [
+    "puo",
+    "fuo",
+    "fever of unknown origin"
+   ]
+  },
+  {
+   "n": "Weight loss under evaluation",
+   "s": "misc",
+   "syn": [
+    "unexplained weight loss"
+   ]
+  },
+  {
+   "n": "Generalised lymphadenopathy",
+   "s": "misc",
+   "syn": [
+    "lymphadenopathy"
+   ]
+  },
+  {
+   "n": "Hepatomegaly",
+   "s": "misc",
+   "syn": [
+    "enlarged liver"
+   ]
+  },
+  {
+   "n": "Ascites",
+   "s": "misc"
+  },
+  {
+   "n": "Oedema under evaluation",
+   "s": "misc",
+   "syn": [
+    "generalised oedema",
+    "anasarca"
+   ]
+  },
+  {
+   "n": "Syncope under evaluation",
+   "s": "misc",
+   "syn": [
+    "collapse"
+   ]
+  },
+  {
+   "n": "Chronic fatigue",
+   "s": "misc"
+  },
+  {
+   "n": "Vitamin B12 deficiency",
+   "s": "misc"
+  },
+  {
+   "n": "Vitamin D deficiency",
+   "s": "misc"
+  },
+  {
+   "n": "Iron overload",
+   "s": "misc"
+  },
+  {
+   "n": "Amyloidosis",
+   "s": "misc"
+  },
+  {
+   "n": "Sarcopenia of ageing",
+   "s": "misc",
+   "syn": [
+    "frailty"
+   ]
+  },
+  {
+   "n": "Drug induced liver injury",
+   "s": "misc",
+   "syn": [
+    "dili",
+    "hepatotoxicity"
+   ]
+  },
+  {
+   "n": "Adverse drug reaction",
+   "s": "misc",
+   "syn": [
+    "adr",
+    "drug toxicity"
+   ]
+  }
+ ]
+}

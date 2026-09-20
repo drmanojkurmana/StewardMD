@@ -39,6 +39,10 @@ export function localVerdict(resource, rows, kind) {
  * resources the doctor should be asked for. Each verified view gets `view.verified` (PHI-free).
  */
 const ROW_HUNT_PATIENTS = 8;
+/* The "-detail" resources the server's approval gate insists on (REQUIRED_RESOURCES in
+ * functions/api/connect/agent/[[path]].js). Kept here so a detail the agent could not chain becomes a
+ * question the doctor can answer, instead of a silent refusal at approval time. */
+const GATE_DETAILS = Object.freeze(['labs-detail', 'radiology-detail']);
 
 /** The doctor walked to this view during a guided ask (index.mjs records the taps as view.guidedPath). */
 function shownByDoctor(view) {
@@ -187,6 +191,20 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
     const rows = out ? out.rows : [];
     const c = { resource: view.resourceHint, ok: rows.length > 0, via: out ? 'endpoint' : 'none', rows: rows.length, kind: out ? out.kind : 'none', reason: rows.length ? rows.length + ' rows for one ' + view.detailOf + ' row through the chained call' : (err ? 'replay failed: ' + err : 'the chained call answered no rows'), url: out ? out.url : null };
     checks.push(c); view.verified = c;
+    if (!c.ok) failed.push(view.resourceHint);
+  }
+
+  /* A DETAIL THAT NEVER PROVED MUST BE ASKABLE. This loop only ever pushed to `checks`, so a labs-detail
+   * that failed - or, worse, a proven lab list that produced no detail view at all, so this loop never
+   * ran for it - never reached `failed`, never became a gap, and the doctor was never asked. The run
+   * then finished looking healthy and the server refused approval: "not endpoint-complete: no proven
+   * backend request for labs-detail" (owner's run 6, 2026-09-18). Silence was the bug.
+   * The agent opening the row itself stays the primary path; this only makes the miss visible. */
+  for (const detailRes of GATE_DETAILS) {
+    if (failed.includes(detailRes)) continue;
+    const parent = /^(.+)-detail$/.exec(detailRes)[1];
+    const ok = (res) => list.some((v) => v && v.resourceHint === res && v.verified && v.verified.ok);
+    if (ok(parent) && !ok(detailRes)) failed.push(detailRes);
   }
   return { patients, checks, failed: [...new Set(failed)] };
 }

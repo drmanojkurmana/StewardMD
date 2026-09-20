@@ -124,7 +124,8 @@ test("answer(): a non-Lite pack with CAPS.kb is grounded, its paraphrase is kept
   assert.equal(r.grounding.verdict, "partial");
   assert.match(r.text, /amoxicillin.*500 mg.*tid/i);
   assert.doesNotMatch(r.text, /azithromycin/);
-  assert.match(r.text, /Left out: 1 statement the Knowledge Base did not support\./);
+  assert.doesNotMatch(r.text, /Left out:/, "the verdict no longer sits inside the clinical text (owner audit 2026-09-19)");
+  assert.equal(r.grounding.removed.length, 1);
   assert.match(r.text, /Source: StewardMD Knowledge Base - based on standard medical resources\.$/);
   assert.doesNotMatch(r.text, /p\.\d/, "never a page number");
 });

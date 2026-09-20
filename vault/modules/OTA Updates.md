@@ -130,6 +130,48 @@ never by calling an internal function name directly — there isn't one to call.
   (`minNativeBuild`, `rollout` field on the channel) but the admin UI doesn't expose the rollout
   slider yet — every publish defaults to 100%.
 
+## Gotcha: the plugin cancels a big download at 25 seconds (fixed 2026-09-18)
+Every "Download & install" on the owner's iPhone failed with **"Install failed — download-failed"**.
+It was not the network and not the bundle (sha256 matched, `unzip -t` clean, 1328 files).
+
+`CapgoUpdater.swift performDownloadRequest()` waits on ONE semaphore for the whole transfer:
+`let waitTimeout = max(self.timeout + 5, 10)`, and `self.timeout` is
+`getConfig().getInt("responseTimeout", 20)` — so the default cap on a *complete* bundle download is
+**25 seconds**. Our bundle is 48MB and measures ~77s from production. It was cancelled every time.
+
+Two things follow, both worth remembering:
+1. **`responseTimeout` is a `capacitor.config.json` key, so it is NATIVE.** There is no JS setter.
+   Changing it costs a rebuild + reinstall (which wipes app data — see CLAUDE.md). It is now `900`.
+2. The cancel rejects with `"Timed out downloading bundle from <url>"` — **"timed out", two words**.
+   `otaCode()` in `native-ota.js` matched only `timeout`, so the most common real-world failure fell
+   through to the generic fallback and the raw code reached the doctor's screen. Now matches both.
+
+Also set `"statsUrl": ""` in the same block: the plugin otherwise POSTs device stats to
+`plugin.capgo.app` on every update event (`statsUrlDefault`, `CapacitorUpdaterPlugin.swift:102`).
+An empty string short-circuits `sendStatsWithMetadata` (`guard !statsUrl.isEmpty`). A clinical app
+should not phone a third party, and it also keeps the 900s timeout off any external call.
+
+**Bundle size is the standing risk here.** 48MB zip / 123MB unpacked / 1328 files, of which ~66MB is
+rarely-changing ML/wasm (`kb.enrichment*.js`, onnxruntime, mediapipe, `face_landmarker.task`,
+`offline-clinical.json.gz`). capgo supports a delta path — `download({manifest})` with
+`{file_name, file_hash, download_url}` entries — and `_ota.js checkForDevice` already returns
+`files[]` with `path`/`hash`/`size` for exactly that. Not wired up: the FIRST manifest download has
+no delta cache, so it fetches all 1328 files individually and is slower than the one zip. Worth
+doing only alongside a cache-warming story.
+
+## Version numbering the doctor reads (2026-09-18)
+The server counts releases as a monotonic integer because a rollback republishes an old bundle under
+a NEW number. Nobody says "I'm on 94" out loud, so `SMD_OTA.versionLabel()` maps it to a decimal
+ladder: one tenth per release, rolling over at `.9` — 1.2, 1.3 … 1.9, 2.0, 2.1. `LADDER_BASE = 94`
+is the server version labelled `LADDER_BASE_TENTHS = 12`; the built-in bundle is the rung below.
+**Moving the base re-labels every past release at once** — don't, unless renumbering is the point.
+Shown pinned at the top of the sidebar (`sidebar-redesign.js verHTML()`) with the exact bundle
+number beside it, and in Settings as `Version 1.2 (bundle 94)`.
+
+`SMD_OTA.purgeOld()` runs 8s after launch: a failed 48MB download unpacks to ~123MB of loose files
+and `autoDeletePrevious` only drops the bundle just replaced, so repeated failures accumulated
+copies nothing would ever load.
+
 Deps: [[Native app delivery]]. See [[Decisions]] for the full incident history and reasoning.
 
 - **2026-09-12 gotcha:** an `adb install` can look like it did nothing: the phone keeps running the downloaded OTA bundle (`CapacitorUpdater.current()` over CDP shows it), not `assets/public`. `CapacitorUpdater.reset({toLastSuccessful:false})` puts the APK bundle back. After a client merge, press Push to devices or the next OTA pull restores the old UI.

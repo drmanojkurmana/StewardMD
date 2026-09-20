@@ -208,7 +208,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Radical Nephrectomy + Regimen EE-4A (Vincristine + Dactinomycin) x 18 weeks (No RT)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "peds-wilms-ee4a"
+      ]
     },
     {
       "id": "n_stage_iii_fh_tx",
@@ -244,7 +246,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Radical Nephrectomy + Flank RT (10.8 Gy) + Regimen DD-4A (Vincristine/Dactinomycin/Doxorubicin)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "peds-wilms-dd4a"
+      ]
     },
     {
       "id": "n_stage_iv_fh_tx",
@@ -280,7 +284,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Regimen DD-4A + Whole Lung Radiotherapy (12 Gy, omitted if rapid complete response)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "peds-wilms-dd4a"
+      ]
     },
     {
       "id": "n_diffuse_anaplasia_tx",
@@ -315,7 +321,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Radical Nephrectomy + RT (19.8-24 Gy) + Regimen UH-1/I (VDC alternating with VP-16/Cisplatin)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "peds-wilms-dd4a"
+      ]
     },
     {
       "id": "n_bilateral_tx",
@@ -352,7 +360,10 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Neoadjuvant Chemo (Vincristine+Dactinomycin) x 6-12 weeks -> Nephron-Sparing Partial Nephrectomy",
-      "protocolRefs": []
+      "protocolRefs": [
+        "peds-wilms-ee4a",
+        "peds-wilms-dd4a"
+      ]
     }
   ],
   "links": [
@@ -430,6 +441,7 @@
     }
   ],
   "protocolRefs": [
+    "peds-wilms-dd4a",
     "peds-wilms-ee4a"
   ]
 }

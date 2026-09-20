@@ -12,30 +12,55 @@
  *
  * CONTEXT BUDGET is the whole design constraint. The server prompt-builder can spend a huge context
  * on grounding; we have n_ctx 4096 total, shared between prompt and answer, because the KV cache is
- * what gets an 8 GB iPhone killed. So the package is clipped HARD (see PROMPT_CHAR_BUDGET) and the
- * most decision-relevant evidence goes first — grounding chunks are already page-cited and ranked,
- * retrieved chunks are already cross-encoder re-ranked by the caller.
+ * what gets an 8 GB iPhone killed. So the package is clipped HARD and the most decision-relevant
+ * evidence goes first — grounding chunks are already page-cited and ranked, retrieved chunks are
+ * already cross-encoder re-ranked by the caller.
+ *
+ * Where the clipping actually happens, because there is no single PROMPT_CHAR_BUDGET constant (an
+ * earlier version of this header named one that never existed):
+ *   answer()        — retrieveGrounding() caps evidence at TOPK(3) passages x 700 chars, history at
+ *                     HISTORY_TURNS(2) x HISTORY_CLIP(180) with CARRY_CAP(700) on the last reply.
+ *                     Worst case lands ~1300 prompt tokens, so nPredict 768 still fits 4096.
+ *                     NOTE: this path does NOT call windowBudget() — the caps above are the budget.
+ *   every long-text path (summary/assess/scribe/reason/imaging/correlate) — windowBudget() +
+ *                     splitWindows(), which DO clamp against n_ctx because their input is unbounded.
+ * test/maik-prompt-budget.test.mjs pins the answer() side so it cannot silently regrow.
  * ======================================================================== */
 (function () {
   "use strict";
 
-  /* UNGROUNDED BY DESIGN.
+  /* GROUNDED ON-DEVICE, AND THE LATENCY THAT BUYS (owner, 2026-09-18).
    *
-   * The on-device engine answers from MedGemma's OWN weights and touches no StewardMD data. That is
-   * the product decision, and it is what makes it fast: grounding was 94% of time-to-first-word on a
-   * Pixel 9 (1799 prompt tokens -> 130 s of prefill at a flat ~14 tok/s). A question-only prompt is
-   * ~100 tokens, so first token lands in seconds rather than a minute.
+   * SUPERSEDED: this block used to read "UNGROUNDED BY DESIGN - the on-device engine answers from
+   * MedGemma's OWN weights and touches no StewardMD data". That is no longer true and has not been
+   * since the owner asked for the book to ship on-device ("SHIP OUR RAG PLUS EXISTING BOTH RAGS
+   * BM25"). The note is kept because the NUMBER in it still governs every prompt decision here.
    *
-   * It also removes a failure mode rather than adding one. When retrieval missed - "pyogenic liver
-   * abscess" resolves to LIVER_ABSCESS by FALLBACK while AMOEBIC_LIVER_ABSCESS is an exact match -
-   * the model was handed amoebic chunks labelled "primary source" and dutifully answered
-   * metronidazole for a pyogenic abscess. Grounding is only a safety net when retrieval is right;
-   * when it is wrong it is an amplifier pointed the wrong way.
+   * What that number was: grounding measured 94% of time-to-first-word on a Pixel 9 - 1799 prompt
+   * tokens at a flat ~14 tok/s prefill, so ~130 s before the first word. An ungrounded prompt is
+   * ~100 tokens and lands in seconds. Prefill cost IS the on-device latency story; decode is not.
    *
-   * The division of labour is now explicit:
+   * Why we took the cost anyway: ungrounded, the model answers from weights alone and can be
+   * confidently wrong with no way for the reader to check it. Two RAGs now chain instead - the cloud
+   * router picks the disease, the on-device BM25 book supplies the passages, and retrieveGrounding()
+   * requires the router's disease as an ANCHOR before a passage may be kept. That anchor rule is the
+   * answer to the failure that motivated going ungrounded in the first place: "pyogenic liver
+   * abscess" resolved to LIVER_ABSCESS by FALLBACK while AMOEBIC_LIVER_ABSCESS was an exact match,
+   * and the model dutifully answered metronidazole for a pyogenic abscess. Grounding is only a
+   * safety net when retrieval is right; when it is wrong it is an amplifier pointed the wrong way.
+   * Zero anchored passages therefore means "not grounded", never "grounded in the wrong chapter".
+   *
+   * The current division of labour:
    *   KB only    - StewardMD knowledge base, grounded, cited
    *   MaiK Cloud - Gemini, grounded with the same KB package
-   *   On-device  - the model's own knowledge, fast, offline, CAN BE WRONG (accepted tradeoff)
+   *   On-device  - the model's weights PLUS the on-device book, anchor-gated and claim-checked
+   *
+   * BUDGET, so the 94% never comes back: evidence is TOPK(3) passages clipped to 700 chars each,
+   * ~525 tokens, on top of a ~250-token pack system prompt. Anything that grows the prompt is a
+   * latency change first and a quality change second - measure prefill before and after, do not
+   * reason about it. The ~14 tok/s figure above PREDATES the batched-prefill wiring in
+   * LlamaPlugin.java (nBatch/nUbatch 512, nThreadsBatch = all cores), so it is a ceiling on how bad
+   * this can be, not a current reading. Re-measure on device before trading quality away for speed.
    *
    * Conversation history IS kept: it is the clinician's own turns, not a StewardMD resource, and
    * without it a bare follow-up ("and the dose?") is meaningless. Two turns, tightly clipped.
@@ -547,8 +572,20 @@
    * larger model's answers for paraphrase; the claim-level verifier removes that reason. A harness
    * with no registry keeps the old behaviour. */
   function ragEligible(packId) {
+    // The clinician's own switch comes first: unlinked means the book is disconnected, so no pack
+    // retrieves however capable it is (maik-engine.js KEY_RAG_LINK). Absent engine = linked, so a
+    // test harness with no engine module keeps the grounded behaviour.
+    if (!ragLinkedPref()) return false;
     try { var M = models(); if (M && M.caps) { var c = M.caps(packId); return !!(c && c.kb); } } catch (e) {}
     return packId === "maik-lite";
+  }
+  /** Reads the engine's RAG link switch; defaults to CONNECTED when the engine is not present. */
+  function ragLinkedPref() {
+    try {
+      var E = (typeof window !== "undefined") && window.SMD_MAIK_ENGINE;
+      if (E && typeof E.ragLinked === "function") return E.ragLinked();
+      return localStorage.getItem("smd_maik_rag_linked") !== "0";
+    } catch (e) { return true; }
   }
   // General model knowledge next to a grounded answer is a PRODUCT switch, off by default: unsupported
   // claims are left out unless the owner turns this on, and then they appear under their own heading,
@@ -619,54 +656,196 @@
     var floor = topic.length ? 0.6 * topic[0][0] : 0;
     return { topic: topic.filter(function (e) { return e[0] >= floor; }).slice(0, 3).map(function (e) { return e[1]; }), drugs: drugs, mods: mods };
   }
-  function retrieveGrounding(packId, question) {
+  /* TWO RAGS, CHAINED (owner, 2026-09-19: "use both"). The cloud package's topicMatch is the
+   * ROUTER: StewardRAG.buildPackage() runs on the phone and already knows WHICH disease a question
+   * is about (name/alias/coverage tiers, refuses to pick a wrong disease). The on-device book is the
+   * CORPUS: a full textbook, far bigger than the disease index. Before this, the local engine
+   * discarded the router's verdict and let BM25 match words in chunks, which is how "melena workup"
+   * was grounded on a dermatitis chunk that contained "workup". Now the router's disease name is
+   * added to the query AND becomes a required anchor, so the book is searched for chunks about that
+   * disease. Router says "none": the question's own anchors apply as before. */
+  var ROUTER_STOP = /^(?:disease|diseases|disorder|syndrome|acute|chronic|severe|infection|infections|management|treatment|fever|upper|lower|primary|secondary|with|and|the)$/;
+  function routerTopic(pkg) {
+    var tm = pkg && pkg.topicMatch;
+    if (!tm) return "";
+    if (tm.matched === true) return String(tm.grounded || tm.topic || "");
+    if (tm.mode === "assume") return String((tm.assume && tm.assume.name) || tm.nearest || "");
+    return "";
+  }
+  function routerToks(topic) {
+    return String(topic || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/)
+      .filter(function (t) { return t.length >= 4 && !ROUTER_STOP.test(t); }).slice(0, 4);
+  }
+  /* QUERY EXPANSION FROM RAG #1 (owner, 2026-09-20).
+   *
+   * The router does not only know WHICH disease - buildPackage() also carries that disease's own
+   * cited material (pkg.grounding) and the lexical top-K for the query (pkg.retrieved), both of
+   * which were themselves produced with a server-side VECTOR arm (/api/retrieve). That text is the
+   * disease's working vocabulary: its synonyms, its complications, its drugs, its investigations.
+   *
+   * Mining it is what lets requirement 3 be safe. A passage about a complication of a disease often
+   * never states the disease name - a variceal-bleeding passage may say "portal hypertension" and
+   * "band ligation" without "cirrhosis" - so demanding the name as a hard filter throws away exactly
+   * the passages a clinician asked for. Expansion terms give such a passage a way to prove it is on
+   * topic without repeating the title.
+   *
+   * This is also where the "hybrid" in hybrid retrieval actually lives. There is no dense index on
+   * the phone and no embedding model in the app, so a true on-device vector arm is not available;
+   * what IS available is RAG #1's server-side vector verdict, already computed, fused into the BM25
+   * query and into the rerank as a coverage feature. Honest description: BM25 lexical retrieval,
+   * seeded and reranked by a semantic arm that ran upstream.
+   *
+   * Terms are kept only if the BOOK knows them (idfOf defined) and they are specific enough to
+   * discriminate - an expansion term with a low IDF would re-open the "matches every chapter" hole
+   * that anchoring was built to close.
+   */
+  var EXP_MAX = 8;             // precision over volume: a long OR-query drifts off topic
+  var EXP_MIN_IDF = 4.0;       // below this a term is too common to prove relevance
+  function packageText(pkg) {
+    var src = [];
+    function take(v) {
+      if (!v) return;
+      if (typeof v === "string") { src.push(v); return; }
+      if (typeof v === "object") { ["text", "snippet", "body", "chunk", "heading", "name", "title"].forEach(function (k) { if (typeof v[k] === "string") src.push(v[k]); }); }
+    }
+    try { (pkg && pkg.grounding || []).forEach(take); } catch (e) {}
+    try { (pkg && pkg.retrieved || []).forEach(take); } catch (e) {}
+    try {
+      var tm = pkg && pkg.topicMatch;
+      if (tm) { take(tm.grounded); take(tm.topic); take(tm.nearest); take(tm.assume); }
+    } catch (e) {}
+    return src.join(" ");
+  }
+  function expansionTerms(pkg, bk, RAG, seen) {
+    var raw = packageText(pkg);
+    if (!raw) return [];
+    var toks = [];
+    try { toks = RAG.toks(raw) || []; } catch (e) { return []; }
+    var scored = [], dedupe = {};
+    for (var i = 0; i < toks.length; i++) {
+      var w = toks[i];
+      try { if (bk.us) w = bk.us(w); } catch (e) {}
+      if (!w || w.length < 4 || dedupe[w] || seen[w]) continue;
+      if (GENERIC_Q.test(w) || ROUTER_STOP.test(w)) continue;
+      var idf = bk.idfOf ? bk.idfOf(w) : undefined;
+      if (idf === undefined || idf < EXP_MIN_IDF) continue;   // unknown to the book, or too common
+      dedupe[w] = 1;
+      scored.push([idf, w]);
+    }
+    scored.sort(function (a, b) { return b[0] - a[0]; });
+    return scored.slice(0, EXP_MAX).map(function (e) { return e[1]; });
+  }
+
+  /* RERANK (owner, 2026-09-20, requirement 5).
+   *
+   * BM25 alone ranks by word overlap, which is how "melena workup" once grounded on a dermatitis
+   * chapter that merely contained "workup". The rerank re-scores the retrieved pool on what makes a
+   * passage clinically relevant rather than lexically similar:
+   *
+   *   bm25      normalised against the best hit, so the lexical signal still counts
+   *   anchor    fraction of the router/question disease anchors the passage covers
+   *   expansion fraction of the RAG #1 vocabulary it covers (the semantic arm's contribution)
+   *   modifier  "...in pregnancy" - a passage carrying the modifier outranks one that does not
+   *   intro     a DEFINITIONS chapter is not the answer to a treatment question
+   *
+   * SAFETY FLOOR, unchanged in spirit from the hard filter it replaces: a passage supported by
+   * NEITHER an anchor nor an expansion term cannot be kept at any BM25 score, and if nothing in the
+   * pool has either, the question is reported ungrounded rather than grounded on whatever ranked
+   * first. Requirement 3 removes the exact-NAME string match; it does not remove the requirement
+   * that a passage prove it is about the right thing.
+   */
+  function rerankPassages(cited, F) {
+    var best = cited[0] ? cited[0].score : 1;
+    if (!(best > 0)) best = 1;
+    var nAnchor = F.anchors.length, nExp = F.expansion.length;
+    cited.forEach(function (c) {
+      c.anchorN = nAnchor ? F.anchors.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length : 0;
+      c.expN = nExp ? F.expansion.filter(function (x) { return c.hay.indexOf(x) !== -1; }).length : 0;
+      c.supported = (c.anchorN > 0) || (c.expN > 0);
+      var bm = Math.min(1, c.score / best);
+      var aCov = nAnchor ? c.anchorN / nAnchor : 0;
+      var eCov = nExp ? c.expN / nExp : 0;
+      var s = 0.50 * bm + 0.34 * aCov + 0.16 * eCov;
+      // A passage that names the disease outright is still the strongest evidence there is; the
+      // change is that not naming it is survivable, not that naming it stopped mattering.
+      if (c.anchorN > 1) s *= 1.12;
+      if (F.mods.length) {
+        var hasMod = F.mods.some(function (m) { return c.hay.indexOf(m) !== -1; });
+        s *= hasMod ? 1.25 : 0.80;
+      }
+      if (F.treat && INTRO_HEAD.test(c.p.heading || "")) s *= 0.55;
+      c.rank = s;
+    });
+    var kept = cited.filter(function (c) { return c.supported; });
+    kept.sort(function (a, b) { return b.rank - a.rank; });
+    // Diversity: three slices of one chapter teach less than two chapters do, and a single heading
+    // filling the whole window is how a broad question comes back narrow.
+    var perHead = {}, out = [];
+    for (var i = 0; i < kept.length && out.length < F.topk; i++) {
+      var h = String(kept[i].p.heading || "").toLowerCase().split(">")[0].trim() || ("_" + i);
+      if ((perHead[h] || 0) >= 2) continue;
+      perHead[h] = (perHead[h] || 0) + 1;
+      out.push(kept[i]);
+    }
+    // Precision over volume: a third passage that is far weaker than the first adds noise, not
+    // evidence, and costs ~175 prompt tokens of prefill to say so.
+    if (out.length > 2 && out[2].rank < 0.55 * out[0].rank) out = out.slice(0, 2);
+    return out;
+  }
+
+  function retrieveGrounding(packId, question, topic, pkg) {
     if (!ragEligible(packId) || !question) return Promise.resolve(null);
     var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
     var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
     if (!RAG || !KB) return Promise.resolve(null);
+    var rt = routerToks(topic);
     return KB.loadBook(RAG).then(function (bk) {
-      // Search wider than we keep: the anchored passages are often ranks 2-6 behind a glossary
-      // chapter that matches every word. Same BM25 pass, only the sort tail is longer.
-      var hits = bk.search(question, RAG.TOPK * 3);
-      if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
       var A = anchorsFor(bk, RAG, question);
       if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
-      var need = A.topic.length ? A.topic : A.drugs;
-      // Owner report (2026-09-11): "Teach me Pneumonia atoz" and "Can I learn a new medical topic
-      // today" both had NO real topic or drug anchor (every content word was generic filler, or "atoz"
-      // and "topic" simply are not in the book's vocabulary at all) - a topic-less question has no
-      // way to tell a relevant passage from an irrelevant one, so falling through to the raw top BM25
-      // hits grounded a fabricated "Pneumonia atoz" monograph on an unrelated chapter and "teach me a
-      // topic" on a machine-learning chapter. Zero anchors now means "not covered", never "grounded in
-      // whatever scored highest" - a passage's relevance can never be established without one.
-      if (!need.length) return null;
+      // Router anchors first: the disease the router named is the strongest evidence of topic.
+      if (rt.length) A.topic = rt.concat(A.topic.filter(function (t) { return rt.indexOf(t) < 0; }));
       var anchors = A.topic.concat(A.drugs);
-      var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
-      // Count anchors per passage. With two or more topic anchors, a passage matching two beats one
-      // matching one ("community" alone let a typhoid epidemiology passage stand in for CAP); when
-      // nothing matches two, one is enough.
-      cited.forEach(function (c) { c.n = need.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length; });
-      var kept = cited.filter(function (c) { return c.n > 0; });
+      var seen = {};
+      anchors.forEach(function (a) { seen[a] = 1; });
+      var expansion = expansionTerms(pkg, bk, RAG, seen);
+      // Nothing to prove relevance WITH - no disease anchor, no drug, and RAG #1 offered no
+      // vocabulary either. "Teach me Pneumonia atoz" / "can I learn a new topic today" land here:
+      // every content word is generic filler or absent from the book, so no passage can be shown to
+      // be about the right thing. Ungrounded is the honest answer (owner report 2026-09-11).
+      if (!anchors.length && !expansion.length) return null;
+      /* Expanded query. The router's disease AND RAG #1's vocabulary ride into BM25, so passages
+       * about complications and management rank even when the question's own words are sparse.
+       * Only the top few expansion terms go in: the pool is reranked afterwards anyway, and a long
+       * query dilutes the IDF weighting that makes BM25 discriminate at all. */
+      var q = question;
+      if (rt.length) q += " " + rt.join(" ");
+      if (expansion.length) q += " " + expansion.slice(0, 4).join(" ");
+      // Search wider than we keep: the relevant passages are often ranks 2-8 behind a glossary
+      // chapter that matches every word. The rerank below is what picks from this pool.
+      var hits = bk.search(q, RAG.TOPK * 4);
+      if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
+      var cited = hits.map(function (h) {
+        var p = bk.cite(h[1]);
+        return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() };
+      });
+      var kept = rerankPassages(cited, {
+        anchors: anchors, expansion: expansion, mods: A.mods,
+        treat: TREAT_Q.test(question), topk: RAG.TOPK
+      });
+      // Every candidate failed the floor: supported by neither an anchor nor RAG #1's vocabulary.
       if (!kept.length) return null;
-      if (need.length > 1 && kept.some(function (c) { return c.n > 1; })) kept = kept.filter(function (c) { return c.n > 1; });
-      // "…in pregnancy": among the on-topic passages, the ones that mention the modifier win when any
-      // do; when none do, the topic passages stay and the model says so, instead of a passage about
-      // a different disease in pregnancy.
-      if (A.mods.length) {
-        var wm = kept.filter(function (c) { return A.mods.some(function (m) { return c.hay.indexOf(m) !== -1; }); });
-        if (wm.length) kept = wm;
-      }
-      // A definitions / introduction chapter is not the answer to a treatment question when anything
-      // else survived (the live "■■ DEFINITIONS" fallback for a UTI treatment ask).
-      if (TREAT_Q.test(question) && kept.length > 1) {
-        var nd = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); });
-        if (nd.length) kept = nd;
-      }
-      kept = kept.filter(function (c) { return c.score >= 0.4 * kept[0].score; }).slice(0, RAG.TOPK);
-      if (kept.length > 2 && kept[2].score < 0.6 * kept[0].score) kept = kept.slice(0, 2);
       var passages = kept.map(function (c) { c.p.text = cleanPassage(c.p.text); return c.p; });
-      var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 700); }).join("\n\n");
-      return { evidenceText: evidenceText, passages: passages, RAG: RAG, anchors: anchors };
+      /* SOURCE METADATA IN THE EVIDENCE (requirement 6). The heading travels with each passage so
+       * the model can say which chapter a statement came from, and so maik-grounding.js can attach
+       * a real citation to a surviving claim. Page numbers stay in the passage objects and out of
+       * the prompt: the standing owner rule is that the visible attribution never prints a page
+       * number (see the Source line below), and a number in the prompt is a number the model will
+       * eventually print. */
+      var evidenceText = passages.map(function (p, n) {
+        var head = String(p.heading || "").trim();
+        return "[" + (n + 1) + "]" + (head ? " (" + head.slice(0, 90) + ")" : "") + " " + p.text.slice(0, 700);
+      }).join("\n\n");
+      return { evidenceText: evidenceText, passages: passages, RAG: RAG, anchors: anchors, expansion: expansion };
     }).catch(function () { return null; });
   }
 
@@ -686,7 +865,9 @@
     // A greeting is not a question: no retrieval, so no "Source:" line on a hello (owner
     // screenshot, 2026-09-04).
     var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
-      : retrieveGrounding(packId, ragQuestion(pkg));
+      // pkg goes in so expansionTerms() can mine RAG #1's own vocabulary. It is read HERE, before
+      // the citation-bearing fields are stripped off the package further down.
+      : retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg);
 
     return groundingP.then(function (grounding) {
     // Queued like every other local generation, and NOT background: the clinician is watching this
@@ -780,6 +961,11 @@
       }).then(function (r) {
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
+        // A leaked fine-tuning template is not an answer. MAiK Cortex (MedMO-4B) answered "Hi" with
+        // "##Instruction: If you are a doctor... Question: ... ##Options:" (owner transcript,
+        // 2026-09-19): the model continued its SFT format instead of replying. Treat it as empty so the
+        // one retry below runs, and never render it.
+        if (/^\s*#{1,3}\s*(?:instruction|question|options)\b/i.test(text) || /##\s*(?:options|instruction)\s*:/i.test(text)) text = "";
         // Everything the model produced was reasoning (unterminated think block ate the
         // budget). Measured on-device 2026-08-31: a second pass with sampling jitter and a
         // directness nudge recovers most of these, so retry ONCE before surfacing an error.
@@ -838,7 +1024,10 @@
           } else {
             text = g.text;
             if (g.general) text += "\n\n" + GENERAL_HEAD + "\n" + g.general;
-            if (g.removed.length) text += "\n\nLeft out: " + g.removed.length + " statement" + (g.removed.length === 1 ? "" : "s") + " the Knowledge Base did not support.";
+            // The count of removed statements is a verdict on the pipeline, not clinical content; it
+            // used to be printed inside the answer ("Left out: 3 statements ..."). It now travels in
+            // result.grounding.removed and the UI shows it in the small perf/meta line (owner audit,
+            // 2026-09-19: offline answers should read like MaiK's, not like a log).
             text += "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
           }
           groundingOut = { verdict: g.verdict, stats: g.stats, claims: g.claims, removed: g.removed, citations: g.citations };
@@ -2038,7 +2227,11 @@
     translate: tracked(translate),
     sanitizeAssessment: sanitizeAssessment, sanitizeScribe: sanitizeScribe, scribeMerge: scribeMerge, sanitizeSurgxNote: sanitizeSurgxNote, NEVER_AI_FILLABLE: NEVER_AI_FILLABLE,
     sanitizeIcd: sanitizeIcd, sanitizeReasoning: sanitizeReasoning, sanitizeMaikNext: sanitizeMaikNext, sanitizeMaikExtract: sanitizeMaikExtract, sanitizeAdvisory: sanitizeAdvisory,
-    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, continues: continues, carry: carry, ragQuestion: ragQuestion, answer: tracked(answer), available: available, currentPack: currentPack,
+    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, continues: continues, carry: carry, ragQuestion: ragQuestion, routerTopic: routerTopic, routerToks: routerToks, answer: tracked(answer), available: available, currentPack: currentPack,
+    // Retrieval internals, exported for the RAG battery: answer() returns rendered text, so the
+    // only way to assert WHICH passages were chosen (and that their citation metadata survived) is
+    // to call the retriever itself. test/maik-rag-hybrid.test.mjs is the consumer.
+    retrieveGrounding: retrieveGrounding, expansionTerms: expansionTerms, rerankPassages: rerankPassages,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,

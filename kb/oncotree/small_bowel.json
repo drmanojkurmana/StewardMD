@@ -187,7 +187,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Whipple or Segmental Small Bowel Resection -> Adjuvant mFOLFOX6/CAPOX x 6 months",
-      "protocolRefs": []
+      "protocolRefs": [
+        "small-bowel-folfox"
+      ]
     },
     {
       "id": "n_dmmr_metastatic_tx",
@@ -224,7 +226,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "Pembrolizumab 200 mg IV q3w (or Nivolumab +/- Ipilimumab) Immunotherapy",
-      "protocolRefs": []
+      "protocolRefs": [
+        "gi-crc-msi-pembro"
+      ]
     },
     {
       "id": "n_pmmr_metastatic_tx",
@@ -260,7 +264,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "mFOLFOX6 or CAPOX +/- Bevacizumab First-Line Doublet",
-      "protocolRefs": []
+      "protocolRefs": [
+        "small-bowel-folfox"
+      ]
     },
     {
       "id": "n_subsequent_tx",
@@ -295,7 +301,9 @@
         "Physician decides; dose engine calculates patient-specific doses."
       ],
       "regimenSummary": "FOLFIRI +/- Bevacizumab or TAS-102 or Biomarker-Targeted Therapy (NTRK/BRAF/HER2)",
-      "protocolRefs": []
+      "protocolRefs": [
+        "folfiri"
+      ]
     }
   ],
   "links": [
@@ -359,5 +367,10 @@
         "subsequent"
       ]
     }
+  ],
+  "protocolRefs": [
+    "folfiri",
+    "gi-crc-msi-pembro",
+    "small-bowel-folfox"
   ]
 }

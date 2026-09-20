@@ -5,6 +5,101 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-18 · Deferring a payload without deferring the contract (PDF engines off cold start)
+
+**Measured first, because the received wisdom was wrong.** `stewardmd.in` is a MARKETING PAGE (3
+scripts, App Store links); `/home.js` 404s there. The app is a Capacitor bundle read off LOCAL DISK.
+So compression, CDN, `modulepreload` and service-worker *network* strategy do not apply to real
+users at all. The only cold-start cost that is real is **V8 parse+compile of the bundle**: 13.4 MB
+across 268 files, 205 ms on desktop node (several times that on a mid-range phone).
+
+**The pattern that makes deferral safe here: defer the PAYLOAD, never the CONTRACT.** The globals
+keep their exact names and shapes; the feature `await`s a cached-promise loader before first use;
+every pre-existing "engine unavailable" guard stays as the fail-safe. Because the bundle is on local
+disk, "lazy" costs a file read plus parse (**measured: 44 ms**), not a download. That is what makes
+the trade nearly free in THIS app and is exactly why it would not be free in a web app.
+
+**Superseded on the 2026-09-19 merge:** `origin/main` had shipped the same deferral as `ensurePdfEngine()` in `native-bridge.js` + `window.smdLazy` in `prescription.js`; `pdf-engines.js` and its two tests were dropped in favour of main's version. The pattern below still holds.
+
+**First application: `pdf-engines.js` (dropped, see above).** vendor-html2canvas (194 KB) + vendor-jspdf (357 KB) = 551 KB
+parsed at every launch for two features most sessions never reach (prescription export, native
+HTML->PDF). Now loaded on demand by `SMD_PDF_ENGINES.ensure()`. **13.4 MB -> 12.9 MB, 205 ms -> 176 ms.**
+
+**It also fixed a live race.** `prescription.js` read `window.html2canvas` directly and told the
+doctor *"Export engine still loading - try again"* whenever Export was reached before the eagerly
+deferred 551 KB had parsed. Awaiting the loader removes that window rather than apologising for it.
+
+**A collision this nearly caused, worth remembering:** `native-bridge.js` already owns
+`window.SMD_PDF` (its `fromHtml` renderer, used by MaiK/onco/reports) and loads FIRST. Naming the
+loader `SMD_PDF` would have silently replaced it. Hence `SMD_PDF_ENGINES`, pinned by a test.
+
+**The ordered plan for the rest, by win over risk:**
+
+| Tier | Target | Win | Why it is safe, or not |
+|---|---|---|---|
+| done | vendor jspdf + html2canvas | 551 KB | call sites already guarded; no clinical content |
+| next | `hospitals-in.js` (249 KB), `followcare-i18n.js` (173 KB) | 422 KB | pure data, single consumer each, count is assertable |
+| then | `kardiox-content-pack.js` (1.88 MB) + `kardiox-content.js` (508 KB) | 2.4 MB | biggest win, but it CONCATS 1041 lessons into `SMD_KARDIOX_CONTENT.ecgs` at load; needs a test asserting the atlas still reports 1141 or it truncates silently. `index.html` already calls this out: CliniX fetches its content lazily *"deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load"* |
+| **never** | `interaction-rules.js` (880 KB) | - | a drug-safety engine must be present anywhere a drug appears. Deferring it risks a missed interaction warning. **Do not lazy-load a safety engine.** |
+
+**Rejected, with measurements:** debouncing the search inputs. They are undebounced, but ONCQIS
+search is **1-5 ms/keystroke** and the 2,405-row hospital picker is **0.4-1.7 ms** (60-row cap). A
+120 ms debounce on a 2 ms operation adds lag for no gain.
+
+**Status:** `test/pdf-engines.test.mjs` 7/7 (single injection under concurrency, never rejects,
+retryable, no SMD_PDF clobber); `test/run-pdf-lazy-ui.mjs` 13/13 in a real browser, including
+rendering an actual PDF after the lazy load. Suite 3210 pass; 4 failures all reproduce on clean
+`origin/main` (followcare-voice-server, opd-mrn-alloc, and two in entitlement-trial).
+
+## 2026-09-02 · A named score is answered by its calculator, not by the model; the tool chips were dead
+
+**Reported with a screenshot:** "HACOR score" in MaiK (Cloud) spent a paid Gemini turn and answered
+with a fabricated formula (`FiO2 × 100 / (PaO2/FiO2)` - HACOR is Heart rate, Acidosis, Consciousness,
+Oxygenation, Respiratory rate), while the "Open calculators" chip under the answer did nothing when
+tapped. Owner: "why didn't it redirect to our calculator, and these chips don't work."
+
+**Why the chip was dead.** `home.js`'s delegated chip handler resolved the tapped element with
+`closest("[data-maik-q],[data-maik-web]")` and returned when nothing matched. The tool chips carry
+only `data-maik-tool`, so every one of them ("Open calculators", "Open Drug Index", "Check
+interactions") fell through that early return; the `data-maik-tool` branch further down was
+unreachable. A comment elsewhere in the file still claimed those chips "always worked", which is how
+a dead code path stays dead: it was believed to be the working one. The selector now includes
+`data-maik-tool`, `data-maik-calc`, `data-maik-calcask`.
+
+**Why the tokens were spent.** Nothing resolved a score NAME against the calculator registry before
+the model was called. `MaiKBrain.suggestCalcs` maps conditions to scores (pneumonia → CURB-65) but
+had no idea what "HACOR" was, and `plan()`'s "pure score → no Gemini" flag is not consulted by
+`runClinical` anyway. (HACOR also did not exist in the registry: 430 calculators, no HACOR.)
+
+**Fix, four places.** (1) `calculators.js` `MEDCALC.find(query)`: resolve free text to ONE calculator
+by name. Conservative by construction: every significant word of the question must appear in the
+title (so "treatment of pneumonia" does not hit "CURB-65 (pneumonia)"), a real word must match (so
+"65" alone never does), the calculator's own name must be at least half covered, and two calculators
+that fit equally is "not sure" ("wells score" → null; "wells score for PE" → wells_pe). Digits split
+from letters and subscripts normalised so `curb65`, `CURB-65`, `CHA2DS2-VASc` all resolve. A short
+alias map covers spoken forms (`gcs`, `crcl`, `chads vasc`). (2) `home.js` `maikRoute()`: a
+`calculator` kind, checked before the patient-specific route, that requires either an exact name or
+a score cue word. The answer is a local card (what it is, what it needs, "Open <name>", "Ask MaiK
+anyway") - zero tokens, and the arithmetic is the registry's. `_maikSkipCalc` is a one-shot bypass
+for "Ask MaiK anyway", same pattern as `_maikDisambigResolved`. (3) `maikToolChipsHTML` names the
+calculator ("Open CURB-65" via `data-maik-calc`) when the question names one, generic list chip
+otherwise. (4) `MaiKBrain.suggestCalcs` puts a named calculator first, so the copilot's "Open in
+StewardMD" chips say its name. Plus a HACOR entry (Duan 2017, five bands, >5 = high risk of NIV
+failure) so the reported question has somewhere to land.
+
+**Trade-off:** a question that is ONLY a score name no longer gets a narrative from the model by
+default; it gets the calculator and an explicit "Ask MaiK anyway". That is the owner's stated
+preference ("rather than wasting tokens"). A false positive in `find()` would send a doctor to the
+wrong calculator, which is why it is conservative and every miss falls back to the old behaviour.
+
+**Status:** `test/calc-find.test.mjs` 9/9 (resolver + HACOR bands + threshold); `test/run-maik-calc-route-ui.mjs`
+22/22 in a real browser: the reported question routes to HACOR through the real send path with ZERO
+`/api/ai` calls, the previously-dead generic chip opens the list, the specific chip opens that
+calculator, delegation survives a thread restore, and "Ask MaiK anyway" bypasses exactly once.
+`maikRoute()` gained `typeof` guards because two structural suites evaluate it outside module scope.
+**Note:** the HACOR entry is new clinical content and is marked for clinician sign-off like the rest
+of the registry.
+
 ## 2026-09-18 · Related figures under a MaiK answer: a search result, never hosted or generated
 
 **Owner:** show the image a trusted medical page carries for the topic "just like Google", with the
@@ -28,6 +123,54 @@ computed.
 figure pages like the UNC AUA algorithm do), and the rule is the OCR rule: show nothing rather than
 a wrong image. No KV cache of results by the owner's instruction, so each answer costs one TinyFish
 query plus up to five page reads. Shipped behind the flag. Tests: `test/maik-figures.test.mjs`.
+
+## 2026-09-19 · Offline MaiK must reply like MaiK: audit findings and what shipped
+
+**Owner:** "audit offline AI models, they should reply like MaiK native models."
+
+**Finding.** The on-device models were wrapped in a second, weaker MaiK: (1) `maik-local.js`
+discarded the cloud package's `topicMatch` and re-retrieved from the book by word overlap, so
+"melena workup" grounded on a dermatitis chunk containing "workup"; (2) answers carried pipeline
+verdicts ("Left out: 3 statements") in the clinical text; (3) `_brainAugment` skipped the local
+engine entirely, so no follow-up chips, workflow steps or tool launchers; (4) 20 to 70 s per answer
+on Lite; (5) Cortex leaked its SFT template and once returned nothing; (6) duplicated render and an
+export full of button labels; (7) the per-model battery had never been run.
+
+**Shipped.** (1) Two RAGs chained: the cloud topic match is the ROUTER (which disease), the
+on-device book is the CORPUS; the router's disease name rides in the BM25 query and is a required
+anchor (`retrieveGrounding(packId, question, topic)`, `test/maik-rag-router.test.mjs`).
+(2) Verdict moved to `result.grounding.removed` and the meta line. (3) Chips, workflow and tools
+render on device; only page-cited verify lines stay off. (6) Export strips all UI. Earlier the same
+day: greetings never hit a model, leaked-template guard, continuity on every engine, dose follow-up
+section fix.
+
+**Open.** (4) Latency: fewer passages, prefix-stable prompt for KV reuse, token streaming in the UI.
+(5) Explicit ChatML wrapper for Cortex when the GGUF has no template; make `EMPTY_ANSWER` visibly
+render. (6) The duplicated dengue render (replay + final on the local path) needs a repro.
+(7) Run `bench/rag-grounding/run.mjs --live` on the phone as the gate for every offline change.
+
+## 2026-09-19 · Ternary Bonsai 2 27B: not shippable on our llama.cpp; pack stays on Bonsai 27B v1
+
+**Owner:** update the Bonsai packs to PrismML's 17 Sep 2026 release (Ternary Bonsai 2 27B, Qwen3.8-27B
+base, 98.2% of full precision, 5.9 GB class, Apache 2.0).
+
+**Finding.** Every official GGUF (`prism-ml/Ternary-Bonsai-2-27B-gguf`: PTQ1_0 5.95 GB, PQ2_0 7.21 GB;
+`-gguf-dev`: Q2_0 "prism-fork-required" 7.63 GB) is a fork-only type. The model card states stock
+llama.cpp rejects PTQ1_0/PQ2_0 as unknown types and lacks the Hadamard activation runtime. Our
+`capacitor-llama` plugin links mainline b10502. No mainline g64 file was published (the 8B ternary
+has one, which is why `bonsai-ternary-8b` works). There is no Bonsai 2 at 8B or 4B.
+
+**Decision (same day, owner: "go ahead").** Move `local-plugins/capacitor-llama` to PrismML's fork,
+release `prism-b10685-7dffb15` (mainline b10685 base, so a superset of b10502: every existing pack is
+a plain GGUF and keeps loading). iOS: `Package.swift` binaryTarget now points at the fork's
+xcframework (322,127,363 B, checksum `c9c83d40…`; same `build-apple/llama.xcframework/` layout, and
+it adds simulator slices). Android: the `llama-cpp` submodule URL is the fork and the pointer is the
+tag's commit `7dffb15`. New pack `bonsai2-27b` ("MAiK Bonsai Max 2", PTQ1_0, 5,946,648,928 B, sha256
+`53107f53…`), tier 5.5, 12 GB floor, text-only for now (the repo's Q8_0 mmproj is noted, not wired).
+
+**Verification status.** Both apps were rebuilt against the fork. Still to prove on a phone: an
+existing pack (Lite, Cortex, Bonsai 8B) answering on the fork runtime, then the 5.95 GB pack itself
+loading on a 12 GB device. Until that is done the new pack should not be pushed to devices.
 
 ## 2026-09-18 · A dose question is a database lookup, not a model question
 
@@ -139,6 +282,75 @@ llama.cpp is also unverified on device.
 **Trade-off accepted:** concept-overlap support (COV_MIN 0.5 of a claim's stemmed content tokens in one
 passage) is a heuristic; it errs toward leaving a correct prose sentence out, never toward keeping an
 unsupported dose in. Tune COV_MIN from the live battery, not from intuition.
+## 2026-09-18 · SUPERSEDES the entry below: ONCQIS is add-on only, SURGX is Pro and residents
+
+**Decision (owner):** ONCQIS and OncoTree are NOT free. Every account gets a **3 day trial**, after
+which they need the **Onco add-on (₹89/mo)**, which any tier may buy. SURGX is NOT free either: it is
+included with **Pro and above**, and with **resident** plans (trainee tier whose verified role is
+resident, plus Co-Resident). CliniX is unchanged: Respiratory free, the other systems Pro.
+
+**Still to build:** `onco` and `surgx` entries in the role x tier matrix (`functions/_features.js` on
+branch worktree-agent-aca63a9e6e54f1648), the 3-day onco trial clock, and the client gates. The copy
+in this branch (website + paywall) already states the new rule, so code and copy must land together
+or the site promises what the app refuses.
+
+## 2026-09-17 · ONCQIS and SURGX free; CliniX one system free, the rest Pro (SUPERSEDED 2026-09-18)
+
+**Decision (owner):** ONCQIS (oncology) and SURGX are included free on every account. CliniX gives
+Respiratory free and locks the other four systems (Cardiovascular, GIT and abdomen, Neurology, Short
+cases) behind Pro.
+
+**How:** ONCQIS and SURGX already had no Pro check in code; only copy changed (website pricing, in-app
+paywall blurbs, and the +₹89 OncoTree + ONCQIS add-on row removed). CliniX: `free: true` on the
+system in `clinix/manifest.json` (data, not code); pure `systemLocked()` / `openPackIds()` in
+`clinix-model.js`; enforced at every door in `clinix-screens.js` (system card, disease/module open,
+resume) and in `loadAllSkills(pro)` so a locked system's skills are not reachable through the skills
+library. Refusals route through `SMD_PRO_NOTICE` ("clinix"). `pro-notice.js` gained a `signin` reason
+so a signed-out reader is asked to sign in instead of being told their connection failed.
+
+**Trade-off:** client-side only. CliniX content ships inside the native bundle, so a determined user
+can read the JSON; same ceiling as every other client gate. Pro here is `SMD_PRO.isProSync()`, which
+with `VERIFY_REQUIRED_FOR_PRO` on (default) means verified (7-day free Pro) or paid; unverified
+signed-up users see the lock immediately, the launch promo does not open it.
+
+**Open for owner:** the App Store product `in.stewardmd.onco.monthly` (Onco add-on, READY_TO_SUBMIT)
+is now unsold; leave it out of the review submission or delete it. Website plan ladder
+(Student/Intern/Resident/Physician Pro/Onco+ at ₹129-799) still differs from the in-app/App Store
+ladder (Trainee/Co-Resident/Pro/Physician/Physician Pro at ₹199-2,499).
+## 2026-09-18 · The paywall sells three plans, and every number on it comes from the server
+
+**Decision:** `pro-paywall.js` opens on THREE cards (Pro / Physician / Physician Pro) with **Physician
+preselected** and the **Annual** cycle preselected. Trainee and Co-Resident sit behind a quiet
+"I’m a student or resident" link: self-selection keeps the default view premium without making a
+cheaper tier unbuyable (the link reveals them, a revealed tier never re-hides, and the CTA follows
+whatever is selected). Each card leads with a per-day figure ("₹21 a day. Less than a samosa, and it
+runs your clinic.") over one benefit line; a sticky bottom bar always names the tier, the amount and
+the period. The Onco add-on is back and is offered on EVERY tier, priced from `plans.addons.onco`.
+
+**Why the honesty rules shaped it more than the conversion playbook.** Three tactics were asked for
+and three were changed:
+1. **Strike-throughs and SAVE% come only from the server’s `regular`** (x12 on an annual card). No
+   `regular`, or one that is not higher, renders nothing. Inventing a "was" price is misleading-MRP
+   territory under Indian consumer law and fails App Store review.
+2. **The CTA does NOT say "Start 7 days free, then ₹7,499/year".** No purchase path here begins with
+   a free period: Razorpay charges on the spot and no StoreKit introductory offer is configured. The
+   bar reads "Subscribe to Physician · ₹7,490/year" with "Cancel anytime" under it. The free access
+   some accounts already hold is still stated by the banner, from `/api/billing/status`.
+3. **The add-on’s "3-day trial everyone gets" renders only if the server sends `addons.onco.trialDays`.**
+   Nothing server-side grants an onco trial today, so the sentence stays off until it does.
+No countdown, no scarcity, no clinical outcome claim, no statistic, and only assistive framing for
+MaiK Voice Scribe ("offers the differentials worth considering"), because a doctor who trusts the AI not to miss
+checks less carefully.
+
+**Trade-off:** the default view hides two real tiers behind a tap, and the strike-through disappears
+entirely if a KV price edit drops `regular`. Both are deliberate: reachable beats prominent, and a
+missing anchor beats a fabricated one.
+
+**Status:** `test/paywall-render.test.mjs` 17/17 (three-card default, preselection, reveal link,
+SAVE% from `regular`, no-`regular` → no strike, CTA text per selection, per-day maths both cycles,
+benefit lines, and every rupee on a card traced back to the payload), `paywall-interceptor` 4/4,
+`paywall-resync` 6/6, `pro-notice` 11/11, `no-ui-emoji` pass, and `test/run-paywall-ui.mjs` 28/28 in
+headless Chrome against `test/fixtures/paywall-sheet.html`.
 
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 
@@ -2498,6 +2710,51 @@ Known gaps for a v3 pass (do not re-discover): the think habit is reduced, not e
 robust fix is a <think>-token ban at the native sampler (both platforms) or more discipline data;
 scope-refusal is enforced by the Intent Firewall (maik-scope.js) upstream, NOT by the model, which
 answered a football question in bare-model probes.
+
+## 2026-09-19 — One email template (premium, single column), unsubscribe everywhere it must be, promo series OFF, phone verified over WhatsApp
+
+**Email.** `functions/_email.js` is now a component kit (`headline`, `hero`, `tile`, `ctaRow`,
+`codeBox`, `facts`, `note`) plus one `renderEmail()` shell: soft grey page, white 600px column, the
+SD mark alone at the top, one big headline, one line, one pill button, tiles that make one point each,
+quiet footer. Every existing template (OTP, reset, temp password, verified, reminder, Pro, failed,
+welcome, upsell) was rewritten on it; no em-dash anywhere (pinned by test). `sendBranded(env, opts)`
+takes `kind:"marketing"` + `uid`: it then signs an unsubscribe token (`_unsub.js`, HMAC under
+`UNSUB_SECRET` falling back to `RESEND_API_KEY`), adds the footer Unsubscribe button + link and the
+RFC 8058 `List-Unsubscribe` / `List-Unsubscribe-Post: One-Click` headers. `/api/unsubscribe` (GET link,
+POST one-click, `resub=1` to undo) flips `unsubscribedAt` on the lifecycle record ONLY. Account notices
+(codes, verification, the day-5 removal warning) are transactional and deliberately never suppressed:
+nobody may lose an account because they unsubscribed from offers. Welcome + Pro upsell are marketing
+(unsubscribable); `sendProUpsellOnce` honours the opt-out without stamping `upsellAt`.
+
+**Prices in copy come from `_pricing.js`**, which reads the same `cfgPrice` the paywall reads (KV
+override > env > default) and rounds per-day figures UP, so a price change can never make an email
+understate the cost. Today: Pro 599/mo = 20/day, annual 4999 = 14/day, trainee 199 = 7/day.
+
+**Promo series** (`_promo.js`): seven editions, 2-3 features each, one hero figure, per-day price
+against a chai / bottle of water / pastry. `PROMO_SERIES_ON` is OFF: the nightly `/api/lifecycle/run`
+reports candidates but sends nothing until the owner turns it on. Starts day 5 (after the day-3
+upsell), one edition every 4 days, never to opt-outs or paying accounts. Owner preview:
+`GET /api/email-preview?kind=promo:maik` (owner auth), `POST` sends a real copy.
+
+**Phone verification** (owner: "ask every signup phone number verified by WhatsApp with backup
+SMS"). Server `_phone_otp.js` + `/api/auth/phone-start|phone-verify`, keyed `otp:phone:<uid>`, same
+rules as the email OTP (10-min TTL, 30 s throttle, 5 tries then the code burns) plus a per-number
+daily cap of 6 so our account cannot be used to SMS-bomb a number. Delivery reuses the FollowCare
+senders: WhatsApp first when a provider is configured, else SMS; 2Factor goes through its dedicated
+OTP API (pre-approved DLT OTP template), other providers through `sendSms`. A same-window resend
+by SMS carries the SAME code. Success sets the `phoneVerified` claim and stamps the lifecycle record.
+Client `phone-verify.js` asks after `profile-setup.js` saves (listens for `smd:profile-saved`), never
+stacks on the registration gate (`#verifyGate`, polls until hidden), "Later" snoozes per app-open.
+Nothing is gated on it yet; it is an ask, not a wall. Kill switches: `smd_phone_verify=0` (client),
+`PHONE_VERIFY_ON=0` (server).
+
+**Not done, deliberately:** an in-app "marketing emails" toggle (the email button + header suffice for
+now); `mark-teal.png` is in the repo but 404s on the live site, so the template uses `logo.png`.
+
+Tests: `test/email-template.test.mjs` (16), `test/phone-otp.test.mjs` (17),
+`test/run-phone-verify-ui.mjs` (35 in a real browser), `test/render-emails.mjs` renders every email
+to PNG for a human look. Guide: the Clinical UX Guide canvas (10 boards) was produced the same day.
+
 
 ## 2026-09-02 — MaiK Lite v3/v4: found and fixed WHY the think habit persisted, caution policy removed
 
@@ -8463,3 +8720,238 @@ different facts and are never rendered the same way.
   `section(..., "failed", ...)` state.
 - Not done here: `patient-access.js:441` (the portal's own PatientMessage read) and the sites owned by
   R6-1/R6-3/R6-4/R6-5.
+## 2026-09-18 Purchase tier is separate from verification role (ROLE_GATES_ON)
+
+- Entitlement records now carry `tier` + `tierExp` (what was PAID for: free|trainee|coresident|pro|physician|
+  physicianpro) alongside `role` (WHO they are, from verification). One Trainee price, three trainee roles: PG
+  Logbook needs the role, Scribe needs the tier, Ward Sync needs both. `fulfilPurchase()` used to discard the plan
+  key and grant a flat Pro, so ₹199 and ₹2,499 bought the same thing.
+- Money rule in `purchasePatch()`: a purchase may upgrade and may extend, never downgrade an active higher tier and
+  never shorten an expiry (Trainee bought on top of Physician Pro, or a replayed webhook, must not shrink anything).
+  `tierExp: null` = forever (owner comp) and stays null.
+- Onco add-on (`oncoAddonExp`) is buyable by any tier; the oncology AI extras get a 3-day trial per account started on
+  FIRST USE (`oncoTrialStart`), not signup. ONCQIS/OncoTree reference stays free forever and is not in the matrix.
+- The role x tier matrix in `_features.js` is INERT unless `ROLE_GATES_ON=1` (on top of the existing `FEATURES_ON`);
+  with it off `featureAllowed()` behaves exactly as before. Per-user `featureFlags` and `FEATURE_<KEY>_DEFAULT_ON`
+  still override the matrix. Route-by-route rollout is a later step.
+## 2026-09-18 — Per-patient quota meters (FollowCare/MAiTRI + MaiK Scribe), flag `QUOTA_METERS_ON`
+- FollowCare (7 SMS over 7 days) and a MAiTRI recovery call each cost us ₹10, so they share ONE wallet:
+  1 patient credit = one MAiTRI call OR one 7-day FollowCare course. A Scribe consult costs ₹3-5.
+- `functions/_quota.js` is the meter. KV, keyed `quota:<feature>:<uid>:<YYYY-MM>` for the monthly included
+  allowance (Physician / Physician Pro only: 5 care + 50 scribe, calendar-month reset, NO roll-over) and
+  `quota:<feature>:<uid>:bal` for purchased packs, written with no TTL so purchased credits never expire.
+  Spend order is included first. Concurrency is best-effort read-modify-write, same as `_usage.js`; the
+  documented ceiling is at most one over-granted unit per concurrent burst (₹10), not worth a Durable Object.
+- Enforced only at real spend points: `followcare/enroll`, the doctor-initiated `followcare/voice/call`, and
+  the Scribe `extract` path. Refusal is a 402 `{error:"quota-exhausted", feature, remaining:0, packs, copy}`
+  that the client renders as a top-up sheet. Never a hard lock: one Scribe "consult" is a dictation SESSION
+  (rolling 45-min marker), so the ~120s refine loop is charged once and an open session is never refused.
+- Packs `in.stewardmd.care.25|100` and `in.stewardmd.scribe.50|250` live in `plans().packs` (cfgPrice
+  overridable) and are fulfilled by `fulfilPurchase()` on both the Razorpay and StoreKit paths.
+- Copy is owner-approved value framing and is asserted in tests: no clinical outcome claims, no promise that
+  Scribe cannot miss anything (false, contradicts the App Store "not a diagnostic device" listing, invites
+  CDSCO/FDA medical-device scope, and a doctor who believes it checks less carefully), no invented statistics,
+  no em-dash. The "N patients have not heard from you" line renders only with a real server number.
+- Not wired: the ROLE_GATES_ON access matrix (separate branch), an `unheardCount` source for that line, and
+  the scheduler's own MAiTRI calls (they continue an already-paid episode).
+
+## 2026-09-18 — The "N patients have not heard from you" nudge stays unwired: there is no honest source
+
+Investigated whether the `unheardCount` line in `quotaCopy()` (`functions/_quota.js`) can be made real.
+It cannot, today. Not wiring it is the decision, not an omission. The sentence tells a clinician they
+neglected patients; a wrong number there is worse than no sentence, so it renders only from a real count.
+
+The sentence needs three facts joined: (1) a patient this doctor discharged, (2) in this calendar month,
+(3) with no FollowCare episode. Four stores were checked and none carries all three.
+
+- **`q_tickets` / `q_sessions` (Firestore, OPD queue).** Has the doctor (`q_sessions.doctorUid`,
+  `_queue_engine.js:23,33`), a completion time (`consultEndAt`, `:209`) and a joinable patient key
+  (`decPHI(encMobile)` reproduces FollowCare's `patientKeyHash`). **Killed by retention:** every ticket
+  and session carries `expiresAt` = end of visit day (`_queue_engine.js:36,171`) under a Firestore TTL
+  policy (`docs/queue/smart-opd-queue-design.md:120`, `QUEUE_RETENTION_DAYS` default 2). A month of
+  tickets does not exist to be counted. Also: an OPD visit is not a discharge.
+- **WardSynQ `Encounter` (D1 `wardsynq_record`).** The only durable discharge record: `attendingId` =
+  the syncing session's `doctorUid` (`_wardsynq/migrate-encounter.js:153,191`), `periodEnd` = the real
+  discharge time (`migrate-discharge.js:576-584`), not TTL'd. **Fails on both remaining counts.**
+  (a) Neither `attendingId` nor `periodEnd` is indexed - they live inside the JSON body, and the only
+  read paths are by patient, by id prefix, or a whole-type tenant scan (`db/wardsynq_schema.sql:32-33`,
+  `repository-d1.js:163-168`). One doctor's month = a tenant-wide Encounter scan. (b) **There is no join
+  key to FollowCare.** The Encounter's `patientId` is a pseudonym derived from the MRN
+  (`_wardsynq/opd-identity.js:18-20`); the identity index knows mrn / abha / ticket / ghis-episode and
+  no phone at all (`_wardsynq/identity-key.js:39-51`), and the `Patient` model has no phone field.
+  FollowCare keys patients by `patientKeyHash(hospitalId, last-10-of-phone)` (`_followcare.js:118-126`).
+  Nothing can decide whether a discharged patient already has an episode. Also gated: nothing is written
+  unless the tenant has WardSynQ migration on (`migrate-encounter.js:180`).
+- **`q_patients` / `q_patient_index`.** A registry, not a visit log: org-scoped, no doctor uid, no visit
+  or discharge timestamp.
+- **`fc_episodes`.** Has all four properties (`doctorUid`, `dischargeMs`, an equality-indexed per-doctor
+  query at `_followcare.js:470`, `patientKeyHash`) and is therefore circular: it only knows the patients
+  who already have an episode, which is the set the sentence subtracts.
+
+Second tenant problem even if a join existed: FollowCare's `hospitalId` comes from the doctor's
+self-declared `fc_doctors` binding (`_followcare.js:482`), the OPD org id comes from the org store. The
+two namespaces are not the same string, so the hash would not match even with the phone in hand.
+
+**What would have to be recorded first** (any one of these unblocks it):
+1. The discharge/visit-completion event carries the patient's phone-derived `patientKeyHash` under the
+   same tenant id FollowCare uses - i.e. `patientKeyHash` written onto the WardSynQ `Encounter` (or its
+   identity index gains a phone system) at admission/registration. It is a non-reversible hash, so this
+   adds no new PHI at rest.
+2. **Or** a small per-doctor monthly counter maintained at the discharge write itself: increment
+   `nudge:<uid>:<YYYY-MM>` on discharge, decrement on FollowCare enrol when the episode's
+   `patientKeyHash` matches. O(1) per event, no scan, no month-long retention needed, and the paywall
+   reads one KV key. This is the cheaper option and the one to build.
+
+Either way the count is then folded into the `quota` block of `/api/billing/status` and passed to
+`quotaCopy()`. Until then `unheardCount` is never supplied and the line never renders.
+
+Hardened meanwhile (`functions/_quota.js`): the guard is now `Number.isInteger(n) && n > 0` with **no**
+coercion, so `true`, `"5"`, `Infinity`, `NaN`, `2.7` and `-3` all produce no sentence rather than
+"1 patients discharged this month have not heard from you." Pinned by `test/quota-meters.test.mjs`
+(21 tests, +2) and `test/run-quota-topup-ui.mjs` (27 browser checks, +7: the nudge renders verbatim from
+a real count, exactly once, leading the deck, with no identifier, and vanishes at 0).
+
+## 2026-09-18 — Credit model: one credit = one bounded EPISODE; new prices; web pricing kept out of iOS
+
+Owner decisions, implemented on `nudge-unheard-count`. Still fully inert behind `QUOTA_METERS_ON`.
+
+**1. One credit = one bounded episode, charged once at enrol.** An episode is day 0 the 7-day
+FollowCare SMS/WhatsApp check-in course, day 3 a MAiTRI call *only* if the patient has not responded,
+day 7 a MAiTRI call *only* if there is still no response, plus feedback capture, the ambulance alert by
+WhatsApp/SMS, the doctor-app alert and in-app patient messaging. At most two calls, both conditional on
+non-response. Nothing else in the episode deducts.
+
+This made `followcare/voice/call` a **bug, not a gap**: it was deducting a second credit for the
+doctor-initiated MAiTRI call. That route 404s without an existing `episodeId`, so every call it can
+place belongs to an episode already paid for at enrol - the deduction was double-charging the doctor
+for what they had bought. Removed (`functions/api/followcare/[[path]].js:415`). `enroll` is now the
+only care deduction in the codebase, and `test/quota-meters.test.mjs` asserts exactly that by counting
+the `careCredit(` call sites in the router and asserting the scheduler dispatch path never imports the
+meter. The scheduler-initiated calls that were already unmetered were correct all along.
+
+**2. New prices** (verified live in App Store Connect): `in.stewardmd.care.25` ₹2,499 (was ₹1,099),
+`in.stewardmd.care.100` ₹8,999 (was ₹3,499). Scribe unchanged at ₹999 / ₹3,999. Per-patient copy is
+₹100 and ₹90, and `perUnit` is **derived** from `amount / units` rather than typed, so the two cannot
+drift apart. Rationale in the code: an episode costs us ~₹32 worst case (SMS ₹10 + up to two calls at
+₹10 + ~₹2 of alerts) and ~₹19 typical, so ₹100 holds 55% margin even for a patient who needs both calls.
+
+**3. Web pricing, and why it never appears on iOS.** `quotaPacks()` now carries `amount` (store) and
+`webAmount` (web): care.25 ₹2,199, care.100 ₹7,999. The discount is funded by the payment fee we save
+(Razorpay ~2% against Apple's 15%), not out of margin. Scribe deliberately has **no** `webAmount`, so
+nothing can advertise a discount that does not exist.
+
+The India storefront's anti-steering rules make a "cheaper on the web" hint anywhere in the iOS app a
+straight rejection, and this app is mid-submission. Apple's 2021 anti-steering settlement permits
+telling users about other payment methods *outside* the app, with consent. So the two halves are
+separated **structurally**, not by discipline:
+- The outbound SMS/WhatsApp/email copy is `webUpsellSms()` in `functions/_quota.js`. `functions/` is
+  excluded from the app bundle by `scripts/build-www.sh`, so that string physically cannot reach an
+  iOS screen.
+- The sheet renderer gates every web price on `var webOk = plat() !== "ios";`
+  (`pro-paywall.js` `openTopUp`). On iOS the card shows the App Store price and the store-derived
+  per-patient figure; on the web it shows the web price and the web-derived figure. There is no
+  comparison shown anywhere, on either platform, so there is nothing to steer with.
+
+Asserted three ways: a node test that the in-app refusal copy contains no web price, no `stewardmd.in`,
+and no steering wording, that `pro-paywall.js` reads `webAmount` only behind the platform gate and
+ships no purchase URL; and a headless-Chrome test that re-renders the *same* sheet with
+`Capacitor.getPlatform() === "ios"` and asserts ₹2,499 / ₹8,999 are shown while `2,199`, `7,999`,
+`219900`, `799900` and `stewardmd.in` appear nowhere in the sheet's **markup**, not merely its text.
+
+Tests: `test/quota-meters.test.mjs` 24/24 (+3), `test/run-quota-topup-ui.mjs` 36/36 browser checks (+9).
+
+## 2026-09-18 — Product name is "MaiK Voice Scribe" in every user-facing string
+
+Owner correction. Renamed in the three places a doctor can read it:
+- `functions/_quota.js` pack labels: `"50 Scribe consults"` -> `"50 MaiK Voice Scribe consults"`,
+  `"250 Scribe consults"` -> `"250 MaiK Voice Scribe consults"`. These are what `plans().packs` serves
+  (`plans()` just returns `quotaPacks(env)`), so the paywall, the /billing/plans response and the 402
+  refusal body all pick the new name up from one place.
+- `pro-paywall.js` top-up sheet title: `"MaiK Scribe consults"` -> `"MaiK Voice Scribe consults"`.
+- `pro-paywall.js` Physician tier blurb: `"... FollowCare · Scribe · unlimited billing"` ->
+  `"... FollowCare · MaiK Voice Scribe · unlimited billing"`.
+
+`quotaCopy("scribe")` needed NO change: its approved copy never names the product. The headline
+("Not just a note. A second pair of eyes."), the five lines, the price line and "Consults never expire."
+are unchanged, as instructed.
+
+NOT renamed, deliberately: the internal feature key `"scribe"`, the KV key prefix `quota:scribe:*`, and
+the product ids `in.stewardmd.scribe.50|250`. Renaming any of those orphans every existing purchase and
+every live counter. The App Store display names are the owner's to change in App Store Connect;
+`iap.js` product ids untouched (its only "Scribe" mention is a code comment).
+
+Guarded by a test that walks every user-facing string in the 402 body and asserts that wherever the
+word "Scribe" appears it is preceded by "MaiK Voice", which catches a bare "Scribe", the old
+"MaiK Scribe", and any future half-rename; plus a bundle check that neither old spelling survives in
+`pro-paywall.js`, and a browser check on the rendered sheet.
+
+## 2026-09-19 — Feature guides run ON the screen (SMD_TOUR engine), and the OTP sheet is a designed screen
+
+**Owner: "the guide should run on the screen like the app tours".** The first attempt was a static
+canvas; the real thing is eight walkthroughs on the existing spotlight engine in `onboarding.js`
+(`GUIDES`, `guideController`, `startGuide`, `SMD_TOUR.guide(id)` / `guides()`, `start("guide:<id>")`):
+home, reasoning, maik, drugs, calculators, hospital, imaging, account. Each step names a `screen`;
+`gotoScreen()` closes whatever is open and opens that screen for real (Hospital / Drugs / Dosing /
+More / Dx sheets via the home `[data-act]` buttons, MaiK via `SMD_askMaik("")`, Calculators via
+`MEDCALC.openList()`, the sidebar via `SB.open()`, and Experimental via Settings then Experimental,
+because that page is a page inside Settings). Every targeted step is `optional`: a gated tile is
+skipped, never a coach-mark over nothing. Resolution is scoped to the screen on top (`guideScope`) so a
+drawer control behind an overlay is never spotlighted through it. The chooser (About & Help) lists
+them under "Feature guides"; the Hospital guide hands off to the ICU tour (`then:"icu"`).
+Engine tweak: the coach-mark is `visibility:hidden` between goStep and paint, so no empty box flashes
+while a sheet animates open (affects all tours, for the better).
+Copy rule holds: no em-dash in any guide string (test-pinned). `test/run-feature-guide-ui.mjs` drives
+all eight in a real browser; `test/feature-guide.test.mjs` pins shape and wiring.
+
+**OTP sheet redesign** (owner: "looks AI slop, make it premium"): `phone-verify.js` now renders six
+code slots with a marching-dot ring on the waiting slot, pop-in digits, a red shake on a wrong code,
+a green sweep on success, a resend countdown ring, a status row that says what the app is doing about
+the message (WebOTP on Android fills the code; the input is `autocomplete="one-time-code"` so the iOS
+keyboard offers it), inline SVG icons only, light and dark, reduced motion honoured. The one real
+input is a hidden `#phvCode` over the slots (so the harness and the keyboard both drive it). It also
+waits for the first-launch guided tour, not just the registration gate, before asking.
+
+
+**CliniX case simulation, 2026-09-19** (owner: *"each student talk english differently how will he
+ask exact question as we programmed? Fix that and in ddx,dx give him 100s of diagnosis and he will
+pickup one and give hints too, and plan also give mcq options so he will select"*). Four decisions:
+
+1. **The patient understands lay English, and still never improvises.** `clinix-lexicon.js` sits in
+   front of the cue matcher: contraction expansion, ~320 lay and Indian-English phrases, a synonym
+   map, stemming and a bounded fuzzy snap that requires the first TWO letters to match (one letter
+   turned "spell" into "swell"). Scoring uses cue specificity, a key-cue boost and a
+   document-frequency rarity TIEBREAK (rarity as a multiplier dragged every score under the
+   threshold). Above `ANSWER_AT` the patient answers; between `SUGGEST_AT` and `ANSWER_AT` it offers
+   a did-you-mean rather than guessing; below that it matches NOTHING and suggests nothing, because
+   a simulated patient answering small talk from a case script is inventing clinical content.
+   `clinix-model.js` keeps `legacyMatchAsk` and uses it when the lexicon is absent.
+2. **Marking counts CONCEPTS, not accept terms.** An accept list carrying "heart failure", "CCF" and
+   "cardiac failure" describes one concept; counting them separately told a student they had missed
+   two things when they had missed none. Missed terms are grouped by `conceptKey` (vocabulary entry,
+   else anglicised string) and a differential is scored on PICKS.
+3. **Breadth is not a differential.** 8+ picks, or unsupported guesses outnumbering supported ones,
+   is marked `shotgun` and fails even when the right answer is in the list. Missing the true
+   diagnosis fails regardless of how many other reasonable ones were named.
+4. **A harmful management choice is disqualifying, not a deduction**, and the result names the
+   option. A case whose model answer is keyword fragments rather than actions ("b12", "treatable",
+   "88" as a saturation target) keeps the written plan: an unanswerable two-option stub is worse
+   than a text box. `ataxia` is currently the only case on that path.
+
+**Physiology sandbox rebuilt** (owner: *"physiology sandbox doesnt work its 1/10 make it 10/10"*).
+Two independent defects, both real. (a) The engine was uncalibrated: nominal sliders gave 70/46 with
+a cardiac output of 3.0, and the Hill denominator was `26.6 * 1000` rather than
+`Math.pow(26.6, 2.7)`, so a PaO2 of 88 read as 87%. **The old test file pinned both as "observed"**,
+which is how they survived, and is the reason a test that pins behaviour must say whether that
+behaviour is CORRECT. (b) `onInput` called `repaint()`, replacing the `<input type=range>` mid-drag,
+so no slider moved. The readout and the controls are now separate regions and only the readout is
+rewritten while dragging; the same fix was applied to the plan MCQ, where a repaint per tick meant a
+student ticking four boxes kept only the first.
+
+The engine is physiology rather than fudge: ventricular-arterial coupling
+(`SV = (EDV - V0) * Ees / (Ees + Ea)`) on the cardiovascular side, and gas exchange solved by OXYGEN
+CONTENT on the respiratory side. Content-based solving is not a refinement, it is the only way a
+shunt behaves like a shunt (at 45% shunt, FiO2 1.0 barely moves the saturation) and that behaviour is
+the entire teaching point of the tab. Ventilation is a fixed point of the chemoreflex line against
+the CO2 hyperbola, subject to a mechanical ceiling, so "a normal CO2 in acute severe asthma" and
+"oxygen retains CO2 in COPD" both emerge instead of being hand-written. Waveforms are seeded SVG
+paths, so a repaint never reshuffles a trace.
