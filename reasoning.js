@@ -3805,10 +3805,9 @@
       try { return window.SMD_REASON.assess(findings).infectious.some(function (x) { return x.matched; }); } catch (e) { return false; }
     },
     mimicsFor: mimicsFor,
-    // Open the curated KB reference for a disease id. Exported for home.js's "Read more in
-    // StewardMD KB" chip under a MaiK answer - the same screen the Knowledge Library opens, so
-    // there is one disease page in the app rather than a second, drifting copy of it.
-    openDiseaseRef: openDiseaseRef,
+    // NOT openDiseaseRef: that writes into `root` assuming the reasoning workspace is already on
+    // screen, so it throws when called cold. Callers outside the workspace use openRef() below,
+    // which does ensureRoot() and makes the panel visible. Exposing the raw one invited that bug.
     // Guard for the offer: only show the chip when a real page exists behind it.
     hasDiseaseRef: hasDiseaseRef,
     flag: reasonV2,

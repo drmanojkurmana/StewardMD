@@ -7372,12 +7372,30 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
        * than doing nothing, because a dead control is worse than an honest one. */
       var kbm = ev.target && ev.target.closest ? ev.target.closest("[data-kb-more]") : null;
       if (kbm) {
+        ev.preventDefault();
         var _kbid = kbm.getAttribute("data-kb-more");
         try { if (window.SMD_HAPTICS && SMD_HAPTICS.tap) SMD_HAPTICS.tap(); } catch (e) {}
-        try {
-          if (window.SMD_REASON && SMD_REASON.openDiseaseRef && _kbid) SMD_REASON.openDiseaseRef(_kbid);
-          else toast("Knowledge Base reference is not available here.");
-        } catch (e) { toast("Could not open that Knowledge Base page."); }
+        /* CLOSE MaiK FIRST, then open the reference — the same trap the copilot tool chips above
+         * document. #maikSheet is z-index 999 and .dx-overlay is 850, so opening the disease page
+         * with the sheet still up renders it BEHIND MaiK: fully working, completely invisible,
+         * which is exactly what "the chip doesn't do anything" looks like (owner, 2026-09-20).
+         *
+         * And it must be openRef(), not openDiseaseRef(). openDiseaseRef() writes into `root`
+         * (#dxOverlay) assuming the reasoning workspace is already built and on screen; called cold
+         * from the MaiK sheet `root` is still null, so it throws before rendering anything.
+         * openRef() is the documented entry point for exactly this - "open ANY disease's reference
+         * panel from outside the reasoning workspace" - and does ensureRoot() plus the
+         * dx-reference-mode/on/dx-lock classes that actually make the panel visible.
+         */
+        if (!(window.SMD_REASON && SMD_REASON.openRef && _kbid)) {
+          toast("Knowledge Base reference is not available here.");
+          return;
+        }
+        try { close(); } catch (e) {}
+        setTimeout(function () {
+          try { SMD_REASON.openRef(_kbid, { from: "maik" }); }
+          catch (e) { toast("Could not open that Knowledge Base page."); }
+        }, 180);
         return;
       }
       var know = ev.target && ev.target.closest ? ev.target.closest(".maik-know") : null;

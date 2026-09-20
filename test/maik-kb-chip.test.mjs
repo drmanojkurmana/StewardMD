@@ -53,10 +53,28 @@ test("the existence check uses the SAME lookups as the page it offers", () => {
 test("it opens the curated record and never silently does nothing", () => {
   const i = HOME.indexOf('closest("[data-kb-more]")');
   assert.ok(i > 0, "the click is handled");
-  const block = HOME.slice(i, i + 900);
-  assert.match(block, /SMD_REASON\.openDiseaseRef/, "opens the KB disease reference");
+  const block = HOME.slice(i, i + 1600);
+  assert.match(block, /SMD_REASON\.openRef\(/, "uses openRef, the documented entry point from outside the workspace");
+  assert.doesNotMatch(block, /SMD_REASON\.openDiseaseRef/,
+    "never the raw internal: it assumes the reasoning workspace is already on screen and throws cold");
   assert.match(block, /toast\(/, "says so when the reference module is not loaded");
-  assert.match(REASON, /openDiseaseRef: openDiseaseRef/, "reasoning.js exports it");
+  assert.match(REASON, /openRef: function/, "reasoning.js exposes openRef");
+});
+
+/* THE BUG THIS FILE EXISTS FOR (owner, 2026-09-20: "clicking on chips not taking me to disease").
+ * #maikSheet is z-index 999; .dx-overlay is 850. Opening the disease page with the sheet still up
+ * renders it BEHIND MaiK - fully working, completely invisible. home.js already documents this trap
+ * for the copilot tool chips ("exactly what the chips don't do anything looks like"); the KB chip
+ * walked into it too. */
+test("the sheet is CLOSED before the disease page opens, or it renders behind MaiK", () => {
+  const i = HOME.indexOf('closest("[data-kb-more]")');
+  const block = HOME.slice(i, i + 1600);
+  const closeAt = block.indexOf("close()");
+  const openAt = block.indexOf("SMD_REASON.openRef(");
+  assert.ok(closeAt > 0, "MaiK is closed first");
+  assert.ok(openAt > closeAt, "the reference opens AFTER the sheet closes");
+  assert.match(block, /setTimeout\([\s\S]{0,200}?18\d\)/,
+    "opens on the same settle delay the working tool chips use");
 });
 
 test("it sits ABOVE the token-spending refine chips", () => {
