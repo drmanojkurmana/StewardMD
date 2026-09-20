@@ -347,7 +347,7 @@
    * losing continuity yields a generic answer, while bleeding topics yields a confidently wrong one.
    */
   var FILLER = /^(what|whats|what's|how|why|and|but|so|about|of|for|the|a|an|in|on|to|is|are|it|its|it's|this|that|them|those|these|same|any|other|more|also|then|ok|okay|please|tell|me|us|give|show)$/;
-  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease)$/;
+  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease|drug|drugs|medication|medications|medicine|medicines|antibiotic|antibiotics|therapy|treatment|management|investigation|investigations|workup|test|tests|cause|causes|symptom|symptoms|sign|signs|diagnosis|differential|prevention|prophylaxis|definition|criteria|staging|grading)$/;   // bare nouns a doctor asks alone ("Drugs?", "Causes?") - owner transcript 2026-09-21
 
   /** An aspect-only question: every token is filler or an aspect word, so it has no subject of its
    *  own and is only answerable against the previous turn. "Side effects?" yes; "Polycystic Kidney
@@ -424,7 +424,10 @@
     var hist = histTurns(pkg.history);
     if (continues(question, hist)) {
       L.push("Recent conversation:");
-      var turns = hist.slice(-HISTORY_TURNS * 2);
+      // An aspect-only follow-up ("Drugs?", "side effects?") is about the answer just given. Showing
+      // the exchange before it too made "Drugs?" after a CFS answer come back about carvedilol from the
+      // varices turn (owner transcript, 2026-09-21). Corrections and named subjects keep both turns.
+      var turns = hist.slice(subjectTokens(question).length ? -HISTORY_TURNS * 2 : -2);
       turns.forEach(function (h, i) {
         var isA = h.role === "assistant", lastA = isA && i === turns.length - 1 - (turns[turns.length - 1].role === "assistant" ? 0 : 1);
         L.push((isA ? "MaiK: " : "Doctor: ") + (lastA ? carry(h.text || h.content) : clip(h.text || h.content, HISTORY_CLIP)));
@@ -960,7 +963,10 @@
                 : !images.length ? (pk.system || systemFor(pkg && pkg.question))
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
-          nPredict: pk.nPredict || 512,
+          // "tell me in detail" ran on the pack's default 512 and stopped mid-sentence ("continued for at
+          // least 48 hours post", owner transcript 2026-09-21). Detailed depth gets 1024; the worst-case
+          // prompt is ~1300 tokens, so it still fits a 4096 context.
+          nPredict: (opts && opts.depth === "detailed") ? Math.max(pk.nPredict || 512, 1024) : (pk.nPredict || 512),
           // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
           // byte for byte, so a regenerate request gets a little sampling jitter.
           temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : ((opts && opts.regen) ? 0.4 : 0),
@@ -1401,25 +1407,35 @@
     }).join("\n\n");
     var evidenceText = list.map(function (s, i) { return "[" + (i + 1) + "] " + String(s.title || "") + ". " + String(s.snippet || ""); }).join("\n");
     var prompt = "Question: " + q + "\n\nWeb results:\n" + ctx;
-    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
-      if (!text) return { error: "no-answer" };
-      var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+    var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+    function gateOf(text) {
       try {
         var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
-        if (RAG && RAG.evidenceGate) {
-          var gate = RAG.evidenceGate(text, evidenceText, q);
-          if (!gate.ok) {
-            var top = list[0];
-            var shown = String(top.title || "") + (top.snippet ? "\n" + top.snippet : "") + (top.url ? "\n" + top.url : "");
-            return {
-              text: "The on-device model's answer could not be verified against the web results it found " +
-                "(it stated a figure or drug not in them). Showing the top result instead:\n\n" + shown,
-              sources: srcOut, engine: "local", mode: "web-local"
-            };
-          }
-        }
+        if (RAG && RAG.evidenceGate) return RAG.evidenceGate(text, evidenceText, q).ok;
       } catch (e) {}
-      return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+      return true;
+    }
+    /* Owner, 2026-09-21 ("even we search dont show whole topic in detail"): a failed gate used to
+     * throw the whole answer away and print ONE snippet. Now: retry once with a sources-only
+     * prompt at temperature 0; if that fails too, show EVERY result in full, so the clinician still
+     * gets the topic, just quoted rather than written. */
+    function digest() {
+      return "The on-device model's answer could not be verified against the web results, so here are the " +
+        "results themselves:\n\n" + list.map(function (s, i) {
+          return "**" + (i + 1) + ". " + String(s.title || s.site || "Source").trim() + "**" +
+            (s.snippet ? "\n" + String(s.snippet).trim() : "") + (s.url ? "\n" + String(s.url) : "");
+        }).join("\n\n");
+    }
+    var STRICT = WEB_SYS + "\nSTRICT MODE: use ONLY facts, figures and drug names that appear in the numbered WEB RESULTS. " +
+      "Cite [n] after each. If the results do not cover a point, say so instead of supplying it.";
+    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
+      if (!text) return { error: "no-answer" };
+      if (gateOf(text)) return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+      var o2 = {}; for (var k in (opts || {})) o2[k] = opts[k]; o2.temperature = 0;
+      return generateText(prompt, STRICT, WEB_MAX, o2).then(function (t2) {
+        if (t2 && gateOf(t2)) return { text: emphasize(t2), sources: srcOut, engine: "local", mode: "web-local" };
+        return { text: digest(), sources: srcOut, engine: "local", mode: "web-local" };
+      }, function () { return { text: digest(), sources: srcOut, engine: "local", mode: "web-local" }; });
     });
   }
   function generateJSON(prompt, system, nPredict, opts) {

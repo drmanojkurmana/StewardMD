@@ -5508,7 +5508,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       _maikBusy = busy;
       maikBuddyBusy(!!busy);
       if (sheet._maikAtmosphere) sheet._maikAtmosphere.setBusy(!!busy);
-      if (was && !busy) { try { maikDocCue("done"); } catch (e) {} }   // wave the answer in
+      if (was && !busy) { try { maikDocCue("done"); } catch (e) {} try { maikHaptic("done"); } catch (e) {} }   // wave the answer in
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
       sendBtn.classList.toggle("stopping", !!busy);
@@ -5742,8 +5742,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (t.ts && (Date.now() - t.ts) > 30 * 60 * 1000) { _maikTopic = null; return null; }   // session continuity only
       q = maikDeslang(q);   // "wat iz da treatment doze?" → "what is the treatment dose?" so the branches below match
       var n = maikNorm(q), wc = n.split(" ").filter(Boolean).length;
-      if (/(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/.test(n) || /^(more|detail|details|elaborate|expand|continue)\b/.test(n)) {
-        return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
+      var DETAIL_RE = /(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/, DETAIL_START_RE = /^(more|detail|details|elaborate|expand|continue)\b/;
+      if (DETAIL_RE.test(n) || DETAIL_START_RE.test(n)) {
+        // Owner transcript 2026-09-21: "How to treat Covid 19 tell me in detail" matched "in detail" and
+        // was rewritten to a detailed STEMI answer. The detail phrase only continues the topic when
+        // what is LEFT is generic ("tell me in detail", "more detail please"); a message that still
+        // names a subject after the phrase is a NEW question, asked in detail (see the caller).
+        var restD = n.replace(DETAIL_RE, " ").replace(DETAIL_START_RE, " ").replace(/\?/g, " ").split(" ").filter(Boolean);
+        if (!restD.length || restD.every(function (w) { return GENERIC_FU.test(w); })) {
+          return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
+        }
+        return null;
       }
       if (/(antibiotic|antibiotics|abx|antimicrobial|drug of choice|which agent)/.test(n) && wc <= 7) {
         return { question: "Empiric antimicrobial therapy for " + t.topic + " — agent/class choice, severity and host adjustment, and culture-directed de-escalation principles.", depth: "concise", topic: "antibiotics for " + t.topic, retrieval: t.topic + " empiric antibiotics antimicrobial therapy de-escalation" };
@@ -6651,7 +6660,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var onDelta = function (acc) {
             if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
             _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
-            if (!_perfTTFT) _perfTTFT = maikNow();
+            if (!_perfTTFT) { _perfTTFT = maikNow(); try { maikHaptic("start"); } catch (e) {} }   // first chunk: the answer is coming
             var _accS = maikStripRefine(acc).replace(/@@\s*MORE\s*@@/gi, "\n\n");   // hide the @@REFINE@@ / @@MORE@@ markers while streaming
             var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
             _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
@@ -7042,7 +7051,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
-      if (_researchMode) { maikRunResearch(q); return; }
+      if (_researchMode) {
+        // Evidence Review is a cloud feature. With an on-device engine selected the old path refused
+        // ("Evidence Review is a MaiK Cloud feature") and answered nothing; owner transcript 2026-09-21,
+        // "Which is better in Esophageal Varices". Answer it on-device instead, and say why once.
+        var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.effective ? SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
+        if (!_eff || _eff === "cloud") { maikRunResearch(q); return; }
+        try { toast("Evidence Review needs MaiK Cloud. Answering on-device."); } catch (e) {}
+      }
       var active = maikActiveCase();
       _maikUserQ = q; _maikFollowUp = false;
       if (maikV2()) {
@@ -7269,15 +7285,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * Distinct feedback per meaning: a light tap for send, a firmer one for stop, because stopping is
      * a different kind of decision and should not feel identical to sending.
      */
+    /* MaiK haptic vocabulary (owner, 2026-09-21: "i want best haptics"):
+     *   send   medium  the primary action, firmer than a chip tap
+     *   stop   heavy   interrupting generation is the most deliberate press in the sheet
+     *   start  light   the first streamed chunk landed: the answer is coming
+     *   done   success the answer is complete (iOS notification pattern, two soft knocks)
+     *   error  error   generation failed or was refused
+     *   pick   selection  choosing a model / flipping the Knowledge Base switch */
+    var MAIK_HAPTIC = { send: "medium", stop: "heavy", start: "light", done: "success", error: "error", pick: "selection" };
     function maikHaptic(kind) {
+      var fn = MAIK_HAPTIC[kind] || "light";
       try {
         var H = window.SMD_HAPTICS;
-        if (H) { if (kind === "stop") H.medium(); else H.tap(); return; }
+        if (H && H[fn]) { H[fn](); return; }
       } catch (e) {}
       try {
         var C = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Haptics;
         if (C && C.impact) {
-          C.impact({ style: kind === "stop" ? "MEDIUM" : "LIGHT" }).catch(function () {});
+          if (fn === "success" || fn === "error") C.notification({ type: fn.toUpperCase() }).catch(function () {});
+          else C.impact({ style: fn === "heavy" ? "HEAVY" : fn === "medium" ? "MEDIUM" : "LIGHT" }).catch(function () {});
           return;
         }
       } catch (e) {}

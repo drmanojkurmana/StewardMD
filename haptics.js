@@ -21,11 +21,15 @@
   // every other platform are a hard no-op. (navigator.vibrate is intentionally NOT used.)
   function iosNative() { return isNative() && platform() === "ios"; }
 
-  var _p; // cached plugin ref (undefined=unknown, null=absent)
+  var _p; // cached plugin ref once FOUND. Absent is re-checked every call: caching null on the
+  // first early call (before the bridge proxied the plugin) made every later tap silent.
   function plugin() {
-    if (_p !== undefined) return _p;
-    _p = (iosNative() && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Haptics) || null;
-    return _p;
+    if (_p) return _p;
+    if (!iosNative()) return null;
+    var C = window.Capacitor, P = C && C.Plugins && C.Plugins.Haptics;
+    if (!P && C && typeof C.registerPlugin === "function") { try { P = C.registerPlugin("Haptics"); } catch (e) { P = null; } }
+    if (P && (P.impact || P.notification)) _p = P;
+    return P || null;
   }
 
   function enabled() {

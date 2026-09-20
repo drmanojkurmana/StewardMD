@@ -1370,18 +1370,41 @@
         return (g ? groupHeadHTML(g) : "") + rows.map(oneRowHTML).join("");
       }).join("");
     }
+    /* Bars instead of prose (owner, 2026-09-21: "telling about model in simple bars or words").
+     * Depth is the caps table's reasoning tier; Speed is its inverse. ponytail: speed is a proxy from
+     * model size, swap for measured tok/s once the on-device bench records one. */
+    function meterHTML(label, n) {
+      var segs = "";
+      for (var i = 1; i <= 3; i++) {
+        segs += '<i style="display:inline-block;width:14px;height:4px;border-radius:2px;margin-right:2px;background:' +
+          (i <= n ? "var(--mk-teal,#0e6e63)" : "var(--mk-bd,#dbe3ee)") + '"></i>';
+      }
+      return '<span style="display:inline-flex;align-items:center;gap:6px;margin-right:14px" aria-label="' + label + ' ' + n + ' of 3">' +
+        '<span style="font:600 10.5px/1 var(--sans,system-ui);letter-spacing:.03em;text-transform:uppercase;color:var(--mk-mut,#5a7184)">' + label + '</span>' +
+        '<span aria-hidden="true">' + segs + '</span></span>';
+    }
+    function metersHTML(o) {
+      if (!o.pack) return "";
+      var M = window.SMD_MAIK_MODELS, c = null, size = "";
+      try { c = M && M.caps ? M.caps(o.pack) : null; size = M && M.sizeLabel ? M.sizeLabel(o.pack) : ""; } catch (e) {}
+      var depth = Math.max(1, Math.min(3, (c && c.reasoning) || 2)), speed = 4 - depth;
+      return '<span style="display:flex;align-items:center;flex-wrap:wrap;margin-top:7px">' + meterHTML("Depth", depth) + meterHTML("Speed", speed) +
+        (size ? '<span style="font:500 11px/1 var(--sans,system-ui);color:var(--mk-mut,#5a7184)">' + esc(size) + '</span>' : "") + '</span>';
+    }
     function oneRowHTML(o) {
       return [o].map(function (o) {
         var on = o.id === cur;
+        var badge = (o.pack && o.badge === "OFFLINE") ? "" : o.badge;   // every on-device row is offline; the bars say it
         return '<button type="button" data-mk-pick="' + o.id + '" role="option" aria-selected="' + on + '" ' +
           'style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;border:0;' +
           'background:' + (on ? "var(--mk-tsoft,#e6f4f1)" : "transparent") + ';padding:14px 16px;' +
           'color:var(--mk-ink,#14202b);-webkit-tap-highlight-color:transparent">' +
           '<span style="flex:1;min-width:0">' +
             '<span style="display:flex;align-items:center;gap:7px;font:600 15px/1.25 var(--sans,system-ui)">' + esc(o.label) +
-              '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + o.badge + '</span>' +
+              (badge ? '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + badge + '</span>' : "") +
             '</span>' +
             '<span data-mk-sub="' + o.id + '" style="display:block;font:500 12px/1.4 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:3px">' + esc(o.sub) + '</span>' +
+            metersHTML(o) +
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:18px;text-align:center;color:var(--mk-teal,#0e6e63);font-size:15px;font-weight:800;opacity:' + (on ? "1" : "0") + '">\u2713</span>' +
           '</button>';
@@ -1425,11 +1448,17 @@
         '</div>';
     }
 
-    ov.innerHTML = '<div id="maikModelSheetInner" style="width:100%;background:var(--mk-bg,#fff);border-radius:18px 18px 0 0;padding:8px 0 max(14px,env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.28)">' +
-      '<div style="width:38px;height:4px;border-radius:2px;background:var(--mk-bd,#dbe3ee);margin:6px auto 10px"></div>' +
-      '<div style="font:700 13px/1.2 var(--sans,system-ui);color:var(--mk-mut,#5a7184);padding:0 16px 8px">Answer with</div>' +
-      '<div id="maikModelRows" role="listbox">' + rowsHTML() + '</div>' +
-      '<div id="maikKbRow">' + kbRowHTML() + '</div>' +
+    // Owner screenshot 2026-09-21: twelve rows overflowed the screen with no scroll and no way back.
+    // The sheet is capped, the list scrolls inside it, the header (title + close) and the Knowledge
+    // Base switch stay put. Tapping the dim backdrop still closes it.
+    ov.innerHTML = '<div id="maikModelSheetInner" style="display:flex;flex-direction:column;width:100%;max-height:min(88dvh,88vh);background:var(--mk-bg,#fff);border-radius:18px 18px 0 0;padding:8px 0 max(14px,env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.28)">' +
+      '<div style="flex:0 0 auto;width:38px;height:4px;border-radius:2px;background:var(--mk-bd,#dbe3ee);margin:6px auto 4px"></div>' +
+      '<div style="flex:0 0 auto;display:flex;align-items:center;padding:0 8px 4px 16px">' +
+        '<span style="flex:1;font:700 17px/1.2 var(--sans,system-ui);color:var(--mk-ink,#14202b)">Answer with</span>' +
+        '<button type="button" data-mk-close="1" aria-label="Close" style="width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--mk-mut,#5a7184);font:400 22px/1 var(--sans,system-ui);cursor:pointer;-webkit-tap-highlight-color:transparent">\u00d7</button>' +
+      '</div>' +
+      '<div id="maikModelRows" role="listbox" style="flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain">' + rowsHTML() + '</div>' +
+      '<div id="maikKbRow" style="flex:0 0 auto">' + kbRowHTML() + '</div>' +
       '</div>';
     document.body.appendChild(ov);
 
@@ -1461,13 +1490,14 @@
         if (kb.disabled) return;                 // cloud / KB-only are always grounded
         setRagLinked(!ragLinked());
         repaintKb();
-        try { if (window.SMD_HAPTICS && SMD_HAPTICS.tap) SMD_HAPTICS.tap(); } catch (e2) {}
+        try { if (window.SMD_HAPTICS && SMD_HAPTICS.selection) SMD_HAPTICS.selection(); } catch (e2) {}
         return;
       }
       var btn = e.target && e.target.closest ? e.target.closest("[data-mk-pick]") : null;
-      if (!btn) { if (e.target === ov) closePicker(); return; }
+      if (!btn) { if (e.target === ov || (e.target.closest && e.target.closest("[data-mk-close]"))) closePicker(); return; }
       var optId = btn.getAttribute("data-mk-pick");
       var chosen = options().filter(function (x) { return x.id === optId; })[0];
+      try { if (window.SMD_HAPTICS && SMD_HAPTICS.selection) SMD_HAPTICS.selection(); } catch (e2) {}
       selectOption(optId);
       // Picking an on-device model that is not downloaded starts the download right here.
       if (chosen && chosen.needsDownload && chosen.pack) {
