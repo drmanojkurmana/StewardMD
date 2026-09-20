@@ -246,5 +246,6 @@
     document.body.classList.remove("icd-lock");
   }
 
-  window.SMD_ICD = { open: open, pick: pick, close: close, localSearch: localSearch };
+  function openCode(id) { openWith(null); try { openDetail(id); } catch (e) {} }
+  window.SMD_ICD = { open: open, pick: pick, close: close, localSearch: localSearch, openCode: openCode };
 })();

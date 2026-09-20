@@ -741,6 +741,10 @@
     if (typeof window !== "undefined") {
       window.SMD_openSettings = openSettingsPage;
       window.SMD_openExperimental = openExperimentalPage;
+      window.SMD_SETTINGS_INDEX = function () {
+        return ADV_TOGGLES.map(function (t) { return { id: t.id, title: t.title, sub: t.sub, key: t.key, group: "adv" }; })
+          .concat(EXP_TOGGLES.map(function (t) { return { id: t.id, title: t.title, sub: t.sub, key: t.key, group: "exp" }; }));
+      };
     }
   } catch (e) {}
 

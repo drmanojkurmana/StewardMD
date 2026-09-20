@@ -3221,6 +3221,8 @@
     // to open the full antibiotic-stewardship console, so nothing is lost.
     if (window.DX && DX.openRef) { DX.openRef(id); try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {} }
   }
+  // Universal search: the KB index and opener are closure-private; expose read-only handles.
+  try { window.SMD_KB = { search: kbSearch, open: kbOpen }; } catch (e) {}
   function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
   function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
   function kbPersonalHTML(entries) {
