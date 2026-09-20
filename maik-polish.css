@@ -35,7 +35,12 @@ html body #maikSheet.maik-polished .maik-ta{font-size:16px;line-height:1.45;min-
 html body #maikSheet.maik-polished :is(.maik-mic,.maik-img,.maik-research,.maik-send){width:44px;height:44px;flex:0 0 44px;border-radius:16px}
 html body #maikSheet.maik-polished :is(.maik-hd-btn,.maik-mic,.maik-img,.maik-research,.maik-send)::after{inset:0}
 html body #maikSheet :is(button,input,textarea,select,[contenteditable]),html body #maikSheet.maik-polished :is(button,input,textarea,select,[contenteditable]),html body #maikSheet :is(button,input,textarea,select,[contenteditable]):focus,html body #maikSheet :is(button,input,textarea,select,[contenteditable]):focus-visible,html body #maikSheet.maik-polished :is(button,input,textarea,select,[contenteditable]):focus,html body #maikSheet.maik-polished :is(button,input,textarea,select,[contenteditable]):focus-visible{outline:none!important;outline-style:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent!important}
-html body #maikSheet.maik-polished .maik-side{background:var(--mk-bg)}
+/* Conversations sidebar: crisp. It is a composited layer (its transform animates) and its old
+   width, min(86%,340px), is 335.4px on a 390px phone, with translateX(-103%) landing on a fractional
+   pixel too; iOS WebKit rasterises text in such a layer between pixels and it reads as blurred
+   (owner, 2026-09-20: "previous chats menu is getting blurred"). Whole-pixel width, whole-pixel
+   travel, no filters, and the layer is released once the slide ends. */
+html body #maikSheet.maik-polished .maik-side{width:min(calc(100% - 48px),340px);transform:translate3d(-100%,0,0);backface-visibility:hidden;-webkit-backface-visibility:hidden;filter:none;-webkit-backdrop-filter:none;backdrop-filter:none;-webkit-font-smoothing:antialiased;will-change:auto;background:var(--mk-bg)}
 html body #maikSheet.maik-polished .maik-side-row{min-height:48px;border-radius:14px}
 html body #maikSheet.maik-polished .maik-side-srch input{font-size:16px}
 html body #maikSheet.maik-polished .mkdoc{overflow-x:clip;overflow-y:visible}
@@ -53,20 +58,19 @@ html body #maikSheet.maik-polished .maik-acts{grid-column:1/-1;grid-row:2;displa
 html body #maikSheet.maik-polished .maik-acts .maik-act{width:100%;padding:10px 4px;border-radius:12px;background:var(--mk-soft);color:var(--mk-mut)}
 html body #maikSheet.maik-polished :is(.maik-fb-reason,.maik-fb-reasonrow){grid-column:1/-1;font-size:16px}
 
-/* Compact app navigation: model stays in the top-right slot at every width. */
+/* Compact app navigation: menu + logo on the first row, caption + actions on the second. The model
+   chip moved to the composer (2026-09-20): its 150px header slot truncated every label. */
 html body #maikSheet.maik-polished .maik-hd{padding:8px 16px 4px;padding-top:max(8px,env(safe-area-inset-top))}
-html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(64px,1fr) minmax(110px,150px);gap:4px 8px}
+html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px 1fr;gap:4px 8px}
 html body #maikSheet.maik-polished .maik-logo-wrap{grid-column:2;grid-row:1;padding:0}
 html body #maikSheet.maik-polished #maikMenu{grid-column:1;grid-row:1}
-html body #maikSheet.maik-polished #maikModelChip{grid-column:3;grid-row:1;justify-self:end;min-width:0;width:100%;max-width:150px!important;justify-content:center;min-height:44px;padding:8px 10px!important;border-radius:16px!important;font-size:12px!important}
-html body #maikSheet.maik-polished #maikModelChipLbl{min-width:0}
 html body #maikSheet.maik-polished .maik-nav-actions{grid-column:1/-1;display:flex;align-items:center;gap:4px;min-width:0}
 html body #maikSheet.maik-polished .maik-nav-caption{flex:1;min-width:0;padding-left:8px;color:var(--mk-mut);font-size:12px;font-weight:500;letter-spacing:.01em}
 html body #maikSheet.maik-polished .maik-hd-btn{flex:0 0 44px}
 html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send){touch-action:manipulation;transition:background .15s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
 html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send):active{transform:scale(.97);background:var(--mk-tsoft)!important}
 html body #maikSheet.maik-polished .maik-body{-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-@media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(64px,1fr) minmax(100px,130px);column-gap:6px}html body #maikSheet.maik-polished .maik-nav-caption{font-size:11px}}
+@media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px 1fr;column-gap:6px}html body #maikSheet.maik-polished .maik-nav-caption{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send){transition:none;transform:none}}
 
 html body #maikSheet.maik-polished .maik-ta{resize:none;scrollbar-width:none;background:transparent;border:0;box-shadow:none}
@@ -89,4 +93,11 @@ html body #maikSheet.maik-polished #maikImg{grid-column:3;grid-row:2}
 html body #maikSheet.maik-polished #maikExtract{grid-column:4;grid-row:2;justify-self:start;display:flex;align-items:center;justify-content:center;visibility:hidden;width:44px;height:44px;min-height:44px;margin:0;padding:10px;border:0;background:transparent;color:var(--mk-mut)}
 html body #maikSheet.maik-polished #maikExtract.show{visibility:visible}
 html body #maikSheet.maik-polished #maikSend{grid-column:5;grid-row:2;order:0;box-shadow:none}
+/* Model chip in the composer's flexible cell, hugging Send. Shares the cell with the extract
+   button (start-aligned, hidden until there is text); when that shows, the chip yields 52px. */
+html body #maikSheet.maik-polished #maikModelChip{grid-column:4;grid-row:2;justify-self:end;align-self:center;min-width:0;max-width:100%!important;min-height:44px;height:44px;margin:0 8px 0 0;padding:8px 12px!important;border-radius:16px!important;font-size:12px!important;justify-content:center}
+html body #maikSheet.maik-polished #maikModelChipLbl{min-width:0}
+html body #maikSheet.maik-polished .maik-cmp-in:has(#maikExtract.show) #maikModelChip{max-width:calc(100% - 52px)!important}
 html body #maikSheet.maik-polished .maik-fb-b[aria-pressed="true"]{color:var(--mk-bg)}
+
+html body #maikSheet.maik-polished .maik-side-wrap.open .maik-side{transform:translate3d(0,0,0)}

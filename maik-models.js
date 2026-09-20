@@ -813,6 +813,12 @@
         return sizeOf(f.name).then(function (n) { return f.bytes ? n === f.bytes : n > 0; });
       });
     }, Promise.resolve(true)).then(function (ok) {
+      // Size matches, but is every part in? A preallocated file measures full size from the start.
+      if (!ok) return false;
+      var L = llama();
+      if (!(L && L.modelPath)) return true;
+      return L.modelPath({ name: files[0].name }).then(function (mp) { return !(mp && mp.partial); }, function () { return true; });
+    }).then(function (ok) {
       if (ok) { lset(MARK_PREFIX + id, "1"); var s = registrySha(id); if (s) lset(SHA_PREFIX + id, s); }
       else lrem(MARK_PREFIX + id);
       return ok;
@@ -960,7 +966,16 @@
         if (s.state === "done") {
           var onDisk = s.onDisk || 0;
           if (f.bytes && onDisk !== f.bytes) throw new Error("size mismatch: got " + onDisk + " want " + f.bytes);
-          return true;
+          /* SIZE IS NOT COMPLETION. The final file is preallocated at full length before the first
+           * part lands, and the native start() used to declare any full-size file "done" on the spot -
+           * so a download interrupted at 60% came back after a relaunch as "completed", was marked
+           * installed, and the model loaded with holes in it: "generation failure" (owner, iPhone 17
+           * Pro, 2026-09-20). The `.parts` sidecar is the authority; ask for it before believing done. */
+          if (!L.modelPath) return true;
+          return L.modelPath({ name: f.name }).then(function (mp) {
+            if (mp && mp.partial) throw new Error("PARTIAL");
+            return true;
+          }, function () { return true; });
         }
         if (s.state === "failed") throw new Error("download failed (reason " + s.reason + ")");
         if (s.state === "cancelled" || s.state === "none") throw new Error("cancelled");
@@ -984,7 +999,14 @@
       if (mp && mp.freeBytes > 0 && f.bytes && mp.freeBytes < f.bytes * 1.05 + 600e6) {
         throw new Error("not enough free space (" + (mp.freeBytes / 1e9).toFixed(1) + " GB left, needs " + (f.bytes / 1e9).toFixed(1) + " GB)");
       }
-      return begin().then(poll);
+      return begin().then(poll).catch(function (e) {
+        // An older native build cannot resume a preallocated file (its start() short-circuits on
+        // size), so the only way to a working model there is a clean restart. Once.
+        if (String((e && e.message) || e) !== "PARTIAL" || stopped) throw e;
+        report(0, "Download was incomplete, starting again");
+        return (L.modelDelete ? L.modelDelete({ name: f.name }).catch(function () {}) : Promise.resolve())
+          .then(function () { lrem(KEY_DLID + id); return fresh().then(poll); });
+      });
     }).then(function () {
       lset(MARK_PREFIX + id, "1");
       var s0 = registrySha(id); if (s0) lset(SHA_PREFIX + id, s0);
