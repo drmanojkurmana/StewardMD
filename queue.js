@@ -492,6 +492,12 @@
       var box = document.getElementById("qTlRows"); if (box) box.innerHTML = timelineRows(st);
       return;
     }
+    /* SAME RULE FOR ANY FIELD IN THE PROFILE SHEET, which is where staff are added. A repaint here
+     * is not a cosmetic flicker: the login name and PIN being typed are wiped, the keyboard closes,
+     * and a half-typed PIN submitted afterwards creates a member the nurse then cannot sign in as.
+     * The sheet is a modal - nothing behind it is being read - so skipping the rebuild costs
+     * nothing and the next click paints it. */
+    if (ae && ae.closest && ae.closest(".q-profile")) return;
     // Preserve scroll across the 8s poll repaint (rebuild otherwise yanks the list to the top).
     var prev = r.querySelector(".q-canvas"), top = prev ? prev.scrollTop : 0;
     r.innerHTML = _render(st);
@@ -500,7 +506,9 @@
   }
 
   function refresh() {
-    if (st.demo || !st.session || st.view === "settings") return;   // demo has no server session; don't clobber unsaved settings mid-poll
+    /* demo has no server session; don't clobber unsaved settings mid-poll; and the profile sheet
+     * (Clinic and staff) is a form the owner is filling in, for the same reason settings is. */
+    if (st.demo || !st.session || st.view === "settings" || st.profileOpen) return;
     st.pollN = (st.pollN || 0) + 1;
     // real-time-ish sync: silently re-pull today's GHIS Out-patients list every ~5 polls (~40s) so newly
     // registered patients appear without a manual import (dedupes server-side by visit id).

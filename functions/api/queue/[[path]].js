@@ -850,7 +850,18 @@ export async function onRequest(context) {
       const b = await readBody(request);
       if (sub === "pin") {
         const orgId = await ORG.resolveOrgId(env, b.clinicCode || b.orgId || "");   // accept the SMD-XXXXXX clinic code
-        const auth = await ORG.getMemberAuth(env, orgId, b.identity || "");
+        /* THE LOGIN NAME IS MATCHED EXACTLY FIRST, THEN IN LOWER CASE.
+         *
+         * The staff console lowercases a login name when it creates the member (mobile keyboards
+         * auto-capitalise), and this path matched the stored key verbatim - so a nurse added as
+         * "nurse1" who typed "Nurse1" was told her Clinic ID, login or PIN was wrong, with the
+         * correct PIN, and no way to tell which of the three was supposedly at fault.
+         *
+         * Exact match still wins, so an org that already holds both "Nurse1" and "nurse1" keeps
+         * answering as it did; the fallback only runs when the name as typed matches nobody. */
+        const typed = String(b.identity || "");
+        const auth = (await ORG.getMemberAuth(env, orgId, typed))
+          || (typed !== typed.trim().toLowerCase() ? await ORG.getMemberAuth(env, orgId, typed.trim().toLowerCase()) : null);
         /* EVERY OUTCOME IS AUDITED under the hospital, so "who tried to get in as this nurse at 3am"
          * has an answer. Unknown IDs are recorded too when the hospital resolved. Never the PIN. */
         if (!auth || !auth.active || !auth.pinHash) {
