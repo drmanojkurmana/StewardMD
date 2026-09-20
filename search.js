@@ -364,7 +364,8 @@
     root.hidden = false; backdrop.hidden = false;
     document.body.classList.add("us-open");
     requestAnimationFrame(function () { root.classList.add("on"); });
-    setQuery(input.value);
+    setTimeout(function () { if (root) root.classList.add("on"); }, 50);   // rAF stalls in background tabs; never leave the panel unstyled
+    setQuery("");                                                 // fresh open always starts at zero state (recents + browse)
     input.focus();                                               // synchronous: same tap, keyboard rises on iOS
   }
   function close() {

@@ -1418,7 +1418,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         </div>
       </div>
       <div class="app-head-actions" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-        <div class="session-badge hidden" id="sessionBadge"><span class="dot"></span><span id="sessionBadgeText"></span><button class="session-signout" id="sessionSignOut" title="Sign out">&#9211;</button></div><button class="smd-search-btn" id="smdSearchBtn" onclick="openSearch()" title="Search syndromes, drugs, calculators">🔍</button><button id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode"><span class="toggle-knob" id="themeKnob">☀️</span></button>
+        <div class="session-badge hidden" id="sessionBadge"><span class="dot"></span><span id="sessionBadgeText"></span><button class="session-signout" id="sessionSignOut" title="Sign out">&#9211;</button></div><button class="smd-search-btn" id="smdSearchBtn" onclick="openSearch()" title="Search anything in StewardMD (Cmd+K)">🔍</button><button id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode"><span class="toggle-knob" id="themeKnob">☀️</span></button>
         <button class="my-cases-btn" id="myCasesBtn" onclick="openMyCases()">📂<span class="mcb-txt"> My Cases</span></button>
         <div class="golden-q">8-question stewardship framework</div>
       </div>
@@ -2141,7 +2141,7 @@ window.openExternal = function (u) {
 <script src="/id-token.js?v=idtok2" defer></script>
 <link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit8">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall5">
-<script src="/reasoning.js?v=hardlocal3" defer></script>
+<script src="/reasoning.js?v=hardlocal3-us1" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2179,11 +2179,11 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab8" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab8" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-us1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
-<script defer src="/sidebar-redesign.js?v=settings-page3-exp1-clinix3-surgx1-hosp1"></script>
+<script defer src="/sidebar-redesign.js?v=settings-page3-exp1-clinix3-surgx1-hosp1-us1"></script>
 <!-- Settings ▸ Apple Watch page (SMD_APPLE_WATCH). Additive; the sidebar's Apple Watch row
      opens it. Auto-detects pairing via the WatchBridge plugin; degrades to an info card on web.
      Must load after sidebar-redesign.js so the row's action resolves. -->
@@ -2198,7 +2198,9 @@ window.openExternal = function (u) {
 <script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold992-rotate-fix" defer></script>
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
-<script src="/icd.js?v=hardlocal3" defer></script>
+<script src="/icd.js?v=hardlocal3-us1" defer></script>
+<link rel="stylesheet" href="/search.css?v=us1">
+<script src="/search.js?v=us1" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
 <script src="/swipe-back.js?v=gold482-edgeback-gestnav1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
