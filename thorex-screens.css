@@ -704,3 +704,20 @@
 #thorexRoot .tx-firstrun .material-symbols-rounded{font-size:16px;color:#5eead4;flex:0 0 auto}
 @keyframes txBlink{0%,100%{opacity:1}50%{opacity:.42}}
 @media (prefers-reduced-motion: reduce){#thorexRoot .tx-firstrun{animation:none}}
+
+/* Ask MaiK call-to-action — the same aurora glow as the OPD Ask MaiK button. The oeMaikAurora /
+   oeMaikBloom keyframes live in opd-emr.css, which loads earlier on the same page, so they are
+   reused here rather than duplicated. */
+#thorexRoot .tx-maik-cta{position:relative;overflow:hidden;isolation:isolate;display:flex;flex:0 0 auto;align-items:center;gap:13px;width:100%;min-height:64px;padding:14px 16px;margin:10px 0 4px;border:1px solid rgba(124,58,237,.45);border-radius:16px;background:var(--sc-lowest,#fff);color:var(--on-surface,#0f172a);text-align:left;cursor:pointer;transition:transform .08s;animation:oeMaikBloom 5.5s ease-in-out infinite}
+#thorexRoot .tx-maik-cta:active{transform:scale(.99)}
+#thorexRoot .tx-maik-cta[disabled]{cursor:default;opacity:.7}
+#thorexRoot .tx-maik-glow{display:block;position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;background:linear-gradient(90deg,rgba(99,102,241,.26),rgba(168,85,247,.18),rgba(236,72,153,.26),rgba(168,85,247,.18),rgba(99,102,241,.26));background-size:220% 100%;animation:oeMaikAurora 7s ease-in-out infinite}
+body.dark #thorexRoot .tx-maik-glow{opacity:.16}
+#thorexRoot .tx-maik-ico,#thorexRoot .tx-maik-txt{position:relative;z-index:1}
+#thorexRoot .tx-maik-ico{flex:0 0 auto;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);box-shadow:0 5px 14px -5px rgba(124,58,237,.55)}
+#thorexRoot .tx-maik-ico .material-symbols-rounded,#thorexRoot .tx-maik-ico .material-symbols-outlined{font-size:21px;color:#fff;-webkit-text-fill-color:#fff}
+#thorexRoot .tx-maik-txt{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+#thorexRoot .tx-maik-txt b{font:800 15.5px var(--q-sans,system-ui);line-height:1.2}
+#thorexRoot .tx-maik-txt span{font:500 12.5px/1.4 var(--q-sans,system-ui);color:var(--on-surface-variant,#64748b)}
+#thorexRoot .tx-maik-cta::after{content:"\203A";position:relative;z-index:1;flex:0 0 auto;font:700 21px var(--q-sans,system-ui);color:var(--on-surface-variant,#64748b);line-height:1}
+@media (prefers-reduced-motion: reduce){#thorexRoot .tx-maik-cta,#thorexRoot .tx-maik-glow{animation:none}#thorexRoot .tx-maik-cta{box-shadow:0 4px 18px -8px rgba(124,58,237,.45)}}

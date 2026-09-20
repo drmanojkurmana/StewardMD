@@ -764,7 +764,13 @@
           '<button type="button" class="tx-clin-mic" data-act="tx-aidx-scribe" aria-label="Dictate history with MaiK Scribe">' + ic("mic") + "<span>MaiK Scribe</span></button>" +
           '<textarea class="tx-clin-ta" data-hook="aidxHx" rows="2" placeholder="Symptoms &amp; history — e.g. fever, foul sputum, IV drug use">' + esc((a && a.__context) || "") + "</textarea>" +
         "</div>" +
-        '<button type="button" class="tx-btn tx-btn-primary tx-aidx-go" data-act="tx-aidx-go">' + ic("auto_awesome") + "<span>Get best-fit diagnoses</span></button>" +
+        /* Ask MaiK call-to-action, matching the glowing one in OPD (same aurora keyframes).
+         * data-act is unchanged, so the existing runAiDx handler still drives it. */
+        '<button type="button" class="tx-aidx-go tx-maik-cta" data-act="tx-aidx-go">' +
+          '<span class="tx-maik-glow" aria-hidden="true"></span>' +
+          '<span class="tx-maik-ico">' + ic("auto_awesome") + "</span>" +
+          '<span class="tx-maik-txt"><b>Ask MaiK</b><span>Correlate these findings with the history</span></span>' +
+        "</button>" +
         '<div class="tx-aidx-out" data-hook="aidxOut" hidden></div>' +
       "</div>";
 
