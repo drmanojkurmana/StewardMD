@@ -181,6 +181,40 @@ export function scribeCaps(env) {
   const d = Number(env && env.SCRIBE_SEC_DAY), w = Number(env && env.SCRIBE_SEC_WEEK);
   return { day: Number.isFinite(d) && d >= 0 ? d : 1800, week: Number.isFinite(w) && w >= 0 ? w : 3600 };
 }
+// ---- what ONE scribe call charges against that budget ------------------------------------------
+// The honest unit is the NEW audio a call covers. Neither of the two things the server can see
+// measures that: an opd-scribe refine resends the WHOLE growing transcript (so transcript length
+// charges the same minute again on every refine), and a per-call cadence constant only holds while
+// the client's cadence never moves. It moved: the refine loop went from one call per 120s to roughly
+// one per 45s, and the flat 120s/call left over from the old cadence charged a 10-minute consult
+// ~1680s of the 1800s daily budget -- the cap then tripped and the client stopped the recording
+// mid-consultation.
+//
+// So the client tells us, and `sec` means: seconds of NEW dictation since this caller's PREVIOUS
+// charged call -- a DELTA, never the total elapsed. Clamped to [0, SCRIBE_SEC_MAX_CALL] so one
+// request can never spend a whole day's budget.
+//
+// Absent (any client that predates the field): fall back to the per-kind figure below. Each is the
+// client's MINIMUM gap between two charged calls of that kind, so the fallback can only ever
+// UNDER-charge. That direction is deliberate: under-charging loosens a cost bound, over-charging
+// ends a doctor's consultation.
+//   opd-scribe 45 -- gatedRefine's floor between two background refines (opd-emr.js
+//                    scribeLiveMinGapMs, default 45000).
+//   assessment  0 -- its only call site (opd-emr.js assessLLM) runs inside the SAME ambient session
+//                    as the opd-scribe refine and re-reads the SAME audio, so charging it again is
+//                    double-counting the same minutes. A client that ever runs it standalone should
+//                    send `sec` for it.
+//   translate  15 -- a one-shot field mic, no cadence involved.
+export const SCRIBE_CALL_SEC = { assessment: 0, "opd-scribe": 45, translate: 15 };
+export const SCRIBE_SEC_MAX_CALL = 300;
+export function isScribeKind(kind) { return Object.prototype.hasOwnProperty.call(SCRIBE_CALL_SEC, kind); }
+export function scribeChargeSec(kind, sec) {
+  if (!isScribeKind(kind)) return 0;
+  const n = Number(sec);
+  if (Number.isFinite(n) && n > 0) return Math.min(n, SCRIBE_SEC_MAX_CALL);
+  return SCRIBE_CALL_SEC[kind];
+}
+
 // Pre-call: has this doctor blown the day or ISO-week dictation-seconds budget? Fail-OPEN on any
 // store error (never block a paying clinician mid-consult because KV hiccuped).
 export async function checkScribeTime(store, uid, now, caps) {
