@@ -58,7 +58,11 @@ test("it opens the curated record and never silently does nothing", () => {
   assert.doesNotMatch(block, /SMD_REASON\.openDiseaseRef/,
     "never the raw internal: it assumes the reasoning workspace is already on screen and throws cold");
   assert.match(block, /toast\(/, "says so when the reference module is not loaded");
-  assert.match(REASON, /openRef: function/, "reasoning.js exposes openRef");
+  // 2026-09-21: openRef existed only on window.DX; the chip checks SMD_REASON. Look INSIDE that object.
+  const sr = REASON.slice(REASON.indexOf("window.SMD_REASON = {"));
+  const srObj = sr.slice(0, sr.indexOf("\n  };"));
+  assert.match(srObj, /openRef: function/, "SMD_REASON itself exposes openRef, the object the chip calls");
+  assert.match(srObj, /hasDiseaseRef: hasDiseaseRef/, "next to hasDiseaseRef, which the chip's render guard uses");
 });
 
 /* THE BUG THIS FILE EXISTS FOR (owner, 2026-09-20: "clicking on chips not taking me to disease").

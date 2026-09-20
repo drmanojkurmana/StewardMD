@@ -3810,6 +3810,10 @@
     // which does ensureRoot() and makes the panel visible. Exposing the raw one invited that bug.
     // Guard for the offer: only show the chip when a real page exists behind it.
     hasDiseaseRef: hasDiseaseRef,
+    // Owner, 2026-09-21 ("KB chips doesnt redirect to my KB"): home.js's chip calls
+    // SMD_REASON.openRef, but openRef lived only on window.DX, so the guard failed and the tap
+    // only toasted. Same function, exposed where its caller looks.
+    openRef: function (id, opts) { return window.DX.openRef(id, opts); },
     flag: reasonV2,
     setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} },
     // specificity-aware ranking flag (smd_rank_v2, default ON) — instantly reversible.
