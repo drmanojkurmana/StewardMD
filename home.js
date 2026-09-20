@@ -6264,7 +6264,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return "<b>" + maikEscH(m.label) + "</b> (" + maikEscH(m.size || "") + (m.installed ? ", installed" : "") + (m.level === "warn" ? ", may run slowly" : "") + ")";
       }).join(", ");
       return maikEscH(r.message || "This needs a different on-device model.") +
-        (recs ? "<br><br>Unlocks on this phone with: " + recs + ". Open <b>Settings, AI Assistant, Answer engine</b> to download or select one." : "") +
+        (recs ? "<br><br>Unlocks on this phone with: " + recs + ". Open <b>Settings, MaiK, Who answers</b> to download or select one." : "") +
         (r.offline ? "" : "<br><br>Or tap the model name at the top and choose <b>MaiK Cloud</b>.");
     }
     if (e === "kb-only") return maikEscH(r.message || "KB-only mode makes no AI calls.");

@@ -229,7 +229,8 @@ function load(env = {}) {
   const h = E.settingsHTML();
   ok("settings: one .me-seg host", (h.match(/class="me-seg"/g) || []).length === 1);
   ok("settings: three engine options", (h.match(/data-me-opt="/g) || []).length === 3);
-  ok("settings: labels present", /KB only/.test(h) && /MaiK Cloud/.test(h) && /On-device model/.test(h));
+  ok("settings: labels present", /Knowledge Base only/.test(h) && /MaiK Cloud/.test(h) && /MaiK on this phone/.test(h));
+  ok("settings: Cloud is graded DM, the super specialist, and never named by vendor", /MaiK Cloud[\s\S]{0,400}>DM</.test(h) && !/Gemini/.test(h));
   ok("settings: cloud is checked by default", /data-me-opt="cloud" role="radio" aria-checked="true"/.test(h));
   ok("settings: local disabled without a gate", /data-me-opt="local"[^>]*aria-disabled="true"/.test(h));
   ok("settings: no model row without gate+runtime", !/data-me-model/.test(h));
@@ -237,9 +238,9 @@ function load(env = {}) {
   const ready = load({ gate: true, runtime: true, models: true, pack: false });
   const h2 = ready.E.settingsHTML();
   ok("settings: gated+runtime shows a download row", /data-me-model="download"/.test(h2));
-  ok("settings: download copy promises resume", /resumes if interrupted/i.test(h2));
-  ok("settings: no Wi-Fi-only restriction in the copy", /Wi-Fi or mobile data/.test(h2));
-  ok("settings: download keeps going off-screen is stated", /keeps going/i.test(h2));
+  ok("settings: download copy promises resume", /resume if interrupted/i.test(h2));
+  ok("settings: no Wi-Fi-only restriction in the copy", !/Wi-Fi only/i.test(h2));
+  ok("settings: download keeps going off-screen is stated", /keep going when you leave/i.test(h2));
 
   const installed = load({ gate: true, runtime: true, pack: true });
   const h3 = installed.E.settingsHTML();
@@ -350,7 +351,9 @@ function load(env = {}) {
   ok("picker: no upstream model name leaks into the row", !/MedGemma|Gemma/i.test(opts[2].sub) && !/MedGemma|Gemma/i.test(opts[2].label));
   ok("picker: installed pack says it works offline", /works offline/i.test(opts[2].sub));
   ok("picker: KB-only row claims citations", /cited/i.test(opts[1].sub));
-  ok("picker: cloud row names Gemini + grounding", /Gemini/.test(opts[0].sub) && /grounded/i.test(opts[0].sub));
+  ok("picker: cloud row is our super specialist, grounded, never a vendor name", /super specialist/i.test(opts[0].sub) && /grounded/i.test(opts[0].sub) && !/Gemini/.test(opts[0].sub));
+  ok("picker: cloud row carries the DM grade", opts[0].grade === "DM");
+  ok("picker: on-device rows carry a grade", ["MBBS", "MD", "PhD"].indexOf(opts[2].grade) >= 0 && ["MBBS", "MD", "PhD"].indexOf(opts[4].grade) >= 0);
   ok("picker: uninstalled pack invites a download with its size", /Tap to download 3\.11 GB/.test(opts[4].sub));
   ok("picker: uninstalled pack flagged needsDownload", opts[3].needsDownload === true && !opts[2].needsDownload);
 
@@ -485,45 +488,37 @@ function load(env = {}) {
 }
 
 
-// ── "Which one should I download?" guide ────────────────────────────────────────────────────────
-// A clinician is asked to spend 2.5-3.1 GB and choose between three invented names. The picker rows
-// only fit a size and a one-liner, so the reasoning lives in an expandable guide.
+// ── Orientation without a wall of text ──────────────────────────────────────────────────────────
+// Owner, 2026-09-21: "This whole page is shit. Make into one single well organised setting and dont
+// name Real Model names only our model names." The "Which one should I download?" panel is gone; a
+// first-timer is oriented by the grade ladder (MBBS / MD / DM / PhD), one note per shelf, and one
+// footer line that says where to start.
 {
   const { E } = load({ gate: true, runtime: true, pack: true });
   const h = E.settingsHTML();
 
-  ok("settings offers the guide", /data-me-guide\b/.test(h) && /Which one should I download\?/.test(h));
-  ok("the guide panel ships collapsed", /data-me-guide-panel hidden/.test(h));
-  ok("the toggle reports its state to a screen reader", /data-me-guide aria-expanded="false"/.test(h));
+  ok("the old guide panel is gone", !/data-me-guide\b/.test(h) && !/Which one should I download/.test(h));
+  ok("the page reads as one: who answers, on this phone, model library, advanced",
+     h.indexOf("Who answers") < h.indexOf("On this phone") && h.indexOf("On this phone") < h.indexOf("Model library") && h.indexOf("Model library") < h.indexOf("Advanced"));
+  ok("the grade ladder names all four grades", />MBBS</.test(h) && />MD</.test(h) && />DM</.test(h) && />PhD</.test(h));
+  ok("the ladder says what a grade means in a clinician's words", /PhD is a scholar/.test(h) && /MBBS, MD and DM are doctors/.test(h));
+  ok("every on-device row carries a grade pill", (h.match(/data-me-pack-row=/g) || []).length === (h.match(/data-me-pack="[^"]+"[^>]*>[\s\S]*?>(MBBS|MD|PhD)</g) || []).length);
+  ok("the three shelves are named the owner's way", /Trained by StewardMD/.test(h) && /Medical specialists/.test(h) && /General models/.test(h));
+  ok("the general shelf says PhD grade, not a doctor", /PhD grade: broad knowledge, not a doctor/.test(h));
+  ok("the footer tells a first-timer where to start", /Start with MAiK Lite/.test(h) && /our own model/.test(h));
 
-  // The whole point of the owner's instruction: tier names only.
-  ok("guide never prints an upstream model name", !/MedGemma|Gemma|Q4_K_M|Q5_K_M|quant/i.test(h));
-  ok("guide names all three tiers", /MAiK MxCore/.test(h) && /MAiK Neural/.test(h) && /MAiK Horizon/.test(h));
+  // The whole point of the owner's instruction: our names only.
+  ok("no upstream or vendor name anywhere on the page",
+     !/MedGemma|Gemma|Gemini|Bonsai|PrismML|ternary|MedPsy|MedMO|MBZUAI|Qwen|Q4_K_M|Q5_K_M|quant/i.test(h));
+  ok("no emoji on the page (the tick glyph is the app's own check mark)", !/[\u{1F300}-\u{1FAFF}]/u.test(h));
 
-  // No emoji anywhere: the house rule is a custom icon set, and the ratings are CSS pips.
-  const panel = (h.match(/<div data-me-guide-panel[\s\S]*$/) || [""])[0];
-  ok("guide panel was rendered", panel.length > 400);
-  ok("guide uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(panel));
+  // The Knowledge Base check is a positive switch, on by default, and says what off costs.
+  ok("KB check reads as a positive switch", /Check answers against the Knowledge Base/.test(h) && !/Disconnected/.test(h));
+  ok("KB switch is on by default and says why", /data-me-rag="1" role="switch" aria-checked="true"/.test(h) && /safer default/.test(h));
 
-  // It must say what on-device mode CANNOT do. Easy to omit, and it is the part that matters.
-  ok("guide states there are no sources or citations", /no sources or citations/i.test(h));
-  ok("guide states it can be wrong", /can be wrong/i.test(h));
-  // esc() renders the apostrophe as &#39;, so match around it rather than through it.
-  ok("guide says answers do not come from the knowledge base", /not from StewardMD.{0,6}s knowledge base/i.test(h));
-  ok("guide states no tokens are used", /No internet, no AI tokens/i.test(h));
-  ok("guide explains resumable download", /resumes if it is interrupted/i.test(h));
-  ok("guide explains you can keep several and switch", /switch between them/i.test(h));
-
-  // Ratings are comparative, not absolute - claiming otherwise would overstate a 4B.
-  ok("guide scopes its ratings comparatively, not absolutely", /compare these options with each other, nothing else/i.test(h));
-  ok("guide rates all three axes", /Speed/.test(h) && /Medical depth/.test(h) && /General knowledge/.test(h));
-  ok("guide tells a first-timer where to start and why", /Start with MAiK Lite/.test(h) && /Apex on a flagship phone/.test(h));
-  ok("guide names our own model as the starting point", /StewardMD.s own model/i.test(h));
-  ok("guide warns Horizon is not medically tuned", /Not medically tuned/i.test(h));
-  ok("pips are labelled for assistive tech", /role="img" aria-label="Speed: \d of 3"/.test(h));
+  // The tester tool is kept, under Advanced, collapsed.
+  ok("cloud block test lives under a collapsed Advanced section", /data-mk-grp="advanced"(?! open)/.test(h) && /data-me-cloudblock/.test(h));
 }
-
-
 
 // ── Hardware warning, in every surface a clinician can commit from ─────────────────────────────
 // These are 2.5-3.2 GB models held in memory while answering. On a phone without the RAM and the AI
@@ -540,9 +535,6 @@ function load(env = {}) {
   ok("warning names the supported Samsungs", /Fold 7, 6, 5 or S24, S25, S26 Ultra/.test(h));
   ok("warning states the risk plainly", /at your own risk/.test(h) && /hang or crash the phone/.test(h));
   ok("warning is styled as a caution, not a footnote", /role="note"/.test(h));
-  ok("guide sheet repeats it under a plain question", /Will it run on my phone\?/.test(h));
-  ok("warning appears in both the section and the guide",
-     (h.match(/Built for flagship, AI-enabled phones/g) || []).length >= 2);
   ok("no em-dash in the warning (app-facing text)", !/Built for flagship[^<]*\u2014/.test(h));
 
   // Selection surface: the picker row itself must carry the hardware flag.

@@ -163,7 +163,7 @@
     return {
       text: "**KB-only mode is on.** The StewardMD knowledge base has no entry that answers this, " +
             "and KB-only mode never makes a paid AI call.\n\n" +
-            "To get an answer for this question, open **Settings → AI Assistant → Answer engine** " +
+            "To get an answer for this question, open **Settings → MaiK → Who answers** " +
             "and pick **MaiK Cloud**. Clinical reasoning, calculators and every reference tool keep " +
             "working as they are.",
       sources: [],
@@ -558,6 +558,66 @@
     return '<span style="font:700 9px/1 var(--sans,system-ui);background:' + bg + ';color:' + fg +
       ';border-radius:5px;padding:2px 5px;vertical-align:middle">' + text + '</span>';
   }
+  /* ── Settings: one page (owner, 2026-09-21: "This whole page is shit. Make into one single well
+   * organised setting and dont name Real Model names only our model names").
+   *
+   * The page reads top to bottom as one question and its consequences:
+   *   1. WHO ANSWERS      three rows: Knowledge Base only / MaiK Cloud / MaiK on this phone.
+   *   2. ON THIS PHONE    the model answering (or ready) here, its grade, whether it runs well, what
+   *                       it can and cannot do, and the Knowledge Base check as a positive switch.
+   *   3. MODEL LIBRARY    three shelves in the owner's words (Trained by StewardMD / Medical
+   *                       specialists / General models), a grade on every model so the download
+   *                       decision is about training, not gigabytes.
+   *   4. ADVANCED         the cloud-block test tool, collapsed, for testers.
+   *
+   * GRADES replace vendor names: MBBS (our own), MD (medical specialists), DM (MaiK Cloud, the
+   * super specialist), PhD (general models: well read, not a physician). They come from
+   * maik-models.js grade(), never from copy here, so the two surfaces cannot disagree.
+   *
+   * Every data-me-* hook the wiring and the live-progress patcher depend on is unchanged:
+   * data-me-opt, data-me-pack, data-me-pack-row, data-me-status, data-me-bar, data-me-actions,
+   * data-me-model, data-me-rag, data-me-upgrade, data-me-cloudblock, data-me-device, .me-seg, .mk-grp.
+   */
+  function gradePill(code) {
+    var C = { MBBS: ["#e0f2fe", "#075985"], MD: ["#ede9fe", "#5b21b6"], DM: ["#fce7f3", "#9d174d"], PhD: ["#e5e7eb", "#374151"] };
+    var c = C[code] || C.PhD;
+    return pill(code, c[0], c[1]);
+  }
+  function gradeOf(id) {
+    var M = window.SMD_MAIK_MODELS;
+    try { if (M && M.grade) return M.grade(id); } catch (e) {}
+    // Older registry: derive the same way grade() does, so nothing renders ungraded.
+    try {
+      if (M && M.PACKS && M.PACKS[id] && M.PACKS[id].own) return { code: "MBBS", name: "Our own doctor" };
+      var c = M && M.caps ? M.caps(id) : null;
+      if (c && c.medical) return { code: "MD", name: "Medical specialist" };
+    } catch (e2) {}
+    return { code: "PhD", name: "Scholar, not a doctor" };
+  }
+  var LIB_GROUPS_FALLBACK = [
+    { key: "own", title: "Trained by StewardMD", grade: "MBBS", note: "Our own models, trained on the StewardMD Knowledge Base to answer the way a doctor does." },
+    { key: "medical", title: "Medical specialists", grade: "MD", note: "Well trained medical models. We trained them to work as an MD: they read the Knowledge Base before they answer." },
+    { key: "general", title: "General models", grade: "PhD", note: "PhD grade: broad knowledge, not a doctor. Answer everything you want, still checked against the Knowledge Base." }
+  ];
+  function libGroups() { var M = window.SMD_MAIK_MODELS; return (M && M.GROUPS) || LIB_GROUPS_FALLBACK; }
+  function groupKeyOf(id) {
+    var M = window.SMD_MAIK_MODELS;
+    try { if (M && M.groupOf) return M.groupOf(id).key; } catch (e) {}
+    var g = gradeOf(id).code;
+    return g === "MBBS" ? "own" : g === "MD" ? "medical" : "general";
+  }
+  /* Fit per pack for THIS phone, from the same suitability the capability matcher uses. Absent in
+   * an older registry, in which case no fit pill is drawn rather than a wrong one. */
+  function fitMap() {
+    var M = window.SMD_MAIK_MODELS, out = {};
+    try {
+      if (!M || !M.recommend) return out;
+      var dev = (M.device && M.device()) || {};
+      var r = M.recommend({}, dev);
+      r.recommended.concat(r.unsuitable).forEach(function (x) { out[x.id] = x; });
+    } catch (e) {}
+    return out;
+  }
   function settingsHTML() {
     var pref = getPref();
     function opt(engine, label, badge, desc, first, disabled) {
@@ -569,7 +629,7 @@
         (first ? "" : "border-top:1px solid var(--line,#e2e8f0);") +
         'padding:13px 14px;color:var(--ink,#14202b);opacity:' + (disabled ? ".55" : "1") +
         ';-webkit-tap-highlight-color:transparent">' +
-        '<span style="flex:1;min-width:0"><span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:600 14px/1.3 var(--sans,system-ui)">' +
+        '<span style="flex:1;min-width:0"><span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;font:600 14.5px/1.3 var(--sans,system-ui)">' +
         label + " " + badge + '</span><span style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">' +
         desc + '</span></span>' +
         '<span aria-hidden="true" style="flex:0 0 auto;width:20px;text-align:center;color:var(--teal,#0e6e63);font-size:16px;font-weight:800;opacity:' +
@@ -577,88 +637,94 @@
     }
 
     var rt = runtimeAvailable(), have = packInstalled();
+    var M = window.SMD_MAIK_MODELS;
+    var packLabel = "";
+    try { packLabel = (M && M.PACKS && M.PACKS[activePack()]) ? M.PACKS[activePack()].label : ""; } catch (e) {}
     var localDesc, localDisabled = false;
     if (!rt) { localDesc = "Needs the latest native app build. Update the app to use this."; localDisabled = true; }
-    else if (!have) { localDesc = "Ready to set up. Download the model to answer without any AI tokens."; }
-    else { localDesc = "The model's own knowledge, on this device. Fast, no network, no tokens, and no StewardMD grounding, so it can be wrong."; }
+    else if (!have) { localDesc = "A MaiK model stored on your phone. No network, no tokens. Download one below to begin."; }
+    else { localDesc = "A MaiK model stored on your phone. No network, no tokens. Answering now: <b>" + esc(packLabel) + "</b>."; }
 
     return '<div class="me-seg">' +
-      '<div class="smd-nav-lbl" style="margin-bottom:6px">Answer engine</div>' +
+      '<div class="smd-nav-lbl" style="margin-bottom:6px">Who answers</div>' +
       '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
-      opt("rag", "KB only", pill("Free", "#dcfce7", "#166534"),
-          "StewardMD knowledge base only, with citations. No AI tokens, works offline.", true, false) +
-      opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e"),
-          "Gemini, grounded in the StewardMD knowledge base. Uses AI tokens.", false, false) +
-      opt("local", "On-device model", pill("Free", "#dcfce7", "#166534") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
+      opt("rag", "Knowledge Base only", pill("Free", "#dcfce7", "#166534"),
+          "StewardMD's own references, with citations. No AI, works offline.", true, false) +
+      opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e") + " " + gradePill("DM"),
+          "Our super specialist. The strongest MaiK, reads the Knowledge Base before every answer. Uses AI tokens.", false, false) +
+      opt("local", "MaiK on this phone", pill("Free", "#dcfce7", "#166534") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
       (rt ? capsHTML() + modelRowHTML() : "") +
       '</div>';
   }
 
-  /* ── Current AI mode, model, capabilities and upgrade options (owner, 2026-09-11) ──
-   * Capability-based recommendations are the primary UX; the manual pack list below it stays.
-   * Suitability is decided by maik-models.js suitability(): a pack that is unlikely to run well on
-   * THIS phone is shown as "Not for this phone" with the reason and gets no download button. No
-   * upstream model names, no emoji (house rules). */
   function levelPill(level) {
     return level === "ok" ? pill("Runs well", "#dcfce7", "#166534")
       : level === "warn" ? pill("May run slowly", "#fef3c7", "#92400e")
       : pill("Not for this phone", "#fee2e2", "#991b1b");
   }
+  function chip(text, off) {
+    return '<span style="display:inline-block;font:600 11.5px/1.4 var(--sans,system-ui);padding:4px 9px;border-radius:999px;' +
+      'border:1px solid var(--line,#e2e8f0);background:var(--paper,#f6f7f5);color:' + (off ? "var(--slate-soft,#8aa0b0)" : "var(--ink,#14202b)") +
+      (off ? ";text-decoration:line-through" : "") + '">' + esc(text) + '</span>';
+  }
+  /* ON THIS PHONE: the one card about the model that lives here. Keeps the [data-me-caps] and
+   * [data-me-device] hooks so wireSettings() can patch the device line in place. */
   function capsHTML() {
     var M = window.SMD_MAIK_MODELS;
-    if (!M || !M.caps || !M.recommend) return "";
-    var e = effective(), pid = activePack(), c = M.caps(pid) || {}, have = packInstalled();
+    if (!M || !M.PACKS) return "";
+    var e = effective(), pid = activePack(), p = M.PACKS[pid] || {}, have = packInstalled();
+    var c = {}; try { c = (M.caps && M.caps(pid)) || {}; } catch (er) {}
     var L = window.SMD_MAIK_LOCAL, vis = !!(have && L && L.visionReady && L.visionReady(pid));
-    var dev = (M.device && M.device()) || {};
-    var modeLabel = e === "cloud" ? "CLOUD AI" : e === "local" ? "LOCAL AI" : (getPref() === "local" ? "LOCAL AI (not ready)" : "KB ONLY");
-    var tier = { 1: "Low", 2: "Medium", 3: "High" }[c.reasoning] || "Low";
-    var langs = ["English"].concat((c.lang || []).map(function (l) { return { te: "Telugu", hi: "Hindi" }[l] || l; }));
-    function row(ok, t) {
-      return '<div style="display:flex;gap:8px;align-items:baseline;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356)">' +
-        '<span aria-hidden="true" style="flex:0 0 14px;font-weight:800;color:' + (ok ? "var(--teal,#0e6e63)" : "var(--slate-soft,#8aa0b0)") + '">' + (ok ? "✓" : "✗") + '</span>' +
-        '<span>' + esc(t) + '</span></div>';
-    }
-    var capRows = row(!!c.medical, "Medical fine-tune") + row(!!c.kb, "Answers checked against the Knowledge Base") + row(true, "Works offline") +
-      row(vis, c.vision ? (vis ? "Image reading (projector installed)" : "Image reading (add the image-reading download below)") : "Image reading (this model cannot see)") +
-      row((c.json || 0) >= 2, "Structured output: Scribe, notes, ICD ranking, extraction") +
-      row(true, "Reasoning: " + tier) + row(true, "Offline languages: " + langs.join(", "));
+    var dev = {}; try { dev = (M.device && M.device()) || {}; } catch (er2) {}
+    var fit = fitMap()[pid];
+    var g = gradeOf(pid);
+    var st = M.state ? M.state(pid) : { frac: 0 };
+    var size = M.sizeLabel ? M.sizeLabel(pid) : "";
+
+    var status = e === "local" ? pill("Answering now", "#0e6e63", "#ffffff")
+      : have ? pill("Ready, not selected", "#e2e8f0", "#334155")
+      : st.downloading ? pill("Downloading " + (st.frac * 100).toFixed(0) + "%", "#fef3c7", "#92400e")
+      : pill("Not downloaded", "#e2e8f0", "#334155");
+    var groupTitle = ""; try { groupTitle = (M.groupOf ? M.groupOf(pid).title : libGroups()[0].title); } catch (er3) {}
+    var meta = [groupTitle, have ? "Downloaded" : "Not downloaded", size].filter(Boolean).join(" · ");
+
+    var kbOn = !!c.kb && ragLinked();
+    var chips = chip(kbOn ? "Checked against the Knowledge Base" : "Answers from its own training", !kbOn) +
+      chip("Works offline") +
+      chip("Scribe, notes, ICD", (c.json || 0) < 2) +
+      chip(["English"].concat((c.lang || []).map(function (l) { return { te: "Telugu", hi: "Hindi" }[l] || l; })).join(", ")) +
+      chip(c.vision ? (vis ? "Reads images" : "Reads images with the add-on") : "Reads images", !c.vision || !vis);
+
     var devLine = "This phone: " + (dev.ramGB != null ? dev.ramGB + (dev.ramGBMin ? "+" : "") + " GB memory" : "total memory not readable by the app") +
       (dev.availGB != null ? ", " + dev.availGB.toFixed(1) + " GB free now" : "") + (dev.freeGB != null ? ", " + dev.freeGB.toFixed(1) + " GB storage free" : "") +
       ". Heat and battery drain cannot be read by the app; a large model warms the phone.";
-    var r = M.recommend({}, dev);
-    var all = r.recommended.concat(r.unsuitable).filter(function (x) { return x.id !== pid; });
-    var up = all.map(function (x) {
-      var cx = M.caps(x.id) || {};
-      var unlocks = unlocksFor(cx).filter(function (u) { return unlocksFor(c).indexOf(u) < 0; });
-      var btn = x.level === "no" ? '<div style="font:600 12px/1.4 var(--sans,system-ui);color:#991b1b;margin-top:6px">Not recommended for this phone. MaiK Cloud can do this instead.</div>'
-        : x.installed ? '<button type="button" class="smd-nav-btn" data-me-pack="' + x.id + '" style="margin:6px 0 0;width:100%">Use this model</button>'
-        : '<button type="button" class="smd-nav-btn" data-me-upgrade="' + x.id + '" data-me-level="' + x.level + '" style="margin:6px 0 0;width:100%">Download and install (' + esc(x.size) + ')</button>';
-      return '<div style="padding:10px 0;border-top:1px solid var(--line,#e2e8f0)">' +
-        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:700 13.5px/1.3 var(--sans,system-ui)">' + esc(x.label) + '</span>' + levelPill(x.level) +
-          '<span style="font:500 12px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' + esc(x.size) + (x.ramGB ? " · needs " + x.ramGB + " GB phone" : "") + '</span></div>' +
-        (unlocks.length ? '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:4px">Unlocks: ' + esc(unlocks.join("; ")) + '</div>' : "") +
-        (x.reasons.length ? '<div style="font:500 12px/1.5 var(--sans,system-ui);color:' + (x.level === "no" ? "#991b1b" : "var(--yellow,#92620a)") + ';margin-top:4px">' + esc(x.reasons.join(" ")) + '</div>' : "") +
-        btn + '</div>';
-    }).join("");
-    return '<div data-me-caps style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);padding:12px 14px;margin:0 0 10px">' +
-      '<div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap"><span style="font:800 11px/1 var(--sans,system-ui);letter-spacing:.06em;color:var(--teal,#0e6e63)">' + esc(modeLabel) + '</span>' +
-        '<span style="font:700 14px/1.3 var(--sans,system-ui)">' + esc(c.label || "No on-device model") + '</span>' + (have ? "" : pill("Not downloaded", "#e2e8f0", "#334155")) + '</div>' +
-      '<div style="margin-top:8px">' + capRows + '</div>' +
-      '<div data-me-device style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">' + esc(devLine) + '</div>' +
-      (up ? '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-top:12px">Other models</div>' + up : "") +
-      '<div style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">Nothing downloads without your tap. A "May run slowly" model works but with the limitation shown.</div>' +
-      cloudBlockHTML() +
-    '</div>';
+
+    return '<div class="smd-nav-lbl" style="margin:14px 0 6px">On this phone</div>' +
+      '<div data-me-caps style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);overflow:hidden;margin:0 0 8px">' +
+        '<div style="padding:13px 14px 12px">' +
+          '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
+            '<span style="font:800 17px/1.2 var(--sans,system-ui);color:var(--ink,#14202b)">' + esc(p.label || "No model on this phone") + '</span>' +
+            gradePill(g.code) + (fit ? levelPill(fit.level) : "") + status +
+          '</div>' +
+          '<div style="font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:4px">' + esc(meta) + '</div>' +
+          '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">' + chips + '</div>' +
+          (fit && fit.reasons && fit.reasons.length ? '<div style="font:500 12px/1.5 var(--sans,system-ui);color:' + (fit.level === "no" ? "#991b1b" : "var(--yellow,#92620a)") + ';margin-top:8px">' + esc(fit.reasons.join(" ")) + '</div>' : "") +
+          '<div data-me-device style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">' + esc(devLine) + '</div>' +
+        '</div>' +
+        ragLinkHTML() +
+      '</div>';
   }
+
   /* The per-phone cloud kill switch (reasoning.js aiBase). Shown so the tester can flip it and read
    * the count: with it ON, any feature that reports "Could not reach MaiK" while the Local engine is
-   * selected is a leak, and the counter says how many attempts were stopped. */
+   * selected is a leak, and the counter says how many attempts were stopped. Lives under Advanced,
+   * collapsed: testers keep it, clinicians never see it. */
   function cloudBlockHTML() {
     var on = lget("smd_ai_cloud_block") === "1";
     var n = 0; try { n = window.__SMD_CLOUD_ATTEMPTS || 0; } catch (e) {}
-    return '<div style="border-top:1px solid var(--line,#e2e8f0);margin-top:10px;padding-top:10px">' +
+    return '<div style="padding:10px 14px 12px">' +
       '<div style="font:700 13px/1.3 var(--sans,system-ui)">Test: block cloud AI on this phone</div>' +
       '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:3px">' +
         (on ? 'ON. Every cloud AI request from this phone is stopped and counted. Attempts stopped this session: <b>' + n + '</b>. With the on-device engine selected this number should stay at 0.'
@@ -714,6 +780,25 @@
     } catch (e) {}
   }
 
+  /* The grade ladder: the one piece of orientation a first-timer needs, in place of the old
+   * "Which one should I download?" wall of text. */
+  function ladderHTML() {
+    var M = window.SMD_MAIK_MODELS, G = (M && M.GRADES) || {
+      MBBS: { code: "MBBS", blurb: "Fast, small, ours. Everyday questions." },
+      MD: { code: "MD", blurb: "Deeper clinical detail, bigger download." },
+      DM: { code: "DM", blurb: "Our super specialist. The best answer, needs network." },
+      PhD: { code: "PhD", blurb: "Broad knowledge, not a doctor. Answer everything you want." }
+    };
+    function rung(code, who) {
+      return '<div style="border:1px solid var(--line,#e2e8f0);border-radius:12px;background:var(--panel,#fff);padding:9px 10px">' +
+        gradePill(code) + '<span style="display:block;font:700 12.5px/1.3 var(--sans,system-ui);margin-top:6px">' + esc(who) + '</span>' +
+        '<span style="display:block;font:500 11.5px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + esc(G[code].blurb) + '</span></div>';
+    }
+    return '<div style="font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin:0 0 8px 2px">Every model here is a MaiK. The grade says how it was trained: MBBS, MD and DM are doctors, PhD is a scholar.</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">' +
+      rung("MBBS", "MAiK Lite") + rung("MD", "Medical specialists") + rung("DM", "MaiK Cloud") + rung("PhD", "General models") + '</div>';
+  }
+
   function modelRowHTML() {
     injectGroupCSS();
     var M = window.SMD_MAIK_MODELS;
@@ -723,6 +808,7 @@
     var active = M.activePack ? M.activePack() : PACK_ID;
     var ids = (M.packIds ? M.packIds() : Object.keys(M.PACKS));
     if (!ids.length) return "";
+    var fits = fitMap();
 
     function rowFor(id, i) {
       var p = M.PACKS[id];
@@ -730,6 +816,8 @@
       var have = M.installedCached(id);
       var st = M.state(id);
       var size = M.sizeLabel(id);
+      var fit = fits[id];
+      var g = gradeOf(id);
 
       var status;
       if (st.queued) status = (st.note || "Waiting") + " · " + size;
@@ -740,7 +828,7 @@
       else if (have) status = "Downloaded · " + size;
       else if (st.err) status = st.note + " · tap Download to resume";
       else if (st.frac > 0) status = "Paused at " + (st.frac * 100).toFixed(1) + "% · tap Download to resume";
-      else status = "Not downloaded · " + size;
+      else status = size + (p.note ? " · " + p.note : "");
 
       var bar = (!st.queued && (st.downloading || (st.frac > 0 && !have)))
         ? '<div style="height:4px;border-radius:2px;background:var(--line,#e2e8f0);overflow:hidden;margin-top:7px">' +
@@ -748,130 +836,116 @@
           '</div>'
         : "";
 
+      // A model that will not run on this phone gets no download button: MaiK Cloud does the job.
+      var unfit = !!(fit && fit.level === "no" && !have);
+      // A first download of a pack the matcher has graded goes through the upgrade path, which asks
+      // once more when the fit is "May run slowly" and marks the pack PENDING so the answering model
+      // keeps answering until this one is ready (KEY_PENDING). Resume/verify/pause keep the plain path.
+      var firstDownload = !!(fit && !have && !st.downloading && !st.queued && !(st.frac > 0));
+      var actions = unfit
+        ? '<div style="font:600 12px/1.4 var(--sans,system-ui);color:#991b1b">Not for this phone. ' + esc((fit.reasons || []).join(" ")) + ' MaiK Cloud can do this instead.</div>'
+        : firstDownload
+        ? '<button type="button" class="smd-nav-btn" data-me-upgrade="' + id + '" data-me-level="' + fit.level + '" style="margin:0;flex:1">Download and install (' + esc(size) + ')</button>'
+        : actionBtnHTML(id, st, have) +
+          // No Delete while a transfer is running: a mis-tap there throws away a partial download
+          // AND cancels it. Pause first, then Delete appears.
+          (!st.downloading && !st.queued && (have || st.frac > 0)
+            ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "");
+
       return '<div data-me-pack-row="' + id + '" style="' + (i ? "border-top:1px solid var(--line,#e2e8f0);" : "") + 'padding:12px 14px">' +
         '<button type="button" data-me-pack="' + id + '" role="radio" aria-checked="' + on + '"' +
         ' style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;background:transparent;border:0;padding:0;color:var(--ink,#14202b);-webkit-tap-highlight-color:transparent">' +
           '<span style="flex:1;min-width:0">' +
-            '<span style="display:block;font:600 14px/1.3 var(--sans,system-ui)">' + p.label + '</span>' +
-            '<span data-me-status="' + id + '" style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + status + '</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:700 14px/1.3 var(--sans,system-ui)">' + esc(p.label) + " " + gradePill(g.code) +
+              (fit ? " " + levelPill(fit.level) : "") + (on ? " " + pill("Selected", "#0e6e63", "#ffffff") : "") + '</span>' +
+            '<span data-me-status="' + id + '" style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">' + esc(status) + '</span>' +
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:20px;text-align:center;color:var(--teal,#0e6e63);font-size:16px;font-weight:800;opacity:' + (on ? "1" : "0") + '">✓</span>' +
         '</button>' +
         '<div data-me-bar="' + id + '">' + bar + '</div>' +
-        '<div style="display:flex;gap:8px;margin-top:9px" data-me-actions="' + id + '">' +
-          actionBtnHTML(id, st, have) +
-          // No Delete while a transfer is running: a mis-tap there throws away a partial download
-          // AND cancels it. Pause first, then Delete appears.
-          (!st.downloading && !st.queued && (have || st.frac > 0)
-            ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "") +
-        '</div>' +
+        '<div style="display:flex;gap:8px;margin-top:9px" data-me-actions="' + id + '">' + actions + '</div>' +
         // Image reading is a SEPARATE add-on, offered only once the model itself is on the device:
         // spending 851 MB on a projector for a model you do not have is not a choice worth offering.
         visionRowHTML(id, have) +
       '</div>';
     }
 
-    /* CATEGORISED, NOT A LONGER LIST (owner, 2026-09-20: "categorise and sub categorise, keep info
-     * in sub categories", "without deleting any info").
-     *
-     * Ten packs in one flat column is a wall: every row carries a label, a status line, a progress
-     * bar, two buttons and sometimes a vision sub-row, so the clinician scrolls past ~8 screens of
-     * equally-weighted choices to find the one they want. Nothing is removed here - the same rows,
-     * the same statuses, the same actions - they are grouped by the question the clinician is
-     * actually asking, and every group but the first is collapsed so the page opens short.
-     *
-     * The grouping is DERIVED from the registry (own / caps.medical / the bonsai family), never a
-     * hand-kept list: a pack added to maik-models.js lands in the right group without touching this
-     * file, and cannot silently vanish - UNGROUPED catches anything that matches no rule.
+    /* THREE SHELVES, derived from the registry (grade), never hand-kept: a pack added to
+     * maik-models.js lands on the right shelf without touching this file, and cannot silently vanish
+     * because "general" claims everything the first two do not.
      *
      * <details> rather than a JS accordion: it is keyboard- and screen-reader-correct for free,
-     * survives a re-render without state wiring, and the open/closed state is one attribute.
-     */
-    function capsOf(id) { try { return (M.caps && M.caps(id)) || {}; } catch (e) { return {}; } }
-    var GROUPS = [
-      { key: "own", title: "StewardMD's own", open: true,
-        note: "Trained by us on the StewardMD Knowledge Base.",
-        test: function (id) { return !!(M.PACKS[id] && M.PACKS[id].own); } },
-      { key: "medical", title: "Medically tuned", open: false,
-        note: "Third-party models fine-tuned on medical material.",
-        test: function (id) { return !!capsOf(id).medical; } },
-      { key: "bonsai", title: "Bonsai (ternary)", open: false,
-        note: "PrismML ternary builds - large models at a fraction of the memory.",
-        test: function (id) { return /bonsai/i.test(id); } },
-      { key: "general", title: "General purpose", open: false,
-        note: "Not medically tuned. Broader world knowledge, weaker clinical detail.",
-        test: function () { return true; } },
-    ];
-    var taken = {}, grouped = GROUPS.map(function (g) {
-      var mine = ids.filter(function (id) { return !taken[id] && g.test(id); });
+     * survives a re-render without state wiring, and the open/closed state is one attribute. */
+    var groups = libGroups();
+    var taken = {}, grouped = groups.map(function (g) {
+      var mine = ids.filter(function (id) { return !taken[id] && groupKeyOf(id) === g.key; });
       mine.forEach(function (id) { taken[id] = 1; });
       return { g: g, ids: mine };
     });
-    // Nothing may be dropped by a rule change: anything unclaimed still gets a home.
     var leftovers = ids.filter(function (id) { return !taken[id]; });
-    if (leftovers.length) grouped.push({ g: { key: "other", title: "Other", open: false, note: "" }, ids: leftovers });
+    if (leftovers.length) grouped.push({ g: { key: "other", title: "Other", note: "" }, ids: leftovers });
 
     var idx = 0;
-    var rows = grouped.filter(function (b) { return b.ids.length; }).map(function (b) {
+    var rows = grouped.filter(function (b) { return b.ids.length; }).map(function (b, gi) {
       var installed = b.ids.filter(function (id) { return M.installedCached(id); }).length;
       var hasActive = b.ids.indexOf(active) !== -1;
-      // The group holding the answering model is always open, whatever its default: the clinician
-      // must be able to see what is answering without hunting for it.
-      var open = b.g.open || hasActive;
+      // The first shelf opens by default; the shelf holding the answering model is always open,
+      // whatever its default: the clinician must see what is answering without hunting for it.
+      var open = gi === 0 || hasActive;
       var body = b.ids.map(function (id) { return rowFor(id, idx++); }).join("");
       return '<details class="mk-grp" data-mk-grp="' + b.g.key + '"' + (open ? " open" : "") + '>' +
         '<summary style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;' +
-          'font:700 12.5px/1.3 var(--sans,system-ui);color:var(--ink,#14202b);background:var(--paper,#f6f7f5);' +
+          'font:700 13px/1.3 var(--sans,system-ui);color:var(--ink,#14202b);background:var(--paper,#f6f7f5);' +
           'border-bottom:1px solid var(--line,#e2e8f0)">' +
           '<span class="mk-grp-cv" aria-hidden="true" style="color:var(--slate-soft,#5a7184);font-size:10px">▸</span>' +
           '<span style="flex:1;min-width:0">' + esc(b.g.title) +
-            (b.g.note ? '<span style="display:block;font:500 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + esc(b.g.note) + '</span>' : "") +
+            (b.g.note ? '<span style="display:block;font:500 11.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + esc(b.g.note) + '</span>' : "") +
           '</span>' +
           '<span style="flex:0 0 auto;font:700 10px/1 var(--sans,system-ui);color:var(--slate-soft,#5a7184);' +
             'background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:3px 7px">' +
-            (installed ? installed + " of " + b.ids.length + " ready" : b.ids.length) + '</span>' +
+            installed + " of " + b.ids.length + " ready</span>" +
         '</summary>' + body + '</details>';
     }).join("");
 
-    return '<div class="smd-nav-lbl" style="margin:14px 0 6px">On-device model</div>' +
+    return '<div class="smd-nav-lbl" style="margin:14px 0 6px">Model library</div>' +
+      ladderHTML() +
       // ABOVE the list, not below it: the hardware warning has to be read before a 3 GB tap, not
       // discovered afterwards. Same text is repeated at the moment of selection.
       deviceWarnHTML() +
       '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff)">' + rows + '</div>' +
-      '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
-      ragLinkHTML() +
-      '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
-      guideHTML();
+      '<div class="smd-nav-note" style="margin-top:6px">Not sure? Start with MAiK Lite, our own model, the smallest download and the fastest answers. Move to a medical specialist when you want more depth. ' +
+        'Nothing downloads without your tap. Downloads resume if interrupted and keep going when you leave this screen.</div>' +
+      '<details class="mk-grp" data-mk-grp="advanced" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-top:12px">' +
+        '<summary style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font:700 13px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' +
+          '<span class="mk-grp-cv" aria-hidden="true" style="font-size:10px">▸</span><span style="flex:1">Advanced</span>' +
+          '<span style="font:500 11.5px/1 var(--sans,system-ui)">Block cloud AI (test)</span></summary>' +
+        cloudBlockHTML() +
+      '</details>';
   }
 
   /**
-   * Knowledge Base group for the on-device model: connect or disconnect the book.
-   *
-   * FIRST row in its own group on purpose (owner: "keep option above grounded on off toggle"), so a
-   * grounding switch lands underneath it rather than above. Reuses the app's .smd-nav-row / .smd-nav-sw
-   * switch markup so it is the same control the rest of Settings uses - same size, same 44px target,
-   * same role="switch" semantics - rather than a second bespoke toggle style.
-   *
-   * The sub-label states the trade in the clinician's terms and names the real cost of each side,
-   * because "RAG" is not a word at the bedside and the speed gain is genuine.
+   * The Knowledge Base check for the on-device model, as a POSITIVE switch: "Check answers against
+   * the Knowledge Base", on by default. It used to read "Connected / Disconnected" with the sub-label
+   * describing the off state, which read backwards on a phone (owner screenshot, 2026-09-21).
+   * Reuses the app's .smd-nav-row / .smd-nav-sw switch markup so it is the same control the rest of
+   * Settings uses: same size, same 44px target, same role="switch" semantics.
    */
   function ragLinkHTML() {
     var on = ragLinked();
-    return '<div class="smd-nav-lbl" style="margin:16px 0 6px">Knowledge Base</div>' +
-      '<div style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);padding:2px 12px">' +
+    return '<div style="border-top:1px solid var(--line,#e2e8f0);padding:2px 14px">' +
         '<div class="smd-nav-row">' +
           '<div class="smd-nav-rl">' +
-            '<div class="smd-nav-lbl">' + (on ? "Connected" : "Disconnected") + '</div>' +
+            '<div class="smd-nav-lbl">Check answers against the Knowledge Base</div>' +
             '<div class="smd-nav-sub">' + (on
               ? "The model reads the StewardMD Knowledge Base before answering and every claim is checked against it. Slower, and the safer default."
-              : "The model answers from its own training only. Faster, but nothing is checked against the Knowledge Base and no sources are shown.") +
+              : "Off: faster, but the model answers from its own training and shows no sources.") +
+              " MaiK Cloud and Knowledge Base only are always checked." +
             '</div>' +
           '</div>' +
           '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-rag="1" role="switch" aria-checked="' + on + '"' +
-            ' aria-label="Connect the Knowledge Base to the on-device model"><span></span></button>' +
+            ' aria-label="Check answers against the Knowledge Base"><span></span></button>' +
         '</div>' +
-      '</div>' +
-      '<div class="smd-nav-note" style="margin-top:6px">Applies to on-device models that can read the Knowledge Base. MaiK Cloud and KB only are always grounded.</div>';
+      '</div>';
   }
 
   /**
@@ -920,68 +994,6 @@
     '</div>';
   }
 
-
-  /* ── "Which one should I download?" ────────────────────────────────────────────────────────────
-   * A clinician is being asked to spend 2.5-3.1 GB and pick between three names that mean nothing
-   * to them. The picker rows only have room for a size and a one-liner, so the reasoning lives here.
-   *
-   * NO upstream model names, by owner decision - the UI shows MAiK tiers only. The pip scale is
-   * RELATIVE to the other two tiers and says so, because "medical depth: 3" is meaningless as an
-   * absolute claim and would be a quiet overstatement of what a 4B can do.
-   * NO emoji, per the house icon rule - the pips are CSS blocks.
-   */
-  function pips(n, label) {
-    var out = '<span style="display:inline-flex;gap:3px;vertical-align:middle" role="img" aria-label="' + label + ': ' + n + ' of 3">';
-    for (var i = 1; i <= 3; i++) {
-      out += '<span style="width:14px;height:5px;border-radius:3px;background:' +
-             (i <= n ? "var(--teal,#0e6e63)" : "var(--line,#e2e8f0)") + '"></span>';
-    }
-    return out + "</span>";
-  }
-
-  function guideHTML() {
-    var M = window.SMD_MAIK_MODELS;
-    if (!M) return "";
-    var intro = (M.GUIDE_INTRO || []).map(function (t) {
-      return '<li style="margin:0 0 6px">' + esc(t) + "</li>";
-    }).join("");
-
-    var rows = M.packIds().map(function (id) {
-      var p = M.PACKS[id] || {}, g = p.guide || {};
-      var line = function (lbl, n) {
-        return '<div style="display:flex;align-items:center;gap:8px;margin-top:5px">' +
-                 '<span style="flex:0 0 96px;font:500 12px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' + lbl + "</span>" +
-                 pips(n || 1, lbl) +
-               "</div>";
-      };
-      return '<div style="padding:12px 0;border-top:1px solid var(--line,#e2e8f0)">' +
-        '<div style="display:flex;align-items:baseline;gap:8px">' +
-          '<span style="font:700 14px/1.3 var(--sans,system-ui)">' + esc(p.label || id) + "</span>" +
-          '<span style="font:500 12px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' + esc(M.sizeLabel(id)) + "</span>" +
-        "</div>" +
-        line("Speed", g.speed) + line("Medical depth", g.medical) + line("General knowledge", g.general) +
-        '<div style="font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:8px">' +
-          "<b>Best for</b> " + esc(g.bestFor || "") + "<br>" + esc(g.why || "") +
-        "</div>" +
-        (g.pick ? '<div style="font:600 12.5px/1.5 var(--sans,system-ui);color:var(--teal,#0e6e63);margin-top:5px">' + esc(g.pick) + "</div>" : "") +
-      "</div>";
-    }).join("");
-
-    return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);padding:14px;margin-top:8px">' +
-      '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">Will it run on my phone?</div>' +
-      deviceWarnHTML() +
-      '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">How on-device mode works</div>' +
-      '<ul style="margin:0 0 4px;padding-left:18px;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356)">' + intro + "</ul>" +
-      '<div style="font:700 13px/1.3 var(--sans,system-ui);margin:14px 0 0">Choosing a model</div>' +
-      '<div style="font:500 11.5px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">Ratings compare these options with each other, nothing else.</div>' +
-      rows +
-      '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);border-top:1px solid var(--line,#e2e8f0);padding-top:10px;margin-top:2px">' +
-        "Start with MAiK Lite: StewardMD's own model, the smallest download and the fastest answers. " +
-        "MxCore and Neural for deeper medical detail, Horizon for broader general knowledge, Apex on a " +
-        "flagship phone when you want the best answer and can wait a little longer." +
-      "</div>" +
-    "</div>";
-  }
 
   // Live updates without re-rendering the whole section (which would kill the tap targets
   // mid-download). Patches only the status line and the bar for the pack that changed.
@@ -1096,18 +1108,6 @@
         if (line) { var tmp = document.createElement("div"); tmp.innerHTML = capsHTML(); var fresh = tmp.querySelector("[data-me-device]"); if (fresh) line.textContent = fresh.textContent; }
       }, function () {});
     } catch (e) {}
-    // The guide is a plain expander rather than a modal: rerender() replaces this whole section on
-    // every pack change, and a modal would have to be torn down and re-opened around that.
-    root.querySelectorAll("[data-me-guide]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var panel = root.querySelector("[data-me-guide-panel]");
-        if (!panel) return;
-        var open = !panel.hasAttribute("hidden");
-        if (open) panel.setAttribute("hidden", ""); else panel.removeAttribute("hidden");
-        b.setAttribute("aria-expanded", open ? "false" : "true");
-        b.textContent = open ? "Which one should I download?" : "Hide the guide";
-      });
-    });
     root.querySelectorAll("[data-me-model]").forEach(function (b) {
       b.addEventListener("click", function () {
         var act = b.getAttribute("data-me-model");
@@ -1163,7 +1163,7 @@
    */
   function options() {
     var out = [
-      { id: "cloud", label: "MaiK Cloud", sub: "Gemini, grounded in the StewardMD KB. Uses AI tokens.", badge: "PRO" },
+      { id: "cloud", label: "MaiK Cloud", sub: "Our super specialist, grounded in the StewardMD KB. Uses AI tokens.", badge: "PRO", grade: "DM" },
       { id: "rag", label: "KB only", sub: "StewardMD knowledge base, cited. No tokens, works offline.", badge: "FREE" }
     ];
     var M = window.SMD_MAIK_MODELS;
@@ -1184,6 +1184,7 @@
           flagship: !!M.PACKS[pid].flagship,
           warn: M.DEVICE_WARNING || "",
           pack: pid, needsDownload: !have && !st.downloading,
+          grade: gradeOf(pid).code,
           requested: pendingPack() === pid
         });
       });
@@ -1337,14 +1338,10 @@
      */
     function pickerGroupOf(o) {
       if (!o.pack) return "";
-      try {
-        var M = window.SMD_MAIK_MODELS;
-        if (M && M.PACKS && M.PACKS[o.pack] && M.PACKS[o.pack].own) return "StewardMD's own";
-        if (/bonsai/i.test(o.pack)) return "Bonsai (ternary)";
-        var c = (M && M.caps) ? M.caps(o.pack) : null;
-        if (c && c.medical) return "Medically tuned";
-      } catch (e) {}
-      return "General purpose";
+      // Same three shelves as Settings, from the same registry-derived grade.
+      var key = groupKeyOf(o.pack), gs = libGroups();
+      for (var i = 0; i < gs.length; i++) if (gs[i].key === key) return gs[i].title;
+      return gs[gs.length - 1].title;
     }
     function groupHeadHTML(title) {
       return '<div style="font:700 10.5px/1.2 var(--sans,system-ui);letter-spacing:.05em;text-transform:uppercase;' +
@@ -1354,7 +1351,7 @@
     // and Apex), which printed "Medically tuned" twice - a heading that repeats reads as a bug, so
     // the rows are bucketed into a fixed order and only their ORDER WITHIN a bucket is the
     // registry's. "" is the hosted pair (Cloud, KB only), which stays first and unlabelled.
-    var PICKER_ORDER = ["", "StewardMD's own", "Medically tuned", "Bonsai (ternary)", "General purpose"];
+    var PICKER_ORDER = [""].concat(libGroups().map(function (g) { return g.title; }));
     function rowsHTML() {
       var all = options(), bucket = {}, extra = [];
       all.forEach(function (o) {
@@ -1400,7 +1397,8 @@
           'background:' + (on ? "var(--mk-tsoft,#e6f4f1)" : "transparent") + ';padding:14px 16px;' +
           'color:var(--mk-ink,#14202b);-webkit-tap-highlight-color:transparent">' +
           '<span style="flex:1;min-width:0">' +
-            '<span style="display:flex;align-items:center;gap:7px;font:600 15px/1.25 var(--sans,system-ui)">' + esc(o.label) +
+            '<span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;font:600 15px/1.25 var(--sans,system-ui)">' + esc(o.label) +
+              (o.grade ? gradePill(o.grade) : "") +
               (badge ? '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + badge + '</span>' : "") +
             '</span>' +
             '<span data-mk-sub="' + o.id + '" style="display:block;font:500 12px/1.4 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:3px">' + esc(o.sub) + '</span>' +
