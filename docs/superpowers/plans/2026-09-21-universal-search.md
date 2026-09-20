@@ -43,12 +43,12 @@ Derived from the ui-ux-pro-max guideline search (Search/No Results, Autocomplete
 1. **Instant.** Local results render synchronously on `input`. No debounce on the local path. Focus the input synchronously inside `openSearch()` so the mobile keyboard rises on the same tap.
 2. **One list, ranked, sectioned.** Sections in fixed order: Tools, Calculators, Drugs, Diseases, Syndromes, ICD codes, Settings, then always an "Ask MaiK about "query"" row. In the All view each section shows at most 4 rows plus a "See all N" button that selects that section's chip.
 3. **Category chips are buttons.** `<button class="us-chip" aria-pressed>`; chips wrap onto a second line rather than clip; only categories with hits are shown, each with a count; "All" first. Minimum 44 px tap height.
-4. **Zero state is useful.** With an empty query: recent searches (existing `smd_recent_searches` key, max 8) and a "Browse" row of category tiles that open that category's full list.
+4. **Zero state is useful.** With an empty query: recent searches (existing `smd_recent_searches` key, max 8) with individual removal buttons and a "Clear all" link, plus a "Browse" row of category tiles that open that category's full list.
 5. **No dead ends.** No hits: "No results for "x"" plus the Ask MaiK row plus a "Check spelling or try a brand name" hint.
-6. **No layout shift.** Async sections reserve space with three 56 px skeleton rows while pending, then replace in place; an empty async result removes the section.
-7. **Keyboard.** ArrowDown/ArrowUp move `aria-selected` across rows, Enter opens the selected row (or the first), Escape closes. Input attributes: `type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search StewardMD"`.
-8. **Motion.** Panel scales from `transform-origin: top right` (the header button) 0.96 to 1 with opacity, 260 ms `cubic-bezier(.2,.8,.2,1)`; exit mirrors the same path in 180 ms. `prefers-reduced-motion`: opacity only, 150 ms. Header uses `backdrop-filter: blur(20px) saturate(180%)` with a solid fallback under `prefers-reduced-transparency`.
-9. **Theme and safe area.** All colours from existing tokens so `body.dark` and `html[data-theme=*]` work for free; `padding-top: env(safe-area-inset-top)`.
+6. **No layout shift.** Async sections reserve space with three 56 px skeleton rows while pending, then replace in place; an empty async result removes the section. Network errors/rejections are trapped cleanly so skeletons never freeze indefinitely.
+7. **Keyboard & Desktop shortcuts.** Cmd+K / Ctrl+K toggles the search panel from anywhere on desktop. Within the panel, ArrowDown/ArrowUp move `aria-selected` and update `aria-activedescendant` across rows, Enter opens the selected row (or the first), Escape closes. Input attributes: `type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search StewardMD"`.
+8. **Motion.** Panel scales from `transform-origin: top right` (the header button) 0.96 to 1 with opacity, 260 ms `cubic-bezier(.2,.8,.2,1)`; exit mirrors the same path in 180 ms. Rapid re-open is debounced to avoid close-timer race condition. `prefers-reduced-motion`: opacity only, 150 ms. Header uses `backdrop-filter: blur(20px) saturate(180%)` with a solid fallback under `prefers-reduced-transparency`.
+9. **Theme, viewport and safe area.** All colours from existing tokens so `body.dark` and `html[data-theme=*]` work for free; `height: 100%; height: 100dvh` ensures the panel resizes above virtual keyboards without hiding bottom results; `padding-top: env(safe-area-inset-top)`.
 10. **Press feedback** on rows within 100 ms (`:active` background), no layout-shifting transforms.
 
 ## File structure
@@ -501,6 +501,11 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
     q = String(q || "").trim(); if (q.length < 2 || q.length > 60) return;
     try { var a = recentGet().filter(function (x) { return x.toLowerCase() !== q.toLowerCase(); }); a.unshift(q); localStorage.setItem(RECENT_KEY, JSON.stringify(a.slice(0, RECENT_MAX))); } catch (e) {}
   }
+  function recentDel(q) {
+    q = String(q || "").trim();
+    try { var a = recentGet().filter(function (x) { return x.toLowerCase() !== q.toLowerCase(); }); localStorage.setItem(RECENT_KEY, JSON.stringify(a)); } catch (e) {}
+    render();
+  }
   function recentClear() { try { localStorage.removeItem(RECENT_KEY); } catch (e) {} render(); }
 
   /* ---------- DOM ---------- */
@@ -529,6 +534,12 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
     chips.addEventListener("click", function (e) { var b = e.target.closest(".us-chip"); if (b) { ST.cat = b.getAttribute("data-cat"); ST.sel = -1; render(); } });
     body.addEventListener("click", function (e) {
       var more = e.target.closest(".us-more"); if (more) { ST.cat = more.getAttribute("data-cat"); ST.sel = -1; render(); return; }
+      var rdel = e.target.closest(".us-recent-del");
+      if (rdel) {
+        var prc = rdel.closest(".us-recent");
+        if (prc) recentDel(prc.getAttribute("data-q"));
+        return;
+      }
       var rc = e.target.closest(".us-recent"); if (rc) { setQuery(rc.getAttribute("data-q")); return; }
       var cl = e.target.closest("#usRecentClear"); if (cl) { recentClear(); return; }
       var br = e.target.closest(".us-browse"); if (br) { ST.cat = br.getAttribute("data-cat"); render(); return; }
@@ -553,6 +564,10 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
             if (tok !== ST.token) return;                        // stale response; a newer query is live
             ST.async[p.cat] = { pending: false, items: rank(q, items) };
             render();
+          }).catch(function () {
+            if (tok !== ST.token) return;
+            ST.async[p.cat] = { pending: false, items: [] };
+            render();
           });
         });
       }, ASYNC_DEBOUNCE);
@@ -570,7 +585,7 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
 
   /* ---------- rendering ---------- */
   function rowHTML(it, idx, catIcon) {
-    return '<button class="us-row" role="option" type="button" data-cat="' + esc(it.cat) + '" data-id="' + esc(it.id) + '" data-idx="' + idx + '" aria-selected="' + (idx === ST.sel) + '">' +
+    return '<button id="us-row-' + idx + '" class="us-row" role="option" type="button" data-cat="' + esc(it.cat) + '" data-id="' + esc(it.id) + '" data-idx="' + idx + '" aria-selected="' + (idx === ST.sel) + '">' +
       '<span class="us-row-ico">' + ico(catIcon) + '</span>' +
       '<span class="us-row-txt"><span class="us-row-t">' + esc(it.title) + '</span>' + (it.sub ? '<span class="us-row-s">' + esc(it.sub) + '</span>' : "") + '</span>' +
       ico("chev", "us-ico us-row-chev") + '</button>';
@@ -586,8 +601,8 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
       chips.innerHTML = "";
       var rec = recentGet();
       if (rec.length) {
-        html += '<div class="us-sec"><div class="us-sec-h">' + ico("clock") + ' Recent searches<button id="usRecentClear" class="us-link" type="button">Clear</button></div><div class="us-recents">' +
-          rec.map(function (r) { return '<button class="us-recent" type="button" data-q="' + esc(r) + '">' + esc(r) + '</button>'; }).join("") + '</div></div>';
+        html += '<div class="us-sec"><div class="us-sec-h">' + ico("clock") + ' Recent searches<button id="usRecentClear" class="us-link" type="button">Clear all</button></div><div class="us-recents">' +
+          rec.map(function (r) { return '<span class="us-recent" data-q="' + esc(r) + '"><span class="us-recent-txt">' + esc(r) + '</span><button class="us-recent-del" type="button" aria-label="Remove ' + esc(r) + '">&times;</button></span>'; }).join("") + '</div></div>';
       }
       html += '<div class="us-sec"><div class="us-sec-h">Browse</div><div class="us-browse-grid">' +
         CATS.map(function (c) { return '<button class="us-browse" type="button" data-cat="' + c.key + '">' + ico(c.icon) + '<span>' + esc(c.label) + '</span></button>'; }).join("") + '</div></div>';
@@ -631,6 +646,7 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
       if (!n) return; e.preventDefault();
       ST.sel = e.key === "ArrowDown" ? Math.min(n - 1, ST.sel + 1) : Math.max(0, ST.sel - 1);
       for (i = 0; i < n; i++) rows[i].setAttribute("aria-selected", String(i === ST.sel));
+      if (input) input.setAttribute("aria-activedescendant", ST.sel >= 0 ? "us-row-" + ST.sel : "");
       rows[ST.sel].scrollIntoView({ block: "nearest" });
       return;
     }
@@ -638,8 +654,10 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
   }
 
   /* ---------- open / close ---------- */
+  var closeTimer = null;
   function open() {
     ensureDOM();
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
     ST.cat = "all"; ST.sel = -1; ST.async = {};
     root.hidden = false; backdrop.hidden = false;
     document.body.classList.add("us-open");
@@ -650,8 +668,15 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
   function close() {
     if (!root || root.hidden) return;
     root.classList.remove("on"); document.body.classList.remove("us-open");
-    var done = function () { root.hidden = true; backdrop.hidden = true; root.removeEventListener("transitionend", done); };
-    root.addEventListener("transitionend", done); setTimeout(done, 220);   // reduced-motion may never fire transitionend
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    var done = function () {
+      if (root && root.classList.contains("on")) return;         // reopened before transition finished
+      if (root) root.hidden = true;
+      if (backdrop) backdrop.hidden = true;
+      if (root) root.removeEventListener("transitionend", done);
+    };
+    root.addEventListener("transitionend", done);
+    closeTimer = setTimeout(done, 220);   // reduced-motion may never fire transitionend
     input.blur();
   }
 
@@ -662,7 +687,13 @@ git commit -m "search: providers for tools, calculators, drugs, diseases, syndro
     G.openSearch = open; G.closeSearch = close;                 // header button onclick, ACT.search, kbOpen all route here
     G.doSearch = function (q) { open(); setQuery(q); };
     G.clearSearch = function () { setQuery(""); };
-    var btn = document.getElementById("smdSearchBtn"); if (btn) btn.setAttribute("title", "Search anything in StewardMD");
+    var btn = document.getElementById("smdSearchBtn"); if (btn) btn.setAttribute("title", "Search anything in StewardMD (Cmd+K)");
+    document.addEventListener("keydown", function (e) {
+      if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        if (root && !root.hidden && root.classList.contains("on")) close(); else open();
+      }
+    });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setTimeout(wrap, 0); });
   else setTimeout(wrap, 0);                                      // after app.js's own DOMContentLoaded listener
@@ -676,7 +707,7 @@ Ordering note: `reasoning.js:3298-3303` wraps `openSearch` once from `smdWireKBS
 /* search.css - Universal search panel. Colour tokens come from index.html :root / body.dark / data-theme. */
 .us-backdrop{position:fixed;inset:0;z-index:calc(var(--z-search) - 1);background:rgba(20,32,43,.28)}
 body.dark .us-backdrop{background:rgba(0,0,0,.5)}
-.us-panel{position:fixed;inset:0;z-index:var(--z-search);display:flex;flex-direction:column;background:var(--paper);color:var(--ink);
+.us-panel{position:fixed;inset:0;height:100%;height:100dvh;z-index:var(--z-search);display:flex;flex-direction:column;background:var(--paper);color:var(--ink);
   padding-top:env(safe-area-inset-top);transform-origin:top right;transform:scale(.96);opacity:0;
   transition:transform 260ms cubic-bezier(.2,.8,.2,1),opacity 200ms ease-out;will-change:transform,opacity}
 .us-panel.on{transform:none;opacity:1}
@@ -714,7 +745,9 @@ body.dark .us-backdrop{background:rgba(0,0,0,.5)}
 .us-empty-t{font-size:16px;font-weight:600}
 .us-empty-s{font-size:13px;color:var(--slate-soft);margin-top:4px}
 .us-recents{display:flex;flex-wrap:wrap;gap:8px;padding:0 4px}
-.us-recent{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.us-recent{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 10px 0 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.us-recent-del{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:transparent;border:0;color:var(--slate-soft);font-size:14px;cursor:pointer;padding:0;line-height:1}
+.us-recent-del:hover{color:var(--ink);background:var(--line)}
 .us-browse-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px;padding:0 4px}
 .us-browse{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:72px;justify-content:center;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
 .us-browse .us-ico{width:22px;height:22px;color:var(--teal)}
@@ -840,6 +873,25 @@ try {
 
   await ev(`window.openSearch(); return 1;`); await sleep(100); await type("zzqxv"); await sleep(400);
   chk("no-results state still offers Ask MaiK", await ev(`return !!document.querySelector("#usBody .us-empty") && document.querySelectorAll('#usBody .us-row[data-cat="ask"]').length===1`) === true);
+  await ev(`window.closeSearch(); return 1;`); await sleep(300);
+
+  // desktop shortcut: Cmd+K / Ctrl+K
+  await ev(`document.dispatchEvent(new KeyboardEvent("keydown",{key:"k",metaKey:true,bubbles:true})); return 1;`); await sleep(350);
+  chk("Cmd+K opens the universal panel", await ev(`var p=document.getElementById("usPanel");return !!p && !p.hidden && p.classList.contains("on")`) === true);
+  await ev(`document.dispatchEvent(new KeyboardEvent("keydown",{key:"k",metaKey:true,bubbles:true})); return 1;`); await sleep(300);
+  chk("Cmd+K closes the universal panel", await ev(`return document.getElementById("usPanel").hidden===true`) === true);
+
+  // rapid re-open race guard
+  await ev(`window.openSearch(); window.closeSearch(); window.openSearch(); return 1;`); await sleep(350);
+  chk("rapid re-open stays open (no close-timer race)", await ev(`var p=document.getElementById("usPanel");return !!p && !p.hidden && p.classList.contains("on")`) === true);
+  await ev(`window.closeSearch(); return 1;`); await sleep(300);
+
+  // recent item single deletion
+  await ev(`window.openSearch(); return 1;`); await sleep(300);
+  await ev(`var b=document.querySelector('#usBody .us-recent[data-q="antibiogram"] .us-recent-del'); if(b)b.click(); return 1;`); await sleep(100);
+  chk("single recent item deletion works", await ev(`return !document.querySelector('#usBody .us-recent[data-q="antibiogram"]')`) === true);
+  chk("smd_recent_searches updated after deletion", JSON.parse(await ev(`return localStorage.getItem("smd_recent_searches")`) || "[]").indexOf("antibiogram") === -1);
+  await ev(`window.closeSearch(); return 1;`); await sleep(300);
 
   // kill switch: legacy panel must be the one that opens
   await boot(BASE + "?usearch=0&cb=" + Date.now());
@@ -924,16 +976,16 @@ settings toggles. Category chips filter; an "Ask MaiK about ..." row is always l
 **Decision:** New `search.js` panel over a provider registry; the three legacy listeners on
 `#smdSearchInput` are left in place but never shown (app.js is minified, never edited). Default ON
 with a kill switch (`?usearch=0`), per the 2026-09-04 no-more-flagging instruction; git tag
-`pre-universal-search` is the recovery point. Cases/patients not indexed (PHI). Schemes, CliniX and
-SURGX content, and a Cmd/Ctrl-K shortcut are deferred to Roadmap.
+`pre-universal-search` is the recovery point. Cases/patients not indexed (PHI). Cmd/Ctrl-K desktop shortcut,
+safe-area 100dvh viewport, race-condition close guard, and individual recent-item deletion are included.
+Schemes, and CliniX/SURGX lazy content are deferred to Roadmap.
 ```
 
 - [ ] **Step 3: Roadmap deferred items**
 
 ```markdown
 - Universal Search phase 2: Scheme Search provider (`/api/schemes/search`), CliniX/SURGX content
-  providers (manifest is lazy; needs a cached title index), OPD/ICU patient jump (PHI review first),
-  Cmd/Ctrl-K on desktop web.
+  providers (manifest is lazy; needs a cached title index), OPD/ICU patient jump (PHI review first).
 ```
 
 - [ ] **Step 4: Tag and commit**
