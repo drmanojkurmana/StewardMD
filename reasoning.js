@@ -3472,7 +3472,10 @@
     body.className = "sbref-body";
     var sec = body.querySelector(".sbref-sec"); if (!sec) return;
     sec.classList.add("kblib-discover");
-    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
+    /* Discover renders its own <h1>Knowledge Library</h1> hero directly below the bar, so setting the
+     * bar title here printed the same words twice on one screen. The tool tabs (Syndromes /
+     * Antibiogram / AWaRe / Guidelines) have no hero, so they keep their bar title. */
+    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = ""; } catch (e) {}
     var branches = [], seen = {}, entries = kbBuildIndex();
     entries.forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 0; branches.push(d.branch); } seen[d.branch]++; });
     branches.sort();

@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 const repo=fileURLToPath(new URL('../',import.meta.url));
 const server=spawn('node',[repo+'test/serve.mjs',repo,'9032'],{stdio:'ignore'});
-const chrome=spawn('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',['--headless=new','--remote-debugging-port=9432',`--user-data-dir=/tmp/library-chrome-${process.pid}`,'--no-first-run','--disable-gpu'],{stdio:'ignore'});
+const chrome=spawn(process.env.CHROME||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',['--headless=new','--remote-debugging-port=9432',`--user-data-dir=/tmp/library-chrome-${process.pid}`,'--no-first-run','--disable-gpu'],{stdio:'ignore'});
 let ws,sid,id=0,failures=0;const pending=new Map();
 const call=(method,params={})=>new Promise(resolve=>{const n=++id;pending.set(n,resolve);ws.send(JSON.stringify({id:n,method,params,sessionId:sid}));});
 const ev=async expression=>{const r=await call('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.result?.exceptionDetails)throw Error(JSON.stringify(r.result.exceptionDetails));return r.result?.result?.value;};
@@ -21,6 +21,9 @@ try{
  ok(await ev(`document.querySelector('.kblib-intro').textContent.includes('4,800+')`),'catalog breadth is prominent');
  ok(await ev(`document.querySelectorAll('.kblib-tiles [data-br]').length===new Set(Object.values(KB_ENRICHMENT.byId).map(x=>x.system)).size`) || await ev(`document.querySelectorAll('.kblib-tiles [data-br]').length>=10`),'medical branches are available');
  ok(await ev(`getComputedStyle(document.querySelector('#sbrefOverlay')).overflow==='hidden' && getComputedStyle(document.querySelector('#sbrefBody')).overflowY==='auto'`),'library uses a pinned app shell with internal scrolling');
+ // Discover has its own <h1> hero; the bar title used to repeat it, printing the same words twice.
+ ok(await ev(`(document.querySelector('#sbrefTitle').textContent||'').trim()===''`),'bar title does not repeat the Discover hero heading');
+ ok(await ev(`document.querySelector('.kblib-intro h1').textContent.trim()==='Knowledge Library'`),'the hero heading still names the library');
  ok(await ev(`Math.abs(document.querySelector('#sbrefOverlay').getBoundingClientRect().bottom-innerHeight)<=1`),'library fills the visible viewport');
  ok(await ev(`!document.querySelector('#smdTopBack') || getComputedStyle(document.querySelector('#smdTopBack')).visibility==='hidden'`),'library suppresses the underlying global back control');
  for(const width of [320,390,768,1280]){await call('Emulation.setDeviceMetricsOverride',{width,height:844,deviceScaleFactor:1,mobile:width<700});ok(await ev(`document.querySelector('#sbrefOverlay').scrollWidth<=innerWidth`),`no overflow at ${width}px`);if(width===390)await shot('discover-mobile');if(width===1280)await shot('discover-desktop');}
