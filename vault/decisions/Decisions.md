@@ -5339,3 +5339,13 @@ their own leak-resistant system prompt or verify on-device whether `stripReasoni
 in practice. `LlamaEngine.swift`'s chat-template application (`llama_chat_apply_template`) looks
 correct on inspection, so this reads as an instruction-following limit at 4B scale, not a template
 bug - not re-verified live on device this session.
+
+## 2026-09-21 · Universal Search replaces the header search panel
+
+**Ask:** "make it search anything inside app, any feature, topic, anything ... and category filters."
+**Decision:** New `search.js` panel over a provider registry; the three legacy listeners on
+`#smdSearchInput` are left in place but never shown (app.js is minified, never edited). Default ON
+with a kill switch (`?usearch=0`), per the 2026-09-04 no-more-flagging instruction; git tag
+`pre-universal-search` is the recovery point. Cases/patients not indexed (PHI). Cmd/Ctrl-K desktop shortcut,
+safe-area 100dvh viewport, race-condition close guard, and individual recent-item deletion are included.
+Schemes, and CliniX/SURGX lazy content are deferred to Roadmap.
