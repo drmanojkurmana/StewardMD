@@ -105,7 +105,11 @@ function boot(ls0) {
    "Habitat_addiction_drug", "Habitat_addiction_tobacco"].forEach((n) => doc._field(n, "check"));
   return { win, doc, OE, st, windows, calls, queue };
 }
-const tick = () => new Promise((r) => setTimeout(r, 0));
+// NOT the patched global: app timers are unref'd above so the real modules' polling
+// intervals cannot hold the process open. The test's own await must keep the loop
+// alive, or node resolves the event loop with this promise still pending and cancels
+// every remaining test in the file ("cancelledByParent" — seen on CI, not locally).
+const tick = () => new Promise((r) => _sT(r, 0));
 const transcriptBox = (h) => h.doc.getElementById("oeTranscript").textContent;
 const domValue = (h, name) => h.doc._inputs[name][0].value;
 const ynChecked = (h, name) => (h.doc._inputs[name].filter((r) => r.checked)[0] || {}).value;
