@@ -5508,7 +5508,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       _maikBusy = busy;
       maikBuddyBusy(!!busy);
       if (sheet._maikAtmosphere) sheet._maikAtmosphere.setBusy(!!busy);
-      if (was && !busy) { try { maikDocCue("done"); } catch (e) {} }   // wave the answer in
+      if (was && !busy) { try { maikDocCue("done"); } catch (e) {} try { maikHaptic("done"); } catch (e) {} }   // wave the answer in
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
       sendBtn.classList.toggle("stopping", !!busy);
@@ -6651,7 +6651,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var onDelta = function (acc) {
             if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
             _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
-            if (!_perfTTFT) _perfTTFT = maikNow();
+            if (!_perfTTFT) { _perfTTFT = maikNow(); try { maikHaptic("start"); } catch (e) {} }   // first chunk: the answer is coming
             var _accS = maikStripRefine(acc).replace(/@@\s*MORE\s*@@/gi, "\n\n");   // hide the @@REFINE@@ / @@MORE@@ markers while streaming
             var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
             _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
@@ -7269,15 +7269,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * Distinct feedback per meaning: a light tap for send, a firmer one for stop, because stopping is
      * a different kind of decision and should not feel identical to sending.
      */
+    /* MaiK haptic vocabulary (owner, 2026-09-21: "i want best haptics"):
+     *   send   medium  the primary action, firmer than a chip tap
+     *   stop   heavy   interrupting generation is the most deliberate press in the sheet
+     *   start  light   the first streamed chunk landed: the answer is coming
+     *   done   success the answer is complete (iOS notification pattern, two soft knocks)
+     *   error  error   generation failed or was refused
+     *   pick   selection  choosing a model / flipping the Knowledge Base switch */
+    var MAIK_HAPTIC = { send: "medium", stop: "heavy", start: "light", done: "success", error: "error", pick: "selection" };
     function maikHaptic(kind) {
+      var fn = MAIK_HAPTIC[kind] || "light";
       try {
         var H = window.SMD_HAPTICS;
-        if (H) { if (kind === "stop") H.medium(); else H.tap(); return; }
+        if (H && H[fn]) { H[fn](); return; }
       } catch (e) {}
       try {
         var C = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Haptics;
         if (C && C.impact) {
-          C.impact({ style: kind === "stop" ? "MEDIUM" : "LIGHT" }).catch(function () {});
+          if (fn === "success" || fn === "error") C.notification({ type: fn.toUpperCase() }).catch(function () {});
+          else C.impact({ style: fn === "heavy" ? "HEAVY" : fn === "medium" ? "MEDIUM" : "LIGHT" }).catch(function () {});
           return;
         }
       } catch (e) {}
