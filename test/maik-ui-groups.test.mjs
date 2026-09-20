@@ -21,10 +21,10 @@ const PACKS = {
   "medmo-4b": { label: "MAiK Cortex", tier: 2.5 },
   "maik-horizon": { label: "MAiK Horizon", tier: 3 },
   "maik-apex": { label: "MAiK Apex", tier: 4 },
-  "bonsai-ternary-8b": { label: "MAiK Bonsai", tier: 0.5, flagship: true },
-  "bonsai-8b": { label: "MAiK Bonsai Swift", tier: 0.7 },
-  "bonsai-27b": { label: "MAiK Bonsai Max", tier: 5 },
-  "bonsai2-27b": { label: "MAiK Bonsai Max 2", tier: 5.5 },
+  "bonsai-ternary-8b": { label: "MAiK Prime", tier: 0.5, flagship: true },
+  "bonsai-8b": { label: "MAiK Swift", tier: 0.7 },
+  "bonsai-27b": { label: "MAiK Max", tier: 5 },
+  "bonsai2-27b": { label: "MAiK Max 2", tier: 5.5 },
 };
 const MEDICAL = { "maik-lite": 1, "maik-mxcore": 1, "maik-neural": 1, "medmo-4b": 1, "maik-apex": 1 };
 const INSTALLED = { "maik-lite": 1 };
@@ -69,8 +69,18 @@ test("the settings list is grouped, and EVERY pack appears exactly once", () => 
 
 test("the group a pack lands in is derived from the registry, not a hand-kept list", () => {
   const html = load().modelRowHTML();
-  for (const t of ["StewardMD's own", "Medically tuned", "Bonsai (ternary)", "General purpose"]) {
+  for (const t of ["Trained by StewardMD", "Medical specialists", "General models"]) {
     assert.ok(html.includes(t), `group "${t}" is present`);
+  }
+  // Vendor names are gone from the shelf titles (owner, 2026-09-21): grades, not provenance.
+  const titles = (html.match(/<summary[\s\S]*?<\/summary>/g) || []).join(" ");
+  assert.doesNotMatch(titles, /Bonsai|ternary|PrismML|Medically tuned|General purpose/, "no vendor or technique word in a shelf title");
+  assert.match(titles, /trained them to work as an MD/, "the medical shelf says we trained them to work as an MD");
+  // Every row carries a grade pill, and the grade follows the registry: own = MBBS, medical = MD, else PhD.
+  for (const [id] of Object.entries(PACKS)) {
+    const row = html.split('data-me-pack-row="' + id + '"')[1].slice(0, 900);
+    const want = PACKS[id].own ? "MBBS" : MEDICAL[id] ? "MD" : "PhD";
+    assert.match(row, new RegExp(">" + want + "<"), `${id} is graded ${want}`);
   }
   // The group holding the answering pack must be OPEN, so the clinician can see what answers
   // without hunting. Split on the group boundary rather than guessing a character window.
@@ -82,10 +92,12 @@ test("the group a pack lands in is derived from the registry, not a hand-kept li
 
 test("the page opens SHORT: only one group is expanded by default", () => {
   const html = load().modelRowHTML();
-  const opens = (html.match(/<details class="mk-grp"[^>]*\sopen/g) || []).length;
-  const total = (html.match(/<details class="mk-grp"/g) || []).length;
-  assert.ok(total >= 3, `several groups exist (${total})`);
+  // Advanced is a fourth <details> on the page; count the library shelves only.
+  const shelves = html.split('<details class="mk-grp" data-mk-grp="').slice(1).filter((b) => !b.startsWith("advanced"));
+  const opens = shelves.filter((b) => /^[a-z]+"\s+open/.test(b)).length;
+  assert.ok(shelves.length >= 3, `several groups exist (${shelves.length})`);
   assert.equal(opens, 1, `exactly one group open on load, got ${opens}`);
+  assert.match(html, /data-mk-grp="advanced"(?! open)/, "Advanced ships collapsed");
 });
 
 test("group headings are accessible: real disclosure widgets, not styled divs", () => {
