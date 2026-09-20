@@ -81,10 +81,10 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
   add a chip kind, and cover it in `test/run-maik-calc-route-ui.mjs`.
 - `maikRoute()` is evaluated OUTSIDE module scope by `test/maik-greeting-route.test.mjs` (regex-sliced,
   `new Function`). Any module-level variable it touches must be `typeof`-guarded or the suite breaks.
-- **The on-device engine is gated on PRO, not on a flag** (2026-08-27). `gateActive()` reads
-  `SMD_PRO.isProSync()` only; the old `SMD_XACCESS` `maik_local` access-code gate is gone from the
-  client AND from `functions/_experimental.js`. Dev hatches kept: `smd_maik_local_bypass=1` and a
-  native debug build. `SMD_PRO` fails OPEN, so the promo period makes it open to everyone on native.
+- **The on-device engine is FREE for every user, guest included** (owner, 2026-09-20; reverses the
+  2026-08-27 Pro gate). `gateActive()` returns true: no `SMD_PRO`, no access code, no bypass key, no
+  debug-build exception. The settings row badges it Free; the server matrix lists `local_ai` under
+  every tier. MaiK Cloud keeps its own Pro gate (tokens cost money). See Decisions.md 2026-09-20.
 - Model is env-driven (`GEMINI_MODEL`); `thinkingBudget:0`.
 - Preview env has no Vertex → Tier-0 (KB) only.
 - No em-dash in app-facing text (AI *output* exempt).

@@ -72,20 +72,13 @@ test("the probe is bounded — it cannot retry forever", () => {
   assert.equal(/while\s*\(true\)/.test(LOCAL), false);
 });
 
-test("REGRESSION: an installed model is never described as partly downloaded", () => {
+test("there is no 'installed but locked' state any more: on-device is free for everyone (owner, 2026-09-20)", () => {
   const fn = ENGINE.slice(ENGINE.indexOf("function kbOnlyNotice()"), ENGINE.indexOf("function kbOnlyNotice()") + 2600);
-  assert.match(fn, /packInstalled\(\) && !gateActive\(\)/,
-    "installed-but-locked needs its own branch");
-  // and that branch must come BEFORE the frac-based ones, or it never runs
-  assert.ok(fn.indexOf("packInstalled() && !gateActive()") < fn.indexOf("st.frac > 0"),
-    "the installed-but-locked case must be checked before the partial-download case");
-  assert.match(fn, /is downloaded, but on-device answering is not unlocked/);
-});
-
-test("the notice distinguishes 'still checking' from 'locked'", () => {
-  const fn = ENGINE.slice(ENGINE.indexOf("function kbOnlyNotice()"), ENGINE.indexOf("function kbOnlyNotice()") + 2600);
-  assert.match(fn, /debugProbed/, "uses the probe state");
-  assert.match(fn, /Still checking with the device/);
+  assert.doesNotMatch(fn, /packInstalled\(\) && !gateActive\(\)/, "the locked branch is gone");
+  assert.doesNotMatch(fn, /not unlocked|included with Pro|Still checking with the device/i, "the notice never sells or awaits Pro");
+  assert.match(ENGINE, /function gateActive\(\) \{ return true; \}/, "the gate is simply open");
+  // an installed model is still never described as partly downloaded: the frac branches only run when it is NOT ready
+  assert.match(fn, /if \(getPref\(\) === "local" && !localReady\(\)\)/);
 });
 
 test("the silent downgrade is still honest about what it did", () => {
