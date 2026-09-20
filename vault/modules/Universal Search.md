@@ -30,3 +30,8 @@ settings toggles. Category chips filter; an "Ask MaiK about ..." row is always l
 - Cases and patients are deliberately not indexed (PHI).
 - Every `open()` starts at the zero state (query cleared), so a fresh tap always shows recents +
   browse; the `.on` class has a 50 ms timer fallback because rAF stalls in background tabs.
+- Mobile iOS touch bar & click-shield gotcha: `.us-panel` has `display: flex`, which in CSS overrides
+  user-agent `[hidden] { display: none }`. `.us-backdrop[hidden], .us-panel[hidden] { display: none !important; }`
+  and `.us-panel:not(.on) { pointer-events: none !important; }` are strictly mandatory; `close()` immediately
+  disables `input.disabled = true` to force iOS WebKit to drop the keyboard and accessory touch bar (`^`, `v`, `✓`)
+  without leaving invisible click traps over the homepage.

@@ -93,6 +93,14 @@ try {
   chk("smd_recent_searches updated after deletion", JSON.parse(await ev(`return localStorage.getItem("smd_recent_searches")`) || "[]").indexOf("antibiogram") === -1);
   await ev(`window.closeSearch(); return 1;`); await sleep(300);
 
+  // clean close guarantees: no invisible touch traps, input disabled, homepage unobstructed
+  chk("after close: panel display is none", await ev(`var p=document.getElementById("usPanel");return window.getComputedStyle(p).display==="none"`) === true);
+  chk("after close: panel pointer-events is none", await ev(`var p=document.getElementById("usPanel");return window.getComputedStyle(p).pointerEvents==="none"`) === true);
+  chk("after close: input is disabled", await ev(`return document.getElementById("usInput").disabled===true`) === true);
+  chk("after close: backdrop display is none", await ev(`var b=document.getElementById("usBackdrop");return window.getComputedStyle(b).display==="none"`) === true);
+  chk("after close: body scroll is unlocked", await ev(`return !document.body.classList.contains("us-open")`) === true);
+  chk("after close: elementFromPoint is never intercepted by panel or backdrop", await ev(`var hit=document.elementFromPoint(100, 100);return hit && !hit.closest("#usPanel") && !hit.closest("#usBackdrop")`) === true);
+
   // kill switch: legacy panel must be the one that opens
   await boot(BASE + "?usearch=0&cb=" + Date.now());
   await ev(`document.getElementById("smdSearchBtn").click(); return 1;`); await sleep(400);

@@ -1,11 +1,14 @@
 /* search.css - Universal search panel. Colour tokens come from index.html :root / body.dark / data-theme. */
-.us-backdrop{position:fixed;inset:0;z-index:calc(var(--z-search) - 1);background:rgba(20,32,43,.28)}
+.us-backdrop[hidden],.us-panel[hidden]{display:none !important}
+.us-backdrop{position:fixed;inset:0;z-index:calc(var(--z-search) - 1);background:rgba(20,32,43,.28);opacity:0;pointer-events:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity 180ms ease-out}
 body.dark .us-backdrop{background:rgba(0,0,0,.5)}
+.us-backdrop.on{opacity:1;pointer-events:auto}
+.us-backdrop:not(.on){opacity:0;pointer-events:none !important}
 .us-panel{position:fixed;inset:0;height:100%;height:100dvh;z-index:var(--z-search);display:flex;flex-direction:column;background:var(--paper);color:var(--ink);
-  padding-top:env(safe-area-inset-top);transform-origin:top right;transform:scale(.96);opacity:0;
+  padding-top:env(safe-area-inset-top);transform-origin:top right;transform:scale(.96);opacity:0;pointer-events:none;
   transition:transform 260ms cubic-bezier(.2,.8,.2,1),opacity 200ms ease-out;will-change:transform,opacity}
-.us-panel.on{transform:none;opacity:1}
-.us-panel:not(.on){transition-duration:180ms,140ms}            /* exit mirrors the entry path, faster */
+.us-panel.on{transform:none;opacity:1;pointer-events:auto}
+.us-panel:not(.on){pointer-events:none !important;transition-duration:180ms,140ms}            /* exit mirrors the entry path, faster */
 .us-head{display:flex;align-items:center;gap:8px;padding:8px 12px;position:sticky;top:0;
   background:color-mix(in srgb,var(--panel) 72%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--line)}
 .us-field{flex:1;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}

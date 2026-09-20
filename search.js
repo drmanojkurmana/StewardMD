@@ -214,12 +214,12 @@
   var root = null, input = null, body = null, chips = null, clearBtn = null, backdrop = null;
   function ensureDOM() {
     if (root) return;
-    backdrop = document.createElement("div"); backdrop.id = "usBackdrop"; backdrop.className = "us-backdrop"; backdrop.hidden = true;
-    root = document.createElement("section"); root.id = "usPanel"; root.className = "us-panel"; root.setAttribute("role", "dialog"); root.setAttribute("aria-label", "Search StewardMD"); root.hidden = true;
+    backdrop = document.createElement("div"); backdrop.id = "usBackdrop"; backdrop.className = "us-backdrop"; backdrop.hidden = true; backdrop.style.display = "none"; backdrop.style.pointerEvents = "none";
+    root = document.createElement("section"); root.id = "usPanel"; root.className = "us-panel"; root.setAttribute("role", "dialog"); root.setAttribute("aria-label", "Search StewardMD"); root.hidden = true; root.style.display = "none"; root.style.pointerEvents = "none";
     root.innerHTML =
       '<header class="us-head">' +
         '<div class="us-field">' + ico("search") +
-          '<input id="usInput" class="us-input" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search StewardMD" aria-controls="usBody" placeholder="Search tools, drugs, scores, diseases, codes, settings">' +
+          '<input id="usInput" class="us-input" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search StewardMD" aria-controls="usBody" placeholder="Search tools, drugs, scores, diseases, codes, settings" disabled>' +
           '<button id="usClear" class="us-clear" type="button" aria-label="Clear search" hidden>' + ico("x") + '</button>' +
         '</div>' +
         '<button id="usCancel" class="us-cancel" type="button">Cancel</button>' +
@@ -231,8 +231,11 @@
     input.addEventListener("input", function () { setQuery(input.value); });
     input.addEventListener("keydown", onKey);
     clearBtn.addEventListener("click", function () { setQuery(""); input.focus(); });
-    root.querySelector("#usCancel").addEventListener("click", close);
+    var cancelBtn = root.querySelector("#usCancel");
+    cancelBtn.addEventListener("click", close);
+    cancelBtn.addEventListener("touchend", function (e) { e.preventDefault(); close(); });
     backdrop.addEventListener("click", close);
+    backdrop.addEventListener("touchend", function (e) { e.preventDefault(); close(); });
     chips.addEventListener("click", function (e) { var b = e.target.closest(".us-chip"); if (b) { ST.cat = b.getAttribute("data-cat"); ST.sel = -1; render(); } });
     body.addEventListener("click", function (e) {
       var more = e.target.closest(".us-more"); if (more) { ST.cat = more.getAttribute("data-cat"); ST.sel = -1; render(); return; }
@@ -356,31 +359,58 @@
   }
 
   /* ---------- open / close ---------- */
-  var closeTimer = null;
+  var closeTimer = null, openTimer = null, openRaf = null, isOpen = false;
   function open() {
     ensureDOM();
+    isOpen = true;
     if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    if (openTimer) { clearTimeout(openTimer); openTimer = null; }
+    if (openRaf && typeof cancelAnimationFrame === "function") { cancelAnimationFrame(openRaf); openRaf = null; }
     ST.cat = "all"; ST.sel = -1; ST.async = {};
-    root.hidden = false; backdrop.hidden = false;
+    if (input) input.disabled = false;
+    root.hidden = false; root.style.display = "flex"; root.style.pointerEvents = "";
+    if (backdrop) { backdrop.hidden = false; backdrop.style.display = "block"; backdrop.style.pointerEvents = ""; }
     document.body.classList.add("us-open");
-    requestAnimationFrame(function () { root.classList.add("on"); });
-    setTimeout(function () { if (root) root.classList.add("on"); }, 50);   // rAF stalls in background tabs; never leave the panel unstyled
+    if (typeof requestAnimationFrame === "function") {
+      openRaf = requestAnimationFrame(function () {
+        openRaf = null;
+        if (!isOpen) return;
+        if (root) root.classList.add("on");
+        if (backdrop) backdrop.classList.add("on");
+      });
+    }
+    openTimer = setTimeout(function () {
+      openTimer = null;
+      if (!isOpen) return;
+      if (root) root.classList.add("on");
+      if (backdrop) backdrop.classList.add("on");
+    }, 50);   // rAF stalls in background tabs; never leave the panel unstyled
     setQuery("");                                                 // fresh open always starts at zero state (recents + browse)
-    input.focus();                                               // synchronous: same tap, keyboard rises on iOS
+    if (input) input.focus();                                     // synchronous: same tap, keyboard rises on iOS
   }
   function close() {
-    if (!root || root.hidden) return;
-    root.classList.remove("on"); document.body.classList.remove("us-open");
+    if (!root) return;
+    isOpen = false;
+    if (openTimer) { clearTimeout(openTimer); openTimer = null; }
+    if (openRaf && typeof cancelAnimationFrame === "function") { cancelAnimationFrame(openRaf); openRaf = null; }
     if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    root.classList.remove("on");
+    if (backdrop) backdrop.classList.remove("on");
+    document.body.classList.remove("us-open");
+    root.style.pointerEvents = "none";
+    if (backdrop) backdrop.style.pointerEvents = "none";
+    if (input) {
+      try { input.blur(); } catch (e) {}
+      input.disabled = true;
+    }
     var done = function () {
-      if (root && root.classList.contains("on")) return;         // reopened before transition finished
-      if (root) root.hidden = true;
-      if (backdrop) backdrop.hidden = true;
+      if (isOpen) return;         // reopened before transition finished
+      if (root) { root.hidden = true; root.style.display = "none"; root.style.pointerEvents = "none"; }
+      if (backdrop) { backdrop.hidden = true; backdrop.style.display = "none"; backdrop.style.pointerEvents = "none"; }
       if (root) root.removeEventListener("transitionend", done);
     };
     root.addEventListener("transitionend", done);
     closeTimer = setTimeout(done, 220);   // reduced-motion may never fire transitionend
-    input.blur();
   }
 
   API.open = open; API.close = close; API.setQuery = function (q) { ensureDOM(); setQuery(q); };
@@ -394,7 +424,7 @@
     document.addEventListener("keydown", function (e) {
       if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
         e.preventDefault();
-        if (root && !root.hidden && root.classList.contains("on")) close(); else open();
+        if (isOpen) close(); else open();
       }
     });
   }
