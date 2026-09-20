@@ -236,7 +236,11 @@ export async function onRequest(context) {
        * the verification screen showed a green tick. Reconciling here means Pro returns on the next
        * app open rather than only if they happen to open that screen. */
       try { await reconcileVerifiedClaim(env, uid); } catch (e) {}
-      const state = await entitlementFor(env, uid);
+      // The token's email rides along so an OWNER is recognised here as on the hot AI gate; custom
+      // claims carry no email, so without this the owner's status read "not Pro" (2026-09-20).
+      let _em = "";
+      try { const w0 = await usageIdentify(request, env); _em = (w0 && !w0.guest && w0.email) || ""; } catch (e) {}
+      const state = await entitlementFor(env, uid, _em);
       /* Give every UNVERIFIED account a lifecycle record, so the day-7 sweep can actually see it.
        *
        * markFirstSeen() was only ever called from /api/welcome, which fires exclusively for

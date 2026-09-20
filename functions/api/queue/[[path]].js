@@ -44,7 +44,7 @@ import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwn
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
-import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
+import { orderQueue, orderRoomView, displayBoard, opdPulse } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge, deviceLabel } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
@@ -850,7 +850,18 @@ export async function onRequest(context) {
       const b = await readBody(request);
       if (sub === "pin") {
         const orgId = await ORG.resolveOrgId(env, b.clinicCode || b.orgId || "");   // accept the SMD-XXXXXX clinic code
-        const auth = await ORG.getMemberAuth(env, orgId, b.identity || "");
+        /* THE LOGIN NAME IS MATCHED EXACTLY FIRST, THEN IN LOWER CASE.
+         *
+         * The staff console lowercases a login name when it creates the member (mobile keyboards
+         * auto-capitalise), and this path matched the stored key verbatim - so a nurse added as
+         * "nurse1" who typed "Nurse1" was told her Clinic ID, login or PIN was wrong, with the
+         * correct PIN, and no way to tell which of the three was supposedly at fault.
+         *
+         * Exact match still wins, so an org that already holds both "Nurse1" and "nurse1" keeps
+         * answering as it did; the fallback only runs when the name as typed matches nobody. */
+        const typed = String(b.identity || "");
+        const auth = (await ORG.getMemberAuth(env, orgId, typed))
+          || (typed !== typed.trim().toLowerCase() ? await ORG.getMemberAuth(env, orgId, typed.trim().toLowerCase()) : null);
         /* EVERY OUTCOME IS AUDITED under the hospital, so "who tried to get in as this nurse at 3am"
          * has an answer. Unknown IDs are recorded too when the hospital resolved. Never the PIN. */
         if (!auth || !auth.active || !auth.pinHash) {
@@ -2517,7 +2528,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "list" && method === "GET") {
-        const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
+        /* R7-2: the ward list's reads are audited in ONE chain extension, not one per read. Every
+         * audited read takes the hospital's chain lock, reads the head and inserts, so a screen that
+         * reads the census, the names and the stated dates was paying three serialised round trips
+         * per read before it could answer - the same fix, and the same reason, as nurse-worklist
+         * below. The rows themselves are unchanged: one per chart read, written together. */
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const wdeps = { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository } };
+        const r = await listWard(request, env, { ...wdeps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
+        await audits.flush().catch(() => {});
         // P2.4: how long a device may show an offline copy of a chart. Hospital config, 1-72 hours, default 12.
         if (r.ok) { const h = Number(wsqCfg && wsqCfg.offlineCacheHours); r.offlineCacheHours = Number.isFinite(h) && h >= 1 && h <= 72 ? h : 12; }
         // The hospital's label sizes (Admin > Hospital), for the labels printed from any ward screen.
@@ -6142,6 +6161,39 @@ export async function onRequest(context) {
       return json({ ok: true, safety }, 200, request);
     }
     // Nurse-station board: rooms (status/counts) + unassigned pool for an org+day.
+    /* THE OPD PULSE: one hospital's whole outpatient day, in the figures somebody can act on.
+     *
+     * Deliberately hospital-wide and not per session: the doctor's own analytics answers "how did my
+     * clinic go", and the question at the desk is "is the OPD running, and where is it stuck". Same
+     * capability as the board it sits beside (queue.view) because it is the board's summary, and it
+     * names NOBODY - counts and durations only, so it can live on a screen the whole desk can see.
+     *
+     * Every room's session plus the pool, exactly as boardForOrg walks them, but the tickets are NOT
+     * filtered to the active ones: a day with 40 completed and 9 no-shows is the day being measured. */
+    if (method === "GET" && seg === "opd-pulse") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      const date = url.searchParams.get("date") || "";
+      const rows = [];
+      /* A room whose session could not be read is NAMED, never silently dropped: a pulse that is quietly
+       * short reads as a quiet OPD, which is the one thing this screen must never say by accident. */
+      const unread = [];
+      for (const rm of await ORG.listRooms(env, orgId)) {
+        if (!resolveRoomDoctor(rm)) continue;                       // no doctor, no session, no queue
+        try {
+          const sess = await Q.getOrCreateRoomSession(env, org, rm, date);
+          if (sess) rows.push(...(await Q.listTickets(env, sess.id)));
+        } catch (e) { unread.push(rm.name || rm.id || "room"); }
+      }
+      try {
+        const pool = await Q.getOrCreatePoolSession(env, org, date);
+        if (pool) rows.push(...(await Q.listTickets(env, pool.id)));
+      } catch (e) { unread.push("walk-in pool"); }
+      return json({ ok: true, pulse: opdPulse(rows, Date.now()), ...(unread.length ? { unread } : {}) }, 200, request);
+    }
     if (method === "GET" && seg === "opd-board") {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);

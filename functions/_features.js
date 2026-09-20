@@ -39,7 +39,7 @@ export const FEATURE_REGISTRY = [
   { key: "sknx",             label: "SknX module",    defaultRoles: [], experimental: true },
   // Ladder features (matrix-gated; live only under ROLE_GATES_ON)
   { key: "clinix_all",       label: "CliniX full library",              tiers: PAID_TIERS },
-  { key: "local_ai",         label: "On-device MaiK",                   tiers: PAID_TIERS },
+  { key: "local_ai",         label: "On-device MaiK",                   tiers: ALL_TIERS },   // free for every user (owner, 2026-09-20)
   { key: "pglog",            label: "NMC PG logbook",                   tiers: ["trainee", "coresident"], roles: ["intern", "resident"] },
   { key: "scribe",           label: "MaiK Scribe",                      tiers: ATTENDING_TIERS },
   { key: "followcare",       label: "FollowCare",                       tiers: ATTENDING_TIERS },

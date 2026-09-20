@@ -412,15 +412,20 @@ async function releaseBedClaim(svc, candidate) {
  * always a recently registered one), then a read by id for any still missing: a roster read alone, oldest
  * first, left the newest patients on a ward list nameless once a hospital passed 1,000 patients.
  */
+/* R7-2: the ward's patients are read BY ID, in one query.
+ *
+ * This used to read the newest 1,000 Patient records and then fetch, one at a time, every admitted
+ * patient that roster had missed. Two things were wrong with it. The roster answers with whoever was
+ * REGISTERED most recently, which on a hospital taking a few hundred registrations a day covers about
+ * three days - so most of the ward missed it, and each miss cost a round trip for the read and two
+ * more for its audit row. A hundred beds came to five to eight seconds of ward list.
+ *
+ * Reading by id is also simply the correct question: the ward list knows exactly whose names it
+ * needs. A name that cannot be read still stays absent rather than failing the list. */
 async function patientsFor(svc, ids) {
   const want = [...new Set((ids || []).filter(Boolean))];
-  const byId = new Map(((await svc.list("Patient", 1000, { newest: true })) || []).filter((p) => p && p.id).map((p) => [p.id, p]));
-  const missing = want.filter((id) => !byId.has(id));
-  for (let i = 0; i < missing.length; i += 8) {
-    const got = await Promise.all(missing.slice(i, i + 8).map((id) => svc.get("Patient", id).catch(() => null)));
-    got.forEach((p) => { if (p && p.id) byId.set(p.id, p); });
-  }
-  return byId;
+  if (!want.length) return new Map();
+  return svc.getMany("Patient", want);
 }
 
 /* Ward name -> its department's name, from the hospital's own master data (Admin, departments and wards).
@@ -477,7 +482,8 @@ async function listWard(request, env, ctx) {
   /* Each stay's expected discharge date (expected-discharge.js), with overdue worked out on the hospital's clock.
    * null = none set; false on the row = could not be read, which the screen must not show as "none set". */
   let edds = null;
-  try { edds = await expectedDischargeMap(svc); } catch (e) { edds = false; }
+  // R7-2: only the stays on this list, read by id. Not every date the hospital has ever stated.
+  try { edds = await expectedDischargeMap(svc, open.map((e) => e.id)); } catch (e) { edds = false; }
   const today = hospitalToday(Date.now(), ctx.clock);
   // BUG-MU0710W4-04KD: the ward list filters by department.
   let deptOf = new Map();

@@ -782,7 +782,12 @@ function renderGroundedPrompt(pkg) {
   // whatever was retrieved and (with a vague follow-up) narrates unrelated retrieved diseases.
   if (pkg.question) L.push("=== CLINICIAN QUESTION (answer THIS specifically and completely) ===\n" + clip(pkg.question, 500) + "\n");
   if (pkg.history && pkg.history.length) {
-    L.push("=== RECENT CONVERSATION (for context/continuity; do not repeat it back) ===");
+    // pkg.newTopic: the client's continuity classifier judged this a NEW question (it names a subject
+    // the thread never mentioned). The turns still travel as background, but the model must not
+    // merge the two conditions ("hematuria in a patient who also has AF" for a bare "Afib ECG").
+    L.push(pkg.newTopic
+      ? "=== RECENT CONVERSATION (background only: the clinician has moved to a NEW question; answer it on its own and do NOT merge it with the earlier condition unless they explicitly link the two) ==="
+      : "=== RECENT CONVERSATION (for context/continuity; do not repeat it back) ===");
     pkg.history.slice(-4).forEach(function (h) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, 300)); });
     L.push("");
   }

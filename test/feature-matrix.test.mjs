@@ -8,8 +8,12 @@ import { matrixAllows, imagingCapFor, oncoTrialState, oncoAiAllowed, featureAllo
 const DAY = 86400000, NOW = 1750000000000;
 const paid = ["trainee", "coresident", "pro", "physician", "physicianpro"];
 
-test("clinix_all / case_sync / local_ai: any paid tier, free refused", () => {
-  ["clinix_all", "case_sync", "local_ai"].forEach((k) => {
+test("local_ai: every tier, free and guest included (owner decision 2026-09-20)", () => {
+  ["free"].concat(paid).forEach((t) => assert.equal(matrixAllows("local_ai", t, null), true, "local_ai " + t));
+});
+
+test("clinix_all / case_sync: any paid tier, free refused", () => {
+  ["clinix_all", "case_sync"].forEach((k) => {
     paid.forEach((t) => assert.equal(matrixAllows(k, t, null), true, k + " " + t));
     assert.equal(matrixAllows(k, "free", "physician"), false, k + " free");
   });

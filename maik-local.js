@@ -88,7 +88,7 @@
    * instruction a 4B applies out of context is worse than no instruction: it manufactures a
    * confident number to satisfy the format. So the rule now names the condition first.
    */
-  var SYSTEM =
+  var SYSTEM_CORE =
     "You are MaiK, clinical decision support for doctors. Answer in markdown.\n" +
     "Answer medical questions only. For anything else reply: \"I can only help with medical and " +
     "clinical questions.\"\n" +
@@ -99,9 +99,17 @@
     "write about that alone.\n" +
     "When asked for a dose, give the standard flat adult dose with route and frequency, like " +
     "\"2 g IV over 20 min\". Use mg/kg only when adults are genuinely dosed by weight.\n" +
-    "Name the first-line regimen most guidelines agree on. Where unsure of a figure, give the range " +
-    "and say it varies.\n" +
-    "End with one line: \"Verify against local protocol.\"";
+    "";
+  /* The regimen rule is for TREATMENT questions only. Applied to every question it turned "IRIS in
+   * HIV" into the first-line ART regimen for HIV with IRIS never mentioned (owner transcript,
+   * 2026-09-20): a small model satisfies the instruction it can see. A definition, workup or
+   * mechanism question now gets the opposite instruction. TREAT_Q is the same predicate the
+   * retrieval rerank uses, so "what the question is about" is decided once. */
+  var SYSTEM_TREAT = "Name the first-line regimen most guidelines agree on. Where unsure of a figure, give the range and say it varies.\n";
+  var SYSTEM_ASK = "Answer the question that was asked. Do not switch to treatment or drug regimens unless the question asks for them.\n";
+  var SYSTEM_END = "End with one line: \"Verify against local protocol.\"";
+  var SYSTEM = SYSTEM_CORE + SYSTEM_TREAT + SYSTEM_END;
+  function systemFor(question) { return SYSTEM_CORE + (TREAT_Q.test(String(question || "")) ? SYSTEM_TREAT : SYSTEM_ASK) + SYSTEM_END; }
 
   /* A PURE greeting: the whole message is hello-ish with no clinical substance. Deliberately TIGHT -
    * "hi rx of uti" must NOT match. test/maik-greeting-route.test.mjs guards exactly that: a greeting
@@ -339,7 +347,7 @@
    * losing continuity yields a generic answer, while bleeding topics yields a confidently wrong one.
    */
   var FILLER = /^(what|whats|what's|how|why|and|but|so|about|of|for|the|a|an|in|on|to|is|are|it|its|it's|this|that|them|those|these|same|any|other|more|also|then|ok|okay|please|tell|me|us|give|show)$/;
-  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease)$/;
+  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease|drug|drugs|medication|medications|medicine|medicines|antibiotic|antibiotics|therapy|treatment|management|investigation|investigations|workup|test|tests|cause|causes|symptom|symptoms|sign|signs|diagnosis|differential|prevention|prophylaxis|definition|criteria|staging|grading)$/;   // bare nouns a doctor asks alone ("Drugs?", "Causes?") - owner transcript 2026-09-21
 
   /** An aspect-only question: every token is filler or an aspect word, so it has no subject of its
    *  own and is only answerable against the previous turn. "Side effects?" yes; "Polycystic Kidney
@@ -404,7 +412,9 @@
     if (!lines.length) return "";
     var keep = [lines[0]];
     for (var i = 1; i < lines.length; i++) if (/^([-*•]|\d+[.)])\s/.test(lines[i]) || /\d/.test(lines[i])) keep.push(lines[i].replace(/^([-*•]|\d+[.)])\s+/, ""));
-    return clip(keep.join(" | "), cap || CARRY_CAP);
+    // Joined with "; ", not " | ": the model imitates the history it is shown, and the second Scrub
+    // Typhus answer in the owner's transcript (2026-09-20) came back as one pipe-separated line.
+    return clip(keep.map(function (x) { return x.replace(/[.;]\s*$/, ""); }).join("; "), cap || CARRY_CAP);
   }
 
   function buildPrompt(pkg, packId) {
@@ -414,7 +424,10 @@
     var hist = histTurns(pkg.history);
     if (continues(question, hist)) {
       L.push("Recent conversation:");
-      var turns = hist.slice(-HISTORY_TURNS * 2);
+      // An aspect-only follow-up ("Drugs?", "side effects?") is about the answer just given. Showing
+      // the exchange before it too made "Drugs?" after a CFS answer come back about carvedilol from the
+      // varices turn (owner transcript, 2026-09-21). Corrections and named subjects keep both turns.
+      var turns = hist.slice(subjectTokens(question).length ? -HISTORY_TURNS * 2 : -2);
       turns.forEach(function (h, i) {
         var isA = h.role === "assistant", lastA = isA && i === turns.length - 1 - (turns[turns.length - 1].role === "assistant" ? 0 : 1);
         L.push((isA ? "MaiK: " : "Doctor: ") + (lastA ? carry(h.text || h.content) : clip(h.text || h.content, HISTORY_CLIP)));
@@ -622,6 +635,19 @@
   var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
   var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
   var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
+  /** A generation that stopped on its token budget ends mid-sentence. Prose that trails off is cut
+   *  back to the last sentence end (kept only if that keeps most of the answer, else an ellipsis);
+   *  a list item or heading as the last line is left alone, they legitimately end without a stop. */
+  function finishCut(text) {
+    var t = String(text == null ? "" : text).replace(/\s+$/, "");
+    if (!t) return { text: t, truncated: false };
+    var lines = t.split("\n"), last = lines[lines.length - 1].trim();
+    if (/^([-*\u2022]|\d+[.)])\s/.test(last) || /^#{1,4}\s/.test(last) || /^\|/.test(last)) return { text: t, truncated: false };
+    if (/[.!?:;)\]"\u201d\u2019']$/.test(last) || last.split(/\s+/).length < 6) return { text: t, truncated: false };
+    var idx = Math.max(t.lastIndexOf(". "), t.lastIndexOf(".\n"), t.lastIndexOf("!\n"), t.lastIndexOf("?\n"));
+    if (idx > t.length * 0.6) return { text: t.slice(0, idx + 1), truncated: true };
+    return { text: t + "\u2026", truncated: true };
+  }
   function cleanPassage(s) { return String(s || "").replace(/[■□▪▫●○◆◇◼◻•·]+/g, " ").replace(/\s+/g, " ").trim(); }
   function anchorsFor(bk, RAG, question) {
     // No tokenizer available (an older RAG build or a test stub) means no anchoring, never a
@@ -934,10 +960,13 @@
                 // A pack can carry its own system prompt (registry-driven, like noThink).
                 // MaiK Lite was TRAINED with its prompt, so the shared one would be a
                 // distribution shift - and its dose example was parroted as a real dose.
-                : !images.length ? (pk.system || SYSTEM)
+                : !images.length ? (pk.system || systemFor(pkg && pkg.question))
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
-          nPredict: pk.nPredict || 512,
+          // "tell me in detail" ran on the pack's default 512 and stopped mid-sentence ("continued for at
+          // least 48 hours post", owner transcript 2026-09-21). Detailed depth gets 1024; the worst-case
+          // prompt is ~1300 tokens, so it still fits a 4096 context.
+          nPredict: (opts && opts.depth === "detailed") ? Math.max(pk.nPredict || 512, 1024) : (pk.nPredict || 512),
           // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
           // byte for byte, so a regenerate request gets a little sampling jitter.
           temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : ((opts && opts.regen) ? 0.4 : 0),
@@ -961,6 +990,9 @@
       }).then(function (r) {
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
+        // nPredict ran out mid-word ("Intralesional vinblas" with the verify line glued on, owner
+        // transcript 2026-09-20). Finish at the last complete sentence and flag it in the result.
+        var cut = finishCut(text); text = cut.text;
         // A leaked fine-tuning template is not an answer. MAiK Cortex (MedMO-4B) answered "Hi" with
         // "##Instruction: If you are a doctor... Question: ... ##Options:" (owner transcript,
         // 2026-09-19): the model continued its SFT format instead of replying. Treat it as empty so the
@@ -1052,6 +1084,7 @@
         if (!quotedPassage) text = emphasize(text);
         return {
           text: text,
+          truncated: !!(cut && cut.truncated),   // hit the output budget; finished at the last full sentence
           // sources stays [] regardless: the citation UI's own contract (SMD_MaiK.sourceList)
           // recomputes from pkg.grounding/retrieved/treatment, which this engine does not
           // populate. A plain "Source: ..." line is appended to the text itself above instead,
@@ -1374,25 +1407,35 @@
     }).join("\n\n");
     var evidenceText = list.map(function (s, i) { return "[" + (i + 1) + "] " + String(s.title || "") + ". " + String(s.snippet || ""); }).join("\n");
     var prompt = "Question: " + q + "\n\nWeb results:\n" + ctx;
-    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
-      if (!text) return { error: "no-answer" };
-      var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+    var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+    function gateOf(text) {
       try {
         var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
-        if (RAG && RAG.evidenceGate) {
-          var gate = RAG.evidenceGate(text, evidenceText, q);
-          if (!gate.ok) {
-            var top = list[0];
-            var shown = String(top.title || "") + (top.snippet ? "\n" + top.snippet : "") + (top.url ? "\n" + top.url : "");
-            return {
-              text: "The on-device model's answer could not be verified against the web results it found " +
-                "(it stated a figure or drug not in them). Showing the top result instead:\n\n" + shown,
-              sources: srcOut, engine: "local", mode: "web-local"
-            };
-          }
-        }
+        if (RAG && RAG.evidenceGate) return RAG.evidenceGate(text, evidenceText, q).ok;
       } catch (e) {}
-      return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+      return true;
+    }
+    /* Owner, 2026-09-21 ("even we search dont show whole topic in detail"): a failed gate used to
+     * throw the whole answer away and print ONE snippet. Now: retry once with a sources-only
+     * prompt at temperature 0; if that fails too, show EVERY result in full, so the clinician still
+     * gets the topic, just quoted rather than written. */
+    function digest() {
+      return "The on-device model's answer could not be verified against the web results, so here are the " +
+        "results themselves:\n\n" + list.map(function (s, i) {
+          return "**" + (i + 1) + ". " + String(s.title || s.site || "Source").trim() + "**" +
+            (s.snippet ? "\n" + String(s.snippet).trim() : "") + (s.url ? "\n" + String(s.url) : "");
+        }).join("\n\n");
+    }
+    var STRICT = WEB_SYS + "\nSTRICT MODE: use ONLY facts, figures and drug names that appear in the numbered WEB RESULTS. " +
+      "Cite [n] after each. If the results do not cover a point, say so instead of supplying it.";
+    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
+      if (!text) return { error: "no-answer" };
+      if (gateOf(text)) return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+      var o2 = {}; for (var k in (opts || {})) o2[k] = opts[k]; o2.temperature = 0;
+      return generateText(prompt, STRICT, WEB_MAX, o2).then(function (t2) {
+        if (t2 && gateOf(t2)) return { text: emphasize(t2), sources: srcOut, engine: "local", mode: "web-local" };
+        return { text: digest(), sources: srcOut, engine: "local", mode: "web-local" };
+      }, function () { return { text: digest(), sources: srcOut, engine: "local", mode: "web-local" }; });
     });
   }
   function generateJSON(prompt, system, nPredict, opts) {
@@ -2216,7 +2259,7 @@
   }
 
   var API = {
-    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
+    SYSTEM: SYSTEM, systemFor: systemFor, finishCut: finishCut, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
     // local task layer (2026-09-11)
     TUTOR_SYS: TUTOR_SYS, SURG_SYS: SURG_SYS, MODE_SYS: MODE_SYS,
     estTokens: estTokens, splitWindows: splitWindows, windowBudget: windowBudget, numbersIn: numbersIn, canonNum: canonNum, dropUnsupportedNumbers: dropUnsupportedNumbers, stripIndic: stripIndic, mergeText: mergeText,

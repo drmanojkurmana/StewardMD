@@ -92,24 +92,16 @@
   // Entitlement and pack (downloaded) are separate: entitled-but-not-downloaded must show a
   // download row, not disappear.
   //
-  // PRO IS THE GATE (owner decision, 2026-08-27). The shared experimental access-code gate
-  // (SMD_XACCESS "maik_local") is gone: on-device answering is a paid feature, not a private beta,
-  // so a code must not unlock it for a non-subscriber, and a subscriber must never be asked for
-  // one. SMD_PRO (account.js) is the single source of truth and fails OPEN, which is the right
-  // direction here - a network blip must never lock a paying clinician out of a 2.5 GB model that
-  // is already sitting on their phone.
-  function gateActive() {
-    // Owner/QA escape hatch, same convention as the NMC verify bypass: lets the on-device engine be
-    // driven on a device that has no Pro state to read. The device harnesses set it
-    // (test/eval-device-maik-local.mjs, test/drive-device-llama.mjs); by hand, in the WebView console:
-    //   localStorage.setItem("smd_maik_local_bypass","1")
-    try { if (lget("smd_maik_local_bypass") === "1") return true; } catch (e) {}
-    // A DEVELOPMENT build opens it too, so the feature is reachable on a debug install with no Pro
-    // state and no JS console to set the bypass by hand. Release builds report debugBuild:false
-    // from the native plugin, so production still requires a live subscription.
-    try { if (window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.isDebugBuild && window.SMD_MAIK_LOCAL.isDebugBuild()) return true; } catch (e) {}
-    try { return !!(window.SMD_PRO && window.SMD_PRO.isProSync && window.SMD_PRO.isProSync()); } catch (e) { return false; }
-  }
+  /* ON-DEVICE MODELS ARE FREE FOR EVERYONE (owner decision, 2026-09-20).
+   *
+   * "Every free user, irrespective of any user or guest user, should have AI models on and
+   * available. No Pro needed." This reverses the 2026-08-27 "Pro is the gate" decision for
+   * on-device answering (vault/decisions/Decisions.md). The trigger was the owner's own phone:
+   * the Pro verdict read false and every model vanished behind "Subscribe to unlock". Rather
+   * than tune the verdict, the dependency is gone: no SMD_PRO, no debug-build exception, no
+   * bypass key. MaiK Cloud keeps its own gate (tokens cost money); this is the on-device engine
+   * only. The function stays so every call site keeps reading one answer. */
+  function gateActive() { return true; }
   function runtimeAvailable() {
     try {
       var L = window.SMD_MAIK_LOCAL;
@@ -160,18 +152,6 @@
       var st = (M && M.state) ? M.state(pid) : { frac: 0, downloading: false };
       var why, how;
       if (!runtimeAvailable()) { why = "this build cannot run on-device models"; how = "Update the app, or switch to **MaiK Cloud**."; }
-      // The model IS fully installed and the runtime IS here, but the experimental gate is shut. Before
-      // this branch that case fell through to "only partly downloaded (100%) - select it again to
-      // resume", which is nonsense advice for a model that is already on the device, and is exactly
-      // what a clinician sees after downloading 2.5 GB. Say the true thing instead.
-      else if (packInstalled() && !gateActive()) {
-        var L0 = window.SMD_MAIK_LOCAL;
-        var checking = !!(L0 && L0.debugProbed && !L0.debugProbed());
-        why = "**" + label + "** is downloaded, but on-device answering is not unlocked on this account";
-        how = checking
-          ? "Still checking with the device - reopen this screen in a moment. If it stays locked, use **MaiK Cloud**."
-          : "Use **MaiK Cloud** for now. On-device answering is included with Pro.";
-      }
       else if (st.downloading) { why = "**" + label + "** is still downloading (" + (st.frac * 100).toFixed(0) + "%)"; how = "It will answer here as soon as the download finishes. Until then pick **MaiK Cloud** or **KB only**."; }
       else if (st.frac > 0) { why = "**" + label + "** is only partly downloaded (" + (st.frac * 100).toFixed(0) + "%)"; how = "Tap the model name at the top of this screen and select it again to resume the download."; }
       else { why = "**" + label + "** is not downloaded to this device yet"; how = "Tap the model name at the top of this screen and select it to start the download."; }
@@ -596,16 +576,9 @@
         (on ? "1" : "0") + '">✓</span></button>';
     }
 
-    var gated = gateActive(), rt = runtimeAvailable(), have = packInstalled();
+    var rt = runtimeAvailable(), have = packInstalled();
     var localDesc, localDisabled = false;
-    var proKnown = true;
-    try { proKnown = !window.SMD_PRO || !window.SMD_PRO.proKnown || window.SMD_PRO.proKnown(); } catch (e) { proKnown = true; }
-    // "Not Pro" and "have not asked the server yet" are different answers. On the first launch of a
-    // build the per-uid Pro cache is empty, so the honest state for a second is CHECKING, not
-    // "subscribe". The row re-renders itself when the verdict lands (see watchPro).
-    if (!gated && !proKnown) { localDesc = "Checking your subscription…"; localDisabled = true; }
-    else if (!gated) { localDesc = "Included with Pro. Subscribe to unlock, then download the model."; localDisabled = true; }
-    else if (!rt) { localDesc = "Needs the latest native app build. Update the app to use this."; localDisabled = true; }
+    if (!rt) { localDesc = "Needs the latest native app build. Update the app to use this."; localDisabled = true; }
     else if (!have) { localDesc = "Ready to set up. Download the model to answer without any AI tokens."; }
     else { localDesc = "The model's own knowledge, on this device. Fast, no network, no tokens, and no StewardMD grounding, so it can be wrong."; }
 
@@ -616,10 +589,10 @@
           "StewardMD knowledge base only, with citations. No AI tokens, works offline.", true, false) +
       opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e"),
           "Gemini, grounded in the StewardMD knowledge base. Uses AI tokens.", false, false) +
-      opt("local", "On-device model", pill("Pro", "#fef3c7", "#92400e") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
+      opt("local", "On-device model", pill("Free", "#dcfce7", "#166534") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
-      (gated && rt ? capsHTML() + modelRowHTML() : "") +
+      (rt ? capsHTML() + modelRowHTML() : "") +
       '</div>';
   }
 
@@ -1069,7 +1042,6 @@
     root.querySelectorAll("[data-me-opt]").forEach(function (b) {
       b.addEventListener("click", function () {
         var want = b.getAttribute("data-me-opt");
-        if (want === "local" && !gateActive()) { toast("The on-device model is included with Pro."); return; }
         if (want === "local" && !runtimeAvailable()) { toast("The on-device model needs the latest app build."); return; }
         if (want === "local" && !packInstalled()) { setPref(want); rerender(b, root); return startDownload(b, root); }
         setPref(want);
@@ -1229,7 +1201,11 @@
   function chipLabel() {
     var cur = currentOptionId();
     var o = options().filter(function (x) { return x.id === cur; })[0];
-    var base = o ? o.label : (getPref() === "rag" ? "KB only" : "MaiK Cloud");
+    // A gated on-device pick has no option row (options() hides the packs), and the chip then read
+    // "MaiK Cloud (not ready)" - the owner took that as Cloud being broken (2026-09-20). Name the pack.
+    var _pk = null;
+    try { var _M0 = window.SMD_MAIK_MODELS; _pk = (_M0 && _M0.PACKS && _M0.PACKS[activePack()]) ? _M0.PACKS[activePack()].label : null; } catch (e) {}
+    var base = o ? o.label : (getPref() === "rag" ? "KB only" : (getPref() === "local" && _pk) ? _pk : "MaiK Cloud");
     // Never let the chip imply an on-device model is answering when it is not ready. Silent
     // degrade-to-KB with a model name still showing is how "I get no answer" happens.
     if (getPref() === "local" && !localReady()) {
@@ -1266,6 +1242,10 @@
         ? "On-device \u00b7 StewardMD knowledge base, verify independently"
         : "On-device \u00b7 AI-generated, no sources, verify independently";
     }
+    // Pref is on-device but the pack cannot answer yet, so KB only is standing in. Say so: the KB
+    // switch reads "disconnected" while this footer names the knowledge base, and without the
+    // reason that looks like the footer ignoring the switch (owner, 2026-09-20).
+    if (e === "rag" && getPref() === "local") return "Knowledge base (on-device model not ready) \u00b7 verify independently";
     if (e === "rag") return "StewardMD knowledge base \u00b7 verify independently";
     return "Grounded \u00b7 AI-generated, verify independently";
   }
@@ -1390,18 +1370,41 @@
         return (g ? groupHeadHTML(g) : "") + rows.map(oneRowHTML).join("");
       }).join("");
     }
+    /* Bars instead of prose (owner, 2026-09-21: "telling about model in simple bars or words").
+     * Depth is the caps table's reasoning tier; Speed is its inverse. ponytail: speed is a proxy from
+     * model size, swap for measured tok/s once the on-device bench records one. */
+    function meterHTML(label, n) {
+      var segs = "";
+      for (var i = 1; i <= 3; i++) {
+        segs += '<i style="display:inline-block;width:14px;height:4px;border-radius:2px;margin-right:2px;background:' +
+          (i <= n ? "var(--mk-teal,#0e6e63)" : "var(--mk-bd,#dbe3ee)") + '"></i>';
+      }
+      return '<span style="display:inline-flex;align-items:center;gap:6px;margin-right:14px" aria-label="' + label + ' ' + n + ' of 3">' +
+        '<span style="font:600 10.5px/1 var(--sans,system-ui);letter-spacing:.03em;text-transform:uppercase;color:var(--mk-mut,#5a7184)">' + label + '</span>' +
+        '<span aria-hidden="true">' + segs + '</span></span>';
+    }
+    function metersHTML(o) {
+      if (!o.pack) return "";
+      var M = window.SMD_MAIK_MODELS, c = null, size = "";
+      try { c = M && M.caps ? M.caps(o.pack) : null; size = M && M.sizeLabel ? M.sizeLabel(o.pack) : ""; } catch (e) {}
+      var depth = Math.max(1, Math.min(3, (c && c.reasoning) || 2)), speed = 4 - depth;
+      return '<span style="display:flex;align-items:center;flex-wrap:wrap;margin-top:7px">' + meterHTML("Depth", depth) + meterHTML("Speed", speed) +
+        (size ? '<span style="font:500 11px/1 var(--sans,system-ui);color:var(--mk-mut,#5a7184)">' + esc(size) + '</span>' : "") + '</span>';
+    }
     function oneRowHTML(o) {
       return [o].map(function (o) {
         var on = o.id === cur;
+        var badge = (o.pack && o.badge === "OFFLINE") ? "" : o.badge;   // every on-device row is offline; the bars say it
         return '<button type="button" data-mk-pick="' + o.id + '" role="option" aria-selected="' + on + '" ' +
           'style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;border:0;' +
           'background:' + (on ? "var(--mk-tsoft,#e6f4f1)" : "transparent") + ';padding:14px 16px;' +
           'color:var(--mk-ink,#14202b);-webkit-tap-highlight-color:transparent">' +
           '<span style="flex:1;min-width:0">' +
             '<span style="display:flex;align-items:center;gap:7px;font:600 15px/1.25 var(--sans,system-ui)">' + esc(o.label) +
-              '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + o.badge + '</span>' +
+              (badge ? '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + badge + '</span>' : "") +
             '</span>' +
             '<span data-mk-sub="' + o.id + '" style="display:block;font:500 12px/1.4 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:3px">' + esc(o.sub) + '</span>' +
+            metersHTML(o) +
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:18px;text-align:center;color:var(--mk-teal,#0e6e63);font-size:15px;font-weight:800;opacity:' + (on ? "1" : "0") + '">\u2713</span>' +
           '</button>';
@@ -1445,11 +1448,17 @@
         '</div>';
     }
 
-    ov.innerHTML = '<div id="maikModelSheetInner" style="width:100%;background:var(--mk-bg,#fff);border-radius:18px 18px 0 0;padding:8px 0 max(14px,env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.28)">' +
-      '<div style="width:38px;height:4px;border-radius:2px;background:var(--mk-bd,#dbe3ee);margin:6px auto 10px"></div>' +
-      '<div style="font:700 13px/1.2 var(--sans,system-ui);color:var(--mk-mut,#5a7184);padding:0 16px 8px">Answer with</div>' +
-      '<div id="maikModelRows" role="listbox">' + rowsHTML() + '</div>' +
-      '<div id="maikKbRow">' + kbRowHTML() + '</div>' +
+    // Owner screenshot 2026-09-21: twelve rows overflowed the screen with no scroll and no way back.
+    // The sheet is capped, the list scrolls inside it, the header (title + close) and the Knowledge
+    // Base switch stay put. Tapping the dim backdrop still closes it.
+    ov.innerHTML = '<div id="maikModelSheetInner" style="display:flex;flex-direction:column;width:100%;max-height:min(88dvh,88vh);background:var(--mk-bg,#fff);border-radius:18px 18px 0 0;padding:8px 0 max(14px,env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.28)">' +
+      '<div style="flex:0 0 auto;width:38px;height:4px;border-radius:2px;background:var(--mk-bd,#dbe3ee);margin:6px auto 4px"></div>' +
+      '<div style="flex:0 0 auto;display:flex;align-items:center;padding:0 8px 4px 16px">' +
+        '<span style="flex:1;font:700 17px/1.2 var(--sans,system-ui);color:var(--mk-ink,#14202b)">Answer with</span>' +
+        '<button type="button" data-mk-close="1" aria-label="Close" style="width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--mk-mut,#5a7184);font:400 22px/1 var(--sans,system-ui);cursor:pointer;-webkit-tap-highlight-color:transparent">\u00d7</button>' +
+      '</div>' +
+      '<div id="maikModelRows" role="listbox" style="flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain">' + rowsHTML() + '</div>' +
+      '<div id="maikKbRow" style="flex:0 0 auto">' + kbRowHTML() + '</div>' +
       '</div>';
     document.body.appendChild(ov);
 
@@ -1481,13 +1490,14 @@
         if (kb.disabled) return;                 // cloud / KB-only are always grounded
         setRagLinked(!ragLinked());
         repaintKb();
-        try { if (window.SMD_HAPTICS && SMD_HAPTICS.tap) SMD_HAPTICS.tap(); } catch (e2) {}
+        try { if (window.SMD_HAPTICS && SMD_HAPTICS.selection) SMD_HAPTICS.selection(); } catch (e2) {}
         return;
       }
       var btn = e.target && e.target.closest ? e.target.closest("[data-mk-pick]") : null;
-      if (!btn) { if (e.target === ov) closePicker(); return; }
+      if (!btn) { if (e.target === ov || (e.target.closest && e.target.closest("[data-mk-close]"))) closePicker(); return; }
       var optId = btn.getAttribute("data-mk-pick");
       var chosen = options().filter(function (x) { return x.id === optId; })[0];
+      try { if (window.SMD_HAPTICS && SMD_HAPTICS.selection) SMD_HAPTICS.selection(); } catch (e2) {}
       selectOption(optId);
       // Picking an on-device model that is not downloaded starts the download right here.
       if (chosen && chosen.needsDownload && chosen.pack) {
@@ -1516,27 +1526,6 @@
     syncChip();
   }
 
-  /* Pro decides gateActive(), and it is read synchronously while painting the settings row and the
-   * picker - but /billing/status resolves AFTER that paint. Before this, the row rendered locked on
-   * first launch of a build (the per-uid Pro cache had never been written) and never corrected
-   * itself, which is exactly "the on-device model is not working". Re-render on the flip. */
-  (function watchPro() {
-    if (typeof window === "undefined" || window.__smdMaikProWatch) return;
-    window.__smdMaikProWatch = 1;
-    var onFlip = function () {
-      try {
-        var seg = document.querySelector(".me-seg");
-        if (seg) rerender(seg.querySelector("[data-me-opt]") || seg, seg.parentNode || document);
-      } catch (e) {}
-      try { syncChip(); } catch (e) {}
-      // Now that the gate may be open, warm the model if it is the chosen engine.
-      try { warmIfLocal(); } catch (e) {}
-    };
-    try {
-      if (window.SMD_PRO && window.SMD_PRO.onProChange) window.SMD_PRO.onProChange(onFlip);
-      else window.addEventListener("smd:pro", onFlip);   // account.js may load after this module
-    } catch (e) {}
-  })();
 
   var API = {
     KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, PACK_ID: PACK_ID,
