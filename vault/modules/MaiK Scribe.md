@@ -306,3 +306,42 @@ work when switched on and both keep their tests (opted in).
   unsure; `informany_attendant` / `informant_relation` — a person's name, mis-attribution is worse
   than blank; `BMI` / `bsa` — computed from height and weight, never extracted; `waist_cm` /
   `muac_cm` — these need regexes in `voice-vitals.js`, which was outside this session's ownership.
+
+## 2026-09-21 — merged to main, and still NOT device-verified
+
+PR **#1153** (the 18 improvements + the autofill regression fix) and PR **#1173** (a CI-only test
+fix) are merged to `main`. The OTA candidate is staged by CI. Going live is the owner pressing
+**Push to devices** in `stewardmd.in/admin` → App updates; nothing reaches a phone until then.
+
+**Nothing in this module has ever run on a physical device.** This session could not build one:
+Xcode and Google Chrome are both absent from `/Applications` and the Mac is at 99.5% disk (1.2 GB
+free of 244 GB), so there is no `xcodebuild`, no `devicectl`, and no headless Chrome for the CDP
+harness that `CLAUDE.md` requires for UI claims. The owner declined disk cleanup and chose the OTA
+route. Every claim about this module rests on Node tests alone.
+
+**Unverified and load-bearing for the OTA route:** it was never confirmed that the app installed on
+the owner's iPhone can receive OTA at all. This note says devices need a native rebuild since
+2026-08-24 to carry the updater plugin, and both native `autoUpdate` and JS `isAuto()` default to
+off, so the update also needs an explicit tap on the phone. The iPhone dropped off USB before
+`ios_webkit_debug_proxy` could be attached to check. If the installed build predates the plugin
+re-link, OTA cannot deliver this fix and a native rebuild is the only path — which needs Xcode and
+disk space.
+
+### A main-branch bug found while merging (not caused by this branch)
+`home.js:7058` read the engine through a bare global inside a try/catch:
+`window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.effective ? SMD_MAIK_ENGINE.effective() : null`.
+Where `SMD_MAIK_ENGINE` is not also an implicit global the bare reference throws, the catch swallows
+it, `_eff` stays null, and the next line sends the question to `maikRunResearch` — the cloud path —
+even though the doctor selected an on-device engine. That violates the hard Local AI policy, and it
+was live on `main`: `test/maik-router-scope.test.mjs` was red at `origin/main`, the test having been
+written for this exact regression. It entered with `91006578d` (2026-09-21, "Research mode
+on-device"). Fixed by qualifying all three references with `window.`.
+
+### CI gotcha this session paid for
+`test/opd-emr-scribe-live.test.mjs` unrefs every timer so the real modules' polling intervals cannot
+hold the process open, then built its own `await` on that same patched global. With no unref'd timer
+left to keep the loop alive, node can resolve the event loop while the promise is still pending, and
+the parent test is cancelled along with every later test in the file (`cancelledByParent`,
+"Promise resolution is still pending but the event loop has already resolved"). It passed locally
+every run and only failed on CI. A test that patches the global timer must build its own ticks on
+the captured real `setTimeout`.
