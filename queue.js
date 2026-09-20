@@ -197,11 +197,27 @@
   // PIN so they sign in at stewardmd.in/opd. Reuses the live server endpoints (GET /org, GET /members,
   // POST /member [+ /member/pin]); owner authority via STAFF_ADMIN. GHIS/hospital sessions are skipped
   // (staff there are managed in the hospital's own system). ----
+  /* The add-staff fields live inside the profile sheet, and loadClinicAdmin repaints that whole
+   * sheet when /org and /members land - which wiped the login name and PIN the owner was part-way
+   * through typing, so staff could never be added unless both responses beat the typing. Repaint
+   * the sheet, then put the half-typed entry (and the caret) back. */
+  var STAFF_FIELDS = ["qStaffName", "qStaffRole", "qStaffPin"];
+  function paintKeepingStaffEntry() {
+    var vals = {}, active = document.activeElement, activeId = active && active.id, selStart = null, selEnd = null;
+    STAFF_FIELDS.forEach(function (id) { var el = document.getElementById(id); if (el) vals[id] = el.value; });
+    if (activeId && STAFF_FIELDS.indexOf(activeId) >= 0) { try { selStart = active.selectionStart; selEnd = active.selectionEnd; } catch (e) {} }
+    paint();
+    STAFF_FIELDS.forEach(function (id) { var el = document.getElementById(id); if (el && vals[id]) el.value = vals[id]; });
+    if (activeId && STAFF_FIELDS.indexOf(activeId) >= 0) {
+      var again = document.getElementById(activeId);
+      if (again) { try { again.focus(); if (selStart != null && again.setSelectionRange) again.setSelectionRange(selStart, selEnd); } catch (e) {} }
+    }
+  }
   function loadClinicAdmin() {
     if (!st.orgId || st.ghisToken) { st.clinicAdmin = null; return; }
     st.clinicAdmin = st.clinicAdmin || {};
-    apiGet("/org?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { if (r && r.ok && r.org) { st.clinicAdmin.code = r.org.code || ""; st.clinicAdmin.name = r.org.name || ""; if (st.profileOpen) paint(); } }).catch(function () {});
-    apiGet("/members?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { if (r && r.ok) { st.clinicAdmin.members = r.members || []; if (st.profileOpen) paint(); } }).catch(function () {});
+    apiGet("/org?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { if (r && r.ok && r.org) { st.clinicAdmin.code = r.org.code || ""; st.clinicAdmin.name = r.org.name || ""; if (st.profileOpen) paintKeepingStaffEntry(); } }).catch(function () {});
+    apiGet("/members?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { if (r && r.ok) { st.clinicAdmin.members = r.members || []; if (st.profileOpen) paintKeepingStaffEntry(); } }).catch(function () {});
   }
   function roleLabel(r) { return r === "nurse" ? "Nursing" : r === "cashier" ? "Billing" : r === "reception" ? "Reception" : r === "admin" ? "Admin" : r === "doctor" ? "Doctor" : r === "supervisor" ? "Supervisor" : (r || "Staff"); }
 
