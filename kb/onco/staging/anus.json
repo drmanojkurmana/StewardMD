@@ -1,0 +1,172 @@
+{
+  "site": "anus",
+  "name": "Anus (anal canal)",
+  "system": "Oncology / Gastrointestinal",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Staging applies to squamous cell carcinoma of the anal canal (including the anal margin where it behaves as canal disease). The 8th edition keeps size-based T (2 cm and 5 cm cutoffs) and redefines N by nodal basin rather than number: inguinal, mesorectal and internal iliac (including obturator) nodes form one group, external iliac nodes another. Invasion of sphincter muscle, rectal wall or perianal skin alone does not qualify as T4; T4 requires invasion of an adjacent organ such as vagina, urethra or bladder. HPV/p16 status is prognostic but does not change the anatomic stage group.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "High-grade squamous intraepithelial lesion (previously carcinoma in situ)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour 2 cm or smaller in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour larger than 2 cm up to 5 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour larger than 5 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour invades adjacent organ(s) such as vagina, urethra or bladder; sphincter, rectal wall or skin invasion alone is not T4",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1a",
+          "label": "Metastasis in inguinal, mesorectal and/or internal iliac (including obturator) nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1b",
+          "label": "Metastasis in external iliac node(s)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1c",
+          "label": "Metastasis in both external iliac and N1a-group nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "In situ",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T1 or T2",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Small tumour with regional nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Organ invasion, node negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T3 or T4",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Large or invasive tumour with nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Perirectal (mesorectal), internal iliac (including obturator), external iliac and inguinal nodes. Iliac nodes above the bifurcation and para-aortic nodes are non-regional (M1).",
+      "histologicGrade": "Well differentiated (G1), moderately differentiated (G2), poorly differentiated (G3), undifferentiated (G4); basaloid and non-keratinising variants graded by the same scale.",
+      "histopathologicTypes": "Keratinising and non-keratinising (basaloid/cloacogenic) squamous cell carcinoma; adenocarcinoma of anal glands or fistula tracts is staged as rectal cancer, and melanoma and neuroendocrine tumours use their own systems.",
+      "prognosticFactors": [
+        "Tumour size",
+        "Nodal basin involvement (N1a vs N1b vs N1c)",
+        "HPV / p16 status",
+        "HIV infection and immune status",
+        "Histologic grade",
+        "Treatment by chemoradiation response"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

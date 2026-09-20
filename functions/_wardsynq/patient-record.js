@@ -50,6 +50,8 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { TYPE as DOC_TYPE } from "./documents.js";
+import { DISCHARGE_SCOPES, documentUnavailable, releasedDischargeSummaries } from "./portal-view.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -134,43 +136,118 @@ async function open_(request, env, ctx, need) {
   }
 }
 
-/** Reads every part of the handout. Writes nothing. */
+/**
+ * Reads every part of the handout. Writes nothing.
+ *
+ * R6-2, the break-glass.js:263-275 pattern: A PART THAT COULD NOT BE READ IS NAMED, NEVER SHOWN AS
+ * NOTHING. Every one of these reads used to be `.catch(() => [])`, so a store hiccup printed "No
+ * allergies are recorded for you" on the page a patient carries to the next hospital, and an
+ * unreadable diagnosis list printed as a patient with no diagnoses. A failed read now leaves its
+ * section `null` - which is not an empty list and is drawn differently - and names the type in
+ * `unreadableTypes`. A GovernanceError is not a failed read and is not caught here: it is the 403
+ * the callers already answer.
+ */
 async function assemble(svc, patientId, neverRelease) {
+  const unreadableTypes = [];
+  const read = async (type, p) => {
+    try { return await p; }
+    catch (e) { if (e instanceof GovernanceError) throw e; unreadableTypes.push(type); return null; }
+  };
   const [patient, conditions, allergies, meds, reports, loops, appointments] = await Promise.all([
-    svc.get("Patient", patientId).catch(() => null),
-    svc.byPatient("Condition", patientId).catch(() => []),
-    svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
-    svc.byPatient("MedicationOrder", patientId).catch(() => []),
-    svc.byPatient("DiagnosticReport", patientId).catch(() => []),
-    svc.byPatient("CriticalResultLoop", patientId).catch(() => []),
-    svc.byPatient("Appointment", patientId).catch(() => []),
+    read("Patient", svc.get("Patient", patientId)),
+    read("Condition", svc.byPatient("Condition", patientId)),
+    read("AllergyIntolerance", svc.byPatient("AllergyIntolerance", patientId)),
+    read("MedicationOrder", svc.byPatient("MedicationOrder", patientId)),
+    read("DiagnosticReport", svc.byPatient("DiagnosticReport", patientId)),
+    read("CriticalResultLoop", svc.byPatient("CriticalResultLoop", patientId)),
+    read("Appointment", svc.byPatient("Appointment", patientId)),
   ]);
+  /* A report is releasable only if no OPEN critical-result loop covers it. With the loops unreadable
+   * that question cannot be answered, so no result is released rather than every result being
+   * released as if no loop existed - the one failure this file's header calls the oldest in the area. */
+  const resultsUnreadable = reports === null || loops === null;
 
   const openIds = openCriticalReportIds(loops);
   const withheld = [];
   const released = [];
-  for (const r of (reports || []).filter(Boolean)) {
+  for (const r of (resultsUnreadable ? [] : reports).filter(Boolean)) {
     const verdict = releasableReport(r, openIds, neverRelease);
     if (verdict.ok) released.push({ id: r.id, name: r.panel || r.display || r.code || "Test result", reportedAt: r.reportedAt || null, status: r.status, conclusion: r.conclusion || null });
     else withheld.push({ reason: verdict.reason, say: verdict.say, reportedAt: r.reportedAt || null });
   }
 
-  const diagnoses = (conditions || []).map(diagnosisFor).filter(Boolean);
+  const diagnoses = conditions === null ? null : conditions.map(diagnosisFor).filter(Boolean);
   /* Counted, because "we left three things out" and "there was nothing else" are different
-   * statements and only one of them is true here. */
-  const excludedDiagnoses = (conditions || []).filter(Boolean).length - diagnoses.length;
+   * statements and only one of them is true here. null when the conditions could not be read: a
+   * count of zero exclusions from a list nobody read is a claim this file cannot make. */
+  const excludedDiagnoses = diagnoses === null ? null : conditions.filter(Boolean).length - diagnoses.length;
 
   return {
-    patient: patient ? { id: patient.id, name: patient.name, mrn: patient.mrn, dob: patient.dob } : null,
+    unreadableTypes,
+    /* LT-24: a date of birth worked out from a typed age is not a date of birth. It is left off a page
+     * the patient is handed rather than printed as if somebody had recorded it. */
+    patient: patient ? { id: patient.id, name: patient.name, mrn: patient.mrn, dob: patient.approxDob ? null : patient.dob } : null,
     diagnoses, excludedDiagnoses,
     /* Never filtered by anything in this file. The value of an allergy list is that the patient
      * carries it to the next hospital, and one this file could trim would not be worth carrying. */
-    allergies: (allergies || []).filter(Boolean).map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null, criticality: a.criticality || null })),
-    medicines: (meds || []).filter(Boolean).filter((m) => str(m.status) !== "stopped" && str(m.status) !== "cancelled")
-      .map((m) => ({ drug: m.drug || m.drugCode, dose: m.dose || null, route: m.route || null, frequency: m.frequency || null, note: m.note || null })),
-    results: released, withheldResults: withheld,
-    appointments: (appointments || []).filter(Boolean).map((a) => ({ at: a.startsAt || a.at || null, with: a.clinicianName || a.clinicianId || null, kind: a.kind || null })),
+    allergies: allergies === null ? null : allergies.filter(Boolean).map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null, criticality: a.criticality || null })),
+    medicines: meds === null ? null : meds.filter(Boolean).filter((m) => str(m.status) !== "stopped" && str(m.status) !== "cancelled")
+      .map((m) => ({ drug: m.drug || m.drugCode, dose: m.dose || null, route: m.route || null, frequency: m.frequency || null, note: m.note || null,
+        // Closed-list codes (migrate-inpatient.js PATIENT_INSTRUCTIONS); the page prints their catalog wording.
+        ...(Array.isArray(m.patientInstructions) && m.patientInstructions.length ? { patientInstructions: m.patientInstructions.map(String) } : {}) })),
+    results: resultsUnreadable ? null : released, withheldResults: resultsUnreadable ? null : withheld,
+    appointments: appointments === null ? null : appointments.filter(Boolean).map((a) => ({ at: a.startsAt || a.at || null, with: a.clinicianName || a.clinicianId || null, kind: a.kind || null })),
   };
+}
+
+/**
+ * PURE. D5: what the portal needs to judge each entry of a signed discharge summary, now. Internal to the
+ * server: it describes withheld reports, so it is never sent to a browser.
+ * withheldReports: every report #940 withholds (any reason); diagnosisIds: conditions that are diagnoses;
+ * excludedDiagnoses: how many are not, counted exactly as assemble() counts them.
+ */
+function withholdingFacts(reports, loops, conditions, neverRelease) {
+  const openIds = openCriticalReportIds(loops);
+  const rows = (conditions || []).filter(Boolean);
+  const diagnosisIds = rows.filter((c) => diagnosisFor(c)).map((c) => str(c.id));
+  return {
+    withheldReports: (reports || []).filter(Boolean).filter((r) => !releasableReport(r, openIds, neverRelease).ok)
+      .map((r) => ({ serviceRequestId: str(r.serviceRequestId), code: str(r.code).toUpperCase(), encounterId: str(r.encounterId) })),
+    blockedCodes: (neverRelease || []).map((c) => str(c).toUpperCase()).filter(Boolean),
+    diagnosisIds, excludedDiagnoses: rows.length - diagnosisIds.length,
+  };
+}
+
+/** The facts, or null when any of their reads failed. Unlike assemble(), a failed read is never an empty list here. */
+async function readWithholdingFacts(svc, patientId, neverRelease) {
+  try {
+    const [reports, loops, conditions] = await Promise.all([
+      svc.byPatient("DiagnosticReport", patientId), svc.byPatient("CriticalResultLoop", patientId), svc.byPatient("Condition", patientId),
+    ]);
+    return withholdingFacts(reports, loops, conditions, neverRelease);
+  } catch (_) { return null; }
+}
+
+/**
+ * D5: what the patient's own portal access shows of the signed discharge summaries once a handover with
+ * each scope is recorded: the releases already on file plus that one, through the portal's own function
+ * with the same facts. The Patient copy screen draws it with the portal's own renderer.
+ * Returns { scopes: { "patient-copy": [...], full: [...] }, checked } or null when the notes or releases
+ * could not be read. checked false: the facts could not be read, so every guarded entry shows withheld.
+ */
+async function portalPreview(svc, patientId, neverRelease) {
+  let notes, releases;
+  try {
+    [notes, releases] = await Promise.all([svc.byPatient("ClinicalNote", patientId), svc.byPatient(RELEASE_TYPE, patientId)]);
+  } catch (_) { return null; }
+  const facts = await readWithholdingFacts(svc, patientId, neverRelease);
+  const signed = (notes || []).filter((n) => n && n.noteType === "discharge-summary" && n.signedBy);
+  const scopes = {};
+  for (const scope of DISCHARGE_SCOPES) {
+    const handover = { dischargeSummaries: signed.map((n) => ({ id: n.id, version: n.version, scope })) };
+    scopes[scope] = releasedDischargeSummaries(notes, [...(releases || []), handover], { patientCopy: true, full: true, facts });
+  }
+  return { scopes, checked: facts !== null };
 }
 
 /**
@@ -183,12 +260,21 @@ async function assemble(svc, patientId, neverRelease) {
  */
 function statements(doc) {
   const out = [];
-  if (doc.withheldResults.length) {
+  /* R6-2: FIRST, because everything under it is then read in the right light. A section that could
+   * not be read is not a section with nothing in it, and a patient handed this page has no other
+   * way to tell the two apart. */
+  if ((doc.unreadableTypes || []).length) {
+    out.push("Part of your record could not be read when this page was made, so something may be missing from it. Ask your care team before you rely on this page.");
+  }
+  if (doc.withheldResults === null) {
+    out.push("Your results could not be read when this page was made, so none of them are shown here. That does not mean you have none.");
+  }
+  if (doc.withheldResults && doc.withheldResults.length) {
     /* Named, never silently absent: a missing result reads as a test nobody did, which is more
      * reassuring than the truth and in the wrong direction. */
     out.push(`${doc.withheldResults.length} result${doc.withheldResults.length === 1 ? " is" : "s are"} not included here. Your care team will discuss ${doc.withheldResults.length === 1 ? "it" : "them"} with you.`);
   }
-  if (doc.excludedDiagnoses > 0) {
+  if (doc.excludedDiagnoses !== null && doc.excludedDiagnoses > 0) {
     out.push("Some entries on your record are possibilities your team was still considering, or have been ruled out. Those are not listed here because they are not diagnoses.");
   }
   out.push("This is a summary your care team has given you. It is not your complete medical record - you can ask the hospital for that separately.");
@@ -196,9 +282,16 @@ function statements(doc) {
 }
 
 /** PURE. What the clinician must read BEFORE handing the page over. Never printed on it. */
-function clinicianWarnings(neverReleaseConfigured) {
-  if (neverReleaseConfigured) return [];
-  return ["This hospital has not configured wardsynq.neverRelease, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over."];
+function clinicianWarnings(neverReleaseConfigured, unreadableTypes) {
+  const out = [];
+  /* R6-2: the clinician is the one who can still act on this, and they are told in their own words
+   * which parts of the chart the store would not give up. The patient's own sentence (statements)
+   * says it without the type names. */
+  if ((unreadableTypes || []).length) {
+    out.push(`This page is incomplete: ${unreadableTypes.join(", ")} could not be read. Do not hand it over as a full summary, and do not read a blank section as nothing recorded.`);
+  }
+  if (!neverReleaseConfigured) out.push("This hospital has not chosen any results to withhold from patients, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over.");
+  return out;
 }
 
 /** ctx: { migration, patientId, neverRelease? } - what the patient would be given. Writes nothing. */
@@ -223,9 +316,11 @@ async function patientCopy(request, env, ctx) {
 
   return {
     ...base, ok: true, patientId, document: doc,
+    unreadableTypes: doc.unreadableTypes,
     statements: statements(doc),
-    clinicianWarnings: clinicianWarnings(neverRelease.length > 0),
+    clinicianWarnings: clinicianWarnings(neverRelease.length > 0, doc.unreadableTypes),
     sensitivityConfigured: neverRelease.length > 0,
+    portalPreview: await portalPreview(svc, patientId, neverRelease),
     /* Said on the preview, which is the moment a clinician can still act on it. */
     preview: "Nothing has been given to the patient. Recording the handover is a separate, deliberate act.",
   };
@@ -242,6 +337,10 @@ async function releaseToPatient(request, env, ctx) {
 
   const patientId = str(ctx.patientId);
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", written: 0 };
+  /* P2: how the signed discharge summaries go to the portal. The clinician chooses; absent is the
+   * patient copy, which is what every release before this was. */
+  const dischargeScope = str(ctx.dischargeScope) || "patient-copy";
+  if (!DISCHARGE_SCOPES.includes(dischargeScope)) return { ...base, ok: false, status: 422, error: "bad_discharge_scope", allowed: DISCHARGE_SCOPES, written: 0 };
 
   const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
@@ -250,6 +349,28 @@ async function releaseToPatient(request, env, ctx) {
   let doc;
   try { doc = await assemble(svc, patientId, neverRelease); }
   catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
+
+  /* R6-2: A HANDOVER IS NOT RECORDED OFF A CHART THAT COULD NOT BE READ. The receipt below counts
+   * allergies, medicines and diagnoses, and a count of zero taken from a read that failed is a
+   * written statement that this patient was handed a page with none - answerable later, and wrong.
+   * The clinician is told which part failed and asked to try again; nothing is written. */
+  if (doc.unreadableTypes.length) {
+    return { ...base, ok: false, status: 502, error: "record_read_failed", unreadableTypes: doc.unreadableTypes,
+      detail: `${doc.unreadableTypes.join(", ")} could not be read, so this handover is not recorded: the receipt would say the patient was given a page these were absent from`, written: 0 };
+  }
+
+  /* P2.9: the signed discharge summaries handed over with this release, by exact version. The patient
+   * portal shows a discharge summary only if a release named that version: a draft, or a correction
+   * signed after the handover, is not on the patient's page until a clinician releases it. */
+  let dischargeSummaries = [];
+  try {
+    dischargeSummaries = ((await svc.byPatient("ClinicalNote", patientId)) || [])
+      .filter((n) => n && n.noteType === "discharge-summary" && n.signedBy)
+      .map((n) => ({ id: n.id, version: n.version, scope: dischargeScope }));
+  } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
   }
@@ -272,6 +393,7 @@ async function releaseToPatient(request, env, ctx) {
     medicineCount: doc.medicines.length,
     allergyCount: doc.allergies.length,
     withheldCount: doc.withheldResults.length,
+    dischargeSummaries, dischargeScope,
     withheldReasons: [...new Set(doc.withheldResults.map((w) => w.reason))],
     sensitivityConfigured: neverRelease.length > 0,
     source: { system: "wardsynq-native", sourceId: `release:${id}` },
@@ -282,8 +404,10 @@ async function releaseToPatient(request, env, ctx) {
     return {
       ...base, ok: true, written: 1, releaseId: id, at, recordVersion: out.record.version,
       document: doc, statements: statements(doc),
-      clinicianWarnings: clinicianWarnings(neverRelease.length > 0),
+      clinicianWarnings: clinicianWarnings(neverRelease.length > 0, doc.unreadableTypes),
       release: record, actor: resolved.actor.id,
+      /* Read after the write, so it includes this release: what the patient's portal now shows. */
+      portalPreview: await portalPreview(svc, patientId, neverRelease),
       note: "Recorded so it is answerable later what this patient was given and when. Nothing was sent anywhere; handing it over is a human act.",
     };
   } catch (e) {
@@ -292,8 +416,70 @@ async function releaseToPatient(request, env, ctx) {
   }
 }
 
+/**
+ * P2: a clinician releases ONE document version to the patient portal. The same receipt as a handover
+ * (PatientRecordRelease), naming the document and version and none of its content.
+ *
+ * The patient is taken from the DOCUMENT, never from the request: releasing a document "to" a
+ * patient it was not filed against would be handing it to the wrong person.
+ *
+ * A withdrawn, purged or past-retention document cannot be released: the portal would refuse to hand
+ * it out, and a release nobody can act on reads as something the patient has been given.
+ *
+ * ctx: { migration, documentId, version, reason?, consentRef?, at?, idempotencyKey? }
+ */
+async function releaseDocumentToPatient(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const documentId = str(ctx.documentId), version = Number(ctx.version);
+  if (!documentId || !Number.isInteger(version) || version < 1) return { ...base, ok: false, status: 422, error: "document_version_required", written: 0 };
+  const reason = str(ctx.reason).slice(0, 500), consentRef = str(ctx.consentRef).slice(0, 200);
+  if (reason.length < 5 && !consentRef) {
+    return { ...base, ok: false, status: 422, error: "reason_required", written: 0,
+      detail: "say why this is being released, or give the consent reference: a release is read later by somebody asking why the patient had it" };
+  }
+
+  const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  let versions;
+  try { versions = (await svc.history(DOC_TYPE, documentId)) || []; }
+  catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
+  const rec = versions.find((x) => Number(x.version) === version);
+  if (!rec) return { ...base, ok: false, status: 404, error: "document_not_found", written: 0 };
+  const gone = documentUnavailable(versions[versions.length - 1], Date.now());
+  if (gone) return { ...base, ok: false, status: 409, error: "document_" + gone.reason, detail: "a withdrawn, deleted or past-retention document cannot be released to the patient", written: 0 };
+
+  const patientId = str(rec.patientId);
+  const at = str(ctx.at) || new Date().toISOString();
+  const id = `wsq-release-${slug(patientId)}-doc-${slug(documentId)}-v${version}-${slug(at)}`;
+  const record = {
+    resourceType: RELEASE_TYPE, id, patientId, at,
+    releasedBy: resolved.actor.id,
+    givenTo: "patient-portal",
+    kind: "document",
+    documents: [{ id: documentId, version }],
+    reason: reason || null, consentRef: consentRef || null,
+    source: { system: "wardsynq-native", sourceId: `release:${id}` },
+  };
+  try {
+    const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, releaseId: id, at, recordVersion: out.record.version, documentId, version, actor: resolved.actor.id,
+      note: "Released to the patient portal. The patient, and a family member granted documents, can now download this version." };
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
+  }
+}
+
 export {
   RELEASE_TYPE, RELEASABLE_STATUS, NOT_A_DIAGNOSIS,
   openCriticalReportIds, releasableReport, diagnosisFor, statements, clinicianWarnings, assemble,
-  patientCopy, releaseToPatient,
+  withholdingFacts, readWithholdingFacts, portalPreview,
+  patientCopy, releaseToPatient, releaseDocumentToPatient,
 };

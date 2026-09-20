@@ -62,9 +62,12 @@ setEngine("rag");
 [["hi"], ["hello"], ["good morning"], ["thanks"]]
   .forEach(([q]) => ok(kind(q) === "casual", "KB-only answers a greeting locally: " + JSON.stringify(q) + " → " + kind(q)));
 
+// On-device used to let the model greet ("free, offline"). Owner transcripts 2026-09-19: MaiK Lite
+// took 7 to 9 s to say hello inside the clinical disclaimer and answer chips, and MAiK Cortex answered
+// "Hi" with a leaked training template ("##Instruction: ... ##Options:"). Same scripted line everywhere.
 setEngine("local");
 [["hi"], ["hello"], ["hey there"], ["hi doctor"], ["good morning"], ["bye"]]
-  .forEach(([q]) => ok(kind(q) === "clinical", "ON-DEVICE lets the model greet (free, offline): " + JSON.stringify(q) + " → " + kind(q)));
+  .forEach(([q]) => ok(kind(q) === "casual", "ON-DEVICE answers a greeting locally too, no model call: " + JSON.stringify(q) + " → " + kind(q)));
 
 // The reply is ONE short line. The old scripted paragraph listing every capability is what made it
 // read as a bot; bringing the routing back must not bring that back with it.

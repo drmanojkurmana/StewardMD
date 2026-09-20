@@ -31,7 +31,11 @@
 (function () {
   "use strict";
 
-  var AGENT_BASE = "/api/connect/agent";
+  /* Absolute on native, like every other API caller (home.js, native-ota.js): the iOS WebView is served
+   * from capacitor://localhost, where a relative /api path resolves to nothing and every call came
+   * back "Could not load your connections" (iPhone 15 Pro, 2026-09-14). Android's https://localhost
+   * happened to tolerate the relative form; the web app has SMD_API_BASE empty and is unchanged. */
+  var AGENT_BASE = (window.SMD_API_BASE || "") + "/api/connect/agent";
   var POLL_MS = 1500;
 
   function esc(s) {
@@ -113,22 +117,30 @@
     st.id = "smd-connect-css";
     st.textContent = [
       ".smd-connect-ov{position:fixed;inset:0;z-index:100000;background:rgba(7,17,25,.48);display:flex;align-items:flex-end;justify-content:center;padding:0}",
+      ".smd-connect-ov{position:fixed;inset:0;z-index:99998;display:flex;align-items:flex-end;justify-content:center;background:rgba(7,17,25,.48);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}",
       ".smd-connect-sheet{width:min(620px,100vw);max-height:92vh;display:flex;flex-direction:column;background:var(--panel,#fff);color:var(--ink,#14202b);border-radius:22px 22px 0 0;box-shadow:0 -18px 60px rgba(0,0,0,.22);font-family:var(--sans,system-ui);will-change:transform}",
+      ".smd-connect-ov[data-compact=\"true\"]{top:52%;height:48%;bottom:0;inset:52% 0 0 0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;align-items:stretch}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-sheet{height:100%;max-height:100%;border-radius:18px 18px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.15);border-top:1px solid rgba(14,124,102,.25)}",
       ".smd-connect-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:0.75rem;padding:0.625rem 1rem calc(0.625rem + env(safe-area-inset-top));background:rgba(255,255,255,.6);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-top:1px solid rgba(255,255,255,.4);border-radius:22px 22px 0 0;touch-action:none;cursor:grab}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-bar{padding:0.5rem 1rem;border-radius:18px 18px 0 0;background:rgba(255,255,255,.95)}",
       ".smd-connect-grip{position:absolute;top:0.375rem;left:50%;width:2.5rem;height:0.25rem;margin-left:-1.25rem;border-radius:999px;background:var(--line,#d7dee3)}",
       ".smd-connect-title{font-size:1.0625rem;font-weight:800;line-height:1.2;letter-spacing:0}",
       ".smd-connect-sub{font-size:0.75rem;color:var(--slate-soft,#5a7184);margin-top:0.125rem;line-height:1.4;letter-spacing:0}",
       ".smd-connect-x{margin-left:auto;border:0;background:none;color:var(--slate-soft,#5a7184);font-size:1.5rem;line-height:1;min-width:2.75rem;min-height:2.75rem;cursor:pointer;border-radius:0.625rem}",
       ".smd-connect-body{overflow:auto;padding:0 1.125rem calc(1.5rem + env(safe-area-inset-bottom))}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-body{flex:1;overflow-y:auto;padding:0.25rem 1rem calc(0.5rem + env(safe-area-inset-bottom,0px))}",
       ".smd-connect-display{font-size:1.5rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin:1rem 0 0.25rem}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-display{font-size:1.125rem;font-weight:700;margin:0.375rem 0 0.125rem}",
       ".smd-connect-lead{font-size:0.875rem;line-height:1.5;letter-spacing:0;color:var(--slate,#2d4356);margin:0.25rem 0 0}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-lead{font-size:0.8125rem;margin:0 0 0.375rem}",
       ".smd-connect-card{border:1px solid var(--line,#d7dee3);border-radius:0.875rem;padding:0.875rem;margin:0.625rem 0;background:var(--paper,#f6f7f5)}",
+      ".smd-connect-ov[data-compact=\"true\"] .smd-connect-card{padding:0.6875rem;margin:0.25rem 0 0.375rem;border-radius:0.75rem;box-shadow:0 1px 3px rgba(0,0,0,.04)}",
       ".smd-connect-label{display:block;font-size:0.75rem;font-weight:800;margin:0 0 0.375rem;letter-spacing:0}",
       ".smd-connect-input{width:100%;box-sizing:border-box;border:1px solid var(--line,#d7dee3);border-radius:0.625rem;padding:0.6875rem 0.75rem;background:var(--panel,#fff);color:var(--ink,#14202b);font:500 0.875rem var(--sans,system-ui);min-height:2.75rem}",
       ".smd-connect-row{display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-top:0.625rem}",
-      ".smd-connect-btn{border:1px solid var(--line,#d7dee3);border-radius:0.625rem;padding:0.625rem 0.8125rem;background:var(--panel,#fff);color:var(--ink,#14202b);font:700 0.8125rem var(--sans,system-ui);cursor:pointer;min-height:2.75rem;letter-spacing:0}",
-      ".smd-connect-btn.primary{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff}",
-      ".smd-connect-btn.danger{color:var(--red,#ab1c2c);border-color:var(--red-line,#efa9b1)}",
+      ".smd-connect-btn{border:1px solid var(--line,#d7dee3);border-radius:0.625rem;padding:0.5625rem 0.8125rem;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 0.8125rem var(--sans,system-ui);cursor:pointer;min-height:2.5rem;letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.05);transition:all 120ms ease-out}",
+      ".smd-connect-btn.primary{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff;box-shadow:0 1px 3px rgba(14,124,102,.25)}",
+      ".smd-connect-btn.danger{color:var(--red,#ab1c2c);border-color:var(--red-line,#efa9b1);background:rgba(171,28,44,.04)}",
       ".smd-connect-btn:disabled{opacity:.5;cursor:not-allowed}",
       ".smd-connect-btn:active{transform:scale(.97);transition:transform 100ms ease-out}",
       ".smd-connect-x:active{background:var(--paper,#f6f7f5)}",
@@ -149,6 +161,8 @@
       ".smd-connect-status.done{color:var(--green,#1c7a4a);font-weight:700}",
       ".smd-connect-status.warn{color:var(--amber,#92620a);font-weight:700}",
       ".smd-connect-status.bad{color:var(--red,#ab1c2c);font-weight:700}",
+      ".smd-connect-status:empty,#smd-connect-status:empty{display:none}",
+      ".smd-connect-ov[data-compact=\"true\"] #smd-connect-status-wrap{display:none!important}",
       ".smd-connect-stages{list-style:none;margin:0.625rem 0 0;padding:0;font-size:0.875rem;line-height:1.5}",
       ".smd-connect-stages li{display:flex;gap:0.625rem;align-items:baseline;padding:0.375rem 0;border-bottom:1px solid var(--line,#d7dee3);color:var(--slate-soft,#5a7184)}",
       ".smd-connect-stages li.on{color:var(--ink,#14202b);font-weight:700}",
@@ -156,14 +170,45 @@
       ".smd-connect-dot{flex:0 0 auto;width:0.625rem;height:0.625rem;border-radius:50%;background:var(--line,#d7dee3);transform:translateY(-0.0625rem)}",
       ".smd-connect-stages li.on .smd-connect-dot{background:var(--teal,#0e6e63)}",
       ".smd-connect-stages li.ok .smd-connect-dot{background:var(--green,#1c7a4a)}",
-      ".smd-connect-note{font-size:0.6875rem;line-height:1.5;letter-spacing:0;color:var(--slate-soft,#5a7184);margin-top:0.625rem}",
-      ".smd-connect-counts{display:flex;justify-content:space-between;margin-top:0}",
+      ".smd-connect-note{font-size:0.6875rem;line-height:1.45;letter-spacing:0;color:var(--slate-soft,#5a7184);margin-top:0.375rem}",
+      ".smd-agent-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.5rem;padding-top:0.375rem;border-top:1px solid var(--line,#e2e8f0)}",
+      ".smd-connect-counts{display:flex;flex-direction:column;gap:0.125rem;background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:0.5rem;padding:0.375rem 0.625rem}",
+      ".smd-connect-counts span{font-size:0.6875rem;color:var(--slate-soft,#5a7184);font-weight:600;text-transform:uppercase;letter-spacing:0.03em}",
+      ".smd-connect-counts strong{font-size:1rem;color:var(--ink,#14202b);font-weight:700}",
+      ".smd-connect-snake{display:none!important}",
+      ".smd-connect-modes{margin-top:0.75rem}.smd-connect-modes .smd-connect-checkrow{margin-top:0.5rem}.smd-connect-modes strong{color:var(--ink,#14202b)}",
+      ".smd-connect-remove{min-height:2rem;padding:0.25rem 0.625rem;margin-left:0.5rem;font-size:0.75rem}",
+      ".smd-connect-prog{height:6px;border-radius:999px;background:rgba(20,32,43,.08);overflow:hidden;margin:2px 0 8px}",
+      ".smd-connect-prog>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#0E7C66 0%,#14B8A6 100%);width:2%;transition:width .5s ease}",
+      "@media (prefers-reduced-motion: reduce){.smd-connect-prog>i{transition:none}}",
+      "#smd-connect-activity{flex:1;min-width:0;font-size:0.8125rem;font-weight:600;color:var(--ink,#14202b)}",
+      "#smd-connect-eta{white-space:nowrap;margin-left:8px;font-weight:700;font-size:0.75rem;color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee);padding:2px 7px;border-radius:6px}",
       ".smd-connect-ov[data-motion=\"fade\"] .smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}",
       "@media (prefers-reduced-motion: reduce){.smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}.smd-connect-btn:active,.smd-connect-hosp:active,.smd-connect-x:active{transform:none}}",
       "@media (prefers-reduced-transparency: reduce){.smd-connect-bar{background:var(--panel,#fff);backdrop-filter:none;-webkit-backdrop-filter:none}.smd-connect-ov{background:rgba(7,17,25,.72)}}",
       "body.dark .smd-connect-ov{background:rgba(0,0,0,.65)}",
       "body.dark .smd-connect-bar{background:rgba(19,32,48,.72)}",
-      "body.dark .smd-connect-hosp{background:var(--panel)}"
+      "body.dark .smd-connect-hosp{background:var(--panel)}",
+      ".smd-agent{display:flex;flex-direction:column;gap:0.5rem}",
+      ".smd-agent-now{display:flex;align-items:center;gap:0.5rem}",
+      ".smd-agent-dot{flex:none;width:0.5rem;height:0.5rem;border-radius:999px;background:#0E7C66;box-shadow:0 0 0 3px rgba(14,124,102,.2);animation:smd-agent-pulse 1.6s ease-in-out infinite}",
+      ".smd-agent-dot.stalled{background:var(--amber,#b26a00);box-shadow:0 0 0 3px rgba(178,106,0,.2);animation:none}",
+      "@keyframes smd-agent-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.85)}}",
+      "@media (prefers-reduced-motion: reduce){.smd-agent-dot{animation:none}}",
+      ".smd-agent-act{flex:1;min-width:0;font-weight:600;color:var(--ink,#14202b);line-height:1.4}",
+      ".smd-agent-sub{font-size:0.75rem;color:var(--muted-ink,#5b6b7a);margin-top:0.125rem;font-weight:400}",
+      ".smd-agent-chips{display:flex;flex-wrap:wrap;gap:0.375rem;margin:0.25rem 0}",
+      ".smd-agent-chip{display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.5rem;border-radius:6px;font-size:0.6875rem;font-weight:600;border:1px solid var(--line,#d7dee3);color:var(--muted-ink,#5b6b7a);background:var(--panel,#fff)}",
+      ".smd-agent-chip.done{color:#0b5f52;border-color:rgba(14,124,102,.35);background:rgba(14,124,102,.08);font-weight:700}",
+      ".smd-agent-chip svg{flex:none;width:0.75rem;height:0.75rem}",
+      ".smd-agent-bar{position:sticky;bottom:0;z-index:3;background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3);padding:0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom,0px));margin-top:0.375rem;display:flex;flex-direction:column;gap:0.375rem}",
+      "body.dark .smd-agent-bar{background:var(--panel,#131f2f)}",
+      ".smd-agent-acts{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}",
+      ".smd-agent-acts .smd-connect-btn{width:100%}",
+      ".smd-agent-stop{grid-column:1/-1}",
+      ".smd-agent-confirm{border:1px solid var(--red-line,#efa9b1);background:rgba(171,28,44,.06);border-radius:0.625rem;padding:0.625rem;display:flex;flex-direction:column;gap:0.5rem}",
+      ".smd-agent-confirm p{margin:0;font-size:0.8125rem;color:var(--ink,#14202b)}",
+      "body.dark .smd-agent-chip{background:transparent}"
     ].join("");
     (document.head || document.documentElement).appendChild(st);
   }
@@ -426,6 +471,7 @@
   }
 
   function close(fromAnim) {
+    if (!fromAnim) forgetRun();   // the doctor closed the sheet on purpose: nothing to resume
     var ov = overlay();
     if (!ov) { S = null; return; }
     if (!fromAnim && S && !reducedMotion() && sheet()) {
@@ -437,6 +483,7 @@
 
   function finishClose() {
     stopPoll();
+    stopProgressTicker();
     removePluginListeners();
     var plugin = getPlugin();
     if (S && (S.screen === "login" || S.screen === "progress" || S.screen === "origins") && plugin && plugin.close) {
@@ -459,7 +506,13 @@
   }
 
   function show(screen) {
+    if (S && S.snake && screen !== "progress") stopSnake();
     if (S) S.screen = screen;
+    var ov = overlay();
+    if (ov) {
+      if (screen === "progress" && wantsCompact()) ov.setAttribute("data-compact", "true");
+      else ov.removeAttribute("data-compact");
+    }
     var render = {
       connections: renderConnections,
       url: renderUrl,
@@ -478,6 +531,45 @@
     if (S) show(S.screen);
   }
 
+  /* THE FIRST RE-ARM LANDS TOO EARLY. The native plugin announces "navigated" from didCommit, while the
+   * new document is still being built, so WebKit rejects that evaluate; the error was swallowed and
+   * nothing tried again, leaving the guide unarmed for the rest of the ask. The doctor's tap then never
+   * turned green and Done captured nothing (owner's iPhone, live GHIS radiology page, 2026-09-18).
+   * GUIDE_ARM is idempotent (it removes any previous handler first), so it is simply fired again a
+   * couple of times as the page settles; each attempt stops if the ask it belongs to is already over. */
+  /* A HEARTBEAT, NOT AN EVENT. Re-arming only when the native browser announced a navigation was not
+   * enough: on the live GHIS radiology page the guide was still unarmed ten seconds after a full page
+   * load, so the doctor's tap turned nothing green and Done captured nothing (owner's iPhone, v90,
+   * 2026-09-18). A missed event, a document replaced after the arm, or an ask re-issued under a new
+   * identity all had the same effect. While a question is on screen the arm is simply re-applied every
+   * GUIDE_ARM_EVERY_MS; it is idempotent (it removes any previous handler first) and one small evaluate
+   * every couple of seconds costs nothing next to a doctor losing the step. */
+  var GUIDE_ARM_EVERY_MS = 2000;
+  function armGuideOnce(full) {
+    if (!S || !S.guide || !S.engine || !S.engine.GUIDE_ARM) return;
+    var c = S.pluginClient || getPlugin();
+    if (!c || !c.evaluate) return;
+    /* Only the first arm of a question runs the observer: it sets the mark that decides which requests
+     * count as this step's answer, and re-running it would discard everything the doctor already did. */
+    var expression = full ? S.engine.GUIDE_ARM : (S.engine.GUIDE_ARM_TAP || S.engine.GUIDE_ARM);
+    try {
+      var p = c.evaluate({ expression: expression });
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) { /* between documents; the next beat covers it */ }
+  }
+  function startGuideHeartbeat() {
+    stopGuideHeartbeat();
+    armGuideOnce(true);
+    S.guideBeat = setInterval(function () {
+      if (!S || !S.guide) { stopGuideHeartbeat(); return; }
+      armGuideOnce();
+    }, GUIDE_ARM_EVERY_MS);
+  }
+  function stopGuideHeartbeat() {
+    if (S && S.guideBeat) { try { clearInterval(S.guideBeat); } catch (e) {} S.guideBeat = null; }
+  }
+  function armGuideWithRetries() { startGuideHeartbeat(); }
+
   /* ---- Plugin event wiring (phone runner) ---- */
   function bindPluginListeners(plugin) {
     removePluginListeners();
@@ -489,18 +581,28 @@
     on("navigated", function (e) {
       var o = e && e.url ? originOf(e.url) : null;
       if (o && S && S.visitedOrigins.indexOf(o) < 0) S.visitedOrigins.push(o);
+      /* RE-ARM THE GUIDE AFTER NAVIGATION. index.mjs's GUIDE_ARM (CRAWL_ARM_OBSERVER + CRAWL_ARM_GUIDE)
+       * is evaluated once per ask and dies with the document, so the doctor's own navigation during a
+       * guided ask (S.guide: an ask is on screen) silently drops tap-to-point and the green outline.
+       * Best-effort: errors are swallowed, never surfaced to the doctor. */
+      if (S && S.guide && S.engine && S.engine.GUIDE_ARM) armGuideWithRetries();
     });
     on("loggedIn", function () {
       if (!S) return;
       /* Guided step: the agent asked the doctor to show it a screen; Done resolves that ask. */
-      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; r({ done: true }); paintProgress(); return; }
+      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r({ done: true }); paintProgress(); return; }
       if (S.loginHandled) return;
       S.loginHandled = true;
+      stopPhoneSignInPoll();
       doHandoff();
+    });
+    on("guideSkip", function () {
+      /* "Not in my EMR" in the browser header: the ask is answered, the resource is recorded missing. */
+      if (S && S.guideResolve) { var r3 = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r3({ done: false, missing: true }); paintProgress(); }
     });
     on("stopped", function () {
       if (S) S.stopRequested = true;
-      if (S && S.guideResolve) { var r2 = S.guideResolve; S.guideResolve = null; S.guide = null; r2({ done: false }); }
+      if (S && S.guideResolve) { var r2 = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r2({ done: false }); }
       if (S && S.screen === "progress") stopDiscovery();
     });
   }
@@ -529,19 +631,56 @@
 
   function connectionRow(c) {
     var pill = pillFor(c);
+    var removable = !!(c && (c.activeVersionId || c.pendingVersionId));
+    var active = !!(c && c.activeVersionId);
     return '<div class="smd-connect-hosp"><span style="flex:1"><span>' + esc(connectionHost(c)) + '</span></span>' +
-      '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span></div>';
+      '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span>' +
+      (active ? '<button class="smd-connect-btn primary smd-connect-openward" type="button" data-dep="' + esc(c.deploymentId) + '" style="margin-left:6px" aria-label="Open ' + esc(connectionHost(c)) + ' in Ward Sync">Open in Ward</button>' : "") +
+      (removable ? '<button class="smd-connect-btn smd-connect-remove" type="button" data-dep="' + esc(c.deploymentId) + '" aria-label="Remove the adapter for ' + esc(connectionHost(c)) + '">Remove</button>' : "") + '</div>';
+  }
+  /* REMOVE AN ADAPTER. Owner or admin only (the server says 403 otherwise): the approved version is
+   * revoked, waiting drafts discarded, and the hospital leaves the Ward Sync list. The hospital row
+   * stays as "Not connected" so it can be connected again. */
+  function removeAdapter(depId, btn) {
+    var c = null;
+    for (var i = 0; i < S.connections.length; i++) if (S.connections[i].deploymentId === depId) c = S.connections[i];
+    var host = c ? connectionHost(c) : "this hospital";
+    if (!window.confirm("Remove the adapter for " + host + "? Doctors will no longer see it in Ward Sync until a new one is approved.")) return;
+    if (btn) btn.disabled = true;
+    api("/connections/" + enc(depId), { method: "DELETE", body: "{}" }).then(function (r) {
+      if (!overlay() || !S) return;
+      if (r.s === 200 && r.d && r.d.ok !== false) { toast("Adapter removed for " + host + "."); loadConnections(); return; }
+      if (btn) btn.disabled = false;
+      if (r.s === 403) { toast("Only an owner or admin can remove an adapter."); return; }
+      setStatus("bad", "Could not remove the adapter" + (r.d && (r.d.detail || r.d.error) ? ": " + (r.d.detail || r.d.error) : "") + ".");
+    });
   }
 
   var TENANT_KEY = "smd_connect_agent_tenant";
+  var MODE_KEY = "smd_connect_agent_mode";
+  function storedMode() { try { return localStorage.getItem(MODE_KEY) === "manual" ? "manual" : "auto"; } catch (e) { return "auto"; } }
+  function storeMode(m) { try { localStorage.setItem(MODE_KEY, m === "manual" ? "manual" : "auto"); } catch (e) {} }
   function storedTenant() { try { return localStorage.getItem(TENANT_KEY) || ""; } catch (e) { return ""; } }
   function storeTenant(id) { try { if (id) localStorage.setItem(TENANT_KEY, id); else localStorage.removeItem(TENANT_KEY); } catch (e) {} }
   /* Which hospital? An account that belongs to several tenants (an owner, a super-admin) must say
    * which one it is connecting; the server refuses to guess. One tenant: nothing to ask. */
-  function pickTenantThenLoad() {
+  function pickTenantThenLoad(attempt) {
     api("/tenants", {}).then(function (r) {
       if (!overlay() || !S) return;
-      var list = (r.s === 200 && r.d && r.d.tenants) || [];
+      /* A FAILED ASK IS NOT AN ANSWER. On a cold start the sign-in token is often not ready for the
+       * first call, and treating "could not ask" as "one hospital" meant the next call went out with
+       * no hospital named. The server refuses that (400, tenantId required), the doctor was told to
+       * check their connection, and nothing ever retried: the console sat on that error with no way
+       * forward. Seen on an iPhone after a reinstall cleared the stored choice, 2026-09-15. */
+      if (r.s !== 200 || !r.d || !r.d.tenants) {
+        var n = (attempt || 0) + 1;
+        if (n <= 3) { setTimeout(function () { pickTenantThenLoad(n); }, n * 1200); return; }
+        S.connLoading = false;
+        S.connError = true;
+        if (S.screen === "connections") renderConnections();
+        return;
+      }
+      var list = r.d.tenants || [];
       if (list.length > 1) {
         S.tenants = list;
         var known = list.some(function (t) { return t.tenantId === S.tenant; });
@@ -579,6 +718,20 @@
         S.connections = Array.isArray(r.d) ? r.d : (r.d.connections || []);
       } else {
         S.connections = [];
+        /* "WHICH HOSPITAL?" IS A QUESTION, NOT A FAILURE. An account on more than one tenant gets a
+         * 400 here, and showing "check your connection" for it sent the doctor to look at their
+         * wifi over a question the app could simply ask. Fetch the list and show the picker. */
+        var detail = (r.d && (r.d.detail || r.d.error)) || "";
+        if (r.s === 400 && /tenant/i.test(String(detail)) && !S.tenants) {
+          api("/tenants", {}).then(function (t) {
+            if (!overlay() || !S) return;
+            var list = (t.s === 200 && t.d && t.d.tenants) || [];
+            if (list.length) { S.tenants = list; S.tenant = ""; storeTenant(""); S.connError = false; }
+            else S.connError = true;
+            if (S.screen === "connections") renderConnections();
+          });
+          return;
+        }
         S.connError = true;
       }
       if (S.screen === "connections") renderConnections();
@@ -603,6 +756,15 @@
     setStatus(S.connError ? "bad" : "", S.connError ? "Could not load your connections. Check your connection and try again." : "");
     var sw = b.querySelector("#smd-connect-switch");
     if (sw) sw.onclick = function () { S.tenant = ""; storeTenant(""); renderConnections(); };
+    var rms = b.querySelectorAll(".smd-connect-remove");
+    for (var k = 0; k < rms.length; k++) rms[k].onclick = function () { removeAdapter(this.getAttribute("data-dep"), this); };
+    var ows = b.querySelectorAll(".smd-connect-openward");
+    for (var m = 0; m < ows.length; m++) ows[m].onclick = function () {
+      var depId = this.getAttribute("data-dep");
+      close();
+      if (window.openGHIS) window.openGHIS();
+      if (window.ghisOpenAdapterHospital && depId) setTimeout(function () { window.ghisOpenAdapterHospital(depId); }, 150);
+    };
     b.querySelector("#smd-connect-add").onclick = function () {
       S.selected = null; S.emrUrl = "";
       show("url");
@@ -653,6 +815,12 @@
       '<li>You can stop the agent at any time.</li>' +
       '<li>A human reviewer approves the connection before another doctor can use it.</li>' +
       '</ul>' +
+      '<div class="smd-connect-modes" role="radiogroup" aria-label="How the agent works">' +
+      '<label class="smd-connect-checkrow"><input class="smd-connect-check" type="radio" name="smd-connect-mode" value="auto"' + (storedMode() === "manual" ? "" : " checked") + '/>' +
+      '<span><strong>Automatic</strong> (recommended). After you sign in the agent explores on its own. You can play a small game while it works.</span></label>' +
+      '<label class="smd-connect-checkrow"><input class="smd-connect-check" type="radio" name="smd-connect-mode" value="manual"' + (storedMode() === "manual" ? " checked" : "") + '/>' +
+      '<span><strong>Manual</strong>. The agent asks you to show it each screen, one at a time. Tap Not in my EMR for anything your hospital does not have.</span></label></div>' +
+      '<div class="smd-connect-note">An AI model helps read the hospital screens (labels and headers only). It never sees patient data.</div>' +
       '<label class="smd-connect-checkrow"><input id="smd-connect-agree" class="smd-connect-check" type="checkbox"/>' +
       '<span>I agree to continue.</span></label>' +
       '<div class="smd-connect-row"><button id="smd-connect-consentgo" class="smd-connect-btn primary" type="button" disabled>I agree, continue</button>' +
@@ -665,6 +833,9 @@
     go.onclick = function () {
       if (!box.checked) return;
       go.disabled = true;
+      var picked = b.querySelector('input[name="smd-connect-mode"]:checked');
+      S.mode = picked && picked.value === "manual" ? "manual" : "auto";
+      storeMode(S.mode);
       setStatus("", "Starting your session.");
       S.runner = hasPlugin() ? "phone" : null;
       var payload = { emrUrl: S.selected.emrUrl, consent: { agreed: true } };
@@ -706,8 +877,28 @@
       '<h2 class="smd-connect-display">Already connected</h2>' +
       '<p class="smd-connect-lead">This hospital is already connected (adapter active).</p>' +
       '<div class="smd-connect-row"><button id="smd-connect-reusego" class="smd-connect-btn primary" type="button">Sign in to use it</button>' +
-      '<button id="smd-connect-reuseback" class="smd-connect-btn" type="button">Back</button></div>';
+      '<button id="smd-connect-reuseback" class="smd-connect-btn" type="button">Back</button></div>' +
+      '<div class="smd-connect-note">Discover again builds a new adapter from scratch and checks it against real patients. The current adapter keeps working in Ward Sync until the new one is approved.</div>' +
+      '<div class="smd-connect-row"><button id="smd-connect-rediscover" class="smd-connect-btn" type="button">Discover again</button></div>';
     setStatus("", "");
+    b.querySelector("#smd-connect-rediscover").onclick = function () {
+      var btn = this; btn.disabled = true;
+      setStatus("", "Starting a new discovery.");
+      api("/sessions", { method: "POST", body: JSON.stringify({ emrUrl: S.selected.emrUrl, consent: { agreed: true }, runner: "phone", purpose: "discover" }) }).then(function (r) {
+        if (!overlay() || !S) return;
+        var sid = r.d && (r.d.sessionId || (r.d.session && r.d.session.id));
+        if (r.s === 200 && r.d && r.d.ok !== false && sid && !r.d.reuse) {
+          S.session = { id: sid, state: r.d.state || null };
+          S.deployment = r.d.deployment || S.deployment;
+          S.reuse = false; S.visitedOrigins = []; S.pendingOrigins = []; S.loginOpened = false; S.loginHandled = false;
+          show("login");
+        } else {
+          btn.disabled = false;
+          var why = r.d && (r.d.detail || r.d.message || r.d.error);
+          setStatus("bad", "Could not start a new discovery" + (why ? ": " + why : "") + ".");
+        }
+      });
+    };
     b.querySelector("#smd-connect-reuseback").onclick = function () { resetToConnections(""); };
     b.querySelector("#smd-connect-reusego").onclick = function () {
       S.loginOpened = false;
@@ -730,23 +921,64 @@
     renderLoginFallback(b);
   }
 
+  /* Three steps, plain words. A first-time doctor sees exactly what will happen before
+   * the hospital website opens: sign in, tap the patient list, tap any patient. */
+  function stepsPrimer() {
+    return '<div class="smd-connect-card"><div class="smd-connect-label">What happens next (3 steps)</div>' +
+      '<div class="smd-connect-note"><strong>Step 1: Sign in.</strong> Use your usual hospital login in the screen that opens.</div>' +
+      '<div class="smd-connect-note"><strong>Step 2: Tap your patient list.</strong> If the agent cannot find it, it will ask you to open it and tap inside it.</div>' +
+      '<div class="smd-connect-note"><strong>Step 3: Tap any patient.</strong> The agent reads that one patient to learn your hospital. You cannot break anything: the agent only reads, and you can stop it at any time.</div></div>';
+  }
+
   function renderLoginPhone(b) {
     var host = hostOf(S.selected.emrUrl);
     b.innerHTML =
       '<h2 class="smd-connect-display">Sign in to ' + esc(host) + '</h2>' +
       '<p class="smd-connect-lead">Sign in yourself inside the hospital website that just opened. StewardMD never asks for or stores your password.</p>' +
+      stepsPrimer() +
       '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open until the connection finishes. The screen stays awake while the hospital website is open.</div>' +
-      '<div class="smd-connect-row"><button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
-    setStatus("", S.statusText || "Opening the hospital website.");
+      // The agent notices sign-in on its own (below). This is the sure way if the doctor wants to move
+      // on the instant they are in: it is handled inside the app, so it never depends on the hospital
+      // browser handing anything back.
+      '<button id="smd-connect-signedin" class="smd-connect-btn primary" type="button" style="width:100%">I have signed in, continue</button>' +
+      '<div class="smd-connect-row"><button id="smd-connect-retryopen" class="smd-connect-btn" type="button">Try again</button>' +
+      '<button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
+    /* Never head a fresh sign-in with the LAST attempt's failure. Coming back here after a failed
+     * discovery replayed "Discovery could not complete: observedViews: proof status invalid" above
+     * the words "Sign in to <hospital>", which reads as though signing in had just failed. */
+    setStatus("", (S.statusKind === "bad" ? "" : S.statusText) || "Opening the hospital website. Sign in, and the agent will notice on its own.");
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
+    b.querySelector("#smd-connect-signedin").onclick = function () {
+      if (S && !S.loginHandled) { S.loginHandled = true; stopPhoneSignInPoll(); doHandoff(); }
+    };
+    /* SELF-REPAIR: reopening the hospital website is safe to repeat (openLoginPlugin
+     * guards double-open), so a failed first open is one tap to retry, not a restart. */
+    b.querySelector("#smd-connect-retryopen").onclick = function () {
+      S.loginOpened = false;
+      setStatus("", "Opening the hospital website.");
+      openLoginPlugin();
+    };
     openLoginPlugin();
   }
 
   function openLoginPlugin() {
-    if (S.loginOpened) return;
-    S.loginOpened = true;
     var plugin = getPlugin();
     if (!plugin) { setStatus("bad", "The in-app browser is unavailable on this device."); return; }
+    /* THE FLAG IS NOT THE BROWSER. S.loginOpened records only that we once ASKED to open it. A
+     * session that comes BACK to this screen — discovery failed, the doctor tapped Try again, the
+     * job was resumed — still carries it set, so the open was skipped and the doctor was told to
+     * "sign in inside the hospital website that just opened" with nothing open at all. Observed on
+     * the owner's iPhone 2026-09-18: screen=login, currentUrl() answering "not-open", and only the
+     * Try again button (which clears the flag by hand) could recover it.
+     * Ask the browser what is true instead of trusting the flag. */
+    if (S.loginOpened) {
+      var reopen = function () { if (S) { S.loginOpened = false; openLoginPlugin(); } };
+      try {
+        Promise.resolve(plugin.currentUrl()).then(function (r) { if (!(r && r.url)) reopen(); }, reopen);
+      } catch (e) { reopen(); }
+      return;
+    }
+    S.loginOpened = true;
     var host = hostOf(S.selected.emrUrl);
     bindPluginListeners(plugin);
     loadPhoneEngine().then(function (engine) {
@@ -765,6 +997,59 @@
     }).catch(function () {
       if (overlay() && S) setStatus("bad", "Could not open the hospital website. Try again.");
     });
+    startPhoneSignInPoll();
+  }
+
+  /* SIGN-IN DETECTION THE APP DRIVES ITSELF.
+   *
+   * The native browser CAN tell the app it is signed in, but that message has to reach a WebView iOS
+   * has throttled to near-nothing while it sits behind the full-screen hospital page, and on the
+   * owner's iPhone it did not arrive: the doctor signed in and the app never moved (2026-09-15). So
+   * the app stops waiting to be told. It ASKS: every couple of seconds it runs one tiny check inside
+   * the hospital page (is there still a visible password box?), which the app itself initiates, so it
+   * works whenever the app gets a slice, however small. A page that once showed a password box and now
+   * shows none, for two checks running, is a completed sign-in. The password value is never read; only
+   * whether a password field is on screen. */
+  var signInPollHandle = null;
+  function startPhoneSignInPoll() {
+    stopPhoneSignInPoll();
+    if (!S) return;
+    S.signInSawPw = false;
+    S.signInGoneTicks = 0;
+    var PW = "(function(){try{if(document.readyState!=='complete')return 'loading';var a=document.querySelectorAll('input[type=\"password\"]');for(var i=0;i<a.length;i++){var e=a[i],r=e.getBoundingClientRect();if(r.width>0&&r.height>0&&e.offsetParent)return 'pw'}return 'none'}catch(e){return 'err'}})()";
+    /* THE HANDLE, NOT THE SLOT. This used to live on S, and stopPhoneSignInPoll cleared whatever S
+     * happened to hold when it ran: a session replaced without cancelSession left the old interval
+     * running forever and the stop call killed the NEW session's poll instead. */
+    var handle = setInterval(function () {
+      if (!S || S.screen !== "login" || S.loginHandled) { clearInterval(handle); if (signInPollHandle === handle) signInPollHandle = null; return; }
+      var plugin = getPlugin();
+      if (!plugin || !plugin.evaluate) return;
+      Promise.resolve(plugin.evaluate({ expression: PW })).then(function (res) {
+        if (!S || S.screen !== "login" || S.loginHandled) return;
+        var flag = res && (res.result != null ? res.result : res);
+        flag = String(flag == null ? "" : flag);
+        if (flag === "pw") { S.signInSawPw = true; S.signInGoneTicks = 0; return; }
+        if (flag !== "none") { S.signInGoneTicks = 0; return; }   // loading / error: no verdict
+        /* MOVING IS NOT SIGNING IN. A password box that was SEEN and is now gone is a completed sign
+         * in; a page that merely moved is not. On a single-sign-on hospital the doctor signs in at one
+         * host and lands on a module chooser at another, with no password box and no EMR yet, so
+         * "moved" fired the handoff while the doctor was still choosing (GIMSR is exactly that shape:
+         * gimsrlogin.gitam.edu, a chooser, then ghis.gitam.edu). connect-agent/phone/index.mjs records
+         * the same false positive ("NOT ON THE EMR YET"). A doctor whose stored session skips the form
+         * entirely taps "I have signed in, continue" instead. */
+        if (!S.signInSawPw) { S.signInGoneTicks = 0; return; }
+        S.signInGoneTicks += 1;
+        if (S.signInGoneTicks >= 2 && !S.loginHandled) {
+          S.loginHandled = true;
+          stopPhoneSignInPoll();
+          doHandoff();
+        }
+      }).catch(function () { /* a throttled tick that could not read: try again next time */ });
+    }, 2000);
+    signInPollHandle = handle;
+  }
+  function stopPhoneSignInPoll() {
+    if (signInPollHandle) { clearInterval(signInPollHandle); signInPollHandle = null; }
   }
 
   function renderLoginFallback(b) {
@@ -845,6 +1130,10 @@
         S.deployment.origins = r.d.origins || S.deployment.origins;
         S.pendingOrigins = r.d.pendingOrigins || [];
         if (S.reuse) { finishReuse(); return; }
+        /* A job that already produced a candidate is DONE: crawling it again only burns the
+         * doctor's time and then fails. Go straight to the review it is waiting for. */
+        var done = r.d.job && r.d.job.candidateVersionId;
+        if (done) { S.versionId = r.d.job.candidateVersionId; S.result = S.result || {}; loadVersionAndShowResult(); return; }
         if (S.pendingOrigins.length) { show("origins"); return; }
         if (S.runner === "phone") { beginAgentMode(); return; }
         show("progress");
@@ -855,11 +1144,21 @@
       } else {
         setStatus("bad", "Sign in was not detected yet. Finish signing in, then try again.");
         S.loginHandled = false;
+        /* The native sign-in watcher fires once per arming. Re-enter login mode after a moment so it
+         * is armed again and the next real sign-in is caught without the doctor hunting for Done. */
+        var p = getPlugin();
+        if (p && p.setMode) {
+          setTimeout(function () {
+            if (!S || S.screen !== "login" || S.loginHandled) return;
+            try { p.setMode({ mode: "login", origins: (S.deployment && S.deployment.origins) || [] }); } catch (e) {}
+          }, 4000);
+        }
       }
     });
   }
 
   function cancelSession() {
+    stopPhoneSignInPoll();
     removePluginListeners();
     var plugin = getPlugin();
     if (plugin && plugin.close) { try { plugin.close(); } catch (e) {} }
@@ -873,6 +1172,7 @@
 
   function resetToConnections(msg) {
     stopPoll();
+    stopProgressTicker();
     removePluginListeners();
     S.session = null;
     S.deployment = null;
@@ -925,10 +1225,33 @@
     };
   }
 
+  /* A RUN SURVIVES A RELOAD. The phone reloaded the StewardMD page under memory pressure while the
+   * doctor was on step 5 of 6; the hospital browser and its Done banner stayed, but the screen that
+   * listens for Done was gone, so Done did nothing and the whole run was lost (owner's iPhone,
+   * 2026-09-17). The open run is remembered here and picked up again on the next load. */
+  var RUN_KEY = "smd_connect_run";
+  function rememberRun() {
+    try { localStorage.setItem(RUN_KEY, JSON.stringify({ tenant: S.tenant, session: S.session, deployment: S.deployment, emrUrl: S.emrUrl, selected: S.selected, at: Date.now() })); } catch (e) {}
+  }
+  function forgetRun() { try { localStorage.removeItem(RUN_KEY); } catch (e) {} }
+  function resumeRun() {
+    var run = null;
+    try { run = JSON.parse(localStorage.getItem(RUN_KEY) || "null"); } catch (e) { run = null; }
+    if (!run || !run.session || !run.deployment || Date.now() - (run.at || 0) > 30 * 60 * 1000) { forgetRun(); return false; }
+    if (!hasPlugin()) return false;
+    open();
+    S.tenant = run.tenant || S.tenant; S.session = run.session; S.deployment = run.deployment; S.emrUrl = run.emrUrl || ""; S.selected = run.selected || null;
+    S.runner = "phone"; S.resumed = true;
+    show("progress");
+    setStatus("", "Resuming your connection where it stopped.");
+    beginAgentMode();
+    return true;
+  }
   function beginAgentMode() {
+    rememberRun();
     var plugin = getPlugin();
     if (plugin && plugin.setMode) {
-      try { plugin.setMode({ mode: "agent", origins: S.deployment.origins }); } catch (e) {}
+      try { plugin.setMode({ mode: "agent", origins: S.deployment.origins, compact: wantsCompact() }); } catch (e) {}
     }
     startPhoneDiscovery();
   }
@@ -941,7 +1264,8 @@
           var e = new Error("reauth"); e.reauth = true; throw e;
         }
         if (r.s < 200 || r.s >= 300 || !r.d || r.d.ok === false) {
-          throw new Error((r.d && r.d.error) || "request-failed");
+          // The server names the reason in `detail` (router catch); carry it so the sheet can say it.
+          throw new Error((r.d && (r.d.detail || r.d.error)) || "request-failed");
         }
         return r.d;
       });
@@ -954,12 +1278,45 @@
     };
   }
 
+  /* The brain: three advisors the engine may consult about screen STRUCTURE (labels, headers, paths;
+   * digit runs already replaced on the phone). A null answer means "no advice", never a failure. */
+  function brainApi() {
+    var origin = (S.deployment && S.deployment.origins && S.deployment.origins[0]) || originOf(S.selected.emrUrl);
+    function ask(op, payload) {
+      var body = payload || {};
+      body.origin = origin;
+      return api("/brain/" + op, { method: "POST", body: JSON.stringify(body) }).then(function (r) {
+        return r.s === 200 && r.d && r.d.ok !== false ? r.d : null;
+      }).catch(function () { return null; });
+    }
+    return {
+      classify: function (p) { return ask("classify", p); },
+      mapColumns: function (p) { return ask("map-columns", p); },
+      next: function (p) { return ask("next", p); },
+      verify: function (p) { return ask("verify", p); },
+      pickEndpoint: function (p) { return ask("pick-endpoint", p); },
+      planControls: function (p) { return ask("plan-controls", p); }
+    };
+  }
+  /* Auto mode keeps the hospital browser to the top half while the agent drives, so the doctor sees
+   * the progress bar and the game underneath. Manual mode needs the whole screen for the doctor. */
+  function wantsCompact() { return !!(S && S.mode !== "manual" && hasPlugin()); }
+
   function startPhoneDiscovery() {
+    S.mode = S.mode || storedMode();
+    S.progressStartedAt = Date.now();      // the clock the time estimate divides by
     S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING", opening: "", found: [], looking: [] };
     S.progressFailed = false;
     S.stopRequested = false;
+    S.finishRequested = false;
+    S.skipRequested = 0;
+    S.redoRequested = 0;
+    S.saveOffered = false;
+    S.lastProgressAt = Date.now();         // the clock the stall watchdog divides by
     S.guide = null;
     S.guideResolve = null;
+    S.statusText = "";
+    setStatus("", "");
     show("progress");
     loadPhoneEngine().then(function (engine) {
       if (!engine || !engine.runPhoneDiscovery) throw new Error("engine-unavailable");
@@ -975,14 +1332,26 @@
         session: S.session,
         deployment: S.deployment,
         startUrl: S.selected.emrUrl,
+        mode: S.mode,
+        brain: brainApi(),
+        compact: wantsCompact(),
         stopSignal: function () { return !!(S && S.stopRequested); },
+        /* "Save what you have": the doctor's escape from a run that has gone quiet. Unlike Stop it
+         * keeps the session and everything learned; the engine breaks out and saves. */
+        finishSignal: function () { return !!(S && S.finishRequested); },
+        /* Counters, not booleans: the engine remembers the count it started a step with and abandons
+         * that step when the doctor bumps it, so one tap skips exactly one step. */
+        skipSignal: function () { return (S && S.skipRequested) || 0; },
+        redoSignal: function () { return (S && S.redoRequested) || 0; },
         /* The agent could not find something: hand the screen to the doctor (plugin guide mode) and
          * resolve when they tap Done in the browser header, or Skip here. */
         askDoctor: function (q) {
           return new Promise(function (resolve) {
             if (!S || S.screen !== "progress" || S.stopRequested) { resolve({ done: false }); return; }
-            S.guide = { gap: q.gap, text: q.text };
+            S.guide = { gap: q.gap, text: q.text, step: q.step || 0, total: q.total || 0 };
+            startGuideHeartbeat();
             S.guideResolve = resolve;
+            S.bannerLine = null;
             paintProgress();
           });
         },
@@ -992,19 +1361,30 @@
           // agent opened, events are requests it observed, opening is the control it is clicking now,
           // found / looking are the canonical views captured so far / still missing.
           var c = S.progressCounts;
+          S.lastProgressAt = Date.now();
           S.progressCounts = {
             pages: (p && p.steps != null) ? p.steps : (p && p.pages != null) ? p.pages : c.pages,
             requests: (p && p.events != null) ? p.events : (p && p.requests != null) ? p.requests : c.requests,
             phase: (p && p.phase) || c.phase,
             opening: (p && p.phase === "CRAWLING") ? (p.opening || "") : "",
             found: (p && p.found) || c.found || [],
-            looking: (p && p.looking) || c.looking || []
+            looking: (p && p.looking) || c.looking || [],
+            checking: (p && p.phase === "VERIFYING") ? (p.checking || "") : "",
+            step: (p && p.step != null) ? p.step : c.step || 0,
+            total: (p && p.total != null) ? p.total : c.total || 0
           };
           paintProgress();
+          publishBannerProgress();
         }
       });
     }).then(function (result) {
       if (!overlay() || !S) return;
+      /* THE CRAWL IS OVER: GIVE THE DOCTOR THEIR PHONE BACK.
+       * The hospital browser used to stay open on top of the approval screen, still wearing the
+       * orange "StewardMD is reading" banner, so a run that had FINISHED and built an adapter looked
+       * exactly like one still crawling: the doctor watched the EMR, never saw Approve, and read the
+       * whole thing as hung (2026-09-12). Closing it first puts the review in front of them. */
+      stopDiscoveryPlugin();
       S.result = result || {};
       S.versionId = (result && result.candidateVersionId) || null;
       loadVersionAndShowResult();
@@ -1018,8 +1398,33 @@
         setStatus("warn", "The hospital session expired. Sign in again to continue. The existing connection is kept.");
         return;
       }
+      /* THE CRAWL ALREADY SUCCEEDED, AND THIS IS THE SECOND ATTEMPT AT IT.
+       *
+       * A session whose job has reached AWAITING_APPROVAL is finished: the server answers any
+       * further discovery with "job is not in discovery". Reopening the sheet on such a session
+       * started the whole crawl again, walked 21 pages a second time and then reported a failure,
+       * while the adapter it had already built sat waiting for the doctor's approval. They saw a
+       * run that said "almost done" and then "you can try again" forever (2026-09-12). Ask the
+       * server what the job actually is, and if it has a candidate, show the approval screen. */
+      stopDiscoveryPlugin();
+      if (S.session && e && /not in discovery/i.test(String(e.message || ""))) {
+        api("/sessions/" + enc(S.session.id), {}).then(function (r) {
+          if (!overlay() || !S) return;
+          var vid = r.s === 200 && r.d && (r.d.candidateVersionId || (r.d.job && r.d.job.candidateVersionId));
+          if (vid) { S.versionId = vid; S.result = S.result || {}; loadVersionAndShowResult(); return; }
+          S.progressFailed = true;
+          setStatus("bad", "This connection was already finished. Close and reopen Connect Hospital to review it.");
+          paintProgress();
+        });
+        return;
+      }
       S.progressFailed = true;
-      setStatus("bad", "Discovery could not complete. You can try again.");
+      /* NAME THE FAILURE. This swallowed e.message and said only "could not complete", so a crawl
+       * that had walked 21 pages and posted its findings left the doctor, and whoever they call,
+       * with nothing to act on. The engine's errors are codes (request-failed, engine-unavailable,
+       * the server's own error string), not stack traces, so they are safe to show. */
+      var why = e && e.message ? String(e.message).slice(0, 120) : "";
+      setStatus("bad", why ? "Discovery could not complete: " + why + ". You can try again." : "Discovery could not complete. You can try again.");
       paintProgress();
     });
   }
@@ -1041,32 +1446,162 @@
   }
 
   function phaseLabel(p) {
+    if (p === "VERIFYING") return "Checking each discovered endpoint against real patients before anything is sent for approval.";
     if (p === "COMPILING") return "Building the connection draft.";
     if (p === "VALIDATING") return "Checking the draft for safety and completeness.";
     if (p === "CRAWLING") return "Opening every view of one patient record, read-only.";
+    if (p === "ASKING" && isManual()) return "Show the agent one screen at a time. In the hospital screen, tap Done when it is showing, or Not in my EMR.";
     if (p === "ASKING") return "The agent needs your help to find a view.";
     return "Discovering read-only workflows. The agent makes no changes to the EMR.";
   }
 
-  var VIEW_NAMES = { worklist: "Worklist", patient: "Patient details", medications: "Medications", labs: "Lab results", radiology: "Radiology reports", discharge: "Discharge summary", history: "Visit history" };
+  var VIEW_NAMES = { worklist: "Worklist", patient: "Patient details", notes: "Clinical notes", medications: "Medications", labs: "Lab results", radiology: "Radiology reports", discharge: "Discharge summary", history: "Visit history" };
   function viewNames(list) {
     var out = [];
     for (var i = 0; i < (list || []).length; i++) out.push(esc(VIEW_NAMES[list[i]] || list[i]));
     return out.length ? out.join(", ") : "none yet";
   }
+  /* WHAT THE AGENT IS DOING, IN WORDS A DOCTOR READS.
+   *
+   * The screen used to show a phase sentence and four counters, so a run that was working looked
+   * identical to one that had died: no sense of how far along it was or how long was left. These
+   * three functions turn the SAME state the engine already reports into a fraction, a sentence and
+   * a time. Nothing new is measured and nothing is invented: the fraction comes from views actually
+   * captured, the sentence from the view being opened, the time from this run's own elapsed clock. */
+  var TARGET_VIEWS = 8;                     // worklist, patient, notes, labs, radiology, medications, discharge, history
+  function isManual() { return !!(S && S.mode === "manual"); }
+  /* THE RUN HAS GONE QUIET.
+   *
+   * The engine pushes progress at every step, so silence means a call that is not coming back. The
+   * screen used to keep counting down through it - a frozen 86% still promising "about a minute
+   * left" - and the only control was Stop, which DELETES the session and throws away a crawl that
+   * had already learned the whole EMR (owner, iPhone, 2026-09-15). Past STALL_MS the estimate is
+   * replaced by the truth, and if anything was found there is a way to keep it that is not Stop. */
+  var STALL_MS = 45000;
+  function stalledFor() {
+    if (!S || S.guide || S.progressFailed || S.finishRequested) return 0;
+    var idle = Date.now() - (S.lastProgressAt || 0);
+    return (S.lastProgressAt && idle > STALL_MS) ? idle : 0;
+  }
+  function foundCount() { return (((S && S.progressCounts) || {}).found || []).length; }
+  function canFinishNow() { return stalledFor() > 0 && foundCount() > 0; }
+  function progressFraction() {
+    var c = S.progressCounts || {};
+    var found = (c.found || []).length;
+    var phase = c.phase || "DISCOVERING";
+    if (phase === "VERIFYING") return 0.86;
+    if (phase === "COMPILING") return 0.9;
+    if (phase === "VALIDATING") return 0.96;
+    // Manual mode: one ask is one share; the ask on screen does not count until it is answered.
+    if (isManual()) {
+      var tot = c.total || TARGET_VIEWS;
+      var done = Math.max(0, (c.step || 0) - (S.guide ? 1 : 0));
+      return Math.max(0.02, Math.min(0.88, (done / tot) * 0.88));
+    }
+    // Exploring earns the first tenth; each captured view earns an equal share of the rest.
+    var explored = Math.min(1, (c.pages || 0) / 6) * 0.1;
+    return Math.max(0.02, Math.min(0.88, explored + (found / TARGET_VIEWS) * 0.78));
+  }
+  /* One sentence naming the thing being done, in the doctor's vocabulary. */
+  function activityLine() {
+    var c = S.progressCounts || {};
+    var phase = c.phase || "DISCOVERING";
+    if (S.guide && S.guide.total) return "Step " + S.guide.step + " of " + S.guide.total + ". " + esc(S.guide.text);
+    if (S.guide) return "Waiting for you to show me one screen.";
+    if (phase === "VERIFYING") return "Reading " + esc(String(VIEW_NAMES[c.checking] || c.checking || "the ward list")).toLowerCase() + " for a real patient to prove the endpoint works.";
+    if (phase === "COMPILING") return "Writing the connection for your hospital.";
+    if (phase === "VALIDATING") return "Checking it is safe and read-only.";
+    if (c.opening) return "Opening " + esc(c.opening) + ".";
+    var looking = (c.looking || []).filter(function (k) { return VIEW_NAMES[k]; });
+    if (phase === "CRAWLING" && looking.length) return "Looking for where your " + esc(String(VIEW_NAMES[looking[0]]).toLowerCase()) + " sit.";
+    if (phase === "CRAWLING") return "Walking through one patient record, read-only.";
+    return "Going through the tabs of your EMR to see what it offers.";
+  }
+  /* A coarse estimate from THIS run's own pace. Silent until there is enough of a run to divide by,
+   * and never a false precision: a doctor needs "about two minutes", not a countdown. */
+  function etaLine() {
+    if (S.finishRequested) return "Saving.";
+    // A stalled run must never keep promising a time. Say how long it has been quiet instead.
+    var idle = stalledFor();
+    if (idle) return "No change for " + Math.round(idle / 1000) + "s.";
+    if (S.guide || (isManual() && progressFraction() < 0.9)) return "";
+    var started = S.progressStartedAt || 0;
+    var f = progressFraction();
+    if (!started || f < 0.08) return "";
+    var elapsed = Date.now() - started;
+    if (elapsed < 15000) return "";
+    var remain = Math.round((elapsed * (1 - f) / f) / 1000);
+    if (remain < 20) return "Almost done.";
+    if (remain < 90) return "About a minute left.";
+    var mins = Math.round(remain / 60);
+    return "About " + (mins > 9 ? "10+" : mins) + " minutes left.";
+  }
+  /* THE ONLY SURFACE THE DOCTOR CAN SEE WHILE THE AGENT WORKS.
+   *
+   * During the crawl the hospital browser is full-screen, so the sheet behind it - progress bar,
+   * activity line, estimate and all - is invisible. The doctor watched a static orange banner for
+   * minutes and concluded the app had hung (2026-09-12). The banner is native and this is the one
+   * thing that can write to it, so the same three facts go there: how far along, what it is doing,
+   * how long is left. Rewritten only when the sentence actually changes, since each write crosses
+   * the bridge and repaints native views. */
+  function bannerProgressLine() {
+    var pct = Math.round(progressFraction() * 100);
+    var eta = etaLine();
+    return pct + "% " + activityLine().replace(/<[^>]*>/g, "") + (eta ? " " + eta : "");
+  }
+  function publishBannerProgress() {
+    if (!S || S.guide || S.stopRequested) return;
+    var plugin = getPlugin();
+    if (!plugin || !plugin.setMode) return;
+    var line = bannerProgressLine();
+    if (line === S.bannerLine) return;
+    S.bannerLine = line;
+    try { plugin.setMode({ mode: "agent", banner: line, origins: (S.deployment && S.deployment.origins) || [], compact: wantsCompact() }); } catch (e) {}
+  }
+
+  function progressBar() {
+    var pct = Math.round(progressFraction() * 100);
+    return '<div class="smd-connect-prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '">' +
+      '<i style="width:' + pct + '%"></i></div>' +
+      '<div class="smd-agent-now"><span id="smd-connect-dot" class="smd-agent-dot' + (stalledFor() ? " stalled" : "") + '" aria-hidden="true"></span>' +
+      '<span class="smd-agent-act" id="smd-connect-activity">' + activityLine() + '</span>' +
+      '<strong id="smd-connect-eta">' + etaLine() + '</strong></div>';
+  }
+  /* WHAT IT HAS AND WHAT IS LEFT, at a glance. SVG tick, never an emoji. */
+  var TICK_SVG = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function agentChips(c) {
+    var out = "", i, n, seen = {};
+    var found = c.found || [], looking = c.looking || [];
+    for (i = 0; i < found.length; i++) {
+      n = VIEW_NAMES[found[i]] || found[i];
+      if (!n || seen[n]) continue;
+      seen[n] = true;
+      out += '<span class="smd-agent-chip done">' + TICK_SVG + esc(n) + "</span>";
+    }
+    for (i = 0; i < looking.length; i++) {
+      n = VIEW_NAMES[looking[i]];
+      if (!n || seen[n]) continue;
+      seen[n] = true;
+      out += '<span class="smd-agent-chip">' + esc(n) + "</span>";
+    }
+    return out ? '<div class="smd-agent-chips" aria-label="What the agent has found so far">' + out + "</div>" : "";
+  }
+
   function progressDetail() {
     var c = S.progressCounts || {};
     if (S.guide) {
-      return '<div class="smd-connect-card"><p class="smd-connect-lead">' + esc(S.guide.text) + '</p>' +
-        '<div class="smd-connect-note">Tap inside the hospital website, then tap Done at the top. Skip if your hospital has no such view.</div>' +
-        '<div class="smd-connect-row"><button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip</button></div></div>';
+      return '<div class="smd-connect-card">' + (S.guide.total ? progressBar() : "") + '<p class="smd-connect-lead">' + esc(S.guide.text) + '</p>' +
+        '<div class="smd-connect-note">Find it in the hospital screen and tap inside it: it turns green so you can see what the agent will read. Then tap Done at the top. If your hospital has no such screen, tap Not in my EMR.</div>' +
+        '<div class="smd-connect-row"><button id="smd-connect-guidemissing" class="smd-connect-btn" type="button">Not in my EMR</button>' +
+        '<button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip for now</button></div></div>';
     }
-    return '<div class="smd-connect-card">' +
-      (c.opening ? '<div class="smd-connect-row smd-connect-counts"><span>Opening</span><strong>' + esc(c.opening) + '</strong></div>' : "") +
-      '<div class="smd-connect-row smd-connect-counts"><span>Found</span><strong>' + viewNames(c.found) + '</strong></div>' +
-      '<div class="smd-connect-row smd-connect-counts"><span>Still looking for</span><strong>' + viewNames(c.looking) + '</strong></div>' +
+    return '<div class="smd-connect-card smd-agent">' +
+      progressBar() +
+      agentChips(c) +
+      '<div class="smd-agent-stats">' +
       '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
       '<div class="smd-connect-row smd-connect-counts"><span>Requests observed</span><strong id="smd-connect-reqs">' + c.requests + '</strong></div>' +
+      '</div>' +
       '</div>';
   }
 
@@ -1079,23 +1614,125 @@
       '<h2 class="smd-connect-display">Reading ' + esc(hostOf(S.selected.emrUrl)) + '</h2>' +
       '<p id="smd-connect-phase" class="smd-connect-lead">' + phaseLabel(S.guide ? "ASKING" : c.phase) + '</p>' +
       '<div id="smd-connect-detail">' + progressDetail() + '</div>' +
-      '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open. Do not switch apps or lock the screen: a locked phone stops the agent and can sign you out of the hospital. This takes a few minutes.</div>' +
-      '<div class="smd-connect-row"><button id="smd-connect-stop" class="smd-connect-btn danger" type="button">Stop</button>' +
-      '<button id="smd-connect-progretry" class="smd-connect-btn primary" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>';
+      '<div class="smd-connect-note">' + (isManual() ? "Keep your phone unlocked and StewardMD open until every step is answered." : "Keep your phone unlocked and StewardMD open. Locking the screen stops the agent. This takes a few minutes.") + '</div>' +
+      (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" style="display:none;" aria-hidden="true"></div>') +
+      /* CONTROLS THAT REACH THE ENGINE. Each one is a real signal the run checks, never decoration:
+       * a control the doctor can press that does nothing is worse than no control at all.
+       *
+       * THEY STICK TO THE BOTTOM. Laid out in the normal flow they sat under the waiting game, which on
+       * a phone pushed all four below the fold: the doctor could watch the agent work and could not
+       * reach Stop without scrolling past a game (owner, iPhone, 2026-09-15). A control that stops a
+       * running agent has to be reachable at every moment, so the bar pins to the bottom of the sheet
+       * and the rest scrolls under it - and the bottom is where the thumb already is. */
+      '<div class="smd-agent-bar">' +
+      '<div id="smd-connect-stallnote" class="smd-connect-note" style="display:none"></div>' +
+      '<div class="smd-agent-acts">' +
+      '<button id="smd-connect-skipstep" class="smd-connect-btn" type="button">Skip this step</button>' +
+      '<button id="smd-connect-redo" class="smd-connect-btn" type="button">Look again</button>' +
+      '<button id="smd-connect-finishnow" class="smd-connect-btn primary smd-agent-stop" type="button" style="display:none">Save what you have</button>' +
+      '<button id="smd-connect-stop" class="smd-connect-btn danger smd-agent-stop" type="button">Stop</button>' +
+      '<button id="smd-connect-progretry" class="smd-connect-btn primary smd-agent-stop" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>' +
+      // Stop throws away everything the agent learned, so it asks first (and offers the kinder option).
+      '<div id="smd-connect-stopconfirm" class="smd-agent-confirm" style="display:none" role="group" aria-label="Confirm stopping">' +
+      '<p id="smd-connect-stoptext">Stop and throw away what the agent has found?</p>' +
+      '<div class="smd-agent-acts"><button id="smd-connect-stopkeep" class="smd-connect-btn" type="button">Keep going</button>' +
+      '<button id="smd-connect-stopyes" class="smd-connect-btn danger" type="button">Stop and discard</button></div></div>' +
+      '</div>';
     setStatus(S.progressFailed ? "bad" : "", S.statusText || "");
-    b.querySelector("#smd-connect-stop").onclick = function () { S.stopRequested = true; stopDiscovery(); };
+    b.querySelector("#smd-connect-stop").onclick = function () {
+      var n = foundCount();
+      var t = b.querySelector("#smd-connect-stoptext");
+      if (t) t.textContent = n ? "Stop and throw away the " + n + (n === 1 ? " screen" : " screens") + " the agent has already found? Save what you have keeps them instead." : "Stop reading this hospital?";
+      var cf = b.querySelector("#smd-connect-stopconfirm");
+      if (cf) cf.style.display = "";
+      var fin = b.querySelector("#smd-connect-finishnow");
+      if (fin && n) { fin.style.display = ""; S.saveOffered = true; }   // the kinder way out, kept on screen
+    };
+    b.querySelector("#smd-connect-stopkeep").onclick = function () {
+      var cf = b.querySelector("#smd-connect-stopconfirm");
+      if (cf) cf.style.display = "none";
+    };
+    b.querySelector("#smd-connect-stopyes").onclick = function () { S.stopRequested = true; stopDiscovery(); };
+    /* Skip: abandon the step on screen now (it is marked not proven) and move to the next one. */
+    b.querySelector("#smd-connect-skipstep").onclick = function () {
+      if (!S) return;
+      S.skipRequested = (S.skipRequested || 0) + 1;
+      S.lastProgressAt = Date.now();            // the doctor acted: the stall clock starts over
+      // If the agent is waiting on a question right now, this answers it too, so one Skip is enough.
+      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat(); r({ done: false }); paintProgress(); }
+      flashAction(b, "#smd-connect-skipstep", "Skipping");
+    };
+    /* Look again: re-walk this hospital for whatever is still missing. */
+    b.querySelector("#smd-connect-redo").onclick = function () {
+      if (!S) return;
+      S.redoRequested = (S.redoRequested || 0) + 1;
+      S.lastProgressAt = Date.now();
+      flashAction(b, "#smd-connect-redo", "Looking again");
+    };
+    /* NOT Stop. The session stays open and the engine keeps everything it learned: it breaks out of
+     * whatever it is waiting on and goes straight to writing the connection. */
+    b.querySelector("#smd-connect-finishnow").onclick = function () {
+      if (!S || S.finishRequested) return;
+      S.finishRequested = true;
+      S.bannerLine = null;
+      var btn = b.querySelector("#smd-connect-finishnow");
+      if (btn) { btn.disabled = true; btn.textContent = "Saving"; }
+      paintProgress();
+      publishBannerProgress();
+    };
     b.querySelector("#smd-connect-progretry").onclick = function () { beginAgentMode(); };
     wireGuideSkip(b);
+    startProgressTicker();
+    if (!isManual()) mountSnake(b.querySelector("#smd-connect-snake"));
+  }
+
+  /* THE GAME IS A COMPANION, NEVER A BLOCKER. It lives outside #smd-connect-detail so progress repaints
+   * do not restart it, and it is stopped whenever the sheet leaves the progress screen. */
+  function loadSnake() {
+    if (window.SMD_SNAKE) return Promise.resolve(window.SMD_SNAKE);
+    if (S && S.snakeLoading) return S.snakeLoading;
+    var p = new Promise(function (resolve) {
+      var sc = document.createElement("script");
+      sc.src = "/connect-agent-snake.js?v=snk1";
+      sc.onload = function () { resolve(window.SMD_SNAKE || null); };
+      sc.onerror = function () { resolve(null); };
+      document.head.appendChild(sc);
+    });
+    if (S) S.snakeLoading = p;
+    return p;
+  }
+  function mountSnake(el) {
+    if (!el) return;
+    stopSnake();
+    // Snake game visuals are suppressed in production UI for a clean clinical presentation
+  }
+  function stopSnake() {
+    if (S && S.snake) { try { S.snake.stop(); } catch (e) {} S.snake = null; }
+  }
+
+  /* A tap has to be acknowledged at once. The engine only acts on a signal when it reaches its next
+   * checkpoint, which can be a moment away, and a button that looks inert invites a second tap. */
+  function flashAction(b, sel, label) {
+    var el = b && b.querySelector ? b.querySelector(sel) : null;
+    if (!el) return;
+    var was = el.textContent;
+    el.disabled = true;
+    el.textContent = label;
+    setTimeout(function () { if (el && el.isConnected) { el.disabled = false; el.textContent = was; } }, 2500);
   }
 
   function wireGuideSkip(b) {
-    var skip = b.querySelector("#smd-connect-guideskip");
-    if (skip) skip.onclick = function () {
-      if (!S || !S.guideResolve) return;
-      var r = S.guideResolve; S.guideResolve = null; S.guide = null;
-      r({ done: false });
-      paintProgress();
-    };
+    function answer(id, value) {
+      var el = b.querySelector(id);
+      if (el) el.onclick = function () {
+        if (!S || !S.guideResolve) return;
+        var r = S.guideResolve; S.guideResolve = null; S.guide = null; stopGuideHeartbeat();
+        r(value);
+        paintProgress();
+      };
+    }
+    answer("#smd-connect-guideskip", { done: false });
+    answer("#smd-connect-guidemissing", { done: false, missing: true });
   }
 
   function paintProgress() {
@@ -1105,6 +1742,47 @@
     var lead = b.querySelector("#smd-connect-phase"); if (lead) lead.textContent = phaseLabel(S.guide ? "ASKING" : c.phase);
     var detail = b.querySelector("#smd-connect-detail"); if (detail) { detail.innerHTML = progressDetail(); wireGuideSkip(b); }
     var retry = b.querySelector("#smd-connect-progretry"); if (retry) retry.style.display = S.progressFailed ? "" : "none";
+  }
+
+  /* A step of the crawl can take half a minute, and a screen that only repaints when the engine
+   * reports reads as frozen. This ticks the estimate (and only the estimate) once a second. */
+  function startProgressTicker() {
+    stopProgressTicker();
+    S.progressTicker = setInterval(function () {
+      if (!S || S.screen !== "progress" || S.progressFailed) return;
+      var eta = document.getElementById("smd-connect-eta");
+      if (eta) eta.textContent = etaLine();
+      var act = document.getElementById("smd-connect-activity");
+      if (act) act.textContent = activityLine();
+      // One crawl step can take half a minute; the banner is all the doctor can see, so the time
+      // left has to keep moving there too, not only on the hidden sheet.
+      publishBannerProgress();
+      // A quiet run grows a way out. Only the ticker can do this: nothing else runs while the
+      // engine is stuck, which is exactly why the screen had no escape before.
+      var fin = document.getElementById("smd-connect-finishnow");
+      var note = document.getElementById("smd-connect-stallnote");
+      var dot = document.getElementById("smd-connect-dot");
+      if (dot) dot.className = "smd-agent-dot" + (stalledFor() ? " stalled" : "");
+      if (fin && !S.finishRequested) fin.style.display = (canFinishNow() || S.saveOffered) ? "" : "none";
+      if (!note) return;
+      if (S.finishRequested) {
+        note.style.display = "";
+        note.textContent = "Keeping what the agent already found. This takes a few seconds.";
+      } else if (canFinishNow()) {
+        var n = foundCount();
+        note.style.display = "";
+        note.textContent = "This step is taking longer than usual. Nothing is lost: " + n + (n === 1 ? " screen has" : " screens have") +
+          " already been learned. Save what you have keeps them and finishes now. Stop throws them away.";
+      } else if (stalledFor()) {
+        note.style.display = "";
+        note.textContent = "This step is taking longer than usual. Still trying.";
+      } else {
+        note.style.display = "none";
+      }
+    }, 1000);
+  }
+  function stopProgressTicker() {
+    if (S && S.progressTicker) { clearInterval(S.progressTicker); S.progressTicker = null; }
   }
 
   /* ---- Fallback (no plugin): server-driven job-state polling, unchanged. ---- */
@@ -1221,6 +1899,10 @@
 
   /* ---- Screen 7: result (capabilities + reviewer approval) ---- */
   function loadVersionAndShowResult() {
+    forgetRun();
+    /* Every path to a result screen closes the hospital browser: left open, it sat on top of the result
+     * with a dead "Done, I'm signed in" and no sign-in detection (owner, 2026-09-13). */
+    try { stopDiscoveryPlugin(); } catch (e) {}
     show("result");
     S.canApprove = true; /* optimistic; server enforces on approve/reject, see below */
     if (!S.versionId) { paintResult(); return; }
@@ -1238,15 +1920,17 @@
     var b = body();
     if (!b) return;
     b.innerHTML =
-      '<h2 class="smd-connect-display">What the agent can read</h2>' +
-      '<p class="smd-connect-lead">Proven at ' + esc(hostOf((S.selected && S.selected.emrUrl) || "")) + '.</p>' +
+      '<h2 class="smd-connect-display">Your adapter is created</h2>' +
+      '<p class="smd-connect-lead">' + esc(hostOf((S.selected && S.selected.emrUrl) || "")) + ' is connected and awaiting approval.</p>' +
       '<ul id="smd-connect-caps" class="smd-connect-caps"></ul>' +
-      '<div class="smd-connect-note">Awaiting approval. A StewardMD reviewer approves before other doctors can use this.</div>' +
+      verifiedLines() +
+      missingLine() +
+      '<div class="smd-connect-note">A StewardMD reviewer approves it, usually within about 4 hours. Once approved, your hospital appears in the Ward Sync hospital list on its own: tap it, sign in, and your patients load.</div>' +
       '<div id="smd-connect-approverow" class="smd-connect-row" style="display:none">' +
       '<button id="smd-connect-approve" class="smd-connect-btn primary" type="button">Approve</button>' +
       '<button id="smd-connect-reject" class="smd-connect-btn danger" type="button">Reject</button></div>' +
       '<div class="smd-connect-row"><button id="smd-connect-resultdone" class="smd-connect-btn" type="button">Done</button></div>';
-    setStatus("warn", "Awaiting approval.");
+    setStatus("warn", "Adapter created. Awaiting approval.");
     b.querySelector("#smd-connect-resultdone").onclick = function () { resetToConnections(""); };
     b.querySelector("#smd-connect-approve").onclick = function () {
       api("/versions/" + enc(S.versionId) + "/approve", { method: "POST", body: "{}" }).then(function (r) {
@@ -1280,6 +1964,30 @@
     paintResult();
   }
 
+  /* WHAT WAS PROVEN, per view: rows read through the discovered endpoint for a real patient, or why not. */
+  function verifiedLines() {
+    var v = S.result && S.result.verification;
+    var checks = (v && v.checks) || [];
+    if (!checks.length) {
+      // No verification ran: say why, in plain words, instead of a silent probe list.
+      var why = S.result && (S.result.crawlStop || S.result.stopReason);
+      var warn = S.result && (S.result.warnings || [])[0];
+      return (why || warn) ? '<div class="smd-connect-note">Not checked against patients' + (why ? ' (the crawl stopped: ' + esc(why) + ')' : '') + (warn ? '. ' + esc(warn) : '') + '.</div>' : "";
+    }
+    var items = checks.map(function (c) {
+      var name = esc(VIEW_NAMES[c.resource] || c.resource);
+      if (c.ok) return '<li>' + name + ': ' + esc(c.rows) + ' rows read through the ' + (c.via === 'endpoint' ? 'discovered endpoint' : 'page') + '.</li>';
+      return '<li class="smd-connect-note">' + name + ': not proven (' + esc(c.reason || 'no rows') + ').</li>';
+    });
+    return '<div class="smd-connect-note">Checked against ' + esc(v.patients) + ' real patient' + (v.patients === 1 ? '' : 's') + ' before sending for approval:</div><ul class="smd-connect-caps">' + items.join('') + '</ul>';
+  }
+
+  function missingLine() {
+    var m = (S.result && S.result.missing) || [];
+    if (!m.length) return "";
+    return '<div class="smd-connect-note">Not in your EMR, as you told the agent: ' + viewNames(m) + '.</div>';
+  }
+
   function paintResult() {
     var b = body();
     if (!b || !S || !S.result) return;
@@ -1295,7 +2003,10 @@
         (proven ? "✓ " : "") + esc(CAP_LABELS[key]) + (proven ? "" : " (not found at this hospital)") + '</li>';
     }
     var list = b.querySelector("#smd-connect-caps");
-    if (list) list.innerHTML = html;
+    /* The probe list said "not found" for everything on a live run whose views were real: what the
+     * agent PROVED against patients (verifiedLines) is the truth, so it replaces the probe list. */
+    var proven = S.result && S.result.verification && (S.result.verification.checks || []).length;
+    if (list) { list.innerHTML = proven ? "" : html; list.style.display = proven ? "none" : ""; }
     var row = b.querySelector("#smd-connect-approverow");
     if (row) row.style.display = S.canApprove ? "" : "none";
   }
@@ -1306,11 +2017,22 @@
     if (!b) return;
     var name = hostOf((S.selected && S.selected.emrUrl) || "");
     var msg = S.reuse ? "Signed in. You can use this connection now." : "Approved. This connection is now active.";
+    var depId = (S.deployment && S.deployment.id) || S.deploymentId || (S.selected && S.selected.deploymentId);
     b.innerHTML =
       '<h2 class="smd-connect-display">Connected</h2>' +
       '<p class="smd-connect-lead">' + esc(name) + '. ' + msg + '</p>' +
-      '<div class="smd-connect-row"><button id="smd-connect-donebtn" class="smd-connect-btn primary" type="button">Done</button></div>';
+      '<div class="smd-connect-row">' +
+      (depId ? '<button id="smd-connect-wardgo" class="smd-connect-btn primary" type="button">Open in Ward Sync</button>' : "") +
+      '<button id="smd-connect-donebtn" class="smd-connect-btn' + (depId ? "" : " primary") + '" type="button">Done</button></div>';
     setStatus("done", "Connection active.");
+    var wbtn = b.querySelector("#smd-connect-wardgo");
+    if (wbtn) {
+      wbtn.onclick = function () {
+        close();
+        if (window.openGHIS) window.openGHIS();
+        if (window.ghisOpenAdapterHospital && depId) setTimeout(function () { window.ghisOpenAdapterHospital(depId); }, 150);
+      };
+    }
     b.querySelector("#smd-connect-donebtn").onclick = function () { close(); };
   }
 
@@ -1361,7 +2083,7 @@
       '<div class="smd-connect-sub">Sign in yourself. StewardMD reads only.</div></div>' +
       '<button class="smd-connect-x" type="button" aria-label="Close">×</button></div>' +
       '<div class="smd-connect-body" id="smd-connect-body"></div>' +
-      '<div style="padding:0 1.125rem calc(1rem + env(safe-area-inset-bottom))"><div id="smd-connect-status" class="smd-connect-status" role="status" aria-live="polite"></div></div>' +
+      '<div id="smd-connect-status-wrap" style="padding:0 1.125rem calc(1rem + env(safe-area-inset-bottom))"><div id="smd-connect-status" class="smd-connect-status" role="status" aria-live="polite"></div></div>' +
       '</section>';
     document.body.appendChild(ov);
     ov.querySelector(".smd-connect-x").onclick = function () { close(); };
@@ -1374,11 +2096,22 @@
     pickTenantThenLoad();
   }
 
+  setTimeout(function () { try { resumeRun(); } catch (e) {} }, 1500);
   window.SMD_CONNECT_AGENT = {
     open: open,
+    __resumeRun: resumeRun,
     close: function () { close(); },
     refresh: refresh,
     __setApi: function (fn) { apiImpl = fn; },
+    /* Test-only: drive the progress screen without a live crawl, so the bar, the wording and the
+     * estimate are provable in a browser the way a doctor sees them. */
+    __reloadConnections: function () { if (S) loadConnections(); },
+    __setState: function (patch) { if (!S) return; for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) S[k] = patch[k]; },
+    __paintProgress: function () { if (S && S.screen === "progress") { renderProgress(); } },
+    /* Test-only: re-enter the sign-in screen the way a resumed or retried session does, so the
+     * "open the hospital website again if it is not actually open" repair is provable. */
+    __paintLogin: function () { if (S && S.screen === "login") { renderLogin(); } },
+    __publishBanner: function () { publishBannerProgress(); },
     __debug: function () {
       if (!S) return { open: !!overlay() };
       return {
@@ -1394,7 +2127,14 @@
         statusText: S.statusText,
         controlOwner: S.controlOwner,
         connectionCount: S.connections.length,
-        canApprove: S.canApprove
+        canApprove: S.canApprove,
+        loginHandled: !!S.loginHandled,
+        stopRequested: !!S.stopRequested,
+        finishRequested: !!S.finishRequested,
+        skipRequested: S.skipRequested || 0,
+        redoRequested: S.redoRequested || 0,
+        lastProgressAt: S.lastProgressAt || 0,
+        run: S.result ? { crawlStop: S.result.crawlStop || null, stopReason: S.result.stopReason || null, views: (S.result.observedViews || []).length, found: S.result.found || [], asked: S.result.asked || [], missing: S.result.missing || [], warnings: S.result.warnings || [], checks: ((S.result.verification || {}).checks || []).length, patients: (S.result.verification || {}).patients || 0, candidate: S.result.candidateVersionId || null } : null
       };
     }
   };

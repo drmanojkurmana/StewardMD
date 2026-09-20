@@ -59,6 +59,15 @@ All new flags default to OFF (fail closed).
 - `CONNECT_AGENT_AUTO_ACTIVATE_FLAG`: Allows automated activation of previously approved adapter templates (default: OFF).
 - `smd_connect_agent`: Client-side UI launcher gate in `connect-agent-boot.js` (default: OFF). Set via `localStorage.setItem("smd_connect_agent", "1")` or URL parameter `?connect_agent=1`.
 
+### The brain (model that reads screen structure)
+- `CONNECT_AGENT_MODEL`: REQUIRED. The exact Google model id for the Connect Agent brain (owner: Gemini 3.8). No default and no fallback: unset means every brain call fails with brain_not_configured. `GET /api/connect/agent/brain/model` reports what is configured. Production (2026-09-13): `gemini-3.8-flash`.
+- `CONNECT_AGENT_MODEL_PROVIDER`: `vertex` (default), `vertex-adc` or `gemini` (AI Studio). With `CONNECT_AGENT_BRAIN_PROXY_URL` + `CONNECT_AGENT_BRAIN_PROXY_SECRET` set, `vertex` goes through the Cloud Run brain proxy (`connect-agent/brain-proxy`, service `connect-agent-brain` in asia-south1, service account `connect-agent-brain@stewardmd-498ec` with roles/aiplatform.user, Vertex `locations/global` via ADC). Production uses that. Direct express mode does not work: the project's Gemini API keys are bound to a service account, and org policy
+  `iam.managed.disableServiceAccountApiKeyCreation` limits them to generativelanguage.googleapis.com, so Vertex express
+  mode (aiplatform.googleapis.com) answers PERMISSION_DENIED for every call (found live, 2026-09-13). Secrets bind at
+  build time: a changed provider needs a new deploy.
+- Ops: `classify`, `map-columns`, `next`, `verify` (judges a replayed view from columns, row count and response kind).
+- Requests pass a refusing PHI gate (whitelisted keys, no 3+ digit runs, no `@`); answers are cached in `MAIK_KV` per origin and structure hash for 30 days. A model outage answers 503 `brain_unavailable` and the phone continues on its deterministic rules.
+
 ### Cryptographic Keys
 - `CONNECT_AGENT_TOKEN_KEY`: Mandatory. Signs viewer tokens (`functions/_connect/agent/viewer-token.js`); missing = POST /sessions answers 400 not-configured. Set 2026-09-12.
 - `CONNECT_CONSENT_SIGNING_KEY`: Mandatory environment variable for `connect-agent/consent.mjs`. Set in production 2026-09-12.

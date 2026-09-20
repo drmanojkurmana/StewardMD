@@ -1,0 +1,91 @@
+{
+  "id": "uveal-tebentafusp",
+  "diseaseId": "uveal_melanoma",
+  "name": "Tebentafusp-tebn (HLA-A*02:01+ Metastatic Uveal Melanoma)",
+  "version": "1.0",
+  "lifecycleState": "active",
+  "intentOptions": [
+    "palliative",
+    "life prolongation"
+  ],
+  "cycleLengthDays": 7,
+  "cycles": 24,
+  "caps": "none",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Uveal Melanoma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS Landmark Regimen: Phase III IMCgp100-202 Trial (Nathan et al. NEJM 2021)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HLA": "HLA-A*02:01 positive"
+  },
+  "stage": [
+    "IV",
+    "metastatic"
+  ],
+  "treatmentSetting": [
+    "first-line",
+    "subsequent-line"
+  ],
+  "histology": "uveal melanoma (HLA-A*02:01 positive)",
+  "premedications": [
+    {
+      "name": "Acetaminophen",
+      "dose": "650 mg PO",
+      "notes": "Give prior to tebentafusp infusion"
+    },
+    {
+      "name": "Diphenhydramine",
+      "dose": "25-50 mg IV/PO",
+      "notes": "Give prior to tebentafusp infusion"
+    },
+    {
+      "name": "IV hydration",
+      "dose": "500-1000 mL Normal Saline",
+      "notes": "Administer before and after first 3 infusions to mitigate hypotension"
+    }
+  ],
+  "supportiveCare": [
+    "Inpatient observation: monitor vitals for at least 16 hours following first 3 infusions due to CRS and hypotension risk.",
+    "After dose 3 without significant CRS, subsequent infusions can be administered in an outpatient setting with 30-minute monitoring."
+  ],
+  "monitoring": [
+    "Vitals every 30 minutes for 2 hours, then hourly during initial inpatient step-up infusions",
+    "CBC, CMP, liver enzymes before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "CRS Grade 2 (hypotension responsive to fluids, hypoxia requiring low-flow O2)",
+      "action": "treat/hold",
+      "text": "Administer IV fluid bolus (1-2 L), supplemental O2. Withhold infusion until resolution."
+    },
+    {
+      "condition": "CRS Grade >= 3",
+      "action": "withhold/discontinue",
+      "text": "Administer tocilizumab 8 mg/kg IV and systemic steroids (dexamethasone or methylprednisolone). Consider permanent discontinuation if Grade 4."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "tebentafusp",
+      "name": "Tebentafusp-tebn",
+      "basis": "flat",
+      "dosePerUnit": 68,
+      "unit": "mcg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Tebentafusp target dose 68 mcg IV weekly (Day 15+). Step-up initiation schedule required: Day 1 (20 mcg), Day 8 (30 mcg), Day 15+ (68 mcg weekly). Grounded in IMCgp100-202 Phase III trial showing significant OS advantage in HLA-A*02:01+ metastatic uveal melanoma."
+    }
+  ]
+}

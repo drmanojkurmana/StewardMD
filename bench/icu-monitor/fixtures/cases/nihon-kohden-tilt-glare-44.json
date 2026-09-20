@@ -1,0 +1,90 @@
+{
+  "id": "nihon-kohden-tilt-glare-44",
+  "manufacturer": "nihon-kohden",
+  "layout": "right-column-label-left-limits-right",
+  "difficulty": [
+    "tilt",
+    "glare"
+  ],
+  "image": "nihon-kohden-tilt-glare-44.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 82
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 96
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 82
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 18
+    },
+    "temp": {
+      "status": "visible",
+      "value": 37.2
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 130,
+        "dbp": 85,
+        "map": 100
+      }
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 130,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 85,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 100,
+      "source": "NIBP"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "20:38"
+  },
+  "notes": "nihon-kohden tilt-glare synthetic fixture."
+}

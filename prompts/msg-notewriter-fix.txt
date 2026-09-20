@@ -1,0 +1,27 @@
+Ticking "nurse" in who-may-write-a-note changed nothing a nurse could do
+
+Verified the admin note-writer control (added earlier this session) actually end to end: ticked
+nurse, saved, then had a nurse try to write a note through the real route. Refused - not with the
+plain refusal the earlier fix was built to replace, but with a raw governance error
+("SCOPE_DENIED"), which means the setting looked like it saved but did nothing.
+
+The route (functions/api/queue/[[path]].js) checks noteWriterRoles and lets the POST /ward/note
+request through - that part worked. But the write still goes to the record engine
+(wardsynq-actors.js's GovernedStore), which independently checks the WRITING ACTOR'S OWN grant
+before committing anything, and a nurse's grant is built purely from her emr.vitals capability,
+which has never included ClinicalNote. The route's decision never reached the actor the write was
+actually checked against, so the deeper engine refused it anyway - the config had a route-level
+door but no way through the second lock behind it.
+
+Fixed at the one place both facts are visible: note-templates.js's open() now widens the actor's
+write scope to include ClinicalNote, but only when the router says noteWriterOverride (meaning:
+this exact request already passed the noteWriterRoles check) AND only on a restricted (array)
+write scope - never touching a role that already has unrestricted write (emr.treat), and never
+granting anything but the one type this config exists to authorise.
+
+Verified live: a nurse with noteWriterRoles including "nurse" can now write a timeline note; the
+same nurse before the tick, or a role never named in the list, still gets the exact same plain
+refusal as before. 5732 tests still pass.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

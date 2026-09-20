@@ -149,6 +149,10 @@ test("full lifecycle: report -> triage -> RCA -> CAPA -> close, each a real new 
   assert.equal(triaged.__status, 200, JSON.stringify(triaged));
   assert.equal(triaged.incident.state, "triaged");
   assert.ok(triaged.incident.version > filed.incident.version, "triage is a NEW version, not a rewrite");
+  const early = await as(SAFETY_OFFICER, "/ward/incident-rca", "POST", { orgId: ORG, incidentId: id, rootCause: "The pump screen shows no unit label at the bedside" });
+  assert.equal(early.error, "NOT_CONFIRMED", "an RCA waits for the signal to be confirmed");
+  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error" });
+  assert.equal(conf.__status, 200, JSON.stringify(conf));
 
   const rca = await as(SAFETY_OFFICER, "/ward/incident-rca", "POST", { orgId: ORG, incidentId: id, rootCause: "The infusion pump's rate-entry screen defaults to mL/hr with no unit label visible at the bedside", conductedBy: "Safety Officer" });
   assert.equal(rca.__status, 200, JSON.stringify(rca));
@@ -194,6 +198,8 @@ test("a SAC-1/2 incident cannot close without an RCA, surfaced through the wire"
   const triaged = await as(SAFETY_OFFICER, "/ward/incident-triage", "POST", { orgId: ORG, incidentId: filed.incident.id, likelihood: "likely", triagedBy: "Safety Officer" });
   assert.equal(triaged.__status, 200, JSON.stringify(triaged));
   assert.ok(triaged.incident.sac.rcaRequired, "this severity/likelihood combination must require RCA for the test to prove anything");
+  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: filed.incident.id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error" });
+  assert.equal(conf.__status, 200, JSON.stringify(conf));
 
   const closeAttempt = await as(SAFETY_OFFICER, "/ward/incident-close", "POST", { orgId: ORG, incidentId: filed.incident.id, by: "Safety Officer" });
   assert.equal(closeAttempt.__status, 409, JSON.stringify(closeAttempt));
@@ -219,9 +225,78 @@ test("triagedBy/conductedBy are the session's own actor, not whatever name the b
   assert.equal(triaged.__status, 200, JSON.stringify(triaged));
   assert.equal(triaged.incident.triagedBy, idFor(SAFETY_OFFICER), "triagedBy must be the authenticated session's actor, never the body");
   assert.notEqual(triaged.incident.triagedBy, "Dr Somebody Else");
+  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error" });
+  assert.equal(conf.__status, 200, JSON.stringify(conf));
+  assert.equal(conf.incident.confirmation.by, idFor(SAFETY_OFFICER), "the decider is the session's actor");
 
   const rca = await as(SAFETY_OFFICER, "/ward/incident-rca", "POST", { orgId: ORG, incidentId: id, rootCause: "The infusion pump's rate-entry screen defaults to mL/hr with no unit label visible at the bedside", conductedBy: "Dr Somebody Else" });
   assert.equal(rca.__status, 200, JSON.stringify(rca));
   assert.equal(rca.incident.rca.conductedBy, idFor(SAFETY_OFFICER), "conductedBy must be the authenticated session's actor, never the body");
   assert.notEqual(rca.incident.rca.conductedBy, "Dr Somebody Else");
+});
+
+test("P1.14 SIGNAL: raised from a real source record, refused for a missing one; the ledger shows its stage", async () => {
+  seedHospital();
+  await RECORD.append(TENANT_ROW.id, [{ resourceType: "SafetyOverride", id: "ovr-1", version: 1, patientId: "pat-1", rule: "allergy" }]);
+  const none = await as(NURSE, "/ward/incident-signal", "POST", { orgId: ORG, what: "Override looked wrong", severity: "no-harm" });
+  assert.equal(none.__status, 422, JSON.stringify(none));
+  const missing = await as(NURSE, "/ward/incident-signal", "POST", { orgId: ORG, what: "Override looked wrong", severity: "no-harm", source: { resourceType: "SafetyOverride", id: "nope" } });
+  assert.equal(missing.__status, 404, JSON.stringify(missing));
+  const sig = await as(NURSE, "/ward/incident-signal", "POST", { orgId: ORG, what: "Allergy override then a rash", severity: "minor", category: "medication-error", source: { resourceType: "SafetyOverride", id: "ovr-1" } });
+  assert.equal(sig.__status, 200, JSON.stringify(sig));
+  assert.deepEqual(sig.incident.source, { resourceType: "SafetyOverride", id: "ovr-1" });
+  assert.equal(sig.incident.patientId, "pat-1", "the patient comes from the source record");
+  const log = await as(SAFETY_OFFICER, "/ward/incident-log?orgId=" + ORG);
+  assert.equal(log.incidents[0].stage, "signal");
+  assert.equal(log.health.signals, 1);
+  assert.ok(log.categories.includes("fall"));
+});
+
+test("P1.14 CONFIRM: a nurse or doctor cannot decide; not-an-incident and duplicate carry a reason and a real target", async () => {
+  seedHospital();
+  const a = await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Patient found on the floor beside the bed", severity: "minor", category: "fall" });
+  const b = await as(DOCTOR, "/ward/incident-report", "POST", { orgId: ORG, what: "Same fall, reported by the doctor", severity: "minor" });
+  for (const who of [NURSE, DOCTOR]) {
+    const r = await as(who, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: a.incident.id, outcome: "confirmed", reason: "real", category: "fall" });
+    assert.equal(r.__status, 403, who);
+  }
+  const noReason = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: b.incident.id, outcome: "not-an-incident" });
+  assert.equal(noReason.error, "NO_REASON");
+  const ghost = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: b.incident.id, outcome: "duplicate", duplicateOf: "wsq-incident-none", reason: "same fall" });
+  assert.equal(ghost.__status, 404, JSON.stringify(ghost));
+  const dup = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: b.incident.id, outcome: "duplicate", duplicateOf: a.incident.id, reason: "same fall, second reporter" });
+  assert.equal(dup.__status, 200, JSON.stringify(dup));
+  assert.equal(dup.incident.state, "rejected");
+  const ok = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: a.incident.id, outcome: "confirmed", reason: "witnessed fall" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  const again = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: a.incident.id, outcome: "not-an-incident", reason: "changed mind" });
+  assert.equal(again.error, "ALREADY_DECIDED");
+  const log = await as(SAFETY_OFFICER, "/ward/incident-log?orgId=" + ORG);
+  assert.deepEqual(log.incidents.map((i) => i.stage).sort(), ["confirmed", "rejected"]);
+  assert.equal(log.health.confirmed, 1);
+  assert.equal(log.health.rejected, 1);
+});
+
+test("P1.14 quality-safety: returns the seed measures and case lists for analytics.view; a nurse and a safety officer are refused", async () => {
+  seedHospital();
+  const a = await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Patient found on the floor beside the bed", severity: "minor", category: "fall" });
+  await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: a.incident.id, outcome: "confirmed", reason: "witnessed fall" });
+  await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Possible second fall, unclear", severity: "no-harm" });
+
+  const r = await as(DOCTOR, "/ward/quality-safety?orgId=" + ORG + "&days=90");
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.period.days, 90);
+  const ids = r.measures.map((m) => m.id);
+  for (const id of ["inpatient-mortality", "readmission-30-day", "sepsis-bundle-compliance", "length-of-stay", "falls", "pressure-injuries", "medication-errors", "hai", "antibiotic-dot", "lab-tat", "radiology-tat", "bed-utilisation"]) assert.ok(ids.includes(id), id);
+  const falls = r.measures.find((m) => m.id === "falls");
+  assert.equal(falls.numerator, 1);
+  assert.equal(falls.rate, null, "no bed-days in this hospital: no rate, not zero");
+  assert.match(r.measures.find((m) => m.id === "antibiotic-dot").reason, /antibiotic list not configured/);
+  assert.deepEqual(r.safety, { signals: 1, confirmed: 1, rejected: 0, withRootCause: 0, capasOpen: 0, capasCompleted: 0 });
+  assert.ok(!JSON.stringify(r).includes(idFor(NURSE)), "no clinician is named");
+
+  const denied = await as(NURSE, "/ward/quality-safety?orgId=" + ORG);
+  assert.equal(denied.__status, 403, "a nurse holds no analytics.view");
+  assert.equal(denied.error, "forbidden");
+  // (SAFETY_OFFICER is this org's owner in the harness, so resolves as admin; not a negative case here.)
 });

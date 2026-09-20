@@ -1,6 +1,6 @@
 /* functions/_queue_notify.js — Smart OPD Queue patient notifications. Reuses the FollowCare SMS/WhatsApp
  * senders + the shared i18n engine; logs its own PHI-free delivery events into q_events (NOT fc_delivery).
- * PHI-light: message bodies carry NO patient name/MRN — only dept, doctor, an opaque link, counts/times.
+ * PHI-light: message bodies carry NO patient name/MRN — only dept, doctor, the OPD token, an opaque link, counts/times.
  *
  * Idempotency: position tiers use ONE MONOTONIC stage counter on the ticket (n_stage: 0→ahead5(1)→
  * ahead2(2)→next(3)) so advancing never re-sends or back-sends a lower tier (a patient added straight at
@@ -11,7 +11,10 @@ import I18n from "../followcare-i18n.js";
 import { sendSms, smsConfigured } from "./_followcare_sms.js";
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import { decPHI, mintTicketToken } from "./_queue.js";
-import { fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsCommit, wUpdate } from "./_fbfirestore.js";
+import { writeOrgAudit } from "./_q_audit_chain.js";
+import { quotaOn, quotaKv, consumeVisit } from "./_quota.js";
+import { getEntitlement } from "./_entitlements.js";
 
 var DEFAULT_THRESHOLDS = { early: 5, prep: 2 };
 var STAGE = { ahead5: 1, ahead2: 2, next: 3 };   // monotonic position tiers
@@ -34,11 +37,27 @@ async function linkUrl(env, ticket) {
   var tok = await mintTicketToken(env, ticket.id, ticket.expiresAt || (Date.now() + 12 * 3600e3), ticket.tokenVer || 1);
   return base.replace(/\/+$/, "") + "/queue?t=" + tok;
 }
+/* Channel order for QUEUE messages. WhatsApp first whenever it is configured, SMS only as the
+ * fallback, because a WhatsApp utility message costs a fraction of an SMS and the queue sends 3 to 5
+ * of them per patient. This is deliberately NOT FollowCare's default (that one is sms-first and stays
+ * that way): QUEUE_MSG_CHANNEL overrides for the queue alone, then FOLLOWCARE_MSG_CHANNEL, and
+ * setting either to "sms" forces SMS.
+ *
+ * HONEST LIMIT: nothing in the codebase knows whether a given patient is actually reachable on
+ * WhatsApp. There is no per-patient channel preference on the ticket, no capability lookup, and the
+ * provider does not report it (see the report accompanying this change). So "WhatsApp first" is a
+ * per-SEND attempt-then-fall-back, not a per-patient routing decision: we try WhatsApp, and a failed
+ * send drops to SMS. A real per-patient signal would need either a stored preference captured at
+ * registration or a provider capability check before the send. */
+function queueChannel(env) {
+  var c = String((env && (env.QUEUE_MSG_CHANNEL || env.FOLLOWCARE_MSG_CHANNEL)) || "whatsapp").toLowerCase();
+  return c === "sms" ? "sms" : "whatsapp";
+}
 async function send(env, toE164, body, link) {
   var payload = { toE164: toE164, body: body, vars: { link: link, text: body } };
   // WhatsApp first (when configured); if that send fails or the patient isn't on WhatsApp, fall back to
   // SMS (2Factor). Otherwise SMS is the primary channel.
-  if (String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase() === "whatsapp" && waConfigured(env)) {
+  if (queueChannel(env) === "whatsapp" && waConfigured(env)) {
     var wa; try { wa = await sendWhatsApp(env, payload); } catch (e) { wa = { ok: false, reason: "wa_exception" }; }
     if (wa && wa.ok) return Object.assign({ channel: "whatsapp" }, wa);
     if (smsConfigured(env)) return Object.assign({ channel: "sms", waFellBack: true }, await sendSms(env, payload));
@@ -46,11 +65,32 @@ async function send(env, toE164, body, link) {
   }
   return Object.assign({ channel: "sms" }, await sendSms(env, payload));
 }
+/* Clinic Messaging meter. ONE unit per patient per visit: the ticket id is the visit, so the first
+ * message of a visit charges and every later message of the SAME visit is free (see consumeVisit in
+ * functions/_quota.js). Returns true when the message may go out.
+ *
+ * Running out never blocks the queue: the doctor keeps seeing patients, positions and ETAs keep
+ * recomputing, only the outbound patient messages pause. It is also fail-open at every step - meter
+ * off, no doctor uid, no KV, or a thrown read all let the message through - because a billing lookup
+ * must never be the reason a waiting patient is left uninformed. */
+async function chargeVisit(env, session, ticket) {
+  try {
+    if (!quotaOn(env)) return true;
+    var uid = (session && session.doctorUid) || "";
+    var kv = quotaKv(env);
+    if (!uid || !kv || !ticket || !ticket.id) return true;
+    var ent = null;
+    try { ent = await getEntitlement(env, uid); } catch (e) { ent = null; }
+    var r = await consumeVisit(env, kv, uid, ticket.id, {
+      role: ent && ent.role, msgTier: ent && ent.msgTier, msgTierExp: ent && ent.msgTierExp,
+    });
+    return !!(r && r.ok);
+  } catch (e) { return true; }
+}
+
 function mask(p) { var d = String(p || "").replace(/\D/g, ""); return d.length >= 4 ? "•••••" + d.slice(-4) : "••••"; }
 async function auditNotify(env, session, ticket, event, res, masked) {
-  var id = crypto.randomUUID().replace(/-/g, "");
-  var f = { ts: Date.now(), hospitalId: session.hospitalId || "", ticketId: ticket.id, actor: "system", action: "notify:" + event, meta: (res.ok ? "sent " : res.skipped ? "skipped " : "failed ") + masked };
-  try { await fsCommit(env, [wCreate(env, "q_events/" + id, f)]); } catch (e) {}
+  await writeOrgAudit(env, { hospitalId: session.hospitalId || "", ticketId: ticket.id, actor: "system", action: "notify:" + event, meta: (res.ok ? "sent " : res.skipped ? "skipped " : "failed ") + masked });
 }
 
 // Send the sealed visit-timeline link to the patient at checkout (channel = FOLLOWCARE_MSG_CHANNEL,
@@ -59,6 +99,7 @@ export async function notifyTimeline(env, session, ticket, url) {
   var mobile = "";
   try { mobile = await decPHI(env, ticket.encMobile); } catch (e) {}
   if (!mobile) return { skipped: true, reason: "no_phone" };
+  if (!(await chargeVisit(env, session, ticket))) return { skipped: true, reason: "quota-exhausted" };
   var doctor = session.doctorName || "your doctor";
   var body = "Your visit summary from " + doctor + " is ready. View it here (private link, valid 7 days): " + url;
   var res;
@@ -78,13 +119,17 @@ export async function notifyTicket(env, session, ticket, event, vars) {
   // No number yet (e.g. a GHIS-imported ticket before the lazy demographics lookup): skip WITHOUT
   // marking, so the tier fires once a mobile is attached. No send attempt = no spam (just a cheap re-check).
   if (!mobile) return { skipped: true, reason: "no_phone" };
+  // Out of messaging allowance: skip WITHOUT marking the stage, exactly like the no-phone case, so the
+  // tier still fires for this patient the moment the doctor tops up. Never throws, never blocks.
+  if (!(await chargeVisit(env, session, ticket))) return { skipped: true, reason: "quota-exhausted" };
   var res;
   try {
     var link = await linkUrl(env, ticket);
     var body = I18n.t("queue.msg." + event, ticket.lang || "en", {
-      dept: session.department || "the clinic", doctor: session.doctorName || "", link: link,
+      dept: ticket.department || session.department || "the clinic", doctor: session.doctorName || "", link: link,
       ahead: vars.ahead != null ? vars.ahead : Math.max(0, (ticket.position || 1) - 1), eta: vars.eta || ""
     });
+    if (ticket.token && (event === "registered" || event === "next")) body = I18n.t("queue.msg.token", ticket.lang || "en", { token: ticket.token }) + " " + body;
     res = await send(env, mobile, body, link);
   } catch (e) { res = { ok: false, reason: "exception" }; }
   // Mark the tier attempted (we had a number) so it never re-fires; audit masked. Best-effort writes.

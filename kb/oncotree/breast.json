@@ -1,1826 +1,2636 @@
 {
- "guideline": "breast",
- "title": "Breast Cancer",
- "subtitle": "StewardMD ONCOTREE navigator (draft)",
- "navigatorVersion": "3.0.0",
- "diseaseId": "breast_cancer",
- "matchDisease": true,
- "status": "draft",
- "provenanceNote": "ONCOTREE navigator DRAFT for breast cancer. Full pathway by histology (DCIS, invasive, inflammatory, phyllodes, Paget, pregnancy, recurrent/Stage IV), then workup -> local-regional vs preoperative-systemic -> subtype-directed adjuvant (HR/HER2) -> adjuvant endocrine (pre/post-menopausal) -> surveillance, plus recurrent / metastatic treatment by subtype and local/regional recurrence. Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by reference; surgery / radiation and agents without a dose protocol are shown as checklist guidance with NO dose. Workup / staging / subtype-stratification content is standard oncology, not proprietary guideline text; structural pathway consistent with Standard Guidelines (NCCN) Breast Cancer, no proprietary content reproduced. Invents no dose/regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
- "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Breast Cancer. Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
- "startNodeIds": [
-  "n_histology"
- ],
- "footnotes": {
-  "a": {
-   "text": "Bone-density (DEXA) monitoring is recommended during aromatase-inhibitor therapy; add calcium/vitamin D and a bone-modifying agent for osteopenia or osteoporosis.",
-   "evidence": "2A"
-  }
- },
- "nodes": [
-  {
-   "id": "n_histology",
-   "linkId": "breast_histology",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Histology",
-   "title": "Breast cancer type",
-   "section": "Contents",
-   "description": "Breast cancer management branches first by disease type / presentation. Choose the applicable category.",
-   "path": "Breast / Type",
-   "pills": [
-    "type"
-   ],
-   "required": true,
-   "bullets": [
-    "Ductal carcinoma in situ (DCIS)",
-    "Invasive breast cancer (non-metastatic)",
-    "Inflammatory breast cancer (IBC)",
-    "Phyllodes tumor",
-    "Paget disease of the nipple",
-    "Breast cancer during pregnancy",
-    "Recurrent or Stage IV (metastatic) disease"
-   ],
-   "options": [
-    {
-     "id": "dcis",
-     "label": "Ductal carcinoma in situ (DCIS)",
-     "sets": {
-      "histology": "dcis"
-     },
-     "pills": [
-      "DCIS"
-     ]
+  "guideline": "breast",
+  "title": "Breast Cancer",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 6.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "breast_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 6.2026 clinical navigator for Breast Cancer. Covers complete clinical algorithm: Diagnostic Workup and Staging (CAP synoptic, 4-tier HER2, genetics, AYA fertility, distress) -> Upfront Surgery vs Preoperative Systemic Therapy -> Locoregional Surgery (BCS margins, Z0011 omission of ALND, PMRT criteria) -> Post-Neoadjuvant Residual Triage (pCR de-escalation vs Residual escalation with KATHERINE T-DM1, DESTINY-Breast05 T-DXd, CREATE-X capecitabine, OlympiA olaparib, monarchE abemaciclib) -> Adjuvant Systemic Therapy (21-gene Oncotype DX Recurrence Score cutoffs for post/premenopausal) -> Adjuvant Endocrine Therapy (OFS, AI, bone-modifying agents) -> Surveillance and Follow-up -> Recurrent / Metastatic (Biopsy, NGS panel, line-by-line sequences). References StewardMD ONCQIS Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Breast Cancer Version 6.2026 (July 29, 2026).",
+  "startNodeIds": [
+    "n_histology"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Bone mineral density (DEXA) monitoring is recommended at baseline and every 1-2 years during aromatase inhibitor therapy; add adjuvant bisphosphonate (zoledronic acid 4 mg IV every 6 months for 3-5 years) for postmenopausal patients to prevent osteoporosis and reduce bone recurrence risk (EBCTCG meta-analysis).",
+      "evidence": "1"
     },
-    {
-     "id": "invasive",
-     "label": "Invasive breast cancer (non-metastatic)",
-     "sets": {
-      "histology": "invasive"
-     },
-     "pills": [
-      "invasive"
-     ]
+    "b": {
+      "text": "Omission of sentinel lymph node biopsy (SLNB) may be considered in postmenopausal patients >50 years with cT1N0 (axillary ultrasound negative), HR+/HER2-, Grade 1-2 tumors who agree to whole-breast RT and endocrine therapy (SOUND and INSEMA trials; BINV-D).",
+      "evidence": "2A"
     },
-    {
-     "id": "ibc",
-     "label": "Inflammatory breast cancer (IBC)",
-     "sets": {
-      "histology": "ibc"
-     },
-     "pills": [
-      "IBC"
-     ]
+    "c": {
+      "text": "Omission of whole-breast radiation therapy may be considered in patients >=65-70 years of age with HR+, HER2-negative, pT1-2 (<=3 cm), pN0 tumors who are committed to receiving 5 years of adjuvant endocrine therapy (CALGB 9343, PRIME II, EUROPA trials; BINV-2).",
+      "evidence": "1"
     },
-    {
-     "id": "phyllodes",
-     "label": "Phyllodes tumor",
-     "sets": {
-      "histology": "phyllodes"
-     },
-     "pills": [
-      "phyllodes"
-     ]
+    "d": {
+      "text": "Pathologic Complete Response (pCR) is defined as the complete absence of invasive cancer in the breast and axillary lymph nodes (ypT0/is ypN0). In-breast or nodal residual disease (non-pCR) requires escalation of adjuvant therapy to reduce recurrence risk.",
+      "evidence": "1"
     },
-    {
-     "id": "paget",
-     "label": "Paget disease",
-     "sets": {
-      "histology": "paget"
-     },
-     "pills": [
-      "Paget"
-     ]
-    },
-    {
-     "id": "pregnancy",
-     "label": "Breast cancer during pregnancy",
-     "sets": {
-      "histology": "pregnancy"
-     },
-     "pills": [
-      "pregnancy"
-     ]
-    },
-    {
-     "id": "recurrent",
-     "label": "Recurrent or Stage IV (metastatic)",
-     "sets": {
-      "histology": "recurrent"
-     },
-     "pills": [
-      "recurrent / M1"
-     ]
+    "e": {
+      "text": "Per ACOSOG Z0011, AMAROS, and SENOMAC trials: for patients with cT1-T2 cN0 disease undergoing breast-conserving surgery and whole-breast radiation who have 1-2 positive sentinel lymph nodes, routine completion axillary lymph node dissection (ALND) is NOT indicated and can be safely omitted with equivalent survival and local control.",
+      "evidence": "1"
     }
-   ]
   },
-  {
-   "id": "n_dcis_wk",
-   "linkId": "breast_dcis_wk",
-   "nodeCategory": "workup",
-   "nodeType": "question",
-   "template": "main",
-   "name": "DCIS workup",
-   "title": "DCIS: workup",
-   "section": "Workup",
-   "description": "Non-invasive disease confined to the ducts. Confirm no invasion and establish ER status.",
-   "path": "Breast / DCIS / Workup",
-   "pills": [
-    "DCIS",
-    "workup"
-   ],
-   "required": true,
-   "bullets": [
-    "History and physical; diagnostic bilateral mammography",
-    "Core biopsy confirming DCIS (rule out invasion); pathology review",
-    "Estrogen-receptor (ER) status on the DCIS",
-    "Breast MRI in selected cases; genetic counseling if criteria met"
-   ],
-   "options": [
+  "nodes": [
     {
-     "id": "continue",
-     "label": "Workup reviewed - continue",
-     "setsValue": null
-    }
-   ]
-  },
-  {
-   "id": "n_dcis_er",
-   "linkId": "breast_dcis_er",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "DCIS ER status",
-   "title": "DCIS: estrogen-receptor status",
-   "section": "Staging",
-   "description": "ER status determines whether endocrine risk-reduction is offered after local therapy.",
-   "path": "Breast / DCIS / ER",
-   "pills": [
-    "ER"
-   ],
-   "required": true,
-   "options": [
-    {
-     "id": "erpos",
-     "label": "ER-positive",
-     "sets": {
-      "biomarkers.ER": "positive"
-     },
-     "pills": [
-      "ER+"
-     ]
-    },
-    {
-     "id": "erneg",
-     "label": "ER-negative",
-     "sets": {
-      "biomarkers.ER": "negative"
-     },
-     "pills": [
-      "ER-"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_tx_dcis_erpos",
-   "linkId": "tx_dcis_erpos",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "DCIS ER+",
-   "title": "DCIS, ER-positive: local therapy + endocrine risk-reduction",
-   "section": "Treatment",
-   "description": "Local therapy with optional endocrine risk-reduction.",
-   "path": "Breast / DCIS / ER+ treatment",
-   "pills": [
-    "DCIS",
-    "ER+",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Lumpectomy + whole-breast radiation, OR total mastectomy (no axillary staging for pure DCIS)",
-    "Endocrine risk-reduction: tamoxifen (pre/post-menopausal) or an aromatase inhibitor (postmenopausal) for breast-conserving therapy",
-    "Endocrine agent regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-tamoxifen",
-    "breast-anastrozole"
-   ]
-  },
-  {
-   "id": "n_tx_dcis_erneg",
-   "linkId": "tx_dcis_erneg",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "DCIS ER-",
-   "title": "DCIS, ER-negative: local therapy",
-   "section": "Treatment",
-   "description": "Local therapy; endocrine therapy is not indicated.",
-   "path": "Breast / DCIS / ER- treatment",
-   "pills": [
-    "DCIS",
-    "ER-",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Lumpectomy + whole-breast radiation, OR total mastectomy",
-    "No endocrine therapy (ER-negative)",
-    "Surveillance with annual mammography"
-   ]
-  },
-  {
-   "id": "n_inv_wk",
-   "linkId": "breast_inv_wk",
-   "nodeCategory": "workup",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Invasive workup",
-   "title": "Invasive: clinical stage and workup",
-   "section": "Workup",
-   "description": "Establish clinical stage and tumor biology to plan sequencing of surgery and systemic therapy.",
-   "path": "Breast / Invasive / Workup",
-   "pills": [
-    "invasive",
-    "workup"
-   ],
-   "required": true,
-   "bullets": [
-    "History and physical; bilateral diagnostic mammography +/- breast MRI",
-    "Core biopsy: ER, PR, HER2, and histologic grade; consider Ki-67",
-    "Clinical staging (cTNM); systemic staging (CT chest/abdomen/pelvis + bone scan, or PET-CT) for stage III / node-positive / symptoms",
-    "Germline testing (BRCA1/2 and panel) if criteria met; fertility counseling in premenopausal patients",
-    "Assess menopausal status; baseline cardiac function if anthracycline / HER2 therapy planned"
-   ],
-   "options": [
-    {
-     "id": "continue",
-     "label": "Workup reviewed - continue",
-     "setsValue": null
-    }
-   ]
-  },
-  {
-   "id": "n_inv_approach",
-   "linkId": "breast_inv_approach",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Sequencing",
-   "title": "Invasive: upfront surgery vs preoperative systemic therapy",
-   "section": "Treatment",
-   "description": "Choose primary sequencing. Preoperative (neoadjuvant) systemic therapy is preferred for HER2-positive or triple-negative tumors >= T2 or node-positive, and to downstage large / locally advanced or inoperable tumors.",
-   "path": "Breast / Invasive / Approach",
-   "pills": [
-    "sequencing"
-   ],
-   "required": true,
-   "options": [
-    {
-     "id": "upfront",
-     "label": "Operable - upfront surgery",
-     "sets": {
-      "approach": "upfront"
-     },
-     "pills": [
-      "upfront surgery"
-     ]
-    },
-    {
-     "id": "preop",
-     "label": "Preoperative (neoadjuvant) systemic therapy",
-     "sets": {
-      "approach": "neoadjuvant"
-     },
-     "pills": [
-      "neoadjuvant"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_locoregional",
-   "linkId": "breast_locoregional",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Locoregional",
-   "title": "Locoregional treatment (cT1-3, cN0 or N+, M0)",
-   "section": "Treatment",
-   "description": "Definitive local-regional therapy; then subtype-directed adjuvant systemic therapy.",
-   "path": "Breast / Invasive / Locoregional",
-   "pills": [
-    "surgery"
-   ],
-   "required": true,
-   "bullets": [
-    "Breast-conserving surgery + whole-breast radiation (BCS + RT) for suitable tumor:breast ratio",
-    "Total mastectomy +/- post-mastectomy radiation (PMRT) for T3-4, node-positive, or patient choice",
-    "Axillary staging: sentinel-node biopsy; axillary dissection for proven node-positive disease"
-   ],
-   "options": [
-    {
-     "id": "bcs",
-     "label": "Breast-conserving surgery +/- RT",
-     "sets": {
-      "surgery": "bcs"
-     },
-     "pills": [
-      "BCS +/- RT"
-     ]
-    },
-    {
-     "id": "mastectomy",
-     "label": "Mastectomy +/- PMRT",
-     "sets": {
-      "surgery": "mastectomy"
-     },
-     "pills": [
-      "mastectomy +/- PMRT"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_tx_bcs",
-   "linkId": "tx_bcs",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "BCS + RT",
-   "title": "Breast-conserving surgery + whole-breast RT",
-   "section": "Treatment",
-   "description": "Breast conservation with radiation, then subtype-directed adjuvant systemic therapy.",
-   "path": "Breast / Locoregional / BCS",
-   "pills": [
-    "BCS",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Lumpectomy to negative margins (no ink on tumor) + surgical axillary staging (sentinel-node biopsy; axillary dissection if node-positive)",
-    "Whole-breast radiation; boost to the tumor bed for high-risk features",
-    "Accelerated / partial-breast irradiation (APBI/PBI) for appropriately selected low-risk patients",
-    "Omission of radiation may be considered in selected older patients with low-risk, ER-positive tumors on endocrine therapy",
-    "Then subtype-directed adjuvant systemic therapy (next step)"
-   ]
-  },
-  {
-   "id": "n_tx_mastectomy",
-   "linkId": "tx_mastectomy",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Mastectomy +/- PMRT",
-   "title": "Total mastectomy +/- post-mastectomy RT (PMRT)",
-   "section": "Treatment",
-   "description": "Mastectomy with post-mastectomy radiation as indicated by nodal status / tumor stage / margins, then adjuvant systemic therapy.",
-   "path": "Breast / Locoregional / Mastectomy",
-   "pills": [
-    "mastectomy",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Total mastectomy +/- reconstruction + surgical axillary staging (sentinel-node biopsy; axillary dissection if node-positive)",
-    "PMRT (+ regional nodal irradiation) for node-positive disease, T3-4 tumors, or positive margins",
-    "PMRT generally not required for node-negative, <= T2, negative-margin (>= 1 mm) disease",
-    "Consider PMRT for node-negative disease with multiple high-risk features (young age, LVI, grade 3, ER-negative)",
-    "Then subtype-directed adjuvant systemic therapy (next step)"
-   ]
-  },
-  {
-   "id": "n_tx_preop",
-   "linkId": "tx_preop",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Neoadjuvant systemic",
-   "title": "Preoperative (neoadjuvant) systemic therapy",
-   "section": "Treatment",
-   "description": "Neoadjuvant systemic therapy matched to subtype, then surgery, then adjuvant. Regimen is chosen by subtype (see the subtype step next).",
-   "path": "Breast / Invasive / Neoadjuvant",
-   "pills": [
-    "neoadjuvant",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "HER2-positive: chemotherapy + HER2 blockade (e.g. TCHP / trastuzumab + pertuzumab based)",
-    "Triple-negative: anthracycline + taxane + carboplatin, with pembrolizumab for high-risk / node-positive",
-    "HR-positive/HER2-negative: anthracycline / taxane chemotherapy for high-risk disease (or neoadjuvant endocrine in selected postmenopausal patients)",
-    "Then surgery (BCS or mastectomy) with response assessment; residual disease guides adjuvant escalation",
-    "Component regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-tchp",
-    "breast-ddac-t",
-    "breast-pembro-chemo-tnbc"
-   ]
-  },
-  {
-   "id": "n_adj_after_preop",
-   "linkId": "breast_adj_after_preop",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Adjuvant after neoadjuvant",
-   "title": "Adjuvant therapy after preoperative systemic therapy + surgery",
-   "section": "Treatment",
-   "description": "After neoadjuvant therapy and surgery, adjuvant therapy is guided by residual disease and subtype.",
-   "path": "Breast / Invasive / Adjuvant-after-neoadjuvant",
-   "pills": [
-    "adjuvant"
-   ],
-   "required": true,
-   "bullets": [
-    "HER2-positive with residual disease: switch to T-DM1 (trastuzumab emtansine)",
-    "Triple-negative with residual disease: consider capecitabine (and continue pembrolizumab if started)",
-    "HR-positive: complete adjuvant endocrine therapy; add olaparib for germline BRCA / high-risk HER2-negative",
-    "Radiation as indicated by surgery and nodal status"
-   ],
-   "options": [
-    {
-     "id": "bcs",
-     "label": "After breast-conserving surgery",
-     "sets": {
-      "surgery": "bcs"
-     },
-     "pills": [
-      "post-BCS"
-     ]
-    },
-    {
-     "id": "mastectomy",
-     "label": "After mastectomy",
-     "sets": {
-      "surgery": "mastectomy"
-     },
-     "pills": [
-      "post-mastectomy"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_subtype",
-   "linkId": "breast_subtype",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Receptor subtype",
-   "title": "Adjuvant systemic therapy: receptor subtype",
-   "section": "Treatment",
-   "description": "Adjuvant systemic therapy is directed by hormone-receptor (HR = ER/PR) and HER2 status.",
-   "path": "Breast / Invasive / Subtype",
-   "pills": [
-    "subtype"
-   ],
-   "required": true,
-   "options": [
-    {
-     "id": "hrpos_her2neg",
-     "label": "HR-positive / HER2-negative",
-     "sets": {
-      "biomarkers.HR": "positive",
-      "biomarkers.HER2": "negative"
-     },
-     "pills": [
-      "HR+/HER2-"
-     ]
-    },
-    {
-     "id": "hrpos_her2pos",
-     "label": "HR-positive / HER2-positive",
-     "sets": {
-      "biomarkers.HR": "positive",
-      "biomarkers.HER2": "positive"
-     },
-     "pills": [
-      "HR+/HER2+"
-     ]
-    },
-    {
-     "id": "hrneg_her2pos",
-     "label": "HR-negative / HER2-positive",
-     "sets": {
-      "biomarkers.HR": "negative",
-      "biomarkers.HER2": "positive"
-     },
-     "pills": [
-      "HR-/HER2+"
-     ]
-    },
-    {
-     "id": "tnbc",
-     "label": "Triple-negative (HR-negative / HER2-negative)",
-     "sets": {
-      "biomarkers.HR": "negative",
-      "biomarkers.HER2": "negative"
-     },
-     "pills": [
-      "TNBC"
-     ]
-    },
-    {
-     "id": "favorable",
-     "label": "Favorable histology (tubular / mucinous)",
-     "sets": {
-      "histoFavorable": "yes"
-     },
-     "pills": [
-      "favorable"
-     ]
-    }
-   ],
-   "tables": [
-    {
-     "title": "Receptor subtype and adjuvant systemic backbone",
-     "headers": [
-      "Subtype (ER/PR, HER2)",
-      "Typical systemic backbone",
-      "Key driver of benefit"
-     ],
-     "rows": [
-      [
-       "HR+ / HER2-",
-       "Endocrine therapy +/- chemo (risk / genomic-assay guided)",
-       "Endocrine responsiveness"
+      "id": "n_histology",
+      "linkId": "breast_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Histology",
+      "title": "Breast cancer type",
+      "section": "Diagnosis",
+      "description": "Step 1: Clinical Presentation. Select the confirmed histopathologic diagnosis and clinical stage presentation.",
+      "path": "Breast / Presentation",
+      "pills": [
+        "presentation"
       ],
-      [
-       "HR+ / HER2+",
-       "Chemo + HER2-targeted + endocrine therapy",
-       "HER2 blockade + endocrine"
+      "required": true,
+      "bullets": [
+        "Ductal Carcinoma In Situ (DCIS, Tis N0 M0): Non-invasive malignancy confined within basement membrane (DCIS-1).",
+        "Invasive Breast Cancer (cT1-3, cN0-1, M0): Operable or non-metastatic invasive ductal/NST, lobular, or mixed carcinoma (BINV-1).",
+        "Inflammatory Breast Cancer (IBC, cT4d): Rapid erythema, edema, and peau d'orange over >=1/3 of breast skin (IBC-1).",
+        "Phyllodes Tumor: Rare fibroepithelial neoplasm requiring wide excision with >=1 cm margins (PHYLL-1).",
+        "Paget Disease of the Nipple: Eczematous nipple-areolar complex change with underlying DCIS or invasive cancer (PAGET-1).",
+        "Breast Cancer During Pregnancy: Gestational cancer requiring trimester-specific systemic and local therapy planning (PREG-1).",
+        "Recurrent or Stage IV (Metastatic) Disease: Locoregional recurrence or distant metastatic disease (BINV-18)."
       ],
-      [
-       "HR- / HER2+",
-       "Chemo + HER2-targeted therapy",
-       "HER2 blockade"
-      ],
-      [
-       "Triple-negative",
-       "Chemo (+ immunotherapy / PARP where indicated)",
-       "Cytotoxic +/- immune / PARP"
+      "options": [
+        {
+          "id": "dcis",
+          "label": "Ductal carcinoma in situ (DCIS, Tis N0 M0)",
+          "sets": {
+            "histology": "dcis"
+          },
+          "pills": [
+            "DCIS"
+          ]
+        },
+        {
+          "id": "invasive",
+          "label": "Invasive breast cancer (non-metastatic, cT1-3, cN0-1, M0)",
+          "sets": {
+            "histology": "invasive"
+          },
+          "pills": [
+            "invasive"
+          ]
+        },
+        {
+          "id": "ibc",
+          "label": "Inflammatory breast cancer (IBC, cT4d, any N, M0)",
+          "sets": {
+            "histology": "ibc"
+          },
+          "pills": [
+            "IBC"
+          ]
+        },
+        {
+          "id": "phyllodes",
+          "label": "Phyllodes tumor (benign, borderline, or malignant)",
+          "sets": {
+            "histology": "phyllodes"
+          },
+          "pills": [
+            "phyllodes"
+          ]
+        },
+        {
+          "id": "paget",
+          "label": "Paget disease of the nipple (with or without mass)",
+          "sets": {
+            "histology": "paget"
+          },
+          "pills": [
+            "Paget"
+          ]
+        },
+        {
+          "id": "pregnancy",
+          "label": "Breast cancer diagnosed during pregnancy",
+          "sets": {
+            "histology": "pregnancy"
+          },
+          "pills": [
+            "pregnancy"
+          ]
+        },
+        {
+          "id": "recurrent",
+          "label": "Recurrent or Stage IV (distant metastatic) disease",
+          "sets": {
+            "histology": "recurrent"
+          },
+          "pills": [
+            "recurrent"
+          ]
+        }
       ]
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_hrpos_meno",
-   "linkId": "breast_hrpos_meno",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "HR+/HER2- menopausal",
-   "title": "Adjuvant HR-positive / HER2-negative: menopausal status",
-   "section": "Treatment",
-   "description": "For HR-positive / HER2-negative disease, adjuvant chemotherapy selection and endocrine therapy differ by menopausal status (and, in premenopausal patients, nodal status).",
-   "path": "Breast / Adjuvant / HR+HER2- / Menopause",
-   "pills": [
-    "HR+/HER2-"
-   ],
-   "required": true,
-   "options": [
-    {
-     "id": "post",
-     "label": "Postmenopausal",
-     "sets": {
-      "menopause": "post"
-     },
-     "pills": [
-      "postmenopausal"
-     ]
     },
     {
-     "id": "pre",
-     "label": "Premenopausal",
-     "sets": {
-      "menopause": "pre"
-     },
-     "pills": [
-      "premenopausal"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_adj_hrpos_post",
-   "linkId": "tx_adj_hrpos_post",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Adjuvant HR+/HER2- postmeno",
-   "title": "Adjuvant HR+/HER2- (postmenopausal)",
-   "section": "Treatment",
-   "description": "Chemotherapy is selected by a genomic-recurrence assay plus clinical risk; endocrine therapy for all.",
-   "path": "Breast / Adjuvant / HR+HER2- / Postmenopausal",
-   "pills": [
-    "HR+/HER2-",
-    "postmenopausal",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Genomic assay (e.g. 21-gene recurrence score) guides who benefits from chemotherapy",
-    "Chemotherapy (e.g. TC, or anthracycline + taxane) for high genomic / clinical risk",
-    "Adjuvant endocrine therapy for all (aromatase-inhibitor based - see next step)",
-    "Add a CDK4/6 inhibitor (abemaciclib) for high-risk node-positive disease; olaparib for germline BRCA",
-    "Chemotherapy regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-tc",
-    "breast-ddac-t"
-   ]
-  },
-  {
-   "id": "n_hrpos_pre_nodal",
-   "linkId": "breast_hrpos_pre_nodal",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "HR+/HER2- premeno nodal",
-   "title": "Adjuvant HR+/HER2- (premenopausal): nodal status",
-   "section": "Treatment",
-   "description": "In premenopausal HR-positive / HER2-negative disease, chemotherapy decisions differ by pathologic nodal status.",
-   "path": "Breast / Adjuvant / HR+HER2- / Premenopausal / Nodal",
-   "pills": [
-    "premenopausal"
-   ],
-   "required": true,
-   "options": [
-    {
-     "id": "pn0",
-     "label": "Node-negative (pT1-3, pN0)",
-     "sets": {
-      "nodal": "pn0"
-     },
-     "pills": [
-      "pN0"
-     ]
+      "id": "n_dcis_wk",
+      "linkId": "breast_dcis_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "DCIS workup",
+      "title": "DCIS: workup and staging",
+      "section": "Workup",
+      "description": "DCIS is non-invasive disease confined within basement membrane. Ensure invasion is excluded on core biopsy and establish Estrogen Receptor (ER) status.",
+      "path": "Breast / DCIS / Workup",
+      "pills": [
+        "DCIS",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "History and physical exam; bilateral diagnostic mammography (magnification views for microcalcifications).",
+        "Pathology review: confirm pure DCIS and rule out invasive carcinoma or microinvasion (DCIS-M <=1 mm).",
+        "Determine tumor Estrogen Receptor (ER) status by IHC (PR and HER2 testing are NOT recommended for pure DCIS).",
+        "Breast MRI is optional and should NOT be routinely used to mandate mastectomy without tissue biopsy.",
+        "Genetic counseling referral if patient meets high-risk familial criteria (e.g., age <=50, family history).",
+        "Assess distress using NCCN Distress Thermometer and Problem List."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup complete - continue to ER status",
+          "setsValue": null
+        }
+      ]
     },
     {
-     "id": "pnpos",
-     "label": "Node-positive (pT1-3, pN+)",
-     "sets": {
-      "nodal": "pnpos"
-     },
-     "pills": [
-      "pN+"
-     ]
+      "id": "n_dcis_er",
+      "linkId": "breast_dcis_er",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "DCIS ER Status",
+      "title": "DCIS: Estrogen-Receptor (ER) Status",
+      "section": "Staging",
+      "description": "ER status determines whether the patient will benefit from 5 years of adjuvant endocrine risk-reduction therapy following breast-conserving surgery.",
+      "path": "Breast / DCIS / ER",
+      "pills": [
+        "ER"
+      ],
+      "required": true,
+      "bullets": [
+        "ER-positive (>=1% nuclear staining): 5 years of endocrine therapy cuts subsequent in-breast and contralateral events by 50% (NSABP B-24, IBIS-II).",
+        "ER-negative (<1% staining): Endocrine therapy provides no proven clinical benefit and is not indicated.",
+        "Surgical margin standard for DCIS: >=2 mm negative margin width reduces ipsilateral breast recurrence rate (SSO/ASTRO/ASCO consensus).",
+        "Axillary staging: SLNB is NOT indicated for pure DCIS treated with BCS unless invasive disease is suspected or mastectomy is performed."
+      ],
+      "options": [
+        {
+          "id": "erpos",
+          "label": "ER-positive (>=1% nuclear staining)",
+          "sets": {
+            "biomarkers.ER": "positive"
+          },
+          "pills": [
+            "ER+"
+          ]
+        },
+        {
+          "id": "erneg",
+          "label": "ER-negative (<1% nuclear staining)",
+          "sets": {
+            "biomarkers.ER": "negative"
+          },
+          "pills": [
+            "ER-"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_dcis_erpos",
+      "linkId": "tx_dcis_erpos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "DCIS ER+ Treatment",
+      "title": "DCIS, ER-Positive: Surgical and Endocrine Risk-Reduction",
+      "section": "Treatment",
+      "description": "Curative local-regional therapy with optional 5-year endocrine risk reduction.",
+      "path": "Breast / DCIS / ER+ Treatment",
+      "pills": [
+        "DCIS",
+        "ER+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Surgical Options: Breast-conserving surgery (lumpectomy to >=2 mm margins) + Whole-Breast RT (Category 1); OR Total Mastectomy +/- reconstruction (SLNB only if mastectomy or high risk of occult invasion).",
+        "Radiation Therapy Options: Whole-breast RT (40-42.5 Gy in 15-16 fx) +/- tumor bed boost; OR Accelerated Partial Breast Irradiation (APBI, Category 2A, RTOG 9804 criteria: screen-detected, grade 1-2, <=2.5 cm, margins >=3 mm).",
+        "Radiation Omission: May be considered for low-risk DCIS meeting RTOG 9804 criteria receiving adjuvant endocrine therapy.",
+        "Adjuvant Endocrine Therapy (5 years): Tamoxifen 20 mg PO daily (or low-dose 5 mg PO daily for 3 years per TAM-01 if standard dose is poorly tolerated) for pre/postmenopausal patients; or Aromatase Inhibitor (anastrozole 1 mg, letrozole 2.5 mg, exemestane 25 mg) for postmenopausal patients (especially age <60 or thromboembolism risk, NSABP B-35).",
+        "Surveillance: Annual bilateral diagnostic mammography beginning 6-12 months post-RT/BCS."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole",
+        "breast-letrozole"
+      ]
+    },
+    {
+      "id": "n_tx_dcis_erneg",
+      "linkId": "tx_dcis_erneg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "DCIS ER- Treatment",
+      "title": "DCIS, ER-Negative: Surgical and Radiation Therapy",
+      "section": "Treatment",
+      "description": "Curative local-regional therapy; endocrine therapy is not indicated.",
+      "path": "Breast / DCIS / ER- Treatment",
+      "pills": [
+        "DCIS",
+        "ER-",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Surgery: Lumpectomy to negative margins (>=2 mm margin width) + Whole-Breast RT (boost recommended if age <50 or high-grade); OR Total Mastectomy +/- reconstruction.",
+        "Axillary staging: SLNB is NOT indicated for pure DCIS treated with BCS unless invasive disease is suspected.",
+        "Systemic Therapy: No endocrine therapy, chemotherapy, or HER2-targeted therapy.",
+        "Surveillance: Physical exam every 6-12 months for 5 years, then annually; annual bilateral diagnostic mammography."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
+      ]
+    },
+    {
+      "id": "n_inv_wk",
+      "linkId": "breast_inv_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Invasive Workup",
+      "title": "Invasive Breast Cancer: Clinical Workup and Staging",
+      "section": "Workup",
+      "description": "Establish clinical stage (cTNM), Nottingham histologic grade, and receptor status (ER, PR, HER2). This directs primary sequencing between upfront surgery and neoadjuvant therapy.",
+      "path": "Breast / Invasive / Workup",
+      "pills": [
+        "invasive",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "History & physical examination; bilateral diagnostic mammogram and breast ultrasound.",
+        "Axillary ultrasound: assess nodal status. (SOUND and INSEMA trials: consider omission of surgical axillary staging if >50y, postmenopausal, cT1N0, HR+/HER2-, grade 1-2).",
+        "Core needle biopsy: mandatory CAP synoptic pathology with Nottingham histologic grade (G1-G3).",
+        "Biomarker testing: ER/PR IHC (record % positive nuclei, note ER-low 1-10%), and HER2 status by validated ASCO/CAP assay (4-tier: IHC 0, 0+ ultralow, 1+ low, 2+ reflex to dual-probe ISH, 3+ positive).",
+        "Biopsy marker clip placement: demarcate breast primary tumor bed AND place clip in most suspicious axillary node (essential for Targeted Axillary Dissection [TAD] if neoadjuvant is given).",
+        "Genetic counseling & testing: all patients <=50y, TNBC at any age, male breast cancer, personal/family high risk, or candidate for adjuvant olaparib (OlympiA).",
+        "Fertility & sexual health counseling (AYA) + serum pregnancy test in all patients of childbearing potential prior to systemic therapy.",
+        "Systemic staging imaging (CT chest/abdomen/pelvis + bone scan or FDG-PET/CT): indicated ONLY for Stage III, cN+, or systemic symptoms. Routine imaging for asymptomatic Stage I-II is NOT recommended."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - select primary sequencing",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_inv_approach",
+      "linkId": "breast_inv_approach",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Primary Sequencing",
+      "title": "Primary Treatment Sequencing: Upfront Surgery vs Neoadjuvant Therapy",
+      "section": "Treatment",
+      "description": "Decide whether to operate upfront or initiate preoperative (neoadjuvant) systemic therapy. Neoadjuvant therapy provides in-vivo chemosensitivity assessment, facilitates breast conservation, and determines post-surgical adjuvant escalation.",
+      "path": "Breast / Invasive / Sequencing",
+      "pills": [
+        "sequencing"
+      ],
+      "required": true,
+      "bullets": [
+        "PREOPERATIVE (NEOADJUVANT) THERAPY IS PREFERRED (NCCN BINV-L) FOR:",
+        "• HER2-positive breast cancer if >=cT2 (tumor >2 cm) OR >=cN1 (clinically node-positive).",
+        "• Triple-Negative Breast Cancer (TNBC) if >=cT1c (tumor >1 cm) OR >=cN1.",
+        "• Locally advanced / inoperable tumors (cT4, bulky cN2, cN3) to render operable.",
+        "• Large tumor relative to breast size in a patient desiring breast conservation.",
+        "• cN+ disease likely to convert to cN0 (enabling Targeted Axillary Dissection [TAD] and avoiding morbid ALND).",
+        "UPFRONT SURGERY IS PREFERRED FOR:",
+        "• Clinically node-negative HR+/HER2- early tumors (cT1N0) where upfront genomics (21-gene Oncotype DX) guide adjuvant chemo vs endocrine alone.",
+        "• Tumors with extensive in situ component where invasive extent is poorly delineated."
+      ],
+      "options": [
+        {
+          "id": "upfront",
+          "label": "Upfront surgery (cT1N0 HR+/HER2- or small operable tumor)",
+          "sets": {
+            "approach": "upfront"
+          },
+          "pills": [
+            "upfront surgery"
+          ]
+        },
+        {
+          "id": "preop",
+          "label": "Preoperative (neoadjuvant) systemic therapy (preferred for HER2+, TNBC >=T1c/N+, or locally advanced)",
+          "sets": {
+            "approach": "neoadjuvant"
+          },
+          "pills": [
+            "neoadjuvant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_locoregional",
+      "linkId": "breast_locoregional",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Locoregional Surgery",
+      "title": "Locoregional Surgery: Breast-Conserving Surgery vs Mastectomy",
+      "section": "Locoregional",
+      "description": "Breast-conserving surgery (BCS) with radiation therapy produces equivalent overall survival to total mastectomy (Category 1).",
+      "path": "Breast / Locoregional / Surgery",
+      "pills": [
+        "surgery"
+      ],
+      "required": true,
+      "bullets": [
+        "Breast-Conserving Surgery (BCS): Lumpectomy with whole-breast RT +/- boost. Candidate if negative margins achievable with acceptable cosmesis.",
+        "Absolute Contraindications to BCS (mandating mastectomy, BINV-G): Inflammatory breast cancer, diffuse microcalcifications, multicentric disease in >2 quadrants, persistently positive margins after re-excision, homozygous ATM mutation, early pregnancy unable to receive RT within 12-16 weeks.",
+        "Total Mastectomy: Total, skin-sparing, or nipple-areolar complex (NAC)-sparing mastectomy +/- immediate/delayed reconstruction (tissue expander, implant, autologous DIEP/TRAM/LD flap)."
+      ],
+      "options": [
+        {
+          "id": "bcs",
+          "label": "Breast-conserving surgery (BCS) +/- surgical axillary staging +/- RT",
+          "sets": {
+            "surgery": "bcs"
+          },
+          "pills": [
+            "BCS"
+          ]
+        },
+        {
+          "id": "mastectomy",
+          "label": "Total mastectomy + surgical axillary staging +/- PMRT",
+          "sets": {
+            "surgery": "mastectomy"
+          },
+          "pills": [
+            "mastectomy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_bcs",
+      "linkId": "tx_bcs",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "BCS + Radiation Plan",
+      "title": "Breast-Conserving Therapy and Radiotherapy Principles",
+      "section": "Locoregional",
+      "description": "Definitive surgical excision with clear margins, followed by risk-adapted radiation therapy and subsequent systemic therapy.",
+      "path": "Breast / Locoregional / BCS",
+      "pills": [
+        "BCS",
+        "locoregional"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Surgical Margins: 'No ink on tumor' is the SSO/ASTRO standard for invasive cancer. (For DCIS, >=2 mm margin required). Re-excision preferred if margin positive.",
+        "ACOSOG Z0011 / AMAROS / SENOMAC Criteria: In cT1-T2 cN0 patients undergoing BCS + whole-breast RT with 1-2 positive SLNs, COMPLETION ALND IS SAFELY OMITTED (Category 1).",
+        "Radiation Therapy (Category 1): Whole-breast RT (hypofractionated 40-42.5 Gy in 15-16 fractions preferred). Tumor bed boost (10-16 Gy) indicated for age <50, high-grade, or close margins.",
+        "Comprehensive Regional Nodal Irradiation (RNI): Mandatory for >=4 positive axillary nodes (Category 1); strongly consider for 1-3 positive nodes.",
+        "Radiation Omission: May be considered in patients >=65-70 years with HR+, HER2-, pN0, pT1 (<=2 cm) receiving 5 years of endocrine therapy (CALGB 9343, PRIME II, EUROPA)."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Proceed to Adjuvant Systemic Therapy Subtype Selection",
+          "setsValue": null
+        }
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
+      ]
+    },
+    {
+      "id": "n_tx_mastectomy",
+      "linkId": "tx_mastectomy",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Mastectomy + PMRT Plan",
+      "title": "Total Mastectomy and Post-Mastectomy Radiation (PMRT)",
+      "section": "Locoregional",
+      "description": "Total mastectomy with sentinel lymph node biopsy and risk-adapted post-mastectomy radiation therapy (PMRT).",
+      "path": "Breast / Locoregional / Mastectomy",
+      "pills": [
+        "mastectomy",
+        "locoregional"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Surgical Margins: Clear margins required. Re-excision preferred for positive margins; if impossible, deliver PMRT + comprehensive RNI.",
+        "Post-Mastectomy Radiation Therapy (PMRT) Indications (BINV-3):",
+        "• >=4 positive axillary nodes (pN2-3): PMRT to chest wall + comprehensive RNI is MANDATORY (Category 1).",
+        "• 1-3 positive axillary nodes (pN1): STRONGLY CONSIDER PMRT to chest wall + comprehensive RNI (EBCTCG meta-analysis shows recurrence and mortality reduction).",
+        "• Node-negative and pT3 (>5 cm): CONSIDER PMRT to chest wall +/- comprehensive RNI.",
+        "• Node-negative, <=pT2 (<=5 cm) with clear margins: PMRT is NOT indicated.",
+        "Breast Reconstruction: Immediate or delayed tissue expander/implant, autologous DIEP/TRAM/LD flap. If PMRT planned, delayed-immediate or autologous reconstruction preferred to reduce capsular contracture."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Proceed to Adjuvant Systemic Therapy Subtype Selection",
+          "setsValue": null
+        }
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
+      ]
+    },
+    {
+      "id": "n_tx_preop",
+      "linkId": "tx_preop",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Preoperative Regimens",
+      "title": "Preoperative (Neoadjuvant) Regimen Selection",
+      "section": "Preoperative",
+      "description": "Administer subtype-specific neoadjuvant therapy. Mark primary tumor and biopsied lymph node with image-detectable clips prior to cycle 1.",
+      "path": "Breast / Preoperative / Regimen",
+      "pills": [
+        "HER2+",
+        "neoadjuvant"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "HER2-Positive (>=cT2 or cN+): TCHP (Docetaxel 75 mg/m2 + Carboplatin AUC 6 + Trastuzumab 8->6 mg/kg + Pertuzumab 840->420 mg IV q21d x 6 cycles; TRYPHAENA trial pCR 66%) (Category 1).",
+        "Triple-Negative Breast Cancer (TNBC >=cT1c/cN+): KEYNOTE-522 (Pembrolizumab 200 mg q21d + Carboplatin AUC 5 + Paclitaxel 80 mg/m2 weekly x 4 cycles -> Pembrolizumab + Doxorubicin 60 mg/m2 + Cyclophosphamide 600 mg/m2 q21d x 4 cycles; pCR 65%, 37% reduction in event/death) (Category 1).",
+        "HR+/HER2- Locally Advanced / High Burden: Dose-Dense AC-T (Doxorubicin 60 mg/m2 + Cyclophosphamide 600 mg/m2 q14d x 4 -> Paclitaxel 175 mg/m2 q14d x 4 with G-CSF) OR Neoadjuvant Endocrine Therapy (Aromatase Inhibitor for 4-6 months, ACOSOG Z1031).",
+        "Post-Neoadjuvant Locoregional Surgery: BCS or Total Mastectomy + Targeted Axillary Dissection (TAD: dual tracer, removal of clipped node, >=3 SLNs) if cN1 converted to ycN0."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Surgery completed - evaluate pathologic response (RCB)",
+          "setsValue": null
+        }
+      ],
+      "protocolRefs": [
+        "breast-tchp",
+        "breast-pembro-chemo-tnbc",
+        "breast-ddac-t",
+        "breast-tc"
+      ]
+    },
+    {
+      "id": "n_preop_response",
+      "linkId": "breast_preop_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Pathologic Response",
+      "title": "Post-Neoadjuvant Pathology: Pathologic Response Assessment",
+      "section": "Response Assessment",
+      "description": "Pathologic Complete Response (pCR) vs Residual Disease directs whether to de-escalate or escalate adjuvant systemic therapy.",
+      "path": "Breast / Preoperative / Response",
+      "pills": [
+        "response"
+      ],
+      "required": true,
+      "bullets": [
+        "Pathologic Complete Response (pCR, ypT0/is ypN0): Complete eradication of invasive disease in breast and axillary lymph nodes.",
+        "Residual Invasive Disease (Non-pCR, ypT1-4 or ypN>=1): Persistent invasive disease indicates high risk of relapse (20-30% recurrence risk) and demands targeted adjuvant escalation."
+      ],
+      "options": [
+        {
+          "id": "pcr",
+          "label": "Pathologic Complete Response (pCR, ypT0/is ypN0)",
+          "sets": {
+            "response": "pcr"
+          },
+          "pills": [
+            "pCR"
+          ]
+        },
+        {
+          "id": "residual",
+          "label": "Residual invasive disease (Non-pCR, ypT+ or ypN+)",
+          "sets": {
+            "response": "residual"
+          },
+          "pills": [
+            "residual"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_preop_pcr_subtype",
+      "linkId": "breast_preop_pcr_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "pCR Subtype",
+      "title": "Pathologic Complete Response: Subtype De-escalation",
+      "section": "Adjuvant Post-pCR",
+      "description": "Select tumor receptor subtype to finalize completion regimen following documented pCR.",
+      "path": "Breast / Post-Neoadjuvant / pCR Subtype",
+      "pills": [
+        "pCR"
+      ],
+      "required": true,
+      "bullets": [
+        "HER2-Positive: Complete up to 1 year total of anti-HER2 blockade with Trastuzumab +/- Pertuzumab (APHINITY trial, Category 1).",
+        "Triple-Negative Breast Cancer: Complete adjuvant single-agent Pembrolizumab 200 mg q21d x 9 cycles (total 1 year KEYNOTE-522, Category 1).",
+        "HR+/HER2-: Adjuvant endocrine therapy (Tamoxifen or Aromatase Inhibitor +/- OFS for 5-10 years) (Category 1)."
+      ],
+      "options": [
+        {
+          "id": "her2pos",
+          "label": "HER2-positive (HR+ or HR-)",
+          "sets": {
+            "subtype": "her2pos"
+          },
+          "pills": [
+            "HER2+"
+          ]
+        },
+        {
+          "id": "tnbc",
+          "label": "Triple-negative (TNBC)",
+          "sets": {
+            "subtype": "tnbc"
+          },
+          "pills": [
+            "TNBC"
+          ]
+        },
+        {
+          "id": "hrpos",
+          "label": "HR-positive / HER2-negative",
+          "sets": {
+            "subtype": "hrpos"
+          },
+          "pills": [
+            "HR+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_post_her2_pcr",
+      "linkId": "tx_post_her2_pcr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HER2+ pCR Plan",
+      "title": "HER2-Positive with pCR: Complete 1-Year Anti-HER2 Blockade",
+      "section": "Adjuvant Post-pCR",
+      "description": "De-escalated maintenance anti-HER2 therapy following documented pCR.",
+      "path": "Breast / Post-Neoadjuvant / HER2+ pCR",
+      "pills": [
+        "HER2+",
+        "pCR",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Complete up to 1 year of HER2-targeted therapy with Trastuzumab (Category 1) +/- Pertuzumab.",
+        "If initially node-positive: Pertuzumab + Trastuzumab is Category 1 preferred (APHINITY 8.4-year follow-up confirms iDFS benefit).",
+        "If HR-positive: Add concurrent adjuvant endocrine therapy (Tamoxifen or AI +/- OFS) (Category 1).",
+        "Adjuvant Radiation Therapy: Whole-breast RT if BCS; chest wall PMRT + RNI if initially node-positive or cT3-4."
+      ],
+      "protocolRefs": [
+        "breast-tchp",
+        "breast-tch"
+      ]
+    },
+    {
+      "id": "n_tx_post_tnbc_pcr",
+      "linkId": "tx_post_tnbc_pcr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "TNBC pCR Plan",
+      "title": "Triple-Negative with pCR: Complete Adjuvant Pembrolizumab",
+      "section": "Adjuvant Post-pCR",
+      "description": "Completion of KEYNOTE-522 adjuvant immunotherapy following confirmed pCR.",
+      "path": "Breast / Post-Neoadjuvant / TNBC pCR",
+      "pills": [
+        "TNBC",
+        "pCR",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Adjuvant Pembrolizumab: 200 mg IV q21d (or 400 mg IV q42d) for up to 9 cycles after surgery (Category 1, KEYNOTE-522).",
+        "5-year EFS rate is 92.2% in patients who achieve pCR and complete adjuvant pembrolizumab.",
+        "Monitor for immune-mediated adverse events (thyroiditis, hypophysitis, pneumonitis, colitis, hepatitis).",
+        "No additional cytotoxic chemotherapy (capecitabine) is needed for patients with confirmed pCR."
+      ],
+      "protocolRefs": [
+        "breast-pembro-chemo-tnbc"
+      ]
+    },
+    {
+      "id": "n_tx_post_hrpos_pcr",
+      "linkId": "tx_post_hrpos_pcr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HR+ pCR Plan",
+      "title": "HR+/HER2- with pCR: Adjuvant Endocrine Therapy",
+      "section": "Adjuvant Post-pCR",
+      "description": "5 to 10 years of adjuvant endocrine therapy following confirmed pCR.",
+      "path": "Breast / Post-Neoadjuvant / HR+ pCR",
+      "pills": [
+        "HR+",
+        "pCR",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Adjuvant Endocrine Therapy for 5-10 years (Category 1).",
+        "Premenopausal: Tamoxifen 20 mg daily +/- OFS (Goserelin / Leuprolide); or Aromatase Inhibitor + OFS for 5 years (SOFT/TEXT).",
+        "Postmenopausal: Aromatase Inhibitor (Letrozole 2.5 mg, Anastrozole 1 mg, Exemestane 25 mg) for 5 years.",
+        "Bone-modifying agents: Zoledronic acid 4 mg IV q6mo x 3-5y in postmenopausal patients."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole",
+        "breast-letrozole"
+      ]
+    },
+    {
+      "id": "n_preop_residual_subtype",
+      "linkId": "breast_preop_residual_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Residual Subtype",
+      "title": "Residual Invasive Disease: Targeted Adjuvant Escalation",
+      "section": "Adjuvant Residual",
+      "description": "Select receptor subtype to deploy evidence-based post-neoadjuvant escalation.",
+      "path": "Breast / Post-Neoadjuvant / Residual Subtype",
+      "pills": [
+        "residual"
+      ],
+      "required": true,
+      "bullets": [
+        "HER2-Positive Residual: Switch from Trastuzumab to T-DM1 (KATHERINE trial: 50% reduction in recurrence/death; 3-year iDFS 88.3% vs 77.0%) OR Fam-Trastuzumab deruxtecan (T-DXd, DESTINY-Breast05, Category 1 for high-risk).",
+        "TNBC Residual: Adjuvant Capecitabine (CREATE-X trial: 42% reduction in risk of death) AND/OR Pembrolizumab (KEYNOTE-522) AND/OR Olaparib if germline BRCA1/2 PV (OlympiA trial).",
+        "HR+/HER2- Residual: Adjuvant Endocrine + Abemaciclib (monarchE trial: 2 years, Category 1 preferred) or Ribociclib (NATALEE trial: 3 years) + Olaparib if germline BRCA1/2 PV (OlympiA trial)."
+      ],
+      "options": [
+        {
+          "id": "her2pos",
+          "label": "HER2-positive with residual: switch to T-DM1 or T-DXd",
+          "sets": {
+            "subtype": "her2pos"
+          },
+          "pills": [
+            "HER2+"
+          ]
+        },
+        {
+          "id": "tnbc",
+          "label": "Triple-negative with residual: capecitabine +/- pembro +/- olaparib",
+          "sets": {
+            "subtype": "tnbc"
+          },
+          "pills": [
+            "TNBC"
+          ]
+        },
+        {
+          "id": "hrpos",
+          "label": "HR+/HER2- with residual: endocrine + CDK4/6i +/- olaparib",
+          "sets": {
+            "subtype": "hrpos"
+          },
+          "pills": [
+            "HR+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_post_her2_residual",
+      "linkId": "tx_post_her2_residual",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HER2+ Residual Plan",
+      "title": "HER2-Positive with Residual Disease: Switch to T-DM1 or T-DXd",
+      "section": "Adjuvant Escalation",
+      "description": "Category 1 post-neoadjuvant antibody-drug conjugate escalation for residual invasive disease.",
+      "path": "Breast / Post-Neoadjuvant / HER2+ Residual",
+      "pills": [
+        "HER2+",
+        "residual",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Ado-trastuzumab emtansine (T-DM1): 3.6 mg/kg IV q21d x 14 cycles (Category 1, KATHERINE trial). Halves risk of invasive recurrence or death compared to continuing trastuzumab (HR 0.50, P < .001).",
+        "Fam-trastuzumab deruxtecan (T-DXd): 5.4 mg/kg IV q21d x 14 cycles (Category 1 for patients with high risk of recurrence per DESTINY-Breast05: inoperable at baseline or ypN+).",
+        "If T-DM1 discontinued for toxicity: Complete remainder of 1 year with Trastuzumab +/- Pertuzumab (Category 1).",
+        "If HR-positive: Add concurrent adjuvant endocrine therapy (Category 1).",
+        "Consider extended adjuvant neratinib (ExteNET) after completing anti-HER2 therapy in perceived high-risk HR+ disease."
+      ],
+      "protocolRefs": [
+        "breast-tdm1",
+        "breast-tdxd"
+      ]
+    },
+    {
+      "id": "n_tx_post_tnbc_residual",
+      "linkId": "tx_post_tnbc_residual",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "TNBC Residual Plan",
+      "title": "TNBC with Residual Disease: Capecitabine + Pembrolizumab ± Olaparib",
+      "section": "Adjuvant Escalation",
+      "description": "Category 1 escalation protocol for residual triple-negative breast cancer.",
+      "path": "Breast / Post-Neoadjuvant / TNBC Residual",
+      "pills": [
+        "TNBC",
+        "residual",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Adjuvant Capecitabine: 1000-1250 mg/m2 PO twice daily on Days 1-14 q21d for 6-8 cycles (Category 1, CREATE-X trial: improved 5-year DFS 74.1% vs 67.6%, OS HR 0.52 in TNBC).",
+        "Adjuvant Pembrolizumab: Continue single-agent pembrolizumab 200 mg q21d for up to 9 cycles after surgery (Category 1, KEYNOTE-522). Can be given sequentially or concurrently with capecitabine.",
+        "Adjuvant Olaparib (if germline BRCA1/2 PV): 300 mg PO BID for 1 year (Category 1, OlympiA trial: 4-year OS 89.8% vs 86.4%, DFS HR 0.58). Administer after completing adjuvant RT.",
+        "Adjuvant Radiation Therapy: Whole-breast RT if BCS; chest wall PMRT + comprehensive RNI if ypN+ or initial cT3-4."
+      ],
+      "protocolRefs": [
+        "breast-capecitabine",
+        "breast-pembro-chemo-tnbc",
+        "breast-olaparib-adjuvant"
+      ]
+    },
+    {
+      "id": "n_tx_post_hrpos_residual",
+      "linkId": "tx_post_hrpos_residual",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HR+ Residual Plan",
+      "title": "HR+/HER2- with Residual Disease: Endocrine + CDK4/6i ± Olaparib",
+      "section": "Adjuvant Escalation",
+      "description": "Escalated adjuvant protocol for residual HR+/HER2- disease.",
+      "path": "Breast / Post-Neoadjuvant / HR+ Residual",
+      "pills": [
+        "HR+",
+        "residual",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Adjuvant Endocrine Therapy (5-10 years): Aromatase Inhibitor (postmenopausal) or AI/Tamoxifen + OFS (premenopausal).",
+        "Adjuvant Abemaciclib (CDK4/6 Inhibitor): 150 mg PO BID x 2 years combined with endocrine therapy (Category 1 preferred, monarchE trial: indicated for residual node-positive or CPS+EG score >=3).",
+        "Adjuvant Ribociclib (NATALEE trial): 400 mg daily on Days 1-21 q28d x 3 years with AI (Category 1 preferred for Stage II/III high risk).",
+        "Adjuvant Olaparib (if germline BRCA1/2 PV): 300 mg PO BID x 1 year (Category 1, OlympiA trial: indicated for residual disease with CPS+EG score >=3).",
+        "Adjuvant Bone-Modifying Agent: Zoledronic acid 4 mg IV q6mo x 3-5 years for postmenopausal patients."
+      ],
+      "protocolRefs": [
+        "breast-abemaciclib-adjuvant",
+        "breast-ribociclib-adjuvant",
+        "breast-olaparib-adjuvant",
+        "breast-anastrozole",
+        "breast-letrozole"
+      ]
+    },
+    {
+      "id": "n_subtype",
+      "linkId": "breast_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Subtype",
+      "title": "Adjuvant Systemic Therapy: Receptor Subtype",
+      "section": "Adjuvant Upfront",
+      "description": "Biomarker status (ER, PR, HER2) determines systemic chemotherapy, targeted therapy, and endocrine pathways.",
+      "path": "Breast / Adjuvant / Subtype",
+      "pills": [
+        "subtype"
+      ],
+      "required": true,
+      "bullets": [
+        "HR+/HER2- (Ductal/NST, Lobular, Mixed): Genomic testing (21-gene Oncotype DX) determines chemotherapy benefit.",
+        "HR+/HER2+ (Triple-Positive): Chemo + dual HER2 blockade (trastuzumab + pertuzumab) + endocrine therapy.",
+        "HR-/HER2+ (HER2-Enriched): Chemo + HER2 blockade (TCHP or paclitaxel + trastuzumab for T1N0).",
+        "HR-/HER2- (Triple-Negative / TNBC): Dose-dense cytotoxic chemotherapy + adjuvant olaparib if germline BRCA1/2 PV.",
+        "Favorable Histologies (Pure tubular, mucinous, cribriform, adenoid cystic): Low-intensity adjuvant therapy."
+      ],
+      "options": [
+        {
+          "id": "hrpos_her2neg",
+          "label": "HR-positive, HER2-negative (luminal disease)",
+          "sets": {
+            "subtype": "hrpos_her2neg"
+          },
+          "pills": [
+            "HR+/HER2-"
+          ]
+        },
+        {
+          "id": "hrpos_her2pos",
+          "label": "HR-positive, HER2-positive (triple-positive disease)",
+          "sets": {
+            "subtype": "hrpos_her2pos"
+          },
+          "pills": [
+            "HR+/HER2+"
+          ]
+        },
+        {
+          "id": "hrneg_her2pos",
+          "label": "HR-negative, HER2-positive (HER2-enriched disease)",
+          "sets": {
+            "subtype": "hrneg_her2pos"
+          },
+          "pills": [
+            "HR-/HER2+"
+          ]
+        },
+        {
+          "id": "tnbc",
+          "label": "Triple-negative (ER-, PR-, HER2-negative)",
+          "sets": {
+            "subtype": "tnbc"
+          },
+          "pills": [
+            "TNBC"
+          ]
+        },
+        {
+          "id": "favorable",
+          "label": "Favorable histology (pure tubular, mucinous, cribriform)",
+          "sets": {
+            "subtype": "favorable"
+          },
+          "pills": [
+            "favorable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_hrpos_meno",
+      "linkId": "breast_hrpos_meno",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "HR+ Menopause",
+      "title": "Adjuvant HR+/HER2-: Menopausal Status",
+      "section": "Adjuvant Upfront",
+      "description": "21-gene Oncotype DX Recurrence Score (RS) cutoffs and chemotherapy indications differ critically by menopausal status (TAILORx, RxPONDER).",
+      "path": "Breast / Adjuvant / HR+ Menopause",
+      "pills": [
+        "menopause"
+      ],
+      "required": true,
+      "bullets": [
+        "Postmenopausal (BINV-6): 21-gene RS <26 gains NO benefit from chemotherapy, even with 1-3 positive nodes (RxPONDER trial). RS >=26 derives significant chemotherapy benefit.",
+        "Premenopausal (BINV-7, BINV-8): Chemotherapy benefit is observed in all node-positive premenopausal patients (RxPONDER) and in node-negative patients with RS 16-25 (TAILORx subset).",
+        "Definition of Menopause (BINV-O): Bilateral oophorectomy, age >=60, or age <60 with >=12 months amenorrhea and postmenopausal FSH/estradiol. (Amenorrhea post-chemo requires serial hormonal checks)."
+      ],
+      "options": [
+        {
+          "id": "post",
+          "label": "Postmenopausal at diagnosis",
+          "sets": {
+            "menopause": "postmenopausal"
+          },
+          "pills": [
+            "postmenopausal"
+          ]
+        },
+        {
+          "id": "pre",
+          "label": "Premenopausal at diagnosis",
+          "sets": {
+            "menopause": "premenopausal"
+          },
+          "pills": [
+            "premenopausal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_adj_hrpos_post",
+      "linkId": "tx_adj_hrpos_post",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HR+ Postmenopausal Plan",
+      "title": "Adjuvant HR+/HER2- (Postmenopausal): Genomic-Guided Chemotherapy",
+      "section": "Adjuvant Upfront",
+      "description": "Evidence-based systemic adjuvant protocol for postmenopausal HR+/HER2- disease.",
+      "path": "Breast / Adjuvant / HR+ Postmenopausal",
+      "pills": [
+        "HR+/HER2-",
+        "postmenopausal",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "pT1a pN0 (<=0.5 cm): Adjuvant endocrine therapy alone (Category 2B). Chemotherapy is not recommended.",
+        "pT1b-T3, pN0 or pN1 (1-3 positive nodes) -> 21-Gene Oncotype DX RS (Category 1):",
+        "• Recurrence Score < 26: Adjuvant Endocrine Therapy alone (Category 1). TAILORx and RxPONDER prove NO chemotherapy benefit.",
+        "• Recurrence Score >= 26: Adjuvant Chemotherapy (Dose-Dense AC-T or TC) followed by Endocrine Therapy (Category 1).",
+        "pN2-3 (>=4 positive nodes): Adjuvant Chemotherapy followed by Endocrine Therapy (Category 1).",
+        "CDK4/6 Inhibitor Escalation: 2 years of Abemaciclib (monarchE, Category 1 preferred) or 3 years of Ribociclib (NATALEE, Category 1) for eligible high-risk patients (>=4 nodes, or 1-3 nodes with grade 3 or >=5 cm).",
+        "Adjuvant Olaparib: 1 year for germline BRCA1/2 PV with >=4 positive nodes (OlympiA, Category 1)."
+      ],
+      "protocolRefs": [
+        "breast-ddac-t",
+        "breast-tc",
+        "breast-abemaciclib-adjuvant",
+        "breast-ribociclib-adjuvant"
+      ]
+    },
+    {
+      "id": "n_hrpos_pre_nodal",
+      "linkId": "breast_hrpos_pre_nodal",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "HR+ Premenopausal Nodal Status",
+      "title": "Adjuvant HR+/HER2- (Premenopausal): Pathologic Nodal Status",
+      "section": "Adjuvant Upfront",
+      "description": "Determines whether chemotherapy is guided by Oncotype DX (pN0) or indicated upfront (pN+).",
+      "path": "Breast / Adjuvant / Premenopausal Nodes",
+      "pills": [
+        "nodal"
+      ],
+      "required": true,
+      "bullets": [
+        "Node-Negative (pN0, BINV-7): 21-gene RS <=15 (endocrine alone); RS 16-25 (chemo -> endocrine +/- OFS vs endocrine + OFS); RS >=26 (chemo -> endocrine + OFS).",
+        "Node-Positive (pN1-3, BINV-8): Prospective RxPONDER trial showed chemotherapy improves invasive DFS by 5% in all premenopausal women with 1-3 positive nodes regardless of RS score."
+      ],
+      "options": [
+        {
+          "id": "pn0",
+          "label": "Node-negative (pN0 or pN1mi <=2 mm)",
+          "sets": {
+            "nodes": "pn0"
+          },
+          "pills": [
+            "pN0"
+          ]
+        },
+        {
+          "id": "pnpos",
+          "label": "Node-positive (pN1a 1-3 positive nodes, or >=4 nodes)",
+          "sets": {
+            "nodes": "pnpos"
+          },
+          "pills": [
+            "pN+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_adj_hrpos_pre_pn0",
+      "linkId": "tx_adj_hrpos_pre_pn0",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Premenopausal pN0 Plan",
+      "title": "Adjuvant HR+/HER2- (Premenopausal, pN0): 21-Gene RS Stratification",
+      "section": "Adjuvant Upfront",
+      "description": "Genomic-guided protocol for premenopausal node-negative disease.",
+      "path": "Breast / Adjuvant / Premenopausal pN0",
+      "pills": [
+        "HR+/HER2-",
+        "premenopausal",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Recurrence Score <= 15: Adjuvant Endocrine Therapy alone +/- Ovarian Function Suppression (OFS). No chemotherapy benefit in TAILORx.",
+        "Recurrence Score 16-25: Adjuvant Chemotherapy followed by Endocrine Therapy +/- OFS (Category 1); or alternatively Endocrine Therapy + OFS (Goserelin / Leuprolide) + Aromatase Inhibitor.",
+        "Recurrence Score >= 26: Adjuvant Chemotherapy (Dose-Dense AC-T or TC) followed by Endocrine Therapy + OFS (Category 1).",
+        "CDK4/6 Inhibitor: Consider 3 years of Ribociclib + AI + OFS for eligible Stage II patients (NATALEE trial, Category 1)."
+      ],
+      "protocolRefs": [
+        "breast-ddac-t",
+        "breast-tc",
+        "breast-ribociclib-adjuvant"
+      ]
+    },
+    {
+      "id": "n_adj_hrpos_pre_pnpos",
+      "linkId": "tx_adj_hrpos_pre_pnpos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Premenopausal pN+ Plan",
+      "title": "Adjuvant HR+/HER2- (Premenopausal, pN+): Chemotherapy Recommended",
+      "section": "Adjuvant Upfront",
+      "description": "Chemotherapy and intensive endocrine suppression for premenopausal node-positive disease.",
+      "path": "Breast / Adjuvant / Premenopausal pN+",
+      "pills": [
+        "HR+/HER2-",
+        "premenopausal",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Chemotherapy (Category 1): Adjuvant Chemotherapy (Dose-Dense AC-T or TC) followed by Endocrine Therapy + OFS (RxPONDER trial: 5% absolute iDFS benefit in premenopausal node-positive women).",
+        "Ovarian Function Suppression (OFS): Mandatory 5 years of Goserelin 3.6 mg SC q4w or Leuprolide + Aromatase Inhibitor (SOFT/TEXT trials: AI + OFS superior to tamoxifen).",
+        "CDK4/6 Inhibitor: 2 years of Abemaciclib (monarchE trial, Category 1 preferred) or 3 years of Ribociclib (NATALEE trial, Category 1) for high-risk criteria.",
+        "Adjuvant Olaparib: 1 year for germline BRCA1/2 PV with >=4 positive nodes (OlympiA trial, Category 1)."
+      ],
+      "protocolRefs": [
+        "breast-ddac-t",
+        "breast-tc",
+        "breast-abemaciclib-adjuvant",
+        "breast-ribociclib-adjuvant",
+        "breast-olaparib-adjuvant"
+      ]
+    },
+    {
+      "id": "n_adj_hrpos_her2pos",
+      "linkId": "tx_adj_hrpos_her2pos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Triple-Positive Plan",
+      "title": "Adjuvant Triple-Positive (HR+/HER2+): Chemo + Dual HER2 Blockade + Endocrine",
+      "section": "Adjuvant Upfront",
+      "description": "Comprehensive adjuvant protocol combining dual HER2 blockade and endocrine therapy.",
+      "path": "Breast / Adjuvant / Triple-Positive",
+      "pills": [
+        "HER2+",
+        "HR+",
+        "adjuvant",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Preferred Regimen: TCHP (Docetaxel + Carboplatin + Trastuzumab + Pertuzumab) x 6 cycles; OR Dose-dense AC followed by Paclitaxel + Trastuzumab + Pertuzumab (AC-THP).",
+        "Node-Positive Disease: Chemotherapy + Pertuzumab + Trastuzumab is Category 1 preferred (APHINITY trial 8.4-year update confirms iDFS benefit in node-positive).",
+        "Small Node-Negative (pT1b-cN0 <=1 cm): Paclitaxel + Trastuzumab weekly x 12 weeks followed by Trastuzumab to complete 1 year (APT trial 10-year iDFS 91.3%).",
+        "Adjuvant Endocrine Therapy: Initiate upon completion of chemotherapy; continue for 5-10 years (Tamoxifen or AI +/- OFS).",
+        "Extended Neratinib: Consider 1 year of oral neratinib following trastuzumab in high-risk HR+/HER2+ disease (ExteNET trial: HR 0.60)."
+      ],
+      "protocolRefs": [
+        "breast-tchp",
+        "breast-ac-th"
+      ]
+    },
+    {
+      "id": "n_adj_hrneg_her2pos",
+      "linkId": "tx_adj_hrneg_her2pos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HER2-Enriched Plan",
+      "title": "Adjuvant HER2-Enriched (HR-/HER2+): Chemo + Dual HER2 Blockade",
+      "section": "Adjuvant Upfront",
+      "description": "Intensive HER2-targeted chemotherapy; endocrine therapy is not indicated.",
+      "path": "Breast / Adjuvant / HER2-Enriched",
+      "pills": [
+        "HER2+",
+        "HR-",
+        "adjuvant",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Node-Positive or Tumor >1 cm: TCHP (Docetaxel + Carboplatin + Trastuzumab + Pertuzumab) x 6 cycles followed by Trastuzumab + Pertuzumab to complete 1 year (Category 1, preferred).",
+        "Small Node-Negative (pT1b-cN0 0.6-1.0 cm): Paclitaxel 80 mg/m2 weekly x 12 weeks + Trastuzumab followed by Trastuzumab to complete 1 year (APT trial, Category 1).",
+        "pT1a pN0 (<=0.5 cm): Consider adjuvant chemotherapy + Trastuzumab (Category 2B).",
+        "Endocrine Therapy: Not indicated for ER-negative/PR-negative disease.",
+        "Cardiac Monitoring: Baseline and q3-month echocardiogram/MUGA for LVEF during trastuzumab therapy."
+      ],
+      "protocolRefs": [
+        "breast-tchp",
+        "breast-paclitaxel-trastuzumab"
+      ]
+    },
+    {
+      "id": "n_adj_tnbc",
+      "linkId": "tx_adj_tnbc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adjuvant TNBC Plan",
+      "title": "Adjuvant Triple-Negative: Chemo-Immunotherapy and PARP Inhibition",
+      "section": "Adjuvant Upfront",
+      "description": "Category 1 adjuvant cytotoxic protocol for triple-negative breast cancer.",
+      "path": "Breast / Adjuvant / TNBC",
+      "pills": [
+        "TNBC",
+        "adjuvant",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Preferred Chemotherapy: Dose-Dense AC followed by Paclitaxel every 2 weeks x 4 cycles (or weekly Paclitaxel x 12 weeks) with G-CSF support (Category 1, EBCTCG meta-analysis).",
+        "Non-Anthracycline Option: TC (Docetaxel 75 mg/m2 + Cyclophosphamide 600 mg/m2 q21d x 4-6 cycles) if cardiac contraindication.",
+        "Adjuvant Olaparib (OlympiA trial): 300 mg PO BID x 1 year for patients with germline BRCA1/2 pathogenic variant and tumor >=pT2 or >=pN1 (Category 1, 4-year OS 89.8% vs 86.4%). Initiate post-RT.",
+        "Small pT1a pN0 (<=0.5 cm): No adjuvant systemic chemotherapy is indicated.",
+        "No endocrine therapy or HER2-targeted therapy is indicated."
+      ],
+      "protocolRefs": [
+        "breast-ddac-t",
+        "breast-tc",
+        "breast-pembro-chemo-tnbc",
+        "breast-olaparib-adjuvant"
+      ]
+    },
+    {
+      "id": "n_adj_favorable",
+      "linkId": "tx_adj_favorable",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Favorable Histology Plan",
+      "title": "Adjuvant: Favorable Histologies (Tubular, Mucinous, Cribriform)",
+      "section": "Adjuvant Upfront",
+      "description": "De-escalated adjuvant therapy for pure favorable histologies.",
+      "path": "Breast / Adjuvant / Favorable",
+      "pills": [
+        "HR+",
+        "favorable",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Histologies: Pure tubular, pure mucinous (>90%), pure cribriform, adenoid cystic carcinoma.",
+        "Must be Nottingham Grade 1-2, pure histology, and HER2-negative.",
+        "Tumor < 1 cm, pN0: Adjuvant endocrine therapy for risk reduction.",
+        "Tumor 1 - 2.9 cm, pN0: Adjuvant endocrine therapy alone (tamoxifen or AI) for 5 years.",
+        "Tumor >= 3 cm or pN+: Adjuvant endocrine therapy +/- chemotherapy."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole",
+        "breast-letrozole"
+      ]
+    },
+    {
+      "id": "n_endocrine",
+      "linkId": "breast_endocrine",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Adjuvant Endocrine",
+      "title": "Adjuvant Endocrine Therapy: Menopausal Status and Risk Stratification",
+      "section": "Endocrine Therapy",
+      "description": "Endocrine therapy reduces recurrence and mortality by 40-50% in HR+ disease. Select menopausal status.",
+      "path": "Breast / Endocrine / Menopause",
+      "pills": [
+        "endocrine"
+      ],
+      "required": true,
+      "bullets": [
+        "Postmenopausal (BINV-K 4 of 4): Aromatase Inhibitor (Letrozole, Anastrozole, Exemestane) for 5 years (Category 1). Extended AI for 7.5-10 years for node-positive patients.",
+        "Premenopausal (BINV-K 3 of 4): Tamoxifen for 5-10 years; OR Aromatase Inhibitor + Ovarian Function Suppression (OFS: Goserelin / Leuprolide) for 5 years (SOFT/TEXT trials: AI+OFS significantly superior in high-risk premenopausal women).",
+        "CDK4/6 Inhibitor Combination: 2 years of Abemaciclib (monarchE) or 3 years of Ribociclib (NATALEE) for eligible high-risk patients.",
+        "Adjuvant Bone-Modifying Agent: Zoledronic acid 4 mg IV q6mo x 3-5 years reduces bone recurrence (EBCTCG meta-analysis, Category 1)."
+      ],
+      "options": [
+        {
+          "id": "post",
+          "label": "Postmenopausal (or >=60 years / bilateral oophorectomy)",
+          "sets": {
+            "endocrine_meno": "post"
+          },
+          "pills": [
+            "postmenopausal"
+          ]
+        },
+        {
+          "id": "pre",
+          "label": "Premenopausal (intact ovaries, <50 years)",
+          "sets": {
+            "endocrine_meno": "pre"
+          },
+          "pills": [
+            "premenopausal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_endo_post",
+      "linkId": "tx_endo_post",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Postmenopausal Endocrine",
+      "title": "Adjuvant Endocrine (Postmenopausal) ± CDK4/6 Inhibitor",
+      "section": "Endocrine Therapy",
+      "description": "Category 1 adjuvant endocrine protocol for postmenopausal patients.",
+      "path": "Breast / Endocrine / Postmenopausal",
+      "pills": [
+        "HR+",
+        "postmenopausal",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Initial Therapy (5 years): Aromatase Inhibitor (Letrozole 2.5 mg daily, Anastrozole 1 mg daily, or Exemestane 25 mg daily) (Category 1 preferred).",
+        "Extended Therapy (7.5 - 10 years total): Additional 3-5 years of AI for node-positive or high-risk patients (MA-17 trial, ATLAS trial).",
+        "Adjuvant CDK4/6 Inhibitor: Abemaciclib 150 mg PO BID x 2 years (monarchE, Category 1 preferred) OR Ribociclib 400 mg daily d1-21 q28d x 3 years (NATALEE, Category 1) for high-risk criteria.",
+        "Adjuvant Bone Protection: Baseline DEXA scan; Zoledronic acid 4 mg IV every 6 months for 3-5 years to prevent osteoporosis and reduce bone recurrence (EBCTCG meta-analysis, Category 1).",
+        "Tamoxifen Alternative: Tamoxifen 20 mg daily for 5-10 years only if AI is contraindicated or not tolerated."
+      ],
+      "protocolRefs": [
+        "breast-anastrozole",
+        "breast-letrozole",
+        "breast-exemestane",
+        "breast-tamoxifen",
+        "breast-cdk46-ai",
+        "breast-abemaciclib-adjuvant",
+        "breast-ribociclib-adjuvant"
+      ]
+    },
+    {
+      "id": "n_endo_pre",
+      "linkId": "tx_endo_pre",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Premenopausal Endocrine",
+      "title": "Adjuvant Endocrine (Premenopausal): Tamoxifen vs OFS + AI ± CDK4/6i",
+      "section": "Endocrine Therapy",
+      "description": "Category 1 adjuvant endocrine protocol for premenopausal patients.",
+      "path": "Breast / Endocrine / Premenopausal",
+      "pills": [
+        "HR+",
+        "premenopausal",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "High Risk (Node-positive, Grade 3, or Young Age <35): Ovarian Function Suppression (OFS: Goserelin 3.6 mg SC q4w or Leuprolide 3.75 mg IM q4w) + Aromatase Inhibitor (Exemestane or Letrozole) for 5 years (Category 1, SOFT and TEXT trials: 15-year DFS 73.5% vs 67.0% for tamoxifen alone).",
+        "Standard Risk: Tamoxifen 20 mg PO daily for 5 years (Category 1) +/- OFS; consider extending to 10 years total (ATLAS trial).",
+        "Adjuvant CDK4/6 Inhibitor: Abemaciclib 150 mg PO BID x 2 years (monarchE) or Ribociclib 400 mg daily d1-21 q28d x 3 years (NATALEE) with AI + OFS for eligible high-risk patients.",
+        "Safety Pearl: Do NOT administer an Aromatase Inhibitor to a premenopausal woman WITHOUT confirmed, continuous Ovarian Function Suppression!"
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole",
+        "breast-letrozole",
+        "breast-exemestane",
+        "breast-cdk46-ai",
+        "breast-abemaciclib-adjuvant",
+        "breast-ribociclib-adjuvant"
+      ]
+    },
+    {
+      "id": "n_surveillance",
+      "linkId": "breast_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Surveillance",
+      "title": "Post-Therapy Surveillance and Survivorship",
+      "section": "Surveillance",
+      "description": "Long-term monitoring schedule and survivorship management following curative breast cancer therapy.",
+      "path": "Breast / Surveillance",
+      "pills": [
+        "surveillance",
+        "followup"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Clinical History & Physical Exam: Every 3 to 6 months for the first 5 years, then annually thereafter.",
+        "Annual Mammography: Begin 6 to 12 months after completion of radiation therapy (or BCS if no RT given), and annually thereafter.",
+        "Routine Imaging of Reconstructed Breast: NOT indicated after total mastectomy.",
+        "Bone Health Monitoring: DEXA scan at baseline and every 1-2 years for patients on aromatase inhibitors or ovarian suppression.",
+        "WHAT NOT TO DO IN ASYMPTOMATIC PATIENTS (NCCN BINV-17, Category 1): Routine CBC, LFTs, tumor markers (CEA, CA 15-3, CA 27.29), CT scans, bone scans, and PET/CT scans are NOT recommended in the absence of signs/symptoms of recurrence (no survival advantage and potential harm from false-positives).",
+        "Lymphedema Management: Educate on symptoms, early referral for compression garments and decongestive physical therapy.",
+        "Cardiovascular Monitoring: Follow LVEF every 3 months during active anti-HER2 therapy; long-term monitoring if anthracycline-treated."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
+      ]
+    },
+    {
+      "id": "n_recur_type",
+      "linkId": "breast_recur_type",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Recurrence Extent",
+      "title": "Recurrent / Stage IV: Location and Extent of Disease",
+      "section": "Recurrence",
+      "description": "Biopsy documentation of first recurrence is mandatory to re-evaluate ER, PR, and HER2 (discordance occurs in 15-30%).",
+      "path": "Breast / Recurrent / Staging",
+      "pills": [
+        "recurrent",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Biopsy of First Recurrence: Mandatory tissue biopsy of metastatic/recurrent lesion to re-evaluate ER/PR and HER2 (discordance in 15-30% changes management).",
+        "4-Tier HER2 Testing (ASCO/CAP 2023): HER2 3+ (positive), HER2 2+ (equivocal reflex to ISH), HER2 1+ (low), HER2 0+ (ultralow), HER2 0 (null).",
+        "Next-Generation Sequencing (NGS) Multigene Panel (tissue or ctDNA): PIK3CA, AKT1, PTEN, ESR1, germline BRCA1/2, PALB2, MSI-H/dMMR, TMB-H, RET, NTRK.",
+        "Systemic Staging: Diagnostic CT chest/abdomen/pelvis with contrast + bone scan (or FDG-PET/CT); brain MRI if neurologic symptoms present.",
+        "Bone Metastases Management (BINV-21): Add Zoledronic acid 4 mg IV q12w or Denosumab 120 mg SQ q4w + Calcium/Vit D + preventive dental exam."
+      ],
+      "options": [
+        {
+          "id": "local",
+          "label": "Local recurrence only (in-breast or chest wall without overt metastases)",
+          "sets": {
+            "recurrence": "local"
+          },
+          "pills": [
+            "local"
+          ]
+        },
+        {
+          "id": "regional",
+          "label": "Regional nodal recurrence (axillary, supraclavicular, internal mammary)",
+          "sets": {
+            "recurrence": "regional"
+          },
+          "pills": [
+            "regional"
+          ]
+        },
+        {
+          "id": "distant",
+          "label": "Distant metastatic disease (Stage IV M1: bone, visceral, brain)",
+          "sets": {
+            "recurrence": "distant"
+          },
+          "pills": [
+            "distant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_local_recur",
+      "linkId": "tx_local_recur",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Local Recurrence Plan",
+      "title": "Management of Isolated Local Recurrence",
+      "section": "Recurrence",
+      "description": "Curative multidisciplinary salvage protocol for isolated local breast/chest wall recurrence.",
+      "path": "Breast / Recurrence / Local",
+      "pills": [
+        "HER2+",
+        "HR+",
+        "recurrence",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Prior BCS without prior RT: Surgical resection (repeat BCS or mastectomy) + Whole-breast/chest-wall RT (Category 1).",
+        "Prior BCS with prior RT: Total mastectomy + surgical axillary staging (repeat SLNB or ALND) +/- repeat RT if feasible.",
+        "Prior Mastectomy without prior RT: Surgical excision of chest wall recurrence + PMRT to chest wall and supraclavicular nodes.",
+        "Systemic Adjuvant Chemotherapy (CALOR trial): Adjuvant chemotherapy improves 5-year DFS (69% vs 57%, HR 0.59) and OS (88% vs 76%), with greatest benefit in ER-negative local recurrences.",
+        "Systemic Endocrine Therapy: 5 years of endocrine therapy for ER-positive recurrences."
+      ],
+      "protocolRefs": [
+        "breast-ddac-t",
+        "breast-paclitaxel-trastuzumab",
+        "breast-tamoxifen",
+        "breast-anastrozole"
+      ]
+    },
+    {
+      "id": "n_regional_recur",
+      "linkId": "tx_regional_recur",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Regional Recurrence Plan",
+      "title": "Management of Isolated Regional (Nodal) Recurrence",
+      "section": "Recurrence",
+      "description": "Locoregional salvage and systemic therapy for regional lymph node recurrence.",
+      "path": "Breast / Recurrence / Regional",
+      "pills": [
+        "HER2+",
+        "HR+",
+        "regional",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Axillary Recurrence (prior SLNB only): Surgical resection of gross disease + Complete ALND (level I/II) + Radiation Therapy.",
+        "Axillary Recurrence (prior ALND): Surgical resection of gross disease if feasible + Radiation Therapy (repeat RT if feasible).",
+        "Supraclavicular / Infraclavicular / Internal Mammary Recurrence: Comprehensive Radiation Therapy (or repeat RT) + systemic therapy.",
+        "Systemic Therapy: Administer full course of systemic chemotherapy, targeted therapy, and endocrine therapy based on biomarker restaging."
+      ],
+      "protocolRefs": [
+        "breast-ddac-t",
+        "breast-paclitaxel-trastuzumab",
+        "breast-tamoxifen",
+        "breast-anastrozole"
+      ]
+    },
+    {
+      "id": "n_mbc_subtype",
+      "linkId": "breast_mbc_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Metastatic Subtype",
+      "title": "Metastatic Breast Cancer: Biomarker Subtype Stratification",
+      "section": "Metastatic",
+      "description": "Therapy is governed by ER, PR, HER2 status, and actionable genomic alterations.",
+      "path": "Breast / Metastatic / Subtype",
+      "pills": [
+        "metastatic"
+      ],
+      "required": true,
+      "bullets": [
+        "HR+/HER2- (BINV-22): Endocrine therapy + CDK4/6 inhibitor is the preferred first-line standard (chemotherapy reserved ONLY for true visceral crisis).",
+        "HER2-Positive (BINV-24, BINV-26): Dual anti-HER2 blockade (CLEOPATRA THP) followed by T-DXd (DESTINY-Breast03) and tucatinib triplet (HER2CLIMB).",
+        "Triple-Negative / TNBC (BINV-27): PD-L1 CPS guided chemo-immunotherapy (KEYNOTE-355), Sacituzumab govitecan (ASCENT), and PARP inhibitors."
+      ],
+      "options": [
+        {
+          "id": "hrpos",
+          "label": "HR-positive, HER2-negative (endocrine-sensitive or resistant)",
+          "sets": {
+            "mbc_subtype": "hrpos"
+          },
+          "pills": [
+            "HR+/HER2-"
+          ]
+        },
+        {
+          "id": "her2pos",
+          "label": "HER2-positive (HR+ or HR- with HER2 IHC 3+ or ISH+)",
+          "sets": {
+            "mbc_subtype": "her2pos"
+          },
+          "pills": [
+            "HER2+"
+          ]
+        },
+        {
+          "id": "tnbc",
+          "label": "Triple-negative (ER-, PR-, HER2-negative)",
+          "sets": {
+            "mbc_subtype": "tnbc"
+          },
+          "pills": [
+            "TNBC"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_mbc_hr_line",
+      "linkId": "breast_mbc_hr_line",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Line of Therapy",
+      "title": "Metastatic HR+/HER2-: Line of Therapy and Endocrine Sensitivity",
+      "section": "Metastatic HR+",
+      "description": "Select whether patient is treatment-naive, progressing on 1L CDK4/6 inhibitor, or endocrine-refractory.",
+      "path": "Breast / Metastatic / HR+ Line",
+      "pills": [
+        "line"
+      ],
+      "required": true,
+      "bullets": [
+        "First-Line (1L): Aromatase inhibitor + CDK4/6 inhibitor (Ribociclib Category 1 with proven OS benefit in MONALEESA-2/7).",
+        "Post-CDK4/6 Inhibitor Progression (2L): Biomarker-directed targeted therapy based on NGS (PIK3CA, AKT1, PTEN, ESR1, BRCA1/2).",
+        "Endocrine-Refractory / Visceral Crisis: Switch to antibody-drug conjugates (T-DXd for HER2-low, Sacituzumab govitecan) or cytotoxic chemotherapy."
+      ],
+      "options": [
+        {
+          "id": "first",
+          "label": "First-line (1L): no prior endocrine therapy for metastatic disease",
+          "sets": {
+            "line": "1l"
+          },
+          "pills": [
+            "1L"
+          ]
+        },
+        {
+          "id": "post_cdk",
+          "label": "Second-line (2L): progression on prior endocrine + CDK4/6 inhibitor",
+          "sets": {
+            "line": "2l"
+          },
+          "pills": [
+            "2L"
+          ]
+        },
+        {
+          "id": "refractory",
+          "label": "Endocrine-refractory or visceral crisis: candidate for chemotherapy / ADCs",
+          "sets": {
+            "line": "refractory"
+          },
+          "pills": [
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_mbc_hr_1l",
+      "linkId": "tx_mbc_hr_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "1L HR+/HER2- Regimen",
+      "title": "Metastatic HR+/HER2- 1L: Endocrine Therapy + CDK4/6 Inhibitor",
+      "section": "Metastatic HR+",
+      "description": "Preferred Category 1 first-line standard of care for advanced HR+/HER2- disease.",
+      "path": "Breast / Metastatic / HR+ 1L",
+      "pills": [
+        "HR+",
+        "1L",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Preferred 1L Regimen: Nonsteroidal Aromatase Inhibitor (Letrozole 2.5 mg or Anastrozole 1 mg daily) + CDK4/6 Inhibitor.",
+        "Ribociclib: 600 mg PO daily Days 1-21 q28d (Category 1, MONALEESA-2 & MONALEESA-7 trials: proven statistically significant Overall Survival benefit, median OS 63.9 vs 51.4 months). Monitor ECG (QTcF) and LFTs.",
+        "Abemaciclib: 150 mg PO BID continuous (Category 2A, MONARCH 3 trial: median PFS 28.2 vs 14.8 months).",
+        "Palbociclib: 125 mg PO daily Days 1-21 q28d (Category 2A, PALOMA-2 trial).",
+        "If Premenopausal: Add Ovarian Function Suppression (Goserelin / Leuprolide) or bilateral oophorectomy (Category 1).",
+        "True Visceral Crisis (severe organ compromise, BINV-Q 2): Chemotherapy or ADC indicated for immediate disease control."
+      ],
+      "protocolRefs": [
+        "breast-cdk46-ai",
+        "breast-letrozole",
+        "breast-anastrozole",
+        "breast-fulvestrant"
+      ]
+    },
+    {
+      "id": "n_mbc_hr_genomics",
+      "linkId": "breast_mbc_hr_genomics",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Metastatic Genomics",
+      "title": "Metastatic HR+/HER2- 2L: Actionable Genomic Alterations",
+      "section": "Targeted 2L",
+      "description": "Select the detected driver alteration from plasma ctDNA or tumor tissue NGS.",
+      "path": "Breast / Metastatic / HR+ 2L",
+      "pills": [
+        "genomics"
+      ],
+      "required": true,
+      "bullets": [
+        "PIK3CA / AKT1 / PTEN Alterations: Capivasertib + Fulvestrant (CAPItello-291, Category 1) OR Fulvestrant/Inavolisib/Palbociclib (INAVO120, Category 1).",
+        "ESR1 Mutation (frequent post-AI resistance): Elacestrant oral SERD (EMERALD, Category 2A) or Imlunestrant (EMBER-3) or Vepdegestrant.",
+        "Germline BRCA1/2 Pathogenic Variant: PARP Inhibitor monotherapy (Olaparib or Talazoparib, Category 1).",
+        "HER2-Low (IHC 1+ or IHC 2+/ISH-) or HER2-Ultralow (IHC 0+): Fam-Trastuzumab deruxtecan (DESTINY-Breast04 / DESTINY-Breast06).",
+        "Biomarker Wild-Type / No Actionable Target: Everolimus + Exemestane (BOLERO-2) or Fulvestrant + CDK4/6i switch."
+      ],
+      "options": [
+        {
+          "id": "pik3ca_akt_pten",
+          "label": "PIK3CA, AKT1, or PTEN alteration",
+          "sets": {
+            "mutation": "pi3k_pathway"
+          },
+          "pills": [
+            "PIK3CA/AKT1/PTEN"
+          ]
+        },
+        {
+          "id": "esr1",
+          "label": "ESR1 mutation (detected in plasma ctDNA or tissue)",
+          "sets": {
+            "mutation": "esr1"
+          },
+          "pills": [
+            "ESR1"
+          ]
+        },
+        {
+          "id": "brca",
+          "label": "Germline BRCA1 or BRCA2 pathogenic variant",
+          "sets": {
+            "mutation": "brca"
+          },
+          "pills": [
+            "BRCA"
+          ]
+        },
+        {
+          "id": "her2_low",
+          "label": "HER2-low (IHC 1+ or 2+/ISH-) or HER2-ultralow (IHC 0+)",
+          "sets": {
+            "mutation": "her2_low"
+          },
+          "pills": [
+            "HER2-Low"
+          ]
+        },
+        {
+          "id": "wildtype",
+          "label": "No actionable biomarker detected (wild-type)",
+          "sets": {
+            "mutation": "wildtype"
+          },
+          "pills": [
+            "wildtype"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_mbc_capivasertib",
+      "linkId": "tx_mbc_capivasertib",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Capivasertib Plan",
+      "title": "PIK3CA / AKT1 / PTEN Altered: Capivasertib + Fulvestrant",
+      "section": "Targeted 2L",
+      "description": "Category 1 targeted therapy for PI3K/AKT/PTEN pathway-altered metastatic disease.",
+      "path": "Breast / Metastatic / PI3K Pathway",
+      "pills": [
+        "HR+",
+        "PIK3CA",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Capivasertib + Fulvestrant: Capivasertib 400 mg PO BID Days 1-4 weekly (4 days on, 3 days off) + Fulvestrant 500 mg IM Days 1, 15, then q28d (Category 1, CAPItello-291 trial: median PFS 7.3 vs 3.1 months in altered cohort, HR 0.50). Monitor for diarrhea and hyperglycemia.",
+        "Fulvestrant / Inavolisib / Palbociclib Triplet: Inavolisib 9 mg daily + Palbociclib 125 mg d1-21 + Fulvestrant (Category 1 preferred for PIK3CA mutation progressing on/within 12 mo of adjuvant ET, INAVO120 trial: median PFS 15.0 vs 7.3 months, HR 0.43; OS benefit 34 vs 27 months, HR 0.67).",
+        "Alpelisib + Fulvestrant: 300 mg PO daily + Fulvestrant (SOLAR-1 trial, Category 1). Requires baseline HbA1c <6.5% and prophylactic antihistamines for rash."
+      ],
+      "protocolRefs": [
+        "breast-capivasertib-fulvestrant",
+        "breast-inavolisib-palbo-fulv",
+        "breast-fulvestrant"
+      ]
+    },
+    {
+      "id": "n_tx_mbc_esr1",
+      "linkId": "tx_mbc_esr1",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Elacestrant Plan",
+      "title": "ESR1-Mutated: Elacestrant (Oral Selective ER Degrader)",
+      "section": "Targeted 2L",
+      "description": "Oral SERD for acquired ESR1-mutated endocrine resistance.",
+      "path": "Breast / Metastatic / ESR1 Mutated",
+      "pills": [
+        "HR+",
+        "ESR1",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Elacestrant: 345 mg PO once daily continuous with food (Category 2A, EMERALD trial: median PFS 8.6 vs 1.9 months in patients with prior CDK4/6i >=12 months, HR 0.41).",
+        "Indicated for ER+/HER2- metastatic breast cancer with ESR1 mutation following progression on at least one line of endocrine therapy.",
+        "Imlunestrant: 400 mg PO daily (Category 2A, EMBER-3 trial: median PFS 5.5 vs 3.8 months, HR 0.62); or Imlunestrant + Abemaciclib (median PFS 11.1 vs 5.5 months, HR 0.53).",
+        "Vepdegestrant (PROTAC ER Degrader): 200 mg PO daily (VERITAC-2 trial: median PFS 5.0 vs 2.1 months, HR 0.58)."
+      ],
+      "protocolRefs": [
+        "breast-elacestrant",
+        "breast-fulvestrant"
+      ]
+    },
+    {
+      "id": "n_tx_mbc_parp",
+      "linkId": "tx_mbc_parp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "PARP Inhibitor Plan",
+      "title": "Germline BRCA1/2 Mutation: PARP Inhibitor Monotherapy",
+      "section": "Targeted 2L",
+      "description": "Category 1 targeted synthetic lethality for germline BRCA1/2 pathogenic variants.",
+      "path": "Breast / Metastatic / BRCA",
+      "pills": [
+        "HR+",
+        "BRCA",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Olaparib: 300 mg PO twice daily continuous (Category 1, OlympiAD trial: median PFS 7.0 vs 4.2 months vs chemotherapy, HR 0.58).",
+        "Talazoparib: 1 mg PO once daily continuous (Category 1, EMBRACA trial: median PFS 8.6 vs 5.6 months vs chemotherapy, HR 0.54).",
+        "Monitor complete blood counts monthly for anemia, neutropenia, and thrombocytopenia."
+      ],
+      "protocolRefs": [
+        "breast-olaparib-adjuvant"
+      ]
+    },
+    {
+      "id": "n_tx_mbc_her2low",
+      "linkId": "tx_mbc_her2low",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "T-DXd HER2-Low Plan",
+      "title": "HER2-Low / Ultralow: Fam-Trastuzumab Deruxtecan (T-DXd)",
+      "section": "Targeted 2L",
+      "description": "Category 1 antibody-drug conjugate for HER2-low and HER2-ultralow metastatic breast cancer.",
+      "path": "Breast / Metastatic / HER2-Low",
+      "pills": [
+        "HER2+",
+        "her2_low",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Fam-trastuzumab deruxtecan (T-DXd): 5.4 mg/kg IV q21d (Category 1 preferred, DESTINY-Breast04 trial: median PFS 10.1 vs 5.4 months, OS 23.9 vs 17.6 months, HR 0.69).",
+        "DESTINY-Breast06 Trial: Extends T-DXd benefit to chemo-naive endocrine-refractory patients with HER2-low (PFS 13.2 vs 8.1 mo, HR 0.62) AND HER2-ultralow (IHC 0+, PFS 13.2 vs 8.3 mo, HR 0.78).",
+        "Toxicity Warning: Monitor for Interstitial Lung Disease (ILD) / pneumonitis (occurs in 11-12%). Interrupt immediately for Grade 1 (asymptomatic ground glass); permanently discontinue for Grade >=2."
+      ],
+      "protocolRefs": [
+        "breast-tdxd"
+      ]
+    },
+    {
+      "id": "n_tx_mbc_wildtype",
+      "linkId": "tx_mbc_wildtype",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Wild-Type 2L Plan",
+      "title": "Biomarker-Negative 2L: Everolimus + Exemestane or Fulvestrant",
+      "section": "Targeted 2L",
+      "description": "mTOR inhibition overcoming endocrine resistance in biomarker-negative disease.",
+      "path": "Breast / Metastatic / Wild-Type 2L",
+      "pills": [
+        "HR+",
+        "wildtype",
+        "endocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Everolimus + Exemestane: Everolimus 10 mg PO daily + Exemestane 25 mg PO daily (Category 1, BOLERO-2 trial: median PFS 11.0 vs 4.1 months, HR 0.38). Use steroid mouthwash to prevent stomatitis.",
+        "Fulvestrant Monotherapy: 500 mg IM Days 1, 15, then monthly (CONFIRM trial).",
+        "CDK4/6 Switch: Abemaciclib + Fulvestrant if palbociclib was used in 1L (postMONARCH trial: PFS HR 0.73)."
+      ],
+      "protocolRefs": [
+        "breast-exemestane",
+        "breast-fulvestrant"
+      ]
+    },
+    {
+      "id": "n_mbc_hr_later",
+      "linkId": "tx_mbc_hr_later",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HR+ Refractory Plan",
+      "title": "Endocrine-Refractory HR+/HER2-: Antibody-Drug Conjugates and Chemotherapy",
+      "section": "Metastatic Chemotherapy",
+      "description": "Sequential ADCs and cytotoxic chemotherapy for endocrine-refractory disease.",
+      "path": "Breast / Metastatic / HR+ Later Lines",
+      "pills": [
+        "HR+/HER2-",
+        "chemotherapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Sacituzumab govitecan: 10 mg/kg IV Days 1, 8 q21d (Category 1 preferred, TROPiCS-02 trial: median OS 14.4 vs 11.2 months, HR 0.79).",
+        "Datopotamab deruxtecan (Dato-DXd): 6 mg/kg IV q21d (Category 2A, TROPION-Breast01 trial: median PFS 7.2 vs 3.6 months, HR 0.63).",
+        "Sequential Single-Agent Chemotherapy: Capecitabine (1000-1250 mg/m2 PO BID d1-14 q21d), weekly Paclitaxel, liposomal Doxorubicin, or Eribulin."
+      ],
+      "protocolRefs": [
+        "breast-sacituzumab-govitecan",
+        "breast-capecitabine"
+      ]
+    },
+    {
+      "id": "n_mbc_her2pos",
+      "linkId": "tx_mbc_her2pos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HER2+ Metastatic Plan",
+      "title": "Metastatic HER2-Positive: Evidence-Based Line Sequencing",
+      "section": "Metastatic HER2+",
+      "description": "Definitive sequential therapy algorithm for metastatic HER2-positive breast cancer.",
+      "path": "Breast / Metastatic / HER2+ Sequencing",
+      "pills": [
+        "HER2+",
+        "metastatic",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "First-Line (1L): Docetaxel + Trastuzumab + Pertuzumab (THP) (Category 1 preferred, CLEOPATRA trial: median OS 57.1 vs 40.8 months, HR 0.66). Maintenance Trastuzumab + Pertuzumab +/- Endocrine therapy (PATINA trial).",
+        "Second-Line (2L): Fam-trastuzumab deruxtecan (T-DXd) 5.4 mg/kg IV q21d (Category 1 preferred, DESTINY-Breast03 trial: median PFS 29 vs 7.2 months vs T-DM1, HR 0.30; 70% reduction in progression/death).",
+        "Third-Line (3L): Tucatinib 300 mg PO BID + Capecitabine 1000 mg/m2 PO BID d1-14 + Trastuzumab (Category 1 preferred, HER2CLIMB trial: active brain metastases OS 18.1 vs 12.0 months, HR 0.58) OR T-DM1 (EMILIA trial).",
+        "Fourth-Line and Beyond: Margetuximab-cmkb + Chemotherapy (SOPHIA trial), Lapatinib + Capecitabine/Trastuzumab, or Neratinib + Capecitabine (NALA trial)."
+      ],
+      "protocolRefs": [
+        "breast-tchp",
+        "breast-tdxd",
+        "breast-tdm1",
+        "breast-ac-th"
+      ]
+    },
+    {
+      "id": "n_mbc_tnbc",
+      "linkId": "tx_mbc_tnbc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Metastatic TNBC Plan",
+      "title": "Metastatic Triple-Negative: Biomarker-Directed Therapy",
+      "section": "Metastatic TNBC",
+      "description": "Category 1 line sequencing for advanced triple-negative breast cancer.",
+      "path": "Breast / Metastatic / TNBC Sequencing",
+      "pills": [
+        "HER2+",
+        "TNBC",
+        "metastatic",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "1L with PD-L1 CPS >= 10: Pembrolizumab 200 mg q21d + Chemotherapy (nab-Paclitaxel, Paclitaxel, or Gemcitabine/Carboplatin) (Category 1 preferred, KEYNOTE-355 trial: median OS 23.0 vs 16.1 months, HR 0.73) OR Sacituzumab govitecan + Pembrolizumab (ASCENT-04).",
+        "1L with PD-L1 CPS < 10: Sacituzumab govitecan 10 mg/kg IV Days 1, 8 q21d (Category 1 preferred, ASCENT-03 trial: median PFS 9.7 vs 6.9 months, HR 0.62) OR Datopotamab deruxtecan (TROPION-Breast02) OR Platinum chemotherapy (Carboplatin/Cisplatin).",
+        "Germline BRCA1/2 Pathogenic Variant: Olaparib 300 mg PO BID or Talazoparib 1 mg PO daily (Category 1, OlympiAD / EMBRACA trials).",
+        "Second-Line and Beyond: Sacituzumab govitecan (ASCENT trial: median OS 12.1 vs 6.7 months, HR 0.48); Fam-trastuzumab deruxtecan if HER2-low (DESTINY-Breast04); sequential single-agent chemotherapy."
+      ],
+      "protocolRefs": [
+        "breast-pembro-chemo-tnbc",
+        "breast-pembro-chemo-mbc",
+        "breast-sacituzumab-govitecan",
+        "breast-carbo-paclitaxel",
+        "breast-capecitabine",
+        "breast-tdxd"
+      ]
+    },
+    {
+      "id": "n_tx_ibc",
+      "linkId": "tx_ibc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "IBC Protocol",
+      "title": "Inflammatory Breast Cancer (cT4d): Trimodality Curative Therapy",
+      "section": "Special Presentations",
+      "description": "Curative multimodality protocol for inflammatory breast cancer.",
+      "path": "Breast / Special / IBC",
+      "pills": [
+        "HER2+",
+        "IBC",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Step 1 (Preoperative Chemotherapy): Anthracycline + Taxane regimen (Dose-Dense AC followed by Paclitaxel). Add Trastuzumab + Pertuzumab if HER2-positive (Category 1). Upfront surgery is CONTRAINDICATED.",
+        "Step 2 (Definitive Surgery): Modified Radical Mastectomy with Level I/II Axillary Lymph Node Dissection. (Breast-conserving surgery and skin-sparing/nipple-sparing mastectomy are STRICTLY CONTRAINDICATED due to dermal lymphatic involvement).",
+        "Step 3 (Post-Mastectomy Radiation): PMRT to chest wall with bolus + comprehensive RNI (supraclavicular and internal mammary nodes) (Category 1).",
+        "Step 4 (Adjuvant Systemic Therapy): Complete 1 year of anti-HER2 therapy if HER2+; add endocrine therapy if HR+; delayed reconstruction only."
+      ],
+      "protocolRefs": [
+        "breast-ddac-t",
+        "breast-tchp",
+        "breast-pembro-chemo-tnbc"
+      ]
+    },
+    {
+      "id": "n_tx_phyllodes",
+      "linkId": "tx_phyllodes",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Phyllodes Protocol",
+      "title": "Phyllodes Tumor: Wide Surgical Excision (≥1 cm Margins)",
+      "section": "Special Presentations",
+      "description": "Surgical resection guidelines for benign, borderline, and malignant phyllodes tumors.",
+      "path": "Breast / Special / Phyllodes",
+      "pills": [
+        "phyllodes",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Surgical Excision: Wide local excision with tumor-free surgical margins of >=1 cm without axillary staging.",
+        "Total Mastectomy: Required ONLY if >=1 cm negative margins cannot be achieved with breast conservation.",
+        "Axillary Staging: SLNB and ALND are NOT indicated (phyllodes tumors metastasize hematogenously, rarely to lymph nodes).",
+        "Adjuvant Systemic Therapy: Chemotherapy and endocrine therapy have NO proven benefit and are not recommended.",
+        "Radiation Therapy: Consider chest wall / breast RT for large (>5 cm) malignant phyllodes tumors with narrow margins."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-anastrozole"
+      ]
+    },
+    {
+      "id": "n_tx_paget",
+      "linkId": "tx_paget",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Paget Protocol",
+      "title": "Paget Disease of the Nipple: Local and Underlying Cancer Management",
+      "section": "Special Presentations",
+      "description": "Diagnostic and surgical management of Paget disease of the nipple-areolar complex.",
+      "path": "Breast / Special / Paget",
+      "pills": [
+        "HER2+",
+        "HR+",
+        "paget",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Workup: Full-thickness skin biopsy of involved nipple-areolar complex (NAC); bilateral mammogram + ultrasound; breast MRI to detect occult parenchymal disease.",
+        "Surgical Options:",
+        "• Central lumpectomy including total resection of NAC with clear margins + Whole-Breast RT (Category 1).",
+        "• Total Mastectomy including NAC +/- SLNB +/- breast reconstruction.",
+        "Axillary Management: Perform SLNB if underlying invasive cancer is present, or if mastectomy is performed.",
+        "Systemic Therapy: Governed by the stage and ER/PR/HER2 receptor status of the underlying parenchymal malignancy."
+      ],
+      "protocolRefs": [
+        "breast-tamoxifen",
+        "breast-paclitaxel-trastuzumab"
+      ]
+    },
+    {
+      "id": "n_tx_pregnancy",
+      "linkId": "tx_pregnancy",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Pregnancy Protocol",
+      "title": "Breast Cancer Diagnosed During Pregnancy: Trimester-Safe Protocols",
+      "section": "Special Presentations",
+      "description": "Fetal-safe multidisciplinary oncology protocols during pregnancy.",
+      "path": "Breast / Special / Pregnancy",
+      "pills": [
+        "pregnancy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "First Trimester: Modified radical mastectomy with axillary staging preferred (therapeutic RT cannot be delivered). Chemotherapy is STRICTLY CONTRAINDICATED in the 1st trimester (teratogenic risk).",
+        "Second and Third Trimesters: Chemotherapy CAN be safely administered (FAC or Dose-Dense AC followed by weekly Paclitaxel). Discontinue chemotherapy at week 35 or 3 weeks before planned delivery to avoid maternal/fetal myelosuppression.",
+        "STRICTLY CONTRAINDICATED DURING PREGNANCY: Radiation therapy (fetal microcephaly, malformations), Endocrine therapy (Tamoxifen, AIs), HER2-targeted agents (Trastuzumab/Pertuzumab cause oligohydramnios/fetal renal failure), Antibody-Drug Conjugates, and PARP inhibitors.",
+        "Delivery & Postpartum: Coordinate with Maternal-Fetal Medicine (MFM); complete RT, anti-HER2, and endocrine therapy postpartum."
+      ],
+      "protocolRefs": [
+        "breast-ddac-t",
+        "breast-ac"
+      ]
     }
-   ]
-  },
-  {
-   "id": "n_adj_hrpos_pre_pn0",
-   "linkId": "tx_adj_hrpos_pre_pn0",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Adjuvant HR+/HER2- premeno pN0",
-   "title": "Adjuvant HR+/HER2- (premenopausal, node-negative)",
-   "section": "Treatment",
-   "description": "Genomic-assay-guided chemotherapy; endocrine therapy for all.",
-   "path": "Breast / Adjuvant / HR+HER2- / Premenopausal / pN0",
-   "pills": [
-    "HR+/HER2-",
-    "premenopausal",
-    "pN0",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Genomic assay (e.g. 21-gene recurrence score) guides chemotherapy benefit; most low-score node-negative patients can omit chemotherapy",
-    "Chemotherapy (e.g. TC or AC-T) for high recurrence score / high clinical risk",
-    "Adjuvant endocrine therapy for all - tamoxifen, or ovarian suppression + an AI / tamoxifen for higher risk (see next step)",
-    "Chemotherapy regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-tc",
-    "breast-ddac-t"
-   ]
-  },
-  {
-   "id": "n_adj_hrpos_pre_pnpos",
-   "linkId": "tx_adj_hrpos_pre_pnpos",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Adjuvant HR+/HER2- premeno pN+",
-   "title": "Adjuvant HR+/HER2- (premenopausal, node-positive)",
-   "section": "Treatment",
-   "description": "Chemotherapy is generally recommended, followed by ovarian-suppression-based endocrine therapy.",
-   "path": "Breast / Adjuvant / HR+HER2- / Premenopausal / pN+",
-   "pills": [
-    "HR+/HER2-",
-    "premenopausal",
-    "pN+",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Adjuvant chemotherapy (anthracycline + taxane, e.g. dose-dense AC-T) is generally recommended",
-    "Then endocrine therapy with ovarian function suppression + an AI or tamoxifen (see next step)",
-    "Add a CDK4/6 inhibitor (abemaciclib) for high-risk node-positive disease; olaparib for germline BRCA",
-    "Chemotherapy regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-ddac-t",
-    "breast-tac"
-   ]
-  },
-  {
-   "id": "n_adj_hrpos_her2pos",
-   "linkId": "tx_adj_hrpos_her2pos",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Adjuvant HR+/HER2+",
-   "title": "Adjuvant: HR-positive / HER2-positive",
-   "section": "Treatment",
-   "description": "Chemotherapy + HER2-targeted therapy, followed by endocrine therapy.",
-   "path": "Breast / Adjuvant / HR+HER2+",
-   "pills": [
-    "HR+/HER2+",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Chemotherapy + trastuzumab (+ pertuzumab for node-positive): TCH / TCHP or AC followed by paclitaxel + trastuzumab",
-    "Complete 1 year of HER2-targeted therapy; T-DM1 if residual disease after neoadjuvant",
-    "Then adjuvant endocrine therapy (see next step)",
-    "Regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-tchp",
-    "breast-tch",
+  ],
+  "links": [
+    {
+      "id": "l_hist_dcis",
+      "from": "n_histology",
+      "to": "n_dcis_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "dcis"
+      ]
+    },
+    {
+      "id": "l_hist_inv",
+      "from": "n_histology",
+      "to": "n_inv_wk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "invasive"
+      ]
+    },
+    {
+      "id": "l_hist_ibc",
+      "from": "n_histology",
+      "to": "n_tx_ibc",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ibc"
+      ]
+    },
+    {
+      "id": "l_hist_phyl",
+      "from": "n_histology",
+      "to": "n_tx_phyllodes",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "phyllodes"
+      ]
+    },
+    {
+      "id": "l_hist_paget",
+      "from": "n_histology",
+      "to": "n_tx_paget",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "paget"
+      ]
+    },
+    {
+      "id": "l_hist_preg",
+      "from": "n_histology",
+      "to": "n_tx_pregnancy",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pregnancy"
+      ]
+    },
+    {
+      "id": "l_hist_rec",
+      "from": "n_histology",
+      "to": "n_recur_type",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "recurrent"
+      ]
+    },
+    {
+      "id": "l_dcis_wk_er",
+      "from": "n_dcis_wk",
+      "to": "n_dcis_er",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_dcis_er_pos",
+      "from": "n_dcis_er",
+      "to": "n_tx_dcis_erpos",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "erpos"
+      ]
+    },
+    {
+      "id": "l_dcis_er_neg",
+      "from": "n_dcis_er",
+      "to": "n_tx_dcis_erneg",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "erneg"
+      ]
+    },
+    {
+      "id": "l_inv_wk_app",
+      "from": "n_inv_wk",
+      "to": "n_inv_approach",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_app_upfront",
+      "from": "n_inv_approach",
+      "to": "n_locoregional",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "upfront"
+      ]
+    },
+    {
+      "id": "l_loco_bcs",
+      "from": "n_locoregional",
+      "to": "n_tx_bcs",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "bcs"
+      ]
+    },
+    {
+      "id": "l_loco_mast",
+      "from": "n_locoregional",
+      "to": "n_tx_mastectomy",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "mastectomy"
+      ]
+    },
+    {
+      "id": "l_bcs_sub",
+      "from": "n_tx_bcs",
+      "to": "n_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_mast_sub",
+      "from": "n_tx_mastectomy",
+      "to": "n_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_app_preop",
+      "from": "n_inv_approach",
+      "to": "n_tx_preop",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "preop"
+      ]
+    },
+    {
+      "id": "l_preop_resp",
+      "from": "n_tx_preop",
+      "to": "n_preop_response",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_preop_pcr",
+      "from": "n_preop_response",
+      "to": "n_preop_pcr_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pcr"
+      ]
+    },
+    {
+      "id": "l_preop_res",
+      "from": "n_preop_response",
+      "to": "n_preop_residual_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "residual"
+      ]
+    },
+    {
+      "id": "l_pcr_her2",
+      "from": "n_preop_pcr_subtype",
+      "to": "n_tx_post_her2_pcr",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "her2pos"
+      ]
+    },
+    {
+      "id": "l_pcr_tnbc",
+      "from": "n_preop_pcr_subtype",
+      "to": "n_tx_post_tnbc_pcr",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "tnbc"
+      ]
+    },
+    {
+      "id": "l_pcr_hrpos",
+      "from": "n_preop_pcr_subtype",
+      "to": "n_tx_post_hrpos_pcr",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hrpos"
+      ]
+    },
+    {
+      "id": "l_res_her2",
+      "from": "n_preop_residual_subtype",
+      "to": "n_tx_post_her2_residual",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "her2pos"
+      ]
+    },
+    {
+      "id": "l_res_tnbc",
+      "from": "n_preop_residual_subtype",
+      "to": "n_tx_post_tnbc_residual",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "tnbc"
+      ]
+    },
+    {
+      "id": "l_res_hrpos",
+      "from": "n_preop_residual_subtype",
+      "to": "n_tx_post_hrpos_residual",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hrpos"
+      ]
+    },
+    {
+      "id": "l_sub_hrpos_her2neg",
+      "from": "n_subtype",
+      "to": "n_hrpos_meno",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hrpos_her2neg"
+      ]
+    },
+    {
+      "id": "l_sub_hrpos_her2pos",
+      "from": "n_subtype",
+      "to": "n_adj_hrpos_her2pos",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hrpos_her2pos"
+      ]
+    },
+    {
+      "id": "l_sub_hrneg_her2pos",
+      "from": "n_subtype",
+      "to": "n_adj_hrneg_her2pos",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hrneg_her2pos"
+      ]
+    },
+    {
+      "id": "l_sub_tnbc",
+      "from": "n_subtype",
+      "to": "n_adj_tnbc",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "tnbc"
+      ]
+    },
+    {
+      "id": "l_sub_fav",
+      "from": "n_subtype",
+      "to": "n_adj_favorable",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "favorable"
+      ]
+    },
+    {
+      "id": "l_meno_post",
+      "from": "n_hrpos_meno",
+      "to": "n_adj_hrpos_post",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "post"
+      ]
+    },
+    {
+      "id": "l_meno_pre",
+      "from": "n_hrpos_meno",
+      "to": "n_hrpos_pre_nodal",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pre"
+      ]
+    },
+    {
+      "id": "l_pre_pn0",
+      "from": "n_hrpos_pre_nodal",
+      "to": "n_adj_hrpos_pre_pn0",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pn0"
+      ]
+    },
+    {
+      "id": "l_pre_pnpos",
+      "from": "n_hrpos_pre_nodal",
+      "to": "n_adj_hrpos_pre_pnpos",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pnpos"
+      ]
+    },
+    {
+      "id": "l_adj_post_endo",
+      "from": "n_adj_hrpos_post",
+      "to": "n_endocrine",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_pre_pn0_endo",
+      "from": "n_adj_hrpos_pre_pn0",
+      "to": "n_endocrine",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_pre_pnpos_endo",
+      "from": "n_adj_hrpos_pre_pnpos",
+      "to": "n_endocrine",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_triple_endo",
+      "from": "n_adj_hrpos_her2pos",
+      "to": "n_endocrine",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pcr_hr_endo",
+      "from": "n_tx_post_hrpos_pcr",
+      "to": "n_endocrine",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_res_hr_endo",
+      "from": "n_tx_post_hrpos_residual",
+      "to": "n_endocrine",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_endo_opt_post",
+      "from": "n_endocrine",
+      "to": "n_endo_post",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "post"
+      ]
+    },
+    {
+      "id": "l_endo_opt_pre",
+      "from": "n_endocrine",
+      "to": "n_endo_pre",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pre"
+      ]
+    },
+    {
+      "id": "l_dcis_erpos_surv",
+      "from": "n_tx_dcis_erpos",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_dcis_erneg_surv",
+      "from": "n_tx_dcis_erneg",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_endo_post_surv",
+      "from": "n_endo_post",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_endo_pre_surv",
+      "from": "n_endo_pre",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_her2_enriched_surv",
+      "from": "n_adj_hrneg_her2pos",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tnbc_adj_surv",
+      "from": "n_adj_tnbc",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fav_adj_surv",
+      "from": "n_adj_favorable",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pcr_her2_surv",
+      "from": "n_tx_post_her2_pcr",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pcr_tnbc_surv",
+      "from": "n_tx_post_tnbc_pcr",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_res_her2_surv",
+      "from": "n_tx_post_her2_residual",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_res_tnbc_surv",
+      "from": "n_tx_post_tnbc_residual",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ibc_surv",
+      "from": "n_tx_ibc",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_phyl_surv",
+      "from": "n_tx_phyllodes",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_paget_surv",
+      "from": "n_tx_paget",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_preg_surv",
+      "from": "n_tx_pregnancy",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_local",
+      "from": "n_recur_type",
+      "to": "n_local_recur",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "local"
+      ]
+    },
+    {
+      "id": "l_rec_reg",
+      "from": "n_recur_type",
+      "to": "n_regional_recur",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "regional"
+      ]
+    },
+    {
+      "id": "l_rec_dist",
+      "from": "n_recur_type",
+      "to": "n_mbc_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "distant"
+      ]
+    },
+    {
+      "id": "l_mbc_sub_hrpos",
+      "from": "n_mbc_subtype",
+      "to": "n_mbc_hr_line",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "hrpos"
+      ]
+    },
+    {
+      "id": "l_mbc_sub_her2pos",
+      "from": "n_mbc_subtype",
+      "to": "n_mbc_her2pos",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "her2pos"
+      ]
+    },
+    {
+      "id": "l_mbc_sub_tnbc",
+      "from": "n_mbc_subtype",
+      "to": "n_mbc_tnbc",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "tnbc"
+      ]
+    },
+    {
+      "id": "l_mbc_hr_1l",
+      "from": "n_mbc_hr_line",
+      "to": "n_mbc_hr_1l",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "first"
+      ]
+    },
+    {
+      "id": "l_mbc_hr_2l",
+      "from": "n_mbc_hr_line",
+      "to": "n_mbc_hr_genomics",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "post_cdk"
+      ]
+    },
+    {
+      "id": "l_mbc_hr_later",
+      "from": "n_mbc_hr_line",
+      "to": "n_mbc_hr_later",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "refractory"
+      ]
+    },
+    {
+      "id": "l_mbc_mut_pi3k",
+      "from": "n_mbc_hr_genomics",
+      "to": "n_tx_mbc_capivasertib",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "pik3ca_akt_pten"
+      ]
+    },
+    {
+      "id": "l_mbc_mut_esr1",
+      "from": "n_mbc_hr_genomics",
+      "to": "n_tx_mbc_esr1",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "esr1"
+      ]
+    },
+    {
+      "id": "l_mbc_mut_brca",
+      "from": "n_mbc_hr_genomics",
+      "to": "n_tx_mbc_parp",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "brca"
+      ]
+    },
+    {
+      "id": "l_mbc_mut_her2low",
+      "from": "n_mbc_hr_genomics",
+      "to": "n_tx_mbc_her2low",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "her2_low"
+      ]
+    },
+    {
+      "id": "l_mbc_mut_wt",
+      "from": "n_mbc_hr_genomics",
+      "to": "n_tx_mbc_wildtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "wildtype"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "breast-abemaciclib-adjuvant",
+    "breast-ac",
     "breast-ac-th",
-    "breast-paclitaxel-trastuzumab"
-   ]
-  },
-  {
-   "id": "n_adj_hrneg_her2pos",
-   "linkId": "tx_adj_hrneg_her2pos",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Adjuvant HR-/HER2+",
-   "title": "Adjuvant: HR-negative / HER2-positive",
-   "section": "Treatment",
-   "description": "Chemotherapy + HER2-targeted therapy (no endocrine therapy).",
-   "path": "Breast / Adjuvant / HR-HER2+",
-   "pills": [
-    "HR-/HER2+",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Chemotherapy + trastuzumab (+ pertuzumab for node-positive): TCH / TCHP or AC then paclitaxel + trastuzumab",
-    "Complete 1 year of HER2-targeted therapy; T-DM1 if residual disease after neoadjuvant",
-    "No endocrine therapy (HR-negative)",
-    "Regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-tchp",
-    "breast-tch",
-    "breast-ac-th",
-    "breast-paclitaxel-trastuzumab"
-   ]
-  },
-  {
-   "id": "n_adj_tnbc",
-   "linkId": "tx_adj_tnbc",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Adjuvant TNBC",
-   "title": "Adjuvant: triple-negative",
-   "section": "Treatment",
-   "description": "Chemotherapy-based; immunotherapy for higher-stage disease.",
-   "path": "Breast / Adjuvant / TNBC",
-   "pills": [
-    "TNBC",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Anthracycline + taxane (+ carboplatin) chemotherapy",
-    "Add pembrolizumab (neoadjuvant + adjuvant) for stage II-III disease",
-    "Capecitabine for residual invasive disease after neoadjuvant chemotherapy",
-    "Add olaparib for germline BRCA-mutated high-risk disease",
-    "Regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-pembro-chemo-tnbc",
-    "breast-ddac-t",
-    "breast-tac",
-    "breast-carbo-paclitaxel",
-    "breast-capecitabine"
-   ]
-  },
-  {
-   "id": "n_adj_favorable",
-   "linkId": "tx_adj_favorable",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Favorable histology",
-   "title": "Adjuvant: favorable histology (tubular / mucinous)",
-   "section": "Treatment",
-   "description": "Favorable histologies are usually ER-positive with excellent prognosis.",
-   "path": "Breast / Adjuvant / Favorable",
-   "pills": [
-    "favorable",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Endocrine therapy if ER-positive (see next step); chemotherapy rarely needed",
-    "Treat as triple-negative if ER-negative (uncommon for these histologies)"
-   ]
-  },
-  {
-   "id": "n_endocrine",
-   "linkId": "breast_endocrine",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Adjuvant endocrine",
-   "title": "Adjuvant endocrine therapy: menopausal status",
-   "section": "Treatment",
-   "description": "For HR-positive disease, adjuvant endocrine therapy is directed by menopausal status.",
-   "path": "Breast / Adjuvant / Endocrine",
-   "pills": [
-    "endocrine"
-   ],
-   "required": true,
-   "options": [
-    {
-     "id": "post",
-     "label": "Postmenopausal",
-     "sets": {
-      "menopause": "post"
-     },
-     "pills": [
-      "postmenopausal"
-     ]
-    },
-    {
-     "id": "pre",
-     "label": "Premenopausal",
-     "sets": {
-      "menopause": "pre"
-     },
-     "pills": [
-      "premenopausal"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_endo_post",
-   "linkId": "tx_endo_post",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "evidenceCategory": [
-    "1"
-   ],
-   "footnotes": [
-    "a"
-   ],
-   "name": "Endocrine postmenopausal",
-   "title": "Adjuvant endocrine (postmenopausal) +/- CDK4/6",
-   "section": "Treatment",
-   "description": "Aromatase-inhibitor-based endocrine therapy.",
-   "path": "Breast / Endocrine / Post",
-   "pills": [
-    "postmenopausal",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "An aromatase inhibitor (letrozole, anastrozole, or exemestane) for 5-10 years; tamoxifen if AI not tolerated",
-    "Add a CDK4/6 inhibitor (abemaciclib) for high-risk node-positive disease",
-    "Bone-health monitoring on an AI (DEXA, calcium/vitamin D, bone-modifying agent as indicated)",
-    "Regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-letrozole",
     "breast-anastrozole",
-    "breast-exemestane",
-    "breast-cdk46-ai"
-   ]
-  },
-  {
-   "id": "n_endo_pre",
-   "linkId": "tx_endo_pre",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Endocrine premenopausal",
-   "title": "Adjuvant endocrine (premenopausal) +/- OFS / CDK4/6",
-   "section": "Treatment",
-   "description": "Tamoxifen, or ovarian suppression with an AI/tamoxifen for higher risk.",
-   "path": "Breast / Endocrine / Pre",
-   "pills": [
-    "premenopausal",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Tamoxifen for 5-10 years",
-    "Ovarian function suppression + an AI or tamoxifen for higher-risk disease",
-    "Add a CDK4/6 inhibitor (abemaciclib) for high-risk node-positive disease",
-    "Regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-tamoxifen",
-    "breast-cdk46-ai"
-   ]
-  },
-  {
-   "id": "n_surveillance",
-   "linkId": "breast_surveillance",
-   "nodeCategory": "surveillance",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Surveillance",
-   "title": "Surveillance / follow-up",
-   "section": "Surveillance",
-   "description": "Follow-up after curative-intent therapy.",
-   "path": "Breast / Surveillance",
-   "pills": [
-    "surveillance"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "History and physical every 3-6 months for 5 years, then annually",
-    "Annual mammography (of preserved / contralateral breast)",
-    "Endocrine-therapy adherence and toxicity review; bone-health on an AI",
-    "No routine systemic imaging or tumor markers in asymptomatic patients; investigate new symptoms"
-   ],
-   "linkTo": "n_recur_type",
-   "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
-  },
-  {
-   "id": "n_recur_type",
-   "linkId": "breast_recur_type",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Recurrence type",
-   "title": "Recurrent / Stage IV: type of recurrence",
-   "section": "Recurrence",
-   "description": "Distinguish isolated local-regional recurrence (potentially curable) from distant metastatic disease.",
-   "path": "Breast / Recurrent / Type",
-   "pills": [
-    "recurrence"
-   ],
-   "required": true,
-   "bullets": [
-    "Biopsy the recurrence and re-test ER, PR, and HER2 (receptors can change)",
-    "Restage to exclude distant disease (CT + bone scan, or PET-CT)"
-   ],
-   "options": [
-    {
-     "id": "local",
-     "label": "Local (in-breast / chest-wall) recurrence",
-     "sets": {
-      "recur": "local"
-     },
-     "pills": [
-      "local"
-     ]
-    },
-    {
-     "id": "regional",
-     "label": "Regional (nodal) recurrence",
-     "sets": {
-      "recur": "regional"
-     },
-     "pills": [
-      "regional"
-     ]
-    },
-    {
-     "id": "distant",
-     "label": "Distant metastatic (Stage IV)",
-     "sets": {
-      "recur": "distant"
-     },
-     "pills": [
-      "distant / M1"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_local_recur",
-   "linkId": "tx_local_recur",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Local recurrence",
-   "title": "Treatment of local recurrence",
-   "section": "Recurrence",
-   "description": "Isolated local recurrence is treated with curative intent.",
-   "path": "Breast / Recurrent / Local",
-   "pills": [
-    "local",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Surgical resection (mastectomy if prior BCS; re-excision if prior mastectomy)",
-    "Radiation to the chest wall / breast if not previously given",
-    "Systemic therapy directed by the recurrence subtype (see distant-metastatic options)",
-    "Subtype-directed regimen options referenced below (endocrine if HR-positive, HER2-directed if HER2-positive, cytotoxic chemotherapy for HR-negative / triple-negative recurrence)"
-   ],
-   "protocolRefs": [
-    "breast-letrozole",
-    "breast-tamoxifen",
-    "breast-tch",
+    "breast-capecitabine",
+    "breast-capivasertib-fulvestrant",
     "breast-carbo-paclitaxel",
-    "breast-capecitabine"
-   ]
-  },
-  {
-   "id": "n_regional_recur",
-   "linkId": "tx_regional_recur",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Regional recurrence",
-   "title": "Treatment of regional (nodal) recurrence",
-   "section": "Recurrence",
-   "description": "Isolated regional nodal recurrence.",
-   "path": "Breast / Recurrent / Regional",
-   "pills": [
-    "regional",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Surgical resection of resectable nodal disease",
-    "Radiation to the regional nodal basin if not previously given",
-    "Systemic therapy directed by the recurrence subtype (see distant-metastatic options)",
-    "Subtype-directed regimen options referenced below (endocrine if HR-positive, HER2-directed if HER2-positive, cytotoxic chemotherapy for HR-negative / triple-negative recurrence)"
-   ],
-   "protocolRefs": [
-    "breast-letrozole",
-    "breast-tamoxifen",
-    "breast-tch",
-    "breast-carbo-paclitaxel",
-    "breast-capecitabine"
-   ]
-  },
-  {
-   "id": "n_mbc_subtype",
-   "linkId": "breast_mbc_subtype",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Metastatic subtype",
-   "title": "Metastatic breast cancer: subtype",
-   "section": "Treatment",
-   "description": "First-line metastatic therapy is directed by receptor subtype (re-biopsied). Test germline BRCA and, for triple-negative, PD-L1.",
-   "path": "Breast / Metastatic / Subtype",
-   "pills": [
-    "metastatic",
-    "subtype"
-   ],
-   "required": true,
-   "options": [
-    {
-     "id": "hrpos",
-     "label": "HR-positive / HER2-negative",
-     "sets": {
-      "biomarkers.HR": "positive",
-      "biomarkers.HER2": "negative"
-     },
-     "pills": [
-      "HR+/HER2-"
-     ]
-    },
-    {
-     "id": "her2pos",
-     "label": "HER2-positive (any HR)",
-     "sets": {
-      "biomarkers.HER2": "positive"
-     },
-     "pills": [
-      "HER2+"
-     ]
-    },
-    {
-     "id": "tnbc",
-     "label": "Triple-negative",
-     "sets": {
-      "biomarkers.HR": "negative",
-      "biomarkers.HER2": "negative"
-     },
-     "pills": [
-      "TNBC"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_mbc_hr_line",
-   "linkId": "breast_mbc_hr_line",
-   "nodeCategory": "criteria",
-   "nodeType": "question",
-   "template": "main",
-   "name": "Metastatic HR+ line",
-   "title": "Metastatic HR+/HER2-: line of therapy",
-   "section": "Treatment",
-   "description": "Endocrine-based therapy is preferred while endocrine-sensitive; sequencing depends on prior therapy and biomarkers (PIK3CA/AKT/PTEN, ESR1, germline BRCA).",
-   "path": "Breast / Metastatic / HR+ / Line",
-   "pills": [
-    "HR+/HER2-",
-    "sequencing"
-   ],
-   "required": true,
-   "options": [
-    {
-     "id": "first",
-     "label": "First line (endocrine-sensitive)",
-     "sets": {
-      "line": "first"
-     },
-     "pills": [
-      "1st line"
-     ]
-    },
-    {
-     "id": "post_cdk",
-     "label": "Progressed on endocrine + CDK4/6",
-     "sets": {
-      "line": "post_cdk"
-     },
-     "pills": [
-      "post-CDK4/6"
-     ]
-    },
-    {
-     "id": "refractory",
-     "label": "Endocrine-refractory / visceral crisis",
-     "sets": {
-      "line": "refractory"
-     },
-     "pills": [
-      "refractory"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "n_mbc_hr_1l",
-   "linkId": "tx_mbc_hr_1l",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Metastatic HR+ 1st line",
-   "title": "Metastatic HR+/HER2-: first line",
-   "section": "Treatment",
-   "description": "Endocrine therapy plus a CDK4/6 inhibitor.",
-   "path": "Breast / Metastatic / HR+ / 1L",
-   "pills": [
-    "HR+/HER2-",
-    "1st line",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Aromatase inhibitor (or fulvestrant) + a CDK4/6 inhibitor (category 1)",
-    "Ovarian suppression added for premenopausal patients",
-    "Regimens referenced below"
-   ],
-   "protocolRefs": [
     "breast-cdk46-ai",
-    "breast-letrozole",
-    "breast-fulvestrant"
-   ]
-  },
-  {
-   "id": "n_mbc_hr_2l",
-   "linkId": "tx_mbc_hr_2l",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Metastatic HR+ 2nd line",
-   "title": "Metastatic HR+/HER2-: after CDK4/6 (biomarker-directed)",
-   "section": "Treatment",
-   "description": "Biomarker-directed endocrine + targeted therapy after progression on endocrine + CDK4/6.",
-   "path": "Breast / Metastatic / HR+ / 2L",
-   "pills": [
-    "HR+/HER2-",
-    "post-CDK4/6",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "PIK3CA/AKT/PTEN-altered: fulvestrant + a PI3K/AKT inhibitor (alpelisib or capivasertib)",
-    "ESR1-mutant: elacestrant (an oral SERD)",
-    "Germline BRCA: a PARP inhibitor (olaparib or talazoparib)",
-    "Otherwise: fulvestrant +/- everolimus, or an alternate endocrine + targeted combination",
-    "Regimen referenced below"
-   ],
-   "protocolRefs": [
-    "breast-fulvestrant"
-   ]
-  },
-  {
-   "id": "n_mbc_hr_later",
-   "linkId": "tx_mbc_hr_later",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Metastatic HR+ refractory",
-   "title": "Metastatic HR+/HER2-: endocrine-refractory / visceral crisis",
-   "section": "Treatment",
-   "description": "Cytotoxic therapy and antibody-drug conjugates once endocrine-refractory.",
-   "path": "Breast / Metastatic / HR+ / Refractory",
-   "pills": [
-    "HR+/HER2-",
-    "refractory",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Sequential single-agent chemotherapy (e.g. capecitabine, taxane)",
-    "Antibody-drug conjugates: sacituzumab govitecan, or trastuzumab deruxtecan if HER2-low (guidance where no dose protocol exists here)",
-    "Chemotherapy for visceral crisis regardless of endocrine sensitivity",
-    "Regimen referenced below"
-   ],
-   "protocolRefs": [
-    "breast-capecitabine"
-   ]
-  },
-  {
-   "id": "n_mbc_her2pos",
-   "linkId": "tx_mbc_her2pos",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Metastatic HER2+",
-   "title": "Metastatic HER2-positive",
-   "section": "Treatment",
-   "description": "Sequential HER2-targeted therapy.",
-   "path": "Breast / Metastatic / HER2+",
-   "pills": [
-    "HER2+",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "First line: taxane + trastuzumab + pertuzumab (THP)",
-    "Second line: trastuzumab deruxtecan (T-DXd)",
-    "Later: tucatinib + trastuzumab + capecitabine, T-DM1, or other HER2-directed regimens",
-    "Add endocrine therapy if also HR-positive",
-    "Regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-tchp",
-    "breast-tdxd",
-    "breast-tdm1"
-   ]
-  },
-  {
-   "id": "n_mbc_tnbc",
-   "linkId": "tx_mbc_tnbc",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Metastatic TNBC",
-   "title": "Metastatic triple-negative",
-   "section": "Treatment",
-   "description": "Biomarker-directed chemotherapy / immunotherapy.",
-   "path": "Breast / Metastatic / TNBC",
-   "pills": [
-    "TNBC",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "PD-L1-positive: chemotherapy + pembrolizumab first line",
-    "Sacituzumab govitecan after prior chemotherapy (no dedicated dose protocol here yet - guidance)",
-    "Olaparib / talazoparib for germline BRCA",
-    "Single-agent chemotherapy (e.g. capecitabine, taxane) otherwise",
-    "Regimens referenced below"
-   ],
-   "protocolRefs": [
-    "breast-pembro-chemo-tnbc",
-    "breast-capecitabine"
-   ]
-  },
-  {
-   "id": "n_tx_ibc",
-   "linkId": "tx_ibc",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Inflammatory BC",
-   "title": "Inflammatory breast cancer: trimodality therapy",
-   "section": "Treatment",
-   "description": "Inflammatory breast cancer is treated as locally advanced disease with preoperative systemic therapy, then surgery, then radiation.",
-   "path": "Breast / IBC",
-   "pills": [
-    "IBC",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Preoperative systemic therapy: anthracycline + taxane, with HER2 blockade if HER2-positive and pembrolizumab if triple-negative",
-    "Then total mastectomy + axillary dissection (no breast conservation, no upfront sentinel-node biopsy)",
-    "Then post-mastectomy radiation to chest wall and regional nodes",
-    "Adjuvant endocrine / HER2 therapy by subtype",
-    "Component regimens referenced below"
-   ],
-   "protocolRefs": [
     "breast-ddac-t",
-    "breast-tchp",
-    "breast-pembro-chemo-tnbc"
-   ]
-  },
-  {
-   "id": "n_tx_phyllodes",
-   "linkId": "tx_phyllodes",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Phyllodes",
-   "title": "Phyllodes tumor: wide local excision",
-   "section": "Treatment",
-   "description": "A fibroepithelial tumor managed surgically.",
-   "path": "Breast / Phyllodes",
-   "pills": [
-    "phyllodes",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Wide local excision with >= 1 cm negative margins (mastectomy if needed for margins)",
-    "No routine axillary staging (spreads hematogenously, not via nodes)",
-    "No routine endocrine or HER2 therapy; chemotherapy only for selected large malignant tumors (sarcoma-type)",
-    "Consider radiation for large / malignant tumors or close margins"
-   ]
-  },
-  {
-   "id": "n_tx_paget",
-   "linkId": "tx_paget",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "Paget disease",
-   "title": "Paget disease: treat the underlying cancer",
-   "section": "Treatment",
-   "description": "Nipple Paget disease usually overlies underlying DCIS or invasive cancer.",
-   "path": "Breast / Paget",
-   "pills": [
-    "Paget",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Breast MRI to define underlying disease extent",
-    "Surgery: central lumpectomy (including nipple-areola) + radiation, or mastectomy",
-    "Axillary staging and adjuvant systemic therapy per the underlying invasive component / subtype",
-    "Adjuvant regimen options for the underlying invasive component referenced below (chemotherapy for HR-negative / higher-risk disease, HER2-directed therapy if HER2-positive, endocrine therapy if HR-positive)"
-   ],
-   "protocolRefs": [
-    "breast-ac-th",
-    "breast-tch",
+    "breast-elacestrant",
+    "breast-exemestane",
+    "breast-fulvestrant",
+    "breast-inavolisib-palbo-fulv",
     "breast-letrozole",
-    "breast-tamoxifen"
-   ]
-  },
-  {
-   "id": "n_tx_pregnancy",
-   "linkId": "tx_pregnancy",
-   "nodeCategory": "treatment",
-   "nodeType": "end",
-   "template": "end",
-   "name": "During pregnancy",
-   "title": "Breast cancer during pregnancy",
-   "section": "Treatment",
-   "description": "Stage-appropriate treatment timed to protect the fetus; coordinate with maternal-fetal medicine.",
-   "path": "Breast / Pregnancy",
-   "pills": [
-    "pregnancy",
-    "treatment"
-   ],
-   "showsRecommendation": true,
-   "bullets": [
-    "Surgery can be done in any trimester; sentinel-node biopsy is generally acceptable",
-    "Chemotherapy (anthracycline + taxane) only after the first trimester",
-    "NO endocrine therapy, HER2-targeted therapy, or radiation during pregnancy - defer to after delivery",
-    "Deliver at term when feasible, then complete stage-appropriate adjuvant therapy",
-    "Chemotherapy regimen referenced below"
-   ],
-   "protocolRefs": [
-    "breast-ddac-t"
-   ]
-  }
- ],
- "links": [
-  {
-   "id": "l_h_dcis",
-   "from": "n_histology",
-   "to": "n_dcis_wk",
-   "fromOptions": [
-    "dcis"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_h_inv",
-   "from": "n_histology",
-   "to": "n_inv_wk",
-   "fromOptions": [
-    "invasive"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_h_ibc",
-   "from": "n_histology",
-   "to": "n_tx_ibc",
-   "fromOptions": [
-    "ibc"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_h_phyl",
-   "from": "n_histology",
-   "to": "n_tx_phyllodes",
-   "fromOptions": [
-    "phyllodes"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_h_paget",
-   "from": "n_histology",
-   "to": "n_tx_paget",
-   "fromOptions": [
-    "paget"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_h_preg",
-   "from": "n_histology",
-   "to": "n_tx_pregnancy",
-   "fromOptions": [
-    "pregnancy"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_h_recur",
-   "from": "n_histology",
-   "to": "n_recur_type",
-   "fromOptions": [
-    "recurrent"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_dcis_wk",
-   "from": "n_dcis_wk",
-   "to": "n_dcis_er",
-   "fromOptions": [
-    "continue"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_dcis_erp",
-   "from": "n_dcis_er",
-   "to": "n_tx_dcis_erpos",
-   "fromOptions": [
-    "erpos"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_dcis_ern",
-   "from": "n_dcis_er",
-   "to": "n_tx_dcis_erneg",
-   "fromOptions": [
-    "erneg"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_inv_wk",
-   "from": "n_inv_wk",
-   "to": "n_inv_approach",
-   "fromOptions": [
-    "continue"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_inv_up",
-   "from": "n_inv_approach",
-   "to": "n_locoregional",
-   "fromOptions": [
-    "upfront"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_inv_pre",
-   "from": "n_inv_approach",
-   "to": "n_tx_preop",
-   "fromOptions": [
-    "preop"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_loc_bcs",
-   "from": "n_locoregional",
-   "to": "n_tx_bcs",
-   "fromOptions": [
-    "bcs"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_loc_mast",
-   "from": "n_locoregional",
-   "to": "n_tx_mastectomy",
-   "fromOptions": [
-    "mastectomy"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_bcs_sub",
-   "from": "n_tx_bcs",
-   "to": "n_subtype",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_mast_sub",
-   "from": "n_tx_mastectomy",
-   "to": "n_subtype",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_preop_adj",
-   "from": "n_tx_preop",
-   "to": "n_adj_after_preop",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_adjpre_sub",
-   "from": "n_adj_after_preop",
-   "to": "n_subtype",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_sub_a",
-   "from": "n_subtype",
-   "to": "n_hrpos_meno",
-   "fromOptions": [
-    "hrpos_her2neg"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_hrpos_post",
-   "from": "n_hrpos_meno",
-   "to": "n_adj_hrpos_post",
-   "fromOptions": [
-    "post"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_hrpos_pre",
-   "from": "n_hrpos_meno",
-   "to": "n_hrpos_pre_nodal",
-   "fromOptions": [
-    "pre"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_pre_pn0",
-   "from": "n_hrpos_pre_nodal",
-   "to": "n_adj_hrpos_pre_pn0",
-   "fromOptions": [
-    "pn0"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_pre_pnpos",
-   "from": "n_hrpos_pre_nodal",
-   "to": "n_adj_hrpos_pre_pnpos",
-   "fromOptions": [
-    "pnpos"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_apost_endo",
-   "from": "n_adj_hrpos_post",
-   "to": "n_endocrine",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_apn0_endo",
-   "from": "n_adj_hrpos_pre_pn0",
-   "to": "n_endocrine",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_apnpos_endo",
-   "from": "n_adj_hrpos_pre_pnpos",
-   "to": "n_endocrine",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_sub_b",
-   "from": "n_subtype",
-   "to": "n_adj_hrpos_her2pos",
-   "fromOptions": [
-    "hrpos_her2pos"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_sub_c",
-   "from": "n_subtype",
-   "to": "n_adj_hrneg_her2pos",
-   "fromOptions": [
-    "hrneg_her2pos"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_sub_d",
-   "from": "n_subtype",
-   "to": "n_adj_tnbc",
-   "fromOptions": [
-    "tnbc"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_sub_e",
-   "from": "n_subtype",
-   "to": "n_adj_favorable",
-   "fromOptions": [
-    "favorable"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_b_endo",
-   "from": "n_adj_hrpos_her2pos",
-   "to": "n_endocrine",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_e_endo",
-   "from": "n_adj_favorable",
-   "to": "n_endocrine",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_endo_post",
-   "from": "n_endocrine",
-   "to": "n_endo_post",
-   "fromOptions": [
-    "post"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_endo_pre",
-   "from": "n_endocrine",
-   "to": "n_endo_pre",
-   "fromOptions": [
-    "pre"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_post_surv",
-   "from": "n_endo_post",
-   "to": "n_surveillance",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_pre_surv",
-   "from": "n_endo_pre",
-   "to": "n_surveillance",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_c_surv",
-   "from": "n_adj_hrneg_her2pos",
-   "to": "n_surveillance",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_d_surv",
-   "from": "n_adj_tnbc",
-   "to": "n_surveillance",
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_rec_local",
-   "from": "n_recur_type",
-   "to": "n_local_recur",
-   "fromOptions": [
-    "local"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_rec_reg",
-   "from": "n_recur_type",
-   "to": "n_regional_recur",
-   "fromOptions": [
-    "regional"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_rec_dist",
-   "from": "n_recur_type",
-   "to": "n_mbc_subtype",
-   "fromOptions": [
-    "distant"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_mbc_hr",
-   "from": "n_mbc_subtype",
-   "to": "n_mbc_hr_line",
-   "fromOptions": [
-    "hrpos"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_mbc_hr_1l",
-   "from": "n_mbc_hr_line",
-   "to": "n_mbc_hr_1l",
-   "fromOptions": [
-    "first"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_mbc_hr_2l",
-   "from": "n_mbc_hr_line",
-   "to": "n_mbc_hr_2l",
-   "fromOptions": [
-    "post_cdk"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_mbc_hr_later",
-   "from": "n_mbc_hr_line",
-   "to": "n_mbc_hr_later",
-   "fromOptions": [
-    "refractory"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_mbc_her2",
-   "from": "n_mbc_subtype",
-   "to": "n_mbc_her2pos",
-   "fromOptions": [
-    "her2pos"
-   ],
-   "linkCategory": "conditional"
-  },
-  {
-   "id": "l_mbc_tnbc",
-   "from": "n_mbc_subtype",
-   "to": "n_mbc_tnbc",
-   "fromOptions": [
-    "tnbc"
-   ],
-   "linkCategory": "conditional"
-  }
- ]
+    "breast-olaparib-adjuvant",
+    "breast-paclitaxel-trastuzumab",
+    "breast-pembro-chemo-mbc",
+    "breast-pembro-chemo-tnbc",
+    "breast-ribociclib-adjuvant",
+    "breast-sacituzumab-govitecan",
+    "breast-tamoxifen",
+    "breast-tc",
+    "breast-tch",
+    "breast-tchp",
+    "breast-tdm1",
+    "breast-tdxd"
+  ]
 }

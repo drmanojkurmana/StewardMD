@@ -45,7 +45,10 @@
   }
 
   // Mandatory safety disclaimer (Global Constraints) — verbatim, appended once per result screen.
-  var MANDATORY_DISCLAIMER = "AI-generated findings are intended to assist qualified healthcare professionals and must always be interpreted in conjunction with clinical assessment, radiologist review where appropriate, laboratory findings and other investigations.";
+  // "Beta, in active development" leads, and is NOT optional: this model is clinically unvalidated
+  // (docs/fundx/VALIDATION-PROGRAM.md) and is now reachable by paying Physician Pro accounts, who
+  // read a finding more trustingly than a tester holding an access code does.
+  var MANDATORY_DISCLAIMER = "Beta, in active development. It may not perform to the mark, so check every result yourself. AI-generated findings are intended to assist qualified healthcare professionals and must always be interpreted in conjunction with clinical assessment, radiologist review where appropriate, laboratory findings and other investigations.";
 
   // One finding -> its render-ready shape (severity pill + band-derived bar, never a raw probability).
   function buildFindingModel(f) {

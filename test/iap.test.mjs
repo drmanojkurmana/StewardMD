@@ -2,7 +2,7 @@
  * Validates: encoding helpers, fail-closed guards, Google active/expired parsing, Apple active/expired. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { verifyPurchase, iapConfigured, b64url, b64urlStr, b64urlDecodeToStr, pemToDer, daysFromExpiry } from "../functions/_iap.js";
+import { verifyPurchase, iapConfigured, appleCfg, b64url, b64urlStr, b64urlDecodeToStr, pemToDer, daysFromExpiry } from "../functions/_iap.js";
 
 const subtle = globalThis.crypto.subtle;
 function pemFromDer(buf, label) {
@@ -32,6 +32,15 @@ test("verifyPurchase fail-closed: unknown platform / not configured", async () =
   assert.equal((await verifyPurchase({}, { platform: "windows" })).configured, false);
   assert.equal((await verifyPurchase({}, { platform: "google" })).reason, "not-configured");
   assert.equal(iapConfigured({ GOOGLE_PLAY_SA_JSON: "{}", GOOGLE_PLAY_PACKAGE: "in.stewardmd.app" }, "google"), true);
+});
+
+test("Apple config: one APPLE_ASC_JSON secret, or the four separate vars as fallback", () => {
+  const j = { APPLE_ASC_JSON: JSON.stringify({ key: "PEM", keyId: "KID", issuer: "ISS" }) };
+  assert.deepEqual(appleCfg(j), { key: "PEM", keyId: "KID", issuer: "ISS", bundleId: "in.stewardmd.app" });
+  assert.equal(iapConfigured(j, "apple"), true);
+  const sep = { APPLE_ASC_KEY: "PEM", APPLE_ASC_KEY_ID: "KID", APPLE_ASC_ISSUER: "ISS", APPLE_BUNDLE_ID: "b.id" };
+  assert.deepEqual(appleCfg(sep), { key: "PEM", keyId: "KID", issuer: "ISS", bundleId: "b.id" });
+  assert.equal(iapConfigured({ APPLE_ASC_JSON: "not json" }, "apple"), false);   // bad JSON never configures
 });
 
 test("Google Play: active subscription -> valid with expiry", async () => {

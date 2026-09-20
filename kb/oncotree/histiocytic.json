@@ -1,0 +1,822 @@
+{
+  "guideline": "histiocytic",
+  "title": "Histiocytic Neoplasms",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "histiocytic_neoplasms",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Histiocytic Neoplasms. Covers complete clinical algorithm: Diagnostic Workup (tissue biopsy with CD1a/Langerin/S100/CD68/CD163 IHC, whole-body FDG PET-CT, brain MRI, bone marrow, and mandatory comprehensive NGS for BRAF V600E, MAP2K1, ARAF, KRAS, NRAS, CSF1R, ALK) -> Classification into Langerhans Cell Histiocytosis (LCH, adult vs pediatric, single-system bone/skin vs multisystem with or without risk organ involvement liver/spleen/hematologic) -> Erdheim-Chester Disease (ECD, hairy kidneys, symmetric long bone osteosclerosis, retro-orbital, CNS, cardiovascular) -> Rosai-Dorfman Disease (RDD, massive painless cervical lymphadenopathy, emperipolesis, extranodal skin/bone/orbit) -> Malignant Histiocytosis (Histiocytic Sarcoma) -> Targeted Therapies: Dabrafenib + Trametinib (rare-histiocytic-braf-mek) or Vemurafenib for BRAF V600E; Cobimetinib or Trametinib for MEK/MAP2K1 or BRAF-wildtype; Cladribine or Cytarabine for refractory; Corticosteroids + Vinblastine for pediatric LCH. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Histiocytic Neoplasms Version 2.2026 (July 2026).",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "histiocytic_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "Histiocytic Neoplasms: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete diagnostic workup before histologic classification. Secure tissue with definitive IHC, run mandatory molecular NGS, and stage extent of disease.",
+      "path": "Histiocytic Neoplasms / Workup",
+      "pills": [
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete history and physical examination, assessment of fever, bone pain, weight loss, neurologic/endocrine deficits (diabetes insipidus screen).",
+        "Diagnostic tissue biopsy: excisional or core biopsy of affected organ (skin, bone, lymph node, retroperitoneum).",
+        "Definitive IHC panel, LCH pattern: CD1a+, Langerin (CD207)+, S100+, CD68+ (faint); Birbeck granules on EM are historical.",
+        "Definitive IHC panel, ECD pattern: CD68+, CD163+, Factor XIIIa+, S100- (or weak/patchy), CD1a-, Langerin-. Lipid-laden foamy histiocytes with Touton giant cells and sclerosis.",
+        "Definitive IHC panel, RDD pattern: S100+ (strong), CD68+, CD163+, CD1a-, Langerin-. Hallmark emperipolesis (intact lymphocytes/erythrocytes inside histiocyte cytoplasm).",
+        "Definitive IHC panel, malignant histiocytosis / histiocytic sarcoma pattern: CD68+, CD163+, lysozyme+, high Ki-67 (>30%), cytokeratins/melanocytic/lymphoid lineage-negative.",
+        "Mandatory molecular NGS panel: high-sensitivity BRAF V600E testing (VE1 IHC plus ultra-sensitive NGS/ddPCR); broad NGS covering MAP2K1, MAP3K1, ARAF, KRAS, NRAS, PIK3CA, CSF1R, ALK fusions.",
+        "Staging and extent of disease: whole-body FDG PET-CT (skull base to mid-thigh/feet for ECD osteosclerosis); dedicated brain MRI with pituitary protocol (crucial for diabetes insipidus / infundibulum thickening in LCH and tentorial/dural thickening in ECD/RDD); echocardiogram or cardiac MRI (pericardial/atrial infiltration, aortic coating in ECD); CT abdomen/pelvis for perinephric hairy kidneys.",
+        "Laboratory baseline: CBC, CMP (hepatic/renal), coagulation profile, endocrine panel (morning cortisol, free T4, TSH, prolactin, urine osmolality with water deprivation if polyuria/polydipsia), serum/urine protein electrophoresis."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Histologic Classification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_histology",
+      "linkId": "histiocytic_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Histologic Classification",
+      "title": "Histiocytic Neoplasms: Histologic Classification",
+      "section": "Diagnosis",
+      "description": "Step 2: Classify the histiocytic neoplasm by histology, IHC, age group, and clinical pattern. Classification directs the disease-specific pathway.",
+      "path": "Histiocytic Neoplasms / Classification",
+      "pills": [
+        "classification"
+      ],
+      "required": true,
+      "bullets": [
+        "Adult LCH: CD1a+/Langerin+ histiocytosis in an adult; stratify next by single-system versus multisystem disease and risk organ involvement.",
+        "Pediatric LCH: CD1a+/Langerin+ histiocytosis in a child; stratify next by single-system bone versus multisystem disease.",
+        "Erdheim-Chester Disease (ECD): CD68+/CD163+/Factor XIIIa+, CD1a-/Langerin- foamy histiocytosis with symmetric long bone osteosclerosis, hairy kidneys, retro-orbital, CNS, or cardiovascular involvement; stratify next by BRAF V600E status.",
+        "Rosai-Dorfman Disease (RDD): S100-strong/CD68+/CD163+ histiocytosis with emperipolesis, classically massive painless cervical lymphadenopathy with extranodal skin, bone, or orbit disease; stratify next by symptom burden.",
+        "Malignant histiocytosis / histiocytic sarcoma: high-grade CD68+/CD163+/lysozyme+ proliferation with high Ki-67 and lineage-negative markers; stratify next by resectability and systemic extent."
+      ],
+      "options": [
+        {
+          "id": "lch_adult",
+          "label": "Adult LCH",
+          "sets": {
+            "histology": "lch_adult"
+          },
+          "pills": [
+            "LCH",
+            "adult"
+          ]
+        },
+        {
+          "id": "lch_ped",
+          "label": "Pediatric LCH",
+          "sets": {
+            "histology": "lch_ped"
+          },
+          "pills": [
+            "LCH",
+            "pediatric"
+          ]
+        },
+        {
+          "id": "ecd",
+          "label": "Erdheim-Chester Disease (ECD)",
+          "sets": {
+            "histology": "ecd"
+          },
+          "pills": [
+            "ECD"
+          ]
+        },
+        {
+          "id": "rdd",
+          "label": "Rosai-Dorfman Disease (RDD)",
+          "sets": {
+            "histology": "rdd"
+          },
+          "pills": [
+            "RDD"
+          ]
+        },
+        {
+          "id": "malignant",
+          "label": "Malignant Histiocytosis / Histiocytic Sarcoma",
+          "sets": {
+            "histology": "malignant"
+          },
+          "pills": [
+            "malignant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_lch_extent",
+      "linkId": "histiocytic_lch_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Adult LCH Extent",
+      "title": "Adult LCH: Extent of Disease",
+      "section": "Staging",
+      "description": "Adult LCH confirmed. Stratify by single-system versus multisystem disease and risk organ involvement (liver, spleen, hematopoietic cytopenias).",
+      "path": "Histiocytic Neoplasms / Adult LCH / Extent",
+      "pills": [
+        "LCH",
+        "adult",
+        "extent"
+      ],
+      "required": true,
+      "bullets": [
+        "Single-system (isolated bone or skin): unifocal or single-system disease without multisystem spread or risk organ dysfunction.",
+        "Multisystem without risk organs: disease in two or more systems but no liver, spleen, or hematopoietic (cytopenia) involvement.",
+        "Multisystem with risk organs: liver, spleen, or hematopoietic cytopenias present; risk organ involvement drives systemic and targeted therapy selection."
+      ],
+      "options": [
+        {
+          "id": "single_system",
+          "label": "Single-system (isolated bone or skin)",
+          "sets": {
+            "extent": "single_system"
+          },
+          "pills": [
+            "single-system"
+          ]
+        },
+        {
+          "id": "multi_norisk",
+          "label": "Multisystem without risk organs",
+          "sets": {
+            "extent": "multisystem_norisk"
+          },
+          "pills": [
+            "multisystem",
+            "no-risk-organ"
+          ]
+        },
+        {
+          "id": "multi_risk",
+          "label": "Multisystem with risk organs (liver, spleen, hematopoietic)",
+          "sets": {
+            "extent": "multisystem_risk"
+          },
+          "pills": [
+            "multisystem",
+            "risk-organ"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_lch_ped_extent",
+      "linkId": "histiocytic_lch_ped_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Pediatric LCH Extent",
+      "title": "Pediatric LCH: Extent of Disease",
+      "section": "Staging",
+      "description": "Pediatric LCH confirmed. Stratify by single-system bone versus multisystem disease to select local versus frontline systemic therapy.",
+      "path": "Histiocytic Neoplasms / Pediatric LCH / Extent",
+      "pills": [
+        "LCH",
+        "pediatric",
+        "extent"
+      ],
+      "required": true,
+      "bullets": [
+        "Single-system bone: isolated bony lesion without multisystem spread; local therapy is the standard approach.",
+        "Multisystem: disease in two or more systems (with or without risk organs); frontline systemic therapy per the LCH-IV protocol is indicated."
+      ],
+      "options": [
+        {
+          "id": "single_bone",
+          "label": "Single-system bone",
+          "sets": {
+            "extent": "single_bone"
+          },
+          "pills": [
+            "single-system",
+            "bone"
+          ]
+        },
+        {
+          "id": "multisystem",
+          "label": "Multisystem disease",
+          "sets": {
+            "extent": "multisystem"
+          },
+          "pills": [
+            "multisystem"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ecd_braf",
+      "linkId": "histiocytic_ecd_braf",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "ECD BRAF Status",
+      "title": "ECD: BRAF V600E Status",
+      "section": "Biomarker",
+      "description": "ECD confirmed. BRAF V600E is present in 50 to 65 percent of ECD and determines frontline targeted therapy.",
+      "path": "Histiocytic Neoplasms / ECD / BRAF",
+      "pills": [
+        "ECD",
+        "BRAF"
+      ],
+      "required": true,
+      "bullets": [
+        "BRAF V600E mutant (50 to 65 percent of ECD): frontline BRAF-directed therapy with profound and rapid responses in bone, cardiac, and CNS lesions.",
+        "BRAF wild-type or unknown: MEK-inhibitor or immunomodulatory/chemotherapy backbone; retest with high-sensitivity NGS/ddPCR when status is unknown."
+      ],
+      "options": [
+        {
+          "id": "braf_mut",
+          "label": "BRAF V600E mutant",
+          "sets": {
+            "braf": "mutant"
+          },
+          "pills": [
+            "BRAF-V600E"
+          ]
+        },
+        {
+          "id": "braf_wt",
+          "label": "BRAF wild-type or unknown",
+          "sets": {
+            "braf": "wildtype"
+          },
+          "pills": [
+            "BRAF-wildtype"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_rdd_extent",
+      "linkId": "histiocytic_rdd_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "RDD Symptom Burden",
+      "title": "RDD: Symptom Burden and Extent",
+      "section": "Staging",
+      "description": "RDD confirmed. Stratify by asymptomatic/mild nodal disease versus symptomatic nodal or extranodal disease (skin, orbit, CNS, airway).",
+      "path": "Histiocytic Neoplasms / RDD / Extent",
+      "pills": [
+        "RDD",
+        "extent"
+      ],
+      "required": true,
+      "bullets": [
+        "Asymptomatic or mild nodal: painless cervical lymphadenopathy without compressive symptoms, organ dysfunction, or progressive extranodal disease; many cases remain stable or regress.",
+        "Symptomatic nodal or extranodal (skin, orbit, CNS, airway): pain, compression, disfigurement, vision or airway compromise, neurologic deficits, or progressive disease requiring systemic therapy or surgery."
+      ],
+      "options": [
+        {
+          "id": "asymptomatic",
+          "label": "Asymptomatic / mild nodal",
+          "sets": {
+            "burden": "asymptomatic"
+          },
+          "pills": [
+            "asymptomatic"
+          ]
+        },
+        {
+          "id": "symptomatic",
+          "label": "Symptomatic nodal or extranodal disease",
+          "sets": {
+            "burden": "symptomatic"
+          },
+          "pills": [
+            "symptomatic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_malignant_tx",
+      "linkId": "histiocytic_malignant_tx",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Malignant Histiocytosis Triage",
+      "title": "Malignant Histiocytosis: Resectability and Extent",
+      "section": "Staging",
+      "description": "Malignant histiocytosis / histiocytic sarcoma confirmed. Triage by resectable localized disease versus advanced/systemic disease.",
+      "path": "Histiocytic Neoplasms / Malignant / Triage",
+      "pills": [
+        "malignant",
+        "triage"
+      ],
+      "required": true,
+      "bullets": [
+        "Resectable localized: solitary lesion removable with clear margins without unacceptable morbidity and no distant spread on whole-body FDG PET-CT.",
+        "Advanced or systemic: multifocal, unresectable, nodal/disseminated, or relapsed disease; test for kinase alterations (BRAF, MEK pathway, ALK) to guide conditional targeted therapy."
+      ],
+      "options": [
+        {
+          "id": "localized",
+          "label": "Resectable localized disease",
+          "sets": {
+            "extent": "localized"
+          },
+          "pills": [
+            "localized",
+            "resectable"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Advanced / systemic disease",
+          "sets": {
+            "extent": "advanced"
+          },
+          "pills": [
+            "advanced",
+            "systemic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_lch_adult_single",
+      "linkId": "histiocytic_tx_lch_adult_single",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adult LCH Single-System Treatment",
+      "title": "Adult LCH, Single-System (Bone or Skin): Local Therapy",
+      "section": "Treatment",
+      "description": "Isolated bone or skin LCH in an adult. Local therapy with surveillance; escalate to systemic therapy on progression or multisystem evolution.",
+      "path": "Histiocytic Neoplasms / Adult LCH / Single-system",
+      "pills": [
+        "LCH",
+        "adult",
+        "single-system",
+        "local-therapy"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Isolated bone lesion: curettage with or without intralesional corticosteroid; low-dose radiotherapy 10 to 20 Gy for unresectable, painful, or critical-site lesions.",
+        "Isolated skin disease: topical corticosteroids or systemic corticosteroids for limited cutaneous LCH; biopsy to confirm clearance when lesions persist.",
+        "Surveillance: clinical examination plus periodic imaging (FDG PET-CT or site-directed MRI) to detect multisystem evolution; repeat NGS if systemic therapy becomes indicated.",
+        "Escalation trigger: new lesions outside the single system, risk organ dysfunction, or BRAF V600E-positive progressive disease prompts systemic or targeted therapy."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_lch_adult_multi_norisk",
+      "linkId": "histiocytic_tx_lch_adult_multi_norisk",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adult LCH Multisystem No-Risk-Organ Treatment",
+      "title": "Adult LCH, Multisystem Without Risk Organs: Systemic Therapy",
+      "section": "Treatment",
+      "description": "Multisystem adult LCH without liver, spleen, or hematopoietic involvement. Purine analogue or cytarabine backbone, with BRAF/MEK targeted therapy when BRAF V600E is present.",
+      "path": "Histiocytic Neoplasms / Adult LCH / Multisystem no-risk",
+      "pills": [
+        "LCH",
+        "adult",
+        "multisystem",
+        "no-risk-organ",
+        "BRAF-V600E"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "BRAF V600E-positive: Dabrafenib plus Trametinib per the StewardMD BRAF/MEK Standard Protocol, with dose engine calculating patient-specific doses; profound responses expected in multisystem LCH.",
+        "BRAF wild-type or unknown: cladribine monotherapy or cytarabine-based systemic therapy; confirm MAP2K1/MAPK pathway status on broad NGS because MEK inhibition is the targeted alternative.",
+        "Response assessment: whole-body FDG PET-CT with PERCIST-style metabolic response, organ function labs, and symptom review; reassess risk organ status at every restaging.",
+        "Refractory disease: switch backbone (cladribine to cytarabine or reverse) or add targeted therapy on newly identified MAPK alteration; refer for clinical trial where available."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_lch_adult_multi_risk",
+      "linkId": "histiocytic_tx_lch_adult_multi_risk",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adult LCH Multisystem Risk-Organ Treatment",
+      "title": "Adult LCH, Multisystem With Risk Organs: Targeted Therapy",
+      "section": "Treatment",
+      "description": "Multisystem adult LCH with liver, spleen, or hematopoietic involvement. BRAF/MEK targeted therapy is preferred when BRAF V600E is present.",
+      "path": "Histiocytic Neoplasms / Adult LCH / Multisystem risk-organ",
+      "pills": [
+        "LCH",
+        "adult",
+        "multisystem",
+        "risk-organ",
+        "BRAF-V600E"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "BRAF V600E-positive: Dabrafenib plus Trametinib per the StewardMD BRAF/MEK Standard Protocol (preferred), with dose engine calculating patient-specific doses; monitor hepatic function and cytopenias closely given risk organ disease.",
+        "BRAF wild-type or MAP2K1-altered: cobimetinib-based MEK inhibition as the targeted alternative; high-sensitivity NGS/ddPCR confirmation of BRAF status before committing to a non-BRAF backbone.",
+        "Chemotherapy alternative: cytarabine or cladribine backbone when targeted therapy is unavailable, contraindicated, or not tolerated.",
+        "Supportive care: transfuse and correct coagulopathy for hematopoietic involvement; hepatology input for hepatic dysfunction; FDG PET-CT plus organ labs at each restaging."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_lch_ped_single",
+      "linkId": "histiocytic_tx_lch_ped_single",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Pediatric LCH Single-Bone Treatment",
+      "title": "Pediatric LCH, Single-System Bone: Local Therapy",
+      "section": "Treatment",
+      "description": "Isolated bone LCH in a child. Local therapy with function-preserving approach and surveillance for reactivation.",
+      "path": "Histiocytic Neoplasms / Pediatric LCH / Single-bone",
+      "pills": [
+        "LCH",
+        "pediatric",
+        "single-system",
+        "bone"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Curettage of the solitary bony lesion, or intralesional methylprednisolone injection for lesions where surgery risks growth-plate or joint injury.",
+        "Avoid mutilating resection and routine radiotherapy in children; reserve low-dose radiotherapy for exceptional unresectable critical-site lesions after multidisciplinary review.",
+        "Surveillance: clinical examination and site-directed imaging to confirm healing; screen for diabetes insipidus, growth disturbance, and late effects at follow-up.",
+        "Escalation trigger: new bone lesions, soft-tissue mass, or multisystem features prompts re-biopsy consideration and systemic therapy per the multisystem pathway."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_lch_ped_multi",
+      "linkId": "histiocytic_tx_lch_ped_multi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Pediatric LCH Multisystem Treatment",
+      "title": "Pediatric LCH, Multisystem: Vinblastine Plus Prednisone (LCH-IV)",
+      "section": "Treatment",
+      "description": "Multisystem pediatric LCH. Frontline vinblastine plus prednisone for 12 months per the LCH-IV protocol, with targeted therapy for refractory disease.",
+      "path": "Histiocytic Neoplasms / Pediatric LCH / Multisystem",
+      "pills": [
+        "LCH",
+        "pediatric",
+        "multisystem",
+        "LCH-IV"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Frontline: vinblastine plus prednisone for 12 months per the LCH-IV protocol, with dose engine calculating patient-specific weight- and surface-area-based doses.",
+        "Early response assessment at 6 to 12 weeks: poor early response predicts reactivation risk and prompts intensification per protocol strata.",
+        "Refractory or reactivated disease: cladribine or cytarabine salvage; add BRAF/MEK targeted therapy when BRAF V600E or MAPK pathway alteration is identified.",
+        "Supportive care: PJP prophylaxis during prolonged steroids, neuropathy monitoring on vinblastine, growth and endocrine surveillance, audiology where aminoglycoside exposure applies."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_ecd_brafmut",
+      "linkId": "histiocytic_tx_ecd_brafmut",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ECD BRAF-Mutant Treatment",
+      "title": "ECD, BRAF V600E Mutant: BRAF-Directed Therapy (Category 1 Preferred)",
+      "section": "Treatment",
+      "description": "BRAF V600E-mutant ECD. Frontline BRAF-directed therapy with profound and rapid responses in bone, cardiac, and CNS lesions.",
+      "path": "Histiocytic Neoplasms / ECD / BRAF-mutant",
+      "pills": [
+        "ECD",
+        "BRAF-V600E",
+        "targeted"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Frontline preferred: Dabrafenib plus Trametinib per the StewardMD BRAF/MEK Standard Protocol (Category 1 preferred), with dose engine calculating patient-specific doses; expect profound and rapid responses in bone, cardiac, and CNS lesions.",
+        "Alternative BRAF-directed monotherapy: vemurafenib for BRAF V600E-positive ECD when combination therapy is not tolerated or not available.",
+        "Organ-directed monitoring: serial FDG PET-CT for osteosclerotic response, cardiac MRI or echocardiogram for pericardial/atrial and aortic disease, brain MRI for CNS/dural lesions, renal imaging for hairy kidney regression.",
+        "Long-term management: targeted therapy is continued long-term because relapse on discontinuation is common; titrate to response and tolerability with dermatologic, cardiac (LVEF), ocular (OCT), and hepatic surveillance."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_ecd_wt",
+      "linkId": "histiocytic_tx_ecd_wt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ECD BRAF-Wildtype Treatment",
+      "title": "ECD, BRAF Wild-Type or Unknown: Cobimetinib (Category 1 Preferred)",
+      "section": "Treatment",
+      "description": "BRAF wild-type or unknown ECD. MEK inhibition with cobimetinib 60 mg daily is Category 1 preferred per histiocytosis approval; cladribine or tocilizumab are alternatives.",
+      "path": "Histiocytic Neoplasms / ECD / BRAF-wildtype",
+      "pills": [
+        "ECD",
+        "BRAF-wildtype",
+        "MEK"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Preferred: cobimetinib 60 mg orally daily (Category 1 preferred per FDA approval for histiocytosis), with dose engine calculating patient-specific doses; assess MAP2K1 and other MAPK alterations on broad NGS.",
+        "Alternatives: cladribine purine-analogue therapy, or tocilizumab IL-6-directed therapy for inflammatory-predominant disease.",
+        "Unknown BRAF status: confirm with high-sensitivity NGS or ddPCR before excluding BRAF-directed therapy; VE1 IHC alone is insufficient to rule out V600E.",
+        "Monitoring: retinal OCT examinations, LVEF and blood pressure surveillance, CK and hepatic panels, plus FDG PET-CT and organ-directed imaging as for BRAF-mutant disease."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_rdd_surv",
+      "linkId": "histiocytic_tx_rdd_surv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "RDD Asymptomatic Treatment",
+      "title": "RDD, Asymptomatic or Mild Nodal: Active Surveillance",
+      "section": "Treatment",
+      "description": "Asymptomatic or mild nodal RDD without compressive or extranodal progressive disease. Active surveillance is the standard.",
+      "path": "Histiocytic Neoplasms / RDD / Surveillance",
+      "pills": [
+        "RDD",
+        "asymptomatic",
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Active surveillance: observation without systemic therapy; a substantial fraction of nodal RDD remains stable or regresses spontaneously.",
+        "Follow-up: serial clinical examination with nodal measurement, symptom review, and periodic imaging (ultrasound, CT, or FDG PET-CT) for progressive or extranodal evolution.",
+        "Intervention triggers: compressive symptoms, airway or orbital compromise, CNS involvement, cytopenias, or progressive extranodal disease prompts re-triage to the symptomatic pathway.",
+        "Counseling: reassure on the generally indolent course of isolated nodal disease while documenting baseline extent for comparison."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_rdd_symp",
+      "linkId": "histiocytic_tx_rdd_symp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "RDD Symptomatic Treatment",
+      "title": "RDD, Symptomatic or Extranodal: Systemic Therapy",
+      "section": "Treatment",
+      "description": "Symptomatic nodal or extranodal RDD (skin, orbit, CNS, airway). Corticosteroid backbone with MEK inhibition for systemic or refractory disease; surgery for compressive lesions.",
+      "path": "Histiocytic Neoplasms / RDD / Symptomatic",
+      "pills": [
+        "RDD",
+        "symptomatic",
+        "extranodal"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "First-line systemic: corticosteroids for symptomatic nodal or extranodal RDD, tapered to response with gastric, glycemic, and bone protection.",
+        "Systemic or refractory disease: cobimetinib (Category 1 preferred for systemic refractory RDD), with dose engine calculating patient-specific doses; confirm MAPK pathway status on broad NGS.",
+        "Alternative systemic: cladribine for steroid-refractory or multiply relapsed RDD.",
+        "Compressive lesions: surgical debulking or excision for airway, orbital, spinal, or CNS compression in parallel with systemic therapy planning; radiotherapy reserved for selected unresectable critical-site disease."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_malig_local",
+      "linkId": "histiocytic_tx_malig_local",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Malignant Localized Treatment",
+      "title": "Malignant Histiocytosis, Resectable Localized: Surgery With or Without RT",
+      "section": "Treatment",
+      "description": "Resectable localized histiocytic sarcoma without distant spread. Wide surgical excision with or without adjuvant radiotherapy.",
+      "path": "Histiocytic Neoplasms / Malignant / Localized",
+      "pills": [
+        "malignant",
+        "localized",
+        "resectable",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Wide surgical excision with clear margins as the curative-intent backbone for solitary resectable disease.",
+        "Adjuvant radiotherapy for close or positive margins, high-grade features, or sites where re-excision is morbid; dose and field per soft-tissue sarcoma principles.",
+        "Staging confirmation: whole-body FDG PET-CT and bone marrow assessment to exclude occult systemic spread before committing to a local-only plan.",
+        "Surveillance: intensive clinical and imaging follow-up because distant relapse risk is high even after complete resection; re-biopsy and NGS at any recurrence."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    },
+    {
+      "id": "n_tx_malig_adv",
+      "linkId": "histiocytic_tx_malig_adv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Malignant Advanced Treatment",
+      "title": "Malignant Histiocytosis, Advanced or Systemic: Anthracycline-Based Chemotherapy",
+      "section": "Treatment",
+      "description": "Advanced or systemic histiocytic sarcoma. Anthracycline-based chemotherapy (CHOP or ifosfamide-based) with conditional targeted therapy when a kinase alteration is identified.",
+      "path": "Histiocytic Neoplasms / Malignant / Advanced",
+      "pills": [
+        "malignant",
+        "advanced",
+        "systemic",
+        "chemotherapy"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Backbone: anthracycline-based chemotherapy with CHOP, or an ifosfamide-based regimen for fit patients with aggressive systemic disease; dose engine calculates patient-specific doses.",
+        "Conditional targeted therapy: add or switch to BRAF-directed therapy for BRAF V600E, MEK inhibition for MAPK pathway alteration, or ALK-directed therapy for ALK fusion identified on comprehensive NGS.",
+        "Baseline and on-treatment: cardiac function (anthracycline), CBC/renal/hepatic panels, fertility counseling, growth-factor support per febrile-neutropenia risk.",
+        "Restaging: FDG PET-CT after 2 to 3 cycles to judge chemosensitivity; early progression prompts regimen switch, targeted pivot on new molecular result, or clinical trial referral."
+      ],
+      "protocolRefs": [
+        "rare-histiocytic-braf-mek"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_hist",
+      "from": "n_workup",
+      "to": "n_histology",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_hist_lch_adult",
+      "from": "n_histology",
+      "to": "n_lch_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "lch_adult"
+      ]
+    },
+    {
+      "id": "l_hist_lch_ped",
+      "from": "n_histology",
+      "to": "n_lch_ped_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "lch_ped"
+      ]
+    },
+    {
+      "id": "l_hist_ecd",
+      "from": "n_histology",
+      "to": "n_ecd_braf",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "ecd"
+      ]
+    },
+    {
+      "id": "l_hist_rdd",
+      "from": "n_histology",
+      "to": "n_rdd_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "rdd"
+      ]
+    },
+    {
+      "id": "l_hist_malig",
+      "from": "n_histology",
+      "to": "n_malignant_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "malignant"
+      ]
+    },
+    {
+      "id": "l_lch_single",
+      "from": "n_lch_extent",
+      "to": "n_tx_lch_adult_single",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "single_system"
+      ]
+    },
+    {
+      "id": "l_lch_norisk",
+      "from": "n_lch_extent",
+      "to": "n_tx_lch_adult_multi_norisk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "multi_norisk"
+      ]
+    },
+    {
+      "id": "l_lch_risk",
+      "from": "n_lch_extent",
+      "to": "n_tx_lch_adult_multi_risk",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "multi_risk"
+      ]
+    },
+    {
+      "id": "l_ped_single",
+      "from": "n_lch_ped_extent",
+      "to": "n_tx_lch_ped_single",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "single_bone"
+      ]
+    },
+    {
+      "id": "l_ped_multi",
+      "from": "n_lch_ped_extent",
+      "to": "n_tx_lch_ped_multi",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "multisystem"
+      ]
+    },
+    {
+      "id": "l_ecd_mut",
+      "from": "n_ecd_braf",
+      "to": "n_tx_ecd_brafmut",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "braf_mut"
+      ]
+    },
+    {
+      "id": "l_ecd_wt",
+      "from": "n_ecd_braf",
+      "to": "n_tx_ecd_wt",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "braf_wt"
+      ]
+    },
+    {
+      "id": "l_rdd_surv",
+      "from": "n_rdd_extent",
+      "to": "n_tx_rdd_surv",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "asymptomatic"
+      ]
+    },
+    {
+      "id": "l_rdd_symp",
+      "from": "n_rdd_extent",
+      "to": "n_tx_rdd_symp",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "symptomatic"
+      ]
+    },
+    {
+      "id": "l_malig_local",
+      "from": "n_malignant_tx",
+      "to": "n_tx_malig_local",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "localized"
+      ]
+    },
+    {
+      "id": "l_malig_adv",
+      "from": "n_malignant_tx",
+      "to": "n_tx_malig_adv",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "advanced"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "rare-histiocytic-braf-mek"
+  ]
+}

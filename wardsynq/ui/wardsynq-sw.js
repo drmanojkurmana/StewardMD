@@ -9,7 +9,13 @@
  * ago rendered without comment is exactly the hazard wardsynq-vitals.js refuses at the other end of
  * the pipe. So:
  *
- *   1. The app shell (HTML, CSS, JS, the mark) is CACHE FIRST. It changes on deploy, not on rounds.
+ *   1. The app shell (HTML, CSS, JS, the mark) is NETWORK FIRST and the cache is the offline copy.
+ *      It was cache first until 2026-09-15, and that is why "record service refused to open (401)"
+ *      survived three auth fixes: a browser that had opened the workstation before the fixes kept
+ *      being handed the page and the unversioned record-deployment.js it cached then, which carried
+ *      no sign-in, so every open went out with no credential. The owner's banner still read in the
+ *      wording that code was replaced with on 2026-09-14. A cached copy of the code that decides who
+ *      is signing an order is only acceptable when there is no network to fetch the current one.
  *   2. Anything that looks like clinical data is NETWORK FIRST, and when the network fails the
  *      response is NOT a cached body. It is a 503 carrying a JSON object that says the network is
  *      unavailable, so the caller renders "unavailable" rather than a number with no date on it.
@@ -21,14 +27,15 @@
  * way for one nurse to be looking at a different rule set from the next.
  */
 
-const VERSION = "wardsynq-v1";
+const VERSION = "wardsynq-v8";
 
 /* The whole surface, listed rather than discovered. A shell that caches what it happens to fetch
    works until the one screen nobody opened before the wifi went is the one somebody needs. */
 const SHELL = [
   "./wardsynq.html",
-  "./wardsynq.css?v=8",
+  "./wardsynq.css?v=12",
   "./wardsynq-app.js",
+  "./wardsynq-app.js?v=15",
   "./opd.html",
   "./opd.css",
   "./opd-emr.js",
@@ -57,12 +64,23 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil((async () => {
+    let replaced = false;
     for (const key of await caches.keys()) {
       // Deleted, not left to expire. Two versions of a clinical surface in two tabs means one nurse
       // reading a different rule set from the next.
-      if (key !== VERSION) await caches.delete(key);
+      if (key !== VERSION) { await caches.delete(key); replaced = true; }
     }
     await self.clients.claim();
+    /* An open workstation window was served by the old worker, so it is still the old code (see 1.
+     * above). Reload it once, on the upgrade only. The workstation writes nothing until an order is
+     * signed, so what a reload can cost is an unsigned draft; the old page could not sign one anyway
+     * when it could not open the record. The bedside page (opd.html) is left alone: it holds typed
+     * observations. */
+    if (replaced) {
+      for (const c of await self.clients.matchAll({ type: "window" })) {
+        if (/\/wardsynq\/ui\/wardsynq(\.html)?(\?|$)/.test(c.url) && c.navigate) { try { await c.navigate(c.url); } catch { /* not ours to navigate */ } }
+      }
+    }
   })());
 });
 
@@ -89,19 +107,8 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  /* The shell: cache first, and refresh in the background so the next load is current. */
+  /* The shell: network first, and the cache is the copy for when the network is not there. */
   event.respondWith((async () => {
-    const cached = await caches.match(request, { ignoreSearch: false });
-    if (cached) {
-      event.waitUntil((async () => {
-        try {
-          const fresh = await fetch(request);
-          if (fresh && fresh.ok) (await caches.open(VERSION)).put(request, fresh.clone());
-        } catch { /* offline is the normal case here, not an error */ }
-      })());
-      return cached;
-    }
-
     try {
       const fresh = await fetch(request);
       if (fresh && fresh.ok && new URL(url).origin === self.location.origin) {
@@ -109,6 +116,8 @@ self.addEventListener("fetch", (event) => {
       }
       return fresh;
     } catch {
+      const cached = await caches.match(request, { ignoreSearch: false });
+      if (cached) return cached;
       // A working app that says it is offline beats a browser error page at a bedside.
       if (request.mode === "navigate") {
         const shell = await caches.match("./wardsynq.html");

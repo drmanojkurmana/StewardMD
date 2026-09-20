@@ -11,15 +11,68 @@ import assert from "node:assert/strict";
 
 import {
   SEVERITY, LIKELIHOOD, STATE, CONTROL_STRENGTH, IncidentError,
-  sacScore, report, triage, recordRCA, addCAPA, completeCAPA, close, reportingHealth,
+  CATEGORY, CONFIRM_OUTCOME,
+  sacScore, report, triage, confirm, stageOf, recordRCA, addCAPA, completeCAPA, close, reportingHealth,
 } from "../wardsynq/wardsynq-incidents.js";
 
 const NOW = "2026-09-04T09:00:00.000Z";
 const later = (h) => new Date(Date.parse(NOW) + h * 3600000).toISOString();
 
-const anIncident = (over) => report({
+// A CONFIRMED incident: RCA, actions and close all need the signal decided first.
+const aSignal = (over) => report({
   what: "Wrong-strength potassium ampoule selected from the resuscitation trolley",
   severity: SEVERITY.NEAR_MISS, reportedBy: "nurse-7", now: NOW, ...over,
+});
+const anIncident = (over) => confirm(aSignal(over), { outcome: CONFIRM_OUTCOME.CONFIRMED, reason: "reviewed, a real event", category: CATEGORY.MEDICATION_ERROR, by: "safety-lead", now: NOW });
+
+/* ------------------------------------------------------------------ signal -> confirm */
+
+test("a report starts as a SIGNAL, and RCA, actions and close all refuse until it is confirmed", () => {
+  const s = aSignal({ source: { resourceType: "SafetyOverride", id: "ovr-1" } });
+  assert.equal(stageOf(s), "signal");
+  assert.deepEqual(s.source, { resourceType: "SafetyOverride", id: "ovr-1" });
+  const cause = "identical ampoules stocked together with no barcode check";
+  assert.throws(() => recordRCA(s, { rootCause: cause, conductedBy: "lead", now: NOW }), (e) => e.code === "NOT_CONFIRMED");
+  assert.throws(() => addCAPA(s, { action: "Separate stock", owner: "p", dueBy: later(1), now: NOW }), (e) => e.code === "NOT_CONFIRMED");
+  assert.throws(() => close(s, { by: "lead", now: NOW }), (e) => e.code === "NOT_CONFIRMED");
+  assert.throws(() => aSignal({ source: { resourceType: "Patient", id: "p1" } }), (e) => e.code === "BAD_SOURCE");
+  assert.throws(() => aSignal({ category: "bad luck" }), (e) => e.code === "BAD_CATEGORY");
+});
+
+test("confirmation: a category is required to confirm, a reason always, a duplicate names the other, and it is decided once", () => {
+  assert.throws(() => confirm(aSignal(), { outcome: "confirmed", reason: "real", by: "lead" }), (e) => e.code === "NO_CATEGORY");
+  assert.throws(() => confirm(aSignal(), { outcome: "confirmed", category: "fall", by: "lead" }), (e) => e.code === "NO_REASON");
+  assert.throws(() => confirm(aSignal(), { outcome: "maybe", reason: "x y z", by: "lead" }), (e) => e.code === "BAD_OUTCOME");
+  assert.throws(() => confirm(aSignal(), { outcome: "duplicate", reason: "same event", by: "lead" }), (e) => e.code === "NO_DUPLICATE_OF");
+  assert.throws(() => confirm(aSignal(), { outcome: "confirmed", reason: "real", category: "fall" }), (e) => e.code === "NO_ACTOR");
+
+  const dup = confirm(aSignal(), { outcome: "duplicate", duplicateOf: "inc-other", reason: "same fall, second reporter", by: "lead", now: NOW });
+  assert.equal(stageOf(dup), "rejected");
+  assert.equal(dup.confirmation.duplicateOf, "inc-other");
+  assert.throws(() => triage(dup, { likelihood: LIKELIHOOD.RARE, triagedBy: "lead" }), (e) => e.code === "REJECTED");
+  assert.throws(() => confirm(dup, { outcome: "confirmed", reason: "changed mind", category: "fall", by: "lead" }), (e) => e.code === "ALREADY_DECIDED");
+
+  const ok = anIncident();
+  assert.equal(stageOf(ok), "confirmed");
+  assert.equal(ok.category, "medication-error");
+  recordRCA(ok, { rootCause: "identical ampoules stocked together with no barcode check", conductedBy: "lead", now: NOW });
+  assert.equal(stageOf(ok), "under-investigation");
+});
+
+test("the ledger keeps signals, confirmed, root-caused and completed actions apart", () => {
+  const withRca = anIncident();
+  recordRCA(withRca, { rootCause: "identical ampoules stocked together with no barcode check", conductedBy: "lead", now: NOW });
+  const c = addCAPA(withRca, { action: "Separate the stock", owner: "p", dueBy: later(1), strength: "SIMPLIFICATION", now: NOW });
+  addCAPA(withRca, { action: "Barcode check at selection", owner: "p", dueBy: later(1), strength: "AUTOMATION", now: NOW });
+  completeCAPA(withRca, c.id, { by: "p", evidence: "photo", now: NOW });
+  const rejected = confirm(aSignal(), { outcome: "not-an-incident", reason: "expected side effect", by: "lead", now: NOW });
+  const h = reportingHealth([aSignal(), aSignal(), anIncident(), withRca, rejected], NOW);
+  assert.equal(h.signals, 2);
+  assert.equal(h.confirmed, 2);
+  assert.equal(h.rejected, 1);
+  assert.equal(h.withRootCause, 1);
+  assert.equal(h.openCapas, 1);
+  assert.equal(h.completedCapas, 1);
 });
 
 /* ------------------------------------------------------------------ reporting is made easy */

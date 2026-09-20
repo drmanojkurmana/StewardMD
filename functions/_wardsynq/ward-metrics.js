@@ -31,6 +31,9 @@ import { reconciliationSummary } from "./med-reconciliation.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const IPD = "IPD", OPEN_ENC = "in-progress";
+/* migrate-inpatient.js ADMISSION_CLASSES, repeated rather than imported (that file's import chain is the whole ward);
+ * test/wardsynq-ward-metrics.test.mjs pins the two equal. */
+const ADMITTED = Object.freeze(["IPD", "ICU", "MATERNITY", "PEDIATRICS", "NICU"]);
 
 /** Administration states that mean a dose was started and never finished. */
 const IN_FLIGHT = Object.freeze(["ordered", "verified", "dispensed", "scanned", "held"]);
@@ -54,10 +57,15 @@ function summariseWard(input) {
   const patientIds = new Set(stays.map((e) => e.patientId));
   const mine = (r) => !want || patientIds.has(r && r.patientId);
 
-  // Occupancy. `unplaced` is admitted-to-a-ward-without-a-bed, which is a real state and not zero.
+  /* Occupancy. `unplaced` is admitted-to-a-ward-without-a-bed, which is a real state and not zero.
+   * ONE DEFINITION OF ADMITTED (LT-39, live test 2026-09-15): the bed board, patient flow (Command center) and the
+   * ward list count an admission by ADMISSION_CLASSES; this counted ED, theatre and PACU encounters as occupied
+   * beds too, so the ward home said "85 beds occupied, 2 without a bed" while Command center said 83 and 1 and the
+   * Map 84 admitted, all at once. Open work below still covers every open encounter. */
+  const admitted = stays.filter((e) => ADMITTED.includes(e.class));
   const beds = new Map();
   let unplaced = 0;
-  for (const e of stays) {
+  for (const e of admitted) {
     const bed = str(e.location && e.location.bed);
     if (!bed) { unplaced += 1; continue; }
     const w = str(e.location && e.location.ward) || "(no ward)";
@@ -86,7 +94,10 @@ function summariseWard(input) {
   return {
     ward: str(i.ward) || null,
     computedAt: new Date(nowMs).toISOString(),
+    // patients: every open stay (theatre and ED included; the group census and a theatre ward's home read it).
+    // admitted: the LT-39 count the hospital-wide ward home compares with the Map and Command center.
     patients: stays.length,
+    admitted: admitted.length,
     occupiedBeds: beds.size,
     unplaced,
     open: {
@@ -107,6 +118,21 @@ function summariseWard(input) {
       reportedAt: oldest.reportedAt, escalation: escalationOf(oldest, nowMs, i.escalationPolicy),
     } : null,
   };
+}
+
+/* summariseWard counts the [] stand-ins for unread types as zero; this blanks those counts so the
+ * response says "not readable", not "none". Without Encounter nothing is scoped, so nothing stands. */
+function blankUnreadable(metrics, unreadable) {
+  if (!unreadable || !unreadable.length) return metrics;
+  const o = metrics.open, gone = (t) => unreadable.includes(t);
+  if (gone("Encounter")) { metrics.patients = null; metrics.occupiedBeds = null; metrics.unplaced = null; for (const k of Object.keys(o)) o[k] = null; }
+  if (gone("CriticalResultLoop")) { o.criticalResults = null; o.criticalResultsEscalated = null; metrics.oldestUnacknowledgedCritical = null; }
+  if (gone("MedicationAdministration")) o.dosesInFlight = null;
+  if (gone("ShiftHandover")) o.handoversWaiting = null;
+  if (gone("MedicationReconciliation")) { o.medicinesUndecided = null; o.staysWithNoMedicationHistory = null; }
+  if (gone("MedicationOrder") || gone("MedicationVerification")) o.ordersNotPharmacyVerified = null;
+  metrics.openItems = null;
+  return metrics;
 }
 
 async function open(request, env, ctx) {
@@ -132,10 +158,13 @@ async function wardMetrics(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx);
   if (error) return { ...base, ...error, metrics: null };
 
-  const read = async (type, limit) => { try { return await svc.list(type, limit || 300); } catch { return null; } };
+  /* R4-2: this read the OLDEST 300 of each type, so past 300 encounters the ward's census and work were wrong. Open stays,
+   * doses in flight and active orders are read by status; the rest whole (listAll). A read past its ceiling is null, so
+   * that count is blank and named unreadable, never short. ponytail: audit O20 if paging is slow. */
+  const read = async (type, statuses) => { try { return statuses ? await svc.listByStatus(type, statuses) : (await svc.listAll(type, { max: 50000, throwOnTruncate: true })).rows; } catch { return null; } };
   const [encounters, criticalLoops, administrations, handovers, reconciliations, orders, verifications] = await Promise.all([
-    read("Encounter"), read("CriticalResultLoop"), read("MedicationAdministration"),
-    read("ShiftHandover"), read("MedicationReconciliation"), read("MedicationOrder"), read("MedicationVerification"),
+    read("Encounter", [OPEN_ENC]), read("CriticalResultLoop"), read("MedicationAdministration", IN_FLIGHT),
+    read("ShiftHandover"), read("MedicationReconciliation"), read("MedicationOrder", ["active"]), read("MedicationVerification"),
   ]);
 
   /* A type this actor may not read comes back null, and its counts are OMITTED rather than reported
@@ -155,7 +184,8 @@ async function wardMetrics(request, env, ctx) {
     orders: orZero(orders, "MedicationOrder"),
     verifications: orZero(verifications, "MedicationVerification"),
   });
+  blankUnreadable(metrics, unreadable);
   return { ...base, ok: true, metrics, ...(unreadable.length ? { unreadable, partial: true } : {}) };
 }
 
-export { IN_FLIGHT, summariseWard, wardMetrics };
+export { IN_FLIGHT, ADMITTED, summariseWard, blankUnreadable, wardMetrics };

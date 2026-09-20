@@ -35,6 +35,7 @@ import { RecordService } from "./service.js";
 import { resolveClinicalActor } from "./actor.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
+import { FOETAL_SEX } from "./registers.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -56,9 +57,10 @@ const NOT_EMERGENCY =
  * may create. It is TIER.DRAFT and not EXECUTE on purpose: what a patient sends is a REQUEST, and
  * the ladder should say so rather than relying on every route to remember.
  */
-function patientWriteActor(patientId) {
+function patientWriteActor(patientId, auditId) {
   return makeActor({
-    id: `patient:${str(patientId)}`,
+    /* P2.9: a proxy writes under its own id, so the record says a relative sent it, not the patient. */
+    id: str(auditId) || `patient:${str(patientId)}`,
     kind: KIND.HUMAN,
     tier: TIER.DRAFT,
     scope: { read: [MESSAGE_TYPE, REQUEST_TYPE], write: [MESSAGE_TYPE, REQUEST_TYPE] },
@@ -141,9 +143,10 @@ async function sendMessage(request, env, ctx) {
   const at = new Date().toISOString();
   const id = `wsq-pmsg-${str(patientId).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "")}`;
   const record = PatientMessage({ id, patientId, subject: str(ctx.subject) || null, body, sentAt: at });
+  if (str(ctx.actorId)) record.sentBy = str(ctx.actorId);
 
   try {
-    await serviceFor(ctx, patientWriteActor(patientId)).put(record);
+    await serviceFor(ctx, patientWriteActor(patientId, ctx.actorId)).put(record);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
@@ -181,13 +184,13 @@ async function requestAppointment(request, env, ctx) {
     requestedAt: at,
     /* WHO ASKED, recorded. A follow-up a clinician promised and one a patient asked for are
      * different facts and a booking clerk reads them differently. */
-    requestedBy: `patient:${patientId}`,
+    requestedBy: str(ctx.actorId) || `patient:${patientId}`,
     origin: "patient",
     source: { system: "wardsynq-native", sourceId: `patient-appointment-request:${id}` },
   };
 
   try {
-    await serviceFor(ctx, patientWriteActor(patientId)).put(record);
+    await serviceFor(ctx, patientWriteActor(patientId, ctx.actorId)).put(record);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
@@ -223,7 +226,7 @@ async function messageWorklist(request, env, ctx) {
   if (error) return { ...base, ...error, open: 0, messages: [] };
 
   let rows;
-  try { rows = await svc.list(MESSAGE_TYPE, 200); }
+  try { rows = (await svc.listAll(MESSAGE_TYPE, { max: 50000, throwOnTruncate: true })).rows; } // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), open: 0, messages: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), open: 0, messages: [] };
@@ -249,6 +252,17 @@ async function replyToMessage(request, env, ctx) {
   try { current = await svc.get(MESSAGE_TYPE, messageId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", written: 0 }; }
   if (!current) return { ...base, ok: false, status: 404, error: "message_not_found", written: 0 };
+  /* PC&PNDT Act s.5(2): no person communicates the sex of a foetus "by words, signs, or in any other manner"; rule 18(i)
+   * binds everyone in the hospital (legal review B.4.4). A reply that names it is refused the same way an obstetric report
+   * is (register-routes.js formFGate), and the refusal is audited with who and when, never the text. A patient's own
+   * message is not refused: receiving a question discloses nothing, and a patient's message must never be lost. */
+  if (FOETAL_SEX.test(reply)) {
+    try {
+      await ctx.recordDeps.repository.auditOnly(ctx.migration.tenantId, { ts: new Date().toISOString(), actor: resolved.actor.id, connectorId: "wardsynq-registers", action: "pcpndt.disclosure_refused", outcome: "refused",
+        scope: { register: "formf", on: "patient-message-reply", fields: ["reply"], messageId }, patientRefHash: null });
+    } catch { /* the refusal is the protection */ }
+    return { ...base, ok: false, status: 422, error: "foetal_sex_refused", detail: "PC&PNDT Act s.5(2) and s.6: a message to a patient must not state the sex of a foetus. Nothing was sent or saved.", written: 0 };
+  }
 
   const { meta, version, ...rest } = current;
   const now = new Date().toISOString();

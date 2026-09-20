@@ -50,6 +50,7 @@ const RHD = Object.freeze(["positive", "negative"]);
  * Who may receive whose red cells. Recipient group -> acceptable donor groups.
  * O is the universal red cell donor; AB the universal red cell recipient.
  */
+const WHOLE_BLOOD_COMPATIBILITY = Object.freeze({ O: ["O"], A: ["A"], B: ["B"], AB: ["AB"] });
 const RED_CELL_COMPATIBILITY = Object.freeze({
   O: Object.freeze(["O"]),
   A: Object.freeze(["A", "O"]),
@@ -71,8 +72,15 @@ const PLASMA_COMPATIBILITY = Object.freeze({
 /** Component classes this module knows how to reason about. Anything else is refused, not guessed. */
 const COMPONENT = Object.freeze({
   RED_CELLS: "red-cells",
+  PRBC: "prbc",
+  WHOLE_BLOOD: "whole-blood",
   PLASMA: "plasma",
+  FFP: "ffp",
   PLATELETS: "platelets",
+  SDP: "sdp",
+  CRYO: "cryo",
+  GRANULOCYTES: "granulocytes",
+  OTHER: "other",
 });
 
 class TransfusionSafetyError extends Error {
@@ -107,30 +115,37 @@ function checkCompatibility(patient, unit, opts) {
   if (!ABO.includes(pAbo)) reasons.push({ code: "PATIENT_GROUP_UNKNOWN", message: "the patient's ABO group is not determined" });
   if (!ABO.includes(uAbo)) reasons.push({ code: "UNIT_GROUP_UNKNOWN", message: "the unit's ABO group is not recorded" });
 
-  const table = component === COMPONENT.RED_CELLS ? RED_CELL_COMPATIBILITY
-    : component === COMPONENT.PLASMA ? PLASMA_COMPATIBILITY
-      : null;
+  // Whole blood carries red cells AND plasma, so neither one-way table is safe on its own: an O unit's
+  // anti-A/anti-B would pass the red-cell table into an A patient. Only the identical group is.
+  const isWholeBlood = component === COMPONENT.WHOLE_BLOOD;
+  const isRedCells = component === COMPONENT.RED_CELLS || component === "prbc" || isWholeBlood;
+  const isPlasma = component === COMPONENT.PLASMA || component === "ffp" || component === "cryo";
+
+  const table = isWholeBlood ? WHOLE_BLOOD_COMPATIBILITY
+    : isRedCells ? RED_CELL_COMPATIBILITY
+      : isPlasma ? PLASMA_COMPATIBILITY
+        : null;
   if (!table) {
-    // Platelets and anything else: this module will not guess a compatibility direction.
+    // Platelets, SDP and anything else: this module will not guess a compatibility direction.
     reasons.push({ code: "COMPONENT_NOT_SUPPORTED", message: `compatibility for component "${unit && unit.component}" is not modelled here and must be determined by the blood bank` });
   }
 
   if (table && ABO.includes(pAbo) && ABO.includes(uAbo) && !table[pAbo].includes(uAbo)) {
     reasons.push({
       code: "ABO_INCOMPATIBLE",
-      message: `${component === COMPONENT.PLASMA ? "plasma" : "red cells"} of group ${uAbo} must never be given to a group ${pAbo} patient`,
+      message: `${isWholeBlood ? "whole blood" : isPlasma ? "plasma" : "red cells"} of group ${uAbo} must never be given to a group ${pAbo} patient`,
     });
   }
 
   // RhD. A D-negative patient given D-positive cells risks alloimmunisation, which matters most for
   // anyone who could become pregnant. Whether that is ever acceptable is site policy, so it is
   // reported as a distinct reason and the caller's policy decides, but it defaults to blocking.
-  if (component === COMPONENT.RED_CELLS && pRh === "negative" && uRh === "positive") {
+  if (isRedCells && pRh === "negative" && uRh === "positive") {
     if (!opts.allowRhDPositiveToNegative) {
       reasons.push({ code: "RHD_MISMATCH", message: "a D-negative patient must not receive D-positive red cells without an explicit blood bank policy decision" });
     }
   }
-  if (component === COMPONENT.RED_CELLS && !RHD.includes(pRh)) {
+  if (isRedCells && !RHD.includes(pRh)) {
     reasons.push({ code: "PATIENT_RHD_UNKNOWN", message: "the patient's RhD type is not determined" });
   }
 

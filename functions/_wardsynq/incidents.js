@@ -33,8 +33,8 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import {
-  SEVERITY, LIKELIHOOD, STATE, IncidentError,
-  report, triage, recordRCA, addCAPA, completeCAPA, close, reportingHealth,
+  SEVERITY, LIKELIHOOD, STATE, CATEGORIES, SIGNAL_SOURCES, IncidentError,
+  report, triage, confirm, stageOf, recordRCA, addCAPA, completeCAPA, close, reportingHealth,
 } from "../../wardsynq/wardsynq-incidents.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -122,11 +122,26 @@ async function reportIncident(request, env, ctx) {
       // was asked for - the engine itself refuses a named report with no reporter.
       reportedBy: ctx.anonymous ? null : (str(ctx.reportedBy) || resolved.actor.id),
       patientId: ctx.patientId || null, likelihood: ctx.likelihood || null,
-      contributingFactors: ctx.contributingFactors || [], now: at,
+      contributingFactors: ctx.contributingFactors || [], category: ctx.category || null,
+      source: ctx.source || null, now: at,
     });
   } catch (e) {
     if (e instanceof IncidentError) return { ...base, ok: false, status: 422, error: e.code, detail: e.message, written: 0 };
     throw e;
+  }
+
+  /* A SIGNAL POINTS AT A REAL RECORD. A link to an override or a critical result loop that does not
+   * exist would send the investigator looking for evidence that was never there, so the source is
+   * read (under this actor's own read scope) before anything is written. */
+  if (draft.source) {
+    let src;
+    try { src = await svc.get(draft.source.resourceType, draft.source.id); }
+    catch (e) {
+      if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "source_not_readable", written: 0 };
+      return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+    }
+    if (!src) return { ...base, ok: false, status: 404, error: "source_not_found", written: 0 };
+    if (!draft.patientId && src.patientId) draft.patientId = src.patientId;
   }
 
   const id = incidentIdFor((mig && mig.tenantId) || "", at, draft.id);
@@ -141,6 +156,33 @@ async function reportIncident(request, env, ctx) {
     if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "version_conflict", written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
   }
+}
+
+/** A signal is a report linked to the record that prompted it. ctx: reportIncident's, plus source {resourceType, id}. */
+async function signalIncident(request, env, ctx) {
+  const mig = ctx.migration;
+  if (!ctx.source || !str(ctx.source.resourceType) || !str(ctx.source.id)) {
+    return { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null, ok: false, status: 422, error: "source_required", detail: `a signal names its source: ${SIGNAL_SOURCES.join(", ")}`, written: 0 };
+  }
+  return reportIncident(request, env, ctx);
+}
+
+/**
+ * The confirmation decision. ctx: { migration, incidentId, outcome, reason, duplicateOf?, category?, by, ... }
+ * A duplicate must name an incident that exists: "duplicate of something" is a rejection with no trail.
+ */
+async function confirmIncident(request, env, ctx) {
+  if (ctx.migration && ctx.migration.mode !== "off" && ctx.outcome === "duplicate" && str(ctx.duplicateOf)) {
+    const { svc, error } = await open(request, env, ctx, "record:read");
+    if (error) return { ...error, written: 0 };
+    let other;
+    try { other = await svc.get(TYPE, str(ctx.duplicateOf)); } catch (e) { other = null; }
+    if (!other) return { ok: false, status: 404, error: "duplicate_not_found", written: 0 };
+  }
+  return mutate(request, env, ctx, (draft) => confirm(draft, {
+    outcome: ctx.outcome, reason: ctx.reason, duplicateOf: str(ctx.duplicateOf) || null,
+    category: ctx.category || null, by: str(ctx.by), now: new Date().toISOString(),
+  }));
 }
 
 /** ctx: { migration, incidentId, likelihood, triagedBy, actorDeps, recordDeps } */
@@ -185,7 +227,7 @@ async function incidentLog(request, env, ctx) {
   if (error) return { ...base, ...error, incidents: [] };
 
   let rows;
-  try { rows = await svc.list(TYPE, 200); }
+  try { rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; } // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), incidents: [] }; }
 
   let incidents = (rows || []).filter(Boolean);
@@ -194,10 +236,11 @@ async function incidentLog(request, env, ctx) {
   }
   incidents.sort((a, b) => String(b.reportedAt || "").localeCompare(String(a.reportedAt || "")));
 
-  return { ...base, ok: true, incidents, health: reportingHealth(incidents) };
+  incidents = incidents.map((i) => ({ ...i, stage: stageOf(i) }));
+  return { ...base, ok: true, incidents, health: reportingHealth(incidents), categories: CATEGORIES };
 }
 
 export {
   SEVERITY, LIKELIHOOD, STATE,
-  incidentIdFor, reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog,
+  incidentIdFor, reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog,
 };

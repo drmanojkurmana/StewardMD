@@ -229,6 +229,22 @@ test("POST /onboard/wardsynq: requires a Firebase account (a staff session canno
   assert.equal(r.error, "account_required");
 });
 
+test("SECURITY: only a StewardMD platform operator may create a hospital under a chosen id or run the legacy migration", async () => {
+  reset();
+  const squat = await api("/onboard/hospital", "POST", { name: "Squat", hospitalId: "gh-real-hospital" }, asFirebase(OWNER_EMAIL));
+  assert.equal(squat.__status, 403, JSON.stringify(squat));
+  assert.ok(!docs.has("q_orgs/gh-real-hospital"), "nothing was created under the chosen id");
+  const plain = await api("/onboard/hospital", "POST", { name: "My Hospital" }, asFirebase(OWNER_EMAIL));
+  assert.equal(plain.__status, 200, "an ordinary sign-up with no chosen id still works: " + JSON.stringify(plain));
+  const bf = await api("/migrate/backfill", "POST", { hospitalId: "gh-real-hospital" }, asFirebase(OWNER_EMAIL));
+  assert.equal(bf.__status, 403, JSON.stringify(bf));
+
+  ENV.OWNER_EMAILS = OWNER_EMAIL;
+  const op = await api("/migrate/backfill", "POST", { hospitalId: "gh-real-hospital" }, asFirebase(OWNER_EMAIL));
+  assert.equal(op.__status, 200, JSON.stringify(op));
+  assert.equal(op.org.id, "gh-real-hospital");
+});
+
 test("POST /onboard/wardsynq: 503s when the record store isn't configured", async () => {
   reset();
   delete ENV.CONNECT_DB;
@@ -265,6 +281,90 @@ test("POST /ward/update: renames the ward", async () => {
   assert.equal(r.__status, 200, JSON.stringify(r));
   assert.equal(r.ok, true);
   assert.equal(r.ward.name, "North 2");
+  assert.equal(r.ward.code, "N", "fields not sent are kept, not blanked");
+});
+
+test("SECURITY: an admin of one hospital cannot edit another hospital's ward", async () => {
+  reset();
+  seedOrg("org-a", OWNER, "Hospital A");
+  const OTHER = "other-owner@example.test";
+  seedOrg("org-b", uidFor(OTHER), "Hospital B");
+  const wardA = await api("/ward", "POST", { orgId: "org-a", name: "North", code: "N" }, asFirebase(OWNER_EMAIL));
+  assert.equal(wardA.__status, 200, JSON.stringify(wardA));
+  const r = await api("/ward/update", "POST", { orgId: "org-b", wardId: wardA.ward.id, name: "Taken", active: false }, asFirebase(OTHER));
+  assert.equal(r.__status, 404, JSON.stringify(r));
+  const list = await api("/wards?orgId=org-a", "GET", null, asFirebase(OWNER_EMAIL));
+  assert.equal(list.wards.find((w) => w.id === wardA.ward.id).name, "North");
+});
+
+/* ---- BUG-MU2PHANW: POST /api/queue/org/delete (Remove hospital) --------------------------------- */
+const orgFields = (id) => (docs.get(`q_orgs/${id}`) || {}).fields || {};
+const removalRows = (id) => [...docs.entries()].filter(([p, d]) => p.startsWith("q_events/") && d.fields.hospitalId === id && d.fields.action === "org:delete");
+
+test("REMOVE HOSPITAL: POST /api/queue/org/delete with no session is 401 and writes nothing", async () => {
+  reset();
+  seedOrg("org-rm0", OWNER, "Removal Test Hospital");
+  const r = await api("/org/delete", "POST", { orgId: "org-rm0", confirm: "DELETE" });
+  assert.equal(r.__status, 401, JSON.stringify(r));
+  assert.equal(orgFields("org-rm0").deleted, undefined);
+  assert.equal(removalRows("org-rm0").length, 0);
+});
+
+test("REMOVE HOSPITAL: an admin who is not the owner gets 403 owner_only and nothing is written", async () => {
+  reset();
+  seedOrg("org-rm1", OWNER, "Removal Test Hospital");
+  seedMember("org-rm1", MEMBER_UID, "admin");
+  const r = await api("/org/delete", "POST", { orgId: "org-rm1", confirm: "DELETE" }, asFirebase(MEMBER_EMAIL));
+  assert.equal(r.__status, 403, JSON.stringify(r));
+  assert.equal(r.error, "owner_only");
+  assert.equal(orgFields("org-rm1").deleted, undefined);
+  assert.equal(removalRows("org-rm1").length, 0);
+});
+
+test("REMOVE HOSPITAL: the owner of another hospital is refused (403/404) and nothing is written", async () => {
+  reset();
+  seedOrg("org-rm2", OWNER, "Removal Test Hospital");
+  const OTHER = "other-owner@example.test";
+  seedOrg("org-rm2b", uidFor(OTHER), "Another Test Hospital");
+  const r = await api("/org/delete", "POST", { orgId: "org-rm2", confirm: "DELETE" }, asFirebase(OTHER));
+  assert.ok(r.__status === 403 || r.__status === 404, JSON.stringify(r));
+  assert.equal(orgFields("org-rm2").deleted, undefined);
+  const ghost = await api("/org/delete", "POST", { orgId: "org-does-not-exist", confirm: "DELETE" }, asFirebase(OTHER));
+  assert.equal(ghost.__status, 404, JSON.stringify(ghost));
+});
+
+test("REMOVE HOSPITAL: the owner must type DELETE exactly; anything else is 422 and writes nothing", async () => {
+  reset();
+  seedOrg("org-rm3", OWNER, "Removal Test Hospital");
+  for (const confirm of [undefined, "", "delete", "DELETE ", "yes"]) {
+    const r = await api("/org/delete", "POST", { orgId: "org-rm3", confirm }, asFirebase(OWNER_EMAIL));
+    assert.equal(r.__status, 422, JSON.stringify({ confirm, r }));
+    assert.equal(r.error, "confirm_required");
+  }
+  assert.equal(orgFields("org-rm3").deleted, undefined);
+  assert.equal(removalRows("org-rm3").length, 0);
+});
+
+test("REMOVE HOSPITAL: the owner with DELETE soft-deletes it, audited in the event-log chain, gone from GET /orgs, the document kept", async () => {
+  reset();
+  seedOrg("org-rm4", OWNER, "Removal Test Hospital");
+  seedOrg("org-keep", OWNER, "Kept Test Hospital");
+  const who = await api("/whoami?orgId=org-rm4", "GET", null, asFirebase(OWNER_EMAIL));
+  assert.equal(who.orgOwner, true, "whoami tells the Admin screen this account owns the hospital: " + JSON.stringify(who));
+  const r = await api("/org/delete", "POST", { orgId: "org-rm4", confirm: "DELETE" }, asFirebase(OWNER_EMAIL));
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  const f = orgFields("org-rm4");
+  assert.equal(f.deleted, true);
+  assert.equal(f.deletedBy, OWNER);
+  assert.equal(f.name, "Removal Test Hospital", "a soft delete: the hospital document and its fields are retained");
+  const rows = removalRows("org-rm4");
+  assert.equal(rows.length, 1, "exactly one audit row");
+  assert.equal(rows[0][1].fields.actor, OWNER);
+  assert.ok(rows[0][1].fields.rowHash && rows[0][1].fields.prevHash, "the row is on the hash chain (appendOrgAudit)");
+  const list = await api("/orgs", "GET", null, asFirebase(OWNER_EMAIL));
+  assert.deepEqual(list.orgs.map((o) => o.id), ["org-keep"], "the removed hospital left the list, the other stayed");
+  const member = await api("/whoami?orgId=org-keep", "GET", null, asFirebase(MEMBER_EMAIL));
+  assert.equal(member.orgOwner, undefined, "a non-owner is not told they own it");
 });
 
 test("GET /ward/list: still owned by the clinical block, not the admin-route not_found", async () => {

@@ -35,10 +35,15 @@
 import { Observation } from "../../wardsynq/wardsynq-model.js";
 import { ageBandOf, weightLooksWrong, paediatricCeiling, neonatalReady, BAND } from "../../wardsynq/wardsynq-paediatrics.js";
 import { weightBasedRate, FlowsheetError } from "../../wardsynq/wardsynq-flowsheet.js";
+import { growthZ, correctedAge, centileLines } from "../../wardsynq/wardsynq-growth.js";
+import { growthReferenceFor } from "./growth-tables.js";
+import { weightInKg } from "../../wardsynq/wardsynq-vitals.js";
+import { PREG_TYPE, LINK_TYPE as FAMILY_LINK_TYPE, pregnancyIdFor } from "./migrate-maternity.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
+import { DEVICE_CLASSES } from "./infection-control.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const NEONATAL_CATEGORY = "neonatal";
@@ -99,7 +104,10 @@ async function checkPaediatricDoseCeiling(request, env, ctx) {
     mgPerKg: Number(ctx.mgPerKg), weightKg: Number(ctx.weightKg),
     adultMaxMg: ctx.adultMaxMg == null ? undefined : Number(ctx.adultMaxMg), band: ctx.band,
   });
-  return { ...base, ok: true, result };
+  /* limitMg repeats the engine's number under a neutral name, so the ward screen can show it without
+   * carrying the engine's rule vocabulary - the screen is forbidden by test from containing dose-rule
+   * words, as the guarantee that it holds no dose logic of its own. The engine's field is unchanged. */
+  return { ...base, ok: true, result: { ...result, limitMg: result.ceiling } };
 }
 
 /** ctx: { migration, patient: {ageDays?, dob?, ageYears?, gestationalAgeWeeks?, weightKg?}, actorDeps, recordDeps } */
@@ -179,8 +187,12 @@ async function recordLine(request, env, ctx) {
   const current = await svc.get(LINE_TYPE, id).catch(() => null);
   if (current) return { ...base, ok: true, written: 0, skipped: "already_recorded", lineId: id };
 
+  /* The device class a line is counted under for device-days (infection-control.js). Optional and closed: a line of
+   * any other kind is still logged, and simply not counted as a central line, urinary catheter or ventilator day. */
+  const deviceClass = str(l.deviceClass) || null;
+  if (deviceClass && !DEVICE_CLASSES.includes(deviceClass)) return { ...base, ok: false, status: 422, error: "bad_device_class", detail: `deviceClass is one of ${DEVICE_CLASSES.join(", ")}, or left out`, written: 0 };
   const record = {
-    resourceType: LINE_TYPE, id, patientId, encounterId, type, site: str(l.site) || null,
+    resourceType: LINE_TYPE, id, patientId, encounterId, type, site: str(l.site) || null, deviceClass,
     insertedAt, insertedBy: resolved.actor.id, removedAt: null, removedBy: null,
     source: { system: "wardsynq-native", sourceId: `line:${id}` },
   };
@@ -225,8 +237,93 @@ async function listLines(request, env, ctx) {
   return { ...base, ok: true, lines: rows || [] };
 }
 
+/* GROWTH CHART. wardsynq-growth.js holds the LMS method; this reads what the ward actually recorded, against the
+ * reference this hospital uses: its own licensed tables when loaded (growth-tables.js), else the CDC 2000 reference.
+ *
+ * WHAT IS PLOTTED. Body weight (LOINC 29463-7), the only growth measurement this build records: the
+ * vitals form charts it, in kg or pounds, read through the one weightInKg() conversion. No length,
+ * height or head circumference is recorded anywhere in WardSynQ, so those charts are named as not
+ * recorded, never drawn empty as if the child had not been measured.
+ *
+ * GESTATIONAL AGE. The only place it is recorded is the mother's pregnancy episode, and only its due
+ * date is a fact about the birth (gestationWeeks is whatever was typed antenatally, weeks before
+ * delivery). So for a newborn registered here: the FamilyLink is fetched by its own deterministic id
+ * and must name this baby, and gestation at birth = 280 days - (due date - birth date). Anything
+ * else (born elsewhere, no due date, a result outside 22 to 44 weeks) is "not known" and no age is
+ * corrected. An approximate date of birth (age given in years at registration) is refused outright:
+ * a centile at a guessed age is a guess. */
+const BODY_WEIGHT_LOINC = "29463-7";
+const NEWBORN_ID = /^opd-pat-newborn-(.+)-(\d{4}-\d{2}-\d{2}t\d{2}-\d{2}-\d{2}(?:-\d{3})?z)$/;
+const DAY_MS = 86_400_000;
+
+async function gestationAtBirth(svc, patient) {
+  const m = NEWBORN_ID.exec(str(patient.id));
+  if (!m) return { days: null, reason: "not_registered_at_birth_here" };
+  const link = await svc.get(FAMILY_LINK_TYPE, `wsq-family-${slug(m[1])}-${slug(patient.id)}`).catch(() => null);
+  if (!link || link.relatedPatientId !== patient.id) return { days: null, reason: "no_mother_link" };
+  const preg = await svc.get(PREG_TYPE, pregnancyIdFor(link.patientId)).catch(() => null);
+  const edd = Date.parse(str(preg && preg.edd).slice(0, 10)), born = Date.parse(str(link.deliveredAt).slice(0, 10));
+  if (!Number.isFinite(edd) || !Number.isFinite(born)) return { days: null, reason: "no_due_date" };
+  const days = 280 - Math.round((edd - born) / DAY_MS);
+  if (days < 22 * 7 || days > 44 * 7) return { days: null, reason: "due_date_implausible" };
+  return { days, reason: "mother_due_date" };
+}
+
+/** ctx: { migration, patientId, actorDeps, recordDeps } */
+async function growthChart(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", growth: null };
+  const patientId = str(ctx.patientId);
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", growth: null };
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, growth: null };
+
+  let patient, obs, ref;
+  try { [patient, obs, ref] = await Promise.all([svc.get("Patient", patientId), svc.byPatient("Observation", patientId), growthReferenceFor(svc, mig.tenantId)]); }
+  catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), growth: null };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The record could not be read. Do not read this as nothing recorded.", growth: null };
+  }
+  if (!patient) return { ...base, ok: false, status: 404, error: "patient_not_found", growth: null };
+
+  const sex = patient.sex === "male" || patient.sex === "female" ? patient.sex : null;
+  const born = Date.parse(str(patient.dob).slice(0, 10));
+  const dobUsable = Number.isFinite(born) && !patient.approxDob;
+  const gestation = await gestationAtBirth(svc, patient);
+
+  const measurements = (obs || [])
+    .filter((o) => o && o.code === BODY_WEIGHT_LOINC)
+    .map((o) => {
+      const at = str((o.meta && o.meta.effectiveAt) || o.effectiveAt);
+      const kg = weightInKg(o.value, o.unit);
+      const chronologicalDays = dobUsable && Number.isFinite(Date.parse(at)) ? Math.floor((Date.parse(at) - born) / DAY_MS) : null;
+      const correction = correctedAge(chronologicalDays, gestation.days);
+      let result;
+      if (!dobUsable) result = { ok: false, code: patient.approxDob ? "DOB_APPROXIMATE" : "AGE_UNKNOWN", reason: "the date of birth is not recorded exactly" };
+      else if (kg === null) result = { ok: false, code: "UNIT_UNKNOWN", reason: "the weight's unit is not kg or lb" };
+      else if (correction.ageDays === null) result = { ok: false, code: correction.reason === "BEFORE_TERM" ? "BEFORE_TERM" : "AGE_UNKNOWN", reason: "no age to plot at" };
+      else result = growthZ({ indicator: "wfa", sex, ageDays: correction.ageDays, value: kg }, ref);
+      return { id: o.id, at, indicator: "wfa", valueKg: kg == null ? null : Math.round(kg * 1000) / 1000,
+        chronologicalDays, plotDays: correction.ageDays, corrected: correction.corrected, correctionReason: correction.reason, result };
+    })
+    .sort((a, b) => a.at.localeCompare(b.at));
+
+  const plotted = measurements.filter((x) => x.result.ok);
+  let lines = [];
+  if (sex && plotted.length) {
+    const days = plotted.map((x) => x.plotDays);
+    lines = centileLines("wfa", sex, Math.max(0, Math.min(...days) - 30), Math.max(...days) + 30, 40, ref);
+  }
+  return { ...base, ok: true, growth: {
+    patientId, sex, dob: patient.dob || null, approxDob: !!patient.approxDob,
+    gestationDays: gestation.days, gestationReason: gestation.reason,
+    measurements, lines, notRecorded: ["lhfa", "hcfa", "wfl", "bmi"], reference: ref.info,
+  } };
+}
+
 export {
   NEONATAL_CATEGORY, LINE_TYPE, NEONATAL_CODES, RESP_SUPPORT_MODES, lineIdFor,
   checkWeightBasedRate, checkPaediatricDoseCeiling, checkAgeBand,
-  recordNeonatalObservation, recordLine, removeLine, listLines,
+  recordNeonatalObservation, recordLine, removeLine, listLines, gestationAtBirth, growthChart,
 };

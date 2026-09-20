@@ -69,12 +69,30 @@ public class ConnectBrowserPlugin extends Plugin {
     private Dialog dialog;
     private WebView webView;
     private TextView subtitleLabel;
+    private Button backButton;
     private TextView bannerLabel;
     private Button doneButton;
+    private Button skipButton;
     private View bannerView;
     private View touchBlockerView;
 
     private String mode = "login";
+    private boolean compact = false;
+    private boolean hidden = false;
+    private View rootLayout; // dialog root, kept so hidden mode can take its alpha to 0 (see applyWindowLayout)
+    // Automatic sign-in detection state (see maybeAutoLoggedIn). Reset with every browser open.
+    private boolean sawPasswordField = false;
+    private boolean autoLoginNotified = false;
+    private int signedInTicks = 0; // consecutive polls that looked signed in; two are needed
+    private String openedURL = ""; // the address the browser was opened at; still there = not signed in
+    private String loginOrigin = ""; // origin the browser was opened at; landing elsewhere = signed in
+    /* A SIGN-IN IS NOT ALWAYS A NAVIGATION. maybeAutoLoggedIn ran only from onPageFinished, which
+     * misses the EMR that signs the doctor in on the same page and swaps the body in place (no later
+     * onPageFinished ever arrives, so the "password field is gone" second look never happens and the
+     * sheet waits forever). Found on iOS against GHIS, 2026-09-15; the same gap was here. The browser
+     * now also watches itself while it waits. Idempotent: autoLoginNotified still fires once. */
+    private android.os.Handler loginPoll;
+    private Runnable loginPollTick;
     private Set<String> allowedOrigins = Collections.emptySet();
     private String hostTitle = "";
     private String pendingLateInitScript; // non-null only when DOCUMENT_START_SCRIPT is unsupported
@@ -137,6 +155,13 @@ public class ConnectBrowserPlugin extends Plugin {
                 teardown(false);
                 allowedOrigins = new HashSet<>(origins);
                 mode = "login";
+                compact = false;
+                hidden = call.getBoolean("hidden", false);
+                sawPasswordField = false;
+                autoLoginNotified = false;
+                signedInTicks = 0;
+                openedURL = urlStr;
+                loginOrigin = originOf(Uri.parse(urlStr));
                 hostTitle = title != null ? title : hostOf(urlStr);
                 synchronized (requestLog) {
                     requestLog.clear();
@@ -171,6 +196,7 @@ public class ConnectBrowserPlugin extends Plugin {
                 buildDialog(activity);
                 webView.loadUrl(urlStr);
                 dialog.show();
+                startLoginPoll(webView);
 
                 JSObject opened = new JSObject();
                 opened.put("initScriptMode", initMode);
@@ -179,6 +205,8 @@ public class ConnectBrowserPlugin extends Plugin {
 
                 JSObject ret = new JSObject();
                 ret.put("ok", true);
+                ret.put("hidden", hidden);
+                ret.put("contract", "hidden-v2");
                 call.resolve(ret);
             }
         });
@@ -357,6 +385,8 @@ public class ConnectBrowserPlugin extends Plugin {
         }
         final String banner = call.getString("banner");
         final JSArray originsArr = call.getArray("origins");
+        final boolean newCompact = call.getBoolean("compact", false);
+        final Boolean newHidden = call.getBoolean("hidden");
         final Activity activity = getActivity();
         if (activity == null) {
             call.reject("no activity");
@@ -366,6 +396,10 @@ public class ConnectBrowserPlugin extends Plugin {
             @Override
             public void run() {
                 mode = newMode;
+                compact = newCompact;
+                if (newHidden != null) hidden = newHidden;
+                // Entering login mode arms the sign-in watcher; leaving it disarms.
+                if ("login".equals(mode) && !autoLoginNotified) startLoginPoll(webView); else if (!"login".equals(mode)) stopLoginPoll();
                 if (originsArr != null) {
                     try {
                         Set<String> next = new HashSet<>();
@@ -376,6 +410,7 @@ public class ConnectBrowserPlugin extends Plugin {
                 applyModeUi(banner);
                 JSObject ret = new JSObject();
                 ret.put("ok", true);
+                ret.put("hidden", hidden);
                 call.resolve(ret);
             }
         });
@@ -428,6 +463,7 @@ public class ConnectBrowserPlugin extends Plugin {
         root.setOrientation(LinearLayout.VERTICAL);
         root.setBackgroundColor(Color.WHITE);
         root.setFitsSystemWindows(true);
+        rootLayout = root;
 
         int pad = dp(activity, 12);
 
@@ -452,6 +488,7 @@ public class ConnectBrowserPlugin extends Plugin {
 
         TextView titleLabel = new TextView(activity);
         titleLabel.setText(hostTitle);
+        titleLabel.setTextColor(Color.parseColor("#14202B"));
         titleLabel.setTextSize(15);
         titleLabel.setTypeface(null, Typeface.BOLD);
         titleLabel.setGravity(Gravity.CENTER);
@@ -460,7 +497,7 @@ public class ConnectBrowserPlugin extends Plugin {
 
         subtitleLabel = new TextView(activity);
         subtitleLabel.setTextSize(11);
-        subtitleLabel.setTextColor(Color.DKGRAY);
+        subtitleLabel.setTextColor(Color.parseColor("#5A7184"));
         subtitleLabel.setGravity(Gravity.CENTER);
 
         titleBox.addView(titleLabel);
@@ -468,7 +505,14 @@ public class ConnectBrowserPlugin extends Plugin {
 
         doneButton = new Button(activity);
         doneButton.setText("Done, I'm signed in");
-        flattenButton(doneButton);
+        /* THIS BUTTON WAS INVISIBLE. The dialog uses Theme_Black, whose default button text is WHITE,
+         * and the header is white: Cancel and Done were white-on-white. A doctor who signed in saw a
+         * blank strip, tapped nothing, and the agent looked dead. Both buttons now state their own
+         * colours; Done is filled so it reads as the action. Sign-in is also detected automatically
+         * (see maybeAutoLoggedIn) so the tap is a fallback, not the only way forward. */
+        doneButton.setAllCaps(false);
+        doneButton.setTextColor(Color.WHITE);
+        doneButton.setBackgroundColor(Color.parseColor("#0E7C66"));
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -478,26 +522,64 @@ public class ConnectBrowserPlugin extends Plugin {
             }
         });
 
+        /* NO WAY BACK. The doctor is asked to show the agent a view ("open the discharge summary,
+         * then tap Done"), but reaching it usually means leaving the screen the agent left them on,
+         * and this header had only Cancel and Done: a popup or a sub-page was a dead end, and the
+         * ask could not be answered at all. Found on GHIS 2026-09-12. Back walks the EMR's own
+         * history; it is hidden in agent mode, where the agent drives. */
+        backButton = new Button(activity);
+        backButton.setText("Back");
+        flattenButton(backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { goBackIfPossible(); }
+        });
+
+        // guide-only escape hatch: the agent's expected screen isn't there, let the doctor say so
+        // instead of hunting for it. Visible only in guide mode (see applyModeUi).
+        skipButton = new Button(activity);
+        skipButton.setText("Not in my EMR");
+        flattenButton(skipButton);
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSObject data = new JSObject();
+                data.put("url", webView != null && webView.getUrl() != null ? webView.getUrl() : "");
+                notifyListeners("guideSkip", data);
+            }
+        });
+
         header.addView(cancelButton);
+        header.addView(backButton);
         header.addView(titleBox, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        header.addView(skipButton);
         header.addView(doneButton);
 
         LinearLayout banner = new LinearLayout(activity);
         banner.setOrientation(LinearLayout.HORIZONTAL);
         banner.setGravity(Gravity.CENTER_VERTICAL);
-        banner.setBackgroundColor(Color.parseColor("#FF9500"));
-        banner.setPadding(pad, dp(activity, 6), pad, dp(activity, 6));
+        banner.setBackgroundColor(Color.parseColor("#0E7C66"));
+        banner.setPadding(pad, dp(activity, 8), pad, dp(activity, 8));
         banner.setVisibility(View.GONE);
         bannerView = banner;
 
         bannerLabel = new TextView(activity);
         bannerLabel.setTextColor(Color.WHITE);
         bannerLabel.setTextSize(13);
+        bannerLabel.setTypeface(null, Typeface.BOLD);
 
         Button stopButton = new Button(activity);
         stopButton.setText("Stop");
         stopButton.setTextColor(Color.WHITE);
-        stopButton.setBackgroundColor(Color.TRANSPARENT);
+        stopButton.setTextSize(12);
+        stopButton.setTypeface(null, Typeface.BOLD);
+        android.graphics.drawable.GradientDrawable stopBg = new android.graphics.drawable.GradientDrawable();
+        stopBg.setColor(Color.parseColor("#AB1C2C"));
+        stopBg.setCornerRadius(dp(activity, 14));
+        stopButton.setBackground(stopBg);
+        stopButton.setPadding(dp(activity, 14), dp(activity, 4), dp(activity, 14), dp(activity, 4));
+        stopButton.setMinWidth(0);
+        stopButton.setMinimumWidth(0);
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -536,6 +618,19 @@ public class ConnectBrowserPlugin extends Plugin {
         if (dialog.getWindow() != null) {
             dialog.getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
+        /* The phone's own back gesture walks the EMR's history, like every other browser. Without
+         * this it fell through to the dialog and ended the whole connection, which is the opposite
+         * of what a doctor backing out of a popup means. With nothing to go back to it is ignored;
+         * Cancel is the only way out, and in agent mode the doctor is not driving at all. */
+        dialog.setOnKeyListener(new android.content.DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(android.content.DialogInterface d, int keyCode, android.view.KeyEvent event) {
+                if (keyCode != android.view.KeyEvent.KEYCODE_BACK || event.getAction() != android.view.KeyEvent.ACTION_UP) return false;
+                if ("agent".equals(mode)) return true;
+                goBackIfPossible();
+                return true;
+            }
+        });
         dialog.setOnCancelListener(new android.content.DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(android.content.DialogInterface d) {
@@ -559,6 +654,9 @@ public class ConnectBrowserPlugin extends Plugin {
             doneButton.setVisibility(agent ? View.GONE : View.VISIBLE);
             doneButton.setText(guide ? "Done" : "Done, I'm signed in");
         }
+        if (skipButton != null) skipButton.setVisibility(guide ? View.VISIBLE : View.GONE);
+        // The doctor navigates in login and guide mode; in agent mode the agent drives.
+        if (backButton != null) backButton.setVisibility(agent ? View.GONE : View.VISIBLE);
         if (bannerView != null) bannerView.setVisibility(agent || guide ? View.VISIBLE : View.GONE);
         if (bannerLabel != null) {
             bannerLabel.setText(bannerText != null
@@ -566,11 +664,94 @@ public class ConnectBrowserPlugin extends Plugin {
                 : "StewardMD is reading " + hostTitle + " on your behalf. Tap Stop to end.");
         }
         if (touchBlockerView != null) touchBlockerView.setVisibility(agent ? View.VISIBLE : View.GONE);
+        applyWindowLayout();
+    }
+
+    /* Compact agent mode: shrink the dialog window to the top 52% of the screen so the doctor can
+     * see (and touch) their own Activity underneath while the agent drives in the strip above.
+     * FLAG_NOT_TOUCH_MODAL lets touches outside the window fall through; idempotent, since setMode
+     * is called repeatedly (banner text refreshes) with the same mode/compact pair. */
+    private void applyWindowLayout() {
+        if (dialog == null) return;
+        Window window = dialog.getWindow();
+        if (window == null) return;
+        /* HIDDEN AGENT READ. Full-size window so the hospital page lays out exactly as it would on
+         * screen (a 1x1 window gives it a 1x0 viewport and collapses every responsive layout), but
+         * fully transparent and untouchable so the doctor keeps seeing and using their own screen. */
+        if (hidden) {
+            window.setGravity(Gravity.NO_GRAVITY);
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            window.addFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                    | android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    | android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.setDimAmount(0f);
+            window.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(Color.TRANSPARENT));
+            /* DECOR ALPHA IS NOT ENOUGH. A Dialog on Theme_Black_NoTitleBar_Fullscreen keeps an opaque
+             * SurfaceFlinger window on Android 14/15 (Pixel 9): fading the decor view still left the
+             * full-screen browser over the live dashboard. The window attributes' own alpha is what
+             * makes the surface transparent; the white root layout is faded too. */
+            android.view.WindowManager.LayoutParams lp = window.getAttributes();
+            lp.alpha = 0f;
+            window.setAttributes(lp);
+            View decor = window.getDecorView();
+            if (decor != null) decor.setAlpha(0f);
+            if (rootLayout != null) rootLayout.setAlpha(0f);
+            return;
+        }
+        /* LEAVING HIDDEN MODE IS UNCONDITIONAL. The dialog and its window are reused across opens, so
+         * the transparent/untouchable state of a hidden read survives into the next visible one: the
+         * doctor was shown an invisible sign-in page that refused every tap (owner, 2026-09-14).
+         * Never guard this on the current alpha - always restore before laying the window out. */
+        View decor = window.getDecorView();
+        if (decor != null) decor.setAlpha(1f);
+        if (rootLayout != null) rootLayout.setAlpha(1f);
+        android.view.WindowManager.LayoutParams lp = window.getAttributes();
+        lp.alpha = 1f;
+        window.setAttributes(lp);
+        window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        Activity activity = getActivity();
+        boolean useCompact = compact && "agent".equals(mode);
+        if (useCompact && activity != null) {
+            int heightPx = activity.getResources().getDisplayMetrics().heightPixels;
+            window.setGravity(Gravity.TOP);
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, Math.round(heightPx * 0.52f));
+            window.addFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+            window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        } else {
+            window.setGravity(Gravity.NO_GRAVITY);
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+        }
+    }
+
+    /** One step back in the EMR's own history. Never closes the browser: Cancel does that. */
+    private void goBackIfPossible() {
+        /* NEVER BACK INTO THE SIGN-IN. Walking history past the first screen after sign-in lands on
+         * the hospital's login page (GHIS: the SSO form) and reads as being signed out mid-ask
+         * (owner, 2026-09-13). The previous entry is checked first: a login-looking page is refused. */
+        try {
+            if (webView == null || !webView.canGoBack()) return;
+            android.webkit.WebBackForwardList list = webView.copyBackForwardList();
+            int i = list.getCurrentIndex();
+            if (i > 0) {
+                android.webkit.WebHistoryItem prev = list.getItemAtIndex(i - 1);
+                String u = prev != null && prev.getUrl() != null ? prev.getUrl().toLowerCase() : "";
+                if (u.contains("login") || u.contains("signin") || u.contains("sign-in") || u.contains("logout") || u.contains("/sso") || u.contains("auth")) {
+                    android.widget.Toast.makeText(getActivity(), "This is the first screen after sign-in.", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            webView.goBack();
+        } catch (Exception ignored) {}
     }
 
     private static void flattenButton(Button b) {
         b.setBackgroundColor(Color.TRANSPARENT);
         b.setAllCaps(false);
+        // Theme_Black's default text is white and this header is white: state the colour explicitly.
+        b.setTextColor(Color.parseColor("#14202B"));
     }
 
     private static int dp(Context c, int v) {
@@ -613,7 +794,93 @@ public class ConnectBrowserPlugin extends Plugin {
                 data.put("mainFrame", true);
                 notifyListeners("navigated", data);
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                maybeAutoLoggedIn(view, url);
+            }
         };
+    }
+
+    /* SIGN-IN DETECTED WITHOUT A TAP.
+     *
+     * The flow used to wait for the doctor to press "Done, I'm signed in". That button was invisible
+     * (white on white), so a doctor who had signed in watched an agent that appeared to do nothing.
+     * Even with the colours fixed, asking a human to announce something the page already shows is a
+     * step worth removing.
+     *
+     * The signal is the password field itself: a login page has one, the screen after sign-in does
+     * not. Once this browser has seen a password field and a later page has none, sign-in happened.
+     * A stored session or SSO may never show a password box at all, so landing on another origin or
+     * another finished page with no visible password box counts too (mirrors iOS). Fires at most
+     * once per session, only in login mode, and the Done button still works for the EMR that keeps
+     * a password field on every page. No credential is read - only whether such a field EXISTS. */
+    /** Watch for a sign-in that never fires onPageFinished. Stops at the first answer, or with the browser. */
+    private void startLoginPoll(final WebView view) {
+        stopLoginPoll();
+        if (view == null) return;
+        loginPoll = new android.os.Handler(android.os.Looper.getMainLooper());
+        loginPollTick = new Runnable() {
+            @Override
+            public void run() {
+                if (autoLoginNotified || !"login".equals(mode)) { stopLoginPoll(); return; }
+                maybeAutoLoggedIn(view, view.getUrl());
+                if (loginPoll != null) loginPoll.postDelayed(this, 1500);
+            }
+        };
+        loginPoll.postDelayed(loginPollTick, 1500);
+    }
+
+    private void stopLoginPoll() {
+        if (loginPoll != null && loginPollTick != null) loginPoll.removeCallbacks(loginPollTick);
+        loginPoll = null;
+        loginPollTick = null;
+    }
+
+    private void maybeAutoLoggedIn(final WebView view, final String url) {
+        if (autoLoginNotified || !"login".equals(mode) || view == null) return;
+        try {
+            /* SIGNED IN = a finished page with no VISIBLE password box. Hidden password inputs
+             * (change-password modals, re-auth forms) used to count and could hold the poll at
+             * "still signing in" forever. Mirrors ConnectBrowserPlugin.swift. */
+            view.evaluateJavascript(
+                "(function(){try{if(document.readyState!=='complete')return 'loading';var all=document.querySelectorAll('input[type=\"password\"]');for(var i=0;i<all.length;i++){var e=all[i];var r=e.getBoundingClientRect();if(r.width>0&&r.height>0&&e.offsetParent)return '1'}return '0'}catch(e){return 'e'}})()",
+                new android.webkit.ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String value) {
+                        if (value != null && value.contains("1")) {
+                            sawPasswordField = true;
+                            signedInTicks = 0;
+                            return;
+                        }
+                        if (value == null || !value.contains("0")) { signedInTicks = 0; return; } // loading / could not tell: say nothing
+                        /* THREE WAYS TO KNOW. (1) The doctor typed into a password box and it is gone.
+                         * (2) COOKIE AUTO-LOGIN onto another allowed origin (sign-in host -> data host).
+                         * (3) COOKIE AUTO-LOGIN ON THE SAME ORIGIN: the browser was opened at the sign-in
+                         * address and now sits on a different, finished page with no password box - the
+                         * module picker after a stored session. (2) and (3) were missing, so a doctor
+                         * whose session was still valid sat on a signed-in page with the app waiting for
+                         * a password field that would never appear (Pixel 9, 2026-09-18). Two consecutive
+                         * ticks so a page that has not drawn its form yet is not mistaken for one. */
+                        String current = view.getUrl() != null ? view.getUrl() : (url != null ? url : "");
+                        String landed = "";
+                        try { landed = originOf(Uri.parse(current)); } catch (Exception ignored) {}
+                        boolean isHttps = current.startsWith("https://");
+                        boolean movedOff = isHttps && loginOrigin != null && !loginOrigin.isEmpty() && !landed.equals(loginOrigin);
+                        boolean movedOn = isHttps && openedURL != null && !openedURL.isEmpty() && !current.equals(openedURL);
+                        if (!(sawPasswordField || movedOff || movedOn)) { signedInTicks = 0; return; }
+                        signedInTicks++;
+                        if (signedInTicks < 2 || autoLoginNotified) return;
+                        autoLoginNotified = true;
+                        stopLoginPoll();
+                        JSObject data = new JSObject();
+                        data.put("url", current);
+                        data.put("auto", true);
+                        notifyListeners("loggedIn", data);
+                    }
+                });
+        } catch (Exception ignored) {}
     }
 
     // Returns true to BLOCK the navigation (shouldOverrideUrlLoading semantics: true = we handled it, don't load).
@@ -634,6 +901,7 @@ public class ConnectBrowserPlugin extends Plugin {
     }
 
     private void teardown(boolean notify) {
+        stopLoginPoll();
         boolean had = dialog != null;
         if (dialog != null) {
             try {
@@ -651,6 +919,7 @@ public class ConnectBrowserPlugin extends Plugin {
         doneButton = null;
         bannerView = null;
         touchBlockerView = null;
+        rootLayout = null;
         pendingLateInitScript = null;
         for (Integer id : new ArrayList<>(pendingEvals.keySet())) {
             Runnable timeout = pendingEvalTimeouts.remove(id);

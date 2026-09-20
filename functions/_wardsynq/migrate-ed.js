@@ -28,8 +28,8 @@
  * race: two arrivals computing the same candidate sequence both attempt the same Patient id: version
  * 1, the storage layer lands exactly one, and the loser retries the next sequence.
  *
- * TRIAGE ACUITY IS NEVER COMPUTED. It is the one thing in this whole file a human chooses, exactly
- * once (recordEdTriage). No algorithm here derives it from vitals, NEWS2 or anything else - the
+ * TRIAGE ACUITY IS NEVER COMPUTED. It is the one thing in this whole file a human chooses
+ * (recordEdTriage), at arrival and again at every re-triage, each kept as its own version. No algorithm here derives it from vitals, NEWS2 or anything else - the
  * vitals and the acuity are two separate facts on the same chart, read by a clinician. This
  * hospital's own acuity SCALE (what each level of 1-5 is called) is ORG content, the same convention
  * formulary.js/note-templates.js/admission-request.js already use for content this file must not
@@ -46,10 +46,10 @@ import { makeProvisionalIdentity } from "../../wardsynq/wardsynq-mpi.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { patientIdForMrn } from "./opd-identity.js";
-import { admitPatient } from "./migrate-inpatient.js";
+import { admitPatient, patientsFor } from "./migrate-inpatient.js";
 
 const ED = "ED";
 const OPEN = "in-progress";
@@ -116,12 +116,14 @@ async function edArrival(request, env, ctx) {
  *  then open the encounter under the same mrn. */
 async function arriveUnknown(svc, resolved, base, arrival, arrivedAt, ctx) {
   let candidates;
-  try { candidates = await svc.list("Patient", 1000); }
+  // R4-2: the NEWEST 1,000 registrations hold today's provisional MRNs (the old read was the oldest 1,000). The count only
+  // picks where to start; a taken sequence is still refused by the write and the next is tried.
+  try { candidates = await svc.list("Patient", 1000, { newest: true }); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
   let start = 1;
   try {
-    const probe = makeProvisionalIdentity({ sex: arrival.unknown.sex, name: arrival.unknown.name, arrivedAt, sequence: 1 });
+    const probe = makeProvisionalIdentity({ sex: arrival.unknown.sex, name: arrival.unknown.name, arrivedAt, isTrauma: arrival.unknown.isTrauma, sequence: 1 });
     // The token+day prefix, shared by every unidentified arrival of this sex today - so the count
     // starts past whoever else already arrived, rather than always guessing 1 and retrying every time.
     const prefix = probe.mrn.replace(/-01$/, "-");
@@ -131,7 +133,7 @@ async function arriveUnknown(svc, resolved, base, arrival, arrivedAt, ctx) {
   for (let attempt = 0; attempt < MAX_SEQUENCE_ATTEMPTS; attempt++) {
     const sequence = start + attempt;
     let provisional;
-    try { provisional = makeProvisionalIdentity({ sex: arrival.unknown.sex, name: arrival.unknown.name, arrivedAt, sequence }); }
+    try { provisional = makeProvisionalIdentity({ sex: arrival.unknown.sex, name: arrival.unknown.name, arrivedAt, isTrauma: arrival.unknown.isTrauma, sequence }); }
     catch (e) { return { ...base, ok: false, status: 422, error: "invalid_arrival", detail: str(e && e.message), written: 0 }; }
     const patientId = patientIdForMrn(provisional.mrn);
     const newPatient = { ...provisional, id: patientId };
@@ -211,11 +213,23 @@ async function recordEdTriage(request, env, ctx) {
     source: { system: "wardsynq-native", sourceId: `ed-triage:${current.id}` },
   });
   if (current.attendingId) next.attendingId = current.attendingId;
+  /* RE-TRIAGE. Triage is a history, not a field: every triage is a new version of the Encounter,
+   * which is itself append-only, so the history is read back from the versions (triageHistory()) and
+   * the current acuity can never disagree with the latest entry in it - both are the same single,
+   * version-guarded write. A repeat needs a reason: "reassessed, no change" is a reason too. */
+  const reason = str(ctx.reason);
+  if (current.acuity != null && !reason) {
+    return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why this patient is being triaged again", encounterId, written: 0 };
+  }
   const cc = str(ctx.chiefComplaint) || str(current.reason);
   if (cc) next.reason = cc;
   next.acuity = acuity;
   next.triagedAt = new Date().toISOString();
   next.triagedBy = resolved.actor.id;
+  next.previousAcuity = current.acuity != null ? current.acuity : null;
+  next.triageReason = reason || null;
+  // Which triage this is. Two triages inside one millisecond share a triagedAt; they never share this.
+  next.triageSeq = (Number(current.triageSeq) || 0) + 1;
 
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
@@ -288,7 +302,7 @@ async function closeEdEncounter(svc, current, disposition, at, ctx) {
   if (current.attendingId) next.attendingId = current.attendingId;
   if (current.reason) next.reason = current.reason;
   if (current.acuity != null) next.acuity = current.acuity;
-  if (current.triagedAt) { next.triagedAt = current.triagedAt; next.triagedBy = current.triagedBy; }
+  if (current.triagedAt) { next.triagedAt = current.triagedAt; next.triagedBy = current.triagedBy; next.previousAcuity = current.previousAcuity != null ? current.previousAcuity : null; next.triageReason = current.triageReason || null; if (current.triageSeq != null) next.triageSeq = current.triageSeq; }
   next.disposition = disposition;
   const reason = str(ctx.reason);
   if (reason) next.dispositionReason = reason;
@@ -314,16 +328,24 @@ async function listEd(request, env, ctx) {
   if (error) return { ...base, ...error, patients: [] };
 
   let encounters;
-  try { encounters = await svc.list("Encounter", 200); }
+  // R4-1: every open encounter (was the oldest 200, so the newest arrivals were missing from the ED board).
+  try { encounters = await svc.listByStatus("Encounter", [OPEN]); }
   catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_open", detail: str(e.message), patients: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), detail: str(e.message), patients: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), patients: [] };
   }
 
+  /* BUG-MU06NW2S-8D53: the board drew the patient's sex in bold from a field this list never sent, so it
+   * never appeared. One roster read, joined in memory as listWard does; unreadable leaves name and sex null. */
+  let byId = new Map();
+  try { byId = await patientsFor(svc, (encounters || []).filter((e) => e && e.class === ED).map((e) => e.patientId)); } catch { /* rows still shown */ }
   const patients = (encounters || [])
     .filter((e) => e && e.class === ED && e.status === OPEN)
     .map((e) => ({
       encounterId: e.id, patientId: e.patientId,
+      name: (byId.get(e.patientId) && byId.get(e.patientId).name) || null,
+      sex: (byId.get(e.patientId) && byId.get(e.patientId).sex && byId.get(e.patientId).sex !== "unknown" && byId.get(e.patientId).sex) || null,
       mrn: ((e.identifiers || []).find((i) => i && i.system === "opd-mrn") || {}).value || null,
       chiefComplaint: e.reason || null, acuity: e.acuity != null ? e.acuity : null,
       arrivedAt: e.periodStart || null, triagedAt: e.triagedAt || null, version: e.version,
@@ -336,7 +358,149 @@ async function listEd(request, env, ctx) {
       if (a.acuity !== b.acuity) return (a.acuity || 99) - (b.acuity || 99);
       return String(a.arrivedAt).localeCompare(String(b.arrivedAt));
     });
-  return { ...base, ok: true, patients };
+  const reassessMinutes = ctx.reassessMinutes || null;
+  const nowMs = Date.now();
+  for (const p of patients) p.reassessment = reassessmentStatus({ acuity: p.acuity, triagedAt: p.triagedAt }, reassessMinutes, nowMs);
+  const overdueReassessments = patients.filter((p) => p.reassessment.state === "overdue").length;
+  return { ...base, ok: true, patients, overdueReassessments, reassessIntervalsSet: hasIntervals(reassessMinutes) };
 }
 
-export { ED, OPEN, FINISHED, DISPOSITIONS, edVisitIdFor, edArrival, recordEdTriage, edDisposition, listEd };
+/* REASSESSMENT. How long a patient of each acuity may wait before somebody looks again is the
+ * HOSPITAL's decision (org config wardsynq.edReassessMinutes, e.g. {"2": 15, "3": 60}), never a
+ * number shipped here. With no interval set for this acuity the answer is "no reassessment interval
+ * set", NEVER "not due": a board that said "not due" for a hospital that had configured nothing would
+ * be reassuring about a clock that does not exist. A reassessment is recorded as a re-triage (the
+ * acuity may stay the same), which restarts the clock. */
+function intervalFor(map, acuity) {
+  if (!map || typeof map !== "object" || Array.isArray(map)) return null;
+  const raw = map[String(acuity)];
+  if (raw == null || raw === "") return null;
+  const n = Number(raw);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+function hasIntervals(map) { return [1, 2, 3, 4, 5].some((a) => intervalFor(map, a) != null); }
+
+/** PURE. enc: {acuity, triagedAt}. */
+function reassessmentStatus(enc, map, nowMs) {
+  if (!enc || enc.acuity == null) return { state: "not-triaged", text: "not triaged yet" };
+  const minutes = intervalFor(map, enc.acuity);
+  if (minutes == null) return { state: "no-interval", text: "no reassessment interval set" };
+  const at = Date.parse(str(enc.triagedAt));
+  if (!Number.isFinite(at)) return { state: "not-known", text: "reassessment time not known: the last triage time could not be read", intervalMinutes: minutes };
+  const due = at + minutes * 60000;
+  const now = Number.isFinite(nowMs) ? nowMs : Date.now();
+  const late = Math.floor((now - due) / 60000);
+  return late > 0
+    ? { state: "overdue", dueAt: new Date(due).toISOString(), intervalMinutes: minutes, minutesOverdue: late, text: `reassessment overdue by ${late} min` }
+    : { state: "due", dueAt: new Date(due).toISOString(), intervalMinutes: minutes, text: "reassessment due" };
+}
+
+/** PURE. Which triage a version carries: its triageSeq, or its triagedAt for a version written before
+ *  triageSeq existed. A version is a new triage when this differs from the version before it (a
+ *  disposition carries the last one forward unchanged). Shared with the timeline. */
+function triageKey(v) { return !v || !v.triagedAt ? null : v.triageSeq != null ? `seq:${v.triageSeq}` : `at:${v.triagedAt}`; }
+
+/** PURE. Every triage, read from the Encounter's own versions, newest first. */
+function triageHistory(versions) {
+  const out = [];
+  let prevAt = null;
+  for (const v of (versions || []).slice().sort((a, b) => (a.version || 0) - (b.version || 0))) {
+    const key = triageKey(v);
+    if (!key || key === prevAt) continue;
+    out.push({
+      version: v.version, acuity: v.acuity != null ? v.acuity : null,
+      previousAcuity: v.previousAcuity != null ? v.previousAcuity : (out.length ? out[out.length - 1].acuity : null),
+      chiefComplaint: v.reason || null, reason: v.triageReason || null,
+      triagedAt: v.triagedAt, triagedBy: v.triagedBy || null, retriage: out.length > 0,
+    });
+    prevAt = key;
+  }
+  return out.reverse();
+}
+
+const PROCEDURE_TYPE = "ProcedureRecord";
+
+/**
+ * A procedure done in the ED. ctx: { migration, encounterId, procedure: {name, site?, performedBy,
+ *   performedAt, notes?, complications?}, actorDeps, recordDeps }
+ * performedAt is REQUIRED and never defaulted to "now": a procedure written up an hour later with the
+ * time it was typed would sit in the wrong place on the chart.
+ */
+async function recordEdProcedure(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const encounterId = str(ctx.encounterId);
+  const p = ctx.procedure || {};
+  if (!encounterId) return { ...base, ok: false, status: 422, error: "encounter_required", written: 0 };
+  if (!str(p.name)) return { ...base, ok: false, status: 422, error: "name_required", detail: "say which procedure was done", written: 0 };
+  if (!str(p.performedBy)) return { ...base, ok: false, status: 422, error: "performer_required", detail: "say who performed it", written: 0 };
+  const atMs = Date.parse(str(p.performedAt));
+  if (!Number.isFinite(atMs)) return { ...base, ok: false, status: 422, error: "time_required", detail: "say when it was done", written: 0 };
+  if (atMs > Date.now() + 5 * 60000) return { ...base, ok: false, status: 422, error: "time_in_future", detail: "a procedure cannot be recorded as done in the future", written: 0 };
+
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  let enc;
+  try { enc = await svc.get("Encounter", encounterId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  if (!enc) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId, written: 0 };
+  if (enc.class !== ED) return { ...base, ok: false, status: 409, error: "not_an_ed_visit", encounterId, written: 0 };
+
+  const rec = {
+    resourceType: PROCEDURE_TYPE, id: `wsq-edproc-${slug(encounterId)}-${crypto.randomUUID().slice(0, 13)}`,
+    patientId: enc.patientId, encounterId,
+    name: str(p.name), site: str(p.site) || null, performedBy: str(p.performedBy),
+    performedAt: new Date(atMs).toISOString(), notes: str(p.notes) || null, complications: str(p.complications) || null,
+    recordedBy: resolved.actor.id,
+  };
+  try {
+    const out = await svc.put(rec, { idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, procedureId: out.record.id, version: out.record.version, replayed: out.replayed, actor: resolved.actor.id };
+  } catch (e) {
+    return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };
+  }
+}
+
+/**
+ * The ED half of one chart: every triage, the reassessment clock, and the procedures.
+ * ctx: { migration, encounterId, reassessMinutes?, actorDeps, recordDeps }
+ */
+async function edRecord(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", triages: [], procedures: [] };
+
+  const encounterId = str(ctx.encounterId);
+  if (!encounterId) return { ...base, ok: false, status: 422, error: "encounter_required" };
+
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+
+  try {
+    const versions = (await svc.history("Encounter", encounterId)).slice().sort((a, b) => (a.version || 0) - (b.version || 0));
+    if (!versions.length) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
+    const enc = versions[versions.length - 1];
+    if (enc.class !== ED) return { ...base, ok: false, status: 409, error: "not_an_ed_visit", encounterId };
+    const procedures = (await svc.byPatient(PROCEDURE_TYPE, enc.patientId))
+      .filter((r) => r && r.encounterId === encounterId)
+      .sort((a, b) => String(b.performedAt).localeCompare(String(a.performedAt)))
+      .map((r) => ({ id: r.id, name: r.name, site: r.site, performedBy: r.performedBy, performedAt: r.performedAt, notes: r.notes, complications: r.complications, recordedBy: r.recordedBy || null }));
+    return {
+      ...base, ok: true, encounterId, status: enc.status, acuity: enc.acuity != null ? enc.acuity : null,
+      triages: triageHistory(versions),
+      reassessment: enc.status === OPEN ? reassessmentStatus(enc, ctx.reassessMinutes, Date.now()) : { state: "closed", text: "this ED visit is closed" },
+      procedures,
+    };
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
+  }
+}
+
+export {
+  ED, OPEN, FINISHED, DISPOSITIONS, PROCEDURE_TYPE, edVisitIdFor, edArrival, recordEdTriage, edDisposition, listEd,
+  reassessmentStatus, triageHistory, recordEdProcedure, edRecord,
+};

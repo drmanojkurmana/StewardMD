@@ -1,15 +1,15 @@
 {
   "guideline": "uppergi",
   "title": "Gastric / Esophageal Cancer",
-  "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "3.0.0",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 3.2026)",
+  "navigatorVersion": "3.2.0",
   "diseaseId": "uppergi_cancer",
   "matchDisease": false,
   "status": "draft",
-  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. ONCOTREE navigator for upper gastrointestinal carcinoma. It captures the physician-entered histology (esophageal squamous vs adenocarcinoma of esophagus/GEJ/stomach), workup, clinical stage/setting, and the biomarkers that steer therapy (HER2, PD-L1 CPS, MMR/MSI, Claudin18.2). Every curative arm routes through a response / restaging or adjuvant step before surveillance, and every advanced arm is refined by line of therapy (first line, progression, second line, later line) before a recommendation. Adenocarcinoma of the distal esophagus, GEJ, and stomach converge on one shared biomarker-directed and line-of-therapy metastatic subtree. The navigator invents no dose, regimen, or eligibility criterion; where no existing StewardMD Standard Protocol fits a leaf, the regimen is described in bullets only. Structural taxonomy consistent with standard guidelines (NCCN Esophageal and Esophagogastric Junction / Gastric Cancer); no proprietary content reproduced. DRAFT - not clinically activated; physician decides and the existing dose engine computes patient doses.",
-  "sourceNote": "Structural pathway consistent with standard guidelines (NCCN Gastric / Esophageal), DeVita, and Harrison. Treatment options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "provenanceNote": "ONCOTREE navigator for upper gastrointestinal carcinoma, structured in accordance with NCCN Guidelines Version 3.2026 (Esophageal and EGJ Cancers; Gastric Cancer). It captures the physician-entered histology (esophageal squamous vs adenocarcinoma of esophagus/GEJ/stomach), diagnostic workup, clinical stage/setting, and the biomarkers that steer therapy (HER2, PD-L1 CPS, MMR/MSI, Claudin 18.2, NTRK/RET fusions). Curative standards: neoadjuvant CROSS chemoradiation (carboplatin + paclitaxel + 41.4 Gy) followed by esophagectomy, with adjuvant nivolumab for residual pathologic disease (CheckMate 577, Category 1), for esophageal/GEJ cancer; perioperative FLOT (4 cycles pre-op and 4 post-op, Category 1 preferred) for gastric/GEJ adenocarcinoma. Metastatic standards: trastuzumab + chemotherapy + pembrolizumab for HER2-positive disease (KEYNOTE-811, Category 1 for PD-L1 CPS >= 1); Zolbetuximab + mFOLFOX6 (SPOTLIGHT, Category 1 preferred) or + CAPOX (GLOW, Category 1) for Claudin 18.2-positive HER2-negative disease; nivolumab + chemotherapy (CheckMate 649, Category 1) or pembrolizumab + chemotherapy (KEYNOTE-859, Category 1) for CPS >= 5; immunotherapy-first for dMMR/MSI-high; trastuzumab deruxtecan (DESTINY-Gastric01/02) and ramucirumab + paclitaxel (RAINBOW) in later lines. Every curative arm routes through a response/restaging or adjuvant step before surveillance, and every advanced arm is refined by line of therapy before a recommendation. The navigator invents no dose, regimen, or eligibility criterion; where no existing StewardMD Standard Protocol fits a leaf, the regimen is described in bullets only. DRAFT - not clinically activated; physician decides and the existing dose engine computes patient doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Esophageal and EGJ Cancers Version 3.2026 (June 3, 2026) and Gastric Cancer Version 3.2026 (June 3, 2026).",
   "startNodeIds": [
-    "n_entry"
+    "n_workup"
   ],
   "footnotes": {
     "a": {
@@ -21,11 +21,11 @@
       "evidence": "1"
     },
     "c": {
-      "text": "Adjuvant nivolumab for up to 1 year is offered when residual pathologic disease (non-pCR) remains after neoadjuvant chemoradiation and R0 resection (CheckMate 577 population).",
+      "text": "Adjuvant nivolumab 240 mg every 2 weeks or 480 mg every 4 weeks for up to 1 year is offered when residual pathologic disease (ypT+ or ypN+, non-pCR) remains after neoadjuvant chemoradiation and R0 resection (CheckMate 577, Category 1).",
       "evidence": "1"
     },
     "d": {
-      "text": "First-line metastatic therapy is layered on biomarkers: add anti-PD-1 for PD-L1 CPS-positive tumors, trastuzumab for HER2-positive, zolbetuximab for Claudin18.2-positive, and favor immunotherapy for MMR-deficient / MSI-high disease. Test all four up front on the metastatic sample.",
+      "text": "First-line metastatic therapy is layered on biomarkers: trastuzumab + chemotherapy + pembrolizumab for HER2-positive (KEYNOTE-811, Category 1 for CPS >= 1); zolbetuximab + chemotherapy for Claudin 18.2-positive HER2-negative (SPOTLIGHT/GLOW, Category 1); nivolumab + chemotherapy (CheckMate 649, Category 1) or pembrolizumab + chemotherapy (KEYNOTE-859, Category 1) for CPS >= 5; immunotherapy-first for dMMR/MSI-high. Test the full panel up front on the metastatic sample.",
       "evidence": "1"
     },
     "e": {
@@ -34,6 +34,55 @@
     }
   },
   "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "uppergi_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic workup",
+      "title": "Diagnostic workup checklist",
+      "description": "Complete the full diagnostic, anatomic, and biomarker workup first; once workup is done, choose the histology-directed pathway.",
+      "path": "Upper GI / Workup",
+      "section": "Workup",
+      "pills": [
+        "workup"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "High-definition upper endoscopy (EGD) with multiple targeted biopsies; endoscopic ultrasound (EUS) for locoregional T and N staging.",
+        "Contrast-enhanced CT of the chest, abdomen, and pelvis; whole-body FDG-PET/CT (Category 1 for detecting occult distant metastases in disease >= cT1b).",
+        "Diagnostic laparoscopy with peritoneal cytology (mandatory for gastric / GEJ tumors >= T1b to rule out occult peritoneal carcinomatosis).",
+        {
+          "label": "Universal biomarker panel for locally advanced / metastatic disease: HER2 (ERBB2) IHC with reflex FISH",
+          "sub": "IHC 3+ or IHC 2+/FISH-amplified is positive; steers trastuzumab-based first line (KEYNOTE-811)"
+        },
+        {
+          "label": "PD-L1 IHC with CPS score (22C3 or 28-8)",
+          "sub": "steers anti-PD-1 addition to chemotherapy (CheckMate 649, KEYNOTE-859)"
+        },
+        {
+          "label": "MMR / MSI testing (MLH1, MSH2, MSH6, PMS2)",
+          "sub": "dMMR / MSI-H steers an immunotherapy-first approach"
+        },
+        {
+          "label": "Claudin 18.2 (CLDN18.2) IHC",
+          "sub": "Category 1 per SPOTLIGHT and GLOW; positive at >= 75% tumor cells with moderate-to-strong membrane staining"
+        },
+        "NTRK fusions and RET fusions on tumor molecular profiling for locally advanced / metastatic disease.",
+        "Nutritional assessment and enteral access planning (jejunostomy tube preferred over gastrostomy if gastric resection is planned)."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Anatomic & Biomarker Staging",
+          "setsValue": null
+        }
+      ]
+    },
     {
       "id": "n_entry",
       "linkId": "entry",
@@ -96,42 +145,53 @@
       "id": "n_scc_workup",
       "linkId": "scc_workup",
       "nodeCategory": "workup",
-      "nodeType": "display",
+      "nodeType": "question",
       "template": "main",
       "name": "SCC workup",
       "title": "Esophageal SCC: workup checklist",
-      "description": "Establish histology, local depth / nodes, and distant spread before assigning a treatment intent.",
+      "description": "Complete the full diagnostic, anatomic, and biomarker workup first; once workup is done, choose the stage-directed SCC pathway.",
       "path": "Upper GI / SCC / Workup",
       "section": "Workup",
       "pills": [
         "workup"
       ],
-      "required": false,
+      "required": true,
       "evidenceCategory": [
         "2A"
       ],
       "bullets": [
+        "Record tumor length, distance from incisors, and Siewert classification for GEJ involvement.",
+        "High-definition upper endoscopy (EGD) with multiple targeted biopsies; endoscopic ultrasound (EUS) for locoregional T and N staging.",
+        "Contrast-enhanced CT of the chest, abdomen, and pelvis; whole-body FDG-PET/CT (Category 1 for detecting occult distant metastases in disease >= cT1b).",
+        "Diagnostic laparoscopy with peritoneal cytology (mandatory for gastric / GEJ tumors >= T1b to rule out occult peritoneal carcinomatosis).",
         {
-          "label": "Upper endoscopy with biopsy",
-          "sub": "document tumor length and distance from incisors"
+          "label": "Universal biomarker panel for locally advanced / metastatic disease: HER2 (ERBB2) IHC with reflex FISH",
+          "sub": "IHC 3+ or IHC 2+/FISH-amplified is positive; steers trastuzumab-based first line (KEYNOTE-811)"
         },
         {
-          "label": "Endoscopic ultrasound (EUS)",
-          "sub": "cT/cN depth when not overtly metastatic"
+          "label": "PD-L1 IHC with CPS score (22C3 or 28-8)",
+          "sub": "steers anti-PD-1 addition to chemotherapy (CheckMate 649, KEYNOTE-859)"
         },
-        "CT chest/abdomen with contrast",
         {
-          "label": "FDG-PET/CT",
-          "sub": "for occult metastases in candidates for curative therapy"
+          "label": "MMR / MSI testing (MLH1, MSH2, MSH6, PMS2)",
+          "sub": "dMMR / MSI-H steers an immunotherapy-first approach"
         },
-        "MMR/MSI and PD-L1 CPS on biopsy (steers systemic and later-line therapy)",
         {
-          "label": "Nutrition and performance status",
-          "sub": "dysphagia grade, weight loss, ECOG"
-        }
+          "label": "Claudin 18.2 (CLDN18.2) IHC",
+          "sub": "Category 1 per SPOTLIGHT and GLOW; positive at >= 75% tumor cells with moderate-to-strong membrane staining"
+        },
+        "NTRK fusions and RET fusions on tumor molecular profiling for locally advanced / metastatic disease.",
+        "Nutritional assessment and enteral access planning (jejunostomy tube preferred over gastrostomy if gastric resection is planned)."
       ],
       "footnotes": [
         "b"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Anatomic & Biomarker Staging",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -365,9 +425,9 @@
         "gi-esophageal-crt-cross"
       ],
       "bullets": [
-        "Carboplatin + paclitaxel with concurrent radiotherapy (CROSS backbone)",
+        "Neoadjuvant chemoradiation on the CROSS backbone: weekly carboplatin + paclitaxel with concurrent 41.4 Gy RT (Category 1)",
         "Esophagectomy 4-8 weeks after chemoradiation in fit patients",
-        "Then assess pathologic response to decide adjuvant therapy (next step)"
+        "Then assess pathologic response (ypT / ypN) to decide adjuvant therapy (next step)"
       ],
       "footnotes": [
         "b"
@@ -435,8 +495,9 @@
         "gi-esophageal-nivolumab-adjuvant"
       ],
       "bullets": [
-        "Nivolumab for up to 1 year, started after recovery from surgery",
-        "Monitor for immune-related toxicity; hold / steroid per grade",
+        "Adjuvant nivolumab 240 mg every 2 weeks or 480 mg every 4 weeks for 1 year",
+        "For residual pathologic disease (ypT+ or ypN+) after neoadjuvant chemoradiation and R0 resection (CheckMate 577, Category 1)",
+        "Monitor for immune-related toxicity; hold / steroids per grade",
         "Then post-treatment surveillance"
       ],
       "footnotes": [
@@ -535,6 +596,10 @@
         "Restage to exclude distant disease before salvage surgery",
         "Salvage esophagectomy at an experienced center (higher morbidity than planned surgery)",
         "Then post-treatment surveillance"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     },
     {
@@ -799,6 +864,10 @@
         "Esophageal stent or palliative RT for dysphagia",
         "Nutrition support and pain / symptom management",
         "Early palliative-care involvement"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     },
     {
@@ -888,39 +957,64 @@
       "bullets": [
         "Continue scheduled surveillance",
         "Ongoing nutrition and symptom support"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     },
     {
       "id": "n_eg_workup",
       "linkId": "eg_workup",
       "nodeCategory": "workup",
-      "nodeType": "display",
+      "nodeType": "question",
       "template": "main",
       "name": "Esophageal/GEJ adeno workup",
       "title": "Esophageal / GEJ adenocarcinoma: workup checklist",
-      "description": "Same anatomic staging as SCC plus the full adenocarcinoma biomarker panel, which drives metastatic and later-line therapy.",
+      "description": "Complete the full diagnostic, anatomic, and biomarker workup first, including the adenocarcinoma panel that drives metastatic therapy; once workup is done, choose the stage-directed pathway.",
       "path": "Upper GI / Adeno EG / Workup",
       "section": "Workup",
       "pills": [
         "workup"
       ],
-      "required": false,
+      "required": true,
       "evidenceCategory": [
         "2A"
       ],
       "bullets": [
-        "Upper endoscopy with biopsy; Siewert classification for GEJ",
-        "EUS for cT / cN, CT chest / abdomen, FDG-PET/CT",
+        "Upper endoscopy with biopsy; Siewert classification for GEJ tumors.",
+        "High-definition upper endoscopy (EGD) with multiple targeted biopsies; endoscopic ultrasound (EUS) for locoregional T and N staging.",
+        "Contrast-enhanced CT of the chest, abdomen, and pelvis; whole-body FDG-PET/CT (Category 1 for detecting occult distant metastases in disease >= cT1b).",
+        "Diagnostic laparoscopy with peritoneal cytology (mandatory for gastric / GEJ tumors >= T1b to rule out occult peritoneal carcinomatosis).",
         {
-          "label": "Biomarker panel on tumor tissue",
-          "sub": "HER2 IHC/ISH, PD-L1 CPS, MMR/MSI, Claudin18.2"
+          "label": "Universal biomarker panel for locally advanced / metastatic disease: HER2 (ERBB2) IHC with reflex FISH",
+          "sub": "IHC 3+ or IHC 2+/FISH-amplified is positive; steers trastuzumab-based first line (KEYNOTE-811)"
         },
-        "Staging laparoscopy with peritoneal cytology for cT3-4 or GEJ Siewert II-III",
-        "Nutrition and ECOG assessment"
+        {
+          "label": "PD-L1 IHC with CPS score (22C3 or 28-8)",
+          "sub": "steers anti-PD-1 addition to chemotherapy (CheckMate 649, KEYNOTE-859)"
+        },
+        {
+          "label": "MMR / MSI testing (MLH1, MSH2, MSH6, PMS2)",
+          "sub": "dMMR / MSI-H steers an immunotherapy-first approach"
+        },
+        {
+          "label": "Claudin 18.2 (CLDN18.2) IHC",
+          "sub": "Category 1 per SPOTLIGHT and GLOW; positive at >= 75% tumor cells with moderate-to-strong membrane staining"
+        },
+        "NTRK fusions and RET fusions on tumor molecular profiling for locally advanced / metastatic disease.",
+        "Nutritional assessment and enteral access planning (jejunostomy tube preferred over gastrostomy if gastric resection is planned)."
       ],
       "footnotes": [
         "a",
         "b"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Anatomic & Biomarker Staging",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -1038,6 +1132,10 @@
         "EMR / ESD plus ablation (e.g. RFA) of residual Barrett metaplasia",
         "Escalate to esophagectomy for submucosal invasion, positive margin, or LVI",
         "Then endoscopic surveillance"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     },
     {
@@ -1064,6 +1162,10 @@
         "Esophagectomy with regional lymphadenectomy",
         "Node-positive pathology moves the patient to the locally advanced / adjuvant pathway",
         "Then post-treatment surveillance"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     },
     {
@@ -1128,7 +1230,7 @@
         "gi-flot"
       ],
       "bullets": [
-        "FLOT (5-FU, leucovorin, oxaliplatin, docetaxel) x 4 cycles preoperatively",
+        "Perioperative FLOT (Fluorouracil, Leucovorin, Oxaliplatin, Docetaxel): 4 cycles before surgery and 4 cycles after (Category 1 preferred)",
         "Restage after induction to confirm resectability (next step)",
         "The dose engine computes patient doses"
       ],
@@ -1199,7 +1301,7 @@
       ],
       "bullets": [
         "R0 resection (esophagectomy) with adequate lymphadenectomy",
-        "Complete the remaining 4 postoperative FLOT cycles as tolerated",
+        "Complete the remaining 4 postoperative FLOT cycles as tolerated (4 pre-op + 4 post-op, Category 1 preferred)",
         "Then post-treatment surveillance"
       ],
       "footnotes": [
@@ -1230,9 +1332,9 @@
         "gi-esophageal-crt-cross"
       ],
       "bullets": [
-        "Carboplatin + paclitaxel with concurrent 41.4 Gy (CROSS backbone)",
+        "Neoadjuvant chemoradiation on the CROSS backbone: weekly carboplatin + paclitaxel with concurrent 41.4 Gy RT (Category 1)",
         "Esophagectomy after chemoradiation in fit patients",
-        "Then assess pathologic response for adjuvant therapy (next step)"
+        "Then assess pathologic response (ypT / ypN) for adjuvant therapy (next step)"
       ],
       "footnotes": [
         "b"
@@ -1300,8 +1402,9 @@
         "gi-esophageal-nivolumab-adjuvant"
       ],
       "bullets": [
-        "Nivolumab for up to 1 year after recovery from surgery",
-        "Monitor for immune-related toxicity",
+        "Adjuvant nivolumab 240 mg every 2 weeks or 480 mg every 4 weeks for 1 year",
+        "For residual pathologic disease (ypT+ or ypN+) after neoadjuvant chemoradiation and R0 resection (CheckMate 577, Category 1)",
+        "Monitor for immune-related toxicity; hold / steroids per grade",
         "Then post-treatment surveillance"
       ],
       "footnotes": [
@@ -1312,35 +1415,53 @@
       "id": "n_gastric_workup",
       "linkId": "gastric_workup",
       "nodeCategory": "workup",
-      "nodeType": "display",
+      "nodeType": "question",
       "template": "main",
       "name": "Gastric adeno workup",
       "title": "Gastric adenocarcinoma: workup checklist",
-      "description": "Add staging laparoscopy with peritoneal cytology to the standard workup, since occult peritoneal disease changes intent.",
+      "description": "Complete the full diagnostic, anatomic, and biomarker workup first, including staging laparoscopy since occult peritoneal disease changes intent; once workup is done, choose the stage-directed pathway.",
       "path": "Upper GI / Gastric / Workup",
       "section": "Workup",
       "pills": [
         "workup"
       ],
-      "required": false,
+      "required": true,
       "evidenceCategory": [
         "2A"
       ],
       "bullets": [
-        "Upper endoscopy with biopsy and tumor mapping",
-        "CT chest / abdomen / pelvis; EUS for early lesions",
+        "Upper endoscopy with biopsy and tumor mapping of the stomach.",
+        "High-definition upper endoscopy (EGD) with multiple targeted biopsies; endoscopic ultrasound (EUS) for locoregional T and N staging.",
+        "Contrast-enhanced CT of the chest, abdomen, and pelvis; whole-body FDG-PET/CT (Category 1 for detecting occult distant metastases in disease >= cT1b).",
+        "Diagnostic laparoscopy with peritoneal cytology (mandatory for gastric / GEJ tumors >= T1b to rule out occult peritoneal carcinomatosis).",
         {
-          "label": "Staging laparoscopy + peritoneal washings",
-          "sub": "for cT3-4 or node-positive disease"
+          "label": "Universal biomarker panel for locally advanced / metastatic disease: HER2 (ERBB2) IHC with reflex FISH",
+          "sub": "IHC 3+ or IHC 2+/FISH-amplified is positive; steers trastuzumab-based first line (KEYNOTE-811)"
         },
         {
-          "label": "Biomarker panel",
-          "sub": "HER2 IHC/ISH, PD-L1 CPS, MMR/MSI, Claudin18.2"
+          "label": "PD-L1 IHC with CPS score (22C3 or 28-8)",
+          "sub": "steers anti-PD-1 addition to chemotherapy (CheckMate 649, KEYNOTE-859)"
         },
-        "Nutrition, weight loss, and ECOG assessment"
+        {
+          "label": "MMR / MSI testing (MLH1, MSH2, MSH6, PMS2)",
+          "sub": "dMMR / MSI-H steers an immunotherapy-first approach"
+        },
+        {
+          "label": "Claudin 18.2 (CLDN18.2) IHC",
+          "sub": "Category 1 per SPOTLIGHT and GLOW; positive at >= 75% tumor cells with moderate-to-strong membrane staining"
+        },
+        "NTRK fusions and RET fusions on tumor molecular profiling for locally advanced / metastatic disease.",
+        "Nutritional assessment and enteral access planning (jejunostomy tube preferred over gastrostomy if gastric resection is planned)."
       ],
       "footnotes": [
         "a"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Anatomic & Biomarker Staging",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -1485,6 +1606,10 @@
         "En-bloc ESD with careful margin / depth assessment",
         "Escalate to gastrectomy for submucosal invasion, positive margin, or LVI",
         "Then endoscopic and nutritional surveillance"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     },
     {
@@ -1511,6 +1636,10 @@
         "Gastrectomy with D2 lymphadenectomy",
         "Node-positive pathology moves the patient to the adjuvant pathway",
         "Then endoscopic and nutritional surveillance"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     },
     {
@@ -1575,7 +1704,7 @@
         "gi-flot"
       ],
       "bullets": [
-        "FLOT x 4 cycles before and 4 after R0 D2 gastrectomy",
+        "Perioperative FLOT (Fluorouracil, Leucovorin, Oxaliplatin, Docetaxel): 4 cycles before and 4 after R0 D2 gastrectomy (Category 1 preferred)",
         "Greatest benefit with an R0 resection and adequate nodal harvest",
         "Then post-treatment surveillance"
       ],
@@ -1702,6 +1831,10 @@
       "bullets": [
         "Continue scheduled surveillance",
         "Ongoing nutritional and symptom support"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     },
     {
@@ -1712,7 +1845,7 @@
       "template": "main",
       "name": "Adeno metastatic HER2",
       "title": "Metastatic adenocarcinoma: first-line HER2 status",
-      "description": "Shared first-line pathway for metastatic adenocarcinoma of the esophagus, GEJ, and stomach. HER2 status is the first fork; HER2-positive disease adds trastuzumab-based therapy.",
+      "description": "Shared first-line pathway for metastatic adenocarcinoma of the esophagus, GEJ, and stomach. HER2 status is the first fork; HER2-positive (IHC 3+ or IHC 2+/FISH+) disease adds trastuzumab + pembrolizumab to chemotherapy (KEYNOTE-811).",
       "path": "Upper GI / Adeno metastatic / HER2",
       "section": "Recurrence",
       "pills": [
@@ -1751,8 +1884,8 @@
       "nodeType": "end",
       "template": "end",
       "name": "Adeno met HER2+ 1L",
-      "title": "Metastatic adeno, HER2-positive: first-line chemo + trastuzumab (+/- pembrolizumab)",
-      "description": "Fluoropyrimidine-platinum chemotherapy plus trastuzumab first line; pembrolizumab is added for PD-L1 CPS-positive tumors. Chemo backbone via protocol; HER2 / IO agents in bullets. Reassess at progression (next step).",
+      "title": "Metastatic adeno, HER2-positive: first-line trastuzumab + chemo + pembrolizumab",
+      "description": "Trastuzumab + fluoropyrimidine + platinum + pembrolizumab first line for HER2-positive (IHC 3+ or IHC 2+/FISH+) disease (KEYNOTE-811, Category 1 for PD-L1 CPS >= 1). Chemo backbone via protocol; HER2/IO agents in bullets. Reassess at progression (next step).",
       "path": "Upper GI / Adeno metastatic / HER2+ 1L",
       "section": "Recurrence",
       "pills": [
@@ -1768,8 +1901,8 @@
         "gi-gastric-folfox"
       ],
       "bullets": [
-        "Add trastuzumab to the fluoropyrimidine-platinum backbone (e.g. FOLFOX / CAPOX)",
-        "Add pembrolizumab when PD-L1 CPS is positive",
+        "Trastuzumab + fluoropyrimidine + platinum backbone (e.g. FOLFOX / CAPOX)",
+        "Add pembrolizumab (KEYNOTE-811, Category 1 for PD-L1 CPS >= 1)",
         "Continue to progression, then reassess (next step)"
       ],
       "footnotes": [
@@ -1824,7 +1957,7 @@
       "template": "end",
       "name": "Adeno met HER2+ 2L",
       "title": "Metastatic adeno, HER2-positive: second-line trastuzumab deruxtecan",
-      "description": "Trastuzumab deruxtecan (T-DXd) for HER2-positive disease progressing after a trastuzumab-containing regimen (DESTINY-Gastric). No existing T-DXd dose protocol is present; described in bullets. Reassess at further progression (next step).",
+      "description": "Trastuzumab deruxtecan (T-DXd) for HER2-positive disease progressing after a trastuzumab-containing regimen (DESTINY-Gastric01 / DESTINY-Gastric02, Category 1). Reassess at further progression (next step).",
       "path": "Upper GI / Adeno metastatic / HER2+ 2L",
       "section": "Recurrence",
       "pills": [
@@ -1840,7 +1973,7 @@
         "eg-trastuzumab-deruxtecan"
       ],
       "bullets": [
-        "Trastuzumab deruxtecan (T-DXd) after prior trastuzumab",
+        "Trastuzumab deruxtecan (T-DXd) after prior trastuzumab (DESTINY-Gastric01/02, Category 1)",
         "Monitor for interstitial lung disease / pneumonitis and nausea",
         "Reassess at progression for later-line chemotherapy (next step)"
       ],
@@ -1856,7 +1989,7 @@
       "template": "main",
       "name": "Adeno met biomarker",
       "title": "Metastatic adeno, HER2-negative: first-line biomarker-directed option",
-      "description": "For HER2-negative metastatic adenocarcinoma, select the highest-priority actionable biomarker. Overlaps are common; MSI-high generally takes precedence, then Claudin18.2 and PD-L1 CPS layer onto chemotherapy.",
+      "description": "For HER2-negative metastatic adenocarcinoma, select the highest-priority actionable biomarker. Overlaps are common; dMMR/MSI-high generally takes precedence, then Claudin 18.2 (>= 75% moderate-to-strong staining) and PD-L1 CPS >= 5 layer targeted agents onto chemotherapy.",
       "path": "Upper GI / Adeno metastatic / Biomarker",
       "section": "Recurrence",
       "pills": [
@@ -1880,17 +2013,17 @@
             [
               "MMR/MSI",
               "dMMR / MSI-high",
-              "Anti-PD-1 (pembrolizumab), chemo often deferrable"
+              "Pembrolizumab or nivolumab + ipilimumab (Category 1)"
             ],
             [
               "PD-L1 CPS",
-              "CPS >= 5 (benefit rises with CPS)",
-              "Anti-PD-1 added to chemotherapy"
+              "CPS >= 5",
+              "Nivolumab + chemo (CheckMate 649, Category 1) or pembrolizumab + chemo (KEYNOTE-859, Category 1)"
             ],
             [
               "Claudin18.2",
               "IHC 2-3+ in >= 75% of cells",
-              "Zolbetuximab added to chemotherapy"
+              "Zolbetuximab + mFOLFOX6 (SPOTLIGHT, Category 1) or + CAPOX (GLOW, Category 1)"
             ],
             [
               "None actionable",
@@ -1949,7 +2082,7 @@
       "template": "end",
       "name": "Adeno met MSI-H 1L",
       "title": "Metastatic adeno, MSI-high: first-line anti-PD-1",
-      "description": "MMR-deficient / MSI-high metastatic adenocarcinoma is highly immunotherapy-responsive; pembrolizumab (with or without chemotherapy) is preferred first line. Reassess at progression (next step).",
+      "description": "dMMR / MSI-high metastatic adenocarcinoma is highly immunotherapy-responsive: pembrolizumab or nivolumab + ipilimumab first line (Category 1). Reassess at progression (next step).",
       "path": "Upper GI / Adeno metastatic / MSI-H 1L",
       "section": "Recurrence",
       "pills": [
@@ -1966,7 +2099,8 @@
         "gi-gastric-pembro"
       ],
       "bullets": [
-        "Pembrolizumab, with or without a chemotherapy doublet",
+        "Pembrolizumab, with or without a chemotherapy doublet (Category 1)",
+        "Nivolumab + ipilimumab is the chemotherapy-sparing alternative (Category 1)",
         "Durable responses are common; chemotherapy may be deferrable in selected patients",
         "Reassess at progression (next step)"
       ],
@@ -1981,8 +2115,8 @@
       "nodeType": "end",
       "template": "end",
       "name": "Adeno met CPS+ 1L",
-      "title": "Metastatic adeno, CPS-positive: first-line chemo + anti-PD-1",
-      "description": "Fluoropyrimidine-platinum chemotherapy plus pembrolizumab (or nivolumab) for PD-L1 CPS-positive HER2-negative disease. Reassess at progression (next step).",
+      "title": "Metastatic adeno, HER2-negative CPS >= 5: first-line chemo + anti-PD-1",
+      "description": "Fluoropyrimidine-platinum chemotherapy plus nivolumab (CheckMate 649, Category 1) or pembrolizumab (KEYNOTE-859, Category 1) for HER2-negative, Claudin 18.2-negative or unknown disease with PD-L1 CPS >= 5. Reassess at progression (next step).",
       "path": "Upper GI / Adeno metastatic / CPS+ 1L",
       "section": "Recurrence",
       "pills": [
@@ -1997,10 +2131,12 @@
       ],
       "protocolRefs": [
         "gi-gastric-folfox",
+        "gi-gastric-capox",
         "gi-gastric-pembro"
       ],
       "bullets": [
-        "FOLFOX / CAPOX backbone plus pembrolizumab or nivolumab",
+        "FOLFOX / CAPOX backbone plus nivolumab (CheckMate 649, Category 1 for CPS >= 5)",
+        "Pembrolizumab + chemotherapy is the alternative (KEYNOTE-859, Category 1)",
         "Benefit rises with CPS; weigh IO benefit at low CPS",
         "Reassess at progression (next step)"
       ],
@@ -2016,7 +2152,7 @@
       "template": "end",
       "name": "Adeno met Claudin18.2+ 1L",
       "title": "Metastatic adeno, Claudin18.2-positive: first-line chemo + zolbetuximab",
-      "description": "Fluoropyrimidine-oxaliplatin chemotherapy plus zolbetuximab for Claudin18.2-positive, HER2-negative disease. Chemo backbone via protocol; zolbetuximab in bullets. Reassess at progression (next step).",
+      "description": "Zolbetuximab + fluoropyrimidine-oxaliplatin chemotherapy for Claudin 18.2-positive (>= 75% tumor cells with moderate-to-strong membrane staining), HER2-negative disease (SPOTLIGHT/GLOW, Category 1). Chemo backbone via protocol; zolbetuximab in bullets. Reassess at progression (next step).",
       "path": "Upper GI / Adeno metastatic / Claudin18.2+ 1L",
       "section": "Recurrence",
       "pills": [
@@ -2032,7 +2168,8 @@
         "gi-gastric-folfox"
       ],
       "bullets": [
-        "Add zolbetuximab (anti-Claudin18.2) to the fluoropyrimidine-oxaliplatin backbone",
+        "Zolbetuximab + mFOLFOX6 (SPOTLIGHT, Category 1 preferred)",
+        "Zolbetuximab + CAPOX is the alternative backbone (GLOW, Category 1)",
         "Premedicate for nausea / vomiting, which is dose-limiting early",
         "Reassess at progression (next step)"
       ],
@@ -2118,7 +2255,7 @@
       "template": "end",
       "name": "Adeno met 2L",
       "title": "Metastatic adeno: second-line ramucirumab + paclitaxel",
-      "description": "Ramucirumab plus paclitaxel is the preferred second line after a platinum-fluoropyrimidine. No existing ramucirumab dose protocol is present; described in bullets. Reassess at progression (next step).",
+      "description": "Ramucirumab plus paclitaxel is the preferred second line after a platinum-fluoropyrimidine (RAINBOW, Category 1). Reassess at progression (next step).",
       "path": "Upper GI / Adeno metastatic / 2L",
       "section": "Recurrence",
       "pills": [
@@ -2133,7 +2270,7 @@
         "eg-ramucirumab-paclitaxel"
       ],
       "bullets": [
-        "Ramucirumab + paclitaxel (preferred second line)",
+        "Ramucirumab + paclitaxel (RAINBOW, Category 1 preferred second line)",
         "Single-agent ramucirumab or paclitaxel if unfit for the combination",
         "Reassess at progression for later-line therapy (next step)"
       ],
@@ -2233,10 +2370,23 @@
         "Stent / palliative RT for obstruction or bleeding",
         "Nutrition support and pain / symptom management",
         "Early palliative-care involvement"
+      ],
+      "protocolRefs": [
+        "gi-esophageal-crt-cross",
+        "gi-esophageal-nivolumab-adjuvant"
       ]
     }
   ],
   "links": [
+    {
+      "id": "l_workup_entry",
+      "from": "n_workup",
+      "to": "n_entry",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "workup"
+    },
     {
       "id": "l_entry_scc",
       "from": "n_entry",
@@ -2909,5 +3059,20 @@
       ],
       "linkCategory": "conditional"
     }
+  ],
+  "protocolRefs": [
+    "eg-cisplatin-5fu-rt",
+    "eg-irinotecan",
+    "eg-paclitaxel",
+    "eg-ramucirumab-paclitaxel",
+    "eg-trastuzumab-deruxtecan",
+    "folfiri",
+    "gi-esophageal-crt-cross",
+    "gi-esophageal-nivolumab-adjuvant",
+    "gi-flot",
+    "gi-gastric-capox",
+    "gi-gastric-folfox",
+    "gi-gastric-pembro",
+    "modified-folfox-6"
   ]
 }

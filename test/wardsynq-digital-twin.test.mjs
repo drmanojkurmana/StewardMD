@@ -157,22 +157,34 @@ test("3. financial sections are opt-in and absent by default, never blended into
   const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
   assert.equal(r.twin.sections.billing, undefined);
   assert.equal(r.twin.sections.claims, undefined);
-  const withFinance = await call(DOCTOR, `/ward/twin?orgId=${ORG}&finance=1`);
+  const withFinance = await call(ADMIN, `/ward/twin?orgId=${ORG}&finance=1`);
   assert.ok(withFinance.twin.sections.billing);
   assert.ok(withFinance.twin.sections.claims);
+  assert.equal(withFinance.twin.financeWithheld, undefined);
 });
 
 /* ---- 4: NOT BUILT is distinguishable from checked-and-zero ----------------------------------------- */
 
-test("4. blood bank and radiology backlog are marked NOT BUILT, never a silent zero", async () => {
+test("3b. NEGATIVE: an EMR_VIEW-only actor asking for finance gets no finance section, checked on the server", async () => {
+  seed();
+  for (const who of [DOCTOR, NURSE]) {
+    const r = await call(who, `/ward/twin?orgId=${ORG}&finance=1`);
+    assert.equal(r.__status, 200);
+    assert.equal(r.twin.sections.billing, undefined, "doctor/nurse hold no billing.view");
+    assert.equal(r.twin.sections.claims, undefined);
+    assert.equal(r.twin.financeWithheld, "billing_view_required");
+  }
+});
+
+test("4. blood bank is marked NOT BUILT, never a silent zero; radiology backlog is now a real section", async () => {
   seed();
   const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
   assert.ok(r.twin.notBuilt.bloodBank, "must name that blood inventory was never built");
-  assert.ok(r.twin.notBuilt.radiologyQueue);
+  assert.equal(r.twin.notBuilt.radiologyQueue, undefined);
+  assert.equal(r.twin.sections.radiology.status, "ok");
   assert.match(r.twin.notBuilt.bloodBank, /no blood-product inventory module/);
   // And these must NEVER appear as a numeric section that looks like a real zero count.
   assert.equal(r.twin.sections.bloodBank, undefined);
-  assert.equal(r.twin.sections.radiologyQueue, undefined);
 });
 
 /* ---- 5: one dead subsystem does not blank the hospital --------------------------------------------- */
@@ -187,6 +199,12 @@ test("5. ADVERSARIAL: a broken subsystem is UNAVAILABLE by name, and everything 
   RECORD.latestByType = async (tenantId, type, limit) => {
     if (type === "CriticalResultLoop") throw new Error("simulated storage fault");
     return realLatestByType(tenantId, type, limit);
+  };
+  // R4-2: the hospital-wide criticals list pages every loop (pageByType), so the fault is injected there too.
+  const realPageByType = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (tenantId, type, opts) => {
+    if (type === "CriticalResultLoop") throw new Error("simulated storage fault");
+    return realPageByType(tenantId, type, opts);
   };
   const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
   assert.equal(r.__status, 200, "the whole request must not fail because one section did");
@@ -267,6 +285,45 @@ test("11. reconstruction refuses a missing or invalid timestamp rather than gues
   assert.equal(missing.__status, 422);
   const bad = await call(ADMIN, `/ward/twin-reconstruct?orgId=${ORG}&at=not-a-date`);
   assert.equal(bad.__status, 422);
+});
+
+test("11b. R5-4: past the per-type bound the reconstruction reads the NEWEST records, and says the oldest were not read", async () => {
+  seed();
+  /* 505 critical-result loops: five more than the rebuild's per-type bound. The bound is real (each
+   * record read costs one further history read), so what matters is WHICH end of the type it reads.
+   * It used to read the oldest 500, which is exactly the half an as-of question is never about. */
+  const rows = [];
+  for (let i = 0; i < 505; i++) {
+    rows.push({ resourceType: "CriticalResultLoop", id: `crl-${String(i).padStart(3, "0")}`, version: 1, patientId: "twin-pat-11b",
+      reportedAt: new Date(Date.parse("2026-01-01T00:00:00.000Z") + i * 60000).toISOString(), status: "open", meta: meta() });
+  }
+  await RECORD.append(TENANT.id, rows);
+
+  const r = await call(ADMIN, `/ward/twin-reconstruct?orgId=${ORG}&at=${encodeURIComponent(new Date().toISOString())}`);
+  assert.equal(r.__status, 200, JSON.stringify(r).slice(0, 400));
+  const s = r.reconstruction.state.CriticalResultLoop;
+  assert.equal(s.status, "partial");
+  assert.equal(s.capped, true, "the ceiling is stated, never silently applied");
+  assert.equal(s.count, 500);
+  const ids = new Set(s.records.map((x) => x.id));
+  assert.ok(ids.has("crl-504"), "the newest record must be in a reconstruction of a recent moment");
+  assert.ok(ids.has("crl-005"), "the newest 500 are crl-005 .. crl-504");
+  assert.ok(!ids.has("crl-000"), "and the OLDEST are the ones dropped, which is what the screen says");
+});
+
+test("20b. R5-4: a notification read that FAILED reports unavailable, never a delivery rate over an empty sample", async () => {
+  seed();
+  const realLatestByType = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenantId, type, limit, opts) => {
+    if (type === "BreakGlassGrant") throw new Error("simulated storage fault");
+    return realLatestByType(tenantId, type, limit, opts);
+  };
+  const r = await call(ADMIN, `/ward/operational-health?orgId=${ORG}`);
+  RECORD.latestByType = realLatestByType;
+  assert.equal(r.__status, 200, "one dead read does not blank the report");
+  assert.equal(r.health.notifications.status, "unavailable", "a failed read is not a hospital that sent nothing");
+  assert.ok(r.health.notifications.error, "and it says why");
+  assert.equal(r.health.notifications.rate, undefined, "no rate is computed over records that were never read");
 });
 
 /* ---- 12: freshnessOf, pure --------------------------------------------------------------------------- */
@@ -444,4 +501,130 @@ test("23. ADVERSARIAL: operational health never carries another hospital's state
   seed();
   const outsider = await call(OUTSIDER, `/ward/operational-health?orgId=${ORG}`);
   assert.equal(outsider.__status, 403, "hospital B has no membership in hospital A's org - refused before any capability is even checked");
+});
+
+/* ---- P1.13 command center: drill-down and the new sections --------------------------------------- */
+
+test("P1.13 ICU occupancy, ventilation and vasopressors carry the encounter ids behind each count", async () => {
+  seed();
+  await patient("cc-icu-p1"); await patient("cc-icu-p2"); await patient("cc-ward-p3");
+  await encounter("cc-icu-e1", "cc-icu-p1", { class: "ICU", location: { ward: "ICU", bed: "1" } });
+  await encounter("cc-icu-e2", "cc-icu-p2", { class: "ICU", location: { ward: "ICU", bed: "2" } });
+  await encounter("cc-ward-e3", "cc-ward-p3");
+  const recent = new Date(Date.now() - 3600000).toISOString();
+  await RECORD.append(TENANT.id, [
+    { resourceType: "IcuRecord", id: "cc-vent-1", version: 1, patientId: "cc-icu-p1", encounterId: "cc-icu-e1", kind: "ventilator", at: recent, values: {}, meta: meta() },
+    { resourceType: "MedicationOrder", id: "cc-nor-1", version: 1, patientId: "cc-icu-p2", encounterId: "cc-icu-e2", drug: "Noradrenaline", status: "active", meta: meta() },
+  ]);
+  const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  const icu = r.twin.sections.icu;
+  assert.equal(icu.status, "ok", JSON.stringify(icu));
+  assert.equal(icu.data.occupied, 2);
+  assert.deepEqual(icu.data.drill.occupied.items.map((i) => i.encounterId).sort(), ["cc-icu-e1", "cc-icu-e2"]);
+  assert.equal(icu.data.drill.occupied.truncated, false);
+  assert.ok(icu.generatedAt, "each section says when it was computed");
+  assert.equal(icu.data.ventilatedRecorded, 1); assert.equal(icu.data.vasopressorsRecorded, 1);
+  assert.equal(icu.data.drill.ventilated.total, icu.data.ventilatedRecorded);
+  assert.equal(icu.data.drill.vasopressors.total, icu.data.vasopressorsRecorded);
+  // The flow section now names the patients behind "occupied".
+  const occ = r.twin.sections.flow.data.flow.drill.occupied;
+  assert.equal(occ.total, r.twin.sections.flow.data.flow.beds.occupied);
+});
+
+test("R4-5: an open census past its ceiling makes the ICU and flow sections say too_many_open, not a bare 'threw'", async () => {
+  seed();
+  const { RecordService, ListCeilingError } = await import("../functions/_wardsynq/service.js");
+  const real = RecordService.prototype.listByStatus;
+  RecordService.prototype.listByStatus = async function (type) { throw new ListCeilingError("too_many_open", type, 5000); };
+  try {
+    const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+    assert.equal(r.twin.sections.icu.status, "unavailable");
+    assert.equal(r.twin.sections.icu.error, "too_many_open");
+    assert.equal(r.twin.sections.flow.error, "too_many_open");
+  } finally { RecordService.prototype.listByStatus = real; }
+});
+
+test("P1.13 lab TAT and radiology backlog are computed from real timestamps, with exclusions counted", async () => {
+  seed();
+  await patient("cc-lab-p1");
+  await encounter("cc-lab-e1", "cc-lab-p1");
+  const t0 = Date.now() - 5 * 3600000;
+  const m = (iso) => ({ ...meta(), recordedAt: iso });
+  await RECORD.append(TENANT.id, [
+    { resourceType: "ServiceRequest", id: "cc-sr-1", version: 1, patientId: "cc-lab-p1", encounterId: "cc-lab-e1", code: "K", category: "laboratory", status: "active", meta: m(new Date(t0).toISOString()) },
+    { resourceType: "DiagnosticReport", id: "cc-dr-1", version: 1, patientId: "cc-lab-p1", serviceRequestId: "cc-sr-1", status: "final", reportedAt: new Date(t0 + 60 * 60000).toISOString(), meta: meta() },
+    { resourceType: "ServiceRequest", id: "cc-sr-img", version: 1, patientId: "cc-lab-p1", encounterId: "cc-lab-e1", code: "CXR", category: "imaging", status: "active", meta: m(new Date(t0).toISOString()) },
+  ]);
+  const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  const lab = r.twin.sections.labTat, rad = r.twin.sections.radiology;
+  assert.equal(lab.status, "ok", JSON.stringify(lab));
+  assert.equal(rad.status, "ok", JSON.stringify(rad));
+  assert.equal(lab.data.sampleSize, 1);
+  assert.equal(lab.data.medianMinutes, 60);
+  assert.equal(rad.data.waiting, 1);
+  assert.equal(rad.data.drill.waiting.items[0].serviceRequestId, "cc-sr-img");
+  assert.equal(rad.data.drill.waiting.items[0].encounterId, "cc-lab-e1");
+});
+
+test("P1.13 OPD queue counts today's waiting and in-consultation tickets; staffing with no roster is not known, never zero", async () => {
+  seed();
+  docs.set("q_sessions/s1", { fields: { hospitalId: ORG, date: new Date().toISOString().slice(0, 10), status: "active" }, updateTime: "t1" });
+  docs.set("q_tickets/t1", { fields: { sessionId: "s1", status: "waiting" }, updateTime: "t1" });
+  docs.set("q_tickets/t2", { fields: { sessionId: "s1", status: "in_consultation" }, updateTime: "t1" });
+  const r = await call(DOCTOR, `/ward/twin?orgId=${ORG}`);
+  assert.equal(r.twin.sections.opdQueue.status, "ok", JSON.stringify(r.twin.sections.opdQueue));
+  assert.equal(r.twin.sections.opdQueue.data.waiting, 1);
+  assert.equal(r.twin.sections.opdQueue.data.inConsultation, 1);
+  const staff = r.twin.sections.staffing;
+  assert.equal(staff.status, "ok", JSON.stringify(staff));
+  assert.equal(staff.data.rosterConfigured, false, "no shifts set up is 'not known', never zero on duty");
+  assert.equal(staff.data.onDutyNow, null);
+});
+
+test("P1.13 NEGATIVE: an outsider from another hospital gets no twin at all", async () => {
+  seed();
+  const r = await call(OUTSIDER, `/ward/twin?orgId=${ORG}&finance=1`);
+  assert.equal(r.__status, 403);
+  assert.equal(r.twin, undefined);
+});
+
+test("P1.13 pure helpers: percentile, TAT exclusions, backlog oldest, staffing gaps", async () => {
+  const { percentile, labTurnaround, radiologyBacklog, staffingNow } = await import("../functions/_wardsynq/digital-twin.js");
+  assert.equal(percentile([], 50), null);
+  assert.equal(percentile([10, 20, 30, 40], 50), 20);
+  assert.equal(percentile([10, 20, 30, 40, 50, 60, 70, 80, 90, 100], 90), 90);
+  const now = Date.parse("2026-09-13T12:00:00Z");
+  const reqs = [
+    { id: "a", category: "laboratory", meta: { recordedAt: "2026-09-13T10:00:00Z" } },
+    { id: "b", category: "laboratory", meta: {} },
+    { id: "c", category: "laboratory", meta: { recordedAt: "2026-09-13T11:00:00Z" } },
+  ];
+  const reps = [
+    { serviceRequestId: "a", reportedAt: "2026-09-13T10:30:00Z" },
+    { serviceRequestId: "b", reportedAt: "2026-09-13T11:00:00Z" },
+    { serviceRequestId: "c", reportedAt: "2026-09-13T10:00:00Z" },
+    { serviceRequestId: "gone", reportedAt: "2026-09-13T11:00:00Z" },
+    { serviceRequestId: "a", reportedAt: "" },
+  ];
+  const tat = labTurnaround(reqs, reps, now - 7 * 864e5, now);
+  assert.equal(tat.sampleSize, 1);
+  assert.equal(tat.medianMinutes, 30);
+  assert.deepEqual(tat.excluded, { requestNotReadable: 1, requestTimeMissing: 1, reportTimeMissing: 1, negative: 1 });
+  assert.equal(labTurnaround([], [], 0, now).medianMinutes, null, "no sample is null, never 0");
+
+  const img = (id, at) => ({ resourceType: "ServiceRequest", id, category: "imaging", status: "active", meta: at ? { recordedAt: at } : {} });
+  const bl = radiologyBacklog([img("x", "2026-09-13T08:00:00Z"), img("y", "2026-09-12T08:00:00Z"), img("z"), img("done", "2026-09-10T00:00:00Z")], [{ serviceRequestId: "done" }], now);
+  assert.equal(bl.waiting, 3);
+  assert.equal(bl.oldestWaitingSince, "2026-09-12T08:00:00.000Z");
+  assert.equal(bl.orderTimeMissing, 1);
+
+  const shifts = { day: { id: "day", name: "Day", unit: "ICU", start: "08:00", end: "20:00", minimum: { nurse: 2, doctor: 1 } } };
+  const cov = [{ date: "2026-09-13", shiftId: "day", shift: "Day", unit: "ICU", gaps: [{ role: "nurse", need: 2, have: 1, short: 1 }] }];
+  const sn = staffingNow(now, 0, shifts, cov, [{ identity: "n1", shift: "Day" }]);
+  assert.equal(sn.shiftsRunning, 1);
+  assert.equal(sn.requiredNow, 3);
+  assert.equal(sn.onDutyNow, 1);
+  assert.equal(sn.gaps[0].role, "nurse");
+  assert.equal(staffingNow(now, 0, shifts, [], []).requiredNow, null);
+
 });

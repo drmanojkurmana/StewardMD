@@ -2,11 +2,11 @@
   "guideline": "aml",
   "title": "Acute Myeloid Leukemia Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
+  "navigatorVersion": "3.0.0",
   "diseaseId": "aml_cancer",
   "status": "draft",
   "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Pathway: presentation (newly diagnosed / APL / relapsed) -> workup checklist -> fitness for intensive therapy -> ELN risk by cytogenetics and molecular markers (FLT3/NPM1/IDH/CEBPA) -> biomarker-directed induction (7+3 +/- targeted, CPX-351, or azacitidine-venetoclax) -> response -> risk-directed consolidation / transplant -> surveillance -> relapsed/refractory pathway. No AML-specific dose protocol exists in this library, so treatment leaves give checklist guidance with NO doses and reference no protocol. Structural pathway only; no proprietary guideline text reproduced. DRAFT - not clinically activated.",
-  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN/DeVita/Harrison). Leaves are guidance checklists; the physician decides and any dosing is computed elsewhere.",
+  "sourceNote": "NCCN Guidelines Version 5.2026 - Acute Myeloid Leukemia (AML-1 to AML-9, AML-E, APL-1 to APL-3)",
   "startNodeIds": [
     "n_entry"
   ],
@@ -101,12 +101,15 @@
       ],
       "required": true,
       "bullets": [
-        "CBC with differential, peripheral smear, coagulation panel (PT/aPTT/fibrinogen/D-dimer), LDH, uric acid, renal/hepatic panels",
-        "Bone marrow aspirate + biopsy: morphology, flow cytometry immunophenotype, cytochemistry",
-        "Cytogenetics (karyotype + FISH) and molecular panel: FLT3-ITD/TKD, NPM1, CEBPA, IDH1/IDH2, TP53, RUNX1, ASXL1 (and a broad NGS myeloid panel)",
-        "Assess for tumor lysis and hyperleukocytosis/leukostasis; start allopurinol/hydration; leukapheresis if symptomatic hyperleukocytosis",
-        "HLA typing and early transplant referral if intensive therapy is a candidate; baseline echocardiogram before anthracycline; HBV/HCV/HIV serology",
-        "Lumbar puncture only if CNS symptoms (after excluding leukostasis/coagulopathy)"
+        "Complete blood count (CBC) with differential, peripheral blood smear review, comprehensive metabolic panel, LFTs, LDH, uric acid.",
+        "Coagulation / DIC panel: PT/INR, PTT, fibrinogen, and D-dimer (mandatory on presentation to detect subclinical DIC).",
+        "Tumor lysis syndrome (TLS) panel: potassium, phosphorus, calcium, uric acid, creatinine; initiate aggressive hydration +/- rasburicase or allopurinol.",
+        "Bone marrow aspirate and core biopsy: morphologic blast percentage (>=20% or presence of defining cytogenetic abnormalities), comprehensive flow cytometric immunophenotyping (CD33, CD34, CD117, CD123).",
+        "Rapid cytogenetics (karyotype and FISH) for PML::RARA, RUNX1::RUNX1T1, CBFB::MYH11, KMT2A, and MECOM.",
+        "Comprehensive Myeloid NGS Gene Panel (ELN 2022 / NCCN 2026): mandatory testing for FLT3 (ITD and TKD, reporting allelic ratio), NPM1, CEBPA (in-frame bZIP mutations), IDH1, IDH2, TP53, and myelodysplasia-related (MR) genes (ASXL1, BCOR, EZH2, RUNX1, SF3B1, SRSF2, STAG2, U2AF1, ZRSR2).",
+        "Infectious disease screening: Hepatitis B, Hepatitis C, HIV-1/2; screen and treat active fungal/bacterial infections prior to induction.",
+        "Cardiac assessment: baseline echocardiogram or MUGA scan (mandatory prior to high-dose anthracycline).",
+        "Early HLA typing for patient and siblings; initiate immediate allogeneic donor search for all intermediate and adverse risk patients."
       ],
       "options": [
         {
@@ -331,7 +334,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "7+3 + midostaurin",
-      "title": "Induction: 7+3 plus midostaurin (FLT3-mutated)",
+      "title": "Induction: 7+3 plus FLT3 Inhibitor (Midostaurin or Quizartinib)",
       "section": "Treatment",
       "description": "Intensive induction with a FLT3 inhibitor added.",
       "path": "AML / Fit / Induction / FLT3",
@@ -344,10 +347,12 @@
         "1"
       ],
       "bullets": [
-        "Standard 7+3 induction (continuous-infusion cytarabine + an anthracycline) plus midostaurin on the specified days",
-        "Continue midostaurin through consolidation and as maintenance where used",
-        "Antifungal prophylaxis choice must account for azole-FLT3-inhibitor interactions",
-        "Reassess response by marrow after count recovery (next step)"
+        "Standard 7+3 induction backbone: Cytarabine 100-200 mg/m2 continuous IV infusion daily x 7 days + Daunorubicin 60-90 mg/m2 (or Idarubicin 12 mg/m2) daily x 3 days.",
+        "FLT3 Inhibitor options:",
+        "• Midostaurin: 50 mg PO BID on days 8-21 of induction and consolidation (approved for both FLT3-ITD and FLT3-TKD mutations, RATIFY trial).",
+        "• Quizartinib: 35.5 mg PO daily on days 8-21 (approved for FLT3-ITD mutations, QuANTUM-First trial; requires ECG QTc monitoring).",
+        "Bone marrow biopsy at day 14-21 to assess blast clearance (hypocellular marrow with <5% blasts); reinduce if significant residual leukemia.",
+        "Evaluate for consolidative allogeneic HCT in first remission (CR1), particularly for FLT3-ITD with adverse co-mutations or persistent MRD."
       ],
       "protocolRefs": [
         "aml-7-3-midostaurin"
@@ -588,6 +593,10 @@
         "If transplant-ineligible or no donor: high-dose cytarabine-based consolidation",
         "MRD status and comorbidity refine the decision; bridge with consolidation while a donor is identified",
         "Then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -617,6 +626,10 @@
         "Post-remission oral azacitidine maintenance for patients not proceeding to transplant",
         "FLT3-inhibitor maintenance after transplant for FLT3-mutated disease where used",
         "Prioritize clinical-trial enrollment; then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -644,7 +657,11 @@
         "Survivorship: cardiac follow-up after anthracyclines, vaccination, secondary-malignancy awareness"
       ],
       "linkTo": "n_relapsed",
-      "linkLabel": "If relapse is detected: go to the relapsed/refractory pathway"
+      "linkLabel": "If relapse is detected: go to the relapsed/refractory pathway",
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
+      ]
     },
     {
       "id": "n_unfit_target",
@@ -734,11 +751,10 @@
         "1"
       ],
       "bullets": [
-        "Azacitidine (or decitabine) + venetoclax with a careful ramp-up and tumor-lysis prophylaxis",
-        "Antifungal azoles markedly raise venetoclax exposure - reduce the venetoclax dose accordingly",
-        "Expect prolonged neutropenia; hold/adjust venetoclax duration by marrow response",
-        "For FLT3-mutated unfit disease, this backbone is used and a FLT3 inhibitor is reserved options at relapse",
-        "Assess response after the first cycles (next step)"
+        "Azacitidine 75 mg/m2 SC/IV daily x 7 days (or Decitabine 20 mg/m2 IV daily x 5 days) combined with Venetoclax oral daily (target dose 400 mg daily).",
+        "Mandatory TLS Prophylaxis: Inpatient admission or close outpatient ramp-up (Day 1: 100 mg, Day 2: 200 mg, Day 3+: 400 mg), vigorous hydration, allopurinol/rasburicase, and frequent electrolyte monitoring.",
+        "CYP3A4 inhibitor dose adjustments: Reduce venetoclax dose by 75% (to 100 mg daily) with strong CYP3A4 inhibitors (posaconazole, voriconazole), and by 50% (to 200 mg daily) with moderate inhibitors (fluconazole, isavuconazole).",
+        "Bone marrow evaluation: Perform day 21-28 bone marrow aspirate/biopsy. If blast clearance is achieved, interrupt venetoclax to allow peripheral count recovery before initiating cycle 2."
       ],
       "protocolRefs": [
         "aml-aza-venetoclax"
@@ -751,7 +767,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "IDH1 inhibitor",
-      "title": "Unfit: ivosidenib-based (IDH1-mutated)",
+      "title": "Unfit: Ivosidenib or Olutasidenib (IDH1-Mutated AML)",
       "section": "Treatment",
       "description": "An oral IDH1 inhibitor, alone or with azacitidine, for IDH1-mutated unfit disease.",
       "path": "AML / Unfit / IDH1",
@@ -764,10 +780,10 @@
         "1"
       ],
       "bullets": [
-        "Ivosidenib + azacitidine (or ivosidenib monotherapy) for IDH1-mutated disease",
-        "Monitor for differentiation syndrome and QT prolongation; start corticosteroids promptly if differentiation syndrome is suspected",
-        "Azacitidine + venetoclax is an alternative lower-intensity option",
-        "Assess response after the first cycles (next step)"
+        "Ivosidenib 500 mg PO daily: Can be given as monotherapy or combined with Azacitidine 75 mg/m2 x 7 days (AGILE trial showed significant event-free and overall survival advantage over azacitidine alone).",
+        "Olutasidenib 150 mg PO BID: Potent oral IDH1 inhibitor; indicated for relapsed/refractory or intensive-induction ineligible IDH1-mutated AML.",
+        "Monitor for IDH Differentiation Syndrome: Symptoms include fever, dyspnea, unexplained pulmonary infiltrates, pleural/pericardial effusions, and rapid leukocytosis. Promptly treat with Dexamethasone 10 mg IV BID until resolution.",
+        "Monitor ECG QTc interval periodically (especially with ivosidenib and concurrent azole antifungals)."
       ],
       "protocolRefs": [
         "aml-ivosidenib",
@@ -1104,9 +1120,10 @@
         "1"
       ],
       "bullets": [
-        "Gilteritinib for relapsed/refractory FLT3-mutated AML",
-        "Monitor for differentiation syndrome and QT prolongation",
-        "Bridge responders to allogeneic transplant; consider FLT3-inhibitor maintenance after transplant"
+        "Gilteritinib 120 mg PO once daily: Potent dual FLT3-ITD and FLT3-TKD inhibitor; demonstrated superior overall survival and CR/CRh rates compared to salvage chemotherapy (ADMIRAL trial).",
+        "Gilteritinib + Venetoclax: Promising combination showing high response rates in refractory/relapsed FLT3-mutated disease.",
+        "Monitor for differentiation syndrome, posterior reversible encephalopathy syndrome (PRES), and QTc prolongation.",
+        "Bridge to allogeneic HCT: Proceed to consolidative allogeneic stem cell transplant immediately upon achieving morphologic or molecular remission; continue post-HCT maintenance with gilteritinib."
       ],
       "protocolRefs": [
         "aml-gilteritinib"
@@ -1119,7 +1136,7 @@
       "nodeType": "end",
       "template": "end",
       "name": "Ivosidenib (R/R)",
-      "title": "Relapsed IDH1-mutated: ivosidenib",
+      "title": "R/R AML: Ivosidenib or Olutasidenib (IDH1-Mutated)",
       "section": "Recurrence",
       "description": "An IDH1 inhibitor for relapsed/refractory IDH1-mutated disease.",
       "path": "AML / Relapsed / IDH1",
@@ -1132,9 +1149,10 @@
         "2A"
       ],
       "bullets": [
-        "Ivosidenib for relapsed/refractory IDH1-mutated AML",
-        "Monitor for differentiation syndrome and QT prolongation",
-        "Bridge responders to allogeneic transplant where eligible"
+        "Ivosidenib (500 mg PO daily) or Olutasidenib (150 mg PO BID) monotherapy produces durable CR/CRh in relapsed or refractory IDH1-mutated AML.",
+        "Evaluate IDH differentiation syndrome vigilantly; hold drug and initiate dexamethasone 10 mg IV q12h immediately at symptom onset.",
+        "Consider combination therapy with Venetoclax or Azacitidine on clinical trials or compassionate access.",
+        "Bridge to allogeneic HCT upon count recovery and remission."
       ],
       "protocolRefs": [
         "aml-ivosidenib"
@@ -1298,6 +1316,10 @@
         "No cytotoxic maintenance is required after ATRA + arsenic trioxide for low/intermediate-risk disease",
         "Serial PML-RARA PCR monitoring for the first 2-3 years; higher-risk disease is monitored more closely",
         "Then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -1437,6 +1459,10 @@
         "Refer for allogeneic transplant evaluation - persistent MRD reclassifies a favorable patient toward higher relapse risk",
         "Add or continue the matched targeted agent (e.g. FLT3 inhibitor) where applicable",
         "Enroll on an MRD-directed clinical trial where available; then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -1509,6 +1535,10 @@
         "Give post-transplant FLT3-inhibitor maintenance for FLT3-mutated disease where used",
         "Continue donor search and transplant work-up in parallel with the FLT3 inhibitor",
         "Then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin",
+        "aml-7-3-gemtuzumab"
       ]
     },
     {
@@ -2008,5 +2038,20 @@
       ],
       "linkCategory": "conditional"
     }
+  ],
+  "matchDisease": false,
+  "protocolRefs": [
+    "aml-7-3",
+    "aml-7-3-gemtuzumab",
+    "aml-7-3-midostaurin",
+    "aml-atra-ato",
+    "aml-aza-venetoclax",
+    "aml-azacitidine",
+    "aml-cpx-351",
+    "aml-enasidenib",
+    "aml-flag-ida",
+    "aml-gilteritinib",
+    "aml-hidac",
+    "aml-ivosidenib"
   ]
 }

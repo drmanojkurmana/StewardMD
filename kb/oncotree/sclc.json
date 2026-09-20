@@ -1,0 +1,375 @@
+{
+  "guideline": "sclc",
+  "id": "sclc",
+  "title": "Small Cell Lung Cancer",
+  "category": "Thoracic Oncology",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "small_cell_lung_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Small Cell Lung Cancer (SCLC). Covers complete clinical algorithm: Diagnostic Workup (pathologic confirmation of small cell histology with neuroendocrine markers, contrast-enhanced CT chest/abdomen/pelvis, brain MRI with gadolinium, whole-body FDG-PET/CT for limited vs extensive stratification, baseline PFTs with performance status, laboratory evaluation with sodium and LDH) -> Stage Stratification (Limited-Stage LS-SCLC vs Extensive-Stage ES-SCLC vs Relapsed/Refractory platinum-resistant vs platinum-sensitive) -> LS-SCLC concurrent chemoradiation (platinum plus etoposide with early concurrent thoracic RT, PCI for responders, consolidative durvalumab maintenance per ADRIATIC) -> ES-SCLC first-line chemoimmunotherapy (platinum plus etoposide with atezolizumab per IMpower133 or durvalumab per CASPIAN, consolidative thoracic RT, MRI brain surveillance) -> Platinum-resistant relapse (lurbinectedin, topotecan, tarlatamab DLL3 BiTE per DeLLphi-301, palliative RT) -> Platinum-sensitive relapse (platinum doublet re-challenge, lurbinectedin, topotecan, or tarlatamab). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Small Cell Lung Cancer Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Brain MRI with and without gadolinium contrast is mandatory at diagnosis given the high incidence of brain metastases in SCLC; contrast-enhanced CT brain is used only when MRI is contraindicated.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Whole-body FDG-PET/CT from skull base to mid-thigh distinguishes limited-stage disease (confined to one hemithorax and regional nodes, encompassable in a single RT port) from extensive-stage disease (distant metastases, contralateral nodal disease, or malignant effusion).",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "LS-SCLC concurrent chemoradiation: cisplatin 60 mg/m2 day 1 (or carboplatin AUC 5-6) with etoposide 100 mg/m2 days 1-3 every 21 days for 4 cycles plus early concurrent thoracic RT (45 Gy in 1.5 Gy twice-daily fractions or 60-70 Gy once daily); PCI 25 Gy in 10 fractions for complete or partial responders; consolidative durvalumab maintenance for non-progressing patients per the ADRIATIC trial.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "ES-SCLC first-line chemoimmunotherapy: carboplatin AUC 5 day 1 with etoposide 100 mg/m2 days 1-3 plus atezolizumab 1200 mg IV day 1 every 21 days for 4 cycles then atezolizumab 1200 mg every 3 weeks (IMpower133), or carboplatin AUC 5 / cisplatin 75-80 mg/m2 day 1 with etoposide 100 mg/m2 days 1-3 plus durvalumab 1500 mg IV day 1 every 21 days for 4 cycles then durvalumab 1500 mg every 4 weeks (CASPIAN). Consolidative thoracic RT for residual thoracic disease in responders; MRI brain surveillance is preferred over PCI.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Tarlatamab is a DLL3-targeted bispecific T-cell engager (BiTE) dosed 1 mg IV day 1, 10 mg day 8, 10 mg day 15, then 10 mg every 2 weeks per the DeLLphi-301 trial; monitor for cytokine release syndrome (CRS) and immune effector cell-associated neurotoxicity syndrome (ICANS). Lurbinectedin 3.2 mg/m2 IV over 60 minutes every 21 days; topotecan 1.5 mg/m2/day IV days 1-5 every 21 days (or 2.3 mg/m2/day PO days 1-5).",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "sclc_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Small Cell Lung Cancer: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before stage stratification. Confirm small cell histology with neuroendocrine markers, stage the chest/abdomen/pelvis and brain, separate limited from extensive stage with PET/CT, and document pulmonary reserve and baseline laboratories.",
+      "path": "Small Cell Lung Cancer / Workup",
+      "pills": [
+        "SCLC",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Pathologic confirmation of small cell histology with neuroendocrine markers (synaptophysin, chromogranin, CD56, INSM1, Ki-67 >80-90%)",
+        "Contrast-enhanced CT of the chest, abdomen, and pelvis",
+        "Brain MRI with and without gadolinium contrast (mandatory due to high incidence of brain metastases; CT with contrast only if MRI contraindicated)",
+        "Whole-body FDG-PET/CT (skull base to mid-thigh) to differentiate limited from extensive stage",
+        "Baseline pulmonary function testing (PFTs: FEV1, DLCO) and performance status evaluation prior to concurrent chemoradiation",
+        "Laboratory evaluation: CBC, CMP, sodium (screening for SIADH), LDH, and liver function tests"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Stage Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage",
+      "linkId": "sclc_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Stage Stratification",
+      "title": "Small Cell Lung Cancer: Stage Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign limited vs extensive stage from anatomic extent and RT-port encompassability, or classify relapse by interval from completion of first-line platinum; the group selects the concurrent chemoradiation, chemoimmunotherapy, or relapsed-therapy pathway.",
+      "path": "Small Cell Lung Cancer / Stage Stratification",
+      "pills": [
+        "SCLC",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Limited-Stage SCLC (LS-SCLC): disease confined to one hemithorax with regional nodes, tolerable in a single radiation port.",
+        "Extensive-Stage SCLC (ES-SCLC): distant metastases, contralateral nodal disease, or malignant effusion.",
+        "Relapsed / Refractory platinum-resistant SCLC: relapse less than 6 months from completion of first-line platinum.",
+        "Relapsed / Refractory platinum-sensitive SCLC: relapse 6 months or more from completion of first-line platinum."
+      ],
+      "options": [
+        {
+          "id": "limited",
+          "label": "Limited-Stage SCLC (LS-SCLC: Disease confined to one hemithorax, regional nodes, tolerable in single RT port)",
+          "sets": {
+            "stage": "limited"
+          },
+          "pills": [
+            "SCLC",
+            "limited-stage",
+            "LS-SCLC"
+          ]
+        },
+        {
+          "id": "extensive",
+          "label": "Extensive-Stage SCLC (ES-SCLC: Distant metastases, contralateral nodal disease, or malignant effusion)",
+          "sets": {
+            "stage": "extensive"
+          },
+          "pills": [
+            "SCLC",
+            "extensive-stage",
+            "ES-SCLC"
+          ]
+        },
+        {
+          "id": "resistant",
+          "label": "Relapsed / Refractory SCLC (Platinum-Resistant: Relapse <6 months from completion of first-line platinum)",
+          "sets": {
+            "setting": "relapsed_refractory",
+            "platinum": "resistant"
+          },
+          "pills": [
+            "SCLC",
+            "relapsed",
+            "refractory",
+            "platinum-resistant"
+          ]
+        },
+        {
+          "id": "sensitive",
+          "label": "Relapsed / Refractory SCLC (Platinum-Sensitive: Relapse >=6 months from completion of first-line platinum)",
+          "sets": {
+            "setting": "relapsed_refractory",
+            "platinum": "sensitive"
+          },
+          "pills": [
+            "SCLC",
+            "relapsed",
+            "refractory",
+            "platinum-sensitive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_lssclc_tx",
+      "linkId": "sclc_lssclc_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Limited-Stage Treatment",
+      "title": "LS-SCLC: Concurrent Chemoradiation Then PCI / Durvalumab Maintenance",
+      "section": "Treatment",
+      "description": "Concurrent platinum-etoposide with early thoracic radiotherapy for limited-stage SCLC, followed by PCI for responders and consolidative durvalumab maintenance per ADRIATIC in non-progressing patients.",
+      "path": "Small Cell Lung Cancer / Limited-Stage / Treatment",
+      "pills": [
+        "SCLC",
+        "limited-stage",
+        "LS-SCLC",
+        "chemoradiation"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Concurrent Chemoradiation: Cisplatin 60 mg/m2 day 1 (or Carboplatin AUC 5-6) + Etoposide 100 mg/m2 days 1-3 every 21 days for 4 cycles with early concurrent Thoracic Radiotherapy (TRT: 45 Gy in 1.5 Gy twice-daily fractions or 60-70 Gy once daily).",
+        "Prophylactic Cranial Irradiation (PCI: 25 Gy in 10 fractions) for complete or partial responders after completion of concurrent chemoradiation.",
+        "Consolidative Durvalumab maintenance (ADRIATIC trial) after completion of concurrent chemoradiation in non-progressing patients.",
+        "Verify baseline PFTs (FEV1, DLCO) and performance status support concurrent chemoradiation before starting; monitor for esophagitis, pneumonitis, and myelosuppression during TRT.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Cisplatin/Carboplatin + Etoposide + Early Concurrent TRT -> PCI / Durvalumab Maintenance (ADRIATIC)",
+      "protocolRefs": [
+        "sclc-platinum-etoposide"
+      ]
+    },
+    {
+      "id": "n_essclc_tx",
+      "linkId": "sclc_essclc_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Extensive-Stage Treatment",
+      "title": "ES-SCLC: First-Line Chemoimmunotherapy Then IO Maintenance",
+      "section": "Treatment",
+      "description": "First-line platinum-etoposide plus PD-L1 checkpoint inhibition (atezolizumab per IMpower133 or durvalumab per CASPIAN) for extensive-stage SCLC, with consolidative thoracic RT for residual disease and MRI brain surveillance.",
+      "path": "Small Cell Lung Cancer / Extensive-Stage / Treatment",
+      "pills": [
+        "SCLC",
+        "extensive-stage",
+        "ES-SCLC",
+        "chemoimmunotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "First-line Chemoimmunotherapy Option A: Carboplatin AUC 5 day 1 + Etoposide 100 mg/m2 days 1-3 + Atezolizumab 1200 mg IV day 1 every 21 days for 4 cycles, then Atezolizumab maintenance 1200 mg every 3 weeks (IMpower133 trial).",
+        "First-line Chemoimmunotherapy Option B: Carboplatin AUC 5 or Cisplatin 75-80 mg/m2 day 1 + Etoposide 100 mg/m2 days 1-3 + Durvalumab 1500 mg IV day 1 every 21 days for 4 cycles, then Durvalumab maintenance 1500 mg every 4 weeks (CASPIAN trial).",
+        "Consolidative thoracic RT for residual thoracic disease in responding patients.",
+        "MRI brain surveillance preferred over PCI in responding extensive-stage patients.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Platinum + Etoposide + Atezolizumab or Durvalumab x 4 cycles -> IO Maintenance",
+      "protocolRefs": [
+        "sclc-atezolizumab",
+        "sclc-durvalumab",
+        "sclc-platinum-etoposide"
+      ]
+    },
+    {
+      "id": "n_relapse_resistant_tx",
+      "linkId": "sclc_relapse_resistant_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Platinum-Resistant Relapse Treatment",
+      "title": "Platinum-Resistant Relapse: Lurbinectedin, Topotecan, or Tarlatamab",
+      "section": "Treatment",
+      "description": "Second-line and subsequent therapy for platinum-resistant or refractory relapse (relapse less than 6 months from first-line platinum): lurbinectedin, topotecan, or tarlatamab DLL3 BiTE with palliative RT for brain or bone metastases.",
+      "path": "Small Cell Lung Cancer / Relapsed Refractory Platinum-Resistant / Treatment",
+      "pills": [
+        "SCLC",
+        "relapsed",
+        "refractory",
+        "platinum-resistant"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Lurbinectedin 3.2 mg/m2 IV infusion over 60 minutes every 21 days.",
+        "Topotecan 1.5 mg/m2/day IV days 1-5 every 21 days (or 2.3 mg/m2/day PO days 1-5).",
+        "Tarlatamab (DLL3-targeted bispecific T-cell engager / BiTE, DeLLphi-301 trial: 1 mg IV day 1, 10 mg day 8, 10 mg day 15, then 10 mg every 2 weeks; monitor for CRS and ICANS).",
+        "Palliative radiotherapy for brain or bone metastases.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Lurbinectedin 3.2 mg/m2 or Topotecan or Tarlatamab (DLL3 BiTE) 10 mg q2w",
+      "protocolRefs": [
+        "sclc-topotecan"
+      ]
+    },
+    {
+      "id": "n_relapse_sensitive_tx",
+      "linkId": "sclc_relapse_sensitive_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Platinum-Sensitive Relapse Treatment",
+      "title": "Platinum-Sensitive Relapse: Platinum Re-challenge, Lurbinectedin, or Tarlatamab",
+      "section": "Treatment",
+      "description": "Therapy for platinum-sensitive relapse (6 months or more from first-line platinum): retreatment with the original platinum doublet, or lurbinectedin, topotecan, or tarlatamab DLL3 BiTE.",
+      "path": "Small Cell Lung Cancer / Relapsed Refractory Platinum-Sensitive / Treatment",
+      "pills": [
+        "SCLC",
+        "relapsed",
+        "refractory",
+        "platinum-sensitive"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Retreatment with original first-line platinum doublet (Carboplatin or Cisplatin + Etoposide) for platinum-sensitive relapse (6 months or more from completion of first-line platinum).",
+        "Lurbinectedin 3.2 mg/m2 IV every 21 days as an alternative systemic option.",
+        "Topotecan (1.5 mg/m2/day IV days 1-5 every 21 days or 2.3 mg/m2/day PO days 1-5) as an alternative systemic option.",
+        "Tarlatamab (DLL3 BiTE) 10 mg every 2 weeks as an alternative systemic option with CRS and ICANS monitoring.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Platinum + Etoposide Re-challenge or Lurbinectedin or Tarlatamab DLL3 BiTE",
+      "protocolRefs": [
+        "sclc-platinum-etoposide",
+        "sclc-topotecan"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage",
+      "toNodeId": "n_stage",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_limited",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_lssclc_tx",
+      "toNodeId": "n_lssclc_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "limited",
+      "fromOptions": [
+        "limited"
+      ]
+    },
+    {
+      "id": "l_stage_extensive",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_essclc_tx",
+      "toNodeId": "n_essclc_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "extensive",
+      "fromOptions": [
+        "extensive"
+      ]
+    },
+    {
+      "id": "l_stage_resistant",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_relapse_resistant_tx",
+      "toNodeId": "n_relapse_resistant_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "resistant",
+      "fromOptions": [
+        "resistant"
+      ]
+    },
+    {
+      "id": "l_stage_sensitive",
+      "from": "n_stage",
+      "fromNodeId": "n_stage",
+      "to": "n_relapse_sensitive_tx",
+      "toNodeId": "n_relapse_sensitive_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "sensitive",
+      "fromOptions": [
+        "sensitive"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "sclc-atezolizumab",
+    "sclc-durvalumab",
+    "sclc-lurbinectedin",
+    "sclc-platinum-etoposide",
+    "sclc-tarlatamab",
+    "sclc-topotecan"
+  ]
+}

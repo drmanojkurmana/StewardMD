@@ -172,9 +172,99 @@ test("EVERY NUMBER TRACES BACK TO A REAL RECORD: ED arrival, admissions pending,
   assert.ok(kinds.includes("stays_with_open_items"));
   assert.ok(!("severity" in (f.bottlenecks[0] || {})), "no invented severity field - a plain count only");
 
-  // Never a fabricated field: no expected/predicted discharge date exists anywhere in the response.
-  assert.equal(JSON.stringify(f).indexOf("xpectedDischarge"), -1);
+  // Never a fabricated field: no predicted discharge date. An expected date appears only when a clinician stated one
+  // (expected-discharge.js), and none was stated here, so nothing is overdue and no stay carries a date.
+  assert.deepEqual(f.overdueDischarges, []);
+  assert.ok(!/"expectedDischarge":\{/.test(JSON.stringify(f)), "no stay carries a date nobody set");
   assert.equal(JSON.stringify(f).indexOf("redictedDischarge"), -1);
+});
+
+/* ---- R5-1: the companion reads -------------------------------------------------------------------
+ *
+ * MedicationOrder / MedicationAdministration / ServiceRequest / Condition / DiagnosticReport used to be
+ * `svc.list(type, 1000).catch(() => [])` - the OLDEST thousand, with a failed read becoming []. Past a
+ * thousand of any of them the open-items count for a CURRENT patient read 0, silently. */
+async function oneOpenStay() {
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "Medical A" }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "1" }, "actor-1");
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Flow Ceiling Testcase", ...nextMrn(), gender: "female", ageYears: 60 });
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "1" });
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+  return adm;
+}
+
+test("R5-1: past 1,000 older MedicationOrders an open stay still counts its OWN order, never 0", async () => {
+  seedHospital();
+  const adm = await oneOpenStay();
+
+  // 1,500 active orders belonging to other, older admissions - written FIRST, so the oldest-1,000
+  // read would have filled up on these and missed the one that matters.
+  const filler = [];
+  for (let i = 0; i < 1500; i++) {
+    filler.push({
+      resourceType: "MedicationOrder", id: `wsq-mo-filler-${i}`, version: 1,
+      patientId: `wsq-pt-old-${i}`, encounterId: `wsq-enc-old-${i}`, drug: "Filler", prescriberId: "cfa:old",
+      dose: { value: 1, unit: "mg" }, status: "active",
+    });
+  }
+  await RECORD.append(TENANT_ROW.id, filler);
+
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Amoxicillin 500mg", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "TID" } });
+  assert.equal(ord.__status, 200, JSON.stringify(ord));
+
+  const f = (await as(DOCTOR, `/ward/patient-flow?orgId=${ORG}`)).flow;
+  assert.deepEqual(f.openItemsUnknown, [], "nothing was truncated, so the count is a real one");
+  assert.equal(f.staysWithOpenItems.length, 1, JSON.stringify(f.staysWithOpenItems));
+  assert.equal(f.staysWithOpenItems[0].encounterId, adm.encounterId);
+  assert.equal(f.staysWithOpenItems[0].openItems, 1, "its own order, not 0");
+  assert.equal(f.dischargeCandidates, 0, "and it is NOT a discharge candidate");
+});
+
+test("R5-1: a companion read that FAILS is a 502, never an empty list behind a live count", async () => {
+  seedHospital();
+  await oneOpenStay();
+
+  const real = RECORD.pageByType.bind(RECORD);
+  RECORD.pageByType = async (tenantId, type, opts) => {
+    if (type === "Condition") throw new Error("record store unavailable");
+    return real(tenantId, type, opts);
+  };
+  try {
+    const flow = await as(DOCTOR, `/ward/patient-flow?orgId=${ORG}`);
+    assert.equal(flow.__status, 502, JSON.stringify(flow));
+    assert.equal(flow.error, "record_read_failed");
+    assert.equal(flow.flow, null, "no half-built board with a swallowed read inside it");
+  } finally { delete RECORD.pageByType; }
+});
+
+test("R5-1: a companion read past its ceiling makes open items UNKNOWN, never zero", async () => {
+  seedHospital();
+  const adm = await oneOpenStay();
+  await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Amoxicillin 500mg", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "TID" } });
+
+  // More DiagnosticReports than one read can hold: pages that never run out.
+  const real = RECORD.pageByType.bind(RECORD);
+  let made = 0;
+  RECORD.pageByType = async (tenantId, type, opts) => {
+    if (type !== "DiagnosticReport") return real(tenantId, type, opts);
+    const records = [];
+    for (let i = 0; i < 1000; i++) { made += 1; records.push({ resourceType: "DiagnosticReport", id: `wsq-dr-${made}`, version: 1, patientId: "wsq-pt-x", code: "X", status: "final" }); }
+    return { records, next: made };
+  };
+  try {
+    const flow = await as(DOCTOR, `/ward/patient-flow?orgId=${ORG}`);
+    assert.equal(flow.__status, 200, JSON.stringify(flow).slice(0, 400));
+    const f = flow.flow;
+    assert.deepEqual(f.openItemsUnknown, ["DiagnosticReport"], "the screen is told WHICH read ran short");
+    assert.equal(f.dischargeCandidates, null, "null, never 0: 'ready to leave' is a clinical claim");
+    assert.equal(f.drill.dischargeCandidates, null, "and no drill-down list stands behind a count nobody has");
+    assert.deepEqual(f.staysWithOpenItems, [], "no stay is ranked by a number that was not counted");
+  } finally { delete RECORD.pageByType; }
+
+  // Read whole again: the counts are back and openItemsUnknown is empty. The two states are distinct.
+  const f2 = (await as(DOCTOR, `/ward/patient-flow?orgId=${ORG}`)).flow;
+  assert.deepEqual(f2.openItemsUnknown, []);
+  assert.equal(f2.staysWithOpenItems[0].openItems, 1);
 });
 
 test("RBAC: emr.view is enough to read the command center - a nurse can see it, exactly like ward metrics", async () => {

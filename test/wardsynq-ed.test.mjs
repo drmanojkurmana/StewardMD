@@ -343,6 +343,19 @@ test("THE ED BOARD lists open presentations, untriaged first, then by acuity, th
   // board most needs to surface, ahead of a patient already assessed and known to be acuity 1.
   assert.equal(board.patients[0].encounterId, c.encounterId, "the untriaged arrival sorts before an already-triaged acuity 1");
   assert.equal(board.patients[1].encounterId, b.encounterId);
+  // BUG-MU06NW2S-8D53: GET /api/queue/ward/ed-list names each patient and their recorded sex.
+  assert.equal(board.patients[1].name, "Board B");
+  assert.equal(board.patients[1].sex, "female");
+});
+
+test("ED BOARD (BUG-MU06NW2S-8D53): an unidentified arrival of unknown sex is not given one", async () => {
+  seedHospital();
+  const u = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { unknown: { sex: "unknown", isTrauma: false }, chiefComplaint: "Collapsed", arrivedAt: "2026-09-09T03:00:00.000Z" } });
+  assert.equal(u.__status, 200, JSON.stringify(u));
+  const board = await as(NURSE, `/ward/ed-list?orgId=${ORG}`);
+  const row = board.patients.find((p) => p.encounterId === u.encounterId);
+  assert.equal(row.sex, null);
+  assert.match(u.mrn, /^EMERG-UNKNOWN-/, "an arrival not marked trauma is not filed as trauma");
 });
 
 /* ---- resuscitation: the real state machine's own rules still hold ---------------------------------- */
@@ -397,4 +410,140 @@ test("an open ED patient appears on the downtime pack and in ward metrics, not o
   const metrics = await as(DOCTOR, `/ward/metrics?orgId=${ORG}&ward=ED`);
   assert.equal(metrics.__status, 200, JSON.stringify(metrics));
   assert.ok(metrics, "the ED's own metrics read without error and are not silently empty because the filter never looked for class ED");
+});
+
+/* ---- P1.11: re-triage, the reassessment clock, procedures, the ED timeline, referral ---------------- */
+
+const { reassessmentStatus, triageHistory } = await import("../functions/_wardsynq/migrate-ed.js");
+
+function setReassessConfig(map) {
+  const d = docs.get(`q_orgs/${ORG}`);
+  d.fields = { ...d.fields, wardsynq: { ...d.fields.wardsynq, edReassessMinutes: map } };
+}
+
+test("RE-TRIAGE: triage is a history - a repeat needs a reason, the Encounter's acuity follows the latest, and every triage is kept with who, when and why", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Retriage Testcase", mobile: "9876500220", gender: "male", ageYears: 61 });
+  const arr = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { mrn: reg.mrn, chiefComplaint: "Chest pain", arrivedAt: "2026-09-09T08:00:00.000Z" } });
+  assert.equal((await as(NURSE, "/ward/ed-triage", "POST", { orgId: ORG, encounterId: arr.encounterId, acuity: 3 })).__status, 200);
+
+  const noReason = await as(NURSE, "/ward/ed-triage", "POST", { orgId: ORG, encounterId: arr.encounterId, acuity: 2 });
+  assert.equal(noReason.__status, 422); assert.equal(noReason.error, "reason_required");
+
+  const again = await as(NURSE, "/ward/ed-triage", "POST", { orgId: ORG, encounterId: arr.encounterId, acuity: 1, chiefComplaint: "Chest pain, now hypotensive", reason: "BP dropped to 80 systolic" });
+  assert.equal(again.__status, 200, JSON.stringify(again));
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", arr.encounterId)).acuity, 1);
+
+  const rec = await as(DOCTOR, `/ward/ed-record?orgId=${ORG}&encounterId=${arr.encounterId}`);
+  assert.equal(rec.__status, 200, JSON.stringify(rec));
+  assert.equal(rec.triages.length, 2);
+  assert.deepEqual([rec.triages[0].acuity, rec.triages[0].previousAcuity, rec.triages[0].retriage, rec.triages[0].reason], [1, 3, true, "BP dropped to 80 systolic"]);
+  assert.equal(rec.triages[0].chiefComplaint, "Chest pain, now hypotensive");
+  assert.equal(rec.triages[0].triagedBy, idFor(NURSE));
+  assert.deepEqual([rec.triages[1].acuity, rec.triages[1].retriage], [3, false]);
+  assert.equal(rec.acuity, 1, "the current acuity and the latest history entry are the same write");
+
+  // Disposition carries the last triage forward and does not add a phantom triage entry.
+  await as(DOCTOR, "/ward/ed-disposition", "POST", { orgId: ORG, encounterId: arr.encounterId, disposition: "home" });
+  const closed = await as(DOCTOR, `/ward/ed-record?orgId=${ORG}&encounterId=${arr.encounterId}`);
+  assert.equal(closed.triages.length, 2);
+  assert.equal(closed.reassessment.state, "closed");
+});
+
+test("REASSESSMENT: with no hospital interval the answer is 'no reassessment interval set', never 'not due'; with one it is a real due time, and the board counts overdue", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Reassess Testcase", mobile: "9876500221", gender: "female", ageYears: 33 });
+  const arr = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { mrn: reg.mrn, arrivedAt: "2026-09-09T08:00:00.000Z" } });
+  let board = await as(NURSE, `/ward/ed-list?orgId=${ORG}`);
+  assert.equal(board.patients[0].reassessment.state, "not-triaged");
+  await as(NURSE, "/ward/ed-triage", "POST", { orgId: ORG, encounterId: arr.encounterId, acuity: 2 });
+
+  board = await as(NURSE, `/ward/ed-list?orgId=${ORG}`);
+  assert.equal(board.patients[0].reassessment.state, "no-interval");
+  assert.equal(board.patients[0].reassessment.text, "no reassessment interval set");
+  assert.equal(board.reassessIntervalsSet, false);
+  assert.ok(!/not due/.test(JSON.stringify(board)));
+
+  setReassessConfig({ "2": 15 });
+  board = await as(NURSE, `/ward/ed-list?orgId=${ORG}`);
+  assert.equal(board.reassessIntervalsSet, true, JSON.stringify(board));
+  const r = board.patients[0].reassessment;
+  assert.equal(r.state, "due", JSON.stringify(r)); assert.equal(r.intervalMinutes, 15);
+  assert.ok(Math.abs(Date.parse(r.dueAt) - Date.now() - 15 * 60000) < 60000);
+  assert.equal(board.overdueReassessments, 0);
+  const rec = await as(NURSE, `/ward/ed-record?orgId=${ORG}&encounterId=${arr.encounterId}`);
+  assert.equal(rec.reassessment.state, "due");
+});
+
+test("REASSESSMENT, pure: overdue is computed from the last triage; an unreadable triage time is 'not known' with a reason; an acuity with no interval is not given a default", () => {
+  const map = { "1": 5, "3": 60 };
+  const t = Date.parse("2026-09-09T08:00:00.000Z");
+  assert.equal(reassessmentStatus({ acuity: 3, triagedAt: "2026-09-09T08:00:00.000Z" }, map, t + 90 * 60000).state, "overdue");
+  assert.equal(reassessmentStatus({ acuity: 3, triagedAt: "2026-09-09T08:00:00.000Z" }, map, t + 90 * 60000).minutesOverdue, 30);
+  assert.equal(reassessmentStatus({ acuity: 3, triagedAt: "2026-09-09T08:00:00.000Z" }, map, t + 30 * 60000).state, "due");
+  assert.equal(reassessmentStatus({ acuity: 2, triagedAt: "2026-09-09T08:00:00.000Z" }, map, t).state, "no-interval");
+  const unknown = reassessmentStatus({ acuity: 1, triagedAt: "garbage" }, map, t);
+  assert.equal(unknown.state, "not-known"); assert.match(unknown.text, /not known: /);
+  assert.equal(reassessmentStatus({ acuity: 3, triagedAt: "2026-09-09T08:00:00.000Z" }, null, t).text, "no reassessment interval set");
+  assert.equal(reassessmentStatus({ acuity: 3, triagedAt: "2026-09-09T08:00:00.000Z" }, { "3": "abc" }, t).state, "no-interval");
+  assert.equal(triageHistory([{ version: 1 }, { version: 2, acuity: 3, triagedAt: "a" }, { version: 3, acuity: 3, triagedAt: "a", status: "finished" }]).length, 1);
+});
+
+test("ED PROCEDURES: a doctor records one with name, site, performer, time, notes and complications; it lists on the ED record; a nurse is refused at the door; the time is never defaulted", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Procedure Testcase", mobile: "9876500222", gender: "male", ageYears: 44 });
+  const arr = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { mrn: reg.mrn, arrivedAt: "2026-09-09T08:00:00.000Z" } });
+  const procedure = { name: "Intercostal chest drain", site: "Left 5th intercostal space", performedBy: "Dr Test", performedAt: "2026-09-09T08:30:00.000Z", notes: "28Fr, swinging", complications: "Minor bleeding at site" };
+
+  const byNurse = await as(NURSE, "/ward/ed-procedure", "POST", { orgId: ORG, encounterId: arr.encounterId, procedure });
+  assert.equal(byNurse.__status, 403, "recording a procedure is emr.treat; a nurse does not hold it");
+
+  const noTime = await as(DOCTOR, "/ward/ed-procedure", "POST", { orgId: ORG, encounterId: arr.encounterId, procedure: { ...procedure, performedAt: "" } });
+  assert.equal(noTime.__status, 422); assert.equal(noTime.error, "time_required");
+  const noName = await as(DOCTOR, "/ward/ed-procedure", "POST", { orgId: ORG, encounterId: arr.encounterId, procedure: { ...procedure, name: "" } });
+  assert.equal(noName.error, "name_required");
+
+  const ok = await as(DOCTOR, "/ward/ed-procedure", "POST", { orgId: ORG, encounterId: arr.encounterId, procedure });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  const rec = await as(NURSE, `/ward/ed-record?orgId=${ORG}&encounterId=${arr.encounterId}`);
+  assert.equal(rec.__status, 200);
+  assert.equal(rec.procedures.length, 1);
+  const p0 = rec.procedures[0];
+  assert.deepEqual({ name: p0.name, site: p0.site, performedBy: p0.performedBy, performedAt: p0.performedAt, notes: p0.notes, complications: p0.complications }, procedure);
+
+  const refused = await as(PHARM, `/ward/ed-record?orgId=${ORG}&encounterId=${arr.encounterId}`);
+  assert.equal(refused.__status, 403, "reading the ED record is emr.view; pharmacy does not hold it");
+});
+
+test("ED TIMELINE: arrival, triage, re-triage and disposition are each their own event, at the time each happened", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Timeline ED", mobile: "9876500223", gender: "female", ageYears: 50 });
+  const arr = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { mrn: reg.mrn, chiefComplaint: "Headache", arrivedAt: "2026-09-09T08:00:00.000Z" } });
+  await as(NURSE, "/ward/ed-triage", "POST", { orgId: ORG, encounterId: arr.encounterId, acuity: 4 });
+  await as(NURSE, "/ward/ed-triage", "POST", { orgId: ORG, encounterId: arr.encounterId, acuity: 2, reason: "New confusion" });
+  await as(DOCTOR, "/ward/ed-procedure", "POST", { orgId: ORG, encounterId: arr.encounterId, procedure: { name: "Lumbar puncture", performedBy: "Dr Test", performedAt: "2026-09-09T09:00:00.000Z" } });
+  await as(DOCTOR, "/ward/ed-disposition", "POST", { orgId: ORG, encounterId: arr.encounterId, disposition: "transferred", reason: "Neurosurgical centre", at: "2026-09-10T11:00:00.000Z" });
+
+  const tl = await as(DOCTOR, `/ward/timeline?orgId=${ORG}&patientId=${arr.patientId}`);
+  assert.equal(tl.__status, 200, JSON.stringify(tl));
+  const labels = tl.events.map((e) => e.label);
+  assert.ok(labels.some((l) => /^ED: arrived, Headache/.test(l)), labels.join(" | "));
+  assert.ok(labels.some((l) => /^Triaged: acuity 4/.test(l)), labels.join(" | "));
+  const re = tl.events.find((e) => /^Re-triaged: acuity 4 to 2/.test(e.label));
+  assert.ok(re, labels.join(" | ")); assert.equal(re.body[0].text, "New confusion");
+  const disp = tl.events.find((e) => /^ED disposition: transferred/.test(e.label));
+  assert.ok(disp, labels.join(" | ")); assert.equal(disp.at, "2026-09-10T11:00:00.000Z"); assert.equal(disp.body[0].text, "Neurosurgical centre");
+  const proc = tl.events.find((e) => e.resourceType === "ProcedureRecord");
+  assert.ok(proc && /Lumbar puncture/.test(proc.label), labels.join(" | ")); assert.equal(proc.at, "2026-09-09T09:00:00.000Z");
+  assert.equal(labels.filter((l) => l.indexOf("ED: arrived") === 0).length, 1);
+});
+
+test("REFERRAL FROM ED: the disposition card's referral goes through the existing referral-create route, carrying the ED encounter", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Referral ED", mobile: "9876500224", gender: "male", ageYears: 67 });
+  const arr = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { mrn: reg.mrn, arrivedAt: "2026-09-09T08:00:00.000Z" } });
+  const ref = await as(DOCTOR, "/ward/referral-create", "POST", { orgId: ORG, patientId: arr.patientId, encounterId: arr.encounterId, specialty: "Cardiology", urgency: "urgent", kind: "internal", reason: "New AF", clinicalSummary: "Fast AF, rate controlled in ED." });
+  assert.equal(ref.__status, 200, JSON.stringify(ref));
+  const list = await as(DOCTOR, `/ward/referrals?orgId=${ORG}&patientId=${arr.patientId}`);
+  assert.equal(list.referrals.length, 1); assert.equal(list.referrals[0].encounterId, arr.encounterId);
 });

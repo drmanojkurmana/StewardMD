@@ -32,9 +32,10 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService, isExternalRecord } from "./service.js";
+import { RecordService, isExternalRecord, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { priorityRank } from "./ward-order.js";
+import { priorityRank, OPEN_ORDER_STATUSES, isOpenOrder } from "./ward-order.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 // The SAME wristband comparator wardsynq-meds.js's five-rights scan already uses (HAZ-MED-04) and
@@ -45,6 +46,13 @@ const TYPE = "SpecimenCollection";
 const STATES = Object.freeze(["collected", "received", "failed"]);
 /** The ones where somebody is still waiting on a sample. `failed` is outstanding: it needs redoing. */
 const OUTSTANDING = Object.freeze(["collected", "failed"]);
+/* A LABORATORY REJECTION is a failure with a CODE, so it can be counted by reason and ward. The order goes back
+ * to needing collection exactly as any failed attempt does, which is the prompt to recollect. */
+const REJECTION_REASONS = Object.freeze({
+  haemolysed: "Haemolysed", clotted: "Clotted", insufficient: "Insufficient sample", mislabelled: "Mislabelled", "wrong-container": "Wrong container",
+});
+/** Order categories (ward-order.js CATEGORIES) that are acquired, performed or referred, never collected. */
+const NO_SPECIMEN_CATEGORIES = Object.freeze(["imaging", "procedure", "referral"]);
 
 function SpecimenCollection(input) {
   const i = input || {};
@@ -62,6 +70,7 @@ function SpecimenCollection(input) {
     collectedBy: i.collectedBy || null, collectedAt: i.collectedAt || null,
     receivedAt: i.receivedAt || null, receivedBy: i.receivedBy || null,
     failureReason: i.failureReason || null, failedAt: i.failedAt || null,
+    rejection: i.rejection || null,
     // The label a ward and a laboratory read off the tube. Deterministic, so the same collection
     // relabelled is the same specimen and not a second one.
     label: i.label || null,
@@ -118,11 +127,34 @@ function collectionState(specimens) {
   if (received) return { state: "received", at: received.receivedAt, specimenId: received.id };
   const collected = rows.filter((s) => s.state === "collected")
     .sort((a, b) => String(b.collectedAt || "").localeCompare(String(a.collectedAt || "")))[0];
-  if (collected) return { state: "collected", at: collected.collectedAt, specimenId: collected.id };
+  // The accession and the specimen type travel with it: the laboratory board matches a scanned tube and reprints its label from them.
+  if (collected) return { state: "collected", at: collected.collectedAt, by: collected.collectedBy || null, specimenId: collected.id, accessionNumber: collected.accessionNumber || null, specimenType: collected.specimenType || null };
   /* Every attempt failed. This is the state that must never read as "in progress": the order needs
    * doing again and nobody is going to be told by a result arriving. */
   const failed = rows.sort((a, b) => String(b.failedAt || "").localeCompare(String(a.failedAt || "")))[0];
   return { state: "failed", attempts: rows.length, reason: failed.failureReason || null, detail: "Every attempt failed. This sample still needs taking." };
+}
+
+/* A whole-type read (service.listAll, paged) is still right for the monthly rejection count below: that
+ * figure IS a history, and it says so when it is truncated. It is wrong for a bench worklist, which is
+ * about the work in front of the hospital - see collectionList for what replaced it and why. */
+const WORKLIST_MAX = 50000;
+const ceilingRefusal = (e) => ({ ok: false, status: 503, error: e.code, detail: str(e.message) });
+
+/**
+ * The records of one type belonging to a bounded set of patients, through the caller's own governed
+ * read, eight at a time (as service.histories() fans out). A read that FAILS throws: a collection
+ * worklist that quietly dropped one patient's specimens would tell a phlebotomist to go and bleed
+ * somebody who has already been bled.
+ */
+async function byPatients(svc, type, patientIds) {
+  const ids = [...new Set((patientIds || []).map(str).filter(Boolean))];
+  const out = [];
+  for (let i = 0; i < ids.length; i += 8) {
+    const got = await Promise.all(ids.slice(i, i + 8).map((pid) => svc.byPatient(type, pid)));
+    for (const rows of got) for (const r of rows || []) out.push(r);
+  }
+  return out;
 }
 
 async function open(request, env, ctx, need) {
@@ -153,6 +185,7 @@ function summary(s) {
     collectedBy: s.collectedBy, collectedAt: s.collectedAt,
     receivedAt: s.receivedAt || null, receivedBy: s.receivedBy || null,
     failureReason: s.failureReason || null, failedAt: s.failedAt || null,
+    rejection: s.rejection || null,
     version: s.version,
   };
 }
@@ -186,6 +219,12 @@ async function collectSpecimen(request, env, ctx) {
   if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
   if (sr.status === "revoked" || sr.status === "completed") {
     return { ...base, ok: false, status: 409, error: "request_not_open", detail: `this request is ${sr.status}`, serviceRequestId, written: 0 };
+  }
+  // BUG-MU2PR8I2: an imaging study, a procedure or a referral has no sample. A "collected" chest X-ray
+  // would put an accession number on the laboratory's board for a tube that does not exist. Read from
+  // the order's own category, never its name. LT-15: a catalogued imaging test filed as laboratory reads as imaging.
+  if (NO_SPECIMEN_CATEGORIES.includes(effectiveCategory(sr))) {
+    return { ...base, ok: false, status: 409, error: "not_a_specimen_order", detail: `this is a ${effectiveCategory(sr)} order; there is no sample to collect`, serviceRequestId, written: 0 };
   }
 
   const scanned = str(ctx.scannedPatientBarcode);
@@ -232,7 +271,11 @@ async function collectSpecimen(request, env, ctx) {
 
 /**
  * The laboratory has it, or the attempt failed.
- * ctx: { migration, specimenId, state: "received" | "failed", failureReason?, ... }
+ * ctx: { migration, specimenId, state: "received" | "failed", failureReason?, scannedAccession?, ... }
+ *
+ * WRONG TUBE REFUSED: when the laboratory scanned the tube's label (scannedAccession), it must be THIS specimen's
+ * accession number, compared with the same normaliseBarcode as the wristband check. A tube picked up beside the
+ * one on the board is never received under the other's name.
  */
 async function specimenOutcome(request, env, ctx) {
   const mig = ctx.migration;
@@ -244,7 +287,11 @@ async function specimenOutcome(request, env, ctx) {
   if (state !== "received" && state !== "failed") {
     return { ...base, ok: false, status: 400, error: "unknown_state", detail: "state must be received or failed", written: 0 };
   }
-  const failureReason = str(ctx.failureReason);
+  const rejectionCode = str(ctx.rejectionCode);
+  if (rejectionCode && (state !== "failed" || !REJECTION_REASONS[rejectionCode])) {
+    return { ...base, ok: false, status: 422, error: "unknown_rejection_reason", detail: `a rejection is recorded as failed with one of: ${Object.keys(REJECTION_REASONS).join(", ")}`, written: 0 };
+  }
+  const failureReason = str(ctx.failureReason) || (rejectionCode ? REJECTION_REASONS[rejectionCode] : "");
   // A failure with no reason cannot be acted on, and "take it again" is the action.
   if (state === "failed" && !failureReason) {
     return { ...base, ok: false, status: 422, error: "reason_required", detail: "say why - missed vein, clotted, haemolysed, insufficient - so the ward knows what to do differently", written: 0 };
@@ -259,7 +306,19 @@ async function specimenOutcome(request, env, ctx) {
   if (!current) return { ...base, ok: false, status: 404, error: "specimen_not_found", specimenId, written: 0 };
   /* RECEIVED IS TERMINAL. The laboratory said it has the sample; a later "failed" is a statement
    * about the ASSAY, not the specimen, and it belongs on the result. */
-  if (current.state === "received") return { ...base, ok: true, written: 0, skipped: "already_received", ...summary(current) };
+  /* EXCEPT A CODED REJECTION BEFORE ANY RESULT: haemolysis is seen when the tube is spun, after it was received, and
+   * that sample still has to be taken again. Once a result exists the problem belongs on the result. */
+  if (current.state === "received" && !rejectionCode) return { ...base, ok: true, written: 0, skipped: "already_received", ...summary(current) };
+  if (current.state === "received") {
+    let reports;
+    try { reports = ((await svc.byPatient("DiagnosticReport", current.patientId)) || []).filter((r) => r && r.serviceRequestId === current.serviceRequestId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    if (reports.length) return { ...base, ok: false, status: 409, error: "already_resulted", detail: "A result has been released for this sample. Correct or annotate the result instead of rejecting the sample.", written: 0 };
+  }
+  const scannedAccession = str(ctx.scannedAccession);
+  if (scannedAccession && normaliseBarcode(scannedAccession) !== normaliseBarcode(current.accessionNumber || "")) {
+    return { ...base, ok: false, status: 409, error: "wrong_specimen_scan", detail: "the scanned label is not this specimen's accession number", specimenId, written: 0 };
+  }
 
   const now = new Date().toISOString();
   const next = SpecimenCollection({
@@ -268,12 +327,13 @@ async function specimenOutcome(request, env, ctx) {
     receivedBy: state === "received" ? resolved.actor.id : current.receivedBy,
     failureReason: state === "failed" ? failureReason : current.failureReason,
     failedAt: state === "failed" ? now : current.failedAt,
+    rejection: rejectionCode ? { code: rejectionCode, by: resolved.actor.id, at: now, fromState: current.state } : current.rejection,
   });
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
     return {
       ...base, ok: true, written: 1, ...summary({ ...next, version: out.record.version }),
-      ...(state === "failed" ? { note: "This sample still needs taking. The request is not waiting on a result." } : {}),
+      ...(state === "failed" ? { note: rejectionCode ? "Rejected. The sample must be collected again; the ward sees this order as awaiting collection." : "This sample still needs taking. The request is not waiting on a result." } : {}),
       actor: resolved.actor.id,
     };
   } catch (e) {
@@ -312,13 +372,30 @@ async function collectionList(request, env, ctx) {
 
   let orders, specimens;
   try {
-    [orders, specimens] = hospitalWide
-      ? await Promise.all([svc.list("ServiceRequest", 300), svc.list(TYPE, 300).catch(() => [])])
-      : await Promise.all([
+    if (hospitalWide) {
+      /* R5-2: THE OPEN ORDERS, not every order this hospital has ever placed. Reading the whole type
+       * (and the whole specimen archive beside it) grew with history: tens of thousands of parsed
+       * records in one Worker within weeks on a busy hospital, and the board then failed with a 500
+       * rather than the designed message. Releasing a result now closes the order it answers
+       * (ward-order.js closeOrderOnResult), so this read is bounded by the samples still owed. Past
+       * OPEN_CENSUS_MAX it refuses out loud (503) - orders nobody has ever resulted, which a
+       * laboratory has to see rather than have hidden behind a short list.
+       * ponytail: the per-page group-by inside the store is unchanged (audit O20). */
+      orders = await svc.listByStatus("ServiceRequest", OPEN_ORDER_STATUSES);
+      /* Only these orders' patients. SpecimenCollection carries `state`, not `status`, so the store
+       * cannot filter it (repository pageByType reads $.status) - but nothing here needs the archive:
+       * a specimen matters for exactly one question, which is where the orders ON THIS LIST stand. */
+      specimens = await byPatients(svc, TYPE, orders.map((o) => o && o.patientId));
+    } else {
+      [orders, specimens] = await Promise.all([
         svc.byPatient("ServiceRequest", patientId),
-        svc.byPatient(TYPE, patientId).catch(() => []),
+        /* R6-2: a failed specimen read is the 502 below, never an empty set. Swallowed, it read as
+         * "nothing has been collected" and sent a phlebotomist back to a patient already bled. */
+        svc.byPatient(TYPE, patientId),
       ]);
+    }
   } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...ceilingRefusal(e), requests: [] };
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), requests: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), requests: [] };
   }
@@ -332,9 +409,10 @@ async function collectionList(request, env, ctx) {
 
   const requests = (orders || [])
     // An order another hospital placed is on this chart for the record, not for this ward's phlebotomist.
-    .filter((o) => o && o.status !== "revoked" && o.status !== "completed" && !isExternalRecord(o))
+    // isOpenOrder is the SAME open/closed vocabulary the status-scoped read above asks the store for.
+    .filter((o) => o && isOpenOrder(o) && !isExternalRecord(o))
     .map((o) => ({
-      serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: o.category || null,
+      serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: (o.category || effectiveCategory(o) === "imaging") ? effectiveCategory(o) : null,
       // Carried so a hospital-wide caller can say WHOSE specimen this is. Harmless per-patient
       // (the caller already knows), and the one thing a department board cannot work without.
       patientId: o.patientId || null,
@@ -360,4 +438,51 @@ async function collectionList(request, env, ctx) {
   };
 }
 
-export { TYPE, STATES, OUTSTANDING, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };
+/**
+ * Rejected specimens in one calendar month, by reason and by ward. ctx: { migration, month: "YYYY-MM" }.
+ * Counts only; names no patient.
+ */
+async function rejectionStats(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off" };
+  const month = str(ctx.month) || new Date().toISOString().slice(0, 7);
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) return { ...base, ok: false, status: 422, error: "bad_month", detail: "month is YYYY-MM" };
+  const { svc, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+  let rows, truncated;
+  try { ({ rows, truncated } = await svc.listAll(TYPE, { max: WORKLIST_MAX })); }
+  catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
+  }
+  const inMonth = (t) => str(t).slice(0, 7) === month;
+  const rejected = rows.filter((s) => s && s.rejection && inMonth(s.rejection.at));
+  const collected = rows.filter((s) => s && inMonth(s.collectedAt)).length;
+  /* THE WARD IS READ FROM THE ENCOUNTER THROUGH THE REPOSITORY, not the caller's scope: the laboratory's grant
+   * deliberately cannot read an Encounter, and all that leaves here is the ward's name beside a count. */
+  const wardOf = new Map();
+  let wardUnreadable = 0;
+  for (const encId of [...new Set(rejected.map((s) => str(s.encounterId)).filter(Boolean))]) {
+    try {
+      const enc = await ctx.recordDeps.repository.latest(mig.tenantId, "Encounter", encId);
+      wardOf.set(encId, str(enc && enc.location && enc.location.ward) || null);
+    } catch { wardUnreadable += 1; wardOf.set(encId, null); }
+  }
+  const byReason = {}, byWard = {}, table = {};
+  for (const s of rejected) {
+    const reason = s.rejection.code, ward = wardOf.get(str(s.encounterId)) || "";
+    byReason[reason] = (byReason[reason] || 0) + 1;
+    byWard[ward] = (byWard[ward] || 0) + 1;
+    table[ward] = table[ward] || {};
+    table[ward][reason] = (table[ward][reason] || 0) + 1;
+  }
+  return {
+    ...base, ok: true, month, rejected: rejected.length, collected, reasons: REJECTION_REASONS,
+    byReason, byWard: Object.keys(byWard).sort().map((w) => ({ ward: w || null, total: byWard[w], byReason: table[w] })),
+    ...(wardUnreadable ? { wardUnreadable } : {}),
+    ...(truncated ? { partial: true, partialWarning: `More than ${WORKLIST_MAX} specimens exist and the newest were not counted; this month's figures may be low.` } : {}),
+  };
+}
+
+export { REJECTION_REASONS, rejectionStats, TYPE, STATES, OUTSTANDING, NO_SPECIMEN_CATEGORIES, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };

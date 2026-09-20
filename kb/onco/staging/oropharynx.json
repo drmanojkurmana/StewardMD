@@ -1,0 +1,266 @@
+{
+  "site": "oropharynx",
+  "name": "Oropharynx (HPV-mediated and HPV-negative)",
+  "system": "Oncology / Head and neck",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Oropharyngeal SCC has two parallel 8th-edition stagings split by p16 (HPV surrogate): p16-positive (HPV-mediated) disease stages far more favourably and ignores extranodal extension, while p16-negative disease follows the standard head-and-neck ENE scheme. Clinical N for p16-positive disease is laterality-based (N1 ipsilateral, N2 bilateral/contralateral, N3 over 6 cm); pathological N counts nodes (pN1: 4 or fewer; pN2: 5 or more). Unknown-primary p16-positive cervical nodes are staged as T0 oropharynx. Smoking history over 10 pack-years worsens prognosis within p16-positive stages but does not change the group.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No primary identified (p16-positive unknown primary with cervical nodes)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour 2 cm or smaller (p16-positive: without epiglottic extension criteria; p16-negative: same size rule)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour larger than 2 cm up to 4 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour larger than 4 cm, or extension to lingual surface of epiglottis (p16-positive clinical)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Moderately advanced: invasion of larynx (beyond epiglottis), deep tongue musculature, medial pterygoid, hard palate or mandible",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Very advanced: invasion of lateral pterygoid, pterygoid plates, skull base, lateral nasopharynx, or carotid encasement",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "HPV-mediated (p16+): one or more ipsilateral nodes 6 cm or smaller; HPV-negative: single ipsilateral node 3 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "HPV-mediated (p16+): bilateral or contralateral nodes 6 cm or smaller; HPV-negative: N2a/N2b/N2c per size and laterality, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2a",
+          "label": "HPV-negative: single ipsilateral node 3-6 cm, ENE- (pathological p16+: 5 or more nodes is pN2)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2b",
+          "label": "HPV-negative: multiple ipsilateral nodes 6 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2c",
+          "label": "HPV-negative: bilateral or contralateral nodes 6 cm or smaller, ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "HPV-mediated: any node larger than 6 cm; HPV-negative: N3a over 6 cm ENE- or N3b any ENE+",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pN1",
+          "label": "Pathological HPV-mediated: metastasis in 4 or fewer lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pN2",
+          "label": "Pathological HPV-mediated: metastasis in 5 or more lymph nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis (p16-positive M1 still stages as IV, not IVC)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "In situ (p16-negative scheme)",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I (p16+)",
+          "t": "T0, T1 or T2",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "HPV-mediated clinical: small primary, ipsilateral nodes at most",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II (p16+)",
+          "t": "T0, T1 or T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "HPV-mediated clinical: bilateral/contralateral nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II (p16+)",
+          "t": "T3",
+          "n": "N0, N1 or N2",
+          "m": "M0",
+          "basis": "HPV-mediated clinical: large primary without N3",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III (p16+)",
+          "t": "T4",
+          "n": "any N",
+          "m": "M0",
+          "basis": "HPV-mediated clinical: very advanced primary",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III (p16+)",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "HPV-mediated clinical: node over 6 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I (p16-)",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "HPV-negative: standard head-neck grouping",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II (p16-)",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "HPV-negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III (p16-)",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "HPV-negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III (p16-)",
+          "t": "T1-T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "HPV-negative, single small node ENE-",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA (p16-)",
+          "t": "T4a",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "HPV-negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA (p16-)",
+          "t": "T1-T4a",
+          "n": "N2",
+          "m": "M0",
+          "basis": "HPV-negative",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB (p16-)",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "HPV-negative ENE+ or over 6 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB (p16-)",
+          "t": "T4b",
+          "n": "any N",
+          "m": "M0",
+          "basis": "HPV-negative unresectable",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV (p16+)",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "HPV-mediated distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVC (p16-)",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "HPV-negative distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Levels II, III and IV jugular nodes plus retropharyngeal nodes; bilateral drainage is common (midline base-of-tongue and soft-palate lesions). Unknown-primary p16-positive nodes are staged as oropharynx T0. Contralateral nodes define N2 in the p16-positive clinical scheme.",
+      "histologicGrade": "Well differentiated (G1) to poorly differentiated (G3); HPV-mediated tumours are typically non-keratinising with basaloid morphology and are not further graded for staging. p16 immunohistochemistry (70 percent or greater strong diffuse staining) is the staging surrogate for HPV.",
+      "histopathologicTypes": "HPV-mediated (p16-positive) non-keratinising SCC including tonsil and base-of-tongue primaries; HPV-negative conventional keratinising SCC; basaloid, papillary and lymphoepithelial patterns.",
+      "prognosticFactors": [
+        "p16/HPV status (separate staging tracks)",
+        "Smoking pack-years (over 10 worsens p16-positive prognosis)",
+        "Extranodal extension (staging only for p16-negative)",
+        "Nodal burden and bilaterality",
+        "T0 unknown-primary presentation",
+        "Cystic nodal metastasis (typical of HPV-mediated)"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

@@ -31,6 +31,8 @@ public class WhisperEngine {
     public StateCb onState;
     public TextCb onPartial;
     public TextCb onFinal;
+    /** A segment transcribed mid-recording by {@link #flushAndTranscribe} — the mic stays open. */
+    public TextCb onFlush;
     public ErrCb onError;
 
     private static final int SAMPLE_RATE = 16000;
@@ -249,6 +251,29 @@ public class WhisperEngine {
         });
     }
 
+    /**
+     * CONTINUOUS CAPTURE: transcribe everything captured so far WITHOUT stopping the recorder.
+     * Snapshots {@code samples}, clears them (so the next flush only sees new audio) and runs
+     * inference on the snapshot while the record thread keeps appending — so no audio is lost at the
+     * seam, which is the point (the JS stop/re-arm loop drops a few hundred ms per boundary).
+     * Emits {@code onFlush}; {@code onFinal} still fires exactly once, from stopAndTranscribe.
+     * {@code work} is a single-thread executor, so flushes (and a stop landing on one) queue rather
+     * than running two whisper_full calls against the same context.
+     */
+    public void flushAndTranscribe(String language, String initialPrompt) {
+        if (!recording.get() || cancelled.get()) return;
+        Log.i(TAG, "flushAndTranscribe: samples=" + samples.size());
+        work.execute(() -> {
+            float[] audio;
+            synchronized (samplesLock) {
+                audio = new float[samples.size()];
+                for (int i = 0; i < audio.length; i++) audio[i] = samples.get(i);
+                samples.clear();   // keep capacity: the mic is still filling this list
+            }
+            transcribe(audio, language, initialPrompt, true);
+        });
+    }
+
     /** Abort: stop capture, drop the buffer. No transcription, no final event. */
     public void cancel() {
         cancelled.set(true);
@@ -280,6 +305,12 @@ public class WhisperEngine {
     // MARK: - Inference
 
     private void transcribe(float[] audio, String language, String initialPrompt) {
+        transcribe(audio, language, initialPrompt, false);
+    }
+
+    // flush = a mid-recording segment (continuous capture): emits onFlush instead of onFinal and
+    // does NOT announce the "done" state, because the session is not done.
+    private void transcribe(float[] audio, String language, String initialPrompt, boolean flush) {
         if (cancelled.get()) return;
         if (ctx == 0L) {
             emitError(WhisperErr.TRANSCRIPTION_FAILURE, "no ctx");
@@ -287,8 +318,8 @@ public class WhisperEngine {
         }
         // Too short to be meaningful (< ~0.2 s at 16 kHz) → empty final, not an error.
         if (audio.length < 3200) {
-            emitState("done");
-            if (onFinal != null) onFinal.on("");
+            if (!flush) emitState("done");
+            emit(flush, "");
             return;
         }
         // 4 threads (of the available cores). The earlier "spinning forever" was NOT a threadpool
@@ -312,8 +343,13 @@ public class WhisperEngine {
             emitError(WhisperErr.TRANSCRIPTION_FAILURE, "whisper_full");
             return;
         }
-        emitState("done");
-        if (onFinal != null) onFinal.on(text.trim());
+        if (!flush) emitState("done");
+        emit(flush, text.trim());
+    }
+
+    private void emit(boolean flush, String text) {
+        TextCb cb = flush ? onFlush : onFinal;
+        if (cb != null) cb.on(text);
     }
 
     public void dispose() {

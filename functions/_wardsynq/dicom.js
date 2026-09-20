@@ -48,8 +48,12 @@
  */
 
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { zoneOffsetAt } from "./mar-schedule.js";
+import { reportIdFor as radiologyReportIdFor } from "./radiology-report.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
+import { OPEN_ORDER_STATUSES } from "./ward-order.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -58,12 +62,24 @@ const str = (v) => (v == null ? "" : String(v).trim());
  *  rejected by the modality itself, so it is refused here where somebody can still fix it. */
 const MODALITIES = Object.freeze(["CR", "CT", "MR", "US", "XA", "NM", "PT", "RF", "DX", "MG", "PX", "IO", "OP", "ES", "EC", "SM", "OT"]);
 
-/** PURE. A YYYY-MM-DD... instant into DICOM DA (YYYYMMDD) and TM (HHMMSS), or nulls. */
-function dicomDateTime(iso) {
+/** PURE. A YYYY-MM-DD... instant into DICOM DA (YYYYMMDD) and TM (HHMMSS), or nulls.
+ *
+ * LT-27: DA and TM are the INSTITUTION'S LOCAL wall clock (PS3.5), and this copied the UTC digits out of the ISO
+ * string, so every study read 5 h 30 min early on an Indian worklist. With `clock` ({offsetMinutes, timeZone}, the
+ * hospital's own, as the MAR uses) an instant with a time is shifted to that wall clock, and `offset` carries
+ * TimezoneOffsetFromUTC ("+0530") so a reader never has to guess. A date alone (a date of birth) is never shifted. */
+function dicomDateTime(iso, clock) {
   const s = str(iso);
   const m = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2}))?/.exec(s);
   if (!m) return { date: null, time: null };
-  return { date: `${m[1]}${m[2]}${m[3]}`, time: m[4] ? `${m[4]}${m[5]}${m[6]}` : null };
+  const at = Date.parse(s);
+  if (!clock || !m[4] || !Number.isFinite(at)) return { date: `${m[1]}${m[2]}${m[3]}`, time: m[4] ? `${m[4]}${m[5]}${m[6]}` : null };
+  const zone = str(clock.timeZone) ? zoneOffsetAt(str(clock.timeZone), at) : null;
+  const off = Number.isFinite(zone) ? zone : Number.isFinite(clock.offsetMinutes) ? clock.offsetMinutes : 330;
+  const w = new Date(at + off * 60000).toISOString();
+  const abs = Math.abs(off), pad = (n) => String(n).padStart(2, "0");
+  return { date: w.slice(0, 4) + w.slice(5, 7) + w.slice(8, 10), time: w.slice(11, 13) + w.slice(14, 16) + w.slice(17, 19),
+    offset: `${off < 0 ? "-" : "+"}${pad(Math.floor(abs / 60))}${pad(abs % 60)}` };
 }
 
 /** PURE. A WardSynQ name into DICOM PN (Family^Given), which is the one reordering DICOM requires. */
@@ -90,9 +106,10 @@ const tag = (vr, value) => (value == null || value === "" ? undefined : { vr, Va
  * a WardSynQ imaging order carries - it has no appointment slot. That is stated rather than dressed
  * up as a schedule this system does not keep.
  */
-function worklistItem(order, patient, modality) {
-  const when = dicomDateTime((order.meta && order.meta.effectiveAt) || order.authoredAt || null);
+function worklistItem(order, patient, modality, clock) {
+  const when = dicomDateTime((order.meta && order.meta.effectiveAt) || order.authoredAt || null, clock);
   const item = {
+    "00080201": tag("SH", when.offset || null),                                     // TimezoneOffsetFromUTC
     "00100010": tag("PN", dicomName(patient && patient.name)),                      // PatientName
     "00100020": tag("LO", str(patient && patient.mrn) || null),                     // PatientID
     "00100030": tag("DA", dicomDateTime(patient && patient.dob).date),              // PatientBirthDate
@@ -128,7 +145,8 @@ function modalityMapOf(config) {
 
 /** PURE. Is this order one a modality should see: an imaging request that is still to be done. */
 function isPendingImaging(o) {
-  if (!o || o.resourceType !== "ServiceRequest" || o.category !== "imaging") return false;
+  // LT-15: a catalogued imaging test filed as laboratory (the demo's "CXR") is on the radiology worklist too.
+  if (!o || o.resourceType !== "ServiceRequest" || effectiveCategory(o) !== "imaging") return false;
   // An imported order carries the sender's own status; a native one carries ours. Either way a
   // cancelled or completed order is not on anybody's worklist.
   const status = str(o.externalStatus) || str(o.status);
@@ -161,13 +179,35 @@ async function imagingWorklist(request, env, ctx) {
   try {
     orders = str(ctx.patientId)
       ? await svc.byPatient("ServiceRequest", str(ctx.patientId))
-      : await svc.list("ServiceRequest", 500);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), worklist: [] }; }
+      /* R5-2: THE OPEN ORDERS, not every order this hospital has ever placed (service.listByStatus,
+       * filtered in SQL). Reading the whole type grew with history - tens of thousands of parsed
+       * records in one Worker within weeks on a busy hospital, and a 500 rather than a message. A
+       * radiology report now closes the order it answers (radiology-report.js), so what comes back
+       * here is bounded by the studies still to be done. Past OPEN_CENSUS_MAX it refuses out loud
+       * (503) - on this read that means unreported studies piling up, which has to be seen.
+       * ponytail: the per-page group-by inside the store is unchanged (audit O20). */
+      : await svc.listByStatus("ServiceRequest", OPEN_ORDER_STATUSES);
+  } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: e.code, detail: str(e.message), worklist: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), worklist: [] };
+  }
 
-  const pending = (orders || []).filter(isPendingImaging);
+  /* LT-27: A REPORTED STUDY IS NOT STILL TO BE DONE. reportImaging() never changes the order's status, so a study
+   * with a final report stayed on the worklist with File Report beside it and could be reported twice. A final or
+   * corrected radiology report (one per order, radiology-report.js reportIdFor) takes it off; a preliminary one
+   * leaves it on, because the final reading is still owed. If the reports cannot be read the list is kept whole
+   * and says so, never trimmed on a guess. */
+  let reported = new Set(), warnings = [];
+  const wanted = (orders || []).filter(isPendingImaging);
+  try {
+    const reports = await Promise.all(wanted.map((o) => svc.get("DiagnosticReport", radiologyReportIdFor(o.id))));
+    reported = new Set(reports.filter((r) => r && (r.status === "final" || r.status === "corrected")).map((r) => r.serviceRequestId));
+  } catch { warnings = ["Radiology reports could not be read, so a study listed here may already be reported."]; }
+  const pending = wanted.filter((o) => !reported.has(o.id));
   const patients = new Map();
   const worklist = [];
   const unmapped = [];
+  const pcpndt = [];
   for (const o of pending) {
     let p = patients.get(o.patientId);
     if (p === undefined) {
@@ -179,10 +219,14 @@ async function imagingWorklist(request, env, ctx) {
     if (!p) { unmapped.push({ order: o.id, reason: "the patient is not readable by this caller" }); continue; }
     const modality = map[str(o.code).toLowerCase()] || map[str(o.display).toLowerCase()] || null;
     if (!modality) unmapped.push({ order: o.id, reason: `no modality is mapped for "${str(o.code)}"; the item is on the worklist without one` });
-    worklist.push(worklistItem(o, p, modality));
+    worklist.push(worklistItem(o, p, modality, ctx.clock || null));
+    /* PCPNDT (legal review B.4.1, B.4.3): an obstetric ultrasound still to be done whose Form F is missing or incomplete is
+     * flagged beside the worklist, never inside the DICOM item a modality parses. The route hands in the check. */
+    if (typeof ctx.pcpndtFlag === "function") { const flag = await ctx.pcpndtFlag(o, modality); if (flag) pcpndt.push({ orderId: o.id, ...flag }); }
   }
 
-  return { ...base, ok: true, worklist, count: worklist.length, unmapped,
+  return { ...base, ok: true, worklist, count: worklist.length, unmapped, reportedExcluded: reported.size, ...(typeof ctx.pcpndtFlag === "function" ? { pcpndt } : {}),
+    ...(warnings.length ? { warnings } : {}),
     ...(rejected.length ? { configWarnings: [`these modalityMap entries name a modality DICOM does not define and were ignored: ${rejected.join(", ")}`] } : {}) };
 }
 

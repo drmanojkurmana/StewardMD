@@ -1,0 +1,571 @@
+{
+  "guideline": "bone",
+  "title": "Bone Cancer",
+  "subtitle": "Osteosarcoma (MAP), Ewing Sarcoma (VDC/IE), Chondrosarcoma, GCTB, and Chordoma",
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "bone_cancer",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "Clinical algorithms extracted from NCCN Guidelines Version 1.2027 for Bone Cancer.",
+  "sourceNote": "NCCN Guidelines Version 1.2027 - Bone Cancer (BONE-1, OSTEO-1, EW-1, CHON-1, GCTB-1, CHOR-1)",
+  "startNodeIds": [
+    "n_bone_entry"
+  ],
+  "footnotes": {
+    "fn_biopsy": "Biopsy of suspected primary bone sarcoma MUST be performed at the treating orthopedic oncology referral center.",
+    "fn_ewing_interval": "Interval-compressed VDC/IE administered every 2 weeks is the category 1 standard of care for Ewing sarcoma."
+  },
+  "nodes": [
+    {
+      "id": "n_bone_entry",
+      "linkId": "bone_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Presentation",
+      "title": "Primary Bone Tumors: Clinical Presentation & Initial Radiographic Finding",
+      "section": "Diagnosis",
+      "description": "Patients presenting with persistent localized bone pain (frequently nocturnal), swelling, palpable osseous mass, or pathologic fracture.",
+      "path": "Bone / Presentation",
+      "pills": [
+        "bone-sarcoma",
+        "bone-tumor",
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Clinical presentation: deep, aching bone pain unrelieved by rest and worsening at night; soft-tissue swelling or palpable mass near metaphyseal region of long bones; pathologic fracture through an osteolytic lesion.",
+        "Initial radiographic suspicion: plain radiographs of involved extremity showing destructive bone lesion, cortical breakthrough, periosteal reaction (Codman triangle, 'sunburst' appearance, or 'onion-skin' layering).",
+        "Age Stratification: In patients <40 years, primary bone sarcomas (osteosarcoma, Ewing sarcoma) predominate; in patients >=40 years, metastatic carcinoma (breast, prostate, lung, kidney, thyroid) and multiple myeloma must be ruled out."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Suspected primary bone neoplasm - Proceed to multidisciplinary workup",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_bone_workup",
+      "linkId": "bone_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "Bone Sarcomas: Biopsy, Staging, and Multidisciplinary Workup Checklist",
+      "section": "Workup",
+      "description": "Specialized biopsy at referral center, MRI of entire involved bone, chest CT, and systemic staging prior to definitive intervention.",
+      "path": "Bone / Workup",
+      "pills": [
+        "workup",
+        "MRI",
+        "biopsy-principles",
+        "chest-CT",
+        "PET-CT"
+      ],
+      "required": true,
+      "bullets": [
+        "Orthopedic Oncology Referral: Biopsy MUST be planned and performed at the treating tertiary sarcoma center by or in consultation with the orthopedic oncology team; poorly placed biopsy tracts can cause limb loss or preclude limb-sparing surgery.",
+        "Biopsy Principles: Longitudinal incision strictly parallel to limb axis; place track such that it will be entirely excised en bloc during definitive oncologic resection; meticulous hemostasis to prevent hematoma and compartment seeding.",
+        "Local Staging: Contrast-enhanced MRI of the entire involved bone including adjacent proximal and distal joints (essential to evaluate intramedullary extent, skip metastases, epiphysis/joint involvement, and neurovascular bundle proximity).",
+        "Metastatic Staging: Contrast-enhanced chest CT (or non-contrast thin-slice chest CT) to detect pulmonary metastases (the most common site of first recurrence).",
+        "Systemic Skeletal Staging: Whole-body FDG-PET/CT (preferred) or bone scintigraphy (99mTc-MDP bone scan) to detect occult skeletal metastases.",
+        "Laboratory Workup: Complete blood count, CMP, serum alkaline phosphatase (ALP), and lactate dehydrogenase (LDH; independent prognostic indicator).",
+        "Workup in patients >=40 years: Serum and urine protein electrophoresis (SPEP/UPEP/sFLC) to rule out myeloma; PSA in men; CT chest/abdomen/pelvis.",
+        "Fertility Counseling: Sperm banking or oocyte preservation discussion prior to alkylator/anthracycline-based chemotherapy."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup completed - Classify histopathologic subtype",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_bone_histology",
+      "linkId": "bone_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Bone Sarcoma Subtype",
+      "title": "Bone Sarcoma: Histopathologic & Molecular Classification",
+      "section": "Subtype & Risk",
+      "description": "Histopathologic classification dictates whether chemotherapy, surgery alone, targeted therapies, or radiation are indicated.",
+      "path": "Bone / Histology",
+      "pills": [
+        "osteosarcoma",
+        "ewing",
+        "chondrosarcoma",
+        "GCTB",
+        "chordoma"
+      ],
+      "required": true,
+      "bullets": [
+        "Osteosarcoma: Malignant mesenchymal neoplasm producing malignant osteoid; high-grade conventional (intramedullary) is most common (~85%).",
+        "Ewing Sarcoma: Small round blue cell tumor harboring EWSR1 gene rearrangements (most commonly t(11;22) EWSR1::FLI1); CD99 strongly positive.",
+        "Chondrosarcoma: Malignant cartilaginous matrix-producing tumor (conventional grades 1-3, dedifferentiated, clear cell, mesenchymal).",
+        "Giant Cell Tumor of Bone (GCTB): Benign but locally destructive osteolytic neoplasm rich in osteoclast-like multinucleated giant cells; driven by RANKL signaling.",
+        "Chordoma: Malignant tumor arising from embryonic notochord remnants in the axial skeleton (sacrum, skull base, mobile spine); brachyury positive."
+      ],
+      "options": [
+        {
+          "id": "sub_osteo",
+          "label": "Osteosarcoma (High-Grade Conventional)",
+          "sets": {
+            "subtype": "osteo"
+          },
+          "pills": [
+            "Osteosarcoma"
+          ]
+        },
+        {
+          "id": "sub_ewing",
+          "label": "Ewing Sarcoma (EWSR1 Rearranged)",
+          "sets": {
+            "subtype": "ewing"
+          },
+          "pills": [
+            "Ewing Sarcoma"
+          ]
+        },
+        {
+          "id": "sub_chondro",
+          "label": "Chondrosarcoma (Conventional or Dedifferentiated)",
+          "sets": {
+            "subtype": "chondro"
+          },
+          "pills": [
+            "Chondrosarcoma"
+          ]
+        },
+        {
+          "id": "sub_gctb",
+          "label": "Giant Cell Tumor of Bone (GCTB)",
+          "sets": {
+            "subtype": "gctb"
+          },
+          "pills": [
+            "GCTB"
+          ]
+        },
+        {
+          "id": "sub_chordoma",
+          "label": "Chordoma (Sacrum / Spine / Skull Base)",
+          "sets": {
+            "subtype": "chordoma"
+          },
+          "pills": [
+            "Chordoma"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_bone_osteo_extent",
+      "linkId": "bone_osteo_extent",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Osteosarcoma Staging",
+      "title": "Osteosarcoma: Localized vs Metastatic Disease Extent",
+      "section": "Subtype & Risk",
+      "description": "Distinguish localized resectable disease from primary metastatic presentation.",
+      "path": "Bone / Osteosarcoma / Extent",
+      "pills": [
+        "osteosarcoma",
+        "staging",
+        "metastatic"
+      ],
+      "required": true,
+      "bullets": [
+        "Localized Disease: Confined to primary osseous site without distant metastases.",
+        "Metastatic Disease: Distant metastases at presentation (most commonly lungs ~80-85%, bones ~10-15%)."
+      ],
+      "options": [
+        {
+          "id": "osteo_localized",
+          "label": "Localized High-Grade Osteosarcoma (Resectable)",
+          "sets": {
+            "stage": "localized"
+          },
+          "pills": [
+            "Localized"
+          ]
+        },
+        {
+          "id": "osteo_metastatic",
+          "label": "Metastatic Osteosarcoma at Initial Presentation",
+          "sets": {
+            "stage": "metastatic"
+          },
+          "pills": [
+            "Metastatic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_bone_osteo_loc_tx",
+      "linkId": "bone_osteo_loc_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Localized Osteo MAP",
+      "title": "Localized Osteosarcoma: Neoadjuvant MAP, Limb-Sparing Surgery & Adjuvant Chemotherapy",
+      "section": "Primary Treatment",
+      "description": "Category 1 multiagent perioperative chemotherapy and limb-salvage surgery.",
+      "path": "Bone / Osteosarcoma / Localized Tx",
+      "pills": [
+        "osteosarcoma",
+        "MAP",
+        "limb-salvage",
+        "category-1"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Category 1 Preferred Frontline Regimen: MAP Regimen (High-Dose Methotrexate, Doxorubicin [Adriamycin], Cisplatin).",
+        "• High-Dose Methotrexate (12 g/m2 IV with leucovorin rescue and urine alkalinization), Cisplatin (100-120 mg/m2), and Doxorubicin (75 mg/m2) for 2 to 3 preoperative cycles (~10 weeks).",
+        "Definitive Surgical Resection (Limb Salvage vs Amputation):",
+        "• Wide surgical resection with negative margins (R0) and complete removal of biopsy tract; endoprosthetic reconstruction, allograft, or rotationplasty.",
+        "Pathologic Necrosis Assessment (Huvos Grading):",
+        "• Good histologic response (>=90% tumor necrosis): Resume and complete planned postoperative adjuvant MAP chemotherapy for a total of 29-32 weeks.",
+        "• Poor histologic response (<90% tumor necrosis): Complete remaining adjuvant MAP cycles; addition of ifosfamide and etoposide (MAPIE) has been utilized, though EURAMOS-1 showed equivalent survival.",
+        "Surveillance: Physical exam, local MRI/radiographs, and chest imaging (CT/x-ray) every 3 months for 2 years, every 6 months for years 3-5, then annually up to 10 years."
+      ]
+    },
+    {
+      "id": "n_bone_osteo_met_tx",
+      "linkId": "bone_osteo_met_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Metastatic Osteosarcoma",
+      "title": "Metastatic Osteosarcoma: Systemic Chemotherapy & Metastasectomy",
+      "section": "Metastatic Disease",
+      "description": "Intensive systemic therapy combined with aggressive surgical clearance of metastases.",
+      "path": "Bone / Osteosarcoma / Metastatic Tx",
+      "pills": [
+        "metastatic",
+        "metastasectomy",
+        "MAP",
+        "regorafenib"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "First-Line Intensive Chemotherapy: MAP (Methotrexate, Doxorubicin, Cisplatin) or Cisplatin + Doxorubicin + Ifosfamide.",
+        "Surgical Metastasectomy (Potentially Curative): For patients with resectable pulmonary metastases achieving primary disease control, complete surgical resection of all lung metastases (thoracotomy/video-assisted thoracoscopy with wedge resections) yields long-term 5-year survival ~30-40%.",
+        "Subsequent Lines / Refractory Disease:",
+        "• Targeted Multikinase Inhibitors: Regorafenib (160 mg daily days 1-21 q28d) or Cabozantinib (60 mg daily) significantly prolong progression-free survival in relapsed/refractory osteosarcoma (REGOBONE / CABONE trials).",
+        "• Cytotoxic Salvage: Gemcitabine + Docetaxel, Ifosfamide + Etoposide, or High-Dose Ifosfamide.",
+        "• Bone-targeting radiopharmaceuticals: Radium-223 or Samarium-153 for widespread painful osteoblastic skeletal metastases."
+      ]
+    },
+    {
+      "id": "n_bone_ewing_tx",
+      "linkId": "bone_ewing_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Ewing Sarcoma VDC/IE",
+      "title": "Ewing Sarcoma: Interval-Compressed VDC/IE & Local Control",
+      "section": "Primary Treatment",
+      "description": "Category 1 standard interval-compressed chemoimmunotherapy and local control.",
+      "path": "Bone / Ewing / Treatment",
+      "pills": [
+        "Ewing",
+        "VDC-IE",
+        "interval-compressed",
+        "category-1"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Category 1 Preferred First-Line Strategy: Interval-Compressed VDC/IE (AEWS0031 trial):",
+        "• Vincristine (2 mg/m2), Doxorubicin (75 mg/m2), and Cyclophosphamide (1200 mg/m2 with mesna) alternating with Ifosfamide (1800 mg/m2/d x 5 with mesna) and Etoposide (100 mg/m2/d x 5).",
+        "• Administered every 14 days with mandatory G-CSF / filgrastim support; interval compression significantly improves event-free and overall survival compared to standard 3-week scheduling.",
+        "Neoadjuvant Phase: 9 to 12 weeks of VDC/IE prior to local control evaluation.",
+        "Local Control Modality (Week 12-14):",
+        "• Complete surgical resection with negative margins (preferred when functionally feasible).",
+        "• Definitive Radiation Therapy (50.4–55.8 Gy) for surgically unresectable lesions or positive surgical margins.",
+        "Consolidation Phase: Complete remaining cycles of interval-compressed VDC/IE (total of 14-17 cycles, ~28-30 weeks of therapy).",
+        "Relapsed/Refractory Options: Topotecan + Cyclophosphamide, Irinotecan + Temozolomide, High-dose Ifosfamide, Cabozantinib, or Lenvatinib."
+      ],
+      "protocolRefs": [
+        "sarc-ewing-vdc-ie"
+      ]
+    },
+    {
+      "id": "n_bone_chondro_subtype",
+      "linkId": "bone_chondro_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Chondrosarcoma Subtype",
+      "title": "Chondrosarcoma: Histologic Subtype & Dedifferentiation",
+      "section": "Subtype & Risk",
+      "description": "Distinguish conventional chondrosarcoma (chemoresistant) from high-grade dedifferentiated chondrosarcoma.",
+      "path": "Bone / Chondrosarcoma / Subtype",
+      "pills": [
+        "chondrosarcoma",
+        "conventional",
+        "dedifferentiated"
+      ],
+      "required": true,
+      "bullets": [
+        "Conventional Chondrosarcoma (Grades 1-3, Clear cell): Abundant cartilaginous matrix; resistant to conventional chemotherapy and radiation.",
+        "Dedifferentiated Chondrosarcoma: Biphasic tumor featuring low-grade cartilaginous component juxtaposed with high-grade non-cartilaginous sarcoma (e.g. osteosarcoma, MFH); extremely aggressive."
+      ],
+      "options": [
+        {
+          "id": "chondro_conv",
+          "label": "Conventional Chondrosarcoma (Grades 1–3, Clear Cell)",
+          "sets": {
+            "chondro_type": "conventional"
+          },
+          "pills": [
+            "Conventional"
+          ]
+        },
+        {
+          "id": "chondro_dediff",
+          "label": "Dedifferentiated Chondrosarcoma (High-Grade Sarcoma Component)",
+          "sets": {
+            "chondro_type": "dedifferentiated"
+          },
+          "pills": [
+            "Dedifferentiated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_bone_chondro_conv_tx",
+      "linkId": "bone_chondro_conv_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Conventional Chondro Tx",
+      "title": "Conventional Chondrosarcoma: Surgical Resection & Targeted Agents",
+      "section": "Primary Treatment",
+      "description": "Wide oncologic resection is the primary curative modality.",
+      "path": "Bone / Chondrosarcoma / Conventional Tx",
+      "pills": [
+        "chondrosarcoma",
+        "surgery",
+        "R0",
+        "ivosidenib",
+        "pazopanib"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Primary Curative Modality: Complete en bloc wide surgical excision with negative margins (R0 resection). Intralesional curettage with local adjuvant (phenol/cryotherapy) only acceptable for select low-grade intraosseous (ACT) appendicular lesions.",
+        "Chemotherapy & Radiation Resistance: Conventional cytotoxic chemotherapy has NO proven efficacy in conventional chondrosarcoma and is NOT routinely recommended.",
+        "Unresectable / Advanced / Metastatic Disease Management:",
+        "• Ivosidenib (500 mg PO daily): Targeted IDH1 inhibitor; highly effective in chondrosarcoma harboring susceptible IDH1 mutations (~50% of central chondrosarcomas).",
+        "• Multikinase Inhibitors: Pazopanib (800 mg daily) or Dasatinib.",
+        "• High-dose Particle Radiation (Proton or Carbon Ion RT) for anatomically unresectable skull base or axial lesions."
+      ],
+      "protocolRefs": [
+        "sarc-osteosarcoma-map"
+      ]
+    },
+    {
+      "id": "n_bone_chondro_dediff_tx",
+      "linkId": "bone_chondro_dediff_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Dedifferentiated Chondro Tx",
+      "title": "Dedifferentiated Chondrosarcoma: Osteosarcoma-Aligned Chemotherapy & Resection",
+      "section": "Primary Treatment",
+      "description": "High-intensity multiagent chemotherapy directed against the aggressive non-cartilaginous component.",
+      "path": "Bone / Chondrosarcoma / Dedifferentiated Tx",
+      "pills": [
+        "dedifferentiated",
+        "chemotherapy",
+        "cisplatin",
+        "doxorubicin"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Systemic Chemotherapy: Administer multiagent systemic chemotherapy directed at the high-grade sarcoma component per osteosarcoma protocols:",
+        "• Cisplatin + Doxorubicin, or MAP (Methotrexate, Doxorubicin, Cisplatin), or AIM (Doxorubicin, Ifosfamide, Mesna).",
+        "Surgical Resection: Radical en bloc resection of the primary tumor with wide margins; amputation may be necessary for large invasive lesions with vascular involvement.",
+        "Poor overall prognosis: Median survival remains guarded (<1-2 years); early multidisciplinary goals-of-care discussion and clinical trial consideration recommended."
+      ],
+      "protocolRefs": [
+        "sarc-osteosarcoma-map"
+      ]
+    },
+    {
+      "id": "n_bone_gctb_tx",
+      "linkId": "bone_gctb_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "GCTB Denosumab & Surgery",
+      "title": "Giant Cell Tumor of Bone (GCTB): Denosumab & Joint-Preserving Surgery",
+      "section": "Primary Treatment",
+      "description": "RANKL targeted inhibition and intralesional curettage / resection.",
+      "path": "Bone / GCTB / Treatment",
+      "pills": [
+        "GCTB",
+        "denosumab",
+        "curettage",
+        "RANKL"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Targeted RANKL Inhibition with Denosumab (Preferred Medical Therapy):",
+        "• Dose: 120 mg SC on days 1, 8, 15 of cycle 1, then 120 mg SC every 4 weeks.",
+        "• Indications: Unresectable tumors, sacral/spine lesions, or as preoperative downstaging therapy to reduce surgical morbidity and allow joint-preserving resection.",
+        "• Toxicity monitoring: Baseline dental examination prior to therapy to prevent osteonecrosis of the jaw (ONJ); daily calcium (500-1000 mg) and vitamin D (400-800 IU) supplementation to prevent hypocalcemia.",
+        "Surgical Treatment:",
+        "• Resectable lesions: Extensive intralesional curettage with high-speed burr drilling, supplemented with local chemical/thermal adjuvants (liquid nitrogen, phenol, or polymethylmethacrylate [PMMA] bone cement) and bone grafting.",
+        "• En bloc wide resection reserved for joint destruction or malignant transformation.",
+        "Malignant GCTB (Rare ~1-2%): Treat as conventional high-grade osteosarcoma."
+      ],
+      "protocolRefs": [
+        "sarc-osteosarcoma-map"
+      ]
+    },
+    {
+      "id": "n_bone_chordoma_tx",
+      "linkId": "bone_chordoma_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Chordoma Resection & RT",
+      "title": "Chordoma: En Bloc R0 Surgical Resection, Proton Beam RT & Targeted TKIs",
+      "section": "Primary Treatment",
+      "description": "Specialized skull base and sacropelvic oncology management.",
+      "path": "Bone / Chordoma / Treatment",
+      "pills": [
+        "chordoma",
+        "sacrectomy",
+        "proton-beam",
+        "imatinib"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Definitive Surgical Resection: En bloc wide surgical resection with negative margins (sacrectomy, mobile spine spondylectomy, or skull base endoscopic approach); positive margins carry high risk of local recurrence.",
+        "Advanced Radiation Therapy (Proton Beam / Carbon Ion Therapy):",
+        "• High doses (70–74 Gy RBE) required due to radioresistance; proton beam or carbon ion RT provides sharp dose fall-off sparing spinal cord and rectum.",
+        "• Indicated postoperatively for positive/close surgical margins or as definitive primary therapy for inoperable tumors.",
+        "Systemic Therapy for Unresectable / Metastatic Disease:",
+        "• Imatinib (400-800 mg daily; PDGFRB-directed) +/- Everolimus.",
+        "• Dasatinib, Sunitinib, or Lapatinib (for EGFR-expressing chordomas).",
+        "• Dedifferentiated chordomas: Doxorubicin + Ifosfamide (AIM regimen)."
+      ],
+      "protocolRefs": [
+        "sarc-osteosarcoma-map"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_bone_entry_to_workup",
+      "from": "n_bone_entry",
+      "to": "n_bone_workup",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_bone_workup_to_hist",
+      "from": "n_bone_workup",
+      "to": "n_bone_histology",
+      "linkCategory": "mandatory",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_bone_hist_to_osteo",
+      "from": "n_bone_histology",
+      "to": "n_bone_osteo_extent",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_osteo"
+      ]
+    },
+    {
+      "id": "l_bone_hist_to_ewing",
+      "from": "n_bone_histology",
+      "to": "n_bone_ewing_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_ewing"
+      ]
+    },
+    {
+      "id": "l_bone_hist_to_chondro",
+      "from": "n_bone_histology",
+      "to": "n_bone_chondro_subtype",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_chondro"
+      ]
+    },
+    {
+      "id": "l_bone_hist_to_gctb",
+      "from": "n_bone_histology",
+      "to": "n_bone_gctb_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_gctb"
+      ]
+    },
+    {
+      "id": "l_bone_hist_to_chordoma",
+      "from": "n_bone_histology",
+      "to": "n_bone_chordoma_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "sub_chordoma"
+      ]
+    },
+    {
+      "id": "l_bone_osteo_to_loc",
+      "from": "n_bone_osteo_extent",
+      "to": "n_bone_osteo_loc_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "osteo_localized"
+      ]
+    },
+    {
+      "id": "l_bone_osteo_to_met",
+      "from": "n_bone_osteo_extent",
+      "to": "n_bone_osteo_met_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "osteo_metastatic"
+      ]
+    },
+    {
+      "id": "l_bone_chondro_to_conv",
+      "from": "n_bone_chondro_subtype",
+      "to": "n_bone_chondro_conv_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "chondro_conv"
+      ]
+    },
+    {
+      "id": "l_bone_chondro_to_dediff",
+      "from": "n_bone_chondro_subtype",
+      "to": "n_bone_chondro_dediff_tx",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "chondro_dediff"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "sarc-ewing-vdc-ie",
+    "sarc-osteosarcoma-map"
+  ]
+}

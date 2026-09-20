@@ -81,7 +81,9 @@ class RemoteBackend {
   _url(path) { return `${this.baseUrl}/api/wardsynq/${encodeURIComponent(this.tenantId)}${path}`; }
 
   async _headers(extra) {
-    const h = { "Content-Type": "application/json", ...(this.extraHeaders() || {}), ...(extra || {}) };
+    const cleanExtra = { ...(extra || {}) };
+    delete cleanExtra._refreshed;
+    const h = { "Content-Type": "application/json", ...(this.extraHeaders() || {}), ...cleanExtra };
     const t = await this.token();
     if (t) h.Authorization = `Bearer ${t}`;
     const st = await this.staffToken();
@@ -92,6 +94,16 @@ class RemoteBackend {
   async _request(method, path, body, extra) {
     if (this._closed) throw new RemoteStoreError("RemoteBackend is closed", "CLOSED");
     const res = await this._fetch(this._url(path), { method, headers: await this._headers(extra), body: body === undefined ? undefined : JSON.stringify(body) });
+    if (res.status === 401 && !(extra && extra._refreshed) && typeof window !== "undefined" && window.firebase && window.firebase.auth && window.firebase.auth().currentUser) {
+      try {
+        await window.firebase.auth().currentUser.getIdToken(true);
+        const retryExtra = { ...(extra || {}), _refreshed: true };
+        const retryRes = await this._fetch(this._url(path), { method, headers: await this._headers(retryExtra), body: body === undefined ? undefined : JSON.stringify(body) });
+        let retryData = null;
+        try { retryData = await retryRes.json(); } catch { retryData = null; }
+        return { status: retryRes.status, data: retryData };
+      } catch {}
+    }
     let data = null;
     try { data = await res.json(); } catch { data = null; }
     return { status: res.status, data };
@@ -101,9 +113,22 @@ class RemoteBackend {
   async open() {
     this._closed = false;
     if (this._opened) return this.descriptor;
-    const { status, data } = await this._request("GET", "");
+    let { status, data } = await this._request("GET", "");
+    // If auth is still resolving or refreshing on initial navigation, give it one retry opportunity
+    if (status === 401) {
+      await new Promise((r) => setTimeout(r, 600));
+      const retry = await this._request("GET", "");
+      if (retry.status === 200 && retry.data && retry.data.ok) {
+        status = retry.status;
+        data = retry.data;
+      }
+    }
     if (status !== 200 || !data || !data.ok) {
-      throw new RemoteStoreError(`record service refused to open (${status})`, status === 401 ? "UNAUTHENTICATED" : status === 403 ? "FORBIDDEN" : status === 404 ? "NOT_AVAILABLE" : "OPEN_FAILED", status, data);
+      const code = status === 401 ? "UNAUTHENTICATED" : status === 403 ? "FORBIDDEN" : status === 404 ? "NOT_AVAILABLE" : (!data ? "NOT_AVAILABLE" : "OPEN_FAILED");
+      const msg = !data && status === 200
+        ? "record service returned non-JSON response (200)"
+        : `record service refused to open (${status})`;
+      throw new RemoteStoreError(msg, code, status, data);
     }
     this.descriptor = data;
     this._opened = true;

@@ -180,7 +180,6 @@ QUEUE_EMR_WRITE = "1"   # LIVE GHIS write-back for assessment + investigation or
 QUEUE_STAFF_ENABLED = "1"   # OPD staff platform on for dev/testing. PUBLIC-RELEASE-GATE: set "0" before release
 FOLLOWCARE_MSG_CHANNEL = "whatsapp"   # queue patient messages via WhatsApp for now; switch to "sms" (2Factor) later
 MAIK_ANSWER_CACHE = "1"   # semantic answer cache ON (generic Qs only, never case/PHI); MAIK_CACHE_VERSION bump = invalidate
-MAIK_CACHE_VERSION = "1"
 MAIK_ABSTAIN = "1"   # cite-or-abstain prompt directive ON (ground+cite, say 'verify' vs guess)
 QUEUE_ONCO_WRITE = "1"   # onco treatment-plan writes on (cap-gated EMR_TREAT/EMR_VITALS + confirm). PUBLIC-RELEASE-GATE
 MAIK_ENFORCE_CAPS = "1"   # enforce per-user/per-module AI daily+rate caps (owner exempt); set "0" to revert
@@ -213,10 +212,9 @@ FOUNDING_AI_GRANT_INR = "120"        # founding annual pool: ₹120 + one ₹120
 FOUNDING_AI_REFILL_INR = "120"
 FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily → founding AI draws the annual pool
 FOUNDING_SEATS = "500"
-DEVICE_LOCK_ON = "0"                  # "1" enforces the anti-sharing device limit (1/tier; Co-Res + Physician Pro 2)
 # NMC PG Logbook verification domain (public). Named envs do NOT inherit top-level [vars], so it is
 # repeated here. The SIGNING KEY is a Pages secret, never a var — see the note in [vars] above.
-PGLOG_VERIFY_BASE = "https://stewardmd.in"
+# PGLOG_VERIFY_BASE, MAIK_CACHE_VERSION and DEVICE_LOCK_ON removed from production 2026-09-13: each equalled the code default (see functions/_pglog_verify.js, _maik_cache.js, _devices.js), and Cloudflare caps a Pages Function at 128 text bindings (vars + secrets). Removing them changes nothing at runtime.
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"

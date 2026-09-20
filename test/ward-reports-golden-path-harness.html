@@ -12,6 +12,11 @@
  * test/wardsynq-reports-bridge.test.mjs. Proves the CLIENT half only. */
 window.__calls = [];
 localStorage.setItem("smd_opd_staff_tok", "harness-token");
+/* LT-38: the CSV a report table downloads is captured here instead of saved, so the runner can read it. */
+window.__csv = null;
+URL.createObjectURL = function (blob) { blob.text().then(function (t) { window.__csv = t; }); return "about:blank#csv"; };
+URL.revokeObjectURL = function () {};
+(function (real) { HTMLAnchorElement.prototype.click = function () { if (this.hasAttribute("download")) { window.__downloadName = this.download; return; } return real.call(this); }; })(HTMLAnchorElement.prototype.click);
 
 function envelope(dataSource, body) {
   return Object.assign({ ok: true, dataSource: dataSource, period: { from: null, to: null }, filters: {}, generatedAt: "2026-09-09T09:00:00.000Z", scope: { role: "admin", tenantId: "tenant-wsq" } }, body);

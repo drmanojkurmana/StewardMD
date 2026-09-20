@@ -14,7 +14,7 @@
      the network being up at exactly the moment a ward has lost it. The stack in --sans is now the
      design rather than a fallback from one. Production step, if the face is wanted: self-host a
      subset alongside the CSS with font-display: swap, so it is cached with everything else. -->
-<link rel="stylesheet" href="wardsynq.css?v=10">
+<link rel="stylesheet" href="wardsynq.css?v=12">
 <link rel="icon" type="image/png" sizes="32x32" href="brand/icon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="brand/icon-180.png">
 <link rel="manifest" href="brand/wardsynq.webmanifest">
@@ -30,11 +30,13 @@
      already says what this is, and a screen reader announcing "WardSynQ logo" before every ward
      round is noise. -->
 <div class="brandbar">
-  <img class="brand-mark" src="brand/wardsynq-lockup.png" alt="" aria-hidden="true"
-       width="261" height="61" decoding="async">
+  <a href="/#/home" title="Return to WardSynQ Map" style="text-decoration:none;display:inline-block">
+    <img class="brand-mark" src="brand/wardsynq-lockup.png" alt="" aria-hidden="true"
+         width="261" height="61" decoding="async">
+  </a>
 </div>
 
-<div class="pack" id="pack" role="status">Loading clinical rules.</div>
+<div class="pack" id="pack" role="status">Loading the ward.</div>
 
 <!-- Patient identity. Quiet and generously set: the name is the largest thing on screen, the facts
      read as one line, and the allergy stays unfilled until the drug on the order implicates it. -->
@@ -48,8 +50,6 @@
       <button class="link" type="button" data-go="meds">Medications <span class="k">M</span></button>
       <button class="link" type="button" data-go="results">Results <span class="k">L</span></button>
       <button class="link" type="button" data-go="ledger">Record <span class="k">R</span></button>
-      <button class="link" type="button" disabled>Notes</button>
-      <button class="link" type="button" disabled>Handover</button>
     </nav>
     <!-- The rest of WardSynQ, when this page is the hospital's landing screen on wardsynq.com
          (opened with ?site=1 by the site shell). Hidden everywhere else: inside the StewardMD app
@@ -57,13 +57,17 @@
     <nav class="sitemap" id="sitemap" hidden aria-label="WardSynQ">
       <div class="heading">WardSynQ</div>
       <a href="/#/home">Map</a>
-      <a href="/#/ward/">Ward</a>
+      <a href="/#/ward">Ward</a>
       <a href="/#/ward/board">Bed board</a>
       <a href="/#/ward/edboard">Emergency</a>
       <a href="/#/ward/critsboard">Critical results</a>
+      <a href="/#/ward/labboard">Laboratory</a>
+      <a href="/#/ward/radboard">Radiology</a>
       <a href="/#/ward/flowcommand">Command center</a>
       <a href="/#/ward/twin">Digital twin</a>
       <a href="/#/patients">Patients</a>
+      <a href="/#/ward/cashier">Billing</a>
+      <a href="/#/ward/reports">Reports</a>
       <a href="/#/maik">MaiK</a>
       <a href="/#/admin">Admin Center</a>
       <a href="/#/audit">Audit</a>
@@ -93,13 +97,17 @@
           <label class="f"><span>Route</span>
             <select id="route"><option value="oral">Oral</option><option value="IV">IV</option><option value="IM">IM</option><option value="SC">Subcutaneous</option></select>
           </label>
+          <label class="f"><span>Frequency</span>
+            <input type="text" id="freq" list="freqList" autocomplete="off" spellcheck="false">
+            <datalist id="freqList"><option value="OD"><option value="BD"><option value="TDS"><option value="QID"><option value="q6h"><option value="q8h"><option value="STAT"><option value="PRN"></datalist>
+          </label>
           <p class="keys"><kbd>Enter</kbd> next field <span aria-hidden="true">&nbsp;&nbsp;</span> <kbd>Ctrl Enter</kbd> sign <span aria-hidden="true">&nbsp;&nbsp;</span> <kbd>Esc</kbd> clear</p>
         </div>
       </div>
     </section>
 
     <div id="findings" role="region" aria-live="polite" aria-label="Safety">
-      <section class="line" data-sig="none"><div class="signal"></div><div class="said"><p class="quiet">Enter a medication to check it against this patient.</p></div></section>
+      <section class="line" data-sig="none"><div class="signal"></div><div class="said"><p class="quiet">Choose a patient from the ward list.</p></div></section>
     </div>
 
     <section class="line" data-sig="none">
@@ -141,7 +149,7 @@
 
 </div>
 
-<footer class="foot">WardSynQ demonstration build. Real deterministic safety engine, unapproved clinical content. Not for clinical use.</footer>
+<footer class="foot">The safety check runs on the server against this patient's record, with clinical content awaiting pharmacy sign-off.</footer>
 
 <!-- THE WORKSTATION HAD NO IDENTITY AT ALL.
      This page carried no Firebase and no SMD_AUTH, so every call it made to the record service went
@@ -157,28 +165,117 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
-  try {
-    firebase.initializeApp({ apiKey: "AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain: "stewardmd-498ec.firebaseapp.com", projectId: "stewardmd-498ec", appId: "1:911280405587:web:d09038e15e98d69dc79aa6" });
-    /* WAIT FOR THE SESSION TO RESTORE BEFORE ANSWERING. firebase.auth().currentUser is null for the
-     * first moments after load while the SDK rehydrates from IndexedDB, and this page opens the
-     * record service immediately - so answering "no token" straight away would reproduce the very
-     * 401 this is here to fix, just with a smaller window. Resolves once on the first auth state,
-     * and is capped so a page with no session (a hospital PC behind Cloudflare Access, which needs
-     * no bearer at all) opens promptly rather than hanging on a sign-in that is never coming. */
-    var ready = new Promise(function (resolve) {
-      var done = false;
-      var settle = function (u) { if (!done) { done = true; resolve(u || null); } };
-      try { firebase.auth().onAuthStateChanged(settle); } catch (e) { settle(null); }
-      setTimeout(function () { settle(null); }, 4000);
-    });
-    window.SMD_AUTH = window.SMD_AUTH || {
-      token: function () {
-        return ready.then(function (u) { return u && u.getIdToken ? u.getIdToken() : null; }).catch(function () { return null; });
+  (function () {
+    try {
+      firebase.initializeApp({
+        apiKey: "AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",
+        authDomain: "stewardmd-498ec.firebaseapp.com",
+        projectId: "stewardmd-498ec",
+        appId: "1:911280405587:web:d09038e15e98d69dc79aa6"
+      });
+    } catch (e) {}
+
+    var auth = null;
+    try { auth = firebase.auth(); } catch (e) {}
+
+    /* SAFARI/INDEXEDDB SESSION RESTORATION FIX:
+     * Never latch on an initial null from onAuthStateChanged. In WebKit/Safari, IndexedDB takes
+     * 100-500ms to restore the persisted session. An observer registered immediately will fire
+     * with null before the stored user is read.
+     * We:
+     * 1) Await auth.authStateReady() (native in Firebase 9.14+ / 10 compat).
+     * 2) Also listen on onAuthStateChanged to resolve immediately once a user is found.
+     * 3) Dynamic token(): ALWAYS checks auth.currentUser.getIdToken() dynamically on every call,
+     *    never relying solely on a stale settled promise.
+     * 4) Fall back to smd_opd_staff_tok if the user is a hospital staff sign-in.
+     */
+    var authReadyPromise = null;
+    function ensureAuthReady() {
+      if (!auth) return Promise.resolve(null);
+      if (auth.currentUser) return Promise.resolve(auth.currentUser);
+      if (authReadyPromise) return authReadyPromise;
+
+      authReadyPromise = new Promise(function (resolve) {
+        var settled = false;
+        function finish(u) {
+          if (settled) return;
+          settled = true;
+          resolve(u || (auth && auth.currentUser) || null);
+        }
+
+        if (typeof auth.authStateReady === "function") {
+          auth.authStateReady().then(function () {
+            finish(auth.currentUser);
+          }).catch(function () {});
+        }
+
+        var unsub = null;
+        try {
+          unsub = auth.onAuthStateChanged(function (u) {
+            if (u) {
+              if (unsub) { try { unsub(); } catch (e) {} }
+              finish(u);
+            }
+          });
+        } catch (e) {}
+
+        var tokType = "";
+        try { tokType = localStorage.getItem("smd_opd_toktype") || ""; } catch (e) {}
+        /* 3500 ms was a deadline, not a guard: restoring a Firebase session includes a network call,
+         * and on a slow hospital link an account that WAS signed in lost the race and opened onto
+         * a 401. An account sign-in now waits for Firebase itself; the cap only catches an SDK that
+         * never answers. */
+        var maxWait = tokType === "staff" ? 300 : 10000;
+
+        setTimeout(function () {
+          if (unsub) { try { unsub(); } catch (e) {} }
+          finish(auth && auth.currentUser);
+        }, maxWait);
+      });
+
+      return authReadyPromise;
+    }
+
+    ensureAuthReady();
+
+    window.SMD_AUTH = {
+      ready: authReadyPromise,
+      token: async function () {
+        try {
+          if (auth && auth.currentUser) {
+            return await auth.currentUser.getIdToken();
+          }
+          var u = await ensureAuthReady();
+          if (u && typeof u.getIdToken === "function") {
+            return await u.getIdToken();
+          }
+          if (auth && auth.currentUser && typeof auth.currentUser.getIdToken === "function") {
+            return await auth.currentUser.getIdToken();
+          }
+        } catch (e) {}
+
+        // Fallback for staff sessions on hospital PC
+        try {
+          var st = localStorage.getItem("smd_opd_staff_tok");
+          if (st) return st;
+        } catch (e) {}
+
+        return null;
       },
+      get currentUser() {
+        return auth ? auth.currentUser : null;
+      }
     };
-  } catch (e) {}
+  })();
 </script>
-<script type="module" src="wardsynq-app.js?v=7"></script>
+<!-- Staff language (ui-i18n-site, owner decision 2026-09-15). Classic scripts, loaded before the app
+     module, so window.WSQI18n and window.WSQPrint exist when the module runs. Same files and cache
+     tokens the site shell uses (wardsynq/site/index.html). -->
+<script src="../site/i18n.js?v=63"></script>
+<script src="../site/print-lang.js?v=2"></script>
+<!-- Which credential a request for this hospital carries, the same file the ward screen loads first. -->
+<script src="/hospital-auth.js?v=1"></script>
+<script type="module" src="wardsynq-app.js?v=16"></script>
 <script type="module">
   // Offline shell. Registered separately from the app so a caching failure never stops the
   // workstation loading: an app that says it is offline is more use than one that will not open.

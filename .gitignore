@@ -1,8 +1,8 @@
 # Cloudflare Worker tooling / caches (never commit)
 .wrangler/
 worker/.wrangler/
-worker/node_modules/
-node_modules/
+worker/node_modules
+node_modules
 **/.dev.vars
 
 # Large drug-database source files — NEVER commit (exceed GitHub's 100 MB limit;
@@ -46,8 +46,12 @@ xcuserdata/
 google-services.json
 GoogleService-Info.plist
 
-# Local Claude Code session/agent state
+# Local Claude Code / agent state
 .claude/
+.agents/
+
+# Large input guideline PDFs (staging inbox)
+kb/guidelines_inbox/
 
 # Offline-clinical build artifacts (only the .gz ships; JSON + temp DB are regenerated)
 data/offline-clinical.json
@@ -126,3 +130,8 @@ test/wardsynq-maik-eval/results.*.json
 
 # wardsynq.com site build output (scripts/build-wardsynq-site.sh)
 /dist-wardsynq/
+debug-bugs*.jsonl
+
+# graphify knowledge graph artifacts (regenerable, ~200MB)
+graphify-out/
+.planning/graphs/

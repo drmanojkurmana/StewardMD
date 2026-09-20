@@ -54,7 +54,15 @@
     // PRO + ULTIMATE Telugu route: vasista22 Telugu-small → ggml → INT8 (q8_0). Benchmark-best Telugu
     // (te WER 14.7%). NOT an off-the-shelf HF file — built by scripts/convert-telugu-whisper-ggml.sh;
     // sha256/bytes stay PENDING (feature flag-gated OFF) until that conversion + upload is done.
-    "telugu-small-q8_0": { file: "ggml-telugu-small-q8_0.bin", sha256: "355cef20a0d433ca6ffae35d414c817e0aeecfce21b934d68203efee1e72dcba", bytes: 264464607 }
+    "telugu-small-q8_0": { file: "ggml-telugu-small-q8_0.bin", sha256: "355cef20a0d433ca6ffae35d414c817e0aeecfce21b934d68203efee1e72dcba", bytes: 264464607 },
+    // Hindi specialist route (voice.js flag smd_voice_hi_model, DEFAULT OFF). Mirrors the Telugu
+    // route: a Hindi fine-tuned Whisper small, converted to ggml + INT8 (q8_0).
+    // TODO(unpublished): the file is NOT hosted yet and its sha256/bytes are UNKNOWN. They are left
+    // empty ON PURPOSE - an empty sha256 is rejected by BOTH native plugins (iOS `!sha.isEmpty`,
+    // Android `sha.isEmpty()`) and by downloadWhisperModel() below, so this entry FAILS CLOSED:
+    // nothing can download or install it. Publish the file, then fill in the real sha256 + bytes
+    // (see scripts/host-whisper-models.sh) before the flag is flipped on.
+    "hindi-small-q8_0": { file: "ggml-hindi-small-q8_0.bin", sha256: "", bytes: 0, unpublished: true }
   };
 
   // ---- Native helpers (native-only; stay UNDEFINED on web because this file
@@ -91,40 +99,190 @@
   // Client-side HTML->PDF (jsPDF + html2canvas) — the reliable path when the native VisionOcr plugin is
   // absent (Android has no VisionOcr; it is iOS-only). Mirrors the proven prescription.js exportRx pipeline:
   // render the doc offscreen at A4 width, rasterize, paginate into a PDF, then share (native) or download (web).
-  // Rejects if the vendored engines aren't loaded, so callers keep their existing HTML/text fallback = no regression.
+  // Client-side HTML->PDF (jsPDF + html2canvas) — the reliable path when the native VisionOcr plugin is
+  // absent (Android has no VisionOcr; it is iOS-only). Mirrors the proven prescription.js exportRx pipeline:
+  // render the doc offscreen at A4 width, rasterize, paginate into a PDF, then share (native) or download (web).
+  function ensurePdfEngine() {
+    var H = window.html2canvas, JS = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+    if (H && JS) return Promise.resolve({ H: H, JS: JS });
+    var lazy = window.smdLazy || function (src) {
+      return new Promise(function (resolve, reject) {
+        var s = document.createElement("script");
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    };
+    var p1 = window.html2canvas ? Promise.resolve() : lazy("/vendor-html2canvas.js?v=1");
+    return p1.then(function () {
+      var p2 = ((window.jspdf && window.jspdf.jsPDF) || window.jsPDF) ? Promise.resolve() : lazy("/vendor-jspdf.js?v=1");
+      return p2.then(function () {
+        var H2 = window.html2canvas, JS2 = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+        if (!H2 || !JS2) throw new Error("pdf-engine-unavailable");
+        return { H: H2, JS: JS2 };
+      });
+    });
+  }
+
   function pdfFromHtmlJs(html, name, title) {
-    return new Promise(function (resolve, reject) {
-      var H = window.html2canvas, JS = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
-      if (!H || !JS) { reject(new Error("pdf-engine-unavailable")); return; }
+    return ensurePdfEngine().then(function (engines) {
+      var H = engines.H, JS = engines.JS;
       var s = String(html == null ? "" : html);
-      var style = (s.match(/<style[\s\S]*?<\/style>/i) || [""])[0];
+      var style = (s.match(/<style[\s\S]*?<\/style>/gi) || [""]).join("\n");
       var bodyInner = (s.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [null, s])[1];
       var host = document.createElement("div");
       host.style.cssText = "position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1;color:#14202b";
-      host.innerHTML = style + '<div style="padding:24px;box-sizing:border-box;width:794px">' + bodyInner + "</div>";
+      host.innerHTML = style + '<div class="smd-pdf-container" style="padding:16px 20px;box-sizing:border-box;width:794px;background:#fff">' + bodyInner + "</div>";
       document.body.appendChild(host);
-      H(host, { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
+
+      var pdf = new JS({ unit: "pt", format: "a4" });
+      var pw = pdf.internal.pageSize.getWidth();
+      var ph = pdf.internal.pageSize.getHeight();
+      var pageCount = 0;
+
+      function addCanvasSlice(canvas, hostElem) {
+        var imgW = pw;
+        var imgH = canvas.height * (pw / canvas.width);
+        if (imgH <= ph) {
+          if (pageCount > 0) pdf.addPage();
+          pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, imgW, imgH);
+          pageCount++;
+          return;
+        }
+        var hostRect = hostElem.getBoundingClientRect();
+        var scale = canvas.width / Math.max(1, hostElem.offsetWidth);
+        var pagePx = ph / (pw / Math.max(1, hostElem.offsetWidth));
+        var totalHeightPx = hostElem.offsetHeight;
+
+        var breakElems = hostElem.querySelectorAll("tr, .ps-card, .ps-block, .ps-signatures, .ps-foot, section, p, h1, h2, h3, h4, .ps-tox-card, .ps-oral-card, li, .ps-regimenbanner");
+        var safeTops = [];
+        for (var b = 0; b < breakElems.length; b++) {
+          var r = breakElems[b].getBoundingClientRect();
+          var top = r.top - hostRect.top;
+          if (top > 10 && top < totalHeightPx - 10) safeTops.push(top);
+        }
+        safeTops.sort(function (a, b) { return a - b; });
+
+        var currentY = 0;
+        while (currentY < totalHeightPx - 1) {
+          var targetY = currentY + pagePx;
+          var splitY = totalHeightPx;
+          if (targetY < totalHeightPx) {
+            var bestSafe = -1;
+            for (var si = 0; si < safeTops.length; si++) {
+              var sTop = safeTops[si];
+              if (sTop <= targetY && sTop > currentY + (pagePx * 0.4)) {
+                bestSafe = sTop;
+              }
+            }
+            splitY = (bestSafe > 0) ? bestSafe : targetY;
+          }
+
+          var sliceHeightCss = splitY - currentY;
+          var sliceHeightCanvas = Math.round(sliceHeightCss * scale);
+          if (sliceHeightCanvas <= 0) break;
+
+          var sliceCanvas = document.createElement("canvas");
+          sliceCanvas.width = canvas.width;
+          sliceCanvas.height = sliceHeightCanvas;
+          var sCtx = sliceCanvas.getContext("2d");
+          sCtx.fillStyle = "#ffffff";
+          sCtx.fillRect(0, 0, sliceCanvas.width, sliceHeightCanvas);
+          sCtx.drawImage(
+            canvas,
+            0, Math.round(currentY * scale), canvas.width, sliceHeightCanvas,
+            0, 0, canvas.width, sliceHeightCanvas
+          );
+
+          if (pageCount > 0) pdf.addPage();
+          var slicePtH = sliceHeightCanvas * (pw / canvas.width);
+          pdf.addImage(sliceCanvas.toDataURL("image/png"), "PNG", 0, 0, pw, slicePtH);
+          pageCount++;
+          currentY = splitY;
+        }
+      }
+
+      var pageNodes = host.querySelectorAll(".ps-page, .page");
+      var renderPromise;
+
+      if (pageNodes && pageNodes.length > 0) {
+        var pChain = Promise.resolve();
+        for (var pi = 0; pi < pageNodes.length; pi++) {
+          (function (pageElem) {
+            pChain = pChain.then(function () {
+              return H(pageElem, { scale: 3, backgroundColor: "#ffffff", useCORS: true }).then(function (pageCanvas) {
+                addCanvasSlice(pageCanvas, pageElem);
+              });
+            });
+          })(pageNodes[pi]);
+        }
+        renderPromise = pChain;
+      } else {
+        var container = host.querySelector(".smd-pdf-container") || host;
+        renderPromise = H(container, { scale: 3, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
+          addCanvasSlice(canvas, container);
+        });
+      }
+
+      return renderPromise.then(function () {
         try { host.remove(); } catch (e) {}
-        var pdf = new JS({ unit: "pt", format: "a4" }), pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight();
-        var imgW = pw, imgH = canvas.height * (pw / canvas.width), img = canvas.toDataURL("image/jpeg", 0.95);
-        if (imgH <= ph) pdf.addImage(img, "JPEG", 0, 0, imgW, imgH);
-        else { var y = 0; while (y < imgH - 1) { pdf.addImage(img, "JPEG", 0, -y, imgW, imgH); y += ph; if (y < imgH - 1) pdf.addPage(); } }
         var uri = pdf.output("datauristring");
         var P = plugins();
         if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
           var b64 = (uri.split(",")[1] || "");
-          P.Filesystem.writeFile({ path: name + ".pdf", data: b64, directory: "CACHE" }).then(function (res) {
+          return P.Filesystem.writeFile({ path: name + ".pdf", data: b64, directory: "CACHE" }).then(function (res) {
             return P.Share.share({ title: title || "StewardMD", url: res.uri, files: [res.uri], dialogTitle: "Save PDF / Print / Share" });
-          }).then(resolve, reject);
+          });
         } else {
-          try { var a = document.createElement("a"); a.href = uri; a.download = name + ".pdf"; document.body.appendChild(a); a.click(); a.remove(); resolve(); } catch (e) { reject(e); }
+          try {
+            var a = document.createElement("a");
+            a.href = uri;
+            a.download = name + ".pdf";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          } catch (e) {
+            throw e;
+          }
         }
-      }).catch(function (e) { try { host.remove(); } catch (x) {} reject(e); });
+      }).catch(function (e) {
+        try { host.remove(); } catch (x) {}
+        throw e;
+      });
     });
   }
-  window.SMD_PDF = { fromHtml: pdfFromHtmlJs };   // reusable everywhere (MaiK, onco, reports)
+  window.SMD_PDF = { fromHtml: pdfFromHtmlJs, ensurePdfEngine: ensurePdfEngine };   // reusable everywhere (MaiK, onco, reports)
+
+  // Natural pixel size of a data URL, via a throwaway <img> (needed to normalize ML Kit's pixel boxes to [0,1]).
+  function ocrImageSize(dataUrl) {
+    return new Promise(function (res) {
+      var img = new Image();
+      img.onload = function () { res({ w: img.naturalWidth, h: img.naturalHeight }); };
+      img.onerror = function () { res(null); };
+      img.src = dataUrl;
+    });
+  }
+  // ML Kit's processImage wants a file path, not base64/data URL. Write to CACHE, return the file:// URI's path.
+  var ocrTmpN = 0;
+  function writeTempImage(dataUrl) {
+    var P = plugins();
+    var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+    var name = "smd-ocr-" + Date.now() + "-" + (ocrTmpN++) + ".jpg";
+    return P.Filesystem.writeFile({ path: name, data: b64, directory: "CACHE" })
+      .then(function (r) { return r.uri; });
+  }
+  function removeTempImage(uri) {
+    var P = plugins();
+    try { P.Filesystem.deleteFile({ path: uri }); } catch (e) {}
+  }
 
   window.SMD_NATIVE = {
+    // Write a data: URL to a device-local temp file and return its path, for native calls (the
+    // on-device vision model, ML Kit OCR) that read the image file themselves rather than take
+    // base64/data-URL bytes over the JS bridge. Caller must removeTempImage() when done.
+    writeTempImage: writeTempImage,
+    removeTempImage: removeTempImage,
     // Route to the iOS share sheet (offers Save to Files / Print / Markup / Mail).
     share: function (opts) {
       var P = plugins();
@@ -219,20 +377,69 @@
     },
     // On-device OCR via ML Kit text recognition. The IMAGE NEVER LEAVES THE DEVICE —
     // only recognized text is returned to JS. Resolves { text, lines:[string] }.
-    ocr: function (dataUrl) {
-      var P = plugins();
-      var TR = P && P.VisionOcr;   // local Apple Vision plugin (@stewardmd/capacitor-vision-ocr)
-      if (!(TR && TR.detectText)) return Promise.reject(new Error("ocr-unavailable"));
+    // On-device vital-tile detector (Core ML, iOS). Resolves { available, detections:[{cls,conf,x,y,w,h}] }
+    // (normalized top-left). available=false on builds without the model or on Android: callers fall back.
+    detectVitals: function (dataUrl) {
+      var P = plugins(), TR = P && P.VisionOcr;
+      if (!(TR && TR.detectVitals)) return Promise.resolve({ available: false, detections: [] });
       var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
-      if (!b64) return Promise.reject(new Error("no-image"));
-      return TR.detectText({ base64Image: b64 }).then(function (res) {
-        var lines = [];
-        try { (res.blocks || []).forEach(function (bl) { (bl.lines || []).forEach(function (ln) { if (ln && ln.text) lines.push(String(ln.text)); }); }); } catch (e) {}
-        if (!lines.length && res && res.lines && res.lines.length) lines = res.lines.map(String);
-        if (!lines.length && res && res.text) lines = String(res.text).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
-        // boxes: normalized [0,1] top-left {text,x,y,w,h} per text line (for on-device PHI redaction).
-        var boxes = (res && Array.isArray(res.boxes)) ? res.boxes : [];
-        return { text: (res && res.text) || lines.join("\n"), lines: lines, boxes: boxes };
+      return TR.detectVitals({ base64Image: b64 }).then(function (r) {
+        return { available: !!(r && r.available), detections: (r && Array.isArray(r.detections)) ? r.detections : [] };
+      }, function () { return { available: false, detections: [] }; });
+    },
+    // On-device digit reader (CRNN-CTC; Core ML on iOS, TFLite on Android - same model, converted from the
+    // same PyTorch checkpoint, verified for exact parity): reads the digits inside each box independently
+    // of the OCR engine that found the box. Resolves { available, reads:[{x,y,w,h,text,conf}] };
+    // available=false only on a build with neither native model.
+    readDigits: function (dataUrl, boxes) {
+      var P = plugins(), TR = P && P.VisionOcr;
+      if (!(TR && TR.readDigits) || !(boxes && boxes.length)) return Promise.resolve({ available: false, reads: [] });
+      var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+      return TR.readDigits({ base64Image: b64, boxes: boxes }).then(function (r) {
+        return { available: !!(r && r.available), reads: (r && Array.isArray(r.reads)) ? r.reads : [] };
+      }, function () { return { available: false, reads: [] }; });
+    },
+    ocr: function (dataUrl, opts) {
+      var P = plugins();
+      var TR = P && P.VisionOcr;   // local Apple Vision plugin (@stewardmd/capacitor-vision-ocr), iOS only
+      if (TR && TR.detectText) {
+        var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+        if (!b64) return Promise.reject(new Error("no-image"));
+        // opts.languageCorrection (default true): off for numeric screens, where Vision's word
+        // model rewrites digits. Older plugin builds ignore the extra keys.
+        var req = { base64Image: b64, languageCorrection: !(opts && opts.languageCorrection === false) };
+        if (opts && opts.minTextHeight > 0) req.minTextHeight = opts.minTextHeight;
+        return TR.detectText(req).then(function (res) {
+          var lines = [];
+          try { (res.blocks || []).forEach(function (bl) { (bl.lines || []).forEach(function (ln) { if (ln && ln.text) lines.push(String(ln.text)); }); }); } catch (e) {}
+          if (!lines.length && res && res.lines && res.lines.length) lines = res.lines.map(String);
+          if (!lines.length && res && res.text) lines = String(res.text).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+          // boxes: normalized [0,1] top-left {text,x,y,w,h} per text line (for on-device PHI redaction).
+          var boxes = (res && Array.isArray(res.boxes)) ? res.boxes : [];
+          return { text: (res && res.text) || lines.join("\n"), lines: lines, boxes: boxes };
+        });
+      }
+      // Android: @capacitor-mlkit/text-recognition (Google ML Kit, off-the-shelf, on-device, free).
+      // No confidence per line (ML Kit v2 does not expose one) and no languageCorrection knob to disable —
+      // it does not rewrite digits the way Vision's word model can, so this is not a gap for numeric screens.
+      var MLK = P && P.TextRecognition;
+      if (!(MLK && MLK.processImage)) return Promise.reject(new Error("ocr-unavailable"));
+      return ocrImageSize(dataUrl).then(function (sz) {
+        return writeTempImage(dataUrl).then(function (path) {
+          return MLK.processImage({ path: path }).then(function (res) {
+            var lines = [], boxes = [];
+            var W = (sz && sz.w) || 0, H = (sz && sz.h) || 0;
+            (res.blocks || []).forEach(function (bl) {
+              (bl.lines || []).forEach(function (ln) {
+                if (!ln || !ln.text) return;
+                lines.push(String(ln.text));
+                var r = ln.boundingBox;
+                if (r && W > 0 && H > 0) boxes.push({ text: ln.text, x: r.left / W, y: r.top / H, w: (r.right - r.left) / W, h: (r.bottom - r.top) / H });
+              });
+            });
+            return { text: (res && res.text) || lines.join("\n"), lines: lines, boxes: boxes };
+          }).finally(function () { removeTempImage(path); });
+        });
       });
     },
     // MaiK Scribe — native device speech-to-text (@capacitor-community/speech-recognition:
@@ -357,6 +564,9 @@
       on("whisperState", function (d) { if (opts.onStateChange) opts.onStateChange(d.state); });
       on("whisperPartial", function (d) { if (opts.onPartial && d.text != null) opts.onPartial(String(d.text)); });
       on("whisperFinal", function (d) { finalText(d.text); });
+      // CONTINUOUS CAPTURE (opt-in): a segment transcribed mid-recording by flushWhisper(). The mic
+      // is still open and more segments follow, so this must NOT set `done` the way finalText does.
+      on("whisperFlush", function (d) { if (opts.onFlush && d.text != null) opts.onFlush(String(d.text)); });
       on("whisperError", function (d) { fail(d.code || "transcription-failure"); });
       on("whisperDownloadProgress", function (d) { if (opts.onDownloadProgress) opts.onDownloadProgress(Number(d.progress) || 0); });
 
@@ -372,6 +582,9 @@
       try { console.info("[SV-native] transcribeWhisper model=" + modelKey + " lang=" + lang); } catch (e) {}
       function startDownload() {
         if (!current()) return;
+        // No pinned sha256 = the file is not hosted yet (see WHISPER_MODELS). Fail closed rather than
+        // fetch bytes nothing can verify.
+        if (!m.sha256) { fail("model-unpublished"); return; }
         if (opts.onStateChange) opts.onStateChange("downloading");
         try { console.info("[SV-native] downloading " + modelKey + " <- " + WHISPER_MODEL_HOST + "/" + m.file); } catch (e) {}
         W.downloadModel({ model: modelKey, url: WHISPER_MODEL_HOST + "/" + m.file, sha256: m.sha256 })
@@ -404,6 +617,14 @@
     },
     // Stop recording and transcribe (final arrives via the whisperFinal event → onFinal).
     stopWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.stopTranscribe) W.stopTranscribe(); } catch (e) {} },
+    // CONTINUOUS CAPTURE: transcribe what has been captured so far WITHOUT stopping the mic, so no
+    // audio is lost at a chunk seam (the JS stop/re-arm loop drops a few hundred ms per boundary).
+    // The segment arrives via the whisperFlush event → onFlush; whisperFinal still fires once, on
+    // stopWhisper(). Present only in plugin builds that ship flushTranscribe — see whisperCanFlush().
+    flushWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.flushTranscribe) W.flushTranscribe(); } catch (e) {} },
+    // Does THIS build's native plugin support flush-without-stopping? False on every older binary,
+    // which is why the continuous-capture path stays inert until the app is rebuilt.
+    whisperCanFlush: function () { var P = plugins(); var W = P && P.Whisper; return !!(W && typeof W.flushTranscribe === "function"); },
     // Abort with no transcription (release native resources).
     cancelWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.cancel) W.cancel(); } catch (e) {} this._removeWhisperSubs(); },
     // Is a Clinical model on the device? Checks the given model, or ALL known models (no arg) so the
@@ -430,6 +651,9 @@
       var P = plugins(); var W = P && P.Whisper;
       if (!(W && W.downloadModel)) return Promise.reject(new Error("whisper-unavailable"));
       var m = WHISPER_MODELS[model]; if (!m) return Promise.reject(new Error("whisper-unknown-model"));
+      // Fails closed: a model whose file is not hosted yet has no pinned sha256, and an unverifiable
+      // download must never be attempted (the native side would reject it anyway).
+      if (!m.sha256) return Promise.reject(new Error("whisper-model-unpublished"));
       var sub = null;
       if (opts.onProgress) { try { sub = W.addListener("whisperDownloadProgress", function (d) { opts.onProgress(Number(d && d.progress) || 0); }); } catch (e) {} }
       function cleanup() { try { if (sub) { if (sub.remove) sub.remove(); else if (sub.then) sub.then(function (h) { try { h && h.remove && h.remove(); } catch (e) {} }); } } catch (e) {} }

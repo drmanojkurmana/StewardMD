@@ -1,0 +1,90 @@
+{
+  "id": "nihon-kohden-high-acuity-43",
+  "manufacturer": "nihon-kohden",
+  "layout": "right-column-label-left-limits-right",
+  "difficulty": [
+    "clean"
+  ],
+  "image": "nihon-kohden-high-acuity-43.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 138
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 88
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 136
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 34
+    },
+    "temp": {
+      "status": "visible",
+      "value": 38.9
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 78,
+        "dbp": 44,
+        "map": 55
+      }
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 78,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 44,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 55,
+      "source": "NIBP"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "11:55",
+    "banner": "** RR HIGH"
+  },
+  "notes": "nihon-kohden high-acuity synthetic fixture."
+}

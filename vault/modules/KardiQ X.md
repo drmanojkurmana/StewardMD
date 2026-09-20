@@ -1,7 +1,7 @@
 ---
 tags: [module, ai, imaging]
-status: staged
-flag: smd_kardiox (default OFF)
+status: live for every user (flag ON since 2026-08-26); model clinically unvalidated + regulatory-pending
+flag: smd_kardiox (def:true — ON)
 ---
 # KardiQ X
 

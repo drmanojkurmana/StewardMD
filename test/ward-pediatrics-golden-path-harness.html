@@ -38,6 +38,18 @@ window.fetch = function (url, opts) {
   }
   if (u.indexOf("/ward/neonatal") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1, observationId: "wsq-neonatal-1" });
 
+  // Growth: reads fail until the runner clears __growthFail (the card must say so, not look empty); then one plotted and one refused weight.
+  if (u.indexOf("/ward/growth") >= 0) {
+    if (window.__growthFail !== false) return Promise.reject(new Error("offline"));
+    var line = function (c, base) { return { centile: c, points: [[0, base], [20, base + 0.5], [44, base + 1]] }; };
+    return reply({ ok: true, growth: { patientId: PATIENT_ID, sex: "male", dob: "2026-07-01", approxDob: false, gestationDays: 224, gestationReason: "mother_due_date",
+      measurements: [
+        { id: "o1", at: "2026-07-15T06:00:00.000Z", indicator: "wfa", valueKg: 1.6, chronologicalDays: 14, plotDays: null, corrected: true, correctionReason: "BEFORE_TERM", result: { ok: false, code: "BEFORE_TERM", reason: "no age to plot at" } },
+        { id: "o2", at: "2026-09-09T06:00:00.000Z", indicator: "wfa", valueKg: 3.5, chronologicalDays: 70, plotDays: 14, corrected: true, correctionReason: "PRETERM", result: { ok: true, reference: "cdc2000", indicator: "wfa", z: -0.84, centile: 20.1, implausible: false } }
+      ],
+      lines: [line(3, 2.5), line(10, 2.7), line(25, 3.0), line(50, 3.4), line(75, 3.7), line(90, 4.0), line(97, 4.3)], notRecorded: ["lhfa", "hcfa", "wfl", "bmi"],
+      reference: { id: "cdc2000", name: "CDC 2000 growth reference", method: "lms" } } });
+  }
   if (u.indexOf("/ward/line-list") >= 0) return reply({ ok: true, lines: LINES });
   if (u.indexOf("/ward/line-remove") >= 0 && (opts && opts.method) === "POST") {
     LINES = LINES.map(function (l) { return l.id === body.lineId ? Object.assign({}, l, { removedAt: "2026-09-09T09:00:00.000Z" }) : l; });

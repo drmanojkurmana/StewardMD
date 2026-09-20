@@ -153,7 +153,7 @@
       tier: 0,
       own: true,
       noThink: true,
-      note: "StewardMD's own model, trained on the StewardMD Knowledge Base. Smallest download, fastest answers, and the only pack whose answers are checked against the Knowledge Base.",
+      note: "StewardMD's own model, trained on the StewardMD Knowledge Base. Smallest download, fastest answers, checked claim by claim against the Knowledge Base.",
       guide: {
         speed: 3, medical: 2, general: 1,
         bestFor: "Everyday clinical questions, answered the way they are asked at the bedside.",
@@ -182,12 +182,12 @@
       label: "MAiK MxCore",
       actual: "MedGemma 1.5 4B (Q4_K_M)",
       tier: 1,
-      note: "Lightest of the 4B medical packs. Answers from its own training, not checked against the Knowledge Base. Optional photo reading with the vision download.",
+      note: "Lightest of the 4B medical packs. Reads the Knowledge Base and is checked against it claim by claim. Optional photo reading with the vision download.",
       guide: {
         speed: 3, medical: 2, general: 1,
         bestFor: "Everyday clinical questions on any supported phone, plus reading a photo of a report or label.",
         why: "Medically tuned, and the lightest of the 4B packs on memory.",
-        pick: "Move up here from MaiK Lite when you want more depth and your phone can carry a 2.5 GB model. Expect 20 to 40 seconds per answer, no Knowledge Base check, and figures that can be wrong."
+        pick: "Move up here from MaiK Lite when you want more depth and your phone can carry a 2.5 GB model. Expect 20 to 40 seconds per answer; figures the Knowledge Base does not support are left out."
       },
       nCtx: 4096,
       nPredict: 512,
@@ -210,12 +210,12 @@
       label: "MAiK Neural",
       actual: "MedGemma 1.5 4B (Q5_K_M)",
       tier: 2,
-      note: "MxCore at higher precision: fewer numeric slips, a little slower, more RAM and storage. Not checked against the Knowledge Base.",
+      note: "MxCore at higher precision: fewer numeric slips, a little slower, more RAM and storage. Checked against the Knowledge Base.",
       guide: {
         speed: 2, medical: 3, general: 1,
         bestFor: "When you want the most dependable medical detail from the MedGemma family.",
         why: "Same medical tuning held at higher precision, so figures and regimens drift less.",
-        pick: "Choose this if you have the storage to spare and answer quality matters more than speed. Expect 30 to 50 seconds per answer and no Knowledge Base check."
+        pick: "Choose this if you have the storage to spare and answer quality matters more than speed. Expect 30 to 50 seconds per answer, checked against the Knowledge Base."
       },
       nCtx: 4096,
       nPredict: 512,
@@ -239,7 +239,7 @@
       label: "MAiK Horizon",
       actual: "Gemma 4 E2B (Q4_K_M)",
       tier: 3,
-      note: "Broadest general knowledge. Not medically fine-tuned, not checked against the Knowledge Base, and the slowest of the 4B packs.",
+      note: "Broadest general knowledge. Not medically fine-tuned, checked against the Knowledge Base, and the slowest of the 4B packs.",
       guide: {
         speed: 1, medical: 1, general: 3,
         bestFor: "Broader reasoning and topics at the edges of clinical work.",
@@ -280,12 +280,12 @@
       actual: "MedPsy 4B (Q5_K_M, imatrix)",
       tier: 4,
       noThink: true,
-      note: "Strongest of the medical fine-tunes and the slowest of them. Flagship phones only. Not checked against the Knowledge Base.",
+      note: "Strongest of the medical fine-tunes and the slowest of them. Flagship phones only. Checked against the Knowledge Base.",
       guide: {
         speed: 1, medical: 3, general: 3,
         bestFor: "Flagship phones, when you want the best medical fine-tune on device and can wait a little longer.",
         why: "A medical fine-tune on a newer, stronger base than the other tiers, so it reasons better across both clinical and general questions.",
-        pick: "Best quality among the medical fine-tunes, slowest of them. Expect about a minute per answer and no Knowledge Base check. On an older phone prefer MxCore."
+        pick: "Best quality among the medical fine-tunes, slowest of them. Expect about a minute per answer, checked against the Knowledge Base. On an older phone prefer MxCore."
       },
       nCtx: 4096,
       nPredict: 768,          // more headroom: a reasoning-capable base spends tokens before answering
@@ -296,11 +296,38 @@
         sha256: "68bd5e14cd87ff40bba5d08fbef2da9a6088b11aacab8466ef3f13a602e2d868"   // lfs.oid from the HF API
       }]
     },
+    /* MedMO-4B (MBZUAI, 2026): a medical multimodal foundation model on a Qwen3-VL-4B base, added
+     * 2026-09-18 on the owner's decision as a text-only pack. The only published GGUF is a community
+     * Q4_K_M with NO vision projector, so this pack cannot read images (no `vision` key; the
+     * chooser already handles that). Model-card text QA: MedQA 78.5, MMLU-Med 75.7, PubMedQA 78.0,
+     * MedMCQA 58.0. bytes and sha256 are the HF API's exact size and lfs.oid. UNVERIFIED on device:
+     * a qwen3vl-architecture GGUF loading text-only in the plugin's llama.cpp has not been run here. */
+    "medmo-4b": {
+      label: "MAiK Cortex",   // owner, 2026-09-18: shipped under the MAiK name; `actual` keeps the honest provenance
+      actual: "MedMO-4B (MBZUAI, Qwen3-VL-4B base, Q4_K_M)",
+      tier: 2.5,
+      noThink: true,
+      note: "Medical foundation model (MBZUAI MedMO-4B), strong on medical text QA, with every answer checked claim by claim against the Knowledge Base. Text only: this download carries no vision file.",
+      guide: {
+        speed: 2, medical: 3, general: 2,
+        bestFor: "Clinical questions answered from a medical foundation model, checked against the Knowledge Base.",
+        why: "Trained on 26M medical samples; MedQA 78.5 and MMLU-Med 75.7 on its model card, the strongest text scores of the 4B packs.",
+        pick: "Pick this for medical depth without a 3 GB download, answered from the Knowledge Base. Expect 30 to 50 seconds per answer. It cannot read photos."
+      },
+      nCtx: 4096,
+      nPredict: 768,
+      files: [{
+        name: "medmo-4b-q4_k_m.gguf",
+        url: HF + "/BrazosDeDios/MedMO-4B-Q4_K_M-GGUF/resolve/main/medmo-4b-q4_k_m.gguf?download=true",
+        bytes: 2716064480,   // exact: HF API size
+        sha256: "359d1369a2f2c9f083bb58f1d81b283c28a779a54286834781a23014c075607c"   // lfs.oid from the HF API
+      }]
+    },
     /* BONSAI (PrismML, Apache-2.0): models TRAINED at 1 bit or ternary, not quantized afterwards.
      * Added 2026-09-03 on the owner's decision: the ternary 8B is the on-device stand-in for MaiK
      * Cloud when the phone is offline (maik-engine.js effective()), and all three are in the picker.
      *
-     * FORMAT vs OUR RUNTIME. The plugin links mainline llama.cpp b10502, which carries
+     * FORMAT vs OUR RUNTIME. The plugin linked mainline llama.cpp b10502 until 2026-09-19 (now PrismML's fork prism-b10685-7dffb15, a superset); b10502 carried
      * GGML_TYPE_Q1_0 (128-weight groups) and GGML_TYPE_Q2_0 (64-weight groups) with Metal kernels
      * (checked in that tag's ggml-common.h). PrismML's default ternary file is grouped by 128 for
      * THEIR fork; the g64 file below is the one mainline reads (its byte count is exactly the
@@ -319,12 +346,12 @@
       tier: 0.5,
       flagship: true,
       noThink: true,
-      note: "Best on-device quality per gigabyte. Answers from its own training, not checked against the Knowledge Base. Stands in for MaiK Cloud when you are offline, but it is not MaiK Cloud.",
+      note: "Best on-device quality per gigabyte. Reads the Knowledge Base and is checked against it claim by claim. Stands in for MaiK Cloud when you are offline, but it is not MaiK Cloud.",
       guide: {
         speed: 2, medical: 3, general: 3,
         bestFor: "Offline use in place of MaiK Cloud: an 8B general model, the best differential and viva feedback of the on-device packs.",
         why: "Trained natively at 1.58 bits, so an 8-billion-parameter model fits in 2.3 GB and answers at a usable pace on a recent phone.",
-        pick: "Pick this for the strongest offline answer without a 3 GB download. Expect 30 to 60 seconds per answer on an 8 GB phone, about 2 minutes for the OPD differential, and a minute to reload after the app has been in the background. Not medically fine-tuned and no Knowledge Base check."
+        pick: "Pick this for the strongest offline answer without a 3 GB download. Expect 30 to 60 seconds per answer on an 8 GB phone, about 2 minutes for the OPD differential, and a minute to reload after the app has been in the background. Not medically fine-tuned; checked against the Knowledge Base."
       },
       nCtx: 4096,
       nPredict: 768,
@@ -340,12 +367,12 @@
       actual: "Bonsai 8B (PrismML, GGUF Q1_0 g128, 1-bit)",
       tier: 0.7,
       noThink: true,
-      note: "Fastest and smallest of the Bonsai packs, noticeably less accurate than MAiK Bonsai. Not checked against the Knowledge Base.",
+      note: "Fastest and smallest of the Bonsai packs, noticeably less accurate than MAiK Bonsai. Checked against the Knowledge Base.",
       guide: {
         speed: 3, medical: 2, general: 3,
         bestFor: "Speed on a phone with less memory: an 8B model in 1.2 GB.",
         why: "Every weight is a single bit. The download size of MaiK Lite with far more parameters; several points below the ternary pack on accuracy, and weaker at following strict formats.",
-        pick: "Pick this on an older phone, or when speed matters more than accuracy. Expect the occasional confidently wrong figure, no Knowledge Base check, and no medical fine-tuning."
+        pick: "Pick this on an older phone, or when speed matters more than accuracy. Expect the occasional confidently wrong figure (the Knowledge Base check leaves those out) and no medical fine-tuning."
       },
       nCtx: 4096,
       nPredict: 768,
@@ -356,17 +383,48 @@
         sha256: "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54"   // lfs.oid from the HF API
       }]
     },
+    /* TERNARY BONSAI 2 27B (PrismML, 2026-09-17): Qwen3.8-27B base, 98.2% of full-precision aggregate
+     * benchmark performance, Apache-2.0. Its GGUFs are fork-only types (PTQ1_0 dense trits, 1.75
+     * bits/weight; PQ2_0 2-bit slots) that need PrismML's Hadamard activation runtime: "Stock llama.cpp
+     * will not run these files." So on 2026-09-19 (owner: "go ahead") the plugin moved from mainline
+     * b10502 to PrismML's fork, release prism-b10685-7dffb15, on both platforms; every earlier pack is
+     * a plain GGUF and keeps loading. PTQ1_0 is the smaller file and the one the card recommends for
+     * memory-bound devices. bytes and sha256 are the HF API's exact size and lfs.oid. The repo also
+     * carries an mmproj (Q8_0 629,246,976 B); vision is left off until mtmd + the Qwen3.8 projector
+     * are exercised on a phone. UNVERIFIED on device at the time of writing: the fork runtime was
+     * built, the 5.95 GB pack itself has not yet been loaded on a 12 GB phone. */
+    "bonsai2-27b": {
+      label: "MAiK Bonsai Max 2",
+      actual: "Ternary Bonsai 2 27B (PrismML, GGUF PTQ1_0, 1.75-bit ternary, Qwen3.8-27B base)",
+      tier: 5.5,
+      noThink: true,
+      note: "PrismML's September 2026 release: the 27B-class model at 98% of full precision in 5.95 GB. Needs a 12 GB phone. Checked against the Knowledge Base.",
+      guide: {
+        speed: 1, medical: 3, general: 3,
+        bestFor: "Flagship phones with 12 GB memory, for the strongest offline reasoning available here.",
+        why: "Two months after the first Bonsai 27B, the same footprint class with a materially smaller gap to full precision, especially on multi-step reasoning and tool use.",
+        pick: "Only on a 12 GB phone, and only if you can wait: several minutes per answer and a long reload after backgrounding. No medical fine-tuning; checked against the Knowledge Base."
+      },
+      nCtx: 4096,
+      nPredict: 768,
+      files: [{
+        name: "ternary-bonsai-2-27b-ptq1_0.gguf",
+        url: HF + "/prism-ml/Ternary-Bonsai-2-27B-gguf/resolve/main/Ternary-Bonsai-2-27B-PTQ1_0.gguf?download=true",
+        bytes: 5946648928,   // exact: HF API size
+        sha256: "53107f530aa52eb00912263ab1ee29bd199261c87cd7b4ad4ca1318c1fe33ee3"   // lfs.oid from the HF API
+      }]
+    },
     "bonsai-27b": {
       label: "MAiK Bonsai Max",
       actual: "Bonsai 27B (PrismML, GGUF Q1_0 g128, 1-bit, Qwen3.6 backbone)",
       tier: 5,
       noThink: true,
-      note: "27B-class reasoning in 3.8 GB, the slowest pack here by far. Needs a 12 GB phone: on 8 GB it has no headroom. Not checked against the Knowledge Base.",
+      note: "27B-class reasoning in 3.8 GB, the slowest pack here by far. Needs a 12 GB phone: on 8 GB it has no headroom. Checked against the Knowledge Base.",
       guide: {
         speed: 1, medical: 3, general: 3,
         bestFor: "Flagship phones with 12 GB memory, for the deepest offline reasoning when time does not matter.",
         why: "A 27-billion-parameter model at one bit per weight. Strong reasoning, but on an 8 GB phone it leaves no headroom and is evicted whenever you switch apps.",
-        pick: "Only on a 12 GB phone. Expect several minutes per answer and a long reload every time the app comes back from the background. On anything else MAiK Bonsai scores higher on most tasks anyway. No medical fine-tuning, no Knowledge Base check."
+        pick: "Only on a 12 GB phone. Expect several minutes per answer and a long reload every time the app comes back from the background. On anything else MAiK Bonsai scores higher on most tasks anyway. No medical fine-tuning; checked against the Knowledge Base."
       },
       nCtx: 4096,             // PrismML's 5.2 GB peak-memory figure for this file is at 4K context
       nPredict: 768,
@@ -407,7 +465,7 @@
    * CAPS, keyed by pack id. Values are relative within this lineup and come from the registry
    * notes above, not from benchmarks nobody has run:
    *   medical    tuned on medical text (Lite, MedGemma, MedPsy). Bonsai and Gemma 4 are general.
-   *   kb         answers are checked against the Knowledge Base (Lite only, see GUIDE_INTRO).
+   *   kb         answers are grounded in the Knowledge Base and checked claim by claim (all text packs since 2026-09-18).
    *   json       strict structured-output reliability: 0 none, 1 weak, 2 good. Bonsai Swift's own
    *              note says "weaker at following strict formats", so it is 1 and never picked for
    *              extraction work.
@@ -424,17 +482,22 @@
    *              until measured: a model that technically emits Telugu is not thereby safe for a
    *              prescription line, and nobody has measured that yet. Fill in from the eval only.
    * vision is not repeated here: a pack can see iff it has a `vision` projector entry above. */
+  // kb (owner, 2026-09-18): every text pack reads the Knowledge Base and is checked CLAIM BY CLAIM
+  // (kb/ai/maik-grounding.js), not answer-by-answer; the flag stays so a future pack that cannot
+  // follow a "reference material" prompt can opt out. maik-local.js ragEligible() reads it.
   var CAPS = {
     "maik-lite":         { medical: true,  kb: true,  json: 2, reasoning: 1, ramGB: 6,  kvGBat4k: 0.47, lang: [] },
-    "maik-mxcore":       { medical: true,  kb: false, json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
-    "maik-neural":       { medical: true,  kb: false, json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
-    "maik-horizon":      { medical: false, kb: false, json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [],
+    "maik-mxcore":       { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
+    "maik-neural":       { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
+    "medmo-4b":          { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.60, lang: [] },
+    "maik-horizon":      { medical: false, kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [],
                            warn8: "On an 8 GB phone this pack needs the increased-memory entitlement and is unloaded whenever you switch apps." },
-    "maik-apex":         { medical: true,  kb: false, json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [],
+    "maik-apex":         { medical: true,  kb: true,  json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [],
                            warn8: "Flagship phones only: the slowest of the medical packs, with little headroom on 8 GB." },
-    "bonsai-ternary-8b": { medical: false, kb: false, json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [] },
-    "bonsai-8b":         { medical: false, kb: false, json: 1, reasoning: 2, ramGB: 6,  kvGBat4k: 0.60, lang: [] },
-    "bonsai-27b":        { medical: false, kb: false, json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] }
+    "bonsai-ternary-8b": { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [] },
+    "bonsai-8b":         { medical: false, kb: true,  json: 1, reasoning: 2, ramGB: 6,  kvGBat4k: 0.60, lang: [] },
+    "bonsai-27b":        { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] },
+    "bonsai2-27b":       { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] }
   };
   // ponytail: one constant for llama.cpp scratch + the app beside the weights. Tune from device data.
   var RUNTIME_GB = 0.4;
@@ -750,6 +813,12 @@
         return sizeOf(f.name).then(function (n) { return f.bytes ? n === f.bytes : n > 0; });
       });
     }, Promise.resolve(true)).then(function (ok) {
+      // Size matches, but is every part in? A preallocated file measures full size from the start.
+      if (!ok) return false;
+      var L = llama();
+      if (!(L && L.modelPath)) return true;
+      return L.modelPath({ name: files[0].name }).then(function (mp) { return !(mp && mp.partial); }, function () { return true; });
+    }).then(function (ok) {
       if (ok) { lset(MARK_PREFIX + id, "1"); var s = registrySha(id); if (s) lset(SHA_PREFIX + id, s); }
       else lrem(MARK_PREFIX + id);
       return ok;
@@ -897,7 +966,16 @@
         if (s.state === "done") {
           var onDisk = s.onDisk || 0;
           if (f.bytes && onDisk !== f.bytes) throw new Error("size mismatch: got " + onDisk + " want " + f.bytes);
-          return true;
+          /* SIZE IS NOT COMPLETION. The final file is preallocated at full length before the first
+           * part lands, and the native start() used to declare any full-size file "done" on the spot -
+           * so a download interrupted at 60% came back after a relaunch as "completed", was marked
+           * installed, and the model loaded with holes in it: "generation failure" (owner, iPhone 17
+           * Pro, 2026-09-20). The `.parts` sidecar is the authority; ask for it before believing done. */
+          if (!L.modelPath) return true;
+          return L.modelPath({ name: f.name }).then(function (mp) {
+            if (mp && mp.partial) throw new Error("PARTIAL");
+            return true;
+          }, function () { return true; });
         }
         if (s.state === "failed") throw new Error("download failed (reason " + s.reason + ")");
         if (s.state === "cancelled" || s.state === "none") throw new Error("cancelled");
@@ -921,7 +999,14 @@
       if (mp && mp.freeBytes > 0 && f.bytes && mp.freeBytes < f.bytes * 1.05 + 600e6) {
         throw new Error("not enough free space (" + (mp.freeBytes / 1e9).toFixed(1) + " GB left, needs " + (f.bytes / 1e9).toFixed(1) + " GB)");
       }
-      return begin().then(poll);
+      return begin().then(poll).catch(function (e) {
+        // An older native build cannot resume a preallocated file (its start() short-circuits on
+        // size), so the only way to a working model there is a clean restart. Once.
+        if (String((e && e.message) || e) !== "PARTIAL" || stopped) throw e;
+        report(0, "Download was incomplete, starting again");
+        return (L.modelDelete ? L.modelDelete({ name: f.name }).catch(function () {}) : Promise.resolve())
+          .then(function () { lrem(KEY_DLID + id); return fresh().then(poll); });
+      });
     }).then(function () {
       lset(MARK_PREFIX + id, "1");
       var s0 = registrySha(id); if (s0) lset(SHA_PREFIX + id, s0);

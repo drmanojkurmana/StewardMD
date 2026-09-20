@@ -223,7 +223,7 @@
 
     // Concise footer caveat - ONE muted line. NO model names/sizes/architecture in the copy.
     var footerHtml = '<div class="sknx-footer">' + ic("info") +
-      "<span>Experimental, educational only - not a diagnosis. Does not exclude skin cancer; correlate clinically.</span></div>";
+      "<span>Beta, in active development. It may not perform to the mark, so check every result yourself. Experimental, educational only - not a diagnosis. Does not exclude skin cancer; correlate clinically.</span></div>";
 
     var lesionHtml = a.lesion ?
       '<div class="sknx-lesion">' + ic("info") +

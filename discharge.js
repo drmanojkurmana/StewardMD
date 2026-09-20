@@ -30,6 +30,10 @@
  *    a discharge - a ward has real reasons to send a patient home with a result pending - but
  *    nobody should discover them by reading the summary later.
  *
+ * 6. EDUCATION LEAFLETS ARE THE HOSPITAL'S OWN, APPROVED, AND GIVEN BY A PERSON. The rail lists the leaflets given on
+ *    this stay (functions/_wardsynq/patient-education.js) and, for a treating clinician, the approved leaflets that may
+ *    be given. Only a given leaflet prints, after the summary, as the approved copy made when it was given.
+ *
  * 5. IT ASKS FOR NOTHING IT CANNOT DO. The server says whether this viewer may author, and the
  *    screen offers only that. Authority is still enforced server-side on every write.
  */
@@ -46,13 +50,34 @@
     signed: false, signedBy: null, noteId: null, version: null, recordedAt: null,
     canAuthor: false, hasDraft: false,
     editing: "", compare: {},           // which section is open for editing; which show the record's version
-    busy: false, loaded: false, err: "", note: "", refusal: null
+    busy: false, loaded: false, err: "", note: "", refusal: null,
+    ask: null,                          // the question open before an irreversible step: { kind: "sign" | "revert", arg }
+    print: null, printLang: "",         // the hospital's print settings; the second language picked for this print
+    edu: null, eduLib: null,            // leaflets given on this stay and approved leaflets: null loading, false failed
+    // MaiK Scribe for the discharge summary (item 16). See scribeOn() below -- OFF by default, and
+    // inert (no capture object, no draft) until a device turns the flag on.
+    scribeCapture: null, scribeOn: false, scribeStatus: "", scribeDraft: ""
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
-  function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
+  // aria-hidden: the icon name is a font ligature, not words; without it "verified Sign and finalise" was the button's name (LT-31).
+  function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '" aria-hidden="true">' + name + "</span>"; }
+  /* THE STAFF LANGUAGE, as ward.js (owner decision 2026-09-15): every string this screen writes goes through wT (plain),
+   * wTH (inside markup) or wTD (a dialog) with its English inline, keys "ward.dc-*" in the ward.js block of
+   * wardsynq/site/i18n.js. Without i18n.js, or with English picked, the English is exactly what it was. Recorded and
+   * assembled clinical text is never translated, and the PRINTED summary stays English (its second language is
+   * print-lang.js). A failure keeps its English under the translation. */
+  var HAS = function (o, k) { return Object.prototype.hasOwnProperty.call(o, k); };
+  var EN_OF = {};
+  function wLang() { var I = G.WSQI18n, s = G.WSQ && G.WSQ.state; return I && s && s.navLang ? I.normalize(s.navLang) : "en"; }
+  function wTr(key) { var I = G.WSQI18n, L = wLang(), c = L !== "en" && I && I._catalogs[L]; return c && HAS(c, key) ? String(c[key]) : null; }
+  function wFill(s, vars) { return vars ? s.replace(/\{(\w+)\}/g, function (m, k) { return HAS(vars, k) ? "" + vars[k] : m; }) : s; }
+  function wT(key, en, vars) { var tr = wTr(key); if (tr == null) return wFill(en, vars); var s = wFill(tr, vars), e = wFill(en, vars); if (s !== e) EN_OF[s] = e; return s; }
+  function wTH(key, en, vars) { var tr = wTr(key); return tr == null ? wFill(en, vars) : wFill(String(tr).replace(/&(?![a-z]+;|#\d+;)/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"), vars); }
+  function wTD(key, en, vars) { var tr = wTr(key), e = wFill(en, vars); return tr == null ? e : wFill(tr, vars) + "\n\n" + e; }
+  /* The English under a failure this screen translated; "" for a server's own words or in English. */
+  function wEnglishOf(text) { return text && wLang() !== "en" && HAS(EN_OF, text) ? '<span class="en-orig" lang="en">' + esc(EN_OF[text]) + "</span>" : ""; }
   function val(id) { var el = document.getElementById(id); return el ? String(el.value == null ? "" : el.value) : ""; }
-  function confirmed(m) { try { return !!(G.confirm && G.confirm(m)); } catch (e) { return false; } }
 
   /* The eight sections the assembler produces, in the order a discharge summary is read. Allergies
    * sit high because that is where a receiving clinician looks first, not where the data model
@@ -67,7 +92,36 @@
     { k: "assessment", n: "Assessment", icon: "assignment" },
     { k: "plan", n: "Plan and follow-up", icon: "event_upcoming" }
   ];
+  /* The one section the assembler produces only on a birth stay (a maternity stay, or a newborn's own): the delivery,
+   * each newborn and its APGAR. Shown when the record has it; a signed summary shows it only if it was signed with it. */
+  var BIRTH = { k: "birth", n: "Delivery, newborn and APGAR", icon: "child_care" };
+  function sectionsOf(s) {
+    var has = function (o) { return !!o && HAS(o, "birth"); };
+    return has(s && s.sections) || (!(s && s.signed) && has(s && s.assembled)) ? SECTIONS.concat([BIRTH]) : SECTIONS;
+  }
   var NOT_RECORDED = "Not recorded.";
+  function sectionName(sec) {
+    switch (sec.k) {
+      case "admission": return wT("ward.dc-sec-admission", "Admission and stay");
+      case "diagnoses": return wT("ward.dc-sec-diagnoses", "Diagnoses");
+      case "allergies": return wT("ward.dc-sec-allergies", "Allergies");
+      case "vitals": return wT("ward.dc-sec-vitals", "Clinical course");
+      case "investigations": return wT("ward.dc-sec-investigations", "Investigations");
+      case "medications": return wT("ward.dc-sec-medications", "Medications");
+      case "assessment": return wT("ward.dc-sec-assessment", "Assessment");
+      case "plan": return wT("ward.dc-sec-plan", "Plan and follow-up");
+      case "birth": return wT("ward.dc-sec-birth", "Delivery, newborn and APGAR");
+      default: return sec.n;
+    }
+  }
+  function sectionNote(sec) {
+    switch (sec.k) {
+      case "diagnoses": return wT("ward.dc-note-diagnoses", "From the problem list, not from prose.");
+      case "vitals": return wT("ward.dc-note-vitals", "First and last recorded observations. A summary is not a flowsheet.");
+      case "medications": return wT("ward.dc-note-medications", "What was ordered, and how many doses were actually given.");
+      default: return sec.note;
+    }
+  }
 
   // ---- transport (identical to queue.js / ward.js) -----------------------------------------
   function staffTok() { try { return localStorage.getItem(LS_STAFF) || ""; } catch (e) { return ""; } }
@@ -76,7 +130,10 @@
     try { if (G.firebase && firebase.auth && firebase.auth().currentUser) return firebase.auth().currentUser.getIdToken(); } catch (e) {}
     return Promise.resolve(null);
   }
+  /* S3 ID-01, as ward.js: a staff token only for the hospital it was minted for (hospital-auth.js), else the
+   * account bearer. Pages without that file keep the old rule. */
   function authHeaders() {
+    if (G.SMD_HOSPITAL_AUTH) return G.SMD_HOSPITAL_AUTH.headersFor(st.orgId, fbToken);
     var t = staffTok();
     if (t) return Promise.resolve({ "Content-Type": "application/json", "X-Staff-Token": t });
     return fbToken().then(function (t2) { var h = { "Content-Type": "application/json" }; if (t2) h.Authorization = "Bearer " + t2; return h; });
@@ -95,11 +152,11 @@
    * the server's message, because "this discharge summary is signed" is actionable and "something
    * went wrong" is not. */
   function problem(r) {
-    if (!r) return { err: "No response from the server." };
+    if (!r) return { err: wT("ward.dc-no-response", "No response from the server.") };
     if (r.ok) return null;
-    if (r.error === "governance") return { refusal: { reasons: r.reasons || [], detail: "The record service refused this write." } };
-    if (r.error === "already_signed") return { err: r.detail || "This summary is signed and cannot be redrafted." };
-    return { err: r.message || r.detail || r.error || "Request failed." };
+    if (r.error === "governance") return { refusal: { reasons: r.reasons || [], detail: wT("ward.dc-record-service-refused", "The record service refused this write.") } };
+    if (r.error === "already_signed") return { err: r.detail || wT("ward.dc-already-signed", "This summary is signed and cannot be redrafted.") };
+    return { err: r.message || r.detail || r.error || wT("ward.dc-request-failed", "Request failed.") };
   }
   function settle(r, okMsg) {
     st.busy = false; st.err = ""; st.refusal = null; st.note = "";
@@ -110,12 +167,23 @@
   }
 
   // ---- pure helpers -------------------------------------------------------------------------
-  function when(iso, withTime) {
+  /* THE HOSPITAL'S CLOCK, NOT UTC AND NOT THE BROWSER'S (LT-19). Through the shared print helper
+   * (wardsynq/site/print-lang.js WSQPrint.date) with the hospital's own time zone or offset from the
+   * server, so this screen and the printed summary can never show one instant two ways. */
+  function when(iso, withTime, clock) {
     if (!iso) return null;
+    if (G.WSQPrint && G.WSQPrint.date) return G.WSQPrint.date(iso, clock || st.print, withTime);
     var d = new Date(iso); if (isNaN(d.getTime())) return String(iso);
     var o = { day: "2-digit", month: "short", year: "numeric" };
     if (withTime !== false) { o.hour = "2-digit"; o.minute = "2-digit"; }
     return d.toLocaleString([], o);
+  }
+  /* The assembled sections carry instants as ISO text ("Admitted: 2026-09-15T15:23:31.058Z."), which is
+   * what the signed record keeps. They are READ in the hospital's clock: only a full instant with its zone
+   * is rewritten, so a date, a dose or anything a clinician typed is never touched. */
+  var ISO_INSTANT = /\b\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})\b/g;
+  function localTimes(text, clock) {
+    return String(text == null ? "" : text).replace(ISO_INSTANT, function (iso) { return when(iso, true, clock) || iso; });
   }
   function initials(n) {
     n = String(n || "").trim(); if (!n) return "?";
@@ -138,41 +206,161 @@
     return Math.max(0, Math.round(((isFinite(e) ? e : Date.now()) - s) / 86400000));
   }
 
+  /* MaiK Scribe for the discharge summary (item 16, WardSynQ). OFF by default --
+   * localStorage.setItem("smd_discharge_scribe","on") turns it on for one device pending a real
+   * discharge verification (there is no automated way to drive a real inpatient stay + signed
+   * discharge here).
+   *
+   * Reuses SMD_AMBIENT.start (voice-ambient.js) exactly as opd-emr.js's startVoice does, and the
+   * SAME server extract opd-emr.js's doRefine calls (kind:"opd-scribe") to turn a transcript into a
+   * clean English narrative. A discharge section (Assessment, Plan and follow-up, etc) is free
+   * text, not OPD's structured EMR schema, so the LLM's "en" translation IS the draft;
+   * emrFields/suggestions are not used. Only offered while a section is open for editing (s.editing
+   * -- the only place this screen accepts free text); ward.js carries the identical shape for the
+   * ward round note (its version works one field, "wTlNote", instead of the currently-open section).
+   *
+   * SAFETY GATES (same as the ward round note):
+   *  - Nothing reaches the record without an explicit Accept: the draft only ever lands in the open
+   *    section's edit textarea (#dEdit) via scribeInsert(), on a doctor's own tap, and the section
+   *    itself is not written until the existing "Save section" button (cmd "save" -> draft()) runs.
+   *  - A section the doctor edited is never silently overwritten: scribeAppend() only ever APPENDS
+   *    to whatever is already in the box, and only runs on that explicit tap -- no live auto-fill.
+   *  - Garbled audio and cloud upload are guarded upstream, in voice.js (isGarbled) and
+   *    voice-ambient.js (noCloud:true) -- this file only calls SMD_AMBIENT.start(), never a
+   *    lower-level API, so both guards apply unchanged.
+   *
+   * ponytail: no shared file with ward.js for this ~40-line pattern -- this item's scope limited
+   * index.html to one new script tag (scribe-templates.js), so a third loadable file was not an
+   * option here. If a third caller needs this shape, extract both copies into one then.
+   */
+  function scribeOn() { try { return localStorage.getItem("smd_discharge_scribe") === "on"; } catch (e) { return false; } }
+  // PURE: append an accepted scribe draft to whatever is already in the section box. Never replaces
+  // -- an edited section is never silently overwritten -- and a repeated Accept of the same draft
+  // text is a no-op. Exposed as DISCHARGE._scribeAppend for testing.
+  function scribeAppend(existing, draft) {
+    existing = String(existing == null ? "" : existing);
+    draft = String(draft == null ? "" : draft).trim();
+    if (!draft) return existing;
+    var trimmed = existing.replace(/\s+$/, "");
+    if (!trimmed) return draft;
+    if (trimmed.indexOf(draft) !== -1) return existing;
+    return trimmed + "\n" + draft;
+  }
+  function scribeRefine(transcript) {
+    if (!transcript) return;
+    var extract = G.SMD_AI && G.SMD_AI.extract;
+    if (!extract) { st.scribeDraft = transcript.trim(); repaintIfOpen(); return; }
+    extract(transcript, "opd-scribe").then(function (r) {
+      st.scribeDraft = ((r && !r.error && r.en) ? r.en : transcript).trim();
+      repaintIfOpen();
+    }).catch(function () { st.scribeDraft = transcript.trim(); repaintIfOpen(); });
+  }
+  function startScribe() {
+    if (!st.editing) return;
+    if (!G.SMD_AMBIENT) { try { G.toast && G.toast(wT("ward.dc-scribe-unavailable", "MaiK Scribe is not available on this build.")); } catch (e) {} return; }
+    st.scribeOn = true; st.scribeDraft = ""; st.scribeStatus = wT("ward.dc-scribe-starting", "Starting…"); paint();
+    st.scribeCapture = G.SMD_AMBIENT.start({
+      speaker: "doctor", language: "auto", chunkMs: 15000, refineEveryChunks: 8,
+      getState: function () { return {}; },
+      onState: function (s) {
+        st.scribeStatus = s === "listening" ? wT("ward.dc-scribe-listening", "MaiK Scribe is listening")
+          : s === "fallback" ? wT("ward.dc-scribe-fallback", "Whisper model not installed - using device dictation")
+          : s === "preparing" ? wT("ward.dc-scribe-preparing", "Preparing model…")
+          : s === "downloading" ? wT("ward.dc-scribe-downloading", "Downloading model…") : "";
+        repaintIfOpen();
+      },
+      onRefine: scribeRefine,
+      onError: function () {
+        st.scribeStatus = wT("ward.dc-scribe-error", "Voice error - tap to retry.");
+        st.scribeOn = false; st.scribeCapture = null; paint();
+      }
+    });
+  }
+  function stopScribe() {
+    if (st.scribeCapture) { try { st.scribeCapture.stop(); } catch (e) {} }
+    st.scribeCapture = null; st.scribeOn = false; st.scribeStatus = ""; paint();
+  }
+  // Accept: the draft joins whichever section is currently open for editing, exactly as if typed.
+  // Save section still has to be tapped separately -- this never writes to the record on its own.
+  function scribeInsert() {
+    if (!st.editing) return;
+    var el = document.getElementById("dEdit");
+    var joined = scribeAppend(el ? el.value : "", st.scribeDraft);
+    st.scribeDraft = "";
+    if (el) el.value = joined;
+    paint();
+  }
+  function scribeMicBtn() {
+    if (!scribeOn() || !G.SMD_AMBIENT) return "";
+    var on = !!st.scribeOn;
+    return '<button type="button" class="d-btn ghost sm' + (on ? " recording" : "") + '" data-d-act="' +
+      (on ? "scribestop" : "scribestart") + '" title="' + wTH("ward.dc-scribe-title", "MaiK Scribe: listen and draft this section") + '">' +
+      ms(on ? "stop_circle" : "graphic_eq") + (on ? wTH("ward.dc-scribe-stop", "Stop") : wTH("ward.dc-scribe-start", "MaiK Scribe")) + "</button>";
+  }
+  function scribePanel() {
+    if (!scribeOn() || !G.SMD_AMBIENT) return "";
+    if (!st.scribeOn && !st.scribeDraft) return "";
+    var status = st.scribeOn ? '<p class="d-hint">' + ms("mic") + esc(st.scribeStatus || wT("ward.dc-scribe-listening", "MaiK Scribe is listening")) + "</p>" : "";
+    var draft = st.scribeDraft
+      ? '<div class="d-scribe-draft"><p class="d-hint">' + ms("auto_awesome") + wTH("ward.dc-scribe-draft-label", "MaiK Scribe draft - review before adding") + "</p>" +
+        "<p>" + esc(st.scribeDraft) + "</p>" +
+        '<button class="d-btn ghost sm" data-d-act="scribeaccept">' + ms("check") + wTH("ward.dc-scribe-insert", "Add to section") + "</button>" +
+        '<button class="d-btn ghost sm" data-d-act="scribediscard">' + ms("close") + wTH("ward.dc-scribe-discard", "Discard") + "</button></div>"
+      : "";
+    return status + draft;
+  }
+
   // ---- render: identity + status ------------------------------------------------------------
   function identity(s) {
     var p = s.patient || {}, e = s.encounter || {};
     var los = stayDays(e.admittedAt, e.dischargedAt);
     var facts = [
       p.mrn ? { l: "MRN", v: p.mrn, mono: true } : null,
-      p.sex ? { l: "Sex", v: p.sex } : null,
-      e.ward ? { l: "Ward", v: e.ward + (e.bed ? ", bed " + e.bed : "") } : null,
-      { l: "Admitted", v: when(e.admittedAt) || "not recorded" },
-      { l: "Discharged", v: when(e.dischargedAt) || "not yet" },
-      los === null ? null : { l: "Stay", v: los + (los === 1 ? " day" : " days") }
+      p.sex ? { l: wT("ward.dc-sex", "Sex"), v: p.sex } : null,
+      e.ward ? { l: wT("ward.dc-ward", "Ward"), v: e.bed ? wT("ward.dc-ward-bed", "{ward}, bed {bed}", { ward: e.ward, bed: e.bed }) : e.ward } : null,
+      { l: wT("ward.dc-admitted", "Admitted"), v: when(e.admittedAt, true, s.print) || wT("ward.dc-not-recorded-lc", "not recorded") },
+      { l: wT("ward.dc-discharged", "Discharged"), v: when(e.dischargedAt, true, s.print) || wT("ward.dc-not-yet", "not yet") },
+      los === null ? null : { l: wT("ward.dc-stay", "Stay"), v: los === 1 ? wT("ward.dc-stay-day", "{n} day", { n: los }) : wT("ward.dc-stay-days", "{n} days", { n: los }) }
     ].filter(Boolean).map(function (f) {
       return '<div class="d-fact"><dt>' + esc(f.l) + "</dt><dd" + (f.mono ? ' class="mono"' : "") + ">" + esc(f.v) + "</dd></div>";
     }).join("");
     return '<div class="d-identity"><div class="d-idmain">' +
       '<span class="d-avatar" aria-hidden="true">' + esc(initials(p.name)) + "</span>" +
-      "<div><h2>" + esc(p.name || s.patientId || "Unnamed patient") + "</h2>" +
+      "<div><h2>" + esc(p.name || s.patientId || wT("ward.dc-unnamed-patient", "Unnamed patient")) + "</h2>" +
       // An unmerged trauma record must never read as a confirmed identity on a document that leaves
       // the hospital.
-      (p.provisional ? '<span class="d-chip warning">' + ms("help") + "Provisional identity, not yet merged</span>" : "") +
+      (p.provisional ? '<span class="d-chip warning">' + ms("help") + wTH("ward.dc-provisional-identity", "Provisional identity, not yet merged") + "</span>" : "") +
       '<div class="d-encstate">' + encounterState(e) + "</div></div></div>" +
       '<dl class="d-facts">' + facts + "</dl></div>";
   }
   function encounterState(e) {
-    if (e.status === "finished") return '<span class="d-chip done">' + ms("logout") + "Discharged" + (e.disposition ? " &middot; " + esc(e.disposition) : "") + "</span>";
+    if (e.status === "finished") return '<span class="d-chip done">' + ms("logout") + wTH("ward.dc-discharged", "Discharged") + (e.disposition ? " &middot; " + esc(e.disposition) : "") + "</span>";
     // Drafting a summary for a patient still on the ward is legitimate - it is how a planned
     // discharge is prepared - but the document must say the stay is still open.
-    return '<span class="d-chip info">' + ms("bed") + "Still admitted &middot; the stay is open</span>";
+    return '<span class="d-chip info">' + ms("bed") + wTH("ward.dc-still-admitted", "Still admitted &middot; the stay is open") + "</span>";
+  }
+
+  /* WHO SIGNED, as every chart screen names staff (ward.js staffWho): "Name (employee id)", the whole identity on hover
+   * and on a tap. signedBy is the signer's sign-in id ("cfa:...", "fb:...", a staff ID), never shown as it is. Without
+   * ward.js on the page an account id or a mobile number reads as "a clinician account". */
+  function signerHtml(s) {
+    var W = G.WARD, id = String(s.signedBy || "");
+    if (!id) return wTH("ward.dc-clinician", "clinician");
+    if (W && W._who) return W._who(id, null);
+    return esc(signerText(s));
+  }
+  function signerText(s) {
+    var W = G.WARD, id = String(s.signedBy || "");
+    if (!id) return wT("ward.dc-clinician", "clinician");
+    if (W && W._whoText) return W._whoText(id);
+    return /^(fb|cfa|ghis):/.test(id) || /^\+?[\d\s().-]{7,}$/.test(id) ? wT("ward.a-clinician-account", "a clinician account") : id;
   }
 
   function signatureBlock(s) {
     if (!s.signed) return "";
     return '<div class="d-signed">' + ms("verified") +
-      "<div><b>Signed</b><span>" + esc(s.signedBy || "clinician") + (s.recordedAt ? " &middot; " + esc(when(s.recordedAt)) : "") +
-      "</span><small>This version is immutable. A correction is a new signed version, not a change to this one.</small></div>" +
+      "<div><b>" + wTH("ward.dc-signed", "Signed") + "</b><span>" + signerHtml(s) + (s.recordedAt ? " &middot; " + esc(when(s.recordedAt, true, s.print)) : "") +
+      "</span><small>" + wTH("ward.dc-version-immutable", "This version is immutable. A correction is a new signed version, not a change to this one.") + "</small></div>" +
       '<span class="d-ver">v' + esc(s.version == null ? "?" : s.version) + "</span></div>";
   }
 
@@ -183,22 +371,23 @@
     if (s.editing === k) {
       return '<div class="d-edit">' +
         '<textarea id="dEdit" class="d-ta" rows="8" spellcheck="true">' + esc(body) + "</textarea>" +
+        (scribeOn() ? '<div class="d-scribe">' + scribeMicBtn() + scribePanel() + "</div>" : "") +
         '<div class="d-editbar">' +
-          '<button class="d-btn primary" data-d-act="save">' + ms("save") + "Save section</button>" +
-          '<button class="d-btn ghost" data-d-act="cancel">Cancel</button>' +
-          (edited ? '<button class="d-btn ghost" data-d-act="revert:' + esc(k) + '" title="Return this section to tracking the record">' + ms("undo") + "Revert to record</button>" : "") +
+          '<button class="d-btn primary" data-d-act="save">' + ms("save") + wTH("ward.dc-save-section", "Save section") + "</button>" +
+          '<button class="d-btn ghost" data-d-act="cancel">' + wTH("ward.dc-cancel", "Cancel") + "</button>" +
+          (edited ? '<button class="d-btn ghost" data-d-act="revert:' + esc(k) + '" title="' + wTH("ward.dc-revert-title", "Return this section to tracking the record") + '">' + ms("undo") + wTH("ward.dc-revert-to-record", "Revert to record") + "</button>" : "") +
         "</div>" +
-        '<p class="d-hint">' + ms("info") + "Saved text replaces this section only. Every other section keeps refreshing from the record.</p>" +
+        '<p class="d-hint">' + ms("info") + wTH("ward.dc-saved-text-replaces", "Saved text replaces this section only. Every other section keeps refreshing from the record.") + "</p>" +
       "</div>";
     }
 
-    var out = '<div class="d-body' + (absent ? " absent" : "") + '">' + esc(body || NOT_RECORDED) + "</div>";
+    var out = '<div class="d-body' + (absent ? " absent" : "") + '">' + (absent ? wTH("ward.dc-not-recorded", "Not recorded.") : esc(localTimes(body, s.print))) + "</div>";
     // What the record says, beside what the clinician wrote. This is the whole point of keeping both.
     if (edited) {
       var open = !!s.compare[k];
       out += '<button class="d-compare" data-d-act="compare:' + esc(k) + '" aria-expanded="' + (open ? "true" : "false") + '">' +
-        ms(open ? "expand_less" : "expand_more") + (open ? "Hide what the record says" : "Show what the record says") + "</button>" +
-        (open ? '<div class="d-source"><span class="d-srclabel">' + ms("database") + "Assembled from the record</span><div class=\"d-body absent-src\">" + esc((s.assembled && s.assembled[k]) || NOT_RECORDED) + "</div></div>" : "");
+        ms(open ? "expand_less" : "expand_more") + (open ? wTH("ward.dc-hide-record", "Hide what the record says") : wTH("ward.dc-show-record", "Show what the record says")) + "</button>" +
+        (open ? '<div class="d-source"><span class="d-srclabel">' + ms("database") + wTH("ward.dc-assembled-from-record", "Assembled from the record") + "</span><div class=\"d-body absent-src\">" + (s.assembled && s.assembled[k] && s.assembled[k] !== NOT_RECORDED ? esc(localTimes(s.assembled[k], s.print)) : wTH("ward.dc-not-recorded", "Not recorded.")) + "</div></div>" : "");
     }
     return out;
   }
@@ -206,15 +395,15 @@
   function section(sec, i, s) {
     var k = sec.k, edited = isEdited(s, k);
     var badge = edited
-      ? '<span class="d-chip edit">' + ms("edit_note") + "Clinician edited</span>"
-      : '<span class="d-chip src">' + ms("database") + "From record</span>";
+      ? '<span class="d-chip edit">' + ms("edit_note") + wTH("ward.dc-clinician-edited", "Clinician edited") + "</span>"
+      : '<span class="d-chip src">' + ms("database") + wTH("ward.dc-from-record", "From record") + "</span>";
     var canEdit = s.canAuthor && !s.signed && s.editing !== k;
     return '<section class="d-sec' + (edited ? " is-edited" : "") + '" id="dsec-' + esc(k) + '">' +
       '<header class="d-sech"><span class="d-num">' + (i + 1) + "</span>" +
-        "<h3>" + ms(sec.icon) + esc(sec.n) + "</h3>" + badge +
-        (canEdit ? '<button class="d-ic" data-d-act="edit:' + esc(k) + '" title="Correct this section">' + ms("edit") + "</button>" : "") +
+        "<h3>" + ms(sec.icon) + esc(sectionName(sec)) + "</h3>" + badge +
+        (canEdit ? '<button class="d-ic" data-d-act="edit:' + esc(k) + '" title="' + wTH("ward.dc-correct-this-section", "Correct this section") + '">' + ms("edit") + "</button>" : "") +
       "</header>" +
-      (sec.note && !s.signed ? '<p class="d-secnote">' + esc(sec.note) + "</p>" : "") +
+      (sec.note && !s.signed ? '<p class="d-secnote">' + esc(sectionNote(sec)) + "</p>" : "") +
       sectionBody(sec, s) +
     "</section>";
   }
@@ -222,50 +411,77 @@
   function provenance(s) {
     var text = (s.sections && s.sections.provenance) || (s.assembled && s.assembled.provenance) || "";
     if (!text) return "";
-    return '<section class="d-sec d-prov"><header class="d-sech"><h3>' + ms("fact_check") + "Provenance</h3></header>" +
+    return '<section class="d-sec d-prov"><header class="d-sech"><h3>' + ms("fact_check") + wTH("ward.dc-provenance", "Provenance") + "</h3></header>" +
       '<div class="d-body">' + esc(text) + "</div>" +
       (s.edited && s.edited.length
-        ? '<p class="d-provedit">' + ms("edit_note") + "Corrected by a clinician: " +
-          esc(s.edited.map(function (k) { var f = SECTIONS.filter(function (x) { return x.k === k; })[0]; return f ? f.n.toLowerCase() : k; }).join(", ")) +
-          ". The rest is assembled from the record.</p>"
-        : '<p class="d-provedit">' + ms("database") + "Every section above is assembled from the record. Nothing has been edited.</p>") +
+        ? '<p class="d-provedit">' + ms("edit_note") + wTH("ward.dc-corrected-by-clinician", "Corrected by a clinician: {sections}. The rest is assembled from the record.", {
+            sections: esc(s.edited.map(function (k) { var f = sectionsOf(s).filter(function (x) { return x.k === k; })[0]; return f ? (wLang() === "en" ? f.n.toLowerCase() : sectionName(f)) : k; }).join(", ")) }) + "</p>"
+        : '<p class="d-provedit">' + ms("database") + wTH("ward.dc-nothing-edited", "Every section above is assembled from the record. Nothing has been edited.") + "</p>") +
     "</section>";
   }
 
   // ---- render: the rail ----------------------------------------------------------------------
-  var PENDING_LABEL = { dose: "Dose not finished", investigation: "Investigation open", medication: "Order still active", problem: "Diagnosis unconfirmed" };
+  function pendingLabel(kind) {
+    return kind === "dose" ? wT("ward.dc-pending-dose", "Dose not finished") : kind === "investigation" ? wT("ward.dc-pending-investigation", "Result pending")
+      : kind === "medication" ? wT("ward.dc-pending-medication", "Order still active") : kind === "problem" ? wT("ward.dc-pending-problem", "Diagnosis unconfirmed") : kind;
+  }
   function pendingCard(s) {
     var rows = (s.pending || []).map(function (p) {
       var what = p.drug || p.display || p.orderId || p.id;
-      return '<li><span class="d-pk">' + esc(PENDING_LABEL[p.kind] || p.kind) + "</span>" +
+      return '<li><span class="d-pk">' + esc(pendingLabel(p.kind)) + "</span>" +
         "<b>" + esc(what) + "</b>" + (p.status ? '<span class="d-pstat">' + esc(p.status) + "</span>" : "") +
         (p.dose && p.dose.value != null ? '<span class="d-pstat">' + esc(p.dose.value + " " + (p.dose.unit || "")) + "</span>" : "") + "</li>";
     }).join("");
     if (!rows) {
-      return '<div class="d-card"><h4>' + ms("check_circle") + "Outstanding</h4>" +
-        '<p class="d-ok">' + ms("check") + "Nothing is left open on this stay.</p></div>";
+      return '<div class="d-card"><h4>' + ms("check_circle") + wTH("ward.dc-outstanding", "Outstanding") + "</h4>" +
+        '<p class="d-ok">' + ms("check") + wTH("ward.dc-nothing-left-open", "Nothing is left open on this stay.") + "</p></div>";
     }
-    // Amber, not red. None of this blocks a discharge; it has to be seen, not alarmed about.
-    return '<div class="d-card warn"><h4>' + ms("pending_actions") + "Outstanding &middot; " + s.pending.length + "</h4>" +
-      '<p class="d-cardnote">None of this stops a discharge. It should be a decision, not a discovery.</p>' +
+    // Amber, not red. It has to be seen, not alarmed about.
+    return '<div class="d-card warn"><h4>' + ms("pending_actions") + wTH("ward.dc-outstanding", "Outstanding") + " &middot; " + s.pending.length + "</h4>" +
+      '<p class="d-cardnote">' + wTH("ward.dc-open-orders-stop-discharge", "Open orders and pending results stop the discharge until a treating clinician records why the patient may go with them. It should be a decision, not a discovery.") + "</p>" +
       '<ul class="d-pending">' + rows + "</ul></div>";
   }
   function indexCard(s) {
-    var rows = SECTIONS.map(function (sec, i) {
+    var rows = sectionsOf(s).map(function (sec, i) {
       return '<a class="d-idx' + (isEdited(s, sec.k) ? " is-edited" : "") + '" href="#dsec-' + esc(sec.k) + '">' +
-        '<span class="d-num sm">' + (i + 1) + "</span>" + esc(sec.n) +
+        '<span class="d-num sm">' + (i + 1) + "</span>" + esc(sectionName(sec)) +
         (isEdited(s, sec.k) ? ms("edit_note") : "") + "</a>";
     }).join("");
-    return '<div class="d-card"><h4>' + ms("list") + "Sections</h4><nav class=\"d-index\">" + rows + "</nav></div>";
+    return '<div class="d-card"><h4>' + ms("list") + wTH("ward.dc-sections", "Sections") + "</h4><nav class=\"d-index\">" + rows + "</nav></div>";
+  }
+  /* PATIENT EDUCATION. Loading, failed and none are three different cards: "could not load" never reads as "none given". */
+  function eduCard(s) {
+    var head = '<div class="d-card"><h4>' + ms("menu_book") + wTH("ward.dc-edu-title", "Patient education") + "</h4>";
+    if (s.edu == null) return head + "<p>" + wTH("ward.dc-edu-loading", "Loading leaflets...") + "</p></div>";
+    if (s.edu === false) return head + '<p class="d-cardnote" role="alert">' + wTH("ward.dc-edu-failed", "The leaflets given on this stay could not be loaded. Do not read this as none given.") + "</p></div>";
+    var items = s.edu.items || [];
+    var rows = items.map(function (x) {
+      return "<li><b>" + esc(x.title) + "</b> (" + esc(x.language) + ")" +
+        (x.detached ? '<span class="d-pstat">' + wTH("ward.dc-edu-taken-back", "Taken back: {why}", { why: esc(x.detached.reason) }) + "</span>"
+          : '<span class="d-pstat">' + wTH("ward.dc-edu-approved-by", "Approved by {who}", { who: esc(x.approvedBy || x.approvedById) }) + "</span>" +
+            (s.canAuthor ? ' <button class="d-btn ghost" data-d-act="eduback:' + esc(x.itemId) + '">' + wTH("ward.dc-edu-take-back", "Take back") + "</button>" : "")) + "</li>";
+    }).join("");
+    var list = rows ? '<ul class="d-pending">' + rows + "</ul>" : "<p>" + wTH("ward.dc-edu-none", "No leaflet has been given on this stay.") + "</p>";
+    var give = "";
+    if (s.canAuthor) {
+      if (s.eduLib == null) give = "<p>" + wTH("ward.dc-edu-loading", "Loading leaflets...") + "</p>";
+      else if (s.eduLib === false) give = '<p class="d-cardnote" role="alert">' + wTH("ward.dc-edu-lib-failed", "The approved leaflets could not be loaded, so none can be given now.") + "</p>";
+      else if (!s.eduLib.length) give = "<p>" + wTH("ward.dc-edu-lib-none", "This hospital has no approved leaflet yet. Leaflets are written and approved on the Patient portal page.") + "</p>";
+      else give = '<label class="d-lang"><span>' + wTH("ward.dc-edu-pick", "Approved leaflet") + '</span><select id="dEduPick">' + s.eduLib.map(function (l) {
+          return '<option value="' + esc(l.leafletId + "|" + l.version) + '">' + esc(l.title) + " (" + esc(l.language) + ")</option>";
+        }).join("") + "</select></label>" + '<button class="d-btn" data-d-act="edugive">' + ms("add") + wTH("ward.dc-edu-give", "Give with this summary") + "</button>";
+      give += '<label class="d-lang"><span>' + wTH("ward.dc-edu-why", "Reason, when taking a leaflet back") + '</span><input id="dEduWhy" maxlength="300"></label>';
+    }
+    return head + '<p class="d-cardnote">' + wTH("ward.dc-edu-note", "A given leaflet prints after the summary and shows on the patient's portal. Only an approved leaflet can be given.") + "</p>" + list + give + "</div>";
   }
   function statusCard(s) {
     if (s.signed) return '<div class="d-card">' + signatureBlock(s) + "</div>";
     var lines = [
-      s.hasDraft ? { i: "edit_document", t: "Draft saved", m: "v" + (s.version == null ? "?" : s.version) }
-                 : { i: "auto_awesome_motion", t: "Not yet drafted", m: "Assembled from the record, not saved" },
-      { i: "person", t: s.canAuthor ? "You may sign this" : "Read only for you", m: s.canAuthor ? "" : "Authoring a discharge summary needs a treating clinician." }
+      s.hasDraft ? { i: "edit_document", t: wT("ward.dc-draft-saved", "Draft saved"), m: "v" + (s.version == null ? "?" : s.version) }
+                 : { i: "auto_awesome_motion", t: wT("ward.dc-not-yet-drafted", "Not yet drafted"), m: wT("ward.dc-assembled-not-saved", "Assembled from the record, not saved") },
+      { i: "person", t: s.canAuthor ? wT("ward.dc-you-may-sign", "You may sign this") : wT("ward.dc-read-only-for-you", "Read only for you"), m: s.canAuthor ? "" : wT("ward.dc-authoring-needs-treating", "Authoring a discharge summary needs a treating clinician.") }
     ];
-    return '<div class="d-card"><h4>' + ms("draft") + "Status</h4>" +
+    return '<div class="d-card"><h4>' + ms("draft") + wTH("ward.dc-status", "Status") + "</h4>" +
       lines.map(function (l) { return '<div class="d-stat">' + ms(l.i) + "<div><b>" + esc(l.t) + "</b>" + (l.m ? "<span>" + esc(l.m) + "</span>" : "") + "</div></div>"; }).join("") +
       "</div>";
   }
@@ -274,38 +490,59 @@
   function banner(s) {
     if (s.refusal) {
       var rs = (s.refusal.reasons || []).map(function (r) { return "<li>" + esc(typeof r === "string" ? r : (r.code || "")) + "</li>"; }).join("");
-      return '<div class="d-banner warn">' + ms("gpp_maybe") + "<div><b>Refused</b>" + (rs ? "<ul>" + rs + "</ul>" : "") +
-        (s.refusal.detail ? "<p>" + esc(s.refusal.detail) + "</p>" : "") + '</div><button class="d-x" data-d-act="dismiss">' + ms("close") + "</button></div>";
+      var refused = wTH("ward.dc-refused", "Refused");
+      return '<div class="d-banner warn">' + ms("gpp_maybe") + "<div><b>" + refused + (refused !== "Refused" ? '<span class="en-orig" lang="en">Refused</span>' : "") + "</b>" + (rs ? "<ul>" + rs + "</ul>" : "") +
+        (s.refusal.detail ? "<p>" + esc(s.refusal.detail) + wEnglishOf(s.refusal.detail) + "</p>" : "") + '</div><button class="d-x" data-d-act="dismiss">' + ms("close") + "</button></div>";
     }
-    if (s.err) return '<div class="d-banner err">' + ms("error") + "<p>" + esc(s.err) + '</p><button class="d-x" data-d-act="dismiss">' + ms("close") + "</button></div>";
+    if (s.err) return '<div class="d-banner err">' + ms("error") + "<p>" + esc(s.err) + wEnglishOf(s.err) + '</p><button class="d-x" data-d-act="dismiss">' + ms("close") + "</button></div>";
     if (s.note) return '<div class="d-banner ok">' + ms("check_circle") + "<p>" + esc(s.note) + '</p><button class="d-x" data-d-act="dismiss">' + ms("close") + "</button></div>";
     return "";
+  }
+
+  /* ASKED ON THE SCREEN, NOT IN A BROWSER DIALOG (retest 2026-09-16). Signing is irreversible, so the question
+   * stays: it is a panel above the action bar, translated like the rest of the screen, and nothing is written
+   * until its own button is pressed. Cancel writes nothing. */
+  function askPanel(s) {
+    var a = s.ask; if (!a) return "";
+    var n = (s.pending || []).length, body, yes;
+    if (a.kind === "sign") {
+      var q = wTH("ward.dc-sign-confirm", "Sign this discharge summary?\n\nIt becomes part of the permanent record and CANNOT be edited. A correction afterwards is a new signed version.").split(/\n+/);
+      body = "<b>" + q[0] + "</b>" + (q.length > 1 ? "<br>" + q.slice(1).join(" ") : "") +
+        (n ? "<br>" + (n === 1 ? wTH("ward.dc-sign-one-outstanding", "There is 1 item still outstanding on this stay. Signing does not resolve them.") : wTH("ward.dc-sign-n-outstanding", "There are {n} items still outstanding on this stay. Signing does not resolve them.", { n: n })) : "");
+      yes = '<button class="d-btn sign" data-d-act="askyes"' + (s.busy ? " disabled" : "") + ">" + ms("verified") + wTH("ward.dc-sign-and-finalise", "Sign and finalise") + "</button>";
+    } else {
+      body = wTH("ward.dc-discard-correction", "Discard your correction to this section and return it to the record's own text?");
+      yes = '<button class="d-btn" data-d-act="askyes"' + (s.busy ? " disabled" : "") + ">" + ms("undo") + wTH("ward.dc-revert-to-record", "Revert to record") + "</button>";
+    }
+    return '<div class="d-banner warn" role="alertdialog" aria-modal="false" aria-label="' + wTH("ward.dc-sign-and-finalise", "Sign and finalise") + '">' + ms("gpp_maybe") +
+      "<div><p>" + body + '</p><div class="d-editbar">' + yes +
+      '<button class="d-btn ghost" data-d-act="askno">' + wTH("ward.dc-cancel", "Cancel") + "</button></div></div></div>";
   }
 
   function actionbar(s) {
     if (s.signed) {
       // Signed off: the locked idiom the assessment screen already uses. No Save, because offering
       // one that must fail is worse than not offering it.
-      return '<div class="d-actions locked"><div class="d-lock">' + ms("lock") + "<span>Signed off</span></div>" +
-        '<div class="d-lockmsg">' + ms("verified") + "Signed" + (s.signedBy ? " by " + esc(s.signedBy) : "") + " &middot; this version is locked</div>" +
-        '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button></div>";
+      return '<div class="d-actions locked"><div class="d-lock">' + ms("lock") + "<span>" + wTH("ward.dc-signed-off", "Signed off") + "</span></div>" +
+        '<div class="d-lockmsg">' + ms("verified") + (s.signedBy ? wTH("ward.dc-signed-by-locked", "Signed by {by} &middot; this version is locked", { by: signerHtml(s) }) : wTH("ward.dc-signed-locked", "Signed &middot; this version is locked")) + "</div>" +
+        langPicker(s) + '<button class="d-btn ghost" data-d-act="print">' + ms("print") + wTH("ward.dc-print", "Print") + "</button></div>";
     }
     if (!s.canAuthor) {
-      return '<div class="d-actions"><p class="d-hint">' + ms("info") + "You can read this summary. Authoring and signing it needs a treating clinician.</p>" +
-        '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button></div>";
+      return '<div class="d-actions"><p class="d-hint">' + ms("info") + wTH("ward.dc-read-only-hint", "You can read this summary. Authoring and signing it needs a treating clinician.") + "</p>" +
+        langPicker(s) + '<button class="d-btn ghost" data-d-act="print">' + ms("print") + wTH("ward.dc-print", "Print") + "</button></div>";
     }
     var n = (s.pending || []).length;
     return '<div class="d-actions">' +
-      '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button>" +
-      '<button class="d-btn" data-d-act="draft" title="Save the assembled summary as a draft">' + ms("save") + (s.hasDraft ? "Refresh draft" : "Save draft") + "</button>" +
-      '<button class="d-btn sign" data-d-act="sign">' + ms("verified") + "Sign and finalise</button>" +
-      (n ? '<span class="d-actwarn">' + ms("pending_actions") + n + " outstanding</span>" : "") +
+      langPicker(s) + '<button class="d-btn ghost" data-d-act="print">' + ms("print") + wTH("ward.dc-print", "Print") + "</button>" +
+      '<button class="d-btn" data-d-act="draft" title="' + wTH("ward.dc-save-draft-title", "Save the assembled summary as a draft") + '">' + ms("save") + (s.hasDraft ? wTH("ward.dc-refresh-draft", "Refresh draft") : wTH("ward.dc-save-draft", "Save draft")) + "</button>" +
+      '<button class="d-btn sign" data-d-act="sign">' + ms("verified") + wTH("ward.dc-sign-and-finalise", "Sign and finalise") + "</button>" +
+      (n ? '<span class="d-actwarn">' + ms("pending_actions") + wTH("ward.dc-n-outstanding", "{n} outstanding", { n: n }) + "</span>" : "") +
     "</div>";
   }
 
   function _render(s) {
     if (!s.loaded && !s.err) {
-      return '<div class="d-shell">' + topbar(s) + '<div class="d-canvas"><div class="d-loading">' + ms("hourglass_top") + "<p>Reading the record…</p></div></div></div>";
+      return '<div class="d-shell">' + topbar(s) + '<div class="d-canvas"><div class="d-loading">' + ms("hourglass_top") + "<p>" + wTH("ward.dc-reading-the-record", "Reading the record…") + "</p></div></div></div>";
     }
     if (!s.encounter && s.err) {
       return '<div class="d-shell">' + topbar(s) + '<div class="d-canvas">' + banner(s) + "</div></div>";
@@ -313,23 +550,26 @@
     return '<div class="d-shell">' + topbar(s) +
       '<div class="d-canvas"><div class="d-wrap">' +
         '<div class="d-main">' + banner(s) + identity(s) + signatureBlock(s) +
-          SECTIONS.map(function (sec, i) { return section(sec, i, s); }).join("") +
+          sectionsOf(s).map(function (sec, i) { return section(sec, i, s); }).join("") +
           provenance(s) +
         "</div>" +
-        '<aside class="d-rail">' + statusCard(s) + pendingCard(s) + indexCard(s) + "</aside>" +
-      "</div></div>" + actionbar(s) + "</div>";
+        '<aside class="d-rail">' + statusCard(s) + pendingCard(s) + eduCard(s) + indexCard(s) + "</aside>" +
+      "</div></div>" + askPanel(s) + actionbar(s) + "</div>";
   }
   function topbar(s) {
-    return '<header class="d-top"><button class="d-ic" data-d-act="close" title="Close">' + ms("arrow_back") + "</button>" +
-      '<div class="d-toptitle"><b>Discharge summary</b><span>WardSynQ</span></div>' +
+    return '<header class="d-top"><button class="d-ic" data-d-act="close" title="' + wTH("ward.dc-close", "Close") + '">' + ms("arrow_back") + "</button>" +
+      '<div class="d-toptitle"><b>' + wTH("ward.discharge-summary", "Discharge summary") + "</b><span>WardSynQ</span></div>" +
       (s.busy ? '<span class="d-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>";
   }
 
   // ---- controller ----------------------------------------------------------------------------
   function root() { var el = document.getElementById("smdDischarge"); if (!el) { el = document.createElement("div"); el.id = "smdDischarge"; document.body.appendChild(el); } return el; }
+  function repaintIfOpen() { var el = document.getElementById("smdDischarge"); if (el && el.classList.contains("on")) paint(); }
   function paint() {
     var r = root(), prev = r.querySelector(".d-canvas"), top = prev ? prev.scrollTop : 0;
     r.innerHTML = _render(st);
+    // The signer named by staffWho is looked up with the ward's one staff lookup, and this overlay repainted when it answers.
+    if (G.WARD && G.WARD._whoFetch) G.WARD._whoFetch(repaintIfOpen, st.orgId);
     var next = r.querySelector(".d-canvas"); if (next && top) next.scrollTop = top;
     var ta = document.getElementById("dEdit"); if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }
   }
@@ -350,13 +590,29 @@
     st.noteId = stored ? stored.noteId : null;
     st.version = stored ? stored.version : null;
     st.recordedAt = stored ? stored.recordedAt : null;
+    st.print = r.print || null;          // { languagesEnabled, timeZone, utcOffsetMinutes } from the hospital's settings
   }
 
   function load(msg) {
     st.busy = true; paint();
     return apiGet("/ward/discharge-summary?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(st.encounterId))
-      .then(function (r) { if (settle(r, msg)) applyRead(r); st.loaded = true; paint(); })
-      .catch(function () { st.busy = false; st.loaded = true; st.err = "Could not reach the record."; paint(); });
+      .then(function (r) { if (settle(r, msg)) { applyRead(r); loadEdu(); } st.loaded = true; paint(); })
+      .catch(function () { st.busy = false; st.loaded = true; st.err = wT("ward.dc-could-not-reach-record", "Could not reach the record."); paint(); });
+  }
+
+  function loadEdu() {
+    var q = "?orgId=" + encodeURIComponent(st.orgId);
+    apiGet("/ward/education-attachments" + q + "&encounterId=" + encodeURIComponent(st.encounterId))
+      .then(function (r) { st.edu = r && r.ok ? r : false; repaintIfOpen(); }, function () { st.edu = false; repaintIfOpen(); });
+    if (!st.canAuthor) return;
+    apiGet("/ward/education-leaflets" + q + "&state=approved")
+      .then(function (r) { st.eduLib = r && r.ok ? r.leaflets : false; repaintIfOpen(); }, function () { st.eduLib = false; repaintIfOpen(); });
+  }
+  function eduWrite(path, body, okMsg) {
+    st.busy = true; paint();
+    apiPost(path, body)
+      .then(function (r) { if (settle(r, okMsg)) { st.edu = null; loadEdu(); } paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.dc-edu-not-saved", "Could not reach the record. Nothing was changed."); paint(); });
   }
 
   /** Saves the whole current section set, with `patch` applied. The server re-assembles the rest. */
@@ -366,72 +622,124 @@
     if (patch) body.sections = patch;
     return apiPost("/ward/discharge-summary", body)
       .then(function (r) { if (settle(r, msg)) { st.editing = ""; return load(msg); } paint(); })
-      .catch(function () { st.busy = false; st.err = "Could not save the draft."; paint(); });
+      .catch(function () { st.busy = false; st.err = wT("ward.dc-could-not-save-draft", "Could not save the draft."); paint(); });
   }
 
   function sign() {
-    var n = (st.pending || []).length;
-    var warn = n ? "\n\nThere " + (n === 1 ? "is 1 item" : "are " + n + " items") + " still outstanding on this stay. Signing does not resolve them." : "";
-    if (!confirmed("Sign this discharge summary?\n\nIt becomes part of the permanent record and CANNOT be edited. A correction afterwards is a new signed version." + warn)) return;
+    st.ask = null;
     st.busy = true; paint();
     apiPost("/ward/sign-discharge-summary", { orgId: st.orgId, encounterId: st.encounterId })
-      .then(function (r) { if (settle(r)) return load("Signed. This version is now immutable."); paint(); })
-      .catch(function () { st.busy = false; st.err = "Could not sign the summary."; paint(); });
+      .then(function (r) { if (settle(r)) return load(wT("ward.dc-signed-now-immutable", "Signed. This version is now immutable.")); paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.dc-could-not-sign", "Could not sign the summary."); paint(); });
   }
 
   /* Printed as its own document, not as the screen with the chrome hidden: a summary handed to a
    * patient must not depend on the app's theme, and @media print on a dark-mode overlay is exactly
    * how that goes wrong. The markup is plain and self-contained. */
+  /* A SECOND LANGUAGE IS OPTIONAL AND ENGLISH STAYS WHOLE (owner decision 2026-09-15, wardsynq/site/print-lang.js).
+   * With a language picked, `tr(...)` asides are added between the English blocks, carrying only catalog words:
+   * the headings and labels, the authority line, and the signature wording. Every section's text is recorded or
+   * assembled clinical text, so its aside says it is printed in English only. Without one, tr() is "". */
   function printable(s) {
     s = s || st;                       // the controller prints what is on screen; callers may pass a state
     var p = s.patient || {}, e = s.encounter || {};
-    var head = [
-      ["Patient", p.name || s.patientId], ["MRN", p.mrn], ["Sex", p.sex],
-      ["Ward", e.ward ? e.ward + (e.bed ? ", bed " + e.bed : "") : null],
-      ["Admitted", when(e.admittedAt)], ["Discharged", when(e.dischargedAt)]
-    ].filter(function (r) { return r[1]; })
-      .map(function (r) { return '<div class="p-f"><span>' + esc(r[0]) + "</span><b>" + esc(r[1]) + "</b></div>"; }).join("");
-    var body = SECTIONS.map(function (sec, i) {
-      return '<section><h2>' + (i + 1) + ". " + esc(sec.n) + (isEdited(s, sec.k) ? ' <em>clinician edited</em>' : "") + "</h2><p>" + esc(textOf(s, sec.k) || NOT_RECORDED) + "</p></section>";
+    var WP = G.WSQPrint, lang = WP && WP.enabled(s.print) && WP.valid(s.printLang) ? s.printLang : "";
+    var tr = function (html) { return lang ? WP.aside(lang, html) : ""; };
+    var T = function (k) { return lang ? esc(WP.t(k, lang)) : ""; };
+    var pd = function (iso) { return WP ? WP.date(iso, s.print, true) : when(iso); };   // the hospital's clock, "15 Sep 2026, 09:05"
+    var rows = [
+      ["Patient", p.name || s.patientId, "patient"], ["MRN", p.mrn], ["Sex", p.sex, "sex"],
+      ["Ward", e.ward ? e.ward + (e.bed ? ", bed " + e.bed : "") : null, "ward"],
+      ["Admitted", pd(e.admittedAt), "admitted"], ["Discharged", pd(e.dischargedAt), "discharged"]
+    ].filter(function (r) { return r[1]; });
+    var head = rows.map(function (r) { return '<div class="p-f"><span>' + esc(r[0]) + "</span><b>" + esc(r[1]) + "</b></div>"; }).join("");
+    var headTr = rows.filter(function (r) { return r[2]; }).map(function (r) { return esc(r[0]) + ": " + T("print.dc.field." + r[2]); }).join(" &middot; ");
+    var body = sectionsOf(s).map(function (sec, i) {
+      return '<section><h2>' + (i + 1) + ". " + esc(sec.n) + (isEdited(s, sec.k) ? ' <em>clinician edited</em>' : "") + "</h2><p>" + esc(localTimes(textOf(s, sec.k) || NOT_RECORDED, s.print)) + "</p></section>" +
+        tr("<h2>" + (i + 1) + ". " + T("print.dc.section." + sec.k) + "</h2><p>" + T("print.tr.englishOnly") + "</p>");
     }).join("");
     var prov = (s.sections && s.sections.provenance) || (s.assembled && s.assembled.provenance) || "";
     var sig = s.signed
-      ? '<div class="p-sig"><div class="ln"></div><span>Signed by ' + esc(s.signedBy || "") + (s.recordedAt ? " on " + esc(when(s.recordedAt)) : "") + " &middot; version " + esc(s.version) + "</span></div>"
-      : '<div class="p-sig"><div class="ln"></div><span>Signature</span><p class="p-draft">UNSIGNED DRAFT - not a final discharge summary.</p></div>';
-    return "<h1>Discharge summary</h1><div class=\"p-head\">" + head + "</div>" + body +
-      (prov ? '<section class="p-prov"><h2>Provenance</h2><p>' + esc(prov) + "</p></section>" : "") + sig;
+      ? '<div class="p-sig"><div class="ln"></div><span>Signed by ' + esc(signerText(s)) + (s.recordedAt ? " on " + esc(pd(s.recordedAt)) : "") + " &middot; version " + esc(s.version) + "</span></div>" +
+        tr("<p>" + T("print.dc.signedBy") + "</p>")
+      : '<div class="p-sig"><div class="ln"></div><span>Signature</span><p class="p-draft">UNSIGNED DRAFT - not a final discharge summary.</p></div>' +
+        tr('<p class="p-draft">' + T("print.dc.unsigned") + "</p>");
+    /* The approved copies given on this stay, after the summary, each on its own page, in the leaflet's own language. */
+    var given = (s.edu && s.edu.items || []).filter(function (x) { return !x.detached; });
+    var leaflets = given.map(function (x) {
+      return '<section class="p-edu" style="page-break-before:always"><h2 lang="' + esc(x.language) + '">' + esc(x.title) + '</h2><p lang="' + esc(x.language) + '">' + esc(x.body).replace(/\n/g, "<br>") + "</p>" +
+        '<p class="p-prov">Patient information leaflet approved by ' + esc(x.approvedBy || x.approvedById) + " on " + esc(pd(x.approvedAt)) + ", given " + esc(pd(x.attachedAt)) + ".</p></section>";
+    }).join("");
+    return "<h1>Discharge summary</h1><div class=\"p-head\">" + head + "</div>" +
+      tr("<h2>" + T("print.dc.title") + "</h2>" + (lang ? WP.authority("dc", lang) : "") + "<p>" + headTr + "</p>") + body +
+      (prov ? '<section class="p-prov"><h2>Provenance</h2><p>' + esc(prov) + "</p></section>" + tr("<h2>" + T("print.dc.provenance") + "</h2><p>" + T("print.tr.englishOnly") + "</p>") : "") + sig + leaflets;
   }
   function doPrint() {
     var w = root().querySelector(".d-print");
     if (!w) { w = document.createElement("div"); w.className = "d-print"; root().appendChild(w); }
-    w.innerHTML = printable();
-    try { G.print(); } catch (e) {}
+    var go = function () { w.innerHTML = printable(); try { G.print(); } catch (e) {} };
+    // The picked language's catalog is loaded first, so the paper never goes out half in English by accident.
+    if (st.printLang && G.WSQPrint) G.WSQPrint.ensureLoaded(st.printLang, go); else go();
+  }
+  /* Offered only when the hospital turned it on (Admin > Hospital). Off means no picker at all. */
+  function langPicker(s) {
+    var WP = G.WSQPrint;
+    return WP && WP.enabled(s.print) ? '<label class="d-lang"><span>' + wTH("ward.dc-second-language-print", "Second language on the print") + "</span>" + WP.picker("dPrintLang", s.printLang || "") + "</label>" : "";
   }
 
   function onClick(e) {
+    // A tap on the signer says name, employee id and role (touch screens have no hover), as on every chart screen.
+    var w = e.target.closest && e.target.closest('[data-w-act^="whoinfo:"]');
+    if (w && G.WARD && G.WARD._whoInfo) { G.WARD._whoInfo(w.getAttribute("data-w-act").slice(8)); return; }
     var b = e.target.closest && e.target.closest("[data-d-act]"); if (!b) return;
     var a = b.getAttribute("data-d-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "compare") { st.compare[arg] = !st.compare[arg]; paint(); return; }
     if (cmd === "edit") { st.editing = arg; paint(); return; }
-    if (cmd === "cancel") { st.editing = ""; paint(); return; }
+    if (cmd === "cancel") { if (st.scribeOn) stopScribe(); st.scribeDraft = ""; st.editing = ""; paint(); return; }
+    if (cmd === "scribestart") { startScribe(); return; }
+    if (cmd === "scribestop") { stopScribe(); return; }
+    if (cmd === "scribeaccept") { scribeInsert(); return; }
+    if (cmd === "scribediscard") { st.scribeDraft = ""; paint(); return; }
     if (cmd === "print") { doPrint(); return; }
-    if (cmd === "draft") { draft(null, "Draft saved from the record."); return; }
-    if (cmd === "sign") { sign(); return; }
+    if (cmd === "edugive") {
+      var pick = val("dEduPick"), bar = pick.lastIndexOf("|"); if (bar < 1 || st.busy) return;
+      eduWrite("/ward/education-attach", { orgId: st.orgId, encounterId: st.encounterId, leafletId: pick.slice(0, bar), leafletVersion: Number(pick.slice(bar + 1)) }, wT("ward.dc-edu-given", "Leaflet given with this summary."));
+      return;
+    }
+    if (cmd === "eduback") {
+      var why = val("dEduWhy").trim();
+      if (why.length < 5) { st.err = wT("ward.dc-edu-why-needed", "Write why the leaflet is taken back, then press Take back."); paint(); return; }
+      eduWrite("/ward/education-detach", { orgId: st.orgId, encounterId: st.encounterId, itemId: arg, reason: why }, wT("ward.dc-edu-taken", "Leaflet taken back. It stays in the record."));
+      return;
+    }
+    if (cmd === "draft") { draft(null, wT("ward.dc-draft-saved-from-record", "Draft saved from the record.")); return; }
+    if (cmd === "sign") { st.ask = { kind: "sign" }; paint(); return; }
+    if (cmd === "askno") { st.ask = null; paint(); return; }
+    if (cmd === "askyes") {
+      var a = st.ask; if (!a || st.busy) return;
+      if (a.kind === "sign") { sign(); return; }
+      st.ask = null;
+      var rp = {}; rp[a.arg] = (st.assembled && st.assembled[a.arg]) || NOT_RECORDED;
+      draft(rp, wT("ward.dc-section-returned", "Section returned to the record."));
+      return;
+    }
     if (cmd === "save") {
       var k = st.editing; if (!k) return;
       var patch = {}; patch[k] = val("dEdit");
-      draft(patch, "Section saved.");
+      if (st.scribeOn) stopScribe();
+      st.scribeDraft = "";
+      draft(patch, wT("ward.dc-section-saved", "Section saved."));
       return;
     }
-    if (cmd === "revert") {
-      var text = (st.assembled && st.assembled[arg]) || NOT_RECORDED;
-      if (!confirmed("Discard your correction to this section and return it to the record's own text?")) return;
-      var rp = {}; rp[arg] = text;
-      draft(rp, "Section returned to the record.");
-      return;
-    }
+    if (cmd === "revert") { st.ask = { kind: "revert", arg: arg }; paint(); return; }
+  }
+
+  function onChange(e) {
+    if (!e.target || e.target.id !== "dPrintLang") return;
+    st.printLang = e.target.value;
+    if (G.WSQPrint) G.WSQPrint.ensureLoaded(st.printLang);
   }
 
   function open(opts) {
@@ -439,13 +747,17 @@
     st.orgId = opts.orgId || st.orgId || "";
     st.encounterId = opts.encounterId || "";
     st.patientId = opts.patientId || "";
-    if (!st.orgId || !st.encounterId) { try { G.toast && G.toast("A discharge summary needs an admission."); } catch (e) {} return; }
-    st.loaded = false; st.err = ""; st.note = ""; st.refusal = null; st.editing = ""; st.compare = {};
+    if (!st.orgId || !st.encounterId) { try { G.toast && G.toast(wT("ward.dc-needs-an-admission", "A discharge summary needs an admission.")); } catch (e) {} return; }
+    st.loaded = false; st.err = ""; st.note = ""; st.refusal = null; st.editing = ""; st.compare = {}; st.printLang = ""; st.ask = null; st.edu = null; st.eduLib = null;
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    el.removeEventListener("change", onChange); el.addEventListener("change", onChange);
     paint(); load();
   }
-  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
+  function close() { if (st.scribeCapture) stopScribe(); st.ask = null; var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
 
-  G.DISCHARGE = { open: open, close: close, _render: _render, _st: st, _sections: SECTIONS, _problem: problem, _printable: printable };
+  G.DISCHARGE = { open: open, close: close, _render: _render, _st: st, _sections: SECTIONS, _problem: problem, _printable: printable,
+    // MaiK Scribe for the discharge summary (item 16), exposed for testing.
+    _scribeOn: scribeOn, _scribeAppend: scribeAppend, _scribeRefine: scribeRefine,
+    _startScribe: startScribe, _stopScribe: stopScribe, _scribeInsert: scribeInsert };
 })();

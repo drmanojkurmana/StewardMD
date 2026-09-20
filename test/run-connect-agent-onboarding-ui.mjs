@@ -157,7 +157,11 @@ return 1;
  * lets the test decide the outcome per scenario. */
 const FAKE_ENGINE = `
 window.__engineCalls = [];
+// Stands in for index.mjs's real GUIDE_ARM (CRAWL_ARM_OBSERVER + CRAWL_ARM_GUIDE sources): a distinctive
+// marker the onboarding UI should re-evaluate on a native "navigated" event while a guided ask is active.
 window.__SMD_PHONE_ENGINE_TEST__ = {
+  GUIDE_ARM: "SMD_TEST_GUIDE_ARM_MARKER",
+  GUIDE_ARM_TAP: "SMD_TEST_GUIDE_TAP_MARKER",
   runPhoneDiscovery: function (opts) {
     window.__engineCalls.push(opts);
     window.__lastOnProgress = opts.onProgress;
@@ -178,6 +182,9 @@ window.SMD_CONNECT_AGENT.__setApi(function (path, opts) {
   var body = {};
   try { body = opts && opts.body ? JSON.parse(opts.body) : {}; } catch (x) {}
   window.__calls.push({ path: path, method: (opts && opts.method) || "GET", body: body });
+  if (path.indexOf("/connections/dep-") === 0 && opts && opts.method === "DELETE") {
+    window.__removed = path; return Promise.resolve({ s: 200, d: { ok: true, deploymentId: path.slice(13), removedVersionId: "ver-old", discarded: 0 } });
+  }
   if (path === "/connections" && (!opts || !opts.method || opts.method === "GET")) {
     return Promise.resolve({ s: 200, d: window.__connections || [] });
   }
@@ -192,8 +199,14 @@ window.SMD_CONNECT_AGENT.__setApi(function (path, opts) {
       deployment: { id: "dep-1", origins: ["https://emr.newcity.example"], activeVersionId: null }, reuse: false } });
   }
   if (path === "/sessions/sess-1/handoff") {
+    // A job that already produced a candidate is finished; the sheet must review, not re-crawl.
     return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://emr.newcity.example"],
-      pendingOrigins: window.__pendingOrigins || [] } });
+      pendingOrigins: window.__pendingOrigins || [],
+      job: window.__finishedJob ? { jobId: "job-1", state: "AWAITING_APPROVAL", candidateVersionId: "ver-1" } : null } });
+  }
+  if (path === "/sessions/sess-1" && (!opts || !opts.method || opts.method === "GET")) {
+    return Promise.resolve({ s: 200, d: { ok: true, sessionId: "sess-1", state: "AUTHENTICATED",
+      job: window.__finishedJob ? { jobId: "job-1", state: "AWAITING_APPROVAL", candidateVersionId: "ver-1" } : { jobId: "job-1", state: "DISCOVERING", candidateVersionId: null } } });
   }
   if (path === "/sessions/sess-1/origins") {
     return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://emr.newcity.example", "https://sso.newcity.example"] } });
@@ -283,7 +296,7 @@ try {
   `);
 
   // 1. Open the sheet: empty-state connections list for a first-time doctor.
-  await ev(`window.__connections = []; return 1;`);
+  await ev(`window.__connections = []; try { localStorage.removeItem("smd_connect_agent_mode"); } catch (e) {} return 1;`);
   await ev(`document.getElementById("smd-connect-agent-launch").click(); return 1;`);
   ok(await waitFor(`return !!(window.SMD_CONNECT_AGENT && document.getElementById("smd-connect-ov"));`, 8000), "clicking the launcher opens the sheet");
   ok(await ev(`var s=document.querySelector("#smd-connect-ov .smd-connect-sheet"); return !!(s && s.getAttribute("role")==="dialog" && s.getAttribute("aria-modal")==="true");`) === true, "sheet has dialog role with aria-modal");
@@ -291,6 +304,29 @@ try {
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="connections";`, 8000), "sheet opens on the connections list");
   ok(await waitFor(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("have not connected a hospital yet")>=0;`, 8000), "first-time doctor sees empty-state copy");
   ok(await ev(noDash) === true, "connections copy has no em-dash");
+
+  // 1b. A connected hospital carries a Remove button; confirming it DELETEs the connection and reloads.
+  await ev(`window.__connections = [{ deploymentId: "dep-kims", origins: ["https://hims.kims.example"], activeVersionId: "ver-old", pendingVersionId: null }, { deploymentId: "dep-new", origins: ["https://new.example"], activeVersionId: null, pendingVersionId: null }]; window.__removed = null; window.confirm = function () { return true; }; return 1;`);
+  await ev(`if(window.SMD_CONNECT_AGENT) window.SMD_CONNECT_AGENT.close(); return 1;`);
+  await sleep(800);
+  await ev(MOCK);
+  await ev(`document.getElementById("smd-connect-agent-launch").click(); return 1;`);
+  ok(await waitFor(`return !!(window.SMD_CONNECT_AGENT && document.getElementById("smd-connect-ov"));`, 8000), "sheet reopens for the connected-hospital scenario");
+  await ev(MOCK);
+  await ev(`window.SMD_CONNECT_AGENT.__reloadConnections(); return 1;`);
+  ok(await waitFor(`var r=document.querySelectorAll(".smd-connect-remove"); return r.length===1 && r[0].getAttribute("data-dep")==="dep-kims";`, 8000), "only the connected hospital offers Remove, a not-connected one does not");
+  await ev(`document.querySelector(".smd-connect-remove").click(); return 1;`);
+  ok(await waitFor(`return window.__removed==="/connections/dep-kims";`, 4000), "confirming Remove sends DELETE /connections/:deploymentId");
+  ok(await waitFor(`return window.__calls.filter(function(c){return c.path==="/connections" && c.method==="GET";}).length>=2;`, 4000), "the list reloads after the removal");
+  ok(await ev(noDash) === true, "remove copy has no em-dash");
+  await ev(`window.__connections = []; if(window.SMD_CONNECT_AGENT) window.SMD_CONNECT_AGENT.close(); return 1;`);
+  await sleep(800);
+  await ev(MOCK);
+  await ev(`document.getElementById("smd-connect-agent-launch").click(); return 1;`);
+  ok(await waitFor(`return !!(window.SMD_CONNECT_AGENT && document.getElementById("smd-connect-ov"));`, 8000), "sheet reopens for the main flow");
+  await ev(MOCK);
+  await ev(`window.SMD_CONNECT_AGENT.__reloadConnections(); return 1;`);
+  ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="connections";`, 8000), "back on the connections list");
 
   // transform-origin anchors to the launcher, and the sheet fits the viewport.
   ok(await ev(`
@@ -323,6 +359,8 @@ try {
   // 3. Consent: no pre-checked box; Agree posts /sessions with runner:"phone".
   ok(await ev(`var b=document.getElementById("smd-connect-consentgo"); var c=document.getElementById("smd-connect-agree"); return !!b && b.disabled===true && !!c && c.checked===false;`) === true, "consent checkbox starts unchecked and Agree stays disabled (no pre-checked boxes)");
   ok(await ev(noDash) === true, "consent copy has no em-dash");
+  ok(await ev(`var r=document.querySelectorAll('input[name="smd-connect-mode"]'); return r.length===2 && r[0].value==="auto" && r[0].checked===true && r[1].value==="manual" && r[1].checked===false;`) === true, "consent offers Automatic (default) and Manual modes");
+  ok(await ev(`var t=document.getElementById("smd-connect-body").textContent; return t.indexOf("never sees patient data")>=0;`) === true, "consent declares the model reads screen structure only, never patient data");
   await ev(`document.getElementById("smd-connect-agree").click(); return 1;`);
   ok(await waitFor(`return document.getElementById("smd-connect-consentgo").disabled===false;`, 4000), "checking the box enables Agree and continue");
   await ev(`window.__reuse = false; document.getElementById("smd-connect-consentgo").click(); return 1;`);
@@ -340,6 +378,51 @@ try {
   `) === true, "plugin.open receives the https EMR URL, deployment origins, and deployment id as storeId");
   ok(await ev(noDash) === true, "login copy has no em-dash");
 
+  /* 4a. THE FLAG IS NOT THE BROWSER. Coming back to sign-in after a failed discovery, S.loginOpened
+   * is still set from the first attempt, so openLoginPlugin() returned early and the hospital website
+   * was never opened — the doctor read "Sign in yourself inside the hospital website that just
+   * opened" with nothing open. Seen on the owner's iPhone 2026-09-18: screen=login, currentUrl()
+   * answering "not-open", recoverable only by hand via Try again. And the sign-in screen replayed the
+   * previous attempt's error ("Discovery could not complete..."), which reads as if signing in failed. */
+  await ev(`window.__pluginCalls.length = 0;
+    delete window.Capacitor.Plugins.ConnectBrowser.currentUrl;
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.reject(new Error("not-open")); };
+    window.SMD_CONNECT_AGENT.__setState({ statusKind: "bad", statusText: "Discovery could not complete: observedViews: proof status invalid. You can try again." });
+    window.SMD_CONNECT_AGENT.__paintLogin(); return 1;`);
+  ok(await waitFor(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length>=1;`, 6000),
+     "returning to sign-in with the hospital browser shut opens it again, instead of trusting the stale flag");
+  ok(await ev(`var t=(document.getElementById("smd-connect-status")||{}).textContent||""; return t.indexOf("Discovery could not complete")<0 && t.length>0;`) === true,
+     "...and the fresh sign-in screen does not replay the previous attempt's failure");
+  // a browser that IS open must not be opened a second time
+  await ev(`window.__pluginCalls.length = 0;
+    delete window.Capacitor.Plugins.ConnectBrowser.currentUrl;
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.resolve({ url: "https://emr.newcity.example/login", title: "" }); };
+    window.SMD_CONNECT_AGENT.__paintLogin(); return 1;`);
+  await new Promise((r) => setTimeout(r, 1200));
+  ok(await ev(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length===0;`) === true,
+     "...but a hospital browser that is already open is never re-opened underneath the doctor");
+  await ev(`delete window.Capacitor.Plugins.ConnectBrowser.currentUrl;
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.resolve({ url: "", title: "" }); };
+    window.SMD_CONNECT_AGENT.__setState({ statusKind: "", statusText: "" }); return 1;`);
+
+  /* 4b. AN SSO HOSPITAL MOVES BEFORE THE DOCTOR IS IN. The sign-in poll sees no password box on the
+   * module chooser at another host. Movement alone must never be read as a completed sign in: on GIMSR
+   * that would hand the browser to the agent while the doctor is still choosing a module. */
+  await ev(`window.__pwFlag = "none"; window.__curUrl = "https://sso.newcity.example/chooser";
+    window.Capacitor.Plugins.ConnectBrowser.evaluate = function (a) {
+      window.__pluginCalls.push({ m: "evaluate", a: a });
+      return Promise.resolve({ result: /password/.test(String((a && a.expression) || "")) ? window.__pwFlag : "" });
+    };
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.resolve({ url: window.__curUrl, title: "" }); };
+    return 1;`);
+  await sleep(7000);
+  ok(await ev(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="login";`) === true, "a page that moved without ever showing a password box is not a completed sign in");
+  ok(await ev(`return !window.__calls.some(function(x){return x.path==="/sessions/sess-1/handoff";});`) === true, "no handoff was posted from the module chooser");
+  await ev(`delete window.Capacitor.Plugins.ConnectBrowser.evaluate; delete window.Capacitor.Plugins.ConnectBrowser.currentUrl;
+    window.Capacitor.Plugins.ConnectBrowser.evaluate = function (a) { window.__pluginCalls.push({ m: "evaluate", a: a }); return Promise.resolve({ result: "" }); };
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.resolve({ url: "", title: "" }); };
+    return 1;`);
+
   // 5. loggedIn -> handoff -> pendingOrigins confirm -> Allow -> origins approve -> agent mode.
   await ev(`window.__pendingOrigins = ["https://sso.newcity.example"]; window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/login", mainFrame:true}); window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://emr.newcity.example/home"}); return 1;`);
   ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/sessions/sess-1/handoff";}); return c.length===1 && c[0].body.visitedOrigins.indexOf("https://emr.newcity.example")>=0;`, 8000), "loggedIn posts handoff with the visited origins");
@@ -349,6 +432,11 @@ try {
   await ev(`window.__engineOutcome = function () { return new Promise(function () {}); }; document.getElementById("smd-connect-originsyes").click(); return 1;`);
   ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/sessions/sess-1/origins";}); return c.length===1 && c[0].body.approve.indexOf("https://sso.newcity.example")>=0;`, 8000), "Allow posts POST origins approve with the pending origin");
   ok(await waitFor(`return window.__pluginCalls.filter(function(c){return c.m==="setMode" && c.a.mode==="agent";}).length>=1;`, 8000), "agent mode is set on the plugin once origins are settled");
+  ok(await ev(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.mode==="auto" && c.compact===true && c.brain && typeof c.brain.classify==="function" && typeof c.brain.mapColumns==="function" && typeof c.brain.next==="function";`) === true, "the engine runs in auto mode with the compact browser and the three brain advisors");
+  ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="setMode" && c.a.mode==="agent" && c.a.compact===true;});`) === true, "auto mode asks the browser for its top-half layout so the sheet stays visible");
+  ok(await ev(`return !!document.getElementById("smd-connect-snake");`) === true, "auto mode shows the game container under the progress");
+  await ev(`window.__brainCalls = []; var c=window.__engineCalls[window.__engineCalls.length-1]; c.brain.classify({path:"/Doctor/Home", headers:["Patient ID"], labels:["Home"]}); return 1;`);
+  ok(await waitFor(`var b=window.__calls.filter(function(x){return x.path==="/brain/classify";}); return b.length===1 && b[0].body.origin==="https://emr.newcity.example" && b[0].body.headers[0]==="Patient ID";`, 3000), "a brain question goes to POST /brain/classify with the hospital origin and structure only");
 
   // 6. Progress: runPhoneDiscovery invoked with plugin/api/session/deployment; onProgress updates counters.
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="progress";`, 8000), "discovery starts and shows the progress screen");
@@ -378,8 +466,70 @@ try {
   `).then((v) => ok(v === true, "runPhoneDiscovery receives askDoctor and stopSignal"));
   ok(await waitFor(`var t=document.getElementById("smd-connect-detail").textContent; return t.indexOf("radiology reports")>=0 && !!document.getElementById("smd-connect-guideskip");`, 3000), "guided step renders the question and a Skip button");
   ok(await ev(`return document.getElementById("smd-connect-phase").textContent.indexOf("needs your help")>=0;`) === true, "guided step phase copy asks for help");
+
+  // FIX A regression: index.mjs's GUIDE_ARM dies with the document, so a doctor's own navigation
+  // during a guided ask silently drops tap-to-point/the green outline. The native "navigated" event
+  // must re-evaluate GUIDE_ARM on the plugin while an ask is active, and must NOT do so once it is not.
+  const guideArmed = `return window.__pluginCalls.some(function(c){return c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER";});`;
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
+  ok(await waitFor(guideArmed, 3000), "a navigated event during an active guided ask re-evaluates GUIDE_ARM on the plugin");
+
+  /* THE FIRST RE-ARM LANDS TOO EARLY. The native plugin announces "navigated" from didCommit, while the
+   * new document is still being built, so that evaluate is rejected by WebKit and the swallowed error
+   * left the guide unarmed for the rest of the ask: the doctor's tap never turned green and Done could
+   * capture nothing (owner's iPhone, live GHIS radiology page, 2026-09-18). The re-arm must be retried. */
+  await ev(`
+    window.__pluginCalls = window.__pluginCalls.filter(function(c){return !(c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER");});
+    window.__armAttempts = 0;
+    var p = window.Capacitor.Plugins.ConnectBrowser;
+    p.evaluate = function (args) {
+      window.__pluginCalls.push({ m: "evaluate", a: args });
+      if (args && (args.expression === "SMD_TEST_GUIDE_ARM_MARKER" || args.expression === "SMD_TEST_GUIDE_TAP_MARKER")) {
+        window.__armAttempts++;
+        if (window.__armAttempts === 1) return Promise.reject(new Error("WebKit: page is navigating"));
+      }
+      return Promise.resolve({ result: "" });
+    };
+    return 1;
+  `);
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
+  ok(await waitFor(`return window.__armAttempts >= 2;`, 6000), "the guide is re-armed again after the first attempt fails on a still-loading page");
+
+  /* THE CAPTURE MUST COME BACK ON ITS OWN. Relying on the native "navigated" event was not enough: on
+   * the live GHIS radiology page the guide was still unarmed ten seconds after a full page load, so the
+   * doctor's tap turned nothing green and Done captured nothing (owner's iPhone, v90, 2026-09-18).
+   * While a question is on screen the arm is simply re-applied on a heartbeat, which survives a missed
+   * event, a document replaced mid-flight, and an ask that was re-issued. */
+  await ev(`
+    window.__pluginCalls = window.__pluginCalls.filter(function(c){return !(c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER");});
+    window.__armAttempts = 0; window.__fullArms = 0;
+    var p = window.Capacitor.Plugins.ConnectBrowser;
+    p.evaluate = function (args) {
+      window.__pluginCalls.push({ m: "evaluate", a: args });
+      if (args && args.expression === "SMD_TEST_GUIDE_ARM_MARKER") window.__fullArms++;
+      if (args && args.expression === "SMD_TEST_GUIDE_TAP_MARKER") window.__armAttempts++;
+      return Promise.resolve({ result: "" });
+    };
+    return 1;
+  `);
+  // let any retry scheduled by the earlier navigated event drain first, so this proves the heartbeat only
+  await sleep(3000);
+  await ev(`window.__armAttempts = 0; return 1;`);
+  // no navigated event at all: the heartbeat alone must re-apply the arm
+  ok(await waitFor(`return window.__armAttempts >= 1;`, 8000), "the guide keeps the capture alive while the question is on screen, with no navigation event");
+  ok(await ev(`return window.__fullArms === 0;`) === true, "the heartbeat never re-runs the observer, which would discard the requests the doctor already made");
+
   await ev(`document.getElementById("smd-connect-guideskip").click(); return 1;`);
   ok(await waitFor(`return window.__ask1 && window.__ask1.done === false && !document.getElementById("smd-connect-guideskip");`, 3000), "Skip resolves the ask with done:false and removes the instruction");
+  // and it stops once the question is answered: no further arming after the skip
+  await ev(`window.__armAttempts = 0; return 1;`);
+  await sleep(3500);
+  ok(await ev(`return window.__armAttempts === 0;`) === true, "the heartbeat stops once the question is answered");
+  await ev(`window.__pluginCalls = window.__pluginCalls.filter(function(c){return !(c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER");}); return 1;`);
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
+  await sleep(300);
+  ok(await ev(guideArmed) === false, "a navigated event outside an active guided ask does not re-evaluate GUIDE_ARM");
+
   await ev(`
     var call = window.__engineCalls[window.__engineCalls.length - 1];
     call.askDoctor({gap:"discharge", text:"I could not find the discharge summary. Tap where it lives, then tap Done."}).then(function (r) { window.__ask2 = r; });
@@ -390,6 +540,50 @@ try {
   ok(await waitFor(`return window.__ask2 && window.__ask2.done === true;`, 3000), "the plugin's Done (loggedIn) during a guided step resolves the ask with done:true, not a second handoff");
   ok(await ev(`return window.__calls.filter(function(x){return x.path==="/sessions/sess-1/handoff";}).length === 1;`) === true, "no extra handoff was posted by the guided Done");
   ok(await ev(noDash) === true, "guided-step copy has no em-dash");
+  await ev(`
+    var call = window.__engineCalls[window.__engineCalls.length - 1];
+    window.__ask3 = null; window.__ask4 = null;
+    call.askDoctor({gap:"radiology", text:"Show me the radiology reports for that patient, then tap Done.", step:5, total:8}).then(function (r) { window.__ask3 = r; });
+    return 1;
+  `);
+  ok(await waitFor(`var t=document.getElementById("smd-connect-detail").textContent; return !!document.getElementById("smd-connect-guidemissing") && t.indexOf("Step 5 of 8")>=0;`, 3000), "a numbered ask shows its step and a Not in my EMR button");
+  await ev(`document.getElementById("smd-connect-guidemissing").click(); return 1;`);
+  ok(await waitFor(`return window.__ask3 && window.__ask3.done === false && window.__ask3.missing === true;`, 3000), "Not in my EMR on the sheet resolves the ask as missing");
+  await ev(`
+    var call = window.__engineCalls[window.__engineCalls.length - 1];
+    call.askDoctor({gap:"discharge", text:"Show me the discharge summary for that patient, then tap Done.", step:7, total:8}).then(function (r) { window.__ask4 = r; });
+    return 1;
+  `);
+  ok(await waitFor(`return !!document.getElementById("smd-connect-guidemissing");`, 3000), "fourth ask renders");
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("guideSkip", {url:"https://emr.newcity.example/home"}); return 1;`);
+  ok(await waitFor(`return window.__ask4 && window.__ask4.done === false && window.__ask4.missing === true;`, 3000), "the browser header's Not in my EMR (native guideSkip) resolves the ask as missing");
+
+  // 6d. THE AGENT CONSOLE. Every control reaches the engine as a signal it really reads; Stop asks
+  // first; a quiet run tells the truth and grows a way to keep what it found.
+  ok(await ev(`return !!document.getElementById("smd-connect-skipstep") && !!document.getElementById("smd-connect-redo") && !!document.getElementById("smd-connect-stop") && !!document.getElementById("smd-connect-finishnow") && !!document.getElementById("smd-connect-stopconfirm");`) === true, "the console renders Skip this step, Look again, Stop, Save what you have and the Stop confirm");
+  ok(await ev(`return document.getElementById("smd-connect-finishnow").style.display==="none" && document.getElementById("smd-connect-stopconfirm").style.display==="none";`) === true, "Save and the Stop confirm start hidden");
+  ok(await ev(`var c=window.__engineCalls[window.__engineCalls.length-1]; return typeof c.finishSignal==="function" && typeof c.skipSignal==="function" && typeof c.redoSignal==="function" && c.finishSignal()===false && c.skipSignal()===0 && c.redoSignal()===0;`) === true, "the engine receives finish, skip and redo signals, all idle at first");
+  await ev(`document.getElementById("smd-connect-skipstep").click(); return 1;`);
+  ok(await waitFor(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.skipSignal()===1 && window.SMD_CONNECT_AGENT.__debug().skipRequested===1;`, 3000), "Skip this step bumps the skip signal the engine reads");
+  await ev(`document.getElementById("smd-connect-redo").click(); return 1;`);
+  ok(await waitFor(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.redoSignal()===1;`, 3000), "Look again bumps the redo signal the engine reads");
+  ok(await waitFor(`return document.getElementById("smd-connect-skipstep").disabled===false;`, 4000), "Skip re-enables after acknowledging the tap");
+  await ev(`document.getElementById("smd-connect-stop").click(); return 1;`);
+  ok(await waitFor(`var cf=document.getElementById("smd-connect-stopconfirm"); return cf.style.display!=="none" && cf.textContent.indexOf("throw away")>=0 && window.SMD_CONNECT_AGENT.__debug().stopRequested===false;`, 3000), "Stop asks first, names what would be thrown away, and has not stopped anything yet");
+  ok(await ev(`return document.getElementById("smd-connect-finishnow").style.display!=="none";`) === true, "Stop offers Save what you have alongside the confirm");
+  await ev(`document.getElementById("smd-connect-stopkeep").click(); return 1;`);
+  ok(await waitFor(`return document.getElementById("smd-connect-stopconfirm").style.display==="none";`, 3000), "Keep going closes the confirm without stopping");
+  await sleep(1300);
+  ok(await ev(`return document.getElementById("smd-connect-finishnow").style.display!=="none";`) === true, "Save stays on screen after Keep going (the ticker does not hide it)");
+  // A stalled run: nothing from the engine for a minute.
+  await ev(`window.SMD_CONNECT_AGENT.__setState({lastProgressAt: Date.now()-60000}); return 1;`);
+  ok(await waitFor(`var e=document.getElementById("smd-connect-eta"); return !!e && e.textContent.indexOf("No change for")===0;`, 3000), "a quiet run stops promising a time and says how long it has been quiet");
+  ok(await waitFor(`var n=document.getElementById("smd-connect-stallnote"); return n.style.display!=="none" && n.textContent.indexOf("already been learned")>=0;`, 3000), "the stall note says what is already learned and that Save keeps it");
+  ok(await ev(`return document.getElementById("smd-connect-dot").className.indexOf("stalled")>=0;`) === true, "the live dot goes amber when stalled");
+  await ev(`document.getElementById("smd-connect-finishnow").click(); return 1;`);
+  ok(await waitFor(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.finishSignal()===true && window.SMD_CONNECT_AGENT.__debug().finishRequested===true;`, 3000), "Save what you have raises the finish signal the engine reads");
+  ok(await waitFor(`return document.getElementById("smd-connect-eta").textContent==="Saving.";`, 3000), "and the console says it is saving");
+  ok(await ev(noDash) === true, "agent console copy has no em-dash");
 
   // Resolve discovery: result screen with proven/unproven capabilities. The first run above left
   // runPhoneDiscovery's promise deliberately unresolved (__engineOutcome's default), so this next
@@ -410,11 +604,12 @@ try {
   await ev(`document.getElementById("smd-connect-add").click(); return 1;`);
   await ev(`document.getElementById("smd-connect-url").value="https://emr.newcity.example"; document.getElementById("smd-connect-urlgo").click(); return 1;`);
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="consent";`, 6000), "second run reaches consent");
-  await ev(`document.getElementById("smd-connect-agree").click(); window.__reuse=false; document.getElementById("smd-connect-consentgo").click(); return 1;`);
+  await ev(`document.querySelector('input[name="smd-connect-mode"][value="manual"]').click(); document.getElementById("smd-connect-agree").click(); window.__reuse=false; document.getElementById("smd-connect-consentgo").click(); return 1;`);
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="login";`, 8000), "second run reaches login");
+  ok(await ev(`try { return localStorage.getItem("smd_connect_agent_mode")==="manual"; } catch (e) { return false; }`) === true, "the chosen mode is remembered for next time");
   await ev(`
     window.__engineOutcome = function () {
-      return Promise.resolve({candidateVersionId:"ver-1", capabilities: window.__capabilities, evidenceHash:"h1", state:"AWAITING_APPROVAL"});
+      return Promise.resolve({candidateVersionId:"ver-1", capabilities: window.__capabilities, evidenceHash:"h1", state:"AWAITING_APPROVAL", missing:["radiology","discharge"], mode:"manual"});
     };
     window.__pendingOrigins = [];
     window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://emr.newcity.example/home"});
@@ -424,6 +619,15 @@ try {
   ok(await waitFor(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Worklist")>=0 && t.indexOf("Medications")>=0;`, 4000), "proven capabilities are listed");
   ok(await ev(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Allergies")>=0 && t.indexOf("not found at this hospital")>=0;`) === true, "unproven capabilities are shown greyed with a not-found note");
   ok(await ev(`return document.getElementById("smd-connect-ov").innerText.indexOf("Awaiting approval")>=0;`) === true, "result names the awaiting-approval state");
+  ok(await ev(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Your adapter is created")>=0 && t.indexOf("awaiting approval")>=0 && t.indexOf("4 hours")>=0 && t.indexOf("Ward Sync")>=0;`) === true, "result says the adapter is created, awaiting approval, and where it will appear in about 4 hours");
+  ok(await ev(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Not in your EMR")>=0 && t.indexOf("Radiology reports")>=0 && t.indexOf("Discharge summary")>=0;`) === true, "result lists what the doctor said the EMR does not have");
+  ok(await ev(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.mode==="manual" && c.compact===false;`) === true, "manual mode runs the engine without the compact browser");
+  ok(await ev(`var calls=window.__pluginCalls; var last=-1; for (var i=0;i<calls.length;i++) if (calls[i].m==="open") last=i; var after=calls.slice(last); window.__dbgCalls=JSON.stringify(after.map(function(c){return [c.m, c.a&&c.a.mode, c.a&&c.a.compact];})); return !after.some(function(c){return c.m==="setMode" && c.a.compact===true;});`) === true, "manual mode never asks for the top-half browser");
+  if (!(await ev(`return !window.__pluginCalls.slice(window.__pluginCalls.map(function(c){return c.m;}).lastIndexOf("open")).some(function(c){return c.m==="setMode" && c.a.compact===true;});`))) console.log("  calls after open:", await ev(`return window.__dbgCalls;`));
+  // The crawl is over, so the hospital browser must be gone: left open it covers this very screen,
+  // still wearing the "StewardMD is reading" banner, and a finished run reads as a hung one.
+  ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="close";});`) === true,
+    "the hospital browser is closed when discovery finishes, so the approval screen is what the doctor sees");
   ok(await ev(noDash) === true, "result copy has no em-dash");
 
   // 7. Approve button appears for an admin fake and activating reaches Connected.
@@ -523,6 +727,76 @@ try {
   ok(await waitFor(`return localStorage.getItem("smd_connect_agent_tenant")==="t-b" && window.__calls.some(function(c){return c.path==="/connections";});`, 6000), "picking a hospital stores the choice and loads its connections");
   ok(await waitFor(`return document.getElementById("smd-connect-ov").innerText.indexOf("Switch hospital")>=0;`, 4000), "the list offers Switch hospital");
   await ev(`window.__tenants = null; localStorage.removeItem("smd_connect_agent_tenant"); return 1;`);
+
+  // What the doctor watches while the agent works: a bar that moves, a sentence in their own
+  // vocabulary, and a time. A screen that only counted pages read as frozen.
+  await ev(`
+    var A = window.SMD_CONNECT_AGENT;
+    A.__setState({ screen: "progress", runner: "phone",
+      selected: { emrUrl: "https://emr.newcity.example" },
+      progressStartedAt: Date.now() - 60000,
+      progressCounts: { pages: 6, requests: 12, phase: "CRAWLING", opening: "", found: ["worklist", "patient"], looking: ["labs", "medications"] } });
+    A.__paintProgress();
+    return 1;
+  `);
+  ok(await waitFor(`return !!document.querySelector('.smd-connect-prog > i');`, 4000), "the progress screen shows a progress bar");
+  const pct = Number(await ev(`var b=document.querySelector('.smd-connect-prog'); return b ? b.getAttribute('aria-valuenow') : '';`));
+  ok(pct > 10 && pct < 90, "the bar reports a real percentage, not 0 or 100: " + pct);
+  ok(await ev(`return document.getElementById('smd-connect-activity').textContent.indexOf('Looking for where your lab results sit') >= 0;`) === true,
+    "it says what it is doing in the doctor's words, naming the view it is hunting for");
+  ok(await ev(`return /minute/.test(document.getElementById('smd-connect-eta').textContent);`) === true, "it estimates the time left");
+
+  // Further along, the bar must be further along, and the wording follows the phase.
+  await ev(`
+    var A = window.SMD_CONNECT_AGENT;
+    A.__setState({ progressCounts: { pages: 20, requests: 48, phase: "COMPILING", opening: "", found: ["worklist","patient","labs","medications","radiology"], looking: [] } });
+    A.__paintProgress();
+    return 1;
+  `);
+  const pct2 = Number(await ev(`var b=document.querySelector('.smd-connect-prog'); return b ? b.getAttribute('aria-valuenow') : '';`));
+  ok(pct2 > pct, "the bar advances as views are captured: " + pct + " -> " + pct2);
+  ok(await ev(`return document.getElementById('smd-connect-activity').textContent.indexOf('Writing the connection') >= 0;`) === true,
+    "the compile step says it is writing the connection, not a phase code");
+  ok(await ev(noDash) === true, "the progress copy has no em-dash");
+
+  // The sheet is BEHIND the full-screen hospital browser during a crawl, so the same three facts
+  // have to reach the one surface the doctor can see: the native banner.
+  await ev(`
+    var A = window.SMD_CONNECT_AGENT;
+    A.__setState({ bannerLine: "", deployment: { id: "dep-1", origins: ["https://emr.newcity.example"] },
+      progressCounts: { pages: 9, requests: 20, phase: "CRAWLING", opening: "", found: ["worklist","patient","labs"], looking: ["medications"] } });
+    window.__pluginCalls = [];
+    A.__publishBanner();
+    return 1;
+  `);
+  const banner = await ev(`var c = window.__pluginCalls.filter(function(x){return x.m==="setMode";}).pop(); return c && c.a ? String(c.a.banner) : "";`);
+  ok(/^\d+%/.test(banner), "the banner leads with a percentage: " + banner);
+  ok(/medication/i.test(banner), "the banner names what the agent is hunting for");
+  ok(banner.indexOf("\u2014") < 0, "banner copy has no em-dash");
+
+  // Reopening a connection whose crawl ALREADY finished must review it, never crawl it again:
+  // the server refuses a second discovery ("job is not in discovery") and the doctor sat watching
+  // a 21-page re-crawl end in "you can try again" while their adapter waited for approval.
+  await ev(`
+    window.__finishedJob = true;
+    window.__reuse = false;          // an earlier scenario left the reuse shortcut on
+    var A = window.SMD_CONNECT_AGENT;
+    A.close(); A.open();
+    return 1;
+  `);
+  await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="connections";`, 6000);
+  await ev(`document.getElementById("smd-connect-add").click(); return 1;`);
+  await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="url";`, 4000);
+  await ev(`document.getElementById("smd-connect-url").value="https://emr.newcity.example"; document.getElementById("smd-connect-urlgo").click(); return 1;`);
+  await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="consent";`, 4000);
+  await ev(`var b=document.getElementById("smd-connect-agree"); b.checked=true; b.onchange(); document.getElementById("smd-connect-consentgo").click(); return 1;`);
+  await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="login";`, 6000);
+  await ev(`window.__pendingOrigins = []; window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://emr.newcity.example/home"}); return 1;`);
+  ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="result";`, 8000),
+    "a connection whose crawl already finished goes straight to the review, not back through discovery");
+  ok(await ev(`return document.getElementById("smd-connect-ov").innerText.indexOf("Awaiting approval")>=0;`) === true,
+    "and it shows the approval the doctor owes a decision on");
+  await ev(`window.__finishedJob = false; return 1;`);
 
   ok(consoleErrors.length === 0, "zero console errors and zero uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 5)) : ""));
 

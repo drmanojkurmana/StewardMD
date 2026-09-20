@@ -202,3 +202,77 @@ test("a discount and a write-off both require a reason; a nurse cannot raise or 
   // A nurse still reads it - billing.view, the same read the cashier has, is not the write authority.
   assert.equal((await as(NURSE, `/ward/invoice?orgId=${ORG}&invoiceId=${invoiceId}`)).__status, 403, "a plain nurse role holds neither billing.view nor billing.charge here");
 });
+
+
+/* THE PROVIDER-AGNOSTIC PAYMENT FRAMEWORK, through the real cashier routes.
+ *
+ * A hospital that has configured its payment methods gets them ENFORCED server-side: a method it
+ * does not take is refused, a collection missing what reconciliation needs is refused, and nothing
+ * a request body says can make a typed-in card payment read as confirmed by a machine. */
+test("PAYMENTS: a configured hospital's methods are enforced, and typed money is never recorded as machine-confirmed", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, payment: { methods: [
+    { method: "cash", counters: ["front-desk"] },
+    { method: "card", provider: "pinelabs" },
+    { method: "neft", provider: "hdfc" },
+  ] } };
+  const { adm } = await admittedPatientOnAdministeredDrug();
+  const invoiceId = (await as(CASHIER, "/ward/invoice", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId })).invoiceId;
+
+  // No method at all, on a hospital that has configured methods: refused, nothing written.
+  const noMethod = await as(CASHIER, "/ward/invoice-payment", "POST", { orgId: ORG, invoiceId, amount: 2 });
+  assert.equal(noMethod.__status, 422, JSON.stringify(noMethod));
+  assert.equal(noMethod.error, "method_required");
+
+  // A method this hospital does not take.
+  const upi = await as(CASHIER, "/ward/invoice-payment", "POST", { orgId: ORG, invoiceId, amount: 2, method: "upi", paymentDetails: { reference: "x" } });
+  assert.equal(upi.__status, 422, JSON.stringify(upi));
+  assert.equal(upi.error, "method_not_accepted");
+
+  // Cash without a counter cannot be reconciled against a drawer.
+  const cashNoCounter = await as(CASHIER, "/ward/invoice-payment", "POST", { orgId: ORG, invoiceId, amount: 2, method: "cash" });
+  assert.equal(cashNoCounter.__status, 422, JSON.stringify(cashNoCounter));
+  assert.deepEqual(cashNoCounter.missing, ["counter"]);
+
+  // A bank transfer without its UTR cannot be matched to a statement.
+  const neftNoUtr = await as(CASHIER, "/ward/invoice-payment", "POST", { orgId: ORG, invoiceId, amount: 2, method: "neft", paymentDetails: { bank: "HDFC" } });
+  assert.equal(neftNoUtr.__status, 422, JSON.stringify(neftNoUtr));
+  assert.deepEqual(neftNoUtr.missing, ["utr"]);
+
+  // A card payment typed from a slip, with a body that TRIES to claim a machine confirmed it.
+  const card = await as(CASHIER, "/ward/invoice-payment", "POST", {
+    orgId: ORG, invoiceId, amount: 3, method: "card",
+    capture: "integrated", settlement: "settled",
+    paymentDetails: { terminal: "T-01", reference: "APPR-8891" },
+  });
+  assert.equal(card.__status, 200, JSON.stringify(card));
+  const receipt = card.receipts[card.receipts.length - 1];
+  assert.ok(receipt, "the payment should produce a receipt");
+  const stored = await RECORD.latest(TENANT_ROW.id, "Invoice", invoiceId);
+  const ev = stored.events[stored.events.length - 1];
+  assert.equal(ev.collection.method, "card");
+  assert.equal(ev.collection.provider, "pinelabs");
+  assert.equal(ev.collection.details.terminal, "T-01");
+  assert.equal(ev.collection.capture, "manual", "a request body must never make typed money read as machine-confirmed");
+  assert.equal(ev.collection.settlement, "unknown", "a card batch is not settled because somebody typed it in");
+
+  // Cash with its counter is recorded, and settles immediately because it is in the drawer.
+  const cash = await as(CASHIER, "/ward/invoice-payment", "POST", { orgId: ORG, invoiceId, amount: 2, method: "cash", paymentDetails: { counter: "front-desk", cashier: "r.k" } });
+  assert.equal(cash.__status, 200, JSON.stringify(cash));
+  const stored2 = await RECORD.latest(TENANT_ROW.id, "Invoice", invoiceId);
+  const cashEv = stored2.events[stored2.events.length - 1];
+  assert.equal(cashEv.collection.method, "cash");
+  assert.equal(cashEv.collection.details.counter, "front-desk");
+  assert.equal(cashEv.collection.settlement, "settled");
+});
+
+test("PAYMENTS: NEGATIVE - a nurse cannot take a payment even with a valid method", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, payment: { methods: [{ method: "cash", counters: ["front-desk"] }] } };
+  const { adm } = await admittedPatientOnAdministeredDrug();
+  const invoiceId = (await as(CASHIER, "/ward/invoice", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId })).invoiceId;
+  const r = await as(NURSE, "/ward/invoice-payment", "POST", { orgId: ORG, invoiceId, amount: 2, method: "cash", paymentDetails: { counter: "front-desk" } });
+  assert.equal(r.__status, 403, JSON.stringify(r));
+});

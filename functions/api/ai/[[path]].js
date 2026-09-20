@@ -112,7 +112,7 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR } from "../../_credits.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
@@ -127,13 +127,16 @@ import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMe
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
+import { findFigures } from "../../_figures.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
-import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
+import { scribeExtractPrompt, sanitizeScribeOutput, parseScribeJson, attachGrounding, mergeScribeDraft, flagContradictions } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
 import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
 import * as icdRepo from "../../_icd_repo.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
+import { quotaOn, quotaKv, consumeScribeSession, quotaRefusal } from "../../_quota.js";
+import { getEntitlement } from "../../_entitlements.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -779,7 +782,12 @@ function renderGroundedPrompt(pkg) {
   // whatever was retrieved and (with a vague follow-up) narrates unrelated retrieved diseases.
   if (pkg.question) L.push("=== CLINICIAN QUESTION (answer THIS specifically and completely) ===\n" + clip(pkg.question, 500) + "\n");
   if (pkg.history && pkg.history.length) {
-    L.push("=== RECENT CONVERSATION (for context/continuity; do not repeat it back) ===");
+    // pkg.newTopic: the client's continuity classifier judged this a NEW question (it names a subject
+    // the thread never mentioned). The turns still travel as background, but the model must not
+    // merge the two conditions ("hematuria in a patient who also has AF" for a bare "Afib ECG").
+    L.push(pkg.newTopic
+      ? "=== RECENT CONVERSATION (background only: the clinician has moved to a NEW question; answer it on its own and do NOT merge it with the earlier condition unless they explicitly link the two) ==="
+      : "=== RECENT CONVERSATION (for context/continuity; do not repeat it back) ===");
     pkg.history.slice(-4).forEach(function (h) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, 300)); });
     L.push("");
   }
@@ -1310,6 +1318,20 @@ export async function onRequest(context) {
     });
   }
   if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
+
+  // Related figures under a MaiK answer (owner, 2026-09-18): a SEARCH step, not a model call.
+  // TinyFish finds trusted pages for the topic, functions/_figures.js picks the figure each page is
+  // built around, and the phone loads that image from the source with the link below it - like a
+  // Google result. Nothing is hosted, cached or regenerated here; zero tokens; [] on any failure.
+  if (seg === "figures") {
+    const fu = new URL(request.url);
+    const fq = String(fu.searchParams.get("q") || "").slice(0, 200);
+    if (!fq || firewallBlock(fq)) return json({ figures: [] });
+    const fdebug = fu.searchParams.get("debug") === "1";   // per-page fetch/pick trace; public pages only
+    let figures = [];
+    try { figures = await findFigures(env, fq, 3, { debug: fdebug }); } catch (e) { figures = []; }
+    return json(fdebug ? { figures: figures, debug: figures._debug || [] } : { figures: figures });
+  }
 
   const _hm = {};   // sub-stage marks inside the "head" region, so its ~1.1s is attributable
   let body = {};
@@ -2021,10 +2043,13 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       // ---- MaiK Scribe policy: cheaper model (env.SCRIBE_MODEL) always; Pro-only + time caps when env.SCRIBE_CAPS="1".
-      // SCRIBE_KINDS values = seconds of dictation charged per call when the client doesn't send body.sec
-      // (the OPD scribe loop refines every refineEveryChunks*chunkMs = 60s; the field mic is a short one-shot).
-      const SCRIBE_KINDS = { assessment: 120, "opd-scribe": 120, translate: 15 };   // seconds charged per call (refine cadence = refineEveryChunks*chunkMs = 120s); field-mic translate is a short one-shot
-      const _isScribe = Object.prototype.hasOwnProperty.call(SCRIBE_KINDS, body.kind);
+      // How many dictation seconds ONE call charges now lives in _ai_usage.js scribeChargeSec:
+      // body.sec (seconds of NEW audio since this caller's previous charged call, clamped to 300)
+      // when the client sends it, else a per-kind floor that can only under-charge. It used to be a
+      // flat 120s per call -- a constant calibrated to a refine cadence the client no longer uses,
+      // which charged a 10-minute consult ~1680s of the 1800s daily budget and then stopped the
+      // recording mid-consultation.
+      const _isScribe = isScribeKind(body.kind);
       const _scribeOpts = (_isScribe && scribeModel(env)) ? { model: scribeModel(env) } : undefined;
       let _scribeStore = null, _scribeUid = null;
       if (_isScribe && String(env && env.SCRIBE_CAPS) === "1") {
@@ -2038,8 +2063,22 @@ export async function onRequest(context) {
             message: tb.reason === "scribe-weekly" ? "You've reached this week's MaiK Scribe limit (1 hour/week)." : "You've reached today's MaiK Scribe limit (30 minutes/day)." }, 429);
         }
       }
-      // charge this call's dictation seconds (body.sec if the client sends real elapsed, else the per-kind estimate)
-      const _chargeScribe = () => addScribeTime(_scribeStore, _scribeUid, Number(body.sec) > 0 ? Math.min(Number(body.sec), 300) : SCRIBE_KINDS[body.kind], Date.now());
+
+      // ---- Per-consult Scribe quota (flag QUOTA_METERS_ON). Independent of SCRIBE_CAPS above: that one
+      // caps dictation TIME, this one meters CONSULTS against the monthly allowance + purchased packs.
+      if (_isScribe && quotaOn(env)) {
+        let _qUid = _scribeUid, _qRole = null, _qSkip = false;
+        if (!_qUid) { try { const pr = await proFromRequest(env, request); _qUid = pr.uid || null; } catch (e) { _qSkip = true; } }
+        if (!_qSkip && _qUid) {
+          try { const ent = await getEntitlement(env, _qUid); _qRole = ent && ent.role; } catch (e) { _qSkip = true; }   // fail-open
+          if (!_qSkip) {
+            const qr = await consumeScribeSession(env, quotaKv(env), _qUid, { role: _qRole, session: body.sessionId || body.session || null });
+            if (!qr.ok) return json(quotaRefusal(env, "scribe"), 402);
+          }
+        }
+      }
+      // charge this call's dictation seconds (see scribeChargeSec: the body.sec delta when sent, else the floor)
+      const _chargeScribe = () => addScribeTime(_scribeStore, _scribeUid, scribeChargeSec(body.kind, body.sec), Date.now());
       if (body.kind === "reasoning") {
         const catalog = Array.isArray(body.catalog) ? body.catalog.slice(0, 500) : [];
         const prompt = reasoningExtractPrompt(transcript, catalog).slice(0, MAX_IN_CHARS + 12000);
@@ -2078,13 +2117,57 @@ export async function onRequest(context) {
         // Vitals + exam are handled deterministically on-device (never the LLM). Output is
         // whitelisted to narrative fields + three suggestion arrays, so no invented diagnosis,
         // symptom, finding, dose, vital or investigation can reach the app.
-        const prompt = scribeExtractPrompt(transcript);
+        // specialtyPrompt: an already-resolved block of extra instruction lines for a specialty
+        // template (the template registry mapping body.specialty -> this text lives elsewhere);
+        // capped defensively since it comes from the request body.
+        const specialtyPrompt = typeof body.specialtyPrompt === "string" ? body.specialtyPrompt.slice(0, 4000) : "";
+        // DELTA mode (body.delta + body.priorDraft): `transcript` is only the speech since the last
+        // call whose result the client actually applied, and priorDraft is the note built from the
+        // earlier speech. Cost then scales with consult length instead of its SQUARE. The prior draft
+        // arrives in the REQUEST BODY, so it goes through the same whitelist+cap as a model reply
+        // before it is ever put in a prompt. The client's FINAL (Pause/Stop) refine never sets this:
+        // that one still re-reads the whole transcript with no prior draft, and stays authoritative.
+        const _prior = body.delta ? sanitizeScribeOutput({
+          emrFields: (body.priorDraft && body.priorDraft.emrFields) || body.priorDraft || {},
+          suggestions: (body.priorDraft && body.priorDraft.suggestions) || {},
+        }) : null;
+        const _isDelta = !!(_prior && Object.keys(_prior.emrFields).length);
+        const prompt = scribeExtractPrompt(transcript, (specialtyPrompt || _isDelta) ? { specialtyPrompt, priorDraft: _isDelta ? _prior : null } : undefined);
+        // OUT_BASE (1100) is calibrated for a CHAT answer. This reply is not one: it must carry a
+        // faithful English translation of the WHOLE transcript ("en", ~1 token per 4 transcript
+        // chars), PLUS every emrFields value, PLUS a verbatim source sentence for each populated
+        // field, PLUS the suggestion lists. A 10-minute consult overran 1100 on "en" alone, the
+        // reply was cut mid-token, and the whole EMR extraction was lost. maxOutputTokens is a
+        // CEILING, not a spend -- a reply that already fitted costs exactly what it cost before.
+        // Sized against the hard input cap (MAX_IN_CHARS chars -> "en" and the quoted sources are
+        // both bounded by it). Tune with SCRIBE_MAX_OUTPUT_TOKENS.
+        const SCRIBE_OUT = Math.max(OUT_BASE, Math.min(8192, Number(env.SCRIBE_MAX_OUTPUT_TOKENS) || 6000));
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
+        try { text = await callGemini(env, [{ text: prompt }], SCRIBE_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         await _chargeScribe();
-        const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
+        // Truncation-tolerant parse (keeps the completed fields instead of returning nothing), then
+        // the grounding pass the client's "not found in the recording" badge depends on. Grounding
+        // is withheld whenever it would be incomplete -- see attachGrounding. SCRIBE_GROUND="0"
+        // (default ON) turns the whole signal off without touching the prompt.
+        const _parsed = parseScribeJson(text);
+        const _truncated = _parsed.truncated || /MAX_TOKENS/i.test((_lastGenMeta && _lastGenMeta.finishReason) || "");
+        const _out = sanitizeScribeOutput(_parsed.parsed);
+        if (_isDelta) {
+          // Merge the delta into the running draft and return the WHOLE merged draft (same JSON
+          // shape), so the client applies it exactly as it applies a full refine. `en` is the delta's
+          // translation only -- the client accumulates it. Grounding is withheld: a sources map
+          // covering only the new speech would badge every earlier field as unsupported.
+          const contradictions = flagContradictions(transcript, _prior);
+          const merged = mergeScribeDraft(_prior, _out, { contradictions });
+          if (contradictions.length) merged.contradictions = contradictions;
+          return json({ kind: "opd-scribe", ...attachGrounding(transcript, merged, { truncated: _truncated, disabled: true }), mode: "opd-scribe", delta: true });
+        }
+        const sanitized = attachGrounding(transcript, _out, {
+          truncated: _truncated,
+          disabled: String(env && env.SCRIBE_GROUND) === "0",
+        });
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
       }
       if (body.kind === "surgx-note") {

@@ -42,10 +42,12 @@ import {
   getVersion,
   insertVersion,
   casVersionLifecycle,
+  listVersionsByLifecycle,
   findVersionByLifecycle,
   insertSession,
   getSessionRow,
   findLiveSession,
+  listLiveSessions,
   findLatestSessionForDeployment,
   casSession,
   sessionView,
@@ -53,6 +55,7 @@ import {
   findJobForSession,
   findJobByCandidateVersion,
   casJob,
+  casDeploymentActiveVersion,
   getActiveActivation,
   revokeSessionViewerTokens,
   newId,
@@ -70,8 +73,47 @@ import {
   templatePlaceholders,
 } from "../../../../connect-agent/manifest/schema.mjs";
 import { inferHtmlOperations } from "../../../../connect-agent/manifest/infer-html.mjs";
+import { askBrain, brainModel, ROLES as BRAIN_ROLES } from "../../../_connect/agent/brain.js";
+import { loginRun, logoutRun, statusRun, dataRun, RESOURCES } from "../../../_connect/agent/dispatcher.js";
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
+
+/* A manifest id the manifest schema will actually accept: lower-case [a-z0-9._-], 64 characters at
+ * most (MANIFEST_ID_RE, connect-agent/manifest/schema.mjs). The ids here are `dep_<uuid>` and
+ * `job_<uuid>`, so prefixes and dashes are dropped and the first 12 hex characters of each are kept:
+ * 34 characters, unique per deployment and job, and both are still readable to a reviewer. */
+/* HOW MANY CANDIDATES ONE HOSPITAL MAY HOLD AT ONCE.
+ *
+ * Re-running discovery is normal: a doctor signs in again, shows the agent a view it missed, and a
+ * fresh candidate appears. Only one of them can ever become the connection, so the rest are noise -
+ * and left alone they accumulate as decisions nobody will be asked to make. Owner rule (2026-09-12):
+ * keep the three newest, discard the rest, and when one is approved discard every other candidate
+ * for that deployment. Three is enough to compare a retry against what came before; more is a
+ * queue of stale drafts. Discarded means REVOKED: nothing is deleted and the audit trail stands. */
+export const CANDIDATE_LIMIT = 3;
+
+/** Revoke every AWAITING_APPROVAL candidate of a deployment except the ones named in `keepIds`. */
+async function discardOtherCandidates(db, tenantId, deploymentId, keepIds, reason) {
+  const keep = new Set((keepIds || []).filter(Boolean));
+  const all = await listVersionsByLifecycle(db, tenantId, deploymentId, "AWAITING_APPROVAL");
+  const discarded = [];
+  for (const v of all) {
+    if (keep.has(v.id)) continue;
+    try {
+      await casVersionLifecycle(db, tenantId, v.id, "AWAITING_APPROVAL", {
+        lifecycle: "REVOKED",
+        policy_version: "discarded:" + String(reason || "superseded").slice(0, 100),
+      });
+      discarded.push(v.id);
+    } catch { /* a candidate someone else just decided on: leave it as they left it */ }
+  }
+  return discarded;
+}
+
+export function manifestIdFor(deploymentId, jobId) {
+  const short = (id) => String(id || "").toLowerCase().replace(/^(dep|job)_/, "").replace(/[^a-z0-9]/g, "").slice(0, 12) || "unknown";
+  return `manifest-${short(deploymentId)}-${short(jobId)}`;
+}
 
 const STATUS = (e) =>
   e instanceof OnboardError
@@ -108,8 +150,55 @@ function hasCredentials(body) {
   return false;
 }
 
+// A crawler view's pathTemplate is a full URL; infer-html reduces it to a path. Same reduction here so a
+// repaired view can be matched to the operation it produced.
+function toRepairPath(p) { try { return new URL(String(p)).pathname || "/"; } catch { return String(p || "/").split("?")[0]; } }
+
+/* An identifier inside a captured page path is not structure. Older phones stored a labs page as
+ * /LabResults/Home?recordNo=<MRN>; the value becomes {id} on the way in and on the way out. */
+export function redactPathValues(p) {
+  return String(p || "").replace(/=([A-Za-z]{0,6}\d{3,}[A-Za-z0-9-]*)(?=&|$)/g, "={id}");
+}
+
 function safeJsonParse(text) {
   try { return JSON.parse(text); } catch { return null; }
+}
+
+const PARAM_NAME = /^[^@]{1,80}$/;
+const TODAY_FORMATS = ["DD-MM-YYYY", "DD/MM/YYYY", "YYYY-MM-DD", "MM/DD/YYYY", "DD-Mon-YYYY"];
+function fieldNameOk(s) { return typeof s === "string" && PARAM_NAME.test(s) && !/\d{3,}/.test(s); }
+// A proven endpoint's field sources (prove.mjs paramsOf): each names a source, never carries a value
+// beyond a short letters-only mode constant.
+function cleanProvenParams(raw) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw) || Object.keys(raw).length > 40) throw new OnboardError("invalid", "observedViews: endpoint params invalid");
+  const out = {};
+  for (const k of Object.keys(raw)) {
+    const s = raw[k];
+    if (!fieldNameOk(k) || k.length > 60 || !s || typeof s !== "object" || Array.isArray(s)) throw new OnboardError("invalid", "observedViews: endpoint params invalid");
+    if (s.token === true) out[k] = { token: true };
+    else if (s.empty === true) out[k] = { empty: true };
+    else if (s.unmapped === true) out[k] = { unmapped: true };
+    else if (["size", "start", "number"].indexOf(s.page) >= 0) out[k] = { page: s.page };
+    else if (TODAY_FORMATS.indexOf(s.today) >= 0) out[k] = { today: s.today };
+    else if (typeof s.constant === "string" && /^[A-Za-z0-9_][A-Za-z0-9_ .-]{0,31}$/.test(s.constant) && !/\d{3,}/.test(s.constant)) out[k] = { constant: s.constant };
+    else if (typeof s.from === "string" && /^[a-z-]{1,32}$/.test(s.from) && fieldNameOk(s.field)) out[k] = { from: s.from, field: s.field };
+    else if (typeof s.from === "string" && /^[a-z-]{1,32}$/.test(s.from) && Array.isArray(s.fields) && s.fields.length === 2 && s.fields.every(fieldNameOk) && /^[-_/|]$/.test(s.join)) out[k] = { from: s.from, fields: s.fields.slice(), join: s.join };
+    else throw new OnboardError("invalid", "observedViews: endpoint params invalid");
+  }
+  return out;
+}
+function cleanProofCounts(raw, kinds, name) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new OnboardError("invalid", "observedViews: " + name + " invalid");
+  const out = {};
+  if (raw.kind !== undefined) { if (kinds.indexOf(raw.kind) < 0) throw new OnboardError("invalid", "observedViews: " + name + " kind invalid"); out.kind = raw.kind; }
+  // `population`: how many rows the SAVED (widened) list request returned, so a subset is visible later.
+  for (const k of ["hits", "cells", "rows", "population"]) {
+    if (raw[k] === undefined) continue;
+    if (!Number.isInteger(raw[k]) || raw[k] < 0 || raw[k] > 100000) throw new OnboardError("invalid", "observedViews: " + name + " " + k + " invalid");
+    out[k] = raw[k];
+  }
+  if (raw.overlap !== undefined) { if (typeof raw.overlap !== "number" || !(raw.overlap >= 0 && raw.overlap <= 1)) throw new OnboardError("invalid", "observedViews: " + name + " overlap invalid"); out.overlap = raw.overlap; }
+  return out;
 }
 
 // Validates+strips body.observedViews (crawler-observed server-rendered views) for inferHtmlOperations.
@@ -126,7 +215,7 @@ function cleanObservedViews(raw) {
     if (!Array.isArray(v.headers) || v.headers.length > 24 || v.headers.some((h) => typeof h !== "string" || h.length > 120)) {
       throw new OnboardError("invalid", "observedViews: headers invalid");
     }
-    const clean = { resourceHint: v.resourceHint, pathTemplate: v.pathTemplate, headers: v.headers.slice() };
+    const clean = { resourceHint: v.resourceHint, pathTemplate: redactPathValues(v.pathTemplate), headers: v.headers.slice() };
     if (v.rowsSelector !== undefined) {
       if (typeof v.rowsSelector !== "string" || v.rowsSelector.length > 200) throw new OnboardError("invalid", "observedViews: rowsSelector invalid");
       clean.rowsSelector = v.rowsSelector;
@@ -161,13 +250,98 @@ function cleanObservedViews(raw) {
         if (!e || typeof e !== "object" || (e.method !== "GET" && e.method !== "POST") || typeof e.path !== "string" || e.path.length > 512 || /\d{3,}/.test(e.path)) {
           throw new OnboardError("invalid", "observedViews: endpoint invalid");
         }
-        return { method: e.method, path: e.path };
+        const cleanEndpoint = { method: e.method, path: e.path };
+        // Request FIELD NAMES only (never values), for the phone runtime to replay a POST inside the
+        // doctor's authenticated session (e.g. GHIS's __RequestVerificationToken + recordNo).
+        if (e.bodyKeys !== undefined) {
+          if (!Array.isArray(e.bodyKeys) || e.bodyKeys.length > 40 || e.bodyKeys.some((k) => typeof k !== "string" || k.length > 60 || /\d{3,}/.test(k) || k.indexOf("@") >= 0)) {
+            throw new OnboardError("invalid", "observedViews: endpoint bodyKeys invalid");
+          }
+          cleanEndpoint.bodyKeys = e.bodyKeys.slice();
+        }
+        if (e.requestKind !== undefined) {
+          if (e.requestKind !== "form" && e.requestKind !== "json" && e.requestKind !== "multipart" && e.requestKind !== "other") {
+            throw new OnboardError("invalid", "observedViews: endpoint requestKind invalid");
+          }
+          cleanEndpoint.requestKind = e.requestKind;
+        }
+        if (e.xhr !== undefined) {
+          if (typeof e.xhr !== "boolean") throw new OnboardError("invalid", "observedViews: endpoint xhr invalid");
+          cleanEndpoint.xhr = e.xhr;
+        }
+        if (e.contentType !== undefined) {
+          if (typeof e.contentType !== "string" || e.contentType.length > 60) throw new OnboardError("invalid", "observedViews: endpoint contentType invalid");
+          cleanEndpoint.contentType = e.contentType;
+        }
+        // Proven on the phone (connect-agent/phone/prove.mjs): its role, where each field's value comes
+        // from (names only) and the match counts. Never a value.
+        if (e.role !== undefined) {
+          if (e.role !== "data" && e.role !== "prerequisite") throw new OnboardError("invalid", "observedViews: endpoint role invalid");
+          cleanEndpoint.role = e.role;
+        }
+        if (e.params !== undefined) cleanEndpoint.params = cleanProvenParams(e.params);
+        if (e.proof !== undefined) cleanEndpoint.proof = cleanProofCounts(e.proof, ["json", "html", "fired-before"], "endpoint proof");
+        return cleanEndpoint;
       });
     }
     // Guided step: the doctor showed the agent where this lives; the tap path is the replay pattern.
     if (v.guided !== undefined) {
       if (typeof v.guided !== "boolean") throw new OnboardError("invalid", "observedViews: guided invalid");
       clean.guided = v.guided;
+    }
+    // The brain's column roles (advisory; infer-html uses one only where its own rules found nothing).
+    if (v.fieldHints !== undefined) {
+      if (!v.fieldHints || typeof v.fieldHints !== "object" || Array.isArray(v.fieldHints)) throw new OnboardError("invalid", "observedViews: fieldHints invalid");
+      const fh = {};
+      for (const k of Object.keys(v.fieldHints)) {
+        if (typeof k !== "string" || k.length > 120 || BRAIN_ROLES.indexOf(v.fieldHints[k]) < 0) throw new OnboardError("invalid", "observedViews: fieldHints invalid");
+        if (clean.headers.indexOf(k) >= 0) fh[k] = v.fieldHints[k];
+      }
+      clean.fieldHints = fh;
+    }
+    /* Learned on the phone by value equality against the screen (prove.mjs learnColumns): which
+     * response field each header shows, or two fields and the joiner between them. Names only; a
+     * name with an identifier-shaped digit run or an @ is refused, never stored. */
+    if (v.columns !== undefined) {
+      if (!v.columns || typeof v.columns !== "object" || Array.isArray(v.columns)) throw new OnboardError("invalid", "observedViews: columns invalid");
+      const nameOk = (s) => typeof s === "string" && s.length > 0 && s.length <= 80 && !/\d{3,}/.test(s) && s.indexOf("@") < 0;
+      const cols = {};
+      for (const h of Object.keys(v.columns)) {
+        if (clean.headers.indexOf(h) < 0) continue;
+        const c = v.columns[h];
+        if (!c || typeof c !== "object" || Array.isArray(c)) throw new OnboardError("invalid", "observedViews: columns invalid");
+        if (c.key !== undefined) {
+          if (!nameOk(c.key)) throw new OnboardError("invalid", "observedViews: columns key invalid");
+          cols[h] = { key: c.key };
+        } else if (Array.isArray(c.keys) && c.keys.length === 2 && c.keys.every(nameOk)) {
+          const join = typeof c.join === "string" && c.join.length <= 8 && !/\d/.test(c.join) ? c.join : " ";
+          cols[h] = { keys: c.keys.slice(), join };
+        } else throw new OnboardError("invalid", "observedViews: columns entry invalid");
+      }
+      if (Object.keys(cols).length) clean.columns = cols;
+    }
+    if (v.detailOf !== undefined) {
+      if (typeof v.detailOf !== "string" || v.detailOf.length > 32) throw new OnboardError("invalid", "observedViews: detailOf invalid");
+      clean.detailOf = v.detailOf;
+    }
+    // What the agent proved before asking for approval: counts and kinds only, never a value.
+    if (v.verified !== undefined) {
+      const w = v.verified;
+      if (!w || typeof w !== "object" || Array.isArray(w) || typeof w.ok !== "boolean") throw new OnboardError("invalid", "observedViews: verified invalid");
+      const ver = { ok: w.ok, via: ["endpoint", "page", "none"].indexOf(w.via) >= 0 ? w.via : "none", rows: Number.isInteger(w.rows) && w.rows >= 0 ? Math.min(w.rows, 100000) : 0 };
+      if (typeof w.kind === "string" && w.kind.length <= 16) ver.kind = w.kind;
+      if (typeof w.reason === "string") { if (/\d{3,}/.test(w.reason) || w.reason.indexOf("@") >= 0) throw new OnboardError("invalid", "observedViews: verified reason invalid"); ver.reason = w.reason.slice(0, 200); }
+      if (typeof w.resourceSeen === "string" && w.resourceSeen.length <= 32) ver.resourceSeen = w.resourceSeen;
+      clean.verified = ver;
+    }
+    if (v.proof !== undefined) {
+      const p = cleanProofCounts(v.proof, ["json", "html"], "proof");
+      if (["proven", "unproven", "no-requests", "no-screen-values", "signed-out", "error", "no-headers", "no-rows"].indexOf(v.proof.status) < 0) throw new OnboardError("invalid", "observedViews: proof status invalid");
+      p.status = v.proof.status;
+      if (v.proof.tried !== undefined) { if (!Number.isInteger(v.proof.tried) || v.proof.tried < 0 || v.proof.tried > 50) throw new OnboardError("invalid", "observedViews: proof tried invalid"); p.tried = v.proof.tried; }
+      if (v.proof.brain !== undefined) { if (typeof v.proof.brain !== "boolean") throw new OnboardError("invalid", "observedViews: proof brain invalid"); p.brain = v.proof.brain; }
+      if (v.proof.model !== undefined && v.proof.model !== null) { if (typeof v.proof.model !== "string" || !/^[\w.:\/-]{1,80}$/.test(v.proof.model)) throw new OnboardError("invalid", "observedViews: proof model invalid"); p.model = v.proof.model; }
+      clean.proof = p;
     }
     if (v.guidedPath !== undefined) {
       if (!Array.isArray(v.guidedPath) || v.guidedPath.length > 20 || v.guidedPath.some((s) => typeof s !== "string" || s.length > 120 || /\d{3,}/.test(s))) {
@@ -177,6 +351,83 @@ function cleanObservedViews(raw) {
     }
     return clean;
   });
+}
+
+/* The phone's proof trace (connect-agent/phone/prove.mjs createProofBook): per screen, which requests
+ * were replayed and how many on-screen values each carried. Without it a failed screen is a bare
+ * "no-requests" and the next run is a guess (adapter ver_b16da370, 2026-09-15). Method, redacted path,
+ * role, kind and counts only; an attempt whose path still carries an identifier is dropped. */
+function cleanProofTrace(raw) {
+  if (!Array.isArray(raw)) return [];
+  const num = (x) => (Number.isFinite(Number(x)) ? Math.max(0, Math.min(100000, Math.round(Number(x)))) : 0);
+  const word = (x) => (typeof x === "string" && /^[A-Za-z-]{1,32}$/.test(x) ? x : "");
+  return raw.slice(0, 60).filter((t) => t && typeof t === "object" && !Array.isArray(t)).map((t) => ({
+    resource: word(t.resource),
+    status: word(t.status),
+    tried: num(t.tried),
+    attempts: (Array.isArray(t.attempts) ? t.attempts : []).slice(0, 12)
+      .filter((a) => a && typeof a.path === "string" && a.path.length <= 256 && !/\d{3,}/.test(a.path) && a.path.indexOf("@") < 0)
+      .map((a) => ({
+        method: a.method === "POST" ? "POST" : "GET",
+        path: a.path,
+        role: word(a.role),
+        kind: word(a.kind),
+        hits: num(a.hits),
+        ratio: Math.max(0, Math.min(1, Number(a.ratio) || 0)),
+      })),
+  }));
+}
+
+/* ENDPOINT-COMPLETE OR NOT COMPLETE (owner, 2026-09-16). Every routine clinical resource must be a
+ * proven backend request; a resource read only by scraping a page, or not read at all, means the
+ * adapter is not done. History rides OPD-side and never gates (the hand-built adapter reads it there). */
+const REQUIRED_RESOURCES = ["worklist", "medications", "labs", "labs-detail", "radiology", "radiology-detail"];
+function adapterCompleteness(observedViews) {
+  const views = Array.isArray(observedViews) ? observedViews : [];
+  /* A DATA CALL THAT LOST THE PATIENT IS NOT ENDPOINT-BACKED. A patient-keyed field saved `empty`
+   * replays with nothing in it, so the request stops being about this patient and whatever the
+   * hospital answers for everyone lands in one chart. `unmapped` is not the same thing: the runtime
+   * never sends that blank -- adapter-runtime.mjs provenValue() falls back to idCandidates(key,
+   * patient)[0] for a patient/visit key (ver_05ce2f04: recordNo -> patientId, exactly the hand-built's
+   * /Radio/Home?recordNo=${patientId}), and unscopedField() refuses at send time if it would still be
+   * blank. Only {empty:true} replays unscoped. A {constant} is not scoped either (GHIS ver_b27ed367,
+   * 2026-09-17): a page-side JS bug recorded ?id=undefined as a "mode" value, proof matched it once, and
+   * provenValue would then send that same literal id=undefined for every patient forever -- the same
+   * wrong chart in every read, not a blank one. The worklist is exempt: it is not patient-scoped, and
+   * its filters are proven empty on purpose (Task 2c). */
+  const PATIENT_ISH = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$|visit|episode|encounter|admission|ip(no|number)/i;
+  const scoped = (v) => (v.endpoints || []).every((e) => {
+    if (!e || e.role !== "data") return true;
+    const p = e.params || {};
+    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && (p[k].empty === true || p[k].constant !== undefined));
+  });
+  const scopedFor = (res, v) => res === "worklist" || scoped(v);
+  const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(res, v));
+  /* A LIST THAT ALREADY CARRIES THE RESULTS NEEDS NO SEPARATE DETAIL CALL (owner, 2026-09-16; GHIS
+   * ver_05ce2f04: OTLabPrints IS the results, so demanding a second labs-detail endpoint is a false
+   * requirement). A "-detail" resource is satisfied "inline" when its parent's own proven view already
+   * carries result-shaped columns -- never marked "endpoint" (no detail request was proven), and never
+   * pushed to `missing`. */
+  const RESULT_SHAPED = /result|value|unit|range|\blow\b|\bhigh\b/i;
+  const inlineDetail = (res) => {
+    const m = /^(.+)-detail$/.exec(res);
+    if (!m) return false;
+    const parent = m[1];
+    return views.some((v) => v && v.resourceHint === parent && v.proof && v.proof.status === "proven" &&
+      Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(parent, v) &&
+      Array.isArray(v.headers) && v.headers.some((h) => RESULT_SHAPED.test(String(h || ""))));
+  };
+  const how = {};
+  const missing = [];
+  for (const res of REQUIRED_RESOURCES) {
+    if (provenEndpoint(res)) how[res] = "endpoint";
+    else if (inlineDetail(res)) how[res] = "inline";
+    else {
+      how[res] = views.some((v) => v && v.resourceHint === res && !scopedFor(res, v)) ? "unscoped" : "absent";
+      missing.push(res);
+    }
+  }
+  return { how, endpointComplete: missing.length === 0, missing };
 }
 
 // A discovery-spec event's redacted path (connect-agent/discovery.mjs's redactPath) always writes the
@@ -321,6 +572,29 @@ export async function onRequest(context) {
       const mine = (await listMyTenants(deps, request, env)).filter((t) => canAgent(t.role, "read"));
       return jsonResponse({ ok: true, tenants: mine.map((t) => ({ tenantId: t.tenantId, name: t.name || null, role: t.role })) });
     }
+    // POST /brain/classify | /brain/map-columns | /brain/next -- the model that reads screen STRUCTURE.
+    // PHI gate first (400 with the reason, nothing sent), then a per-origin cache, then the model.
+    // A model failure is 503 brain_unavailable: the phone falls back to its deterministic rules.
+    // GET /brain/model -- which model the Connect Agent brain is configured to use (no key, no fallback).
+    if (method === "GET" && seg === "brain/model") {
+      await requireAgent(deps, request, env, tid, "read");
+      try { const m = brainModel(env); return jsonResponse({ ok: true, provider: m.provider, model: m.model }); }
+      catch (e) { return jsonResponse({ ok: false, error: "brain_not_configured", detail: String(e.message || e) }, { status: 503 }); }
+    }
+    if (method === "POST" && parts.length === 2 && parts[0] === "brain") {
+      await requireAgent(deps, request, env, tid, "session");
+      if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
+      const { tenantId: _t, ...payload } = body;
+      payload.op = parts[1];
+      let out;
+      try {
+        out = await askBrain({ env, kv: deps.kv, fetchImpl: deps.fetch, generateImpl: env.brainGenerate, payload });
+      } catch (e) {
+        return jsonResponse({ ok: false, error: "brain_unavailable", detail: String((e && e.message) || e).slice(0, 300) }, { status: 503 });
+      }
+      if (!out.ok) throw new OnboardError("invalid", "refused by the PHI gate: " + out.refused);
+      return jsonResponse(Object.assign({ ok: true, cached: out.cached, model: out.model }, out.answer));
+    }
     // POST /sessions -- validate actor/tenant via identify()+RBAC, consent, create job/session
     if (method === "POST" && seg === "sessions") {
       if (!browserSessionFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
@@ -380,6 +654,24 @@ export async function onRequest(context) {
       // Reconnect/backgrounding resumption
       let session = await findLiveSession(deps.db, tenantId, actor.id, deployment.id, SESSION_LIVE, nowMs);
       let job = session ? await findJobForSession(deps.db, tenantId, session.id) : null;
+      /* DISCOVER AGAIN. A hospital that already has an approved adapter can be discovered afresh (a
+       * better adapter, an EMR that changed): the doctor asks with purpose:"discover". An onboarding
+       * run already in flight on this session is resumed; otherwise a new session and job start, and
+       * the approved adapter keeps serving Ward Sync until the new draft is approved over it. */
+      const discover = body.purpose === "discover";
+      const ONBOARDING = ["CREATED", "AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING"];
+      // A phone session whose run already FINISHED is never resumed: a new connect attempt landed on the
+      // old draft's result behind the browser, with Done and sign-in detection dead (owner, 2026-09-13).
+      if (runnerPhone && session && job && !ONBOARDING.includes(job.state)) { session = null; job = null; }
+      if (discover) {
+        // Any live session of this doctor with a run still onboarding is the one to resume; the newest
+        // live session may be a Ward Sync read with no job at all.
+        session = null; job = null;
+        for (const s of await listLiveSessions(deps.db, tenantId, actor.id, deployment.id, SESSION_LIVE, nowMs)) {
+          const j = await findJobForSession(deps.db, tenantId, s.id);
+          if (j && ONBOARDING.includes(j.state)) { session = s; job = j; break; }
+        }
+      }
       if (!session) {
         const sessionId = newId("ses_");
         const sessionTtl = Number(body.ttlMs) > 0 ? Number(body.ttlMs) : 3600000;
@@ -398,7 +690,7 @@ export async function onRequest(context) {
         // Phone runner reuse: the deployment already has a live, approved adapter -- this session is for
         // reauth/use of that adapter, not for onboarding a new one, so no job is created at all. The
         // existing Camofox path (runner absent) is unchanged: it always onboards, active version or not.
-        if (!(runnerPhone && deployment.active_version_id)) {
+        if (!(runnerPhone && deployment.active_version_id) || discover) {
           const jobId = newId("job_");
           job = await insertJob(deps.db, {
             id: jobId,
@@ -416,7 +708,12 @@ export async function onRequest(context) {
       const sessionResp = Object.assign({ ok: true }, sessionView(session, job));
       if (runnerPhone) {
         sessionResp.deployment = { id: deployment.id, origins: deploymentOrigins(deployment), activeVersionId: deployment.active_version_id || null };
-        sessionResp.reuse = !job && !!deployment.active_version_id;
+        /* REUSE IS ABOUT THE ADAPTER, NOT ABOUT A LEFTOVER JOB. When an approved adapter is active,
+         * every phone session reuses it unless the doctor explicitly requested purpose: "discover"
+         * or a live onboarding job is actively running that this session needs to resume.
+         * Stale draft jobs from completed onboarding must never force a doctor into a 5-10 minute crawl. */
+        const jobBusy = !!job && ["CREATED", "AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING"].includes(job.state);
+        sessionResp.reuse = !!deployment.active_version_id && !discover && (body.purpose === "read" || !jobBusy);
       }
       return jsonResponse(sessionResp);
     }
@@ -702,6 +999,7 @@ export async function onRequest(context) {
       const spec = body.spec;
       if (!spec || typeof spec !== "object" || Array.isArray(spec)) throw new OnboardError("invalid", "spec required");
       const observedViews = cleanObservedViews(body.observedViews);
+      const proofTrace = cleanProofTrace(body.proofs);
 
       let job = await findJobForSession(deps.db, tid, sessionId);
       if (!job) throw new OnboardError("not-found", "job not found");
@@ -721,12 +1019,20 @@ export async function onRequest(context) {
       let manifest;
       try {
         const compiled = await compileManifest(spec, {
-          manifestId: `manifest-${deployment.id}-${job.id}`,
+          /* THE ID THAT FAILED EVERY REAL HOSPITAL. `manifest-<deployment>-<job>` with two prefixed
+           * UUIDs is 90 characters; MANIFEST_ID_RE caps a manifestId at 64, so validateManifest
+           * rejected it and compileManifest threw for EVERY discovery that ever reached this line.
+           * The fixtures passed because their ids are short ("dep-1", "job-1"). A doctor's crawl of
+           * 21 pages died here with "spec could not be compiled" (device, 2026-09-12). Twelve hex
+           * characters of each id keep it unique and readable inside the cap. */
+          manifestId: manifestIdFor(deployment.id, job.id),
           timezone: (env && env.CONNECT_AGENT_MANIFEST_TIMEZONE) || "Asia/Kolkata",
         });
         manifest = compiled.manifest;
       } catch (e) {
-        throw new OnboardError("invalid", "spec could not be compiled");
+        // Keep the compiler's own reason: without it a failed compile is indistinguishable from a
+        // network error, and the crawl that produced the spec is thrown away with nothing to fix.
+        throw new OnboardError("invalid", "spec could not be compiled: " + String((e && e.message) || e).slice(0, 200));
       }
 
       // HTML-operation inference: merge crawler-observed views into the compiled manifest so a phone that
@@ -797,11 +1103,28 @@ export async function onRequest(context) {
 
       // observedViews are kept on the job (PHI-free structure: selectors, labels, redacted endpoints and
       // the doctor's guided tap paths) as the replay pattern for the phone-side runtime.
+      /* WHO ASKED FOR THIS CONNECTION, kept with the candidate it produced.
+       *
+       * The approval screen named the hospital and nothing else, which is the one fact the owner
+       * already knows: they are looking at their own hospital's queue. What they cannot see is WHICH
+       * doctor signed in and ran the agent, and that is the whole basis for trusting the request
+       * (owner, 2026-09-12). The email is the VERIFIED one from identify(), never a body value, and
+       * it names a colleague rather than a patient: no PHI. Session rows keep only a pseudonymous
+       * actor id, so this is where the human-readable fact can live without a schema change. */
+      let requestedBy = null;
+      try {
+        const who = await deps.identifyFn(request, env);
+        requestedBy = who && who.email ? String(who.email).toLowerCase() : null;
+      } catch { /* identity is already proven by requireAgent above; this is only the label */ }
+
       const phoneState = {
         manifest, probes,
         offlineValidation,
+        requestedBy,
+        requestedAt: nowIso(),
         observedEvents: (Array.isArray(spec.events) ? spec.events : []).slice(0, 200),
         observedViews,
+        proofTrace,
       };
       job = await casJob(deps.db, tid, job.id, job.revision, { phone_state: JSON.stringify(phoneState) });
 
@@ -884,6 +1207,15 @@ export async function onRequest(context) {
         version = await casVersionLifecycle(deps.db, tid, version.id, "CREATED", { lifecycle: "VALIDATING" });
         assertTransition("adapter", "VALIDATING", "AWAITING_APPROVAL");
         version = await casVersionLifecycle(deps.db, tid, version.id, "VALIDATING", { lifecycle: "AWAITING_APPROVAL" });
+        /* A retry ADDS a candidate rather than replacing one, so hold the newest CANDIDATE_LIMIT and
+         * discard anything older: an owner should never face a queue of stale drafts of the same
+         * connection. The candidate just built is always among those kept. */
+        const holding = await listVersionsByLifecycle(deps.db, tid, version.deployment_id, "AWAITING_APPROVAL");
+        if (holding.length > CANDIDATE_LIMIT) {
+          const keep = holding.slice(0, CANDIDATE_LIMIT).map((v) => v.id);
+          if (keep.indexOf(version.id) < 0) { keep.pop(); keep.push(version.id); }
+          await discardOtherCandidates(deps.db, tid, version.deployment_id, keep, "older than the newest " + CANDIDATE_LIMIT);
+        }
         versionState = version.lifecycle;
       } else {
         const version = await getVersion(deps.db, tid, candidateVersionId);
@@ -913,10 +1245,35 @@ export async function onRequest(context) {
           method: op.method, pathTemplate: op.pathTemplate,
         }));
       }
+      /* WHAT THE OWNER NEEDS TO JUDGE THIS, not just accept or reject it blind.
+       *
+       * The detail carried the operations and a hash. An owner asked, reasonably, how they were
+       * meant to decide: who requested it, what the agent actually saw, and whether it will work
+       * (2026-09-12). All of it already exists on the job; none of it is PHI - view labels, column
+       * headers, paths and probe outcomes, never a patient's data. */
+      const validation = phoneState && phoneState.offlineValidation ? phoneState.offlineValidation : null;
+      const views = (phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews : []).map((v) => ({
+        resource: v.resourceHint || "unknown",
+        path: v.pathTemplate ? redactPathValues(v.pathTemplate) : null,
+        columns: Array.isArray(v.headers) ? v.headers.slice(0, 12) : [],
+        guided: !!v.guided,
+        verified: v.verified || null,
+        endpoints: Array.isArray(v.endpoints) ? v.endpoints.length : 0,
+      }));
       return jsonResponse({
         ok: true, id: version.id, state: version.lifecycle, deploymentId: version.deployment_id,
         operations, capabilities: safeJsonParse(version.capabilities) || [],
         evidenceHash: version.evidence_hash || null, createdAt: version.created_at,
+        requestedBy: (phoneState && phoneState.requestedBy) || null,
+        requestedAt: (phoneState && phoneState.requestedAt) || null,
+        pagesObserved: phoneState && Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents.length : 0,
+        views,
+        proofTrace: phoneState && Array.isArray(phoneState.proofTrace) ? phoneState.proofTrace : [],
+        completeness: adapterCompleteness(phoneState && phoneState.observedViews),
+        // The phone runtime replays these (selectors, labels, paths: PHI-free by construction, see
+        // connect-agent/phone/CONTRACT.md "observedViews") to read a ward list in the doctor's own session.
+        replay: phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews.map((v) => Object.assign({}, v, { pathTemplate: redactPathValues(v.pathTemplate) })) : [],
+        validation: validation ? { ok: validation.ok !== false, issues: (validation.issues || []).slice(0, 10) } : null,
       });
     }
 
@@ -926,6 +1283,26 @@ export async function onRequest(context) {
       const { actor, role } = await requireAgent(deps, request, env, tid, "approve");
       const version = await getVersion(deps.db, tid, versionId);
       if (!version) throw new OnboardError("not-found", "adapter version not found");
+      /* ENDPOINT-COMPLETE, OR NOT APPROVED. Every required clinical resource must be a proven backend
+       * request; approving a partial adapter put a 30-minute page hang in front of the owner
+       * (ver_b16da370, 2026-09-15). JSON-probe adapters (no observed views) keep their own evidence. */
+      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
+      const candidateViews = ((job && safeJsonParse(job.phone_state)) || {}).observedViews;
+      if (Array.isArray(candidateViews) && candidateViews.length) {
+        const completeness = adapterCompleteness(candidateViews);
+        if (!completeness.endpointComplete) {
+          throw new OnboardError("conflict", "this adapter is not endpoint-complete: no proven backend request for " + completeness.missing.join(", ") + ". Run Connect Hospital again and show the missing screens");
+        }
+      } else if (job) {
+        /* NO VIEWS AT ALL IS NOT AN EXEMPTION. A crawl that found nothing posts an empty list, which
+         * skipped the gate entirely and let the emptiest adapter through while a nearly complete one
+         * was refused. A JSON-probe adapter still approves on its own evidence: at least one capability
+         * the phone actually proved. */
+        const caps = safeJsonParse(version.capabilities);
+        if (!Array.isArray(caps) || !caps.some((c) => c && c.proven === true)) {
+          throw new OnboardError("conflict", "this adapter proved nothing: the run found no screens and no probe succeeded. Run Connect Hospital again");
+        }
+      }
       const { version: activated, activation } = await activateVersion(deps.db, {
         tenantId: tid,
         deploymentId: version.deployment_id,
@@ -935,12 +1312,90 @@ export async function onRequest(context) {
         policyVersion: "connect-agent-phone/1",
         evidenceHash: version.evidence_hash,
       });
-      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
       if (job && canTransition("job", job.state, "ACTIVE")) {
         assertTransition("job", job.state, "ACTIVE");
         await casJob(deps.db, tid, job.id, job.revision, { state: "ACTIVE", completed_at: nowIso() });
       }
-      return jsonResponse({ ok: true, state: activated.lifecycle, activationId: activation.id });
+      // One candidate wins; the others are drafts of the same connection and must not stay in the
+      // owner's queue pretending to be decisions (CANDIDATE_LIMIT).
+      const discarded = await discardOtherCandidates(deps.db, tid, version.deployment_id, [versionId], "approved:" + versionId);
+      return jsonResponse({ ok: true, state: activated.lifecycle, activationId: activation.id, discarded: discarded.length });
+    }
+
+    // POST /versions/:id/repair -- read-time self-repair. The phone read zero rows through an APPROVED
+    // adapter, the doctor was asked to show the right screen, and this is that screen's PHI-free
+    // structure. It becomes a NEW candidate (parent = the approved version) for the owner to approve;
+    // the approved adapter is never edited in place, and the three-draft rule applies.
+    if (method === "POST" && parts.length === 3 && parts[0] === "versions" && parts[2] === "repair") {
+      const versionId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "session");
+      if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
+      const session = await getSessionRow(deps.db, tid, String(body.sessionId || ""));
+      assertOwnership(session, tid, actor.id);
+      const version = await getVersion(deps.db, tid, versionId);
+      if (!version) throw new OnboardError("not-found", "adapter version not found");
+      if (version.lifecycle !== "ACTIVE") throw new OnboardError("conflict", "only an approved adapter can be repaired");
+      if (!body.view || typeof body.view !== "object") throw new OnboardError("invalid", "view required");
+      const view = cleanObservedViews([body.view])[0];
+      if (!view.rowsSelector) throw new OnboardError("invalid", "the repaired view has no row selector");
+      if (!Array.isArray(view.endpoints) || !view.endpoints.some((e) => e && e.role === "data")) {
+        throw new OnboardError("conflict", "a repaired ward list must carry a proven backend request, not a page selector");
+      }
+      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
+      const phoneState = job ? safeJsonParse(job.phone_state) : null;
+      if (!phoneState || !phoneState.manifest || !Array.isArray(phoneState.manifest.origins) || !phoneState.manifest.origins.length) {
+        throw new OnboardError("conflict", "no candidate manifest on this adapter");
+      }
+      view.guided = true;
+      const observedViews = (Array.isArray(phoneState.observedViews) ? phoneState.observedViews : [])
+        .filter((v) => v && v.resourceHint !== view.resourceHint).concat([view]);
+      const base = phoneState.manifest;
+      const inferred = inferHtmlOperations(observedViews, { originId: base.origins[0].id });
+      const jsonOps = (base.operations || []).filter((op) => op.responseFormat !== "html");
+      const jsonTypes = new Set(jsonOps.map((op) => op.type));
+      const htmlOps = inferred.operations.filter((op) => !jsonTypes.has(op.type));
+      const manifest = Object.assign({}, base, {
+        operations: jsonOps.concat(htmlOps),
+        unsupported: inferred.unsupported,
+        capabilityProbes: (Array.isArray(base.capabilityProbes) ? base.capabilityProbes.filter((p) => p && jsonTypes.has(p.operationType)) : [])
+          .concat(htmlOps.map((op) => ({ operationType: op.type, expect: { minItems: 0 } }))),
+      });
+      manifest.contentHash = manifestContentHash(manifest);
+      const errors = validateManifest(manifest);
+      if (errors.length) throw new OnboardError("invalid", "repaired adapter failed validation: " + String((errors[0] && (errors[0].message || errors[0].path)) || errors[0]).slice(0, 160));
+      const offlineValidation = await validateCandidate({ manifest, fixture: { routes: {} } });
+      const evidenceHash = sha256(canonicalJson({ offlineValidation, repairedFrom: versionId }));
+      const capabilities = manifest.operations.map((op) => ({ operation: op.type, resource: capabilityResource(op.type), proven: op.type === (inferred.operations.find((o) => o.pathTemplate === toRepairPath(view.pathTemplate)) || {}).type, how: "repair" }));
+      let candidate = await insertVersion(deps.db, {
+        tenantId: tid, deploymentId: version.deployment_id, manifestRef: "manifest:" + manifest.contentHash,
+        schemaVersion: manifest.schemaVersion, contentHash: manifest.contentHash, capabilities,
+        parentVersionId: versionId, evidenceHash,
+      });
+      assertTransition("adapter", "CREATED", "VALIDATING");
+      candidate = await casVersionLifecycle(deps.db, tid, candidate.id, "CREATED", { lifecycle: "VALIDATING" });
+      assertTransition("adapter", "VALIDATING", "AWAITING_APPROVAL");
+      candidate = await casVersionLifecycle(deps.db, tid, candidate.id, "VALIDATING", { lifecycle: "AWAITING_APPROVAL" });
+      const holding = await listVersionsByLifecycle(deps.db, tid, version.deployment_id, "AWAITING_APPROVAL");
+      if (holding.length > CANDIDATE_LIMIT) {
+        const keep = holding.slice(0, CANDIDATE_LIMIT).map((v) => v.id);
+        if (keep.indexOf(candidate.id) < 0) { keep.pop(); keep.push(candidate.id); }
+        await discardOtherCandidates(deps.db, tid, version.deployment_id, keep, "older than the newest " + CANDIDATE_LIMIT);
+      }
+      let requestedBy = null;
+      try { const who = await deps.identifyFn(request, env); requestedBy = who && who.email ? String(who.email).toLowerCase() : null; } catch { /* label only */ }
+      // The candidate's own job row carries the replay views the phone runtime reads once approved.
+      const repairJob = await insertJob(deps.db, {
+        id: newId("job_"), tenant_id: tid, session_id: session.id, deployment_id: version.deployment_id, actor_id: actor.id,
+        state: "AWAITING_APPROVAL", idempotency_key: null, deadline_at: session.expires_at, max_attempts: 1,
+      });
+      await casJob(deps.db, tid, repairJob.id, repairJob.revision, {
+        candidate_version_id: candidate.id,
+        phone_state: JSON.stringify({
+          manifest, probes: [], offlineValidation, requestedBy, requestedAt: nowIso(), repairedFrom: versionId,
+          observedEvents: Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents : [], observedViews,
+        }),
+      });
+      return jsonResponse({ ok: true, candidateVersionId: candidate.id, state: candidate.lifecycle, parentVersionId: versionId, replay: observedViews });
     }
 
     // POST /versions/:id/reject -- owner/admin only; revokes the candidate
@@ -960,6 +1415,25 @@ export async function onRequest(context) {
         await casJob(deps.db, tid, job.id, job.revision, { state: "FAILED", stage_code: "E_REJECTED", completed_at: nowIso() });
       }
       return jsonResponse({ ok: true, state: updated.lifecycle });
+    }
+
+    // DELETE /connections/:deploymentId -- owner/admin removes a hospital's adapter: the approved version
+    // is revoked, the hospital's active pointer cleared, every waiting draft discarded. The deployment
+    // row stays (history, consent), so the hospital shows as "Not connected" and can be connected again.
+    if (method === "DELETE" && parts.length === 2 && parts[0] === "connections") {
+      const deploymentId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "approve");
+      const deployment = await getDeployment(deps.db, tid, deploymentId);
+      const activeId = deployment.active_version_id || null;
+      if (activeId) {
+        const active = await getVersion(deps.db, tid, activeId);
+        await casDeploymentActiveVersion(deps.db, tid, deploymentId, activeId, null);
+        if (active && canTransition("adapter", active.lifecycle, "REVOKED")) {
+          await casVersionLifecycle(deps.db, tid, activeId, active.lifecycle, { lifecycle: "REVOKED", policy_version: "removed:" + String(actor.id).slice(0, 60) });
+        }
+      }
+      const discarded = await discardOtherCandidates(deps.db, tid, deploymentId, [], "removed by " + String(body.reason || "the owner").slice(0, 60));
+      return jsonResponse({ ok: true, deploymentId, removedVersionId: activeId, discarded: discarded.length });
     }
 
     // GET /connections -- this tenant's deployments, one row each
@@ -1080,8 +1554,73 @@ export async function onRequest(context) {
       return jsonResponse(Object.assign({ ok: true }, deploymentView(foundDep, activeVer)));
     }
 
+    // --- edge dispatcher: the agent-built adapter served from Cloudflare (GHIS parity) -----------
+    // Tier 1 (adapter) + Tier 2 (recipe) are hospital-level and shared; Tier 3 (doctor session) is
+    // a per-token KV cookie jar. Only the ACTIVE version ever serves: AWAITING_APPROVAL drafts
+    // never reach dataRun (dispatcher.resolveActiveAdapter), and rollbackVersion restores v1.
+    // A 302 drops the KV session (401); a 404/schema drift marks NEEDS_REPAIR via markDrift and
+    // never falls back to WebView scraping.
+    const bearerOf = (req) => {
+      const h = req.headers.get("authorization") || req.headers.get("Authorization") || "";
+      const m = /^Bearer\s+(.+)$/i.exec(String(h).trim());
+      if (m) return m[1].trim();
+      return url.searchParams.get("token") || (body && body.token) || null;
+    };
+    // POST /run/:deploymentId/login { userId, password, recipe? } -> { ok, token, doctorName }
+    if (method === "POST" && parts.length === 3 && parts[0] === "run" && parts[2] === "login") {
+      const deploymentId = parts[1];
+      await requireAgent(deps, request, env, tid, "session");
+      await getDeployment(deps.db, tid, deploymentId);
+      const out = await loginRun(env, {
+        deploymentId,
+        userId: body.userId || body.username,
+        password: body.password,
+        recipe: body.recipe || null,
+      }, { fetchImpl: deps.fetch });
+      return jsonResponse(out);
+    }
+    // POST /run/:deploymentId/logout (Bearer) -> { ok }
+    if (method === "POST" && parts.length === 3 && parts[0] === "run" && parts[2] === "logout") {
+      const token = bearerOf(request);
+      await requireAgent(deps, request, env, tid, "session");
+      return jsonResponse(await logoutRun(env, token));
+    }
+    // GET /run/:deploymentId/status (Bearer) -> { connected } or 401
+    if (method === "GET" && parts.length === 3 && parts[0] === "run" && parts[2] === "status") {
+      const token = bearerOf(request);
+      await requireAgent(deps, request, env, tid, "read");
+      const r = await statusRun(env, token);
+      return jsonResponse(r.body, { status: r.status });
+    }
+    // GET /run/:deploymentId/:resource (Bearer + query) for patients, medications, lab,
+    // lab-detail, radiology, radiology-report, demographics. The active adapter version (or an
+    // explicit adapter/recipe from D1/store via body.adapter) supplies the endpoint definition.
+    if (method === "GET" && parts.length === 3 && parts[0] === "run" && RESOURCES.indexOf(parts[2]) >= 0) {
+      const deploymentId = parts[1];
+      const resource = parts[2];
+      await requireAgent(deps, request, env, tid, "read");
+      await getDeployment(deps.db, tid, deploymentId);
+      const token = bearerOf(request);
+      const params = {};
+      url.searchParams.forEach((v, k) => { params[k] = v; });
+      const dep = await getDeployment(deps.db, tid, deploymentId);
+      const r = await dataRun(env, { deploymentId, resource, token, params }, {
+        fetchImpl: deps.fetch,
+        adapter: body && body.adapter ? body.adapter : null,
+        db: deps.db, tenantId: tid,
+        versionId: dep.active_version_id || null,
+      });
+      return jsonResponse(r.body, { status: r.status });
+    }
+
     return jsonResponse({ error: "not_found" }, { status: 404 });
   } catch (e) {
-    return jsonResponse({ error: CODE(e) }, { status: STATUS(e) });
+    /* The CODE alone is not enough to act on: a doctor whose crawl walked 21 pages was told
+     * {"error":"invalid"} and nothing else. An OnboardError's message is authored here, is a
+     * sentence rather than a stack, and carries no PHI, so it travels as `detail`. Any OTHER
+     * exception keeps the bare code, since its message is not ours to promise. */
+    const body = { error: CODE(e) };
+    if (e instanceof OnboardError && e.message) body.detail = String(e.message).slice(0, 300);
+    return jsonResponse(body, { status: STATUS(e) });
   }
 }

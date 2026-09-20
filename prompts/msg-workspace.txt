@@ -1,0 +1,37 @@
+feat(P0.3): the doctor workspace
+
+Everything about a patient that changes what a doctor may safely do, on one screen, so
+that answering "what am I dealing with" does not mean reading nine cards.
+
+IT IS A PROJECTION AND OWNS NOTHING. Every block reads state the chart already fetched
+through the governed routes. No new endpoint, no new record type, no second copy and no
+separate idea of what is true - which is also why the reachability count is unchanged by
+this commit. Delete the screen and nothing becomes impossible.
+
+THE RULE THAT MATTERS MOST: A BLOCK THAT DID NOT LOAD MUST NEVER LOOK LIKE AN EMPTY ONE.
+An empty allergy box reads as "no known allergies" to every clinician alive, and a screen
+that renders a failed read as blank calm is the most dangerous thing that could be built
+here. So an unloaded block says "Not loaded. Do not read this as empty." and a genuinely
+empty one says "None recorded." They can never be confused, and there is a test asserting
+that an unloaded allergy block does NOT contain the reassuring words. This is the same
+reasoning loadChart() already applies to critical results.
+
+What is shown: allergies, outstanding critical results and current medicines across the
+top - the three a prescribing decision rests on, never collapsed - then active problems,
+the early warning score, recent results, tests still waiting, recent notes and whether
+there is anybody to telephone. A deceased patient is stated above all of it, because it
+changes how everything below should be read.
+
+Only live things read as live: an acknowledged critical is not outstanding, and a resolved
+problem is not an active problem. An incomplete early warning score says it is incomplete
+rather than presenting a low total as reassurance.
+
+And it leads somewhere. A workspace that shows everything and offers nothing to do with it
+is a dashboard, which is what this deliberately is not: start a consultation, open the
+full history, open the chart, each one click away.
+
+Tests: 10, rendering the screen for real, including the not-loaded-versus-empty rule and
+the ordering of the deceased banner. Suite 5871 passing, 0 failing.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

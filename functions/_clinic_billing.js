@@ -46,10 +46,54 @@ export function rupees(paise) { return "₹" + (Math.round(paise || 0) / 100).to
 // Validate a tariff (price-catalog) item before save. Price is integer paise.
 export function validateTariff(item) {
   if (!item || !String(item.name || "").trim()) return { ok: false, error: "name_required" };
+  /* Blood is not for sale (DCGI advisory, January 2024; legal opinion 2026-09-17 G.1 and G.5.7): only processing charges at
+   * the NBTC rates the hospital enters. A line priced as the blood itself is refused by its name. */
+  if (/\b(price|cost|sale|selling)\s+(of\s+)?(a\s+|one\s+)?(blood|whole blood|red cells?|packed (red )?cells?|plasma|platelets?|cryo(precipitate)?)\b|\b(blood|plasma|platelets?)\s+(unit\s+)?(price|cost|sale)\b/i.test(String(item.name))) {
+    return { ok: false, error: "blood_not_for_sale", detail: "Blood is not for sale: a blood centre bills only processing charges at the NBTC rates. Name the line as a processing charge." };
+  }
   const price = Math.round(Number(item.price));
   if (!isFinite(price) || price < 0) return { ok: false, error: "bad_price" };
-  const kind = (item.kind === "medication" || item.kind === "service") ? item.kind : "investigation";
-  return { ok: true, item: { code: String(item.code || "").trim(), name: String(item.name).trim(), kind, price } };
+  /* bed, nursing and visit joined 2026-09-15 (LT-30): charges per day of an inpatient stay, priced by the
+   * ward bill (functions/_wardsynq/charge-capture.js). `ward` narrows one to a ward by name; empty means
+   * every ward. They are never offered as OPD orders (inv-catalog lists tests and medicines only). */
+  const kind = ["medication", "service", "bed", "nursing", "visit"].indexOf(item.kind) >= 0 ? item.kind : "investigation";
+  const out = { code: String(item.code || "").trim(), name: String(item.name).trim(), kind, price };
+  if (kind === "bed" || kind === "nursing" || kind === "visit") out.ward = String(item.ward || "").trim();
+  /* GST (gap-claims-gst B; the rules are in functions/_region_in.js gstForLines). Each field is stored only when
+   * the caller sends it, so a screen that does not know about GST cannot wipe it on a price change, and sending ""
+   * clears it. hsnSac: HSN (goods) or SAC (services), 4, 6 or 8 digits (Notification 78/2020-Central Tax).
+   * gstRate: the item's own rate, 0-100. intensiveCare: a bed row that is an ICU/CCU/ICCU/NICU room, set by the
+   * hospital and never inferred from a ward's name. */
+  if (item.hsnSac !== undefined) {
+    const h = String(item.hsnSac == null ? "" : item.hsnSac).replace(/\s+/g, "");
+    if (h && !/^(\d{4}|\d{6}|\d{8})$/.test(h)) return { ok: false, error: "bad_hsn_sac" };
+    out.hsnSac = h;
+  }
+  if (item.gstRate !== undefined) {
+    const t = String(item.gstRate == null ? "" : item.gstRate).trim();
+    if (t && !(/^\d+(\.\d{1,2})?$/.test(t) && Number(t) <= 100)) return { ok: false, error: "bad_gst_rate" };
+    out.gstRate = t ? Number(t) : "";
+  }
+  if (kind === "bed" && item.intensiveCare !== undefined) out.intensiveCare = item.intensiveCare === true;
+  /* gst-packages (2026-09-17). intensiveCareClass: which intensive care unit a bed row is, set by the hospital: the four
+   * the notification names (ICU, CCU, ICCU, NICU), a specialty ICU (PICU, MICU, SICU) or HDU / step-down; "" is an
+   * ordinary room. It also sets the older intensiveCare marker, true only for the four named units. unitHours: how many
+   * hours one bed price covers (24 a day, 8 a shift, 1 an hour), so the room charge is tested per day. nonHealthcare: an
+   * item that is not health care (attendant food or bed, cosmetic procedure, retail), taxed at its own rate even on an
+   * in-patient bill. */
+  if (kind === "bed" && item.intensiveCareClass !== undefined) {
+    const c = String(item.intensiveCareClass == null ? "" : item.intensiveCareClass).trim().toUpperCase();
+    if (c && ["ICU", "CCU", "ICCU", "NICU", "ICU_SPECIALTY", "HDU"].indexOf(c) < 0) return { ok: false, error: "bad_intensive_care_class" };
+    out.intensiveCareClass = c;
+    out.intensiveCare = ["ICU", "CCU", "ICCU", "NICU"].indexOf(c) >= 0;
+  }
+  if (kind === "bed" && item.unitHours !== undefined) {
+    const t = String(item.unitHours == null ? "" : item.unitHours).trim();
+    if (t && !(/^\d{1,2}$/.test(t) && Number(t) >= 1 && Number(t) <= 24)) return { ok: false, error: "bad_unit_hours" };
+    out.unitHours = t ? Number(t) : "";
+  }
+  if (item.nonHealthcare !== undefined) out.nonHealthcare = item.nonHealthcare === true;
+  return { ok: true, item: out };
 }
 
 // Validate an order before create.

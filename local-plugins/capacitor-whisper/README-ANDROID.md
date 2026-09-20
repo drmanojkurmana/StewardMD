@@ -74,20 +74,35 @@ treat an emulator failure as a code bug):
 - Events: `whisperState{state}`, `whisperPartial{text}`, `whisperFinal{text}`,
   `whisperError{code,message}`, `whisperDownloadProgress{progress}`.
 
-## Continuous capture upgrade path (device-gated, not yet built)
-`WhisperEngine.java`'s `AudioRecord` capture is record-then-transcribe today: `stopTranscribe()`
+## Continuous capture (BUILT — option (c), flag-gated OFF, not yet device-verified)
+`WhisperEngine.java`'s `AudioRecord` capture started as record-then-transcribe: `stopTranscribe()`
 stops the recorder and runs whisper.cpp once over the whole buffer, emitting a single `whisperFinal`.
-`whisperPartial` is reserved but never emitted. `voice-ambient.js`'s ambient/OPD-scribe controller
-works around this in JS today (shipped): it calls `stopTranscribe`/`startTranscribe` back-to-back in
-~15s windows and stitches the finals together (`accumulate()`). Each restart briefly closes and
-reopens the `AudioRecord`, so audio right at a 15s seam can be clipped (a few hundred ms) — the
-boundary-gap ceiling of the JS re-arm.
+`voice-ambient.js`'s ambient/OPD-scribe controller works around that in JS (still the default): it
+calls `stopTranscribe`/`startTranscribe` back-to-back in ~15s windows and stitches the finals together
+(`accumulate()`). Each restart briefly closes and reopens the `AudioRecord`, so audio right at a 15s
+seam can be clipped (a few hundred ms) — the boundary-gap ceiling of the JS re-arm.
 
-The native fix (mirrors the iOS README): keep `AudioRecord` open across windows and either (a) feed
-whisper.cpp a ring buffer of the last ~N seconds, or (c) keep one growing buffer and run inference
-on it every ~15s without ever calling `stop()`/`release()` between windows. **Contract**: emit
-`whisperPartial {text}` once per ~15s window while the mic stays open, still emit one `whisperFinal`
-when the JS actually calls `stopTranscribe()`. `voice-ambient.js` already wires `onPartial` for this
-(currently unreachable since `whisperPartial` is never fired) — no `SMD_AMBIENT` API change needed to
-adopt it, only the native engine. Must be validated on a **real arm64 device** (mic continuity +
-inference timing, per the "Testing" section above).
+**What now exists: option (c), continuous-record-with-flush** (mirrors the iOS README).
+`flushTranscribe()` → `WhisperEngine.flushAndTranscribe(language, initialPrompt)` copies `samples`
+under `samplesLock`, clears the list (keeping capacity — the record thread is still filling it) and
+runs whisper.cpp on the copy. `AudioRecord` is never stopped or released, so there is no seam.
+Inference is submitted to the same single-thread `work` executor as `stopAndTranscribe`, so flushes
+and a stop queue rather than racing the one native context. Option (a), the ring buffer, was not
+built — with the buffer cleared per flush there is nothing to slide.
+
+**Contract as built**: each flush emits `whisperFlush {text}` — a NEW event, not `whisperPartial`,
+because a flushed segment is consumed (appends) while a partial would replace. `whisperFinal` still
+fires exactly once, on `stopTranscribe()`, carrying only the tail since the last flush.
+
+`WhisperPlugin.java` registers `flushTranscribe` as the LAST `@PluginMethod` — registration is
+positional, so never insert a method among the existing ones. After editing this class, run:
+`grep -n "@PluginMethod" -A2 WhisperPlugin.java | grep "public void"` and confirm every pre-existing
+method is still listed.
+
+**Consumer**: `SMD_NATIVE.flushWhisper()` / `SMD_NATIVE.whisperCanFlush()` (native-bridge.js) →
+`session.flush` (voice.js) → `voice-ambient.js`'s window boundary. Gated on
+`localStorage.smd_voice_continuous` — **DEFAULT OFF**; with the flag off, or on an APK built before
+this change, the JS re-arm loop runs exactly as before. No `SMD_AMBIENT` API change.
+
+**Still needs validation on a real arm64 device**: mic continuity across a flush, whether CPU-only
+inference while recording drops frames, and end-to-end timing (per the "Testing" section above).

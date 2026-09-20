@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ ward: tablet round and keyboard harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* P2.16. The REAL ward.js and ward.css against a stubbed transport, so a real browser can measure the
+ * nurse's round at tablet sizes and press real keys. Every request is recorded; no network, no server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENTS = [{ encounterId: "enc-1", patientId: "pat-1", name: "Harness Patient One", mrn: "MRN-H1", ward: "Ward A", bed: "07", class: "IPD", admittedAt: "2026-09-12T04:00:00.000Z" }];
+var at = function (h) { var d = new Date(); d.setHours(h, 0, 0, 0); return d.toISOString(); };
+var DUE = [
+  { drug: "Piperacillin with tazobactam (extended infusion over four hours)", dose: { value: 4.5, unit: "g" }, route: "IV", frequency: "8th hourly", dueAt: at(6), status: "ordered", overdue: true },
+  { drug: "Paracetamol", dose: { value: 1, unit: "g" }, route: "oral", frequency: "QID", dueAt: at(10), status: "verified" },
+  { drug: "Enoxaparin", dose: { value: 40, unit: "mg" }, route: "SC", frequency: "OD", dueAt: at(12), status: "dispensed" },
+  { drug: "Pantoprazole", dose: { value: 40, unit: "mg" }, route: "IV", frequency: "OD", dueAt: at(14), status: "scanned" },
+  { drug: "Ondansetron", dose: { value: 4, unit: "mg" }, route: "IV", frequency: "TDS", dueAt: at(16), status: "ordered" },
+  { drug: "Insulin regular", dose: { value: 6, unit: "units" }, route: "SC", frequency: "TDS", dueAt: at(18), status: "held" },
+  { drug: "Ceftriaxone", dose: { value: 1, unit: "g" }, route: "IV", frequency: "OD", dueAt: at(20), status: "ordered" },
+];
+var WORKLIST = { ok: true, me: "cfa:nurse", staff: [], rows: [1, 2, 3, 4, 5].map(function (i) {
+  return { patientId: "pat-" + i, patient: { name: "Worklist Patient " + i, bed: String(i), encounterId: "enc-" + i }, overdue: i === 2 ? 1 : 0, dueSoon: i, news2: { total: i, risk: i > 4 ? "high" : "low", scorable: true }, problems: [],
+    assignment: { nurseId: "cfa:nurse", nurseLabel: "nurse@h.test", shift: "Day" }, tasksOpen: 1, tasksOverdue: 0, vitals: { state: "due", text: "Observations every 4 h" } };
+}) };
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj, status) { return Promise.resolve({ ok: (status || 200) < 400, status: status || 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: PATIENTS, region: "IN" });
+  if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: DUE, prn: [], unscheduled: [] });
+  if (u.indexOf("/ward/nurse-worklist") >= 0) return reply(WORKLIST);
+  if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
+  // Owner 2026-09-16: a timeline line carries the actor's id; the ward names the person from /ward/staff-identities.
+  if (u.indexOf("/ward/timeline") >= 0) return reply({ ok: true, events: [{ at: at(8), resourceType: "MedicationAdministration", id: "mar-h1", category: "medication",
+    label: "Ondansetron - administered · by a clinician account", labelBase: "Ondansetron - administered", byId: "cfa:nurse" }], activeMedications: [] });
+  if (u.indexOf("/ward/staff-identities") >= 0) return reply({ ok: true, identities: { "cfa:nurse": { name: "Sister Anitha R", employeeId: "EMP-1042", role: "nurse" } } });
+  if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
+  if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
+  if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
+  if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  // G13: a fixed refusal, so the test can prove a warning/error takes focus instead of the control pressed.
+  if (u.indexOf("/ward/nurse-assign") >= 0) return reply({ ok: false, error: "refused", reasons: ["harness: nurse assignment refused for this test"] });
+  if (u.indexOf("/ward/nursing-patient") >= 0) return reply({ ok: true, problems: [],
+    assignment: { nurseId: "cfa:nurse", nurseLabel: "nurse@h.test", shift: "Day", assignedAt: at(6) },
+    vitals: { state: "due", text: "Observations every 4 h", dueAt: at(10), everyHours: 4 },
+    tasks: [{ id: "t1", title: "Reposition", status: "open", dueAt: at(12), createdBy: "cfa:nurse", overdue: false, version: 1 },
+      { id: "t2", title: "Wound check", status: "open", dueAt: at(6), createdBy: "cfa:nurse", overdue: true, version: 1 }] });
+  if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", entry: [] });
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script src="ward-ask-autoanswer.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

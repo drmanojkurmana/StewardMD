@@ -16,10 +16,14 @@ rm -rf "$OUT"
 mkdir -p "$OUT/wardsynq/site" "$OUT/wardsynq/ui" "$OUT/wardsynq/adapters" "$OUT/wardsynq/data" "$OUT/assets/fonts" "$OUT/data" "$OUT/kb/protocols"
 
 cp "$ROOT/wardsynq/site/index.html" "$OUT/index.html"
+# The patient and family portal (P2.9): its own page, no staff session. portal.js rides the *.js copy below.
+cp "$ROOT/wardsynq/site/portal.html" "$OUT/portal.html"
 cp "$ROOT/wardsynq/site/_worker.js" "$OUT/_worker.js"
 cp "$ROOT/wardsynq/site/"*.js "$ROOT/wardsynq/site/"*.css "$ROOT/wardsynq/site/"*.webmanifest "$OUT/wardsynq/site/"
 rm -f "$OUT/wardsynq/site/_worker.js"
 cp -R "$ROOT/wardsynq/site/pages" "$OUT/wardsynq/site/pages"
+# Per-language catalogs (D6): one file per language, loaded on demand by portal.js's switcher.
+cp -R "$ROOT/wardsynq/site/i18n" "$OUT/wardsynq/site/i18n"
 
 # The clinical surfaces, byte-identical to what the app runs.
 # discharge.css was missing from this list until 2026-09-12. discharge.js shipped without it, so the
@@ -28,9 +32,11 @@ cp -R "$ROOT/wardsynq/site/pages" "$OUT/wardsynq/site/pages"
 # opened), every Material Symbols ligature printed as its own name — "medicationMedications",
 # "fact_checkProvenance" — and the print stylesheet was absent, which is why the printed PDF came out
 # as unstyled running text. One file, four symptoms.
-for f in ward.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
+for f in hospital-auth.js ward.js ward-offline.js ward-labels.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
   cp "$ROOT/$f" "$OUT/$f"
 done
+# The QR encoder (MIT, vendored) the Patients page draws ABDM Scan and Share counter QR codes with.
+mkdir -p "$OUT/vendor" && cp "$ROOT/vendor/qrcode-generator.js" "$OUT/vendor/qrcode-generator.js"
 # The order-safety workstation and the WardSynQ client libraries it imports.
 cp "$ROOT/wardsynq/ui/"* "$OUT/wardsynq/ui/" 2>/dev/null || true
 cp -R "$ROOT/wardsynq/ui/brand" "$OUT/wardsynq/ui/brand"

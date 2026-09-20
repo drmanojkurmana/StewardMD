@@ -149,7 +149,11 @@ async function exportPage(request, env, ctx) {
     await repository.auditOnly(tenantId, {
       action: "record.export",
       tenantId,
+      /* `actor` is the column the audit table stores; `actorId` alone landed as NULL, so nobody
+       * could tell afterwards WHO took the hospital out. resourceCounts feeds the export review. */
+      actor: resolved.actor.id,
       actorId: resolved.actor.id,
+      resourceCounts: { records: rows.length },
       detail: `backup export page: ${rows.length} rows, seq ${since + 1}..${(page && page.cursor) || since}`,
     });
   } catch (e) {
@@ -233,7 +237,7 @@ async function backupStatus(request, env, ctx) {
   if (error) return { ...base, ...error, rpo: null };
 
   let runs;
-  try { runs = await svc.list(RUN_TYPE, 50); }
+  try { runs = await svc.list(RUN_TYPE, 50, { newest: true }); } // the newest 50 runs: the last backup is among them
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), rpo: null };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), rpo: null };

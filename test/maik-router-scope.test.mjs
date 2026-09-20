@@ -53,8 +53,12 @@ test("the scripted paragraph is gone, and greetings are routed by who pays", () 
   assert.ok(!HOME.includes("I’m well, thank you."), "canned how-are-you still present");
   assert.ok(!HOME.includes("You’re welcome. Let me know"), "canned thanks still present");
   assert.ok(!/var MAIK_ACK =/.test(HOME), "MAIK_ACK is dead once the ack reply is gone");
-  assert.match(HOME, /if \(_eng === "local"\) return \{ kind: "clinical" \};/,
-    "on-device must let the model greet (free and offline)");
+  // 2026-09-19, owner transcripts: on-device greeting by the model cost 7 to 9 s on MaiK Lite and
+  // produced a leaked "##Instruction ... ##Options" training template on MAiK Cortex. The per-engine
+  // exemption is gone; the one-line scripted greeting applies on every engine. What must stay gone
+  // is still the capability-reciting paragraph.
+  assert.ok(!/if \(_eng === "local"\) return \{ kind: "clinical" \};/.test(HOME),
+    "on-device must NOT send a greeting to the model (owner transcripts 2026-09-19)");
   assert.match(HOME, /return \{ kind: "casual", reply: "Hello\. What would you like to look at\?" \};/,
     "cloud and KB must answer a greeting locally, spending no tokens");
   // The lookup must be window-qualified: `window.X && X.y()` relies on X also being an implicit

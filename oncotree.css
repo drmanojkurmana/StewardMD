@@ -1,10 +1,424 @@
+/* ═════════════════════════════════════════════════════════════════════════════════
+ * STEWARDMD ONCOTREE & ONCQIS — ULTRA-PREMIUM LUXURY DESIGN SYSTEM
+ * Synthesized from:
+ *   - Apple Design & Emil Kowalski Fluid Interfaces (WWDC / iOS Human Interface Guidelines)
+ *   - React Bits (Luminous Spotlight Cards, Specular Highlights, Glassmorphic Docks)
+ *   - Linear & Stripe Design Language (Deep Charcoal, Hairline Sheen, Measured Tracking)
+ * ═════════════════════════════════════════════════════════════════════════════════ */
+
+.ot-overlay {
+  /* Canvas & Base Tokens — Light Museum Parchment */
+  --ot-bg: #f8f9fa;
+  --ot-canvas-subtle: #f1f3f5;
+  --ot-card: #ffffff;
+  --ot-card-elevated: #ffffff;
+  --ot-ink: #111827;
+  --ot-sub: #4b5563;
+  --ot-faint: #9ca3af;
+  --ot-line: rgba(0, 0, 0, 0.07);
+  --ot-line-strong: rgba(0, 0, 0, 0.12);
+  --ot-glass: rgba(255, 255, 255, 0.78);
+  --ot-glass-border: rgba(255, 255, 255, 0.9);
+  
+  /* Chromatic Signatures — Emerald-Teal & Apple System Blue */
+  --ot-accent: #0f766e;
+  --ot-accent-light: #14b8a6;
+  --ot-accent-glow: rgba(15, 118, 110, 0.12);
+  --ot-accent-subtle: #f0fdfa;
+  --ot-action: #0071e3;
+  --ot-action-glow: rgba(0, 113, 227, 0.14);
+  
+  /* Luminous Specular Shadows */
+  --ot-shadow-ambient: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+  --ot-shadow-card: 0 4px 16px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+  --ot-shadow-elevated: 0 12px 32px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+  --ot-shadow-modal: 0 25px 60px -12px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  /* Typography Scale — Apple SF Pro */
+  --ot-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  --ot-mono: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--ot-font);
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── OLED Obsidian Dark Canvas (Linear / Apple Titanium) ── */
+body.dark .ot-overlay {
+  --ot-bg: #07080a;
+  --ot-canvas-subtle: #0f1115;
+  --ot-card: #12141a;
+  --ot-card-elevated: #181b22;
+  --ot-ink: #f9fafb;
+  --ot-sub: #9ca3af;
+  --ot-faint: #6b7280;
+  --ot-line: rgba(255, 255, 255, 0.08);
+  --ot-line-strong: rgba(255, 255, 255, 0.14);
+  --ot-glass: rgba(18, 20, 26, 0.82);
+  --ot-glass-border: rgba(255, 255, 255, 0.08);
+  
+  --ot-accent: #2dd4bf;
+  --ot-accent-light: #5eead4;
+  --ot-accent-glow: rgba(45, 212, 191, 0.18);
+  --ot-accent-subtle: rgba(45, 212, 191, 0.08);
+  --ot-action: #38bdf8;
+  --ot-action-glow: rgba(56, 189, 248, 0.2);
+
+  --ot-shadow-ambient: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  --ot-shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  --ot-shadow-elevated: 0 14px 36px -4px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  --ot-shadow-modal: 0 30px 70px -10px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* ── React Bits: Dynamic Spotlight & Luminous Edge Border ── */
+.ot-disease, .ot-flow-card, .ot-flow-opt-card, .ot-step, .ot-flow-proto-card, .ot-card {
+  position: relative;
+  background: var(--ot-card);
+  box-shadow: var(--ot-shadow-card);
+  border: 1px solid var(--ot-line);
+  border-radius: 18px;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, border-color 0.18s ease;
+  overflow: hidden;
+}
+
+/* Spotlight Ambient Inner Glow */
+.ot-disease::before, .ot-flow-card::before, .ot-flow-opt-card::before, .ot-step::before, .ot-flow-proto-card::before,
+.ot-opt::before, .ot-node-card::before, .ot-proto-card::before, .ot-super-card::before, .ot-spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(360px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--ot-accent-glow), transparent 75%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Luminous Border Beam Glow on Hover */
+.ot-disease::after, .ot-flow-card::after, .ot-flow-opt-card::after, .ot-step::after, .ot-flow-proto-card::after,
+.ot-opt::after, .ot-node-card::after, .ot-proto-card::after, .ot-super-card::after, .ot-spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(220px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--ot-accent), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ot-disease:hover::before, .ot-flow-card:hover::before, .ot-flow-opt-card:hover::before, .ot-step:hover::before, .ot-flow-proto-card:hover::before,
+.ot-opt:hover::before, .ot-node-card:hover::before, .ot-proto-card:hover::before, .ot-super-card:hover::before, .ot-spotlight-card:hover::before,
+.ot-disease:hover::after, .ot-flow-card:hover::after, .ot-flow-opt-card:hover::after, .ot-step:hover::after, .ot-flow-proto-card:hover::after,
+.ot-opt:hover::after, .ot-node-card:hover::after, .ot-proto-card:hover::after, .ot-super-card:hover::after, .ot-spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ── Emil Kowalski: Kinetic Spring Physics & Zero-Latency Feel ── */
+.ot-disease:active,
+.ot-flow-opt-card:active,
+.ot-flow-proto-card:active,
+.ot-btn:active,
+.ot-hbtn:active,
+.ot-nav-mode-btn:active,
+.ot-opt:active {
+  transform: scale(0.976) translateY(1px) !important;
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ── Apple Cupertino Translucent Frosted Glass Header ── */
+.ot-header {
+  background: var(--ot-glass) !important;
+  backdrop-filter: blur(32px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+  border-bottom: 1px solid var(--ot-line) !important;
+  box-shadow: 0 1px 0 0 var(--ot-glass-border) !important;
+}
+
+.ot-hname {
+  font-family: var(--ot-font) !important;
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: -0.025em !important;
+  background: linear-gradient(180deg, var(--ot-ink) 0%, color-mix(in srgb, var(--ot-ink) 80%, transparent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ot-hkicker {
+  letter-spacing: 0.14em !important;
+  font-size: 9.5px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  color: var(--ot-accent) !important;
+}
+
+/* ── Apple Segmented View Switcher (Pill-morphing) ── */
+.ot-viewtoggle {
+  background: var(--ot-glass) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border-bottom: 1px solid var(--ot-line) !important;
+  padding: 8px 16px !important;
+  gap: 6px !important;
+}
+
+.ot-vt {
+  border-radius: 9999px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid transparent !important;
+}
+
+.ot-vt.on {
+  background: var(--ot-card-elevated) !important;
+  color: var(--ot-accent) !important;
+  border-color: var(--ot-line) !important;
+  box-shadow: var(--ot-shadow-card) !important;
+}
+
+/* ── Tactile Disease Selection Grid ── */
+.ot-disease {
+  min-height: 72px !important;
+  padding: 16px 18px !important;
+  border-radius: 20px !important;
+  gap: 16px !important;
+}
+
+.ot-disease-ic {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 16px !important;
+  background: var(--ot-accent-subtle) !important;
+  color: var(--ot-accent) !important;
+  border: 1px solid color-mix(in srgb, var(--ot-accent) 20%, transparent) !important;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+}
+
+.ot-disease-t b {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.018em !important;
+  color: var(--ot-ink) !important;
+}
+
+.ot-disease-t span {
+  font-size: 12.5px !important;
+  color: var(--ot-sub) !important;
+  margin-top: 2px !important;
+}
+
+/* ── Decision Options & Flowchart Cards ── */
+.ot-flow-card {
+  border-radius: 22px !important;
+  padding: 20px !important;
+  box-shadow: var(--ot-shadow-card) !important;
+}
+
+.ot-flow-card.active {
+  border-color: color-mix(in srgb, var(--ot-accent) 40%, transparent) !important;
+  box-shadow: 0 0 0 2px var(--ot-accent-glow), var(--ot-shadow-elevated) !important;
+}
+
+.ot-flow-card-title {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.024em !important;
+  color: var(--ot-ink) !important;
+  line-height: 1.3 !important;
+}
+
+.ot-flow-opt-card {
+  border-radius: 16px !important;
+  padding: 14px 18px !important;
+  border: 1px solid var(--ot-line) !important;
+  box-shadow: var(--ot-shadow-ambient) !important;
+}
+
+.ot-flow-opt-card.selected {
+  border-color: var(--ot-accent) !important;
+  background: color-mix(in srgb, var(--ot-accent) 7%, var(--ot-card)) !important;
+  box-shadow: 0 0 0 1.5px var(--ot-accent), var(--ot-shadow-card) !important;
+}
+
+/* ── Regimen & Outcome Recommendations ── */
+.ot-flow-proto-card {
+  border-radius: 18px !important;
+  border: 1px solid var(--ot-line) !important;
+  border-left: 4px solid var(--ot-accent) !important;
+  padding: 16px 18px !important;
+  box-shadow: var(--ot-shadow-card) !important;
+}
+
+.ot-flow-proto-tag {
+  font-size: 9.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.1em !important;
+  color: var(--ot-accent) !important;
+  background: var(--ot-accent-subtle) !important;
+  border: 1px solid color-mix(in srgb, var(--ot-accent) 24%, transparent) !important;
+  border-radius: 9999px !important;
+  padding: 2px 8px !important;
+}
+
+.ot-flow-proto-name {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
+  color: var(--ot-ink) !important;
+}
+
+/* ── Apple Bottom Sheet Modal (Drawer) ── */
+.ot-sheet-handle {
+  width: 40px !important;
+  height: 5px !important;
+  border-radius: 9999px !important;
+  background: rgba(0, 0, 0, 0.18) !important;
+  margin: 12px auto 8px !important;
+  flex-shrink: 0 !important;
+}
+body.dark .ot-sheet-handle {
+  background: rgba(255, 255, 255, 0.22) !important;
+}
+
+.ot-superpower-backdrop {
+  z-index: 16000 !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+}
+
+/* Loading/unavailable notice inside the superpower modal: explicit, never a silent no-op. */
+.ot-notice { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border: 1px solid var(--ot-line); border-radius: 14px; background: var(--ot-card); }
+.ot-notice .material-symbols-outlined { font-size: 24px; color: var(--ot-sub); flex: 0 0 auto; }
+.ot-notice p { margin: 0 0 6px; font-size: 13px; line-height: 1.5; color: var(--ot-ink, #14202b); }
+.ot-notice p:last-child { margin-bottom: 0; }
+
+.ot-superpower-modal {
+  border-radius: 28px !important;
+  border: 1px solid var(--ot-line) !important;
+  background: var(--ot-card-elevated) !important;
+  box-shadow: var(--ot-shadow-modal) !important;
+  max-width: 900px !important;
+}
+
+.ot-superpower-hd {
+  background: transparent !important;
+  border-bottom: 1px solid var(--ot-line) !important;
+  padding: 16px 24px !important;
+}
+
+.ot-superpower-title {
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--ot-ink) !important;
+}
+
+.ot-superpower-body {
+  padding: 20px 24px 28px !important;
+}
+
+.ot-superpower-ft {
+  background: transparent !important;
+  border-top: 1px solid var(--ot-line) !important;
+  padding: 14px 24px !important;
+}
+
+/* ── Comparison Table & Clinical Metrics ── */
+.ot-compare-table {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-shadow: var(--ot-shadow-ambient) !important;
+}
+
+.ot-compare-table th {
+  background: var(--ot-canvas-subtle) !important;
+  color: var(--ot-ink) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  padding: 12px 14px !important;
+}
+
+.ot-compare-table td {
+  padding: 12px 14px !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* Pill Badges */
+.badge {
+  border-radius: 9999px !important;
+  padding: 3px 10px !important;
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  border: 1px solid currentColor !important;
+}
+
+.badge-danger {
+  background: color-mix(in srgb, #ef4444 10%, transparent) !important;
+  color: #dc2626 !important;
+}
+.badge-warning {
+  background: color-mix(in srgb, #f59e0b 10%, transparent) !important;
+  color: #b45309 !important;
+}
+.badge-info {
+  background: color-mix(in srgb, var(--ot-accent) 10%, transparent) !important;
+  color: var(--ot-accent) !important;
+}
+
+/* ── Floating Action Bar for Superpowers ── */
+.ot-superpowers-bar {
+  background: var(--ot-canvas-subtle) !important;
+  border: 1px solid var(--ot-line) !important;
+  border-radius: 16px !important;
+  padding: 12px !important;
+  gap: 10px !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+.ot-superpowers-bar .ot-btn {
+  border-radius: 12px !important;
+  background: var(--ot-card) !important;
+  border: 1px solid var(--ot-line) !important;
+  box-shadow: var(--ot-shadow-ambient) !important;
+  color: var(--ot-ink) !important;
+  font-weight: 600 !important;
+}
+
+.ot-superpowers-bar .ot-btn:hover {
+  border-color: var(--ot-accent) !important;
+  color: var(--ot-accent) !important;
+  box-shadow: var(--ot-shadow-card) !important;
+}
+
+/* ── Mobile Layout Polish (Apple Sheet Mode) ── */
+@media (max-width: 768px) {
+  .ot-superpower-modal {
+    border-radius: 26px 26px 0 0 !important;
+    max-height: 94dvh !important;
+  }
+}
+
 /* StewardMD ONCOTREE navigator - mobile-first clinical UI. Calm, high-density, evidence-first.
    Color is used primarily for state (category accent --ot-c; lifecycle badges). Self-contained. */
 
 .ot-overlay {
   /* LIGHT is the default palette; the body.dark rule below overrides all of them together. */
   --ot-bg: var(--paper, #f6f7f5); --ot-ink: var(--ink, #14202b); --ot-card: var(--panel, #ffffff); --ot-line: var(--line, #d7dee3); --ot-sub: var(--slate, #2d4356); --ot-accent: var(--teal, #0e6e63);
-  position: fixed; inset: 0; z-index: 4000; display: none;
+  position: fixed; inset: 0; z-index: 14000; display: none;
   background: var(--ot-bg);
   -webkit-tap-highlight-color: transparent;
   font: 15px/1.45 var(--sans);
@@ -31,41 +445,170 @@ body.ot-open { overflow: hidden; }
   vertical-align: middle; user-select: none;
 }
 
-.ot-shell { display: flex; flex-direction: column; height: 100%; height: 100dvh; }
+.ot-shell { display: flex; flex-direction: column; height: 100%; height: 100dvh; min-height: 0; overflow: hidden; background: var(--ot-bg); }
 
 /* header */
 .ot-header {
-  display: flex; align-items: center; gap: 10px;
-  padding: calc(env(safe-area-inset-top, 0px) + 8px) 12px 8px;
-  background: var(--ot-card); border-bottom: 1px solid var(--ot-line);
-  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 12px;
+  padding: calc(env(safe-area-inset-top, 0px) + 8px) 14px 10px;
+  background: var(--ot-glass, rgba(255, 255, 255, 0.82));
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 0.5px solid var(--ot-line);
+  position: sticky; top: 0; z-index: 20;
+  flex: 0 0 auto;
 }
+body.dark .ot-header { background: rgba(14, 17, 23, 0.85); }
 .ot-hbtn {
-  flex: 0 0 auto; width: 40px; height: 40px; border: none; border-radius: 12px;
-  background: transparent; color: var(--ot-ink); display: grid; place-items: center; cursor: pointer;
+  flex: 0 0 auto; width: 34px; height: 34px; border: none; border-radius: 50%;
+  background: rgba(142, 142, 147, 0.14); color: var(--ot-ink); display: grid; place-items: center; cursor: pointer;
+  transition: background 0.15s, transform 0.1s cubic-bezier(0.2, 0, 0, 1);
 }
-.ot-hbtn:active { background: color-mix(in srgb, var(--ot-ink) 8%, transparent); }
-.ot-htitle { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
-.ot-hkicker { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ot-sub); font-weight: 700; }
-.ot-hname { font-size: 16px; font-weight: 700; }
+.ot-hbtn:active { background: rgba(142, 142, 147, 0.28); transform: scale(0.92); }
+.ot-hbtn .material-symbols-outlined { font-size: 19px; }
+.ot-htitle { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; line-height: 1.15; }
+.ot-hkicker { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ot-accent); font-weight: 800; }
+.ot-hname { font-size: 16px; font-weight: 700; letter-spacing: -0.015em; color: var(--ot-ink); }
+
+.ot-h-actions { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; }
+.ot-hbtn-calc { color: var(--ot-accent); font-weight: 700; background: rgba(15, 118, 110, 0.12); }
+.ot-hbtn-calc:active { background: rgba(15, 118, 110, 0.24); }
 
 .ot-hkicker-btn { border: none; background: transparent; color: var(--ot-accent); font-weight: 700; display: inline-flex; align-items: center; gap: 3px; cursor: pointer; padding: 0; }
 .ot-hkicker-btn .material-symbols-outlined { font-size: 13px; }
 
 /* disease picker */
-.ot-picker { display: flex; flex-direction: column; gap: 10px; padding-top: 6px; }
-.ot-picker-h { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
-.ot-picker-sub { color: var(--ot-sub); font-size: 13px; margin-bottom: 8px; }
-.ot-disease { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; min-height: 64px; padding: 14px; border: 1px solid var(--ot-line); border-radius: 16px; background: var(--ot-card); color: var(--ot-ink); cursor: pointer; transition: transform .05s, border-color .15s; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
-.ot-disease:active { transform: scale(.99); }
-.ot-disease[disabled] { opacity: .5; cursor: default; }
-.ot-disease-ic { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, var(--ot-accent) 12%, transparent); color: var(--ot-accent); }
+.ot-picker { display: flex; flex-direction: column; min-height: 0; touch-action: pan-y; }
+.ot-picker-hd { margin-bottom: 12px; }
+.ot-picker-topline {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
+}
+.ot-picker-badge {
+  display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 999px;
+  background: var(--ot-accent-subtle, rgba(15, 118, 110, 0.1));
+  border: 0.5px solid var(--ot-accent-glow, rgba(15, 118, 110, 0.22));
+  color: var(--ot-accent); font: 800 10.5px/1 var(--ot-font, system-ui); letter-spacing: .06em;
+}
+.ot-picker-badge .material-symbols-outlined { font-size: 13px; }
+.ot-calc-pill {
+  display: inline-flex; align-items: center; gap: 5px; padding: 4px 11px; border-radius: 999px;
+  background: var(--ot-accent-subtle, rgba(15, 118, 110, 0.08));
+  border: 0.5px solid var(--ot-accent-glow, rgba(15, 118, 110, 0.25));
+  color: var(--ot-accent); font: 700 11px/1 var(--ot-font, system-ui); cursor: pointer;
+  transition: all 0.14s ease;
+}
+.ot-calc-pill:active { transform: scale(0.96); background: var(--ot-accent); color: #ffffff; }
+.ot-calc-pill .material-symbols-outlined { font-size: 14px; }
+.ot-picker-h { font: 800 28px/1.12 var(--ot-font, system-ui); letter-spacing: -.025em; color: var(--ot-ink); margin: 0 0 6px; }
+.ot-picker-sub { color: var(--ot-sub); font-size: 13.5px; line-height: 1.45; margin: 0 0 14px; }
+
+/* Apple Search & Category Filter Controls */
+.ot-picker-controls {
+  position: sticky; top: -16px; z-index: 10;
+  background: var(--ot-bg); padding: 4px 0 12px; margin-bottom: 6px;
+}
+.ot-search-box {
+  position: relative; display: flex; align-items: center;
+  background: rgba(142, 142, 147, 0.12); border: 1px solid var(--ot-line);
+  border-radius: 14px; height: 44px; padding: 0 12px; gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
+.ot-search-box:focus-within {
+  background: var(--ot-card); border-color: var(--ot-accent);
+  box-shadow: 0 0 0 3.5px var(--ot-accent-glow);
+}
+.ot-search-box .material-symbols-outlined { font-size: 20px; color: var(--ot-faint); flex: 0 0 auto; }
+.ot-search-input {
+  flex: 1; background: transparent; border: none; outline: none;
+  font: 600 14px var(--ot-font, system-ui); color: var(--ot-ink); min-width: 0;
+}
+.ot-search-input::placeholder { color: var(--ot-faint); font-weight: 500; }
+.ot-search-clear {
+  width: 26px; height: 26px; border-radius: 50%; border: none; background: transparent;
+  color: var(--ot-faint); display: grid; place-items: center; cursor: pointer; padding: 0;
+}
+.ot-search-clear .material-symbols-outlined { font-size: 18px; }
+
+/* Horizontal Segmented Tabs */
+.ot-picker-tabs {
+  display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; padding-top: 10px;
+}
+.ot-picker-tabs::-webkit-scrollbar { display: none; }
+.ot-tab-chip {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 999px; border: 1px solid var(--ot-line);
+  background: var(--ot-card); color: var(--ot-sub); font: 600 12.5px var(--ot-font, system-ui);
+  cursor: pointer; transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ot-tab-chip.on {
+  background: var(--ot-accent); color: #ffffff; border-color: transparent;
+  box-shadow: 0 2px 10px var(--ot-accent-glow, rgba(15, 118, 110, 0.3));
+}
+.ot-chip-num {
+  font-size: 10.5px; opacity: .85; font-weight: 700; padding: 1px 5px;
+  border-radius: 999px; background: rgba(0, 0, 0, 0.08);
+}
+.ot-tab-chip.on .ot-chip-num { background: rgba(255, 255, 255, 0.22); }
+
+/* Disease Cards List */
+.ot-disease-list { display: flex; flex-direction: column; gap: 10px; }
+.ot-disease {
+  position: relative; display: flex; align-items: center; gap: 14px; width: 100%;
+  text-align: left; padding: 14px 16px; border-radius: 18px; background: var(--ot-card);
+  border: 1px solid var(--ot-line); box-shadow: var(--ot-shadow-card, 0 1px 3px rgba(0,0,0,.04));
+  color: var(--ot-ink); cursor: pointer;
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s, border-color 0.15s;
+  box-sizing: border-box; overflow: hidden;
+}
+.ot-disease:active { transform: scale(0.985); }
+.ot-disease[disabled] { opacity: .55; cursor: default; }
+.ot-disease-ic {
+  flex: 0 0 46px; width: 46px; height: 46px; border-radius: 14px;
+  display: grid; place-items: center; transition: transform 0.15s ease;
+}
 .ot-disease-ic .material-symbols-outlined { font-size: 24px; }
-.ot-disease-t { flex: 1; display: flex; flex-direction: column; }
-.ot-disease-t b { font-size: 16px; font-weight: 700; }
-.ot-disease-t span { color: var(--ot-sub); font-size: 12.5px; }
-.ot-disease > .material-symbols-outlined { color: var(--ot-sub); }
+.ot-disease-t { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.ot-disease-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.ot-disease-t b {
+  font: 700 16px/1.2 var(--ot-font, system-ui); color: var(--ot-ink); letter-spacing: -.012em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ot-disease-t span {
+  color: var(--ot-sub); font-size: 12.5px; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.ot-card-pill {
+  font: 800 9.5px/1 system-ui; text-transform: uppercase; letter-spacing: .06em;
+  padding: 2.5px 6px; border-radius: 6px; background: rgba(15, 118, 110, 0.12);
+  color: var(--ot-accent); border: 0.5px solid rgba(15, 118, 110, 0.25); flex: 0 0 auto;
+}
+.ot-card-pill.ot-pill-maker { background: rgba(0, 113, 227, 0.12); color: #0071e3; border-color: rgba(0, 113, 227, 0.25); }
+.ot-chevron { flex: 0 0 auto; color: var(--ot-faint); font-size: 20px; transition: transform 0.15s ease; }
+.ot-disease:active .ot-chevron { transform: translateX(2px); }
 .ot-soon { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ot-sub); border: 1px solid var(--ot-line); border-radius: 6px; padding: 2px 6px; }
+
+/* Themes for icon squircles */
+.ot-theme-rose .ot-disease-ic { background: linear-gradient(135deg, rgba(244, 63, 94, 0.16), rgba(225, 29, 72, 0.24)); color: #f43f5e; }
+.ot-theme-sky .ot-disease-ic { background: linear-gradient(135deg, rgba(14, 165, 233, 0.16), rgba(2, 132, 199, 0.24)); color: #0284c7; }
+.ot-theme-emerald .ot-disease-ic { background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(5, 150, 105, 0.24)); color: #059669; }
+.ot-theme-indigo .ot-disease-ic { background: linear-gradient(135deg, rgba(99, 102, 241, 0.16), rgba(79, 70, 229, 0.24)); color: #6366f1; }
+.ot-theme-crimson .ot-disease-ic { background: linear-gradient(135deg, rgba(239, 68, 68, 0.16), rgba(220, 38, 38, 0.24)); color: #dc2626; }
+.ot-theme-amber .ot-disease-ic { background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(217, 119, 6, 0.24)); color: #d97706; }
+.ot-theme-violet .ot-disease-ic { background: linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(147, 51, 234, 0.24)); color: #9333ea; }
+.ot-theme-purple .ot-disease-ic { background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(124, 58, 237, 0.24)); color: #7c3aed; }
+.ot-theme-teal .ot-disease-ic { background: linear-gradient(135deg, rgba(15, 118, 110, 0.16), rgba(13, 148, 136, 0.24)); color: #0f766e; }
+
+/* Custom protocol maker button */
+.ot-disease-maker { border: 1.5px dashed var(--ot-accent); background: var(--ot-accent-subtle, rgba(15, 118, 110, 0.04)); }
+.ot-disease-maker .ot-disease-ic { background: rgba(15, 118, 110, 0.14); color: var(--ot-accent); }
+
+/* Empty search */
+.ot-empty-search { text-align: center; padding: 44px 20px; color: var(--ot-sub); }
+.ot-empty-search .material-symbols-outlined { font-size: 42px; color: var(--ot-faint); margin-bottom: 10px; }
+.ot-empty-t { font: 700 16px var(--ot-font, system-ui); color: var(--ot-ink); margin-bottom: 4px; }
+.ot-empty-sub { font-size: 13px; color: var(--ot-sub); max-width: 280px; margin: 0 auto 16px; line-height: 1.4; }
 
 /* view toggle */
 .ot-viewtoggle { display: flex; gap: 4px; padding: 8px 12px; background: var(--ot-card); border-bottom: 1px solid var(--ot-line); }
@@ -78,7 +621,15 @@ body.ot-open { overflow: hidden; }
 .ot-vt.on { background: color-mix(in srgb, var(--ot-accent) 14%, transparent); color: var(--ot-accent); }
 
 /* scroll body */
-.ot-scroll { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 14px 12px 24px; }
+.ot-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  padding: 16px 14px calc(env(safe-area-inset-bottom, 24px) + 36px);
+}
 .ot-body-main { animation: ot-fade .22s ease; }
 @keyframes ot-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
@@ -364,3 +915,1563 @@ body.ot-open { overflow: hidden; }
 .ot-sum-sheet .ot-fn-hd { flex: 0 0 auto; }
 .ot-sum-sheet .ot-sum-pre { flex: 1 1 auto; min-height: 0; max-height: none; }
 .ot-sum-sheet .ot-detail-actions { flex: 0 0 auto; padding-top: 10px; }
+
+/* ── NCCN GUIDELINES NAVIGATOR (Horizontal Multi-Column Flowchart Canvas) ── */
+.ot-scroll.ot-scroll-nav {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.ot-nav-canvas, .ot-nav-cols, .ot-nav-col, .ot-nav-card, .ot-nav-svg {
+  max-width: none !important;
+}
+
+.ot-nav-wrap {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  background: var(--ot-bg, #EEF2F6);
+}
+
+/* Sidebar: Table of Contents */
+.ot-nav-sidebar {
+  width: 290px;
+  flex: 0 0 290px;
+  background: #0B2238;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+}
+.ot-nav-sidebar.collapsed {
+  margin-left: -290px;
+}
+.ot-nav-sb-hd {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: #071726;
+}
+.ot-nav-sb-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 13px system-ui;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #90CAF9;
+}
+.ot-nav-sb-title .material-symbols-outlined {
+  font-size: 18px;
+  color: #64B5F6;
+}
+.ot-nav-sb-toggle {
+  background: transparent;
+  border: none;
+  color: #90A4AE;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ot-nav-sb-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+.ot-nav-sb-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+.ot-nav-sb-search .material-symbols-outlined {
+  font-size: 18px;
+  color: #90A4AE;
+}
+.ot-nav-sb-search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font: 500 13px system-ui;
+  outline: none;
+}
+.ot-nav-sb-search input::placeholder {
+  color: #78909C;
+}
+.ot-nav-sb-list {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ot-nav-sb-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ECEFF1;
+  transition: background 0.15s, color 0.15s;
+}
+.ot-nav-sb-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+.ot-nav-sb-item:active {
+  background: #1976D2;
+  color: #ffffff;
+}
+.ot-nav-sb-item-t {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.ot-nav-sb-item-d {
+  font-size: 11px;
+  opacity: 0.65;
+  margin-top: 3px;
+  line-height: 1.3;
+}
+
+/* Main Area & Toolbar */
+.ot-nav-main {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--ot-bg, #F4F7FA);
+}
+.ot-nav-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #DCE3E8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  z-index: 5;
+  flex-wrap: wrap;
+}
+.ot-nav-tb-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+.ot-nav-tb-btn {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid #DCE3E8;
+  border-radius: 8px;
+  color: #0B2238;
+  cursor: pointer;
+}
+.ot-nav-tb-btn:hover {
+  background: #F0F4F8;
+}
+.ot-nav-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.ot-nav-brand-t {
+  font: 800 15px system-ui;
+  color: #0B2238;
+  letter-spacing: -0.01em;
+}
+.ot-nav-brand-v {
+  font: 600 11.5px system-ui;
+  color: #607D8B;
+}
+.ot-nav-crumb-sep {
+  color: #B0BEC5;
+  font-size: 14px;
+}
+.ot-nav-cur-node {
+  font: 700 13px system-ui;
+  color: #1976D2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+.ot-nav-tb-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Non-active paths switch */
+.ot-nav-toggle-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font: 600 12px system-ui;
+  color: #37474F;
+}
+.ot-nav-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: #CFD8DC;
+  border-radius: 999px;
+  transition: background 0.2s;
+  display: inline-block;
+}
+.ot-nav-switch.checked {
+  background: #1976D2;
+}
+.ot-nav-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.ot-nav-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.ot-nav-switch.checked .ot-nav-slider {
+  transform: translateX(16px);
+}
+
+/* Zoom controls */
+.ot-nav-zoom-group {
+  display: inline-flex;
+  border: 1px solid #DCE3E8;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+.ot-nav-zbtn {
+  background: none;
+  border: none;
+  padding: 4px 10px;
+  font: 700 13px system-ui;
+  color: #37474F;
+  cursor: pointer;
+  border-right: 1px solid #DCE3E8;
+}
+.ot-nav-zbtn:last-child {
+  border-right: none;
+}
+.ot-nav-zbtn:hover {
+  background: #F0F4F8;
+}
+.ot-nav-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 1px solid #DCE3E8;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font: 700 12px system-ui;
+  color: #D32F2F;
+  cursor: pointer;
+}
+.ot-nav-clear-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+.ot-nav-clear-btn:hover {
+  background: #FFEBEE;
+  border-color: #FFCDD2;
+}
+
+/* Flowchart Canvas & Viewport */
+.ot-nav-vp {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-x pan-y;
+  position: relative;
+  cursor: grab;
+  background: var(--ot-bg, #EEF2F6);
+  background-image: radial-gradient(#CFD8DC 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+.ot-nav-vp:active {
+  cursor: grabbing;
+}
+.ot-nav-canvas {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+  padding: 32px 40px 60px;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.ot-nav-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+.ot-nav-edge {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke 0.2s, stroke-width 0.2s;
+}
+.ot-nav-edge.active {
+  stroke: #1976D2;
+  stroke-width: 3.2px;
+  filter: drop-shadow(0 2px 4px rgba(25, 118, 210, 0.3));
+}
+.ot-nav-edge.non-active {
+  stroke: #90A4AE;
+  stroke-width: 1.8px;
+  stroke-dasharray: 4 5;
+  opacity: 0.55;
+}
+
+/* Columns */
+.ot-nav-cols {
+  display: flex;
+  gap: 75px;
+  position: relative;
+  z-index: 2;
+  align-items: flex-start;
+}
+.ot-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 360px;
+  flex: 0 0 360px;
+}
+
+/* Decision Node Card */
+.ot-nav-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(11, 34, 56, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid #DCE3E8;
+  border-top: 4px solid var(--ot-nav-c, #1976D2);
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+  box-sizing: border-box;
+}
+.ot-nav-card.active {
+  border-color: #1976D2;
+  box-shadow: 0 8px 24px rgba(25, 118, 210, 0.18), 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.ot-nav-card.non-active {
+  opacity: 0.45;
+  filter: grayscale(0.25);
+}
+.ot-nav-card.non-active:hover {
+  opacity: 0.88;
+  filter: none;
+}
+.ot-nav-card-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 7px;
+  background: #FAFBFD;
+  border-bottom: 1px solid #EEF2F6;
+}
+.ot-nav-card-cat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font: 800 10.5px system-ui;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ot-nav-c, #1976D2);
+}
+.ot-nav-card-cat .material-symbols-outlined {
+  font-size: 15px;
+}
+.ot-nav-card-code {
+  font: 700 10px system-ui;
+  color: #607D8B;
+  background: #ECEFF1;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+.ot-nav-card-title {
+  font: 700 14.5px/1.3 system-ui;
+  color: #0B2238;
+  padding: 10px 14px 4px;
+}
+.ot-nav-card-desc {
+  font: 400 11.5px/1.4 system-ui;
+  color: #546E7A;
+  padding: 0 14px 8px;
+}
+
+/* Radio options */
+.ot-nav-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 8px 10px;
+}
+.ot-nav-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  border: 1px solid transparent;
+}
+.ot-nav-opt:hover {
+  background: #F0F4F8;
+}
+.ot-nav-opt.selected {
+  background: #E3F2FD;
+  border-color: #90CAF9;
+}
+.ot-nav-radio {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  border: 2px solid #78909C;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  transition: border-color 0.15s;
+}
+.ot-nav-radio.checked {
+  border-color: #1976D2;
+}
+.ot-nav-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1976D2;
+  transform: scale(0);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ot-nav-radio.checked .ot-nav-radio-dot {
+  transform: scale(1);
+}
+.ot-nav-opt-lbl {
+  font: 500 12.5px/1.3 system-ui;
+  color: #1A2530;
+  flex: 1;
+}
+.ot-nav-opt.selected .ot-nav-opt-lbl {
+  font-weight: 700;
+  color: #0D47A1;
+}
+
+/* Diagnostic Workup Checklist */
+.ot-nav-workup-list {
+  padding: 4px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ot-nav-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font: 500 11.5px/1.35 system-ui;
+  color: #2C3E50;
+}
+.ot-nav-check-ic {
+  font-size: 15px;
+  color: #1976D2;
+  flex: 0 0 15px;
+  margin-top: 1px;
+}
+.ot-nav-check-txt {
+  flex: 1;
+}
+
+/* Regimen / Protocol Links */
+.ot-nav-links-wrap {
+  padding: 8px 10px 10px;
+  border-top: 1px solid #EEF2F6;
+  background: #FAFBFD;
+}
+.ot-nav-links-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border: 1px solid #90CAF9;
+  background: #E3F2FD;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  color: #0D47A1;
+  font: 600 12px system-ui;
+  text-align: left;
+  transition: background 0.15s;
+}
+.ot-nav-links-btn:hover {
+  background: #BBDEFB;
+}
+.ot-nav-tx-badge {
+  background: #0D47A1;
+  color: #ffffff;
+  font: 800 10px system-ui;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.ot-nav-links-pill {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font: 700 11px system-ui;
+  color: #1565C0;
+}
+.ot-nav-links-pill .material-symbols-outlined {
+  font-size: 14px;
+}
+.ot-nav-links-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* End of Algorithm Modal Dialog */
+.ot-nav-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 34, 56, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: otFade 0.2s ease;
+}
+.ot-nav-modal {
+  width: 460px;
+  max-width: 90%;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+  border: 1px solid #DCE3E8;
+  overflow: hidden;
+}
+.ot-nav-modal-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #EEF2F6;
+  background: #F8FAFC;
+}
+.ot-nav-modal-title {
+  font: 800 15px system-ui;
+  color: #0B2238;
+}
+.ot-nav-modal-x {
+  border: none;
+  background: none;
+  font-size: 16px;
+  color: #607D8B;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ot-nav-modal-body {
+  padding: 18px;
+  font: 400 13.5px/1.55 system-ui;
+  color: #37474F;
+}
+.ot-nav-modal-body p {
+  margin: 0 0 10px;
+}
+.ot-nav-modal-body p:last-child {
+  margin-bottom: 0;
+}
+.ot-nav-modal-acts {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 18px;
+  background: #F8FAFC;
+  border-top: 1px solid #EEF2F6;
+}
+.ot-btn.accent {
+  background: #1976D2;
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ot-btn.accent:hover {
+  background: #1565C0;
+}
+
+/* ==========================================================================
+   Guided Flowchart & Mobile Navigator Experience
+   ========================================================================== */
+
+/* Mode Pill Switcher (Flowchart vs Canvas) */
+.ot-nav-mode-pill {
+  display: inline-flex;
+  background: #ECEFF1;
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.ot-nav-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: transparent;
+  color: #546E7A;
+  font: 700 11.5px system-ui;
+  padding: 5px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.ot-nav-mode-btn .material-symbols-outlined {
+  font-size: 15px;
+}
+.ot-nav-mode-btn.on {
+  background: #ffffff;
+  color: #1976D2;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+.ot-nav-mode-btn:hover:not(.on) {
+  color: #0B2238;
+}
+
+/* Flow Viewport Container */
+.ot-flow-viewport {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  background: var(--ot-bg, #F4F7FA);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stage Progression Ribbon / Stepper */
+.ot-flow-stepper-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #ffffff;
+  border-bottom: 1px solid #DCE3E8;
+  padding: 10px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.ot-flow-stepper-wrap::-webkit-scrollbar {
+  display: none;
+}
+.ot-flow-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 100%;
+}
+.ot-flow-step-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font: 600 12px system-ui;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.ot-flow-step-item.completed {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+.ot-flow-step-item.current {
+  background: #E3F2FD;
+  color: #0D47A1;
+  font-weight: 800;
+  box-shadow: 0 0 0 1.5px #1976D2;
+}
+.ot-flow-step-item.upcoming {
+  background: #ECEFF1;
+  color: #78909C;
+}
+.ot-flow-step-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+}
+.ot-flow-step-item.completed .ot-flow-step-dot {
+  background: #2E7D32;
+  color: #ffffff;
+}
+.ot-flow-step-item.current .ot-flow-step-dot {
+  background: #1976D2;
+  color: #ffffff;
+}
+.ot-flow-step-item.upcoming .ot-flow-step-dot {
+  background: #B0BEC5;
+  color: #ffffff;
+}
+.ot-flow-step-dot .material-symbols-outlined {
+  font-size: 13px;
+}
+.ot-flow-step-arrow {
+  color: #B0BEC5;
+  display: flex;
+  align-items: center;
+}
+.ot-flow-step-arrow .material-symbols-outlined {
+  font-size: 16px;
+}
+
+/* Flow Cards Stream */
+.ot-flow-content {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Base Card */
+.ot-flow-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(11, 34, 56, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid #DCE3E8;
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+/* Completed Step Card */
+.ot-flow-card.completed {
+  background: #FAFCFE;
+  border-left: 4px solid #4CAF50;
+  padding: 12px 16px;
+}
+.ot-flow-card.completed .ot-flow-card-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.ot-flow-card.completed .ot-flow-card-title {
+  font: 700 13px system-ui;
+  color: #455A64;
+  margin: 0 0 6px;
+}
+.ot-flow-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ot-flow-done-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #E8F5E9;
+  color: #2E7D32;
+  font: 700 11px system-ui;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.ot-flow-done-pill .material-symbols-outlined {
+  font-size: 13px;
+}
+.ot-flow-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  border: 1px solid #CFD8DC;
+  background: #ffffff;
+  color: #37474F;
+  font: 600 11px system-ui;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ot-flow-edit-btn:hover {
+  background: #ECEFF1;
+  color: #0B2238;
+}
+.ot-flow-edit-btn .material-symbols-outlined {
+  font-size: 13px;
+}
+.ot-flow-answered-val {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #F1F8E9;
+  border: 1px solid #C8E6C9;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.ot-flow-answered-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2E7D32;
+  flex: 0 0 8px;
+}
+.ot-flow-answered-txt {
+  font: 500 12.5px system-ui;
+  color: #1B5E20;
+}
+
+/* Active Step Card */
+.ot-flow-card.active {
+  border-top: 4px solid var(--ot-nav-c, #1976D2);
+  border-color: #90CAF9;
+  box-shadow: 0 8px 28px rgba(25, 118, 210, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 20px;
+}
+.ot-flow-card.active .ot-flow-card-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.ot-flow-card-cat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font: 800 11px system-ui;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.ot-flow-card-cat .material-symbols-outlined {
+  font-size: 16px;
+}
+.ot-flow-active-badge {
+  background: #E3F2FD;
+  color: #0D47A1;
+  font: 800 10.5px system-ui;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.ot-flow-card.active .ot-flow-card-title {
+  font: 800 18px/1.3 system-ui;
+  color: #0B2238;
+  margin: 0 0 8px;
+}
+.ot-flow-card-desc {
+  font: 400 13.5px/1.55 system-ui;
+  color: #455A64;
+  margin: 0 0 16px;
+}
+
+/* Diagnostic Workup Checklist Box */
+.ot-flow-workup-box {
+  background: #F8FAFD;
+  border: 1px solid #D0E1FD;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.ot-flow-workup-hd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #E8F0FE;
+  padding: 10px 14px;
+  border-bottom: 1px solid #D0E1FD;
+  font: 800 12.5px system-ui;
+  color: #1565C0;
+  letter-spacing: -0.01em;
+}
+.ot-flow-workup-hd .material-symbols-outlined {
+  font-size: 18px;
+  color: #1976D2;
+}
+.ot-flow-workup-list {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ot-flow-workup-list .ot-flow-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font: 500 12.5px/1.4 system-ui;
+  color: #263238;
+}
+.ot-flow-workup-list .ot-flow-check-ic {
+  font-size: 16px;
+  color: #1976D2;
+  flex: 0 0 16px;
+  margin-top: 1px;
+}
+
+/* Decision Options Container */
+.ot-flow-opts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ot-flow-decision-prompt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 13px system-ui;
+  color: #0B2238;
+}
+.ot-flow-decision-prompt .material-symbols-outlined {
+  font-size: 16px;
+  color: #1976D2;
+}
+.ot-flow-opts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ot-flow-opt-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #FAFBFD;
+  border: 1.5px solid #DCE3E8;
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 52px;
+}
+.ot-flow-opt-card:hover {
+  background: #F0F7FF;
+  border-color: #90CAF9;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(25, 118, 210, 0.08);
+}
+.ot-flow-opt-card:active {
+  background: #E3F2FD;
+  border-color: #1976D2;
+  transform: translateY(0);
+}
+.ot-flow-opt-radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #90A4AE;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  flex: 0 0 22px;
+  transition: border-color 0.15s;
+}
+.ot-flow-opt-radio-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1976D2;
+  transform: scale(0);
+  transition: transform 0.15s;
+}
+.ot-flow-opt-card:hover .ot-flow-opt-radio {
+  border-color: #1976D2;
+}
+.ot-flow-opt-info {
+  flex: 1;
+}
+.ot-flow-opt-lbl {
+  font: 700 14px/1.35 system-ui;
+  color: #0B2238;
+}
+.ot-flow-opt-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.ot-flow-pill {
+  font: 600 10.5px system-ui;
+  background: #ECEFF1;
+  color: #455A64;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.ot-flow-opt-card .material-symbols-outlined {
+  font-size: 16px;
+  color: #90A4AE;
+  transition: transform 0.15s, color 0.15s;
+}
+.ot-flow-opt-card:hover .material-symbols-outlined {
+  color: #1976D2;
+  transform: translateX(2px);
+}
+
+/* Single Acknowledge Button */
+.ot-flow-single-opt {
+  margin-top: 6px;
+}
+.ot-flow-continue-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: #1976D2;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font: 700 14px system-ui;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+  box-shadow: 0 4px 14px rgba(25, 118, 210, 0.25);
+}
+.ot-flow-continue-btn:hover {
+  background: #1565C0;
+  transform: translateY(-1px);
+}
+.ot-flow-continue-btn:active {
+  transform: translateY(0);
+}
+.ot-flow-continue-btn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* Outcome Card (Recommendations / Regimens) */
+.ot-flow-card.outcome {
+  border-top: 4px solid #2E7D32;
+  border-color: #A5D6A7;
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0 8px 28px rgba(46, 125, 50, 0.12);
+}
+.ot-flow-card.outcome .ot-flow-card-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.ot-flow-rec-badge {
+  background: #E8F5E9;
+  color: #2E7D32;
+  font: 800 10.5px system-ui;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+.ot-flow-card.outcome .ot-flow-card-title {
+  font: 800 18px/1.3 system-ui;
+  color: #0B2238;
+  margin: 0 0 8px;
+}
+.ot-flow-guidance-list {
+  background: #F1F8E9;
+  border: 1px solid #C8E6C9;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.ot-flow-guide-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font: 500 12.5px/1.4 system-ui;
+  color: #1B5E20;
+}
+.ot-flow-guide-item .material-symbols-outlined {
+  font-size: 16px;
+  color: #2E7D32;
+  flex: 0 0 16px;
+  margin-top: 1px;
+}
+
+/* Regimens Grid */
+.ot-flow-protos-wrap {
+  margin-top: 16px;
+}
+.ot-flow-protos-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 800 13px system-ui;
+  color: #0B2238;
+  margin-bottom: 10px;
+}
+.ot-flow-protos-title .material-symbols-outlined {
+  font-size: 16px;
+  color: #1976D2;
+}
+.ot-flow-protos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.ot-flow-proto-card {
+  background: #FAFBFD;
+  border: 1.5px solid #BBDEFB;
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+}
+.ot-flow-proto-card:hover {
+  background: #E3F2FD;
+  border-color: #1976D2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.12);
+}
+.ot-flow-proto-hd {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.ot-flow-proto-tag {
+  background: #1976D2;
+  color: #ffffff;
+  font: 800 9px system-ui;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.ot-flow-proto-name {
+  font: 700 13px system-ui;
+  color: #0D47A1;
+}
+.ot-flow-proto-sub {
+  font: 400 11.5px system-ui;
+  color: #546E7A;
+  margin-bottom: 10px;
+  flex: 1;
+}
+.ot-flow-proto-ft {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #E1F5FE;
+  padding-top: 8px;
+  font: 700 11px system-ui;
+  color: #1565C0;
+}
+.ot-flow-proto-view, .ot-flow-proto-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.ot-flow-proto-ft .material-symbols-outlined {
+  font-size: 13px;
+}
+.ot-flow-restart-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* Vertical Connectors */
+.ot-flow-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 6px 0;
+  color: #90CAF9;
+}
+.ot-flow-line {
+  width: 2px;
+  height: 22px;
+  background: #90CAF9;
+}
+.ot-flow-connector .material-symbols-outlined {
+  font-size: 16px;
+  margin-top: -3px;
+}
+
+/* Mobile Responsiveness & Drawer Overlay */
+.ot-nav-sb-backdrop {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ot-nav-wrap {
+    position: relative;
+  }
+  .ot-nav-sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    width: 280px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ot-nav-sidebar.collapsed {
+    transform: translateX(-100%);
+    margin-left: 0;
+  }
+  .ot-nav-sb-backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 34, 56, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 45;
+  }
+  .ot-nav-toolbar {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  .ot-nav-brand-v, .ot-nav-crumb-sep, .ot-nav-cur-node {
+    display: none;
+  }
+  .ot-nav-toggle-wrap {
+    display: none;
+  }
+  .ot-flow-content {
+    padding: 16px 12px 60px;
+  }
+  .ot-flow-card.active {
+    padding: 16px 14px;
+  }
+  .ot-flow-card.active .ot-flow-card-title {
+    font-size: 16px;
+  }
+  .ot-flow-opt-card {
+    padding: 12px 14px;
+  }
+  .ot-flow-protos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* ── ONCOTREE ADVANCED CLINICAL SUPERPOWERS (Mobile-Optimized) ── */
+.ot-superpowers-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px;
+  background: var(--paper, #f1f5f9);
+  border: 1px solid var(--line, #cbd5e1);
+  border-radius: 12px;
+}
+.ot-superpowers-bar .ot-btn {
+  flex: 1 1 calc(50% - 8px);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+.ot-flow-proto-actions {
+  margin-bottom: 12px;
+}
+.ot-flow-proto-actions .ot-btn {
+  min-height: 44px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0e6e63;
+  background: #e6f4f2;
+  border: 1px solid #99d5cf;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.ot-flow-proto-actions .ot-btn:active {
+  background: #ccede8;
+}
+
+/* Superpower Modal Sheets */
+.ot-superpower-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 14500;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+.ot-superpower-modal {
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: ot-modal-up 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes ot-modal-up {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.ot-superpower-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #0f766e;
+  color: #ffffff;
+}
+.ot-superpower-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.ot-superpower-x {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.ot-superpower-x:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+.ot-superpower-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 20px 24px;
+}
+.ot-superpower-ft {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Compare Matrix Table */
+.ot-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-top: 10px;
+}
+.ot-compare-table th, .ot-compare-table td {
+  border: 1px solid #cbd5e1;
+  padding: 10px 12px;
+  vertical-align: top;
+  text-align: left;
+}
+.ot-compare-table th {
+  background: #f0fdfa;
+  color: #0f766e;
+  font-weight: 700;
+}
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.badge-danger { background: #fee2e2; color: #b91c1c; }
+.badge-warning { background: #fef3c7; color: #b45309; }
+.badge-info { background: #e0f2fe; color: #0369a1; }
+.badge-success { background: #dcfce7; color: #15803d; }
+
+/* ── Interactive Bedside Oncology Calculator (Creatinine & Calvert) ── */
+.ot-organ-calc-divider { height: 1px; background: var(--ot-line, #e2e8f0); margin: 18px 0; }
+.ot-calc-shell { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+.ot-calc-desc { font-size: 13px; color: var(--ot-sub); line-height: 1.45; }
+.ot-calc-sync-row { display: flex; justify-content: flex-start; }
+.ot-sync-btn { border-radius: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.ot-calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+.ot-calc-f { display: flex; flex-direction: column; gap: 4px; }
+.ot-calc-f label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ot-sub); }
+.ot-calc-f input, .ot-calc-f select {
+  height: 38px; padding: 0 10px; border-radius: 10px; border: 1px solid var(--ot-line);
+  background: var(--ot-card); color: var(--ot-ink); font: 600 13.5px var(--ot-font, system-ui); outline: none;
+}
+.ot-calc-f input:focus, .ot-calc-f select:focus {
+  border-color: var(--ot-accent); box-shadow: 0 0 0 3px var(--ot-accent-glow);
+}
+.ot-calc-f-wide { grid-column: 1 / -1; }
+.ot-calc-auc-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ot-calc-auc-row input { flex: 0 0 90px; }
+.ot-auc-presets { display: flex; gap: 6px; flex-wrap: wrap; }
+.ot-auc-tag {
+  border: 1px solid var(--ot-line); background: rgba(142, 142, 147, 0.12);
+  border-radius: 8px; padding: 4px 10px; font: 700 12px var(--ot-font, system-ui);
+  color: var(--ot-sub); cursor: pointer; transition: all 0.12s;
+}
+.ot-auc-tag.on, .ot-auc-tag:active { background: var(--ot-accent); color: #fff; border-color: transparent; }
+.ot-calc-cards { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.ot-res-card {
+  padding: 14px 16px; border-radius: 16px; background: var(--ot-card);
+  border: 1px solid var(--ot-line); box-shadow: var(--ot-shadow-card, 0 1px 3px rgba(0,0,0,0.04));
+  display: flex; flex-direction: column; gap: 4px;
+}
+.ot-res-card.highlight {
+  background: color-mix(in srgb, var(--ot-accent) 6%, var(--ot-card));
+  border-color: color-mix(in srgb, var(--ot-accent) 30%, var(--ot-line));
+}
+.ot-res-hd { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ot-res-title { font-size: 13px; font-weight: 700; color: var(--ot-ink); display: flex; align-items: center; gap: 6px; }
+.ot-res-title .material-symbols-outlined { font-size: 17px; color: var(--ot-accent); }
+.ot-res-val { font: 800 26px/1.1 var(--ot-font, system-ui); color: var(--ot-ink); letter-spacing: -0.02em; }
+.ot-res-unit { font-size: 14px; font-weight: 600; color: var(--ot-sub); }
+.ot-res-sub { font-size: 12px; color: var(--ot-sub); line-height: 1.4; }
+.ot-res-glow { color: var(--ot-accent); }
+.ot-calc-alerts { display: flex; flex-direction: column; gap: 8px; }
+.ot-alert { padding: 10px 14px; border-radius: 12px; font-size: 12.5px; line-height: 1.45; display: flex; align-items: flex-start; gap: 8px; }
+.ot-alert .material-symbols-outlined { font-size: 18px; flex: 0 0 auto; margin-top: 1px; }
+.ot-alert.success { background: rgba(16, 185, 129, 0.12); color: #065f46; border: 1px solid rgba(16, 185, 129, 0.25); }
+.ot-alert.warning { background: rgba(245, 158, 11, 0.12); color: #92400e; border: 1px solid rgba(245, 158, 11, 0.25); }
+.ot-alert.danger { background: rgba(239, 68, 68, 0.12); color: #991b1b; border: 1px solid rgba(239, 68, 68, 0.25); }
+body.dark .ot-alert.success { background: rgba(16, 185, 129, 0.18); color: #34d399; }
+body.dark .ot-alert.warning { background: rgba(245, 158, 11, 0.18); color: #fbbf24; }
+body.dark .ot-alert.danger { background: rgba(239, 68, 68, 0.18); color: #f87171; }
+
+/* Timeline Grid */
+.ot-timeline-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+.ot-timeline-day {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #ffffff;
+}
+.ot-day-admin { border-left: 5px solid #0f766e; background: #f0fdfa; }
+.ot-day-nadir { border-left: 5px solid #dc2626; background: #fef2f2; }
+.ot-day-labs { border-left: 5px solid #0284c7; background: #f0f9ff; }
+.ot-day-recovery { border-left: 5px solid #94a3b8; }
+.ot-day-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  margin-bottom: 4px;
+}
+.ot-day-phase {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #475569;
+}
+.ot-day-events {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+}
+.ot-day-alert {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.alert-high { background: #fee2e2; color: #991b1b; font-weight: 600; }
+.alert-warning { background: #fef3c7; color: #92400e; }
+.alert-info { background: #e0f2fe; color: #075985; }
+
+/* Mobile Adaptations */
+@media (max-width: 768px) {
+  .ot-superpowers-bar .ot-btn {
+    flex: 1 1 100%;
+  }
+  .ot-superpower-modal {
+    max-width: 100%;
+    max-height: 100%;
+    max-height: 100dvh;
+    height: 100%;
+    border-radius: 0;
+  }
+  .ot-superpower-backdrop {
+    padding: 0;
+  }
+  .ot-compare-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

@@ -54,3 +54,29 @@ test("checkout timeline link resolves (verifyTicketToken awaited)", { skip: canM
   const bad = await getTimelineByToken(env, token.slice(0, -3) + "aaa");
   assert.notEqual(bad.ok, true);
 });
+
+test("the doctor's link extension: refused before checkout, never promised past the token's life", { skip: canMock ? false : "needs --experimental-test-module-mocks" }, async () => {
+  const { appendTimeline, finalizeCheckout, extendTimeline, extendLinkMs } = mod;
+  const env = {
+    QUEUE_TOKEN_SECRET: "x".repeat(40),
+    FOLLOWCARE_PHI_KEY: Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString("base64url"),
+  };
+  const session = { id: "sess2", doctorUid: "docA", hospitalId: "org1" };
+  const ticket = { id: "tkt_" + Math.random().toString(36).slice(2), mrnLast4: "9876" };
+  const DAY = 86400000;
+
+  assert.equal((await extendTimeline(env, "tkt_missing", 30)).error, "not_found");
+  await appendTimeline(env, session, ticket, "note", "Seen", "docA");
+  assert.equal((await extendTimeline(env, ticket.id, 30)).error, "not_ready", "an open visit has no link to extend");
+
+  const fin = await finalizeCheckout(env, session, ticket, "docA");
+  const ext = await extendTimeline(env, ticket.id, 30);
+  assert.equal(ext.ok, true);
+  assert.ok(ext.linkExpiresAt > fin.linkExpiresAt, "30 days is longer than the default 7");
+  assert.ok(ext.linkExpiresAt <= Date.now() + 30 * DAY + 1000);
+
+  // 25 days after the visit, "30 more days" must stop at the 30-day token, not day 55.
+  const closedAt = 1000000000000;
+  assert.equal(extendLinkMs(closedAt + 25 * DAY, 30, closedAt), closedAt + 30 * DAY);
+  assert.equal(extendLinkMs(closedAt, 7, closedAt), closedAt + 7 * DAY);
+});

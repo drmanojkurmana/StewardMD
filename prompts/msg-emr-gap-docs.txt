@@ -1,0 +1,38 @@
+docs: OpenMRS/Bahmni gap analysis - brutally honest EMR/HMS completeness audit
+
+Seven documents in docs/emr-gap-analysis/, requested by the owner as a forensic audit of what
+Bahmni and OpenMRS already solve that WardSynQ doesn't, and what to do about it: reuse, rebuild,
+or throw away.
+
+The single most important finding, verified against actual source in this repo rather than
+assumed: at least seven functions/_wardsynq/*.js modules carry their own comment admitting the
+module was finished and nothing in the product ever called it (billing.js, incidents.js,
+migrate-emar.js, news2-view.js, mpi-view.js, read-log.js, wardsynq-safety-case.js). This session's
+own role-by-role walkthrough found and fixed the incident-reporting instance of this pattern live.
+That is the real shape of the owner's "10% EMR" instinct: the backend is frequently more
+sophisticated than a fresh build would produce (real upcoding detection in billing, a real
+append-only stock ledger, a DICOM boundary that correctly refuses to touch pixel data this
+runtime has nowhere to store) - but end-to-end reachability has been the recurring failure, not a
+shortage of domain logic.
+
+Recommendation (TARGET_ARCHITECTURE.md): keep WardSynQ's own architecture and UI entirely; reuse
+exactly one thing from the open-source ecosystem - an external, MPL-licensed terminology service
+for ICD/SNOMED/LOINC, called over HTTP - because terminology.js admits outright it has no real
+code tables. Everything else genuinely missing (patient relationships, deceased tracking, staff
+rostering, pharmacy procurement, a live payment gateway) is native, well-scoped work, not a reuse
+candidate, because neither OpenMRS nor Bahmni solves those better than WardSynQ's own post-fix
+logic already does. Bahmni's core pieces are historically AGPL-licensed (LICENSING_ANALYSIS.md),
+which rules out running its backend as a live service behind a closed-source product regardless of
+technical fit.
+
+Highest-leverage single recommendation (IMPLEMENTATION_ROADMAP.md, P0 #1): a static reachability
+checker that fails CI when a domain function has no route calling it, or a route has no UI
+element calling it - the exact class of bug found by hand eight times this session, made
+structural instead of requiring another marathon manual walkthrough to catch the next instance.
+
+A deeper source-level verification pass against the actual cloned openmrs-core/bahmnicore/
+bahmni-config-example repos was running in parallel and will follow up with corrections/citations
+to OPENMRS_BAHMNI_AUDIT.md.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

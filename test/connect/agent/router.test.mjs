@@ -152,35 +152,35 @@ test("flag-off returns the same 'not enabled' shape the onboard router uses", as
   const res1 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, {}, doc1.headers));
   assert.equal(res1.status, 404);
   assert.equal(res1.headers.get("cache-control"), "no-store");
-  assert.deepEqual(await res1.json(), { error: "not_found" });
+  assert.equal((await res1.json()).error, "not_found");
 
   // Master flag off
   const res2 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1" }, { CONNECT_ONBOARD_FLAG: "1", CONNECT_AGENT_FLAG: "1" }, doc1.headers));
   assert.equal(res2.status, 404);
-  assert.deepEqual(await res2.json(), { error: "not_found" });
+  assert.equal((await res2.json()).error, "not_found");
 
   // Onboard flag off
   const res3 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1" }, { CONNECT_FLAG: "1", CONNECT_AGENT_FLAG: "1" }, doc1.headers));
   assert.equal(res3.status, 404);
-  assert.deepEqual(await res3.json(), { error: "not_found" });
+  assert.equal((await res3.json()).error, "not_found");
 
   // Agent flag off
   const res4 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1" }, { CONNECT_FLAG: "1", CONNECT_ONBOARD_FLAG: "1" }, doc1.headers));
   assert.equal(res4.status, 404);
-  assert.deepEqual(await res4.json(), { error: "not_found" });
+  assert.equal((await res4.json()).error, "not_found");
 
   // Browser session flag off gates POST /sessions (404), but GET /sessions/:id or POST /hospitals/resolve are reachable past the router gate
   const envNoBrowser = Object.assign({}, BASE_FLAGS, { CONNECT_BROWSER_SESSION_FLAG: "0" });
   const res5 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, envNoBrowser, doc1.headers));
   assert.equal(res5.status, 404);
-  assert.deepEqual(await res5.json(), { error: "not_found" });
+  assert.equal((await res5.json()).error, "not_found");
 });
 
 test("unknown sub-path returns 404", async () => {
   const { env, doc1 } = await setupTestEnv();
   const res = await onRequest(get("/api/connect/agent/nonexistent-endpoint", env, doc1.headers));
   assert.equal(res.status, 404);
-  assert.deepEqual(await res.json(), { error: "not_found" });
+  assert.equal((await res.json()).error, "not_found");
 });
 
 // --- Unauthenticated Requests Denied ---
@@ -192,42 +192,42 @@ test("unauthenticated request denied with sanitized 401 and no-store", async () 
   const r1 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, env));
   assert.equal(r1.status, 401);
   assert.equal(r1.headers.get("cache-control"), "no-store");
-  assert.deepEqual(await r1.json(), { error: "auth" });
+  assert.equal((await r1.json()).error, "auth");
 
   // GET /sessions/:id
   const r2 = await onRequest(get("/api/connect/agent/sessions/sess-1?tenant=t1", env));
   assert.equal(r2.status, 401);
-  assert.deepEqual(await r2.json(), { error: "auth" });
+  assert.equal((await r2.json()).error, "auth");
 
   // POST /sessions/:id/viewer-token
   const r3 = await onRequest(post("/api/connect/agent/sessions/sess-1/viewer-token", { tenantId: "t1" }, env));
   assert.equal(r3.status, 401);
-  assert.deepEqual(await r3.json(), { error: "auth" });
+  assert.equal((await r3.json()).error, "auth");
 
   // POST /sessions/:id/handoff
   const r4 = await onRequest(post("/api/connect/agent/sessions/sess-1/handoff", { tenantId: "t1" }, env));
   assert.equal(r4.status, 401);
-  assert.deepEqual(await r4.json(), { error: "auth" });
+  assert.equal((await r4.json()).error, "auth");
 
   // POST /sessions/:id/pause
   const r5 = await onRequest(post("/api/connect/agent/sessions/sess-1/pause", { tenantId: "t1" }, env));
   assert.equal(r5.status, 401);
-  assert.deepEqual(await r5.json(), { error: "auth" });
+  assert.equal((await r5.json()).error, "auth");
 
   // POST /sessions/:id/resume
   const r6 = await onRequest(post("/api/connect/agent/sessions/sess-1/resume", { tenantId: "t1" }, env));
   assert.equal(r6.status, 401);
-  assert.deepEqual(await r6.json(), { error: "auth" });
+  assert.equal((await r6.json()).error, "auth");
 
   // DELETE /sessions/:id
   const r7 = await onRequest(del("/api/connect/agent/sessions/sess-1?tenant=t1", {}, env));
   assert.equal(r7.status, 401);
-  assert.deepEqual(await r7.json(), { error: "auth" });
+  assert.equal((await r7.json()).error, "auth");
 
   // POST /hospitals/resolve
   const r8 = await onRequest(post("/api/connect/agent/hospitals/resolve", { tenantId: "t1", origins: ["https://emr1.example.org"] }, env));
   assert.equal(r8.status, 401);
-  assert.deepEqual(await r8.json(), { error: "auth" });
+  assert.equal((await r8.json()).error, "auth");
 });
 
 // --- Cross-Tenant and Role Denied ---
@@ -238,7 +238,7 @@ test("cross-tenant request denied (IDOR protection)", async () => {
   // Doc1 is a member of t1 only; asking for t2 is rejected with 403
   const res = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t2", deploymentId: "dep-secret-2" }, env, doc1.headers));
   assert.equal(res.status, 403);
-  assert.deepEqual(await res.json(), { error: "permission" });
+  assert.equal((await res.json()).error, "permission");
 });
 
 test("auditor role is denied session creation (fail-closed RBAC)", async () => {
@@ -247,7 +247,7 @@ test("auditor role is denied session creation (fail-closed RBAC)", async () => {
   // Auditor has read permission but may not perform "session"
   const res = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, env, auditor.headers));
   assert.equal(res.status, 403);
-  assert.deepEqual(await res.json(), { error: "permission" });
+  assert.equal((await res.json()).error, "permission");
 });
 
 // --- Credential Safety ---
@@ -267,7 +267,9 @@ test("POST /sessions rejects supplied credentials and never echoes them", async 
     const res = await onRequest(post("/api/connect/agent/sessions", b, env, doc1.headers));
     assert.equal(res.status, 400);
     const data = await res.json();
-    assert.deepEqual(data, { error: "invalid" });
+    assert.equal(data.error, "invalid");
+    // The reason is authored server-side and must never quote what the caller sent.
+    assert.equal(data.detail, "credentials must not be supplied");
     assert.doesNotMatch(JSON.stringify(data), /SecretPassword/);
     assert.doesNotMatch(JSON.stringify(data), /bearer-token/);
   }
@@ -281,7 +283,7 @@ test("missing or invalid consent denied", async () => {
   // 1. Missing consent entirely
   const r1 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, env, doc1.headers));
   assert.equal(r1.status, 403);
-  assert.deepEqual(await r1.json(), { error: "forbidden" });
+  assert.equal((await r1.json()).error, "forbidden");
 
   // 2. Expired consent
   const expiredRow = await recordConsent(
@@ -298,7 +300,7 @@ test("missing or invalid consent denied", async () => {
   );
   const r2 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, env, doc1.headers));
   assert.equal(r2.status, 400);
-  assert.deepEqual(await r2.json(), { error: "expired" });
+  assert.equal((await r2.json()).error, "expired");
 
   // Clean up expired row from db
   db._tables.connect_agent_consent = [];
@@ -318,7 +320,7 @@ test("missing or invalid consent denied", async () => {
   await db.prepare("UPDATE connect_agent_consent SET revoked_at=? WHERE id=?").bind(nowMs, revRow.id).run();
   const r3 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, env, doc1.headers));
   assert.equal(r3.status, 400);
-  assert.deepEqual(await r3.json(), { error: "revoked" });
+  assert.equal((await r3.json()).error, "revoked");
 
   // Clean up revoked row
   db._tables.connect_agent_consent = [];
@@ -338,7 +340,7 @@ test("missing or invalid consent denied", async () => {
   await db.prepare("UPDATE connect_agent_consent SET receipt_hmac=? WHERE id=?").bind("badbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadb", tamperRow.id).run();
   const r4 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, env, doc1.headers));
   assert.equal(r4.status, 403);
-  assert.deepEqual(await r4.json(), { error: "forbidden" });
+  assert.equal((await r4.json()).error, "forbidden");
 
   // 5. Consent missing required scope ("emr:read" granted, but not "emr:session")
   db._tables.connect_agent_consent = [];
@@ -355,7 +357,7 @@ test("missing or invalid consent denied", async () => {
   );
   const r5 = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", deploymentId: "dep-1" }, env, doc1.headers));
   assert.equal(r5.status, 403);
-  assert.deepEqual(await r5.json(), { error: "forbidden" });
+  assert.equal((await r5.json()).error, "forbidden");
 });
 
 // --- Session Creation and Resumption ---
@@ -437,7 +439,7 @@ test("viewer-token is actor-bound (a different actor's token is rejected) and si
     tenantId: "t1",
   }, env, doc2.headers));
   assert.equal(doc2Req.status, 404);
-  assert.deepEqual(await doc2Req.json(), { error: "not-found" });
+  assert.equal((await doc2Req.json()).error, "not-found");
 
   // Doc1 requests viewer token
   const vtRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/viewer-token`, {
@@ -456,7 +458,7 @@ test("viewer-token is actor-bound (a different actor's token is rejected) and si
     token: vtData.token,
   }, env, doc2.headers));
   assert.equal(redeemDoc2.status, 403);
-  assert.deepEqual(await redeemDoc2.json(), { error: "forbidden" });
+  assert.equal((await redeemDoc2.json()).error, "forbidden");
 
   // Doc1 redeems their own viewer token -> succeeds
   const redeemDoc1 = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/viewer-token/redeem`, {
@@ -474,7 +476,7 @@ test("viewer-token is actor-bound (a different actor's token is rejected) and si
     token: vtData.token,
   }, env, doc1.headers));
   assert.equal(redeemAgain.status, 409);
-  assert.deepEqual(await redeemAgain.json(), { error: "conflict" });
+  assert.equal((await redeemAgain.json()).error, "conflict");
 });
 
 // --- Pause and Resume Ownership Gating ---
@@ -505,14 +507,14 @@ test("pause/resume rejected for a non-owning actor", async () => {
     tenantId: "t1",
   }, env, doc2.headers));
   assert.equal(pauseNonOwner.status, 404);
-  assert.deepEqual(await pauseNonOwner.json(), { error: "not-found" });
+  assert.equal((await pauseNonOwner.json()).error, "not-found");
 
   // Doc2 attempts resume on Doc1's session -> rejected with 404 not-found
   const resumeNonOwner = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/resume`, {
     tenantId: "t1",
   }, env, doc2.headers));
   assert.equal(resumeNonOwner.status, 404);
-  assert.deepEqual(await resumeNonOwner.json(), { error: "not-found" });
+  assert.equal((await resumeNonOwner.json()).error, "not-found");
 
   // Doc1 (owner) successfully transfers ownership
   const pauseOwner = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/pause`, {
@@ -647,7 +649,7 @@ test("DELETE actually reaches revoke/cleanup in state.js", async () => {
     tenantId: "t1",
   }, env, doc1.headers));
   assert.equal(secondDel.status, 409);
-  assert.deepEqual(await secondDel.json(), { error: "conflict" });
+  assert.equal((await secondDel.json()).error, "conflict");
 });
 
 // --- Hospitals Resolve: No Leakage ---
@@ -682,9 +684,11 @@ test("hospitals/resolve does not distinguish 'exists but not yours' from 'does n
   const bodyB = await resNonexistent.json();
   const bodyC = await resNotFoundSameTenant.json();
 
-  assert.deepEqual(bodyA, { error: "not-found" });
-  assert.deepEqual(bodyB, { error: "not-found" });
-  assert.deepEqual(bodyC, { error: "not-found" });
+  // Byte-identical bodies are the point here: "exists but not yours" must not be distinguishable
+  // from "does not exist", reason included.
+  assert.deepEqual(bodyA, bodyB);
+  assert.deepEqual(bodyB, bodyC);
+  assert.equal(bodyA.error, "not-found");
 
   // And an accessible hospital in Doc1's own tenant succeeds with client-safe view
   const resFound = await onRequest(post("/api/connect/agent/hospitals/resolve", {
@@ -720,11 +724,11 @@ test("raw browser runner controls (evaluate, navigate, devtools) are never expos
   for (const p of paths) {
     const postRes = await onRequest(post(p, { script: "alert(1)" }, env, doc1.headers));
     assert.equal(postRes.status, 404);
-    assert.deepEqual(await postRes.json(), { error: "not_found" });
+    assert.equal((await postRes.json()).error, "not_found");
 
     const getRes = await onRequest(get(p, env, doc1.headers));
     assert.equal(getRes.status, 404);
-    assert.deepEqual(await getRes.json(), { error: "not_found" });
+    assert.equal((await getRes.json()).error, "not_found");
   }
 });
 
@@ -735,7 +739,7 @@ test("prototype-pollution keys in body do not grant access or pollute responses"
   const res = await onRequest(post("/api/connect/agent/sessions", hostileBody, env, doc1.headers));
   // Must fail at consent (since doc1 has no consent yet), NOT bypass to superadmin
   assert.equal(res.status, 403);
-  assert.deepEqual(await res.json(), { error: "forbidden" });
+  assert.equal((await res.json()).error, "forbidden");
   assert.equal(({}).role, undefined);
 });
 
@@ -766,7 +770,7 @@ test("native identify() without env override works with Cf-Access header", async
 
   // Resolved tenant, reached deployment lookup, not-found (authenticated and authorized!)
   assert.equal(res.status, 404);
-  assert.deepEqual(await res.json(), { error: "not-found" });
+  assert.equal((await res.json()).error, "not-found");
 });
 
 

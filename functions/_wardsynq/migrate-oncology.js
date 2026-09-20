@@ -305,14 +305,22 @@ async function oncologyTimeline(request, env, ctx) {
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, timeline: null };
 
+  /* A PART THAT COULD NOT BE READ IS NAMED, NEVER RETURNED AS EMPTY. Each read used to fall back to an
+   * empty list on failure, so a timeline whose chemotherapy read had failed said this patient had been
+   * given no chemotherapy - and the next dose is decided against exactly that list. The parts that failed
+   * are now listed in `incomplete`, and the screen says so. */
+  const incomplete = [];
+  const read = (type, what) => svc.byPatient(type, patientId).catch(() => { incomplete.push(what); return null; });
   const [links, conditions, events, admins] = await Promise.all([
-    svc.byPatient(LINK_TYPE, patientId).catch(() => []),
-    svc.byPatient("Condition", patientId).catch(() => []),
-    svc.byPatient(AE_TYPE, patientId).catch(() => []),
-    svc.byPatient(CHEMO_TYPE, patientId).catch(() => []),
+    read(LINK_TYPE, "ONCqis link"),
+    read("Condition", "diagnoses"),
+    read(AE_TYPE, "adverse events"),
+    read(CHEMO_TYPE, "chemotherapy given"),
   ]);
   return {
-    ...base, ok: true, timeline: {
+    ...base, ok: true,
+    ...(incomplete.length ? { incomplete, warning: "Could not read: " + incomplete.join(", ") + ". Do not read those as empty." } : {}),
+    timeline: {
       patientId, links: links || [],
       diagnoses: (conditions || []).filter((c) => c && c.oncologyStaging),
       adverseEvents: events || [], chemoAdministrations: admins || [],

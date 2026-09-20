@@ -35,20 +35,20 @@
     if (document.getElementById(CSS_ID)) return;
     var s = document.createElement("style"); s.id = CSS_ID;
     s.textContent =
-      ".rxc-auto{margin:7px 0 3px;border:1px solid var(--hbd,#dbe4e8);border-radius:10px;background:rgba(14,110,99,.035);padding:8px 9px;font:500 11.5px/1.35 var(--hfont,system-ui);color:var(--hink,#0f172a)}" +
-      ".rxc-auto-head{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-bottom:6px}" +
-      ".rxc-auto-title{font:800 10px var(--hfont,system-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--teal,#0e6e63)}" +
-      ".rxc-auto-status{font:600 10px var(--hfont,system-ui);color:var(--hmut,#64748b)}" +
-      ".rxc-auto-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}" +
-      ".rxc-auto-card{min-width:0;border:1px solid var(--hbd,#dbe4e8);border-radius:8px;background:var(--hpanel,#fff);padding:6px 7px;cursor:pointer;text-align:left;color:inherit}" +
-      ".rxc-auto-card:hover{border-color:var(--teal,#0e6e63)}" +
-      ".rxc-auto-card.rec{border-color:var(--teal,#0e6e63);box-shadow:0 0 0 1px rgba(14,110,99,.12)}" +
-      ".rxc-auto-cat{font:800 9px var(--hfont,system-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--hmut,#64748b)}" +
-      ".rxc-auto-card.rec .rxc-auto-cat{color:var(--teal,#0e6e63)}" +
-      ".rxc-auto-brand{font:800 11.5px/1.2 var(--hfont,system-ui);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}" +
-      ".rxc-auto-cost{font:700 10px var(--hfont,system-ui);color:var(--teal,#0e6e63);margin-top:2px}" +
-      ".rxc-auto-note{padding:4px 2px;color:var(--hmut,#64748b)}" +
-      ".rxc-auto-badge{font:800 8.5px var(--hfont,system-ui);color:var(--teal,#0e6e63);margin-left:3px}";
+      ".rxc-auto{margin:8px 0 4px;border:1px solid rgba(0,0,0,.08);border-radius:12px;background:#fbfdff;padding:9px 10px;font:400 11.5px/1.35 -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#1d1d1f}" +
+      ".rxc-auto-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}" +
+      ".rxc-auto-title{font:600 9.5px -apple-system,BlinkMacSystemFont,system-ui;letter-spacing:.04em;text-transform:uppercase;color:#0071e3}" +
+      ".rxc-auto-status{font:400 10px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b}" +
+      ".rxc-auto-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}" +
+      ".rxc-auto-card{min-width:0;border:1px solid rgba(0,0,0,.08);border-radius:10px;background:#fff;padding:7px 8px;cursor:pointer;text-align:left;color:inherit;transition:all .15s ease}" +
+      ".rxc-auto-card:hover{border-color:rgba(0,113,227,.35);box-shadow:0 2px 8px rgba(0,0,0,.04)}" +
+      ".rxc-auto-card.rec{border:1px solid rgba(0,113,227,.3);background:#fafcff;box-shadow:0 0 0 1px rgba(0,113,227,.15)}" +
+      ".rxc-auto-cat{font:600 8.5px -apple-system,BlinkMacSystemFont,system-ui;letter-spacing:.04em;text-transform:uppercase;color:#86868b}" +
+      ".rxc-auto-card.rec .rxc-auto-cat{color:#0071e3}" +
+      ".rxc-auto-brand{font:600 11.5px/1.25 -apple-system,BlinkMacSystemFont,system-ui;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#1d1d1f}" +
+      ".rxc-auto-cost{font:600 10.5px -apple-system,BlinkMacSystemFont,system-ui;color:#1d1d1f;margin-top:2px}" +
+      ".rxc-auto-note{padding:4px 2px;color:#86868b}" +
+      ".rxc-auto-badge{font:600 8px -apple-system,BlinkMacSystemFont,system-ui;color:#0071e3;margin-left:4px;background:rgba(0,113,227,.08);padding:1px 5px;border-radius:999px}";
     document.head.appendChild(s);
   }
 
@@ -71,8 +71,16 @@
     return rows.map(function (r) { return [r.drug,r.brand,r.dose,r.freq,r.duration].join("¦"); }).join("§");
   }
 
-  function resolveBrand(brand) {
-    if (!brand || !G.MEDAPI.searchBrands) return Promise.resolve(null);
+  function resolveBrand(row) {
+    var brand = typeof row === "string" ? row : (row && row.brand);
+    if (!brand) return Promise.resolve(null);
+    if (G.SMD_RXCHOICE_UI && G.SMD_RXCHOICE_UI.resolvePrescribed) {
+      return G.SMD_RXCHOICE_UI.resolvePrescribed(typeof row === "string" ? { brand: brand } : row).then(function (rec) {
+        if (rec && !rec.pack && rec.form) rec.pack = rec.form;
+        return rec;
+      });
+    }
+    if (!G.MEDAPI.searchBrands) return Promise.resolve(null);
     return G.MEDAPI.searchBrands(brand, 24).then(function (d) {
       var rows = (d && d.results) || [];
       if (!rows.length) return null;
@@ -84,37 +92,65 @@
         return score(aa) - score(bb) || String(aa).length - String(bb).length;
       });
       var active = rows.filter(function (r) { return !r.discontinued; });
-      return active[0] || rows[0] || null;
+      var rec = active[0] || rows[0] || null;
+      if (rec && !rec.pack && rec.form) rec.pack = rec.form;
+      return rec;
     }).catch(function () { return null; });
   }
 
   function candidates(comp) {
     if (!comp || !G.MEDAPI.composition) return Promise.resolve([]);
-    return G.MEDAPI.composition(comp, "price_asc", "all", 300, 0)
-      .then(function (d) { return (d && d.brands) || []; })
-      .catch(function () { return []; });
+    function fetchComp(name) {
+      return G.MEDAPI.composition(name, "price_asc", "all", 300, 0);
+    }
+    return fetchComp(comp).then(function (d) {
+      var list = (d && d.brands) || [];
+      if (!list.length && comp.indexOf("+") > -1) {
+        var alt = comp.split(/\s*\+\s*/).reverse().join(" + ");
+        if (alt !== comp) return fetchComp(alt);
+      }
+      return d;
+    }).then(function (d) {
+      var list = (d && d.brands) || [];
+      var compName = (d && d.composition) || comp;
+      return list.map(function (b) {
+        return {
+          id: b.id,
+          brand: b.brand,
+          manufacturer: b.manufacturer,
+          mrp: b.mrp,
+          form: b.form,
+          pack: b.pack || b.form,
+          composition: b.composition || compName,
+          discontinued: b.discontinued
+        };
+      });
+    }).catch(function () { return []; });
   }
 
   function choose(row, prescribed, cands) {
     var rx = {};
     Object.keys(prescribed || {}).forEach(function (k) { rx[k] = prescribed[k]; });
+    if (!rx.pack && rx.form) rx.pack = rx.form;
     rx.dose = row.dose; rx.freq = row.freq; rx.duration = row.duration;
     return core().choose(rx, cands);
   }
 
   function card(category, o) {
     if (!o) return '<div class="rxc-auto-card"><div class="rxc-auto-cat">' + esc(category) + '</div><div class="rxc-auto-note">No validated match</div></div>';
-    var isRec = category === "BALANCED ⭐";
+    var isRec = typeof category === "string" && category.indexOf("BALANCED") === 0;
     var label = category === "DOCTOR PRESCRIBED" ? "DOCTOR PRESCRIBED" : category;
     return '<button type="button" class="rxc-auto-card' + (isRec ? " rec" : "") + '" data-rxc-auto="1" data-rxc-cat="' + esc(o.category || category.toLowerCase()) + '">' +
       '<div class="rxc-auto-cat">' + esc(label) + (isRec ? '<span class="rxc-auto-badge">RECOMMENDED VALUE</span>' : '') + '</div>' +
-      '<div class="rxc-auto-brand">' + esc(o.brand || "—") + '</div>' +
-      '<div class="rxc-auto-cost">' + (o.courseCost != null ? money(o.courseCost) + " / course" : "Price unavailable") + '</div></button>';
+      '<div class="rxc-auto-brand">' + esc(o.brand || "-") + '</div>' +
+      '<div class="rxc-auto-cost">' + (o.courseCost != null ? money(o.courseCost) + " / course" : (o.mrp != null ? money(o.mrp) : "Price unavailable")) + '</div></button>';
   }
 
   function paint(row, result) {
     var old = row.line.querySelector(":scope > .rxc-auto");
     if (old) old.remove();
+    // If prescription.js inline container is active on this line, do not double-render
+    if (row.line.querySelector(".rxc-inline-box") || row.line.querySelector(".rxc-inline-container")) return;
     var wrap = document.createElement("div"); wrap.className = "rxc-auto";
     if (!result) {
       wrap.innerHTML = '<div class="rxc-auto-head"><span class="rxc-auto-title">RxChoice™</span><span class="rxc-auto-status">No database match</span></div>' +
@@ -128,7 +164,7 @@
     }
     wrap.innerHTML = '<div class="rxc-auto-head"><span class="rxc-auto-title">RxChoice™ · Same Prescription. Smarter Price.</span><span class="rxc-auto-status">Validated from Drug Database</span></div>' +
       '<div class="rxc-auto-grid">' +
-      card("GENERIC", result.generic) + card("BALANCED ⭐", result.balanced) +
+      card("GENERIC", result.generic) + card("BALANCED", result.balanced) +
       card("PREMIUM", result.premium) + card("DOCTOR PRESCRIBED", result.prescribed) + '</div>';
     row.line.appendChild(wrap);
 
@@ -147,6 +183,7 @@
           if (!sh._rxChoice) sh._rxChoice = {};
           sh._rxChoice[row.drug || ("line" + Date.now())] = opt;
         }
+        try { if (G.SMD_RXCHOICE_UI && G.SMD_RXCHOICE_UI.recordSelection) G.SMD_RXCHOICE_UI.recordSelection(result, cat, { prescriptionId: null }); } catch (e) {}
         setTimeout(schedule, 0);
       });
     });

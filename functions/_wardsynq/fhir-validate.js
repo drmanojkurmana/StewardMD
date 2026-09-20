@@ -23,6 +23,8 @@
  * the list back; the caller decides what to ask and what to report.
  */
 
+import { TYPES_R5, RESOURCES_R5, REQUIRED_CC_R5 } from "./fhir-validate-r5.js";
+
 const str = (v) => (v == null ? "" : String(v).trim());
 const isObj = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
 
@@ -52,6 +54,8 @@ const PRIMITIVES = Object.freeze({
   uuid: (v) => typeof v === "string" && UUID.test(v),
   boolean: (v) => v === true || v === false,
   integer: (v) => Number.isInteger(v),
+  // R5: a 64-bit integer travels as a JSON string.
+  integer64: (v) => typeof v === "string" && /^-?([0]|([1-9][0-9]*))$/.test(v),
   positiveInt: (v) => Number.isInteger(v) && v > 0,
   unsignedInt: (v) => Number.isInteger(v) && v >= 0,
   decimal: (v) => typeof v === "number" && Number.isFinite(v),
@@ -118,6 +122,9 @@ const VS = Object.freeze({
   conditionVer: "unconfirmed|provisional|differential|confirmed|refuted|entered-in-error",
   allergyClinical: "active|inactive|resolved",
   allergyVer: "unconfirmed|confirmed|refuted|entered-in-error",
+  immunizationStatus: "completed|entered-in-error|not-done",
+  subscriptionStatus: "requested|active|error|off",
+  subscriptionChannel: "rest-hook|websocket|email|sms|message",
 });
 
 /** A CodeableConcept whose R4 binding is REQUIRED: at least one coding must carry one of these codes in this system. */
@@ -339,6 +346,24 @@ const RESOURCES = Object.freeze({
   Provenance: { ...DOMAIN, "target[]!": "Reference", "occurred[x]": { occurredPeriod: "Period", occurredDateTime: "dateTime" }, "recorded!": "instant", "policy[]": "uri", location: "Reference(Location)", "reason[]": "CodeableConcept", activity: "CodeableConcept",
     "agent[]!": { ...BACKBONE, type: "CodeableConcept", "role[]": "CodeableConcept", "who!": "Reference", onBehalfOf: "Reference" },
     "entity[]": { ...BACKBONE, "role!": `code:${VS.entityRole}`, "what!": "Reference", "agent[]": "any" }, "signature[]": "any" },
+  /* G6. The full R4 Immunization element set; education, reaction and protocolApplied's authority are
+   * listed so an element added to the mapper later is checked rather than unknown. */
+  Immunization: { ...DOMAIN, "identifier[]": "Identifier", "status!": `code:${VS.immunizationStatus}`, statusReason: "CodeableConcept",
+    "vaccineCode!": "CodeableConcept", "patient!": "Reference(Patient)", encounter: "Reference(Encounter)",
+    "occurrence[x]!": { occurrenceDateTime: "dateTime", occurrenceString: "string" }, recorded: "dateTime", primarySource: "boolean",
+    reportOrigin: "CodeableConcept", location: "Reference(Location)", manufacturer: "Reference(Organization)", lotNumber: "string", expirationDate: "date",
+    site: "CodeableConcept", route: "CodeableConcept", doseQuantity: "Quantity",
+    "performer[]": { ...BACKBONE, function: "CodeableConcept", "actor!": "Reference(Practitioner|PractitionerRole|Organization)" },
+    "note[]": "Annotation", "reasonCode[]": "CodeableConcept", "reasonReference[]": "Reference(Condition|Observation|DiagnosticReport)",
+    isSubpotent: "boolean", "subpotentReason[]": "CodeableConcept",
+    "education[]": { ...BACKBONE, documentType: "string", reference: "uri", publicationDate: "dateTime", presentationDate: "dateTime" },
+    "programEligibility[]": "CodeableConcept", fundingSource: "CodeableConcept",
+    "reaction[]": { ...BACKBONE, date: "dateTime", detail: "Reference(Observation)", reported: "boolean" },
+    "protocolApplied[]": { ...BACKBONE, series: "string", authority: "Reference(Organization)", "targetDisease[]": "CodeableConcept",
+      "doseNumber[x]!": { doseNumberPositiveInt: "positiveInt", doseNumberString: "string" }, "seriesDoses[x]": { seriesDosesPositiveInt: "positiveInt", seriesDosesString: "string" } } },
+  /* G10. R4 Subscription, so a create over FHIR is checked structurally before its meaning is. */
+  Subscription: { ...DOMAIN, "status!": `code:${VS.subscriptionStatus}`, "contact[]": "ContactPoint", end: "instant", "reason!": "string", "criteria!": "string", error: "string",
+    "channel!": { ...BACKBONE, "type!": `code:${VS.subscriptionChannel}`, endpoint: "url", payload: "code", "header[]": "string" } },
   Bundle: { ...RESOURCE, identifier: "Identifier", "type!": `code:${VS.bundleType}`, timestamp: "instant", total: "unsignedInt",
     "link[]": { ...BACKBONE, "relation!": "string", "url!": "uri" },
     "entry[]": { ...BACKBONE, "link[]": { ...BACKBONE, "relation!": "string", "url!": "uri" }, fullUrl: "uri", resource: "Resource",
@@ -358,6 +383,52 @@ const NAMED = Object.freeze({
   ParametersParameter: { ...BACKBONE, "name!": "string", "value[x]": VALUE_CHOICE, resource: "Resource", "part[]": "ParametersParameter" },
 });
 
+/* ---- the tables per FHIR version (D9) -----------------------------------------------------------
+ *
+ * SEPARATE TABLES, NOT A FLAG. Each version the server declares has its own element lists, and the walker
+ * is handed one set. 4.0 is the R4 tables above. 4.3 (R4B) is derived from them by the whole of the
+ * structural R4-to-R4B difference that touches these types, from the published R4B diff (fhir.diff.json):
+ * Element.id became an `id`, Extension.value[x] and Parameters.parameter.value[x] gained CodeableReference
+ * and RatioRange, and Observation.subject and DiagnosticReport.subject gained targets. 5.0 (R5) is
+ * generated from the R5 StructureDefinitions (fhir-validate-r5.js) for the resources WardSynQ transforms
+ * to R5, and nothing else is declared valid there.
+ */
+
+/** PURE. A deep copy of a spec with every Element.id ("id": "string") retyped as an id. */
+function withIdAsId(spec) {
+  if (!isObj(spec)) return spec;
+  const out = {};
+  for (const [k, v] of Object.entries(spec)) out[k] = k === "id" && v === "string" ? "id" : isObj(v) ? withIdAsId(v) : v;
+  return out;
+}
+const r4bMap = (table) => Object.fromEntries(Object.entries(table).map(([k, v]) => [k, withIdAsId(v)]));
+const R4B_VALUE_ADDS = { valueCodeableReference: "CodeableReference", valueRatioRange: "RatioRange" };
+const R4B_SUBJECT = "Reference(Patient|Group|Device|Location|Organization|Procedure|Practitioner|Medication|Substance)";
+const TYPES_R4B = (() => {
+  const t = r4bMap(TYPES);
+  t.Extension = { ...t.Extension, "value[x]": { ...t.Extension["value[x]"], ...R4B_VALUE_ADDS } };
+  t.CodeableReference = { id: "id", "extension[]": "Extension", concept: "CodeableConcept", reference: "Reference" };
+  t.RatioRange = { id: "id", "extension[]": "Extension", lowNumerator: "Quantity", highNumerator: "Quantity", denominator: "Quantity" };
+  return Object.freeze(t);
+})();
+const NAMED_R4B = (() => {
+  const n = r4bMap(NAMED);
+  n.ParametersParameter = { ...n.ParametersParameter, "value[x]": { ...n.ParametersParameter["value[x]"], ...R4B_VALUE_ADDS } };
+  return Object.freeze(n);
+})();
+const RESOURCES_R4B = (() => {
+  const r = r4bMap(RESOURCES);
+  r.Observation = { ...r.Observation, subject: R4B_SUBJECT };
+  r.DiagnosticReport = { ...r.DiagnosticReport, subject: R4B_SUBJECT };
+  return Object.freeze(r);
+})();
+
+const TABLES = Object.freeze({
+  "4.0": Object.freeze({ TYPES, NAMED, RESOURCES, REQUIRED_CC }),
+  "4.3": Object.freeze({ TYPES: TYPES_R4B, NAMED: NAMED_R4B, RESOURCES: RESOURCES_R4B, REQUIRED_CC }),
+  "5.0": Object.freeze({ TYPES: TYPES_R5, NAMED: Object.freeze({}), RESOURCES: RESOURCES_R5, REQUIRED_CC: REQUIRED_CC_R5 }),
+});
+
 /* ---- the walker ------------------------------------------------------------------------------ */
 
 /** PURE. Parses an element key of the spec grammar. */
@@ -375,6 +446,9 @@ class Walker {
     this.codings = [];
     this.max = (opts && opts.maxIssues) || 200;
     this.depth = 0;
+    this.version = (opts && opts.version) || "4.0";
+    this.t = TABLES[this.version];
+    if (!this.t) throw new Error(`no validator tables for FHIR ${this.version}`);
   }
   add(i) { if (this.issues.length < this.max) this.issues.push(i); }
 
@@ -391,8 +465,8 @@ class Walker {
       return;
     }
     if (type.startsWith("cc:")) {
-      const b = REQUIRED_CC[type.slice(3)];
-      this.object(v, TYPES.CodeableConcept, path);
+      const b = this.t.REQUIRED_CC[type.slice(3)];
+      this.object(v, this.t.TYPES.CodeableConcept, path);
       if (isObj(v)) {
         const codes = b.codes.split("|");
         const ok = (v.coding || []).some((c) => c && c.system === b.system && codes.includes(c.code));
@@ -402,7 +476,7 @@ class Walker {
     }
     const refM = /^Reference(?:\(([^)]*)\))?$/.exec(type);
     if (refM) {
-      this.object(v, TYPES.Reference, path);
+      this.object(v, this.t.TYPES.Reference, path);
       if (isObj(v)) {
         const ref = str(v.reference);
         if (ref) {
@@ -417,7 +491,7 @@ class Walker {
       }
       return;
     }
-    const spec = TYPES[type] || NAMED[type];
+    const spec = this.t.TYPES[type] || this.t.NAMED[type];
     if (spec === undefined) { this.add(issue("fatal", "exception", path, `validator has no definition for ${type}`)); return; }
     if (spec === "any") { if (!isObj(v)) this.add(issue("error", "structure", path, "must be an object")); return; }
     this.object(v, spec, path);
@@ -445,7 +519,7 @@ class Walker {
         continue;
       }
       const k = known.get(key);
-      if (!k) { this.add(issue("error", "structure", `${path}.${key}`, "unknown element (not in R4)")); continue; }
+      if (!k) { this.add(issue("error", "structure", `${path}.${key}`, `unknown element (not in ${this.version === "5.0" ? "R5" : this.version === "4.3" ? "R4B" : "R4"})`)); continue; }
       const val = v[key];
       const p = `${path}.${key}`;
       if (val === null || val === undefined) { this.add(issue("error", "structure", p, "null is not a value; omit the element")); continue; }
@@ -471,7 +545,7 @@ class Walker {
       if (c.required && !present.length) this.add(issue("error", "required", `${path}.${c.name}[x]`, `one of ${Object.keys(c.options).join(", ")} is required`));
     }
     if (isObj(v) && "extension" in v && Object.keys(v).length === 1 && path.includes(".extension[")) { /* ext-1 handled below */ }
-    if (spec === TYPES.Extension && isObj(v)) {
+    if (spec === this.t.TYPES.Extension && isObj(v)) {
       const hasValue = Object.keys(v).some((k) => k.startsWith("value"));
       const hasNested = Array.isArray(v.extension) && v.extension.length > 0;
       if (hasValue && hasNested) this.add(issue("error", "structure", path, "an extension has a value or nested extensions, not both (ext-1)"));
@@ -495,8 +569,8 @@ class Walker {
     if (!isObj(r)) { this.add(issue("error", "structure", path, "a resource must be a JSON object")); return; }
     const t = str(r.resourceType);
     if (!t) { this.add(issue("error", "structure", path, "resourceType is required")); return; }
-    const spec = RESOURCES[t];
-    if (!spec) { this.add(issue("error", "not-supported", path, `${t} is not a resource type this server validates`)); return; }
+    const spec = this.t.RESOURCES[t];
+    if (!spec) { this.add(issue("error", "not-supported", path, `${t} is not a resource type this server validates${this.version === "4.0" ? "" : ` in FHIR ${this.version}`}`)); return; }
     this.object(r, spec, path);
     this.invariants(r, t, path);
   }
@@ -618,5 +692,6 @@ function validationOutcome(result) {
 
 /** The types this file validates, for the CapabilityStatement. */
 const VALIDATED_TYPES = Object.freeze(Object.keys(RESOURCES));
+const VALIDATED_TYPES_BY_VERSION = Object.freeze(Object.fromEntries(Object.entries(TABLES).map(([v, t]) => [v, Object.freeze(Object.keys(t.RESOURCES))])));
 
-export { PRIMITIVES, VS, REQUIRED_CC, TYPES, RESOURCES, VALIDATED_TYPES, parseKey, validateResource, validationOutcome, applyProfiles, valuesAt };
+export { PRIMITIVES, VS, REQUIRED_CC, TYPES, RESOURCES, TABLES, VALIDATED_TYPES, VALIDATED_TYPES_BY_VERSION, parseKey, validateResource, validationOutcome, applyProfiles, valuesAt };

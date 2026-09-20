@@ -1,14 +1,16 @@
 {
   "guideline": "cns",
   "title": "CNS / Glioma Cancer",
-  "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "2.0.0",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
   "diseaseId": "cns_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Adult diffuse glioma pathway: workup -> maximal safe resection / biopsy -> WHO 2021 molecular class (IDH, 1p/19q) -> grade and risk -> subtype-directed induction (surgery/RT + concurrent chemo) -> restaging / response-adapted adjuvant -> surveillance, plus a line-of-therapy recurrence pathway (re-resection -> first salvage -> on progression -> later salvage). Systemic-therapy nodes now reference draft CNS dose protocols (cns-tmz-concurrent, cns-tmz-adjuvant, cns-pcv, cns-lomustine, cns-bevacizumab) so the recommended regimen opens in the Protocol Sheet with computed per-drug doses; the physician confirms and adjusts. Protocol doses are standard-of-care doses in the author's own wording, marked experimental / draft. No proprietary guideline text reproduced.",
-  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN CNS, DeVita, Harrison) and WHO CNS5 (2021) molecular classification. Content authored in original wording. The referenced cns-* protocols carry standard-of-care regimen doses (temozolomide, PCV, lomustine, bevacizumab) authored in original wording as draft / experimental decision support, not copied from any source.",
-  "startNodeIds": ["n_workup"],
+  "provenanceNote": "NCCN Guidelines Version 2.2026 clinical navigator for adult diffuse glioma (Central Nervous System Cancers, June 10, 2026). Pathway: diagnostic workup with high-resolution MRI and maximal safe resection -> integrated WHO CNS5 molecular classification (IDH1/IDH2, 1p/19q, ATRX, TP53, MGMT, CDKN2A/B homozygous deletion as a molecular grade 4 criterion, TERT/EGFR/+7/-10 for molecular glioblastoma, BRAF V600E, H3 K27M/G34R) -> grade- and risk-directed induction: RT plus PCV (Category 1 per RTOG 9402 / EORTC 26951) for 1p/19q-codeleted oligodendroglioma, Vorasidenib 40 mg daily (IDH1/2 inhibitor, INDIGO trial Category 1 preferred) for grade 2 IDH-mutant glioma with residual non-enhancing disease, RT 60 Gy plus temozolomide for grade 3-4 IDH-mutant astrocytoma, and the Stupp protocol (RT 60 Gy with concurrent and adjuvant temozolomide) plus Tumor Treating Fields / Optune (Category 1 preferred) for glioblastoma -> restaging and response-adapted adjuvant therapy -> surveillance, plus a recurrence pathway with dedicated recurrence workup (re-resection -> first salvage -> later salvage). Systemic-therapy nodes reference draft CNS dose protocols (cns-tmz-concurrent, cns-tmz-adjuvant, cns-pcv, cns-lomustine, cns-bevacizumab) so the recommended regimen opens in the Protocol Sheet with computed per-drug doses; the physician confirms and adjusts. Targeted options without a dose protocol (Vorasidenib, Dabrafenib plus Trametinib) are carried as written guidance with protocolRefs []. DRAFT decision support - physician decides. No proprietary guideline text reproduced.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Central Nervous System Cancers Version 2.2026 (June 10, 2026).",
+  "startNodeIds": [
+    "n_workup"
+  ],
   "footnotes": {
     "a": {
       "text": "Stupp-type regimen: maximal safe resection followed by focal radiation with concurrent daily temozolomide, then adjuvant temozolomide cycles. Alternating electric-field therapy (TTFields) may be added in the adjuvant phase for supratentorial glioblastoma.",
@@ -29,6 +31,14 @@
     "e": {
       "text": "Pseudoprogression is increased enhancement / edema within roughly 3 months of chemoradiation that later stabilizes or regresses without a change in therapy, and can mimic true progression. Short-interval MRI, perfusion imaging, or amino-acid PET help distinguish it; observation and steroid adjustment are preferred over premature salvage therapy.",
       "evidence": "2A"
+    },
+    "f": {
+      "text": "Vorasidenib is an oral dual IDH1/2 inhibitor dosed 40 mg once daily continuously. In the INDIGO trial in grade 2 IDH-mutant oligodendroglioma or astrocytoma with residual or recurrent non-enhancing disease after surgery only (no prior radiation or chemotherapy), it prolonged progression-free survival and delayed the need for radiation and chemotherapy; it is a Category 1 preferred option in that setting and preserves neurocognition by deferring radiation in young patients.",
+      "evidence": "1"
+    },
+    "g": {
+      "text": "Tumor Treating Fields (TTFields / Optune) added to adjuvant temozolomide improved progression-free and overall survival in supratentorial glioblastoma in the EF-14 trial and is a Category 1 preferred option with maintenance temozolomide. Manage scalp and skin care and support adherence to daily wear-time.",
+      "evidence": "1"
     }
   },
   "nodes": [
@@ -41,17 +51,31 @@
       "description": "Baseline evaluation of a suspected diffuse glioma before definitive management.",
       "path": "CNS / Workup",
       "section": "Workup",
-      "pills": ["workup"],
+      "pills": [
+        "workup"
+      ],
       "required": true,
       "bullets": [
-        "History, neurologic exam, performance status (KPS); document seizures, focal deficits, raised-ICP symptoms",
-        "Contrast MRI brain (structural); add perfusion / spectroscopy where it changes management (MR is the reference imaging)",
-        "Tissue diagnosis by maximal safe resection or biopsy for an integrated histologic + molecular diagnosis (WHO CNS5)",
-        "Molecular testing: IDH1/2 mutation, 1p/19q codeletion, ATRX, MGMT promoter methylation; add CDKN2A/B, EGFR, +7/-10, TERT for grading IDH-wildtype tumors",
-        "Perioperative supportive care: steroids for symptomatic edema, anti-seizure medication only if seizures, VTE awareness; multidisciplinary review"
+        "History, neurologic examination, and performance status (KPS); document seizures, focal deficits, and raised intracranial pressure symptoms",
+        "High-resolution 3D contrast-enhanced MRI brain: T1 pre- and post-contrast, T2/FLAIR, diffusion-weighted imaging (DWI), perfusion-weighted MRI, and MR spectroscopy",
+        "Maximal safe surgical resection with intraoperative cortical mapping and neuronavigation (or stereotactic biopsy for unresectable or eloquently located disease) for an integrated histologic plus molecular diagnosis (WHO CNS5)",
+        "Integrated WHO CNS5 molecular testing on tumor tissue:",
+        "IDH1 (R132H immunohistochemistry plus sequencing) and IDH2 mutation status",
+        "1p/19q codeletion by FISH or chromosomal microarray / NGS",
+        "ATRX loss of expression and TP53 mutation",
+        "MGMT promoter methylation by pyrosequencing or MS-PCR",
+        "CDKN2A/B homozygous deletion (defines WHO grade 4 in IDH-mutant astrocytoma regardless of histology)",
+        "For IDH-wildtype diffuse astrocytoma: TERT promoter mutation, EGFR amplification, and +7/-10 chromosome copy-number changes (any of which diagnoses molecular glioblastoma, WHO grade 4)",
+        "BRAF V600E (pleomorphic xanthoastrocytoma, ganglioglioma, epithelioid glioblastoma) - predicts response to Dabrafenib plus Trametinib",
+        "H3 K27M and H3 G34R mutations (diffuse midline and hemispheric gliomas)",
+        "Perioperative supportive care: steroids for symptomatic edema, anti-seizure medication only if seizures occur, VTE awareness; multidisciplinary neuro-oncology review"
       ],
       "options": [
-        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to WHO Molecular Classification",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -63,12 +87,41 @@
       "description": "Choose the current scenario. Management branches by whether this is a new diagnosis, routine surveillance, or recurrence.",
       "path": "CNS / Setting",
       "section": "Staging",
-      "pills": ["setting"],
+      "pills": [
+        "setting"
+      ],
       "required": true,
       "options": [
-        { "id": "newly", "label": "Newly diagnosed diffuse glioma", "sets": { "setting": "newly" }, "pills": ["new"] },
-        { "id": "surveillance", "label": "Post-treatment surveillance / follow-up", "sets": { "setting": "surveillance" }, "pills": ["surveillance"] },
-        { "id": "recurrent", "label": "Recurrent / progressive disease", "sets": { "setting": "recurrent" }, "pills": ["recurrence"] }
+        {
+          "id": "newly",
+          "label": "Newly diagnosed diffuse glioma",
+          "sets": {
+            "setting": "newly"
+          },
+          "pills": [
+            "new"
+          ]
+        },
+        {
+          "id": "surveillance",
+          "label": "Post-treatment surveillance / follow-up",
+          "sets": {
+            "setting": "surveillance"
+          },
+          "pills": [
+            "surveillance"
+          ]
+        },
+        {
+          "id": "recurrent",
+          "label": "Recurrent / progressive disease",
+          "sets": {
+            "setting": "recurrent"
+          },
+          "pills": [
+            "recurrence"
+          ]
+        }
       ]
     },
     {
@@ -80,7 +133,9 @@
       "description": "Extent of resection is both diagnostic and prognostic. Greater resection improves outcome when it can be achieved safely; otherwise biopsy secures the integrated diagnosis.",
       "path": "CNS / Surgery",
       "section": "Treatment",
-      "pills": ["surgery"],
+      "pills": [
+        "surgery"
+      ],
       "required": true,
       "bullets": [
         "Aim for maximal safe cytoreduction within functional limits (awake mapping / intraoperative adjuncts as indicated)",
@@ -88,9 +143,36 @@
         "Extent of resection recorded (gross-total, subtotal, biopsy) - feeds risk stratification and adjuvant planning"
       ],
       "options": [
-        { "id": "gtr", "label": "Gross-total / near-total resection achieved", "sets": { "resection": "gtr" }, "pills": ["GTR"] },
-        { "id": "str", "label": "Subtotal resection (residual disease)", "sets": { "resection": "str" }, "pills": ["STR"] },
-        { "id": "biopsy", "label": "Biopsy only (unresectable / eloquent location)", "sets": { "resection": "biopsy" }, "pills": ["biopsy"] }
+        {
+          "id": "gtr",
+          "label": "Gross-total / near-total resection achieved",
+          "sets": {
+            "resection": "gtr"
+          },
+          "pills": [
+            "GTR"
+          ]
+        },
+        {
+          "id": "str",
+          "label": "Subtotal resection (residual disease)",
+          "sets": {
+            "resection": "str"
+          },
+          "pills": [
+            "STR"
+          ]
+        },
+        {
+          "id": "biopsy",
+          "label": "Biopsy only (unresectable / eloquent location)",
+          "sets": {
+            "resection": "biopsy"
+          },
+          "pills": [
+            "biopsy"
+          ]
+        }
       ]
     },
     {
@@ -98,11 +180,15 @@
       "nodeCategory": "criteria",
       "nodeType": "question",
       "name": "Molecular class",
-      "title": "WHO 2021 molecular class (IDH / 1p-19q)",
-      "description": "Adult diffuse gliomas are classified first by IDH status and 1p/19q codeletion, which define three lineages and drive treatment more than histology alone.",
+      "title": "WHO CNS5 molecular class (IDH / 1p-19q)",
+      "description": "Adult diffuse gliomas are classified first by IDH status and 1p/19q codeletion under WHO CNS5 integrated diagnosis, which define three lineages and drive treatment more than histology alone. CDKN2A/B homozygous deletion upgrades IDH-mutant astrocytoma to grade 4, and TERT / EGFR / +7/-10 define molecular glioblastoma in IDH-wildtype disease.",
       "path": "CNS / Molecular",
       "section": "Staging",
-      "pills": ["molecular", "IDH", "1p/19q"],
+      "pills": [
+        "molecular",
+        "IDH",
+        "1p/19q"
+      ],
       "required": true,
       "bullets": [
         "Oligodendroglioma: IDH-mutant AND 1p/19q-codeleted (grade 2 or 3)",
@@ -113,19 +199,79 @@
       "tables": [
         {
           "title": "WHO CNS5 adult diffuse glioma classes",
-          "headers": ["Class", "IDH", "1p/19q", "Grades"],
+          "headers": [
+            "Class",
+            "IDH",
+            "1p/19q",
+            "Grades"
+          ],
           "rows": [
-            ["Oligodendroglioma", "Mutant", "Codeleted", "2-3"],
-            ["Astrocytoma, IDH-mutant", "Mutant", "Intact", "2-4"],
-            ["Glioblastoma, IDH-wildtype", "Wildtype", "Intact", "4"]
+            [
+              "Oligodendroglioma",
+              "Mutant",
+              "Codeleted",
+              "2-3"
+            ],
+            [
+              "Astrocytoma, IDH-mutant",
+              "Mutant",
+              "Intact",
+              "2-4"
+            ],
+            [
+              "Glioblastoma, IDH-wildtype",
+              "Wildtype",
+              "Intact",
+              "4"
+            ]
           ]
         }
       ],
       "options": [
-        { "id": "oligo", "label": "Oligodendroglioma (IDH-mut, 1p/19q-codeleted)", "sets": { "molClass": "oligo", "biomarkers.IDH": "mutant", "biomarkers.1p19q": "codeleted" }, "pills": ["oligodendroglioma"] },
-        { "id": "astro", "label": "Astrocytoma, IDH-mutant (1p/19q intact)", "sets": { "molClass": "astro", "biomarkers.IDH": "mutant" }, "pills": ["IDH-mut astrocytoma"] },
-        { "id": "gbm", "label": "Glioblastoma, IDH-wildtype", "sets": { "molClass": "gbm", "biomarkers.IDH": "wildtype" }, "pills": ["GBM"] },
-        { "id": "pending", "label": "Molecular result pending", "sets": { "molClass": "pending" }, "pills": ["pending"] }
+        {
+          "id": "oligo",
+          "label": "Oligodendroglioma (IDH-mut, 1p/19q-codeleted)",
+          "sets": {
+            "molClass": "oligo",
+            "biomarkers.IDH": "mutant",
+            "biomarkers.1p19q": "codeleted"
+          },
+          "pills": [
+            "oligodendroglioma"
+          ]
+        },
+        {
+          "id": "astro",
+          "label": "Astrocytoma, IDH-mutant (1p/19q intact)",
+          "sets": {
+            "molClass": "astro",
+            "biomarkers.IDH": "mutant"
+          },
+          "pills": [
+            "IDH-mut astrocytoma"
+          ]
+        },
+        {
+          "id": "gbm",
+          "label": "Glioblastoma, IDH-wildtype",
+          "sets": {
+            "molClass": "gbm",
+            "biomarkers.IDH": "wildtype"
+          },
+          "pills": [
+            "GBM"
+          ]
+        },
+        {
+          "id": "pending",
+          "label": "Molecular result pending",
+          "sets": {
+            "molClass": "pending"
+          },
+          "pills": [
+            "pending"
+          ]
+        }
       ]
     },
     {
@@ -137,7 +283,10 @@
       "description": "Integrated diagnosis not yet complete. Adjuvant therapy choice depends on IDH / 1p-19q, so defer it until results return.",
       "path": "CNS / Molecular / Pending",
       "section": "Treatment",
-      "pills": ["pending", "treatment"],
+      "pills": [
+        "pending",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Complete IDH, 1p/19q, MGMT, and grading markers before committing to adjuvant therapy",
@@ -145,7 +294,9 @@
         "Re-enter the class pathway once the integrated diagnosis is available",
         "Do not start radiation or chemotherapy on histology alone when molecular results are imminent"
       ],
-      "evidenceCategory": ["2A"]
+      "evidenceCategory": [
+        "2A"
+      ]
     },
     {
       "id": "n_oligo_grade",
@@ -156,11 +307,32 @@
       "description": "Codeleted oligodendroglioma is graded 2 (lower-grade) or 3 (anaplastic). Grade and risk drive whether chemoradiation follows surgery.",
       "path": "CNS / Oligo / Grade",
       "section": "Staging",
-      "pills": ["oligodendroglioma", "grade"],
+      "pills": [
+        "oligodendroglioma",
+        "grade"
+      ],
       "required": true,
       "options": [
-        { "id": "g2", "label": "Grade 2 (lower-grade)", "sets": { "grade": "2" }, "pills": ["grade 2"] },
-        { "id": "g3", "label": "Grade 3 (anaplastic)", "sets": { "grade": "3" }, "pills": ["grade 3"] }
+        {
+          "id": "g2",
+          "label": "Grade 2 (lower-grade)",
+          "sets": {
+            "grade": "2"
+          },
+          "pills": [
+            "grade 2"
+          ]
+        },
+        {
+          "id": "g3",
+          "label": "Grade 3 (anaplastic)",
+          "sets": {
+            "grade": "3"
+          },
+          "pills": [
+            "grade 3"
+          ]
+        }
       ]
     },
     {
@@ -172,7 +344,10 @@
       "description": "Lower-grade glioma is split into lower-risk (candidate for observation after resection) and higher-risk (postoperative chemoradiation).",
       "path": "CNS / Oligo / Grade 2 / Risk",
       "section": "Staging",
-      "pills": ["grade 2", "risk"],
+      "pills": [
+        "grade 2",
+        "risk"
+      ],
       "required": true,
       "bullets": [
         "Lower-risk: younger (about <= 40) AND gross-total / near-total resection, minimal residual, no major deficit",
@@ -182,18 +357,54 @@
       "tables": [
         {
           "title": "Lower-grade glioma risk factors",
-          "headers": ["Factor", "Lower-risk", "Higher-risk"],
+          "headers": [
+            "Factor",
+            "Lower-risk",
+            "Higher-risk"
+          ],
           "rows": [
-            ["Age", "<= 40", "> 40"],
-            ["Resection", "Gross-total / near-total", "Subtotal / biopsy (residual)"],
-            ["Tumor size / deficit", "Small, no major deficit", "Large or symptomatic"]
+            [
+              "Age",
+              "<= 40",
+              "> 40"
+            ],
+            [
+              "Resection",
+              "Gross-total / near-total",
+              "Subtotal / biopsy (residual)"
+            ],
+            [
+              "Tumor size / deficit",
+              "Small, no major deficit",
+              "Large or symptomatic"
+            ]
           ]
         }
       ],
-      "footnotes": ["c"],
+      "footnotes": [
+        "c"
+      ],
       "options": [
-        { "id": "low", "label": "Lower-risk", "sets": { "riskGroup": "low" }, "pills": ["lower-risk"] },
-        { "id": "high", "label": "Higher-risk", "sets": { "riskGroup": "high" }, "pills": ["higher-risk"] }
+        {
+          "id": "low",
+          "label": "Lower-risk",
+          "sets": {
+            "riskGroup": "low"
+          },
+          "pills": [
+            "lower-risk"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "Higher-risk",
+          "sets": {
+            "riskGroup": "high"
+          },
+          "pills": [
+            "higher-risk"
+          ]
+        }
       ]
     },
     {
@@ -205,7 +416,10 @@
       "description": "After maximal safe resection, close MRI observation is reasonable for lower-risk codeleted grade 2 disease, reserving radiation and chemotherapy for progression.",
       "path": "CNS / Oligo / Grade 2 / Observe",
       "section": "Surveillance",
-      "pills": ["grade 2", "surveillance"],
+      "pills": [
+        "grade 2",
+        "surveillance"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Maximal safe resection is the primary treatment",
@@ -213,8 +427,13 @@
         "Defer radiation + PCV to documented progression or reclassification to higher-risk",
         "Manage seizures; support neurocognition"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["b", "c"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
       "linkTo": "n_surv_type",
       "linkLabel": "On documented progression, enter the surveillance / recurrence pathway"
     },
@@ -224,22 +443,37 @@
       "nodeType": "question",
       "name": "Oligo G2 induction",
       "title": "Grade 2 oligodendroglioma, higher-risk: RT + PCV induction",
-      "description": "Higher-risk codeleted grade 2 disease is treated with postoperative focal radiation followed by chemotherapy; proceed to restaging to guide the adjuvant course.",
+      "description": "Higher-risk codeleted grade 2 disease is treated with postoperative focal radiation followed by PCV chemotherapy (Category 1 per RTOG 9402 / EORTC 26951); proceed to restaging to guide the adjuvant course.",
       "path": "CNS / Oligo / Grade 2 / Induction",
-      "protocolRefs": ["cns-pcv", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Treatment",
-      "pills": ["grade 2", "treatment"],
+      "pills": [
+        "grade 2",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
-        "Focal external-beam radiation to the tumor bed",
-        "Followed by PCV (procarbazine, lomustine, vincristine); temozolomide is an alternative backbone at some centers",
+        "Maximal safe resection, then focal external-beam radiation to the tumor bed",
+        "Followed by PCV (Procarbazine, Lomustine, Vincristine), Category 1 per RTOG 9402 / EORTC 26951 for 1p/19q-codeleted disease; Temozolomide is an alternative backbone at some centers for tolerability",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts",
         "Baseline and serial neurocognitive assessment"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["b", "c"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
       "options": [
-        { "id": "continue", "label": "Induction delivered - restage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Induction delivered - restage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -248,22 +482,36 @@
       "nodeType": "question",
       "name": "Oligo G3 induction",
       "title": "Grade 3 oligodendroglioma (anaplastic): RT + PCV induction",
-      "description": "Anaplastic codeleted oligodendroglioma is treated with radiation plus chemotherapy after maximal safe resection - the codeletion predicts strong chemotherapy benefit. Restage to guide the adjuvant course.",
+      "description": "Anaplastic codeleted oligodendroglioma is treated with radiation plus PCV chemotherapy after maximal safe resection (Category 1 per RTOG 9402 / EORTC 26951) - the codeletion predicts strong chemotherapy benefit with long-term overall survival gain. Restage to guide the adjuvant course.",
       "path": "CNS / Oligo / Grade 3 / Induction",
-      "protocolRefs": ["cns-pcv", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Treatment",
-      "pills": ["grade 3", "treatment"],
+      "pills": [
+        "grade 3",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
         "Maximal safe resection, then focal radiation",
-        "Chemotherapy with PCV (preferred by long-term data); temozolomide is an alternative",
+        "Chemotherapy with PCV (Procarbazine, Lomustine, Vincristine), Category 1 preferred by long-term RTOG 9402 / EORTC 26951 data in 1p/19q-codeleted disease; Temozolomide is an alternative backbone for tolerability",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts",
         "Serial neurocognitive assessment through therapy"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
       "options": [
-        { "id": "continue", "label": "Induction delivered - restage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Induction delivered - restage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -275,12 +523,42 @@
       "description": "IDH-mutant astrocytoma is graded 2, 3, or 4 (CDKN2A/B homozygous loss defines grade 4). Grade drives the intensity of postoperative therapy.",
       "path": "CNS / Astro / Grade",
       "section": "Staging",
-      "pills": ["IDH-mut astrocytoma", "grade"],
+      "pills": [
+        "IDH-mut astrocytoma",
+        "grade"
+      ],
       "required": true,
       "options": [
-        { "id": "g2", "label": "Grade 2 (lower-grade)", "sets": { "grade": "2" }, "pills": ["grade 2"] },
-        { "id": "g3", "label": "Grade 3 (anaplastic)", "sets": { "grade": "3" }, "pills": ["grade 3"] },
-        { "id": "g4", "label": "Grade 4 (incl. CDKN2A/B loss)", "sets": { "grade": "4" }, "pills": ["grade 4"] }
+        {
+          "id": "g2",
+          "label": "Grade 2 (lower-grade)",
+          "sets": {
+            "grade": "2"
+          },
+          "pills": [
+            "grade 2"
+          ]
+        },
+        {
+          "id": "g3",
+          "label": "Grade 3 (anaplastic)",
+          "sets": {
+            "grade": "3"
+          },
+          "pills": [
+            "grade 3"
+          ]
+        },
+        {
+          "id": "g4",
+          "label": "Grade 4 (incl. CDKN2A/B loss)",
+          "sets": {
+            "grade": "4"
+          },
+          "pills": [
+            "grade 4"
+          ]
+        }
       ]
     },
     {
@@ -289,20 +567,55 @@
       "nodeType": "question",
       "name": "Astro G2 risk",
       "title": "Grade 2 IDH-mutant astrocytoma: risk group",
-      "description": "As with oligodendroglioma, lower-risk grade 2 astrocytoma may be observed after resection while higher-risk disease gets postoperative chemoradiation.",
+      "description": "Grade 2 IDH-mutant astrocytoma splits three ways: observe after gross-total resection, Vorasidenib for residual non-enhancing disease, or postoperative chemoradiation for higher-risk disease.",
       "path": "CNS / Astro / Grade 2 / Risk",
       "section": "Staging",
-      "pills": ["grade 2", "risk"],
+      "pills": [
+        "grade 2",
+        "risk"
+      ],
       "required": true,
       "bullets": [
-        "Lower-risk: age <= 40 and gross-total / near-total resection with minimal residual",
-        "Higher-risk: age > 40, or residual disease after subtotal resection / biopsy, or large / symptomatic tumor",
+        "Lower-risk: age <= 40 and gross-total / near-total resection with minimal residual - observe",
+        "Residual non-enhancing disease after surgery only (no prior RT or chemotherapy): Vorasidenib pathway (INDIGO, Category 1 preferred)",
+        "Higher-risk: age > 40, enhancing or large / symptomatic residual, or neurologic deficit - postoperative RT plus Temozolomide",
         "IDH-mutant astrocytoma trends more aggressive than codeleted oligodendroglioma at equal grade"
       ],
-      "footnotes": ["c"],
+      "footnotes": [
+        "c",
+        "f"
+      ],
       "options": [
-        { "id": "low", "label": "Lower-risk", "sets": { "riskGroup": "low" }, "pills": ["lower-risk"] },
-        { "id": "high", "label": "Higher-risk", "sets": { "riskGroup": "high" }, "pills": ["higher-risk"] }
+        {
+          "id": "low",
+          "label": "Lower-risk",
+          "sets": {
+            "riskGroup": "low"
+          },
+          "pills": [
+            "lower-risk"
+          ]
+        },
+        {
+          "id": "residual",
+          "label": "Residual non-enhancing disease (Vorasidenib candidate)",
+          "sets": {
+            "riskGroup": "residual"
+          },
+          "pills": [
+            "vorasidenib candidate"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "Higher-risk",
+          "sets": {
+            "riskGroup": "high"
+          },
+          "pills": [
+            "higher-risk"
+          ]
+        }
       ]
     },
     {
@@ -311,21 +624,71 @@
       "nodeType": "end",
       "name": "Astro G2 observe",
       "title": "Grade 2 IDH-mut astrocytoma, lower-risk: resection + observation",
-      "description": "Maximal safe resection with MRI surveillance is reasonable for lower-risk grade 2 IDH-mutant astrocytoma.",
+      "description": "Maximal safe resection with MRI surveillance is reasonable for lower-risk grade 2 IDH-mutant astrocytoma after gross-total resection.",
       "path": "CNS / Astro / Grade 2 / Observe",
       "section": "Surveillance",
-      "pills": ["grade 2", "surveillance"],
+      "pills": [
+        "grade 2",
+        "surveillance"
+      ],
       "showsRecommendation": true,
       "bullets": [
-        "Maximal safe resection is primary therapy",
-        "Serial MRI surveillance; reserve radiation + temozolomide for progression or reclassification",
+        "Maximal safe resection is primary therapy; observation applies after gross-total / near-total resection",
+        "If measurable residual non-enhancing disease is present, Vorasidenib 40 mg daily is the Category 1 preferred alternative to observation (INDIGO) - see the Vorasidenib pathway",
+        "Serial MRI surveillance; reserve radiation + temozolomide for progression, enhancement, or reclassification",
         "Manage seizures; support neurocognition",
         "Any documented progression triggers restaging and treatment"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "f"
+      ],
       "linkTo": "n_surv_type",
-      "linkLabel": "On documented progression, enter the surveillance / recurrence pathway"
+      "linkLabel": "On documented progression, enter the surveillance / recurrence pathway",
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ]
+    },
+    {
+      "id": "n_tx_astro_g2_vora",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Astro G2 vorasidenib",
+      "title": "Grade 2 IDH-mutant glioma, residual disease: Vorasidenib (INDIGO, Category 1 preferred)",
+      "description": "For grade 2 IDH-mutant oligodendroglioma or astrocytoma with residual or recurrent non-enhancing disease after surgery only, Vorasidenib delays radiation and chemotherapy and is the preferred systemic option.",
+      "path": "CNS / Astro / Grade 2 / Vorasidenib",
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ],
+      "section": "Treatment",
+      "pills": [
+        "grade 2",
+        "vorasidenib",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Vorasidenib 40 mg orally once daily, continuous dosing until progression or unacceptable toxicity (dual IDH1/2 inhibitor)",
+        "Category 1 preferred per the INDIGO trial for grade 2 IDH-mutant disease with residual or recurrent non-enhancing disease after surgery only (no prior radiation or chemotherapy)",
+        "Eligibility pattern: prior surgery only, preserved performance status, measurable non-enhancing disease on MRI",
+        "Monitor hepatic transaminases and CBC; manage fatigue, headache, and liver enzyme elevation; MRI response assessment on therapy",
+        "Deferring radiation preserves neurocognition in young patients; convert to RT plus alkylating chemotherapy at progression or enhancement",
+        "Observation remains the option after gross-total resection; enhancing, large, or symptomatic high-risk disease proceeds to RT plus Temozolomide instead",
+        "No dose-protocol reference exists for Vorasidenib in this build, so dosing above is written guidance for the physician to confirm against the label"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "linkTo": "n_surv_type",
+      "linkLabel": "Enter lower-grade surveillance on Vorasidenib"
     },
     {
       "id": "n_astro_g2_induction",
@@ -335,9 +698,15 @@
       "title": "Grade 2 IDH-mut astrocytoma, higher-risk: RT + temozolomide induction",
       "description": "Higher-risk grade 2 IDH-mutant astrocytoma is treated with postoperative radiation followed by alkylating chemotherapy; restage to guide the adjuvant course.",
       "path": "CNS / Astro / Grade 2 / Induction",
-      "protocolRefs": ["cns-tmz-adjuvant", "cns-pcv"],
+      "protocolRefs": [
+        "cns-tmz-adjuvant",
+        "cns-pcv"
+      ],
       "section": "Treatment",
-      "pills": ["grade 2", "treatment"],
+      "pills": [
+        "grade 2",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
         "Focal radiation to the tumor bed",
@@ -345,10 +714,18 @@
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts",
         "Serial neurocognitive assessment"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["c"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
       "options": [
-        { "id": "continue", "label": "Induction delivered - restage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Induction delivered - restage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -357,21 +734,33 @@
       "nodeType": "question",
       "name": "Astro G3 induction",
       "title": "Grade 3 IDH-mut astrocytoma (anaplastic): RT + temozolomide induction",
-      "description": "Anaplastic IDH-mutant astrocytoma is treated with radiation plus temozolomide after maximal safe resection; restage to guide the adjuvant course.",
+      "description": "Anaplastic IDH-mutant astrocytoma is treated with focal radiation to 60 Gy plus temozolomide after maximal safe resection; restage to guide the adjuvant course.",
       "path": "CNS / Astro / Grade 3 / Induction",
-      "protocolRefs": ["cns-tmz-concurrent", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-tmz-concurrent",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Treatment",
-      "pills": ["grade 3", "treatment"],
+      "pills": [
+        "grade 3",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
-        "Maximal safe resection, then focal radiation",
-        "Temozolomide (concurrent and/or adjuvant); PCV is an alternative alkylator backbone",
+        "Maximal safe resection, then focal radiation to 60 Gy",
+        "Temozolomide with radiation (concurrent and adjuvant phases) carries the survival benefit; PCV is an alternative alkylator backbone",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts",
         "Serial neurocognitive assessment"
       ],
-      "evidenceCategory": ["1"],
+      "evidenceCategory": [
+        "1"
+      ],
       "options": [
-        { "id": "continue", "label": "Induction delivered - restage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Induction delivered - restage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -380,22 +769,36 @@
       "nodeType": "question",
       "name": "Astro G4 induction",
       "title": "Grade 4 IDH-mut astrocytoma: Stupp-type induction",
-      "description": "Grade 4 IDH-mutant astrocytoma is treated like glioblastoma with a Stupp-type chemoradiation backbone, recognizing its more favorable biology than IDH-wildtype GBM; restage to guide the adjuvant course.",
+      "description": "Grade 4 IDH-mutant astrocytoma (including CDKN2A/B homozygous-deleted disease, which is grade 4 regardless of histology) is treated like glioblastoma with a Stupp-type chemoradiation backbone, recognizing its more favorable biology than IDH-wildtype GBM; restage to guide the adjuvant course.",
       "path": "CNS / Astro / Grade 4 / Induction",
-      "protocolRefs": ["cns-tmz-concurrent", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-tmz-concurrent",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Treatment",
-      "pills": ["grade 4", "treatment"],
+      "pills": [
+        "grade 4",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
-        "Maximal safe resection, then focal radiation with concurrent daily temozolomide",
+        "Maximal safe resection, then focal radiation to 60 Gy with concurrent daily temozolomide",
         "Adjuvant temozolomide cycles follow, guided by restaging",
         "The Stupp-type regimen references the CNS draft dose protocols below (concurrent then adjuvant temozolomide), which compute doses in the Protocol Sheet; the physician confirms and adjusts",
         "Better prognosis than IDH-wildtype GBM but still treated intensively"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["a"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a"
+      ],
       "options": [
-        { "id": "continue", "label": "Induction delivered - restage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Induction delivered - restage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -407,16 +810,37 @@
       "description": "In IDH-wildtype glioblastoma, age and performance status choose between full Stupp therapy and an abbreviated elderly / frail regimen.",
       "path": "CNS / GBM / Fitness",
       "section": "Staging",
-      "pills": ["GBM", "fitness"],
+      "pills": [
+        "GBM",
+        "fitness"
+      ],
       "required": true,
       "bullets": [
-        "Fit: younger / good performance status (e.g. KPS >= 70), able to tolerate full chemoradiation",
-        "Elderly / frail: older (e.g. > 65-70) or poor performance status",
-        "MGMT methylation is most decision-relevant in the elderly / frail group"
+        "Fit: younger with good performance status (KPS 70 or higher), able to tolerate full Stupp chemoradiation",
+        "Elderly / frail: age 65-70 or older, or KPS below 70",
+        "MGMT promoter methylation is most decision-relevant in the elderly / frail group"
       ],
       "options": [
-        { "id": "fit", "label": "Fit for full chemoradiation", "sets": { "fitness": "fit" }, "pills": ["fit"] },
-        { "id": "elderly", "label": "Elderly / frail", "sets": { "fitness": "elderly" }, "pills": ["elderly/frail"] }
+        {
+          "id": "fit",
+          "label": "Fit for full chemoradiation",
+          "sets": {
+            "fitness": "fit"
+          },
+          "pills": [
+            "fit"
+          ]
+        },
+        {
+          "id": "elderly",
+          "label": "Elderly / frail",
+          "sets": {
+            "fitness": "elderly"
+          },
+          "pills": [
+            "elderly/frail"
+          ]
+        }
       ]
     },
     {
@@ -425,22 +849,39 @@
       "nodeType": "question",
       "name": "GBM Stupp induction",
       "title": "Glioblastoma, fit: Stupp chemoradiation induction (+/- TTFields)",
-      "description": "Standard of care for fit IDH-wildtype glioblastoma is maximal safe resection followed by concurrent chemoradiation, given regardless of MGMT status; restage before adjuvant temozolomide.",
+      "description": "Standard of care for fit IDH-wildtype glioblastoma is the Stupp protocol (Category 1): maximal safe resection followed by RT 60 Gy in 30 fractions with concurrent daily Temozolomide 75 mg/m2, then adjuvant Temozolomide plus Tumor Treating Fields, given regardless of MGMT status; restage before adjuvant temozolomide.",
       "path": "CNS / GBM / Stupp / Induction",
-      "protocolRefs": ["cns-tmz-concurrent", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-tmz-concurrent",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Treatment",
-      "pills": ["GBM", "treatment"],
+      "pills": [
+        "GBM",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
-        "Maximal safe resection",
-        "Focal radiation with concurrent daily temozolomide (induction), then plan adjuvant cycles after restaging",
-        "MGMT methylation is prognostic but does not withhold Stupp therapy in fit patients",
+        "Maximal safe resection with intraoperative mapping and neuronavigation where indicated",
+        "Stupp protocol: focal radiation 60 Gy in 30 fractions with concurrent daily Temozolomide 75 mg/m2, then adjuvant Temozolomide 150-200 mg/m2 on days 1-5 every 28 days for 6-12 cycles",
+        "Add Tumor Treating Fields (TTFields / Optune) with adjuvant Temozolomide for supratentorial glioblastoma - Category 1 preferred",
+        "MGMT promoter methylation is prognostic but does not withhold Stupp therapy in fit patients",
         "The Stupp regimen references the CNS draft dose protocols below (concurrent then adjuvant temozolomide), which compute doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["a", "d"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "d",
+        "g"
+      ],
       "options": [
-        { "id": "continue", "label": "Chemoradiation delivered - restage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Chemoradiation delivered - restage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -452,13 +893,46 @@
       "description": "In the elderly / frail glioblastoma, MGMT promoter methylation guides whether to use temozolomide-containing therapy or radiation alone with a hypofractionated schedule.",
       "path": "CNS / GBM / Elderly / MGMT",
       "section": "Treatment",
-      "pills": ["GBM", "elderly", "MGMT"],
+      "pills": [
+        "GBM",
+        "elderly",
+        "MGMT"
+      ],
       "required": true,
-      "footnotes": ["d"],
+      "footnotes": [
+        "d"
+      ],
       "options": [
-        { "id": "methylated", "label": "MGMT methylated", "sets": { "biomarkers.MGMT": "methylated" }, "pills": ["MGMT+"] },
-        { "id": "unmethylated", "label": "MGMT unmethylated", "sets": { "biomarkers.MGMT": "unmethylated" }, "pills": ["MGMT-"] },
-        { "id": "unknown", "label": "MGMT unknown / not available", "sets": { "biomarkers.MGMT": "unknown" }, "pills": ["MGMT ?"] }
+        {
+          "id": "methylated",
+          "label": "MGMT methylated",
+          "sets": {
+            "biomarkers.MGMT": "methylated"
+          },
+          "pills": [
+            "MGMT+"
+          ]
+        },
+        {
+          "id": "unmethylated",
+          "label": "MGMT unmethylated",
+          "sets": {
+            "biomarkers.MGMT": "unmethylated"
+          },
+          "pills": [
+            "MGMT-"
+          ]
+        },
+        {
+          "id": "unknown",
+          "label": "MGMT unknown / not available",
+          "sets": {
+            "biomarkers.MGMT": "unknown"
+          },
+          "pills": [
+            "MGMT ?"
+          ]
+        }
       ]
     },
     {
@@ -467,22 +941,38 @@
       "nodeType": "question",
       "name": "GBM elderly TMZ induction",
       "title": "Elderly GBM, MGMT methylated: hypofractionated RT + temozolomide induction",
-      "description": "Methylated elderly glioblastoma benefits most from an alkylating agent; a hypofractionated radiation course with temozolomide (or temozolomide alone if radiation is not tolerable) is preferred, then restage.",
+      "description": "Methylated elderly glioblastoma benefits most from an alkylating agent; hypofractionated RT 40 Gy in 15 fractions with temozolomide, or temozolomide monotherapy if radiation is not tolerable, is preferred, then restage.",
       "path": "CNS / GBM / Elderly / TMZ / Induction",
-      "protocolRefs": ["cns-tmz-concurrent", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-tmz-concurrent",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Treatment",
-      "pills": ["GBM", "elderly", "MGMT+", "treatment"],
+      "pills": [
+        "GBM",
+        "elderly",
+        "MGMT+",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
-        "Hypofractionated (short-course) radiation with concurrent temozolomide",
-        "Temozolomide alone is an option if radiation is not feasible (methylated tumors respond)",
+        "Hypofractionated radiation 40 Gy in 15 fractions with concurrent and adjuvant temozolomide (MGMT methylated)",
+        "Temozolomide monotherapy is an option if radiation is not feasible (methylated tumors respond)",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts",
         "Attention to marrow tolerance and performance status"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "options": [
-        { "id": "continue", "label": "Induction delivered - restage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Induction delivered - restage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -493,19 +983,34 @@
       "title": "Elderly GBM, MGMT unknown: hypofractionated RT + temozolomide induction",
       "description": "When MGMT status is unavailable, a hypofractionated radiation course with temozolomide is a pragmatic default for the elderly patient who can tolerate combined therapy; restage before adjuvant cycles.",
       "path": "CNS / GBM / Elderly / ChemoRT / Induction",
-      "protocolRefs": ["cns-tmz-concurrent", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-tmz-concurrent",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Treatment",
-      "pills": ["GBM", "elderly", "treatment"],
+      "pills": [
+        "GBM",
+        "elderly",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
-        "Hypofractionated radiation with concurrent temozolomide",
-        "Send MGMT if not already done to refine the adjuvant choice",
+        "Hypofractionated radiation (for example 40 Gy in 15 fractions) with concurrent temozolomide",
+        "Send MGMT promoter methylation by pyrosequencing or MS-PCR if not already done to refine the adjuvant choice",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "options": [
-        { "id": "continue", "label": "Induction delivered - restage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Induction delivered - restage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -517,7 +1022,12 @@
       "description": "Unmethylated elderly glioblastoma derives little from temozolomide; hypofractionated radiation alone is a reasonable, better-tolerated choice, with best supportive care for the frailest.",
       "path": "CNS / GBM / Elderly / RT",
       "section": "Treatment",
-      "pills": ["GBM", "elderly", "MGMT-", "treatment"],
+      "pills": [
+        "GBM",
+        "elderly",
+        "MGMT-",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Hypofractionated radiation alone",
@@ -525,10 +1035,18 @@
         "Best supportive care for the frailest / lowest performance status",
         "Radiation-only pathway; no systemic dose protocol applies here"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["d"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
       "linkTo": "n_surv_type",
-      "linkLabel": "Enter high-grade surveillance after radiation"
+      "linkLabel": "Enter high-grade surveillance after radiation",
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ]
     },
     {
       "id": "n_restage",
@@ -539,7 +1057,10 @@
       "description": "After induction chemoradiation, a restaging MRI (typically ~4 weeks after radiation, then serially) is response-adapted: distinguish true response from pseudoprogression and from genuine early progression / residual disease. The answer drives the adjuvant course.",
       "path": "CNS / Restaging",
       "section": "Treatment",
-      "pills": ["restaging", "response"],
+      "pills": [
+        "restaging",
+        "response"
+      ],
       "required": true,
       "bullets": [
         "Responder: stable or reduced disease on restaging - proceed to planned adjuvant chemotherapy",
@@ -547,11 +1068,41 @@
         "True progression / residual: unequivocal growth or new disease during / just after induction - treat as refractory",
         "Perfusion imaging or amino-acid PET, and short-interval re-imaging, help resolve ambiguous scans before changing therapy"
       ],
-      "footnotes": ["a", "e"],
+      "footnotes": [
+        "a",
+        "e"
+      ],
       "options": [
-        { "id": "responder", "label": "Responder (stable / regressed)", "sets": { "response": "responder" }, "pills": ["responder"] },
-        { "id": "pseudoprog", "label": "Suspected pseudoprogression", "sets": { "response": "pseudoprogression" }, "pills": ["pseudoprogression"] },
-        { "id": "progression", "label": "True progression / residual", "sets": { "response": "progression" }, "pills": ["progression"] }
+        {
+          "id": "responder",
+          "label": "Responder (stable / regressed)",
+          "sets": {
+            "response": "responder"
+          },
+          "pills": [
+            "responder"
+          ]
+        },
+        {
+          "id": "pseudoprog",
+          "label": "Suspected pseudoprogression",
+          "sets": {
+            "response": "pseudoprogression"
+          },
+          "pills": [
+            "pseudoprogression"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "True progression / residual",
+          "sets": {
+            "response": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
       ]
     },
     {
@@ -562,9 +1113,15 @@
       "title": "Responder: adjuvant chemotherapy continuation",
       "description": "A responder proceeds to the planned adjuvant chemotherapy course after chemoradiation. Choose whether to add maintenance / device therapy or move to surveillance on completion.",
       "path": "CNS / Adjuvant",
-      "protocolRefs": ["cns-tmz-adjuvant", "cns-pcv"],
+      "protocolRefs": [
+        "cns-tmz-adjuvant",
+        "cns-pcv"
+      ],
       "section": "Treatment",
-      "pills": ["adjuvant", "treatment"],
+      "pills": [
+        "adjuvant",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
         "Deliver the planned adjuvant alkylator cycles (e.g. temozolomide for astrocytoma / GBM, PCV for oligodendroglioma)",
@@ -572,11 +1129,34 @@
         "Reassess with MRI before each restaging point; stop early for unequivocal progression",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["a", "b"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
       "options": [
-        { "id": "complete", "label": "Complete adjuvant cycles - enter surveillance", "sets": { "adjuvant": "complete" }, "pills": ["completed"] },
-        { "id": "escalate", "label": "Add maintenance / TTFields (supratentorial GBM)", "sets": { "adjuvant": "maintenance" }, "pills": ["maintenance"] }
+        {
+          "id": "complete",
+          "label": "Complete adjuvant cycles - enter surveillance",
+          "sets": {
+            "adjuvant": "complete"
+          },
+          "pills": [
+            "completed"
+          ]
+        },
+        {
+          "id": "escalate",
+          "label": "Add maintenance / TTFields (supratentorial GBM)",
+          "sets": {
+            "adjuvant": "maintenance"
+          },
+          "pills": [
+            "maintenance"
+          ]
+        }
       ]
     },
     {
@@ -585,20 +1165,31 @@
       "nodeType": "end",
       "name": "Maintenance / TTFields",
       "title": "Adjuvant maintenance: TTFields / continued alkylator",
-      "description": "Selected supratentorial glioblastoma patients add alternating electric-field therapy (TTFields) during maintenance, alongside continued adjuvant temozolomide, before transitioning to surveillance.",
+      "description": "Supratentorial glioblastoma patients add Tumor Treating Fields (TTFields / Optune, Category 1 preferred) during maintenance, alongside continued adjuvant temozolomide, before transitioning to surveillance.",
       "path": "CNS / Adjuvant / Maintenance",
-      "protocolRefs": ["cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-tmz-adjuvant"
+      ],
       "section": "Treatment",
-      "pills": ["GBM", "maintenance", "treatment"],
+      "pills": [
+        "GBM",
+        "maintenance",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
-        "TTFields (alternating electric fields) added in the adjuvant phase for supratentorial glioblastoma",
-        "Continue adjuvant temozolomide cycles as planned",
-        "Manage scalp / skin care for the device; support adherence to wear-time",
+        "TTFields (Optune) with adjuvant temozolomide for supratentorial glioblastoma - Category 1 preferred per EF-14",
+        "Continue adjuvant temozolomide 150-200 mg/m2 on days 1-5 every 28 days as planned",
+        "Manage scalp / skin care for the device; support adherence to daily wear-time",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["1"],
-      "footnotes": ["a"],
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "g"
+      ],
       "linkTo": "n_surv_type",
       "linkLabel": "Transition to high-grade surveillance on completion"
     },
@@ -610,9 +1201,15 @@
       "title": "Suspected pseudoprogression: continue therapy, re-image",
       "description": "Findings favor treatment effect rather than true growth. Continue the planned adjuvant course and re-image at short interval rather than switching to salvage therapy prematurely.",
       "path": "CNS / Restaging / Pseudoprogression",
-      "protocolRefs": ["cns-tmz-adjuvant", "cns-pcv"],
+      "protocolRefs": [
+        "cns-tmz-adjuvant",
+        "cns-pcv"
+      ],
       "section": "Treatment",
-      "pills": ["pseudoprogression", "treatment"],
+      "pills": [
+        "pseudoprogression",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Continue planned adjuvant chemotherapy; do not label as progression yet",
@@ -620,8 +1217,12 @@
         "Adjust steroids for symptomatic edema; avoid premature salvage therapy",
         "If subsequent imaging confirms true growth, move to the recurrence pathway"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "linkTo": "n_recur_type",
       "linkLabel": "If confirmed as true progression, enter the recurrence pathway"
     },
@@ -633,9 +1234,16 @@
       "title": "True early progression / residual: treat as refractory",
       "description": "Unequivocal growth or residual disease during or just after chemoradiation is treated as refractory disease, managed on the recurrence / salvage pathway with a clinical trial prioritized.",
       "path": "CNS / Restaging / Progression",
-      "protocolRefs": ["cns-tmz-adjuvant", "cns-lomustine", "cns-bevacizumab"],
+      "protocolRefs": [
+        "cns-tmz-adjuvant",
+        "cns-lomustine",
+        "cns-bevacizumab"
+      ],
       "section": "Treatment",
-      "pills": ["progression", "treatment"],
+      "pills": [
+        "progression",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Confirm true progression (perfusion / PET / short-interval MRI, biopsy if ambiguous)",
@@ -643,8 +1251,12 @@
         "Switch systemic therapy (alternate alkylator, bevacizumab for symptom control); prioritize a clinical trial",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
       "linkTo": "n_recur_type",
       "linkLabel": "Manage on the recurrence / salvage pathway"
     },
@@ -657,11 +1269,31 @@
       "description": "Follow-up cadence differs by grade. Choose the treated tumor category.",
       "path": "CNS / Surveillance",
       "section": "Surveillance",
-      "pills": ["surveillance"],
+      "pills": [
+        "surveillance"
+      ],
       "required": true,
       "options": [
-        { "id": "lgg", "label": "Lower-grade glioma (grade 2-3)", "sets": { "survGrade": "lgg" }, "pills": ["LGG"] },
-        { "id": "hgg", "label": "High-grade glioma (grade 4 / GBM)", "sets": { "survGrade": "hgg" }, "pills": ["HGG"] }
+        {
+          "id": "lgg",
+          "label": "Lower-grade glioma (grade 2-3)",
+          "sets": {
+            "survGrade": "lgg"
+          },
+          "pills": [
+            "LGG"
+          ]
+        },
+        {
+          "id": "hgg",
+          "label": "High-grade glioma (grade 4 / GBM)",
+          "sets": {
+            "survGrade": "hgg"
+          },
+          "pills": [
+            "HGG"
+          ]
+        }
       ]
     },
     {
@@ -673,7 +1305,10 @@
       "description": "Long-horizon MRI surveillance, since lower-grade gliomas progress slowly and can transform.",
       "path": "CNS / Surveillance / LGG",
       "section": "Surveillance",
-      "pills": ["LGG", "surveillance"],
+      "pills": [
+        "LGG",
+        "surveillance"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "MRI at intervals (for example every 3-6 months for 5 years, then lengthen) - individualize",
@@ -681,9 +1316,15 @@
         "Neurocognitive and seizure follow-up",
         "A confirmed progression enters the recurrence pathway"
       ],
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": [
+        "2A"
+      ],
       "linkTo": "n_recur_type",
-      "linkLabel": "On confirmed progression, enter the recurrence pathway"
+      "linkLabel": "On confirmed progression, enter the recurrence pathway",
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ]
     },
     {
       "id": "n_surv_hgg",
@@ -694,7 +1335,10 @@
       "description": "Closer MRI surveillance with awareness of pseudoprogression early after chemoradiation.",
       "path": "CNS / Surveillance / HGG",
       "section": "Surveillance",
-      "pills": ["HGG", "surveillance"],
+      "pills": [
+        "HGG",
+        "surveillance"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "MRI roughly every 2-4 months (individualize) after completing chemoradiation",
@@ -702,10 +1346,49 @@
         "Monitor steroid needs and performance status",
         "A confirmed progression enters the recurrence pathway"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["a", "e"],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "e"
+      ],
       "linkTo": "n_recur_type",
-      "linkLabel": "On confirmed progression, enter the recurrence pathway"
+      "linkLabel": "On confirmed progression, enter the recurrence pathway",
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ]
+    },
+    {
+      "id": "n_recur_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Recurrence workup",
+      "title": "Suspected recurrence: confirm true progression",
+      "description": "Full recurrence workup before any salvage decision: distinguish true progression from pseudoprogression or radiation necrosis, re-stage molecularly, and review prior therapy.",
+      "path": "CNS / Recurrence / Workup",
+      "section": "Recurrence",
+      "pills": [
+        "workup",
+        "recurrence"
+      ],
+      "required": true,
+      "bullets": [
+        "High-resolution 3D contrast-enhanced MRI brain (T1 pre/post, T2/FLAIR, DWI) with perfusion-weighted MRI and MR spectroscopy to separate true progression from pseudoprogression or radiation necrosis",
+        "Short-interval repeat MRI or amino-acid PET, or stereotactic biopsy, when imaging is equivocal - do not start salvage therapy on ambiguous first progression",
+        "Re-review integrated WHO CNS5 molecular class (IDH, 1p/19q, MGMT promoter methylation, CDKN2A/B) and document all prior therapy received (extent of resection, radiation dose and volumes, alkylator exposure)",
+        "Performance status (KPS), neurologic function, steroid requirement, seizure control, marrow reserve, and hepatic function",
+        "Assess resectability of focal recurrence and candidacy for re-irradiation (prior dose, interval since radiation, volume)",
+        "Prioritize a clinical trial at every salvage line; multidisciplinary neuro-oncology review before committing to salvage"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Recurrence Workup Reviewed — Proceed to Recurrence Category",
+          "setsValue": null
+        }
+      ]
     },
     {
       "id": "n_recur_type",
@@ -713,20 +1396,49 @@
       "nodeType": "question",
       "name": "Recurrence type",
       "title": "Recurrence: tumor category",
-      "description": "At recurrence, first confirm true progression (versus pseudoprogression / treatment effect), then select the category to guide salvage options.",
+      "description": "True progression confirmed on recurrence workup. Select the tumor category to guide salvage options.",
       "path": "CNS / Recurrence",
       "section": "Recurrence",
-      "pills": ["recurrence"],
+      "pills": [
+        "recurrence"
+      ],
       "required": true,
       "bullets": [
-        "Confirm true progression on MRI (+/- perfusion / spectroscopy or biopsy)",
-        "Re-review molecular class and prior therapy received (radiation, alkylator)",
+        "True progression confirmed (versus pseudoprogression / treatment effect) on recurrence workup",
+        "Molecular class re-reviewed and prior therapy received documented (radiation, alkylator)",
         "Prioritize a clinical trial at every salvage line"
       ],
       "options": [
-        { "id": "recur_lgg", "label": "Recurrent lower-grade glioma (grade 2-3)", "sets": { "recurClass": "lgg" }, "pills": ["LGG"] },
-        { "id": "recur_astro", "label": "Recurrent grade 4 IDH-mutant astrocytoma", "sets": { "recurClass": "astro4" }, "pills": ["astro G4"] },
-        { "id": "recur_gbm", "label": "Recurrent glioblastoma (IDH-wildtype)", "sets": { "recurClass": "gbm" }, "pills": ["GBM"] }
+        {
+          "id": "recur_lgg",
+          "label": "Recurrent lower-grade glioma (grade 2-3)",
+          "sets": {
+            "recurClass": "lgg"
+          },
+          "pills": [
+            "LGG"
+          ]
+        },
+        {
+          "id": "recur_astro",
+          "label": "Recurrent grade 4 IDH-mutant astrocytoma",
+          "sets": {
+            "recurClass": "astro4"
+          },
+          "pills": [
+            "astro G4"
+          ]
+        },
+        {
+          "id": "recur_gbm",
+          "label": "Recurrent glioblastoma (IDH-wildtype)",
+          "sets": {
+            "recurClass": "gbm"
+          },
+          "pills": [
+            "GBM"
+          ]
+        }
       ]
     },
     {
@@ -738,7 +1450,10 @@
       "description": "Salvage for recurrent lower-grade glioma often begins with re-resection to confirm grade and rule out transformation, then selects the modality not yet given.",
       "path": "CNS / Recurrence / LGG / Re-resection",
       "section": "Recurrence",
-      "pills": ["LGG", "recurrence"],
+      "pills": [
+        "LGG",
+        "recurrence"
+      ],
       "required": true,
       "bullets": [
         "Re-resection where feasible confirms grade and rules out transformation to grade 4",
@@ -746,8 +1461,30 @@
         "Proceed to the modality step whether or not re-resection is performed"
       ],
       "options": [
-        { "id": "reop", "label": "Re-resection feasible / performed", "sets": { "recurReop": "yes" }, "pills": ["re-resection"] },
-        { "id": "noreop", "label": "Re-resection not feasible", "sets": { "recurReop": "no" }, "pills": ["no re-op"] }
+        {
+          "id": "reop",
+          "label": "Re-resection feasible / performed",
+          "sets": {
+            "recurReop": "yes"
+          },
+          "pills": [
+            "re-resection"
+          ]
+        },
+        {
+          "id": "noreop",
+          "label": "Re-resection not feasible",
+          "sets": {
+            "recurReop": "no"
+          },
+          "pills": [
+            "no re-op"
+          ]
+        }
+      ],
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
       ]
     },
     {
@@ -759,7 +1496,10 @@
       "description": "Choose the salvage modality by what has already been delivered and whether the tumor has transformed to higher grade.",
       "path": "CNS / Recurrence / LGG / Modality",
       "section": "Recurrence",
-      "pills": ["LGG", "recurrence"],
+      "pills": [
+        "LGG",
+        "recurrence"
+      ],
       "required": true,
       "bullets": [
         "Radiation-naive: focal radiation is the preferred next modality",
@@ -767,9 +1507,40 @@
         "Transformed to grade 4 on re-resection: switch to the high-grade pathway"
       ],
       "options": [
-        { "id": "rt", "label": "Radiation-naive - give radiation", "sets": { "recurModality": "rt" }, "pills": ["RT"] },
-        { "id": "chemo", "label": "Prior radiation - give chemotherapy", "sets": { "recurModality": "chemo" }, "pills": ["chemo"] },
-        { "id": "transformed", "label": "Transformed to grade 4", "sets": { "recurModality": "transformed" }, "pills": ["transformed"] }
+        {
+          "id": "rt",
+          "label": "Radiation-naive - give radiation",
+          "sets": {
+            "recurModality": "rt"
+          },
+          "pills": [
+            "RT"
+          ]
+        },
+        {
+          "id": "chemo",
+          "label": "Prior radiation - give chemotherapy",
+          "sets": {
+            "recurModality": "chemo"
+          },
+          "pills": [
+            "chemo"
+          ]
+        },
+        {
+          "id": "transformed",
+          "label": "Transformed to grade 4",
+          "sets": {
+            "recurModality": "transformed"
+          },
+          "pills": [
+            "transformed"
+          ]
+        }
+      ],
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
       ]
     },
     {
@@ -780,9 +1551,15 @@
       "title": "Recurrent LGG, radiation-naive: focal radiation",
       "description": "A radiation-naive recurrent lower-grade glioma is salvaged with focal external-beam radiation, typically followed by chemotherapy.",
       "path": "CNS / Recurrence / LGG / RT",
-      "protocolRefs": ["cns-pcv", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Recurrence",
-      "pills": ["LGG", "treatment"],
+      "pills": [
+        "LGG",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Focal external-beam radiation to the recurrent tumor volume",
@@ -790,8 +1567,12 @@
         "Baseline and serial neurocognitive assessment",
         "The follow-on systemic regimen(s) reference the CNS draft dose protocol(s) below, which compute doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["b"]
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ]
     },
     {
       "id": "n_tx_recur_lgg_chemo",
@@ -801,9 +1582,15 @@
       "title": "Recurrent LGG, prior radiation: alkylating chemotherapy",
       "description": "When radiation has already been delivered, alkylating chemotherapy is the preferred salvage for recurrent lower-grade glioma.",
       "path": "CNS / Recurrence / LGG / Chemo",
-      "protocolRefs": ["cns-tmz-adjuvant", "cns-pcv"],
+      "protocolRefs": [
+        "cns-tmz-adjuvant",
+        "cns-pcv"
+      ],
       "section": "Recurrence",
-      "pills": ["LGG", "treatment"],
+      "pills": [
+        "LGG",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Alkylating chemotherapy: temozolomide, or PCV (procarbazine, lomustine, vincristine)",
@@ -811,8 +1598,12 @@
         "Monitor marrow counts and cumulative nitrosourea exposure",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["b"]
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ]
     },
     {
       "id": "n_tx_recur_lgg_transformed",
@@ -822,9 +1613,17 @@
       "title": "Recurrent LGG transformed to grade 4: high-grade salvage",
       "description": "A lower-grade glioma that has transformed to grade 4 on re-resection is treated on the high-grade / glioblastoma salvage pathway.",
       "path": "CNS / Recurrence / LGG / Transformed",
-      "protocolRefs": ["cns-tmz-adjuvant", "cns-lomustine", "cns-bevacizumab"],
+      "protocolRefs": [
+        "cns-tmz-adjuvant",
+        "cns-lomustine",
+        "cns-bevacizumab"
+      ],
       "section": "Recurrence",
-      "pills": ["LGG", "transformed", "treatment"],
+      "pills": [
+        "LGG",
+        "transformed",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Treat as high-grade disease: maximal safe re-resection plus chemoradiation as feasible",
@@ -832,8 +1631,12 @@
         "Prioritize a clinical trial",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["2A"],
-      "footnotes": ["a"]
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ]
     },
     {
       "id": "n_recur_astro_line",
@@ -844,7 +1647,10 @@
       "description": "Salvage of recurrent grade 4 IDH-mutant astrocytoma mirrors recurrent glioblastoma but with generally better outcomes. Decide on re-resection / re-irradiation versus straight to systemic salvage.",
       "path": "CNS / Recurrence / Astro G4 / Line",
       "section": "Recurrence",
-      "pills": ["astro G4", "recurrence"],
+      "pills": [
+        "astro G4",
+        "recurrence"
+      ],
       "required": true,
       "bullets": [
         "Re-resection for accessible, symptomatic recurrence; re-irradiation in selected cases",
@@ -852,8 +1658,30 @@
         "Generally better prognosis than IDH-wildtype recurrence; clinical trial encouraged"
       ],
       "options": [
-        { "id": "local", "label": "Re-resection / re-irradiation feasible", "sets": { "recurAstroLocal": "yes" }, "pills": ["local salvage"] },
-        { "id": "systemic", "label": "Straight to systemic salvage", "sets": { "recurAstroLocal": "no" }, "pills": ["systemic"] }
+        {
+          "id": "local",
+          "label": "Re-resection / re-irradiation feasible",
+          "sets": {
+            "recurAstroLocal": "yes"
+          },
+          "pills": [
+            "local salvage"
+          ]
+        },
+        {
+          "id": "systemic",
+          "label": "Straight to systemic salvage",
+          "sets": {
+            "recurAstroLocal": "no"
+          },
+          "pills": [
+            "systemic"
+          ]
+        }
+      ],
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
       ]
     },
     {
@@ -864,9 +1692,15 @@
       "title": "Recurrent astrocytoma G4: first salvage systemic therapy",
       "description": "First-line salvage systemic therapy is an alkylator; the next decision depends on whether disease responds or progresses.",
       "path": "CNS / Recurrence / Astro G4 / First salvage",
-      "protocolRefs": ["cns-tmz-adjuvant", "cns-lomustine"],
+      "protocolRefs": [
+        "cns-tmz-adjuvant",
+        "cns-lomustine"
+      ],
       "section": "Recurrence",
-      "pills": ["astro G4", "recurrence"],
+      "pills": [
+        "astro G4",
+        "recurrence"
+      ],
       "required": true,
       "bullets": [
         "Temozolomide rechallenge (esp. MGMT-methylated with a treatment-free interval) or lomustine",
@@ -875,8 +1709,26 @@
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
       "options": [
-        { "id": "progression", "label": "On progression - later-line salvage", "sets": { "recurAstroLine": "second" }, "pills": ["progression"] },
-        { "id": "bsc", "label": "Poor performance status - best supportive care", "sets": { "recurAstroLine": "bsc" }, "pills": ["BSC"] }
+        {
+          "id": "progression",
+          "label": "On progression - later-line salvage",
+          "sets": {
+            "recurAstroLine": "second"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "bsc",
+          "label": "Poor performance status - best supportive care",
+          "sets": {
+            "recurAstroLine": "bsc"
+          },
+          "pills": [
+            "BSC"
+          ]
+        }
       ]
     },
     {
@@ -887,9 +1739,16 @@
       "title": "Recurrent astrocytoma G4: later-line salvage",
       "description": "After progression on first salvage, options are an alternate alkylator, bevacizumab for symptom control, or a clinical trial.",
       "path": "CNS / Recurrence / Astro G4 / Later",
-      "protocolRefs": ["cns-lomustine", "cns-tmz-adjuvant", "cns-bevacizumab"],
+      "protocolRefs": [
+        "cns-lomustine",
+        "cns-tmz-adjuvant",
+        "cns-bevacizumab"
+      ],
       "section": "Recurrence",
-      "pills": ["astro G4", "treatment"],
+      "pills": [
+        "astro G4",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Alternate alkylator (switch temozolomide <-> lomustine) if not exhausted",
@@ -897,7 +1756,9 @@
         "Re-irradiation for focal recurrence in selected patients; prioritize a clinical trial",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["2B"]
+      "evidenceCategory": [
+        "2B"
+      ]
     },
     {
       "id": "n_tx_recur_astro_bsc",
@@ -908,7 +1769,10 @@
       "description": "For poor performance status, best supportive care with symptom-directed measures is appropriate.",
       "path": "CNS / Recurrence / Astro G4 / BSC",
       "section": "Recurrence",
-      "pills": ["astro G4", "supportive"],
+      "pills": [
+        "astro G4",
+        "supportive"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Symptom-directed care: steroids for edema, anti-seizure medication, analgesia",
@@ -916,7 +1780,13 @@
         "Bevacizumab may be used purely for symptom control in selected patients",
         "Best supportive care; no systemic dose protocol applies here (bevacizumab, if used for symptom control, is referenced on the salvage nodes)"
       ],
-      "evidenceCategory": ["2A"]
+      "evidenceCategory": [
+        "2A"
+      ],
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ]
     },
     {
       "id": "n_recur_gbm_resect",
@@ -927,11 +1797,32 @@
       "description": "For recurrent glioblastoma, whether the recurrence is safely resectable steers toward re-operation versus straight-to-systemic therapy / re-irradiation.",
       "path": "CNS / Recurrence / GBM / Resectability",
       "section": "Recurrence",
-      "pills": ["GBM", "recurrence"],
+      "pills": [
+        "GBM",
+        "recurrence"
+      ],
       "required": true,
       "options": [
-        { "id": "resectable", "label": "Focal, safely resectable recurrence", "sets": { "recurResect": "yes" }, "pills": ["resectable"] },
-        { "id": "unresectable", "label": "Diffuse / unresectable recurrence", "sets": { "recurResect": "no" }, "pills": ["unresectable"] }
+        {
+          "id": "resectable",
+          "label": "Focal, safely resectable recurrence",
+          "sets": {
+            "recurResect": "yes"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "unresectable",
+          "label": "Diffuse / unresectable recurrence",
+          "sets": {
+            "recurResect": "no"
+          },
+          "pills": [
+            "unresectable"
+          ]
+        }
       ]
     },
     {
@@ -942,9 +1833,17 @@
       "title": "Recurrent GBM, resectable: re-resection then systemic",
       "description": "A focal, symptomatic, safely resectable glioblastoma recurrence is re-operated, optionally with a local implant, then moves to first-line salvage systemic therapy.",
       "path": "CNS / Recurrence / GBM / Surgery",
-      "protocolRefs": ["cns-bevacizumab", "cns-lomustine", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-bevacizumab",
+        "cns-lomustine",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Recurrence",
-      "pills": ["GBM", "resectable", "treatment"],
+      "pills": [
+        "GBM",
+        "resectable",
+        "treatment"
+      ],
       "required": true,
       "bullets": [
         "Re-resection for symptomatic mass effect / focal recurrence",
@@ -952,9 +1851,15 @@
         "Then proceed to first-line salvage systemic therapy and/or re-irradiation",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["2B"],
+      "evidenceCategory": [
+        "2B"
+      ],
       "options": [
-        { "id": "continue", "label": "Re-resection done - start systemic salvage", "setsValue": null }
+        {
+          "id": "continue",
+          "label": "Re-resection done - start systemic salvage",
+          "setsValue": null
+        }
       ]
     },
     {
@@ -965,9 +1870,16 @@
       "title": "Recurrent GBM: first-line salvage systemic therapy",
       "description": "First-line salvage for recurrent glioblastoma is systemic therapy (with re-irradiation in selected cases); the next step depends on response versus further progression.",
       "path": "CNS / Recurrence / GBM / First salvage",
-      "protocolRefs": ["cns-bevacizumab", "cns-lomustine", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-bevacizumab",
+        "cns-lomustine",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Recurrence",
-      "pills": ["GBM", "recurrence"],
+      "pills": [
+        "GBM",
+        "recurrence"
+      ],
       "required": true,
       "bullets": [
         "Systemic options: bevacizumab (edema / symptom control), lomustine, or temozolomide rechallenge (esp. MGMT-methylated with a treatment-free interval)",
@@ -976,8 +1888,26 @@
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
       "options": [
-        { "id": "progression", "label": "On progression - later-line salvage", "sets": { "recurGbmLine": "second" }, "pills": ["progression"] },
-        { "id": "poorps", "label": "Poor performance status - best supportive care", "sets": { "recurGbmLine": "bsc" }, "pills": ["BSC"] }
+        {
+          "id": "progression",
+          "label": "On progression - later-line salvage",
+          "sets": {
+            "recurGbmLine": "second"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "poorps",
+          "label": "Poor performance status - best supportive care",
+          "sets": {
+            "recurGbmLine": "bsc"
+          },
+          "pills": [
+            "BSC"
+          ]
+        }
       ]
     },
     {
@@ -988,9 +1918,16 @@
       "title": "Recurrent GBM: later-line salvage",
       "description": "After progression on first salvage, later-line options are an alternate systemic agent or combination, with clinical trial strongly preferred.",
       "path": "CNS / Recurrence / GBM / Later",
-      "protocolRefs": ["cns-bevacizumab", "cns-lomustine", "cns-tmz-adjuvant"],
+      "protocolRefs": [
+        "cns-bevacizumab",
+        "cns-lomustine",
+        "cns-tmz-adjuvant"
+      ],
       "section": "Recurrence",
-      "pills": ["GBM", "treatment"],
+      "pills": [
+        "GBM",
+        "treatment"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Switch systemic agent: bevacizumab +/- lomustine, or an alternate alkylator if not exhausted",
@@ -998,7 +1935,9 @@
         "Clinical trial strongly preferred at this line",
         "Recommended regimen(s) reference the CNS draft dose protocol(s) below, which compute per-drug doses in the Protocol Sheet; the physician confirms and adjusts"
       ],
-      "evidenceCategory": ["2B"]
+      "evidenceCategory": [
+        "2B"
+      ]
     },
     {
       "id": "n_tx_recur_gbm_bsc",
@@ -1009,7 +1948,10 @@
       "description": "For poor performance status at recurrence, best supportive care with symptom-directed measures is appropriate.",
       "path": "CNS / Recurrence / GBM / BSC",
       "section": "Recurrence",
-      "pills": ["GBM", "supportive"],
+      "pills": [
+        "GBM",
+        "supportive"
+      ],
       "showsRecommendation": true,
       "bullets": [
         "Symptom-directed care: steroids for edema, anti-seizure medication, analgesia",
@@ -1017,77 +1959,537 @@
         "Palliative care / hospice referral as appropriate",
         "Best supportive care; no systemic dose protocol applies here (bevacizumab, if used for symptom control, is referenced on the salvage nodes)"
       ],
-      "evidenceCategory": ["2A"]
+      "evidenceCategory": [
+        "2A"
+      ],
+      "protocolRefs": [
+        "cns-pcv",
+        "cns-tmz-adjuvant"
+      ]
     }
   ],
   "links": [
-    { "id": "l_wk", "from": "n_workup", "to": "n_setting", "fromOptions": ["continue"], "linkCategory": "conditional" },
-
-    { "id": "l_set_new", "from": "n_setting", "to": "n_surgery", "fromOptions": ["newly"], "linkCategory": "conditional" },
-    { "id": "l_set_surv", "from": "n_setting", "to": "n_surv_type", "fromOptions": ["surveillance"], "linkCategory": "conditional" },
-    { "id": "l_set_recur", "from": "n_setting", "to": "n_recur_type", "fromOptions": ["recurrent"], "linkCategory": "conditional" },
-
-    { "id": "l_surg_mol", "from": "n_surgery", "to": "n_molecular", "fromOptions": ["gtr", "str", "biopsy"], "linkCategory": "conditional" },
-
-    { "id": "l_mol_oligo", "from": "n_molecular", "to": "n_oligo_grade", "fromOptions": ["oligo"], "linkCategory": "conditional" },
-    { "id": "l_mol_astro", "from": "n_molecular", "to": "n_astro_grade", "fromOptions": ["astro"], "linkCategory": "conditional" },
-    { "id": "l_mol_gbm", "from": "n_molecular", "to": "n_gbm_fitness", "fromOptions": ["gbm"], "linkCategory": "conditional" },
-    { "id": "l_mol_pending", "from": "n_molecular", "to": "n_tx_await_molecular", "fromOptions": ["pending"], "linkCategory": "conditional" },
-
-    { "id": "l_oligo_g2", "from": "n_oligo_grade", "to": "n_oligo_g2_risk", "fromOptions": ["g2"], "linkCategory": "conditional" },
-    { "id": "l_oligo_g3", "from": "n_oligo_grade", "to": "n_oligo_g3_induction", "fromOptions": ["g3"], "linkCategory": "conditional" },
-    { "id": "l_oligo_g2_low", "from": "n_oligo_g2_risk", "to": "n_tx_oligo_g2_obs", "fromOptions": ["low"], "linkCategory": "conditional" },
-    { "id": "l_oligo_g2_high", "from": "n_oligo_g2_risk", "to": "n_oligo_g2_induction", "fromOptions": ["high"], "linkCategory": "conditional" },
-    { "id": "l_oligo_g2_ind_rs", "from": "n_oligo_g2_induction", "to": "n_restage", "fromOptions": ["continue"], "linkCategory": "conditional" },
-    { "id": "l_oligo_g3_ind_rs", "from": "n_oligo_g3_induction", "to": "n_restage", "fromOptions": ["continue"], "linkCategory": "conditional" },
-
-    { "id": "l_astro_g2", "from": "n_astro_grade", "to": "n_astro_g2_risk", "fromOptions": ["g2"], "linkCategory": "conditional" },
-    { "id": "l_astro_g3", "from": "n_astro_grade", "to": "n_astro_g3_induction", "fromOptions": ["g3"], "linkCategory": "conditional" },
-    { "id": "l_astro_g4", "from": "n_astro_grade", "to": "n_astro_g4_induction", "fromOptions": ["g4"], "linkCategory": "conditional" },
-    { "id": "l_astro_g2_low", "from": "n_astro_g2_risk", "to": "n_tx_astro_g2_obs", "fromOptions": ["low"], "linkCategory": "conditional" },
-    { "id": "l_astro_g2_high", "from": "n_astro_g2_risk", "to": "n_astro_g2_induction", "fromOptions": ["high"], "linkCategory": "conditional" },
-    { "id": "l_astro_g2_ind_rs", "from": "n_astro_g2_induction", "to": "n_restage", "fromOptions": ["continue"], "linkCategory": "conditional" },
-    { "id": "l_astro_g3_ind_rs", "from": "n_astro_g3_induction", "to": "n_restage", "fromOptions": ["continue"], "linkCategory": "conditional" },
-    { "id": "l_astro_g4_ind_rs", "from": "n_astro_g4_induction", "to": "n_restage", "fromOptions": ["continue"], "linkCategory": "conditional" },
-
-    { "id": "l_gbm_fit", "from": "n_gbm_fitness", "to": "n_gbm_stupp_induction", "fromOptions": ["fit"], "linkCategory": "conditional" },
-    { "id": "l_gbm_eld", "from": "n_gbm_fitness", "to": "n_gbm_elderly_mgmt", "fromOptions": ["elderly"], "linkCategory": "conditional" },
-    { "id": "l_gbm_stupp_rs", "from": "n_gbm_stupp_induction", "to": "n_restage", "fromOptions": ["continue"], "linkCategory": "conditional" },
-    { "id": "l_gbm_eld_m", "from": "n_gbm_elderly_mgmt", "to": "n_gbm_eld_tmz_induction", "fromOptions": ["methylated"], "linkCategory": "conditional" },
-    { "id": "l_gbm_eld_u", "from": "n_gbm_elderly_mgmt", "to": "n_gbm_eld_chemort_induction", "fromOptions": ["unknown"], "linkCategory": "conditional" },
-    { "id": "l_gbm_eld_unm", "from": "n_gbm_elderly_mgmt", "to": "n_tx_gbm_eld_rt", "fromOptions": ["unmethylated"], "linkCategory": "conditional" },
-    { "id": "l_gbm_eld_tmz_rs", "from": "n_gbm_eld_tmz_induction", "to": "n_restage", "fromOptions": ["continue"], "linkCategory": "conditional" },
-    { "id": "l_gbm_eld_cr_rs", "from": "n_gbm_eld_chemort_induction", "to": "n_restage", "fromOptions": ["continue"], "linkCategory": "conditional" },
-
-    { "id": "l_rs_resp", "from": "n_restage", "to": "n_tx_adjuvant", "fromOptions": ["responder"], "linkCategory": "conditional" },
-    { "id": "l_rs_pseudo", "from": "n_restage", "to": "n_tx_pseudoprog", "fromOptions": ["pseudoprog"], "linkCategory": "conditional" },
-    { "id": "l_rs_prog", "from": "n_restage", "to": "n_tx_early_prog", "fromOptions": ["progression"], "linkCategory": "conditional" },
-
-    { "id": "l_adj_complete", "from": "n_tx_adjuvant", "to": "n_surv_type", "fromOptions": ["complete"], "linkCategory": "conditional" },
-    { "id": "l_adj_escalate", "from": "n_tx_adjuvant", "to": "n_tx_maintenance", "fromOptions": ["escalate"], "linkCategory": "conditional" },
-
-    { "id": "l_surv_lgg", "from": "n_surv_type", "to": "n_surv_lgg", "fromOptions": ["lgg"], "linkCategory": "conditional" },
-    { "id": "l_surv_hgg", "from": "n_surv_type", "to": "n_surv_hgg", "fromOptions": ["hgg"], "linkCategory": "conditional" },
-
-    { "id": "l_recur_lgg", "from": "n_recur_type", "to": "n_recur_lgg_reop", "fromOptions": ["recur_lgg"], "linkCategory": "conditional" },
-    { "id": "l_recur_astro", "from": "n_recur_type", "to": "n_recur_astro_line", "fromOptions": ["recur_astro"], "linkCategory": "conditional" },
-    { "id": "l_recur_gbm", "from": "n_recur_type", "to": "n_recur_gbm_resect", "fromOptions": ["recur_gbm"], "linkCategory": "conditional" },
-
-    { "id": "l_lgg_reop_mod_a", "from": "n_recur_lgg_reop", "to": "n_recur_lgg_modality", "fromOptions": ["reop"], "linkCategory": "conditional" },
-    { "id": "l_lgg_reop_mod_b", "from": "n_recur_lgg_reop", "to": "n_recur_lgg_modality", "fromOptions": ["noreop"], "linkCategory": "conditional" },
-    { "id": "l_lgg_mod_rt", "from": "n_recur_lgg_modality", "to": "n_tx_recur_lgg_rt", "fromOptions": ["rt"], "linkCategory": "conditional" },
-    { "id": "l_lgg_mod_chemo", "from": "n_recur_lgg_modality", "to": "n_tx_recur_lgg_chemo", "fromOptions": ["chemo"], "linkCategory": "conditional" },
-    { "id": "l_lgg_mod_trans", "from": "n_recur_lgg_modality", "to": "n_tx_recur_lgg_transformed", "fromOptions": ["transformed"], "linkCategory": "conditional" },
-
-    { "id": "l_astro_line_local", "from": "n_recur_astro_line", "to": "n_recur_astro_1l", "fromOptions": ["local"], "linkCategory": "conditional" },
-    { "id": "l_astro_line_sys", "from": "n_recur_astro_line", "to": "n_recur_astro_1l", "fromOptions": ["systemic"], "linkCategory": "conditional" },
-    { "id": "l_astro_1l_prog", "from": "n_recur_astro_1l", "to": "n_tx_recur_astro_2l", "fromOptions": ["progression"], "linkCategory": "conditional" },
-    { "id": "l_astro_1l_bsc", "from": "n_recur_astro_1l", "to": "n_tx_recur_astro_bsc", "fromOptions": ["bsc"], "linkCategory": "conditional" },
-
-    { "id": "l_gbm_res_yes", "from": "n_recur_gbm_resect", "to": "n_recur_gbm_surg", "fromOptions": ["resectable"], "linkCategory": "conditional" },
-    { "id": "l_gbm_res_no", "from": "n_recur_gbm_resect", "to": "n_recur_gbm_1l", "fromOptions": ["unresectable"], "linkCategory": "conditional" },
-    { "id": "l_gbm_surg_1l", "from": "n_recur_gbm_surg", "to": "n_recur_gbm_1l", "fromOptions": ["continue"], "linkCategory": "conditional" },
-    { "id": "l_gbm_1l_prog", "from": "n_recur_gbm_1l", "to": "n_tx_recur_gbm_2l", "fromOptions": ["progression"], "linkCategory": "conditional" },
-    { "id": "l_gbm_1l_bsc", "from": "n_recur_gbm_1l", "to": "n_tx_recur_gbm_bsc", "fromOptions": ["poorps"], "linkCategory": "conditional" }
+    {
+      "id": "l_wk",
+      "from": "n_workup",
+      "to": "n_setting",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_set_new",
+      "from": "n_setting",
+      "to": "n_surgery",
+      "fromOptions": [
+        "newly"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_set_surv",
+      "from": "n_setting",
+      "to": "n_surv_type",
+      "fromOptions": [
+        "surveillance"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_set_recur",
+      "from": "n_setting",
+      "to": "n_recur_workup",
+      "fromOptions": [
+        "recurrent"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_recur_wk_type",
+      "from": "n_recur_workup",
+      "to": "n_recur_type",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_surg_mol",
+      "from": "n_surgery",
+      "to": "n_molecular",
+      "fromOptions": [
+        "gtr",
+        "str",
+        "biopsy"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mol_oligo",
+      "from": "n_molecular",
+      "to": "n_oligo_grade",
+      "fromOptions": [
+        "oligo"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mol_astro",
+      "from": "n_molecular",
+      "to": "n_astro_grade",
+      "fromOptions": [
+        "astro"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mol_gbm",
+      "from": "n_molecular",
+      "to": "n_gbm_fitness",
+      "fromOptions": [
+        "gbm"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mol_pending",
+      "from": "n_molecular",
+      "to": "n_tx_await_molecular",
+      "fromOptions": [
+        "pending"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_oligo_g2",
+      "from": "n_oligo_grade",
+      "to": "n_oligo_g2_risk",
+      "fromOptions": [
+        "g2"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_oligo_g3",
+      "from": "n_oligo_grade",
+      "to": "n_oligo_g3_induction",
+      "fromOptions": [
+        "g3"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_oligo_g2_low",
+      "from": "n_oligo_g2_risk",
+      "to": "n_tx_oligo_g2_obs",
+      "fromOptions": [
+        "low"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_oligo_g2_high",
+      "from": "n_oligo_g2_risk",
+      "to": "n_oligo_g2_induction",
+      "fromOptions": [
+        "high"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_oligo_g2_ind_rs",
+      "from": "n_oligo_g2_induction",
+      "to": "n_restage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_oligo_g3_ind_rs",
+      "from": "n_oligo_g3_induction",
+      "to": "n_restage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g2",
+      "from": "n_astro_grade",
+      "to": "n_astro_g2_risk",
+      "fromOptions": [
+        "g2"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g3",
+      "from": "n_astro_grade",
+      "to": "n_astro_g3_induction",
+      "fromOptions": [
+        "g3"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g4",
+      "from": "n_astro_grade",
+      "to": "n_astro_g4_induction",
+      "fromOptions": [
+        "g4"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g2_low",
+      "from": "n_astro_g2_risk",
+      "to": "n_tx_astro_g2_obs",
+      "fromOptions": [
+        "low"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g2_vora",
+      "from": "n_astro_g2_risk",
+      "to": "n_tx_astro_g2_vora",
+      "fromOptions": [
+        "residual"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g2_high",
+      "from": "n_astro_g2_risk",
+      "to": "n_astro_g2_induction",
+      "fromOptions": [
+        "high"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g2_ind_rs",
+      "from": "n_astro_g2_induction",
+      "to": "n_restage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g3_ind_rs",
+      "from": "n_astro_g3_induction",
+      "to": "n_restage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_g4_ind_rs",
+      "from": "n_astro_g4_induction",
+      "to": "n_restage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_fit",
+      "from": "n_gbm_fitness",
+      "to": "n_gbm_stupp_induction",
+      "fromOptions": [
+        "fit"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_eld",
+      "from": "n_gbm_fitness",
+      "to": "n_gbm_elderly_mgmt",
+      "fromOptions": [
+        "elderly"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_stupp_rs",
+      "from": "n_gbm_stupp_induction",
+      "to": "n_restage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_eld_m",
+      "from": "n_gbm_elderly_mgmt",
+      "to": "n_gbm_eld_tmz_induction",
+      "fromOptions": [
+        "methylated"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_eld_u",
+      "from": "n_gbm_elderly_mgmt",
+      "to": "n_gbm_eld_chemort_induction",
+      "fromOptions": [
+        "unknown"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_eld_unm",
+      "from": "n_gbm_elderly_mgmt",
+      "to": "n_tx_gbm_eld_rt",
+      "fromOptions": [
+        "unmethylated"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_eld_tmz_rs",
+      "from": "n_gbm_eld_tmz_induction",
+      "to": "n_restage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_eld_cr_rs",
+      "from": "n_gbm_eld_chemort_induction",
+      "to": "n_restage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rs_resp",
+      "from": "n_restage",
+      "to": "n_tx_adjuvant",
+      "fromOptions": [
+        "responder"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rs_pseudo",
+      "from": "n_restage",
+      "to": "n_tx_pseudoprog",
+      "fromOptions": [
+        "pseudoprog"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rs_prog",
+      "from": "n_restage",
+      "to": "n_tx_early_prog",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_complete",
+      "from": "n_tx_adjuvant",
+      "to": "n_surv_type",
+      "fromOptions": [
+        "complete"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_escalate",
+      "from": "n_tx_adjuvant",
+      "to": "n_tx_maintenance",
+      "fromOptions": [
+        "escalate"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_surv_lgg",
+      "from": "n_surv_type",
+      "to": "n_surv_lgg",
+      "fromOptions": [
+        "lgg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_surv_hgg",
+      "from": "n_surv_type",
+      "to": "n_surv_hgg",
+      "fromOptions": [
+        "hgg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_recur_lgg",
+      "from": "n_recur_type",
+      "to": "n_recur_lgg_reop",
+      "fromOptions": [
+        "recur_lgg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_recur_astro",
+      "from": "n_recur_type",
+      "to": "n_recur_astro_line",
+      "fromOptions": [
+        "recur_astro"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_recur_gbm",
+      "from": "n_recur_type",
+      "to": "n_recur_gbm_resect",
+      "fromOptions": [
+        "recur_gbm"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lgg_reop_mod_a",
+      "from": "n_recur_lgg_reop",
+      "to": "n_recur_lgg_modality",
+      "fromOptions": [
+        "reop"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lgg_reop_mod_b",
+      "from": "n_recur_lgg_reop",
+      "to": "n_recur_lgg_modality",
+      "fromOptions": [
+        "noreop"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lgg_mod_rt",
+      "from": "n_recur_lgg_modality",
+      "to": "n_tx_recur_lgg_rt",
+      "fromOptions": [
+        "rt"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lgg_mod_chemo",
+      "from": "n_recur_lgg_modality",
+      "to": "n_tx_recur_lgg_chemo",
+      "fromOptions": [
+        "chemo"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lgg_mod_trans",
+      "from": "n_recur_lgg_modality",
+      "to": "n_tx_recur_lgg_transformed",
+      "fromOptions": [
+        "transformed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_line_local",
+      "from": "n_recur_astro_line",
+      "to": "n_recur_astro_1l",
+      "fromOptions": [
+        "local"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_line_sys",
+      "from": "n_recur_astro_line",
+      "to": "n_recur_astro_1l",
+      "fromOptions": [
+        "systemic"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_1l_prog",
+      "from": "n_recur_astro_1l",
+      "to": "n_tx_recur_astro_2l",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_astro_1l_bsc",
+      "from": "n_recur_astro_1l",
+      "to": "n_tx_recur_astro_bsc",
+      "fromOptions": [
+        "bsc"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_res_yes",
+      "from": "n_recur_gbm_resect",
+      "to": "n_recur_gbm_surg",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_res_no",
+      "from": "n_recur_gbm_resect",
+      "to": "n_recur_gbm_1l",
+      "fromOptions": [
+        "unresectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_surg_1l",
+      "from": "n_recur_gbm_surg",
+      "to": "n_recur_gbm_1l",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_1l_prog",
+      "from": "n_recur_gbm_1l",
+      "to": "n_tx_recur_gbm_2l",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gbm_1l_bsc",
+      "from": "n_recur_gbm_1l",
+      "to": "n_tx_recur_gbm_bsc",
+      "fromOptions": [
+        "poorps"
+      ],
+      "linkCategory": "conditional"
+    }
+  ],
+  "protocolRefs": [
+    "cns-bevacizumab",
+    "cns-lomustine",
+    "cns-pcv",
+    "cns-tmz-adjuvant",
+    "cns-tmz-concurrent"
   ]
 }

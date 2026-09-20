@@ -212,7 +212,7 @@ function installRxChoice() {
           <div class="rxchoice-drug">${esc(it.drug)}${composition?`<span style="display:block;font:600 10.5px var(--hfont);color:var(--hmut,#64748b);margin-top:2px">Verified composition: ${esc(composition)}</span>`:""}</div>
           <div class="rxchoice-grid">
             ${card("Generic · Lowest Cost",tiers.generic,it.line,"",false)}
-            ${card("Balanced ⭐ · Best Value",tiers.balanced,it.line,"bal",false)}
+            ${card("Balanced · Best Value",tiers.balanced,it.line,"bal",false)}
             ${card("Premium · Top Branded",tiers.premium,it.line,"",false)}
             ${card("Doctor Prescribed",prescribed,it.line,"",true)}
           </div>

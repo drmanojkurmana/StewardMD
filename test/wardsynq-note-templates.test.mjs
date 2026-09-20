@@ -92,3 +92,15 @@ test("two ward rounds in a day are two notes", () => {
   assert.notEqual(a, noteIdFor("enc", "operation-note", "2026-09-10T09:00:00.000Z"));
   assert.equal(noteIdFor("", "t", "at"), null);
 });
+
+test("the built-in nursing note is one free-text section with a question and no default text, and an org template of the same id replaces it", async () => {
+  const { BUILT_IN_TEMPLATES, withBuiltIns } = await import("../functions/_wardsynq/note-templates.js");
+  const def = BUILT_IN_TEMPLATES.find((d) => d.id === "nursing");
+  const r = resolveTemplate(def);
+  assert.equal(r.ok, true); assert.equal(r.noteType, "nursing"); assert.equal(r.sections.length, 1);
+  assert.match(r.sections[0].prompt, /\?$/);
+  assert.equal(composeNote(r, {}).sections.narrative, NOT_RECORDED, "an unwritten nursing note says so");
+  const org = withBuiltIns([{ id: "nursing", name: "Our nursing note", sections: [{ key: "a", title: "A" }] }]);
+  assert.equal(org.filter((d) => d.id === "nursing").length, 1);
+  assert.equal(org.find((d) => d.id === "nursing").name, "Our nursing note");
+});

@@ -21,10 +21,25 @@ const NEXT = {
   followup:        ["completed", "cancelled"],
   completed:       [],
   cancelled:       [],
-  no_show:         []
+  // D13 (2026-09-14): a patient marked no-show who then turns up is recalled with the SAME token, back to
+  // waiting or straight to called. Only through recallNoShow (_queue_engine.js), which requires a reason,
+  // the queue-management capability, and the recall window below; setStatus refuses it.
+  no_show:         ["waiting", "called"]
 };
 export function canTransition(from, to) { return STATUS.indexOf(to) >= 0 && (NEXT[from] || []).indexOf(to) >= 0; }
-export function isTerminal(s) { return s === "completed" || s === "cancelled" || s === "no_show"; }
+// no_show is no longer terminal (D13): the patient link keeps working so a recalled patient still sees
+// their place. It is still not queued (no position, no ETA) until recalled.
+export function isTerminal(s) { return s === "completed" || s === "cancelled"; }
+export const NO_SHOW_RECALL_MS = 4 * 3600e3;
+/* PURE (D13). Why this no-show cannot be recalled now, or null. The window is 4 hours from being marked
+ * no-show, or the end of the OPD session, whichever comes first: after that the number has been skipped
+ * for long enough that calling it again would confuse the hall more than it helps the patient. */
+export function recallRefusal(ticket, session, nowMs) {
+  if (!ticket || ticket.status !== "no_show") return "not_no_show";
+  if (session && (session.status === "finished" || (session.expiresAt && nowMs > session.expiresAt))) return "session_ended";
+  if (!ticket.noShowAt || nowMs - ticket.noShowAt > NO_SHOW_RECALL_MS) return "recall_window_passed";
+  return null;
+}
 // Tickets still waiting for the doctor (get a position + ETA). in_consultation/investigation/terminal excluded.
 export function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
 
@@ -45,29 +60,32 @@ export function orderRoomView(tickets) {
   return t.filter((x) => x.status === "in_consultation").concat(orderQueue(t));
 }
 
-// PHI-minimal name for a PUBLIC waiting-room screen: first name + last initial only (e.g. "Ramesh K"),
-// never full name / MRN / phone. A one-word name is shown as-is.
-export function shortName(n) {
-  const p = String(n || "").trim().split(/\s+/).filter(Boolean);
-  if (!p.length) return "Patient";
-  return p.length > 1 ? p[0] + " " + p[p.length - 1][0].toUpperCase() : p[0];
-}
-// Project the nurse board (boardForOrg output) to a login-free wall display: room-centric, PHI-minimal.
+// A PUBLIC waiting-room screen shows the ticket's TOKEN and never a name, MRN or phone: the token is what
+// the hall calls out, so a patient recognises their turn without anyone else learning who they are. A
+// ticket registered before tokens existed has none and is shown as "" (the screen draws a blank, not a name).
+const wallToken = (t) => String((t && t.token) || "");
+// D7: the department each token was issued in, aligned with the token arrays. A department name names no
+// patient. Shown beside a token when it differs from the room's own (a patient moved between departments
+// keeps the number they already heard).
+const wallDept = (t) => String((t && t.department) || "");
+// Project the nurse board (boardForOrg output) to a login-free wall display: room-centric, PHI-free.
 // Tickets are already priority/seq-ordered by boardForOrg (orderRoomView), so `calling`/`upcoming`
 // reflect true order. `calling` = summoned-not-yet-entered (the attention state); `serving` = in room.
 export function displayBoard(org, board) {
   const rooms = (board.rooms || []).filter((rm) => rm.doctorUid).map((rm) => {
     const ts = rm.tickets || [];
     const waiting = ts.filter((t) => t.status === "registered" || t.status === "waiting");
+    const calling = ts.filter((t) => t.status === "called"), serving = ts.filter((t) => t.status === "in_consultation")[0];
     return {
       name: (rm.room && rm.room.name) || "Room", number: (rm.room && rm.room.number) || "",
       department: (rm.room && rm.room.department) || "", status: rm.status,
-      calling: ts.filter((t) => t.status === "called").map((t) => shortName(t.name)),
-      serving: ts.filter((t) => t.status === "in_consultation").map((t) => shortName(t.name))[0] || "",
-      waiting: waiting.length, upcoming: waiting.slice(0, 3).map((t) => shortName(t.name)),
+      calling: calling.map(wallToken), callingDepartments: calling.map(wallDept),
+      serving: serving ? wallToken(serving) : "", servingDepartment: serving ? wallDept(serving) : "",
+      waiting: waiting.length, upcoming: waiting.slice(0, 3).map(wallToken), upcomingDepartments: waiting.slice(0, 3).map(wallDept),
     };
   });
-  return { ok: true, org: { name: (org && org.name) || "OPD", code: (org && org.code) || "" }, rooms: rooms };
+  const scope = org && org.tokens && org.tokens.scope === "department" ? "department" : "hospital";
+  return { ok: true, org: { name: (org && org.name) || "OPD", code: (org && org.code) || "" }, tokenScope: scope, rooms: rooms };
 }
 
 // PURE: the new `seq` to give `moveId` so it lands at visible index `toIndex` in the CURRENT ordered
@@ -185,5 +203,75 @@ export function aggregate(tickets, nowMs) {
     avgConsultMin: conN ? min(conSum / conN) : 0,
     etaAccuracyPct: etaN ? Math.round((etaHit / etaN) * 100) : null,   // % of predictions within 10 min
     peakHours: peak
+  };
+}
+
+/* ---- THE OPD PULSE: what the desk and the owner act on, hospital-wide -------------------------------
+ *
+ * aggregate() above answers "how did that doctor's session go". This answers the question a hospital
+ * actually asks at 11am: IS THE OPD RUNNING, AND IF NOT, WHERE IS IT STUCK. Three deliberate choices:
+ *
+ * MEDIAN AND P90, NEVER THE AVERAGE. One patient waiting three hours moves an average by a few minutes
+ * and then hides behind it. p90 is the patient who is about to complain at the desk, and it is the
+ * number that changes behaviour.
+ *
+ * THE WAIT IS SPLIT IN TWO. Door to called is the DESK (registration, paperwork, the queue itself);
+ * called to seen is the DOCTOR (running late, long consults). One combined number blames everybody and
+ * tells nobody what to fix; these two say which half of the building to walk to.
+ *
+ * WAITING NOW IS MEASURED LIVE, not from finished visits. Everything else here is history; the only
+ * figure that can still be acted on today is how long the people sitting in the hall have been there,
+ * which is why longestMin and the over-30/over-60 counts are computed against nowMs.
+ */
+function percentileMin(list, p) {
+  if (!list.length) return null;
+  const s = list.slice().sort((a, b) => a - b);
+  const i = Math.min(s.length - 1, Math.max(0, Math.ceil((p / 100) * s.length) - 1));
+  return Math.round(s[i] / 60000);
+}
+export function opdPulse(tickets, nowMs) {
+  const rows = tickets || [], now = Number.isFinite(nowMs) ? nowMs : Date.now();
+  const WAIT = ["registered", "waiting", "called"];
+  const doorToSeen = [], doorToCalled = [], calledToSeen = [], consults = [], waitingNow = [];
+  let waiting = 0, inConsultation = 0, completed = 0, noShow = 0, cancelled = 0, recalls = 0, held = 0;
+
+  for (const t of rows) {
+    if (!t) continue;
+    if (t.status === "completed") completed++;
+    else if (t.status === "no_show") noShow++;
+    else if (t.status === "cancelled") cancelled++;
+    else if (t.status === "in_consultation") inConsultation++;
+    else if (WAIT.indexOf(t.status) > -1) waiting++;
+    // Waiting on a result, or booked back: still the hospital's open work, counted apart from the hall.
+    else if (t.status === "investigation" || t.status === "followup") held++;
+    recalls += Number(t.recallCount) || 0;
+
+    if (t.registeredAt && t.consultStartAt) doorToSeen.push(t.consultStartAt - t.registeredAt);
+    if (t.registeredAt && t.calledAt) doorToCalled.push(t.calledAt - t.registeredAt);
+    if (t.calledAt && t.consultStartAt && t.consultStartAt >= t.calledAt) calledToSeen.push(t.consultStartAt - t.calledAt);
+    if (t.consultStartAt && t.consultEndAt) consults.push(t.consultEndAt - t.consultStartAt);
+    if (WAIT.indexOf(t.status) > -1 && t.registeredAt) waitingNow.push(now - t.registeredAt);
+  }
+
+  const finished = completed + noShow;
+  return {
+    at: now,
+    registered: rows.length,
+    waiting, inConsultation, completed, noShow, cancelled, held, recalls,
+    seen: completed + inConsultation,
+    // History: how long it took the people already seen.
+    doorToDoctor: { medianMin: percentileMin(doorToSeen, 50), p90Min: percentileMin(doorToSeen, 90), n: doorToSeen.length },
+    deskWait: { medianMin: percentileMin(doorToCalled, 50), p90Min: percentileMin(doorToCalled, 90), n: doorToCalled.length },
+    doctorWait: { medianMin: percentileMin(calledToSeen, 50), p90Min: percentileMin(calledToSeen, 90), n: calledToSeen.length },
+    consult: { medianMin: percentileMin(consults, 50), p90Min: percentileMin(consults, 90), n: consults.length },
+    // Live: the hall as it stands right now, the half somebody can still do something about.
+    waitingNow: {
+      longestMin: waitingNow.length ? Math.round(Math.max.apply(null, waitingNow) / 60000) : 0,
+      medianMin: percentileMin(waitingNow, 50),
+      over30: waitingNow.filter((ms) => ms >= 30 * 60000).length,
+      over60: waitingNow.filter((ms) => ms >= 60 * 60000).length,
+    },
+    // null, not 0: nobody has finished yet is not the same as nobody abandoned.
+    abandonedPct: finished ? Math.round((noShow / finished) * 100) : null,
   };
 }

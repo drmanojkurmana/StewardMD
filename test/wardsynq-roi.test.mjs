@@ -88,3 +88,19 @@ test("authorizationBasis is recorded verbatim, never validated against a list of
   authorize(req, { by: "him-1", at: NOW, authorizationBasis: "A napkin the requester waved at the front desk" });
   assert.equal(req.authorizationBasis, "A napkin the requester waved at the front desk", "this module records the stated basis - judging its sufficiency is a HIM/legal decision, not this file's");
 });
+
+test("IMC Regulations 2002 reg 1.3.2: copies for the patient, an authorised attendant or a legal authority are due within 72 hours; others run no such clock", async () => {
+  const { imcClock } = await import("../wardsynq/wardsynq-roi.js");
+  assert.equal(imcClock(newRequest(), Date.parse(NOW)), null, "an attorney is not one reg 1.3.2 names");
+  const own = newRequest({ id: "roi-2", requester: { name: "Asha A", relationship: "patient" } });
+  const c = imcClock(own, Date.parse(NOW) + 3600000);
+  assert.equal(Date.parse(c.dueBy) - Date.parse(NOW), 72 * 3600000);
+  assert.equal(c.late, false);
+  assert.equal(imcClock(own, Date.parse(NOW) + 73 * 3600000).late, true);
+  assert.throws(() => newRequest({ id: "roi-3", requester: { name: "Ravi A", relationship: "authorised-attendant" } }), (e) => e.code === "AUTHORITY_REQUIRED");
+  const att = newRequest({ id: "roi-4", requester: { name: "Ravi A", relationship: "authorised-attendant", authority: "Patient's signed authorisation, 9 Sep" } });
+  assert.equal(att.requester.authority, "Patient's signed authorisation, 9 Sep");
+  authorize(att, { by: "him-1", at: NOW, authorizationBasis: "Signed authorisation" });
+  fulfill(att, { by: "him-1", at: new Date(Date.parse(NOW) + 24 * 3600000).toISOString(), resourceCounts: { DiagnosticReport: 1 } });
+  assert.equal(imcClock(att, Date.parse(NOW) + 100 * 3600000).late, false, "issued within 72 hours stays on time");
+});

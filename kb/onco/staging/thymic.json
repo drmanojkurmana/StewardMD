@@ -1,0 +1,173 @@
+{
+  "site": "thymic",
+  "name": "Thymoma and thymic carcinoma",
+  "system": "Oncology / Thoracic",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "AJCC Cancer Staging Manual 8th Edition / NCCN / UICC",
+      "provenance": "8th edition staging, verified against AJCC 8th edition / NCCN guidelines; licensed verification standard. Requires R1 clinical verification before unchecked use.",
+      "introduction": "Thymic epithelial tumours carry two parallel stagings: the Masaoka-Koga system (I-IVb, based on capsular integrity and invasion/dissemination) still used clinically, and the 8th-edition TNM (T by level of invasion from encapsulated T1a to great-vessel T4; N1 anterior/perithymic vs N2 deep/cervical; M1a pleural/pericardial nodules vs M1b distant). Thymic carcinoma behaves far more aggressively than thymoma at the same stage. Myasthenia gravis and other paraneoplastic syndromes affect management but not stage.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Encapsulated tumour, or unencapsulated without mediastinal pleura invasion (Masaoka-Koga I)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Invasion of mediastinal pleura (Masaoka-Koga IIa/IIb pleural pattern)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Direct invasion of pericardium (Masaoka-Koga IIb/III pericardial pattern)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Direct invasion of lung, brachiocephalic vein, superior vena cava, chest wall or phrenic nerve (Masaoka-Koga III)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Direct invasion of aorta or arch vessels, intrapericardial pulmonary artery, myocardium, trachea or oesophagus",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis in anterior (perithymic) lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Metastasis in deep intrathoracic or cervical lymph nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis (Masaoka-Koga I-III, N0-N2)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1a",
+          "label": "Pleural or pericardial nodule(s), separate from direct invasion (Masaoka-Koga IVa)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b",
+          "label": "Intraparenchymal pulmonary nodule(s) or distant organ metastasis (Masaoka-Koga IVb)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "T1a or T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Masaoka-Koga I-IIa: encapsulated or microscopic transcapsular invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Masaoka-Koga IIb: macroscopic fat/pleural or pericardial invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Masaoka-Koga III: neighbouring-organ invasion, resectable pattern",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Masaoka-Koga III: great-vessel invasion pattern",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Anterior nodal disease",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1a",
+          "basis": "Masaoka-Koga IVa: pleural/pericardial dissemination",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Deep/cervical nodal disease",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1b",
+          "basis": "Masaoka-Koga IVb: lymphogenous/haematogenous metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Anterior (perithymic) nodes are N1; deep intrathoracic (paratracheal, subcarinal, hilar) and cervical nodes are N2. Pleural/pericardial drop nodules are M1a (not T), and lung parenchymal nodules are M1b.",
+      "histologicGrade": "WHO types A, AB, B1, B2, B3 (thymoma, increasing atypia) and C (thymic carcinoma, graded G1-G3 by differentiation); Masaoka-Koga stage and completeness of resection outweigh grade for thymoma prognosis.",
+      "histopathologicTypes": "Thymoma WHO types A, AB, B1, B2, B3; thymic carcinoma (squamous most common, plus basaloid, mucoepidermoid, lymphoepithelioma-like); thymic neuroendocrine tumours (staged by the same TNM).",
+      "prognosticFactors": [
+        "Masaoka-Koga vs TNM concordance",
+        "WHO type (thymoma vs thymic carcinoma)",
+        "Completeness of resection (R0/R1/R2)",
+        "Myasthenia gravis and paraneoplastic syndromes",
+        "Great-vessel invasion (T4)",
+        "Pleural dissemination (M1a)",
+        "Tumour size over 5 cm (adjuvant-radiotherapy consideration)"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

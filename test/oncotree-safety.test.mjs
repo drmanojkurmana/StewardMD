@@ -90,15 +90,29 @@ test("BREAST: no endocrine regimen is ever offered at an ER-negative / TNBC node
 // refNeverWhere() tests above, which key off the node's declared pills rather than its id.
 test("BREAST: HER2-directed regimens only in HER2-positive nodes", () => {
   ["breast-tchp", "breast-tch", "breast-ac-th", "breast-paclitaxel-trastuzumab", "breast-tdm1", "breast-tdxd"]
-    .forEach(id => refOnlyIn(breast, id, ["n_adj_hrneg_her2pos", "n_adj_hrpos_her2pos", "n_local_recur", "n_mbc_her2pos", "n_regional_recur", "n_tx_ibc", "n_tx_paget", "n_tx_preop"]));
+    .forEach(id => refOnlyIn(breast, id, [
+      "n_adj_hrneg_her2pos", "n_adj_hrpos_her2pos", "n_local_recur", "n_mbc_her2pos",
+      "n_regional_recur", "n_tx_ibc", "n_tx_paget", "n_tx_preop",
+      "n_tx_post_her2_pcr", "n_tx_post_her2_residual", "n_tx_mbc_her2low",
+      "n_mbc_tnbc"
+    ]));
 });
 test("BREAST: CDK4/6 + pembro-TNBC only in their subtype nodes", () => {
   refOnlyIn(breast, "breast-cdk46-ai", ["n_endo_post", "n_endo_pre", "n_mbc_hr_1l"]);
-  refOnlyIn(breast, "breast-pembro-chemo-tnbc", ["n_adj_tnbc", "n_mbc_tnbc", "n_tx_ibc", "n_tx_preop"]);
+  refOnlyIn(breast, "breast-pembro-chemo-tnbc", [
+    "n_adj_tnbc", "n_mbc_tnbc", "n_tx_ibc", "n_tx_preop",
+    "n_tx_post_tnbc_pcr", "n_tx_post_tnbc_residual"
+  ]);
 });
 test("BREAST: endocrine agents only in HR-positive / DCIS contexts (never TNBC)", () => {
   ["breast-tamoxifen", "breast-anastrozole", "breast-letrozole", "breast-exemestane", "breast-fulvestrant"]
-    .forEach(id => refOnlyIn(breast, id, ["n_endo_post", "n_endo_pre", "n_local_recur", "n_mbc_hr_1l", "n_mbc_hr_2l", "n_regional_recur", "n_tx_dcis_erpos", "n_tx_paget"]));
+    .forEach(id => refOnlyIn(breast, id, [
+      "n_endo_post", "n_endo_pre", "n_local_recur", "n_mbc_hr_1l", "n_mbc_hr_2l",
+      "n_regional_recur", "n_tx_dcis_erpos", "n_tx_paget",
+      "n_tx_post_hrpos_pcr", "n_tx_post_hrpos_residual",
+      "n_tx_mbc_capivasertib", "n_tx_mbc_esr1", "n_tx_mbc_wildtype", "n_tx_mbc_pik3ca",
+      "n_adj_favorable"
+    ]));
 });
 
 test("LUNG: driver TKIs + single-agent pembro + consolidation each only in their node", () => {

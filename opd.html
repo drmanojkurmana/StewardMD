@@ -84,6 +84,21 @@
   .cact .del{padding:9px 12px;color:var(--red);background:var(--red-soft);border:1px solid var(--red-line)}
   /* board toolbar */
   .toolbar{display:flex;gap:10px;align-items:center;margin:16px 0 18px;flex-wrap:wrap}
+  /* The OPD pulse: dense, quiet, and only the tiles worth acting on take the warning colour.
+     Scrolls sideways on a phone rather than wrapping into an unreadable grid. */
+  .pulse{margin:0 0 18px}
+  .pulse:empty{display:none}
+  .p-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px}
+  .p-t{flex:1 0 132px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card)}
+  .p-t.warn{border-color:#dc2626;background:rgba(220,38,38,.06)}
+  .p-l{font:600 11px system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+  .p-v{font:700 24px system-ui,sans-serif;margin-top:4px}
+  .p-v u{text-decoration:none;font:700 13px system-ui,sans-serif;opacity:.65;margin-left:2px}
+  .p-t.warn .p-v{color:#dc2626}
+  .p-v .p-none{font:600 14px system-ui,sans-serif;font-style:normal;opacity:.45}
+  .p-s{font:500 12px system-ui,sans-serif;opacity:.65;margin-top:2px}
+  .p-note{font:500 12px system-ui,sans-serif;opacity:.75;margin-top:8px}
+  .p-warn{font:600 13px system-ui,sans-serif;color:#dc2626;margin-top:8px}
   .toolbar .grow{flex:1;font-size:14px;color:var(--mut)}
   .toolbar .grow b{color:var(--ink);font-size:16px}
   #walk{background:var(--tl);color:#fff;font-weight:700;border-color:var(--tl);box-shadow:0 2px 8px var(--tl-glow)}
@@ -104,6 +119,7 @@
   .pos{width:28px;height:28px;border-radius:8px;background:var(--tl);color:#fff;font-weight:800;display:grid;place-items:center;font-size:13px;flex:none}
   @media (prefers-color-scheme:dark){.pos{color:#04322c}}
   .pos.consult{background:var(--ok)}
+  .tok{display:inline-block;min-width:28px;padding:1px 7px;margin-right:6px;border-radius:6px;background:var(--ink);color:#fff;font:800 14px/1.5 ui-monospace,monospace;text-align:center}
   .nm{font-weight:700;font-size:14.5px;color:var(--ink)}.mrn{color:var(--mut);font-weight:600;font-size:12px;margin-left:4px;font-family:ui-monospace,monospace}
   .meta{color:var(--mut);font-size:12px;margin-top:2px}
   .st{margin-left:auto;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--tl);display:flex;align-items:center;gap:4px}
@@ -210,8 +226,8 @@
   @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-<link rel="stylesheet" href="/patient-register.css?v=preg1">
-<script src="/patient-register.js?v=preg1" defer></script>
+<link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
+<script src="/patient-register.js?v=preg5-abdm" defer></script>
 </head>
 <body>
 <div id="app"></div>
@@ -227,8 +243,16 @@
   // to YESTERDAY's session while the doctor's app read TODAY's, and console-added patients simply never
   // appeared. Same clinic, same room, different bucket.
   function istDay(){ return new Date(Date.now()+19800000).toISOString().slice(0,10); }
-  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
+  /* ONE ACCOUNT SIGN-IN, TWO SPELLINGS (LT-01, live test 2026-09-15). wardsynq.com (wardsynq/site/shell.js)
+   * records a StewardMD account sign-in as "account"; this console wrote and read only "firebase". A
+   * doctor signed in on wardsynq.com who opened the OPD desk therefore arrived with tokType "account",
+   * no staff token, and was shown this page's sign-in wall. Same Firebase project, same origin, same
+   * persisted session: both spellings mean "use the account's ID token". The server still verifies it. */
+  function ttNorm(t){ return t==="account"?"firebase":(t||""); }
+  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:ttNorm(localStorage.getItem(LS_TT)), who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
   var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
+  // The OPD token (called out in the waiting hall). A ticket registered before tokens existed has none.
+  var tok=function(t){return t&&t.token?'<span class="tok" title="Token">'+esc(t.token)+'</span>':"";};
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});};
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
   function fbAuth(){ try{ return (window.firebase&&firebase.auth)?firebase.auth():null; }catch(e){ return null; } }
@@ -266,13 +290,28 @@
   function doStaffLogin(){
     var id=document.getElementById("sid").value.trim(), pw=document.getElementById("spw").value;
     if(!id||!pw){err("Enter your staff ID (or email) and PIN (or password).");return;}
-    var isEmail=id.indexOf("@")>-1;
+    /* THE CLINIC CODE DECIDES, NOT THE SHAPE OF THE ID. This read only for an "@" and sent anything
+     * containing one down the email+password door, ignoring the clinic code just typed and offering
+     * the PIN as a password. Every staff ID seeded so far IS an email address, so the staff door
+     * answered "Wrong email or password" to people whose code, ID and PIN were all correct. Same
+     * bug, same fix as wardsynq/site/shell.js. */
+    var hasAt=id.indexOf("@")>-1;
+    var codeTyped=(document.getElementById("sorg")&&document.getElementById("sorg").value.trim())||"";
+    var isEmail=!codeTyped&&hasAt;
     id=id.toLowerCase();   // staff IDs + emails are case-insensitive; the doctor app stores them lowercase, and mobile keyboards auto-capitalize - so normalize to match
-    if(!isEmail && !document.getElementById("sorg").value.trim()){err("Enter your clinic code (or sign in with your email).");return;}
+    if(!hasAt && !codeTyped){err("Enter your clinic code (or sign in with your email).");return;}
     err("Signing in…");
     var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
-    var body=isEmail?{email:id,password:pw}:{clinicCode:document.getElementById("sorg").value.trim(),identity:id,pin:pw};
+    var body=isEmail?{email:id,password:pw}:{clinicCode:codeTyped,identity:id,pin:pw};
     fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
+      // Two-step sign-in: the PIN/password was right; ask for the phone's code and pass the answer through.
+      if(!r||r.error!=="mfa_required") return r;
+      var code=""; try{ code=prompt((r.message||"Enter the 6-digit code from your authenticator app.")+"\n\nLost your phone? Enter a backup code instead.")||""; }catch(e){}
+      if(!code.trim()) return {cancelled:true};
+      return fetch("/api/queue/auth/mfa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
+    }).then(function(r){
+      if(r&&r.cancelled){ err("Sign-in cancelled."); return; }
+      if(r&&(r.error==="wrong_code"||r.error==="challenge_expired")){ err(r.error==="wrong_code"?"That code did not match. Sign in again and use the newest code.":"That took too long. Sign in again."); return; }
       if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(isEmail?"Wrong email or password.":"Wrong clinic code, staff ID or PIN."))); return; }
       onLogin("staff",r.token,r.orgId);
     }).catch(function(){err("Could not reach the server.");});
@@ -299,11 +338,16 @@
     app.innerHTML='<div class="login"><p>Loading…</p></div>';
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout("Your session ended. Please sign in again.");return;} renderLogin("Session expired. Sign in again."); return; }
+      // The hospital requires two-step sign-in for this role and it is not set up: every other request would be refused.
+      if(r.twoStepRequired){ app.innerHTML='<div class="login"><h3>Two-step sign-in required</h3><p>Your hospital requires two-step sign-in for your role. Set it up at <a href="https://wardsynq.com/#/security">wardsynq.com, Sign-in security</a>, then sign in here again.</p><button class="btn" id="tsOut">Sign out</button></div>'; document.getElementById("tsOut").onclick=function(){logout("");}; return; }
       st.who=r; st.smdId=r.smdId||""; st.billingOn=!!r.billing; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
       if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; st.ownsOrg=true;
         if(!list.length){ openWizard(); return; }
+        // Came from wardsynq.com with a hospital already chosen: open that one, not the picker.
+        var wp=wardsynqOrg(), chosen=wp&&list.filter(function(c){return c.id===wp;})[0];
+        if(chosen){ openClinic(chosen); return; }
         if(list.length===1){ openClinic(list[0]); return; }
         renderClinics(list);
       }); return; }
@@ -318,7 +362,11 @@
     }).catch(function(){ renderLogin("Could not reach the server. Check your connection and try again."); });
   }
   // ---- multi-clinic manager: one StewardMD account can own several clinics (open / add / delete) ----
-  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id); loadDash(); }
+  function wardsynqOrg(){ var w=""; try{ w=localStorage.getItem("smd_opd_workplace")||""; }catch(e){} return w.indexOf("wardsynq:")===0?w.slice(9):""; }
+  /* The role is hospital-scoped: an account's whoami without a hospital is its global role, which hid
+   * the admin controls from a hospital admin. Ask again for the opened hospital, as shell.js does. */
+  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id);
+    api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){ if(r&&r.ok) st.who=r; },function(){}).then(function(){ loadDash(); }); }
   function openClinics(){
     app.innerHTML='<div class="login"><p>Loading your clinics…</p></div>';
     api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){ openWizard(); return; } renderClinics(list); })
@@ -336,11 +384,18 @@
     Array.prototype.forEach.call(app.querySelectorAll("[data-open]"),function(b){b.onclick=function(){ openClinic({id:b.getAttribute("data-open"),code:b.getAttribute("data-code")}); };});
     Array.prototype.forEach.call(app.querySelectorAll("[data-del]"),function(b){b.onclick=function(){ delClinic(b.getAttribute("data-del"),b.getAttribute("data-name")); };});
     document.getElementById("newc").onclick=openWizard;
-    document.getElementById("lo2").onclick=logout;
+    /* WRAPPED, because logout(msg) takes a MESSAGE. Wired straight to onclick the browser hands it
+     * the click event instead, which flows to renderLogin(msg) and renders as the error line
+     * "[object PointerEvent]" - so every ordinary sign-out finished on a red error nobody could
+     * read or explain. Found 2026-09-12 signing out of the OPD console. */
+    document.getElementById("lo2").onclick=function(){logout();};
   }
   function delClinic(id,name){
-    if(!confirm('Delete "'+name+'"? Its queue and rooms will be removed. This cannot be undone.')) return;
-    api("org/delete",{method:"POST",body:{orgId:id}}).then(function(r){
+    if(!confirm('Remove "'+name+'"? It leaves your clinic list. Patient records and the audit trail are kept.')) return;
+    /* The server removes a clinic only for its owner and only with the word DELETE (BUG-MU2PHANW). */
+    var typed=prompt('Type DELETE to remove "'+name+'"');
+    if(typed!=="DELETE"){ if(typed!==null) toast("Nothing was removed. Type DELETE exactly."); return; }
+    api("org/delete",{method:"POST",body:{orgId:id,confirm:typed}}).then(function(r){
       if(!r||!r.ok){ toast(r&&r.error?friendly(r.error):"Could not delete the clinic"); return; }
       toast("Clinic deleted"); openClinics();
     }).catch(function(){ toast("Could not reach the server"); });
@@ -350,7 +405,7 @@
   function loadDash(tries){
     tries=tries||0;
     api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
-      if(r&&r.ok){ st.opd=r; renderNurseStation(r); return; }   // org-scoped board only; NO shared legacy board
+      if(r&&r.ok){ st.opd=r; renderNurseStation(r); if(!st.pulse) loadPulse(); return; }   // org-scoped board only; NO shared legacy board
       if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
       else renderShell('<div class="empty">'+((r&&r.error==="forbidden"||r&&r.error==="not_a_member")?"You are not assigned to this clinic. Ask the owner to add you.":"No queue available yet.")+'</div>');
@@ -362,7 +417,7 @@
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
       if(!r||!r.ok){ renderShell('<div class="empty">'+(r&&r.error==="forbidden"?"You do not have access to this hospital.":"Could not load the board.")+'</div>'); return; }
-      st.board=r.board||[]; renderBoard();
+      st.board=r.board||[]; renderBoard(); if(!st.pulse) loadPulse();
     });
   }
 
@@ -379,9 +434,14 @@
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
+        (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
-      '</div>'+inner+'</div>';
-    document.getElementById("lo").onclick=logout;
+      '</div>'+
+      // The OPD's own figures, above the board they summarise. Filled by paintPulse when it arrives.
+      '<section class="pulse" id="opdPulse">'+pulseInner()+'</section>'+
+      inner+'</div>';
+    var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
+    document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
@@ -390,7 +450,70 @@
     var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
     var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
   }
-  function refresh(){ st.opd?loadDash():loadBoard(); }
+  function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); }
+
+  /* ---- THE OPD PULSE (server: /opd-pulse, figures: functions/_queue_eta.js opdPulse) -------------
+   * The same card the app shows, on the desk that can act on it first. Counts and durations only - it
+   * names nobody, so it is safe on a screen the whole waiting hall can see. A read that fails SAYS so:
+   * an empty strip here would read as a quiet OPD, which is the one thing it must never say by
+   * accident. The preview clinic has no hospital behind it, so it simply does not ask. */
+  function loadPulse(){
+    if(!st.orgId||st.orgId==="demo") return;
+    api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
+    }).catch(function(){ st.pulse={failed:true}; paintPulse(); });
+  }
+  function paintPulse(){
+    var host=document.getElementById("opdPulse"); if(host) host.innerHTML=pulseInner();
+  }
+  function pnum(v,unit){ return v==null?'<i class="p-none">not yet</i>':esc(v)+(unit?'<u>'+unit+'</u>':''); }
+  function pulseInner(){
+    var r=st.pulse; if(!r) return '';
+    if(r.failed) return '<div class="p-warn">Could not read the OPD figures. Do not read this as a quiet clinic.</div>';
+    var p=r.pulse||{},hall=p.waitingNow||{},d2d=p.doorToDoctor||{},desk=p.deskWait||{},doc=p.doctorWait||{};
+    var blame=desk.medianMin==null||doc.medianMin==null?''
+      :desk.medianMin>doc.medianMin*2?'the wait is at the desk'
+      :doc.medianMin>desk.medianMin*2?'the wait is for the doctor':'desk and doctor are even';
+    var tile=function(label,value,sub,warn){
+      return '<div class="p-t'+(warn?' warn':'')+'"><div class="p-l">'+esc(label)+'</div><div class="p-v">'+value+'</div><div class="p-s">'+(sub||'')+'</div></div>';
+    };
+    return '<div class="p-row">'+
+      tile('In the hall',esc(p.waiting||0),hall.longestMin?'longest '+esc(hall.longestMin)+'m':'nobody waiting',hall.over60>0)+
+      tile('Waiting over 1h',esc(hall.over60||0),(hall.over30||0)+' over 30m',(hall.over60||0)>0)+
+      tile('Door to doctor',pnum(d2d.medianMin,'m'),d2d.p90Min==null?'median':'9 in 10 within '+esc(d2d.p90Min)+'m')+
+      tile('Seen',esc(p.completed||0),(p.inConsultation||0)+' in the room')+
+      tile('Did not wait',p.abandonedPct==null?'<i class="p-none">not yet</i>':esc(p.abandonedPct)+'<u>%</u>',esc(p.noShow||0)+' no-show'+((p.noShow||0)===1?'':'s'),(p.abandonedPct||0)>=10)+
+      (p.held?tile('Awaiting result',esc(p.held),'sent for a test or booked back'):'')+
+      '</div>'+(blame?'<div class="p-note">Desk '+pnum(desk.medianMin,'m')+', doctor '+pnum(doc.medianMin,'m')+' · '+esc(blame)+'</div>':'')+
+      (r.unread&&r.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>':'');
+  }
+  /* D13: RECALL NO-SHOWS. Every queue in this hospital today; a patient marked no-show in the last 4 hours
+   * (and before the session ended) goes back to waiting with the SAME token, at the head of their priority
+   * band. A reason is required and recorded with who and when. A failed load is said, never "nobody". */
+  function openNoShows(){
+    open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    api("no-show/list?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
+      var el=sheet.querySelector("#nsl"); if(!el) return;
+      if(!r||!r.ok){ el.innerHTML='<div class="empty">The no-shows could not be loaded ('+esc((r&&(r.message||r.error))||"no response")+'). Do not read this as none.</div>'; return; }
+      var list=r.noShows||[];
+      if(!list.length){ el.innerHTML='<div class="empty">No one marked no-show in the last 4 hours.</div>'; return; }
+      var hm=function(ms){ return new Date(ms).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}); };
+      el.innerHTML=list.map(function(t){ return '<div class="ev"><b>'+tok(t)+esc(t.name||"Patient")+'</b> <span class="t">'+esc(t.department||"")+' · marked '+hm(t.noShowAt)+' · recall until '+hm(t.recallableUntil)+'</span>'+
+        (can("queue.reorder")?'<input class="nsr" data-t="'+esc(t.id)+'" placeholder="Why recalled (required)" style="margin:6px 0">'+
+        '<div class="row2"><button class="cancel" data-nsr="waiting" data-s="'+esc(t.sessionId)+'" data-t="'+esc(t.id)+'">Back to waiting</button><button class="btn" data-nsr="called" data-s="'+esc(t.sessionId)+'" data-t="'+esc(t.id)+'" style="margin:0">Call now</button></div>':'<div class="t">Recalling needs the queue.reorder permission.</div>')+'</div>'; }).join("");
+      Array.prototype.forEach.call(el.querySelectorAll("[data-nsr]"),function(b){ b.onclick=function(){
+        var tid=b.getAttribute("data-t"), inp=el.querySelector('.nsr[data-t="'+tid+'"]'), why=inp?inp.value.trim():"";
+        if(why.length<3){ toast("Say why the patient is recalled"); if(inp) inp.focus(); return; }
+        b.disabled=true;
+        api("no-show/recall",{method:"POST",body:{sessionId:b.getAttribute("data-s"),ticketId:tid,reason:why,to:b.getAttribute("data-nsr")}}).then(function(x){
+          b.disabled=false;
+          if(!x||!x.ok){ toast("Not recalled: "+((x&&(x.message||x.error))||"no response")); return; }
+          toast("Recalled with the same token"); openNoShows(); refresh();
+        },function(){ b.disabled=false; toast("Not recalled: the server could not be reached."); });
+      }; });
+    },function(){ var el=sheet.querySelector("#nsl"); if(el) el.innerHTML='<div class="empty">The no-shows could not be loaded (no connection). Do not read this as none.</div>'; });
+  }
   // Owner/admin: mint the login-free waiting-room display link for a wall TV/tablet.
   function openDisplayLink(){
     api("display-link",{method:"POST",body:{orgId:st.orgId}}).then(function(r){
@@ -457,6 +580,7 @@
     var b=[];
     if(!consult&&can("queue.status")) b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>');
     if(!consult&&can("queue.status")) b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>');
+    if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">No-show</button>');
     if(can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
     if(can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
     if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
@@ -468,7 +592,7 @@
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');   // nurse records BP/temp/SpO2 etc. onto the encounter timeline
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
       '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
       '<div class="acts">'+b.join("")+'</div></div>';
@@ -480,6 +604,7 @@
         if(a==="call") post("status",{sessionId:sid,ticketId:tid,status:"called"});
         else if(a==="start") post("status",{sessionId:sid,ticketId:tid,status:"in_consultation"});
         else if(a==="sendback") post("status",{sessionId:sid,ticketId:tid,status:"waiting"});
+        else if(a==="noshow") openNoShowMark(sid,tid,btn.getAttribute("data-n"));
         else if(a==="prio") post("priority",{sessionId:sid,ticketId:tid,priority:+btn.getAttribute("data-p")});
         else if(a==="up") openMove(sid,tid,+btn.getAttribute("data-i")-1);
         else if(a==="down") openMove(sid,tid,+btn.getAttribute("data-i")+1);
@@ -493,7 +618,7 @@
     });
   }
   function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
-  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope."}[e]||e; }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why."}[e]||e; }
 
   // ---- reorder-with-reason modal (anti-misuse) ----
   var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
@@ -513,6 +638,11 @@
     };
   }
   // ---- remove-patient modal (mistaken / duplicate / wrongly-routed entry) ----
+  function openNoShowMark(sid,tid,name){
+    open('<h3>Mark '+esc(name||"patient")+' as no-show?</h3><p class="t">Called and did not come. The token is kept: for 4 hours the patient can be recalled from <b>No-shows</b>.</p><div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Mark no-show</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){ close(); post("status",{sessionId:sid,ticketId:tid,status:"no_show"}); };
+  }
   function openRemove(sid,tid,name){
     open('<h3>Remove patient</h3><p style="color:var(--mut);margin:0 0 10px">Remove <b>'+esc(name||"this patient")+'</b> from the queue? Use this for a mistaken, duplicate, or wrongly-routed entry — it is recorded in the audit trail. To send them to another doctor instead, use <b>Move to doctor</b>.</p>'+
       '<div class="row2"><button class="cancel" id="cx">Keep in queue</button><button class="btn danger" id="ok" style="margin:0">Remove patient</button></div>');
@@ -550,8 +680,28 @@
     api("checkout",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
       if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Checkout failed");return;}
       refresh();
-      if(r.timelineUrl){ open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary (valid 7 days):")+'</p><div class="link">'+esc(r.timelineUrl)+'</div><div class="row2"><button class="btn" id="cx" style="margin:0">Done</button></div>'); sheet.querySelector("#cx").onclick=close; }
+      var nx=(r.tickets||[]).filter(function(x){return x.status==="called";})[0];
+      if(nx&&nx.token) toast("Now calling token "+nx.token);
+      if(r.timelineUrl){
+        open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary:")+'</p><div class="link">'+esc(r.timelineUrl)+'</div>'+
+          '<p id="lx" style="color:var(--mut)">'+linkUntil(r.linkExpiresAt)+'</p>'+
+          '<div class="row2">'+(can("emr.treat")?'<button class="cancel" id="ext" style="margin:0">Keep open 30 days</button>':'')+'<button class="btn" id="cx" style="margin:0">Done</button></div>');
+        sheet.querySelector("#cx").onclick=close;
+        var ext=sheet.querySelector("#ext");
+        if(ext) ext.onclick=function(){ extendLink(sid,tid,ext); };
+      }
     });
+  }
+  function linkUntil(ms){ return ms?"The patient can open it until "+new Date(ms).toLocaleDateString([],{day:"numeric",month:"short",year:"numeric"})+".":"The link expiry date is not known."; }
+  // The date shown only changes when the server says the extension was saved.
+  function extendLink(sid,tid,btn){
+    btn.disabled=true; btn.textContent="Saving…";
+    api("timeline/extend",{method:"POST",body:{sessionId:sid,ticketId:tid,days:30}}).then(function(r){
+      var lx=sheet.querySelector("#lx");
+      if(!r||!r.ok){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast(r&&r.error==="not_ready"?"This visit is not closed yet.":r&&r.error?friendly(r.error):"Could not extend the link. The old date still applies."); return; }
+      if(lx) lx.textContent=linkUntil(r.linkExpiresAt);
+      btn.textContent="Extended";
+    }).catch(function(){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast("Could not extend the link. The old date still applies."); });
   }
   // ---- audit drawer ----
   function openAudit(sid){
@@ -923,10 +1073,14 @@
       if(pin && !/^\d{4,6}$/.test(pin)){toast("PIN must be 4 to 6 digits");return;}
       api("member",{method:"POST",body:{orgId:st.orgId,identity:id,role:role}}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;}
+        // Each step's refusal stops the chain and is shown. This said "Saved" even when the PIN or
+        // password had been refused, so staff were handed a sign-in that did not exist.
+        var step=function(what,path,body){return function(){return api(path,{method:"POST",body:body}).then(function(x){ if(!x||!x.ok) throw new Error(what+" not set: "+((x&&(x.message||friendly(x.error)))||"no response")); });};};
         var chain=Promise.resolve();
-        if(pin) chain=chain.then(function(){return api("member/pin",{method:"POST",body:{orgId:st.orgId,identity:id,pin:pin}});});
-        if(em&&pw) chain=chain.then(function(){return api("member/password",{method:"POST",body:{orgId:st.orgId,identity:id,email:em,password:pw}});});
-        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); });
+        if(pin) chain=chain.then(step("PIN","member/pin",{orgId:st.orgId,identity:id,pin:pin}));
+        if(em&&pw) chain=chain.then(step("Password","member/password",{orgId:st.orgId,identity:id,email:em,password:pw}));
+        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); })
+          .catch(function(e){ loadStaffList(); toast(e.message); });
       });
     };
     loadStaffList();
@@ -937,6 +1091,11 @@
       var rows=(r&&r.members)||[];
       el.innerHTML=rows.length? rows.map(function(m){
         var login=(m.hasPin?"PIN":"")+(m.email?((m.hasPin?" + ":"")+"email"):""); if(!login) login="no login set";
+        /* Why they cannot sign in, where the owner can fix it: five wrong PINs lock the account for
+           fifteen minutes, and the sign-in page will not say so (it must not confirm which login names
+           exist), so the owner otherwise hears "wrong PIN" for a PIN that is right. */
+        var lockMin=m.lockedUntil&&m.lockedUntil>Date.now()?Math.ceil((m.lockedUntil-Date.now())/60000):0;
+        if(lockMin) login="locked "+lockMin+"m (too many tries)";
         return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(m.identity)+'</b>'+(m.active?"":' <span class="t" style="color:var(--red)">(disabled)</span>')+'<div class="t">'+esc(m.role)+' · '+esc(login)+'</div></div>'+
           '<button class="cancel" data-tog="'+esc(m.identity)+'" data-act="'+(m.active?"disable":"restore")+'" style="padding:6px 10px">'+(m.active?"Disable":"Restore")+'</button></div>';
       }).join("") : '<div class="empty">No staff yet. Invite one below.</div>';
@@ -957,7 +1116,7 @@
     rooms.forEach(function(rm){ inRooms+=rm.waiting||0; (rm.tickets||[]).forEach(function(t){ if(t.status==="in_consultation") consulting++; }); });
     // routing inbox
     var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
-      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
+      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
         '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
         (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="width:100%;margin-left:0;margin-top:4px">Route to a room <span class="ms sm">chevron_right</span></button>':"")+'</div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
@@ -982,6 +1141,7 @@
     var consult=t.status==="in_consultation"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
     var b=[];
     if(!consult&&can("queue.status")){ b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>'); b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>'); }
+    if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">No-show</button>');   // D13: called and did not come; recallable with the same token
     if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
     if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // room -> waiting hall (in_consultation -> waiting)
@@ -989,7 +1149,7 @@
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   // Nurse records vitals -> a compact timeline entry (kind:"vitals", EMR_VITALS cap). This is the nurse's
@@ -1028,10 +1188,11 @@
     var dept=(pt.department||"").toLowerCase();
     // GIMSR routing: matching-department rooms first, then the rest; shortest queue reads at a glance.
     var rooms=((st.opd&&st.opd.rooms)||[]).filter(function(r){return r.doctorUid;});
-    var match=function(r){ return dept && String(r.room.department||"").toLowerCase()===dept; };
+    // D7: by department id when both carry one (a renamed department still matches), else by name.
+    var match=function(r){ if(pt.departmentId&&r.room.departmentId) return pt.departmentId===r.room.departmentId; return dept && String(r.room.department||"").toLowerCase()===dept; };
     rooms.sort(function(a,b){ return (match(b)?1:0)-(match(a)?1:0) || (a.waiting||0)-(b.waiting||0); });
     var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+(match(r)?"✓ ":"")+esc(r.room.name||"Room")+(r.room.department?" ("+esc(r.room.department)+")":"")+' - '+esc(STATUS_LABEL[r.status]||r.status)+' · '+r.waiting+' waiting</option>';}).join("");
-    open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first.":"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
+    open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first."+(pt.token?" A room in another department keeps token "+esc(pt.token)+".":""):"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
       (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px"><input type="checkbox" id="urg"> Urgent (front of the room queue)</label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
       '<input id="arz" placeholder="Optional note" style="margin-top:6px">'+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
@@ -1050,16 +1211,27 @@
     // The server validates and issues the MR number; this only carries the answers.
     if(!(window.SMD_PATIENTREG&&SMD_PATIENTREG.open)){ toast("Patient check-in is unavailable."); return; }
     var mode=(st.opd&&st.opd.mode==="connect")?"connect":"native";
-    SMD_PATIENTREG.open({
-      mode: mode,
-      clinicName: st.orgCode||"Check-in",
-      submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; return api("patient/register",{method:"POST",body:b}); },
-      onAdded: function(r){
-        // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
-        api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
-          mrn:r.mrn,visitType:(r.patient&&r.patient.visitType)==="followup"?"followup":"new",date:st.date}})
-          .then(function(){ toast("Added - "+r.mrn); refresh(); });
-      }
+    // D7: the hospital's departments and token numbering first, so the desk picks the department the
+    // token is numbered in. A failed load is said on the sheet (departments:null), never an empty list.
+    api("org?orgId="+encodeURIComponent(st.orgId)).then(function(o){ return o&&o.ok?o:null; },function(){ return null; }).then(function(o){
+      var perDept=!!(o&&o.org&&o.org.tokens&&o.org.tokens.scope==="department");
+      SMD_PATIENTREG.open({
+        mode: mode,
+        clinicName: st.orgCode||"Check-in",
+        departments: o?(o.departments||[]):null,
+        departmentRequired: perDept,
+        submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue="pool"; return api("patient/register",{method:"POST",body:b}); },
+        onAdded: function(r,sent){
+          // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
+          api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
+            mrn:r.mrn,visitType:(r.patient&&r.patient.visitType)==="followup"?"followup":"new",date:st.date,departmentId:(sent&&sent.departmentId)||""}})
+            .then(function(q){
+              // A refused queue add is never shown as added: the patient is registered but has no token.
+              if(!q||!q.ok){ toast("Registered "+r.mrn+" but NOT queued: "+((q&&q.message)||(q&&q.error)||"no response")); refresh(); return; }
+              toast("Added - "+r.mrn+(q.ticket&&q.ticket.token?" - token "+q.ticket.token:"")); refresh();
+            },function(){ toast("Registered "+r.mrn+" but NOT queued: the server could not be reached."); });
+        }
+      });
     });
   }
 
@@ -1090,11 +1262,19 @@
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
       '<input id="nrn" placeholder="New room name (e.g. Room 1 / Cardiology)" style="margin-bottom:8px">'+
       '<input id="nrnum" placeholder="Room number (optional)">'+
+      // D7: the room's department. Patients registered into this room are numbered in it.
+      '<select id="nrdept" style="margin-top:8px"><option value="">Department: loading...</option></select>'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Add room</button></div></div>');
+    api("org?orgId="+encodeURIComponent(st.orgId)).then(function(o){
+      var sel=sheet.querySelector("#nrdept"); if(!sel) return;
+      if(!o||!o.ok){ sel.innerHTML='<option value="">Departments could not be loaded (room added without one)</option>'; return; }
+      var ds=(o.departments||[]).filter(function(d){return d.active!==false;});
+      sel.innerHTML='<option value="">'+(ds.length?"No department":"No departments set up")+'</option>'+ds.map(function(d){return '<option value="'+esc(d.id)+'">'+esc(d.name)+'</option>';}).join("");
+    },function(){ var sel=sheet.querySelector("#nrdept"); if(sel) sel.innerHTML='<option value="">Departments could not be loaded (room added without one)</option>'; });
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
       var n=sheet.querySelector("#nrn").value.trim(); if(!n){toast("Enter a room name");return;}
-      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
+      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),departmentId:sheet.querySelector("#nrdept").value||null,assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} toast("Room added (assigned to you)"); sheet.querySelector("#nrn").value="";sheet.querySelector("#nrnum").value=""; loadRoomsList();
       });
     };
@@ -1106,7 +1286,7 @@
       var el=sheet.querySelector("#rlist"); if(!el) return;
       var rooms=(r&&r.rooms)||[];
       el.innerHTML=rooms.length? rooms.map(function(rm){
-        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+'</div></div>'+
+        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+(rm.department?" · "+esc(rm.department):"")+'</div></div>'+
           '<button class="cancel" data-assign="'+esc(rm.id)+'" style="padding:6px 10px">Assign</button></div>';
       }).join("") : '<div class="empty">No rooms yet. Add one below.</div>';
       Array.prototype.forEach.call(el.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openRoomAssign(b.getAttribute("data-assign"));};});
@@ -1158,9 +1338,15 @@
     sheet.querySelector("#ok").onclick=function(){
       var id=sheet.querySelector("#wri").value.trim(), pin=sheet.querySelector("#wrp").value.trim();
       if(!id){close();loadDash();return;}
-      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(){
+      // A refused member or PIN keeps the sheet open with the reason, instead of "Clinic ready".
+      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(r){
+        if(!r||!r.ok){toast((r&&(r.message||friendly(r.error)))||"Could not add the receptionist");return;}
         var done=function(){close();toast("Clinic ready");loadDash();};
-        pin?api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(done):done();
+        if(!pin) return done();
+        api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(function(p){
+          if(!p||!p.ok){toast("PIN not set: "+((p&&(p.message||friendly(p.error)))||"no response"));return;}
+          done();
+        });
       });
     };
   }
@@ -1212,5 +1398,6 @@
 })();
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
+<script src="/wardsynq/site/bug-reporter.js?v=4"></script>
 </body>
 </html>

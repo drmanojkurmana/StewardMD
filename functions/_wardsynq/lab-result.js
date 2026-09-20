@@ -30,10 +30,14 @@ import { Observation, DiagnosticReport, numericValue } from "../../wardsynq/ward
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService, isExternalRecord } from "./service.js";
+import { RecordService, isExternalRecord, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { LAB_CODE_SEED } from "../../wardsynq/adapters/wardsynq-ghis-adapter.js";
 import { deltaCheck, autoVerify } from "./lab-delta.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
+import { OPEN_ORDER_STATUSES, isOpenOrder, closeOrderOnResult } from "./ward-order.js";
+import { TYPE as SPECIMEN_TYPE, NO_SPECIMEN_CATEGORIES, SpecimenCollection, collectionState } from "./specimen.js";
+import { qcBlockedTests, recordQcOverride } from "./lab-qc.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const CATEGORY = "laboratory";
@@ -158,6 +162,23 @@ async function releaseResult(request, env, ctx) {
     catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
     if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
   }
+  /* LT-25: NO RESULT FOR A SAMPLE NOBODY TOOK. A result released against a blood or fluid order that was never
+   * collected (or whose every attempt failed) is a number with no tube behind it, and the order then sat on the
+   * board as "awaiting collection" for ever. Imaging, procedures and referrals have no sample and are not asked.
+   * A collected sample the laboratory never marked received is received by this release, by whoever released it:
+   * the person resulting it had it on the bench, and the specimen then leaves every "awaiting" list. */
+  let receiveOnRelease = null;
+  if (sr && !NO_SPECIMEN_CATEGORIES.includes(str(sr.category))) {
+    let specimens;
+    try { specimens = ((await svc.byPatient(SPECIMEN_TYPE, sr.patientId)) || []).filter((s) => s && s.serviceRequestId === serviceRequestId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    const where = collectionState(specimens);
+    if (where.state === "none" || where.state === "failed") {
+      return { ...base, ok: false, status: 409, error: "specimen_not_collected", serviceRequestId, collection: where.state,
+        detail: "No sample has been collected for this request. Record the collection (who took it, when) before releasing a result.", written: 0 };
+    }
+    if (where.state === "collected") receiveOnRelease = specimens.find((s) => s.id === where.specimenId) || null;
+  }
   const patientId = str(ctx.patientId) || (sr && sr.patientId) || "";
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", detail: "a result names its patient, or the request it answers", written: 0 };
 
@@ -193,6 +214,14 @@ async function releaseResult(request, env, ctx) {
    * laboratory that cannot release a number because software disagreed with it is a laboratory that
    * routes around the software by the end of the week. A failure to READ the history is likewise not
    * a reason to withhold anything - the check is simply reported as not done. */
+  if (receiveOnRelease) {
+    const at = new Date().toISOString();
+    const next = SpecimenCollection({ ...receiveOnRelease, state: "received", receivedAt: at, receivedBy: resolved.actor.id });
+    next.receivedOnRelease = true;
+    try { await svc.put(next, { expectedVersion: receiveOnRelease.version }); }
+    catch (e) { return { ...base, ...writeFailure(e, { serviceRequestId, written: 0, actor: resolved.actor.id }) }; }
+  }
+
   let history = [];
   try { history = (await svc.byPatient("Observation", patientId)) || []; }
   catch { history = null; }
@@ -226,11 +255,20 @@ async function releaseResult(request, env, ctx) {
     }
   }
 
+  /* SECOND-PERSON VERIFICATION (P1.9), when the hospital asks for it (labVerification.mode =
+   * "second-person"). A FINAL result that the hospital's own autoverification did not pass goes on the
+   * chart as PRELIMINARY, awaiting verification, and a different person makes it final. It is still on
+   * the chart and a critical value still opens its loop: holding a potassium of 7 back from the ward
+   * until somebody signs it off is the harm this must never cause. Without the setting, nothing changes. */
+  const needsSecond = str(ctx.labVerification && ctx.labVerification.mode) === "second-person"
+    && status === "final" && results.some((x) => !x.autoVerified);
+  const storedStatus = needsSecond ? "preliminary" : status;
+
   const report = DiagnosticReport({
     id: reportId, patientId, encounterId: str(ctx.encounterId) || (sr && sr.encounterId) || null,
     serviceRequestId: serviceRequestId || null,
     code: str(ctx.panel) || (sr && (sr.display || sr.code)) || "Laboratory result",
-    status,
+    status: storedStatus,
     // Never composed. A conclusion is the laboratory's own words or there is none.
     conclusion: str(ctx.conclusion) || null,
     resultObservationIds: observations.map((o) => o.id),
@@ -240,11 +278,26 @@ async function releaseResult(request, env, ctx) {
   report.reportedAt = reportedAt;
   report.releasedBy = resolved.actor.id;
   if (!serviceRequestId) report.unsolicited = true;
+  if (needsSecond) report.awaitingVerification = true;
+  /* Which analyser measured it (lab-analysers.js releases through here). Carried so verifying it later is
+   * held by the same QC block that held its release. */
+  if (ctx.analyser && str(ctx.analyser.id)) {
+    report.analyserId = str(ctx.analyser.id);
+    report.analyserName = str(ctx.analyser.name) || null;
+    report.analyserTests = (ctx.analyser.tests || []).map(str).filter(Boolean);
+  }
 
   try {
     const out = await svc.put(report, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
+    /* R5-2: THE ORDER IS ANSWERED, SO IT CLOSES. It used to stay `active` for ever, which is why the
+     * collection and pending-results worklists had to read every order the hospital had ever held.
+     * Attempted after the result is safely on the chart and never allowed to fail it: `orderClosed`
+     * says what actually happened rather than the response implying tidiness it did not achieve. */
+    const closure = sr ? await closeOrderOnResult({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant, actorId: resolved.actor.id }, sr) : null;
     return {
-      ...base, ok: true, written: written + 1, reportId, patientId, status,
+      ...base, ok: true, written: written + 1, reportId, patientId, status: storedStatus,
+      ...(closure ? { orderClosed: closure.closed === true, ...(closure.closed ? {} : { orderCloseFailed: closure.reason || null }) } : {}),
+      ...(needsSecond ? { awaitingVerification: true, detail: "On the chart as preliminary. Another member of the laboratory must verify it before it is final. A critical value has still been checked." } : {}),
       serviceRequestId: serviceRequestId || null, unsolicited: !serviceRequestId,
       observations: results, critical: report.critical,
       /* Counted at the top level, because these are the two numbers a laboratory acts on. A breach
@@ -261,6 +314,122 @@ async function releaseResult(request, env, ctx) {
   } catch (e) {
     return { ...base, ...writeFailure(e, { reportId, written, observations: results, actor: resolved.actor.id }) };
   }
+}
+
+/** ctx: { migration, reportId, decision: "verify"|"return", reason?, expectedVersion? }. A different
+ *  person from whoever released it makes it final, or returns it for re-entry with a reason. */
+async function verifyResult(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  const reportId = str(ctx.reportId), decision = str(ctx.decision), reason = str(ctx.reason);
+  if (!reportId) return { ...base, ok: false, status: 422, error: "report_required", written: 0 };
+  if (decision !== "verify" && decision !== "return") return { ...base, ok: false, status: 400, error: "unknown_decision", detail: "decision is verify or return", written: 0 };
+  if (decision === "return" && !reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "Say what needs checking or re-entering.", written: 0 };
+
+  const { svc, resolved, error } = await open(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+  let report;
+  try { report = await svc.get("DiagnosticReport", reportId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  if (!report) return { ...base, ok: false, status: 404, error: "report_not_found", written: 0 };
+  if (!report.awaitingVerification) return { ...base, ok: false, status: 409, error: "not_awaiting_verification", detail: "This result is not waiting for verification.", reportStatus: report.status, written: 0 };
+  if (str(report.releasedBy) === resolved.actor.id) {
+    return { ...base, ok: false, status: 403, error: "cannot_verify_own", detail: "You entered this result, so somebody else must verify it.", written: 0 };
+  }
+  /* A result an analyser measured is not made final while a rejected QC run on that analyser and test
+   * has no corrective action, unless the verifier overrides with a reason (recorded and audited). */
+  let overrideId = null;
+  if (decision === "verify" && report.analyserId) {
+    let blocked;
+    try { blocked = await qcBlockedTests(ctx.recordDeps.repository, mig.tenantId, report.analyserId, report.analyserTests || []); }
+    catch { return { ...base, ok: false, status: 502, error: "qc_unreadable", detail: "The QC state of this analyser could not be read, so the result was not verified.", written: 0 }; }
+    if (blocked.length) {
+      const why = str(ctx.qcOverrideReason).slice(0, 1000);
+      if (why.length < 10) return { ...base, ok: false, status: 409, error: "qc_blocked", blocked: blocked.map((b) => ({ test: b.test, rules: b.rules })), detail: "A rejected QC run blocks this analyser and test. Record the corrective action on the Quality control screen, or override with a reason.", written: 0 };
+      try { overrideId = (await recordQcOverride(ctx.recordDeps.repository, mig.tenantId, resolved.actor.id, { analyserId: report.analyserId, blocked, reason: why, subject: { kind: "DiagnosticReport", id: reportId } })).id; }
+      catch (e) { return { ...base, ...writeFailure(e, { reportId, written: 0 }) }; }
+    }
+  }
+  const at = new Date().toISOString();
+  const next = decision === "verify"
+    ? { ...report, status: "final", awaitingVerification: false, verifiedBy: resolved.actor.id, verifiedAt: at }
+    : { ...report, awaitingVerification: false, returned: { by: resolved.actor.id, at, reason } };
+  delete next.version; delete next.meta; delete next.writtenBy;
+  try {
+    const out = await svc.put(next, { expectedVersion: ctx.expectedVersion != null ? Number(ctx.expectedVersion) : report.version });
+    return { ...base, ok: true, written: 1, reportId, decision, status: next.status, version: out.record.version, actor: resolved.actor.id, ...(overrideId ? { overrideId } : {}) };
+  } catch (e) {
+    return { ...base, ...writeFailure(e, { reportId, written: 0 }) };
+  }
+}
+
+/* R5-2: THE WORKLIST READS WHAT IS OPEN, NOT WHAT THE HOSPITAL HAS EVER HELD.
+ *
+ * It used to read EVERY ServiceRequest and EVERY DiagnosticReport (service.listAll, paged) and throw
+ * away the finished ones here. That is a cost that grows with history: a hospital placing 500 orders
+ * a day reached tens of thousands of parsed records in one Worker within weeks, and the screen then
+ * failed with a 500 or a hang - before the designed ceiling and without the designed message.
+ *
+ * It now asks the store for the orders whose status is open (service.listByStatus, filtered in SQL),
+ * which is bounded by the work in front of the laboratory, and reads the reports of only those
+ * orders' patients. Both halves are bounded by CURRENT work; neither grows with the archive. Past
+ * OPEN_CENSUS_MAX the read still refuses out loud (503 "too_many_open"), which on this read means
+ * orders nobody ever resulted - a real backlog, and one that must be seen rather than hidden behind a
+ * short list.
+ *
+ * ponytail: the per-page cost inside the store is unchanged - every page still re-groups all versions
+ * of the type (repository-d1.js pageByType, audit O20). What collapses is rows returned, pages,
+ * memory and JS time, which is what was actually failing.
+ */
+const ceilingRefusal = (e) => ({ ok: false, status: 503, error: e.code, detail: str(e.message) });
+
+/**
+ * The records of one type belonging to a bounded set of patients, through the caller's own governed
+ * read. Eight at a time, as service.histories() fans out, so a busy worklist is not one round trip
+ * per patient in sequence. A read that FAILS throws: a laboratory board that quietly dropped one
+ * patient's reports would show an order that has been resulted as still owed.
+ */
+async function byPatients(svc, type, patientIds) {
+  const ids = [...new Set((patientIds || []).map(str).filter(Boolean))];
+  const out = [];
+  for (let i = 0; i < ids.length; i += 8) {
+    const got = await Promise.all(ids.slice(i, i + 8).map((pid) => svc.byPatient(type, pid)));
+    for (const rows of got) for (const r of rows || []) out.push(r);
+  }
+  return out;
+}
+
+/** Every result waiting for a second person, with the reasons autoverification gave. */
+async function resultsToVerify(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", results: [] };
+  const { svc, resolved, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, results: [] };
+  let reports;
+  /* A result waiting for a second person is stored preliminary (releaseResult): the open read, not the oldest 500. */
+  try { reports = await svc.listByStatus("DiagnosticReport", ["preliminary"]); }
+  catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...ceilingRefusal(e), results: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), results: [] };
+  }
+  const waiting = reports.filter((r) => r && r.awaitingVerification);
+  const results = [];
+  for (const r of waiting) {
+    const obs = [];
+    let unread = 0;
+    for (const id of r.resultObservationIds || []) {
+      try {
+        const o = await svc.get("Observation", id);
+        if (o) obs.push({ id: o.id, display: o.display || o.code, value: o.value, unit: o.unit || null, referenceRange: o.referenceRange || null, deltaBreach: o.deltaBreach || null, autoVerified: o.autoVerified === true, critical: o.sourceCritical === true });
+      } catch { unread += 1; }
+    }
+    results.push({ reportId: r.id, patientId: r.patientId, panel: r.code, reportedAt: r.reportedAt || null, releasedBy: r.releasedBy || null, analyserName: r.analyserName || null,
+      mine: str(r.releasedBy) === resolved.actor.id, version: r.version, observations: obs, ...(unread ? { unreadObservations: unread } : {}) });
+  }
+  results.sort((a, b) => str(a.reportedAt).localeCompare(str(b.reportedAt)));
+  return { ...base, ok: true, results };
 }
 
 /** The tests still waiting on a result. ctx: { migration, patientId, actorDeps, recordDeps } */
@@ -283,25 +452,38 @@ async function pendingRequests(request, env, ctx) {
 
   let requests, reports;
   try {
-    [requests, reports] = hospitalWide
-      ? await Promise.all([svc.list("ServiceRequest", 300), svc.list("DiagnosticReport", 300).catch(() => [])])
-      : await Promise.all([
+    if (hospitalWide) {
+      requests = await svc.listByStatus("ServiceRequest", OPEN_ORDER_STATUSES);
+      /* Only these orders' patients: a report matters here for one reason, which is whether an order
+       * on THIS list has already been answered. A read that fails is a 502 below, never an empty set
+       * standing in for one - that would put resulted orders back on the bench as still owed. */
+      reports = await byPatients(svc, "DiagnosticReport", requests.map((s) => s && s.patientId));
+    } else {
+      [requests, reports] = await Promise.all([
         svc.byPatient("ServiceRequest", patientId),
-        svc.byPatient("DiagnosticReport", patientId).catch(() => []),
+        /* R6-2: no .catch(() => []) here either. A failed report read used to read as "nothing has
+         * been resulted", which puts every already-answered order back on the bench as still owed. */
+        svc.byPatient("DiagnosticReport", patientId),
       ]);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), pending: [] }; }
+    }
+  } catch (e) {
+    if (e instanceof ListCeilingError) return { ...base, ...ceilingRefusal(e), pending: [] };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), pending: [] };
+  }
 
   const resulted = new Set((reports || []).filter((r) => r && r.serviceRequestId).map((r) => r.serviceRequestId));
   const pending = (requests || [])
     // Another hospital's order is not one this laboratory owes a result for.
-    .filter((s) => s && s.status !== "completed" && s.status !== "revoked" && s.status !== "cancelled" && !isExternalRecord(s))
+    // isOpenOrder is the SAME open/closed vocabulary the status-scoped read above asks the store for.
+    .filter((s) => s && isOpenOrder(s) && !isExternalRecord(s))
     .filter((s) => !resulted.has(s.id))
     // patientId travels so a hospital-wide caller can say whose test this is.
-    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
+    // LT-15: the category the boards file it under, a catalogued imaging test filed as laboratory read as imaging.
+    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, category: effectiveCategory(s), patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
   return { ...base, ok: true, patientId: patientId || null, scope: hospitalWide ? "hospital" : "patient", pending };
 }
 
 export {
   CATEGORY, LOCAL_SYSTEM, STATUSES, codeForTest, reportIdFor, observationIdFor, observationsFrom,
-  releaseResult, pendingRequests,
+  releaseResult, pendingRequests, verifyResult, resultsToVerify,
 };

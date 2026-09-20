@@ -1,0 +1,440 @@
+{
+  "guideline": "pediatric_all",
+  "id": "pediatric_all",
+  "title": "Pediatric Acute Lymphoblastic Leukemia",
+  "category": "Pediatric Hematology",
+  "version": "1.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "pediatric_acute_lymphoblastic_leukemia",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for Pediatric Acute Lymphoblastic Leukemia. Covers complete clinical algorithm: Diagnostic Workup (bone marrow aspirate and biopsy with multiparameter flow cytometry for B-ALL vs T-ALL lineage, karyotype plus FISH plus RT-PCR/NGS for ETV6::RUNX1, hyperdiploidy, hypodiploidy, KMT2A rearrangement, BCR::ABL1 and Ph-like fusions, diagnostic lumbar puncture with CSF cytology for CNS-1/CNS-2/CNS-3 status with concurrent first intrathecal methotrexate, organ function plus coagulation plus TLS monitoring, baseline echocardiogram before anthracyclines, infectious screening plus HLA typing) -> Subtype and Risk Stratification (B-ALL Standard Risk vs B-ALL High Risk vs Ph-Positive B-ALL vs T-ALL/ETP-ALL vs Relapsed/Refractory) -> B-ALL Standard Risk 3-drug induction with end-induction MRD triage then BFM consolidation, interim maintenance, delayed intensification and 2-3 year maintenance -> B-ALL High Risk 4-drug induction with augmented BFM consolidation, blinatumomab for persistent MRD (COG AALL1331), then allogeneic HCT or continued chemotherapy -> Ph-Positive B-ALL multiagent chemotherapy plus continuous dasatinib or imatinib (COG AALL0031/EsPhALL) then HCT or continued chemotherapy plus TKI for MRD-negative patients -> T-ALL intensive 4-drug induction with high-dose methotrexate plus nelarabine (COG AALL0434/AALL1231) with cranial radiation strictly for CNS-3 or high-risk features -> Relapsed/Refractory tisagenlecleucel CAR T-cell therapy (ELIANA) or blinatumomab for CD19-positive disease, inotuzumab ozogamicin for CD22-positive disease, then allogeneic HCT. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Pediatric Acute Lymphoblastic Leukemia Version 1.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "NCI Standard Risk requires BOTH age 1-9.99 years at diagnosis AND presenting WBC below 50,000/uL; NCI High Risk is age 10 years or older OR WBC 50,000/uL or higher. Unfavorable genetics (hypodiploidy, KMT2A rearrangement) or end-induction MRD 0.01% or higher escalates an otherwise Standard Risk patient to High Risk therapy.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Minimal residual disease is measured by multiparameter flow cytometry or PCR/NGS of clonal rearrangements with a standard sensitivity threshold of 0.01% (1 leukemic cell per 10,000 nucleated cells). End-induction MRD below 0.01% defines a favorable early response; MRD 0.01% or higher after induction or consolidation triggers treatment intensification or immunotherapy.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "CNS status at diagnosis: CNS-1 (no lymphoblasts in CSF), CNS-2 (fewer than 5 WBC/uL with blasts present), CNS-3 (5 or more WBC/uL with blasts present, or cranial nerve palsy). All patients receive CNS-directed intrathecal therapy; cranial radiation is reserved for CNS-3 or other high-risk features in contemporary pediatric protocols.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Ph-positive B-ALL requires continuous TKI exposure starting during induction: dasatinib 60 mg/m2 PO daily or imatinib 340 mg/m2 PO daily (COG AALL0031/EsPhALL backbone). Test for ABL1 kinase domain mutations including T315I at suboptimal response or relapse; ponatinib is a multidisciplinary consideration for T315I-mutated disease.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Nelarabine 650 mg/m2/day IV on days 1-5 (COG AALL0434/AALL1231) is incorporated into T-ALL consolidation for intermediate and high-risk patients. Screen for and monitor peripheral and central neurotoxicity (neuropathy, seizures, altered mental status); withhold for grade 2 or higher neurotoxicity.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Tisagenlecleucel dosing per ELIANA: 0.2 to 5 x 10^6 chimeric antigen receptor-positive viable T cells/kg IV as a single infusion for patients 25 years or younger with CD19-positive relapsed or refractory B-ALL. Requires REMS-certified center with tocilizumab available for cytokine release syndrome and monitoring for immune effector cell-associated neurotoxicity syndrome (ICANS).",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "pediatric_all_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Pediatric ALL: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before subtype and risk stratification. Confirm lineage by flow cytometry, complete cytogenetic and molecular profiling, establish CNS status with concurrent first intrathecal therapy, document organ function and TLS risk, record baseline cardiac function before anthracyclines, and screen for infection plus HLA type high-risk transplant candidates.",
+      "path": "Pediatric Acute Lymphoblastic Leukemia / Workup",
+      "pills": [
+        "pediatric ALL",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Diagnostic bone marrow aspirate and biopsy: morphology, cytochemistry, and comprehensive multiparameter flow cytometry (B-ALL vs T-ALL)",
+        "Baseline cytogenetics and molecular testing: Karyotype, FISH, RT-PCR/NGS for ETV6::RUNX1, hyperdiploidy (>50), hypodiploidy, KMT2A::AFF1, BCR::ABL1, and Ph-like fusions (CRLF2, ABL-class)",
+        "Diagnostic lumbar puncture with CSF cytology for CNS status (CNS-1, CNS-2, CNS-3) with concurrent first dose of intrathecal methotrexate (IT MTX)",
+        "Baseline organ function, coagulation panel (fibrinogen, antithrombin III before asparaginase), uric acid, and tumor lysis syndrome (TLS) monitoring",
+        "Echocardiogram for baseline left ventricular ejection fraction prior to anthracycline exposure",
+        "Infectious screening (hepatitis B/C, HIV, CMV) and baseline HLA typing of patient and siblings for high-risk allogeneic HCT candidates"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Subtype and Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_risk_strat",
+      "linkId": "pediatric_all_risk_strat",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Subtype and Risk Stratification",
+      "title": "Pediatric ALL: Subtype and Risk Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign lineage, Philadelphia chromosome status, NCI risk group, genetics, and MRD response; the group selects the Standard Risk, High Risk, Ph-positive, T-ALL, or relapsed/refractory pathway.",
+      "path": "Pediatric Acute Lymphoblastic Leukemia / Subtype and Risk Stratification",
+      "pills": [
+        "pediatric ALL",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "B-ALL Standard Risk: NCI SR (age 1-9.99 years and WBC below 50,000/uL) with favorable genetics (ETV6::RUNX1, hyperdiploidy above 50 chromosomes) or no unfavorable cytogenetics, and end-induction MRD below 0.01%.",
+        "B-ALL High Risk: NCI HR (age 10 years or older or WBC 50,000/uL or higher), hypodiploidy, KMT2A rearrangement, or end-induction MRD 0.01% or higher.",
+        "Ph-Positive B-ALL: t(9;22)(q34;q11.2) BCR::ABL1 confirmed by karyotype, FISH, or RT-PCR/NGS; requires continuous TKI from induction onward.",
+        "T-Cell ALL including Early T-Cell Precursor ALL (ETP-ALL): T-lineage by flow cytometry, ETP immunophenotype, intensive T-ALL backbone with high-dose methotrexate and nelarabine.",
+        "Relapsed or Refractory ALL (B-cell or T-cell): primary refractory disease or any relapse after frontline therapy; antigen status (CD19, CD22) determines immunotherapy selection before allogeneic HCT."
+      ],
+      "options": [
+        {
+          "id": "ball_sr",
+          "label": "B-ALL Standard Risk (NCI SR: Age 1-9.99 yrs and WBC <50,000/uL, favorable genetics or no unfavorable cytogenetics)",
+          "sets": {
+            "subtype": "b_all",
+            "risk": "standard"
+          },
+          "pills": [
+            "B-ALL",
+            "standard-risk"
+          ]
+        },
+        {
+          "id": "ball_hr",
+          "label": "B-ALL High Risk (NCI HR: Age >=10 yrs or WBC >=50,000/uL, hypodiploid, KMT2A-rearranged, or end-induction MRD >=0.01%)",
+          "sets": {
+            "subtype": "b_all",
+            "risk": "high"
+          },
+          "pills": [
+            "B-ALL",
+            "high-risk"
+          ]
+        },
+        {
+          "id": "ph_pos",
+          "label": "Ph-Positive B-ALL (t(9;22)(q34;q11.2) BCR::ABL1)",
+          "sets": {
+            "subtype": "b_all",
+            "risk": "ph_positive"
+          },
+          "pills": [
+            "B-ALL",
+            "Ph-positive",
+            "BCR::ABL1"
+          ]
+        },
+        {
+          "id": "tall",
+          "label": "T-Cell ALL (T-ALL) and Early T-Cell Precursor ALL (ETP-ALL)",
+          "sets": {
+            "subtype": "t_all"
+          },
+          "pills": [
+            "T-ALL",
+            "ETP-ALL"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed or Refractory ALL (B-cell or T-cell)",
+          "sets": {
+            "setting": "relapsed_refractory"
+          },
+          "pills": [
+            "ALL",
+            "relapsed",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ball_sr_tx",
+      "linkId": "pediatric_all_ball_sr_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "B-ALL Standard Risk Treatment",
+      "title": "B-ALL Standard Risk: 3-Drug Induction Then BFM Consolidation and Maintenance",
+      "section": "Treatment",
+      "description": "Three-drug induction without anthracycline for NCI Standard Risk B-ALL with favorable early MRD response, followed by BFM consolidation, interim maintenance, delayed intensification, and prolonged antimetabolite maintenance with CNS-directed intrathecal therapy throughout.",
+      "path": "Pediatric Acute Lymphoblastic Leukemia / B-ALL Standard Risk / Treatment",
+      "pills": [
+        "B-ALL",
+        "standard-risk",
+        "induction"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "3-drug induction: Dexamethasone 6 mg/m2/day divided TID on days 1-28, Vincristine 1.5 mg/m2 IV weekly x 4 doses (capped per institutional policy), Pegaspargase 2500 IU/m2 IV/IM on day 4 or 15 (or Calaspargase pegol 2100 IU/m2), plus intrathecal cytarabine/methotrexate per age-based dosing with CNS status.",
+        "End-induction MRD assessment by flow cytometry or PCR/NGS: if MRD below 0.01%, proceed to Consolidation; if MRD 0.01% or higher, escalate to the High Risk pathway with augmented BFM consolidation.",
+        "Consolidation per Berlin-Frankfurt-Munster (BFM) backbone, then Interim Maintenance (escalating-dose methotrexate without leucovorin rescue plus vincristine and asparaginase), then Delayed Intensification (re-induction plus re-consolidation blocks).",
+        "Maintenance for a total therapy duration of 2-3 years from diagnosis: Daily 6-mercaptopurine 75 mg/m2 PO plus Weekly oral methotrexate 20 mg/m2 PO, with periodic vincristine and corticosteroid pulses and continued intrathecal therapy per CNS status; titrate 6-MP/MTX to ANC 500-1500/uL with TPMT/NUDT15-guided dosing where available.",
+        "Supportive care throughout: TLS prophylaxis (hydration, allopurinol or rasburicase), fibrinogen and antithrombin III monitoring on asparaginase with replacement for bleeding or thrombosis, pancreatitis and hepatotoxicity monitoring, dexamethasone-associated hypertension/hyperglycemia and avascular necrosis surveillance.",
+        "Surveillance after completion: CBC with differential and marrow plus MRD assessment on suspicion of relapse; long-term follow-up for late effects (growth, neurocognitive, cardiometabolic, second neoplasms).",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "3-Drug Induction -> BFM Consolidation -> Maintenance (6-MP + MTX)",
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
+    },
+    {
+      "id": "n_ball_hr_tx",
+      "linkId": "pediatric_all_ball_hr_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "B-ALL High Risk Treatment",
+      "title": "B-ALL High Risk: 4-Drug Induction Then Augmented BFM With Blinatumomab and HCT",
+      "section": "Treatment",
+      "description": "Four-drug anthracycline-containing induction with augmented BFM consolidation for NCI High Risk or genetically high-risk B-ALL; persistent MRD triggers consolidative blinatumomab immunotherapy (COG AALL1331) followed by allogeneic HCT or continued augmented chemotherapy.",
+      "path": "Pediatric Acute Lymphoblastic Leukemia / B-ALL High Risk / Treatment",
+      "pills": [
+        "B-ALL",
+        "high-risk",
+        "induction"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "4-drug induction: Dexamethasone 6 mg/m2/day divided TID on days 1-28 plus Vincristine 1.5 mg/m2 IV weekly x 4 plus Pegaspargase 2500 IU/m2 (or Calaspargase pegol 2100 IU/m2) plus Daunorubicin 25-30 mg/m2 IV weekly x 4 doses, with age-based intrathecal methotrexate per CNS status.",
+        "Augmented BFM consolidation with additional vincristine, asparaginase, and anthracycline exposure relative to the Standard Risk backbone; reassess marrow MRD after induction and again after consolidation.",
+        "If persistent MRD 0.01% or higher after consolidation: Blinatumomab 15 mcg/m2/day by continuous IV infusion x 28 days per cycle (COG AALL1331) as consolidative immunotherapy; hospitalize for the first days of cycle 1, monitor for cytokine release syndrome and neurotoxicity including seizures, and give dexamethasone premedication per labeling.",
+        "Post-blinatumomab disposition: Allogeneic HCT from matched sibling or unrelated donor for persistent MRD-positive or very high-risk genetics (hypodiploidy, KMT2A rearrangement in infants), or continued augmented chemotherapy with maintenance for MRD-negative responders without HCT indications.",
+        "Cardiac surveillance with serial echocardiograms given cumulative anthracycline exposure; consider dexrazoxane per institutional policy for high cumulative doses.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "4-Drug Induction -> Augmented BFM Consolidation +/- Blinatumomab -> HCT",
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
+    },
+    {
+      "id": "n_ph_pos_tx",
+      "linkId": "pediatric_all_ph_pos_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Ph-Positive B-ALL Treatment",
+      "title": "Ph-Positive B-ALL: Multiagent Chemotherapy Plus Continuous TKI Then HCT",
+      "section": "Treatment",
+      "description": "Multiagent chemotherapy backbone with continuous tyrosine kinase inhibition from induction (COG AALL0031/EsPhALL), consolidation, then allogeneic HCT from matched sibling or unrelated donor, or continued chemotherapy plus TKI for MRD-negative patients without HCT indications.",
+      "path": "Pediatric Acute Lymphoblastic Leukemia / Ph-Positive B-ALL / Treatment",
+      "pills": [
+        "B-ALL",
+        "Ph-positive",
+        "BCR::ABL1",
+        "TKI"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "Multiagent chemotherapy backbone plus continuous Tyrosine Kinase Inhibitor initiated during induction (COG AALL0031/EsPhALL): Dasatinib 60 mg/m2 PO daily (preferred for CNS penetration) or Imatinib 340 mg/m2 PO daily; continue TKI without interruption through consolidation and maintenance unless toxicity requires a hold.",
+        "Monitor BCR::ABL1 transcript by RT-PCR plus flow MRD at end of induction and end of consolidation; test ABL1 kinase domain mutations (including T315I) for suboptimal response, rising transcript, or relapse.",
+        "Consolidation with intensive multiagent blocks and age-based intrathecal therapy per CNS status, followed by Allogeneic HCT from matched sibling or unrelated donor for eligible patients.",
+        "For MRD-negative patients without high-risk features or HCT indications: continued chemotherapy plus TKI followed by prolonged TKI-containing maintenance with molecular monitoring; proceed to HCT on molecular relapse or persistent MRD.",
+        "TKI toxicity monitoring: myelosuppression, fluid retention and pleural effusion (dasatinib), hepatotoxicity, QTc prolongation, and growth effects with chronic pediatric exposure.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Multiagent Chemotherapy + Continuous Dasatinib 60 mg/m2 PO daily -> HCT",
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
+    },
+    {
+      "id": "n_tall_tx",
+      "linkId": "pediatric_all_tall_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "T-ALL Treatment",
+      "title": "T-ALL and ETP-ALL: Intensive Induction Plus High-Dose MTX and Nelarabine",
+      "section": "Treatment",
+      "description": "Intensive 4-drug induction with BFM-style consolidation including high-dose methotrexate with leucovorin rescue, nelarabine for intermediate and high-risk disease (COG AALL0434/AALL1231), and cranial radiation strictly for CNS-3 or high-risk features.",
+      "path": "Pediatric Acute Lymphoblastic Leukemia / T-ALL / Treatment",
+      "pills": [
+        "T-ALL",
+        "ETP-ALL",
+        "induction"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "c",
+        "e"
+      ],
+      "bullets": [
+        "Intensive 4-drug induction: Prednisone 60 mg/m2/day on days 1-28 (or dexamethasone per protocol) plus Vincristine 1.5 mg/m2 IV weekly x 4 plus Pegaspargase 2500 IU/m2 (or Calaspargase pegol 2100 IU/m2) plus Daunorubicin 25-30 mg/m2 IV weekly x 4, with age-based intrathecal therapy per CNS status.",
+        "Consolidation with High-Dose Methotrexate 5 g/m2 IV with leucovorin rescue and hyperhydration plus urine alkalinization; monitor methotrexate levels, creatinine, and delayed clearance, with glucarpidase available for toxic levels with renal dysfunction.",
+        "Nelarabine 650 mg/m2/day IV on days 1-5 per COG AALL0434/AALL1231 in consolidation for intermediate and high-risk T-ALL; monitor for peripheral neuropathy, central neurotoxicity, and seizures, and withhold for grade 2 or higher neurotoxicity.",
+        "Cranial radiation therapy strictly for CNS-3 disease or defined high-risk features (overt CNS leukemia, high presenting WBC with T-ALL risk factors per protocol); omit prophylactic cranial radiation in CNS-1/CNS-2 responders managed with intensive intrathecal and systemic CNS-directed therapy.",
+        "ETP-ALL: treat on the intensive T-ALL backbone with early MRD reassessment; escalate persistent MRD-positive disease toward allogeneic HCT and consider clinical trial enrollment given historically inferior early response.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "4-Drug Induction -> High-Dose MTX + Nelarabine (COG AALL0434) + Maintenance",
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
+    },
+    {
+      "id": "n_relapsed_tx",
+      "linkId": "pediatric_all_relapsed_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Relapsed or Refractory Treatment",
+      "title": "Relapsed or Refractory ALL: Immunotherapy and CAR T-Cell Therapy Then HCT",
+      "section": "Treatment",
+      "description": "Antigen-directed immunotherapy and cellular therapy selected by CD19/CD22 status: tisagenlecleucel CAR T-cell therapy (ELIANA) or blinatumomab for CD19-positive B-ALL, inotuzumab ozogamicin for CD22-positive B-ALL, with re-induction chemotherapy bridging to allogeneic HCT.",
+      "path": "Pediatric Acute Lymphoblastic Leukemia / Relapsed or Refractory / Treatment",
+      "pills": [
+        "ALL",
+        "relapsed",
+        "refractory",
+        "CAR-T"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "f"
+      ],
+      "bullets": [
+        "Confirm lineage and antigen status at relapse (CD19, CD22, CD20 by flow cytometry) plus repeat cytogenetics, ABL1 kinase domain testing for Ph-positive disease, and CNS restaging with lumbar puncture; select immunotherapy by antigen expression.",
+        "CD19-positive B-ALL: Tisagenlecleucel CAR T-cell therapy 0.2 to 5 x 10^6 chimeric antigen receptor-positive viable T cells/kg IV as a single infusion (ELIANA trial) at a REMS-certified center, or Blinatumomab (bispecific T-cell engager, BiTE) 15 mcg/m2/day by continuous IV infusion with cytokine release syndrome and neurotoxicity monitoring.",
+        "CD22-positive B-ALL: Inotuzumab ozogamicin (anti-CD22 calicheamicin conjugate) with hepatic monitoring for sinusoidal obstruction syndrome (veno-occlusive disease), particularly when bridging to HCT; avoid dual hepatotoxic conditioning combinations per labeling.",
+        "Re-induction chemotherapy as a bridge to cellular therapy or to Allogeneic Hematopoietic Cell Transplantation (HCT) for chemotherapy-sensitive relapse, T-ALL relapse, or antigen-negative disease; enroll in a clinical trial wherever available.",
+        "Consolidate second remission with Allogeneic HCT from the best available donor for eligible patients; monitor for graft-versus-host disease, infection, and late effects after transplant.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Tisagenlecleucel CAR T-cell Therapy or Blinatumomab / Inotuzumab -> Allogeneic HCT",
+      "protocolRefs": [
+        "ped-all-induction"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_risk",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_risk_strat",
+      "toNodeId": "n_risk_strat",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_risk_ball_sr",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_ball_sr_tx",
+      "toNodeId": "n_ball_sr_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "ball_sr",
+      "fromOptions": [
+        "ball_sr"
+      ]
+    },
+    {
+      "id": "l_risk_ball_hr",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_ball_hr_tx",
+      "toNodeId": "n_ball_hr_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "ball_hr",
+      "fromOptions": [
+        "ball_hr"
+      ]
+    },
+    {
+      "id": "l_risk_ph_pos",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_ph_pos_tx",
+      "toNodeId": "n_ph_pos_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "ph_pos",
+      "fromOptions": [
+        "ph_pos"
+      ]
+    },
+    {
+      "id": "l_risk_tall",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_tall_tx",
+      "toNodeId": "n_tall_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "tall",
+      "fromOptions": [
+        "tall"
+      ]
+    },
+    {
+      "id": "l_risk_relapsed",
+      "from": "n_risk_strat",
+      "fromNodeId": "n_risk_strat",
+      "to": "n_relapsed_tx",
+      "toNodeId": "n_relapsed_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "relapsed",
+      "fromOptions": [
+        "relapsed"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "ped-all-induction"
+  ]
+}

@@ -1,0 +1,376 @@
+{
+  "guideline": "small_bowel",
+  "id": "small_bowel",
+  "title": "Small Bowel Adenocarcinoma",
+  "category": "Gastrointestinal Oncology",
+  "version": "1.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "small_bowel_adenocarcinoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for Small Bowel Adenocarcinoma. Covers complete clinical algorithm: Diagnostic Workup (upper endoscopy with push or balloon-assisted enteroscopy or video capsule endoscopy after confirming patency, multiphase CT/MR enterography plus CT chest/abdomen/pelvis, histopathologic confirmation with primary site duodenum/jejunum/ileum, universal MMR/MSI testing with Lynch syndrome assessment, comprehensive molecular profiling for KRAS/NRAS/BRAF/HER2/NTRK, baseline CBC/CMP plus CEA and CA 19-9) -> Stage and Biomarker Stratification (localized resectable Stage I-III vs advanced/metastatic dMMR/MSI-H vs advanced/metastatic pMMR/MSS vs subsequent-line/relapsed) -> Resectable complete surgical resection with regional mesenteric lymphadenectomy followed by adjuvant mFOLFOX6/CAPOX for Stage III or high-risk Stage II (BALLAD trial) -> dMMR/MSI-H first-line pembrolizumab or nivolumab with or without ipilimumab (KEYNOTE-158/KEYNOTE-177, CheckMate-142) -> pMMR/MSS first-line mFOLFOX6 or CAPOX with or without bevacizumab, FOLFOXIRI for select fit patients -> Subsequent-line FOLFIRI with or without bevacizumab, trifluridine/tipiracil (TAS-102) with or without bevacizumab, or biomarker-targeted therapy (larotrectinib/entrectinib for NTRK fusions, encorafenib plus cetuximab for BRAF V600E, trastuzumab plus tucatinib for HER2-amplified disease). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Small Bowel Adenocarcinoma Version 1.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Video capsule endoscopy requires confirmed luminal patency (patency capsule or cross-sectional imaging) to avoid capsule retention at an obstructing small bowel tumor; push enteroscopy, single/double-balloon-assisted enteroscopy, and EGD cover duodenal and proximal jejunal lesions.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Universal MMR/MSI testing by IHC for MLH1, MSH2, MSH6, and PMS2 (with MSI PCR or NGS confirmation where indicated). Small bowel adenocarcinoma has a high dMMR/MSI-H rate (~15-20%) with strong Lynch syndrome association; refer dMMR cases for genetic counseling and germline testing.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Adjuvant chemotherapy for resected Stage III (node-positive) or high-risk Stage II (T4, perforation, obstruction, close/positive margins, inadequate nodal sampling) small bowel adenocarcinoma: mFOLFOX6 or CAPOX for 6 months per the BALLAD trial paradigm; duodenal primaries resected by pancreaticoduodenectomy (Whipple), jejunal/ileal primaries by segmental small bowel resection with wide regional mesenteric lymphadenectomy.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Pembrolizumab 200 mg IV every 3 weeks or 400 mg IV every 6 weeks (KEYNOTE-158/KEYNOTE-177 paradigm) or nivolumab 240 mg IV every 2 weeks (or 480 mg every 4 weeks) with or without ipilimumab 1 mg/kg every 6 weeks (CheckMate-142 paradigm) produces exceptional durable responses in dMMR/MSI-H small bowel tumors; monitor for immune-related adverse events.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "First-line pMMR/MSS metastatic therapy uses an oxaliplatin-based doublet: mFOLFOX6 (oxaliplatin 85 mg/m2, leucovorin 400 mg/m2, 5-FU 400 mg/m2 bolus plus 2400 mg/m2 46h infusion every 14 days) or CAPOX (capecitabine 1000 mg/m2 BID days 1-14 plus oxaliplatin 130 mg/m2 day 1 every 21 days) with or without bevacizumab (5 mg/kg q14d with FOLFOX or 7.5 mg/kg q21d with CAPOX); FOLFOXIRI is reserved for select fit patients.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Subsequent-line therapy: FOLFIRI (irinotecan 180 mg/m2, leucovorin, 5-FU bolus/infusion every 14 days) with or without bevacizumab; trifluridine/tipiracil (TAS-102) 35 mg/m2 BID days 1-5 and 8-12 every 28 days with or without bevacizumab; biomarker-targeted options include larotrectinib/entrectinib for NTRK fusions, encorafenib plus cetuximab for BRAF V600E, and trastuzumab plus tucatinib for HER2-amplified disease.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "small_bowel_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Small Bowel Adenocarcinoma: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before stage and biomarker stratification. Confirm endoscopic and imaging assessment, histology with primary site, universal MMR/MSI status, comprehensive molecular profile, and baseline labs with tumor markers.",
+      "path": "Small Bowel Adenocarcinoma / Workup",
+      "pills": [
+        "small bowel",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Upper endoscopy (EGD) with push enteroscopy, balloon-assisted enteroscopy, or video capsule endoscopy (after confirming patency)",
+        "Cross-sectional imaging: multiphase contrast-enhanced CT enterography or MR enterography, plus CT chest/abdomen/pelvis",
+        "Histopathologic confirmation of adenocarcinoma with primary anatomic site: duodenum (55%), jejunum (30%), or ileum (15%)",
+        "Mandatory universal MMR / MSI testing (IHC for MLH1, MSH2, MSH6, PMS2; high ~15-20% Lynch syndrome association)",
+        "Comprehensive molecular testing: KRAS, NRAS, BRAF V600E, HER2 amplification, and NTRK gene fusions",
+        "Baseline laboratory assessment: CBC, CMP, and serum tumor markers (CEA, CA 19-9)"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Stage and Biomarker Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage_biomarker",
+      "linkId": "small_bowel_stage_biomarker",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Stage and Biomarker Stratification",
+      "title": "Small Bowel Adenocarcinoma: Stage and Biomarker Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign resectability (Stage I-III vs metastatic) and MMR/MSI status plus treatment line; the group selects the surgical-adjuvant, dMMR immunotherapy, pMMR chemotherapy, or subsequent-line pathway.",
+      "path": "Small Bowel Adenocarcinoma / Stage and Biomarker Stratification",
+      "pills": [
+        "small bowel",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Localized / resectable disease: Stage I-III (T1-T4, N0-N2, M0) amenable to complete surgical resection with negative margins and regional lymphadenectomy.",
+        "Advanced / metastatic dMMR / MSI-H disease: unresectable or M1 with mismatch repair deficiency or microsatellite instability-high status.",
+        "Advanced / metastatic pMMR / MSS disease: unresectable or M1 with mismatch repair proficient or microsatellite stable status.",
+        "Subsequent-line / relapsed disease: progression after first-line systemic therapy or relapse after prior definitive treatment."
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Localized / Resectable Small Bowel Adenocarcinoma (Stage I-III: T1-T4, N0-N2, M0)",
+          "sets": {
+            "stage": "resectable"
+          },
+          "pills": [
+            "small bowel",
+            "resectable",
+            "Stage I-III"
+          ]
+        },
+        {
+          "id": "dmmr",
+          "label": "Advanced / Metastatic dMMR / MSI-H Small Bowel Adenocarcinoma",
+          "sets": {
+            "stage": "metastatic",
+            "biomarker": "dmmr_msi_h"
+          },
+          "pills": [
+            "small bowel",
+            "metastatic",
+            "dMMR",
+            "MSI-H"
+          ]
+        },
+        {
+          "id": "pmmr",
+          "label": "Advanced / Metastatic pMMR / MSS Small Bowel Adenocarcinoma",
+          "sets": {
+            "stage": "metastatic",
+            "biomarker": "pmmr_mss"
+          },
+          "pills": [
+            "small bowel",
+            "metastatic",
+            "pMMR",
+            "MSS"
+          ]
+        },
+        {
+          "id": "subsequent",
+          "label": "Subsequent-Line / Relapsed Small Bowel Adenocarcinoma",
+          "sets": {
+            "setting": "subsequent_line"
+          },
+          "pills": [
+            "small bowel",
+            "subsequent-line",
+            "relapsed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_resectable_tx",
+      "linkId": "small_bowel_resectable_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Resectable Treatment",
+      "title": "Stage I-III Resectable: Surgery Then Adjuvant mFOLFOX6/CAPOX",
+      "section": "Treatment",
+      "description": "Complete surgical resection with negative margins and regional mesenteric lymphadenectomy followed by adjuvant oxaliplatin-based chemotherapy for Stage III or high-risk Stage II disease.",
+      "path": "Small Bowel Adenocarcinoma / Resectable / Treatment",
+      "pills": [
+        "small bowel",
+        "resectable",
+        "Stage I-III",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Complete surgical resection with negative margins and regional mesenteric lymphadenectomy: Pancreaticoduodenectomy / Whipple for duodenal primaries; segmental small bowel resection with wide lymphadenectomy for jejunum/ileum primaries.",
+        "Adjuvant chemotherapy for Stage III (node-positive) or high-risk Stage II (T4, perforation, obstruction): 6 months of mFOLFOX6 (Oxaliplatin 85 mg/m2 plus Leucovorin plus 5-FU bolus/infusion).",
+        "Alternative adjuvant option: CAPOX (Capecitabine 1000 mg/m2 BID days 1-14 plus Oxaliplatin 130 mg/m2 day 1 every 21 days; BALLAD trial paradigm).",
+        "Surveillance after definitive therapy: history, physical examination, CBC/CMP, CEA and CA 19-9, plus cross-sectional imaging per NCCN schedule; offer clinical trial enrollment.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Whipple or Segmental Small Bowel Resection -> Adjuvant mFOLFOX6/CAPOX x 6 months",
+      "protocolRefs": [
+        "small-bowel-folfox"
+      ]
+    },
+    {
+      "id": "n_dmmr_metastatic_tx",
+      "linkId": "small_bowel_dmmr_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "dMMR/MSI-H Metastatic Treatment",
+      "title": "dMMR/MSI-H Metastatic: Pembrolizumab or Nivolumab Immunotherapy",
+      "section": "Treatment",
+      "description": "First-line systemic immunotherapy for advanced or metastatic dMMR/MSI-H small bowel adenocarcinoma with exceptional durable objective response rates.",
+      "path": "Small Bowel Adenocarcinoma / Metastatic dMMR-MSI-H / Systemic Therapy",
+      "pills": [
+        "small bowel",
+        "metastatic",
+        "dMMR",
+        "MSI-H",
+        "immunotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "First-line systemic immunotherapy: Pembrolizumab 200 mg IV every 3 weeks or 400 mg IV every 6 weeks (KEYNOTE-158 / KEYNOTE-177).",
+        "Alternative: Nivolumab 240 mg every 2 weeks (or 480 mg every 4 weeks) with or without Ipilimumab 1 mg/kg every 6 weeks (CheckMate-142).",
+        "Exceptional durable objective response rates in dMMR small bowel tumors; continue until disease progression or unacceptable toxicity with immune-related adverse event monitoring.",
+        "Confirm dMMR/MSI-H status, refer for Lynch syndrome genetic counseling, and offer clinical trial enrollment.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Pembrolizumab 200 mg IV q3w (or Nivolumab +/- Ipilimumab) Immunotherapy",
+      "protocolRefs": [
+        "gi-crc-msi-pembro"
+      ]
+    },
+    {
+      "id": "n_pmmr_metastatic_tx",
+      "linkId": "small_bowel_pmmr_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "pMMR/MSS Metastatic Treatment",
+      "title": "pMMR/MSS Metastatic: mFOLFOX6 or CAPOX With or Without Bevacizumab",
+      "section": "Treatment",
+      "description": "First-line oxaliplatin-based chemotherapy doublet with or without bevacizumab for advanced or metastatic pMMR/MSS small bowel adenocarcinoma.",
+      "path": "Small Bowel Adenocarcinoma / Metastatic pMMR-MSS / Systemic Therapy",
+      "pills": [
+        "small bowel",
+        "metastatic",
+        "pMMR",
+        "MSS",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "First-line oxaliplatin-based chemotherapy doublet: mFOLFOX6 (Oxaliplatin 85 mg/m2, Leucovorin 400 mg/m2, 5-FU 400 mg/m2 bolus plus 2400 mg/m2 46h continuous infusion every 14 days).",
+        "Alternative doublet: CAPOX (Capecitabine 1000 mg/m2 BID days 1-14 plus Oxaliplatin 130 mg/m2 day 1 every 21 days) with or without Bevacizumab 5 mg/kg IV every 14 days (or 7.5 mg/kg every 21 days).",
+        "Bevacizumab may be added to mFOLFOX6 (5 mg/kg IV every 14 days); alternative: FOLFOXIRI for select fit patients.",
+        "Restage with cross-sectional imaging every 8-12 weeks on systemic therapy; offer clinical trial enrollment at every line.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "mFOLFOX6 or CAPOX +/- Bevacizumab First-Line Doublet",
+      "protocolRefs": [
+        "small-bowel-folfox"
+      ]
+    },
+    {
+      "id": "n_subsequent_tx",
+      "linkId": "small_bowel_subsequent_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Subsequent-Line Treatment",
+      "title": "Subsequent-Line: FOLFIRI, TAS-102, or Biomarker-Targeted Therapy",
+      "section": "Treatment",
+      "description": "Second-line and targeted subsequent therapy selected by prior exposure and biomarker status: FOLFIRI, trifluridine/tipiracil, or NTRK/BRAF/HER2-directed options.",
+      "path": "Small Bowel Adenocarcinoma / Subsequent-Line / Systemic Therapy",
+      "pills": [
+        "small bowel",
+        "subsequent-line",
+        "relapsed",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "FOLFIRI (Irinotecan 180 mg/m2, Leucovorin, 5-FU bolus/infusion every 14 days) with or without Bevacizumab.",
+        "Trifluridine/Tipiracil (TAS-102 35 mg/m2 BID days 1-5 and 8-12 every 28 days) with or without Bevacizumab.",
+        "Biomarker-targeted options: Larotrectinib/Entrectinib for NTRK fusions; Encorafenib plus Cetuximab for BRAF V600E; Trastuzumab plus Tucatinib for HER2-amplified disease.",
+        "Repeat molecular profiling at progression to confirm actionable targets; offer clinical trial enrollment at every line.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "FOLFIRI +/- Bevacizumab or TAS-102 or Biomarker-Targeted Therapy (NTRK/BRAF/HER2)",
+      "protocolRefs": [
+        "folfiri"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage_biomarker",
+      "toNodeId": "n_stage_biomarker",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_resectable",
+      "from": "n_stage_biomarker",
+      "fromNodeId": "n_stage_biomarker",
+      "to": "n_resectable_tx",
+      "toNodeId": "n_resectable_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "resectable",
+      "fromOptions": [
+        "resectable"
+      ]
+    },
+    {
+      "id": "l_stage_dmmr",
+      "from": "n_stage_biomarker",
+      "fromNodeId": "n_stage_biomarker",
+      "to": "n_dmmr_metastatic_tx",
+      "toNodeId": "n_dmmr_metastatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "dmmr",
+      "fromOptions": [
+        "dmmr"
+      ]
+    },
+    {
+      "id": "l_stage_pmmr",
+      "from": "n_stage_biomarker",
+      "fromNodeId": "n_stage_biomarker",
+      "to": "n_pmmr_metastatic_tx",
+      "toNodeId": "n_pmmr_metastatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "pmmr",
+      "fromOptions": [
+        "pmmr"
+      ]
+    },
+    {
+      "id": "l_stage_subsequent",
+      "from": "n_stage_biomarker",
+      "fromNodeId": "n_stage_biomarker",
+      "to": "n_subsequent_tx",
+      "toNodeId": "n_subsequent_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "subsequent",
+      "fromOptions": [
+        "subsequent"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "folfiri",
+    "gi-crc-msi-pembro",
+    "small-bowel-folfox"
+  ]
+}

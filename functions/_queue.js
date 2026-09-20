@@ -61,7 +61,7 @@ export async function verifyToken(token, secret, curVer, nowMs) {
     const ok = await crypto.subtle.verify("HMAC", k, unb64u(parts[1]), enc.encode(body + "." + curVer));
     if (!ok) return { ok: false, reason: "bad_signature" };          // wrong secret OR revoked (ver bumped)
     if (typeof nowMs === "number" && exp < nowMs) return { ok: false, reason: "expired", id };
-    return { ok: true, id };
+    return { ok: true, id, exp };
   } catch (e) { return { ok: false, reason: "malformed" }; }
 }
 

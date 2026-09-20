@@ -17,16 +17,49 @@
  *   latest(tenantId, resourceType, id)               -> record | null       the highest version
  *   history(tenantId, resourceType, id)              -> record[]            every version, ascending
  *   byPatient(tenantId, resourceType, patientId)     -> record[]            latest version per id
- *   latestByType(tenantId, resourceType, limit)      -> record[]            latest per id, a roster
+ *   latestByType(tenantId, resourceType, limit, opts) -> record[]           latest per id, a roster;
+ *                                                                           opts.newest: most recently written first
+ *   latestByStatus(tenantId, resourceType, statuses, limit) -> record[]     OPTIONAL, latest per id
+ *                                                                           whose body status is one of statuses,
+ *                                                                           oldest first. The outbox drain reads waiting
+ *                                                                           events through it instead of the newest N of
+ *                                                                           everything; an implementation without it gets
+ *                                                                           the old newest-N scan (see outbox.js).
+ *   pageByType(tenantId, resourceType, {afterSeq, limit, statuses, newest, beforeSeq}) -> {records, next}
+ *                                                                           OPTIONAL, latest per id,
+ *                                                                           OLDEST first, one page after the afterSeq
+ *                                                                           cursor; statuses (optional) keeps only ids whose
+ *                                                                           latest body status is one of them; next is the
+ *                                                                           cursor for the following page, null on the last.
+ *                                                                           newest: true reverses it (newest first, beforeSeq
+ *                                                                           the cursor) so a period read can stop early.
+ *                                                                           service.js listByStatus/listAll/listSince page
+ *                                                                           through it.
+ *   pageByIdPrefix(tenantId, resourceType, prefix, {limit, before}) -> {records, next}   OPTIONAL, latest per id
+ *                                                                           whose id starts with prefix, newest first,
+ *                                                                           one page; next is the cursor for the page after
+ *   latestByIds(tenantId, resourceType, ids)         -> record[]            OPTIONAL, the latest version of each
+ *                                                                           NAMED id, in one read; ids the store does
+ *                                                                           not hold are absent. service.js getMany
+ *                                                                           falls back to one latest() per id without
+ *                                                                           it, which is a round trip per id.
  *   patientsByIdentifier(tenantId, keys)             -> Patient[]           an INDEX SEEK, not a scan
  *   append(tenantId, records, ctx)                   -> {seq}               ATOMIC; see below
  *   changes(tenantId, sinceSeq, limit)               -> {records, cursor}   ascending by seq
  *   recall(tenantId, idempotencyKey)                 -> {resourceType,id,version} | null
  *   auditOnly(tenantId, event)                       -> void                a read's audit row
  *
+ * Every audit row either write produces is CHAINED (audit-chain.js): a link row with the previous
+ * link's hash lands in the same atomic write, and a lost race for the next link number retries the
+ * whole write rather than forking the chain. auditChainHead/auditChainRows read it back (optional).
+ *
  * append() is the only write and it is append-only: it inserts new versions and never updates or
  * deletes. It MUST be atomic across the records, the idempotency key and the audit event it is
- * given, and it MUST throw VersionConflictError if any (resourceType, id, version) already exists
+ * given - and across the optional ctx.idempotency ([{key, resourceType, id, version}]) and
+ * ctx.audits ([event]) lists, which let one append carry several logical writes (see staged.js,
+ * the consultation's unit of work) with every key and every audit row they would have had alone.
+ * ctx.aliases ([{hash, resourceType, id}]) adds published-id aliases beyond the automatic ones, so an
+ * opaque id handed to another system (a webhook notification) resolves on the FHIR door - and it MUST throw VersionConflictError if any (resourceType, id, version) already exists
  * for that tenant. That last rule is the concurrency control for the whole system: two clients
  * that both derive version N+1 from version N cannot both land, whatever the network did.
  *
@@ -36,6 +69,7 @@
 
 import { patientIdentifierKeys } from "./identity-key.js";
 import { fhirId, hashedId } from "./fhir-id.js";
+import { nextLinks, withChainLock } from "./audit-chain.js";
 
 /**
  * PURE. The published hashed form of a record id, or null when the id is published verbatim.
@@ -122,6 +156,9 @@ function clone(v) {
  * limit is real and is stated in the audit rather than papered over here.
  */
 const MAX_ROSTER = 1000;
+/* ponytail: the security review reads at most this many audit rows per request; past it the oldest
+ * baseline rows drop and the report says so. A paged read is the upgrade when a hospital outgrows it. */
+const AUDIT_READ_MAX = 20000;
 const DEFAULT_ROSTER = 100;
 
 function rosterLimit(limit) {
@@ -163,6 +200,52 @@ class MemoryRepository {
      * `${tenant}|${idHash}` -> {resourceType, id}. Only non-conforming ids appear here. */
     this._alias = new Map();
     this.audit = [];            // audit events, in order, for inspection
+    /* The tamper-evidence chain, mirroring wardsynq_audit_chain. Each link holds the audit event
+     * OBJECT it covers, so a test that edits or splices this.audit is detected exactly as a database
+     * UPDATE or DELETE would be. */
+    this._chain = [];
+  }
+
+  _chainHead(tenantId) {
+    for (let i = this._chain.length - 1; i >= 0; i--) {
+      const l = this._chain[i];
+      if (l.tenantId === tenantId) return { seq: l.chainSeq, hash: l.rowHash };
+    }
+    return null;
+  }
+
+  /**
+   * Links `events` onto the tenant's chain, then runs `commit` (synchronous: every check and write the
+   * append makes; a throw leaves nothing) and pushes the events and links. The hashing awaits, so the
+   * chain lock is what stops a second write extending the same head in between. In one process that is
+   * the whole story; D1 adds the primary key for writers the lock cannot see.
+   */
+  _withChain(tenantId, events, commit) {
+    return withChainLock(this, tenantId, async () => {
+      const head = this._chainHead(tenantId);
+      let boundary = null;
+      if (!head) {
+        const mine = this.audit.map((e, i) => [e, i]).filter(([e]) => e.tenantId === tenantId);
+        const last = mine[mine.length - 1];
+        boundary = last ? (last[0].id || `mem-${last[1]}`) : null;
+      }
+      const links = await nextLinks(head, events.map((e, i) => ({ auditId: e.id || `mem-${this.audit.length + i}`, row: e })), boundary);
+      const out = commit();
+      events.forEach((e, i) => { this.audit.push(e); this._chain.push({ tenantId, event: e, ...links[i] }); });
+      return out;
+    });
+  }
+
+  /** OPTIONAL (audit-chain.js): the newest link, or null before the first chained row. */
+  async auditChainHead(tenantId) {
+    return this._chainHead(tenantId);
+  }
+
+  /** OPTIONAL (audit-chain.js): links fromSeq..toSeq with the audit row each covers (null if gone). */
+  async auditChainRows(tenantId, fromSeq, toSeq) {
+    const present = new Set(this.audit);
+    return this._chain.filter((l) => l.tenantId === tenantId && l.chainSeq >= fromSeq && l.chainSeq <= toSeq)
+      .map((l) => ({ chainSeq: l.chainSeq, auditId: l.auditId, prevHash: l.prevHash, rowHash: l.rowHash, legacyBoundary: l.legacyBoundary, row: present.has(l.event) ? clone(l.event) : null }));
   }
 
   _versionsOf(tenantId, resourceType, id) {
@@ -187,14 +270,106 @@ class MemoryRepository {
     return [...byId.values()].map((r) => clone(r.body));
   }
 
-  async latestByType(tenantId, resourceType, limit) {
+  async latestByType(tenantId, resourceType, limit, opts) {
     const max = rosterLimit(limit);
     const byId = new Map();
     for (const r of this._rows) {
       if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
       byId.set(r.id, r);
     }
-    return [...byId.values()].slice(0, max).map((r) => clone(r.body));
+    const rows = [...byId.values()];
+    if (opts && opts.newest) rows.sort((a, b) => b.seq - a.seq);
+    return rows.slice(0, max).map((r) => clone(r.body));
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): the latest version of each of these ids, in ONE read.
+   *
+   * R7-2. The ward list used to ask for a hundred patients one at a time because the port had no way
+   * to ask for a known set: the only reads were "this one id" and "a roster of the whole type". A
+   * roster is the wrong shape for a ward (it answers with whoever was written most recently, which is
+   * not who is in the beds) and one-at-a-time is a round trip per bed. Ids the store does not hold are
+   * simply absent from the answer, exactly as a missing id is null from latest().
+   */
+  async latestByIds(tenantId, resourceType, ids) {
+    const want = new Set((ids || []).map((x) => String(x)).filter(Boolean));
+    if (!want.size) return [];
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType || !want.has(r.id)) continue;
+      byId.set(r.id, r);                       // rows are in seq order, so the last wins
+    }
+    return [...byId.values()].map((r) => clone(r.body));
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): one page, oldest first, of the latest version of each id
+   * written after `afterSeq`, optionally only those whose status is one of `statuses`.
+   *
+   * The cursor is the seq of each id's LATEST version, so a record amended between two pages moves
+   * forward and is met again on a later page (the reader keeps the last copy by id); it can never move
+   * back behind the cursor, so paging to the end misses nothing.
+   *
+   * R5-3: `newest: true` reverses it - newest first, `beforeSeq` the cursor - so a period-scoped read
+   * can start at the newest record and stop when it has walked past its window (service.listSince).
+   * The amendment rule reverses with it: a record amended DURING a newest-first read moves forward,
+   * past a cursor already handed out, so that read can miss it. A month report is read in one pass of
+   * a few pages and that race is the price of not reading the whole type; a read that must not miss a
+   * concurrent amendment (a ledger, a count that must balance) stays on the oldest-first cursor.
+   */
+  async pageByType(tenantId, resourceType, opts) {
+    const max = rosterLimit(opts && opts.limit), desc = !!(opts && opts.newest);
+    const after = Number(opts && opts.afterSeq) || 0;
+    const before = Number(opts && opts.beforeSeq) || Infinity;
+    const want = opts && Array.isArray(opts.statuses) ? new Set(opts.statuses.filter((s) => typeof s === "string")) : null;
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
+      byId.set(r.id, r);
+    }
+    const rows = [...byId.values()]
+      .filter((r) => (desc ? r.seq < before : r.seq > after) && (!want || want.has(r.body && r.body.status)))
+      .sort((a, b) => (desc ? b.seq - a.seq : a.seq - b.seq));
+    return { records: rows.slice(0, max).map((r) => clone(r.body)), next: rows.length > max ? rows[max - 1].seq : null };
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): one page of the latest version of each id that starts
+   * with `prefix`, most recently written first. `before` is the cursor a previous page handed back.
+   * A per-owner log whose ids carry the owner (a webhook's delivery attempts) is read through here
+   * as an index range, instead of the hospital's newest N rows filtered afterwards.
+   */
+  async pageByIdPrefix(tenantId, resourceType, prefix, opts) {
+    const max = rosterLimit(opts && opts.limit), before = Number(opts && opts.before) || Infinity, pre = String(prefix || "");
+    if (!pre) return { records: [], next: null };
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType || !r.id.startsWith(pre)) continue;
+      byId.set(r.id, r);
+    }
+    const rows = [...byId.values()].filter((r) => r.seq < before).sort((a, b) => b.seq - a.seq);
+    return { records: rows.slice(0, max).map((r) => clone(r.body)), next: rows.length > max ? rows[max - 1].seq : null };
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): the latest version of each id whose body status is one
+   * of `statuses`, oldest first, bounded like every other roster read.
+   *
+   * Oldest first is the point. The outbox drain asks for waiting events through here, and the one
+   * that has waited longest must come back first: a newest-first cap is what stranded old pending
+   * events behind settled ones. A caller that needs newer-first already has latestByType.
+   */
+  async latestByStatus(tenantId, resourceType, statuses, limit) {
+    const want = new Set((Array.isArray(statuses) ? statuses : []).filter((s) => typeof s === "string"));
+    const max = rosterLimit(limit);
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
+      byId.set(r.id, r);                     // rows are in seq order, so the last wins
+    }
+    const rows = [...byId.values()].filter((r) => want.has(r.body && r.body.status));
+    rows.sort((a, b) => a.seq - b.seq);
+    return rows.slice(0, max).map((r) => clone(r.body));
   }
 
   /**
@@ -280,6 +455,13 @@ class MemoryRepository {
    */
   async append(tenantId, records, ctx) {
     ctx = ctx || {};
+    const events = [ctx.audit, ...(Array.isArray(ctx.audits) ? ctx.audits : [])].filter(Boolean).map((a) => ({ tenantId, ...clone(a) }));
+    // No audit row, no link: nothing to wait for, and the chain lock is not taken.
+    if (!events.length) return this._appendNow(tenantId, records, ctx);
+    return this._withChain(tenantId, events, () => this._appendNow(tenantId, records, ctx));
+  }
+
+  _appendNow(tenantId, records, ctx) {
     // Atomicity: check every row first, then write every row. Nothing lands if anything conflicts.
     for (const rec of records) {
       const dup = this._rows.find((r) => r.tenantId === tenantId && r.resourceType === rec.resourceType && r.id === rec.id && r.version === rec.version);
@@ -289,6 +471,10 @@ class MemoryRepository {
     }
     if (ctx.idempotencyKey && this._idem.has(`${tenantId}|${ctx.idempotencyKey}`)) {
       throw new VersionConflictError("idempotency key already used", { idempotencyKey: ctx.idempotencyKey });
+    }
+    const extraKeys = Array.isArray(ctx.idempotency) ? ctx.idempotency : [];
+    for (const k of extraKeys) {
+      if (this._idem.has(`${tenantId}|${k.key}`)) throw new VersionConflictError("idempotency key already used", { idempotencyKey: k.key });
     }
     /* THE IDENTITY CHECK, in the same all-or-nothing phase as the version check above and for the
      * same reason: an identifier that lands while a sibling row is refused would leave the index
@@ -343,17 +529,26 @@ class MemoryRepository {
         this._alias.set(`${tenantId}|${alias}`, { resourceType: rec.resourceType, id: rec.id });
       }
     }
+    for (const a of Array.isArray(ctx.aliases) ? ctx.aliases : []) {
+      if (!this._alias.has(`${tenantId}|${a.hash}`)) this._alias.set(`${tenantId}|${a.hash}`, { resourceType: a.resourceType, id: a.id });
+    }
     if (ctx.idempotencyKey && records.length) {
       const r = records[records.length - 1];
       this._idem.set(`${tenantId}|${ctx.idempotencyKey}`, { resourceType: r.resourceType, id: r.id, version: r.version });
     }
-    if (ctx.audit) this.audit.push({ tenantId, ...clone(ctx.audit) });
+    for (const k of extraKeys) this._idem.set(`${tenantId}|${k.key}`, { resourceType: k.resourceType, id: k.id, version: k.version });
     return { seq: last };
   }
 
-  async changes(tenantId, sinceSeq, limit) {
+  /** opts.newest: newest first, below opts.before (a cursor from the previous page), for a person reading an audit list. */
+  async changes(tenantId, sinceSeq, limit, opts) {
     const since = Number(sinceSeq) || 0;
     const max = Math.max(1, Math.min(500, Number(limit) || 100));
+    if (opts && opts.newest) {
+      const before = Number(opts.before) > 0 ? Number(opts.before) : Infinity;
+      const desc = this._rows.filter((r) => r.tenantId === tenantId && r.seq < before).sort((a, b) => b.seq - a.seq).slice(0, max);
+      return { records: desc.map((r) => ({ seq: r.seq, ...clone(r.body) })), cursor: desc.length ? desc[desc.length - 1].seq : null };
+    }
     const rows = this._rows.filter((r) => r.tenantId === tenantId && r.seq > since).slice(0, max);
     return { records: rows.map((r) => ({ seq: r.seq, ...clone(r.body) })), cursor: rows.length ? rows[rows.length - 1].seq : since };
   }
@@ -370,8 +565,86 @@ class MemoryRepository {
   }
 
   async auditOnly(tenantId, event) {
-    this.audit.push({ tenantId, ...clone(event) });
+    await this._withChain(tenantId, [{ tenantId, ...clone(event) }], () => null);
+  }
+
+  /** OPTIONAL (bufferReadAudits): many read rows linked in one chain step, same rows as auditOnly one by one. */
+  async auditMany(tenantId, events) {
+    if ((events || []).length) await this._withChain(tenantId, events.map((e) => ({ tenantId, ...clone(e) })), () => null);
+  }
+
+  /** OPTIONAL (see repository-d1.js auditTrail): same contract, newest rows win the limit. */
+  async auditTrail(tenantId, opts) {
+    const since = String((opts && opts.since) || "");
+    const limit = Math.max(1, Math.min(AUDIT_READ_MAX, Number(opts && opts.limit) || AUDIT_READ_MAX));
+    const mine = this.audit.map((e, i) => ({ id: e.id || `mem-${i}`, ...clone(e) }))
+      .filter((e) => e.tenantId === tenantId);
+    const all = mine.filter((e) => String(e.ts || "") >= since).sort((a, b) => String(a.ts || "").localeCompare(String(b.ts || "")));
+    const oldest = mine.map((e) => String(e.ts || "")).filter(Boolean).sort()[0] || null;
+    return { events: all.slice(-limit), oldestAt: oldest, truncated: all.length > limit };
+  }
+
+  /** OPTIONAL (see repository-d1.js auditRowsById): this hospital's audit rows with these ids, ids as auditTrail names them. */
+  async auditRowsById(tenantId, ids) {
+    const want = new Set((ids || []).map(String));
+    const seqOf = new Map(this._chain.map((l) => [l.event, l.chainSeq]));
+    return this.audit.map((e, i) => ({ id: e.id || `mem-${i}`, ...clone(e), chainSeq: seqOf.has(e) ? seqOf.get(e) : null }))
+      .filter((e) => e.tenantId === tenantId && want.has(String(e.id)));
   }
 }
 
-export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit };
+/**
+ * LT-21: A LIST SCREEN THAT READS HUNDREDS OF RECORDS WRITES ITS READ AUDIT ROWS TOGETHER.
+ *
+ * Every read is audited, and every audit row is linked onto the tenant's hash chain under one lock, so a
+ * worklist composed of hundreds of per-patient reads queued hundreds of chain appends one behind another
+ * (about a minute on the live nurse worklist). This wraps a repository for ONE request: reads go through
+ * unchanged, their audit rows are kept, and flush() links them all onto the chain in a few batches. Nothing
+ * is dropped: the caller must flush before it answers, and a flush that fails is the request's failure, so
+ * no record read here is handed out unaudited. Writes are not buffered (append carries its own audit row).
+ * -> { repository, flush(): Promise<number> }
+ */
+function bufferReadAudits(repository) {
+  const held = [];
+  const hold = async (tenantId, event) => { held.push([String(tenantId), event]); };
+  // Every other method runs on the repository itself, so its own state and locks are the ones used.
+  const wrapped = new Proxy(repository, { get: (t, k) => (k === "auditOnly" ? hold : typeof t[k] === "function" ? t[k].bind(t) : t[k]) });
+  async function flush() {
+    const rows = held.splice(0, held.length);
+    const byTenant = new Map();
+    for (const [t, e] of rows) byTenant.set(t, [...(byTenant.get(t) || []), e]);
+    for (const [t, events] of byTenant) {
+      for (let i = 0; i < events.length; i += AUDIT_FLUSH_BATCH) {
+        const part = events.slice(i, i + AUDIT_FLUSH_BATCH);
+        if (typeof repository.auditMany === "function") await repository.auditMany(t, part);
+        else for (const e of part) await repository.auditOnly(t, e);
+      }
+    }
+    return rows.length;
+  }
+  return { repository: wrapped, flush };
+}
+const AUDIT_FLUSH_BATCH = 40;
+
+/**
+ * R4-2: every latest record of one type straight from the port, for a service read with no clinical actor (the
+ * escalation timer, a group's counts). The same paging as RecordService._pageAll: pageByType pages of 1,000, oldest first,
+ * a record amended between pages kept at its later copy. Stops once more than `max` ids are held.
+ * -> { rows, capped }: capped true means the NEWEST records past max were not read, and the caller must say so.
+ * ponytail: each page re-groups every version of the type (audit O20 is the upgrade).
+ */
+async function pagedLatest(repository, tenantId, resourceType, opts) {
+  if (typeof repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");
+  const max = Math.max(1, Number(opts && opts.max) || 50000), statuses = opts && opts.statuses;
+  const byId = new Map();
+  let after = 0;
+  for (;;) {
+    const page = await repository.pageByType(tenantId, resourceType, { afterSeq: after, limit: MAX_ROSTER, ...(statuses ? { statuses } : {}) });
+    for (const r of page.records || []) if (r && r.id != null) { byId.delete(r.id); byId.set(r.id, r); }
+    if (byId.size > max) return { rows: [...byId.values()].slice(0, max), capped: true };
+    if (page.next == null) return { rows: [...byId.values()], capped: false };
+    after = page.next;
+  }
+}
+
+export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit, AUDIT_READ_MAX, bufferReadAudits, pagedLatest };

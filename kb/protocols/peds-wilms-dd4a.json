@@ -1,0 +1,99 @@
+{
+  "id": "peds-wilms-dd4a",
+  "diseaseId": "wilms",
+  "name": "Regimen DD-4A: Vincristine + Dactinomycin + DOXOrubicin (Stage III-IV / High-Risk Wilms Tumor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 8,
+  "caps": "drug",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pediatric Wilms Tumor v1.2026",
+    "textbook": "Principles and Practice of Pediatric Oncology, 8th ed."
+  },
+  "stage": [
+    "III",
+    "IV",
+    "high-risk"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "curative"
+  ],
+  "histology": "nephroblastoma / Wilms tumor (favorable histology with Stage III/IV or 1p/16q LOH)",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "0.15 mg/kg IV",
+      "notes": "Prior to chemotherapy"
+    }
+  ],
+  "supportiveCare": [
+    "Bowel management to prevent vincristine constipation",
+    "Hepatopathy monitoring for sinusoidal obstruction syndrome with dactinomycin",
+    "Flank or whole-lung radiotherapy coordination per COG AREN0532/AREN0533"
+  ],
+  "monitoring": [
+    "CBC with differential prior to each cycle",
+    "CMP, LFTs, BUN/creatinine",
+    "Echocardiogram baseline and cumulative doxorubicin tracking"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "vincristine",
+      "name": "vinCRIStine",
+      "basis": "bsa",
+      "dosePerUnit": 1.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 2
+      },
+      "notes": "vinCRIStine 1.5 mg/m2 (hard cap 2.0 mg) IV push on Day 1. Fatal if given intrathecally."
+    },
+    {
+      "id": "dactinomycin",
+      "name": "Dactinomycin",
+      "basis": "mgkg",
+      "dosePerUnit": 0.045,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Dactinomycin 0.045 mg/kg (or 1.35 mg/m2) IV push on Day 1. Reduce dose by 50% during concurrent radiotherapy."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 45,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "cumulativeLifetime": {
+          "warn": 250,
+          "hard": 350,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "DOXOrubicin 45 mg/m2 IV infusion on Day 1. Lifetime cumulative anthracycline cardiotoxicity guard applied."
+    }
+  ]
+}

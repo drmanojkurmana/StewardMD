@@ -47,14 +47,75 @@ import {
   CLAIM_STATE, PREAUTH_STATE, SUPPORT, BillingError,
   mayProceedClinically, supportFor, codeClaim, detectUpcoding,
   submit, deny, resubmit, recordAdjudication, preAuthorisation, upcodingWatchlist,
+  recordAcknowledgement, settle, moveBalanceToPatient, costEstimate,
 } from "../../wardsynq/wardsynq-billing.js";
-import { submitViaAdapter } from "../../wardsynq/wardsynq-tpa-adapter.js";
+import { submitViaAdapter, adapterForPayer, payerById, publicPayers, payerRuleWarnings } from "../../wardsynq/wardsynq-tpa-adapter.js";
+import { resolveParties, partiesRecord } from "./payer-contracts.js";
+import { STAY_PAYER_TYPE, stayPayerWithParties } from "./stay-payer.js";
+import { FhirClaimAdapter } from "../../wardsynq/wardsynq-fhir-claim-adapter.js";
+import { NhcxAdapter } from "../../wardsynq/wardsynq-nhcx-adapter.js";
+import { openSecret } from "./webhooks.js";
+import { nhcxAdapterDeps, ELIGIBILITY_TYPE } from "./nhcx.js";
+import { makeSafeFetch } from "../_connect/onboard/net.js";
+import { makeSecrets } from "../_connect/secrets.js";
+import { priceWith } from "./charge-capture.js";
+import { scrubClaim, claimFacts, checklistOf, recordPayerQuery, answerOpenQueries, markDocuments, classifyDenial } from "./claims-ops.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 const CLAIM_TYPE = "Claim";
 const PREAUTH_TYPE = "PreAuthorisation";
+const ESTIMATE_TYPE = "CostEstimate";
+
+/* ---- P1.5: payer credentials ------------------------------------------------------------------
+ * Provider-agnostic and never plaintext. A payer's auth block names a credentialRef of the form
+ * "sealed:<ciphertext>", sealed with the deployment's EXISTING Connect envelope key (the same one every
+ * connector credential already uses; no new secret or binding). Opened only at send time, only for that
+ * payer. No reference, a malformed one, or an unavailable key: no credential, and the adapter records
+ * "not_configured: credentials missing" rather than sending unauthenticated. */
+function sealedCredentialAuthorizer(env, payers, secretsImpl) {
+  return async (request) => {
+    const payer = payerById(payers, request && request.payerId);
+    const auth = payer && payer.auth && typeof payer.auth === "object" ? payer.auth : null;
+    const ref = str(auth && auth.credentialRef);
+    let token;
+    /* Owner S4: a payer saved as a connector carries its credential sealed under the document key
+     * (connectors.js); a wardsynq.payers entry keeps the Connect envelope reference. */
+    if (auth && auth.connectorSecret) token = str(await openSecret(env, auth.connectorSecret));
+    else if (!ref.startsWith("sealed:")) return null;
+    else { try { token = str(await (secretsImpl || makeSecrets(env)).open(ref.slice(7))); } catch { return null; } }
+    if (!token) return null;
+    if (auth.type === "header" && str(auth.headerName)) return { [str(auth.headerName)]: token };
+    return { authorization: `Bearer ${token}` };
+  };
+}
+
+/* NHCX needs more than a header: several sealed values and the correlation record written before sending
+ * (nhcx.js). actorId is who asked, for that record's audit. */
+const ADAPTER_KINDS = Object.freeze({ "fhir-claim": FhirClaimAdapter, nhcx: (payer, deps) => NhcxAdapter(payer, deps.nhcx || {}) });
+
+/** The adapter for a payer id, with a hardened transport. ctx.tpaAdapter (a site's own) wins when given. */
+function resolveAdapter(env, ctx, payerId, actorId) {
+  if (ctx.tpaAdapter) return ctx.tpaAdapter;
+  const fetchImpl = typeof ctx.fetchImpl === "function" ? ctx.fetchImpl : (typeof fetch === "function" ? fetch : null);
+  return adapterForPayer(ctx.payers, payerId, ADAPTER_KINDS, {
+    fetch: fetchImpl ? makeSafeFetch(fetchImpl) : null,
+    authorize: sealedCredentialAuthorizer(env, ctx.payers, ctx.secretsImpl),
+    nhcx: ctx.recordDeps && ctx.migration ? nhcxAdapterDeps(env, ctx, actorId) : {},
+  }).adapter;
+}
+
+/** Payer figures from an acknowledged response land on the claim as the payer's, with history. */
+function applyAcknowledged(record, adapterResult, now) {
+  if (!adapterResult || adapterResult.state !== "acknowledged") return;
+  if (adapterResult.payerReference) { record.payerReference = adapterResult.payerReference; record.acknowledgedAt = now; }
+  const adj = adapterResult.adjudication;
+  if (adj && adj.approved != null && record.history) {
+    record.approvedAmount = adj.approved;
+    record.history.push({ at: now, event: "adjudicated", by: "payer-response", detail: `approved ${adj.approved} (from the payer's ClaimResponse)` });
+  }
+}
 
 /* Never evidence for a charge. A differential is the list of things it might be, and a refuted
  * condition is the thing it turned out not to be. */
@@ -145,6 +206,9 @@ async function codeClaimForEncounter(request, env, ctx) {
   let claim;
   try {
     claim = codeClaim({ encounterId, patientId, record: view, codes, codedBy: resolved.actor.id, now, invoiceId: str(ctx.invoiceId) || null });
+    // P1.5: which payer, as a reference only. Everything payer-specific stays in wardsynq.payers.
+    claim.payerId = str(ctx.payerId) || null;
+    if (str(ctx.policyNumber)) claim.policyNumber = str(ctx.policyNumber);
   } catch (e) {
     if (!(e instanceof BillingError)) throw e;
     /* The refusal names every code and what the record says about each, so the coder can see which
@@ -186,11 +250,13 @@ async function codeClaimForEncounter(request, env, ctx) {
   }
 }
 
-const ACTIONS = Object.freeze(["submit", "deny", "resubmit", "adjudicate"]);
+/* rcm-claims-ops (claims-ops.js): a payer query arriving, documents obtained for the claim, and the hospital's own reason
+ * code and root cause on a denial. Each is recorded by a person and sends nothing. */
+const ACTIONS = Object.freeze(["submit", "deny", "resubmit", "adjudicate", "acknowledge", "settle", "balance-to-patient", "query", "documents", "classify-denial"]);
 
 /**
  * Moves a claim through its lifecycle.
- * ctx: { migration, claimId, action, reason?, codes?, now? }
+ * ctx: { migration, claimId, action, reason?, codes?, now?, overrideReason?, text?, receivedAt?, documents?, denialCode?, rootCause?, rcm?, payers? }
  */
 async function claimAction(request, env, ctx) {
   const mig = ctx.migration;
@@ -228,12 +294,29 @@ async function claimAction(request, env, ctx) {
     };
   }
 
+  /* THE CHECKLIST BEFORE A CLAIM LEAVES (claims-ops.js scrubClaim). A blocking finding refuses the submission and names
+   * itself; a person may still send it with a reason, kept on the claim with who, when and what was overridden. The
+   * facts are read through this actor's own grants, and a fact the grant cannot read is said as unchecked. */
+  let scrub = null;
+  const overrideReason = str(ctx.overrideReason).slice(0, 1000);
+  if (action === "submit" || action === "resubmit") {
+    const payerId = str(ctx.payerId) || claim.payerId;
+    scrub = scrubClaim({ ...claim, payerId }, await claimFacts(svc, claim), { payer: payerById(ctx.payers, payerId), submittedAmount: ctx.submittedAmount, now });
+    if (!scrub.clean && !overrideReason) {
+      return {
+        ...base, ok: false, status: 422, error: "claim_checklist_blocked", findings: scrub.blocking, warnings: scrub.warnings, claim: null,
+        detail: `Not sent: ${scrub.blocking.map((f) => f.text).join(" ")} Fix these, or send it anyway with a reason, which is recorded permanently on the claim.`,
+      };
+    }
+  }
+
   let next;
   try {
     if (action === "submit") next = submit(claim, { by, now, submittedAmount: ctx.submittedAmount });
     else if (action === "deny") {
       if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "a denial carries the payer's reason", claim: null };
       next = deny(claim, { reason, by, now, deniedAmount: ctx.deniedAmount });
+      if (str(ctx.denialCode)) classifyDenial(next, { denialCode: ctx.denialCode, rootCause: ctx.rootCause, rcm: ctx.rcm, by, now });
     } else if (action === "resubmit") {
       if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "a resubmission names why", claim: null };
       /* Re-coding on resubmission is re-checked against the CHART AS IT IS NOW, not against the view
@@ -248,6 +331,25 @@ async function claimAction(request, env, ctx) {
         view = clinicalView(conditions);
       }
       next = resubmit(claim, { codes: ctx.codes || null, record: view, by, reason, now, submittedAmount: ctx.submittedAmount });
+      // A resubmission after a payer query is the answer to it: the open queries close with its reason and their clocks stop.
+      if ((next.payerQueries || []).some((q) => !q.answeredAt)) answerOpenQueries(next, { answer: reason, by, now });
+    } else if (action === "acknowledge") {
+      next = recordAcknowledgement(claim, { payerReference: str(ctx.payerReference), by, now, note: reason || null });
+    } else if (action === "settle") {
+      next = settle(claim, { paidAmount: ctx.paidAmount, disallowances: ctx.disallowances, shortPaymentReason: str(ctx.shortPaymentReason) || null, by, now, payerReference: str(ctx.payerReference) || null });
+    } else if (action === "balance-to-patient") {
+      next = moveBalanceToPatient(claim, { amount: ctx.amount, reason, by, now });
+    } else if (action === "query") {
+      if (![CLAIM_STATE.SUBMITTED, CLAIM_STATE.QUERIED].includes(claim.state)) throw new BillingError("a payer query is recorded on a submitted claim", "NOT_SUBMITTED");
+      recordPayerQuery(claim, { text: ctx.text, receivedAt: ctx.receivedAt, responseDays: checklistOf(payerById(ctx.payers, claim.payerId)).queryResponseDays, by, now });
+      claim.state = CLAIM_STATE.QUERIED;
+      next = claim;
+    } else if (action === "documents") {
+      if (!markDocuments(claim, { documents: ctx.documents, by, now })) return { ...base, ok: true, claimId, action, unchanged: true, state: claim.state, claim, actor: by };
+      next = claim;
+    } else if (action === "classify-denial") {
+      classifyDenial(claim, { denialCode: ctx.denialCode, rootCause: ctx.rootCause, rcm: ctx.rcm, by, now });
+      next = claim;
     } else {
       // adjudicate: records what the payer said it will pay. Never moves claim.state - that stays
       // submit/deny/resubmit's job alone.
@@ -257,6 +359,13 @@ async function claimAction(request, env, ctx) {
      * would put the words "unsupported severity" into the history of a claim that had none. */
     if (reason && action === "submit" && claim.upcoding && !claim.upcoding.clean) {
       next.history.push({ at: now, event: "submitted-with-unsupported-severity", by, detail: reason });
+    }
+    if (scrub) {
+      next.checklist = { at: now, blocking: scrub.blocking, warnings: scrub.warnings };
+      if (!scrub.clean) {
+        next.checklistOverrides = (claim.checklistOverrides || []).concat([{ at: now, by, reason: overrideReason, action, findings: scrub.blocking.map((f) => ({ code: f.code, text: f.text })) }]);
+        next.history.push({ at: now, event: "sent-over-checklist-findings", by, detail: `${overrideReason} (${scrub.blocking.map((f) => f.code).join(", ")})` });
+      }
     }
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "billing_refused", code: e.code, detail: e.message, claim: null };
@@ -270,7 +379,10 @@ async function claimAction(request, env, ctx) {
    * hospital's own existing out-of-band process - never claimed as sent to a payer that was never
    * actually contacted. */
   if (action === "submit" || action === "resubmit") {
-    next.adapter = await submitViaAdapter(next, ctx.tpaAdapter || null);
+    if (str(ctx.payerId)) next.payerId = str(ctx.payerId);
+    next.adapter = await submitViaAdapter(next, resolveAdapter(env, ctx, next.payerId, by), { use: "claim", now, payerId: next.payerId || null });
+    applyAcknowledged(next, next.adapter, now);
+    next.history.push({ at: now, event: "payer-channel", by, detail: `${next.adapter.adapterId}: ${next.adapter.state}` });
   }
 
   try {
@@ -316,13 +428,44 @@ async function recordPreAuth(request, env, ctx) {
       scheme: str(ctx.scheme) || null, reason: str(ctx.reason) || null, requestedBy: resolved.actor.id,
       invoiceId: str(ctx.invoiceId) || null, authorizedAmount: ctx.authorizedAmount,
     });
+    auth.payerId = str(ctx.payerId) || null;
+    if (Number.isFinite(Number(ctx.requestedAmount)) && ctx.requestedAmount !== "" && ctx.requestedAmount != null) auth.requestedAmount = Number(ctx.requestedAmount);
+    if (str(ctx.policyNumber)) auth.policyNumber = str(ctx.policyNumber);
+    /* rcm-claims-ops: the last day the payer's approval letter says it is valid, as the payer wrote it. The claims
+     * checklist (claims-ops.js) blocks a claim whose only approval ran out before the admission. */
+    if (str(ctx.validUntil)) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(str(ctx.validUntil)) || !Number.isFinite(Date.parse(str(ctx.validUntil)))) throw new BillingError("the validity date is a date (YYYY-MM-DD)", "BAD_VALID_UNTIL");
+      if (state !== PREAUTH_STATE.APPROVED) throw new BillingError("a validity date belongs to an approved pre-authorisation", "VALID_UNTIL_NOT_APPROVED");
+      auth.validUntil = str(ctx.validUntil);
+    }
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "preauth_refused", code: e.code, detail: e.message, preAuth: null };
     throw e;
   }
+  /* The diagnoses a payer's pre-authorisation form asks for (NHCX Claim.diagnosis is 1..*). They face the same
+   * rule as a claim: a code the problem list does not support is refused, never carried to a payer. */
+  const dxCodes = (Array.isArray(ctx.codes) ? ctx.codes : []).map((c) => str(typeof c === "string" ? c : c && c.code)).filter(Boolean);
+  if (dxCodes.length) {
+    let conditions;
+    try { conditions = await svc.byPatient("Condition", patientId); }
+    catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", preAuth: null }; }
+    const view = clinicalView(conditions);
+    const unsupported = dxCodes.map((code) => ({ code, ...supportFor(code, view), condition: conditionDetail(code, conditions) })).filter((x) => x.support !== SUPPORT.DOCUMENTED);
+    if (unsupported.length) {
+      return { ...base, ok: false, status: 422, error: "preauth_refused", code: "UNSUPPORTED_DIAGNOSIS", codes: unsupported, preAuth: null,
+        detail: `Not on the problem list, so not sent to a payer: ${unsupported.map((x) => x.code).join(", ")}. A clinician documents a diagnosis through the clinical path first.` };
+    }
+    auth.codes = dxCodes.map((code) => ({ code }));
+  }
 
   const id = `wsq-preauth-${slug(patientId)}-${slug(treatment)}-${slug(decidedAt)}`;
   const record = { ...auth, resourceType: PREAUTH_TYPE, id, source: { system: "wardsynq-native", sourceId: `preauth:${id}` } };
+  /* P1.5: a REQUESTED pre-authorisation with a payer goes through that payer's adapter as a FHIR Claim
+   * with use=preauthorization. A decision (approved/refused/expired) is a fact arriving and sends nothing. */
+  if (state === PREAUTH_STATE.REQUESTED && auth.payerId) {
+    record.adapter = await submitViaAdapter(record, resolveAdapter(env, ctx, auth.payerId, resolved.actor.id), { use: "preauthorization", now: decidedAt, payerId: auth.payerId });
+    if (record.adapter.state === "acknowledged" && record.adapter.payerReference) record.payerReference = record.adapter.payerReference;
+  }
 
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
@@ -338,7 +481,9 @@ async function recordPreAuth(request, env, ctx) {
   }
 }
 
-/** ctx: { migration, patientId } - a patient's claims, and the answer about gating care. */
+/** ctx: { migration, patientId, payers, gst } - a patient's claims, and the answer about gating care. Each claim and
+ *  pre-authorisation, and each stay's payer, carries its parties (payer-contracts.js): patient, payer, insurer, TPA and the
+ *  GST recipient, resolved from the payer's contract as it stands now. */
 async function claimsForPatient(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -350,25 +495,82 @@ async function claimsForPatient(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, claims: [] };
 
-  let rows, auths;
+  let rows, auths, estimates, eligibility, stayPayers;
+  let preAuthsUnreadable = false, estimatesUnreadable = false, eligibilityUnreadable = false, stayPayersUnreadable = false;
   try {
-    [rows, auths] = await Promise.all([
+    [rows, auths, estimates, eligibility, stayPayers] = await Promise.all([
       svc.byPatient(CLAIM_TYPE, patientId),
-      svc.byPatient(PREAUTH_TYPE, patientId).catch(() => []),
+      /* R6-2: the last swallow on this read. An unreadable pre-authorisation list used to read as
+       * "none recorded", which is the answer a payer rule below turns into "no approved
+       * pre-authorisation" - a refusal written against a patient whose approval was simply not read. */
+      svc.byPatient(PREAUTH_TYPE, patientId).catch(() => { preAuthsUnreadable = true; return []; }),
+      svc.byPatient(ESTIMATE_TYPE, patientId).catch(() => { estimatesUnreadable = true; return []; }),
+      // NHCX eligibility checks (nhcx.js). Unreadable is said, never shown as none.
+      svc.byPatient(ELIGIBILITY_TYPE, patientId).catch(() => { eligibilityUnreadable = true; return []; }),
+      // gst-parties: who settles each stay. Unreadable is said (null), never shown as self-pay.
+      svc.byPatient(STAY_PAYER_TYPE, patientId).catch(() => { stayPayersUnreadable = true; return []; }),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), claims: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), claims: [] };
   }
 
+  const partiesOf = (payerId) => partiesRecord(resolveParties({ payerRef: payerId, payers: ctx.payers, gst: ctx.gst || null }), null);
+  const claims = (rows || []).filter(Boolean).map((c) => ({ ...c, parties: partiesOf(c.payerId) }));
+  const preAuthorisations = preAuthsUnreadable ? null : (auths || []).filter(Boolean).map((a) => ({ ...a, parties: partiesOf(a.payerId) }));
+  const now = str(ctx.now) || new Date().toISOString();
   return {
     ...base, ok: true, patientId,
-    claims: (rows || []).filter(Boolean),
-    preAuthorisations: (auths || []).filter(Boolean),
+    claims,
+    preAuthorisations,
+    ...(preAuthsUnreadable ? { preAuthsUnreadable: true } : {}),
+    estimates: (estimates || []).filter(Boolean),
+    ...(estimatesUnreadable ? { estimatesUnreadable: true } : {}),
+    eligibilityChecks: eligibilityUnreadable ? null : (eligibility || []).filter(Boolean).sort((a, b) => String(b.at).localeCompare(String(a.at))),
+    stayPayers: stayPayersUnreadable ? null : (stayPayers || []).filter(Boolean).map((r) => stayPayerWithParties(r, ctx)),
+    // P1.5: the payer list as a screen may see it, and each claim's payer rules as warnings only.
+    payers: publicPayers(ctx.payers),
+    /* With the pre-authorisations unreadable, every rule that turns on one is UNCHECKED and says so
+     * first: payerRuleWarnings would otherwise state, as a fact, that no approved pre-authorisation
+     * is recorded - off a list nobody read. */
+    payerWarnings: Object.fromEntries(claims.map((c) => [c.id, preAuthsUnreadable
+      ? ["The pre-authorisations could not be read, so any pre-authorisation rule for this payer is unchecked. This is not a statement that none is recorded."]
+      : payerRuleWarnings(c, payerById(ctx.payers, c.payerId), { preAuths: preAuthorisations, now })])),
     /* On the list, not only on a refusal. This is the screen where somebody looking at an unpaid
      * account is most tempted to decide it means something clinically. */
     clinical: mayProceedClinically(),
   };
+}
+
+/**
+ * P1.5: a pre-admission cost estimate from tariff lines. ctx: { migration, patientId, lines:[{code, quantity}], payerId?, tariff }
+ * No tariff means no estimate: a number invented without one would be read as a quote.
+ */
+async function raiseEstimate(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", estimate: null };
+  const patientId = str(ctx.patientId);
+  const lines = (Array.isArray(ctx.lines) ? ctx.lines : []).filter((l) => l && str(l.code)).map((l) => ({ code: str(l.code), quantity: Number(l.quantity) > 0 ? Number(l.quantity) : 1 }));
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", estimate: null };
+  if (!lines.length) return { ...base, ok: false, status: 422, error: "lines_required", detail: "an estimate is built from tariff lines", estimate: null };
+  if (!ctx.tariff || typeof ctx.tariff !== "object" || !Object.keys(ctx.tariff).length) {
+    return { ...base, ok: false, status: 422, error: "tariff_not_configured", detail: "This hospital has no tariff configured (wardsynq.tariff), so no estimate can be priced.", estimate: null };
+  }
+  const { svc, resolved, error } = await open(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, estimate: null };
+  const now = str(ctx.now) || new Date().toISOString();
+  let est;
+  try { est = costEstimate({ patientId, payerId: str(ctx.payerId) || null, lines, priced: priceWith(lines, ctx.tariff), by: resolved.actor.id, now }); }
+  catch (e) { if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "estimate_refused", code: e.code, detail: e.message, estimate: null }; throw e; }
+  const id = `wsq-estimate-${slug(patientId)}-${slug(now)}`;
+  const record = { ...est, resourceType: ESTIMATE_TYPE, id, source: { system: "wardsynq-native", sourceId: `estimate:${id}` } };
+  try {
+    const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, estimateId: id, recordVersion: out.record.version, estimate: record, actor: resolved.actor.id };
+  } catch (e) {
+    return { ...base, ...writeFailure(e, { estimateId: id, estimate: null, actor: resolved.actor.id }) };
+  }
 }
 
 /** ctx: { migration, patientId? } - claims whose coding changed after a denial. */
@@ -399,7 +601,7 @@ async function watchlist(request, env, ctx) {
 }
 
 export {
-  CLAIM_TYPE, PREAUTH_TYPE, CLAIM_STATE, PREAUTH_STATE, SUPPORT,
-  clinicalView, conditionDetail,
-  codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist,
+  CLAIM_TYPE, PREAUTH_TYPE, ESTIMATE_TYPE, CLAIM_STATE, PREAUTH_STATE, SUPPORT,
+  clinicalView, conditionDetail, sealedCredentialAuthorizer,
+  codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist, raiseEstimate,
 };

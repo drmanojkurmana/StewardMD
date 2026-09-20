@@ -13,7 +13,7 @@ import { verifyFirebaseToken } from "./_fbauth.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
 import { ownerEmails } from "./_adminauth.js";
 
-const PROMO_UNTIL_DEFAULT = Date.parse("2026-09-15T23:59:59+05:30");   // 15 Sep 2026, 23:59 IST
+const PROMO_UNTIL_DEFAULT = Date.parse("2026-09-27T23:59:59+05:30");   // 27 Sep 2026, 23:59 IST (owner, 2026-09-16)
 
 export function promoUntil(env) {
   const v = cfgFlag(env, "PRO_FREE_UNTIL");   // live KV override wins over env (lets the owner end the promo now)
@@ -150,11 +150,17 @@ export function entitlementState(env, claims, now) {
 
 // Authoritative (fresh) entitlement for a uid — does a server-side claims lookup, so it reflects a
 // grant immediately even before the client's ID token refreshes. Use for /billing/status, not hot gates.
-export async function entitlementFor(env, uid) {
+// `email` is the caller's address from the SIGNED token (the billing route passes it). Custom claims
+// never carry an email - nothing writes one - so without it isOwnerClaims() below is always false on
+// this path, and the owner's own /billing/status said "not Pro" the day their verified free week
+// ended (2026-09-20: on-device models locked, MaiK "not working"), while the hot AI gate, which reads
+// the token, still said Pro. The email is merged transiently, never persisted.
+export async function entitlementFor(env, uid, email) {
   try { await warmBillingCfg(env && env.MAIK_KV); } catch (e) {}
   if (!uid) return entitlementState(env, null);
   let claims = {};
   try { claims = await getUserClaims(env, uid); } catch (e) {}
+  if (email && typeof email === "string" && !claims.email) claims.email = email;
   // Start the per-user trial clock on first status check (no pro, no trial yet). One write per new
   // account; done here (not on the hot proFromRequest gate) so gates stay read-only.
   try { if (!claims.pro && !claims.trialStart) { const ts = Date.now(); await mergeUserClaims(env, uid, { trialStart: ts }); claims.trialStart = ts; } } catch (e) {}

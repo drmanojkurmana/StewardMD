@@ -46,6 +46,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 // pharmacist verifying an order was, until now, reading the raw allergy list unassisted; this
 // gives them the exact interaction/dose/allergy verdict the engine already computes for the ward.
 import { bedsideSafetyCheck } from "./migrate-emar.js";
+import { readOrNull, unavailable } from "./unreadable.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "MedicationVerification";
@@ -145,6 +146,18 @@ async function verifyOrder(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!order) return { ...base, ok: false, status: 404, error: "order_not_found", orderId, written: 0 };
 
+  /* 5. NOBODY VERIFIES THEIR OWN PRESCRIPTION (LT-20). A second pair of eyes is the whole point of
+   * verification, and a prescriber who can clear their own order has made it a formality. Refused and
+   * audited whatever role the actor holds, admin included. An unverified order can still be given
+   * (rule 4), so this strands no ward. */
+  const prescriber = str(order.prescriberId || order.signedBy);
+  if (prescriber && prescriber === str(resolved.actor.id)) {
+    try { await svc.auditDenied(TYPE, verificationIdFor(orderId, order.version) || orderId, ["SELF_VERIFICATION"], order.patientId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "audit_failed", detail: "The refusal could not be recorded in the audit trail. Nothing was verified.", written: 0 }; }
+    return { ...base, ok: false, status: 403, error: "self_verification", orderId, written: 0,
+      message: "You prescribed this order, so you cannot verify it. Another pharmacist or clinician must check it. Nothing was recorded." };
+  }
+
   const id = verificationIdFor(orderId, order.version);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
@@ -187,19 +200,27 @@ async function verificationQueue(request, env, ctx) {
   const patientId = str(ctx.patientId);
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", orders: [] };
 
-  const { svc, error } = await openService(request, env, ctx, "record:read");
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, orders: [] };
 
+  /* NEITHER OF THESE READS MAY FAIL QUIETLY (R6-1, 2026-09-18).
+   *  - the verification rows decide every row's state, and an unreadable list made every order read
+   *    as `unverified` - including one verified against an OLDER version, which is the one state
+   *    this file exists to show. It is a refusal now, not a guess.
+   *  - the allergies travel WITH the queue, because a pharmacist who has to go and look them up
+   *    separately is a pharmacist who sometimes will not, and this is the check they are here to
+   *    make. A failed allergy read leaves the orders on screen but never an empty allergy list:
+   *    `allergies: null` plus a named `allergiesUnavailable`, which the screen says out loud. */
   let orders, verifications, allergies;
+  const failures = [];
   try {
     [orders, verifications, allergies] = await Promise.all([
       svc.byPatient("MedicationOrder", patientId),
-      svc.byPatient(TYPE, patientId).catch(() => []),
-      // The allergies travel WITH the queue. A pharmacist who has to go and look them up separately
-      // is a pharmacist who sometimes will not, and this is the check they are here to make.
-      svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
+      svc.byPatient(TYPE, patientId),
+      readOrNull(svc.byPatient("AllergyIntolerance", patientId), "AllergyIntolerance", failures),
     ]);
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orders: [] }; }
+  const allergiesUnavailable = unavailable(failures);
 
   const active = (orders || []).filter((o) => o && o.status === "active");
   // TASK 3.3: the SAME engine the bedside hook runs, once per queued order. Never a second engine,
@@ -213,6 +234,8 @@ async function verificationQueue(request, env, ctx) {
     return {
       orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
       encounterId: o.encounterId || null, orderVersion: o.version, prescriberId: o.prescriberId || null,
+      // The screen offers no Verify on an order this reader prescribed; the server refuses it regardless.
+      prescribedByYou: !!(resolved && str(o.prescriberId || o.signedBy) === str(resolved.actor.id)),
       ...v,
       verification: v.verification ? {
         outcome: v.verification.outcome, reason: v.verification.reason || null,
@@ -226,7 +249,9 @@ async function verificationQueue(request, env, ctx) {
   rows.sort((a, b) => (RANK[a.state] - RANK[b.state]) || String(a.drug).localeCompare(String(b.drug)));
   return {
     ...base, ok: true, patientId, orders: rows,
-    allergies: (allergies || []).map((a) => ({ substance: a.substance, severity: a.severity || null, criticality: a.criticality || null, verifiedBy: a.verifiedBy || null })),
+    // null = the allergy list could not be read. [] = it was read and the patient has none recorded.
+    allergies: allergies === null ? null : allergies.map((a) => ({ substance: a.substance, severity: a.severity || null, criticality: a.criticality || null, verifiedBy: a.verifiedBy || null })),
+    ...(allergiesUnavailable ? { allergiesUnavailable } : {}),
     unverified: rows.filter((r) => r.state !== "verified").length,
   };
 }

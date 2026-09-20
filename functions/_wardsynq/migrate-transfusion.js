@@ -250,7 +250,7 @@ async function traceBloodUnit(request, env, ctx) {
   if (error) return { ...base, ...error, trace: [] };
 
   let rows;
-  try { rows = await svc.list(TYPE, 1000); }
+  try { rows = (await svc.listAll(TYPE, { max: 50000, throwOnTruncate: true })).rows; } // R4-2: every record (listAll, paged; was the oldest N), past 50,000 refused rather than short
   catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), trace: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), trace: [] };

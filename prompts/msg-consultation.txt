@@ -1,0 +1,41 @@
+feat: save a whole consultation in one go, and tell the truth when it half-fails
+
+Adapted from Bahmni's BahmniEncounterTransaction, which has had this right for years: a
+consultation is one act of care, so it should be one save.
+
+The old way was five buttons, five separate saves, all reporting into the same single
+error line on screen - so whichever reply landed last won. A refused prescription could
+be painted over by a note that saved fine, and the doctor would walk away believing the
+drug was ordered. This session's bug hunt kept finding that same shape.
+
+_wardsynq/consultation.js takes the vitals, the diagnosis, the prescription, the test
+and the note together. It holds no authority of its own: every piece goes through the
+exact writer its own route has always called, so the same validation, governance, audit
+and safety engine apply, and the formulary and advisories stay org content rather than
+becoming caller-supplied just because the call arrived bundled.
+
+Half a consultation is the thing to fear, and there is no transaction across records to
+prevent it, so the common failure is caught before it can happen: the actor is resolved
+ONCE up front and every requested piece is checked against their grant, and if any one
+piece is outside it the whole save is refused with nothing written. A nurse who may
+record vitals but not prescribe is told that before her vitals are saved, not after.
+
+What can still fail mid-way is a write that passes permission and then fails on its own
+merits. That is reported, never hidden: the reply names what reached the chart, where it
+stopped, and what was never attempted, and the screen renders that literally instead of
+collapsing it to "saved" or "failed".
+
+Also: each piece gets its own derived idempotency key. Sharing the screen's single key
+across five writes would have made the second piece look like a repeat of the first and
+be silently dropped - which is how a resend quietly loses a prescription.
+
+The new Consultation screen on the chart is what makes this reachable; the reachability
+checker added in the previous commit caught the route as orphaned within a second of it
+being written, which is precisely what it is for. The five individual buttons all still
+work - a nurse recording observations should not have to open a consultation.
+
+Tests: 10 new, covering chart order, the all-or-nothing permission refusal, the partial
+save report, a writer that throws, and per-piece indexing. Suite 5743 passing, 0 failing.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

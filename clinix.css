@@ -140,6 +140,9 @@
 }
 #clinixRoot .cx-sys:active { background: var(--cx-surface-2); }
 #clinixRoot .cx-sys--empty { opacity: .55; }
+#clinixRoot .cx-sys--locked .cx-sys-ic, #clinixRoot .cx-sys--locked .cx-sys-t { opacity: .6; }
+#clinixRoot .cx-sys-pro { display: inline-flex; align-items: center; gap: 3px; align-self: flex-start; margin-top: 2px; padding: 2px 8px 2px 6px; border-radius: 999px; background: var(--cx-surface-2); color: var(--cx-primary); font-size: 11px; font-weight: 700; }
+#clinixRoot .cx-sys-pro .material-symbols-rounded { font-size: 14px; }
 #clinixRoot .cx-sys-ic { color: var(--cx-primary); }
 #clinixRoot .cx-sys-ic .material-symbols-rounded { font-size: 26px; }
 #clinixRoot .cx-sys-t { font-weight: 700; font-size: 15px; }
@@ -770,3 +773,267 @@ html.cx-lock .mc-overlay { z-index: 1300; }
 #clinixRoot .cx-input:focus {
   outline: none; border-color: var(--cx-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25);
 }
+
+/* ── Bedside Simulation Cockpit & Vitals Monitor ───────────────────────────── */
+
+#clinixRoot .cx-vitals-monitor {
+  display: flex; gap: 8px; overflow-x: auto; padding: 10px 14px;
+  background: var(--cx-surface-2); border-bottom: 1px solid var(--cx-line);
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+#clinixRoot .cx-vitals-monitor::-webkit-scrollbar { display: none; }
+
+#clinixRoot .cx-vital-pill {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;
+  padding: 6px 10px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r-ctl); min-width: 62px; text-align: center;
+}
+#clinixRoot .cx-vital-label { font-size: 10px; font-weight: 700; color: var(--cx-muted); letter-spacing: .04em; text-transform: uppercase; }
+#clinixRoot .cx-vital-val { font-size: 14px; font-weight: 700; color: var(--cx-ink); font-variant-numeric: tabular-nums; }
+#clinixRoot .cx-vital-val--alert { color: var(--cx-bad); }
+#clinixRoot .cx-vital-val--warn { color: var(--cx-warn); }
+
+#clinixRoot .cx-maneuver-bar {
+  display: flex; gap: 6px; overflow-x: auto; padding: 8px 14px;
+  background: var(--cx-surface); border-bottom: 1px solid var(--cx-line);
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+#clinixRoot .cx-maneuver-bar::-webkit-scrollbar { display: none; }
+#clinixRoot .cx-maneuver-btn {
+  flex: 0 0 auto; padding: 5px 11px; font-size: 11.5px; font-weight: 600;
+  border-radius: 14px; border: 1px solid var(--cx-line); background: var(--cx-surface-2);
+  color: var(--cx-muted); cursor: pointer; transition: all .15s ease;
+}
+#clinixRoot .cx-maneuver-btn--on {
+  background: var(--cx-primary); color: #fff; border-color: transparent;
+}
+
+#clinixRoot .cx-card-diag {
+  margin: 10px 0; padding: 12px 14px; background: var(--cx-surface);
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r);
+}
+#clinixRoot .cx-card-diag-title {
+  display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--cx-ink); margin-bottom: 6px;
+}
+#clinixRoot .cx-card-diag-result { font-size: 13.5px; line-height: 1.5; color: var(--cx-ink); }
+#clinixRoot .cx-card-diag-note { margin-top: 6px; font-size: 12px; color: var(--cx-muted); line-height: 1.45; }
+
+/* ── Blind Examination & Synthesis Card ────────────────────────────────────── */
+
+#clinixRoot .cx-blind-banner {
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+  background: var(--cx-teach-soft); border-bottom: 1px solid var(--cx-teach);
+  color: var(--cx-teach); font-size: 13px; font-weight: 600;
+}
+#clinixRoot .cx-synthesis-box {
+  margin: 14px 0; padding: 16px; background: var(--cx-surface);
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r);
+}
+#clinixRoot .cx-synth-section { margin-bottom: 12px; }
+#clinixRoot .cx-synth-h { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--cx-muted); margin-bottom: 4px; }
+#clinixRoot .cx-synth-list { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.5; color: var(--cx-ink); }
+
+/* ── Physiology Sandbox ────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-physio-ctrl {
+  display: flex; flex-direction: column; gap: 4px; margin: 12px 0;
+}
+#clinixRoot .cx-physio-slider-row {
+  display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+}
+#clinixRoot .cx-physio-slider-val { font-weight: 700; color: var(--cx-primary); }
+#clinixRoot .cx-physio-range {
+  width: 100%; -webkit-appearance: none; height: 6px; border-radius: 3px; background: var(--cx-line); outline: none; margin: 6px 0;
+}
+#clinixRoot .cx-physio-range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--cx-primary); cursor: pointer;
+}
+
+/* ── 10x Pedagogical Enrichment: Universal Bedside Cards ────────────────── */
+
+#clinixRoot .cx-teach-analogy {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: rgba(245, 158, 11, 0.08); border: 1.5px solid rgba(245, 158, 11, 0.35);
+  display: flex; flex-direction: column; gap: 6px;
+}
+#clinixRoot .cx-teach-analogy-h {
+  display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: #d97706;
+}
+#clinixRoot .cx-teach-analogy-p {
+  margin: 0; font-size: 14px; line-height: 1.55; color: var(--cx-ink); font-style: italic;
+}
+
+#clinixRoot .cx-teach-sensory {
+  margin: 14px 0; display: grid; grid-template-columns: 1fr; gap: 10px;
+}
+@media (min-width: 600px) {
+  #clinixRoot .cx-teach-sensory { grid-template-columns: 1fr 1fr; }
+}
+#clinixRoot .cx-sensory-box {
+  padding: 12px 14px; border-radius: var(--cx-r); border: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-sensory-norm {
+  background: rgba(16, 185, 129, 0.07); border-color: rgba(16, 185, 129, 0.3);
+}
+#clinixRoot .cx-sensory-norm .cx-sensory-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; color: #059669; margin-bottom: 4px;
+}
+#clinixRoot .cx-sensory-abnorm {
+  background: rgba(239, 68, 68, 0.07); border-color: rgba(239, 68, 68, 0.3);
+}
+#clinixRoot .cx-sensory-abnorm .cx-sensory-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; color: #dc2626; margin-bottom: 4px;
+}
+#clinixRoot .cx-sensory-b {
+  font-size: 13px; line-height: 1.45; color: var(--cx-ink); margin: 0;
+}
+
+#clinixRoot .cx-teach-traps {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: rgba(225, 29, 72, 0.07); border-left: 4px solid #e11d48;
+}
+#clinixRoot .cx-teach-traps-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: #be123c; margin-bottom: 6px;
+}
+#clinixRoot .cx-teach-traps-list {
+  margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--cx-ink);
+}
+
+#clinixRoot .cx-teach-technique {
+  margin: 14px 0; padding: 14px 16px; border-radius: var(--cx-r);
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-teach-technique-h {
+  display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--cx-primary); margin-bottom: 8px;
+}
+#clinixRoot .cx-teach-technique-steps {
+  margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.55; color: var(--cx-ink);
+}
+
+/* ── Case reasoning stages: the differential picker, the diagnosis picker and the management MCQ.
+   Added 2026-09-19 when the three free-text boxes were replaced (owner: "in ddx, dx give him 100s
+   of diagnosis and he will pickup one and give hints too, and plan also give mcq options"). All
+   scoped under #clinixRoot and built from the existing --cx-* tokens, so every theme works. ── */
+#clinixRoot .cx-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 0 2px; }
+#clinixRoot .cx-chips-toggle {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 8px 12px;
+  background: none; border: 1px dashed var(--cx-line); border-radius: 999px;
+  color: var(--cx-muted); font: 600 12.5px inherit; cursor: pointer; min-height: 40px;
+}
+#clinixRoot .cx-chip {
+  display: inline-flex; align-items: center; gap: 4px; padding: 8px 13px; min-height: 40px;
+  background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: 999px;
+  color: var(--cx-ink); font: 600 13px inherit; cursor: pointer; text-align: left;
+}
+#clinixRoot .cx-chip:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-chip--on { border-color: var(--cx-primary); background: var(--cx-primary); color: #fff; }
+#clinixRoot .cx-chip--pick { border-color: var(--cx-primary); color: var(--cx-primary); }
+#clinixRoot .cx-chip--pick .material-symbols-rounded { font-size: 16px; opacity: .7; }
+#clinixRoot .cx-chip--done { opacity: .55; cursor: default; }
+#clinixRoot .cx-chip--done .material-symbols-rounded { font-size: 15px; color: var(--cx-primary); }
+
+#clinixRoot .cx-didyoumean { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0 2px; }
+#clinixRoot .cx-dym-l { font: 700 11.5px inherit; letter-spacing: .04em; text-transform: uppercase; color: var(--cx-muted); }
+
+#clinixRoot .cx-picked { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 12px; min-height: 40px; }
+#clinixRoot .cx-picked-empty { font: 500 13px inherit; color: var(--cx-muted); align-self: center; }
+
+#clinixRoot .cx-dx-search { margin: 4px 0 8px; }
+#clinixRoot .cx-dx-sysbar { margin-bottom: 8px; }
+#clinixRoot .cx-dxlist { display: flex; flex-direction: column; gap: 6px; max-height: 46vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+#clinixRoot .cx-dxrow {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 13px; min-height: 48px;
+  background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl);
+  color: var(--cx-ink); font: 600 14px inherit; text-align: left; cursor: pointer;
+}
+#clinixRoot .cx-dxrow:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-dxrow--on { border-color: var(--cx-primary); background: var(--cx-surface-2); }
+#clinixRoot .cx-dxrow-ic { flex: 0 0 auto; display: inline-flex; color: var(--cx-primary); }
+#clinixRoot .cx-dxrow-t { flex: 1 1 auto; min-width: 0; }
+#clinixRoot .cx-dxrow-s { flex: 0 0 auto; font: 600 11px inherit; color: var(--cx-muted); }
+#clinixRoot .cx-dx-loading, #clinixRoot .cx-dx-empty { padding: 16px 4px; font: 500 13px inherit; color: var(--cx-muted); }
+
+#clinixRoot .cx-hints { margin: 12px 0 4px; display: flex; flex-direction: column; gap: 8px; }
+#clinixRoot .cx-hints .cx-hint { display: flex; gap: 8px; align-items: flex-start; cursor: default; }
+#clinixRoot .cx-hints .cx-hint .material-symbols-rounded { color: var(--cx-warn); flex: 0 0 auto; }
+#clinixRoot .cx-hint-btn { align-self: flex-start; }
+#clinixRoot .cx-hint-note { font: 500 11.5px inherit; color: var(--cx-muted); }
+
+#clinixRoot .cx-mcq { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+#clinixRoot .cx-mcq-opt {
+  display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 14px 13px; min-height: 52px;
+  background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl);
+  color: var(--cx-ink); font: 500 14px/1.45 inherit; text-align: left; cursor: pointer;
+}
+#clinixRoot .cx-mcq-opt--on { border-color: var(--cx-primary); background: var(--cx-surface-2); }
+#clinixRoot .cx-mcq-box { flex: 0 0 auto; display: inline-flex; color: var(--cx-primary); }
+#clinixRoot .cx-mcq-t { flex: 1 1 auto; min-width: 0; }
+#clinixRoot .cx-mcq-opt--right { border-color: var(--cx-primary); }
+#clinixRoot .cx-mcq-opt--harm { border-color: var(--cx-bad); background: var(--cx-bad-bg); }
+
+/* ── Physiology sandbox: waveforms, state banner and the reasoning panel ──────
+ * The sandbox now separates a derived readout (rewritten on every slider move) from the controls
+ * (never rewritten while dragging), so these rules only style the readout half.
+ */
+
+#clinixRoot .cx-physio-state {
+  margin: 12px 0; padding: 12px 14px; border-radius: var(--cx-r);
+  border: 1.5px solid var(--cx-line); background: var(--cx-card);
+}
+#clinixRoot .cx-physio-state--ok { border-color: rgba(16, 185, 129, .45); background: rgba(16, 185, 129, .07); }
+#clinixRoot .cx-physio-state--warn { border-color: rgba(245, 158, 11, .45); background: rgba(245, 158, 11, .07); }
+#clinixRoot .cx-physio-state--bad { border-color: rgba(239, 68, 68, .45); background: rgba(239, 68, 68, .07); }
+#clinixRoot .cx-physio-state-t { font-size: 15px; font-weight: 700; color: var(--cx-ink); line-height: 1.35; }
+#clinixRoot .cx-physio-state-s { margin-top: 4px; font-size: 12.5px; color: var(--cx-muted); line-height: 1.45; }
+
+#clinixRoot .cx-waves {
+  display: flex; flex-direction: column; gap: 10px; margin: 12px 0;
+}
+#clinixRoot .cx-wave {
+  margin: 0; padding: 8px 10px 6px; border-radius: var(--cx-r);
+  background: var(--cx-card); border: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-wave svg { display: block; width: 100%; height: 66px; }
+#clinixRoot .cx-wave-path { fill: none; stroke: var(--cx-primary); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+#clinixRoot .cx-wave-mid { stroke: var(--cx-line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+#clinixRoot .cx-wave-cap {
+  margin-top: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: .02em;
+  color: var(--cx-muted); text-transform: none;
+}
+
+#clinixRoot .cx-physio-listen {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+  margin-top: 8px; font-size: 13.5px; line-height: 1.55; color: var(--cx-ink);
+}
+#clinixRoot .cx-physio-listen .cx-btn { flex: 0 0 auto; }
+
+#clinixRoot .cx-physio-nums {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 0 4px;
+  font-size: 12px; color: var(--cx-muted); font-variant-numeric: tabular-nums;
+}
+#clinixRoot .cx-physio-nums b { color: var(--cx-ink); font-weight: 700; }
+
+#clinixRoot .cx-physio-why {
+  margin: 12px 0; padding: 12px 14px; border-radius: var(--cx-r);
+  background: var(--cx-soft, rgba(127, 127, 127, .06)); border: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-physio-why .cx-synth-list { margin-top: 6px; }
+#clinixRoot .cx-physio-why .cx-synth-list li + li { margin-top: 6px; }
+
+#clinixRoot .cx-physio-group { margin-top: 14px; }
+#clinixRoot .cx-physio-group-h {
+  display: block; margin-bottom: 6px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--cx-muted);
+}
+#clinixRoot .cx-physio-note {
+  margin: 8px 0 2px; padding: 10px 12px; border-radius: var(--cx-r);
+  background: rgba(59, 130, 246, .07); border: 1px solid rgba(59, 130, 246, .3);
+  font-size: 13px; line-height: 1.5; color: var(--cx-ink);
+}
+#clinixRoot .cx-vitals-monitor { margin: 12px 0; }
+#clinixRoot .cx-card-diag { margin: 12px 0; }

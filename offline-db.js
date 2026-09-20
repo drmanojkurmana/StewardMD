@@ -236,8 +236,8 @@
   // composition → {composition,class,chem_class,action_class,habit_forming,total,brands:[...]}
   // Sort/tier vocabulary + manufacturer tiers mirror worker/src/index.js SORTS + TIERS exactly.
   var TIERS = {
-    branded: ["sun pharma", "abbott", "cipla", "dr reddy", "lupin", "torrent", "zydus", "alkem", "sanofi", "glaxo", "pfizer", "astrazeneca", "boehringer", "novo nordisk", "eli lilly"],
-    generic: ["mankind", "aristo", "intas", "macleods", "micro labs", "emcure", "alembic", "usv", "eris", "glenmark", "blue cross", "franco", "wallace", "medley", "akumentis"]
+    branded: ["sun pharma", "abbott", "cipla", "dr reddy", "lupin", "torrent", "zydus", "alkem", "sanofi", "glaxo", "pfizer", "astrazeneca", "boehringer", "novo nordisk", "eli lilly", "ipca", "jb chemicals", "wockhardt", "cadila", "hetero"],
+    generic: ["mankind", "aristo", "intas", "macleods", "micro labs", "emcure", "alembic", "usv", "eris", "glenmark", "blue cross", "franco", "wallace", "medley", "akumentis", "leford", "apex"]
   };
   function composition(name, sort, tier, limit, offset, bq) {
     var order = sort === "price_asc" ? "(d.mrp IS NULL) ASC, d.mrp ASC, d.brand COLLATE NOCASE ASC"

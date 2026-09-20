@@ -68,6 +68,7 @@ const LIKELIHOOD_RANK = Object.freeze({
 
 const STATE = Object.freeze({
   REPORTED: "reported",
+  REJECTED: "rejected",           // decided at confirmation: not an incident, or a duplicate
   TRIAGED: "triaged",
   INVESTIGATING: "investigating",
   ACTIONS_OPEN: "actions-open",   // RCA accepted, CAPAs outstanding
@@ -91,6 +92,51 @@ const CONTROL_STRENGTH = Object.freeze({
   CHECKLIST: { rank: 2, label: "Checklist, double-check or independent verification" },
   EDUCATION: { rank: 1, label: "Education, training, reminders or policy" },
 });
+
+/**
+ * WHAT KIND OF EVENT IT WAS. A fixed list, so confirmed incidents can be counted into rates (falls
+ * per 1000 bed-days needs every fall to say it was a fall). Adapted from the incident-type classes
+ * of the WHO Conceptual Framework for the International Classification for Patient Safety (ICPS,
+ * 2009), collapsed to the categories a ward records. The list is UNAPPROVED locally. Optional at
+ * filing (every mandatory field is a reason not to report) and REQUIRED at confirmation, because
+ * that is where a report becomes a counted incident.
+ */
+const CATEGORY = Object.freeze({
+  FALL: "fall",
+  MEDICATION_ERROR: "medication-error",
+  PRESSURE_INJURY: "pressure-injury",
+  HAI: "healthcare-associated-infection",
+  PATIENT_IDENTIFICATION: "patient-identification",
+  TRANSFUSION: "blood-transfusion",
+  PROCEDURE: "clinical-procedure",
+  DIAGNOSIS_OR_RESULT: "diagnosis-or-result",
+  DETERIORATION: "deterioration-not-recognised",
+  DEVICE: "medical-device",
+  DOCUMENTATION: "documentation",
+  BEHAVIOUR: "behaviour-or-violence",
+  OTHER: "other",
+});
+const CATEGORIES = Object.freeze(Object.values(CATEGORY));
+
+/**
+ * Records a signal may be raised from. A signal is a report that has not yet been decided; linking it
+ * to the record that prompted it lets the investigator open the override, the critical result loop
+ * or the escalation instead of reconstructing it from a description.
+ */
+const SIGNAL_SOURCES = Object.freeze(["SafetyOverride", "CriticalResultLoop", "Observation", "RiskAssessment", "WoundAssessment", "MedicationAdministration"]);
+
+/** The confirmation decision. Only "confirmed" lets an investigation proceed. */
+const CONFIRM_OUTCOME = Object.freeze({ CONFIRMED: "confirmed", NOT_AN_INCIDENT: "not-an-incident", DUPLICATE: "duplicate" });
+
+/** Where an incident is, for a list: signal, confirmed, rejected, under investigation, closed. */
+function stageOf(incident) {
+  const i = incident || {};
+  if (i.state === STATE.CLOSED) return "closed";
+  if (i.state === STATE.REJECTED) return "rejected";
+  if (i.state === STATE.INVESTIGATING || i.state === STATE.ACTIONS_OPEN) return "under-investigation";
+  if (i.confirmation && i.confirmation.outcome === CONFIRM_OUTCOME.CONFIRMED) return "confirmed";
+  return "signal";
+}
 
 class IncidentError extends Error {
   constructor(message, code) {
@@ -135,7 +181,7 @@ let seq = 0;
  * report, and the reports lost to friction are not a random sample: they are the minor and the
  * near-miss ones, which is to say the ones that were still cheap to learn from.
  */
-function report({ what, when, severity, reportedBy, anonymous = false, patientId, likelihood, contributingFactors, now } = {}) {
+function report({ what, when, severity, reportedBy, anonymous = false, patientId, likelihood, contributingFactors, category, source, now } = {}) {
   if (!what || String(what).trim().length < 3) {
     throw new IncidentError("an incident needs a description of what happened", "NO_DESCRIPTION");
   }
@@ -146,6 +192,12 @@ function report({ what, when, severity, reportedBy, anonymous = false, patientId
   // author; what it buys is the report existing at all, and that is the better trade.
   if (!anonymous && !reportedBy) {
     throw new IncidentError("a named report needs the reporter, or set anonymous: true", "NO_REPORTER");
+  }
+  if (category && !CATEGORIES.includes(category)) {
+    throw new IncidentError(`category must be one of ${CATEGORIES.join(", ")}`, "BAD_CATEGORY");
+  }
+  if (source && (!SIGNAL_SOURCES.includes(source.resourceType) || !String(source.id || "").trim())) {
+    throw new IncidentError(`a signal source needs a resourceType (${SIGNAL_SOURCES.join(", ")}) and an id`, "BAD_SOURCE");
   }
 
   const at = now || new Date().toISOString();
@@ -163,6 +215,9 @@ function report({ what, when, severity, reportedBy, anonymous = false, patientId
     reportedBy: anonymous ? null : reportedBy,
     patientId: patientId || null,
     contributingFactors: contributingFactors || [],
+    category: category || null,
+    source: source ? { resourceType: source.resourceType, id: String(source.id).trim() } : null,
+    confirmation: null,
     state: STATE.REPORTED,
     rca: null,
     capas: [],
@@ -170,9 +225,53 @@ function report({ what, when, severity, reportedBy, anonymous = false, patientId
   };
 }
 
+const notRejected = (incident) => {
+  if (incident.state === STATE.REJECTED) throw new IncidentError("this signal was decided not to be an incident (or a duplicate); it is not investigated", "REJECTED");
+};
+const mustBeConfirmed = (incident, what) => {
+  notRejected(incident);
+  if (!incident.confirmation || incident.confirmation.outcome !== CONFIRM_OUTCOME.CONFIRMED) {
+    throw new IncidentError(`${what} needs the signal confirmed as an incident first`, "NOT_CONFIRMED");
+  }
+};
+
+/**
+ * Decides a signal: confirmed as an incident, not an incident, or a duplicate of another report.
+ * Every outcome carries a reason and names who decided, because a rejected signal is exactly the
+ * kind of decision an auditor needs to be able to read back. Decided once; a second decision is a
+ * new report, not a rewrite.
+ */
+function confirm(incident, { outcome, reason, duplicateOf, category, by, now } = {}) {
+  if (!by) throw new IncidentError("a confirmation must name who decided it", "NO_ACTOR");
+  if (incident.confirmation) throw new IncidentError(`already decided: ${incident.confirmation.outcome}`, "ALREADY_DECIDED");
+  if (!Object.values(CONFIRM_OUTCOME).includes(outcome)) {
+    throw new IncidentError(`outcome must be one of ${Object.values(CONFIRM_OUTCOME).join(", ")}`, "BAD_OUTCOME");
+  }
+  if (!reason || String(reason).trim().length < 3) throw new IncidentError("a confirmation decision needs a reason", "NO_REASON");
+  const cat = category || incident.category;
+  if (outcome === CONFIRM_OUTCOME.CONFIRMED && !CATEGORIES.includes(cat)) {
+    throw new IncidentError(`a confirmed incident needs a category (${CATEGORIES.join(", ")}), or it cannot be counted`, "NO_CATEGORY");
+  }
+  if (category && !CATEGORIES.includes(category)) throw new IncidentError(`category must be one of ${CATEGORIES.join(", ")}`, "BAD_CATEGORY");
+  if (outcome === CONFIRM_OUTCOME.DUPLICATE && (!duplicateOf || duplicateOf === incident.id)) {
+    throw new IncidentError("a duplicate must name the other incident it duplicates", "NO_DUPLICATE_OF");
+  }
+  const at = now || new Date().toISOString();
+  incident.category = cat || null;
+  incident.confirmation = {
+    outcome, reason: String(reason).trim(),
+    duplicateOf: outcome === CONFIRM_OUTCOME.DUPLICATE ? duplicateOf : null,
+    by, at,
+  };
+  if (outcome !== CONFIRM_OUTCOME.CONFIRMED) incident.state = STATE.REJECTED;
+  incident.history.push({ at, event: "confirmation", by, detail: outcome });
+  return incident;
+}
+
 /** Triage assigns likelihood and therefore the SAC, and names who did it. */
 function triage(incident, { likelihood, triagedBy, now } = {}) {
   if (!triagedBy) throw new IncidentError("triage must name who did it", "NO_ACTOR");
+  notRejected(incident);
   incident.likelihood = likelihood;
   incident.sac = sacScore(incident.severity, likelihood);
   incident.state = STATE.TRIAGED;
@@ -201,6 +300,7 @@ function recordRCA(incident, { rootCause, contributingFactors, method, conducted
       `"${rootCause}" names a person as the root cause. That is where an investigation starts, not where it finishes: it leaves unasked why the system made this error easy, likely, or invisible until it reached the patient. Describe the system condition instead.`,
       "PERSON_AS_ROOT_CAUSE");
   }
+  mustBeConfirmed(incident, "a root cause analysis");
 
   incident.rca = {
     rootCause: String(rootCause).trim(),
@@ -234,6 +334,7 @@ function addCAPA(incident, { action, owner, dueBy, strength, now } = {}) {
   if (strength && !CONTROL_STRENGTH[strength]) {
     throw new IncidentError(`strength must be one of ${Object.keys(CONTROL_STRENGTH).join(", ")}`, "BAD_STRENGTH");
   }
+  mustBeConfirmed(incident, "a corrective action");
 
   const inferred = strength || (looksWeak(action) ? "EDUCATION" : null);
   const capa = {
@@ -272,6 +373,7 @@ function completeCAPA(incident, capaId, { by, evidence, now } = {}) {
  */
 function close(incident, { by, now } = {}) {
   if (!by) throw new IncidentError("closing an incident must name who closed it", "NO_ACTOR");
+  mustBeConfirmed(incident, "closing");
   if (incident.sac && incident.sac.rcaRequired && !incident.rca) {
     throw new IncidentError(`a SAC ${incident.sac.sac} incident cannot be closed without a root cause analysis`, "NO_RCA");
   }
@@ -309,8 +411,16 @@ function reportingHealth(incidents, nowIso) {
   const allCapas = all.flatMap((i) => i.capas);
   const weak = allCapas.filter((c) => c.weak).length;
 
+  const confirmedOnes = all.filter((i) => i.confirmation && i.confirmation.outcome === CONFIRM_OUTCOME.CONFIRMED);
   return {
     total: all.length,
+    // The safety pipeline, kept apart: a signal is not an incident until someone decides it is, and
+    // an incident with a root cause is not one with its actions done.
+    signals: all.filter((i) => stageOf(i) === "signal").length,
+    confirmed: confirmedOnes.length,
+    rejected: all.filter((i) => i.state === STATE.REJECTED).length,
+    withRootCause: confirmedOnes.filter((i) => i.rca).length,
+    completedCapas: allCapas.filter((c) => c.state === "complete").length,
     nearMiss,
     harm,
     anonymous: all.filter((i) => i.anonymous).length,
@@ -329,6 +439,7 @@ function reportingHealth(incidents, nowIso) {
 
 export {
   SEVERITY, SEVERITY_RANK, LIKELIHOOD, STATE, CONTROL_STRENGTH, WEAK_ACTIONS,
+  CATEGORY, CATEGORIES, SIGNAL_SOURCES, CONFIRM_OUTCOME,
   IncidentError,
-  sacScore, report, triage, recordRCA, addCAPA, completeCAPA, close, reportingHealth,
+  sacScore, report, triage, confirm, stageOf, recordRCA, addCAPA, completeCAPA, close, reportingHealth,
 };

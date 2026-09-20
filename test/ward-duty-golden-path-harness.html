@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ ward team duty: golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js through the owner's 2026-09-15 duty path: the ward list shows My duty (from GET
+ * /roster/duty-status) and who a level 2 alert would reach per ward (GET /ward/alert-cover); "I am off duty" posts
+ * the caller's own status (no identity in the body) and the card changes only after the server says saved; a
+ * refusal is shown. Response shapes are the ones pinned through the real router in
+ * test/wardsynq-ward-duty-team.test.mjs. This proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+var REFUSE_NEXT = false;
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/alert-cover") >= 0) return reply({ ok: true, wards: [
+    { rule: "all-on-duty-ward-team", source: "default", ward: "Cardio", counts: { nurse: 0, resident: 0, consultant: 0 }, total: 0 },
+    { rule: "all-on-duty-ward-team", source: "default", ward: "Medical A", counts: { nurse: 2, resident: 1, consultant: 1 }, total: 4 }] });
+  if (u.indexOf("/roster/duty-status") >= 0 && (opts && opts.method) === "POST") {
+    if (REFUSE_NEXT) { REFUSE_NEXT = false; return reply({ ok: false, error: "unknown_ward", message: "\"Nowhere\" is not a ward in this hospital." }); }
+    return reply({ ok: true, status: { status: body.status, unit: body.unit || "", setAt: 1, expiresAt: "2026-09-15T14:30:00.000Z", basis: "shift", shiftId: "day" }, rota: { id: "day", name: "Day", unit: "Medical A" } });
+  }
+  if (u.indexOf("/roster/duty-status") >= 0) return reply({ ok: true, identity: "nurse7", status: null, rota: { id: "day", name: "Day", unit: "Medical A" }, wards: ["Cardio", "Medical A"], hours: 12 });
+  return reply({ ok: true });
+};
+window.__refuseNext = function () { REFUSE_NEXT = true; };
+</script>
+<script src="../ward.js"></script>
+<script>window.__ready = !!(window.WARD && window.WARD.open);</script>
+</body></html>

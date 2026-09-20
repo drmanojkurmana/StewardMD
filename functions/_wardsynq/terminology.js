@@ -57,6 +57,9 @@ const SYSTEMS = Object.freeze({
   ucum: { uri: "http://unitsofmeasure.org", name: "UCUM" },
   "http://unitsofmeasure.org": { uri: "http://unitsofmeasure.org", name: "UCUM" },
   ndc: { uri: "http://hl7.org/fhir/sid/ndc", name: "NDC" },
+  // CVX, the CDC's vaccine code system, for an immunization whose recorder gave a code (immunization.js). A system, not a catalogue.
+  cvx: { uri: "http://hl7.org/fhir/sid/cvx", name: "CVX" },
+  "http://hl7.org/fhir/sid/cvx": { uri: "http://hl7.org/fhir/sid/cvx", name: "CVX" },
   "http://hl7.org/fhir/sid/ndc": { uri: "http://hl7.org/fhir/sid/ndc", name: "NDC" },
 });
 

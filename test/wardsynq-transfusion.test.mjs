@@ -52,6 +52,22 @@ async function upToBedside(engine, patient, unit) {
 
 /* ------------------------------------------------------------------ the matrix */
 
+test("WHOLE BLOOD IS GIVEN ONLY TO THE IDENTICAL GROUP: its plasma makes O whole blood unsafe for an A patient", () => {
+  for (const recipient of ["O", "A", "B", "AB"]) {
+    for (const donor of ["O", "A", "B", "AB"]) {
+      const v = checkCompatibility(
+        { aboGroup: recipient, rhD: "positive" },
+        unitOf({ aboGroup: donor, rhD: "positive", component: "whole-blood" }),
+      );
+      assert.equal(v.compatible, recipient === donor, `whole blood: group ${donor} into group ${recipient}`);
+    }
+  }
+  const o2a = checkCompatibility({ aboGroup: "A", rhD: "positive" }, unitOf({ aboGroup: "O", rhD: "positive", component: "whole-blood" }));
+  assert.ok(o2a.reasons.some((r) => r.code === "ABO_INCOMPATIBLE" && /whole blood/.test(r.message)));
+  const rh = checkCompatibility({ aboGroup: "A", rhD: "negative" }, unitOf({ aboGroup: "A", rhD: "positive", component: "whole-blood" }));
+  assert.ok(rh.reasons.some((r) => r.code === "RHD_MISMATCH"), "whole blood still carries red cells for the RhD rule");
+});
+
 test("compatibility: the full red cell matrix is exactly right", () => {
   // Recipient -> every donor group that may be given. Written out by hand on purpose.
   const expected = {

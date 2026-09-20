@@ -138,6 +138,32 @@ export async function checkForDevice(r2, state = {}) {
 }
 
 // One content-addressed file. `hash` is caller-validated (see the router) before this is called.
-export async function getFile(r2, hash) { return r2.get(K.file(hash)); }
+export async function getFile(r2, hash, options) { return r2.get(K.file(hash), options); }
+
+/* RESUMABLE DOWNLOADS. The bundle is ~48MB and the phone was served it as one un-resumable stream:
+ * the route answered 200 with the whole body whatever Range was asked for, so any drop restarted from
+ * zero and the updater reported "download failed" (owner's iPhone, 2026-09-18). Parses an HTTP Range
+ * header into R2's {offset,length}; returns null when absent or unsatisfiable, which the caller
+ * answers as a normal 200. Only a single byte range is honoured. */
+export function parseRange(header, size) {
+  const m = /^bytes=(\d*)-(\d*)$/.exec(String(header || "").trim());
+  if (!m || !size) return null;
+  const hasStart = m[1] !== "", hasEnd = m[2] !== "";
+  if (!hasStart && !hasEnd) return null;
+  let offset, length;
+  if (!hasStart) {
+    const n = Number(m[2]);
+    if (!n) return null;
+    length = Math.min(n, size);
+    offset = size - length;
+  } else {
+    offset = Number(m[1]);
+    if (offset >= size) return null;
+    const end = hasEnd ? Math.min(Number(m[2]), size - 1) : size - 1;
+    if (end < offset) return null;
+    length = end - offset + 1;
+  }
+  return { offset, length };
+}
 
 export const KEYS = K;

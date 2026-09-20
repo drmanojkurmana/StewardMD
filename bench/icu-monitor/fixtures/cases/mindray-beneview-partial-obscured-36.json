@@ -1,0 +1,95 @@
+{
+  "id": "mindray-beneview-partial-obscured-36",
+  "manufacturer": "mindray-beneview",
+  "layout": "right-column-limits-right",
+  "difficulty": [
+    "partial",
+    "label-obscured"
+  ],
+  "image": "mindray-beneview-partial-obscured-36.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 88
+    },
+    "spo2": {
+      "status": "ambiguous",
+      "value": 97,
+      "why": "label obscured by glare; value legible but parameter identity unconfirmed without the label"
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 88
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "rr": {
+      "status": "not_visible"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 126,
+        "dbp": 80,
+        "map": 95
+      }
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 126,
+        "dbp": 80,
+        "map": 95
+      }
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 126,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 80,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 95,
+      "source": "ART"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "23:47"
+  },
+  "notes": "mindray-beneview partial-obscured synthetic fixture."
+}

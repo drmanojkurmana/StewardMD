@@ -13,6 +13,54 @@ cold copy.
 trusted box (`wrangler login` first) and archive the output to storage you control (a second cloud / R2
 in a different account). Restore a cold copy into a fresh DB: `wrangler d1 execute <db> --file <sql>`.
 
+### 1a. The WardSynQ audit trail on restore (P2.17)
+`connect_audit_event` refuses UPDATE and DELETE (triggers in `db/connect_schema.sql`), and every audit row the
+WardSynQ record repository writes has a hash-chain link in `wardsynq_audit_chain` (`functions/db/wardsynq_schema.sql`,
+`functions/_wardsynq/audit-chain.js`). Admin Center > Security review and System health verify the newest rows.
+- **Triggers do not stop a restore.** Time Travel and a cold-copy import work below them. That is expected; the
+  chain is what shows what a restore changed.
+- **A Time Travel restore rewinds the rows and their links together**, so the chain verifies as intact afterwards.
+  That does NOT prove nothing was lost: every audit row written after the restore point is gone. The chain head is
+  copied to KV at most hourly (`anchorHead`, `wsq:auditanchor:<tenant>`), outside the database, so once an anchor
+  newer than the restore point exists, System health and Security review report the trail as **truncated** or
+  **rewritten**. After a legitimate restore that report is correct and expected, and it stays until the anchor log
+  is acknowledged. To acknowledge it, once the restore is confirmed legitimate and written up:
+  1. Record the restore in the incident log (`docs/INCIDENT_RESPONSE.md`) and keep its incident reference.
+  2. Open Admin Center > Security review > Audit retention > Tamper evidence. The outside-copy line names
+     the break; only the hospital owner sees the acknowledgement form (a StewardMD platform owner may do
+     it in their place). Do not acknowledge a difference nobody can explain: ask the information
+     governance lead first.
+  3. Enter why the database was restored (at least 20 characters, no patient details) and the incident
+     reference, review the read-back, and confirm. The old anchor log is archived unchanged under
+     `wsq:auditanchor:<tenant>:archived:<time>` and never deleted, a fresh log restarts from the newest
+     row, and the acknowledgement itself is written to the audit trail. System health and Security review
+     then read up, naming who acknowledged the restore, when, and under which incident.
+  Do not delete the KV key by hand, because it is the evidence of what was lost.
+  **Two outside copies (G12).** The same head is also copied hourly into Firestore (`q_audit_anchors`, one doc per
+  anchor key, via `firestoreAnchorStore`), for the clinical chain and for the hospital event log (`q:<orgId>`).
+  Each copy is compared with the database and the two are compared with each other; a disagreement between them is
+  reported on its own, down in System health. The acknowledgement restarts every broken copy (and seeds an empty one)
+  under one chained row, and archives each old log in its own store. Delete neither copy by hand.
+  **Confirm the live chain without the cron (G4):** `node scripts/audit-chain-live-check.mjs --since <ISO time>`
+  (optional `--db stewardmd-connect`, `--tenant <id>`, `--limit 500`; needs `wrangler login`; sends SELECTs only).
+  It compares `connect_audit_event` rows (connector wardsynq) written since then with `wardsynq_audit_chain` links
+  and re-hashes each hospital's newest links with the app's own code. Exit 0: every row since then has a link,
+  no link lost its row, no link number is missing, every chain verifies. 1: findings, named. 2: nothing was
+  written since then, so the live chain was NOT observed. 3: the database could not be read.  **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
+  take a manual export (`scripts/backup-d1.sh`). After restoring, the difference is the audit rows the restore
+  discarded; keep that export as the record of them.
+- **Never merge rows from a cold copy back into a restored database.** New writes continue from the restored
+  head, so link numbers after the restore point are reused by a different history. Re-inserting old rows either
+  collides on the chain's primary key or shows as a break. Restore a copy side by side and compare instead.
+- **Restoring a cold copy into a fresh DB:** apply `db/connect_schema.sql` then `functions/db/wardsynq_schema.sql`
+  (both re-runnable), import, then confirm the four triggers exist:
+  `SELECT tbl_name, name FROM sqlite_master WHERE type='trigger'` should list `connect_audit_event_no_update`,
+  `connect_audit_event_no_delete`, `wardsynq_audit_chain_no_update`, `wardsynq_audit_chain_no_delete`.
+  Run the same check after applying the schema with `wrangler d1 execute --file` the first time.
+- Rows written before the chain existed are unchained and cannot be verified; link 1 names the newest of them.
+- Nothing deletes audit rows for retention. `wardsynq.auditRetentionYears` is shown in Security review and is
+  informational only.
+
 ## 2. Firestore (patient/ICU/clinical docs)
 **Enable PITR** (Firebase console → Firestore → **Point-in-time recovery: ON**) — 7-day continuous
 recovery. Restore via `gcloud firestore databases restore`.
@@ -20,6 +68,12 @@ recovery. Restore via `gcloud firestore databases restore`.
 `gcloud firestore export gs://<bucket>` on a Cloud Scheduler job (this is a GCP-side cron, NOT a
 Cloudflare Worker — Firestore managed export targets GCS). Retain 30–90 days.
 Restore: `gcloud firestore import gs://<bucket>/<export>`.
+**The hospital event log is chained too (G3).** `q_events` rows (sign-ins, staff and hospital setting changes,
+queue and billing acts) are linked per hospital (`functions/_q_audit_chain.js`): row `q_events/<key>__c<seq>` with
+`prevHash`/`rowHash`, head in `q_audit_chain_head/<key>`. A PITR restore or an import rewinds rows and head
+together, so the chain verifies afterwards while every later row is gone; the same rules as 1a apply (note the
+head seq before restoring, never merge old rows back in, acknowledge the anchor break only for a planned
+restore). Rows written before linking began are shown as unlinked in Security review, never as verified.
 
 ## 3. Cloudflare KV (MAIK_KV — usage counters, remote config, client-error log, audit)
 KV holds operational metadata (no PHI), mostly TTL'd. It has no native export; if you want a copy, a
@@ -40,3 +94,22 @@ cross-account replication for the DR copy.
 ## Ownership
 - Weekly: `scripts/backup-d1.sh` (automate in CI). Monthly: verify Firestore export ran + a spot restore.
 - Before any risky migration/deploy: take a manual D1 export + note the Time Travel bookmark.
+
+## 5. WardSynQ scheduled backups (per hospital)
+The worker's hourly cron (`0 * * * *`) POSTs `/api/queue/ops/backup-all` with the admin token. For each WardSynQ
+hospital with a **backup destination** (Admin Center > Integrations > Backup destination):
+- The first run of each UTC day takes a backup: a full on the first run of a month, otherwise an incremental from
+  the last run's record sequence. Files are encrypted per hospital (AES-256-GCM, key derived from the document key)
+  and stored as `wardsynq-backups/<tenant>/<yyyy-mm>/<run>.jsonl.aesgcm`, read back and SHA-256 verified, and
+  recorded as a `BackupRun` record (audited). A failed run is retried the next hour.
+- Retention is set on the connector (default 30 daily, 12 monthly); expired files are deleted only when no kept
+  restore point needs them, each deletion audited.
+- Weekly, the newest restore point is restored into a scratch in-memory copy and compared (files, checksums,
+  version chains, counts per resource type, audit-chain head); the result is an automated `RestoreTest`.
+- System health shows the last successful backup and size, the last restore test and the last failure; a failure
+  is pushed to the hospital's administrators once a day.
+**Destinations.** `s3`: the hospital's own S3-compatible bucket (AWS S3, R2, MinIO, Wasabi), credentials sealed.
+`platform`: this deployment's object store, which needs the `DOC_S3_*` settings, i.e. owner decision S1 (the
+storage bucket). Until one is configured, System health reads "Backups are not running: no backup destination is
+configured". The bucket holder cannot read the files; restoring one needs WardSynQ (the document key) and
+`backup.js verifyPlan` before any import. SFTP is not supported.

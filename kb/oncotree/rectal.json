@@ -1,0 +1,385 @@
+{
+  "guideline": "rectal",
+  "id": "rectal",
+  "title": "Rectal Cancer",
+  "category": "Gastrointestinal Oncology",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "rectal_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Rectal Cancer. Covers complete clinical algorithm: Diagnostic Workup (rigid or flexible proctoscopy with DRE establishing tumor height from anal verge, high-resolution thin-slice pelvic MRI for CRM depth and EMVI, diagnostic colonoscopy with biopsy confirming adenocarcinoma, mandatory MMR/MSI plus RAS BRAF V600E and HER2 testing, contrast-enhanced CT chest/abdomen/pelvis with baseline CEA, multidisciplinary tumor board evaluation) -> Stage and Biomarker Stratification (early-stage cT1N0 favorable vs locally advanced dMMR/MSI-H vs locally advanced pMMR/MSS vs metastatic Stage IV/M1) -> Early-stage local therapy (transanal local excision TEM/TAMIS or TME with LAR/APR, observation for clear margins without adverse features) -> Locally advanced dMMR/MSI-H neoadjuvant PD-1 monotherapy (dostarlimab with watch-and-wait organ preservation for cCR, Cercek et al. NEJM) -> Locally advanced pMMR/MSS total neoadjuvant therapy (OPRA/RAPIDO mFOLFOX6/CAPOX plus long-course chemoradiotherapy, watch-and-wait for cCR vs TME) -> Metastatic multidisciplinary management (perioperative FOLFOX/CAPOX with resection of oligometastases, or doublet/triplet systemic therapy with biologics and pembrolizumab for dMMR/MSI-H). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Rectal Cancer Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Tumor height from the anal verge on rigid or flexible proctoscopy with DRE defines surgical planning: low rectum below 5 cm, mid rectum 5 to 10 cm, upper rectum 10 to 15 cm. Low tumors near the sphincter complex require explicit sphincter-preservation assessment by an experienced colorectal surgeon.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "High-resolution thin-slice pelvic MRI with a dedicated rectal protocol stages mesorectal fascia and CRM involvement, T category and depth of extramural spread, nodal morphology, and EMVI status. CRM threatened or involved disease and EMVI positivity select the total neoadjuvant therapy pathway.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "All rectal adenocarcinomas require MMR/MSI testing by IHC for MLH1, MSH2, MSH6, and PMS2, plus KRAS/NRAS, BRAF V600E, and HER2 testing at diagnosis. dMMR/MSI-H locally advanced disease is eligible for neoadjuvant dostarlimab organ-preservation therapy; RAS and BRAF status guides metastatic biologic selection.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Neoadjuvant dostarlimab-gxly 500 mg IV every 3 weeks for 6 months (9 cycles, Cercek et al. NEJM) produced sustained clinical complete responses in dMMR locally advanced rectal cancer. Patients with cCR on restaging endoscopy with biopsy, pelvic MRI, DRE, and CT enter non-operative watch-and-wait surveillance every 3 to 4 months; surgery is reserved for residual or recurrent tumor.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Total neoadjuvant therapy per OPRA/RAPIDO: mFOLFOX6 (oxaliplatin 85 mg/m2, leucovorin 400 mg/m2, 5-FU 400 mg/m2 bolus plus 2400 mg/m2 46-hour continuous infusion every 14 days for 6 to 8 cycles) or CAPOX combined with long-course chemoradiotherapy (50.4 Gy with concurrent capecitabine 825 mg/m2 twice daily). Restage at 8 to 12 weeks: cCR proceeds to watch-and-wait organ preservation; incomplete response proceeds to TME.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Metastatic rectal cancer is managed by resectability: resectable oligometastatic liver or lung disease receives perioperative FOLFOX/CAPOX with metastasectomy or ablation plus pelvic chemoradiation/TME; unresectable disease receives doublet or triplet systemic therapy (FOLFOX, FOLFIRI, or FOLFIRINOX) with bevacizumab or, for RAS wild-type left-sided tumors, panitumumab or cetuximab; dMMR/MSI-H disease receives pembrolizumab.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "rectal_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Rectal Cancer: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before stage and biomarker stratification. Establish tumor height from the anal verge, stage the mesorectum with dedicated MRI, confirm adenocarcinoma histology, complete mandatory molecular testing, screen for distant spread, and obtain multidisciplinary review.",
+      "path": "Rectal Cancer / Workup",
+      "pills": [
+        "rectal",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Rigid or flexible proctoscopy with digital rectal exam (DRE) establishing tumor height from anal verge (below 5 cm low, 5 to 10 cm mid, 10 to 15 cm upper)",
+        "High-resolution thin-slice pelvic MRI with dedicated rectal protocol to assess Circumferential Resection Margin (CRM), depth of invasion, and extramural venous invasion (EMVI)",
+        "Diagnostic colonoscopy with biopsy confirming adenocarcinoma",
+        "Mandatory MMR / MSI testing (IHC for MLH1, MSH2, MSH6, PMS2) plus RAS (KRAS/NRAS), BRAF V600E, and HER2 testing",
+        "Contrast-enhanced CT chest/abdomen/pelvis for distant staging, and baseline serum CEA",
+        "Multidisciplinary tumor board evaluation (colorectal surgeon, medical oncologist, radiation oncologist)"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Stage and Biomarker Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage_biomarker",
+      "linkId": "rectal_stage_biomarker",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Stage and Biomarker Stratification",
+      "title": "Rectal Cancer: Stage and Biomarker Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign stage and biomarker group from clinical T and N category, MMR/MSI status, CRM assessment, and distant spread; the group selects the local-excision, dMMR organ-preservation, pMMR total neoadjuvant, or metastatic pathway.",
+      "path": "Rectal Cancer / Stage and Biomarker Stratification",
+      "pills": [
+        "rectal",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Early-stage disease: favorable cT1N0, tumor below 3 cm, mobile on DRE, well or moderately differentiated, no lymphovascular invasion (LVI).",
+        "Locally advanced dMMR/MSI-H disease: cT3-T4 or node-positive with dMMR/MSI-H by IHC or PCR, eligible for neoadjuvant PD-1 organ-preservation therapy.",
+        "Locally advanced pMMR/MSS disease: cT3-T4 or node-positive with pMMR/MSS, including CRM threatened disease requiring total neoadjuvant therapy.",
+        "Metastatic disease: Stage IV (M1) rectal cancer with distant organ spread on chest/abdomen/pelvis CT."
+      ],
+      "options": [
+        {
+          "id": "early",
+          "label": "Early-Stage Rectal Cancer (cT1N0 favorable, <3cm, mobile, well/mod diff, no LVI)",
+          "sets": {
+            "stage": "early",
+            "setting": "localized"
+          },
+          "pills": [
+            "rectal",
+            "early-stage",
+            "cT1N0"
+          ]
+        },
+        {
+          "id": "dmmr",
+          "label": "Locally Advanced dMMR / MSI-H Rectal Cancer (cT3-T4 or N+, dMMR/MSI-H)",
+          "sets": {
+            "stage": "locally_advanced",
+            "biomarker": "dmmr_msi_h"
+          },
+          "pills": [
+            "rectal",
+            "locally advanced",
+            "dMMR",
+            "MSI-H"
+          ]
+        },
+        {
+          "id": "pmmr",
+          "label": "Locally Advanced pMMR / MSS Rectal Cancer (cT3-T4 or N+, pMMR/MSS, CRM threatened)",
+          "sets": {
+            "stage": "locally_advanced",
+            "biomarker": "pmmr_mss"
+          },
+          "pills": [
+            "rectal",
+            "locally advanced",
+            "pMMR",
+            "MSS"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Metastatic Rectal Cancer (Stage IV / M1)",
+          "sets": {
+            "stage": "metastatic",
+            "setting": "metastatic"
+          },
+          "pills": [
+            "rectal",
+            "metastatic",
+            "M1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_early_tx",
+      "linkId": "rectal_early_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Early-Stage Treatment",
+      "title": "Early-Stage cT1N0: Local Excision or TME With Observation",
+      "section": "Treatment",
+      "description": "Organ-sparing local excision for select low-risk cT1N0 tumors or total mesorectal excision for the remaining early-stage patients, with observation for clear-margin pathology without adverse features.",
+      "path": "Rectal Cancer / Early-Stage / Treatment",
+      "pills": [
+        "rectal",
+        "early-stage",
+        "cT1N0",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Transanal local excision (TEM or TAMIS) for select low-risk cT1N0 tumors: below 3 cm, mobile, well or moderately differentiated, no LVI, with full-thickness excision and oriented specimen for margin assessment.",
+        "Total Mesorectal Excision (TME) by Low Anterior Resection (LAR) for mid and upper tumors or Abdominoperineal Resection (APR) for very low tumors with sphincter involvement, with sharp mesorectal dissection and CRM-negative intent.",
+        "Observation after local excision when margins are clear (at least 3 mm) and final pathology is pT1 without adverse features (no poor differentiation, no LVI, no tumor budding, no positive margin); enter endoscopic and MRI surveillance.",
+        "Conversion to TME or chemoradiotherapy when final pathology shows high-risk features: positive or close margin below 3 mm, pT2 or deeper invasion, poor differentiation, LVI, tumor budding, or fragmented specimen.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Transanal Local Excision (TAMIS) or TME Surgery (LAR/APR) + Observation",
+      "protocolRefs": [
+        "modified-folfox-6"
+      ]
+    },
+    {
+      "id": "n_dmmr_tnt_tx",
+      "linkId": "rectal_dmmr_tnt_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "dMMR/MSI-H Neoadjuvant Treatment",
+      "title": "dMMR/MSI-H Locally Advanced: Dostarlimab Then Watch-and-Wait",
+      "section": "Treatment",
+      "description": "Neoadjuvant PD-1 monotherapy with dostarlimab for locally advanced dMMR/MSI-H rectal cancer, followed by rigorous restaging with organ preservation for clinical complete response.",
+      "path": "Rectal Cancer / Locally Advanced dMMR-MSI-H / Treatment",
+      "pills": [
+        "rectal",
+        "locally advanced",
+        "dMMR",
+        "MSI-H",
+        "organ preservation"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Neoadjuvant PD-1 monotherapy: Dostarlimab-gxly 500 mg IV every 3 weeks for 6 months (9 cycles; Cercek et al. NEJM) without concurrent chemoradiation or upfront surgery.",
+        "Rigorous restaging after completion: endoscopy with biopsy, pelvic MRI, DRE, and CT of chest/abdomen/pelvis to adjudicate clinical complete response (cCR) versus residual disease.",
+        "Clinical complete response (cCR): proceed to Non-Operative Management (watch-and-wait surveillance every 3 to 4 months with endoscopy, MRI, DRE, CEA, and CT) without chemoradiation or surgery.",
+        "Residual or recurrent tumor: proceed to salvage Total Mesorectal Excision (LAR or APR) with curative intent; consider multidisciplinary review before any additional systemic therapy.",
+        "Immune-related adverse event monitoring (colitis, hepatitis, pneumonitis, endocrinopathies) throughout PD-1 therapy; physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Dostarlimab 500 mg IV q3w x 6 months -> Watch-and-Wait Organ Preservation for cCR",
+      "protocolRefs": [
+        "rectal-dostarlimab"
+      ]
+    },
+    {
+      "id": "n_pmmr_tnt_tx",
+      "linkId": "rectal_pmmr_tnt_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "pMMR/MSS Total Neoadjuvant Treatment",
+      "title": "pMMR/MSS Locally Advanced: TNT Then Watch-and-Wait vs TME",
+      "section": "Treatment",
+      "description": "Total neoadjuvant therapy combining systemic chemotherapy with long-course chemoradiotherapy for locally advanced pMMR/MSS rectal cancer, with response-adapted organ preservation or surgery.",
+      "path": "Rectal Cancer / Locally Advanced pMMR-MSS / Treatment",
+      "pills": [
+        "rectal",
+        "locally advanced",
+        "pMMR",
+        "MSS",
+        "TNT"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "e"
+      ],
+      "bullets": [
+        "Total Neoadjuvant Therapy (TNT) per OPRA/RAPIDO approach: induction or consolidation chemotherapy with mFOLFOX6 (Oxaliplatin 85 mg/m2, Leucovorin 400 mg/m2, 5-FU 400 mg/m2 bolus plus 2400 mg/m2 46-hour continuous infusion every 14 days for 6 to 8 cycles) or CAPOX.",
+        "Long-Course Chemoradiotherapy (LCRT): 50.4 Gy in 28 fractions with concurrent Capecitabine 825 mg/m2 twice daily on radiation days, sequenced before or after systemic chemotherapy per OPRA/RAPIDO schema and CRM status.",
+        "Restaging at 8 to 12 weeks after TNT completion: DRE, endoscopy with biopsy, pelvic MRI, and CT to adjudicate clinical complete response (cCR) versus incomplete response.",
+        "Clinical complete response (cCR): organ preservation with watch-and-wait surveillance every 3 to 4 months (endoscopy, MRI, DRE, CEA, CT); incomplete response: Total Mesorectal Excision (LAR or APR) with sharp mesorectal dissection.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Total Neoadjuvant Therapy (TNT: mFOLFOX6/CAPOX + LCRT 50.4 Gy) -> Watch-and-Wait vs TME",
+      "protocolRefs": [
+        "modified-folfox-6",
+        "folfox-4"
+      ]
+    },
+    {
+      "id": "n_metastatic_tx",
+      "linkId": "rectal_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Metastatic Treatment",
+      "title": "Stage IV/M1: Systemic Therapy With Oligometastatic Resection",
+      "section": "Treatment",
+      "description": "Multidisciplinary metastatic management stratified by resectability: perioperative chemotherapy with resection for oligometastatic disease, or doublet/triplet systemic therapy with biologics for unresectable disease.",
+      "path": "Rectal Cancer / Metastatic / Systemic Therapy",
+      "pills": [
+        "rectal",
+        "metastatic",
+        "M1",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "f"
+      ],
+      "bullets": [
+        "Resectable oligometastatic (liver or lung) disease: perioperative FOLFOX or CAPOX plus surgical resection or ablation of metastases, combined with pelvic chemoradiation and TME for the primary tumor after multidisciplinary sequencing.",
+        "Unresectable systemic disease: doublet or triplet chemotherapy (FOLFOX 5-FU plus leucovorin plus oxaliplatin, FOLFIRI 5-FU plus leucovorin plus irinotecan, or FOLFIRINOX) selected by fitness, prior exposure, and RAS/BRAF status.",
+        "Biologic add-on: Bevacizumab with FOLFOX or FOLFIRI in RAS-mutant or right-sided disease; Panitumumab or Cetuximab with FOLFOX or FOLFIRI strictly for RAS wild-type left-sided tumors.",
+        "dMMR/MSI-H metastatic disease: Pembrolizumab 200 mg IV every 3 weeks (or 400 mg every 6 weeks) with immune-related adverse event monitoring; confirm MMR/MSI by IHC or PCR before starting.",
+        "Reassess resectability every 8 to 12 weeks on systemic therapy; offer clinical trial enrollment at every line. Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "FOLFOX/FOLFIRI +/- Biologic -> Resection of Oligometastases or Palliative Chemotherapy",
+      "protocolRefs": [
+        "modified-folfox-6",
+        "folfiri",
+        "gi-crc-msi-pembro"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage_biomarker",
+      "toNodeId": "n_stage_biomarker",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_early",
+      "from": "n_stage_biomarker",
+      "fromNodeId": "n_stage_biomarker",
+      "to": "n_early_tx",
+      "toNodeId": "n_early_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "early",
+      "fromOptions": [
+        "early"
+      ]
+    },
+    {
+      "id": "l_stage_dmmr",
+      "from": "n_stage_biomarker",
+      "fromNodeId": "n_stage_biomarker",
+      "to": "n_dmmr_tnt_tx",
+      "toNodeId": "n_dmmr_tnt_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "dmmr",
+      "fromOptions": [
+        "dmmr"
+      ]
+    },
+    {
+      "id": "l_stage_pmmr",
+      "from": "n_stage_biomarker",
+      "fromNodeId": "n_stage_biomarker",
+      "to": "n_pmmr_tnt_tx",
+      "toNodeId": "n_pmmr_tnt_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "pmmr",
+      "fromOptions": [
+        "pmmr"
+      ]
+    },
+    {
+      "id": "l_stage_metastatic",
+      "from": "n_stage_biomarker",
+      "fromNodeId": "n_stage_biomarker",
+      "to": "n_metastatic_tx",
+      "toNodeId": "n_metastatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "metastatic",
+      "fromOptions": [
+        "metastatic"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "folfiri",
+    "folfox-4",
+    "gi-crc-msi-pembro",
+    "modified-folfox-6",
+    "rectal-dostarlimab"
+  ]
+}

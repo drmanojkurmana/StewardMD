@@ -1,0 +1,265 @@
+/* wardsynq/site/pages/portal-access.js - "Patient portal": the staff side of P2.9.
+ *
+ * Three jobs, each on a route the server already guards: enrol a patient (or a family member the
+ * patient has agreed to) for their own access, see and revoke those grants, and answer the messages
+ * patients send. Enrolment and replies are emr.treat; the worklist is emr.view. The access code is
+ * shown ONCE, here, to be read to the person in front of you: it is not stored and nothing sends it.
+ *
+ * A fourth: the hospital's patient education leaflets (functions/_wardsynq/patient-education.js). Written here as drafts
+ * and approved here by a second clinician; WardSynQ ships none. A leaflet is given to a patient on the discharge summary
+ * (discharge.js) and then shows on their portal.
+ */
+(function () {
+  "use strict";
+  var WSQ = window.WSQ;
+  /* Staff language (ui-i18n-site). The inline English is the fallback when the shell context has no t
+   * (helpers rendered on their own), and must equal the key's English in i18n.js byte for byte. */
+  function T(c, key, en, vars) { return c && c.t ? c.t(key, vars, en) : String(en).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? String(vars[k]) : m; }); }
+  function TS(c, key, en, vars) { return c && c.tSafe ? c.tSafe(key, vars, en) : String(T(c, key, en, vars)).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); }
+  function EN(c, html) { return c && c.en ? c.en(html) : html; }
+  /* The server's own list (portal-view.js SECTIONS). "Full discharge summary" and "Released documents" are
+   * separate choices on purpose: a relative trusted with care instructions is not automatically trusted
+   * with the whole signed summary or every document a clinician releases. The section CODE is a
+   * configuration value (stays as is); its label is staff-facing UI text and is translated below. */
+  var SECTIONS = [["status", "OPD queue status"], ["appointments", "Appointments"], ["medicines", "Medicines"], ["results", "Results"], ["diagnoses", "Diagnoses and allergies"],
+    ["discharge", "Discharge summaries (patient copy)"], ["discharge-full", "Full discharge summary"], ["documents", "Released documents"],
+    ["bills", "Bills"], ["consents", "Consents (view only)"], ["messages", "Messages"], ["education", "Education leaflets given"], ["forms", "Pre-admission forms (fill in)"]];
+  function sectionLabel(c, code) {
+    switch (code) {
+      case "status": return T(c, "site.portal.section.status", "OPD queue status");
+      case "appointments": return T(c, "site.portal.section.appointments", "Appointments");
+      case "medicines": return T(c, "site.portal.section.medicines", "Medicines");
+      case "results": return T(c, "site.portal.section.results", "Results");
+      case "diagnoses": return T(c, "site.portal.section.diagnoses", "Diagnoses and allergies");
+      case "discharge": return T(c, "site.portal.section.discharge", "Discharge summaries (patient copy)");
+      case "discharge-full": return T(c, "site.portal.section.dischargeFull", "Full discharge summary");
+      case "documents": return T(c, "site.portal.section.documents", "Released documents");
+      case "bills": return T(c, "site.portal.section.bills", "Bills");
+      case "consents": return T(c, "site.portal.section.consents", "Consents (view only)");
+      case "messages": return T(c, "site.portal.section.messages", "Messages");
+      case "education": return T(c, "site.portal.section.education", "Education leaflets given");
+      case "forms": return T(c, "site.portal.section.forms", "Pre-admission forms (fill in)");
+      default: return code;
+    }
+  }
+  function val(id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; }
+  /* The record id every OPD-registered patient files under (functions/_wardsynq/opd-identity.js patientIdForMrn). */
+  function patientIdForMrn(mrn) { var m = String(mrn || "").trim(); return m ? "opd-pat-" + m.toLowerCase().replace(/[^a-z0-9]+/g, "-") : ""; }
+
+  /** PURE. The message worklist, with loading, failed and empty distinct. */
+  function worklistHtml(c, r) {
+    if (r == null) return '<span class="spin"></span> ' + c.esc(T(c, "site.portal.loadingMessages", "Loading messages..."));
+    if (!r.ok) return '<div class="msg err">' + TS(c, "site.portal.messagesLoadFailed", "Could not load patient messages ({err}). Do not read this as no messages waiting.", { err: r.error || T(c, "site.portal.noAnswer", "no answer") }) + "</div>";
+    if (!r.messages.length) return '<p data-empty="messages">' + c.esc(T(c, "site.portal.noMessages", "No unanswered patient messages.")) + "</p>";
+    return (r.warning ? '<div class="msg err">' + EN(c, c.esc(r.warning)) + "</div>" : "") + "<ul>" + r.messages.map(function (m) {
+      return "<li><b>" + EN(c, c.esc(m.patientId)) + "</b>, " + c.esc(T(c, "site.portal.waiting", "waiting {hours} h", { hours: m.waitingHours == null ? "?" : m.waitingHours })) + (m.subject ? ": " + EN(c, c.esc(m.subject)) : "") +
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.replyLabel", "Reply")) + '</span><textarea rows="2" id="pr-' + c.esc(m.messageId) + '"></textarea></label>' +
+        '<button class="btn" type="button" data-pa="reply" data-id="' + c.esc(m.messageId) + '">' + c.esc(T(c, "site.portal.sendReply", "Send reply")) + "</button>" +
+        /* P6: a MaiK draft of the reply, through the governed route. It fills the box; a person still presses Send. */
+        (c.can && c.can("emr.treat") ? '<button class="btn quiet" type="button" data-pa="draft" data-id="' + c.esc(m.messageId) + '" data-patient="' + c.esc(m.patientId) + '">' + c.esc(T(c, "site.portal.draftWithMaik", "Draft with MaiK")) + "</button>" : "") +
+        '</div><div id="pd-' + c.esc(m.messageId) + '" aria-live="polite"></div></li>';
+    }).join("") + "</ul>";
+  }
+
+  function eduState(c, st) {
+    if (st === "approved") return T(c, "site.portal.edu.approved", "Approved");
+    if (st === "retired") return T(c, "site.portal.edu.retired", "Retired");
+    return T(c, "site.portal.edu.draft", "Draft, not yet given to patients");
+  }
+  /** PURE. The leaflet library, with loading, failed and empty distinct. Titles, text and names are data. */
+  function libraryHtml(c, r, treat) {
+    if (r == null) return '<span class="spin"></span> ' + c.esc(T(c, "site.portal.edu.loading", "Loading leaflets..."));
+    if (!r.ok || !Array.isArray(r.leaflets)) return '<div class="msg err">' + TS(c, "site.portal.edu.failed", "The leaflet library could not be loaded. Do not read this as no leaflets.") + "</div>";
+    if (!r.leaflets.length) return '<p data-empty="leaflets">' + c.esc(T(c, "site.portal.edu.none", "This hospital has written no leaflet yet.")) + "</p>";
+    return (r.warning ? '<div class="msg err">' + EN(c, c.esc(r.warning)) + "</div>" : "") + "<ul>" + r.leaflets.map(function (l) {
+      var mine = (l.draftedBy || []).indexOf(r.me) >= 0;
+      return "<li><b>" + EN(c, c.esc(l.title)) + "</b> (" + EN(c, c.esc(l.language)) + "), " + c.esc(eduState(c, l.state)) + ", " + c.esc(T(c, "site.portal.edu.version", "version {n}", { n: l.version })) +
+        (l.approval ? "<br>" + c.esc(T(c, "site.portal.edu.approvedBy", "Approved by")) + " " + EN(c, c.esc(l.approval.byName || l.approval.by)) : "") +
+        (l.retired ? "<br>" + c.esc(T(c, "site.portal.edu.retiredWhy", "Retired:")) + " " + EN(c, c.esc(l.retired.reason)) : "") +
+        '<details><summary>' + c.esc(T(c, "site.portal.edu.read", "Read")) + '</summary><div style="white-space:pre-wrap" lang="' + c.esc(l.language) + '">' + EN(c, c.esc(l.body)) + "</div></details>" +
+        (treat && l.state !== "retired" ? '<div class="row"><button class="btn quiet" type="button" data-pa="eduedit" data-id="' + c.esc(l.leafletId) + '">' + c.esc(T(c, "site.portal.edu.edit", "Edit")) + "</button>" +
+          (l.state === "draft" && !mine ? '<button class="btn primary" type="button" data-pa="eduapprove" data-id="' + c.esc(l.leafletId) + '" data-v="' + c.esc(l.version) + '">' + c.esc(T(c, "site.portal.edu.approve", "Approve this version")) + "</button>" : "") +
+          (l.state === "draft" && mine ? ' <span class="quiet">' + c.esc(T(c, "site.portal.edu.needsSecond", "Another clinician approves what you wrote.")) + "</span>" : "") +
+          '<button class="btn danger" type="button" data-pa="eduretire" data-id="' + c.esc(l.leafletId) + '">' + c.esc(T(c, "site.portal.edu.retire", "Retire")) + "</button></div>" : "") + "</li>";
+    }).join("") + "</ul>";
+  }
+
+  /** PURE. A patient's grants, with loading, failed and empty distinct. */
+  function grantsHtml(c, r) {
+    if (r == null) return '<span class="spin"></span>';
+    if (!r.ok) return '<div class="msg err">' + TS(c, "site.portal.grantsLoadFailed", "Could not load access for this patient ({err}). Do not read this as nobody having access.", { err: r.error || T(c, "site.portal.noAnswer", "no answer") }) + "</div>";
+    if (!r.grants.length) return '<p data-empty="grants">' + c.esc(T(c, "site.portal.noGrants", "Nobody has portal access to this patient's record.")) + "</p>";
+    return "<ul>" + r.grants.map(function (g) {
+      var who = g.proxy
+        ? (g.proxy.name ? EN(c, c.esc(g.proxy.name)) : c.esc(T(c, "site.portal.familyMember", "Family member"))) + " (" + (g.proxy.relationship ? EN(c, c.esc(g.proxy.relationship)) : c.esc(T(c, "site.portal.proxyFallback", "proxy"))) + ")"
+        : c.esc(T(c, "site.portal.patient", "Patient"));
+      return "<li><b>" + who + "</b>: " + EN(c, c.esc(g.state)) +
+        (g.proxy ? "<br>" + c.esc(T(c, "site.portal.maySeeLead", "May see:")) + " " + EN(c, c.esc(g.proxy.sections.join(", "))) + ". " + c.esc(T(c, "site.portal.agreedLead", "Agreed by")) + " " + EN(c, c.esc(g.proxy.consentFrom)) + ", " + EN(c, c.esc(g.proxy.consentMethod)) : "") +
+        '<br><span class="mono">' + c.esc(g.grantId) + "</span>" +
+        (g.state !== "revoked" ? ' <button class="btn danger" type="button" data-pa="revoke" data-id="' + c.esc(g.grantId) + '">' + c.esc(T(c, "site.portal.revoke", "Revoke")) + "</button>" : " (" + EN(c, c.esc(g.revokedReason || "")) + ")") + "</li>";
+    }).join("") + "</ul>";
+  }
+
+  WSQ.page("portal-access", { render: function (c) {
+    var el = c.el, org = c.state.orgId, q = "?orgId=" + encodeURIComponent(org), treat = c.can("emr.treat");
+    if (!c.can("emr.view")) { el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.portal.title", "Patient portal")) + '</h1></div><div class="msg note">' + TS(c, "site.portal.noAccess", "Your role cannot see patient messages.") + "</div>"; return; }
+    var set = function (id, h) { var e = document.getElementById(id); if (e) e.innerHTML = h; };
+    var cur = { patientId: "" }, drafts = {};
+    el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.portal.title", "Patient portal")) + '</h1></div>' +
+      '<div class="card"><h2>' + c.esc(T(c, "site.portal.messagesCard", "Patient messages")) + '</h2><div id="paWork">' + worklistHtml(c, null) + "</div></div>" +
+      (treat ? '<div class="card"><h2>' + c.esc(T(c, "site.portal.giveAccessCard", "Give a patient or family member access")) + '</h2>' +
+        '<p class="quiet">' + c.esc(T(c, "site.portal.giveAccessNote1", "Only with the person in front of you. The code is shown once; read it to them. Patients sign in at")) + ' <b>/portal.html#org=' + EN(c, c.esc(org)) + "</b>.</p>" +
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.mrnLabel", "MR number")) + '</span><input id="paMrn" autocapitalize="characters"></label><button class="btn quiet" type="button" data-pa="find">' + c.esc(T(c, "site.portal.find", "Find")) + "</button></div>" +
+        '<div id="paPatient"></div></div>' : "") +
+      '<div class="card"><h2>' + c.esc(T(c, "site.portal.edu.card", "Patient education leaflets")) + '</h2><p class="quiet">' + c.esc(T(c, "site.portal.edu.intro", "The hospital's own leaflets. WardSynQ ships none. A leaflet reaches a patient only after a second clinician approves the version, and only when a clinician gives it on the discharge summary.")) + "</p>" +
+        (treat ? '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.portal.edu.title", "Title")) + '</span><input id="paEduTitle" maxlength="160"></label>' +
+          '<label class="f"><span>' + c.esc(T(c, "site.portal.edu.language", "Language code (en, hi, ta)")) + '</span><input id="paEduLang" maxlength="12"></label>' +
+          '<label class="f"><span>' + c.esc(T(c, "site.portal.edu.tags", "Conditions or procedures, separated by commas")) + '</span><input id="paEduTags"></label></div>' +
+          '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.portal.edu.body", "Leaflet text")) + '</span><textarea id="paEduBody" rows="6" maxlength="20000"></textarea></label></div>' +
+          '<button class="btn primary" type="button" data-pa="edusave">' + c.esc(T(c, "site.portal.edu.save", "Save draft")) + '</button> <button class="btn quiet" type="button" data-pa="edunew">' + c.esc(T(c, "site.portal.edu.new", "New leaflet")) + '</button><div id="paEduOut" aria-live="polite"></div>' : "") +
+        '<div id="paEduLib"></div></div>';
+    var edu = { lib: null, editing: null };
+    function loadLib() { set("paEduLib", libraryHtml(c, null, treat)); c.api("/ward/education-leaflets" + q).then(function (r) { edu.lib = r && r.ok && Array.isArray(r.leaflets) ? r : { ok: false }; set("paEduLib", libraryHtml(c, edu.lib, treat)); }); }
+    function eduForm(l) {
+      edu.editing = l ? { id: l.leafletId, v: l.version } : null;
+      [["paEduTitle", l ? l.title : ""], ["paEduLang", l ? l.language : ""], ["paEduTags", l ? (l.tags || []).join(", ") : ""], ["paEduBody", l ? l.body : ""]].forEach(function (x) { var e = document.getElementById(x[0]); if (e) e.value = x[1]; });
+    }
+    function loadWork() { set("paWork", worklistHtml(c, null)); c.api("/ward/patient-messages" + q).then(function (r) { set("paWork", worklistHtml(c, r || { ok: false })); }); }
+    function loadGrants() { set("paGrants", grantsHtml(c, null)); c.api("/ward/patient-grants" + q + "&patientId=" + encodeURIComponent(cur.patientId)).then(function (r) { set("paGrants", grantsHtml(c, r || { ok: false })); }); }
+    function showPatient(p) {
+      set("paPatient", '<div class="msg ok">' + EN(c, c.esc(p.name || "")) + " (" + EN(c, c.esc(p.mrn)) + ")</div>" +
+        '<h3>' + c.esc(T(c, "site.portal.currentAccess", "Current access")) + '</h3><div id="paGrants"></div>' +
+        '<h3>' + c.esc(T(c, "site.portal.newAccess", "New access")) + '</h3><div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.whoFor", "Who is this for?")) + '</span><select id="paWho"><option value="patient">' + c.esc(T(c, "site.portal.thePatient", "The patient")) + '</option></select></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.portal.howIdentified", "How did you identify them?")) + '</span><input id="paIdent" placeholder="' + c.esc(T(c, "site.portal.identPlaceholder", "e.g. Aadhaar card seen")) + '"></label></div>' +
+        /* DPDP Rules 2025 r.10, from 13 May 2027: a child's portal account needs the parent verified. The server decides when. */
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.pvMethod", "For a child: how the parent's identity was checked")) + '</span><select id="paPvMethod"><option value="">' + c.esc(T(c, "site.portal.pvNone", "Not a child, or not checked")) + '</option><option value="id-held">' + c.esc(T(c, "site.portal.pvId", "Against an ID the hospital holds")) + '</option><option value="digilocker-token">' + c.esc(T(c, "site.portal.pvDigilocker", "With a DigiLocker token")) + "</option></select></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.portal.pvRef", "ID or token reference")) + '</span><input id="paPvRef"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.portal.pvName", "Parent or guardian name")) + '</span><input id="paPvName"></label></div>' +
+        '<div id="paProxy" class="hide"><fieldset><legend>' + c.esc(T(c, "site.portal.proxyLegend", "What may this family member see?")) + '</legend>' + SECTIONS.map(function (s) {
+          return '<label><input type="checkbox" name="paSec" value="' + s[0] + '"> ' + c.esc(sectionLabel(c, s[0])) + "</label> ";
+        }).join("") + "</fieldset>" +
+        '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.whoAgreedLabel", "Who agreed")) + '</span><select id="paFrom"><option value="patient">' + c.esc(T(c, "site.portal.thePatient", "The patient")) + '</option><option value="legal-guardian">' + c.esc(T(c, "site.portal.legalGuardian", "Legal guardian")) + '</option><option value="power-of-attorney">' + c.esc(T(c, "site.portal.powerOfAttorney", "Power of attorney")) + '</option></select></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.portal.howLabel", "How")) + '</span><select id="paMethod"><option value="in-person-verbal">' + c.esc(T(c, "site.portal.inPersonVerbal", "In person, spoken")) + '</option><option value="in-person-written">' + c.esc(T(c, "site.portal.inPersonWritten", "In person, written")) + '</option></select></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.portal.noteOptional", "Note (optional)")) + '</span><input id="paNote"></label></div></div>' +
+        '<button class="btn primary" type="button" data-pa="enrol">' + c.esc(T(c, "site.portal.createCode", "Create access code")) + '</button><div id="paCode" aria-live="polite"></div>');
+      loadGrants();
+      c.api("/ward/related-people" + q + "&patientId=" + encodeURIComponent(cur.patientId)).then(function (r) {
+        var sel = document.getElementById("paWho"); if (!sel) return;
+        if (!r || !r.ok) { set("paCode", '<div class="msg err">' + TS(c, "site.portal.contactsLoadFailed", "Could not load family contacts; only the patient can be enrolled now.") + "</div>"); return; }
+        r.people.filter(function (x) { return x.active; }).forEach(function (x) {
+          var o = document.createElement("option"); o.value = x.relatedPersonId; o.textContent = x.name + " (" + x.relationship + ")"; sel.appendChild(o);
+        });
+        sel.onchange = function () { document.getElementById("paProxy").className = sel.value === "patient" ? "hide" : ""; };
+      });
+    }
+    loadWork();
+    loadLib();
+    el.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-pa]"); if (!b) return;
+      var a = b.getAttribute("data-pa");
+      var eduDone = function (r) {
+        b.disabled = false;
+        if (!r || !r.ok) { set("paEduOut", '<div class="msg err">' + TS(c, "site.portal.edu.notSaved", "Not saved: {why}", { why: (r && (r.detail || r.error)) || T(c, "site.portal.noAnswer", "no answer") }) + "</div>"); return; }
+        set("paEduOut", '<div class="msg ok">' + TS(c, "site.portal.edu.saved", "Saved.") + "</div>");
+        loadLib();
+      };
+      if (a === "edunew") { eduForm(null); set("paEduOut", ""); return; }
+      if (a === "eduedit") {
+        var hit = edu.lib && edu.lib.ok && edu.lib.leaflets.filter(function (x) { return x.leafletId === b.getAttribute("data-id"); })[0];
+        if (hit) { eduForm(hit); set("paEduOut", '<div class="msg note">' + TS(c, "site.portal.edu.editing", "Editing. Saving an approved leaflet makes it a draft again, to be approved again.") + "</div>"); }
+        return;
+      }
+      if (a === "edusave") {
+        var eb = { orgId: org, title: val("paEduTitle"), language: val("paEduLang"), body: val("paEduBody"), tags: val("paEduTags").split(",").map(function (x) { return x.trim(); }).filter(Boolean) };
+        if (edu.editing) { eb.leafletId = edu.editing.id; eb.expectedVersion = edu.editing.v; }
+        b.disabled = true;
+        return c.api("/ward/education-leaflet-save", eb).then(function (r) { if (r && r.ok) eduForm(null); eduDone(r); });
+      }
+      if (a === "eduapprove") {
+        b.disabled = true;
+        return c.api("/ward/education-leaflet-approve", { orgId: org, leafletId: b.getAttribute("data-id"), expectedVersion: Number(b.getAttribute("data-v")) }).then(eduDone);
+      }
+      if (a === "eduretire") {
+        var ew = ""; try { ew = prompt(T(c, "site.portal.edu.retirePrompt", "Why is this leaflet retired? Leaflets already given stay readable.")) || ""; } catch (e) {}
+        if (!ew.trim()) return;
+        b.disabled = true;
+        return c.api("/ward/education-leaflet-retire", { orgId: org, leafletId: b.getAttribute("data-id"), reason: ew.trim() }).then(eduDone);
+      }
+      if (a === "draft") {
+        var dId = b.getAttribute("data-id");
+        b.disabled = true;
+        set("pd-" + dId, '<span class="spin"></span> ' + c.esc(T(c, "site.portal.drafting", "MaiK is drafting...")));
+        return c.api("/ward/maik-ask", { orgId: org, patientId: b.getAttribute("data-patient"), task: "draft-portal-reply", messageId: dId }).then(function (r) {
+          b.disabled = false;
+          if (!r || !r.ok) { set("pd-" + dId, '<div class="msg err">' + (WSQ._maikAskFailure ? WSQ._maikAskFailure(c, r) : c.esc(T(c, "site.portal.noAnswer", "no answer"))) + "</div>"); return; }
+          if (!r.interaction.output) { set("pd-" + dId, '<div class="msg err">' + TS(c, "site.portal.draftWithheld", "MaiK's draft was withheld by the safety screen. Write the reply yourself.") + "</div>"); return; }
+          drafts[dId] = { interactionId: r.interaction.id, text: r.interaction.output };
+          var box = document.getElementById("pr-" + dId); if (box) { box.value = r.interaction.output; box.rows = 6; }
+          set("pd-" + dId, '<div class="msg note">' + TS(c, "site.portal.draftLabel", "DRAFT by MaiK, not sent. Read and change it; nothing reaches the patient until you press Send reply.") +
+            ' <button class="btn quiet" type="button" data-pa="discard" data-id="' + c.esc(dId) + '">' + c.esc(T(c, "site.portal.discardDraft", "Discard draft")) + "</button></div>");
+        });
+      }
+      if (a === "discard") {
+        var xId = b.getAttribute("data-id"), dr = drafts[xId]; if (!dr) return;
+        var xWhy = ""; try { xWhy = prompt(T(c, "site.portal.discardReason", "Why is this draft not usable?")) || ""; } catch (e) {}
+        if (xWhy.trim().length < 5) return c.toast(T(c, "site.portal.discardReasonShort", "Say in a few words why the draft is not usable."));
+        return c.api("/ward/maik-review", { orgId: org, interactionId: dr.interactionId, decision: "rejected", reason: xWhy.trim() }).then(function (r) {
+          if (!r || !r.ok) return c.toast(T(c, "site.portal.reviewNotRecorded", "The decision on the draft could not be recorded."));
+          delete drafts[xId];
+          var xb = document.getElementById("pr-" + xId); if (xb) xb.value = "";
+          set("pd-" + xId, "");
+        });
+      }
+      if (a === "reply") {
+        var text = val("pr-" + b.getAttribute("data-id")); if (!text) return c.toast(T(c, "site.portal.writeReplyFirst", "Write a reply first."));
+        var used = drafts[b.getAttribute("data-id")];
+        b.disabled = true;
+        /* A reply built on a MaiK draft records the clinician's decision first (accepted as drafted, or edited); if that
+         * cannot be recorded, the reply is not sent. */
+        if (used) {
+          var mId = b.getAttribute("data-id");
+          return c.api("/ward/maik-review", used.text === text ? { orgId: org, interactionId: used.interactionId, decision: "accepted" } : { orgId: org, interactionId: used.interactionId, decision: "edited", editedOutput: text }).then(function (rv) {
+            if (!rv || !rv.ok) { b.disabled = false; return c.toast(T(c, "site.portal.draftReviewFailed", "The decision on MaiK's draft could not be recorded, so the reply was not sent.")); }
+            delete drafts[mId];
+            return c.api("/ward/patient-reply", { orgId: org, messageId: mId, reply: text }).then(function (r) { b.disabled = false; c.toast(r && r.ok ? T(c, "site.portal.replySaved", "Reply saved to the patient's record.") : T(c, "site.portal.notSent", "Not sent: {why}", { why: (r && (r.detail || r.error)) || T(c, "site.portal.noAnswer", "no answer") })); if (r && r.ok) loadWork(); });
+          });
+        }
+        return c.api("/ward/patient-reply", { orgId: org, messageId: b.getAttribute("data-id"), reply: text }).then(function (r) { b.disabled = false; c.toast(r && r.ok ? T(c, "site.portal.replySaved", "Reply saved to the patient's record.") : T(c, "site.portal.notSent", "Not sent: {why}", { why: (r && (r.detail || r.error)) || T(c, "site.portal.noAnswer", "no answer") })); if (r && r.ok) loadWork(); });
+      }
+      if (a === "find") {
+        var mrn = val("paMrn"); if (!mrn) return c.toast(T(c, "site.portal.enterMrn", "Enter an MR number."));
+        set("paPatient", '<span class="spin"></span>');
+        return c.api("/patient/get" + q + "&mrn=" + encodeURIComponent(mrn)).then(function (r) {
+          if (!r || !r.ok || !r.patient) { set("paPatient", '<div class="msg note">' + c.esc(T(c, "site.portal.noPatientForMrn", "No patient with that MR number.")) + "</div>"); return; }
+          cur.patientId = patientIdForMrn(r.patient.mrn || mrn); showPatient(r.patient);
+        });
+      }
+      if (a === "enrol") {
+        var who = val("paWho"), body = { orgId: org, patientId: cur.patientId, identifiedBy: val("paIdent") };
+        if (!body.identifiedBy) return c.toast(T(c, "site.portal.recordIdentified", "Record how you identified them."));
+        if (val("paPvMethod")) body.parentVerification = { method: val("paPvMethod"), reference: val("paPvRef"), parentName: val("paPvName") };
+        if (who !== "patient") {
+          var secs = [].slice.call(document.querySelectorAll('input[name="paSec"]:checked')).map(function (x) { return x.value; });
+          if (!secs.length) return c.toast(T(c, "site.portal.chooseSections", "Choose what this family member may see."));
+          body.proxy = { relatedPersonId: who, sections: secs, consentFrom: val("paFrom"), consentMethod: val("paMethod"), consentNote: val("paNote") };
+        }
+        b.disabled = true;
+        return c.api("/ward/patient-enrol", body).then(function (r) {
+          b.disabled = false;
+          if (!r || !r.ok) { set("paCode", '<div class="msg err">' + TS(c, "site.portal.enrolFailed", "Not created: {why}", { why: (r && (r.detail || r.error)) || T(c, "site.portal.noAnswer", "no answer") }) + "</div>"); return; }
+          set("paCode", '<div class="msg ok">' + TS(c, "site.portal.codeWarning", "Read these to them now. The code is not stored and cannot be shown again.") + "<br>" + c.esc(T(c, "site.portal.hospitalIdLabel", "Hospital ID:")) + " <b class=\"mono\">" + EN(c, c.esc(org)) +
+            "</b><br>" + c.esc(T(c, "site.portal.accessIdLabel", "Access ID:")) + " <b class=\"mono\">" + EN(c, c.esc(r.grantId)) + "</b><br>" + c.esc(T(c, "site.portal.codeLabel", "Code:")) + " <b class=\"mono\">" + EN(c, c.esc(r.code)) + "</b> " + c.esc(T(c, "site.portal.validMinutes", "(valid {n} minutes)", { n: r.expiresInMinutes })) + "</div>");
+          loadGrants();
+        });
+      }
+      if (a === "revoke") {
+        var why = ""; try { why = prompt(T(c, "site.portal.revokeReasonPrompt", "Why is this access being revoked?")) || ""; } catch (e) {}
+        if (!why.trim()) return;
+        /* Portal access revocation is a security-sensitive, irreversible action: the outcome toast is
+         * plain text (shell.js toast() sets textContent), so it uses T rather than TS, per spec. */
+        return c.api("/ward/patient-revoke", { orgId: org, grantId: b.getAttribute("data-id"), reason: why.trim() }).then(function (r) { c.toast(r && r.ok ? T(c, "site.portal.revoked", "Access revoked.") : T(c, "site.portal.revokeFailed", "Not revoked: {why}", { why: (r && (r.detail || r.error)) || T(c, "site.portal.noAnswer", "no answer") })); loadGrants(); });
+      }
+    };
+  } });
+  WSQ._portalAccess = { libraryHtml: libraryHtml, worklistHtml: worklistHtml, grantsHtml: grantsHtml, patientIdForMrn: patientIdForMrn };
+})();

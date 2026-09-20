@@ -1,5 +1,5 @@
 import { test } from "node:test"; import assert from "node:assert/strict";
-import { scribeExtractPrompt, sanitizeScribeOutput } from "../functions/api/ai/_opd-scribe.js";
+import { scribeExtractPrompt, sanitizeScribeOutput, verifySources, flagContradictions } from "../functions/api/ai/_opd-scribe.js";
 test("whitelist: only emrFields + suggestions{provisionalDx,ddx,investigations}; drops injected keys", () => {
   const o = sanitizeScribeOutput({ emrFields:{ cc:"fever x3d", Temp:"101", vitals:{x:1} },
     suggestions:{ provisionalDx:"viral fever", ddx:["dengue","enteric fever"], investigations:["CBC","NS1"], drug:"metformin" },
@@ -59,4 +59,106 @@ test("SAFETY: a patient-reported vital (e.g. 'my BP was 150') can never reach em
   assert.equal("BP" in o.emrFields, false);
   assert.equal("Temp" in o.emrFields, false);
   assert.equal(o.emrFields.cc, "fever, patient reports BP was 150 at home");   // the REPORT of it, as narrative history -- not a measured vital
+});
+
+// ── Task 6: sources (every extracted fact must cite the transcript) ────────────────────────
+test("sanitizeScribeOutput: sources whitelisted, cleaned + capped like emrFields; omitted when empty", () => {
+  const o1 = sanitizeScribeOutput({ emrFields: { cc: "fever" } });
+  assert.equal("sources" in o1, false, "no sources key at all when the model gave none");
+  const o2 = sanitizeScribeOutput({
+    emrFields: { cc: "fever" },
+    sources: { cc: "  patient   has fever  ", bogusKey: "not a real field", Temp: "should be dropped (not in whitelist)", pastHx: 5 }
+  });
+  assert.equal(o2.sources.cc, "patient has fever");
+  assert.equal("bogusKey" in o2.sources, false);
+  assert.equal("Temp" in o2.sources, false);
+  assert.equal(o2.sources.pastHx, "5");   // numeric source value coerced to string, same as emrFields
+  assert.equal(sanitizeScribeOutput({ emrFields: {}, sources: { cc: "x".repeat(3000) } }).sources.cc.length, 2000);
+});
+
+test("verifySources: populated field with no source at all is ungrounded", () => {
+  const { grounded, ungrounded } = verifySources("some transcript text", { emrFields: { cc: "Fever" } });
+  assert.deepEqual(grounded, []);
+  assert.deepEqual(ungrounded, ["cc"]);
+});
+
+test("verifySources: a fabricated field with no transcript support is ungrounded; a real one is grounded", () => {
+  const transcript = "Patient came with fever and cough for three days.";
+  const sanitized = {
+    emrFields: { cc: "Fever and cough x3 days", allergies: "Penicillin allergy with anaphylaxis" },
+    sources: {
+      cc: "Patient came with fever and cough for three days.",
+      allergies: "Patient reports a severe penicillin allergy with anaphylaxis"   // never said -- fabricated
+    }
+  };
+  const { grounded, ungrounded } = verifySources(transcript, sanitized);
+  assert.ok(grounded.includes("cc"));
+  assert.ok(ungrounded.includes("allergies"));
+});
+
+test("verifySources: normalises case/punctuation so a lightly-cleaned verbatim quote still grounds", () => {
+  const transcript = "Patient says: 'BP was 150 at home, Doctor!'";
+  const sanitized = { emrFields: { cc: "reports BP 150 at home" }, sources: { cc: "bp was 150 at home doctor" } };
+  assert.ok(verifySources(transcript, sanitized).grounded.includes("cc"));
+});
+
+// ── Task 10: negation / stopped-medicine contradictions ─────────────────────────────────────
+test("scribeExtractPrompt: carries the negation/duration and sources rules", () => {
+  const p = scribeExtractPrompt("x");
+  assert.match(p, /denies/i);
+  assert.match(p, /never be written as present/i);
+  assert.match(p, /duration and onset/i);
+  assert.match(p, /stopped/i);
+  assert.match(p, /verbatim from the transcript/i);
+});
+
+test("flagContradictions: 'no fever'/'denies fever' in the transcript must not become an asserted fever field", () => {
+  const transcript = "Patient denies fever, has cough for 2 days.";
+  const badExtraction = { emrFields: { cc: "Fever, cough x 2 days" } };   // a bad/hallucinated extraction
+  const flags = flagContradictions(transcript, badExtraction);
+  assert.ok(flags.some(f => f.field === "cc" && f.term === "fever"));
+});
+
+test("flagContradictions: a correctly recorded pertinent negative is never flagged", () => {
+  const transcript = "Patient denies fever, has cough for 2 days.";
+  const goodExtraction = { emrFields: { presentHx: "Denies fever, cough x 2 days" } };
+  assert.deepEqual(flagContradictions(transcript, goodExtraction), []);
+});
+
+test("flagContradictions: 'fever for 3 days' keeps its duration and is not itself flagged", () => {
+  const transcript = "Patient has had fever for 3 days, denies vomiting.";
+  const extraction = { emrFields: { cc: "Fever for 3 days" } };
+  assert.deepEqual(flagContradictions(transcript, extraction), [], "a truthfully-asserted, undenied symptom is not a contradiction");
+  assert.equal(sanitizeScribeOutput({ emrFields: extraction.emrFields }).emrFields.cc, "Fever for 3 days");
+});
+
+test("flagContradictions: a stopped drug must not land as a current medicine", () => {
+  const transcript = "Patient was on metformin but stopped metformin last month due to GI upset.";
+  const badExtraction = { emrFields: { treatmentReceived: "Metformin 500mg BD" } };   // should have been marked discontinued
+  const flags = flagContradictions(transcript, badExtraction);
+  assert.ok(flags.some(f => f.field === "treatmentReceived" && f.term === "metformin"));
+});
+
+test("flagContradictions: a discontinued medicine correctly recorded as such is never flagged", () => {
+  const transcript = "Patient was on metformin but stopped metformin last month due to GI upset.";
+  const goodExtraction = { emrFields: { pastHx: "Stopped metformin last month (GI upset)" } };
+  assert.deepEqual(flagContradictions(transcript, goodExtraction), []);
+});
+
+// ── Task 17 support: scribeExtractPrompt(transcript, opts) ─────────────────────────────────
+test("scribeExtractPrompt: opts is optional; omitting it (or passing {}/undefined) is byte-identical", () => {
+  const t = "patient with fever";
+  const a = scribeExtractPrompt(t);
+  assert.equal(a, scribeExtractPrompt(t, undefined));
+  assert.equal(a, scribeExtractPrompt(t, {}));
+  assert.equal(a, scribeExtractPrompt(t, { specialtyPrompt: "" }));
+});
+
+test("scribeExtractPrompt: opts.specialtyPrompt is appended to the STRUCTURED EMR FIELDS section only", () => {
+  const t = "patient with chest pain";
+  const withSpecialty = scribeExtractPrompt(t, { specialtyPrompt: "- ecgFindings: any stated ECG findings" });
+  assert.match(withSpecialty, /- ecgFindings: any stated ECG findings/);
+  assert.ok(withSpecialty.indexOf("ecgFindings") > withSpecialty.indexOf("STRUCTURED EMR FIELDS"));
+  assert.ok(withSpecialty.indexOf("ecgFindings") < withSpecialty.indexOf("NEGATION AND TIME"));
+  assert.equal(withSpecialty.replace("- ecgFindings: any stated ECG findings\n", ""), scribeExtractPrompt(t));
 });

@@ -474,7 +474,8 @@ async function identityCandidates(svc, incoming, rosterLimit) {
    * which is the correct outcome: nothing written, and the feed knows to send it again. */
   const [indexed, roster] = await Promise.all([
     svc.findPatientsByIdentifier(incoming),
-    svc.list("Patient", rosterLimit || 1000),
+    // R4-2: the NEWEST registrations (the old roster was the oldest), beside the identifier index seek above.
+    svc.list("Patient", rosterLimit || 1000, { newest: true }),
   ]);
   const byId = new Map();
   for (const p of [...(indexed || []), ...(roster || [])]) if (p && p.id) byId.set(p.id, p);
@@ -941,7 +942,7 @@ async function landBundle(request, env, ctx) {
   } else if (incoming) {
     let locals = [], decisions = [];
     try {
-      [locals, decisions] = await Promise.all([identityCandidates(svc, incoming, 1000), svc.list(DECISION_TYPE, 1000).catch(() => [])]);
+      [locals, decisions] = await Promise.all([identityCandidates(svc, incoming, 1000), svc.listAll(DECISION_TYPE, { max: 50000 }).then((g) => g.rows, () => [])]); // R4-2: every decision (was the oldest 1,000)
     } catch (e) { if (e instanceof GovernanceError) return { ok: false, status: 403, outcome: operationOutcome("error", "forbidden", "cannot read the patient register to reconcile identity") }; throw e; }
     /* A decision a person already made for THIS source patient outranks the matcher: the same
      * look-alike is not held and decided again on every message. A prior "reject" holds again -
@@ -1332,7 +1333,7 @@ async function listExceptions(request, env, ctx) {
   const { svc, error } = await openIngest(request, env, { ...ctx });
   if (error) return { ok: false, status: error.status, error: "permission", detail: error.outcome.issue[0].diagnostics, open: [] };
   let rows;
-  try { rows = await svc.list(EXCEPTION_TYPE, 200); }
+  try { rows = (await svc.listAll(EXCEPTION_TYPE, { max: 50000, throwOnTruncate: true })).rows; } // R4-2: every exception (was the oldest 200)
   catch (e) { return { ok: false, status: 403, error: "permission", open: [] }; }
   const open = (rows || []).filter((r) => r && r.status === "open").sort((a, b) => String(a.raisedAt).localeCompare(String(b.raisedAt)))
     .map((r) => ({ id: r.id, source: r.source, reason: r.reason, detail: r.detail, patientId: r.patientId, candidates: r.candidates, conflict: r.conflict, entityRefs: r.entityRefs, raisedAt: r.raisedAt }));

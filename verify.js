@@ -421,12 +421,18 @@
         try { if (window.SMD_PGLOG_STORE && SMD_PGLOG_STORE.clearAccount) SMD_PGLOG_STORE.clearAccount(); } catch (e) {}
         try { localStorage.removeItem("stewardmd_account"); } catch (e) {}
         var a = auth();
-        var p = (a && a.signOut) ? a.signOut() : Promise.resolve();
         // Reload once signOut settles — but never let a slow/hanging signOut block it.
         var reloaded = false;
         function go() { if (reloaded) return; reloaded = true; try { location.reload(); } catch (e) {} }
-        Promise.resolve(p).catch(function () {}).then(go);
-        setTimeout(go, 700);
+        // S3: off the hospital's critical-result alerts first, while the account still works (native-push.js,
+        // bounded wait; a failure is recorded there and told on the next launch).
+        var P = window.SMD_WSQ_PUSH, rel = Promise.resolve();
+        try { if (P && P.accountSignOut) rel = Promise.resolve(P.accountSignOut()).catch(function () {}); } catch (e) {}
+        rel.then(function () {
+          var p = (a && a.signOut) ? a.signOut() : Promise.resolve();
+          Promise.resolve(p).catch(function () {}).then(go);
+          setTimeout(go, 700);
+        });
       });
     }
   }

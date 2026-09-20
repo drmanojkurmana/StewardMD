@@ -1,0 +1,600 @@
+{
+  "guideline": "mds",
+  "title": "Myelodysplastic Syndromes",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 3.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "myelodysplastic_syndromes",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 3.2026 clinical navigator for Myelodysplastic Syndromes (MDS). Covers complete clinical algorithm: Diagnostic Workup (CBC with peripheral blood smear, bone marrow aspirate and biopsy with Prussian blue iron stain for ring sideroblasts, conventional cytogenetics/karyotype, comprehensive myeloid NGS covering SF3B1, TP53 multi-hit, ASXL1, RUNX1, STAG2, U2AF1, SRSF2, EZH2, serum erythropoietin EPO level, ferritin, B12/folate) -> Prognostic Risk Stratification (IPSS-M Molecular IPSS and IPSS-R: Very Low, Low, Intermediate, High, Very High) -> Lower-Risk MDS (IPSS-M Very Low / Low / Moderate-Low, IPSS-R <=3.5): Isolated del(5q) -> Lenalidomide 10 mg daily (Category 1 Preferred); Non-del(5q) with symptomatic anemia and serum EPO <=500 mU/mL -> Erythropoiesis-stimulating agents (ESAs: Epoetin alfa or Darbepoetin alfa); Non-del(5q) transfusion-dependent anemia with ring sideroblasts (>=15% or >=5% with SF3B1 mutation) or ESA refractory -> Luspatercept 1.0-1.75 mg/kg SC q3w (COMMANDS Category 1 Preferred); ESA-refractory transfusion-dependent with high baseline transfusion burden -> Imetelstat (IMerge trial) or Hypomethylating Agent (HMA: Azacitidine, Decitabine) -> Higher-Risk MDS (IPSS-M Moderate-High / High / Very High, IPSS-R >3.5): Evaluation for Allogeneic Hematopoietic Cell Transplantation (HCT, only curative modality); Bridging / Non-transplant therapy with Hypomethylating Agents: Azacitidine 75 mg/m2 SC/IV daily x 7 days q28d (aml-azacitidine Category 1 with demonstrated OS benefit), Decitabine 20 mg/m2 IV daily x 5 days, or Oral Decitabine/Cedazuridine (Inqovi); Relapsed / Refractory -> Clinical trial (HMA + Venetoclax) or intensive AML-like induction. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Myelodysplastic Syndromes Version 3.2026 (July 2026).",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "IPSS-M (Molecular IPSS) integrates 31-gene mutation data with cytogenetics, blasts, hemoglobin, platelets, and neutrophils into six risk groups (Very Low, Low, Moderate-Low, Moderate-High, High, Very High); TP53 multi-hit (biallelic) status is the strongest adverse lesion and must be established before treatment planning.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Serum EPO must be drawn before red cell transfusions; an EPO level above 500 mU/mL predicts poor ESA response, and ESA therapy is not indicated in that setting.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Allogeneic HCT is the only curative modality for MDS; HLA typing and donor search should begin at diagnosis for all higher-risk and fit patients, and bridging HMA aims to reduce marrow blasts below 5% before transplant.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "mds_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Workup",
+      "title": "MDS: diagnostic workup",
+      "section": "Workup",
+      "description": "Confirm MDS diagnosis and gather the morphology, cytogenetic, molecular, and laboratory data that drive IPSS-M/IPSS-R risk stratification.",
+      "path": "Myelodysplastic Syndromes / Workup",
+      "pills": [
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete blood count (CBC) with differential, reticulocyte count, and manual peripheral blood smear review for dysplastic morphology in >=1 cell lineages (erythroid, myeloid, megakaryocytic).",
+        "Bone marrow aspirate and core biopsy: bone marrow cellularity, myeloid:erythroid ratio, megakaryocyte morphology, and blast percentage count (200 cells on aspirate, 500 on biopsy).",
+        "Prussian blue iron stain: mandatory quantification of ring sideroblasts (>=15% of erythroid precursors, or >=5% if SF3B1 mutated, defines MDS with ring sideroblasts).",
+        "Conventional G-banded cytogenetics: karyotype of >=20 metaphases (detects del(5q), monosomy 7/del(7q), trisomy 8, complex karyotype with >=3 abnormalities).",
+        "Comprehensive targeted myeloid NGS panel: testing for SF3B1, TP53 (essential to determine single vs multi-hit allelic state), ASXL1, RUNX1, STAG2, U2AF1, SRSF2, EZH2, IDH1/IDH2, DNMT3A, TET2.",
+        "Laboratory baseline: serum erythropoietin (EPO) level drawn prior to red cell transfusions, ferritin, iron panel, vitamin B12, folate, TSH."
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to IPSS-M Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_ipss_risk",
+      "linkId": "mds_ipss_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "IPSS risk",
+      "title": "Prognostic risk stratification (IPSS-M / IPSS-R)",
+      "section": "Staging",
+      "description": "Assign risk with the Molecular IPSS (preferred) supported by the revised IPSS. Risk group determines lower-risk versus higher-risk management.",
+      "path": "Myelodysplastic Syndromes / Risk",
+      "pills": [
+        "risk"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Lower risk: IPSS-M Very Low / Low / Moderate-Low, or IPSS-R <=3.5",
+        "Higher risk: IPSS-M Moderate-High / High / Very High, or IPSS-R >3.5"
+      ],
+      "options": [
+        {
+          "id": "lower",
+          "label": "Lower Risk (IPSS-M Very Low / Low / Moderate-Low, IPSS-R <=3.5)",
+          "sets": {
+            "risk": "lower"
+          },
+          "pills": [
+            "lower risk"
+          ]
+        },
+        {
+          "id": "higher",
+          "label": "Higher Risk (IPSS-M Moderate-High / High / Very High, IPSS-R >3.5)",
+          "sets": {
+            "risk": "higher"
+          },
+          "pills": [
+            "higher risk"
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "title": "IPSS-M risk groups and management track",
+          "headers": [
+            "Risk group",
+            "IPSS-M category",
+            "Management track"
+          ],
+          "rows": [
+            [
+              "Lower",
+              "Very Low / Low / Moderate-Low (IPSS-R <=3.5)",
+              "Anemia-directed therapy: lenalidomide, ESA, luspatercept, imetelstat"
+            ],
+            [
+              "Higher",
+              "Moderate-High / High / Very High (IPSS-R >3.5)",
+              "Allogeneic HCT evaluation plus HMA bridging or definitive therapy"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_lower_del5q",
+      "linkId": "mds_lower_del5q",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Lower-risk cytogenetics",
+      "title": "Lower-risk MDS: del(5q) status",
+      "section": "Treatment",
+      "description": "Lower-risk MDS branches first on isolated del(5q), which has a dedicated Category 1 preferred therapy.",
+      "path": "Myelodysplastic Syndromes / Lower Risk / del(5q)",
+      "pills": [
+        "lower risk"
+      ],
+      "required": true,
+      "bullets": [
+        "Isolated del(5q) with or without one other cytogenetic abnormality, excluding monosomy 7/del(7q)",
+        "Non-del(5q): all other lower-risk cytogenetics"
+      ],
+      "options": [
+        {
+          "id": "del5q",
+          "label": "Isolated del(5q) (+/- one other abnormality, excluding monosomy 7/del(7q))",
+          "sets": {
+            "del5q": "yes"
+          },
+          "pills": [
+            "del(5q)"
+          ]
+        },
+        {
+          "id": "non_del5q",
+          "label": "Non-del(5q) MDS",
+          "sets": {
+            "del5q": "no"
+          },
+          "pills": [
+            "non-del(5q)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_lower_anemia_triage",
+      "linkId": "mds_lower_anemia_triage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Anemia triage",
+      "title": "Non-del(5q) lower-risk MDS: anemia triage",
+      "section": "Treatment",
+      "description": "For non-del(5q) lower-risk disease, the next therapy is chosen by serum EPO, ring sideroblast status, transfusion burden, and prior ESA response.",
+      "path": "Myelodysplastic Syndromes / Lower Risk / Anemia",
+      "pills": [
+        "lower risk",
+        "anemia"
+      ],
+      "required": true,
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Serum EPO <=500 mU/mL with low transfusion burden favors erythropoiesis-stimulating agents",
+        "Ring sideroblasts >=15% (or >=5% with SF3B1 mutation) or high transfusion burden favors luspatercept",
+        "Prior ESA/luspatercept failure moves to imetelstat or a hypomethylating agent"
+      ],
+      "options": [
+        {
+          "id": "low_epo",
+          "label": "Serum EPO <=500 mU/mL, low transfusion burden, ESA-naive",
+          "sets": {
+            "anemia": "low_epo"
+          },
+          "pills": [
+            "EPO <=500"
+          ]
+        },
+        {
+          "id": "ring_sideroblasts",
+          "label": "Ring sideroblasts positive (>=15%, or >=5% with SF3B1) or high transfusion burden",
+          "sets": {
+            "anemia": "ring_sideroblasts"
+          },
+          "pills": [
+            "RS+"
+          ]
+        },
+        {
+          "id": "esa_refractory",
+          "label": "Refractory to ESAs / luspatercept",
+          "sets": {
+            "anemia": "refractory"
+          },
+          "pills": [
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_lenalidomide",
+      "linkId": "tx_mds_lenalidomide",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Lenalidomide",
+      "title": "Lower-risk del(5q) MDS: lenalidomide",
+      "section": "Treatment",
+      "description": "Category 1 preferred therapy for lower-risk isolated del(5q) MDS with symptomatic anemia.",
+      "path": "Myelodysplastic Syndromes / Lower Risk / del(5q) / Lenalidomide",
+      "pills": [
+        "lower risk",
+        "del(5q)",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Lenalidomide 10 mg PO daily x 21 days q28d (Category 1 Preferred); approximately 67% of patients achieve transfusion independence.",
+        "Monitor CBC weekly for neutropenia and thrombocytopenia; dose-hold and dose-reduce per cytopenias.",
+        "Assess transfusion burden and cytogenetic response at 2-4 cycles; continue until progression or intolerance.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ]
+    },
+    {
+      "id": "n_tx_esa",
+      "linkId": "tx_mds_esa",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ESA",
+      "title": "Lower-risk non-del(5q) MDS: erythropoiesis-stimulating agents",
+      "section": "Treatment",
+      "description": "ESA therapy for non-del(5q) lower-risk MDS with symptomatic anemia and serum EPO <=500 mU/mL.",
+      "path": "Myelodysplastic Syndromes / Lower Risk / Anemia / ESA",
+      "pills": [
+        "lower risk",
+        "anemia",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Epoetin alfa 40,000-60,000 U SC weekly, or darbepoetin alfa 150-300 mcg SC q1-2w, with or without G-CSF.",
+        "Confirm serum EPO <=500 mU/mL drawn before transfusions; ESA response is unlikely above this threshold.",
+        "Replenish iron, B12, and folate before judging response; assess hemoglobin and transfusion need at 6-8 weeks.",
+        "Non-responders advance to luspatercept (if ring sideroblasts positive) or imetelstat / HMA pathways.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ]
+    },
+    {
+      "id": "n_tx_luspatercept",
+      "linkId": "tx_mds_luspatercept",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Luspatercept",
+      "title": "Lower-risk MDS: luspatercept for RS-positive or transfusion-dependent anemia",
+      "section": "Treatment",
+      "description": "Luspatercept for transfusion-dependent lower-risk MDS with ring sideroblasts or ESA-refractory disease (COMMANDS Category 1 Preferred).",
+      "path": "Myelodysplastic Syndromes / Lower Risk / Anemia / Luspatercept",
+      "pills": [
+        "lower risk",
+        "RS+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Luspatercept 1.0 mg/kg SC q3w, titrating to 1.33 mg/kg then 1.75 mg/kg for inadequate response (COMMANDS Category 1 Preferred, with superior durability over ESAs).",
+        "Indicated for ring sideroblasts >=15% (or >=5% with SF3B1 mutation), ESA-refractory disease, or high baseline transfusion burden.",
+        "Monitor pre-dose hemoglobin, blood pressure, and for thromboembolic symptoms; hold for hemoglobin above target per label.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ]
+    },
+    {
+      "id": "n_tx_lower_refractory",
+      "linkId": "tx_mds_lower_refractory",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Imetelstat or HMA",
+      "title": "Lower-risk MDS refractory to ESA / luspatercept: imetelstat or HMA",
+      "section": "Treatment",
+      "description": "Options for ESA/luspatercept-refractory transfusion-dependent lower-risk MDS, including high baseline transfusion burden.",
+      "path": "Myelodysplastic Syndromes / Lower Risk / Anemia / Refractory",
+      "pills": [
+        "lower risk",
+        "refractory",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Imetelstat 7.1 mg/kg IV q4w, a telomerase inhibitor studied in the IMerge trial for ESA-refractory transfusion-dependent lower-risk MDS (monitor LFTs and cytopenias).",
+        "Hypomethylating agent alternative: azacitidine 75 mg/m2 SC/IV daily x 7 days q28d, or decitabine 20 mg/m2 IV daily x 5 days.",
+        "Clinical trial enrollment is preferred where available before committing to chronic HMA therapy.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "aml-azacitidine"
+      ]
+    },
+    {
+      "id": "n_higher_hct",
+      "linkId": "mds_higher_hct",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "HCT candidacy",
+      "title": "Higher-risk MDS: allogeneic HCT candidacy and disease course",
+      "section": "Treatment",
+      "description": "Higher-risk MDS management hinges on fitness for allogeneic HCT, the only curative modality, and on whether disease is relapsed or refractory.",
+      "path": "Myelodysplastic Syndromes / Higher Risk / HCT",
+      "pills": [
+        "higher risk"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Fit candidates: prompt donor search with HMA bridging to reduce marrow blasts below 5% before HCT",
+        "Non-candidates: definitive hypomethylating agent therapy",
+        "Relapsed or refractory after HMA: clinical trial or AML-like therapy"
+      ],
+      "options": [
+        {
+          "id": "hct_candidate",
+          "label": "Fit candidate for allogeneic HCT",
+          "sets": {
+            "hct": "candidate"
+          },
+          "pills": [
+            "HCT candidate"
+          ]
+        },
+        {
+          "id": "non_hct",
+          "label": "Not an HCT candidate",
+          "sets": {
+            "hct": "non_candidate"
+          },
+          "pills": [
+            "non-HCT"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed / refractory after HMA",
+          "sets": {
+            "hct": "relapsed"
+          },
+          "pills": [
+            "R/R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_higher_hct",
+      "linkId": "tx_mds_higher_hct",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HCT with HMA bridging",
+      "title": "Higher-risk MDS: allogeneic HCT with HMA bridging",
+      "section": "Treatment",
+      "description": "Curative-intent pathway for fit higher-risk MDS: urgent transplant referral with hypomethylating bridging.",
+      "path": "Myelodysplastic Syndromes / Higher Risk / HCT Candidate",
+      "pills": [
+        "higher risk",
+        "HCT candidate",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Prompt HLA typing and donor search at diagnosis; HCT is the only curative modality for MDS.",
+        "HMA bridging to reduce marrow blasts below 5% prior to allogeneic HCT: azacitidine 75 mg/m2 IV/SC d1-7 q28d (Category 1), or decitabine 20 mg/m2 IV d1-5.",
+        "Reassess marrow blast percentage and donor availability each cycle; proceed to conditioning without delay once blasts are controlled.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "aml-azacitidine"
+      ]
+    },
+    {
+      "id": "n_tx_higher_hma",
+      "linkId": "tx_mds_higher_hma",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HMA definitive",
+      "title": "Higher-risk MDS, non-HCT candidate: hypomethylating agent therapy",
+      "section": "Treatment",
+      "description": "Definitive HMA therapy for higher-risk MDS in patients who are not allogeneic HCT candidates.",
+      "path": "Myelodysplastic Syndromes / Higher Risk / Non-HCT / HMA",
+      "pills": [
+        "higher risk",
+        "non-HCT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Azacitidine 75 mg/m2 IV/SC d1-7 q28d (Category 1 with demonstrated overall survival benefit), or decitabine 20 mg/m2 IV d1-5, or oral decitabine/cedazuridine (Inqovi) where parenteral therapy is not feasible.",
+        "Continue a minimum of 4-6 cycles before judging response; responders continue until progression or intolerance.",
+        "Monitor CBC, renal function, and transfusion burden each cycle; provide infection prophylaxis per neutropenia.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "aml-azacitidine"
+      ]
+    },
+    {
+      "id": "n_tx_higher_rr",
+      "linkId": "tx_mds_higher_rr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "R/R after HMA",
+      "title": "Higher-risk MDS relapsed / refractory: trial or AML-like therapy",
+      "section": "Treatment",
+      "description": "Salvage pathway for higher-risk MDS that is relapsed or refractory after hypomethylating therapy.",
+      "path": "Myelodysplastic Syndromes / Higher Risk / Relapsed-Refractory",
+      "pills": [
+        "higher risk",
+        "R/R",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Clinical trial enrollment is preferred (HMA plus venetoclax combinations or novel agents).",
+        "HMA plus venetoclax where a trial is unavailable and marrow blast burden supports it.",
+        "Intensive AML-like induction for fit patients with rising blasts approaching AML.",
+        "Best supportive care and goals-of-care discussion for patients unfit for salvage therapy.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "protocolRefs": [
+        "aml-aza-venetoclax"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_risk",
+      "from": "n_workup",
+      "to": "n_ipss_risk",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_risk_lower",
+      "from": "n_ipss_risk",
+      "to": "n_lower_del5q",
+      "fromOptions": [
+        "lower"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_risk_higher",
+      "from": "n_ipss_risk",
+      "to": "n_higher_hct",
+      "fromOptions": [
+        "higher"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_del5q_yes",
+      "from": "n_lower_del5q",
+      "to": "n_tx_lenalidomide",
+      "fromOptions": [
+        "del5q"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_del5q_no",
+      "from": "n_lower_del5q",
+      "to": "n_lower_anemia_triage",
+      "fromOptions": [
+        "non_del5q"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_anemia_esa",
+      "from": "n_lower_anemia_triage",
+      "to": "n_tx_esa",
+      "fromOptions": [
+        "low_epo"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_anemia_luspa",
+      "from": "n_lower_anemia_triage",
+      "to": "n_tx_luspatercept",
+      "fromOptions": [
+        "ring_sideroblasts"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_anemia_refractory",
+      "from": "n_lower_anemia_triage",
+      "to": "n_tx_lower_refractory",
+      "fromOptions": [
+        "esa_refractory"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hct_candidate",
+      "from": "n_higher_hct",
+      "to": "n_tx_higher_hct",
+      "fromOptions": [
+        "hct_candidate"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hct_non",
+      "from": "n_higher_hct",
+      "to": "n_tx_higher_hma",
+      "fromOptions": [
+        "non_hct"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hct_relapsed",
+      "from": "n_higher_hct",
+      "to": "n_tx_higher_rr",
+      "fromOptions": [
+        "relapsed"
+      ],
+      "linkCategory": "conditional"
+    }
+  ],
+  "protocolRefs": [
+    "aml-aza-venetoclax",
+    "aml-azacitidine"
+  ]
+}

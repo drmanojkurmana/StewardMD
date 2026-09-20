@@ -82,8 +82,14 @@ test("wardsynqSafetyNote: an unresolved drug is reported as NOT CHECKED, never a
     findings: [{ code: "DOSE_UNPARSEABLE", severity: "major", message: "no numeric dose" }] });
   assert.match(gappedWithFindings, /NOT compared against: Warfarin 5mg/, "and told even when there ARE other findings");
 
-  // Unavailable decision support stays distinct from both.
-  assert.match(OE._wardsynqSafetyNote({ degraded: true }), /unavailable/i);
+  /* Unavailable decision support stays distinct from both - and since R6-1 (2026-09-18) it is a
+   * NOT CHECKED sentence, not a parenthetical: a degraded verdict means the patient's allergy list
+   * was never read, which is the one thing that must not read as "nothing found". */
+  const down = OE._wardsynqSafetyNote({ degraded: true });
+  assert.match(down, /NOT CHECKED/);
+  assert.match(down, /not an empty one/);
+  // A named unreadable type says which part of the record it is.
+  assert.match(OE._wardsynqSafetyNote({ findings: [], notChecked: ["AllergyIntolerance"] }), /NOT CHECKED against: this patient's allergies/);
   assert.equal(OE._wardsynqSafetyNote(null), "");
   for (const s of [{ unresolvedDrug: true, findings: [] }, { findings: [] }, { degraded: true }]) {
     assert.ok(!NO_EMOJI.test(OE._wardsynqSafetyNote(s)), "no emoji in clinician-facing text");

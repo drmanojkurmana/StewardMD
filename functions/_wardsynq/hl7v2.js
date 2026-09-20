@@ -311,7 +311,9 @@ async function adtForEncounter(request, env, ctx) {
   let encounter, patient;
   try {
     encounter = await svc.get("Encounter", encounterId);
-    patient = encounter ? await svc.get("Patient", encounter.patientId).catch(() => null) : null;
+    /* R6-2: a failed Patient read is the 502 below. Swallowed, the ADT went out with an empty PID
+     * on a stay that has a patient, and the receiver files it against nobody. */
+    patient = encounter ? await svc.get("Patient", encounter.patientId) : null;
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), message: null }; }
   if (!encounter) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId, message: null };
 
@@ -357,9 +359,13 @@ async function oruForReport(request, env, ctx) {
     report = await svc.get("DiagnosticReport", reportId);
     if (report) {
       [observations, patient, encounter] = await Promise.all([
-        svc.byPatient("Observation", report.patientId).catch(() => []),
-        svc.get("Patient", report.patientId).catch(() => null),
-        report.encounterId ? svc.get("Encounter", report.encounterId).catch(() => null) : Promise.resolve(null),
+        /* R6-2: none of these is swallowed. A failed Observation read used to send an ORU with no
+         * OBX segments for a report that released results - a receiver files that as "no results" -
+         * and a failed Patient read sent it with an empty PID. The read fails, so the message is
+         * refused with the 502 below rather than transmitted short. */
+        svc.byPatient("Observation", report.patientId),
+        svc.get("Patient", report.patientId),
+        report.encounterId ? svc.get("Encounter", report.encounterId) : Promise.resolve(null),
       ]);
     }
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), message: null }; }

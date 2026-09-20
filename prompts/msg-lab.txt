@@ -1,0 +1,37 @@
+The laboratory can open the laboratory
+
+The bench had a board and could not use it. lab holds queue.view and lab.result;
+the board's reads were gated emr.view alone, which the role deliberately does not
+have because resulting a potassium needs the order and not the consultation
+notes. So the one department screen the laboratory exists to work from was the
+one screen it could not open.
+
+THREE NARROW CHANGES, each matching a pattern already in the codebase:
+
+1. lab.result is now an alternative authority for collections and pending-tests,
+   exactly as order.verify already is for criticals and lab.result already is for
+   specimen-outcome. It grants the narrow record scope in actor.js and nothing
+   more, so it opens no other route.
+
+2. The laboratory's record scope gains READ on Patient. Without it every row of
+   its own worklist named a specimen by record id, the one identifier that cannot
+   be checked against a tube, a form or a wristband, which is the entire purpose
+   of the specimen subsystem. The imaging worklist settled the identical question
+   already, on the stated grounds that a worklist with no identity on it is worse
+   than no worklist.
+
+3. A tile may name more than one way in, because some screens honestly have two.
+   The laboratory board is opened by a ward with emr.view and by the bench with
+   lab.result, the same pair the server now accepts, and a single capability
+   would have had to lock out one of the two departments.
+
+THIS MOVES A PINNED BOUNDARY, so it is recorded and not absorbed. The role test
+asserted "and never reads the chart" over Patient and ClinicalNote together. That
+assertion is now split: Patient is readable, and the test asserts explicitly that
+ClinicalNote, Encounter, Condition and MedicationOrder are not, and that the lab
+never WRITES an identity. A laboratory still cannot read the chart. emr.view was
+tried on the role first and reverted the same day because it opened the discharge
+summary and the ward's critical-results list.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

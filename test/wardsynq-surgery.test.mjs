@@ -122,6 +122,14 @@ const THREE = [{ role: "surgeon", actorId: "dr-surgeon-1" }, { role: "anaestheti
 const allOf = (obj) => Object.fromEntries(obj.map((k) => [k, true]));
 const SIGN_IN_ITEMS = ["identity-confirmed", "site-confirmed", "procedure-confirmed", "consent-confirmed", "site-marked-confirmed", "anaesthesia-safety-check", "pulse-oximeter-working", "allergies-reviewed", "airway-risk-assessed", "blood-loss-risk-assessed"];
 const TIME_OUT_ITEMS = ["team-introduced", "identity-site-procedure-reconfirmed", "critical-events-anticipated", "antibiotic-prophylaxis-addressed", "imaging-displayed"];
+const FIT_PAC = {
+  history: "No comorbidities. No previous anaesthetic. No regular medicines. No known allergies.",
+  airway: { mallampati: "II", mouthOpeningCm: 4.5, thyromentalDistanceCm: 7, neckMovement: "normal" },
+  asaClass: "I", asaEmergency: false,
+  fasting: { status: "adequate", solidsLastAt: "2026-09-08T22:00:00.000Z", clearFluidsLastAt: "2026-09-09T04:00:00.000Z" },
+  investigations: { reviewed: true, summary: "Hb 13.2 g/dL" }, plan: { technique: "general" },
+  consent: { obtained: true, givenBy: "patient" }, decision: "fit",
+};
 const SIGN_OUT_ITEMS = ["procedure-recorded", "counts-correct", "specimens-labelled", "equipment-problems-addressed", "recovery-concerns-addressed"];
 
 async function bookedCase(mrnSuffix) {
@@ -172,10 +180,17 @@ test("THE GOLDEN PATH: consent -> mark site -> Sign In -> Time Out -> incision -
   const marked = await as(DOCTOR, "/ward/surgery-marksite", "POST", { orgId: ORG, caseId, marking: { site: "abdomen", laterality: "not-applicable" } });
   assert.equal(marked.__status, 200, JSON.stringify(marked)); assert.equal(marked.stage, "marked");
 
+  const pac = await as(DOCTOR, "/ward/pac", "POST", { orgId: ORG, caseId, pac: FIT_PAC });
+  assert.equal(pac.__status, 200, JSON.stringify(pac));
   const signIn = await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
   assert.equal(signIn.__status, 200, JSON.stringify(signIn)); assert.equal(signIn.stage, "signed-in");
+  const signedIn = await RECORD.latest(TENANT_ROW.id, "SurgicalCase", caseId);
+  assert.equal(signedIn.signIn.pac.status, "fit", "sign in keeps what the checkup said at that moment");
+  assert.equal(signedIn.signIn.pac.acknowledgement, null);
 
-  await as(DOCTOR, "/ward/anesthesia-start", "POST", { orgId: ORG, caseId, asaClass: "ASA II" });
+  const badTech = await as(DOCTOR, "/ward/anesthesia-start", "POST", { orgId: ORG, caseId, asaClass: "ASA II", technique: "hypnosis" });
+  assert.equal(badTech.__status, 422); assert.equal(badTech.error, "bad_technique");
+  await as(DOCTOR, "/ward/anesthesia-start", "POST", { orgId: ORG, caseId, asaClass: "ASA II", technique: "local-with-monitoring" });
   const drug = await as(DOCTOR, "/ward/anesthesia-event", "POST", { orgId: ORG, caseId, event: { drug: "Propofol", dose: "150 mg", route: "IV" } });
   assert.equal(drug.__status, 200, JSON.stringify(drug)); assert.equal(drug.events.length, 1);
 
@@ -193,9 +208,11 @@ test("THE GOLDEN PATH: consent -> mark site -> Sign In -> Time Out -> incision -
   const signOut = await as(DOCTOR, "/ward/surgery-signout", "POST", { orgId: ORG, caseId, submission: { items: allOf(SIGN_OUT_ITEMS), signatures: THREE } });
   assert.equal(signOut.__status, 200, JSON.stringify(signOut)); assert.equal(signOut.stage, "signed-out");
 
-  await as(DOCTOR, "/ward/anesthesia-end", "POST", { orgId: ORG, caseId });
+  const ended = await as(DOCTOR, "/ward/anesthesia-end", "POST", { orgId: ORG, caseId, technique: "general" });
+  assert.equal(ended.__status, 200, JSON.stringify(ended));
   const anes = await as(DOCTOR, `/ward/anesthesia-get?orgId=${ORG}&caseId=${caseId}`);
   assert.ok(anes.record.endedAt, "anaesthesia end is real, not just the case's own state");
+  assert.deepEqual([anes.record.technique, anes.record.techniqueChangedFrom], ["general", "local-with-monitoring"], "a conversion keeps the technique it started under");
 
   const note = await as(DOCTOR, "/ward/surgery-note", "POST", { orgId: ORG, caseId, note: "Uncomplicated appendicectomy." });
   assert.equal(note.__status, 200, JSON.stringify(note));
@@ -221,7 +238,7 @@ test("THE GATE: incision is unreachable without both Sign In and Time Out; sign 
   const onePerson = await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: [{ role: "surgeon", actorId: "dr-x" }, { role: "anaesthetist", actorId: "dr-x" }, { role: "nurse", actorId: "dr-x" }], lateralityAsserted: "not-applicable" } });
   assert.equal(onePerson.__status, 409); assert.equal(onePerson.code, "SIGNATURES_NOT_INDEPENDENT", JSON.stringify(onePerson));
 
-  await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
+  await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable", pacAcknowledgement: "Checkup done on paper, entered later" } });
   await as(DOCTOR, "/ward/surgery-timeout", "POST", { orgId: ORG, caseId, submission: { items: allOf(TIME_OUT_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
   await as(DOCTOR, "/ward/surgery-incise", "POST", { orgId: ORG, caseId });
 
@@ -262,7 +279,7 @@ test("THE THEATRE BOARD lists every open case hospital-wide, and drops one once 
 
   await as(DOCTOR, "/ward/surgery-consent", "POST", { orgId: ORG, caseId: booking.caseId, consent: { procedure: "Appendicectomy", laterality: "not-applicable", signedByPatientOrProxy: true } });
   await as(DOCTOR, "/ward/surgery-marksite", "POST", { orgId: ORG, caseId: booking.caseId, marking: { site: "abdomen", laterality: "not-applicable" } });
-  await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
+  await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable", pacAcknowledgement: "Checkup done on paper, entered later" } });
   await as(DOCTOR, "/ward/surgery-timeout", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(TIME_OUT_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
   await as(DOCTOR, "/ward/surgery-incise", "POST", { orgId: ORG, caseId: booking.caseId });
   await as(DOCTOR, "/ward/surgery-signout", "POST", { orgId: ORG, caseId: booking.caseId, submission: { items: allOf(SIGN_OUT_ITEMS), signatures: THREE } });

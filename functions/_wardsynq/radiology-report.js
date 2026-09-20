@@ -31,6 +31,8 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { templatesOf, applyTemplate } from "./imaging-viewer.js";
+import { closeOrderOnResult } from "./ward-order.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const STATUSES = Object.freeze(["preliminary", "final", "corrected"]);
@@ -85,7 +87,15 @@ async function reportImaging(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
 
   const serviceRequestId = str(ctx.serviceRequestId);
-  const findings = str(ctx.findings);
+  /* P1.10 STRUCTURED TEMPLATES. A report written against a hospital template stores the sections and
+   * the template id/version. Findings may be left blank then: they become the radiologist's own section
+   * entries, joined, never reworded. The impression is still never composed. Free text stays. */
+  let templated = null;
+  if (str(ctx.templateId)) {
+    templated = applyTemplate(templatesOf(ctx.templates).templates, ctx.templateId, ctx.templateVersion, ctx.sections);
+    if (!templated.ok) return { ...base, ok: false, status: 422, error: templated.error, detail: templated.detail, written: 0 };
+  }
+  const findings = str(ctx.findings) || (templated ? templated.sections.map((x) => `${x.label}: ${x.value}`).join("\n") : "");
   const impression = str(ctx.impression);
   const status = str(ctx.status) || "preliminary";
   if (!serviceRequestId) return { ...base, ok: false, status: 422, error: "request_required", detail: "an imaging report answers a request", written: 0 };
@@ -106,6 +116,19 @@ async function reportImaging(request, env, ctx) {
   try { sr = await svc.get("ServiceRequest", serviceRequestId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
+  /* PCPNDT (register-routes.js formFGate), legal review B.4.3 and B.4.4. Every report of an obstetric ultrasound needs
+   * the pregnant woman's declaration recorded on Form F before the procedure (rule 10(1A)); a final report needs the
+   * complete Form F and carries the doctor's declaration. A report naming the sex of the foetus is refused (s.5(2), s.6).
+   * A gate that could not be checked refuses too, because "could not check" is not "complete". */
+  let pcpndt = null;
+  if (typeof ctx.formFCheck === "function") {
+    let gate;
+    try { gate = await ctx.formFCheck(sr, ctx.modality, { findings, impression, status, actorId: resolved.actor.id }); } catch { gate = { required: true, ok: false, error: "formf_unreadable", detail: "Form F could not be checked, so the report was not saved." }; }
+    if (gate && gate.required && !gate.ok) {
+      return { ...base, ok: false, status: gate.status || (gate.error === "formf_unreadable" ? 502 : 409), error: gate.error, detail: gate.detail, missing: gate.missing || [], serviceRequestId, written: 0 };
+    }
+    if (gate && gate.declaration) pcpndt = gate.declaration;
+  }
 
   const id = reportIdFor(serviceRequestId);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
@@ -135,6 +158,7 @@ async function reportImaging(request, env, ctx) {
   report.category = "imaging";
   report.modality = str(ctx.modality) || null;
   report.findings = findings;
+  if (templated) { report.template = templated.template; report.sections = templated.sections; }
   report.impression = impression || null;
   report.reportedBy = resolved.actor.id;
   report.reportedAt = str(ctx.reportedAt) || new Date().toISOString();
@@ -144,6 +168,8 @@ async function reportImaging(request, env, ctx) {
   // before this; the closed-loop notification/acknowledgement/escalation machinery was built and
   // waiting, unreachable for imaging until this one flag is wired through.
   if (ctx.critical === true) report.critical = true;
+  // PC&PNDT Rules r.10(1A): the doctor's declaration goes on each report, as recorded on Form F.
+  if (pcpndt) report.pcpndtDeclaration = pcpndt;
   if (changed) {
     report.impressionChangedFrom = current.impression || null;
     report.discrepancy = true;
@@ -151,11 +177,22 @@ async function reportImaging(request, env, ctx) {
 
   try {
     const out = await svc.put(report, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
+    /* R5-2 / LT-27: A REPORTED STUDY IS NOT STILL TO BE DONE, and now the ORDER says so. This used to
+     * leave the order `active` for ever, so the modality worklist had to read every order the hospital
+     * had ever held and subtract the reported ones - the read that failed with a 500 within weeks.
+     * Only a FINAL or CORRECTED reading closes it: a preliminary report still owes a final one, which
+     * is exactly the rule dicom.js's worklist already applied. Never allowed to fail the report. */
+    const closure = (status === "final" || status === "corrected")
+      ? await closeOrderOnResult({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant, actorId: resolved.actor.id }, sr)
+      : null;
     return {
       ...base, ok: true, written: 1, reportId: id, patientId: report.patientId,
+      ...(closure ? { orderClosed: closure.closed === true, ...(closure.closed ? {} : { orderCloseFailed: closure.reason || null }) } : {}),
       serviceRequestId, status, modality: report.modality,
       findings, impression: report.impression, version: out.record.version,
+      ...(templated ? { template: templated.template, sections: templated.sections } : {}),
       critical: !!report.critical,
+      ...(pcpndt ? { pcpndtDeclaration: pcpndt } : {}),
       supersedes: current ? { status: current.status, version: current.version } : null,
       ...(changed ? {
         discrepancy: true,

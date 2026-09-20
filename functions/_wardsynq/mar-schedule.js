@@ -366,10 +366,17 @@ async function marSchedule(request, env, ctx) {
   const nowMs = Date.parse(str(ctx.now)) || Date.now();
   const opts = { from: new Date(fromMs).toISOString(), to: new Date(toMs).toISOString(), times: ctx.marTimes, offsetMinutes: ctx.offsetMinutes, timeZone: ctx.timeZone };
   const due = [], prn = [], unscheduled = [];
-  let truncated = false;
+  let truncated = false, unreadDoses = 0;
+  /* LT-21: the patient's dose records in ONE read, not one read per slot (the nurse worklist did this for every
+   * dose of every patient). Latest version per id, exactly what a get per slot returned. A failed read is still
+   * never "not started": every slot is unknown. */
+  let given = null;
+  try { given = new Map(((await svc.byPatient("MedicationAdministration", patientId)) || []).filter(Boolean).map((m) => [m.id, m])); }
+  catch { given = null; }
 
   for (const o of (orders || []).filter((x) => x && x.status === "active")) {
-    const card = { orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
+    // orderVersion: the order as the nurse saw it. A dose charted against it is refused if the order changed (G2).
+    const card = { orderId: o.id, orderVersion: o.version == null ? null : o.version, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
     const spec = parseFrequency(o.frequency);
     if (!spec) {
       // Named, not omitted. A ward that cannot see this order has no way to know a dose is missing.
@@ -384,13 +391,20 @@ async function marSchedule(request, env, ctx) {
     for (const t of slots.due) {
       const dueAt = new Date(t).toISOString();
       const administrationId = medicationAdministrationIdFor(o.id, dueAt);
-      let mar = null;
-      try { mar = administrationId ? await svc.get("MedicationAdministration", administrationId) : null; } catch { mar = null; }
+      let mar = null, readFailed = false;
+      /* A failed read is NOT "not started": shown as null it offered Administer on a dose that may
+       * already have been given. */
+      if (!given) { readFailed = true; unreadDoses += 1; } else mar = (administrationId && given.get(administrationId)) || null;
       due.push({
         ...card, dueAt, administrationId,
-        status: mar ? mar.status : null,             // null = this dose has not been started
+        ...(readFailed ? { readFailed: true } : {}),
+        status: readFailed ? "unknown" : mar ? mar.status : null,             // null = this dose has not been started
         administeredAt: (mar && mar.administeredAt) || null,
         administeredBy: (mar && mar.administeredBy) || null,
+        /* Owner 2026-09-16: who witnessed a high-alert dose, and who put the dose in its current state (the session
+         * that wrote this version: the nurse who held it, recorded the refusal or cancelled it). Ids; the round names them. */
+        witnessedBy: (mar && mar.witnessedBy) || null,
+        statusBy: (mar && mar.writtenBy && mar.writtenBy.id) || null,
         overdue: isOverdue(t, mar && mar.status, nowMs, ctx.graceMinutes),
         /* Only when this dose is NOT at the time the ward's policy names. A nurse handed a time the
          * policy does not contain is owed the reason on the same row, not in a release note. */
@@ -404,6 +418,7 @@ async function marSchedule(request, env, ctx) {
     due, prn, unscheduled,
     // Never a silent cap: a truncated round that looked complete would read as "nothing else is due".
     ...(truncated ? { truncated: true, detail: `more than ${MAX_SLOTS} doses fall in this window; narrow it` } : {}),
+    ...(unreadDoses ? { unreadDoses, warning: `${unreadDoses} dose record${unreadDoses === 1 ? "" : "s"} could not be read, so whether ${unreadDoses === 1 ? "it was" : "they were"} given is unknown. Reload before giving.` } : {}),
   };
 }
 

@@ -1,0 +1,105 @@
+{
+  "id": "small-bowel-folfox",
+  "diseaseId": "small_bowel",
+  "name": "mFOLFOX6: Oxaliplatin + Leucovorin + 5-Fluorouracil (Small Bowel Adenocarcinoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 12,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Small Bowel Adenocarcinoma v1.2026"
+  },
+  "stage": [
+    "II",
+    "III",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "first-line"
+  ],
+  "histology": "small bowel adenocarcinoma (duodenal, jejunal, or ileal)",
+  "premedications": [
+    {
+      "name": "Ondansetron",
+      "dose": "16 mg IV",
+      "notes": "Prior to oxaliplatin"
+    },
+    {
+      "name": "Dexamethasone",
+      "dose": "12 mg IV",
+      "notes": "Prior to oxaliplatin"
+    }
+  ],
+  "supportiveCare": [
+    "Cold avoidance for oxaliplatin acute neuropathy",
+    "Antidiarrheal management with loperamide"
+  ],
+  "monitoring": [
+    "CBC with diff, CMP",
+    "Sensory neuropathy assessment before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "oxaliplatin",
+      "name": "Oxaliplatin",
+      "basis": "bsa",
+      "dosePerUnit": 85,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Oxaliplatin 85 mg/m2 IV in D5W over 2 hours on Day 1."
+    },
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Leucovorin 400 mg/m2 IV over 2 hours concurrently with oxaliplatin on Day 1."
+    },
+    {
+      "id": "fluorouracil-bolus",
+      "name": "Fluorouracil (5-FU Bolus)",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "5-FU 400 mg/m2 IV bolus on Day 1 following leucovorin."
+    },
+    {
+      "id": "fluorouracil-infusion",
+      "name": "Fluorouracil (5-FU Continuous)",
+      "basis": "bsa",
+      "dosePerUnit": 2400,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2
+      ],
+      "notes": "5-FU 2400 mg/m2 continuous IV infusion over 46-48 hours via elastomeric or electronic pump."
+    }
+  ]
+}

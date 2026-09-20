@@ -1,0 +1,46 @@
+fix: a made-up approval reference was clearing antimicrobial stewardship
+
+formulary.js blocks a restricted drug until it is handed an approval reference, which is
+right, and then read `if (entry.requiresApproval && approvalRef)` - ANY non-empty string.
+approvalRef came off the request body and nothing ever looked it up. A prescriber blocked
+from meropenem at 2am could type one character and be through. The control the hospital
+had configured to protect its last-line antibiotics was a formality that looked like a
+control, which is worse than not having one, because everybody believed in it.
+
+_wardsynq/verification.js is the fix, and its shape is the one thing from the whole
+OpenMRS/Bahmni/Danphe audit worth taking wholesale - Danphe's append-only approval chain.
+An approval is never a flag on the thing approved. It is its own record pointing at the
+one before it, so who decided what, at which level, in what order, is always
+reconstructable. A boolean cannot answer "who approved it, and was it later withdrawn",
+and by the time anybody asks, the answer is gone.
+
+The rules that make it worth having:
+  - The person who asked cannot be a person who grants. Without this the chain is just an
+    audit trail of people approving themselves, which is what the free-text reference
+    already was.
+  - Two approvals from one person are one person agreeing with themselves.
+  - An approval covers the subject it was granted for. Meropenem's approval does not
+    prescribe vancomycin.
+  - A withdrawal is a new row after the approval it withdraws, never an edit of it. The
+    approval stays readable, because it happened, and because somebody reviewing a death
+    needs to see that it was given before it was taken back.
+  - How many approvers a hospital wants is org config, the same way note writers are.
+  - Reading the chain can fail, and a failure resolves to NOT approved. Failing closed is
+    the only safe direction: an approval that cannot be read is not an approval.
+
+Closing the lock without cutting a key would have made restricted drugs unprescribable,
+so this also ships the door: ward/approval-request, ward/approval-decide, ward/approvals,
+and an Approvals screen showing each chain in full, oldest first, withdrawn approvals
+included.
+
+Two existing tests asserted the old behaviour - they encoded the hole as intended
+behaviour, which is how it survived this long. Both now assert the fix, and one proves
+end to end that a real chain read out of the record store does clear the block. The
+drug-scoping case moved to a unit test rather than another live order, because this file
+shares one rate-limit budget and an extra write was failing an unrelated FHIR test two
+thousand lines below.
+
+Suite 5760 passing, 0 failing.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

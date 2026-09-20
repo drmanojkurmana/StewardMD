@@ -52,7 +52,7 @@ mock.module("../functions/_fbfirestore.js", {
     wDelete: (_e, path) => ({ delete: path }),
   },
 });
-mock.module("../functions/_opd_auth.js", { namedExports: { genSalt: () => "salt", hashSecret: async () => "hash" } });
+mock.module("../functions/_opd_auth.js", { namedExports: { genSalt: () => "salt", hashSecret: async () => "hash", passwordProblem: () => null, pinProblem: () => null } });
 
 const ORG = await import("../functions/_opd_org_store.js");
 

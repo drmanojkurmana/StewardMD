@@ -66,6 +66,29 @@ version with a fresh session - no rediscovery.
   of one patient record capturing table + report-block STRUCTURE only. Contract: `connect-agent/phone/CONTRACT.md`.
 - Broker route `POST /sessions/:id/discovery` runs `manifest/infer-html.mjs` server-side over the observed
   views and keeps them on the job's `phone_state` (replay pattern for the runtime).
+- **Two modes** (2026-09-12, `docs/connect/agent-modes-plan.md`): `runPhoneDiscovery({ mode })`. `auto`
+  explores and crawls, then asks the doctor only for gaps; `manual` asks for every resource in
+  `ASK_ORDER` (worklist, patient, notes, labs, radiology, medications, discharge, history) and never taps.
+  Every ask has "Not in my EMR" (sheet button and the native header button, event `guideSkip`).
+- **The brain**: `functions/_connect/agent/brain.js` + routes `POST /brain/{classify,map-columns,next}`.
+  Screen STRUCTURE only through a refusing PHI gate, cached per origin + structure hash in `MAIK_KV`,
+  model from `CONNECT_AGENT_MODEL` via the MaiK gateway Google adapter. Phone side: `enrichView` /
+  `scrubForBrain` in deep-crawl.mjs; the answer is advisory (`fieldHints` on the view, honored by
+  infer-html only where its own rules found nothing; `brain.next` picks a control from the crawler's
+  own candidate list).
+- **Auto mode UI**: `setMode({ compact: true })` keeps the native browser to the top 52% while the agent
+  drives so the sheet's progress bar and `connect-agent-snake.js` stay visible; guided asks are full size.
+- **Runtime + self-repair**: `connect-agent/phone/runtime.mjs` replays an approved version's views for
+  Ward Sync (`ghis-ward.js` `ghisOpenAdapterHospital`). Zero rows -> guide mode with `REPAIR_ASK` ->
+  `captureWorklist` + `readView({ navigate: false })` -> `POST /versions/:id/repair` files a child
+  candidate (parent untouched, three-draft rule).
+- **The adapter answers the GHIS proxy** (`connect-agent/phone/ghis-shim.mjs`, wired in ghis-ward.js
+  `installAdapterProxy`): while an adapter session is fresh (30 min after a ward read), fetches to
+  `GHIS.getProxyBase()` are served on the phone in the hand-built proxy JSON shapes (patients, profile,
+  lab, lab-detail, radiology, radiology-report, medications, history, status; writes 501), one browser
+  read per patient cached per session. Assess, the drawers and medication review work on any hospital.
+- **Remove an adapter**: `DELETE /api/connect/agent/connections/:deploymentId` (owner/admin), buttons on
+  the sheet list and the admin Governance card.
 
 **Runner and connector**
 - `connect-agent/runner.mjs`: the actual long-lived process - leases a job, drives discovery through
@@ -144,3 +167,38 @@ session does not have.
   once); the guided ask uses `guide` mode, which has no overlay.
 - **Inline report lines extract whole.** `<p><b>Study:</b> CT BRAIN</p>` yields "Study: CT BRAIN" (the
   closed transforms cannot strip the label); acceptable for documents, note it when mapping.
+- **Verification before approval** (2026-09-13): `connect-agent/phone/verify.mjs` runs after the crawl
+  (and after manual asks): ward list through the adapter, real patients, every view with a call
+  replayed and judged by brain op `verify` (columns, row count, kind only). Failed views are asked
+  first. `view.verified` is stored and shown on the result screen and the admin card.
+- **Discovery records request field names** (`bodyKeys`, `requestKind`, `xhr`, `contentType` on view
+  endpoints; observer in discovery.mjs, merged in deep-crawl `mergeEndpointDetails`); credential
+  requests are never endpoints; the worklist keeps its page-load call; first rows of lab, radiology,
+  history, discharge and notes lists are opened once for `<kind>-detail` views (`detailOf`).
+- **Endpoint replay** (2026-09-13): `runtime.readPatientDetails` reads a patient view from its own page with
+  the patient filled in, then from the keyed GET data calls discovery recorded on that view
+  (`endpoints`, e.g. `/Doctor/Home/GetMedicines/?id`), inside the doctor browser session; a view sharing
+  the worklist page is not re-read there. Captured page URLs carry `{id}` (deep-crawl `redactPageUrl`);
+  the server redacts stored/returned paths too (`redactPathValues`).
+- **Proven endpoints only** (owner decision 2026-09-13; `connect-agent/phone/prove.mjs`): the page observer
+  keeps a page-realm, never-drained replay buffer (`window.__SMD_REPLAY__`: exact url, body, response
+  STRUCTURE; sign-in bodies skipped). Per captured screen: candidates = requests since the action's mark
+  (`__smdProveMark`, set by CRAWL_ARM_OBSERVER; a new document means all of it) -> brain op
+  `pick-endpoint` ranks them from structure (data | prerequisite | lookup | ping | shell) -> each is
+  re-issued from inside the page in that order -> the first whose answer carries >= 50% (and >= 3) of the
+  on-screen cell values is the data call. Patient-bound POSTs fired before it ride as `prerequisite`.
+  Every field gets a source (`params`: worklist column, `{from, fields, join}` joined id, parent list
+  column for `-detail` views, constant, token, page, today). Unproven views keep NO endpoints
+  (`view.proof.status`). Runtime `executeProven` sends exactly that; patients carry their list row as
+  non-enumerable `_row`; `readPatientDetails` follows `labs -> labs-detail` style chains (`_of` meta).
+- **Brain reaches Vertex through ADC** (2026-09-13): org policy limits the project's API keys to the Gemini
+  API and forbids service-account keys, so Vertex express mode answered PERMISSION_DENIED to every brain
+  call and discovery ran without Gemini (`proof.brain:false`). Cloud Run service `connect-agent-brain`
+  (asia-south1, `connect-agent/brain-proxy`, SA `connect-agent-brain@` with roles/aiplatform.user) calls
+  gemini-3.8-flash on `locations/global` with its ADC token; Pages secrets
+  `CONNECT_AGENT_BRAIN_PROXY_URL/SECRET` route brain.js to it (`/brain/model` says `vertex-adc`). Gotcha:
+  a Pages secret change showed up only on the deploy AFTER the next one.
+- **Gold audit** (`connect-agent/phone/gold-audit.mjs`, verification only, never imported by discovery):
+  `GHIS.goldAudit()` in the app answers the same proxy paths from the hand-built `/api/ghis` and from the
+  adapter (via ghis-shim) for the same patients; report = counts per endpoint and field. Browser test:
+  `node test/run-connect-prove-browser.mjs`.

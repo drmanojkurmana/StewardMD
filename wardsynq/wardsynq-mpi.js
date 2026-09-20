@@ -36,6 +36,71 @@ import { Patient } from "./wardsynq-model.js";
 
 /* ------------------------------------------------------------------ string utilities */
 
+/* ------------------------------------------------------------------ Devanagari to Latin
+ *
+ * An Indian register holds the same person as "Ramesh" at one desk and "रमेश" at another, and
+ * normalizeName below keeps only a-z, so a Devanagari name used to normalise to NOTHING and could
+ * never be found. This maps Devanagari to a plain Latin spelling BEFORE normalisation, so both
+ * scripts reach the same Jaro-Winkler and Soundex comparison that already absorbs Lakshmi/Laxmi.
+ *
+ * DETERMINISTIC AND DELIBERATELY PLAIN. One table, no dictionary, no model: the same input always
+ * gives the same key, which the header's reproducibility argument requires. It writes the spelling a
+ * desk clerk would type (no diacritics, long vowels folded: आ -> a), deletes only the WORD-FINAL
+ * inherent vowel (रमेश -> ramesh, not ramesha), and leaves medial schwa in place (कमला -> kamala);
+ * the phonetic matcher, not this table, is what forgives kamala/kamla. It produces a comparison key,
+ * never a name to display or store. Candidates only: nothing here can link a record.
+ */
+const DEV_CONSONANTS = {
+  "क": "k", "ख": "kh", "ग": "g", "घ": "gh", "ङ": "n", "च": "ch", "छ": "chh", "ज": "j", "झ": "jh", "ञ": "n",
+  "ट": "t", "ठ": "th", "ड": "d", "ढ": "dh", "ण": "n", "त": "t", "थ": "th", "द": "d", "ध": "dh", "न": "n",
+  "प": "p", "फ": "ph", "ब": "b", "भ": "bh", "म": "m", "य": "y", "र": "r", "ल": "l", "व": "v",
+  "श": "sh", "ष": "sh", "स": "s", "ह": "h", "ळ": "l",
+  "क़": "q", "ख़": "kh", "ग़": "g", "ज़": "z", "ड़": "d", "ढ़": "rh", "फ़": "f",
+};
+const DEV_VOWELS = { "अ": "a", "आ": "a", "इ": "i", "ई": "i", "उ": "u", "ऊ": "u", "ऋ": "ri", "ए": "e", "ऐ": "ai", "ओ": "o", "औ": "au" };
+const DEV_MATRAS = { "ा": "a", "ि": "i", "ी": "i", "ु": "u", "ू": "u", "ृ": "ri", "े": "e", "ै": "ai", "ो": "o", "ौ": "au", "ॉ": "o" };
+const DEV_VIRAMA = "्";
+const DEV_NUKTA = "़";
+const isDev = (c) => !!c && c >= "ऀ" && c <= "ॿ" && c !== "।" && c !== "॥";
+
+/**
+ * PURE. Devanagari letters to a plain Latin spelling. Every other character passes through, so a
+ * Latin or mixed name comes back as it was.
+ * @param {string} text
+ * @returns {string}
+ */
+function transliterateDevanagari(text) {
+  if (typeof text !== "string") return "";
+  if (!/[ऀ-ॿ]/.test(text)) return text;
+  const chars = Array.from(text.normalize("NFD").replace(/डॉ\.?/g, " "));
+  let out = "";
+  for (let i = 0; i < chars.length; i++) {
+    let c = chars[i];
+    if (chars[i + 1] === DEV_NUKTA && DEV_CONSONANTS[c + DEV_NUKTA]) { c += DEV_NUKTA; i++; }
+    if (DEV_CONSONANTS[c]) {
+      out += DEV_CONSONANTS[c];
+      const next = chars[i + 1];
+      if (next === DEV_VIRAMA) { i++; continue; }
+      if (DEV_MATRAS[next]) { out += DEV_MATRAS[next]; i++; continue; }
+      // The inherent vowel: dropped at the end of a word, kept inside it and on a one-letter word.
+      const wordEnd = !isDev(next);
+      const oneLetter = !isDev(chars[i - 1]);
+      if (!wordEnd || oneLetter) out += "a";
+      continue;
+    }
+    if (DEV_VOWELS[c]) out += DEV_VOWELS[c];
+    else if (DEV_MATRAS[c]) out += DEV_MATRAS[c];
+    else if (c === "ं" || c === "ँ") out += "n";
+    else if (c === "ः") out += "h";
+    else if (c === DEV_VIRAMA || c === DEV_NUKTA) out += "";
+    else if (c === "।" || c === "॥") out += " ";
+    else if (c >= "०" && c <= "९") out += String(c.charCodeAt(0) - 0x0966);
+    else out += c;
+  }
+  return out;
+}
+
+
 /** Honorifics and courtesy titles seen on Indian registration desks and on imported feeds. They
  * carry no identity information, so leaving them in makes "Dr Anita Rao" and "Anita Rao" look like
  * different people. Deliberately excludes suffixes that CAN disambiguate (Jr/Sr, II/III). */
@@ -52,6 +117,7 @@ const HONORIFICS = new Set([
  */
 function normalizeName(name) {
   if (typeof name !== "string") return "";
+  name = transliterateDevanagari(name);
   const tokens = name
     .toLowerCase()
     .replace(/[.,'`_/\\-]+/g, " ") // dots and hyphens are punctuation in names, not letters
@@ -280,7 +346,19 @@ const DEFAULT_THRESHOLDS = {
   review: 0.13,
   // Jaro-Winkler at or above this counts as name agreement rather than name disagreement.
   nameAgreement: 0.9,
+  // Below nameAgreement, a name still agrees when every word sounds alike (per-word Soundex) AND the
+  // spelling is at least this close. Transliteration is where Indian registries split one person
+  // in two: Mohammed/Muhammad (0.85), Lakshmi/Laxmi (0.83), Sita/Seetha (0.79). Soundex alone is too
+  // coarse to trust - Ravi and Rupa are both R100 - so the spelling floor keeps it from pairing them.
+  phoneticFloor: 0.75,
 };
+
+/** PURE. Same number of words, and each word codes to the same Soundex, in order. */
+function soundsAlike(aName, bName) {
+  const a = aName.split(" "), b = bName.split(" ");
+  if (a.length !== b.length) return false;
+  return a.every((t, i) => { const s = soundex(t); return s !== "" && s === soundex(b[i]); });
+}
 
 /** Denominator for the score: the total weight on offer if every field agreed. Identifiers count
  * once here even though several systems can each contribute, which is why the raw total is clamped
@@ -365,14 +443,17 @@ function scoreMatch(candidate, existing, config) {
   const bName = normalizeName(b.name);
   if (aName && bName) {
     const similarity = jaroWinkler(aName, bName);
-    const agreed = similarity >= thresholds.nameAgreement;
+    const spelled = similarity >= thresholds.nameAgreement;
+    const floor = thresholds.phoneticFloor ?? DEFAULT_THRESHOLDS.phoneticFloor;
+    const phonetic = !spelled && similarity >= floor && soundsAlike(aName, bName);
+    const agreed = spelled || phonetic;
     // Graded both ways: a near miss is worth almost the full weight, and a total mismatch costs the
     // full penalty, with everything in between scaled instead of falling off a cliff at the
     // threshold.
     const contribution = agreed
       ? weights.name.agree * similarity
       : -weights.name.disagree * (1 - similarity);
-    record("name", agreed, contribution, `name Jaro-Winkler ${similarity.toFixed(2)}`);
+    record("name", agreed, contribution, `name Jaro-Winkler ${similarity.toFixed(2)}${phonetic ? ", sounds alike" : ""}`);
   }
 
   const aDob = dobOf(a);
@@ -501,7 +582,8 @@ function makeProvisionalIdentity(input) {
   const day = compactDate(spec.arrivedAt);
   // Padded to two digits for readability; a day past 99 unidentified arrivals keeps counting rather
   // than wrapping, because a colliding mrn is a wrong-patient hazard and an ugly one is not.
-  const mrn = `TRAUMA-UNKNOWN-${token}-${day}-${String(sequence).padStart(2, "0")}`;
+  const prefix = spec.isTrauma === false ? "EMERG-UNKNOWN" : (spec.prefix || "TRAUMA-UNKNOWN");
+  const mrn = `${prefix}-${token}-${day}-${String(sequence).padStart(2, "0")}`;
 
   return Patient({
     mrn,
@@ -674,6 +756,7 @@ function unmerge(mergeRecord) {
 
 export {
   normalizeName,
+  transliterateDevanagari,
   soundex,
   jaroWinkler,
   DEFAULT_WEIGHTS,

@@ -1827,7 +1827,7 @@
         importProgress("Compressing image…");
         compressImage(dataUrl, function (d, meta) {
           if (!d) return importProgress("Could not read this image.", true);
-          doOcr(kind, d, meta ? meta.kb + " KB" : "");
+          doOcr(kind, d, meta ? meta.kb + " KB" : "", dataUrl);
         });
       }).catch(function () { importDone(); });
       return;
@@ -1907,6 +1907,31 @@
   }
   // Map an engine result (fields keyed strictly) → the numeric field map the review uses.
   // Ingest mapping is UNCHANGED — values map by key exactly as before.
+  // Debug overlay (localStorage smd_icu_ocr_debug = "1"): draws the OCR boxes, labels, selected and
+  // rejected candidates and label→value lines over the thumbnail of the LAST monitor read, using the
+  // evidence reasoning.js parked in window.__SMD_ICU_OCR_LAST. Developer aid only; no effect otherwise.
+  function smdOcrOverlay(el) {
+    try {
+      if (localStorage.getItem("smd_icu_ocr_debug") !== "1") return;
+      var last = window.__SMD_ICU_OCR_LAST, M = window.SMD_ICU_MONITOR;
+      if (!last || !M || !el) return;
+      var img = el.querySelector(".icu-imp-thumb"); if (!img) return;
+      function draw() {
+        var w = img.naturalWidth || 1000, h = img.naturalHeight || 1000;
+        var wrap = document.createElement("div"); wrap.style.cssText = "position:relative;display:inline-block;max-width:100%;margin:0 16px";
+        img.parentNode.insertBefore(wrap, img); wrap.appendChild(img);
+        img.style.margin = "0"; img.style.maxHeight = "320px"; img.style.display = "block";
+        var holder = document.createElement("div"); holder.innerHTML = M.overlaySVG(last.result, last.boxes, w, h);
+        var svg = holder.firstChild; svg.setAttribute("width", "100%"); svg.setAttribute("height", "100%"); svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        svg.style.cssText = "position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none";
+        wrap.appendChild(svg);
+        var pre = document.createElement("pre"); pre.style.cssText = "font:10px/1.35 ui-monospace,Menlo,monospace;white-space:pre-wrap;max-height:220px;overflow:auto;margin:8px 16px;padding:8px;border-radius:8px;background:var(--panel2,#f6f7f9);color:var(--muted,#555)";
+        pre.textContent = M.explain(last.result, last.boxes);
+        wrap.parentNode.insertBefore(pre, wrap.nextSibling);
+      }
+      if (img.complete && img.naturalWidth) draw(); else img.addEventListener("load", draw, { once: true });
+    } catch (e) {}
+  }
   function extractOcrFields(r) {
     var fields = {};
     if (r && r.mode === "fields") {
@@ -1915,12 +1940,12 @@
     }
     return fields;
   }
-  function doOcr(kind, dataUrl, note) {
+  function doOcr(kind, dataUrl, note, original) {
     // Combined "all" → the engine returns SECTIONS ({labs,abg,vitals,ventilator}); route to the
     // grouped review so every category present in one image is captured at once (gold249).
     if (kind === "all") {
       if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process) {
-        SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "all" }).then(function (r) {
+        SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "all", original: original }).then(function (r) {
           importDone();
           if (!r || r.cancelled) return;
           openImportReviewAll(coerceSections(r && r.fields), dataUrl, (r && r.lines) || [], note, "Imported report");
@@ -1935,7 +1960,7 @@
     // the same { mode, fields, lines } shape the review already consumes. Falls back to the
     // legacy readImage path only if the module is somehow absent.
     if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process) {
-      SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: mapKind }).then(function (r) {
+      SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: mapKind, original: original }).then(function (r) {
         importDone();
         if (!r || r.cancelled) return;   // user cancelled — no dead end, just closes cleanly
         openImportReview(kind, extractOcrFields(r), dataUrl, (r && r.lines) || []);
@@ -1992,6 +2017,7 @@
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + rows + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
+    smdOcrOverlay(el);
     function close() { el.remove(); }
     var focused = el.querySelector("[data-impk]");
     el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
@@ -2069,6 +2095,7 @@
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + groupsHTML + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
+    smdOcrOverlay(el);
     function close() { el.remove(); }
     var focused = el.querySelector("[data-impk]");
     el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
@@ -6257,7 +6284,7 @@
         if (r && r.lines && r.lines.length) { if (out) out.innerHTML = "Read on-device — couldn't auto-structure. Recognized: <span style=\"color:var(--muted)\">" + r.lines.slice(0, 8).map(function (s) { return String(s).replace(/[<>&]/g, ""); }).join(" · ") + "</span>. Tap ✎ to enter manually."; return true; }
         return false;
       }
-      function runSnap(kind, out, dataUrl) {
+      function runSnap(kind, out, dataUrl, original) {
         if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
         // Patient details / EMR case sheet: its own schema (name/age/sex/history/etc. are mostly
         // free text, not the numeric labs/vitals/ABG/vent set), so it gets a dedicated review sheet
@@ -6265,7 +6292,7 @@
         // misread identity/history text is worth a proper look before it lands on the patient.
         if (kind === "patient") {
           var runP = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
-            ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "patient" })
+            ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "patient", original: original })
             : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, "patient") : Promise.reject(new Error("no-reader")));
           runP.then(function (r) {
             if (!r || r.cancelled) { if (out) out.textContent = ""; return; }
@@ -6287,7 +6314,7 @@
         var combined = (kind !== "flowsheet");
         var useKind = combined ? "all" : kind;
         var run = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
-          ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: useKind })
+          ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: useKind, original: original })
           : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, useKind) : Promise.reject(new Error("no-reader")));
         run.then(function (r) {
           if (!r || r.cancelled) { if (out) out.textContent = ""; return; }
@@ -6321,7 +6348,7 @@
             var out = modalEl.querySelector('[data-out="' + kind + '"]');
             if (out) out.textContent = "✨ Reading…";
             window.SMD_NATIVE.pickImage({ prompt: true }).then(function (dataUrl) {
-              compressImage(dataUrl, function (d) { runSnap(kind, out, d); });
+              compressImage(dataUrl, function (d) { runSnap(kind, out, d, dataUrl); });
             }).catch(function () { if (out) out.textContent = ""; });
           });
         });

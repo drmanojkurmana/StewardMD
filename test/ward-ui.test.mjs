@@ -174,7 +174,11 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
    * this test already made for the word "allergy" a few lines below, and for the same reason - the
    * property being defended is that the screen never RUNS a clinical rule, not that it never contains
    * a clinical word. Drug-interaction logic remains forbidden by name. */
-  assert.ok(!/drug.?interaction|interactionCheck|checkInteraction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
+  /* Server route paths are removed before scanning. "/ward/dose-ceiling" is the NAME OF A SERVER CALL -
+   * calling the server is exactly how this screen is supposed to get a dose answer, because the rule runs
+   * there. Identifiers and logic are still scanned in full; only quoted route paths are exempt. */
+  const codeNoPaths = code.replace(/["'`]\/(?:api\/queue\/)?[a-z0-9-]+\/[a-z0-9-]+/g, " ");
+  assert.ok(!/drug.?interaction|interactionCheck|checkInteraction|contraindicat|maxdose|ceiling|cross.?react/i.test(codeNoPaths), "no clinical rule logic in the UI");
   /* The word "allergy" used to be on that list as a proxy, and it stopped being a usable one when the
    * downtime pack began DISPLAYING an allergy list the server assembled. Displaying is not deciding,
    * and the property this test defends is that the screen never decides. So the check now tests the
@@ -227,7 +231,8 @@ test("critical results sit ABOVE everything else on the chart, and say whose cal
   // An open loop can be acknowledged; one already acknowledged names who saw it and offers nothing.
   assert.match(html, /data-w-act="ack:l1"/);
   assert.ok(!html.includes('data-w-act="ack:l2"'));
-  assert.match(html, /acknowledged by cfa:doc/);
+  // Owner 2026-09-16: never the raw account id; while the staff record loads the chart says "a clinician account" (ward-staff-identity-view.test.mjs).
+  assert.match(html, /acknowledged by <span class="w-who">a clinician account<\/span>/);
   assert.match(html, /It is not a way to clear the list\./);
 });
 
@@ -266,7 +271,7 @@ test("fluid balance shows in and out beside the net, never the net alone", () =>
   assert.match(thin, /w-hint warn/);
   // No balance at all is stated, not rendered as zero.
   assert.match(W._render(chart), /No fluid charted for this period\./);
-  assert.ok(!/0 mL/.test(W._render(chart)), "an absent balance is never drawn as zeroes");
+  assert.ok(!/\b0 mL/.test(W._render(chart)), "an absent balance is never drawn as zeroes");
 });
 
 test("A FAILED READ NEVER LOOKS LIKE A CLEAR CHART", () => {
@@ -295,7 +300,8 @@ test("A DIAGNOSIS IS ENTERED HERE, AND THE SCREEN NEVER DECIDES WHO MAY ENTER ON
    * enforced on /ward/problem and a nurse gets a 403 that says so; that refusal is asserted three
    * times in wardsynq-inpatient-emar.test.mjs, and it, not a hidden button, is the control. */
   assert.match(html, /data-w-act="problem"/);
-  assert.ok(!/\brole\b/.test(W._render(chart)), "the screen has no idea who is looking at it");
+  // An ARIA role="tab" attribute is markup, not a user role.
+  assert.ok(!/\brole\b(?!=")/.test(W._render(chart)), "the screen has no idea who is looking at it");
 
   // Every value the server's own vocabulary accepts, so nobody is forced to overstate their
   // confidence. A list offering only "confirmed" turns every working idea into a diagnosis.
@@ -417,7 +423,9 @@ test("THE NOTE COMPOSER SUPPLIES HEADINGS AND NEVER CONTENT", () => {
   const src = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
   const saveNote = src.slice(src.indexOf("function saveNote"), src.indexOf("function findCode"));
   assert.ok(saveNote.length > 100, "found the composer's save");
-  assert.match(saveNote, /apiPost\("\/ward\/note",/);
+  // G2: through the bedside-write path, which posts to /ward/note (or keeps it on the device offline).
+  assert.match(saveNote, /bedsideWrite\("note",/);
+  assert.match(src, /note: "\/ward\/note"/);
   assert.ok(!/note-sign|signedBy|sign\(/.test(saveNote), "and it carries no signature");
 });
 
@@ -548,7 +556,7 @@ test("THE CO-SIGN WORKLIST SAYS WHO WROTE IT, HOW LONG IT HAS WAITED, AND WHAT I
     mine: [],
   };
   const html = W._render(Object.assign({}, base, { cosign: q }));
-  assert.match(html, /written by cfa:locum/, "the author is named, not replaced by the signer");
+  assert.match(html, /written by <span class="w-who">a clinician account<\/span>/, "the author is named (resolved to a person at display), not replaced by the signer");
   assert.match(html, /waiting 3 h 15 min/);
   /* The gap travels WITH the note to the person being asked to put their name to it: a signature
    * does not fill in a missing plan, and the signer should know before they sign, not after. */

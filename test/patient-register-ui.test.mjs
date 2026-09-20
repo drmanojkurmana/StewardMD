@@ -142,9 +142,34 @@ test("REGRESSION: the local phone check no longer hardcodes India's 91/0-strippe
   assert.equal(/replace\(\/\^\(91\|0\)\//.test(SRC), false, "the India-only local mobile regex must be gone");
 });
 
+test("LT-29 (retest 2026-09-16): moving to another screen closes the sheet, so the added card never covers the ED board", () => {
+  const listeners = {};
+  const host = { className: "", innerHTML: "", querySelector: () => null, addEventListener() {}, onclick: null };
+  const win = { document: { getElementById: () => host, createElement: () => host, body: { appendChild() {} } },
+    addEventListener: (t, fn) => { (listeners[t] = listeners[t] || []).push(fn); },
+    removeEventListener: (t, fn) => { listeners[t] = (listeners[t] || []).filter((f) => f !== fn); } };
+  win.window = win;
+  new Function("window", "module", SRC)(win, { exports: {} });
+  win.SMD_PATIENTREG.open({ mode: "native", submit: () => Promise.resolve({ ok: true }) });
+  assert.equal(host.className, "on");
+  win.SMD_PATIENTREG.open({ mode: "native", submit: () => Promise.resolve({ ok: true }) });   // "Add another"
+  assert.equal((listeners.hashchange || []).length, 1, "one listener however often the sheet is reopened");
+  listeners.hashchange[0]();
+  assert.equal(host.className, ""); assert.equal(host.innerHTML, "", "the sheet is gone");
+  assert.equal((listeners.hashchange || []).length, 0, "and stops listening");
+});
+
+test("LT-29: the Patients page registers; it does not say it queues", () => {
+  const PAGE = readFileSync(new URL("../wardsynq/site/pages/patients.js", import.meta.url), "utf8");
+  assert.match(PAGE, /submitLabel: T\(c, "site\.patients\.registerSubmit", "Register patient"\)/);
+});
+
 test("the client does not re-implement the server's validation rules", () => {
   // Local checks are UX hints; the authority is the server, whose field-keyed errors are rendered inline.
-  assert.equal(/verhoeff|Verhoeff/.test(SRC), false, "ABHA checksum stays server-side, in one place");
+  // The ABHA number's check digit stays server-side (_opd_patient.js). The one checksum here is the AADHAAR number's,
+  // which ABDM certification (CRT_ABHA_104) requires the desk to check BEFORE an OTP is requested, and it is never stored.
+  assert.equal(/verhoeffOk|abhaNumber[^\n]*verhoeff/i.test(SRC), false, "ABHA checksum stays server-side, in one place");
+  assert.match(SRC, /validAadhaar\(aad\)/, "the Aadhaar pre-check guards the OTP request");
   assert.match(SRC, /r\.errors/, "server errors are rendered per field");
   assert.match(SRC, /setErr\(/);
 });

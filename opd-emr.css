@@ -56,6 +56,29 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-tag { font: 600 11px var(--q-sans); letter-spacing: .03em; text-transform: uppercase; color: var(--on-secondary-container); background: var(--secondary-container); padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
 #smdOpdEmr .oe-when { font: 500 11.5px var(--q-mono); color: var(--secondary); white-space: nowrap; }
 
+/* item 18 — persistent recording indicator, visible on every tab (not just Assessment's orb) */
+#smdOpdEmr .oe-rec-banner { display: flex; align-items: center; gap: 9px; padding: 8px 20px; background: var(--error-container, #fdecec); color: var(--on-error-container, #7f1d1d); font: 700 12.5px var(--q-sans); }
+#smdOpdEmr .oe-rec-dot { width: 9px; height: 9px; border-radius: 999px; background: var(--error, #dc2626); box-shadow: 0 0 8px var(--error, #dc2626); flex: none; animation: oeRecPulse 1.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-rec-dot { animation: none; } }
+@keyframes oeRecPulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+#smdOpdEmr .oe-rec-txt { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#smdOpdEmr .oe-rec-timer { font: 700 12.5px var(--q-mono, ui-monospace, monospace); }
+#smdOpdEmr .oe-rec-stop { display: inline-flex; align-items: center; gap: 3px; border: 1px solid rgba(220,38,38,.35); background: rgba(255,255,255,.35); color: var(--on-error-container, #7f1d1d); font: 700 11.5px var(--q-sans); padding: 4px 9px; border-radius: 999px; cursor: pointer; }
+#smdOpdEmr .oe-rec-stop .material-symbols-outlined { font-size: 15px; }
+body.dark #smdOpdEmr .oe-rec-banner { background: #3a1414; color: #ffb4ab; }
+body.dark #smdOpdEmr .oe-rec-stop { background: rgba(255,255,255,.06); color: #ffb4ab; }
+
+/* item 14 — post-consult review panel (extends .oe-ai-* from the MaiK suggestions panel above) */
+#smdOpdEmr .oe-rev-changed, #smdOpdEmr .oe-rev-badge { display: inline-flex; align-items: center; gap: 3px; font: 700 10.5px var(--q-sans); padding: 1px 8px; border-radius: 999px; }
+#smdOpdEmr .oe-rev-changed .material-symbols-outlined, #smdOpdEmr .oe-rev-badge .material-symbols-outlined { font-size: 13px; }
+#smdOpdEmr .oe-rev-changed { background: var(--secondary-container); color: var(--on-secondary-container); }
+#smdOpdEmr .oe-rev-badge { background: var(--error-container, #fdecec); color: var(--on-error-container, #93000a); }
+#smdOpdEmr .oe-rev-acts { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 5px; }
+#smdOpdEmr .oe-rev-icbtn { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--outline-variant); border-radius: 50%; background: transparent; color: var(--secondary); cursor: pointer; }
+#smdOpdEmr .oe-rev-icbtn .material-symbols-outlined { font-size: 17px; }
+#smdOpdEmr .oe-rev-icbtn.danger { color: var(--error, #ba1a1a); border-color: rgba(186,26,26,.3); }
+#smdOpdEmr .oe-rev-icbtn:hover { background: var(--sc-low); }
+
 /* tabs */
 #smdOpdEmr .oe-tabs { position: sticky; top: 0; z-index: 15; display: flex; gap: 4px; background: var(--surface); border-bottom: 1px solid var(--sc-low); padding: 6px 12px 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 #smdOpdEmr .oe-tab { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; border: none; background: none; color: var(--secondary); font: 600 13.5px var(--q-sans); padding: 10px 12px; border-bottom: 2px solid transparent; cursor: pointer; }
@@ -116,14 +139,17 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-req-badge.done { background: var(--green-bg, #e7f5ec); color: var(--green, #1c7a4a); }
 #smdOpdEmr .oe-cnt { font: 700 11px var(--q-mono); color: var(--secondary); background: var(--sc-high); border-radius: 999px; padding: 2px 9px; }
 #smdOpdEmr .oe-field.req-empty .oe-inp { border-color: color-mix(in srgb, var(--error) 45%, var(--outline-variant)); background: color-mix(in srgb, var(--error-container) 14%, var(--surface)); }
-#smdOpdEmr .oe-savebar { position: sticky; bottom: 0; z-index: 2; display: flex; align-items: center; gap: 12px; margin-top: 4px; padding: 12px 14px; background: color-mix(in srgb, var(--surface) 90%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid var(--outline-variant); border-radius: 14px; box-shadow: 0 -3px 14px rgba(20,32,43,.08); }
-/* prog + Clear stay compact (flex:0 0 auto, nowrap) so the primary Save button (flex:1) fills the
-   rest and nothing wraps to multiple lines on a narrow phone. */
+#smdOpdEmr .oe-savebar { position: sticky; bottom: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 4px; padding: 12px 14px; background: color-mix(in srgb, var(--surface) 90%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid var(--outline-variant); border-radius: 14px; box-shadow: 0 -3px 14px rgba(20,32,43,.08); }
+/* prog + Clear + Summary share the top row (compact, nowrap - they never carry a label long enough
+   to clip). Save (and Authorise, when both show at once) always claim a full-width row of their own
+   below via flex-basis:100%, so a long "Save to <EMR label>" caption wraps onto its own button
+   instead of clipping at the screen edge or overlapping Summary - the iPhone 15 Pro report. If the
+   top row itself ever gets too tight (very narrow phones), flex-wrap lets Summary drop down too. */
 #smdOpdEmr .oe-savebar .prog { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; font: 600 13px var(--q-sans); color: var(--secondary); white-space: nowrap; }
 #smdOpdEmr .oe-savebar .prog.done { color: var(--green, #1c7a4a); }
 #smdOpdEmr .oe-savebar .prog .material-symbols-outlined { font-size: 18px; }
-#smdOpdEmr .oe-savebar .oe-btn { flex: 0 0 auto; padding: 11px 16px; white-space: nowrap; }
-#smdOpdEmr .oe-savebar .oe-btn.primary { flex: 1 1 auto; min-width: 0; }
+#smdOpdEmr .oe-savebar .oe-btn { flex: 0 0 auto; padding: 11px 16px; min-height: 44px; box-sizing: border-box; white-space: nowrap; }
+#smdOpdEmr .oe-savebar .oe-btn.primary, #smdOpdEmr .oe-savebar .oe-btn.authorise { flex: 1 1 100%; min-width: 0; white-space: normal; text-align: center; }
 
 /* ---- report detail drawer (tap a lab / radiology row) ---- */
 #smdOpdEmr .oe-report { position: fixed; inset: 0; z-index: 40; background: var(--surface); display: flex; flex-direction: column; }
@@ -387,7 +413,7 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-vc-sub { font:500 12.5px/1.5 var(--q-sans); color:var(--vc-muted); margin:6px auto 0; max-width:36ch; }
 /* transcript box */
 #smdOpdEmr .oe-vc-notes { margin:13px 0 2px; text-align:left; }
-#smdOpdEmr .oe-vc-notes-h { display:flex; align-items:center; gap:6px; margin:0 2px 5px; font:700 11px/1.2 var(--q-sans); letter-spacing:.06em; text-transform:uppercase; color:var(--vc-muted); }
+#smdOpdEmr .oe-vc-notes-h { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0 2px 5px; font:700 11px/1.2 var(--q-sans); letter-spacing:.06em; text-transform:uppercase; color:var(--vc-muted); }
 #smdOpdEmr .oe-vc-notes-h .material-symbols-outlined { font-size:15px; }
 #smdOpdEmr .oe-vc-notes .oe-vc-box { margin:0; }
 #smdOpdEmr .oe-vc-notes-acts { margin-left:auto; display:flex; gap:6px; }
@@ -530,3 +556,23 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-sum-none { font: 500 12.5px var(--q-sans); color: var(--secondary); }
 #smdOpdEmr .oe-sum-txt { font: 500 13.5px/1.5 var(--q-sans); color: var(--on-surface); }
 #smdOpdEmr .oe-sum-note { font: 500 11.5px var(--q-sans); color: var(--secondary); margin-top: 14px; }
+
+/* MaiK Scribe clinical wiring (flag smd_scribe_clinical): specialty picker, Q&A speaker correction,
+   and the drug-correction / medicine / ICD / safety panels. Reuses the .oe-ai-panel shell. */
+#smdOpdEmr .oe-vc-spec { display:flex; flex-wrap:wrap; justify-content:center; gap:5px; margin:0 0 12px; }
+#smdOpdEmr .oe-vc-specb { border:1px solid var(--vc-line); background:transparent; color:var(--vc-muted); font:700 11px var(--q-sans); padding:5px 11px; border-radius:999px; cursor:pointer; }
+#smdOpdEmr .oe-vc-specb.on { background:var(--vc-cyan); color:#002021; border-color:var(--vc-cyan); }
+/* A turn the labeller could not tell apart: visibly neither side, never styled as the doctor. */
+#smdOpdEmr .oe-vc-turn.unk { align-self:center; max-width:94%; background:rgba(255,255,255,.03); border:1px dashed var(--vc-line); }
+#smdOpdEmr .oe-vc-turn.unk .oe-vc-who { color:var(--vc-muted); }
+#smdOpdEmr .oe-vc-fix { display:flex; gap:5px; margin-top:6px; }
+#smdOpdEmr .oe-vc-fixb { border:1px solid var(--vc-line); background:transparent; color:var(--vc-muted); font:700 10.5px var(--q-sans); padding:3px 9px; border-radius:999px; cursor:pointer; }
+#smdOpdEmr .oe-vc-fixb:active { background:rgba(255,255,255,.07); }
+#smdOpdEmr .oe-vc-fixed { display:inline-flex; align-items:center; gap:3px; margin-top:6px; font:700 10.5px var(--q-sans); color:var(--vc-cyan); }
+#smdOpdEmr .oe-vc-fixed .material-symbols-outlined { font-size:13px; }
+/* Safety panel leads the clinical stack, so give it an outline a doctor cannot scroll past. */
+#smdOpdEmr .oe-scx-safety { border-color: color-mix(in srgb, var(--error) 45%, transparent); }
+#smdOpdEmr .oe-sev { display:inline-flex; align-items:center; margin-right:6px; padding:1px 8px; border-radius:999px; font:700 10.5px var(--q-sans); text-transform:uppercase; letter-spacing:.04em; background:var(--sc-high); color:var(--on-surface); }
+#smdOpdEmr .oe-sev.critical, #smdOpdEmr .oe-sev.major { background:var(--error-container, #fdecec); color:var(--on-error-container, #93000a); }
+#smdOpdEmr .oe-scx-miss .oe-ai-label { color:var(--on-surface); }
+#smdOpdEmr .oe-scx-miss .oe-ai-label .material-symbols-outlined { font-size:16px; margin-right:4px; }
