@@ -53,7 +53,7 @@ const IRIS_A = "IRIS is immune reconstitution inflammatory syndrome, a paradoxic
 
 test("conv 6: 'Afib Ecg' after a hematuria answer is a NEW question", () => {
   thread("Hematuria Workup", "Hematuria Workup", HEMATURIA_A);
-  assert.deepEqual(mk.novel("Afib Ecg"), ["afib", "ecg"]);
+  assert.deepEqual(mk.novel("Afib Ecg"), ["afib"]);   // ECG is a test, not a subject; AF is
   assert.equal(isFollowUp("Afib Ecg"), false);
 });
 
@@ -208,4 +208,27 @@ test("conv 5: a budget-cut answer is finished at the last full sentence and flag
   assert.equal(ok.text.endsWith("GI upset"), true);
   assert.equal(L.finishCut("Yes.").truncated, false);
   assert.match(LOCAL, /var cut = finishCut\(text\); text = cut\.text;/, "answer() applies it before the grounding gate");
+});
+
+// ── conv "maik-conversation 4" (owner, 2026-09-21 02:51) ─────────────────────────────────────────
+const MYO_A = "Myocarditis is an inflammatory condition of the heart muscle, often caused by viral infections or autoimmune processes. The pathophysiology involves direct cellular injury from viruses or autoimmune responses.";
+test("conv 4b: 'Is MRI used to diagnose?' after Myocarditis is a FOLLOW-UP (a modality is not a subject)", () => {
+  thread("Myocarditis", "Myocarditis", MYO_A);
+  assert.deepEqual(mk.novel("Is MRI used to diagnose?"), []);
+  assert.deepEqual(mk.novel("Is MRI used to diagnose it?"), []);
+  assert.deepEqual(mk.novel("what about troponin"), ["troponin"], "a specific test the thread never named still reads as new; acceptable");
+});
+test("conv 4b: the misspelt essay request continues the topic (it went to malaria)", () => {
+  thread("Myocarditis", "Myocarditis", MYO_A);
+  assert.deepEqual(mk.novel("Give me detailed answer Pathophsyooly pathogensis climical features diagnosis treatment full essay"), []);
+});
+test("typo tolerance never swallows a real new subject", () => {
+  thread("Myocarditis", "Myocarditis", MYO_A);
+  for (const q of ["How to treat Covid 19 tell me in detail", "dengue management in detail", "explain more about meningitis", "hepatitis b essay", "psoriasis in detail", "angina"])
+    assert.ok(mk.novel(q).length > 0, "expected a new subject in: " + q);
+});
+test("the detail branch of the resolver defers to the same novelty test", () => {
+  const i = HOME.indexOf("var DETAIL_RE = ");
+  assert.ok(i > 0);
+  assert.match(HOME.slice(i, i + 1600), /if \(maikNovelTokens\(q\)\.length\) return null;/);
 });

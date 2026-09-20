@@ -59,13 +59,13 @@ enum ThermalGovernor {
         }
     }
 
-    /// Trim the token budget when the phone is saving power. Never raises it.
+    /// Owner, 2026-09-21: no token limits on offline models. Low Power Mode and a low battery no
+    /// longer cut an answer short (they trimmed it to ~250 words with no message). The one trim
+    /// left is thermal: at .serious the budget is capped so the phone does not climb to .critical,
+    /// where the decode loop stops and the OS may kill the app mid-answer. Never raises it.
     static func budget(_ requested: Int32) -> Int32 {
         var b = requested
-        if ProcessInfo.processInfo.isLowPowerModeEnabled { b = min(b, 320) }
-        let lvl = UIDevice.current.batteryLevel        // -1 when unknown
-        if lvl >= 0, lvl < 0.15, UIDevice.current.batteryState != .charging { b = min(b, 256) }
-        if ProcessInfo.processInfo.thermalState == .serious { b = min(b, 384) }
+        if ProcessInfo.processInfo.thermalState == .serious { b = min(b, 1024) }
         return max(64, b)
     }
 }

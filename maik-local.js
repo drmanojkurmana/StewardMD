@@ -93,8 +93,11 @@
     "Answer medical questions only. For anything else reply: \"I can only help with medical and " +
     "clinical questions.\"\n" +
     "Give the final answer only, never your reasoning.\n" +
-    "Open with ONE plain sentence answering the question, then short bullets. Use no section labels " +
-    "such as \"Bottom Line\", \"Answer\" or \"Summary\".\n" +
+    "Open with ONE plain sentence answering the question, then as much well-organised detail as the " +
+    "question deserves: a quick question gets a few short bullets; a request for detail, an essay or a " +
+    "complete overview gets full sections (pathophysiology, clinical features, diagnosis, treatment and " +
+    "whatever else was asked), each written to the end. Never stop part-way through a section. Use no " +
+    "section labels such as \"Bottom Line\", \"Answer\" or \"Summary\".\n" +
     "Answer exactly what was asked: for side effects, mechanism, monitoring or contraindications, " +
     "write about that alone.\n" +
     "When asked for a dose, give the standard flat adult dose with route and frequency, like " +
@@ -915,6 +918,7 @@
       var attach = (typeof onDelta === "function" && L.addListener)
         ? Promise.resolve(L.addListener("llamaToken", function (ev) {
             acc += (ev && ev.text) || "";
+            if (_touchJob) _touchJob();   // a live stream is not a wedged call
             // Strip on the way out too, not just at the end: onDelta feeds the live typewriter, so a
             // leaked reasoning preamble would be read on screen even though the final text is clean.
             // While the model is inside an unterminated reasoning block this yields "", which is the
@@ -963,10 +967,6 @@
                 : !images.length ? (pk.system || systemFor(pkg && pkg.question))
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
-          // "tell me in detail" ran on the pack's default 512 and stopped mid-sentence ("continued for at
-          // least 48 hours post", owner transcript 2026-09-21). Detailed depth gets 1024; the worst-case
-          // prompt is ~1300 tokens, so it still fits a 4096 context.
-          nPredict: (opts && opts.depth === "detailed") ? Math.max(pk.nPredict || 512, 1024) : (pk.nPredict || 512),
           // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
           // byte for byte, so a regenerate request gets a little sampling jitter.
           temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : ((opts && opts.regen) ? 0.4 : 0),
@@ -976,6 +976,10 @@
           // only needs wiring on the text path.
           prefillEmptyThink: !images.length && noThinkPack(packId)
         };
+        // Owner, 2026-09-21: "remove token limits for all offline models, let them speak as much as
+        // they are designed to". No per-pack cap: the answer may use every token the prompt leaves
+        // free in the context window. (A 512 cap cut "tell me in detail" mid-sentence.)
+        common.nPredict = openBudget(pk, common.system, common.prompt);
         if (!images.length) return L.generate(common);
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone
         // photo is several MB and marshalling that as a string is what made the old downloader
@@ -1237,8 +1241,8 @@
    *
    * ponytail: a plain FIFO with one priority tier. A real scheduler would need the engine to
    * support pre-emption, which it does not. */
-  var _running = false, _waiting = [];
-  var JOB_TIMEOUT_MS = 180000;   // a wedged native call must not stall every later one forever
+  var _running = false, _waiting = [], _touchJob = null;
+  var JOB_TIMEOUT_MS = 180000;   // IDLE time: a wedged native call must not stall every later one forever
   function serial(fn, opts) {
     opts = opts || {};
     /* RE-ENTRANCY. answer() calls ITSELF for the blank-answer retry (_retried) and the no-coverage
@@ -1267,6 +1271,7 @@
     function finish(ok, v) {
       if (done) return; done = true;
       if (timer) { clearTimeout(timer); timer = null; }
+      _touchJob = null;
       _running = false;
       if (ok) job.resolve(v); else job.reject(v);
       // Fire-and-forget callers (warm, a background refine whose screen has gone) attach no
@@ -1274,16 +1279,22 @@
       try { job.promise.catch(function () {}); } catch (e) {}
       pump();
     }
-    try {
-      timer = setTimeout(function () {
-        // Free the engine so the rest of the queue can run, and say which call gave up.
-        try { var L = llama(); if (L && L.cancel) L.cancel(); } catch (e) {}
-        finish(false, new Error("on-device generation timed out"));
-      }, JOB_TIMEOUT_MS);
-      // A pending timeout must never be a reason for the host to stay alive (it kept `node --test`
-      // running for the full three minutes, then fired into a finished test). No-op in a WebView.
-      if (timer && typeof timer.unref === "function") timer.unref();
-    } catch (e) {}
+    // The timeout is IDLE time, not total time: with no token cap an answer can stream for many
+    // minutes, and every streamed token re-arms it. A wedged call produces nothing and still trips.
+    function arm() {
+      try {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function () {
+          // Free the engine so the rest of the queue can run, and say which call gave up.
+          try { var L = llama(); if (L && L.cancel) L.cancel(); } catch (e) {}
+          finish(false, new Error("on-device generation timed out"));
+        }, JOB_TIMEOUT_MS);
+        // A pending timeout must never be a reason for the host to stay alive (it kept `node --test`
+        // running for the full three minutes, then fired into a finished test). No-op in a WebView.
+        if (timer && typeof timer.unref === "function") timer.unref();
+      } catch (e) {}
+    }
+    arm(); _touchJob = arm;
     Promise.resolve().then(job.fn).then(function (r) { finish(true, r); }, function (e) { finish(false, e); });
   }
   /** Queue depth, for tests and diagnostics. */
@@ -1377,14 +1388,21 @@
     "Draw on solid, widely-accepted medical knowledge for the substance of the answer; the numbered WEB RESULTS below are recent supporting sources - use them to ground specifics (agents, doses, current guidance) and cite the relevant ones inline as [n] matching the list, but do NOT merely summarise the snippets or limit yourself to what they happen to mention. " +
     "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
     "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer." + MEDICAL_ONLY_LOCAL;
-  var WEB_MAX = 900;
+  var WEB_MAX = 0;   // 0 = whatever the context window has left (owner, 2026-09-21: no token limits offline)
+  /** Tokens the answer may use: the context window minus the prompt, with a margin for the chat
+   * template and the estimator's error. Never below the pack's old default. */
+  function openBudget(pk, system, prompt) {
+    var ctx = (pk && pk.nCtx) || 4096;
+    return Math.max((pk && pk.nPredict) || 512, ctx - estTokens(String(system || "")) - estTokens(String(prompt || "")) - 256);
+  }
   function generateText(prompt, system, nPredict, opts) {
     var L = llama();
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     var packId = (opts && opts.pack) || currentPack();
     return serial(function () {
       return ensureLoaded(packId).then(function () {
-        return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
+        var pk = (models() && models().PACKS[packId]) || {};
+        return L.generate({ prompt: prompt, system: system, nPredict: nPredict > 0 ? nPredict : openBudget(pk, system, prompt),
                             temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
                             stream: false, prefillEmptyThink: noThinkPack(packId) });
       }).then(function (r) {
