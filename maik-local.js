@@ -317,6 +317,36 @@
     try { return !!M.installedCached(M.visionIdOf(packId)); } catch (e) { return false; }
   }
 
+  /** Speculative-decoding draft (perf plan #6): is one registered for this pack and on disk? The
+   * clinician can switch it off with localStorage smd_maik_draft="0". */
+  function draftReady(packId) {
+    try { if (localStorage.getItem("smd_maik_draft") === "0") return false; } catch (e) {}
+    var M = models();
+    if (!M || !M.hasDraft || !M.hasDraft(packId)) return false;
+    try { return !!M.installedCached(M.draftIdOf(packId)); } catch (e) { return false; }
+  }
+  function draftPathFor(packId) {
+    var M = models();
+    if (!M || !draftReady(packId)) return Promise.resolve("");
+    return M.pathFor(M.draftIdOf(packId)).then(function (p) { return p || ""; }, function () { return ""; });
+  }
+  /** Bytes the draft adds to the load when it is on disk (memory check), else 0. */
+  function draftBytes(M, packId) {
+    try { return draftReady(packId) ? (M.totalBytes(M.draftIdOf(packId)) || 0) : 0; } catch (e) { return 0; }
+  }
+  /** Queue the draft download once per pack. It rides the ordinary pack queue, so its progress
+   * shows in the models sheet and it can be removed there. ~290 MB (Gemma) or ~640 MB (Qwen). */
+  function fetchDraftOnce(packId) {
+    try {
+      var M = models(); if (!M || !M.hasDraft || !M.hasDraft(packId) || !M.ensure) return;
+      if (localStorage.getItem("smd_maik_draft") === "0") return;
+      var did = M.draftIdOf(packId); if (M.installedCached(did)) return;
+      var key = "smd_maik_draft_asked:" + did;
+      if (localStorage.getItem(key) === "1") return;
+      localStorage.setItem(key, "1");
+      Promise.resolve(M.ensure(did)).catch(function () {});
+    } catch (e) {}
+  }
   /** Absolute path of the projector for this pack, or "" when it is not downloaded. */
   function visionPathFor(packId) {
     var M = models();
@@ -420,8 +450,12 @@
     return clip(keep.map(function (x) { return x.replace(/[.;]\s*$/, ""); }).join("; "), cap || CARRY_CAP);
   }
 
-  function buildPrompt(pkg, packId) {
-    if (!pkg) return "";
+  /** The two parts of the user turn: the (optional) "Recent conversation" block and the question.
+   * Kept apart so answer() can slot the evidence BETWEEN them: the chat template, the system prompt
+   * and the history are then an identical token prefix across the turns of one thread, which the
+   * native engine reuses instead of re-prefilling (perf plan #2). */
+  function buildPromptParts(pkg, packId) {
+    if (!pkg) return null;
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
     var L = [];
     var hist = histTurns(pkg.history);
@@ -437,6 +471,7 @@
       });
       L.push("");
     }
+    var H = L; L = [];
     L.push(question || "Give a brief clinical overview.");
     /* Suppress the base model's thinking mode when the pack asks for it.
      *
@@ -460,8 +495,9 @@
      * "<|im_start|>assistant\n" actually is after applying the template.
      */
     if (packId && noThinkPack(packId)) L.push("/no_think");
-    return L.join("\n");
+    return { history: H.length ? H.join("\n") + "\n" : "", question: L.join("\n") };
   }
+  function buildPrompt(pkg, packId) { var p = buildPromptParts(pkg, packId); return p ? p.history + p.question : ""; }
 
   /** Does this pack's base model need its thinking mode switched off? Registry-driven, not hardcoded. */
   function noThinkPack(id) {
@@ -513,7 +549,7 @@
         var avail = 0, need = 0;
         try {
           avail = (a && Number(a.availableMemory)) || 0;
-          need = M.totalBytes(packId) || 0;
+          need = (M.totalBytes(packId) || 0) + draftBytes(M, packId);
         } catch (e) { return null; }
         // ponytail: 0.35 is calibrated against two real measurements, not theory - 176 MB free
         // against a 2.83 GB model (0.06) hung forever, 2.1 GB against 2.49 GB (0.85) runs. Retune
@@ -527,9 +563,16 @@
         }
         return null;
       })
-      .then(function () { return M.pathFor(packId); }).then(function (path) {
-      return L.load({ path: path, nCtx: pk.nCtx || 4096 });
-    }).then(function () { _loadedPack = packId; return null; }, function (err) {
+      .then(function () { return Promise.all([M.pathFor(packId), draftPathFor(packId)]); }).then(function (pp) {
+      return L.load({ path: pp[0], nCtx: pk.nCtx || 4096,
+        // perf plan #4: a q8_0 KV cache halves the cache and the memory traffic per decoded token;
+        // flash attention is what makes a quantised V cache legal. A pack may opt out (kvQ8: false).
+        kvQ8: pk.kvQ8 !== false, flashAttn: pk.flashAttn !== false,
+        // perf plan #5: prefill knobs per pack; 0 = the plugin's measured default.
+        nBatch: pk.nBatch || 0, nUbatch: pk.nUbatch || 0,
+        // perf plan #6: same-tokeniser draft for speculative decoding, when it is on disk.
+        draftPath: pp[1] || "" });
+    }).then(function () { _loadedPack = packId; fetchDraftOnce(packId); return null; }, function (err) {
       /* A CORRUPT MODEL IS A DEAD END UNLESS WE CLEAR IT.
        *
        * llama.cpp rejects a structurally bad file and the plugin reports "model-corrupted". Nothing
@@ -787,10 +830,19 @@
     var best = cited[0] ? cited[0].score : 1;
     if (!(best > 0)) best = 1;
     var nAnchor = F.anchors.length, nExp = F.expansion.length;
+    // A DRUG NAME is not the topic; the disease is. When some anchor is a chapter heading in the
+    // pool ("Pneumonia"), a passage must carry one of THOSE (or an expansion term) to count as
+    // supported. Matching only on shared drug names is how a typhoid-resistance passage was cited
+    // for a pneumonia question (live battery, 2026-09-04) and cost ~175 prefill tokens of noise.
+    var headAnchors = F.anchors.filter(function (a) {
+      if (F.mods.indexOf(a) !== -1) return false;
+      return cited.some(function (c) { return String(c.p.heading || "").toLowerCase().indexOf(a) !== -1; });
+    });
     cited.forEach(function (c) {
       c.anchorN = nAnchor ? F.anchors.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length : 0;
       c.expN = nExp ? F.expansion.filter(function (x) { return c.hay.indexOf(x) !== -1; }).length : 0;
-      c.supported = (c.anchorN > 0) || (c.expN > 0);
+      var topicN = headAnchors.length ? headAnchors.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length : c.anchorN;
+      c.supported = (topicN > 0) || (c.expN > 0);
       var bm = Math.min(1, c.score / best);
       var aCov = nAnchor ? c.anchorN / nAnchor : 0;
       var eCov = nExp ? c.expN / nExp : 0;
@@ -806,6 +858,10 @@
       c.rank = s;
     });
     var kept = cited.filter(function (c) { return c.supported; });
+    // A DEFINITIONS chapter is not the answer to a treatment question: once a real answer passage
+    // survives, the intro is dropped rather than merely demoted (it is ~175 prefill tokens spent
+    // saying what the disease is called).
+    if (F.treat) { var real = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); }); if (real.length) kept = real; }
     kept.sort(function (a, b) { return b.rank - a.rank; });
     // Diversity: three slices of one chapter teach less than two chapters do, and a single heading
     // filling the whole window is how a broad question comes back narrow.
@@ -871,8 +927,9 @@
        * number (see the Source line below), and a number in the prompt is a number the model will
        * eventually print. */
       var evidenceText = passages.map(function (p, n) {
-        var head = String(p.heading || "").trim();
-        return "[" + (n + 1) + "]" + (head ? " (" + head.slice(0, 90) + ")" : "") + " " + p.text.slice(0, 700);
+        var head = String(p.heading || "").trim(), headPart = head ? " (" + head.slice(0, 90) + ")" : "";
+        // 700 chars INCLUDING the heading: the cap is a prefill budget, not a text length.
+        return "[" + (n + 1) + "]" + headPart + " " + p.text.slice(0, Math.max(400, 700 - headPart.length - 1));
       }).join("\n\n");
       return { evidenceText: evidenceText, passages: passages, RAG: RAG, anchors: anchors, expansion: expansion };
     }).catch(function () { return null; });
@@ -906,8 +963,11 @@
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
       if (grounding) {
-        prompt = "Reference material from the StewardMD Knowledge Base:\n" + grounding.evidenceText +
-          "\n\nUsing the reference material above where it applies, answer:\n" + prompt;
+        // History FIRST, evidence second, question last: the prefix up to the evidence is the same
+        // tokens on every turn of a thread, so the engine can keep its KV and prefill only the rest.
+        var parts = buildPromptParts(pkg, packId) || { history: "", question: prompt };
+        prompt = parts.history + "Reference material from the StewardMD Knowledge Base:\n" + grounding.evidenceText +
+          "\n\nUsing the reference material above where it applies, answer:\n" + parts.question;
       }
       // Retry-after-blank: nudge the model out of the deliberation attractor it fell into.
       if (opts && opts.nudge) prompt += "\nGive the final answer directly, no deliberation.";
@@ -915,6 +975,23 @@
       if (opts && opts._regen && grounding) prompt += REGEN_NUDGE;
 
       // Stream tokens into the caller's typewriter. Accumulate: onDelta wants the full text so far.
+      //
+      // COALESCED PAINTING (perf plan #1, 2026-09-21). Every token used to cross the bridge and
+      // re-render the whole accumulated markdown: on a 2,000-token answer that is quadratic
+      // main-thread work and a battery cost that has nothing to do with the model. The first token
+      // paints at once (time-to-first-token is what the doctor feels); after that the screen repaints
+      // at most every PAINT_MS, and a final paint runs when generation ends.
+      var _paintT = null, _paintLast = 0, _paintDirty = false;
+      function paintNow() { _paintT = null; _paintDirty = false; _paintLast = Date.now(); try { onDelta(stripReasoning(acc)); } catch (e) {} }
+      function paint() {
+        _paintDirty = true;
+        if (_paintT) return;
+        var wait = PAINT_MS - (Date.now() - _paintLast);
+        if (wait <= 0) { paintNow(); return; }
+        _paintT = setTimeout(paintNow, wait);
+        try { if (_paintT && typeof _paintT.unref === "function") _paintT.unref(); } catch (e) {}
+      }
+      function paintFlush() { if (_paintT) { clearTimeout(_paintT); _paintT = null; } if (_paintDirty) paintNow(); }
       var attach = (typeof onDelta === "function" && L.addListener)
         ? Promise.resolve(L.addListener("llamaToken", function (ev) {
             acc += (ev && ev.text) || "";
@@ -923,7 +1000,7 @@
             // leaked reasoning preamble would be read on screen even though the final text is clean.
             // While the model is inside an unterminated reasoning block this yields "", which is the
             // honest thing to show - nothing has been answered yet.
-            try { onDelta(stripReasoning(acc)); } catch (e) {}
+            paint();
           }))
         : Promise.resolve(null);
 
@@ -992,6 +1069,7 @@
           return L.generateWithImage(common);
         });
       }).then(function (r) {
+        paintFlush();
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
         // nPredict ran out mid-word ("Intralesional vinblas" with the verify line glued on, owner
@@ -1099,7 +1177,9 @@
           engine: "local",
           images: images.length,
           model: (models() && models().PACKS[packId] && models().PACKS[packId].label) || packId,
-          ms: (r && r.ms) || (Date.now() - t0)
+          ms: (r && r.ms) || (Date.now() - t0),
+          // perf plan #8: what the native engine measured (prefill, reuse, tok/s, thermal, draft).
+          perf: (r && r.perf) || null
         };
       });
     }).catch(function (e) {
@@ -1243,6 +1323,7 @@
    * support pre-emption, which it does not. */
   var _running = false, _waiting = [], _touchJob = null;
   var JOB_TIMEOUT_MS = 180000;   // IDLE time: a wedged native call must not stall every later one forever
+  var PAINT_MS = 66;             // live-answer repaint interval (~15/s); see answer()
   function serial(fn, opts) {
     opts = opts || {};
     /* RE-ENTRANCY. answer() calls ITSELF for the blank-answer retry (_retried) and the no-coverage

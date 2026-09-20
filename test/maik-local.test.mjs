@@ -201,12 +201,14 @@ const { L } = load();
   ok("answer is tagged engine=local", r.engine === "local");
   ok("answer reports the MAiK tier label", r.model === "MAiK Lite");
   ok("answer reports timing", r.ms === 1234);
-  ok("onDelta called once per token", seen.length === 3);
+  // Coalesced painting (perf plan #1, 2026-09-21): the first token paints at once, later tokens are
+  // batched to ~15 repaints a second, and the final text is always painted when generation ends.
+  ok("onDelta paints the first token at once and the full text at the end", seen.length >= 2 && seen.length <= 3);
   // Right-trimmed, because every delta goes through stripReasoning() on the way to the typewriter -
   // the trade for never rendering a leaked reasoning preamble on screen. The trailing space arrives
   // with the next word, so the render is unaffected.
   ok("onDelta receives ACCUMULATED text, not deltas",
-     seen[0] === "Hel" && seen[1] === "Hello" && seen[2] === "Hello world");
+     seen[0] === "Hel" && seen[seen.length - 1] === "Hello world");
   ok("each onDelta value extends the previous", seen.every((v, i) => i === 0 || v.startsWith(seen[i - 1])));
   ok("listener removed after the answer (no leak across questions)", calls.removed === 1);
   ok("greedy by default (reproducible answers)", calls.generate[0].temperature === 0);

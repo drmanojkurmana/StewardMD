@@ -6937,6 +6937,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   var _replayed = !!(r && r.replayed);
                   el.textContent = "⏱ " + (ttft ? ((_replayed ? "answer " : "first token ") + ttft + "s · ") : "") +
                     (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "") +
+                    // On-device engine measurements (perf plan #8): prefill and how much of it was reused,
+                    // decode rate, thermal state across the answer, and the draft's acceptance rate.
+                    (function (p) {
+                      if (!p) return "";
+                      var s = "";
+                      if (p.promptTokens != null) s += " · prompt " + p.promptTokens + " tok" + (p.reusedTokens ? " (" + p.reusedTokens + " reused)" : "") + (p.prefillMs != null ? " in " + (p.prefillMs / 1000).toFixed(1) + "s" : "");
+                      if (p.tokPerSec) s += " · " + Number(p.tokPerSec).toFixed(1) + " tok/s";
+                      if (p.draftProposed) s += " · draft " + Math.round(100 * (p.draftAccepted || 0) / p.draftProposed) + "% accepted";
+                      if (p.thermalStart) s += " · " + p.thermalStart + (p.thermalEnd && p.thermalEnd !== p.thermalStart ? " to " + p.thermalEnd : "");
+                      if (p.kvQ8) s += " · kv q8";
+                      return s;
+                    })(r && r.perf) +
                     ((r && r.grounding && r.grounding.removed && r.grounding.removed.length) ? " · " + r.grounding.removed.length + " unsupported statement" + (r.grounding.removed.length === 1 ? "" : "s") + " left out" : "");
                   _h.appendChild(el);
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
