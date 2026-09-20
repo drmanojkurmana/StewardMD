@@ -2083,7 +2083,7 @@ window.openExternal = function (u) {
 <script src="/antibiogram-data.js?v=gold363" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
-<script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1-wsqfu3-tier1" defer></script>
+<script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1-wsqfu3-tier1-gate1" defer></script>
 <!-- Guest session bar: the 300 s auto-sign-out clock, across the top instead of buried in
      the account chip. Additive, reads app.js's account record; never edits app.js. -->
 <script src="/guest-timer.js?v=gold1200-guestbar2" defer></script>
@@ -2177,11 +2177,11 @@ window.openExternal = function (u) {
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1-uigroups1-thread1" defer></script>
+<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1-uigroups1-thread1-gate1" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
-<script src="/maik-models.js?v=hardlocal3-ground1-bonsai2" defer></script>
+<script src="/maik-models.js?v=hardlocal3-ground1-bonsai2-gate1" defer></script>
 <!-- MaiK Lite on-device RAG (window.SMD_MAIK_RAG / SMD_MAIK_KB_STORE): BM25 over the book chunks +
      evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
      actual book text instead of trusting its own recollection. Loaded before maik-local.js, which

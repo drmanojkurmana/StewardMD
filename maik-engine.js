@@ -1229,7 +1229,11 @@
   function chipLabel() {
     var cur = currentOptionId();
     var o = options().filter(function (x) { return x.id === cur; })[0];
-    var base = o ? o.label : (getPref() === "rag" ? "KB only" : "MaiK Cloud");
+    // A gated on-device pick has no option row (options() hides the packs), and the chip then read
+    // "MaiK Cloud (not ready)" - the owner took that as Cloud being broken (2026-09-20). Name the pack.
+    var _pk = null;
+    try { var _M0 = window.SMD_MAIK_MODELS; _pk = (_M0 && _M0.PACKS && _M0.PACKS[activePack()]) ? _M0.PACKS[activePack()].label : null; } catch (e) {}
+    var base = o ? o.label : (getPref() === "rag" ? "KB only" : (getPref() === "local" && _pk) ? _pk : "MaiK Cloud");
     // Never let the chip imply an on-device model is answering when it is not ready. Silent
     // degrade-to-KB with a model name still showing is how "I get no answer" happens.
     if (getPref() === "local" && !localReady()) {
