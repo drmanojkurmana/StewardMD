@@ -46,3 +46,26 @@ test("CATS is ordered and every entry has key, label, icon", () => {
   assert.deepEqual(S.CATS.map(c => c.key), ["tools", "calcs", "drugs", "kb", "syn", "icd", "settings"]);
   for (const c of S.CATS) { assert.ok(c.label && c.icon); }
 });
+
+test("providers: tools provider maps SMD_HOME_TOOLS and adds aliases", () => {
+  globalThis.SMD_HOME_TOOLS = () => [{ act: "kardiox", tt: "KardiQ X AI", sub: "ECG", ic: "" }];
+  const p = S.providers().find(p => p.cat === "tools");
+  const it = p.items().find(i => i.id === "kardiox");
+  assert.equal(it.title, "KardiQ X AI");
+  assert.match(it.kw, /electrocardiogram/);
+  assert.equal(S.rank("ecg", p.items())[0].id, "kardiox");
+});
+
+test("providers: settings items carry the toggle title", () => {
+  globalThis.SMD_SETTINGS_INDEX = () => [{ id: "maikperf", title: "Show AI response time", sub: "x", key: "smd_maik_perf", group: "exp" }];
+  const p = S.providers().find(p => p.cat === "settings");
+  assert.equal(p.items()[0].title, "Show AI response time");
+});
+
+test("providers: every provider is sync (items) or async (query), never both", () => {
+  for (const p of S.providers()) assert.ok((typeof p.items === "function") !== (typeof p.query === "function"), p.cat);
+});
+
+test("askItem: always produced, carries the query", () => {
+  assert.equal(S.askItem("dka").title, 'Ask MaiK about "dka"');
+});
