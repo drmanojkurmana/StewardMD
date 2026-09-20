@@ -1838,6 +1838,17 @@
       }
       return;
     }
+    /* "Fetch Patient Labs from WardSync EMR" only ever read an ALREADY-selected patient, so with no
+     * active EMR session it said "No active WardSync patient" and stopped - the clinician had no way
+     * to get to one from here. Open the ward patient list instead (WARD.open asks for the hospital
+     * first when none is remembered), so they can pick the patient and fetch again. */
+    function openWardPatientPicker() {
+      if (G.WARD && G.WARD.open) {
+        if (G.toast) G.toast("Pick the patient in the ward list, then tap Fetch again.");
+        try { G.WARD.open(); return; } catch (e) {}
+      }
+      if (G.toast) G.toast("Open a patient in WardSync first, then tap Fetch again.");
+    }
     if (act === "calc-wardsync-fetch") {
       if (G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs) {
         var wsq = G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs(G);
@@ -1853,8 +1864,10 @@
           updateCalvertCalc();
           if (G.toast) G.toast("Imported patient labs & vitals from WardSync EMR.");
         } else {
-          if (G.toast) G.toast("No active WardSync patient in EMR session.");
+          openWardPatientPicker();
         }
+      } else {
+        openWardPatientPicker();
       }
       return;
     }
