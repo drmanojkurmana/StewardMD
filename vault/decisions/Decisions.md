@@ -8809,3 +8809,43 @@ signature, not ours.
 **Why it is not urgent.** With the GBM the slope is 0.926 (95% CI 0.861 to 1.010) and clears the
 point-estimate gate outright. The interval is reported beside every slope either way, so nobody has
 to infer the precision.
+
+## 2026-09-20 — Real ICU data: the frequency shortcut is most of the signal, and four gates caught it
+
+The owner pushed to use public datasets. I had reasoned that public ICU data is credentialed and
+needs a DUA nobody here can sign; that is true of full MIMIC-IV and eICU and FALSE of both demos,
+which are openly licensed and need nothing. They were available the whole time.
+
+**What was run.** The eICU Collaborative Research Database Demo: 2,477 ICU stays across 186
+hospitals, 6,353,242 observations, 225 with a vasopressor start. Adapter at
+`backend/medcore/adapters/eicu-demo.mjs`; MIMIC-IV demo adapter beside it.
+
+**THE RESULT, and it is the most important number this project has produced.** On real data a model
+knowing NOTHING but how often the patient was measured scores AUROC 0.772. The full physiological
+model scores 0.785. Margin 0.013 against a gate of 0.05, so `beatsFrequencyProbe` FAILS. The
+measurement-frequency shortcut (HAZ-ML-01) is not a theoretical risk in ICU data: it is most of the
+apparent signal. A 0.785 would have looked like a good deterioration model while being close to a
+staffing detector.
+
+On the synthetic cohort the same probe scored 0.53 to 0.59, because the generator's observation
+schedule was written by the same person as the control. **No synthetic cohort can surface this.**
+That is now the strongest available argument for the whole real-data gate.
+
+**Second finding: at one hospital the model is worse than chance** (site 420, AUROC 0.248, against
+0.785 overall). A single-site evaluation would have reported 0.785 and shipped it. Multi-site is not
+a nicety; it is how that is visible at all.
+
+Four of seven gates failed (frequency probe, subgroup collapse, calibration slope 1.56, missed
+events reduced 5.9% against 25%). On synthetic data all seven had passed. The gates did their job,
+and the difference between those two runs is the argument for keeping them inconvenient.
+
+**Bugs real data found in our own code, in one session:** the unit table lacked `insp/min` and
+dropped 13,913 respiratory rates; it lacked `units` for pH and dropped 1,013 more; three gates
+PASSED on a test split with zero events (now every evidence-dependent gate fails when it cannot be
+measured); MC-3 required a MAP, which restricted it to patients with an arterial line and refused
+26,467 of 29,823 points until `minimumInputsAnyOf` let a cuff pressure answer the same question;
+and `readFileSync` cannot hold a 560 MB extract, so the featurizer now streams.
+
+**Nothing about this model is clinically usable.** It failed its gates and `medcore-models.js`
+would refuse it. eICU is US ICU data with synthetic dates; StewardMD serves US and Indian wards, and
+site is a gated subgroup precisely so that difference is measured rather than assumed.

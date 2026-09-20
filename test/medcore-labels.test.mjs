@@ -88,9 +88,12 @@ test("labels: the minimum input set is checked deterministically, before any mod
     interventions: { vasopressor: { active: false }, ventilation: { active: false }, oxygen: { active: true }, rrt: { active: false } }
   });
   const withCtx = Object.assign({}, thin, { context: { dnr: false, creatinineBaseline: 0.9 } });
+  // MC-3 needs a heart rate AND a blood pressure, where MAP or SBP both count: naming one cuff
+  // would exclude every patient without an arterial line rather than every patient without a
+  // pressure. Here only HR is charted, so the pressure group is what is missing.
   const a = askable(withCtx, OUT, "MC-3");
   assert.equal(a.reason, NOT_ASKABLE.INSUFFICIENT_INPUTS);
-  assert.deepEqual(a.detail.missing, ["map"]);
+  assert.deepEqual(a.detail.missing, ["map or sbp"]);
   // MC-1 tolerates one unusable input of its six, and no more. It also needs to know where the
   // patient already is, so the encounter context is supplied here the way an adapter would.
   const ward = Object.assign({}, thin, {
@@ -142,6 +145,30 @@ test("labels: every outcome is an event with a timestamp, and says so", () => {
     assert.equal(o.approvalStatus, "unapproved", id + " must not claim approval");
     assert.ok(/Never its own alert|prompt/.test(o.workflow), id + " must say it feeds a prompt, not an alert");
   }
+});
+
+test("labels: either member of an any-of group satisfies it, and neither does not", () => {
+  const ctx = { dnr: false, creatinineBaseline: 0.9 };
+  const withSbp = buildState(DEPS, {
+    asOf: NOW, patient: { ageYears: 65 },
+    observations: [
+      { param: "hr", value: 118, at: min(10), source: "icu-state" },
+      { param: "sbp", value: 88, at: min(10), source: "icu-state" }   // no MAP at all
+    ],
+    interventions: { vasopressor: { active: false }, ventilation: { active: false }, oxygen: { active: true }, rrt: { active: false } }
+  });
+  assert.equal(askable(Object.assign({}, withSbp, { context: ctx }), OUT, "MC-3").askable, true,
+    "a cuff pressure is a blood pressure; requiring MAP would exclude everyone without an arterial line");
+
+  const withMap = buildState(DEPS, {
+    asOf: NOW, patient: { ageYears: 65 },
+    observations: [
+      { param: "hr", value: 118, at: min(10), source: "icu-state" },
+      { param: "map", value: 58, at: min(10), source: "icu-state" }
+    ],
+    interventions: { vasopressor: { active: false }, ventilation: { active: false }, oxygen: { active: true }, rrt: { active: false } }
+  });
+  assert.equal(askable(Object.assign({}, withMap, { context: ctx }), OUT, "MC-3").askable, true);
 });
 
 test("labels: an ICU-transfer question cannot be asked without knowing where the patient already is", () => {

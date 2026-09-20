@@ -26,7 +26,8 @@
  *          --outcome MC-3 --grid 4 --out backend/medcore/out/matrix.jsonl
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, createReadStream, createWriteStream } from "node:fs";
+import { createInterface } from "node:readline";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildState } from "../../medcore/medcore-state.js";
@@ -187,17 +188,27 @@ if (import.meta.url === "file://" + process.argv[1]) {
   const outcome = String(arg("outcome", "MC-3"));
   const gridHours = Number(arg("grid", 4));
   const packs = loadPacks();
-  const encounters = readFileSync(resolvePath(ROOT, inPath), "utf8").trim().split("\n").map((l) => JSON.parse(l));
 
+  /* STREAMED, ONE ENCOUNTER PER LINE. readFileSync cannot return a string longer than about 512 MB,
+   * and a real multi-site extract passes that easily: the eICU demo alone is 560 MB of JSONL. An
+   * extract too large to read in one string is not an edge case in this domain. Only the metadata
+   * the splitter needs is retained; each encounter's observations are released once featurized. */
+  const encounters = [];
   const rowsByEnc = new Map();
   const excluded = [];
-  for (const enc of encounters) {
+  const rl = createInterface({ input: createReadStream(resolvePath(ROOT, inPath)), crlfDelay: Infinity });
+  for await (const line of rl) {
+    if (!line.trim()) continue;
+    const enc = JSON.parse(line);
     const r = featurizeEncounter(enc, packs, { outcome, gridHours });
     rowsByEnc.set(enc.encounterId, r.rows);
     excluded.push(...r.excluded);
+    encounters.push({ encounterId: enc.encounterId, admittedAt: enc.admittedAt });
   }
   const rows = split(encounters, rowsByEnc, {});
-  writeFileSync(resolveOut(ROOT, outPath), rows.map((r) => JSON.stringify(r)).join("\n") + "\n");
+  const outStream = createWriteStream(resolveOut(ROOT, outPath));
+  for (const r of rows) outStream.write(JSON.stringify(r) + "\n");
+  await new Promise((res) => outStream.end(res));
 
   const by = (s) => rows.filter((r) => r.split === s);
   const rate = (a) => a.length ? (100 * a.filter((r) => r.label === 1).length / a.length).toFixed(2) + "%" : "n/a";

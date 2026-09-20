@@ -9,10 +9,21 @@
       "label": "Unplanned ICU transfer or ICU review request",
       "horizonHours": 24,
       "population": "ward inpatient",
-      "minimumInputs": ["rr", "spo2", "hr", "sbp", "temp", "gcs"],
+      "minimumInputs": [
+        "rr",
+        "spo2",
+        "hr",
+        "sbp",
+        "temp",
+        "gcs"
+      ],
       "maxUnusableInputs": 1,
       "labelDefinition": "First ICU admission, or a documented request for ICU review, for a ward patient after t0 and within the horizon.",
-      "riskSetExclusions": ["alreadyInIcu", "electivePostOpAdmission", "admissionPlannedBeforeT0"],
+      "riskSetExclusions": [
+        "alreadyInIcu",
+        "electivePostOpAdmission",
+        "admissionPlannedBeforeT0"
+      ],
       "requiredKnown": [],
       "blankingMin": 60,
       "workflow": "Evidence for an existing wardsynq-recognition prompt to the ward registrar. Never its own alert.",
@@ -22,11 +33,22 @@
       "label": "Cardiac arrest or death",
       "horizonHours": 24,
       "population": "inpatient",
-      "minimumInputs": ["rr", "spo2", "hr", "sbp", "temp", "gcs"],
+      "minimumInputs": [
+        "rr",
+        "spo2",
+        "hr",
+        "sbp",
+        "temp",
+        "gcs"
+      ],
       "maxUnusableInputs": 1,
       "labelDefinition": "First in-hospital resuscitation call, or death, after t0 and within the horizon.",
-      "riskSetExclusions": ["dnrAtT0"],
-      "requiredKnown": ["resuscitationStatus"],
+      "riskSetExclusions": [
+        "dnrAtT0"
+      ],
+      "requiredKnown": [
+        "resuscitationStatus"
+      ],
       "censorNote": "A patient with a documented do-not-resuscitate decision at t0 is CENSORED, never labelled negative: they are not a patient in whom arrest was prevented.",
       "blankingMin": 60,
       "workflow": "Highest-weight evidence on the same prompt as MC-1. Never its own alert.",
@@ -36,40 +58,76 @@
       "label": "First vasopressor initiation",
       "horizonHours": 12,
       "population": "inpatient",
-      "minimumInputs": ["map", "hr"],
+      "minimumInputs": [
+        "hr"
+      ],
       "maxUnusableInputs": 0,
       "labelDefinition": "First vasopressor administration recorded in the eMAR after t0 and within the horizon.",
-      "riskSetExclusions": ["vasopressorActiveAtT0"],
-      "requiredKnown": ["vasopressor"],
+      "riskSetExclusions": [
+        "vasopressorActiveAtT0"
+      ],
+      "requiredKnown": [
+        "vasopressor"
+      ],
       "blankingMin": 60,
       "workflow": "Evidence on a haemodynamic prompt. The deterministic shock rules remain authoritative.",
-      "approvalStatus": "unapproved"
+      "approvalStatus": "unapproved",
+      "minimumInputsAnyOf": [
+        [
+          "map",
+          "sbp"
+        ]
+      ],
+      "minimumInputsNote": "A blood pressure and a heart rate. Naming MAP alone restricted this outcome to patients with an arterial line - already the sickest - and refused 26,467 of 29,823 prediction points on a real eICU extract. Which cuff produced the pressure is a fact about the monitoring, not about the patient. Changed 2026-09-20 after the first real-data run; still unapproved."
     },
     "MC-4": {
       "label": "First invasive or non-invasive ventilation",
       "horizonHours": 24,
       "population": "inpatient",
-      "minimumInputs": ["spo2", "rr"],
+      "minimumInputs": [
+        "spo2"
+      ],
       "maxUnusableInputs": 0,
       "labelDefinition": "First recorded initiation of non-invasive ventilation or intubation after t0 and within the horizon.",
-      "riskSetExclusions": ["ventilatedAtT0"],
-      "requiredKnown": ["ventilation", "oxygen"],
+      "riskSetExclusions": [
+        "ventilatedAtT0"
+      ],
+      "requiredKnown": [
+        "ventilation",
+        "oxygen"
+      ],
       "blankingMin": 60,
       "workflow": "Evidence on a respiratory prompt.",
-      "approvalStatus": "unapproved"
+      "approvalStatus": "unapproved",
+      "minimumInputsAnyOf": [
+        [
+          "rr",
+          "fio2"
+        ]
+      ],
+      "minimumInputsNote": "Oxygen saturation, plus either a respiratory rate or an inspired-oxygen fraction. Same reasoning as MC-3."
     },
     "MC-5": {
       "label": "AKI KDIGO stage 2 or worse",
       "horizonHours": 48,
       "population": "inpatient",
-      "minimumInputs": ["creat"],
+      "minimumInputs": [
+        "creat"
+      ],
       "maxUnusableInputs": 0,
       "labelDefinition": "KDIGO stage 2 or worse by the creatinine criterion, against the documented baseline, after t0 and within the horizon.",
-      "riskSetExclusions": ["aki2OrWorseAtT0", "onRrtAtT0"],
-      "requiredKnown": ["creatinineBaseline", "rrt"],
+      "riskSetExclusions": [
+        "aki2OrWorseAtT0",
+        "onRrtAtT0"
+      ],
+      "requiredKnown": [
+        "creatinineBaseline",
+        "rrt"
+      ],
       "blankingMin": 60,
       "workflow": "Evidence on a renal prompt plus a drug-review nudge through the existing renal-dose logic.",
       "approvalStatus": "unapproved"
     }
-  }
+  },
+  "anyOfNote": "minimumInputs are ALL required. minimumInputsAnyOf is a list of groups, each needing at least one member, for cases where several parameters answer the same clinical question."
 }

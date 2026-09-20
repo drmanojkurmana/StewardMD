@@ -108,12 +108,30 @@ export function askable(state, table, id) {
 
   // 3. Are the minimum inputs usable? This is checked BEFORE any model runs, deterministically.
   const params = (state && state.params) || {};
-  const missing = (def.minimumInputs || []).filter((p) => !(params[p] && params[p].usable));
+  const usable = (p) => !!(params[p] && params[p].usable);
+  const missing = (def.minimumInputs || []).filter((p) => !usable(p));
   const allowed = typeof def.maxUnusableInputs === "number" ? def.maxUnusableInputs : 0;
   if (missing.length > allowed) {
     return {
       askable: false, reason: NOT_ASKABLE.INSUFFICIENT_INPUTS,
       detail: { missing: missing, allowed: allowed }
+    };
+  }
+
+  /* `minimumInputsAnyOf` is a list of GROUPS, each needing at least one member. It exists because
+   * naming one parameter where several would answer the question excludes a population rather than
+   * a gap: requiring a MAP for the vasopressor outcome silently restricts it to patients with an
+   * arterial line, who are already the sickest, and on a real eICU extract it refused 26,467 of
+   * 29,823 prediction points. A blood pressure is a blood pressure; which cuff produced it is a
+   * fact about the monitoring, not about the patient. */
+  const missingGroups = [];
+  for (const group of (def.minimumInputsAnyOf || [])) {
+    if (!group.some(usable)) missingGroups.push(group);
+  }
+  if (missingGroups.length) {
+    return {
+      askable: false, reason: NOT_ASKABLE.INSUFFICIENT_INPUTS,
+      detail: { missing: missingGroups.map((g) => g.join(" or ")), anyOf: missingGroups }
     };
   }
   return { askable: true, reason: null, detail: { missing: missing } };

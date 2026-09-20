@@ -105,7 +105,7 @@ test("decide: missing inputs are INSUFFICIENT_INFORMATION, with what to go and g
   const out = decide(thin, { outcomes: OUTCOMES, enabled: ["MC-3"], artifacts: { "MC-3": realArtifact() } });
   const d = of(out, "MC-3");
   assert.equal(d.status, STATUS.INSUFFICIENT_INFORMATION);
-  assert.deepEqual(d.missing.map((m) => m.param), ["map"]);
+  assert.deepEqual(d.missing.map((m) => m.param), ["map or sbp"]);
   assert.equal(d.missing[0].reason, "NEVER_RECORDED");
   assert.equal(d.probability, undefined, "a patient we cannot assess gets no number at all");
 });
