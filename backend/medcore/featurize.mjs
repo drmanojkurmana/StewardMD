@@ -139,7 +139,10 @@ export function featurizeEncounter(enc, packs, opt) {
         completeness: completenessQuartile(f.values),
         // Both target populations are gated subgroups, not a caveat (adapters/README.md).
         site: enc.site || "unknown",
-        region: enc.region || "unknown"
+        region: enc.region || "unknown",
+        // The SOURCE is a subgroup too. Pooling three hospitals' data and reporting one AUROC hides
+        // the question that matters for a product shipping to two countries: does it transfer?
+        dataset: (enc.provenance && enc.provenance.dataset) || "unknown"
       },
       synthetic: !!enc.provenance.synthetic
     });

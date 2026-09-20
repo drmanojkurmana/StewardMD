@@ -93,7 +93,7 @@ const pairs = (rows, score) => rows.map((r) => ({ y: r.label, p: score(r) }));
 
 function subgroupAuroc(rows, score) {
   const out = {};
-  for (const key of ["ageBand", "sex", "completeness", "site", "region"]) {
+  for (const key of ["ageBand", "sex", "completeness", "site", "region", "dataset"]) {
     for (const level of Array.from(new Set(rows.map((r) => r.strata[key])))) {
       if (level === undefined) continue;
       const sub = rows.filter((r) => r.strata[key] === level);
