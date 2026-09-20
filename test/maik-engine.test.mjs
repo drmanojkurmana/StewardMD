@@ -177,13 +177,13 @@ function load(env = {}) {
   ok("local: explain() normalised to a package", calls[0][1][0].summary === "SUM" && calls[0][1][0].question === "Q");
 }
 
-// ── local degrades to KB-only rather than dead-ending ──
+// ── local degrades to KB-only only when it truly cannot answer (no pack / no runtime) ──
 {
-  const noGate = load({ runtime: true, pack: true });
+  const noGate = load({ runtime: true, pack: true });   // no Pro state at all: irrelevant since 2026-09-20
   noGate.E.setPref("local");
-  ok("local without gate → effective rag", noGate.E.effective() === "rag");
+  ok("local with no Pro state → effective local (on-device is free for everyone)", noGate.E.effective() === "local");
   const r1 = await noGate.win.SMD_AI.explainGrounded({});
-  ok("local without gate → KB-only notice, no paid call", !!r1.text && noGate.calls.length === 0);
+  ok("local with no Pro state → answered on-device, never a paid call", !!r1.text && noGate.calls.every((c) => c[0] === "local"));
 
   const noPack = load({ gate: true, runtime: true });
   noPack.E.setPref("local");
@@ -203,37 +203,24 @@ function load(env = {}) {
   ok("local: rejection becomes {error}", r.error === "oom");
 }
 
-// ── a DEV build opens the experimental gate; a release build does not ──
-// Without this the feature is unreachable on a device: SMD_XACCESS needs a server-issued code and
-// iOS has no JS console to set a bypass by hand.
+// ── the gate is OPEN for everyone (owner decision 2026-09-20): guest, free, Pro, debug or release ──
 {
-  const dev = load({ runtime: true, pack: true });
-  dev.win.SMD_MAIK_LOCAL.isDebugBuild = () => true;
-  ok("debug build opens the gate", dev.E.gateActive() === true && dev.E.localReady() === true);
-
   const rel = load({ runtime: true, pack: true });
   rel.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
-  ok("release build still requires a subscription", rel.E.gateActive() === false && rel.E.localReady() === false);
-
-  const relPro = load({ pro: true, runtime: true, pack: true });
-  relPro.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
-  ok("release build WITH Pro is allowed", relPro.E.gateActive() === true);
-
-  // The experimental-access framework no longer has any say here.
-  const xa = load({ pro: false, runtime: true, pack: true });
-  xa.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
-  xa.win.SMD_XACCESS = { isActiveCached: () => true, devBypass: () => true };
-  ok("neither an SMD_XACCESS code nor its devBypass can open a non-Pro gate", xa.E.gateActive() === false);
+  ok("release build with no Pro state at all: on-device is available", rel.E.gateActive() === true && rel.E.localReady() === true);
+  const nonPro = load({ pro: false, runtime: true, pack: true });
+  nonPro.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
+  ok("a KNOWN non-Pro account is not gated either", nonPro.E.gateActive() === true && nonPro.E.localReady() === true);
+  const gateSrc = SRC.slice(SRC.indexOf("function gateActive"), SRC.indexOf("function runtimeAvailable"));
+  ok("gateActive reads neither SMD_PRO nor a debug flag nor a bypass key", !/SMD_PRO|isDebugBuild|smd_maik_local_bypass/.test(gateSrc));
 }
 
-// ── owner/QA bypass unlocks the gate without a server deploy ──
+
+// ── no bypass key is needed any more: the gate is open for everyone (2026-09-20) ──
 {
-  const { E, ls } = load({ runtime: true, pack: true });
-  ok("gate closed without a code", E.localReady() === false);
-  ls.setItem("smd_maik_local_bypass", "1");
-  ok("bypass opens the gate", E.localReady() === true);
-  E.setPref("local");
-  ok("bypass makes local the effective engine", E.effective() === "local");
+  const { E } = load({ runtime: true, pack: true });
+  ok("ready without any key or Pro state", E.localReady() === true);
+  ok("the bypass key is gone from the source", !/smd_maik_local_bypass/.test(SRC));
 }
 
 // ── settings markup ──
@@ -422,7 +409,7 @@ function load(env = {}) {
   const gated = load({ gate: false, runtime: true, pack: true, active: "maik-horizon",
                        state: { downloading: false, frac: 1, done: true, err: null } });
   gated.E.setPref("local");
-  ok("chip names the selected pack even while the gate hides it", /MAiK Horizon \(not ready\)/.test(gated.E.chipLabel()) && !/Cloud/.test(gated.E.chipLabel()));
+  ok("chip names the selected pack for a non-Pro user, never MaiK Cloud", /MAiK Horizon/.test(gated.E.chipLabel()) && !/Cloud/.test(gated.E.chipLabel()));
 }
 
 // the "no answer" message must name the real reason, not claim KB-only mode
@@ -471,7 +458,7 @@ function load(env = {}) {
 // on-device rows must NOT appear without the gate or the native runtime
 {
   const nogate = load({ runtime: true, pack: true });
-  ok("picker: no on-device rows without the access gate", nogate.E.options().length === 2);
+  ok("picker: on-device rows appear with no Pro state at all", nogate.E.options().length > 2);
   const nort = load({ gate: true, pack: true });
   ok("picker: no on-device rows without the native plugin", nort.E.options().length === 2);
 }
@@ -571,61 +558,26 @@ function load(env = {}) {
      !/MedPsy|MedGemma|Gemma|Qwen/i.test(apex.label + " " + apex.sub));
 }
 
-// ── Pro opens the gate (2026-08-27) — without removing the access-code path ──
+// ── on-device models are free for every user (owner decision 2026-09-20) ──
 {
-  const { E } = load({ pro: true, runtime: true, pack: true });
-  ok("Pro alone opens the gate (no access code, no bypass)", E.gateActive() === true);
-  ok("Pro + runtime + pack = the local engine is actually usable", E.localReady() === true);
+  const { E } = load({ pro: false, proKnown: false, runtime: true, pack: true });
+  ok("no Pro and verdict unknown: the gate is open", E.gateActive() === true);
   E.setPref("local");
-  ok("Pro: 'local' survives effective() instead of degrading to KB-only", E.effective() === "local");
-  ok("Pro: the picker offers the on-device packs", E.options().some((o) => o.pack === "maik-mxcore"));
+  ok("'local' survives effective() for a non-Pro user", E.effective() === "local");
+  ok("the picker offers the on-device packs to a non-Pro user", E.options().some((o) => o.pack === "maik-mxcore"));
+  const h = E.settingsHTML();
+  ok("the settings row never sells Pro for on-device", !/Included with Pro|Subscribe to unlock|Checking your subscription/.test(h));
+  ok("only MaiK Cloud is badged Pro; the on-device row is not", (h.match(/>Pro</g) || []).length === 1 && /On-device model/.test(h));
+  ok("the on-device row is badged Free", (h.match(/>Free</g) || []).length >= 2);
+  ok("the KB-only notice no longer mentions Pro for an installed model", !/included with Pro|not unlocked on this account/i.test(E.kbOnlyNotice().text));
 }
 {
   const { E } = load({ pro: false, xaccess: true, runtime: true, pack: true });
-  ok("an experimental access code no longer unlocks it - Pro is the only gate", E.gateActive() === false);
-  ok("the SMD_XACCESS coupling is gone from the source", !/SMD_XACCESS\.isActiveCached/.test(SRC));
+  ok("the SMD_XACCESS coupling stays gone from the source", !/SMD_XACCESS\.isActiveCached/.test(SRC));
+  ok("an access code has nothing to unlock: the gate is simply open", E.gateActive() === true);
 }
-{
-  const { E } = load({ pro: false, runtime: true, pack: true });
-  ok("no Pro = gated", E.gateActive() === false);
-  E.setPref("local");
-  ok("gated: 'local' degrades to KB-only rather than dead-ending", E.effective() === "rag");
-  ok("gated: the picker offers no on-device pack", !E.options().some((o) => o.pack));
-  const n = E.kbOnlyNotice();
-  ok("gated + installed: the notice names Pro, not an access code",
-     /included with Pro/i.test(n.text) && !/access code/i.test(n.text));
-  ok("gated: the settings row sells Pro, not a private beta code",
-     /Included with Pro/.test(E.settingsHTML()) && !/access code/i.test(E.settingsHTML()));
-  ok("the on-device row is badged Pro, like MaiK Cloud", />Pro</.test(E.settingsHTML()));
-  ok("no em-dash in the new app-facing copy", !/Included with Pro[^<]*\u2014/.test(E.settingsHTML()));
-}
-
-/* == The regression that made on-device look broken after the Pro gate shipped ================
- * gateActive() is read SYNCHRONOUSLY while painting, but /billing/status answers after that paint.
- * Seeding _pro from a per-uid cache that had never been written meant the FIRST launch of a build
- * started at false, so the row rendered locked and, with nothing listening for the flip, stayed
- * locked. Two halves: do not claim "not Pro" before you know, and re-render when you find out. */
-{
-  const { E } = load({ pro: false, proKnown: false, runtime: true, pack: true });
-  const h = E.settingsHTML();
-  ok("unknown Pro says CHECKING, not 'subscribe'", /Checking your subscription/.test(h));
-  ok("unknown Pro never shows the upsell copy", !/Subscribe to unlock/.test(h));
-}
-{
-  const { E } = load({ pro: false, proKnown: true, runtime: true, pack: true });
-  const h = E.settingsHTML();
-  ok("a KNOWN non-Pro account does get the upsell", /Subscribe to unlock/.test(h));
-  ok("...and not the checking state", !/Checking your subscription/.test(h));
-}
-{
-  // An older account.js with no proKnown() must not break the row.
-  const { win, E } = load({ pro: false, runtime: true, pack: true });
-  delete win.SMD_PRO.proKnown;
-  ok("missing proKnown() degrades to the upsell, never to a blank row",
-     /Subscribe to unlock/.test(E.settingsHTML()));
-}
-ok("the module re-renders when Pro flips (watchPro is wired)", /smd:pro|onProChange/.test(SRC));
-ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slice(SRC.indexOf("function watchPro"))));
+ok("no Pro watcher is needed any more (watchPro removed)", !/function watchPro/.test(SRC));
+ok("warmIfLocal still exists for the chosen engine", /function warmIfLocal/.test(SRC));
 
 /* == Dark mode: only use CSS vars the app actually defines ====================================
  * The picker cards were background:var(--card,#fff). --card is defined NOWHERE in StewardMD, so it

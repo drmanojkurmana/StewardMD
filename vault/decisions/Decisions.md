@@ -8955,3 +8955,9 @@ the entire teaching point of the tab. Ventilation is a fixed point of the chemor
 the CO2 hyperbola, subject to a mechanical ceiling, so "a normal CO2 in acute severe asthma" and
 "oxygen retains CO2 in COPD" both emerge instead of being hand-written. Waveforms are seeded SVG
 paths, so a repaint never reshuffles a trace.
+
+## 2026-09-20 — On-device AI models are free for every user; the Pro gate on them is removed
+
+Owner, 2026-09-20 (voice): "Every free user, irrespective of any user or guest user, should have Pro AI models on and available. No Pro needed." This reverses the 2026-08-27 "Pro requires a verified registration" decision for ON-DEVICE answering only. `gateActive()` in maik-engine.js returns true for everyone (no SMD_PRO, no debug-build exception, no bypass key); the settings row and picker never sell Pro for it; the server feature matrix lists `local_ai` under every tier. MaiK Cloud keeps its own gate because tokens cost money.
+
+Why now: the Pro verdict had locked the owner's own phone out of the models (offline-gate PR #1163 fixed the verdict; this removes the dependency). The decision is about access, not cost: an on-device model spends nothing server-side.
