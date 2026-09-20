@@ -1998,6 +1998,8 @@
     HOME_TOOLS.forEach(function (t) { if (!seen[t.act]) out.push(t); });
     return out;
   }
+  // Universal search reads the same registry the home grid renders, filtered by eligibility.
+  window.SMD_HOME_TOOLS = function () { return HOME_TOOLS.filter(homeToolEligible).map(function (t) { return { act: t.act, tt: t.tt, sub: t.sub || "", ic: t.ic || "" }; }); };
   // Drops `dragEl` into `container` (list or 2D grid) at whichever slot the pointer is over, on
   // every move, and persists the resulting order on release. Shared by the Customize-tools sheet
   // (vertical list) and the home tool grid (2D) - one implementation, no per-surface duplicate.
@@ -7084,7 +7086,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // Evidence Review is a cloud feature. With an on-device engine selected the old path refused
         // ("Evidence Review is a MaiK Cloud feature") and answered nothing; owner transcript 2026-09-21,
         // "Which is better in Esophageal Varices". Answer it on-device instead, and say why once.
-        var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.effective ? SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
+        var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective ? window.SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
         if (!_eff || _eff === "cloud") { maikRunResearch(q); return; }
         try { toast("Evidence Review needs MaiK Cloud. Answering on-device."); } catch (e) {}
       }

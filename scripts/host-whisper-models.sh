@@ -33,6 +33,19 @@ FILES=(
   # uploaded by scripts/convert-telugu-whisper-ggml.sh, which pins its own SHA.)
   "ggml-small-q8_0.bin:49c8fb02b65e6049d5fa6c04f81f53b867b5ec9540406812c643f177317f779f"
   "ggml-large-v3-turbo-q5_0.bin:394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"
+  # ── TODO(unpublished): Hindi specialist route — ggml-hindi-small-q8_0.bin ──────────────────────
+  # Deliberately NOT in this list. It is not an off-the-shelf ggerganov file (it is a Hindi
+  # fine-tuned Whisper small, converted to ggml + INT8 the way the Telugu specialist was), so
+  # HF_BASE below cannot serve it and its SHA-256 is UNKNOWN. Adding a placeholder hash here would
+  # make the loop download something unverifiable; leaving it out FAILS CLOSED.
+  # To turn the route on, in this order:
+  #   1. build/convert the weights (mirror scripts/convert-telugu-whisper-ggml.sh) and upload to
+  #      r2://$BUCKET/$PREFIX/ggml-hindi-small-q8_0.bin
+  #   2. record the real sha256 + byte size of the uploaded file
+  #   3. fill both into native-bridge.js WHISPER_MODELS["hindi-small-q8_0"] (currently sha256:"")
+  #      and confirm the MODEL_META mb value in voice.js
+  #   4. native rebuild + reinstall, THEN set localStorage smd_voice_hi_model = "1"
+  # ──────────────────────────────────────────────────────────────────────────────────────────────
 )
 HF_BASE="https://huggingface.co/ggerganov/whisper.cpp/resolve/main"
 

@@ -166,7 +166,8 @@
     var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue <button class="q-ic" title="Recall no-shows" data-q-act="noshows">' + ms("person_search") + "</button></span></div>" + noShowPanel(state) + searchBox +
       '<div id="qTlRows">' + timelineRows(state) + "</div></div>";   // the timeline already lists the full ordered queue; the old "View full queue" foot link was a dead no-op
     var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';   // removed the dead "Send notification" CTA (no handler / no /notify route yet)
-    return kpis + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
+    // The doctor's own session above, the hospital's whole OPD day beneath it.
+    return kpis + pulseCard(state) + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
       '<button class="q-pause" data-q-act="pause">' + ms("pause_circle") + (paused ? " Resume Queue" : " Pause Queue") + "</button></div>" +
       '<div class="q-side-col"><h2 class="q-h2">' + ms("view_list", false) + 'Queue Timeline<span class="r">Next ' + Math.min(3, ordered.length) + "</span></h2>" + timeline + ai + "</div></section>";
   }
@@ -203,6 +204,66 @@
     apiGet("/members?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { if (r && r.ok) { st.clinicAdmin.members = r.members || []; if (st.profileOpen) paint(); } }).catch(function () {});
   }
   function roleLabel(r) { return r === "nurse" ? "Nursing" : r === "cashier" ? "Billing" : r === "reception" ? "Reception" : r === "admin" ? "Admin" : r === "doctor" ? "Doctor" : r === "supervisor" ? "Supervisor" : (r || "Staff"); }
+
+  /* ---- THE OPD PULSE (server: /opd-pulse, figures: _queue_eta.js opdPulse) ------------------------
+   *
+   * The KPI strip above it is THIS doctor's session. This is the hospital's whole outpatient day, and
+   * it exists because the numbers a clinic actually acts on are not averages: the longest wait in the
+   * hall right now, how many people are past an hour, and whether the delay is the desk's or the
+   * doctor's. Everything here is counts and durations - it names nobody, so it is safe on a screen the
+   * whole front desk can see.
+   *
+   * Fetched on the existing poll, not a timer of its own, and only every fourth pass: it walks every
+   * room's session, which is not something to do to a hospital every eight seconds. The refresh
+   * control is there for the moment somebody wants it now. */
+  function loadPulse(force) {
+    if (!st.orgId || st.pulseBusy) return;
+    if (!force && st.pulseN && (st.pulseN % 4) !== 0) { st.pulseN++; return; }
+    st.pulseN = (st.pulseN || 0) + 1; st.pulseBusy = true;
+    apiGet("/opd-pulse?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.pulseBusy = false; st.pulse = r && r.ok ? r : { failed: true }; pulsePaint(); })
+      .catch(function () { st.pulseBusy = false; st.pulse = { failed: true }; pulsePaint(); });
+  }
+  /* The front desk is NOT painted by paint() - it is rendered straight into the root by
+   * renderFrontDesk - so a plain paint() here would replace a signed-in desk with the doctor's app.
+   * And neither surface is rebuilt while somebody is typing in it: the staff form taught us that. */
+  function pulsePaint() {
+    var el = root(), ae = document.activeElement;
+    if (ae && ae.closest && ae.closest("input, textarea, select")) return;
+    if (el && el.querySelector(".q-fd")) { if (st.board) el.innerHTML = renderFrontDesk(st.board); return; }
+    paint();
+  }
+  function pulseNum(v, unit) { return v == null ? '<u style="opacity:.5">not yet</u>' : esc(v) + (unit ? "<u>" + unit + "</u>" : ""); }
+  function pulseCard(state) {
+    if (!state.orgId) return "";                      // a personal clinic with no hospital has no OPD-wide day
+    var r = state.pulse;
+    if (!r) return "";
+    /* A pulse that could not be read says so. An empty strip here would read as a quiet OPD, which is
+     * the one thing this card must never say by accident. */
+    if (r.failed) return '<section class="q-pulse"><div class="q-pulse-h"><b>OPD today</b><button class="q-ic" data-q-act="pulse" title="Retry">' + ms("refresh") + '</button></div><div class="q-pulse-warn">' + ms("error") + "Could not read the OPD figures. Do not read this as a quiet clinic.</div></section>";
+    var p = r.pulse || {}, hall = p.waitingNow || {}, d2d = p.doorToDoctor || {}, desk = p.deskWait || {}, doc = p.doctorWait || {};
+    // Which half of the building is slow: stated in words, because "45 and 15" means nothing at a glance.
+    var blame = desk.medianMin == null || doc.medianMin == null ? ""
+      : desk.medianMin > doc.medianMin * 2 ? "the wait is at the desk"
+      : doc.medianMin > desk.medianMin * 2 ? "the wait is for the doctor"
+      : "desk and doctor are even";
+    var tile = function (label, icon, value, sub, warn) {
+      return '<div class="q-pulse-t' + (warn ? " warn" : "") + '"><div class="q-pulse-l">' + ms(icon) + esc(label) + "</div><div class=\"q-pulse-v\">" + value + "</div>" + (sub ? '<div class="q-pulse-s">' + sub + "</div>" : "") + "</div>";
+    };
+    return '<section class="q-pulse"><div class="q-pulse-h"><b>OPD today</b>' +
+      (r.unread && r.unread.length ? '<span class="q-pulse-warn-i" title="Some rooms could not be read: ' + esc(r.unread.join(", ")) + '">' + ms("error") + "</span>" : "") +
+      '<button class="q-ic" data-q-act="pulse" title="Refresh the OPD figures">' + ms("refresh") + "</button></div>" +
+      '<div class="q-pulse-row">' +
+        tile("In the hall", "groups", esc(p.waiting || 0), hall.longestMin ? "longest " + esc(hall.longestMin) + "m" : "nobody waiting", hall.over60 > 0) +
+        tile("Waiting over 1h", "hourglass_bottom", esc(hall.over60 || 0), (hall.over30 || 0) + " over 30m", (hall.over60 || 0) > 0) +
+        tile("Door to doctor", "schedule", pulseNum(d2d.medianMin, "m"), d2d.p90Min == null ? "median" : "9 in 10 within " + esc(d2d.p90Min) + "m") +
+        tile("Seen", "check_circle", esc(p.completed || 0), (p.inConsultation || 0) + " in the room") +
+        tile("Did not wait", "person_off", p.abandonedPct == null ? '<u style="opacity:.5">not yet</u>' : esc(p.abandonedPct) + "<u>%</u>", esc(p.noShow || 0) + " no-show" + ((p.noShow || 0) === 1 ? "" : "s"), (p.abandonedPct || 0) >= 10) +
+        (p.held ? tile("Awaiting result", "science", esc(p.held), "sent for a test or booked back") : "") +
+      "</div>" +
+      (blame ? '<div class="q-pulse-note">' + ms("insights") + "Desk " + pulseNum(desk.medianMin, "m") + ", doctor " + pulseNum(doc.medianMin, "m") + " &middot; " + esc(blame) + "</div>" : "") +
+      "</section>";
+  }
   function addStaff() {
     var nameEl = document.getElementById("qStaffName"), roleEl = document.getElementById("qStaffRole"), pinEl = document.getElementById("qStaffPin");
     var identity = ((nameEl && nameEl.value) || "").trim().toLowerCase(), role = (roleEl && roleEl.value) || "nurse", pin = ((pinEl && pinEl.value) || "").trim();   // lowercase so it always matches the staff login (mobile keyboards auto-capitalize; server match is case-sensitive)
@@ -224,7 +285,12 @@
     var members = ca.members || [];
     var rows = members.length
       ? members.map(function (m) {
-          return '<div class="q-staff-row"><div class="q-staff-id"><b>' + esc(m.identity || m.email || "staff") + "</b><span>" + esc(roleLabel(m.role)) + (m.hasPin ? " · PIN set" : " · no PIN") + (m.active === false ? " · disabled" : "") + "</span></div>" +
+          /* Why this person cannot sign in, in the one place the owner can fix it. Five wrong PINs lock
+           * the account for fifteen minutes and the sign-in screen will not say so (it must not confirm
+           * which login names exist), so without this the owner is told "wrong PIN" for a PIN that is right. */
+          var lockedMin = m.lockedUntil && m.lockedUntil > Date.now() ? Math.ceil((m.lockedUntil - Date.now()) / 60000) : 0;
+          var why = lockedMin ? " · locked " + lockedMin + "m (too many tries)" : m.hasPin ? " · PIN set" : " · no PIN yet";
+          return '<div class="q-staff-row"><div class="q-staff-id"><b>' + esc(m.identity || m.email || "staff") + "</b><span>" + esc(roleLabel(m.role)) + esc(why) + (m.active === false ? " · disabled" : "") + "</span></div>" +
             '<button class="q-ic q-rm" title="Remove access" data-q-act="staffremove:' + esc(m.identity) + '">' + ms("person_remove") + "</button></div>";
         }).join("")
       : '<div class="q-staff-empty">No team members yet. Add doctors, nursing, reception or billing below.</div>';
@@ -492,6 +558,12 @@
       var box = document.getElementById("qTlRows"); if (box) box.innerHTML = timelineRows(st);
       return;
     }
+    /* SAME RULE FOR ANY FIELD IN THE PROFILE SHEET, which is where staff are added. A repaint here
+     * is not a cosmetic flicker: the login name and PIN being typed are wiped, the keyboard closes,
+     * and a half-typed PIN submitted afterwards creates a member the nurse then cannot sign in as.
+     * The sheet is a modal - nothing behind it is being read - so skipping the rebuild costs
+     * nothing and the next click paints it. */
+    if (ae && ae.closest && ae.closest(".q-profile")) return;
     // Preserve scroll across the 8s poll repaint (rebuild otherwise yanks the list to the top).
     var prev = r.querySelector(".q-canvas"), top = prev ? prev.scrollTop : 0;
     r.innerHTML = _render(st);
@@ -500,13 +572,16 @@
   }
 
   function refresh() {
-    if (st.demo || !st.session || st.view === "settings") return;   // demo has no server session; don't clobber unsaved settings mid-poll
+    /* demo has no server session; don't clobber unsaved settings mid-poll; and the profile sheet
+     * (Clinic and staff) is a form the owner is filling in, for the same reason settings is. */
+    if (st.demo || !st.session || st.view === "settings" || st.profileOpen) return;
     st.pollN = (st.pollN || 0) + 1;
     // real-time-ish sync: silently re-pull today's GHIS Out-patients list every ~5 polls (~40s) so newly
     // registered patients appear without a manual import (dedupes server-side by visit id).
     if (st.ghisToken && st.pollN % 5 === 0 && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(true); } catch (e) {} }
     if (st.openOpts && st.openOpts.source === "connect" && st.pollN % 5 === 0) { try { importFromSource(true); } catch (e) {} }   // re-pull the connected EMR worklist periodically
     apiGet("/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok) { st.tickets = r.tickets || []; paint(); } }).catch(function () {});
+    loadPulse();   // every fourth pass, hospital-wide (see loadPulse)
   }
   function act(sessId, path, body) { body = body || {}; body.sessionId = sessId; return apiPost(path, body).then(function (r) { if (r && r.ok && r.tickets) { st.tickets = r.tickets; paint(); } else if (r && r.ok && r.session) { st.session = r.session; paint(); } return r; }); }
   function switchView(view) {
@@ -562,6 +637,7 @@
     if (cmd === "stafflogin") { staffLogin(); return; }
     if (cmd === "staffout") { wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
     if (cmd === "fdrefresh") { loadFrontDesk(); return; }
+    if (cmd === "pulse") { loadPulse(true); return; }   // the OPD figures, now rather than on the next pass
     if (cmd === "fdadd") { frontDeskAdd(); return; }
     if (cmd === "fdroute") { frontDeskRoute(arg); return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
@@ -902,10 +978,12 @@
         st.board = b;
         el.innerHTML = renderFrontDesk(b);
         clearInterval(st.pollId);
+        loadPulse(true);
         st.pollId = setInterval(function () {
           apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (n) {
             if (n && n.ok) { st.board = n; var e2 = root(); if (e2 && e2.querySelector(".q-fd")) e2.innerHTML = renderFrontDesk(n); }
           }).catch(function () {});
+          loadPulse();
         }, POLL_MS);
       });
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-btn" data-q-act="fdrefresh">Retry</button>'); });
@@ -922,7 +1000,9 @@
     var kpis = '<section class="q-kpis">' +
       kpi("Waiting", "groups", String(waitingTotal), "") +
       kpi("Unassigned", "help", String(pool.length), "") +
-      kpi("Rooms", "door_front", String(rooms.length), "") + "</section>";
+      kpi("Rooms", "door_front", String(rooms.length), "") + "</section>" +
+      // The same OPD figures the doctor sees, on the desk that can act on them first.
+      pulseCard(st);
 
     var roomCards = rooms.length ? rooms.map(function (r) {
       var rm = r.room || {}, unavailable = r.status === "unavailable";

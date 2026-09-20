@@ -28,6 +28,25 @@
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
   }
+  // Item 18 — persistent recording indicator. The breathing orb in consultBar() only exists on the
+  // Assessment tab, so switching to Investigations/Medications/etc. mid-consult hid every sign that
+  // MaiK Scribe was still listening (recording continues in the background regardless of the active
+  // tab). This banner sits between the header and the tab bar - visible on EVERY tab - whenever
+  // capture is live and not paused, with its own elapsed timer (tickElapsed keeps #oeRecTimer in
+  // sync the same way it already does #oeElapsed).
+  // Kill switch (item 18): DEFAULT ON; localStorage.setItem("smd_scribe_banner","off") removes the
+  // banner entirely, restoring the pre-item-18 screen (the Assessment-tab orb as the only indicator).
+  // Checked AFTER the capture-state guard so an idle repaint never touches localStorage.
+  function scribeBannerOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_banner") === "off") return false; } catch (e) {} return true; }
+  function recordingBanner(st) {
+    if (!st.voiceOn || st.voicePaused) return "";
+    if (!scribeBannerOn()) return "";
+    return '<div class="oe-rec-banner" role="status" aria-live="polite">' +
+      '<span class="oe-rec-dot" aria-hidden="true"></span>' +
+      '<span class="oe-rec-txt">Recording this consultation</span>' +
+      '<span class="oe-rec-timer" id="oeRecTimer">' + esc(fmtElapsed((st._now || now()) - (st.voiceStartedAt || now()))) + "</span>" +
+      '<button class="oe-rec-stop" data-oe-act="voice-stop" aria-label="Stop recording">' + ms("stop") + "Stop</button></div>";
+  }
   function patientHead(p, phone) {
     var line = '<span>' + ms("badge") + ' MR# <b class="mono">' + esc(p.displayId || p.mrn || "-") + "</b></span>";
     if (phone) line += '<span>' + ms("call") + ' <span class="mono">' + esc(phone) + "</span></span>";
@@ -490,6 +509,8 @@
   // opd-emr omits because their GHIS write-names aren't captured — those are DROPPED, never guessed.
   var OPD_KIND = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { OPD_KIND[f.n] = f.k; }); });
   var OPD_LABEL = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { OPD_LABEL[f.n] = f.l; }); });
+  // The option list of every <select> field, so a spoken value can be snapped to a real option.
+  var OPD_OPTS = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { if (f.opts && f.opts.length) OPD_OPTS[f.n] = f.opts; }); });
   function fieldLabel(n) { return OPD_LABEL[n] || n; }
   var VOICE_MAP = {
     cc: "Chief_complaints_duration", presentHx: "History_present_illness", pastHx: "History_past_illness",
@@ -530,7 +551,28 @@
     allergies: "Known_allergies_details",
     habits: "Habitat_addiction_yesno", habitsDetails: "Habitat_addiction_others",
     alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
-    recDrug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco"
+    recDrug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco",
+    // ---- 2026-09-20: the rest of the form a doctor actually dictates ---------------------------
+    // Every name below is a real ASSESS_SCHEMA field that had NO path from speech: absent from
+    // VOICE_MAP, or present here but with no extractor on either side able to produce it. Each is
+    // plain text, a yes/no, or a select the coercion above snaps to a real option — nothing numeric
+    // is inferred and nothing is filled unless it was said (see the RULES line in _opd-scribe.js).
+    priorInvestigations: "val.investigation_desc",
+    maritalStatus: "Single_married", childrenCount: "No_of_children", consanguinity: "Consanguinity",
+    appetite: "Appetite", bowels: "Bowels", micturition: "Micturition", micturitionDetails: "Mic_abnorml_details",
+    familyPsych: "Family_history_psych", familyOther: "Family_history_others",
+    menstrualHistory: "menstrual_history_y_n", menstrualDetails: "Others",
+    obstetricHistory: "obstetric_history_yes_no", pregnancyComplications: "pregnancy_comlications",
+    contraception: "contracception", lactating: "lactating", dysmenorrhoea: "dysmenorrhoea",
+    breastFeeding: "breast_feeding", feedingDuration: "feeding_duration",
+    cranialNerves: "cranial_nerves", motorSystem: "motor_sys", sensorySystem: "sensory_sys",
+    reflexes: "reflexes", plantars: "plantar", gait: "gait", speech: "speech",
+    cerebellar: "cerebellar_sign", jvp: "JVP", skin: "skin", entExam: "ENT_exam",
+    musculoskeletal: "musculo_skeletal_system", breastExam: "breast_exam",
+    teethExam: "teeth_exam", headNeckExam: "head_neck_exam",
+    hernialOrifices: "hernial_orifices", hernialOrificesDetails: "hernial_orifices_details",
+    genitalExam: "genital", perinealExam: "external_genitilia_perineum", perRectalExam: "examination",
+    differentialDx: "differential_diagnosis", referral: "refered_management_plan"
   };
   // Live BMI (kg/m^2) and Mosteller BSA (m^2):
   // BMI = weight / (height/100)^2; BSA = sqrt((height * weight) / 3600). Returns null if either invalid.
@@ -611,6 +653,23 @@
     });
     return out;
   }
+  // PURE: map a spoken/extracted value onto one of a select's own option strings, or "" for no match.
+  // Exact (case/punctuation-insensitive) first; then a UNIQUE option that starts with what was said or
+  // contains it as a whole word, so "Sick" reaches "Sick / Poor" and "non consanguineous" reaches
+  // "Non-consanguineous". Two candidates = ambiguous = nothing. Exposed for tests.
+  function _snapOption(opts, value) {
+    var s = String(value == null ? "" : value).trim(); if (!s) return "";
+    function nrm(x) { return String(x == null ? "" : x).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
+    var want = nrm(s), i, o;
+    if (!want) return "";
+    for (i = 0; i < opts.length; i++) { if (opts[i] && nrm(opts[i]) === want) return opts[i]; }
+    var hit = "", n = 0;
+    for (i = 0; i < opts.length; i++) {
+      o = nrm(opts[i]); if (!o) continue;
+      if (o.indexOf(want + " ") === 0 || (" " + o + " ").indexOf(" " + want + " ") >= 0) { hit = opts[i]; n++; }
+    }
+    return n === 1 ? hit : "";
+  }
   // coerce the engine's value to this form's wire value for the target field kind. null = don't set.
   function voiceCoerce(name, value) {
     var k = OPD_KIND[name];
@@ -618,6 +677,12 @@
       : (value === false || value === "false" || value === "No" || value === "N") ? "false" : null;
     if (k === "yesno") return (value === "Yes" || value === true || value === "Y") ? "Y"
       : (value === "No" || value === false || value === "N") ? "N" : null;
+    // A <select> only holds one of its own option strings: putVoiceDom assigns el.value, and a browser
+    // silently DROPS a value no <option> carries. So "vegetarian" for Diet, or "sick" for General
+    // condition, used to blank the field instead of filling it — the extractor had said the right
+    // thing and the form showed nothing. Snap to a real option; a value that matches none, or more
+    // than one, sets NOTHING (an absent statement must leave the field empty — never a guess).
+    if (k === "select" && OPD_OPTS[name]) { var picked = _snapOption(OPD_OPTS[name], value); return picked || null; }
     // null = don't set. Treat empty/whitespace as "no value" too, so a later empty extraction can't
     // silently BLANK a field the doctor already voice-filled (voice writes aren't marked 'touched').
     if (value == null) return null;
@@ -670,6 +735,13 @@
     // Prefers the English translation (voiceTranscriptEn) where cues are clearest; falls back to raw.
     function qaHtml() {
       var src = st.voiceTranscriptEn || tx;
+      // Flag ON + scribe-speaker present: its labelling (which can answer "unknown") replaces the
+      // wording-only SMD_DIARIZE guess and adds the one-tap correction. Either missing falls straight
+      // back to the previous behaviour.
+      if (scribeClinicalOn() && src) {
+        var sturns = _speakerTurns(src, st.scribeSpeakerFix);
+        if (sturns && sturns.length) return speakerQaHtml(sturns);
+      }
       var turns = (G.SMD_DIARIZE && G.SMD_DIARIZE.toQA && src) ? G.SMD_DIARIZE.toQA(src) : [];
       if (!turns.length) return '<div class="oe-vc-box"><div class="oe-vc-tx"><span class="oe-vc-ph">The Q&amp;A view appears once there is some back-and-forth to label.</span></div></div>';
       return '<div class="oe-vc-qa">' + turns.map(function (t) {
@@ -692,9 +764,12 @@
         '<button class="oe-vc-vt' + (qa ? " on" : "") + '" data-oe-act="notes-view:qa">Q&amp;A</button></span>' : "";
       var acts = tx ? '<span class="oe-vc-notes-acts">' +
         (edit ? '<button class="oe-vc-nbtn" data-oe-act="notes-copy" aria-label="Copy VoiceNote">' + ms("content_copy") + "Copy</button>" +
-                '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save to Present history">' + ms("save") + "Save</button>" : "") +
+                '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save transcript to Present history">' + ms("save") + "Save transcript</button>" : "") +
         '<button class="oe-vc-nbtn danger" data-oe-act="notes-clear" aria-label="Clear VoiceNote">' + ms("delete") + "Clear</button></span>" : "";
-      var head = '<div class="oe-vc-notes-h">' + ms("clinical_notes") + "<span>VoiceNote</span>" + tog + acts + "</div>";
+      // Item 13b: a doctor must never mistake a no-network on-device draft for the full-quality
+      // cloud one, so it carries a plain-English badge wherever the note itself is shown.
+      var offlineTag = st.scribeOfflineDraft ? '<span class="oe-tag oe-review" title="No internet connection - MaiK drafted this note on your phone instead of MaiK Cloud. Check it carefully.">Drafted on this phone</span>' : "";
+      var head = '<div class="oe-vc-notes-h">' + ms("clinical_notes") + "<span>VoiceNote</span>" + offlineTag + tog + acts + "</div>";
       var body = qa ? qaHtml()
         : edit ? ((txEn && txEn !== tx.trim() ? '<div class="oe-vc-tx-en ro">' + esc(txEn) + "</div>" : "") +
                   '<textarea class="oe-vc-edit" id="oeNotesEdit" data-oe-inp="notes" placeholder="Your words will appear here as you speak…">' + esc(tx) + "</textarea>")
@@ -731,7 +806,7 @@
     // OFF (idle) — invite to start.
     if (!on) {
       return '<div class="oe-vc idle">' +
-        '<div class="oe-vc-head"><span class="oe-vc-eyebrow">MaiK Scribe</span>' + langs + "</div>" +
+        '<div class="oe-vc-head"><span class="oe-vc-eyebrow">MaiK Scribe</span>' + langs + "</div>" + specialtyPicker() +
         '<button class="oe-vc-orb" data-oe-act="voice-toggle" aria-label="Start MaiK Scribe"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
         '<div class="oe-vc-status">' + (tx ? "MaiK Scribe completed" : "Start MaiK Scribe") + "</div>" +
         invChips() +
@@ -816,6 +891,99 @@
       "<span>Decision support only. Provisional and advisory; not a substitute for clinical judgement. Nothing is saved until you Accept and Save. Verify doses, contraindications and local protocol.</span></div>" +
       "</section>";
   }
+
+  // ---- Item 14: one-screen post-consult review ---------------------------------------------------
+  // Every field MaiK Scribe filled this consult, in one place: which ones the doctor has since edited
+  // ("changed"), which the (optional, feature-detected) server grounding says the transcript does not
+  // support ("not found in the recording" - never bulk-accepted), a per-row Accept/Edit/Remove, and a
+  // bulk "Accept all confirmed" over only the rows that ARE grounded. Nothing here writes to GHIS -
+  // that still needs the doctor's own Save tap; this is a fast visual double-check of what already
+  // landed in the form via live dictation (item 12), not a second write path.
+  //
+  // PURE: build one row per scribe-filled field. `filled` = field names in first-fill order
+  // (st.scribeFilledFields); `vals`/`touched` = the live assessment state; `ground` = the OPTIONAL
+  // server signal { ungroundedFields?: string[], sources?: {field: falsy|truthy|{supported}} } that
+  // another agent may add to the opd-scribe extract - feature-detected field by field. Absence of
+  // Complete absence of `ground` (the server sent neither signal at all) means "unknown support",
+  // which renders with NO badge (never assume unsupported just because nobody said so yet). Exposed
+  // for tests; no DOM.
+  //
+  // Server contract as actually shipped (functions/api/ai/_opd-scribe.js, Task 6): `sources` is a map
+  // {emrFieldKey: "<verbatim transcript sentence>"} the model is instructed to populate for EVERY
+  // emrFields key it fills ("if you cannot point to a supporting sentence, do not populate the
+  // field") — so once a `sources` map is present at all, a filled field missing FROM it is itself the
+  // ungrounded signal, not an unknown one. `verifySources()` (same file) additionally fuzzy-matches
+  // each cited sentence against the transcript and returns `{grounded, ungrounded}` field-key arrays;
+  // that check is not wired into the HTTP response yet, so `ground.ungroundedFields`/`ground.ungrounded`
+  // is read defensively for whenever it is, without this file re-implementing the fuzzy match itself.
+  function _buildReviewRows(filled, vals, touched, ground) {
+    vals = vals || {}; touched = touched || {};
+    var ungrounded = {};
+    (ground && (ground.ungroundedFields || ground.ungrounded) || []).forEach(function (f) { ungrounded[f] = true; });
+    var sources = (ground && ground.sources) || null;
+    function supported(name) {
+      if (ungrounded[name]) return false;
+      if (sources) {
+        if (!Object.prototype.hasOwnProperty.call(sources, name)) return false;   // sources map exists but has no citation for this field
+        var s = sources[name];
+        if (s === false || s == null || s === "") return false;
+        if (typeof s === "object" && !Array.isArray(s) && s.supported === false) return false;
+        if (Array.isArray(s) && !s.length) return false;
+        return true;
+      }
+      return null;   // no grounding signal at all -- unknown, not unsupported
+    }
+    var seen = {}, rows = [];
+    (filled || []).forEach(function (name) {
+      if (seen[name]) return; seen[name] = 1;
+      var val = vals[name];
+      if (val == null || val === "") return;             // scribe fill was since cleared -- nothing to review
+      rows.push({ field: name, label: fieldLabel(name), value: val, changed: !!touched[name], supported: supported(name) });
+    });
+    return rows;
+  }
+  function reviewRow(r) {
+    var val = String(r.value == null ? "" : r.value).replace(/\s+/g, " ").trim();
+    if (val.length > 90) val = val.slice(0, 90) + "…";
+    var badges = (r.changed ? '<span class="oe-rev-changed">' + ms("edit") + "Changed</span>" : "") +
+      (r.supported === false ? '<span class="oe-rev-badge">' + ms("help") + "Not found in the recording</span>" : "");
+    var right;
+    if (r.status) {
+      var word = r.status === "rejected" ? "Removed" : r.status === "edited" ? "Edited" : "Confirmed";
+      right = '<span class="oe-ai-added">' + ms(r.status === "rejected" ? "close" : "check") + word + "</span>";
+    } else {
+      right = '<span class="oe-rev-acts">' +
+        '<button class="oe-rev-icbtn" data-oe-act="scribe-review-edit:' + esc(r.field) + '" aria-label="Edit ' + esc(r.label) + '">' + ms("edit") + "</button>" +
+        '<button class="oe-rev-icbtn danger" data-oe-act="scribe-review-reject:' + esc(r.field) + '" aria-label="Remove ' + esc(r.label) + '">' + ms("close") + "</button>" +
+        '<button class="oe-ai-accept" data-oe-act="scribe-review-accept:' + esc(r.field) + '">' + ms("check") + "Accept</button></span>";
+    }
+    return '<div class="oe-ai-row"><div class="oe-ai-main"><div class="oe-ai-label">' + esc(r.label) + badges + "</div>" +
+      '<div class="oe-ai-why">' + (val ? esc(val) : "(blank)") + "</div></div>" + right + "</div>";
+  }
+  // Shown once the consult has actually finished (not while still listening/finishing up) and there is
+  // at least one scribe-filled field left to look at. Collapses naturally as rows resolve to a done
+  // state; never re-shows a row that has already been Accepted/Edited/Removed.
+  // Kill switch (item 14): DEFAULT ON; localStorage.setItem("smd_scribe_review","off") removes the
+  // panel entirely, restoring the previous post-consult screen. Checked after the cheap state guards
+  // so a repaint with nothing scribe-filled never touches localStorage.
+  function scribeReviewOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_review") === "off") return false; } catch (e) {} return true; }
+  function reviewPanel(st) {
+    if (!st.scribeFilledFields || !st.scribeFilledFields.length) return "";
+    if (st.voiceOn || st.voiceProcessing) return "";
+    if (!scribeReviewOn()) return "";
+    var rows = _buildReviewRows(st.scribeFilledFields, st.assessVals, st.assessTouched, st.scribeGround);
+    if (!rows.length) return "";
+    var review = st.scribeReview || {};
+    rows.forEach(function (r) { r.status = review[r.field] || null; });
+    var pending = rows.filter(function (r) { return !r.status; });
+    var confirmable = pending.filter(function (r) { return r.supported !== false; });
+    var doneCount = rows.length - pending.length;
+    return '<section class="oe-ai-panel oe-rev-panel"><div class="oe-ai-ghead"><h3 class="oe-h3">' + ms("fact_check") +
+      "Review MaiK&#39;s draft<span class=\"oe-tag oe-review\">" + doneCount + "/" + rows.length + "</span></h3>" +
+      (confirmable.length > 1 ? '<button class="oe-ai-acceptall" data-oe-act="scribe-review-acceptall">' + ms("done_all") + "Accept all confirmed</button>" : "") +
+      "</div>" + rows.map(reviewRow).join("") + specialtyMissingHtml(st) +
+      '<div class="oe-ai-disc">' + ms("info") + "<span>Everything MaiK filled while you were speaking. Check each line, then Accept, Edit or Remove it - nothing changes in " + esc((st && st.emrLabel) || "GHIS") + " until you Save.</span></div></section>";
+  }
   function assessTab(st) {
     if (st.assessLoading) return loadingBox("Loading assessment…");
     if (st.assessErr) return errorBox(st.assessErr);
@@ -888,7 +1056,7 @@
         '<button class="oe-btn ghost" data-oe-act="rx-summary" title="View, print, or share patient consultation summary">' + ms("print") + "Summary</button>" +
         saveBtn + authBtn + "</div>";
     }
-    return consultBar(st) + triageHtml + allergyHtml + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
   // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
@@ -1048,7 +1216,7 @@
       else if (active === "immun") body = head + immunTab(st);
       else body = head + profileTab(st);
     }
-    var app = '<div class="oe-app">' + header() + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
+    var app = '<div class="oe-app">' + header() + recordingBanner(st) + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
     if (st.report && st.report.open) return app + reportView(st.report);   // report drawer overlays the workspace
     if (st.doseDrawer) return app + ((G.SMD_ONCOUI && G.SMD_ONCOUI.doseDrawerView) ? G.SMD_ONCOUI.doseDrawerView(st.doseDrawer) : "");   // dose drawer, cloned from the report-drawer pattern
     return app;
@@ -1069,7 +1237,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, protoQuery: "", oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, scribeFilledFields: [], scribeGround: null, scribeOfflineDraft: false, scribeReview: {}, scribeDrugFixes: [], scribeDrugFixUndone: {}, scribeDrugFixSrc: "", scribeRx: null, scribeSafety: null, scribeIcd: null, scribeSpeakerFix: {}, scribeDraft: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, protoQuery: "", oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
   /* Keep the scroll position across a repaint.
    *
    * Every action in a consultation repaints the whole overlay with one innerHTML swap, and the new
@@ -1329,7 +1497,17 @@
       st.assessVals = st.assessVals || {};
       st.assessVals[an] = val;
       st.assessTouched = st.assessTouched || {};
+      // Item 15: the FIRST manual edit of a field the scribe filled is a correction signal worth
+      // logging (field key + action only - see logScribeFeedback). Gated on the touched flag not yet
+      // being set, so this fires once per field per consult, not once per keystroke.
+      // scribeFeedbackOn() is LAST in the chain on purpose: off means off (no st.scribeReview write
+      // either), without reading localStorage on every keystroke in every field.
+      var wasScribeFilled = !st.assessTouched[an] && !!st.scribeFilledFields && st.scribeFilledFields.indexOf(an) >= 0 && scribeFeedbackOn();
       st.assessTouched[an] = true;
+      if (wasScribeFilled) {
+        st.scribeReview = st.scribeReview || {};
+        if (!st.scribeReview[an]) { st.scribeReview[an] = "edited"; logScribeFeedback(an, "edited"); }
+      }
       if (an === "Height" || an === "Weight") {
         var mBmi = calcBmiBsa(st.assessVals.Height, st.assessVals.Weight);
         if (mBmi) {
@@ -1477,12 +1655,21 @@
     if (cmd === "assess-maik-pro") return askMaikPro();
     if (cmd === "assess-clear") return clearAssessment();
     if (cmd === "storage-info") return;   // passive "Not saved" note (decision-support only) — no action
-    if (cmd === "voice-toggle") { if (!st.voiceOn) startVoice(); return; }
+    if (cmd === "voice-toggle") { if (!st.voiceOn) askScribeConsent(startVoice); return; }
     if (cmd === "voice-pause") return togglePauseVoice();
     if (cmd === "voice-stop") return stopVoice();
     if (cmd === "vlang") { st.voiceLang = arg; if (st.voiceOn) { stopVoice(); } else { paint(); } return; }
     if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
+    if (cmd === "scribe-review-accept") return scribeReviewAccept(arg);
+    if (cmd === "scribe-review-reject") return scribeReviewReject(arg);
+    if (cmd === "scribe-review-edit") return scribeReviewEdit(arg);
+    if (cmd === "scribe-review-acceptall") return scribeReviewAcceptAll();
+    if (cmd === "scribe-drugfix-undo") return scribeDrugFixUndo(arg);
+    if (cmd === "scribe-rx-pad") return scribeRxToPad();
+    if (cmd === "scribe-icd") return scribeIcdAccept(arg);
+    if (cmd === "scribe-speaker") return scribeSpeakerFix(arg);
+    if (cmd === "scribe-spec") return setScribeSpecialty(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
     if (cmd === "icdsearch") return openIcdSearchForField(arg);
     if (cmd === "icdsuggest") return openIcdSuggestForField(arg);
@@ -1535,7 +1722,10 @@
     if (!(st.voiceTranscript || st.voiceTranscriptEn || (st.dictatedInv || []).length)) { paint(); return; }
     if (!confirmed("Clear this VoiceNote (transcript + translation)? EMR fields you've already accepted are kept.")) return;
     st.voiceTranscript = ""; st.voiceTranscriptEn = ""; st.scribeSuggestions = null; st.scribeStats = null; st.dictatedInv = []; st._notesSavedText = "";
-    try { _lastFullTranscript = ""; _priorTranscript = ""; _lastRefinedTranscript = ""; } catch (e) {}
+    st.scribeFilledFields = []; st.scribeGround = null; st.scribeOfflineDraft = false; st.scribeReview = {};
+    st.scribeDrugFixes = []; st.scribeDrugFixUndone = {}; st.scribeDrugFixSrc = ""; st.scribeRx = null; st.scribeSafety = null; st.scribeIcd = null; st.scribeSpeakerFix = {};
+    st.scribeDraft = null;                                   // and the delta refine starts from zero again
+    try { _lastFullTranscript = ""; _priorTranscript = ""; _lastRefinedTranscript = ""; _lastFullRefined = ""; _sentUpTo = 0; _sentCovered = ""; } catch (e) {}
     st.notesView = "raw";
     paint();
     try { toast("VoiceNote cleared"); } catch (e) {}
@@ -2611,6 +2801,17 @@
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
   var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "", _scribeCapToasted = "";
+  // Item 12 — live draft cadence: when speech has stopped landing for LIVE_IDLE_MS, treat it as "the
+  // doctor paused speaking" and let a refine run early (still through the same cost-guarded gate as
+  // every other mid-consult tick). _lastSpeechAt tracks the last onTranscript growth; _idleRefinedAt
+  // remembers the LAST _lastSpeechAt an idle-refine already fired for, so one silence stretch only
+  // ever triggers one extra refine (it re-arms once new speech moves _lastSpeechAt forward again).
+  var _lastSpeechAt = 0, _idleRefinedAt = 0, _lastLiveRefineAt = 0;
+  // smd_scribe_live resolved ONCE per capture session (startVoice), not per tick: tickElapsed calls
+  // maybeIdleRefine every second for the whole consult, and a localStorage read per second is a real
+  // cost on a phone. Null until a session starts, which also keeps maybeIdleRefine inert before one.
+  var _liveOnSession = null;
+  var LIVE_IDLE_MS = 4000;
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
   function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } _finishPending = false; if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
@@ -2625,7 +2826,24 @@
   }
   // Which on-device model is transcribing right now (updates live as Auto mode adapts per chunk).
   function setModelChip(code) { st.voiceModel = code || ""; try { var e = document.getElementById("oeVcModel"); if (e && code) e.textContent = code; } catch (x) {} }
-  function tickElapsed() { try { var e = document.getElementById("oeElapsed"); if (e) e.textContent = fmtElapsed(now() - (st.voiceStartedAt || now())); } catch (x) {} }
+  function tickElapsed() {
+    var t = fmtElapsed(now() - (st.voiceStartedAt || now()));
+    try { var e = document.getElementById("oeElapsed"); if (e) e.textContent = t; } catch (x) {}
+    try { var r = document.getElementById("oeRecTimer"); if (r) r.textContent = t; } catch (x) {}   // item 18 persistent banner, visible on every tab
+    maybeIdleRefine();
+  }
+  // Item 12: "the doctor paused speaking" -> an early refine, off by default cadence (flag OFF: this
+  // is a no-op, so the legacy chunkMs/refineEveryChunks cadence is byte-identical). Fires at most once
+  // per silence stretch and is still subject to gatedRefine's own cost guard.
+  function maybeIdleRefine() {
+    if (!_liveOnSession || !st.voiceOn || st.voicePaused || st.voiceProcessing) return;   // cached flag: tickElapsed runs this EVERY SECOND
+    if (!_lastSpeechAt) return;                                    // nothing said yet this session
+    var t = now();
+    if ((t - _lastSpeechAt) < LIVE_IDLE_MS) return;                // still mid-utterance
+    if (_idleRefinedAt >= _lastSpeechAt) return;                   // already refined this silence stretch
+    _idleRefinedAt = t;
+    gatedRefine(_lastFullTranscript);
+  }
   // Opens the ICD Search overlay in picker mode; the chosen code+title is appended as a new line
   // to the named field (same DOM-patch path as voice dictation - putVoiceDom - so it doesn't lose
   // scroll position or trigger a full repaint()).
@@ -3253,22 +3471,223 @@
   // main double-call-on-Stop fix is in stopVoice(), which no longer races its own stale call
   // against the teardown flush's onRefine).
   var _lastRefinedTranscript = "";
+  // The transcript the last FULL (whole-transcript) send covered — NOT the same thing as the last send.
+  // OWNER BUG 2026-09-20 ("autofill is broken"): the dedupe guard above compares against the last send
+  // of ANY kind, so the authoritative final pass was skipped whenever the transcript had not grown
+  // since the previous background refine. That is the COMMON case, not a corner: the idle-refine
+  // (LIVE_IDLE_MS, 4 s of silence) fires exactly when the doctor stops talking, and the last 15 s
+  // window before the Stop tap is usually that same silence — so the transcript at Stop equals the
+  // transcript already refined. Harmless while every refine was a full pass; with `smd_scribe_delta`
+  // on it meant the WHOLE consult was only ever read 45 seconds at a time and the one pass that reads
+  // it end to end never ran. A final now dedupes against the last FULL pass only.
+  var _lastFullRefined = "";
+  // PURE: is there genuinely nothing new to say? Exposed for tests. A background tick may be skipped
+  // when the last send already covered this text; a doctor-initiated FINAL only when a FULL pass did.
+  function _dedupeSkip(transcript, isFinal, lastSent, lastFull) {
+    if (arguments.length < 3) { lastSent = _lastRefinedTranscript; lastFull = _lastFullRefined; }
+    return String(isFinal ? lastFull : lastSent).indexOf(transcript) === 0;
+  }
   // True between a doctor-initiated Pause/Stop and the moment the note is drafted. Every failure path
   // in doRefine is SILENT by design during background ticks (a mid-consult hiccup must not nag), but
   // when the doctor has explicitly finished, silence is indistinguishable from "MaiK Scribe is broken":
   // the finishing animation ends and nothing appears. While this is set, failures say what happened.
   var _finishPending = false;
   function refineFail(msg) { if (_finishPending) { try { toast(msg); } catch (e) {} } finishProcessing(); }
+  // Item 12 — live draft. DEFAULT ON; localStorage.setItem("smd_scribe_live","off") restores the
+  // legacy ~2-minute cadence byte-identically (see gatedRefine below, which short-circuits to a bare
+  // doRefine() call when this is off).
+  function scribeLiveOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_live") === "off") return false; } catch (e) {} return true; }
+  // Configurable cost-guard floor between two BACKGROUND (non-final) LLM refines. Default 45s;
+  // override with localStorage.setItem("smd_scribe_live_mingap_ms","<n>").
+  function scribeLiveMinGapMs() {
+    try { var v = G.localStorage && G.localStorage.getItem("smd_scribe_live_mingap_ms"); if (v != null && +v > 0) return +v; } catch (e) {}
+    return 45000;
+  }
+  // PURE: cadence gate for a mid-consult (non-final) refine. A doctor-initiated finish (Pause/Stop,
+  // isFinal=true - always _finishPending in this file) ALWAYS runs, unguarded: "keep the authoritative
+  // final refine on Stop exactly as it is". A background tick must wait at least minGapMs since the
+  // last one it actually ran, however chatty refineEveryChunks is. Exposed for tests; no DOM/timers.
+  function _liveRefineGate(nowMs, lastAt, minGapMs, isFinal) {
+    if (isFinal) return true;
+    return (nowMs - (lastAt || 0)) >= (minGapMs || 0);
+  }
+  // Wraps doRefine with the cadence gate for the AMBIENT-driven cadence (opts.onRefine below): its
+  // periodic mid-consult ticks AND its own pause/stop flush both call this same reference. The
+  // pause/stop FALLBACK calls in togglePauseVoice/stopVoice below call doRefine directly, bypassing
+  // this on purpose - those are the authoritative finish and must never be gated.
+  function gatedRefine(transcript) {
+    if (!scribeLiveOn()) { doRefine(transcript); return; }   // flag off: identical to passing doRefine straight through
+    if (!_liveRefineGate(now(), _lastLiveRefineAt, scribeLiveMinGapMs(), _finishPending)) return;
+    _lastLiveRefineAt = now();
+    doRefine(transcript);
+  }
+  // Item 13 — offline structuring. DEFAULT ON; localStorage.setItem("smd_scribe_offline_draft","0")
+  // restores today's behaviour byte-identically (a failed cloud refine just toasts, nothing drafts).
+  function scribeOfflineDraftOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_offline_draft") === "0") return false; } catch (e) {} return true; }
+  // Is this failure the network being unreachable, rather than a deliberate refusal? G.SMD_AI.extract
+  // (reasoning.js) never rejects — every fetch failure and the raceTimeout's bare "timeout" are
+  // already caught into { error: "<message>" } — so this is a plain string match, not a promise-shape
+  // check. Deliberate refusals (quota / LOCAL_CAPABILITY_REQUIRED / kb-only / busy / low-memory /
+  // draft-unparsed) are handled by name before this ever runs and must never fall through to it.
+  // NOTE: "timeout" (no space) only, never "timed out" - "on-device generation timed out" is the
+  // LOCAL engine's OWN timeout (only reachable once the policy already routed to local), not a
+  // connectivity failure, and already has its own message below; matching it here would retry local
+  // work with more local work and mislabel a slow model as "no internet".
+  var NET_ERR_RE = /fetch|network|internet|unreachable|no connection|\bdns\b|resolve host|econnrefused|econnreset|enotfound|eai_again/i;
+  function isUnreachableError(msg) { var s = String(msg || ""); return NET_ERR_RE.test(s) || /\btimeout\b/i.test(s); }
+  // Does the DEVICE say it has no network right now? Airplane mode / no carrier / Wi-Fi down all set
+  // navigator.onLine false; a working-but-slow connection leaves it true.
+  function isOfflineNow() { try { return !!(G.navigator && G.navigator.onLine === false); } catch (e) { return false; } }
+  // PURE: should ONE failed cloud refine be retried on-device? Exposed for tests.
+  //   flagOn  - smd_scribe_offline_draft.
+  //   isFinal - the doctor tapped Pause/Stop. A BACKGROUND tick never starts a multi-window llama.cpp
+  //             generation: the next tick re-tries the cloud, and the authoritative refine still runs
+  //             on Stop. Before this, one bad minute of signal cost a full local generation per tick.
+  //   offline - navigator.onLine === false at the moment of the failure.
+  // A named network/DNS error is a genuine connectivity failure on its own. A bare "timeout" is NOT:
+  // SMD_AI.extract resolves { error: "timeout" } after 45s, which on a working-but-slow connection is
+  // only a slow server - so that case additionally requires the device to report itself offline.
+  // Airplane mode still drafts on-device: fetch fails there with "Failed to fetch" (a named network
+  // error), and navigator.onLine is false anyway. ("timed out" never matches - that is the LOCAL
+  // engine's own timeout, see isUnreachableError above.)
+  function _shouldOfflineFallback(msg, opts) {
+    opts = opts || {};
+    if (!opts.flagOn || !opts.isFinal) return false;
+    var s = String(msg || "");
+    if (NET_ERR_RE.test(s)) return true;
+    if (/\btimeout\b/i.test(s)) return !!opts.offline;
+    return false;
+  }
+  // ---- FIX 1 (overlapping refines): ticket per refine, newest-applied wins --------------------
+  // The live cadence floor (45s) and extract()'s own 45s timeout are the same order, so two refines
+  // CAN be in flight at once. Every doRefine takes a ticket; a result whose ticket is OLDER than the
+  // newest one already applied is discarded, so a slow early refine can never overwrite a newer
+  // draft (emrFields, the English transcript, st.scribeOfflineDraft). A doctor-initiated finish is
+  // never dropped by this: nothing starts a refine after Pause/Stop (maybeIdleRefine is gated on
+  // st.voiceProcessing and the engine is torn down), so a final always carries the newest ticket.
+  // Never reset - a monotonic counter also discards a refine left in flight by a previous session.
+  var _refineSeq = 0, _appliedSeq = 0;
+  function _refineStale(ticket, appliedSeq) { return ticket < appliedSeq; }   // PURE, exposed for tests
+  function applyIfFresh(ticket, r, transcript, offline, isDelta) {
+    if (_refineStale(ticket, _appliedSeq)) return false;
+    _appliedSeq = ticket;
+    applyScribeResult(r, transcript, offline, isDelta);
+    return true;
+  }
+  // FIX 3: a throw out of applyScribeResult (the rx / safety / ICD wiring, the grounder) is a BUG in
+  // this client, never a network failure - it must not be laundered into "no internet" and answered
+  // with an on-device generation. Always logged where the owner can see it; toasted only on a
+  // doctor-initiated finish, because a mid-consult tick must not nag.
+  function refineBug(e, isFinal) {
+    try { if (G.console && G.console.error) G.console.error("[opd-scribe] refine failed", e); } catch (x) {}
+    try { if (G.SMD_logError) G.SMD_logError("opd-scribe refine failed: " + ((e && e.message) || e), (e && e.stack) || ""); } catch (x) {}
+    if (isFinal) { try { toast("Something went wrong while drafting the note - the transcript is kept, tap Stop again."); } catch (x) {} }
+  }
+  // Retry ONE cloud-refine failure on-device instead of leaving the doctor with only a toast. Mirrors
+  // the 2026-09-11 hard Local AI policy in reverse (cloud unreachable -> on-device stands in) and must
+  // be equally explicit: a successful fallback is marked offline (item 13b) via applyScribeResult's
+  // `offline` flag, never silently presented as the full-quality cloud draft.
+  function offlineScribeFallback(transcript, ticket, isFinal) {
+    if (!(G.SMD_MAIK_LOCAL && G.SMD_MAIK_LOCAL.available && G.SMD_MAIK_LOCAL.available() && G.SMD_MAIK_LOCAL.scribeFill)) {
+      if (isFinal) { try { toast("No internet connection, and no on-device model is ready to draft here. The transcript is kept - try again once you are online."); } catch (e) {} }
+      return;
+    }
+    return G.SMD_MAIK_LOCAL.scribeFill(transcript).then(function (r) {
+      if (!r || r.error) {
+        if (isFinal) {
+          var why = (r && r.error === "draft-unparsed" && r.message) ? r.message
+            : "No internet connection, and the on-device draft did not work either. The transcript is kept - try again.";
+          try { toast(why); } catch (e) {}
+        }
+        return;
+      }
+      if (isFinal) { try { toast("No internet. This note was drafted on your phone instead - check it carefully before you save."); } catch (e) {} }
+      applyIfFresh(ticket, r, transcript, true);
+    }, function () {
+      if (isFinal) { try { toast("No internet connection, and the on-device draft did not work either. The transcript is kept - try again."); } catch (e) {} }
+    });
+  }
+  // ---- Incremental (delta) refine: smd_scribe_delta, DEFAULT ON ---------------------------------
+  // Every background refine used to resend the WHOLE growing transcript, so a consult's input cost
+  // grew with the SQUARE of its length (a 20-minute consult sent ~10x the text it needed to). A
+  // background refine now sends only the speech since the last call whose result was actually
+  // APPLIED, plus the draft so far — which is bounded by the field list, not by consult length.
+  // The FINAL refine (Pause/Stop) is deliberately untouched: whole transcript, no prior draft, a
+  // fresh authoritative extraction. That is the safety net that makes the delta path acceptable.
+  //
+  // DEFAULT OFF since 2026-09-20 (owner report, real iPhone: "autofill into the OPD Assessment form is
+  // broken"). The delta wire needs the SERVER half (the `delta` / `priorDraft` branch in
+  // functions/api/ai/[[path]].js), and that is not deployed yet: against the live worker a delta is
+  // just a 45-second fragment with no context, so each background refine fills a handful of fields
+  // instead of the note. Turn it on — localStorage.setItem("smd_scribe_delta","on") — only once the
+  // worker carrying mergeScribeDraft is live.
+  function scribeDeltaOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_delta") === "on") return true; } catch (e) {} return false; }
+  var _sentUpTo = 0, _sentCovered = "";   // chars of the PREPARED text already extracted AND applied
+  // PURE: what this refine should send. Falls back to the whole text whenever anything is off — a
+  // failed/stale/never-applied call leaves _sentUpTo where it was, so the speech it covered is
+  // resent by the next call. Losing speech is worse than resending it. Exposed for tests.
+  // The client clips a transcript before sending (reasoning.js SMD_AI.extract). Past this many
+  // characters a "full" send is not full at all: the tail is dropped, and the tail of a consult is
+  // where the diagnosis, the plan and the prescription are spoken. 16000 is the server's own
+  // MAX_IN_CHARS default (functions/api/ai/[[path]].js).
+  var SCRIBE_MAX_CHARS = 16000;
+  function _deltaPlan(text, covered, sentUpTo, opts) {
+    text = String(text == null ? "" : text);
+    var full = { delta: false, text: text, to: text.length };
+    if (!opts || !opts.flagOn || !opts.hasDraft) return full;
+    // A LONG final pass is the exception to "the final refine always sends everything": sending
+    // everything would silently drop the end of the consultation at the clip above, whereas the
+    // draft already holds what the earlier passes extracted. Delta plus that draft loses nothing.
+    if (opts.isFinal && !(text.length > (opts.maxChars || SCRIBE_MAX_CHARS) && sentUpTo)) return full;
+    if (!sentUpTo || sentUpTo > text.length) return full;
+    if (text.slice(0, sentUpTo) !== covered) return full;    // transcript edited or replaced: start clean
+    return { delta: true, text: text.slice(sentUpTo), to: text.length };
+  }
+  // PURE: accumulate the English translation across deltas. A delta's `en` covers only its own
+  // speech, so REPLACING would throw away every earlier translation — which both the VoiceNote Q&A
+  // view and the deterministic vitals extractor read. Exposed for tests.
+  function _enAccum(prev, add) {
+    prev = String(prev == null ? "" : prev); add = String(add == null ? "" : add).trim();
+    if (!add) return prev;
+    if (!prev) return add.slice(0, 24000);
+    if (prev.indexOf(add) >= 0) return prev;                 // a resent delta must not duplicate
+    return (prev + " " + add).slice(0, 24000);
+  }
+  // PURE: the running draft that rides up as priorDraft. ADD/UPDATE only — an absent or empty key
+  // never clears a field already captured. Exposed for tests.
+  function _draftAccum(prev, ef) {
+    var out = {}, k;
+    for (k in (prev || {})) if (Object.prototype.hasOwnProperty.call(prev, k)) out[k] = prev[k];
+    for (k in (ef || {})) if (Object.prototype.hasOwnProperty.call(ef, k) && ef[k]) out[k] = ef[k];
+    return out;
+  }
+  // Decide delta vs full for this send and attach the delta body keys. Kept out of doRefine's body
+  // (see the NOTE below about test/maik-local-queue.test.mjs reading its first 3000 characters).
+  function _deltaPrep(p, isFinal) {
+    var has = !!(st.scribeDraft && Object.keys(st.scribeDraft).length);
+    p.opts.maxChars = SCRIBE_MAX_CHARS;                      // raise the client clip to what the server accepts
+    var plan = _deltaPlan(p.text, _sentCovered, _sentUpTo, { flagOn: scribeDeltaOn(), isFinal: isFinal, hasDraft: has, maxChars: SCRIBE_MAX_CHARS });
+    if (plan.delta) { p.opts.delta = 1; p.opts.priorDraft = { emrFields: st.scribeDraft }; }
+    return plan;
+  }
+  // `scribeSendPrep` (flag smd_scribe_clinical) decides what is actually SENT: the transcript with
+  // misheard drug names corrected and the chosen specialty's prompt attached. Flag off or modules
+  // absent -> the transcript unchanged and no extra body key. See its own comment below.
+  // NOTE: test/maik-local-queue.test.mjs asserts the named engine-error messages appear in the FIRST
+  // 3000 characters of this function, so keep new work out of its body (a helper above/below, like
+  // scribeSendPrep) rather than inlining it here.
   function doRefine(transcript) {
     if (!transcript) { refineFail("Nothing was transcribed - check the microphone and try again."); return; }
     if (!(G.SMD_AI && G.SMD_AI.extract)) { refineFail("Note drafting is unavailable on this build."); return; }
-    if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine — genuinely nothing to say
+    var isFinal = _finishPending;                          // captured at CALL time (see applyIfFresh)
+    if (_dedupeSkip(transcript, isFinal)) { finishProcessing(); return; }   // nothing new to say
+    var ticket = ++_refineSeq;
     _lastRefinedTranscript = transcript;
-    G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
+    var p = scribeSendPrep(transcript), pl = _deltaPrep(p, isFinal);
+    if (!pl.delta) _lastFullRefined = transcript;          // this send reads the whole transcript
+    if (pl.delta && !pl.text.trim()) { _unsendScribeSec(); finishProcessing(); return; }
+    return G.SMD_AI.extract(pl.text, "opd-scribe", p.opts).then(function (r) {
       if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
-      // The engine refused for a named reason (Local mode, model lacks the capability): say it ONCE
-      // per session rather than on every refine tick, and keep dictating (the deterministic vitals
-      // extractor and the transcript are unaffected).
       // A named refusal (Local mode, model lacks the capability): say it once per distinct reason.
       // It used to be once per SESSION, so every later refine fell through to the generic message
       // below and the actual reason was never seen again (owner report, 2026-09-11).
@@ -3281,7 +3700,9 @@
       // engine runs one generation at a time, so a refine landing on a busy engine reported "busy"
       // and the doctor was told only that drafting failed).
       if (!r || r.error) {
-        if (_finishPending) {
+        // Item 13a, narrowed: genuine connectivity failure + doctor-initiated finish only.
+        if (_shouldOfflineFallback(r && r.error, { flagOn: scribeOfflineDraftOn(), isFinal: isFinal, offline: isOfflineNow() })) return offlineScribeFallback(transcript, ticket, isFinal);
+        if (isFinal) {
           var e0 = String((r && r.error) || "");
           var why = (r && r.error === "draft-unparsed" && r.message) ? r.message
             : /busy|already running/i.test(e0) ? "MaiK was still drafting the previous part. Tap Stop again in a moment."
@@ -3293,68 +3714,106 @@
         }
         return;
       }
-      var sg = r.suggestions || {};
-      var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
-        : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
-      _applyRefine({ emrFields: r.emrFields || {}, suggestions: { provisionalDx: sg.provisionalDx, ddx: grounded.ddx, investigations: grounded.investigations } });
-      // Multilingual VITALS: the deterministic extractor (voice-vitals) is English-regex only, so a
-      // Telugu/Hindi consult (native-script transcript) never matched "BP 120/80" etc. Re-run the SAME
-      // deterministic extractor on the LLM's faithful English translation — still no LLM-invented numbers.
-      var enText = (r && r.en) || transcript;
-      if (enText) {
-        if (r && r.en) st.voiceTranscriptEn = r.en;                       // full English translation-so-far -> powers the Q&A speaker view
-        var reducer = (G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) ? G.SMD_AMBIENT.reduce
-          : ((G.SMD_VVITALS && G.SMD_EMRMAP) ? function (t, o) { return G.SMD_EMRMAP.merge(G.SMD_VVITALS.extract(t), o); } : null);
-        if (reducer) {
-          try { applyVoice(reducer(enText, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
-        }
+      // The "sent up to" offset advances ONLY here, on a result that was really applied: a failed,
+      // timed-out or stale-discarded call leaves it where it was and its speech rides in the next call.
+      if (applyIfFresh(ticket, r, transcript, false, pl.delta)) { _sentUpTo = p.text.length; _sentCovered = p.text; }
+    }, function (e) {
+      // FIX 3: the REJECTION handler of the network call ONLY. It used to be a .catch chained AFTER
+      // the handler above, so a throw inside applyScribeResult (a bug in the rx/safety/ICD wiring)
+      // was read as a dropped connection and answered with an on-device generation. extract() normally
+      // resolves { error: ... }; rejecting means the transport itself failed.
+      if (_shouldOfflineFallback(String((e && e.message) || "network"), { flagOn: scribeOfflineDraftOn(), isFinal: isFinal, offline: isOfflineNow() })) return offlineScribeFallback(transcript, ticket, isFinal);
+      if (isFinal) { try { toast("Could not reach MaiK to draft the note - check your connection, your transcript is safe."); } catch (e2) {} }
+    }).then(finishProcessing, function (e) { finishProcessing(); refineBug(e, isFinal); });   // clear the "Finishing…" state whether it succeeded or not
+  }
+  // The successful-refine tail, shared by the cloud path and the item-13 offline fallback. `offline`
+  // (item 13b) marks the draft as on-device so _applyRefine can flag it for the UI - a doctor must
+  // never mistake a no-network draft for the full-quality cloud one.
+  function applyScribeResult(r, transcript, offline, isDelta) {
+    var sg = r.suggestions || {};
+    // The running draft the NEXT delta sends up as priorDraft. Accumulated, never replaced, so an
+    // old worker that ignored `delta` (and answered about the delta text alone) degrades to a
+    // smaller prompt context rather than to a forgotten note.
+    st.scribeDraft = _draftAccum(st.scribeDraft, r.emrFields);
+    var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
+      : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
+    // Item 14 seam: the server extract may (another agent is adding this) return which fields it
+    // could actually ground in the transcript, as EITHER an `ungroundedFields` list OR a `sources`
+    // map keyed by field name. Both are feature-detected — neither exists in the response today, and
+    // _buildReviewRows treats an absent/unrecognised shape as "unknown support" (no badge), never
+    // as "unsupported", so this is inert until the other agent's field actually ships.
+    _applyRefine({ emrFields: r.emrFields || {}, suggestions: { provisionalDx: sg.provisionalDx, ddx: grounded.ddx, investigations: grounded.investigations },
+      ground: (r.ungroundedFields || r.ungrounded || r.sources) ? { ungroundedFields: r.ungroundedFields || r.ungrounded, sources: r.sources } : null,
+      offlineDraft: !!offline });
+    // Multilingual VITALS: the deterministic extractor (voice-vitals) is English-regex only, so a
+    // Telugu/Hindi consult (native-script transcript) never matched "BP 120/80" etc. Re-run the SAME
+    // deterministic extractor on the LLM's faithful English translation — still no LLM-invented numbers.
+    // Full pass: `en` is the whole transcript translated, so it replaces (today's behaviour).
+    // Delta pass: `en` covers ONLY this delta's speech, so it is APPENDED — replacing would throw
+    // away the earlier translation the Q&A view and the vitals extractor both read.
+    if (r && r.en) st.voiceTranscriptEn = isDelta ? _enAccum(st.voiceTranscriptEn, r.en) : r.en;
+    // Run the extractor over the ACCUMULATED translation, not just this pass's `en`. A vital spoken
+    // either side of a delta boundary ("BP one forty" / "by ninety") is invisible to each fragment on
+    // its own; the joined text has it whole. Idempotent by construction — extract() dedupes per field
+    // and _voiceMerge only ever adds — so re-reading earlier speech costs nothing and invents nothing.
+    var enText = (r && r.en) ? (st.voiceTranscriptEn || r.en) : transcript;
+    if (enText) {
+      var reducer = (G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) ? G.SMD_AMBIENT.reduce
+        : ((G.SMD_VVITALS && G.SMD_EMRMAP) ? function (t, o) { return G.SMD_EMRMAP.merge(G.SMD_VVITALS.extract(t), o); } : null);
+      if (reducer) {
+        try { applyVoice(reducer(enText, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
       }
-      // Alcohol: patient stated an amount -> tick Alcohol/Habits + write the amount with computed
-      // grams of ethanol + WHO standard drinks into the details field (respecting a doctor edit).
-      var alcAff = (r.emrFields && r.emrFields.alcohol === "Yes") || !!r.alcoholDetail;
-      var ac = alcoholCalc(r.alcoholDetail || r.en || "");   // parse "<n> ml <drink>" from the detail OR the English transcript (needs a drink-type word, so 'ml saline' won't trigger)
-      if (alcAff || ac) {
-        applyVoice({ updates: [{ field: "habits", value: "Yes", applied: true }, { field: "alcohol", value: "Yes", applied: true }] });
-        if (ac) {
-          var note = (r.alcoholDetail || (ac.ml + " ml " + ac.type)) + " (" + ac.pureMl + " ml pure alcohol, ~" + ac.grams + " g, ~" + ac.std + " standard drink" + (ac.std === 1 ? "" : "s") + ")";
-          st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
-          if (!st.assessTouched.Habitat_addiction_others) { st.assessVals.Habitat_addiction_others = note; putVoiceDom("Habitat_addiction_others"); }
-        }
+    }
+    // Alcohol: patient stated an amount -> tick Alcohol/Habits + write the amount with computed
+    // grams of ethanol + WHO standard drinks into the details field (respecting a doctor edit).
+    var alcAff = (r.emrFields && r.emrFields.alcohol === "Yes") || !!r.alcoholDetail;
+    var ac = alcoholCalc(r.alcoholDetail || r.en || "");   // parse "<n> ml <drink>" from the detail OR the English transcript (needs a drink-type word, so 'ml saline' won't trigger)
+    if (alcAff || ac) {
+      applyVoice({ updates: [{ field: "habits", value: "Yes", applied: true }, { field: "alcohol", value: "Yes", applied: true }] });
+      if (ac) {
+        var note = (r.alcoholDetail || (ac.ml + " ml " + ac.type)) + " (" + ac.pureMl + " ml pure alcohol, ~" + ac.grams + " g, ~" + ac.std + " standard drink" + (ac.std === 1 ? "" : "s") + ")";
+        st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+        if (!st.assessTouched.Habitat_addiction_others) { st.assessVals.Habitat_addiction_others = note; putVoiceDom("Habitat_addiction_others"); }
       }
-      // Doctor-dictated investigations ("let's do CBC, LFT, RFT") -> Management plan. Deterministic +
-      // on-device (works for GHIS AND personal clinic; no catalog needed); appendPlan dedups so a
-      // re-run over the growing transcript never duplicates a line.
-      var invs = detectInvestigations((r.en || "") + " " + transcript);
-      if (invs.length) {
-        st.dictatedInv = st.dictatedInv || []; var added = false;
-        invs.forEach(function (n) { if (st.dictatedInv.indexOf(n) < 0) { st.dictatedInv.push(n); added = true; } appendPlan("management_plan", "Ix: " + n); });
-        putVoiceDom("management_plan");
-        // Surface new investigation chips (infrequent: per refine, not per tick) — but NOT while the
-        // doctor is mid-edit in the notes textarea (a late refine resolving after Stop would steal focus).
-        if (added) { var ed = null; try { ed = document.getElementById("oeNotesEdit"); } catch (e) {} if (!ed || document.activeElement !== ed) paint(); }
-      }
-    }).catch(function () {
-      // Was silently swallowed: a dropped connection mid-consult looked exactly like a working Stop
-      // that produced nothing. The transcript is never lost, so say so and let the doctor retry.
-      if (_finishPending) { try { toast("Could not reach MaiK to draft the note - check your connection, your transcript is safe."); } catch (e) {} }
-    }).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
+    }
+    // Doctor-dictated investigations ("let's do CBC, LFT, RFT") -> Management plan. Deterministic +
+    // on-device (works for GHIS AND personal clinic; no catalog needed); appendPlan dedups so a
+    // re-run over the growing transcript never duplicates a line.
+    var invs = detectInvestigations((r.en || "") + " " + transcript);
+    if (invs.length) {
+      st.dictatedInv = st.dictatedInv || []; var added = false;
+      invs.forEach(function (n) { if (st.dictatedInv.indexOf(n) < 0) { st.dictatedInv.push(n); added = true; } appendPlan("management_plan", "Ix: " + n); });
+      putVoiceDom("management_plan");
+      // Surface new investigation chips (infrequent: per refine, not per tick) — but NOT while the
+      // doctor is mid-edit in the notes textarea (a late refine resolving after Stop would steal focus).
+      if (added) { var ed = null; try { ed = document.getElementById("oeNotesEdit"); } catch (e) {} if (!ed || document.activeElement !== ed) paint(); }
+    }
   }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
     // Preserve any prior transcript so restarting after Stop APPENDS ("record more") instead of wiping it.
     _priorTranscript = (st.voiceTranscript || "").trim() ? ((st.voiceTranscript || "").trim() + "\n") : "";
-    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceModel = ""; _lastFullTranscript = st.voiceTranscript || ""; _lastRefinedTranscript = ""; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
+    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceModel = ""; _lastFullTranscript = st.voiceTranscript || ""; _lastRefinedTranscript = ""; _lastFullRefined = ""; _lastLiveRefineAt = 0; _liveOnSession = scribeLiveOn(); _lastSpeechAt = 0; _idleRefinedAt = 0; _lastScribeSentAt = 0; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
     if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
       language: st.voiceLang || "auto",                     // en | auto | te — multilingual Whisper decodes Telugu + code-switch
-      chunkMs: 15000, refineEveryChunks: 8,                  // refine every 2 min (cost): the full authoritative extraction still runs on Stop, so the final EMR is identical — this only trims mid-dictation live-preview calls
+      // Remembers this visit's detected language across a Stop-then-record-more, so the Auto probe
+      // (and the model load behind it) is paid once per consult, not once per restart. Keyed per
+      // visit on purpose: carrying one patient's language into the next would decode the next
+      // consult on the wrong model. Falls back to a fresh probe when there is no id to key on.
+      sessionId: st.visitId || st.episodeId || st.ticketId || (st.patient && st.patient.mrn) || "",
+      // refineEveryChunks: flag OFF keeps the original ~2 min cadence (8 * 15s) byte-identical; flag ON
+      // (default) drops to every 2 chunks (~30s) so the draft visibly fills in as the consult goes.
+      // Either way the full authoritative extraction still runs on Stop, so the final EMR is identical —
+      // gatedRefine (not this cadence alone) is what actually caps LLM cost, see its comment above.
+      chunkMs: 15000, refineEveryChunks: scribeLiveOn() ? 2 : 8,
       getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,
-      onTranscript: function (t) { _lastFullTranscript = _priorTranscript + (t || ""); setTranscript(_lastFullTranscript); },
+      onTranscript: function (t) { _lastFullTranscript = _priorTranscript + (t || ""); setTranscript(_lastFullTranscript); if (scribeLiveOn()) _lastSpeechAt = now(); },
       onModel: function (code) { setModelChip(code); },     // "which model" chip (Auto adapts per chunk)
-      onRefine: doRefine,                                    // rolling capture (Task 5) is wired: fires every refineEveryChunks windows + once more on Stop (the flushed final chunk); stopVoice() only makes its own call as a fallback when there's no in-flight chunk to flush
+      onRefine: gatedRefine,                                 // rolling capture (Task 5) is wired: fires every refineEveryChunks windows + once more on Stop (the flushed final chunk); stopVoice() only makes its own call as a fallback when there's no in-flight chunk to flush. gatedRefine cost-guards the periodic ticks; the flush call still always refines (see gatedRefine's comment).
       onState: function (s) { if (s === "fallback") st.voiceFallback = true; setVoiceStatus(s === "listening" ? (st.voiceFallback ? "MaiK Scribe is listening (device dictation)" : "MaiK Scribe is listening") : s === "fallback" ? "Whisper model not installed - using device dictation" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
       onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; } paint(); }
     });
@@ -3420,6 +3879,7 @@
       st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
       st.assessVals.provisional_diagnosis = name; st.assessTouched.provisional_diagnosis = true;
       if (kind === "dx") s.acceptedDx = true; else { s.acceptedDdx = s.acceptedDdx || {}; s.acceptedDdx[idx] = true; }
+      if (scribeClinicalOn()) scribeIcdSuggest(name);   // offers codes for a tap; never assigns one
     } else if (kind === "inv") {
       var inv = s.investigations[idx]; if (!inv) return false;
       // Fold every accepted investigation into the Management plan (accumulates across taps + "Accept all",
@@ -3429,8 +3889,9 @@
       s.acceptedInv = s.acceptedInv || {}; s.acceptedInv[idx] = true;
     } else if (kind === "rx") {
       var rx = s.treatment && s.treatment[idx]; if (!rx) return false;
-      appendPlan("management_plan", "Rx: " + rx.label);
+      appendPlan("management_plan", "Rx: " + rx.label);   // unchanged free-text path
       s.acceptedRx = s.acceptedRx || {}; s.acceptedRx[idx] = true;
+      stageScribeRx(rx.label);                            // ADDITIVE structured rows + safety check
     } else if (kind === "fix") {
       var fx = s.corrections && s.corrections[idx]; if (!fx) return false;
       applyCorrection(fx);
@@ -3484,9 +3945,476 @@
     // Voice refine autofills the EMR fields ONLY. Diagnostic / investigation SUGGESTIONS are NOT
     // auto-shown after a consult — the clinician taps "Ask MaiK" to pull them on demand.
     st.scribeStats = { filled: m.filled.length, suggestions: 0 };
+    // Item 13b: a draft made on-device because the cloud was unreachable is flagged here, never
+    // silently presented as the full-quality cloud draft. Reset (not just set) on every refine, so
+    // the label disappears the moment a later cloud refine succeeds again.
+    st.scribeOfflineDraft = !!result.offlineDraft;
+    // Item 14: remember every field name the scribe has EVER filled this consult (first-fill order),
+    // so the post-consult review panel can list them even after a later refine didn't touch them again.
+    st.scribeFilledFields = st.scribeFilledFields || [];
+    m.filled.forEach(function (name) { if (st.scribeFilledFields.indexOf(name) < 0) st.scribeFilledFields.push(name); });
+    if (result.ground && (result.ground.ungroundedFields || result.ground.sources)) st.scribeGround = result.ground;   // keep the latest non-empty snapshot; never erase a prior one with an empty refine
     paint();
     m.filled.forEach(putVoiceDom);
     return { filled: m.filled, dropped: m.dropped, conflicts: m.conflicts };
+  }
+
+  // ---- Item 14 review-panel actions: one field at a time, or "Accept all confirmed" as a batch. None
+  // of this writes to GHIS - the value already sits in st.assessVals from live dictation; these just
+  // record the doctor's explicit disposition (and, for Reject, actually clear the field).
+  function scribeReviewAccept(field) {
+    st.scribeReview = st.scribeReview || {};
+    if (st.scribeReview[field]) return;
+    st.scribeReview[field] = "accepted";
+    logScribeFeedback(field, "accepted");
+    paint();
+  }
+  function scribeReviewReject(field) {
+    st.scribeReview = st.scribeReview || {};
+    if (st.scribeReview[field]) return;
+    st.scribeReview[field] = "rejected";
+    st.assessVals = st.assessVals || {}; st.assessVals[field] = "";
+    if (st.assessTouched) delete st.assessTouched[field];   // cleared, not doctor-edited -- no future edit-log noise
+    putVoiceDom(field);
+    logScribeFeedback(field, "rejected");
+    paint();
+  }
+  // Navigation only (scroll + focus the real input in the accordion below) - no state change, no log.
+  // The actual "edited" log fires from setField the moment the doctor changes the value (see above).
+  function scribeReviewEdit(field) {
+    try {
+      var esc2 = (G.CSS && CSS.escape) ? CSS.escape(field) : field;
+      var el = document.querySelector('#smdOpdEmr [data-oe-inp="assess:' + esc2 + '"]');
+      var acc = el && el.closest ? el.closest("details.oe-acc") : null; if (acc && !acc.open) acc.open = true;
+      if (el && el.scrollIntoView) el.scrollIntoView({ block: "center" });
+      if (el && el.focus) el.focus();
+    } catch (e) {}
+  }
+  function scribeReviewAcceptAll() {
+    var rows = _buildReviewRows(st.scribeFilledFields, st.assessVals, st.assessTouched, st.scribeGround);
+    st.scribeReview = st.scribeReview || {};
+    var changed = false;
+    rows.forEach(function (r) {
+      if (st.scribeReview[r.field] || r.supported === false) return;   // never bulk-accept an unsupported row
+      st.scribeReview[r.field] = "accepted"; logScribeFeedback(r.field, "accepted"); changed = true;
+    });
+    if (changed) paint();
+  }
+
+  // ==== MaiK Scribe clinical wiring (flag smd_scribe_clinical, DEFAULT ON) =========================
+  // Six finished modules (scribe-drugfix / scribe-rx / scribe-icdsug / scribe-safety / scribe-speaker /
+  // scribe-templates) are called from here and nowhere else. Every call is feature-detected, so a build
+  // missing one degrades to the pre-wiring behaviour instead of throwing, and
+  // localStorage.setItem("smd_scribe_clinical","off") restores that behaviour everywhere.
+  //
+  // The existing clinical gates are NOT weakened by anything below:
+  //   - nothing reaches the EMR, an order or the prescription pad without the doctor's own tap;
+  //   - a field the doctor edited is still protected by assessTouched / _voiceMerge;
+  //   - no dose, drug or code is ever invented - a module that returns nothing renders nothing.
+  function scribeClinicalOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_clinical") === "off") return false; } catch (e) {} return true; }
+
+  // ---- 1. Misheard drug names (scribe-drugfix.js) ------------------------------------------------
+  // The recording and the VoiceNote the doctor reads are NEVER rewritten. Only the copy handed to the
+  // structuring pass is corrected, every correction is listed on screen, and each one has its own Undo
+  // (which re-drafts the note without it). The module only corrects unambiguous single matches.
+  function drugFixOpts() { return { drugs: (G.MEDDRUGS && G.MEDDRUGS._list) || [], fuzzy: G.DrugFuzzy }; }
+  // PURE: re-apply only the corrections the doctor has NOT undone. `corrections` are scribe-drugfix
+  // rows ({from, to, index}) computed against THIS exact `src`; a row whose span no longer matches the
+  // source is skipped rather than spliced somewhere it was not measured. Exposed for tests.
+  function _drugFixText(src, corrections, undone) {
+    var out = String(src == null ? "" : src), u = undone || {};
+    var list = (corrections || []).filter(function (c) { return c && !u[c.from + ">" + c.to]; });
+    for (var i = list.length - 1; i >= 0; i--) {
+      var c = list[i], from = String(c.from);
+      if (out.slice(c.index, c.index + from.length) !== from) continue;
+      out = out.slice(0, c.index) + c.to + out.slice(c.index + from.length);
+    }
+    return out;
+  }
+  // PURE: one display row per correction, carrying whether the doctor has undone it. Exposed for tests.
+  function _drugFixRows(corrections, undone) {
+    var u = undone || {};
+    return (corrections || []).filter(Boolean).map(function (c) {
+      return { from: String(c.from), to: String(c.to), confidence: c.confidence, undone: !!u[c.from + ">" + c.to] };
+    });
+  }
+  // Toggle one correction off (or back on) and re-draft the note from the same transcript, so Undo
+  // actually changes the draft rather than only the label. Doctor-initiated, so failures speak up.
+  function scribeDrugFixUndo(i) {
+    var c = (st.scribeDrugFixes || [])[+i]; if (!c) return;
+    st.scribeDrugFixUndone = st.scribeDrugFixUndone || {};
+    var k = c.from + ">" + c.to;
+    if (st.scribeDrugFixUndone[k]) delete st.scribeDrugFixUndone[k]; else st.scribeDrugFixUndone[k] = true;
+    var src = st.scribeDrugFixSrc || _lastFullTranscript || st.voiceTranscript || "";
+    _lastRefinedTranscript = ""; _lastFullRefined = "";
+    if (src) { _finishPending = true; st.voiceProcessing = true; paint(); doRefine(src); return; }
+    paint();
+  }
+  function drugFixPanel(st) {
+    var rows = _drugFixRows(st.scribeDrugFixes, st.scribeDrugFixUndone);
+    if (!rows.length) return "";
+    return '<section class="oe-ai-panel oe-scx"><h3 class="oe-h3">' + ms("spellcheck") + "Drug names MaiK corrected</h3>" +
+      rows.map(function (r, i) {
+        return '<div class="oe-ai-row"><div class="oe-ai-main"><div class="oe-ai-label">' + esc(r.from) + " " + ms("arrow_forward") + " " + esc(r.to) +
+          (r.undone ? '<span class="oe-rev-badge">' + ms("undo") + "Undone</span>" : "") + "</div>" +
+          '<div class="oe-ai-why">Heard as "' + esc(r.from) + '" in the recording.</div></div>' +
+          '<button class="oe-ai-accept" data-oe-act="scribe-drugfix-undo:' + i + '">' + ms(r.undone ? "redo" : "undo") + (r.undone ? "Redo" : "Undo") + "</button></div>";
+      }).join("") +
+      '<div class="oe-ai-disc">' + ms("info") + "<span>Your recording is unchanged. MaiK used the corrected names to draft this note. Undo re-drafts it without that correction.</span></div></section>";
+  }
+
+  // ---- 2. Dictated treatment to structured medicine rows (scribe-rx.js) --------------------------
+  // ADDITIVE. scribeAcceptOne("rx") still writes its free-text "Rx:" line into the Management plan
+  // exactly as before; these rows are a second, structured read of that same accepted text which the
+  // doctor can hand to the prescription pad. An `unparsed` line is SURFACED, never dropped.
+  function _scribeRxParse(text) {
+    if (!(G.SMD_SCRIBERX && G.SMD_SCRIBERX.parse)) return null;
+    try {
+      return G.SMD_SCRIBERX.parse(text, { parseLine: (G.SMD_RX && G.SMD_RX._parseVoiceRx) || null, drugs: (G.MEDDRUGS && G.MEDDRUGS._list) || [] });
+    } catch (e) { return null; }
+  }
+  // PURE: fold one parse result into what is already staged, de-duplicating on the verbatim line so
+  // re-accepting (or "Accept all") never doubles a medicine. Exposed for tests.
+  function _mergeRxRows(prev, parsed) {
+    var rows = ((prev && prev.rows) || []).slice(), unparsed = ((prev && prev.unparsed) || []).slice();
+    var seen = {}, seenU = {};
+    rows.forEach(function (r) { seen[r.verbatim] = 1; });
+    unparsed.forEach(function (l) { seenU[l] = 1; });
+    ((parsed && parsed.rows) || []).forEach(function (r) { if (r && !seen[r.verbatim]) { seen[r.verbatim] = 1; rows.push(r); } });
+    ((parsed && parsed.unparsed) || []).forEach(function (l) { if (l && !seenU[l]) { seenU[l] = 1; unparsed.push(l); } });
+    return { rows: rows, unparsed: unparsed };
+  }
+  // Stage one accepted treatment line and re-run the safety check over everything staged so far.
+  function stageScribeRx(text) {
+    if (!scribeClinicalOn()) return;
+    var parsed = _scribeRxParse(text); if (!parsed) return;
+    st.scribeRx = _mergeRxRows(st.scribeRx, parsed);
+    var sf = _scribeSafetyCheck(st.scribeRx.rows, _scribeSafetyCtx(st));
+    st.scribeSafety = sf ? { findings: _safetyRows(sf.findings), summary: sf.summary } : null;
+  }
+  // Hand the staged rows to the prescription pad. toRegimen marks a DICTATED dose source:"ai", which
+  // is what makes rx-build flag it unverified - a spoken dose must be read back before signing.
+  function scribeRxToPad() {
+    var rows = (st.scribeRx && st.scribeRx.rows) || [];
+    if (!rows.length) { toast("No structured medicines to send yet."); return; }
+    if (!(G.SMD_RX && G.SMD_RX.open && G.SMD_SCRIBERX && G.SMD_SCRIBERX.toRegimen)) { toast("The prescription pad is not available on this build."); return; }
+    try { G.SMD_RX.open({ regimen: G.SMD_SCRIBERX.toRegimen(rows), topic: "MaiK Scribe" }); } catch (e) { toast("Could not open the prescription pad."); }
+  }
+  function scribeRxPanel(st) {
+    var rx = st.scribeRx; if (!rx || (!(rx.rows || []).length && !(rx.unparsed || []).length)) return "";
+    var rows = (rx.rows || []).map(function (r) {
+      var bits = [r.strength, r.dose, r.freq, r.duration, r.route].filter(Boolean).join(" · ");
+      return '<div class="oe-ai-row"><div class="oe-ai-main"><div class="oe-ai-label">' + esc(r.generic || r.drug) +
+        (r.matched ? "" : '<span class="oe-rev-badge">' + ms("help") + "Not in the drug index</span>") + "</div>" +
+        '<div class="oe-ai-why">' + (bits ? esc(bits) : "No dose, frequency or duration was dictated.") + "</div></div></div>";
+    }).join("");
+    var un = (rx.unparsed || []).length ? '<div class="oe-ai-row"><div class="oe-ai-main"><div class="oe-ai-label">' + ms("warning") +
+      'Could not be read as a medicine</div><div class="oe-ai-why">' + (rx.unparsed || []).map(function (l) { return esc(l); }).join("<br>") +
+      "</div></div></div>" : "";
+    var send = (rx.rows || []).length ? '<button class="oe-ai-acceptall" data-oe-act="scribe-rx-pad">' + ms("prescriptions") + "Send to prescription pad</button>" : "";
+    return '<section class="oe-ai-panel oe-scx-rx"><div class="oe-ai-ghead"><h3 class="oe-h3">' + ms("medication") + "Medicines from your dictation</h3>" + send + "</div>" +
+      rows + un +
+      '<div class="oe-ai-disc">' + ms("info") + "<span>Read back from what you dictated. No dose is filled in for you. Nothing is prescribed until you send these to the prescription pad and sign there.</span></div></section>";
+  }
+
+  // ---- 3. ICD candidates for an accepted diagnosis (scribe-icdsug.js) ----------------------------
+  // Offered, never assigned. Each candidate needs its own tap, which appends "CODE - term" to the
+  // provisional diagnosis the same way the manual ICD search already does. suggest() never rejects.
+  // PURE: candidates to display rows. Exposed for tests.
+  function _icdCandidateRows(list) {
+    return (list || []).filter(function (c) { return c && c.code; }).map(function (c) {
+      return { code: String(c.code), term: String(c.term || ""), score: typeof c.score === "number" ? c.score : null };
+    });
+  }
+  function scribeIcdSuggest(text) {
+    if (!(G.SMD_SCRIBEICD && G.SMD_SCRIBEICD.suggest && G.SMD_ICD && G.SMD_ICD.localSearch)) return;
+    var forPatient = st;
+    try {
+      G.SMD_SCRIBEICD.suggest(text, { search: G.SMD_ICD.localSearch }).then(function (rows) {
+        if (st !== forPatient) return;
+        var out = _icdCandidateRows(rows);
+        if (!out.length) return;                               // nothing found: show nothing, never a guess
+        st.scribeIcd = out; paint();
+      });
+    } catch (e) {}
+  }
+  function scribeIcdAccept(i) {
+    var c = (st.scribeIcd || [])[+i]; if (!c) return;
+    var name = "provisional_diagnosis";
+    st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+    var cur = st.assessVals[name] || "", line = esc2Line(c.code) + " - " + esc2Line(c.term);
+    if (cur.indexOf(line) < 0) st.assessVals[name] = cur ? (cur + (/\n$/.test(cur) ? "" : "\n") + line) : line;
+    st.assessTouched[name] = true;
+    st.scribeIcd = null;
+    putVoiceDom(name); paint();
+    toast("ICD code added: " + c.code);
+  }
+  function scribeIcdPanel(st) {
+    var rows = st.scribeIcd; if (!rows || !rows.length) return "";
+    return '<section class="oe-ai-panel oe-scx-icd"><h3 class="oe-h3">' + ms("tag") + "ICD codes for this diagnosis</h3>" +
+      rows.map(function (c, i) {
+        return '<div class="oe-ai-row"><div class="oe-ai-main"><div class="oe-ai-label">' + esc(c.code) + "</div>" +
+          '<div class="oe-ai-why">' + esc(c.term) + "</div></div>" +
+          '<button class="oe-ai-accept" data-oe-act="scribe-icd:' + i + '">' + ms("add") + "Add</button></div>";
+      }).join("") +
+      '<div class="oe-ai-disc">' + ms("info") + "<span>Suggestions from the offline ICD index. Tap one to add it to the provisional diagnosis; nothing is coded for you.</span></div></section>";
+  }
+
+  // ---- 4. Safety review of the scribed medicines (scribe-safety.js) ------------------------------
+  // Runs the app's OWN engines (SMD_RX._analyzeRegimenSafety + INTERACTIONS.checkInteractions) over the
+  // staged rows the moment they are accepted. `summary` is rendered VERBATIM: it is worded never to
+  // imply the prescription is cleared, so it must not be paraphrased or replaced here.
+  function _scribeSafetyCtx(st) {
+    var v = (st && st.assessVals) || {}, p = (st && st.patient) || {};
+    return {
+      allergies: v.Known_allergies_details || "",
+      age: (p.age != null && p.age !== "") ? p.age : "",     // from the patient record when the caller supplied one
+      sex: p.sex || "",
+      pregnancy: "",                                          // never inferred from an LMP - no rule reads it today
+      renal: v.Renal_yesNo === "Y"
+    };
+  }
+  function _scribeSafetyCheck(rows, ctx) {
+    if (!(G.SMD_SCRIBESAFETY && G.SMD_SCRIBESAFETY.check)) return null;
+    try {
+      return G.SMD_SCRIBESAFETY.check(rows, ctx, {
+        analyzeRegimen: (G.SMD_RX && G.SMD_RX._analyzeRegimenSafety) || null,
+        checkInteractions: (G.INTERACTIONS && G.INTERACTIONS.checkInteractions) || null
+      });
+    } catch (e) { return null; }
+  }
+  // PURE: findings to display rows. Exposed for tests.
+  function _safetyRows(findings) {
+    return (findings || []).filter(Boolean).map(function (f) {
+      return { severity: String(f.severity || "moderate"), drug: String(f.drug || ""), message: String(f.message || "") };
+    });
+  }
+  function safetyPanel(st) {
+    var sf = st.scribeSafety; if (!sf) return "";
+    var body = (sf.findings || []).map(function (f) {
+      return '<div class="oe-ai-row"><div class="oe-ai-main"><div class="oe-ai-label"><span class="oe-sev ' + esc(f.severity) + '">' + esc(f.severity) + "</span>" +
+        esc(f.drug || "This prescription") + "</div>" +
+        '<div class="oe-ai-why">' + esc(f.message) + "</div></div></div>";
+    }).join("");
+    return '<section class="oe-ai-panel oe-scx-safety"><h3 class="oe-h3">' + ms("gpp_maybe") + "Medicine safety check</h3>" + body +
+      '<div class="oe-ai-disc">' + ms("info") + "<span>" + esc(sf.summary) + "</span></div></section>";
+  }
+
+  // ---- 5. Doctor / Patient labelling in the Q&A view (scribe-speaker.js) -------------------------
+  // Replaces the wording-only guess. A turn the module could not tell apart is labelled "unknown" and
+  // is SHOWN as Unknown speaker - never quietly rendered as the doctor - and one tap relabels it.
+  // PURE-ish: label `src`, then fold the doctor's manual corrections back in through the module's own
+  // relabel(). `fixes` = { "<turn index>": "doctor" | "patient" }. Exposed for tests.
+  function _speakerTurns(src, fixes) {
+    if (!(G.SMD_SCRIBESPEAKER && G.SMD_SCRIBESPEAKER.label)) return null;
+    var turns;
+    try { turns = (G.SMD_SCRIBESPEAKER.label(src) || {}).turns || []; } catch (e) { return null; }
+    var f = fixes || {};
+    for (var k in f) {
+      if (!Object.prototype.hasOwnProperty.call(f, k)) continue;
+      var i = +k;
+      if (turns[i] && G.SMD_SCRIBESPEAKER.relabel) turns = G.SMD_SCRIBESPEAKER.relabel(turns, i, f[k]);
+    }
+    return turns;
+  }
+  var SPEAKER_WHO = { doctor: "Doctor", patient: "Patient", unknown: "Unknown speaker" };
+  function speakerQaHtml(turns) {
+    return '<div class="oe-vc-qa">' + turns.map(function (t, i) {
+      var cls = t.speaker === "doctor" ? "dr" : t.speaker === "patient" ? "pt" : "unk";
+      var fix = t.manual ? '<span class="oe-vc-fixed">' + ms("check") + "You set this</span>"
+        : '<span class="oe-vc-fix">' +
+          '<button class="oe-vc-fixb" data-oe-act="scribe-speaker:' + i + ':doctor" aria-label="Mark this turn as the doctor">Doctor</button>' +
+          '<button class="oe-vc-fixb" data-oe-act="scribe-speaker:' + i + ':patient" aria-label="Mark this turn as the patient">Patient</button></span>';
+      return '<div class="oe-vc-turn ' + cls + '"><span class="oe-vc-who">' + (SPEAKER_WHO[t.speaker] || SPEAKER_WHO.unknown) + "</span>" + esc(t.text) + fix + "</div>";
+    }).join("") + '<div class="oe-vc-qa-note">' + ms("info") +
+      "Auto-labelled from the conversation. A turn MaiK could not tell apart is marked Unknown speaker - tap Doctor or Patient to correct it. Never changes an EMR field.</div></div>";
+  }
+  function scribeSpeakerFix(arg) {
+    var p = String(arg).split(":"), i = +p[0], who = p[1];
+    if (who !== "doctor" && who !== "patient") return;
+    st.scribeSpeakerFix = st.scribeSpeakerFix || {};
+    st.scribeSpeakerFix[i] = who;
+    paint();
+  }
+
+  // ---- 6. Specialty templates (scribe-templates.js) ----------------------------------------------
+  // Remembered per doctor (the localStorage key carries the documenting author), so a paediatrician
+  // does not re-pick it every consult. The chosen template's promptLines are sent to the server as
+  // `specialtyPrompt` (functions/api/ai/[[path]].js already reads body.specialtyPrompt); its
+  // requiredFields drive a "still blank" prompt in the review panel. Documentation prompts only - the
+  // registry never prescribes or diagnoses.
+  function _specialtyKey(author) { return "smd_scribe_specialty" + (author ? ":" + String(author).replace(/\s+/g, "_") : ""); }
+  function scribeSpecialtyId() {
+    if (!scribeClinicalOn() || !(G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.get)) return "";
+    try { return (G.localStorage && G.localStorage.getItem(_specialtyKey(st && st.author))) || ""; } catch (e) { return ""; }
+  }
+  function setScribeSpecialty(id) {
+    try { if (G.localStorage) G.localStorage.setItem(_specialtyKey(st && st.author), id || ""); } catch (e) {}
+    paint();
+  }
+  // PURE: the extra prompt block for the extract body, or "" when this specialty adds nothing.
+  function _specialtyPrompt(tpl) {
+    var lines = (tpl && tpl.promptLines) || [];
+    return lines.length ? lines.join("\n") : "";
+  }
+  // PURE: which of a specialty's required fields are still blank. The template's keys are voice-field
+  // keys, mapped through VOICE_MAP to this form's own field names; a key this form cannot save is
+  // skipped rather than reported as missing. Exposed for tests.
+  function _requiredMissing(requiredFields, vals) {
+    vals = vals || {};
+    var out = [];
+    (requiredFields || []).forEach(function (k) {
+      var name = VOICE_MAP[k]; if (!name) return;
+      var v = vals[name];
+      if (v == null || String(v).trim() === "") out.push({ field: name, label: fieldLabel(name) });
+    });
+    return out;
+  }
+  // The picker itself, on the MaiK Scribe panel head. Buttons (not a select) to match the language
+  // toggle beside it; the current choice is the only pressed one.
+  function specialtyPicker() {
+    if (!scribeClinicalOn() || !(G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.list)) return "";
+    var cur = scribeSpecialtyId() || (G.SMD_SCRIBETPL.DEFAULT_ID || "general");
+    var list = G.SMD_SCRIBETPL.list() || [];
+    if (!list.length) return "";
+    return '<div class="oe-vc-spec" role="group" aria-label="Consultation specialty">' + list.map(function (t) {
+      return '<button class="oe-vc-specb' + (t.id === cur ? " on" : "") + '" data-oe-act="scribe-spec:' + esc(t.id) + '" aria-pressed="' + (t.id === cur) + '" title="' + esc(t.description || "") + '">' + esc(t.label) + "</button>";
+    }).join("") + "</div>";
+  }
+  // The review panel's "this specialty expects these" prompt. Never fills anything in.
+  function specialtyMissingHtml(st) {
+    if (!scribeClinicalOn() || !(G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.get)) return "";
+    var tpl = G.SMD_SCRIBETPL.get(scribeSpecialtyId());
+    var miss = _requiredMissing(tpl.requiredFields, st.assessVals);
+    if (!miss.length) return "";
+    return '<div class="oe-ai-row oe-scx-miss"><div class="oe-ai-main"><div class="oe-ai-label">' + ms("help") + esc(tpl.label) + ": still blank</div>" +
+      '<div class="oe-ai-why">' + miss.map(function (m) { return esc(m.label); }).join(", ") + ". MaiK did not hear these - add them if they apply.</div></div></div>";
+  }
+
+  // What doRefine actually SENDS for structuring: the transcript with misheard drug names corrected
+  // (module 1) and the chosen specialty's prompt lines attached (module 6). The transcript the doctor
+  // reads is never touched - only this copy. Flag off, or either module absent, returns the
+  // transcript unchanged with no extra body key, so the request is identical to the pre-wiring one.
+  // Seconds of NEW dictation since the last refine we actually sent. The server meters the scribe by
+  // audio captured, not by how often we call it (functions/_ai_usage.js scribeChargeSec), so this must
+  // be the DELTA: every refine resends the whole growing transcript, and billing that in full would
+  // charge the same minute again on every pass. Stamped only when a call is really sent.
+  var _lastScribeSentAt = 0, _prevScribeSentAt = 0;
+  function scribeSec() {
+    var t = now();
+    var prev = _lastScribeSentAt || st.voiceStartedAt || t;
+    _prevScribeSentAt = _lastScribeSentAt; _lastScribeSentAt = t;
+    var sec = Math.round((t - prev) / 1000);
+    return (sec > 0 && sec < 3600) ? Math.min(sec, 300) : 0;   // the server clamps too; 0 = let it use its floor
+  }
+  // A prepared send that is then ABANDONED (a delta with nothing new to say) must not consume the
+  // meter's clock: the seconds it covered belong to the next call that actually goes out.
+  function _unsendScribeSec() { _lastScribeSentAt = _prevScribeSentAt; }
+
+  function scribeSendPrep(transcript) {
+    var out = { text: transcript, opts: { sec: scribeSec() } };
+    if (!scribeClinicalOn()) return out;
+    if (G.SMD_SCRIBEDRUGFIX && G.SMD_SCRIBEDRUGFIX.correct) {
+      try {
+        var fx = G.SMD_SCRIBEDRUGFIX.correct(transcript, drugFixOpts()) || {};
+        st.scribeDrugFixes = fx.corrections || [];
+        st.scribeDrugFixSrc = transcript;
+        out.text = _drugFixText(transcript, st.scribeDrugFixes, st.scribeDrugFixUndone);
+      } catch (e) { st.scribeDrugFixes = []; }
+    }
+    if (G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.get) {
+      var sp = _specialtyPrompt(G.SMD_SCRIBETPL.get(scribeSpecialtyId()));
+      if (sp) out.opts.specialtyPrompt = sp;        // SMD_AI.extract merges an options OBJECT into the body as-is
+    }
+    return out;
+  }
+
+  // All the clinical panels in one slot, safety first (it is the one a doctor must not scroll past).
+  function scribeClinicalPanels(st) {
+    if (!scribeClinicalOn()) return "";
+    return safetyPanel(st) + scribeRxPanel(st) + scribeIcdPanel(st) + drugFixPanel(st);
+  }
+
+  // ---- Item 15: correction feedback log (localStorage, capped ring buffer, NO transcript/audio/PHI) --
+  // Records only: which scribe-filled field, what the doctor did with it (accepted/edited/rejected),
+  // the dictation language, and when. This is how the owner finds which fields MaiK gets wrong most -
+  // never the words themselves.
+  var SCRIBE_FEEDBACK_KEY = "smd_scribe_feedback_log", SCRIBE_FEEDBACK_CAP = 200;
+  function scribeFeedbackOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_feedback") === "off") return false; } catch (e) {} return true; }
+  // PURE: push one entry into a capped ring buffer, dropping the OLDEST when over cap. Never mutates
+  // `buf`. Exposed for tests.
+  function _feedbackPush(buf, entry, cap) {
+    var out = (buf || []).slice();
+    out.push(entry);
+    cap = cap || 200;
+    if (out.length > cap) out = out.slice(out.length - cap);
+    return out;
+  }
+  function scribeFeedbackRead() {
+    try { var raw = G.localStorage && G.localStorage.getItem(SCRIBE_FEEDBACK_KEY); return raw ? (JSON.parse(raw) || []) : []; } catch (e) { return []; }
+  }
+  function scribeFeedbackWrite(list) {
+    try { if (G.localStorage) G.localStorage.setItem(SCRIBE_FEEDBACK_KEY, JSON.stringify(list)); } catch (e) {}
+  }
+  function logScribeFeedback(field, action) {
+    if (!scribeFeedbackOn()) return;
+    var entry = { field: String(field || ""), action: action, lang: st.voiceLang || "auto", t: now() };
+    scribeFeedbackWrite(_feedbackPush(scribeFeedbackRead(), entry, SCRIBE_FEEDBACK_CAP));
+  }
+
+  // ---- Item 18: recording consent, remembered PER VISIT (not per app, not permanently per patient) --
+  // Store shape: { "<visitKey>": "granted" | "declined" }.
+  // Capped like the feedback ring buffer (FIX 4): one key per visit was never evicted, and every
+  // consent check parses the whole blob. Oldest-inserted keys are dropped first; re-deciding an
+  // existing visit keeps its original position (an eviction heuristic, not an LRU - a doctor who has
+  // seen 200 visits since is not coming back to that one, and the worst case is one extra prompt).
+  var SCRIBE_CONSENT_KEY = "smd_scribe_consent_visits", SCRIBE_CONSENT_CAP = 200;
+  function scribeConsentFlagOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_consent") === "off") return false; } catch (e) {} return true; }
+  // PURE: consent state machine. `store` is a plain {visitKey: "granted"|"declined"} map; returns a
+  // NEW store, never mutates the one it was given. Exposed for tests.
+  function _consentReducer(store, visitKey, action, cap) {
+    store = store || {};
+    if (!visitKey || (action !== "grant" && action !== "decline")) return store;
+    var next = {}, keys = [], k;
+    for (k in store) if (store.hasOwnProperty(k)) { next[k] = store[k]; keys.push(k); }
+    if (!next.hasOwnProperty(visitKey)) keys.push(visitKey);
+    next[visitKey] = action === "grant" ? "granted" : "declined";
+    cap = cap || SCRIBE_CONSENT_CAP;
+    if (keys.length <= cap) return next;
+    var out = {}, keep = keys.slice(keys.length - cap);          // newest `cap` keys, oldest dropped
+    for (var i = 0; i < keep.length; i++) out[keep[i]] = next[keep[i]];
+    return out;
+  }
+  // PURE: "granted" | "declined" | "unknown" (no decision recorded for this visit yet). Exposed for tests.
+  function _consentStatus(store, visitKey) { return (store && visitKey && store[visitKey]) || "unknown"; }
+  function consentStoreRead() { try { var raw = G.localStorage && G.localStorage.getItem(SCRIBE_CONSENT_KEY); return raw ? (JSON.parse(raw) || {}) : {}; } catch (e) { return {}; } }
+  function consentStoreWrite(store) { try { if (G.localStorage) G.localStorage.setItem(SCRIBE_CONSENT_KEY, JSON.stringify(store)); } catch (e) {} }
+  // Keyed by the visit, not the patient or the app: the same GHIS episode/visit never re-asks once
+  // decided; a NEW visit for the same patient (or no visit id at all, e.g. a fresh unsaved profile)
+  // always does.
+  // A personal-clinic patient can have NO episode/visit/ticket id and no MR number at all. That used
+  // to key to "", so setConsent stored nothing and the doctor was asked again on every single start.
+  // Such a consult falls back to one random key per app session: it identifies nothing (no patient
+  // id is invented, nothing identifying is written), it is stable for the session so the prompt comes
+  // once, and it is gone on relaunch. The cap above evicts these like any other key.
+  var _sessionConsentKey = "";
+  function sessionConsentKey() {
+    if (!_sessionConsentKey) _sessionConsentKey = "s:" + Math.random().toString(36).slice(2, 10) + now().toString(36);
+    return _sessionConsentKey;
+  }
+  function visitConsentKey() { return String((st.episodeId || st.visitId || st.ticketId || (st.patient && st.patient.mrn) || "")) || sessionConsentKey(); }
+  function consentStatus() { var k = visitConsentKey(); if (!k) return "unknown"; return _consentStatus(consentStoreRead(), k); }
+  function setConsent(action) { var k = visitConsentKey(); if (!k) return; consentStoreWrite(_consentReducer(consentStoreRead(), k, action)); }
+  // Gate for the FIRST recording of a visit: already granted -> start immediately, no re-ask. Anything
+  // else (unknown OR a prior decline - so the doctor can change their mind) shows the exact wording
+  // asked for, with a clear decline. Declining never touches any other EMR function - it just does not
+  // call onGranted, so startVoice() never runs.
+  function askScribeConsent(onGranted) {
+    if (!scribeConsentFlagOn() || consentStatus() === "granted") { onGranted(); return; }
+    var ok = confirmed("Record this consultation? The audio stays on this phone and is not uploaded.");
+    setConsent(ok ? "grant" : "decline");
+    if (ok) onGranted();
+    else toast("Recording is off for this visit. Tap the mic again any time to turn it on.");
   }
 
   function openProfile(opts) {
@@ -3503,7 +4431,9 @@
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     st = freshState();
-    st.patient = { name: opts.name || "", mrn: opts.patientId || "", displayId: opts.displayId || "" };   // displayId = human hospital id (SMD-XXX-nnn) for no-MRN clinic patients; mrn stays the storage key
+    // age/sex are carried ONLY when the caller actually has them (the scribe safety check reads them);
+    // nothing infers them, so an absent age stays absent rather than becoming a guessed one.
+    st.patient = { name: opts.name || "", mrn: opts.patientId || "", displayId: opts.displayId || "", age: opts.age != null ? opts.age : "", sex: opts.sex || opts.gender || "" };   // displayId = human hospital id (SMD-XXX-nnn) for no-MRN clinic patients; mrn stays the storage key
     st.recordNo = opts.recordNo || "";
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.visitId = opts.visitId || opts.episodeId || "";        // GHIS OPMR visit number — the Getopcard id for the history timeline
@@ -3730,6 +4660,10 @@
   // preview for the open patient. Registered once; guarded (no-op unless a patient profile is open).
   try { if (typeof document !== "undefined") document.addEventListener("smd-oncotree-select", function (e) { try { receiveOncoTreeProtocol(e && e.detail); } catch (err) {} }); } catch (e) {}
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml };
+  // Small standalone accessor for the item-15 correction-feedback log, so a later analysis pass (or a
+  // support/debug screen) can read or wipe it without reaching into OPDEMR internals.
+  G.SMD_SCRIBE_FEEDBACK = { list: scribeFeedbackRead, clear: function () { scribeFeedbackWrite([]); } };
+
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript };
 })();

@@ -19,7 +19,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const VV = require(join(HERE, "..", "voice-vitals.js"));
 const MAP = require(join(HERE, "..", "voice-emr-map.js"));
 const G = require(join(HERE, "..", "voice-scribe-ground.js"));
-import { sanitizeScribeOutput } from "../functions/api/ai/_opd-scribe.js";
+import { sanitizeScribeOutput, verifySources, flagContradictions } from "../functions/api/ai/_opd-scribe.js";
 
 function detFields(transcript, speaker) {
   const recs = VV.extract(transcript);
@@ -100,4 +100,31 @@ test("FIXTURE (code-switch): 'metformin start cheddam' (let's start metformin) -
   assert.equal(sanitized.emrFields.cc, "poor sugar control");
   assert.equal("drug" in sanitized.emrFields, false); assert.equal("dose" in sanitized.emrFields, false);
   assert.equal("drug" in sanitized.suggestions, false); assert.equal("dose" in sanitized.suggestions, false);
+});
+
+// ── Fixture 5: sourced extraction -- grounded vs. a fabricated field with no support in the transcript ──
+test("FIXTURE (English, sources): a real field grounds; a fabricated one is reported ungrounded, not silently dropped", () => {
+  const transcript = "Patient came with fever and cough for three days. No history of similar episodes before.";
+  const llmRaw = {
+    emrFields: { cc: "fever and cough x3 days", allergies: "Sulfa drug allergy with rash" },   // allergies never stated -- fabricated
+    sources: {
+      cc: "Patient came with fever and cough for three days.",
+      allergies: "Patient reports a sulfa allergy with rash"   // fabricated citation to match the fabricated field
+    },
+    suggestions: { ddx: [], investigations: [] }
+  };
+  const sanitized = sanitizeScribeOutput(llmRaw);
+  const { grounded, ungrounded } = verifySources(transcript, sanitized);
+  assert.ok(grounded.includes("cc"));
+  assert.ok(ungrounded.includes("allergies"), "the fabricated field stays in emrFields but is flagged ungrounded for the doctor");
+});
+
+// ── Fixture 6: negation -- a denied symptom in the transcript must not surface as an asserted field ──
+test("FIXTURE (English, negation): 'no fever' in the transcript flags a bad extraction that asserts fever present", () => {
+  const transcript = "Patient denies fever, has had cough for two days.";
+  const badExtraction = sanitizeScribeOutput({ emrFields: { cc: "Fever, cough x2 days" } });
+  const flags = flagContradictions(transcript, badExtraction);
+  assert.ok(flags.some((f) => f.field === "cc" && f.term === "fever"));
+  const goodExtraction = sanitizeScribeOutput({ emrFields: { presentHx: "Denies fever, cough x2 days" } });
+  assert.deepEqual(flagContradictions(transcript, goodExtraction), []);
 });

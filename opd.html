@@ -84,6 +84,21 @@
   .cact .del{padding:9px 12px;color:var(--red);background:var(--red-soft);border:1px solid var(--red-line)}
   /* board toolbar */
   .toolbar{display:flex;gap:10px;align-items:center;margin:16px 0 18px;flex-wrap:wrap}
+  /* The OPD pulse: dense, quiet, and only the tiles worth acting on take the warning colour.
+     Scrolls sideways on a phone rather than wrapping into an unreadable grid. */
+  .pulse{margin:0 0 18px}
+  .pulse:empty{display:none}
+  .p-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px}
+  .p-t{flex:1 0 132px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card)}
+  .p-t.warn{border-color:#dc2626;background:rgba(220,38,38,.06)}
+  .p-l{font:600 11px system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+  .p-v{font:700 24px system-ui,sans-serif;margin-top:4px}
+  .p-v u{text-decoration:none;font:700 13px system-ui,sans-serif;opacity:.65;margin-left:2px}
+  .p-t.warn .p-v{color:#dc2626}
+  .p-v .p-none{font:600 14px system-ui,sans-serif;font-style:normal;opacity:.45}
+  .p-s{font:500 12px system-ui,sans-serif;opacity:.65;margin-top:2px}
+  .p-note{font:500 12px system-ui,sans-serif;opacity:.75;margin-top:8px}
+  .p-warn{font:600 13px system-ui,sans-serif;color:#dc2626;margin-top:8px}
   .toolbar .grow{flex:1;font-size:14px;color:var(--mut)}
   .toolbar .grow b{color:var(--ink);font-size:16px}
   #walk{background:var(--tl);color:#fff;font-weight:700;border-color:var(--tl);box-shadow:0 2px 8px var(--tl-glow)}
@@ -390,7 +405,7 @@
   function loadDash(tries){
     tries=tries||0;
     api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
-      if(r&&r.ok){ st.opd=r; renderNurseStation(r); return; }   // org-scoped board only; NO shared legacy board
+      if(r&&r.ok){ st.opd=r; renderNurseStation(r); if(!st.pulse) loadPulse(); return; }   // org-scoped board only; NO shared legacy board
       if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
       else renderShell('<div class="empty">'+((r&&r.error==="forbidden"||r&&r.error==="not_a_member")?"You are not assigned to this clinic. Ask the owner to add you.":"No queue available yet.")+'</div>');
@@ -402,7 +417,7 @@
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
       if(!r||!r.ok){ renderShell('<div class="empty">'+(r&&r.error==="forbidden"?"You do not have access to this hospital.":"Could not load the board.")+'</div>'); return; }
-      st.board=r.board||[]; renderBoard();
+      st.board=r.board||[]; renderBoard(); if(!st.pulse) loadPulse();
     });
   }
 
@@ -421,7 +436,10 @@
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
-      '</div>'+inner+'</div>';
+      '</div>'+
+      // The OPD's own figures, above the board they summarise. Filled by paintPulse when it arrives.
+      '<section class="pulse" id="opdPulse">'+pulseInner()+'</section>'+
+      inner+'</div>';
     var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
     document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
@@ -432,7 +450,43 @@
     var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
     var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
   }
-  function refresh(){ st.opd?loadDash():loadBoard(); }
+  function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); }
+
+  /* ---- THE OPD PULSE (server: /opd-pulse, figures: functions/_queue_eta.js opdPulse) -------------
+   * The same card the app shows, on the desk that can act on it first. Counts and durations only - it
+   * names nobody, so it is safe on a screen the whole waiting hall can see. A read that fails SAYS so:
+   * an empty strip here would read as a quiet OPD, which is the one thing it must never say by
+   * accident. The preview clinic has no hospital behind it, so it simply does not ask. */
+  function loadPulse(){
+    if(!st.orgId||st.orgId==="demo") return;
+    api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
+    }).catch(function(){ st.pulse={failed:true}; paintPulse(); });
+  }
+  function paintPulse(){
+    var host=document.getElementById("opdPulse"); if(host) host.innerHTML=pulseInner();
+  }
+  function pnum(v,unit){ return v==null?'<i class="p-none">not yet</i>':esc(v)+(unit?'<u>'+unit+'</u>':''); }
+  function pulseInner(){
+    var r=st.pulse; if(!r) return '';
+    if(r.failed) return '<div class="p-warn">Could not read the OPD figures. Do not read this as a quiet clinic.</div>';
+    var p=r.pulse||{},hall=p.waitingNow||{},d2d=p.doorToDoctor||{},desk=p.deskWait||{},doc=p.doctorWait||{};
+    var blame=desk.medianMin==null||doc.medianMin==null?''
+      :desk.medianMin>doc.medianMin*2?'the wait is at the desk'
+      :doc.medianMin>desk.medianMin*2?'the wait is for the doctor':'desk and doctor are even';
+    var tile=function(label,value,sub,warn){
+      return '<div class="p-t'+(warn?' warn':'')+'"><div class="p-l">'+esc(label)+'</div><div class="p-v">'+value+'</div><div class="p-s">'+(sub||'')+'</div></div>';
+    };
+    return '<div class="p-row">'+
+      tile('In the hall',esc(p.waiting||0),hall.longestMin?'longest '+esc(hall.longestMin)+'m':'nobody waiting',hall.over60>0)+
+      tile('Waiting over 1h',esc(hall.over60||0),(hall.over30||0)+' over 30m',(hall.over60||0)>0)+
+      tile('Door to doctor',pnum(d2d.medianMin,'m'),d2d.p90Min==null?'median':'9 in 10 within '+esc(d2d.p90Min)+'m')+
+      tile('Seen',esc(p.completed||0),(p.inConsultation||0)+' in the room')+
+      tile('Did not wait',p.abandonedPct==null?'<i class="p-none">not yet</i>':esc(p.abandonedPct)+'<u>%</u>',esc(p.noShow||0)+' no-show'+((p.noShow||0)===1?'':'s'),(p.abandonedPct||0)>=10)+
+      (p.held?tile('Awaiting result',esc(p.held),'sent for a test or booked back'):'')+
+      '</div>'+(blame?'<div class="p-note">Desk '+pnum(desk.medianMin,'m')+', doctor '+pnum(doc.medianMin,'m')+' · '+esc(blame)+'</div>':'')+
+      (r.unread&&r.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>':'');
+  }
   /* D13: RECALL NO-SHOWS. Every queue in this hospital today; a patient marked no-show in the last 4 hours
    * (and before the session ended) goes back to waiting with the SAME token, at the head of their priority
    * band. A reason is required and recorded with who and when. A failed load is said, never "nobody". */
@@ -1037,6 +1091,11 @@
       var rows=(r&&r.members)||[];
       el.innerHTML=rows.length? rows.map(function(m){
         var login=(m.hasPin?"PIN":"")+(m.email?((m.hasPin?" + ":"")+"email"):""); if(!login) login="no login set";
+        /* Why they cannot sign in, where the owner can fix it: five wrong PINs lock the account for
+           fifteen minutes, and the sign-in page will not say so (it must not confirm which login names
+           exist), so the owner otherwise hears "wrong PIN" for a PIN that is right. */
+        var lockMin=m.lockedUntil&&m.lockedUntil>Date.now()?Math.ceil((m.lockedUntil-Date.now())/60000):0;
+        if(lockMin) login="locked "+lockMin+"m (too many tries)";
         return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(m.identity)+'</b>'+(m.active?"":' <span class="t" style="color:var(--red)">(disabled)</span>')+'<div class="t">'+esc(m.role)+' · '+esc(login)+'</div></div>'+
           '<button class="cancel" data-tog="'+esc(m.identity)+'" data-act="'+(m.active?"disable":"restore")+'" style="padding:6px 10px">'+(m.active?"Disable":"Restore")+'</button></div>';
       }).join("") : '<div class="empty">No staff yet. Invite one below.</div>';
