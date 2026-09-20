@@ -24,6 +24,8 @@ const normSrc = grab(/function maikNorm\(q\)\s*\{[\s\S]*?\n {4}\}/, "maikNorm");
 const fuSrc = grab(/function maikResolveFollowup\(q\)\s*\{[\s\S]*?\n {4}\}/, "maikResolveFollowup");
 const deslangVar = grab(/var _MAIK_DESLANG = \{[^}]*\};/, "_MAIK_DESLANG");
 const deslangFn = grab(/function maikDeslang\(s\)\s*\{[\s\S]*?\n {4}\}/, "maikDeslang");
+// GENERIC_FU moved out of maikResolveFollowup (2026-09-20) so the thread-continuity classifier can share it.
+const genericSrc = grab(/var GENERIC_FU = \/\^\([^\n]*\$\/;/, "GENERIC_FU");
 
 let _maikTopic = { topic: "Clostridioides difficile infection", lastDrug: "vancomycin", ts: Date.now() };
 const resolve = new Function("_getTopic", `
@@ -31,6 +33,7 @@ const resolve = new Function("_getTopic", `
   ${normSrc}
   ${deslangVar}
   ${deslangFn}
+  ${genericSrc}
   ${fuSrc}
   return maikResolveFollowup;
 `)(() => _maikTopic);

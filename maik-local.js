@@ -88,7 +88,7 @@
    * instruction a 4B applies out of context is worse than no instruction: it manufactures a
    * confident number to satisfy the format. So the rule now names the condition first.
    */
-  var SYSTEM =
+  var SYSTEM_CORE =
     "You are MaiK, clinical decision support for doctors. Answer in markdown.\n" +
     "Answer medical questions only. For anything else reply: \"I can only help with medical and " +
     "clinical questions.\"\n" +
@@ -99,9 +99,17 @@
     "write about that alone.\n" +
     "When asked for a dose, give the standard flat adult dose with route and frequency, like " +
     "\"2 g IV over 20 min\". Use mg/kg only when adults are genuinely dosed by weight.\n" +
-    "Name the first-line regimen most guidelines agree on. Where unsure of a figure, give the range " +
-    "and say it varies.\n" +
-    "End with one line: \"Verify against local protocol.\"";
+    "";
+  /* The regimen rule is for TREATMENT questions only. Applied to every question it turned "IRIS in
+   * HIV" into the first-line ART regimen for HIV with IRIS never mentioned (owner transcript,
+   * 2026-09-20): a small model satisfies the instruction it can see. A definition, workup or
+   * mechanism question now gets the opposite instruction. TREAT_Q is the same predicate the
+   * retrieval rerank uses, so "what the question is about" is decided once. */
+  var SYSTEM_TREAT = "Name the first-line regimen most guidelines agree on. Where unsure of a figure, give the range and say it varies.\n";
+  var SYSTEM_ASK = "Answer the question that was asked. Do not switch to treatment or drug regimens unless the question asks for them.\n";
+  var SYSTEM_END = "End with one line: \"Verify against local protocol.\"";
+  var SYSTEM = SYSTEM_CORE + SYSTEM_TREAT + SYSTEM_END;
+  function systemFor(question) { return SYSTEM_CORE + (TREAT_Q.test(String(question || "")) ? SYSTEM_TREAT : SYSTEM_ASK) + SYSTEM_END; }
 
   /* A PURE greeting: the whole message is hello-ish with no clinical substance. Deliberately TIGHT -
    * "hi rx of uti" must NOT match. test/maik-greeting-route.test.mjs guards exactly that: a greeting
@@ -404,7 +412,9 @@
     if (!lines.length) return "";
     var keep = [lines[0]];
     for (var i = 1; i < lines.length; i++) if (/^([-*•]|\d+[.)])\s/.test(lines[i]) || /\d/.test(lines[i])) keep.push(lines[i].replace(/^([-*•]|\d+[.)])\s+/, ""));
-    return clip(keep.join(" | "), cap || CARRY_CAP);
+    // Joined with "; ", not " | ": the model imitates the history it is shown, and the second Scrub
+    // Typhus answer in the owner's transcript (2026-09-20) came back as one pipe-separated line.
+    return clip(keep.map(function (x) { return x.replace(/[.;]\s*$/, ""); }).join("; "), cap || CARRY_CAP);
   }
 
   function buildPrompt(pkg, packId) {
@@ -622,6 +632,19 @@
   var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
   var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
   var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
+  /** A generation that stopped on its token budget ends mid-sentence. Prose that trails off is cut
+   *  back to the last sentence end (kept only if that keeps most of the answer, else an ellipsis);
+   *  a list item or heading as the last line is left alone, they legitimately end without a stop. */
+  function finishCut(text) {
+    var t = String(text == null ? "" : text).replace(/\s+$/, "");
+    if (!t) return { text: t, truncated: false };
+    var lines = t.split("\n"), last = lines[lines.length - 1].trim();
+    if (/^([-*\u2022]|\d+[.)])\s/.test(last) || /^#{1,4}\s/.test(last) || /^\|/.test(last)) return { text: t, truncated: false };
+    if (/[.!?:;)\]"\u201d\u2019']$/.test(last) || last.split(/\s+/).length < 6) return { text: t, truncated: false };
+    var idx = Math.max(t.lastIndexOf(". "), t.lastIndexOf(".\n"), t.lastIndexOf("!\n"), t.lastIndexOf("?\n"));
+    if (idx > t.length * 0.6) return { text: t.slice(0, idx + 1), truncated: true };
+    return { text: t + "\u2026", truncated: true };
+  }
   function cleanPassage(s) { return String(s || "").replace(/[■□▪▫●○◆◇◼◻•·]+/g, " ").replace(/\s+/g, " ").trim(); }
   function anchorsFor(bk, RAG, question) {
     // No tokenizer available (an older RAG build or a test stub) means no anchoring, never a
@@ -934,7 +957,7 @@
                 // A pack can carry its own system prompt (registry-driven, like noThink).
                 // MaiK Lite was TRAINED with its prompt, so the shared one would be a
                 // distribution shift - and its dose example was parroted as a real dose.
-                : !images.length ? (pk.system || SYSTEM)
+                : !images.length ? (pk.system || systemFor(pkg && pkg.question))
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
           nPredict: pk.nPredict || 512,
@@ -961,6 +984,9 @@
       }).then(function (r) {
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
+        // nPredict ran out mid-word ("Intralesional vinblas" with the verify line glued on, owner
+        // transcript 2026-09-20). Finish at the last complete sentence and flag it in the result.
+        var cut = finishCut(text); text = cut.text;
         // A leaked fine-tuning template is not an answer. MAiK Cortex (MedMO-4B) answered "Hi" with
         // "##Instruction: If you are a doctor... Question: ... ##Options:" (owner transcript,
         // 2026-09-19): the model continued its SFT format instead of replying. Treat it as empty so the
@@ -1052,6 +1078,7 @@
         if (!quotedPassage) text = emphasize(text);
         return {
           text: text,
+          truncated: !!(cut && cut.truncated),   // hit the output budget; finished at the last full sentence
           // sources stays [] regardless: the citation UI's own contract (SMD_MaiK.sourceList)
           // recomputes from pkg.grounding/retrieved/treatment, which this engine does not
           // populate. A plain "Source: ..." line is appended to the text itself above instead,
@@ -2208,7 +2235,7 @@
   }
 
   var API = {
-    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
+    SYSTEM: SYSTEM, systemFor: systemFor, finishCut: finishCut, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
     // local task layer (2026-09-11)
     TUTOR_SYS: TUTOR_SYS, SURG_SYS: SURG_SYS, MODE_SYS: MODE_SYS,
     estTokens: estTokens, splitWindows: splitWindows, windowBudget: windowBudget, numbersIn: numbersIn, canonNum: canonNum, dropUnsupportedNumbers: dropUnsupportedNumbers, stripIndic: stripIndic, mergeText: mergeText,
