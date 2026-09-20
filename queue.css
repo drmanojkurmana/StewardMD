@@ -295,3 +295,26 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-kpi:nth-child(2) { animation-delay: .05s; }
 #smdQueue .q-kpi:nth-child(3) { animation-delay: .1s; }
 #smdQueue .q-kpi:nth-child(4) { animation-delay: .15s; }
+
+/* ---- THE OPD PULSE (queue.js pulseCard) ---------------------------------------------------------
+ * The hospital's whole outpatient day under the doctor's own KPI strip, and on the front desk. Small,
+ * dense and quiet on purpose: it sits under the numbers somebody is already reading, and only the
+ * tiles that need acting on (an hour in the hall, a tenth of the day walking out) take the warn
+ * colour. Scrolls sideways on a phone rather than wrapping into an unreadable grid. */
+#smdQueue .q-pulse { margin: 16px 0 0; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-lowest); padding: 12px 14px; }
+#smdQueue .q-pulse-h { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+#smdQueue .q-pulse-h b { font: 600 12px var(--q-sans); letter-spacing: .05em; text-transform: uppercase; color: var(--on-surface-variant); }
+#smdQueue .q-pulse-h .q-ic { margin-left: auto; }
+#smdQueue .q-pulse-warn-i .material-symbols-outlined { font-size: 18px; color: var(--error); }
+#smdQueue .q-pulse-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 2px; }
+#smdQueue .q-pulse-t { flex: 1 0 128px; border: 1px solid var(--outline-variant); border-radius: 10px; padding: 10px 12px; background: var(--surface); }
+#smdQueue .q-pulse-t.warn { border-color: color-mix(in srgb, var(--error) 45%, transparent); background: color-mix(in srgb, var(--error) 6%, transparent); }
+#smdQueue .q-pulse-l { display: flex; align-items: center; gap: 5px; font: 600 11px var(--q-sans); letter-spacing: .04em; text-transform: uppercase; color: var(--on-surface-variant); }
+#smdQueue .q-pulse-l .material-symbols-outlined { font-size: 15px; color: var(--secondary); }
+#smdQueue .q-pulse-v { font: 700 26px var(--q-sans); letter-spacing: -.02em; color: var(--on-surface); margin-top: 4px; }
+#smdQueue .q-pulse-v u { text-decoration: none; font: 700 14px var(--q-sans); color: var(--secondary); margin-left: 2px; }
+#smdQueue .q-pulse-t.warn .q-pulse-v { color: var(--error); }
+#smdQueue .q-pulse-s { font: 500 12px var(--q-sans); color: var(--on-surface-variant); margin-top: 2px; }
+#smdQueue .q-pulse-note { display: flex; align-items: center; gap: 6px; margin-top: 10px; font: 500 12px var(--q-sans); color: var(--on-surface-variant); }
+#smdQueue .q-pulse-note .material-symbols-outlined { font-size: 16px; color: var(--secondary); }
+#smdQueue .q-pulse-warn { display: flex; align-items: center; gap: 6px; font: 600 13px var(--q-sans); color: var(--error); }

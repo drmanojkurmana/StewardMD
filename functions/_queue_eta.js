@@ -205,3 +205,73 @@ export function aggregate(tickets, nowMs) {
     peakHours: peak
   };
 }
+
+/* ---- THE OPD PULSE: what the desk and the owner act on, hospital-wide -------------------------------
+ *
+ * aggregate() above answers "how did that doctor's session go". This answers the question a hospital
+ * actually asks at 11am: IS THE OPD RUNNING, AND IF NOT, WHERE IS IT STUCK. Three deliberate choices:
+ *
+ * MEDIAN AND P90, NEVER THE AVERAGE. One patient waiting three hours moves an average by a few minutes
+ * and then hides behind it. p90 is the patient who is about to complain at the desk, and it is the
+ * number that changes behaviour.
+ *
+ * THE WAIT IS SPLIT IN TWO. Door to called is the DESK (registration, paperwork, the queue itself);
+ * called to seen is the DOCTOR (running late, long consults). One combined number blames everybody and
+ * tells nobody what to fix; these two say which half of the building to walk to.
+ *
+ * WAITING NOW IS MEASURED LIVE, not from finished visits. Everything else here is history; the only
+ * figure that can still be acted on today is how long the people sitting in the hall have been there,
+ * which is why longestMin and the over-30/over-60 counts are computed against nowMs.
+ */
+function percentileMin(list, p) {
+  if (!list.length) return null;
+  const s = list.slice().sort((a, b) => a - b);
+  const i = Math.min(s.length - 1, Math.max(0, Math.ceil((p / 100) * s.length) - 1));
+  return Math.round(s[i] / 60000);
+}
+export function opdPulse(tickets, nowMs) {
+  const rows = tickets || [], now = Number.isFinite(nowMs) ? nowMs : Date.now();
+  const WAIT = ["registered", "waiting", "called"];
+  const doorToSeen = [], doorToCalled = [], calledToSeen = [], consults = [], waitingNow = [];
+  let waiting = 0, inConsultation = 0, completed = 0, noShow = 0, cancelled = 0, recalls = 0, held = 0;
+
+  for (const t of rows) {
+    if (!t) continue;
+    if (t.status === "completed") completed++;
+    else if (t.status === "no_show") noShow++;
+    else if (t.status === "cancelled") cancelled++;
+    else if (t.status === "in_consultation") inConsultation++;
+    else if (WAIT.indexOf(t.status) > -1) waiting++;
+    // Waiting on a result, or booked back: still the hospital's open work, counted apart from the hall.
+    else if (t.status === "investigation" || t.status === "followup") held++;
+    recalls += Number(t.recallCount) || 0;
+
+    if (t.registeredAt && t.consultStartAt) doorToSeen.push(t.consultStartAt - t.registeredAt);
+    if (t.registeredAt && t.calledAt) doorToCalled.push(t.calledAt - t.registeredAt);
+    if (t.calledAt && t.consultStartAt && t.consultStartAt >= t.calledAt) calledToSeen.push(t.consultStartAt - t.calledAt);
+    if (t.consultStartAt && t.consultEndAt) consults.push(t.consultEndAt - t.consultStartAt);
+    if (WAIT.indexOf(t.status) > -1 && t.registeredAt) waitingNow.push(now - t.registeredAt);
+  }
+
+  const finished = completed + noShow;
+  return {
+    at: now,
+    registered: rows.length,
+    waiting, inConsultation, completed, noShow, cancelled, held, recalls,
+    seen: completed + inConsultation,
+    // History: how long it took the people already seen.
+    doorToDoctor: { medianMin: percentileMin(doorToSeen, 50), p90Min: percentileMin(doorToSeen, 90), n: doorToSeen.length },
+    deskWait: { medianMin: percentileMin(doorToCalled, 50), p90Min: percentileMin(doorToCalled, 90), n: doorToCalled.length },
+    doctorWait: { medianMin: percentileMin(calledToSeen, 50), p90Min: percentileMin(calledToSeen, 90), n: calledToSeen.length },
+    consult: { medianMin: percentileMin(consults, 50), p90Min: percentileMin(consults, 90), n: consults.length },
+    // Live: the hall as it stands right now, the half somebody can still do something about.
+    waitingNow: {
+      longestMin: waitingNow.length ? Math.round(Math.max.apply(null, waitingNow) / 60000) : 0,
+      medianMin: percentileMin(waitingNow, 50),
+      over30: waitingNow.filter((ms) => ms >= 30 * 60000).length,
+      over60: waitingNow.filter((ms) => ms >= 60 * 60000).length,
+    },
+    // null, not 0: nobody has finished yet is not the same as nobody abandoned.
+    abandonedPct: finished ? Math.round((noShow / finished) * 100) : null,
+  };
+}

@@ -348,7 +348,13 @@ export async function getMembership(env, orgId, identity) {
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
   const m = M.membership(withId(id, f));
-  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, alertMobile: m.alertMobile, displayName: m.displayName, employeeId: m.employeeId, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+  /* lockedUntil answers the owner's actual question when a nurse says "it says my PIN is wrong": five
+   * bad attempts lock the account for fifteen minutes, and until this was returned the staff list
+   * looked identical whether the PIN was unset, wrong, or simply locked. The sign-in page still says
+   * nothing (it must not confirm which login names exist); this list is staff.admin only, so the
+   * person who can fix it can see it. */
+  const lockedUntil = Number((f && f.pinLockedUntil) || 0) || 0;
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, alertMobile: m.alertMobile, displayName: m.displayName, employeeId: m.employeeId, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), lockedUntil, createdAt: m.createdAt };
 }
 /* EVERY member, in pages of 300 (includes disabled so admin can restore; active flag shown). One query of 300 used to be
  * the whole answer, so a staff member beyond the first 300 was not named on a chart: an Access sign-in id ("cfa:" +
