@@ -201,12 +201,14 @@ const { L } = load();
   ok("answer is tagged engine=local", r.engine === "local");
   ok("answer reports the MAiK tier label", r.model === "MAiK Lite");
   ok("answer reports timing", r.ms === 1234);
-  ok("onDelta called once per token", seen.length === 3);
+  // Coalesced painting (perf plan #1, 2026-09-21): the first token paints at once, later tokens are
+  // batched to ~15 repaints a second, and the final text is always painted when generation ends.
+  ok("onDelta paints the first token at once and the full text at the end", seen.length >= 2 && seen.length <= 3);
   // Right-trimmed, because every delta goes through stripReasoning() on the way to the typewriter -
   // the trade for never rendering a leaked reasoning preamble on screen. The trailing space arrives
   // with the next word, so the render is unaffected.
   ok("onDelta receives ACCUMULATED text, not deltas",
-     seen[0] === "Hel" && seen[1] === "Hello" && seen[2] === "Hello world");
+     seen[0] === "Hel" && seen[seen.length - 1] === "Hello world");
   ok("each onDelta value extends the previous", seen.every((v, i) => i === 0 || v.startsWith(seen[i - 1])));
   ok("listener removed after the answer (no leak across questions)", calls.removed === 1);
   ok("greedy by default (reproducible answers)", calls.generate[0].temperature === 0);
@@ -220,6 +222,11 @@ const { L } = load();
   // the model was printing. Do not let it creep further without measuring.
   ok("system prompt kept terse (it is prefill on the critical path)", calls.generate[0].system.length < 900);
   ok("model loaded with the clamped context", calls.load[0].nCtx === 4096);
+  // Perf plan 2026-09-21: the load asks for a q8_0 KV cache with flash attention (per-pack opt-out) and
+  // passes the draft path only when the draft is on disk (none in this harness).
+  ok("load asks for q8 KV + flash attention by default", calls.load[0].kvQ8 === true && calls.load[0].flashAttn === true);
+  ok("no draft on disk: draftPath is empty", calls.load[0].draftPath === "");
+  ok("history precedes the evidence in the prompt (KV prefix reuse)", /parts\.history \+ "Reference material from the StewardMD Knowledge Base:/.test(SRC));
 }
 
 // ── the model is loaded once, not per question ──
