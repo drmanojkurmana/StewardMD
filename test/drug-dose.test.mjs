@@ -94,3 +94,48 @@ test("FAILS OPEN: unknown molecule, or a record with no dose text, returns null 
   assert.equal(await D.answer("treatment of pneumonia", deps), null);
   assert.equal(await D.answer("dose of ondansetron", { MEDAPI: null }), null, "no database -> model answers");
 });
+
+test("TIRZEPATIDE & STRENGTH VARIANTS: intent resolves and on-device formulary matches parenthetical strengths", () => {
+  const it = D.intent("dose of tirzepatide");
+  assert.equal(it.name, "tirzepatide");
+  assert.equal(it.section, "adult");
+  assert.equal(D.base("Tirzepatide (5mg)"), "Tirzepatide");
+  assert.equal(D.base("Tirzepatide (15mg/0.6ml)"), "Tirzepatide");
+
+  const fs = require("node:fs");
+  const vm = require("node:vm");
+  const ctx = { window: {}, document: { addEventListener: () => {}, createElement: () => ({ style: {}, classList: { add: ()=>{}, remove: ()=>{} }, querySelector: ()=>null, appendChild: ()=>{} }), body: { classList: { add: ()=>{}, remove: ()=>{} }, appendChild: ()=>{} }, head: { appendChild: ()=>{} } } };
+  vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(new URL("../drugs.js", import.meta.url), "utf8"), ctx);
+  const M = ctx.window.MEDDRUGS;
+  const d = M.findByName("Tirzepatide (5mg)");
+  assert.ok(d, "Tirzepatide (5mg) resolves to the base Tirzepatide record");
+  assert.equal(d.generic, "Tirzepatide");
+  assert.equal(d.cls, "Dual GIP/GLP-1 receptor agonist");
+  assert.match(d.dose, /2\.5 mg SC once weekly/);
+});
+
+test("VACCINE RESOLUTION: Rabies Vaccine and Tetanus Toxoid resolve and match on-device monographs", () => {
+  const fs = require("node:fs");
+  const vm = require("node:vm");
+  const ctx = { window: {}, document: { addEventListener: () => {}, createElement: () => ({ style: {}, classList: { add: ()=>{}, remove: ()=>{} }, querySelector: ()=>null, appendChild: ()=>{} }), body: { classList: { add: ()=>{}, remove: ()=>{} }, appendChild: ()=>{} }, head: { appendChild: ()=>{} } } };
+  vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(new URL("../drugs.js", import.meta.url), "utf8"), ctx);
+  const M = ctx.window.MEDDRUGS;
+
+  const r = M.findByName("Rabies Vaccine");
+  assert.ok(r, "Rabies Vaccine exists in formulary");
+  assert.equal(r.generic, "Rabies Vaccine");
+  assert.match(r.dose, /Days 0, 3, 7, 14, 28/);
+
+  const tt = M.findByName("Tetanus Toxoid");
+  assert.ok(tt, "Tetanus Toxoid exists in formulary");
+  assert.equal(tt.generic, "Tetanus Toxoid");
+
+  // Check gold monograph exists and is valid JSON
+  const goldRabies = JSON.parse(fs.readFileSync(new URL("../worker/data/gold/Rabies Vaccine.json", import.meta.url), "utf8"));
+  assert.equal(goldRabies.generic, "Rabies Vaccine (Human)");
+  assert.ok(goldRabies.quick.length > 5);
+  assert.ok(goldRabies.dosage.length >= 3);
+});
+

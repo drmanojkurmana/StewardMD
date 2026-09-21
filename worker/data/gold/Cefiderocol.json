@@ -1,0 +1,95 @@
+{
+  "generic": "Cefiderocol",
+  "cls": "Siderophore cephalosporin antibacterial",
+  "pharm": "Siderophore cephalosporin; Trojan-horse iron-transport uptake plus PBP-3 binding (cell-wall synthesis inhibition)",
+  "tags": ["cephalosporin", "siderophore", "Gram-negative", "CRE", "CRAB", "Pseudomonas", "beta-lactam", "parenteral", "reserve"],
+  "quick": [
+    ["Adult dose", "2 g IV every 8 hours infused over 3 hours"],
+    ["Meal", "Parenteral; not affected by food"],
+    ["Pregnancy", "Insufficient human data; use only if clearly needed"],
+    ["Lactation", "Unknown excretion; weigh benefit vs risk"],
+    ["Renal", "Dose adjust by creatinine clearance (incl. augmented clearance)"],
+    ["Hepatic", "No adjustment expected"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Renal function, hypersensitivity, C. difficile, iron studies if indicated"]
+  ],
+  "summary": "Cefiderocol is a parenteral siderophore cephalosporin reserved for carbapenem-resistant Gram-negative infections, including CRE, carbapenem-resistant Acinetobacter baumannii (CRAB) and difficult-to-treat Pseudomonas aeruginosa. It enters bacteria via iron-transport systems (Trojan horse) and inhibits cell-wall synthesis. The usual adult dose is 2 g IV every 8 hours as a 3-hour infusion, adjusted for renal function.",
+  "indications": [
+    "Complicated urinary tract infections (cUTI), including pyelonephritis, caused by susceptible Gram-negative organisms",
+    "Hospital-acquired bacterial pneumonia and ventilator-associated bacterial pneumonia (HAP/VAP) caused by susceptible Gram-negative organisms",
+    "Infections caused by carbapenem-resistant Gram-negative bacteria (CRE, CRAB, difficult-to-treat P. aeruginosa) with limited treatment options"
+  ],
+  "dosage": [
+    {"c": "cUTI / HAP-VAP / carbapenem-resistant Gram-negative infection", "r": "Standard", "d": "2 g IV every 8 hours infused over 3 hours", "t": "Every 8 h", "n": "7-14 days per indication/response"},
+    {"c": "Augmented renal clearance (CrCl >= 120 mL/min)", "r": "Adjusted", "d": "2 g IV every 6 hours infused over 3 hours", "t": "Every 6 h", "n": "Higher clearance needs shorter interval"},
+    {"c": "Mild impairment (CrCl 60-119 mL/min)", "r": "Adjusted", "d": "2 g IV every 8 hours infused over 3 hours", "t": "Every 8 h", "n": "Standard regimen"},
+    {"c": "Moderate impairment (CrCl 30-59 mL/min)", "r": "Adjusted", "d": "1.5 g IV every 8 hours infused over 3 hours", "t": "Every 8 h", "n": "Reduce dose, keep interval"},
+    {"c": "Severe impairment (CrCl 15-29 mL/min)", "r": "Adjusted", "d": "1 g IV every 8 hours infused over 3 hours", "t": "Every 8 h", "n": "Reduce dose, keep interval"},
+    {"c": "End-stage renal disease (CrCl < 15 mL/min, with or without HD)", "r": "Adjusted", "d": "0.75 g IV every 12 hours infused over 3 hours", "t": "Every 12 h", "n": "Give at the earliest suitable time after HD on dialysis days"},
+    {"c": "Continuous renal replacement therapy (CRRT)", "r": "Adjusted", "d": "Dose by effluent flow rate per label table", "t": "Per effluent rate", "n": "Higher effluent rates need higher/frequent dosing"}
+  ],
+  "admin": [
+    "Reconstitute and dilute per label, then administer by IV infusion over 3 hours; the 3-hour infusion is part of the approved regimen",
+    "Adjust dose and interval by creatinine clearance before the first maintenance dose, including augmented renal clearance",
+    "Obtain cultures and susceptibility before starting; reserve for documented or highly suspected carbapenem-resistant Gram-negative infection",
+    "Do not mix with other drugs in the same infusion line unless compatibility is established; flush lines between drugs",
+    "Use prepared solutions promptly; observe storage and beyond-use guidance"
+  ],
+  "moa": "Cefiderocol is a bactericidal siderophore cephalosporin that chelates ferric iron and enters Gram-negative bacteria through iron-transport channels (Trojan-horse uptake), concentrating in the periplasmic space. It then binds penicillin-binding protein 3 (PBP-3) and inhibits peptidoglycan cell-wall synthesis, causing cell lysis. The siderophore entry plus stability against many beta-lactamases (including KPC, OXA-48-like, NDM and other metallo-enzymes) gives activity against carbapenem-resistant Enterobacterales, Acinetobacter baumannii and Pseudomonas aeruginosa.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to cefiderocol or other cephalosporins"],
+    "relative": ["History of immediate-type penicillin or carbapenem allergy (cross-reactivity risk)", "History of antibiotic-associated colitis", "Severe renal impairment without dose adjustment"],
+    "monitor": ["Concomitant nephrotoxic drugs", "Prolonged therapy (superinfection/resistance)", "Patients with seizure risk or CNS disorders"]
+  },
+  "preg": "There are no adequate well-controlled studies in pregnancy. Animal studies showed no direct fetal harm at clinically relevant exposures. Use during pregnancy only if clearly needed and the benefit outweighs the risk.",
+  "lact": "It is unknown whether cefiderocol is excreted in human milk. Consider the developmental and health benefits of breastfeeding alongside the mother's clinical need and any potential risk to the infant.",
+  "renal": "Cefiderocol is eliminated primarily by the kidneys, so the dose must be adjusted by creatinine clearance. Standard 2 g q8h (3-hour infusion) applies at CrCl 60-119 mL/min; give 2 g q6h if CrCl >= 120 mL/min (augmented clearance), 1.5 g q8h at CrCl 30-59, 1 g q8h at CrCl 15-29, and 0.75 g q12h at CrCl < 15 mL/min (with or without hemodialysis). On hemodialysis days give the dose after dialysis. For CRRT, dose by effluent flow rate per the label table.",
+  "hepatic": "No dosage adjustment is expected in hepatic impairment; cefiderocol is eliminated renally as largely unchanged drug.",
+  "interactions": {
+    "major": ["No major contraindicated drug interactions established"],
+    "moderate": ["Nephrotoxic drugs (aminoglycosides, potent diuretics) - additive renal risk; monitor renal function", "Iron preparations - theoretical interaction with iron-dependent uptake; clinical significance unclear"],
+    "minor": ["Live typhoid/BCG vaccines - antibacterials may reduce efficacy", "Oral anticoagulants - cephalosporins may rarely prolong prothrombin time"],
+    "food": "Not applicable; administered parenterally.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "May cause false-positive urine glucose with copper-reduction methods and a positive direct Coombs test."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Vomiting", "Infusion-site reactions", "Headache", "Hepatic enzyme elevation", "Hypokalemia"],
+    "serious": ["Clostridioides difficile-associated diarrhea", "Serious hypersensitivity/anaphylaxis", "Seizure/neurotoxicity (class risk, especially with renal impairment)", "Increased all-cause mortality signal vs best available therapy in CREDIBLE-CR (carbapenem-resistant infections)"],
+    "rare": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "Blood dyscrasias", "Interstitial nephritis"],
+    "emergency": ["Anaphylaxis / severe angioedema", "Severe C. difficile colitis", "Seizure"]
+  },
+  "monitoring": [
+    "Renal function at baseline and during therapy; re-adjust dose as CrCl changes",
+    "Signs of hypersensitivity, particularly in beta-lactam-allergic patients",
+    "Complete blood count, electrolytes and liver enzymes on prolonged therapy",
+    "Neurologic status in renal impairment; evaluate persistent diarrhea for C. difficile",
+    "Clinical response and susceptibilities; de-escalate when a narrower agent applies"
+  ],
+  "counsel": [
+    "Given as a 3-hour IV infusion in a healthcare setting on a strict every-8-hour schedule",
+    "Report rash, hives, swelling or difficulty breathing immediately",
+    "Tell staff about any penicillin, cephalosporin or carbapenem allergy",
+    "Report severe or persistent diarrhea during or after treatment",
+    "Complete the full course of therapy"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal activity during the 3-hour infusion"],
+    ["Peak", "End of the 3-hour IV infusion"],
+    ["Half-life", "~2-3 hours (prolonged in renal impairment)"],
+    ["Duration", "Dosing every 6-12 hours by renal function maintains levels"],
+    ["Storage", "Store vials per label; use reconstituted and diluted solutions within labeled beyond-use time"]
+  ],
+  "pearls": [
+    "Reserve agent: restrict to documented or highly suspected carbapenem-resistant Gram-negative infection with stewardship oversight",
+    "The 3-hour infusion and renal-adjusted interval are part of efficacy; augmented clearance (CrCl >= 120) needs q6h dosing",
+    "Covers KPC, OXA-48-like and metallo-beta-lactamases (NDM, VIM, IMP) that defeat most beta-lactams",
+    "Note the CREDIBLE-CR mortality signal in carbapenem-resistant infections; weigh benefit vs risk and monitor closely"
+  ],
+  "missed": "For scheduled inpatient dosing, give the missed dose as soon as possible and adjust the schedule so the interval to the next dose matches the renal-adjusted interval; do not give two doses together. Maintain the 3-hour infusion for each dose.",
+  "overdose": "No specific antidote. Overdose, particularly in renal impairment, may cause neurologic sequelae including encephalopathy and seizures. Manage supportively; cefiderocol is removed by hemodialysis, which can lower serum levels.",
+  "refs": [
+    ["FDA Cefiderocol (Fetroja) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cefiderocol%22"],
+    ["FDA DailyMed - Cefiderocol", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

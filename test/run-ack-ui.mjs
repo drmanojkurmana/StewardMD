@@ -107,8 +107,22 @@ try {
   ok(/Field Testing & Bug Reports/i.test(txt), "his role shows on the collapsed row");
 
   // Names and roles are visible without tapping; bios are not.
-  ok(/Dr\. Manoj Kumar Kurmana/.test(txt) && /Diwakar Kurmana/.test(txt), "founders are listed");
+  ok(/Dr\. Manoj Kumar Kurmana/.test(txt) && /Diwakar Kumar Kurmana/.test(txt), "founders are listed");
   ok(!/published in PubMed/i.test(txt), "long bios are NOT in the collapsed view");
+
+  // BUG-020: team hierarchy order is contractual — founders, then Maniram Kumhar,
+  // Suryanarayana Murthy, Sai Niranjan, Sri Harsha Gora, then the remaining members.
+  const order = await ev(`return [].map.call(document.querySelectorAll("#ackCard .ack-contrib-name"), function(e){ var t=""; for (var i=0;i<e.childNodes.length;i++){ if(e.childNodes[i].nodeType===3) t+=e.childNodes[i].nodeValue; } return t.replace(/\\s+/g," ").trim(); });`);
+  const want = ["Manoj Kumar Kurmana", "Diwakar Kumar Kurmana", "Maniram Kumhar", "M. Suryanarayana Murthy", "S. Sai Niranjan", "Sri Harsha Gora", "Riyaz Mohammad", "Prachi Sharma", "Preeti", "Ishita Jha", "Rajesh", "Kumar Swamy"];
+  const idx = (n) => order.findIndex((x) => x.indexOf(n) >= 0);
+  const inOrder = want.every((n, i) => idx(n) >= 0 && (i === 0 || idx(want[i - 1]) < idx(n)));
+  ok(inOrder, `team hierarchy order holds (${(order || []).join(" | ")})`);
+
+  // BUG-021: co-founder education — NIT Calicut in Diwakar's bio, plus the About modal credit.
+  ok(await ev(`var els=[].slice.call(document.querySelectorAll("#ackCard .creator-name")); var d=els.filter(function(e){return /Diwakar/.test(e.textContent)})[0]; return !!d && /National Institute of Technology Calicut/.test(d.textContent) && /Co-founder/.test(d.textContent);`) === true,
+     "Diwakar Kumar Kurmana's bio shows co-founder role + NIT Calicut");
+  ok(await ev(`var m=document.getElementById("aboutModal"); return !!m && /Diwakar Kumar Kurmana/.test(m.textContent) && /National Institute of Technology Calicut/.test(m.textContent);`) === true,
+     "About modal 'Who built it' credits both founders");
 
   // Tap to expand.
   ok(await ev(`

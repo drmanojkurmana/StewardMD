@@ -552,6 +552,7 @@
       "</div>" +
       '<div class="ot-sel-actions">' +
         '<button class="ot-btn ghost" data-ot-act="back-pathway">' + ms("arrow_back") + "Back to pathway</button>" +
+        (G.SMD_PROTOSHEET ? '<button class="ot-btn ghost" data-ot-act="proto-sheet" data-ot-proto="' + esc(s.protocolId) + '">' + ms("description") + "Protocol sheet</button>" : "") +
         '<button class="ot-btn primary" data-ot-act="handoff">' + ms("open_in_new") + "Continue in treatment workflow</button>" +
       "</div></div>";
   }
@@ -1364,8 +1365,11 @@
     if (!st.graph) return pickerHtml();
     var state = evalState();
     if (!state) return '<div class="ot-loading">Preparing...</div>';
-    if (st.openedProtocol) return protocolDetailHtml(st.openedProtocol);
-    if (st.selection) return selectionHtml();
+    // BUG-006: the Summary sheet must open from the protocol detail / selection views too —
+    // the header tabs stay visible there, so a sheet that only renders in the three main views
+    // would make Summary look dead.
+    if (st.openedProtocol) return protocolDetailHtml(st.openedProtocol) + summarySheetHtml();
+    if (st.selection) return selectionHtml() + summarySheetHtml();
     if (st.view === "map") return mapHtml(state) + footnoteSheetHtml() + summarySheetHtml();
     if (st.view === "navigator") return navigatorHtml(state) + footnoteSheetHtml() + summarySheetHtml();
 
@@ -1881,9 +1885,9 @@
       if (st.view === "navigator") navAutoScroll();
       return;
     }
-    if (act === "view-navigator") { st.view = "navigator"; paint(); return; }
-    if (act === "view-pathway") { st.view = "pathway"; paint(); return; }
-    if (act === "view-map") { st.view = "map"; paint(); return; }
+    if (act === "view-navigator") { st.openedProtocol = null; st.selection = null; st.view = "navigator"; paint(); return; }
+    if (act === "view-pathway") { st.openedProtocol = null; st.selection = null; st.view = "pathway"; paint(); return; }
+    if (act === "view-map") { st.openedProtocol = null; st.selection = null; st.view = "map"; paint(); return; }
     if (act === "nav-sidebar-toggle") { st.sidebarOpen = !(st.sidebarOpen !== false); repaintBody(); return; }
     if (act === "nav-toggle-nonactive") { st.showNonActive = !st.showNonActive; repaintBody(); return; }
     if (act === "nav-zoom-in") { navZoom("in"); return; }
@@ -2133,7 +2137,7 @@
   }
 
   function selectProtocol(ref) {
-    var p = st.protocols[ref] || {};
+    var p = resolveProto(ref) || st.protocols[ref] || {};
     var state = evalState();
     st.selection = {
       protocolId: ref, protocolVersion: p.version || p.protocolVersion || null,
@@ -2151,7 +2155,7 @@
   // chart so the dose engine can compute per-drug totals. Assign routes back through the same handoff event.
   function openProtocolSheet(ref) {
     if (!G.SMD_PROTOSHEET) { try { G.toast && G.toast("Protocol sheet unavailable."); } catch (e) {} return; }
-    var p = st.protocols[ref] || ref;
+    var p = resolveProto(ref) || st.protocols[ref] || ref;
     var c = st.ctx || {};
     var today = "";
     try { var d = new (G.Date)(); today = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); } catch (e2) {}
