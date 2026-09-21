@@ -51,3 +51,16 @@ token-first routing), `smd_opd_storage_mode` (device | shared).
 `xcrun devicectl device process launch --device <id> --console <bundleId>` - but note Capacitor's JS
 `console.*` bridge did NOT reach that channel in testing (only the launch lines did). For UI-path
 questions prefer an on-screen signal (toast) or a real headless-Chrome CDP test over device logs.
+
+
+## GOTCHA - the profile sheet must fit the phone (fixed 2026-09-21)
+`renderProfile()` (the avatar sheet: status, Clinic ID, staff admin, switch, sign out) is a
+centred `.q-sheet` overlay. With nine staff rows the `.q-profile` card grew past the screen; its
+only Close was the bottom button, the tappable backdrop was covered, and the card had no
+`overflow`, so the owner could neither scroll nor close it (screenshot 2026-09-21). Now
+`.q-profile` is capped to `100dvh` minus the safe areas and scrolls inside itself
+(`overscroll-behavior:contain`), and a sticky `.q-profile-head` carries an X
+(`data-q-act="profile-close"`, `aria-label="Close"` so `swipe-back.js` BACK_SEL also closes it on
+Android back). Rule for any new `.q-sheet` card: cap it and give it a header close; a bottom-only
+Close is unreachable the moment the content grows. Tests: `test/opd-profile-sheet.test.mjs`,
+`test/run-opd-profile-ui.mjs` (real queue.css at 390x844).

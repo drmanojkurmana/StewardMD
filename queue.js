@@ -312,7 +312,10 @@
   function renderProfile(state, doctorName, dept) {
     var s = state.session || {};
     var status = s.doctorStatus ? cap(s.doctorStatus) : (s.status === "paused" ? "Paused" : "Online");
-    return '<div class="q-sheet" data-q-act="profile-close"><div class="q-profile" data-q-act="profile-stop">' +
+    return '<div class="q-sheet" data-q-act="profile-close"><div class="q-profile" data-q-act="profile-stop" role="dialog" aria-label="Doctor profile">' +
+      // Sticky X: aria-label="Close" is also what swipe-back.js BACK_SEL matches, so the Android
+      // back gesture and hardware button close the sheet too.
+      '<div class="q-profile-head"><button class="q-ic q-profile-x" data-q-act="profile-close" aria-label="Close">' + ms("close") + "</button></div>" +
       '<div class="q-profile-top"><div class="q-avatar q-avatar-lg">' + esc(initials(doctorName)) + "</div>" +
       '<div class="q-profile-id"><b>' + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
       (state.ghisUser ? '<div class="q-profile-row">' + ms("badge") + "<span>GHIS ID</span><b>" + esc(state.ghisUser) + "</b></div>" : "") +

@@ -56,8 +56,13 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-avatar-btn:hover { border-color: var(--primary); }
 #smdQueue .q-avatar-btn:active { transform: scale(.94); }
 /* doctor profile sheet */
-#smdQueue .q-sheet { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(20,32,43,.45); backdrop-filter: blur(2px); animation: smdFadeIn var(--smd-dur-sm, .2s) ease both; }
-#smdQueue .q-profile { width: 100%; max-width: 380px; box-sizing: border-box; background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 20px; padding: 22px; box-shadow: 0 20px 60px rgba(20,32,43,.25); animation: smdSheetUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-sheet { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: calc(16px + env(safe-area-inset-top, 0px)) 16px calc(16px + env(safe-area-inset-bottom, 0px)); background: rgba(20,32,43,.45); backdrop-filter: blur(2px); animation: smdFadeIn var(--smd-dur-sm, .2s) ease both; }
+/* The profile card can never be taller than the screen (owner screenshot 2026-09-21: nine staff rows
+   pushed Close and the backdrop off-screen, and the card itself did not scroll, so the sheet could
+   not be closed). It scrolls inside itself, and the X in its header is sticky so it is always in reach. */
+#smdQueue .q-profile { position: relative; width: 100%; max-width: 380px; max-height: calc(100vh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; box-sizing: border-box; background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 20px; padding: 0 22px 22px; box-shadow: 0 20px 60px rgba(20,32,43,.25); animation: smdSheetUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-profile-head { position: sticky; top: 0; z-index: 2; display: flex; justify-content: flex-end; margin: 0 -22px 2px; padding: 10px 12px 0; background: var(--sc-lowest); }
+#smdQueue .q-profile-x { width: 40px; height: 40px; }
 #smdQueue .q-profile-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
 #smdQueue .q-avatar-lg { width: 60px; height: 60px; font-size: 22px; }
 #smdQueue .q-profile-id b { display: block; font: 800 18px var(--q-sans); color: var(--on-surface); }
