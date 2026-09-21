@@ -356,7 +356,7 @@ test("irAE close() foregrounds a mounted ONCQIS", () => {
 test("reference mode stacks above ONCQIS and collapses the workspace layout", () => {
   const css = readFileSync(join(ROOT, "reasoning-workspace.css"), "utf8");
   const norm = css.replace(/\s+/g, " ");
-  assert.ok(norm.indexOf("#dxOverlay.dx-reference-mode { z-index:900 !important; }") >= 0,
+  assert.ok(/#dxOverlay\.dx-reference-mode\s*\{[^}]*z-index:900 !important;[^}]*\}/.test(norm),
     "dx-reference-mode must pin z-index 900 above ONCQIS 875/865");
   assert.ok(css.indexOf("dx-reference-mode:has(.dx-reader.on)") >= 0 &&
     css.indexOf("display:none !important") >= 0,
@@ -367,8 +367,10 @@ test("reference mode stacks above ONCQIS and collapses the workspace layout", ()
 
 test("reader keeps safe-area padding and wraps long disease names on mobile", () => {
   const css = readFileSync(join(ROOT, "reasoning-workspace.css"), "utf8");
-  assert.ok(css.indexOf("max-width:100vw") >= 0 && css.indexOf("overflow-x:hidden") >= 0,
-    ".dx-reader must be viewport-bounded with no x-overflow");
+  assert.ok(/#dxOverlay\.dx-reference-mode\s*\{[^}]*position:fixed;[^}]*inset:0;[^}]*width:auto;[^}]*max-width:none/.test(css),
+    "reference root must fill the viewport instead of retaining a phone-width ancestor");
+  assert.ok(/#dxOverlay \.dx-reader\s*\{[^}]*position:fixed;[^}]*inset:0;[^}]*width:auto;[^}]*max-width:none;[^}]*overflow-x:hidden/.test(css),
+    ".dx-reader must pin both viewport edges with no inherited fixed width or x-overflow");
   const mobile = css.slice(css.indexOf("@media(max-width:600px)"));
   assert.ok(mobile.indexOf("env(safe-area-inset-top") >= 0,
     "mobile reader header must keep env(safe-area-inset-top) (never strip it)");
@@ -376,6 +378,9 @@ test("reader keeps safe-area padding and wraps long disease names on mobile", ()
   assert.ok(mobile.indexOf("overflow-wrap:break-word") >= 0 && mobile.indexOf("word-break:break-word") >= 0,
     "disease names must break-word on narrow screens");
   assert.ok(/\.dx-mgmt-body[^}]*width:\s*100%/.test(mobile), "mobile reader body is full-width");
+  assert.ok(/\.dx-mgmt-body[^}]*margin-inline:\s*auto/.test(css), "reader body is centred within the viewport");
+  assert.ok(/\.dx-mgmt-top[^}]*grid-template-columns:\s*minmax\(0,1fr\) auto minmax\(0,1fr\)/.test(mobile),
+    "mobile header uses equal side columns so the title is centred on the screen");
 });
 
 test("oncotree close steps back through protocol/modal/pathway before exiting", () => {
