@@ -8988,3 +8988,28 @@ those models never had. The grade is derived from the registry (`own`, `caps.med
 hand-kept, so a new pack cannot land ungraded. The Knowledge Base switch became a positive label
 ("Check answers against the Knowledge Base"): a switch whose label reads the state it is NOT in is
 what "Disconnected" with a tick beside it looked like on the phone.
+
+
+**Tours fit every phone, and the first guide is a hands-on demo (2026-09-21).** Owner: *"the tour
+you created doesnt fit the screen it should work and auto adjust on all phone screens and guide the
+user thru a demo like make him use a start a case and see diagnosis of meningitis ... stewardship
+console clinical reasoning everything in a demo to be made step by step by the user so he learns
+after one learn."* Engine (`onboarding.js`): the coach-mark is capped to the VISIBLE viewport
+(`window.visualViewport`, which shrinks for the keyboard; `env(safe-area-inset-bottom)` via a probe
+element) and scrolls inside itself; when neither side of a target has room, `fitTargetAndCard()`
+scrolls the target's own scroll parent so the spotlight sits at the top and the card takes the room
+below, once per step so it never fights the student. A step may ask `place:"above"|"below"|"bottom"`;
+"bottom" pins the card to the foot of the viewport so a search box and its dropdown stay tappable.
+Guides gained hands-on steps: `kind:"tap"` with `done()` (the step advances on its OUTCOME, however
+the student got there, never on a click the engine happened to see), `find()` resolvers for targets a
+selector cannot name (the top infectious card, stewardship card 05), and `gotoScreen()` no longer
+closes and re-opens a screen the student opened themselves (`SCREEN_OPEN`). The demo
+(`DEMO_GUIDE`, first in the chooser) walks the real app: Dx Patient, Add New Patient, type four
+findings (fever, headache, neck stiffness, photophobia, the set that makes `SYNDROMES.MENINGITIS`
+lead), Review differential, the antibiotic gate, open the top card, commit, then six cards of the
+real stewardship console (04 pathogens, 05 empiric antibiotics, 07 stewardship comment, 08
+investigations, 09 de-escalation, 10 evidence). The student's own open findings are parked at the
+start and restored at the end; the demo case, the stewardship page and the workspace are cleared.
+The tour copy never states a dose; the console does, with its source. Pointing hand is an inline
+SVG, not an emoji. Verified in `test/run-feature-guide-ui.mjs` at 320x568, 360x640, 390x844 and
+430x932.

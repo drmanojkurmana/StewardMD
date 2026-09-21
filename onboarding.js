@@ -159,7 +159,8 @@
       // block taps outside the spotlight for non-tap steps
       ".smdt-block{position:fixed;inset:0;z-index:100038}",
       // coach-mark card
-      ".smdt-card{position:fixed;z-index:100050;width:min(340px,calc(100vw - 24px));background:#fff;color:#0f172a;border:1px solid rgba(15,118,110,.14);border-radius:20px;box-shadow:0 24px 60px -18px rgba(15,23,42,.5);padding:18px;font-family:var(--sans,'Inter',system-ui,-apple-system,'IBM Plex Sans',sans-serif)}",
+      ".smdt-card{position:fixed;z-index:100050;width:min(340px,calc(100vw - 24px));max-height:calc(100vh - 24px - env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 24px - env(safe-area-inset-bottom,0px));overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;box-sizing:border-box;background:#fff;color:#0f172a;border:1px solid rgba(15,118,110,.14);border-radius:20px;box-shadow:0 24px 60px -18px rgba(15,23,42,.5);padding:18px;font-family:var(--sans,'Inter',system-ui,-apple-system,'IBM Plex Sans',sans-serif)}",
+      ".smdt-sa{position:fixed;left:0;bottom:0;width:1px;height:env(safe-area-inset-bottom,0px);pointer-events:none;visibility:hidden}",
       ".smdt-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}",
       ".smdt-eyebrow{display:flex;align-items:center;gap:8px;font:700 10.5px/1 inherit;letter-spacing:1px;color:#0F766E}",
       ".smdt-skip{border:0;background:none;font:600 12px inherit;color:#94a3b8;cursor:pointer;padding:4px 2px}",
@@ -340,22 +341,101 @@
     _spot.style.width = w + "px"; _spot.style.height = h + "px";
     return { top: top, left: left, bottom: top + h, right: left + w, width: w, height: h };
   }
-  function positionCard(spot) {
-    var cw = _card.offsetWidth || 320, ch = _card.offsetHeight || 200, vw = window.innerWidth, vh = window.innerHeight, m = 12, gap = 14, top, left;
-    if (!spot) { left = (vw - cw) / 2; top = Math.max(m, (vh - ch) / 2); }
+  /* The viewport the user can SEE. On iOS a fixed element is laid out against the layout viewport,
+   * which does not shrink when the keyboard rises; window.visualViewport is the part still visible,
+   * and a tap step that opens the keyboard (typing a finding) must keep its card inside that. */
+  var _sa = null;
+  function safeBottom() {
+    try {
+      if (!_sa) { _sa = document.createElement("div"); _sa.className = "smdt-sa"; document.body.appendChild(_sa); }
+      return _sa.offsetHeight || 0;
+    } catch (e) { return 0; }
+  }
+  function viewport() {
+    var vv = window.visualViewport;
+    if (vv && vv.height) return { top: vv.offsetTop || 0, left: vv.offsetLeft || 0, width: vv.width, height: vv.height };
+    return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+  }
+  function positionCard(spot, prefer) {
+    var vp = viewport(), cw = _card.offsetWidth || 320, ch = _card.offsetHeight || 200, m = 12, gap = 14, top, left;
+    var vw = vp.width, vTop = vp.top + m, vBot = vp.top + vp.height - m - safeBottom();
+    // The card can never be taller than the visible viewport: it scrolls inside itself instead.
+    var maxH = Math.max(120, vBot - vTop);
+    _card.style.maxHeight = maxH + "px";
+    if (ch > maxH) ch = maxH;
+    if (!spot) { left = vp.left + (vw - cw) / 2; top = Math.max(vTop, vp.top + (vp.height - ch) / 2); }
     else {
-      left = Math.min(Math.max(m, spot.left + spot.width / 2 - cw / 2), vw - cw - m);
+      left = Math.min(Math.max(vp.left + m, spot.left + spot.width / 2 - cw / 2), vp.left + vw - cw - m);
       var below = spot.bottom + gap, above = spot.top - gap - ch;
-      if (below + ch <= vh - m) top = below;          // fits below (use the full height down to the margin)
-      else if (above >= m) top = above;               // else above
+      var fitsBelow = below + ch <= vBot, fitsAbove = above >= vTop;
+      // A step may ask for the card above its target: the findings search box opens a dropdown
+      // BELOW itself, and a card sitting there would hide the very results the student must tap.
+      var bottomPin = vBot - ch;
+      if (prefer === "bottom" && bottomPin >= spot.bottom + gap) top = bottomPin;
+      else if (prefer === "above" && fitsAbove) top = above;
+      else if (prefer === "below" && fitsBelow) top = below;
+      else if (fitsBelow) top = below;
+      else if (fitsAbove) top = above;
       else {
-        // Too tall to clear the target on either side: pin to whichever side has more room and flush
-        // it to that edge, so the card sits clear of the spotlight instead of centred on top of it —
-        // the highlighted section stays visible (the earlier centre fallback hid it).
-        top = (vh - spot.bottom) >= spot.top ? (vh - ch - m) : m;
+        // Too tall to clear the target on either side (a stewardship card taller than the screen):
+        // paint() has scrolled the target so its top, where the heading is, sits at the top of the
+        // viewport, so the card goes to the FOOT and the heading stays readable. Only a target whose
+        // top is in the lower half of the screen gets the card above it.
+        top = (spot.top - vTop) < vp.height / 2 ? (vBot - ch) : vTop;
       }
     }
-    _card.style.left = left + "px"; _card.style.top = Math.max(m, top) + "px";
+    _card.style.left = Math.max(vp.left + m, left) + "px";
+    _card.style.top = Math.min(Math.max(vTop, top), Math.max(vTop, vBot - ch)) + "px";
+  }
+  // The nearest ancestor that actually scrolls, so a target can be brought to where the card is not.
+  function scrollParentOf(el) {
+    var p = el && el.parentElement;
+    while (p && p !== document.body && p !== document.documentElement) {
+      try {
+        var cs = window.getComputedStyle(p);
+        if (/(auto|scroll)/.test(cs.overflowY) && p.scrollHeight > p.clientHeight + 2) return p;
+      } catch (e) {}
+      p = p.parentElement;
+    }
+    return null;
+  }
+  /* Owner, 2026-09-21: "the tour doesnt fit the screen". On a short phone a spotlighted section
+   * and the coach-mark could not both be on screen, so the card sat on top of the thing it was
+   * describing. When neither side fits, scroll the target to the top of the visible viewport so the
+   * card can take the room below it. Once per step, so it never fights the student's own scrolling. */
+  var _fittedFor = null;
+  function fitTargetAndCard(tgt, s) {
+    if (!tgt || !_card || _fittedFor === s) return;
+    _fittedFor = s;
+    var vp = viewport(), m = 12, gap = 14, pad = 8;
+    var r = rectOf(tgt), ch = Math.min(_card.offsetHeight || 200, vp.height - 2 * m);
+    var vTop = vp.top + m, vBot = vp.top + vp.height - m - safeBottom();
+    var fitsBelow = r.bottom + pad + gap + ch <= vBot, fitsAbove = r.top - pad - gap - ch >= vTop;
+    // "Fits" only counts with the target's TOP on screen: a card two screens below the fold has
+    // plenty of room above it and is still not where the student is looking, and a target taller
+    // than the screen that scrollIntoView centred has its heading above the fold.
+    var headVisible = r.top - pad >= vTop && r.top + 44 <= vBot;
+    if (headVisible && (fitsBelow || fitsAbove)) return;
+    var wantTop = vTop + pad + 4;                 // spotlight at the top, card below it
+    var delta = (r.top - pad) - wantTop;
+    if (Math.abs(delta) < 2) return;
+    var sp = scrollParentOf(tgt);
+    try {
+      if (sp) { if (sp.scrollTo) sp.scrollTo({ top: sp.scrollTop + delta, behavior: "instant" }); else sp.scrollTop += delta; }
+      else window.scrollTo({ top: (window.scrollY || window.pageYOffset || 0) + delta, behavior: "instant" });
+    } catch (e) { try { if (sp) sp.scrollTop += delta; else window.scrollBy(0, delta); } catch (e2) {} }
+  }
+  // The page may move the target AFTER the step painted (the stewardship page scrolls itself into
+  // view 150 ms after it renders). For a short grace period after painting, a target that has left
+  // the screen entirely is fetched back; after that, scrolling is the student's.
+  var _fitUntil = 0;
+  function refitIfLost(tgt, s) {
+    if (!tgt || Date.now() > _fitUntil) return;
+    var vp = viewport(), r = rectOf(tgt), vTop = vp.top + 12, vBot = vp.top + vp.height - 12 - safeBottom();
+    // The heading (the top 44px) must stay on screen. The stewardship page animates an 11,000 px
+    // smooth scroll to itself for a second or more after it renders; every tick of that moved the
+    // target out from under the spotlight until this held it in place.
+    if (r.top < vTop - 2 || r.top + 44 > vBot) { _fittedFor = null; fitTargetAndCard(tgt, s); }
   }
 
   function curStep() { return _run && _run.steps[_step]; }
@@ -366,7 +446,11 @@
     ensureEls();
     var n = _run.steps.length, last = _step === n - 1;
     var tgt = _run.resolve(s);
-    if (tgt) { try { tgt.scrollIntoView({ block: "center", inline: "nearest" }); } catch (e) {} }
+    // INSTANT, never smooth: the app sets scroll-behavior:smooth in places, and an animated scroll
+    // here meant the target was still travelling when the card was measured against it, so the
+    // spotlight glued itself to a card two screens below the fold (2026-09-21).
+    if (tgt) { try { tgt.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" }); } catch (e) { try { tgt.scrollIntoView({ block: "center" }); } catch (e2) {} } }
+    _fitUntil = Date.now() + 4000;
     var body = (_run.live && s.liveBody) ? s.liveBody : s.body;
     var tap = isTapStep(s);
     _card.innerHTML =
@@ -375,7 +459,7 @@
       '<div class="smdt-bar"><i style="width:' + Math.round((_step + 1) / n * 100) + '%"></i></div>' +
       '<div class="smdt-title">' + esc(s.title) + "</div>" +
       '<div class="smdt-text">' + esc(body) + "</div>" +
-      (tap ? '<div class="smdt-tap' + (reduceMotion() ? "" : " anim") + '"><span class="h">👆</span><span class="t">' + esc(s.tapHint || "Tap the highlighted control") + "</span></div>" : "") +
+      (tap ? '<div class="smdt-tap' + (reduceMotion() ? "" : " anim") + '"><span class="h" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V4a1.5 1.5 0 0 1 3 0v6"/><path d="M12 10V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 11a1.5 1.5 0 0 1 3 0v1"/><path d="M18 12a1.5 1.5 0 0 1 3 0v4a6 6 0 0 1-6 6h-2a6 6 0 0 1-5-2.7L4.5 15a1.6 1.6 0 0 1 2.6-1.9L9 15"/></svg></span><span class="t">' + esc(s.tapHint || "Tap the highlighted control") + "</span></div>" : "") +
       (tap ? "" :
         '<div class="smdt-btns">' +
           (_step > 0 ? '<button class="smdt-b gho" data-t="back">Back</button>' : "") +
@@ -384,8 +468,14 @@
     _card.style.visibility = "visible";
     // tap steps let the user touch the real/demo control; non-tap steps block the backdrop.
     _block.style.display = tap ? "none" : "block";
-    var spot = positionSpot(tgt); positionCard(spot);
-    requestAnimationFrame(function () { positionCard(positionSpot(_run.resolve(s))); });
+    try { _block.style.pointerEvents = (tgt && rectOf(tgt).height > viewport().height * 0.8) ? "none" : "auto"; } catch (e) {}
+    var spot = positionSpot(tgt); positionCard(spot, s.place);
+    requestAnimationFrame(function () {
+      if (!_run || curStep() !== s) return;
+      var t2 = _run.resolve(s);
+      fitTargetAndCard(t2, s);
+      positionCard(positionSpot(t2), s.place);
+    });
     // preventScroll: focusing the (fixed) card button must NOT scroll the home scroller, or the
     // target slides out from under the spotlight after we've positioned it.
     if (!tap) setTimeout(function () { try { var b = _card.querySelector('[data-t="next"]'); if (b) b.focus({ preventScroll: true }); } catch (e) {} }, 40);
@@ -396,7 +486,7 @@
 
   // Keep the spotlight glued to its target. The scroll listener misses some layout shifts (the home
   // re-renders / resets its scroller after we position), so re-sync continuously while a step is up.
-  function reflow() { if (!_run || !_settled) return; var s = curStep(); if (!s) return; positionCard(positionSpot(_run.resolve(s))); }
+  function reflow() { if (!_run || !_settled) return; var s = curStep(); if (!s) return; var t = _run.resolve(s); refitIfLost(t, s); positionCard(positionSpot(t), s.place); }
 
   // Move to a specific step index, letting the controller prepare the screen first.
   function goStep(i) {
@@ -405,7 +495,7 @@
     if (i < 0) i = 0;
     _step = i;
     var s = _run.steps[i];
-    _settled = false;   // suppress the re-sync loop until this step has painted
+    _settled = false; _fittedFor = null;   // suppress the re-sync loop until this step has painted
     showChromeForRun();
     // The card is shown but EMPTY until the controller has opened the step's screen (a sheet, MaiK,
     // the sidebar): keep it invisible in that gap so no blank box flashes over the animation.
@@ -446,6 +536,7 @@
     _run = controller; _step = startStep || 0;
     ensureEls(); showChromeForRun();
     window.addEventListener("resize", reflow); window.addEventListener("scroll", reflow, true);
+    try { if (window.visualViewport) { window.visualViewport.addEventListener("resize", reflow); window.visualViewport.addEventListener("scroll", reflow); } } catch (e) {}
     _onKey = function (e) { if (e.key === "Escape") skipRun(); else if (e.key === "ArrowRight") { var s = curStep(); if (!isTapStep(s)) next(); } else if (e.key === "ArrowLeft") { var s2 = curStep(); if (!isTapStep(s2)) back(); } };
     document.addEventListener("keydown", _onKey);
     // global capture-phase tap listener so real/demo controls can advance tap steps
@@ -468,6 +559,7 @@
     if (_block) _block.style.display = "none";
     if (_card) { _card.style.display = "none"; _card.innerHTML = ""; }
     window.removeEventListener("resize", reflow); window.removeEventListener("scroll", reflow, true);
+    try { if (window.visualViewport) { window.visualViewport.removeEventListener("resize", reflow); window.visualViewport.removeEventListener("scroll", reflow); } } catch (e) {}
     if (_onKey) { document.removeEventListener("keydown", _onKey); _onKey = null; }
     if (_tapListener) { document.removeEventListener("click", _tapListener, true); _tapListener = null; }
   }
@@ -928,6 +1020,94 @@
     ] }
   ];
 
+  // ---- HANDS-ON DEMO (2026-09-21) ---------------------------------------------------------
+  // Owner: "guide the user thru a demo like make him use a start a case and see diagnosis of
+  // meningitis how it shows diagnosis, stewardship console clinical reasoning everything in a demo
+  // to be made step by step by the user so he learns after one learn. All should be interactive."
+  //
+  // Every step here is a TAP step the student performs on the real app; the card only moves on
+  // when the outcome exists (done()). Nothing is simulated: the findings go into the real Dx
+  // workspace, the real engine ranks them, the real stewardship page opens. The demo case is
+  // cleared when the tour ends and the student's own findings, if any were open, are put back.
+  var _demoSaved = null, _demoShell = false;
+  function dxHas(k) { try { return !!(window.DX && DX._state && DX._state.f && DX._state.f[k]); } catch (e) { return false; } }
+  function dxCardOpen() { return document.querySelector("#dxOverlay #dxCols .dx-card.inf.open"); }
+  function stewardCard(num) {
+    var cards = document.querySelectorAll("#outputArea .card");
+    for (var i = 0; i < cards.length; i++) {
+      var n = cards[i].querySelector("h2 .num");
+      if (n && n.textContent.trim() === num) return cards[i];
+    }
+    return null;
+  }
+  function findingStep(key, label, title, body) {
+    return { screen: "dx", sel: "#dxSearch", kind: "tap", place: "bottom", title: title,
+      tapHint: "Type " + label.toLowerCase() + ", then tap the result",
+      body: body, done: function () { return dxHas(key); } };
+  }
+  var DEMO_GUIDE = { id: "demo", icon: "brain", name: "Hands-on: a case of meningitis", sub: "You do every step, on the real app · 3 min",
+    start: function () {
+      _demoShell = false;
+      try { _demoSaved = (window.DX && DX._state && DX._state.f) ? Object.keys(DX._state.f) : []; if (_demoSaved.length && DX.reset) DX.reset(); } catch (e) { _demoSaved = null; }
+    },
+    finish: function () {
+      try { if (window.DX && DX.reset) DX.reset(); } catch (e) {}
+      try { if (_demoSaved && _demoSaved.length && window.DX && DX.addFindings) DX.addFindings(_demoSaved); } catch (e) {}
+      _demoSaved = null;
+      if (_demoShell || stewardOpen()) {
+        try { var oa = document.getElementById("outputArea"); if (oa) oa.innerHTML = ""; } catch (e) {}
+        try { var sh = document.querySelector(".shell"); if (sh) sh.style.display = "none"; } catch (e) {}
+        try { window.__smdDxReturn = false; } catch (e) {}
+        try { if (window.SMD_showHome) SMD_showHome(); } catch (e) {}
+      }
+      _demoShell = false;
+    },
+    steps: [
+      { screen: "home", sel: '[data-act="reasoning"]', kind: "tap", tapHint: "Tap Dx Patient", title: "A patient walks in",
+        body: "A 24-year-old with two days of fever and a headache, worse today, and he cannot bear the light. Let us reason it through together. Tap Dx Patient.",
+        done: function () { return !!firstVisible("#dxAddNew", document); } },
+      { screen: "home", find: function () { return document.getElementById("dxAddNew"); }, kind: "tap", tapHint: "Tap Add New Patient", title: "Start a new patient",
+        body: "Add New Patient opens the reasoning workspace. Import the patient pulls labs and imaging from Ward Sync instead; not today.",
+        done: dxOpen },
+      findingStep("fever", "Fever", "Add the first finding", "Type fever in the search box and tap the Fever result. Every finding you add re-ranks the differential underneath."),
+      findingStep("headache", "Headache", "Now the headache", "Type headache and tap the result. Two findings in; the engine still waits for a third before it commits to a ranking."),
+      findingStep("neckStiffness", "Neck stiffness", "Neck stiffness", "Type neck and tap Neck stiffness. Three findings are enough for a first differential; the count on the Findings tab keeps score."),
+      findingStep("photophobia", "Photophobia", "Photophobia", "Type photo and tap Photophobia. A highly specific finding moves the top card, and the gate, decisively."),
+      { screen: "dx", sel: '[data-dx-jump="dxReview"]', kind: "tap", tapHint: "Tap Review differential", title: "Now review the differential",
+        body: "Findings on one tab, the ranked differential on the other. Tap Review differential to see what the engine made of the four findings.",
+        done: function () { var r = document.getElementById("dxReview"); return !!(r && !r.hidden); } },
+      { screen: "dx", sel: "#dxGate .dx-gate-card", title: "The antibiotic gate",
+        body: "Before any antibiotic is suggested, the case is graded. Fever with neck stiffness reads Infection very likely, so antibiotics may surface. A non-infectious picture keeps them out, however many drugs the app knows." },
+      { screen: "dx", find: function () { return document.querySelector("#dxOverlay #dxCols .dx-card.inf .dx-row-head"); }, kind: "tap", tapHint: "Tap the top infectious card", title: "Bacterial meningitis leads",
+        body: "The infectious column ranks acute bacterial meningitis first, with a Clinical Confidence Score. Tap the card to open it.",
+        done: dxCardOpen },
+      { screen: "dx", find: function () { return document.querySelector("#dxOverlay .dx-card.open .dx-detail"); }, title: "Read the card like a consultant",
+        body: "Supporting findings, contradictory findings, and what is missing. The score is weighted evidence, not a probability; the missing findings are what to ask about next." },
+      { screen: "dx", find: function () { return document.querySelector("#dxOverlay .dx-card.open .dx-select"); }, kind: "tap", tapHint: "Tap Open full stewardship page", title: "Commit to the diagnosis",
+        body: "Selecting the diagnosis opens the stewardship console for this patient: pathogens, empiric therapy, coverage, duration, de-escalation and the guideline behind each line.",
+        done: function () {
+          if (!stewardOpen()) return false;
+          _demoShell = true;
+          try { var oa = document.getElementById("outputArea"); window.scrollTo({ top: oa.getBoundingClientRect().top + (window.scrollY || 0), behavior: "instant" }); } catch (e) {}
+          return true;
+        } },
+      { screen: "steward", find: function () { return stewardCard("04"); }, title: "Probable pathogens",
+        body: "Pneumococcus and meningococcus lead in the community; Listeria is added for the very young, the over-50s, pregnancy and the immunocompromised. The empiric regimen is built from this list." },
+      { screen: "steward", find: function () { return stewardCard("05"); }, title: "Recommended empiric antibiotics",
+        body: "Drug, dose, route, frequency and duration, each with the reason it is there, its AWaRe class and the hospital policy. Renal dosing appears when the case carries a creatinine." },
+      { screen: "steward", find: function () { return stewardCard("07"); }, title: "The stewardship comment",
+        body: "Why this diagnosis, why this drug, and what would change the plan. This is the paragraph a stewardship round asks for." },
+      { screen: "steward", find: function () { return stewardCard("08"); }, title: "Investigations",
+        body: "Blood cultures before the first dose, CSF when it is safe to obtain it, and the imaging rule that decides whether it is." },
+      { screen: "steward", find: function () { return stewardCard("09"); }, title: "De-escalation plan",
+        body: "The exit is planned on day one: narrow to the organism once cultures return, and the total duration by pathogen." },
+      { screen: "steward", find: function () { return stewardCard("10"); }, title: "The evidence",
+        body: "Every recommendation carries its source. Open the reference to read the passage the line came from." },
+      { screen: "steward", sel: null, title: "You just did the whole loop", cta: "Done",
+        body: "Findings in, the gate, the ranked differential, a committed diagnosis and its stewardship plan. That is the loop for every patient. This demo case is cleared now; your own cases live in My Cases." }
+    ] };
+  GUIDES.unshift(DEMO_GUIDE);
+
   var _gScreen = null;
   function gHomeAct(act) {
     var b = firstPresent('[data-act="' + act + '"]', document.getElementById("homeV2") || document);
@@ -940,11 +1120,18 @@
     try { if (window.MEDCALC && MEDCALC.close) MEDCALC.close(); } catch (e) {}
     try { var ovs = document.querySelectorAll(".sbr-set-ov"); for (var i = ovs.length - 1; i >= 0; i--) ovs[i].remove(); } catch (e) {}
     try { if (window.SB && SB.close) SB.close(); } catch (e) {}
+    try { if (window.DX && DX.close && dxOpen()) DX.close(); } catch (e) {}
     _gScreen = null;
   }
+  // Screens a student may have opened THEMSELVES during a hands-on step. gotoScreen() must not
+  // close and re-open those: the tap was the point, and the state they built lives there.
+  function dxOpen() { var o = document.getElementById("dxOverlay"); return !!(o && o.classList.contains("on")); }
+  function stewardOpen() { var oa = document.getElementById("outputArea"); return !!(oa && oa.querySelector(".card") && !dxOpen()); }
+  var SCREEN_OPEN = { dx: dxOpen, steward: stewardOpen };
   // Open the screen a step lives on. Same screen as the previous step: nothing moves.
   function gotoScreen(name, cb) {
     if (_gScreen === name) { cb(); return; }
+    if (SCREEN_OPEN[name] && SCREEN_OPEN[name]()) { _gScreen = name; cb(); return; }
     var wasOpen = _gScreen != null;
     gCloseAll();
     setTimeout(function () {
@@ -955,6 +1142,7 @@
       else if (name === "dosing") gHomeAct("dosing");
       else if (name === "more") gHomeAct("more");
       else if (name === "dx") gHomeAct("reasoning");
+      else if (name === "steward") { /* only reachable by the student's own tap on "Open full stewardship page" */ }
       else if (name === "maik") { try { if (window.SMD_askMaik) SMD_askMaik(""); } catch (e) {} }
       else if (name === "calc") { try { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); } catch (e) {} }
       else if (name === "sidebar" || name === "sidebar-exp") {
@@ -970,6 +1158,10 @@
     }, wasOpen ? 340 : 60);
   }
   function guideScope(s) {
+    // "dx" is two places: the chooser sheet (Add New Patient / Import) until the workspace opens,
+    // then the workspace overlay itself.
+    if (s.screen === "dx") return dxOpen() ? document.getElementById("dxOverlay") : (document.getElementById("hvSheet") || document);
+    if (s.screen === "steward") return document.getElementById("outputArea") || document;
     if (s.screen === "sidebar-exp") return document.querySelector(".sbr-exp-ov") || document.querySelector(".sbr-set-ov") || document.getElementById("sbDrawer") || document;
     if (s.screen === "sidebar") return document.getElementById("sbDrawer") || document;
     if (s.screen === "maik") return document.getElementById("maikSheet") || document;
@@ -978,20 +1170,27 @@
     return document.getElementById("homeV2") || document;
   }
   function guideController(g) {
-    var steps = g.steps.map(function (s) { return s.sel ? Object.assign({ optional: true }, s) : s; });
+    var steps = g.steps.map(function (s) { return (s.sel || s.find) ? Object.assign({ optional: true }, s) : s; });
     return {
       id: "guide:" + g.id, icon: obIco(g.icon), live: false, steps: steps,
       scope: function () { return document; },
-      resolve: function (s) { return s.sel ? firstPresent(s.sel, guideScope(s)) : null; },
+      resolve: function (s) {
+        if (s.find) { try { var el = s.find(); return (el && present(el)) ? el : null; } catch (e) { return null; } }
+        return s.sel ? firstPresent(s.sel, guideScope(s)) : null;
+      },
       enter: function (s, cb) { gotoScreen(s.screen || "home", cb); },
+      // A hands-on step is done when its outcome exists, not when a particular node was clicked:
+      // typing a finding and tapping its result, or adding it from the browse list, both count.
+      tapWatch: function (s) { try { return !!(s.done && s.done()); } catch (e) { return false; } },
       onDomTap: function () { return false; },
-      finish: function () { gCloseAll(); }
+      finish: function (completed) { try { if (g.finish) g.finish(completed); } catch (e) {} gCloseAll(); }
     };
   }
   function guideById(id) { for (var i = 0; i < GUIDES.length; i++) if (GUIDES[i].id === id) return GUIDES[i]; return null; }
   function startGuide(id) {
     var g = guideById(id); if (!g) { openReplay(); return; }
     markLaunch();
+    try { if (g.start) g.start(); } catch (e) {}
     startRun(guideController(g), 0);
   }
   function guideCardsHTML() {
