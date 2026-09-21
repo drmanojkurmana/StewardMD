@@ -356,7 +356,7 @@ test("irAE close() foregrounds a mounted ONCQIS", () => {
 test("reference mode stacks above ONCQIS and collapses the workspace layout", () => {
   const css = readFileSync(join(ROOT, "reasoning-workspace.css"), "utf8");
   const norm = css.replace(/\s+/g, " ");
-  assert.ok(norm.indexOf("#dxOverlay.dx-reference-mode { z-index:900 !important; }") >= 0,
+  assert.ok(/#dxOverlay\.dx-reference-mode\s*\{[^}]*z-index:900 !important;[^}]*\}/.test(norm),
     "dx-reference-mode must pin z-index 900 above ONCQIS 875/865");
   assert.ok(css.indexOf("dx-reference-mode:has(.dx-reader.on)") >= 0 &&
     css.indexOf("display:none !important") >= 0,
