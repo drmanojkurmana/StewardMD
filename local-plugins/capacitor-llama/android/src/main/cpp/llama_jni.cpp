@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 #include <unistd.h>
+#include <cstdio>
 #include <android/log.h>
 #include "llama.h"
 #include "mtmd.h"
@@ -48,11 +49,64 @@ static std::atomic<bool> g_cancel{false};
  */
 static std::atomic<int> g_thermal{0};
 
-static inline int thermal_yield_us() {
+/* PROACTIVE duty cycle (perf plan #7, 2026-09-21): the old policy only reacted at SEVERE, where the
+ * OS has already throttled the cores. Once the status is LIGHT or MODERATE and the answer is already
+ * long, a 3 ms yield per token keeps the phone below that cliff; a short answer still runs flat out. */
+static inline int thermal_yield_us(int produced) {
     const int t = g_thermal.load(std::memory_order_relaxed);
     if (t >= 4) return 40000;      // CRITICAL and above
     if (t == 3) return 12000;      // SEVERE: roughly halves the duty cycle
+    if (t >= 1 && produced > 512) return 3000;
     return 0;
+}
+static const char* thermal_name(int t) {
+    switch (t) { case 0: return "none"; case 1: return "light"; case 2: return "moderate"; case 3: return "severe";
+                 case 4: return "critical"; case 5: return "emergency"; case 6: return "shutdown"; default: return "unknown"; }
+}
+
+/* KV PREFIX REUSE (perf plan #2). The tokens each context currently holds, in order, so the next
+ * prompt keeps the longest common prefix and prefills only the rest. Keyed by the context pointer: a
+ * new context starts from nothing. Emptied after an image answer (its positions are embeddings, not
+ * tokens). One engine, one generation at a time (LlamaEngine.java serialises), so plain statics. */
+static std::vector<llama_token> g_kv, g_dkv;
+static llama_context* g_kv_ctx = nullptr;
+static llama_context* g_dkv_ctx = nullptr;
+static std::atomic<bool> g_kv_q8{false}, g_flash{false};
+
+/* What the last generate() measured (perf plan #8); lastStats() hands it to Java as JSON. */
+struct GenStats {
+    int promptTokens = 0, reusedTokens = 0, tokens = 0, draftProposed = 0, draftAccepted = 0;
+    long long prefillMs = 0, decodeMs = 0;
+    double tokPerSec = 0;
+    int thermalStart = 0, thermalEnd = 0;
+    bool stoppedHot = false;
+};
+static GenStats g_stats;
+
+/* Feed `toks` into `ctx`, keeping the prefix its cache already holds. Returns the number of tokens
+ * reused, or -1 on a decode failure. At least the last token is always decoded: that is what yields
+ * the logits the first sample reads. */
+static int prefill_reuse(llama_context* ctx, std::vector<llama_token>& kv, llama_context*& kv_ctx,
+                         const std::vector<llama_token>& toks, int n_batch) {
+    if (kv_ctx != ctx) { kv.clear(); kv_ctx = ctx; }
+    size_t common = 0;
+    const size_t maxCommon = std::min(kv.size(), toks.size() - 1);
+    while (common < maxCommon && kv[common] == toks[common]) common++;
+    llama_memory_t mem = llama_get_memory(ctx);
+    if (common > 0) {
+        if (!llama_memory_seq_rm(mem, 0, (llama_pos) common, -1)) { llama_memory_clear(mem, true); common = 0; }
+    } else {
+        llama_memory_clear(mem, true);
+    }
+    kv.clear();
+    for (size_t i = common; i < toks.size(); i += (size_t) n_batch) {
+        const int n = (int) std::min((size_t) n_batch, toks.size() - i);
+        llama_batch batch = llama_batch_get_one(const_cast<llama_token*>(toks.data()) + i, (int32_t) n);
+        if (llama_decode(ctx, batch) != 0) { llama_memory_clear(mem, true); return -1; }
+        if (g_cancel.load(std::memory_order_relaxed)) { llama_memory_clear(mem, true); return (int) common; }
+    }
+    kv = toks;
+    return (int) common;
 }
 static inline bool thermal_should_stop() { return g_thermal.load(std::memory_order_relaxed) >= 4; }
 static std::atomic<bool> g_backend_ready{false};
@@ -109,27 +163,74 @@ Java_in_stewardmd_llama_LlamaNative_freeModel(JNIEnv*, jobject, jlong h) {
 JNIEXPORT jlong JNICALL
 Java_in_stewardmd_llama_LlamaNative_newContext(
         JNIEnv*, jobject, jlong modelHandle, jint nCtx, jint nThreads,
-        jint nBatch, jint nUbatch, jint nThreadsBatch) {
+        jint nBatch, jint nUbatch, jint nThreadsBatch, jboolean kvQ8, jboolean flashAttn) {
     auto* m = reinterpret_cast<llama_model*>(modelHandle);
     if (m == nullptr) return 0;
-    llama_context_params cp = llama_context_default_params();
-    cp.n_ctx               = (uint32_t) nCtx;
-    // PREFILL COST lives here. Prefill is a batched matmul over the whole prompt, so it scales with
-    // how many tokens ggml can work on per pass (n_ubatch) and how many threads it can use for a
-    // BATCH (n_threads_batch), which is a different tradeoff from single-token decode: decode is
-    // latency-bound and hates slow little cores, prefill is throughput-bound and can use them.
-    // Both are parameters rather than constants so they can be swept on a real device.
-    cp.n_batch             = (uint32_t) (nBatch  > 0 ? nBatch  : 512);
-    cp.n_ubatch            = (uint32_t) (nUbatch > 0 ? nUbatch : 512);
-    cp.n_threads           = (int32_t) nThreads;
-    cp.n_threads_batch     = (int32_t) (nThreadsBatch > 0 ? nThreadsBatch : nThreads);
-    cp.abort_callback      = abort_cb;
-    cp.abort_callback_data = nullptr;
+    auto params = [&](bool q8, bool fa) {
+        llama_context_params cp = llama_context_default_params();
+        cp.n_ctx               = (uint32_t) nCtx;
+        // PREFILL COST lives here. Prefill is a batched matmul over the whole prompt, so it scales with
+        // how many tokens ggml can work on per pass (n_ubatch) and how many threads it can use for a
+        // BATCH (n_threads_batch), which is a different tradeoff from single-token decode: decode is
+        // latency-bound and hates slow little cores, prefill is throughput-bound and can use them.
+        // Both are parameters rather than constants so they can be swept on a real device.
+        cp.n_batch             = (uint32_t) (nBatch  > 0 ? nBatch  : 512);
+        cp.n_ubatch            = (uint32_t) (nUbatch > 0 ? nUbatch : 512);
+        cp.n_threads           = (int32_t) nThreads;
+        cp.n_threads_batch     = (int32_t) (nThreadsBatch > 0 ? nThreadsBatch : nThreads);
+        // QUANTISED KV + FLASH ATTENTION (perf plan #4): a q8_0 cache is half the size of f16 and
+        // halves the bytes moved per decoded token, the decode bottleneck on a phone. A quantised V
+        // cache needs flash attention, so q8 implies it.
+        if (fa) cp.flash_attn_type = LLAMA_FLASH_ATTN_TYPE_ENABLED;
+        if (q8) { cp.type_k = GGML_TYPE_Q8_0; cp.type_v = GGML_TYPE_Q8_0; }
+        cp.abort_callback      = abort_cb;
+        cp.abort_callback_data = nullptr;
+        return cp;
+    };
+    bool q8 = kvQ8 && flashAttn, fa = flashAttn;
+    llama_context_params cp = params(q8, fa);
     llama_context* c = llama_init_from_model(m, cp);
+    if (c == nullptr && (q8 || fa)) {
+        // This device or build refused the combination: run the plain context rather than failing.
+        LOGI("newContext: kv_q8=%d flash_attn=%d refused, retrying with defaults", (int) q8, (int) fa);
+        q8 = false; fa = false;
+        cp = params(false, false);
+        c = llama_init_from_model(m, cp);
+    }
+    g_kv_q8.store(q8); g_flash.store(fa);
     if (c == nullptr) LOGE("llama_init_from_model returned null (n_ctx=%d)", (int) nCtx);
-    else LOGI("newContext: n_ctx=%d threads=%d n_batch=%d n_ubatch=%d threads_batch=%d",
-              (int) nCtx, (int) nThreads, (int) cp.n_batch, (int) cp.n_ubatch, (int) cp.n_threads_batch);
+    else LOGI("newContext: n_ctx=%d threads=%d n_batch=%d n_ubatch=%d threads_batch=%d kv_q8=%d flash_attn=%d",
+              (int) nCtx, (int) nThreads, (int) cp.n_batch, (int) cp.n_ubatch, (int) cp.n_threads_batch, (int) q8, (int) fa);
     return reinterpret_cast<jlong>(c);
+}
+
+/* Same tokeniser? Same vocabulary type and size, same BOS and EOS ids. A mismatched draft would make
+ * every proposal a miss at best and an out-of-range id at worst (perf plan #6). */
+JNIEXPORT jboolean JNICALL
+Java_in_stewardmd_llama_LlamaNative_vocabCompatible(JNIEnv*, jobject, jlong a, jlong b) {
+    auto* ma = reinterpret_cast<llama_model*>(a);
+    auto* mb = reinterpret_cast<llama_model*>(b);
+    if (ma == nullptr || mb == nullptr) return JNI_FALSE;
+    const llama_vocab* va = llama_model_get_vocab(ma);
+    const llama_vocab* vb = llama_model_get_vocab(mb);
+    if (llama_vocab_type(va) != llama_vocab_type(vb)) return JNI_FALSE;
+    if (llama_vocab_n_tokens(va) != llama_vocab_n_tokens(vb)) return JNI_FALSE;
+    return (llama_vocab_bos(va) == llama_vocab_bos(vb) && llama_vocab_eos(va) == llama_vocab_eos(vb)) ? JNI_TRUE : JNI_FALSE;
+}
+
+/* The last generate()'s measurements as JSON (perf plan #8). */
+JNIEXPORT jstring JNICALL
+Java_in_stewardmd_llama_LlamaNative_lastStats(JNIEnv* env, jobject) {
+    const GenStats& s = g_stats;
+    char buf[512];
+    snprintf(buf, sizeof(buf),
+             "{\"promptTokens\":%d,\"reusedTokens\":%d,\"prefillMs\":%lld,\"decodeMs\":%lld,\"tokens\":%d,"
+             "\"tokPerSec\":%.2f,\"thermalStart\":\"%s\",\"thermalEnd\":\"%s\",\"draftProposed\":%d,"
+             "\"draftAccepted\":%d,\"stoppedHot\":%s,\"kvQ8\":%s,\"flashAttn\":%s}",
+             s.promptTokens, s.reusedTokens, s.prefillMs, s.decodeMs, s.tokens, s.tokPerSec,
+             thermal_name(s.thermalStart), thermal_name(s.thermalEnd), s.draftProposed, s.draftAccepted,
+             s.stoppedHot ? "true" : "false", g_kv_q8.load() ? "true" : "false", g_flash.load() ? "true" : "false");
+    return env->NewStringUTF(buf);
 }
 
 JNIEXPORT void JNICALL
@@ -199,13 +300,17 @@ Java_in_stewardmd_llama_LlamaNative_applyChatTemplate(
 JNIEXPORT jstring JNICALL
 Java_in_stewardmd_llama_LlamaNative_generate(
         JNIEnv* env, jobject, jlong ctxHandle, jlong modelHandle, jstring promptStr,
-        jint nPredict, jfloat temp, jint seed, jobject callback) {
+        jint nPredict, jfloat temp, jint seed, jlong draftCtxHandle, jlong draftModelHandle, jobject callback) {
     auto* ctx = reinterpret_cast<llama_context*>(ctxHandle);
     auto* mdl = reinterpret_cast<llama_model*>(modelHandle);
+    auto* dctx = reinterpret_cast<llama_context*>(draftCtxHandle);
+    auto* dmdl = reinterpret_cast<llama_model*>(draftModelHandle);
     if (ctx == nullptr || mdl == nullptr) return nullptr;
 
     g_cancel.store(false, std::memory_order_relaxed);
     const llama_vocab* vocab = llama_model_get_vocab(mdl);
+    GenStats st;
+    st.thermalStart = g_thermal.load(std::memory_order_relaxed);
 
     const char* prompt = env->GetStringUTFChars(promptStr, nullptr);
     if (prompt == nullptr) return nullptr;
@@ -222,9 +327,6 @@ Java_in_stewardmd_llama_LlamaNative_generate(
 
     const int n_ctx = (int) llama_n_ctx(ctx);
     if (ntok >= n_ctx) { LOGE("prompt %d >= n_ctx %d", ntok, n_ctx); return nullptr; }
-
-    // Fresh KV per answer — one-shot Q&A, no carried context (matches the whisper engine's no_context).
-    llama_memory_clear(llama_get_memory(ctx), true);
 
     // Sampler chain.
     //
@@ -255,49 +357,33 @@ Java_in_stewardmd_llama_LlamaNative_generate(
         if (env->ExceptionCheck()) env->ExceptionClear();
     }
 
-    // Prefill, CHUNKED to n_batch.
-    //
-    // llama_batch_get_one() over the whole prompt looks fine and crashes hard: llama_decode()
-    // GGML_ABORTs (SIGABRT, uncatchable) when a batch exceeds n_batch. Short prompts hid it; the real
-    // grounded package is ~2000 tokens against n_batch 512, which killed the app inside
-    // llama_context::decode. Feed the prompt in n_batch-sized slices instead, which is also how
-    // llama.cpp's own examples do it, and keep the compute buffer bounded rather than raising
-    // n_batch to n_ctx.
+    // Prefill, CHUNKED to n_batch (one llama_batch_get_one() over the whole prompt GGML_ABORTs when
+    // it exceeds n_batch), REUSING the prefix the cache already holds (perf plan #2).
     const int n_batch = (int) llama_n_batch(ctx);
     LOGI("generate: prefill start, %d tokens, n_batch=%d", (int) toks.size(), n_batch);
     const auto _pf0 = std::chrono::steady_clock::now();
-    for (int i = 0; i < (int) toks.size(); i += n_batch) {
-        int n = std::min(n_batch, (int) toks.size() - i);
-        llama_batch batch = llama_batch_get_one(toks.data() + i, (int32_t) n);
-        if (llama_decode(ctx, batch) != 0) {
-            LOGE("prefill decode failed at token %d/%d (n_batch=%d)", i, (int) toks.size(), n_batch);
-            llama_sampler_free(smpl);
-            return nullptr;
-        }
-        if (g_cancel.load(std::memory_order_relaxed)) { llama_sampler_free(smpl); return env->NewStringUTF(""); }
-    }
+    const int reused = prefill_reuse(ctx, g_kv, g_kv_ctx, toks, n_batch);
+    if (reused < 0) { LOGE("prefill decode failed"); llama_sampler_free(smpl); return nullptr; }
+    if (g_cancel.load(std::memory_order_relaxed)) { llama_sampler_free(smpl); return env->NewStringUTF(""); }
 
     const long long prefill_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::steady_clock::now() - _pf0).count();
 
     g_last_prefill_ms.store(prefill_ms);
     g_last_prompt_tokens.store(ntok);
-    LOGI("generate: prefill done in %lld ms, decoding", (long long) prefill_ms);
+    st.promptTokens = ntok; st.reusedTokens = reused; st.prefillMs = prefill_ms;
+    LOGI("generate: prefill done in %lld ms (%d reused), decoding", (long long) prefill_ms, reused);
 
     std::string full;
     int produced = 0;
+    bool stoppedHot = false;
     const int budget = (nPredict > 0) ? nPredict : 512;
+    const auto _dc0 = std::chrono::steady_clock::now();
 
-    while (produced < budget && (ntok + produced) < n_ctx) {
-        if (g_cancel.load(std::memory_order_relaxed)) { LOGI("generate cancelled at %d tokens", produced); break; }
-
-        llama_token id = llama_sampler_sample(smpl, ctx, -1);
-        if (llama_vocab_is_eog(vocab, id)) break;
-
+    auto emit = [&](llama_token id) {
         std::string piece = piece_of(vocab, id);
         full += piece;
         produced++;
-
         if (onToken != nullptr && !piece.empty()) {
             jstring js = env->NewStringUTF(piece.c_str());
             if (js != nullptr) {
@@ -306,25 +392,125 @@ Java_in_stewardmd_llama_LlamaNative_generate(
                 env->DeleteLocalRef(js);
             }
         }
+    };
 
-        llama_batch nb = llama_batch_get_one(&id, 1);
-        if (llama_decode(ctx, nb) != 0) { LOGE("decode failed at %d", produced); break; }
+    /* SPECULATIVE DECODING (perf plan #6). A small same-vocabulary draft proposes up to K tokens; the
+     * target scores `committed + proposals` in ONE batched pass and keeps the longest run it agrees
+     * with, then both caches roll back to that point. Under greedy sampling the target's choice at
+     * every position is deterministic, so an accepted proposal is exactly the token the plain loop
+     * would have produced: the answer is byte-identical, only faster. With temperature > 0 (a
+     * regenerate) the plain loop below runs. */
+    const bool useDraft = dctx != nullptr && dmdl != nullptr && temp <= 0.0f;
+    if (useDraft) {
+        constexpr int K = 6;
+        bool draftOK = prefill_reuse(dctx, g_dkv, g_dkv_ctx, toks, n_batch) >= 0;
+        llama_sampler* dsmpl = llama_sampler_chain_init(llama_sampler_chain_default_params());
+        llama_sampler_chain_add(dsmpl, llama_sampler_init_greedy());
+        llama_batch batch = llama_batch_init(K + 1, 0, 1);
 
-        /* Back off when the phone is hot. Same answer, lower sustained power, heat stops climbing.
-         * Checked every 8 tokens (~2 s at the measured rate) so the atomic read is negligible. */
-        if ((produced & 7) == 0) {
-            if (thermal_should_stop()) {
-                LOGI("stopping at %d tokens: thermal status critical", produced);
-                full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._";
-                break;
+        llama_token committed = llama_sampler_sample(smpl, ctx, -1);
+        int n = (int) g_kv.size();
+        while (produced < budget && n + 1 < n_ctx) {
+            if (g_cancel.load(std::memory_order_relaxed)) { LOGI("generate cancelled at %d tokens", produced); break; }
+            if (thermal_should_stop()) { stoppedHot = true; break; }
+            if (llama_vocab_is_eog(vocab, committed)) break;
+            emit(committed);
+
+            // 1. The draft proposes up to k tokens after `committed`. A failure on its side only means
+            //    fewer proposals; the target never depends on it for correctness.
+            std::vector<llama_token> drafts;
+            if (draftOK) {
+                const int k = std::max(0, std::min(K, n_ctx - n - 2));
+                llama_token one = committed;
+                llama_batch dnb = llama_batch_get_one(&one, 1);
+                if (llama_decode(dctx, dnb) == 0) {
+                    g_dkv.push_back(committed);
+                    while ((int) drafts.size() < k) {
+                        llama_token d = llama_sampler_sample(dsmpl, dctx, -1);
+                        if (llama_vocab_is_eog(vocab, d)) break;
+                        llama_token dd = d;
+                        llama_batch db = llama_batch_get_one(&dd, 1);
+                        if (llama_decode(dctx, db) != 0) { draftOK = false; break; }
+                        g_dkv.push_back(d);
+                        drafts.push_back(d);
+                    }
+                } else draftOK = false;
             }
+
+            // 2. The target scores committed + proposals in one pass, logits at every position.
+            std::vector<llama_token> step; step.reserve(drafts.size() + 1);
+            step.push_back(committed); step.insert(step.end(), drafts.begin(), drafts.end());
+            batch.n_tokens = (int32_t) step.size();
+            for (size_t i = 0; i < step.size(); i++) {
+                batch.token[i] = step[i]; batch.pos[i] = (llama_pos) (n + (int) i);
+                batch.n_seq_id[i] = 1; batch.seq_id[i][0] = 0; batch.logits[i] = 1;
+            }
+            if (llama_decode(ctx, batch) != 0) { LOGE("verify decode failed at %d", produced); break; }
+            g_kv.insert(g_kv.end(), step.begin(), step.end());
+
+            // 3. Accept the longest run the target agrees with; its first disagreement (or the token
+            //    after the last accepted proposal) is the next committed token.
+            int accepted = 0; bool haveNext = false; llama_token next = committed;
+            for (size_t i = 0; i <= drafts.size(); i++) {
+                llama_token t = llama_sampler_sample(smpl, ctx, (int32_t) i);
+                if (i < drafts.size() && t == drafts[i]) {
+                    accepted++; emit(drafts[i]);
+                    if (produced >= budget) break;
+                    continue;
+                }
+                next = t; haveNext = true; break;
+            }
+            st.draftProposed += (int) drafts.size(); st.draftAccepted += accepted;
+
+            // 4. Roll both caches back to what was accepted.
+            const int keep = n + 1 + accepted;
+            if ((int) g_kv.size() > keep) { llama_memory_seq_rm(llama_get_memory(ctx), 0, (llama_pos) keep, -1); g_kv.resize((size_t) keep); }
+            if ((int) g_dkv.size() > keep) { llama_memory_seq_rm(llama_get_memory(dctx), 0, (llama_pos) keep, -1); g_dkv.resize((size_t) keep); }
+            n = keep;
+            if (!haveNext) break;
+            committed = next;
+
+            const int nap = thermal_yield_us(produced);
+            if (nap > 0) usleep((useconds_t) (nap * (1 + accepted)));
         }
-        const int nap = thermal_yield_us();
-        if (nap > 0) usleep(nap);
+        llama_batch_free(batch);
+        llama_sampler_free(dsmpl);
+    } else {
+        while (produced < budget && (ntok + produced) < n_ctx) {
+            if (g_cancel.load(std::memory_order_relaxed)) { LOGI("generate cancelled at %d tokens", produced); break; }
+
+            llama_token id = llama_sampler_sample(smpl, ctx, -1);
+            if (llama_vocab_is_eog(vocab, id)) break;
+            emit(id);
+
+            llama_batch nb = llama_batch_get_one(&id, 1);
+            if (llama_decode(ctx, nb) != 0) { LOGE("decode failed at %d", produced); break; }
+            g_kv.push_back(id);
+
+            /* Back off when the phone is warm or hot. Same answer, lower sustained power, heat stops
+             * climbing. Checked every 8 tokens (~2 s at the measured rate) so the atomic read is negligible. */
+            if ((produced & 7) == 0) {
+                if (thermal_should_stop()) { stoppedHot = true; break; }
+            }
+            const int nap = thermal_yield_us(produced);
+            if (nap > 0) usleep((useconds_t) nap);
+        }
+    }
+    if (stoppedHot) {
+        LOGI("stopping at %d tokens: thermal status critical", produced);
+        full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._";
     }
 
-    LOGI("generate: %d prompt tokens, prefill %lld ms, %d produced%s", ntok, (long long) prefill_ms,
-         produced, g_cancel.load() ? " (cancelled)" : "");
+    st.decodeMs = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - _dc0).count();
+    st.tokens = produced;
+    st.tokPerSec = st.decodeMs > 0 ? (double) produced / ((double) st.decodeMs / 1000.0) : 0.0;
+    st.thermalEnd = g_thermal.load(std::memory_order_relaxed);
+    st.stoppedHot = stoppedHot;
+    g_stats = st;
+
+    LOGI("generate: %d prompt tokens (%d reused), prefill %lld ms, %d produced, %.1f tok/s, draft %d/%d%s",
+         ntok, reused, (long long) prefill_ms, produced, st.tokPerSec, st.draftAccepted, st.draftProposed,
+         g_cancel.load() ? " (cancelled)" : "");
     llama_sampler_free(smpl);
     return env->NewStringUTF(full.c_str());
 }
@@ -422,6 +608,7 @@ Java_in_stewardmd_llama_LlamaNative_generateWithImage(
     }
 
     llama_memory_clear(llama_get_memory(ctx), true);   // fresh KV per answer
+    g_kv.clear(); g_dkv.clear();                          // positions are embeddings here: nothing reusable
 
     LOGI("mtmd: tokenized, evaluating chunks");
     const auto tPrefill = std::chrono::steady_clock::now();
