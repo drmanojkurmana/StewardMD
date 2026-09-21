@@ -117,10 +117,11 @@ const { L } = load();
   {
     const w = load({ tokens: ["ok"] });
     await w.L.answer({ question: "Treatment of STEMI" }, { pack: "maik-lite", depth: "detailed" });
-    ok("detailed depth raises the token budget to at least 1024", w.calls.generate[0].nPredict >= 1024);
+    ok("no token cap: the answer may use the context the prompt leaves free (>= 1024)", w.calls.generate[0].nPredict >= 1024);
+    ok("... but never more than the context window", w.calls.generate[0].nPredict < 4096);
     const c = load({ tokens: ["ok"] });
     await c.L.answer({ question: "Treatment of STEMI" }, { pack: "maik-lite" });
-    ok("concise keeps the pack default", c.calls.generate[0].nPredict <= 768);
+    ok("a concise ask gets the same open budget (owner: no limits for offline models)", c.calls.generate[0].nPredict >= 1024);
   }
   const hist = L.buildPrompt({ question: "and the dose?", history: [
     { role: "user", text: "meropenem in meningitis" }, { role: "assistant", text: "Meropenem is used for..." }] });
@@ -138,7 +139,7 @@ const { L } = load();
      /no section labels/.test(L.SYSTEM) && /ONE plain sentence/.test(L.SYSTEM));
   ok("system prompt makes no promise about retrieved knowledge",
      !/RETRIEVED|knowledge base|grounding/i.test(L.SYSTEM));
-  ok("system prompt stays terse", L.SYSTEM.length < 900);
+  ok("system prompt stays compact (owner 2026-09-21: it now asks for full sections when detail is requested)", L.SYSTEM.length < 1400);
   // Phrased positively: a 4B follows instructions far better than prohibitions. The old negative
   // wording ("not a made-up figure") produced "20 mg/kg" for adult IV magnesium.
   ok("dose rule tells it what TO do", /give the standard flat adult dose/i.test(L.SYSTEM));
@@ -163,7 +164,7 @@ const { L } = load();
     ok(`NOT a greeting: ${JSON.stringify(q)}`, LG.isGreeting(q) === false);
 
   // The fix must not be paid for on every clinical answer: SYSTEM is prefill on the critical path.
-  ok("SYSTEM is untouched by the greeting fix", LG.SYSTEM.length < 900);
+  ok("SYSTEM is untouched by the greeting fix", LG.SYSTEM.length < 1400);
   ok("greetings get their own, shorter prompt", LG.SYSTEM_GREET.length < LG.SYSTEM.length);
   ok("greeting prompt asks for one short sentence", /one short/i.test(LG.SYSTEM_GREET));
   ok("greeting prompt keeps it non-clinical", /nothing clinical/i.test(LG.SYSTEM_GREET));
@@ -209,7 +210,7 @@ const { L } = load();
   ok("each onDelta value extends the previous", seen.every((v, i) => i === 0 || v.startsWith(seen[i - 1])));
   ok("listener removed after the answer (no leak across questions)", calls.removed === 1);
   ok("greedy by default (reproducible answers)", calls.generate[0].temperature === 0);
-  ok("nPredict capped from the pack", calls.generate[0].nPredict === 512);
+  ok("no pack cap: the answer gets the context the prompt leaves free (owner 2026-09-21)", calls.generate[0].nPredict >= 512 && calls.generate[0].nPredict < 4096);
   ok("system prompt sent", /clinical decision support/i.test(calls.generate[0].system));
   // Prefill is ~14 tok/s on-device and linear in prompt tokens, so every character here is latency:
   // roughly 1s per 14 tokens (~56 chars). The budget grew 600 -> 750 -> 900: the last step bought the

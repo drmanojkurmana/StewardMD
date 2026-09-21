@@ -8961,3 +8961,30 @@ paths, so a repaint never reshuffles a trace.
 Owner, 2026-09-20 (voice): "Every free user, irrespective of any user or guest user, should have Pro AI models on and available. No Pro needed." This reverses the 2026-08-27 "Pro requires a verified registration" decision for ON-DEVICE answering only. `gateActive()` in maik-engine.js returns true for everyone (no SMD_PRO, no debug-build exception, no bypass key); the settings row and picker never sell Pro for it; the server feature matrix lists `local_ai` under every tier. MaiK Cloud keeps its own gate because tokens cost money.
 
 Why now: the Pro verdict had locked the owner's own phone out of the models (offline-gate PR #1163 fixed the verdict; this removes the dependency). The decision is about access, not cost: an on-device model spends nothing server-side.
+
+## 2026-09-21 · Universal Search replaces the header search panel
+
+**Ask:** "make it search anything inside app, any feature, topic, anything ... and category filters."
+**Decision:** New `search.js` panel over a provider registry; the three legacy listeners on
+`#smdSearchInput` are left in place but never shown (app.js is minified, never edited). Default ON
+with a kill switch (`?usearch=0`), per the 2026-09-04 no-more-flagging instruction; git tag
+`pre-universal-search` is the recovery point. Cases/patients not indexed (PHI). Cmd/Ctrl-K desktop shortcut,
+safe-area 100dvh viewport, race-condition close guard, and individual recent-item deletion are included.
+Schemes, and CliniX/SURGX lazy content are deferred to Roadmap.
+
+
+**MaiK settings: one page, our names, a grade ladder (2026-09-21).** Owner: *"This whole page is
+shit. Make into one single well organised setting and dont name Real Model names only our model
+names."* Four panels (engine, capabilities, pack list, KB toggle) each re-explained the same thing;
+they are now one page that reads as a question and its consequences (who answers, on this phone,
+model library, advanced). Vendor and technique words are gone from every string a clinician can see;
+`actual` in the registry keeps provenance for logs. The four packs that carried a vendor's product
+name are renamed (Prime, Swift, Max, Max 2) with their IDs unchanged so installs survive.
+Grades replace gigabytes and provenance as the way a model is described, on the clinician's own
+ladder: **MBBS** (our own doctor), **MD** (the medical specialists we trained to work as one),
+**DM** (MaiK Cloud, the super specialist), **PhD** (the general models: well read, not a
+physician). Intern/Resident were rejected for the general models because both imply medical training
+those models never had. The grade is derived from the registry (`own`, `caps.medical`), never
+hand-kept, so a new pack cannot land ungraded. The Knowledge Base switch became a positive label
+("Check answers against the Knowledge Base"): a switch whose label reads the state it is NOT in is
+what "Disconnected" with a tick beside it looked like on the phone.

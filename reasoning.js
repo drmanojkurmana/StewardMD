@@ -3297,6 +3297,8 @@
       }
     }
   }
+  // Universal search: the KB index and opener are closure-private; expose read-only handles.
+  try { window.SMD_KB = { search: kbSearch, open: kbOpen }; } catch (e) {}
   function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
   function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
   function kbPersonalHTML(entries) {
@@ -4587,10 +4589,19 @@
     // options instead ({ allowedFields, noteType } for "surgx-note"), merged into the body as-is.
     extract: function (transcript, kind, catalog) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
-      var t = String(transcript == null ? "" : transcript).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
+      // The transcript is CLIPPED here, silently. At the old fixed 8000 it meant a consult longer
+      // than roughly eleven minutes had its tail dropped before it was ever sent - and the tail of a
+      // consultation is where the diagnosis, the plan and the prescription are spoken. The server
+      // accepts MAX_IN_CHARS (functions/api/ai/[[path]].js, 16000 by default), so a caller that
+      // knows its content is long may ask for more, up to that ceiling. Default unchanged.
+      var maxChars = 8000;
+      if (catalog && typeof catalog === "object" && !Array.isArray(catalog) && catalog.maxChars) {
+        maxChars = Math.max(1000, Math.min(16000, Number(catalog.maxChars) || 0)) || 8000;
+      }
+      var t = String(transcript == null ? "" : transcript).slice(0, maxChars); if (!t) return Promise.resolve({ error: "no-text" });
       var body = { transcript: t, kind: kind };
       if (Array.isArray(catalog)) body.catalog = catalog;
-      else if (catalog && typeof catalog === "object") { for (var ok in catalog) if (Object.prototype.hasOwnProperty.call(catalog, ok) && !(ok in body)) body[ok] = catalog[ok]; }
+      else if (catalog && typeof catalog === "object") { for (var ok in catalog) if (Object.prototype.hasOwnProperty.call(catalog, ok) && !(ok in body) && ok !== "maxChars") body[ok] = catalog[ok]; }
       return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
         .then(function (r) { if (r.status === 402 || r.status === 429) return r.json().then(function (j) { return { error: "quota", needsPro: r.status === 402, message: (j && j.message) || "" }; }, function () { return { error: "quota", needsPro: r.status === 402 }; }); if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });

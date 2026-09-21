@@ -19,6 +19,9 @@ final class WhisperEngine {
     var onState: ((String) -> Void)?
     var onPartial: ((String) -> Void)?
     var onFinal: ((String) -> Void)?
+    /// A segment transcribed mid-recording by `flushAndTranscribe` (continuous capture). Distinct
+    /// from `onFinal`: the mic is still open and more segments will follow.
+    var onFlush: ((String) -> Void)?
     var onError: ((WhisperErr, String) -> Void)?
     /// End-of-speech detected (opt-in, see `silenceEndpointMs`). The plugin turns this into the same
     /// stop-and-transcribe the JS "stop" would do. Fires at most once per recording.
@@ -246,6 +249,22 @@ final class WhisperEngine {
         }
     }
 
+    /// CONTINUOUS CAPTURE: transcribe everything captured so far WITHOUT stopping the mic.
+    /// Snapshots `samples`, clears them (so the next flush sees only new audio) and runs inference on
+    /// the snapshot; the tap keeps appending in the meantime, so no audio is lost at the seam — which
+    /// is the whole point (the JS stop/re-arm loop drops a few hundred ms per boundary).
+    /// Emits `onFlush`; `onFinal` still fires exactly once, from stopAndTranscribe.
+    /// `work` is serial, so overlapping flushes (and a stop landing on top of one) queue rather than
+    /// running two whisper_full calls against the same context.
+    func flushAndTranscribe(language: String, initialPrompt: String) {
+        guard recording, !cancelled else { return }
+        work.async { [weak self] in
+            guard let self = self else { return }
+            self.sampleLock.lock(); let audio = self.samples; self.samples.removeAll(keepingCapacity: true); self.sampleLock.unlock()
+            self.transcribe(audio: audio, language: language, initialPrompt: initialPrompt, flush: true)
+        }
+    }
+
     /// Abort: stop capture, restore session, drop the buffer. No transcription, no final event.
     func cancel() {
         cancelled = true
@@ -274,11 +293,12 @@ final class WhisperEngine {
 
     // MARK: - Inference
 
-    private func transcribe(audio: [Float], language: String, initialPrompt: String) {
+    private func transcribe(audio: [Float], language: String, initialPrompt: String, flush: Bool = false) {
+        let emit: ((String) -> Void)? = flush ? onFlush : onFinal
         guard let ctx = ctx else { onError?(.transcriptionFailure, "no ctx"); return }
         if cancelled { return }
         // Too short to be meaningful (< ~0.2 s at 16 kHz) → empty final, not an error.
-        if audio.count < 3200 { onState?("done"); onFinal?(""); return }
+        if audio.count < 3200 { if !flush { onState?("done") }; emit?(""); return }
 
         // Beam-search decoding — noticeably more accurate than greedy for accented (Indian) English
         // and medical terms; a little slower, which is fine for short stop-to-transcribe clips.
@@ -334,8 +354,8 @@ final class WhisperEngine {
         ctxLock.unlock()
         if cancelled { return }
         if ret != 0 { onError?(.transcriptionFailure, "whisper_full \(ret)"); return }
-        onState?("done")
-        onFinal?(text.trimmingCharacters(in: .whitespacesAndNewlines))
+        if !flush { onState?("done") }
+        emit?(text.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     deinit { stopCapture(); freeContext() }

@@ -16,9 +16,12 @@ import Capacitor
  *   startTranscribe({ model, language?, initialPrompt?, silenceEndpointMs? }) -> { ok }  (+ whisperState)
  *     silenceEndpointMs > 0 auto-stops the turn once the speaker goes quiet that long (MaiK Ask).
  *   stopTranscribe()                                    -> { ok }         (+ whisperFinal / whisperError)
+ *   flushTranscribe()                                   -> { ok }         (+ whisperFlush)
+ *     CONTINUOUS CAPTURE: transcribe what has been captured so far WITHOUT stopping the mic.
  *   cancel()                                            -> { ok }
  *
  * Events (notifyListeners): whisperState {state}, whisperPartial {text}, whisperFinal {text},
+ *   whisperFlush {text},
  *   whisperError {code, message}, whisperDownloadProgress {progress}.
  */
 @objc(WhisperPlugin)
@@ -31,7 +34,9 @@ public class WhisperPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "deleteModel", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "startTranscribe", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "stopTranscribe", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "cancel", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "cancel", returnType: CAPPluginReturnPromise),
+        // APPEND-ONLY: this list is positional. New methods go at the END, never in the middle.
+        CAPPluginMethod(name: "flushTranscribe", returnType: CAPPluginReturnPromise)
     ]
 
     private let engine = WhisperEngine()
@@ -46,6 +51,7 @@ public class WhisperPlugin: CAPPlugin, CAPBridgedPlugin {
         engine.onState = { [weak self] s in self?.notifyListeners("whisperState", data: ["state": s]) }
         engine.onPartial = { [weak self] t in self?.notifyListeners("whisperPartial", data: ["text": t]) }
         engine.onFinal = { [weak self] t in self?.notifyListeners("whisperFinal", data: ["text": t]) }
+        engine.onFlush = { [weak self] t in self?.notifyListeners("whisperFlush", data: ["text": t]) }
         // End-of-speech (opt-in VAD): finish this turn exactly as an explicit stopTranscribe() would,
         // so the same language/prompt are used and whisperFinal is emitted on the normal path.
         engine.onEndpoint = { [weak self] in
@@ -132,6 +138,15 @@ public class WhisperPlugin: CAPPlugin, CAPBridgedPlugin {
 
     @objc func cancel(_ call: CAPPluginCall) {
         engine.cancel()
+        call.resolve(["ok": true])
+    }
+
+    // APPENDED (registration is positional - keep new methods last).
+    /// Continuous capture: transcribe the audio captured so far and keep the mic OPEN. The segment
+    /// arrives as `whisperFlush {text}`; `whisperFinal` still fires once, on stopTranscribe().
+    /// Same language/prompt as the running session, so a flushed segment decodes like a stopped one.
+    @objc func flushTranscribe(_ call: CAPPluginCall) {
+        engine.flushAndTranscribe(language: lastLanguage, initialPrompt: lastPrompt)
         call.resolve(["ok": true])
     }
 }

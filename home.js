@@ -1998,6 +1998,8 @@
     HOME_TOOLS.forEach(function (t) { if (!seen[t.act]) out.push(t); });
     return out;
   }
+  // Universal search reads the same registry the home grid renders, filtered by eligibility.
+  window.SMD_HOME_TOOLS = function () { return HOME_TOOLS.filter(homeToolEligible).map(function (t) { return { act: t.act, tt: t.tt, sub: t.sub || "", ic: t.ic || "" }; }); };
   // Drops `dragEl` into `container` (list or 2D grid) at whichever slot the pointer is over, on
   // every move, and persists the resulting order on release. Shared by the Customize-tools sheet
   // (vertical list) and the home tool grid (2D) - one implementation, no per-surface duplicate.
@@ -5737,22 +5739,24 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Generic clinical/request words: a message made ONLY of these has no subject of its own and is a
     // follow-up on the current topic. Shared by maikResolveFollowup() and maikNovelTokens().
     var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|it|them|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|medicine|medicines|med|meds|recommend|recommended|suggest|suggested|suggestion|suggestions|prescribe|prescribed|prescription|write|writing|should|shall|can|could|would|will|you|we|i|need|use|used|using|which|when|why|how|better|safe|safer|safety|alternative|alternatives|avoid|contraindication|contraindications|interaction|interactions|side|effect|effects|adverse|acute|chronic|severe|mild|moderate|start|starting|begin|prefer|preferred|do|does|to|with|on|or|as|at|than|vs|any|renal|hepatic|kidney|liver|pregnancy|pregnant|elderly|adult|child|children|paediatric|pediatric|neonatal|neonate|geriatric|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|diagnose|diagnosed|diagnostic|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
+    // "Write it long": detail, essay, full/complete/comprehensive answer. One predicate, three callers.
+    var MAIK_DETAIL_ASK = /(in (more )?detail|detailed|elaborate|in depth|essay|full answer|complete answer|comprehensive|everything about)/;
     function maikResolveFollowup(q) {
       var t = _maikTopic; if (!t || !t.topic) return null;
       if (t.ts && (Date.now() - t.ts) > 30 * 60 * 1000) { _maikTopic = null; return null; }   // session continuity only
       q = maikDeslang(q);   // "wat iz da treatment doze?" → "what is the treatment dose?" so the branches below match
       var n = maikNorm(q), wc = n.split(" ").filter(Boolean).length;
-      var DETAIL_RE = /(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/, DETAIL_START_RE = /^(more|detail|details|elaborate|expand|continue)\b/;
+      var DETAIL_RE = /(in (more )?detail|more detail|detailed answer|detailed|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth|essay|comprehensive|everything)/, DETAIL_START_RE = /^(more|detail|details|elaborate|expand|continue)\b/;
       if (DETAIL_RE.test(n) || DETAIL_START_RE.test(n)) {
-        // Owner transcript 2026-09-21: "How to treat Covid 19 tell me in detail" matched "in detail" and
-        // was rewritten to a detailed STEMI answer. The detail phrase only continues the topic when
-        // what is LEFT is generic ("tell me in detail", "more detail please"); a message that still
-        // names a subject after the phrase is a NEW question, asked in detail (see the caller).
-        var restD = n.replace(DETAIL_RE, " ").replace(DETAIL_START_RE, " ").replace(/\?/g, " ").split(" ").filter(Boolean);
-        if (!restD.length || restD.every(function (w) { return GENERIC_FU.test(w); })) {
-          return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
-        }
-        return null;
+        // Owner transcripts 2026-09-21: "How to treat Covid 19 tell me in detail" was rewritten to a
+        // detailed STEMI answer; later "Give me detailed answer Pathophsyooly pathogensis climical
+        // features diagnosis treatment full essay" (after Myocarditis) came back about malaria. A
+        // detail request continues the topic unless it names a subject the thread has not seen: the
+        // same novelty test as the continuity gate, where typos and aspect words are not subjects.
+        if (maikNovelTokens(q).length) return null;
+        var restD = n.replace(DETAIL_RE, " ").replace(DETAIL_START_RE, " ").replace(/\?/g, " ").split(" ").filter(function (w) { return w && !MAIK_FU_FILLER.test(w); });
+        var askD = restD.length ? restD.join(" ") : "management";
+        return { question: "Provide a detailed, complete clinical answer on " + t.topic + " covering: " + askD + ". Write it in full, with a section for each aspect asked.", depth: "detailed", topic: t.topic, retrieval: t.topic + " " + askD };
       }
       if (/(antibiotic|antibiotics|abx|antimicrobial|drug of choice|which agent)/.test(n) && wc <= 7) {
         return { question: "Empiric antimicrobial therapy for " + t.topic + " — agent/class choice, severity and host adjustment, and culture-directed de-escalation principles.", depth: "concise", topic: "antibiotics for " + t.topic, retrieval: t.topic + " empiric antibiotics antimicrobial therapy de-escalation" };
@@ -5832,7 +5836,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * receives the recent turns either way; this decides only whether the topic is GLUED onto the
      * question, and it sets pkg.newTopic so the server prompt does not merge the two subjects.
      */
-    var MAIK_FU_FILLER = /^(just|only|please|pls|kindly|tell|me|us|give|show|explain|describe|elaborate|like|im|i'?m|am|dumb|layman|simple|simply|simpler|brief|briefly|short|shortly|quick|quickly|one|two|line|lines|word|words|sentence|sentences|point|points|send|order|need|needed|want|wanted|know|mean|meant|say|said|again|also|too|more|less|now|then|here|there|what|whats|which|when|where|why|how|much|many|is|are|was|were|be|been|can|could|should|would|will|shall|may|might|must|about|for|of|in|on|at|to|with|from|by|and|or|but|if|so|not|no|yes|ok|okay|it|its|this|that|these|those|they|them|their|he|she|his|her|we|our|you|your|my|mine|maik|doctor|doc|sir|madam|regarding|same|above|earlier|previous|previously|before|next|other|another|any|some|all|each|every|both|either|neither|such|per|as|than|very|really|actually|exactly|exact|detail|details|detailed|depth|expand|continue|go|ahead|sure|right|correct|wrong|instead|rather|else|anything|something|nothing|everything|thing|things|stuff|info|information|answer|answers|question|questions|reply|response|version|format|table|list|bullet|bullets|summary|summarise|summarize|the|a|an|does|did|do|done|get|got|make|made|take|taken|put|use|used|using|given|start|started|stop|stopped|wait|till|until|beyond|below|greater|lower|higher|level|levels|value|values|normal|high|low|via|through|patient|patients|case|safest|impairment|impaired|insufficiency|dysfunction|adjustment|adjusted|adjust|elderly|children|adults|neonates|infants|compare|compared|comparison|difference|differences|between|versus|timing|time|times|schedule|interval|intervals|frequency|duration|urgency|urgent|priority|role|indication|indications|indicated|contraindicated|preferred|preferable|recommendation|recommendations)$/;
+    var MAIK_FU_FILLER = /^(essay|full|complete|completely|comprehensive|thorough|thoroughly|overview|notes|entire|whole|everything|cover|covering|include|including|aspects|aspect|headings|sections|section|paragraph|paragraphs|long|longer|big|bigger|large|proper|properly|clearly|pathophysiology|pathogenesis|aetiology|etiology|epidemiology|presentation|manifestations|manifestation|clinical|examination|imaging|scan|scans|mri|usg|ultrasound|xray|radiograph|radiology|ecg|ekg|echo|echocardiography|biopsy|culture|cultures|serology|pcr|marker|markers|level|levels|useful|helpful|indicated|indication|indications|role|utility|accuracy|sensitivity|specificity|confirm|confirmed|confirmatory|detect|detected|detects|shows|shown|reveal|reveals|just|only|please|pls|kindly|tell|me|us|give|show|explain|describe|elaborate|like|im|i'?m|am|dumb|layman|simple|simply|simpler|brief|briefly|short|shortly|quick|quickly|one|two|line|lines|word|words|sentence|sentences|point|points|send|order|need|needed|want|wanted|know|mean|meant|say|said|again|also|too|more|less|now|then|here|there|what|whats|which|when|where|why|how|much|many|is|are|was|were|be|been|can|could|should|would|will|shall|may|might|must|about|for|of|in|on|at|to|with|from|by|and|or|but|if|so|not|no|yes|ok|okay|it|its|this|that|these|those|they|them|their|he|she|his|her|we|our|you|your|my|mine|maik|doctor|doc|sir|madam|regarding|same|above|earlier|previous|previously|before|next|other|another|any|some|all|each|every|both|either|neither|such|per|as|than|very|really|actually|exactly|exact|detail|details|detailed|depth|expand|continue|go|ahead|sure|right|correct|wrong|instead|rather|else|anything|something|nothing|everything|thing|things|stuff|info|information|answer|answers|question|questions|reply|response|version|format|table|list|bullet|bullets|summary|summarise|summarize|the|a|an|does|did|do|done|get|got|make|made|take|taken|put|use|used|using|given|start|started|stop|stopped|wait|till|until|beyond|below|greater|lower|higher|level|levels|value|values|normal|high|low|via|through|patient|patients|case|safest|impairment|impaired|insufficiency|dysfunction|adjustment|adjusted|adjust|elderly|children|adults|neonates|infants|compare|compared|comparison|difference|differences|between|versus|timing|time|times|schedule|interval|intervals|frequency|duration|urgency|urgent|priority|role|indication|indications|indicated|contraindicated|preferred|preferable|recommendation|recommendations)$/;
     // Uppercase tokens that are notation, not a topic ("IV", "BD", "ICU"), so they never count as a new subject.
     var MAIK_ACRO_OK = /^(OK|IV|IM|PO|SC|SL|PR|BD|TDS|TID|OD|QID|HS|ICU|ER|ED|OPD|IPD|MG|ML|KG|HR|BP|RR|CT|MRI|USG|CXR|CBC|ABG|LFT|RFT|KFT|TFT|ECG|EKG|PRN|SOS|STAT|RX|MX|DX|DDX|HX|PT|ASAP|FYI|MEQ|MMOL|DL|IU|GM|MCG|HRS|MIN|VS)$/;
     function maikThreadBag() {
@@ -5852,6 +5856,32 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var shouting = letters.length >= 8 && upper.length / letters.length > 0.6;
       if (!shouting) raw.replace(/\b[A-Z][A-Z0-9]{1,5}\b/g, function (w) { caps[w.toLowerCase()] = w; return w; });
       var toks = maikNorm(maikDeslang(raw)).replace(/\?/g, "").split(" ").filter(Boolean);
+      // A misspelt generic word is still generic: "pathogensis", "climical" (owner transcript,
+      // 2026-09-21) were counted as new subjects and sent a detail request off-topic. A long token
+      // within two edits of a long vocabulary word with the same first letter is dismissed.
+      var vocab = (GENERIC_FU.source + "|" + MAIK_FU_FILLER.source).replace(/[\^\$\(\)]/g, "").split("|").filter(function (v) { return v.length >= 7 && /^[a-z]+$/.test(v); });
+      function within2(a, b) {
+        var prev = [], cur, i, j;
+        for (j = 0; j <= b.length; j++) prev[j] = j;
+        for (i = 1; i <= a.length; i++) {
+          cur = [i]; var rowMin = i;
+          for (j = 1; j <= b.length; j++) {
+            cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+            if (cur[j] < rowMin) rowMin = cur[j];
+          }
+          if (rowMin > 2) return false;
+          prev = cur;
+        }
+        return prev[b.length] <= 2;
+      }
+      function nearVocab(w) {
+        if (w.length < 7) return false;
+        for (var i = 0; i < vocab.length; i++) {
+          var v = vocab[i];
+          if (v[0] === w[0] && Math.abs(v.length - w.length) <= 2 && within2(w, v)) return true;
+        }
+        return false;
+      }
       toks.forEach(function (w) {
         var isAcro = !!caps[w] && !MAIK_ACRO_OK.test(caps[w]);
         if (!isAcro) {
@@ -5862,6 +5892,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // search let "MI" hide inside "immediately"; 2-3 letter tokens must match a whole word.
         var stem = w.slice(0, Math.min(w.length, 6)).replace(/[^a-z0-9]/g, "");
         if (stem && new RegExp("\\b" + stem + (w.length <= 3 ? "\\b" : "")).test(bag)) return;
+        if (nearVocab(w)) return;
         out.push(w);
       });
       return out;
@@ -6233,7 +6264,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return "<b>" + maikEscH(m.label) + "</b> (" + maikEscH(m.size || "") + (m.installed ? ", installed" : "") + (m.level === "warn" ? ", may run slowly" : "") + ")";
       }).join(", ");
       return maikEscH(r.message || "This needs a different on-device model.") +
-        (recs ? "<br><br>Unlocks on this phone with: " + recs + ". Open <b>Settings, AI Assistant, Answer engine</b> to download or select one." : "") +
+        (recs ? "<br><br>Unlocks on this phone with: " + recs + ". Open <b>Settings, MaiK, Who answers</b> to download or select one." : "") +
         (r.offline ? "" : "<br><br>Or tap the model name at the top and choose <b>MaiK Cloud</b>.");
     }
     if (e === "kb-only") return maikEscH(r.message || "KB-only mode makes no AI calls.");
@@ -7055,7 +7086,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // Evidence Review is a cloud feature. With an on-device engine selected the old path refused
         // ("Evidence Review is a MaiK Cloud feature") and answered nothing; owner transcript 2026-09-21,
         // "Which is better in Esophageal Varices". Answer it on-device instead, and say why once.
-        var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.effective ? SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
+        var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective ? window.SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
         if (!_eff || _eff === "cloud") { maikRunResearch(q); return; }
         try { toast("Evidence Review needs MaiK Cloud. Answering on-device."); } catch (e) {}
       }
@@ -7084,7 +7115,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (!_own && _fwc <= 14 && !maikNovelTokens(q).length) {
           _maikFollowUp = true;
           var _fq = _maikTopic.topic + ": " + q.replace(/\?+$/, "").trim();
-          var _fdepth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
+          var _fdepth = MAIK_DETAIL_ASK.test(maikNorm(q)) ? "detailed" : "concise";
           runClinical(_fq, _maikTopic.topic + " " + q, _fdepth, active, _maikTopic.topic); return;
         }
       }
@@ -7117,7 +7148,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _lk = maikDoseLookup(q);
       if (_lk) { maikDoseCard(_lk, q); return; }
       var topic = maikV2() ? maikCanonTopic(q) : q;
-      var depth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
+      var depth = MAIK_DETAIL_ASK.test(maikNorm(q)) ? "detailed" : "concise";
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)

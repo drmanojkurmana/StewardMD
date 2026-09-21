@@ -172,11 +172,15 @@ test("the toggle renders as a real switch with the app's own markup and an acces
   assert.match(html, /aria-checked="true"/, "state is exposed to assistive tech");
   assert.match(html, /aria-label="[^"]+"/, "the control has an accessible name");
   assert.match(html, /class="smd-nav-sw on"/, "reuses the app's switch component");
-  assert.match(html, />Connected</, "label reads the state");
+  // A positive label, on or off (owner, 2026-09-21): "Connected / Disconnected" read backwards on
+  // a phone. The label names the check; the sub-label states what the current side costs.
+  assert.match(html, />Check answers against the Knowledge Base</, "label names the check");
+  assert.match(html, /safer default/, "on: says why it is the default");
 
   E.setRagLinked(false);
   const off = E.ragLinkHTML();
   assert.match(off, /aria-checked="false"/);
-  assert.match(off, />Disconnected</);
+  assert.match(off, /shows no sources/, "off: says what it costs");
+  assert.doesNotMatch(off, /Disconnected/);
   assert.doesNotMatch(off, /class="smd-nav-sw on"/, "off state is not painted as on");
 });

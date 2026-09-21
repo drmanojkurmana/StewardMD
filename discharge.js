@@ -53,7 +53,10 @@
     busy: false, loaded: false, err: "", note: "", refusal: null,
     ask: null,                          // the question open before an irreversible step: { kind: "sign" | "revert", arg }
     print: null, printLang: "",         // the hospital's print settings; the second language picked for this print
-    edu: null, eduLib: null             // leaflets given on this stay and approved leaflets: null loading, false failed
+    edu: null, eduLib: null,            // leaflets given on this stay and approved leaflets: null loading, false failed
+    // MaiK Scribe for the discharge summary (item 16). See scribeOn() below -- OFF by default, and
+    // inert (no capture object, no draft) until a device turns the flag on.
+    scribeCapture: null, scribeOn: false, scribeStatus: "", scribeDraft: ""
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -203,6 +206,110 @@
     return Math.max(0, Math.round(((isFinite(e) ? e : Date.now()) - s) / 86400000));
   }
 
+  /* MaiK Scribe for the discharge summary (item 16, WardSynQ). OFF by default --
+   * localStorage.setItem("smd_discharge_scribe","on") turns it on for one device pending a real
+   * discharge verification (there is no automated way to drive a real inpatient stay + signed
+   * discharge here).
+   *
+   * Reuses SMD_AMBIENT.start (voice-ambient.js) exactly as opd-emr.js's startVoice does, and the
+   * SAME server extract opd-emr.js's doRefine calls (kind:"opd-scribe") to turn a transcript into a
+   * clean English narrative. A discharge section (Assessment, Plan and follow-up, etc) is free
+   * text, not OPD's structured EMR schema, so the LLM's "en" translation IS the draft;
+   * emrFields/suggestions are not used. Only offered while a section is open for editing (s.editing
+   * -- the only place this screen accepts free text); ward.js carries the identical shape for the
+   * ward round note (its version works one field, "wTlNote", instead of the currently-open section).
+   *
+   * SAFETY GATES (same as the ward round note):
+   *  - Nothing reaches the record without an explicit Accept: the draft only ever lands in the open
+   *    section's edit textarea (#dEdit) via scribeInsert(), on a doctor's own tap, and the section
+   *    itself is not written until the existing "Save section" button (cmd "save" -> draft()) runs.
+   *  - A section the doctor edited is never silently overwritten: scribeAppend() only ever APPENDS
+   *    to whatever is already in the box, and only runs on that explicit tap -- no live auto-fill.
+   *  - Garbled audio and cloud upload are guarded upstream, in voice.js (isGarbled) and
+   *    voice-ambient.js (noCloud:true) -- this file only calls SMD_AMBIENT.start(), never a
+   *    lower-level API, so both guards apply unchanged.
+   *
+   * ponytail: no shared file with ward.js for this ~40-line pattern -- this item's scope limited
+   * index.html to one new script tag (scribe-templates.js), so a third loadable file was not an
+   * option here. If a third caller needs this shape, extract both copies into one then.
+   */
+  function scribeOn() { try { return localStorage.getItem("smd_discharge_scribe") === "on"; } catch (e) { return false; } }
+  // PURE: append an accepted scribe draft to whatever is already in the section box. Never replaces
+  // -- an edited section is never silently overwritten -- and a repeated Accept of the same draft
+  // text is a no-op. Exposed as DISCHARGE._scribeAppend for testing.
+  function scribeAppend(existing, draft) {
+    existing = String(existing == null ? "" : existing);
+    draft = String(draft == null ? "" : draft).trim();
+    if (!draft) return existing;
+    var trimmed = existing.replace(/\s+$/, "");
+    if (!trimmed) return draft;
+    if (trimmed.indexOf(draft) !== -1) return existing;
+    return trimmed + "\n" + draft;
+  }
+  function scribeRefine(transcript) {
+    if (!transcript) return;
+    var extract = G.SMD_AI && G.SMD_AI.extract;
+    if (!extract) { st.scribeDraft = transcript.trim(); repaintIfOpen(); return; }
+    extract(transcript, "opd-scribe").then(function (r) {
+      st.scribeDraft = ((r && !r.error && r.en) ? r.en : transcript).trim();
+      repaintIfOpen();
+    }).catch(function () { st.scribeDraft = transcript.trim(); repaintIfOpen(); });
+  }
+  function startScribe() {
+    if (!st.editing) return;
+    if (!G.SMD_AMBIENT) { try { G.toast && G.toast(wT("ward.dc-scribe-unavailable", "MaiK Scribe is not available on this build.")); } catch (e) {} return; }
+    st.scribeOn = true; st.scribeDraft = ""; st.scribeStatus = wT("ward.dc-scribe-starting", "Starting…"); paint();
+    st.scribeCapture = G.SMD_AMBIENT.start({
+      speaker: "doctor", language: "auto", chunkMs: 15000, refineEveryChunks: 8,
+      getState: function () { return {}; },
+      onState: function (s) {
+        st.scribeStatus = s === "listening" ? wT("ward.dc-scribe-listening", "MaiK Scribe is listening")
+          : s === "fallback" ? wT("ward.dc-scribe-fallback", "Whisper model not installed - using device dictation")
+          : s === "preparing" ? wT("ward.dc-scribe-preparing", "Preparing model…")
+          : s === "downloading" ? wT("ward.dc-scribe-downloading", "Downloading model…") : "";
+        repaintIfOpen();
+      },
+      onRefine: scribeRefine,
+      onError: function () {
+        st.scribeStatus = wT("ward.dc-scribe-error", "Voice error - tap to retry.");
+        st.scribeOn = false; st.scribeCapture = null; paint();
+      }
+    });
+  }
+  function stopScribe() {
+    if (st.scribeCapture) { try { st.scribeCapture.stop(); } catch (e) {} }
+    st.scribeCapture = null; st.scribeOn = false; st.scribeStatus = ""; paint();
+  }
+  // Accept: the draft joins whichever section is currently open for editing, exactly as if typed.
+  // Save section still has to be tapped separately -- this never writes to the record on its own.
+  function scribeInsert() {
+    if (!st.editing) return;
+    var el = document.getElementById("dEdit");
+    var joined = scribeAppend(el ? el.value : "", st.scribeDraft);
+    st.scribeDraft = "";
+    if (el) el.value = joined;
+    paint();
+  }
+  function scribeMicBtn() {
+    if (!scribeOn() || !G.SMD_AMBIENT) return "";
+    var on = !!st.scribeOn;
+    return '<button type="button" class="d-btn ghost sm' + (on ? " recording" : "") + '" data-d-act="' +
+      (on ? "scribestop" : "scribestart") + '" title="' + wTH("ward.dc-scribe-title", "MaiK Scribe: listen and draft this section") + '">' +
+      ms(on ? "stop_circle" : "graphic_eq") + (on ? wTH("ward.dc-scribe-stop", "Stop") : wTH("ward.dc-scribe-start", "MaiK Scribe")) + "</button>";
+  }
+  function scribePanel() {
+    if (!scribeOn() || !G.SMD_AMBIENT) return "";
+    if (!st.scribeOn && !st.scribeDraft) return "";
+    var status = st.scribeOn ? '<p class="d-hint">' + ms("mic") + esc(st.scribeStatus || wT("ward.dc-scribe-listening", "MaiK Scribe is listening")) + "</p>" : "";
+    var draft = st.scribeDraft
+      ? '<div class="d-scribe-draft"><p class="d-hint">' + ms("auto_awesome") + wTH("ward.dc-scribe-draft-label", "MaiK Scribe draft - review before adding") + "</p>" +
+        "<p>" + esc(st.scribeDraft) + "</p>" +
+        '<button class="d-btn ghost sm" data-d-act="scribeaccept">' + ms("check") + wTH("ward.dc-scribe-insert", "Add to section") + "</button>" +
+        '<button class="d-btn ghost sm" data-d-act="scribediscard">' + ms("close") + wTH("ward.dc-scribe-discard", "Discard") + "</button></div>"
+      : "";
+    return status + draft;
+  }
+
   // ---- render: identity + status ------------------------------------------------------------
   function identity(s) {
     var p = s.patient || {}, e = s.encounter || {};
@@ -264,6 +371,7 @@
     if (s.editing === k) {
       return '<div class="d-edit">' +
         '<textarea id="dEdit" class="d-ta" rows="8" spellcheck="true">' + esc(body) + "</textarea>" +
+        (scribeOn() ? '<div class="d-scribe">' + scribeMicBtn() + scribePanel() + "</div>" : "") +
         '<div class="d-editbar">' +
           '<button class="d-btn primary" data-d-act="save">' + ms("save") + wTH("ward.dc-save-section", "Save section") + "</button>" +
           '<button class="d-btn ghost" data-d-act="cancel">' + wTH("ward.dc-cancel", "Cancel") + "</button>" +
@@ -589,7 +697,11 @@
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "compare") { st.compare[arg] = !st.compare[arg]; paint(); return; }
     if (cmd === "edit") { st.editing = arg; paint(); return; }
-    if (cmd === "cancel") { st.editing = ""; paint(); return; }
+    if (cmd === "cancel") { if (st.scribeOn) stopScribe(); st.scribeDraft = ""; st.editing = ""; paint(); return; }
+    if (cmd === "scribestart") { startScribe(); return; }
+    if (cmd === "scribestop") { stopScribe(); return; }
+    if (cmd === "scribeaccept") { scribeInsert(); return; }
+    if (cmd === "scribediscard") { st.scribeDraft = ""; paint(); return; }
     if (cmd === "print") { doPrint(); return; }
     if (cmd === "edugive") {
       var pick = val("dEduPick"), bar = pick.lastIndexOf("|"); if (bar < 1 || st.busy) return;
@@ -616,6 +728,8 @@
     if (cmd === "save") {
       var k = st.editing; if (!k) return;
       var patch = {}; patch[k] = val("dEdit");
+      if (st.scribeOn) stopScribe();
+      st.scribeDraft = "";
       draft(patch, wT("ward.dc-section-saved", "Section saved."));
       return;
     }
@@ -640,7 +754,10 @@
     el.removeEventListener("change", onChange); el.addEventListener("change", onChange);
     paint(); load();
   }
-  function close() { st.ask = null; var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
+  function close() { if (st.scribeCapture) stopScribe(); st.ask = null; var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
 
-  G.DISCHARGE = { open: open, close: close, _render: _render, _st: st, _sections: SECTIONS, _problem: problem, _printable: printable };
+  G.DISCHARGE = { open: open, close: close, _render: _render, _st: st, _sections: SECTIONS, _problem: problem, _printable: printable,
+    // MaiK Scribe for the discharge summary (item 16), exposed for testing.
+    _scribeOn: scribeOn, _scribeAppend: scribeAppend, _scribeRefine: scribeRefine,
+    _startScribe: startScribe, _stopScribe: stopScribe, _scribeInsert: scribeInsert };
 })();
