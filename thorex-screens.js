@@ -764,7 +764,12 @@
           '<button type="button" class="tx-clin-mic" data-act="tx-aidx-scribe" aria-label="Dictate history with MaiK Scribe">' + ic("mic") + "<span>MaiK Scribe</span></button>" +
           '<textarea class="tx-clin-ta" data-hook="aidxHx" rows="2" placeholder="Symptoms &amp; history — e.g. fever, foul sputum, IV drug use">' + esc((a && a.__context) || "") + "</textarea>" +
         "</div>" +
-        '<button type="button" class="tx-btn tx-btn-primary tx-aidx-go" data-act="tx-aidx-go">' + ic("auto_awesome") + "<span>Get best-fit diagnoses</span></button>" +
+        // QA BUG-001: the same glowing Ask MAiK banner the OPD assessment uses (aurora sheen + bloom).
+        '<button type="button" class="tx-aidx-go tx-maik-cta" data-act="tx-aidx-go" aria-label="Ask MAiK for the best-fit diagnoses">' +
+          '<span class="tx-maik-glow" aria-hidden="true"></span>' +
+          '<span class="tx-maik-ico">' + ic("auto_awesome") + '</span>' +
+          '<span class="tx-maik-txt"><b>Ask MAiK</b><span>Best-fit diagnoses from the findings and history</span></span>' +
+        "</button>" +
         '<div class="tx-aidx-out" data-hook="aidxOut" hidden></div>' +
       "</div>";
 

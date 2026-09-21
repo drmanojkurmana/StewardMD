@@ -45,20 +45,28 @@
     if (document.getElementById("phvCss")) return;
     var st = document.createElement("style"); st.id = "phvCss";
     st.textContent = [
-      "#" + ROOT_ID + "{--pv-bg:#ffffff;--pv-ink:#0f172a;--pv-mut:#5b6b7b;--pv-line:rgba(15,23,42,.10);--pv-slot:rgba(15,23,42,.045);--pv-teal:#0e6e63;--pv-teal2:#139a8a;--pv-glow:rgba(14,110,99,.22);--pv-ok:#1f9d63;--pv-bad:#d64545;--pv-font:var(--hfont,-apple-system,'SF Pro Text','Segoe UI',Roboto,system-ui,sans-serif);--pv-mono:'SF Mono',Menlo,'IBM Plex Mono',Consolas,monospace;position:fixed;inset:0;z-index:17000;display:none;align-items:flex-end;justify-content:center;background:rgba(6,12,20,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}",
+      "#" + ROOT_ID + "{--pv-bg:#ffffff;--pv-ink:#0f172a;--pv-mut:#5b6b7b;--pv-line:rgba(15,23,42,.10);--pv-slot:rgba(15,23,42,.045);--pv-teal:#0e6e63;--pv-teal2:#139a8a;--pv-glow:rgba(14,110,99,.22);--pv-ok:#1f9d63;--pv-bad:#d64545;--pv-font:var(--hfont,-apple-system,'SF Pro Text','Segoe UI',Roboto,system-ui,sans-serif);--pv-mono:'SF Mono',Menlo,'IBM Plex Mono',Consolas,monospace;position:fixed;inset:0;z-index:17000;display:none;align-items:flex-end;justify-content:center;box-sizing:border-box;padding-bottom:var(--pv-kb,0px);background:rgba(6,12,20,.55);-webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1);-webkit-tap-highlight-color:transparent;transition:padding-bottom .2s cubic-bezier(.2,.8,.2,1)}",
       "#" + ROOT_ID + ".on{display:flex}",
       "body.dark #" + ROOT_ID + ",body.v3-dark #" + ROOT_ID + "{--pv-bg:#0e141c;--pv-ink:#eef3f8;--pv-mut:#93a3b4;--pv-line:rgba(255,255,255,.09);--pv-slot:rgba(255,255,255,.055);--pv-teal:#2fc4b0;--pv-teal2:#5ad8c8;--pv-glow:rgba(47,196,176,.25)}",
-      "#" + ROOT_ID + " .phv-card{width:100%;max-width:520px;max-height:100%;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--pv-bg);color:var(--pv-ink);border-radius:28px 28px 0 0;padding:14px 22px calc(env(safe-area-inset-bottom,0px) + 22px);box-shadow:0 -24px 60px -20px rgba(0,0,0,.55);font-family:var(--pv-font);transform:translateY(24px);opacity:0;animation:phvUp .42s cubic-bezier(.2,.8,.2,1) forwards}",
+      /* A real bottom sheet: the card never covers the whole screen (a strip of dimmed app always
+         shows above it, which is what makes it read as a sheet and not as a web page), it carries the
+         top safe area itself, and its actions are pinned to the bottom so the keyboard never hides
+         the primary button. Body scrolls inside the card; the card itself does not move. */
+      "#" + ROOT_ID + " .phv-card{position:relative;width:100%;max-width:520px;max-height:calc(100% - 44px);display:flex;flex-direction:column;min-height:0;overflow:hidden;background:var(--pv-bg);color:var(--pv-ink);border-radius:28px 28px 0 0;box-shadow:0 -1px 0 var(--pv-line),0 -26px 64px -22px rgba(0,0,0,.6);font-family:var(--pv-font);transform:translateY(26px);opacity:0;animation:phvUp .42s cubic-bezier(.2,.8,.2,1) forwards}",
       "@keyframes phvUp{to{transform:none;opacity:1}}",
-      "#" + ROOT_ID + ".kb .phv-card{padding-bottom:14px;border-radius:22px 22px 0 0;animation:none;transform:none;opacity:1}",
-      "#" + ROOT_ID + ".kb .phv-grab{display:none}",
-      "#" + ROOT_ID + ".kb .phv-mark{width:36px;height:36px;border-radius:12px;margin-bottom:8px}#" + ROOT_ID + ".kb .phv-mark svg{width:18px;height:18px}",
-      "#" + ROOT_ID + ".kb .phv-t{font-size:20px;margin-bottom:4px}#" + ROOT_ID + ".kb .phv-s{margin-bottom:12px;font-size:13.5px}",
-      "#" + ROOT_ID + " .phv-grab{width:38px;height:5px;border-radius:3px;background:var(--pv-line);margin:0 auto 18px}",
+      "#" + ROOT_ID + " .phv-head{flex:0 0 auto;padding:10px 22px 0}",
+      "#" + ROOT_ID + " .phv-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 22px 4px}",
+      "#" + ROOT_ID + " .phv-foot{flex:0 0 auto;padding:12px 22px calc(env(safe-area-inset-bottom,0px) + 14px);background:var(--pv-bg);border-top:1px solid var(--pv-line)}",
+      "#" + ROOT_ID + ".kb .phv-foot{padding-bottom:12px}",
+      "#" + ROOT_ID + ".kb .phv-card{max-height:100%;border-radius:22px 22px 0 0;animation:none;transform:none;opacity:1}",
+      "#" + ROOT_ID + ".kb .phv-mark{width:34px;height:34px;border-radius:11px;margin-bottom:8px}#" + ROOT_ID + ".kb .phv-mark svg{width:17px;height:17px}",
+      "#" + ROOT_ID + ".kb .phv-t{font-size:19px;margin-bottom:3px}#" + ROOT_ID + ".kb .phv-s{margin-bottom:12px;font-size:13px}",
+      "#" + ROOT_ID + ".kb .phv-grab{margin-bottom:10px}",
+      "#" + ROOT_ID + " .phv-grab{width:38px;height:5px;border-radius:3px;background:var(--pv-line);margin:0 auto 14px}",
       "#" + ROOT_ID + " .phv-mark{width:48px;height:48px;border-radius:16px;background:linear-gradient(140deg,var(--pv-teal),var(--pv-teal2));color:#fff;display:flex;align-items:center;justify-content:center;margin:0 0 14px;box-shadow:0 10px 24px -10px var(--pv-glow)}",
       "#" + ROOT_ID + " .phv-mark svg{width:24px;height:24px}",
       "#" + ROOT_ID + " .phv-t{font:800 24px/1.15 var(--pv-font);letter-spacing:-.02em;margin:0 0 8px}",
-      "#" + ROOT_ID + " .phv-s{font:500 14.5px/1.5 var(--pv-font);color:var(--pv-mut);margin:0 0 20px}",
+      "#" + ROOT_ID + " .phv-s{font:500 14.5px/1.5 var(--pv-font);color:var(--pv-mut);margin:0 0 18px}",
       "#" + ROOT_ID + " .phv-s b{color:var(--pv-ink);font-weight:700}",
       "#" + ROOT_ID + " .phv-l{display:block;font:700 11px/1 var(--pv-font);letter-spacing:.1em;text-transform:uppercase;color:var(--pv-mut);margin:0 0 8px}",
       "#" + ROOT_ID + " .phv-field{display:flex;align-items:center;gap:10px;border:1px solid var(--pv-line);background:var(--pv-slot);border-radius:16px;padding:0 14px;min-height:56px;transition:box-shadow .2s,border-color .2s}",
@@ -94,16 +102,21 @@
       "@keyframes phvPulse{0%{box-shadow:0 0 0 0 var(--pv-glow)}70%{box-shadow:0 0 0 9px rgba(0,0,0,0)}100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}}",
       "#" + ROOT_ID + " .phv-msg.done .phv-dot{animation:none;background:var(--pv-ok)}",
       "#" + ROOT_ID + " .phv-msg b{color:var(--pv-ink)}",
-      "#" + ROOT_ID + " .phv-err{font:600 12.5px var(--pv-font);color:var(--pv-bad);margin-top:10px;min-height:16px}",
+      "#" + ROOT_ID + " .phv-err{font:600 12.5px/1.4 var(--pv-font);color:var(--pv-bad);margin:0;max-height:0;overflow:hidden;transition:max-height .18s,margin .18s}",
+      "#" + ROOT_ID + " .phv-err.on{margin-top:10px;max-height:44px}",
       /* buttons */
-      "#" + ROOT_ID + " .phv-acts{display:flex;gap:10px;margin-top:18px}",
-      "#" + ROOT_ID + " .phv-btn{flex:1;border:0;border-radius:999px;padding:0 18px;font:700 15px var(--pv-font);cursor:pointer;min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,opacity .2s,box-shadow .2s}",
+      "#" + ROOT_ID + " .phv-acts{display:block}",
+      /* Secondary actions stack full-width under the primary: a half-width text button cannot hold
+         "Resend code in 27s" without collapsing, and a stacked list is the native pattern anyway. */
+      "#" + ROOT_ID + " .phv-subacts{display:block;margin-top:2px}",
+      "#" + ROOT_ID + " .phv-subacts .phv-alt{padding-top:4px;white-space:nowrap}",
+      "#" + ROOT_ID + " .phv-subacts .phv-later{color:var(--pv-mut)}",
+      "#" + ROOT_ID + " .phv-btn{width:100%;border:0;border-radius:999px;padding:0 18px;font:700 15px var(--pv-font);cursor:pointer;min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,opacity .2s,box-shadow .2s}",
       "#" + ROOT_ID + " .phv-btn:active{transform:scale(.98)}",
       "#" + ROOT_ID + " .phv-btn svg{width:18px;height:18px}",
       "#" + ROOT_ID + " .phv-go{background:linear-gradient(140deg,var(--pv-teal),var(--pv-teal2));color:#fff;box-shadow:0 12px 26px -12px var(--pv-glow)}",
       "#" + ROOT_ID + " .phv-go[disabled]{opacity:.55;box-shadow:none}",
-      "#" + ROOT_ID + " .phv-later{background:transparent;border:1px solid var(--pv-line);color:var(--pv-mut);flex:0 0 auto;min-width:96px}",
-      "#" + ROOT_ID + " .phv-alt{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:none;border:0;color:var(--pv-teal);font:600 14px var(--pv-font);padding:14px 0 0;cursor:pointer}",
+      "#" + ROOT_ID + " .phv-alt{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;background:none;border:0;color:var(--pv-teal);font:600 14px var(--pv-font);padding:10px 0 0;cursor:pointer}",
       "#" + ROOT_ID + " .phv-alt[disabled]{color:var(--pv-mut);cursor:default}",
       "#" + ROOT_ID + " .phv-alt svg{width:18px;height:18px}",
       "#" + ROOT_ID + " .phv-alt .phv-cd{--p:0;width:18px;height:18px;border-radius:50%;background:conic-gradient(var(--pv-teal) calc(var(--p)*1%),var(--pv-line) 0);-webkit-mask:radial-gradient(circle 6px,transparent 5.2px,#000 5.6px);mask:radial-gradient(circle 6px,transparent 5.2px,#000 5.6px)}",
@@ -140,9 +153,13 @@
     if (!vv || !vv.height) return;
     var ih = window.innerHeight || vv.height;
     var kb = Math.max(0, ih - vv.height - (vv.offsetTop || 0));
-    el.style.top = Math.max(0, vv.offsetTop || 0) + "px";
-    el.style.height = Math.round(vv.height) + "px";
-    el.style.bottom = "auto";
+    /* The root stays FULL SCREEN and the keyboard height becomes bottom padding, rather than the
+     * root being resized down to the visual viewport. Resizing left the app's own tab bar visible
+     * in the gap between the card and the keyboard, which is what made this look like a web page
+     * sitting on top of the app instead of a sheet. Full-screen scrim + padded card = the card sits
+     * directly on the keyboard and nothing of the app shows through anywhere. */
+    el.style.top = ""; el.style.height = ""; el.style.bottom = "";
+    el.style.setProperty("--pv-kb", Math.round(kb) + "px");
     el.classList.toggle("kb", kb > 80);
     // Keep whatever the doctor is typing in on screen inside the (now shorter) card.
     try {
@@ -161,7 +178,7 @@
     if (_vvOn) { try { window.visualViewport.removeEventListener("resize", onVv); window.visualViewport.removeEventListener("scroll", onVv); } catch (e) {} _vvOn = false; }
     _vvTest = null;
     var el = document.getElementById(ROOT_ID);
-    if (el) { el.style.top = ""; el.style.height = ""; el.style.bottom = ""; el.classList.remove("kb"); }
+    if (el) { el.style.top = ""; el.style.height = ""; el.style.bottom = ""; el.style.removeProperty("--pv-kb"); el.classList.remove("kb"); }
   }
   function close() { var el = document.getElementById(ROOT_ID); if (el) { el.classList.remove("on"); el.innerHTML = ""; } clearInterval(tick); abortWebOtp(); unbindViewport(); }
   function snooze() { try { sessionStorage.setItem(SNOOZE, "1"); } catch (e) {} close(); }
@@ -234,16 +251,22 @@
     var el = root(); el.classList.add("on"); bindViewport();
     if (state.step === "phone") {
       el.innerHTML = '<div class="phv-card">' +
-        '<div class="phv-grab"></div>' +
-        '<div class="phv-mark">' + ICO.shield + '</div>' +
-        '<div class="phv-t">Verify your mobile number</div>' +
-        '<p class="phv-s">We send a 6-digit code on <b>WhatsApp</b>. No WhatsApp on this number? It arrives by SMS instead. Colleagues and FollowCare reach you here.</p>' +
-        '<label class="phv-l" for="phvPhone">Mobile number</label>' +
-        '<div class="phv-field">' + ICO.phone + '<input class="phv-in" id="phvPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" value="' + esc(state.phone) + '"></div>' +
-        '<div class="phv-err" id="phvErr"></div>' +
-        '<div class="phv-acts"><button type="button" class="phv-btn phv-later" id="phvLater">Later</button>' +
-        '<button type="button" class="phv-btn phv-go" id="phvSend">' + ICO.chat + '<span>Send code on WhatsApp</span></button></div>' +
-        '<button type="button" class="phv-alt" id="phvSms">' + ICO.sms + '<span>Send by SMS instead</span></button></div>';
+        '<div class="phv-head"><div class="phv-grab"></div>' +
+          '<div class="phv-mark">' + ICO.shield + '</div>' +
+          '<div class="phv-t">Verify your mobile number</div></div>' +
+        '<div class="phv-body">' +
+          '<p class="phv-s">We send a 6-digit code on <b>WhatsApp</b>. No WhatsApp on this number? It arrives by SMS instead. Colleagues and FollowCare reach you here.</p>' +
+          '<label class="phv-l" for="phvPhone">Mobile number</label>' +
+          '<div class="phv-field">' + ICO.phone + '<input class="phv-in" id="phvPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" value="' + esc(state.phone) + '"></div>' +
+          '<div class="phv-err" id="phvErr"></div>' +
+        '</div>' +
+        '<div class="phv-foot">' +
+          '<div class="phv-acts"><button type="button" class="phv-btn phv-go" id="phvSend">' + ICO.chat + '<span>Send code on WhatsApp</span></button></div>' +
+          '<div class="phv-subacts">' +
+            '<button type="button" class="phv-alt" id="phvSms">' + ICO.sms + '<span>Use SMS instead</span></button>' +
+            '<button type="button" class="phv-alt phv-later" id="phvLater"><span>Later</span></button>' +
+          '</div>' +
+        '</div></div>';
       el.querySelector("#phvLater").addEventListener("click", snooze);
       el.querySelector("#phvSend").addEventListener("click", function () { send("auto"); });
       el.querySelector("#phvSms").addEventListener("click", function () { send("sms"); });
@@ -253,19 +276,24 @@
     var via = state.channel === "sms" ? "SMS" : "WhatsApp";
     var slots = ""; for (var i = 0; i < 6; i++) slots += '<div class="phv-slot' + (i === 0 ? " on" : "") + '" data-i="' + i + '">' + RING + '<span class="phv-d"></span><span class="phv-caret"></span></div>';
     el.innerHTML = '<div class="phv-card">' +
-      '<div class="phv-grab"></div>' +
-      '<div class="phv-mark">' + (state.channel === "sms" ? ICO.sms : ICO.chat) + '</div>' +
-      '<div class="phv-t">Enter the code</div>' +
-      '<p class="phv-s">Sent by <b>' + via + '</b> to <b>' + esc(state.to) + '</b>.' + (state.fellBack ? " WhatsApp did not go through, so it went by SMS." : "") + '</p>' +
-      '<div class="phv-slotwrap"><div class="phv-slots" id="phvSlots">' + slots + '</div>' +
-      '<input class="phv-code" id="phvCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" aria-label="6-digit code"></div>' +
-      '<div class="phv-msg" id="phvMsg"></div>' +
-      '<div class="phv-err" id="phvErr"></div>' +
-      '<div class="phv-acts"><button type="button" class="phv-btn phv-later" id="phvBack">' + ICO.back + '<span>Number</span></button>' +
-      '<button type="button" class="phv-btn phv-go" id="phvVerify">' + ICO.check + '<span>Verify</span></button></div>' +
-      '<button type="button" class="phv-alt" id="phvResend" disabled><span class="phv-cd"></span><span>Resend code</span></button>' +
-      (state.channel !== "sms" ? '<button type="button" class="phv-alt" id="phvSms2">' + ICO.sms + '<span>Send by SMS instead</span></button>' : "") +
-      '</div>';
+      '<div class="phv-head"><div class="phv-grab"></div>' +
+        '<div class="phv-mark">' + (state.channel === "sms" ? ICO.sms : ICO.chat) + '</div>' +
+        '<div class="phv-t">Enter the code</div></div>' +
+      '<div class="phv-body">' +
+        '<p class="phv-s">Sent by <b>' + via + '</b> to <b>' + esc(state.to) + '</b>.' + (state.fellBack ? " WhatsApp did not go through, so it went by SMS." : "") + '</p>' +
+        '<div class="phv-slotwrap"><div class="phv-slots" id="phvSlots">' + slots + '</div>' +
+        '<input class="phv-code" id="phvCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" aria-label="6-digit code"></div>' +
+        '<div class="phv-msg" id="phvMsg"></div>' +
+        '<div class="phv-err" id="phvErr"></div>' +
+      '</div>' +
+      '<div class="phv-foot">' +
+        '<div class="phv-acts"><button type="button" class="phv-btn phv-go" id="phvVerify">' + ICO.check + '<span>Verify</span></button></div>' +
+        '<div class="phv-subacts">' +
+          '<button type="button" class="phv-alt" id="phvResend" disabled><span class="phv-cd"></span><span>Resend code</span></button>' +
+          '<button type="button" class="phv-alt phv-later" id="phvBack">' + ICO.back + '<span>Number</span></button>' +
+        '</div>' +
+        (state.channel !== "sms" ? '<button type="button" class="phv-alt" id="phvSms2">' + ICO.sms + '<span>Send by SMS instead</span></button>' : "") +
+      '</div></div>';
     el.querySelector("#phvBack").addEventListener("click", function () { abortWebOtp(); state.step = "phone"; render(); });
     el.querySelector("#phvVerify").addEventListener("click", verify);
     el.querySelector("#phvResend").addEventListener("click", function () { send(state.channel === "sms" ? "sms" : "auto"); });
@@ -315,7 +343,15 @@
     }
     paint(); tick = setInterval(paint, 1000);
   }
-  function showErr(msg) { var e = document.getElementById("phvErr"); if (e) e.textContent = msg || ""; }
+  function showErr(msg) {
+    var e = document.getElementById("phvErr");
+    if (!e) return;
+    e.textContent = msg || "";
+    // The error line collapses when empty, so there is no dead gap above the buttons when nothing
+    // is wrong, and the message is scrolled into view inside the card body when there is.
+    e.classList.toggle("on", !!msg);
+    if (msg) { try { e.scrollIntoView({ block: "nearest" }); } catch (x) {} }
+  }
   function busy(on, id, label) {
     state.busy = on;
     var b = document.getElementById(id); if (b) { b.disabled = on; if (label) { var sp = b.querySelector("span:last-child"); if (sp) sp.textContent = label; else b.textContent = label; } }

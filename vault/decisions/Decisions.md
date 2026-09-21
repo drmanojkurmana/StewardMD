@@ -9013,3 +9013,30 @@ start and restored at the end; the demo case, the stewardship page and the works
 The tour copy never states a dose; the console does, with its source. Pointing hand is an inline
 SVG, not an emoji. Verified in `test/run-feature-guide-ui.mjs` at 320x568, 360x640, 390x844 and
 430x932.
+
+## 2026-09-21 - QA bug sheet: AgentConnect needs written hospital permission before it can be started
+The internal QA sheet (BUG-012, Critical) called the EMR Website Login copy unacceptable: it claimed
+"no IT approvals required" and "zero changes to your hospital's EMR", which reads as a promise that
+the doctor may connect a hospital EMR on their own authority. The feature itself is correct and was
+NOT changed (owner's instruction: "Agent Connect is working correctly dont change any function of
+it just change the wording"). What changed is the wording plus a gate:
+- The card now says the link uses only the access the doctor's own login already has, and that it is
+  for hospitals with a web/online/cloud EMR, used only after hospital administration has permitted it.
+- A full small-font disclaimer sits above the button: permission must come from the hospital
+  administration or the authority that controls the EMR; StewardMD neither obtains nor can confirm
+  that permission; the doctor is responsible for their credentials, for every screen read while
+  signed in, and for hospital IT/privacy policy and the DPDP Act 2023; MAIKNOWLEDGE LLP accepts no
+  responsibility for use without permission.
+- A tick ("I have permission ... and I take responsibility") enables the Start button. The button is
+  disabled and dimmed until then, and the click handler returns early if it is not ticked.
+The existing in-flow consent screen (connect-agent-onboarding.js) is unchanged and still applies.
+
+## 2026-09-21 - The Knowledge Library and the disease reader get CALM glass, not the app-hub aurora
+BUG-011 ("Liquid Glass ... absurd", owner: "fix it properly"). appearance.css painted every
+full-screen root with the same four-blob radial aurora. Behind paragraphs of reference text that is
+noise, and the library's own `.kblib-feature` added a second blurred blob on top of it. The library
+home, the library tool pages and the disease reader now get: one quiet top wash, hairline
+translucent cards on a single radius, blur on the sticky chrome ONLY (no per-row blur - WKWebView
+perf), a segmented tab pill, and no decorative blobs anywhere. The app hubs keep the aurora.
+Also BUG-013: the library home's `<h1>` said "Knowledge Library" directly under the sheet chrome
+that already says "Knowledge Library"; the page heading is now "Find any disease".

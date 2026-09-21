@@ -30,8 +30,7 @@ body.dark .kblib-discover { --kl-accent:#bebaff; }
 .kblib-discover .kblib-kicker { font-size:10px; letter-spacing:.12em; color:var(--kl-muted); font-weight:650; }
 .kblib-discover .kblib-search-label { display:block; margin-bottom:7px; font-size:12px; color:var(--kl-muted); }
 .kblib-discover .kblib-search { min-height:48px; border:1px solid var(--kl-line); border-radius:13px; background:var(--kl-paper); color:var(--ink); font-size:16px; margin:0; padding:12px 14px; }
-.kblib-discover .kblib-feature { position:relative; overflow:hidden; isolation:isolate; margin:20px 0; padding:22px; border-radius:22px; background:color-mix(in srgb,var(--kl-accent) 10%,var(--kl-paper)); }
-.kblib-discover .kblib-feature::after { content:''; position:absolute; z-index:-1; width:230px; height:230px; right:-50px; top:-90px; border-radius:50%; background:radial-gradient(circle,color-mix(in srgb,var(--kl-accent) 24%,transparent),transparent 70%); }
+.kblib-discover .kblib-feature { position:relative; overflow:hidden; margin:20px 0; padding:22px; border:1px solid color-mix(in srgb,var(--kl-accent) 18%,var(--kl-line)); border-radius:18px; background:color-mix(in srgb,var(--kl-accent) 8%,var(--kl-paper)); }
 .kblib-discover .kblib-feature h2 { font-size:26px; letter-spacing:-.04em; line-height:1.13; margin:10px 0; }
 .kblib-discover .kblib-feature p { font-size:12px; color:var(--kl-muted); margin:0; }
 .kblib-discover .kblib-section-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin:22px 0 12px; }

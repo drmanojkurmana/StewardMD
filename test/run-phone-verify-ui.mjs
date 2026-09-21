@@ -142,12 +142,16 @@ try {
   await ev(`document.getElementById("phvCode").focus(); SMD_PHONE_VERIFY._fit({ height: 424, offsetTop: 0, width: 390 }); return 1;`); await sleep(300);
   // Another script scales open overlays for their entrance, so geometry is read RELATIVE to the
   // root's own box rather than in absolute pixels.
-  const kb = JSON.parse(await ev(`var r=document.getElementById("phvRoot"); var rr=r.getBoundingClientRect(); var c=r.querySelector(".phv-card").getBoundingClientRect(); var sl=document.getElementById("phvSlots").getBoundingClientRect(); return JSON.stringify({kb:r.classList.contains("kb"), h:r.style.height, top:rr.top, bottom:rr.bottom, cardBottom:c.bottom, slotsTop:sl.top, slotsBottom:sl.bottom});`));
-  ok(kb.kb === true && kb.h === "424px", "the sheet is resized to the visual viewport when the keyboard is up " + JSON.stringify(kb));
-  ok(kb.cardBottom <= kb.bottom + 1, "the card ends above the keyboard, not behind it");
-  ok(kb.slotsTop >= kb.top - 1 && kb.slotsBottom <= kb.bottom + 1, "the code slots are on screen while typing");
+  const kb = JSON.parse(await ev(`var r=document.getElementById("phvRoot"); var rr=r.getBoundingClientRect(); var c=r.querySelector(".phv-card").getBoundingClientRect(); var sl=document.getElementById("phvSlots").getBoundingClientRect(); var ft=r.querySelector(".phv-foot").getBoundingClientRect(); return JSON.stringify({kb:r.classList.contains("kb"), pad:r.style.getPropertyValue("--pv-kb"), rootH:rr.height, ih:window.innerHeight, cardTop:c.top, cardBottom:c.bottom, footBottom:ft.bottom, slotsTop:sl.top, slotsBottom:sl.bottom});`));
+  ok(kb.kb === true && kb.pad === "420px", "the keyboard height becomes the sheet's bottom inset " + JSON.stringify(kb));
+  ok(kb.rootH >= kb.ih * 0.95, "the scrim still covers the whole screen, so no app chrome shows through under the sheet");
+  ok(kb.ih - kb.cardBottom >= 380, "the card is lifted clear of the keyboard, not left behind it " + JSON.stringify(kb));
+  ok(Math.abs(kb.footBottom - kb.cardBottom) < 2, "the action buttons are pinned to the bottom of the card " + JSON.stringify(kb));
+  ok(kb.slotsTop >= kb.cardTop - 1 && kb.slotsBottom <= kb.cardBottom + 1, "the code slots are on screen while typing");
   await ev(`SMD_PHONE_VERIFY._fit(null); return 1;`); await sleep(150);
-  ok(await ev(`var r=document.getElementById("phvRoot"); return !r.classList.contains("kb") && r.style.height==="844px";`) === true, "and returns to full height when the keyboard closes");
+  ok(await ev(`var r=document.getElementById("phvRoot"); return !r.classList.contains("kb") && (r.style.getPropertyValue("--pv-kb")==="0px"||!r.style.getPropertyValue("--pv-kb"));`) === true, "and the inset clears when the keyboard closes");
+  const sheet = JSON.parse(await ev(`var c=document.querySelector("#phvRoot .phv-card").getBoundingClientRect(); return JSON.stringify({top:c.top, bottom:c.bottom, ih:window.innerHeight});`));
+  ok(sheet.top >= 40 && sheet.bottom >= sheet.ih - 14, "it reads as a bottom sheet: dimmed app visible above it, flush to the bottom " + JSON.stringify(sheet));
 
   await type("phvCode", "000000"); await sleep(600);
   ok(/not right/.test(await text()) && /4 tries left/.test(await text()), "a wrong code shows the tries left");
