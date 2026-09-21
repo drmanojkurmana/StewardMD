@@ -629,7 +629,7 @@
     });
   }
   function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
-  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why.",weak_pin:"PIN must be 4-8 digits; avoid simple runs like 1234 or 1111.",weak_password:"Password is too weak or common. Use at least 10 characters.",member_not_found:"Staff member not found."}[e]||e; }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why.",weak_pin:"PIN must be 4-8 digits; avoid simple repeated digits like 1111.",weak_password:"Password is too weak or common. Use at least 10 characters.",member_not_found:"Staff member not found."}[e]||e; }
 
   // ---- reorder-with-reason modal (anti-misuse) ----
   var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
@@ -1345,7 +1345,7 @@
     open('<h3>Clinic ready</h3><p class="t" style="margin-top:0">Your clinic code is <b>'+esc(st.orgCode||orgId)+'</b> - staff sign in with this. Add a front-desk login now, or skip.</p>'+
       '<input id="wri" placeholder="Reception staff ID (e.g. front1)" autocapitalize="none" autocorrect="off" spellcheck="false" style="margin-bottom:8px">'+
       '<input id="wrp" placeholder="Set a PIN (4-8 digits, e.g. 4826)" inputmode="numeric" type="password">'+
-      '<div style="font-size:11px;color:var(--mut);margin:4px 0 10px 0">Avoid repeated digits (1111) or consecutive runs (1234).</div>'+
+      '<div style="font-size:11px;color:var(--mut);margin:4px 0 10px 0">Avoid repeated digits (1111).</div>'+
       '<div class="row2"><button class="cancel" id="skip">Skip · Start</button><button class="btn" id="ok" style="margin:0">Add & start</button></div>');
     sheet.querySelector("#skip").onclick=function(){close();toast("Clinic ready");loadDash();};
     sheet.querySelector("#ok").onclick=function(){

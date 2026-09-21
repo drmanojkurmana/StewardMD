@@ -91,6 +91,16 @@ test("identity casing & PIN whitespace tolerance", async () => {
   const r4 = await as(null, "/auth/pin", "POST", { clinicCode: "SMD-WARD01", identity: "reception", pin: " 593721" });
   assert.equal(r4.__status, 200, "PIN with leading space succeeds");
   assert.ok(r4.token);
+
+  // Consecutive digits PINs (e.g. 1234, 123456) are permitted
+  const addConsec = await as(ADMIN, "/member", "POST", { orgId: ORG, identity: "diwa", role: "nurse" });
+  assert.equal(addConsec.__status, 200);
+  const setConsecPin = await as(ADMIN, "/member/pin", "POST", { orgId: ORG, identity: "diwa", pin: "1234" });
+  assert.equal(setConsecPin.__status, 200, "Setting consecutive PIN 1234 is allowed");
+
+  const r5 = await as(null, "/auth/pin", "POST", { clinicCode: "SMD-WARD01", identity: "diwa", pin: "1234" });
+  assert.equal(r5.__status, 200, "Signing in with 1234 succeeds");
+  assert.ok(r5.token);
 });
 
 test("security boundary remains enforced: invalid credentials refused", async () => {

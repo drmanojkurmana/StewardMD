@@ -68,7 +68,6 @@ export function pinProblem(pin) {
   const p = String(pin || "").trim();
   if (!/^\d{4,8}$/.test(p)) return "A PIN is 4 to 8 digits.";
   if (/^(\d)\1+$/.test(p)) return "A PIN cannot be one digit repeated.";
-  if ("01234567890".includes(p) || "09876543210".includes(p)) return "A PIN cannot be a run of consecutive digits.";
   return null;
 }
 
