@@ -268,7 +268,7 @@
     var nameEl = document.getElementById("qStaffName"), roleEl = document.getElementById("qStaffRole"), pinEl = document.getElementById("qStaffPin");
     var identity = ((nameEl && nameEl.value) || "").trim().toLowerCase(), role = (roleEl && roleEl.value) || "nurse", pin = ((pinEl && pinEl.value) || "").trim();   // lowercase so it always matches the staff login (mobile keyboards auto-capitalize; server match is case-sensitive)
     if (!identity) { try { G.toast && G.toast("Enter a login name"); } catch (e) {} return; }
-    if (!/^\d{4,6}$/.test(pin)) { try { G.toast && G.toast("PIN must be 4 to 6 digits"); } catch (e) {} return; }
+    if (!/^\d{4,8}$/.test(pin)) { try { G.toast && G.toast("PIN must be 4 to 8 digits"); } catch (e) {} return; }
     apiPost("/member", { orgId: st.orgId, identity: identity, role: role }).then(function (r) {
       if (!r || !r.ok) { try { G.toast && G.toast("Could not add staff"); } catch (e) {} return null; }
       return apiPost("/member/pin", { orgId: st.orgId, identity: identity, pin: pin });
@@ -917,7 +917,7 @@
   function prefillStaff() {
     setTimeout(function () {
       try {
-        var o = document.getElementById("qFdOrg"), last = localStorage.getItem("smd_opd_staff_org") || "";
+        var o = document.getElementById("qFdOrg"), last = localStorage.getItem("smd_opd_staff_org") || localStorage.getItem("smd_opd_clinic_code") || "";
         if (o && last) o.value = last;
         var f = document.getElementById(last ? "qFdUser" : "qFdOrg"); if (f) f.focus();
       } catch (e) {}
@@ -930,7 +930,7 @@
       user = (document.getElementById("qFdUser") || {}).value || "";
       pin = (document.getElementById("qFdPin") || {}).value || "";
     } catch (e) {}
-    org = org.trim(); user = user.trim(); pin = pin.trim();
+    org = org.trim(); user = user.trim().toLowerCase(); pin = pin.trim();
     if (!org || !user || !pin) { root().innerHTML = _staffGate("Enter the Clinic ID, your login and your PIN."); prefillStaff(); return; }
     root().innerHTML = '<div class="q-empty" style="padding:80px">Signing in…</div>';
     fetchRetry(API + "/auth/pin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ clinicCode: org, identity: user, pin: pin }) })
@@ -953,7 +953,7 @@
           root().innerHTML = _staffGate(msg); prefillStaff(); return;
         }
         setStaffTok(r.token);
-        try { localStorage.setItem("smd_opd_staff_org", org); } catch (e) {}
+        try { localStorage.setItem("smd_opd_staff_org", org); if (r.orgCode) localStorage.setItem("smd_opd_clinic_code", r.orgCode); } catch (e) {}
         st.orgId = r.orgId || "";
         _setWp("");                     // a staff session is not a doctor workplace
         loadFrontDesk();
