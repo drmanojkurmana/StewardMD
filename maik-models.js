@@ -107,7 +107,7 @@
    * wrong - because that is the part that matters at the bedside and it is easy to leave out. */
   var GUIDE_INTRO = [
     "Answers come from a model stored on your phone. No internet, no AI tokens.",
-    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The Bonsai, MedGemma and MedPsy packs answer from their own training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
+    "MaiK Lite is StewardMD's own model, trained on the StewardMD Knowledge Base - based on standard medical resources. The other models answer from their own training. Either way answers carry no page citations and can be wrong. Verify against local protocol.",
     "Every pack is a trade-off. Smaller means faster and thinner answers; larger means better reasoning, a longer wait, and on an 8 GB phone the large packs are unloaded whenever you switch apps and must reload. None of them matches MaiK Cloud. Only MaiK Lite checks its answers against the Knowledge Base; every other pack answers from its own training, unchecked.",
     "You can keep more than one downloaded and switch between them. Only the selected one runs.",
     "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted.",
@@ -127,6 +127,14 @@
   var DEVICE_WARNING = "Built for flagship, AI-enabled phones: " + DEVICE_SUPPORTED +
     " On any other phone this is at your own risk. It may hang or crash the phone.";
 
+  /* SPECULATIVE-DECODING DRAFTS (perf plan #6). A tiny model with the SAME tokeniser proposes a few
+   * tokens; the real model verifies them in one batched pass and keeps only what it would have
+   * produced itself, so under greedy sampling the answer is byte-identical, just faster. The native
+   * engine checks vocabulary compatibility at load and silently runs without the draft otherwise.
+   * Sizes are exact (Hugging Face API, 2026-09-21). MaiK Lite (1.7B) and the 27B Bonsai packs
+   * (different backbone vocabularies) carry none. */
+  var DRAFT_GEMMA3 = { name: "gemma-3-270m-it-Q8_0.gguf", url: HF + "/unsloth/gemma-3-270m-it-GGUF/resolve/main/gemma-3-270m-it-Q8_0.gguf?download=true", bytes: 291546144 };
+  var DRAFT_QWEN3 = { name: "Qwen3-0.6B-Q8_0.gguf", url: HF + "/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf?download=true", bytes: 639446688 };
   var PACKS = {
     /* FLAGSHIP: StewardMD's OWN model (weights replaced 2026-08-31; the pack previously pointed at
      * the upstream MedPsy 1.7B base). This is our LoRA fine-tune of that base, trained on the
@@ -181,6 +189,7 @@
     "maik-mxcore": {
       label: "MAiK MxCore",
       actual: "MedGemma 1.5 4B (Q4_K_M)",
+      draft: DRAFT_GEMMA3,
       tier: 1,
       note: "Lightest of the 4B medical packs. Reads the Knowledge Base and is checked against it claim by claim. Optional photo reading with the vision download.",
       guide: {
@@ -209,11 +218,12 @@
     "maik-neural": {
       label: "MAiK Neural",
       actual: "MedGemma 1.5 4B (Q5_K_M)",
+      draft: DRAFT_GEMMA3,
       tier: 2,
       note: "MxCore at higher precision: fewer numeric slips, a little slower, more RAM and storage. Checked against the Knowledge Base.",
       guide: {
         speed: 2, medical: 3, general: 1,
-        bestFor: "When you want the most dependable medical detail from the MedGemma family.",
+        bestFor: "When you want the most dependable medical detail of the mid-size specialists.",
         why: "Same medical tuning held at higher precision, so figures and regimens drift less.",
         pick: "Choose this if you have the storage to spare and answer quality matters more than speed. Expect 30 to 50 seconds per answer, checked against the Knowledge Base."
       },
@@ -278,6 +288,7 @@
     "maik-apex": {
       label: "MAiK Apex",
       actual: "MedPsy 4B (Q5_K_M, imatrix)",
+      draft: DRAFT_QWEN3,
       tier: 4,
       noThink: true,
       note: "Strongest of the medical fine-tunes and the slowest of them. Flagship phones only. Checked against the Knowledge Base.",
@@ -305,9 +316,10 @@
     "medmo-4b": {
       label: "MAiK Cortex",   // owner, 2026-09-18: shipped under the MAiK name; `actual` keeps the honest provenance
       actual: "MedMO-4B (MBZUAI, Qwen3-VL-4B base, Q4_K_M)",
+      draft: DRAFT_QWEN3,
       tier: 2.5,
       noThink: true,
-      note: "Medical foundation model (MBZUAI MedMO-4B), strong on medical text QA, with every answer checked claim by claim against the Knowledge Base. Text only: this download carries no vision file.",
+      note: "A medical foundation model, strong on medical text questions, with every answer checked claim by claim against the Knowledge Base. Text only: this download carries no vision file.",
       guide: {
         speed: 2, medical: 3, general: 2,
         bestFor: "Clinical questions answered from a medical foundation model, checked against the Knowledge Base.",
@@ -341,8 +353,9 @@
      * book retrieval and no evidence gate. Only MaiK Lite is grounded (maik-local.js ragEligible).
      * noThink: Qwen3 family, thinking traces eat the token budget on a phone. */
     "bonsai-ternary-8b": {
-      label: "MAiK Bonsai",
+      label: "MAiK Prime",
       actual: "Ternary Bonsai 8B (PrismML, GGUF Q2_0 g64, 1.58-bit)",
+      draft: DRAFT_QWEN3,
       tier: 0.5,
       flagship: true,
       noThink: true,
@@ -350,7 +363,7 @@
       guide: {
         speed: 2, medical: 3, general: 3,
         bestFor: "Offline use in place of MaiK Cloud: an 8B general model, the best differential and viva feedback of the on-device packs.",
-        why: "Trained natively at 1.58 bits, so an 8-billion-parameter model fits in 2.3 GB and answers at a usable pace on a recent phone.",
+        why: "An 8-billion-parameter model that fits in 2.3 GB and answers at a usable pace on a recent phone.",
         pick: "Pick this for the strongest offline answer without a 3 GB download. Expect 30 to 60 seconds per answer on an 8 GB phone, about 2 minutes for the OPD differential, and a minute to reload after the app has been in the background. Not medically fine-tuned; checked against the Knowledge Base."
       },
       nCtx: 4096,
@@ -363,15 +376,16 @@
       }]
     },
     "bonsai-8b": {
-      label: "MAiK Bonsai Swift",
+      label: "MAiK Swift",
       actual: "Bonsai 8B (PrismML, GGUF Q1_0 g128, 1-bit)",
+      draft: DRAFT_QWEN3,
       tier: 0.7,
       noThink: true,
-      note: "Fastest and smallest of the Bonsai packs, noticeably less accurate than MAiK Bonsai. Checked against the Knowledge Base.",
+      note: "Fastest and smallest of the general models, noticeably less accurate than MAiK Prime. Checked against the Knowledge Base.",
       guide: {
         speed: 3, medical: 2, general: 3,
         bestFor: "Speed on a phone with less memory: an 8B model in 1.2 GB.",
-        why: "Every weight is a single bit. The download size of MaiK Lite with far more parameters; several points below the ternary pack on accuracy, and weaker at following strict formats.",
+        why: "The download size of MaiK Lite with far more parameters; several points below MAiK Prime on accuracy, and weaker at following strict formats.",
         pick: "Pick this on an older phone, or when speed matters more than accuracy. Expect the occasional confidently wrong figure (the Knowledge Base check leaves those out) and no medical fine-tuning."
       },
       nCtx: 4096,
@@ -394,15 +408,15 @@
      * are exercised on a phone. UNVERIFIED on device at the time of writing: the fork runtime was
      * built, the 5.95 GB pack itself has not yet been loaded on a 12 GB phone. */
     "bonsai2-27b": {
-      label: "MAiK Bonsai Max 2",
+      label: "MAiK Max 2",
       actual: "Ternary Bonsai 2 27B (PrismML, GGUF PTQ1_0, 1.75-bit ternary, Qwen3.8-27B base)",
       tier: 5.5,
       noThink: true,
-      note: "PrismML's September 2026 release: the 27B-class model at 98% of full precision in 5.95 GB. Needs a 12 GB phone. Checked against the Knowledge Base.",
+      note: "The newer 27B-class model, close to full precision in 5.95 GB. Needs a 12 GB phone. Checked against the Knowledge Base.",
       guide: {
         speed: 1, medical: 3, general: 3,
         bestFor: "Flagship phones with 12 GB memory, for the strongest offline reasoning available here.",
-        why: "Two months after the first Bonsai 27B, the same footprint class with a materially smaller gap to full precision, especially on multi-step reasoning and tool use.",
+        why: "The same footprint class as MAiK Max with a materially smaller gap to full precision, especially on multi-step reasoning and tool use.",
         pick: "Only on a 12 GB phone, and only if you can wait: several minutes per answer and a long reload after backgrounding. No medical fine-tuning; checked against the Knowledge Base."
       },
       nCtx: 4096,
@@ -415,7 +429,7 @@
       }]
     },
     "bonsai-27b": {
-      label: "MAiK Bonsai Max",
+      label: "MAiK Max",
       actual: "Bonsai 27B (PrismML, GGUF Q1_0 g128, 1-bit, Qwen3.6 backbone)",
       tier: 5,
       noThink: true,
@@ -423,8 +437,8 @@
       guide: {
         speed: 1, medical: 3, general: 3,
         bestFor: "Flagship phones with 12 GB memory, for the deepest offline reasoning when time does not matter.",
-        why: "A 27-billion-parameter model at one bit per weight. Strong reasoning, but on an 8 GB phone it leaves no headroom and is evicted whenever you switch apps.",
-        pick: "Only on a 12 GB phone. Expect several minutes per answer and a long reload every time the app comes back from the background. On anything else MAiK Bonsai scores higher on most tasks anyway. No medical fine-tuning; checked against the Knowledge Base."
+        why: "A 27-billion-parameter model. Strong reasoning, but on an 8 GB phone it leaves no headroom and is evicted whenever you switch apps.",
+        pick: "Only on a 12 GB phone. Expect several minutes per answer and a long reload every time the app comes back from the background. On anything else MAiK Prime scores higher on most tasks anyway. No medical fine-tuning; checked against the Knowledge Base."
       },
       nCtx: 4096,             // PrismML's 5.2 GB peak-memory figure for this file is at 4K context
       nPredict: 768,
@@ -509,9 +523,40 @@
     var out = {};
     for (var k in c) if (Object.prototype.hasOwnProperty.call(c, k)) out[k] = c[k];
     out.id = base; out.label = p.label; out.vision = !!p.vision; out.nCtx = p.nCtx || 4096;
-    out.bytes = totalBytes(base); out.visionBytes = p.vision ? (p.vision.bytes || 0) : 0;
+    out.bytes = totalBytes(base); out.visionBytes = p.vision ? (p.vision.bytes || 0) : 0; out.draftBytes = p.draft ? (p.draft.bytes || 0) : 0;
     return out;
   }
+  /* GRADES (owner, 2026-09-21: "Like MBBS MD DM give some name"). The clinician's own ladder, used
+   * instead of gigabytes or vendor names to say what a model IS. MBBS is our own doctor, MD the
+   * medical specialists we trained to work as one, DM the super specialist (MaiK Cloud), and PhD
+   * the general models: very well read, not a physician. The grade is DERIVED from the registry
+   * (own / caps.medical), never hand-kept, so a new pack cannot land ungraded. */
+  var GRADES = {
+    MBBS: { code: "MBBS", name: "Our own doctor", blurb: "Fast, small, ours. Everyday questions." },
+    MD:   { code: "MD",   name: "Medical specialist", blurb: "Deeper clinical detail, bigger download." },
+    DM:   { code: "DM",   name: "Super specialist", blurb: "Our super specialist. The best answer, needs network." },
+    PhD:  { code: "PhD",  name: "Scholar, not a doctor", blurb: "Broad knowledge, not a doctor. Answer everything you want." }
+  };
+  function grade(id) {
+    var p = PACKS[baseIdOf(id)], c = CAPS[baseIdOf(id)];
+    if (p && p.own) return GRADES.MBBS;
+    if (c && c.medical) return GRADES.MD;
+    return GRADES.PhD;
+  }
+  /* The three shelves of the model library, in the words the owner used for them. */
+  var GROUPS = [
+    { key: "own",     title: "Trained by StewardMD", grade: "MBBS",
+      note: "Our own models, trained on the StewardMD Knowledge Base to answer the way a doctor does." },
+    { key: "medical", title: "Medical specialists",  grade: "MD",
+      note: "Well trained medical models. We trained them to work as an MD: they read the Knowledge Base before they answer." },
+    { key: "general", title: "General models",       grade: "PhD",
+      note: "PhD grade: broad knowledge, not a doctor. Answer everything you want, still checked against the Knowledge Base." }
+  ];
+  function groupOf(id) {
+    var g = grade(id).code;
+    return g === "MBBS" ? GROUPS[0] : g === "MD" ? GROUPS[1] : GROUPS[2];
+  }
+
   function fmtGB(bytes) { var gb = bytes / 1e9; return gb >= 1 ? gb.toFixed(2) + " GB" : Math.round(bytes / 1e6) + " MB"; }
 
   /* What this phone can carry. Every source is a bridge call, so the profile is refreshed
@@ -631,13 +676,22 @@
    * one-at-a-time queue, chunked ranged parts, the .parts sidecar, resume, the progress rows - works
    * on it unchanged, because as far as those are concerned it is just another pack with one file.
    */
-  var VISION_SUFFIX = "#vision";
+  var VISION_SUFFIX = "#vision", DRAFT_SUFFIX = "#draft";   // the speed draft rides the same sub-pack machinery
   function isVisionId(id) { return String(id || "").slice(-VISION_SUFFIX.length) === VISION_SUFFIX; }
-  function baseIdOf(id) { return isVisionId(id) ? String(id).slice(0, -VISION_SUFFIX.length) : String(id); }
+  function isDraftId(id) { return String(id || "").slice(-DRAFT_SUFFIX.length) === DRAFT_SUFFIX; }
+  function baseIdOf(id) {
+    if (isVisionId(id)) return String(id).slice(0, -VISION_SUFFIX.length);
+    if (isDraftId(id)) return String(id).slice(0, -DRAFT_SUFFIX.length);
+    return String(id);
+  }
   function visionIdOf(id) { return baseIdOf(id) + VISION_SUFFIX; }
+  function draftIdOf(id) { return baseIdOf(id) + DRAFT_SUFFIX; }
   /** The vision file for a pack, or null when that model cannot see (Apex is text-only). */
   function visionFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.vision) || null; }
   function hasVision(id) { return !!visionFile(id); }
+  /** The speculative-decoding draft for a pack, or null when it has none. */
+  function draftFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.draft) || null; }
+  function hasDraft(id) { return !!draftFile(id); }
 
   function pack(id) {
     if (isVisionId(id)) {
@@ -646,6 +700,12 @@
       // A one-file synthetic pack. nPredict/nCtx are irrelevant here (nothing generates from it).
       return { label: base.label + " vision", actual: base.actual + " projector", tier: base.tier,
                files: [vf], visionOf: baseIdOf(id) };
+    }
+    if (isDraftId(id)) {
+      var baseD = PACKS[baseIdOf(id)], df = baseD && baseD.draft;
+      if (!df) throw new Error("no draft pack for: " + id);
+      return { label: baseD.label + " speed draft", actual: df.name + " (speculative-decoding draft)", tier: baseD.tier,
+               files: [df], draftOf: baseIdOf(id) };
     }
     var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p;
   }
@@ -1269,6 +1329,7 @@
   var API = {
     PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, DEVICE_WARNING: DEVICE_WARNING, DEVICE_SUPPORTED: DEVICE_SUPPORTED,
     hasVision: hasVision, visionFile: visionFile, visionIdOf: visionIdOf, isVisionId: isVisionId, baseIdOf: baseIdOf,
+    hasDraft: hasDraft, draftFile: draftFile, draftIdOf: draftIdOf, isDraftId: isDraftId,
     activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,
@@ -1279,6 +1340,7 @@
     // capability + device suitability (2026-09-11)
     CAPS: CAPS, caps: caps, device: device, refreshDevice: refreshDevice, setDevice: setDevice,
     suitability: suitability, recommend: recommend, fmtGB: fmtGB,
+    GRADES: GRADES, grade: grade, GROUPS: GROUPS, groupOf: groupOf,
     _abToB64: abToB64
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

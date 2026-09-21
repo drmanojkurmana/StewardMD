@@ -850,6 +850,7 @@ export async function onRequest(context) {
       const b = await readBody(request);
       if (sub === "pin") {
         const orgId = await ORG.resolveOrgId(env, b.clinicCode || b.orgId || "");   // accept the SMD-XXXXXX clinic code
+        if (!orgId) return json({ ok: false, error: "invalid_login" }, 401, request);
         /* THE LOGIN NAME IS MATCHED EXACTLY FIRST, THEN IN LOWER CASE.
          *
          * The staff console lowercases a login name when it creates the member (mobile keyboards
@@ -859,9 +860,9 @@ export async function onRequest(context) {
          *
          * Exact match still wins, so an org that already holds both "Nurse1" and "nurse1" keeps
          * answering as it did; the fallback only runs when the name as typed matches nobody. */
-        const typed = String(b.identity || "");
+        const typed = String(b.identity || "").trim();
         const auth = (await ORG.getMemberAuth(env, orgId, typed))
-          || (typed !== typed.trim().toLowerCase() ? await ORG.getMemberAuth(env, orgId, typed.trim().toLowerCase()) : null);
+          || (typed !== typed.toLowerCase() ? await ORG.getMemberAuth(env, orgId, typed.toLowerCase()) : null);
         /* EVERY OUTCOME IS AUDITED under the hospital, so "who tried to get in as this nurse at 3am"
          * has an answer. Unknown IDs are recorded too when the hospital resolved. Never the PIN. */
         if (!auth || !auth.active || !auth.pinHash) {
@@ -870,13 +871,16 @@ export async function onRequest(context) {
         }
         const gate = pinLocked(auth, Date.now());
         if (gate.locked) { await loginAudit(auth.orgId, auth.identity, "login:pin_locked", ""); return json({ ok: false, error: "locked", retryInMs: gate.remainingMs }, 429, request); }
-        const ok = await verifySecret(String(b.pin || ""), auth.pinSalt, auth.pinHash);
+        const cleanPin = String(b.pin || "").trim();
+        const ok = await verifySecret(cleanPin, auth.pinSalt, auth.pinHash);
         const nx = nextPinState(auth, Date.now(), ok);
         await ORG.recordMemberPinAttempt(env, auth.orgId, auth.identity, nx);
         await loginAudit(auth.orgId, auth.identity, ok ? "login:pin_ok" : nx.pinLockedUntil ? "login:pin_lockout" : "login:pin_failed", ok ? "" : "attempt " + nx.pinAttempts);
         if (!ok) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - nx.pinAttempts) }, 401, request);
         if (auth.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, auth.orgId, auth.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
-        return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, identity: auth.identity }, 200, request);
+        let orgCode = "";
+        try { const o = await ORG.getOrg(env, auth.orgId); if (o) orgCode = o.code || ""; } catch (e) {}
+        return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, orgCode: orgCode, identity: auth.identity }, 200, request);
       }
       const m = await ORG.findMemberByEmail(env, b.email || "");
       if (!m || !m.active || !m.passHash) {

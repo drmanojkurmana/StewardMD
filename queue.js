@@ -284,7 +284,7 @@
     var nameEl = document.getElementById("qStaffName"), roleEl = document.getElementById("qStaffRole"), pinEl = document.getElementById("qStaffPin");
     var identity = ((nameEl && nameEl.value) || "").trim().toLowerCase(), role = (roleEl && roleEl.value) || "nurse", pin = ((pinEl && pinEl.value) || "").trim();   // lowercase so it always matches the staff login (mobile keyboards auto-capitalize; server match is case-sensitive)
     if (!identity) { try { G.toast && G.toast("Enter a login name"); } catch (e) {} return; }
-    if (!/^\d{4,6}$/.test(pin)) { try { G.toast && G.toast("PIN must be 4 to 6 digits"); } catch (e) {} return; }
+    if (!/^\d{4,8}$/.test(pin)) { try { G.toast && G.toast("PIN must be 4 to 8 digits"); } catch (e) {} return; }
     apiPost("/member", { orgId: st.orgId, identity: identity, role: role }).then(function (r) {
       if (!r || !r.ok) { try { G.toast && G.toast("Could not add staff"); } catch (e) {} return null; }
       return apiPost("/member/pin", { orgId: st.orgId, identity: identity, pin: pin });
@@ -328,7 +328,10 @@
   function renderProfile(state, doctorName, dept) {
     var s = state.session || {};
     var status = s.doctorStatus ? cap(s.doctorStatus) : (s.status === "paused" ? "Paused" : "Online");
-    return '<div class="q-sheet" data-q-act="profile-close"><div class="q-profile" data-q-act="profile-stop">' +
+    return '<div class="q-sheet" data-q-act="profile-close"><div class="q-profile" data-q-act="profile-stop" role="dialog" aria-label="Doctor profile">' +
+      // Sticky X: aria-label="Close" is also what swipe-back.js BACK_SEL matches, so the Android
+      // back gesture and hardware button close the sheet too.
+      '<div class="q-profile-head"><button class="q-ic q-profile-x" data-q-act="profile-close" aria-label="Close">' + ms("close") + "</button></div>" +
       '<div class="q-profile-top"><div class="q-avatar q-avatar-lg">' + esc(initials(doctorName)) + "</div>" +
       '<div class="q-profile-id"><b>' + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
       (state.ghisUser ? '<div class="q-profile-row">' + ms("badge") + "<span>GHIS ID</span><b>" + esc(state.ghisUser) + "</b></div>" : "") +
@@ -930,7 +933,7 @@
   function prefillStaff() {
     setTimeout(function () {
       try {
-        var o = document.getElementById("qFdOrg"), last = localStorage.getItem("smd_opd_staff_org") || "";
+        var o = document.getElementById("qFdOrg"), last = localStorage.getItem("smd_opd_staff_org") || localStorage.getItem("smd_opd_clinic_code") || "";
         if (o && last) o.value = last;
         var f = document.getElementById(last ? "qFdUser" : "qFdOrg"); if (f) f.focus();
       } catch (e) {}
@@ -943,7 +946,7 @@
       user = (document.getElementById("qFdUser") || {}).value || "";
       pin = (document.getElementById("qFdPin") || {}).value || "";
     } catch (e) {}
-    org = org.trim(); user = user.trim(); pin = pin.trim();
+    org = org.trim(); user = user.trim().toLowerCase(); pin = pin.trim();
     if (!org || !user || !pin) { root().innerHTML = _staffGate("Enter the Clinic ID, your login and your PIN."); prefillStaff(); return; }
     root().innerHTML = '<div class="q-empty" style="padding:80px">Signing in…</div>';
     fetchRetry(API + "/auth/pin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ clinicCode: org, identity: user, pin: pin }) })
@@ -966,7 +969,7 @@
           root().innerHTML = _staffGate(msg); prefillStaff(); return;
         }
         setStaffTok(r.token);
-        try { localStorage.setItem("smd_opd_staff_org", org); } catch (e) {}
+        try { localStorage.setItem("smd_opd_staff_org", org); if (r.orgCode) localStorage.setItem("smd_opd_clinic_code", r.orgCode); } catch (e) {}
         st.orgId = r.orgId || "";
         _setWp("");                     // a staff session is not a doctor workplace
         loadFrontDesk();
@@ -1008,39 +1011,119 @@
   function renderFrontDesk(b) {
     var who = st.staffWho || {}, rooms = (b && b.rooms) || [], pool = (b && b.pool) || [];
     var canAdd = staffCan("queue.add"), canAssign = staffCan("queue.assign");
-    var head = '<div class="q-fd-top"><div><h2 class="q-h2" style="margin:0">' + ms("badge") + "Front desk</h2>" +
-      '<div class="q-hint">' + esc(who.name || "Staff") + " &middot; " + esc(who.role || "viewer") + (who.orgCode ? " &middot; " + esc(who.orgCode) : "") + "</div></div>" +
-      '<button class="q-pause" style="width:auto;padding:8px 14px" data-q-act="staffout">Sign out</button></div>';
-
+    var activeRooms = rooms.filter(function (r) { return r.status !== "unavailable"; }).length;
     var waitingTotal = rooms.reduce(function (n, r) { return n + (r.waiting || 0); }, 0);
-    var kpis = '<section class="q-kpis">' +
-      kpi("Waiting", "groups", String(waitingTotal), "") +
-      kpi("Unassigned", "help", String(pool.length), "") +
-      kpi("Rooms", "door_front", String(rooms.length), "") + "</section>" +
-      // The same OPD figures the doctor sees, on the desk that can act on them first.
-      pulseCard(st);
+    var inConsultTotal = rooms.reduce(function (n, r) {
+      return n + ((r.tickets || []).filter(function (t) { return t.status === "in_consultation"; }).length);
+    }, 0);
+
+    var head = '<header class="q-fd-top">' +
+      '<div class="q-fd-brand">' +
+        '<div class="q-fd-avatar">' + ms("support_agent") + '</div>' +
+        '<div class="q-fd-title-col">' +
+          '<div class="q-fd-h-row">' +
+            '<h1 class="q-fd-title">Front desk</h1>' +
+            '<span class="q-fd-pill"><span class="q-fd-dot"></span>Live</span>' +
+          '</div>' +
+          '<div class="q-hint q-fd-meta">' +
+            '<span class="q-fd-who">' + esc(who.name || "Staff") + '</span>' +
+            '<span class="q-fd-sep">&middot;</span>' +
+            '<span class="q-fd-role">' + esc(who.role || "viewer") + '</span>' +
+            (who.orgCode ? '<span class="q-fd-sep">&middot;</span><span class="q-fd-code">' + esc(who.orgCode) + '</span>' : '') +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="q-fd-top-acts">' +
+        '<button class="q-fd-btn-icon" data-q-act="fdrefresh" title="Refresh board" aria-label="Refresh">' + ms("refresh") + '</button>' +
+        '<button class="q-pause q-fd-signout" data-q-act="staffout" title="Sign out">' + ms("logout") + '<span>Sign out</span></button>' +
+      '</div>' +
+    '</header>';
+
+    var banner = canAdd ? (
+      '<div class="q-fd-banner">' +
+        '<div class="q-fd-banner-text">' +
+          '<div class="q-fd-banner-title">Patient Reception &amp; Check-In</div>' +
+          '<div class="q-fd-banner-sub">Register walk-ins or arrivals into the OPD queue</div>' +
+        '</div>' +
+        '<button class="q-gate-btn q-fd-add-btn" data-q-act="fdadd">' + ms("person_add") + '<span>Add patient</span></button>' +
+      '</div>'
+    ) : '';
+
+    var kpis = '<section class="q-kpis q-fd-kpis">' +
+      kpi("Waiting", "groups", String(waitingTotal), '<div class="q-kpi-sub">in rooms</div>') +
+      kpi("Unassigned", "help", String(pool.length), '<div class="q-kpi-sub' + (pool.length ? ' alert' : '') + '">' + (pool.length ? pool.length + ' in hall' : 'hall clear') + '</div>') +
+      kpi("In Consult", "stethoscope", String(inConsultTotal), '<div class="q-kpi-sub">with doctor</div>') +
+      kpi("Rooms", "door_front", String(activeRooms) + '<span class="q-kpi-denom">/' + String(rooms.length) + '</span>', '<div class="q-kpi-sub">' + (activeRooms === rooms.length ? 'all online' : activeRooms + ' active') + '</div>') +
+    '</section>';
 
     var roomCards = rooms.length ? rooms.map(function (r) {
       var rm = r.room || {}, unavailable = r.status === "unavailable";
-      return '<div class="q-card"><div class="q-card-h">' + ms("door_front") + esc(rm.name || "Room") +
-        (rm.number ? ' <span class="q-hint">#' + esc(rm.number) + "</span>" : "") + "</div>" +
-        '<div class="q-out"><span>' + (unavailable ? "No doctor assigned" : "Waiting") + "</span><b>" +
-        (unavailable ? "&mdash;" : r.waiting) + "</b></div>" +
-        (rm.department ? '<div class="q-hint">' + esc(rm.department) + "</div>" : "") + "</div>";
+      var inConsult = (r.tickets || []).filter(function (t) { return t.status === "in_consultation"; })[0];
+      var waitingCount = unavailable ? 0 : (r.waiting || 0);
+      return '<div class="q-card q-room-card' + (unavailable ? ' unstaffed' : '') + '">' +
+        '<div class="q-room-top">' +
+          '<div class="q-room-name-wrap">' +
+            '<div class="q-room-icon' + (unavailable ? ' muted' : '') + '">' + ms("door_front") + '</div>' +
+            '<div>' +
+              '<div class="q-room-title">' + esc(rm.name || "Room") + (rm.number ? ' <span class="q-room-num">#' + esc(rm.number) + '</span>' : '') + '</div>' +
+              (rm.department ? '<div class="q-hint q-room-dept">' + esc(rm.department) + '</div>' : '') +
+            '</div>' +
+          '</div>' +
+          '<span class="q-room-pill ' + (unavailable ? 'offline' : inConsult ? 'busy' : 'available') + '">' +
+            '<span class="q-dot"></span>' + (unavailable ? 'No doctor' : inConsult ? 'In consult' : 'Available') +
+          '</span>' +
+        '</div>' +
+        '<div class="q-room-body">' +
+          '<div class="q-room-stat">' +
+            '<span class="q-room-stat-lbl">In room</span>' +
+            '<div class="q-room-stat-val">' +
+              (unavailable ? '<span class="q-hint">&mdash;</span>' : inConsult ? tok(inConsult) + '<span class="q-room-cur-name">' + esc(inConsult.name || "Patient") + '</span>' : '<span class="q-hint">None</span>') +
+            '</div>' +
+          '</div>' +
+          '<div class="q-room-stat waiting">' +
+            '<span class="q-room-stat-lbl">Waiting</span>' +
+            '<div class="q-room-stat-val bold' + (waitingCount > 3 ? ' warn' : '') + '">' +
+              (unavailable ? '&mdash;' : waitingCount) +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
     }).join("") : '<div class="q-empty">No rooms set up yet. The clinic owner adds rooms in the console.</div>';
 
-    var poolRows = pool.length ? pool.map(function (t) {
-      return '<div class="q-fd-row"><div>' + tok(t) + "<b>" + esc(t.name || "Patient") + "</b>" +
-        '<div class="q-hint">' + esc(t.mrnLast4 ? "MRN ..." + t.mrnLast4 : "No MRN") + " &middot; " + esc(t.visitType === "followup" ? "Follow-up" : "New") + (t.department ? " &middot; " + esc(t.department) : "") + "</div></div>" +
-        (canAssign ? '<button class="q-pause" style="width:auto;padding:8px 12px" data-q-act="fdroute:' + esc(t.id) + '">Route</button>' : "") +
-        "</div>";
-    }).join("") : '<div class="q-empty" style="padding:22px">Nobody waiting to be routed.</div>';
+    var poolRows = pool.length ? '<div class="q-fd-pool-list">' + pool.map(function (t) {
+      return '<div class="q-fd-row"><div>' + tok(t) + '<b class="q-fd-pname">' + esc(t.name || "Patient") + '</b>' +
+        '<div class="q-hint">' + esc(t.mrnLast4 ? "MRN ..." + t.mrnLast4 : "No MRN") + " &middot; " + esc(t.visitType === "followup" ? "Follow-up" : "New") + (t.department ? " &middot; " + esc(t.department) : "") + '</div></div>' +
+        (canAssign ? '<button class="q-fd-route-btn" data-q-act="fdroute:' + esc(t.id) + '">' + ms("arrow_forward") + '<span>Route</span></button>' : '') +
+        '</div>';
+    }).join("") + '</div>' : '<div class="q-fd-empty"><div class="q-fd-empty-icon">' + ms("check_circle") + '</div><div class="q-fd-empty-text">Nobody waiting to be routed.</div><div class="q-hint">All registered patients have been routed to consultation rooms.</div></div>';
 
-    return '<div class="q-fd">' + head + kpis +
-      (canAdd ? '<button class="q-gate-btn" style="margin:4px 0 14px" data-q-act="fdadd">' + ms("person_add") + " Add patient</button>" : "") +
-      '<h2 class="q-h2">' + ms("meeting_room") + "Rooms</h2><div class=\"q-grid2\">" + roomCards + "</div>" +
-      '<h2 class="q-h2">' + ms("groups") + "Waiting to be routed</h2>" + poolRows +
-      '<div style="height:24px"></div></div>';
+    return '<div class="q-fd">' + head +
+      '<div class="q-fd-scroll"><div class="q-fd-body">' +
+        banner +
+        kpis +
+        pulseCard(st) +
+        '<section class="q-fd-sec">' +
+          '<div class="q-fd-sec-hd">' +
+            '<div class="q-fd-sec-left">' +
+              '<h2 class="q-h2" style="margin:0">' + ms("meeting_room") + '<span>Rooms</span></h2>' +
+              '<span class="q-fd-badge">' + rooms.length + '</span>' +
+            '</div>' +
+            '<div class="q-fd-sec-meta">' + activeRooms + ' active &middot; ' + (rooms.length - activeRooms) + ' unstaffed</div>' +
+          '</div>' +
+          '<div class="q-grid2 q-fd-rooms-grid">' + roomCards + '</div>' +
+        '</section>' +
+        '<section class="q-fd-sec">' +
+          '<div class="q-fd-sec-hd">' +
+            '<div class="q-fd-sec-left">' +
+              '<h2 class="q-h2" style="margin:0">' + ms("groups") + '<span>Waiting to be routed</span></h2>' +
+              '<span class="q-fd-badge' + (pool.length ? ' alert' : '') + '">' + pool.length + '</span>' +
+            '</div>' +
+            (pool.length ? '<div class="q-fd-sec-meta">Waiting in reception hall</div>' : '') +
+          '</div>' +
+          poolRows +
+        '</section>' +
+      '</div></div>' +
+    '</div>';
   }
 
   // Add a patient from the front desk: the SAME ABDM-ready check-in sheet the doctor uses, then into

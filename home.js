@@ -825,30 +825,40 @@
       intro.style.cssText = "margin-bottom:20px;text-align:center";
       intro.innerHTML = '<div style="font:700 13px var(--sans,sans-serif);color:var(--teal,#0e6e63);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Unified Hospital Link</div>' +
         '<div style="font:800 22px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.02em">Choose how your hospital connects</div>' +
-        '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--slate,#64748b);margin-top:6px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.5">Link your hospital\'s EMR to auto-sync inpatient ward lists, real-time lab reports, and vitals directly into StewardMD.</div>';
+        '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--slate,#64748b);margin-top:6px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.5">Link your hospital\'s EMR to bring inpatient ward lists, lab reports and vitals into StewardMD. Every pathway needs your hospital\'s permission and uses only the access it grants.</div>';
       scroll.appendChild(intro);
 
       // Pathway 1: EMR Website Login (Connect Agent)
       var card1 = document.createElement("div");
       card1.style.cssText = "background:var(--panel,#fff);border:1.5px solid var(--teal,#0e6e63);border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 4px 16px rgba(14,110,99,0.08);position:relative";
+      // QA BUG-012: wording only. The agent's behaviour is unchanged; the doctor must confirm
+      // hospital-administration permission (tick) before the Start button becomes usable.
       card1.innerHTML =
         '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
-          '<span style="background:var(--teal,#0e6e63);color:#fff;font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">RECOMMENDED &middot; NO EMR CHANGES</span>' +
-          '<span style="font:600 12px var(--sans,sans-serif);color:var(--slate,#64748b);margin-left:auto">Doctor Self-Service</span>' +
+          '<span style="background:var(--teal,#0e6e63);color:#fff;font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">WITH HOSPITAL PERMISSION</span>' +
+          '<span style="font:600 12px var(--sans,sans-serif);color:var(--slate,#64748b);margin-left:auto">Doctor-led setup</span>' +
         '</div>' +
         '<div style="font:800 18px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.01em;display:flex;align-items:center;gap:8px">' +
           'Connect by EMR Website Login' +
         '</div>' +
-        '<div style="font:600 13.5px var(--sans,sans-serif);color:var(--teal,#0e6e63);margin:4px 0 10px">Sign in to your hospital portal &mdash; AI agent does the rest</div>' +
+        '<div style="font:600 13.5px var(--sans,sans-serif);color:var(--teal,#0e6e63);margin:4px 0 10px">Sign in to your hospital portal yourself. StewardMD reads what your login can already see.</div>' +
         '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--ink,#334155);line-height:1.55;margin-bottom:14px">' +
-          'Sign in to your hospital\'s web portal or HIS in a private, encrypted in-app browser. Our AI agent autonomously explores your hospital screens, discovers patient rosters and lab results, and creates a verified read-only adapter tailored to your hospital. It makes no changes to your hospital\'s EMR &mdash; you sign in with your own credentials and read only what your account is already permitted to see. Use it in line with your hospital\'s IT and information-governance policy.' +
+          'For hospitals with a web, online or cloud EMR. You sign in to your hospital\'s portal in a private, encrypted in-app browser using your own credentials. StewardMD then reads patient rosters and lab results through that login and builds a read-only link for your account. It does not change your hospital\'s EMR and does not grant itself any access beyond what your login already has. Use this only after your hospital administration has permitted it.' +
         '</div>' +
-        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:16px">' +
-          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> 100% Private In-App Login</div>' +
-          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Autonomous Screen Discovery</div>' +
-          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Verified with Real Patients</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:14px">' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Private in-app sign-in, password never stored</div>' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Read-only: cannot order, prescribe or edit</div>' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Uses only the access your login already has</div>' +
         '</div>' +
-        '<button id="smdBtnAgentLogin" type="button" style="width:100%;min-height:46px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:12px;font:700 15px var(--sans,sans-serif);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 2px 8px rgba(14,110,99,0.3)">' +
+        '<div id="smdAgentDisclaimer" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px 12px;margin-bottom:12px;font:400 10.5px/1.5 var(--sans,sans-serif);color:var(--slate,#475569)">' +
+          '<div style="font-weight:700;color:var(--ink,#1e293b);margin-bottom:4px;font-size:11px">Disclaimer. Please read before you continue.</div>' +
+          'EMR Website Login must be used only after you have obtained permission from your hospital administration, or from the authority that controls your hospital\'s EMR, to connect it to StewardMD. StewardMD does not obtain this permission for you and cannot confirm that it has been given. You sign in with your own credentials and you alone are responsible for their use, for every screen the link reads while you are signed in, and for complying with your hospital\'s IT, information-security, privacy and data-protection policies and with applicable law, including the Digital Personal Data Protection Act, 2023. StewardMD reads only what your login can already see, cannot add, change or grant any access, and does not alter your hospital\'s EMR. Patient data read through this link is used only inside your StewardMD account. MAIKNOWLEDGE LLP and StewardMD accept no responsibility for any use of this feature without the required permission, or for any breach of hospital policy or law arising from such use. You can stop the link at any time from this screen.' +
+        '</div>' +
+        '<label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;cursor:pointer;font:600 12.5px/1.45 var(--sans,sans-serif);color:var(--ink,#1e293b)">' +
+          '<input id="smdAgentConsent" type="checkbox" style="width:20px;height:20px;margin:1px 0 0;flex-shrink:0;accent-color:var(--teal,#0e6e63)">' +
+          '<span>I have permission from my hospital administration to connect this EMR, I have read the disclaimer above, and I take responsibility for this connection.</span>' +
+        '</label>' +
+        '<button id="smdBtnAgentLogin" type="button" disabled aria-disabled="true" style="width:100%;min-height:46px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:12px;font:700 15px var(--sans,sans-serif);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 2px 8px rgba(14,110,99,0.3);opacity:.45">' +
           '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>' +
           'Start EMR Web Login &amp; Discovery' +
         '</button>';
@@ -917,8 +927,18 @@
 
       // Event handlers
       var btnAgent = card1.querySelector("#smdBtnAgentLogin");
+      var agentConsent = card1.querySelector("#smdAgentConsent");
+      if (btnAgent && agentConsent) {
+        agentConsent.onchange = function () {
+          var ok = !!agentConsent.checked;
+          btnAgent.disabled = !ok;
+          btnAgent.setAttribute("aria-disabled", ok ? "false" : "true");
+          btnAgent.style.opacity = ok ? "1" : ".45";
+        };
+      }
       if (btnAgent) {
         btnAgent.onclick = function () {
+          if (agentConsent && !agentConsent.checked) return;
           closeHub();
           setTimeout(function () {
             if (window.SMD_CONNECT_AGENT_BOOT && SMD_CONNECT_AGENT_BOOT.open) {
@@ -6274,7 +6294,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return "<b>" + maikEscH(m.label) + "</b> (" + maikEscH(m.size || "") + (m.installed ? ", installed" : "") + (m.level === "warn" ? ", may run slowly" : "") + ")";
       }).join(", ");
       return maikEscH(r.message || "This needs a different on-device model.") +
-        (recs ? "<br><br>Unlocks on this phone with: " + recs + ". Open <b>Settings, AI Assistant, Answer engine</b> to download or select one." : "") +
+        (recs ? "<br><br>Unlocks on this phone with: " + recs + ". Open <b>Settings, MaiK, Who answers</b> to download or select one." : "") +
         (r.offline ? "" : "<br><br>Or tap the model name at the top and choose <b>MaiK Cloud</b>.");
     }
     if (e === "kb-only") return maikEscH(r.message || "KB-only mode makes no AI calls.");
@@ -6947,6 +6967,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   var _replayed = !!(r && r.replayed);
                   el.textContent = "⏱ " + (ttft ? ((_replayed ? "answer " : "first token ") + ttft + "s · ") : "") +
                     (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "") +
+                    // On-device engine measurements (perf plan #8): prefill and how much of it was reused,
+                    // decode rate, thermal state across the answer, and the draft's acceptance rate.
+                    (function (p) {
+                      if (!p) return "";
+                      var s = "";
+                      if (p.promptTokens != null) s += " · prompt " + p.promptTokens + " tok" + (p.reusedTokens ? " (" + p.reusedTokens + " reused)" : "") + (p.prefillMs != null ? " in " + (p.prefillMs / 1000).toFixed(1) + "s" : "");
+                      if (p.tokPerSec) s += " · " + Number(p.tokPerSec).toFixed(1) + " tok/s";
+                      if (p.draftProposed) s += " · draft " + Math.round(100 * (p.draftAccepted || 0) / p.draftProposed) + "% accepted";
+                      if (p.thermalStart) s += " · " + p.thermalStart + (p.thermalEnd && p.thermalEnd !== p.thermalStart ? " to " + p.thermalEnd : "");
+                      if (p.kvQ8) s += " · kv q8";
+                      return s;
+                    })(r && r.perf) +
                     ((r && r.grounding && r.grounding.removed && r.grounding.removed.length) ? " · " + r.grounding.removed.length + " unsupported statement" + (r.grounding.removed.length === 1 ? "" : "s") + " left out" : "");
                   _h.appendChild(el);
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}

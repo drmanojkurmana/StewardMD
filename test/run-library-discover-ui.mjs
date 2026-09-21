@@ -69,7 +69,13 @@ try{
  ok(await ev(`document.querySelector('#dxOverlay').textContent`).then(t=>t.includes(diseaseName)),'disease entry opens existing reference');
  ok(await ev(`document.querySelector('#dxMgmt').classList.contains('dx-reader') && document.querySelector('.dx-reader-brand strong').textContent==='Knowledge Library'`),'disease entry uses the shared Knowledge Library reader');
  ok(await ev(`(()=>{const panel=document.querySelector('#dxMgmt'),body=panel.querySelector('.dx-mgmt-body'),r=panel.getBoundingClientRect();return getComputedStyle(panel).position==='fixed'&&getComputedStyle(panel).overflow==='hidden'&&getComputedStyle(body).overflowY==='auto'&&Math.abs(r.height-innerHeight)<=1})()`),'disease reader remains a pinned full-screen app surface');
- ok(await ev(`document.querySelector('#dxMgmt').scrollWidth<=innerWidth && document.querySelector('.dx-mgmt-name').textContent.trim()===${JSON.stringify(diseaseName)}`),'disease reader retains its title without horizontal overflow');
+ ok(await ev(`document.querySelector('.dx-mgmt-name').textContent.trim()===${JSON.stringify(diseaseName)}`),'disease reader retains its title');
+ for(const width of [320,375,390,393,430]){
+  await call('Emulation.setDeviceMetricsOverride',{width,height:844,deviceScaleFactor:1,mobile:true});
+  const fit=JSON.parse(await ev(`(()=>{const panel=document.querySelector('#dxMgmt'),body=panel.querySelector('.dx-mgmt-body'),brand=panel.querySelector('.dx-reader-brand'),p=panel.getBoundingClientRect(),b=body.getBoundingClientRect(),t=brand.getBoundingClientRect();return JSON.stringify({left:p.left,right:p.right,viewport:innerWidth,overflow:panel.scrollWidth>innerWidth,titleDelta:Math.abs((t.left+t.right)/2-innerWidth/2),gutterDelta:Math.abs(b.left-(innerWidth-b.right))})})()`));
+  ok(Math.abs(fit.left)<=1&&Math.abs(fit.right-fit.viewport)<=1&&!fit.overflow&&fit.titleDelta<=1&&fit.gutterDelta<=1,`reader fits and is symmetrical at ${width}px ${JSON.stringify(fit)}`);
+ }
+ await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
  await shot('disease-reader-mobile');
  await ev(`document.querySelector('.dx-reader-favourite').click()`);
  ok(await ev(`document.querySelector('.dx-reader-favourite').getAttribute('aria-pressed')==='true'`),'disease can be saved as a favourite');

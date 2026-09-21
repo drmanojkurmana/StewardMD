@@ -1684,7 +1684,37 @@
       vitalCard("Net Fluid", f.net24h, "mL", "", null, "fluids:net24h"),
       vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, K_CRIT_LO, K_CRIT_HI), labSeries("k", _trendWin), "labs:k")   // BUG #5: shared crit constant with the alert engine
     ];
-    return '<div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
+    return '<div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>" + renderVentAbgTiles();
+  }
+  // QA BUG-024: ventilator + ABG columns as tap-to-edit tiles (same component, same single-value
+  // editor as the monitor tiles), shown under Live Status and on their own tabs.
+  function abgTiles() {
+    var g = _raw.abg || {};
+    return [
+      vitalCard("pH", g.ph, "", vstat(g.ph, 7.35, 7.45, 7.2, 7.6), null, "abg:ph"),
+      vitalCard("PaCO₂", g.paco2, "mmHg", vstat(g.paco2, 35, 45, 25, 70), null, "abg:paco2"),
+      vitalCard("PaO₂", g.pao2, "mmHg", vstat(g.pao2, 80, null, 55, null), null, "abg:pao2"),
+      vitalCard("HCO₃⁻", g.hco3, "mEq/L", vstat(g.hco3, 22, 26, 12, 40), null, "abg:hco3"),
+      vitalCard("Base excess", g.be, "", vstat(g.be, -2, 2, -10, 10), null, "abg:be"),
+      vitalCard("FiO₂ (ABG)", g.fio2, "%", "", null, "abg:fio2")
+    ].join("");
+  }
+  function ventTiles() {
+    var v = _raw.ventilator || {};
+    return [
+      vitalCard("Mode", v.mode, "", "", null, "ventilator:mode"),
+      vitalCard("FiO₂", v.fio2, "%", vstat(v.fio2, null, 60, null, 80), null, "ventilator:fio2"),
+      vitalCard("PEEP", v.peep, "cmH₂O", vstat(v.peep, null, 12, null, 18), null, "ventilator:peep"),
+      vitalCard("Tidal vol", v.tv, "mL", "", null, "ventilator:tv"),
+      vitalCard("Set rate", v.rr, "/min", vstat(v.rr, 8, 30, null, 35), null, "ventilator:rr"),
+      vitalCard("Plateau", v.plateau, "cmH₂O", vstat(v.plateau, null, 30, null, 35), null, "ventilator:plateau"),
+      vitalCard("Peak", v.peak, "cmH₂O", vstat(v.peak, null, 35, null, 40), null, "ventilator:peak"),
+      vitalCard("Driving P", v.drivingP, "cmH₂O", vstat(v.drivingP, null, 15, null, 18), null, "ventilator:drivingP")
+    ].join("");
+  }
+  function renderVentAbgTiles() {
+    return '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("lungs", "🫁") + ' Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>' +
+      '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("abg", "🩸") + ' ABG</div><div class="icu-vitals">' + abgTiles() + '</div>';
   }
 
   /* --------------------------------------------------------- AI import panel */
@@ -3427,9 +3457,8 @@
     abg: function () {
       var g = _raw.abg || {}, L = _raw.labs.recent || {}, r = analyzeABG(g, L);
       var head = '<div class="icu-card"><h3>ABG &amp; Acid–Base</h3>' +
-        row("pH", g.ph) + row("PaCO₂", g.paco2, "mmHg") + row("PaO₂", g.pao2, "mmHg") +
-        row("HCO₃⁻", g.hco3, "mEq/L") + row("FiO₂", g.fio2, "%") + row("Base excess", g.be) +
-        '<button class="icu-btn ghost" data-icu-act="edit:abg">' + ico("edit","✎") + ' Update ABG</button></div>';
+        '<p class="icu-doc-sub" style="margin:0 0 8px">Tap a tile to edit that value.</p><div class="icu-vitals">' + abgTiles() + '</div>' +
+        '<button class="icu-btn ghost" data-icu-act="edit:abg" style="margin-top:10px">' + ico("edit","✎") + ' Update full ABG</button></div>';
       if (!r) return head + '<div class="icu-card"><div class="icu-empty">Enter pH, PaCO₂ and HCO₃ to interpret. (Anion gap also uses Na/Cl/albumin from Labs.)</div></div>';
       var sev = /Mixed|acidosis/.test(r.primary) ? "warn" : "";
       return head + '<div class="icu-card"><h3>Interpretation</h3>' +
@@ -3500,9 +3529,8 @@
       var v = _raw.ventilator || {}, iv = interpretVent(v, _raw.patient, _raw.abg);
       var extub = ["Cause of respiratory failure resolving", "Oxygenation on low support (FiO₂ ≤0.4, PEEP ≤5–8)", "Haemodynamically stable, minimal vasopressors", "Awake, following commands, protecting airway", "Adequate cough & manageable secretions", "Passed spontaneous breathing trial (RSBI <105)"];
       return '<div class="icu-card"><h3>Ventilator settings</h3>' +
-        row("Mode", v.mode) + row("FiO₂", v.fio2, "%") + row("PEEP", v.peep, "cmH₂O") +
-        row("Tidal volume", v.tv, "mL") + row("Resp rate", v.rr, "/min") + row("Plateau", v.plateau, "cmH₂O") +
-        '<button class="icu-btn ghost" data-icu-act="edit:ventilator">' + ico("edit","✎") + ' Update ventilator</button></div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 8px">Tap a tile to edit that value.</p><div class="icu-vitals">' + ventTiles() + '</div>' +
+        '<button class="icu-btn ghost" data-icu-act="edit:ventilator" style="margin-top:10px">' + ico("edit","✎") + ' Update all settings</button></div>' +
         '<div class="icu-card"><h3>Protective ventilation & ARDS</h3>' + iv.rows.map(function (x) { return row(x[0], x[1]); }).join("") + evidenceBadges(["ARDSNet", "ESICM"]) + "</div>" +
         recsCard("Recommendations", iv.recs, iv.flags, ["ARDSNet", "ESICM"]) +
         '<div class="icu-card"><h3>Extubation readiness</h3>' + extub.map(function (t) { return '<div class="icu-row"><span>' + esc(t) + '</span><b>☐</b></div>'; }).join("") + evidenceBadges(["ESICM", "SCCM"]) + "</div>";
@@ -5961,7 +5989,13 @@
     var pend = String(_roundText || "").trim(); if (pend) out.push(pend);
     return out;
   }
-  function grpRoundCaptureText() { try { var el = rootEl && rootEl.querySelector("#icuRoundCustom"); if (el) _roundText = String(el.value || ""); } catch (e) {} }
+  function grpRoundCaptureText() {
+    try { var el = rootEl && rootEl.querySelector("#icuRoundCustom"); if (el) _roundText = String(el.value || ""); } catch (e) {}
+    try { var nt = rootEl && rootEl.querySelector("#icuRoundNote"); if (nt) _roundNote = String(nt.value || ""); } catch (e) {}
+  }
+  // QA BUG-003: a free-text clinical note posted to the patient timeline (not a tracked task).
+  var _roundNote = "";
+  function grpRoundNoteText() { return String(_roundNote || "").trim(); }
   // Priority picker (instructing roles only) — sets the deadline window a task must be done within.
   function priorityPickerHTML() {
     return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 10px">Priority — done within</div><div class="icu-v2-priopick">' +
@@ -6008,18 +6042,23 @@
     // BOX 2 — add your own (always visible, right below the suggestions box).
     var custom = '<div class="icu-card icu-v2-ownbox"><div class="icu-sec-lbl" style="margin:0 0 8px">Add your own</div>' +
       '<div class="icu-v2-rcustom"><input id="icuRoundCustom" type="text" aria-label="Add your own instruction" placeholder="e.g. Increase PEEP to 8" value="' + esc(_roundText) + '"><button class="icu-btn" data-icu-act="grproundadd" aria-label="Add this instruction">Add</button></div></div>';
-    var n = grpRoundChosen().length;
-    var btnLbl = n ? "Post " + n + " instruction" + (n === 1 ? "" : "s") + " · " + TASK_PRIORITY[_roundPriority].label : "Choose or type an instruction";
-    var post = '<div class="icu-v2-rpost"><button class="icu-btn' + (n ? "" : " ghost") + '" data-icu-act="grproundpost"' + (n ? "" : " disabled") + '>' + esc(btnLbl) + '</button></div>';
+    // BOX 3 — clinical note (QA BUG-003): free text that goes to the timeline as a note, never a task.
+    var noteBox = '<div class="icu-card icu-v2-notebox"><div class="icu-sec-lbl" style="margin:0 0 8px">Clinical note <span style="opacity:.6">· optional</span></div>' +
+      '<p class="icu-doc-sub" style="margin:0 0 8px">Progress, examination findings or a plan. Saved to the patient timeline with your name; it is not a task.</p>' +
+      '<textarea id="icuRoundNote" rows="3" aria-label="Clinical note" placeholder="e.g. Day 3. Afebrile, off pressors since 06:00, tolerating feeds. Plan: wean FiO₂, repeat ABG at 14:00." style="width:100%;box-sizing:border-box;font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink)">' + esc(_roundNote) + '</textarea></div>';
+    var n = grpRoundChosen().length, hasNote = !!grpRoundNoteText();
+    var btnLbl = n ? "Post " + n + " instruction" + (n === 1 ? "" : "s") + " · " + TASK_PRIORITY[_roundPriority].label + (hasNote ? " + note" : "") : (hasNote ? "Post note" : "Choose or type an instruction, or write a note");
+    var canPost = n || hasNote;
+    var post = '<div class="icu-v2-rpost"><button class="icu-btn' + (canPost ? "" : " ghost") + '" data-icu-act="grproundpost"' + (canPost ? "" : " disabled") + '>' + esc(btnLbl) + '</button></div>';
     // Flex column: header (fixed) · body (intro/priority/add-your-own fixed + suggestions box flexes &
     // scrolls) · post bar (fixed). Both boxes stay on screen; only the suggestions list scrolls.
     return '<div class="icu-v2-dialog" role="dialog" aria-modal="true" aria-label="Add round note" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden">' +
-      header + '<div class="icu-v2-rbody">' + errNote + intro + prio + sugBox + custom + onBehalfPickerHTML() + '</div>' + post + '</div>';
+      header + '<div class="icu-v2-rbody">' + errNote + intro + prio + sugBox + custom + noteBox + onBehalfPickerHTML() + '</div>' + post + '</div>';
   }
   function grpRoundSetPriority(k) { grpRoundCaptureText(); if (TASK_PRIORITY[k]) _roundPriority = k; paint(); }
   function grpOpenRound() {
     if (!grpActive() || !_grpPtId) return;
-    _roundSel = {}; _roundExtra = []; _roundText = ""; _roundPriority = "high"; _roundOnBehalf = null; _grpErr = null;
+    _roundSel = {}; _roundExtra = []; _roundText = ""; _roundNote = ""; _roundPriority = "high"; _roundOnBehalf = null; _grpErr = null;
     _screen = "round"; _paintTop = true; paint();
   }
   function grpRoundToggle(i) { grpRoundCaptureText(); i = +i; _roundSel[i] = !_roundSel[i]; paint(); }
@@ -6035,7 +6074,19 @@
   function grpDoPostRound() {
     grpRoundCaptureText();
     var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
-    var chosen = grpRoundChosen(); if (!chosen.length) return;
+    var chosen = grpRoundChosen(), noteTxt = grpRoundNoteText();
+    if (!chosen.length && !noteTxt) return;
+    // QA BUG-003: the clinical note posts as its own timeline entry (create + display; the timeline is
+    // the audit trail, so a posted note is amended by posting a correction, not edited in place).
+    if (noteTxt) {
+      try { var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Clinical note — " + v2AccountName(), detail: noteTxt }); if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {}
+    }
+    if (!chosen.length) {
+      _roundNote = "";
+      if (window.toast) toast("Note posted");
+      grpRoundBack();
+      return;
+    }
     var instr = true;   // any unit member can log a tracked instruction now (the consultant often says it orally + a resident notes it down — attribute via "Instructed by")
     var onBehalf = null;
     if (_roundOnBehalf) { var _m = (_grpMembers || []).filter(function (x) { return x.uid === _roundOnBehalf; })[0]; if (_m) onBehalf = { uid: _m.uid, name: _m.name || grpDisplayTitle(_m) }; }
@@ -6048,7 +6099,7 @@
     // Immediate push to the unit when an instruction is ISSUED (not just when it later goes overdue) —
     // so residents are alerted the moment a high/immediate order is given.
     if (instr && plan.tasks.length) { try { grpNotifyInstruction(gid, pid, chosen, _roundPriority); } catch (e) {} }
-    _roundSel = {}; _roundExtra = []; _roundText = ""; _roundOnBehalf = null;
+    _roundSel = {}; _roundExtra = []; _roundText = ""; _roundNote = ""; _roundOnBehalf = null;
     if (window.toast) toast(instr ? (plan.tasks.length + " instruction" + (plan.tasks.length === 1 ? "" : "s") + " posted" + (onBehalf ? " for " + onBehalf.name : "")) : "Note posted");
     grpRoundBack();
   }
@@ -6216,19 +6267,32 @@
     "labs:cl": { l: "Chloride (Cl⁻)", u: "mEq/L" }, "labs:hco3": { l: "Bicarbonate (HCO₃⁻)", u: "mEq/L" },
     "labs:ca": { l: "Calcium", u: "mg/dL" }, "labs:ica": { l: "Ionised calcium", u: "mmol/L" },
     "labs:mg": { l: "Magnesium", u: "mg/dL" }, "labs:po4": { l: "Phosphate", u: "mg/dL" },
-    "fluids:net24h": { l: "Net fluid balance (24h)", u: "mL" }
+    "fluids:net24h": { l: "Net fluid balance (24h)", u: "mL" },
+    // QA BUG-024: ABG and ventilator columns use the same tap-to-edit tiles as the monitor.
+    "abg:ph": { l: "pH", u: "" }, "abg:paco2": { l: "PaCO\u2082", u: "mmHg" }, "abg:pao2": { l: "PaO\u2082", u: "mmHg" },
+    "abg:hco3": { l: "HCO\u2083\u207b", u: "mEq/L" }, "abg:fio2": { l: "FiO\u2082", u: "%" }, "abg:be": { l: "Base excess", u: "mEq/L" },
+    "abg:lactate": { l: "Lactate (ABG)", u: "mmol/L" },
+    "ventilator:mode": { l: "Ventilator mode", u: "", text: true }, "ventilator:fio2": { l: "FiO\u2082", u: "%" },
+    "ventilator:peep": { l: "PEEP", u: "cmH\u2082O" }, "ventilator:tv": { l: "Tidal volume", u: "mL" }, "ventilator:rr": { l: "Set rate", u: "/min" },
+    "ventilator:plateau": { l: "Plateau pressure", u: "cmH\u2082O" }, "ventilator:peak": { l: "Peak pressure", u: "cmH\u2082O" },
+    "ventilator:drivingP": { l: "Driving pressure", u: "cmH\u2082O" }
   };
   function openQuickVital(key) {
     var spec = QV_SPEC[key]; if (!spec) return;
     injectCSS(); ensureModal();
     var parts = key.split(":"), domain = parts[0], k = parts[1];
     var lv = mergedVitals(_raw.vitals), L = (_raw.labs && _raw.labs.recent) || {}, fl = _raw.fluids || {};
+    var ab = _raw.abg || {}, vt = _raw.ventilator || {};
     var body;
-    if (spec.bp) {
+    if (spec.text) {
+      var curT = domain === "ventilator" ? vt[k] : "";
+      body = '<div class="icu-fld" style="grid-column:1/-1"><label for="qv-val">' + esc(spec.l) + '</label>' +
+        '<input id="qv-val" data-k="' + esc(k) + '" type="text" autocapitalize="characters" placeholder="e.g. VC-AC, PC-SIMV, PSV" value="' + esc(curT != null ? curT : "") + '"></div>';
+    } else if (spec.bp) {
       body = '<div class="icu-fld"><label for="qv-sbp">Systolic (mmHg)</label><input id="qv-sbp" data-k="sbp" type="number" inputmode="decimal" step="any" value="' + esc(lv.sbp != null ? lv.sbp : "") + '"></div>' +
              '<div class="icu-fld"><label for="qv-dbp">Diastolic (mmHg)</label><input id="qv-dbp" data-k="dbp" type="number" inputmode="decimal" step="any" value="' + esc(lv.dbp != null ? lv.dbp : "") + '"></div>';
     } else {
-      var cur = domain === "labs" ? L[k] : domain === "fluids" ? fl[k] : lv[k];
+      var cur = domain === "labs" ? L[k] : domain === "fluids" ? fl[k] : domain === "abg" ? ab[k] : domain === "ventilator" ? vt[k] : lv[k];
       body = '<div class="icu-fld" style="grid-column:1/-1"><label for="qv-val">' + esc(spec.l) + (spec.u ? " (" + esc(spec.u) + ")" : "") + '</label>' +
         '<input id="qv-val" data-k="' + esc(k) + '" type="number" inputmode="decimal" step="any" value="' + esc(cur != null ? cur : "") + '"></div>';
     }
@@ -6245,11 +6309,27 @@
     if (!modalEl) return;
     var key = modalEl.getAttribute("data-qv"); if (!key) { closeForm(); return; }
     var domain = key.split(":")[0], obj = {};
-    modalEl.querySelectorAll("[data-k]").forEach(function (el) { var v = num(el.value); if (v != null && !isNaN(v)) obj[el.getAttribute("data-k")] = v; });
+    modalEl.querySelectorAll("[data-k]").forEach(function (el) {
+      if (el.type === "text") { var t = String(el.value || "").trim(); if (t) obj[el.getAttribute("data-k")] = t; return; }
+      var v = num(el.value); if (v != null && !isNaN(v)) obj[el.getAttribute("data-k")] = v;
+    });
     modalEl.removeAttribute("data-qv");
     if (!Object.keys(obj).length) { closeForm(); return; }
     // Vitals/labs -> the same clinician review sheet manual entry uses (mistype safety; unit-safe).
     if (domain === "monitor" || domain === "labs") { closeForm(); openImportReview(domain, obj, null, null, "Manual"); return; }
+    // QA BUG-024: ABG and ventilator tiles write through the same paths the full forms use.
+    if (domain === "abg") {
+      if (!STATE.abg) STATE.abg = {};
+      Object.keys(obj).forEach(function (kk) { STATE.abg[kk] = obj[kk]; }); STATE.abg.ts = nowTs();
+      try { recompute(_raw); } catch (e) {}
+      closeForm(); if (window.toast) toast("ABG updated"); paint();
+      return;
+    }
+    if (domain === "ventilator") {
+      ingestVentilator(obj);
+      closeForm(); if (window.toast) toast("Ventilator updated"); paint();
+      return;
+    }
     if (domain === "fluids") {
       if (!STATE.fluids) STATE.fluids = {};
       Object.keys(obj).forEach(function (kk) { STATE.fluids[kk] = obj[kk]; });
@@ -6272,7 +6352,9 @@
       '<div class="icu-steps">' + steps.map(function (s, i) {
         return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + ico(s[3], s[0]) + " Capture " + s[1] + "</div>" +
           (canSnap
-            ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">' + ico("camera", "📷") + ' Capture / upload<input type="file" accept="image/*" capture="environment" data-snap="' + s[2] + '" style="display:none"></label><button type="button" class="icu-btn ghost" data-snapfile="' + s[2] + '" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px">📄 PDF / file</button><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ' + ico("edit", "✎") + ' enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
+            ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">' + ico("camera", "📷") + ' Capture / upload<input type="file" accept="image/*,application/pdf" data-snap="' + s[2] + '" style="display:none"></label>' +
+              '<button type="button" class="icu-btn ghost" data-snap-pdf="' + s[2] + '" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px" aria-label="Upload a PDF report for ' + esc(s[1]) + '">' + ico("doc", "📄") + ' Upload PDF</button>' +
+              '<span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ' + ico("edit", "✎") + ' enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
             : '<span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">' + ico("edit", "✎") + ' Enter manually for now</span>') +
           "</div></div>";
       }).join("") + "</div>" +
@@ -6342,6 +6424,48 @@
           } else if (!linesMsg(out, r) && out) out.textContent = "Couldn't read that image — try again or enter manually.";
         }).catch(function () { if (out) out.textContent = "Couldn't read this — enter manually."; });
       }
+      // QA BUG-005: a PDF (ABG slip, lab report, discharge summary) goes through the SAME reader as a
+      // photo: pdf.js rasterises the page(s) here on the device, then the clinician's chosen engine reads
+      // the pixels. Numeric kinds use the combined multi-page review; the case sheet reads page 1.
+      function snapPdf(kind, out, blob) {
+        if (!blob) { if (out) out.textContent = ""; return; }
+        if (out) out.textContent = "📄 Reading PDF…";
+        if (kind === "patient") {
+          loadPdfJs().then(function (pdfjs) {
+            var fr = new FileReader();
+            fr.onload = function () {
+              pdfjs.getDocument({ data: new Uint8Array(fr.result) }).promise.then(function (pdf) {
+                renderPdfPageToImage(pdf, 1, function (img) {
+                  if (!img) { if (out) out.textContent = "Couldn't read this PDF — try a photo or enter manually."; return; }
+                  compressImage(img, function (d) { runSnap(kind, out, d, img); });
+                });
+              }).catch(function () { if (out) out.textContent = "Couldn't read this PDF — try a photo or enter manually."; });
+            };
+            fr.onerror = function () { if (out) out.textContent = "Couldn't read this PDF."; };
+            fr.readAsArrayBuffer(blob);
+          }).catch(function () { if (out) out.textContent = "PDF reader unavailable right now."; });
+          return;
+        }
+        if (out) out.textContent = "📄 PDF sent to the reader — review the values when they appear.";
+        handleImportFile(kind === "flowsheet" ? "flowsheet" : "all", blob);
+      }
+      modalEl.querySelectorAll("[data-snap-pdf]").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          var kind = btn.getAttribute("data-snap-pdf"), out = modalEl.querySelector('[data-out="' + kind + '"]');
+          if (window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.pickFile) {
+            window.SMD_NATIVE.pickFile({ types: ["application/pdf"] }).then(function (blob) { snapPdf(kind, out, blob); })
+              .catch(function (err) {
+                if (out) out.textContent = (err && /unavailable/.test(String(err.message || err))) ? "PDF picker is not available in this build — use Capture / upload." : "";
+              });
+            return;
+          }
+          var inp = document.createElement("input"); inp.type = "file"; inp.accept = "application/pdf"; inp.style.display = "none";
+          document.body.appendChild(inp);
+          inp.addEventListener("change", function () { var f = inp.files && inp.files[0]; inp.remove(); if (f) snapPdf(kind, out, f); });
+          inp.click();
+        });
+      });
       if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
         // Native: the hidden <input type=file> never opens a picker in WKWebView.
         // Intercept the label tap and use the Camera plugin instead (same pipeline).
@@ -6375,7 +6499,9 @@
         modalEl.querySelectorAll("input[data-snap]").forEach(function (inp) {
           inp.addEventListener("change", function () {
             var kind = inp.getAttribute("data-snap"), out = modalEl.querySelector('[data-out="' + kind + '"]');
-            var f = inp.files && inp.files[0]; if (!f) return; if (out) out.textContent = "✨ Reading…";
+            var f = inp.files && inp.files[0]; if (!f) return;
+            if (/pdf$/i.test(f.type || "") || /\.pdf$/i.test(f.name || "")) { snapPdf(kind, out, f); return; }   // QA BUG-005
+            if (out) out.textContent = "✨ Reading…";
             // Compress before sending to vision (was sending the raw full-res image → wasted
             // AI tokens). compressImage downscales to ~1024px / q0.6.
             compressImage(f, function (dataUrl) { runSnap(kind, out, dataUrl); });
@@ -8749,7 +8875,9 @@
       case "edit": openForm(arg); break;
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "adddata": openDataMenu(); break;
-      case "editvital": openQuickVital(arg); break;      // tap a Live-Status tile to edit that one value
+      // QA BUG-004: the GCS tile carries the edit key "gcsopen"; route it to the E/V/M calculator
+      // instead of the single-value editor (which has no spec for it and silently did nothing).
+      case "editvital": if (arg === "gcsopen") openGcsCalc(); else openQuickVital(arg); break;      // tap a Live-Status tile to edit that one value
       case "savequickvital": saveQuickVital(); break;
       case "coach": _coachForce = true; paint(); break;
       case "coachdone": setIcuSeen(); _coachForce = false; paint(); break;

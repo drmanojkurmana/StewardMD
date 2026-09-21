@@ -174,3 +174,29 @@ Selected modes: light uses variant 5, Quiet Focus (a gentle focus reveal followe
 `maik-atmosphere.js` / `.css` mount decorative Aurora and Letter Glitch canvases on the MaiK sheet. Light uses a pure white base and green/white/orange stops; Graphite uses saffron/green/navy. The existing `maikSetSendMode` controls the generation effect, including stop/error/completion. No prompts or patient text enter the renderer. Motion pauses when hidden, is static under Reduce Motion, and releases WebGL/listeners when the sheet closes or is replaced. The existing Medibot artwork, size, and animation remain unchanged. React Bits attribution is in `licenses/react-bits.txt`.
 
 The atmosphere refinement softens Aurora and gives messages and composer translucent, blurred surfaces. The engine-aware verification notice now sits beneath the composer in the footer; its wording still follows the selected engine. Original bot unchanged.
+
+## One settings page, our names only (2026-09-21)
+Owner: *"This whole page is shit. Make into one single well organised setting and dont name Real
+Model names only our model names."* `SMD_MAIK_ENGINE.settingsHTML()` now renders ONE page:
+1. **Who answers**: Knowledge Base only (Free) / MaiK Cloud (Pro, graded **DM**) / MaiK on this phone.
+2. **On this phone** (`capsHTML()`): the answering (or ready) pack, its grade, its fit for this phone,
+   capability chips, the device line (`[data-me-device]`, patched in place) and the Knowledge Base
+   check as a POSITIVE switch (`ragLinkHTML()`: "Check answers against the Knowledge Base", on by
+   default; it used to read Connected/Disconnected, which read backwards on a phone).
+3. **Model library** (`modelRowHTML()`): a four-rung grade ladder, then three `<details>` shelves
+   derived from the registry (`SMD_MAIK_MODELS.GROUPS` / `groupOf()`): Trained by StewardMD (MBBS),
+   Medical specialists (MD), General models (PhD). Every row carries a grade pill and a fit pill; an
+   unfit pack gets no download button. A pack's FIRST download goes through `data-me-upgrade`
+   (confirm on "May run slowly", PENDING promotion); resume/verify/pause stay on `data-me-model`.
+4. **Advanced**: the cloud-block test tool, collapsed.
+
+**Grades** live in `maik-models.js` (`GRADES`, `grade(id)`): MBBS = `own`, MD = `caps.medical`,
+PhD = everything else, DM = MaiK Cloud. Derived, never hand-kept. The picker (`openPicker()`) uses the
+same shelves and shows the grade pill on every row.
+
+**Renames** (vendor word removed): MAiK Bonsai -> **MAiK Prime**, Bonsai Swift -> **MAiK Swift**,
+Bonsai Max -> **MAiK Max**, Bonsai Max 2 -> **MAiK Max 2**. Pack IDs are unchanged (`bonsai-*`), so
+installed files, sidecars and `KEY_ACTIVE` carry over. `actual` still records provenance for logs.
+The "Which one should I download?" panel (`guideHTML`, pips) is gone; orientation is the ladder, one
+note per shelf and one footer line. Gotcha: `GUIDE_INTRO` is still exported and still used by
+`test/maik-engine.test.mjs`; keep it vendor-free.

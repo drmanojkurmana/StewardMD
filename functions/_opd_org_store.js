@@ -59,13 +59,55 @@ export async function getOrg(env, orgId) {
 }
 // Resolve a clinic StewardMD code (SMD-XXXXXX) OR a raw orgId to the orgId.
 export async function getOrgByCode(env, code) {
-  const c = M.normalizeSmdId(code); if (!c) return null;
-  const r = await fsQuery(env, "q_orgs", { where: { field: "code", value: c }, limit: 1 });
+  let c = M.normalizeSmdId(code); if (!c) return null;
+  let r = await fsQuery(env, "q_orgs", { where: { field: "code", value: c }, limit: 1 });
+  if ((!r || !r[0]) && !c.startsWith("SMD-")) {
+    const stripped = c.replace(/^SMD-?/, "");
+    const withPrefix = "SMD-" + stripped;
+    r = await fsQuery(env, "q_orgs", { where: { field: "code", value: withPrefix }, limit: 1 });
+  }
   return r && r[0] ? M.org(withId(r[0].id, r[0].fields)) : null;
 }
 export async function resolveOrgId(env, codeOrId) {
-  if (M.looksLikeSmdCode(codeOrId)) { const o = await getOrgByCode(env, codeOrId); return o ? o.id : ""; }
-  return String(codeOrId || "");
+  const raw = String(codeOrId || "").trim();
+  if (!raw) return "";
+
+  // 1. Try finding org by code candidates (handles SMD-XXXXXX, smd-xxxxxx, XXXXXX, smdxxxxxx, etc.)
+  const stripped = raw.toUpperCase().replace(/[^0-9A-Z]/g, "");
+  const candidates = new Set();
+  const normSmd = M.normalizeSmdId(raw);
+  if (normSmd) candidates.add(normSmd);
+
+  if (stripped.startsWith("SMD")) {
+    const rest = stripped.slice(3);
+    if (rest.startsWith("U")) {
+      candidates.add("SMD-U-" + rest.slice(1));
+    } else {
+      candidates.add("SMD-" + rest);
+    }
+  } else if (/^[0-9A-Z]{4,10}$/.test(stripped) && !/^[0-9A-F]{32}$/i.test(stripped)) {
+    candidates.add("SMD-" + stripped);
+  }
+
+  for (const c of candidates) {
+    const o = await getOrgByCode(env, c);
+    if (o && o.id) return o.id;
+  }
+
+  // 2. Try raw orgId via getOrg (handles 32-char hex, UUID, case folding, legacy code backfill)
+  let cleanId = raw;
+  if (/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(raw)) {
+    cleanId = raw.replace(/-/g, "").toLowerCase();
+  }
+  const direct = await getOrg(env, cleanId);
+  if (direct && direct.id) return direct.id;
+  if (cleanId.toLowerCase() !== cleanId) {
+    const folded = await getOrg(env, cleanId.toLowerCase());
+    if (folded && folded.id) return folded.id;
+  }
+
+  // 3. Fallback: sanitize and return
+  return sanitize(cleanId);
 }
 // Stable StewardMD ID per Google account (uid) — get-or-create.
 export async function userSmdId(env, uid, email) {
@@ -300,13 +342,15 @@ export async function updateBed(env, bedId, patch, actorId) {
 // ---- membership (org-based access: role + scope) -----------------------------------------------
 function memberId(orgId, identity) { return sanitize(orgId) + "__" + sanitize(identity); }
 export async function setMembership(env, orgId, identity, body, actorId) {
-  const id = memberId(orgId, identity);
+  const normIdentity = String(identity || "").trim().toLowerCase();
   /* MERGE, do not overwrite. M.membership() fills an omitted scope with {departments:[],opds:[],
    * rooms:[]}, and an EMPTY scope means whole-org (see withinScope in _opd_org.js). wUpdate's mask
    * covers every key present, so a caller that sends no scope - /api/pglog/enrol never does -
    * silently promoted an HoD scoped to one department into institution-wide access, and flipped
    * `active` back to true. Re-enrolling someone to fix a typo must not widen what they can see. */
-  const prev = (await getMembership(env, orgId, identity)) || null;
+  const prev = (await getMembership(env, orgId, normIdentity))
+    || (normIdentity !== String(identity || "").trim() ? await getMembership(env, orgId, identity) : null);
+  const targetId = (prev && prev.id) || memberId(orgId, normIdentity);
   const b = body || {};
 
   /* ROLE FALLS BACK TO THE EXISTING ROLE, exactly as scope and active do below.
@@ -323,7 +367,7 @@ export async function setMembership(env, orgId, identity, body, actorId) {
   if (!role) return { ok: false, error: "role_required", message: "Choose a role for this person - a member with no role can only watch the queue." };
 
   const f = M.membership({
-    id, orgId, identity,
+    id: targetId, orgId: sanitize(orgId), identity: normIdentity,
     role: role,
     scope: b.scope !== undefined ? b.scope : (prev && prev.scope),
     /* Falls back to the stored value for the same reason role and scope do: an edit that was about
@@ -338,16 +382,40 @@ export async function setMembership(env, orgId, identity, body, actorId) {
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
   });
-  await fsCommit(env, [wUpdate(env, "q_members/" + id, f)]);
-  await audit(env, orgId, actorId, "member:set", identity + ":" + f.role); return f;
+  await fsCommit(env, [wUpdate(env, "q_members/" + targetId, f)]);
+  await audit(env, orgId, actorId, "member:set", normIdentity + ":" + f.role); return f;
 }
 export async function getMembership(env, orgId, identity) {
-  const d = await fsGet(env, "q_members/" + memberId(orgId, identity));
-  return d ? M.membership(withId(memberId(orgId, identity), d.fields)) : null;
+  const cleanOrg = sanitize(orgId);
+  if (!cleanOrg) return null;
+  const rawId = String(identity || "").trim();
+  const normId = rawId.toLowerCase();
+  let d = await fsGet(env, "q_members/" + memberId(cleanOrg, normId));
+  let foundDocId = memberId(cleanOrg, normId);
+  if (!d && normId !== rawId) {
+    d = await fsGet(env, "q_members/" + memberId(cleanOrg, rawId));
+    if (d) foundDocId = memberId(cleanOrg, rawId);
+  }
+  if (!d) {
+    try {
+      const members = await fsQuery(env, "q_members", { where: { field: "orgId", value: cleanOrg }, limit: 100 });
+      const match = (members || []).find((m) => {
+        const mid = String((m.fields && m.fields.identity) || "").trim().toLowerCase();
+        return mid === normId;
+      });
+      if (match) {
+        d = match;
+        foundDocId = match.id;
+      }
+    } catch (e) {}
+  }
+  const docId = String(d && d.id ? d.id : foundDocId).replace(/^q_members\//, "");
+  return d ? M.membership(withId(docId, d.fields)) : null;
 }
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
-  const m = M.membership(withId(id, f));
+  const docId = String(id).replace(/^q_members\//, "");
+  const m = M.membership(withId(docId, f));
   /* lockedUntil answers the owner's actual question when a nurse says "it says my PIN is wrong": five
    * bad attempts lock the account for fifteen minutes, and until this was returned the staff list
    * looked identical whether the PIN was unset, wrong, or simply locked. The sign-in page still says
@@ -377,43 +445,90 @@ export async function listMembers(env, orgId) {
  * defaults the missing role to "viewer") that nobody chose to create. Members are only ever
  * deactivated, never deleted, so reading first leaves no window for one to vanish. */
 const NO_MEMBER = { ok: false, error: "member_not_found", message: "No staff member with that ID or email in this hospital. Add them first." };
-async function memberMissing(env, orgId, identity) { return !(await fsGet(env, "q_members/" + memberId(orgId, identity))); }
+async function memberMissing(env, orgId, identity) { return !(await getMembership(env, orgId, identity)); }
 // Lifecycle. disable/remove -> active:false blocks OPD access IMMEDIATELY (authorizeOrg checks active).
 export async function setMemberActive(env, orgId, identity, active, actorId) {
-  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { active: !!active, ...(active ? {} : { sessionsRevokedAt: now() }), updatedAt: now() })]);
-  await audit(env, orgId, actorId, active ? "member:restore" : "member:disable", identity); return { ok: true };
+  const m = await getMembership(env, orgId, identity);
+  if (!m) return NO_MEMBER;
+  const docId = String(m.id).replace(/^q_members\//, "");
+  await fsCommit(env, [wUpdate(env, "q_members/" + docId, { active: !!active, ...(active ? {} : { sessionsRevokedAt: now() }), updatedAt: now() })]);
+  await audit(env, orgId, actorId, active ? "member:restore" : "member:disable", m.identity); return { ok: true };
 }
 export async function removeMembership(env, orgId, identity, actorId) { return setMemberActive(env, orgId, identity, false, actorId); }
 
 // ---- staff credentials (email + PIN) — hashed at rest, owner-managed ----------------------------
 export async function setMemberPin(env, orgId, identity, pin, actorId) {
-  const weakPin = pinProblem(pin);
+  const cleanPin = String(pin || "").trim();
+  const weakPin = pinProblem(cleanPin);
   if (weakPin) return { ok: false, error: "weak_pin", message: weakPin };
-  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
-  const salt = genSalt(); const pinHash = await hashSecret(String(pin), salt);
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
-  await audit(env, orgId, actorId, "member:set_pin", identity); return { ok: true };
+  const m = await getMembership(env, orgId, identity);
+  if (!m) return NO_MEMBER;
+  const docId = String(m.id).replace(/^q_members\//, "");
+  const salt = genSalt(); const pinHash = await hashSecret(cleanPin, salt);
+  await fsCommit(env, [wUpdate(env, "q_members/" + docId, { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
+  await audit(env, orgId, actorId, "member:set_pin", m.identity); return { ok: true };
 }
 export async function setMemberPassword(env, orgId, identity, email, password, actorId) {
   const weakPass = passwordProblem(password, email);
   if (weakPass) return { ok: false, error: "weak_password", message: weakPass };
-  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
+  const m = await getMembership(env, orgId, identity);
+  if (!m) return NO_MEMBER;
+  const docId = String(m.id).replace(/^q_members\//, "");
   const salt = genSalt(); const passHash = await hashSecret(String(password), salt);
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, passAttempts: 0, passLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
-  await audit(env, orgId, actorId, "member:set_password", identity); return { ok: true };
+  await fsCommit(env, [wUpdate(env, "q_members/" + docId, { email: String(email || "").toLowerCase().trim(), passSalt: salt, passHash: passHash, passAttempts: 0, passLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
+  await audit(env, orgId, actorId, "member:set_password", m.identity); return { ok: true };
 }
 export async function resetMemberAccess(env, orgId, identity, actorId) {
-  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, passAttempts: 0, passLockedUntil: 0, ...MFA_OFF, sessionsRevokedAt: now(), updatedAt: now() })]);
-  await audit(env, orgId, actorId, "member:reset_access", identity); return { ok: true };
+  const m = await getMembership(env, orgId, identity);
+  if (!m) return NO_MEMBER;
+  const docId = String(m.id).replace(/^q_members\//, "");
+  await fsCommit(env, [wUpdate(env, "q_members/" + docId, { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, passAttempts: 0, passLockedUntil: 0, ...MFA_OFF, sessionsRevokedAt: now(), updatedAt: now() })]);
+  await audit(env, orgId, actorId, "member:reset_access", m.identity); return { ok: true };
 }
 // Raw auth record for the login path (NEVER returned to a client).
 export async function getMemberAuth(env, orgId, identity) {
-  const d = await fsGet(env, "q_members/" + memberId(orgId, identity));
+  const cleanOrg = sanitize(orgId);
+  if (!cleanOrg) return null;
+  const rawId = String(identity || "").trim();
+  const lowerId = rawId.toLowerCase();
+  let d = await fsGet(env, "q_members/" + memberId(cleanOrg, lowerId));
+  let foundDocId = memberId(cleanOrg, lowerId);
+  if (!d && rawId !== lowerId) {
+    d = await fsGet(env, "q_members/" + memberId(cleanOrg, rawId));
+    if (d) foundDocId = memberId(cleanOrg, rawId);
+  }
+  if (!d) {
+    try {
+      const members = await fsQuery(env, "q_members", { where: { field: "orgId", value: cleanOrg }, limit: 100 });
+      const match = (members || []).find((m) => {
+        const mid = String((m.fields && m.fields.identity) || "").trim().toLowerCase();
+        return mid === lowerId;
+      });
+      if (match) {
+        d = match;
+        foundDocId = match.id;
+      }
+    } catch (e) {}
+  }
   if (!d) return null;
   const f = d.fields || {};
-  return { orgId: sanitize(orgId), identity: String(identity), active: f.active !== false, role: f.role || "viewer", email: f.email || "", pinSalt: f.pinSalt || "", pinHash: f.pinHash || "", passSalt: f.passSalt || "", passHash: f.passHash || "", pinAttempts: f.pinAttempts || 0, pinLockedUntil: f.pinLockedUntil || 0, sessionsRevokedAt: f.sessionsRevokedAt || 0, mfaEnabled: !!f.mfaEnabled };
+  const docId = String(foundDocId).replace(/^q_members\//, "");
+  return {
+    docId: docId,
+    orgId: cleanOrg,
+    identity: String(f.identity || rawId),
+    active: f.active !== false,
+    role: f.role || "viewer",
+    email: f.email || "",
+    pinSalt: f.pinSalt || "",
+    pinHash: f.pinHash || "",
+    passSalt: f.passSalt || "",
+    passHash: f.passHash || "",
+    pinAttempts: f.pinAttempts || 0,
+    pinLockedUntil: f.pinLockedUntil || 0,
+    sessionsRevokedAt: f.sessionsRevokedAt || 0,
+    mfaEnabled: !!f.mfaEnabled
+  };
 }
 /* ---- two-step sign-in ----------------------------------------------------------------------------
  * The authenticator secret is encrypted at rest with the same key as clinical text, and never leaves
@@ -422,8 +537,11 @@ export async function getMemberAuth(env, orgId, identity) {
  * updateTime as a precondition: two sign-ins racing on the same code cannot both win. */
 const MFA_OFF = { mfaEnabled: false, mfaSecretEnc: "", mfaPendingEnc: "", mfaLastStep: 0, mfaRecovery: [], mfaAttempts: 0, mfaLockedUntil: 0 };
 async function memberDoc(env, orgId, identity) {
-  const d = await fsGet(env, "q_members/" + memberId(orgId, identity));
-  return d ? { path: "q_members/" + memberId(orgId, identity), f: d.fields || {}, updateTime: d.updateTime } : null;
+  const m = await getMembership(env, orgId, identity);
+  if (!m) return null;
+  const docId = String(m.id).replace(/^q_members\//, "");
+  const d = await fsGet(env, "q_members/" + docId);
+  return d ? { path: "q_members/" + docId, f: d.fields || {}, updateTime: d.updateTime } : null;
 }
 export async function mfaStatus(env, orgId, identity) {
   const m = await memberDoc(env, orgId, identity);
@@ -482,17 +600,21 @@ export async function disableMfa(env, orgId, identity, code) {
   return { ok: true, enabled: false };
 }
 export async function recordMemberPinAttempt(env, orgId, identity, patch) {
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinAttempts: patch.pinAttempts, pinLockedUntil: patch.pinLockedUntil, updatedAt: now() })]);
+  const m = await getMembership(env, orgId, identity);
+  const docId = String(m ? m.id : memberId(orgId, identity)).replace(/^q_members\//, "");
+  await fsCommit(env, [wUpdate(env, "q_members/" + docId, { pinAttempts: patch.pinAttempts, pinLockedUntil: patch.pinLockedUntil, updatedAt: now() })]);
 }
 export async function findMemberByEmail(env, email) {
-  const r = await fsQuery(env, "q_members", { where: { field: "email", value: String(email || "").toLowerCase() }, limit: 5 });
+  const r = await fsQuery(env, "q_members", { where: { field: "email", value: String(email || "").toLowerCase().trim() }, limit: 5 });
   const row = r.find((x) => x.fields && x.fields.active !== false) || r[0];
   if (!row) return null;
   const f = row.fields || {};
   return { orgId: f.orgId || "", identity: f.identity || "", active: f.active !== false, email: f.email || "", passSalt: f.passSalt || "", passHash: f.passHash || "", passAttempts: f.passAttempts || 0, passLockedUntil: f.passLockedUntil || 0, mfaEnabled: !!f.mfaEnabled };
 }
 export async function recordMemberPassAttempt(env, orgId, identity, patch) {
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { passAttempts: patch.passAttempts, passLockedUntil: patch.passLockedUntil, updatedAt: now() })]);
+  const m = await getMembership(env, orgId, identity);
+  const docId = String(m ? m.id : memberId(orgId, identity)).replace(/^q_members\//, "");
+  await fsCommit(env, [wUpdate(env, "q_members/" + docId, { passAttempts: patch.passAttempts, passLockedUntil: patch.passLockedUntil, updatedAt: now() })]);
 }
 // Sign-in outcomes, audited under the hospital. Never the secret; the identity is a staff ID, not PHI.
 export async function auditLogin(env, orgId, identity, action, meta) {
@@ -520,8 +642,10 @@ export async function orgAuditEvents(env, orgId) {
   return { events: rows.map((r) => withId(r.id, r.fields)), partial: rows.length >= ORG_EVENT_SCAN };
 }
 export async function signOutEverywhere(env, orgId, identity) {
-  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { sessionsRevokedAt: now(), updatedAt: now() })]);
+  const m = await getMembership(env, orgId, identity);
+  if (!m) return NO_MEMBER;
+  const docId = String(m.id).replace(/^q_members\//, "");
+  await fsCommit(env, [wUpdate(env, "q_members/" + docId, { sessionsRevokedAt: now(), updatedAt: now() })]);
   await audit(env, orgId, identity, "login:signed_out_everywhere", "");
   return { ok: true };
 }

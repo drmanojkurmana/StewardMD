@@ -121,8 +121,8 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
                 self.engine.generate(system: "You are MaiK, clinical decision support for doctors. Answer in markdown: one-line bottom line, then short bullets.",
                                      user: q, nPredict: 120, temperature: 0, seed: 0, onToken: nil) { r in
                     switch r {
-                    case .success(let text):
-                        llamaPerf("SELFTEST q\(i + 1) total_ms=\(Int(Date().timeIntervalSince(t0) * 1000)) chars=\(text.count)")
+                    case .success(let g):
+                        llamaPerf("SELFTEST q\(i + 1) total_ms=\(Int(Date().timeIntervalSince(t0) * 1000)) chars=\(g.text.count) reused=\(g.reusedTokens) draft=\(g.draftAccepted)/\(g.draftProposed)")
                     case .failure(let e):
                         llamaPerf("SELFTEST q\(i + 1) FAILED \(e)")
                     }
@@ -210,12 +210,22 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         // -1 = offload every layer to Metal (the big A17 win). See LlamaEngine: this is the
         // calibration knob to step down if peak footprint crowds the jetsam ceiling.
         let nGpuLayers = Int32(call.getInt("nGpuLayers") ?? -1)
+        // Perf plan (2026-09-21): q8_0 KV + flash attention (default on), prefill batch knobs, and the
+        // optional speculative-decoding draft. See LlamaEngine.load for what each does.
+        let kvQ8 = call.getBool("kvQ8") ?? true
+        let flashAttn = call.getBool("flashAttn") ?? true
+        let nBatch = Int32(call.getInt("nBatch") ?? 0)
+        let nUbatch = Int32(call.getInt("nUbatch") ?? 0)
+        let draftPath = call.getString("draftPath") ?? ""
 
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self else { return }
             do {
-                try self.engine.load(path: path, nCtx: nCtx, nThreads: nThreads, nGpuLayers: nGpuLayers)
-                call.resolve(["loaded": true, "nCtx": Int(nCtx), "nThreads": Int(nThreads)])
+                try self.engine.load(path: path, nCtx: nCtx, nThreads: nThreads, nGpuLayers: nGpuLayers,
+                                     kvQ8: kvQ8, flashAttn: flashAttn, nBatch: nBatch, nUbatch: nUbatch,
+                                     draftPath: draftPath)
+                call.resolve(["loaded": true, "nCtx": Int(nCtx), "nThreads": Int(nThreads),
+                              "kvQ8": kvQ8, "flashAttn": flashAttn, "draft": !draftPath.isEmpty])
             } catch let e as LlamaError {
                 self.notifyListeners("llamaError", data: ["code": e.code.rawValue, "message": e.detail])
                 call.reject(e.detail, e.code.rawValue)
@@ -269,9 +279,9 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
                                   nPredict: nPredict, temperature: temperature, seed: seed,
                                   onToken: onToken) { [weak self] result in
             switch result {
-            case .success(let text):
+            case .success(let g):
                 self?.armIdleRelease()
-                call.resolve(["text": text, "ms": Int(Date().timeIntervalSince(t0) * 1000), "images": paths.count])
+                call.resolve(["text": g.text, "ms": Int(Date().timeIntervalSince(t0) * 1000), "images": paths.count, "perf": g.dict])
             case .failure(let err):
                 let e = err as? LlamaError ?? LlamaError(.generationFailure, err.localizedDescription)
                 self?.notifyListeners("llamaError", data: ["code": e.code.rawValue, "message": e.detail])
@@ -299,9 +309,9 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         engine.generate(system: system, user: prompt, nPredict: nPredict, temperature: temperature,
                         seed: seed, prefillEmptyThink: prefillEmptyThink, onToken: onToken) { [weak self] result in
             switch result {
-            case .success(let text):
+            case .success(let g):
                 self?.armIdleRelease()
-                call.resolve(["text": text, "ms": Int(Date().timeIntervalSince(t0) * 1000)])
+                call.resolve(["text": g.text, "ms": Int(Date().timeIntervalSince(t0) * 1000), "perf": g.dict])
             case .failure(let err):
                 let e = err as? LlamaError ?? LlamaError(.generationFailure, err.localizedDescription)
                 self?.notifyListeners("llamaError", data: ["code": e.code.rawValue, "message": e.detail])

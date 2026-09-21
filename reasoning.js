@@ -3483,7 +3483,7 @@
     var featured = ["Cardiology", "Neurology", "Respiratory", "GI / Hepatology"].filter(function (b) { return !!seen[b]; });
     var tile = function (b) { return f(_libState.branch === b, "br", b, '<span class="kblib-tile-icon" aria-hidden="true">' + rIco("book") + '</span><span>' + esc(b) + '</span><small>' + seen[b].toLocaleString() + ' entries</small>'); };
     sec.innerHTML =
-      '<header class="kblib-intro"><span class="kblib-kicker">STEWARDMD · DISCOVER</span><h1>Knowledge Library</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
+      '<header class="kblib-intro"><span class="kblib-kicker">DISCOVER</span><h1>Find any disease</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
       '<label class="kblib-search-label" for="kblibQ">Search the full library</label><input id="kblibQ" class="kblib-search" type="search" placeholder="Disease, syndrome or clinical detail" autocomplete="off" value="' + esc(_libState.q) + '">' +
       kbPersonalHTML(entries) +
       '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +

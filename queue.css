@@ -56,8 +56,13 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-avatar-btn:hover { border-color: var(--primary); }
 #smdQueue .q-avatar-btn:active { transform: scale(.94); }
 /* doctor profile sheet */
-#smdQueue .q-sheet { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(20,32,43,.45); backdrop-filter: blur(2px); animation: smdFadeIn var(--smd-dur-sm, .2s) ease both; }
-#smdQueue .q-profile { width: 100%; max-width: 380px; box-sizing: border-box; background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 20px; padding: 22px; box-shadow: 0 20px 60px rgba(20,32,43,.25); animation: smdSheetUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-sheet { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: calc(16px + env(safe-area-inset-top, 0px)) 16px calc(16px + env(safe-area-inset-bottom, 0px)); background: rgba(20,32,43,.45); backdrop-filter: blur(2px); animation: smdFadeIn var(--smd-dur-sm, .2s) ease both; }
+/* The profile card can never be taller than the screen (owner screenshot 2026-09-21: nine staff rows
+   pushed Close and the backdrop off-screen, and the card itself did not scroll, so the sheet could
+   not be closed). It scrolls inside itself, and the X in its header is sticky so it is always in reach. */
+#smdQueue .q-profile { position: relative; width: 100%; max-width: 380px; max-height: calc(100vh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; box-sizing: border-box; background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 20px; padding: 0 22px 22px; box-shadow: 0 20px 60px rgba(20,32,43,.25); animation: smdSheetUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-profile-head { position: sticky; top: 0; z-index: 2; display: flex; justify-content: flex-end; margin: 0 -22px 2px; padding: 10px 12px 0; background: var(--sc-lowest); }
+#smdQueue .q-profile-x { width: 40px; height: 40px; }
 #smdQueue .q-profile-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
 #smdQueue .q-avatar-lg { width: 60px; height: 60px; font-size: 22px; }
 #smdQueue .q-profile-id b { display: block; font: 800 18px var(--q-sans); color: var(--on-surface); }
@@ -318,3 +323,667 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-pulse-note { display: flex; align-items: center; gap: 6px; margin-top: 10px; font: 500 12px var(--q-sans); color: var(--on-surface-variant); }
 #smdQueue .q-pulse-note .material-symbols-outlined { font-size: 16px; color: var(--secondary); }
 #smdQueue .q-pulse-warn { display: flex; align-items: center; gap: 6px; font: 600 13px var(--q-sans); color: var(--error); }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   FRONT DESK VIEW (.q-fd) — Clinical Reception & Triage Command Center
+   Designed for high-throughput clinic reception: safe-area insets on mobile,
+   balanced 4-card KPI grid, prominent patient check-in banner, executive
+   OPD flow pulse, informative room status cards, and fluid routing queue.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#smdQueue .q-fd {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  height: 100dvh;
+  background: var(--bg);
+  color: var(--on-surface);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Header bar with iOS safe-area-inset-top */
+#smdQueue .q-fd-top {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--sc-lowest);
+  border-bottom: 1px solid var(--outline-variant);
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 20px 14px;
+  box-shadow: 0 1px 3px rgba(20, 32, 43, 0.04);
+  z-index: 30;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+#smdQueue .q-fd-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+#smdQueue .q-fd-avatar .material-symbols-outlined {
+  font-size: 24px;
+}
+
+#smdQueue .q-fd-title-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+#smdQueue .q-fd-h-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#smdQueue .q-fd-title {
+  font: 800 20px/1.2 var(--q-sans);
+  color: var(--on-surface);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+#smdQueue .q-fd-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+  font: 700 11px var(--q-sans);
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#smdQueue .q-fd-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+#smdQueue .q-fd-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 12.5px var(--q-sans);
+  color: var(--secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0;
+}
+
+#smdQueue .q-fd-who {
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+#smdQueue .q-fd-role {
+  text-transform: capitalize;
+}
+
+#smdQueue .q-fd-code {
+  font-family: var(--q-mono);
+  background: var(--sc-high);
+  color: var(--primary);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+#smdQueue .q-fd-top-acts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#smdQueue .q-fd-btn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface);
+  color: var(--secondary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-btn-icon:hover {
+  background: var(--sc-high);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+#smdQueue .q-fd-btn-icon:active {
+  transform: scale(0.95);
+}
+
+#smdQueue .q-pause.q-fd-signout {
+  margin-top: 0;
+  width: auto;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  color: var(--secondary);
+  font: 600 13px var(--q-sans);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-pause.q-fd-signout:hover {
+  background: color-mix(in srgb, var(--error) 8%, transparent);
+  color: var(--error);
+  border-color: color-mix(in srgb, var(--error) 40%, transparent);
+}
+
+#smdQueue .q-pause.q-fd-signout .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* Scroll area */
+#smdQueue .q-fd-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px 16px calc(36px + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-body {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-sizing: border-box;
+}
+
+/* Patient Check-in Action Banner */
+#smdQueue .q-fd-banner {
+  background: linear-gradient(135deg, var(--sc-lowest) 0%, var(--surface) 100%);
+  border: 1px solid var(--outline-variant);
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(20, 32, 43, 0.04);
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-banner-text {
+  min-width: 0;
+}
+
+#smdQueue .q-fd-banner-title {
+  font: 800 16px var(--q-sans);
+  color: var(--on-surface);
+  letter-spacing: -0.01em;
+}
+
+#smdQueue .q-fd-banner-sub {
+  font: 500 12.5px var(--q-sans);
+  color: var(--secondary);
+  margin-top: 2px;
+}
+
+#smdQueue .q-gate-btn.q-fd-add-btn {
+  width: auto;
+  min-width: 150px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  font: 700 14px var(--q-sans);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 104, 95, 0.2);
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-gate-btn.q-fd-add-btn:hover {
+  background: var(--primary-container);
+  box-shadow: 0 4px 12px rgba(0, 104, 95, 0.3);
+}
+
+#smdQueue .q-gate-btn.q-fd-add-btn:active {
+  transform: scale(0.97);
+}
+
+#smdQueue .q-gate-btn.q-fd-add-btn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* 4-KPI Grid */
+#smdQueue .q-fd-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+#smdQueue .q-fd-kpis .q-kpi {
+  background: var(--sc-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 3px rgba(20, 32, 43, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-kpis .q-kpi:hover {
+  border-color: var(--primary);
+}
+
+#smdQueue .q-kpi-sub {
+  font: 500 11.5px var(--q-sans);
+  color: var(--secondary);
+  margin-top: 4px;
+}
+
+#smdQueue .q-kpi-sub.alert {
+  color: #b45309;
+  font-weight: 700;
+}
+
+#smdQueue .q-kpi-denom {
+  font: 600 18px var(--q-sans);
+  color: var(--secondary);
+  margin-left: 2px;
+}
+
+/* OPD Pulse adjustments in front desk */
+#smdQueue .q-fd .q-pulse {
+  margin: 0;
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 3px rgba(20, 32, 43, 0.03);
+}
+
+#smdQueue .q-fd .q-pulse-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  padding-bottom: 6px;
+}
+
+#smdQueue .q-fd .q-pulse-t {
+  flex: 0 0 148px;
+  scroll-snap-align: start;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+/* Section Header */
+#smdQueue .q-fd-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#smdQueue .q-fd-sec-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+#smdQueue .q-fd-sec-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#smdQueue .q-fd-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--sc-high);
+  color: var(--on-surface-variant);
+  font: 700 12px var(--q-mono);
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-badge.alert {
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+  color: var(--primary);
+}
+
+#smdQueue .q-fd-sec-meta {
+  font: 500 12px var(--q-sans);
+  color: var(--secondary);
+}
+
+/* Rooms Grid & Room Cards */
+#smdQueue .q-fd-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+#smdQueue .q-room-card {
+  background: var(--sc-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(20, 32, 43, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-room-card:hover {
+  border-color: var(--primary);
+}
+
+#smdQueue .q-room-card.unstaffed {
+  opacity: 0.72;
+  background: var(--surface);
+}
+
+#smdQueue .q-room-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#smdQueue .q-room-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+#smdQueue .q-room-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+#smdQueue .q-room-icon.muted {
+  background: var(--sc-high);
+  color: var(--secondary);
+}
+
+#smdQueue .q-room-title {
+  font: 700 15px var(--q-sans);
+  color: var(--on-surface);
+  line-height: 1.2;
+}
+
+#smdQueue .q-room-num {
+  font: 600 12px var(--q-mono);
+  color: var(--secondary);
+  margin-left: 4px;
+}
+
+#smdQueue .q-room-dept {
+  font: 500 11.5px var(--q-sans);
+  color: var(--secondary);
+  margin-top: 2px;
+}
+
+#smdQueue .q-room-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font: 700 11px var(--q-sans);
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+#smdQueue .q-room-pill .q-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+#smdQueue .q-room-pill.available {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+}
+
+#smdQueue .q-room-pill.available .q-dot {
+  background: var(--primary);
+}
+
+#smdQueue .q-room-pill.busy {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+#smdQueue .q-room-pill.busy .q-dot {
+  background: #2563eb;
+}
+
+#smdQueue .q-room-pill.offline {
+  background: var(--sc-high);
+  color: var(--secondary);
+}
+
+#smdQueue .q-room-pill.offline .q-dot {
+  background: var(--outline);
+}
+
+#smdQueue .q-room-body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--sc-low);
+}
+
+#smdQueue .q-room-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#smdQueue .q-room-stat.waiting {
+  align-items: flex-end;
+}
+
+#smdQueue .q-room-stat-lbl {
+  font: 600 11px var(--q-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--secondary);
+}
+
+#smdQueue .q-room-stat-val {
+  font: 600 13px var(--q-sans);
+  color: var(--on-surface);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#smdQueue .q-room-stat-val.bold {
+  font: 800 22px/1 var(--q-sans);
+  color: var(--on-surface);
+}
+
+#smdQueue .q-room-stat-val.bold.warn {
+  color: var(--error);
+}
+
+#smdQueue .q-room-cur-name {
+  font-weight: 600;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Pool rows */
+#smdQueue .q-fd-pool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#smdQueue .q-fd-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: var(--sc-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 2px rgba(20, 32, 43, 0.03);
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-row:hover {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+#smdQueue .q-fd-pname {
+  font: 700 15px var(--q-sans);
+  color: var(--on-surface);
+}
+
+#smdQueue .q-fd-route-btn {
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  font: 700 13px var(--q-sans);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-route-btn:hover {
+  background: var(--primary-container);
+  transform: translateY(-1px);
+}
+
+#smdQueue .q-fd-route-btn:active {
+  transform: scale(0.97);
+}
+
+#smdQueue .q-fd-route-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+#smdQueue .q-fd-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 20px;
+  background: var(--sc-lowest);
+  border: 1px dashed var(--outline-variant);
+  border-radius: 14px;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+#smdQueue .q-fd-empty-icon {
+  font-size: 32px;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+#smdQueue .q-fd-empty-icon .material-symbols-outlined {
+  font-size: 32px;
+}
+
+#smdQueue .q-fd-empty-text {
+  font: 700 14px var(--q-sans);
+  color: var(--on-surface);
+}
+
+/* Mobile responsive rules (< 900px) */
+@media (max-width: 900px) {
+  #smdQueue .q-fd-top {
+    padding: calc(12px + env(safe-area-inset-top, 0px)) 16px 12px;
+  }
+  #smdQueue .q-fd-title {
+    font-size: 18px;
+  }
+  #smdQueue .q-fd-banner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  #smdQueue .q-gate-btn.q-fd-add-btn {
+    width: 100%;
+    padding: 13px;
+  }
+  #smdQueue .q-fd-kpis {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  #smdQueue .q-fd-rooms-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
