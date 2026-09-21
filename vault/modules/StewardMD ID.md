@@ -48,6 +48,15 @@ must never be shown a price, because verification unlocks it free. `openPaywall(
 for the unverified/pending reasons, so no call site can open the wrong door.
 
 ## Gotchas
+- **The OTP sheet follows the keyboard (2026-09-21).** Owner: "when keyboard is opened the dialog
+  box doesnt go up". `phone-verify.js` is a bottom-anchored `position:fixed` sheet, and on iOS a
+  fixed element is laid out against the LAYOUT viewport, which does not shrink for the keyboard, so
+  the code slots and Verify sat behind the keys. `fitViewport()` resizes `#phvRoot` to
+  `window.visualViewport` (top/height) on every viewport resize/scroll and on focus inside the
+  sheet; the card is `max-height:100%` of the root and scrolls inside it; `.kb` tightens the layout.
+  Android resizes the layout viewport itself, so the same code is a no-op there. Harness:
+  `SMD_PHONE_VERIFY._fit({height,offsetTop})` injects a viewport (headless Chrome has no keyboard);
+  `_fit(null)` clears it. Covered in `test/run-phone-verify-ui.mjs`.
 - **Phone verification is an ask, not a gate (2026-09-19).** `phone-verify.js` opens after the
   profile form saves (`smd:profile-saved`) and waits for `#verifyGate` to hide; the claim is
   `phoneVerified`, the record is `lifecycle:u:<uid>.phoneVerifiedAt`. Server routes live in

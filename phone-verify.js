@@ -48,8 +48,12 @@
       "#" + ROOT_ID + "{--pv-bg:#ffffff;--pv-ink:#0f172a;--pv-mut:#5b6b7b;--pv-line:rgba(15,23,42,.10);--pv-slot:rgba(15,23,42,.045);--pv-teal:#0e6e63;--pv-teal2:#139a8a;--pv-glow:rgba(14,110,99,.22);--pv-ok:#1f9d63;--pv-bad:#d64545;--pv-font:var(--hfont,-apple-system,'SF Pro Text','Segoe UI',Roboto,system-ui,sans-serif);--pv-mono:'SF Mono',Menlo,'IBM Plex Mono',Consolas,monospace;position:fixed;inset:0;z-index:17000;display:none;align-items:flex-end;justify-content:center;background:rgba(6,12,20,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}",
       "#" + ROOT_ID + ".on{display:flex}",
       "body.dark #" + ROOT_ID + ",body.v3-dark #" + ROOT_ID + "{--pv-bg:#0e141c;--pv-ink:#eef3f8;--pv-mut:#93a3b4;--pv-line:rgba(255,255,255,.09);--pv-slot:rgba(255,255,255,.055);--pv-teal:#2fc4b0;--pv-teal2:#5ad8c8;--pv-glow:rgba(47,196,176,.25)}",
-      "#" + ROOT_ID + " .phv-card{width:100%;max-width:520px;max-height:94vh;overflow:auto;background:var(--pv-bg);color:var(--pv-ink);border-radius:28px 28px 0 0;padding:14px 22px calc(env(safe-area-inset-bottom,0px) + 22px);box-shadow:0 -24px 60px -20px rgba(0,0,0,.55);font-family:var(--pv-font);transform:translateY(24px);opacity:0;animation:phvUp .42s cubic-bezier(.2,.8,.2,1) forwards}",
+      "#" + ROOT_ID + " .phv-card{width:100%;max-width:520px;max-height:100%;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--pv-bg);color:var(--pv-ink);border-radius:28px 28px 0 0;padding:14px 22px calc(env(safe-area-inset-bottom,0px) + 22px);box-shadow:0 -24px 60px -20px rgba(0,0,0,.55);font-family:var(--pv-font);transform:translateY(24px);opacity:0;animation:phvUp .42s cubic-bezier(.2,.8,.2,1) forwards}",
       "@keyframes phvUp{to{transform:none;opacity:1}}",
+      "#" + ROOT_ID + ".kb .phv-card{padding-bottom:14px;border-radius:22px 22px 0 0;animation:none;transform:none;opacity:1}",
+      "#" + ROOT_ID + ".kb .phv-grab{display:none}",
+      "#" + ROOT_ID + ".kb .phv-mark{width:36px;height:36px;border-radius:12px;margin-bottom:8px}#" + ROOT_ID + ".kb .phv-mark svg{width:18px;height:18px}",
+      "#" + ROOT_ID + ".kb .phv-t{font-size:20px;margin-bottom:4px}#" + ROOT_ID + ".kb .phv-s{margin-bottom:12px;font-size:13.5px}",
       "#" + ROOT_ID + " .phv-grab{width:38px;height:5px;border-radius:3px;background:var(--pv-line);margin:0 auto 18px}",
       "#" + ROOT_ID + " .phv-mark{width:48px;height:48px;border-radius:16px;background:linear-gradient(140deg,var(--pv-teal),var(--pv-teal2));color:#fff;display:flex;align-items:center;justify-content:center;margin:0 0 14px;box-shadow:0 10px 24px -10px var(--pv-glow)}",
       "#" + ROOT_ID + " .phv-mark svg{width:24px;height:24px}",
@@ -116,7 +120,50 @@
     document.body.appendChild(el);
     return el;
   }
-  function close() { var el = document.getElementById(ROOT_ID); if (el) { el.classList.remove("on"); el.innerHTML = ""; } clearInterval(tick); abortWebOtp(); }
+  /* ── keyboard ─────────────────────────────────────────────────────────────────────────────────
+   * Owner, 2026-09-21: "when keyboard is opened the dialog box doesnt go up". The sheet is
+   * position:fixed and bottom-anchored, and on iOS a fixed element is laid out against the LAYOUT
+   * viewport, which does not shrink when the keyboard rises: the bottom half of the card (the code
+   * slots, the Verify button) sat behind the keys. window.visualViewport is the viewport the user
+   * can actually see, so the root is resized to it on every change and the card, which is
+   * max-height:100% of the root, scrolls inside that. Android's WebView resizes the layout viewport
+   * itself, in which case this is a no-op. Nothing here fires unless the sheet is open. */
+  var _vvOn = false, _vvTest = null;
+  function fitViewport(vv) {
+    // A viewport passed in explicitly sticks (null clears it): the browser harness has no soft
+    // keyboard, so it feeds the shrunken viewport this way, and the focus/resize refits that
+    // follow must not undo it.
+    if (vv !== undefined) _vvTest = vv;
+    var el = document.getElementById(ROOT_ID);
+    if (!el || !el.classList.contains("on")) return;
+    vv = _vvTest || window.visualViewport;
+    if (!vv || !vv.height) return;
+    var ih = window.innerHeight || vv.height;
+    var kb = Math.max(0, ih - vv.height - (vv.offsetTop || 0));
+    el.style.top = Math.max(0, vv.offsetTop || 0) + "px";
+    el.style.height = Math.round(vv.height) + "px";
+    el.style.bottom = "auto";
+    el.classList.toggle("kb", kb > 80);
+    // Keep whatever the doctor is typing in on screen inside the (now shorter) card.
+    try {
+      var a = document.activeElement;
+      if (kb > 80 && a && el.contains(a)) setTimeout(function () { try { a.scrollIntoView({ block: "center" }); } catch (e) {} }, 60);
+    } catch (e) {}
+  }
+  function bindViewport() {
+    if (_vvOn || !window.visualViewport) return;
+    _vvOn = true;
+    try { window.visualViewport.addEventListener("resize", onVv); window.visualViewport.addEventListener("scroll", onVv); } catch (e) {}
+    fitViewport();
+  }
+  function onVv() { fitViewport(undefined); }
+  function unbindViewport() {
+    if (_vvOn) { try { window.visualViewport.removeEventListener("resize", onVv); window.visualViewport.removeEventListener("scroll", onVv); } catch (e) {} _vvOn = false; }
+    _vvTest = null;
+    var el = document.getElementById(ROOT_ID);
+    if (el) { el.style.top = ""; el.style.height = ""; el.style.bottom = ""; el.classList.remove("kb"); }
+  }
+  function close() { var el = document.getElementById(ROOT_ID); if (el) { el.classList.remove("on"); el.innerHTML = ""; } clearInterval(tick); abortWebOtp(); unbindViewport(); }
   function snooze() { try { sessionStorage.setItem(SNOOZE, "1"); } catch (e) {} close(); }
 
   var state = { phone: "", step: "phone", channel: "", to: "", sentAt: 0, busy: false };
@@ -184,7 +231,7 @@
 
   /* ── render ───────────────────────────────────────────────────────────────────────────────── */
   function render() {
-    var el = root(); el.classList.add("on");
+    var el = root(); el.classList.add("on"); bindViewport();
     if (state.step === "phone") {
       el.innerHTML = '<div class="phv-card">' +
         '<div class="phv-grab"></div>' +
@@ -338,6 +385,13 @@
     });
   }
 
+  try {
+    document.addEventListener("focusin", function (e) {
+      var el = document.getElementById(ROOT_ID);
+      if (!el || !el.classList.contains("on") || !el.contains(e.target)) return;
+      setTimeout(function () { fitViewport(undefined); }, 120); setTimeout(function () { fitViewport(undefined); }, 420);
+    }, true);
+  } catch (e) {}
   function open(phone) { state = { phone: phone || state.phone || "", step: "phone", channel: "", to: "", sentAt: 0, busy: false }; render(); }
 
   var _asked = false;
@@ -392,5 +446,5 @@
   if (document.readyState !== "loading") setTimeout(start, 900);
   else document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 900); });
 
-  window.SMD_PHONE_VERIFY = { open: open, close: close, needed: needed, check: check, FLAG: FLAG, _state: function () { return state; }, _reset: function () { _asked = false; }, _start: start };
+  window.SMD_PHONE_VERIFY = { open: open, close: close, needed: needed, check: check, FLAG: FLAG, _state: function () { return state; }, _reset: function () { _asked = false; }, _start: start, _fit: fitViewport };
 })();
