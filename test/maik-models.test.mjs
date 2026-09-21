@@ -698,6 +698,19 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   ok("a LIVE transfer is re-attached to, never duplicated", calls.start === 0);
 }
 
+{
+  // Speculative-decoding drafts (perf plan #6, 2026-09-21): a same-tokeniser sub-pack "<id>#draft".
+  const M = (await import("node:module")).createRequire(import.meta.url)("../maik-models.js");
+  ok("MedGemma packs carry the Gemma 3 270M draft", M.hasDraft("maik-mxcore") && M.hasDraft("maik-neural"));
+  ok("Qwen3-family packs carry the Qwen3 0.6B draft", ["medmo-4b", "maik-apex", "bonsai-ternary-8b", "bonsai-8b"].every((id) => M.hasDraft(id)));
+  ok("MaiK Lite and the 27B Bonsai packs carry none", !M.hasDraft("maik-lite") && !M.hasDraft("bonsai2-27b") && !M.hasDraft("bonsai-27b"));
+  const did = M.draftIdOf("maik-mxcore");
+  ok("draft id is the base id plus #draft and maps back", did === "maik-mxcore#draft" && M.isDraftId(did) && M.baseIdOf(did) === "maik-mxcore");
+  ok("the draft sub-pack resolves to the draft file's exact size", M.totalBytes(did) === 291546144 && M.totalBytes(M.draftIdOf("maik-apex")) === 639446688);
+  ok("caps() reports draftBytes", M.caps("maik-mxcore").draftBytes === 291546144 && M.caps("maik-lite").draftBytes === 0);
+  ok("a draft id is neither a vision id nor a base pack", !M.isVisionId(did) && M.PACKS[did] === undefined);
+}
+
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
 // Exit explicitly. The last case re-attaches to a LIVE transfer, which starts the module's download
 // poll — a deliberately perpetual 1.5s loop that only ends when the native download reports done,
@@ -730,19 +743,6 @@ console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
      x.vision.sha256 === "eb561d41a7bbeb0fcf04883c8af11078ef6cae0a66862a0b68443cfca495269d");
   ok("the vision sub-pack resolves with the projector's own byte count", M.totalBytes(M.visionIdOf("bonsai-27b")) === 629246880);
   ok("no pack carries a rag flag: grounding eligibility is the CAPS.kb capability, read by maik-local.js", Object.keys(M.PACKS).every((id) => !M.PACKS[id].rag));
-}
-
-{
-  // Speculative-decoding drafts (perf plan #6, 2026-09-21): a same-tokeniser sub-pack "<id>#draft".
-  const M = (await import("node:module")).createRequire(import.meta.url)("../maik-models.js");
-  ok("MedGemma packs carry the Gemma 3 270M draft", M.hasDraft("maik-mxcore") && M.hasDraft("maik-neural"));
-  ok("Qwen3-family packs carry the Qwen3 0.6B draft", ["medmo-4b", "maik-apex", "bonsai-ternary-8b", "bonsai-8b"].every((id) => M.hasDraft(id)));
-  ok("MaiK Lite and the 27B Bonsai packs carry none", !M.hasDraft("maik-lite") && !M.hasDraft("bonsai2-27b") && !M.hasDraft("bonsai-27b"));
-  const did = M.draftIdOf("maik-mxcore");
-  ok("draft id is the base id plus #draft and maps back", did === "maik-mxcore#draft" && M.isDraftId(did) && M.baseIdOf(did) === "maik-mxcore");
-  ok("the draft sub-pack resolves to the draft file's exact size", M.totalBytes(did) === 291546144 && M.totalBytes(M.draftIdOf("maik-apex")) === 639446688);
-  ok("caps() reports draftBytes", M.caps("maik-mxcore").draftBytes === 291546144 && M.caps("maik-lite").draftBytes === 0);
-  ok("a draft id is neither a vision id nor a base pack", !M.isVisionId(did) && M.PACKS[did] === undefined);
 }
 
 process.exit(fail ? 1 : 0);
