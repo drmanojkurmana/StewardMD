@@ -65,25 +65,33 @@
   /* -------- lookups (exact, then canonical/case-insensitive) -------- */
   function cleanComp(name) {
     var s = String(name || "").trim();
+    if (/^sacubitril\s*[\/|+]\s*valsartan/i.test(s)) return "Sacubitril + Valsartan";
     if (/rabies\s*vaccine|human\s*\+\s*rabies|rabies.*human/i.test(s)) return "Rabies Vaccine";
-    if (/tetanus\s*toxoid|tdap|\btt\b|adsorbed\s*tetanus/i.test(s)) return "Tetanus Toxoid";
+    if (/tetanus\s*toxoid|tdap|\btt\b|adsorbed\s*tetanus/i.test(s)) return "Adsorbed Tetanus Vaccine";
     if (/rotavirus\s*vaccine/i.test(s)) return "Rotavirus Vaccine";
-    if (/typhoid\s*vaccine|salmonella\s*typhi|purified\s*vi.*typhoid/i.test(s)) return "Typhoid Vaccine";
+    if (/typhoid\s*vaccine|salmonella\s*typhi|purified\s*vi.*typhoid/i.test(s)) return "Purified Vi Polysaccharide Typhoid Vaccine";
     if (/hepatitis\s*b\s*vaccine|aluminium.*hepatitis\s*b/i.test(s)) return "Hepatitis B Vaccine";
-    if (/hepatitis\s*a\s*vaccine/i.test(s)) return "Hepatitis A Vaccine";
-    if (/influenza\s*vaccine/i.test(s)) return "Influenza Vaccine";
-    if (/pneumococc\w*\s*(?:polysaccharide\s*)?conjugate\s*vaccine/i.test(s)) return "Pneumococcal Conjugate Vaccine";
+    if (/hepatitis\s*a\s*vaccine/i.test(s)) return "Inactivated Hepatitis A Vaccine";
+    if (/influenza\s*vaccine/i.test(s)) return "Inactivated Influenza Vaccine";
+    if (/pneumococc\w*\s*(?:polysaccharide\s*)?conjugate\s*vaccine/i.test(s)) return "Pneumococcal Polysaccharide Conjugate Vaccine";
     if (/pneumococc\w*\s*polysaccharide\s*vaccine/i.test(s)) return "Pneumococcal Polysaccharide Vaccine";
-    if (/measles.*mumps.*rubella|mmr/i.test(s)) return "MMR Vaccine";
+    if (/measles.*mumps.*rubella|mmr/i.test(s)) return "Measles Vaccine";
     if (/varicella\s*vaccine/i.test(s)) return "Varicella Vaccine";
     if (/human\s*papilloma\w*|hpv/i.test(s)) return "Human Papillomavirus Vaccine";
     if (/herpes\s*zoster|shingles/i.test(s)) return "Herpes Zoster Vaccine";
     if (/\bbcg\b/i.test(s)) return "BCG Vaccine";
     if (/cholera\s*vaccine/i.test(s)) return "Cholera Vaccine";
     if (/polio\s*vaccine/i.test(s)) return "Polio Vaccine";
+    if (/^dabigatran(?:\s+etexilate)?$/i.test(s)) return "Dabigatran Etexilate";
+    if (/^metoprolol(?:\s+(?:succinate|tartrate))?$/i.test(s)) return "Metoprolol Succinate";
+    if (/^noradrenaline(?:\s*\(.*?\))?$/i.test(s)) return "Norepinephrine";
+    if (/^levothyroxine$/i.test(s)) return "Thyroxine";
+    if (/^chlorphen(?:ir)?amine(?:\s+maleate)?$/i.test(s)) return "Chlorpheniramine Maleate";
+    if (/^magnesium\s*sul(?:f|ph)ate$/i.test(s)) return "Magnesium Sulphate";
+    if (/^insulin(?:\s*\(regular\))?$/i.test(s)) return "Human Insulin";
     s = s.replace(/\s*\([^)]*\)/g, " ");
     s = s.replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi, " ");
-    return s.replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();
+    return s.replace(/\s*\/\s*/g, " + ").replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();
   }
   function lookStruct(name) {
     var s = _data.struct || {};
@@ -111,8 +119,8 @@
     }
     return null;
   }
-  function isCombo(name) { return /\s\+\s/.test(String(name)); }
-  function splitCombo(name) { return String(name).split(/\s*\+\s*/).map(function (s) { return s.trim(); }).filter(Boolean); }
+  function isCombo(name) { return /\s\+\s|\s*\/\s*/.test(String(name)); }
+  function splitCombo(name) { return String(name).split(/\s*\+\s*|\s*\/\s*/).map(function (s) { return s.trim(); }).filter(Boolean); }
 
   /* -------- response builders — identical shapes to the worker handlers -------- */
   function structResp(name) {

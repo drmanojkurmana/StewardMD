@@ -232,12 +232,8 @@
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function detailHTML(d){
-    var realBrands=(d.brands||[]).filter(function(b){return ["ppi","h2","h2 blocker","nsaid","doac","lmwh","ufh","statin","ccb","acei","arb","bb","beta blocker","saba","ics","steroid","antiemetic","laxative","insulin","asa","ntg","gtn","txa","mgso4","kcl","nahco3","pcm","cpm"].indexOf(b.toLowerCase())<0;});
-    return '<div style="font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--teal);margin-bottom:8px">'+esc(d.cls)+'</div>'+
-      '<div style="background:var(--teal-soft);border:1px solid var(--teal);border-radius:10px;padding:12px 14px;margin-bottom:10px"><div style="font:700 11px var(--sans);color:var(--slate-soft);text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px">Adult dose</div><div style="font:600 14px var(--sans);color:var(--ink);line-height:1.5">'+esc(d.dose)+'</div></div>'+
-      (realBrands.length?'<div style="font:500 12.5px var(--sans);color:var(--slate);margin-bottom:8px"><b style="color:var(--ink)">Common brands:</b> '+esc(realBrands.join(", "))+'</div>':"")+
-      (d.notes?'<div style="font:500 12.5px var(--sans);color:var(--slate);line-height:1.55;background:var(--paper);border:1px dashed var(--line);border-radius:9px;padding:10px 12px">'+dIco("warn")+' '+esc(d.notes)+'</div>':"")+
-      '<div style="font:500 11px var(--sans);color:var(--slate-soft);margin-top:12px;line-height:1.5">Adult dosing only — verify against the individual patient, renal/hepatic function and local protocol.</div>';
+    // Legacy formulary card retired — all drugs display the Gold-Standard clinical monograph
+    return "";
   }
 
   /* The Drugs Database is the single browse/dosing surface. Keep the old API
