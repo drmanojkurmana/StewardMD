@@ -222,6 +222,11 @@ const { L } = load();
   // the model was printing. Do not let it creep further without measuring.
   ok("system prompt kept terse (it is prefill on the critical path)", calls.generate[0].system.length < 900);
   ok("model loaded with the clamped context", calls.load[0].nCtx === 4096);
+  // Perf plan 2026-09-21: the load asks for a q8_0 KV cache with flash attention (per-pack opt-out) and
+  // passes the draft path only when the draft is on disk (none in this harness).
+  ok("load asks for q8 KV + flash attention by default", calls.load[0].kvQ8 === true && calls.load[0].flashAttn === true);
+  ok("no draft on disk: draftPath is empty", calls.load[0].draftPath === "");
+  ok("history precedes the evidence in the prompt (KV prefix reuse)", /parts\.history \+ "Reference material from the StewardMD Knowledge Base:/.test(SRC));
 }
 
 // ── the model is loaded once, not per question ──

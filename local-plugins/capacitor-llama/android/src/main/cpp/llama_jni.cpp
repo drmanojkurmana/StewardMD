@@ -670,7 +670,7 @@ Java_in_stewardmd_llama_LlamaNative_generateWithImage(
             full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._";
             break;
         }
-        const int nap = thermal_yield_us();
+        const int nap = thermal_yield_us(produced);
         if (nap > 0) usleep(nap);
     }
 
