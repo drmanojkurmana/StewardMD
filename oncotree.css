@@ -1610,6 +1610,8 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
   position: sticky;
   top: 0;
   z-index: 10;
+  flex: 0 0 auto;   /* QA BUG-014: a flex child with overflow-x:auto shrank to a 10px sliver under the toolbar */
+  min-height: 0;
   background: #ffffff;
   border-bottom: 1px solid #DCE3E8;
   padding: 10px 16px;
@@ -2179,15 +2181,41 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
     backdrop-filter: blur(2px);
     z-index: 45;
   }
+  /* QA BUG-014: phone toolbar = two clean rows. Row 1: menu + cancer name. Row 2: the controls,
+     scrolling sideways instead of wrapping into a clipped third row. */
   .ot-nav-toolbar {
-    padding: 8px 12px;
-    gap: 8px;
+    padding: 8px 12px 6px;
+    gap: 6px 8px;
+    flex-direction: column;
+    align-items: stretch;
   }
+  .ot-nav-tb-left {
+    flex-wrap: nowrap;
+    min-height: 34px;
+  }
+  .ot-nav-brand-t {
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ot-nav-tb-right {
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .ot-nav-tb-right::-webkit-scrollbar { display: none; }
+  .ot-nav-tb-right > * { flex: 0 0 auto; }
   .ot-nav-brand-v, .ot-nav-crumb-sep, .ot-nav-cur-node {
     display: none;
   }
   .ot-nav-toggle-wrap {
     display: none;
+  }
+  .ot-flow-stepper-wrap {
+    padding: 8px 12px;
   }
   .ot-flow-content {
     padding: 16px 12px 60px;

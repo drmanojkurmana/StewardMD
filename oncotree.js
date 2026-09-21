@@ -1289,11 +1289,41 @@
       st.answers = { n_histology: ["recurrent"] };
     } else if (opt) {
       st.answers = { n_histology: [opt] };
+    } else if (!navJumpGeneric(sec)) {
+      if (G.toast) G.toast("No step found for " + sec);
+      return;
     }
     pruneDownstream();
     st.navEndModalOpen = false;
+    st.sidebarOpen = isMobileScreen() ? false : st.sidebarOpen;   // the drawer covered the result on a phone
     repaintBody();
     navAutoScroll();
+  }
+  // QA BUG-015: guideline-agnostic section jump. Finds the first node whose section matches, walks
+  // the answered path back to the closest active ancestor so the flow re-roots there, and on the
+  // canvas selects + centres that node. Returns false when the section has no nodes.
+  function navSectionNodes(sec) {
+    var want = String(sec || "").trim().toLowerCase(), out = [];
+    if (!want) return out;
+    var state = evalState(), order = (state && asArr(state.order)) || Object.keys(st.byId || {});
+    order.forEach(function (id) {
+      var raw = st.byId && st.byId[id]; if (!raw) return;
+      var s2 = String(raw.section || "").trim().toLowerCase();
+      if (s2 === want || s2.indexOf(want) === 0) out.push(id);
+    });
+    return out;
+  }
+  function navJumpGeneric(sec) {
+    var ids = navSectionNodes(sec);
+    if (!ids.length) return false;
+    var target = ids[0];
+    // Prefer a node already reachable on the current path; otherwise the section's first node.
+    var state = evalState();
+    for (var i = 0; i < ids.length; i++) { var n = state && state.nodes && state.nodes[ids[i]]; if (n && n.status === "active") { target = ids[i]; break; } }
+    st.mapSel = target;
+    st.navJumpTarget = target;
+    if (typeof editStep === "function" && state && state.nodes && state.nodes[target] && st.answers[target]) { try { editStep(target); } catch (e) {} }
+    return true;
   }
 
   function navZoom(dir) {
@@ -1309,6 +1339,13 @@
   function navAutoScroll() {
     if (typeof setTimeout === "undefined") return;
     setTimeout(function () {
+      // QA BUG-015: a section jump lands on its node (flow card or canvas card) rather than the
+      // last active column.
+      if (st.navJumpTarget) {
+        var jt = st.navJumpTarget; st.navJumpTarget = null;
+        var card = D && (D.getElementById("otFlowCard_" + jt) || D.querySelector('[data-ot-node="' + jt + '"].ot-nav-card, .ot-nav-card[data-ot-node="' + jt + '"]'));
+        if (card && card.scrollIntoView) { try { card.scrollIntoView({ block: "center", inline: "center", behavior: "smooth" }); } catch (e) { card.scrollIntoView(); } return; }
+      }
       var vp = D && D.getElementById("otNavVp");
       if (!vp) return;
       var activeCols = vp.querySelectorAll(".ot-nav-col.has-active");
@@ -1345,6 +1382,34 @@
       vp.scrollLeft = scrollLeft - (x - startX);
       vp.scrollTop = scrollTop - (y - startY);
     });
+
+    // QA BUG-016: phones. One finger pans (native scroll of the viewport), two fingers pinch-zoom the
+    // board about the pinch midpoint, clamped to the same 0.4x..2x range as the +/- buttons. Page
+    // zoom is suppressed while a pinch is in progress (touch-action + preventDefault on the move).
+    var pinch = null;
+    function dist(t) { var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy); }
+    function mid(t) { return { x: (t[0].clientX + t[1].clientX) / 2, y: (t[0].clientY + t[1].clientY) / 2 }; }
+    vp.addEventListener("touchstart", function (e) {
+      if (e.touches.length !== 2) { pinch = null; return; }
+      var m = mid(e.touches), r = vp.getBoundingClientRect(), z = st.navZoom || 1;
+      pinch = { d0: dist(e.touches), z0: z,
+        // board-space point under the pinch midpoint, so zooming keeps that point under the fingers
+        bx: (vp.scrollLeft + (m.x - r.left)) / z, by: (vp.scrollTop + (m.y - r.top)) / z,
+        mx: m.x - r.left, my: m.y - r.top };
+    }, { passive: true });
+    vp.addEventListener("touchmove", function (e) {
+      if (!pinch || e.touches.length !== 2) return;
+      e.preventDefault();
+      var z = Math.max(0.4, Math.min(2.0, pinch.z0 * (dist(e.touches) / (pinch.d0 || 1))));
+      st.navZoom = z;
+      var canvas = D && D.getElementById("otNavCanvas");
+      if (canvas) canvas.style.transform = "scale(" + z + ")";
+      var m = mid(e.touches), r = vp.getBoundingClientRect();
+      vp.scrollLeft = pinch.bx * z - (m.x - r.left);
+      vp.scrollTop = pinch.by * z - (m.y - r.top);
+    }, { passive: false });
+    vp.addEventListener("touchend", function (e) { if (e.touches.length < 2) pinch = null; }, { passive: true });
+    vp.addEventListener("touchcancel", function () { pinch = null; }, { passive: true });
   }
 
   function summarySheetHtml() {
@@ -1466,9 +1531,10 @@
 
     return '<div class="ot-calc-shell">' +
       '<div class="ot-calc-desc">Bedside Cockcroft-Gault CrCl &amp; Calvert Carboplatin dosing engine with ASCO/FDA/NCCN safety caps.</div>' +
-      (G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs ? (
+      ((G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs) || (G.GHIS && G.GHIS.pickPatient) ? (
         '<div class="ot-calc-sync-row">' +
-          '<button type="button" class="ot-btn ghost sm ot-sync-btn" data-ot-act="calc-wardsync-fetch">' + ms("sync") + ' Fetch Patient Labs from WardSync EMR</button>' +
+          '<button type="button" class="ot-btn ghost sm ot-sync-btn" data-ot-act="calc-wardsync-fetch">' + ms("sync") + ' Pick patient from WardSynQ &amp; fetch labs</button>' +
+          '<div class="ot-calc-patient" data-ot-calc-patient style="font:600 12px system-ui;color:#607D8B;margin-top:6px">' + esc(p.name ? (p.name + (p.patientId ? " · MR " + p.patientId : "")) : "No patient picked yet. Values below are editable defaults.") + '</div>' +
         '</div>'
       ) : '') +
       '<div class="ot-calc-grid">' +
@@ -1839,6 +1905,33 @@
       return;
     }
     if (act === "calc-wardsync-fetch") {
+      // QA BUG-018: hospital -> WardSynQ patient list -> pick -> this patient's demographics and
+      // newest creatinine land in the calculator. The same one-shot picker SURGX and ICU use.
+      if (G.GHIS && G.GHIS.pickPatient && G.GHIS.latestLabsFor) {
+        if (G.toast) G.toast("Pick the patient from the WardSynQ list");
+        G.GHIS.pickPatient(function (pk) {
+          if (!pk || !pk.patientId) return;
+          if (G.toast) G.toast("Fetching labs for " + (pk.name || "patient") + "…");
+          G.GHIS.latestLabsFor(pk.patientId).then(function (res) {
+            res = res || {};
+            var dem = res.patient || {}, labs = res.labs || {};
+            var filled = [];
+            if (dem.age) { var aInp2 = D.querySelector("[data-ot-calc='age']"); if (aInp2) { aInp2.value = dem.age; filled.push("age"); } }
+            if (dem.sex) { var sInp2 = D.querySelector("[data-ot-calc='sex']"); if (sInp2) { sInp2.value = /^f/i.test(String(dem.sex)) ? "female" : "male"; filled.push("sex"); } }
+            if (dem.weightKg) { var wInp2 = D.querySelector("[data-ot-calc='weight']"); if (wInp2) { wInp2.value = dem.weightKg; filled.push("weight"); } }
+            if (labs.creatinine != null) { var scInp2 = D.querySelector("[data-ot-calc='scr']"); if (scInp2) { scInp2.value = labs.creatinine; filled.push("creatinine"); } }
+            st.ctx = st.ctx || {};
+            st.ctx.patient = Object.assign({}, st.ctx.patient || {}, { name: pk.name, patientId: pk.patientId, age: dem.age, sex: dem.sex, weightKg: dem.weightKg, creatinine: labs.creatinine });
+            if (labs.creatinine != null) st.ctx.serumCreatinine = labs.creatinine;
+            if (dem.age) st.ctx.age = dem.age;
+            var lbl = D.querySelector("[data-ot-calc-patient]");
+            if (lbl) lbl.textContent = (pk.name || "Patient") + " · WardSynQ" + (labs.creatinineDate ? " · creatinine " + labs.creatinineDate : "");
+            updateCalvertCalc();
+            if (G.toast) G.toast(filled.length ? ("Filled " + filled.join(", ") + " from WardSynQ") : "No creatinine on file for this patient; enter it manually.");
+          }).catch(function () { if (G.toast) G.toast("Could not fetch labs from WardSynQ."); });
+        });
+        return;
+      }
       if (G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs) {
         var wsq = G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs(G);
         if (wsq && (wsq.patient || wsq.vitals || wsq.labs)) {
@@ -1855,6 +1948,8 @@
         } else {
           if (G.toast) G.toast("No active WardSync patient in EMR session.");
         }
+      } else if (G.toast) {
+        G.toast("WardSynQ is not connected on this device. Open Ward Sync from Home and sign in first.");
       }
       return;
     }

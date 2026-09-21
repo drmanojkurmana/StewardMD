@@ -41,8 +41,11 @@
       noResponseDays: clampInt(rv.noResponseDays, 2, 30, 3),
       fallbackHours: clampInt(rv.fallbackHours, 0, 240, 24),
       maxCallsPerDay: 1,
-      maxAttempts: clampInt(rv.maxAttempts, 1, 5, 2)
+      maxAttempts: clampInt(rv.maxAttempts, 1, 5, 2),
+      // QA BUG-009: the controlled destination for "Place test call" (digits only, 10-15). Empty = not set.
+      testPhone: String(rv.testPhone || "").replace(/[^\d]/g, "").slice(0, 15)
     };
+    if (v.testPhone && v.testPhone.length < 10) v.testPhone = "";
     if (v.morningEnd <= v.morningStart) { v.morningStart = 9; v.morningEnd = 10; }
     if (v.eveningEnd <= v.eveningStart) { v.eveningStart = 17; v.eveningEnd = 18; }
     function contact(rc) {
