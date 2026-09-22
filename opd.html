@@ -380,16 +380,12 @@
   // ---- multi-clinic manager: one StewardMD account can own several clinics (open / add / delete) ----
   function wardsynqOrg(){ var w=""; try{ w=localStorage.getItem("smd_opd_workplace")||""; }catch(e){} return w.indexOf("wardsynq:")===0?w.slice(9):""; }
   /* WardSynQ hospital OPDs bill through the hospital's unified OPD + IPD cashier (ward.js), not the
-   * standalone clinic cashier. Personal clinics keep /clinic-billing. */
+   * standalone clinic cashier. Personal clinics keep /clinic-billing. A clinic is ONLY a WardSynQ
+   * Inpatient Hospital when the SERVER says so on whoami (mode "wardsynq" with a real hospital id):
+   * never from the hostname, nor from a stored workplace, both of which misrouted personal clinics
+   * (mode "native", e.g. SMD-6TEQZM) into the inpatient cashier that looks for admitted bed stays. */
   function isWardSynQHospital(){
-    if(st.source==="wardsynq") return true;
-    if(st.who&&(st.who.mode==="wardsynq"||st.who.isHospital)) return true;
-    if(wardsynqOrg()) return true;
-    var wp=""; try{ wp=localStorage.getItem("smd_opd_workplace")||""; }catch(e){}
-    if(wp.indexOf("wardsynq:")===0) return true;
-    if(st.orgId&&st.orgId.indexOf("wardsynq:")===0) return true;
-    if(st.currentOrg&&st.currentOrg.mode==="wardsynq") return true;
-    return false;
+    return !!(st.who&&st.who.mode==="wardsynq"&&st.who.hospitalId&&st.who.hospitalId!=="manual");
   }
   function openWardSynqCashier(mrn){
     if(window.WARD&&window.WARD.open){ window.WARD.open({orgId:st.orgId,act:"cashier",mrn:mrn||"",returnToOpd:true}); return; }
@@ -1213,6 +1209,7 @@
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
+    b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(t.smdId||t.mrn||t.id)+'" data-mrn="'+esc(t.mrn||t.smdId||t.id||"")+'">Bill</button>');   // personal clinic -> /clinic-billing?patientId=, hospital -> ward cashier (see wireRowActions)
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
       '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
