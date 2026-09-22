@@ -148,7 +148,10 @@ export function org(o = {}) {
    * was created without this field and is an Indian one, so not a single record changes meaning.
    * What it actually implies lives in functions/_region.js and nowhere else. */
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
-  return { id: s(o.id), code: s(o.code), name: s(o.name), doctorName: s(o.doctorName), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
+  return { id: s(o.id), code: s(o.code), name: s(o.name), doctorName: s(o.doctorName),
+           opdBillingMode: o.opdBillingMode === "doctor_first" ? "doctor_first" : "pay_first",
+           defaultConsultationFee: Math.max(0, Math.round(Number(o.defaultConsultationFee) || 0)),
+           kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), tokens: tokenConfig(o.tokens),
            wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security),
            /* Country-specific identifiers (India: GSTIN, HFR facility id). Shaped by the region adapter,

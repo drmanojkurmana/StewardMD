@@ -174,8 +174,18 @@ export async function dispenseOrder(env, orgId, orderId, actor) {
   if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
   const o = d.fields;
   if (o.status === "dispensed") return { ok: true, already: true };
-  if (!isDispensable(Object.assign({ id: orderId }, o))) return { ok: false, error: "not_dispensable", status: o.status, kind: o.kind };
-  await fsCommit(env, [wUpdate(env, "q_orders/" + orderId, { status: "dispensed", dispensedAt: Date.now(), dispensedBy: actor || "", updatedAt: Date.now() })]);
+  const updates = [wUpdate(env, "q_orders/" + orderId, { status: "dispensed", dispensedAt: Date.now(), dispensedBy: actor || "", updatedAt: Date.now() })];
+  if (o.tariffId) {
+    try {
+      const trf = await fsGet(env, "q_tariff/" + o.tariffId).catch(() => null);
+      if (trf && trf.fields && typeof trf.fields.stock === "number") {
+        const curStock = Number(trf.fields.stock) || 0;
+        const decQty = Math.max(1, Number(o.qty) || 1);
+        updates.push(wUpdate(env, "q_tariff/" + o.tariffId, { stock: Math.max(0, curStock - decQty), updatedAt: Date.now() }));
+      }
+    } catch (e) {}
+  }
+  await fsCommit(env, updates);
   await qAudit(env, { hospitalId: orgId, ticketId: o.patientId || "", actor: actor || "pharmacy", action: "order_dispense", meta: o.name || "" });
   return { ok: true };
 }

@@ -227,6 +227,20 @@
   .dot2{width:8px;height:8px;border-radius:50%;background:var(--slate);flex:none} .dot2.on{background:var(--ok)}
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
+  .sheet.wide{max-width:680px}
+  .ttabs{display:flex;gap:4px;background:var(--btn);padding:4px;border-radius:12px;margin:12px 0 16px;border:1px solid var(--line);overflow-x:auto}
+  .ttab{flex:1;min-width:110px;padding:8px 10px;text-align:center;font-size:12.5px;font-weight:600;border-radius:8px;cursor:pointer;color:var(--mut);transition:all .15s ease;border:none;background:none;display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap}
+  .ttab.active{background:var(--card);color:var(--ink);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .flowcard{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;cursor:pointer;transition:all .15s ease;background:var(--card)}
+  .flowcard:hover{border-color:var(--tl);box-shadow:var(--sh-md)}
+  .flowcard.selected{border-color:var(--tl);background:var(--tl-soft)}
+  .flowsteps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0 4px;font-size:11.5px;font-weight:700;color:var(--mut)}
+  .flowsteps span{background:var(--card);border:1px solid var(--line);padding:3px 8px;border-radius:6px;color:var(--ink)}
+  .flowsteps .arr{color:var(--tl);font-size:13px;border:none;background:none;padding:0}
+  .quickpill{display:inline-block;padding:4px 9px;font-size:11.5px;font-weight:600;background:var(--btn);border:1px solid var(--line);border-radius:6px;cursor:pointer;margin:2px 3px;color:var(--ink);transition:all .12s ease}
+  .quickpill:hover{background:var(--tl-soft);border-color:var(--tl);color:var(--tl);transform:translateY(-1px)}
+  .stock-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--card)}
+  .stock-item:hover{background:var(--btn)}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
@@ -490,6 +504,7 @@
         (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="clinics">Clinics</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="rooms">Rooms</button>':'')+
+        (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="tariffBtn">Tariff & Stock</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
@@ -508,6 +523,7 @@
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
     var nc=document.getElementById("clinics"); if(nc) nc.onclick=openClinics;
     var rms=document.getElementById("rooms"); if(rms) rms.onclick=openRoomsAdmin;
+    var trfBtn=document.getElementById("tariffBtn"); if(trfBtn) trfBtn.onclick=function(){ openTariffAdmin(); };
     var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
     var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
     var bll = document.getElementById("billing");
@@ -681,9 +697,16 @@
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
-    b.push('<button data-a="bill" data-t="' + t.id + '" data-smd="' + esc(t.smdId || t.mrn || t.id) + '" data-mrn="' + esc(t.mrn || t.smdId || t.id || "") + '">Bill</button>');
+    var billLabel = (t.unbilledAmount > 0) ? ("Bill ₹" + Math.round(t.unbilledAmount / 100)) : "Bill";
+    var billChip = (t.unbilledAmount > 0)
+      ? ' <span class="chip" style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:700">₹' + Math.round(t.unbilledAmount/100) + ' unbilled</span>'
+      : (t.billingStatus === "paid"
+        ? ' <span class="chip" style="background:#ecfdf5;color:#059669;font-size:11px;font-weight:700">Paid</span>'
+        : ' <span class="chip" style="background:#f1f5f9;color:#64748b;font-size:11px">Unbilled</span>');
+    var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
+    b.push('<button data-a="bill" data-t="' + t.id + '" data-smd="' + esc(mrnVal) + '" data-mrn="' + esc(mrnVal) + '" data-unbilled="' + (t.unbilledAmount||0) + '" data-name="' + esc(t.name||"Patient") + '"' + (t.unbilledAmount>0?' class="pri"':'') + '>' + billLabel + '</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+'</div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
       '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
       '<div class="acts">'+b.join("")+'</div></div>';
@@ -707,8 +730,12 @@
         else if(a==="vitals") openVitals(sid,tid,btn.getAttribute("data-n"));
         else if (a === "bill") {
           var mrn = btn.getAttribute("data-mrn") || btn.getAttribute("data-smd") || tid;
+          var unbilledAmt = Number(btn.getAttribute("data-unbilled")) || 0;
+          var ptName = btn.getAttribute("data-name") || "Patient";
           if (isWardSynQHospital()) {
             openWardSynqCashier(mrn);
+          } else if (unbilledAmt > 0) {
+            openQuickPay(mrn, tid, ptName, unbilledAmt);
           } else {
             var curOrg = st.orgId || st.hospital || "";
             location.href = "/clinic-billing?patientId=" + encodeURIComponent(mrn) + "&orgId=" + encodeURIComponent(curOrg) + "&ticketId=" + encodeURIComponent(tid);
@@ -771,7 +798,15 @@
     ok.onclick=function(){
       var n=sheet.querySelector("#wn").value.trim(); if(!n){toast("Enter a name");return;}
       var sel=sheet.querySelector("#wsel"); if(!sel){toast("No doctor queue available");return;}
-      close(); post("ticket",{sessionId:sel.value,name:n,mobile:sheet.querySelector("#wm").value.trim(),visitType:"new"});
+      var sVal=sel.value;
+      close();
+      post("ticket",{sessionId:sVal,name:n,mobile:sheet.querySelector("#wm").value.trim(),visitType:"new"}, function(r){
+        var tkt = (r && r.tickets || []).filter(function(x){ return x.name === n; })[0];
+        var sObj = (st.board||[]).find(function(b){ return b.session && b.session.id === sVal; });
+        var docUid = sObj && sObj.session && sObj.session.doctorUid;
+        if(tkt) autoQueueConsultationFee(tkt.mrn || tkt.id, tkt.id, docUid);
+        refresh();
+      });
     };
   }
   // ---- checkout ----
@@ -1248,6 +1283,468 @@
     });
   }
 
+  // ---- AUTO-QUEUE CONSULTATION FEE (Pay First Flow) ----
+  function autoQueueConsultationFee(patientId, ticketId, doctorId){
+    var mode = (st.opd && st.opd.opdBillingMode) || "pay_first";
+    if (mode !== "pay_first") return; // doctor_first mode doesn't queue upfront fee
+    api("bill/tariff?orgId=" + encodeURIComponent(st.orgId)).then(function(r){
+      if (!r || !r.ok || !r.items || !r.items.length) return;
+      var items = r.items;
+      var trf = (doctorId && items.find(function(x){ return x.kind === "consultation" && (x.doctorId === doctorId || (x.code && x.code.indexOf(doctorId) > -1)); })) ||
+                items.find(function(x){ return x.kind === "consultation"; });
+      if (trf) {
+        api("bill/order", {
+          method: "POST",
+          body: { orgId: st.orgId, patientId: patientId, ticketId: ticketId, tariffId: trf.id, qty: 1 }
+        }).then(function(){ refresh(); }).catch(function(){});
+      }
+    }).catch(function(){});
+  }
+
+  // ---- QUICK PAY IN-LINE MODAL (Reception / Cashier instant settlement) ----
+  function openQuickPay(mrn, tid, ptName, unbilledAmt){
+    var amtStr = "₹" + Math.round(unbilledAmt / 100);
+    open('<h3>Settle Bill · ' + esc(ptName) + '</h3>' +
+      '<div style="background:var(--tl-soft);border:1px solid var(--tl-border);border-radius:12px;padding:16px;text-align:center;margin:12px 0">' +
+        '<div style="font-size:12px;color:var(--mut);text-transform:uppercase;font-weight:700;letter-spacing:0.04em">Amount to collect</div>' +
+        '<div style="font-size:30px;font-weight:800;color:var(--ink);margin:4px 0">' + amtStr + '</div>' +
+        '<div style="font-size:12px;color:var(--mut)">Patient: ' + esc(ptName) + ' (' + esc(mrn) + ')</div>' +
+      '</div>' +
+      '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Select payment method:</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">' +
+        '<button class="btn" data-paym="cash" style="margin:0;padding:14px 10px;font-size:14px;background:#10b981;color:#fff"><span class="ms sm" style="display:block;margin-bottom:4px;font-size:20px">payments</span>Cash</button>' +
+        '<button class="btn" data-paym="upi" style="margin:0;padding:14px 10px;font-size:14px;background:#0ea5e9;color:#fff"><span class="ms sm" style="display:block;margin-bottom:4px;font-size:20px">qr_code_2</span>UPI</button>' +
+        '<button class="btn" data-paym="card" style="margin:0;padding:14px 10px;font-size:14px;background:#6366f1;color:#fff"><span class="ms sm" style="display:block;margin-bottom:4px;font-size:20px">credit_card</span>Card</button>' +
+      '</div>' +
+      '<div style="text-align:center;margin-bottom:12px">' +
+        '<a href="/clinic-billing?patientId=' + encodeURIComponent(mrn) + '&orgId=' + encodeURIComponent(st.orgId) + '&ticketId=' + encodeURIComponent(tid) + '" style="font-size:13px;color:var(--tl);font-weight:600;text-decoration:underline">Open detailed billing station / add more items</a>' +
+      '</div>' +
+      '<div class="row2"><button class="cancel" id="cx" style="margin:0">Cancel</button></div>');
+    sheet.querySelector("#cx").onclick = close;
+    Array.prototype.forEach.call(sheet.querySelectorAll("[data-paym]"), function(b){
+      b.onclick = function(){
+        var method = b.getAttribute("data-paym");
+        Array.prototype.forEach.call(sheet.querySelectorAll("[data-paym]"), function(x){ x.disabled = true; });
+        b.textContent = "Processing…";
+        api("bill/invoice", { method: "POST", body: { orgId: st.orgId, patientId: mrn } }).then(function(invR){
+          if (!invR || !invR.ok) {
+            toast(invR && invR.error === "no_billable_orders" ? "Orders already billed." : "Could not generate invoice.");
+            close(); refresh(); return;
+          }
+          var invId = invR.invoice && invR.invoice.id;
+          api("bill/pay", { method: "POST", body: { orgId: st.orgId, invoiceId: invId, method: method } }).then(function(payR){
+            close();
+            if (payR && payR.ok) {
+              toast("Collected " + amtStr + " via " + method.toUpperCase() + " · Patient cleared!");
+              refresh();
+            } else {
+              toast("Payment recording failed. Settle in Billing station.");
+              refresh();
+            }
+          }).catch(function(){ close(); refresh(); });
+        }).catch(function(){ toast("Could not reach billing server"); close(); });
+      };
+    });
+  }
+
+  // ---- TARIFF, PHARMACY STOCK & OPD FLOW ADMIN ----
+  function openTariffAdmin(initialTab){
+    var activeTab = initialTab || 0;
+    open('<h3>Price List, Pharmacy Stock & OPD Flow</h3>' +
+      '<div class="t" style="margin-top:-6px;font-size:12.5px;color:var(--mut)">Configure doctor consultation fees, dispensary stock & procedures, and choose your billing workflow.</div>' +
+      '<div class="ttabs">' +
+        '<button class="ttab' + (activeTab===0?' active':'') + '" data-ttab="0"><span class="ms sm">medical_services</span> Doctor Fees</button>' +
+        '<button class="ttab' + (activeTab===1?' active':'') + '" data-ttab="1"><span class="ms sm">medication</span> Pharmacy Stock</button>' +
+        '<button class="ttab' + (activeTab===2?' active':'') + '" data-ttab="2"><span class="ms sm">biotech</span> Investigations</button>' +
+        '<button class="ttab' + (activeTab===3?' active':'') + '" data-ttab="3"><span class="ms sm">swap_horiz</span> Billing Flow</button>' +
+      '</div>' +
+      '<div id="tAdminContent"><div class="empty">Loading clinic catalog…</div></div>' +
+      '<div class="row2"><button class="cancel" id="cxTariff" style="margin:0">Close</button></div>', true);
+
+    sheet.querySelector("#cxTariff").onclick = close;
+
+    function renderTab(){
+      Array.prototype.forEach.call(sheet.querySelectorAll("[data-ttab]"), function(b){
+        b.classList.toggle("active", Number(b.getAttribute("data-ttab")) === activeTab);
+      });
+      var host = sheet.querySelector("#tAdminContent");
+      if (!host) return;
+
+      var items = st.tariffItems || [];
+      var curOrg = st.currentOrg || {};
+      var defaultFee = curOrg.defaultConsultationFee || 0;
+      var flowMode = curOrg.opdBillingMode || (st.opd && st.opd.opdBillingMode) || "pay_first";
+
+      if (activeTab === 0) {
+        // Tab 0: Doctor Fees
+        var docList = [{ id: meUid() || "owner", name: st.doctorName || (st.who && st.who.doctorName) || meName() || "Owner Doctor" }];
+        (st.docMembers || []).forEach(function(m){
+          if (m.role === "doctor" && m.identity !== docList[0].id) {
+            docList.push({ id: m.identity, name: m.displayName || m.identity });
+          }
+        });
+
+        var docRows = docList.map(function(doc){
+          var curItem = items.find(function(t){
+            return t.kind === "consultation" && (t.doctorId === doc.id || (doc.name && t.name && t.name.indexOf(doc.name) > -1));
+          });
+          var fee = curItem ? Math.round(curItem.price / 100) : (defaultFee ? Math.round(defaultFee / 100) : 500);
+          return '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--card)">' +
+            '<div><b>' + esc(withDr(doc.name) || "Doctor") + '</b><div style="font-size:11.5px;color:var(--mut)">' + esc(doc.id) + '</div></div>' +
+            '<div style="display:flex;align-items:center;gap:6px">' +
+              '<span style="font-weight:700">₹</span>' +
+              '<input type="number" min="0" step="50" style="width:90px;padding:6px 8px;margin:0" value="' + fee + '" data-docfee-id="' + esc(doc.id) + '" data-docfee-name="' + esc(doc.name) + '" data-docfee-tid="' + esc(curItem ? curItem.id : "") + '">' +
+              '<button class="btn" style="margin:0;width:auto;padding:6px 12px;font-size:12px" data-save-docfee="' + esc(doc.id) + '">Save</button>' +
+            '</div>' +
+          '</div>';
+        }).join("");
+
+        host.innerHTML = '<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">' +
+          '<div style="font-weight:700;font-size:13px;margin-bottom:4px">Clinic Default Consultation Fee</div>' +
+          '<div style="font-size:12px;color:var(--mut);margin-bottom:8px">Applied when no doctor-specific fee is found.</div>' +
+          '<div style="display:flex;align-items:center;gap:8px">' +
+            '<span style="font-weight:700">₹</span>' +
+            '<input id="defFeeInput" type="number" min="0" step="50" style="width:110px;margin:0" value="' + (defaultFee ? Math.round(defaultFee / 100) : 500) + '">' +
+            '<button class="btn" id="saveDefFee" style="margin:0;width:auto;padding:8px 14px;font-size:12.5px">Save Default Fee</button>' +
+          '</div>' +
+        '</div>' +
+        '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Doctor-Specific Consultation Fees</div>' +
+        docRows;
+
+        var sDef = host.querySelector("#saveDefFee");
+        if (sDef) {
+          sDef.onclick = function(){
+            var val = Math.round(Number(host.querySelector("#defFeeInput").value) * 100) || 0;
+            sDef.disabled = true; sDef.textContent = "Saving…";
+            api("org/update", { method: "POST", body: { orgId: st.orgId, defaultConsultationFee: val } }).then(function(r){
+              sDef.disabled = false; sDef.textContent = "Save Default Fee";
+              if (r && r.ok) {
+                if (st.currentOrg) st.currentOrg.defaultConsultationFee = val;
+                if (st.opd) st.opd.defaultConsultationFee = val;
+                toast("Default consultation fee saved");
+              } else toast("Failed to save default fee");
+            });
+          };
+        }
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-save-docfee]"), function(btn){
+          btn.onclick = function(){
+            var docId = btn.getAttribute("data-save-docfee");
+            var inp = host.querySelector('[data-docfee-id="' + docId + '"]');
+            var docName = inp.getAttribute("data-docfee-name") || "Doctor";
+            var existingTid = inp.getAttribute("data-docfee-tid") || "";
+            var amt = Math.round(Number(inp.value) * 100) || 0;
+            btn.disabled = true; btn.textContent = "Saving…";
+            var itemBody = {
+              orgId: st.orgId,
+              name: "Consultation - " + docName,
+              kind: "consultation",
+              code: "CONS-" + docId.replace(/[^a-zA-Z0-9]/g, "").slice(0, 10),
+              price: amt,
+              doctorId: docId,
+              doctorName: docName
+            };
+            if (existingTid) itemBody.id = existingTid;
+            api("bill/tariff", { method: "POST", body: itemBody }).then(function(r){
+              btn.disabled = false; btn.textContent = "Save";
+              if (r && r.ok) {
+                toast("Consultation fee for " + withDr(docName) + " updated to ₹" + Math.round(amt / 100));
+                reloadTariff();
+              } else toast("Failed to save doctor fee");
+            });
+          };
+        });
+
+      } else if (activeTab === 1) {
+        // Tab 1: Pharmacy Stock & Medicines
+        var meds = items.filter(function(t){ return t.kind === "medication"; });
+        var medRows = meds.length ? meds.map(function(m){
+          var stock = typeof m.stock === "number" ? m.stock : 0;
+          var stockChip = stock > 10
+            ? '<span class="chip" style="background:#ecfdf5;color:#059669;font-weight:700">In stock: ' + stock + '</span>'
+            : (stock > 0
+              ? '<span class="chip" style="background:#fef3c7;color:#b45309;font-weight:700">Low stock: ' + stock + '</span>'
+              : '<span class="chip" style="background:#fee2e2;color:#dc2626;font-weight:700">Out of stock</span>');
+          return '<div class="stock-item">' +
+            '<div>' +
+              '<div style="font-weight:700;font-size:13.5px">' + (m.dosageForm ? '<span class="asn-pill rx-on" style="margin-right:6px;font-size:10px">' + esc(m.dosageForm) + '</span>' : '') + esc(m.name) + '</div>' +
+              '<div style="font-size:12px;color:var(--mut);margin-top:3px">₹' + (m.price/100).toFixed(2) + (m.unit ? ' / ' + esc(m.unit) : '') + ' · ' + stockChip + '</div>' +
+            '</div>' +
+            '<div style="display:flex;align-items:center;gap:6px">' +
+              '<button class="ghost" style="margin:0;padding:5px 10px;font-size:12px" data-addstock="' + esc(m.id) + '" data-stock="' + stock + '">+ Stock</button>' +
+              '<button class="rm" style="margin:0;padding:5px 8px;font-size:12px;border:none;background:none;color:var(--red);cursor:pointer" data-deltrf="' + esc(m.id) + '" title="Remove item"><span class="ms sm">delete</span></button>' +
+            '</div>' +
+          '</div>';
+        }).join("") : '<div class="empty" style="padding:16px">No medicines added yet. Use the form below to stock your pharmacy.</div>';
+
+        host.innerHTML = '<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">' +
+          '<div style="font-weight:700;font-size:13px;margin-bottom:4px">Add Medicine to Pharmacy Stock</div>' +
+          '<div style="font-size:12px;color:var(--mut);margin-bottom:6px">Quick suggestions:</div>' +
+          '<div style="margin-bottom:10px">' +
+            ['Paracetamol 650mg:Tab:30:100', 'Amoxicillin 500mg:Cap:80:50', 'Pantoprazole 40mg:Tab:60:50', 'Cetirizine 10mg:Tab:20:100', 'Azithromycin 500mg:Tab:120:30', 'Metformin 500mg:Tab:40:100', 'Cough Syrup 100ml:Syr:85:25', 'ORS Sachet:Sachet:25:50'].map(function(sug){
+              var parts = sug.split(":");
+              return '<span class="quickpill" data-sugmed="' + esc(parts[0]) + '" data-sugform="' + esc(parts[1]) + '" data-sugprice="' + esc(parts[2]) + '" data-sugstock="' + esc(parts[3]) + '">+ ' + esc(parts[0]) + '</span>';
+            }).join("") +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px">' +
+            '<input id="mName" placeholder="Medicine name (e.g. Paracetamol 650mg)" style="margin:0">' +
+            '<select id="mForm" style="margin:0"><option value="Tab">Tablet (Tab)</option><option value="Cap">Capsule (Cap)</option><option value="Syr">Syrup (Syr)</option><option value="Inj">Injection (Inj)</option><option value="Drops">Drops</option><option value="Oint">Ointment</option><option value="Sachet">Sachet</option></select>' +
+            '<input id="mPrice" type="number" min="0" step="1" placeholder="Price ₹" style="margin:0">' +
+            '<input id="mStock" type="number" min="0" placeholder="Qty Stock" value="100" style="margin:0">' +
+          '</div>' +
+          '<button class="btn" id="btnAddMed" style="margin:0;width:auto;padding:8px 16px;font-size:13px">Add Medicine</button>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
+          '<div style="font-weight:700;font-size:13px">Pharmacy Inventory (' + meds.length + ')</div>' +
+          '<input id="medFilter" placeholder="Search medicines…" style="width:160px;margin:0;padding:5px 8px;font-size:12px">' +
+        '</div>' +
+        '<div id="medListContainer">' + medRows + '</div>';
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-sugmed]"), function(pill){
+          pill.onclick = function(){
+            host.querySelector("#mName").value = pill.getAttribute("data-sugmed");
+            host.querySelector("#mForm").value = pill.getAttribute("data-sugform");
+            host.querySelector("#mPrice").value = pill.getAttribute("data-sugprice");
+            host.querySelector("#mStock").value = pill.getAttribute("data-sugstock");
+          };
+        });
+
+        var addMedBtn = host.querySelector("#btnAddMed");
+        if (addMedBtn) {
+          addMedBtn.onclick = function(){
+            var nm = host.querySelector("#mName").value.trim();
+            if (!nm) { toast("Enter medicine name"); return; }
+            var form = host.querySelector("#mForm").value;
+            var pr = Math.round(Number(host.querySelector("#mPrice").value) * 100) || 0;
+            var stVal = Math.max(0, Math.round(Number(host.querySelector("#mStock").value) || 0));
+            addMedBtn.disabled = true; addMedBtn.textContent = "Adding…";
+            api("bill/tariff", {
+              method: "POST",
+              body: { orgId: st.orgId, name: nm, kind: "medication", dosageForm: form, unit: form, price: pr, stock: stVal }
+            }).then(function(r){
+              addMedBtn.disabled = false; addMedBtn.textContent = "Add Medicine";
+              if (r && r.ok) {
+                toast("Added " + nm + " (Stock: " + stVal + ")");
+                reloadTariff();
+              } else toast("Failed to add medicine");
+            });
+          };
+        }
+
+        var filter = host.querySelector("#medFilter");
+        if (filter) {
+          filter.oninput = function(){
+            var q = filter.value.trim().toLowerCase();
+            Array.prototype.forEach.call(host.querySelectorAll(".stock-item"), function(item){
+              var text = item.textContent.toLowerCase();
+              item.style.display = (!q || text.indexOf(q) > -1) ? "" : "none";
+            });
+          };
+        }
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-addstock]"), function(btn){
+          btn.onclick = function(){
+            var tid = btn.getAttribute("data-addstock");
+            var curSt = Number(btn.getAttribute("data-stock")) || 0;
+            var add = prompt("How many units to add to stock?", "50");
+            if (!add || isNaN(add) || Number(add) <= 0) return;
+            var newTotal = curSt + Math.round(Number(add));
+            btn.disabled = true;
+            api("bill/tariff", { method: "POST", body: { orgId: st.orgId, id: tid, stock: newTotal } }).then(function(r){
+              btn.disabled = false;
+              if (r && r.ok) { toast("Stock updated to " + newTotal); reloadTariff(); }
+              else toast("Failed to update stock");
+            });
+          };
+        });
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-deltrf]"), function(btn){
+          btn.onclick = function(){
+            var tid = btn.getAttribute("data-deltrf");
+            if (!confirm("Remove this item from the active catalog?")) return;
+            api("bill/tariff", { method: "POST", body: { orgId: st.orgId, id: tid, active: false } }).then(function(r){
+              if (r && r.ok) { toast("Item removed"); reloadTariff(); }
+              else toast("Failed to remove item");
+            });
+          };
+        });
+
+      } else if (activeTab === 2) {
+        // Tab 2: Investigations & Services
+        var svcs = items.filter(function(t){ return t.kind === "service" || t.kind === "investigation"; });
+        var svcRows = svcs.length ? svcs.map(function(s){
+          return '<div class="stock-item">' +
+            '<div>' +
+              '<div style="font-weight:700;font-size:13.5px">' + esc(s.name) + '</div>' +
+              '<div style="font-size:12px;color:var(--mut);margin-top:2px">₹' + (s.price/100).toFixed(2) + ' · ' + esc(s.kind) + '</div>' +
+            '</div>' +
+            '<div style="display:flex;align-items:center;gap:6px">' +
+              '<button class="rm" style="margin:0;padding:5px 8px;font-size:12px;border:none;background:none;color:var(--red);cursor:pointer" data-deltrf="' + esc(s.id) + '" title="Remove item"><span class="ms sm">delete</span></button>' +
+            '</div>' +
+          '</div>';
+        }).join("") : '<div class="empty" style="padding:16px">No investigations or procedures added yet.</div>';
+
+        host.innerHTML = '<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">' +
+          '<div style="font-weight:700;font-size:13px;margin-bottom:4px">Add Investigation or Procedure</div>' +
+          '<div style="font-size:12px;color:var(--mut);margin-bottom:6px">Quick suggestions:</div>' +
+          '<div style="margin-bottom:10px">' +
+            ['ECG 12-Lead:250', 'Dressing (Small):100', 'GRBS Blood Sugar:50', 'Nebulization:150', 'Suture Removal:150', 'CBC Blood Test:250', 'Urine Routine:120', 'Injection Admin Fee:50'].map(function(sug){
+              var parts = sug.split(":");
+              return '<span class="quickpill" data-sugsvc="' + esc(parts[0]) + '" data-sugsvcprice="' + esc(parts[1]) + '">+ ' + esc(parts[0]) + '</span>';
+            }).join("") +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:8px">' +
+            '<input id="sName" placeholder="Service name (e.g. ECG 12-Lead)" style="margin:0">' +
+            '<select id="sKind" style="margin:0"><option value="service">Procedure / Service</option><option value="investigation">Lab / Diagnostic</option></select>' +
+            '<input id="sPrice" type="number" min="0" step="10" placeholder="Price ₹" style="margin:0">' +
+          '</div>' +
+          '<button class="btn" id="btnAddSvc" style="margin:0;width:auto;padding:8px 16px;font-size:13px">Add Service</button>' +
+        '</div>' +
+        '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Investigations & Services (' + svcs.length + ')</div>' +
+        svcRows;
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-sugsvc]"), function(pill){
+          pill.onclick = function(){
+            host.querySelector("#sName").value = pill.getAttribute("data-sugsvc");
+            host.querySelector("#sPrice").value = pill.getAttribute("data-sugsvcprice");
+          };
+        });
+
+        var addSvcBtn = host.querySelector("#btnAddSvc");
+        if (addSvcBtn) {
+          addSvcBtn.onclick = function(){
+            var nm = host.querySelector("#sName").value.trim();
+            if (!nm) { toast("Enter service name"); return; }
+            var k = host.querySelector("#sKind").value;
+            var pr = Math.round(Number(host.querySelector("#sPrice").value) * 100) || 0;
+            addSvcBtn.disabled = true; addSvcBtn.textContent = "Adding…";
+            api("bill/tariff", {
+              method: "POST",
+              body: { orgId: st.orgId, name: nm, kind: k, price: pr }
+            }).then(function(r){
+              addSvcBtn.disabled = false; addSvcBtn.textContent = "Add Service";
+              if (r && r.ok) { toast("Added " + nm); reloadTariff(); }
+              else toast("Failed to add service");
+            });
+          };
+        }
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-deltrf]"), function(btn){
+          btn.onclick = function(){
+            var tid = btn.getAttribute("data-deltrf");
+            if (!confirm("Remove this item?")) return;
+            api("bill/tariff", { method: "POST", body: { orgId: st.orgId, id: tid, active: false } }).then(function(r){
+              if (r && r.ok) { toast("Item removed"); reloadTariff(); }
+              else toast("Failed to remove item");
+            });
+          };
+        });
+
+      } else if (activeTab === 3) {
+        // Tab 3: OPD Billing Flow
+        var isPayFirst = flowMode !== "doctor_first";
+        host.innerHTML = '<div style="margin-bottom:12px">' +
+          '<div style="font-weight:700;font-size:14px;margin-bottom:4px">Select OPD Patient Journey</div>' +
+          '<div style="font-size:12.5px;color:var(--mut);margin-bottom:14px">Choose how walk-in and appointment billing behaves for your clinic.</div>' +
+
+          '<div class="flowcard' + (isPayFirst ? ' selected' : '') + '" data-flow="pay_first">' +
+            '<div style="display:flex;align-items:center;gap:8px">' +
+              '<input type="radio" name="flowRadio" value="pay_first"' + (isPayFirst ? ' checked' : '') + ' style="margin:0">' +
+              '<b style="font-size:14px">Pay First (Pre-Paid Consultation)</b>' +
+              '<span class="chip" style="background:#ecfdf5;color:#059669;font-weight:700;font-size:11px;margin-left:auto">Recommended for Private Clinics</span>' +
+            '</div>' +
+            '<div class="flowsteps">' +
+              '<span>1. Arrival</span><span class="arr">→</span>' +
+              '<span>2. Register</span><span class="arr">→</span>' +
+              '<span style="border-color:var(--tl);color:var(--tl);background:var(--tl-soft);font-weight:800">3. Pay Consultation Fee</span><span class="arr">→</span>' +
+              '<span>4. Triage / Vitals</span><span class="arr">→</span>' +
+              '<span>5. Doctor Consult</span><span class="arr">→</span>' +
+              '<span>6. Pharmacy</span><span class="arr">→</span>' +
+              '<span>7. Discharge</span>' +
+            '</div>' +
+            '<div style="font-size:12px;color:var(--mut);margin-top:6px;line-height:1.4">' +
+              'Patient pays the doctor\'s consultation fee upfront at the desk. The OPD Queue card shows an amber <b>Unpaid: ₹[Fee]</b> chip with a 1-click Pay button, turning green <b>Paid</b> immediately.' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="flowcard' + (!isPayFirst ? ' selected' : '') + '" data-flow="doctor_first">' +
+            '<div style="display:flex;align-items:center;gap:8px">' +
+              '<input type="radio" name="flowRadio" value="doctor_first"' + (!isPayFirst ? ' checked' : '') + ' style="margin:0">' +
+              '<b style="font-size:14px">Doctor Visit First (Post-Paid Consultation)</b>' +
+            '</div>' +
+            '<div class="flowsteps">' +
+              '<span>1. Arrival</span><span class="arr">→</span>' +
+              '<span>2. Register</span><span class="arr">→</span>' +
+              '<span>3. Triage / Vitals</span><span class="arr">→</span>' +
+              '<span>4. Doctor Consult & Orders</span><span class="arr">→</span>' +
+              '<span style="border-color:var(--tl);color:var(--tl);background:var(--tl-soft);font-weight:800">5. Settle Invoice at Billing</span><span class="arr">→</span>' +
+              '<span>6. Pharmacy</span><span class="arr">→</span>' +
+              '<span>7. Discharge</span>' +
+            '</div>' +
+            '<div style="font-size:12px;color:var(--mut);margin-top:6px;line-height:1.4">' +
+              'Patient sees the doctor first. After the consultation, the cashier generates a single consolidated bill for the consultation fee plus any lab tests or medicines ordered.' +
+            '</div>' +
+          '</div>' +
+
+          '<button class="btn" id="saveFlowBtn" style="margin-top:10px;width:auto;padding:10px 20px;font-size:13.5px">Save Billing Workflow</button>' +
+        '</div>';
+
+        Array.prototype.forEach.call(host.querySelectorAll(".flowcard"), function(card){
+          card.onclick = function(){
+            var val = card.getAttribute("data-flow");
+            host.querySelector('input[value="' + val + '"]').checked = true;
+            Array.prototype.forEach.call(host.querySelectorAll(".flowcard"), function(c){
+              c.classList.toggle("selected", c.getAttribute("data-flow") === val);
+            });
+          };
+        });
+
+        var saveFlow = host.querySelector("#saveFlowBtn");
+        if (saveFlow) {
+          saveFlow.onclick = function(){
+            var rad = host.querySelector('input[name="flowRadio"]:checked');
+            var mode = rad ? rad.value : "pay_first";
+            saveFlow.disabled = true; saveFlow.textContent = "Saving…";
+            api("org/update", { method: "POST", body: { orgId: st.orgId, opdBillingMode: mode } }).then(function(r){
+              saveFlow.disabled = false; saveFlow.textContent = "Save Billing Workflow";
+              if (r && r.ok) {
+                if (st.currentOrg) st.currentOrg.opdBillingMode = mode;
+                if (st.opd) st.opd.opdBillingMode = mode;
+                toast("OPD Billing Workflow updated to " + (mode === "pay_first" ? "Pay First (Pre-Paid)" : "Doctor Visit First (Post-Paid)"));
+              } else toast("Failed to save workflow");
+            });
+          };
+        }
+      }
+    }
+
+    function reloadTariff(){
+      Promise.all([
+        api("bill/tariff?orgId=" + encodeURIComponent(st.orgId)),
+        api("members?orgId=" + encodeURIComponent(st.orgId)),
+        api("org?orgId=" + encodeURIComponent(st.orgId))
+      ]).then(function(res){
+        var trfRes = res[0], memRes = res[1], orgRes = res[2];
+        if (trfRes && trfRes.ok) st.tariffItems = trfRes.items || [];
+        if (memRes && memRes.ok) st.docMembers = memRes.members || [];
+        if (orgRes && orgRes.ok) st.currentOrg = orgRes.org || {};
+        renderTab();
+      }).catch(function(){
+        var host = sheet.querySelector("#tAdminContent");
+        if (host) host.innerHTML = '<div class="empty">Could not load tariff data.</div>';
+      });
+    }
+
+    Array.prototype.forEach.call(sheet.querySelectorAll("[data-ttab]"), function(btn){
+      btn.onclick = function(){
+        activeTab = Number(btn.getAttribute("data-ttab"));
+        renderTab();
+      };
+    });
+
+    reloadTariff();
+  }
+
   // ---- NURSE STATION (unassigned pool -> assign to room -> room queue) ----
   var STATUS_LABEL={normal:"Normal",moderate:"Moderate",busy:"Busy",unavailable:"Doctor offline",available:"Available"};
   function waitMin(t){ return t.registeredAt?Math.max(0,Math.round((Date.now()-t.registeredAt)/60000)):0; }
@@ -1270,7 +1767,7 @@
         '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
         '<div class="acts" style="display:flex;gap:6px;margin-top:6px">'+
           (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="flex:1;margin:0">Route to a room <span class="ms sm">chevron_right</span></button>':"")+
-          '<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'"'+(t.unbilledAmount>0?' class="pri"':'')+' style="flex:none">'+billLabel+'</button>'+
+          '<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'" data-unbilled="'+(t.unbilledAmount||0)+'" data-name="'+esc(t.name||"Patient")+'"'+(t.unbilledAmount>0?' class="pri"':'')+' style="flex:none">'+billLabel+'</button>'+
         '</div></div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
     var poolPanel='<div class="pool"><h3>Central routing · '+pool.length+' waiting</h3><div class="rows">'+poolRows+'</div></div>';
@@ -1309,7 +1806,7 @@
         ? ' <span class="chip" style="background:#ecfdf5;color:#059669;font-size:11px;font-weight:700">Paid</span>'
         : ' <span class="chip" style="background:#f1f5f9;color:#64748b;font-size:11px">Unbilled</span>');
     var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
-    b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'"'+(t.unbilledAmount>0?' class="pri"':'')+'>'+billLabel+'</button>');
+    b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'" data-unbilled="'+(t.unbilledAmount||0)+'" data-name="'+esc(t.name||"Patient")+'"'+(t.unbilledAmount>0?' class="pri"':'')+'>'+billLabel+'</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
       '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+'</div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
@@ -1390,7 +1887,9 @@
             .then(function(q){
               // A refused queue add is never shown as added: the patient is registered but has no token.
               if(!q||!q.ok){ toast("Registered "+r.mrn+" but NOT queued: "+((q&&q.message)||(q&&q.error)||"no response")); refresh(); return; }
-              toast("Added - "+r.mrn+(q.ticket&&q.ticket.token?" - token "+q.ticket.token:"")); refresh();
+              toast("Added - "+r.mrn+(q.ticket&&q.ticket.token?" - token "+q.ticket.token:""));
+              if(q.ticket) autoQueueConsultationFee(r.mrn, q.ticket.id, sent && sent.doctorId);
+              refresh();
             },function(){ toast("Registered "+r.mrn+" but NOT queued: the server could not be reached."); });
         }
       });
@@ -1569,8 +2068,8 @@
     sheet.querySelector("#ok").onclick=function(){close();toast("Hospital ready");loadDash();};
   }
 
-  function open(html){ sheet.innerHTML=html; scrim.classList.add("on"); }
-  function close(){ scrim.classList.remove("on"); sheet.innerHTML=""; }
+  function open(html, wide){ if(wide) sheet.classList.add("wide"); else sheet.classList.remove("wide"); sheet.innerHTML=html; scrim.classList.add("on"); }
+  function close(){ sheet.classList.remove("wide"); scrim.classList.remove("on"); sheet.innerHTML=""; }
   scrim.onclick=function(e){ if(e.target===scrim) close(); };
 
   // Preview mode (?mock=1): render the central-routing control with sample data - no auth/network.

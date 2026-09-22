@@ -56,9 +56,15 @@ export function validateTariff(item) {
   /* bed, nursing and visit joined 2026-09-15 (LT-30): charges per day of an inpatient stay, priced by the
    * ward bill (functions/_wardsynq/charge-capture.js). `ward` narrows one to a ward by name; empty means
    * every ward. They are never offered as OPD orders (inv-catalog lists tests and medicines only). */
-  const kind = ["medication", "service", "bed", "nursing", "visit"].indexOf(item.kind) >= 0 ? item.kind : "investigation";
+  const kind = ["consultation", "medication", "service", "bed", "nursing", "visit"].indexOf(item.kind) >= 0 ? item.kind : "investigation";
   const out = { code: String(item.code || "").trim(), name: String(item.name).trim(), kind, price };
   if (kind === "bed" || kind === "nursing" || kind === "visit") out.ward = String(item.ward || "").trim();
+  if (item.doctorId !== undefined) out.doctorId = String(item.doctorId || "").trim();
+  if (item.doctorName !== undefined) out.doctorName = String(item.doctorName || "").trim();
+  if (item.stock !== undefined) out.stock = Math.max(0, Math.round(Number(item.stock) || 0));
+  if (item.unit !== undefined) out.unit = String(item.unit || "").trim();
+  if (item.dosageForm !== undefined) out.dosageForm = String(item.dosageForm || "").trim();
+  if (item.lowStockThreshold !== undefined) out.lowStockThreshold = Math.max(0, Math.round(Number(item.lowStockThreshold) || 0));
   /* GST (gap-claims-gst B; the rules are in functions/_region_in.js gstForLines). Each field is stored only when
    * the caller sends it, so a screen that does not know about GST cannot wipe it on a price change, and sending ""
    * clears it. hsnSac: HSN (goods) or SAC (services), 4, 6 or 8 digits (Notification 78/2020-Central Tax).
@@ -100,7 +106,7 @@ export function validateTariff(item) {
 export function validateOrder(o) {
   if (!o || !String(o.patientId || "").trim()) return { ok: false, error: "patient_required" };
   if (!String(o.name || "").trim()) return { ok: false, error: "name_required" };
-  const kind = (o.kind === "medication") ? "medication" : "investigation";
+  const kind = (o.kind === "medication") ? "medication" : (o.kind === "consultation" || o.kind === "service") ? o.kind : "investigation";
   // ticketId/sessionId are OPTIONAL and carried through untouched. When the doctor raises an order from
   // the EMR they are known, and they are the only thread back to the visit - without them a payment at
   // the cash desk can never be reflected in the doctor's queue, because the billing patient registry

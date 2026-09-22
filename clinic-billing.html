@@ -261,10 +261,30 @@
       if (!box) return;
       if (!r || !r.ok) { box.innerHTML = '<div class="msg">'+ms("error")+'The price list could not be loaded.</div>'; return; }
       var items = r.items || [];
-      if (!items.length) { box.innerHTML = '<div class="msg">'+ms("info")+'The price list is empty. The clinic owner adds items under Admin, Price list.</div>'; return; }
-      box.innerHTML = '<label>Item</label><select id="tItem">'+items.map(function(t){ return '<option value="'+esc(t.id)+'">'+esc(t.name)+' - '+rupees(t.price)+'</option>'; }).join("")+'</select>'+
+      if (!items.length) {
+        box.innerHTML = '<div class="msg" style="line-height:1.5">'+ms("info")+'The price list is empty.<br><br>The clinic owner can configure doctor consultation fees, dispensary medicines, and tests under <b>Tariff & Stock</b> in OPD.<br><br><a href="/opd" class="btn ghost" style="display:inline-block;width:auto;padding:8px 16px;text-decoration:none">'+ms("settings")+' Go to OPD Admin</a></div>';
+        return;
+      }
+      var consItem = items.find(function(t){ return t.kind === "consultation"; });
+      var consBtnHtml = consItem
+        ? '<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--line)">' +
+            '<button class="btn" id="tQuickCons" style="margin:0;width:auto;padding:8px 14px;font-size:13px;background:var(--teal);color:#fff">' + ms("medical_services") + ' Add ' + esc(consItem.name) + ' (' + rupees(consItem.price) + ')</button>' +
+          '</div>'
+        : '';
+      box.innerHTML = consBtnHtml + '<label>Item</label><select id="tItem">'+items.map(function(t){ return '<option value="'+esc(t.id)+'">'+esc(t.name)+' - '+rupees(t.price)+'</option>'; }).join("")+'</select>'+
         '<label>Quantity</label><input id="tQty" type="number" min="1" value="1">'+
         '<button class="btn ghost" id="tAdd">'+ms("add")+'Add to this bill</button>';
+      var qCons = document.getElementById("tQuickCons");
+      if (qCons && consItem) {
+        qCons.onclick = function(){
+          qCons.disabled = true;
+          api("order", { method: "POST", body: { orgId: orgId, patientId: p.id, ticketId: p.ticketId || "", tariffId: consItem.id, qty: 1 } }).then(function(x){
+            if (x && x.ok) { loadPatient(p.id); return; }
+            qCons.disabled = false;
+            document.getElementById("err").textContent = "Could not add consultation fee.";
+          });
+        };
+      }
       document.getElementById("tAdd").onclick = function(){
         var b = this; b.disabled = true;
         api("order", { method:"POST", body:{ orgId:orgId, patientId:p.id, ticketId:p.ticketId||"", tariffId:document.getElementById("tItem").value, qty:Number(document.getElementById("tQty").value)||1 } }).then(function(x){

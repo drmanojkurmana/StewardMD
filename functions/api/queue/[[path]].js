@@ -653,19 +653,27 @@ async function boardForOrg(env, org, date) {
   }
   const out = [];
   let unbilledByPatient = new Map();
+  let paidPatients = new Set();
   try {
     const bQ = await BILL.billingQueue(env, org.id);
     (bQ.orders || []).forEach((o) => {
       if (o.patientId) unbilledByPatient.set(o.patientId, (unbilledByPatient.get(o.patientId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
       if (o.ticketId) unbilledByPatient.set(o.ticketId, (unbilledByPatient.get(o.ticketId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
     });
+    const { rows: paidOrders } = await readAll(env, "q_orders", [{ field: "orgId", value: org.id }, { field: "status", value: "paid" }], 500).catch(() => ({ rows: [] }));
+    (paidOrders || []).forEach((r) => {
+      const f = r.fields || {};
+      if (f.patientId) paidPatients.add(f.patientId);
+      if (f.ticketId) paidPatients.add(f.ticketId);
+    });
   } catch (e) {}
   const annotateTickets = (tickets) => {
     return (tickets || []).map((t) => {
       const pid = t.mrn || t.ghisPatientId || t.id;
       const unbilled = (unbilledByPatient.get(t.id) || 0) + (pid ? (unbilledByPatient.get(pid) || 0) : 0);
+      const isPaid = !unbilled && (paidPatients.has(t.id) || (pid && paidPatients.has(pid)));
       return Object.assign({}, t, {
-        billingStatus: unbilled > 0 ? "unbilled" : "",
+        billingStatus: unbilled > 0 ? "unbilled" : (isPaid ? "paid" : ""),
         unbilledAmount: unbilled
       });
     });
@@ -683,7 +691,18 @@ async function boardForOrg(env, org, date) {
   }
   const pool = await Q.getOrCreatePoolSession(env, org, date);
   const poolTickets = (await Q.listTickets(env, pool.id)).filter((t) => WAITING.indexOf(t.status) > -1);
-  return { mode: org.mode, orgName: effectiveOrgName, orgCode: org.code, hasLogo: hasLogo, thresholds: org.thresholds, rooms: out, pool: annotateTickets(await ticketView(env, orderQueue(poolTickets))), poolSessionId: pool.id };
+  return {
+    mode: org.mode,
+    orgName: effectiveOrgName,
+    orgCode: org.code,
+    hasLogo: hasLogo,
+    thresholds: org.thresholds,
+    opdBillingMode: org.opdBillingMode || "pay_first",
+    defaultConsultationFee: org.defaultConsultationFee || 0,
+    rooms: out,
+    pool: annotateTickets(await ticketView(env, orderQueue(poolTickets))),
+    poolSessionId: pool.id
+  };
 }
 // Org config → OPD connector. Read from env OPD_CONNECTORS (JSON: { "<hospitalId>": "ghis", "*": "..." });
 // native by default. NO hard-coded GHIS org/user id — a hospital is wired to a connector purely by config.

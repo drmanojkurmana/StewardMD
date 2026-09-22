@@ -163,3 +163,74 @@ test("queue router provides orders, tariff, and today's opd patients in bill seg
   assert.match(ROUTER, /opdPatients/, "Router bill queue must return opdPatients");
 });
 
+test("tariff and order validation supports consultation fee and rich metadata", async () => {
+  const { validateTariff, validateOrder } = await import("../functions/_clinic_billing.js");
+  const trf = validateTariff({
+    name: "Consultation - Dr. Rajesh",
+    kind: "consultation",
+    price: 50000,
+    doctorId: "dr1",
+    doctorName: "Dr. Rajesh",
+    stock: 0,
+    dosageForm: "",
+    unit: ""
+  });
+  assert.equal(trf.ok, true);
+  assert.equal(trf.item.kind, "consultation");
+  assert.equal(trf.item.doctorId, "dr1");
+  assert.equal(trf.item.doctorName, "Dr. Rajesh");
+  assert.equal(trf.item.price, 50000);
+
+  const medTrf = validateTariff({
+    name: "Paracetamol 650mg",
+    kind: "medication",
+    price: 3000,
+    stock: 150,
+    dosageForm: "Tab",
+    unit: "strip"
+  });
+  assert.equal(medTrf.ok, true);
+  assert.equal(medTrf.item.kind, "medication");
+  assert.equal(medTrf.item.stock, 150);
+  assert.equal(medTrf.item.dosageForm, "Tab");
+  assert.equal(medTrf.item.unit, "strip");
+
+  const ordCons = validateOrder({ patientId: "P1", name: "Consultation", kind: "consultation", qty: 1, unitPrice: 50000 });
+  assert.equal(ordCons.ok, true);
+  assert.equal(ordCons.order.kind, "consultation");
+
+  const ordSvc = validateOrder({ patientId: "P1", name: "ECG", kind: "service", qty: 1, unitPrice: 25000 });
+  assert.equal(ordSvc.ok, true);
+  assert.equal(ordSvc.order.kind, "service");
+});
+
+test("OPD admin provides Tariff & Stock manager, Quick Pay, and dual billing flows", () => {
+  assert.match(CONSOLE_HTML, /id="tariffBtn"/, "OPD header must include Tariff & Stock button");
+  assert.match(CONSOLE_HTML, /openTariffAdmin/, "OPD console must define openTariffAdmin");
+  assert.match(CONSOLE_HTML, /openQuickPay/, "OPD console must define openQuickPay");
+  assert.match(CONSOLE_HTML, /autoQueueConsultationFee/, "OPD console must define autoQueueConsultationFee");
+  assert.match(CONSOLE_HTML, /Doctor Fees/, "Tariff admin must offer Doctor Fees tab");
+  assert.match(CONSOLE_HTML, /Pharmacy Stock/, "Tariff admin must offer Pharmacy Stock tab");
+  assert.match(CONSOLE_HTML, /Investigations/, "Tariff admin must offer Investigations tab");
+  assert.match(CONSOLE_HTML, /Billing Flow/, "Tariff admin must offer Billing Flow tab");
+  assert.match(CONSOLE_HTML, /Pay First \(Pre-Paid Consultation\)/, "Billing flow offers Pay First option");
+  assert.match(CONSOLE_HTML, /Doctor Visit First \(Post-Paid Consultation\)/, "Billing flow offers Doctor Visit First option");
+});
+
+test("clinic billing station offers 1-click consultation fee and OPD admin link", () => {
+  assert.match(STATION_HTML, /tQuickCons/, "Billing station offers 1-click quick consultation fee button");
+  assert.match(STATION_HTML, /Go to OPD Admin/, "Empty price list directs owner to OPD Admin");
+});
+
+test("org schema preserves opdBillingMode and defaultConsultationFee", async () => {
+  const { org } = await import("../functions/_opd_org.js");
+  const o1 = org({ id: "o1", name: "Clinic 1", opdBillingMode: "doctor_first", defaultConsultationFee: 75000 });
+  assert.equal(o1.opdBillingMode, "doctor_first");
+  assert.equal(o1.defaultConsultationFee, 75000);
+
+  const o2 = org({ id: "o2", name: "Clinic 2" });
+  assert.equal(o2.opdBillingMode, "pay_first", "defaults to pay_first");
+  assert.equal(o2.defaultConsultationFee, 0);
+});
+
+
