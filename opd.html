@@ -807,11 +807,56 @@
   function openWalkin(){
     var opts=st.board.map(function(b){return '<option value="'+esc(b.session.id)+'">'+esc(b.session.doctorName||b.session.doctorUid)+'</option>';}).join("");
     open('<h3>Add walk-in patient</h3>'+
+      '<button type="button" class="ghost" id="wScanNfc" style="width:100%;margin-bottom:12px;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">\uD83D\uDCF1 Read NFC Tag from File</button>'+
       '<input id="wn" placeholder="Patient name" style="margin-bottom:10px">'+
       '<input id="wm" placeholder="Mobile (optional)" inputmode="tel" style="margin-bottom:10px">'+
       (opts?'<select id="wsel">'+opts+'</select>':'<div class="empty">No doctor queue yet - a doctor must sign in first.</div>')+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Add</button></div>');
     sheet.querySelector("#cx").onclick=close;
+    var scanBtn=sheet.querySelector("#wScanNfc");
+    if(scanBtn){
+      scanBtn.onclick=function(){
+        scanBtn.disabled=true;
+        scanBtn.textContent="Hold physical file tag to phone...";
+        if(window.SMD_NFC && window.SMD_NFC.startScan){
+          window.SMD_NFC.startScan(function(tag){
+            var uhid = (window.SMD_NFC.parseTagUhid && window.SMD_NFC.parseTagUhid(tag)) || "";
+            if(!uhid){
+              scanBtn.disabled=false;
+              scanBtn.textContent="\uD83D\uDCF1 Read NFC Tag from File";
+              toast("NFC tag is empty / unassigned. Fill details and save to program this tag.");
+              return;
+            }
+            scanBtn.textContent="✓ Tag read: " + uhid;
+            scanBtn.disabled=false;
+            var inputN = sheet.querySelector("#wn");
+            var inputM = sheet.querySelector("#wm");
+            var found = null;
+            (st.board||[]).forEach(function(b){
+              (b.tickets||[]).forEach(function(t){
+                if(t.mrn === uhid || t.id === uhid) found = t;
+              });
+            });
+            if(found){
+              if(inputN) inputN.value = found.name || "";
+              if(inputM && found.mobile) inputM.value = found.mobile;
+              toast("Loaded patient: " + (found.name || uhid));
+            } else {
+              if(inputN && !inputN.value) inputN.value = uhid;
+              toast("Tag read: " + uhid);
+            }
+          }).catch(function(e){
+            scanBtn.disabled=false;
+            scanBtn.textContent="\uD83D\uDCF1 Read NFC Tag from File";
+            toast("NFC read error: " + (e && e.message ? e.message : e));
+          });
+        } else {
+          scanBtn.disabled=false;
+          scanBtn.textContent="\uD83D\uDCF1 Read NFC Tag from File";
+          toast("NFC reading is not available on this device or browser.");
+        }
+      };
+    }
     var ok=sheet.querySelector("#ok");
     ok.onclick=function(){
       var n=sheet.querySelector("#wn").value.trim(); if(!n){toast("Enter a name");return;}

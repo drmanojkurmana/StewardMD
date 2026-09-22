@@ -219,6 +219,7 @@
 
         '<div class="pr-body">' +
           '<div class="pr-dup" id="prDup" hidden></div>' +
+          '<button type="button" class="pr-btn ghost" data-a="read-nfc" style="width:100%;margin-bottom:14px;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">\uD83D\uDCF1 ' + wTH("ward.reg-read-nfc", "Read NFC Tag from File") + '</button>' +
 
           '<h3 class="pr-sec">' + wTH("ward.reg-patient", "Patient") + "</h3>" +
           field("name", wT("ward.reg-full-name", "Full name"), { req: true, ph: wT("ward.reg-name-example", "e.g. Asha Kumar"), max: 80, auto: "name" }) +
@@ -621,6 +622,39 @@
       if (a === "cancel" || a === "close") return close();
       if (a === "save") return save();
       if (a === "another") { open(opts); return; }
+      if (a === "read-nfc") {
+        var sBtn = b;
+        sBtn.disabled = true;
+        sBtn.textContent = wT("ward.reg-hold-tag", "Hold file tag to phone…");
+        var resetScan = function () { sBtn.disabled = false; sBtn.textContent = "\uD83D\uDCF1 " + wT("ward.reg-read-nfc", "Read NFC Tag from File"); };
+        var NFC = root.SMD_NFC;
+        if (!NFC || typeof NFC.startScan !== "function") {
+          resetScan();
+          if (root.toast) root.toast("NFC reading is not available on this device");
+          return;
+        }
+        NFC.startScan(function (tag) {
+          var uhid = (NFC.parseTagUhid && NFC.parseTagUhid(tag)) || "";
+          if (!uhid) {
+            resetScan();
+            if (root.toast) root.toast("NFC tag is empty / unassigned.");
+            return;
+          }
+          sBtn.textContent = "\u2713 " + uhid;
+          sBtn.disabled = false;
+          var mrnInput = host.querySelector('[data-f="mrn"] input');
+          if (mrnInput) mrnInput.value = uhid;
+          var nameInput = host.querySelector('[data-f="name"] input');
+          if (nameInput && !nameInput.value) nameInput.value = uhid;
+          var followBtn = host.querySelector('[data-f="visitType"] [data-v="followup"]');
+          if (followBtn) followBtn.click();
+          if (root.toast) root.toast("NFC Tag read: " + uhid);
+        }).catch(function (err) {
+          resetScan();
+          if (root.toast) root.toast("NFC read error: " + (err && err.message ? err.message : err));
+        });
+        return;
+      }
       if (a === "write-nfc") return writeNfc(b);
       if (a === "print-label") { try { if (root.openFileLabel) root.openFileLabel(state.doneMrn); } catch (e) {} return; }
       if (a === "dup-continue") { state.confirmDuplicate = true; host.querySelector("#prDup").hidden = true; return save(); }
