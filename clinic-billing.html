@@ -57,10 +57,12 @@
   @keyframes rise{ from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
   @keyframes pop{ 0%{transform:scale(.4);opacity:0} 60%{transform:scale(1.12)} 100%{transform:scale(1);opacity:1} }
   @media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important } }
+  #loBtn{ transition:all .15s ease; border:1px solid var(--line); }
+  #loBtn:hover{ background:var(--red); color:#fff; border-color:var(--red); }
 </style>
 </head>
 <body>
-<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><a class="btn ghost" href="/opd" style="text-decoration:none;margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:auto;margin-right:8px;display:inline-flex;align-items:center;gap:4px"><span class="ms" style="font-size:16px">arrow_back</span> OPD Board</a><span class="tag" id="stnTag" style="margin-left:0">Cashier</span></div></header>
+<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><a class="btn ghost" href="/opd" style="text-decoration:none;margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:auto;margin-right:8px;display:inline-flex;align-items:center;gap:4px"><span class="ms" style="font-size:16px">arrow_back</span> OPD Board</a><span class="tag" id="stnTag" style="margin-left:0">Cashier</span><button class="btn ghost" id="loBtn" title="Sign out of this session" style="margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:8px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;flex-shrink:0"><span class="ms" style="font-size:16px">logout</span> Sign out</button></div></header>
 <main id="app"></main>
 <script>
 (function(){
@@ -76,6 +78,20 @@
   if (tt === "account") tt = "firebase";   // wardsynq.com spells the account sign-in "account" (LT-01)
   var orgId = ""; try { orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
   var cur = null;   // { patient, orders } | { invoice }
+
+  var loBtn = document.getElementById("loBtn");
+  if (loBtn) {
+    loBtn.onclick = function() {
+      try {
+        localStorage.removeItem("smd_opd_staff_tok");
+        localStorage.removeItem("smd_opd_toktype");
+        localStorage.removeItem("smd_opd_hospital");
+        sessionStorage.removeItem("smd_staff_token");
+        if (window.firebase && firebase.auth) firebase.auth().signOut().catch(function(){});
+      } catch (e) {}
+      location.href = "/opd";
+    };
+  }
 
   function ms(n){ return '<span class="ms">'+n+'</span>'; }
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }

@@ -56,12 +56,15 @@
   .brand{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}.brand span{color:var(--tl)}
   .brand .mk{width:22px;height:22px;background:var(--tl);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;flex:none}
   .brand .clogo{height:24px;width:auto;max-width:130px;object-fit:contain}
-  .role{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center}
+  .role{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center;flex-shrink:0}
+  .who-name{max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .pw{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
   .pw .m{width:13px;height:13px;background:var(--mut);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
-  .chip{background:var(--tl-soft);color:var(--tl);border:1px solid var(--tl-border);padding:3px 10px;border-radius:999px;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+  .chip{background:var(--tl-soft);color:var(--tl);border:1px solid var(--tl-border);padding:3px 10px;border-radius:999px;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
   .ghost{background:var(--btn);color:var(--ink);padding:8px 14px;border:1px solid var(--line);font-weight:600;font-size:13.5px}
   .ghost:hover{background:var(--line);border-color:var(--mut)}
+  #lo{display:inline-flex;align-items:center;gap:5px;cursor:pointer;font-weight:700;border-radius:9px;white-space:nowrap;flex-shrink:0;padding:7px 14px;border:1.5px solid var(--line);transition:all .15s ease}
+  #lo:hover{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
   /* login */
   .login{max-width:400px;margin:8vh auto;background:var(--card);border-radius:var(--r);box-shadow:var(--sh-lg);border:1px solid var(--line);padding:28px;animation:rise .38s var(--ease) both}
   .login h1{margin:0 0 4px;font-size:22px;letter-spacing:-.02em}.login p{margin:0 0 18px;color:var(--mut);font-size:14px}
@@ -345,7 +348,18 @@
     }
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
-  function logout(msg){ if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} } st.tok=""; st.tokType=""; st.who=null; localStorage.removeItem(LS_TOK); localStorage.removeItem(LS_TT); renderLogin(msg); }
+  function logout(msg){
+    if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} }
+    st.tok=""; st.tokType=""; st.who=null;
+    try{
+      localStorage.removeItem(LS_TOK);
+      localStorage.removeItem(LS_TT);
+      localStorage.removeItem("smd_opd_staff_tok");
+      localStorage.removeItem("smd_opd_toktype");
+      sessionStorage.removeItem("smd_staff_token");
+    }catch(e){}
+    renderLogin(msg);
+  }
 
   // ---- boot: whoami then board ----
   function boot(){
@@ -366,14 +380,9 @@
         if(list.length===1){ openClinic(list[0]); return; }
         renderClinics(list);
       }); return; }
-      // Station-bound roles open on their own station rather than the read-only queue board. Guarded on
-      // the SERVER's billing switch: the station is inert unless CLINIC_BILLING_ENABLED=1, and redirecting
-      // into a switched-off page left the cashier with nowhere to go at all - they could not fall back,
-      // because the redirect fired first. When it is off, they stay here and are told why.
-      var stationRole=st.who&&(st.who.role==="cashier"||st.who.role==="pharmacy");
-      if(stationRole&&st.who.role==="cashier"&&isWardSynQHospital()){ openWardSynqCashier(); return; }
-      if(stationRole&&st.billingOn){ location.replace(st.who.role==="pharmacy"?"/clinic-billing?station=pharmacy":"/clinic-billing"); return; }
-      if(stationRole&&!st.billingOn){ renderShell('<div class="empty">The billing and pharmacy station is not switched on for this clinic yet.<br>Ask the owner to enable it, then sign in again.</div>'); return; }
+      // All roles (doctor, nurse, cashier, pharmacy, admin, owner) share the common OPD dashboard.
+      // Cashier and pharmacy stations are accessible via the Billing & Pharmacy buttons in the toolbar
+      // or patient ticket Bill actions, without forcibly ejecting staff away from the queue board.
       loadDash();
     }).catch(function(){ renderLogin("Could not reach the server. Check your connection and try again."); });
   }
@@ -457,8 +466,8 @@
   function renderShell(inner){
     var name=st.who?(st.who.name||"Staff"):"", role=st.who?st.who.role:"";
     app.innerHTML='<header><div class="wrap"><div class="brand">Steward<span>MD</span> OPD</div>'+
-      '<div class="role"><span>'+esc(name)+'</span><span class="chip">'+esc(role)+'</span>'+
-      '<button class="ghost" id="lo">Sign out</button></div></div></header>'+
+      '<div class="role"><span class="who-name">'+esc(name)+'</span><span class="chip">'+esc(role)+'</span>'+
+      '<button class="ghost" id="lo" title="Sign out of this session"><span class="ms sm">logout</span> Sign out</button></div></div></header>'+
       '<div class="wrap"><div class="toolbar">'+
         '<div class="grow"><b>OPD Board</b> · <span title="Clinic code - staff use this to sign in">'+esc(st.orgCode||st.hospital)+'</span> · '+esc(st.date)+'</div>'+
         (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="clinics">Clinics</button>':'')+
@@ -1179,7 +1188,10 @@
     var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
       return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
         '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
-        (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="width:100%;margin-left:0;margin-top:4px">Route to a room <span class="ms sm">chevron_right</span></button>':"")+'</div>';
+        '<div class="acts" style="display:flex;gap:6px;margin-top:6px">'+
+          (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="flex:1;margin:0">Route to a room <span class="ms sm">chevron_right</span></button>':"")+
+          '<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(t.smdId||t.mrn||t.id)+'" data-mrn="'+esc(t.mrn||t.smdId||t.id||"")+'" style="flex:none">Bill</button>'+
+        '</div></div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
     var poolPanel='<div class="pool"><h3>Central routing · '+pool.length+' waiting</h3><div class="rows">'+poolRows+'</div></div>';
     // room wall

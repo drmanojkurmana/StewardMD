@@ -217,13 +217,32 @@ try {
   await nav(BASE + "/opd.html");
   await setStorage({ smd_opd_staff_tok: BILLER_TOK, smd_opd_toktype: "staff", smd_opd_hospital: ORG });
   await nav("about:blank"); await nav(BASE + "/opd.html");
-  await step("cashier: lands directly on /clinic-billing, never the ward cashier", async () => {
-    const href = await until(`return location.href.indexOf('/clinic-billing')>-1 ? location.href : null;`, 12000);
-    if (!href) return "landed: " + await ev(`return location.href + ' :: ' + document.body.textContent.slice(0,160);`);
-    const t = await until(`return document.body.textContent.indexOf('Waiting to be billed')>-1 ? 'y' : null;`, 10000);
-    return t === "y" ? true : "billing queue missing: " + await ev(`return document.body.textContent.slice(0,200);`);
+  await step("cashier: lands on the common OPD dashboard with cashier chip and logout button", async () => {
+    const chip = await until(`return (function(){ var c=document.querySelector('.role .chip'); return c && c.textContent.trim()==='cashier' ? 'y' : null; })();`, 12000);
+    if (chip !== 'y') return "role chip not cashier: " + await ev(`return document.body.textContent.slice(0,200);`);
+    const lo = await ev(`return !!document.getElementById('lo');`);
+    if (!lo) return "no logout button on OPD dashboard";
+    const billBtn = await ev(`return !!document.getElementById('billing');`);
+    if (!billBtn) return "no billing button in toolbar";
+    return true;
   });
-  // Clear on the app origin (about:blank has no localStorage): revisit first, then clear, then reload.
+  await step("cashier: toolbar Billing navigates from common dashboard to /clinic-billing", async () => {
+    await click("#billing");
+    const href = await until(`return location.href.indexOf('/clinic-billing')>-1 ? location.href : null;`, 10000);
+    if (!href) return "failed to open billing: " + await ev(`return location.href;`);
+    const hasLogout = await until(`return !!document.getElementById('loBtn') || null;`, 8000);
+    if (!hasLogout) return "no logout button on clinic-billing header";
+    return true;
+  });
+  await step("cashier: sign out from clinic-billing header clears session and returns to /opd", async () => {
+    await click("#loBtn");
+    const backToOpd = await until(`return location.pathname.indexOf('/opd')>-1 ? 'y' : null;`, 10000);
+    if (backToOpd !== 'y') return "did not navigate back to /opd: " + await ev(`return location.href;`);
+    const tokCleared = await ev(`return localStorage.getItem('smd_opd_staff_tok') || '';`);
+    if (tokCleared) return "token not cleared from localStorage: " + tokCleared;
+    return true;
+  });
+  // Re-enter billing station to test PIN sign-in and invoice collection
   await nav(BASE + "/clinic-billing");
   await setStorage({});
   await nav("about:blank"); await nav(BASE + "/clinic-billing");
@@ -258,9 +277,18 @@ try {
   });
 
   // ================= 4. PHARMACY =================
-  await nav(BASE + "/clinic-billing?station=pharmacy");
+  await nav(BASE + "/opd.html");
   await setStorage({ smd_opd_staff_tok: pharm.staff, smd_opd_toktype: "staff", smd_opd_hospital: ORG });
-  await nav("about:blank"); await nav(BASE + "/clinic-billing?station=pharmacy");
+  await nav("about:blank"); await nav(BASE + "/opd.html");
+  await step("pharmacy: lands on common dashboard and navigates via Pharmacy button", async () => {
+    const chip = await until(`return (function(){ var c=document.querySelector('.role .chip'); return c && c.textContent.trim()==='pharmacy' ? 'y' : null; })();`, 12000);
+    if (chip !== 'y') return "role chip not pharmacy: " + await ev(`return document.body.textContent.slice(0,200);`);
+    const lo = await ev(`return !!document.getElementById('lo');`);
+    if (!lo) return "no logout button on OPD dashboard for pharmacy";
+    await click("#pharmacy");
+    const href = await until(`return location.href.indexOf('station=pharmacy')>-1 ? location.href : null;`, 10000);
+    return href ? true : "did not navigate to pharmacy station: " + await ev(`return location.href;`);
+  });
   await step("pharmacy: dispense station lists the paid medication only", async () => {
     const list = await until(`return document.querySelectorAll('[data-disp]').length>0 ? 'y' : null;`, 10000);
     if (list !== "y") return "dispense list empty: " + await ev(`return document.body.textContent.slice(0,200);`);
