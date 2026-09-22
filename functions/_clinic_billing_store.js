@@ -169,10 +169,19 @@ export async function pharmacyQueue(env, orgId) {
 }
 // Hand the medicines over. Guarded by the state machine rather than by the pharmacist remembering:
 // only paid + medication can reach "dispensed", so an unpaid order cannot be released.
-export async function dispenseOrder(env, orgId, orderId, actor) {
+// The station names who the row is for (patientId): a row that names a different patient than
+// the order is refused, so a stale screen can never dispense patient A's drugs to patient B.
+// The handover is recorded as dispensedBy/dispensedAt - the pharmacy act, distinct from the
+// bedside administeredBy/At the eMAR records when the dose is actually given (which this
+// station never writes).
+export async function dispenseOrder(env, orgId, orderId, actor, claim) {
   const d = await fsGet(env, "q_orders/" + orderId).catch(() => null);
   if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
   const o = d.fields;
+  const claimedPatient = claim && claim.patientId ? String(claim.patientId).trim() : "";
+  if (claimedPatient && o.patientId && claimedPatient !== String(o.patientId)) {
+    return { ok: false, error: "patient_mismatch", message: "That order belongs to a different patient. Nothing was dispensed." };
+  }
   if (o.status === "dispensed") return { ok: true, already: true };
   const updates = [wUpdate(env, "q_orders/" + orderId, { status: "dispensed", dispensedAt: Date.now(), dispensedBy: actor || "", updatedAt: Date.now() })];
   if (o.tariffId) {

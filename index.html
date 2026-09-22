@@ -2561,12 +2561,17 @@ window.openExternal = function (u) {
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
-<script src="/patient-register.js?v=preg6-nfc" defer></script>
+<script src="/patient-register.js?v=preg7-sid1" defer></script>
 <script src="/queue.js?v=fdesk4-pulse1-profilex1" defer></script>
 <!-- Unified NFC bridge (native Capacitor NfcPlugin + Web NFC). The file-tag tap listener below
      (smdNfcBoot) routes a tapped folder to the patient's full chart, or offers to write a UHID
      to a blank tag. No-op on browsers without NFC. -->
 <script src="/smd-nfc.js?v=nfc-2" defer></script>
+<!-- Universal Patient Identity (StewardID 2.0 / Ni-Key): the canonical carrier resolver plus the
+     mountable station scanner. patient-register.js mints StewardIDs, ward.js checks revocation at
+     the bedside, and OPD stations route through these; all degrade gracefully when absent. -->
+<script src="/steward-identity-resolver.js?v=sir-1" defer></script>
+<script src="/smd-identity-scanner.js?v=sis-1" defer></script>
 <!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
      medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
      discharge - the whole golden path, through the same server-authoritative routes as before.
@@ -2580,7 +2585,7 @@ window.openExternal = function (u) {
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
 <script src="/ward-labels.js?v=1" defer></script>
-<script src="/ward.js?v=ward75-recall-r7-scribe18" defer></script>
+<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
@@ -2602,7 +2607,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag

@@ -5664,7 +5664,7 @@ export async function onRequest(context) {
         return json(rep ? Object.assign({ ok: true }, rep) : { ok: false, error: "shift_unreadable", message: "Today's takings could not be read. Do not read this as zero collected." }, 200, request);
       }
       if (sub === "pharmacy" && method === "GET") return json({ ok: true, ...(await BILL.pharmacyQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
-      if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid), 200, request);
+      if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid, { patientId: body.patientId || "", encounterId: body.encounterId || "" }), 200, request);
       return json({ ok: false, error: "not_found" }, 404, request);
     }
 

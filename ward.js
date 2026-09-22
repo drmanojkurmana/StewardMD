@@ -9147,7 +9147,8 @@
     var verdict = "";
     if (v) {
       verdict = v.matches
-        ? '<div class="w-sub"><h4>' + ms("check") + wTH("ward.this-band-belongs-to", "This band belongs to {name}", { name: esc(s.name || s.patientId) }, "name") + "</h4></div>"
+        ? '<div class="w-sub"><h4>' + ms("check") + wTH("ward.this-band-belongs-to", "This band belongs to {name}", { name: esc(s.name || s.patientId) }, "name") + "</h4>" +
+          (v.episode && v.episodeWords ? "<p>" + esc(v.episodeWords) + "</p>" : "") + "</div>"
         : '<div class="w-sub w-dead"><h4>' + ms("warning") + wTH("ward.stop-this-band-does-not-match", "STOP - this band does not match {name}", { name: esc(s.name || s.patientId) }, "name") + "</h4>" +
           "<p>" + esc(v.reason || wT("ward.the-scanned-code-is-not-this", "The scanned code is not this patient's active band.")) + "</p>" +
           "<p>" + wTH("ward.do-not-give-anything-to-this", "Do not give anything to this patient until the mismatch is resolved.", null, "", 1) + "</p></div>";
@@ -10558,6 +10559,7 @@
     var s = st.sel; if (!s) return;
     var deviceId = val("wDevId"), assetTag = val("wDevTag"), wristband = val("wDevWrist");
     if (!deviceId || !assetTag || !wristband) { st.err = wT("ward.scan-the-device-s-asset-tag", "Scan the device's asset tag and the patient's wristband, and give the device an ID."); paint(); return; }
+    if (carrierRevoked("wristband", normCarrierValue(wristband))) { st.err = revokedErr(); paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/device-associate", {
       orgId: st.orgId,
@@ -13243,6 +13245,119 @@
     return specimenOutcomeSend(hit.specimenId, "received", "", code);
   }
 
+  /* Universal Patient Identity (StewardID 2.0) at the bedside. The resolver is optional:
+   * without it every check below degrades to the server-side verification that already existed.
+   * NORMALIZE-THEN-CHECK, never compare: the scans themselves still travel to the server
+   * verbatim (ward-ui.test.mjs pins that - the server remains the only judge of the five
+   * rights). What the bedside refuses on its own is a carrier already known to be dead. */
+  function stewardResolver() {
+    try { return (G.StewardIdentityResolver && G.StewardIdentityResolver.normalizeCarrierValue) ? G.StewardIdentityResolver : null; } catch (e) { return null; }
+  }
+  function normCarrierValue(v) {
+    var R = stewardResolver();
+    if (R) { try { return R.normalizeCarrierValue(v); } catch (e) {} }
+    return String(v == null ? "" : v).trim().toUpperCase();
+  }
+  function carrierRevoked(type, value) {
+    var R = stewardResolver();
+    if (!R || !R.isCarrierRevoked) return false;
+    try { return !!R.isCarrierRevoked({ type: type || "", value: value }); } catch (e) { return false; }
+  }
+  function revokedErr() { return wT("ward.scanned-tag-deactivated", "Scanned tag has been deactivated or reported lost"); }
+  /* OPD-vs-IPD disambiguation at the bedside. When the scanned patient has BOTH an active OPD
+   * visit and an IPD admission, the nurse picks which episode the next act belongs to, so
+   * clinical documentation attaches to the correct episode. A single context (or no resolver
+   * with context to give) proceeds untouched - never a question with one answer. */
+  function bedsideOpdLabel(enc) {
+    if (!enc || typeof enc !== "object") return "";
+    return enc.department || enc.dept || enc.clinic || enc.type || "OPD";
+  }
+  function bedsideIpdLabel(adm) {
+    if (!adm || typeof adm !== "object") return "";
+    var w = adm.ward || adm.wardName || "", b = adm.bed || adm.bedNo || adm.bedNumber || "";
+    return [w, b].filter(Boolean).join(" / ");
+  }
+  function bedsideEpisodeWords(choice, opd, ipd) {
+    if (choice === "opd") return wT("ward.bedside-episode-opd", "OPD - {where}", { where: bedsideOpdLabel(opd) || "OPD" });
+    return wT("ward.bedside-episode-ipd", "IPD - {where}", { where: bedsideIpdLabel(ipd) || "IPD" });
+  }
+  /* A body-level sheet (NOT _render: paint() replaces the ward subtree, which would swallow a
+   * choice left open across a repaint). Inline styles only - it must work wherever ward.js runs. */
+  function bedsideContextSheet(opd, ipd, onPick) {
+    var done = false;
+    function pick(choice) {
+      if (done) return; done = true;
+      try { var n = document.getElementById("wBedsideCtx"); if (n && n.parentNode) n.parentNode.removeChild(n); } catch (e) {}
+      try { onPick(choice); } catch (e) {}
+    }
+    try {
+      var old = document.getElementById("wBedsideCtx");
+      if (old && old.parentNode) old.parentNode.removeChild(old);
+      var ov = document.createElement("div");
+      ov.id = "wBedsideCtx";
+      ov.setAttribute("role", "dialog");
+      ov.setAttribute("aria-label", wT("ward.where-do-you-want-to-work", "Where do you want to work?"));
+      ov.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(8,18,22,.55);display:flex;align-items:center;justify-content:center;padding:20px;";
+      var card = document.createElement("div");
+      card.style.cssText = "background:#fff;color:#14202b;border-radius:16px;max-width:420px;width:100%;padding:20px;box-shadow:0 12px 34px rgba(20,32,43,.3);font-family:system-ui,-apple-system,sans-serif;";
+      var h = document.createElement("h3");
+      h.style.cssText = "margin:0 0 6px;font-size:16px;";
+      h.textContent = wT("ward.where-do-you-want-to-work", "Where do you want to work?");
+      var sub = document.createElement("p");
+      sub.style.cssText = "margin:0 0 14px;font-size:13px;color:#5a7184;";
+      sub.textContent = wT("ward.this-patient-has-an-opd-visit-and-an-admission", "This patient has an active OPD visit and an IPD admission. Pick which episode this act belongs to.");
+      var bOpd = document.createElement("button");
+      bOpd.type = "button"; bOpd.setAttribute("data-bedside-pick", "opd");
+      bOpd.style.cssText = "display:block;width:100%;margin:0 0 8px;padding:13px;border:none;border-radius:12px;background:#0e6e63;color:#fff;font-size:15px;font-weight:700;cursor:pointer;";
+      bOpd.textContent = bedsideEpisodeWords("opd", opd, ipd);
+      var bIpd = document.createElement("button");
+      bIpd.type = "button"; bIpd.setAttribute("data-bedside-pick", "ipd");
+      bIpd.style.cssText = "display:block;width:100%;margin:0;padding:13px;border:1px solid #d7dee3;border-radius:12px;background:#eef1f4;color:#14202b;font-size:15px;font-weight:700;cursor:pointer;";
+      bIpd.textContent = bedsideEpisodeWords("ipd", opd, ipd);
+      bOpd.onclick = function () { pick("opd"); };
+      bIpd.onclick = function () { pick("ipd"); };
+      ov.onclick = function (e) { if (e && e.target === ov) pick(null); };
+      card.appendChild(h); card.appendChild(sub); card.appendChild(bOpd); card.appendChild(bIpd);
+      ov.appendChild(card);
+      document.body.appendChild(ov);
+    } catch (e) { pick(null); }
+  }
+  /* What the bedside resolution may draw on: the station's own configuration
+   * (window.SMD_IDENTITY_OPTIONS = { patientStore, activeEncounter, ... }, set by the
+   * station shell or the identity scanner) plus this screen's selected admission, which the
+   * ward always knows. Without either, resolution is context-free and single-context. */
+  function bedsideIdentityOptions() {
+    var opts = {};
+    try {
+      if (G.SMD_IDENTITY_OPTIONS && typeof G.SMD_IDENTITY_OPTIONS === "object") {
+        for (var k in G.SMD_IDENTITY_OPTIONS) opts[k] = G.SMD_IDENTITY_OPTIONS[k];
+      }
+    } catch (e) {}
+    try {
+      if (st.sel && st.sel.encounterId && !opts.activeAdmission) {
+        opts.activeAdmission = { encounterId: st.sel.encounterId, ward: st.sel.ward || "", bed: st.sel.bed || "" };
+      }
+    } catch (e) {}
+    return opts;
+  }
+  /* Resolves the scanned carrier and, only when BOTH an OPD visit and an IPD admission are
+   * active, asks which episode the act belongs to. proceed(choice) with choice "opd", "ipd",
+   * or null (single context / cancelled / no resolver). ipdFallback is this screen's own
+   * selected admission - the ward always knows its own side of the question. */
+  function maybeAskBedsideContext(code, ipdFallback, proceed) {
+    var R = stewardResolver();
+    if (!R || !R.resolvePatientIdentity) { proceed(null); return; }
+    var res = null;
+    try { res = R.resolvePatientIdentity({ type: "wristband", value: code }, bedsideIdentityOptions()); } catch (e) { res = null; }
+    if (!res || res.then || !res.ok) { proceed(null); return; }
+    var enc = res.activeEncounter;
+    var opd = (enc && typeof enc === "object" && (enc.type === "opd" || enc.department || enc.dept || enc.token || enc.ticketId || enc.queueTicket)) ? enc : null;
+    var ipd = (res.activeAdmission && typeof res.activeAdmission === "object") ? res.activeAdmission : (ipdFallback || null);
+    // Only ambiguity is recorded: a single context proceeds exactly as today, with nothing attached.
+    if (opd && ipd) bedsideContextSheet(opd, ipd, function (choice) { proceed(choice, choice ? bedsideEpisodeWords(choice, opd, ipd) : ""); });
+    else proceed(null, "");
+  }
+
   function tagsOpen() {
     if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
     st.view = "tags"; st.tags = null; st.tagVerify = null; paint(); loadTags();
@@ -13261,6 +13376,9 @@
     var s = st.sel; if (!s) return;
     var code = val("wTgScan");
     if (!code) { st.err = wT("ward.scan-or-type-the-code-on", "Scan or type the code on the band."); paint(); return; }
+    /* A carrier already known to be dead is refused before any server call. The code itself
+     * still travels verbatim - the server compares it against the patient's active band. */
+    if (carrierRevoked("wristband", normCarrierValue(code))) { st.err = revokedErr(); paint(); return; }
     st.tagVerify = null; st.busy = true; paint();
     apiPost("/ward/tag-verify", { orgId: st.orgId, patientId: s.patientId, tagType: "wristband", scannedCode: code })
       .then(function (r) {
@@ -13270,6 +13388,15 @@
         if (r && r.ok) st.tagVerify = { matches: !!r.matches, reason: r.reason || null };
         else { st.tagVerify = null; st.err = wT("ward.the-band-could-not-be-checked", "The band could not be checked. Treat it as unchecked."); }
         paint();
+        /* A matching band on a patient with both an OPD visit and an IPD admission: ask which
+         * episode subsequent documentation belongs to, and say the answer on the verdict. */
+        if (r && r.ok && st.tagVerify && st.tagVerify.matches) {
+          try {
+            maybeAskBedsideContext(code, s.encounterId ? { ward: s.ward, bed: s.bed, encounterId: s.encounterId } : null, function (choice, words) {
+              if (choice && st.tagVerify) { st.tagVerify.episode = choice; st.tagVerify.episodeWords = words; paint(); }
+            });
+          } catch (e) {}
+        }
       })
       .catch(function () { st.busy = false; st.tagVerify = null; st.err = wT("ward.the-band-could-not-be-checked", "The band could not be checked. Treat it as unchecked."); paint(); });
   }
@@ -15489,7 +15616,21 @@
     if (d.orderVersion != null) body.expectedOrderVersion = d.orderVersion;
     // The five rights are checked on the server against what was actually scanned. The UI passes the
     // scans through untouched; it does not compare them itself and does not proceed on its own.
-    if (action === "scan") body.scan = { patient: val("wScanP"), drug: val("wScanD") };
+    // The one bedside refusal: a patient carrier already known to be dead never reaches the server.
+    if (action === "scan") {
+      var _scanCode = val("wScanP");
+      if (_scanCode && carrierRevoked("", normCarrierValue(_scanCode))) { st.err = revokedErr(); paint(); return; }
+      body.scan = { patient: val("wScanP"), drug: val("wScanD") };
+      // OPD visit + IPD admission on one patient: ask which episode this act belongs to before
+      // sending. Single-context proceeds exactly as today. (The server ignores `context`.)
+      try {
+        maybeAskBedsideContext(_scanCode, s.encounterId ? { ward: s.ward, bed: s.bed, encounterId: s.encounterId } : null, function (choice) {
+          if (choice) body.scan.context = choice;
+          marSend(action, s, d, body);
+        });
+      } catch (e) { marSend(action, s, d, body); }
+      return;
+    }
     /* Passed through untouched, and only ever passed. The screen does not decide whether a witness is
      * needed - the hospital's high-alert list does, on the server - and it never compares the witness
      * to the nurse. `WITNESS_NOT_INDEPENDENT` is the server's refusal to make. */
@@ -16632,5 +16773,7 @@
     _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo,
     // MaiK Scribe for the ward round note (item 16), exposed for testing.
     _wardScribeOn: wardScribeOn, _wardScribeAppend: wardScribeAppend, _wardScribeRefine: wardScribeRefine,
-    _startWardScribe: startWardScribe, _stopWardScribe: stopWardScribe, _wardScribeInsert: wardScribeInsert };
+    _startWardScribe: startWardScribe, _stopWardScribe: stopWardScribe, _wardScribeInsert: wardScribeInsert,
+    // Bedside Universal Patient Identity (Wave 3), exposed for testing.
+    _bedside: { normalize: normCarrierValue, revoked: carrierRevoked, revokedError: revokedErr, options: bedsideIdentityOptions, askContext: bedsideContextSheet, maybeAsk: maybeAskBedsideContext, episodeWords: bedsideEpisodeWords } };
 })();

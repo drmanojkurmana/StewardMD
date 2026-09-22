@@ -16,6 +16,8 @@
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
+<script src="/steward-identity-resolver.js?v=sir-1"></script>
+<script src="/smd-identity-scanner.js?v=sis-1"></script>
 <style>
   @font-face{ font-family:'Inter Variable'; font-style:normal; font-weight:100 900; font-display:swap; src:url(/assets/fonts/inter-variable.woff2) format('woff2'); }
   @font-face{ font-family:'Material Symbols Rounded'; font-style:normal; font-weight:300 700; font-display:block; src:url(/assets/fonts/material-symbols-rounded.woff2) format('woff2'); }
@@ -161,12 +163,15 @@
       document.getElementById("rf").onclick = pharmacyView;
       return;
     }
+    // The highlight id may be a raw scan (deep link, prefix, lower case): match it canonically too.
+    var hlNorm = "";
+    try { if (window.StewardIdentityResolver && hl) hlNorm = StewardIdentityResolver.normalizeCarrierValue(hl) || ""; } catch (e) {}
     var rows = orders.map(function(o){
-      var sel = hl && o.patientId === hl;
+      var sel = hl && (o.patientId === hl || (hlNorm && o.patientId === hlNorm));
       return '<div class="line"'+(sel ? ' style="outline:2px solid var(--teal);border-radius:12px;background:var(--teal-soft)"' : '')+'><span class="k med">Rx</span>'+
         '<span class="nm">'+esc(o.name)+(o.qty>1?' <small>x'+o.qty+'</small>':'')+
         '<br><small>'+esc(o.patientId||"")+'</small></span>'+
-        '<button class="btn" style="margin:0;width:auto;padding:8px 14px" data-disp="'+esc(o.id)+'">'+ms("check")+'Dispense</button></div>';
+        '<button class="btn" style="margin:0;width:auto;padding:8px 14px" data-disp="'+esc(o.id)+'" data-pat="'+esc(o.patientId||"")+'" data-enc="'+esc(o.encounterId||o.ticketId||"")+'">'+ms("check")+'Dispense</button></div>';
     }).join("");
     app.innerHTML = '<section class="card"><h2>'+ms("medication")+'To dispense <small>('+orders.length+(cap?'+':'')+')</small></h2>'+capNote(cap)+
       rows+'<div class="err" id="err"></div>'+
@@ -175,11 +180,16 @@
     Array.prototype.forEach.call(app.querySelectorAll("[data-disp]"), function(b){
       b.onclick = function(){
         b.disabled = true; b.textContent = "Dispensing…";
-        api("dispense", { method:"POST", body:{ orgId:orgId, orderId:b.getAttribute("data-disp") } }).then(function(r){
+        // The dispense carries who it is for (patientId + encounterId): the server refuses a
+        // row that names a different patient, and records dispensedBy/dispensedAt on the order
+        // itself - the pharmacy handover, distinct from the bedside administeredBy/At the eMAR
+        // records when the dose is actually given.
+        api("dispense", { method:"POST", body:{ orgId:orgId, orderId:b.getAttribute("data-disp"), patientId:b.getAttribute("data-pat")||"", encounterId:b.getAttribute("data-enc")||"" } }).then(function(r){
           if (r && r.ok) { pharmacyView(); return; }
           b.disabled = false; b.innerHTML = ms("check")+"Dispense";
           document.getElementById("err").textContent =
-            (r && r.error === "not_dispensable") ? "That order is not paid yet - send the patient to billing first." : "Could not record the dispense. Try again.";
+            (r && r.error === "not_dispensable") ? "That order is not paid yet - send the patient to billing first." :
+            (r && r.error === "patient_mismatch") ? "That order belongs to a different patient. Nothing was dispensed." : "Could not record the dispense. Try again.";
         });
       };
     });
@@ -437,6 +447,28 @@
   function reviewPatient(uid){
     uid = String(uid == null ? "" : uid).trim();
     if (!uid) return;
+    // Universal Patient Identity: resolve the carrier before reviewing. A revoked tag stops
+    // here with a spoken reason; a verified identity reviews under its canonical id, so the
+    // same patient is always billed under one identity and never gains a duplicate account
+    // from two spellings of one carrier. Anything unresolved falls back to the raw value.
+    try {
+      if (window.StewardIdentityResolver && StewardIdentityResolver.resolvePatientIdentity) {
+        var res = StewardIdentityResolver.resolvePatientIdentity(uid, { station: STATION, orgId: orgId });
+        if (res && res.then) { /* async store: fall through with the raw value */ }
+        else if (res && res.ok === false && res.error === "CARRIER_REVOKED") {
+          lookupView(uid);
+          document.getElementById("err").textContent = "This tag was marked lost or deactivated. Please issue a replacement card.";
+          return;
+        }
+        else if (res && res.ok && res.identityStatus === "verified" && (res.patientId || res.stewardId)) { uid = res.patientId || uid; }
+      }
+    } catch (e) {
+      if (e && e.code === "CARRIER_REVOKED") {
+        lookupView(uid);
+        document.getElementById("err").textContent = "This tag was marked lost or deactivated. Please issue a replacement card.";
+        return;
+      }
+    }
     lookupView(uid);
     loadPatient(uid);
   }

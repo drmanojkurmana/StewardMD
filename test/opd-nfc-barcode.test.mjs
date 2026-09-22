@@ -233,7 +233,7 @@ test("the check-in done card offers 1-touch NFC write (+ File Label on the conso
   assert.match(REG, /data-a="print-label"/);
   assert.match(REG, /root\.openFileLabel/, "the label button exists only where the dialog does");
   assert.match(REG, /var NFC = root\.SMD_NFC/);
-  assert.match(REG, /NFC\.writeTag\(\{ text: mrn, url: "https:\/\/stewardmd\.in\/opd\?uid=" \+ encodeURIComponent\(mrn\) \}\)/);
+  assert.match(REG, /NFC\.writeTag\(\{ text: sid \|\| mrn, url: "https:\/\/stewardmd\.in\/opd\?uid=" \+ encodeURIComponent\(sid \|\| mrn\) \}, \{ verifyReadBack: true \}\)/, "Wave 3: the canonical StewardID (or MRN) with read-back verification");
   assert.match(REG, /Hold tag against phone\.\.\./);
   assert.match(REG, /NFC Tag Written!/);
   assert.match(REG, /Could not write the tag\. Try again\./);

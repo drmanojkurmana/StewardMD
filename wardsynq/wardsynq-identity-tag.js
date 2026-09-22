@@ -64,7 +64,11 @@ let seq = 0;
  */
 function assignTag({ patientId, tagType, code, assignedBy, now } = {}) {
   if (!patientId) throw new IdentityTagError("a tag needs the patient it identifies", "NO_PATIENT");
-  if (!TAG_TYPES.includes(tagType)) throw new IdentityTagError(`tagType must be one of ${TAG_TYPES.join(", ")}`, "BAD_TAG_TYPE");
+  // Wave 2 (Universal Patient Identity): "barcode" is the linear barcode wristband - the same
+  // physical tag "wristband" names. Aliased here so callers specifying either succeed
+  // transparently; TAG_TYPES itself stays exactly ["wristband", "qr", "nfc"].
+  const resolvedType = tagType === "barcode" ? "wristband" : tagType;
+  if (!TAG_TYPES.includes(resolvedType)) throw new IdentityTagError(`tagType must be one of ${TAG_TYPES.join(", ")}`, "BAD_TAG_TYPE");
   const norm = normaliseCode(code);
   if (!norm) throw new IdentityTagError("a tag needs the code that was actually scanned or printed", "NO_CODE");
   if (!assignedBy) throw new IdentityTagError("assigning a tag must name who did it", "NO_ACTOR");
@@ -72,12 +76,12 @@ function assignTag({ patientId, tagType, code, assignedBy, now } = {}) {
   const at = now || new Date().toISOString();
   return {
     id: `tag-${++seq}`,
-    patientId, tagType, code: norm,
+    patientId, tagType: resolvedType, code: norm,
     status: STATUS.ACTIVE,
     assignedBy, assignedAt: at,
     replacesTagId: null,
     endedBy: null, endedAt: null, endedReason: null,
-    history: [{ at, event: "assigned", by: assignedBy, detail: tagType }],
+    history: [{ at, event: "assigned", by: assignedBy, detail: resolvedType }],
   };
 }
 

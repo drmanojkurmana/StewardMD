@@ -245,10 +245,12 @@
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
-<script src="/patient-register.js?v=preg6-nfc" defer></script>
+<script src="/patient-register.js?v=preg7-sid1" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
+<script src="/steward-identity-resolver.js?v=sir-1"></script>
+<script src="/smd-identity-scanner.js?v=sis-1"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -2051,6 +2053,9 @@
   // a tap/scan to the right station with no typing. UID fields checked in order, MRN first.
   function findTicketByUid(uid){
     var key=String(uid==null?"":uid).trim(); if(!key) return null;
+    // Universal Patient Identity: a QR/wedge scan may carry the full /opd deep link or a
+    // prefixed id - reduce it to the canonical id before matching. Best-effort only.
+    try{ if(window.StewardIdentityResolver&&StewardIdentityResolver.normalizeCarrierValue){ var nk=StewardIdentityResolver.normalizeCarrierValue(key); if(nk) key=nk; } }catch(e){}
     var up=key.toUpperCase();
     var same=function(v){ return v!=null&&v!==""&&(String(v)===key||String(v).toUpperCase()===up); };
     var hit=null, i, j;
@@ -2110,9 +2115,13 @@
     uid=String(uid==null?"":uid);
     if(!uid){ toast("Nothing to write."); return Promise.resolve(false); }
     var nfcMod = window.NiKey || window.SMD_NFC;
+    // The desk just issued this carrier: register it so later taps in this session resolve
+    // to this patient (and a later lost-tag report can revoke it). Best-effort only.
+    var regCarrier=function(){ try{ if(window.StewardIdentityResolver&&StewardIdentityResolver.registerCarrier) StewardIdentityResolver.registerCarrier({patientId:uid,stewardId:uid,type:"nfc",value:uid,issuedBy:"frontdesk"}); }catch(e){} };
     if(nfcMod && nfcMod.isSupportedSync && nfcMod.isSupportedSync()){
       toast("Ni-Key: Hold an NFC tag to the device...");
       return nfcMod.writeTag(uid).then(function(){
+        regCarrier();
         toast("Ni-Key tag written. Tap it to verify.");
         return true;
       }, function(e){
@@ -2123,7 +2132,7 @@
     if(!("NDEFReader" in window)){ toast("Ni-Key NFC writing is not available on this device or browser."); return Promise.resolve(false); }
     try{
       var w=new NDEFReader();
-      return w.write(uid).then(function(){ toast("Ni-Key tag written. Tap it to verify."); return true; },
+      return w.write(uid).then(function(){ regCarrier(); toast("Ni-Key tag written. Tap it to verify."); return true; },
         function(e){ toast("Could not write the Ni-Key tag"+(e&&e.message?": "+e.message:"")+". Try another tag."); return false; });
     }catch(e){ toast("Could not write the Ni-Key tag."); return Promise.resolve(false); }
   }
@@ -2199,13 +2208,42 @@
       }catch(err){}
     });
   }
-  // One tap/scan, routed by station: doctor starts (or opens the chart of) the consultation,
-  // nurse opens vitals, pharmacy highlights the dispense row, cashier lands on the bill.
+  // The board as an identity store: today's tickets are the patient records this station
+  // knows, so a tap/scan resolves to a VERIFIED identity (name, queue ticket, OPD visit) with
+  // no network. Resolutions also feed the resolver's offline cache, which the check-in sheet's
+  // Ni-Key read draws on to prefill a returning patient.
+  function boardPatientStore(id){
+    try{
+      var hit=findTicketByUid(id);
+      if(!hit) return null;
+      var t=hit.t||{};
+      return { name:t.name||"", mrn:t.mrn||t.ghisPatientId||"", stewardId:t.stewardId||"",
+        age:t.ageYears!=null?t.ageYears:(t.age!=null?t.age:""), sex:t.sex||t.gender||"",
+        mobile:t.mobile||"", gender:t.sex||t.gender||"", ageYears:t.ageYears!=null?t.ageYears:"",
+        currentQueueTicket:{ ticketId:hit.tid, sessionId:hit.sid, token:t.token, status:t.status },
+        activeEncounter:{ type:"opd", encounterId:t.encounterId||hit.tid, department:t.department||"", token:t.token||"", ticketId:hit.tid, sessionId:hit.sid } };
+    }catch(e){ return null; }
+  }
+  // One tap/scan, routed by station: doctor gets the visit-aware action sheet (start the
+  // consultation, open the chart, or start a linked follow-up), nurse opens vitals pre-linked
+  // to the patient, pharmacy highlights the dispense row, cashier lands on the bill.
   function handleScannedUid(uid){
     uid=String(uid==null?"":uid).trim();
     if(!uid) return;
     var role=st.who&&st.who.role;
     var org=st.orgId||st.hospital||"";
+    // Universal Patient Identity (Wave 3): resolve the carrier before routing. A revoked tag
+    // stops here with a spoken reason; anything unresolved falls back to the raw uid so
+    // routing never depends on the resolver being loaded.
+    var stewardId="", identity=null;
+    try{
+      if(window.StewardIdentityResolver&&StewardIdentityResolver.resolvePatientIdentity){
+        var _r=StewardIdentityResolver.resolvePatientIdentity(uid,{role:role,hospital:st.hospital,orgId:org,patientStore:boardPatientStore});
+        if(_r&&_r.then){ _r=null; }
+        else if(_r&&_r.ok===false&&_r.error==="CARRIER_REVOKED"){ toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."); return; }
+        else if(_r&&_r.ok){ identity=_r; if(_r.identityStatus==="verified") stewardId=_r.stewardId||""; }
+      }
+    }catch(_e){ if(_e&&_e.code==="CARRIER_REVOKED"){ toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."); return; } }
     if(role==="cashier"){ location.href="/clinic-billing?patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
     if(role==="pharmacy"){ location.href="/clinic-billing?station=pharmacy&patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
     var hit=findTicketByUid(uid);
@@ -2214,7 +2252,51 @@
     if(!hit.sid){ toast(nm+" is waiting to be routed - assign a room first."); return; }
     if(role==="nurse"||role==="intern"||role==="resident"||role==="reception"){ openVitals(hit.sid,hit.tid,nm); return; }
     if(hit.t.status==="in_consultation"||hit.t.status==="at_diagnostics"){ openNotes(hit.sid,hit.tid,nm); return; }
+    if(role==="doctor"||isRoomDoctor(hit)){ openDoctorScanSheet(hit,nm,stewardId,identity); return; }
     post("status",{sessionId:hit.sid,ticketId:hit.tid,status:"in_consultation"});
+  }
+  // "Room doctor": the signed-in account is the doctor assigned to the room holding this ticket.
+  function isRoomDoctor(hit){
+    try{
+      if(!hit||!hit.sid) return false;
+      var me=meUid(); if(!me) return false;
+      var rooms=(st.opd&&st.opd.rooms)||[], i, b;
+      for(i=0;i<rooms.length;i++){ if(rooms[i]&&rooms[i].sessionId===hit.sid&&rooms[i].doctorUid&&normDocId(rooms[i].doctorUid)===normDocId(me)) return true; }
+      for(i=0;i<(st.board||[]).length;i++){ b=st.board[i]; if(b&&b.session&&b.session.id===hit.sid&&b.session.doctorUid&&normDocId(b.session.doctorUid)===normDocId(me)) return true; }
+    }catch(e){}
+    return false;
+  }
+  // Doctor desk, Wave 3: a tap/scan on a waiting patient offers the visit-aware actions - the
+  // patient summary plus today's visit status, then Start Consultation (same tap as before),
+  // View Profile (the full chart), or Follow-up Consult (a NEW encounter linked to this one
+  // via parentEncounterId, never overwriting today's notes).
+  function openDoctorScanSheet(hit,nm,stewardId,identity){
+    var t=hit.t||{};
+    var age=(t.ageYears!=null&&t.ageYears!=="")?t.ageYears:(t.age!=null?t.age:"");
+    var demo=(((age===""||age==null)?"":age+"y")+(t.sex?" "+t.sex:"")).trim();
+    var tok=(t.token==null?"":String(t.token));
+    var status=String(t.status||"waiting").replace(/_/g," ");
+    var sid=stewardId||t.stewardId||"";
+    var pid=t.mrn||t.ghisPatientId||t.smdId||t.id||"";
+    open('<h3>'+esc(nm)+'</h3>'+
+      '<p class="t" style="margin:0 0 4px">'+(demo?esc(demo)+" · ":"")+(tok?"Token <b>"+esc(tok)+"</b> · ":"")+'Status: <b>'+esc(status)+"</b></p>"+
+      (sid?'<p class="t" style="margin:0 0 10px">StewardID <b class="mono">'+esc(sid)+"</b></p>":"")+
+      '<button class="btn" id="dsStart" style="width:100%">Start Consultation</button>'+
+      '<button class="ghost" id="dsProfile" style="width:100%;margin-top:8px">View Profile</button>'+
+      '<button class="ghost" id="dsFollow" style="width:100%;margin-top:8px">Follow-up Consult</button>'+
+      '<div class="row2"><button class="cancel" id="dsClose" style="margin:8px 0 0">Close</button></div>');
+    sheet.querySelector("#dsClose").onclick=close;
+    sheet.querySelector("#dsStart").onclick=function(){ close(); post("status",{sessionId:hit.sid,ticketId:hit.tid,status:"in_consultation"}); };
+    sheet.querySelector("#dsProfile").onclick=function(){
+      close();
+      if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:pid,stewardId:sid||pid,mrn:pid,name:nm}); }catch(e){} return; }
+      toast("The full chart opens in the StewardMD app.");
+    };
+    sheet.querySelector("#dsFollow").onclick=function(){
+      close();
+      if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:pid,stewardId:sid||pid,mrn:pid,name:nm,isFollowUp:true,parentEncounterId:t.encounterId||t.episodeId||hit.tid}); }catch(e){} return; }
+      toast("The full chart opens in the StewardMD app.");
+    };
   }
   // A follow-up patient who just walked in with their file: the tag is real but no ticket exists yet.
   // One card queues them for consultation (same station routing as a tap once the ticket exists) or
@@ -2229,6 +2311,13 @@
       '<button class="ghost" id="fChart" style="width:100%;margin-top:8px">Open Full Patient Chart</button>'+
       '<div class="row2"><button class="cancel" id="fClose" style="margin:8px 0 0">Close</button></div>');
     sheet.querySelector("#fClose").onclick=close;
+    // A tag the resolver knows prefills the name, so 1-click queueing stays 1 click.
+    try{
+      if(window.StewardIdentityResolver&&StewardIdentityResolver.resolvePatientIdentity){
+        var _fr=StewardIdentityResolver.resolvePatientIdentity(uid,{role:(st.who&&st.who.role)||"",hospital:st.hospital,orgId:st.orgId,patientStore:boardPatientStore});
+        if(_fr&&!_fr.then&&_fr.ok&&_fr.patient&&_fr.patient.name){ var _fn=sheet.querySelector("#fn"); if(_fn&&!_fn.value) _fn.value=_fr.patient.name; }
+      }
+    }catch(e){}
     sheet.querySelector("#fChart").onclick=function(){
       if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:uid,mrn:uid}); }catch(e){} return; }
       toast("The full chart opens in the StewardMD app.");
@@ -2530,6 +2619,6 @@
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
 <script src="/wardsynq/site/bug-reporter.js?v=4"></script>
-<script src="/ward.js?v=ward75-recall-r7-scribe18" defer></script>
+<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1" defer></script>
 </body>
 </html>

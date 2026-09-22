@@ -279,13 +279,15 @@
   }
   function doneHtml(res) {
     var pending = !!res.pending;
-    /* 1-touch file tagging for a walk-in: program the new UHID onto the physical folder's NFC tag,
-     * and (on the staff console, where openFileLabel exists) print the matching file label. A pending
+    var sid = res.stewardId || "";
+    /* 1-touch full identity package for a walk-in: the canonical StewardID is shown LARGE next to
+     * the MR number, programmed onto the physical folder's Ni-Key NFC tag (with read-back
+     * verification), and printed on the matching file label (staff console only). A pending
      * temporary ID is queue-only - it must never be written to a tag or a label - so both stay hidden. */
     var tagRow = "";
     if (!pending && res.mrn) {
       tagRow = '<div class="pr-actions">' +
-        '<button type="button" class="pr-btn" id="prWriteNfc" data-a="write-nfc" data-mrn="' + esc(res.mrn) + '">&#128241; ' + wTH("ward.reg-write-nfc", "Write NFC Tag") + "</button>" +
+        '<button type="button" class="pr-btn" id="prWriteNfc" data-a="write-nfc" data-mrn="' + esc(res.mrn) + '"' + (sid ? ' data-sid="' + esc(sid) + '"' : "") + '>&#128241; ' + wTH("ward.reg-write-nfc", "Write Ni-Key NFC Tag") + "</button>" +
         ((root && typeof root.openFileLabel === "function")
           ? '<button type="button" class="pr-btn ghost" data-a="print-label">&#127991; ' + wTH("ward.reg-file-label", "File Label") + "</button>"
           : "") +
@@ -295,8 +297,8 @@
       '<div class="pr-card pr-done">' +
         '<div class="pr-tick" aria-hidden="true">&#10003;</div>' +
         '<h2 id="prTitle">' + wTH("ward.reg-name-added", "{name} added", { name: res.name ? esc(res.name) : wTH("ward.reg-patient", "Patient") }) + "</h2>" +
-        '<p class="pr-mrlabel">' + (pending ? wTH("ward.reg-temporary-id", "Temporary ID") : wTH("ward.reg-mr-number", "MR number")) + "</p>" +
-        '<p class="pr-mr">' + esc(res.mrn) + "</p>" +
+        '<p class="pr-mrlabel">' + (sid && !pending ? wTH("ward.reg-stewardid-mr-number", "StewardID &bull; MR Number") : (pending ? wTH("ward.reg-temporary-id", "Temporary ID") : wTH("ward.reg-mr-number", "MR number"))) + "</p>" +
+        '<p class="pr-mr">' + (sid && !pending ? esc(sid) + " &middot; " : "") + esc(res.mrn) + "</p>" +
         (pending
           ? '<p class="pr-warn">' + wTH("ward.reg-temporary-id-warning", "The hospital has not issued an MR number yet. This temporary ID is for the queue only - do not write it on hospital records. It is replaced automatically when the EMR issues the real number.") + "</p>"
           : '<p class="pr-note">' + wTH("ward.reg-write-on-slip", "Write this on the patient's slip.") + "</p>") +
@@ -340,10 +342,18 @@
     function val(id) { var n = q(id); return n ? n.value.trim() : ""; }
 
     function payload() {
+      /* Universal Patient Identity (StewardID 2.0): every registration carries the canonical
+       * StewardID. Minted once per sheet (not per call) so a retry never invents a second one;
+       * a Ni-Key read that resolved an existing patient reuses theirs instead. Without the
+       * resolver bundle the field stays blank and the server owns identity as before. */
+      if (!state.stewardId && root.StewardIdentityResolver && root.StewardIdentityResolver.mintStewardId) {
+        try { state.stewardId = root.StewardIdentityResolver.mintStewardId(); } catch (e) { state.stewardId = ""; }
+      }
       return {
         name: val("name"), mobile: val("mobile"), gender: state.gender,
         ageYears: val("ageYears"), ageMonths: val("ageMonths"),
         visitType: state.visitType, mrn: val("mrn"),
+        stewardId: state.stewardId || "",
         abhaNumber: val("abhaNumber"), abhaAddress: val("abhaAddress"),
         abhaConsent: !!(q("abhaConsent") && q("abhaConsent").checked),
         address: val("address"), district: val("district"), state: val("state"), pincode: val("pincode"),
@@ -519,9 +529,15 @@
 
     function showDuplicate(dup) {
       var d = host.querySelector("#prDup");
+      dup = dup || {};
       d.hidden = false;
+      /* The duplicate may have matched on StewardID, MRN or phone: name every identifier the
+       * server sent back so the desk can find the existing record instead of guessing. */
+      var ids = [(dup.stewardId ? "StewardID " + dup.stewardId : ""), (dup.mrn || ""), (dup.mobile || "")].filter(Boolean).join("  ·  ");
+      var who = dup.mrn || dup.stewardId || dup.mobile || "";
       d.innerHTML = "<b>" + wTH("ward.reg-mobile-already-registered", "This mobile is already registered") + "</b>" +
-        "<span>" + wTH("ward.reg-duplicate-explain", "{mrn} is using this number. If this is the same person, open their record instead. If it is a different patient sharing the phone, continue.", { mrn: esc(dup.mrn) }) + "</span>" +
+        "<span>" + wTH("ward.reg-duplicate-explain", "{mrn} is using this number. If this is the same person, open their record instead. If it is a different patient sharing the phone, continue.", { mrn: esc(who) }) + "</span>" +
+        (ids ? '<span class="pr-dupids" lang="en">' + esc(ids) + "</span>" : "") +
         '<button type="button" class="pr-btn ghost" data-a="dup-continue">' + wTH("ward.reg-different-patient", "This is a different patient") + "</button>";
       d.scrollIntoView({ block: "nearest" });
     }
@@ -536,7 +552,8 @@
       Promise.resolve(opts.submit(sent)).then(function (r) {
         if (r && r.ok) {
           state.doneMrn = r.mrn || "";
-          host.innerHTML = doneHtml({ mrn: r.mrn, pending: r.pending, name: val("name"), abhaLink: r.abhaLink });
+          state.doneStewardId = r.stewardId || sent.stewardId || "";
+          host.innerHTML = doneHtml({ mrn: r.mrn, stewardId: state.doneStewardId, pending: r.pending, name: val("name"), abhaLink: r.abhaLink });
           // The answers travel with the result so the caller queues the patient in the department chosen.
           try { if (opts.onAdded) opts.onAdded(r, sent); } catch (e) {}
           return;
@@ -578,13 +595,18 @@
     function onHash() { close(); }
     function close() { host.className = ""; host.innerHTML = ""; try { root.removeEventListener("hashchange", onHash); } catch (e) {} }
 
-    /* Programs the new UHID onto the physical folder's NFC tag: plain text (every phone camera and
-     * wedge reader takes it) plus the /opd deep link. The button narrates each step; a failure leaves
+    /* Programs the canonical StewardID (falling back to the MR number when the record has no
+     * StewardID yet) onto the physical folder's Ni-Key NFC tag: plain text (every phone camera and
+     * wedge reader takes it) plus the /opd deep link, with read-back verification so a half-written
+     * tag is reported instead of handed over. The button narrates each step; a failure leaves
      * it tappable so the desk can retry with another tag. Never fires without an MR number. */
     function writeNfc(btn) {
       var mrn = "";
       try { mrn = btn.getAttribute("data-mrn") || ""; } catch (e) {}
       mrn = mrn || state.doneMrn || "";
+      var sid = "";
+      try { sid = (btn && btn.getAttribute("data-sid")) || ""; } catch (e) {}
+      sid = sid || state.doneStewardId || "";
       if (!mrn || !btn) return;
       var NFC = root.SMD_NFC;
       if (!NFC || typeof NFC.writeTag !== "function") {
@@ -593,7 +615,14 @@
       }
       btn.disabled = true;
       btn.textContent = wT("ward.reg-nfc-hold-tag", "Hold tag against phone...");
-      NFC.writeTag({ text: mrn, url: "https://stewardmd.in/opd?uid=" + encodeURIComponent(mrn) }).then(function () {
+      NFC.writeTag({ text: sid || mrn, url: "https://stewardmd.in/opd?uid=" + encodeURIComponent(sid || mrn) }, { verifyReadBack: true }).then(function () {
+        /* The desk just issued this carrier: register it so a later tap in this session resolves
+         * to this patient (and a later lost-tag report can revoke it). Best-effort only. */
+        try {
+          if (root.StewardIdentityResolver && root.StewardIdentityResolver.registerCarrier) {
+            root.StewardIdentityResolver.registerCarrier({ patientId: sid || mrn, stewardId: sid || mrn, type: "nfc", value: sid || mrn, issuedBy: "frontdesk" });
+          }
+        } catch (e) {}
         btn.disabled = false;
         btn.textContent = "\u2713 " + wT("ward.reg-nfc-written", "NFC Tag Written!");
       }, function () {
@@ -640,8 +669,36 @@
             if (root.toast) root.toast("Ni-Key tag is empty / unassigned.");
             return;
           }
+          /* Universal Patient Identity: resolve the tag to a canonical record first. A revoked
+           * tag stops here; an existing patient prefills the sheet (and is a follow-up, reusing
+           * their StewardID so this registration never mints a duplicate identity). An unknown
+           * tag keeps the fast path: stamp the id and queue as follow-up. */
+          var hit = null;
+          try {
+            if (root.StewardIdentityResolver && root.StewardIdentityResolver.resolvePatientIdentity) {
+              var res = root.StewardIdentityResolver.resolvePatientIdentity({ type: "nfc", value: uhid });
+              if (res && !res.then && res.ok === false && res.error === "CARRIER_REVOKED") {
+                resetScan();
+                if (root.toast) root.toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card.");
+                return;
+              }
+              if (res && !res.then && res.ok && res.patient) hit = res;
+            }
+          } catch (e) { hit = null; }
           sBtn.textContent = "\u2713 " + uhid;
           sBtn.disabled = false;
+          if (hit && hit.patient) {
+            var p = hit.patient;
+            state.stewardId = hit.stewardId || uhid;
+            if (p.name && q("name") && !q("name").value) q("name").value = p.name;
+            if ((p.mobile || p.phone) && q("mobile") && !q("mobile").value) q("mobile").value = p.mobile || p.phone;
+            if ((p.ageYears || p.age) && q("ageYears") && !q("ageYears").value) q("ageYears").value = p.ageYears || p.age;
+            var g = String(p.gender || p.sex || "").toLowerCase();
+            if (g === "female" || g === "male" || g === "other") {
+              var gb = host.querySelector('[data-seg="gender"] [data-v="' + g + '"]');
+              if (gb) gb.click();
+            }
+          }
           var mrnInput = host.querySelector('[data-f="mrn"] input');
           if (mrnInput) mrnInput.value = uhid;
           var nameInput = host.querySelector('[data-f="name"] input');
@@ -661,7 +718,7 @@
         return;
       }
       if (a === "write-nfc") return writeNfc(b);
-      if (a === "print-label") { try { if (root.openFileLabel) root.openFileLabel(state.doneMrn); } catch (e) {} return; }
+      if (a === "print-label") { try { if (root.openFileLabel) root.openFileLabel(state.doneMrn, state.doneStewardId); } catch (e) {} return; }
       if (a === "dup-continue") { state.confirmDuplicate = true; host.querySelector("#prDup").hidden = true; return save(); }
       if (a === "more") {
         var panel = host.querySelector("#prOpt"), on = panel.hidden;
