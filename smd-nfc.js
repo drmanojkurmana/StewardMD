@@ -411,6 +411,13 @@
           isListening = true;
           return { listening: true, mode: "web" };
         } catch (e) {
+          var isDenied = (e && (e.name === "NotAllowedError" || e.name === "SecurityError" || /permission.*denied/i.test(e.message || "")));
+          if (isDenied) {
+            var err = new Error("NFC permission was denied. Tap 🔒 in your browser address bar → Site Settings → set NFC to Allow.");
+            err.name = "NotAllowedError";
+            err.code = "PERMISSION_DENIED";
+            throw err;
+          }
           throw new Error("Web NFC scan failed: " + (e.message || e));
         }
       }
@@ -473,8 +480,19 @@
         if (url) {
           records.push({ recordType: "url", data: url });
         }
-        await writer.write(records.length === 1 && text ? text : { records: records });
-        return { success: true, text: text, url: url };
+        try {
+          await writer.write(records.length === 1 && text ? text : { records: records });
+          return { success: true, text: text, url: url };
+        } catch (e) {
+          var isDenied = (e && (e.name === "NotAllowedError" || e.name === "SecurityError" || /permission.*denied/i.test(e.message || "")));
+          if (isDenied) {
+            var err = new Error("NFC permission was denied. Tap 🔒 in your browser address bar → Site Settings → set NFC to Allow.");
+            err.name = "NotAllowedError";
+            err.code = "PERMISSION_DENIED";
+            throw err;
+          }
+          throw e;
+        }
       }
 
       return Promise.reject(new Error("NFC writing is not available on this device or browser."));

@@ -7,7 +7,7 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Permissions-Policy: geolocation=(), camera=(self), microphone=(self), payment=()
+  Permissions-Policy: geolocation=(), camera=(self), microphone=(self), payment=(), nfc=(self)
 
 # The CliniX video shim is the ONE page that must be framable cross-origin. The native app is a
 # Capacitor WebView whose origin is capacitor://localhost, so the site-wide X-Frame-Options

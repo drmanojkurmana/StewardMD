@@ -651,7 +651,12 @@
           if (root.toast) root.toast("Ni-Key Tag read: " + uhid);
         }).catch(function (err) {
           resetScan();
-          if (root.toast) root.toast("Ni-Key NFC read error: " + (err && err.message ? err.message : err));
+          var msg = (err && err.message) ? err.message : String(err || "");
+          if (/permission.*denied/i.test(msg) || (err && (err.name === "NotAllowedError" || err.code === "PERMISSION_DENIED"))) {
+            if (root.toast) root.toast("NFC permission denied. Tap 🔒 in address bar → Site Settings → set NFC to Allow.");
+            return;
+          }
+          if (root.toast) root.toast("Ni-Key NFC read error: " + msg);
         });
         return;
       }

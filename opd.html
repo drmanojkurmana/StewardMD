@@ -849,7 +849,12 @@
           }).catch(function(e){
             scanBtn.disabled=false;
             scanBtn.textContent="\uD83D\uDCF1 Ni-Key: Read NFC Tag from File";
-            toast("Ni-Key NFC read error: " + (e && e.message ? e.message : e));
+            var msg = (e && e.message) ? e.message : String(e || "");
+            if (/permission.*denied/i.test(msg) || (e && (e.name === "NotAllowedError" || e.code === "PERMISSION_DENIED"))) {
+              toast("NFC permission denied. Tap 🔒 in address bar → Site Settings → set NFC to Allow.");
+              return;
+            }
+            toast("Ni-Key NFC read error: " + msg);
           });
         } else {
           scanBtn.disabled=false;
