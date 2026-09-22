@@ -246,6 +246,8 @@
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
 <script src="/patient-register.js?v=preg5-abdm" defer></script>
+<script src="/pglog-qr.js?v=pgqr1"></script>
+<script src="/barcode128.js?v=bc128-1"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -475,7 +477,7 @@
         st.opd=r;
         if(r.orgName) st.orgName=r.orgName;
         if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
-        renderNurseStation(r); if(!st.pulse) loadPulse(); return;
+        renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); return;
       }
       if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
@@ -488,7 +490,7 @@
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
       if(!r||!r.ok){ renderShell('<div class="empty">'+(r&&r.error==="forbidden"?"You do not have access to this hospital.":"Could not load the board.")+'</div>'); return; }
-      st.board=r.board||[]; renderBoard(); if(!st.pulse) loadPulse();
+      st.board=r.board||[]; renderBoard(); consumePendingScan(); if(!st.pulse) loadPulse();
     });
   }
 
@@ -706,6 +708,7 @@
     if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // out to diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');
+    b.push('<button data-a="label" data-s="'+s.id+'" data-t="'+t.id+'">Label</button>');
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
     var billLabel = (t.unbilledAmount > 0) ? ("Bill ₹" + Math.round(t.unbilledAmount / 100)) : "Bill";
     var billChip = (t.unbilledAmount > 0)
@@ -741,6 +744,7 @@
         else if(a==="remove") openRemove(sid,tid,btn.getAttribute("data-n"));
         else if(a==="notes") openNotes(sid,tid,btn.getAttribute("data-n"));
         else if(a==="vitals") openVitals(sid,tid,btn.getAttribute("data-n"));
+        else if(a==="label") openFileLabel(tid,sid);
         else if (a === "bill") {
           var mrn = btn.getAttribute("data-mrn") || btn.getAttribute("data-smd") || tid;
           var unbilledAmt = Number(btn.getAttribute("data-unbilled")) || 0;
@@ -1929,6 +1933,7 @@
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
+    b.push('<button data-a="label" data-s="'+s.id+'" data-t="'+t.id+'">Label</button>');
     var billLabel = (t.unbilledAmount > 0) ? ("Bill ₹" + Math.round(t.unbilledAmount / 100)) : "Bill";
     var billChip = (t.unbilledAmount > 0)
       ? ' <span class="chip" style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:700">₹' + Math.round(t.unbilledAmount/100) + ' unbilled</span>'
@@ -1971,6 +1976,167 @@
       var vitals={sbp:bps,dbp:bpd,pulse:g("vpr"),temp:g("vtemp"),tempUnit:"F",spo2:g("vspo2"),rr:g("vrr"),weight:g("vwt"),note:note};
       post("timeline",{sessionId:sid,ticketId:tid,kind:"vitals",text:p.join(" · "),vitals:vitals});
     };
+  }
+  // ---- FILE LABEL / STICKER + 1-TOUCH TAP-SCAN ---------------------------------------
+  // Clinics paste a physical NFC tag onto the patient file and print the same UID as a Code128
+  // barcode + QR on the label. This dialog prints/writes; the background listeners below route
+  // a tap/scan to the right station with no typing. UID fields checked in order, MRN first.
+  function findTicketByUid(uid){
+    var key=String(uid==null?"":uid).trim(); if(!key) return null;
+    var up=key.toUpperCase();
+    var same=function(v){ return v!=null&&v!==""&&(String(v)===key||String(v).toUpperCase()===up); };
+    var hit=null, i, j;
+    var consider=function(t,sid){
+      if(hit||!t) return;
+      if(same(t.mrn)||same(t.ghisPatientId)||same(t.smdId)||same(t.id)||same(t.token)) hit={t:t,sid:sid||null,tid:t.id};
+    };
+    for(i=0;i<(st.board||[]).length&&!hit;i++){ var b=st.board[i], ts=(b&&b.tickets)||[];
+      for(j=0;j<ts.length&&!hit;j++) consider(ts[j],b.session&&b.session.id); }
+    if(st.opd){
+      var pool=st.opd.pool||[];
+      for(j=0;j<pool.length&&!hit;j++) consider(pool[j],null);
+      var rooms=st.opd.rooms||[];
+      for(i=0;i<rooms.length&&!hit;i++){ var rt=(rooms[i]&&rooms[i].tickets)||[];
+        for(j=0;j<rt.length&&!hit;j++) consider(rt[j],rooms[i]&&rooms[i].sessionId); }
+    }
+    return hit;
+  }
+  function openFileLabel(ticketId,sid){
+    var hit=findTicketByUid(ticketId);
+    if(!hit){ toast("That patient is no longer on today's board."); return; }
+    var t=hit.t;
+    var uid=t.mrn||t.ghisPatientId||t.smdId||t.id||"";
+    var clinic=st.orgName||(st.who&&st.who.orgName)||st.orgCode||"Clinic";
+    var tokenNo=(t.token==null?"":String(t.token));
+    var tokenLabel=tokenNo?("#"+(/^\d+$/.test(tokenNo)?("0000"+tokenNo).slice(-4):tokenNo)):"";
+    var age=(t.ageYears!=null&&t.ageYears!=="")?t.ageYears:(t.age!=null?t.age:"");
+    var ageSex=(((age===""||age==null)?"":age+"y")+(t.sex?" "+t.sex:"")).trim()||"-";
+    var barHtml, qrHtml;
+    try{ barHtml=(window.SMD_BARCODE&&SMD_BARCODE.toSvg(uid,{height:56}))||'<div class="t">Barcode unavailable.</div>'; }
+    catch(e){ barHtml='<div class="t">Barcode unavailable for this ID.</div>'; }
+    try{ qrHtml=(window.SMD_PGLOG_QR&&SMD_PGLOG_QR.toSvg(uid,{scale:4}))||'<div class="t">QR unavailable.</div>'; }
+    catch(e){ qrHtml='<div class="t">QR unavailable for this ID.</div>'; }
+    open('<style>@media print{body>*:not(#scrim){display:none!important;}'+
+      '#scrim{position:static!important;background:none!important;display:block!important;opacity:1!important;visibility:visible!important;}'+
+      '#scrim .sheet{transform:none!important;box-shadow:none!important;border:none!important;max-width:none!important;max-height:none!important;}'+
+      '#fileLabel .noprint{display:none!important;}}</style>'+
+      '<div id="fileLabel" style="text-align:center">'+
+      '<div style="font-weight:800;font-size:15px">'+esc(clinic)+'</div>'+
+      (tokenLabel?'<div style="font:800 26px ui-monospace,monospace;margin:2px 0">Token '+esc(tokenLabel)+'</div>':'')+
+      '<div style="font-weight:700;font-size:17px;margin-top:2px">'+esc(t.name||"Patient")+'</div>'+
+      '<div class="t" style="margin:2px 0 8px">'+esc(ageSex)+' · '+esc(st.date||"")+' · MRN '+esc(uid)+'</div>'+
+      '<div style="display:flex;gap:12px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin:6px 0">'+
+      '<div><div style="font-size:11px;color:var(--mut);margin-bottom:2px">BARCODE</div>'+barHtml+
+      '<div style="font:700 13px ui-monospace,monospace;margin-top:2px">'+esc(uid)+'</div></div>'+
+      '<div><div style="font-size:11px;color:var(--mut);margin-bottom:2px">QR</div>'+qrHtml+'</div></div>'+
+      '<button class="ghost" id="flNfc" style="width:100%;margin-top:10px">Write NFC Tag</button>'+
+      '<div class="row2 noprint"><button class="cancel" id="flClose">Close</button>'+
+      '<button class="btn" id="flPrint" style="margin:0">Print Label / Sticker</button></div></div>',true);
+    sheet.querySelector("#flClose").onclick=close;
+    sheet.querySelector("#flPrint").onclick=function(){ window.print(); };
+    sheet.querySelector("#flNfc").onclick=function(){ writeNfcTag(uid); };
+  }
+  // Writes the UID onto a blank NFC tag held to the device. Plain-text payload: every phone
+  // camera and wedge reader takes it with no app. Fails spoken, never silent.
+  function writeNfcTag(uid){
+    uid=String(uid==null?"":uid);
+    if(!uid){ toast("Nothing to write."); return Promise.resolve(false); }
+    if(!("NDEFReader" in window)){ toast("NFC writing is not available on this device or browser."); return Promise.resolve(false); }
+    try{
+      var w=new NDEFReader();
+      return w.write(uid).then(function(){ toast("Tag written. Tap it to verify."); return true; },
+        function(e){ toast("Could not write the tag"+(e&&e.message?": "+e.message:"")+". Try another tag."); return false; });
+    }catch(e){ toast("Could not write the tag."); return Promise.resolve(false); }
+  }
+  // Text out of an NDEF record. RTD-TEXT payloads open with a status byte + language code, so a
+  // raw decode would hand routing "enSMD-..." - skip that prefix, then take the UID-shaped run.
+  function nfcScanText(rec){
+    try{
+      var d=rec&&rec.data;
+      if(typeof d==="string") return d.trim();
+      var bytes=null;
+      if(d instanceof DataView) bytes=new Uint8Array(d.buffer,d.byteOffset,d.byteLength);
+      else if(d instanceof ArrayBuffer) bytes=new Uint8Array(d);
+      if(!bytes||!bytes.length) return "";
+      var off=0;
+      if(rec.recordType==="text"||rec.recordType==="urn:nfc:wkt:T") off=1+(bytes[0]&63);
+      var s="";
+      try{ s=new TextDecoder().decode(bytes.subarray(off)); }
+      catch(e){ s=String.fromCharCode.apply(null,Array.prototype.slice.call(bytes.subarray(off))); }
+      var m=/[A-Za-z0-9][A-Za-z0-9\-_]{2,63}/.exec(s||"");
+      return m?m[0]:"";
+    }catch(e){ return ""; }
+  }
+  // Background NFC read: a tapped file tag routes with no typing. scan() without a gesture may
+  // refuse on some browsers - that only means taps wait for a foreground write, never an error.
+  var nfcListening=false;
+  function startNfcListener(){
+    if(nfcListening||!("NDEFReader" in window)) return;
+    try{
+      var r=new NDEFReader();
+      var p=r.scan();
+      if(p&&p.then) p.then(function(){ nfcListening=true; },function(){});
+      else nfcListening=true;
+      r.onreading=function(ev){
+        try{
+          var recs=(ev&&ev.message&&ev.message.records)||[];
+          for(var i=0;i<recs.length;i++){ var v=nfcScanText(recs[i]); if(v){ handleScannedUid(v); return; } }
+        }catch(e){}
+      };
+    }catch(e){}
+  }
+  // Background wedge-scanner read: USB/Bluetooth scanners type fast (<45ms between keys) and end
+  // with Enter. Keystrokes landing in a field belong to the field (the billing lookup's own Enter
+  // already looks the patient up), so only body-level bursts count as scans.
+  var scanBuf="", scanLast=0, scanTimer=null, scanListening=false;
+  function startScannerListener(){
+    if(scanListening) return; scanListening=true;
+    document.addEventListener("keydown",function(e){
+      try{
+        if(!e||e.ctrlKey||e.metaKey||e.altKey) return;
+        if(e.key==="Enter"){
+          if(scanBuf.length>=3){ var v=scanBuf; scanBuf=""; handleScannedUid(v); e.preventDefault(); }
+          else scanBuf="";
+          return;
+        }
+        if(e.key&&e.key.length===1){
+          var t=e.target, tag=t&&t.tagName;
+          if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT"||(t&&t.isContentEditable)){ scanBuf=""; return; }
+          var now=Date.now();
+          if(now-scanLast>45) scanBuf="";
+          scanLast=now; scanBuf+=e.key;
+          if(scanBuf.length>80) scanBuf=scanBuf.slice(-80);
+          if(scanTimer) clearTimeout(scanTimer);
+          scanTimer=setTimeout(function(){ scanBuf=""; },150);
+        }
+      }catch(err){}
+    });
+  }
+  // One tap/scan, routed by station: doctor starts (or opens the chart of) the consultation,
+  // nurse opens vitals, pharmacy highlights the dispense row, cashier lands on the bill.
+  function handleScannedUid(uid){
+    uid=String(uid==null?"":uid).trim();
+    if(!uid) return;
+    var role=st.who&&st.who.role;
+    var org=st.orgId||st.hospital||"";
+    if(role==="cashier"){ location.href="/clinic-billing?patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
+    if(role==="pharmacy"){ location.href="/clinic-billing?station=pharmacy&patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
+    var hit=findTicketByUid(uid);
+    if(!hit){ toast("No queue entry for "+uid+" on today's board."); return; }
+    var nm=hit.t.name||"Patient";
+    if(!hit.sid){ toast(nm+" is waiting to be routed - assign a room first."); return; }
+    if(role==="nurse"||role==="intern"||role==="resident"||role==="reception"){ openVitals(hit.sid,hit.tid,nm); return; }
+    if(hit.t.status==="in_consultation"||hit.t.status==="at_diagnostics"){ openNotes(hit.sid,hit.tid,nm); return; }
+    post("status",{sessionId:hit.sid,ticketId:hit.tid,status:"in_consultation"});
+  }
+  // ?scan=UID deep link (NFC tools / QR side-channel): consumed once the board has rendered, so
+  // tickets resolve; the cashier/pharmacy paths need no board and route immediately.
+  var pendingScan=null;
+  try{ pendingScan=new URLSearchParams(location.search||"").get("scan")||null; }catch(e){ pendingScan=null; }
+  function consumePendingScan(){
+    if(!pendingScan) return;
+    var v=pendingScan; pendingScan=null;
+    try{ handleScannedUid(v); }catch(e){}
   }
   function openAssignRoom(tid){
     var pt=((st.opd&&st.opd.pool)||[]).filter(function(x){return x.id===tid;})[0]||{};
@@ -2202,6 +2368,10 @@
   function close(){ sheet.classList.remove("wide"); scrim.classList.remove("on"); sheet.innerHTML=""; }
   scrim.onclick=function(e){ if(e.target===scrim) close(); };
 
+  // 1-touch tap/scan runs on every station, preview included: background NFC read plus the
+  // USB/Bluetooth wedge-scanner burst listener. Both no-op where unsupported.
+  try{ startNfcListener(); }catch(e){}
+  try{ startScannerListener(); }catch(e){}
   // Preview mode (?mock=1): render the central-routing control with sample data - no auth/network.
   // The admin capabilities below are COSMETIC: every request is authorised independently on the
   // server, so nothing here can read or write real data. A banner says so, because the Staff /
@@ -2226,6 +2396,7 @@
         {id:"p1",name:"John Peter",mrnLast4:"3341",department:"Cardiology",priority:0,registeredAt:nm-4*60000},
         {id:"p2",name:"Fatima Begum",mrnLast4:"9021",department:"General",priority:2,registeredAt:nm-18*60000},
         {id:"p3",name:"Vikram Rao",mrnLast4:"6655",department:"Dermatology",priority:0,registeredAt:nm-2*60000}]});
+    consumePendingScan();
     return;
   }
   // Entry: a StewardMD account (Firebase) persists in the SDK; wait for it. Staff sessions use the stored token.

@@ -13,6 +13,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>try{ firebase.initializeApp({ apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain:"stewardmd-498ec.firebaseapp.com", projectId:"stewardmd-498ec", appId:"1:911280405587:web:d09038e15e98d69dc79aa6" }); }catch(e){}</script>
+<script src="/pglog-qr.js?v=pgqr1"></script>
+<script src="/barcode128.js?v=bc128-1"></script>
 <style>
   @font-face{ font-family:'Inter Variable'; font-style:normal; font-weight:100 900; font-display:swap; src:url(/assets/fonts/inter-variable.woff2) format('woff2'); }
   @font-face{ font-family:'Material Symbols Rounded'; font-style:normal; font-weight:300 700; font-display:block; src:url(/assets/fonts/material-symbols-rounded.woff2) format('woff2'); }
@@ -143,12 +145,14 @@
           (r && r.error === "billing_disabled" ? "The pharmacy station is not switched on for this clinic yet." : "Could not load the dispense list.")+'</div></section>';
         return;
       }
-      renderPharmacy((r.orders)||[], r.truncated ? r.cap : 0);
+      // A tap/scan arrival carries its patient (?patientId=) so the owed row reads highlighted.
+      var hl = P.get("patientId") || P.get("patient") || P.get("scan") || "";
+      renderPharmacy((r.orders)||[], r.truncated ? r.cap : 0, hl);
     });
   }
   // More waiting than one screen reads: said plainly, so the list is never taken for everything owed.
   function capNote(cap){ return cap ? '<div class="msg">'+ms("warning")+'Showing the first '+cap+' only. More are waiting than this list can show; dispense these and refresh.</div>' : ""; }
-  function renderPharmacy(orders, cap){
+  function renderPharmacy(orders, cap, hl){
     if (!orders.length) {
       app.innerHTML = '<section class="card"><h2>'+ms("done_all")+'Nothing to dispense</h2>'+
         '<div class="msg">Every paid medicine has been handed over.</div>'+
@@ -157,7 +161,8 @@
       return;
     }
     var rows = orders.map(function(o){
-      return '<div class="line"><span class="k med">Rx</span>'+
+      var sel = hl && o.patientId === hl;
+      return '<div class="line"'+(sel ? ' style="outline:2px solid var(--teal);border-radius:12px;background:var(--teal-soft)"' : '')+'><span class="k med">Rx</span>'+
         '<span class="nm">'+esc(o.name)+(o.qty>1?' <small>x'+o.qty+'</small>':'')+
         '<br><small>'+esc(o.patientId||"")+'</small></span>'+
         '<button class="btn" style="margin:0;width:auto;padding:8px 14px" data-disp="'+esc(o.id)+'">'+ms("check")+'Dispense</button></div>';
@@ -418,13 +423,81 @@
       try { document.getElementById("shiftReportBtn").style.display = "none"; } catch(e){}   // dispensing never sees takings
       pharmacyView(); return;
     }
-    var initPt = P.get("patient") || P.get("patientId") || P.get("ticketId");
+    var initPt = P.get("scan") || P.get("patient") || P.get("patientId") || P.get("ticketId");
     if (initPt) {
-      lookupView(initPt);
-      loadPatient(initPt);
+      reviewPatient(initPt);
       return;
     }
     lookupView();
+  }
+
+  // ---- 1-touch tap/scan: an NFC tap or wedge-scanner burst selects the patient instantly,
+  // opening their unbilled orders and the payment review sheet. Same path as a deep link.
+  function reviewPatient(uid){
+    uid = String(uid == null ? "" : uid).trim();
+    if (!uid) return;
+    lookupView(uid);
+    loadPatient(uid);
+  }
+  function nfcScanText(rec){
+    try {
+      var d = rec && rec.data;
+      if (typeof d === "string") return d.trim();
+      var bytes = null;
+      if (d instanceof DataView) bytes = new Uint8Array(d.buffer, d.byteOffset, d.byteLength);
+      else if (d instanceof ArrayBuffer) bytes = new Uint8Array(d);
+      if (!bytes || !bytes.length) return "";
+      var off = 0;
+      if (rec.recordType === "text" || rec.recordType === "urn:nfc:wkt:T") off = 1 + (bytes[0] & 63);
+      var s = "";
+      try { s = new TextDecoder().decode(bytes.subarray(off)); }
+      catch (e) { s = String.fromCharCode.apply(null, Array.prototype.slice.call(bytes.subarray(off))); }
+      var m = /[A-Za-z0-9][A-Za-z0-9\-_]{2,63}/.exec(s || "");
+      return m ? m[0] : "";
+    } catch (e) { return ""; }
+  }
+  var billNfcOn = false;
+  function startNfcListener(){
+    if (billNfcOn || !("NDEFReader" in window)) return;
+    try {
+      var r = new NDEFReader();
+      var p = r.scan();
+      if (p && p.then) p.then(function(){ billNfcOn = true; }, function(){});
+      else billNfcOn = true;
+      r.onreading = function(ev){
+        try {
+          var recs = (ev && ev.message && ev.message.records) || [];
+          for (var i = 0; i < recs.length; i++) { var v = nfcScanText(recs[i]); if (v) { reviewPatient(v); return; } }
+        } catch (e) {}
+      };
+    } catch (e) {}
+  }
+  // USB/Bluetooth wedge scanners type fast (<45ms between keys) and end with Enter. Keystrokes
+  // landing in the lookup field belong to the field (its own Enter already loads the patient),
+  // so only body-level bursts count as scans.
+  var billScanBuf = "", billScanLast = 0, billScanTimer = null, billScanOn = false;
+  function startScannerListener(){
+    if (billScanOn) return; billScanOn = true;
+    document.addEventListener("keydown", function(e){
+      try {
+        if (!e || e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.key === "Enter") {
+          if (billScanBuf.length >= 3) { var v = billScanBuf; billScanBuf = ""; reviewPatient(v); e.preventDefault(); }
+          else billScanBuf = "";
+          return;
+        }
+        if (e.key && e.key.length === 1) {
+          var t = e.target, tag = t && t.tagName;
+          if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) { billScanBuf = ""; return; }
+          var now = Date.now();
+          if (now - billScanLast > 45) billScanBuf = "";
+          billScanLast = now; billScanBuf += e.key;
+          if (billScanBuf.length > 80) billScanBuf = billScanBuf.slice(-80);
+          if (billScanTimer) clearTimeout(billScanTimer);
+          billScanTimer = setTimeout(function(){ billScanBuf = ""; }, 150);
+        }
+      } catch (err) {}
+    });
   }
 
   // ---- boot ----
@@ -483,6 +556,11 @@
   } else {
     start();
   }
+
+  // 1-touch tap/scan runs on every station state, signed in or not (an unauthenticated scan
+  // simply fails closed at the API with the usual message). Both no-op where unsupported.
+  try { startNfcListener(); } catch (e) {}
+  try { startScannerListener(); } catch (e) {}
 })();
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
