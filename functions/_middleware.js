@@ -237,6 +237,7 @@ export async function onRequest(context) {
       // console error once the blanket asset 404 below swallows them. Exactly these files.
       url.pathname === "/barcode128.js" ||
       url.pathname === "/pglog-qr.js" ||
+      url.pathname === "/smd-nfc.js" ||
       // Self-hosted fonts (Inter Variable body text + Material Symbols Rounded icon font, both
       // @font-face'd by every PUBLIC_PAGE: opd/opd-display/queue/subscribe). Public, non-sensitive
       // font files - not app code - same reasoning as the brand-image allowlist below. Missing this

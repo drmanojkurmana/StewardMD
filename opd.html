@@ -248,6 +248,7 @@
 <script src="/patient-register.js?v=preg5-abdm" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
+<script src="/smd-nfc.js?v=nfc-1"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -2041,6 +2042,16 @@
   function writeNfcTag(uid){
     uid=String(uid==null?"":uid);
     if(!uid){ toast("Nothing to write."); return Promise.resolve(false); }
+    if(window.SMD_NFC && window.SMD_NFC.isSupportedSync && window.SMD_NFC.isSupportedSync()){
+      toast("Hold an NFC tag to the device...");
+      return window.SMD_NFC.writeTag(uid).then(function(){
+        toast("Tag written. Tap it to verify.");
+        return true;
+      }, function(e){
+        toast("Could not write the tag"+(e&&e.message?": "+e.message:"")+". Try another tag.");
+        return false;
+      });
+    }
     if(!("NDEFReader" in window)){ toast("NFC writing is not available on this device or browser."); return Promise.resolve(false); }
     try{
       var w=new NDEFReader();
@@ -2071,7 +2082,15 @@
   // refuse on some browsers - that only means taps wait for a foreground write, never an error.
   var nfcListening=false;
   function startNfcListener(){
-    if(nfcListening||!("NDEFReader" in window)) return;
+    if(nfcListening) return;
+    if(window.SMD_NFC && window.SMD_NFC.isSupportedSync && window.SMD_NFC.isSupportedSync()){
+      window.SMD_NFC.startScan(function(tag){
+        var v=(tag&&(tag.text||tag.uid))||"";
+        if(v) handleScannedUid(v);
+      }).then(function(){ nfcListening=true; },function(){});
+      return;
+    }
+    if(!("NDEFReader" in window)) return;
     try{
       var r=new NDEFReader();
       var p=r.scan();

@@ -55,6 +55,9 @@
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <!-- Post notifications (Android 13+) for medical-update push -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- NFC support for reading and writing physical patient file tags across OPD stations -->
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
 
     <queries>
         <intent>
