@@ -839,6 +839,30 @@ export async function onRequest(context) {
   const seg = parts[0] || "", sub = parts[1] || "";
 
   if (method === "GET" && seg === "ready") return json({ ok: true, enabled: queueEnabled(env), configured: isQueueConfigured(env), documentStorage: await documentStorageProbe(env) }, 200, request);
+
+  // When deployed under an auxiliary domain/project (e.g. wardsynq.com) without direct Firebase service account credentials,
+  // proxy the queue request upstream to stewardmd.in where the service account and databases are configured.
+  if (!env.FIREBASE_SERVICE_ACCOUNT && url.hostname.includes("wardsynq")) {
+    const target = new URL(`https://stewardmd.in${url.pathname}${url.search}`);
+    const h = new Headers(request.headers);
+    h.set("host", "stewardmd.in");
+    const init = {
+      method: request.method,
+      headers: h,
+      body: request.method !== "GET" && request.method !== "HEAD" ? await request.clone().arrayBuffer() : undefined,
+      redirect: "follow"
+    };
+    try {
+      const res = await fetch(target.toString(), init);
+      const rh = new Headers(res.headers);
+      const cors = corsHeaders(request);
+      Object.keys(cors).forEach((k) => rh.set(k, cors[k]));
+      return new Response(res.body, { status: res.status, headers: rh });
+    } catch (err) {
+      return json({ ok: false, error: "upstream_proxy_error", message: err.message }, 502, request);
+    }
+  }
+
   if (!queueEnabled(env)) return json({ ok: false, error: "disabled" }, 404, request);
 
   try {
@@ -5568,8 +5592,8 @@ export async function onRequest(context) {
       // re-checks every mutation; this only tells the UI what to offer.
       if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; orgOwner = !!(az.ok && az.owner); }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
-      let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
+      let orgCode = ""; const o = orgId ? await ORG.getOrg(env, orgId) : null; if (o) orgCode = o.code || "";
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, mode: (o && o.mode) || "native", smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
         // UI hints for Remove hospital only; POST /org/delete re-checks both.
         ...(orgOwner ? { orgOwner: true } : {}), ...(actor.isOwner === true ? { platformOwner: true } : {}), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
     }

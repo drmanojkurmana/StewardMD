@@ -12,11 +12,37 @@ const root = process.argv[2] || join(dirname(fileURLToPath(import.meta.url)), ".
 const port = Number(process.argv[3] || 8799);
 const TYPES = { ".html": "text/html", ".js": "application/javascript", ".mjs": "application/javascript", ".css": "text/css", ".png": "image/png", ".webp": "image/webp", ".json": "application/json", ".ico": "image/x-icon", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
 
+import https from "node:https";
+
 http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
+  if (p.startsWith("/api/")) {
+    const proxyReq = https.request(`https://wardsynq.com${req.url}`, {
+      method: req.method,
+      headers: { ...req.headers, host: "wardsynq.com" }
+    }, (proxyRes) => {
+      res.writeHead(proxyRes.statusCode, proxyRes.headers);
+      proxyRes.pipe(res);
+    });
+    proxyReq.on("error", (e) => {
+      res.writeHead(502, { "content-type": "application/json" });
+      res.end(JSON.stringify({ ok: false, error: "proxy_error", message: e.message }));
+    });
+    req.pipe(proxyReq);
+    return;
+  }
   if (p === "/") p = "/index.html";
-  const fp = join(root, normalize(p).replace(/^(\.\.[/\\])+/, ""));
+  let fp = join(root, normalize(p).replace(/^(\.\.[/\\])+/, ""));
   readFile(fp, (err, data) => {
+    if (err && !extname(p)) {
+      const htmlFp = fp + ".html";
+      readFile(htmlFp, (err2, data2) => {
+        if (err2) { res.writeHead(404); res.end("404"); return; }
+        res.writeHead(200, { "content-type": "text/html", "cache-control": "no-store, must-revalidate" });
+        res.end(data2);
+      });
+      return;
+    }
     if (err) { res.writeHead(404); res.end("404"); return; }
     // no-store so the test harness always sees the current working tree (defeats Chrome's cache)
     res.writeHead(200, { "content-type": TYPES[extname(fp)] || "application/octet-stream", "cache-control": "no-store, must-revalidate" });

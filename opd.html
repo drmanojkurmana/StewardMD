@@ -56,12 +56,15 @@
   .brand{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}.brand span{color:var(--tl)}
   .brand .mk{width:22px;height:22px;background:var(--tl);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;flex:none}
   .brand .clogo{height:24px;width:auto;max-width:130px;object-fit:contain}
-  .role{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center}
+  .role{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center;flex-shrink:0}
+  .who-name{max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .pw{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
   .pw .m{width:13px;height:13px;background:var(--mut);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
-  .chip{background:var(--tl-soft);color:var(--tl);border:1px solid var(--tl-border);padding:3px 10px;border-radius:999px;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+  .chip{background:var(--tl-soft);color:var(--tl);border:1px solid var(--tl-border);padding:3px 10px;border-radius:999px;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
   .ghost{background:var(--btn);color:var(--ink);padding:8px 14px;border:1px solid var(--line);font-weight:600;font-size:13.5px}
   .ghost:hover{background:var(--line);border-color:var(--mut)}
+  #lo{display:inline-flex;align-items:center;gap:5px;cursor:pointer;font-weight:700;border-radius:9px;white-space:nowrap;flex-shrink:0;padding:7px 14px;border:1.5px solid var(--line);transition:all .15s ease}
+  #lo:hover{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
   /* login */
   .login{max-width:400px;margin:8vh auto;background:var(--card);border-radius:var(--r);box-shadow:var(--sh-lg);border:1px solid var(--line);padding:28px;animation:rise .38s var(--ease) both}
   .login h1{margin:0 0 4px;font-size:22px;letter-spacing:-.02em}.login p{margin:0 0 18px;color:var(--mut);font-size:14px}
@@ -227,6 +230,7 @@
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
+<link rel="stylesheet" href="/ward.css">
 <script src="/patient-register.js?v=preg5-abdm" defer></script>
 </head>
 <body>
@@ -257,9 +261,13 @@
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
   function fbAuth(){ try{ return (window.firebase&&firebase.auth)?firebase.auth():null; }catch(e){ return null; } }
   function fbToken(){ var a=fbAuth(); var u=a&&a.currentUser; return (u&&u.getIdToken)?u.getIdToken().catch(function(){return "";}):Promise.resolve(""); }
+  function queueApiUrl(path){
+    var base = (location.hostname.indexOf("wardsynq") > -1) ? "https://stewardmd.in/api/queue/" : "/api/queue/";
+    return base + String(path || "").replace(/^\/+/, "");
+  }
   function api(path,opts){
     opts=opts||{}; var h=opts.headers||{}; h["Content-Type"]="application/json";
-    var send=function(){ return fetch("/api/queue/"+path,{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined}).then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});}); };
+    var send=function(){ return fetch(queueApiUrl(path),{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined}).then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});}); };
     if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });
     if(st.tok) h["X-Staff-Token"]=st.tok;   // GHIS token OR StewardMD staff session (server tries both)
     return send();
@@ -304,14 +312,14 @@
     id=id.toLowerCase();   // staff IDs + emails are case-insensitive; the doctor app stores them lowercase, and mobile keyboards auto-capitalize - so normalize to match
     if(!hasAt && !codeTyped){err("Enter your clinic code (or sign in with your email).");return;}
     err("Signing in…");
-    var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
+    var url=isEmail?queueApiUrl("auth/email"):queueApiUrl("auth/pin");
     var body=isEmail?{email:id,password:pw}:{clinicCode:codeTyped,identity:id,pin:pw};
     fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
       // Two-step sign-in: the PIN/password was right; ask for the phone's code and pass the answer through.
       if(!r||r.error!=="mfa_required") return r;
       var code=""; try{ code=prompt((r.message||"Enter the 6-digit code from your authenticator app.")+"\n\nLost your phone? Enter a backup code instead.")||""; }catch(e){}
       if(!code.trim()) return {cancelled:true};
-      return fetch("/api/queue/auth/mfa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
+      return fetch(queueApiUrl("auth/mfa"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
     }).then(function(r){
       if(r&&r.cancelled){ err("Sign-in cancelled."); return; }
       if(r&&(r.error==="wrong_code"||r.error==="challenge_expired")){ err(r.error==="wrong_code"?"That code did not match. Sign in again and use the newest code.":"That took too long. Sign in again."); return; }
@@ -340,7 +348,18 @@
     }
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
-  function logout(msg){ if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} } st.tok=""; st.tokType=""; st.who=null; localStorage.removeItem(LS_TOK); localStorage.removeItem(LS_TT); renderLogin(msg); }
+  function logout(msg){
+    if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} }
+    st.tok=""; st.tokType=""; st.who=null;
+    try{
+      localStorage.removeItem(LS_TOK);
+      localStorage.removeItem(LS_TT);
+      localStorage.removeItem("smd_opd_staff_tok");
+      localStorage.removeItem("smd_opd_toktype");
+      sessionStorage.removeItem("smd_staff_token");
+    }catch(e){}
+    renderLogin(msg);
+  }
 
   // ---- boot: whoami then board ----
   function boot(){
@@ -361,21 +380,33 @@
         if(list.length===1){ openClinic(list[0]); return; }
         renderClinics(list);
       }); return; }
-      // Station-bound roles open on their own station rather than the read-only queue board. Guarded on
-      // the SERVER's billing switch: the station is inert unless CLINIC_BILLING_ENABLED=1, and redirecting
-      // into a switched-off page left the cashier with nowhere to go at all - they could not fall back,
-      // because the redirect fired first. When it is off, they stay here and are told why.
-      var stationRole=st.who&&(st.who.role==="cashier"||st.who.role==="pharmacy");
-      if(stationRole&&st.billingOn){ location.replace(st.who.role==="pharmacy"?"/clinic-billing?station=pharmacy":"/clinic-billing"); return; }
-      if(stationRole&&!st.billingOn){ renderShell('<div class="empty">The billing and pharmacy station is not switched on for this clinic yet.<br>Ask the owner to enable it, then sign in again.</div>'); return; }
+      // All roles (doctor, nurse, cashier, pharmacy, admin, owner) share the common OPD dashboard.
+      // Cashier and pharmacy stations are accessible via the Billing & Pharmacy buttons in the toolbar
+      // or patient ticket Bill actions, without forcibly ejecting staff away from the queue board.
       loadDash();
     }).catch(function(){ renderLogin("Could not reach the server. Check your connection and try again."); });
   }
   // ---- multi-clinic manager: one StewardMD account can own several clinics (open / add / delete) ----
   function wardsynqOrg(){ var w=""; try{ w=localStorage.getItem("smd_opd_workplace")||""; }catch(e){} return w.indexOf("wardsynq:")===0?w.slice(9):""; }
+  /* WardSynQ hospital OPDs bill through the hospital's unified OPD + IPD cashier (ward.js), not the
+   * standalone clinic cashier. Personal clinics keep /clinic-billing. A clinic is ONLY a WardSynQ
+   * Inpatient Hospital when the SERVER says so on whoami (mode "wardsynq" with a real hospital id):
+   * never from the hostname, nor from a stored workplace, both of which misrouted personal clinics
+   * (mode "native", e.g. SMD-6TEQZM) into the inpatient cashier that looks for admitted bed stays. */
+  function isWardSynQHospital(){
+    return !!(st.who&&st.who.mode==="wardsynq"&&st.who.hospitalId&&st.who.hospitalId!=="manual");
+  }
+  function openWardSynqCashier(mrn){
+    if(window.WARD&&window.WARD.open){ window.WARD.open({orgId:st.orgId,act:"cashier",mrn:mrn||"",returnToOpd:true}); return; }
+    toast("Hospital Cashier loading…");
+    var poll=setInterval(function(){
+      if(window.WARD&&window.WARD.open){ clearInterval(poll); window.WARD.open({orgId:st.orgId,act:"cashier",mrn:mrn||"",returnToOpd:true}); }
+    },100);
+    setTimeout(function(){ clearInterval(poll); },4000);
+  }
   /* The role is hospital-scoped: an account's whoami without a hospital is its global role, which hid
    * the admin controls from a hospital admin. Ask again for the opened hospital, as shell.js does. */
-  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id);
+  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; st.currentOrg=c; if(c.id) localStorage.setItem(LS_HOSP,c.id);
     if(c.code) try{ localStorage.setItem("smd_opd_clinic_code", c.code); }catch(e){}
     api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){ if(r&&r.ok) st.who=r; },function(){}).then(function(){ loadDash(); }); }
   function openClinics(){
@@ -435,8 +466,8 @@
   function renderShell(inner){
     var name=st.who?(st.who.name||"Staff"):"", role=st.who?st.who.role:"";
     app.innerHTML='<header><div class="wrap"><div class="brand">Steward<span>MD</span> OPD</div>'+
-      '<div class="role"><span>'+esc(name)+'</span><span class="chip">'+esc(role)+'</span>'+
-      '<button class="ghost" id="lo">Sign out</button></div></div></header>'+
+      '<div class="role"><span class="who-name">'+esc(name)+'</span><span class="chip">'+esc(role)+'</span>'+
+      '<button class="ghost" id="lo" title="Sign out of this session"><span class="ms sm">logout</span> Sign out</button></div></div></header>'+
       '<div class="wrap"><div class="toolbar">'+
         '<div class="grow"><b>OPD Board</b> · <span title="Clinic code - staff use this to sign in">'+esc(st.orgCode||st.hospital)+'</span> · '+esc(st.date)+'</div>'+
         (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="clinics">Clinics</button>':'')+
@@ -446,6 +477,8 @@
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
+        '<button class="ghost" id="billing">Billing</button>'+
+        '<button class="ghost" id="pharmacy">Pharmacy</button>'+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+
       // The OPD's own figures, above the board they summarise. Filled by paintPulse when it arrives.
@@ -460,6 +493,24 @@
     var rms=document.getElementById("rooms"); if(rms) rms.onclick=openRoomsAdmin;
     var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
     var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
+    var bll = document.getElementById("billing");
+    if (bll) {
+      bll.onclick = function () {
+        if (isWardSynQHospital()) openWardSynqCashier();
+        else location.href = "/clinic-billing";
+      };
+    }
+    var phm = document.getElementById("pharmacy");
+    if (phm) {
+      phm.onclick = function () {
+        if (isWardSynQHospital()) {
+          if (window.WARD && window.WARD.open) window.WARD.open({ orgId: st.orgId, act: "inventoryboard", returnToOpd: true });
+          else toast("Hospital Pharmacy loading…");
+        } else {
+          location.href = "/clinic-billing?station=pharmacy";
+        }
+      };
+    }
   }
   function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); }
 
@@ -599,9 +650,9 @@
     if(!consult&&can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');   // an in-consultation patient isn't queued -> assign always failed; hide it
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // reroute from the room back to the waiting hall (in_consultation -> waiting)
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
-    // Remove a mistaken / duplicate / wrongly-routed patient (soft cancel → off the board, audit kept).
-    if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');   // nurse records BP/temp/SpO2 etc. onto the encounter timeline
+    if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
+    b.push('<button data-a="bill" data-t="' + t.id + '" data-smd="' + esc(t.smdId || t.mrn || t.id) + '" data-mrn="' + esc(t.mrn || t.smdId || t.id || "") + '">Bill</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
       '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
@@ -625,6 +676,14 @@
         else if(a==="remove") openRemove(sid,tid,btn.getAttribute("data-n"));
         else if(a==="notes") openNotes(sid,tid,btn.getAttribute("data-n"));
         else if(a==="vitals") openVitals(sid,tid,btn.getAttribute("data-n"));
+        else if (a === "bill") {
+          var mrn = btn.getAttribute("data-mrn") || btn.getAttribute("data-smd") || tid;
+          if (isWardSynQHospital()) {
+            openWardSynqCashier(mrn);
+          } else {
+            location.href = "/clinic-billing?patientId=" + encodeURIComponent(mrn);
+          }
+        }
       };
     });
   }
@@ -1129,7 +1188,10 @@
     var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
       return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
         '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
-        (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="width:100%;margin-left:0;margin-top:4px">Route to a room <span class="ms sm">chevron_right</span></button>':"")+'</div>';
+        '<div class="acts" style="display:flex;gap:6px;margin-top:6px">'+
+          (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="flex:1;margin:0">Route to a room <span class="ms sm">chevron_right</span></button>':"")+
+          '<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(t.smdId||t.mrn||t.id)+'" data-mrn="'+esc(t.mrn||t.smdId||t.id||"")+'" style="flex:none">Bill</button>'+
+        '</div></div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
     var poolPanel='<div class="pool"><h3>Central routing · '+pool.length+' waiting</h3><div class="rows">'+poolRows+'</div></div>';
     // room wall
@@ -1159,6 +1221,7 @@
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
+    b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(t.smdId||t.mrn||t.id)+'" data-mrn="'+esc(t.mrn||t.smdId||t.id||"")+'">Bill</button>');   // personal clinic -> /clinic-billing?patientId=, hospital -> ward cashier (see wireRowActions)
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
       '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
@@ -1412,5 +1475,6 @@
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
 <script src="/wardsynq/site/bug-reporter.js?v=4"></script>
+<script src="/ward.js?v=ward75-recall-r7-scribe18" defer></script>
 </body>
 </html>

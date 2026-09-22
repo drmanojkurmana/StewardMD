@@ -99,10 +99,11 @@ test("an intern can now register a walk-in, but still cannot triage", () => {
 });
 
 /* ---------------------------------------------------------------- cashier landing */
-test("the cashier is not redirected into a station the server has switched off", () => {
+test("everyone shares the common dashboard and has sign out buttons on both opd and billing", () => {
   assert.match(CONSOLE_HTML, /st\.billingOn/, "the console must know the server's billing switch");
-  assert.match(CONSOLE_HTML, /stationRole&&st\.billingOn/, "redirect only when the station is actually on");
-  assert.match(CONSOLE_HTML, /stationRole&&!st\.billingOn/, "otherwise explain, do not strand");
+  assert.match(CONSOLE_HTML, /id="lo"/, "OPD console has Sign out button");
+  assert.match(STATION_HTML, /id="loBtn"/, "billing station has Sign out button");
+  assert.match(STATION_HTML, /billing_disabled/, "billing station explains when billing is switched off");
   assert.match(ROUTER, /billing: BILL\.billingEnabled\(env\)/, "whoami reports it");
 });
 

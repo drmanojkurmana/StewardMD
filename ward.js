@@ -11510,11 +11510,16 @@
           '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="deskopen:' + esc(r.patientId) + "|" + esc(r.encounterId || "") + '">' + ms("open_in_new") + wTH("ward.rcm-open", "Open") + "</button></div></li>";
       }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.cl-none", "No current cashless stay read needs pre-authorisation action.") + "</p>") + "</div>";
   }
-  function cashierOpen() {
+  function cashierOpen(mrn) {
     st.view = "cashier"; st.cashier = {}; paint();
+    if (mrn) {
+      st.cashier.mrn = mrn;
+      var el = document.getElementById("wCashMrn"); if (el) el.value = mrn;
+      cashLookup(mrn);
+    }
   }
-  function cashLookup() {
-    var mrn = val("wCashMrn");
+  function cashLookup(mrnOverride) {
+    var mrn = mrnOverride || val("wCashMrn");
     if (!mrn) { st.cashier.err = wT("ward.enter-an-mrn", "Enter an MRN."); paint(); return; }
     st.cashier.mrn = mrn; st.cashier.err = ""; st.cashier.raised = null; st.busy = true; paint();
     // The same deterministic patientId every other ward flow derives from an MRN - never guessed,
@@ -15731,7 +15736,7 @@
       if (st.view === "twin") { st.twin = {}; st.view = "list"; paint(); return; }
       if (st.view === "trends") { st.trends = null; st.recordDetail = null; twinOpen(); return; }
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
-      if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
+      if (st.view === "cashier") { if (st.returnToOpd) { st.returnToOpd = false; close(); return; } st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
@@ -16547,6 +16552,8 @@
     if (!(opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0)) loadWard();
     // A hospital-level view requested by the shell (bed board, ED, twin...). Only the verbs the ward
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
+    if (opts.returnToOpd) st.returnToOpd = true;
+    if (opts.act === "cashier") { cashierOpen(opts.mrn); return; }
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
   var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "dcboard", "tcentre", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview", "recallview", "claimsdesk"];

@@ -57,10 +57,12 @@
   @keyframes rise{ from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
   @keyframes pop{ 0%{transform:scale(.4);opacity:0} 60%{transform:scale(1.12)} 100%{transform:scale(1);opacity:1} }
   @media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important } }
+  #loBtn{ transition:all .15s ease; border:1px solid var(--line); }
+  #loBtn:hover{ background:var(--red); color:#fff; border-color:var(--red); }
 </style>
 </head>
 <body>
-<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><span class="tag" id="stnTag">Cashier</span></div></header>
+<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><a class="btn ghost" href="/opd" style="text-decoration:none;margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:auto;margin-right:8px;display:inline-flex;align-items:center;gap:4px"><span class="ms" style="font-size:16px">arrow_back</span> OPD Board</a><span class="tag" id="stnTag" style="margin-left:0">Cashier</span><button class="btn ghost" id="loBtn" title="Sign out of this session" style="margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:8px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;flex-shrink:0"><span class="ms" style="font-size:16px">logout</span> Sign out</button></div></header>
 <main id="app"></main>
 <script>
 (function(){
@@ -77,16 +79,34 @@
   var orgId = ""; try { orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
   var cur = null;   // { patient, orders } | { invoice }
 
+  var loBtn = document.getElementById("loBtn");
+  if (loBtn) {
+    loBtn.onclick = function() {
+      try {
+        localStorage.removeItem("smd_opd_staff_tok");
+        localStorage.removeItem("smd_opd_toktype");
+        localStorage.removeItem("smd_opd_hospital");
+        sessionStorage.removeItem("smd_staff_token");
+        if (window.firebase && firebase.auth) firebase.auth().signOut().catch(function(){});
+      } catch (e) {}
+      location.href = "/opd";
+    };
+  }
+
   function ms(n){ return '<span class="ms">'+n+'</span>'; }
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }
   function rupees(p){ return "₹" + (Math.round(p||0)/100).toFixed(2); }
   function initials(n){ return String(n||"?").trim().split(/\s+/).slice(0,2).map(function(w){return w[0]||"";}).join("").toUpperCase() || "?"; }
 
   function fbToken(){ try { var a=firebase&&firebase.auth&&firebase.auth(); var u=a&&a.currentUser; return (u&&u.getIdToken)?u.getIdToken().catch(function(){return "";}):Promise.resolve(""); } catch(e){ return Promise.resolve(""); } }
+  function queueApiUrl(path){
+    var base = (location.hostname.indexOf("wardsynq") > -1) ? "https://stewardmd.in/api/queue/" : "/api/queue/";
+    return base + String(path || "").replace(/^\/+/, "");
+  }
   function api(path, opts){
     opts = opts || {};
     var h = { "Content-Type": "application/json" };
-    var send = function(){ return fetch("/api/queue/bill/" + path, { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
+    var send = function(){ return fetch(queueApiUrl("bill/" + path), { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
       .then(function(r){ return r.json().catch(function(){ return { ok:false, error:"bad_response" }; }); })
       .catch(function(){ return { ok:false, error:"network" }; }); };
     if (tt === "firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });   // clinic owner: mint an id-token like /opd does
@@ -255,6 +275,12 @@
       try { document.getElementById("stnName").textContent = "Pharmacy"; document.getElementById("stnTag").textContent = "Dispense"; } catch(e){}
       pharmacyView(); return;
     }
+    var initPt = P.get("patient") || P.get("patientId");
+    if (initPt) {
+      lookupView(initPt);
+      loadPatient(initPt);
+      return;
+    }
     lookupView();
   }
 
@@ -270,7 +296,47 @@
     var signInPrompt = function(){ app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>'; };
     try { firebase.auth().onAuthStateChanged(function(u){ if(u) start(); else signInPrompt(); }); } catch(e){ start(); }
   } else if (!tok) {
-    app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>';
+    var savedCode = ""; try { savedCode = localStorage.getItem("smd_opd_clinic_code") || ""; } catch(e){}
+    var preCode = P.get("clinicCode") || P.get("clinic") || savedCode;
+    var preId = P.get("staffId") || P.get("id") || "";
+    app.innerHTML = '<section class="card"><h2>' + ms("lock") + 'Cashier Station Sign-in</h2>' +
+      '<p style="color:var(--mut);font-size:13px;margin:0 0 14px">Sign in with your clinic code, staff ID and PIN to access billing.</p>' +
+      '<label>Clinic code</label><input id="bCode" placeholder="SMD-XXXXXX" value="' + esc(preCode) + '" autocomplete="off">' +
+      '<label>Staff ID</label><input id="bId" placeholder="biller" value="' + esc(preId) + '" autocomplete="username" autocapitalize="none">' +
+      '<label>PIN or Password</label><input id="bPin" type="password" placeholder="••••" autocomplete="current-password">' +
+      '<div class="err" id="bErr"></div>' +
+      '<button class="btn" id="bGo">' + ms("lock_open") + 'Unlock Station</button>' +
+      '<div style="text-align:center;margin-top:14px"><a class="btn ghost" href="/opd" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px">' + ms("arrow_back") + 'Back to OPD Board</a></div></section>';
+    var go = document.getElementById("bGo");
+    var doAuth = function() {
+      var c = (document.getElementById("bCode").value || "").trim();
+      var u = (document.getElementById("bId").value || "").trim();
+      var p = (document.getElementById("bPin").value || "").trim();
+      var errEl = document.getElementById("bErr");
+      if (!c || !u || !p) { errEl.textContent = "Enter your clinic code, staff ID and PIN."; return; }
+      errEl.textContent = "Signing in…"; go.disabled = true;
+      fetch(queueApiUrl("auth/pin"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ clinicCode: c, identity: u, pin: p })
+      }).then(function(r){ return r.json(); }).then(function(r){
+        if (!r || !r.ok) {
+          go.disabled = false;
+          errEl.textContent = (r && r.error === "invalid_login") ? "Wrong clinic code, staff ID or PIN." : (r && r.error) || "Sign-in failed.";
+          return;
+        }
+        tok = r.token; orgId = r.orgId; tt = "staff";
+        try {
+          localStorage.setItem("smd_opd_staff_tok", r.token);
+          localStorage.setItem("smd_opd_toktype", "staff");
+          localStorage.setItem("smd_opd_hospital", r.orgId);
+          if (r.orgCode) localStorage.setItem("smd_opd_clinic_code", r.orgCode);
+        } catch(e) {}
+        start();
+      }).catch(function(){ go.disabled = false; errEl.textContent = "Could not reach the server."; });
+    };
+    go.onclick = doAuth;
+    document.getElementById("bPin").addEventListener("keydown", function(e){ if (e.key === "Enter") doAuth(); });
   } else {
     start();
   }
