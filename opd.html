@@ -369,6 +369,9 @@
       // The hospital requires two-step sign-in for this role and it is not set up: every other request would be refused.
       if(r.twoStepRequired){ app.innerHTML='<div class="login"><h3>Two-step sign-in required</h3><p>Your hospital requires two-step sign-in for your role. Set it up at <a href="https://wardsynq.com/#/security">wardsynq.com, Sign-in security</a>, then sign in here again.</p><button class="btn" id="tsOut">Sign out</button></div>'; document.getElementById("tsOut").onclick=function(){logout("");}; return; }
       st.who=r; st.smdId=r.smdId||""; st.billingOn=!!r.billing; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
+      if(r.orgName) st.orgName=r.orgName;
+      if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
+      if(r.doctorName) st.doctorName=r.doctorName;
       if(r.orgCode) try{ localStorage.setItem("smd_opd_clinic_code", r.orgCode); }catch(e){}
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
@@ -406,9 +409,16 @@
   }
   /* The role is hospital-scoped: an account's whoami without a hospital is its global role, which hid
    * the admin controls from a hospital admin. Ask again for the opened hospital, as shell.js does. */
-  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; st.currentOrg=c; if(c.id) localStorage.setItem(LS_HOSP,c.id);
+  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.orgName=c.name||""; st.hasLogo=!!c.hasLogo; st.doctorName=c.doctorName||""; st.hospital=c.id; st.ownsOrg=true; st.currentOrg=c; if(c.id) localStorage.setItem(LS_HOSP,c.id);
     if(c.code) try{ localStorage.setItem("smd_opd_clinic_code", c.code); }catch(e){}
-    api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){ if(r&&r.ok) st.who=r; },function(){}).then(function(){ loadDash(); }); }
+    api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){
+      if(r&&r.ok) {
+        st.who=r;
+        if(r.orgName) st.orgName=r.orgName;
+        if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
+        if(r.doctorName) st.doctorName=r.doctorName;
+      }
+    },function(){}).then(function(){ loadDash(); }); }
   function openClinics(){
     app.innerHTML='<div class="login"><p>Loading your clinics…</p></div>';
     api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){ openWizard(); return; } renderClinics(list); })
@@ -447,7 +457,12 @@
   function loadDash(tries){
     tries=tries||0;
     api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
-      if(r&&r.ok){ st.opd=r; renderNurseStation(r); if(!st.pulse) loadPulse(); return; }   // org-scoped board only; NO shared legacy board
+      if(r&&r.ok){
+        st.opd=r;
+        if(r.orgName) st.orgName=r.orgName;
+        if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
+        renderNurseStation(r); if(!st.pulse) loadPulse(); return;
+      }
       if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
       else renderShell('<div class="empty">'+((r&&r.error==="forbidden"||r&&r.error==="not_a_member")?"You are not assigned to this clinic. Ask the owner to add you.":"No queue available yet.")+'</div>');
@@ -465,11 +480,13 @@
 
   function renderShell(inner){
     var name=st.who?(st.who.name||"Staff"):"", role=st.who?st.who.role:"";
-    app.innerHTML='<header><div class="wrap"><div class="brand">Steward<span>MD</span> OPD</div>'+
+    var cName=st.orgName || (st.who && st.who.orgName) || "";
+    var logoHtml=(st.hasLogo || (st.who && st.who.hasLogo)) ? '<img class="clogo" src="/api/queue/branding/logo?orgId='+encodeURIComponent(st.orgId)+'" alt="" style="height:26px;max-width:100px;object-fit:contain;border-radius:4px;margin-right:8px;vertical-align:middle" onerror="this.style.display=\'none\'">' : '';
+    app.innerHTML='<header><div class="wrap"><div class="brand" style="display:flex;align-items:center">'+logoHtml+'<div>Steward<span>MD</span> OPD'+(cName?' <span class="cname" style="font-weight:500;color:var(--mut);font-size:14px"> · '+esc(cName)+'</span>':'')+'</div></div>'+
       '<div class="role"><span class="who-name">'+esc(name)+'</span><span class="chip">'+esc(role)+'</span>'+
       '<button class="ghost" id="lo" title="Sign out of this session"><span class="ms sm">logout</span> Sign out</button></div></div></header>'+
       '<div class="wrap"><div class="toolbar">'+
-        '<div class="grow"><b>OPD Board</b> · <span title="Clinic code - staff use this to sign in">'+esc(st.orgCode||st.hospital)+'</span> · '+esc(st.date)+'</div>'+
+        '<div class="grow"><b>'+esc(cName || "OPD Board")+'</b> · <span title="Clinic code - staff use this to sign in">'+esc(st.orgCode||st.hospital)+'</span> · '+esc(st.date)+'</div>'+
         (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="clinics">Clinics</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="rooms">Rooms</button>':'')+
@@ -588,11 +605,12 @@
   // Pro white-label: upload the clinic's own logo (shown on the patient page, wall board + FollowCare).
   function openBranding(){
     var url="/api/queue/branding/logo?orgId="+encodeURIComponent(st.orgId)+"&_="+Date.now();
+    var currentName = st.orgName || (st.who && st.who.orgName) || "";
     open('<h3>Clinic branding</h3>'+
-      '<p class="t" style="margin:0 0 12px">Pro clinics can show their own logo on the patient wait page, the waiting-room display and FollowCare messages, with a small "powered by StewardMD". PNG, WebP or JPG, up to 256 KB.</p>'+
+      '<p class="t" style="margin:0 0 12px">Show your clinic name and logo on the OPD dashboard, patient wait page, and waiting-room display. PNG, WebP or JPG, up to 256 KB.</p>'+
       '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><img src="'+esc(url)+'" alt="" style="height:44px;max-width:160px;object-fit:contain;border:1px solid var(--line);border-radius:8px;padding:4px;background:var(--card)" onerror="this.style.display=\'none\'"></div>'+
-      '<label>Clinic name (shown next to the logo)</label><input id="bname" placeholder="e.g. Sunrise Clinic">'+
-      '<label style="margin-top:12px">Logo image</label>'+
+      '<label>Clinic name</label><input id="bname" value="'+esc(currentName)+'" placeholder="e.g. Sunrise Clinic">'+
+      '<label style="margin-top:12px">Logo image (optional)</label>'+
       '<input id="bfile" type="file" accept="image/*" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">'+
       '<button type="button" id="bpick" style="width:100%;margin-top:0;padding:13px;border:1px dashed var(--line);border-radius:10px;background:var(--card);color:var(--tl);font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer"><span class="ms">add_photo_alternate</span>Choose logo image</button>'+
       '<div id="bfilename" style="font-size:12px;color:var(--mut);margin-top:8px;min-height:14px"></div>'+
@@ -603,15 +621,26 @@
     sheet.querySelector("#bfile").onchange=function(){ var sf=this.files[0]; sheet.querySelector("#bfilename").textContent=sf?("Selected: "+sf.name):""; };
     sheet.querySelector("#ok").onclick=function(){
       var f=sheet.querySelector("#bfile").files[0], nm=sheet.querySelector("#bname").value.trim(), er=sheet.querySelector("#berr");
-      if(!f){ er.textContent="Choose a logo image first."; return; }
-      if(f.size>256*1024){ er.textContent="That image is over 256 KB. Please use a smaller file."; return; }
-      var btn=sheet.querySelector("#ok"); btn.disabled=true; btn.textContent="Uploading…";
-      uploadLogo(f,nm).then(function(r){
-        if(!r||!r.ok){ var e=(r&&r.error)||"Upload failed";
+      if(!f && !nm){ er.textContent="Enter a clinic name or choose a logo image."; return; }
+      if(f && f.size>256*1024){ er.textContent="That image is over 256 KB. Please use a smaller file."; return; }
+      var btn=sheet.querySelector("#ok"); btn.disabled=true; btn.textContent="Saving…";
+      var onDone = function(r){
+        if(!r||!r.ok){
+          var e=(r&&r.error)||"Save failed";
           er.textContent = e==="pro_required" ? "Custom branding is a StewardMD Pro feature." : e==="too_large" ? "That image is over 256 KB." : e==="unsupported_type" ? "Please use a PNG, WebP or JPG image." : friendly(e);
-          btn.disabled=false; btn.textContent="Save branding"; return; }
-        toast("Branding saved"); close();
-      });
+          btn.disabled=false; btn.textContent="Save branding"; return;
+        }
+        if(nm) { st.orgName = nm; if(st.who) st.who.orgName = nm; }
+        if(f) { st.hasLogo = true; if(st.who) st.who.hasLogo = true; }
+        toast("Branding saved"); close(); loadDash();
+      };
+      if(f){
+        uploadLogo(f,nm).then(onDone);
+      } else {
+        api("org/update", { method: "POST", body: { orgId: st.orgId, name: nm } }).then(onDone).catch(function(){
+          er.textContent="Could not reach the server."; btn.disabled=false; btn.textContent="Save branding";
+        });
+      }
     };
   }
   function uploadLogo(file,name){
@@ -627,7 +656,7 @@
     var docs=st.board.map(function(b){
       var s=b.session, tickets=(b.tickets||[]).filter(function(t){return ["registered","waiting","called","in_consultation"].indexOf(t.status)>-1;});
       var rows=tickets.length? tickets.map(function(t,i){return ticketRow(s,t,i,tickets.length);}).join("") : '<div class="empty">No patients waiting</div>';
-      return '<div class="doc"><h2>'+esc(s.doctorName||s.doctorUid||"Doctor")+'<small>'+tickets.length+' in queue</small></h2>'+
+      return '<div class="doc"><h2>'+esc(docLabel(s.doctorUid,s.doctorName)||"Doctor")+'<small>'+tickets.length+' in queue</small></h2>'+
         '<div class="rows">'+rows+'</div>'+
         '<div style="padding:8px 12px;border-top:1px solid var(--line);text-align:right">'+
           '<button class="ghost" data-audit="'+esc(s.id)+'" style="font-size:13px">View audit trail</button></div></div>';
@@ -681,7 +710,8 @@
           if (isWardSynQHospital()) {
             openWardSynqCashier(mrn);
           } else {
-            location.href = "/clinic-billing?patientId=" + encodeURIComponent(mrn);
+            var curOrg = st.orgId || st.hospital || "";
+            location.href = "/clinic-billing?patientId=" + encodeURIComponent(mrn) + "&orgId=" + encodeURIComponent(curOrg) + "&ticketId=" + encodeURIComponent(tid);
           }
         }
       };
@@ -1128,8 +1158,23 @@
   // (private clinic) or "ghis:<employeeId>" (GITAM). No GHIS required.
   var ROLES=["nurse","reception","supervisor","intern","resident","doctor","cashier","pharmacy","hr","admin","viewer"];
   function openStaffAdmin(){
-    open('<h3>Staff & roles</h3><div class="t" style="margin-bottom:8px">Clinic code (staff sign in with this): <b>'+esc(st.orgCode||st.orgId)+'</b></div><div id="slist">Loading…</div>'+
+    var clinicName = st.orgName || (st.who && st.who.orgName) || "";
+    var currentDocName = st.doctorName || (st.who && st.who.doctorName) || meName() || "";
+    open('<h3>Staff & roles</h3><div class="t" style="margin-bottom:10px">Clinic code (staff sign in with this): <b>'+esc(st.orgCode||st.orgId)+'</b></div>'+
+      '<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:14px">'+
+        '<div style="font-weight:700;font-size:13px;margin-bottom:4px;display:flex;align-items:center;gap:6px"><span class="ms sm">medical_services</span> Doctor & Clinic Admin Profile</div>'+
+        '<div class="t" style="font-size:12px;margin-bottom:8px">When you are both clinic owner/admin and doctor, configure your display name and clinic name here.</div>'+
+        '<label style="font-size:12px;color:var(--mut)">Doctor display name</label>'+
+        '<input id="admDocName" value="'+esc(currentDocName)+'" placeholder="e.g. Dr. Manoj Kumar" style="margin-bottom:8px">'+
+        '<label style="font-size:12px;color:var(--mut)">Clinic name</label>'+
+        '<input id="admClinicName" value="'+esc(clinicName)+'" placeholder="e.g. Sunrise Clinic" style="margin-bottom:10px">'+
+        '<button class="btn" id="saveAdmProfile" style="margin:0;width:auto;padding:8px 14px;font-size:13px">Save Doctor & Clinic Profile</button>'+
+      '</div>'+
+      '<div style="font-weight:700;font-size:13px;margin-bottom:6px">Staff Members</div>'+
+      '<div id="slist">Loading…</div>'+
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
+      '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Invite Staff / Doctor</div>'+
+      '<input id="sdn" placeholder="Full name (e.g. Dr. Rajesh Sharma or Nurse Priya)" style="margin-bottom:8px">'+
       '<input id="se" placeholder="Staff ID (e.g. recep1, or ghis:502862)" style="margin-bottom:8px">'+
       '<select id="sr" style="margin-bottom:8px">'+ROLES.map(function(r){return '<option value="'+r+'"'+(r==="nurse"?" selected":"")+'>'+r+'</option>';}).join("")+'</select>'+
       '<input id="spin" placeholder="Set a PIN (4-8 digits, e.g. 4826)" inputmode="numeric" style="margin-bottom:8px">'+
@@ -1137,11 +1182,37 @@
       '<input id="spw" type="password" placeholder="Email password (if email set)">'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Invite / Save</button></div></div>');
     sheet.querySelector("#cx").onclick=close;
+    var saveProfileBtn = sheet.querySelector("#saveAdmProfile");
+    if(saveProfileBtn){
+      saveProfileBtn.onclick = function(){
+        var dn = sheet.querySelector("#admDocName").value.trim();
+        var cn = sheet.querySelector("#admClinicName").value.trim();
+        if(!dn && !cn){ toast("Enter doctor name or clinic name"); return; }
+        saveProfileBtn.disabled = true;
+        saveProfileBtn.textContent = "Saving…";
+        api("org/update", { method: "POST", body: { orgId: st.orgId, doctorName: dn, name: cn } }).then(function(r){
+          saveProfileBtn.disabled = false;
+          saveProfileBtn.textContent = "Save Doctor & Clinic Profile";
+          if(!r || !r.ok){ toast(r && r.error ? friendly(r.error) : "Failed to save profile"); return; }
+          if(dn) { st.doctorName = dn; if(st.who) st.who.doctorName = dn; }
+          if(cn) { st.orgName = cn; if(st.who) st.who.orgName = cn; }
+          toast("Doctor and clinic profile updated");
+          loadDash();
+        }).catch(function(){
+          saveProfileBtn.disabled = false;
+          saveProfileBtn.textContent = "Save Doctor & Clinic Profile";
+          toast("Could not reach the server");
+        });
+      };
+    }
     sheet.querySelector("#ok").onclick=function(){
       var id=sheet.querySelector("#se").value.trim().toLowerCase(); if(!id){toast("Enter a staff ID");return;}   // lowercase so it matches the case-insensitive staff login
+      var dn=sheet.querySelector("#sdn").value.trim();
       var role=sheet.querySelector("#sr").value, pin=sheet.querySelector("#spin").value.trim(), em=sheet.querySelector("#sem").value.trim(), pw=sheet.querySelector("#spw").value;
       if(pin && !/^\d{4,8}$/.test(pin)){toast("PIN must be 4 to 8 digits");return;}
-      api("member",{method:"POST",body:{orgId:st.orgId,identity:id,role:role}}).then(function(r){
+      var mBody = { orgId: st.orgId, identity: id, role: role };
+      if(dn) mBody.displayName = dn;
+      api("member",{method:"POST",body:mBody}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;}
         // Each step's refusal stops the chain and is shown. This said "Saved" even when the PIN or
         // password had been refused, so staff were handed a sign-in that did not exist.
@@ -1149,7 +1220,7 @@
         var chain=Promise.resolve();
         if(pin) chain=chain.then(step("PIN","member/pin",{orgId:st.orgId,identity:id,pin:pin}));
         if(em&&pw) chain=chain.then(step("Password","member/password",{orgId:st.orgId,identity:id,email:em,password:pw}));
-        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); })
+        chain.then(function(){ toast("Saved"); loadStaffList(); ["sdn","se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); })
           .catch(function(e){ loadStaffList(); toast(e.message); });
       });
     };
@@ -1159,6 +1230,7 @@
     api("members?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       var el=sheet.querySelector("#slist"); if(!el) return;
       var rows=(r&&r.members)||[];
+      st.docMembers = rows;
       el.innerHTML=rows.length? rows.map(function(m){
         var login=(m.hasPin?"PIN":"")+(m.email?((m.hasPin?" + ":"")+"email"):""); if(!login) login="no login set";
         /* Why they cannot sign in, where the owner can fix it: five wrong PINs lock the account for
@@ -1166,7 +1238,8 @@
            exist), so the owner otherwise hears "wrong PIN" for a PIN that is right. */
         var lockMin=m.lockedUntil&&m.lockedUntil>Date.now()?Math.ceil((m.lockedUntil-Date.now())/60000):0;
         if(lockMin) login="locked "+lockMin+"m (too many tries)";
-        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(m.identity)+'</b>'+(m.active?"":' <span class="t" style="color:var(--red)">(disabled)</span>')+'<div class="t">'+esc(m.role)+' · '+esc(login)+'</div></div>'+
+        var nameDisp = m.displayName ? (esc(m.displayName) + ' <span class="t">(' + esc(m.identity) + ')</span>') : esc(m.identity);
+        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+nameDisp+'</b>'+(m.active?"":' <span class="t" style="color:var(--red)">(disabled)</span>')+'<div class="t">'+esc(m.role)+' · '+esc(login)+'</div></div>'+
           '<button class="cancel" data-tog="'+esc(m.identity)+'" data-act="'+(m.active?"disable":"restore")+'" style="padding:6px 10px">'+(m.active?"Disable":"Restore")+'</button></div>';
       }).join("") : '<div class="empty">No staff yet. Invite one below.</div>';
       Array.prototype.forEach.call(el.querySelectorAll("[data-tog]"),function(b){b.onclick=function(){
@@ -1186,11 +1259,18 @@
     rooms.forEach(function(rm){ inRooms+=rm.waiting||0; (rm.tickets||[]).forEach(function(t){ if(t.status==="in_consultation") consulting++; }); });
     // routing inbox
     var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
-      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
+      var billLabel = (t.unbilledAmount > 0) ? ("Bill ₹" + Math.round(t.unbilledAmount / 100)) : "Bill";
+      var billChip = (t.unbilledAmount > 0)
+        ? ' <span class="chip" style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:700">₹' + Math.round(t.unbilledAmount/100) + ' unbilled</span>'
+        : (t.billingStatus === "paid"
+          ? ' <span class="chip" style="background:#ecfdf5;color:#059669;font-size:11px;font-weight:700">Paid</span>'
+          : ' <span class="chip" style="background:#f1f5f9;color:#64748b;font-size:11px">Unbilled</span>');
+      var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
+      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+billChip+'</div>'+
         '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
         '<div class="acts" style="display:flex;gap:6px;margin-top:6px">'+
           (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="flex:1;margin:0">Route to a room <span class="ms sm">chevron_right</span></button>':"")+
-          '<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(t.smdId||t.mrn||t.id)+'" data-mrn="'+esc(t.mrn||t.smdId||t.id||"")+'" style="flex:none">Bill</button>'+
+          '<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'"'+(t.unbilledAmount>0?' class="pri"':'')+' style="flex:none">'+billLabel+'</button>'+
         '</div></div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
     var poolPanel='<div class="pool"><h3>Central routing · '+pool.length+' waiting</h3><div class="rows">'+poolRows+'</div></div>';
@@ -1198,7 +1278,8 @@
     var wall=rooms.length? rooms.map(function(rm){ var s={id:rm.sessionId}, tickets=rm.tickets||[];
       var q=(rm.sessionId&&tickets.length)? tickets.map(function(t,i){return roomTicketRow(s,t,i,tickets.length);}).join("") : '<div class="empty" style="padding:18px 8px">'+(rm.doctorUid?"No patients":"No doctor - set one in Rooms")+'</div>';
       var pd=(rm.room.assignment&&rm.room.assignment.primary)||rm.doctorUid||"";
-      var doc=rm.doctorUid?(docLabel(pd,rm.doctorName)||"Doctor"):"No doctor";
+      var dName = rm.doctorName || (rm.room && rm.room.doctorName) || (rm.room && rm.room.assignment && rm.room.assignment.doctorName) || "";
+      var doc=rm.doctorUid?(docLabel(pd,dName)||"Doctor"):"No doctor";
       return '<div class="rcard '+esc(rm.status)+'"><h3>'+esc(rm.room.name||"Room")+(rm.room.number?" · "+esc(rm.room.number):"")+'<span class="rstat '+esc(rm.status)+'">'+esc(STATUS_LABEL[rm.status]||rm.status)+'</span></h3>'+
         '<div class="docline"><span class="dot2'+(rm.doctorUid?" on":"")+'"></span>'+esc(doc)+' · '+rm.waiting+' waiting'+(rm.room.department?" · "+esc(rm.room.department):"")+'</div>'+
         '<div class="rows">'+q+'</div>'+
@@ -1221,9 +1302,16 @@
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
-    b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(t.smdId||t.mrn||t.id)+'" data-mrn="'+esc(t.mrn||t.smdId||t.id||"")+'">Bill</button>');   // personal clinic -> /clinic-billing?patientId=, hospital -> ward cashier (see wireRowActions)
+    var billLabel = (t.unbilledAmount > 0) ? ("Bill ₹" + Math.round(t.unbilledAmount / 100)) : "Bill";
+    var billChip = (t.unbilledAmount > 0)
+      ? ' <span class="chip" style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:700">₹' + Math.round(t.unbilledAmount/100) + ' unbilled</span>'
+      : (t.billingStatus === "paid"
+        ? ' <span class="chip" style="background:#ecfdf5;color:#059669;font-size:11px;font-weight:700">Paid</span>'
+        : ' <span class="chip" style="background:#f1f5f9;color:#64748b;font-size:11px">Unbilled</span>');
+    var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
+    b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'"'+(t.unbilledAmount>0?' class="pri"':'')+'>'+billLabel+'</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+'</div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   // Nurse records vitals -> a compact timeline entry (kind:"vitals", EMR_VITALS cap). This is the nurse's
@@ -1316,28 +1404,62 @@
   function meName(){ try{ var u=fbAuth().currentUser; return (u&&u.displayName)||""; }catch(e){ return ""; } }
   function withDr(n){ n=String(n||"").trim(); return n?(/^dr\.?\s/i.test(n)?n:"Dr "+n):""; }
   function prettyLocal(e){ return String(e||"").split("@")[0].replace(/[._]+/g," ").replace(/\d+/g,"").trim().replace(/\b\w/g,function(c){return c.toUpperCase();}); }
+  function normDocId(id){ return String(id||"").replace(/^(fb|cfa|ghis|uid):/i,"").trim(); }
+  function isOpaqueId(v){
+    var x = String(v||"").trim();
+    return !x || /^(fb|cfa|ghis|uid):/i.test(x) || /^[a-z0-9_-]{16,}$/i.test(x);
+  }
   // Friendly doctor label from a stored doctor id (Firebase uid for the account, or a member email for
   // invited doctors). Never surface the raw hex uid. Prefers the account display name for this device.
   function docLabel(pd,doctorName){
     if(!pd) return "";
-    if(pd===meUid()) return withDr(meName()) || withDr(prettyLocal((st.who&&st.who.name)||"")) || "You";
-    if(doctorName && doctorName.indexOf("@")===-1 && !/^[a-z0-9]{16,}$/i.test(doctorName)) return withDr(doctorName);
+    var currentUid = meUid();
+    var isMe = currentUid && normDocId(pd) === normDocId(currentUid);
+    if(doctorName && !isOpaqueId(doctorName) && doctorName.indexOf("@")===-1) {
+      return withDr(doctorName);
+    }
+    if(isMe){
+      var myDocName = st.doctorName || (st.who && st.who.doctorName) || meName() || (st.who && st.who.name && st.who.name !== "Doctor" ? st.who.name : "");
+      if(myDocName && !isOpaqueId(myDocName)) return withDr(myDocName);
+      return "Doctor (You)";
+    }
+    var npd = normDocId(pd);
+    if(st.docMembers && st.docMembers.length){
+      var m = st.docMembers.find(function(x){ return normDocId(x.identity) === npd; });
+      if(m && m.displayName && !isOpaqueId(m.displayName)) return withDr(m.displayName);
+    }
     if(pd.indexOf("@")>-1) return withDr(prettyLocal(pd));
-    return "Dr "+String(pd).slice(0,8);
+    if(st.doctorName && !isOpaqueId(st.doctorName)) return withDr(st.doctorName);
+    return "Doctor";
   }
   function doctorOptions(){ // "Me" (this account) + org members with role doctor
-    var opts=[{id:meUid(),label:"Me (this account)"}];
-    (st.docMembers||[]).forEach(function(m){ if(m.role==="doctor") opts.push({id:m.identity,label:m.identity}); });
+    var myName = st.doctorName || (st.who && st.who.doctorName) || meName() || "Me (this account)";
+    var opts=[{id:meUid(),label:withDr(myName)||"Me (this account)"}];
+    (st.docMembers||[]).forEach(function(m){
+      if(m.role==="doctor") {
+        var lbl = m.displayName ? (withDr(m.displayName) + " (" + m.identity + ")") : m.identity;
+        opts.push({id:m.identity,label:lbl,name:m.displayName||""});
+      }
+    });
     return opts.filter(function(o){return o.id;});
   }
-  function roomDoctorLabel(rm){ var a=rm.assignment||{}; if(a.mode==="unassigned"||(!a.primary&&!(a.doctors||[]).length)) return "No doctor"; if(a.mode==="rotating") return "Rotating ("+(a.doctors||[]).length+")"; var d=a.primary||(a.doctors||[])[0]||""; return d?(docLabel(d)||"Doctor"):"No doctor"; }
+  function roomDoctorLabel(rm){
+    var a=rm.assignment||{};
+    var dn = rm.doctorName || a.doctorName || "";
+    if(a.mode==="unassigned"||(!a.primary&&!(a.doctors||[]).length)) return "No doctor";
+    if(a.mode==="rotating") return "Rotating ("+(a.doctors||[]).length+")";
+    var d=a.primary||(a.doctors||[])[0]||"";
+    return d?(docLabel(d, dn)||"Doctor"):"No doctor";
+  }
   function openRoomsAdmin(){
-    open('<h3>Rooms</h3><div class="t" style="margin-bottom:8px">Clinic '+esc(st.orgCode||st.orgId)+'</div><div id="rlist">Loading…</div>'+
+    var clinicDisp = st.orgName ? (st.orgName + " (" + (st.orgCode||st.orgId) + ")") : (st.orgCode||st.orgId);
+    open('<h3>Rooms</h3><div class="t" style="margin-bottom:8px">Clinic '+esc(clinicDisp)+'</div><div id="rlist">Loading…</div>'+
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
       '<input id="nrn" placeholder="New room name (e.g. Room 1 / Cardiology)" style="margin-bottom:8px">'+
-      '<input id="nrnum" placeholder="Room number (optional)">'+
+      '<input id="nrnum" placeholder="Room number (optional)" style="margin-bottom:8px">'+
+      '<input id="nrdoc" placeholder="Doctor display name (e.g. Dr. Manoj Kumar)" style="margin-bottom:8px">'+
       // D7: the room's department. Patients registered into this room are numbered in it.
-      '<select id="nrdept" style="margin-top:8px"><option value="">Department: loading...</option></select>'+
+      '<select id="nrdept" style="margin-top:0"><option value="">Department: loading...</option></select>'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Add room</button></div></div>');
     api("org?orgId="+encodeURIComponent(st.orgId)).then(function(o){
       var sel=sheet.querySelector("#nrdept"); if(!sel) return;
@@ -1348,8 +1470,9 @@
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
       var n=sheet.querySelector("#nrn").value.trim(); if(!n){toast("Enter a room name");return;}
-      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),departmentId:sheet.querySelector("#nrdept").value||null,assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
-        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} toast("Room added (assigned to you)"); sheet.querySelector("#nrn").value="";sheet.querySelector("#nrnum").value=""; loadRoomsList();
+      var docName=sheet.querySelector("#nrdoc").value.trim();
+      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),doctorName:docName,departmentId:sheet.querySelector("#nrdept").value||null,assignment:{mode:"primary",primary:meUid(),doctors:[meUid()],doctorName:docName}}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} toast("Room added"); sheet.querySelector("#nrn").value="";sheet.querySelector("#nrnum").value="";sheet.querySelector("#nrdoc").value=""; loadRoomsList();
       });
     };
     // load the org's doctor members (for the picker) then the rooms
@@ -1360,26 +1483,34 @@
       var el=sheet.querySelector("#rlist"); if(!el) return;
       var rooms=(r&&r.rooms)||[];
       el.innerHTML=rooms.length? rooms.map(function(rm){
+        var a=rm.assignment||{};
+        var dName = rm.doctorName || a.doctorName || "";
         return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+(rm.department?" · "+esc(rm.department):"")+'</div></div>'+
-          '<button class="cancel" data-assign="'+esc(rm.id)+'" style="padding:6px 10px">Assign</button></div>';
+          '<button class="cancel" data-assign="'+esc(rm.id)+'" data-docname="'+esc(dName)+'" style="padding:6px 10px">Assign</button></div>';
       }).join("") : '<div class="empty">No rooms yet. Add one below.</div>';
-      Array.prototype.forEach.call(el.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openRoomAssign(b.getAttribute("data-assign"));};});
+      Array.prototype.forEach.call(el.querySelectorAll("[data-assign]"),function(b){
+        b.onclick=function(){ openRoomAssign(b.getAttribute("data-assign"), b.getAttribute("data-docname")); };
+      });
     });
   }
-  function openRoomAssign(roomId){
+  function openRoomAssign(roomId, currentDocName){
     var docs=doctorOptions();
     var modeSel='<select id="ram">'+ASSIGN_MODES.map(function(m){return '<option value="'+m[0]+'">'+m[1]+'</option>';}).join("")+'</select>';
     var docList=docs.length? docs.map(function(d){return '<label style="display:block;margin:6px 0"><input type="checkbox" class="rdoc" value="'+esc(d.id)+'"'+(d.label==="Me (this account)"?" checked":"")+'> '+esc(d.label)+'</label>';}).join("") : '<div class="t">No doctors yet - invite doctors in Staff, or assign yourself.</div>';
-    open('<h3>Assign doctor to room</h3><label>Mode</label>'+modeSel+'<label style="display:block;margin-top:10px">Doctor(s)</label>'+docList+
+    open('<h3>Assign doctor to room</h3><label>Mode</label>'+modeSel+
+      '<label style="display:block;margin-top:10px">Doctor display name (override / custom)</label>'+
+      '<input id="radoc" value="'+esc(currentDocName||"")+'" placeholder="e.g. Dr. Manoj Kumar" style="margin-bottom:8px">'+
+      '<label style="display:block;margin-top:10px">Assigned Doctor Account</label>'+docList+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Save</button></div>');
     sheet.querySelector("#cx").onclick=function(){openRoomsAdmin();};
     sheet.querySelector("#ok").onclick=function(){
       var mode=sheet.querySelector("#ram").value;
       var picked=Array.prototype.map.call(sheet.querySelectorAll(".rdoc:checked"),function(c){return c.value;});
-      var assignment=(mode==="unassigned")?{mode:"unassigned",doctors:[],primary:null}:{mode:mode,doctors:picked,primary:picked[0]||null};
+      var docName=sheet.querySelector("#radoc").value.trim();
+      var assignment=(mode==="unassigned")?{mode:"unassigned",doctors:[],primary:null,doctorName:""}:{mode:mode,doctors:picked,primary:picked[0]||null,doctorName:docName};
       if(mode!=="unassigned"&&!picked.length){toast("Pick at least one doctor");return;}
-      api("room/update",{method:"POST",body:{orgId:st.orgId,roomId:roomId,assignment:assignment}}).then(function(r){
-        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;} toast("Room updated"); openRoomsAdmin();
+      api("room/update",{method:"POST",body:{orgId:st.orgId,roomId:roomId,doctorName:docName,assignment:assignment}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;} toast("Room updated"); openRoomsAdmin(); loadDash();
       });
     };
   }

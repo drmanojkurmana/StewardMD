@@ -243,7 +243,7 @@ const roomStored = (rm) => { const f = Object.assign({}, rm); delete f.departmen
 export async function createRoom(env, orgId, body, actorId) {
   const b = body || {};
   const id = newId();
-  const f = roomStored(M.room({ id, orgId, departmentId: b.departmentId, opdId: b.opdId, name: b.name, number: b.number, assignment: b.assignment, active: b.active }));
+  const f = roomStored(M.room({ id, orgId, departmentId: b.departmentId, opdId: b.opdId, name: b.name, number: b.number, assignment: b.assignment, doctorName: b.doctorName || (b.assignment && b.assignment.doctorName), active: b.active }));
   await fsCommit(env, [wCreate(env, "q_rooms/" + id, f)]);
   await audit(env, orgId, actorId, "room:create", f.name);
   return roomOut(f, id, f.departmentId ? [await getDepartment(env, f.departmentId)].filter((x) => x && x.orgId === f.orgId) : []);

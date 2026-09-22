@@ -141,3 +141,23 @@ test("FOOTGUN: roleForActor is not imported into the queue router", () => {
 test("the ?mock=1 preview says it is a preview", () => {
   assert.match(CONSOLE_HTML, /Preview with sample data/);
 });
+
+test("OPD queue shows billing chips and Bill button with MRN", () => {
+  assert.match(CONSOLE_HTML, /data-a="bill"/, "OPD tickets must have a Bill button");
+  assert.match(CONSOLE_HTML, /data-mrn=/, "OPD tickets must pass MRN to billing");
+  assert.match(CONSOLE_HTML, /billingStatus/, "OPD tickets render billing status chips");
+  assert.match(CONSOLE_HTML, /\/clinic-billing\?orgId=/, "Bill action redirects to /clinic-billing with orgId and patientId");
+});
+
+test("clinic billing station displays Today's OPD Queue and handles ticket/MRN lookup", () => {
+  assert.match(STATION_HTML, /Today.*OPD Queue/, "Billing station must render today's registered OPD patients");
+  assert.match(STATION_HTML, /data-opd-bill=/, "Today's OPD queue has 1-click Bill buttons");
+  assert.match(STATION_HTML, /P\.get\("ticketId"\)/, "Billing station handles ticketId in query params");
+});
+
+test("queue router provides orders, tariff, and today's opd patients in bill segment", () => {
+  assert.match(ROUTER, /sub === "orders" && method === "GET"/, "Router must handle GET orders for billing");
+  assert.match(ROUTER, /sub === "tariff" && method === "GET"/, "Router must handle GET tariff for price list");
+  assert.match(ROUTER, /opdPatients/, "Router bill queue must return opdPatients");
+});
+

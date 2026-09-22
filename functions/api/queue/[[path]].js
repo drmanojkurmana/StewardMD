@@ -40,7 +40,7 @@ import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, notAName, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
+import { resolveRoomDoctor, normDocId, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, notAName, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
@@ -642,19 +642,48 @@ const WAITING = ["registered", "waiting", "called"];
 // the central unassigned pool. Status uses the org's CONFIGURABLE thresholds (Phase 3), not hard-codes.
 async function boardForOrg(env, org, date) {
   const rooms = await ORG.listRooms(env, org.id);
+  let brand = null;
+  try { brand = await brandingFor(env, org.id); } catch (e) {}
+  const effectiveOrgName = (brand && brand.clinicName) || org.name || "";
+  const hasLogo = !!(brand && brand.ext);
+  const members = await ORG.listMembers(env, org.id).catch(() => []);
+  const memberMap = new Map();
+  for (const m of (members || [])) {
+    if (m.identity) memberMap.set(normDocId(m.identity), m.displayName || m.name || "");
+  }
   const out = [];
+  let unbilledByPatient = new Map();
+  try {
+    const bQ = await BILL.billingQueue(env, org.id);
+    (bQ.orders || []).forEach((o) => {
+      if (o.patientId) unbilledByPatient.set(o.patientId, (unbilledByPatient.get(o.patientId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
+      if (o.ticketId) unbilledByPatient.set(o.ticketId, (unbilledByPatient.get(o.ticketId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
+    });
+  } catch (e) {}
+  const annotateTickets = (tickets) => {
+    return (tickets || []).map((t) => {
+      const pid = t.mrn || t.ghisPatientId || t.id;
+      const unbilled = (unbilledByPatient.get(t.id) || 0) + (pid ? (unbilledByPatient.get(pid) || 0) : 0);
+      return Object.assign({}, t, {
+        billingStatus: unbilled > 0 ? "unbilled" : "",
+        unbilledAmount: unbilled
+      });
+    });
+  };
   for (const rm of rooms) {
     const doctorUid = resolveRoomDoctor(rm);
+    const a = rm.assignment || {};
+    const docName = rm.doctorName || a.doctorName || (doctorUid ? memberMap.get(normDocId(doctorUid)) : "") || (doctorUid && normDocId(doctorUid) === normDocId(org.ownerUid) ? (org.doctorName || "") : "") || null;
     let tickets = [], sess = null;
-    if (doctorUid) { sess = await Q.getOrCreateRoomSession(env, org, rm, date); if (sess) tickets = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1); }
+    if (doctorUid) { sess = await Q.getOrCreateRoomSession(env, org, rm, date, docName || ""); if (sess) tickets = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1); }
     const waiting = tickets.filter((t) => WAITING.indexOf(t.status) > -1).length;
     const inConsult = tickets.some((t) => t.status === "in_consultation");
-    out.push({ room: rm, doctorUid: doctorUid || null, sessionId: sess ? sess.id : null, waiting: waiting,
-      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: await ticketView(env, orderRoomView(tickets)) });
+    out.push({ room: rm, doctorUid: doctorUid || null, doctorName: docName, sessionId: sess ? sess.id : null, waiting: waiting,
+      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: annotateTickets(await ticketView(env, orderRoomView(tickets))) });
   }
   const pool = await Q.getOrCreatePoolSession(env, org, date);
   const poolTickets = (await Q.listTickets(env, pool.id)).filter((t) => WAITING.indexOf(t.status) > -1);
-  return { mode: org.mode, thresholds: org.thresholds, rooms: out, pool: await ticketView(env, orderQueue(poolTickets)), poolSessionId: pool.id };
+  return { mode: org.mode, orgName: effectiveOrgName, orgCode: org.code, hasLogo: hasLogo, thresholds: org.thresholds, rooms: out, pool: annotateTickets(await ticketView(env, orderQueue(poolTickets))), poolSessionId: pool.id };
 }
 // Org config → OPD connector. Read from env OPD_CONNECTORS (JSON: { "<hospitalId>": "ghis", "*": "..." });
 // native by default. NO hard-coded GHIS org/user id — a hospital is wired to a connector purely by config.
@@ -1105,18 +1134,30 @@ export async function onRequest(context) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
       if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+      const name = url.searchParams.get("name") || "";
+      const ct = request.headers.get("Content-Type") || "";
+      if (ct.indexOf("application/json") > -1) {
+        const b = await readBody(request).catch(() => ({}));
+        const clinicName = (b && b.name) || name;
+        if (clinicName) await ORG.updateOrg(env, orgId, { name: clinicName }, actor.id);
+        return json({ ok: true, clinicName: clinicName }, 200, request);
+      }
       let _pg = { ok: false, reason: "none" };
       try { _pg = await requirePro(env, request); } catch (e) {}
       // Keep the legacy `error: "pro_required"` key for any older client, and add the reason.
       if (!_pg.ok) return json(needsProBody(_pg, { ok: false, error: "pro_required", feature: "queue-branding" }), 402, request);
       const bkt = brandBucket(env);
       if (!bkt) return json({ ok: false, error: "storage_unavailable" }, 503, request);
-      const ct = request.headers.get("Content-Type") || "";
       const bytes = await request.arrayBuffer();
+      if (!bytes.byteLength && name) {
+        await ORG.updateOrg(env, orgId, { name: name }, actor.id);
+        return json({ ok: true, clinicName: name }, 200, request);
+      }
       const v = validateLogo(ct, bytes.byteLength);
       if (!v.ok) return json({ ok: false, error: v.error }, 400, request);
       await bkt.put(logoKey(orgId, v.ext), bytes, { httpMetadata: { contentType: ct } });
-      const res = await putBranding(env, orgId, { clinicName: url.searchParams.get("name") || "", ext: v.ext, updatedBy: actor.id || "" });
+      const res = await putBranding(env, orgId, { clinicName: name, ext: v.ext, updatedBy: actor.id || "" });
+      if (name) await ORG.updateOrg(env, orgId, { name: name }, actor.id);
       return json(Object.assign({ ok: true }, res), 200, request);
     }
 
@@ -5531,9 +5572,49 @@ export async function onRequest(context) {
       if (sub === "patient" && method === "POST") { const org = await ORG.getOrg(env, bOrg); return json(await BILL.registerPatient(env, bOrg, (org && org.code) || bOrg, { name: body.name, mobile: body.mobile, sex: body.sex, ageYears: body.ageYears, actor: aid }), 200, request); }
       if (sub === "patient" && method === "GET") { const p = await BILL.getPatient(env, bOrg, url.searchParams.get("id") || ""); return json(p ? Object.assign({ ok: true }, p) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "order" && method === "POST") return json(await BILL.createOrder(env, bOrg, body, aid), 200, request);
-      if (sub === "orders" && method === "GET") return json({ ok: true, orders: await BILL.ordersForPatient(env, bOrg, url.searchParams.get("patientId") || "", url.searchParams.get("status") || "") }, 200, request);
-      if (sub === "queue" && method === "GET") return json({ ok: true, ...(await BILL.billingQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
-      if (sub === "tariff" && method === "GET") return json({ ok: true, items: await BILL.listTariff(env, bOrg) }, 200, request);
+      if (sub === "orders" && method === "GET") {
+        const patientId = url.searchParams.get("patientId") || "";
+        const status = url.searchParams.get("status") || "";
+        const orders = await BILL.ordersForPatient(env, bOrg, patientId, status).catch(() => []);
+        return json({ ok: true, orders }, 200, request);
+      }
+      if (sub === "tariff" && method === "GET") {
+        const items = await BILL.listTariff(env, bOrg).catch(() => []);
+        return json({ ok: true, items }, 200, request);
+      }
+      if (sub === "queue" && method === "GET") {
+        const bQ = await BILL.billingQueue(env, bOrg);
+        const org = await ORG.getOrg(env, bOrg).catch(() => null);
+        let opdPatients = [];
+        if (org) {
+          try {
+            const bd = await boardForOrg(env, org, url.searchParams.get("date") || "");
+            const seen = new Set();
+            const addTkt = (t) => {
+              if (!t || seen.has(t.id)) return;
+              seen.add(t.id);
+              const tMrn = t.mrn || t.ghisPatientId || "";
+              const patientOrders = (bQ.orders || []).filter((o) => o.patientId === t.id || (tMrn && o.patientId === tMrn));
+              const unbilledTot = patientOrders.reduce((s, o) => s + (o.unitPrice || 0) * (o.qty || 1), 0);
+              opdPatients.push({
+                id: t.id,
+                mrn: tMrn,
+                name: t.name || "Patient",
+                mobile: t.mobile || "",
+                token: t.token || "",
+                status: t.status || "registered",
+                department: t.department || "",
+                roomId: t.roomId || "",
+                unbilledCount: patientOrders.length,
+                unbilledTotal: unbilledTot
+              });
+            };
+            (bd.pool || []).forEach(addTkt);
+            (bd.rooms || []).forEach((rm) => (rm.tickets || []).forEach(addTkt));
+          } catch (e) {}
+        }
+        return json({ ok: true, ...bQ, opdPatients, cap: BILL.QUEUE_CAP }, 200, request);
+      }
       if (sub === "tariff" && method === "POST") return json(await BILL.upsertTariff(env, bOrg, body, aid), 200, request);
       if (sub === "invoice" && method === "POST") {
         /* BNSS 2023 s.397 (legal review D.4.2): the OPD clinic invoice is locked like the ward invoice while a rape, acid
@@ -5592,8 +5673,14 @@ export async function onRequest(context) {
       // re-checks every mutation; this only tells the UI what to offer.
       if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; orgOwner = !!(az.ok && az.owner); }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
-      let orgCode = ""; const o = orgId ? await ORG.getOrg(env, orgId) : null; if (o) orgCode = o.code || "";
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, mode: (o && o.mode) || "native", smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
+      let orgCode = "", orgName = ""; const o = orgId ? await ORG.getOrg(env, orgId) : null;
+      if (o) { orgCode = o.code || ""; orgName = o.name || ""; }
+      let brand = null;
+      try { if (orgId) brand = await brandingFor(env, orgId); } catch (e) {}
+      const effectiveOrgName = (brand && brand.clinicName) || orgName || "";
+      const hasLogo = !!(brand && brand.ext);
+      const doctorName = (o && o.doctorName) || (actor.name && actor.name !== "Doctor" ? actor.name : "");
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, orgName: effectiveOrgName, hasLogo: hasLogo, mode: (o && o.mode) || "native", smdId: smdId, name: actor.name, doctorName: doctorName, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
         // UI hints for Remove hospital only; POST /org/delete re-checks both.
         ...(orgOwner ? { orgOwner: true } : {}), ...(actor.isOwner === true ? { platformOwner: true } : {}), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
     }

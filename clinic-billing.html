@@ -76,7 +76,8 @@
   var tok = "", tt = "";
   try { tok = localStorage.getItem("smd_opd_staff_tok") || ""; tt = localStorage.getItem("smd_opd_toktype") || ""; } catch (e) {}
   if (tt === "account") tt = "firebase";   // wardsynq.com spells the account sign-in "account" (LT-01)
-  var orgId = ""; try { orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
+  var orgId = P.get("orgId") || "";
+  try { if (!orgId) orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
   var cur = null;   // { patient, orders } | { invoice }
 
   var loBtn = document.getElementById("loBtn");
@@ -165,7 +166,7 @@
   function lookupView(prefill){
     cur = null;
     app.innerHTML = '<section class="card"><h2>'+ms("badge")+'Find patient</h2>'+
-      '<label>Patient ID</label><input id="mrn" placeholder="SMD-XXXXXX-0000" autocomplete="off" value="'+esc(prefill||"")+'">'+
+      '<label>Patient ID or Token</label><input id="mrn" placeholder="SMD-XXXXXX-0000 or token" autocomplete="off" value="'+esc(prefill||"")+'">'+
       '<div class="err" id="err"></div>'+
       '<button class="btn" id="go">'+ms("search")+'Look up orders</button></section>';
     var go = document.getElementById("go"), inp = document.getElementById("mrn");
@@ -175,16 +176,48 @@
     // Everyone with something waiting to be billed, so the cashier does not depend on being told an ID.
     var q = document.createElement("section"); q.className = "card"; q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Loading…</div>';
     app.appendChild(q);
-    if (MOCK) { q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Demo: the live list shows every patient with unbilled orders.</div>'; return; }
+
+    var qOpd = document.createElement("section"); qOpd.className = "card"; qOpd.style.display = "none";
+    app.appendChild(qOpd);
+
+    if (MOCK) {
+      q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Demo: the live list shows every patient with unbilled orders.</div>';
+      return;
+    }
     api("queue?orgId="+encodeURIComponent(orgId)).then(function(r){
       if (!r || !r.ok) { q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">'+ms("error")+'The list could not be loaded. Do not read this as nothing waiting. Look a patient up by ID instead.</div>'; return; }
       var by = {}; (r.orders||[]).forEach(function(o){ (by[o.patientId] = by[o.patientId] || []).push(o); });
       var ids = Object.keys(by);
-      q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2>' + (r.truncated ? capNote(r.cap) : "") + (ids.length
+      q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed <small style="font-size:12px;font-weight:600;color:var(--mut)">('+ids.length+')</small></h2>' + (r.truncated ? capNote(r.cap) : "") + (ids.length
         ? ids.map(function(id){ var n = by[id].length, tot = by[id].reduce(function(s,o){ return s + (o.unitPrice||0)*(o.qty||1); }, 0);
             return '<div class="line"><span class="nm">'+esc(id)+' <small>'+n+' item'+(n===1?'':'s')+'</small></span><span class="amt">'+rupees(tot)+'</span><button class="btn ghost" style="width:auto;margin:0 0 0 8px;padding:8px 12px" data-bill="'+esc(id)+'">Open</button></div>'; }).join("")
         : '<div class="msg">Nothing is waiting to be billed.</div>');
       Array.prototype.forEach.call(q.querySelectorAll("[data-bill]"), function(b){ b.onclick = function(){ loadPatient(b.getAttribute("data-bill")); }; });
+
+      if (r.opdPatients && r.opdPatients.length) {
+        qOpd.style.display = "block";
+        qOpd.innerHTML = '<h2>'+ms("group")+'Today\'s OPD Queue <small style="font-size:12px;font-weight:600;color:var(--mut)">('+r.opdPatients.length+' registered)</small></h2>' +
+          r.opdPatients.map(function(p){
+            var chip = p.unbilledTotal > 0
+              ? '<span style="background:var(--teal-soft);color:var(--teal-d);font-weight:700;padding:2px 8px;border-radius:6px;font-size:11px;letter-spacing:0.02em">'+rupees(p.unbilledTotal)+' unbilled</span>'
+              : '<span style="background:var(--btn);color:var(--mut);font-weight:600;padding:2px 8px;border-radius:6px;font-size:11px">Registered</span>';
+            var tokenStr = p.token ? '<span style="display:inline-block;padding:2px 6px;border-radius:6px;background:var(--btn);font-weight:700;font-size:12px;margin-right:6px">#'+esc(p.token)+'</span>' : '';
+            var pid = p.mrn || p.id;
+            return '<div class="line" style="display:flex;align-items:center;justify-content:space-between;gap:8px">'+
+              '<div style="flex:1;min-width:0">'+
+                '<div style="font-weight:700;font-size:14px;display:flex;align-items:center;gap:4px;flex-wrap:wrap">'+tokenStr+'<span>'+esc(p.name||"Patient")+'</span></div>'+
+                '<div style="font-size:12px;color:var(--mut);margin-top:2px">'+esc(pid)+(p.department?' · '+esc(p.department):'')+'</div>'+
+              '</div>'+
+              '<div style="display:flex;align-items:center;gap:8px">'+
+                chip +
+                '<button class="btn ghost" style="width:auto;margin:0;padding:6px 14px;font-size:13px" data-opd-bill="'+esc(pid)+'">'+ms("receipt_long")+' Bill</button>'+
+              '</div>'+
+            '</div>';
+          }).join("");
+        Array.prototype.forEach.call(qOpd.querySelectorAll("[data-opd-bill]"), function(b){
+          b.onclick = function(){ loadPatient(b.getAttribute("data-opd-bill")); };
+        });
+      }
     });
   }
 
@@ -212,7 +245,7 @@
     var body = orders.length
       ? orders.map(orderLine).join("") + '<div class="tot"><span>Total</span><span>'+rupees(total)+'</span></div>' +
         '<button class="btn" id="inv">'+ms("receipt_long")+'Generate invoice</button>'
-      : '<div class="msg">'+ms("inventory_2")+'No unbilled orders for this patient.</div><button class="btn ghost" id="back">'+ms("arrow_back")+'Look up another</button>';
+      : '<div class="msg" style="padding:16px 12px;background:var(--bg);border-radius:12px;border:1px dashed var(--line);margin-bottom:14px;color:var(--mut)">'+ms("inventory_2")+' No unbilled orders yet for this patient. Add items from the price list below to bill.</div><button class="btn ghost" id="back" style="margin-bottom:16px">'+ms("arrow_back")+'Look up another patient</button>';
     app.innerHTML = '<section class="card"><div class="pt"><div class="av">'+esc(initials(p.name))+'</div><div><b>'+esc(p.name||"Patient")+'</b><span>'+esc(p.id||"")+(p.ageYears?" · "+p.ageYears+"y":"")+(p.sex?" · "+esc(p.sex):"")+'</span></div></div>'+
       '<h2>'+ms("assignment")+'Unbilled orders</h2>'+body+'<div class="err" id="err"></div>'+
       '<h2>'+ms("add_shopping_cart")+'Add an item</h2><div id="addItem"><div class="msg">Loading the price list…</div></div></section>';
@@ -234,7 +267,7 @@
         '<button class="btn ghost" id="tAdd">'+ms("add")+'Add to this bill</button>';
       document.getElementById("tAdd").onclick = function(){
         var b = this; b.disabled = true;
-        api("order", { method:"POST", body:{ orgId:orgId, patientId:p.id, tariffId:document.getElementById("tItem").value, qty:Number(document.getElementById("tQty").value)||1 } }).then(function(x){
+        api("order", { method:"POST", body:{ orgId:orgId, patientId:p.id, ticketId:p.ticketId||"", tariffId:document.getElementById("tItem").value, qty:Number(document.getElementById("tQty").value)||1 } }).then(function(x){
           b.disabled = false;
           if (x && x.ok) { loadPatient(p.id); return; }
           document.getElementById("err").textContent = x && x.error === "forbidden" ? "Your role cannot add items to a bill. A doctor or the clinic owner can." :
@@ -275,7 +308,7 @@
       try { document.getElementById("stnName").textContent = "Pharmacy"; document.getElementById("stnTag").textContent = "Dispense"; } catch(e){}
       pharmacyView(); return;
     }
-    var initPt = P.get("patient") || P.get("patientId");
+    var initPt = P.get("patient") || P.get("patientId") || P.get("ticketId");
     if (initPt) {
       lookupView(initPt);
       loadPatient(initPt);

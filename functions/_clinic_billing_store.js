@@ -1,12 +1,14 @@
 // Clinic BILLING - Firestore/PHI I/O (the impure half; pure logic is in _clinic_billing.js).
 // Collections: q_patients (registry, PHI-encrypted), q_orders, q_tariff, q_invoices, q_patient_seq.
 // Not node-testable (needs Firestore) - verify on-device. Additive + gated by CLINIC_BILLING_ENABLED.
-import { fsGet, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsCommit, wCreate, wUpdate, fsQuery } from "./_fbfirestore.js";
 import { PAGE_SIZE, readAll } from "./_fs_read_all.js";
 import { encPHI, decPHI } from "./_queue.js";
 import { qAudit, getSession, getTicket } from "./_queue_engine.js";
 import { appendTimeline } from "./_queue_timeline.js";
 import { postBillingEvent } from "./_accounts_store.js";
+
+function sanitize(s) { return String(s == null ? "" : s).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80); }
 
 /* Billing -> the hospital's books. The invoice or payment is already recorded when this runs; a posting
  * that fails is audited as accounts:posting_failed so finance sees exactly which event is missing from the
@@ -54,9 +56,59 @@ export async function registerPatient(env, orgId, orgCode, p) {
   return { ok: true, id, name: p.name || "" };
 }
 export async function getPatient(env, orgId, id) {
-  const d = await fsGet(env, "q_patients/" + id);
-  if (!d || !d.fields || d.fields.orgId !== orgId) return null;   // org-scoped
-  return { id, orgId, name: await decPHI(env, d.fields.encName), mobile: await decPHI(env, d.fields.encMobile), sex: d.fields.sex || "", ageYears: d.fields.ageYears || 0 };
+  if (!id) return null;
+  const cleanId = sanitize(id);
+  const cleanOrg = sanitize(orgId);
+
+  // 1. Direct match in q_patients/
+  let d = await fsGet(env, "q_patients/" + cleanId).catch(() => null);
+
+  // 2. OPD patient record: q_patients/<orgId>__<mrn>
+  if (!d || !d.fields) {
+    d = await fsGet(env, "q_patients/" + sanitize(cleanOrg + "__" + cleanId)).catch(() => null);
+  }
+
+  // 3. Ticket lookup (if caller passed a ticketId)
+  if (!d || !d.fields) {
+    const t = await fsGet(env, "q_tickets/" + cleanId).catch(() => null);
+    if (t && t.fields && String(t.fields.hospitalId || "") === String(orgId)) {
+      const tf = t.fields;
+      const tMrn = tf.mrn || tf.ghisPatientId || "";
+      if (tMrn) {
+        d = await fsGet(env, "q_patients/" + sanitize(cleanOrg + "__" + String(tMrn))).catch(() => null);
+      }
+      if (!d || !d.fields) {
+        return {
+          id: tMrn || cleanId,
+          ticketId: cleanId,
+          orgId,
+          name: (tf.encName ? await decPHI(env, tf.encName) : "") || tf.name || "Patient",
+          mobile: (tf.encMobile ? await decPHI(env, tf.encMobile) : "") || tf.mobile || "",
+          sex: tf.gender || tf.sex || "",
+          ageYears: tf.ageYears || 0
+        };
+      }
+    }
+  }
+
+  // 4. Query q_patients by mrn in this org
+  if (!d || !d.fields) {
+    const qRes = await fsQuery(env, "q_patients", { where: [{ field: "orgId", value: orgId }, { field: "mrn", value: id }], limit: 1 }).catch(() => []);
+    if (qRes && qRes.length) d = qRes[0];
+  }
+
+  if (!d || !d.fields || (d.fields.orgId && String(d.fields.orgId) !== String(orgId))) return null;
+  const f = d.fields;
+  const pName = f.encName ? await decPHI(env, f.encName) : (f.name || "");
+  const pMobile = f.encMobile ? await decPHI(env, f.encMobile) : (f.mobile || "");
+  return {
+    id: f.mrn || id,
+    orgId,
+    name: pName || "Patient",
+    mobile: pMobile || "",
+    sex: f.gender || f.sex || "",
+    ageYears: f.ageYears || 0
+  };
 }
 
 // ---- orders (first-class; the station work item) ----
@@ -91,6 +143,14 @@ export async function ordersForPatient(env, orgId, patientId, status) {
   if (truncated) throw Object.assign(new Error("orders_too_many"), { status: 507 });
   let list = asOrders(rows).filter((o) => o.orgId === orgId);
   if (status) list = list.filter((o) => o.status === status);
+  if (!list.length && patientId) {
+    const byTicket = await readAll(env, "q_orders", [{ field: "ticketId", value: patientId }, ...(status ? [{ field: "status", value: status }] : [])], 50).catch(() => ({ rows: [] }));
+    if (byTicket.rows && byTicket.rows.length) {
+      let tList = asOrders(byTicket.rows).filter((o) => o.orgId === orgId);
+      if (status) tList = tList.filter((o) => o.status === status);
+      if (tList.length) return tList;
+    }
+  }
   return list;
 }
 /* Billing station inbox: every 'ordered' order in the org, asked for by status (orgId AND status, both equality, so no
