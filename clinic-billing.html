@@ -59,10 +59,23 @@
   @media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important } }
   #loBtn{ transition:all .15s ease; border:1px solid var(--line); }
   #loBtn:hover{ background:var(--red); color:#fff; border-color:var(--red); }
+  #shiftOv{ position:fixed; inset:0; z-index:50; background:rgba(8,18,22,.55); display:flex; align-items:center; justify-content:center; padding:20px; }
+  .sh-card{ background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:16px; box-shadow:var(--sh-lg); max-width:520px; width:100%; max-height:88dvh; overflow:auto; padding:20px; }
+  .sh-table{ width:100%; border-collapse:collapse; font:600 14px 'Inter Variable',Inter; margin:12px 0; }
+  .sh-table th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--mut); padding:6px 8px; border-bottom:1px solid var(--line); }
+  .sh-table td{ padding:8px; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums; }
+  .sh-table tr.tot td{ font-weight:800; border-bottom:none; border-top:2px solid var(--line); font-size:16px; }
+  .splitbox{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+  @media print{
+    body > *:not(#shiftOv){ display:none !important; }
+    #shiftOv{ position:static; background:none; padding:0; display:block; }
+    .sh-card{ max-width:none; max-height:none; overflow:visible; box-shadow:none; border:none; }
+    .noprint{ display:none !important; }
+  }
 </style>
 </head>
 <body>
-<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><a class="btn ghost" href="/opd" style="text-decoration:none;margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:auto;margin-right:8px;display:inline-flex;align-items:center;gap:4px"><span class="ms" style="font-size:16px">arrow_back</span> OPD Board</a><span class="tag" id="stnTag" style="margin-left:0">Cashier</span><button class="btn ghost" id="loBtn" title="Sign out of this session" style="margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:8px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;flex-shrink:0"><span class="ms" style="font-size:16px">logout</span> Sign out</button></div></header>
+<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><a class="btn ghost" href="/opd" style="text-decoration:none;margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:auto;margin-right:8px;display:inline-flex;align-items:center;gap:4px"><span class="ms" style="font-size:16px">arrow_back</span> OPD Board</a><span class="tag" id="stnTag" style="margin-left:0">Cashier</span><button class="btn ghost" id="shiftReportBtn" title="Day-end shift report: today's takings by Cash, UPI and Card" style="margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:8px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;flex-shrink:0"><span class="ms" style="font-size:16px">summarize</span> Shift</button><button class="btn ghost" id="loBtn" title="Sign out of this session" style="margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:8px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;flex-shrink:0"><span class="ms" style="font-size:16px">logout</span> Sign out</button></div></header>
 <main id="app"></main>
 <script>
 (function(){
@@ -93,6 +106,9 @@
       location.href = "/opd";
     };
   }
+
+  var shiftBtn = document.getElementById("shiftReportBtn");
+  if (shiftBtn) shiftBtn.onclick = function(){ openShift(); };
 
   function ms(n){ return '<span class="ms">'+n+'</span>'; }
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }
@@ -309,16 +325,89 @@
     app.innerHTML = '<section class="card"><div class="pt"><div class="av">'+esc(initials(p&&p.name))+'</div><div><b>'+esc((p&&p.name)||"Patient")+'</b><span>Invoice '+esc((invoice.id||"").slice(-6).toUpperCase())+'</span></div></div>'+
       '<h2>'+ms("receipt_long")+'Invoice</h2>'+lines+'<div class="tot"><span>Amount due</span><span>'+rupees(invoice.total)+'</span></div>'+
       '<div class="pays"><button data-m="cash">'+ms("payments")+'Cash</button><button data-m="upi">'+ms("qr_code_2")+'UPI</button><button data-m="card">'+ms("credit_card")+'Card</button></div>'+
+      '<button class="btn ghost" id="splitTgl">'+ms("call_split")+'Split payment (Cash + UPI)</button>'+
+      '<div id="splitBox" style="display:none"><div class="splitbox"><div><label>Cash (Rs.)</label><input id="spCash" type="number" min="0" step="0.01" placeholder="0.00"></div>'+
+      '<div><label>UPI (Rs.)</label><input id="spUpi" type="number" min="0" step="0.01" placeholder="0.00"></div></div>'+
+      '<div style="font-size:12px;color:var(--mut);margin-top:8px">Cash + UPI must add up to '+rupees(invoice.total)+' exactly.</div>'+
+      '<button class="btn" id="splitPay">'+ms("check")+'Record split payment</button></div>'+
       '<div class="err" id="err"></div></section>';
     Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.onclick = function(){ pay(invoice.id, b.getAttribute("data-m")); }; });
+    document.getElementById("splitTgl").onclick = function(){
+      var box = document.getElementById("splitBox");
+      box.style.display = box.style.display === "none" ? "" : "none";
+      if (box.style.display !== "none") document.getElementById("spCash").focus();
+    };
+    document.getElementById("splitPay").onclick = function(){ paySplit(invoice.id, invoice.total); };
+  }
+  function payDone(label){
+    app.innerHTML = '<section class="card"><div class="paid">'+ms("check_circle")+'<b>Payment recorded</b><div style="color:var(--mut);margin-top:6px">'+esc(label)+' · patient is cleared to proceed.</div></div>'+
+      '<button class="btn" id="next">'+ms("person_add")+'Next patient</button></section>';
+    document.getElementById("next").onclick = function(){ lookupView(); };
   }
   function pay(invoiceId, method){
     Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = true; });
     api("pay", { method:"POST", body:{ orgId:orgId, invoiceId:invoiceId, method:method } }).then(function(r){
       if(!r || !r.ok){ document.getElementById("err").textContent = "Payment could not be recorded."; Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = false; }); return; }
-      app.innerHTML = '<section class="card"><div class="paid">'+ms("check_circle")+'<b>Payment recorded</b><div style="color:var(--mut);margin-top:6px">'+method.toUpperCase()+' · patient is cleared to proceed.</div></div>'+
-        '<button class="btn" id="next">'+ms("person_add")+'Next patient</button></section>';
-      document.getElementById("next").onclick = function(){ lookupView(); };
+      payDone(method.toUpperCase());
+    });
+  }
+  // Split tender: part cash, part UPI. The server refuses anything that does not sum to the total.
+  function paySplit(invoiceId, total){
+    var cash = Math.round(Number(document.getElementById("spCash").value) * 100) || 0;
+    var upi = Math.round(Number(document.getElementById("spUpi").value) * 100) || 0;
+    var err = document.getElementById("err");
+    if (cash < 0 || upi < 0 || cash + upi !== total){ err.textContent = "Cash + UPI must add up to " + rupees(total) + " exactly."; return; }
+    err.textContent = "";
+    document.getElementById("splitPay").disabled = true;
+    Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = true; });
+    api("pay", { method:"POST", body:{ orgId:orgId, invoiceId:invoiceId, method:"split", split:{ cash:cash, upi:upi } } }).then(function(r){
+      if(!r || !r.ok){
+        document.getElementById("err").textContent = r && r.error === "split_mismatch" ? "Cash + UPI must add up to " + rupees(total) + " exactly." : "Payment could not be recorded.";
+        document.getElementById("splitPay").disabled = false;
+        Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = false; });
+        return;
+      }
+      payDone("SPLIT (Cash " + rupees(cash) + " + UPI " + rupees(upi) + ")");
+    });
+  }
+
+  // ---- day-end shift report: today's paid invoices grouped by tender ----
+  function shiftClose(){ var ov = document.getElementById("shiftOv"); if (ov) ov.remove(); }
+  function openShift(){
+    shiftClose();
+    var ov = document.createElement("div");
+    ov.id = "shiftOv";
+    ov.innerHTML = '<div class="sh-card" id="shiftModal"><h2>'+ms("summarize")+'Shift Report</h2><div class="msg">Loading today\u2019s takings\u2026</div></div>';
+    document.body.appendChild(ov);
+    ov.addEventListener("click", function(e){ if (e.target === ov) shiftClose(); });
+    api("shift?orgId="+encodeURIComponent(orgId)).then(function(r){
+      var m = document.getElementById("shiftModal"); if (!m) return;
+      var closeBtn = '<div class="noprint" style="display:flex;gap:10px;margin-top:14px"><button class="btn ghost" id="shClose" style="margin:0">Close</button><button class="btn" id="shPrint" style="margin:0">'+ms("print")+'Print</button></div>';
+      if (!r || !r.ok){
+        m.innerHTML = '<h2>'+ms("summarize")+'Shift Report</h2><div class="msg">'+ms("error")+
+          (r && r.error === "forbidden" ? "Your role cannot view the shift report." : "Today\u2019s takings could not be read. Do not read this as zero collected.")+'</div>'+closeBtn;
+        document.getElementById("shClose").onclick = shiftClose;
+        return;
+      }
+      var rows = [["Cash", "cash"], ["UPI", "upi"], ["Card", "card"], ["Split (Cash + UPI)", "split"]]
+        .concat((r.byMethod.other || 0) > 0 ? [["Other", "other"]] : [])
+        .map(function(x){
+          return '<tr><td>'+x[0]+'</td><td>'+(r.byCount[x[1]] || 0)+'</td><td style="text-align:right">'+rupees(r.byMethod[x[1]] || 0)+'</td></tr>';
+        }).join("");
+      var inv = (r.invoices || []).map(function(v){
+        var when = v.paidAt ? new Date(v.paidAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+        var how = String(v.paidMethod || "other").toUpperCase() +
+          (v.split ? ' <small style="color:var(--mut)">(Cash ' + rupees(v.split.cash) + ' + UPI ' + rupees(v.split.upi) + ')</small>' : '');
+        return '<tr><td>'+esc(when)+'</td><td>'+esc(v.shortId || "")+'</td><td>'+how+'</td><td style="text-align:right">'+rupees(v.total)+'</td></tr>';
+      }).join("");
+      m.innerHTML = '<h2>'+ms("summarize")+'Shift Report <small style="font-size:12px;font-weight:600;color:var(--mut)">'+esc(r.date || "")+'</small></h2>'+
+        '<table class="sh-table"><tr><th>Tender</th><th>Bills</th><th style="text-align:right">Amount</th></tr>'+rows+
+        '<tr class="tot"><td>Total</td><td>'+r.count+'</td><td style="text-align:right">'+rupees(r.total)+'</td></tr></table>'+
+        (inv ? '<h2 style="margin-top:16px">'+ms("receipt_long")+'Bills paid today ('+r.count+')</h2>'+
+          '<table class="sh-table"><tr><th>Time</th><th>Bill</th><th>Mode</th><th style="text-align:right">Amount</th></tr>'+inv+'</table>'
+        : '<div class="msg">No bills paid yet today.</div>')+closeBtn;
+      document.getElementById("shClose").onclick = shiftClose;
+      document.getElementById("shPrint").onclick = function(){ window.print(); };
     });
   }
 
@@ -326,6 +415,7 @@
   function start(){
     if (STATION === "pharmacy") {
       try { document.getElementById("stnName").textContent = "Pharmacy"; document.getElementById("stnTag").textContent = "Dispense"; } catch(e){}
+      try { document.getElementById("shiftReportBtn").style.display = "none"; } catch(e){}   // dispensing never sees takings
       pharmacyView(); return;
     }
     var initPt = P.get("patient") || P.get("patientId") || P.get("ticketId");

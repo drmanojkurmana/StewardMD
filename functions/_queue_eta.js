@@ -11,12 +11,15 @@
 export const DEFAULT_CONSULT_MIN = 12;
 
 // ---- status state machine ----------------------------------------------------------------
-export const STATUS = ["registered", "waiting", "called", "in_consultation", "investigation", "followup", "completed", "cancelled", "no_show"];
+export const STATUS = ["registered", "waiting", "called", "in_consultation", "at_diagnostics", "investigation", "followup", "completed", "cancelled", "no_show"];
 const NEXT = {
   registered:      ["waiting", "called", "in_consultation", "cancelled", "no_show"],
   waiting:         ["called", "in_consultation", "cancelled", "no_show"],
   called:          ["in_consultation", "waiting", "no_show", "cancelled"],
-  in_consultation: ["completed", "investigation", "followup", "cancelled", "waiting"],
+  in_consultation: ["completed", "investigation", "followup", "cancelled", "waiting", "at_diagnostics"],
+  // Sent for tests mid-consult: out of the room (not queued, like in_consultation) so the doctor can
+  // call the next patient. Tests done returns them to the waiting hall, or straight back in.
+  at_diagnostics:  ["waiting", "called", "in_consultation", "cancelled"],
   investigation:   ["waiting", "called", "in_consultation", "completed", "followup", "cancelled"],
   followup:        ["completed", "cancelled"],
   completed:       [],
@@ -55,9 +58,11 @@ export function orderQueue(tickets) {
 }
 // A room's display order: the patient in consultation pinned on top (▶), then the waiting queue in true
 // order. orderQueue alone drops in_consultation, so the nurse board needs this to show reorders/priority.
+// Patients sent for tests ride at the end: out of the room but still this doctor's open work, with their
+// "Tests Done" action, so they are never invisible while at the lab.
 export function orderRoomView(tickets) {
   const t = tickets || [];
-  return t.filter((x) => x.status === "in_consultation").concat(orderQueue(t));
+  return t.filter((x) => x.status === "in_consultation").concat(orderQueue(t), t.filter((x) => x.status === "at_diagnostics"));
 }
 
 // A PUBLIC waiting-room screen shows the ticket's TOKEN and never a name, MRN or phone: the token is what
@@ -242,8 +247,8 @@ export function opdPulse(tickets, nowMs) {
     else if (t.status === "cancelled") cancelled++;
     else if (t.status === "in_consultation") inConsultation++;
     else if (WAIT.indexOf(t.status) > -1) waiting++;
-    // Waiting on a result, or booked back: still the hospital's open work, counted apart from the hall.
-    else if (t.status === "investigation" || t.status === "followup") held++;
+    // Waiting on a result, at the lab, or booked back: still the hospital's open work, counted apart from the hall.
+    else if (t.status === "investigation" || t.status === "followup" || t.status === "at_diagnostics") held++;
     recalls += Number(t.recallCount) || 0;
 
     if (t.registeredAt && t.consultStartAt) doorToSeen.push(t.consultStartAt - t.registeredAt);

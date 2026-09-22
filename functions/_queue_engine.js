@@ -209,9 +209,11 @@ export async function setStatus(env, session, ticketId, to, actor) {
   if (to === "no_show") patch.noShowAt = now();   // starts the recall window
   if (to === "called" && !t.calledAt) patch.calledAt = now();
   if (to === "in_consultation") { patch.consultStartAt = now(); if (!t.calledAt) patch.calledAt = now(); sessPatch.currentTicketId = ticketId; }
-  // Send back to the waiting hall (doctor/nurse reroute from the consulting room): free the room, drop the
-  // partial-consult timer so it is not counted, and re-queue the patient (recompute reassigns position/ETA).
-  if (from === "in_consultation" && to === "waiting") { patch.consultStartAt = 0; patch.calledAt = 0; if (session.currentTicketId === ticketId) sessPatch.currentTicketId = ""; }
+  // Send back to the waiting hall, or out to diagnostics ("Send for Tests" mid-consult): free the room,
+  // drop the partial-consult timer so it is not counted, and (for waiting) re-queue the patient
+  // (recompute reassigns position/ETA). A patient at diagnostics is out of the room queue entirely, so the
+  // doctor can call the next patient; "Tests Done" returns them with priority.
+  if (from === "in_consultation" && (to === "waiting" || to === "at_diagnostics")) { patch.consultStartAt = 0; patch.calledAt = 0; if (session.currentTicketId === ticketId) sessPatch.currentTicketId = ""; }
   let learn = null;
   if (from === "in_consultation" && (to === "completed" || to === "investigation" || to === "followup" || to === "cancelled")) {
     patch.consultEndAt = now();

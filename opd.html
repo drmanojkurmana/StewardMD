@@ -670,7 +670,7 @@
   function renderBoard(){
     if(!st.board.length){ renderShell('<div class="empty">No OPD queues yet for today.<br>Patients auto-import from GHIS once doctors sign in, or add a walk-in.</div>'); return; }
     var docs=st.board.map(function(b){
-      var s=b.session, tickets=(b.tickets||[]).filter(function(t){return ["registered","waiting","called","in_consultation"].indexOf(t.status)>-1;});
+      var s=b.session, tickets=(b.tickets||[]).filter(function(t){return ["registered","waiting","called","in_consultation","at_diagnostics"].indexOf(t.status)>-1;});
       var rows=tickets.length? tickets.map(function(t,i){return ticketRow(s,t,i,tickets.length);}).join("") : '<div class="empty">No patients waiting</div>';
       return '<div class="doc"><h2>'+esc(docLabel(s.doctorUid,s.doctorName)||"Doctor")+'<small>'+tickets.length+' in queue</small></h2>'+
         '<div class="rows">'+rows+'</div>'+
@@ -681,19 +681,29 @@
     Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
     wireRowActions();
   }
+  // Lab-flow badges shared by both boards: a patient sent for tests reads "At Lab / Tests", and a
+  // patient returned with results reads "Results Ready".
+  function labBadges(t){
+    var h="";
+    if(t.status==="at_diagnostics") h+=' <span class="chip" style="background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700">At Lab / Tests</span>';
+    if(t.priority===1) h+=' <span class="chip" style="background:#fef9c3;color:#854d0e;font-size:11px;font-weight:700">★ Results Ready</span>';
+    return h;
+  }
   function ticketRow(s,t,i,n){
-    var cls=t.priority>=2?"p2":(t.priority>=1?"p1":""); var consult=t.status==="in_consultation";
+    var cls=t.priority>=2?"p2":(t.priority>=1?"p1":""); var consult=t.status==="in_consultation"; var atLab=t.status==="at_diagnostics";
     var eta=t.etaStart?Math.max(0,Math.round((t.etaStart-Date.now())/60000)):null;
     var b=[];
-    if(!consult&&can("queue.status")) b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>');
-    if(!consult&&can("queue.status")) b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>');
+    if(!consult&&!atLab&&can("queue.status")) b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>');
+    if(!consult&&!atLab&&can("queue.status")) b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>');
+    if(atLab&&can("queue.status")) b.push('<button class="pri" data-a="diagdone" data-s="'+s.id+'" data-t="'+t.id+'">Tests Done → Return</button>');
     if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">No-show</button>');
-    if(can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
-    if(can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
-    if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
+    if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
+    if(!atLab&&can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
+    if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
     if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear urgent":"Urgent")+'</button>');
-    if(!consult&&can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');   // an in-consultation patient isn't queued -> assign always failed; hide it
+    if(!consult&&!atLab&&can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');   // an in-consultation patient isn't queued -> assign always failed; hide it
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // reroute from the room back to the waiting hall (in_consultation -> waiting)
+    if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // out to diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
@@ -706,7 +716,7 @@
     var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
     b.push('<button data-a="bill" data-t="' + t.id + '" data-smd="' + esc(mrnVal) + '" data-mrn="' + esc(mrnVal) + '" data-unbilled="' + (t.unbilledAmount||0) + '" data-name="' + esc(t.name||"Patient") + '"' + (t.unbilledAmount>0?' class="pri"':'') + '>' + billLabel + '</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+'</div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+labBadges(t)+'</div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
       '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
       '<div class="acts">'+b.join("")+'</div></div>';
@@ -718,6 +728,9 @@
         if(a==="call") post("status",{sessionId:sid,ticketId:tid,status:"called"});
         else if(a==="start") post("status",{sessionId:sid,ticketId:tid,status:"in_consultation"});
         else if(a==="sendback") post("status",{sessionId:sid,ticketId:tid,status:"waiting"});
+        else if(a==="senddiag") post("status",{sessionId:sid,ticketId:tid,status:"at_diagnostics"});
+        // Tests done: back to the doctor's queue first, then flagged priority 1 so the row reads Results Ready.
+        else if(a==="diagdone") post("status",{sessionId:sid,ticketId:tid,status:"waiting"},function(){ post("priority",{sessionId:sid,ticketId:tid,priority:1}); });
         else if(a==="noshow") openNoShowMark(sid,tid,btn.getAttribute("data-n"));
         else if(a==="prio") post("priority",{sessionId:sid,ticketId:tid,priority:+btn.getAttribute("data-p")});
         else if(a==="up") openMove(sid,tid,+btn.getAttribute("data-i")-1);
@@ -1363,6 +1376,115 @@
 
     sheet.querySelector("#cxTariff").onclick = close;
 
+    // ---- bulk CSV import (Pharmacy Stock + Investigations tabs) ----
+    // Columns: Name,Kind,DosageForm,PriceRupees,Stock,Unit. A header row is recognised by a "name"
+    // column; without one the columns are read in that fixed order. Each row is saved through the same
+    // bill/tariff endpoint as the manual form, so validation + audit are identical.
+    var CSV_KINDS = { medication: 1, investigation: 1, service: 1, consultation: 1 };
+    function parseCsv(text){
+      var rows = [], row = [], cur = "", q = false, i, c;
+      for (i = 0; i < text.length; i++){
+        c = text[i];
+        if (q){
+          if (c === '"'){ if (text[i + 1] === '"'){ cur += '"'; i++; } else q = false; }
+          else cur += c;
+        }
+        else if (c === '"') q = true;
+        else if (c === ","){ row.push(cur); cur = ""; }
+        else if (c === "\n" || c === "\r"){
+          if (c === "\r" && text[i + 1] === "\n") i++;
+          row.push(cur); cur = "";
+          if (row.length > 1 || String(row[0]).trim() !== "") rows.push(row);
+          row = [];
+        }
+        else cur += c;
+      }
+      row.push(cur);
+      if (row.length > 1 || String(row[0]).trim() !== "") rows.push(row);
+      return rows;
+    }
+    function csvTemplate(defaultKind){
+      var k = defaultKind === "investigation" ? "investigation" : "medication";
+      return "Name,Kind,DosageForm,PriceRupees,Stock,Unit\n" +
+        (k === "medication"
+          ? "Paracetamol 650mg,medication,Tab,30,100,Tab\nAmoxicillin 500mg,medication,Cap,80,50,Cap\n"
+          : "CBC Blood Test,investigation,,250,,\nECG 12-Lead,investigation,,250,,\n");
+    }
+    function downloadCsvSample(defaultKind){
+      var blob = new Blob([csvTemplate(defaultKind)], { type: "text/csv" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = defaultKind === "investigation" ? "investigations-template.csv" : "pharmacy-stock-template.csv";
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    }
+    function runCsvImport(file, defaultKind, statusEl){
+      var reader = new FileReader();
+      reader.onload = function(){
+        var rows;
+        try { rows = parseCsv(String(reader.result || "")); }
+        catch (e){ statusEl.textContent = "That file could not be read as CSV."; return; }
+        if (!rows.length){ statusEl.textContent = "The file has no rows."; return; }
+        var head = rows[0].map(function(h){ return String(h).trim().toLowerCase(); });
+        var hasHead = head.indexOf("name") > -1;
+        var data = hasHead ? rows.slice(1) : rows;
+        var col = function(r, name, pos){
+          if (hasHead){ var i = head.indexOf(name); return i > -1 ? String(r[i] || "").trim() : ""; }
+          return String(r[pos] != null ? r[pos] : "").trim();
+        };
+        var n = 0, ok = 0, skipped = 0;
+        var next = function(){
+          if (n >= data.length){
+            statusEl.textContent = "Saved " + ok + " of " + data.length + " rows" + (skipped ? " (" + skipped + " skipped: no name or bad price)" : "") + ".";
+            toast("CSV import: " + ok + " of " + data.length + " saved");
+            reloadTariff();
+            return;
+          }
+          var r = data[n]; n++;
+          statusEl.textContent = "Saving row " + n + " of " + data.length + "...";
+          var name = col(r, "name", 0);
+          var kind = col(r, "kind", 1).toLowerCase();
+          if (!CSV_KINDS[kind]) kind = defaultKind;
+          var paise = Math.round(Number(col(r, "pricerupees", 3)) * 100);
+          if (!name || !isFinite(paise) || paise < 0){ skipped++; next(); return; }
+          api("bill/tariff", { method: "POST", body: {
+            orgId: st.orgId, name: name, kind: kind,
+            dosageForm: col(r, "dosageform", 2), unit: col(r, "unit", 5),
+            price: paise, stock: Math.max(0, Math.round(Number(col(r, "stock", 4)) || 0))
+          } }).then(function(x){ if (x && x.ok) ok++; else skipped++; next(); },
+            function(){ skipped++; next(); });
+        };
+        next();
+      };
+      reader.readAsText(file);
+    }
+    function wireCsvImport(host, defaultKind){
+      var sample = host.querySelector("#csvSample"), imp = host.querySelector("#csvImport"), file = host.querySelector("#csvFile");
+      if (sample) sample.onclick = function(){ downloadCsvSample(defaultKind); };
+      if (imp && file){
+        imp.onclick = function(){ file.click(); };
+        file.onchange = function(){
+          var statusEl = host.querySelector("#csvStatus");
+          if (!file.files || !file.files.length) return;
+          if (statusEl) statusEl.textContent = "Reading " + file.files[0].name + "...";
+          runCsvImport(file.files[0], defaultKind, statusEl || { textContent: "" });
+          file.value = "";
+        };
+      }
+    }
+    function csvImportCard(){
+      return '<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">' +
+        '<div style="font-weight:700;font-size:13px;margin-bottom:4px">Bulk Import via CSV</div>' +
+        '<div style="font-size:12px;color:var(--mut);margin-bottom:10px">Columns: Name, Kind, DosageForm, PriceRupees, Stock, Unit. One item per row.</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+          '<button class="btn ghost" id="csvSample" style="margin:0;width:auto;padding:8px 14px;font-size:12.5px">Download Sample Template</button>' +
+          '<button class="btn" id="csvImport" style="margin:0;width:auto;padding:8px 14px;font-size:12.5px">Import CSV</button>' +
+          '<input type="file" id="csvFile" accept=".csv,text/csv" style="display:none">' +
+        '</div>' +
+        '<div id="csvStatus" style="font-size:12px;color:var(--mut);margin-top:8px"></div>' +
+      '</div>';
+    }
+
     function renderTab(){
       Array.prototype.forEach.call(sheet.querySelectorAll("[data-ttab]"), function(b){
         b.classList.toggle("active", Number(b.getAttribute("data-ttab")) === activeTab);
@@ -1494,6 +1616,7 @@
           '</div>' +
           '<button class="btn" id="btnAddMed" style="margin:0;width:auto;padding:8px 16px;font-size:13px">Add Medicine</button>' +
         '</div>' +
+        csvImportCard() +
         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
           '<div style="font-weight:700;font-size:13px">Pharmacy Inventory (' + meds.length + ')</div>' +
           '<input id="medFilter" placeholder="Search medicines…" style="width:160px;margin:0;padding:5px 8px;font-size:12px">' +
@@ -1569,6 +1692,8 @@
           };
         });
 
+        wireCsvImport(host, "medication");
+
       } else if (activeTab === 2) {
         // Tab 2: Investigations & Services
         var svcs = items.filter(function(t){ return t.kind === "service" || t.kind === "investigation"; });
@@ -1600,6 +1725,7 @@
           '</div>' +
           '<button class="btn" id="btnAddSvc" style="margin:0;width:auto;padding:8px 16px;font-size:13px">Add Service</button>' +
         '</div>' +
+        csvImportCard() +
         '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Investigations & Services (' + svcs.length + ')</div>' +
         svcRows;
 
@@ -1639,6 +1765,8 @@
             });
           };
         });
+
+        wireCsvImport(host, "investigation");
 
       } else if (activeTab === 3) {
         // Tab 3: OPD Billing Flow
@@ -1789,13 +1917,15 @@
     wireRowActions();
   }
   function roomTicketRow(s,t,i,n){
-    var consult=t.status==="in_consultation"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
+    var consult=t.status==="in_consultation"; var atLab=t.status==="at_diagnostics"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
     var b=[];
-    if(!consult&&can("queue.status")){ b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>'); b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>'); }
+    if(!consult&&!atLab&&can("queue.status")){ b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>'); b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>'); }
+    if(atLab&&can("queue.status")) b.push('<button class="pri" data-a="diagdone" data-s="'+s.id+'" data-t="'+t.id+'">Tests Done → Return</button>');
     if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">No-show</button>');   // D13: called and did not come; recallable with the same token
-    if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
+    if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
     if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // room -> waiting hall (in_consultation -> waiting)
+    if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // room -> diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
@@ -1808,7 +1938,7 @@
     var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
     b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'" data-unbilled="'+(t.unbilledAmount||0)+'" data-name="'+esc(t.name||"Patient")+'"'+(t.unbilledAmount>0?' class="pri"':'')+'>'+billLabel+'</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+'</div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+labBadges(t)+'</div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   // Nurse records vitals -> a compact timeline entry (kind:"vitals", EMR_VITALS cap). This is the nurse's

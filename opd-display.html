@@ -34,6 +34,9 @@
   .pw .m{ width:clamp(13px,1.1vw,18px); height:clamp(13px,1.1vw,18px); background:var(--muted); -webkit-mask:url(/logo.png) center/contain no-repeat; mask:url(/logo.png) center/contain no-repeat; }
   .grow{ flex:1; }
   .live{ display:flex; align-items:center; gap:.5vw; color:var(--muted); font-size:clamp(12px,1.1vw,18px); font-weight:600; }
+  #soundbtn{ background:transparent; border:1px solid var(--line); color:var(--muted); border-radius:999px;
+    font:700 clamp(11px,1vw,16px) 'Inter Variable',system-ui,sans-serif; padding:.5vh 1vw; cursor:pointer; letter-spacing:.4px; }
+  #soundbtn.on{ color:var(--call); border-color:var(--call); }
   .dot{ width:.8vw; height:.8vw; min-width:9px; min-height:9px; border-radius:50%; background:var(--serve); animation:ping 2.4s var(--ease) infinite; }
   .clock{ font-variant-numeric:tabular-nums; font-size:clamp(16px,1.7vw,30px); font-weight:700; letter-spacing:1px; }
 
@@ -90,6 +93,7 @@
     <div class="clinic" id="clinic"></div>
     <div class="grow"></div>
     <div class="live"><span class="dot" id="livedot"></span><span id="livetxt">Live</span></div>
+    <button id="soundbtn" class="on" type="button" title="Turn call-out sound on or off">Sound: On</button>
     <div class="clock" id="clock"></div>
   </header>
   <section class="banner" id="banner"><div class="tag"><span class="ms">campaign</span>Now Calling</div><div class="items" id="bannerItems"></div></section>
@@ -129,15 +133,70 @@
     }
   }
 
+  // Audible call-outs: a gentle dual-tone hospital chime (Web Audio, no audio files) plus a spoken
+  // "Token X, please proceed to Room Y" (speechSynthesis). Browsers unlock audio only after a tap, so the
+  // first tap anywhere (or on the toggle) warms the AudioContext; the toggle persists its choice.
+  var soundOn = true;
+  try { soundOn = localStorage.getItem("smd_display_sound") !== "off"; } catch (e) {}
+  var AC = null;
+  function audio(){
+    try {
+      if (!AC) { var Ctx = window.AudioContext || window.webkitAudioContext; if (!Ctx) return null; AC = new Ctx(); }
+      if (AC.state === "suspended") AC.resume();
+      return AC;
+    } catch (e) { return null; }
+  }
+  function tone(ac, freq, t0, dur){
+    var o = ac.createOscillator(), g = ac.createGain();
+    o.type = "sine"; o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(0.4, t0 + 0.06);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g); g.connect(ac.destination);
+    o.start(t0); o.stop(t0 + dur + 0.05);
+  }
+  function playChime(){
+    var ac = audio(); if (!ac) return;
+    var t = ac.currentTime + 0.03;
+    tone(ac, 880, t, 0.55);          // A5, then a fifth below: the classic two-tone hospital call
+    tone(ac, 659.25, t + 0.5, 0.8);  // E5
+  }
+  function announceCall(label, room){
+    try {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();   // a newer call replaces a stale one, never queues behind it
+      var u = new SpeechSynthesisUtterance(label + ", please proceed to Room " + room);
+      u.rate = 0.95;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  function paintSoundBtn(){
+    var b = $("soundbtn"); if (!b) return;
+    b.textContent = soundOn ? "Sound: On" : "Sound: Off";
+    b.className = soundOn ? "on" : "";
+  }
+  function setSound(on){
+    soundOn = !!on;
+    try { localStorage.setItem("smd_display_sound", soundOn ? "on" : "off"); } catch (e) {}
+    if (soundOn) audio(); else { try { if ("speechSynthesis" in window) window.speechSynthesis.cancel(); } catch (e) {} }
+    paintSoundBtn();
+  }
+  paintSoundBtn();
+  $("soundbtn").onclick = function(){ setSound(!soundOn); };
+  document.addEventListener("pointerdown", function warm(){ try { audio(); } catch (e) {} document.removeEventListener("pointerdown", warm); });
+
   function renderBanner(rooms){
     var calls = [];
     rooms.forEach(function(r){ (r.calling || []).forEach(function(n, i){ calls.push({ n: n, room: r.number || r.name, label: whoIn(n, (r.callingDepartments || [])[i], r) }); }); });
     if (!calls.length){ banner.classList.remove("on"); return; }
     bannerItems.innerHTML = calls.map(function(c){ return '<span class="item"><b>' + esc(c.label) + '</b><span class="arrow">&rarr;</span>Room ' + esc(c.room) + '</span>'; }).join("");
     banner.classList.add("on");
-    // new call since last poll? one-shot attention pulse on the whole banner
-    var fresh = calls.some(function(c){ return !prevCalling.has(c.room + "|" + c.n); });
-    if (fresh){ banner.classList.remove("freshpulse"); void banner.offsetWidth; banner.classList.add("freshpulse"); }
+    // new call since last poll? one-shot attention pulse on the whole banner, plus chime + announcement
+    var freshCalls = calls.filter(function(c){ return !prevCalling.has(c.room + "|" + c.n); });
+    if (freshCalls.length){
+      banner.classList.remove("freshpulse"); void banner.offsetWidth; banner.classList.add("freshpulse");
+      if (soundOn){ playChime(); freshCalls.forEach(function(c){ announceCall(c.label, c.room); }); }
+    }
   }
 
   function card(r){

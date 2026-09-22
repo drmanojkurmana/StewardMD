@@ -637,7 +637,7 @@ async function requireOrgOrGlobal(env, actor, orgId, cap, resourceOwnerUid) {
   if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
 }
 async function ticketView(env, tickets) { return Q.decorateForDoctor(env, tickets); }
-const ACTIVE = ["registered", "waiting", "called", "in_consultation"];
+const ACTIVE = ["registered", "waiting", "called", "in_consultation", "at_diagnostics"];
 const WAITING = ["registered", "waiting", "called"];
 // The nurse-station board for an org: each room (its resolved-doctor session) with count + status, plus
 // the central unassigned pool. Status uses the org's CONFIGURABLE thresholds (Phase 3), not hard-codes.
@@ -5581,6 +5581,8 @@ export async function onRequest(context) {
         order: CAPS.ORDER_CREATE, orders: CAPS.ORDER_READ, queue: CAPS.BILLING_VIEW,
         tariff: method === "POST" ? CAPS.STAFF_ADMIN : CAPS.BILLING_VIEW,
         invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE,
+        // Day-end shift report: read-only takings by tender for the cashier closing the drawer.
+        shift: CAPS.BILLING_VIEW,
         // Pharmacy station: read what is owed, and hand it over. Separate caps from billing on purpose -
         // the person releasing medicines is never the person taking the money.
         pharmacy: CAPS.ORDER_READ, dispense: CAPS.ORDER_DISPENSE
@@ -5656,7 +5658,11 @@ export async function onRequest(context) {
         return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
       }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
-      if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
+      if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid, body.split), 200, request);
+      if (sub === "shift" && method === "GET") {
+        const rep = await BILL.shiftReport(env, bOrg).catch((e) => { if (e && e.status === 507) throw e; return null; });
+        return json(rep ? Object.assign({ ok: true }, rep) : { ok: false, error: "shift_unreadable", message: "Today's takings could not be read. Do not read this as zero collected." }, 200, request);
+      }
       if (sub === "pharmacy" && method === "GET") return json({ ok: true, ...(await BILL.pharmacyQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
       if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid), 200, request);
       return json({ ok: false, error: "not_found" }, 404, request);

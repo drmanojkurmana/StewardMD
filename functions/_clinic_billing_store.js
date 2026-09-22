@@ -232,17 +232,27 @@ export async function createInvoice(env, orgId, patientId, actor) {
   if (inv.total > 0) await toBooks(env, orgId, { kind: "invoice_posted", id, amountPaise: inv.total, date: today(), category: "consultation", payer: "patient" }, actor);
   return { ok: true, id, invoice: Object.assign({ id, status: "open" }, inv) };
 }
-export async function payInvoice(env, orgId, invoiceId, method, actor) {
+export async function payInvoice(env, orgId, invoiceId, method, actor, split) {
   const d = await fsGet(env, "q_invoices/" + invoiceId);
   if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
   if (d.fields.status === "paid") return { ok: true, already: true };
   const lines = JSON.parse(d.fields.lines || "[]");
   const paidAt = Date.now();
-  const writes = [wUpdate(env, "q_invoices/" + invoiceId, { status: "paid", paidMethod: method || "cash", paidAt, paidUtcDay: utcDay(paidAt) })];
+  // Split tender (Cash + UPI): the two parts must add up to the invoice total to the paise, so the
+  // day-end report can never disagree with what was billed. Anything else is refused, unpaid.
+  let paidMethod = method || "cash", paidSplit = "";
+  if (paidMethod === "split") {
+    const cash = Math.round(Number((split && split.cash) || 0));
+    const upi = Math.round(Number((split && split.upi) || 0));
+    if (!isFinite(cash) || !isFinite(upi) || cash < 0 || upi < 0 || cash + upi !== (d.fields.total || 0))
+      return { ok: false, error: "split_mismatch", message: "Cash + UPI must add up to the invoice total." };
+    paidSplit = JSON.stringify({ cash, upi });
+  }
+  const writes = [wUpdate(env, "q_invoices/" + invoiceId, Object.assign({ status: "paid", paidMethod, paidAt, paidUtcDay: utcDay(paidAt) }, paidSplit ? { paidSplit } : {}))];
   lines.forEach((l) => { if (l.orderId) writes.push(wUpdate(env, "q_orders/" + l.orderId, { status: "paid", updatedAt: Date.now() })); });
   await fsCommit(env, writes);
-  await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId, actor: actor || "cashier", action: "invoice_pay", meta: method || "cash" });
-  if (d.fields.total > 0) await toBooks(env, orgId, { kind: "payment", id: invoiceId, amountPaise: d.fields.total, date: today(), method: method || "cash", payer: "patient" }, actor);
+  await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId, actor: actor || "cashier", action: "invoice_pay", meta: paidSplit ? ("split cash:" + JSON.parse(paidSplit).cash + " upi:" + JSON.parse(paidSplit).upi) : paidMethod });
+  if (d.fields.total > 0) await toBooks(env, orgId, { kind: "payment", id: invoiceId, amountPaise: d.fields.total, date: today(), method: paidMethod, payer: "patient" }, actor);
   // Tell the VISIT the money is in. The cashier deliberately holds no queue capability - taking payment
   // is not queue authority - so this is emitted by the payment itself, not by a person clicking twice.
   // Only possible for orders the doctor raised from the EMR, which carry ticketId/sessionId; an order
@@ -256,7 +266,7 @@ export async function payInvoice(env, orgId, invoiceId, method, actor) {
       if (!f || !f.ticketId || !f.sessionId || seen.indexOf(f.ticketId) > -1) continue;
       seen.push(f.ticketId);
       const [sess, tkt] = await Promise.all([getSession(env, f.sessionId), getTicket(env, f.ticketId)]);
-      if (sess && tkt) await appendTimeline(env, sess, tkt, "status", "Payment received - " + (method || "cash"), actor || "Billing desk");
+      if (sess && tkt) await appendTimeline(env, sess, tkt, "status", "Payment received - " + (paidSplit ? ("split cash:" + JSON.parse(paidSplit).cash + " upi:" + JSON.parse(paidSplit).upi) : paidMethod), actor || "Billing desk");
     }
   } catch (e) { /* the payment is already recorded; the visit note is best-effort */ }
   return { ok: true };
@@ -276,6 +286,11 @@ export async function getInvoice(env, orgId, invoiceId) {
  * paidUtcDay existed have none and are not counted: only the deploy day itself can be short. */
 export const REVENUE_CAP = 20000;
 const utcDay = (ms) => new Date(ms).toISOString().slice(0, 10);
+const dayBounds = (offsetMinutes) => {
+  const off = (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000;
+  const now = Date.now(), dayStart = now - ((((now + off) % 86400000) + 86400000) % 86400000);
+  return { dayStart, dayEnd: dayStart + 86400000, date: new Date(dayStart + off).toISOString().slice(0, 10) };
+};
 export async function revenueToday(env, orgId, offsetMinutes) {
   if (!billingEnabled(env) || !orgId) return null;
   const off = (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000;
@@ -288,4 +303,39 @@ export async function revenueToday(env, orgId, offsetMinutes) {
     rows.forEach((r) => { const f = r.fields || {}; if (f.orgId === orgId && f.status === "paid" && (f.paidAt || 0) >= dayStart && f.paidAt < dayEnd) { paise += (f.total || 0); count++; } });
   }
   return { revenueToday: Math.round(paise / 100), invoicesPaidToday: count };
+}
+/* The cashier's day-end shift report: today's PAID invoices grouped by tender (Cash, UPI, Card, Split),
+ * plus a per-invoice list for reconciliation. Same day bounds + paging discipline as revenueToday: past
+ * REVENUE_CAP invoices paid in one UTC day it throws rather than show a short total. Invoice rows carry
+ * no patient identity (suffix + amount + method + time is enough to reconcile the drawer). */
+const SHIFT_METHODS = ["cash", "upi", "card", "split"];
+export async function shiftReport(env, orgId, offsetMinutes) {
+  if (!billingEnabled(env) || !orgId) return null;
+  const { dayStart, dayEnd, date } = dayBounds(offsetMinutes);
+  const days = [...new Set([utcDay(dayStart), utcDay(dayEnd - 1)])];
+  const byMethod = { cash: 0, upi: 0, card: 0, split: 0, other: 0 };
+  const byCount = { cash: 0, upi: 0, card: 0, split: 0, other: 0 };
+  const invoices = [];
+  const seen = new Set();
+  let paise = 0, count = 0;
+  for (const day of days) {
+    const { rows, truncated } = await readAll(env, "q_invoices", [{ field: "orgId", value: orgId }, { field: "paidUtcDay", value: day }], REVENUE_CAP);
+    if (truncated) throw Object.assign(new Error("revenue_too_many_invoices"), { status: 507, detail: `More than ${REVENUE_CAP} invoices paid on ${day}.` });
+    rows.forEach((r) => {
+      const f = r.fields || {};
+      if (f.orgId !== orgId || f.status !== "paid" || (f.paidAt || 0) < dayStart || f.paidAt >= dayEnd) return;
+      // One invoice, one paidUtcDay: a page overlap must never count the same bill twice in a money report.
+      if (!r.id || seen.has(r.id)) return;
+      seen.add(r.id);
+      const m = String(f.paidMethod || "");
+      const key = SHIFT_METHODS.indexOf(m) > -1 ? m : "other";
+      const tot = f.total || 0;
+      byMethod[key] += tot; byCount[key]++; paise += tot; count++;
+      let split = null;
+      try { split = f.paidSplit ? JSON.parse(f.paidSplit) : null; } catch (e) { split = null; }
+      invoices.push({ id: r.id, shortId: String(r.id || "").slice(-6).toUpperCase(), total: tot, paidMethod: m || "other", paidAt: f.paidAt || 0, split });
+    });
+  }
+  invoices.sort((a, b) => (b.paidAt || 0) - (a.paidAt || 0));
+  return { date, total: paise, count, byMethod, byCount, invoices };
 }
