@@ -219,7 +219,7 @@
 
         '<div class="pr-body">' +
           '<div class="pr-dup" id="prDup" hidden></div>' +
-          '<button type="button" class="pr-btn ghost" data-a="read-nfc" style="width:100%;margin-bottom:14px;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">\uD83D\uDCF1 ' + wTH("ward.reg-read-nfc", "Read NFC Tag from File") + '</button>' +
+          '<button type="button" class="pr-btn ghost" data-a="read-nfc" style="width:100%;margin-bottom:14px;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">\uD83D\uDCF1 ' + wTH("ward.reg-read-nfc", "Ni-Key: Read NFC Tag from File") + '</button>' +
 
           '<h3 class="pr-sec">' + wTH("ward.reg-patient", "Patient") + "</h3>" +
           field("name", wT("ward.reg-full-name", "Full name"), { req: true, ph: wT("ward.reg-name-example", "e.g. Asha Kumar"), max: 80, auto: "name" }) +
@@ -625,19 +625,19 @@
       if (a === "read-nfc") {
         var sBtn = b;
         sBtn.disabled = true;
-        sBtn.textContent = wT("ward.reg-hold-tag", "Hold file tag to phone…");
-        var resetScan = function () { sBtn.disabled = false; sBtn.textContent = "\uD83D\uDCF1 " + wT("ward.reg-read-nfc", "Read NFC Tag from File"); };
-        var NFC = root.SMD_NFC;
+        sBtn.textContent = wT("ward.reg-hold-tag", "Hold Ni-Key tag to phone…");
+        var resetScan = function () { sBtn.disabled = false; sBtn.textContent = "\uD83D\uDCF1 " + wT("ward.reg-read-nfc", "Ni-Key: Read NFC Tag from File"); };
+        var NFC = root.SMD_NFC || root.NiKey;
         if (!NFC || typeof NFC.startScan !== "function") {
           resetScan();
-          if (root.toast) root.toast("NFC reading is not available on this device");
+          if (root.toast) root.toast("Ni-Key NFC reading is not available on this device");
           return;
         }
         NFC.startScan(function (tag) {
           var uhid = (NFC.parseTagUhid && NFC.parseTagUhid(tag)) || "";
           if (!uhid) {
             resetScan();
-            if (root.toast) root.toast("NFC tag is empty / unassigned.");
+            if (root.toast) root.toast("Ni-Key tag is empty / unassigned.");
             return;
           }
           sBtn.textContent = "\u2713 " + uhid;
@@ -648,10 +648,10 @@
           if (nameInput && !nameInput.value) nameInput.value = uhid;
           var followBtn = host.querySelector('[data-f="visitType"] [data-v="followup"]');
           if (followBtn) followBtn.click();
-          if (root.toast) root.toast("NFC Tag read: " + uhid);
+          if (root.toast) root.toast("Ni-Key Tag read: " + uhid);
         }).catch(function (err) {
           resetScan();
-          if (root.toast) root.toast("NFC read error: " + (err && err.message ? err.message : err));
+          if (root.toast) root.toast("Ni-Key NFC read error: " + (err && err.message ? err.message : err));
         });
         return;
       }

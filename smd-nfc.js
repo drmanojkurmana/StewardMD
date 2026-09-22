@@ -10,9 +10,14 @@
  */
 (function (root, factory) {
   if (typeof module === "object" && module.exports) {
-    module.exports = factory();
+    var mod = factory();
+    module.exports = mod;
+    try { root.NiKey = root.NI_KEY = root.SMD_NFC = mod; } catch (e) {}
   } else {
-    root.SMD_NFC = factory();
+    var mod = factory();
+    root.NiKey = mod;
+    root.NI_KEY = mod;
+    root.SMD_NFC = mod;
   }
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
@@ -203,9 +208,9 @@
     ov.id = "smdNfcEmpty";
     ov.setAttribute("style", "position:fixed;inset:0;z-index:99999;display:flex;align-items:flex-end;justify-content:center;background:rgba(15,23,42,.55);padding:0 0 env(safe-area-inset-bottom,0px);");
     var card = "background:#fff;color:#0f172a;border-radius:18px 18px 0 0;width:100%;max-width:520px;max-height:86vh;overflow:auto;padding:20px 18px;font:400 15px/1.5 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;box-shadow:0 -8px 32px rgba(15,23,42,.25);";
-    var h = '<div role="dialog" aria-modal="true" aria-label="Empty NFC tag" style="' + card + '">' +
-      '<div style="font:800 17px/1.3 inherit;margin:0 0 2px;">NFC Tag Detected (Empty / Blank)</div>' +
-      '<div style="font:600 12.5px inherit;color:#64748b;margin:0 0 10px;">Tag Serial: ' + escHtml(serial || "-") + "</div>" +
+    var h = '<div role="dialog" aria-modal="true" aria-label="Ni-Key empty NFC tag" style="' + card + '">' +
+      '<div style="font:800 17px/1.3 inherit;margin:0 0 2px;">Ni-Key &middot; NFC Tag Detected (Empty / Blank)</div>' +
+      '<div style="font:600 12.5px inherit;color:#64748b;margin:0 0 10px;">Ni-Key NFC Card Module &middot; Tag Serial: ' + escHtml(serial || "-") + "</div>" +
       "<p style=\"margin:0 0 14px;\">This physical file tag is empty. Would you like to write a patient UHID to it?</p>";
     if (cur && cur.uhid) {
       h += '<button type="button" data-nfc-pick="' + escHtml(cur.uhid) + '" style="display:block;width:100%;text-align:left;border:1.5px solid #0f766e;background:#e3f1ee;color:#0f766e;border-radius:12px;padding:13px 14px;font:700 15px inherit;cursor:pointer;margin:0 0 8px;">Write Current Patient (' +
@@ -244,8 +249,8 @@
     function doWrite(uhid) {
       uhid = String(uhid == null ? "" : uhid).trim();
       if (!uhid) { say("Enter a UHID first.", true); return; }
-      if (writeBtn) { writeBtn.disabled = true; writeBtn.textContent = "Hold tag against phone..."; }
-      say("Hold the tag against the phone...");
+      if (writeBtn) { writeBtn.disabled = true; writeBtn.textContent = "Hold Ni-Key tag against phone..."; }
+      say("Hold the Ni-Key tag against the phone...");
       SMD_NFC.writeTag({ text: uhid, url: writeUrl(uhid) }).then(function () {
         say("\u2713 NFC Tag Written!");
         if (writeBtn) { writeBtn.disabled = false; writeBtn.textContent = "Write to Tag"; }
@@ -279,6 +284,10 @@
   }
 
   var SMD_NFC = {
+    NAME: "Ni-Key",
+    MODULE_NAME: "Ni-Key",
+    MODULE_DESCRIPTION: "Ni-Key NFC Card & Physical Patient File Tag Module",
+
     /**
      * Synchronous capability check: returns true if either native Capacitor NfcPlugin
      * or standard Web NFC NDEFReader is present in this environment.

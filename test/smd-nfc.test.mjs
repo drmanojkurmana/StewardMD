@@ -73,6 +73,8 @@ test("opd.html and clinic-billing.html include smd-nfc.js", () => {
 
 /* ── 3. Unified JS Bridge (smd-nfc.js) Contract ───────────────────────────── */
 test("smd-nfc.js exports API surface", () => {
+  assert.equal(SMD_NFC.NAME, "Ni-Key");
+  assert.equal(SMD_NFC.MODULE_NAME, "Ni-Key");
   assert.equal(typeof SMD_NFC.isSupportedSync, "function");
   assert.equal(typeof SMD_NFC.isSupported, "function");
   assert.equal(typeof SMD_NFC.startScan, "function");

@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * NfcPlugin — Native NFC reader and writer for StewardMD physical patient file tags
+ * NfcPlugin — Ni-Key: Native NFC Card & Patient File Tag Module for StewardMD
  * and OPD station routing (Doctor, Nurse, Billing, Pharmacy).
  *
  * Exposes methods to web layer:

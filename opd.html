@@ -807,7 +807,7 @@
   function openWalkin(){
     var opts=st.board.map(function(b){return '<option value="'+esc(b.session.id)+'">'+esc(b.session.doctorName||b.session.doctorUid)+'</option>';}).join("");
     open('<h3>Add walk-in patient</h3>'+
-      '<button type="button" class="ghost" id="wScanNfc" style="width:100%;margin-bottom:12px;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">\uD83D\uDCF1 Read NFC Tag from File</button>'+
+      '<button type="button" class="ghost" id="wScanNfc" style="width:100%;margin-bottom:12px;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">\uD83D\uDCF1 Ni-Key: Read NFC Tag from File</button>'+
       '<input id="wn" placeholder="Patient name" style="margin-bottom:10px">'+
       '<input id="wm" placeholder="Mobile (optional)" inputmode="tel" style="margin-bottom:10px">'+
       (opts?'<select id="wsel">'+opts+'</select>':'<div class="empty">No doctor queue yet - a doctor must sign in first.</div>')+
@@ -817,17 +817,18 @@
     if(scanBtn){
       scanBtn.onclick=function(){
         scanBtn.disabled=true;
-        scanBtn.textContent="Hold physical file tag to phone...";
-        if(window.SMD_NFC && window.SMD_NFC.startScan){
-          window.SMD_NFC.startScan(function(tag){
-            var uhid = (window.SMD_NFC.parseTagUhid && window.SMD_NFC.parseTagUhid(tag)) || "";
+        scanBtn.textContent="Hold physical Ni-Key tag to phone...";
+        var nfcMod = window.NiKey || window.SMD_NFC;
+        if(nfcMod && nfcMod.startScan){
+          nfcMod.startScan(function(tag){
+            var uhid = (nfcMod.parseTagUhid && nfcMod.parseTagUhid(tag)) || "";
             if(!uhid){
               scanBtn.disabled=false;
-              scanBtn.textContent="\uD83D\uDCF1 Read NFC Tag from File";
-              toast("NFC tag is empty / unassigned. Fill details and save to program this tag.");
+              scanBtn.textContent="\uD83D\uDCF1 Ni-Key: Read NFC Tag from File";
+              toast("Ni-Key tag is empty / unassigned. Fill details and save to program this tag.");
               return;
             }
-            scanBtn.textContent="✓ Tag read: " + uhid;
+            scanBtn.textContent="✓ Ni-Key Tag read: " + uhid;
             scanBtn.disabled=false;
             var inputN = sheet.querySelector("#wn");
             var inputM = sheet.querySelector("#wm");
@@ -843,17 +844,17 @@
               toast("Loaded patient: " + (found.name || uhid));
             } else {
               if(inputN && !inputN.value) inputN.value = uhid;
-              toast("Tag read: " + uhid);
+              toast("Ni-Key Tag read: " + uhid);
             }
           }).catch(function(e){
             scanBtn.disabled=false;
-            scanBtn.textContent="\uD83D\uDCF1 Read NFC Tag from File";
-            toast("NFC read error: " + (e && e.message ? e.message : e));
+            scanBtn.textContent="\uD83D\uDCF1 Ni-Key: Read NFC Tag from File";
+            toast("Ni-Key NFC read error: " + (e && e.message ? e.message : e));
           });
         } else {
           scanBtn.disabled=false;
-          scanBtn.textContent="\uD83D\uDCF1 Read NFC Tag from File";
-          toast("NFC reading is not available on this device or browser.");
+          scanBtn.textContent="\uD83D\uDCF1 Ni-Key: Read NFC Tag from File";
+          toast("Ni-Key NFC reading is not available on this device or browser.");
         }
       };
     }
@@ -881,7 +882,7 @@
     var tokLabel=tok?("#"+(/^\d+$/.test(tok)?("0000"+tok).slice(-4):tok)):"-";
     open('<h3>Walk-in Patient Added</h3>'+
       '<div class="t">Token <b>'+esc(tokLabel)+'</b> &middot; '+esc(tkt.name||"Patient")+' &middot; UHID <b>'+esc(uhid)+'</b></div>'+
-      '<button class="btn" id="wNfc" style="width:100%;margin-top:10px">\uD83D\uDCF1 Write NFC Tag</button>'+
+      '<button class="btn" id="wNfc" style="width:100%;margin-top:10px">\uD83D\uDCF1 Ni-Key: Write NFC Tag</button>'+
       '<button class="ghost" id="wLabel" style="width:100%;margin-top:8px">\uD83C\uDFF7 Print File Label</button>'+
       '<div class="row2"><button class="cancel" id="wDone" style="margin:8px 0 0">Done</button></div>');
     sheet.querySelector("#wNfc").onclick=function(){ writeNfcTag(uhid); };
@@ -2091,7 +2092,7 @@
       '<div><div style="font-size:11px;color:var(--mut);margin-bottom:2px">BARCODE</div>'+barHtml+
       '<div style="font:700 13px ui-monospace,monospace;margin-top:2px">'+esc(uid)+'</div></div>'+
       '<div><div style="font-size:11px;color:var(--mut);margin-bottom:2px">QR</div>'+qrHtml+'</div></div>'+
-      '<button class="ghost" id="flNfc" style="width:100%;margin-top:10px">Write NFC Tag</button>'+
+      '<button class="ghost" id="flNfc" style="width:100%;margin-top:10px">Ni-Key: Write NFC Tag</button>'+
       '<div class="row2 noprint"><button class="cancel" id="flClose">Close</button>'+
       '<button class="btn" id="flPrint" style="margin:0">Print Label / Sticker</button></div></div>',true);
     sheet.querySelector("#flClose").onclick=close;
@@ -2103,22 +2104,23 @@
   function writeNfcTag(uid){
     uid=String(uid==null?"":uid);
     if(!uid){ toast("Nothing to write."); return Promise.resolve(false); }
-    if(window.SMD_NFC && window.SMD_NFC.isSupportedSync && window.SMD_NFC.isSupportedSync()){
-      toast("Hold an NFC tag to the device...");
-      return window.SMD_NFC.writeTag(uid).then(function(){
-        toast("Tag written. Tap it to verify.");
+    var nfcMod = window.NiKey || window.SMD_NFC;
+    if(nfcMod && nfcMod.isSupportedSync && nfcMod.isSupportedSync()){
+      toast("Ni-Key: Hold an NFC tag to the device...");
+      return nfcMod.writeTag(uid).then(function(){
+        toast("Ni-Key tag written. Tap it to verify.");
         return true;
       }, function(e){
-        toast("Could not write the tag"+(e&&e.message?": "+e.message:"")+". Try another tag.");
+        toast("Could not write the Ni-Key tag"+(e&&e.message?": "+e.message:"")+". Try another tag.");
         return false;
       });
     }
-    if(!("NDEFReader" in window)){ toast("NFC writing is not available on this device or browser."); return Promise.resolve(false); }
+    if(!("NDEFReader" in window)){ toast("Ni-Key NFC writing is not available on this device or browser."); return Promise.resolve(false); }
     try{
       var w=new NDEFReader();
-      return w.write(uid).then(function(){ toast("Tag written. Tap it to verify."); return true; },
-        function(e){ toast("Could not write the tag"+(e&&e.message?": "+e.message:"")+". Try another tag."); return false; });
-    }catch(e){ toast("Could not write the tag."); return Promise.resolve(false); }
+      return w.write(uid).then(function(){ toast("Ni-Key tag written. Tap it to verify."); return true; },
+        function(e){ toast("Could not write the Ni-Key tag"+(e&&e.message?": "+e.message:"")+". Try another tag."); return false; });
+    }catch(e){ toast("Could not write the Ni-Key tag."); return Promise.resolve(false); }
   }
   // Text out of an NDEF record. RTD-TEXT payloads open with a status byte + language code, so a
   // raw decode would hand routing "enSMD-..." - skip that prefix, then take the UID-shaped run.
