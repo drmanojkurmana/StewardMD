@@ -7,6 +7,7 @@ import { discoverAuthorizedEmr, attachToTab, PHASE_AGENT_READ } from "./discover
 import { compileManifest } from "./manifest/compile.mjs";
 import { validateCandidate } from "./manifest/validate.mjs";
 import { createCamofoxClient } from "./camofox-client.mjs";
+import { createConnectAi } from "./decision-router.mjs";
 
 export async function signRunnerRequest({ method, pathname, body, runnerKey, runnerId, timestamp, nonce }) {
   const ts = timestamp || Date.now();
@@ -109,6 +110,8 @@ export async function processJob({ job, session, deployment }, options = {}) {
   }
 
   try {
+    const connectAi = options.connectAi || await createConnectAi({ env: process.env, fetchFn });
+
     // --- STAGE 1: DISCOVERING ---
     await sendReport("DISCOVERING", "progress");
 
@@ -149,9 +152,16 @@ export async function processJob({ job, session, deployment }, options = {}) {
     const manifestId = `manifest-${job.deploymentId || job.id}`;
     const timezone = options.timezone || process.env.MANIFEST_TIMEZONE || "Asia/Kolkata";
 
+    // Jev is an orchestration accelerator only. If it is unavailable or uncertain,
+    // compilation remains deterministic and unchanged.
+    const route = connectAi.enabled ? await connectAi.routeDiscovery(spec) : null;
+    const routeAnswer = route && route.answers && route.answers.route;
+    const useAiMapping = !!(routeAnswer && routeAnswer.choice === "deep_review" && Number(routeAnswer.confidence || 0) >= 0.70);
+
     const { manifest } = await compileManifest(spec, {
       manifestId,
       timezone,
+      suggest: useAiMapping ? connectAi.suggestMapping : null,
     });
 
     if (!manifest) throw new Error("Compiler produced no manifest");
