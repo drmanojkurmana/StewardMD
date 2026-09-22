@@ -2793,7 +2793,8 @@
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<section class="dx-reader-hero"><div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<section class="dx-reader-hero"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div>' +
+        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
         '<div class="dx-reader-glance"><h3>At a glance</h3>' +
@@ -3437,7 +3438,7 @@
       else button.removeAttribute("aria-current");
     });
     var intro = document.createElement("div"); intro.className = "kblib-tool-intro";
-    intro.innerHTML = '<span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
+    intro.innerHTML = '<img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
       '<label for="kblibToolSearch">Search this collection</label><input id="kblibToolSearch" class="kblib-tool-search" type="search" autocomplete="off" placeholder="' + spec.search + '"><div id="kblibToolCount" class="kblib-tool-count" role="status"></div>';
     tabs.insertAdjacentElement("afterend", intro);
     function paint() {
@@ -3483,10 +3484,10 @@
     var featured = ["Cardiology", "Neurology", "Respiratory", "GI / Hepatology"].filter(function (b) { return !!seen[b]; });
     var tile = function (b) { return f(_libState.branch === b, "br", b, '<span class="kblib-tile-icon" aria-hidden="true">' + rIco("book") + '</span><span>' + esc(b) + '</span><small>' + seen[b].toLocaleString() + ' entries</small>'); };
     sec.innerHTML =
-      '<header class="kblib-intro"><span class="kblib-kicker">DISCOVER</span><h1>Find any disease</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
+      '<header class="kblib-intro"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-kicker">DISCOVER</span><h1>Find any disease</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
       '<label class="kblib-search-label" for="kblibQ">Search the full library</label><input id="kblibQ" class="kblib-search" type="search" placeholder="Disease, syndrome or clinical detail" autocomplete="off" value="' + esc(_libState.q) + '">' +
       kbPersonalHTML(entries) +
-      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
+      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
       '<div class="kblib-section-heading"><h2>Explore a branch</h2><span>' + branches.length + ' branches</span></div><div class="kblib-tiles">' + featured.map(tile).join("") + '</div>' +
       '<details class="kblib-all-branches"><summary>See all medical branches</summary><div class="kblib-tiles">' + branches.filter(function (b) { return featured.indexOf(b) < 0; }).map(tile).join("") + '</div></details></div>' +
       '<div class="kblib-section-heading"><h2 id="kblibResultsTitle">Disease index</h2><button type="button" id="kblibClear" class="kblib-clear">Clear filters</button></div>' +
