@@ -258,9 +258,13 @@
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
   function fbAuth(){ try{ return (window.firebase&&firebase.auth)?firebase.auth():null; }catch(e){ return null; } }
   function fbToken(){ var a=fbAuth(); var u=a&&a.currentUser; return (u&&u.getIdToken)?u.getIdToken().catch(function(){return "";}):Promise.resolve(""); }
+  function queueApiUrl(path){
+    var base = (location.hostname.indexOf("wardsynq") > -1) ? "https://stewardmd.in/api/queue/" : "/api/queue/";
+    return base + String(path || "").replace(/^\/+/, "");
+  }
   function api(path,opts){
     opts=opts||{}; var h=opts.headers||{}; h["Content-Type"]="application/json";
-    var send=function(){ return fetch("/api/queue/"+path,{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined}).then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});}); };
+    var send=function(){ return fetch(queueApiUrl(path),{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined}).then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});}); };
     if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });
     if(st.tok) h["X-Staff-Token"]=st.tok;   // GHIS token OR StewardMD staff session (server tries both)
     return send();
@@ -305,14 +309,14 @@
     id=id.toLowerCase();   // staff IDs + emails are case-insensitive; the doctor app stores them lowercase, and mobile keyboards auto-capitalize - so normalize to match
     if(!hasAt && !codeTyped){err("Enter your clinic code (or sign in with your email).");return;}
     err("Signing in…");
-    var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
+    var url=isEmail?queueApiUrl("auth/email"):queueApiUrl("auth/pin");
     var body=isEmail?{email:id,password:pw}:{clinicCode:codeTyped,identity:id,pin:pw};
     fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
       // Two-step sign-in: the PIN/password was right; ask for the phone's code and pass the answer through.
       if(!r||r.error!=="mfa_required") return r;
       var code=""; try{ code=prompt((r.message||"Enter the 6-digit code from your authenticator app.")+"\n\nLost your phone? Enter a backup code instead.")||""; }catch(e){}
       if(!code.trim()) return {cancelled:true};
-      return fetch("/api/queue/auth/mfa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
+      return fetch(queueApiUrl("auth/mfa"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
     }).then(function(r){
       if(r&&r.cancelled){ err("Sign-in cancelled."); return; }
       if(r&&(r.error==="wrong_code"||r.error==="challenge_expired")){ err(r.error==="wrong_code"?"That code did not match. Sign in again and use the newest code.":"That took too long. Sign in again."); return; }

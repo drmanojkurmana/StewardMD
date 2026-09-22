@@ -83,10 +83,14 @@
   function initials(n){ return String(n||"?").trim().split(/\s+/).slice(0,2).map(function(w){return w[0]||"";}).join("").toUpperCase() || "?"; }
 
   function fbToken(){ try { var a=firebase&&firebase.auth&&firebase.auth(); var u=a&&a.currentUser; return (u&&u.getIdToken)?u.getIdToken().catch(function(){return "";}):Promise.resolve(""); } catch(e){ return Promise.resolve(""); } }
+  function queueApiUrl(path){
+    var base = (location.hostname.indexOf("wardsynq") > -1) ? "https://stewardmd.in/api/queue/" : "/api/queue/";
+    return base + String(path || "").replace(/^\/+/, "");
+  }
   function api(path, opts){
     opts = opts || {};
     var h = { "Content-Type": "application/json" };
-    var send = function(){ return fetch("/api/queue/bill/" + path, { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
+    var send = function(){ return fetch(queueApiUrl("bill/" + path), { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
       .then(function(r){ return r.json().catch(function(){ return { ok:false, error:"bad_response" }; }); })
       .catch(function(){ return { ok:false, error:"network" }; }); };
     if (tt === "firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });   // clinic owner: mint an id-token like /opd does
@@ -295,7 +299,7 @@
       var errEl = document.getElementById("bErr");
       if (!c || !u || !p) { errEl.textContent = "Enter your clinic code, staff ID and PIN."; return; }
       errEl.textContent = "Signing in…"; go.disabled = true;
-      fetch("/api/queue/auth/pin", {
+      fetch(queueApiUrl("auth/pin"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ clinicCode: c, identity: u, pin: p })
