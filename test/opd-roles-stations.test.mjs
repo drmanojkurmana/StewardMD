@@ -146,7 +146,9 @@ test("OPD queue shows billing chips and Bill button with MRN", () => {
   assert.match(CONSOLE_HTML, /data-a="bill"/, "OPD tickets must have a Bill button");
   assert.match(CONSOLE_HTML, /data-mrn=/, "OPD tickets must pass MRN to billing");
   assert.match(CONSOLE_HTML, /billingStatus/, "OPD tickets render billing status chips");
-  assert.match(CONSOLE_HTML, /\/clinic-billing\?orgId=/, "Bill action redirects to /clinic-billing with orgId and patientId");
+  assert.match(CONSOLE_HTML, /\/clinic-billing\?patientId=/, "Bill action redirects to /clinic-billing with patientId prefilled");
+  assert.match(CONSOLE_HTML, /orgId=/, "Bill action carries the org");
+  assert.match(CONSOLE_HTML, /ticketId=/, "Bill action carries the ticket");
 });
 
 test("clinic billing station displays Today's OPD Queue and handles ticket/MRN lookup", () => {
