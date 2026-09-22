@@ -2793,7 +2793,8 @@
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<section class="dx-reader-hero"><div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<section class="dx-reader-hero"><div class="dx-reader-kb-banner"><span class="dx-reader-kb-mark" aria-hidden="true">S</span><span><strong>StewardMD</strong> Knowledge Base</span></div>' +
+        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
         '<div class="dx-reader-glance"><h3>At a glance</h3>' +
