@@ -278,6 +278,18 @@
   }
   function doneHtml(res) {
     var pending = !!res.pending;
+    /* 1-touch file tagging for a walk-in: program the new UHID onto the physical folder's NFC tag,
+     * and (on the staff console, where openFileLabel exists) print the matching file label. A pending
+     * temporary ID is queue-only - it must never be written to a tag or a label - so both stay hidden. */
+    var tagRow = "";
+    if (!pending && res.mrn) {
+      tagRow = '<div class="pr-actions">' +
+        '<button type="button" class="pr-btn" id="prWriteNfc" data-a="write-nfc" data-mrn="' + esc(res.mrn) + '">&#128241; ' + wTH("ward.reg-write-nfc", "Write NFC Tag") + "</button>" +
+        ((root && typeof root.openFileLabel === "function")
+          ? '<button type="button" class="pr-btn ghost" data-a="print-label">&#127991; ' + wTH("ward.reg-file-label", "File Label") + "</button>"
+          : "") +
+        "</div>";
+    }
     return '<div class="pr-wrap" role="dialog" aria-modal="true" aria-labelledby="prTitle">' +
       '<div class="pr-card pr-done">' +
         '<div class="pr-tick" aria-hidden="true">&#10003;</div>' +
@@ -288,6 +300,7 @@
           ? '<p class="pr-warn">' + wTH("ward.reg-temporary-id-warning", "The hospital has not issued an MR number yet. This temporary ID is for the queue only - do not write it on hospital records. It is replaced automatically when the EMR issues the real number.") + "</p>"
           : '<p class="pr-note">' + wTH("ward.reg-write-on-slip", "Write this on the patient's slip.") + "</p>") +
         abhaLinkHtml(res.abhaLink) +
+        tagRow +
         '<div class="pr-actions">' +
           '<button type="button" class="pr-btn ghost" data-a="another">' + wTH("ward.reg-add-another", "Add another") + "</button>" +
           '<button type="button" class="pr-btn primary" data-a="close">' + wTH("ward.reg-done", "Done") + "</button>" +
@@ -521,6 +534,7 @@
       var sent = payload();
       Promise.resolve(opts.submit(sent)).then(function (r) {
         if (r && r.ok) {
+          state.doneMrn = r.mrn || "";
           host.innerHTML = doneHtml({ mrn: r.mrn, pending: r.pending, name: val("name"), abhaLink: r.abhaLink });
           // The answers travel with the result so the caller queues the patient in the department chosen.
           try { if (opts.onAdded) opts.onAdded(r, sent); } catch (e) {}
@@ -562,6 +576,30 @@
      * the card is unsaved (the patient was already added, and the number is on their record). */
     function onHash() { close(); }
     function close() { host.className = ""; host.innerHTML = ""; try { root.removeEventListener("hashchange", onHash); } catch (e) {} }
+
+    /* Programs the new UHID onto the physical folder's NFC tag: plain text (every phone camera and
+     * wedge reader takes it) plus the /opd deep link. The button narrates each step; a failure leaves
+     * it tappable so the desk can retry with another tag. Never fires without an MR number. */
+    function writeNfc(btn) {
+      var mrn = "";
+      try { mrn = btn.getAttribute("data-mrn") || ""; } catch (e) {}
+      mrn = mrn || state.doneMrn || "";
+      if (!mrn || !btn) return;
+      var NFC = root.SMD_NFC;
+      if (!NFC || typeof NFC.writeTag !== "function") {
+        btn.textContent = wT("ward.reg-nfc-unavailable", "NFC is not available on this device");
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = wT("ward.reg-nfc-hold-tag", "Hold tag against phone...");
+      NFC.writeTag({ text: mrn, url: "https://stewardmd.in/opd?uid=" + encodeURIComponent(mrn) }).then(function () {
+        btn.disabled = false;
+        btn.textContent = "\u2713 " + wT("ward.reg-nfc-written", "NFC Tag Written!");
+      }, function () {
+        btn.disabled = false;
+        btn.textContent = wT("ward.reg-nfc-failed", "Could not write the tag. Try again.");
+      });
+    }
     try { root.removeEventListener("hashchange", open._onHash); root.addEventListener("hashchange", onHash); open._onHash = onHash; } catch (e) {}
 
     host.onclick = function (ev) {
@@ -583,6 +621,8 @@
       if (a === "cancel" || a === "close") return close();
       if (a === "save") return save();
       if (a === "another") { open(opts); return; }
+      if (a === "write-nfc") return writeNfc(b);
+      if (a === "print-label") { try { if (root.openFileLabel) root.openFileLabel(state.doneMrn); } catch (e) {} return; }
       if (a === "dup-continue") { state.confirmDuplicate = true; host.querySelector("#prDup").hidden = true; return save(); }
       if (a === "more") {
         var panel = host.querySelector("#prOpt"), on = panel.hidden;

@@ -21,6 +21,9 @@ const BC = require("../barcode128.js");
 const OPD = readFileSync(new URL("../opd.html", import.meta.url), "utf8");
 const BILL = readFileSync(new URL("../clinic-billing.html", import.meta.url), "utf8");
 const GATE = readFileSync(new URL("../functions/_middleware.js", import.meta.url), "utf8");
+const REG = readFileSync(new URL("../patient-register.js", import.meta.url), "utf8");
+const INDEX = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+const NFC = readFileSync(new URL("../smd-nfc.js", import.meta.url), "utf8");
 
 /* ── A. the pattern table, against the published Code 128 chart ────────────── */
 test("the table holds 107 symbols with valid module sums", () => {
@@ -222,4 +225,70 @@ test("the pharmacy station highlights the scanned patient in the dispense queue"
 test("the middleware pass-through covers both renderer scripts", () => {
   assert.match(GATE, /url\.pathname === "\/barcode128\.js"/);
   assert.match(GATE, /url\.pathname === "\/pglog-qr\.js"/);
+});
+
+/* ── E. walk-in tagging: registration ends in Write NFC Tag, never a silent close ── */
+test("the check-in done card offers 1-touch NFC write (+ File Label on the console)", () => {
+  assert.match(REG, /id="prWriteNfc" data-a="write-nfc"/);
+  assert.match(REG, /data-a="print-label"/);
+  assert.match(REG, /root\.openFileLabel/, "the label button exists only where the dialog does");
+  assert.match(REG, /var NFC = root\.SMD_NFC/);
+  assert.match(REG, /NFC\.writeTag\(\{ text: mrn, url: "https:\/\/stewardmd\.in\/opd\?uid=" \+ encodeURIComponent\(mrn\) \}\)/);
+  assert.match(REG, /Hold tag against phone\.\.\./);
+  assert.match(REG, /NFC Tag Written!/);
+  assert.match(REG, /Could not write the tag\. Try again\./);
+});
+
+test("a pending temporary ID is never offered for a tag or a label", () => {
+  assert.match(REG, /if \(!pending && res\.mrn\)/);
+});
+
+test("a console walk-in add ends in a tag-the-folder confirmation", () => {
+  assert.match(OPD, /if\(tkt\) openWalkinDone\(tkt\)/);
+  assert.match(OPD, /function openWalkinDone\(tkt\)/);
+  assert.match(OPD, /Walk-in Patient Added/);
+  assert.match(OPD, /id="wNfc"/);
+  assert.match(OPD, /writeNfcTag\(uhid\)/);
+  assert.match(OPD, /Print File Label/);
+  assert.match(OPD, /openFileLabel\(tkt\.id\)/);
+});
+
+test("the console exposes its label dialog to the shared check-in sheet", () => {
+  assert.match(OPD, /window\.openFileLabel=openFileLabel/);
+});
+
+/* ── F. follow-up tap: an unknown UHID offers check-in + full chart ─────────── */
+test("a scan with no queue entry opens the follow-up card, not a dead end", () => {
+  assert.match(OPD, /if\(!hit\)\{ openFollowupCard\(uid\); return; \}/);
+  assert.match(OPD, /function openFollowupCard\(uid\)/);
+  assert.match(OPD, /Follow-up Patient Scanned/);
+  assert.match(OPD, /Queue for Consultation/);
+  assert.match(OPD, /Open Full Patient Chart/);
+  assert.match(OPD, /post\("ticket",\{sessionId:sVal,name:nm,mrn:uid,visitType:"followup"\}/);
+  assert.match(OPD, /OPDEMR\.openProfile\(\{patientId:uid,mrn:uid\}\)/);
+});
+
+test("the written deep link (?uid=) is honoured like ?scan=", () => {
+  assert.match(OPD, /_pq\.get\("scan"\)\|\|_pq\.get\("uid"\)\|\|_pq\.get\("patientId"\)/);
+});
+
+/* ── G. the app shell routes taps to the full chart, blanks to the sheet ────── */
+test("index.html loads the NFC bridge and boots the app listener", () => {
+  assert.match(INDEX, /<script src="\/smd-nfc\.js\?v=nfc-2" defer><\/script>/);
+  assert.match(INDEX, /SMD_NFC\.initAppListener\(\{/);
+  assert.match(INDEX, /onUhid: onNfcUhid/);
+  assert.match(INDEX, /NFC Tag: UHID " \+ uhid/);
+  assert.match(INDEX, /_openTicketEmr\(t\.id\)/, "a queued patient opens through the workplace router");
+  assert.match(INDEX, /OPDEMR\.openProfile\(\{ patientId: uhid, mrn: uhid, name: "Patient " \+ uhid \}\)/, "a follow-up opens the full chart by UHID");
+  assert.match(INDEX, /currentPatient: function/, "the blank-tag sheet can write the open patient");
+});
+
+test("smd-nfc.js carries the parser, the sheet and the listener", () => {
+  assert.match(NFC, /parseTagUhid: parseTagUhid/);
+  assert.match(NFC, /isEmptyTag: isEmptyTag/);
+  assert.match(NFC, /showEmptyTagPrompt: showEmptyTagPrompt/);
+  assert.match(NFC, /initAppListener: function \(options\)/);
+  assert.match(NFC, /NFC Tag Detected \(Empty \/ Blank\)/);
+  assert.match(NFC, /Write Current Patient \(/);
+  assert.match(NFC, /Write to Tag/);
 });

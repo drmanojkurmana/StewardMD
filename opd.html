@@ -245,10 +245,10 @@
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
-<script src="/patient-register.js?v=preg5-abdm" defer></script>
+<script src="/patient-register.js?v=preg6-nfc" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
-<script src="/smd-nfc.js?v=nfc-1"></script>
+<script src="/smd-nfc.js?v=nfc-2"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -824,8 +824,24 @@
         var docUid = sObj && sObj.session && sObj.session.doctorUid;
         if(tkt) autoQueueConsultationFee(tkt.mrn || tkt.id, tkt.id, docUid);
         refresh();
+        if(tkt) openWalkinDone(tkt);
       });
     };
+  }
+  // A walk-in add ends HERE, not in a silent close: the desk sees the token + UHID and can tag the
+  // physical folder (NFC) and print its label in one touch each, before the patient walks away.
+  function openWalkinDone(tkt){
+    var uhid=tkt.mrn||tkt.id||"";
+    var tok=(tkt.token==null?"":String(tkt.token));
+    var tokLabel=tok?("#"+(/^\d+$/.test(tok)?("0000"+tok).slice(-4):tok)):"-";
+    open('<h3>Walk-in Patient Added</h3>'+
+      '<div class="t">Token <b>'+esc(tokLabel)+'</b> &middot; '+esc(tkt.name||"Patient")+' &middot; UHID <b>'+esc(uhid)+'</b></div>'+
+      '<button class="btn" id="wNfc" style="width:100%;margin-top:10px">\uD83D\uDCF1 Write NFC Tag</button>'+
+      '<button class="ghost" id="wLabel" style="width:100%;margin-top:8px">\uD83C\uDFF7 Print File Label</button>'+
+      '<div class="row2"><button class="cancel" id="wDone" style="margin:8px 0 0">Done</button></div>');
+    sheet.querySelector("#wNfc").onclick=function(){ writeNfcTag(uhid); };
+    sheet.querySelector("#wLabel").onclick=function(){ openFileLabel(tkt.id); };
+    sheet.querySelector("#wDone").onclick=close;
   }
   // ---- checkout ----
   function doCheckout(sid,tid){
@@ -2141,17 +2157,51 @@
     if(role==="cashier"){ location.href="/clinic-billing?patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
     if(role==="pharmacy"){ location.href="/clinic-billing?station=pharmacy&patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
     var hit=findTicketByUid(uid);
-    if(!hit){ toast("No queue entry for "+uid+" on today's board."); return; }
+    if(!hit){ openFollowupCard(uid); return; }
     var nm=hit.t.name||"Patient";
     if(!hit.sid){ toast(nm+" is waiting to be routed - assign a room first."); return; }
     if(role==="nurse"||role==="intern"||role==="resident"||role==="reception"){ openVitals(hit.sid,hit.tid,nm); return; }
     if(hit.t.status==="in_consultation"||hit.t.status==="at_diagnostics"){ openNotes(hit.sid,hit.tid,nm); return; }
     post("status",{sessionId:hit.sid,ticketId:hit.tid,status:"in_consultation"});
   }
+  // A follow-up patient who just walked in with their file: the tag is real but no ticket exists yet.
+  // One card queues them for consultation (same station routing as a tap once the ticket exists) or
+  // opens their full chart in the app. Never a dead-end toast at a busy desk.
+  function openFollowupCard(uid){
+    var opts=st.board.map(function(b){return '<option value="'+esc(b.session.id)+'">'+esc(b.session.doctorName||b.session.doctorUid)+'</option>';}).join("");
+    open('<h3>Follow-up Patient Scanned</h3>'+
+      '<p class="t" style="margin:0 0 10px">UHID <b>'+esc(uid)+'</b> is not in today\'s queue.</p>'+
+      '<input id="fn" placeholder="Patient name" style="margin-bottom:10px">'+
+      (opts?'<select id="fsel">'+opts+'</select>':'<div class="empty">No doctor queue yet - a doctor must sign in first.</div>')+
+      '<button class="btn" id="fQueue" style="width:100%;margin-top:10px">Queue for Consultation</button>'+
+      '<button class="ghost" id="fChart" style="width:100%;margin-top:8px">Open Full Patient Chart</button>'+
+      '<div class="row2"><button class="cancel" id="fClose" style="margin:8px 0 0">Close</button></div>');
+    sheet.querySelector("#fClose").onclick=close;
+    sheet.querySelector("#fChart").onclick=function(){
+      if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:uid,mrn:uid}); }catch(e){} return; }
+      toast("The full chart opens in the StewardMD app.");
+    };
+    sheet.querySelector("#fQueue").onclick=function(){
+      var nm=sheet.querySelector("#fn").value.trim();
+      var sel=sheet.querySelector("#fsel");
+      if(!nm){ toast("Enter the patient's name"); return; }
+      if(!sel){ toast("No doctor queue available"); return; }
+      var sVal=sel.value;
+      close();
+      post("ticket",{sessionId:sVal,name:nm,mrn:uid,visitType:"followup"},function(r){
+        refresh();
+        var tkt=((r&&r.tickets)||[]).filter(function(x){ return x.mrn===uid||x.id===uid; })[0];
+        if(!tkt){ toast("Queued for consultation."); return; }
+        var role=st.who&&st.who.role;
+        if(role==="nurse"||role==="intern"||role==="resident"||role==="reception"){ openVitals(sVal,tkt.id,tkt.name||"Patient"); return; }
+        post("status",{sessionId:sVal,ticketId:tkt.id,status:"in_consultation"});
+      });
+    };
+  }
   // ?scan=UID deep link (NFC tools / QR side-channel): consumed once the board has rendered, so
   // tickets resolve; the cashier/pharmacy paths need no board and route immediately.
   var pendingScan=null;
-  try{ pendingScan=new URLSearchParams(location.search||"").get("scan")||null; }catch(e){ pendingScan=null; }
+  try{ var _pq=new URLSearchParams(location.search||""); pendingScan=_pq.get("scan")||_pq.get("uid")||_pq.get("patientId")||null; }catch(e){ pendingScan=null; }
   function consumePendingScan(){
     if(!pendingScan) return;
     var v=pendingScan; pendingScan=null;
@@ -2387,6 +2437,9 @@
   function close(){ sheet.classList.remove("wide"); scrim.classList.remove("on"); sheet.innerHTML=""; }
   scrim.onclick=function(e){ if(e.target===scrim) close(); };
 
+  // The shared check-in sheet (patient-register.js) offers a File Label button on its done card
+  // only when this is present - the phone app has no label dialog, so it stays hidden there.
+  try{ window.openFileLabel=openFileLabel; }catch(e){}
   // 1-touch tap/scan runs on every station, preview included: background NFC read plus the
   // USB/Bluetooth wedge-scanner burst listener. Both no-op where unsupported.
   try{ startNfcListener(); }catch(e){}

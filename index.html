@@ -2561,8 +2561,12 @@ window.openExternal = function (u) {
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
-<script src="/patient-register.js?v=preg5-abdm" defer></script>
+<script src="/patient-register.js?v=preg6-nfc" defer></script>
 <script src="/queue.js?v=fdesk4-pulse1-profilex1" defer></script>
+<!-- Unified NFC bridge (native Capacitor NfcPlugin + Web NFC). The file-tag tap listener below
+     (smdNfcBoot) routes a tapped folder to the patient's full chart, or offers to write a UHID
+     to a blank tag. No-op on browsers without NFC. -->
+<script src="/smd-nfc.js?v=nfc-2" defer></script>
 <!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
      medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
      discharge - the whole golden path, through the same server-authoritative routes as before.
@@ -2853,6 +2857,100 @@ window.openExternal = function (u) {
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
+})();
+</script>
+<script>
+/* ── NFC file-tag taps (smdNfcBoot) ──────────────────────────────────────────
+   A tapped folder tag opens the patient's FULL chart (vitals, assessment, meds,
+   investigations, timeline - OPDEMR loads all of these itself). Resolution order:
+   today's queue ticket -> on-device clinic record -> hospital record by UHID.
+   A blank tag opens the assignment sheet (write current / today's / typed UHID).
+   Silent no-op where NFC is unsupported (desktop browsers). */
+(function () {
+  function say(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
+  function buzz() { try { if (navigator.vibrate) navigator.vibrate(40); } catch (e) {} }
+  function same(a, b) {
+    if (a == null || a === "" || b == null || b === "") return false;
+    return String(a) === String(b) || String(a).toUpperCase() === String(b).toUpperCase();
+  }
+  function queueTickets() {
+    try {
+      var s = window.QUEUE && window.QUEUE._st;
+      return (s && s.tickets) || [];
+    } catch (e) { return []; }
+  }
+  function onNfcUhid(uhid) {
+    uhid = String(uhid == null ? "" : uhid).trim();
+    if (!uhid) return;
+    buzz();
+    say("NFC Tag: UHID " + uhid);
+    // 1. Today's queue: route through the workplace-aware opener (GHIS / Connect /
+    //    WardSynQ / local clinic), exactly as tapping the ticket would.
+    try {
+      var tk = queueTickets();
+      for (var i = 0; i < tk.length; i++) {
+        var t = tk[i] || {};
+        if (same(t.mrn, uhid) || same(t.ghisPatientId, uhid) || same(t.smdId, uhid) || same(t.id, uhid) || same(t.token, uhid)) {
+          if (window.QUEUE && window.QUEUE._openTicketEmr) { window.QUEUE._openTicketEmr(t.id); return; }
+        }
+      }
+    } catch (e) {}
+    // 2. On-device clinic store (My Clinic): open the local record directly.
+    try {
+      var C = window.SMD_CLINIC;
+      if (C && C.listPatients && window.OPDEMR && window.OPDEMR.openProfile) {
+        var pts = C.listPatients() || [];
+        for (var j = 0; j < pts.length; j++) {
+          var p = pts[j] || {};
+          if (same(p.mrn, uhid) || same(p.id, uhid)) {
+            window.OPDEMR.openProfile({ source: "local", localStore: C.localStore, patientId: p.id, displayId: p.mrn || "", name: p.name || ("Patient " + uhid), age: p.age || "", sex: p.sex || "" });
+            return;
+          }
+        }
+      }
+    } catch (e) {}
+    // 3. Hospital record by UHID: OPDEMR loads the profile, vitals, assessment, meds,
+    //    investigations and timeline itself (and asks for sign-in when needed).
+    try {
+      if (window.OPDEMR && window.OPDEMR.openProfile) {
+        window.OPDEMR.openProfile({ patientId: uhid, mrn: uhid, name: "Patient " + uhid });
+      } else {
+        say("No patient chart available for " + uhid);
+      }
+    } catch (e) {}
+  }
+  function boot() {
+    if (!window.SMD_NFC || !window.SMD_NFC.initAppListener) return;
+    try {
+      var p = window.SMD_NFC.initAppListener({
+        onUhid: onNfcUhid,
+        currentPatient: function () {
+          try {
+            var s = window.OPDEMR && window.OPDEMR._state && window.OPDEMR._state();
+            if (s && s.patient && (s.patient.mrn || s.patient.displayId)) {
+              return { name: s.patient.name || "Patient", uhid: s.patient.mrn || s.patient.displayId };
+            }
+          } catch (e) {}
+          return null;
+        },
+        patients: function () {
+          var out = [];
+          try {
+            var tk = queueTickets();
+            for (var i = 0; i < tk.length && out.length < 8; i++) {
+              var t = tk[i] || {};
+              var u = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
+              if (u) out.push({ name: t.name || "Patient", uhid: u });
+            }
+          } catch (e) {}
+          return out;
+        }
+      });
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) {}
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 })();
 </script>
 <script src="/atlas.js?v=atlas1-3d1" defer></script>
