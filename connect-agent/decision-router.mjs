@@ -13,7 +13,7 @@
  * - if either service is unavailable, the deterministic compiler continues unchanged
  */
 
-const JEV_URL = "https://www.jevai.org/api/v1/decisions";
+const JEV_URL = "https://thejevai.com/v1/systemone";
 const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models";
 
 function trim(s, n = 12000) {
@@ -40,7 +40,7 @@ export async function jevDecide({ state, questions, apiKey = process.env.JEV_API
   });
   if (!res.ok) throw new Error(`Jev HTTP ${res.status}`);
   const body = await res.json();
-  return body?.data || body?.result || body;
+  return body;
 }
 
 export async function routeDiscovery({ spec, fetchFn = globalThis.fetch, apiKey }) {
