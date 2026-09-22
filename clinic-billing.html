@@ -60,7 +60,7 @@
 </style>
 </head>
 <body>
-<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><span class="tag" id="stnTag">Cashier</span></div></header>
+<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><a class="btn ghost" href="/opd" style="text-decoration:none;margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:auto;margin-right:8px;display:inline-flex;align-items:center;gap:4px"><span class="ms" style="font-size:16px">arrow_back</span> OPD Board</a><span class="tag" id="stnTag" style="margin-left:0">Cashier</span></div></header>
 <main id="app"></main>
 <script>
 (function(){
@@ -255,6 +255,12 @@
       try { document.getElementById("stnName").textContent = "Pharmacy"; document.getElementById("stnTag").textContent = "Dispense"; } catch(e){}
       pharmacyView(); return;
     }
+    var initPt = P.get("patient") || P.get("patientId");
+    if (initPt) {
+      lookupView(initPt);
+      loadPatient(initPt);
+      return;
+    }
     lookupView();
   }
 
@@ -270,7 +276,47 @@
     var signInPrompt = function(){ app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>'; };
     try { firebase.auth().onAuthStateChanged(function(u){ if(u) start(); else signInPrompt(); }); } catch(e){ start(); }
   } else if (!tok) {
-    app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>';
+    var savedCode = ""; try { savedCode = localStorage.getItem("smd_opd_clinic_code") || ""; } catch(e){}
+    var preCode = P.get("clinicCode") || P.get("clinic") || savedCode;
+    var preId = P.get("staffId") || P.get("id") || "";
+    app.innerHTML = '<section class="card"><h2>' + ms("lock") + 'Cashier Station Sign-in</h2>' +
+      '<p style="color:var(--mut);font-size:13px;margin:0 0 14px">Sign in with your clinic code, staff ID and PIN to access billing.</p>' +
+      '<label>Clinic code</label><input id="bCode" placeholder="SMD-XXXXXX" value="' + esc(preCode) + '" autocomplete="off">' +
+      '<label>Staff ID</label><input id="bId" placeholder="biller" value="' + esc(preId) + '" autocomplete="username" autocapitalize="none">' +
+      '<label>PIN or Password</label><input id="bPin" type="password" placeholder="••••" autocomplete="current-password">' +
+      '<div class="err" id="bErr"></div>' +
+      '<button class="btn" id="bGo">' + ms("lock_open") + 'Unlock Station</button>' +
+      '<div style="text-align:center;margin-top:14px"><a class="btn ghost" href="/opd" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px">' + ms("arrow_back") + 'Back to OPD Board</a></div></section>';
+    var go = document.getElementById("bGo");
+    var doAuth = function() {
+      var c = (document.getElementById("bCode").value || "").trim();
+      var u = (document.getElementById("bId").value || "").trim();
+      var p = (document.getElementById("bPin").value || "").trim();
+      var errEl = document.getElementById("bErr");
+      if (!c || !u || !p) { errEl.textContent = "Enter your clinic code, staff ID and PIN."; return; }
+      errEl.textContent = "Signing in…"; go.disabled = true;
+      fetch("/api/queue/auth/pin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ clinicCode: c, identity: u, pin: p })
+      }).then(function(r){ return r.json(); }).then(function(r){
+        if (!r || !r.ok) {
+          go.disabled = false;
+          errEl.textContent = (r && r.error === "invalid_login") ? "Wrong clinic code, staff ID or PIN." : (r && r.error) || "Sign-in failed.";
+          return;
+        }
+        tok = r.token; orgId = r.orgId; tt = "staff";
+        try {
+          localStorage.setItem("smd_opd_staff_tok", r.token);
+          localStorage.setItem("smd_opd_toktype", "staff");
+          localStorage.setItem("smd_opd_hospital", r.orgId);
+          if (r.orgCode) localStorage.setItem("smd_opd_clinic_code", r.orgCode);
+        } catch(e) {}
+        start();
+      }).catch(function(){ go.disabled = false; errEl.textContent = "Could not reach the server."; });
+    };
+    go.onclick = doAuth;
+    document.getElementById("bPin").addEventListener("keydown", function(e){ if (e.key === "Enter") doAuth(); });
   } else {
     start();
   }

@@ -227,6 +227,7 @@
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
+<link rel="stylesheet" href="/ward.css">
 <script src="/patient-register.js?v=preg5-abdm" defer></script>
 </head>
 <body>
@@ -366,6 +367,7 @@
       // into a switched-off page left the cashier with nowhere to go at all - they could not fall back,
       // because the redirect fired first. When it is off, they stay here and are told why.
       var stationRole=st.who&&(st.who.role==="cashier"||st.who.role==="pharmacy");
+      if(stationRole&&st.who.role==="cashier"&&isWardSynQHospital()){ openWardSynqCashier(); return; }
       if(stationRole&&st.billingOn){ location.replace(st.who.role==="pharmacy"?"/clinic-billing?station=pharmacy":"/clinic-billing"); return; }
       if(stationRole&&!st.billingOn){ renderShell('<div class="empty">The billing and pharmacy station is not switched on for this clinic yet.<br>Ask the owner to enable it, then sign in again.</div>'); return; }
       loadDash();
@@ -373,9 +375,29 @@
   }
   // ---- multi-clinic manager: one StewardMD account can own several clinics (open / add / delete) ----
   function wardsynqOrg(){ var w=""; try{ w=localStorage.getItem("smd_opd_workplace")||""; }catch(e){} return w.indexOf("wardsynq:")===0?w.slice(9):""; }
+  /* WardSynQ hospital OPDs bill through the hospital's unified OPD + IPD cashier (ward.js), not the
+   * standalone clinic cashier. Personal clinics keep /clinic-billing. */
+  function isWardSynQHospital(){
+    if(st.source==="wardsynq") return true;
+    if(st.who&&(st.who.mode==="wardsynq"||st.who.isHospital)) return true;
+    if(wardsynqOrg()) return true;
+    var wp=""; try{ wp=localStorage.getItem("smd_opd_workplace")||""; }catch(e){}
+    if(wp.indexOf("wardsynq:")===0) return true;
+    if(st.orgId&&st.orgId.indexOf("wardsynq:")===0) return true;
+    if(st.currentOrg&&st.currentOrg.mode==="wardsynq") return true;
+    return false;
+  }
+  function openWardSynqCashier(mrn){
+    if(window.WARD&&window.WARD.open){ window.WARD.open({orgId:st.orgId,act:"cashier",mrn:mrn||"",returnToOpd:true}); return; }
+    toast("Hospital Cashier loading…");
+    var poll=setInterval(function(){
+      if(window.WARD&&window.WARD.open){ clearInterval(poll); window.WARD.open({orgId:st.orgId,act:"cashier",mrn:mrn||"",returnToOpd:true}); }
+    },100);
+    setTimeout(function(){ clearInterval(poll); },4000);
+  }
   /* The role is hospital-scoped: an account's whoami without a hospital is its global role, which hid
    * the admin controls from a hospital admin. Ask again for the opened hospital, as shell.js does. */
-  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id);
+  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; st.currentOrg=c; if(c.id) localStorage.setItem(LS_HOSP,c.id);
     if(c.code) try{ localStorage.setItem("smd_opd_clinic_code", c.code); }catch(e){}
     api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){ if(r&&r.ok) st.who=r; },function(){}).then(function(){ loadDash(); }); }
   function openClinics(){
@@ -446,6 +468,8 @@
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
+        '<button class="ghost" id="billing">Billing</button>'+
+        '<button class="ghost" id="pharmacy">Pharmacy</button>'+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+
       // The OPD's own figures, above the board they summarise. Filled by paintPulse when it arrives.
@@ -460,6 +484,24 @@
     var rms=document.getElementById("rooms"); if(rms) rms.onclick=openRoomsAdmin;
     var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
     var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
+    var bll = document.getElementById("billing");
+    if (bll) {
+      bll.onclick = function () {
+        if (isWardSynQHospital()) openWardSynqCashier();
+        else location.href = "/clinic-billing";
+      };
+    }
+    var phm = document.getElementById("pharmacy");
+    if (phm) {
+      phm.onclick = function () {
+        if (isWardSynQHospital()) {
+          if (window.WARD && window.WARD.open) window.WARD.open({ orgId: st.orgId, act: "inventoryboard", returnToOpd: true });
+          else toast("Hospital Pharmacy loading…");
+        } else {
+          location.href = "/clinic-billing?station=pharmacy";
+        }
+      };
+    }
   }
   function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); }
 
@@ -599,9 +641,9 @@
     if(!consult&&can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');   // an in-consultation patient isn't queued -> assign always failed; hide it
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // reroute from the room back to the waiting hall (in_consultation -> waiting)
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
-    // Remove a mistaken / duplicate / wrongly-routed patient (soft cancel → off the board, audit kept).
-    if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');   // nurse records BP/temp/SpO2 etc. onto the encounter timeline
+    if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
+    b.push('<button data-a="bill" data-t="' + t.id + '" data-smd="' + esc(t.smdId || t.mrn || t.id) + '" data-mrn="' + esc(t.mrn || t.smdId || t.id || "") + '">Bill</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
       '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
@@ -625,6 +667,14 @@
         else if(a==="remove") openRemove(sid,tid,btn.getAttribute("data-n"));
         else if(a==="notes") openNotes(sid,tid,btn.getAttribute("data-n"));
         else if(a==="vitals") openVitals(sid,tid,btn.getAttribute("data-n"));
+        else if (a === "bill") {
+          var mrn = btn.getAttribute("data-mrn") || btn.getAttribute("data-smd") || tid;
+          if (isWardSynQHospital()) {
+            openWardSynqCashier(mrn);
+          } else {
+            location.href = "/clinic-billing?patientId=" + encodeURIComponent(mrn);
+          }
+        }
       };
     });
   }
@@ -1412,5 +1462,6 @@
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
 <script src="/wardsynq/site/bug-reporter.js?v=4"></script>
+<script src="/ward.js?v=ward75-recall-r7-scribe18" defer></script>
 </body>
 </html>
