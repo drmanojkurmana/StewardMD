@@ -3204,7 +3204,7 @@
   function openAccount() {
     var a = readAccount();
     var P = (window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile()) || null;
-    var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple"));
+    var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple" || a.type === "email" || a.providerType === "email"));
     var dangerBtn = 'style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer"';
 
     if (!signedIn) {
@@ -9400,9 +9400,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var pid = u && u.providerData && u.providerData[0] && u.providerData[0].providerId;
       if (pid === "apple.com") return "apple";
       if (pid === "google.com") return "google";
-      if (pid === "password") return "email";
+      if (pid === "password" || (pid && pid.indexOf("email") > -1)) return "email";
     } catch (e) {}
-    return (a && a.type) || "";
+    return (a && a.providerType) || (a && a.type) || "";
   }
   function acctProviderLabel(a, withSync) {
     var p = acctProvider(a);
@@ -9416,7 +9416,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var box = document.getElementById("smdSbAccount");
     if (!box) { box = document.createElement("div"); box.id = "smdSbAccount"; box.className = "smd-sba"; head.insertAdjacentElement("afterend", box); }
     var a = readAccount();
-    if (a && (a.email || a.type === "google" || a.type === "apple")) {
+    if (a && (a.email || a.type === "google" || a.type === "apple" || a.type === "email" || a.providerType === "email")) {
       var initial = (((a.name || a.email).trim()[0]) || "U").toUpperCase();
       var pic = a.picture
         ? '<img class="smd-sba-pic" src="' + smdEsc(a.picture) + '" alt="" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=&quot;smd-sba-pic smd-sba-ph&quot;>' + smdEsc(initial) + '</div>\'">'

@@ -31,6 +31,7 @@
     var a = legacy();
     if (a && a.type === "tester") return "tester";
     if (a && a.type === "guest") return "guest";
+    if (a && (a.providerType === "email" || a.type === "email")) return "email";
     return (a && a.providerType) || (a && a.type) || "unknown";
   }
   function profile() {
@@ -41,7 +42,7 @@
       email: (u && u.email) || (a && a.email) || "",
       picture: (u && u.photoURL) || (a && a.picture) || "",
       type: a && a.type, isGuest: !!(a && a.type === "guest"),
-      signedIn: !!fbUser() || !!(a && (a.email || a.type === "google" || a.type === "apple"))
+      signedIn: !!fbUser() || !!(a && (a.email || a.type === "google" || a.type === "apple" || a.type === "email" || a.providerType === "email"))
     };
   }
   var subs = [];
@@ -180,6 +181,7 @@
     };
     window.SMD_applyGoogleUser._smdWrapped = true;
     window.SMD_applyAppleUser = window.SMD_applyGoogleUser;   // explicit intent for native-auth.js
+    window.SMD_applyEmailUser = window.SMD_applyGoogleUser;   // explicit intent for email-auth.js
     return true;
   }
 

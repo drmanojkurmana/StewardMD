@@ -22,6 +22,85 @@
   function saveProfile(uid, data) { var r = profileRef(uid); if (!r) return Promise.reject(); return r.set(data, { merge: true }); }
   function idToken() { var a = auth(); var u = a && a.currentUser; return u ? u.getIdToken() : Promise.reject("no-user"); }
 
+  function fb() { return (window.firebase && window.firebase.auth) ? window.firebase : null; }
+  function ensureFb() {
+    return new Promise(function (resolve) {
+      if (fb() && auth()) {
+        try { if (window.SMD_bootFirebase) window.SMD_bootFirebase(); } catch (e) {}
+        return resolve(fb());
+      }
+      if (window.SMD_loadFirebase) {
+        window.SMD_loadFirebase(function () {
+          try { if (window.SMD_bootFirebase) window.SMD_bootFirebase(); } catch (e) {}
+          resolve(fb());
+        });
+      } else {
+        resolve(null);
+      }
+    });
+  }
+
+  function applyUser(u) {
+    if (!u) {
+      try { var a = auth(); u = a && a.currentUser; } catch (e) {}
+    }
+    if (!u) return;
+    try {
+      if (window.SMD_applyEmailUser) {
+        window.SMD_applyEmailUser(u);
+      } else if (window.SMD_applyGoogleUser) {
+        window.SMD_applyGoogleUser(u);
+      } else {
+        var acct = {
+          type: "google",
+          providerType: "email",
+          name: u.displayName || _state.name || (u.email ? u.email.split("@")[0] : "Doctor"),
+          email: u.email || "",
+          uid: u.uid || ""
+        };
+        localStorage.setItem("stewardmd_account", JSON.stringify(acct));
+      }
+    } catch (e) {}
+    try {
+      var aObj = JSON.parse(localStorage.getItem("stewardmd_account") || "null") || {};
+      aObj.type = aObj.type || "google";
+      aObj.providerType = "email";
+      aObj.email = u.email || aObj.email || _state.email || "";
+      aObj.uid = u.uid || aObj.uid || "";
+      if (!aObj.name || aObj.name === "Google user" || aObj.name === aObj.email) {
+        if (_state.name) aObj.name = _state.name;
+        else if (u.displayName) aObj.name = u.displayName;
+        else if (aObj.email) aObj.name = aObj.email.split("@")[0];
+      }
+      localStorage.setItem("stewardmd_account", JSON.stringify(aObj));
+    } catch (e) {}
+    try { if (window.SMD_ACCOUNT && window.SMD_ACCOUNT._emit) window.SMD_ACCOUNT._emit(); } catch (e) {}
+    try { if (window.SMD_migrateGuestCasesOnSignIn) window.SMD_migrateGuestCasesOnSignIn(u); } catch (e) {}
+    try { var g = document.getElementById("accountGate"); if (g) g.classList.add("hidden"); } catch (e) {}
+    try { var p = document.getElementById("introPoster"); if (p) p.classList.add("hidden"); } catch (e) {}
+    try { var s = document.getElementById("splash"); if (s) s.classList.add("hidden"); } catch (e) {}
+    try {
+      var bs = document.getElementById("smdBootSplash");
+      if (bs) { bs.classList.add("sbs-hide"); setTimeout(function () { if (bs && bs.parentNode) bs.parentNode.removeChild(bs); }, 300); }
+    } catch (e) {}
+    try {
+      if (u.uid) {
+        loadProfile(u.uid).then(function (prof) {
+          if (prof && prof.name) {
+            try { if (u.updateProfile && !u.displayName) u.updateProfile({ displayName: prof.name }); } catch (x) {}
+            var cur = JSON.parse(localStorage.getItem("stewardmd_account") || "null");
+            if (cur) {
+              cur.name = prof.name;
+              if (prof.hospital) cur.hospital = prof.hospital;
+              localStorage.setItem("stewardmd_account", JSON.stringify(cur));
+              if (window.SMD_ACCOUNT && window.SMD_ACCOUNT._emit) window.SMD_ACCOUNT._emit();
+            }
+          }
+        }).catch(function () {});
+      }
+    } catch (e) {}
+  }
+
   // ---- CSS ---------------------------------------------------------------------------------
   function injectCSS() {
     if (document.getElementById("smdEmailAuthCss")) return;
@@ -71,12 +150,14 @@
   function openEmail(mode) {
     _state.mode = mode || "signup";
     var isSignup = _state.mode === "signup";
+    var prefillEmail = _state.email || "";
+    try { if (!prefillEmail) prefillEmail = localStorage.getItem("smd_last_email_login") || ""; } catch (e) {}
     shell().innerHTML =
       '<div class="smdea-card">' +
         '<div class="smdea-h">' + (isSignup ? "Create your account" : "Sign in") + "</div>" +
         '<div class="smdea-sub">' + (isSignup ? "Use your work email to get started." : "Welcome back.") + "</div>" +
         (isSignup ? '<label class="smdea-lbl">Full name</label><input class="smdea-in" id="eaName" type="text" autocomplete="name" placeholder="Dr Jane Doe">' : "") +
-        '<label class="smdea-lbl">Email</label><input class="smdea-in" id="eaEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@hospital.org">' +
+        '<label class="smdea-lbl">Email</label><input class="smdea-in" id="eaEmail" type="email" autocomplete="email" inputmode="email" value="' + esc(prefillEmail) + '" placeholder="you@hospital.org">' +
         '<label class="smdea-lbl">Password</label><input class="smdea-in" id="eaPw" type="password" autocomplete="' + (isSignup ? "new-password" : "current-password") + '" placeholder="At least 8 characters">' +
         (isSignup ? "" : '<div style="text-align:right;margin-top:8px"><button class="smdea-link" data-ea="forgot">Forgot password?</button></div>') +
         '<div class="smdea-err"></div>' +
@@ -95,7 +176,10 @@
       if (a === "forgot") return openForgot((_el.querySelector("#eaEmail") || {}).value || "");
       if (a === "submit") return submitEmail(isSignup);
     };
-    setTimeout(function () { var f = _el.querySelector(isSignup ? "#eaName" : "#eaEmail"); if (f) f.focus(); }, 60);
+    setTimeout(function () {
+      var f = _el.querySelector(isSignup ? (prefillEmail ? "#eaPw" : "#eaName") : (prefillEmail ? "#eaPw" : "#eaEmail"));
+      if (f) f.focus();
+    }, 60);
   }
 
   // ---- forgot password: OTP reset (primary) + temp-password fallback -----------------------
@@ -169,9 +253,22 @@
       .then(function (j) {
         if (j && j.ok) {
           // password changed → sign in with it
-          var a = auth();
-          if (a) return a.signInWithEmailAndPassword(email, pw).then(function () { busy(false); close(); toast("Password reset — signed in"); }).catch(function () { busy(false); openEmail("signin"); toast("Password reset — please sign in"); });
-          busy(false); openEmail("signin"); toast("Password reset — please sign in");
+          ensureFb().then(function () {
+            var a = auth();
+            if (a) {
+              return a.signInWithEmailAndPassword(email, pw).then(function (cred) {
+                busy(false);
+                applyUser((cred && cred.user) || a.currentUser);
+                close();
+                toast("Password reset — signed in");
+              }).catch(function () {
+                busy(false);
+                openEmail("signin");
+                toast("Password reset — please sign in");
+              });
+            }
+            busy(false); openEmail("signin"); toast("Password reset — please sign in");
+          });
         } else {
           busy(false);
           if (j && j.error === "mismatch") err("Incorrect code. " + (j.triesLeft != null ? j.triesLeft + " tries left." : ""));
@@ -194,7 +291,6 @@
   }
 
   function submitEmail(isSignup) {
-    var a = auth(); if (!a) { err("Sign-in is still loading — try again in a moment."); return; }
     var name = (_el.querySelector("#eaName") || {}).value || "";
     var email = ((_el.querySelector("#eaEmail") || {}).value || "").trim();
     var pw = (_el.querySelector("#eaPw") || {}).value || "";
@@ -203,19 +299,32 @@
     if (isSignup && !name.trim()) { err("Please enter your name."); return; }
     err(""); busy(true);
     _state.name = name.trim(); _state.email = email;
-    var p = isSignup ? a.createUserWithEmailAndPassword(email, pw) : a.signInWithEmailAndPassword(email, pw);
-    p.then(function (cred) {
-      var user = cred && cred.user;
-      if (isSignup) {
-        try { if (user && user.updateProfile && name.trim()) user.updateProfile({ displayName: name.trim() }); } catch (e) {}
-        // new account → send OTP to verify the email
-        openOtp();
-        sendOtp();
-      } else {
-        // existing account → straight in; the profile prompt (if needed) fires on auth change
-        close();
-        toast("Signed in");
+    try { localStorage.setItem("smd_last_email_login", email); } catch (e) {}
+
+    ensureFb().then(function (F) {
+      var a = auth();
+      if (!a) {
+        busy(false);
+        err("Authentication is not ready yet — please try again.");
+        return;
       }
+      var p = isSignup ? a.createUserWithEmailAndPassword(email, pw) : a.signInWithEmailAndPassword(email, pw);
+      return p.then(function (cred) {
+        busy(false);
+        var user = cred && cred.user;
+        if (isSignup) {
+          try { if (user && user.updateProfile && name.trim()) user.updateProfile({ displayName: name.trim() }); } catch (e) {}
+          applyUser(user);
+          // new account → send OTP to verify the email
+          openOtp();
+          sendOtp();
+        } else {
+          // existing account → apply user & dismiss gate immediately
+          applyUser(user);
+          close();
+          toast("Signed in");
+        }
+      });
     }).catch(function (e) {
       busy(false);
       err(authErr(e, isSignup));
@@ -252,7 +361,7 @@
       var a = b.getAttribute("data-ea");
       if (a === "verify") return verifyOtp();
       if (a === "resend") return sendOtp(true);
-      if (a === "later") { toast("You can verify your email later from Account"); return afterVerified(false); }
+      if (a === "later") { toast("You can verify your email later from Account"); applyUser(auth() && auth().currentUser); return afterVerified(false); }
     };
     setTimeout(function () { var f = _el.querySelector("#eaOtp"); if (f) f.focus(); }, 60);
   }
@@ -290,6 +399,7 @@
   function afterVerified(verified) {
     var uid = curUid();
     if (uid && verified) { try { saveProfile(uid, { emailVerified: true }); } catch (e) {} }
+    applyUser(auth() && auth().currentUser);
     // every new user gets the profile step next
     openProfile({ firstRun: true, name: _state.name });
   }
@@ -326,7 +436,7 @@
         var b = e.target.closest && e.target.closest("[data-ea]"); if (!b) return;
         var a = b.getAttribute("data-ea");
         if (a === "cancel") return close();
-        if (a === "skipProfile") { markProfileSeen(); close(); toast("You can complete your profile later from Account"); try { window.SMD_APPLOCK && window.SMD_APPLOCK.promptSetup({ hospital: "" }); } catch (e) {} return; }
+        if (a === "skipProfile") { markProfileSeen(); applyUser(auth() && auth().currentUser); close(); toast("You can complete your profile later from Account"); try { window.SMD_APPLOCK && window.SMD_APPLOCK.promptSetup({ hospital: "" }); } catch (e) {} return; }
         if (a === "saveProfile") return submitProfile();
       };
     });
@@ -382,6 +492,7 @@
     saveProfile(uid, data).then(function () {
       try { var u = auth().currentUser; if (u && u.updateProfile && name) u.updateProfile({ displayName: name }); } catch (e) {}
       markProfileSeen();
+      applyUser(auth() && auth().currentUser);
       busy(false); close();
       toast("Profile saved");
       try { window.dispatchEvent(new CustomEvent("smd:profile", { detail: data })); } catch (e) {}

@@ -308,7 +308,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   if(!document.documentElement.classList.contains("smd-splash-v2"))return;
   var s=document.getElementById("smdBootSplash");if(!s)return;
   var a=null;try{a=JSON.parse(localStorage.getItem("stewardmd_account")||"null");}catch(e){}
-  if(!a||!(a.email||a.type==="google"||a.type==="apple"))return;
+  if(!a||!(a.email||a.type==="google"||a.type==="apple"||a.type==="email"||a.providerType==="email"))return;
   var nm=String(a.name||a.email||"").trim();if(!nm)return;
   var label=nm.indexOf("@")>-1?nm.split("@")[0]:nm;
   if(label.length>28)label=label.slice(0,27)+"\u2026";
