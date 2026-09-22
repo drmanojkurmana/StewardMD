@@ -233,4 +233,30 @@ test("org schema preserves opdBillingMode and defaultConsultationFee", async () 
   assert.equal(o2.defaultConsultationFee, 0);
 });
 
+test("MaikOS: triage vitals sync and unified catalog in OPD EMR and queue", async () => {
+  const OPD_EMR_SRC = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
+  const QUEUE_SRC = readFileSync(new URL("../queue.js", import.meta.url), "utf8");
+  const { decorateForDoctor } = await import("../functions/_queue_engine.js");
+
+  // 1. decorateForDoctor retains vitals
+  const decorated = await decorateForDoctor({}, [{
+    id: "t1", encName: "", encMobile: "", mrn: "MRN-1",
+    vitals: { sbp: "120", dbp: "80", pulse: "72", temp: "98.4", spo2: "99", rr: "16", weight: "68" }
+  }]);
+  assert.ok(decorated[0].vitals, "decorated ticket must carry vitals");
+  assert.equal(decorated[0].vitals.sbp, "120");
+  assert.equal(decorated[0].vitals.pulse, "72");
+
+  // 2. queue.js passes vitals and orgId into OPDEMR.openProfile
+  assert.match(QUEUE_SRC, /vitals:\s*t\.vitals/, "openTicketEmr must pass ticket vitals");
+  assert.match(QUEUE_SRC, /orgId:\s*st\.orgId/, "openTicketEmr must pass orgId");
+
+  // 3. opd-emr.js implements applyTicketVitals, vitalsSyncBanner, and unified non-GHIS catalog search
+  assert.match(OPD_EMR_SRC, /applyTicketVitals/, "opd-emr.js must define applyTicketVitals");
+  assert.match(OPD_EMR_SRC, /vitalsSyncBanner/, "opd-emr.js must define vitalsSyncBanner");
+  assert.match(OPD_EMR_SRC, /oe-vitals-synced/, "opd-emr.js must render synced vitals badge");
+  assert.match(OPD_EMR_SRC, /inv-catalog\?kind=/, "opd-emr.js routes non-GHIS searches to inv-catalog");
+  assert.doesNotMatch(OPD_EMR_SRC, /st\.source !== "ghis".*offghis/, "offghis wall must be removed for clinic records");
+});
+
 

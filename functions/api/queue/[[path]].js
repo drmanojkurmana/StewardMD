@@ -44,6 +44,7 @@ import { resolveRoomDoctor, normDocId, roomStatus, roomForActor, memberChangeRef
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
+import { fsCommit, wUpdate } from "../../_fbfirestore.js";
 import { orderQueue, orderRoomView, displayBoard, opdPulse } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge, deviceLabel } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
@@ -6266,14 +6267,25 @@ export async function onRequest(context) {
     // added the same way any tariff item is (bill/tariff POST). ?kind=medication added 2026-09-06
     // for native prescribing; investigation stays the default (unchanged for every existing caller).
     if (method === "GET" && seg === "inv-catalog") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
-      await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
-      const orgId = s.orgId || s.hospitalId;
+      // MaikOS unified catalog: phone app and web share the org's ONE tariff catalog (q_tariff).
+      // The org resolves from the queue session when opened from a ticket, or directly from
+      // ?orgId= for an on-device EMR with no queue session in scope. Rich rows carry what the
+      // doctor's picker shows: formulation, unit price and stock — never gated behind the billing flag.
+      const sessionId = url.searchParams.get("sessionId");
+      let orgId = url.searchParams.get("orgId") || "";
+      if (sessionId) {
+        const { s, err } = await loadSessionFor(env, sessionId, actor, request); if (err) return err;
+        await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+        orgId = orgId || s.orgId || s.hospitalId;
+      } else {
+        if (!orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        await requireOrgOrGlobal(env, actor, orgId, CAPS.EMR_TREAT);
+      }
       const q = String(url.searchParams.get("q") || "").trim().toLowerCase();
       const wantKind = url.searchParams.get("kind") === "medication" ? "medication" : "investigation";
       let rows = (await BILL.listTariff(env, orgId)).filter((t) => t.kind === wantKind);
       if (q) rows = rows.filter((t) => (t.name || "").toLowerCase().indexOf(q) > -1 || (t.code || "").toLowerCase().indexOf(q) > -1);
-      return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "" })) }, 200, request);
+      return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "", kind: t.kind, pricePaise: (t.pricePaise != null ? t.pricePaise : (t.price || 0)), dosageForm: t.dosageForm || "", stock: t.stock != null ? t.stock : null, unit: t.unit || "" })) }, 200, request);
     }
     // Native prescribing's advisory-only CDSS pre-check (WardSynQ-native hospitals). NEVER gates -
     // see functions/_wardsynq/rx-safety.js's header (unapproved clinical content, per
@@ -6993,6 +7005,13 @@ export async function onRequest(context) {
         await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : isImmunization ? CAPS.EMR_IMMUNISE : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        // MaikOS vitals sync: the nurse's structured vitals ride on the ticket itself, so the
+        // doctor's EMR (queue.js -> opd-emr.js "Initial Assessment") prefills BP/Pulse/Temp/SpO2/
+        // RR/Weight/GRBS without re-parsing timeline text. The ticket mirror is best-effort and
+        // never fails the save; the same payload also travels as the timeline entry's structured
+        // data (appendTimeline's `data`), so a reader can prefer either source.
+        const vitalsData = (isVitals && body.vitals && typeof body.vitals === "object") ? { vitals: body.vitals } : null;
+        if (vitalsData) { try { await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { vitals: body.vitals, updatedAt: Date.now() })]); } catch (e) {} }
         if (isImmunization) {
           // The CODE is validated against the IG's value set server-side. A client-supplied code is a
           // claim, and an unrecognised one would put an invented SNOMED concept into a patient's PHR - so
@@ -7066,14 +7085,17 @@ export async function onRequest(context) {
             if (isAssessment && !isSignOff && wsqMig) {
               try { await recordAllergiesFromAssessment(request, env, { migration: mig, ticket: t, vals: body.vals, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), rulePack: getRulePack() }); } catch (e) {}
             }
-            const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+            const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData || undefined);
             return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
           }
           // shadow: the timeline is still what the ward reads; the record write reports, never throws.
-          const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+          const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData || undefined);
           const rec = await migrator(request, env, ctx);
           return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
         }
+        // Off (no migration): the original single line, unchanged for every pre-existing payload.
+        // Only a vitals write carrying structured values takes the data-carrying variant above it.
+        if (vitalsData) return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData)), 200, request);
         return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
       }
       // A mirror of a READ, not of a write (migrate-results.js's header explains why this is its own

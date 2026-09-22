@@ -757,7 +757,8 @@
   function openTicketEmr(ticketId, tab) {
     var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
-    var o = { name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id };
+    var o = { name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id, vitals: t.vitals || null,
+      orgId: st.orgId || (st.session && (st.session.orgId || st.session.hospitalId)) || "" };   // MaikOS: triage vitals prefill + unified catalog scope ride into the EMR
     if (tab) o.tab = tab;
     // Hospital workplace (GHIS / Connect / WardSynQ) with a real hospital id -> the hospital record.
     if (t.ghisPatientId && !inClinicWorkplace()) {

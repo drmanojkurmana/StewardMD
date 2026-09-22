@@ -58,6 +58,7 @@ export async function decorateForDoctor(env, tickets) {
       mrn: mrn,
       patientId: t.patientId || mrn || t.id,
       ghisPatientId: mrn,   // full MR# for the View-EMR-profile action (smd_opd_emr)
+      vitals: t.vitals || null,   // MaikOS vitals sync: triage-recorded vitals ride to the doctor's EMR (Initial Assessment prefill)
       roomId: t.roomId || "", department: t.department || "", departmentId: t.departmentId || ""   // OPD platform: room + department (Phase 4); departmentId since D7
     });
   }));
