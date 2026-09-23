@@ -4225,7 +4225,10 @@
     if (!(G.SMD_SCRIBEICD && G.SMD_SCRIBEICD.suggest && G.SMD_ICD && G.SMD_ICD.localSearch)) return;
     var forPatient = st;
     try {
-      G.SMD_SCRIBEICD.suggest(text, { search: G.SMD_ICD.localSearch }).then(function (rows) {
+      // OpenMed disease tagger (openmed-ner.js, flag smd_openmed_disease, DEFAULT OFF, fails closed until
+      // its licence and checksums are pinned) splits a combined diagnosis into conditions for the search.
+      var N = G.SMD_OPENMED_NER, ext = (N && N.status && N.status("disease").ok) ? N.diseases : undefined;
+      G.SMD_SCRIBEICD.suggest(text, { search: G.SMD_ICD.localSearch, extract: ext }).then(function (rows) {
         if (st !== forPatient) return;
         var out = _icdCandidateRows(rows);
         if (!out.length) return;                               // nothing found: show nothing, never a guess

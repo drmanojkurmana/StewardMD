@@ -500,6 +500,25 @@
   function buildPrompt(pkg, packId) { var p = buildPromptParts(pkg, packId); return p ? p.history + p.question : ""; }
 
   /** Does this pack's base model need its thinking mode switched off? Registry-driven, not hardcoded. */
+  /* OpenMed drug tagger (openmed-ner.js, flag smd_openmed_pharma, DEFAULT OFF, fails closed until the
+   * checkpoint licence and sha256s are pinned). Tags drug names in the answer and the retrieved passages
+   * so claim grounding also checks drugs its suffix rule cannot see (paracetamol, aspirin, warfarin...).
+   * Stricter checking only; any failure, timeout or an off flag leaves `r` exactly as it was. */
+  var NER_TIMEOUT_MS = 8000;
+  function withNerDrugs(r, grounding) {
+    var N = (typeof window !== "undefined") && window.SMD_OPENMED_NER;
+    if (!r || r.error || !grounding || !N || !N.status || !N.status("pharma").ok) return r;
+    var src = String(r.text || "") + "\n" + (grounding.passages || []).map(function (p) { return p && p.text || ""; }).join("\n");
+    var done = false;
+    return new Promise(function (resolve) {
+      var t = setTimeout(function () { if (!done) { done = true; resolve(r); } }, NER_TIMEOUT_MS);
+      N.drugNames(src).then(function (names) {
+        if (done) return; done = true; clearTimeout(t);
+        if (names && names.length) r._nerDrugs = names;
+        resolve(r);
+      }, function () { if (!done) { done = true; clearTimeout(t); resolve(r); } });
+    });
+  }
   function noThinkPack(id) {
     try { var m = models(); return !!(m && m.PACKS[id] && m.PACKS[id].noThink); } catch (e) { return false; }
   }
@@ -1069,6 +1088,8 @@
           return L.generateWithImage(common);
         });
       }).then(function (r) {
+        return withNerDrugs(r, grounding);
+      }).then(function (r) {
         paintFlush();
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
@@ -1121,6 +1142,7 @@
            * reference material, and only then does the reference passage stand in for the answer. */
           var g = G.groundAnswer(text, grounding.passages, pkg && pkg.question, {
             allowGeneral: generalKnowledgeAllowed(), inlineRefs: true,
+            drugs: r && r._nerDrugs,
             expand: (grounding.RAG && grounding.RAG.expand) ? function (q) { return grounding.RAG.expand(q)[0]; } : null
           });
           try { window.__smdLastGate = { q: pkg && pkg.question, verdict: g.verdict, stats: g.stats, removed: g.removed, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}

@@ -2231,9 +2231,12 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-lite-rag.js?v=rag1" defer></script>
 <!-- Claim-level grounding verifier (2026-09-18): checks each statement of an on-device answer against the
      retrieved passages on facts (doses, drugs, figures), not wording. Loaded before maik-local.js. -->
-<script src="/kb/ai/maik-grounding.js?v=ground1" defer></script>
+<script src="/kb/ai/maik-grounding.js?v=ground1-nerdrugs1" defer></script>
+<!-- OpenMed on-device drug/disease tagger (openmed-ner.js). Flags smd_openmed_pharma / smd_openmed_disease,
+     DEFAULT OFF, and fails closed until each checkpoint licence + sha256 is pinned. -->
+<script src="/openmed-ner.js?v=openmedner1" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
-<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs1" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034-ugib1" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -2368,7 +2371,7 @@ window.openExternal = function (u) {
      scribe-drugfix reuses window.DrugFuzzy, already loaded above with the Scan-Meds flow. -->
 <script src="/scribe-drugfix.js?v=gold1" defer></script>
 <script src="/scribe-rx.js?v=gold1" defer></script>
-<script src="/scribe-icdsug.js?v=gold1" defer></script>
+<script src="/scribe-icdsug.js?v=gold1-nerdx1" defer></script>
 <script src="/scribe-safety.js?v=gold1" defer></script>
 <!-- MaiK Scribe specialty templates (window.SMD_SCRIBETPL) — extra prompt lines + required-field
      hints per specialty (paediatrics, obstetrics & gynaecology, surgery follow-up), general OPD by
@@ -2626,7 +2629,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag

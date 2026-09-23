@@ -199,6 +199,20 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-23 · OpenMed drug + disease taggers wired in, off and fail-closed
+
+**Decision.** Owner: integrate PharmaDetect-TinyMed-65M and DiseaseDetect-TinyMed-65M. `openmed-ner.js`
+runs them on the vendored onnxruntime-web. Pharma feeds extra drug names to claim grounding (stricter
+only: fixes the aspirin-for-paracetamol swap that grounding graded supported). Disease splits a combined
+diagnosis for ICD suggestions (offered, never assigned). Flags `smd_openmed_pharma` / `smd_openmed_disease`
+default OFF.
+
+**Trade-off / status.** The owner's rule (no model unless its exact checkpoint licence is verified
+Apache-2.0) is enforced in code: `licence.verified:false` and null sha256s make every call return []
+without a download. Hugging Face was unreachable from this session. The pipeline is proven on the real
+runtime with a fixture model, not on the real weights. The aspirin gap could also be closed without a
+model by passing drug-DB names (`MEDDRUGS._list`) as `opts.drugs`; not done, owner asked for the models.
+
 ## 2026-09-23 · OpenMed: rules now, models only after licence check and benchmark
 
 **Decision.** From the OpenMed catalog (2,255 of 2,266 checkpoints declared Apache-2.0), nothing

@@ -52,14 +52,29 @@ phones; single-threaded WASM will be slower.
 | **BENCHMARK FIRST** | `OpenMed-PII-ClinicalE5-Small-33M-v1-onnx-android` | English PII spans (unlabelled names, addresses) | Second pass inside `redactPHI()`; later the scribe transcript before `SMD_AI.extract(...,"opd-scribe")` in `opd-emr.js` `doRefine` | Regex only catches labelled names ("Name: ..."); a free-text name in OCR or dictation reaches the cloud today | 33M; INT8 ~70 MB (OpenMed npm README) | Download once; OpenMed Tiny-tier target <= 350 MB RAM, unmeasured on our phones; unload after use | Catalog: apache-2.0; HF card and Nemotron-PII dataset licence unverified |
 | **BENCHMARK FIRST** | `OpenMed-PII-Hindi-ClinicalE5-Small-33M-v1-onnx-android`, `...-Telugu-ClinicalE5-Small-33M-v1-onnx-android` | Hindi / Telugu PII | Same, routed by `voice-ambient.js` `detectScript` | Scribe's default route is the Telugu specialist; names in Telugu dictation are unprotected | 33M each | As above, one language pack at a time | As above |
 | **BENCHMARK FIRST** | `OpenMed-PII-SuperClinical-Small-44M-v1-onnx-android` | English PII (OpenMed's own offline default) | Alternative to ClinicalE5-33M | Possibly higher recall | 44M | DeBERTa-v2 needs a SentencePiece tokenizer in JS (the BERT WordPiece of ClinicalE5 is far simpler) | As above |
-| **OPTIONAL** | `OpenMed-NER-PharmaDetect-TinyMed-65M-v1-onnx-android` | Drug mentions | `kb/ai/maik-grounding.js` drug detection (`DRUG_SUFFIX` regex) | The suffix regex misses paracetamol, aspirin, warfarin, digoxin, morphine, clopidogrel, linezolid, prednisolone, insulin. **Try the existing drug DB (`MEDDRUGS._list`, `DrugFuzzy`) as a lexicon first**: exact, deterministic, no download | 65M | Download size unverified (HF blocked) | Catalog: apache-2.0 |
-| **OPTIONAL** | `OpenMed-NER-DiseaseDetect-TinyMed-65M-v1-onnx-android` | Disease mentions | Seed ICD Search from free-text assessment | The scribe already gets ICD candidates from the cloud extract; marginal | 65M | Download size unverified (HF blocked) | Catalog: apache-2.0 |
+| **INTEGRATED (off, fails closed)** | `OpenMed-NER-PharmaDetect-TinyMed-65M-v1-onnx-android` | Drug mentions | `openmed-ner.js` `drugNames` -> `maik-local.js` `withNerDrugs` -> `maik-grounding.js` `opts.drugs` | Closes a measured gap: an answer swapping aspirin for the reference's paracetamol at the same dose was graded SUPPORTED (aspirin is invisible to `DRUG_SUFFIX`); with tagger names it is removed. Stricter checking only | 65M DistilBERT | Download size unverified; unloaded after 60 s idle; 8 s timeout, then grounding runs as before | Catalog: apache-2.0; HF card unverified, so `licence.verified:false` and no sha256: will not load |
+| **INTEGRATED (off, fails closed)** | `OpenMed-NER-DiseaseDetect-TinyMed-65M-v1-onnx-android` | Disease mentions | `openmed-ner.js` `diseases` -> `scribe-icdsug.js` `opts.extract` (from `opd-emr.js` `scribeIcdSuggest`) | A combined diagnosis ("CAP with T2DM and CKD 3") is searched per condition, so each gets an ICD code offered; fewer than two conditions or any failure = the old single query | 65M DistilBERT | As above | As above |
 | **DON'T USE** | OncologyDetect, AnatomyDetect, Pathology, BloodCancer | NER | Onco / RadioAnatome | These modules are structured (staging tables, dose engines, ontology), not free text; nothing to tag | 33M+ | n/a | n/a |
 | **DON'T USE** | DNA, Genome, Genomic, Protein, Organism, Species | NER | none | No StewardMD text flow needs them | n/a | n/a | n/a |
 | **DON'T USE** | Any Large/XLarge (>= 278M) | any | phone | 4 GB RAM tier; competes with MaiK packs for memory | 278M-600M | High | n/a |
 | **DON'T USE** | GLiNER ZeroShot (143) | zero-shot NER | none | No ONNX build; MLX is iOS-native only, the app runs in a WebView | n/a | n/a | n/a |
 | **DON'T USE** | Qwen3.5-2B/Qwen2.5-VL-3B/Ministral-3B-Medical, laneformer, maple-preview, privacy-filter-nemotron-v2 | generation / PII | none | Not Apache-2.0 (or no licence); generation would duplicate MaiK | n/a | n/a | Excluded |
 | **DON'T USE (for now)** | any NER for RAG preprocessing | tagging KB passages | `kb/ai/maik-lite-rag.js` | BM25 over a curated KB is deterministic and already grounded claim by claim; tagging adds cost, not accuracy | n/a | n/a | n/a |
+
+## Integration state (2026-09-23, second pass)
+`openmed-ner.js` (`window.SMD_OPENMED_NER`) runs both TinyMed-65M packs on the vendored onnxruntime-web
+(WordPiece tokenizer read from the checkpoint's own `tokenizer.json`, 510-token windows, BIO/BIOES
+decoding, OpenMed's recommended thresholds 0.65 pharma / 0.60 disease). Flags `smd_openmed_pharma` and
+`smd_openmed_disease`, DEFAULT OFF. **Fails closed**: a pack loads only when `licence.verified` is true
+and every file (`model_int8.onnx`, `tokenizer.json`, `id2label.json`) has a pinned sha256, checked with
+WebCrypto after download. Both are empty, so nothing downloads today, flag or no flag.
+Tests: `test/openmed-ner.test.mjs` (13) and `test/run-openmed-ner-ui.mjs` (real onnxruntime-web 1.20.1
+in Chromium, on a lookup-table fixture model with OpenMed's exact I/O contract,
+`scripts/openmed/make-ner-fixture.py`). The real checkpoints have NOT been run: accuracy on Indian
+notes is unmeasured.
+
+To switch on: verify each HF licence page, record the three sha256s + byte sizes in `openmed-ner.js`
+PACKS, set `licence.verified: true`, benchmark on real text, then set the flag.
 
 ## Next steps (owner decision)
 1. Open huggingface.co in the environment network policy (openmed.life is optional: its content is

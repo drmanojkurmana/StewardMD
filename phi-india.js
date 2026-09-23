@@ -30,7 +30,7 @@
   var R = "[redacted]";
   // Zero of each Indic decimal-digit block; the nine digits follow contiguously.
   var ZEROS = [0x0966, 0x09E6, 0x0A66, 0x0AE6, 0x0B66, 0x0BE6, 0x0C66, 0x0CE6, 0x0D66];
-  var INDIC_DIGIT = /[०-९০-৯੦-੯૦-૯୦-୯௦-௯౦-౯೦-೯൦-൯]/g;
+  var INDIC_DIGIT = /[\u0966-\u096F\u09E6-\u09EF\u0A66-\u0A6F\u0AE6-\u0AEF\u0B66-\u0B6F\u0BE6-\u0BEF\u0C66-\u0C6F\u0CE6-\u0CEF\u0D66-\u0D6F]/g;
   // UPI handles from the major PSP apps. Explicit list: a generic "x@y" rule would eat "@ 5 mg/kg".
   var UPI_PSP = "okaxis|oksbi|okhdfcbank|okicici|ybl|ibl|axl|paytm|pthdfc|ptsbi|ptyes|ptaxis|apl|yapl|upi|" +
     "icici|sbi|hdfcbank|axisbank|kotak|axisb|ikwik|freecharge|jupiteraxis|fam|slice|naviaxis|waaxis|wahdfcbank|" +
