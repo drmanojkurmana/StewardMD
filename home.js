@@ -5482,6 +5482,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
+    // Drug names in questions and answers: bold yellow, tap opens the monograph (drug-link.js).
+    try { if (window.SMD_DRUGLINK && body) SMD_DRUGLINK.watch(body); } catch (e) {}
 
     /* ROUTE PREFETCH (2026-08-24, measured on device).
      *
@@ -7120,6 +7122,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       bubble("ai", html); scroll();
       try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
     }
+    function maikDrugAskCard(drugs, question) {
+      var list = drugs.slice(0, 3);
+      var fz = list.filter(function (d) { return d.fuzzy; });
+      var html = '<div class="maik-dosecard maik-drugask">' +
+        '<div class="maik-dose-h">' + MK.book + '<span>' + (list.length > 1 ? "Drugs in your question" : "Drug in your question") + '</span></div>' +
+        '<div class="maik-dose-n">' + list.map(function (d) { return maikEscH(d.name); }).join(", ") + '</div>' +
+        (fz.length ? '<div class="maik-dose-c">Read "' + maikEscH(fz[0].typed) + '" as ' + maikEscH(fz[0].name) + '</div>' : '') +
+        '<div class="maik-dose-note">Do you want to see the drug monograph first?</div>' +
+        '<div class="maik-dose-acts">' +
+          list.map(function (d) { return '<button class="maik-fu maik-dose-go" data-maik-drugidx="' + maikEscH(d.name) + '">Open ' + maikEscH(d.name) + ' monograph</button>'; }).join("") +
+          '<button class="maik-fu" data-maik-drugcont="' + maikEscH(question) + '">Just answer</button>' +
+          '<button class="maik-fu maik-drugask-no" data-maik-drugnoask="' + maikEscH(question) + '">Answer, don\'t ask again</button>' +
+        '</div></div>';
+      bubble("ai", html); scroll();
+    }
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
@@ -7138,6 +7155,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { maikDocCue(maikDocClassify(q)); } catch (e) {}   // the doctor acts out the question
       bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
+      // Drug named in the question (drug-link.js, flag smd_druglink / smd_druglink_ask, default ON):
+      // offer the drug's monograph FIRST, then answer on "Just answer". Misspellings count
+      // ("dose of paracetomol"). Not for image questions or Evidence Review.
+      if (!_researchMode && !_sentThumb) {
+        var _drugs = [];
+        try { if (window.SMD_DRUGLINK && SMD_DRUGLINK.askEnabled()) _drugs = SMD_DRUGLINK.drugsIn(q, { fuzzy: true }); } catch (e) { _drugs = []; }
+        if (_drugs.length) { maikDrugAskCard(_drugs, q); return; }
+      }
+      maikSendRest(q, false);
+    }
+    // Everything send() does after the question bubble. Split out so the drug-monograph card can
+    // resume the exact same path ("Just answer") without re-posting the question.
+    function maikSendRest(q, fromDrugAsk) {
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
       if (_researchMode) {
         // Evidence Review is a cloud feature. With an on-device engine selected the old path refused
@@ -7202,7 +7232,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         }
         bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return;
       }
-      var _lk = maikDoseLookup(q);
+      var _lk = fromDrugAsk ? null : maikDoseLookup(q);   // the drug card already offered the Drug Index
       if (_lk) { maikDoseCard(_lk, q); return; }
       var topic = maikV2() ? maikCanonTopic(q) : q;
       var depth = MAIK_DETAIL_ASK.test(maikNorm(q)) ? "detailed" : "concise";
@@ -7648,6 +7678,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             else if (window.toast) toast("Drug Index loading…");
           } catch (e) {}
         }, 180);
+        return;
+      }
+      var dcont = ev.target && ev.target.closest ? ev.target.closest("[data-maik-drugcont],[data-maik-drugnoask]") : null;
+      if (dcont) {
+        ev.preventDefault();
+        if (_maikBusy) return;
+        var noask = dcont.hasAttribute("data-maik-drugnoask");
+        var cq = dcont.getAttribute(noask ? "data-maik-drugnoask" : "data-maik-drugcont") || "";
+        if (noask) { try { localStorage.setItem("smd_druglink_ask", "0"); toast("MaiK will not ask about drug monographs again. Drug names stay highlighted."); } catch (e) {} }
+        var dcard = dcont.closest(".maik-dosecard"); if (dcard) { var da = dcard.querySelector(".maik-dose-acts"); if (da) da.remove(); }
+        maikSendRest(cq, true);
         return;
       }
       var anyway = ev.target && ev.target.closest ? ev.target.closest("[data-maik-anyway]") : null;

@@ -514,7 +514,7 @@
       var t = setTimeout(function () { if (!done) { done = true; resolve(r); } }, NER_TIMEOUT_MS);
       N.drugNames(src).then(function (names) {
         if (done) return; done = true; clearTimeout(t);
-        if (names && names.length) r._nerDrugs = names;
+        if (names && names.length) { r._nerDrugs = names; try { if (window.SMD_DRUGLINK) window.SMD_DRUGLINK.learn(names); } catch (e) {} }
         resolve(r);
       }, function () { if (!done) { done = true; clearTimeout(t); resolve(r); } });
     });

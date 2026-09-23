@@ -199,6 +199,21 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-23 · Drug names are links: highlight + monograph-first in MaiK
+
+**Decision.** Owner: every drug name in a question, answer or page is bold yellow and opens that drug's
+monograph (`MEDDB.openComposition`). A MaiK question naming a drug first shows a card: open the
+monograph, Just answer, or answer and don't ask again. `drug-link.js` + generated `drug-lexicon.js`
+(2,213 generics + 180 brands from `data/interaction-rules.json`, public domain), plus the Drug Index
+formulary, `SMD_BRANDS`, and fuzzy spelling for the doctor's own question ("paracetomol"). Surfaces:
+`#maikBody`, `#icuAskSheet`, `#dxOverlay`, `#refOverlay` (the Drugs Database itself is excluded).
+Flags `smd_druglink` and `smd_druglink_ask`, both default ON, "0" to turn off.
+
+**Trade-off / status.** Detection is a lexicon, not the OpenMed tagger: it works offline today, and the
+tagger (still fail-closed, licence unverified) only adds names via `SMD_DRUGLINK.learn()` once enabled.
+Lab analytes (sodium, potassium, glucose) are deliberately not highlighted. Tests:
+`test/drug-link.test.mjs`, `test/run-druglink-ui.mjs` (real app, MaiK send path, Chromium 390 px).
+
 ## 2026-09-23 · OpenMed drug + disease taggers wired in, off and fail-closed
 
 **Decision.** Owner: integrate PharmaDetect-TinyMed-65M and DiseaseDetect-TinyMed-65M. `openmed-ner.js`
