@@ -25,7 +25,7 @@ FILM.section({
     // Streamed answer: a cover over the answer body (native y 300-665) rolls down.
     var cover = F.el(maik.view, "", "position:absolute;left:0;right:0;background:linear-gradient(180deg,rgba(242,244,246,0) 0,#f2f4f6 40px);top:" + (300 * 380 / MW) + "px;height:" + (365 * 380 / MW) + "px");
     tl.set(cover, { opacity: 1 }, 0);
-    tl.fromTo(cover, { y: 0 }, { y: 365 * 380 / MW + 40, duration: 1.6, ease: "power1.in" }, 0.9);
+    tl.fromTo(cover, { y: 0 }, { y: 365 * 380 / MW + 40, duration: 1.2, ease: "power1.inOut" }, 0.4);
 
     // Copy on the left, with the MaiK wordmark.
     var c = F.copy(root, "03", "Ask MaiK",

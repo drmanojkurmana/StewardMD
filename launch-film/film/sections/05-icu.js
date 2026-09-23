@@ -24,7 +24,7 @@ FILM.section({
 
     var R = F.RECTS.icu;
     // Header vitals strip (FILM.RECTS.icu.vitals): MAP 76 · HR 98 · SpO2 95% · LACT 2.6
-    var strip = F.cropR(root, F.A.icu, R.vitals, [6, 6], 1.2, 1010, 150, "border-radius:14px");
+    var strip = F.cropR(root, F.A.icu, R.vitals, [6, 6], 1.3, 1030, 250, "border-radius:14px");
     tl.fromTo(strip, { opacity: 0, x: -150, z: -220, rotationY: -20 }, { opacity: 1, x: 0, z: 90, rotationY: -8, duration: 0.6, ease: "power3.out" }, 0.7);
     tl.to(strip, { opacity: 0, y: -20, filter: "blur(6px)", duration: 0.35, ease: "power2.in" }, 1.9);
 

@@ -53,7 +53,7 @@ mkdirSync(dirname(out), { recursive: true });
 
 const ff = [
   "-y", "-hide_banner", "-loglevel", "error",
-  "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "png", "-i", "-",
+  "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
   ...(existsSync(audio) ? ["-ss", String(from), "-t", String(to - from), "-i", audio] : []),
   "-c:v", "libx264", "-preset", "slow", "-crf", String(args.crf || 16), "-tune", "animation",
   "-pix_fmt", "yuv420p", "-profile:v", "high", "-level", "4.1",
@@ -69,7 +69,7 @@ const done = new Promise((res, rej) => enc.on("close", (c) => (c === 0 ? res() :
 const t0 = Date.now();
 for (let i = 0; i < frames; i++) {
   await seek(from + i / FPS);
-  const buf = await page.screenshot({ type: "png" });
+  const buf = await page.screenshot({ type: "jpeg", quality: 98 });
   if (!enc.stdin.write(buf)) await new Promise((r) => enc.stdin.once("drain", r));
   if (i % 60 === 0) process.stdout.write(`frame ${i}/${frames}  ${((Date.now() - t0) / 1000).toFixed(0)}s\n`);
 }

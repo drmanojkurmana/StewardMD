@@ -17,7 +17,7 @@ also had to read together as one platform, following one patient and one clinici
 
 | # | Capability | What the film shows | Why it made the cut |
 |---|---|---|---|
-| 1 | **Dx My Patient**: live clinical reasoning (`reasoning.js`) | Home, then Dx Patient. Four findings are entered, the guided consult asks one question ("Altered sensorium?"), and the clinician taps *Present · add*. The ranked differential follows, with the engine's own "What changed" line (for example "Viral meningitis fell 91→62"). | Fully working and in production. A deterministic, explainable engine, which is rare in a market of black-box chatbots. It is the clinical entry point for everything else, and the differential updating on screen is easy to follow. |
+| 1 | **Dx My Patient**: live clinical reasoning (`reasoning.js`) | Home, then Dx Patient. Four findings are entered, the guided consult asks one question ("Altered sensorium?"), and the clinician taps *Present · add*. The ranked differential follows, with the engine's own "What changed" line (for example "Viral (Aseptic) Meningitis fell (91→62)"). | Fully working and in production. A deterministic, explainable engine, which is rare in a market of black-box chatbots. It is the clinical entry point for everything else, and the differential updating on screen is easy to follow. |
 | 2 | **Antimicrobial stewardship**: stewardship page + ICMR antibiogram (`reasoning.js`, `antibiogram*.js`) | The same case continues to the stewardship page: QUICK DECISION (Acute Bacterial Meningitis, Ceftriaxone 2 g IV q12h, ICU/HDU). Then the ICMR AMRSN 2024 resistance rates on the phone, and the full coverage grid on an iPad in landscape. | This is the product's namesake and its strongest differentiator: national ICMR AMRSN 2024 data across 5 Indian regions plus 20 hospital antibiograms. It is fully working and very visual (the heat-map grid), and it follows directly from capability 1 as one workflow. |
 | 3 | **MaiK**: grounded clinical AI (`maik-engine.js`, `functions/api/ai`) | "Grounded · AI-generated, verify independently". A clinician's question, then a MaiK Evidence Review answer with numbered citations, revealed top-down the way MaiK streams. | Fully working (3-tier routing, streaming on native). It is grounded in the StewardMD knowledge base, and the Intent Firewall keeps it clinical-only. It is the "wow" moment, and it is honest: the UI says advisory, verify. |
 | 4 | **ICU workstation** (`icu.js`, `icu-autoscores.js`) | A synthetic septic-shock patient: header vitals, live status tiles with trends, electrolyte alerts, "Critical: NEWS2 10", and the qSOFA 2/3 critical alert that the engine computed from charted values. | Core dashboard and auto-scores are live. It is StewardMD's flagship workstation, it is clinically weighty, and it looks striking (red CRITICAL header, sparkline tiles). It shows that StewardMD covers the sickest patients, not just a reference shelf. |
@@ -55,6 +55,25 @@ also had to read together as one platform, following one patient and one clinici
 
 Consecutive sections share a device. Each outgoing section ends on the exact state the next one
 starts from (same phone, pose and screen scroll), so every cut is invisible.
+
+## Review pass (first render → final)
+
+The first full render was checked frame by frame (2 fps contact sheet plus full-size frames).
+These problems were found and fixed:
+
+| Problem in v1 | Fix |
+|---|---|
+| Wordmark sheen drawn as a band across the whole frame; a grey smear beside "StewardMD" (1.0-1.6 s) | Sheen is now a copy of the wordmark filled with a moving highlight and clipped to the letterforms |
+| Identity still on screen while the phone rose through it (2.4-2.7 s) | Identity exits 0.25 s earlier; phone rise shortened and starts later |
+| Mark small in the opening, and first wordmark beat late | Mark 150→170 px; wordmark and kicker land 0.15-0.2 s sooner |
+| First "What changed" capture had no change line: all five findings were added in one batch, so the crop framed "Dominant system" instead | Capture now follows the real guided-consult flow (four findings, then *Present · add* on the suggested "Altered sensorium"), and crop rectangles are measured from the DOM (`film/rects.js`) instead of estimated |
+| "What changed" lift too small to read | Enlarged to 1.62x, placed beside the phone |
+| Lifted cards crossing into the headline column (MaiK, ICU) | All lifts are positioned by their right edge (≤ x 1030); the MaiK copy column is narrowed, and the "Grounded" strip lift was dropped (translucent, read as grey) |
+| MaiK phone looked blank for about 1 s while the answer "streamed" | Stream starts at 0.4 s and runs 1.2 s |
+| iPad and resistance captures still showed the app's one-time "Rotate for a wider view" hint | Capture waits 5 s for the hint to time out |
+| Finale: the tilted iPad sliced through the desktop's plane (shared 3D space), and the capability chips did not render | Flat finale rig, each device with its own perspective and explicit stacking; chip backdrop-filter removed |
+| Finale end card undersized; iPad clipped at the left edge | Line 84→96 px, mark 112→132 px, URL larger; iPad moved in |
+| Audio: heartbeat and impact peaks far above the bed; -13.4 LUFS overall | Rebalanced (heartbeat and impact down, pads and plucks up), master about -15 LUFS / -3 dBFS |
 
 ## Sound design (`audio/soundtrack.py` → `audio/soundtrack.wav`)
 
@@ -118,7 +137,7 @@ the test patient the site already ships.
 | HyperFrames composition: 1920x1080 `#root[data-composition-id]`, `<meta name="hyperframes">` | `film/index.html` |
 | One paused GSAP timeline per composition, `window.__timelines.root`, finite (no infinite repeats) | `FILM.build()` in `film/lib.js` |
 | Sections / clips with `data-start`, `data-duration`, `data-track-index` | one file per section in `film/sections/`, registered with `FILM.section({...})` |
-| Frame-accurate export: seek the timeline to each frame's time and capture it; nothing is recorded in real time | `render/render.mjs` (Playwright seek, PNG pipe to ffmpeg/x264; NullMotion's WebCodecs path needs H.264 in Chrome, which headless Chromium lacks) |
+| Frame-accurate export: seek the timeline to each frame's time and capture it; nothing is recorded in real time | `render/render.mjs` (Playwright seek, JPEG q98 frames piped to ffmpeg/x264 CRF 16; NullMotion's WebCodecs path needs an H.264 encoder in the browser, which headless Chromium lacks) |
 
 ## Edit and export
 

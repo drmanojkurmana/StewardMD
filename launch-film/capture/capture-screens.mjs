@@ -113,7 +113,8 @@ async function dxConfirm(p) {
 }
 {
   const { ctx, p } = await boot({ w: 1180, h: 1600 });
-  await p.evaluate(() => document.querySelector('[data-act="antibiogram"]').click()); await p.waitForTimeout(1800);
+  await p.evaluate(() => document.querySelector('[data-act="antibiogram"]').click());
+  await p.waitForTimeout(5000);   // rotate hint times out
   await shot(p, "antibiogram-grid-ipad-tall");
   await ctx.close();
 }

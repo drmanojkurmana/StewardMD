@@ -46,7 +46,7 @@ FILM.section({
 
     // Scroll to the ranked list; lift the engine's own "What changed" line (FILM.RECTS.dxr.changed).
     F.scrollTo(tl, dxr, 470, 2.95, 1.0, "power2.inOut");
-    var changed = F.cropR(root, F.A.dxr, R.dxr.changed, [0, 0], 1.18, 1010, 392);
+    var changed = F.cropR(root, F.A.dxr, R.dxr.changed, [4, 4], 1.62, 1030, 470);
     tl.fromTo(changed, { opacity: 0, x: -140, z: -200, rotationY: -20 },
       { opacity: 1, x: 0, z: 80, rotationY: -8, duration: 0.6, ease: "power3.out" }, 2.95);
     tl.to(changed, { opacity: 0, y: -24, filter: "blur(6px)", duration: 0.35, ease: "power2.in" }, 4.0);

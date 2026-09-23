@@ -7,7 +7,10 @@ FILM.section({
   build: function (root, tl) {
     var F = FILM;
 
-    var rig = F.el(root, "", "position:absolute;inset:0;transform-style:preserve-3d");
+    // Flat rig: each device carries its own perspective (transformPerspective) and they stack in
+    // DOM order (iPad, desktop, iPhone, Watch). A shared 3D space made the tilted iPad slice
+    // through the desktop's plane.
+    var rig = F.el(root, "", "position:absolute;inset:0;transform-style:flat");
 
     // iPad, back left.
     var tab = F.tablet(rig, 700, 488);
@@ -24,12 +27,13 @@ FILM.section({
     // Apple Watch, front right (continues exactly from section 06).
     var H = 860, W = H * 720 / 1172;
     var w = F.watch(rig, F.A.watchCode, H);
+    [tab.wrap, desk.wrap, ph.wrap, w].forEach(function (d) { d.style.transformStyle = "flat"; gsap.set(d, { transformPerspective: 2200 }); });
 
     // Arrival.
     tl.fromTo(desk.wrap, { x: (1920 - DW - 24) / 2, y: 700, opacity: 0, rotationX: 18 },
       { x: (1920 - DW - 24) / 2, y: 96, opacity: 1, rotationX: 0, duration: 1.1, ease: "expo.out" }, 0);
     tl.fromTo(tab.wrap, { x: -700, y: 330, rotationY: 40, opacity: 0 },
-      { x: 150, y: 300, rotationY: 20, opacity: 1, duration: 1.15, ease: "expo.out" }, 0.08);
+      { x: 200, y: 300, rotationY: 20, opacity: 1, duration: 1.15, ease: "expo.out" }, 0.08);
     tl.fromTo(ph.wrap, { x: 2200, y: 200, scale: 0.72, rotationY: -40 },
       { x: 1290, y: 150, scale: 0.72, rotationY: -16, duration: 1.15, ease: "expo.out" }, 0.12);
     tl.fromTo(w, { x: 1336, y: 330, scale: 0.36 }, { x: 1440, y: 390, scale: 0.34, rotationZ: -4, duration: 1.1, ease: "expo.out" }, 0);
@@ -49,11 +53,11 @@ FILM.section({
 
     var end = F.el(root, "", "position:absolute;left:0;right:0;top:0;height:1080px;text-align:center");
     var mk = document.createElement("img"); mk.src = F.A.markWhite;
-    mk.style.cssText = "position:absolute;left:50%;top:232px;width:112px;height:112px;margin-left:-56px;filter:drop-shadow(0 0 30px rgba(95,212,194,.6))";
+    mk.style.cssText = "position:absolute;left:50%;top:214px;width:132px;height:132px;margin-left:-66px;filter:drop-shadow(0 0 30px rgba(95,212,194,.6))";
     end.appendChild(mk);
-    var line = F.el(end, "headline", "position:absolute;left:0;right:0;top:384px;font-size:84px;line-height:1.04",
+    var line = F.el(end, "headline", "position:absolute;left:0;right:0;top:384px;font-size:96px;line-height:1.04",
       "When the clinical decision matters,<br><em>open StewardMD.</em>");
-    var url = F.el(end, "", "position:absolute;left:0;right:0;top:624px;font:600 26px Inter;letter-spacing:.18em;color:#dff5f0", "STEWARDMD.IN");
+    var url = F.el(end, "", "position:absolute;left:0;right:0;top:652px;font:600 28px Inter;letter-spacing:.18em;color:#dff5f0", "STEWARDMD.IN");
     var fine = F.el(end, "fine", "position:absolute;left:0;right:0;top:980px", "Clinical decision support for registered medical practitioners.");
 
     tl.fromTo(mk, { scale: 0.5, opacity: 0, filter: "blur(12px) drop-shadow(0 0 30px rgba(95,212,194,.6))" },
