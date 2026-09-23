@@ -121,8 +121,8 @@ try {
     return c === "doctor" ? true : "chip: " + c;
   });
   await step("doctor: room wall + patient tickets render", async () =>
-    (await ev(`return document.querySelectorAll('.rcard').length + '/' + document.querySelectorAll('.rcard .row').length;`)) === "1/1"
-      ? true : await ev(`return document.querySelectorAll('.rcard').length + '/' + document.querySelectorAll('.rcard .row').length;`));
+    (await ev(`return document.querySelectorAll('.rcard').length + '/' + document.querySelectorAll('.rcard .row, .opd-lane .row').length;`)) === "1/1"
+      ? true : await ev(`return document.querySelectorAll('.rcard').length + '/' + document.querySelectorAll('.rcard .row, .opd-lane .row').length;`));
   await step("doctor: toolbar has Billing and Pharmacy", async () =>
     (await ev(`return !!document.getElementById('billing') && !!document.getElementById('pharmacy');`)) === true
       ? true : "toolbar buttons missing");
@@ -165,7 +165,7 @@ try {
   await step("nurse: board, + Walk-in and vitals action", async () => {
     const w = await ev(`return !!document.getElementById('walk');`);
     const v = await ev(`return document.querySelectorAll('.acts [data-a="vitals"]').length;`);
-    const rows = await ev(`return document.querySelectorAll('.rcard .row').length;`);
+    const rows = await ev(`return document.querySelectorAll('.rcard .row, .opd-lane .row').length;`);
     return w && v >= 1 && rows >= 1 ? true : `walk=${w} vitals=${v} rows=${rows}`;
   });
   await step("nurse: + Walk-in opens the check-in sheet and registers with a token", async () => {
@@ -207,9 +207,9 @@ try {
     return s === "y" ? true : "no in-consultation ticket";
   });
   await step("doctor: Checkout completes the visit and releases the patient", async () => {
-    const before = await ev(`return document.querySelectorAll('.rcard .row').length;`);
+    const before = await ev(`return document.querySelectorAll('.rcard .row, .opd-lane .row').length;`);
     await ev(`document.querySelector('.acts [data-a="checkout"]').click(); return 1;`);
-    const after = await until(`return (function(n){ var m=document.querySelectorAll('.rcard .row').length; return m<n ? String(m) : null; })(${before});`, 10000);
+    const after = await until(`return (function(n){ var m=document.querySelectorAll('.rcard .row, .opd-lane .row').length; return m<n ? String(m) : null; })(${before});`, 10000);
     return after !== null ? true : `queue did not advance (still ${before})`;
   });
 
