@@ -3925,6 +3925,9 @@
     t = t.replace(/\b(DOB|D\.?O\.?B|Date of Birth|Age\/Sex)\b\s*[:]?\s*\S+/gi, "$1: [redacted]");
     t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, "[redacted]");                                          // phone / 10+ digit id runs
     t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");                            // dd/mm/yyyy
+    // Indian identifiers (ABHA Address, UPI, PAN, Indic-script digits, labelled IDs): phi-india.js,
+    // additive only. Flag smd_phi_india, default ON; "0" restores the output above exactly.
+    try { var PI = window.SMD_PHI_INDIA; if (PI && PI.enabled()) t = PI.apply(t); } catch (e) {}
     return t;
   }
   window.SMD_redactPHI = redactPHI;

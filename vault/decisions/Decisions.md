@@ -199,6 +199,19 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-23 · OpenMed: rules now, models only after licence check and benchmark
+
+**Decision.** From the OpenMed catalog (2,255 of 2,266 checkpoints declared Apache-2.0), nothing
+replaces MaiK, MedGemma, Bonsai or the deterministic engines: every OpenMed model is a token tagger.
+Shipped now: `phi-india.js`, OpenMed's India health-ID coverage re-implemented as rules inside
+`redactPHI()` (flag `smd_phi_india`, default ON, "0" restores the old output exactly). It closes real
+leaks: `name@abdm` ABHA Addresses, UPI IDs, PAN, and Aadhaar/phone numbers in Indic digits all used to
+reach the cloud from AI Vision. PII models (ClinicalE5-Small-33M en/hi/te) are BENCHMARK FIRST.
+
+**Trade-off / status.** No OpenMed weights are bundled or downloaded: the per-checkpoint Hugging Face
+licence and the Nemotron-PII dataset licence could not be verified from this session. Full table and
+next steps: [[OpenMed-Evaluation]]. Tests: `test/phi-india.test.mjs`.
+
 ## 2026-09-23 · MAiK Cortex (`medmo-4b`) removed from the offline model list
 
 **Decision.** Owner: remove MAiK Cortex from the offline models. The `medmo-4b` entry is gone from
