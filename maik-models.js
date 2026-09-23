@@ -307,34 +307,6 @@
         sha256: "68bd5e14cd87ff40bba5d08fbef2da9a6088b11aacab8466ef3f13a602e2d868"   // lfs.oid from the HF API
       }]
     },
-    /* MedMO-4B (MBZUAI, 2026): a medical multimodal foundation model on a Qwen3-VL-4B base, added
-     * 2026-09-18 on the owner's decision as a text-only pack. The only published GGUF is a community
-     * Q4_K_M with NO vision projector, so this pack cannot read images (no `vision` key; the
-     * chooser already handles that). Model-card text QA: MedQA 78.5, MMLU-Med 75.7, PubMedQA 78.0,
-     * MedMCQA 58.0. bytes and sha256 are the HF API's exact size and lfs.oid. UNVERIFIED on device:
-     * a qwen3vl-architecture GGUF loading text-only in the plugin's llama.cpp has not been run here. */
-    "medmo-4b": {
-      label: "MAiK Cortex",   // owner, 2026-09-18: shipped under the MAiK name; `actual` keeps the honest provenance
-      actual: "MedMO-4B (MBZUAI, Qwen3-VL-4B base, Q4_K_M)",
-      draft: DRAFT_QWEN3,
-      tier: 2.5,
-      noThink: true,
-      note: "A medical foundation model, strong on medical text questions, with every answer checked claim by claim against the Knowledge Base. Text only: this download carries no vision file.",
-      guide: {
-        speed: 2, medical: 3, general: 2,
-        bestFor: "Clinical questions answered from a medical foundation model, checked against the Knowledge Base.",
-        why: "Trained on 26M medical samples; MedQA 78.5 and MMLU-Med 75.7 on its model card, the strongest text scores of the 4B packs.",
-        pick: "Pick this for medical depth without a 3 GB download, answered from the Knowledge Base. Expect 30 to 50 seconds per answer. It cannot read photos."
-      },
-      nCtx: 4096,
-      nPredict: 768,
-      files: [{
-        name: "medmo-4b-q4_k_m.gguf",
-        url: HF + "/BrazosDeDios/MedMO-4B-Q4_K_M-GGUF/resolve/main/medmo-4b-q4_k_m.gguf?download=true",
-        bytes: 2716064480,   // exact: HF API size
-        sha256: "359d1369a2f2c9f083bb58f1d81b283c28a779a54286834781a23014c075607c"   // lfs.oid from the HF API
-      }]
-    },
     /* BONSAI (PrismML, Apache-2.0): models TRAINED at 1 bit or ternary, not quantized afterwards.
      * Added 2026-09-03 on the owner's decision: the ternary 8B is the on-device stand-in for MaiK
      * Cloud when the phone is offline (maik-engine.js effective()), and all three are in the picker.
@@ -503,7 +475,6 @@
     "maik-lite":         { medical: true,  kb: true,  json: 2, reasoning: 1, ramGB: 6,  kvGBat4k: 0.47, lang: [] },
     "maik-mxcore":       { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
     "maik-neural":       { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
-    "medmo-4b":          { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.60, lang: [] },
     "maik-horizon":      { medical: false, kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [],
                            warn8: "On an 8 GB phone this pack needs the increased-memory entitlement and is unloaded whenever you switch apps." },
     "maik-apex":         { medical: true,  kb: true,  json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [],

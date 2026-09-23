@@ -199,6 +199,17 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-23 · MAiK Cortex (`medmo-4b`) removed from the offline model list
+
+**Decision.** Owner: remove MAiK Cortex from the offline models. The `medmo-4b` entry is gone from
+`PACKS` and `CAPS` in `maik-models.js`, so it no longer appears in the picker or grades. Supersedes
+the 2026-09-18 entry below.
+
+**Trade-off / status.** A phone that had Cortex selected falls back to MxCore (`activePack()` returns
+`maik-mxcore` for an unknown id). A previously downloaded `medmo-4b-q4_k_m.gguf` (2.7 GB) is not
+deleted automatically; it is orphaned on disk until the app data is cleared. Pinned in
+`test/maik-models.test.mjs`.
+
 ## 2026-09-18 · MedMO-4B ships as MAiK Cortex, RAG-connected like every other text pack
 
 **Decision.** The `medmo-4b` pack is labelled **MAiK Cortex** in the offline model list; `actual`

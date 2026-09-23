@@ -18,7 +18,6 @@ const PACKS = {
   "maik-lite": { label: "MAiK Lite", own: true, tier: 0 },
   "maik-mxcore": { label: "MAiK MxCore", tier: 1 },
   "maik-neural": { label: "MAiK Neural", tier: 2 },
-  "medmo-4b": { label: "MAiK Cortex", tier: 2.5 },
   "maik-horizon": { label: "MAiK Horizon", tier: 3 },
   "maik-apex": { label: "MAiK Apex", tier: 4 },
   "bonsai-ternary-8b": { label: "MAiK Prime", tier: 0.5, flagship: true },
@@ -26,7 +25,7 @@ const PACKS = {
   "bonsai-27b": { label: "MAiK Max", tier: 5 },
   "bonsai2-27b": { label: "MAiK Max 2", tier: 5.5 },
 };
-const MEDICAL = { "maik-lite": 1, "maik-mxcore": 1, "maik-neural": 1, "medmo-4b": 1, "maik-apex": 1 };
+const MEDICAL = { "maik-lite": 1, "maik-mxcore": 1, "maik-neural": 1, "maik-apex": 1 };
 const INSTALLED = { "maik-lite": 1 };
 
 function load() {

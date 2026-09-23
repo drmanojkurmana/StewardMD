@@ -67,7 +67,7 @@ async function liveAnswers(packs) {
 let answers = null;
 if (opt("--answers")) answers = JSON.parse(readFileSync(opt("--answers"), "utf8"));
 else if (args.includes("--live")) {
-  const packs = (opt("--packs") || "maik-lite,medmo-4b,maik-mxcore,bonsai-ternary-8b").split(",");
+  const packs = (opt("--packs") || "maik-lite,maik-mxcore,bonsai-ternary-8b").split(",");
   answers = await liveAnswers(packs);
   const f = new URL("./answers-" + new Date().toISOString().slice(0, 10) + ".json", import.meta.url);
   writeFileSync(f, JSON.stringify(answers, null, 2)); console.log("recorded to " + f.pathname);
