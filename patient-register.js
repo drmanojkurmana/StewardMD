@@ -219,7 +219,10 @@
 
         '<div class="pr-body">' +
           '<div class="pr-dup" id="prDup" hidden></div>' +
-          '<button type="button" class="pr-btn ghost" data-a="read-nfc" style="width:100%;margin-bottom:14px;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">\uD83D\uDCF1 ' + wTH("ward.reg-read-nfc", "Ni-Key: Read NFC Tag from File") + '</button>' +
+          '<div style="display:flex;gap:8px;margin-bottom:14px">' +
+            '<button type="button" class="pr-btn ghost" data-a="read-nfc" style="flex:1;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">&#128241; ' + wTH("ward.reg-read-nfc", "Ni-Key: Read NFC Tag") + '</button>' +
+            '<button type="button" class="pr-btn ghost" data-a="scan-qr" style="flex:1;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">&#128247; ' + wTH("ward.reg-scan-qr", "Scan QR / Barcode") + '</button>' +
+          '</div>' +
 
           '<h3 class="pr-sec">' + wTH("ward.reg-patient", "Patient") + "</h3>" +
           field("name", wT("ward.reg-full-name", "Full name"), { req: true, ph: wT("ward.reg-name-example", "e.g. Asha Kumar"), max: 80, auto: "name" }) +
@@ -280,14 +283,15 @@
   function doneHtml(res) {
     var pending = !!res.pending;
     var sid = res.stewardId || "";
-    /* 1-touch full identity package for a walk-in: the canonical StewardID is shown LARGE next to
-     * the MR number, programmed onto the physical folder's Ni-Key NFC tag (with read-back
+    var canonicalId = (res.stewardId || res.mrn || "").trim();
+    /* 1-touch full identity package for a walk-in: the canonical single StewardID is shown,
+     * programmed onto the physical folder's Ni-Key NFC tag (with read-back
      * verification), and printed on the matching file label (staff console only). A pending
      * temporary ID is queue-only - it must never be written to a tag or a label - so both stay hidden. */
     var tagRow = "";
     if (!pending && res.mrn) {
       tagRow = '<div class="pr-actions">' +
-        '<button type="button" class="pr-btn" id="prWriteNfc" data-a="write-nfc" data-mrn="' + esc(res.mrn) + '"' + (sid ? ' data-sid="' + esc(sid) + '"' : "") + '>&#128241; ' + wTH("ward.reg-write-nfc", "Write Ni-Key NFC Tag") + "</button>" +
+        '<button type="button" class="pr-btn" id="prWriteNfc" data-a="write-nfc" data-mrn="' + esc(canonicalId) + '"' + (sid ? ' data-sid="' + esc(sid) + '"' : "") + '>&#128241; ' + wTH("ward.reg-write-nfc", "Write Ni-Key NFC Tag") + "</button>" +
         ((root && typeof root.openFileLabel === "function")
           ? '<button type="button" class="pr-btn ghost" data-a="print-label">&#127991; ' + wTH("ward.reg-file-label", "File Label") + "</button>"
           : "") +
@@ -297,8 +301,8 @@
       '<div class="pr-card pr-done">' +
         '<div class="pr-tick" aria-hidden="true">&#10003;</div>' +
         '<h2 id="prTitle">' + wTH("ward.reg-name-added", "{name} added", { name: res.name ? esc(res.name) : wTH("ward.reg-patient", "Patient") }) + "</h2>" +
-        '<p class="pr-mrlabel">' + (sid && !pending ? wTH("ward.reg-stewardid-mr-number", "StewardID &bull; MR Number") : (pending ? wTH("ward.reg-temporary-id", "Temporary ID") : wTH("ward.reg-mr-number", "MR number"))) + "</p>" +
-        '<p class="pr-mr">' + (sid && !pending ? esc(sid) + " &middot; " : "") + esc(res.mrn) + "</p>" +
+        '<p class="pr-mrlabel">' + (pending ? wTH("ward.reg-temporary-id", "Temporary ID") : (sid ? wTH("ward.reg-stewardid", "StewardID") : wTH("ward.reg-mr-number", "MR number"))) + "</p>" +
+        '<p class="pr-mr">' + esc(canonicalId) + "</p>" +
         (pending
           ? '<p class="pr-warn">' + wTH("ward.reg-temporary-id-warning", "The hospital has not issued an MR number yet. This temporary ID is for the queue only - do not write it on hospital records. It is replaced automatically when the EMR issues the real number.") + "</p>"
           : '<p class="pr-note">' + wTH("ward.reg-write-on-slip", "Write this on the patient's slip.") + "</p>") +
@@ -552,7 +556,8 @@
       Promise.resolve(opts.submit(sent)).then(function (r) {
         if (r && r.ok) {
           state.doneMrn = r.mrn || "";
-          state.doneStewardId = r.stewardId || sent.stewardId || "";
+          state.doneStewardId = r.stewardId || sent.stewardId || r.mrn || "";
+          if (r.mrn && !r.stewardId) state.doneStewardId = r.mrn;
           host.innerHTML = doneHtml({ mrn: r.mrn, stewardId: state.doneStewardId, pending: r.pending, name: val("name"), abhaLink: r.abhaLink });
           // The answers travel with the result so the caller queues the patient in the department chosen.
           try { if (opts.onAdded) opts.onAdded(r, sent); } catch (e) {}
@@ -651,11 +656,71 @@
       if (a === "cancel" || a === "close") return close();
       if (a === "save") return save();
       if (a === "another") { open(opts); return; }
+      function applyResolvedIdentity(uhid, carrierType) {
+        var code = "";
+        try {
+          if (root.StewardIdentityResolver && root.StewardIdentityResolver.normalizeCarrierValue) {
+            code = root.StewardIdentityResolver.normalizeCarrierValue(uhid);
+          }
+        } catch (e) {}
+        if (!code) code = String(uhid == null ? "" : uhid).trim().toUpperCase();
+        if (!code) return;
+        /* Universal Patient Identity: resolve the carrier to a canonical record first. A revoked
+         * tag stops here; an existing patient prefills the sheet (and is a follow-up, reusing
+         * their StewardID so this registration never mints a duplicate identity). An unknown
+         * tag keeps the fast path: stamp the id and queue as follow-up. */
+        var hit = null;
+        try {
+          if (root.StewardIdentityResolver && root.StewardIdentityResolver.resolvePatientIdentity) {
+            var res = root.StewardIdentityResolver.resolvePatientIdentity({ type: carrierType || "qr", value: code });
+            if (res && !res.then && res.ok === false && res.error === "CARRIER_REVOKED") {
+              if (root.toast) root.toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card.");
+              return;
+            }
+            if (res && !res.then && res.ok && res.patient) hit = res;
+          }
+        } catch (e) { hit = null; }
+        if (hit && hit.patient) {
+          var p = hit.patient;
+          state.stewardId = hit.stewardId || uhid;
+          if (p.name && q("name") && !q("name").value) q("name").value = p.name;
+          if ((p.mobile || p.phone) && q("mobile") && !q("mobile").value) q("mobile").value = p.mobile || p.phone;
+          if ((p.ageYears || p.age) && q("ageYears") && !q("ageYears").value) q("ageYears").value = p.ageYears || p.age;
+          var g = String(p.gender || p.sex || "").toLowerCase();
+          if (g === "female" || g === "male" || g === "other") {
+            var gb = host.querySelector('[data-seg="gender"] [data-v="' + g + '"]');
+            if (gb) gb.click();
+          }
+        }
+        var mrnInput = host.querySelector('[data-f="mrn"] input');
+        if (mrnInput) mrnInput.value = code;
+        var nameInput = host.querySelector('[data-f="name"] input');
+        if (nameInput && !nameInput.value) nameInput.value = code;
+        var followBtn = host.querySelector('[data-f="visitType"] [data-v="followup"]');
+        if (followBtn) followBtn.click();
+        if (root.toast) root.toast((carrierType === "nfc" ? "Ni-Key Tag read: " : "Scanned code: ") + code);
+      }
+      if (a === "scan-qr") {
+        if (root.WARD_LABELS && root.WARD_LABELS.cameraSupported && root.WARD_LABELS.cameraSupported()) {
+          root.WARD_LABELS.scan().then(function (res) {
+            if (res && res.code) applyResolvedIdentity(res.code, res.format || "qr");
+            else if (res && res.error === "denied") {
+              if (root.toast) root.toast("Camera permission denied. Tap 🔒 in address bar → Site Settings → set Camera to Allow.");
+            } else if (res && !res.cancelled) {
+              if (root.toast) root.toast("Camera scan failed.");
+            }
+          });
+          return;
+        }
+        var pVal = prompt("Scan or type QR / Barcode / StewardID:");
+        if (pVal && pVal.trim()) applyResolvedIdentity(pVal.trim(), "qr");
+        return;
+      }
       if (a === "read-nfc") {
         var sBtn = b;
         sBtn.disabled = true;
         sBtn.textContent = wT("ward.reg-hold-tag", "Hold Ni-Key tag to phone…");
-        var resetScan = function () { sBtn.disabled = false; sBtn.textContent = "\uD83D\uDCF1 " + wT("ward.reg-read-nfc", "Ni-Key: Read NFC Tag from File"); };
+        var resetScan = function () { sBtn.disabled = false; sBtn.textContent = "\uD83D\uDCF1 " + wT("ward.reg-read-nfc", "Ni-Key: Read NFC Tag"); };
         var NFC = root.SMD_NFC || root.NiKey;
         if (!NFC || typeof NFC.startScan !== "function") {
           resetScan();
@@ -687,25 +752,8 @@
           } catch (e) { hit = null; }
           sBtn.textContent = "\u2713 " + uhid;
           sBtn.disabled = false;
-          if (hit && hit.patient) {
-            var p = hit.patient;
-            state.stewardId = hit.stewardId || uhid;
-            if (p.name && q("name") && !q("name").value) q("name").value = p.name;
-            if ((p.mobile || p.phone) && q("mobile") && !q("mobile").value) q("mobile").value = p.mobile || p.phone;
-            if ((p.ageYears || p.age) && q("ageYears") && !q("ageYears").value) q("ageYears").value = p.ageYears || p.age;
-            var g = String(p.gender || p.sex || "").toLowerCase();
-            if (g === "female" || g === "male" || g === "other") {
-              var gb = host.querySelector('[data-seg="gender"] [data-v="' + g + '"]');
-              if (gb) gb.click();
-            }
-          }
-          var mrnInput = host.querySelector('[data-f="mrn"] input');
-          if (mrnInput) mrnInput.value = uhid;
-          var nameInput = host.querySelector('[data-f="name"] input');
-          if (nameInput && !nameInput.value) nameInput.value = uhid;
-          var followBtn = host.querySelector('[data-f="visitType"] [data-v="followup"]');
-          if (followBtn) followBtn.click();
-          if (root.toast) root.toast("Ni-Key Tag read: " + uhid);
+          state.stewardId = (hit && hit.stewardId) || uhid;
+          applyResolvedIdentity(uhid, "nfc", hit);
         }).catch(function (err) {
           resetScan();
           var msg = (err && err.message) ? err.message : String(err || "");

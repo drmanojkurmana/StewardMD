@@ -88,11 +88,11 @@ test("registration payload mints a canonical StewardID via the resolver", () => 
   assert.match(REG_SRC, /if \(!state\.stewardId && root\.StewardIdentityResolver/);
 });
 
-test("done card shows StewardID next to the MRN with Ni-Key write + file label", () => {
+test("done card shows single canonical StewardID with Ni-Key write + file label", () => {
   regWindow.openFileLabel = () => {};
   const html = REG._doneHtml({ mrn: "MRN-42", stewardId: "SMD-ABC123", name: "Asha" });
-  assert.match(html, /<p class="pr-mrlabel">StewardID &bull; MR Number<\/p>/);
-  assert.match(html, /<p class="pr-mr">SMD-ABC123 &middot; MRN-42<\/p>/);
+  assert.match(html, /<p class="pr-mrlabel">StewardID<\/p>/);
+  assert.match(html, /<p class="pr-mr">SMD-ABC123<\/p>/);
   assert.match(html, /id="prWriteNfc" data-a="write-nfc"/);
   assert.match(html, /data-sid="SMD-ABC123"/);
   assert.match(html, /Write Ni-Key NFC Tag/);
@@ -352,4 +352,22 @@ test("OPD + IPD ambiguity asks which episode the act belongs to (behavioral)", a
 test("the ward tag verdict can carry the chosen episode", () => {
   assert.match(WARD_SRC, /st\.tagVerify\.episode = choice; st\.tagVerify\.episodeWords = words/);
   assert.match(WARD_SRC, /v\.episode && v\.episodeWords \? "<p>" \+ esc\(v\.episodeWords\)/);
+});
+
+test("opd toolbar carries a Scan button wired to openOpdScanner", () => {
+  assert.match(OPD, /id="opdScanBtn"/);
+  assert.match(OPD, /openOpdScanner/);
+  assert.match(OPD, /window\.openOpdScanner=openOpdScanner/);
+});
+
+test("patient registration sheet carries both Ni-Key NFC and Scan QR buttons", () => {
+  assert.match(REG_SRC, /data-a="read-nfc"/);
+  assert.match(REG_SRC, /data-a="scan-qr"/);
+  assert.match(REG_SRC, /applyResolvedIdentity/);
+});
+
+test("index.html routes incoming deep links on boot and appUrlOpen to the patient", () => {
+  const INDEX = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(INDEX, /checkUrlScanOnBoot/);
+  assert.match(INDEX, /window\.SMD_handleScanUid = onNfcUhid/);
 });

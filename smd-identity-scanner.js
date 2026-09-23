@@ -361,6 +361,28 @@
           return p;
         }
       }
+      if (typeof window !== "undefined" && window.WARD_LABELS && WARD_LABELS.cameraSupported && WARD_LABELS.cameraSupported() && typeof WARD_LABELS.scan === "function") {
+        this._listening = true;
+        var pScan = WARD_LABELS.scan();
+        if (pScan && typeof pScan.then === "function") {
+          pScan.then(function (res) {
+            self._listening = false;
+            if (res && res.code) {
+              self.handleScan(String(res.code), res.format || "qr");
+            } else if (res && res.cancelled) {
+              self.setStatus("Scan cancelled. Tap to scan again, or enter ID manually.");
+            } else {
+              if (!armWedge()) self.fail(new Error("Camera scan failed: " + ((res && res.error) || "unknown")));
+              else self.setStatus("Camera unavailable. Wedge reader armed: scan now, or enter the ID manually.");
+            }
+          }, function (err) {
+            self._listening = false;
+            if (!armWedge()) self.fail(err);
+            else self.setStatus("Camera unavailable. Wedge reader armed: scan now, or enter the ID manually.");
+          });
+          return pScan;
+        }
+      }
     } catch (e) {}
     if (!armWedge()) {
       this.setStatus("Scanner armed. Enter the scanned value below, or type the ID manually.");

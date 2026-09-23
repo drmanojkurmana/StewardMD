@@ -148,16 +148,17 @@ test("every ticket row carries a File Label button wired to openFileLabel", () =
   assert.match(OPD, /else if\(a==="label"\) openFileLabel\(tid,sid\)/);
 });
 
-test("openFileLabel renders clinic, token, patient, date, MRN, barcode, QR, print", () => {
+test("openFileLabel renders clinic, token, patient, date, StewardID, barcode, QR deep link, print", () => {
   assert.match(OPD, /function openFileLabel\(ticketId,sid\)/);
   assert.match(OPD, /SMD_BARCODE&&SMD_BARCODE\.toSvg\(uid/);
-  assert.match(OPD, /SMD_PGLOG_QR&&SMD_PGLOG_QR\.toSvg\(uid/);
+  assert.match(OPD, /SMD_PGLOG_QR&&SMD_PGLOG_QR\.toSvg\(/);
+  assert.match(OPD, /\/opd\?uid=/);
   assert.match(OPD, /Print Label \/ Sticker/);
   assert.match(OPD, /Write NFC Tag/);
   assert.match(OPD, /window\.print\(\)/);
   assert.match(OPD, /@media print/);
   assert.match(OPD, /Token \'/);
-  assert.match(OPD, /MRN \'/);
+  assert.match(OPD, /StewardID \'/);
 });
 
 test("writeNfcTag writes the UID via NDEFReader.write and fails spoken", () => {

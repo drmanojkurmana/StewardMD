@@ -513,6 +513,7 @@
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
+        '<button class="ghost" id="opdScanBtn" title="Scan QR code, barcode, or tap Ni-Key">&#128247; Scan</button>'+
         (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
         '<button class="ghost" id="billing">Billing</button>'+
         '<button class="ghost" id="pharmacy">Pharmacy</button>'+
@@ -524,6 +525,7 @@
     var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
     document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
+    var scb=document.getElementById("opdScanBtn"); if(scb) scb.onclick=function(){ openOpdScanner(); };
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
     var nc=document.getElementById("clinics"); if(nc) nc.onclick=openClinics;
@@ -2061,7 +2063,7 @@
     var hit=null, i, j;
     var consider=function(t,sid){
       if(hit||!t) return;
-      if(same(t.mrn)||same(t.ghisPatientId)||same(t.smdId)||same(t.id)||same(t.token)) hit={t:t,sid:sid||null,tid:t.id};
+      if(same(t.stewardId)||same(t.mrn)||same(t.ghisPatientId)||same(t.smdId)||same(t.id)||same(t.token)) hit={t:t,sid:sid||null,tid:t.id};
     };
     for(i=0;i<(st.board||[]).length&&!hit;i++){ var b=st.board[i], ts=(b&&b.tickets)||[];
       for(j=0;j<ts.length&&!hit;j++) consider(ts[j],b.session&&b.session.id); }
@@ -2078,7 +2080,7 @@
     var hit=findTicketByUid(ticketId);
     if(!hit){ toast("That patient is no longer on today's board."); return; }
     var t=hit.t;
-    var uid=t.mrn||t.ghisPatientId||t.smdId||t.id||"";
+    var uid=t.stewardId||t.mrn||t.ghisPatientId||t.smdId||t.id||"";
     var clinic=st.orgName||(st.who&&st.who.orgName)||st.orgCode||"Clinic";
     var tokenNo=(t.token==null?"":String(t.token));
     var tokenLabel=tokenNo?("#"+(/^\d+$/.test(tokenNo)?("0000"+tokenNo).slice(-4):tokenNo)):"";
@@ -2087,7 +2089,8 @@
     var barHtml, qrHtml;
     try{ barHtml=(window.SMD_BARCODE&&SMD_BARCODE.toSvg(uid,{height:56}))||'<div class="t">Barcode unavailable.</div>'; }
     catch(e){ barHtml='<div class="t">Barcode unavailable for this ID.</div>'; }
-    try{ qrHtml=(window.SMD_PGLOG_QR&&SMD_PGLOG_QR.toSvg(uid,{scale:4}))||'<div class="t">QR unavailable.</div>'; }
+    var qrTarget=(location&&location.origin?location.origin:"https://stewardmd.in")+"/opd?uid="+encodeURIComponent(uid);
+    try{ qrHtml=(window.SMD_PGLOG_QR&&SMD_PGLOG_QR.toSvg(qrTarget,{scale:4,label:"Scan to open patient record"}))||'<div class="t">QR unavailable.</div>'; }
     catch(e){ qrHtml='<div class="t">QR unavailable for this ID.</div>'; }
     open('<style>@media print{body>*:not(#scrim){display:none!important;}'+
       '#scrim{position:static!important;background:none!important;display:block!important;opacity:1!important;visibility:visible!important;}'+
@@ -2097,7 +2100,7 @@
       '<div style="font-weight:800;font-size:15px">'+esc(clinic)+'</div>'+
       (tokenLabel?'<div style="font:800 26px ui-monospace,monospace;margin:2px 0">Token '+esc(tokenLabel)+'</div>':'')+
       '<div style="font-weight:700;font-size:17px;margin-top:2px">'+esc(t.name||"Patient")+'</div>'+
-      '<div class="t" style="margin:2px 0 8px">'+esc(ageSex)+' · '+esc(st.date||"")+' · MRN '+esc(uid)+'</div>'+
+      '<div class="t" style="margin:2px 0 8px">'+esc(ageSex)+' · '+esc(st.date||"")+' · StewardID '+esc(uid)+'</div>'+
       '<div style="display:flex;gap:12px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin:6px 0">'+
       '<div><div style="font-size:11px;color:var(--mut);margin-bottom:2px">BARCODE</div>'+barHtml+
       '<div style="font:700 13px ui-monospace,monospace;margin-top:2px">'+esc(uid)+'</div></div>'+
@@ -2223,6 +2226,33 @@
         currentQueueTicket:{ ticketId:hit.tid, sessionId:hit.sid, token:t.token, status:t.status },
         activeEncounter:{ type:"opd", encounterId:t.encounterId||hit.tid, department:t.department||"", token:t.token||"", ticketId:hit.tid, sessionId:hit.sid } };
     }catch(e){ return null; }
+  }
+  function openOpdScanner(){
+    if(window.WARD_LABELS&&WARD_LABELS.cameraSupported&&WARD_LABELS.cameraSupported()){
+      WARD_LABELS.scan().then(function(res){
+        if(res&&res.code) handleScannedUid(res.code);
+        else if(res&&res.error==="denied") toast("Camera permission denied. Allow camera in site settings.");
+        else if(res&&!res.cancelled) toast("Camera scan failed.");
+      });
+      return;
+    }
+    if(window.PatientIdentityScanner){
+      var sc=PatientIdentityScanner.create({
+        station: (st.who&&st.who.role)||"doctor",
+        onResolved: function(r){
+          close();
+          var id=r.stewardId||r.patientId||(r.carrier&&r.carrier.normalized);
+          if(id) handleScannedUid(id);
+        }
+      });
+      open('<h3>Scan Patient Identity</h3><div id="opdScanBox" style="min-height:160px"></div><div class="row2"><button class="cancel" id="scClose">Close</button></div>');
+      sheet.querySelector("#scClose").onclick=close;
+      sc.mount(sheet.querySelector("#opdScanBox"));
+      sc.startBarcodeScan();
+      return;
+    }
+    var manualVal=prompt("Enter or scan StewardID / MRN:");
+    if(manualVal&&manualVal.trim()) handleScannedUid(manualVal.trim());
   }
   // One tap/scan, routed by station: doctor gets the visit-aware action sheet (start the
   // consultation, open the chart, or start a linked follow-up), nurse opens vitals pre-linked
@@ -2581,6 +2611,8 @@
   // The shared check-in sheet (patient-register.js) offers a File Label button on its done card
   // only when this is present - the phone app has no label dialog, so it stays hidden there.
   try{ window.openFileLabel=openFileLabel; }catch(e){}
+  try{ window.openOpdScanner=openOpdScanner; }catch(e){}
+  try{ window.handleScannedUid=handleScannedUid; }catch(e){}
   // 1-touch tap/scan runs on every station, preview included: background NFC read plus the
   // USB/Bluetooth wedge-scanner burst listener. Both no-op where unsupported.
   try{ startNfcListener(); }catch(e){}

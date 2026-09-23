@@ -2884,9 +2884,14 @@ window.openExternal = function (u) {
       return (s && s.tickets) || [];
     } catch (e) { return []; }
   }
+  try { window.onNfcUhid = onNfcUhid; window.SMD_handleScanUid = onNfcUhid; } catch (e) {}
   function onNfcUhid(uhid) {
     uhid = String(uhid == null ? "" : uhid).trim();
     if (!uhid) return;
+    if (window.StewardIdentityResolver && window.StewardIdentityResolver.normalizeCarrierValue) {
+      var _norm = window.StewardIdentityResolver.normalizeCarrierValue(uhid);
+      if (_norm) uhid = _norm;
+    }
     buzz();
     say("NFC Tag: UHID " + uhid);
     // 1. Today's queue: route through the workplace-aware opener (GHIS / Connect /
@@ -2895,7 +2900,7 @@ window.openExternal = function (u) {
       var tk = queueTickets();
       for (var i = 0; i < tk.length; i++) {
         var t = tk[i] || {};
-        if (same(t.mrn, uhid) || same(t.ghisPatientId, uhid) || same(t.smdId, uhid) || same(t.id, uhid) || same(t.token, uhid)) {
+        if (same(t.stewardId, uhid) || same(t.mrn, uhid) || same(t.ghisPatientId, uhid) || same(t.smdId, uhid) || same(t.id, uhid) || same(t.token, uhid)) {
           if (window.QUEUE && window.QUEUE._openTicketEmr) { window.QUEUE._openTicketEmr(t.id); return; }
         }
       }
@@ -2907,8 +2912,8 @@ window.openExternal = function (u) {
         var pts = C.listPatients() || [];
         for (var j = 0; j < pts.length; j++) {
           var p = pts[j] || {};
-          if (same(p.mrn, uhid) || same(p.id, uhid)) {
-            window.OPDEMR.openProfile({ source: "local", localStore: C.localStore, patientId: p.id, displayId: p.mrn || "", name: p.name || ("Patient " + uhid), age: p.age || "", sex: p.sex || "" });
+          if (same(p.stewardId, uhid) || same(p.mrn, uhid) || same(p.id, uhid)) {
+            window.OPDEMR.openProfile({ source: "local", localStore: C.localStore, patientId: p.id, displayId: p.mrn || p.stewardId || "", name: p.name || ("Patient " + uhid), age: p.age || "", sex: p.sex || "" });
             return;
           }
         }
@@ -2924,7 +2929,24 @@ window.openExternal = function (u) {
       }
     } catch (e) {}
   }
+  function checkUrlScanOnBoot() {
+    try {
+      var sp = new URLSearchParams(window.location.search || "");
+      var raw = sp.get("uid") || sp.get("scan") || sp.get("stewardId") || sp.get("mrn") || sp.get("patientId") || "";
+      if (raw) {
+        var clean = raw.trim();
+        if (window.StewardIdentityResolver && window.StewardIdentityResolver.normalizeCarrierValue) {
+          var n = window.StewardIdentityResolver.normalizeCarrierValue(clean);
+          if (n) clean = n;
+        }
+        setTimeout(function () {
+          onNfcUhid(clean);
+        }, 400);
+      }
+    } catch (e) {}
+  }
   function boot() {
+    checkUrlScanOnBoot();
     if (!window.SMD_NFC || !window.SMD_NFC.initAppListener) return;
     try {
       var p = window.SMD_NFC.initAppListener({
