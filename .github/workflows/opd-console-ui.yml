@@ -2,10 +2,10 @@ name: OPD console UI
 on:
   pull_request:
     branches: [main]
-    paths: ['opd.html', 'test/run-opd-console-flow-ui.mjs', '.github/workflows/opd-console-ui.yml']
+    paths: ['opd.html', 'test/run-opd-clinic-billing-ui.mjs', 'test/run-opd-console-flow-ui.mjs', '.github/workflows/opd-console-ui.yml']
   push:
     branches: [main, feat/opd-flow-revamp]
-    paths: ['opd.html', 'test/run-opd-console-flow-ui.mjs', '.github/workflows/opd-console-ui.yml']
+    paths: ['opd.html', 'test/run-opd-clinic-billing-ui.mjs', 'test/run-opd-console-flow-ui.mjs', '.github/workflows/opd-console-ui.yml']
 permissions:
   contents: read
 jobs:
