@@ -1,0 +1,85 @@
+/* StewardMD launch film. Brand tokens come from the app (redesign-system.css) and the public site
+   (_site/index.html): teal #0F766E / #115E59, sphere teal #2f9184 → #06231e, ink #0D1B24,
+   Inter for UI type, Newsreader serif with a teal italic for headlines. */
+@font-face { font-family: "Inter"; src: url("../assets/fonts/inter-variable.woff2") format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Newsreader"; src: url("../assets/fonts/newsreader-300.ttf"); font-weight: 300; font-style: normal; }
+@font-face { font-family: "Newsreader"; src: url("../assets/fonts/newsreader-400.ttf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Newsreader"; src: url("../assets/fonts/newsreader-italic-300.ttf"); font-weight: 300; font-style: italic; }
+@font-face { font-family: "Newsreader"; src: url("../assets/fonts/newsreader-italic-400.ttf"); font-weight: 400; font-style: italic; }
+
+:root {
+  --teal: #0F766E; --teal-2: #115E59; --teal-hi: #2f9184; --teal-glow: #5fd4c2;
+  --deep: #041512; --deep-2: #06231e; --ink: #0D1B24;
+  --paper: #F5F8F9; --text: #ECF3F1; --muted: #93aaa5;
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "Inter", -apple-system, system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: antialiased; }
+#root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--deep); isolation: isolate; }
+#stage { position: absolute; inset: 0; perspective: 2200px; }
+.section { transform-style: preserve-3d; }
+
+/* ---------- background ---------- */
+.bg-base { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 40%, #07231f 0%, #041512 55%, #020a09 100%); }
+.bg-grid { position: absolute; inset: -60px; opacity: .07;
+  background-image: linear-gradient(rgba(255,255,255,.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.9) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 0%, transparent 75%); mask-image: radial-gradient(70% 70% at 50% 50%, #000 0%, transparent 75%); }
+.glow { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .0; }
+.grain { position: absolute; inset: 0; pointer-events: none; opacity: .09; mix-blend-mode: overlay; z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px; }
+.vignette { position: absolute; inset: 0; pointer-events: none; z-index: 49;
+  background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%); }
+.letterbox { position: absolute; left: 0; right: 0; height: 0; background: #000; z-index: 60; }
+
+/* ---------- devices ---------- */
+.dev { transform-style: preserve-3d; will-change: transform; }
+.phone-body { position: absolute; inset: 0; border-radius: 64px;
+  background: linear-gradient(145deg, #3a3f43 0%, #16191b 35%, #2b3033 60%, #0c0e0f 100%);
+  box-shadow: 0 70px 120px -30px rgba(0,0,0,.75), 0 30px 60px -20px rgba(0,0,0,.6), inset 0 0 0 1.5px rgba(255,255,255,.14), inset 0 0 0 5px #0b0d0e; }
+.phone-btn { position: absolute; width: 4px; border-radius: 2px; background: linear-gradient(90deg, #202427, #454b4f); }
+.phone-btn.l1 { left: -3px; top: 150px; height: 30px; } .phone-btn.l2 { left: -3px; top: 205px; height: 58px; }
+.phone-btn.l3 { left: -3px; top: 275px; height: 58px; } .phone-btn.r1 { right: -3px; top: 230px; height: 92px; }
+.phone-screen { position: absolute; border-radius: 51px; overflow: hidden; background: #fff; transform: translateZ(0); }
+.phone-glare { position: absolute; inset: 0; border-radius: 64px; pointer-events: none; z-index: 5;
+  background: linear-gradient(115deg, rgba(255,255,255,0) 38%, rgba(255,255,255,.10) 47%, rgba(255,255,255,0) 56%); background-size: 260% 100%; background-position: 110% 0; }
+.status { position: absolute; left: 0; right: 0; top: 0; height: 47px; z-index: 4; display: flex; justify-content: space-between; align-items: center; padding: 6px 34px 0 42px; color: #0D1B24; font: 600 16px var(--sans); letter-spacing: -.01em; }
+.status .ico { display: flex; gap: 6px; align-items: center; } .status svg { fill: currentColor; color: currentColor; }
+.status.light { color: #fff; }
+.island { position: absolute; left: 50%; top: 11px; width: 118px; height: 34px; margin-left: -59px; border-radius: 20px; background: #000; z-index: 6; }
+.layer { will-change: transform; }
+.tap { position: absolute; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; z-index: 7; pointer-events: none;
+  background: radial-gradient(circle, rgba(255,255,255,.55) 0%, rgba(255,255,255,.28) 45%, rgba(255,255,255,0) 70%); box-shadow: 0 0 0 2px rgba(255,255,255,.65); opacity: 0; }
+
+.tablet-body { position: absolute; inset: 0; border-radius: 38px; background: linear-gradient(145deg, #2d3134, #121416 45%, #262a2d);
+  box-shadow: 0 70px 120px -30px rgba(0,0,0,.75), inset 0 0 0 1.5px rgba(255,255,255,.12), inset 0 0 0 6px #0b0d0e; }
+.tablet-screen { position: absolute; border-radius: 22px; overflow: hidden; background: #fff; transform: translateZ(0); }
+.tablet-cam { position: absolute; left: 7px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: #1d2327; }
+
+.desk-body { position: absolute; left: 0; top: 0; border-radius: 22px; background: linear-gradient(160deg, #2b2f32, #0f1112);
+  box-shadow: 0 80px 140px -40px rgba(0,0,0,.8), inset 0 0 0 1.5px rgba(255,255,255,.12); }
+.desk-screen { position: absolute; border-radius: 12px; overflow: hidden; background: #fff; }
+.desk-neck { position: absolute; width: 140px; height: 150px; background: linear-gradient(90deg, #8b9195, #d4d8da 45%, #7d8387); clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
+.desk-foot { position: absolute; width: 340px; height: 24px; border-radius: 6px 6px 12px 12px; background: linear-gradient(180deg, #c9cdd0, #7d8387); box-shadow: 0 20px 40px rgba(0,0,0,.6); }
+
+.watch { filter: drop-shadow(0 50px 70px rgba(0,0,0,.7)); }
+
+/* ---------- lifted UI crop ---------- */
+.lift { position: absolute; background-repeat: no-repeat; border-radius: 18px; will-change: transform;
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.35), 0 0 60px -10px rgba(95,212,194,.25); }
+
+/* ---------- copy ---------- */
+.copy { position: absolute; width: 760px; }
+.kicker { display: flex; align-items: center; gap: 16px; font: 600 15px var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--teal-glow); margin-bottom: 26px; }
+.kicker .num { font-variant-numeric: tabular-nums; color: #fff; opacity: .9; letter-spacing: .08em; }
+.kicker .rule { width: 46px; height: 1px; background: currentColor; opacity: .7; }
+.headline { font: 300 74px/1.02 var(--serif); letter-spacing: -.02em; color: #F4F8F7; }
+.headline em { font-style: italic; color: var(--teal-glow); font-weight: 300; }
+.sub { margin-top: 28px; font: 400 23px/1.45 var(--sans); color: var(--muted); max-width: 640px; }
+.chip { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; font: 600 15px var(--sans); letter-spacing: .02em;
+  color: #dff5f0; background: rgba(15,118,110,.22); box-shadow: inset 0 0 0 1px rgba(95,212,194,.35); backdrop-filter: blur(6px); }
+.chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-glow); }
+.fine { font: 500 15px var(--sans); color: rgba(236,243,241,.55); letter-spacing: .02em; }
