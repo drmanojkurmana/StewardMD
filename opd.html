@@ -242,6 +242,85 @@
   .stock-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--card)}
   .stock-item:hover{background:var(--btn)}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* Flow Board: scoped to the signed-in console; existing dialogs and clinical actions stay intact. */
+  .opd-modern{--bg:#f5f5f0;--card:#fff;--btn:#eeefe9;--ink:#242a27;--ink-sec:#454e46;--mut:#667166;--line:#e0e4da;--tl:#36562d;--tl-d:#294423;--tl-soft:#e5efd9;--tl-border:#bfcfb3;--tl-glow:rgba(54,86,45,.12);--sh:0 0 0 1px rgba(0,0,0,.04),0 2px 3px rgba(0,0,0,.025),0 6px 14px rgba(0,0,0,.035);background:var(--bg);min-height:100vh}
+  .opd-modern [hidden]{display:none!important}
+  .opd-modern header{background:var(--card);backdrop-filter:none}
+  .opd-modern header .wrap{max-width:none;padding:16px 28px}
+  .opd-modern .brand{font-weight:650;letter-spacing:-.6px;font-size:18px}
+  .opd-modern .brand span{color:var(--tl)}
+  .opd-layout{display:grid;grid-template-columns:188px minmax(0,1fr);min-height:calc(100vh - 75px)}
+  .opd-sidebar{padding:26px 14px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:5px;align-items:stretch}
+  .opd-nav-brand{font-size:13px;font-weight:600;padding:0 10px 22px;display:flex;gap:8px;align-items:center}
+  .opd-nav-brand .mk{width:23px;height:23px;background:var(--tl);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;flex-shrink:0}
+  .opd-nav-label{font-size:11px;color:var(--mut);letter-spacing:.7px;padding:16px 10px 7px;text-transform:uppercase}
+  .opd-sidebar button{display:flex;align-items:center;gap:9px;text-align:left;padding:11px 10px;font-size:13px;font-weight:500;border:0;background:transparent;color:var(--ink-sec);border-radius:9px;box-shadow:none}
+  .opd-sidebar button.opd-nav-current{background:#d8edbd;color:#283f24;font-weight:600}
+  .opd-modern .opd-main{width:100%;max-width:1800px;padding:28px;min-width:0}
+  .opd-modern .toolbar{margin:0 0 25px;gap:10px}
+  .opd-modern .toolbar .grow{font-size:12px;line-height:1.6;min-width:200px}
+  .opd-modern .toolbar .grow b{font-size:12px;font-weight:500}
+  .opd-modern h1{font-size:30px;font-weight:600;letter-spacing:-1.2px;margin:0 0 5px;line-height:1.25;color:var(--ink)}
+  .opd-modern #walk{padding:11px 17px;box-shadow:none;font-size:13px;font-weight:600}
+  .opd-modern #ref{font-size:12px;border:0;background:var(--card);box-shadow:var(--sh);padding:11px 14px}
+  .opd-modern .p-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:0;background:var(--card);border-radius:16px;box-shadow:var(--sh);padding:18px 0;overflow:visible}
+  .opd-modern .p-t{border:0;border-right:1px solid var(--line);border-radius:0;padding:0 17px;background:none}
+  .opd-modern .p-t:last-child{border:0}.opd-modern .p-t.warn{background:none}
+  .opd-modern .p-l{font-family:inherit;text-transform:none;letter-spacing:0;opacity:1;font-weight:500;color:var(--mut);font-size:12px}
+  .opd-modern .p-v{font-family:inherit;font-size:29px;font-weight:550;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+  .opd-modern .p-v u{font-weight:500;letter-spacing:0}
+  .opd-modern .p-s{font-family:inherit;font-size:11px;opacity:1;color:var(--mut)}
+  .opd-modern .tot{gap:20px;margin:0 0 20px;padding-bottom:15px;border-bottom:1px solid var(--line)}
+  .opd-modern .tot .kpi{padding:0;flex:0 1 auto;min-width:0;border:0;box-shadow:none;background:none;font-weight:500;letter-spacing:0;text-transform:none;font-size:12px;display:flex;gap:7px;align-items:baseline}
+  .opd-modern .tot .kpi b{font-size:17px;font-weight:600;margin:0}
+  .opd-flow-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0}
+  .opd-view-switch{display:flex;padding:4px;background:var(--btn);border-radius:10px;gap:3px}
+  .opd-view-switch button{padding:8px 12px;color:var(--mut);background:none;font-size:12px;font-weight:500;border-radius:7px}
+  .opd-view-switch button[aria-pressed=true]{color:var(--ink);background:var(--card);box-shadow:var(--sh)}
+  .opd-search{display:flex;align-items:center;gap:6px;flex:1;max-width:290px;min-width:170px;background:var(--card);border-radius:10px;padding:0 11px;box-shadow:var(--sh)}
+  .opd-search input{border:0;background:none;padding:10px 0;font-size:13px;box-shadow:none;min-width:0}
+  .opd-search:focus-within{outline:2px solid var(--tl);outline-offset:2px}.opd-search input:focus{box-shadow:none}
+  .opd-filter-label{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--mut)}
+  .opd-filter-label select{width:auto;font-size:12px;padding:9px 10px;border-width:1px;max-width:190px}
+  #opdFilterCount{font-size:11px;color:var(--mut);margin-left:auto}
+  .opd-flow-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+  .opd-lane{background:var(--btn);padding:10px;border-radius:17px;min-width:0;min-height:240px}
+  .opd-lane>h2{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;margin:5px 3px 3px}
+  .opd-lane-count{font-size:12px;font-weight:500;color:var(--mut);font-variant-numeric:tabular-nums}
+  .opd-lane>p{margin:0 3px 17px;font-size:11px;color:var(--mut)}
+  .opd-lane-cards{display:flex;flex-direction:column;gap:12px}
+  .opd-modern .pcard,.opd-modern .row{border:0;background:var(--card);box-shadow:var(--sh);border-radius:10px;padding:13px;min-width:0;transform:none}
+  .opd-modern .pcard.urg,.opd-modern .row.p2{border-left:3px solid var(--red)}
+  .opd-modern .row.p1{border-left:3px solid var(--amber)}
+  .opd-modern .pcard:hover,.opd-modern .row:hover,.opd-modern .rcard:hover,.opd-modern .doc:hover{transform:none;box-shadow:var(--sh)}
+  .opd-card-context{font-size:11px;color:var(--mut);margin-bottom:9px;overflow-wrap:anywhere}
+  .opd-long-wait{font-size:11px;font-weight:600;color:var(--amber);margin:0 0 9px}
+  .opd-modern .nm{font-size:14px;font-weight:600;overflow-wrap:anywhere}
+  .opd-modern .mrn{font-size:11px;font-weight:400;display:inline-block}
+  .opd-modern .tok{background:var(--btn);color:var(--ink);font-weight:600;font-size:12px}
+  .opd-modern .row .top{align-items:flex-start;gap:8px}.opd-modern .row .top>div{min-width:0}
+  .opd-modern .pos{width:24px;height:24px;font-size:11px;flex-shrink:0}
+  .opd-modern .acts{gap:6px;margin-top:12px}
+  .opd-modern .acts button{font-size:12px;font-weight:500;border:0;padding:8px 10px;min-height:34px;border-radius:7px;white-space:normal;text-align:left}
+  .opd-modern .acts button.pri{font-weight:600}
+  .opd-modern .assignbtn{font-size:12px;border-radius:7px;white-space:normal}
+  .opd-modern .dept,.opd-modern .chip{font-size:11px;font-weight:500;letter-spacing:0;text-transform:none}
+  .opd-modern .nm .chip{display:inline-block;margin:5px 3px 0 0;white-space:normal}
+  .opd-lane-empty{font-size:12px;color:var(--mut);padding:24px 8px;text-align:center}
+  .opd-modern .ctl{grid-template-columns:minmax(260px,.75fr) minmax(0,2fr)}
+  .opd-modern .pool{position:static;border:0;box-shadow:var(--sh)}.opd-modern .pool .rows{max-height:none;overflow:visible}
+  .opd-modern .wall,.opd-modern .docs{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+  .opd-modern .rcard,.opd-modern .doc{border-radius:16px;box-shadow:var(--sh)}
+  .opd-modern button{transition:transform 150ms ease-out}.opd-modern button:active{transform:scale(.96)}
+  .opd-modern button:focus-visible{outline:2px solid var(--tl);outline-offset:3px}
+  @media(hover:hover) and (pointer:fine){.opd-sidebar button:hover{background:var(--tl-soft)}.opd-modern .acts button:hover{filter:brightness(.95)}}
+  @media(prefers-color-scheme:dark){.opd-modern{--bg:#171c19;--card:#222a25;--btn:#303b32;--ink:#eef2eb;--ink-sec:#d3dccf;--mut:#a9b5a9;--line:#3c483e;--tl:#b4d59b;--tl-d:#a3c58b;--tl-soft:#34462e;--tl-border:#52694a;--sh:0 0 0 1px rgba(255,255,255,.07),0 2px 4px rgba(0,0,0,.1)}.opd-sidebar button.opd-nav-current{background:#354f2a;color:#dbefcf}.opd-modern #walk,.opd-modern .acts button.pri,.opd-modern .assignbtn{color:#172313}}
+  @media(max-width:1250px){.opd-flow-board{grid-template-columns:repeat(2,minmax(0,1fr))}.opd-modern .opd-main{padding:22px}.opd-layout{grid-template-columns:170px minmax(0,1fr)}.opd-modern .ctl{grid-template-columns:1fr}.opd-modern .p-row{row-gap:20px}}
+  @media(max-width:760px){.opd-layout{grid-template-columns:1fr}.opd-sidebar{flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--line);gap:5px;padding:12px 16px}.opd-nav-label,.opd-nav-brand{display:none}.opd-sidebar button{font-size:12px;padding:8px 10px;background:var(--card);min-height:40px}.opd-sidebar .ms{font-size:16px}.opd-modern header .wrap{padding:12px 16px;flex-wrap:wrap}.opd-modern .role{margin-left:0;flex-wrap:wrap}.opd-modern .opd-main{padding:20px 16px}.opd-modern .brand .cname{display:none}.opd-modern .p-row{grid-template-columns:repeat(2,minmax(0,1fr))}.opd-modern .p-t:nth-child(even){border-right:0}.opd-modern .tot{gap:12px}.opd-search{max-width:none}.opd-modern h1{font-size:27px}}
+  @media(max-width:480px){.opd-flow-board{grid-template-columns:1fr}.opd-modern .wall,.opd-modern .docs{grid-template-columns:1fr}.opd-modern .toolbar .grow{flex-basis:100%}.opd-flow-tools{gap:10px}.opd-view-switch{width:100%}.opd-view-switch button{flex:1}.opd-search{flex-basis:100%}.opd-modern .role .chip{max-width:120px;overflow-wrap:anywhere}.opd-modern .tot{flex-direction:column;gap:7px}}
+  @media(pointer:coarse){.opd-modern button,.opd-modern .acts button{min-height:44px}.opd-modern input,.opd-modern select{font-size:16px}}
+  @media(prefers-reduced-motion:reduce){.opd-modern *{transition:none!important;animation:none!important}.opd-modern button:active{transform:none}}
+
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
@@ -497,7 +576,93 @@
     });
   }
 
+  // Presentation-only enhancement: move the existing, permission-gated nodes. Never copy an
+  // action or reconstruct its payload. Recovery: localStorage.smd_opd_flow_ui = "0" + reload.
+  var flowUI={view:"flow",filter:"all",query:"",org:null,cards:[],restore:[],focusSearch:false};
+  function flowEnabled(){ try{return localStorage.getItem("smd_opd_flow_ui")!=="0";}catch(e){return true;} }
+  function enhanceOpdShell(){
+    if(!flowEnabled()) return;
+    if(flowUI.org!==st.orgId){flowUI.view="flow";flowUI.filter="all";flowUI.query="";flowUI.org=st.orgId;}
+    var main=app.querySelector(".wrap>.toolbar"); if(!main) return;
+    main=main.parentNode;
+    app.classList.add("opd-modern");
+    var layout=document.createElement("div"); layout.className="opd-layout";
+    main.parentNode.insertBefore(layout,main);
+    var nav=document.createElement("nav");nav.className="opd-sidebar";nav.setAttribute("aria-label","Clinic workspace");
+    nav.innerHTML='<div class="opd-nav-brand"><span class="mk"></span>Clinic workspace</div><span class="opd-nav-label">Daily work</span><button type="button" class="opd-nav-current" id="opdHome"><span class="ms" aria-hidden="true">view_kanban</span>Patient flow</button>';
+    layout.appendChild(nav);layout.appendChild(main);main.classList.add("opd-main");
+    var icons={billing:"receipt_long",pharmacy:"medication",noshows:"person_off",staff:"group",rooms:"meeting_room",tariffBtn:"inventory_2",disp:"desktop_windows",brand:"palette",clinics:"domain"};
+    ["billing","pharmacy","noshows","rooms","staff","tariffBtn","disp","brand","clinics"].forEach(function(id,i){
+      var b=document.getElementById(id);if(!b)return;
+      if(i===3){var label=document.createElement("span");label.className="opd-nav-label";label.textContent="Manage clinic";nav.appendChild(label);}
+      var icon=document.createElement("span");icon.className="ms";icon.setAttribute("aria-hidden","true");icon.textContent=icons[id];b.insertBefore(icon,b.firstChild);nav.appendChild(b);
+    });
+    var toolbar=main.querySelector(".toolbar"), grow=toolbar.querySelector(".grow");
+    if(grow){var title=document.createElement("h1");title.textContent="Patient flow";grow.insertBefore(title,grow.firstChild);}
+    document.getElementById("opdHome").onclick=function(){flowUI.query="";flowUI.filter="all";flowUI.view="flow";mountOpdFlow();};
+  }
+  function mountOpdFlow(){
+    if(!flowEnabled()||!app.classList.contains("opd-modern")) return;
+    // Restore before rebuilding the view (e.g. Home), leaving every original listener attached.
+    flowUI.restore.forEach(function(x){if(x.anchor.parentNode)x.anchor.parentNode.replaceChild(x.node,x.anchor);});
+    flowUI.restore=[];flowUI.cards=[];
+    var previous=app.querySelector(".opd-flow-board");if(previous)previous.remove();
+    var oldTools=app.querySelector(".opd-flow-tools");if(oldTools)oldTools.remove();
+    var main=app.querySelector(".opd-main"), original=main.querySelector(".ctl,.docs");if(!original)return;
+    original.hidden=false;
+    var tools=document.createElement("div");tools.className="opd-flow-tools";
+    tools.innerHTML='<div class="opd-view-switch" role="group" aria-label="Board view"><button type="button" data-opd-view="flow">Flow board</button><button type="button" data-opd-view="rooms">'+(st.opd?'Rooms':'Doctor queues')+'</button></div>'+
+      '<label class="opd-search"><span class="ms" aria-hidden="true">search</span><input id="opdPatientSearch" type="search" autocomplete="off" aria-label="Find patient by name, token or MRN" placeholder="Find patient, token or MRN"></label>'+
+      '<label class="opd-filter-label">Show<select id="opdPatientFilter"><option value="all">Everyone</option><option value="urgent">Urgent</option><option value="long">Waiting over 1 hour</option></select></label>'+
+      '<span id="opdFilterCount" role="status" aria-live="polite"></span>';
+    original.parentNode.insertBefore(tools,original);
+    var board=document.createElement("div");board.className="opd-flow-board";
+    var stages=[['route','To route','Assign a consultation room'],['waiting','Room queue','Waiting or called'],['consult','Consulting','In the room with a doctor'],['tests','At diagnostics','Tests and return to queue']];
+    board.innerHTML=stages.map(function(s){return '<section class="opd-lane" data-opd-lane="'+s[0]+'" aria-label="'+s[1]+'"><h2>'+s[1]+'<span class="opd-lane-count"></span></h2><p>'+s[2]+'</p><div class="opd-lane-cards"></div><div class="opd-lane-empty">No patients in this stage.</div></section>';}).join("");
+    original.parentNode.insertBefore(board,original);
+    var records={};
+    function record(t,sid,room,doctor){records[(sid||"pool")+":"+t.id]={ticket:t,room:room,doctor:doctor};}
+    if(st.opd){
+      (st.opd.pool||[]).forEach(function(t){record(t,null,"Not assigned","");});
+      (st.opd.rooms||[]).forEach(function(r){(r.tickets||[]).forEach(function(t){record(t,r.sessionId,(r.room.name||"Room")+(r.room.number?" · "+r.room.number:""),docLabel(r.doctorUid,r.doctorName)||"");});});
+    }else{(st.board||[]).forEach(function(b){(b.tickets||[]).forEach(function(t){record(t,b.session.id,"",docLabel(b.session.doctorUid,b.session.doctorName)||"Doctor");});});}
+    Array.prototype.forEach.call(original.querySelectorAll(".pcard,.row"),function(node){
+      var a=node.querySelector("[data-assign]"), action=node.querySelector("[data-t][data-s]")||node.querySelector("[data-t]");
+      var key=a?"pool:"+a.getAttribute("data-assign"):(action?(action.getAttribute("data-s")||"pool")+":"+action.getAttribute("data-t"):"");
+      var r=records[key];if(!r)return;
+      var t=r.ticket, stage=key.indexOf("pool:")===0?"route":t.status==="in_consultation"?"consult":t.status==="at_diagnostics"?"tests":"waiting";
+      var wait=waitMin(t), longWait=(stage==="route"||stage==="waiting")&&wait>=60;
+      var context=node.querySelector(".opd-card-context");if(!context){context=document.createElement("div");context.className="opd-card-context";node.insertBefore(context,node.firstChild);}
+      context.textContent=[r.room,r.doctor].filter(Boolean).join(" · ");
+      var oldWait=node.querySelector(".opd-long-wait");if(oldWait)oldWait.remove();
+      if(longWait){var warn=document.createElement("div");warn.className="opd-long-wait";warn.textContent="Waiting over 1 hour";node.insertBefore(warn,context.nextSibling);}
+      // Waiting duration is from the existing registration timestamp, never labelled as time in a stage.
+      var search=[t.name,t.token,t.tokenLabel,t.tokenNumber,t.mrn,t.mrnLast4,t.ghisPatientId,t.smdId].join(" ").toLowerCase();
+      flowUI.cards.push({node:node,stage:stage,search:search,urgent:t.priority>=2,longWait:longWait,key:key});
+    });
+    function setView(){
+      flowUI.restore.forEach(function(x){if(x.anchor.parentNode)x.anchor.parentNode.replaceChild(x.node,x.anchor);});flowUI.restore=[];
+      if(flowUI.view==="flow")flowUI.cards.forEach(function(c){var anchor=document.createComment("opd-room-position");c.node.parentNode.insertBefore(anchor,c.node);flowUI.restore.push({node:c.node,anchor:anchor});board.querySelector('[data-opd-lane="'+c.stage+'"] .opd-lane-cards').appendChild(c.node);});
+      original.hidden=flowUI.view==="flow";board.hidden=flowUI.view!=="flow";
+      Array.prototype.forEach.call(tools.querySelectorAll("[data-opd-view]"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-opd-view")===flowUI.view));});
+      applyFilters();
+    }
+    function applyFilters(){
+      var shown=0, counts={route:0,waiting:0,consult:0,tests:0};
+      flowUI.cards.forEach(function(c){var visible=(!flowUI.query||c.search.indexOf(flowUI.query.toLowerCase())!==-1)&&(flowUI.filter==="all"||(flowUI.filter==="urgent"&&c.urgent)||(flowUI.filter==="long"&&c.longWait));c.node.hidden=!visible;if(visible){shown++;counts[c.stage]++;}});
+      stages.forEach(function(s){var lane=board.querySelector('[data-opd-lane="'+s[0]+'"]');lane.querySelector(".opd-lane-count").textContent=counts[s[0]];lane.querySelector(".opd-lane-empty").hidden=counts[s[0]]>0;lane.querySelector(".opd-lane-empty").textContent=flowUI.query||flowUI.filter!=="all"?"No patients match this filter.":"No patients in this stage.";});
+      document.getElementById("opdFilterCount").textContent=shown+" of "+flowUI.cards.length+" patients";
+    }
+    var input=document.getElementById("opdPatientSearch"), select=document.getElementById("opdPatientFilter");input.value=flowUI.query;select.value=flowUI.filter;
+    input.oninput=function(){flowUI.query=input.value;applyFilters();};select.onchange=function(){flowUI.filter=select.value;applyFilters();};
+    Array.prototype.forEach.call(tools.querySelectorAll("[data-opd-view]"),function(b){b.onclick=function(){flowUI.view=b.getAttribute("data-opd-view");setView();};});
+    setView();
+    if(flowUI.focusSearch){input.focus();flowUI.focusSearch=false;}
+  }
+
   function renderShell(inner){
+    flowUI.focusSearch=!!(document.activeElement&&document.activeElement.id==="opdPatientSearch");
+    app.classList.remove("opd-modern");
     var name=st.who?(st.who.name||"Staff"):"", role=st.who?st.who.role:"";
     var cName=st.orgName || (st.who && st.who.orgName) || "";
     var logoHtml=(st.hasLogo || (st.who && st.who.hasLogo)) ? '<img class="clogo" src="/api/queue/branding/logo?orgId='+encodeURIComponent(st.orgId)+'" alt="" style="height:26px;max-width:100px;object-fit:contain;border-radius:4px;margin-right:8px;vertical-align:middle" onerror="this.style.display=\'none\'">' : '';
@@ -549,6 +714,7 @@
         }
       };
     }
+    enhanceOpdShell();
   }
   function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); }
 
@@ -685,6 +851,7 @@
     renderShell('<div class="docs">'+docs+'</div>');
     Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
     wireRowActions();
+    mountOpdFlow();
   }
   // Lab-flow badges shared by both boards: a patient sent for tests reads "At Lab / Tests", and a
   // patient returned with results reads "Results Ready".
@@ -1989,6 +2156,7 @@
     Array.prototype.forEach.call(document.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openAssignRoom(b.getAttribute("data-assign"));};});
     Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
     wireRowActions();
+    mountOpdFlow();
   }
   function roomTicketRow(s,t,i,n){
     var consult=t.status==="in_consultation"; var atLab=t.status==="at_diagnostics"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");

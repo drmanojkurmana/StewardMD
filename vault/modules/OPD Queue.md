@@ -64,3 +64,23 @@ only Close was the bottom button, the tappable backdrop was covered, and the car
 Android back). Rule for any new `.q-sheet` card: cap it and give it a header close; a bottom-only
 Close is unreachable the moment the content grows. Tests: `test/opd-profile-sheet.test.mjs`,
 `test/run-opd-profile-ui.mjs` (real queue.css at 390x844).
+
+## Web OPD Flow Board (2026-09-23)
+`opd.html` now enhances the signed-in console with warm neutral surfaces, workspace navigation,
+patient search (name/token/MRN), urgent/over-one-hour filters, and a Flow Board / Rooms switch.
+The stages mirror existing states: To route, Room queue, Consulting, At diagnostics. Checkout
+stays the existing action on a consulting ticket; no invented discharge state is persisted.
+
+The presentation moves the existing permission-gated DOM nodes with their existing handlers and
+payloads, then restores them to their original room positions for Rooms view. Registration,
+routing, vitals/notes, call/start, reorder, priority, diagnostics return, checkout, file labels,
+NFC/scanner, no-shows, billing/pharmacy, clinic management and audit handlers are unchanged.
+The same enhancement supports legacy doctor queues. Search is memory-only (no PHI storage or URL)
+and resets when changing clinics. The recovery switch `localStorage.smd_opd_flow_ui = "0"` plus
+reload restores the original board. All UI CSS is inline; the service-worker cache is bumped.
+
+Regression gates: all `test/opd-*.test.mjs`; `test/run-opd-console-flow-ui.mjs` verifies real DOM
+node/action parity for admin, doctor, nurse, cashier and pharmacy, view switching, diagnostics,
+filter/focus retention, 320-1440px, dark/reduced-motion and fallback. The existing
+`test/run-opd-clinic-billing-ui.mjs` exercises the real mocked router through clinic registration,
+vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both browser suites.
