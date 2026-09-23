@@ -39,7 +39,7 @@ try {
   ok(/Paracetamol/.test(card) && /monograph first/.test(card), "the card names Paracetamol and asks about the monograph first");
   ok(/Read "paracetomol" as Paracetamol/.test(card), "it says how the misspelling was read");
   ok(aiCalls.length === 0, "no answer requested yet (the question waits for the doctor): " + aiCalls.join(" "));
-  const mk = await page.evaluate(() => { const m = document.querySelector("#maikBody .maik-b.you mark.smd-drug"); if (!m) return null; const cs = getComputedStyle(m); return { t: m.textContent, bg: cs.backgroundColor, fw: cs.fontWeight }; });
+  const mk = await page.evaluate(() => { const m = document.querySelector("#maikBody .maik-b.you .smd-drug"); if (!m) return null; const cs = getComputedStyle(m); return { t: m.textContent, bg: cs.backgroundColor, fw: cs.fontWeight }; });
   ok(mk && mk.t === "paracetomol" && mk.bg === "rgb(253, 224, 71)" && +mk.fw >= 700, "the typed drug is highlighted bold yellow in the question: " + JSON.stringify(mk));
   if (SHOTS) await page.screenshot({ path: SHOTS + "/druglink-card.png" });
 
@@ -62,13 +62,58 @@ try {
   // highlighting inside an answer bubble + tap
   await page.evaluate(() => { const b = document.createElement("div"); b.className = "maik-b ai"; b.id = "t_ans"; b.innerHTML = "<p>First line: ceftriaxone 2 g IV daily plus azithromycin 500 mg. Potassium 3.2 is low.</p>"; document.getElementById("maikBody").appendChild(b); });
   await page.waitForTimeout(700);
-  const marks = await page.evaluate(() => Array.from(document.querySelectorAll("#t_ans mark.smd-drug")).map((m) => m.textContent));
+  const marks = await page.evaluate(() => Array.from(document.querySelectorAll("#t_ans .smd-drug")).map((m) => m.textContent));
   ok(JSON.stringify(marks) === JSON.stringify(["ceftriaxone", "azithromycin"]), "answer text: drugs highlighted, lab analyte not: " + marks.join(","));
   if (SHOTS) await page.screenshot({ path: SHOTS + "/druglink-answer.png" });
-  await page.click("#t_ans mark.smd-drug");
+  await page.click("#t_ans .smd-drug");
   await page.waitForTimeout(1500);
   const db2 = await page.evaluate(() => { const t = document.querySelector("#dbTitle, .db-title"); return t ? t.textContent : ""; });
   ok(/Ceftriaxone/i.test(db2), "tapping a highlighted drug in an answer opens its monograph: " + db2);
+
+  // ── Knowledge Library, disease reader, protocol sheet ─────────────────────────────────────────────
+  const topIsDb = () => page.evaluate(() => { const e = document.elementFromPoint(innerWidth / 2, innerHeight / 2); return !!(e && e.closest("#dbOverlay")); });
+  await page.evaluate(() => { try { MEDDB.close(); } catch (e) {} });
+  await page.keyboard.press("Escape").catch(() => {});
+  await page.evaluate(() => { const c = document.querySelector("#maikSheet .maik-x, [data-maik-close], #maikClose"); if (c) c.click(); });
+  await page.waitForTimeout(500);
+  for (const tab of ["antibiogram", "aware", "guidelines"]) {
+    await page.evaluate((t) => SB.openRef(t), tab);
+    await page.waitForTimeout(900);
+    const n = await page.evaluate(() => document.querySelectorAll("#sbrefBody .smd-drug").length);
+    if (tab === "guidelines") ok(n === 0, "Knowledge Library / guidelines (a list of guideline sources, no drugs): nothing highlighted");
+    else ok(n > 0, "Knowledge Library / " + tab + ": " + n + " drug names highlighted");
+    if (SHOTS && tab === "aware") await page.screenshot({ path: SHOTS + "/druglink-aware.png" });
+  }
+  await page.evaluate(() => { SB.openRef("syndromes"); const c = document.querySelector("#kblibClear"); if (c) c.click(); const q = document.querySelector("#kblibQ"); q.value = "tuberculosis"; q.dispatchEvent(new Event("input", { bubbles: true })); });
+  await page.waitForTimeout(900);
+  await page.evaluate(() => document.querySelector("#kblibGrid .kblib-row").click());
+  await page.waitForTimeout(1800);
+  const rd = await page.evaluate(() => { const m = Array.from(document.querySelectorAll("#dxOverlay .smd-drug")); return { n: m.length, first: m.slice(0, 6).map((x) => x.textContent) }; });
+  ok(rd.n > 0, "Knowledge Library disease reader: " + rd.n + " drug names highlighted " + JSON.stringify(rd.first));
+  if (SHOTS) await page.screenshot({ path: SHOTS + "/druglink-reader.png" });
+  if (rd.n) {
+    await page.evaluate(() => { const m = document.querySelector("#dxOverlay .smd-drug"); m.scrollIntoView({ block: "center" }); m.click(); });
+    await page.waitForTimeout(1500);
+    ok(await topIsDb(), "tapping it in the reader opens the monograph ON TOP of the reader");
+    if (SHOTS) await page.screenshot({ path: SHOTS + "/druglink-reader-mono.png" });
+    await page.evaluate(() => MEDDB.close());
+    await page.waitForTimeout(400);
+    ok(await page.evaluate(() => { const d = document.getElementById("dbOverlay"); return !d.getAttribute("data-druglink-lift") && d.style.zIndex === ""; }), "the database z-index is restored when it closes");
+  }
+  const ps = await page.evaluate(async () => {
+    const idx = await (await fetch("/kb/protocols/index.json")).json();
+    const list = idx.protocols || idx.items || idx;
+    const id = (Array.isArray(list) ? list : Object.values(list))[0].id;
+    const p = await (await fetch("/kb/protocols/" + id + ".json")).json();
+    SMD_PROTOSHEET.open({ protocol: p, patient: { name: "", heightCm: 165, weightKg: 60 }, today: "2026-09-23" });
+    await new Promise((r) => setTimeout(r, 1200));
+    const m = Array.from(document.querySelectorAll("#smdProtoSheet .smd-drug"));
+    return { id, n: m.length, first: m.slice(0, 5).map((x) => x.textContent) };
+  });
+  ok(ps.n > 0, "chemotherapy protocol sheet (" + ps.id + "): " + ps.n + " drug names highlighted " + JSON.stringify(ps.first));
+  if (SHOTS) await page.screenshot({ path: SHOTS + "/druglink-protocol.png" });
+  const printBg = await page.evaluate(() => { const r = document.getElementById("smd-druglink-css").textContent; return /@media print\{\.smd-drug\{background:none/.test(r); });
+  ok(printBg, "print CSS strips the highlight from printed sheets");
 
   // flag off
   const off = await page.evaluate(() => { localStorage.setItem("smd_druglink", "0"); const d = document.createElement("div"); d.innerHTML = "warfarin"; const n = SMD_DRUGLINK.highlight(d); localStorage.removeItem("smd_druglink"); return n; });

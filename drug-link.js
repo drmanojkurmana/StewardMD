@@ -32,7 +32,10 @@
   // Brand words that are also everyday or clinical English: never highlighted as a drug.
   var STOP = { pan: 1, ppi: 1, acid: 1, relief: 1, total: 1, cold: 1, "stop": 1, calm: 1, rest: 1, flow: 1, "clear": 1,
     "active": 1, "rapid": 1, "fresh": 1, "sleep": 1, "focus": 1, "boost": 1, "cough": 1, "fever": 1, "plain": 1,
-    "tablet": 1, "tablets": 1, "capsule": 1, "syrup": 1, "injection": 1, "drops": 1, "cream": 1, "patients": 1 };
+    "tablet": 1, "tablets": 1, "capsule": 1, "syrup": 1, "injection": 1, "drops": 1, "cream": 1, "patients": 1,
+    // drug CLASSES the formulary lists as search aliases: not one drug, so no single monograph to open
+    steroid: 1, steroids: 1, statin: 1, statins: 1, nsaid: 1, nsaids: 1, antiemetic: 1, antiemetics: 1, laxative: 1,
+    laxatives: 1, antibiotic: 1, antibiotics: 1, "beta blocker": 1, "h2 blocker": 1, diuretic: 1, anticoagulant: 1 };
 
   // ── Index: first word -> phrases (longest first) ────────────────────────────────────────────────
   var idx = null, fuzzyVocab = [], learned = {}, sig = "";
@@ -115,15 +118,17 @@
   }
 
   // ── DOM: highlight, open, watch ─────────────────────────────────────────────────────────────────
-  var SKIP = "script,style,textarea,input,select,button,a,code,pre,mark,[contenteditable],.smd-drug,.maik-thinking,.maik-dosecard,svg";
+  var SKIP = "script,style,textarea,input,select,option,button,a,code,pre,mark,canvas,[contenteditable],.smd-drug,.maik-thinking,.maik-dosecard,svg,.no-druglink";
   function css() {
     if (!W || !W.document || W.document.getElementById("smd-druglink-css")) return;
     var st = W.document.createElement("style"); st.id = "smd-druglink-css";
     st.textContent =
-      "mark.smd-drug{background:#fde047;color:#1f2937;font-weight:700;border-radius:3px;padding:0 2px;cursor:pointer;" +
+      ".smd-drug{background:#fde047;color:#1f2937;font-weight:700;border-radius:3px;padding:0 2px;cursor:pointer;" +
       "-webkit-box-decoration-break:clone;box-decoration-break:clone}" +
-      "mark.smd-drug:focus-visible{outline:2px solid #0e6e63;outline-offset:1px}" +
-      "@media (prefers-color-scheme:dark){mark.smd-drug{background:#facc15;color:#111827}}";
+      ".smd-drug:focus-visible{outline:2px solid #0e6e63;outline-offset:1px}" +
+      "@media (prefers-color-scheme:dark){.smd-drug{background:#facc15;color:#111827}}" +
+      // Printed protocol sheets, discharge notes and PDFs: plain text, no highlight.
+      "@media print{.smd-drug{background:none!important;color:inherit!important;font-weight:inherit!important;padding:0!important}}";
     W.document.head.appendChild(st);
   }
   function highlight(rootEl) {
@@ -145,7 +150,9 @@
       var frag = doc.createDocumentFragment(), at = 0;
       hits.forEach(function (h) {
         if (h.start > at) frag.appendChild(doc.createTextNode(text.slice(at, h.start)));
-        var mk = doc.createElement("mark");
+        // A <span>, not a <mark>: exported HTML that copies this DOM without our stylesheet must not
+        // come out yellow (a bare <mark> is yellow in every browser by default).
+        var mk = doc.createElement("span");
         mk.className = "smd-drug";
         mk.setAttribute("data-smd-drug", h.generic);
         mk.setAttribute("data-maik-drugidx", title(h.generic));   // MaiK's own handler opens it inside the sheet
@@ -159,24 +166,48 @@
     });
     return count;
   }
+  // Opened from a surface that may sit above the Drugs Database (protocol sheet, reader modes): lift the
+  // database to the top while it is open, and put its z-index back when it closes.
+  function lift() {
+    var db = W.document && W.document.getElementById("dbOverlay");
+    if (!db || db.getAttribute("data-druglink-lift")) return;
+    db.setAttribute("data-druglink-lift", db.style.zIndex || "-");
+    db.style.zIndex = "2147480000";
+    if (!W.MutationObserver) return;
+    var mo = new W.MutationObserver(function () {
+      if (db.classList.contains("on")) return;
+      var prev = db.getAttribute("data-druglink-lift");
+      db.style.zIndex = prev === "-" ? "" : prev; db.removeAttribute("data-druglink-lift"); mo.disconnect();
+    });
+    mo.observe(db, { attributes: true, attributeFilter: ["class"] });
+  }
   function openMonograph(generic) {
     var name = title(generic);
     try {
-      if (W.MEDDB && W.MEDDB.openComposition && name) return W.MEDDB.openComposition(name);
+      if (W.MEDDB && W.MEDDB.openComposition && name) { var r = W.MEDDB.openComposition(name); lift(); return r; }
       if (W.MEDDB && W.MEDDB.openList) return W.MEDDB.openList();
       if (W.toast) W.toast("Drugs Database loading...");
     } catch (e) {}
   }
   function onActivate(ev) {
-    var t = ev.target && ev.target.closest ? ev.target.closest("mark.smd-drug") : null;
+    var t = ev.target && ev.target.closest ? ev.target.closest(".smd-drug") : null;
     if (!t) return;
     if (ev.type === "keydown" && ev.key !== "Enter" && ev.key !== " ") return;
     if (t.closest(".maik-b") && ev.type === "click") return;   // MaiK's sheet handler owns taps inside MaiK
     ev.preventDefault();
     openMonograph(t.getAttribute("data-smd-drug"));
   }
-  // Reading surfaces. The Drugs Database itself (#dbBody) is the monograph, so it is not listed.
-  var SURFACES = ["maikBody", "icuAskSheet", "dxOverlay", "refOverlay"];
+  // Reading surfaces: where drug names are read. Editors (prescription pad, OPD assessment, protocol
+  // maker) are deliberately absent, and the Drugs Database (#dbOverlay) is the monograph itself.
+  var SURFACES = [
+    "maikBody",                                                        // MaiK questions and replies
+    "icuAskSheet", "icuDeepSheet", "icuDisAiSheet", "icuEvSheet",      // ICU MaiK / evidence / AI discharge
+    "sbrefBody",                                                       // Knowledge Library + Syndromes, Antibiogram, AWaRe, Guidelines tabs
+    "dxOverlay", "refOverlay",                                         // disease reader, management, references
+    "abgBody",                                                         // antibiogram
+    "smdProtoSheet", "smdOncoHome",                                    // chemotherapy protocols, oncology home
+    "clinixScroll", "surgxScroll"                                      // CliniX learning, SURGX protocols and procedures
+  ];
   var watched = [];
   function watch(el) {
     if (!el || watched.indexOf(el) >= 0 || !W.MutationObserver) return;

@@ -56,3 +56,12 @@ test("flags: smd_druglink=0 turns it off; smd_druglink_ask=0 keeps highlighting 
   store.set("smd_druglink", "0"); assert.equal(D.enabled(), false); assert.equal(D.askEnabled(), false);
   store.clear();
 });
+
+test("British/Indian spellings (from api.js CLIN_SYN) are recognised", () => {
+  assert.deepEqual(names("rifampicin, salbutamol neb, lignocaine 2%, glyceryl trinitrate, frusemide 40 mg"),
+    ["rifampicin", "salbutamol", "lignocaine", "glyceryl trinitrate", "frusemide"]);
+});
+
+test("drug CLASSES are not highlighted as one drug (no single monograph to open)", () => {
+  for (const q of ["start a steroid", "add a statin", "avoid NSAIDs", "give an antiemetic", "beta blocker"]) assert.deepEqual(names(q), [], q);
+});

@@ -206,7 +206,12 @@ monograph (`MEDDB.openComposition`). A MaiK question naming a drug first shows a
 monograph, Just answer, or answer and don't ask again. `drug-link.js` + generated `drug-lexicon.js`
 (2,213 generics + 180 brands from `data/interaction-rules.json`, public domain), plus the Drug Index
 formulary, `SMD_BRANDS`, and fuzzy spelling for the doctor's own question ("paracetomol"). Surfaces:
-`#maikBody`, `#icuAskSheet`, `#dxOverlay`, `#refOverlay` (the Drugs Database itself is excluded).
+`#maikBody` (MaiK), the ICU MaiK/evidence/AI-discharge sheets, `#sbrefBody` (Knowledge Library with
+its Syndromes, Antibiogram, AWaRe and Guidelines tabs), `#dxOverlay` (disease reader), `#refOverlay`,
+`#abgBody`, `#smdProtoSheet` (chemotherapy protocols), `#smdOncoHome`, `#clinixScroll`, `#surgxScroll`.
+Editors and the Drugs Database itself are excluded. The highlight is a `<span>` (a bare `<mark>` would
+print yellow in exported HTML) with a print rule that removes it; the database is lifted above any
+surface it opens from and restored on close. British/Indian spellings come from api.js `CLIN_SYN`.
 Flags `smd_druglink` and `smd_druglink_ask`, both default ON, "0" to turn off.
 
 **Trade-off / status.** Detection is a lexicon, not the OpenMed tagger: it works offline today, and the
