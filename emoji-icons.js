@@ -160,13 +160,15 @@
   }
   // ── Textbooks as sources, and page numbers (owner, 2026-09-24: "I shouldn't find Harrison or any text
   // book as source but reference, as copyright problem, and no page numbers anywhere"). Flag smd_nobooks,
-  // DEFAULT ON. Titles become "Standard medical references"; the bare name in prose ("per Harrison")
+  // DEFAULT ON. Specific citations become one generic line, GENERIC_REF (owner, 2026-09-24: "reference
+  // standard textbooks: harrison, oxford, davidson"); the bare name in prose ("per Harrison")
   // becomes "the reference"; page / chapter / edition locators are removed. Clinical eponyms that share
   // an author's name are protected: Harrison's groove/sulcus/sign, Fitzpatrick skin type, Braunwald
   // classification, Kaplan-Meier, Brenner tumour, Nelson syndrome, Rockwood classification.
   function booksOn() { return lget("smd_nobooks") !== "0"; }
   var AP = "(?:'|\\u2019)";
-  var ED = "(?:,?\\s*\\(?\\s*\\d{1,2}(?:st|nd|rd|th)?\\s*(?:e|ed\\.?|edn\\.?|edition)\\b\\)?)?";
+  var EDN = "\\d{1,2}(?:st|nd|rd|th)?\\s*(?:e|ed\\.?|edn\\.?|edition)\\b";
+  var ED = "(?:,?\\s*(?:\\(\\s*" + EDN + "\\s*\\)|" + EDN + ")(?:\\s*\\(\\d{4}\\))?)?";
   var BOOK_TITLES = [
     "Harrison" + AP + "?s?\\s+Principles\\s+of\\s+Internal\\s+Medicine",
     "Nelson\\s+Textbook\\s+of\\s+Pa?ediatrics",
@@ -175,7 +177,7 @@
     "Sleisenger\\s+(?:and|&)\\s+Fordtran" + AP + "?s?\\s+Gastrointestinal\\s+and\\s+Liver\\s+Disease",
     "Adams\\s+(?:and|&)\\s+Victor" + AP + "?s?\\s+Principles\\s+of\\s+Neurology",
     "Williams\\s+Obstetrics", "Williams\\s+Textbook\\s+of\\s+Endocrinology",
-    "Bailey\\s+(?:and|&)\\s+Love" + AP + "?s?\\s+Short\\s+Practice\\s+of\\s+Surgery",
+    "Bailey\\s+(?:and|&)\\s+Love(?:" + AP + "?s?\\s+Short\\s+Practice\\s+of\\s+Surgery)?",
     "Murray\\s+(?:and|&)\\s+Nadel" + AP + "?s?\\s+Textbook\\s+of\\s+Respiratory\\s+Medicine",
     "Sabiston\\s+Textbook\\s+of\\s+Surgery", "Schwartz" + AP + "?s?\\s+Principles\\s+of\\s+Surgery",
     "Oxford\\s+Handbook\\s+of(?:\\s+[A-Z][A-Za-z]+)+", "Oxford\\s+Textbook\\s+of(?:\\s+[A-Z][A-Za-z]+)+",
@@ -201,13 +203,61 @@
   var HARRISON_RE = new RegExp("\\bHarrison(?:" + AP + "s)?(?!" + AP + "?s?\\s+(?:groove|sulcus|sign|line))\\b" + ED, "g");
   var NELSON_RE = /\bNelson(?:'s|\u2019s)?\s+(?:\d{1,2}(?:st|nd|rd|th)?\s*(?:e|ed\.?|edition)\b|Pa?ediatrics\b)/gi;
   // Locators: "p. 1234", "pp. 12-15", "pg 45", "page 123" (not "page 2 of 5"), "Chapter 45", "Ch. 12".
-  var PAGE_RE = /\s*[,;(]?\s*\b(?:pp?\.|pg\.?)\s*\d{1,4}(?:\s*[-\u2013]\s*\d{1,4})?\)?|\s*[,;(]?\s*\bpages?\s+\d{1,4}(?:\s*[-\u2013]\s*\d{1,4})?(?!\s+of\b)\)?|\s*[,;(]?\s*\b(?:Chapter|Chap\.|Ch\.)\s*\d{1,4}[A-Za-z]?\)?/gi;
-  var BOOKS_TEST = new RegExp(BOOK_RE.source + "|\\bSanford\\b|\\bHarrison\\b|\\bNelson(?:'s|\\u2019s)?\\s+(?:\\d|Pa?ediatrics)|\\b(?:pp?\\.|pg\\.?)\\s*\\d|\\bpages?\\s+\\d|\\b(?:Chapter|Chap\\.|Ch\\.)\\s*\\d", "i");
-  function hasBooks(v) { return BOOKS_TEST.test(String(v || "")) && !/^\s*page\s+\d+\s+of\s+\d+\s*$/i.test(String(v)); }
-  function scrubBooks(text) {
+  var PAGE_RE = /\s*[,;(]?\s*\b(?:pp?\.|pg\.?)\s*\d{1,4}(?:\s*[-\u2013]\s*\d{1,4})?\)?|\s*[,;(]?\s*\bpages?\s+\d{1,4}(?:\s*[-\u2013]\s*\d{1,4})?(?!\s+of\b)\)?/gi;
+  // Chapter locators are case-SENSITIVE: "CH50" (complement assay) must never read as "Ch 50".
+  var CHAP_RE = /\s*[,;(]?\s*\b(?:[Cc]hapter|[Cc]hap\.|Ch\.|Ch(?= \d))\s*\d{1,4}[A-Za-z]?\)?/g;
+  var BOOKS_TEST = new RegExp(BOOK_RE.source + "|\\bSanford\\b|\\bHarrison\\b|\\bNelson(?:'s|\\u2019s)?\\s+(?:\\d|Pa?ediatrics)|\\b(?:pp?\\.|pg\\.?)\\s*\\d|\\bpages?\\s+\\d", "i");
+  var BOOKS_TEST2 = /\b(?:[Cc]hapter|[Cc]hap\.|Ch\.)\s*\d|\bCh \d/;
+  // Subject-appropriate standard textbooks (owner, 2026-09-24: "general medicine these three, genetics the
+  // top genetics books, neuro a neuro book, cardio Braunwald"). Named as the standard texts of the field,
+  // never with edition, chapter or page. A KB entry's `system` picks the subject (genetics first, so
+  // "Cardiovascular / Genetics" gets the genetics texts); no context = general medicine.
+  var SUBJECTS = [
+    ["genetics", /genetic|dysmorpholog|ciliopath|inborn|chromosom/i, ["Thompson & Thompson Genetics and Genomics in Medicine", "Emery's Elements of Medical Genetics", "Harper's Practical Genetic Counselling"]],
+    ["cardiology", /cardio|cardiac|heart|vascular/i, ["Braunwald's Heart Disease", "Hurst's The Heart", "Oxford Handbook of Cardiology"]],
+    ["neurology", /neuro|nervous|cerebro|epilep|stroke|spastic|ataxia/i, ["Adams and Victor's Principles of Neurology", "Bradley and Daroff's Neurology in Clinical Practice", "Oxford Handbook of Neurology"]],
+    ["respiratory", /respirat|pulmon|lung|thoracic/i, ["Murray and Nadel's Textbook of Respiratory Medicine", "Fishman's Pulmonary Diseases and Disorders", "Oxford Handbook of Respiratory Medicine"]],
+    ["gastroenterology", /gastro|hepat|liver|biliar|pancrea|intestin|digestive/i, ["Sleisenger and Fordtran's Gastrointestinal and Liver Disease", "Sherlock's Diseases of the Liver and Biliary System", "Yamada's Textbook of Gastroenterology"]],
+    ["nephrology", /renal|nephro|kidney/i, ["Brenner and Rector's The Kidney", "Comprehensive Clinical Nephrology", "Oxford Handbook of Nephrology and Hypertension"]],
+    ["endocrinology", /endocrin|diabet|thyroid|adrenal|metabolic|nutrition/i, ["Williams Textbook of Endocrinology", "Greenspan's Basic and Clinical Endocrinology", "Oxford Handbook of Endocrinology and Diabetes"]],
+    ["infectious", /infect|tropical|microb|parasit/i, ["Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases", "Oxford Handbook of Infectious Diseases and Microbiology", "Harrison's Principles of Internal Medicine"]],
+    ["oncology", /oncolog|cancer|sarcoma|tumou?r|breast/i, ["DeVita, Hellman, and Rosenberg's Cancer: Principles and Practice of Oncology", "Abeloff's Clinical Oncology", "Oxford Handbook of Oncology"]],
+    ["haematology", /haemat|hemat|transfus|blood/i, ["Williams Hematology", "Hoffman's Hematology: Basic Principles and Practice", "Oxford Handbook of Clinical Haematology"]],
+    ["paediatrics", /paediat|pediat|neonat|child/i, ["Nelson Textbook of Pediatrics", "Rudolph's Pediatrics", "Oxford Handbook of Paediatrics"]],
+    ["obgyn", /obstet|gyna?ec|reproduct|pregnan/i, ["Williams Obstetrics", "Berek and Novak's Gynecology", "Dewhurst's Textbook of Obstetrics and Gynaecology"]],
+    ["urology", /urolog|androlog|genitourin/i, ["Campbell-Walsh-Wein Urology", "Smith and Tanagho's General Urology", "Oxford Handbook of Urology"]],
+    ["dermatology", /dermat|skin|integument|trichol|nail/i, ["Fitzpatrick's Dermatology", "Rook's Textbook of Dermatology", "Andrews' Diseases of the Skin"]],
+    ["rheumatology", /rheumat|immunolog|autoimmun|connective/i, ["Kelley and Firestein's Textbook of Rheumatology", "Oxford Textbook of Rheumatology", "Hochberg's Rheumatology"]],
+    ["psychiatry", /psychiat|mental|psycholog|behaviou?r/i, ["Kaplan and Sadock's Comprehensive Textbook of Psychiatry", "New Oxford Textbook of Psychiatry", "Oxford Handbook of Psychiatry"]],
+    ["ophthalmology", /ophthal|\beye\b|retin|ocular/i, ["Kanski's Clinical Ophthalmology", "Parsons' Diseases of the Eye", "Oxford Handbook of Ophthalmology"]],
+    ["ent", /\bENT\b|otorhino|otolaryng|audiolog|\bear\b/i, ["Scott-Brown's Otorhinolaryngology Head and Neck Surgery", "Cummings Otolaryngology", "Dhingra's Diseases of Ear, Nose and Throat"]],
+    ["orthopaedics", /musculoskel|orthop|spine|fractur|bone|trauma/i, ["Rockwood and Green's Fractures in Adults", "Campbell's Operative Orthopaedics", "Apley and Solomon's System of Orthopaedics and Trauma"]],
+    ["surgery", /surg/i, ["Bailey and Love's Short Practice of Surgery", "Sabiston Textbook of Surgery", "Schwartz's Principles of Surgery"]],
+    ["dental", /dental|dentist|oral|maxillofac/i, ["Peterson's Principles of Oral and Maxillofacial Surgery", "Shafer's Textbook of Oral Pathology", "Burket's Oral Medicine"]],
+    ["emergency", /emergen|toxicol|envenom|poison|environment|critical care/i, ["Tintinalli's Emergency Medicine", "Rosen's Emergency Medicine", "Goldfrank's Toxicologic Emergencies"]],
+    ["pharmacology", /pharmacol/i, ["Goodman and Gilman's The Pharmacological Basis of Therapeutics", "Katzung's Basic and Clinical Pharmacology", "Rang and Dale's Pharmacology"]],
+    ["general", /./, ["Harrison's Principles of Internal Medicine", "Oxford Handbook of Clinical Medicine", "Davidson's Principles and Practice of Medicine"]]
+  ];
+  function lineOf(books) { return "Standard textbooks: " + books.join("; "); }
+  /** The standard-textbook line for a subject, chosen from a KB entry's system/class/name. */
+  function refFor(system) {
+    var s = String(system || "");
+    for (var i = 0; i < SUBJECTS.length; i++) if (SUBJECTS[i][1].test(s)) return lineOf(SUBJECTS[i][2]);
+    return lineOf(SUBJECTS[SUBJECTS.length - 1][2]);
+  }
+  var GENERIC_REF = lineOf(SUBJECTS[SUBJECTS.length - 1][2]);
+  // Every subject line is protected from re-scrubbing (its titles would otherwise match BOOK_RE).
+  var LINES_RE = new RegExp(SUBJECTS.map(function (x) { return lineOf(x[2]).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|"), "gi");
+  function hasBooks(v) { var s = String(v || "").replace(LINES_RE, ""); LINES_RE.lastIndex = 0; return (BOOKS_TEST.test(s) || BOOKS_TEST2.test(s)) && !/^\s*page\s+\d+\s+of\s+\d+\s*$/i.test(s); }
+  function scrubBooks(text, opts) {
     var t = String(text == null ? "" : text);
     if (!hasBooks(t)) return t;
-    var o = t;
+    var o = t, REF = (opts && opts.ref) || GENERIC_REF, kept = [];
+    t = t.replace(LINES_RE, function (m) { if (m === REF) return "\u0003"; kept.push(m); return "\u0004" + (kept.length - 1) + "\u0004"; });
+    t = t.replace(/\bTinsley\s+R(?:andolph|\.)?\s+Harrison\b/g, function (m) { kept.push(m); return "\u0004" + (kept.length - 1) + "\u0004"; });   // the physician, not the book
+    t = t.replace(/\bHarrison(?:'s|\u2019s)?\s+line\s+\d+/g, "\u0001");
+    var unwrap = function (m) { var a = /^\s*\(/.test(m), z = /\)\s*$/.test(m); return a && z ? "" : a ? "(" : z ? ")" : ""; };
+    t = t.replace(PAGE_RE, unwrap).replace(CHAP_RE, unwrap);
     t = t.replace(BOOK_RE, "\u0001").replace(NELSON_RE, "\u0001");
     t = t.replace(HARRISON_RE, function (m, off, str) {
       // "Source: Harrison 22e" / list item -> the generic source; prose "per Harrison" -> "the reference"
@@ -219,10 +269,20 @@
     t = t.replace(/\bSanford[-\s]aligned\b/g, "Guideline-aligned").replace(/\bsanford[-\s]aligned\b/g, "guideline-aligned")
       .replace(/\b(?:The\s+)?Sanford\s+Guide(?:\s+to\s+Antimicrobial\s+Therapy)?(?:\s+\d{4})?/gi, "\u0001")
       .replace(/\bSanford\b(?:\s*\/\s*)?/g, function (m) { return /\//.test(m) ? "" : "\u0001"; });
-    t = t.replace(PAGE_RE, function (m) { return /^\s*\(/.test(m) && !/\)\s*$/.test(m) ? "(" : ""; });
+    t = t.replace(/\(\s*[\u0001\u0002]\s*\)/g, "").replace(/\(\s*\)/g, "");   // a bracket that only held a citation goes
     // merge runs of generic sources ("Harrison; Nelson" -> one), then write them out
     t = t.replace(/\u0001(?:\s*(?:[;,&\u00B7|]|and)\s*\u0001)+/g, "\u0001");
-    t = t.replace(/(^|[.!?:]\s+|\n\s*)\u0001/g, "$1Standard medical references").replace(/\u0001/g, "standard medical references");
+    t = t.replace(/\u0003/g, "\u0001").replace(/\u0001(?:\s*(?:[;,&\u00B7|]|and)\s*\u0001)+/g, "\u0001");
+    // The subject line goes where a source stands on its own: the whole text, or after a Source/Reference
+    // label. A citation in the middle of a sentence is simply dropped (no book list inside prose).
+    if (/^[\s\u0001;,&\u00B7|/.-]*$/.test(t.replace(/and/g, ""))) t = REF;
+    else {
+      t = t.replace(/^(\s*)\u0001/, "$1" + REF);                                    // a list that opens with the book
+      t = t.replace(/((?:^|[\s(])(?:Sources?|References?|Refs?|Reference texts?|Based on|Adapted from|Evidence|Src)\s*:\s*)\u0001/gi, "$1" + REF);
+      t = t.replace(/\s*[,;/&\u00B7|]?\s*\u0001\s*(?=[,;/&\u00B7|)]|$)/g, "").replace(/\u0001\s*[,;/&\u00B7|]\s*/g, "").replace(/\u0001/g, "");
+      t = t.replace(/^[\s,;/&|\u00B7]+/, "").replace(/\(\s*[,;/]?\s*\)/g, "").replace(/\(\s*[,;/]\s*/g, "(").replace(/\s*[,;/]\s*\)/g, ")").replace(/[\s,;/&|\u00B7]+$/, function (m) { return /\n/.test(m) ? m : ""; });
+    }
+    t = t.replace(/\u0004(\d+)\u0004/g, function (m, i) { return kept[+i]; });
     t = t.replace(/(^|[.!?]\s+)\u0002/g, "$1The reference").replace(/\u0002/g, "the reference");
     t = t.replace(/\(\s*\)/g, "").replace(/\s+([,.;:)])/g, "$1").replace(/,\s*,/g, ",").replace(/ {2,}/g, " ");
     return t === o ? o : t;
@@ -423,5 +483,5 @@
   if (W && W.document) {
     if (W.document.readyState === "loading") W.document.addEventListener("DOMContentLoaded", boot); else boot();
   }
-  return { strip: strip, scrubBooks: scrubBooks, hasBooks: hasBooks, booksOn: booksOn, tidy: tidy, display: display, norm: norm, same: same, hasDash: hasDash, dashOn: dashOn, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
+  return { strip: strip, scrubBooks: scrubBooks, GENERIC_REF: GENERIC_REF, refFor: refFor, SUBJECTS: SUBJECTS, hasBooks: hasBooks, booksOn: booksOn, tidy: tidy, display: display, norm: norm, same: same, hasDash: hasDash, dashOn: dashOn, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
 });

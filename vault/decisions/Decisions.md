@@ -199,6 +199,30 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-24 · Bundle carries subject-appropriate standard textbooks, never specific citations
+
+**Decision.** Owner revised the reference style: not one generic line but the standard textbooks of the
+subject (general medicine Harrison/Oxford Handbook of Clinical Medicine/Davidson; cardiology Braunwald/
+Hurst/Oxford Cardiology; genetics Thompson & Thompson/Emery/Harper; neurology Adams and Victor/Bradley and
+Daroff/Oxford Neurology; ... 23 subjects in `emoji-icons.js` SUBJECTS). Never an edition, chapter or page.
+Labelled "Standard textbooks", not "Source": they are the field's standard texts, not a claim that an
+entry was taken from them.
+
+**How.** `scripts/sanitize-sources.mjs` runs in `build-www.sh` on the assembled www/ (and KB encryption now
+reads the sanitized copies): specific citations in KB data become the entry's subject line (by `system`;
+genetics first), page/pages/chapter fields are emptied, source/reference fields that name any book become
+the subject line, inline citations inside prose are dropped, comments are cleaned too. kb/dist bundles are
+evaluated, rewritten as data and re-emitted with the same wrapper and entry counts; JSON must re-parse; JS
+is rewritten only inside string literals/comments (lexer skips regex/template literals) and must parse, or
+the file is kept and reported. Result on the bundle: 377 files, 0 failures; ~13,700 textbook mentions and
+~15,000 page locators down to 13 intentional leftovers (regex patterns in code, the physician Tinsley R.
+Harrison, the Davidson 1800/1500 insulin rule). The repo keeps its authoring provenance.
+
+**Not covered.** The on-device RAG book (`maik-lite-kb.jsonl`, 38 MB, downloaded from models.stewardmd.in,
+sha256-pinned in `kb/ai/maik-lite-kb-store.js`) is not in this repo; it must be regenerated and re-uploaded
+with its page groups remapped (maik-lite-rag.js uses `rows[].pages` only to cap chunks per page, so opaque
+group ids keep behaviour) and the new sha256/size pinned.
+
 ## 2026-09-24 · No textbooks named as sources, no page numbers (copyright)
 
 **Decision.** Owner: "I shouldn't find Harrison or any text book as source but reference, as copyright

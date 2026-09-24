@@ -90,16 +90,23 @@ test("flag smd_nodash=0 leaves dashes as authored", () => {
 });
 
 test("textbooks as sources become generic references; page numbers go; clinical eponyms stay", () => {
+  const G = E.GENERIC_REF;
+  
+  assert.equal(E.scrubBooks(G), G, "the generic line is never re-scrubbed");
+  assert.equal(E.scrubBooks("Clostridial myositis (Harrison 22e p.1096)."), "Clostridial myositis.");
+  assert.equal(E.scrubBooks("infection (p.123, p.456). Next"), "infection. Next");
+  assert.equal(E.scrubBooks("Harrison 22e p.302"), G);
+  assert.equal(E.scrubBooks("Harrison's Principles of Internal Medicine, 22e (2025)"), G);
   const T = [
-    ["Harrison's Principles of Internal Medicine, 22e, p. 1234", "Standard medical references"],
-    ["Source: Harrison 22e; IDSA Practice Guidelines", "Source: Standard medical references; IDSA Practice Guidelines"],
+    ["Harrison's Principles of Internal Medicine, 22e, p. 1234", G],
+    ["Source: Harrison 22e; IDSA Practice Guidelines", "Source: " + G + "; IDSA Practice Guidelines"],
     ["instead Harrison enumerates risk factors", "instead the reference enumerates risk factors"],
     ["Harrison notes that sepsis", "The reference notes that sepsis"],
-    ["Nelson Textbook of Pediatrics", "Standard medical references"],
-    ["Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases", "Standard medical references"],
-    ["Adams and Victor's Principles of Neurology, 11th ed, Chapter 16", "Standard medical references"],
+    ["Nelson Textbook of Pediatrics", G],
+    ["Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases", G],
+    ["Adams and Victor's Principles of Neurology, 11th ed, Chapter 16", G],
     ["See Harrison (pp. 152-153) for details.", "See the reference for details."],
-    ["Harrison; Nelson Textbook of Pediatrics; IDSA", "Standard medical references; IDSA"],
+    ["Harrison; Nelson Textbook of Pediatrics; IDSA", G + "; IDSA"],
     ["Regimens · Sanford-aligned", "Regimens · Guideline-aligned"],
   ];
   for (const [a, b] of T) assert.equal(E.scrubBooks(a), b, a);
