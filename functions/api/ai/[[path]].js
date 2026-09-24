@@ -1867,11 +1867,14 @@ export async function onRequest(context) {
         "RULES: (1) Expand EVERY abbreviation/acronym to its most likely full canonical medical name given clinical context; resolve brands to generic drugs and lab/serology/imaging codes to their full name. (2) Infer intent from shorthand generically: rx/tx/'management' => treatment; 'prophylaxis'/'ppx'/'prevent'/'prevention' => prevention; a named DRUG with a dosing cue (dose, dosing, drip, infusion, push, bolus, mg, mcg, units, rate, /kg) => dose; dx or 'diagnosis' => investigation; a lab/serology/marker/imaging token or 'cutoff'/'titre'/'level'/'interpretation' => investigation; a named set of DIAGNOSTIC CRITERIA used to ESTABLISH a diagnosis (e.g. Duke, Brugada, Sgarbossa, Light's) => investigation; a SEVERITY / PROGNOSTIC / RISK score or a staging/grading system (e.g. Ranson, APACHE, CURB-65, Child-Pugh, NIHSS) => severity; a named published GUIDELINE/consensus => guideline; a procedure/operation token => procedure; a comparison ('X vs Y'), a patient scenario, or a 'latest/recent evidence' request => reasoning. (3) AMBIGUITY: whenever a SHORT acronym (<=4 letters) has more than one well-established medical meaning AND the surrounding words do NOT decisively fix exactly one, set ambiguous=true and list the top 2-3 canonical meanings in options (still set primaryConcept to the most likely). Only skip this when one meaning is clearly dominant in context. (4) Do NOT invent modifiers that aren't in the query. (5) Output JSON ONLY, no prose, no markdown. This must generalise to every specialty and every future term — reason from meaning, not from any fixed list. (6) SCOPE: StewardMD is a clinician-only clinical tool. If the query is NOT a medical/clinical/health question (coding, software/API integration, general knowledge, math, trivia, personal/legal/financial advice), set outOfScope=true and primaryConcept=\"\"; for ANY medical/clinical/health question set outOfScope=false.\n\n" +
         "Query: " + q;
       let text;
-      // Pin the router to a capable-but-fast model. flash-lite was measured to degrade parse quality
-      // (intent -9pts, entity -10pts) WITHOUT cutting latency (the ~5-6s is Vertex serving/network/failover
-      // overhead, not model compute), so the router uses full flash. Overridable via env.
-      const routerModel = env.MAIK_ROUTER_MODEL || "gemini-2.5-flash";
-      try { text = await gen([{ text: sys }], 200, { temperature: 0, model: routerModel }); }
+      // Router model (T42): the SAME model the answers use (modelId), unless MAIK_ROUTER_MODEL pins one.
+      // It used to default to a hard-coded "gemini-2.5-flash", which Vertex returned NOT_FOUND for on
+      // new projects (functions/_wardsynq/maik-gateway.js notes the same) while answers ran on the
+      // configured model. flash-lite was measured to degrade parse quality (intent -9pts, entity
+      // -10pts) without cutting latency, so do not pin it here. JSON mode + a 512 cap so a model that
+      // thinks cannot spend the whole budget before the JSON (200 was cutting it off).
+      const routerModel = env.MAIK_ROUTER_MODEL || modelId(env);
+      try { text = await gen([{ text: sys }], 512, { temperature: 0, model: routerModel, json: true }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "route-failed" }, 502); }
       await recordUsage(gate, { ...tokens(sys.length, text), status: "success" });
       const p = parseJsonLoose(text) || {};
