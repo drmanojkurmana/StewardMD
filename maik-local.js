@@ -11,7 +11,8 @@
  * onDelta(full.slice(0, i)). Getting this backwards would render "aababc..." on screen.
  *
  * CONTEXT BUDGET is the whole design constraint. The server prompt-builder can spend a huge context
- * on grounding; we have n_ctx 4096 total, shared between prompt and answer, because the KV cache is
+ * on grounding; we have n_ctx 4096 (8192 when the phone has room, see wantCtx) shared between
+ * prompt and answer, because the KV cache is
  * what gets an 8 GB iPhone killed. So the package is clipped HARD and the most decision-relevant
  * evidence goes first — grounding chunks are already page-cited and ranked, retrieved chunks are
  * already cross-encoder re-ranked by the caller.
@@ -19,8 +20,9 @@
  * Where the clipping actually happens, because there is no single PROMPT_CHAR_BUDGET constant (an
  * earlier version of this header named one that never existed):
  *   answer()        — retrieveGrounding() caps evidence at TOPK(3) passages x 700 chars, history at
- *                     HISTORY_TURNS(2) x HISTORY_CLIP(180) with CARRY_CAP(700) on the last reply.
- *                     Worst case lands ~1300 prompt tokens, so nPredict 768 still fits 4096.
+ *                     HISTORY_TURNS(2), doctor turns at HISTORY_CLIP(180), MaiK turns via carry() at
+ *                     CARRY_CAP(700) (every turn rendered the same way, T24). nPredict is openBudget():
+ *                     whatever the window leaves after the prompt (no per-pack cap since 2026-09-21).
  *                     NOTE: this path does NOT call windowBudget() — the caps above are the budget.
  *   every long-text path (summary/assess/scribe/reason/imaging/correlate) — windowBudget() +
  *                     splitWindows(), which DO clamp against n_ctx because their input is unbounded.
@@ -679,10 +681,10 @@
    * wrong regimen with total confidence. Doctors expect textbook/guideline-accurate specifics,
    * which only comes from retrieval + a check against it, same architecture as the server.
    *
-   * Scoped to maik-lite only tonight, not every noThink pack - that is what was asked for
-   * ("the model we trained"), and widening it needs its own verification pass.
+   * First scoped to maik-lite only (2026-09-03); widened to every pack the registry marks `kb` on
+   * 2026-09-18, see below. (The old "MaiK Lite ONLY, Bonsai answers from its own weights" note was
+   * stale and is gone, audit T63.)
    */
-  // Owner decision 2026-09-03: MaiK Lite ONLY. The Bonsai packs answer from their own weights.
   /* Capability-based, not model-id-based (owner, 2026-09-18): any pack the registry marks `kb` reads
    * the Knowledge Base and is checked claim by claim (kb/ai/maik-grounding.js). The old
    * `packId === "maik-lite"` allow-list existed because the whole-answer gate rejected half of a
@@ -1991,8 +1993,8 @@
   }
 
   /* ── LONG INPUT (Phase 6) ──
-   * Every pack loads at 4096 tokens (llama_jni.cpp keeps n_ctx deliberately small), whatever the
-   * model card says. A whole patient timeline or a 30-minute dictation does not fit, and silently
+   * Every pack loads at 4096 tokens, or 8192 when the phone has room (wantCtx), whatever the model
+   * card says; windowBudget() reads the size actually loaded. A whole patient timeline or a 30-minute dictation does not fit, and silently
    * truncating it would drop the clinically important tail. So: split on entry, then sentence,
    * boundaries into windows that fit beside the system prompt and the output budget; process each;
    * carry the intermediate result forward. chars/3.6 is a deliberately pessimistic token estimate
