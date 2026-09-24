@@ -7088,7 +7088,12 @@ export async function onRequest(context) {
       if (seg === "move") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }
       if (seg === "assign") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ASSIGN); return json({ ok: true, tickets: await ticketView(env, await Q.assignTicket(env, s, body.ticketId, body.toDoctorUid, body, actor.id)) }, 200, request); }
       if (seg === "revoke") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REMOVE); await Q.revokeTicket(env, s, body.ticketId, actor.id); return json({ ok: true, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
-      if (seg === "session" && sub === "status") { await requireSessionCap(env, actor, s, CAPS.SESSION_MANAGE); return json({ ok: true, session: await Q.setSessionStatus(env, s, body, actor.id) }, 200, request); }
+      if (seg === "session" && sub === "status") {
+        await requireSessionCap(env, actor, s, CAPS.SESSION_MANAGE);
+        const sess = await Q.setSessionStatus(env, s, body, actor.id);
+        try { await Q.recompute(env, sess); } catch (e) {}   // plan item 14: estimates move now, and the waiting hall hears the doctor is running late
+        return json({ ok: true, session: sess }, 200, request);
+      }
 
       // Add a clinical entry to the encounter timeline. Vitals => nurse (EMR_VITALS); notes/meds/
       // assessment => doctor (EMR_TREAT). "Add to timeline" for meds writes ONLY here (no pharmacy/EMR).
