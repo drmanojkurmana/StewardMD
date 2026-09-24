@@ -4226,7 +4226,7 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined });
+      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
       function attempt(retried) {
@@ -4300,6 +4300,11 @@
       // This lets native stream like the web (first token in seconds) instead of waiting for the whole
       // answer; if the pristine stream misbehaves we fall straight back to the proven whole-fetch path.
       var isNative = !!window.SMD_IS_NATIVE;
+      // The stream bypasses the CapacitorHttp bridge (pristine fetch / WebView XHR), and the bridge is what
+      // rewrites a relative "/api/..." to https://stewardmd.in. Relative, the stream went to the app's own
+      // bundle, failed, and every native answer fell back to fetch-then-replay: no words until the whole
+      // answer was done (audit T14, 2026-09-25). native-bridge.js publishes the origin as SMD_API_BASE.
+      var sb = (isNative && window.SMD_API_BASE && String(b || "").charAt(0) === "/") ? window.SMD_API_BASE + b : b;
       /* REAL NATIVE STREAMING (2026-08-24).
        *
        * This whole path - the watchdog, the native first-token budget, the nsBad cooldown, the
@@ -4412,7 +4417,7 @@
               }
             }
             function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
-            try { xhr.open("POST", b + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
+            try { xhr.open("POST", sb + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
             try { xhr.setRequestHeader("Accept", "text/event-stream"); } catch (e) {}
             for (var k in h) { if (Object.prototype.hasOwnProperty.call(h, k)) { try { xhr.setRequestHeader(k, h[k]); } catch (e) {} } }
             xhr.onprogress = function () { drain(); };
@@ -4430,7 +4435,7 @@
             try { xhr.timeout = NX_TOTAL; } catch (e) {}
             armx(NX_FIRST);
             try {
-              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }));
+              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined }));
             } catch (e) { nsBad(true); settle(fallback()); }
           });
         });
@@ -4465,7 +4470,7 @@
       });
       var attempt = aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }), signal: ctrl.signal });
+        return sfetch(sb + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined }), signal: ctrl.signal });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }

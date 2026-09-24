@@ -680,11 +680,35 @@
         if (S.screen === "connections") renderConnections();
         return;
       }
-      var list = r.d.tenants || [];
+      /* One row per organisation: the owner's list carried KGH twice. */
+      var seenIds = {};
+      var list = (r.d.tenants || []).filter(function (t) { if (!t || !t.tenantId || seenIds[t.tenantId]) return false; seenIds[t.tenantId] = 1; return true; });
       if (list.length > 1) {
         S.tenants = list;
         var known = list.some(function (t) { return t.tenantId === S.tenant; });
-        if (!known) { S.tenant = ""; storeTenant(""); if (S.screen === "connections") renderConnections(); return; }
+        if (!known) {
+          S.tenant = ""; storeTenant("");
+          /* THE DOCTOR IS CONNECTING THEIR OWN HOSPITAL, NOT CHOOSING ONE OF OUR TENANTS. A tenant id is
+           * our bookkeeping (the server's own words: "no client screen ever shows it"), yet an account on
+           * several organisations - the owner's: a HAPI sandbox, an E2E test hospital, two KGH rows, a
+           * WardSynQ demo - was stopped with "Which hospital?" before it could even see its hospitals
+           * (Pixel 9, fresh storage, 2026-09-25). The organisation that already holds this doctor's
+           * connection IS the answer: the one with an approved adapter, else the only one with any.
+           * Only a genuinely ambiguous account is asked; the server still never guesses. */
+          Promise.all(list.map(function (t) {
+            return api("/connections?tenant=" + encodeURIComponent(t.tenantId), {}).then(function (c) {
+              var cs = (c && c.s === 200 && c.d) ? (Array.isArray(c.d) ? c.d : (c.d.connections || [])) : [];
+              return { id: t.tenantId, any: cs.length > 0, active: cs.some(function (x) { return x && x.activeVersionId; }) };
+            }, function () { return { id: t.tenantId, any: false, active: false }; });
+          })).then(function (seen) {
+            if (!overlay() || !S) return;
+            var act = seen.filter(function (x) { return x.active; }), any = seen.filter(function (x) { return x.any; });
+            var pick = act.length === 1 ? act[0].id : (act.length === 0 && any.length === 1 ? any[0].id : "");
+            if (pick) { S.tenant = pick; storeTenant(pick); loadConnections(); return; }
+            if (S.screen === "connections") renderConnections();
+          });
+          return;
+        }
       } else if (list.length === 1 && S.tenant && S.tenant !== list[0].tenantId) { S.tenant = ""; storeTenant(""); }
       loadConnections();
     });

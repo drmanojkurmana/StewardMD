@@ -9180,3 +9180,32 @@ translucent cards on a single radius, blur on the sticky chrome ONLY (no per-row
 perf), a segmented tab pill, and no decorative blobs anywhere. The app hubs keep the aurora.
 Also BUG-013: the library home's `<h1>` said "Knowledge Library" directly under the sheet chrome
 that already says "Knowledge Library"; the page heading is now "Find any disease".
+
+## 2026-09-24 — The logbook's numbers are counted, and they say what they counted
+The PG logbook now has an analytics page (`pglog-analytics.js`). Three rules are in the code, not
+just the copy, because a training record that overstates itself is worse than one with no numbers:
+1. Headline figures count VERIFIED entries only, the same rule the progress engine uses, and the
+   unverified remainder is printed on the page rather than quietly dropped.
+2. A rate with no denominator returns null, and below 20 procedures the UI shows "2 of 6" instead of
+   a percentage. `MIN_RATE_N` is the single place that threshold lives.
+3. Complication figures are self-reported training records for reflection and for a conversation
+   with a guide. `DISCLAIMER` travels with every result object and every surface must show it. They
+   are not an audited outcome statistic and must never be presented as one.
+
+## 2026-09-24 — Clinical photographs stay on the device; consent is a gate, not a checkbox
+`pglog-photos.js` encrypts photographs device-local (the SURGX scheme) and adds NO upload endpoint.
+Putting patient photographs on a server is a decision for the institution and the owner, not a side
+effect of a logbook feature. `attach()` refuses without consent AND a de-identification assertion,
+per photograph, with no "remember my answer"; the consent text and timestamp are stored with the
+reference so it can be shown to an examiner. The app strips what it can (a canvas re-encode drops
+all EXIF including GPS) and states plainly what it cannot check: no software here can see whether a
+face is in the frame. The reference carries no filename, because a camera filename can carry a
+patient's name. The cost is that a reinstall destroys them, which is why the Drive backup exists.
+
+## 2026-09-24 — "Automatic" Drive backup means unlocked-this-session, and the UI says so
+The owner asked for auto-sync to Google Drive. A background upload that needs no password would
+mean the key was stored somewhere, which defeats the point of encrypting it. So `pglog-backup.js`
+takes the password once per app session and, while unlocked, backs up on change with a 10-minute
+floor; closing the app re-locks it. The backup holds only what exists nowhere else (drafts, queue,
+photographs) — verified entries stay on the server, because copying them into a file the resident
+can edit is how a logbook stops being evidence.
