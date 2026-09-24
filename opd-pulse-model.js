@@ -33,6 +33,7 @@
       { key: "walked", label: "Did not wait", icon: "person_off", value: p.abandonedPct == null ? null : p.abandonedPct, unit: "%", sub: (p.noShow || 0) + " no-show" + ((p.noShow || 0) === 1 ? "" : "s"), warn: (p.abandonedPct || 0) >= 10 },
     ];
     if (p.held) tiles.push({ key: "held", label: "Awaiting result", icon: "science", value: p.held, sub: "sent for a test or booked back" });
+    if (p.resultsBack) tiles.push({ key: "results", label: "Results back", icon: "lab_research", value: p.resultsBack, sub: "back in the queue with their result" });
     if (p.syncFailed) tiles.push({ key: "sync", label: "Not in record", icon: "sync_problem", value: p.syncFailed, sub: "send again", warn: true, action: "reconcile" });
     var blame = blameOf(desk, doc);
     return {

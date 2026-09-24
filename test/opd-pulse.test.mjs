@@ -117,6 +117,12 @@ test("a doctor of the hospital may read it too: it is the queue they are working
 });
 
 /* ---- plan item 6: visits that did not reach the clinical record ------------------------------- */
+test("plan item 10: a patient back from a test with the result ready is counted as results back", () => {
+  const p = opdPulse([t({ status: "waiting", resultReadyAt: NOW - min(5), registeredAt: NOW - min(90) }), t({ status: "investigation" }), t({ status: "completed", resultReadyAt: NOW })], NOW);
+  assert.equal(p.resultsBack, 1, "only one still waiting to be seen with the result");
+  assert.equal(p.held, 1, "the other is still at the lab");
+});
+
 test("a visit whose record sync failed is counted, so it is seen instead of silently missing", () => {
   const p = opdPulse([t({ encounterSync: "failed" }), t({ encounterSync: "ok" }), t({})], NOW);
   assert.equal(p.syncFailed, 1);

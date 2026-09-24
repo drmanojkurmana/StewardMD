@@ -309,6 +309,32 @@ import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.j
  * never fails on it (the desk must keep moving), but when a hospital's record is switched on, the outcome
  * is now written onto the ticket: encounterSync "ok" or "failed" with the reason. The OPD pulse counts the
  * failures and POST /opd-reconcile retries them. A hospital with the record off is untouched. */
+/* OPD plan item 10, THE INVESTIGATION LOOP. A patient sent for a test sits in "investigation" and used to
+ * stay there until somebody remembered them. When the result is released, every one of today's OPD tickets
+ * for that patient that is in "investigation" goes back to "waiting" (the state machine's own edge) with
+ * resultReadyAt stamped, so the doctor sees them again and the pulse counts "results back". Matched on the
+ * ticket's patientId; best-effort, never fails the release. */
+async function opdResultBack(env, org, patientId) {
+  if (!org || !org.id || !patientId) return 0;
+  const sessions = [];
+  try {
+    for (const rm of await ORG.listRooms(env, org.id)) {
+      if (!resolveRoomDoctor(rm)) continue;
+      try { const s1 = await Q.getOrCreateRoomSession(env, org, rm, ""); if (s1) sessions.push(s1); } catch (e) {}
+    }
+    const p1 = await Q.getOrCreatePoolSession(env, org, "").catch(() => null);
+    if (p1) sessions.push(p1);
+  } catch (e) { return 0; }
+  let n = 0;
+  for (const s1 of sessions) {
+    for (const t of await Q.listTickets(env, s1.id).catch(() => [])) {
+      if (!t || t.status !== "investigation" || String(t.patientId) !== String(patientId)) continue;
+      try { await Q.setStatus(env, s1, t.id, "waiting", "system:result-released"); await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { resultReadyAt: Date.now() })]); n++; } catch (e) {}
+    }
+  }
+  return n;
+}
+
 async function syncEncounter(request, env, s, ticket) {
   let mig = null;
   const mark = async (fields) => { try { if (ticket && ticket.id) await fsCommit(env, [wUpdate(env, "q_tickets/" + ticket.id, Object.assign({ encounterSyncAt: Date.now() }, fields))]); } catch (e) { /* the mark is advisory */ } };
@@ -4526,6 +4552,7 @@ export async function onRequest(context) {
         });
         // Checked against the critical limits straight after the write (wsqReleaseCriticalCheck).
         if (r && r.ok && r.reportId) r.criticalCheck = await wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, r.reportId, body.idempotencyKey || null);
+        if (r && r.ok) { try { r.opdRecalled = await opdResultBack(env, wOrg, body.patientId); } catch (e) {} }   // plan item 10
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* An analyser's result, released by the technologist who presses the button (lab-analysers.js). The release

@@ -238,7 +238,7 @@ export function opdPulse(tickets, nowMs) {
   const rows = tickets || [], now = Number.isFinite(nowMs) ? nowMs : Date.now();
   const WAIT = ["registered", "waiting", "called"];
   const doorToSeen = [], doorToCalled = [], calledToSeen = [], consults = [], waitingNow = [];
-  let waiting = 0, inConsultation = 0, completed = 0, noShow = 0, cancelled = 0, recalls = 0, held = 0, syncFailed = 0;
+  let waiting = 0, inConsultation = 0, completed = 0, noShow = 0, cancelled = 0, recalls = 0, held = 0, syncFailed = 0, resultsBack = 0;
 
   for (const t of rows) {
     if (!t) continue;
@@ -251,6 +251,7 @@ export function opdPulse(tickets, nowMs) {
     else if (t.status === "investigation" || t.status === "followup" || t.status === "at_diagnostics") held++;
     recalls += Number(t.recallCount) || 0;
     if (t.encounterSync === "failed") syncFailed++;   // seen or queued, but the visit is not in the clinical record
+    if (t.resultReadyAt && WAIT.indexOf(t.status) > -1) resultsBack++;   // plan item 10: back from a test, result ready
 
     if (t.registeredAt && t.consultStartAt) doorToSeen.push(t.consultStartAt - t.registeredAt);
     if (t.registeredAt && t.calledAt) doorToCalled.push(t.calledAt - t.registeredAt);
@@ -263,7 +264,7 @@ export function opdPulse(tickets, nowMs) {
   return {
     at: now,
     registered: rows.length,
-    waiting, inConsultation, completed, noShow, cancelled, held, recalls, syncFailed,
+    waiting, inConsultation, completed, noShow, cancelled, held, recalls, syncFailed, resultsBack,
     seen: completed + inConsultation,
     // History: how long it took the people already seen.
     doorToDoctor: { medianMin: percentileMin(doorToSeen, 50), p90Min: percentileMin(doorToSeen, 90), n: doorToSeen.length },
