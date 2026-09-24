@@ -2590,8 +2590,8 @@ window.openExternal = function (u) {
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
-<script src="/patient-register.js?v=preg7-sid1" defer></script>
-<script src="/queue.js?v=fdesk4-pulse1-profilex1" defer></script>
+<script src="/patient-register.js?v=preg7-sid1-sid1" defer></script>
+<script src="/queue.js?v=fdesk4-pulse1-profilex1-sid1" defer></script>
 <!-- Unified NFC bridge (native Capacitor NfcPlugin + Web NFC). The file-tag tap listener below
      (smdNfcBoot) routes a tapped folder to the patient's full chart, or offers to write a UHID
      to a blank tag. No-op on browsers without NFC. -->
@@ -2599,7 +2599,7 @@ window.openExternal = function (u) {
 <!-- Universal Patient Identity (StewardID 2.0 / Ni-Key): the canonical carrier resolver plus the
      mountable station scanner. patient-register.js mints StewardIDs, ward.js checks revocation at
      the bedside, and OPD stations route through these; all degrade gracefully when absent. -->
-<script src="/steward-identity-resolver.js?v=sir-1" defer></script>
+<script src="/steward-identity-resolver.js?v=sir-1-sid1" defer></script>
 <script src="/smd-identity-scanner.js?v=sis-1" defer></script>
 <!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
      medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
@@ -2613,8 +2613,8 @@ window.openExternal = function (u) {
 <script src="/wardsynq/site/portal.js?v=44" defer></script>
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
-<script src="/ward-labels.js?v=1" defer></script>
-<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1" defer></script>
+<script src="/ward-labels.js?v=1-sid1" defer></script>
+<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1-sid1" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->

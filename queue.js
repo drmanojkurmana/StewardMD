@@ -847,6 +847,8 @@
       mode: mode,
       clinicName: (st.me && st.me.name) || (st.session && st.session.doctorName) || "Check-in",
       departments: dp.departments, departmentRequired: dp.required,
+      /* One patient lookup for every carrier (QR, Ni-Key, barcode, typed): the server's, so a patient registered on another device is found. */
+      resolve: function (id) { return apiGet("/patient/resolve?orgId=" + encodeURIComponent(st.orgId || st.hospital || "") + "&id=" + encodeURIComponent(id)); },
       submit: function (body) {
         body.orgId = st.orgId || st.hospital || "";
         body.workplaceMode = mode;
@@ -1136,6 +1138,7 @@
         mode: "native",
         clinicName: (st.staffWho && st.staffWho.orgCode) || "Check-in",
         departments: dp.departments, departmentRequired: dp.required,
+        resolve: function (id) { return apiGet("/patient/resolve?orgId=" + encodeURIComponent(st.orgId) + "&id=" + encodeURIComponent(id)); },
         submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; body.forQueue = "pool"; return apiPost("/patient/register", body); },
         onAdded: function (r, sent) {
           apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
