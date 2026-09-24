@@ -94,10 +94,12 @@ function resolveAs(type, value) {
 
 test("J1: registration mints a canonical StewardID for the walk-in patient", () => {
   R.reset();
-  assert.match(REG_SRC, /mintStewardId\(\)/, "the register sheet mints via the resolver");
-  assert.match(REG_SRC, /if \(!state\.stewardId && root\.StewardIdentityResolver/, "minted once per sheet");
+  /* 2026-09-24: the StewardID is minted and reserved by the SERVER at registration. The sheet used to
+   * mint one itself, unique only within its tab, and the server dropped it - so the card resolved
+   * nowhere. The sheet now mints nothing; R.mintStewardId below stands in for the server's answer. */
+  assert.doesNotMatch(REG_SRC, /mintStewardId\(\)/, "the register sheet never mints an ID on the device");
   J.sid = R.mintStewardId();
-  assert.match(J.sid, /^SMD-[0-9ABCDEFGHJKMNPQRSTVWXYZ]{6}$/, "canonical SMD- + 6 Crockford chars");
+  assert.match(J.sid, /^SMP-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{5}$/, "SMP-, never the clinic-code SMD- namespace");
   J.store[J.sid] = {
     name: J.name, stewardId: J.sid, mrn: J.mrn, mobile: "9876543220",
     history: [], encounters: J.encounters,

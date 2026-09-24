@@ -96,8 +96,12 @@
     return finishNorm(str);
   }
 
+  /* SMP-XXXX-XXXXC is the StewardID, minted and reserved by the SERVER (functions/_steward_id.js), with
+   * a Luhn mod-32 check character. The legacy SMD- form is still RECOGNISED so a card printed before
+   * the move keeps scanning, but no new ID is ever issued in it: SMD- is the clinic-code namespace. */
   function isStewardId(v) {
-    return /^SMD-[0-9A-Z][0-9A-Z-]*$/.test(String(v || ""));
+    var s = String(v || "");
+    return /^SMP-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{5}$/.test(s) || /^SMD-[0-9A-Z][0-9A-Z-]*$/.test(s);
   }
 
   function normType(t) {
@@ -119,20 +123,27 @@
     return Math.floor(Math.random() * n);
   }
 
-  /* Canonical patient identifier: SMD- + 6 Crockford Base32 chars (no I/L/O/U). */
+  /* NOT HOW A PATIENT GETS A STEWARDID. Registration IDs are minted and reserved by the server
+   * (functions/_steward_id.js), because an ID minted here was unique only within this tab and was never
+   * stored. This produces the same SMP-XXXX-XXXXC shape, check character included, for tests and
+   * previews only; nothing that registers a patient calls it. */
+  function luhn32(body) {
+    var factor = 2, sum = 0;
+    for (var i = body.length - 1; i >= 0; i--) {
+      var addend = factor * CROCKFORD.indexOf(body.charAt(i));
+      factor = factor === 2 ? 1 : 2;
+      sum += Math.floor(addend / 32) + (addend % 32);
+    }
+    return CROCKFORD.charAt((32 - (sum % 32)) % 32);
+  }
   function mintStewardId() {
     for (var tries = 0; tries < 64; tries++) {
-      var s = "SMD-";
-      for (var i = 0; i < 6; i++) s += CROCKFORD.charAt(randInt(CROCKFORD.length));
-      if (!minted[s]) {
-        minted[s] = true;
-        return s;
-      }
+      var b = "";
+      for (var i = 0; i < 8; i++) b += CROCKFORD.charAt(randInt(CROCKFORD.length));
+      var s = "SMP-" + b.slice(0, 4) + "-" + b.slice(4) + luhn32(b);
+      if (!minted[s]) { minted[s] = true; return s; }
     }
-    var f = "SMD-";
-    for (var k = 0; k < 6; k++) f += CROCKFORD.charAt(Math.floor(Math.random() * CROCKFORD.length));
-    minted[f] = true;
-    return f;
+    throw new Error("could not mint a preview StewardID");
   }
 
   /* ---- carrier registry + revocation ---- */

@@ -17,6 +17,7 @@ import {
   validateRegistration, resolveMrn, makeClinicMrn, makeProvisionalMrn,
   duplicateKey, normalizeMobile
 } from "./_opd_patient.js";
+import { mintStewardId, normalizeStewardId } from "./_steward_id.js";
 
 const now = () => Date.now();
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 120);
@@ -103,16 +104,29 @@ export async function registerPatient(env, org, body, actorId) {
    * plain wUpdate - a second registration under the SAME supplied MRN silently overwrote the first
    * patient's record instead of failing. wCreate's exists:false guard makes that collision fail the
    * commit instead, which fsCommit turns into a "precondition" error caught below. */
-  const writes = [wCreate(env, "q_patients/" + id, fields)];
-  if (dupKey) writes.push(wUpdate(env, "q_patient_index/" + sanitize(dupKey), { orgId, mrn, patientId: id, updatedAt: now() }));
-  try {
-    await fsCommit(env, writes);
-  } catch (e) {
-    if (e && e.code === "precondition") return { ok: false, error: "mrn_taken", message: "MR number " + mrn + " is already in use at this hospital." };
-    throw e;
+  /* THE STEWARDID IS MINTED AND RESERVED HERE, in the same commit as the patient. The reservation doc
+   * q_steward_ids/<id> is a create-only write, so two registrations can never hold one number - on any
+   * device, at any clinic - and the patient never exists without the number printed on their card. A
+   * failed commit is either this MR being taken (the patient doc exists) or, in theory, a StewardID
+   * clash; the second is retried with a fresh number. See functions/_steward_id.js. */
+  let stewardId = "";
+  for (let attempt = 0; attempt < 5; attempt++) {
+    stewardId = mintStewardId();
+    const writes = [wCreate(env, "q_patients/" + id, Object.assign({}, fields, { stewardId })),
+      wCreate(env, "q_steward_ids/" + stewardId, { stewardId, orgId, patientId: id, mrn, status: "active", createdBy: actorId || "", createdAt: now() })];
+    if (dupKey) writes.push(wUpdate(env, "q_patient_index/" + sanitize(dupKey), { orgId, mrn, patientId: id, stewardId, updatedAt: now() }));
+    try {
+      await fsCommit(env, writes);
+      break;
+    } catch (e) {
+      if (!(e && e.code === "precondition")) throw e;
+      const taken = await fsGet(env, "q_patients/" + id).catch(() => null);
+      if (taken) return { ok: false, error: "mrn_taken", message: "MR number " + mrn + " is already in use at this hospital." };
+      if (attempt === 4) throw Object.assign(new Error("stewardid_contention"), { status: 503 });
+    }
   }
-  await qAudit(env, { hospitalId: orgId, ticketId: id, actor: actorId || "", action: "patient:register", meta: mrSource + " " + mrn });
-  return { ok: true, patientId: id, mrn, mrSource, pending: !!r.pending, patient: Object.assign({}, p, { mrn, mrSource }) };
+  await qAudit(env, { hospitalId: orgId, ticketId: id, actor: actorId || "", action: "patient:register", meta: mrSource + " " + mrn + " " + stewardId });
+  return { ok: true, patientId: id, mrn, mrSource, stewardId, pending: !!r.pending, patient: Object.assign({}, p, { mrn, mrSource, stewardId }) };
 }
 
 /* Who is already registered here under this mobile number, from the same index registerPatient checks; null for nobody. A
@@ -129,7 +143,7 @@ export async function getPatient(env, orgId, mrn) {
   if (!d || !d.fields || String(d.fields.orgId) !== String(orgId)) return null;
   const f = d.fields;
   return {
-    mrn: f.mrn, mrSource: f.mrSource, pending: !!f.pending, hospitalRef: f.hospitalRef || "",
+    mrn: f.mrn, mrSource: f.mrSource, pending: !!f.pending, hospitalRef: f.hospitalRef || "", stewardId: f.stewardId || "",
     name: await decPHI(env, f.encName), mobile: await decPHI(env, f.encMobile),
     gender: f.gender, birthDate: f.birthDate, approxDob: !!f.approxDob,
     ageYears: f.ageYears, ageMonths: f.ageMonths,
@@ -138,6 +152,39 @@ export async function getPatient(env, orgId, mrn) {
     referredBy: f.referredBy || "", createdAt: f.createdAt,
     supersededBy: f.supersededBy || "", previousMrn: f.previousMrn || ""
   };
+}
+
+/* ---- StewardID resolve + revoke: the one lookup behind QR, Ni-Key, barcode and typed entry ----------
+ *
+ * Every carrier lands here with whatever it read. The ID is normalised and CHECKED first
+ * (_steward_id.js), so a smudged card or a mistyped character is "not a StewardID", never a different
+ * patient. Resolution is scoped to the hospital asking: a number reserved by another clinic answers
+ * "not found here" rather than handing over a patient this hospital has no relationship with.
+ *
+ * Revocation is on the SERVER. It used to be an array in one browser tab, so a lost Ni-Key card was
+ * revoked on the device that noticed and kept working everywhere else. */
+export async function resolveStewardId(env, orgId, input) {
+  const sid = normalizeStewardId(input);
+  if (!sid) return { ok: false, error: "not_a_steward_id", message: "That is not a valid StewardID. Check the characters or scan again." };
+  const d = await fsGet(env, "q_steward_ids/" + sid);   // a failed read throws: never "not found" by accident
+  const f = d && d.fields;
+  if (!f || String(f.orgId) !== String(orgId)) return { ok: false, error: "not_found", stewardId: sid, message: "No patient with this StewardID at this hospital." };
+  if (f.status === "revoked") return { ok: false, error: "revoked", stewardId: sid, reason: f.revokedReason || "", message: "This card was reported lost or replaced. Ask for the new card or search by name." };
+  const patient = await getPatient(env, orgId, f.mrn);
+  if (!patient) return { ok: false, error: "not_found", stewardId: sid, message: "No patient with this StewardID at this hospital." };
+  return { ok: true, stewardId: sid, mrn: f.mrn, patientId: f.patientId, patient };
+}
+
+export async function revokeStewardId(env, orgId, input, reason, actorId) {
+  const sid = normalizeStewardId(input);
+  if (!sid) return { ok: false, error: "not_a_steward_id" };
+  const why = String(reason || "").trim();
+  if (!why) return { ok: false, error: "reason_required", message: "Say why the card is being revoked (lost, damaged, replaced)." };
+  const d = await fsGet(env, "q_steward_ids/" + sid);
+  if (!d || !d.fields || String(d.fields.orgId) !== String(orgId)) return { ok: false, error: "not_found" };
+  await fsCommit(env, [wUpdate(env, "q_steward_ids/" + sid, { status: "revoked", revokedReason: why.slice(0, 200), revokedBy: actorId || "", revokedAt: now() }, { updateTime: d.updateTime })]);
+  await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId || sid, actor: actorId || "", action: "patient:stewardid_revoke", meta: sid + " " + why.slice(0, 80) });
+  return { ok: true, stewardId: sid, status: "revoked" };
 }
 
 // The hospital EMR finally issued a real MR for a patient we queued on a provisional id. Swap it, and

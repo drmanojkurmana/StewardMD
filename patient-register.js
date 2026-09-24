@@ -346,18 +346,13 @@
     function val(id) { var n = q(id); return n ? n.value.trim() : ""; }
 
     function payload() {
-      /* Universal Patient Identity (StewardID 2.0): every registration carries the canonical
-       * StewardID. Minted once per sheet (not per call) so a retry never invents a second one;
-       * a Ni-Key read that resolved an existing patient reuses theirs instead. Without the
-       * resolver bundle the field stays blank and the server owns identity as before. */
-      if (!state.stewardId && root.StewardIdentityResolver && root.StewardIdentityResolver.mintStewardId) {
-        try { state.stewardId = root.StewardIdentityResolver.mintStewardId(); } catch (e) { state.stewardId = ""; }
-      }
+      /* The StewardID is minted and reserved by the SERVER at registration (functions/_steward_id.js) and
+       * shown from its answer. It used to be minted here, unique only within this browser tab, and the
+       * server dropped it - so the number on the card resolved nowhere. Nothing is minted on the device. */
       return {
         name: val("name"), mobile: val("mobile"), gender: state.gender,
         ageYears: val("ageYears"), ageMonths: val("ageMonths"),
         visitType: state.visitType, mrn: val("mrn"),
-        stewardId: state.stewardId || "",
         abhaNumber: val("abhaNumber"), abhaAddress: val("abhaAddress"),
         abhaConsent: !!(q("abhaConsent") && q("abhaConsent").checked),
         address: val("address"), district: val("district"), state: val("state"), pincode: val("pincode"),

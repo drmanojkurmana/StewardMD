@@ -19,10 +19,10 @@ import { TAG_TYPES, assignTag } from "../wardsynq/wardsynq-identity-tag.js";
 const GATE = readFileSync(new URL("../functions/_middleware.js", import.meta.url), "utf8");
 
 /* ── mintStewardId ─────────────────────────────────────────────────────────── */
-test("mintStewardId generates canonical SMD- + 6 Crockford chars", () => {
+test("mintStewardId (preview/test helper) produces the server's SMP- shape, never the clinic SMD- one", () => {
   for (let i = 0; i < 50; i++) {
     const id = R.mintStewardId();
-    assert.match(id, /^SMD-[0-9ABCDEFGHJKMNPQRSTVWXYZ]{6}$/, id);
+    assert.match(id, /^SMP-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{5}$/, id);
     assert.ok(!/[ILOU]/.test(id.slice(4)), `no ambiguous chars in ${id}`);
   }
 });

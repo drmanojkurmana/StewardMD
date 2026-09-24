@@ -5456,6 +5456,24 @@ export async function onRequest(context) {
     if (seg === "patient") {
       const body = method === "POST" ? await readBody(request) : {};
       const pOrg = url.searchParams.get("orgId") || body.orgId || "";
+      /* THE ONE PATIENT LOOKUP behind every carrier - card QR, Ni-Key tag, wristband barcode, typed
+       * StewardID. Same authority as reading the queue: anybody who can see who is waiting can find
+       * the patient in front of them. A bad or revoked number is SAID, never resolved to someone else
+       * (functions/_opd_patient_store.js resolveStewardId). */
+      if (sub === "resolve" && method === "GET") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_VIEW);
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        const r = await PAT.resolveStewardId(env, pOrg, url.searchParams.get("id") || "");
+        return json(r, r.ok ? 200 : r.error === "not_a_steward_id" ? 422 : r.error === "revoked" ? 410 : 404, request);
+      }
+      /* A lost or replaced card is revoked HERE, once, for every device. The desk issues cards, so the
+       * desk's authority revokes them, and always with a reason. */
+      if (sub === "revoke" && method === "POST") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        const r = await PAT.revokeStewardId(env, pOrg, body.stewardId, body.reason, actor.id || "");
+        return json(r, r.ok ? 200 : r.error === "not_found" ? 404 : 422, request);
+      }
       if (sub === "register" && method === "POST") {
         const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
         /* Say WHICH refusal this is. authorizeOrgAccess already distinguishes org_not_found,

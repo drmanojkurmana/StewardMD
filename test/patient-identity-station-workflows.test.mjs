@@ -80,12 +80,10 @@ function loadWardBedside(doc) {
 
 /* ── 1. front desk: mint, done card, duplicate warning ────────────────────── */
 
-test("registration payload mints a canonical StewardID via the resolver", () => {
-  assert.match(REG_SRC, /root\.StewardIdentityResolver/);
-  assert.match(REG_SRC, /mintStewardId\(\)/);
-  assert.match(REG_SRC, /stewardId: state\.stewardId \|\| ""/);
-  // Minted once per sheet (a retry must not invent a second identity).
-  assert.match(REG_SRC, /if \(!state\.stewardId && root\.StewardIdentityResolver/);
+test("registration never mints a StewardID on the device: the server mints and reserves it", () => {
+  // 2026-09-24: a device-minted ID was unique only within its tab and the server dropped it.
+  assert.doesNotMatch(REG_SRC, /mintStewardId\(\)/);
+  assert.doesNotMatch(REG_SRC, /stewardId: state\.stewardId \|\| ""/, "the payload no longer carries a device-made ID");
 });
 
 test("done card shows single canonical StewardID with Ni-Key write + file label", () => {
