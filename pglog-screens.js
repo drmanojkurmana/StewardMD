@@ -29,6 +29,10 @@
   function C() { try { return window.SMD_PGLOG_CURRICULUM || null; } catch (e) { return null; } }
   function ST() { try { return window.SMD_PGLOG_STORE || null; } catch (e) { return null; } }
   function REP() { try { return window.SMD_PGLOG_REPORTS || null; } catch (e) { return null; } }
+  function QK() { try { return window.SMD_PGLOG_QUICK || null; } catch (e) { return null; } }
+  function AN() { try { return window.SMD_PGLOG_ANALYTICS || null; } catch (e) { return null; } }
+  function PH() { try { return window.SMD_PGLOG_PHOTOS || null; } catch (e) { return null; } }
+  function BK() { try { return window.SMD_PGLOG_BACKUP || null; } catch (e) { return null; } }
   function AI() { try { return window.SMD_PGLOG_AI || null; } catch (e) { return null; } }
   function flag(k) { try { return !!(window.SMD_PGLOG_FLAGS && SMD_PGLOG_FLAGS.bool(k)); } catch (e) { return false; } }
   function fint(k) { try { return window.SMD_PGLOG_FLAGS ? SMD_PGLOG_FLAGS.int(k) : 0; } catch (e) { return 0; } }
@@ -49,6 +53,35 @@
   }
   function todayISO() { var m = M(); return m ? m.isoDate(Date.now()) : ""; }
 
+  /* What this resident logs most, kept on the device so the quick picker puts it first. Titles
+   * only - a procedure name is not patient data - capped, and scoped to the account. */
+  function recentsKey() { try { var st = ST(); return "smd_pglog_recent_" + (st ? st.uid() : "anon"); } catch (e) { return "smd_pglog_recent_anon"; } }
+  function readRecents() {
+    if (state.quickRecents) return state.quickRecents;
+    try { state.quickRecents = JSON.parse(localStorage.getItem(recentsKey()) || "[]") || []; }
+    catch (e) { state.quickRecents = []; }
+    return state.quickRecents;
+  }
+  function noteRecent(kind, title) {
+    title = String(title || "").trim(); if (!title) return;
+    var list = readRecents().slice(), hit = null;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] && String(list[i].title).toLowerCase() === title.toLowerCase() && list[i].kind === kind) { hit = list[i]; break; }
+    }
+    if (hit) { hit.n = (hit.n || 0) + 1; hit.at = Date.now(); }
+    else list.push({ title: title, kind: kind, n: 1, at: Date.now() });
+    list.sort(function (a, b) { return (b.n || 0) - (a.n || 0) || (b.at || 0) - (a.at || 0); });
+    state.quickRecents = list.slice(0, 60);
+    try { localStorage.setItem(recentsKey(), JSON.stringify(state.quickRecents)); } catch (e) {}
+  }
+  function recentsFor(kind) {
+    return readRecents().filter(function (r) { return !kind || r.kind === kind; });
+  }
+  function specialtyId() {
+    var p = (state.dash && state.dash.programme) || (state.ctx && state.ctx.programme) || {};
+    return p.specialtyId || p.packId || p.name || "";
+  }
+
   /* ── state ───────────────────────────────────────────────────────────────── */
   var state = {
     root: null, host: null, stack: ["home"],
@@ -65,7 +98,12 @@
     cert: null, certVerifyUrl: "", certLoading: false,   // the signed document + its QR target
     filter: { kind: "", status: "" },
     deptFilter: { departmentId: "", trainingYear: "" },
-    inbox: []
+    inbox: [],
+    // Quick log (15-20s path), analytics and the Drive backup sheet.
+    quick: null,          // { kind, query, title, role, setting, complications[], notes, heard[], photos[] }
+    quickRecents: null,   // [{title,kind,n,at}] from localStorage - what THIS resident picks most
+    analytics: { window: "all", kind: "" },
+    backupBusy: false
   };
 
   function route() { return state.stack[state.stack.length - 1] || "home"; }
@@ -353,18 +391,21 @@
     h.push(navRow("research", "science", "Research and thesis", researchSubtitle()));
     if (flag("smd_pglog_attendance")) h.push(navRow("attendance", "event_available", "Attendance", attendanceSubtitle()));
     h.push(navRow("progress", "insights", "Progress and gaps", state.gaps.length ? state.gaps.length + " gap(s)" : "On track"));
-    if (flag("smd_pglog_reports")) h.push(navRow("reports", "description", "Reports and portfolio", "12 documents"));
+    h.push(navRow("analytics", "query_stats", "My numbers", "Caseload, complications, independence year on year"));
+    if (flag("smd_pglog_reports")) h.push(navRow("reports", "description", "Reports and portfolio", "12 documents · PDF and CSV"));
     if (flag("smd_pglog_certify")) h.push(navRow("certify", "verified_user", "Certification and official PDF", certNavSubtitle()));
     if (canFaculty()) h.push(navRow("faculty", "how_to_reg", "Faculty review", "Verify, assess, authenticate"));
     if (canDept()) h.push(navRow("dept", "corporate_fare", "Department oversight", "Progress across residents"));
     h.push(navRow("check", "qr_code_scanner", "Verify a signed record", "Scan or type a verification code"));
+    if (BK() && BK().available()) h.push(navRow("backup", "cloud_sync", "Backup to Google Drive", BK().describe()));
 
     h.push('<div class="pgl-banner" data-t="ai" style="margin-top:18px">' + ic("policy") +
       "<div>Requirements shown here are traced to their NMC source. This app does not certify " +
       "compliance and does not determine examination eligibility — your University and institution do.</div></div>");
 
     var bar = '<div class="pgl-actionbar">' +
-      '<button class="pgl-btn" data-pgl="go" data-r="add">' + ic("add") + "Add activity</button>" +
+      '<button class="pgl-btn" data-pgl="go" data-r="quick">' + ic("bolt") + "Log it now</button>" +
+      '<button class="pgl-btn ghost" data-pgl="go" data-r="add">' + ic("add") + "Full form</button>" +
       (state.inbox.length ? '<button class="pgl-btn ghost" data-pgl="go" data-r="inbox">' + ic("notifications") + " " + state.inbox.length + "</button>" : "") +
       "</div>";
     return wrap(h.join("")) + bar;
@@ -1427,6 +1468,339 @@
     ["final_portfolio", "menu_book", "Final training portfolio", "Everything, in examiner order"],
     ["certified_logbook", "verified_user", "Certified logbook", "The signed document, with its verification QR"]
   ];
+  /* ── Quick log — the 15-to-20-second path ────────────────────────────────────────────────
+   * Three taps and Save: what, which rung of the role ladder, done. Everything else is a default
+   * the resident can see and change. It writes the same draft the long form writes, through the
+   * same store and the same validation - see pglog-quick.js for why that matters. */
+  function quickState() {
+    if (!state.quick) {
+      var st = ST(), prefs = (st && st.prefs()) || {};
+      state.quick = {
+        kind: prefs.lastKind === "academic" ? "academic" : (prefs.lastKind || "procedure"),
+        query: "", title: "", role: "", setting: "",
+        supervisor: prefs.lastSupervisor || "",
+        complications: [], notes: "", heard: [], photos: [], listening: false, saving: false
+      };
+    }
+    return state.quick;
+  }
+  function screenQuick() {
+    var q = quickState(), qk = QK(), m = M();
+    if (!qk || !m) return wrap(errorState("The quick logger is still loading."));
+    var spec = specialtyId();
+    var kinds = [["procedure", "content_cut", "Procedure"], ["clinical", "stethoscope", "Case"], ["academic", "school", "Academic"]];
+    var h = [];
+
+    h.push('<div class="pgl-quick-head">' +
+      '<div class="pgl-quick-t">Log it now</div>' +
+      '<div class="pgl-quick-s">Three taps. It saves as a draft on this device and goes to your guide when you submit.</div></div>');
+
+    // 1 — what kind
+    h.push('<div class="pgl-qsec"><div class="pgl-qlbl">1 · What are you logging?</div><div class="pgl-chips">' +
+      kinds.map(function (k) {
+        return '<button class="pgl-chip' + (q.kind === k[0] ? " on" : "") + '" data-pgl="q-kind" data-v="' + k[0] + '" aria-pressed="' + (q.kind === k[0]) + '">' +
+          ic(k[1]) + esc(k[2]) + "</button>";
+      }).join("") + "</div></div>");
+
+    // 2 — what, from this specialty's own list
+    var list = qk.search(spec, q.kind, q.query, recentsFor(q.kind), 12);
+    h.push('<div class="pgl-qsec"><div class="pgl-qlbl">2 · ' +
+      (q.kind === "procedure" ? "Which procedure?" : q.kind === "academic" ? "Which activity?" : "What did you see?") + "</div>");
+    h.push('<div class="pgl-qsearch">' + ic("search") +
+      '<input id="pglQuickQ" type="text" autocomplete="off" placeholder="' +
+      attr(q.kind === "procedure" ? "Type or pick below" : "Type or pick below") + '" value="' + attr(q.query) + '">' +
+      (voiceAvailable() ? '<button class="pgl-qmic' + (q.listening ? " on" : "") + '" data-pgl="q-mic" aria-label="Dictate this entry">' + ic(q.listening ? "graphic_eq" : "mic") + "</button>" : "") +
+      "</div>");
+    if (q.title) {
+      h.push('<div class="pgl-qpicked">' + ic("check_circle") + "<b>" + esc(q.title) + "</b>" +
+        '<button class="pgl-qclear" data-pgl="q-unpick" aria-label="Choose something else">' + ic("close") + "</button></div>");
+    } else {
+      h.push('<div class="pgl-qlist">' + list.map(function (it) {
+        return '<button class="pgl-qitem' + (it.recent ? " recent" : "") + '" data-pgl="q-pick" data-v="' + attr(it.title) + '">' +
+          (it.recent ? ic("history") : ic("add")) + "<span>" + esc(it.title) + "</span></button>";
+      }).join("") + "</div>");
+      if (q.query && !list.length) {
+        h.push('<button class="pgl-qitem" data-pgl="q-pick" data-v="' + attr(q.query) + '">' + ic("edit") + "<span>Use &ldquo;" + esc(q.query) + "&rdquo;</span></button>");
+      }
+    }
+    h.push("</div>");
+
+    // 3 — the role ladder. Never defaulted: this is the claim the examiner relies on.
+    if (q.kind !== "academic") {
+      h.push('<div class="pgl-qsec"><div class="pgl-qlbl">3 · Your role</div><div class="pgl-chips">' +
+        m.ROLES.map(function (r) {
+          return '<button class="pgl-chip' + (q.role === r ? " on" : "") + '" data-pgl="q-role" data-v="' + r + '" aria-pressed="' + (q.role === r) + '">' +
+            esc(m.ROLE_LABEL[r] || r) + "</button>";
+        }).join("") + "</div></div>");
+    }
+
+    // The defaults, visible and changeable, in one compact strip.
+    var st = ST(), prefs = (st && st.prefs()) || {};
+    var setting = q.setting || (q.kind === "procedure" ? "ot" : (prefs.lastSetting || "opd"));
+    var SET_LABEL = { opd: "OPD", ipd: "Ward / IPD", emergency: "Emergency", ot: "Theatre", daycare: "Day care", bedside: "Bedside" };
+    var settings = q.kind === "procedure" ? ["ot", "opd", "ipd", "emergency", "bedside"] : ["opd", "ipd", "emergency"];
+    h.push('<div class="pgl-qsec"><div class="pgl-qlbl">Where</div><div class="pgl-chips">' +
+      settings.map(function (sx) {
+        return '<button class="pgl-chip sm' + (setting === sx ? " on" : "") + '" data-pgl="q-setting" data-v="' + sx + '">' + esc(SET_LABEL[sx] || sx) + "</button>";
+      }).join("") + "</div></div>");
+
+    if (q.kind === "procedure" && quickNeedsSupervisor()) {
+      // PGMER-2023 5.2(vi): for MS and MCh a procedure entry must name the supervising consultant.
+      // The quick path asks for it here rather than bouncing the resident into the long form.
+      h.push('<div class="pgl-qsec"><div class="pgl-qlbl">Supervising consultant</div>' +
+        '<input id="pglQuickSup" class="pgl-qinput" type="text" placeholder="Who supervised this?" value="' + attr(q.supervisor || prefs.lastSupervisor || "") + '">' +
+        '<div class="pgl-qhint">Required for ' + esc(((state.dash && state.dash.programme) || {}).degree || "this degree") +
+        " procedure entries. It is remembered for your next entry.</div></div>");
+    }
+    if (q.kind === "procedure") {
+      h.push('<div class="pgl-qsec"><div class="pgl-qlbl">Complications</div>' +
+        '<div class="pgl-chips"><button class="pgl-chip sm' + (q.complications.length ? "" : " on") + '" data-pgl="q-nocomp">None</button></div>' +
+        '<input id="pglQuickComp" class="pgl-qinput" type="text" placeholder="If any, comma separated" value="' + attr(q.complications.join(", ")) + '"></div>');
+    }
+
+    // Photographs — consent-gated, device-local. See pglog-photos.js.
+    h.push(quickPhotosHtml(q));
+
+    h.push('<div class="pgl-qsec"><div class="pgl-qlbl">Note <span style="opacity:.6">· optional</span></div>' +
+      '<textarea id="pglQuickNote" class="pgl-qinput" rows="2" placeholder="Anything worth remembering about this case">' + esc(q.notes) + "</textarea></div>");
+
+    if (q.heard.length) {
+      h.push('<div class="pgl-banner" data-t="ai">' + ic("hearing") + "<div><b>Heard:</b> " +
+        q.heard.map(function (x) { return esc(x.field) + " = " + esc(x.phrase); }).join(" · ") +
+        ". Check each field before you save.</div></div>");
+    }
+
+    var draft = qk.quickDraft({
+      kind: q.kind, title: q.title || q.query, role: q.role, setting: setting,
+      complications: q.complications, notes: q.notes
+    }, { prefs: prefs, today: todayISO(), localId: st ? st.localId() : "loc_tmp",
+      residentId: (state.dash && state.dash.resident && state.dash.resident.id) || "",
+      programmeId: (state.dash && state.dash.programme && state.dash.programme.id) || "" });
+    var needSup = quickNeedsSupervisor();
+    if (q.supervisor || prefs.lastSupervisor) draft.supervisor = q.supervisor || prefs.lastSupervisor;
+    var missing = qk.missingFor(draft, { requiresSupervisor: needSup && q.kind === "procedure" });
+    var ready = missing.length === 0;
+
+    var bar = '<div class="pgl-actionbar">' +
+      '<button class="pgl-btn ghost" data-pgl="go" data-r="add">' + ic("tune") + "Full form</button>" +
+      '<button class="pgl-btn" data-pgl="q-save"' + (ready ? "" : " disabled") + ">" + ic("bolt") +
+      (ready ? "Save entry"
+        : missing.indexOf("title") >= 0 ? "Pick what you did"
+        : missing.indexOf("role") >= 0 ? "Choose your role"
+        : missing.indexOf("supervisor") >= 0 ? "Name your supervisor" : "One more field") + "</button></div>";
+    return wrap(h.join("")) + bar;
+  }
+
+  function quickPhotosHtml(q) {
+    var ph = PH();
+    if (!ph || !ph.available()) return "";
+    var shots = q.photos.map(function (p, i) {
+      return '<div class="pgl-qshot">' + ic("image") + "<span>Photo " + (i + 1) + "</span>" +
+        '<button data-pgl="q-photo-del" data-v="' + attr(p.id) + '" aria-label="Remove photograph">' + ic("close") + "</button></div>";
+    }).join("");
+    return '<div class="pgl-qsec"><div class="pgl-qlbl">Clinical photograph <span style="opacity:.6">· optional</span></div>' +
+      (shots ? '<div class="pgl-qshots">' + shots + "</div>" : "") +
+      '<button class="pgl-btn ghost" data-pgl="q-photo">' + ic("photo_camera") + "Add a photograph</button>" +
+      '<div class="pgl-qhint">' + esc(ph.STORAGE_WARNING) + "</div></div>";
+  }
+
+  /* Keep the Save button honest without a re-render: same question missingFor() answers. */
+  function quickSyncSaveButton() {
+    var q = state.quick, qk = QK(), st = ST();
+    if (!q || !qk || !st) return;
+    var btn = document.querySelector('#pglogRoot [data-pgl="q-save"]');
+    if (!btn) return;
+    var prefs = st.prefs() || {};
+    var draft = qk.quickDraft({
+      kind: q.kind, title: q.title || q.query, role: q.role,
+      setting: q.setting || (q.kind === "procedure" ? "ot" : (prefs.lastSetting || "opd")),
+      complications: q.complications, notes: q.notes,
+      supervisor: q.supervisor || prefs.lastSupervisor || ""
+    }, { prefs: prefs, today: todayISO(), localId: "loc_preview" });
+    var missing = qk.missingFor(draft, { requiresSupervisor: quickNeedsSupervisor() && q.kind === "procedure" });
+    var ready = missing.length === 0;
+    btn.disabled = !ready;
+    var label = ready ? "Save entry"
+      : missing.indexOf("title") >= 0 ? "Pick what you did"
+      : missing.indexOf("role") >= 0 ? "Choose your role"
+      : missing.indexOf("supervisor") >= 0 ? "Name your supervisor" : "One more field";
+    var txtNode = btn.lastChild;
+    if (txtNode && txtNode.nodeType === 3) txtNode.nodeValue = label;
+  }
+  /* Retype the suggestion list under the search box without touching the input itself. */
+  function quickSyncList() {
+    var q = state.quick, qk = QK();
+    if (!q || !qk || q.title) return;
+    var host = document.querySelector("#pglogRoot .pgl-qlist");
+    if (!host) return;
+    var list = qk.search(specialtyId(), q.kind, q.query, recentsFor(q.kind), 12);
+    host.innerHTML = list.map(function (it) {
+      return '<button class="pgl-qitem' + (it.recent ? " recent" : "") + '" data-pgl="q-pick" data-v="' + attr(it.title) + '">' +
+        (it.recent ? ic("history") : ic("add")) + "<span>" + esc(it.title) + "</span></button>";
+    }).join("") || '<button class="pgl-qitem" data-pgl="q-pick" data-v="' + attr(q.query) + '">' + ic("edit") + "<span>Use &ldquo;" + esc(q.query) + "&rdquo;</span></button>";
+  }
+  function quickNeedsSupervisor() {
+    var m = M(); if (!m || !m.requiresProcedureLog) return false;
+    var prog = (state.dash && state.dash.programme) || (state.ctx && state.ctx.programme) || {};
+    return !!m.requiresProcedureLog(prog.degree);
+  }
+  function voiceAvailable() {
+    try { return !!(window.SMD_VOICE && window.SMD_VOICE.listen); } catch (e) { return false; }
+  }
+
+  /* ── Analytics — the numbers, counted rather than estimated ─────────────────────────────── */
+  function analyticsEntries() {
+    var d = state.dash || {};
+    var list = arr(d.entries);
+    if (!list.length && d.recent) list = arr(d.recent);
+    return list;
+  }
+  function screenAnalytics() {
+    var an = AN(), m = M();
+    if (!an) return wrap(errorState("The analytics engine is still loading."));
+    var entries = analyticsEntries();
+    if (!entries.length) {
+      return wrap(banner("info", "insights",
+        "Nothing to count yet. Log a few cases and this page shows your real numbers: what you have seen, " +
+        "how often you did it yourself, and how that is changing year on year."));
+    }
+    var res = (state.dash && state.dash.resident) || {};
+    var startYear = String(res.startDate || "").slice(0, 4);
+    var d = an.dashboard(entries, {
+      yearOf: startYear ? function (e) {
+        var y = String(e.occurredAt || "").slice(0, 4);
+        if (!y) return "";
+        var n = (Number(y) - Number(startYear)) + 1;
+        return n >= 1 ? ("Year " + n) : "";
+      } : null,
+      limit: 8
+    });
+    var h = [];
+
+    h.push('<div class="pgl-stats">' +
+      stat(d.caseload.total, "Verified entries") +
+      stat(d.procedures.total, "Procedures") +
+      stat(d.caseload.perMonth == null ? "—" : d.caseload.perMonth, "Per month") +
+      stat(d.unverified, "Not yet verified") +
+      "</div>");
+
+    // Independence — the question a guide actually asks.
+    h.push('<div class="pgl-card"><div class="pgl-row-t">Doing it yourself</div>' +
+      '<div class="pgl-row-s">' + (d.independence.basis === "training_year" ? "By training year" : "By calendar year") +
+      " · procedures with a role recorded</div>");
+    if (!d.independence.years.length) {
+      h.push('<div class="pgl-row-s" style="margin-top:8px">No verified procedure carries a role yet.</div>');
+    } else {
+      h.push('<div class="pgl-bars">' + d.independence.years.map(function (y) {
+        var pct = y.independentShare == null ? 0 : y.independentShare;
+        return '<div class="pgl-bar"><span class="pgl-bar-l">' + esc(y.year) + "</span>" +
+          '<span class="pgl-bar-t"><span style="width:' + pct + '%"></span></span>' +
+          '<span class="pgl-bar-v">' + (y.independentShare == null ? "—" : y.independentShare + "%") +
+          '<small>' + y.n + (y.lowN ? " cases · few" : " cases") + "</small></span></div>";
+      }).join("") + "</div>");
+      var dir = { rising: "Rising — you are operating independently more often than last year.",
+        falling: "Falling — you logged a smaller share independently than last year.",
+        flat: "Level with last year.", insufficient_data: "Not enough years logged to show a trend yet." };
+      h.push('<div class="pgl-row-s" style="margin-top:8px">' + esc(dir[d.independence.direction] || "") + "</div>");
+    }
+    h.push("</div>");
+
+    // Complications — rule 2 of pglog-analytics: a rate with no denominator is not shown.
+    h.push('<div class="pgl-card"><div class="pgl-row-t">Complications recorded</div>');
+    if (!d.complications) {
+      h.push('<div class="pgl-row-s">No verified procedures yet.</div>');
+    } else {
+      var c = d.complications;
+      h.push('<div class="pgl-bignum">' + (c.pct == null ? (c.withComplication + " of " + c.n) : (c.pct + "%")) + "</div>" +
+        '<div class="pgl-row-s">' + (c.lowN
+          ? ("Shown as a count, not a percentage: " + c.n + " procedures is too few for a rate to mean anything.")
+          : (c.withComplication + " of " + c.n + " procedures")) + "</div>");
+      if (c.types.length) {
+        h.push('<div class="pgl-taglist">' + c.types.slice(0, 8).map(function (t) {
+          return '<span class="pgl-tag">' + esc(t.complication) + " · " + t.n + "</span>";
+        }).join("") + "</div>");
+      }
+      h.push('<div class="pgl-qhint">' + esc(c.disclaimer) + "</div>");
+    }
+    h.push("</div>");
+
+    // What they see most.
+    if (d.topProcedures.length) h.push(topCard("Procedures you log most", d.topProcedures, m));
+    if (d.topDiagnoses.length) h.push(topCard("Presentations you see most", d.topDiagnoses, m));
+
+    // Caseload by month.
+    if (d.caseload.months.length > 1) {
+      var max = d.caseload.months.reduce(function (a, x) { return Math.max(a, x.n); }, 0) || 1;
+      h.push('<div class="pgl-card"><div class="pgl-row-t">Month by month</div>' +
+        '<div class="pgl-spark">' + d.caseload.months.map(function (mm) {
+          return '<span title="' + attr(mm.month + ": " + mm.n) + '" style="height:' + Math.max(3, Math.round(mm.n / max * 100)) + '%"></span>';
+        }).join("") + "</div>" +
+        '<div class="pgl-row-s">' + esc(d.caseload.months[0].month) + " to " + esc(d.caseload.months[d.caseload.months.length - 1].month) +
+        (d.caseload.busiestMonth ? " · busiest " + esc(d.caseload.busiestMonth.month) + " (" + d.caseload.busiestMonth.n + ")" : "") + "</div></div>");
+    }
+
+    h.push(banner("info", "fact_check",
+      "Counted from verified entries only. An entry your guide has not verified is a claim, not a record, " +
+      "so it is listed above as “not yet verified” and left out of every figure on this page."));
+
+    var bar = '<div class="pgl-actionbar">' +
+      '<button class="pgl-btn ghost" data-pgl="csv" data-id="all">' + ic("table_view") + "Export CSV</button>" +
+      '<button class="pgl-btn ghost" data-pgl="go" data-r="reports">' + ic("description") + "Reports</button></div>";
+    return wrap(h.join("")) + bar;
+  }
+  function topCard(title, rows, m) {
+    var max = rows.reduce(function (a, r) { return Math.max(a, r.n); }, 0) || 1;
+    return '<div class="pgl-card"><div class="pgl-row-t">' + esc(title) + "</div>" +
+      '<div class="pgl-bars">' + rows.map(function (r) {
+        var ind = (r.roles && r.roles.performed_independent) || 0;
+        return '<div class="pgl-bar"><span class="pgl-bar-l">' + esc(r.title) + "</span>" +
+          '<span class="pgl-bar-t"><span style="width:' + Math.round(r.n / max * 100) + '%"></span></span>' +
+          '<span class="pgl-bar-v">' + r.n + (ind ? '<small>' + ind + " solo</small>" : "") + "</span></div>";
+      }).join("") + "</div></div>";
+  }
+
+  /* ── Backup to the resident's own Google Drive ─────────────────────────────────────────── */
+  function screenBackup() {
+    var bk = BK();
+    if (!bk) return wrap(errorState("Backup is still loading."));
+    var s = bk.status();
+    var h = [];
+    h.push('<div class="pgl-card"><div class="pgl-row-t">Backup to your Google Drive</div>' +
+      '<div class="pgl-row-s">' + esc(bk.describe()) + "</div></div>");
+    if (!s.available) {
+      h.push(banner("warn", "cloud_off", "This needs the StewardMD app on your phone, signed in to Google."));
+      return wrap(h.join(""));
+    }
+    h.push(banner("info", "lock",
+      "The file in your Drive is encrypted with a password only you know. StewardMD never sees it and keeps no " +
+      "copy, so there is no way to recover the backup if you forget it. Your drafts and your clinical " +
+      "photographs are what this protects: they exist only on this phone until they are backed up."));
+    if (!s.configured) {
+      h.push('<div class="pgl-qsec"><div class="pgl-qlbl">Choose a backup password</div>' +
+        '<input id="pglBkP1" class="pgl-qinput" type="password" autocomplete="new-password" placeholder="At least 8 characters">' +
+        '<input id="pglBkP2" class="pgl-qinput" type="password" autocomplete="new-password" placeholder="Type it again" style="margin-top:8px"></div>');
+      h.push('<div class="pgl-actionbar"><button class="pgl-btn" data-pgl="bk-setup">' + ic("lock") + "Set up backup</button></div>");
+      return wrap(h.join(""));
+    }
+    if (!s.unlocked) {
+      h.push('<div class="pgl-qsec"><div class="pgl-qlbl">Enter your backup password</div>' +
+        '<input id="pglBkP1" class="pgl-qinput" type="password" autocomplete="current-password" placeholder="Backup password"></div>');
+      h.push('<div class="pgl-actionbar"><button class="pgl-btn" data-pgl="bk-unlock">' + ic("lock_open") + "Unlock</button></div>");
+      return wrap(h.join(""));
+    }
+    h.push('<label class="pgl-switch"><input type="checkbox" data-pgl="bk-auto"' + (s.auto ? " checked" : "") + ">" +
+      "<span><b>Back up automatically</b><small>While the app is open and unlocked, changes are backed up in the " +
+      "background. It locks again when you close the app, because the password is never stored.</small></span></label>");
+    if (s.lastCounts) {
+      h.push('<div class="pgl-stats">' + stat(s.lastCounts.drafts || 0, "Drafts") + stat(s.lastCounts.photos || 0, "Photographs") +
+        stat(s.lastCounts.onServer || 0, "Already on the server") + "</div>");
+    }
+    h.push('<div class="pgl-actionbar">' +
+      '<button class="pgl-btn"' + (state.backupBusy ? " disabled" : "") + ' data-pgl="bk-now">' + ic("cloud_upload") + (state.backupBusy ? "Working…" : "Back up now") + "</button>" +
+      '<button class="pgl-btn ghost" data-pgl="bk-restore">' + ic("cloud_download") + "Restore</button></div>");
+    return wrap(h.join(""));
+  }
+
   function screenReports() {
     var h = REPORT_LIST.map(function (r) {
       return '<button class="pgl-row" data-pgl="go" data-r="report/' + r[0] + '">' +
@@ -1453,6 +1827,11 @@
     return wrap(REP().toHtml(rep)) +
       '<div class="pgl-actionbar">' +
       '<button class="pgl-btn ghost" data-pgl="print" data-id="' + attr(id) + '">' + ic("print") + "Print / PDF</button>" +
+      // CSV is the format a department re-analyses in a spreadsheet; Excel needs the BOM, which
+      // exportCsv adds. Offered on the entry-level reports, where rows exist to export.
+      ((id === "resident_logbook" || id === "procedure_report" || id === "clinical_report")
+        ? '<button class="pgl-btn ghost" data-pgl="csv" data-id="' + attr(id === "procedure_report" ? "procedure" : id === "clinical_report" ? "clinical" : "all") + '">' + ic("table_view") + "CSV / Excel</button>"
+        : "") +
       '<button class="pgl-btn ghost" data-pgl="share" data-id="' + attr(id) + '">' + ic("ios_share") + "Share</button>" +
       (id === "resident_logbook" || id === "procedure_report"
         ? '<button class="pgl-btn ghost" data-pgl="toggle-ref" data-id="' + attr(id) + '">' +
@@ -2040,6 +2419,9 @@
         if (a) { title = "Log " + a; sub = "New entry"; body = screenAddForm(a); }
         else { title = "Add activity"; body = screenAddPicker(); }
         break;
+      case "quick": title = "Quick log"; sub = "Log a case in seconds"; body = screenQuick(); break;
+      case "analytics": title = "My numbers"; sub = "Counted, not estimated"; body = screenAnalytics(); break;
+      case "backup": title = "Backup"; sub = "Encrypted, to your own Google Drive"; body = screenBackup(); break;
       case "entries": title = "All entries"; body = screenEntries(); break;
       case "entry": title = "Entry"; body = screenEntry(a); break;
       case "progress": title = "Progress"; sub = "Against NMC requirements"; body = screenProgress(); break;
@@ -2089,6 +2471,14 @@
       if (t.hasAttribute && t.hasAttribute("data-f-ft") && state.assessment) state.assessment.free[t.getAttribute("data-f-ft")] = t.value;
       if (t.hasAttribute && t.hasAttribute("data-f-lb") && state.assessment) state.assessment.logbookScore = t.value === "" ? null : Number(t.value);
       if (t.hasAttribute && t.hasAttribute("data-f-plan") && state.assessment) state.assessment.actionPlan = t.value;
+      /* The quick screen updates IN PLACE on every keystroke: re-rendering would take the caret and
+       * the keyboard away mid-word, which is exactly what makes a "fast" form slow. Only the Save
+       * button's state changes, so only that is touched. */
+      if (state.quick && t.id && /^pglQuick/.test(t.id)) {
+        quickReadInputs();
+        quickSyncSaveButton();
+        if (t.id === "pglQuickQ") quickSyncList();
+      }
     };
   }
   function setChip(t) {
@@ -2233,6 +2623,33 @@
         return enter("home");
       }
       case "save-draft": return doSaveDraft(false);
+
+      /* ---- quick log ---- */
+      case "q-kind": { var qk1 = quickState(); qk1.kind = t.getAttribute("data-v"); qk1.title = ""; qk1.query = ""; haptic("light"); return render(); }
+      case "q-pick": { var qk2 = quickState(); qk2.title = t.getAttribute("data-v"); haptic("light"); return render(); }
+      case "q-unpick": { var qk3 = quickState(); qk3.title = ""; return render(); }
+      case "q-role": { var qk4 = quickState(); qk4.role = t.getAttribute("data-v"); haptic("light"); return render(); }
+      case "q-setting": { var qk5 = quickState(); qk5.setting = t.getAttribute("data-v"); haptic("light"); return render(); }
+      case "q-nocomp": { var qk6 = quickState(); qk6.complications = []; return render(); }
+      case "q-mic": return quickDictate();
+      case "q-photo": return quickAddPhoto();
+      case "q-photo-del": return quickRemovePhoto(t.getAttribute("data-v"));
+      case "q-save": return quickSave();
+
+      /* ---- CSV ---- */
+      case "csv": return exportCsv(id);
+
+      /* ---- Drive backup ---- */
+      case "bk-setup": return backupSetup();
+      case "bk-unlock": return backupUnlock();
+      case "bk-now": return backupRun();
+      case "bk-restore": return backupRestore();
+      case "bk-auto": {
+        var bk0 = BK(); if (!bk0) return;
+        bk0.setAuto(!bk0.autoOn());
+        toast(bk0.autoOn() ? "Automatic backup is on while the app is open." : "Automatic backup is off.");
+        return render();
+      }
       case "submit-draft": return doSaveDraft(true);
       case "submit-existing": return doSubmitExisting(id);
       case "edit-draft": {
@@ -2445,6 +2862,247 @@
     }, function (e) {
       state.loading = false; render(); haptic("warning");
       toast((e && e.userMessage) || "Could not save the correction.");
+    });
+  }
+
+  /* ── quick log behaviour ─────────────────────────────────────────────────────────────────
+   * Dictation runs through the app's existing recogniser and is parsed by pglog-quick's vocabulary
+   * matcher. Nothing is saved from speech: every field it fills is shown in the "Heard" line and
+   * the resident still taps Save. */
+  function quickReadInputs() {
+    var q = quickState(), el;
+    try { el = document.getElementById("pglQuickQ"); if (el) q.query = el.value; } catch (e) {}
+    try { el = document.getElementById("pglQuickNote"); if (el) q.notes = el.value; } catch (e) {}
+    try {
+      el = document.getElementById("pglQuickComp");
+      if (el) q.complications = String(el.value || "").split(",").map(function (x) { return x.trim(); }).filter(Boolean);
+    } catch (e) {}
+    try { el = document.getElementById("pglQuickSup"); if (el) q.supervisor = el.value; } catch (e) {}
+    return q;
+  }
+  function quickDictate() {
+    var q = quickReadInputs(), qk = QK(), V = null;
+    try { V = window.SMD_VOICE; } catch (e) {}
+    if (!V || !V.listen) return toast("Voice input is not available on this device.");
+    if (q.listening) { try { if (q._stop) q._stop(); } catch (e) {} q.listening = false; return render(); }
+    function apply(said) {
+      q.listening = false; q._stop = null;
+      said = String(said || "").trim();
+      if (!said) { render(); return toast("Nothing was heard."); }
+      var parsed = qk.parseDictation(said, { specialty: specialtyId(), recents: recentsFor("") });
+      if (parsed.kind) q.kind = parsed.kind;
+      if (parsed.title) q.title = parsed.title;
+      if (parsed.role) q.role = parsed.role;
+      if (parsed.setting) q.setting = parsed.setting;
+      if (parsed.complications.length) q.complications = parsed.complications;
+      if (parsed.notes) q.notes = parsed.notes;
+      q.heard = parsed.heard;
+      haptic("success");
+      render();
+    }
+    q.listening = true; q.heard = []; render();
+    var ctl = V.listen({
+      language: "auto",
+      onFinal: apply,
+      onError: function () { q.listening = false; q._stop = null; render(); toast("Could not hear that. Try again."); }
+    });
+    q._stop = (ctl && ctl.stop) ? function () { try { ctl.stop(); } catch (e) {} } : null;
+    if (!ctl) { q.listening = false; render(); toast("Voice input is not available on this device."); }
+  }
+
+  function quickAddPhoto() {
+    var ph = PH(); if (!ph || !ph.available()) return toast("Photographs need the app on a phone.");
+    var q = quickReadInputs();
+    if (q.photos.length >= ph.MAX_PER_ENTRY) return toast(ph.refusalText("too_many"));
+    photoConsentSheet(function (ok) {
+      if (!ok) return;
+      pickPhoto().then(function (src) {
+        if (!src) return;
+        return ph.attach(src, { consent: true, deidentified: true, existingCount: q.photos.length }).then(function (r) {
+          if (!r.ok) return toast(r.message || "The photograph was not saved.");
+          q.photos.push(r.ref);
+          haptic("success");
+          toast("Photograph saved on this device, encrypted.");
+          render();
+        });
+      }).catch(function () {});
+    });
+  }
+  function pickPhoto() {
+    try {
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.pickImage) {
+        return window.SMD_NATIVE.pickImage({ prompt: true });
+      }
+    } catch (e) {}
+    return new Promise(function (res) {
+      var inp = document.createElement("input");
+      inp.type = "file"; inp.accept = "image/*"; inp.style.display = "none";
+      document.body.appendChild(inp);
+      inp.addEventListener("change", function () {
+        var f = inp.files && inp.files[0]; inp.remove(); res(f || null);
+      });
+      inp.click();
+    });
+  }
+  /* Consent is per photograph and there is no "do not ask again". See pglog-photos.js. */
+  function photoConsentSheet(cb) {
+    var ph = PH(); if (!ph) return cb(false);
+    var ov = document.createElement("div");
+    ov.className = "pgl-consent-ov";
+    ov.innerHTML = '<div class="pgl-consent" role="dialog" aria-modal="true" aria-label="Photograph consent">' +
+      '<div class="pgl-consent-t">Before you photograph a patient</div>' +
+      "<ul>" + ph.GUIDANCE.map(function (g) { return "<li>" + esc(g) + "</li>"; }).join("") + "</ul>" +
+      '<label class="pgl-consent-tick"><input type="checkbox" id="pglConsentBox"><span>' + esc(ph.CONSENT_TEXT) + "</span></label>" +
+      '<div class="pgl-consent-note">' + esc(ph.STORAGE_WARNING) + "</div>" +
+      '<div class="pgl-consent-acts">' +
+        '<button class="pgl-btn ghost" id="pglConsentNo">Cancel</button>' +
+        '<button class="pgl-btn" id="pglConsentGo" disabled>Take the photograph</button>' +
+      "</div></div>";
+    document.body.appendChild(ov);
+    var box = ov.querySelector("#pglConsentBox"), go2 = ov.querySelector("#pglConsentGo");
+    box.addEventListener("change", function () { go2.disabled = !box.checked; });
+    function done(v) { try { ov.remove(); } catch (e) {} cb(v); }
+    ov.querySelector("#pglConsentNo").addEventListener("click", function () { done(false); });
+    go2.addEventListener("click", function () { if (box.checked) done(true); });
+    ov.addEventListener("click", function (e) { if (e.target === ov) done(false); });
+  }
+  function quickRemovePhoto(id) {
+    var q = quickState(), ph = PH();
+    q.photos = q.photos.filter(function (p) { return p.id !== id; });
+    if (ph) ph.remove(id);
+    render();
+  }
+
+  function quickSave() {
+    var q = quickReadInputs(), qk = QK(), st = ST(), m = M();
+    if (!qk || !st || !m) return;
+    var title = q.title || q.query;
+    if (!title) return toast("Pick or type what you did.");
+    if (q.kind !== "academic" && !q.role) return toast("Choose your role.");
+    var prefs = st.prefs() || {};
+    if (q.kind === "procedure" && quickNeedsSupervisor() && !String(q.supervisor || prefs.lastSupervisor || "").trim()) {
+      return toast("Name the consultant who supervised this.");
+    }
+    var draft = qk.quickDraft({
+      kind: q.kind, title: title, role: q.role,
+      setting: q.setting || (q.kind === "procedure" ? "ot" : (prefs.lastSetting || "opd")),
+      complications: q.complications, notes: q.notes,
+      supervisor: q.supervisor || prefs.lastSupervisor || ""
+    }, { prefs: prefs, today: todayISO(), localId: st.localId(),
+      residentId: (state.dash && state.dash.resident && state.dash.resident.id) || "",
+      programmeId: (state.dash && state.dash.programme && state.dash.programme.id) || "" });
+    if (q.photos.length) draft.attachments = q.photos.slice();
+    // Same validation the long form runs; a quick entry is never a shortcut past it.
+    var linked = !!(state.dash && state.dash.resident);
+    var v = m.validateEntry(m.entry(draft), Object.assign(validationContext(), { requireResident: linked }));
+    if (!v.ok) {
+      state.draft = m.entry(draft); state.draftErrors = v.errors;
+      toast("A couple of fields need you — opening the full form.");
+      return enter("add");
+    }
+    var saved = st.saveDraft(draft);
+    noteRecent(q.kind, title);
+    state.quick = null;
+    haptic("success");
+    if (linked && st._online() && flag("smd_pglog_server")) {
+      st.submitDraft(saved.id).then(function () {
+        toast("Logged and sent for verification.");
+        state.dash = null; enter("home"); afterChange("quick");
+      }, function () {
+        st.queueDraft(saved.id); toast("Logged. It will be submitted when you are online."); enter("home"); afterChange("quick");
+      });
+      return;
+    }
+    st.queueDraft(saved.id);
+    toast(linked ? "Logged. It will be submitted when you are online." : "Logged on this device.");
+    enter("home");
+    afterChange("quick");
+  }
+  // Anything that changed the logbook offers the (already unlocked) Drive backup a chance to run.
+  function afterChange(reason) {
+    try { var bk = BK(); if (bk && bk.maybeAuto) bk.maybeAuto(reason); } catch (e) {}
+  }
+
+  /* ── CSV / Excel ─────────────────────────────────────────────────────────────────────────
+   * The BOM is what makes Excel read this as UTF-8; without it a degree sign or a name with an
+   * accent arrives mangled. Native gets the share sheet, web gets a download. */
+  function exportCsv(which) {
+    var an = AN();
+    if (!an) return toast("The export is still loading.");
+    var entries = analyticsEntries();
+    if (!entries.length) return toast("Nothing to export yet.");
+    var opts = {};
+    if (which && which !== "all") opts.kind = which;
+    var csv = an.toCsv(entries, opts);
+    var name = "stewardmd-logbook-" + todayISO() + ".csv";
+    var body = "﻿" + csv;
+    try {
+      var C = window.Capacitor, P = C && C.Plugins;
+      if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Share) {
+        return P.Filesystem.writeFile({ path: name, data: body, directory: "CACHE", encoding: "utf8" })
+          .then(function (res) {
+            return P.Share.share({ title: "Logbook export", url: res.uri, files: [res.uri], dialogTitle: "Save or send your logbook" });
+          }).then(function () { toast("Exported."); }, function () { toast("Could not export."); });
+      }
+    } catch (e) {}
+    try {
+      var blob = new Blob([body], { type: "text/csv;charset=utf-8;" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = name; document.body.appendChild(a); a.click();
+      setTimeout(function () { try { a.remove(); URL.revokeObjectURL(url); } catch (e2) {} }, 400);
+      toast("Downloaded " + name);
+    } catch (e) { toast("Could not export."); }
+  }
+
+  /* ── Drive backup behaviour ──────────────────────────────────────────────────────────── */
+  function backupSetup() {
+    var bk = BK(); if (!bk) return;
+    var p1 = "", p2 = "";
+    try { p1 = (document.getElementById("pglBkP1") || {}).value || ""; } catch (e) {}
+    try { p2 = (document.getElementById("pglBkP2") || {}).value || ""; } catch (e) {}
+    var chk = bk.checkPassword(p1, p2);
+    if (!chk.ok) return toast(chk.message);
+    bk.unlock(p1).then(function (r) {
+      if (!r.ok) return toast(r.message || "Could not set up the backup.");
+      toast("Backup password set. Remember it — it cannot be recovered.");
+      render();
+      backupRun();
+    });
+  }
+  function backupUnlock() {
+    var bk = BK(); if (!bk) return;
+    var p1 = "";
+    try { p1 = (document.getElementById("pglBkP1") || {}).value || ""; } catch (e) {}
+    bk.unlock(p1).then(function (r) {
+      if (!r.ok) return toast(r.message || "Could not unlock.");
+      toast("Unlocked for this session.");
+      render();
+    });
+  }
+  function backupRun() {
+    var bk = BK(); if (!bk) return;
+    state.backupBusy = true; render();
+    bk.backupNow().then(function (r) {
+      state.backupBusy = false; render();
+      if (r.ok) { haptic("success"); return toast("Backed up to your Drive."); }
+      toast(r.error === "no_drive_account" ? "Sign in to Google in the app first." :
+        r.error === "locked" ? "Enter your backup password first." : "Backup failed. Try again.");
+    });
+  }
+  function backupRestore() {
+    var bk = BK(); if (!bk) return;
+    if (!window.confirm("Restore from your Drive backup? Drafts already on this phone are kept unless the backup copy is newer.")) return;
+    state.backupBusy = true; render();
+    bk.restoreNow().then(function (r) {
+      state.backupBusy = false; render();
+      if (!r.ok) {
+        return toast(r.error === "no_backup" ? "No backup found in your Drive." :
+          r.error === "wrong_password" ? "That password does not open this backup." : "Restore failed.");
+      }
+      toast("Restored " + (r.added + r.replaced) + " draft(s) and " + r.photos + " photograph(s).");
+      state.dash = null;
+      enter("home");
     });
   }
 

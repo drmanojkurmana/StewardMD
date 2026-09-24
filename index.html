@@ -88,7 +88,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/insulin.css?v=ins15">
 <link rel="stylesheet" href="/clinix.css?v=cx19-sandbox1-prolock">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
-<link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar">
+<link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
 <link rel="stylesheet" href="/icd.css?v=icd1">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
@@ -2554,9 +2554,13 @@ window.openExternal = function (u) {
 <!-- Prescription validity + schedule rules (pure). Decides which prescriptions get a verification
      QR and how long they stay valid; the QR itself is encoded by pglog-qr.js above. -->
 <script src="/rx-validity.js?v=rxv3-brands" defer></script>
+<script src="/pglog-quick.js?v=pglq1" defer></script>
+<script src="/pglog-analytics.js?v=pgla1" defer></script>
+<script src="/pglog-photos.js?v=pglp1" defer></script>
+<script src="/pglog-backup.js?v=pglb1" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag" defer></script>
 <script src="/pglog-ai.js?v=hardlocal3" defer></script>
-<script src="/pglog-screens.js?v=pgl26-del" defer></script>
+<script src="/pglog-screens.js?v=pgl27-quick" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->

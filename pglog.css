@@ -377,3 +377,87 @@ html.pgl-lock, html.pgl-lock body { overflow: hidden; }
 body.ui-v2 #pglogRoot { position: fixed !important; inset: 0 !important; background: var(--pgl-bg) !important; }
 body.ui-v2 #pglogRoot .pgl-btn { color: #fff !important; }
 body.ui-v2 #pglogRoot .pgl-btn.ghost { color: var(--pgl-ink) !important; }
+
+/* ══ Quick log · analytics · photographs · backup ════════════════════════════════════════════
+   Added with the 15-to-20-second entry path. Reuses the module's existing tokens (--pgl-*) so a
+   quick screen is visibly the same app as the long form, not a second design. */
+
+/* --- quick log --- */
+.pgl-quick-head { margin: 2px 0 14px; }
+.pgl-quick-t { font: 800 22px/1.2 var(--pgl-sans, system-ui); letter-spacing: -.02em; color: var(--pgl-ink, #101828); }
+.pgl-quick-s { margin-top: 5px; font: 500 13px/1.5 var(--pgl-sans, system-ui); color: var(--pgl-muted, #5B6779); }
+.pgl-qsec { margin: 0 0 16px; }
+.pgl-qlbl { margin: 0 0 8px; font: 700 11px/1 var(--pgl-sans, system-ui); letter-spacing: .09em; text-transform: uppercase; color: var(--pgl-muted, #5B6779); }
+.pgl-qsearch { display: flex; align-items: center; gap: 8px; padding: 0 12px; min-height: 52px;
+  border: 1px solid var(--pgl-line, #E3E8EF); border-radius: 14px; background: var(--pgl-surface, #FFFFFF); }
+.pgl-qsearch .material-symbols-rounded { color: var(--pgl-muted, #5B6779); font-size: 20px; }
+.pgl-qsearch input { flex: 1; min-width: 0; border: 0; background: transparent; outline: none;
+  font: 600 16px var(--pgl-sans, system-ui); color: var(--pgl-ink, #101828); padding: 13px 0; }
+.pgl-qmic { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--pgl-line, #E3E8EF);
+  background: var(--pgl-surface, #FFFFFF); color: var(--pgl-primary, #0F766E); display: grid; place-items: center; cursor: pointer; }
+.pgl-qmic.on { background: var(--pgl-primary, #0F766E); color: #fff; border-color: var(--pgl-primary, #0F766E); animation: pglMic 1.2s ease-in-out infinite; }
+@keyframes pglMic { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+.pgl-qlist { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.pgl-qitem { display: inline-flex; align-items: center; gap: 7px; max-width: 100%; min-height: 44px; padding: 9px 13px;
+  border: 1px solid var(--pgl-line, #E3E8EF); border-radius: 999px; background: var(--pgl-surface, #FFFFFF);
+  color: var(--pgl-ink, #101828); font: 600 13.5px var(--pgl-sans, system-ui); cursor: pointer; text-align: left; }
+.pgl-qitem span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pgl-qitem .material-symbols-rounded { font-size: 17px; color: var(--pgl-muted, #5B6779); flex: 0 0 auto; }
+.pgl-qitem.recent { border-color: color-mix(in srgb, var(--pgl-primary, #0F766E) 40%, var(--pgl-line, #E3E8EF)); }
+.pgl-qitem.recent .material-symbols-rounded { color: var(--pgl-primary, #0F766E); }
+.pgl-qitem:active { transform: scale(.98); }
+.pgl-qpicked { display: flex; align-items: center; gap: 9px; margin-top: 10px; padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--pgl-primary, #0F766E) 45%, transparent); border-radius: 14px;
+  background: color-mix(in srgb, var(--pgl-primary, #0F766E) 8%, var(--pgl-surface, #FFFFFF)); font: 600 15px var(--pgl-sans, system-ui); }
+.pgl-qpicked b { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.pgl-qpicked .material-symbols-rounded { color: var(--pgl-primary, #0F766E); }
+.pgl-qclear { flex: 0 0 auto; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent;
+  color: var(--pgl-muted, #5B6779); display: grid; place-items: center; cursor: pointer; }
+.pgl-qinput { width: 100%; box-sizing: border-box; min-height: 46px; padding: 11px 13px; border: 1px solid var(--pgl-line, #E3E8EF);
+  border-radius: 12px; background: var(--pgl-surface, #FFFFFF); color: var(--pgl-ink, #101828); font: 500 15px var(--pgl-sans, system-ui); }
+.pgl-qhint { margin-top: 8px; font: 500 11.5px/1.5 var(--pgl-sans, system-ui); color: var(--pgl-muted, #5B6779); }
+.pgl-qshots { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 9px; }
+.pgl-qshot { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border: 1px solid var(--pgl-line, #E3E8EF);
+  border-radius: 10px; font: 600 12.5px var(--pgl-sans, system-ui); color: var(--pgl-ink, #101828); }
+.pgl-qshot button { border: 0; background: none; color: var(--pgl-muted, #5B6779); cursor: pointer; display: grid; place-items: center; }
+.pgl-chip.sm { min-height: 38px; padding: 7px 12px; font-size: 13px; }
+
+/* --- photograph consent --- */
+.pgl-consent-ov { position: fixed; inset: 0; z-index: 17200; display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(8, 16, 24, .55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.pgl-consent { width: 100%; max-width: 520px; max-height: calc(100% - 44px); overflow-y: auto; box-sizing: border-box;
+  padding: 20px 20px calc(env(safe-area-inset-bottom, 0px) + 18px); border-radius: 24px 24px 0 0;
+  background: var(--pgl-surface, #FFFFFF); color: var(--pgl-ink, #101828); font-family: var(--pgl-sans, system-ui); }
+.pgl-consent-t { font: 800 19px/1.25 var(--pgl-sans, system-ui); letter-spacing: -.02em; margin-bottom: 12px; }
+.pgl-consent ul { margin: 0 0 14px; padding-left: 18px; }
+.pgl-consent li { margin: 0 0 7px; font: 500 13.5px/1.55 var(--pgl-sans, system-ui); color: var(--pgl-ink, #101828); }
+.pgl-consent-tick { display: flex; align-items: flex-start; gap: 11px; padding: 13px; border: 1px solid var(--pgl-line, #E3E8EF);
+  border-radius: 14px; font: 600 13px/1.5 var(--pgl-sans, system-ui); cursor: pointer; }
+.pgl-consent-tick input { width: 22px; height: 22px; flex: 0 0 auto; margin: 0; accent-color: var(--pgl-primary, #0F766E); }
+.pgl-consent-note { margin: 11px 0 0; font: 500 11.5px/1.5 var(--pgl-sans, system-ui); color: var(--pgl-muted, #5B6779); }
+.pgl-consent-acts { display: flex; gap: 10px; margin-top: 16px; }
+.pgl-consent-acts .pgl-btn { flex: 1; }
+
+/* --- analytics --- */
+.pgl-bars { display: flex; flex-direction: column; gap: 9px; margin-top: 12px; }
+.pgl-bar { display: grid; grid-template-columns: minmax(0, 1fr) 90px auto; align-items: center; gap: 10px; }
+.pgl-bar-l { font: 600 13px var(--pgl-sans, system-ui); color: var(--pgl-ink, #101828); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pgl-bar-t { display: block; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--pgl-line, #E3E8EF) 80%, transparent); overflow: hidden; }
+.pgl-bar-t > span { display: block; height: 100%; border-radius: 999px; background: var(--pgl-primary, #0F766E); }
+.pgl-bar-v { font: 700 13px var(--pgl-sans, system-ui); color: var(--pgl-ink, #101828); text-align: right; white-space: nowrap; }
+.pgl-bar-v small { display: block; font: 500 10.5px var(--pgl-sans, system-ui); color: var(--pgl-muted, #5B6779); }
+.pgl-bignum { font: 800 34px/1.1 var(--pgl-sans, system-ui); letter-spacing: -.03em; color: var(--pgl-ink, #101828); margin: 8px 0 4px; }
+.pgl-taglist { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+.pgl-tag { display: inline-block; padding: 5px 10px; border-radius: 999px; background: color-mix(in srgb, var(--pgl-line, #E3E8EF) 55%, transparent);
+  font: 600 11.5px var(--pgl-sans, system-ui); color: var(--pgl-ink, #101828); }
+.pgl-spark { display: flex; align-items: flex-end; gap: 3px; height: 54px; margin: 12px 0 8px; }
+.pgl-spark > span { flex: 1 1 0; min-width: 3px; border-radius: 3px 3px 0 0; background: var(--pgl-primary, #0F766E); opacity: .78; }
+
+/* --- backup switch --- */
+.pgl-switch { display: flex; align-items: flex-start; gap: 12px; margin: 12px 0; padding: 14px;
+  border: 1px solid var(--pgl-line, #E3E8EF); border-radius: 16px; background: var(--pgl-surface, #FFFFFF); cursor: pointer; }
+.pgl-switch input { width: 22px; height: 22px; flex: 0 0 auto; margin: 1px 0 0; accent-color: var(--pgl-primary, #0F766E); }
+.pgl-switch b { display: block; font: 700 14px var(--pgl-sans, system-ui); color: var(--pgl-ink, #101828); }
+.pgl-switch small { display: block; margin-top: 4px; font: 500 12px/1.5 var(--pgl-sans, system-ui); color: var(--pgl-muted, #5B6779); }
+
+@media (prefers-reduced-motion: reduce) { .pgl-qmic.on { animation: none; } }
