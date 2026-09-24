@@ -158,6 +158,85 @@
     return d.parts.filter(function (p) { return p.reg === ri; }).map(function (p) { return p.i; });
   }
 
+  // Opacity of everything that is NOT selected. null = the untouched default: today's 16% ghost
+  // when something is selected, fully opaque otherwise. The X-ray slider sets a number.
+  function ghostAlpha(hasSel, xray) {
+    if (xray == null) return hasSel ? 0.16 : 1;
+    return Math.max(0.04, Math.min(1, +xray || 0));
+  }
+  // Free cut plane across the active body's bounds b ([minx,miny,minz,maxx,maxy,maxz]). Returns
+  // [nx,ny,nz,w]; the shader discards a fragment when dot(p, n) > w. Unflipped it removes the
+  // +axis side: above (axial, y), in front (coronal, z), the patient's left (sagittal, x).
+  function freeClip(axis, t, flip, b) {
+    if (!b) return null;
+    var k = axis === "x" ? 0 : axis === "z" ? 2 : 1;
+    var pos = b[k] + (b[k + 3] - b[k]) * Math.max(0, Math.min(1, +t || 0));
+    var n = [0, 0, 0]; n[k] = flip ? -1 : 1;
+    return [n[0], n[1], n[2], flip ? -pos : pos];
+  }
+  // Undo history for hide / fade / isolate / show all: snapshots, oldest dropped past max.
+  function layerSnap(s) { return { hidden: Object.assign({}, s.hidden), faded: Object.assign({}, s.faded), isolate: !!s.isolate, bowel: !!s.bowel }; }
+  function pushHist(stack, snap, max) { stack.push(snap); while (stack.length > (max || 30)) stack.shift(); return stack; }
+  function progressLabel(done, total) {
+    var pct = total > 0 ? Math.max(0, Math.min(100, Math.floor(done / total * 100))) : 0;
+    function mb(b) { return (b / 1048576).toFixed(1); }
+    return { pct: pct, text: "Loading 3D anatomy " + pct + "%" + (total > 0 ? " (" + mb(done) + " of " + mb(total) + " MB)" : "") };
+  }
+  // Saved views store part IDS, not indices, so a view survives a manifest that re-orders parts.
+  function serializeView(s, d, name) {
+    function ids(set) { return Object.keys(set || {}).filter(function (k) { return set[k] && d.parts[+k]; }).map(function (k) { return d.parts[+k].id; }); }
+    var sub = s.subject, subj = null;
+    if (sub && sub.kind === "part" && d.parts[sub.i]) subj = { kind: "part", id: d.parts[sub.i].id };
+    else if (sub && sub.kind === "canon") subj = { kind: "canon", cid: sub.cid };
+    else if (sub && sub.kind === "concept") subj = { kind: "concept", id: sub.id };
+    var c = s.cam;
+    return {
+      v: 1, name: String(name || "").trim().slice(0, 40) || "View", src: s.src,
+      cam: { target: c.target.slice(), yaw: c.yaw, pitch: c.pitch, dist: c.dist },
+      sel: s.sel.filter(function (i) { return d.parts[i]; }).map(function (i) { return d.parts[i].id; }), subject: subj,
+      hidden: ids(s.hidden), faded: ids(s.faded), isolate: !!s.isolate,
+      clip: s.clip ? { axis: s.clip.axis, t: s.clip.t, flip: !!s.clip.flip } : null,
+      xray: s.xray == null ? null : s.xray, region: s.region || "", explode: s.explodeTarget || 0,
+      bowel: !!s.bowel, shell: s.shell !== false, plane: s.plane ? { m: s.plane.m, i: s.plane.i } : null
+    };
+  }
+  // Validates a stored view against the loaded manifest; unknown parts are dropped, bad input -> null.
+  function restoreView(v, d) {
+    if (!v || v.v !== 1 || !v.cam || !Array.isArray(v.cam.target)) return null;
+    function fin(x, dflt) { x = +x; return isFinite(x) ? x : dflt; }
+    function idx(list) { var o = []; (Array.isArray(list) ? list : []).forEach(function (id) { var i = d.byId[id]; if (i != null) o.push(i); }); return o; }
+    function set(list) { var o = {}; idx(list).forEach(function (i) { o[i] = 1; }); return o; }
+    var src = d.sources.some(function (x) { return x.id === v.src; }) ? v.src : "bp3d";
+    var sel = idx(v.sel), sj = v.subject, subject = null;
+    if (sj && sj.kind === "part" && d.byId[sj.id] != null) subject = { kind: "part", i: d.byId[sj.id] };
+    else if (sj && sj.kind === "canon" && d.canon[sj.cid]) subject = { kind: "canon", cid: sj.cid };
+    else if (sj && sj.kind === "concept" && d.conceptById[sj.id]) subject = { kind: "concept", id: sj.id };
+    var cl = v.clip && /^[xyz]$/.test(v.clip.axis) ? { axis: v.clip.axis, t: Math.max(0, Math.min(1, fin(v.clip.t, 0.5))), flip: !!v.clip.flip } : null;
+    var pl = v.plane && d.planes[v.plane.m] && d.planes[v.plane.m][String(v.plane.i)] ? { m: v.plane.m, i: +v.plane.i } : null;
+    return {
+      src: src, cam: { target: [0, 1, 2].map(function (k) { return fin(v.cam.target[k], 0); }), yaw: fin(v.cam.yaw, 0.45), pitch: Math.max(-1.45, Math.min(1.45, fin(v.cam.pitch, 0.12))), dist: Math.max(0.05, Math.min(12, fin(v.cam.dist, 2.7))) },
+      sel: sel, subject: sel.length ? subject : null, hidden: set(v.hidden), faded: set(v.faded), isolate: !!v.isolate && sel.length > 0,
+      clip: cl, xray: v.xray == null ? null : Math.max(0.04, Math.min(1, fin(v.xray, 1))), region: d.regions.indexOf(v.region) >= 0 ? v.region : "",
+      explode: Math.max(0, Math.min(1, fin(v.explode, 0))), bowel: !!v.bowel, shell: v.shell !== false, plane: pl
+    };
+  }
+  // "Find it" quiz: canonical structures a student can be asked to tap. Only names that are
+  // unique across the ontology, only whole structures (a partial reference mesh, a region or a
+  // "related" stand-in would make a correct tap ambiguous), and only if every mesh is on screen.
+  function quizPool(d, want, isVis) {
+    var byName = {};
+    Object.keys(d.canon).forEach(function (cid) { var n = String(d.canon[cid].name || "").toLowerCase(); byName[n] = (byName[n] || 0) + 1; });
+    return Object.keys(d.canon).filter(function (cid) {
+      var e = d.canon[cid];
+      if (e.kind !== "concept" && e.kind !== "composite") return false;
+      if (!e.name || byName[e.name.toLowerCase()] !== 1 || /[()]/.test(e.name)) return false;
+      var idxs = quizParts(e, want);
+      return idxs.length > 0 && idxs.every(isVis);
+    }).sort();
+  }
+  function quizParts(e, want) { return want === 1 ? (e.live || []) : (e.coverage === "full" ? (e.parts || []) : []); }
+  function fileSlug(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48) || "view"; }
+
   /* ---------- tiny mat4 (column-major, WebGL order) ---------- */
   function perspective(fovDeg, aspect, near, far) {
     var f = 1 / Math.tan(fovDeg * Math.PI / 360), nf = 1 / (near - far);
@@ -189,8 +268,12 @@
     visible: {}, hidden: {}, sel: [], isolate: false, region: "", explode: 0, explodeTarget: 0,
     src: "bp3d", lod: false, plane: null, view: 0, shell: true, bowel: false, _lastTap: 0, _lastTapIdx: -1,
     cam: { target: [0, 0.92, 0], yaw: 0.45, pitch: 0.12, dist: 2.7 },
-    subject: null, dirty: true, raf: 0, err: "", progress: 0, _tab: "about", _prevFocus: null, from: null
+    subject: null, dirty: true, raf: 0, err: "", progress: 0, _tab: "about", _prevFocus: null, from: null,
+    // premium controls; each null/empty value leaves the default view exactly as before
+    faded: {}, xray: null, clip: null, hist: [], quiz: null, failed: {}, lost: false,
+    bytesDone: 0, bytesTotal: 0, counted: {}, _ghostA: 0.16, _othersOpaque: 1, _bounds: {}
   };
+  var HINT_KEY = "smd_atlas3d_hint", VIEWS_KEY = "smd_atlas3d_views", MAX_VIEWS = 20;
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
@@ -272,8 +355,10 @@
   // Pages may serve .gz already decoded (Content-Encoding) or raw; accept both by length.
   function inflate(buf, rawBytes) {
     if (buf.byteLength === rawBytes) return Promise.resolve(buf);
-    if (typeof G.DecompressionStream === "undefined" || typeof G.Blob === "undefined")
-      return Promise.reject(new Error("This browser cannot decompress the 3D data."));
+    if (typeof G.DecompressionStream === "undefined" || typeof G.Blob === "undefined") {
+      var no = new Error("This browser cannot decompress the 3D data."); no.fatal = true;
+      return Promise.reject(no);
+    }
     var stream = new G.Blob([buf]).stream().pipeThrough(new G.DecompressionStream("gzip"));
     return new G.Response(stream).arrayBuffer().then(function (out) {
       if (out.byteLength !== rawBytes) throw new Error("3D chunk size mismatch");
@@ -336,15 +421,22 @@
     var key = c.id;
     if (st.chunks[key] || st.loading[key]) return st.loading[key] || Promise.resolve();
     st.loading[key] = fetchChunk(c).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) {
-      if (st.gl) uploadChunk(c, raw);
       delete st.loading[key];
+      // A chunk that lands while the GL context is lost is dropped; the restore re-uploads it
+      // (from the on-device cache) into the new context.
+      if (!st.gl || st.lost) return;
+      uploadChunk(c, raw);
+      delete st.failed[key];
+      st.bytesDone += c.gz || c.bytes;
       // invalidate(), not a bare dirty flag: a chunk that lands after the camera has settled
       // must schedule its own frame, or the organs never appear (seen on the iPhone, where
       // the network is slower than the camera animation).
       st.loaded++; settleFrames(); paintProgress();
     }).catch(function (e) {
       delete st.loading[key];
-      st.err = e && e.message || "Could not load the 3D anatomy.";
+      // One bad chunk must not blank the whole layer: it is recorded and offered for Retry,
+      // everything that loaded stays usable. Only a browser that cannot decompress at all is fatal.
+      if (e && e.fatal) st.err = e.message; else st.failed[key] = 1;
       paintProgress();
     });
     return st.loading[key];
@@ -357,12 +449,15 @@
     st.sel.forEach(function (i) { sysNeeded[d.systems[d.parts[i].sys].id] = 1; });
     var want = srcIndex();
     if (want === 1 && st.shell) sysNeeded.integumentary = 1;
-    chunkSet().forEach(function (c) { if ((c.src || 0) === want && sysNeeded[c.system] && !st.chunks[c.id]) need.push(c); });
+    // failed chunks wait for the Retry button instead of being re-fetched on every tap
+    chunkSet().forEach(function (c) { if ((c.src || 0) === want && sysNeeded[c.system] && !st.chunks[c.id] && !st.failed[c.id]) need.push(c); });
     return need;
   }
   function ensureChunks() {
     var need = neededChunks();
     if (!need.length) return Promise.resolve();
+    // progress is in bytes: every chunk of this batch counts its gz size once
+    need.forEach(function (c) { if (!st.counted[c.id]) { st.counted[c.id] = 1; st.bytesTotal += c.gz || c.bytes; } });
     // Three in flight, like a browser's per-host budget; the rest queue.
     var cursor = 0;
     function worker() {
@@ -378,10 +473,10 @@
   var VS = [
     "attribute vec3 aPos; attribute vec3 aNrm; attribute float aPid;",
     "uniform mat4 uVP; uniform vec3 uOffset; uniform sampler2D uState;",
-    "varying vec3 vN; varying vec3 vP; varying vec3 vState; varying vec3 vPick;",
+    "varying vec3 vN; varying vec3 vP; varying vec3 vState; varying vec3 vPick; varying float vFade;",
     "void main(){",
     " vec2 uv = vec2((mod(aPid, " + STATE_W + ".0) + 0.5) / " + STATE_W + ".0, (floor(aPid / " + STATE_W + ".0) + 0.5) / " + STATE_W + ".0);",
-    " vState = texture2D(uState, uv).rgb;",
+    " vec4 st4 = texture2D(uState, uv); vState = st4.rgb; vFade = st4.a < 0.5 ? 1.0 : 0.0;",   // alpha 0 = user-faded part
     " float id = aPid + 1.0; float g = floor(id / 256.0); float b = id - g * 256.0;",
     " vPick = vec3(0.0, g / 255.0, b / 255.0);",
     " vec3 p = aPos + uOffset; vP = p; vN = aNrm;",
@@ -389,17 +484,22 @@
     "}"].join("\n");
   var FS = [
     "precision mediump float;",
-    "varying vec3 vN; varying vec3 vP; varying vec3 vState;",
+    "varying vec3 vN; varying vec3 vP; varying vec3 vState; varying float vFade;",
     "uniform vec3 uColor; uniform vec3 uEye; uniform vec3 uBg; uniform vec3 uSel; uniform float uPass; uniform float uGhost; uniform vec4 uClip; uniform float uClipOn;",
+    "uniform float uClipSel; uniform float uOthers;",
     "void main(){",
     " if (vState.r < 0.5) discard;",
-    " if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard;",
+    " bool sel = vState.g > 0.5; bool fade = vFade > 0.5 && !sel;",
+    // the registered CT cut spares the selection (uClipSel); the free cut plane cuts everything
+    " if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w && !(uClipSel > 0.5 && sel)) discard;",
     " float shell = (vState.b > 0.4 && vState.b < 0.75) ? 1.0 : 0.0;", // body outline (living CT skin)
     " if (uPass < 3.5 && shell > 0.5) discard;",                     // shell renders only in pass 4
     " if (uPass > 3.5 && shell < 0.5) discard;",
-    " if (uPass > 0.5 && uPass < 1.5 && vState.g < 0.5) discard;",   // pass 1: selection only
-    " if (uPass > 1.5 && uPass < 2.5 && vState.g > 0.5) discard;", // pass 2: ghosts only
-    " if (uPass > 2.5 && uPass < 3.5 && vState.g < 0.5) discard;",   // pass 3: selection as a see-through ghost (over the slice)
+    // pass 1: opaque = the selection, plus everything else unless it is x-rayed (uOthers 0); never a faded part
+    " if (uPass > 0.5 && uPass < 1.5 && !sel && (fade || uOthers < 0.5)) discard;",
+    // pass 2: translucent = the x-rayed rest and the faded parts
+    " if (uPass > 1.5 && uPass < 2.5 && (sel || (!fade && uOthers > 0.5))) discard;",
+    " if (uPass > 2.5 && uPass < 3.5 && !sel) discard;",   // pass 3: selection as a see-through ghost (over the slice)
     " vec3 n = normalize(vN); if (!gl_FrontFacing) n = -n;",
     " vec3 L = normalize(vec3(-0.45, 0.8, 0.55)); vec3 V = normalize(uEye - vP);",
     " float diff = max(dot(n, L), 0.0); float hemi = 0.5 + 0.5 * n.y;",
@@ -408,7 +508,7 @@
     " c = mix(c, uSel * (0.55 + 0.6 * diff) + spec, vState.g * 0.72);",
     " float dim = shell > 0.5 ? 0.0 : vState.b;",                   // the membrane is never the dim-unselected grey
     " c = mix(c, uBg, dim * 0.35);",
-    " float a = uPass > 1.5 ? uGhost : 1.0;",
+    " float a = uPass > 1.5 ? (fade ? min(uGhost, 0.14) : uGhost) : 1.0;",
     // The skin is a translucent envelope, not a solid coat: a fresnel term makes it clear where
     // you look straight through (so the organs read) and bright at the silhouette (so the body
     // reads). Warm skin tone, independent of the dim logic.
@@ -424,8 +524,9 @@
     "}"].join("\n");
   var FS_PICK = [
     "precision mediump float;",
-    "varying vec3 vState; varying vec3 vPick; varying vec3 vP; uniform vec4 uClip; uniform float uClipOn;",
-    "void main(){ if (vState.r < 0.5) discard; if (vState.b > 0.4 && vState.b < 0.75) discard; if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard; gl_FragColor = vec4(vPick, 1.0); }"].join("\n");
+    "varying vec3 vState; varying vec3 vPick; varying vec3 vP; varying float vFade; uniform vec4 uClip; uniform float uClipOn;",
+    // faded parts are see-through, so a tap passes through them to what is behind
+    "void main(){ if (vState.r < 0.5) discard; if (vState.b > 0.4 && vState.b < 0.75) discard; if (vFade > 0.5 && vState.g < 0.5) discard; if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w) discard; gl_FragColor = vec4(vPick, 1.0); }"].join("\n");
   // The CT slice itself, drawn as a textured quad on the cut plane.
   var QVS = "attribute vec3 aPos; attribute vec2 aUv; uniform mat4 uVP; varying vec2 vUv; void main(){ vUv = aUv; gl_Position = uVP * vec4(aPos, 1.0); }";
   var QFS = "precision mediump float; varying vec2 vUv; uniform sampler2D uTex; uniform float uAlpha; void main(){ vec4 t = texture2D(uTex, vUv); gl_FragColor = vec4(t.rgb, uAlpha); }";
@@ -442,13 +543,20 @@
     gl.linkProgram(p);
     if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error("link: " + gl.getProgramInfoLog(p));
     var u = {};
-    ["uVP", "uOffset", "uState", "uColor", "uEye", "uBg", "uSel", "uPass", "uGhost", "uClip", "uClipOn", "uTex", "uAlpha"].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
+    ["uVP", "uOffset", "uState", "uColor", "uEye", "uBg", "uSel", "uPass", "uGhost", "uClip", "uClipOn", "uClipSel", "uOthers", "uTex", "uAlpha"].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
     return { p: p, u: u };
   }
 
   function initGL(canvas) {
     var gl = canvas.getContext("webgl", { antialias: true, alpha: false, depth: true, preserveDrawingBuffer: false, powerPreference: "high-performance" });
     if (!gl) throw new Error("This device could not start the 3D viewer (WebGL unavailable).");
+    canvas.addEventListener("webglcontextlost", onContextLost, false);
+    canvas.addEventListener("webglcontextrestored", onContextRestored, false);
+    return buildGL(gl);
+  }
+  // Everything that lives inside a GL context. Called once per context: at open, and again on
+  // the SAME context object after webglcontextrestored (every program/buffer/texture is gone then).
+  function buildGL(gl) {
     if (!gl.getExtension("OES_element_index_uint")) throw new Error("32-bit mesh indices are not supported here.");
     if (gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS) < 1) throw new Error("This GPU cannot read part state in the vertex stage.");
     var R = { gl: gl, main: program(gl, VS, FS), pick: program(gl, VS, FS_PICK) };
@@ -468,8 +576,43 @@
     // Pick framebuffer (RGBA8 + depth), resized with the canvas.
     R.fbo = gl.createFramebuffer(); R.fboTex = gl.createTexture(); R.fboDepth = gl.createRenderbuffer(); R.fboW = 0; R.fboH = 0;
     gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);   // meshes are open shells: draw both faces
-    canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); st.err = "The 3D view was paused by the device. Close and reopen it."; paintProgress(); });
     return R;
+  }
+  // iOS drops the GL context when the app is backgrounded or memory runs short. preventDefault
+  // asks the browser to hand it back; on restore the scene is rebuilt in place and the geometry
+  // re-read (from the on-device model cache where it came from R2), so nobody closes/reopens.
+  function onContextLost(e) {
+    e.preventDefault();
+    if (e.target !== st.canvas) return;      // close() -> disposeGL() loses its own context on purpose
+    st.lost = true; st.chunks = {}; st.loaded = 0;
+    if (st.raf && G.cancelAnimationFrame) G.cancelAnimationFrame(st.raf); st.raf = 0;
+    clearTimeout(st._lostTimer);
+    // A browser that never restores gets a fresh canvas instead.
+    st._lostTimer = setTimeout(replaceCanvas, 5000);
+    paintProgress();
+  }
+  function onContextRestored(e) {
+    if (e.target !== st.canvas || !st.gl) return;
+    clearTimeout(st._lostTimer);
+    try { st.gl = buildGL(st.gl.gl); } catch (x) { st.err = x.message; paintProgress(); return; }
+    afterRestore();
+  }
+  // ponytail: last resort for a context that is never restored; a new canvas means a new context.
+  function replaceCanvas() {
+    var old = st.canvas; if (!st.lost || !old || !old.parentNode || !isOpen()) return;
+    var cv = old.cloneNode(false);
+    old.parentNode.replaceChild(cv, old); st.canvas = cv;
+    try { st.gl = initGL(cv); } catch (x) { st.err = x.message; paintProgress(); return; }
+    bindInput(cv); resizeCanvas();
+    afterRestore();
+  }
+  function afterRestore() {
+    // st.loading is kept: a fetch still in flight uploads into the new context when it lands
+    st.lost = false; st.chunks = {}; st.loaded = 0; st.counted = {}; st.bytesDone = st.bytesTotal = 0;
+    applyState();
+    if (st.plane) loadSliceTexture();
+    ensureChunks().then(function () { paintProgress(); settleFrames(); });
+    paintProgress(); settleFrames();
   }
   function uploadChunk(c, raw) {
     var gl = st.gl.gl;
@@ -520,7 +663,7 @@
       buf[o] = vis ? 255 : 0;
       buf[o + 1] = selSet[i] && !shell ? 255 : 0;
       buf[o + 2] = shell ? 128 : (hasSel && !selSet[i] && !st.isolate ? 255 : 0);
-      buf[o + 3] = 255;
+      buf[o + 3] = st.faded[i] && !shell ? 0 : 255;          // alpha 0 = faded by the user
     }
     var gl = R.gl;
     gl.bindTexture(gl.TEXTURE_2D, R.stateTex);
@@ -534,6 +677,7 @@
     return [Math.sin(a) * 0.5 * t, 0, Math.cos(a) * 0.5 * t];
   }
   function hexRgb(h) { var v = parseInt(h.slice(1), 16); return [((v >> 16) & 255) / 255, ((v >> 8) & 255) / 255, (v & 255) / 255]; }
+  function hasKeys(o) { for (var k in o) if (o[k]) return true; return false; }
 
   function drawScene(prog, pick, pass) {
     var R = st.gl, gl = R.gl, d = st.data, cam = st.cam;
@@ -546,16 +690,18 @@
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, R.stateTex); gl.uniform1i(prog.u.uState, 0);
     var clip = clipPlane(eye);
     gl.uniform4fv(prog.u.uClip, new Float32Array(clip ? clip : [0, 1, 0, 0]));
-    // The cut removes the near half of the BODY, never of the structure the user asked about:
-    // passes 1 and 3 (the selection) ignore the clip, so moving the slice away from a kidney
-    // leaves the kidney standing above the cut instead of a label over an empty slice.
-    gl.uniform1f(prog.u.uClipOn, clip && pass !== 1 && pass !== 3 ? 1 : 0);
+    gl.uniform1f(prog.u.uClipOn, clip ? 1 : 0);
     if (!pick) {
+      // The CT cut removes the near half of the BODY, never of the structure the user asked
+      // about: selected fragments ignore it, so moving the slice away from a kidney leaves the
+      // kidney standing above the cut instead of a label over an empty slice.
+      gl.uniform1f(prog.u.uClipSel, planeInfo() ? 1 : 0);
+      gl.uniform1f(prog.u.uOthers, st._othersOpaque ? 1 : 0);
       gl.uniform3fv(prog.u.uEye, new Float32Array(eye));
       gl.uniform3f(prog.u.uBg, 0.07, 0.08, 0.09);
       gl.uniform3fv(prog.u.uSel, new Float32Array(SEL_TINT));
       gl.uniform1f(prog.u.uPass, pass || 0);
-      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.26 : 0.16);
+      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.26 : st._ghostA);
     }
     var sysIdx = {}; d.systems.forEach(function (s, i) { sysIdx[s.id] = i; });
     var want = srcIndex();
@@ -578,9 +724,12 @@
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.viewport(0, 0, st.canvas.width, st.canvas.height);
     gl.clearColor(0.07, 0.08, 0.09, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    if (st.sel.length && !st.isolate) {
+    var hasSel = st.sel.length > 0 && !st.isolate, ga = ghostAlpha(hasSel, st.xray);
+    st._ghostA = ga; st._othersOpaque = ga >= 0.999;
+    if (hasSel || !st._othersOpaque || (!st.isolate && hasKeys(st.faded))) {
       // Selection opaque first, then the rest as a translucent ghost with depth writes off,
-      // so a kidney behind the colon is still visible when the CT side highlights it.
+      // so a kidney behind the colon is still visible when the CT side highlights it. The
+      // X-ray slider sets the ghost's opacity; faded parts always draw in the ghost pass.
       drawScene(R.main, false, 1);
       gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
       drawScene(R.main, false, 2);
@@ -605,7 +754,25 @@
   }
   function pickAt(x, y) {
     var R = st.gl; if (!R || !st.canvas) return -1;
-    var gl = R.gl, w = st.canvas.width, h = st.canvas.height;
+    var gl = pickPass(), h = st.canvas.height;
+    var px = new Uint8Array(4);
+    gl.readPixels(Math.round(x), Math.round(h - y), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    invalidate();
+    return decodePick(px[0], px[1], px[2]);
+  }
+  // Pixels per part in the current view's pick buffer: what a finger can actually reach.
+  function pickCounts() {
+    var R = st.gl; if (!R || !st.canvas) return {};
+    var gl = pickPass(), w = st.canvas.width, h = st.canvas.height, px = new Uint8Array(w * h * 4), out = {};
+    gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    invalidate();
+    for (var i = 0; i < px.length; i += 4) { var id = decodePick(px[i], px[i + 1], px[i + 2]); if (id >= 0) out[id] = (out[id] || 0) + 1; }
+    return out;
+  }
+  function pickPass() {
+    var R = st.gl, gl = R.gl, w = st.canvas.width, h = st.canvas.height;
     if (R.fboW !== w || R.fboH !== h) {
       gl.bindTexture(gl.TEXTURE_2D, R.fboTex);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
@@ -620,11 +787,16 @@
     gl.viewport(0, 0, w, h);
     gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     drawScene(R.pick, true);
-    var px = new Uint8Array(4);
-    gl.readPixels(Math.round(x), Math.round(h - y), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    invalidate();
-    return decodePick(px[0], px[1], px[2]);
+    return gl;
+  }
+  // Draw a frame and read it back in the same task: the drawing buffer is still intact until the
+  // browser composites, so no preserveDrawingBuffer (which costs every frame on mobile) is needed.
+  function readFrame() {
+    var R = st.gl; if (!R || !st.canvas || st.lost) return null;
+    render();
+    var gl = R.gl, w = st.canvas.width, h = st.canvas.height, px = new Uint8Array(w * h * 4);
+    gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
+    return { w: w, h: h, px: px };
   }
 
   /* ---------- cut plane (registered CT slice) ---------- */
@@ -635,12 +807,19 @@
   }
   // Keep the half of the body on the far side of the plane from the camera, so the cut face
   // (and the slice drawn on it) faces the viewer whichever way the body is turned.
+  // A registered CT slice wins; with none showing, the user's free cut plane (if any) applies.
   function clipPlane(eye) {
-    var p = planeInfo(); if (!p) return null;
+    var p = planeInfo();
+    if (!p) return st.clip ? freeClip(st.clip.axis, st.clip.t, st.clip.flip, srcBounds()) : null;
     var n = p.axis === "x" ? [1, 0, 0] : p.axis === "z" ? [0, 0, 1] : [0, 1, 0];
     var side = dot(eye, n) - p.pos;
     if (side < 0) { n = [-n[0], -n[1], -n[2]]; }
     return [n[0], n[1], n[2], dot(n, p.axis === "x" ? [p.pos, 0, 0] : p.axis === "z" ? [0, 0, p.pos] : [0, p.pos, 0])];
+  }
+  function srcBounds() {
+    var want = srcIndex();
+    if (!st._bounds[want]) st._bounds[want] = unionBounds(st.data, st.data.parts.filter(function (p) { return p.src === want; }).map(function (p) { return p.i; }));
+    return st._bounds[want];
   }
   function loadSliceTexture() {
     var R = st.gl, pl = st.plane; if (!R || !pl) return;
@@ -876,6 +1055,7 @@
       if (was === 1 && moved < 10 && Date.now() - t0 < 500 && e.type === "pointerup") {
         var dpr = cv.width / Math.max(1, cv.clientWidth);
         var hit = pickAt(p[0] * dpr, p[1] * dpr);
+        if (st.quiz) { quizTap(hit); return; }      // quiz mode: a tap is an answer, not a selection
         var now = Date.now(), dbl = hit >= 0 && hit === st._lastTapIdx && now - st._lastTap < 350;
         st._lastTap = now; st._lastTapIdx = hit;
         if (dbl) { select([hit], { kind: "part", i: hit }); focusOn([hit], { pad: 1.1 }); }
@@ -944,14 +1124,34 @@
     if (idxs && idxs.length) focusOn(idxs, { pad: 1.05 }); else resetCamera();
     paintChips(); invalidate();
   }
-  function toggleIsolate() { if (!st.sel.length) return; st.isolate = !st.isolate; applyState(); paintBar(); if (st.isolate) focusOn(st.sel, { pad: 1.2 }); invalidate(); }
-  function hideSelected() { st.sel.forEach(function (i) { st.hidden[i] = true; }); select([], null); }
-  function unhideAll() { st.hidden = {}; st.isolate = false; st.bowel = true; applyState(); paintBar(); invalidate(); }
+  function remember() { pushHist(st.hist, layerSnap(st), 30); }
+  function toggleIsolate() { if (!st.sel.length) return; remember(); st.isolate = !st.isolate; applyState(); paintBar(); if (st.isolate) focusOn(st.sel, { pad: 1.2 }); invalidate(); }
+  function hideSelected() { if (!st.sel.length) return; remember(); st.sel.forEach(function (i) { st.hidden[i] = true; }); select([], null); }
+  function allFaded() { return st.sel.length > 0 && st.sel.every(function (i) { return st.faded[i]; }); }
+  // Fade = see-through but still there. A faded selection is deselected so the fade shows;
+  // tapping Fade on an already faded structure (re-selected) restores it.
+  function toggleFade() {
+    if (!st.sel.length) return;
+    remember();
+    if (allFaded()) { st.sel.forEach(function (i) { delete st.faded[i]; }); applyState(); if (st.subject) openSheet(); paintBar(); return; }
+    st.sel.forEach(function (i) { st.faded[i] = 1; });
+    select([], null);
+  }
+  // "Show all": every user hide, fade and isolate undone at once (itself undoable).
+  function unhideAll() { remember(); st.hidden = {}; st.faded = {}; st.isolate = false; st.bowel = true; applyState(); paintBar(); if (st.subject) openSheet(); invalidate(); }
+  function undo() {
+    var s = st.hist.pop(); if (!s) return;
+    st.hidden = s.hidden; st.faded = s.faded; st.bowel = s.bowel; st.isolate = s.isolate && st.sel.length > 0;
+    applyState(); ensureChunks(); paintBar(); if (st.subject) openSheet(); invalidate();
+  }
+  function fadedCount() { var n = 0, want = srcIndex(); for (var k in st.faded) if (st.faded[k] && st.data.parts[+k] && st.data.parts[+k].src === want) n++; return n; }
   // parts hidden by the user (the living body's default-hidden bowel is a Layers switch, not a hide)
+  // Counts only the body on screen: after Reset on the reference body the living bowel defaults
+  // sit in st.hidden too, and must not show up as "Show all 3".
   function userHiddenCount() {
-    var d = st.data, n = 0, dflt = {};
-    if (d && st.src === "live" && !st.bowel) LIVE_BOWEL.forEach(function (id) { if (d.byId[id] != null) dflt[d.byId[id]] = 1; });
-    Object.keys(st.hidden).forEach(function (k) { if (!dflt[k]) n++; });
+    var d = st.data, n = 0, dflt = {}, want = srcIndex();
+    if (d && !st.bowel) LIVE_BOWEL.forEach(function (id) { if (d.byId[id] != null) dflt[d.byId[id]] = 1; });
+    Object.keys(st.hidden).forEach(function (k) { if (st.hidden[k] && !dflt[k] && d && d.parts[+k] && d.parts[+k].src === want) n++; });
     return n;
   }
   function setSystem(id, on) { st.visible[id] = !!on; applyState(); ensureChunks(); paintBar(); invalidate(); }
@@ -968,9 +1168,10 @@
       '<div class="a3d-chips" id="a3dChips"></div>' +
       '<div class="a3d-stage" id="a3dStage"><canvas id="a3dCanvas" aria-label="3D anatomy. Drag to orbit, pinch to zoom, tap a structure, double-tap to focus."></canvas>' +
         '<div class="a3d-label" id="a3dLabel" hidden></div>' +
+        '<div class="a3d-quiz" id="a3dQuiz" role="region" aria-label="Find it quiz" hidden></div>' +
         '<div class="a3d-progress" id="a3dProgress"></div></div>' +
       '<div class="a3d-bar" id="a3dBar"></div>' +
-      '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>';
+      '<div class="atlas-foot">Educational reference only, not for diagnosis.</div>';
   }
   function regionLabel(r) { return { HEAD: "Head", BRAIN: "Brain", NECK: "Neck", CHEST: "Chest", ABDOMEN: "Abdomen", PELVIS: "Pelvis", SPINE: "Spine", UPPER_LIMB: "Upper limb", LOWER_LIMB: "Lower limb", BODY: "Body" }[r] || r; }
   function paintSources() {
@@ -996,28 +1197,66 @@
   }
   function paintBar() {
     var el = G.document.getElementById("a3dBar"); if (!el || !st.data) return;
-    var hidden = userHiddenCount();
-    var pl = st.plane;
+    var hidden = userHiddenCount(), faded = fadedCount();
+    var pl = st.plane, on = function (b) { return b ? " on" : ""; }, pr = function (b) { return ' aria-pressed="' + (b ? "true" : "false") + '"'; };
     var sliceRow = pl ? '<div class="a3d-slice"><span>Slice ' + pl.i + "/" + pl.n + '</span><input type="range" min="1" max="' + pl.n + '" value="' + pl.i + '" data-a3d-act="slice" aria-label="CT slice level">' +
       '<button class="a3d-btn sm" data-a3d-act="ct" data-m="' + esc(pl.m) + '" data-s="" data-i="' + pl.i + '">Open CT</button>' +
       '<button class="a3d-btn sm" data-a3d-act="planeoff" aria-label="Hide slice">×</button></div>' : "";
-    el.innerHTML = sliceRow +
-      '<button class="a3d-btn" data-a3d-act="systems">' + (ico("layers") || "") + "Layers</button>" +
-      '<button class="a3d-btn" data-a3d-act="view" aria-label="Cycle view">' + esc({ "3q": "3/4", front: "Front", side: "Side", back: "Back", top: "Top" }[(VIEWS[st.view] || VIEWS[0]).id]) + "</button>" +
-      '<label class="a3d-explode"><span>Explode</span><input type="range" min="0" max="100" value="' + Math.round(st.explodeTarget * 100) + '" data-a3d-act="explode" aria-label="Explode systems"></label>' +
-      '<button class="a3d-btn' + (st.isolate ? " on" : "") + '" data-a3d-act="isolate"' + (st.sel.length ? "" : " disabled") + ' aria-pressed="' + (st.isolate ? "true" : "false") + '">Isolate</button>' +
-      '<button class="a3d-btn" data-a3d-act="reset">Reset</button>' +
-      (hidden ? '<button class="a3d-btn" data-a3d-act="unhide">Unhide ' + hidden + "</button>" : "");
+    var xr = Math.round((1 - ghostAlpha(st.sel.length > 0 && !st.isolate, st.xray)) * 100);
+    el.innerHTML = sliceRow + clipRowHtml() +
+      '<div class="a3d-tools">' +
+        (st.hist.length ? '<button class="a3d-btn accent" data-a3d-act="undo" aria-label="Undo the last hide, fade or isolate">Undo</button>' : "") +
+        (hidden || faded ? '<button class="a3d-btn" data-a3d-act="unhide" aria-label="Show all hidden and faded structures">Show all ' + (hidden + faded) + "</button>" : "") +
+        '<button class="a3d-btn" data-a3d-act="systems" aria-label="Layers and saved views">' + (ico("layers") || "") + "Layers</button>" +
+        '<button class="a3d-btn" data-a3d-act="view" aria-label="Cycle view">' + esc({ "3q": "3/4", front: "Front", side: "Side", back: "Back", top: "Top" }[(VIEWS[st.view] || VIEWS[0]).id]) + "</button>" +
+        '<button class="a3d-btn' + on(st.isolate) + '" data-a3d-act="isolate"' + (st.sel.length ? "" : " disabled") + pr(st.isolate) + ">Isolate</button>" +
+        '<button class="a3d-btn' + on(st.clip) + '" data-a3d-act="clip"' + pr(!!st.clip) + ' aria-label="Cut plane">Cut</button>' +
+        '<button class="a3d-btn' + on(st.quiz) + '" data-a3d-act="quiz"' + pr(!!st.quiz) + ' aria-label="Find it quiz">' + ico("target") + "Quiz</button>" +
+        '<button class="a3d-btn icon" data-a3d-act="snap" aria-label="Save or share an image of this view">' + (ico("camera") || "Image") + "</button>" +
+        '<button class="a3d-btn" data-a3d-act="reset">Reset</button>' +
+      "</div>" +
+      '<div class="a3d-sliders">' +
+        '<label class="a3d-explode"><span>Explode</span><input type="range" min="0" max="100" value="' + Math.round(st.explodeTarget * 100) + '" data-a3d-act="explode" aria-label="Explode systems"></label>' +
+        '<label class="a3d-explode"><span>X-ray</span><input type="range" min="0" max="96" value="' + xr + '" data-a3d-act="xray" aria-label="X-ray: see through everything that is not selected" aria-valuetext="' + xr + ' percent"></label>' +
+      "</div>";
+  }
+  function clipRowHtml() {
+    var c = st.clip; if (!c) return "";
+    return '<div class="a3d-cliprow" role="group" aria-label="Cut plane">' +
+      '<div class="a3d-seg" role="radiogroup" aria-label="Cut direction">' + [["y", "Axial"], ["z", "Coronal"], ["x", "Sagittal"]].map(function (a) {
+        return '<button class="a3d-segbtn' + (c.axis === a[0] ? " on" : "") + '" role="radio" aria-checked="' + (c.axis === a[0] ? "true" : "false") + '" data-a3d-act="clipaxis" data-ax="' + a[0] + '">' + a[1] + "</button>";
+      }).join("") + "</div>" +
+      '<button class="a3d-btn sm' + (c.flip ? " on" : "") + '" data-a3d-act="clipflip" aria-pressed="' + (c.flip ? "true" : "false") + '" aria-label="Flip which side is cut away">Flip</button>' +
+      '<button class="a3d-btn sm" data-a3d-act="clipoff" aria-label="Remove the cut plane">×</button>' +
+      '<label class="a3d-cutpos"><span>Position</span><input type="range" min="0" max="100" value="' + Math.round(c.t * 100) + '" data-a3d-act="clippos" aria-label="Cut position"' + (st.plane ? " disabled" : "") + "></label>" +
+      (st.plane ? '<small class="a3d-note">Paused while the CT slice is shown</small>' : "") + "</div>";
   }
   function paintProgress() {
     var el = G.document.getElementById("a3dProgress"); if (!el) return;
-    if (st.err) { el.hidden = false; el.className = "a3d-progress err"; el.textContent = st.err; return; }
-    var d = st.data, total = d ? neededChunks().length + st.loaded : 0;
-    var inflight = Object.keys(st.loading).length;
+    el.removeAttribute("role"); el.removeAttribute("aria-valuenow"); el.removeAttribute("aria-valuemin"); el.removeAttribute("aria-valuemax"); el.removeAttribute("aria-label");
+    if (st.err) { el.hidden = false; el.className = "a3d-progress err"; el.setAttribute("role", "alert"); el.textContent = st.err; return; }
+    if (st.lost) { el.hidden = false; el.className = "a3d-progress"; el.setAttribute("role", "status"); el.textContent = "Restoring the 3D view"; return; }
+    var d = st.data, inflight = Object.keys(st.loading).length;
     if (!d || inflight || neededChunks().length) {
+      var p = progressLabel(st.bytesDone, st.bytesTotal);
       el.hidden = false; el.className = "a3d-progress";
-      el.textContent = d ? "Loading 3D anatomy… " + st.loaded + "/" + Math.max(total, 1) : "Loading 3D anatomy…";
-    } else el.hidden = true;
+      el.setAttribute("role", "progressbar"); el.setAttribute("aria-label", "Loading 3D anatomy");
+      el.setAttribute("aria-valuemin", "0"); el.setAttribute("aria-valuemax", "100"); el.setAttribute("aria-valuenow", String(p.pct));
+      el.innerHTML = "<span>" + esc(d ? p.text : "Loading 3D anatomy") + '</span><i class="a3d-pbar" aria-hidden="true"><b style="width:' + p.pct + '%"></b></i>';
+      return;
+    }
+    st.bytesDone = st.bytesTotal = 0; st.counted = {};
+    if (hasKeys(st.failed)) {
+      el.hidden = false; el.className = "a3d-progress warn"; el.setAttribute("role", "status");
+      el.innerHTML = "<span>Some anatomy failed to load</span>" + '<button class="a3d-retry" data-a3d-act="retry" aria-label="Retry loading the missing anatomy">' + ico("refresh") + "Retry</button>";
+      return;
+    }
+    el.hidden = true;
+  }
+  function retryFailed() {
+    st.failed = {}; st.base = null;          // try every host again, not just the one that failed
+    ensureChunks().then(paintProgress);
+    paintProgress();
   }
   function systemsHtml() {
     var d = st.data, counts = {};
@@ -1035,11 +1274,198 @@
     return '<div class="a3d-panel" id="a3dSystems"><div class="atlas-top">' +
       '<button class="atlas-back" data-a3d-act="panelclose" aria-label="Close">‹</button>' +
       '<span class="atlas-hd"><span class="atlas-ttl">Layers</span><span class="atlas-sub">' + d.systems.length + " systems</span></span></div>" +
-      '<div class="atlas-scroll"><ul class="a3d-sys">' + lodRow + d.systems.filter(function (s) { return counts[s.id]; }).map(function (s) {
+      '<div class="atlas-scroll">' + viewsHtml() + '<h3 class="a3d-h">Layers</h3><ul class="a3d-sys">' + lodRow + d.systems.filter(function (s) { return counts[s.id]; }).map(function (s) {
         return '<li><label><input type="checkbox" data-a3d-act="sys" data-id="' + esc(s.id) + '"' + (st.visible[s.id] ? " checked" : "") + ">" +
           '<i style="background:' + esc(s.color) + '"></i><span>' + esc(s.name) + "</span><small>" + (counts[s.id] || 0) + "</small></label></li>";
       }).join("") + "</ul></div></div>";
   }
+  /* ---------- saved views (localStorage, per device) ---------- */
+  function loadViews() {
+    try { var a = JSON.parse(G.localStorage.getItem(VIEWS_KEY) || "[]"); return Array.isArray(a) ? a.filter(function (v) { return v && v.v === 1; }) : []; } catch (e) { return []; }
+  }
+  function storeViews(a) {
+    try { G.localStorage.setItem(VIEWS_KEY, JSON.stringify(a.slice(-MAX_VIEWS))); return true; } catch (e) { return false; }
+  }
+  function viewsHtml() {
+    var vs = loadViews(), srcShort = {};
+    st.data.sources.forEach(function (s) { srcShort[s.id] = s.short || s.name; });
+    return '<section class="a3d-views" aria-label="Saved views"><h3 class="a3d-h">Saved views</h3>' +
+      '<div class="a3d-vsave"><input id="a3dViewName" type="text" maxlength="40" placeholder="Name this view" aria-label="Name for this view" autocomplete="off">' +
+      '<button class="a3d-btn accent" data-a3d-act="vsave" aria-label="Save the current view">' + ico("save") + "Save</button></div>" +
+      (vs.length ? '<ul class="a3d-vlist">' + vs.map(function (v, k) {
+        var meta = [srcShort[v.src] || ""].concat(v.sel && v.sel.length ? ["selection"] : [], v.hidden && v.hidden.length ? [v.hidden.length + " hidden"] : [], v.clip ? ["cut"] : []).filter(Boolean).join(", ");
+        return '<li><button class="a3d-vload" data-a3d-act="vload" data-k="' + k + '" aria-label="Restore view ' + esc(v.name) + '"><span>' + esc(v.name) + "</span><small>" + esc(meta) + "</small></button>" +
+          '<button class="a3d-vdel" data-a3d-act="vdel" data-k="' + k + '" aria-label="Delete view ' + esc(v.name) + '">' + (ico("trash") || "×") + "</button></li>";
+      }).join("") + "</ul>" : '<p class="a3d-empty">Save the camera, selection, hidden parts and cut to come back to them.</p>') +
+      "</section>";
+  }
+  function repaintPanel() {
+    var p = G.document.getElementById("a3dSystems"); if (!p) return;
+    var sc = p.querySelector(".atlas-scroll"), top = sc ? sc.scrollTop : 0;
+    dropPanel("a3dSystems"); p = pushPanel(systemsHtml());
+    sc = p && p.querySelector(".atlas-scroll"); if (sc) sc.scrollTop = top;
+  }
+  function saveView() {
+    var inp = G.document.getElementById("a3dViewName"), vs = loadViews();
+    var name = (inp && inp.value.trim()) || ("View " + (vs.length + 1));
+    vs.push(serializeView(st, st.data, name));
+    if (!storeViews(vs)) { toast("Could not save the view on this device"); return; }
+    repaintPanel(); toast("View saved");
+  }
+  function applyView(v) {
+    var r = restoreView(v, st.data); if (!r) { toast("This view could not be restored"); return false; }
+    quizEnd();
+    if (r.src !== st.src) setSource(r.src, { keepCam: true });
+    st.bowel = r.bowel; st.shell = r.shell; st.hidden = r.hidden; st.faded = r.faded; st.clip = r.clip; st.xray = r.xray;
+    st.region = r.region; st.explodeTarget = r.explode; st.hist = [];
+    if (r.plane) setPlane(r.plane.m, r.plane.i, { noFocus: true }); else st.plane = null;
+    select(r.sel, r.subject, { noFocus: true });
+    st.isolate = r.isolate && st.sel.length > 0;
+    applyState(); ensureChunks();
+    st.camTo = r.cam; schedule();
+    paintChips(); paintBar(); invalidate();
+    return true;
+  }
+  function toast(msg) { try { if (G.SMD_toast) G.SMD_toast(msg); } catch (e) {} }
+
+  /* ---------- image snapshot + share ---------- */
+  // GL rows come back bottom-up; flip into a 2D canvas, caption with the selected structure.
+  function snapshot() {
+    var f = readFrame(); if (!f) return Promise.reject(new Error("The 3D view is not ready."));
+    var cv = G.document.createElement("canvas"); cv.width = f.w; cv.height = f.h;
+    var ctx = cv.getContext("2d"), img = ctx.createImageData(f.w, f.h), row = f.w * 4;
+    for (var y = 0; y < f.h; y++) img.data.set(f.px.subarray((f.h - 1 - y) * row, (f.h - y) * row), y * row);
+    ctx.putImageData(img, 0, 0);
+    var name = st.subject && st.data ? subjectTitle(st.data, st.subject) : "";
+    if (name) {
+      var k = f.w / Math.max(1, st.canvas.clientWidth), fs = Math.round(15 * k), pad = Math.round(10 * k);
+      ctx.font = "600 " + fs + "px -apple-system, system-ui, sans-serif";
+      var tw = ctx.measureText(name).width;
+      ctx.fillStyle = "rgba(6,102,90,0.9)"; ctx.fillRect(pad, f.h - pad * 2 - fs * 1.6, tw + pad * 2, fs * 1.6 + pad);
+      ctx.fillStyle = "#fff"; ctx.textBaseline = "middle"; ctx.fillText(name, pad * 2, f.h - pad * 1.5 - fs * 0.8);
+    }
+    var d = new Date(), stamp = d.getFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + ("0" + d.getDate()).slice(-2) + "-" + ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2);
+    var fname = "radioanatome-3d-" + fileSlug(name || (st.src === "live" ? "living-ct" : "reference-body")) + "-" + stamp + ".png";
+    return new Promise(function (res, rej) {
+      cv.toBlob(function (b) { if (b) res({ blob: b, name: fname, title: name || "3D Anatomy" }); else rej(new Error("The image could not be encoded.")); }, "image/png");
+    });
+  }
+  // Same share ladder as share-card.js: Capacitor Share on a file (native), Web Share with a
+  // File, else a download link.
+  function shareSnapshot() {
+    return snapshot().then(function (r) {
+      var C = G.Capacitor, P = C && C.Plugins;
+      if (G.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
+        return blobB64(r.blob).then(function (b64) {
+          return P.Filesystem.writeFile({ path: r.name, data: b64, directory: "CACHE" });
+        }).then(function (w) { return P.Share.share({ title: r.title, url: w.uri, dialogTitle: "Share image" }); });
+      }
+      var file = null; try { file = new G.File([r.blob], r.name, { type: "image/png" }); } catch (e) {}
+      var nav = G.navigator;
+      if (file && nav && nav.canShare && nav.share && nav.canShare({ files: [file] })) {
+        return nav.share({ files: [file], title: r.title }).catch(function (e) { if (!e || e.name !== "AbortError") downloadBlob(r.blob, r.name); });
+      }
+      downloadBlob(r.blob, r.name); toast("Image saved");
+    }).catch(function (e) { if (!e || e.name !== "AbortError") toast((e && e.message) || "Could not create the image"); });
+  }
+  function blobB64(b) { return new Promise(function (res, rej) { var fr = new G.FileReader(); fr.onload = function () { res(String(fr.result).split(",")[1] || ""); }; fr.onerror = rej; fr.readAsDataURL(b); }); }
+  function downloadBlob(b, name) {
+    var u = G.URL.createObjectURL(b), a = G.document.createElement("a");
+    a.href = u; a.download = name; G.document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { G.URL.revokeObjectURL(u); }, 4000);
+  }
+
+  /* ---------- "Find it" quiz ---------- */
+  function partOnScreen() {
+    // a part counts when its state says visible, it is not faded, and every chunk of its
+    // system in the active set has arrived (LOD chunks do not map 1:1 to part rows)
+    var d = st.data, R = st.gl, want = srcIndex(), sysLoaded = {};
+    chunkSet().forEach(function (c) { if ((c.src || 0) !== want) return; if (sysLoaded[c.system] == null) sysLoaded[c.system] = true; if (!st.chunks[c.id]) sysLoaded[c.system] = false; });
+    return function (i) {
+      var p = d.parts[i];
+      return !!p && !!R && R.stateData[i * 4] === 255 && !st.faded[i] && sysLoaded[d.systems[p.sys].id] === true;
+    };
+  }
+  function quizStart() {
+    hideResults(); dropPanel("a3dSystems"); dropPanel("a3dInfo");
+    st.quiz = { score: 0, n: 0, target: null, state: "ask", msg: "", recent: [] };
+    select([], null); quizNext();
+  }
+  function quizNext() {
+    var q = st.quiz; if (!q) return;
+    select([], null);
+    // Loaded and switched on is not enough: a lateral ventricle inside the skull is "visible"
+    // but cannot be tapped. Ask only for structures with some pixels in this view's pick buffer.
+    var want = srcIndex(), px = pickCounts(), reach = {};
+    var pool = quizPool(st.data, want, partOnScreen()).filter(function (cid) {
+      var n = 0; quizParts(st.data.canon[cid], want).forEach(function (i) { n += px[i] || 0; });
+      reach[cid] = n; return n >= 30;
+    });
+    var fresh = pool.filter(function (c) { return q.recent.indexOf(c) < 0; });
+    if (!fresh.length) { q.recent = []; fresh = pool; }
+    q.state = "ask"; q.msg = ""; q.target = fresh.length ? fresh[Math.floor(Math.random() * fresh.length)] : null;
+    q.px = q.target ? reach[q.target] : 0;
+    if (q.target) { q.recent.push(q.target); if (q.recent.length > 6) q.recent.shift(); }
+    paintQuiz(); paintBar();
+  }
+  function quizTap(hit) {
+    var q = st.quiz, d = st.data; if (!q || !q.target || q.state !== "ask" || hit < 0) return;
+    var idxs = quizParts(d.canon[q.target], srcIndex());
+    if (idxs.indexOf(hit) >= 0) {
+      q.score++; q.n++; q.state = "right"; q.msg = "Correct";
+      select(idxs, null, { noFocus: true });
+    } else {
+      q.msg = "Not quite, that is the " + d.parts[hit].name.toLowerCase() + ". Try again.";
+    }
+    paintQuiz();
+  }
+  function quizSkip() {
+    var q = st.quiz; if (!q || !q.target || q.state !== "ask") return;
+    q.n++; q.state = "shown"; q.msg = "Here it is.";
+    var idxs = quizParts(st.data.canon[q.target], srcIndex());
+    select(idxs, null, { noFocus: true });
+    paintQuiz();
+  }
+  function quizEnd() {
+    if (!st.quiz) return;
+    st.quiz = null; select([], null);
+    var el = G.document && G.document.getElementById("a3dQuiz"); if (el) { el.hidden = true; el.innerHTML = ""; }
+    paintBar();
+  }
+  function paintQuiz() {
+    var el = G.document.getElementById("a3dQuiz"), q = st.quiz; if (!el) return;
+    if (!q) { el.hidden = true; el.innerHTML = ""; return; }
+    var name = q.target ? st.data.canon[q.target].name : "";
+    el.hidden = false;
+    el.innerHTML = '<div class="a3d-qhd"><span class="a3d-qttl">Find it</span><span class="a3d-qscore" aria-label="Score ' + q.score + " of " + q.n + '">' + q.score + " / " + q.n + "</span>" +
+        '<button class="a3d-qx" data-a3d-act="quizend" aria-label="Exit quiz">' + (ico("close") || "×") + "</button></div>" +
+      '<div class="a3d-qask" aria-live="polite">' + (q.target ? "Tap the <b>" + esc(name) + "</b>" : "Nothing to find in this view yet. Zoom out, turn on more layers, or wait for the anatomy to load.") + "</div>" +
+      (q.msg ? '<div class="a3d-qmsg ' + (q.state === "right" ? "ok" : q.state === "shown" ? "info" : "bad") + '" role="status">' + esc(q.msg) + "</div>" : "") +
+      '<div class="a3d-qbtns">' + (q.state === "ask" && q.target
+        ? '<button class="a3d-btn sm" data-a3d-act="quizskip" aria-label="Skip and show the answer">Show me</button>'
+        : '<button class="a3d-btn sm accent" data-a3d-act="quiznext" aria-label="Next structure">Next</button>') + "</div>";
+  }
+
+  /* ---------- first-open gesture hint ---------- */
+  function showHint() {
+    var seen = st._hintDone; try { seen = seen || G.localStorage.getItem(HINT_KEY) === "1"; } catch (e) {}
+    var stage = G.document.getElementById("a3dStage"); if (seen || !stage || G.document.getElementById("a3dHint")) return;
+    var touch = isTouch(), rows = [["refresh", "Drag", "to rotate"], ["search", touch ? "Pinch" : "Scroll", "to zoom"], ["target", "Tap", "to select a structure"], ["eye", "Double-tap", "to focus on it"]];
+    var el = G.document.createElement("div");
+    el.id = "a3dHint"; el.className = "a3d-hint"; el.setAttribute("data-a3d-act", "hintok");
+    el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "false"); el.setAttribute("aria-labelledby", "a3dHintT");
+    el.innerHTML = '<div class="a3d-hint-card"><h3 id="a3dHintT">Explore in 3D</h3><ul>' + rows.map(function (r) {
+      return '<li><i aria-hidden="true">' + ico(r[0]) + "</i><span><b>" + r[1] + "</b> " + r[2] + "</span></li>";
+    }).join("") + '</ul><button class="a3d-btn accent" data-a3d-act="hintok">Got it</button></div>';
+    stage.appendChild(el);
+    try { el.querySelector("button").focus({ preventScroll: true }); } catch (e2) {}
+  }
+  function dismissHint() {
+    st._hintDone = true;
+    try { G.localStorage.setItem(HINT_KEY, "1"); } catch (e) {}
+    var el = G.document.getElementById("a3dHint"); if (el && el.parentNode) el.parentNode.removeChild(el);
+  }
+
   // The ONE place a source credit renders (same rule as atlas.js infoHtml). CC BY 4.0 asks
   // for: the attribution string, the licence, a link, and a note that changes were made.
   function infoHtml() {
@@ -1138,7 +1564,8 @@
         (region ? '<span class="atlas-pill">' + esc(regionLabel(region)) + "</span>" : "") +
         (fma ? '<span class="atlas-pill mono">' + esc(fma) + "</span>" : "") +
         '<button class="atlas-pill' + (st.isolate ? " on" : "") + '" data-a3d-act="isolate" aria-pressed="' + (st.isolate ? "true" : "false") + '">Isolate</button>' +
-        '<button class="atlas-pill" data-a3d-act="hide">Hide</button>' +
+        '<button class="atlas-pill" data-a3d-act="hide" aria-label="Hide this structure">Hide</button>' +
+        '<button class="atlas-pill' + (allFaded() ? " on" : "") + '" data-a3d-act="fade" aria-pressed="' + (allFaded() ? "true" : "false") + '" aria-label="' + (allFaded() ? "Restore this structure" : "Fade this structure so you can see through it") + '">' + (allFaded() ? "Unfade" : "Fade") + "</button>" +
       "</div>" +
       '<div class="atlas-tabs">' + tb("about", "About") + tb("correlate", "CT / MRI") + tb("hierarchy", "Hierarchy") + "</div>" +
       '<div class="atlas-sheet-body">' + body + "</div>";
@@ -1186,11 +1613,31 @@
     if (act === "isolate") { toggleIsolate(); if (st.subject) openSheet(); return; }
     if (act === "hide") { hideSelected(); return; }
     if (act === "unhide") { unhideAll(); return; }
-    if (act === "reset") { st.region = ""; st.isolate = false; st.hidden = {}; st.explodeTarget = 0; liveDefaults(); select([], null); applyState(); paintChips(); if (st.src === "live") focusSource(); else resetCamera(); return; }
+    if (act === "hintok") { dismissHint(); return; }
+    if (act === "reset") {
+      quizEnd();
+      st.region = ""; st.isolate = false; st.hidden = {}; st.faded = {}; st.xray = null; st.clip = null; st.hist = []; st.explodeTarget = 0;
+      liveDefaults(); select([], null); applyState(); paintChips(); paintBar(); if (st.src === "live") focusSource(); else resetCamera(); return;
+    }
     if (act === "tab") { st._tab = t.getAttribute("data-tab"); openSheet(); return; }
     if (act === "view") { cycleView(); return; }
     if (act === "planeoff") { clearPlane(); return; }
     if (!d) return;
+    if (act === "retry") { retryFailed(); return; }
+    if (act === "fade") { toggleFade(); return; }
+    if (act === "undo") { undo(); return; }
+    if (act === "clip") { st.clip = st.clip ? null : { axis: "y", t: 0.5, flip: false }; paintBar(); invalidate(); return; }
+    if (act === "clipaxis" && st.clip) { st.clip.axis = t.getAttribute("data-ax"); paintBar(); invalidate(); return; }
+    if (act === "clipflip" && st.clip) { st.clip.flip = !st.clip.flip; paintBar(); invalidate(); return; }
+    if (act === "clipoff") { st.clip = null; paintBar(); invalidate(); return; }
+    if (act === "quiz") { if (st.quiz) quizEnd(); else quizStart(); return; }
+    if (act === "quizend") { quizEnd(); return; }
+    if (act === "quizskip") { quizSkip(); return; }
+    if (act === "quiznext") { quizNext(); return; }
+    if (act === "snap") { shareSnapshot(); return; }
+    if (act === "vsave") { saveView(); return; }
+    if (act === "vload") { var v = loadViews()[+t.getAttribute("data-k")]; if (v && applyView(v)) dropPanel("a3dSystems"); return; }
+    if (act === "vdel") { var vs = loadViews(); vs.splice(+t.getAttribute("data-k"), 1); storeViews(vs); repaintPanel(); return; }
     if (act === "src") { hideResults(); setSource(t.getAttribute("data-id")); return; }
     if (act === "canon") { hideResults(); st._tab = "correlate"; selectCanon(t.getAttribute("data-c")); return; }
     if (act === "plane") { setPlane(t.getAttribute("data-m"), +t.getAttribute("data-i")); if (st.subject) openSheet(); return; }
@@ -1219,11 +1666,17 @@
     if (act === "lod") { setLod(!t.checked); var sm = t.parentNode && t.parentNode.querySelector("small"); if (sm) sm.textContent = st.lod ? "mobile LOD" : "2.3M triangles"; }
     if (act === "explode") { st.explodeTarget = (+t.value || 0) / 100; schedule(); }
     if (act === "slice" && st.plane) { setPlane(st.plane.m, +t.value, { noFocus: true }); if (st.subject) openSheet(); }
+    if (act === "xray" || act === "clippos") onInput(e);
   }
   function onInput(e) {
-    var t = e.target; if (!t || t.id !== "a3dQ") return;
-    paintResults(t.value);
+    var t = e.target; if (!t) return;
+    if (t.id === "a3dQ") { paintResults(t.value); return; }
+    var act = t.getAttribute && t.getAttribute("data-a3d-act");
+    // both sliders redraw live while dragging, so the effect is visible under the finger
+    if (act === "xray") { st.xray = 1 - (+t.value || 0) / 100; t.setAttribute("aria-valuetext", t.value + " percent"); invalidate(); }
+    if (act === "clippos" && st.clip) { st.clip.t = (+t.value || 0) / 100; invalidate(); }
   }
+  function onKey(e) { if (e.key === "Enter" && e.target && e.target.id === "a3dViewName") { e.preventDefault(); saveView(); } }
   function onSliceInput(e) {
     var t = e.target; if (!t || t.getAttribute("data-a3d-act") !== "slice" || !st.plane) return;
     var lbl = t.parentNode && t.parentNode.querySelector("span"); if (lbl) lbl.textContent = "Slice " + t.value + "/" + st.plane.n;
@@ -1242,9 +1695,11 @@
     el.removeEventListener("change", onChange); el.addEventListener("change", onChange);
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     el.removeEventListener("input", onSliceInput); el.addEventListener("input", onSliceInput);
+    el.removeEventListener("keydown", onKey); el.addEventListener("keydown", onKey);
     el.innerHTML = shellHtml();
     el.classList.add("on");
     st.err = ""; st.base = null; st.sel = []; st.subject = null; st.isolate = false; st.hidden = {}; st.region = ""; st.explodeTarget = 0; st.explode = 0;
+    st.faded = {}; st.xray = null; st.clip = null; st.hist = []; st.quiz = null; st.failed = {}; st.lost = false; st.bytesDone = st.bytesTotal = 0; st.counted = {};
     st.plane = null; st.src = "bp3d"; st.view = 0;
     try { var lodPref = G.localStorage && G.localStorage.getItem("smd_atlas3d_lod"); st.lod = lodPref == null ? isTouch() : lodPref === "1"; } catch (e3) { st.lod = isTouch(); }
     st.cam = { target: [0, 0.92, 0], yaw: 0.45, pitch: 0.12, dist: 2.7 }; st.camTo = null;
@@ -1256,6 +1711,7 @@
       try { st.gl = initGL(cv); } catch (e) { st.err = e.message; paintProgress(); return; }
       bindInput(cv);
       resizeCanvas();
+      showHint();
       paintChips(); paintBar();
       applyState();
       // Opened from a living-torso slice: land on the living body with THAT slice as the cut.
@@ -1274,6 +1730,7 @@
     var el = G.document && G.document.getElementById("smdAtlas3d");
     if (el) el.classList.remove("on");
     closeSheet(); dropPanel("a3dInfo"); dropPanel("a3dSystems");
+    st.quiz = null; clearTimeout(st._lostTimer); st.lost = false;
     disposeGL();
     if (el) el.innerHTML = "";
     try { if (st._prevFocus && st._prevFocus.focus) st._prevFocus.focus(); } catch (e) {}
@@ -1282,12 +1739,14 @@
   function isOpen() { var el = G.document && G.document.getElementById("smdAtlas3d"); return !!(el && el.classList.contains("on")); }
   function back() {
     if (!isOpen()) return false;
+    if (G.document.getElementById("a3dHint")) { dismissHint(); return true; }
     if (G.document.getElementById("a3dInfo")) { dropPanel("a3dInfo"); return true; }
     if (G.document.getElementById("a3dSystems")) { dropPanel("a3dSystems"); return true; }
     var box = G.document.getElementById("a3dResults");
     if (box && !box.hidden) { hideResults(); return true; }
     var sh = G.document.getElementById("a3dSheet");
     if (sh && sh.classList.contains("on")) { select([], null); return true; }
+    if (st.quiz) { quizEnd(); return true; }
     close();
     return true;
   }
@@ -1316,11 +1775,17 @@
   G.ATLAS3D._sheetHtml = sheetHtml;
   G.ATLAS3D._pickAt = pickAt;
   G.ATLAS3D._tick = tick;
+  G.ATLAS3D._readFrame = readFrame;
+  G.ATLAS3D._snapshot = snapshot;
+  G.ATLAS3D._applyView = applyView;
+  G.ATLAS3D._quizTap = quizTap;
   G.ATLAS3D._pure = {
     canonicalOf: canonicalOf, parseManifest: parseManifest, search: search, unionBounds: unionBounds,
     fitDistance: fitDistance, encodePick: encodePick, decodePick: decodePick, canonOfPart: canonOfPart,
     linksFor: linksFor, regionParts: regionParts, perspective: perspective, lookAt: lookAt, mul: mul, eyeFrom: eyeFrom,
-    looksLikeChunk: looksLikeChunk, dataBases: dataBases, dataUrl: dataUrl
+    looksLikeChunk: looksLikeChunk, dataBases: dataBases, dataUrl: dataUrl,
+    ghostAlpha: ghostAlpha, freeClip: freeClip, layerSnap: layerSnap, pushHist: pushHist, progressLabel: progressLabel,
+    serializeView: serializeView, restoreView: restoreView, quizPool: quizPool, fileSlug: fileSlug
   };
   G.ATLAS3D._version = "1.0";
 
