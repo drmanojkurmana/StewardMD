@@ -246,6 +246,22 @@ function percentileMin(list, p) {
   const i = Math.min(s.length - 1, Math.max(0, Math.ceil((p / 100) * s.length) - 1));
   return Math.round(s[i] / 60000);
 }
+/* Plan item 15: the owner's day close, PURE over the day's tickets. The pulse for the whole OPD, then each room
+ * (who saw how many, how long a consult took, how long patients waited for that doctor), then the day's
+ * exceptions an owner asks about: patients put ahead of the queue by reason, and check-ins taken offline.
+ * `roomOf` maps a sessionId to { room, doctor }. Counts and durations only: it names no patient. */
+export function dayClose(tickets, nowMs, roomOf) {
+  const by = {};
+  tickets.forEach((t) => { const k = t.sessionId || ""; (by[k] = by[k] || []).push(t); });
+  const rooms = Object.keys(by).map((k) => {
+    const p = opdPulse(by[k], nowMs), r = (roomOf && roomOf[k]) || {};
+    return { room: r.room || "", doctor: r.doctor || "", registered: p.registered, seen: p.seen, noShow: p.noShow,
+      consultMedianMin: p.consult.medianMin, doorToDoctorMedianMin: p.doorToDoctor.medianMin };
+  }).sort((a, b) => b.seen - a.seen || b.registered - a.registered);
+  const priority = {};
+  tickets.forEach((t) => { if ((t.priority || 0) > 0) { const r = t.priorityReason || "unstated"; priority[r] = (priority[r] || 0) + 1; } });
+  return { pulse: opdPulse(tickets, nowMs), rooms, priority, offline: tickets.filter((t) => t.offline).length };
+}
 export function opdPulse(tickets, nowMs) {
   const rows = tickets || [], now = Number.isFinite(nowMs) ? nowMs : Date.now();
   const WAIT = ["registered", "waiting", "called"];

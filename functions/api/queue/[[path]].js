@@ -45,7 +45,7 @@ import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket 
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
 import { fsCommit, wUpdate } from "../../_fbfirestore.js";
-import { orderQueue, orderRoomView, displayBoard, opdPulse } from "../../_queue_eta.js";
+import { orderQueue, orderRoomView, displayBoard, opdPulse, dayClose } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge, deviceLabel } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
@@ -6425,29 +6425,54 @@ export async function onRequest(context) {
       }
       return json({ ok: true, retried, landed, stillFailed: retried - landed }, 200, request);
     }
+    /* The day's tickets across every staffed room and the walk-in pool, for the pulse and the day close. A room
+     * whose session could not be read is NAMED, never silently dropped: figures that are quietly short read as a
+     * quiet OPD, which is the one thing these screens must never say by accident. */
+    async function opdDay(org, date) {
+      const rows = [], unread = [], roomOf = {};
+      for (const rm of await ORG.listRooms(env, org.id)) {
+        if (!resolveRoomDoctor(rm)) continue;                       // no doctor, no session, no queue
+        try {
+          const sess = await Q.getOrCreateRoomSession(env, org, rm, date);
+          if (sess) { rows.push(...(await Q.listTickets(env, sess.id))); roomOf[sess.id] = { room: rm.name || "Room", doctor: sess.doctorName || "" }; }
+        } catch (e) { unread.push(rm.name || rm.id || "room"); }
+      }
+      try {
+        const pool = await Q.getOrCreatePoolSession(env, org, date);
+        if (pool) { rows.push(...(await Q.listTickets(env, pool.id))); roomOf[pool.id] = { room: "Walk-in pool", doctor: "" }; }
+      } catch (e) { unread.push("walk-in pool"); }
+      return { rows, unread, roomOf };
+    }
     if (method === "GET" && seg === "opd-pulse") {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
       if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
       const org = await ORG.getOrg(env, orgId);
       if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
-      const date = url.searchParams.get("date") || "";
-      const rows = [];
-      /* A room whose session could not be read is NAMED, never silently dropped: a pulse that is quietly
-       * short reads as a quiet OPD, which is the one thing this screen must never say by accident. */
-      const unread = [];
-      for (const rm of await ORG.listRooms(env, orgId)) {
-        if (!resolveRoomDoctor(rm)) continue;                       // no doctor, no session, no queue
-        try {
-          const sess = await Q.getOrCreateRoomSession(env, org, rm, date);
-          if (sess) rows.push(...(await Q.listTickets(env, sess.id)));
-        } catch (e) { unread.push(rm.name || rm.id || "room"); }
-      }
-      try {
-        const pool = await Q.getOrCreatePoolSession(env, org, date);
-        if (pool) rows.push(...(await Q.listTickets(env, pool.id)));
-      } catch (e) { unread.push("walk-in pool"); }
+      const { rows, unread } = await opdDay(org, url.searchParams.get("date") || "");
       return json({ ok: true, pulse: opdPulse(rows, Date.now()), ...(unread.length ? { unread } : {}) }, 200, request);
+    }
+    /* Plan item 15: the owner's day close. The OPD by room, the day's money (takings, refunds, net, by method) and
+     * what is still open, in one read. analytics.view, the owner's and the administrator's right. The money is
+     * TODAY's on the hospital's clock (the cashier's shift report); a read that fails is said, never shown as zero. */
+    if (method === "GET" && seg === "day-close") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.ANALYTICS_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      const { rows, unread, roomOf } = await opdDay(org, "");
+      const out = { ok: true, date: Q.opdDate(""), close: dayClose(rows, Date.now(), roomOf), money: null, unbilled: null };
+      if (unread.length) out.unread = unread;
+      if (BILL.billingEnabled(env)) {
+        try {
+          const rc = org.wardsynq || {}, tzOff = rc.timeZone ? zoneOffsetAt(rc.timeZone, Date.now()) : null;
+          out.money = await BILL.shiftReport(env, orgId, Number.isFinite(tzOff) ? tzOff : Number.isFinite(rc.utcOffsetMinutes) ? rc.utcOffsetMinutes : undefined);
+          if (out.money) delete out.money.invoices;   // the close is totals; the cashier's screen lists the bills
+          out.unbilled = (await BILL.billingQueue(env, orgId)).orders.length;
+        } catch (e) { out.moneyUnread = true; }
+      }
+      return json(out, 200, request);
     }
     if (method === "GET" && seg === "opd-board") {
       const orgId = url.searchParams.get("orgId") || "";

@@ -154,6 +154,16 @@
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
   .offbar{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:39;max-width:min(560px,calc(100% - 32px));background:#fff7e6;color:#7a4b00;border:1px solid #f3d19c;border-radius:14px;padding:10px 14px;box-shadow:var(--sh-lg);font-size:13.5px;font-weight:600}
   .offbar[hidden]{display:none}
+  .dc h3{margin:0 0 2px}.dc .dc-sub{color:var(--mut);font-size:13px;margin:0 0 14px}
+  .dc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:0 0 16px}
+  .dc-k{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card)}
+  .dc-k .l{font-size:12px;color:var(--mut);font-weight:600}.dc-k .v{font-size:24px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
+  .dc-k .s{font-size:12px;color:var(--mut)}.dc-k.warn{border-color:var(--amber-line);background:var(--amber-soft)}.dc-k.warn .v{color:var(--amber)}
+  .dc h4{margin:18px 0 8px;font-size:14px}
+  .dc-t{width:100%;border-collapse:collapse;font-size:13px}.dc-t th,.dc-t td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+  .dc-t th:first-child,.dc-t td:first-child{text-align:left}.dc-t th{color:var(--mut);font-weight:600;font-size:12px}
+  .dc-chips{display:flex;flex-wrap:wrap;gap:8px}.dc-chips span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}
+  .dc-warn{background:var(--amber-soft);border:1px solid var(--amber-line);color:var(--amber);border-radius:10px;padding:10px 12px;font-size:13px;margin:8px 0}
   .offbar .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .offbar button{min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #e0b36a;background:#fff;color:#7a4b00;font-weight:700}
   .offbar .rv{margin-top:6px;font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -693,6 +703,7 @@
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="opdScanBtn" title="Scan QR code, barcode, or tap Ni-Key">&#128247; Scan</button>'+
         (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
+        (st.orgId&&st.orgId!=="demo"&&can("analytics.view")?'<button class="ghost" id="dayclose">Close the day</button>':'')+
         '<button class="ghost" id="billing">Billing</button>'+
         '<button class="ghost" id="pharmacy">Pharmacy</button>'+
         '<button class="ghost" id="ref">Refresh</button>'+
@@ -701,6 +712,7 @@
       '<section class="pulse" id="opdPulse">'+pulseInner()+'</section>'+
       inner+'</div>';
     var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
+    var dcb=document.getElementById("dayclose"); if(dcb) dcb.onclick=openDayClose;
     document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var scb=document.getElementById("opdScanBtn"); if(scb) scb.onclick=function(){ openOpdScanner(); };
@@ -806,6 +818,59 @@
     return '<div class="p-row">'+tiles+'</div>'+
       (m.note?'<div class="p-note">Desk '+pnum(m.note.deskMin,'m')+', doctor '+pnum(m.note.doctorMin,'m')+' · '+esc(m.note.text)+'</div>':'')+
       (m.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(m.unread.join(", "))+'), so these figures are short.</div>':'');
+  }
+  /* ---- plan item 15: the owner's day close (server: /day-close; figures: _queue_eta.js dayClose + the cashier's
+   * shift report). Headline first, then each room, the money, what is still open and the exceptions. A read that
+   * failed says so: an empty money box would read as a day with no takings. ---- */
+  function rupees(p){ return "\u20b9"+Math.round((p||0)/100).toLocaleString("en-IN"); }
+  function dcMin(v){ return v==null?"-":esc(v)+"m"; }
+  function dayCloseHtml(r,fu){
+    var c=r.close||{}, p=c.pulse||{}, m=r.money, rooms=c.rooms||[];
+    var k=function(l,v,s,warn){ return '<div class="dc-k'+(warn?' warn':'')+'"><div class="l">'+esc(l)+'</div><div class="v">'+v+'</div>'+(s?'<div class="s">'+s+'</div>':'')+'</div>'; };
+    var h='<div class="dc"><h3>Day close</h3><p class="dc-sub">'+esc(st.orgName||st.orgCode||"")+' &middot; '+esc(r.date||"")+' &middot; as of '+esc(new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}))+'</p>';
+    if(r.unread&&r.unread.length) h+='<div class="dc-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>';
+    h+='<div class="dc-grid">'+
+      k("Patients seen",esc(p.seen||0),esc(p.registered||0)+" registered")+
+      (m?k("Collected (net)",rupees(m.net),esc(m.count||0)+" bills"):r.moneyUnread?k("Collected","-","could not be read",true):"")+
+      k("Did not wait",p.abandonedPct==null?"-":esc(p.abandonedPct)+"%",esc(p.noShow||0)+" no-shows",(p.abandonedPct||0)>=10)+
+      k("Door to doctor",dcMin(p.doorToDoctor&&p.doorToDoctor.medianMin),"9 in 10 within "+dcMin(p.doorToDoctor&&p.doorToDoctor.p90Min))+
+    '</div>';
+    h+='<h4>By room</h4>'+(rooms.length?'<table class="dc-t"><thead><tr><th>Room</th><th>Registered</th><th>Seen</th><th>No-show</th><th>Consult</th><th>Wait</th></tr></thead><tbody>'+
+      rooms.map(function(x){ return '<tr><td>'+esc(x.room)+(x.doctor?' <span style="color:var(--mut)">'+esc(x.doctor)+'</span>':'')+'</td><td>'+esc(x.registered)+'</td><td>'+esc(x.seen)+'</td><td>'+esc(x.noShow)+'</td><td>'+dcMin(x.consultMedianMin)+'</td><td>'+dcMin(x.doorToDoctorMedianMin)+'</td></tr>'; }).join("")+
+      '</tbody></table>':'<div class="empty">No patients today.</div>');
+    h+='<h4>Money</h4>';
+    if(r.moneyUnread) h+='<div class="dc-warn">The day\'s money could not be read. Do not read this as no takings; open Billing, Shift report.</div>';
+    else if(!m) h+='<div class="empty">Billing is not switched on for this hospital.</div>';
+    else h+='<div class="dc-grid">'+k("Takings",rupees(m.total),esc(m.count||0)+" bills")+k("Refunds",rupees(m.refunds&&m.refunds.total),esc((m.refunds&&m.refunds.count)||0)+" refunds",(m.refunds&&m.refunds.count)>0)+k("Net",rupees(m.net),"")+(r.unbilled!=null?k("Not yet paid",esc(r.unbilled),"orders waiting at billing",r.unbilled>0):"")+'</div>'+
+      '<div class="dc-chips">'+["cash","upi","card","split","other"].filter(function(x){ return m.byCount&&m.byCount[x]; }).map(function(x){ return '<span>'+esc(x.toUpperCase())+' '+rupees(m.byMethod[x])+' &middot; '+esc(m.byCount[x])+'</span>'; }).join("")+'</div>';
+    var open=[["Still waiting",p.waiting],["In consultation",p.inConsultation],["At the lab or booked back",p.held],["Back with results",p.resultsBack],["Visits not in the record",p.syncFailed]];
+    if(fu) open.push(["Follow-ups to book",fu.unbooked+(fu.overdue?" ("+fu.overdue+" overdue)":"")]);
+    open=open.filter(function(x){ return x[1]&&x[1]!=="0"; });
+    h+='<h4>Still open</h4>'+(open.length?'<div class="dc-chips">'+open.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">Nothing left open.</div>');
+    var pr=Object.keys(c.priority||{}), ex=pr.map(function(x){ return ["Ahead of the queue: "+prioLabel({priority:x==="emergency"?2:1,priorityReason:x}),c.priority[x]]; });
+    if(p.recalls) ex.push(["No-shows recalled",p.recalls]);
+    if(c.offline) ex.push(["Checked in offline",c.offline]);
+    h+='<h4>Exceptions</h4>'+(ex.length?'<div class="dc-chips">'+ex.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">No one was put ahead of the queue.</div>');
+    return h+'</div>';
+  }
+  function openDayClose(){
+    open('<div class="dc"><h3>Day close</h3><div class="empty">Reading the day...</div></div>',true);
+    var now=new Date().toISOString(), fu=null;
+    var fuP=api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok) fu={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; },function(){});
+    api("day-close?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      return fuP.then(function(){
+        if(!r||!r.ok){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The day could not be read ('+esc((r&&(r.message||r.error))||"no response")+').</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; return; }
+        var body=dayCloseHtml(r,fu);
+        open(body+'<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dcPrint" style="margin:0">Print</button></div>',true);
+        sheet.querySelector("#cx").onclick=close;
+        sheet.querySelector("#dcPrint").onclick=function(){
+          var css=Array.prototype.map.call(document.querySelectorAll("style"),function(x){ return x.textContent; }).join("\n");
+          var doc='<!doctype html><html><head><meta charset="utf-8"><title>Day close</title><style>'+css+'@page{size:A4;margin:14mm}body{background:#fff;color:#111;padding:0}</style></head><body>'+body+'</body></html>';
+          var okp=false; try{ okp=!!(window.WARD_LABELS&&WARD_LABELS.printDocument(doc)); }catch(e){}
+          if(!okp) window.print();
+        };
+      });
+    },function(){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The server could not be reached.</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; });
   }
   function openNoShows(){
     open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
