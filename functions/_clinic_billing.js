@@ -82,6 +82,13 @@ export function validateTariff(item) {
    * every ward. They are never offered as OPD orders (inv-catalog lists tests and medicines only). */
   const kind = ["consultation", "medication", "service", "bed", "nursing", "visit"].indexOf(item.kind) >= 0 ? item.kind : "investigation";
   const out = { code: String(item.code || "").trim(), name: String(item.name).trim(), kind, price };
+  /* OPD plan item 9: a consultation may carry its own follow-up price (paise); absent, a follow-up costs
+   * the same as a new visit (consultFee). A negative or non-number one is refused, never silently kept. */
+  if (kind === "consultation" && item.followupPrice !== undefined && item.followupPrice !== null && item.followupPrice !== "") {
+    const fp = Math.round(Number(item.followupPrice));
+    if (!isFinite(fp) || fp < 0) return { ok: false, error: "bad_followup_price" };
+    out.followupPrice = fp;
+  }
   if (kind === "bed" || kind === "nursing" || kind === "visit") out.ward = String(item.ward || "").trim();
   if (item.doctorId !== undefined) out.doctorId = String(item.doctorId || "").trim();
   if (item.doctorName !== undefined) out.doctorName = String(item.doctorName || "").trim();

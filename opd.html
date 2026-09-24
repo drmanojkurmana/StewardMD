@@ -1753,6 +1753,8 @@
             '<div style="display:flex;align-items:center;gap:6px">' +
               '<span style="font-weight:700">₹</span>' +
               '<input type="number" min="0" step="50" style="width:90px;padding:6px 8px;margin:0" value="' + fee + '" data-docfee-id="' + esc(doc.id) + '" data-docfee-name="' + esc(doc.name) + '" data-docfee-tid="' + esc(curItem ? curItem.id : "") + '">' +
+              // OPD plan item 9: the follow-up fee (blank = same as a new visit). The free-review window is the hospital setting.
+              '<input type="number" min="0" step="50" placeholder="Follow-up" title="Follow-up fee (blank = same as new)" style="width:90px;padding:6px 8px;margin:0 0 0 6px" value="' + (curItem && curItem.followupPrice != null ? Math.round(curItem.followupPrice / 100) : "") + '" data-docfee-fu="' + esc(doc.id) + '">' +
               '<button class="btn" style="margin:0;width:auto;padding:6px 12px;font-size:12px" data-save-docfee="' + esc(doc.id) + '">Save</button>' +
             '</div>' +
           '</div>';
@@ -1800,6 +1802,7 @@
               kind: "consultation",
               code: "CONS-" + docId.replace(/[^a-zA-Z0-9]/g, "").slice(0, 10),
               price: amt,
+              followupPrice: (function(){ var fu = host.querySelector('[data-docfee-fu="' + docId + '"]'); return fu && fu.value !== "" ? Math.round(Number(fu.value) * 100) : ""; })(),
               doctorId: docId,
               doctorName: docName
             };
