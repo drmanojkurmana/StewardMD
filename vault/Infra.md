@@ -234,3 +234,6 @@ this repo uses gcloud.
 Patient data (WardSynQ MaiK gateway): the S7 rule stands. PHI goes to Vertex ONLY through the project's
 regional endpoint under a service account; express mode never carries PHI. With only an API key
 configured, PHI-carrying MaiK requests in WardSynQ refuse Vertex rather than use the key.
+
+Pages env `AI_PROVIDER` was set to `vertex` on 2026-09-24 (it had been `developer` in the project settings,
+which overrides wrangler.toml); a Pages variable change applies only to the NEXT deployment, hence this commit.
