@@ -96,7 +96,9 @@ function corsHeaders(request) {
   return {
     "Access-Control-Allow-Origin": o,
     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, X-SMD-App, X-App-Token",
+    // X-SMD-Device: the app sends it on every AI call (reasoning.js aiHeaders); without it the native
+    // streaming preflight failed and every phone answer fell back to fetch-then-replay (audit T14).
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, X-SMD-App, X-App-Token, X-SMD-Device",
     "Access-Control-Max-Age": "86400",
     "Vary": "Origin",
   };
