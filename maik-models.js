@@ -327,8 +327,9 @@
      * Direct HuggingFace URLs like the MedGemma packs: public Apache-2.0 weights, Range-resumable.
      * bytes and sha256 are the HF API's exact size and lfs.oid for each file.
      *
-     * UNGROUNDED, by owner decision (2026-09-03): these packs answer from their own weights, with no
-     * book retrieval and no evidence gate. Only MaiK Lite is grounded (maik-local.js ragEligible).
+     * GROUNDED since 2026-09-18 (the 2026-09-03 "ungrounded, only MaiK Lite" decision was reversed):
+     * like every pack CAPS marks `kb`, these read the Knowledge Base and are checked claim by claim
+     * (maik-local.js ragEligible, kb/ai/maik-grounding.js).
      * noThink: Qwen3 family, thinking traces eat the token budget on a phone. */
     "bonsai-ternary-8b": {
       label: "MAiK Prime",
@@ -473,11 +474,14 @@
    *   reasoning  1 low, 2 mid, 3 high, relative. Max > Apex ~ Bonsai > MedGemma ~ Horizon > Lite.
    *   ramGB      the total-RAM floor the pack is known to run on with the app alive beside it.
    *              Max: "needs a 12 GB phone" (its note). The two ~1.1 GB packs are the 6 GB ones.
-   *   kvGBat4k   KV cache at the 4096 context every pack loads with (llama_jni.cpp keeps n_ctx
-   *              deliberately small). f16 cache (llama_jni.cpp sets no type_k/type_v): 2 * layers *
+   *   kvGBat4k   KV cache at a 4096 context, computed as an f16 cache: 2 * layers *
    *              kvHeads * headDim * 2 B per token. Qwen3-1.7B 28x8x128 -> 0.47; Gemma 3 4B 34x4x256
    *              -> 0.57 full (less with its sliding-window cache); Qwen3-4B/8B 36x8x128 -> 0.60; the
    *              27B hybrid is not derivable this way, 1.30 fits PrismML's 5.2 GB peak figure.
+   *              Packs now load a q8_0 KV cache by default (perf plan #4, half this), so the f16
+   *              figure is a deliberate over-estimate: a device that refuses q8 falls back to f16,
+   *              and maik-local.js wantCtx() sizes the 8K headroom against it. (Comment corrected,
+   *              audit T63: it used to say llama_jni.cpp sets no type_k/type_v.)
    *              Nothing here reads a model's "128K" and believes it.
    *   lang       languages with a PASSING offline eval (test/run-local-translate-eval.mjs). Empty
    *              until measured: a model that technically emits Telugu is not thereby safe for a
