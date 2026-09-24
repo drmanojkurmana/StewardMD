@@ -616,6 +616,17 @@
       }
       window.ghisRenderWardSynqHospitals = ghisRenderWardSynqHospitals;
       window.ghisRenderAdapterHospitals = ghisRenderAdapterHospitals;
+      /* ONE CHECK'S VERDICT while the approved adapter waits for the doctor to sign in.
+       * s = { state: 'login' | 'ok' | 'blank' | 'error', quiet, polls }. A pure function so the rule can be
+       * tested on its own (test/ghis-adapter-signin.test.mjs extracts it between the markers). */
+      /*SIGNIN_VERDICT_START*/
+      function ghisSignInVerdict(s) {
+        if (s.quiet >= 2) return 'resolve';           // two quiet looks without a password box: signed in
+        if (s.state === 'login') return 'wait-login'; // the doctor's turn, however long it takes
+        if (s.polls < 40) return 'wait-load';         // the page is still arriving
+        return 'fail';                                // ~28 s of a page that never became usable
+      }
+      /*SIGNIN_VERDICT_END*/
       function adapterFail(msg) {
         var el = document.getElementById('ghisPatientList');
         if (el) el.innerHTML = '<div class="ghis-empty">' + esc(msg) + '</div>';
@@ -696,18 +707,28 @@
                  * inside the thirty-minute window. */
                 var quiet = 0, polls = 0, lastState = '';
                 function look() {
-                  if (!ctx.listeners.length) return;   // already resolved or rejected
-                  plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.readyState==='complete'?'ok':'blank'))+' '+location.host})()" })
+                  if (!ctx.listeners.length || _adapterCtx !== ctx) return;   // resolved, rejected, or the doctor moved on
+                  /* 'interactive' IS USABLE. The check used to need readyState 'complete', which waits for every
+                   * image and frame. A hospital page that keeps a frame or a slow resource loading - as GHIS does
+                   * in the Android WebView - never gets there, so a signed-in doctor was never recognised. */
+                  plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.readyState!=='loading'?'ok':'blank'))+' '+location.host})()" })
                     .then(function (r) { var v = String((r && r.result) || '').split(' '); lastState = v[0] || ''; if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { lastState = 'error'; quiet = 0; })
                     .then(function () {
-                      polls++;
-                      if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; }
-                      if (polls < 40 && ctx.listeners.length) { setTimeout(look, 700); return; }   // ~28 s: a cold sign-in redirect chain on hospital wifi took longer than 8 s (owner, 2026-09-17)
-                      /* OUT OF POLLS IS AN ANSWER, NOT A WAIT. A login form on screen is the doctor's turn
-                       * (the loggedIn listener stays armed). Anything else after forty polls (about thirty seconds) means the
-                       * hospital page never loaded, and Ward Sync used to sit on "Signing in to ..." for
-                       * ever with nothing to tap (owner, 2026-09-17). Say so, so the doctor can retry. */
-                      if (lastState !== 'login' && ctx.listeners.length) { off(); reject(new Error('Could not reach ' + host + ' in the in-app browser (the page did not load). Check the connection and try again.')); }
+                      /* THE LOGIN FORM HAS NO DEADLINE, AND NEITHER DOES OUR WATCH. After forty checks with the
+                       * password box still on screen this used to STOP checking and wait only for the native
+                       * "loggedIn" event. A doctor still typing at ~28 s, on a phone whose event never came
+                       * (Android, owner 2026-09-24), then signed in and was left on the hospital's logged-in
+                       * page for ever. Keep looking while the form is up; the page-load budget restarts once
+                       * it is gone, so a slow landing after sign-in is not failed for time spent typing. */
+                      polls = lastState === 'login' ? 0 : polls + 1;
+                      if (!ctx.listeners.length) return;
+                      var verdict = ghisSignInVerdict({ state: lastState, quiet: quiet, polls: polls });
+                      if (verdict === 'resolve') { off(); resolve(); return; }
+                      if (verdict === 'wait-login') { setTimeout(look, 1500); return; }
+                      if (verdict === 'wait-load') { setTimeout(look, 700); return; }
+                      /* OUT OF POLLS IS AN ANSWER, NOT A WAIT: the hospital page never loaded. adapterFail closes
+                       * the browser so the doctor sees this rather than a frozen page. */
+                      off(); reject(new Error('Could not reach ' + host + ' in the in-app browser (the page did not load). Check the connection and try again.'));
                     });
                 }
                 setTimeout(look, 1200);
