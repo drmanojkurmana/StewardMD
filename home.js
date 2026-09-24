@@ -6393,6 +6393,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // A drug-database answer has exactly one source; the KB titles the package carried would be
       // borrowed authority (owner transcript 2026-09-19: "4 sources" under an ondansetron dose).
       var srcArr = (r && r.engine === "drugdb") ? ["StewardMD Drugs Database (official label)"]
+        : (r && r.engine === "codedb") ? ["StewardMD ICD and scheme databases (reference data, no AI)"]
         : (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
         : ((window.SMD_MaiK && SMD_MaiK.sourceList) ? SMD_MaiK.sourceList(pkg).map(function (s) { return s.title; })
           : ((window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : []));

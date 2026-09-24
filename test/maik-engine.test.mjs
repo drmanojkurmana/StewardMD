@@ -701,5 +701,34 @@ ok("warmIfLocal still exists for the chosen engine", /function warmIfLocal/.test
   ok("a non-dose question is untouched by the dose router", lq.text === "LOCAL answer" && loc.calls.some((c) => c[0] === "local"));
 }
 
+
+// ── code lookups (owner, 2026-09-24): ICD / scheme codes come from the app's own data, before any model ──
+{
+  const ICD = { localSearch: async (q) => /benzodiazepine/i.test(q)
+    ? [{ id: "icd10:T42.4", system: "ICD-10", code: "T42.4", title: "Poisoning by, adverse effect of and underdosing of benzodiazepines", chapter: "T42", is_leaf: 1 }] : [] };
+  const offlineFetch = () => Promise.reject(new Error("offline"));
+  const c = load({ gate: true, runtime: true, pack: true });
+  c.win.SMD_ICD = ICD; c.win.fetch = offlineFetch;
+  const r = await c.win.SMD_AI.explainGrounded({ question: "ICD code of BZD poisoning" }, {});
+  ok("cloud engine: an ICD ask is answered from the bundled ICD data (BZD expanded), no model call",
+     r && r.engine === "codedb" && /T42\.4/.test(r.text) && /benzodiazepines/.test(r.text) && !c.calls.some((x) => x[0] === "explainGrounded"));
+  const l = load({ gate: true, runtime: true, pack: true });
+  l.win.SMD_ICD = ICD; l.win.fetch = offlineFetch; l.ls.setItem("stewardmd.maikEngine", "local");
+  const lr = await l.win.SMD_AI.explainGrounded({ question: "what is the icd 10 code for benzodiazepine overdose?" }, {});
+  ok("local engine: same answer, the on-device model is never asked for a code", lr && lr.engine === "codedb" && /T42\.4/.test(lr.text) && !l.calls.some((x) => x[0] === "local"));
+  const miss = load({ gate: true, runtime: true, pack: true });
+  miss.win.SMD_ICD = ICD; miss.win.fetch = offlineFetch;
+  const mr = await miss.win.SMD_AI.explainGrounded({ question: "ICD code of zzqxx syndrome" }, {});
+  ok("no match in the databases: falls through to the normal answer", mr.text === "CLOUD grounded");
+  const plain = load({ gate: true, runtime: true, pack: true });
+  plain.win.SMD_ICD = ICD; plain.win.fetch = offlineFetch;
+  const pr = await plain.win.SMD_AI.explainGrounded({ question: "treatment of benzodiazepine poisoning" }, {});
+  ok("a treatment question is not a code lookup", pr.text === "CLOUD grounded");
+  const sch = load({ gate: true, runtime: true, pack: true });
+  sch.win.SMD_ICD = ICD;
+  sch.win.fetch = async (u) => ({ ok: true, json: async () => (/schemes\/search/.test(u) ? { results: [{ treatment_code: "M1.9", treatment_name: "Poisonings with unstable vitals", package_amount: 35000, scheme_name: "Dr NTR Vaidya Seva", state: "AP" }] } : { results: [] }) });
+  const sr = await sch.win.SMD_AI.explainGrounded({ question: "aarogyasri package code for poisoning" }, {});
+  ok("a scheme ask lists the package code, name and rate from the scheme database", sr && sr.engine === "codedb" && /M1\.9/.test(sr.text) && /35000/.test(sr.text));
+}
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

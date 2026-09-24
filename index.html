@@ -2226,7 +2226,7 @@ window.openExternal = function (u) {
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1-uigroups1-thread1-gate1-free1-picker1-hap1-onepage1" defer></script>
+<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1-uigroups1-thread1-gate1-free1-picker1-hap1-onepage1-codedb1" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
@@ -2238,7 +2238,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-lite-rag.js?v=rag1" defer></script>
 <!-- Claim-level grounding verifier (2026-09-18): checks each statement of an on-device answer against the
      retrieved passages on facts (doses, drugs, figures), not wording. Loaded before maik-local.js. -->
-<script src="/kb/ai/maik-grounding.js?v=ground1-nerdrugs1" defer></script>
+<script src="/kb/ai/maik-grounding.js?v=ground1-nerdrugs1-codedb1" defer></script>
 <!-- OpenMed on-device drug/disease tagger (openmed-ner.js). Flags smd_openmed_pharma / smd_openmed_disease,
      DEFAULT OFF, and fails closed until each checkpoint licence + sha256 is pinned. -->
 <script src="/openmed-ner.js?v=openmedner1" defer></script>
