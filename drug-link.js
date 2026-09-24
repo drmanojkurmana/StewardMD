@@ -122,19 +122,52 @@
   function css() {
     if (!W || !W.document || W.document.getElementById("smd-druglink-css")) return;
     var st = W.document.createElement("style"); st.id = "smd-druglink-css";
+    // At rest a drug name is only BOLD. It glows for GLOW_MS when it scrolls into view (and on hover),
+    // then fades back, so a page full of drugs is not a page full of yellow (owner, 2026-09-24).
     st.textContent =
-      ".smd-drug{background:#fde047;color:#1f2937;font-weight:700;border-radius:3px;padding:0 2px;cursor:pointer;" +
-      "-webkit-box-decoration-break:clone;box-decoration-break:clone}" +
+      ".smd-drug{font-weight:700;color:inherit;cursor:pointer;border-radius:4px;padding:0 1px;" +
+      "-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-color .4s,box-shadow .4s}" +
+      ".smd-drug.smd-glow{animation:smdDrugGlow " + (GLOW_MS / 1000) + "s ease-out forwards}" +
+      "@keyframes smdDrugGlow{" +
+        "0%{background-color:rgba(253,224,71,0);box-shadow:0 0 0 0 rgba(250,204,21,0)}" +
+        "10%{background-color:rgba(253,224,71,.6);box-shadow:0 0 12px 3px rgba(250,204,21,.8)}" +
+        "60%{background-color:rgba(253,224,71,.45);box-shadow:0 0 8px 2px rgba(250,204,21,.55)}" +
+        "100%{background-color:rgba(253,224,71,0);box-shadow:0 0 0 0 rgba(250,204,21,0)}}" +
+      "@media (hover:hover){.smd-drug:hover{background-color:rgba(253,224,71,.45);box-shadow:0 0 8px 2px rgba(250,204,21,.6)}}" +
       ".smd-drug:focus-visible{outline:2px solid #0e6e63;outline-offset:1px}" +
-      "@media (prefers-color-scheme:dark){.smd-drug{background:#facc15;color:#111827}}" +
-      // Printed protocol sheets, discharge notes and PDFs: plain text, no highlight.
-      "@media print{.smd-drug{background:none!important;color:inherit!important;font-weight:inherit!important;padding:0!important}}";
+      "@media (prefers-reduced-motion:reduce){.smd-drug.smd-glow{animation:none;background-color:rgba(253,224,71,.45)}}" +
+      // Printed protocol sheets, discharge notes and PDFs: plain text.
+      "@media print{.smd-drug{background:none!important;box-shadow:none!important;animation:none!important;color:inherit!important;font-weight:inherit!important;padding:0!important}}";
     W.document.head.appendChild(st);
+  }
+  // ── Glow on view: an IntersectionObserver per page. A name glows when it comes into view, and is
+  // re-armed only after it has fully left the view, so small scroll jitter does not re-flash it.
+  var GLOW_MS = 5000;
+  var io = null, seenEls = (typeof WeakSet !== "undefined") ? new WeakSet() : null;
+  function glow(el) {
+    if (el._smdGlowT) return;
+    el.classList.remove("smd-glow"); void el.offsetWidth;   // restart the animation cleanly
+    el.classList.add("smd-glow");
+    el._smdGlowT = W.setTimeout(function () { el.classList.remove("smd-glow"); el._smdGlowT = null; }, GLOW_MS);
+  }
+  function observeGlow(el) {
+    if (seenEls) { if (seenEls.has(el)) return; seenEls.add(el); }
+    el.classList.remove("smd-glow");                         // a saved thread may carry a mid-glow class
+    el._smdArmed = true;
+    if (!W.IntersectionObserver) return;
+    if (!io) io = new W.IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var t = en.target;
+        if (en.isIntersecting) { if (t._smdArmed) { t._smdArmed = false; glow(t); } }
+        else t._smdArmed = true;
+      });
+    }, { threshold: 0.6 });
+    io.observe(el);
   }
   function highlight(rootEl) {
     if (!enabled() || !rootEl || !W || !W.document || !W.document.createTreeWalker) return 0;
     css();
-    var doc = W.document, tw = doc.createTreeWalker(rootEl, 4 /* SHOW_TEXT */, null, false), nodes = [], n, count = 0;
+    var doc = W.document, tw = doc.createTreeWalker(rootEl, 4 /* SHOW_TEXT */, null, false), nodes = [], n, count = 0, made = [];
     while ((n = tw.nextNode())) {
       if (!n.nodeValue || n.nodeValue.length < 4) continue;
       var p = n.parentNode;
@@ -159,11 +192,14 @@
         mk.setAttribute("role", "button"); mk.setAttribute("tabindex", "0");
         mk.setAttribute("title", "Open the " + title(h.generic) + " monograph");
         mk.textContent = h.text;
-        frag.appendChild(mk); at = h.end; count++;
+        frag.appendChild(mk); at = h.end; count++; made.push(mk);
       });
       if (at < text.length) frag.appendChild(doc.createTextNode(text.slice(at)));
       tn.parentNode.replaceChild(frag, tn);
     });
+    // New names, plus any restored from a saved MaiK thread, glow as they come into view.
+    made.forEach(observeGlow);
+    try { var old = rootEl.querySelectorAll ? rootEl.querySelectorAll(".smd-drug") : []; for (var oi = 0; oi < old.length; oi++) observeGlow(old[oi]); } catch (e) {}
     return count;
   }
   // Opened from a surface that may sit above the Drugs Database (protocol sheet, reader modes): lift the

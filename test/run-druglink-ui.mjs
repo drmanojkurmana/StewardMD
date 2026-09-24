@@ -39,9 +39,21 @@ try {
   ok(/Paracetamol/.test(card) && /monograph first/.test(card), "the card names Paracetamol and asks about the monograph first");
   ok(/Read "paracetomol" as Paracetamol/.test(card), "it says how the misspelling was read");
   ok(aiCalls.length === 0, "no answer requested yet (the question waits for the doctor): " + aiCalls.join(" "));
-  const mk = await page.evaluate(() => { const m = document.querySelector("#maikBody .maik-b.you .smd-drug"); if (!m) return null; const cs = getComputedStyle(m); return { t: m.textContent, bg: cs.backgroundColor, fw: cs.fontWeight }; });
-  ok(mk && mk.t === "paracetomol" && mk.bg === "rgb(253, 224, 71)" && +mk.fw >= 700, "the typed drug is highlighted bold yellow in the question: " + JSON.stringify(mk));
+  const state = () => page.evaluate(() => { const m = document.querySelector("#maikBody .maik-b.you .smd-drug"); if (!m) return null; const cs = getComputedStyle(m); return { t: m.textContent, glow: m.classList.contains("smd-glow"), bg: cs.backgroundColor, fw: cs.fontWeight }; });
+  const g1 = await state();
+  ok(g1 && g1.t === "paracetomol" && +g1.fw >= 700 && g1.glow, "the typed drug is bold and GLOWING as it comes into view: " + JSON.stringify(g1));
+  if (SHOTS) await page.screenshot({ path: SHOTS + "/druglink-glow.png" });
+  await page.waitForTimeout(5600);
+  const g2 = await state();
+  ok(g2 && !g2.glow && +g2.fw >= 700 && g2.bg === "rgba(0, 0, 0, 0)", "after 5 s the glow is gone: plain bold, no highlight: " + JSON.stringify(g2));
   if (SHOTS) await page.screenshot({ path: SHOTS + "/druglink-card.png" });
+  // scroll it out of view and back: it glows again
+  await page.evaluate(() => { const b = document.getElementById("maikBody"); const pad = document.createElement("div"); pad.id = "t_pad"; pad.style.minHeight = "3000px"; b.appendChild(pad); b.scrollTop = 99999; });
+  await page.waitForTimeout(500);
+  await page.evaluate(() => document.querySelector("#maikBody .maik-b.you .smd-drug").scrollIntoView({ block: "center" }));
+  await page.waitForTimeout(500);
+  ok((await state()).glow, "scrolled away and back: it glows again");
+  await page.evaluate(() => document.getElementById("t_pad").remove());
 
   await page.click('#maikBody .maik-drugask [data-maik-drugidx="Paracetamol"]');
   await page.waitForTimeout(1500);

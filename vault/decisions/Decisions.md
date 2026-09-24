@@ -201,7 +201,11 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 
 ## 2026-09-23 · Drug names are links: highlight + monograph-first in MaiK
 
-**Decision.** Owner: every drug name in a question, answer or page is bold yellow and opens that drug's
+**Decision.** Owner: every drug name in a question, answer or page is BOLD and opens that drug's
+monograph. Revised 2026-09-24 (owner: "bold and glow for 5 sec ... rather than keep it highlighted
+forever"): no permanent yellow; a name glows for 5 s when it scrolls into view (IntersectionObserver,
+re-armed only after it fully leaves the view) and on hover, then rests as plain bold. Reduced motion:
+a steady glow, no animation. Earlier wording, kept for history: the name was bold yellow and opened that drug's
 monograph (`MEDDB.openComposition`). A MaiK question naming a drug first shows a card: open the
 monograph, Just answer, or answer and don't ask again. `drug-link.js` + generated `drug-lexicon.js`
 (2,213 generics + 180 brands from `data/interaction-rules.json`, public domain), plus the Drug Index
