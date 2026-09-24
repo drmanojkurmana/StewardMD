@@ -21,6 +21,11 @@
  */
 (function (root, factory) {
   var api = factory();
+  // Recorded so buildBookAsync() (below) can ship this whole module into a Web Worker as a
+  // string - a worker has no require()/import for kb/ai files, only postMessage, so the
+  // factory's own source is the only way to get RAG.buildIndex running on the worker thread
+  // (audit T25, 2026-09-25).
+  api._factorySrc = "(" + factory.toString() + ")";
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.SMD_MAIK_RAG = api;
 })(typeof self !== "undefined" ? self : this, function () {
@@ -148,13 +153,119 @@
     return [q, extra.join(" ")];
   }
 
-  function Book(rows) {
+  /** Pure index build, split out of Book() so a Web Worker can run it off the WebView main
+   * thread (audit T25, 2026-09-25): measured 2.9s to build the real 42,176-row book, which is
+   * 2.9s of a blocked UI on the phone that owns the first question of a session. This duplicates
+   * Book()'s own inline tokenization loop below rather than sharing it, on purpose - Book(rows)
+   * with no index is the proven fallback and must keep running EXACTLY as it always has (a Map,
+   * insertion-order ids) if a worker can't be used; buildIndex() is a second, independent path
+   * whose output is proven bit-identical to the Map path in test/maik-kb-worker.test.mjs.
+   *
+   * The one real difference: term ids here are SORTED (lexicographic), not insertion order,
+   * because a Map cannot cross a postMessage/structured-clone boundary but a sorted string plus
+   * an offsets array can. off/idf/pd/pf come back already reordered into that sorted id space -
+   * this is the only extra work versus the Map path (a counting-sort remap, O(T log T + postings)). */
+  function buildIndex(rows) {
+    var rawHead = rows.map(function (r) { return (r.headings || []).join(" > "); });
+    var topic = inheritTopics(rawHead);
+    var n = rows.length;
+    var tid = new Map(), df = [], cap = 1 << 20, dT = new Int32Array(cap), dF = new Uint16Array(cap), P = 0;
+    var docStart = new Int32Array(n + 1), len = new Float64Array(n), totalLen = 0, i, e;
+    for (i = 0; i < n; i++) {
+      var d = topic[i] + " " + topic[i] + " " + rawHead[i] + " " + rows[i].text;
+      var w = toks(d), c = new Map();
+      for (var j = 0; j < w.length; j++) c.set(w[j], (c.get(w[j]) || 0) + 1);
+      var bg = bigrams(w);
+      for (var k = 0; k < bg.length; k++) c.set(bg[k], (c.get(bg[k]) || 0) + 1);
+      len[i] = w.length; totalLen += w.length;
+      docStart[i] = P;
+      c.forEach(function (v, term) {
+        var id = tid.get(term);
+        if (id === undefined) { id = df.length; tid.set(term, id); df.push(0); }
+        df[id]++;
+        if (P === cap) {
+          cap *= 2;
+          var a = new Int32Array(cap); a.set(dT); dT = a;
+          var b2 = new Uint16Array(cap); b2.set(dF); dF = b2;
+        }
+        dT[P] = id; dF[P] = v; P++;
+      });
+    }
+    docStart[n] = P;
+    var T = df.length, off = new Int32Array(T + 1), idf = new Float64Array(T), t2;
+    for (t2 = 0; t2 < T; t2++) {
+      off[t2 + 1] = off[t2] + df[t2];
+      idf[t2] = Math.log(1 + (n - df[t2] + 0.5) / (df[t2] + 0.5));
+    }
+    var pd = new Int32Array(P), pf = new Uint16Array(P), cur = off.slice(0, T);
+    for (i = 0; i < n; i++) {
+      for (e = docStart[i]; e < docStart[i + 1]; e++) { var at = cur[dT[e]]++; pd[at] = i; pf[at] = dF[e]; }
+    }
+
+    // Remap insertion-order ids -> sorted-term ids. oldTerms[oldId] recovers the term string;
+    // "order" sorts old ids by that string; sortedTerms[newId] = oldTerms[order[newId]].
+    var oldTerms = new Array(T);
+    tid.forEach(function (id, term) { oldTerms[id] = term; });
+    var order = oldTerms.map(function (_, idx2) { return idx2; }).sort(function (a, b) {
+      return oldTerms[a] < oldTerms[b] ? -1 : (oldTerms[a] > oldTerms[b] ? 1 : 0);
+    });
+    var newOff = new Int32Array(T + 1), newIdf = new Float64Array(T);
+    var newPd = new Int32Array(P), newPf = new Uint16Array(P);
+    var sortedTerms = new Array(T), starts = new Int32Array(T + 1), pos = 0;
+    for (t2 = 0; t2 < T; t2++) {
+      var oldId = order[t2], term2 = oldTerms[oldId];
+      sortedTerms[t2] = term2;
+      starts[t2] = pos; pos += term2.length + (t2 < T - 1 ? 1 : 0); // "\n"-joined below
+      newIdf[t2] = idf[oldId];
+      newOff[t2 + 1] = newOff[t2] + (off[oldId + 1] - off[oldId]);
+    }
+    starts[T] = pos;
+    for (t2 = 0; t2 < T; t2++) {
+      var oldId2 = order[t2], src = off[oldId2], cnt = off[oldId2 + 1] - src, dst = newOff[t2];
+      for (var q = 0; q < cnt; q++) { newPd[dst + q] = pd[src + q]; newPf[dst + q] = pf[src + q]; }
+    }
+    return {
+      off: newOff, idf: newIdf, pd: newPd, pf: newPf, len: len, n: n, avg: totalLen / Math.max(1, n),
+      terms: sortedTerms.join("\n"), starts: starts
+    };
+  }
+
+  /** Binary search over buildIndex()'s sorted "terms" string, standing in for the Map path's
+   * tid.get(w) so search()/idfOf() need no changes when Book was built from a worker's index
+   * (audit T25, 2026-09-25). */
+  function sortedTid(terms, starts) {
+    var T = starts.length - 1;
+    function termAt(i) { return terms.substring(starts[i], i === T - 1 ? terms.length : starts[i + 1] - 1); }
+    return {
+      get: function (w) {
+        var lo = 0, hi = T - 1;
+        while (lo <= hi) {
+          var mid = (lo + hi) >> 1, t = termAt(mid);
+          if (t === w) return mid;
+          if (t < w) lo = mid + 1; else hi = mid - 1;
+        }
+        return undefined;
+      }
+    };
+  }
+
+  function Book(rows, idx) {
     this.rows = rows;
     this.k1 = 1.5; this.b = 0.75;
     var rawHead = rows.map(function (r) { return (r.headings || []).join(" > "); });
     this.topic = inheritTopics(rawHead);
     this.head = this.topic.map(function (t, i) { return (t && t !== rawHead[i]) ? (t + " > " + rawHead[i]) : rawHead[i]; });
     this.noise = this.head.map(function (h) { return NOISE.test(h); });
+
+    if (idx) {
+      // Prebuilt off-main-thread index (buildIndex(), usually run in a Web Worker via
+      // buildBookAsync below). topic/head/noise above are cheap and always computed here on the
+      // main thread; the expensive tokenization pass is skipped entirely (audit T25, 2026-09-25).
+      this.off = idx.off; this.idf = idx.idf; this.pd = idx.pd; this.pf = idx.pf;
+      this.len = idx.len; this.n = idx.n; this.avg = idx.avg;
+      this.tid = sortedTid(idx.terms, idx.starts);
+      return;
+    }
     /* INVERTED index, built ONCE. The Python keeps one term->count dict per chunk and scans all
      * of them per query; the first port did the same with 42,176 JS Maps. A real jetsam report
      * (2026-09-03, owner's iPhone 15 Pro) showed the WebView's content process at 2.16 GB,
@@ -339,9 +450,53 @@
     return { cited: arr, any: arr.length > 0, inRange: arr.length ? arr.every(function (c) { return c >= 1 && c <= k; }) : null };
   }
 
-  return {
+  /** Build a Book off the main thread via a Web Worker, falling back to the synchronous
+   * `new Book(rows)` when a worker cannot be used - unsupported (no Worker/Blob/URL), blocked at
+   * creation (e.g. CSP), erroring, or silent for 30s (audit T25, 2026-09-25). `rows` is already
+   * parsed (the caller, kb/ai/maik-lite-kb-store.js's loadBook, needs its own copy for
+   * cite()/search() regardless); `text` is the same file's raw content, reparsed independently
+   * INSIDE the worker via buildIndex(), which needs its own copy of the rows to tokenize.
+   * The worker is built from this module's own recorded factory source (see the UMD wrapper at
+   * the top) since a worker has no require()/import for a sibling file. */
+  function buildBookAsync(rows, text) {
+    return new Promise(function (resolve, reject) {
+      function fallback() { try { resolve(new Book(rows)); } catch (e) { reject(e); } }
+      if (typeof Worker === "undefined" || typeof Blob === "undefined" ||
+          typeof URL === "undefined" || !URL.createObjectURL) { fallback(); return; }
+
+      var src = "var RAG = " + RAG_API._factorySrc + "();\n" +
+        "self.onmessage = function (ev) {\n" +
+        "  var lines = ev.data.split('\\n'), rows = [];\n" +
+        "  for (var i = 0; i < lines.length; i++) { if (!lines[i]) continue; try { rows.push(JSON.parse(lines[i])); } catch (e) {} }\n" +
+        "  var idx = RAG.buildIndex(rows);\n" +
+        "  self.postMessage(idx, [idx.off.buffer, idx.idf.buffer, idx.pd.buffer, idx.pf.buffer, idx.len.buffer, idx.starts.buffer]);\n" +
+        "};\n";
+
+      var blobUrl = null, worker = null, done = false, timer = null;
+      function cleanup() {
+        if (timer) clearTimeout(timer);
+        try { if (worker) worker.terminate(); } catch (e) {}
+        try { if (blobUrl) URL.revokeObjectURL(blobUrl); } catch (e) {}
+      }
+      try {
+        blobUrl = URL.createObjectURL(new Blob([src], { type: "application/javascript" }));
+        worker = new Worker(blobUrl);
+      } catch (e) { cleanup(); fallback(); return; }
+
+      timer = setTimeout(function () { if (done) return; done = true; cleanup(); fallback(); }, 30000);
+      worker.onmessage = function (e) {
+        if (done) return; done = true; cleanup();
+        try { resolve(new Book(rows, e.data)); } catch (err) { reject(err); }
+      };
+      worker.onerror = function () { if (done) return; done = true; cleanup(); fallback(); };
+      try { worker.postMessage(text); } catch (e) { if (!done) { done = true; cleanup(); fallback(); } }
+    });
+  }
+
+  var RAG_API = {
     Book: Book, MIN_SCORE: MIN_SCORE, TOPK: TOPK,
-    toks: toks, expand: expand,
+    toks: toks, expand: expand, buildIndex: buildIndex, buildBookAsync: buildBookAsync,
     evidenceGate: evidenceGate, citationsOf: citationsOf, drugsOf: drugsOf
   };
+  return RAG_API;
 });

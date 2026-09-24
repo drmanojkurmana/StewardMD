@@ -190,7 +190,9 @@ test("conv 5: the regimen rule is applied to TREATMENT questions only", () => {
   assert.doesNotMatch(L.systemFor("IRIS IN HIV"), /first-line regimen/);
   assert.match(L.systemFor("IRIS IN HIV"), /Answer the question that was asked/);
   assert.match(L.systemFor("What is IRIS?"), /Verify against local protocol/);
-  assert.match(LOCAL, /\(pk\.system \|\| systemFor\(pkg && pkg\.question\)\)/, "answer() uses it");
+  // Audit T24: answer() starts from the stable prompt and appends the TREAT/ASK line LAST.
+  assert.match(LOCAL, /\(pk\.system \|\| SYSTEM_STABLE\)/, "answer() starts from the stable part");
+  assert.match(LOCAL, /if \(!pk\.system\) common\.system \+= treatAskLine\(pkg && pkg\.question\);/, "and appends the per-question line at the end");
 });
 
 test("conv 5: history is carried with '; ', not ' | ', so the model does not copy pipes into its answer", () => {

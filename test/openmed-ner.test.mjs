@@ -156,7 +156,9 @@ function loadWithNer(win) {
 }
 test("maik-local: withNerDrugs is in the answer chain and passes drugs to groundAnswer", () => {
   assert.match(LOCAL, /\.then\(function \(r\) \{\n\s+return withNerDrugs\(r, grounding\);/);
-  assert.match(LOCAL, /drugs: r && r\._nerDrugs,/);
+  // The claim-check options are built once by groundOpts() (shared with the live stream view, T56).
+  assert.match(LOCAL, /G\.groundAnswer\(text, grounding\.passages, pkg && pkg\.question, groundOpts\(r && r\._nerDrugs\)\)/);
+  assert.match(LOCAL, /drugs: nerDrugs,/);
 });
 test("maik-local: withNerDrugs leaves r untouched when off / errored / ungrounded, attaches names when ready", async () => {
   const off = loadWithNer({ SMD_OPENMED_NER: { status: () => ({ ok: false }), drugNames: () => { throw new Error("must not run"); } } });
