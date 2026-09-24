@@ -1047,7 +1047,8 @@
       // [n]) or not at all; only the line still being written is shown raw, at the end, where the
       // live bubble's caret marks it as in progress. Ungrounded answers paint exactly as before.
       var _paintT = null, _paintLast = 0, _paintDirty = false, _detached = false, _doneSrc = null, _doneShown = "";
-      var _Gs = grounding && !images.length && (typeof window !== "undefined") && window.SMD_MAIK_GROUND;
+      // Persona modes (T58) keep their own lines, so their stream is not rewritten either.
+      var _Gs = grounding && !images.length && !(opts && opts.mode && MODE_SYS[opts.mode]) && (typeof window !== "undefined") && window.SMD_MAIK_GROUND;
       function streamView(s) {
         if (!_Gs || !_Gs.groundAnswer) return s;
         var cut = s.lastIndexOf("\n"), done = cut >= 0 ? s.slice(0, cut) : "", part = cut >= 0 ? s.slice(cut + 1) : s;
@@ -1229,7 +1230,20 @@
            * reference material, and only then does the reference passage stand in for the answer. */
           var g = G.groundAnswer(text, grounding.passages, pkg && pkg.question, groundOpts(r && r._nerDrugs));
           try { window.__smdLastGate = { q: pkg && pkg.question, verdict: g.verdict, stats: g.stats, removed: g.removed, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}
-          if (g.verdict === "ungrounded") {
+          /* PERSONA MODES KEEP THEIR VOICE (audit T58, 2026-09-25). A CliniX tutor or SURGX mentor
+           * turn is Socratic teaching, not a reference answer: the claim check used to gut it, or
+           * replace it with a textbook passage plus a Source line. Those two fallbacks are skipped;
+           * what still goes is any line carrying a figure the evidence does not support, or a dose
+           * it contradicts (these modes are told never to give doses anyway). */
+          var persona = !!(opts && opts.mode && MODE_SYS[opts.mode]);
+          if (persona) {
+            var bad = g.claims.filter(function (c) { return c.status === "contradicted" || (c.status === "unsupported" && /\d/.test(c.text)); });
+            text = text.split("\n").filter(function (ln) {
+              var l1 = ln.replace(/\s+/g, " ");
+              return !bad.some(function (c) { return l1.indexOf(c.text) !== -1; });
+            }).join("\n").replace(/\n{3,}/g, "\n\n").trim();
+            if (!text) return { error: EMPTY_ANSWER };
+          } else if (g.verdict === "ungrounded") {
             if (!(opts && opts._regen)) {
               // Constrained to the SAME passages, so the regenerated answer is claim-checked too (T57).
               return retry({ _regen: true, temperature: 0.2, pack: packId, _grounding: grounding });
@@ -1574,8 +1588,12 @@
     "\"I can only help with medical and clinical questions.\"";
   var WEB_SYS =
     "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. Answer the clinician's question directly, thoroughly and naturally - the way a sharp, warm senior colleague would explain it, and the way a modern medical AI answers. " +
-    "Draw on solid, widely-accepted medical knowledge for the substance of the answer; the numbered WEB RESULTS below are recent supporting sources - use them to ground specifics (agents, doses, current guidance) and cite the relevant ones inline as [n] matching the list, but do NOT merely summarise the snippets or limit yourself to what they happen to mention. " +
-    "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
+    // Audit T62 (2026-09-25): this used to say "do NOT limit yourself to what the snippets mention"
+    // while webAnswer()'s gate rejects any figure or drug the snippets do not contain, which forced a
+    // second generation or the snippet digest on almost every answer. The prompt now asks for what
+    // the gate checks: explanation from general knowledge, specifics from the results.
+    "Use solid, widely-accepted medical knowledge to explain (mechanisms, reasoning, context), but take every specific - every figure, dose, duration and drug name - from the numbered WEB RESULTS below, citing them inline as [n] matching the list. If the results give no figure for something, say so rather than supplying one. " +
+    "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give doses, routes and durations only as the results state them. " +
     "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer." + MEDICAL_ONLY_LOCAL;
   var WEB_MAX = 0;   // 0 = whatever the context window has left (owner, 2026-09-21: no token limits offline)
   /** Tokens the answer may use: the context window minus the prompt, with a margin for the chat

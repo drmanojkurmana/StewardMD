@@ -56,3 +56,30 @@ test("T26: the draft download is opt-in and never on a metered connection", asyn
   await save.L.answer({ question: "hi" }, { pack: "maik-mxcore" }, null);
   assert.deepEqual(save.calls.ensure, [], "Save-Data: never");
 });
+
+// ── T58: persona modes keep their voice ──
+const HTN = { heading: "Hypertension > Treatment", page: "p.1", chunk: 1, text: "Amlodipine 5 to 10 mg once daily is a first-line drug for hypertension. Thiazide diuretics are an alternative." };
+const BOOK = { search: () => [[12.5, 0]], cite: () => Object.assign({}, HTN), idfOf: () => 5, us: (w) => w };
+test("T58: a tutor turn is never replaced by a passage or given a Source line; an unsupported dose line still goes", async () => {
+  const tutor = "Good question. Think about what the drug does to the arteriole.\nWhy might a calcium channel blocker cause ankle swelling?\nSome give amlodipine 40 mg daily.";
+  const e = engine({ book: BOOK, text: tutor });
+  const r = await e.L.answer({ question: "why does amlodipine cause oedema in hypertension treatment" }, { pack: "maik-lite", mode: "clinix-tutor" }, null);
+  assert.equal(e.calls.generate.length, 1, "no regenerate for a persona turn");
+  assert.doesNotMatch(r.text, /reference passage|Source:/);
+  assert.match(r.text, /Think about what the drug does to the arteriole\./);
+  assert.match(r.text, /ankle swelling\?/);
+  assert.doesNotMatch(r.text, /40 mg/, "an unsupported dose is removed even in teaching mode");
+  assert.equal(r.checked, true);
+  // The ordinary (non-persona) path still falls back as before.
+  const plain = engine({ book: BOOK, text: "- Warfarin is the drug of choice." });
+  const rp = await plain.L.answer({ question: "treatment of hypertension" }, { pack: "maik-lite" }, null);
+  assert.match(rp.text, /reference passage on this topic instead/);
+});
+
+// ── T62: the web prompt asks for what the web gate checks ──
+test("T62: WEB_SYS no longer tells the model to go beyond the snippets for specifics", () => {
+  const W = engine().L.WEB_SYS;
+  assert.doesNotMatch(W, /limit yourself to what they happen to mention/);
+  assert.match(W, /take every specific - every figure, dose, duration and drug name - from the numbered WEB RESULTS/);
+  assert.match(W, /Use solid, widely-accepted medical knowledge to explain/);
+});
