@@ -60,7 +60,6 @@ try {
     try { Object.defineProperty(navigator, "clipboard", { value: { writeText: function (t) { window.__copied = t; return Promise.resolve(); } }, configurable: true }); } catch (e) {}
     return 1;`);
   await ev(`SMD_askMaik(""); return 1;`); await sleep(1200);
-  console.log("   sheet:", await ev(`return JSON.stringify({ body: !!document.getElementById("maikBody"), menu: !!document.getElementById("maikMenu"), hook: typeof window.__MAIK_TEST });`));
   ok(await click("#maikMenu") === 1, "the conversations sidebar opens"); await sleep(400);
   ok(await click('[data-conv="c1"]') === 1, "the saved conversation is in the list and opens"); await sleep(500);
 
@@ -84,6 +83,15 @@ try {
   const youAfter = await ev(`return document.querySelectorAll("#maikBody .maik-b.you").length;`);
   const last = await ev(`var y = document.querySelectorAll("#maikBody .maik-b.you"); return y[y.length - 1].textContent;`);
   ok(youAfter === youBefore + 1 && /check potassium/i.test(last), `a follow-up chip sends its question ("${last}")`);
+
+  // Close MaiK and open it again: the second restore path (the active thread, not the sidebar).
+  await ev(`window.__copied = ""; return 1;`);
+  await click("#maikClose"); await sleep(600);
+  await ev(`SMD_askMaik(""); return 1;`); await sleep(1200);
+  const t2 = JSON.parse(await ev(`return JSON.stringify(__MAIK_TEST.turns());`) || "[]");
+  ok(t2.length >= 1 && t2[0].q === Q, `after close and reopen, memory is rebuilt (${t2.length} turns)`);
+  await click("#maikBody .maik-b.ai .maik-act"); await sleep(300);
+  ok(/amlodipine 5 mg/.test(await ev(`return window.__copied || "";`)), "after close and reopen, Copy still works");
 
   console.log(fails === 0 ? "\nALL GREEN: a reopened conversation remembers and every control works" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
