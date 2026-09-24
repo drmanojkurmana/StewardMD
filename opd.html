@@ -732,6 +732,9 @@
     if(!st.orgId||st.orgId==="demo") return;
     api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
+      // Plan item 11: follow-ups promised and never booked (silent when the hospital has no record).
+      var now=new Date().toISOString();
+      if(st.pulse.ok) api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok&&st.pulse&&st.pulse.ok){ st.pulse.followups={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; paintPulse(); } }).catch(function(){});
     }).catch(function(){ st.pulse={failed:true}; paintPulse(); });
   }
   function paintPulse(){

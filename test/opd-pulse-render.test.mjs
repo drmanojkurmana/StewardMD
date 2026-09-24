@@ -102,6 +102,14 @@ test("visits missing from the clinical record are shown as a warning with a one-
   assert.ok(!/Not in record/.test(dash(Q, PULSE)), "and absent when every visit landed");
 });
 
+test("plan item 11: follow-ups promised and never booked are shown, overdue ones as a warning", () => {
+  const Q = loadQueue();
+  const html = dash(Q, { ...PULSE, followups: { unbooked: 5, overdue: 2 } });
+  assert.match(html, /Follow-ups to book/);
+  assert.match(html, /2 overdue/);
+  assert.ok(!/Follow-ups to book/.test(dash(Q, PULSE)), "absent when nothing is waiting to be booked");
+});
+
 test("rooms that could not be read are flagged rather than quietly making the day look light", () => {
   const Q = loadQueue();
   const html = dash(Q, { ...PULSE, unread: ["Room 3"] });

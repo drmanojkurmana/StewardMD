@@ -34,6 +34,8 @@
     ];
     if (p.held) tiles.push({ key: "held", label: "Awaiting result", icon: "science", value: p.held, sub: "sent for a test or booked back" });
     if (p.resultsBack) tiles.push({ key: "results", label: "Results back", icon: "lab_research", value: p.resultsBack, sub: "back in the queue with their result" });
+    // Plan item 11: follow-ups promised and never booked (scheduling.js recalls, via /ward/schedule).
+    if (r.followups && r.followups.unbooked) tiles.push({ key: "followups", label: "Follow-ups to book", icon: "event_repeat", value: r.followups.unbooked, sub: (r.followups.overdue || 0) + " overdue", warn: (r.followups.overdue || 0) > 0 });
     if (p.syncFailed) tiles.push({ key: "sync", label: "Not in record", icon: "sync_problem", value: p.syncFailed, sub: "send again", warn: true, action: "reconcile" });
     var blame = blameOf(desk, doc);
     return {

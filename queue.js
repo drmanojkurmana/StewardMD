@@ -237,7 +237,13 @@
     if (!force && st.pulseN && (st.pulseN % 4) !== 0) { st.pulseN++; return; }
     st.pulseN = (st.pulseN || 0) + 1; st.pulseBusy = true;
     apiGet("/opd-pulse?orgId=" + encodeURIComponent(st.orgId))
-      .then(function (r) { st.pulseBusy = false; st.pulse = r && r.ok ? r : { failed: true }; pulsePaint(); })
+      .then(function (r) {
+        st.pulseBusy = false; st.pulse = r && r.ok ? r : { failed: true }; pulsePaint();
+        // Plan item 11: follow-ups promised and never booked. Silent when the hospital has no record (nothing to show).
+        var now = new Date().toISOString();
+        if (st.pulse.ok) apiGet("/ward/schedule?orgId=" + encodeURIComponent(st.orgId) + "&from=" + encodeURIComponent(now) + "&to=" + encodeURIComponent(now))
+          .then(function (s) { if (s && s.ok && st.pulse && st.pulse.ok) { st.pulse.followups = { unbooked: s.unbookedRecalls || 0, overdue: s.overdueRecalls || 0 }; pulsePaint(); } }).catch(function () {});
+      })
       .catch(function () { st.pulseBusy = false; st.pulse = { failed: true }; pulsePaint(); });
   }
   /* The front desk is NOT painted by paint() - it is rendered straight into the root by
