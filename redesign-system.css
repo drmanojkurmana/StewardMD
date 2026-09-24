@@ -895,3 +895,29 @@ html body.rds-on #csOverlay, html body.rds-on #eceOverlay, html body.rds-on #abg
   font: 800 9px/1 var(--rds-font); letter-spacing: .06em; text-transform: uppercase;
   padding: 3px 5px; border-radius: 999px; color: #7a4a00; background: #ffd27a; border: 1px solid rgba(0,0,0,.08);
 }
+
+/* ── APP SHELL FEEL (owner, 2026-09-24: "gives me html vibes, not an app feel") ──────────────────
+   The tells of a web page inside a native shell, removed globally:
+   - grey tap flash and long-press callout on controls and images
+   - text selection on chrome (buttons, chips, tiles, nav) - a native app never selects its labels
+   - rubber-band overscroll of the whole document behind sheets
+   - hover styles that STICK after a touch (a touch screen has no hover) - scoped to hover-capable devices
+   - a 300 ms tap delay where touch-action is unset
+   - no press feedback: controls now compress 2% on press, spring back on release
+   Text the doctor reads (answers, notes) stays selectable. */
+html { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; overscroll-behavior: none; }
+button, [role="button"], .maik-chip, .smd-nav-btn, .ot-btn, .tile, .maik-fu, .maik-tools, summary, label, nav, header {
+  -webkit-user-select: none; user-select: none; touch-action: manipulation; -webkit-touch-callout: none;
+}
+.maik-answer, .maik-streaming, .maik-stopped-answer, p, li, td, textarea, input, [contenteditable="true"] { -webkit-user-select: text; user-select: text; }
+img, svg { -webkit-user-drag: none; user-select: none; }
+button, [role="button"], .maik-chip, .smd-nav-btn, .ot-btn { transition: transform 90ms ease-out, opacity 90ms ease-out; }
+button:active, [role="button"]:active, .maik-chip:active, .smd-nav-btn:active, .ot-btn:active { transform: scale(0.98); opacity: 0.85; }
+@media (hover: none) {
+  button:hover, [role="button"]:hover, .maik-chip:hover, .smd-nav-btn:hover, .ot-btn:hover { filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  button, [role="button"], .maik-chip, .smd-nav-btn, .ot-btn { transition: none; }
+  button:active, [role="button"]:active, .maik-chip:active, .smd-nav-btn:active, .ot-btn:active { transform: none; }
+}
+.maik-stopped { margin-top: 6px; font: 600 11px/1.4 var(--sans, system-ui); color: var(--slate-soft, #5a7184); letter-spacing: .02em; }
