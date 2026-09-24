@@ -44,7 +44,8 @@ function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = 
     release: async () => { loaded = false; return { released: true }; },
     addListener: (name, cb) => {
       calls.listeners.push(name);
-      listener = cb;
+      // Capacitor dispatches by event name; only llamaToken carries tokens (llamaReleased, T60, does not).
+      if (name === "llamaToken") listener = cb;
       return { remove: () => { calls.removed++; listener = null; } };
     }
   };

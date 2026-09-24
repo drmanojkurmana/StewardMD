@@ -216,6 +216,9 @@
       }
     },
     "maik-neural": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Neural",
       actual: "MedGemma 1.5 4B (Q5_K_M)",
       draft: DRAFT_GEMMA3,
@@ -246,6 +249,9 @@
       }
     },
     "maik-horizon": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Horizon",
       actual: "Gemma 4 E2B (Q4_K_M)",
       tier: 3,
@@ -321,8 +327,9 @@
      * Direct HuggingFace URLs like the MedGemma packs: public Apache-2.0 weights, Range-resumable.
      * bytes and sha256 are the HF API's exact size and lfs.oid for each file.
      *
-     * UNGROUNDED, by owner decision (2026-09-03): these packs answer from their own weights, with no
-     * book retrieval and no evidence gate. Only MaiK Lite is grounded (maik-local.js ragEligible).
+     * GROUNDED since 2026-09-18 (the 2026-09-03 "ungrounded, only MaiK Lite" decision was reversed):
+     * like every pack CAPS marks `kb`, these read the Knowledge Base and are checked claim by claim
+     * (maik-local.js ragEligible, kb/ai/maik-grounding.js).
      * noThink: Qwen3 family, thinking traces eat the token budget on a phone. */
     "bonsai-ternary-8b": {
       label: "MAiK Prime",
@@ -348,6 +355,9 @@
       }]
     },
     "bonsai-8b": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Swift",
       actual: "Bonsai 8B (PrismML, GGUF Q1_0 g128, 1-bit)",
       draft: DRAFT_QWEN3,
@@ -380,6 +390,9 @@
      * are exercised on a phone. UNVERIFIED on device at the time of writing: the fork runtime was
      * built, the 5.95 GB pack itself has not yet been loaded on a 12 GB phone. */
     "bonsai2-27b": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Max 2",
       actual: "Ternary Bonsai 2 27B (PrismML, GGUF PTQ1_0, 1.75-bit ternary, Qwen3.8-27B base)",
       tier: 5.5,
@@ -401,6 +414,9 @@
       }]
     },
     "bonsai-27b": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Max",
       actual: "Bonsai 27B (PrismML, GGUF Q1_0 g128, 1-bit, Qwen3.6 backbone)",
       tier: 5,
@@ -458,11 +474,14 @@
    *   reasoning  1 low, 2 mid, 3 high, relative. Max > Apex ~ Bonsai > MedGemma ~ Horizon > Lite.
    *   ramGB      the total-RAM floor the pack is known to run on with the app alive beside it.
    *              Max: "needs a 12 GB phone" (its note). The two ~1.1 GB packs are the 6 GB ones.
-   *   kvGBat4k   KV cache at the 4096 context every pack loads with (llama_jni.cpp keeps n_ctx
-   *              deliberately small). f16 cache (llama_jni.cpp sets no type_k/type_v): 2 * layers *
+   *   kvGBat4k   KV cache at a 4096 context, computed as an f16 cache: 2 * layers *
    *              kvHeads * headDim * 2 B per token. Qwen3-1.7B 28x8x128 -> 0.47; Gemma 3 4B 34x4x256
    *              -> 0.57 full (less with its sliding-window cache); Qwen3-4B/8B 36x8x128 -> 0.60; the
    *              27B hybrid is not derivable this way, 1.30 fits PrismML's 5.2 GB peak figure.
+   *              Packs now load a q8_0 KV cache by default (perf plan #4, half this), so the f16
+   *              figure is a deliberate over-estimate: a device that refuses q8 falls back to f16,
+   *              and maik-local.js wantCtx() sizes the 8K headroom against it. (Comment corrected,
+   *              audit T63: it used to say llama_jni.cpp sets no type_k/type_v.)
    *              Nothing here reads a model's "128K" and believes it.
    *   lang       languages with a PASSING offline eval (test/run-local-translate-eval.mjs). Empty
    *              until measured: a model that technically emits Telugu is not thereby safe for a
@@ -660,8 +679,23 @@
   /** The vision file for a pack, or null when that model cannot see (Apex is text-only). */
   function visionFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.vision) || null; }
   function hasVision(id) { return !!visionFile(id); }
-  /** The speculative-decoding draft for a pack, or null when it has none. */
-  function draftFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.draft) || null; }
+  /** The speculative-decoding draft for a pack, or null when it has none.
+   *
+   * A DRAFT MUST BE SMALL NEXT TO ITS TARGET (audit T26, 2026-09-25). Speculation pays only when a
+   * draft token costs a small fraction of a target token. The 0.64 GB Qwen3-0.6B draft is 55% of MAiK
+   * Swift (1.16 GB) and 28% of MAiK Prime (2.31 GB): each proposal costs a large share of what it
+   * saves, and on CPU-only Android the extra memory traffic is a likely net loss. MxCore and Neural
+   * keep their 0.29 GB gemma-3-270m draft (about 11% of a 2.5 to 2.8 GB target). A draft above
+   * DRAFT_MAX_RATIO of the target's bytes is treated as absent: never downloaded, never loaded.
+   * ponytail: a byte ratio, not a measured speedup; replace with per-pack tok/s once the device
+   * bench records draft acceptance. */
+  var DRAFT_MAX_RATIO = 0.15;
+  function draftFile(id) {
+    var base = baseIdOf(id), p = PACKS[base], d = p && p.draft;
+    if (!d) return null;
+    var target = (p.files || []).reduce(function (s, f) { return s + (f.bytes || 0); }, 0);
+    return (target > 0 && (d.bytes || 0) <= DRAFT_MAX_RATIO * target) ? d : null;
+  }
   function hasDraft(id) { return !!draftFile(id); }
 
   function pack(id) {
@@ -783,7 +817,9 @@
   }
 
   /** Which pack the on-device engine should run. Defaults to the primary (MedGemma). */
-  function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-mxcore"; }
+  // Default pin (audit T27, 2026-09-25): MaiK Lite, our own model and the smallest and fastest
+  // pack, not MxCore. A clinician's own choice (KEY_ACTIVE) is untouched.
+  function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-lite"; }
   function setActivePack(id) { if (PACKS[id]) lset(KEY_ACTIVE, id); return activePack(); }
 
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }

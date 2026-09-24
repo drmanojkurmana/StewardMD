@@ -70,7 +70,9 @@ test("offline: an 8K window when the phone has room, 4K when it cannot tell or t
   assert.deepEqual(t.loads, [8192, 4096], "a refused 8K falls back"); assert.equal(t.PACKS["maik-lite"]._ctx, 4096);
 });
 
-test("offline: the 8K window carries twice the turns", async () => {
+// Audit T24 (2026-09-25): the 4-turn / 400 / 1400 widening at 8K is reverted until measured; the
+// 8K window itself stays (test above). A turn is rendered the same way whatever the window.
+test("offline: the 8K window keeps the 4K history budget (2 turns) until measured", async () => {
   const hist = [];
   for (const d of ["amlodipine", "losartan", "hydrochlorothiazide", "chlorthalidone"]) hist.push({ q: "hypertension " + d + "?", a: "Hypertension: " + d + " is used." });
   const pkg = { question: "hypertension chlorthalidone dose", history: hist };
@@ -79,5 +81,6 @@ test("offline: the 8K window carries twice the turns", async () => {
   await t.L.warm("maik-lite");
   const big = t.L.buildPrompt(pkg, "maik-lite");
   assert.equal((small.match(/^Doctor:/gm) || []).length, 2);
-  assert.equal((big.match(/^Doctor:/gm) || []).length, 4);
+  assert.equal((big.match(/^Doctor:/gm) || []).length, 2);
+  assert.equal(big, small, "same bytes at 4K and 8K");
 });

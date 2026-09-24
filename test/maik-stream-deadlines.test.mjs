@@ -42,7 +42,7 @@ test("every ending goes through one exit that ALWAYS closes the stream", () => {
   const fin = API.slice(iFin, API.indexOf("const rs = new ReadableStream", iFin));
   assert.match(fin, /controller\.close\(\)/, "must close");
   assert.match(fin, /done: true/, "must emit a done event so the client settles");
-  assert.match(fin, /onText\(full\)/, "usage must still be recorded on every path");
+  assert.match(fin, /onText\(full(, usage)?\)/, "usage must still be recorded on every path");
   // the error path must use it too, rather than its own ad-hoc close
   const blk = API.slice(API.indexOf("function streamGeminiToSSE"), API.indexOf("// Azure circuit breaker"));
   assert.match(blk, /catch \(e\) \{\s*try \{ reader\.cancel\(\); \} catch \(e2\) \{\}\s*finish\(controller, "error"\);/,
@@ -73,7 +73,7 @@ test("the streaming call site passes the deadlines through", () => {
   // and a length-capped regex silently stops matching as soon as anything is added to it.
   const i = API.indexOf("streamGeminiToSSE(up,");
   assert.ok(i > 0, "the live-stream call site must exist");
-  const call = API.slice(i, i + 700);
+  const call = API.slice(i, i + 1400);
   assert.match(call, /idleMs: streamIdleMs\(env\)/, "defaults in the helper are useless if the call site does not pass them");
   assert.match(call, /totalMs: streamTotalMs\(env\)/, "both bounds must be passed");
 });

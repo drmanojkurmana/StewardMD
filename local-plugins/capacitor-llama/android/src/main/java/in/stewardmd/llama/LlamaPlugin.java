@@ -12,6 +12,7 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,6 +35,10 @@ public class LlamaPlugin extends Plugin {
     private ModelDownloader downloader;
     /** Single thread: llama.cpp contexts are not thread-safe and the engine serialises anyway. */
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
+    /** Delayed cancel+release for a pause that catches a generation mid-answer (audit T59, 2026-09-25). */
+    private final ScheduledExecutorService pauseScheduler = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledFuture<?> pendingPauseRelease;
+    private static final long PAUSE_GRACE_SECONDS = 20;
 
     @Override
     public void load() {
@@ -140,6 +145,9 @@ public class LlamaPlugin extends Plugin {
          * rather than as no memory.
          */
         long availMem = 0;
+        // totalMem (audit T61, 2026-09-25): lets JS size which model shard to offer, not just
+        // whether one currently fits.
+        long totalMem = 0;
         try {
             android.app.ActivityManager am = (android.app.ActivityManager)
                 getContext().getSystemService(android.content.Context.ACTIVITY_SERVICE);
@@ -147,6 +155,7 @@ public class LlamaPlugin extends Plugin {
                 android.app.ActivityManager.MemoryInfo mi = new android.app.ActivityManager.MemoryInfo();
                 am.getMemoryInfo(mi);
                 availMem = mi.availMem;
+                totalMem = mi.totalMem;
             }
         } catch (Throwable ignore) {}
         call.resolve(new JSObject()
@@ -154,6 +163,7 @@ public class LlamaPlugin extends Plugin {
             .put("debugBuild", isDebug)
             .put("loaded", engine.isLoaded())
             .put("availableMemory", availMem)
+            .put("totalMemory", totalMem)
             // SOFT: availMem is free + reclaimable, and llama.cpp mmaps the weights, so a model
             // larger than this still runs (page faults, not an OOM kill). JS must not hard-block.
             .put("memoryIsHardLimit", false)
@@ -347,9 +357,43 @@ public class LlamaPlugin extends Plugin {
         // iOS kills large-footprint backgrounded apps first and Android will trim us too. Dropping
         // the model here is the difference between a resume and a cold restart; mmap makes the
         // reload cheap enough that this is a clear win.
-        engine.cancel();
-        worker.execute(() -> engine.release());
+        //
+        // But cancelling mid-answer throws away a response that might be one token from done (audit
+        // T59, 2026-09-25). If a generation is running, give it PAUSE_GRACE_SECONDS to finish instead
+        // of cutting it immediately - handleOnResume cancels this grace on a short pause (photo
+        // picker, permission dialog, app switcher).
+        cancelPendingPauseRelease();
+        if (engine.isGenerating()) {
+            pendingPauseRelease = pauseScheduler.schedule(this::cancelAndRelease, PAUSE_GRACE_SECONDS, TimeUnit.SECONDS);
+        } else {
+            cancelAndRelease();
+        }
         super.handleOnPause();
+    }
+
+    @Override
+    protected void handleOnResume() {
+        // A short pause must not cut off an almost-finished answer (audit T59, 2026-09-25). The
+        // release was never queued at pause time (only the delayed task above queues it), so
+        // cancelling the future here is enough to let the generation keep running.
+        cancelPendingPauseRelease();
+        super.handleOnResume();
+    }
+
+    private void cancelPendingPauseRelease() {
+        if (pendingPauseRelease != null) {
+            pendingPauseRelease.cancel(false);
+            pendingPauseRelease = null;
+        }
+    }
+
+    /** cancel() + release() queued behind it on the worker, then the released-on-our-own event (T60). */
+    private void cancelAndRelease() {
+        engine.cancel();
+        worker.execute(() -> {
+            engine.release();
+            notifyListeners("llamaReleased", new JSObject().put("reason", "background"));
+        });
     }
 
     private void emitError(LlamaException e) {

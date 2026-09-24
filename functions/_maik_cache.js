@@ -5,9 +5,12 @@
  * turns those into ZERO-token, instant responses. Env-flagged OFF by default (MAIK_ANSWER_CACHE) so
  * the answer path is byte-identical until the owner opts in.
  *
- * SAFETY (never cache anything patient-specific): the caller only invokes this for GENERIC knowledge
- * answers — no computed differential (hasDx), no lazy tiers, no Connect/PHI context. The version
- * component (MAIK_CACHE_VERSION) lets a prompt/model/KB change invalidate the whole cache in one bump.
+ * SAFETY (never cache anything patient- or user-specific): the caller only invokes this for GENERIC
+ * knowledge answers - no computed differential (hasDx), no tier-2 (priorLead), no Connect/PHI
+ * context, and no per-user context (conversation history, the About-me line, earlier topics); see
+ * cacheEligibleCtx. The key carries a KB fingerprint (kbFingerprint) so a KB change or a different
+ * retrieval never reuses an answer written from other evidence. The version component
+ * (MAIK_CACHE_VERSION) still invalidates the whole cache in one bump.
  */
 const PREFIX = "maik:ans:";
 
@@ -51,6 +54,33 @@ function normQ(q) {
   return String(q == null ? "" : q).toLowerCase().replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
 }
 
+/* A cached answer is only safe to serve to ANOTHER doctor when nothing in the prompt belonged to the
+ * asker. history / earlier are their own conversation, doctor is their About-me line: any of them
+ * shapes the answer, and none of them is in the key. */
+export function cacheEligibleCtx(pkg) {
+  pkg = pkg || {};
+  if (Array.isArray(pkg.history) && pkg.history.length) return false;
+  if (Array.isArray(pkg.earlier) && pkg.earlier.length) return false;
+  if (pkg.doctor && String(pkg.doctor).trim()) return false;
+  return true;
+}
+/* What evidence the answer was written from: grounding disease ids + provenance, retrieved chunk ids,
+ * the numbered SOURCES titles, and the client's kbVersion when it sends one. Sorted + deduped so the
+ * order retrieval happened to return does not fork the key. Hashed by answerCacheKey with the rest. */
+export function kbFingerprint(pkg) {
+  pkg = pkg || {};
+  const ids = new Set();
+  (pkg.grounding || []).forEach((g) => {
+    if (!g) return;
+    if (g.diseaseId) ids.add("d:" + g.diseaseId);
+    (g.provenance || []).forEach((p) => { if (p) ids.add("p:" + String(p).slice(0, 120)); });
+  });
+  (pkg.retrieved || []).forEach((c) => { if (c && c.diseaseId) ids.add("r:" + c.diseaseId + (c.section ? "/" + c.section : "")); });
+  (pkg.sources || []).forEach((x) => { if (x && x.title) ids.add("s:" + String(x.title).slice(0, 120)); });
+  const v = pkg.kbVersion != null ? String(pkg.kbVersion).slice(0, 40) : "";
+  return "kb" + v + ":" + Array.from(ids).sort().join(",");
+}
+
 /* Build the cache key. sha256hex is passed in (from _usage.js) so this module stays dependency-free
  * and unit-testable. Returns null when the question is too short/empty to safely key. */
 export async function answerCacheKey(sha256hex, env, o) {
@@ -66,7 +96,7 @@ export async function answerCacheKey(sha256hex, env, o) {
    * before this still hit rather than being orphaned by a format change. */
   const tier = Number(o.tier) || 0;
   const parts = [ver, q, String(o.depth || "std"), String(o.audience || "any"), String(o.model || "def")]
-    .concat(tier ? ["t" + tier] : []).join("|");
+    .concat(tier ? ["t" + tier] : []).concat(o.kb ? [String(o.kb)] : []).join("|");
   return PREFIX + (await sha256hex(parts));
 }
 

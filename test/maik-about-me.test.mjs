@@ -54,7 +54,9 @@ test("offline: a default answer is BALANCED and carries the doctor line; a teach
   const e = engine();
   await e.L.answer({ question: "treatment of hypertension", doctor: "Speciality: Internal Medicine" }, { depth: "concise", pack: "maik-lite" });
   const sys = e.calls[e.calls.length - 1].system;
-  assert.match(sys, /LENGTH: BALANCED\. Open with one plain sentence .* 6 to 12 bullets/);
+  // Audit T23: this harness retrieves a passage, so Balanced follows the evidence (no word target).
+  assert.match(sys, /LENGTH: BALANCED\. Open with one plain sentence that answers the question, then cover it as fully as the reference material supports/);
+  assert.doesNotMatch(sys, /200 to 350 words/);
   assert.doesNotMatch(sys, /essential points only/);
   assert.match(sys, /ABOUT THE CLINICIAN .*Speciality: Internal Medicine/);
   await e.L.answer({ question: "why does the JVP rise", doctor: "Speciality: Internal Medicine" }, { depth: "concise", pack: "maik-lite", mode: "clinix-tutor" });
