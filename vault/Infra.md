@@ -237,3 +237,5 @@ configured, PHI-carrying MaiK requests in WardSynQ refuse Vertex rather than use
 
 Pages env `AI_PROVIDER` was set to `vertex` on 2026-09-24 (it had been `developer` in the project settings,
 which overrides wrangler.toml); a Pages variable change applies only to the NEXT deployment, hence this commit.
+
+Retry after removing the AI_PROVIDER Pages secret that collided with the wrangler.toml var (2026-09-24).
