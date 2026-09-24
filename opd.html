@@ -341,6 +341,7 @@
 <link rel="stylesheet" href="/ward.css">
 <script src="/opd-pulse-model.js?v=2" defer></script>
 <script src="/opd-offline-desk.js?v=1" defer></script>
+<script src="/opd-live.js?v=1" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
 <script src="/patient-register.js?v=preg7-sid1-sid1-off1" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
@@ -465,6 +466,7 @@
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
   function logout(msg){
+    liveStop();
     // Plan item 13: an offline check-in not yet sent is the patient's place in the queue; say so before it is dropped.
     // A forced sign-out (msg: the session ended) keeps them for the next sign-in at this desk instead.
     try{ var od=offDesk(); if(od&&od.pending()){ if(!msg){ if(!window.confirm(od.pending()+" offline check-in(s) have not reached the queue yet and will be lost. Sign out anyway?")) return; od.clear(); } } else if(od) od.clear(); OFF=null; }catch(e){}
@@ -792,8 +794,25 @@
    * names nobody, so it is safe on a screen the whole waiting hall can see. A read that fails SAYS so:
    * an empty strip here would read as a quiet OPD, which is the one thing it must never say by
    * accident. The preview clinic has no hospital behind it, so it simply does not ask. */
+  /* ---- plan item 16: the console is told when the hospital's queue changes (opd-live.js over GET /live). Before
+   * this it had no timer at all and showed what it last loaded until someone pressed something. A change refreshes
+   * the board unless someone is typing on it (then the next change or the minute's safety pass does); when the
+   * stream is down a slow pass keeps it from going stale. ---- */
+  var LIVE=null, liveOrg="", liveT=null;
+  function liveHdrs(){ var h={}; if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return h; }); if(st.tok) h["X-Staff-Token"]=st.tok; return Promise.resolve(h); }
+  function liveRefresh(){ clearTimeout(liveT); liveT=setTimeout(function(){ var ae=document.activeElement, typing=!!(ae&&ae.closest&&ae.closest("input, textarea, select")); if(!document.hidden&&!typing&&st.orgId) refresh(); },300); }
+  function liveStart(){
+    if(!window.SMD_OPD_LIVE||!st.orgId||st.orgId==="demo") return;
+    if(LIVE&&liveOrg===st.orgId) return;
+    if(LIVE) LIVE.stop();
+    liveOrg=st.orgId;
+    LIVE=SMD_OPD_LIVE.connect({url:queueApiUrl("live?orgId="+encodeURIComponent(st.orgId)),headers:liveHdrs,onChange:liveRefresh});
+  }
+  function liveStop(){ if(LIVE) LIVE.stop(); LIVE=null; liveOrg=""; }
+  try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&!(LIVE&&LIVE.isLive())) liveRefresh(); },60000); }catch(e){}
   function loadPulse(){
     if(!st.orgId||st.orgId==="demo") return;
+    liveStart();
     api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
       // Plan item 11: follow-ups promised and never booked (silent when the hospital has no record).

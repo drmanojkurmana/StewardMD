@@ -14,6 +14,7 @@
  *   POST /api/queue/session/status { sessionId, status?, doctorStatus? } -> { session }
  *   GET  /api/queue/link?sessionId=&ticketId=              -> { token, url }         (patient tracking link)
  *   GET  /api/queue/portal?t=<token>                       -> PHI-free live snapshot  (PATIENT, no auth)
+ *   GET  /api/queue/live?orgId= | ?t=<display token>        -> text/event-stream of { rev } (plan item 16)
  */
 import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
 import { identify, sha256hex } from "../../_usage.js";
@@ -499,6 +500,29 @@ function corsHeaders(request) {
  * Retry-After is a refusal a client has to guess at, and guessing means retrying immediately. Shaped
  * like fhirJson's own `extra` argument below so there is one convention, and every existing
  * three-argument caller is unaffected. */
+/* Plan item 16: a Server-Sent Events stream of the hospital's queue revision. The first event is the current
+ * revision; another follows each time it moves. The stream ends after LIVE_TICKS polls of one small document (a
+ * Worker's subrequests are counted) and the client reconnects; a comment line keeps idle proxies from closing it.
+ * No patient data: { rev } only. */
+function liveStream(env, hospitalId, request) {
+  const ms = Number(env && env.QUEUE_LIVE_MS) || 2000, ticks = Number(env && env.QUEUE_LIVE_TICKS) || 150;
+  const enc = new TextEncoder(), { readable, writable } = new TransformStream(), w = writable.getWriter();
+  (async () => {
+    let last = null;
+    try {
+      await w.write(enc.encode("retry: 1000\n\n"));
+      for (let i = 0; i < ticks; i++) {
+        let rev = last;
+        try { rev = await Q.liveRev(env, hospitalId); } catch (e) {}
+        if (rev !== last) { await w.write(enc.encode("data: " + JSON.stringify({ rev }) + "\n\n")); last = rev; }
+        else if (i % 10 === 9) await w.write(enc.encode(": keep-alive\n\n"));
+        await new Promise((r) => setTimeout(r, ms));
+      }
+    } catch (e) { /* the board went away */ }
+    try { await w.close(); } catch (e) {}
+  })();
+  return new Response(readable, { status: 200, headers: Object.assign({ "Content-Type": "text/event-stream", "Cache-Control": "no-store", "X-Accel-Buffering": "no" }, corsHeaders(request)) });
+}
 function json(obj, status, request, extra) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request), extra || {}) }); }
 /* FHIR's own media type, on every FHIR response including errors. The CapabilityStatement declared
  * application/fhir+json while the route served application/json, and a strict client rejects that
@@ -1155,6 +1179,11 @@ export async function onRequest(context) {
     }
     // WALL DISPLAY: org-scoped signed token, no auth/login (a waiting-room screen). PHI-minimal
     // (first name + last initial only — never MRN/phone). Read-only projection of the nurse board.
+    if (method === "GET" && seg === "live" && url.searchParams.get("t")) {   // plan item 16: the wall display's live stream
+      const orgId = await verifyDisplayToken(env, url.searchParams.get("t") || "");
+      if (!orgId) return json({ ok: false, error: "invalid" }, 401, request);
+      return liveStream(env, orgId, request);
+    }
     if (method === "GET" && seg === "display" && url.searchParams.get("t")) {
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
       const orgId = await verifyDisplayToken(env, url.searchParams.get("t") || "");
@@ -6444,6 +6473,12 @@ export async function onRequest(context) {
         if (pool) { rows.push(...(await Q.listTickets(env, pool.id))); roomOf[pool.id] = { room: "Walk-in pool", doctor: "" }; }
       } catch (e) { unread.push("walk-in pool"); }
       return { rows, unread, roomOf };
+    }
+    if (method === "GET" && seg === "live") {   // plan item 16: the consoles' live stream (queue.view on the hospital)
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      return liveStream(env, orgId, request);
     }
     if (method === "GET" && seg === "opd-pulse") {
       const orgId = url.searchParams.get("orgId") || "";
