@@ -94,7 +94,8 @@
     "clinical questions.\"\n" +
     "Give the final answer only, never your reasoning.\n" +
     "Open with ONE plain sentence answering the question, then as much well-organised detail as the " +
-    "question deserves: a quick question gets a few short bullets; a request for detail, an essay or a " +
+    "question deserves: a single fact (one dose, one code, a yes or no) gets a short answer; any other question " +
+    "gets a balanced answer covering the key points a clinician needs; a request for detail, an essay or a " +
     "complete overview gets full sections (pathophysiology, clinical features, diagnosis, treatment and " +
     "whatever else was asked), each written to the end. Never stop part-way through a section. Use no " +
     "section labels such as \"Bottom Line\", \"Answer\" or \"Summary\".\n" +
@@ -1094,7 +1095,12 @@
           var depth = opts && opts.depth;
           if (depth === "brief") { common.nPredict = Math.min(common.nPredict, 400); common.system += "\nLENGTH: SHORT. Answer directly in 3 to 6 sentences or a few bullets; no sections or background; keep safety-critical caveats."; }
           else if (depth === "detailed") { common.system += "\nLENGTH: DETAILED. Cover every relevant aspect in full sections; do not stop early."; }
-          else { common.nPredict = Math.min(common.nPredict, 1100); common.system += "\nLENGTH: BALANCED. A lead sentence, then the essential points only; sections only when the question needs them."; }
+          // Balanced (owner, 2026-09-25: "answer balanced rather than short"): "essential points only"
+          // read to a small model as "a few bullets". Say what balanced covers, and how much.
+          else { common.nPredict = Math.min(common.nPredict, 1100); common.system += "\nLENGTH: BALANCED. Open with one plain sentence that answers the question, then cover the key points a clinician needs in 2 to 4 short sections or 6 to 12 bullets, as the question calls for (key facts, diagnosis, management, doses, cautions); about 200 to 350 words. Do not stop after two or three bullets."; }
+          // About me: the doctor's saved preferences (home.js maikMeLine). Stable across a thread, so it
+          // sits in the system prompt, inside the reused KV prefix.
+          if (pkg && pkg.doctor) { var _me = "\nABOUT THE CLINICIAN (their saved preferences; tailor to them, never mention this): " + String(pkg.doctor).slice(0, 400); common.system += _me; common.nPredict = Math.max(256, common.nPredict - estTokens(_me)); }
         }
         if (!images.length) return L.generate(common);
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone

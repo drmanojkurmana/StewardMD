@@ -4108,6 +4108,25 @@
   function maikConvKey() { return "smd_maik_convos_" + maikAcctKey(); }
   function maikThreadKey() { return MAIK_LS + "_" + maikAcctKey(); }   /* per-account active thread (was global smd_maik_thread -> leaked across accounts) */
   function maikActiveKey() { return "smd_maik_active_" + maikAcctKey(); }
+  /* ABOUT ME: the doctor's preferences memory (owner, 2026-09-25). What mem0 would give, without its
+   * cost: the DOCTOR (speciality, where they work, guidelines, a short note), never the patient, kept
+   * on this device per account, and sent with each answer as one line of roughly 50 to 100 tokens.
+   * No extra AI call, nothing stored server-side. */
+  var MAIK_ME_WORK = ["ICU", "Ward", "OPD", "Emergency", "Theatre"];
+  var MAIK_ME_GUIDE = { "Indian": "Indian (ICMR, API, NLEM)", "US": "US (IDSA, ACC/AHA, ADA)", "UK": "UK (NICE, BTS)", "WHO": "WHO", "No preference": "" };
+  function maikMeKey() { return "smd_maik_me_" + maikAcctKey(); }
+  function maikMeLoad() { try { var m = JSON.parse(localStorage.getItem(maikMeKey()) || "{}"); return (m && typeof m === "object") ? m : {}; } catch (e) { return {}; } }
+  function maikMeStore(m) { try { localStorage.setItem(maikMeKey(), JSON.stringify(m || {})); } catch (e) {} }
+  // A patient's identity must never ride along: long digit runs (MRN, UHID, phone) and record words are refused.
+  function maikMeHasPHI(s) { return /\d{6,}/.test(String(s || "")) || /\b(mrn|uhid|ip ?no|op ?no|reg(istration)? ?no|patient'?s? name|bed ?(no|number)? ?\d)/i.test(String(s || "")); }
+  function maikMeLine(m) {
+    m = m || maikMeLoad(); var P = [];
+    if (m.spec) P.push("Speciality: " + String(m.spec).slice(0, 60));
+    if (m.work && m.work.length) P.push("Works in: " + m.work.filter(function (w) { return MAIK_ME_WORK.indexOf(w) >= 0; }).join(", "));
+    if (m.guide && MAIK_ME_GUIDE[m.guide]) P.push("Prefers " + MAIK_ME_GUIDE[m.guide] + " guidelines where guidance differs; name the major alternative when it matters");
+    if (m.notes) P.push("Notes: " + String(m.notes).slice(0, 200));
+    return P.join(". ");
+  }
   function maikLoadConvos() { try { return JSON.parse(localStorage.getItem(maikConvKey()) || "[]") || []; } catch (e) { return []; } }
   function maikStoreConvos(list) { try { localStorage.setItem(maikConvKey(), JSON.stringify((list || []).slice(0, 200))); } catch (e) {} }
   var _maikConvId = (function () { try { return localStorage.getItem(maikActiveKey()) || null; } catch (e) { return null; } })();
@@ -4866,6 +4885,8 @@
           '<div class="maik-side-hd"><img class="maik-side-logo" src="' + MK_LOGO() + '" alt="MaiK">' +
             '<button class="maik-hd-btn" id="maikSideClose" type="button" aria-label="Close conversations">' + MK.close + '</button></div>' +
           '<button class="maik-side-row maik-side-new" id="maikSideNew" type="button">' + MK.plus + '<span>New conversation</span></button>' +
+          '<button class="maik-side-row" id="maikSideMe" type="button" aria-controls="maikMe">' + svg("user", "smd-ico") + '<span>About me</span><span class="maik-side-meta" id="maikSideMeState"></span></button>' +
+          '<div class="maik-me" id="maikMe" hidden></div>' +
           '<div class="maik-side-srch">' + MK.search + '<input id="maikSideSearch" type="search" placeholder="Search conversations" autocomplete="off" spellcheck="false"></div>' +
           '<div class="maik-side-lbl">Your conversations</div>' +
           '<div class="maik-side-list" id="maikSideList"></div>' +
@@ -4937,6 +4958,27 @@
       ".maik-side-empty{padding:18px 16px;font:500 13.5px 'Inter',system-ui;color:var(--mk-mut,#94a3b8);line-height:1.5}" +
       ".maik-side-priv{display:flex;align-items:center;gap:7px;padding:10px 16px;font:600 11.5px 'Inter',system-ui;color:var(--mk-teal,#0e6e63);border-top:1px solid var(--mk-line,#eef2f7)}" +
       ".maik-side-acct{display:flex;align-items:center;gap:10px;padding:10px 16px 15px}" +
+      ".maik-side-meta{margin-left:auto;font:700 11px 'Inter',system-ui;color:var(--mk-teal,#0e6e63)}" +
+      ".maik-side.me-open .maik-side-srch,.maik-side.me-open .maik-side-lbl,.maik-side.me-open .maik-side-list,.maik-side.me-open #maikSideMe,.maik-side.me-open #maikSideNew{display:none}" +
+      ".maik-me{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px 16px 16px}" +
+      ".maik-me-hd{display:flex;align-items:center;gap:6px;margin:0 0 4px -8px}" +
+      ".maik-me-hd b{font:800 16px 'Inter',system-ui;color:var(--mk-ink,#0f172a)}" +
+      ".maik-me-back{min-width:44px;min-height:44px;border:0;background:transparent;border-radius:12px;font:700 20px 'Inter',system-ui;color:var(--mk-ink,#0f172a);cursor:pointer}" +
+      ".maik-me-help{margin:0 0 12px;font:500 13px/1.5 'Inter',system-ui;color:var(--mk-mut,#64748b)}" +
+      ".maik-me-lbl{display:block;margin:12px 0 6px;font:700 13px 'Inter',system-ui;color:var(--mk-ink,#0f172a)}" +
+      ".maik-me-in{width:100%;box-sizing:border-box;min-height:44px;padding:10px 12px;border:1px solid var(--mk-bd,rgba(148,163,184,.35));border-radius:12px;background:var(--mk-field,rgba(148,163,184,.12));font:500 16px/1.4 'Inter',system-ui;color:var(--mk-ink,#0f172a);resize:vertical}" +
+      ".maik-me-in::placeholder{color:var(--mk-faint,#94a3b8)}" +
+      ".maik-me-in:focus{outline:2px solid var(--mk-teal,#0e6e63);outline-offset:1px}" +
+      ".maik-me-chips{display:flex;flex-wrap:wrap;gap:8px}" +
+      ".maik-me-chip{min-height:44px;padding:0 14px;border:1px solid rgba(148,163,184,.55);border-radius:22px;background:transparent;font:600 14px 'Inter',system-ui;color:var(--mk-ink,#0f172a);white-space:nowrap;cursor:pointer}" +
+      ".maik-me-chip.on{background:var(--mk-teal,#0e6e63);border-color:var(--mk-teal,#0e6e63);color:#fff}" +
+      ".maik-me-err{min-height:18px;margin-top:8px;font:600 12.5px/1.4 'Inter',system-ui;color:#b91c1c}" +
+      ".maik-me-acts{display:flex;gap:10px;margin-top:6px}" +
+      ".maik-me-save,.maik-me-clear{min-height:44px;padding:0 18px;border-radius:12px;font:700 14.5px 'Inter',system-ui;cursor:pointer}" +
+      ".maik-me-save{flex:1;border:0;background:var(--mk-teal,#0e6e63);color:#fff}" +
+      ".maik-me-clear{border:1px solid rgba(148,163,184,.55);background:transparent;color:var(--mk-ink,#0f172a)}" +
+      "body.dark .maik-me-hd b,body.dark .maik-me-lbl,body.dark .maik-me-back,body.dark .maik-me-chip:not(.on),body.dark .maik-me-in,body.dark .maik-me-clear,body.v3-dark .maik-me-hd b,body.v3-dark .maik-me-lbl,body.v3-dark .maik-me-back,body.v3-dark .maik-me-chip:not(.on),body.v3-dark .maik-me-in,body.v3-dark .maik-me-clear{color:var(--mk-ink,#e6edf3)}" +
+      "body.dark .maik-me-err,body.v3-dark .maik-me-err{color:#fca5a5}" +
       ".maik-side-av{width:32px;height:32px;border-radius:50%;background:var(--mk-teal,#0e6e63);color:#fff;display:flex;align-items:center;justify-content:center;font:800 12px 'Inter',system-ui;flex:none}" +
       ".maik-side-em{display:flex;flex-direction:column;min-width:0}" +
       ".maik-side-em b{font:700 13px 'Inter',system-ui;color:var(--mk-ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}" +
@@ -6820,6 +6862,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             try { scroll(); } catch (e) {}
             return;
           }
+          // About me: the doctor's saved preferences, one line, cloud and on-device alike.
+          try { var _me = maikMeLine(); if (pkg && _me) pkg.doctor = _me; } catch (e) {}
           // Memory: the last 6 turns as gists, and every older question as a one-line topic list.
           // Each engine clips to its own budget (the cloud route and maik-local.js).
           if (pkg && maikV2() && _maikTurns.length) {
@@ -7489,7 +7533,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).join("") : ('<div class="maik-side-empty">' + (q ? "No matching conversations." : "No saved conversations yet — ask MaiK anything to start.") + '</div>');
       if (e.acct) { var em = maikAcctLabel(); e.acct.innerHTML = em ? ('<div class="maik-side-av">' + maikEscH(em.slice(0, 2).toUpperCase()) + '</div><div class="maik-side-em"><b>' + maikEscH(em) + '</b><span>Signed in &middot; history on this device</span></div>') : '<div class="maik-side-av">?</div><div class="maik-side-em"><b>Guest</b><span>History saved on this device</span></div>'; }
     }
-    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
+    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; try { maikMeShow(false); } catch (e2) {} maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
     function maikCloseSide() { var e = maikSideEls(); if (!e.wrap) return; e.wrap.classList.remove("open"); setTimeout(function () { try { e.wrap.hidden = true; } catch (x) {} }, 220); }
     function maikOpenConv(id) {
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
@@ -7502,6 +7546,54 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var _sideClose = sheet.querySelector("#maikSideClose"); if (_sideClose) _sideClose.addEventListener("click", maikCloseSide);
     var _sideOv = sheet.querySelector("#maikSideOv"); if (_sideOv) _sideOv.addEventListener("click", maikCloseSide);
     var _sideNew = sheet.querySelector("#maikSideNew"); if (_sideNew) _sideNew.addEventListener("click", function () { maikNewThread(); });
+    function maikMeState() { var s = sheet.querySelector("#maikSideMeState"); if (s) s.textContent = maikMeLine() ? "On" : ""; }
+    function maikMeShow(on) {
+      var side = sheet.querySelector("#maikSide"), el = sheet.querySelector("#maikMe"); if (!side || !el) return;
+      side.classList.toggle("me-open", !!on); el.hidden = !on;
+      if (!on) { maikMeState(); return; }
+      var m = maikMeLoad(), work = m.work || [];
+      function chips(name, opts, isOn, label) {
+        return '<div class="maik-me-chips" role="group" aria-label="' + label + '">' + opts.map(function (o) {
+          var sel = isOn(o);
+          return '<button type="button" class="maik-me-chip' + (sel ? " on" : "") + '" data-me="' + name + '" data-v="' + maikEscH(o) + '" aria-pressed="' + sel + '">' + maikEscH(o) + '</button>';
+        }).join("") + '</div>';
+      }
+      el.innerHTML = '<div class="maik-me-hd"><button type="button" class="maik-me-back" id="maikMeBack" aria-label="Back to conversations">&#8249;</button><b>About me</b></div>' +
+        '<p class="maik-me-help">MaiK tailors every answer to you. Saved only on this device. Never enter patient details here.</p>' +
+        '<label class="maik-me-lbl" for="maikMeSpec">Speciality</label>' +
+        '<input class="maik-me-in" id="maikMeSpec" maxlength="60" autocomplete="off" placeholder="e.g. Internal Medicine" value="' + maikEscH(m.spec || "") + '">' +
+        '<div class="maik-me-lbl" id="maikMeWorkL">Where you work</div>' + chips("work", MAIK_ME_WORK, function (o) { return work.indexOf(o) >= 0; }, "Where you work") +
+        '<div class="maik-me-lbl" id="maikMeGuideL">Guidelines to prefer</div>' + chips("guide", Object.keys(MAIK_ME_GUIDE), function (o) { return (m.guide || "No preference") === o; }, "Guidelines to prefer") +
+        '<label class="maik-me-lbl" for="maikMeNotes">Anything else about how you work</label>' +
+        '<textarea class="maik-me-in" id="maikMeNotes" rows="3" maxlength="200" placeholder="e.g. District hospital, limited ICU beds; prefer NLEM drugs">' + maikEscH(m.notes || "") + '</textarea>' +
+        '<div class="maik-me-err" id="maikMeErr" role="alert"></div>' +
+        '<div class="maik-me-acts"><button type="button" class="maik-me-save" id="maikMeSave">Save</button><button type="button" class="maik-me-clear" id="maikMeClear">Clear</button></div>';
+    }
+    var _sideMe = sheet.querySelector("#maikSideMe"); if (_sideMe) _sideMe.addEventListener("click", function () { maikMeShow(true); });
+    var _meEl = sheet.querySelector("#maikMe");
+    if (_meEl) _meEl.addEventListener("input", function () { var er = _meEl.querySelector("#maikMeErr"); if (er) er.textContent = ""; });
+    if (_meEl) _meEl.addEventListener("click", function (ev) {
+      var t = ev.target && ev.target.closest ? ev.target : null; if (!t) return;
+      var chip = t.closest(".maik-me-chip");
+      if (chip) {
+        if (chip.getAttribute("data-me") === "guide") Array.prototype.forEach.call(_meEl.querySelectorAll('[data-me="guide"]'), function (c) { c.classList.remove("on"); c.setAttribute("aria-pressed", "false"); });
+        var on = !chip.classList.contains("on"); chip.classList.toggle("on", on); chip.setAttribute("aria-pressed", String(on));
+        try { maikHaptic("pick"); } catch (e) {}
+        return;
+      }
+      if (t.closest("#maikMeBack")) { maikMeShow(false); return; }
+      if (t.closest("#maikMeClear")) { maikMeStore({}); maikMeShow(true); maikMeState(); try { toast("Cleared. MaiK no longer uses it."); } catch (e) {} return; }
+      if (t.closest("#maikMeSave")) {
+        var spec = (_meEl.querySelector("#maikMeSpec").value || "").trim(), notes = (_meEl.querySelector("#maikMeNotes").value || "").trim();
+        if (maikMeHasPHI(spec) || maikMeHasPHI(notes)) { _meEl.querySelector("#maikMeErr").textContent = "Remove anything that could identify a patient: names, record, bed or phone numbers."; return; }
+        var picked = function (k) { return Array.prototype.map.call(_meEl.querySelectorAll('.maik-me-chip.on[data-me="' + k + '"]'), function (c) { return c.getAttribute("data-v"); }); };
+        var g = picked("guide")[0] || "No preference";
+        maikMeStore({ spec: spec.slice(0, 60), work: picked("work"), guide: g === "No preference" ? "" : g, notes: notes.slice(0, 200) });
+        try { maikHaptic("done"); } catch (e) {}
+        try { toast(maikMeLine() ? "Saved. MaiK will use this in every answer." : "Saved."); } catch (e) {}
+        maikMeShow(false);
+      }
+    });
     var _sideSearch = sheet.querySelector("#maikSideSearch"); if (_sideSearch) _sideSearch.addEventListener("input", function () { maikRenderSide(_sideSearch.value); });
     var _sideList = sheet.querySelector("#maikSideList");
     if (_sideList) _sideList.addEventListener("click", function (ev) {
