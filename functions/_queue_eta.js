@@ -44,6 +44,18 @@ export function recallRefusal(ticket, session, nowMs) {
   return null;
 }
 // Tickets still waiting for the doctor (get a position + ETA). in_consultation/investigation/terminal excluded.
+/* Plan item 12: priority follows a stated reason, never a bare number. The reason decides the level
+ * (an emergency goes above everyone, the others above the ordinary queue), so two desks give the same
+ * patient the same place, and "clear" is itself a reason: taking priority away is an override too.
+ * "other" needs words. Returns null when no acceptable reason was given. */
+export const PRIORITY_LEVEL = { emergency: 2, senior: 1, pregnant: 1, disability: 1, child: 1, results: 1, other: 1, clear: 0 };
+export function priorityRule(reason, note) {
+  const r = String(reason || "").trim().toLowerCase();
+  const n = String(note || "").trim().slice(0, 100);
+  if (!Object.prototype.hasOwnProperty.call(PRIORITY_LEVEL, r)) return null;
+  if (r === "other" && n.length < 3) return null;
+  return { priority: PRIORITY_LEVEL[r], reason: r, note: n };
+}
 export function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
 
 // ---- ordering: emergency/priority first, then MANUAL order, then arrival --------------------

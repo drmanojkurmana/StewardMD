@@ -7,10 +7,10 @@
  *   GET  /api/queue/ready                                  -> { enabled, configured }
  *   GET  /api/queue/session?date=&department=&hospitalId=  -> { session, tickets }   (get/create today's)
  *   GET  /api/queue/list?sessionId=                        -> { session, tickets }
- *   POST /api/queue/ticket   { sessionId, name, mobile, mrn, visitType, priority } -> { ticket }
+ *   POST /api/queue/ticket   { sessionId, name, mobile, mrn, visitType, priorityReason?, priorityNote? } -> { ticket }
  *   POST /api/queue/advance  { sessionId }                 -> { tickets }            (Next Patient)
  *   POST /api/queue/status   { sessionId, ticketId, status } -> { tickets }
- *   POST /api/queue/priority { sessionId, ticketId, priority } -> { tickets }
+ *   POST /api/queue/priority { sessionId, ticketId, reason, note? } -> { tickets }   (reason sets the level; plan item 12)
  *   POST /api/queue/session/status { sessionId, status?, doctorStatus? } -> { session }
  *   GET  /api/queue/link?sessionId=&ticketId=              -> { token, url }         (patient tracking link)
  *   GET  /api/queue/portal?t=<token>                       -> PHI-free live snapshot  (PATIENT, no auth)
@@ -6890,6 +6890,8 @@ export async function onRequest(context) {
       // ---- nurse-station runtime: register into the pool + assign a patient to a room ----
       if (seg === "pool") {   // register a department-level walk-in into the central unassigned pool
         const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
+        // Plan item 12: registering ahead of the queue is the priority right, not the desk's; dropped (the patient is still registered) without it.
+        if ((body.priority || body.priorityReason) && !(await azOrg(CAPS.QUEUE_PRIORITY)).ok) { body.priority = 0; body.priorityReason = ""; }
         const org = await ORG.getOrg(env, body.orgId);
         let t;
         try { t = await Q.addToPool(env, org, body, actor.id); }
@@ -6915,9 +6917,9 @@ export async function onRequest(context) {
         const az = await azOrg(CAPS.QUEUE_ASSIGN, { roomId: room.id, departmentId: room.departmentId }); if (!az.ok) return deny(az);
         // Setting urgent priority needs QUEUE_PRIORITY separately - reception may route but not mark urgent. Drop the
         // priority (never deny the whole routing) unless the actor also holds it, so a crafted request can't bypass the role.
-        const azP = body.priority ? await azOrg(CAPS.QUEUE_PRIORITY, { roomId: room.id, departmentId: room.departmentId }) : { ok: false };
+        const azP = body.priorityReason ? await azOrg(CAPS.QUEUE_PRIORITY, { roomId: room.id, departmentId: room.departmentId }) : { ok: false };
         const org = await ORG.getOrg(env, body.orgId);
-        try { await Q.assignToRoom(env, org, body.ticketId, room, { priority: (azP.ok ? body.priority : 0), reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
+        try { await Q.assignToRoom(env, org, body.ticketId, room, { priorityReason: (azP.ok ? body.priorityReason : ""), reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
         catch (e) { return json({ ok: false, error: (e && e.message) || "assign_failed" }, (e && e.status) || 500, request); }
         return json({ ok: true, board: await boardForOrg(env, org, body.date || "") }, 200, request);
       }
@@ -7020,6 +7022,7 @@ export async function onRequest(context) {
       const { s, err } = await loadSessionFor(env, body.sessionId, actor, request); if (err) return err;
       if (seg === "ticket") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
+        if (body.priority || body.priorityReason) { try { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); } catch (e) { body.priority = 0; body.priorityReason = ""; } }   // plan item 12, as /pool
         let t;
         try { t = await Q.addTicket(env, s, body, actor.id); }
         catch (e) { if (e && e.status >= 400 && e.status < 500) return tokenRefusal(e); throw e; }
@@ -7074,7 +7077,7 @@ export async function onRequest(context) {
           throw e;
         }
       }
-      if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }
+      if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, { reason: body.reason, note: body.note }, actor.id)) }, 200, request); }
       if (seg === "move") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }
       if (seg === "assign") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ASSIGN); return json({ ok: true, tickets: await ticketView(env, await Q.assignTicket(env, s, body.ticketId, body.toDoctorUid, body, actor.id)) }, 200, request); }
       if (seg === "revoke") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REMOVE); await Q.revokeTicket(env, s, body.ticketId, actor.id); return json({ ok: true, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }

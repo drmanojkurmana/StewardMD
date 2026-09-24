@@ -54,7 +54,7 @@
     var waitMs = now() - (t.registeredAt || now());
     var late = isQueued(t.status) && waitMs > 30 * 60000;
     var isNext = idx === 0;
-    var pri = t.priority >= 2 ? '<span class="q-pri emerg">Emergency</span>' : t.priority === 1 ? '<span class="q-pri prio">Priority</span>' : "";
+    var pri = t.priority >= 2 ? '<span class="q-pri emerg">Emergency</span>' : t.priority === 1 ? '<span class="q-pri prio">' + esc(prioLabel(t)) + "</span>" : "";
     var etaMin = t.etaStart ? mins(t.etaStart - now()) : null;
     var line = late
       ? '<span class="q-tl-eta late">' + ms("error") + " Waiting: " + mins(waitMs) + "m</span>"
@@ -190,7 +190,7 @@
     var savedTab = '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved on this device / Drive)">' + ms("recent_actors") + "<span>Patients</span></button>";
     var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + savedTab + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
     var main = '<div class="q-main">' + header + '<div class="q-canvas">' + canvas + "</div>" + bottom + "</div>";
-    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + "</div>";
+    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + (state.prioSheet ? renderPrioSheet(state.prioSheet) : "") + "</div>";
   }
   function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
   // ---- Clinic & staff admin (owner, native clinic): Clinic ID + add nursing/reception/billing with a
@@ -317,6 +317,25 @@
         '<button class="q-pbtn" data-q-act="addstaff">' + ms("person_add") + "Add staff</button>" +
       "</div></div>";
   }
+
+  /* Plan item 12: priority with a reason. The reason sets the level on the server (_queue_eta.js
+   * priorityRule): an emergency goes first, the rest ahead of the ordinary queue; "clear" is a reason too. */
+  var PRIO = [["emergency", "Emergency"], ["senior", "Senior citizen"], ["pregnant", "Pregnant"], ["disability", "Disability"], ["child", "Child"], ["results", "Results ready"], ["other", "Other"]];
+  function prioLabel(t) { if (!t || !t.priority) return ""; if (t.priority >= 2) return "Emergency"; var m = PRIO.filter(function (p) { return p[0] === t.priorityReason; })[0]; return m ? m[1] : "Priority"; }
+  function renderPrioSheet(p) {
+    var list = PRIO.slice(); if (p.cur) list.push(["clear", "Clear priority"]);
+    return '<div class="q-sheet" data-q-act="prio-close"><div class="q-profile" data-q-act="prio-stop" role="dialog" aria-label="Set priority">' +
+      '<div class="q-profile-head"><button class="q-ic q-profile-x" data-q-act="prio-close" aria-label="Close">' + ms("close") + "</button></div>" +
+      '<div class="q-prio-h"><b>Priority</b> <span>(reason required)</span></div>' +
+      '<p class="q-prio-p">The reason sets the place: an emergency goes first, the others ahead of the ordinary queue. Recorded in the audit trail.</p>' +
+      '<div class="q-prio-chips" role="group" aria-label="Priority reason">' + list.map(function (c) {
+        return '<button type="button" class="q-prio-chip' + (p.reason === c[0] ? " on" : "") + '" aria-pressed="' + (p.reason === c[0]) + '" data-q-act="prio-pick:' + c[0] + '">' + c[1] + "</button>";
+      }).join("") + "</div>" +
+      '<input id="qPrioNote" class="q-prio-note" aria-label="Priority note" placeholder="Note (required for Other)" value="' + esc(p.note || "") + '">' +
+      '<button class="q-pbtn q-prio-ok" data-q-act="prio-set">Set priority</button>' +
+      "</div></div>";
+  }
+  function prioNote() { var n = document.getElementById("qPrioNote"); return n ? String(n.value || "").trim() : ""; }
 
   // Doctor profile sheet - opened from the header avatar. Identity + status + switch clinic + sign out.
   function renderProfile(state, doctorName, dept) {
@@ -587,7 +606,7 @@
   function refresh() {
     /* demo has no server session; don't clobber unsaved settings mid-poll; and the profile sheet
      * (Clinic and staff) is a form the owner is filling in, for the same reason settings is. */
-    if (st.demo || !st.session || st.view === "settings" || st.profileOpen) return;
+    if (st.demo || !st.session || st.view === "settings" || st.profileOpen || st.prioSheet) return;
     st.pollN = (st.pollN || 0) + 1;
     // real-time-ish sync: silently re-pull today's GHIS Out-patients list every ~5 polls (~40s) so newly
     // registered patients appear without a manual import (dedupes server-side by visit id).
@@ -635,6 +654,18 @@
     if (cmd === "staffremove") { var okrm = true; try { okrm = window.confirm("Remove this staff member's access?"); } catch (e) {} if (okrm) apiPost("/member", { orgId: st.orgId, identity: arg, remove: true }).then(function () { loadClinicAdmin(); }); return; }
     if (cmd === "profile-close") { st.profileOpen = false; paint(); return; }
     if (cmd === "profile-stop") return;   // click inside the profile card: do nothing (don't close)
+    if (cmd === "prio-close") { st.prioSheet = null; paint(); return; }
+    if (cmd === "prio-stop") return;
+    if (cmd === "prio-pick") { if (st.prioSheet) { st.prioSheet.note = prioNote(); st.prioSheet.reason = arg; paint(); } return; }
+    if (cmd === "prio-set") {
+      var ps = st.prioSheet; if (!ps || !st.session) return;
+      var pnote = prioNote();
+      if (!ps.reason) { try { G.toast && G.toast("Pick a reason"); } catch (e) {} return; }
+      if (ps.reason === "other" && pnote.length < 3) { try { G.toast && G.toast("Say why in the note"); } catch (e) {} return; }
+      st.prioSheet = null; paint();
+      act(st.session.id, "/priority", { ticketId: ps.ticketId, reason: ps.reason, note: pnote }).then(function (r) { if (!(r && r.ok)) { try { G.toast && G.toast("Priority not changed: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} } });
+      return;
+    }
     if (cmd === "switch") { _setWp(""); clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; st.orgId = null; st.clinicAdmin = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace (forget remembered); drop clinic identity so the next workplace never shows a stale clinic's staff-admin
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
@@ -704,7 +735,7 @@
     else if (cmd === "noshowsclose") { st.noShows = undefined; paint(); }
     else if (cmd === "recall") recallNoShow(sid, arg);
     else if (cmd === "sendback") act(sid, "/status", { ticketId: arg, status: "waiting" });   // reroute from the consulting room back to the waiting hall (personal + hospital)
-    else if (cmd === "prio") { var pt = (st.tickets || []).filter(function (x) { return x.id === arg; })[0]; act(sid, "/priority", { ticketId: arg, priority: (pt && pt.priority) ? 0 : 1 }); }   // toggle Priority (1) on/off; matches the "Priority" label + is reversible (does NOT set Emergency/2)
+    else if (cmd === "prio") { var pt = (st.tickets || []).filter(function (x) { return x.id === arg; })[0]; st.prioSheet = { ticketId: arg, cur: (pt && pt.priority) || 0, reason: "", note: "" }; paint(); }   // plan item 12: pick a reason; the reason sets the level
     else if (cmd === "remove") { var okr = true; try { okr = window.confirm("Remove this patient from your queue?\n\nUse for a mistaken, duplicate, or wrongly-routed entry. Recorded in the audit trail."); } catch (e) {} if (okr) act(sid, "/status", { ticketId: arg, status: "cancelled" }); }
     else if (cmd === "pause") act(sid, "/session/status", { status: st.session.status === "paused" ? "active" : "paused" });
     else if (cmd === "emergency") act(sid, "/session/status", { doctorStatus: st.session.doctorStatus === "emergency" ? "consulting" : "emergency" });
@@ -1376,7 +1407,7 @@
   try {
     document.addEventListener("smd:consult-end", function () { try { if (st.session) act(st.session.id, "/advance"); } catch (e) {} });
     document.addEventListener("smd:consult-emergency", function (e) {
-      try { if (!st.session) return; var tid = e && e.detail && e.detail.ticketId; if (tid) act(st.session.id, "/priority", { ticketId: tid, priority: 2 }); act(st.session.id, "/advance"); } catch (x) {}
+      try { if (!st.session) return; var tid = e && e.detail && e.detail.ticketId; if (tid) act(st.session.id, "/priority", { ticketId: tid, reason: "emergency", note: "raised from the consult" }); act(st.session.id, "/advance"); } catch (x) {}
     });
   } catch (e) {}
 
