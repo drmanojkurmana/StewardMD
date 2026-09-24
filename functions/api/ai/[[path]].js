@@ -23,7 +23,8 @@
  *     Legacy (only if org allows SA keys): GCP_SA_PRIVATE_KEY.
  *   Developer (fallback): GEMINI_API_KEY (AI Studio).
  * Enabled if EITHER provider is configured. Vertex → Developer failover on error.
- * Auth: same gate as the GHIS Function (Cf-Access / X-App-Token / same-origin).
+ * Auth: authorise() below (verified Firebase token, Cf-Access with its JWT assertion, X-App-Token,
+ *   X-SMD-App, or an allowed Origin).
  *
  * PHI NOTE: /vision sends a clinical IMAGE and /explain sends clinical FINDINGS
  * to Google. This is OFF unless GEMINI_API_KEY is set AND the app's `smd_ai`
@@ -115,7 +116,7 @@ function withCors(request, resp) {
  * schema, so swapping transport needs no change to callers.
  *   AIProvider = { name, available(env), generate(env, parts, maxTokens) -> text }
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
- * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
+ * Developer API. A future provider drops into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
@@ -174,7 +175,8 @@ function looksComplex(q) {
 function visionModel(env) { const m = env && env.VISION_MODEL; return (typeof m === "string" && m) ? m : "gemini-2.5-flash"; }
 
 // AI Control Center — which usage MODULE a route consumes (for the per-module daily cap + analytics).
-// explain is refined to maik_case when a computed differential is present.
+// explain is refined to maik_case when a computed differential is present. refine/route/verify and a
+// tier-2 explain keep their module for the pause switch + device cap but never count as a question (T36).
 // research -> its own "research" (Evidence Review) bucket. NOTE: only the Research-Mode
 // (mode:"evidence-review") request counts against it, and it self-gates INSIDE the handler AFTER the
 // KV cache check (a cache hit must not burn a slot); normal web-research is remapped back to "maik"
@@ -286,16 +288,14 @@ const developerProvider = {
   name: "developer",
   available: function (env) { return !!env.GEMINI_API_KEY; },
   generate: async function (env, parts, maxTokens, opts) {
-    let o = opts || {};
-    if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
+    const o = opts || {};
     const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelFor(env, o)}:generateContent?key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, o.timeoutMs || aiTimeoutMs(env));
     { const _t = parseCandidates(jr.data, jr.status, o.meta); if (o.meta) o.meta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: function (env, parts, maxTokens, opts) {
-    let o = opts || {};
-    if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });
+    const o = opts || {};
     return fetch(`${DEV_HOST}/${modelFor(env, o)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
@@ -370,67 +370,20 @@ const vertexProvider = {
   name: "vertex",
   available: function (env) { return !!vertexKey(env) || vertexProjectReady(env); },
   generate: async function (env, parts, maxTokens, opts) {
-    let o = opts || {};
-    if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
+    const o = opts || {};
     const c = await vertexCall(env, o, "generateContent");
     const jr = await fetchJsonWithTimeout(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)) }, o.timeoutMs || aiTimeoutMs(env));
     { const _t = parseCandidates(jr.data, jr.status, o.meta); if (o.meta) o.meta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
-    let o = opts || {};
-    if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
+    const o = opts || {};
     const c = await vertexCall(env, o, "streamGenerateContent?alt=sse");
     return fetch(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
-/* ---- Azure OpenAI (Foundry) — OPTIONAL primary when AI_PROVIDER=azure. OpenAI v1-compatible
- *      chat/completions against the Foundry deployment (Bearer auth). Model = the DEPLOYMENT name
- *      (env.AZURE_OPENAI_DEPLOYMENT, default gpt-4o-mini). Fails over to Vertex/Developer on ANY error,
- *      so when the credit runs out or the key is unset, MaiK seamlessly returns to Gemini. Text-first
- *      (MaiK); images map to OpenAI image_url parts for vision-capable deployments. No streamFetch —
- *      streaming requests skip Azure and use Vertex (geminiStreamUpstream requires p.streamFetch);
- *      MaiK's reliable path is the non-stream generate() below. ---- */
-function azureMessages(parts) {
-  const items = (parts || []).map(function (p) {
-    if (p && p.text != null) return { type: "text", text: String(p.text) };
-    if (p && p.inlineData && p.inlineData.data) return { type: "image_url", image_url: { url: "data:" + (p.inlineData.mimeType || "image/jpeg") + ";base64," + p.inlineData.data } };
-    return null;
-  }).filter(Boolean);
-  const textOnly = items.length && items.every(function (c) { return c.type === "text"; });
-  return [{ role: "user", content: textOnly ? items.map(function (c) { return c.text; }).join("\n") : items }];
-}
-function parseChatCompletion(data, status) {
-  if (status >= 400 || !data || data.error) throw new Error("Azure HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
-  const ch = data.choices && data.choices[0];
-  return (ch && ch.message && ch.message.content) ? String(ch.message.content) : "";
-}
-const azureProvider = {
-  name: "azure",
-  available: function (env) { return !!(env.AZURE_OPENAI_ENDPOINT && env.AZURE_OPENAI_API_KEY); },
-  generate: async function (env, parts, maxTokens, opts) {
-    const o = opts || {};
-    const base = String(env.AZURE_OPENAI_ENDPOINT).replace(/\/+$/, "");
-    const ver = env.AZURE_OPENAI_API_VERSION || "preview";
-    const url = base + "/chat/completions?api-version=" + encodeURIComponent(ver);
-    const model = env.AZURE_OPENAI_DEPLOYMENT || "gpt-5-mini";
-    const body = { model: model, messages: azureMessages(parts) };
-    if (/^(gpt-5|gpt-6|o[0-9])/i.test(model)) {
-      // GPT-5 / o-series reasoning models: max_completion_tokens (NOT max_tokens), default temperature only,
-      // and reasoning_effort so the budget yields the ANSWER, not internal reasoning tokens.
-      body.max_completion_tokens = Math.max(256, maxTokens || 1024);
-      body.reasoning_effort = env.AZURE_OPENAI_REASONING_EFFORT || "minimal";
-    } else {
-      body.max_tokens = maxTokens || 1024;
-      body.temperature = (typeof o.temperature === "number") ? o.temperature : 0.2;
-    }
-    const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + env.AZURE_OPENAI_API_KEY, "Content-Type": "application/json" }, body: JSON.stringify(body) }, aiTimeoutMs(env));
-    return parseChatCompletion(jr.data, jr.status);
-  }
-};
-
-const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, azure: azureProvider };
+const PROVIDERS = { vertex: vertexProvider, developer: developerProvider };
 
 // Phase 2 — streaming plumbing. geminiStreamUpstream tries providers in order for a streamable
 // body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
@@ -539,33 +492,18 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
   });
   return new Response(rs, { headers: { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-store", "X-Accel-Buffering": "no" } });
 }
-// Azure circuit breaker: once Azure errors (credit exhausted / quota / auth), skip it until a cooldown
-// so MaiK stops wasting a failed attempt on every call and serves Gemini directly. Self-recovers with a
-// single probe after the cooldown if the credit is topped up. Per-isolate + zero-storage.
-let _azureOffUntil = 0;
-function azureBreakerOpen() { return Date.now() < _azureOffUntil; }
-function tripAzureBreaker(env, e) {
-  const m = String((e && e.message) || e).toLowerCase();
-  // Credit/quota/auth exhaustion won't recover without a top-up -> long cooldown; transient error -> short.
-  const hard = /quota|insufficient|exceed|billing|credit|invalid|expired|\b401\b|\b402\b|\b403\b|\b429\b|access denied/.test(m);
-  _azureOffUntil = Date.now() + (hard ? (Number(env && env.AZURE_BREAKER_HARD_MS) || 21600000) : (Number(env && env.AZURE_BREAKER_SOFT_MS) || 300000));
-}
-function providerOrder(env, opts) {
-  // Vertex is primary and fails over to Developer. AZURE IS MaiK-ASSISTANT ONLY: AI_PROVIDER=azure puts
-  // Azure/Foundry FIRST (Vertex→Developer as fallback) ONLY for a MaiK call (opts.maik). Every other
-  // module (Vision, ECG/KardiQ, ThoreX, FundX, scribe, router, …) stays on Gemini/Vertex exactly as
-  // before, regardless of AI_PROVIDER. AI_PROVIDER=developer uses the Developer API directly.
+function providerOrder(env) {
   // Owner, 2026-09-24: Vertex is the main provider and the Gemini (AI Studio) key is the fallback.
+  // AI_PROVIDER=vertex (default) -> Vertex then Developer; any other value -> Developer then Vertex.
   const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
-  const forMaik = !!(opts && opts.maik);
-  let order = sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];   // AZURE REMOVED: developer-primary (edge, fast in India) + vertex failover
-  if (!forMaik) order = order.filter(function (n) { return n !== "azure"; });              // non-MaiK → never Azure
-  if (azureBreakerOpen()) order = order.filter(function (n) { return n !== "azure"; });     // auto-skip Azure while tripped
-  return order.length ? order : ["vertex", "developer"];
+  return sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];
 }
 function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env); }
 
-let _lastFailover = null;   // { from, to, reason, timestamp, model } — for /health + diagnostics
+let _lastFailover = null;
+// provider -> ISO time of its last SUCCESSFUL generation in this isolate. /health reports it next to
+// "configured": a key being set is not the same as the provider answering (T51).
+const _lastSuccess = {};   // { from, to, reason, timestamp, model } — for /health + diagnostics
 function failReason(e) {
   const m = String((e && e.message) || e);
   if (/\b(401|403)\b|unauth|permission|IAM|forbidden|jwt|credential|token|STS|OAuth/i.test(m)) return "auth/permission";
@@ -603,10 +541,9 @@ export async function callGemini(env, parts, maxTokens, opts) {
     for (let a = 0; a < attempts; a++) {
       const left = deadline - Date.now();
       if (left < MIN_ATTEMPT_MS) throw lastErr || new Error("AI deadline exceeded");
-      try { return await p.generate(env, parts, maxTokens, Object.assign({}, opts || {}, { timeoutMs: Math.min(aiTimeoutMs(env), left) })); }
+      try { const out = await p.generate(env, parts, maxTokens, Object.assign({}, opts || {}, { timeoutMs: Math.min(aiTimeoutMs(env), left) })); _lastSuccess[name] = new Date().toISOString(); return out; }
       catch (e) {
         lastErr = e;
-        if (name === "azure") tripAzureBreaker(env, e);   // credit done / Azure error -> auto-stop using Azure
         if (!failoverAllowed(e)) throw e;                   // 400: malformed request, every provider refuses it
         if (!retrySameProvider(e)) break;                   // timeout / 4xx: no second attempt here
       }
@@ -1478,10 +1415,15 @@ export async function onRequest(context) {
       model: modelId(env),
       token_cache: true,
       last_failover: _lastFailover,
-      vertex_status: vAvail ? "healthy" : "unavailable",
+      // "healthy" only once this isolate has had a real success; a key that is merely set is "configured".
+      vertex_status: vAvail ? (_lastSuccess.vertex ? "healthy" : "configured") : "unavailable",
+      vertex_configured: vAvail, vertex_last_success: _lastSuccess.vertex || null,
       vertex_mode: vertexKey(env) ? "api-key (express mode)" : (vertexProjectReady(env) ? "project (service account)" : null),
-      developer_status: dAvail ? "ready" : "not_configured",
-      authentication: vAvail ? (env.GCP_WIF_PRIVATE_KEY ? "Workload Identity Federation" : "Service Account JWT") : "none"
+      developer_status: dAvail ? (_lastSuccess.developer ? "healthy" : "configured") : "not_configured",
+      developer_configured: dAvail, developer_last_success: _lastSuccess.developer || null,
+      last_success_scope: "this isolate",
+      authentication: vertexKey(env) ? "API key (Vertex express mode)" : !vertexProjectReady(env) ? "none"
+        : (env.GCP_WIF_PRIVATE_KEY ? "Workload Identity Federation" : "Service Account JWT")
     });
   }
   if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
@@ -2140,9 +2082,9 @@ export async function onRequest(context) {
       // auto-run after the KB miss. FAST PATH: TinyFish (the search API we already use in the
       // Medical-Updates pipeline) does the search in ONE round-trip, then a cheap flash call just
       // SUMMARISES the returned snippets — no internal Gemini google_search grounding (the slow
-      // multi-hop). Lower tokens (we own the context) + real source links. FALLBACK: if TinyFish
-      // returns nothing (no key / empty / error — it never throws), fall back to Gemini's own
-      // grounded search so nothing regresses. Worst case === the previous behaviour.
+      // multi-hop). Lower tokens (we own the context) + real source links. A TinyFish miss (no key /
+      // empty / error — it never throws) is an honest "no web results"; there is no Gemini-grounded
+      // fallback (removed 2026-09-04, see below).
       const qRaw = String(body.question || body.q || "");
       const q = clipQ(qRaw, 1000);
       if (!qRaw) return json({ error: "no question" }, 400);

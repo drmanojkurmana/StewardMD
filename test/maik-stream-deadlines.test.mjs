@@ -25,12 +25,12 @@ test("the upstream OPEN is bounded and the signal actually reaches both provider
   // A signal the provider ignores is decoration — assert both transports forward it to fetch().
   const devFetch = API.slice(API.indexOf("streamFetch: function (env, parts, maxTokens, opts)"), API.indexOf("/* ---- Vertex AI"));
   assert.match(devFetch, /signal: o\.signal/, "developer provider must forward the signal");
-  const vtxFetch = API.slice(API.indexOf("streamFetch: async function (env, parts, maxTokens, opts)"), API.indexOf("/* ---- Azure OpenAI"));
+  const vtxFetch = API.slice(API.indexOf("streamFetch: async function (env, parts, maxTokens, opts)"), API.indexOf("const PROVIDERS = {"));
   assert.match(vtxFetch, /signal: o\.signal/, "vertex provider must forward the signal");
 });
 
 test("the pump races every read against an idle/total budget — no unbounded await", () => {
-  const blk = API.slice(API.indexOf("function streamGeminiToSSE"), API.indexOf("// Azure circuit breaker"));
+  const blk = API.slice(API.indexOf("function streamGeminiToSSE"), API.indexOf("function providerOrder("));
   assert.match(blk, /Promise\.race\(\[reader\.read\(\), timeout\]\)/, "a bare await reader.read() can hang forever");
   assert.match(blk, /Math\.min\(IDLE, DEADLINE - Date\.now\(\)\)/, "budget is the smaller of idle and remaining total");
   assert.match(blk, /reader\.cancel\(\)/, "the abandoned read must be cancelled so the socket is freed");
@@ -44,7 +44,7 @@ test("every ending goes through one exit that ALWAYS closes the stream", () => {
   assert.match(fin, /done: true/, "must emit a done event so the client settles");
   assert.match(fin, /onText\(full(, usage)?\)/, "usage must still be recorded on every path");
   // the error path must use it too, rather than its own ad-hoc close
-  const blk = API.slice(API.indexOf("function streamGeminiToSSE"), API.indexOf("// Azure circuit breaker"));
+  const blk = API.slice(API.indexOf("function streamGeminiToSSE"), API.indexOf("function providerOrder("));
   assert.match(blk, /catch \(e\) \{\s*try \{ reader\.cancel\(\); \} catch \(e2\) \{\}\s*finish\(controller, "error"\);/,
     "the catch path must cancel and finish, not hand-roll a close");
 });
