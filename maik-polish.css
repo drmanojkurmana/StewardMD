@@ -57,6 +57,11 @@ html body #maikSheet.maik-polished .maik-fb-b{min-width:44px;min-height:44px;pad
 html body #maikSheet.maik-polished .maik-acts{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0}
 html body #maikSheet.maik-polished .maik-acts .maik-act{width:100%;padding:10px 4px;border-radius:12px;background:var(--mk-soft);color:var(--mk-mut)}
 html body #maikSheet.maik-polished :is(.maik-fb-reason,.maik-fb-reasonrow){grid-column:1/-1;font-size:16px}
+/* Acting before rating (audit T30): Copy / Regenerate / Edit are what a doctor uses 50 times a day, so
+   they take the first row; "Was this helpful?" with Yes / No sits under them, quieter. */
+html body #maikSheet.maik-polished .maik-acts{grid-row:1}
+html body #maikSheet.maik-polished .maik-fb-q,html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){grid-row:2;font-size:12.5px}
+html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){color:var(--mk-mut)}
 
 /* Compact app navigation: menu + logo on the first row, caption + actions on the second. The model
    chip moved to the composer (2026-09-20): its 150px header slot truncated every label. */

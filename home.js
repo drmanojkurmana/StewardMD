@@ -4127,8 +4127,37 @@
     if (m.notes) P.push("Notes: " + String(m.notes).slice(0, 200));
     return P.join(". ");
   }
+  function maikConvHtmlKey(id) { return "smd_maik_convh_" + maikAcctKey() + "_" + id; }
+  function maikConvHtml(rec) {
+    if (!rec) return "";
+    if (rec.html) return rec.html;   // written before the split index (audit T48)
+    try { return localStorage.getItem(maikConvHtmlKey(rec.id)) || ""; } catch (e) { return ""; }
+  }
   function maikLoadConvos() { try { return JSON.parse(localStorage.getItem(maikConvKey()) || "[]") || []; } catch (e) { return []; } }
-  function maikStoreConvos(list) { try { localStorage.setItem(maikConvKey(), JSON.stringify((list || []).slice(0, 200))); } catch (e) {} }
+  function maikStoreConvos(list) {
+    list = list || [];
+    var keep = list.slice(0, 200), drop = list.slice(200);
+    // Move any inline html to its own key, then write a small index (audit T48).
+    keep.forEach(function (r) { if (r && r.html) { try { localStorage.setItem(maikConvHtmlKey(r.id), r.html); } catch (e) {} } });
+    drop.forEach(function (r) { try { if (r) localStorage.removeItem(maikConvHtmlKey(r.id)); } catch (e) {} });
+    try { localStorage.setItem(maikConvKey(), JSON.stringify(keep.map(function (r) { return { id: r.id, title: r.title, ts: r.ts }; }))); } catch (e) {}
+  }
+  function maikDeleteConv(id) {
+    try { localStorage.removeItem(maikConvHtmlKey(id)); } catch (e) {}
+    maikStoreConvos(maikLoadConvos().filter(function (c) { return c.id !== id; }));
+  }
+  /* SIGN-OUT (audit T29): conversations, the active thread, About me and the route cache (which holds
+   * question text) belong to the account that is leaving. signout-fix.js dispatches smd:signout before
+   * its reload, while the account is still the signed-in one, so the keys below are that account's. */
+  function maikWipeAccount() {
+    try {
+      var acct = maikAcctKey(), pre = "smd_maik_convh_" + acct + "_", dead = [];
+      for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(pre) === 0) dead.push(k); }
+      dead.concat([maikConvKey(), maikThreadKey(), maikActiveKey(), maikMeKey(), "smd_maik_routes"]).forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+      _maikTurns = []; _maikTopic = null; _maikBodyHTML = "";
+    } catch (e) {}
+  }
+  try { window.addEventListener("smd:signout", maikWipeAccount); } catch (e) {}
   var _maikConvId = (function () { try { return localStorage.getItem(maikActiveKey()) || null; } catch (e) { return null; } })();
   function maikSetActive(id) { _maikConvId = id || null; try { if (id) localStorage.setItem(maikActiveKey(), id); else localStorage.removeItem(maikActiveKey()); } catch (e) {} }
   function maikNewConvId() { return "c" + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36); }
@@ -4142,7 +4171,8 @@
       if (!_maikConvId) maikSetActive(maikNewConvId());
       var list = maikLoadConvos(), i = -1;
       for (var k = 0; k < list.length; k++) if (list[k].id === _maikConvId) { i = k; break; }
-      var rec = { id: _maikConvId, title: maikConvTitle(html), html: html, ts: Date.now() };
+      try { localStorage.setItem(maikConvHtmlKey(_maikConvId), html); } catch (e) {}
+      var rec = { id: _maikConvId, title: maikConvTitle(html), ts: Date.now() };
       if (i >= 0) list[i] = rec; else list.unshift(rec);
       list.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
       maikStoreConvos(list);
@@ -6662,11 +6692,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       });
       try { scroll(); } catch (e) {}
     }
+    /* The in-session answer cache key (audit T38): the same words answered by a different engine or at a
+     * different length are a different answer. It used to be the question alone, so switching engine or
+     * length served the previous answer. */
+    function maikCacheKey(q, active) {
+      var eng = "cloud";
+      try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective) eng = window.SMD_MAIK_ENGINE.effective() + ((window.SMD_MAIK_ENGINE.activePack && window.SMD_MAIK_ENGINE.activePack()) || ""); } catch (e) {}
+      return maikNorm(q) + "|" + eng + "|" + maikLenPref() + (active ? "|case" : "");
+    }
     function runClinical(question, retrieval, depth, active, topicLabel) {
       depth = maikApplyLen(depth);   // the length preference rides the depth channel (Short / Balanced / Detailed)
       var userQ = _maikUserQ || question; _maikUserQ = null;   // what the clinician typed, before any topic prefix
-      var cacheKey = maikNorm(question) + (active ? "|case" : "");
-      if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
+      var cacheKey = maikCacheKey(question, active);
+      if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); try { var _cm = document.createElement("div"); _cm.innerHTML = _maikCache[cacheKey]; maikRememberTurn(question, maikAnswerText(_cm)); } catch (e) {} if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; maikSetSendMode(true);
       var think = bubble("ai", maikBufferHTML("Searching StewardMD knowledge", "maik-thinking"));
       // Tie the answer to the CONVERSATION, not this sheet instance. If the user closes MaiK and reopens
@@ -6807,7 +6845,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResume, 25000); } } catch (e) {}
       Promise.resolve()
         .then(function () {
-          try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}
+          // No SMD_AI.setFlag(true) here any more (audit T44): it switched MaiK back on for a doctor who
+          // had turned it off, and re-drew the live differential, on every question. "Turn on MaiK" in
+          // the ai-off notice is the one place that enables it.
           // Ground on the active case ONLY when the question is about that patient ("this/my
           // patient", "the case/diagnosis"). A standalone knowledge question (e.g. "treatment of
           // paraquat poisoning") must be grounded on its OWN topic, never on the ambient case —
@@ -6874,6 +6914,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             // Hand the turn to web research: this turn's "Reviewing the evidence" stage timers and its
             // watchdog would otherwise keep rewriting the bubble, and maikRunWeb now owns Stop.
             _maikDone = true; _clearStages(); clearTimeout(_maikTO);
+            // maikRunWeb pauses Firestore for its own round trip and resumes it itself; this turn's final
+            // .then used to resume it at once, undoing that pause mid-research (audit T46).
+            _fsResumed = true;
             try { maikRunWeb(think, question); } catch (e) { think.appendChild(maikWebChipEl(question)); }
             try { scroll(); } catch (e) {}
             return;
@@ -6903,11 +6946,22 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
             _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
             if (!_perfTTFT) { _perfTTFT = maikNow(); try { maikHaptic("start"); } catch (e) {} }   // first chunk: the answer is coming
-            var _accS = maikStripRefine(acc).replace(/@@\s*MORE\s*@@/gi, "\n\n");   // hide the @@REFINE@@ / @@MORE@@ markers while streaming
-            var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
-            _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
-            try { scroll(); } catch (e) {}
+            // Paint at most every 50 ms, always the latest text (audit T47): every chunk used to re-render
+            // the whole answer's markdown. The first chunk paints at once. A pending paint never runs after
+            // Stop or once the final answer is being rendered.
+            _paintAcc = acc;
+            if (_paintT) return;
+            var paint = function () {
+              _paintT = null;
+              if (_maikStopped || _streamFinal) return;
+              var _accS = maikStripRefine(_paintAcc).replace(/@@\s*MORE\s*@@/gi, "\n\n");   // hide the @@REFINE@@ / @@MORE@@ markers while streaming
+              var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
+              _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
+              try { scroll(); } catch (e) {}
+            };
+            if (!_paintedOnce) { _paintedOnce = true; paint(); } else { _paintT = setTimeout(paint, 50); }
           };
+          var _paintAcc = "", _paintT = null, _paintedOnce = false, _streamFinal = false;
           // On NATIVE, never use live streaming: the WebView's CapacitorWebFetch can IGNORE the
           // AbortController, so a stalled SSE never rejects and never falls back — the request then
           // hangs to the 90s watchdog ("MaiK took too long") for any session that hadn't already
@@ -7114,7 +7168,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 // the topic-prefixed rewrite, so the clinician's own bubble reappeared as "IRIS: Iris in
                 // aids", got prefixed AGAIN on the way through ("IRIS: IRIS: Iris in aids"), and the
                 // answer drifted further each time (owner transcript, 2026-09-20).
-                try { delete _maikCache[maikNorm(question) + (maikActiveCase() ? "|case" : "")]; } catch (e) {}
+                try { delete _maikCache[maikCacheKey(question, maikActiveCase())]; } catch (e) {}
                 if (_maikBusy) return;
                 _maikRegen = true;
                 runClinical(question, retrieval, depth, active, topicLabel);
@@ -7133,6 +7187,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth, tier: _tier, regen: _regen }, onDelta)
               : window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier, regen: _regen });
             return call.then(function (r) {
+              _streamFinal = true; if (_paintT) { clearTimeout(_paintT); _paintT = null; }
               // Stopped (audit T03): the request could not be recalled (CapacitorHttp ignores abort), so
               // its answer is dropped here. Rendering it overwrote "Stopped" and freed the composer while a
               // newer question could be running.
@@ -7437,7 +7492,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, ok); else ok(); } catch (e) { ok(); }
           } else if (label === "Regenerate") {
             if (_maikBusy || !q) return;
-            try { delete _maikCache[maikNorm(q) + (maikActiveCase() ? "|case" : "")]; } catch (e) {}
+            try { delete _maikCache[maikCacheKey(q, maikActiveCase())]; } catch (e) {}
             _maikRegen = true; runClinical(q, q, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(q) : q);
           } else if (label === "Edit") {
             try { qEl.value = q; qEl.focus(); qEl.setSelectionRange(q.length, q.length); } catch (e) {}
@@ -7569,7 +7624,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikCloseSide() { var e = maikSideEls(); if (!e.wrap) return; e.wrap.classList.remove("open"); setTimeout(function () { try { e.wrap.hidden = true; } catch (x) {} }, 220); }
     function maikOpenConv(id) {
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
-      maikSetActive(id); _maikBodyHTML = rec.html || ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {};
+      maikSetActive(id); _maikBodyHTML = maikConvHtml(rec); _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {};
       if (body) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); }
       try { localStorage.setItem(maikThreadKey(), _maikBodyHTML); } catch (e) {}
       maikCloseSide();
@@ -7630,7 +7685,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var _sideList = sheet.querySelector("#maikSideList");
     if (_sideList) _sideList.addEventListener("click", function (ev) {
       var del = ev.target.closest && ev.target.closest("[data-del]");
-      if (del) { ev.stopPropagation(); var did = del.getAttribute("data-del"); maikStoreConvos(maikLoadConvos().filter(function (c) { return c.id !== did; })); if (did === _maikConvId) maikNewThread(); else maikRenderSide(_sideSearch ? _sideSearch.value : ""); return; }
+      if (del) { ev.stopPropagation(); var did = del.getAttribute("data-del"); maikDeleteConv(did); if (did === _maikConvId) maikNewThread(); else maikRenderSide(_sideSearch ? _sideSearch.value : ""); return; }
       var op = ev.target.closest && ev.target.closest("[data-conv]");
       if (op) maikOpenConv(op.getAttribute("data-conv"));
     });
