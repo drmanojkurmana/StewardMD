@@ -681,6 +681,7 @@
   // never mixed into the Knowledge-Base-backed text.
   function generalKnowledgeAllowed() { try { return localStorage.getItem("smd_maik_general_knowledge") === "1"; } catch (e) { return false; } }
   var GENERAL_HEAD = "Not in the StewardMD Knowledge Base (general model knowledge, unverified):";
+  var NOT_CHECKED = "Not checked against the StewardMD Knowledge Base.";
   var REGEN_NUDGE = "\nState only the drugs, doses and figures that appear in the reference material above. Where the material does not cover part of the question, say so in one line.";
 
   /* A follow-up retrieves on the previous subject too: "tell me doses" alone has no anchor and grounds
@@ -980,12 +981,29 @@
 
     // A greeting is not a question: no retrieval, so no "Source:" line on a hello (owner
     // screenshot, 2026-09-04).
-    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
+    // RETRIES REUSE THE FIRST ATTEMPT'S EVIDENCE (audit T57, 2026-09-25). A retry used to retrieve
+    // again from a package whose grounding had already been stripped (below), so RAG #1's expansion
+    // terms were lost, and a null result showed the regenerated answer unchecked; the blank-answer
+    // retry skipped retrieval altogether. opts._grounding carries the first attempt's passages
+    // (null = deliberately ungrounded, the no-coverage retry).
+    var groundingP = (opts && opts._grounding !== undefined) ? Promise.resolve(opts._grounding)
+      : (images.length || (opts && opts._ungrounded) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
       // pkg goes in so expansionTerms() can mine RAG #1's own vocabulary. It is read HERE, before
       // the citation-bearing fields are stripped off the package further down.
       : retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg);
 
     return groundingP.then(function (grounding) {
+    /** The claim-check options, shared by the live stream view and the final check. */
+    function groundOpts(nerDrugs) {
+      return {
+        allowGeneral: generalKnowledgeAllowed(), inlineRefs: true,
+        drugs: nerDrugs,
+        // The app's drug lexicon (drug-lexicon.js), so drugs the suffix rule cannot see (warfarin,
+        // aspirin, hydralazine...) are checked too, and a bare "- Warfarin" bullet is a claim (T02).
+        lexicon: (typeof window !== "undefined" && window.SMD_DRUG_LEXICON) || null,
+        expand: (grounding && grounding.RAG && grounding.RAG.expand) ? function (q) { return grounding.RAG.expand(q)[0]; } : null
+      };
+    }
     // Queued like every other local generation, and NOT background: the clinician is watching this
     // one, so it goes ahead of any queued Scribe drafting (it cannot interrupt one already running).
     return serial(function () {
@@ -1011,8 +1029,28 @@
       // main-thread work and a battery cost that has nothing to do with the model. The first token
       // paints at once (time-to-first-token is what the doctor feels); after that the screen repaints
       // at most every PAINT_MS, and a final paint runs when generation ends.
-      var _paintT = null, _paintLast = 0, _paintDirty = false;
-      function paintNow() { _paintT = null; _paintDirty = false; _paintLast = Date.now(); try { onDelta(stripReasoning(acc)); } catch (e) {} }
+      //
+      // COMPLETE LINES ONLY ARE SETTLED (audit T56, 2026-09-25). Every token used to be painted raw,
+      // so a line the claim check later removed (an unsupported drug, a spliced dose) sat on screen
+      // as if it were part of the answer until generation ended. Now, when the answer is grounded,
+      // each COMPLETE line is claim-checked as it arrives and shown in its checked form (with its
+      // [n]) or not at all; only the line still being written is shown raw, at the end, where the
+      // live bubble's caret marks it as in progress. Ungrounded answers paint exactly as before.
+      var _paintT = null, _paintLast = 0, _paintDirty = false, _detached = false, _doneSrc = null, _doneShown = "";
+      var _Gs = grounding && !images.length && (typeof window !== "undefined") && window.SMD_MAIK_GROUND;
+      function streamView(s) {
+        if (!_Gs || !_Gs.groundAnswer) return s;
+        var cut = s.lastIndexOf("\n"), done = cut >= 0 ? s.slice(0, cut) : "", part = cut >= 0 ? s.slice(cut + 1) : s;
+        if (done !== _doneSrc) {
+          _doneSrc = done;
+          try {
+            var gs = _Gs.groundAnswer(done, grounding.passages, pkg && pkg.question, groundOpts(null));
+            _doneShown = gs.text + (gs.general ? "\n\n" + GENERAL_HEAD + "\n" + gs.general : "");
+          } catch (e) { _doneShown = ""; }
+        }
+        return _doneShown + (part ? (_doneShown ? "\n" : "") + part : "");
+      }
+      function paintNow() { _paintT = null; _paintDirty = false; _paintLast = Date.now(); if (_detached) return; try { onDelta(streamView(stripReasoning(acc))); } catch (e) {} }
       function paint() {
         _paintDirty = true;
         if (_paintT) return;
@@ -1022,8 +1060,24 @@
         try { if (_paintT && typeof _paintT.unref === "function") _paintT.unref(); } catch (e) {}
       }
       function paintFlush() { if (_paintT) { clearTimeout(_paintT); _paintT = null; } if (_paintDirty) paintNow(); }
+      /* Before a retry recurses into answer(), this attempt stops listening and painting (T57): its
+       * listener used to stay attached for the whole retry, so the screen alternated between the
+       * two attempts' text. The retry attaches its own listener. */
+      function detach() {
+        _detached = true;
+        if (_paintT) { clearTimeout(_paintT); _paintT = null; }
+        if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }
+        sub = null;
+      }
+      function retry(extra) {
+        detach();
+        var o2 = extra;
+        if (opts) { for (var k in opts) { if (!(k in o2)) o2[k] = opts[k]; } }
+        return answer(pkg, o2, onDelta);
+      }
       var attach = (typeof onDelta === "function" && L.addListener)
         ? Promise.resolve(L.addListener("llamaToken", function (ev) {
+            if (_detached) return;
             acc += (ev && ev.text) || "";
             if (_touchJob) _touchJob();   // a live stream is not a wedged call
             // Strip on the way out too, not just at the end: onDelta feeds the live typewriter, so a
@@ -1132,9 +1186,8 @@
         // directness nudge recovers most of these, so retry ONCE before surfacing an error.
         // Text path only: an image answer costs a full vision prefill and is not think-prone.
         if (!text && !images.length && !(opts && opts._retried)) {
-          var ro = { _retried: true, temperature: 0.35, nudge: true, pack: packId };
-          if (opts) { for (var k in opts) { if (!(k in ro)) ro[k] = opts[k]; } }
-          return answer(pkg, ro, onDelta);
+          // Same evidence as this attempt, so the retry is checked like any answer (T57).
+          return retry({ _retried: true, temperature: 0.35, nudge: true, pack: packId, _grounding: grounding });
         }
         if (!text) return { error: EMPTY_ANSWER };
         // NO-COVERAGE FALLBACK (owner, 2026-09-04, from a live screenshot). Retrieval can miss: a
@@ -1145,9 +1198,7 @@
         // from its own weights, marked ungrounded, no gate, no source line (the banner already says
         // "AI-generated, no sources").
         if (grounding && !images.length && !(opts && opts._ungrounded) && NO_COVERAGE.test(text)) {
-          var uo = { _ungrounded: true, pack: packId };
-          if (opts) { for (var k2 in opts) { if (!(k2 in uo)) uo[k2] = opts[k2]; } }
-          return answer(pkg, uo, onDelta);
+          return retry({ _ungrounded: true, pack: packId, _grounding: null });
         }
         // RAG safety net: every number/drug the answer states must be backed by the retrieved
         // book text or the question itself. A doctor-supplied figure ("glucose 32 mg/dL") is not
@@ -1166,20 +1217,12 @@
            * the product allows general knowledge. Paraphrase is free; the bar on figures and drugs is
            * unchanged. If NOTHING can be supported, the model gets ONE more attempt constrained to the
            * reference material, and only then does the reference passage stand in for the answer. */
-          var g = G.groundAnswer(text, grounding.passages, pkg && pkg.question, {
-            allowGeneral: generalKnowledgeAllowed(), inlineRefs: true,
-            drugs: r && r._nerDrugs,
-            // The app's drug lexicon (drug-lexicon.js), so drugs the suffix rule cannot see (warfarin,
-            // aspirin, hydralazine...) are checked too, and a bare "- Warfarin" bullet is a claim (T02).
-            lexicon: (typeof window !== "undefined" && window.SMD_DRUG_LEXICON) || null,
-            expand: (grounding.RAG && grounding.RAG.expand) ? function (q) { return grounding.RAG.expand(q)[0]; } : null
-          });
+          var g = G.groundAnswer(text, grounding.passages, pkg && pkg.question, groundOpts(r && r._nerDrugs));
           try { window.__smdLastGate = { q: pkg && pkg.question, verdict: g.verdict, stats: g.stats, removed: g.removed, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}
           if (g.verdict === "ungrounded") {
             if (!(opts && opts._regen)) {
-              var go = { _regen: true, temperature: 0.2, pack: packId };
-              if (opts) { for (var k3 in opts) { if (!(k3 in go)) go[k3] = opts[k3]; } }
-              return answer(pkg, go, onDelta);
+              // Constrained to the SAME passages, so the regenerated answer is claim-checked too (T57).
+              return retry({ _regen: true, temperature: 0.2, pack: packId, _grounding: grounding });
             }
             var pass0 = grounding.passages[0]; quotedPassage = true;
             var shown0 = cleanPassage(pass0.text);
@@ -1214,9 +1257,13 @@
             text = text + "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
           }
         }
+        // A regenerate that ended up with no passages is never presented as checked (T57). With the
+        // evidence carried through opts._grounding this cannot happen today; it stays as the net.
+        if (!grounding && opts && opts._regen) text += "\n\n" + NOT_CHECKED;
         if (!quotedPassage) text = emphasize(text);
         return {
           text: text,
+          checked: !!groundingOut,   // the claim check ran on this text
           truncated: !!(cut && cut.truncated),   // hit the output budget; finished at the last full sentence
           // sources stays [] regardless: the citation UI's own contract (SMD_MaiK.sourceList)
           // recomputes from pkg.grounding/retrieved/treatment, which this engine does not
