@@ -849,16 +849,42 @@ async function verifyGrounding(env, text, pkg) {
   } catch (e) { return { checked: false }; }
 }
 
-function renderGroundedPrompt(pkg) {
-  const L = [];
+/* Sections + budget (T35). The prompt used to be one list head-cut at MAX_IN_CHARS, with history
+ * (up to ~5.3k chars) BEFORE the knowledge base, so an oversized package lost the treatment dosing,
+ * the stewardship block and the SOURCES list first. Each block now renders into its own section, the
+ * sections are emitted question -> engine/patient -> KB -> treatment + stewardship -> refs -> SOURCES
+ * -> About-me -> history -> earlier -> closing question, and when over maxChars the LEAST important
+ * are trimmed first: earlier topics, then history (oldest turns first), About-me, drug refs, retrieved
+ * chunks, engine output; treatment and SOURCES go last. Section wording is unchanged. */
+function trimTail(t, over) {
+  if (!t || over <= 0) return t;
+  const keep = t.length - over;
+  if (keep <= 0) return "";
+  const cut = t.lastIndexOf("\n", keep);
+  return t.slice(0, cut > 0 ? cut : keep);
+}
+function trimHistoryHead(t, over) {
+  if (!t || over <= 0) return t;
+  const lines = t.split("\n"), head = lines.shift();
+  let removed = 0;
+  while (lines.length && removed < over) removed += lines.shift().length + 1;
+  return lines.filter(Boolean).length ? [head].concat(lines).join("\n") : "";
+}
+const PROMPT_ORDER = ["q", "engine", "kb", "treat", "refs", "sources", "doctor", "history", "earlier", "close"];
+const PROMPT_TRIM = ["earlier", "history", "doctor", "refs", "kb", "engine", "treat", "sources"];
+function renderGroundedPrompt(pkg, maxChars) {
+  const S = { q: [], doctor: [], history: [], earlier: [], engine: [], kb: [], treat: [], refs: [], close: [], sources: [] };
+  let L = S.q;
   const r = pkg.reasoning || {}, pc = pkg.patientCase || {};
   // The clinician's actual question MUST lead the prompt — otherwise the model answers from
   // whatever was retrieved and (with a vague follow-up) narrates unrelated retrieved diseases.
   if (pkg.question) L.push("=== CLINICIAN QUESTION (answer THIS specifically and completely) ===\n" + clipQ(pkg.question, 2000) + "\n");
+  L = S.doctor;
   if (pkg.doctor) {
     // About me (owner, 2026-09-25): the doctor's own saved preferences, never patient data.
     L.push("=== ABOUT THE CLINICIAN (their saved preferences: tailor setting, guideline choice and emphasis to them; never mention this block) ===\n" + clip(String(pkg.doctor), 400) + "\n");
   }
+  L = S.history;
   if (pkg.history && pkg.history.length) {
     // pkg.newTopic: the client's continuity classifier judged this a NEW question (it names a subject
     // the thread never mentioned). The turns still travel as background, but the model must not
@@ -872,10 +898,12 @@ function renderGroundedPrompt(pkg) {
     H.forEach(function (h, i) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, i === H.length - 1 ? 1200 : 450)); });
     L.push("");
   }
+  L = S.earlier;
   if (Array.isArray(pkg.earlier) && pkg.earlier.length) {
     L.push("=== EARLIER IN THIS CONVERSATION the clinician also asked about (context only) ===\n" +
       pkg.earlier.slice(-12).map(function (x) { return clip(String(x || ""), 100); }).filter(Boolean).join("; ") + "\n");
   }
+  L = S.engine;
   L.push("=== DETERMINISTIC ENGINE OUTPUT (AUTHORITATIVE — do not change the diagnosis) ===");
   if (r.gate) L.push("Gate: " + clip(JSON.stringify(r.gate), 300));
   (r.differential || []).forEach((d, i) => {
@@ -898,6 +926,7 @@ function renderGroundedPrompt(pkg) {
   // no content loss: the first occurrence (grounding, page-cited) is kept; later duplicates dropped.
   var _seenChunk = {};
   function _fresh(t) { var k = String(t == null ? "" : t).slice(0, 90).toLowerCase().replace(/\s+/g, " ").trim(); if (!k || _seenChunk[k]) return false; _seenChunk[k] = 1; return true; }
+  L = S.kb;
   L.push("\n=== RETRIEVED STEWARDMD KNOWLEDGE (PRIMARY SOURCE — reason from THIS) ===");
   (pkg.grounding || []).forEach((g) => {
     var emitted = [];
@@ -910,6 +939,7 @@ function renderGroundedPrompt(pkg) {
     var _rlines = (pkg.retrieved || []).filter((c) => _fresh(c.text)).map((c) => "   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : ""));
     if (_rlines.length) { L.push("\nAdditional retrieved chunks (relevance-ranked):"); _rlines.forEach((e) => L.push(e)); }
   }
+  L = S.treat;
   if (pkg.treatment) {
     const t = pkg.treatment;
     L.push("\n=== TREATMENT RESOLUTION (precedence " + (t.precedence || []).join(" ▸ ") + ") ===");
@@ -930,6 +960,7 @@ function renderGroundedPrompt(pkg) {
     });
     if (t.overlayApplied && t.overlay) L.push("Hospital overlay (" + t.overlay.hospitalId + ", SEPARATE — does not replace the default): " + clip(JSON.stringify(t.overlay.recommendation), 700));
   }
+  L = S.refs;
   const rf = pkg.refs || {};
   const refLine = [];
   if (rf.drug && rf.drug.length) refLine.push("drugs(by ref): " + rf.drug.join(", "));
@@ -941,6 +972,7 @@ function renderGroundedPrompt(pkg) {
   // dropped here (only drug/calculator/ICU refs were serialised), so "when can I de-escalate?" /
   // "what's the coverage matrix?" fell back to general knowledge. Sibling of the dose-grounding bug
   // (#482/#483). Emitted compactly (clip + caps) to stay inside MAX_IN_CHARS.
+  L = S.treat;   // stewardship is treatment guidance: protected like the dosing
   const stw = (rf.stewardship || []).filter(Boolean);
   if (stw.length) {
     L.push("\n=== ANTIBIOTIC STEWARDSHIP (curated — use for de-escalation, narrowing & coverage questions) ===");
@@ -967,15 +999,27 @@ function renderGroundedPrompt(pkg) {
       if (s.toxicityFactors && s.toxicityFactors.length) L.push("Severity/toxicity drivers: " + s.toxicityFactors.slice(0, 12).map((x) => clip(x, 40)).join(", "));
     });
   }
+  L = S.close;
   if (pkg.question) L.push("\n=== CLINICIAN QUESTION ===\n" + clipQ(pkg.question, 2000));
   // Phase 2 — numbered SOURCES for per-claim citations + table formatting hint. The client builds
   // this list (identical numbering to the footer it renders) so [n] markers line up exactly.
+  L = S.sources;
   if (pkg.sources && pkg.sources.length) {
     L.push("\n=== SOURCES (cite the specific supporting claim inline with [n]; use ONLY these numbers, never invent one) ===");
     pkg.sources.slice(0, 12).forEach((s) => L.push((s.n || "") + ". " + clip(s.title, 120)));
     L.push("\nFORMATTING: append the matching [n] right after a statement that rests on a source above (e.g. 'first-line is X [2]'). When a recommendation rests on a NAMED guideline or trial in the list (e.g. 'Surviving Sepsis Campaign 2021', 'ESC 2024', 'ICMR AMRSN 2024', an 'AAO' PPP), name it in prose with its year the first time you rely on it ('per the 2021 Surviving Sepsis Campaign [n]'), the way UpToDate attributes a source — do NOT name generic bucket titles ('StewardMD Knowledge Base', 'Standard internal-medicine reference') in prose, only mark them with [n]. When you compare 3+ options across the same attributes (differentials, empiric regimens, drug choices), present them as a compact GitHub-flavoured markdown table (header row + |---| separator). Do not cite what you cannot attribute to a listed source.");
   }
-  return L.join("\n");
+  const txt = {};
+  PROMPT_ORDER.forEach((k) => { txt[k] = S[k].join("\n"); });
+  const size = () => PROMPT_ORDER.reduce((n, k) => n + (txt[k] ? txt[k].length + 1 : 0), 0);
+  const cap = maxChars > 0 ? maxChars : Infinity;
+  for (const k of PROMPT_TRIM) {
+    const over = size() - cap;
+    if (over <= 0) break;
+    txt[k] = k === "history" ? trimHistoryHead(txt[k], over) : trimTail(txt[k], over);
+  }
+  const out = PROMPT_ORDER.map((k) => txt[k]).filter(Boolean).join("\n");
+  return out.length > cap ? out.slice(0, cap) : out;
 }
 
 const VISION_SYS = {
@@ -1730,7 +1774,7 @@ export async function onRequest(context) {
         // and never breaks/delays the answer. Inert + byte-identical unless BOTH Connect flags are on.
         if (maikWiringOn(env)) { try { await applyConnectContext(env, request, pkg); } catch (e) {} }
         _at("connect");
-        let grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
+        let grounded = renderGroundedPrompt(pkg, MAX_IN_CHARS);
         _at("prompt");
         // MaiK Brain (Part 2): if the client sent a RANKED evidence bundle, synthesize from it
         // (StewardMD-first, deduped) and adapt tone to the inferred audience. Backward-compatible:
@@ -1743,7 +1787,8 @@ export async function onRequest(context) {
           else if (body && body.depth === "detailed") sysA = sysA + "\n\nLENGTH: DETAILED. Cover the topic fully in clear sections (pathophysiology, presentation, diagnosis, management, pitfalls, as relevant); do not stop until every relevant aspect is covered.";
           if (pkg.evidenceBundle && Array.isArray(pkg.evidenceBundle.claims) && pkg.evidenceBundle.claims.length) {
             const ebLines = pkg.evidenceBundle.claims.slice(0, 20).map((c, i) => (i + 1) + ". [" + (c.tier ? "tier " + c.tier : "kb") + "] " + String(c.text || "").slice(0, 320)).join("\n");
-            grounded = ("RANKED EVIDENCE (StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from this ranked evidence — do not copy any single item verbatim; merge overlapping points; cite sources; if items conflict, state the disagreement and the higher-authority position:\n" + ebLines + "\n\n" + grounded).slice(0, MAX_IN_CHARS);
+            grounded = ("RANKED EVIDENCE (StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from this ranked evidence — do not copy any single item verbatim; merge overlapping points; cite sources; if items conflict, state the disagreement and the higher-authority position:\n" + ebLines + "\n\n");
+            grounded = grounded + renderGroundedPrompt(pkg, Math.max(2000, MAX_IN_CHARS - grounded.length));   // the package keeps its own budget (T35)
           }
           // Lazy two-call generation (client flag smd_maik_lazy). tier 1 = bottom line ONLY (cheap,
           // fast); tier 2 = the depth, fetched only if the clinician taps "Know more". Inert unless the
