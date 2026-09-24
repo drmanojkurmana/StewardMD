@@ -239,3 +239,7 @@ Pages env `AI_PROVIDER` was set to `vertex` on 2026-09-24 (it had been `develope
 which overrides wrangler.toml); a Pages variable change applies only to the NEXT deployment, hence this commit.
 
 Retry after removing the AI_PROVIDER Pages secret that collided with the wrangler.toml var (2026-09-24).
+
+Pages caps variables plus secrets at 128 bindings; adding VERTEX_API_KEY made 129 and every deployment failed with
+"Too many text bindings". GCP_WIF_ISSUER and GCP_WIF_SUBJECT (code defaults exist) were deleted on 2026-09-24 to get back
+under it; delete the rest of the GCP_* set once the key is verified, and count before adding any new secret.
