@@ -217,7 +217,8 @@
       return slot && !/^\s+[a-z]/.test(after) ? "\u0001" : "\u0002";
     });
     t = t.replace(/\bSanford[-\s]aligned\b/g, "Guideline-aligned").replace(/\bsanford[-\s]aligned\b/g, "guideline-aligned")
-      .replace(/\b(?:The\s+)?Sanford\s+Guide(?:\s+to\s+Antimicrobial\s+Therapy)?(?:\s+\d{4})?/gi, "\u0001");
+      .replace(/\b(?:The\s+)?Sanford\s+Guide(?:\s+to\s+Antimicrobial\s+Therapy)?(?:\s+\d{4})?/gi, "\u0001")
+      .replace(/\bSanford\b(?:\s*\/\s*)?/g, function (m) { return /\//.test(m) ? "" : "\u0001"; });
     t = t.replace(PAGE_RE, function (m) { return /^\s*\(/.test(m) && !/\)\s*$/.test(m) ? "(" : ""; });
     // merge runs of generic sources ("Harrison; Nelson" -> one), then write them out
     t = t.replace(/\u0001(?:\s*(?:[;,&\u00B7|]|and)\s*\u0001)+/g, "\u0001");
