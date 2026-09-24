@@ -1169,6 +1169,9 @@
           var g = G.groundAnswer(text, grounding.passages, pkg && pkg.question, {
             allowGeneral: generalKnowledgeAllowed(), inlineRefs: true,
             drugs: r && r._nerDrugs,
+            // The app's drug lexicon (drug-lexicon.js), so drugs the suffix rule cannot see (warfarin,
+            // aspirin, hydralazine...) are checked too, and a bare "- Warfarin" bullet is a claim (T02).
+            lexicon: (typeof window !== "undefined" && window.SMD_DRUG_LEXICON) || null,
             expand: (grounding.RAG && grounding.RAG.expand) ? function (q) { return grounding.RAG.expand(q)[0]; } : null
           });
           try { window.__smdLastGate = { q: pkg && pkg.question, verdict: g.verdict, stats: g.stats, removed: g.removed, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}
