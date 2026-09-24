@@ -115,7 +115,8 @@ let svg = overlaySvg(SLICE, ATL, B, 400, 800, { sel: null, hidden: {} });
 ok("overlay is an svg", svg.indexOf("<svg") === 0);
 ok("overlay draws one dot per pin", (svg.match(/class="atlas-dot/g) || []).length === 3);
 ok("overlay draws one leader line per pin", (svg.match(/class="atlas-lead/g) || []).length === 3);
-ok("overlay draws one tick per pin", (svg.match(/class="atlas-tick/g) || []).length === 3);
+ok("overlay draws one tick per STRUCTURE (labels are deduped)", (svg.match(/class="atlas-tick/g) || []).length === 2);
+ok("overlay draws one label per structure", (svg.match(/class="atlas-lab/g) || []).length === 2);
 ok("overlay uses both gutters", svg.includes('atlas-lab l') && svg.includes('atlas-lab r'));
 ok("overlay uses the category colour", svg.includes("#7fd9e8"));
 ok("overlay tags elements with their structure id", (svg.match(/data-atlas-s="fornix"/g) || []).length >= 2);
@@ -152,7 +153,8 @@ ok("letterboxing does not desync label from dot", Math.abs(+tLead[2] - +tLead[4]
 
 // Selection: the chosen structure is marked on BOTH of its pins, others dim.
 svg = overlaySvg(SLICE, ATL, B, 400, 800, { sel: "fornix", hidden: {} });
-ok("selection marks every instance", (svg.match(/atlas-lab [lr] on"/g) || []).length === 2);
+ok("selection marks the one label of the structure", (svg.match(/atlas-lab [lr] on"/g) || []).length === 1);
+ok("selection marks every dot of the structure", (svg.match(/class="atlas-dot on"/g) || []).length === 2);
 ok("selection dims the others", /atlas-lab [lr] dim"/.test(svg));
 ok("selection thickens both leader lines", (svg.match(/atlas-lead on"/g) || []).length === 2);
 ok("unselected dots dim too", /atlas-dot dim"/.test(svg));
@@ -191,6 +193,134 @@ ok("fewer slices than samples degrades gracefully", trackThumbs(mkA(3), 5).lengt
 ok("single slice is safe", trackThumbs(mkA(1), 5).length === 1);
 ok("empty atlas is safe", trackThumbs({ slices: [] }, 5).length === 0);
 ok("null atlas is safe", trackThumbs(null, 5).length === 0);
+
+// ===================== premium viewer helpers (2026-09-25) =====================
+const P = mod.exports;
+const near = (a, b, e = 1e-6) => Math.abs(a - b) < e;
+
+// --- exactly one tab stop per structure ---
+const tabStops = (s) => [...s.matchAll(/<(?:circle|text)[^>]*tabindex="0"[^>]*>/g)].map((m) => (m[0].match(/data-atlas-s="([^"]+)"/) || [])[1]);
+svg = overlaySvg(SLICE, ATL, B, 400, 800, { mode: "labels" });
+ok("labels mode: one tab stop per structure", tabStops(svg).sort().join() === "fornix,sas");
+ok("labels mode: the tab stop is the label, dots are hidden from AT",
+   !/<circle class="atlas-dot[^>]*tabindex/.test(svg) && /<circle class="atlas-dot[^>]*aria-hidden="true"/.test(svg));
+svg = overlaySvg(SLICE, ATL, imageBox(400, 800, 0.9, 0), 400, 800, { mode: "pins" });
+ok("pins mode: one tab stop per structure", tabStops(svg).sort().join() === "fornix,sas");
+ok("pins mode: every pin is still drawn", (svg.match(/class="atlas-dot/g) || []).length === 3);
+ok("pins mode: no gutter labels", !svg.includes("atlas-lab"));
+svg = overlaySvg(SLICE, ATL, imageBox(400, 800, 0.9, 0), 400, 800, { mode: "off" });
+ok("off mode: a clean image", !svg.includes("atlas-dot") && !svg.includes("atlas-lab"));
+svg = overlaySvg(SLICE, ATL, imageBox(400, 800, 0.9, 0), 400, 800, { mode: "off", sel: "fornix" });
+ok("off mode still shows the selected structure, without tab stops",
+   (svg.match(/class="atlas-dot/g) || []).length === 2 && !svg.includes("tabindex"));
+
+// --- dedupe grouping ---
+const G2 = P.groupPins([{ s: "a", x: 10, y: 10 }, { s: "b", x: 50, y: 50 }, { s: "a", x: 30, y: 20 }, { s: "a", x: 20, y: 30 }]);
+ok("groupPins: one group per structure, first-appearance order", G2.length === 2 && G2[0].s === "a" && G2[1].s === "b");
+ok("groupPins: keeps every point", G2[0].pts.length === 3);
+ok("groupPins: mean position", near(G2[0].x, 20) && near(G2[0].y, 20));
+ok("groupPins: empty in, empty out", P.groupPins([]).length === 0 && P.groupPins(null).length === 0);
+const PANC = { categories: ATL.categories, structures: { p: { name: "Pancreas", category: "wm" } } };
+const P4 = { i: 1, aspect: 1, pins: [{ s: "p", x: 40, y: 50 }, { s: "p", x: 45, y: 52 }, { s: "p", x: 55, y: 51 }, { s: "p", x: 60, y: 49 }] };
+svg = overlaySvg(P4, PANC, imageBox(400, 800, 1, 90), 400, 800, { mode: "labels" });
+ok("a 4-pin structure has one label", (svg.match(/class="atlas-lab/g) || []).length === 1);
+ok("... with a leader to each of its pins", (svg.match(/class="atlas-lead/g) || []).length === 4);
+// Real data: ct-live-torso-axial slice 6 carries 25 pins over 15 structures.
+const TORSO = JSON.parse(readFileSync(join(ROOT, "atlas/ct-live-torso-axial/atlas.json"), "utf8"));
+const t6 = TORSO.slices[5], uniq = new Set(t6.pins.map((p) => p.s)).size;
+svg = overlaySvg(t6, TORSO, imageBox(390, 560, t6.aspect, 90), 390, 560, { mode: "labels" });
+ok("torso slice 6: one label per structure (" + uniq + ")", (svg.match(/class="atlas-lab/g) || []).length === uniq);
+ok("torso slice 6: one leader per pin (" + t6.pins.length + ")", (svg.match(/class="atlas-lead/g) || []).length === t6.pins.length);
+ok("torso slice 6: both gutters are used", svg.includes("atlas-lab l") && svg.includes("atlas-lab r"));
+
+// --- labels never go under a peeking sheet or above the stage ---
+const labYs = (s, side) => [...s.matchAll(/class="atlas-lab ([lr])[^"]*" x="[\d.]+" y="([\d.]+)"/g)]
+  .filter((m) => !side || m[1] === side).map((m) => +m[2]);
+svg = overlaySvg(t6, TORSO, imageBox(390, 400, t6.aspect, 90), 390, 560, { mode: "labels", visH: 400 });
+ok("labels stay inside the visible height (2-line label bottom included)", labYs(svg).every((y) => y + 13 + 4 <= 400));
+ok("labels clear the top edge of the stage", labYs(svg).every((y) => y - 10 >= 0));
+svg = overlaySvg(t6, TORSO, imageBox(390, 560, t6.aspect, 90), 390, 560, { mode: "labels" });
+const gapsOf = (ys) => ys.sort((a, b) => a - b).slice(1).map((y, i) => y - ys[i]);
+ok("labels in a column never overlap", ["l", "r"].every((sd) => gapsOf(labYs(svg, sd)).every((g) => g >= 17)));
+
+// --- zoom box, clamp, zoom about a point ---
+const base = { x: 0, y: 100, w: 400, h: 300 };
+ok("zoomBox at s=1 is the base box", JSON.stringify(P.zoomBox(base, { s: 1, px: 0, py: 0 })) === JSON.stringify(base));
+let zb = P.zoomBox(base, { s: 2, px: 0, py: 0 });
+ok("zoomBox scales about the base centre", near(zb.w, 800) && near(zb.h, 600) && near(zb.x, -200) && near(zb.y, -50));
+ok("clampZoom caps the scale", P.clampZoom(base, { s: 9, px: 0, py: 0 }, 400, 500, 6).s === 6);
+ok("clampZoom floors the scale at 1", P.clampZoom(base, { s: 0.3, px: 50, py: 50 }, 400, 500).s === 1);
+ok("an unzoomed image cannot be panned", (() => { const c = P.clampZoom(base, { s: 1, px: 80, py: -40 }, 400, 500); return c.px === 0 && c.py === 0; })());
+zb = P.zoomBox(base, P.clampZoom(base, { s: 2, px: 5000, py: -5000 }, 400, 500));
+ok("clamped pan: the image still covers the view horizontally", zb.x <= 1e-9 && zb.x + zb.w >= 400 - 1e-9);
+ok("clamped pan: the image still covers the view vertically", zb.y <= 1e-9 && zb.y + zb.h >= 500 - 1e-9);
+const z1 = P.zoomAt(base, { s: 1, px: 0, py: 0 }, 3, 100, 200), d1 = P.zoomBox(base, z1);
+ok("zoomAt keeps the image point under the finger", near((100 - d1.x) / d1.w, 0.25) && near((200 - d1.y) / d1.h, 1 / 3));
+const d2 = P.zoomBox(base, P.zoomAt(base, z1, 3, 100, 200, 150, 260));
+ok("zoomAt with a moving midpoint pans with it", near((150 - d2.x) / d2.w, 0.25) && near((260 - d2.y) / d2.h, 1 / 3));
+const pz = P.toScreen(d1, false, 25, 100 / 3);
+ok("a pin under the focal point stays under it after zooming", near(pz.x, 100) && near(pz.y, 200));
+
+// --- flipX (display-time mirror) ---
+const fb = { x: 10, y: 20, w: 200, h: 100 };
+const a0 = P.toScreen(fb, false, 30, 40), a1 = P.toScreen(fb, true, 30, 40);
+ok("flip mirrors x about the image centre", near(a0.x + a1.x, 2 * (fb.x + fb.w / 2)));
+ok("flip leaves y alone", near(a0.y, a1.y));
+ok("toImage inverts toScreen (unflipped)", (() => { const q = P.toImage(fb, false, a0.x, a0.y); return near(q.x, 30) && near(q.y, 40); })());
+ok("toImage inverts toScreen (flipped)", (() => { const q = P.toImage(fb, true, a1.x, a1.y); return near(q.x, 30) && near(q.y, 40); })());
+const fdot = overlaySvg(ONE, ATL, B, 400, 800, { mode: "pins", flip: true }).match(/class="atlas-dot[^"]*" cx="([\d.]+)"/);
+ok("overlaySvg mirrors pins when flipX", Math.abs(+fdot[1] - (B.x + (1 - 0.30) * B.w)) < 0.2);
+const nf = overlaySvg(ONE, ATL, B, 400, 800, { mode: "labels", flip: true });
+ok("a mirrored left-side pin gets a right-hand label", nf.includes("atlas-lab r") && !nf.includes("atlas-lab l"));
+
+// --- orientation letters ---
+svg = overlaySvg(ONE, ATL, B, 400, 800, { mode: "pins", orient: { left: "R", right: "L", top: "A", bottom: "P" } });
+ok("orient letters are drawn", ["R", "L", "A", "P"].every((c) => svg.includes('aria-hidden="true">' + c + "</text>")));
+ok("orient accepts only R L A P S I", !overlaySvg(ONE, ATL, B, 400, 800, { mode: "pins", orient: { left: "<b>" } }).includes("atlas-orient"));
+ok("no orient data, no letters", !overlaySvg(ONE, ATL, B, 400, 800, { mode: "pins" }).includes("atlas-orient"));
+
+// --- ruler ---
+ok("rulerMm: the full width of a 300 mm image", near(P.rulerMm({ x: 0, y: 50 }, { x: 100, y: 50 }, [300, 200]), 300));
+ok("rulerMm: anisotropic diagonal", near(P.rulerMm({ x: 0, y: 0 }, { x: 100, y: 100 }, [300, 400]), 500));
+ok("rulerMm: no mm, no measurement", P.rulerMm({ x: 0, y: 0 }, { x: 1, y: 1 }, null) === null);
+// Points are stored in image %, so a measurement taken zoomed and flipped equals the same
+// two points measured unzoomed.
+const zD = P.zoomBox(base, { s: 4, px: 30, py: -20 });
+const m1 = P.toImage(zD, true, 120, 180), m2 = P.toImage(zD, true, 220, 260);
+const s1 = P.toScreen(zD, true, m1.x, m1.y), s2 = P.toScreen(zD, true, m2.x, m2.y);
+const pxDist = Math.hypot(s2.x - s1.x, s2.y - s1.y) / 4;          // unzoomed screen px
+ok("ruler: zoomed+flipped taps map back to the same screen points", near(s1.x, 120) && near(s2.y, 260));
+ok("ruler: mm is zoom-invariant", near(P.rulerMm(m1, m2, [base.w, base.h]), pxDist, 1e-6));
+svg = overlaySvg(ONE, ATL, B, 400, 800, { mode: "off", ruler: { pts: [{ x: 0, y: 50 }, { x: 50, y: 50 }], mm: [300, 200] } });
+ok("the ruler is drawn with its mm label", svg.includes("atlas-ruler") && svg.includes(">150 mm<"));
+
+// --- Find it ---
+const JP = [{ s: "aorta", x: 100, y: 100 }, { s: "ivc", x: 140, y: 100 }, { s: "aorta", x: 300, y: 300 }];
+ok("judgeFind: a tap nearest the target is right", P.judgeFind(JP, 110, 102, "aorta", 50).ok === true);
+ok("judgeFind: a tap nearest another structure is wrong and says which",
+   P.judgeFind(JP, 132, 100, "aorta", 50).ok === false && P.judgeFind(JP, 132, 100, "aorta", 50).s === "ivc");
+ok("judgeFind: any pin of a multi-pin structure counts", P.judgeFind(JP, 290, 310, "aorta", 50).ok === true);
+ok("judgeFind: a tap far from every pin is wrong", P.judgeFind(JP, 600, 600, "aorta", 50).ok === false && P.judgeFind(JP, 600, 600, "aorta", 50).s === null);
+ok("judgeFind: no pins is safe", P.judgeFind([], 1, 1, "x", 50).ok === false);
+
+// --- quiz rendering ---
+const PB = imageBox(400, 800, 0.9, 0);
+svg = overlaySvg(SLICE, ATL, PB, 400, 800, { mode: "pins", quiz: { kind: "name", marks: {} } });
+ok("Name it hides every name, even from AT", !svg.includes("Fornix") && !svg.includes("Subarachnoid"));
+ok("Name it keeps one tab stop per structure", tabStops(svg).length === 2);
+svg = overlaySvg(SLICE, ATL, PB, 400, 800, { mode: "pins", quiz: { kind: "name", marks: { fornix: true, sas: false } } });
+ok("Name it colours self-marked pins", (svg.match(/atlas-dot big qok/g) || []).length === 2 && (svg.match(/atlas-dot big qbad/g) || []).length === 1);
+ok("Find it shows no pins before the answer", !overlaySvg(SLICE, ATL, PB, 400, 800, { mode: "pins", quiz: { kind: "find" } }).includes("atlas-dot"));
+svg = overlaySvg(SLICE, ATL, PB, 400, 800, { mode: "pins", quiz: { kind: "find", show: "fornix", ok: false, tap: { x: 80, y: 40 } } });
+ok("Find it reveals the target's pins and marks the tap after answering",
+   (svg.match(/class="atlas-dot/g) || []).length === 2 && svg.includes("atlas-tapmark qbad"));
+
+// --- windows and default label mode ---
+ok("windowUrl: the first window is the image itself", P.windowUrl("/atlas/m/007.webp", null) === "/atlas/m/007.webp");
+ok("windowUrl: others live under w/<id>/ with the same NNN", P.windowUrl("/atlas/m/007.webp", "lung") === "/atlas/m/w/lung/007.webp");
+ok("default mode: pins on a portrait phone", P.defaultLabelMode(390, 844) === "pins");
+ok("default mode: labels on a tablet or desktop", P.defaultLabelMode(1024, 768) === "labels");
+ok("default mode: pins on a short landscape phone", P.defaultLabelMode(844, 390) === "pins");
 
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);
