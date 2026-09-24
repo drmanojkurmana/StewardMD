@@ -122,7 +122,7 @@ import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, 
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR } from "../../_credits.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
-import { ownerOK } from "../../_adminauth.js";
+import { ownerOK, tokenMatch } from "../../_adminauth.js";
 import { verifiedClaimsFor, cfAccessEmail } from "../../_fbauth.js";
 import { hitLimit, clientIp } from "../../_ratelimit.js";
 import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
@@ -191,10 +191,12 @@ function moduleLimitMsg(mod, limit) {
   const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions", surgx_note: "SURGX note dictations", surgx_case: "SURGX case questions" }[mod] || "AI requests";
   return "Daily limit reached: " + limit + " " + label + " per day. This resets at midnight. (Configurable per hospital.)";
 }
+/* Owner Google login OR the admin token. The token is accepted from the X-Admin-Token HEADER only and
+ * compared in constant time (T50): a ?token= query param lands in access logs, browser history and
+ * Referer headers. `url` is kept for call-site compatibility and deliberately unused. */
 async function aiAdminAuthed(request, env, url) {
-  const want = env.UPDATES_ADMIN_TOKEN || "";
-  const got = (request.headers.get("X-Admin-Token") || (url && url.searchParams.get("token")) || "");
-  return (!!want && got === want) || (await ownerOK(request, env));   // owner Google login OR admin token
+  if (tokenMatch(request.headers.get("X-Admin-Token") || "", env.UPDATES_ADMIN_TOKEN || "")) return true;
+  return await ownerOK(request, env);
 }
 // Per-call model override (opts.model) so a lightweight parse-only call (the semantic router) can pin a
 // FAST model instead of inheriting the heavy answer model. Answer calls pass no model → unchanged.
@@ -1147,11 +1149,8 @@ export async function onRequest(context) {
 
   // Admin diagnostics (aggregate usage; no PHI). Gated by UPDATES_ADMIN_TOKEN.
   if (seg === "admin") {
-    const want = env.UPDATES_ADMIN_TOKEN || "";
     const url = new URL(request.url);
-    const got = (request.headers.get("X-Admin-Token") || url.searchParams.get("token") || "");
-    const tokenOK = !!want && got === want;
-    if (!tokenOK && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403);   // owner Google login OR admin token
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);   // owner Google login OR admin token (header only)
     const rep = await adminReport(env);
     if (url.searchParams.get("format") === "csv") {
       const rows = [["account", "tokens", "general", "case", "ocr"]].concat((rep.accounts || []).map((a) => [a.acct, a.tokens, a.general, a.case, a.ocr]));
@@ -1409,7 +1408,17 @@ export async function onRequest(context) {
     // The topic goes to a third party (TinyFish): identifier-like content never leaves (T09).
     const fq = stripIdentifiers(String(fu.searchParams.get("q") || "").slice(0, 200));
     if (!fq || firewallBlock(fq)) return json({ figures: [] });
-    const fdebug = fu.searchParams.get("debug") === "1";   // per-page fetch/pick trace; public pages only
+    // debug trace is owner/admin only (T50); for anyone else ?debug=1 is ignored.
+    const fdebug = fu.searchParams.get("debug") === "1" && (await aiAdminAuthed(request, env, fu));
+    /* /figures fans out to up to 9 upstream fetches and had no quota at all (T50). A small daily cap per
+     * caller (signed-in email, else device/IP guest id, the same key the AI quotas use) bounds it.
+     * MAIK_FIGURES_DAILY_CAP overrides; fails open when KV is unavailable. Over the cap = no figures. */
+    try {
+      const _fwho = await identify(request, env);
+      const _fcap = Number(env.MAIK_FIGURES_DAILY_CAP) > 0 ? Number(env.MAIK_FIGURES_DAILY_CAP) : 60;
+      const _fl = await hitLimit(usageKv(env), "figures", usageKeyFor(_fwho), _fcap, 86400, typeof context.waitUntil === "function" ? context.waitUntil.bind(context) : null);
+      if (!_fl.ok) return json({ figures: [], limited: true });
+    } catch (e) { /* fail-open */ }
     let figures = [];
     try { figures = await findFigures(env, fq, 3, { debug: fdebug }); } catch (e) { figures = []; }
     return json(fdebug ? { figures: figures, debug: figures._debug || [] } : { figures: figures });
@@ -1732,6 +1741,9 @@ export async function onRequest(context) {
         // concise answer uses the TIGHTER cap → generation finishes ~2x faster (the ~10-15s native
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
         const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : (body && body.depth === "brief") ? Math.min(NONSTREAM_BASE, 480) : NONSTREAM_BASE;
+        // ?diag=1 exposes model, token counts and stage timings: owner/admin only (T50). Checked only
+        // when asked for, so an ordinary request pays nothing.
+        const _wantDiag = new URL(request.url).searchParams.get("diag") === "1" && (await aiAdminAuthed(request, env, null));
         const nsSys = sysA;
         _at("preGen");
         const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)
@@ -1747,7 +1759,6 @@ export async function onRequest(context) {
         // Client asked for a stream: hand the reliable whole-answer back over the SSE channel it's
         // already listening on (one delta + done). Renders immediately — no empty stream, no hang.
         if (wantStream) {
-          const _wantDiag = new URL(request.url).searchParams.get("diag") === "1";
           _at("gen");
           return withCors(request, streamTextAsSSE(text, _wantDiag ? {
             ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,
@@ -1761,7 +1772,7 @@ export async function onRequest(context) {
         }
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
-        if (new URL(request.url).searchParams.get("diag") === "1") {
+        if (_wantDiag) {
           const u = (_lastGenMeta && _lastGenMeta.usage) || {};
           _at("gen");
           const _diag = { ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,

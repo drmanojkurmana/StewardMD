@@ -26,7 +26,7 @@ export function emailFromToken(idToken) {
     return String(JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(p), (c) => c.charCodeAt(0)))).email || "").toLowerCase();
   } catch (e) { return ""; }
 }
-function tokenMatch(got, want) {
+export function tokenMatch(got, want) {
   if (!want || !got || got.length !== want.length) return false;
   let d = 0; for (let i = 0; i < got.length; i++) d |= got.charCodeAt(i) ^ want.charCodeAt(i);
   return d === 0;
