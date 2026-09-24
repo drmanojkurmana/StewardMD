@@ -3818,8 +3818,8 @@
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v6 · Medical Knowledge Base</div><ul>' +
         '<li><b>v6.0</b> · Every disease migrated into a single declarative Medical Knowledge Base; the reasoning engine now runs entirely from the KB, regression-locked and byte-identical to the trusted engine.</li>' +
-        '<li><b>v6.1</b> · Harrison&#39;s Principles of Internal Medicine (22e) knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls, paraphrased and page-cited.</li>' +
-        '<li><b>v6.2</b> · Knowledge base expanded to the full Harrison disease universe, <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a page-cited Harrison reference panel.</li>' +
+        '<li><b>v6.1</b> · Standard medical reference knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls, paraphrased and page-cited.</li>' +
+        '<li><b>v6.2</b> · Knowledge base expanded to the full internal medicine disease universe, <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a reference panel.</li>' +
         '<li><b>v6.3</b> · Reasoning upgrades: the stewardship engine now covers all 140 diagnoses, smart next-question suggestions, and broader non-infective finding inputs.</li>' +
         '<li><b>v6.4</b> · AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface), fully functional with no AI today, and AI-ready (decision-first, explanation second).</li>' +
       '</ul></div>' +
@@ -3830,14 +3830,14 @@
         '<li><b>v7.3</b> · Whole-app appearance themes now recolour the home too; restored the sidebar menu and a universal Home button on every screen.</li>' +
         '<li><b>v7.4</b> · Brand polish: rounded StewardMD wordmark, refreshed footer with the MaiKnowledge signature.</li>' +
         '<li><b>v7.5</b> · Native iOS &amp; Android apps (Capacitor): StewardMD is now installable as a real app, with offline clinical data and native push notifications.</li>' +
-        '<li><b>v7.6</b> · MaiK, the AI clinical assistant: grounded, page-cited explanations with comparison tables, per-claim citations, and streaming answers, decision first, explanation second.</li>' +
+        '<li><b>v7.6</b> · MaiK, the AI clinical assistant: grounded, cited explanations with comparison tables, per-claim citations, and streaming answers, decision first, explanation second.</li>' +
         '<li><b>v7.7</b> · Knowledge Units: earn points as you read references and work cases, unlocking subscription discounts.</li>' +
         '<li><b>v7.8</b> · Lab Watch: monitor a patient&#39;s labs for new results, in-app alerts plus optional 24/7 background alerts (Ward Sync / GHIS-linked, consent-gated) even when the app is closed.</li>' +
         '<li><b>v7.9</b> · App-style navigation is now the default (bottom tab bar, quick-action tiles); plus reliability &amp; alignment polish across web, iOS and Android (global toast feedback, home-tile and sidebar alignment fixes).</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v8 · Reference-grade breadth</div><ul>' +
         '<li><b>v8.0</b> · Calculators expanded to an MDCalc-scale library, <b>400+</b> validated bedside tools across every specialty, each formula executed and checked before shipping.</li>' +
-        '<li><b>v8.1</b> · Knowledge base grown to <b>4,800+</b> searchable conditions (Harrison plus Nelson paediatrics, ophthalmology and further specialties), each with a page-cited reference panel.</li>' +
+        '<li><b>v8.1</b> · Knowledge base grown to <b>4,800+</b> searchable conditions (internal medicine, paediatrics, ophthalmology and further specialties), each with a reference panel.</li>' +
         '<li><b>v8.2</b> · Scores wired to diagnoses: relevant clinical scores are suggested on every diagnosis, and the ICU dashboard now auto-computes scores (SOFA, qSOFA, NEWS2, APACHE II, BISAP, MELD…) from fetched labs and vitals, tap any score to open the calculator pre-filled.</li>' +
         '<li><b>v8.3</b> · Management for every reference condition: condition-specific, guideline-aligned management now appears on all <b>4,600+</b> reference diseases (AI-drafted decision-support, verify before acting).</li>' +
       '</ul></div>' +
@@ -3876,7 +3876,7 @@
     // true, change the code or change the number.
     return '<span class="smd-ab-badge">By the numbers</span>' +
       '<ul class="smd-facts">' +
-      '<li><span class="fn">4,804</span> searchable conditions: 140 with full diagnostic reasoning plus 4,664 reference conditions, each with a page-cited reference panel and condition-specific management.</li>' +
+      '<li><span class="fn">4,804</span> searchable conditions: 140 with full diagnostic reasoning plus 4,664 reference conditions, each with a reference panel and condition-specific management.</li>' +
       '<li><span class="fn">1,466+</span> drug monographs in structured &quot;gold&quot; format.</li>' +
       '<li><span class="fn">405</span> bedside clinical calculators at MDCalc scale, every formula executed &amp; checked.</li>' +
       '<li><span class="fn">124</span> cancer protocols across <span class="fn">65</span> OncoTree guidelines, each carrying its own lifecycle state instead of being presented as settled fact.</li>' +
@@ -3891,7 +3891,7 @@
       '<div class="smd-modal-section" style="margin-top:18px">Verified Milestones</div>' +
       '<ul class="smd-facts">' +
       '<li><span class="fn">Jul 2026</span> Genesis of StewardMD and the Stanford antimicrobial stewardship framework.</li>' +
-      '<li><span class="fn">Aug 2026</span> Harrison 22e &amp; Nelson knowledge base expansion; Apple Watch Code Blue assistant; iOS &amp; Android native apps.</li>' +
+      '<li><span class="fn">Aug 2026</span> Knowledge base expansion (internal medicine and paediatrics); Apple Watch Code Blue assistant; iOS &amp; Android native apps.</li>' +
       '<li><span class="fn">Early Sep 2026</span> KardioX ECG AI and FundX retinal preview; 400+ MDCalc clinical calculators; doctor NMC verification gate.</li>' +
       '<li><span class="fn">Mid Sep 2026</span> Comprehensive OncoTree guidelines &amp; 124 chemo protocols; WardSynQ inpatient digital twin.</li>' +
       '<li><span class="fn">Sep 2026</span> Universal Search, Scribe 1.8 ambient multilingual documentation, and EMR integration.</li>' +

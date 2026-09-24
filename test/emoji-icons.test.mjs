@@ -88,3 +88,23 @@ test("flag smd_nodash=0 leaves dashes as authored", () => {
   store.set("smd_nodash", "0"); assert.equal(E.dashOn(), false); assert.equal(E.display("A — B"), "A — B"); store.clear();
   assert.equal(E.display("🔔 A — B"), "A, B");
 });
+
+test("textbooks as sources become generic references; page numbers go; clinical eponyms stay", () => {
+  const T = [
+    ["Harrison's Principles of Internal Medicine, 22e, p. 1234", "Standard medical references"],
+    ["Source: Harrison 22e; IDSA Practice Guidelines", "Source: Standard medical references; IDSA Practice Guidelines"],
+    ["instead Harrison enumerates risk factors", "instead the reference enumerates risk factors"],
+    ["Harrison notes that sepsis", "The reference notes that sepsis"],
+    ["Nelson Textbook of Pediatrics", "Standard medical references"],
+    ["Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases", "Standard medical references"],
+    ["Adams and Victor's Principles of Neurology, 11th ed, Chapter 16", "Standard medical references"],
+    ["See Harrison (pp. 152-153) for details.", "See the reference for details."],
+    ["Harrison; Nelson Textbook of Pediatrics; IDSA", "Standard medical references; IDSA"],
+    ["Regimens · Sanford-aligned", "Regimens · Guideline-aligned"],
+  ];
+  for (const [a, b] of T) assert.equal(E.scrubBooks(a), b, a);
+  for (const keep of ["Harrison's groove in rickets", "Fitzpatrick skin type IV", "Braunwald classification of unstable angina", "Kaplan-Meier survival",
+    "Brenner tumour of ovary", "Nelson syndrome after adrenalectomy", "Rockwood classification type III", "Page 2 of 5", "p53 mutation and p = 0.05"])
+    assert.equal(E.scrubBooks(keep), keep, keep);
+  store.set("smd_nobooks", "0"); assert.equal(E.display("Harrison 22e, p. 12"), "Harrison 22e, p. 12"); store.clear();
+});

@@ -21,7 +21,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); 
 
 // Emoji still visible as text (typography excluded by the module's own classifier; inputs excluded).
 const COUNT = () => {
-  const E = window.SMD_EMOJI_ICONS, out = [], dashes = [];
+  const E = window.SMD_EMOJI_ICONS, out = [], dashes = [], books = [];
   const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   let n;
   while ((n = tw.nextNode())) {
@@ -30,16 +30,17 @@ const COUNT = () => {
     const r = p.getBoundingClientRect(); if (!r.width && !r.height) continue;   // not rendered
     if (E.has(n.nodeValue)) out.push(n.nodeValue.trim().slice(0, 40));
     if (/[\u2014\u2015]|(^|\s)--(\s|$)/.test(n.nodeValue)) dashes.push(n.nodeValue.trim().slice(0, 40));
+    if (E.hasBooks && E.hasBooks(n.nodeValue)) books.push(n.nodeValue.trim().slice(0, 50));
   }
   const vis = Array.from(document.querySelectorAll(".smd-emo,.smd-emo-dot")).filter((e) => { const r = e.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < innerHeight; }).length;
   const empties = Array.from(document.querySelectorAll("*")).filter((e) => e.children.length === 0 && e.textContent === "\u2013" && e.getBoundingClientRect().width).length;
-  return { left: out.length, sample: out.slice(0, 5), icons: vis, dashes: dashes.length, dsample: dashes.slice(0, 4), empties };
+  return { left: out.length, sample: out.slice(0, 5), icons: vis, dashes: dashes.length, dsample: dashes.slice(0, 4), books: books.length, bsample: books.slice(0, 3), empties };
 };
 
 async function run(flagOff) {
   const browser = await pw.chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
-  if (flagOff) await ctx.addInitScript(() => { try { localStorage.setItem("smd_noemoji", "0"); localStorage.setItem("smd_nodash", "0"); } catch (e) {} });
+  if (flagOff) await ctx.addInitScript(() => { try { localStorage.setItem("smd_noemoji", "0"); localStorage.setItem("smd_nodash", "0"); localStorage.setItem("smd_nobooks", "0"); } catch (e) {} });
   const page = await ctx.newPage();
   const errs = []; page.on("pageerror", (e) => errs.push(String(e)));
   await page.goto(BASE, { waitUntil: "load" });
@@ -79,6 +80,7 @@ async function run(flagOff) {
 const on = await run(false);
 for (const [k, v] of Object.entries(on.res)) ok(v.left === 0, `${k}: no emoji left in visible text (${v.icons} icons on screen)` + (v.left ? " " + JSON.stringify(v.sample) : ""));
 for (const [k, v] of Object.entries(on.res)) if (k !== "dialogWrapped") ok(v.dashes === 0, `${k}: no AI dashes left in visible text` + (v.dashes ? " " + JSON.stringify(v.dsample) : ""));
+for (const [k, v] of Object.entries(on.res)) if (k !== "dialogWrapped") ok(v.books === 0, `${k}: no textbook names or page numbers in visible text` + (v.books ? " " + JSON.stringify(v.bsample) : ""));
 ok(on.res["icu-overview"].empties > 5, "ICU empty vitals still show an empty marker (\u2013): " + on.res["icu-overview"].empties);
 ok(on.res.contact.icons >= 5, "Contact Us shows icons where emoji were: " + on.res.contact.icons);
 ok(Object.values(on.res).reduce((a, v) => a + v.icons, 0) > 0, "icons are drawn in place of emoji");

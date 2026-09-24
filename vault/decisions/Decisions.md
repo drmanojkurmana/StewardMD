@@ -199,6 +199,26 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-24 · No textbooks named as sources, no page numbers (copyright)
+
+**Decision.** Owner: "I shouldn't find Harrison or any text book as source but reference, as copyright
+problem, and no page numbers anywhere." Our own copy was rewritten at source (About changelog in home.js,
+About text and demo notes in index.html). Data-driven text (knowledge-base reader footers, "Source:"
+lines, MaiK answers) is scrubbed on the rendered DOM by `emoji-icons.js` (flag `smd_nobooks`, default ON):
+full textbook titles (Harrison, Nelson, Mandell, Campbell-Walsh, Sleisenger, Adams and Victor, Williams,
+Bailey and Love, Murray and Nadel, Sabiston, Oxford Handbooks, Tintinalli, Davidson, Robbins, Guyton,
+Goodman and Gilman, Washington Manual, Kumar and Clark, Katzung, Braunwald's Heart Disease, Fitzpatrick's
+Dermatology, Sherlock, Brenner and Rector, Rockwood and Green, Novak, Sanford Guide...) become "Standard
+medical references"; the bare name in prose becomes "the reference"; p./pp./page/Chapter/Ch. locators are
+removed. Clinical eponyms are protected (Harrison's groove, Fitzpatrick skin type, Braunwald
+classification, Kaplan-Meier, Brenner tumour, Nelson syndrome, Rockwood classification, "Page 2 of 5").
+
+**Trade-off / status.** The shipped knowledge-base DATA still carries the source metadata (about 30,700
+textbook mentions and 41,000 page locators in kb/ files, mostly `kb/dist/*`); nothing displays it, but
+anyone unpacking the app bundle can read it. Removing it from the data is a separate, larger change
+(the RAG and reader code read those fields), not done yet. The underlying question of whether the KB
+prose itself is paraphrased closely enough is a legal review, not a display fix.
+
 ## 2026-09-24 · No AI-style dashes in the app
 
 **Decision.** Owner: "remove AI slop like -- AI dashes all over the app without causing malfunction".

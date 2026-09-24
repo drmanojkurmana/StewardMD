@@ -125,8 +125,8 @@
   }
   // ── AI-style dashes (owner, 2026-09-24: "remove AI slop like -- AI dashes all over the app without
   // causing malfunction"). Flag smd_nodash, DEFAULT ON, "0" = dashes as authored. Rules keep meaning:
-  //   5—10 / 5 – 10          -> 5-10            (a range stays a range; a plain 7–10 en dash is untouched)
-  //   "HR: —" / a lone "—"   -> "HR: –" / "–"   (an empty value stays visibly empty)
+  //   5—10 / 5 \u2013 10          -> 5-10            (a range stays a range; a plain 7\u201310 en dash is untouched)
+  //   "HR: —" / a lone "—"   -> "HR: \u2013" / "\u2013"   (an empty value stays visibly empty)
   //   X — Y, X—Y, X -- Y     -> X, Y            (the aside dash becomes a comma)
   //   leading/trailing dash  -> ", " when text continues in the next/previous element, else removed
   function dashOn() { return lget("smd_nodash") !== "0"; }
@@ -136,7 +136,7 @@
     var t = String(text == null ? "" : text);
     if (!hasDash(t)) return t;
     ctx = ctx || {};
-    // numeric ranges first: 5—10, 5 – 10, 5 -- 10 -> 5-10 (a tight 7–10 en dash is not matched by DASH)
+    // numeric ranges first: 5—10, 5 \u2013 10, 5 -- 10 -> 5-10 (a tight 7\u201310 en dash is not matched by DASH)
     t = t.replace(/(\d)\s*[\u2014\u2015]\s*(\d)/g, "$1-$2").replace(/(\d)\s+(?:\u2013|--)\s+(\d)/g, "$1-$2");
     // then every remaining dash token, judged by its neighbours (spaces skipped)
     var WORD = /[A-Za-z0-9\u00C0-\u024F\u0370-\u03FF\u0900-\u0D7F\)\]%+\u00B0"'\u2019\u201D]/;
@@ -158,11 +158,80 @@
     out += t.slice(at);
     return out.replace(/,\s*([,.;:!?)])/g, "$1");
   }
+  // ── Textbooks as sources, and page numbers (owner, 2026-09-24: "I shouldn't find Harrison or any text
+  // book as source but reference, as copyright problem, and no page numbers anywhere"). Flag smd_nobooks,
+  // DEFAULT ON. Titles become "Standard medical references"; the bare name in prose ("per Harrison")
+  // becomes "the reference"; page / chapter / edition locators are removed. Clinical eponyms that share
+  // an author's name are protected: Harrison's groove/sulcus/sign, Fitzpatrick skin type, Braunwald
+  // classification, Kaplan-Meier, Brenner tumour, Nelson syndrome, Rockwood classification.
+  function booksOn() { return lget("smd_nobooks") !== "0"; }
+  var AP = "(?:'|\\u2019)";
+  var ED = "(?:,?\\s*\\(?\\s*\\d{1,2}(?:st|nd|rd|th)?\\s*(?:e|ed\\.?|edn\\.?|edition)\\b\\)?)?";
+  var BOOK_TITLES = [
+    "Harrison" + AP + "?s?\\s+Principles\\s+of\\s+Internal\\s+Medicine",
+    "Nelson\\s+Textbook\\s+of\\s+Pa?ediatrics",
+    "Mandell,?\\s+Douglas,?\\s+(?:and|&)\\s+Bennett" + AP + "?s?\\s+Principles\\s+and\\s+Practice\\s+of\\s+Infectious\\s+Diseases",
+    "Campbell[-\\s]Walsh(?:[-\\s]Wein)?\\s+Urology",
+    "Sleisenger\\s+(?:and|&)\\s+Fordtran" + AP + "?s?\\s+Gastrointestinal\\s+and\\s+Liver\\s+Disease",
+    "Adams\\s+(?:and|&)\\s+Victor" + AP + "?s?\\s+Principles\\s+of\\s+Neurology",
+    "Williams\\s+Obstetrics", "Williams\\s+Textbook\\s+of\\s+Endocrinology",
+    "Bailey\\s+(?:and|&)\\s+Love" + AP + "?s?\\s+Short\\s+Practice\\s+of\\s+Surgery",
+    "Murray\\s+(?:and|&)\\s+Nadel" + AP + "?s?\\s+Textbook\\s+of\\s+Respiratory\\s+Medicine",
+    "Sabiston\\s+Textbook\\s+of\\s+Surgery", "Schwartz" + AP + "?s?\\s+Principles\\s+of\\s+Surgery",
+    "Oxford\\s+Handbook\\s+of(?:\\s+[A-Z][A-Za-z]+)+", "Oxford\\s+Textbook\\s+of(?:\\s+[A-Z][A-Za-z]+)+",
+    "Tintinalli" + AP + "?s?\\s+Emergency\\s+Medicine", "Rosen" + AP + "?s?\\s+Emergency\\s+Medicine",
+    "Davidson" + AP + "?s?\\s+Principles\\s+and\\s+Practice\\s+of\\s+Medicine",
+    "Robbins(?:\\s+(?:and|&)\\s+Cotran)?\\s+(?:Basic\\s+Pathology|Pathologic\\s+Basis\\s+of\\s+Disease)",
+    "Guyton\\s+(?:and|&)\\s+Hall\\s+Textbook\\s+of\\s+Medical\\s+Physiology",
+    "Goodman\\s+(?:and|&)\\s+Gilman" + AP + "?s?\\s+The\\s+Pharmacological\\s+Basis\\s+of\\s+Therapeutics",
+    "(?:The\\s+)?Washington\\s+Manual(?:\\s+of\\s+Medical\\s+Therapeutics)?",
+    "Kumar\\s+(?:and|&)\\s+Clark" + AP + "?s?\\s+Clinical\\s+Medicine",
+    "Katzung" + AP + "?s?\\s+Basic\\s+(?:and|&)\\s+Clinical\\s+Pharmacology",
+    "Braunwald" + AP + "s\\s+Heart\\s+Disease(?::\\s+A\\s+Textbook\\s+of\\s+Cardiovascular\\s+Medicine)?",
+    "Fitzpatrick" + AP + "s\\s+Dermatology(?:\\s+in\\s+General\\s+Medicine)?",
+    "Sherlock" + AP + "s\\s+Diseases\\s+of\\s+the\\s+Liver\\s+and\\s+Biliary\\s+System",
+    "Brenner\\s+(?:and|&)\\s+Rector" + AP + "?s?\\s+The\\s+Kidney",
+    "Rockwood\\s+(?:and|&)\\s+Green" + AP + "?s?\\s+Fractures\\s+in\\s+Adults",
+    "(?:Berek\\s+(?:and|&)\\s+)?Novak" + AP + "s\\s+Gyn(?:a|ae)?ecology",
+    "Cecil\\s+(?:Textbook\\s+of\\s+Medicine|Medicine)", "Current\\s+Medical\\s+Diagnosis\\s+(?:and|&)\\s+Treatment",
+    "Grainger\\s+(?:and|&)\\s+Allison" + AP + "?s?\\s+Diagnostic\\s+Radiology"
+  ];
+  var BOOK_RE = new RegExp("(?:" + BOOK_TITLES.join("|") + ")" + ED, "gi");
+  // Short forms seen in the knowledge base and in model answers: "Harrison 22e", "Harrison's", "Harrison".
+  var HARRISON_RE = new RegExp("\\bHarrison(?:" + AP + "s)?(?!" + AP + "?s?\\s+(?:groove|sulcus|sign|line))\\b" + ED, "g");
+  var NELSON_RE = /\bNelson(?:'s|\u2019s)?\s+(?:\d{1,2}(?:st|nd|rd|th)?\s*(?:e|ed\.?|edition)\b|Pa?ediatrics\b)/gi;
+  // Locators: "p. 1234", "pp. 12-15", "pg 45", "page 123" (not "page 2 of 5"), "Chapter 45", "Ch. 12".
+  var PAGE_RE = /\s*[,;(]?\s*\b(?:pp?\.|pg\.?)\s*\d{1,4}(?:\s*[-\u2013]\s*\d{1,4})?\)?|\s*[,;(]?\s*\bpages?\s+\d{1,4}(?:\s*[-\u2013]\s*\d{1,4})?(?!\s+of\b)\)?|\s*[,;(]?\s*\b(?:Chapter|Chap\.|Ch\.)\s*\d{1,4}[A-Za-z]?\)?/gi;
+  var BOOKS_TEST = new RegExp(BOOK_RE.source + "|\\bSanford\\b|\\bHarrison\\b|\\bNelson(?:'s|\\u2019s)?\\s+(?:\\d|Pa?ediatrics)|\\b(?:pp?\\.|pg\\.?)\\s*\\d|\\bpages?\\s+\\d|\\b(?:Chapter|Chap\\.|Ch\\.)\\s*\\d", "i");
+  function hasBooks(v) { return BOOKS_TEST.test(String(v || "")) && !/^\s*page\s+\d+\s+of\s+\d+\s*$/i.test(String(v)); }
+  function scrubBooks(text) {
+    var t = String(text == null ? "" : text);
+    if (!hasBooks(t)) return t;
+    var o = t;
+    t = t.replace(BOOK_RE, "\u0001").replace(NELSON_RE, "\u0001");
+    t = t.replace(HARRISON_RE, function (m, off, str) {
+      // "Source: Harrison 22e" / list item -> the generic source; prose "per Harrison" -> "the reference"
+      // A name followed by a lowercase word is prose ("Harrison notes that ...") even at a slot.
+      var before = str.slice(0, off), after = str.slice(off + m.length);
+      var slot = /(?:^|[:;,(\u2022\u00B7|]\s*)$/.test(before) && !/\b(?:per|by|from|in|see|according to|instead)\s*$/i.test(before);
+      return slot && !/^\s+[a-z]/.test(after) ? "\u0001" : "\u0002";
+    });
+    t = t.replace(/\bSanford[-\s]aligned\b/g, "Guideline-aligned").replace(/\bsanford[-\s]aligned\b/g, "guideline-aligned")
+      .replace(/\b(?:The\s+)?Sanford\s+Guide(?:\s+to\s+Antimicrobial\s+Therapy)?(?:\s+\d{4})?/gi, "\u0001");
+    t = t.replace(PAGE_RE, function (m) { return /^\s*\(/.test(m) && !/\)\s*$/.test(m) ? "(" : ""; });
+    // merge runs of generic sources ("Harrison; Nelson" -> one), then write them out
+    t = t.replace(/\u0001(?:\s*(?:[;,&\u00B7|]|and)\s*\u0001)+/g, "\u0001");
+    t = t.replace(/(^|[.!?:]\s+|\n\s*)\u0001/g, "$1Standard medical references").replace(/\u0001/g, "standard medical references");
+    t = t.replace(/(^|[.!?]\s+)\u0002/g, "$1The reference").replace(/\u0002/g, "the reference");
+    t = t.replace(/\(\s*\)/g, "").replace(/\s+([,.;:)])/g, "$1").replace(/,\s*,/g, ",").replace(/ {2,}/g, " ");
+    return t === o ? o : t;
+  }
   /** What a string should read as on screen with the current flags: emoji removed, dashes tidied. */
   function display(text) {
     var s = String(text == null ? "" : text);
     if (enabled()) s = strip(s);
     if (dashOn()) s = tidy(s);
+    if (booksOn()) s = scrubBooks(s);
     return s;
   }
   /** For code that reads screen text back and compares it with the string it rendered: both sides are
@@ -216,7 +285,7 @@
     if (svg && svg.setAttribute) svg.setAttribute("aria-hidden", "true");
     return svg;
   }
-  function needs(v) { return !!v && ((enabled() && has(v)) || (dashOn() && hasDash(v))); }
+  function needs(v) { return !!v && ((enabled() && has(v)) || (dashOn() && hasDash(v)) || (booksOn() && hasBooks(v))); }
   function fixText(tn) {
     var v = tn.nodeValue;
     if (!needs(v)) return;
@@ -227,6 +296,7 @@
       var t2 = tidy(v, { next: !!(nx && (nx.nodeType === 1 || /\S/.test(nx.nodeValue || ""))), prev: !!(pv && (pv.nodeType === 1 || /\S/.test(pv.nodeValue || ""))) });
       if (t2 !== v) { tn.nodeValue = t2; v = t2; }
     }
+    if (booksOn() && hasBooks(v)) { var b3 = scrubBooks(v); if (b3 !== v) { tn.nodeValue = b3; v = b3; } }
     if (!(enabled() && has(v))) return;
     if (p.closest && p.closest(STRIP_ONLY)) { tn.nodeValue = strip(v); return; }
     var segs = segments(v), doc = W.document, frag = doc.createDocumentFragment();
@@ -246,7 +316,7 @@
     if (el.tagName === "INPUT" && /^(button|submit|reset)$/i.test(el.type) && needs(el.value)) el.value = display(el.value);
   }
   function fixTree(rootEl) {
-    if (!rootEl || !(enabled() || dashOn())) return;
+    if (!rootEl || !(enabled() || dashOn() || booksOn())) return;
     if (rootEl.nodeType === 3) { fixText(rootEl); return; }
     if (rootEl.nodeType !== 1 && rootEl.nodeType !== 9 && rootEl.nodeType !== 11) return;
     css();
@@ -323,7 +393,7 @@
     } catch (e) {}
   }
   function boot() {
-    if (!(enabled() || dashOn()) || !W.document || !W.document.body) return;
+    if (!(enabled() || dashOn() || booksOn()) || !W.document || !W.document.body) return;
     wrapDialogs();
     // the bridges load after this file (deferred): wrap now and again as they appear
     wrapOutbound(); [500, 2000, 6000, 15000].forEach(function (ms) { W.setTimeout(wrapOutbound, ms); });
@@ -352,5 +422,5 @@
   if (W && W.document) {
     if (W.document.readyState === "loading") W.document.addEventListener("DOMContentLoaded", boot); else boot();
   }
-  return { strip: strip, tidy: tidy, display: display, norm: norm, same: same, hasDash: hasDash, dashOn: dashOn, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
+  return { strip: strip, scrubBooks: scrubBooks, hasBooks: hasBooks, booksOn: booksOn, tidy: tidy, display: display, norm: norm, same: same, hasDash: hasDash, dashOn: dashOn, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
 });
