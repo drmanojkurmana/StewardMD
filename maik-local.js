@@ -550,8 +550,9 @@
 
   // ── model lifecycle ─────────────────────────────────────────────────────
   var _loadedPack = null;
-  function ensureLoaded(packId) {
+  function ensureLoaded(packId, loadOpts) {
     var L = llama(), M = models();
+    watchRelease(L);
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     if (!M) return Promise.reject(new Error("model manager unavailable"));
     if (_loadedPack === packId) {
@@ -559,7 +560,7 @@
       return L.available().then(function (a) {
         if (a && a.loaded) return null;
         _loadedPack = null;
-        return ensureLoaded(packId);
+        return ensureLoaded(packId, loadOpts);
       });
     }
     var pk = M.PACKS[packId];
@@ -596,10 +597,16 @@
         try {
           avail = (a && Number(a.availableMemory)) || 0;
           need = (M.totalBytes(packId) || 0) + draftBytes(M, packId);
+          // An image answer also maps the vision projector (0.6 to 1 GB, not mmap'd, freed after the
+          // answer): count it when this load is for one (audit T61, 2026-09-25).
+          if (loadOpts && loadOpts.vision) { var cv = M.caps ? M.caps(packId) : null; need += (cv && cv.visionBytes) || 0; }
         } catch (e) { return null; }
         // ponytail: 0.35 is calibrated against two real measurements, not theory - 176 MB free
         // against a 2.83 GB model (0.06) hung forever, 2.1 GB against 2.49 GB (0.85) runs. Retune
         // with device data, do not compute it.
+        // ponytail: 1.15 on the hard (iOS jetsam) limit is UNCALIBRATED (audit T61): weights plus a
+        // guessed 15% for KV and runtime, never measured against a real peak footprint. Retune from
+        // Xcode's memory graph on the floor device before trusting it near the edge.
         var ratio = (a && a.memoryIsHardLimit) ? 1.15 : 0.35;
         if (avail > 0 && need > 0 && avail < need * ratio) {
           var err = new Error("not-enough-memory:" + Math.round(avail / 1e6) + "MB free, " +
@@ -1064,7 +1071,7 @@
     // Queued like every other local generation, and NOT background: the clinician is watching this
     // one, so it goes ahead of any queued Scribe drafting (it cannot interrupt one already running).
     return serial(function () {
-    return ensureLoaded(packId).then(function () {
+    return ensureLoaded(packId, { vision: images.length > 0 }).then(function () {
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
       if (grounding) {
@@ -1434,18 +1441,33 @@
    * Fire-and-forget: never rejects, and never blocks a real answer.
    */
   var _warmed = null;
+  /* WARM STATE FOLLOWS THE NATIVE SIDE (audit T60, 2026-09-25). The plugin releases the model on its
+   * own (idle backstop, app backgrounded) and _warmed used to survive that, so warm() returned early
+   * and the next question loaded cold. The plugin now emits llamaReleased; the flags drop with it,
+   * and a stale flag is re-checked against available().loaded before it is trusted. warm() also
+   * queues through serial() (background priority) instead of racing a question for the engine. */
+  var _relSub = false;
+  function watchRelease(L) {
+    if (_relSub || !L || !L.addListener) return;
+    _relSub = true;
+    try { L.addListener("llamaReleased", function () { _warmed = null; _loadedPack = null; }); } catch (e) {}
+  }
   function warm(packId) {
     var L = llama();
     if (!L) return Promise.resolve(false);
+    watchRelease(L);
     packId = packId || currentPack();
-    if (_warmed === packId) return Promise.resolve(true);
-    return ensureLoaded(packId)
-      .then(function () {
-        // One token is enough to walk the whole graph and fault the weights in.
-        return L.generate({ prompt: "ok", system: "", nPredict: 1, temperature: 0, stream: false });
-      })
-      .then(function () { _warmed = packId; return true; })
-      .catch(function () { return false; });
+    var fresh = function () {
+      return serial(function () {
+        return ensureLoaded(packId).then(function () {
+          // One token is enough to walk the whole graph and fault the weights in.
+          return L.generate({ prompt: "ok", system: "", nPredict: 1, temperature: 0, stream: false });
+        });
+      }, { background: true }).then(function () { _warmed = packId; return true; }, function () { return false; });
+    };
+    if (_warmed !== packId) return fresh();
+    return Promise.resolve().then(function () { return L.available(); })
+      .then(function (a) { if (a && a.loaded) return true; _warmed = null; _loadedPack = null; return fresh(); }, function () { return true; });
   }
 
   function cancel() { var L = llama(); if (L && L.cancel) { try { return L.cancel(); } catch (e) {} } }
@@ -1453,7 +1475,6 @@
   function release() {
     var L = llama();
     _loadedPack = null;
-    _warmed = null;
     _warmed = null;
     if (L && L.release) { try { return L.release(); } catch (e) {} }
   }

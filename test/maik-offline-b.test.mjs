@@ -8,10 +8,10 @@ const require = createRequire(import.meta.url);
 const SRC = readFileSync(new URL("../maik-local.js", import.meta.url), "utf8");
 
 /** A maik-local harness. ls: localStorage values; nav: navigator; models: overrides for SMD_MAIK_MODELS. */
-function engine({ ls = {}, nav = {}, models = {}, text = "Answer. Verify against local protocol.", book = null, loaded = true, extra = {} } = {}) {
+function engine({ ls = {}, nav = {}, models = {}, text = "Answer. Verify against local protocol.", book = null, loaded = true, extra = {}, mem = {} } = {}) {
   const calls = { generate: [], ensure: [], load: [], listeners: {} };
   const Llama = {
-    available: async () => ({ available: true, loaded }), load: async (o) => { calls.load.push(o); loaded = true; return { loaded: true }; },
+    available: async () => Object.assign({ available: true, loaded }, mem), load: async (o) => { calls.load.push(o); loaded = true; return { loaded: true }; },
     generate: async (o) => { calls.generate.push(o); return { text: typeof text === "function" ? text(o) : text, ms: 5 }; },
     cancel: async () => ({}), release: async () => { loaded = false; return { released: true }; },
     addListener: (name, cb) => { (calls.listeners[name] = calls.listeners[name] || []).push(cb); return { remove: () => {} }; }
@@ -126,6 +126,44 @@ test("T24: a past turn renders identically whether or not it is the latest", () 
   const p2 = e.L.buildPrompt({ question: "hypertension losartan dose", history: t2 }, "maik-mxcore");
   const turn1 = p1.split("\n").find((l) => l.startsWith("MaiK: "));
   assert.ok(p2.includes(turn1), "the first answer keeps its bytes when a newer turn follows it");
+});
+
+// ── T60: warm state follows the native side ──
+test("T60: a native release (llamaReleased) or a model found unloaded makes the next warm() load again", async () => {
+  const e = engine({ loaded: false });
+  assert.equal(await e.L.warm("maik-lite"), true);
+  assert.equal(await e.L.warm("maik-lite"), true);
+  assert.equal(e.calls.load.length, 1, "still resident: no reload");
+  e.calls.listeners.llamaReleased.forEach((cb) => cb({ reason: "idle" }));
+  await e.L.warm("maik-lite");
+  assert.equal(e.calls.load.length, 2, "the native idle release cleared the stale warm flag");
+  await e.Llama.release();   // released without an event (e.g. an older plugin)
+  await e.L.warm("maik-lite");
+  assert.equal(e.calls.load.length, 3, "a stale flag is checked against available().loaded");
+});
+test("T60: warm() queues through serial(); the offline stand-in is warmed; native idle is a 180 s backstop", () => {
+  const w = SRC.slice(SRC.indexOf("function warm(packId)"), SRC.indexOf("function cancel()"));
+  assert.match(w, /serial\(function \(\) \{\s+return ensureLoaded\(packId\)/);
+  assert.match(w, /\{ background: true \}/);
+  const ENG = readFileSync(new URL("../maik-engine.js", import.meta.url), "utf8");
+  const wl = ENG.slice(ENG.indexOf("function warmIfLocal()"), ENG.indexOf("function warmIfLocal()") + 500);
+  assert.match(wl, /if \(effective\(\) !== "local"\) return;/);
+  const SW = readFileSync(new URL("../local-plugins/capacitor-llama/ios/Sources/LlamaPlugin/LlamaPlugin.swift", import.meta.url), "utf8");
+  assert.match(SW, /idleSeconds: TimeInterval = 180/);
+  assert.match(SW, /notifyListeners\("llamaReleased", data: \["reason": "idle"\]\)/);
+  assert.equal((SRC.match(/_warmed = null;\n\s+_warmed = null;/g) || []).length, 0, "the duplicated reset is gone");
+});
+
+// ── T61: memory pre-check ──
+test("T61: an image answer counts the vision projector in the memory check", async () => {
+  const mk = () => engine({ loaded: false, mem: { availableMemory: 1.4e9, memoryIsHardLimit: true },
+    models: { caps: () => ({ kb: true, visionBytes: 0.85e9 }), hasVision: () => true, visionIdOf: (id) => id + "#vision", installedCached: () => true, hasDraft: () => false } });
+  const txt = await mk().L.answer({ question: "hi" }, { pack: "maik-mxcore" }, null);
+  assert.ok(!txt.error, "text: 1.0 GB x 1.15 fits in 1.4 GB");
+  const img = await mk().L.answer({ question: "read this" }, { pack: "maik-mxcore", images: ["/tmp/a.jpg"] }, null);
+  assert.match(String(img.error), /Not enough free memory/, "image: 1.85 GB x 1.15 does not");
+  const SW = readFileSync(new URL("../local-plugins/capacitor-llama/ios/Sources/LlamaPlugin/LlamaPlugin.swift", import.meta.url), "utf8");
+  assert.match(SW, /"totalMemory": Int\(ProcessInfo\.processInfo\.physicalMemory\)/);
 });
 
 // ── T62: the web prompt asks for what the web gate checks ──
