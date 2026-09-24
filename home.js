@@ -6326,9 +6326,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Concise-first: split an answer on the @@MORE@@ marker → tier-1 bottom line + tier-2 detail.
     // Flag smd_maik_concise="0" reverts to the classic single-block answer without a redeploy.
     function maikConciseOn() { try { return localStorage.getItem("smd_maik_concise") !== "0"; } catch (e) { return true; } }
-    // Lazy two-tier generation (flag smd_maik_lazy, default OFF): the FIRST call fetches only the concise
-    // bottom line (cheap + fast); the tier-2 detail is fetched on demand when "Know more" is tapped. Cuts
-    // output tokens ~40-60% since most reads stop at the bottom line. Off by default → test then enable.
+    // Lazy two-tier generation (flag smd_maik_lazy, default ON; "0" turns it off): the FIRST call fetches
+    // only the concise bottom line (cheap + fast); the tier-2 detail is fetched on demand when "Know more"
+    // is tapped. A Detailed request skips tier 1 and asks once (audit T17).
     /* Two-tier answers, DEFAULT ON (2026-08-24). Measured on production, n=20: MaiK latency is
      * output-token-bound - gen_ms ~= 1389 + 7.8 x outputTokens - so the first answer's LENGTH is the
      * wait. Tier 1 asks for the bottom line PLUS everything safety-critical (red flags,
@@ -6774,7 +6774,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return;
       }
       // ── MaiK Brain (Part 1) — deterministic NEVER-GUESS gate (flag smd_maik_brain, default
-      // OFF). When a query is genuinely ambiguous (an ambiguous 2-letter acronym like "MS"/"DM",
+      // ON; "0" or ?brain=0 turns it off). When a query is genuinely ambiguous (an ambiguous 2-letter acronym like "MS"/"DM",
       // or an under-specified broad concept), ASK instead of fuzzy-matching one condition — BEFORE
       // grounding/router/Gemini, so it costs nothing. Answer/overview fall through unchanged.
       var _skipAsk = _maikDisambigResolved; _maikDisambigResolved = false;   // consume the one-shot flag (this send is a disambiguation ANSWER, not a new query)
@@ -6964,12 +6964,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             if (!_paintedOnce) { _paintedOnce = true; paint(); } else { _paintT = setTimeout(paint, 50); }
           };
           var _paintAcc = "", _paintT = null, _paintedOnce = false, _streamFinal = false;
-          // On NATIVE, never use live streaming: the WebView's CapacitorWebFetch can IGNORE the
-          // AbortController, so a stalled SSE never rejects and never falls back — the request then
-          // hangs to the 90s watchdog ("MaiK took too long") for any session that hadn't already
-          // flipped to non-stream (which is why some accounts worked and others didn't). Native can't
-          // render progressive SSE anyway (the WebView buffers it), so use the bounded whole-answer
-          // path (explainGrounded, 35s cap) — the same path that already works on native and web.
+          // Streaming on every platform: explainGroundedStream (reasoning.js) streams on web and, on native,
+          // through the pristine WebView fetch/XHR to the absolute API origin (audit T14); if the stream
+          // stalls or fails it falls back to the bounded whole-answer call and a typewriter replay.
           // ── MaiK V2 — deterministic KB answer (retrieval-first, NO Gemini) ──
           // If the StewardMD KB confidently covers this knowledge question, compose the
           // answer LOCALLY in ~1ms and render it through the SAME path (maikRenderAnswer)
