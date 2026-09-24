@@ -130,6 +130,7 @@ import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getM
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { findFigures } from "../../_figures.js";
+import { stripIdentifiers } from "../../_deid.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
 import { scribeExtractPrompt, sanitizeScribeOutput, parseScribeJson, attachGrounding, mergeScribeDraft, flagContradictions } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
@@ -1350,7 +1351,8 @@ export async function onRequest(context) {
   // Google result. Nothing is hosted, cached or regenerated here; zero tokens; [] on any failure.
   if (seg === "figures") {
     const fu = new URL(request.url);
-    const fq = String(fu.searchParams.get("q") || "").slice(0, 200);
+    // The topic goes to a third party (TinyFish): identifier-like content never leaves (T09).
+    const fq = stripIdentifiers(String(fu.searchParams.get("q") || "").slice(0, 200));
     if (!fq || firewallBlock(fq)) return json({ figures: [] });
     const fdebug = fu.searchParams.get("debug") === "1";   // per-page fetch/pick trace; public pages only
     let figures = [];
@@ -1896,9 +1898,10 @@ export async function onRequest(context) {
       // Trusted external reference lookup (opt-in fallback). Input is a DE-IDENTIFIED topic string
       // only (no patient data). Queries NCBI PubMed E-utilities — a single trusted NIH host —
       // filtered to guideline/review publication types. Returns REAL citations; NEVER open-web.
-      // De-id backstop: strip standalone digit runs (MRN/bed/age) even if the client is bypassed —
-      // a guideline/review search needs no numbers.
-      const topic = clip(String(body.topic || "").replace(/[^\w\s,\-]/g, " ").replace(/\b\d+\b/g, " ").replace(/\s+/g, " ").trim(), 200);
+      // De-id backstop: strip identifiers (stripIdentifiers, shared with /research + feedback), then
+      // every standalone digit run (MRN/bed/age) even if the client is bypassed - a guideline/review
+      // search needs no numbers.
+      const topic = clip(stripIdentifiers(body.topic).replace(/[^\w\s,\-]/g, " ").replace(/\b\d+\b/g, " ").replace(/\s+/g, " ").trim(), 200);
       if (!topic) return json({ error: "no-topic" }, 400);
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
@@ -1946,6 +1949,10 @@ export async function onRequest(context) {
       // grounded search so nothing regresses. Worst case === the previous behaviour.
       const q = String(body.question || body.q || "").slice(0, 500);
       if (!q) return json({ error: "no question" }, 400);
+      // What a THIRD PARTY (TinyFish web search, PubMed) is sent (T09): the client's router/KB canonical
+      // topic when it sends one, else the question with identifier-like content stripped. The raw
+      // question only ever reaches the Gemini prompt below, never a search provider.
+      const searchQ = body.topic ? clip(stripIdentifiers(body.topic), 200) : stripIdentifiers(q);
       if (firewallBlock(q)) return json({ text: null, blocked: true, outOfScope: true, sources: [], message: "MaiK answers only medical and clinical questions." }); // no web search, no Gemini
 
       // ── Research Mode: EVIDENCE REVIEW over trusted medical literature (NOT a general web search).
@@ -1959,7 +1966,8 @@ export async function onRequest(context) {
         const history = Array.isArray(body.history) ? body.history.slice(-4) : [];
         // Retrieval topic WITH follow-up context: the question's own keywords, or — when the follow-up
         // is vague ("which is better?", "one answer") — the most recent prior turn's topic.
-        const topicStr = researchTopic(q, history);
+        const topicStr = body.topic ? searchQ
+          : stripIdentifiers(researchTopic(searchQ, history.map(function (t) { return { q: stripIdentifiers((t && (t.q || t.question)) || "") }; })));
         // (1) Response cache: normalize -> sha256hex -> maik:research:v1:<hash>. HIT = free, slot-free.
         // Keyed on the question AND the resolved topic so an identical vague follow-up in a DIFFERENT
         // conversation (different prior topic) does not collide on a stale cached answer.
@@ -2020,7 +2028,7 @@ export async function onRequest(context) {
       // writer only when MaiK Cloud is the selected engine (the ordinary branch below).
       if (body.snippetsOnly) {
         let raw = [];
-        try { raw = await tinyfishSearch(env, q); } catch (e) { raw = []; }
+        try { raw = searchQ ? await tinyfishSearch(env, searchQ) : []; } catch (e) { raw = []; }
         return json({ sources: raw.map(function (r) { return { title: r.title, url: r.url, site: r.site, snippet: r.snippet }; }) });
       }
 
@@ -2029,7 +2037,7 @@ export async function onRequest(context) {
       const RES_MAX = Math.max(256, Math.min(1600, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 1200));
 
       let results = [];
-      try { results = await tinyfishSearch(env, q); } catch (e) { results = []; }
+      try { results = searchQ ? await tinyfishSearch(env, searchQ) : []; } catch (e) { results = []; }
 
       // No Gemini-grounded fallback (owner, 2026-09-04, removed): it was the slow multi-hop path and
       // TinyFish already covers the same ground faster and at $0 per search (see functions/_search.js
