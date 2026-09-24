@@ -12,8 +12,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = readFileSync(join(ROOT, "icu.js"), "utf8");
 
 test("every Snapshot step offers a PDF / file control", () => {
-  assert.match(SRC, /data-snapfile="' \+ s\[2\] \+ '"/, "each step renders a data-snapfile button");
-  assert.match(SRC, /PDF \/ file/, "the control is labelled for PDFs");
+  // 7a605d9e6 (QA bug sheet) renamed the per-step control data-snapfile -> data-snap-pdf ("Upload PDF"),
+  // with its own native pickFile + web <input> handler (snapPdf). Same affordance, new attribute.
+  assert.match(SRC, /data-snap-pdf="' \+ s\[2\] \+ '"/, "each step renders a data-snap-pdf button");
+  assert.match(SRC, /Upload PDF/, "the control is labelled for PDFs");
+  const live = SRC.slice(SRC.indexOf('querySelectorAll("[data-snap-pdf]")'));
+  assert.match(live, /SMD_NATIVE\.pickFile\(\{ types: \["application\/pdf"\] \}\)/, "native: the document picker, not pickImage");
+  assert.match(live, /snapPdf\(kind, out, /, "both branches feed the shared PDF pipeline");
 });
 
 test("native PDF picking uses the document picker, not pickImage", () => {
