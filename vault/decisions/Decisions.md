@@ -199,6 +199,22 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-24 · No emoji in the app: rendered emoji become line icons
+
+**Decision.** Owner: "remove emoji all over the app and replace with icons". ~1,500 emoji sit in 71
+source files, many in non-HTML strings (toasts, textContent, titles, <option>, PDF text), so a source
+rewrite would break them. `emoji-icons.js` works on the rendered DOM instead: an emoji in visible text
+becomes the matching `window.ICONS` line icon (bell, steth, pills, lungs...), status emoji keep their
+colour (green check, amber warn, red cross; coloured circles become solid dots), anything unmapped is
+removed. Attributes (title, placeholder, aria-label, alt), <option> text, document.title and
+alert/confirm/prompt are stripped. Typography (arrows, triangles, check/cross marks, stars, (c)(tm)) is
+kept. User input is never touched. Flag `smd_noemoji`, default ON, "0" restores the emoji.
+
+**Trade-off / status.** The source still contains the emoji; a later clean-up can replace them file by
+file. Not covered: PDF/print text built from strings (jsPDF) and the separate web pages
+(admin/, followcare.html, opd.html), which do not load it. Recovery point: main at c149bb42 (the tag
+push was refused by the session proxy). Tests: `test/emoji-icons.test.mjs`, `test/run-noemoji-ui.mjs`.
+
 ## 2026-09-23 · Drug names are links: highlight + monograph-first in MaiK
 
 **Decision.** Owner: every drug name in a question, answer or page is BOLD and opens that drug's
