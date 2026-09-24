@@ -801,8 +801,15 @@ function renderGroundedPrompt(pkg) {
     L.push(pkg.newTopic
       ? "=== RECENT CONVERSATION (background only: the clinician has moved to a NEW question; answer it on its own and do NOT merge it with the earlier condition unless they explicitly link the two) ==="
       : "=== RECENT CONVERSATION (for context/continuity; do not repeat it back) ===");
-    pkg.history.slice(-4).forEach(function (h) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, 300)); });
+    // Memory (owner, 2026-09-24): the client sends answer GISTS (opening line + key points), not whole
+    // answers. The latest answer is what a follow-up refers to, so it keeps the most; older ones less.
+    const H = pkg.history.slice(-6);
+    H.forEach(function (h, i) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, i === H.length - 1 ? 1200 : 450)); });
     L.push("");
+  }
+  if (Array.isArray(pkg.earlier) && pkg.earlier.length) {
+    L.push("=== EARLIER IN THIS CONVERSATION the clinician also asked about (context only) ===\n" +
+      pkg.earlier.slice(-12).map(function (x) { return clip(String(x || ""), 100); }).filter(Boolean).join("; ") + "\n");
   }
   L.push("=== DETERMINISTIC ENGINE OUTPUT (AUTHORITATIVE — do not change the diagnosis) ===");
   if (r.gate) L.push("Gate: " + clip(JSON.stringify(r.gate), 300));
