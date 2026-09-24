@@ -163,6 +163,15 @@
   .dc-t{width:100%;border-collapse:collapse;font-size:13px}.dc-t th,.dc-t td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
   .dc-t th:first-child,.dc-t td:first-child{text-align:left}.dc-t th{color:var(--mut);font-weight:600;font-size:12px}
   .dc-chips{display:flex;flex-wrap:wrap;gap:8px}.dc-chips span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}
+  .dc-wa{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:16px 0 4px;background:var(--card)}
+  .dc-wa h4{margin:0 0 4px}.dc-wa .t{color:var(--mut);font-size:13px;margin:0 0 10px}
+  .dc-wa .f{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .dc-wa label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--mut)}
+  .dc-wa select,.dc-wa input[type=tel]{min-height:44px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-size:15px;background:var(--card);color:var(--ink)}
+  .dc-wa .on{flex-direction:row;align-items:center;gap:8px;min-height:44px;font-size:14px;color:var(--ink)}
+  .dc-wa .on input{width:20px;height:20px}
+  .dc-wa .row2{margin-top:12px}.dc-wa .row2 button{min-height:44px}
+  .dc-wa-st{margin-top:8px;font-size:13px;color:var(--mut)}.dc-wa-st.bad{color:var(--amber);font-weight:600}
   .dc-warn{background:var(--amber-soft);border:1px solid var(--amber-line);color:var(--amber);border-radius:10px;padding:10px 12px;font-size:13px;margin:8px 0}
   .offbar .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .offbar button{min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #e0b36a;background:#fff;color:#7a4b00;font-weight:700}
@@ -874,6 +883,38 @@
     h+='<h4>Exceptions</h4>'+(ex.length?'<div class="dc-chips">'+ex.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">No one was put ahead of the queue.</div>');
     return h+'</div>';
   }
+  /* Owner ask G2: the day close on WhatsApp at a set hour (server: /org/day-close-settings, sent by the hourly job;
+   * Send now: /day-close/send). The saved number only ever comes back masked; leaving the field blank keeps it. */
+  function hourLabel(h){ var a=h%12===0?12:h%12; return a+(h<12?" am":" pm"); }
+  function dcWaHtml(s){
+    var opts=""; for(var h=0;h<24;h++) opts+='<option value="'+h+'"'+(h===s.hour?" selected":"")+'>'+hourLabel(h)+'</option>';
+    var why=function(r){ return {whatsapp_not_configured:"WhatsApp is not set up on the server",not_configured:"WhatsApp is not set up on the server",bad_number:"the number was not accepted"}[r]||r||"no reason given"; };
+    var last=s.last, st=!last?(s.enabled?"Not sent yet today.":""):last.status==="sent"?"Sent today.":last.status==="failed"?"Today's send failed: "+esc(why(last.reason))+(last.attempts<3?"; it is tried again next hour.":"."):"Sending...";
+    return '<div class="dc-wa" id="dcWa"><h4>Send it to WhatsApp every day</h4><p class="t">The same figures, as counts and totals only (no patient is named), at the hour you pick on the hospital\'s clock.</p>'+
+      '<div class="f"><label class="on"><input type="checkbox" id="dcWaOn"'+(s.enabled?" checked":"")+'> Send daily</label>'+
+      '<label>At<select id="dcWaHour" aria-label="Hour to send">'+opts+'</select></label>'+
+      '<label>WhatsApp number<input type="tel" id="dcWaMob" inputmode="tel" autocomplete="tel" placeholder="'+(s.hasMobile?esc(s.mobileMasked)+" (saved)":"98765 43210")+'"></label></div>'+
+      '<div class="row2">'+(s.hasMobile?'<button class="cancel" id="dcWaNow">Send now</button>':'')+'<button class="btn" id="dcWaSave" style="margin:0">Save</button></div>'+
+      '<div class="dc-wa-st'+(last&&last.status==="failed"?" bad":"")+'" id="dcWaSt" role="status" aria-live="polite">'+st+'</div></div>';
+  }
+  function wireDcWa(){
+    var host=sheet.querySelector("#dcWaHost"); if(!host) return;
+    var say=function(t,bad){ var e=sheet.querySelector("#dcWaSt"); if(e){ e.textContent=t; e.className="dc-wa-st"+(bad?" bad":""); } };
+    function render(s,msg,bad){
+      host.innerHTML=dcWaHtml(s); if(msg) say(msg,bad);
+      sheet.querySelector("#dcWaSave").onclick=function(){
+        var b=this; b.disabled=true;
+        api("org/day-close-settings",{method:"POST",body:{orgId:st.orgId,settings:{enabled:sheet.querySelector("#dcWaOn").checked,hour:+sheet.querySelector("#dcWaHour").value,mobile:sheet.querySelector("#dcWaMob").value.trim()}}}).then(function(x){
+          b.disabled=false;
+          if(!x||!x.ok){ say((x&&x.message)||"Not saved.",true); return; }
+          render(x.settings,x.settings.enabled?"Saved: sent daily at "+hourLabel(x.settings.hour)+" to "+x.settings.mobileMasked+".":"Saved: not sent daily.");
+        },function(){ b.disabled=false; say("Not saved: the server could not be reached.",true); });
+      };
+      var now=sheet.querySelector("#dcWaNow");
+      if(now) now.onclick=function(){ now.disabled=true; api("day-close/send",{method:"POST",body:{orgId:st.orgId}}).then(function(x){ now.disabled=false; say((x&&x.message)||"Not sent.",!(x&&x.ok)); },function(){ now.disabled=false; say("Not sent: the server could not be reached.",true); }); };
+    }
+    api("org/day-close-settings?orgId="+encodeURIComponent(st.orgId)).then(function(r){ if(r&&r.ok) render(r.settings); else host.innerHTML=""; },function(){ host.innerHTML=""; });
+  }
   function openDayClose(){
     open('<div class="dc"><h3>Day close</h3><div class="empty">Reading the day...</div></div>',true);
     var now=new Date().toISOString(), fu=null;
@@ -882,7 +923,8 @@
       return fuP.then(function(){
         if(!r||!r.ok){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The day could not be read ('+esc((r&&(r.message||r.error))||"no response")+').</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; return; }
         var body=dayCloseHtml(r,fu);
-        open(body+'<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dcPrint" style="margin:0">Print</button></div>',true);
+        open(body+(can("staff.admin")||st.ownsOrg?'<div id="dcWaHost"></div>':'')+'<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dcPrint" style="margin:0">Print</button></div>',true);
+        wireDcWa();
         sheet.querySelector("#cx").onclick=close;
         sheet.querySelector("#dcPrint").onclick=function(){
           var css=Array.prototype.map.call(document.querySelectorAll("style"),function(x){ return x.textContent; }).join("\n");
