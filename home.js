@@ -4477,12 +4477,12 @@
    * sprint, auscultating the screen with a bpm report), and reacts when tapped
    * (startle, wave, hearts). Sub-pixel travel + real jump arcs over hand-placed
    * 12x16 frames; one rAF loop that tears itself down when his node is gone.
-   * Flag smd_maik_live_doc: default is the stationary Stetho Buddy resident (audit T33, 2026-09-25);
-   * "1" turns the live doctor on.
+   * Flag smd_maik_live_doc: default ON (owner, 2026-09-25: "Keep my mascot alive"); "0" restores the
+   * stationary Stetho Buddy resident.
    * Under prefers-reduced-motion the resident is used instead (he stands still).
    * Taps on the thread/composer are NEVER intercepted: only the doctor himself
    * (a ~44px hit inset around him) is tappable. */
-  function maikLiveDocOn() { try { return localStorage.getItem("smd_maik_live_doc") === "1"; } catch (e) { return false; } }   // default: stationary resident (audit T33); "1" = live doctor
+  function maikLiveDocOn() { try { return localStorage.getItem("smd_maik_live_doc") !== "0"; } catch (e) { return true; } }   // default ON: owner, 2026-09-25 "Keep my mascot alive"; "0" = stationary resident
   var MAIK_DOC_PAL = {
     h: "#25333B", s: "#E9B48C", k: "#0A1519", w: "#F2F6F7", c: "#C9D6DA",
     g: "#2DD4BF", d: "#0E6E63", r: "#E05252", p: "#22333C"
