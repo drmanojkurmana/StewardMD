@@ -5625,7 +5625,7 @@ export async function onRequest(context) {
         patient: method === "POST" ? CAPS.QUEUE_ADD : CAPS.ORDER_READ,
         order: CAPS.ORDER_CREATE, orders: CAPS.ORDER_READ, queue: CAPS.BILLING_VIEW,
         tariff: method === "POST" ? CAPS.STAFF_ADMIN : CAPS.BILLING_VIEW,
-        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE,
+        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE, refund: CAPS.BILLING_CHARGE,   // OPD plan item 9: the cashier who takes money gives it back, with a reason
         // Day-end shift report: read-only takings by tender for the cashier closing the drawer.
         shift: CAPS.BILLING_VIEW,
         // Pharmacy station: read what is owed, and hand it over. Separate caps from billing on purpose -
@@ -5704,6 +5704,7 @@ export async function onRequest(context) {
       }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid, body.split), 200, request);
+      if (sub === "refund" && method === "POST") { const rf = await BILL.refundOrder(env, bOrg, body.orderId || "", body.reason, aid); return json(rf, rf.ok ? 200 : rf.error === "not_found" ? 404 : 422, request); }
       if (sub === "shift" && method === "GET") {
         const rep = await BILL.shiftReport(env, bOrg).catch((e) => { if (e && e.status === 507) throw e; return null; });
         return json(rep ? Object.assign({ ok: true }, rep) : { ok: false, error: "shift_unreadable", message: "Today's takings could not be read. Do not read this as zero collected." }, 200, request);

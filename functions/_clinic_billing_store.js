@@ -200,6 +200,30 @@ export async function dispenseOrder(env, orgId, orderId, actor, claim) {
   return { ok: true };
 }
 
+/* OPD plan item 9: a refund. Money taken for something not delivered goes back - PAID orders only (the state
+ * machine refuses anything else; a dispensed medicine is a return), always with a reason, written with the
+ * read's updateTime as a precondition so two cashiers cannot refund one order twice, and audited. The
+ * amount is the order's own, never typed. How GST applies to a refund is an accountant's sign-off
+ * (docs/opd/OPD_PLAN_2026-09-24.md), so no tax line is invented here. */
+export async function refundOrder(env, orgId, orderId, reason, actor) {
+  const why = String(reason || "").trim();
+  if (!why) return { ok: false, error: "reason_required", message: "Say why this is refunded." };
+  const d = await fsGet(env, "q_orders/" + orderId).catch(() => null);
+  if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
+  const o = d.fields;
+  if (o.status === "refunded") return { ok: true, already: true };
+  if (!canOrderTransition(o.status, "refunded")) return { ok: false, error: "not_refundable", status: o.status, message: o.status === "dispensed" ? "This medicine was handed over. Record it as a return, not a refund." : "Only a paid order can be refunded." };
+  const amount = Math.max(0, Math.round(Number(o.unitPrice) || 0)) * Math.max(1, Math.round(Number(o.qty) || 1));
+  try {
+    await fsCommit(env, [wUpdate(env, "q_orders/" + orderId, { status: "refunded", refundAmount: amount, refundReason: why.slice(0, 200), refundedBy: actor || "", refundedAt: Date.now(), updatedAt: Date.now() }, { updateTime: d.updateTime })]);
+  } catch (e) {
+    if (e && e.code === "precondition") return { ok: false, error: "changed", message: "This order changed while you were refunding it. Reload and try again." };
+    throw e;
+  }
+  await qAudit(env, { hospitalId: orgId, ticketId: o.patientId || "", actor: actor || "cashier", action: "order_refund", meta: (o.name || "") + " " + amount + " " + why.slice(0, 60) });
+  return { ok: true, orderId, refundAmount: amount };
+}
+
 // ---- tariff (price catalog, integer paise) ----
 /* The WHOLE Price list. Every bill prices from it, so a partial list is never returned: past TARIFF_CAP rows this throws,
  * and the screens say the Price list could not be read rather than billing the missing rows as "no price set". */
