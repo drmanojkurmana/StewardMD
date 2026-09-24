@@ -4301,6 +4301,7 @@
     "ward.reg-offline-token": "Turno sin conexión",
     "ward.reg-offline-explain": "La conexión está caída. Este registro se guarda en este mostrador y pasa a la cola en cuanto vuelva la conexión. El paciente conserva este número y su lugar.",
     "ward.reg-offline-print": "Imprimir comprobante de turno",
+    "ward.reg-offline-tab-only": "Este navegador no puede conservarlo si se cierra la pestaña: mantenga esta pestaña abierta hasta que vuelva la conexión.",
     "ward.reg-add-to-queue": "Agregar a la cola",
     "ward.reg-enter-full-name": "Ingrese el nombre completo del paciente.",
     "ward.reg-select-gender": "Seleccione el género del paciente.",

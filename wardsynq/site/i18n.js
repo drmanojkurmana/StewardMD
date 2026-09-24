@@ -4381,6 +4381,7 @@
     "ward.reg-offline-token": "Offline token",
     "ward.reg-offline-explain": "The connection is down. This check-in is kept on this desk and goes into the queue as soon as the connection is back. The patient keeps this number and their place.",
     "ward.reg-offline-print": "Print token slip",
+    "ward.reg-offline-tab-only": "This browser cannot keep it after the tab is closed: keep this tab open until the connection is back.",
     "ward.reg-read-nfc": "Ni-Key: Read NFC Tag",
     "ward.reg-hold-tag": "Hold Ni-Key tag to phone…",
     "ward.reg-write-nfc": "Write Ni-Key NFC Tag",

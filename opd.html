@@ -340,10 +340,10 @@
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
 <script src="/opd-pulse-model.js?v=2" defer></script>
-<script src="/opd-offline-desk.js?v=1" defer></script>
+<script src="/opd-offline-desk.js?v=2" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
-<script src="/patient-register.js?v=preg7-sid1-sid1-off1" defer></script>
+<script src="/patient-register.js?v=preg7-sid1-sid1-off2" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
@@ -754,10 +754,12 @@
   function offDesk(){
     if(!window.SMD_OPD_OFFLINE||!st.orgId||!(st.who&&can("queue.add"))) return null;
     if(!OFF||OFF._org!==st.orgId||OFF._date!==st.date){
-      var ss=null; try{ ss=window.sessionStorage; }catch(e){}
-      if(!ss) return null;
-      OFF=SMD_OPD_OFFLINE.desk({storage:ss,orgId:st.orgId,date:st.date,call:function(path,body){ return api(path,{method:"POST",body:body}); }});
+      var ss=null, idb=null; try{ ss=window.sessionStorage; }catch(e){} try{ idb=window.indexedDB||null; }catch(e){}
+      if(!ss&&!idb) return null;
+      // IndexedDB first, so a check-in taken offline survives the tab being closed; the tab's storage when it cannot open.
+      OFF=SMD_OPD_OFFLINE.desk({indexedDB:idb,storage:ss,orgId:st.orgId,date:st.date,call:function(path,body){ return api(path,{method:"POST",body:body}); }});
       OFF._org=st.orgId; OFF._date=st.date;
+      OFF.loaded.then(function(){ paintOffline(); if(OFF&&OFF.pending()&&navigator.onLine!==false) offTick(); });
     }
     return OFF;
   }
@@ -2740,7 +2742,7 @@
         departmentRequired: perDept,
         resolve: function(id){ return api("patient/resolve?orgId="+encodeURIComponent(st.orgId)+"&id="+encodeURIComponent(id)); },
         submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue="pool"; return api("patient/register",{method:"POST",body:b}); },
-        offline: function(sent){ var d=offDesk(), r=d?d.issue(sent):null; paintOffline(); return r; },
+        offline: function(sent){ var d=offDesk(); if(!d) return null; return d.issue(sent).then(function(r){ paintOffline(); return r; }); },
         printToken: function(o){ printTokenSlip(o); },
         onAdded: function(r,sent){
           // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
