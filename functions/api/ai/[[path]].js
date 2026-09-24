@@ -214,9 +214,19 @@ async function fetchJsonWithTimeout(url, opts, ms) {
     const r = await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal }));
     const data = await r.json();
     return { data: data, status: r.status };
+  } catch (e) {
+    // Mark an abort as a TIMEOUT so callGemini can tell "slow" (no same-provider retry) from "broken".
+    if (ctrl.signal.aborted) { const te = new Error("AI timeout after " + Math.max(2000, ms || 30000) + "ms"); te.timeout = true; throw te; }
+    throw e;
   } finally { clearTimeout(t); }
 }
+// Per-ATTEMPT ceiling (one provider call). The whole callGemini is also bounded by aiDeadlineMs.
 function aiTimeoutMs(env) { const v = Number(env.MAIK_AI_TIMEOUT_MS); return Number.isFinite(v) && v > 0 ? v : 30000; }
+/* ONE wall-clock budget for a whole callGemini, retries and failover included (T16). It used to be
+ * Vertex x2 + Developer x1 at the per-attempt timeout each: 3 x 22s = 66s in production, while the
+ * native client gives up at ~25-35s, so the doctor saw a failure the server was still working on.
+ * 28s stays under the client's timeout. Env override: MAIK_AI_DEADLINE_MS. */
+function aiDeadlineMs(env) { const v = Number(env && env.MAIK_AI_DEADLINE_MS); return Number.isFinite(v) && v > 0 ? v : 28000; }
 // Deliver an already-computed answer over the SSE channel as one {delta}+{done} event. Lets the
 // client's stream consumer render a whole-answer (non-stream) result — the reliable path — with no
 // empty stream and no hang.
@@ -245,7 +255,7 @@ function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperat
 // is spent on invisible "thinking" (the suspected latency sink) vs visible output. No content, no PHI.
 let _lastGenMeta = null;
 function parseCandidates(data, status) {
-  if (status >= 400 || !data || data.error) throw new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
+  if (status >= 400 || !data || data.error) { const err = new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : "")); err.status = status; throw err; }
   const cand = data.candidates && data.candidates[0];
   _lastGenMeta = { finishReason: (cand && cand.finishReason) || "", usage: (data && data.usageMetadata) || null };
   return (cand && cand.content && cand.content.parts) ? cand.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
@@ -259,7 +269,7 @@ const developerProvider = {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
     const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelFor(env, o)}:generateContent?key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, o.timeoutMs || aiTimeoutMs(env));
     { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
@@ -341,7 +351,7 @@ const vertexProvider = {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
     const c = await vertexCall(env, o, "generateContent");
-    const jr = await fetchJsonWithTimeout(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
+    const jr = await fetchJsonWithTimeout(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)) }, o.timeoutMs || aiTimeoutMs(env));
     { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
@@ -540,9 +550,18 @@ function failReason(e) {
   if (/\b5\d\d\b|unavailable|UNAVAILABLE|internal|timeout|deadline|network|fetch failed|ECONN|ENOTFOUND/i.test(m)) return "vertex-unavailable/5xx/network";
   return "error: " + m.slice(0, 80);
 }
+/* Retry policy (T16). A second attempt on the SAME provider only helps a transient fault: 429, 5xx, or
+ * a network error with no HTTP status. It never follows a timeout (the provider is slow; asking again
+ * doubles the wait) or a 4xx (the answer will not change). Failover to the next provider happens for
+ * everything except HTTP 400, which is our request being malformed and would fail everywhere; a
+ * 401/403/404 is provider-specific (credential, model not enabled) so the other key may still work.
+ * Every attempt is clipped to the time left in aiDeadlineMs. */
+const MIN_ATTEMPT_MS = 2000;
+function httpStatusOf(e) { if (e && e.status) return e.status; const m = /\bHTTP (\d{3})\b/.exec(String((e && e.message) || "")); return m ? Number(m[1]) : 0; }
+function retrySameProvider(e) { if (e && e.timeout) return false; const st = httpStatusOf(e); return !st || st === 429 || st >= 500; }
+function failoverAllowed(e) { return httpStatusOf(e) !== 400; }
 // Facade — callers (RAG explain / legacy explain / vision) are unchanged. Provider priority:
-// Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
-// permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
+// Vertex → Developer hot standby, inside one deadline; see the retry policy above.
 export async function callGemini(env, parts, maxTokens, opts) {
   // Tiered routing: a complex clinical query escalates to the stronger model, if the owner enabled one.
   if (opts && !opts.model) {
@@ -550,22 +569,27 @@ export async function callGemini(env, parts, maxTokens, opts) {
     else { const fm = fastModel(env); if (fm) opts = Object.assign({}, opts, { model: fm }); }                        // simple query -> cheaper/faster non-thinking model (opt-in)
   }
   const order = providerOrder(env, opts);
+  const deadline = Date.now() + aiDeadlineMs(env);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
     const name = order[i], p = PROVIDERS[name];
     if (!p || !p.available(env)) { lastErr = new Error(name + " provider unavailable"); continue; }
-    const attempts = name === "vertex" ? 2 : 1;   // retry Vertex ONCE before switching
+    const attempts = name === "vertex" ? 2 : 1;   // Vertex may retry ONCE, and only for a transient fault
     for (let a = 0; a < attempts; a++) {
-      try { return await p.generate(env, parts, maxTokens, opts); }
+      const left = deadline - Date.now();
+      if (left < MIN_ATTEMPT_MS) throw lastErr || new Error("AI deadline exceeded");
+      try { return await p.generate(env, parts, maxTokens, Object.assign({}, opts || {}, { timeoutMs: Math.min(aiTimeoutMs(env), left) })); }
       catch (e) {
         lastErr = e;
         if (name === "azure") tripAzureBreaker(env, e);   // credit done / Azure error -> auto-stop using Azure
-        const nextProvider = order[i + 1];
-        if (a + 1 >= attempts && nextProvider && PROVIDERS[nextProvider] && PROVIDERS[nextProvider].available(env)) {
-          _lastFailover = { from: name, to: nextProvider, reason: failReason(e), timestamp: new Date().toISOString(), model: modelId(env) };
-          try { console.log("[MaiK failover] " + JSON.stringify(_lastFailover)); } catch (_) {}  // internal only; no PHI/secrets
-        }
+        if (!failoverAllowed(e)) throw e;                   // 400: malformed request, every provider refuses it
+        if (!retrySameProvider(e)) break;                   // timeout / 4xx: no second attempt here
       }
+    }
+    const nextProvider = order[i + 1];
+    if (nextProvider && PROVIDERS[nextProvider] && PROVIDERS[nextProvider].available(env)) {
+      _lastFailover = { from: name, to: nextProvider, reason: failReason(lastErr), timestamp: new Date().toISOString(), model: modelId(env) };
+      try { console.log("[MaiK failover] " + JSON.stringify(_lastFailover)); } catch (_) {}  // internal only; no PHI/secrets
     }
   }
   throw lastErr || new Error("no AI provider configured");
