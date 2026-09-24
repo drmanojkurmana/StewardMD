@@ -23,14 +23,25 @@
 
   var _ai = null, _initP = null, _rrf = null;
   var _tokIdx = null, _uniqToks = null;   // instant nearest-KB resolver index (built in init)
-  // Hybrid retrieval (flag smd_hybrid, default OFF). Vector arm = POST /api/retrieve
-  // (Workers AI embed → Vectorize). Fully degradation-safe: flag off OR empty/failed
-  // vector arm → identical to lexical-only.
-  function smdHybridOn() { try { return localStorage.getItem("smd_hybrid") !== "0"; } catch (e) { return true; } }   // default ON (Vectorize index live); set "0" to disable
+  // Hybrid retrieval (flag smd_hybrid, default ON since the Vectorize index went live; "0" turns it
+  // off). Vector arm = POST /api/retrieve (Workers AI embed → Vectorize). Fully degradation-safe:
+  // flag off OR empty/failed vector arm → identical to lexical-only.
+  //
+  // The vector arm sends the QUESTION to a server-side AI embedder under the doctor's token, so it is
+  // a cloud AI call and obeys the engine policy (audit T07, 2026-09-25): in Local or KB-only mode
+  // (SMD_MAIK_ENGINE.cloudAllowed() false) it never runs. No engine module (a harness) = unchanged.
+  function vectorAllowed() {
+    try { var E = window.SMD_MAIK_ENGINE; return !(E && typeof E.cloudAllowed === "function") || !!E.cloudAllowed(); } catch (e) { return false; }
+  }
+  function smdHybridOn() {
+    if (!vectorAllowed()) return false;
+    try { return localStorage.getItem("smd_hybrid") !== "0"; } catch (e) { return true; }
+  }
   function hybridBase() { return window.AI_PROXY ? String(window.AI_PROXY).replace(/\/ai\b/, "/retrieve") : "/api/retrieve"; }
   var _vecSections = {};   // diseaseId -> the section the vector arm matched (chunk-level), used to bias grounding
   function vectorDiseaseIds(query, k) {
     _vecSections = {};
+    if (!vectorAllowed()) return Promise.resolve([]);   // the choke point: no caller can bypass the policy
     var headers = { "Content-Type": "application/json" };
     var p;
     try {
