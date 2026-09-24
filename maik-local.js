@@ -336,11 +336,21 @@
     try { return draftReady(packId) ? (M.totalBytes(M.draftIdOf(packId)) || 0) : 0; } catch (e) { return 0; }
   }
   /** Queue the draft download once per pack. It rides the ordinary pack queue, so its progress
-   * shows in the models sheet and it can be removed there. ~290 MB (Gemma) or ~640 MB (Qwen). */
+   * shows in the models sheet and it can be removed there. ~290 MB (Gemma).
+   * OPT-IN (audit T26, 2026-09-25): this used to start a 290 to 640 MB download silently after the
+   * first load, on any connection. It now runs only when the clinician has turned the speed draft
+   * on (localStorage smd_maik_draft = "1", default off) and never on a connection the platform
+   * reports as metered (Save-Data, or a cellular link). An already-downloaded draft is still used. */
+  function meteredConnection() {
+    try {
+      var c = (typeof navigator !== "undefined") && (navigator.connection || navigator.mozConnection || navigator.webkitConnection);
+      return !!(c && (c.saveData || c.type === "cellular" || /(^|-)2g$|^3g$/.test(String(c.effectiveType || ""))));
+    } catch (e) { return false; }
+  }
   function fetchDraftOnce(packId) {
     try {
       var M = models(); if (!M || !M.hasDraft || !M.hasDraft(packId) || !M.ensure) return;
-      if (localStorage.getItem("smd_maik_draft") === "0") return;
+      if (localStorage.getItem("smd_maik_draft") !== "1" || meteredConnection()) return;
       var did = M.draftIdOf(packId); if (M.installedCached(did)) return;
       var key = "smd_maik_draft_asked:" + did;
       if (localStorage.getItem(key) === "1") return;

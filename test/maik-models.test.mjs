@@ -697,7 +697,10 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   // Speculative-decoding drafts (perf plan #6, 2026-09-21): a same-tokeniser sub-pack "<id>#draft".
   const M = (await import("node:module")).createRequire(import.meta.url)("../maik-models.js");
   ok("MedGemma packs carry the Gemma 3 270M draft", M.hasDraft("maik-mxcore") && M.hasDraft("maik-neural"));
-  ok("Qwen3-family packs carry the Qwen3 0.6B draft", ["maik-apex", "bonsai-ternary-8b", "bonsai-8b"].every((id) => M.hasDraft(id)));
+  // Audit T26 (2026-09-25): a draft above 15% of its target's bytes is treated as absent. The 0.64 GB
+  // Qwen3-0.6B draft is 20% of Apex, 28% of Prime and 55% of Swift, so all three now run without one.
+  ok("a draft over 15% of the target is off (Apex 20%, Prime 28%, Swift 55%)", ["maik-apex", "bonsai-ternary-8b", "bonsai-8b"].every((id) => !M.hasDraft(id)));
+  ok("the registry still records which draft would fit (raw entry kept)", M.PACKS["bonsai-8b"].draft && M.PACKS["bonsai-8b"].draft.bytes === 639446688);
   ok("MaiK Lite and the 27B Bonsai packs carry none", !M.hasDraft("maik-lite") && !M.hasDraft("bonsai2-27b") && !M.hasDraft("bonsai-27b"));
   const did = M.draftIdOf("maik-mxcore");
   ok("draft id is the base id plus #draft and maps back", did === "maik-mxcore#draft" && M.isDraftId(did) && M.baseIdOf(did) === "maik-mxcore");

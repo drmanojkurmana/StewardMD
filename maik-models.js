@@ -660,8 +660,23 @@
   /** The vision file for a pack, or null when that model cannot see (Apex is text-only). */
   function visionFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.vision) || null; }
   function hasVision(id) { return !!visionFile(id); }
-  /** The speculative-decoding draft for a pack, or null when it has none. */
-  function draftFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.draft) || null; }
+  /** The speculative-decoding draft for a pack, or null when it has none.
+   *
+   * A DRAFT MUST BE SMALL NEXT TO ITS TARGET (audit T26, 2026-09-25). Speculation pays only when a
+   * draft token costs a small fraction of a target token. The 0.64 GB Qwen3-0.6B draft is 55% of MAiK
+   * Swift (1.16 GB) and 28% of MAiK Prime (2.31 GB): each proposal costs a large share of what it
+   * saves, and on CPU-only Android the extra memory traffic is a likely net loss. MxCore and Neural
+   * keep their 0.29 GB gemma-3-270m draft (about 11% of a 2.5 to 2.8 GB target). A draft above
+   * DRAFT_MAX_RATIO of the target's bytes is treated as absent: never downloaded, never loaded.
+   * ponytail: a byte ratio, not a measured speedup; replace with per-pack tok/s once the device
+   * bench records draft acceptance. */
+  var DRAFT_MAX_RATIO = 0.15;
+  function draftFile(id) {
+    var base = baseIdOf(id), p = PACKS[base], d = p && p.draft;
+    if (!d) return null;
+    var target = (p.files || []).reduce(function (s, f) { return s + (f.bytes || 0); }, 0);
+    return (target > 0 && (d.bytes || 0) <= DRAFT_MAX_RATIO * target) ? d : null;
+  }
   function hasDraft(id) { return !!draftFile(id); }
 
   function pack(id) {
