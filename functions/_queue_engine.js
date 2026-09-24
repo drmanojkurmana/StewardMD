@@ -160,6 +160,35 @@ async function allocateToken(env, session, f, id, cfg, dept, unmatched) {
   throw Object.assign(new Error("token_contention"), { status: 409, detail: "Another desk registered at the same moment. Try again." });
 }
 
+/* ---- plan item 13: degraded desk mode ------------------------------------------------------------
+ * While online, a desk reserves a series letter for the day (create-only, so two desks never share one);
+ * offline it prints OA-1, OA-2 ... from it. On sync the ticket keeps that token and the time it was taken
+ * (arrival order), and the token itself is reserved create-only in the same commit as the ticket, so a
+ * retried sync can never queue the same slip twice. The day's numbered sequence is not touched. */
+const OFFLINE_LETTERS = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+export const OFFLINE_TOKEN_RE = /^O([A-HJ-NP-Z])-(\d{1,3})$/;
+const offlinePath = (coll, hosp, date, key) => coll + "/" + [hosp, date, key].map(sanitize).join("__");
+export async function reserveOfflineSeries(env, hospitalId, date, actor) {
+  for (const L of OFFLINE_LETTERS) {
+    try {
+      await fsCommit(env, [wCreate(env, offlinePath("q_offline_series", hospitalId, date, L), { hospitalId: String(hospitalId), date: String(date), letter: L, actor: String(actor || ""), createdAt: now(), expiresAt: endOfDayMs(date) + 2 * 86400e3 })]);
+      return { series: "O" + L };
+    } catch (e) { if (!(e && e.code === "precondition")) throw e; }
+  }
+  throw Object.assign(new Error("no_offline_series"), { status: 409, detail: "Every offline series for today is taken." });
+}
+async function commitOfflineTicket(env, session, f, id, body) {
+  const tok = String(body.offlineToken || "").trim().toUpperCase();
+  const m = OFFLINE_TOKEN_RE.exec(tok);
+  const hosp = session.hospitalId || ("doc-" + session.doctorUid);
+  if (!m || !(await fsGet(env, offlinePath("q_offline_series", hosp, session.date, m[1])))) throw Object.assign(new Error("bad_offline_token"), { status: 422 });
+  const t = now(), at = Number(body.offlineAt) || 0;
+  f.registeredAt = at > t - 12 * 3600e3 && at <= t ? at : t;   // the patient's place is when the slip was printed
+  f.token = tok; f.tokenNo = Number(m[2]); f.tokenScope = "offline"; f.offline = true;
+  try { await fsCommit(env, [wCreate(env, offlinePath("q_offline_tokens", hosp, session.date, tok), { ticketId: id, createdAt: t, expiresAt: endOfDayMs(session.date) + 2 * 86400e3 }), wCreate(env, "q_tickets/" + id, f)]); }
+  catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("offline_token_used"), { status: 409 }); throw e; }
+}
+
 // ---- add a ticket (manual or import) ------------------------------------------------------
 export async function addTicket(env, session, body, actor, org) {
   // Plan item 12: a patient registered ahead of the queue says why, and the reason sets the level.
@@ -192,7 +221,8 @@ export async function addTicket(env, session, body, actor, org) {
   // The ticket carries the resolved department's id and its CURRENT name; the name is display only.
   if (td.department) { f.departmentId = td.department.id; f.department = td.department.name; }
   if (prio) { f.priority = prio.priority; f.priorityReason = prio.reason; }
-  await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
+  if (body.offlineToken) await commitOfflineTicket(env, session, f, id, body);
+  else await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token + (prio ? " priority:" + prio.reason + (prio.note ? " (" + prio.note.slice(0, 60) + ")" : "") : "") });
   await recompute(env, session);
   const ticket = withId(id, f);
