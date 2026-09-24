@@ -126,7 +126,7 @@ import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } fro
 import { getAnalytics } from "../../_analytics.js";
 import { sseFrames, sseFrameText } from "../../_sse_parse.js";
 import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
-import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg } from "../../_maik_cache.js";
+import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg, cacheEligibleCtx, kbFingerprint } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { findFigures } from "../../_figures.js";
@@ -1619,15 +1619,20 @@ export async function onRequest(context) {
          * function of the question, exactly like an untiered answer.
          *
          * So: cache tier 1 and untiered, refuse anything carrying priorLead, and put the tier IN THE
-         * KEY so a short lead can never be served to a request that wanted the full answer. */
+         * KEY so a short lead can never be served to a request that wanted the full answer.
+         *
+         * The cache is SHARED ACROSS USERS, so a request carrying the asker's own context (history,
+         * About-me, earlier topics) is never read or written (cacheEligibleCtx), and the key carries a
+         * KB fingerprint so an answer is only reused for the same evidence. body.regen (Regenerate)
+         * skips the READ but still writes, so the fresh answer replaces the one the doctor rejected. */
         const _tier = (body && body.tier) || 0;
         const _tierCacheable = (_tier === 0 || _tier === 1) && !(body && body.priorLead);
-        const _cacheEligible = _mcfg.answerCache && !hasDx && _tierCacheable && !maikWiringOn(env);
+        const _cacheEligible = _mcfg.answerCache && !hasDx && _tierCacheable && !maikWiringOn(env) && cacheEligibleCtx(pkg);
         let _ckey = null;
         if (_cacheEligible) {
           try {
-            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier });
-            if (_ckey) {
+            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier, kb: kbFingerprint(pkg) });
+            if (_ckey && !(body && body.regen)) {
               const _hit = await getCachedAnswer(usageKv(env), _ckey);
               if (_hit && _hit.text) {
                 try { await recordUsage(gate, { inTok: 0, outTok: 0, status: "cache" }); } catch (e) {}
