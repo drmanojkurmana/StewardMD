@@ -9,7 +9,7 @@ const L = readFileSync(new URL("../maik-local.js", import.meta.url), "utf8");
 test("the sheet has the control and every clinical answer applies the preference", () => {
   assert.match(H, /id="maikLen"/);
   assert.match(H, /function runClinical\(question, retrieval, depth, active, topicLabel\) \{\n\s*depth = maikApplyLen\(depth\);/);
-  const fn = new Function("localStorage", H.slice(H.indexOf("var MAIK_LEN = "), H.indexOf("function maikCycleLen()")) + "return maikApplyLen;");
+  const fn = new Function("localStorage", H.slice(H.indexOf("var MAIK_LEN = "), H.indexOf("function maikShellHTML()")) + "return maikApplyLen;");
   const mk = (v) => fn({ getItem: () => v });
   assert.equal(mk("medium")("concise"), "concise"); assert.equal(mk("medium")("detailed"), "detailed");
   assert.equal(mk("short")("concise"), "brief"); assert.equal(mk("short")("detailed"), "detailed", "an explicit 'in detail' wins over Short");
@@ -22,4 +22,8 @@ test("the cloud route caps and instructs per length", () => {
 test("the on-device engine caps and instructs per length", () => {
   assert.match(L, /depth === "brief"\) \{ common\.nPredict = Math\.min\(common\.nPredict, 400\)/);
   assert.match(L, /LENGTH: BALANCED\./); assert.match(L, /LENGTH: DETAILED\./);
+});
+test("the length helpers live at module scope, where maikShellHTML (which draws the pill) can see them", () => {
+  const shell = H.indexOf("\n  function maikShellHTML()"), def = H.indexOf("\n  function maikLenLabel()");
+  assert.ok(def > 0 && def < shell, "maikLenLabel is a module-level function defined before maikShellHTML");
 });

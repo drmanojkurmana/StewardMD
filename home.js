@@ -4810,6 +4810,21 @@
   };
   // §3 sheet shell — markup verbatim from IMPLEMENTATION.md (kept the app's extract label so it
   // stays consistent with the extract handler's own text; #maikClose replaces the old #maikX id).
+  /* ANSWER LENGTH PREFERENCE. "medium" (balanced) is the default: a lead sentence plus the essential
+   * points. "short" answers to the point in a few sentences; "long" covers everything in full sections.
+   * It rides the existing depth channel, so cloud and on-device engines both honour it: long forces
+   * depth "detailed", short maps concise asks to "brief" but leaves an explicit "in detail" alone.
+   * MODULE scope: maikShellHTML() (module level) reads maikLenLabel() to draw the pill. Defined inside
+   * openAskAi it was a ReferenceError that stopped the MaiK sheet opening at all (caught 2026-09-24). */
+  var MAIK_LEN = ["short", "medium", "long"], MAIK_LEN_LABEL = { short: "Short", medium: "Balanced", long: "Detailed" };
+  function maikLenPref() { try { var v = localStorage.getItem("smd_maik_len"); return MAIK_LEN.indexOf(v) >= 0 ? v : "medium"; } catch (e) { return "medium"; } }
+  function maikLenLabel() { return MAIK_LEN_LABEL[maikLenPref()]; }
+  function maikApplyLen(depth) {
+    var p = maikLenPref();
+    if (p === "long") return "detailed";
+    if (p === "short") return depth === "detailed" ? "detailed" : "brief";
+    return depth;
+  }
   function maikShellHTML() {
     return '' +
       '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
@@ -5581,19 +5596,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * RENDER and frees the composer. That is an honest partial: the tokens are already being spent,
      * and pretending otherwise would be worse than saying so.
      */
-    /* ANSWER LENGTH PREFERENCE. "medium" (balanced) is the default: a lead sentence plus the essential
-     * points. "short" answers to the point in a few sentences; "long" covers everything in full sections.
-     * It rides the existing depth channel, so cloud and on-device engines both honour it: long forces
-     * depth "detailed", short maps concise asks to "brief" but leaves an explicit "in detail" alone. */
-    var MAIK_LEN = ["short", "medium", "long"], MAIK_LEN_LABEL = { short: "Short", medium: "Balanced", long: "Detailed" };
-    function maikLenPref() { try { var v = localStorage.getItem("smd_maik_len"); return MAIK_LEN.indexOf(v) >= 0 ? v : "medium"; } catch (e) { return "medium"; } }
-    function maikLenLabel() { return MAIK_LEN_LABEL[maikLenPref()]; }
-    function maikApplyLen(depth) {
-      var p = maikLenPref();
-      if (p === "long") return "detailed";
-      if (p === "short") return depth === "detailed" ? "detailed" : "brief";
-      return depth;
-    }
     function maikCycleLen() {
       var next = MAIK_LEN[(MAIK_LEN.indexOf(maikLenPref()) + 1) % MAIK_LEN.length];
       try { localStorage.setItem("smd_maik_len", next); } catch (e) {}
