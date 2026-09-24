@@ -35,7 +35,7 @@ const ALLOWED_ORIGINS = [
 const DEV_ORIGIN_RE = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 const TTL = { search: 300, suggest: 600, comp: 600, drug: 86400, list: 86400 };
 // Bump to invalidate all edge/Worker-cached responses after a response-shape change.
-const CACHE_VERSION = "9";
+const CACHE_VERSION = "10";
 
 function corsHeaders(origin) {
   let allow = "https://stewardmd.in";
@@ -325,49 +325,138 @@ async function handleComposition(url, env) {
   }
 }
 
+function cleanCompositionName(name) {
+  let s = String(name || "").trim();
+  if (/rabies\s*vaccine|human\s*\+\s*rabies|rabies.*human/i.test(s)) return "Rabies Vaccine";
+  if (/tetanus\s*toxoid|tdap|\btt\b|adsorbed\s*tetanus/i.test(s)) return "Tetanus Toxoid";
+  if (/rotavirus\s*vaccine/i.test(s)) return "Rotavirus Vaccine";
+  if (/typhoid\s*vaccine|salmonella\s*typhi|purified\s*vi.*typhoid/i.test(s)) return "Typhoid Vaccine";
+  if (/hepatitis\s*b\s*vaccine|aluminium.*hepatitis\s*b/i.test(s)) return "Hepatitis B Vaccine";
+  if (/hepatitis\s*a\s*vaccine/i.test(s)) return "Hepatitis A Vaccine";
+  if (/influenza\s*vaccine/i.test(s)) return "Influenza Vaccine";
+  if (/pneumococc\w*\s*(?:polysaccharide\s*)?conjugate\s*vaccine/i.test(s)) return "Pneumococcal Conjugate Vaccine";
+  if (/pneumococc\w*\s*polysaccharide\s*vaccine/i.test(s)) return "Pneumococcal Polysaccharide Vaccine";
+  if (/measles.*mumps.*rubella|mmr/i.test(s)) return "MMR Vaccine";
+  if (/varicella\s*vaccine/i.test(s)) return "Varicella Vaccine";
+  if (/human\s*papilloma\w*|hpv/i.test(s)) return "Human Papillomavirus Vaccine";
+  if (/herpes\s*zoster|shingles/i.test(s)) return "Herpes Zoster Vaccine";
+  if (/\bbcg\b/i.test(s)) return "BCG Vaccine";
+  if (/cholera\s*vaccine/i.test(s)) return "Cholera Vaccine";
+  if (/polio\s*vaccine/i.test(s)) return "Polio Vaccine";
+
+  if (/\S\s*\+\s*\S/.test(s)) {
+    const KNOWN = ["Pneumococcal Conjugate Vaccine", "Pneumococcal Polysaccharide Vaccine",
+      "Human Papillomavirus Vaccine", "Herpes Zoster Vaccine", "Hepatitis B Vaccine",
+      "Hepatitis A Vaccine", "Rabies Vaccine", "Tetanus Toxoid", "Rotavirus Vaccine",
+      "Typhoid Vaccine", "Influenza Vaccine", "MMR Vaccine", "Varicella Vaccine",
+      "BCG Vaccine", "Cholera Vaccine", "Polio Vaccine"];
+    for (const k of KNOWN) {
+      if (s.toLowerCase().includes(k.toLowerCase())) return k;
+    }
+  }
+
+  s = s.replace(/\s*\([^)]*\)/g, " ");
+  s = s.replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi, " ");
+  return s.replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();
+}
+
 // /monograph -> clinical monograph for a generic. For combination products
 // (composition contains " + ") we compose each component's monograph.
 async function handleMonograph(url, env) {
-  const name = (url.searchParams.get("name") || "").trim();
-  if (!name) return json({ error: "missing name" }, { status: 400 });
+  const rawName = (url.searchParams.get("name") || "").trim();
+  if (!rawName) return json({ error: "missing name" }, { status: 400 });
+  const cleanName = cleanCompositionName(rawName);
+
+  async function queryMono(comp) {
+    if (!comp) return null;
+    let r = await env.DB.prepare(`SELECT * FROM monographs WHERE composition = ?1`).bind(comp).first();
+    if (!r) {
+      r = await env.DB.prepare(`SELECT * FROM monographs WHERE LOWER(composition) = LOWER(?1)`).bind(comp).first();
+    }
+    return r;
+  }
+
   try {
-    if (/\s\+\s/.test(name)) {
-      const parts = name.split(/\s*\+\s*/).map((s) => s.trim()).filter(Boolean);
+    let m = await queryMono(rawName);
+    if (m) return json({ composition: rawName, found: true, monograph: m }, { ttl: 86400 });
+
+    if (cleanName && cleanName !== rawName) {
+      m = await queryMono(cleanName);
+      if (m) return json({ composition: cleanName, found: true, monograph: m }, { ttl: 86400 });
+    }
+
+    const target = cleanName || rawName;
+    if (/\s\+\s/.test(target)) {
+      const parts = target.split(/\s*\+\s*/).map((s) => s.trim()).filter(Boolean);
       const components = [];
       for (const p of parts) {
-        const m = await env.DB.prepare(`SELECT * FROM monographs WHERE composition = ?1`).bind(p).first();
-        components.push({ name: p, monograph: m || null });
+        const cpClean = cleanCompositionName(p);
+        let cpRow = await queryMono(p);
+        if (!cpRow && cpClean !== p) cpRow = await queryMono(cpClean);
+        components.push({ name: p, monograph: cpRow || null });
       }
-      return json({ composition: name, combo: true, found: components.some((c) => c.monograph), components }, { ttl: 86400 });
+      return json({ composition: rawName, combo: true, found: components.some((c) => c.monograph), components }, { ttl: 86400 });
     }
-    const m = await env.DB.prepare(`SELECT * FROM monographs WHERE composition = ?1`).bind(name).first();
-    if (!m) return json({ composition: name, found: false }, { ttl: TTL.comp });
-    return json({ composition: name, found: true, monograph: m }, { ttl: 86400 });
+
+    return json({ composition: rawName, found: false }, { ttl: TTL.comp });
   } catch (err) {
-    if (tableMissing(err)) return json({ composition: name, found: false, note: "monographs not loaded" }, { extra: { "x-db-status": "empty" } });
+    if (tableMissing(err)) return json({ composition: rawName, found: false, note: "monographs not loaded" }, { extra: { "x-db-status": "empty" } });
     return json({ error: "monograph_failed" }, { status: 500 });
   }
 }
 
 // /structured -> structured clinical record (combo-aware) — the new default UI
 async function handleStructured(url, env) {
-  const name = (url.searchParams.get("name") || "").trim();
-  if (!name) return json({ error: "missing name" }, { status: 400 });
+  const rawName = (url.searchParams.get("name") || "").trim();
+  if (!rawName) return json({ error: "missing name" }, { status: 400 });
+  const cleanName = cleanCompositionName(rawName);
+
+  async function queryRow(comp) {
+    if (!comp) return null;
+    let r = await env.DB.prepare(`SELECT * FROM drug_structured WHERE composition = ?1`).bind(comp).first();
+    if (!r) {
+      r = await env.DB.prepare(`SELECT * FROM drug_structured WHERE LOWER(composition) = LOWER(?1)`).bind(comp).first();
+    }
+    return r;
+  }
+
   try {
-    if (/\s\+\s/.test(name)) {
-      const parts = name.split(/\s*\+\s*/).map((s) => s.trim()).filter(Boolean);
+    // 1. Exact match on raw name
+    let m = await queryRow(rawName);
+    if (m) return json({ composition: rawName, found: true, data: m }, { ttl: 86400 });
+
+    // 2. Normalized clean name (stripping strength qualifiers / canonicalizing)
+    if (cleanName && cleanName !== rawName) {
+      m = await queryRow(cleanName);
+      if (m) return json({ composition: cleanName, found: true, data: m }, { ttl: 86400 });
+    }
+
+    // 3. Genuine combination products (containing " + ")
+    const target = cleanName || rawName;
+    if (/\s\+\s/.test(target)) {
+      const parts = target.split(/\s*\+\s*/).map((s) => s.trim()).filter(Boolean);
       const components = [];
       for (const p of parts) {
-        const m = await env.DB.prepare(`SELECT * FROM drug_structured WHERE composition = ?1`).bind(p).first();
-        components.push({ name: p, data: m || null });
+        const cpClean = cleanCompositionName(p);
+        let cpRow = await queryRow(p);
+        if (!cpRow && cpClean !== p) cpRow = await queryRow(cpClean);
+        components.push({ name: p, data: cpRow || null });
       }
-      return json({ composition: name, combo: true, found: components.some((c) => c.data), components }, { ttl: 86400 });
+      const hasAny = components.some((c) => c.data);
+      if (hasAny) {
+        return json({ composition: rawName, combo: true, found: true, components }, { ttl: 86400 });
+      }
     }
-    const m = await env.DB.prepare(`SELECT * FROM drug_structured WHERE composition = ?1`).bind(name).first();
-    if (!m) return json({ composition: name, found: false }, { ttl: TTL.comp });
-    return json({ composition: name, found: true, data: m }, { ttl: 86400 });
+
+    // 4. Prefix match fallback (e.g. "Tirzepatide" for "Tirzepatide ...")
+    if (cleanName) {
+      m = await env.DB.prepare(`SELECT * FROM drug_structured WHERE composition LIKE ?1 || '%' LIMIT 1`).bind(cleanName).first();
+      if (m) return json({ composition: m.composition, found: true, data: m }, { ttl: 86400 });
+    }
+
+    return json({ composition: rawName, found: false }, { ttl: TTL.comp });
   } catch (err) {
-    if (tableMissing(err)) return json({ composition: name, found: false, note: "structured not loaded" }, { extra: { "x-db-status": "empty" } });
+    if (tableMissing(err)) return json({ composition: rawName, found: false, note: "structured not loaded" }, { extra: { "x-db-status": "empty" } });
     return json({ error: "structured_failed" }, { status: 500 });
   }
 }

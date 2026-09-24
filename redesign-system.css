@@ -42,6 +42,14 @@ body {
   --rds-muted:          var(--slate, #5B7083);
   --rds-faint:          var(--slate-soft, #8CA2B1);
 
+  /* ---- Clinical Tools sphere: theme-driven via --sphere-* (graphite-dark.css
+     for default dark, index.html per-theme rules for accents). Deep greens here
+     are defaults only — never neon. ---- */
+  --sphere-hi:   #2f9184;
+  --sphere-mid:  #12564a;
+  --sphere-base: #06231e;
+  --sphere-glow: rgba(8,40,35,.6);
+
   /* ---- typography ---- */
   --rds-font:  var(--sans, 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif);
   --rds-mono:  var(--mono, 'IBM Plex Mono', 'SF Mono', Consolas, monospace);
@@ -79,6 +87,7 @@ body {
 /* Dark: surface-2 + severity get explicit values (base surfaces already flip via body.dark).
    Scoped to the app's primary dark switch (body.dark). */
 body.dark {
+  --rds-primary-2: #12564a;
   --rds-surface-2: #0D1922;
   --rds-line-soft: #16283340;
   --rds-el-card:  0 1px 2px rgba(0,0,0,.30);
@@ -370,6 +379,14 @@ body.dark {
 #homeV2.rnav .rnav-hero-tag { font: 700 11px var(--rds-font); text-transform: uppercase; letter-spacing: .06em; opacity: .9; display: inline-block; margin-top: 3px; }
 #homeV2.rnav .rnav-hero-p { font: 500 13px/1.5 var(--rds-font); opacity: .92; margin: 6px 0 0; }
 #homeV2.rnav .rnav-hero-logo { width: 56px; height: 56px; object-fit: contain; filter: brightness(0) invert(1); opacity: .9; }
+/* Dark: the hero is a deep sphere gradient, never a neon billboard. Theme-driven. */
+html body.dark #homeV2.rnav .rnav-hero,
+html body.v3-dark #homeV2.rnav .rnav-hero {
+  background: linear-gradient(135deg, var(--sphere-mid, #12564a), var(--sphere-base, #06231e));
+  border: 1px solid rgba(47,145,132,.35);
+  border: 1px solid color-mix(in srgb, var(--sphere-hi, #2f9184) 30%, transparent);
+  box-shadow: 0 8px 24px -6px var(--sphere-glow, rgba(8,40,35,.6));
+}
 #homeV2.rnav .rnav-qrow { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
 #homeV2.rnav .rnav-qc { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11px var(--rds-font); cursor: pointer; min-height: 44px; }
 #homeV2.rnav .rnav-qc .rds-icon { color: var(--rds-primary); }
@@ -701,6 +718,12 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   box-shadow: var(--rds-el-cta); box-sizing: border-box;
 }
 #homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
+/* Dark: the Ask Maik FAB is a 3D sphere matching the Clinical Tools badges. */
+html body.dark #homeV2.rnav .rnav-tab-maik .rds-icon,
+html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
+  background: radial-gradient(circle at 34% 26%, var(--sphere-hi, #2f9184) 0%, var(--sphere-mid, #12564a) 52%, var(--sphere-base, #06231e) 100%);
+  box-shadow: inset 0 2px 5px rgba(255,255,255,.28), inset 0 -5px 10px rgba(0,0,0,.42), 0 6px 16px -4px var(--sphere-glow, rgba(8,40,35,.6));
+}
 
 /* Home tiles v4: top-align icons + reserve a 2-line label area so tiles with 1-line
    and 2-line labels (Scan Meds / Ward Sync) are identical and icons line up. */
@@ -733,9 +756,9 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 #homeV2.rnav .rnav-badge {
   width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center;
   justify-content: center; position: relative;
-  background: radial-gradient(circle at 34% 26%, #2f9184 0%, #12564a 52%, #06231e 100%);
+  background: radial-gradient(circle at 34% 26%, var(--sphere-hi, #2f9184) 0%, var(--sphere-mid, #12564a) 52%, var(--sphere-base, #06231e) 100%);
   color: #fff;
-  box-shadow: inset 0 3px 8px rgba(255,255,255,.28), inset 0 -9px 16px rgba(0,0,0,.42), 0 10px 20px -7px rgba(8,40,35,.6);
+  box-shadow: inset 0 3px 8px rgba(255,255,255,.28), inset 0 -9px 16px rgba(0,0,0,.42), 0 10px 20px -7px var(--sphere-glow, rgba(8,40,35,.6));
 }
 /* The specular highlight, the thing that actually reads as "sphere" rather than "dark circle". */
 #homeV2.rnav .rnav-badge::before {
@@ -862,3 +885,13 @@ html body.rds-on .icd-card-code, html body.rds-on .icd-dcode, html body.rds-on .
 html body.rds-on .icd-card-sys, html body.rds-on .gs-pill { border-radius: var(--rds-r-pill); background: var(--rds-primary-soft); color: var(--rds-primary-2); font-family: var(--rds-font); }
 html body.rds-on .icd-card-ch, html body.rds-on .gs-amt.unset { color: var(--rds-muted); font-family: var(--rds-font); }
 html body.rds-on #csOverlay, html body.rds-on #eceOverlay, html body.rds-on #abgOverlay, html body.rds-on #feaOverlay { background: var(--rds-bg); }
+
+/* BETA chip on the experimental imaging-AI tiles (ThoreX / KardiQ X / SknX / FundX). These models
+   are clinically unvalidated, so the chip is unconditional: it renders on every path that shows the
+   tile (access code, tester flag, Physician Pro early access) and cannot be dismissed. */
+#homeV2.rnav .rnav-tile { position: relative; }
+#homeV2.rnav .rnav-tile-beta {
+  position: absolute; top: 6px; right: 6px; z-index: 2;
+  font: 800 9px/1 var(--rds-font); letter-spacing: .06em; text-transform: uppercase;
+  padding: 3px 5px; border-radius: 999px; color: #7a4a00; background: #ffd27a; border: 1px solid rgba(0,0,0,.08);
+}

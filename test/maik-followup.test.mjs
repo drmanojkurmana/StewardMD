@@ -27,3 +27,15 @@ test("naming a new condition routes fresh (NOT a follow-up)", () => {
     assert.equal(isFollowup(q), false, "expected new topic: " + q);
   });
 });
+
+/* Owner transcripts 2026-09-21: "How to treat Covid 19 tell me in detail" was answered about STEMI, then a
+ * misspelt essay request after Myocarditis came back about malaria. The detail branch now continues the
+ * topic exactly when maikNovelTokens finds no new subject (behaviour pinned in maik-thread-continuity). */
+test("the detail branch defers to maikNovelTokens and passes the asked aspects through", () => {
+  const i = SRC.indexOf("var DETAIL_RE = ");
+  assert.ok(i > 0);
+  const blk = SRC.slice(i, i + 1600);
+  assert.match(blk, /if \(maikNovelTokens\(q\)\.length\) return null;/);
+  assert.match(blk, /covering: " \+ askD/);
+  assert.doesNotMatch(blk, /restD\.every\(function \(w\) \{ return GENERIC_FU\.test\(w\); \}\)/, "the generic-only remainder rule is gone");
+});

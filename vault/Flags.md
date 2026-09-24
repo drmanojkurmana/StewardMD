@@ -36,10 +36,19 @@ Turning these on does not enable a feature; it breaks one.
 
 | Flag | State | What it says about itself |
 |---|---|---|
-| `smd_kardiox` | OFF | Its own words: clinically unvalidated, regulatory-pending. Opens per device via the Experimental passcode. |
-| `smd_thorex` | OFF | Its own words: needs GROQ + validation. Opens per device via the Experimental passcode. |
+| `smd_kardiox` | **ON** (def:true) | Its own words: clinically unvalidated, regulatory-pending. Live for every user of the build. |
+| `smd_thorex` | **ON** (def:true) | Its own words: needs GROQ + validation. GROQ is provisioned; the VALIDATION half is still outstanding. Live for every user. |
+| `smd_fundx` | **ON** (def:true) | Live for every user of the build. |
 
-Both open **per device** today via the sidebar Experimental access code, so testers already reach them. Flipping the default makes them live for every user of the build.
+**These are ON, not OFF (owner decision 2026-08-26; corrected here 2026-09-16 after this section was
+found stale against the registries).** The defaults were already flipped in `kardiox-flags.js`,
+`thorex-flags.js` and `fundx-flags.js`; this section still described the pre-flip world, which read as
+"three unvalidated imaging AI modules are off for users" when the opposite is true. The per-module
+tables further down were already correct, so the file contradicted itself.
+
+The clinical position is unchanged by the flag: each module is still clinically unvalidated and
+regulatory-pending, and the in-module wording that says so must stay. Set `def:false` in the relevant
+`*-flags.js` to close one again; `?kardiox=0` / `?thorex=0` / `?fundx=0` disables per device.
 
 ## WardSynQ — three flags, all OFF, added 2026-09-05
 
@@ -229,12 +238,13 @@ leaving it present:
 | `smd_sknx_rx` | **ON** | — |
 | `smd_sknx_secure_egress` | OFF | **BLOCKED ON SERVER.** Same posture as ThoreX: needs the server-side proxy first. |
 
-### StewardMD ID  <sub>2 ON · 0 OFF</sub>
+### StewardMD ID  <sub>3 ON · 0 OFF</sub>
 
 | Flag | Def | Why |
 |---|---|---|
 | `smd_steward_id` | **ON** | Verified-email / Apple-proxy anchor capture UI. ON by owner decision 2026-08-26. The ID itself was already minted on sign-in regardless (smd_steward_i… |
 | `smd_steward_id_mint` | **ON** | Mint the universal StewardMD ID on sign-in. DEFAULT ON. |
+| `smd_phone_verify` | **ON** | Ask every signed-in account to verify its mobile number (WhatsApp code, SMS backup) after the profile form; `phone-verify.js`, 2026-09-19. Set `"0"` to stop asking on this device. Server twin: `PHONE_VERIFY_ON`. |
 
 ### ThoreX  <sub>5 ON · 4 OFF</sub>
 
@@ -250,7 +260,7 @@ leaving it present:
 | `smd_thorex_dev` | OFF | **DEV TOOL.** Pipeline/timing overlay. |
 | `smd_thorex_secure_egress` | OFF | **BLOCKED ON SERVER.** The proxy fails CLOSED with 503 until THOREX_ANALYZE_URL is provisioned. Turning it on breaks analysis. |
 
-### Verification & account lifecycle (SERVER env / KV, not client flags)  <sub>4 ON · 0 OFF</sub>
+### Verification & account lifecycle (SERVER env / KV, not client flags)  <sub>5 ON · 1 OFF</sub>
 
 Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localStorage` flags.
 
@@ -264,6 +274,9 @@ Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localS
 | `AI_BUDGET_ON` | **ON** | Per-tier AI allowances (`_aibudget.js`). Default ON since 2026-08-27, so verification is worth something: unverified **0**, verified-not-Pro 5k, Pro 1M, physician 3M. Set `0` for the legacy flat caps. `BUDGET_FREE_TOKENS` / `BUDGET_PRO_TOKENS` / `BUDGET_PROMAX_TOKENS` tune each rung. |
 | `UNVERIFIED_PURGE_DAYS` | `7` | Age at which an unverified account is removed. |
 | `UNVERIFIED_WARN_DAYS` | `5` | Age at which the single warning email goes out. Nobody is removed who was never warned. |
+| `PHONE_VERIFY_ON` | **ON** | `/api/auth/phone-start` + `phone-verify` (WhatsApp OTP, SMS backup; `_phone_otp.js`). Set `0` and both answer `{error:"off"}`; the client sheet closes quietly. Delivery needs a FollowCare WhatsApp provider and/or SMS provider; with neither configured the route soft-fails `no-channel` and nothing is sent. `TWOFACTOR_TEMPLATE_OTP`, `SMS_TEMPLATE_OTP`, `PHONE_OTP_WA_BODY` tune the templates. |
+| `PROMO_SERIES_ON` | **OFF** | The 7-edition promotional email series (`_promo.js`, sweep in `/api/lifecycle/run`). OFF until the owner switches marketing cadence on; report-only meanwhile. `PROMO_START_DAYS` (5) and `PROMO_EVERY_DAYS` (4) set the cadence, `PROMO_MAX_PER_RUN` (300) the nightly cap. Skips opt-outs and paying accounts. |
+| `UNSUB_SECRET` | (falls back to `RESEND_API_KEY`) | HMAC key for the signed unsubscribe token in every marketing email (`_unsub.js`). Rotating it invalidates links in emails already sent; set it once. |
 
 ## Reading the defaults
 

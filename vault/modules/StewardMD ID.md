@@ -48,6 +48,23 @@ must never be shown a price, because verification unlocks it free. `openPaywall(
 for the unverified/pending reasons, so no call site can open the wrong door.
 
 ## Gotchas
+- **The OTP sheet follows the keyboard (2026-09-21).** Owner: "when keyboard is opened the dialog
+  box doesnt go up". `phone-verify.js` is a bottom-anchored `position:fixed` sheet, and on iOS a
+  fixed element is laid out against the LAYOUT viewport, which does not shrink for the keyboard, so
+  the code slots and Verify sat behind the keys. `fitViewport()` resizes `#phvRoot` to
+  `window.visualViewport` (top/height) on every viewport resize/scroll and on focus inside the
+  sheet; the card is `max-height:100%` of the root and scrolls inside it; `.kb` tightens the layout.
+  Android resizes the layout viewport itself, so the same code is a no-op there. Harness:
+  `SMD_PHONE_VERIFY._fit({height,offsetTop})` injects a viewport (headless Chrome has no keyboard);
+  `_fit(null)` clears it. Covered in `test/run-phone-verify-ui.mjs`.
+- **Phone verification is an ask, not a gate (2026-09-19).** `phone-verify.js` opens after the
+  profile form saves (`smd:profile-saved`) and waits for `#verifyGate` to hide; the claim is
+  `phoneVerified`, the record is `lifecycle:u:<uid>.phoneVerifiedAt`. Server routes live in
+  `functions/api/auth/[[path]].js` BEFORE the `no-email-on-account` gate (Hide-My-Email accounts have
+  a phone too). Delivery is the FollowCare WhatsApp/SMS senders; with neither configured the route
+  soft-fails `no-channel` and the sheet says "cannot send codes right now". The sheet is the six-slot OTP
+  design (marching ring, pop-in digits, shake/sweep, WebOTP + one-time-code autofill); it waits for
+  `#verifyGate` AND the onboarding tour (`.smdt-wel`/`.smdt-card`). See Decisions 2026-09-19.
 - **Two client readers of "is this account Pro", and they can disagree.** `pro-badge.js` reads the
   `pro` CLAIM; `SMD_PRO_NOTICE.reason()` / the paywall's verify-bounce read the `/billing/status`
   payload `account.js` cached at sign-in. A verification landing mid-session must call

@@ -31,6 +31,7 @@
     var a = legacy();
     if (a && a.type === "tester") return "tester";
     if (a && a.type === "guest") return "guest";
+    if (a && (a.providerType === "email" || a.type === "email")) return "email";
     return (a && a.providerType) || (a && a.type) || "unknown";
   }
   function profile() {
@@ -41,7 +42,7 @@
       email: (u && u.email) || (a && a.email) || "",
       picture: (u && u.photoURL) || (a && a.picture) || "",
       type: a && a.type, isGuest: !!(a && a.type === "guest"),
-      signedIn: !!fbUser() || !!(a && (a.email || a.type === "google" || a.type === "apple"))
+      signedIn: !!fbUser() || !!(a && (a.email || a.type === "google" || a.type === "apple" || a.type === "email" || a.providerType === "email"))
     };
   }
   var subs = [];
@@ -67,21 +68,36 @@
   // whole point: "not Pro" and "do not know yet" must not produce the same UI.
   function loadProCacheRaw() { try { var v = localStorage.getItem(proCacheKey(uid())); return v === null ? null : v === "1"; } catch (e) { return null; } }
   function loadProCache() { var v = loadProCacheRaw(); return v === null ? false : v; }
-  function saveProCache(v) { try { localStorage.setItem(proCacheKey(uid()), v ? "1" : "0"); } catch (e) {} }
-  var _pro = loadProCache(), _proState = null, _claimRefreshed = false;
+  function saveProCache(v, u) { try { localStorage.setItem(proCacheKey(u || uid()), v ? "1" : "0"); } catch (e) {} }
+  function tierCacheKey(u) { return "smd_tier_last:" + (u || "anon"); }
+  function loadTierCache() { try { return localStorage.getItem(tierCacheKey(uid())) || ""; } catch (e) { return ""; } }
+  function saveTierCache(v) { try { localStorage.setItem(tierCacheKey(uid()), String(v || "")); } catch (e) {} }
+  var _pro = loadProCache(), _proState = null, _claimRefreshed = false, _tier = loadTierCache();
   var _proKnown = loadProCacheRaw() !== null;   // flips true on the first server answer
   function proKnown() { return _proKnown; }
   function apiUrl(p) { return (window.SMD_API_BASE || "") + p; }
   function idToken() { var u = fbUser(); try { return u && u.getIdToken ? u.getIdToken(false) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function syncStatus() {
+    // Pin WHO this verdict is for at request time. The response can land after the Firebase user
+    // appears, and saving under uid() at that point filed an anonymous "not Pro" under the real
+    // account, which then read as locked until the next successful sync.
+    var u0 = uid(), hadUser = !!fbUser();
     return Promise.resolve(idToken()).then(function (t) {
       var h = t ? { "Authorization": "Bearer " + t } : {};
       return fetch(apiUrl("/api/billing/status"), { headers: h }).then(function (r) { return r.json(); });
     }).then(function (d) {
       _proState = d || null;
-      if (d && typeof d.pro === "boolean") {
+      // A signed-in client that the server could not identify (no token yet, or a token it failed to
+      // verify) gets the GUEST verdict: pro:false, signedIn:false. That is not a verdict about this
+      // account, so it must not flip the cache. Keep the last known answer and let the next sync decide.
+      var _foreign = !!(d && hadUser && d.signedIn === false);
+      if (d && typeof d.tier === "string") {
+        var wasTier = _tier; _tier = d.tier; saveTierCache(_tier);
+        if (wasTier !== _tier) { try { window.dispatchEvent(new CustomEvent("smd:tier", { detail: { tier: _tier } })); } catch (e) {} }
+      }
+      if (d && typeof d.pro === "boolean" && !_foreign) {
         var was = _pro;
-        _pro = d.pro; saveProCache(_pro);                                          // only an explicit boolean flips the cache
+        _pro = d.pro; saveProCache(_pro, u0);                                      // only an explicit boolean, for THIS uid, flips the cache
         /* TELL SOMEONE. Nothing in the app was notified when this flipped, which was harmless while
          * _pro defaulted to true - every gate read true from the first paint and never had to change
          * its mind. Seeding from the per-uid cache made the first launch of a build start at FALSE
@@ -105,6 +121,10 @@
     }, function () { return _proState; });                 // error → keep last known (fail-open)
   }
   function isProSync() { return _pro; }
+  /* Purchase tier, cached per uid like _pro above and for the same reason: gates that render
+   * synchronously on first paint (the home tool grid) must not wait for /api/billing/status.
+   * Unknown → "" (never guess a tier up). */
+  function tierSync() { return _tier; }
   function isPro() { return syncStatus().then(function () { return _pro; }); }
   function proState() { return _proState; }
   // onProChange: for surfaces that render a Pro gate synchronously and cannot poll. Fires only on an
@@ -115,8 +135,8 @@
     try { window.addEventListener("smd:pro", h); } catch (e) {}
     return function () { try { window.removeEventListener("smd:pro", h); } catch (e) {} };
   }
-  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, proState: proState, sync: syncStatus, onProChange: onProChange, proKnown: proKnown, TEST_PRO_EMAILS: [] };
-  onChange(function () { try { _pro = loadProCache(); _proKnown = loadProCacheRaw() !== null; } catch (e) {} try { syncStatus(); } catch (e) {} });   // reseed for this uid, then refresh
+  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, tierSync: tierSync, proState: proState, sync: syncStatus, onProChange: onProChange, proKnown: proKnown, TEST_PRO_EMAILS: [] };
+  onChange(function () { try { _pro = loadProCache(); _proKnown = loadProCacheRaw() !== null; _tier = loadTierCache(); } catch (e) {} try { syncStatus(); } catch (e) {} });   // reseed for this uid, then refresh
 
   /* -------- Anti-sharing device lock --------
    * Register this device on sign-in + resume. When the server (DEVICE_LOCK_ON) reports we are no longer
@@ -161,6 +181,7 @@
     };
     window.SMD_applyGoogleUser._smdWrapped = true;
     window.SMD_applyAppleUser = window.SMD_applyGoogleUser;   // explicit intent for native-auth.js
+    window.SMD_applyEmailUser = window.SMD_applyGoogleUser;   // explicit intent for email-auth.js
     return true;
   }
 

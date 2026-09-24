@@ -44,7 +44,8 @@
     "thorex": "ThoreX chest X-ray AI",
     "sknx": "SknX dermatology AI",
     "kardiox": "KardiQ X ECG AI",
-    "fundx": "FundX retinal AI"
+    "fundx": "FundX retinal AI",
+    "clinix": "The full CliniX library"
   };
   function label(f) { return LABELS[f] || "This feature"; }
 
@@ -73,7 +74,13 @@
   function reason() {
     if (isPro()) return "pro";
     var st = proState();
-    if (!st) return "unknown";
+    // Signed out is not a failed lookup. Trust the server's signedIn when it answered; otherwise the
+    // auth client (a restored session can lag Firebase boot, so the server answer wins when present).
+    try {
+      if (st && typeof st === "object" && typeof st.signedIn === "boolean") { if (!st.signedIn) return "signin"; }
+      else if (window.SMD_AUTH && !window.SMD_AUTH.currentUser) return "signin";
+    } catch (e) {}
+    if (!st || typeof st !== "object") return "unknown";
     return normalise(st);
   }
 
@@ -84,6 +91,14 @@
     var r = srv ? normalise(srv) : reason();
     var serverMsg = (srv && typeof srv.message === "string" && srv.message) || "";
 
+    if (r === "signin") {
+      return {
+        kind: r,
+        title: name + " is part of StewardMD Pro",
+        body: "Sign in to see what your plan includes. Registered doctors get Pro free for 7 days once their registration is verified.",
+        cta: "Sign in", act: "signin"
+      };
+    }
     if (r === "pending") {
       return {
         kind: r,
@@ -129,6 +144,11 @@
   function toast(m) { try { (window.toast || window.SMD_toast || function () {})(m); } catch (e) {} }
 
   function run(act, feature) {
+    if (act === "signin") {
+      try { if (window.SMD_signInWithGoogle) { window.SMD_signInWithGoogle(); return; } } catch (e) {}
+      toast("Open Settings, then Account, to sign in.");
+      return;
+    }
     if (act === "verify" || act === "account") {
       try { if (window.SMD_VERIFY && window.SMD_VERIFY.openPanel) { window.SMD_VERIFY.openPanel(); return; } } catch (e) {}
       toast("Open Settings, then Account and Verification.");

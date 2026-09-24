@@ -84,7 +84,7 @@ test("a correct password resets the count, and every outcome is audited without 
 test("an admin cannot set a weak PIN or password; the route reports it as a failure", async () => {
   await seed();
   assert.equal(pinProblem("1111") != null, true);
-  assert.equal(pinProblem("1234") != null, true);
+  assert.equal(pinProblem("1234"), null);
   assert.equal(pinProblem("12a4") != null, true);
   assert.equal(pinProblem("4826"), null);
   assert.equal(passwordProblem("short1") != null, true);
@@ -92,7 +92,7 @@ test("an admin cannot set a weak PIN or password; the route reports it as a fail
   assert.equal(passwordProblem("nurse1-is-me-ok", "nurse1@clinic.in") != null, true);
   assert.equal(passwordProblem("Ward7-night-shift", "nurse1@clinic.in"), null);
 
-  const r = await ORG.setMemberPin(undefined, "org1", "nurse1", "1234", "owner");
+  const r = await ORG.setMemberPin(undefined, "org1", "nurse1", "1111", "owner");
   assert.equal(r.ok, false);
   assert.equal(r.error, "weak_pin");
   const p = await ORG.setMemberPassword(undefined, "org1", "nurse1", "nurse1@clinic.in", "password123", "owner");

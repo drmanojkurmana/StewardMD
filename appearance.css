@@ -1045,3 +1045,60 @@ html[data-appearance] #homeV2.rnav .rnav-qa-btn::after { display: none !importan
 @media (min-width: 1024px) {
   .ac-card { max-width: 820px; }
 }
+
+/* ============================================================================
+ * Knowledge Library + disease reader: CALM glass (QA BUG-011).
+ * These are long-form reading surfaces. The four-blob aurora used behind the app
+ * hubs is far too loud under paragraphs of text, so the library home, the tool
+ * pages (Syndromes / Antibiogram / AWaRe / Guidelines) and the disease reader get
+ * one quiet top wash, hairline translucent cards and a single blur layer on the
+ * sticky chrome only (no per-row blur: WKWebView perf).
+ * ============================================================================ */
+html[data-appearance] #sbrefOverlay:not(#_):has(.kblib-discover) .sbref-shell,
+html[data-appearance] #sbrefOverlay:not(#_):has(.kblib-tool-page) .sbref-shell,
+html[data-appearance] #dxOverlay:not(#_).dx-reference-mode,
+html[data-appearance] #dxMgmt:not(#_).dx-reader {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--teal,#0f766e) 9%, var(--paper,#f5f5f7)) 0, var(--paper,#f5f5f7) 420px) !important;
+}
+/* the section wrapper is a layout box in the library, not a card: no glass on it */
+html[data-appearance] #sbrefOverlay:not(#_) .sbref-sec.kblib-discover {
+  background: none !important; border: 0 !important; box-shadow: none !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+}
+/* sticky chrome: the only blurred layer */
+html[data-appearance] #sbrefOverlay:not(#_):has(.kblib-discover) .sbref-top,
+html[data-appearance] #sbrefOverlay:not(#_):has(.kblib-tool-page) .sbref-top,
+html[data-appearance] #dxMgmt:not(#_).dx-reader .dx-mgmt-top {
+  background: color-mix(in srgb, var(--panel,#fff) 78%, transparent) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink,#000) 8%, transparent) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.2) !important; backdrop-filter: blur(16px) saturate(1.2) !important;
+}
+/* cards: translucent paper with a hairline, one consistent radius, no blobs */
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover :is(.kblib-personal,.kblib-compare,.kblib-feature,.kblib-grid,.kblib-more,.kblib-search,.kblib-tiles .kblib-f),
+html[data-appearance] #sbrefOverlay:not(#_) #sbrefBody.kblib-tool-page .sbref-sec,
+html[data-appearance] #sbrefOverlay:not(#_) #sbrefBody.kblib-tool-page .kblib-tool-search,
+html[data-appearance] #dxMgmt:not(#_).dx-reader :is(.dx-reader-hero,.dx-reader-glance,.dx-reader-favourite,.ev-wrap,.dx-mgmt-disc) {
+  background: color-mix(in srgb, var(--panel,#fff) 82%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--ink,#000) 9%, transparent) !important;
+  box-shadow: 0 1px 2px rgba(15,23,42,.04) !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+}
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-feature::after,
+html[data-appearance] #dxMgmt:not(#_).dx-reader .dx-reader-hero::after { display: none !important; }
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-tiles .kblib-f.on,
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-f.on {
+  background: var(--kl-accent,#5956a5) !important; border-color: var(--kl-accent,#5956a5) !important; color: #fff !important;
+}
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-row { background: transparent !important; }
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-row:active { background: color-mix(in srgb, var(--kl-accent,#5956a5) 8%, transparent) !important; }
+/* tabs: a segmented pill, one blur on the group not on each tab */
+html[data-appearance] #sbrefBody:not(#_):is(:has(.kblib-discover),.kblib-tool-page) .sbref-tabs {
+  padding: 3px; border-radius: 13px; background: color-mix(in srgb, var(--ink,#000) 6%, transparent);
+}
+html[data-appearance] #sbrefBody:not(#_):is(:has(.kblib-discover),.kblib-tool-page) .sbref-tab {
+  background: transparent !important; border: 0 !important; box-shadow: none !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+}
+html[data-appearance] #sbrefBody:not(#_):is(:has(.kblib-discover),.kblib-tool-page) .sbref-tab.active {
+  background: color-mix(in srgb, var(--panel,#fff) 92%, transparent) !important; box-shadow: 0 1px 3px rgba(15,23,42,.10) !important;
+}

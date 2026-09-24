@@ -61,6 +61,9 @@ function newId() {
  * every string is clipped before it is scanned. The clip is VISIBLE - a silently truncated identifier
  * that still looks like an identifier is worse than one that says it was cut. */
 const AUDIT_STRING_MAX = 512;
+/* How many ids ride in one `IN (...)`. The same 200 auditRowsById has used since G11, so the bound
+ * parameter count stays inside what this codebase already proves D1 accepts. */
+const ID_CHUNK = 200;
 
 /* SCRUB THE LEAVES, NEVER THE CONTAINER, AND THE REASON IS SPECIFIC.
  *
@@ -185,6 +188,36 @@ class D1Repository {
       .bind(...[tenantId, resourceType, tenantId, resourceType, ...windowArgs, ...(want || []), max + 1]).all();
     const rows = r.results || [];
     return { records: rows.slice(0, max).map(parseBody), next: rows.length > max ? rows[max - 1].seq : null };
+  }
+
+  /**
+   * OPTIONAL (see repository.js): the latest version of each NAMED id, in one read.
+   *
+   * R7-2, the ward list. The GROUP BY here is bounded by `id IN (...)`, which is a set of seeks on the
+   * UNIQUE (tenant_id, resource_type, id, version) index rather than the whole-type scan every other
+   * list read pays for - measured at 82,000 rows, this answers in a fraction of a millisecond where the
+   * whole-type group-by takes 8-18ms, and it replaces one round trip PER ID.
+   *
+   * Chunked at the same 200 ids as auditRowsById, so a ward of any size is one or two statements and
+   * the bound-parameter count stays where this codebase already proves D1 accepts it.
+   */
+  async latestByIds(tenantId, resourceType, ids) {
+    const want = [...new Set((ids || []).map(String).filter(Boolean))];
+    if (!want.length) return [];
+    const out = [];
+    for (let i = 0; i < want.length; i += ID_CHUNK) {
+      const part = want.slice(i, i + ID_CHUNK);
+      const marks = part.map(() => "?").join(",");
+      const r = await this.db
+        .prepare(
+          "SELECT r.body FROM wardsynq_record r " +
+          "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? AND id IN (" + marks + ") GROUP BY id) m " +
+          "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=?"
+        )
+        .bind(tenantId, resourceType, ...part, tenantId, resourceType).all();
+      for (const row of r.results || []) out.push(parseBody(row));
+    }
+    return out;
   }
 
   /**

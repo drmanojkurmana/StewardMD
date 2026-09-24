@@ -76,7 +76,9 @@ await delay(400);   // mock analyzer streams 13 stages @ ~8ms then resolves + mo
 ok("pipeline → report shows AF verdict", /Atrial fibrillation/i.test(host._html) && host._html.indexOf("kx-") >= 0);
 ok("report shows confidence 91%", /91/.test(host._html));
 ok("report now lists differentials", /Differentials considered/i.test(host._html) && /Atrial flutter/i.test(host._html));
-ok("report shows the small AI advisory gate (beta · not liable)", /advisory only \(beta\)/i.test(host._html) && /Not liable/i.test(host._html));
+// Wording strengthened 2026-09-18: the footer now LEADS with the beta status, because Physician Pro
+// reaches KardiQ X without an access code and a paid unlock must not read as validation.
+ok("report shows the small AI advisory gate (beta · not liable)", /Beta, in active development/i.test(host._html) && /advisory only/i.test(host._html) && /Not liable/i.test(host._html));
 ok("clinical interpretation carries no model/technical plumbing", !/efficientnet|AUROC|full ECG screen/i.test(host._html));
 
 // why screen (needs analysis in state — set by the pipeline above)

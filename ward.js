@@ -62,7 +62,10 @@
      * LABELLED with, and the unit that box then SENDS - so the screen and the record can never
      * disagree about whether 98.6 is Fahrenheit. "IN" until the server answers. */
     region: "IN",
-    busy: false, err: "", note: "", refusal: null, loaded: false
+    busy: false, err: "", note: "", refusal: null, loaded: false,
+    // MaiK Scribe for the ward round / progress note (item 16). See wardScribeOn() below -- OFF by
+    // default, and inert (no capture object, no draft) until a device turns the flag on.
+    wardScribeCapture: null, wardScribeOn: false, wardScribeStatus: "", wardScribeDraft: "", wardScribeTranscript: ""
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -773,6 +776,9 @@
       "<button class=\"w-btn ghost\" data-w-act=\"integration\" title=\"" + wTA("ward.feeds-in-and-out-what-is", "Feeds in and out: what is held, what is stuck, who may push, where this hospital sends") + "\">" + ms("hub") + wTH("ward.integration", "Integration") + "</button>" +
       // P1.14: quality and safety measures with the case list behind each number (analytics.view, server-checked).
       "<button class=\"w-btn ghost\" data-w-act=\"qualityview\" title=\"" + wTA("ward.quality-and-safety-measures-each-with", "Quality and safety measures, each with its case list") + "\">" + ms("query_stats") + wTH("ward.quality-and-safety", "Quality and safety") + "</button>" +
+      /* R7-1: the recall register (emr.view, server-checked). Hospital-wide like the rest of this column - a
+       * cohort is not one ward's business, and the patient overdue a review is usually on nobody's ward. */
+      "<button class=\"w-btn ghost\" data-w-act=\"recallview\" title=\"" + wTA("ward.patients-in-a-cohort-who-are", "Patients in a cohort who are overdue a review") + "\">" + ms("how_to_reg") + wTH("ward.recall-register", "Recall register") + "</button>" +
       "<button class=\"w-btn ghost\" data-w-act=\"downtime\" title=\"" + wTA("ward.printable-sheet-for-when-the-system", "Printable sheet for when the system is unavailable") + "\">" + ms("print") + wTH("ward.downtime-pack", "Downtime pack") + "</button></div></div>" +
       xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
 
@@ -2342,6 +2348,114 @@
         } else paint();
       }, wT("ward.could-not-save-that-note", "Could not save that note."));
   }
+  /* MaiK Scribe for the ward round / progress note (item 16, WardSynQ). OFF by default --
+   * localStorage.setItem("smd_ward_scribe","on") turns it on for one device pending a real ward
+   * verification (there is no automated way to drive a real consultation + ward record here).
+   *
+   * Reuses SMD_AMBIENT.start (voice-ambient.js) exactly as opd-emr.js's startVoice does, and the
+   * SAME server extract opd-emr.js's doRefine calls (kind:"opd-scribe") to turn the transcript into
+   * a clean English narrative. There is no OPD-style structured EMR schema for a ward note -- it is
+   * one free-text field -- so the LLM's "en" translation (a faithful, de-noised English rendering of
+   * the whole transcript) IS the draft; emrFields/suggestions are not used.
+   *
+   * SAFETY GATES (same as OPD, adapted to a single free-text field):
+   *  - Nothing reaches the record without an explicit Accept: the draft only ever lands in the
+   *    textarea via wardScribeInsert(), which runs on a doctor's tap on "Add to note", and the note
+   *    itself is not saved until the existing "Save note / instruction" button (timelineNoteSave)
+   *    is pressed. Two gates, unchanged from before this feature existed.
+   *  - A field the doctor edited is never silently overwritten: wardScribeAppend() only ever
+   *    APPENDS to whatever is already in the box, never replaces it, and never runs except on that
+   *    explicit tap -- there is no live auto-fill here at all, which is a stricter gate than OPD's
+   *    touched-guard (OPD's is needed because it fills fields live while dictating; a single note
+   *    field does not).
+   *  - Garbled audio and cloud upload are guarded upstream, in voice.js (isGarbled) and
+   *    voice-ambient.js (noCloud:true) -- this file only calls SMD_AMBIENT.start(), never a
+   *    lower-level API, so both guards apply unchanged.
+   *
+   * ponytail: no _voiceMerge-style per-field touched-guard here -- one field has nothing to
+   * conflict with itself. Upgrade path if a ward note ever grows structured fields: lift the merge
+   * shape from opd-emr.js's _voiceMerge (exposed as window.OPDEMR._voiceMerge) into a real shared
+   * file at that point, rather than copying it now for a feature that does not need it yet.
+   */
+  function wardScribeOn() { try { return localStorage.getItem("smd_ward_scribe") === "on"; } catch (e) { return false; } }
+  // PURE: append an accepted scribe draft to whatever is already in the note box. Never replaces --
+  // an edited note is never silently overwritten -- and a repeated Accept of the same draft text is
+  // a no-op rather than a duplicate line. Exposed as WARD._wardScribeAppend for testing.
+  function wardScribeAppend(existing, draft) {
+    existing = String(existing == null ? "" : existing);
+    draft = String(draft == null ? "" : draft).trim();
+    if (!draft) return existing;
+    var trimmed = existing.replace(/\s+$/, "");
+    if (!trimmed) return draft;
+    if (trimmed.indexOf(draft) !== -1) return existing;
+    return trimmed + "\n" + draft;
+  }
+  function wardScribeRefine(transcript) {
+    if (!transcript) return;
+    var extract = G.SMD_AI && G.SMD_AI.extract;
+    if (!extract) { st.wardScribeDraft = transcript.trim(); paint(); return; }
+    extract(transcript, "opd-scribe").then(function (r) {
+      st.wardScribeDraft = ((r && !r.error && r.en) ? r.en : transcript).trim();
+      paint();
+    }).catch(function () { st.wardScribeDraft = transcript.trim(); paint(); });
+  }
+  function startWardScribe() {
+    if (!G.SMD_AMBIENT) { dictSay(wT("ward.scribe-unavailable", "MaiK Scribe is not available on this build.")); return; }
+    st.wardScribeOn = true; st.wardScribeDraft = ""; st.wardScribeTranscript = "";
+    st.wardScribeStatus = wT("ward.scribe-starting", "Starting…"); paint();
+    st.wardScribeCapture = G.SMD_AMBIENT.start({
+      speaker: "doctor", language: "auto", chunkMs: 15000, refineEveryChunks: 8,
+      // Encounter-scoped: a Stop then "record more" on the SAME patient reuses the Auto language
+      // probe's answer instead of paying its model-load cost again (voice-ambient.js, getLangSession).
+      // Falsy when nothing is selected -> undefined -> today's behaviour (a fresh probe every start()).
+      sessionId: st.sel && st.sel.encounterId,
+      getState: function () { return {}; },
+      onTranscript: function (t) { st.wardScribeTranscript = t || ""; },
+      onState: function (s) {
+        st.wardScribeStatus = s === "listening" ? wT("ward.scribe-listening", "MaiK Scribe is listening")
+          : s === "fallback" ? wT("ward.scribe-fallback", "Whisper model not installed - using device dictation")
+          : s === "preparing" ? wT("ward.scribe-preparing", "Preparing model…")
+          : s === "downloading" ? wT("ward.scribe-downloading", "Downloading model…") : "";
+        paint();
+      },
+      onRefine: wardScribeRefine,
+      onError: function () {
+        st.wardScribeStatus = wT("ward.scribe-error", "Voice error - tap to retry.");
+        st.wardScribeOn = false; st.wardScribeCapture = null; paint();
+      }
+    });
+  }
+  function stopWardScribe() {
+    if (st.wardScribeCapture) { try { st.wardScribeCapture.stop(); } catch (e) {} }
+    st.wardScribeCapture = null; st.wardScribeOn = false; st.wardScribeStatus = ""; paint();
+  }
+  // Accept: the draft joins the note textarea exactly as if typed. Save note / instruction still has
+  // to be tapped separately -- this never submits anything on its own.
+  function wardScribeInsert() {
+    var joined = wardScribeAppend(val("wTlNote") || st.noteDraft || "", st.wardScribeDraft);
+    st.noteDraft = joined; st.wardScribeDraft = "";
+    var el = document.getElementById("wTlNote"); if (el) el.value = joined;
+    paint();
+  }
+  function wardScribeMicBtn(state) {
+    if (!wardScribeOn() || !G.SMD_AMBIENT) return "";
+    var on = !!state.wardScribeOn;
+    return '<button type="button" class="w-mic-btn' + (on ? " recording" : "") + '" data-w-act="' +
+      (on ? "wardscribestop" : "wardscribestart") + '" title="' + wTA("ward.scribe-title", "MaiK Scribe: listen and draft this note") + '">' +
+      ms(on ? "stop_circle" : "graphic_eq") + "</button>";
+  }
+  function wardScribePanel(state) {
+    if (!wardScribeOn() || !G.SMD_AMBIENT) return "";
+    if (!state.wardScribeOn && !state.wardScribeDraft) return "";
+    var status = state.wardScribeOn ? '<p class="w-hint">' + ms("mic") + esc(state.wardScribeStatus || wT("ward.scribe-listening", "MaiK Scribe is listening")) + "</p>" : "";
+    var draft = state.wardScribeDraft
+      ? '<div class="w-scribe-draft"><p class="w-hint">' + ms("auto_awesome") + wTH("ward.scribe-draft-label", "MaiK Scribe draft - review before adding") + "</p>" +
+        "<p>" + esc(state.wardScribeDraft) + "</p>" +
+        '<button class="w-btn ghost sm" data-w-act="wardscribeaccept">' + ms("check") + wTH("ward.scribe-insert", "Add to note") + "</button>" +
+        '<button class="w-btn ghost sm" data-w-act="wardscribediscard">' + ms("close") + wTH("ward.scribe-discard", "Discard") + "</button></div>"
+      : "";
+    return status + draft;
+  }
   function filterLabel(v) {
     for (var i = 0; i < TIMELINE_FILTERS.length; i++) if (TIMELINE_FILTERS[i][0] === v) return wTEn(TIMELINE_FILTERS[i][1]);
     return v;
@@ -2378,7 +2492,8 @@
        * told "your role cannot do that" also lost the note they had just written - the one moment
        * the text is most worth keeping, because the fix is to fetch someone who CAN sign it, not to
        * type it again. st.noteDraft is held across paints and only cleared on a successful save. */
-      '<div style="position:relative;"><textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.">' + esc(state.noteDraft || "") + '</textarea><div style="position:absolute; right:8px; top:8px;">' + micBtn("wTlNote") + '</div></div>' +
+      '<div style="position:relative;"><textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.">' + esc(state.noteDraft || "") + '</textarea><div style="position:absolute; right:8px; top:8px;">' + micBtn("wTlNote") + wardScribeMicBtn(state) + '</div></div>' +
+      wardScribePanel(state) +
       (state.noteErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.noteErr) + wEnglishOf(state.noteErr) + "</p>" : "") +
       '<button class="w-btn" data-w-act="timelinenote">' + ms("save") + wTH("ward.save-note-instruction", "Save note / instruction") + "</button></div>" +
       detailPanel(state) +
@@ -9032,7 +9147,8 @@
     var verdict = "";
     if (v) {
       verdict = v.matches
-        ? '<div class="w-sub"><h4>' + ms("check") + wTH("ward.this-band-belongs-to", "This band belongs to {name}", { name: esc(s.name || s.patientId) }, "name") + "</h4></div>"
+        ? '<div class="w-sub"><h4>' + ms("check") + wTH("ward.this-band-belongs-to", "This band belongs to {name}", { name: esc(s.name || s.patientId) }, "name") + "</h4>" +
+          (v.episode && v.episodeWords ? "<p>" + esc(v.episodeWords) + "</p>" : "") + "</div>"
         : '<div class="w-sub w-dead"><h4>' + ms("warning") + wTH("ward.stop-this-band-does-not-match", "STOP - this band does not match {name}", { name: esc(s.name || s.patientId) }, "name") + "</h4>" +
           "<p>" + esc(v.reason || wT("ward.the-scanned-code-is-not-this", "The scanned code is not this patient's active band.")) + "</p>" +
           "<p>" + wTH("ward.do-not-give-anything-to-this", "Do not give anything to this patient until the mismatch is resolved.", null, "", 1) + "</p></div>";
@@ -9476,6 +9592,67 @@
         (c.day ? " &middot; " + esc(c.day) : "") + (c.stage ? " &middot; " + wTH("ward.stage2", "stage {stage}", { stage: esc(c.stage) }, "stage") : "") + "</div></li>";
     }).join("") + "</ul>";
   }
+  /* R7-1 RECALL REGISTER (functions/_wardsynq/registry.js). The one screen in WardSynQ that NAMES PATIENTS
+   * in a cohort, which is the whole point: "which of my diabetics has not had an HbA1c this year" is not a
+   * number, it is a list somebody has to ring. So it is gated on the authority to read a chart, and a refused
+   * read says so - an empty cohort here would read as nobody overdue, which is the failure this screen exists
+   * to prevent. Membership comes from the problem list, never a separate flag. "Never reviewed" is its own
+   * state and sorts first: that patient is the most overdue person on the list, not the least. */
+  function recallState(r) {
+    if (r.state === "never") return '<span class="w-st overdue">' + wTH("ward.never-reviewed-state", "Never reviewed") + "</span>";
+    if (r.state === "overdue") return '<span class="w-st overdue">' + wTH("ward.overdue-by-days", "Overdue by {d} days", { d: esc(r.overdueDays == null ? 0 : r.overdueDays) }, "d") + "</span>";
+    if (r.state === "current") return '<span class="w-st done">' + wTH("ward.up-to-date", "Up to date") + "</span>";
+    return '<span class="w-st">' + wTH("ward.no-review-interval-set", "No review interval") + "</span>";
+  }
+  function recallMemberRow(m) {
+    var r = m.review || {}, last = String(r.lastReview || "").slice(0, 10), due = String(r.dueAt || "").slice(0, 10);
+    return '<li class="w-mini-row"><div><h4>' + escOr(m.mrn || m.patientId) + "</h4><small>" +
+      (m.because ? esc(m.because) + " &middot; " : "") + recallState(r) +
+      (last ? " &middot; " + wTH("ward.last-review-on", "last review {d}", { d: esc(last) }, "d") : "") +
+      (due && r.state === "overdue" ? " &middot; " + wTH("ward.was-due-on", "was due {d}", { d: esc(due) }, "d") : "") +
+      "</small></div></li>";
+  }
+  function recallRegistryCard(reg, overdueOnly) {
+    var counts = wTH("ward.in-the-cohort", "{n} in the cohort", { n: esc(reg.total) }, "n") + " &middot; " +
+      wTH("ward.never-reviewed-count", "{n} never reviewed", { n: esc(reg.neverReviewed) }, "n") + " &middot; " +
+      wTH("ward.overdue-count", "{n} overdue", { n: esc(reg.overdue) }, "n") +
+      (reg.reviewEveryMonths ? " &middot; " + wTH("ward.reviewed-every-months", "reviewed every {n} months", { n: esc(reg.reviewEveryMonths) }, "n") : "");
+    var members = (reg.members || []).map(recallMemberRow).join("");
+    /* An empty list here is only ever "nobody matched the filter you asked for". Every way the list could be
+     * SHORT for another reason - a failed read, a truncated read, an unusable definition - is reported by the
+     * screen above, before any registry is drawn. */
+    var empty = reg.total === 0 ? wTH("ward.nobody-is-in-this-cohort", "Nobody is in this cohort.")
+      : overdueOnly ? wTH("ward.nobody-in-this-cohort-is-overdue", "Nobody in this cohort is overdue.")
+      : wTH("ward.no-members-to-show", "No members to show.");
+    return '<div class="w-sub"><h4>' + esc(reg.name) + '</h4><p class="w-dt-times">' + counts + "</p>" +
+      (reg.recall === null ? '<p class="w-hint">' + ms("info") + wTH("ward.no-review-interval-configured-so-nobody", "No review interval is configured for this registry, so nobody is shown as overdue.") + "</p>" : "") +
+      (members ? '<ul class="w-mini">' + members + "</ul>" : '<p class="w-empty">' + empty + "</p>") + "</div>";
+  }
+  function recallView(state) {
+    var q = state.recall, overdueOnly = !!state.recallOverdue;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("how_to_reg") + "<h3>" + wTH("ward.recall-register", "Recall register") + "</h3>" +
+      '<button class="w-ic" data-w-act="recallload" title="' + wTA("ward.refresh", "Refresh") + '">' + ms("refresh") + "</button></div>" +
+      '<div class="w-tools"><button class="w-btn ' + (overdueOnly ? "" : "ghost ") + 'sm" data-w-act="recallfilter:1">' + wTH("ward.overdue-only", "Overdue only") + "</button>" +
+      '<button class="w-btn ' + (overdueOnly ? "ghost " : "") + 'sm" data-w-act="recallfilter:0">' + wTH("ward.everyone-in-the-cohort", "Everyone in the cohort") + "</button></div>";
+    if (!q || q.busy) return head + '<p class="w-empty">' + wTH("ward.loading-the-recall-register", "Loading the recall register&hellip;") + "</p></div>";
+    if (!q.ok) {
+      return head + '<p class="w-hint warn">' + ms("error") + (q.status === 403
+        ? wTH("ward.your-role-cannot-read-the-recall", "Your role cannot read the recall register (the authority to read a chart is needed).")
+        : wTH("ward.the-recall-register-could-not-be", "The recall register could not be loaded. Do not read this as nobody overdue.", null, "", 1)) + "</p></div>";
+    }
+    if (q.skipped) return head + '<p class="w-hint">' + ms("info") + wTH("ward.the-wardsynq-record-is-not-switched", "The WardSynQ record is not switched on for this hospital, so there is nothing to measure.") + "</p></div>";
+    var warn = "";
+    // Every way the list can be SHORT is said in the words "do not read this as nobody overdue": a record type
+    // that would not load, a read past the limit, or a registry definition the hospital cannot use.
+    if (q.unreadable && q.unreadable.length) warn += '<p class="w-hint warn">' + ms("error") + wTH("ward.some-records-could-not-be-read2", "Some records could not be read, so this list may be short. Do not read it as nobody overdue.", null, "", 1) + "</p>";
+    if (q.truncated) warn += '<p class="w-hint warn">' + ms("warning") + wTH("ward.past-the-read-limit-the-oldest", "Past the read limit the oldest records were not read. The newest are here.") + "</p>";
+    if (q.problems && q.problems.length) warn += '<p class="w-hint warn">' + ms("warning") + wTH("ward.registry-definitions-could-not-be-used", "{n} registry definitions could not be used, so their cohorts are missing.", { n: esc(q.problems.length) }, "n") + "</p>";
+    var regs = q.registries || [];
+    if (!regs.length) return head + warn + '<p class="w-hint">' + ms("info") + wTH("ward.no-registries-are-configured-an-administrator", "No registries are configured. An administrator defines them in clinical settings.") + "</p></div>";
+    return head + '<p class="w-hint">' + ms("info") + wTH("ward.membership-comes-from-the-problem-list", "Membership comes from the problem list, so resolving a diagnosis removes the patient from the cohort. Nothing here decides who is due; the review interval is the hospital's.") + "</p>" +
+      warn + regs.map(function (r) { return recallRegistryCard(r, overdueOnly); }).join("") + "</div>";
+  }
+
   function qualitySafetyView(state) {
     var q = state.qs, days = state.qsDays || 30;
     var head = '<div class="w-card"><div class="w-card-h">' + ms("query_stats") + "<h3>" + wTH("ward.quality-and-safety", "Quality and safety") + "</h3>" +
@@ -9802,6 +9979,7 @@
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
         : state.view === "qualitysafety" ? qualitySafetyView(state)
+        : state.view === "recall" ? recallView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "discharge" ? dischargeView(state)
@@ -10381,6 +10559,7 @@
     var s = st.sel; if (!s) return;
     var deviceId = val("wDevId"), assetTag = val("wDevTag"), wristband = val("wDevWrist");
     if (!deviceId || !assetTag || !wristband) { st.err = wT("ward.scan-the-device-s-asset-tag", "Scan the device's asset tag and the patient's wristband, and give the device an ID."); paint(); return; }
+    if (carrierRevoked("wristband", normCarrierValue(wristband))) { st.err = revokedErr(); paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/device-associate", {
       orgId: st.orgId,
@@ -11333,11 +11512,16 @@
           '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="deskopen:' + esc(r.patientId) + "|" + esc(r.encounterId || "") + '">' + ms("open_in_new") + wTH("ward.rcm-open", "Open") + "</button></div></li>";
       }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.cl-none", "No current cashless stay read needs pre-authorisation action.") + "</p>") + "</div>";
   }
-  function cashierOpen() {
+  function cashierOpen(mrn) {
     st.view = "cashier"; st.cashier = {}; paint();
+    if (mrn) {
+      st.cashier.mrn = mrn;
+      var el = document.getElementById("wCashMrn"); if (el) el.value = mrn;
+      cashLookup(mrn);
+    }
   }
-  function cashLookup() {
-    var mrn = val("wCashMrn");
+  function cashLookup(mrnOverride) {
+    var mrn = mrnOverride || val("wCashMrn");
     if (!mrn) { st.cashier.err = wT("ward.enter-an-mrn", "Enter an MRN."); paint(); return; }
     st.cashier.mrn = mrn; st.cashier.err = ""; st.cashier.raised = null; st.busy = true; paint();
     // The same deterministic patientId every other ward flow derives from an MRN - never guessed,
@@ -13061,6 +13245,119 @@
     return specimenOutcomeSend(hit.specimenId, "received", "", code);
   }
 
+  /* Universal Patient Identity (StewardID 2.0) at the bedside. The resolver is optional:
+   * without it every check below degrades to the server-side verification that already existed.
+   * NORMALIZE-THEN-CHECK, never compare: the scans themselves still travel to the server
+   * verbatim (ward-ui.test.mjs pins that - the server remains the only judge of the five
+   * rights). What the bedside refuses on its own is a carrier already known to be dead. */
+  function stewardResolver() {
+    try { return (G.StewardIdentityResolver && G.StewardIdentityResolver.normalizeCarrierValue) ? G.StewardIdentityResolver : null; } catch (e) { return null; }
+  }
+  function normCarrierValue(v) {
+    var R = stewardResolver();
+    if (R) { try { return R.normalizeCarrierValue(v); } catch (e) {} }
+    return String(v == null ? "" : v).trim().toUpperCase();
+  }
+  function carrierRevoked(type, value) {
+    var R = stewardResolver();
+    if (!R || !R.isCarrierRevoked) return false;
+    try { return !!R.isCarrierRevoked({ type: type || "", value: value }); } catch (e) { return false; }
+  }
+  function revokedErr() { return wT("ward.scanned-tag-deactivated", "Scanned tag has been deactivated or reported lost"); }
+  /* OPD-vs-IPD disambiguation at the bedside. When the scanned patient has BOTH an active OPD
+   * visit and an IPD admission, the nurse picks which episode the next act belongs to, so
+   * clinical documentation attaches to the correct episode. A single context (or no resolver
+   * with context to give) proceeds untouched - never a question with one answer. */
+  function bedsideOpdLabel(enc) {
+    if (!enc || typeof enc !== "object") return "";
+    return enc.department || enc.dept || enc.clinic || enc.type || "OPD";
+  }
+  function bedsideIpdLabel(adm) {
+    if (!adm || typeof adm !== "object") return "";
+    var w = adm.ward || adm.wardName || "", b = adm.bed || adm.bedNo || adm.bedNumber || "";
+    return [w, b].filter(Boolean).join(" / ");
+  }
+  function bedsideEpisodeWords(choice, opd, ipd) {
+    if (choice === "opd") return wT("ward.bedside-episode-opd", "OPD - {where}", { where: bedsideOpdLabel(opd) || "OPD" });
+    return wT("ward.bedside-episode-ipd", "IPD - {where}", { where: bedsideIpdLabel(ipd) || "IPD" });
+  }
+  /* A body-level sheet (NOT _render: paint() replaces the ward subtree, which would swallow a
+   * choice left open across a repaint). Inline styles only - it must work wherever ward.js runs. */
+  function bedsideContextSheet(opd, ipd, onPick) {
+    var done = false;
+    function pick(choice) {
+      if (done) return; done = true;
+      try { var n = document.getElementById("wBedsideCtx"); if (n && n.parentNode) n.parentNode.removeChild(n); } catch (e) {}
+      try { onPick(choice); } catch (e) {}
+    }
+    try {
+      var old = document.getElementById("wBedsideCtx");
+      if (old && old.parentNode) old.parentNode.removeChild(old);
+      var ov = document.createElement("div");
+      ov.id = "wBedsideCtx";
+      ov.setAttribute("role", "dialog");
+      ov.setAttribute("aria-label", wT("ward.where-do-you-want-to-work", "Where do you want to work?"));
+      ov.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(8,18,22,.55);display:flex;align-items:center;justify-content:center;padding:20px;";
+      var card = document.createElement("div");
+      card.style.cssText = "background:#fff;color:#14202b;border-radius:16px;max-width:420px;width:100%;padding:20px;box-shadow:0 12px 34px rgba(20,32,43,.3);font-family:system-ui,-apple-system,sans-serif;";
+      var h = document.createElement("h3");
+      h.style.cssText = "margin:0 0 6px;font-size:16px;";
+      h.textContent = wT("ward.where-do-you-want-to-work", "Where do you want to work?");
+      var sub = document.createElement("p");
+      sub.style.cssText = "margin:0 0 14px;font-size:13px;color:#5a7184;";
+      sub.textContent = wT("ward.this-patient-has-an-opd-visit-and-an-admission", "This patient has an active OPD visit and an IPD admission. Pick which episode this act belongs to.");
+      var bOpd = document.createElement("button");
+      bOpd.type = "button"; bOpd.setAttribute("data-bedside-pick", "opd");
+      bOpd.style.cssText = "display:block;width:100%;margin:0 0 8px;padding:13px;border:none;border-radius:12px;background:#0e6e63;color:#fff;font-size:15px;font-weight:700;cursor:pointer;";
+      bOpd.textContent = bedsideEpisodeWords("opd", opd, ipd);
+      var bIpd = document.createElement("button");
+      bIpd.type = "button"; bIpd.setAttribute("data-bedside-pick", "ipd");
+      bIpd.style.cssText = "display:block;width:100%;margin:0;padding:13px;border:1px solid #d7dee3;border-radius:12px;background:#eef1f4;color:#14202b;font-size:15px;font-weight:700;cursor:pointer;";
+      bIpd.textContent = bedsideEpisodeWords("ipd", opd, ipd);
+      bOpd.onclick = function () { pick("opd"); };
+      bIpd.onclick = function () { pick("ipd"); };
+      ov.onclick = function (e) { if (e && e.target === ov) pick(null); };
+      card.appendChild(h); card.appendChild(sub); card.appendChild(bOpd); card.appendChild(bIpd);
+      ov.appendChild(card);
+      document.body.appendChild(ov);
+    } catch (e) { pick(null); }
+  }
+  /* What the bedside resolution may draw on: the station's own configuration
+   * (window.SMD_IDENTITY_OPTIONS = { patientStore, activeEncounter, ... }, set by the
+   * station shell or the identity scanner) plus this screen's selected admission, which the
+   * ward always knows. Without either, resolution is context-free and single-context. */
+  function bedsideIdentityOptions() {
+    var opts = {};
+    try {
+      if (G.SMD_IDENTITY_OPTIONS && typeof G.SMD_IDENTITY_OPTIONS === "object") {
+        for (var k in G.SMD_IDENTITY_OPTIONS) opts[k] = G.SMD_IDENTITY_OPTIONS[k];
+      }
+    } catch (e) {}
+    try {
+      if (st.sel && st.sel.encounterId && !opts.activeAdmission) {
+        opts.activeAdmission = { encounterId: st.sel.encounterId, ward: st.sel.ward || "", bed: st.sel.bed || "" };
+      }
+    } catch (e) {}
+    return opts;
+  }
+  /* Resolves the scanned carrier and, only when BOTH an OPD visit and an IPD admission are
+   * active, asks which episode the act belongs to. proceed(choice) with choice "opd", "ipd",
+   * or null (single context / cancelled / no resolver). ipdFallback is this screen's own
+   * selected admission - the ward always knows its own side of the question. */
+  function maybeAskBedsideContext(code, ipdFallback, proceed) {
+    var R = stewardResolver();
+    if (!R || !R.resolvePatientIdentity) { proceed(null); return; }
+    var res = null;
+    try { res = R.resolvePatientIdentity({ type: "wristband", value: code }, bedsideIdentityOptions()); } catch (e) { res = null; }
+    if (!res || res.then || !res.ok) { proceed(null); return; }
+    var enc = res.activeEncounter;
+    var opd = (enc && typeof enc === "object" && (enc.type === "opd" || enc.department || enc.dept || enc.token || enc.ticketId || enc.queueTicket)) ? enc : null;
+    var ipd = (res.activeAdmission && typeof res.activeAdmission === "object") ? res.activeAdmission : (ipdFallback || null);
+    // Only ambiguity is recorded: a single context proceeds exactly as today, with nothing attached.
+    if (opd && ipd) bedsideContextSheet(opd, ipd, function (choice) { proceed(choice, choice ? bedsideEpisodeWords(choice, opd, ipd) : ""); });
+    else proceed(null, "");
+  }
+
   function tagsOpen() {
     if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
     st.view = "tags"; st.tags = null; st.tagVerify = null; paint(); loadTags();
@@ -13079,6 +13376,9 @@
     var s = st.sel; if (!s) return;
     var code = val("wTgScan");
     if (!code) { st.err = wT("ward.scan-or-type-the-code-on", "Scan or type the code on the band."); paint(); return; }
+    /* A carrier already known to be dead is refused before any server call. The code itself
+     * still travels verbatim - the server compares it against the patient's active band. */
+    if (carrierRevoked("wristband", normCarrierValue(code))) { st.err = revokedErr(); paint(); return; }
     st.tagVerify = null; st.busy = true; paint();
     apiPost("/ward/tag-verify", { orgId: st.orgId, patientId: s.patientId, tagType: "wristband", scannedCode: code })
       .then(function (r) {
@@ -13088,6 +13388,15 @@
         if (r && r.ok) st.tagVerify = { matches: !!r.matches, reason: r.reason || null };
         else { st.tagVerify = null; st.err = wT("ward.the-band-could-not-be-checked", "The band could not be checked. Treat it as unchecked."); }
         paint();
+        /* A matching band on a patient with both an OPD visit and an IPD admission: ask which
+         * episode subsequent documentation belongs to, and say the answer on the verdict. */
+        if (r && r.ok && st.tagVerify && st.tagVerify.matches) {
+          try {
+            maybeAskBedsideContext(code, s.encounterId ? { ward: s.ward, bed: s.bed, encounterId: s.encounterId } : null, function (choice, words) {
+              if (choice && st.tagVerify) { st.tagVerify.episode = choice; st.tagVerify.episodeWords = words; paint(); }
+            });
+          } catch (e) {}
+        }
       })
       .catch(function () { st.busy = false; st.tagVerify = null; st.err = wT("ward.the-band-could-not-be-checked", "The band could not be checked. Treat it as unchecked."); paint(); });
   }
@@ -14600,6 +14909,23 @@
       .then(function (r) { st.qs = r && r.ok ? r : { ok: false, status: r && r.__status, error: r && r.error }; if (r && (r.error === "permission" || r.error === "forbidden")) st.qs.status = 403; paint(); })
       .catch(function () { st.qs = { ok: false }; paint(); });
   }
+  /* The registry is read whole, not by ward: a cohort is not a ward list, and the patient nobody has seen for
+   * two years is exactly the one no ward holds. `overdue=1` is applied by the SERVER, so the filter narrows the
+   * list a clinician reads, never the counts it is judged by (those come back for the whole cohort either way). */
+  function loadRecall(overdueOnly) {
+    st.view = "recall";
+    if (overdueOnly !== undefined) st.recallOverdue = !!overdueOnly;
+    st.recall = { busy: true }; paint();
+    return apiGet("/ward/registries?orgId=" + encodeURIComponent(st.orgId) + (st.recallOverdue ? "&overdue=1" : ""))
+      .then(function (r) {
+        // A refusal is SHOWN here, unlike the secondary panels on the bed board: an empty recall register that
+        // failed silently reads as nobody overdue, which is the one thing this screen must never say by accident.
+        st.recall = r && r.ok ? r : { ok: false, status: r && r.__status, error: r && r.error };
+        if (r && (r.error === "permission" || r.error === "forbidden")) st.recall.status = 403;
+        paint();
+      })
+      .catch(function () { st.recall = { ok: false }; paint(); });
+  }
   function incidentConfirm(id) {
     var outcome = val("wIncOutcome_" + id), reason = val("wIncConfReason_" + id), category = val("wIncConfCat_" + id), dup = val("wIncDupOf_" + id);
     if (!outcome) { st.err = wT("ward.pick-a-decision", "Pick a decision."); paint(); return; }
@@ -15290,7 +15616,21 @@
     if (d.orderVersion != null) body.expectedOrderVersion = d.orderVersion;
     // The five rights are checked on the server against what was actually scanned. The UI passes the
     // scans through untouched; it does not compare them itself and does not proceed on its own.
-    if (action === "scan") body.scan = { patient: val("wScanP"), drug: val("wScanD") };
+    // The one bedside refusal: a patient carrier already known to be dead never reaches the server.
+    if (action === "scan") {
+      var _scanCode = val("wScanP");
+      if (_scanCode && carrierRevoked("", normCarrierValue(_scanCode))) { st.err = revokedErr(); paint(); return; }
+      body.scan = { patient: val("wScanP"), drug: val("wScanD") };
+      // OPD visit + IPD admission on one patient: ask which episode this act belongs to before
+      // sending. Single-context proceeds exactly as today. (The server ignores `context`.)
+      try {
+        maybeAskBedsideContext(_scanCode, s.encounterId ? { ward: s.ward, bed: s.bed, encounterId: s.encounterId } : null, function (choice) {
+          if (choice) body.scan.context = choice;
+          marSend(action, s, d, body);
+        });
+      } catch (e) { marSend(action, s, d, body); }
+      return;
+    }
     /* Passed through untouched, and only ever passed. The screen does not decide whether a witness is
      * needed - the hospital's high-alert list does, on the server - and it never compares the witness
      * to the nurse. `WITNESS_NOT_INDEPENDENT` is the server's refusal to make. */
@@ -15537,7 +15877,7 @@
       if (st.view === "twin") { st.twin = {}; st.view = "list"; paint(); return; }
       if (st.view === "trends") { st.trends = null; st.recordDetail = null; twinOpen(); return; }
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
-      if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
+      if (st.view === "cashier") { if (st.returnToOpd) { st.returnToOpd = false; close(); return; } st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
@@ -15572,6 +15912,7 @@
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "qualitysafety") { st.qs = null; st.qsOpen = null; st.view = "list"; paint(); return; }
+      if (st.view === "recall") { st.recall = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
@@ -15671,6 +16012,10 @@
     if (cmd === "timeline") { timelineOpen(); return; }
     if (cmd === "timelineload") { loadChart(); return; }
     if (cmd === "timelinenote") { timelineNoteSave(); return; }
+    if (cmd === "wardscribestart") { startWardScribe(); return; }
+    if (cmd === "wardscribestop") { stopWardScribe(); return; }
+    if (cmd === "wardscribeaccept") { wardScribeInsert(); return; }
+    if (cmd === "wardscribediscard") { st.wardScribeDraft = ""; paint(); return; }
     if (cmd === "labboard") { labBoardOpen(); return; }
     if (cmd === "labboardload") { loadLabBoard(); return; }
     if (cmd === "analyserrelease") { analyserReleaseAct(arg, ""); return; }
@@ -15917,6 +16262,9 @@
     if (cmd === "rptcsv") { reportCsv(arg); return; }
     if (cmd === "incidents") { incidentsOpen(); return; }
     if (cmd === "qualityview") { st.qsOpen = null; loadQualitySafety(); return; }
+    if (cmd === "recallview") { loadRecall(st.recallOverdue === undefined ? true : st.recallOverdue); return; }
+    if (cmd === "recallload") { loadRecall(); return; }
+    if (cmd === "recallfilter") { loadRecall(arg === "1"); return; }
     if (cmd === "qsdays") { loadQualitySafety(Number(arg) || 30); return; }
     if (cmd === "qscases") { st.qsOpen = st.qsOpen === arg ? null : arg; paint(); return; }
     if (cmd === "timelinefilter") { st.timelineFilter = arg === "all" ? "" : arg; paint(); return; }
@@ -16345,9 +16693,11 @@
     if (!(opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0)) loadWard();
     // A hospital-level view requested by the shell (bed board, ED, twin...). Only the verbs the ward
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
+    if (opts.returnToOpd) st.returnToOpd = true;
+    if (opts.act === "cashier") { cashierOpen(opts.mrn); return; }
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "dcboard", "tcentre", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview", "claimsdesk"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "dcboard", "tcentre", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview", "recallview", "claimsdesk"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -16365,6 +16715,9 @@
   }
   function close() {
     closeSummaryLayer();
+    // Closing mid-recording must stop the mic too, else SMD_AMBIENT keeps chunking and paint() keeps
+    // firing into a screen that no longer exists. Same shape as discharge.js's close() -> stopScribe().
+    if (st.wardScribeCapture) stopWardScribe();
     st.dc = null; st.fu = null; st.ask = null;
     var el = root(); el.classList.remove("on"); el.innerHTML = "";
     try { document.removeEventListener("keydown", onKey); } catch (e) {}
@@ -16417,5 +16770,10 @@
 
   G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _growthCard: growthCard, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _balanceWindow: balanceWindow, _scoreWhyNot: scoreWhyNot, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
     // The one staff identity rendering, for discharge.js (owner 2026-09-16: name and employee id wherever staff are named).
-    _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo };
+    _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo,
+    // MaiK Scribe for the ward round note (item 16), exposed for testing.
+    _wardScribeOn: wardScribeOn, _wardScribeAppend: wardScribeAppend, _wardScribeRefine: wardScribeRefine,
+    _startWardScribe: startWardScribe, _stopWardScribe: stopWardScribe, _wardScribeInsert: wardScribeInsert,
+    // Bedside Universal Patient Identity (Wave 3), exposed for testing.
+    _bedside: { normalize: normCarrierValue, revoked: carrierRevoked, revokedError: revokedErr, options: bedsideIdentityOptions, askContext: bedsideContextSheet, maybeAsk: maybeAskBedsideContext, episodeWords: bedsideEpisodeWords } };
 })();

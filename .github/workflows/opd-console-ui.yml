@@ -1,0 +1,31 @@
+name: OPD console UI
+on:
+  pull_request:
+    branches: [main]
+    paths: ['opd.html', 'test/run-opd-clinic-billing-ui.mjs', 'test/run-opd-console-flow-ui.mjs', '.github/workflows/opd-console-ui.yml']
+  push:
+    branches: [main, feat/opd-flow-revamp]
+    paths: ['opd.html', 'test/run-opd-clinic-billing-ui.mjs', 'test/run-opd-console-flow-ui.mjs', '.github/workflows/opd-console-ui.yml']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CHROME: /usr/bin/google-chrome
+      CHROME_FLAGS: --no-sandbox --disable-dev-shm-usage
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: OPD presentation and permission parity
+        run: node test/run-opd-console-flow-ui.mjs
+      - name: Real clinic registration, vitals, billing and pharmacy journey
+        run: node --experimental-test-module-mocks test/run-opd-clinic-billing-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: opd-console-screenshots
+          path: test-output/opd-flow-*.png

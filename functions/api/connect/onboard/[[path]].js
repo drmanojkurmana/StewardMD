@@ -31,6 +31,8 @@ import { createFeed as createWebhookFeed, listFeeds as listWebhookFeeds, deleteF
 import { listAll } from "../../../_connect/onboard/dashboard.js";
 import { listMyTenants, listMembers, setRole, removeMember } from "../../../_connect/enterprise/members.js";
 import { selfCreateTenant } from "../../../_connect/enterprise/org.js";
+import { linkTenantToOpdOrg } from "../../../_connect/onboard/opd-org-link.js";
+import { resolveActor } from "../../../_connect/identity.js";
 import { adminFlagOn } from "../../../_connect/onboard/admin-flags.js";
 import { readTenantIntegrationHealth } from "../../../_connect/maik/integration-health.js";
 import { readTenantActivity } from "../../../_connect/onboard/activity.js";
@@ -137,7 +139,29 @@ export async function onRequest(context) {
     // from the name (never client-supplied); sandbox mode, no PHI/live opened here. Off = CONNECT_SELFSERVE_FLAG="0".
     if (method === "POST" && seg === "tenants") {
       if (selfServeBlocks(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
-      return jsonResponse(await selfCreateTenant(deps, request, env, { name: body.name }));
+      const t = await selfCreateTenant(deps, request, env, { name: body.name });
+      /* Owner decision 2026-09-24 (option A): the hospital is also created in the app's registry, so it
+       * appears in the StewardMD hospital picker (opd-org-link.js). The tenant exists at this point - a
+       * failed link is SAID, with the tenant id, never left silently unlinked; the link route below
+       * finishes it. */
+      try {
+        const actor = await resolveActor(deps.identifyFn, request, env);
+        const { org } = await linkTenantToOpdOrg(env, t, actor.id);
+        return jsonResponse(Object.assign({}, t, { orgId: org.id, orgCode: org.code || null }));
+      } catch (e) {
+        return jsonResponse(Object.assign({}, t, { orgLinked: false, error: "org_link_failed", detail: String((e && e.message) || e) }));
+      }
+    }
+    /* A hospital added through Connect BEFORE the link existed is connected to the server and missing from
+     * the app. Its owner links it once; linking again returns the same org. Owner of the tenant only. */
+    if (method === "POST" && seg === "tenants/link") {
+      if (selfServeBlocks(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      const actor = await resolveActor(deps.identifyFn, request, env);
+      const tenantId = String(body.tenantId || "");
+      const own = tenantId ? await deps.db.prepare("SELECT t.id, t.name FROM connect_tenant t JOIN connect_membership m ON m.tenant_id=t.id WHERE t.id=? AND m.user_id=? AND m.role='owner'").bind(tenantId, actor.id).first() : null;
+      if (!own) return jsonResponse({ ok: false, error: "forbidden", message: "Only the hospital's owner can link it." }, { status: 403 });
+      const { org, created } = await linkTenantToOpdOrg(env, own, actor.id);
+      return jsonResponse({ ok: true, tenantId, orgId: org.id, orgCode: org.code || null, created });
     }
     // Part 3 (Enterprise): the unified connections view (FHIR connections + HL7 feeds) for the selected tenant.
     if (method === "GET" && seg === "all") return jsonResponse(Object.assign({ ok: true }, await listAll(deps, request, env, tid)));

@@ -58,6 +58,12 @@ test("manifest: every declared disease file exists and parses", () => {
   }
 });
 
+test("manifest: exactly one system is free (Respiratory); the rest need Pro", () => {
+  const free = manifest.systems.filter((s) => s.free === true).map((s) => s.id);
+  assert.deepEqual(free, ["respiratory"]);
+  for (const s of manifest.systems) assert.equal(M.systemLocked(s, false), s.id !== "respiratory", `${s.id} lock state`);
+});
+
 test("manifest: a system's skillPacks all exist in skillPacks", () => {
   const known = new Set(manifest.skillPacks.map((p) => p.id));
   for (const sys of manifest.systems) {

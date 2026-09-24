@@ -51,11 +51,17 @@ export async function listTickets(env, sid) {
 }
 // Doctor-facing view: decrypt name/mobile (the authed owner may see them). Never sent to a patient page.
 export async function decorateForDoctor(env, tickets) {
-  return Promise.all(tickets.map(async (t) => Object.assign({}, t, {
-    name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
-    ghisPatientId: t.ghisPatientId || "",   // full MR# for the View-EMR-profile action (smd_opd_emr)
-    roomId: t.roomId || "", department: t.department || "", departmentId: t.departmentId || ""   // OPD platform: room + department (Phase 4); departmentId since D7
-  })));
+  return Promise.all(tickets.map(async (t) => {
+    const mrn = t.mrn || t.ghisPatientId || "";
+    return Object.assign({}, t, {
+      name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
+      mrn: mrn,
+      patientId: t.patientId || mrn || t.id,
+      ghisPatientId: mrn,   // full MR# for the View-EMR-profile action (smd_opd_emr)
+      vitals: t.vitals || null,   // MaikOS vitals sync: triage-recorded vitals ride to the doctor's EMR (Initial Assessment prefill)
+      roomId: t.roomId || "", department: t.department || "", departmentId: t.departmentId || ""   // OPD platform: room + department (Phase 4); departmentId since D7
+    });
+  }));
 }
 
 async function getStats(env, doctorUid) {
@@ -157,12 +163,15 @@ async function allocateToken(env, session, f, id, cfg, dept, unmatched) {
 // ---- add a ticket (manual or import) ------------------------------------------------------
 export async function addTicket(env, session, body, actor, org) {
   const id = newId();
+  const mrn = String(body.mrn || "");
   const f = {
     sessionId: session.id, hospitalId: session.hospitalId, status: "registered", position: 0,
     visitType: body.visitType === "followup" ? "followup" : "new", priority: clampPriority(body.priority),
     tokenVer: 1, encName: await encPHI(env, body.name), encMobile: await encPHI(env, body.mobile),
-    mrnLast4: String(body.mrn || "").replace(/\D/g, "").slice(-4),
-    ghisPatientId: String(body.mrn || ""),   // full MR# (for GHIS OPD profile lookups; smd_opd_emr)
+    mrn: mrn,
+    patientId: String(body.patientId || mrn || id),
+    mrnLast4: mrn.replace(/\D/g, "").slice(-4),
+    ghisPatientId: mrn,   // full MR# (for GHIS OPD profile lookups; smd_opd_emr)
     department: String(body.department || ""), roomId: String(body.roomId || ""),   // OPD platform (Phase 4)
     visitId: String(body.visitId || ""), ghisEpisodeId: String(body.ghisEpisodeId || ""),
     lang: String(body.lang || "en"),
@@ -200,9 +209,11 @@ export async function setStatus(env, session, ticketId, to, actor) {
   if (to === "no_show") patch.noShowAt = now();   // starts the recall window
   if (to === "called" && !t.calledAt) patch.calledAt = now();
   if (to === "in_consultation") { patch.consultStartAt = now(); if (!t.calledAt) patch.calledAt = now(); sessPatch.currentTicketId = ticketId; }
-  // Send back to the waiting hall (doctor/nurse reroute from the consulting room): free the room, drop the
-  // partial-consult timer so it is not counted, and re-queue the patient (recompute reassigns position/ETA).
-  if (from === "in_consultation" && to === "waiting") { patch.consultStartAt = 0; patch.calledAt = 0; if (session.currentTicketId === ticketId) sessPatch.currentTicketId = ""; }
+  // Send back to the waiting hall, or out to diagnostics ("Send for Tests" mid-consult): free the room,
+  // drop the partial-consult timer so it is not counted, and (for waiting) re-queue the patient
+  // (recompute reassigns position/ETA). A patient at diagnostics is out of the room queue entirely, so the
+  // doctor can call the next patient; "Tests Done" returns them with priority.
+  if (from === "in_consultation" && (to === "waiting" || to === "at_diagnostics")) { patch.consultStartAt = 0; patch.calledAt = 0; if (session.currentTicketId === ticketId) sessPatch.currentTicketId = ""; }
   let learn = null;
   if (from === "in_consultation" && (to === "completed" || to === "investigation" || to === "followup" || to === "cancelled")) {
     patch.consultEndAt = now();

@@ -24,3 +24,14 @@ Your library now provides device-local favourites and the twelve most recently o
 `node test/run-library-discover-ui.mjs` verifies real catalog counts, 320/390/768/1280px widths, branch selection, pagination, abbreviation search, empty results, infective filtering, all four tabs, pinned scrolling and the disease reader. Screenshots are written to `/tmp/stewardmd-library/`.
 
 User approved the design. The current polish is implemented on the active UI branch, awaiting review before merge.
+
+## Mobile reader fit (2026-09-21)
+
+The disease reader is pinned to all four viewport edges and no longer inherits a narrower phone-width shell. Its content column stays centred with equal gutters. On phones, the header keeps equal flexible columns on both sides of the title, so “Knowledge Library” is centred on the screen even though the Back control exists only on the left.
+
+The browser harness verifies the reader at 320, 375, 390, 393 and 430 CSS-pixel widths, including full-width geometry, zero horizontal overflow, centred title and equal content gutters.
+
+
+## Disease reader branding (2026-09-22)
+
+The disease-name hero now carries a compact StewardMD Knowledge Base banner and a low-contrast StewardMD logo watermark. Both stay behind the existing disease hierarchy, adapt to dark appearance, and remain non-interactive and decorative for assistive technology. The reader's clinical content and source claims are unchanged.

@@ -36,13 +36,17 @@ func llamaPerf(_ parts: Any...) {
  */
 enum ThermalGovernor {
 
-    /// Milliseconds to yield between decoded tokens at the current thermal state.
-    static var yieldUsPerToken: UInt32 {
+    /// Microseconds to yield between decoded tokens. PROACTIVE (perf plan #7, 2026-09-21): the old
+    /// governor only reacted at .serious, where throughput has already halved. Once the OS reports
+    /// .fair and the answer is already long, a 3 ms yield keeps the phone below that cliff; a short
+    /// answer still runs flat out. At .serious and .critical the original duty cycle applies.
+    static func yieldUs(produced: Int32) -> UInt32 {
         switch ProcessInfo.processInfo.thermalState {
-        case .nominal, .fair: return 0
-        case .serious:        return 12_000     // ~12 ms: roughly halves duty cycle at ~4 tok/s
-        case .critical:       return 40_000
-        @unknown default:     return 0
+        case .nominal:  return 0
+        case .fair:     return produced > 512 ? 3_000 : 0
+        case .serious:  return 12_000     // ~12 ms: roughly halves duty cycle at ~4 tok/s
+        case .critical: return 40_000
+        @unknown default: return 0
         }
     }
 
@@ -59,13 +63,13 @@ enum ThermalGovernor {
         }
     }
 
-    /// Trim the token budget when the phone is saving power. Never raises it.
+    /// Owner, 2026-09-21: no token limits on offline models. Low Power Mode and a low battery no
+    /// longer cut an answer short (they trimmed it to ~250 words with no message). The one trim
+    /// left is thermal: at .serious the budget is capped so the phone does not climb to .critical,
+    /// where the decode loop stops and the OS may kill the app mid-answer. Never raises it.
     static func budget(_ requested: Int32) -> Int32 {
         var b = requested
-        if ProcessInfo.processInfo.isLowPowerModeEnabled { b = min(b, 320) }
-        let lvl = UIDevice.current.batteryLevel        // -1 when unknown
-        if lvl >= 0, lvl < 0.15, UIDevice.current.batteryState != .charging { b = min(b, 256) }
-        if ProcessInfo.processInfo.thermalState == .serious { b = min(b, 384) }
+        if ProcessInfo.processInfo.thermalState == .serious { b = min(b, 1024) }
         return max(64, b)
     }
 }
@@ -107,6 +111,24 @@ struct LlamaError: Error {
 /// win on an A17 Pro, but Metal buffers raise resident memory. If peak footprint is too close to
 /// the jetsam ceiling on the floor device, step it down (0 = pure CPU) and re-measure. Do not guess
 /// this from a spec sheet; measure it in Xcode's memory graph on the real phone.
+/// What one generation measured, returned alongside its text (perf plan #8). The JS perf line prints
+/// it; the numbers are also what a tuning sweep compares before and after a change.
+struct GenStats {
+    var text = ""
+    var promptTokens = 0, reusedTokens = 0, prefillMs = 0, decodeMs = 0, tokens = 0
+    var tokPerSec = 0.0
+    var thermalStart = "", thermalEnd = ""
+    var draftProposed = 0, draftAccepted = 0
+    var stoppedHot = false, kvQ8 = false, flashAttn = false
+    var dict: [String: Any] {
+        return ["promptTokens": promptTokens, "reusedTokens": reusedTokens, "prefillMs": prefillMs,
+                "decodeMs": decodeMs, "tokens": tokens, "tokPerSec": tokPerSec,
+                "thermalStart": thermalStart, "thermalEnd": thermalEnd,
+                "draftProposed": draftProposed, "draftAccepted": draftAccepted,
+                "stoppedHot": stoppedHot, "kvQ8": kvQ8, "flashAttn": flashAttn]
+    }
+}
+
 final class LlamaEngine {
 
     private var model: OpaquePointer?
@@ -115,6 +137,20 @@ final class LlamaEngine {
     private var backendReady = false
     /// Recorded so the perf log says whether Metal was actually used.
     private var loadedGpuLayers: Int32 = 0
+    /// Speculative-decoding draft (perf plan #6): a small model with the SAME vocabulary and its own
+    /// context. nil when the pack has none, it is not downloaded, or its vocabulary did not match.
+    private var draftModel: OpaquePointer?
+    private var draftCtx: OpaquePointer?
+    private var loadedDraftPath: String?
+    /// The tokens each context's KV cache currently holds, in order. The next prompt keeps the
+    /// longest common prefix and prefills only the rest (perf plan #2). Emptied by an image answer,
+    /// whose positions are embeddings as well as tokens.
+    private var kvTokens: [llama_token] = []
+    private var draftKvTokens: [llama_token] = []
+    private var loadedKvQ8 = false
+    private var loadedFlashAttn = false
+    /// Draft tokens proposed per verify step. Six is the usual sweet spot for a ~4B target.
+    static let draftK = 6
 
     /// llama.cpp contexts are NOT thread-safe: inference runs on `work`, but load/release can be
     /// called from another thread. Same hazard capacitor-whisper hit (BUG-13, use-after-free).
@@ -132,12 +168,15 @@ final class LlamaEngine {
 
     // MARK: - Lifecycle
 
-    func load(path: String, nCtx: Int32, nThreads: Int32, nGpuLayers: Int32) throws {
+    func load(path: String, nCtx: Int32, nThreads: Int32, nGpuLayers: Int32,
+              kvQ8: Bool = true, flashAttn: Bool = true, nBatch: Int32 = 0, nUbatch: Int32 = 0,
+              draftPath: String = "") throws {
         guard FileManager.default.fileExists(atPath: path) else {
             throw LlamaError(.modelMissing, "no model at the given path")
         }
         lock.lock(); defer { lock.unlock() }
-        if model != nil, ctx != nil, loadedPath == path { return }   // already warm
+        let wantDraft: String? = (!draftPath.isEmpty && FileManager.default.fileExists(atPath: draftPath)) ? draftPath : nil
+        if model != nil, ctx != nil, loadedPath == path, loadedDraftPath == wantDraft { return }   // already warm
         releaseLocked()
 
         if !backendReady { llama_backend_init(); backendReady = true }
@@ -149,18 +188,40 @@ final class LlamaEngine {
             throw LlamaError(.modelCorrupted, "model failed to load")
         }
 
-        var cp = llama_context_default_params()
-        cp.n_ctx = UInt32(nCtx > 0 ? nCtx : Self.defaultNCtx)
-        cp.n_batch = 512
-        cp.n_threads = nThreads
-        cp.n_threads_batch = nThreads
-        cp.abort_callback = { data in
-            guard let data else { return false }
-            return Unmanaged<CancelBox>.fromOpaque(data).takeUnretainedValue().value
+        let wantCtx = UInt32(nCtx > 0 ? nCtx : Self.defaultNCtx)
+        let batch = UInt32(nBatch > 0 ? nBatch : 512)
+        // n_ubatch is the physical slice ggml works on per prefill pass (perf plan #5). It defaults to
+        // n_batch; a pack can lower it if the Metal compute buffer crowds the jetsam ceiling.
+        let ubatch = UInt32(nUbatch > 0 ? nUbatch : Int32(batch))
+        func params(q8: Bool, fa: Bool) -> llama_context_params {
+            var cp = llama_context_default_params()
+            cp.n_ctx = wantCtx
+            cp.n_batch = batch
+            cp.n_ubatch = min(ubatch, batch)
+            cp.n_threads = nThreads
+            cp.n_threads_batch = nThreads
+            if fa { cp.flash_attn_type = LLAMA_FLASH_ATTN_TYPE_ENABLED }
+            if q8 { cp.type_k = GGML_TYPE_Q8_0; cp.type_v = GGML_TYPE_Q8_0 }
+            cp.abort_callback = { data in
+                guard let data else { return false }
+                return Unmanaged<CancelBox>.fromOpaque(data).takeUnretainedValue().value
+            }
+            cp.abort_callback_data = Unmanaged.passUnretained(cancelFlag).toOpaque()
+            return cp
         }
-        cp.abort_callback_data = Unmanaged.passUnretained(cancelFlag).toOpaque()
-
-        guard let c = llama_init_from_model(m, cp) else {
+        // QUANTISED KV + FLASH ATTENTION (perf plan #4). A q8_0 cache is half the size of f16 and
+        // halves the bytes moved per decoded token, which is the decode bottleneck on a phone; the
+        // quality cost at q8_0 is negligible. A quantised V cache needs flash attention, so q8
+        // implies it. If this device or build refuses the combination, fall back to the plain
+        // context rather than failing the load, and say so in the perf log.
+        var q8 = kvQ8 && flashAttn, fa = flashAttn
+        var c = llama_init_from_model(m, params(q8: q8, fa: fa))
+        if c == nil && (q8 || fa) {
+            llamaPerf("PERF context with kv_q8=\(q8) flash_attn=\(fa) failed; retrying with defaults")
+            q8 = false; fa = false
+            c = llama_init_from_model(m, params(q8: false, fa: false))
+        }
+        guard let c else {
             llama_model_free(m)
             throw LlamaError(.lowMemory, "context allocation failed (n_ctx too large for this device?)")
         }
@@ -169,7 +230,40 @@ final class LlamaEngine {
         ctx = c
         loadedPath = path
         loadedGpuLayers = nGpuLayers
-        llamaPerf("PERF loaded n_ctx=\(Int(nCtx)) n_threads=\(Int(nThreads)) n_gpu_layers=\(Int(nGpuLayers))")
+        loadedKvQ8 = q8
+        loadedFlashAttn = fa
+        kvTokens = []
+
+        // DRAFT MODEL (perf plan #6). Loaded with the same offload and cache settings, its own context
+        // at the same n_ctx (positions must line up with the target's). A vocabulary mismatch makes
+        // every proposal a miss at best and an out-of-range id at worst, so it is checked here and the
+        // draft is simply skipped when it fails: the plain loop is always available.
+        draftKvTokens = []
+        loadedDraftPath = nil
+        if let dp = wantDraft {
+            if let dm = llama_model_load_from_file(dp, mp) {
+                if Self.vocabCompatible(llama_model_get_vocab(m), llama_model_get_vocab(dm)),
+                   let dc = llama_init_from_model(dm, params(q8: q8, fa: fa)) {
+                    draftModel = dm
+                    draftCtx = dc
+                    loadedDraftPath = dp
+                } else {
+                    llama_model_free(dm)
+                    llamaPerf("PERF draft skipped: vocabulary mismatch or its context failed")
+                }
+            } else {
+                llamaPerf("PERF draft skipped: could not load \(dp)")
+            }
+        }
+        llamaPerf("PERF loaded n_ctx=\(Int(wantCtx)) n_threads=\(Int(nThreads)) n_gpu_layers=\(Int(nGpuLayers)) n_batch=\(Int(batch)) n_ubatch=\(Int(min(ubatch, batch))) kv_q8=\(q8) flash_attn=\(fa) draft=\(draftCtx != nil)")
+    }
+
+    /// Same tokeniser? Same vocabulary type and size, same BOS and EOS ids.
+    private static func vocabCompatible(_ a: OpaquePointer?, _ b: OpaquePointer?) -> Bool {
+        guard let a, let b else { return false }
+        if llama_vocab_type(a) != llama_vocab_type(b) { return false }
+        if llama_vocab_n_tokens(a) != llama_vocab_n_tokens(b) { return false }
+        return llama_vocab_bos(a) == llama_vocab_bos(b) && llama_vocab_eos(a) == llama_vocab_eos(b)
     }
 
     /// Drop the context and model. Called on app pause: iOS kills large-footprint backgrounded apps
@@ -179,7 +273,12 @@ final class LlamaEngine {
     private func releaseLocked() {
         if let c = ctx { llama_free(c); ctx = nil }
         if let m = model { llama_model_free(m); model = nil }
+        if let dc = draftCtx { llama_free(dc); draftCtx = nil }
+        if let dm = draftModel { llama_model_free(dm); draftModel = nil }
         loadedPath = nil
+        loadedDraftPath = nil
+        kvTokens = []
+        draftKvTokens = []
     }
 
     func cancel() { cancelFlag.value = true }
@@ -197,7 +296,7 @@ final class LlamaEngine {
                   seed: UInt32,
                   prefillEmptyThink: Bool = false,
                   onToken: ((String) -> Void)?,
-                  completion: @escaping (Result<String, Error>) -> Void) {
+                  completion: @escaping (Result<GenStats, Error>) -> Void) {
         work.async { [weak self] in
             guard let self else { return }
             do { completion(.success(try self.generateSync(system: system, user: user, nPredict: nPredict,
@@ -223,7 +322,7 @@ final class LlamaEngine {
                             temperature: Float,
                             seed: UInt32,
                             onToken: ((String) -> Void)?,
-                            completion: @escaping (Result<String, Error>) -> Void) {
+                            completion: @escaping (Result<GenStats, Error>) -> Void) {
         work.async { [weak self] in
             guard let self else { return }
             do { completion(.success(try self.generateSync(system: system, user: user, nPredict: nPredict,
@@ -234,11 +333,43 @@ final class LlamaEngine {
         }
     }
 
+    /// Feed `toks` into `ctx`, keeping the longest prefix its cache already holds (perf plan #2).
+    /// `kv` mirrors the cache: it is compared, then replaced by `toks` on success. Returns the number
+    /// of tokens that did not need prefilling. At least the last token is always decoded, because
+    /// that is what produces the logits the first sample reads.
+    private func prefill(ctx: OpaquePointer, toks: [llama_token], kv: inout [llama_token], nBatch: Int) throws -> Int {
+        var common = 0
+        let maxCommon = min(kv.count, toks.count - 1)
+        while common < maxCommon && kv[common] == toks[common] { common += 1 }
+        let mem = llama_get_memory(ctx)
+        if common > 0 {
+            // Drop everything after the shared prefix; new tokens then take positions from `common`.
+            if !llama_memory_seq_rm(mem, 0, Int32(common), -1) { llama_memory_clear(mem, true); common = 0 }
+        } else {
+            llama_memory_clear(mem, true)
+        }
+        kv = []
+        var i = common
+        while i < toks.count {
+            let n = min(nBatch, toks.count - i)
+            var slice = Array(toks[i..<(i + n)])
+            let batch = llama_batch_get_one(&slice, Int32(n))
+            guard llama_decode(ctx, batch) == 0 else {
+                llama_memory_clear(mem, true)
+                throw LlamaError(.generationFailure, "prefill failed at token \(i)")
+            }
+            if cancelFlag.value { llama_memory_clear(mem, true); return common }
+            i += n
+        }
+        kv = toks
+        return common
+    }
+
     private func generateSync(system: String, user: String, nPredict: Int32,
                               temperature: Float, seed: UInt32,
                               prefillEmptyThink: Bool = false,
                               onToken: ((String) -> Void)?,
-                              imagePaths: [String] = [], mmprojPath: String = "") throws -> String {
+                              imagePaths: [String] = [], mmprojPath: String = "") throws -> GenStats {
         lock.lock()
         guard let m = model, let c = ctx else { lock.unlock(); throw LlamaError(.modelMissing, "model not loaded") }
         if isGenerating { lock.unlock(); throw LlamaError(.busy, "a generation is already running") }
@@ -249,6 +380,10 @@ final class LlamaEngine {
         cancelFlag.value = false
         let vocab = llama_model_get_vocab(m)
         let wantsImages = !imagePaths.isEmpty && !mmprojPath.isEmpty
+        var stats = GenStats()
+        stats.kvQ8 = loadedKvQ8
+        stats.flashAttn = loadedFlashAttn
+        stats.thermalStart = ThermalGovernor.stateName
 
         // IMAGE PATH: load the projector first, because its marker has to be inside the user turn
         // BEFORE the chat template is applied - injecting it afterwards would land it outside the
@@ -305,9 +440,6 @@ final class LlamaEngine {
         let nCtx = Int32(llama_n_ctx(c))
         guard Int32(toks.count) < nCtx else { throw LlamaError(.generationFailure, "prompt longer than the context") }
 
-        // Fresh KV per answer — one-shot Q&A, no carried context.
-        llama_memory_clear(llama_get_memory(c), true)
-
         // Sampler chain. temperature <= 0 -> greedy, i.e. reproducible answers, which is what you
         // want when a clinician may read the same question twice.
         let smpl = llama_sampler_chain_init(llama_sampler_chain_default_params())
@@ -328,82 +460,185 @@ final class LlamaEngine {
         }
 
         let tPrefill = Date()
-        // Prefill, CHUNKED to n_batch.
-        //
-        // Submitting the whole prompt in one llama_batch_get_one() GGML_ABORTs (uncatchable SIGABRT)
-        // when the batch exceeds n_batch. Verified on Android: short prompts passed, the real ~2000
-        // token grounded package killed the process inside llama_context::decode. Slice it.
+        // Prefill, CHUNKED to n_batch: one llama_batch_get_one() over the whole prompt GGML_ABORTs
+        // (uncatchable SIGABRT) when the batch exceeds n_batch.
         let nBatch = Int(llama_n_batch(c))
         // How far the position counter has advanced. On the text path that is simply the prompt
         // length; on the image path mtmd reports it, because image embeddings occupy positions that
         // never existed as tokens.
         var consumed = toks.count
+        var reused = 0
 
         if let v = vision {
             // mtmd owns the whole prefill here: it runs the vision encoder, then interleaves the
-            // resulting embeddings with the text tokens into this same context.
+            // resulting embeddings with the text tokens into this same context. Nothing about those
+            // positions can be reused by a later text prompt, so both caches start clean and are
+            // marked unknown.
+            llama_memory_clear(llama_get_memory(c), true)
+            kvTokens = []
+            if let dc = draftCtx { llama_memory_clear(llama_get_memory(dc), true) }
+            draftKvTokens = []
             consumed = Int(try v.prefill(prompt: prompt, imagePaths: imagePaths, ctx: c, nBatch: Int32(nBatch)))
-            if cancelFlag.value { return "" }
+            if cancelFlag.value { return stats }
         } else {
-            var i = 0
-            while i < toks.count {
-                let n = min(nBatch, toks.count - i)
-                var slice = Array(toks[i..<(i + n)])
-                let batch = llama_batch_get_one(&slice, Int32(n))
-                guard llama_decode(c, batch) == 0 else { throw LlamaError(.generationFailure, "prefill failed at token \(i)") }
-                if cancelFlag.value { return "" }
-                i += n
-            }
+            reused = try prefill(ctx: c, toks: toks, kv: &kvTokens, nBatch: nBatch)
+            if cancelFlag.value { return stats }
         }
 
         let prefillMs = Int(Date().timeIntervalSince(tPrefill) * 1000)
-        llamaPerf("PERF prefill_ms=\(prefillMs) prompt_tokens=\(consumed) images=\(imagePaths.count) n_gpu_layers=\(loadedGpuLayers)")
+        stats.prefillMs = prefillMs
+        stats.promptTokens = consumed
+        stats.reusedTokens = reused
+        llamaPerf("PERF prefill_ms=\(prefillMs) prompt_tokens=\(consumed) reused=\(reused) images=\(imagePaths.count) n_gpu_layers=\(loadedGpuLayers)")
 
         var full = ""
         var produced: Int32 = 0
         let tDecode = Date()
-        // The governor only ever LOWERS the budget (Low Power Mode, flat battery, already hot).
+        // The governor only ever LOWERS the budget (already hot).
         let budget = ThermalGovernor.budget(nPredict > 0 ? nPredict : Self.defaultNPredict)
-        let thermalAtStart = ThermalGovernor.stateName
         var stoppedHot = false
-
-        while produced < budget && Int32(consumed) + produced < nCtx {
-            if cancelFlag.value { break }
-            /* Thermal check every 8 tokens: thermalState is a cheap read but not free, and 8 tokens is
-             * ~2 s at the measured ~4 tok/s, which is fast enough to react before the OS throttles us.
-             *
-             * At .critical we STOP and return what we have. Being killed by the OS mid-answer loses
-             * the whole answer and looks like a crash; stopping deliberately keeps the text and lets
-             * the UI say why.
-             */
-            if produced % 8 == 0 {
-                if ThermalGovernor.shouldStop { stoppedHot = true; break }
-            }
-            var id = llama_sampler_sample(smpl, c, -1)
-            if llama_vocab_is_eog(vocab, id) { break }
-
+        func emit(_ id: llama_token) {
             let piece = Self.piece(vocab: vocab, token: id)
             if !piece.isEmpty { full += piece; onToken?(piece) }
             produced += 1
+        }
 
-            var nb = llama_batch_get_one(&id, 1)
-            guard llama_decode(c, nb) == 0 else { break }
-            _ = nb
+        /* SPECULATIVE DECODING (perf plan #6). A small same-vocabulary draft proposes up to `draftK`
+         * tokens; the target scores `committed + proposals` in ONE batched pass and keeps the longest
+         * run it agrees with, then rolls both caches back to that point. Under greedy sampling the
+         * target's choice at every position is deterministic, so an accepted proposal is exactly the
+         * token the plain loop would have produced: the answer is byte-identical, only faster. With
+         * temperature > 0 (a regenerate) or an image prompt the plain loop below runs instead. */
+        let useDraft = draftCtx != nil && temperature <= 0 && vision == nil
+        if useDraft, let dc = draftCtx {
+            // The draft's cache must hold the same prompt; it reuses its own prefix too.
+            var draftOK = true
+            do { _ = try prefill(ctx: dc, toks: toks, kv: &draftKvTokens, nBatch: nBatch) } catch { draftOK = false }
+            let dsmpl = llama_sampler_chain_init(llama_sampler_chain_default_params())
+            defer { llama_sampler_free(dsmpl) }
+            llama_sampler_chain_add(dsmpl, llama_sampler_init_greedy())
+            let cap = Self.draftK
+            var batch = llama_batch_init(Int32(cap + 1), 0, 1)
+            defer { llama_batch_free(batch) }
 
-            // Duty-cycle when hot. Same answer, lower sustained watts, heat stops accumulating.
-            let nap = ThermalGovernor.yieldUsPerToken
-            if nap > 0 { usleep(nap) }
+            var committed = llama_sampler_sample(smpl, c, -1)
+            var n = Int32(kvTokens.count)
+            while produced < budget && n + 1 < nCtx {
+                if cancelFlag.value { break }
+                if ThermalGovernor.shouldStop { stoppedHot = true; break }
+                if llama_vocab_is_eog(vocab, committed) { break }
+                emit(committed)
+
+                // 1. The draft proposes up to k tokens after `committed`. Any failure on its side
+                //    only means fewer proposals; the target never depends on it for correctness.
+                var drafts: [llama_token] = []
+                if draftOK {
+                    let k = max(0, min(cap, Int(nCtx - n - 2)))
+                    var one = committed
+                    let dnb = llama_batch_get_one(&one, 1)
+                    if llama_decode(dc, dnb) == 0 {
+                        draftKvTokens.append(committed)
+                        while drafts.count < k {
+                            let d = llama_sampler_sample(dsmpl, dc, -1)
+                            if llama_vocab_is_eog(vocab, d) { break }
+                            var dd = d
+                            let db = llama_batch_get_one(&dd, 1)
+                            guard llama_decode(dc, db) == 0 else { draftOK = false; break }
+                            draftKvTokens.append(d)
+                            drafts.append(d)
+                        }
+                    } else { draftOK = false }
+                }
+
+                // 2. The target scores committed + proposals in one pass, logits at every position.
+                let step = [committed] + drafts
+                batch.n_tokens = Int32(step.count)
+                for (i, t) in step.enumerated() {
+                    batch.token[i] = t
+                    batch.pos[i] = n + Int32(i)
+                    batch.n_seq_id[i] = 1
+                    batch.seq_id[i]![0] = 0
+                    batch.logits[i] = 1
+                }
+                guard llama_decode(c, batch) == 0 else { break }
+                kvTokens.append(contentsOf: step)
+
+                // 3. Accept the longest run the target agrees with; its first disagreement (or the
+                //    token after the last accepted proposal) is the next committed token.
+                var accepted = 0
+                var next: llama_token? = nil
+                for i in 0...drafts.count {
+                    let t = llama_sampler_sample(smpl, c, Int32(i))
+                    if i < drafts.count && t == drafts[i] {
+                        accepted += 1
+                        emit(drafts[i])
+                        if produced >= budget { break }
+                        continue
+                    }
+                    next = t
+                    break
+                }
+                stats.draftProposed += drafts.count
+                stats.draftAccepted += accepted
+
+                // 4. Roll both caches back to what was accepted.
+                let keep = n + 1 + Int32(accepted)
+                if Int(keep) < kvTokens.count {
+                    _ = llama_memory_seq_rm(llama_get_memory(c), 0, keep, -1)
+                    kvTokens.removeLast(kvTokens.count - Int(keep))
+                }
+                if Int(keep) < draftKvTokens.count {
+                    _ = llama_memory_seq_rm(llama_get_memory(dc), 0, keep, -1)
+                    draftKvTokens.removeLast(draftKvTokens.count - Int(keep))
+                }
+                n = keep
+                guard let nx = next else { break }
+                committed = nx
+
+                let nap = ThermalGovernor.yieldUs(produced: produced)
+                if nap > 0 { usleep(nap * UInt32(1 + accepted)) }
+            }
+        } else {
+            while produced < budget && Int32(consumed) + produced < nCtx {
+                if cancelFlag.value { break }
+                /* Thermal check every 8 tokens: thermalState is a cheap read but not free.
+                 *
+                 * At .critical we STOP and return what we have. Being killed by the OS mid-answer loses
+                 * the whole answer and looks like a crash; stopping deliberately keeps the text and lets
+                 * the UI say why.
+                 */
+                if produced % 8 == 0 {
+                    if ThermalGovernor.shouldStop { stoppedHot = true; break }
+                }
+                var id = llama_sampler_sample(smpl, c, -1)
+                if llama_vocab_is_eog(vocab, id) { break }
+                emit(id)
+
+                let nb = llama_batch_get_one(&id, 1)
+                guard llama_decode(c, nb) == 0 else { break }
+                if vision == nil { kvTokens.append(id) }
+
+                // Duty-cycle when warm or hot. Same answer, lower sustained watts.
+                let nap = ThermalGovernor.yieldUs(produced: produced)
+                if nap > 0 { usleep(nap) }
+            }
         }
         if stoppedHot {
             full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._"
         }
         let decodeMs = Int(Date().timeIntervalSince(tDecode) * 1000)
         let tps = decodeMs > 0 ? Double(produced) / (Double(decodeMs) / 1000.0) : 0
-        llamaPerf("PERF decode_ms=% tokens=% tok_per_sec=% prefill_tok_per_sec=% thermal_start=% thermal_end=% budget=% stopped_hot=%",
+        stats.text = full
+        stats.decodeMs = decodeMs
+        stats.tokens = Int(produced)
+        stats.tokPerSec = tps
+        stats.thermalEnd = ThermalGovernor.stateName
+        stats.stoppedHot = stoppedHot
+        llamaPerf("PERF decode_ms=% tokens=% tok_per_sec=% prefill_tok_per_sec=% thermal_start=% thermal_end=% budget=% stopped_hot=% draft=%/%",
                decodeMs, Int(produced), tps,
-               prefillMs > 0 ? Double(consumed) / (Double(prefillMs) / 1000.0) : 0,
-               thermalAtStart, ThermalGovernor.stateName, Int(budget), stoppedHot)
-        return full
+               prefillMs > 0 ? Double(consumed - reused) / (Double(prefillMs) / 1000.0) : 0,
+               stats.thermalStart, stats.thermalEnd, Int(budget), stoppedHot, stats.draftAccepted, stats.draftProposed)
+        return stats
     }
 
     // MARK: - Helpers

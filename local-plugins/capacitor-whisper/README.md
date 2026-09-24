@@ -66,28 +66,39 @@ plugin makes exactly one network call type: downloading the model file from the 
 `WhisperEngine` saves the shared session's `category`/`mode`/`options` before recording and restores
 them on stop/cancel, so the existing SFSpeech (Fast Dictation) path is unaffected afterwards.
 
-## Continuous capture upgrade path (device-gated, not yet built)
-Today's plugin is **record-then-transcribe**: `startTranscribe` records, `stopTranscribe` stops the
-mic and runs one inference pass, firing `whisperFinal` once. `whisperPartial` is reserved but never
-emitted. `voice-ambient.js`'s ambient/OPD-scribe controller works around this in JS today (option
-**b**, shipped): it calls `stopTranscribe`/`startTranscribe` back-to-back in ~15s windows and stitches
-the per-window finals into one transcript (`accumulate()` in `voice-ambient.js`). That re-arm has a
-real ceiling — the mic is briefly closed and reopened at every window boundary, so audio spanning the
-seam (a few hundred ms) can be clipped.
+## Continuous capture (BUILT — option (c), flag-gated OFF, not yet device-verified)
+The plugin's original mode is **record-then-transcribe**: `startTranscribe` records, `stopTranscribe`
+stops the mic and runs one inference pass, firing `whisperFinal` once. `voice-ambient.js`'s
+ambient/OPD-scribe controller works around that in JS (option **b**, still the default): it calls
+`stopTranscribe`/`startTranscribe` back-to-back in ~15s windows and stitches the per-window finals
+into one transcript (`accumulate()`). That re-arm has a real ceiling — the mic is briefly closed and
+reopened at every window boundary, so audio spanning the seam (a few hundred ms) can be clipped.
 
-The fix is **native continuous capture**, either:
-- **(a) Ring buffer** — keep `AVAudioEngine`/`AudioRecord` running continuously; every ~15s, hand the
-  whisper.cpp context the last N seconds of PCM (a sliding/ring buffer) without ever stopping the mic.
-- **(c) Continuous-record-with-flush** — keep recording into one buffer for the whole session; every
-  ~15s, run inference on the buffer accumulated so far (or the new tail) and flush, without closing
-  the audio session between windows.
+**What now exists: option (c), continuous-record-with-flush.**
+`flushTranscribe()` transcribes everything captured so far and leaves the mic recording:
+`WhisperEngine.flushAndTranscribe(language:initialPrompt:)` snapshots `samples` under `sampleLock`,
+clears them (so the next flush only sees new audio) and runs `whisper_full` on the snapshot while the
+`AVAudioEngine` tap keeps appending. No `AVAudioSession` teardown, no re-arm, no seam. Inference runs
+on the same serial `work` queue as `stopAndTranscribe`, so overlapping flushes (and a stop landing on
+top of one) queue instead of racing the single `whisper_context`.
 
-**Contract for either**: emit `whisperPartial {text}` once per ~15s window *while recording
-continues* (no `stopTranscribe`/`startTranscribe` round trip), and still emit one `whisperFinal` when
-the caller actually calls `stopTranscribe`. `voice-ambient.js` already consumes `whisperPartial` via
-`onPartial` (currently a no-op in practice since it's never fired) — wiring this in would let the JS
-re-arm loop go away with no `SMD_AMBIENT` API change. Needs a **real device** to validate (mic
-continuity + inference timing can't be verified on a simulator/emulator).
+**Contract as built**: each flush emits `whisperFlush {text}` — a NEW event, deliberately not
+`whisperPartial`: a flushed segment is *consumed* (the buffer is cleared), so it appends, whereas a
+partial would replace. `whisperFinal` still fires exactly once, when the caller calls
+`stopTranscribe`, carrying only the tail captured since the last flush. The flushed session uses the
+language/prompt given to `startTranscribe`. Option (a), the ring buffer, was not built — with the
+buffer cleared per flush there is nothing to slide.
+
+**Consumer**: `native-bridge.js` exposes `SMD_NATIVE.flushWhisper()` + `SMD_NATIVE.whisperCanFlush()`
+(presence of `flushTranscribe` on the plugin proxy), `voice.js listen()` surfaces it as
+`session.flush` when available, and `voice-ambient.js` calls it at a window boundary instead of
+`stop()`. Gated on `localStorage.smd_voice_continuous` — **DEFAULT OFF**; with the flag off, or on any
+app binary built before this change, the JS re-arm loop runs exactly as before. No `SMD_AMBIENT` API
+change. Trade-off: one session means ONE model for the whole consult, so Auto's per-chunk model
+re-routing does not apply on this path (the first-chunk language probe routes up front instead).
+
+**Still needs a real device**: mic continuity across a flush, whether inference during recording drops
+frames on a busy phone, and end-to-end timing cannot be verified on a simulator/emulator.
 
 ## Licenses
 MIT (this plugin). Links whisper.cpp (MIT, ggml authors). ggml Whisper models are MIT

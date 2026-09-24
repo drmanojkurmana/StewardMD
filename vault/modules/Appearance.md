@@ -6,7 +6,7 @@ The user updated the selection to Black: a pure black canvas with near-black rai
 
 - Base background `#000000`, raised surface `#0c0c0e`, inset surface `#161618`, border `#303034`.
 - Text `#f4f4f5` / secondary `#a6a6ad`; primary text contrast against the base is greater than 7:1.
-- Interaction accent `#57d3bd`. Clinical red, orange, yellow and green ramps remain defined by the existing clinical tokens.
+- Interaction accent: deep Clinical Tools sphere green (`#2f9184` / `#12564a` / `#06231e` via `--sphere-*`) in default dark; a saved accent theme keeps its own accent in dark mode (graphite layer enforces neutral surfaces only). No neon green anywhere. Clinical red, orange, yellow and green ramps remain defined by the existing clinical tokens.
 - The layer remaps base, v3 and RDS tokens and the local tokens used by Home, More/Settings, MaiK, SKNX, FollowCare, antibiotic decisions, electrolytes, case sharing, onboarding, email authentication, NMC and voice sheets. It also neutralises the SURGX dark hero and FollowCare AI surfaces that previously hard-coded blue dark backgrounds.
 - Dark surfaces remain black when a saved accent-theme preference is present. Light appearance themes are unchanged.
 

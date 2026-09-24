@@ -152,8 +152,15 @@ for (const [, text] of screens) {
   /* HELPERS THAT CARRY A SEGMENT: `function oncoPost(path) { fetch(base + "/api/queue/onco" + path) }`.
    * A call `oncoPost("/plan")` is onco/plan, and nothing else. */
   const helperSeg = new Map();
-  for (const h of text.matchAll(/function\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)[^)]*\)\s*\{([\s\S]{0,600})/g)) {
-    const m = h[3].match(new RegExp("[\"'`]/api/queue/([a-z0-9-]+)/?[\"'`]\\s*\\+\\s*" + h[2] + "\\b"));
+  /* The body is read through a lookahead so it is not consumed: a 600-char window that ate the next
+   * declaration hid any helper defined within 600 chars of the previous function (clinic-billing.html's
+   * `api` sat right after `queueApiUrl` from 8a32c786b and was never seen). */
+  for (const h of text.matchAll(/function\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)[^)]*\)\s*\{(?=([\s\S]{0,600}))/g)) {
+    /* Either the literal base - `"/api/queue/bill/" + path` - or the host-aware wrapper clinic-billing.html
+     * moved to: `queueApiUrl("bill/" + path)`. Without the second shape every route that page reaches only
+     * through its helper (bill/dispense, bill/shift) read as unreachable. */
+    const m = h[3].match(new RegExp("[\"'`]/api/queue/([a-z0-9-]+)/?[\"'`]\\s*\\+\\s*" + h[2] + "\\b")) ||
+      h[3].match(new RegExp("queueApiUrl\\(\\s*[\"'`]([a-z0-9-]+)/[\"'`]\\s*\\+\\s*" + h[2] + "\\b"));
     if (m) helperSeg.set(h[1], m[1]);
   }
   for (const [name, seg] of helperSeg) {

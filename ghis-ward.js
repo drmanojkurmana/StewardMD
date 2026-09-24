@@ -1327,6 +1327,37 @@
           try { window.openGHIS(); } catch (e) {}
         },
         cancelPick: function() { GHIS._pickCb = null; },
+        /* QA BUG-018: newest lab values for one ward patient, for modules that only need a few numbers
+         * (the oncology Calvert calculator wants creatinine + demographics). Resolves
+         * { patient:{age,sex,name,weightKg?}, labs:{creatinine,creatinineDate,...} }. Uses the same
+         * /lab + /lab-detail calls loadIntoICU uses; PHI stays in memory on this device. */
+        latestLabsFor: function(patientId) {
+          var list = (typeof _patients !== 'undefined' && _patients) || [], p = null;
+          for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
+          var dem = demoFromPatient(p);
+          var WANT = { creatinine: /creatinine/i, urea: /urea|bun/i, bilirubin: /total\s*bili|bilirubin\s*\(?total/i, anc: /absolute\s*neutro|anc\b/i, platelets: /platelet/i, hb: /h(ae|e)moglobin|\bhb\b/i };
+          var found = {};
+          return authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function (j) {
+            var orders = ((j && j.orders) || []).slice(0, 12);
+            return Promise.all(orders.map(function (o) {
+              return authFetch('/lab-detail?renderId=' + encodeURIComponent(o.renderId) + '&episodeId=' + encodeURIComponent(o.episodeId) + '&patientId=' + encodeURIComponent(patientId))
+                .then(function (d) {
+                  (d && d.tests || []).forEach(function (t) {
+                    var v = parseFloat(String(t.result || '').replace(/[^\d.]/g, '')); if (isNaN(v)) return;
+                    Object.keys(WANT).forEach(function (k) {
+                      if (!WANT[k].test(String(t.test || ''))) return;
+                      var when = o.orderDate || o.date || '';
+                      if (!found[k] || String(when) > String(found[k].date)) found[k] = { value: v, date: when };
+                    });
+                  });
+                }).catch(function () {});
+            }));
+          }).catch(function () {}).then(function () {
+            var labs = {};
+            Object.keys(found).forEach(function (k) { labs[k] = found[k].value; labs[k + 'Date'] = found[k].date; });
+            return { patient: dem, labs: labs };
+          });
+        },
         // Assemble a ward patient's labs + imaging + culture and load into the reasoning
         // workspace (display + suggest-with-confirm — DX never auto-ticks findings).
         importPatientReports: function(patientId, name) {

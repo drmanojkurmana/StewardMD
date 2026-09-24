@@ -11,12 +11,15 @@
 export const DEFAULT_CONSULT_MIN = 12;
 
 // ---- status state machine ----------------------------------------------------------------
-export const STATUS = ["registered", "waiting", "called", "in_consultation", "investigation", "followup", "completed", "cancelled", "no_show"];
+export const STATUS = ["registered", "waiting", "called", "in_consultation", "at_diagnostics", "investigation", "followup", "completed", "cancelled", "no_show"];
 const NEXT = {
   registered:      ["waiting", "called", "in_consultation", "cancelled", "no_show"],
   waiting:         ["called", "in_consultation", "cancelled", "no_show"],
   called:          ["in_consultation", "waiting", "no_show", "cancelled"],
-  in_consultation: ["completed", "investigation", "followup", "cancelled", "waiting"],
+  in_consultation: ["completed", "investigation", "followup", "cancelled", "waiting", "at_diagnostics"],
+  // Sent for tests mid-consult: out of the room (not queued, like in_consultation) so the doctor can
+  // call the next patient. Tests done returns them to the waiting hall, or straight back in.
+  at_diagnostics:  ["waiting", "called", "in_consultation", "cancelled"],
   investigation:   ["waiting", "called", "in_consultation", "completed", "followup", "cancelled"],
   followup:        ["completed", "cancelled"],
   completed:       [],
@@ -55,9 +58,11 @@ export function orderQueue(tickets) {
 }
 // A room's display order: the patient in consultation pinned on top (▶), then the waiting queue in true
 // order. orderQueue alone drops in_consultation, so the nurse board needs this to show reorders/priority.
+// Patients sent for tests ride at the end: out of the room but still this doctor's open work, with their
+// "Tests Done" action, so they are never invisible while at the lab.
 export function orderRoomView(tickets) {
   const t = tickets || [];
-  return t.filter((x) => x.status === "in_consultation").concat(orderQueue(t));
+  return t.filter((x) => x.status === "in_consultation").concat(orderQueue(t), t.filter((x) => x.status === "at_diagnostics"));
 }
 
 // A PUBLIC waiting-room screen shows the ticket's TOKEN and never a name, MRN or phone: the token is what
@@ -203,5 +208,75 @@ export function aggregate(tickets, nowMs) {
     avgConsultMin: conN ? min(conSum / conN) : 0,
     etaAccuracyPct: etaN ? Math.round((etaHit / etaN) * 100) : null,   // % of predictions within 10 min
     peakHours: peak
+  };
+}
+
+/* ---- THE OPD PULSE: what the desk and the owner act on, hospital-wide -------------------------------
+ *
+ * aggregate() above answers "how did that doctor's session go". This answers the question a hospital
+ * actually asks at 11am: IS THE OPD RUNNING, AND IF NOT, WHERE IS IT STUCK. Three deliberate choices:
+ *
+ * MEDIAN AND P90, NEVER THE AVERAGE. One patient waiting three hours moves an average by a few minutes
+ * and then hides behind it. p90 is the patient who is about to complain at the desk, and it is the
+ * number that changes behaviour.
+ *
+ * THE WAIT IS SPLIT IN TWO. Door to called is the DESK (registration, paperwork, the queue itself);
+ * called to seen is the DOCTOR (running late, long consults). One combined number blames everybody and
+ * tells nobody what to fix; these two say which half of the building to walk to.
+ *
+ * WAITING NOW IS MEASURED LIVE, not from finished visits. Everything else here is history; the only
+ * figure that can still be acted on today is how long the people sitting in the hall have been there,
+ * which is why longestMin and the over-30/over-60 counts are computed against nowMs.
+ */
+function percentileMin(list, p) {
+  if (!list.length) return null;
+  const s = list.slice().sort((a, b) => a - b);
+  const i = Math.min(s.length - 1, Math.max(0, Math.ceil((p / 100) * s.length) - 1));
+  return Math.round(s[i] / 60000);
+}
+export function opdPulse(tickets, nowMs) {
+  const rows = tickets || [], now = Number.isFinite(nowMs) ? nowMs : Date.now();
+  const WAIT = ["registered", "waiting", "called"];
+  const doorToSeen = [], doorToCalled = [], calledToSeen = [], consults = [], waitingNow = [];
+  let waiting = 0, inConsultation = 0, completed = 0, noShow = 0, cancelled = 0, recalls = 0, held = 0;
+
+  for (const t of rows) {
+    if (!t) continue;
+    if (t.status === "completed") completed++;
+    else if (t.status === "no_show") noShow++;
+    else if (t.status === "cancelled") cancelled++;
+    else if (t.status === "in_consultation") inConsultation++;
+    else if (WAIT.indexOf(t.status) > -1) waiting++;
+    // Waiting on a result, at the lab, or booked back: still the hospital's open work, counted apart from the hall.
+    else if (t.status === "investigation" || t.status === "followup" || t.status === "at_diagnostics") held++;
+    recalls += Number(t.recallCount) || 0;
+
+    if (t.registeredAt && t.consultStartAt) doorToSeen.push(t.consultStartAt - t.registeredAt);
+    if (t.registeredAt && t.calledAt) doorToCalled.push(t.calledAt - t.registeredAt);
+    if (t.calledAt && t.consultStartAt && t.consultStartAt >= t.calledAt) calledToSeen.push(t.consultStartAt - t.calledAt);
+    if (t.consultStartAt && t.consultEndAt) consults.push(t.consultEndAt - t.consultStartAt);
+    if (WAIT.indexOf(t.status) > -1 && t.registeredAt) waitingNow.push(now - t.registeredAt);
+  }
+
+  const finished = completed + noShow;
+  return {
+    at: now,
+    registered: rows.length,
+    waiting, inConsultation, completed, noShow, cancelled, held, recalls,
+    seen: completed + inConsultation,
+    // History: how long it took the people already seen.
+    doorToDoctor: { medianMin: percentileMin(doorToSeen, 50), p90Min: percentileMin(doorToSeen, 90), n: doorToSeen.length },
+    deskWait: { medianMin: percentileMin(doorToCalled, 50), p90Min: percentileMin(doorToCalled, 90), n: doorToCalled.length },
+    doctorWait: { medianMin: percentileMin(calledToSeen, 50), p90Min: percentileMin(calledToSeen, 90), n: calledToSeen.length },
+    consult: { medianMin: percentileMin(consults, 50), p90Min: percentileMin(consults, 90), n: consults.length },
+    // Live: the hall as it stands right now, the half somebody can still do something about.
+    waitingNow: {
+      longestMin: waitingNow.length ? Math.round(Math.max.apply(null, waitingNow) / 60000) : 0,
+      medianMin: percentileMin(waitingNow, 50),
+      over30: waitingNow.filter((ms) => ms >= 30 * 60000).length,
+      over60: waitingNow.filter((ms) => ms >= 60 * 60000).length,
+    },
+    // null, not 0: nobody has finished yet is not the same as nobody abandoned.
+    abandonedPct: finished ? Math.round((noShow / finished) * 100) : null,
   };
 }

@@ -14,9 +14,10 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   DECORATES `window.SMD_AI` rather than branching in home.js. Pref `stewardmd.maikEngine`, default `cloud`
 - `maik-models.js` / `maik-local.js` — on-device model packs (resumable Range download) + llama.cpp
   inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
-  `docs/MAIK_OFFLINE_RUNBOOK.md`. Nine packs (2026-09-18): `maik-lite` (our fine-tune, default),
-  `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers, `medmo-4b`
-  (**MAiK Cortex**, text-only), `maik-apex`, `bonsai-27b`. EVERY text pack reads the on-device book
+  `docs/MAIK_OFFLINE_RUNBOOK.md`. Nine packs (2026-09-23): `maik-lite` (our fine-tune, default),
+  `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers,
+  `maik-apex`, `bonsai-27b`, `bonsai2-27b`
+  (`medmo-4b` / MAiK Cortex removed 2026-09-23). EVERY text pack reads the on-device book
   (`kb/ai/maik-lite-rag.js` BM25 retrieval, `kb/ai/maik-lite-kb-store.js` 38 MB asset): `ragEligible`
   in `maik-local.js` is capability-based and reads `CAPS[pack].kb` (changed 2026-09-18 from
   Lite-only). The whole-answer wording gate was replaced for these packs by claim-level grounding
@@ -69,10 +70,22 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 [[MaiK Intent Firewall]] · [[AI Control Center]] (per-module caps, model) · [[Medical Knowledge Base]] · Vertex (prod only; preview lacks it) · [[Infra]] MAIK_KV.
 
 ## Gotchas
-- **The on-device engine is gated on PRO, not on a flag** (2026-08-27). `gateActive()` reads
-  `SMD_PRO.isProSync()` only; the old `SMD_XACCESS` `maik_local` access-code gate is gone from the
-  client AND from `functions/_experimental.js`. Dev hatches kept: `smd_maik_local_bypass=1` and a
-  native debug build. `SMD_PRO` fails OPEN, so the promo period makes it open to everyone on native.
+- **A named score is answered by its calculator, for free** (2026-09-02). `maikRoute()` has a
+  `calculator` kind: `MEDCALC.find(q)` resolves the question to one calculator by title (conservative:
+  every question word must be in the title, a real word must match, ambiguous names return null), and
+  the answer is a local card with "Open <name>" + "Ask MaiK anyway" (`_maikSkipCalc`, one-shot). Zero
+  tokens. Checked BEFORE the patient-specific route. Decisions 2026-09-02.
+- **Every "Open in app" chip is delegated through ONE `closest()` selector** in `home.js`
+  (`[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-calc],[data-maik-calcask]`). A chip whose
+  attribute is not in that list is silently dead: the handler returns before any branch runs. That is
+  exactly how every `data-maik-tool` chip died for a while. Add the attribute to the selector when you
+  add a chip kind, and cover it in `test/run-maik-calc-route-ui.mjs`.
+- `maikRoute()` is evaluated OUTSIDE module scope by `test/maik-greeting-route.test.mjs` (regex-sliced,
+  `new Function`). Any module-level variable it touches must be `typeof`-guarded or the suite breaks.
+- **The on-device engine is FREE for every user, guest included** (owner, 2026-09-20; reverses the
+  2026-08-27 Pro gate). `gateActive()` returns true: no `SMD_PRO`, no access code, no bypass key, no
+  debug-build exception. The settings row badges it Free; the server matrix lists `local_ai` under
+  every tier. MaiK Cloud keeps its own Pro gate (tokens cost money). See Decisions.md 2026-09-20.
 - Model is env-driven (`GEMINI_MODEL`); `thinkingBudget:0`.
 - Preview env has no Vertex → Tier-0 (KB) only.
 - No em-dash in app-facing text (AI *output* exempt).
@@ -162,3 +175,29 @@ Selected modes: light uses variant 5, Quiet Focus (a gentle focus reveal followe
 `maik-atmosphere.js` / `.css` mount decorative Aurora and Letter Glitch canvases on the MaiK sheet. Light uses a pure white base and green/white/orange stops; Graphite uses saffron/green/navy. The existing `maikSetSendMode` controls the generation effect, including stop/error/completion. No prompts or patient text enter the renderer. Motion pauses when hidden, is static under Reduce Motion, and releases WebGL/listeners when the sheet closes or is replaced. The existing Medibot artwork, size, and animation remain unchanged. React Bits attribution is in `licenses/react-bits.txt`.
 
 The atmosphere refinement softens Aurora and gives messages and composer translucent, blurred surfaces. The engine-aware verification notice now sits beneath the composer in the footer; its wording still follows the selected engine. Original bot unchanged.
+
+## One settings page, our names only (2026-09-21)
+Owner: *"This whole page is shit. Make into one single well organised setting and dont name Real
+Model names only our model names."* `SMD_MAIK_ENGINE.settingsHTML()` now renders ONE page:
+1. **Who answers**: Knowledge Base only (Free) / MaiK Cloud (Pro, graded **DM**) / MaiK on this phone.
+2. **On this phone** (`capsHTML()`): the answering (or ready) pack, its grade, its fit for this phone,
+   capability chips, the device line (`[data-me-device]`, patched in place) and the Knowledge Base
+   check as a POSITIVE switch (`ragLinkHTML()`: "Check answers against the Knowledge Base", on by
+   default; it used to read Connected/Disconnected, which read backwards on a phone).
+3. **Model library** (`modelRowHTML()`): a four-rung grade ladder, then three `<details>` shelves
+   derived from the registry (`SMD_MAIK_MODELS.GROUPS` / `groupOf()`): Trained by StewardMD (MBBS),
+   Medical specialists (MD), General models (PhD). Every row carries a grade pill and a fit pill; an
+   unfit pack gets no download button. A pack's FIRST download goes through `data-me-upgrade`
+   (confirm on "May run slowly", PENDING promotion); resume/verify/pause stay on `data-me-model`.
+4. **Advanced**: the cloud-block test tool, collapsed.
+
+**Grades** live in `maik-models.js` (`GRADES`, `grade(id)`): MBBS = `own`, MD = `caps.medical`,
+PhD = everything else, DM = MaiK Cloud. Derived, never hand-kept. The picker (`openPicker()`) uses the
+same shelves and shows the grade pill on every row.
+
+**Renames** (vendor word removed): MAiK Bonsai -> **MAiK Prime**, Bonsai Swift -> **MAiK Swift**,
+Bonsai Max -> **MAiK Max**, Bonsai Max 2 -> **MAiK Max 2**. Pack IDs are unchanged (`bonsai-*`), so
+installed files, sidecars and `KEY_ACTIVE` carry over. `actual` still records provenance for logs.
+The "Which one should I download?" panel (`guideHTML`, pips) is gone; orientation is the ladder, one
+note per shelf and one footer line. Gotcha: `GUIDE_INTRO` is still exported and still used by
+`test/maik-engine.test.mjs`; keep it vendor-free.

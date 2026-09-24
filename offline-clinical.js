@@ -18,9 +18,8 @@
   "use strict";
   var C = window.Capacitor;
   var isNative = !!(C && typeof C.isNativePlatform === "function" && C.isNativePlatform());
-  if (!isNative) { window.SMD_OFFLINE_CLINICAL = { isNative: false }; return; }
 
-  var VER = "gold240";                            // bump with the bundle so a cached gz is busted
+  var VER = "gold241";                            // bump with the bundle so a cached gz is busted
   var URL_GZ = "/offline-clinical.json.gz?v=" + VER;
   var FLAG = "stewardmd_offline_clinical";        // "0" disables
   var _data = null;      // { v, struct:{comp:{gold|fields}}, mono:{comp:{…}} }
@@ -63,18 +62,75 @@
     return _loading;
   }
 
-  /* -------- lookups (exact, then case-insensitive) -------- */
-  function lookStruct(name) { var s = _data.struct || {}; if (s[name]) return s[name]; var k = _lc["s:" + String(name).toLowerCase()]; return k ? s[k] : null; }
-  function lookMono(name) { var m = _data.mono || {}; if (m[name]) return m[name]; var k = _lc["m:" + String(name).toLowerCase()]; return k ? m[k] : null; }
-  function isCombo(name) { return /\s\+\s/.test(String(name)); }
-  function splitCombo(name) { return String(name).split(/\s*\+\s*/).map(function (s) { return s.trim(); }).filter(Boolean); }
+  /* -------- lookups (exact, then canonical/case-insensitive) -------- */
+  function cleanComp(name) {
+    var s = String(name || "").trim();
+    if (/^sacubitril\s*[\/|+]\s*valsartan/i.test(s)) return "Sacubitril + Valsartan";
+    if (/rabies\s*vaccine|human\s*\+\s*rabies|rabies.*human/i.test(s)) return "Rabies Vaccine";
+    if (/tetanus\s*toxoid|tdap|\btt\b|adsorbed\s*tetanus/i.test(s)) return "Adsorbed Tetanus Vaccine";
+    if (/rotavirus\s*vaccine/i.test(s)) return "Rotavirus Vaccine";
+    if (/typhoid\s*vaccine|salmonella\s*typhi|purified\s*vi.*typhoid/i.test(s)) return "Purified Vi Polysaccharide Typhoid Vaccine";
+    if (/hepatitis\s*b\s*vaccine|aluminium.*hepatitis\s*b/i.test(s)) return "Hepatitis B Vaccine";
+    if (/hepatitis\s*a\s*vaccine/i.test(s)) return "Inactivated Hepatitis A Vaccine";
+    if (/influenza\s*vaccine/i.test(s)) return "Inactivated Influenza Vaccine";
+    if (/pneumococc\w*\s*(?:polysaccharide\s*)?conjugate\s*vaccine/i.test(s)) return "Pneumococcal Polysaccharide Conjugate Vaccine";
+    if (/pneumococc\w*\s*polysaccharide\s*vaccine/i.test(s)) return "Pneumococcal Polysaccharide Vaccine";
+    if (/measles.*mumps.*rubella|mmr/i.test(s)) return "Measles Vaccine";
+    if (/varicella\s*vaccine/i.test(s)) return "Varicella Vaccine";
+    if (/human\s*papilloma\w*|hpv/i.test(s)) return "Human Papillomavirus Vaccine";
+    if (/herpes\s*zoster|shingles/i.test(s)) return "Herpes Zoster Vaccine";
+    if (/\bbcg\b/i.test(s)) return "BCG Vaccine";
+    if (/cholera\s*vaccine/i.test(s)) return "Cholera Vaccine";
+    if (/polio\s*vaccine/i.test(s)) return "Polio Vaccine";
+    if (/^dabigatran(?:\s+etexilate)?$/i.test(s)) return "Dabigatran Etexilate";
+    if (/^metoprolol(?:\s+(?:succinate|tartrate))?$/i.test(s)) return "Metoprolol Succinate";
+    if (/^noradrenaline(?:\s*\(.*?\))?$/i.test(s)) return "Norepinephrine";
+    if (/^levothyroxine$/i.test(s)) return "Thyroxine";
+    if (/^chlorphen(?:ir)?amine(?:\s+maleate)?$/i.test(s)) return "Chlorpheniramine Maleate";
+    if (/^magnesium\s*sul(?:f|ph)ate$/i.test(s)) return "Magnesium Sulphate";
+    if (/^insulin(?:\s*\(regular\))?$/i.test(s)) return "Human Insulin";
+    s = s.replace(/\s*\([^)]*\)/g, " ");
+    s = s.replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi, " ");
+    return s.replace(/\s*\/\s*/g, " + ").replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();
+  }
+  function lookStruct(name) {
+    var s = _data.struct || {};
+    if (s[name]) return s[name];
+    var k = _lc["s:" + String(name).toLowerCase()];
+    if (k && s[k]) return s[k];
+    var cl = cleanComp(name);
+    if (cl && cl !== name) {
+      if (s[cl]) return s[cl];
+      var kcl = _lc["s:" + cl.toLowerCase()];
+      if (kcl && s[kcl]) return s[kcl];
+    }
+    return null;
+  }
+  function lookMono(name) {
+    var m = _data.mono || {};
+    if (m[name]) return m[name];
+    var k = _lc["m:" + String(name).toLowerCase()];
+    if (k && m[k]) return m[k];
+    var cl = cleanComp(name);
+    if (cl && cl !== name) {
+      if (m[cl]) return m[cl];
+      var kcl = _lc["m:" + cl.toLowerCase()];
+      if (kcl && m[kcl]) return m[kcl];
+    }
+    return null;
+  }
+  function isCombo(name) { return /\s\+\s|\s*\/\s*/.test(String(name)); }
+  function splitCombo(name) { return String(name).split(/\s*\+\s*|\s*\/\s*/).map(function (s) { return s.trim(); }).filter(Boolean); }
 
   /* -------- response builders — identical shapes to the worker handlers -------- */
   function structResp(name) {
     return ensureData().then(function () {
       if (isCombo(name)) {
         var comps = splitCombo(name).map(function (p) { return { name: p, data: lookStruct(p) || null }; });
-        return { composition: name, combo: true, found: comps.some(function (c) { return c.data; }), components: comps };
+        var hasAny = comps.some(function (c) { return c.data; });
+        if (hasAny) {
+          return { composition: name, combo: true, found: true, components: comps };
+        }
       }
       var d = lookStruct(name);
       return d ? { composition: name, found: true, data: d } : { composition: name, found: false };
@@ -84,7 +140,10 @@
     return ensureData().then(function () {
       if (isCombo(name)) {
         var comps = splitCombo(name).map(function (p) { return { name: p, monograph: lookMono(p) || null }; });
-        return { composition: name, combo: true, found: comps.some(function (c) { return c.monograph; }), components: comps };
+        var hasAny = comps.some(function (c) { return c.monograph; });
+        if (hasAny) {
+          return { composition: name, combo: true, found: true, components: comps };
+        }
       }
       var d = lookMono(name);
       return d ? { composition: name, found: true, monograph: d } : { composition: name, found: false };
@@ -99,7 +158,11 @@
       M[name] = function (arg) {
         if (enabled() && !online()) return localFn(arg).catch(function () { return { composition: arg, found: false }; });  // offline → local
         return orig.apply(M, arguments).then(function (res) {
-          if (enabled() && res == null) return localFn(arg).catch(function () { return null; });  // API null/unreachable → local backfill
+          if (enabled() && (!res || !res.found)) {
+            return localFn(arg).then(function (loc) {
+              return (loc && loc.found) ? loc : res;
+            }).catch(function () { return res; });
+          }
           return res;
         }).catch(function () { return enabled() ? localFn(arg).catch(function () { return null; }) : null; });
       };

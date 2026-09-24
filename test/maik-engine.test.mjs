@@ -177,13 +177,13 @@ function load(env = {}) {
   ok("local: explain() normalised to a package", calls[0][1][0].summary === "SUM" && calls[0][1][0].question === "Q");
 }
 
-// ── local degrades to KB-only rather than dead-ending ──
+// ── local degrades to KB-only only when it truly cannot answer (no pack / no runtime) ──
 {
-  const noGate = load({ runtime: true, pack: true });
+  const noGate = load({ runtime: true, pack: true });   // no Pro state at all: irrelevant since 2026-09-20
   noGate.E.setPref("local");
-  ok("local without gate → effective rag", noGate.E.effective() === "rag");
+  ok("local with no Pro state → effective local (on-device is free for everyone)", noGate.E.effective() === "local");
   const r1 = await noGate.win.SMD_AI.explainGrounded({});
-  ok("local without gate → KB-only notice, no paid call", !!r1.text && noGate.calls.length === 0);
+  ok("local with no Pro state → answered on-device, never a paid call", !!r1.text && noGate.calls.every((c) => c[0] === "local"));
 
   const noPack = load({ gate: true, runtime: true });
   noPack.E.setPref("local");
@@ -203,37 +203,24 @@ function load(env = {}) {
   ok("local: rejection becomes {error}", r.error === "oom");
 }
 
-// ── a DEV build opens the experimental gate; a release build does not ──
-// Without this the feature is unreachable on a device: SMD_XACCESS needs a server-issued code and
-// iOS has no JS console to set a bypass by hand.
+// ── the gate is OPEN for everyone (owner decision 2026-09-20): guest, free, Pro, debug or release ──
 {
-  const dev = load({ runtime: true, pack: true });
-  dev.win.SMD_MAIK_LOCAL.isDebugBuild = () => true;
-  ok("debug build opens the gate", dev.E.gateActive() === true && dev.E.localReady() === true);
-
   const rel = load({ runtime: true, pack: true });
   rel.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
-  ok("release build still requires a subscription", rel.E.gateActive() === false && rel.E.localReady() === false);
-
-  const relPro = load({ pro: true, runtime: true, pack: true });
-  relPro.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
-  ok("release build WITH Pro is allowed", relPro.E.gateActive() === true);
-
-  // The experimental-access framework no longer has any say here.
-  const xa = load({ pro: false, runtime: true, pack: true });
-  xa.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
-  xa.win.SMD_XACCESS = { isActiveCached: () => true, devBypass: () => true };
-  ok("neither an SMD_XACCESS code nor its devBypass can open a non-Pro gate", xa.E.gateActive() === false);
+  ok("release build with no Pro state at all: on-device is available", rel.E.gateActive() === true && rel.E.localReady() === true);
+  const nonPro = load({ pro: false, runtime: true, pack: true });
+  nonPro.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
+  ok("a KNOWN non-Pro account is not gated either", nonPro.E.gateActive() === true && nonPro.E.localReady() === true);
+  const gateSrc = SRC.slice(SRC.indexOf("function gateActive"), SRC.indexOf("function runtimeAvailable"));
+  ok("gateActive reads neither SMD_PRO nor a debug flag nor a bypass key", !/SMD_PRO|isDebugBuild|smd_maik_local_bypass/.test(gateSrc));
 }
 
-// ── owner/QA bypass unlocks the gate without a server deploy ──
+
+// ── no bypass key is needed any more: the gate is open for everyone (2026-09-20) ──
 {
-  const { E, ls } = load({ runtime: true, pack: true });
-  ok("gate closed without a code", E.localReady() === false);
-  ls.setItem("smd_maik_local_bypass", "1");
-  ok("bypass opens the gate", E.localReady() === true);
-  E.setPref("local");
-  ok("bypass makes local the effective engine", E.effective() === "local");
+  const { E } = load({ runtime: true, pack: true });
+  ok("ready without any key or Pro state", E.localReady() === true);
+  ok("the bypass key is gone from the source", !/smd_maik_local_bypass/.test(SRC));
 }
 
 // ── settings markup ──
@@ -242,7 +229,8 @@ function load(env = {}) {
   const h = E.settingsHTML();
   ok("settings: one .me-seg host", (h.match(/class="me-seg"/g) || []).length === 1);
   ok("settings: three engine options", (h.match(/data-me-opt="/g) || []).length === 3);
-  ok("settings: labels present", /KB only/.test(h) && /MaiK Cloud/.test(h) && /On-device model/.test(h));
+  ok("settings: labels present", /Knowledge Base only/.test(h) && /MaiK Cloud/.test(h) && /MaiK on this phone/.test(h));
+  ok("settings: Cloud is graded DM, the super specialist, and never named by vendor", /MaiK Cloud[\s\S]{0,400}>DM</.test(h) && !/Gemini/.test(h));
   ok("settings: cloud is checked by default", /data-me-opt="cloud" role="radio" aria-checked="true"/.test(h));
   ok("settings: local disabled without a gate", /data-me-opt="local"[^>]*aria-disabled="true"/.test(h));
   ok("settings: no model row without gate+runtime", !/data-me-model/.test(h));
@@ -250,9 +238,9 @@ function load(env = {}) {
   const ready = load({ gate: true, runtime: true, models: true, pack: false });
   const h2 = ready.E.settingsHTML();
   ok("settings: gated+runtime shows a download row", /data-me-model="download"/.test(h2));
-  ok("settings: download copy promises resume", /resumes if interrupted/i.test(h2));
-  ok("settings: no Wi-Fi-only restriction in the copy", /Wi-Fi or mobile data/.test(h2));
-  ok("settings: download keeps going off-screen is stated", /keeps going/i.test(h2));
+  ok("settings: download copy promises resume", /resume if interrupted/i.test(h2));
+  ok("settings: no Wi-Fi-only restriction in the copy", !/Wi-Fi only/i.test(h2));
+  ok("settings: download keeps going off-screen is stated", /keep going when you leave/i.test(h2));
 
   const installed = load({ gate: true, runtime: true, pack: true });
   const h3 = installed.E.settingsHTML();
@@ -317,10 +305,22 @@ function load(env = {}) {
   E.setPref("rag");
   ok("KB-only names the knowledge base", /knowledge base/i.test(E.discLabel()) && !/^Grounded/.test(E.discLabel()));
   E.selectOption("local:maik-mxcore");
+  // On-device now splits by the RAG link (owner, 2026-09-19). This assertion used to read
+  // "on-device says it is on-device with no sources" unconditionally, which was written when the
+  // on-device engine was ungrounded by design. With the book connected that sentence is false, so
+  // the check is now per-state: claim sources only when the book was actually read.
+  E.setRagLinked(true);
+  const dOn = E.discLabel();
+  ok("on-device (KB connected) does NOT claim cloud-style grounded", !/^Grounded/i.test(dOn));
+  ok("on-device (KB connected) is on-device and names the knowledge base", /On-device/i.test(dOn) && /knowledge base/i.test(dOn));
+  ok("on-device (KB connected) does NOT claim it read nothing", !/no sources/i.test(dOn));
+
+  E.setRagLinked(false);
   const d = E.discLabel();
   ok("on-device does NOT claim grounded", !/Grounded/i.test(d));
-  ok("on-device says it is on-device with no sources", /On-device/i.test(d) && /no sources/i.test(d));
-  ok("every variant still tells the clinician to verify", /verify independently/i.test(d));
+  ok("on-device (KB disconnected) says it is on-device with no sources", /On-device/i.test(d) && /no sources/i.test(d));
+  ok("every variant still tells the clinician to verify", /verify independently/i.test(d) && /verify independently/i.test(dOn));
+  E.setRagLinked(true);   // leave the default restored for any later block
 }
 
 // ── no upstream model name anywhere the clinician can see ──
@@ -351,7 +351,9 @@ function load(env = {}) {
   ok("picker: no upstream model name leaks into the row", !/MedGemma|Gemma/i.test(opts[2].sub) && !/MedGemma|Gemma/i.test(opts[2].label));
   ok("picker: installed pack says it works offline", /works offline/i.test(opts[2].sub));
   ok("picker: KB-only row claims citations", /cited/i.test(opts[1].sub));
-  ok("picker: cloud row names Gemini + grounding", /Gemini/.test(opts[0].sub) && /grounded/i.test(opts[0].sub));
+  ok("picker: cloud row is our super specialist, grounded, never a vendor name", /super specialist/i.test(opts[0].sub) && /grounded/i.test(opts[0].sub) && !/Gemini/.test(opts[0].sub));
+  ok("picker: cloud row carries the DM grade", opts[0].grade === "DM");
+  ok("picker: on-device rows carry a grade", ["MBBS", "MD", "PhD"].indexOf(opts[2].grade) >= 0 && ["MBBS", "MD", "PhD"].indexOf(opts[4].grade) >= 0);
   ok("picker: uninstalled pack invites a download with its size", /Tap to download 3\.11 GB/.test(opts[4].sub));
   ok("picker: uninstalled pack flagged needsDownload", opts[3].needsDownload === true && !opts[2].needsDownload);
 
@@ -404,6 +406,13 @@ function load(env = {}) {
                     state: { downloading: true, frac: 0.37, done: false, err: null } });
   dl.E.setPref("local");
   ok("chip shows download progress instead of pretending", /\(37%\)/.test(dl.E.chipLabel()));
+
+  // Owner, 2026-09-20: with the Pro gate shut, options() hides every pack, so the chip fell back to
+  // "MaiK Cloud (not ready)" for a LOCAL preference - read as Cloud being broken. Name the pack.
+  const gated = load({ gate: false, runtime: true, pack: true, active: "maik-horizon",
+                       state: { downloading: false, frac: 1, done: true, err: null } });
+  gated.E.setPref("local");
+  ok("chip names the selected pack for a non-Pro user, never MaiK Cloud", /MAiK Horizon/.test(gated.E.chipLabel()) && !/Cloud/.test(gated.E.chipLabel()));
 }
 
 // the "no answer" message must name the real reason, not claim KB-only mode
@@ -452,7 +461,7 @@ function load(env = {}) {
 // on-device rows must NOT appear without the gate or the native runtime
 {
   const nogate = load({ runtime: true, pack: true });
-  ok("picker: no on-device rows without the access gate", nogate.E.options().length === 2);
+  ok("picker: on-device rows appear with no Pro state at all", nogate.E.options().length > 2);
   const nort = load({ gate: true, pack: true });
   ok("picker: no on-device rows without the native plugin", nort.E.options().length === 2);
 }
@@ -479,45 +488,37 @@ function load(env = {}) {
 }
 
 
-// ── "Which one should I download?" guide ────────────────────────────────────────────────────────
-// A clinician is asked to spend 2.5-3.1 GB and choose between three invented names. The picker rows
-// only fit a size and a one-liner, so the reasoning lives in an expandable guide.
+// ── Orientation without a wall of text ──────────────────────────────────────────────────────────
+// Owner, 2026-09-21: "This whole page is shit. Make into one single well organised setting and dont
+// name Real Model names only our model names." The "Which one should I download?" panel is gone; a
+// first-timer is oriented by the grade ladder (MBBS / MD / DM / PhD), one note per shelf, and one
+// footer line that says where to start.
 {
   const { E } = load({ gate: true, runtime: true, pack: true });
   const h = E.settingsHTML();
 
-  ok("settings offers the guide", /data-me-guide\b/.test(h) && /Which one should I download\?/.test(h));
-  ok("the guide panel ships collapsed", /data-me-guide-panel hidden/.test(h));
-  ok("the toggle reports its state to a screen reader", /data-me-guide aria-expanded="false"/.test(h));
+  ok("the old guide panel is gone", !/data-me-guide\b/.test(h) && !/Which one should I download/.test(h));
+  ok("the page reads as one: who answers, on this phone, model library, advanced",
+     h.indexOf("Who answers") < h.indexOf("On this phone") && h.indexOf("On this phone") < h.indexOf("Model library") && h.indexOf("Model library") < h.indexOf("Advanced"));
+  ok("the grade ladder names all four grades", />MBBS</.test(h) && />MD</.test(h) && />DM</.test(h) && />PhD</.test(h));
+  ok("the ladder says what a grade means in a clinician's words", /PhD is a scholar/.test(h) && /MBBS, MD and DM are doctors/.test(h));
+  ok("every on-device row carries a grade pill", (h.match(/data-me-pack-row=/g) || []).length === (h.match(/data-me-pack="[^"]+"[^>]*>[\s\S]*?>(MBBS|MD|PhD)</g) || []).length);
+  ok("the three shelves are named the owner's way", /Trained by StewardMD/.test(h) && /Medical specialists/.test(h) && /General models/.test(h));
+  ok("the general shelf says PhD grade, not a doctor", /PhD grade: broad knowledge, not a doctor/.test(h));
+  ok("the footer tells a first-timer where to start", /Start with MAiK Lite/.test(h) && /our own model/.test(h));
 
-  // The whole point of the owner's instruction: tier names only.
-  ok("guide never prints an upstream model name", !/MedGemma|Gemma|Q4_K_M|Q5_K_M|quant/i.test(h));
-  ok("guide names all three tiers", /MAiK MxCore/.test(h) && /MAiK Neural/.test(h) && /MAiK Horizon/.test(h));
+  // The whole point of the owner's instruction: our names only.
+  ok("no upstream or vendor name anywhere on the page",
+     !/MedGemma|Gemma|Gemini|Bonsai|PrismML|ternary|MedPsy|MedMO|MBZUAI|Qwen|Q4_K_M|Q5_K_M|quant/i.test(h));
+  ok("no emoji on the page (the tick glyph is the app's own check mark)", !/[\u{1F300}-\u{1FAFF}]/u.test(h));
 
-  // No emoji anywhere: the house rule is a custom icon set, and the ratings are CSS pips.
-  const panel = (h.match(/<div data-me-guide-panel[\s\S]*$/) || [""])[0];
-  ok("guide panel was rendered", panel.length > 400);
-  ok("guide uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(panel));
+  // The Knowledge Base check is a positive switch, on by default, and says what off costs.
+  ok("KB check reads as a positive switch", /Check answers against the Knowledge Base/.test(h) && !/Disconnected/.test(h));
+  ok("KB switch is on by default and says why", /data-me-rag="1" role="switch" aria-checked="true"/.test(h) && /safer default/.test(h));
 
-  // It must say what on-device mode CANNOT do. Easy to omit, and it is the part that matters.
-  ok("guide states there are no sources or citations", /no sources or citations/i.test(h));
-  ok("guide states it can be wrong", /can be wrong/i.test(h));
-  // esc() renders the apostrophe as &#39;, so match around it rather than through it.
-  ok("guide says answers do not come from the knowledge base", /not from StewardMD.{0,6}s knowledge base/i.test(h));
-  ok("guide states no tokens are used", /No internet, no AI tokens/i.test(h));
-  ok("guide explains resumable download", /resumes if it is interrupted/i.test(h));
-  ok("guide explains you can keep several and switch", /switch between them/i.test(h));
-
-  // Ratings are comparative, not absolute - claiming otherwise would overstate a 4B.
-  ok("guide scopes its ratings comparatively, not absolutely", /compare these options with each other, nothing else/i.test(h));
-  ok("guide rates all three axes", /Speed/.test(h) && /Medical depth/.test(h) && /General knowledge/.test(h));
-  ok("guide tells a first-timer where to start and why", /Start with MAiK Lite/.test(h) && /Apex on a flagship phone/.test(h));
-  ok("guide names our own model as the starting point", /StewardMD.s own model/i.test(h));
-  ok("guide warns Horizon is not medically tuned", /Not medically tuned/i.test(h));
-  ok("pips are labelled for assistive tech", /role="img" aria-label="Speed: \d of 3"/.test(h));
+  // The tester tool is kept, under Advanced, collapsed.
+  ok("cloud block test lives under a collapsed Advanced section", /data-mk-grp="advanced"(?! open)/.test(h) && /data-me-cloudblock/.test(h));
 }
-
-
 
 // ── Hardware warning, in every surface a clinician can commit from ─────────────────────────────
 // These are 2.5-3.2 GB models held in memory while answering. On a phone without the RAM and the AI
@@ -534,9 +535,6 @@ function load(env = {}) {
   ok("warning names the supported Samsungs", /Fold 7, 6, 5 or S24, S25, S26 Ultra/.test(h));
   ok("warning states the risk plainly", /at your own risk/.test(h) && /hang or crash the phone/.test(h));
   ok("warning is styled as a caution, not a footnote", /role="note"/.test(h));
-  ok("guide sheet repeats it under a plain question", /Will it run on my phone\?/.test(h));
-  ok("warning appears in both the section and the guide",
-     (h.match(/Built for flagship, AI-enabled phones/g) || []).length >= 2);
   ok("no em-dash in the warning (app-facing text)", !/Built for flagship[^<]*\u2014/.test(h));
 
   // Selection surface: the picker row itself must carry the hardware flag.
@@ -552,61 +550,26 @@ function load(env = {}) {
      !/MedPsy|MedGemma|Gemma|Qwen/i.test(apex.label + " " + apex.sub));
 }
 
-// ── Pro opens the gate (2026-08-27) — without removing the access-code path ──
+// ── on-device models are free for every user (owner decision 2026-09-20) ──
 {
-  const { E } = load({ pro: true, runtime: true, pack: true });
-  ok("Pro alone opens the gate (no access code, no bypass)", E.gateActive() === true);
-  ok("Pro + runtime + pack = the local engine is actually usable", E.localReady() === true);
+  const { E } = load({ pro: false, proKnown: false, runtime: true, pack: true });
+  ok("no Pro and verdict unknown: the gate is open", E.gateActive() === true);
   E.setPref("local");
-  ok("Pro: 'local' survives effective() instead of degrading to KB-only", E.effective() === "local");
-  ok("Pro: the picker offers the on-device packs", E.options().some((o) => o.pack === "maik-mxcore"));
+  ok("'local' survives effective() for a non-Pro user", E.effective() === "local");
+  ok("the picker offers the on-device packs to a non-Pro user", E.options().some((o) => o.pack === "maik-mxcore"));
+  const h = E.settingsHTML();
+  ok("the settings row never sells Pro for on-device", !/Included with Pro|Subscribe to unlock|Checking your subscription/.test(h));
+  ok("only MaiK Cloud is badged Pro; the on-device row is not", (h.match(/>Pro</g) || []).length === 1 && /On-device model/.test(h));
+  ok("the on-device row is badged Free", (h.match(/>Free</g) || []).length >= 2);
+  ok("the KB-only notice no longer mentions Pro for an installed model", !/included with Pro|not unlocked on this account/i.test(E.kbOnlyNotice().text));
 }
 {
   const { E } = load({ pro: false, xaccess: true, runtime: true, pack: true });
-  ok("an experimental access code no longer unlocks it - Pro is the only gate", E.gateActive() === false);
-  ok("the SMD_XACCESS coupling is gone from the source", !/SMD_XACCESS\.isActiveCached/.test(SRC));
+  ok("the SMD_XACCESS coupling stays gone from the source", !/SMD_XACCESS\.isActiveCached/.test(SRC));
+  ok("an access code has nothing to unlock: the gate is simply open", E.gateActive() === true);
 }
-{
-  const { E } = load({ pro: false, runtime: true, pack: true });
-  ok("no Pro = gated", E.gateActive() === false);
-  E.setPref("local");
-  ok("gated: 'local' degrades to KB-only rather than dead-ending", E.effective() === "rag");
-  ok("gated: the picker offers no on-device pack", !E.options().some((o) => o.pack));
-  const n = E.kbOnlyNotice();
-  ok("gated + installed: the notice names Pro, not an access code",
-     /included with Pro/i.test(n.text) && !/access code/i.test(n.text));
-  ok("gated: the settings row sells Pro, not a private beta code",
-     /Included with Pro/.test(E.settingsHTML()) && !/access code/i.test(E.settingsHTML()));
-  ok("the on-device row is badged Pro, like MaiK Cloud", />Pro</.test(E.settingsHTML()));
-  ok("no em-dash in the new app-facing copy", !/Included with Pro[^<]*\u2014/.test(E.settingsHTML()));
-}
-
-/* == The regression that made on-device look broken after the Pro gate shipped ================
- * gateActive() is read SYNCHRONOUSLY while painting, but /billing/status answers after that paint.
- * Seeding _pro from a per-uid cache that had never been written meant the FIRST launch of a build
- * started at false, so the row rendered locked and, with nothing listening for the flip, stayed
- * locked. Two halves: do not claim "not Pro" before you know, and re-render when you find out. */
-{
-  const { E } = load({ pro: false, proKnown: false, runtime: true, pack: true });
-  const h = E.settingsHTML();
-  ok("unknown Pro says CHECKING, not 'subscribe'", /Checking your subscription/.test(h));
-  ok("unknown Pro never shows the upsell copy", !/Subscribe to unlock/.test(h));
-}
-{
-  const { E } = load({ pro: false, proKnown: true, runtime: true, pack: true });
-  const h = E.settingsHTML();
-  ok("a KNOWN non-Pro account does get the upsell", /Subscribe to unlock/.test(h));
-  ok("...and not the checking state", !/Checking your subscription/.test(h));
-}
-{
-  // An older account.js with no proKnown() must not break the row.
-  const { win, E } = load({ pro: false, runtime: true, pack: true });
-  delete win.SMD_PRO.proKnown;
-  ok("missing proKnown() degrades to the upsell, never to a blank row",
-     /Subscribe to unlock/.test(E.settingsHTML()));
-}
-ok("the module re-renders when Pro flips (watchPro is wired)", /smd:pro|onProChange/.test(SRC));
-ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slice(SRC.indexOf("function watchPro"))));
+ok("no Pro watcher is needed any more (watchPro removed)", !/function watchPro/.test(SRC));
+ok("warmIfLocal still exists for the chosen engine", /function warmIfLocal/.test(SRC));
 
 /* == Dark mode: only use CSS vars the app actually defines ====================================
  * The picker cards were background:var(--card,#fff). --card is defined NOWHERE in StewardMD, so it
@@ -738,5 +701,34 @@ ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slic
   ok("a non-dose question is untouched by the dose router", lq.text === "LOCAL answer" && loc.calls.some((c) => c[0] === "local"));
 }
 
+
+// ── code lookups (owner, 2026-09-24): ICD / scheme codes come from the app's own data, before any model ──
+{
+  const ICD = { localSearch: async (q) => /benzodiazepine/i.test(q)
+    ? [{ id: "icd10:T42.4", system: "ICD-10", code: "T42.4", title: "Poisoning by, adverse effect of and underdosing of benzodiazepines", chapter: "T42", is_leaf: 1 }] : [] };
+  const offlineFetch = () => Promise.reject(new Error("offline"));
+  const c = load({ gate: true, runtime: true, pack: true });
+  c.win.SMD_ICD = ICD; c.win.fetch = offlineFetch;
+  const r = await c.win.SMD_AI.explainGrounded({ question: "ICD code of BZD poisoning" }, {});
+  ok("cloud engine: an ICD ask is answered from the bundled ICD data (BZD expanded), no model call",
+     r && r.engine === "codedb" && /T42\.4/.test(r.text) && /benzodiazepines/.test(r.text) && !c.calls.some((x) => x[0] === "explainGrounded"));
+  const l = load({ gate: true, runtime: true, pack: true });
+  l.win.SMD_ICD = ICD; l.win.fetch = offlineFetch; l.ls.setItem("stewardmd.maikEngine", "local");
+  const lr = await l.win.SMD_AI.explainGrounded({ question: "what is the icd 10 code for benzodiazepine overdose?" }, {});
+  ok("local engine: same answer, the on-device model is never asked for a code", lr && lr.engine === "codedb" && /T42\.4/.test(lr.text) && !l.calls.some((x) => x[0] === "local"));
+  const miss = load({ gate: true, runtime: true, pack: true });
+  miss.win.SMD_ICD = ICD; miss.win.fetch = offlineFetch;
+  const mr = await miss.win.SMD_AI.explainGrounded({ question: "ICD code of zzqxx syndrome" }, {});
+  ok("no match in the databases: falls through to the normal answer", mr.text === "CLOUD grounded");
+  const plain = load({ gate: true, runtime: true, pack: true });
+  plain.win.SMD_ICD = ICD; plain.win.fetch = offlineFetch;
+  const pr = await plain.win.SMD_AI.explainGrounded({ question: "treatment of benzodiazepine poisoning" }, {});
+  ok("a treatment question is not a code lookup", pr.text === "CLOUD grounded");
+  const sch = load({ gate: true, runtime: true, pack: true });
+  sch.win.SMD_ICD = ICD;
+  sch.win.fetch = async (u) => ({ ok: true, json: async () => (/schemes\/search/.test(u) ? { results: [{ treatment_code: "M1.9", treatment_name: "Poisonings with unstable vitals", package_amount: 35000, scheme_name: "Dr NTR Vaidya Seva", state: "AP" }] } : { results: [] }) });
+  const sr = await sch.win.SMD_AI.explainGrounded({ question: "aarogyasri package code for poisoning" }, {});
+  ok("a scheme ask lists the package code, name and rate from the scheme database", sr && sr.engine === "codedb" && /M1\.9/.test(sr.text) && /35000/.test(sr.text));
+}
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

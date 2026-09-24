@@ -104,6 +104,25 @@ const { L } = load();
   ok("prompt stays tiny (this IS the latency)", p.length < 250);
 
   // conversation history IS kept - it is the clinician's own turns, not a StewardMD resource
+  // Owner transcript 2026-09-21: "Drugs?" after a CFS answer came back about carvedilol from the turn
+  // before. A bare follow-up now sees ONLY the last exchange; a named subject still sees both.
+  {
+    const two = [{ q: "carvedilol vs propranolol in varices", a: "Carvedilol is preferred over propranolol." },
+                 { q: "Treatment of chronic fatigue syndrome", a: "No specific drug is proven; individualise." }];
+    const bare = L.buildPrompt({ question: "Drugs?", history: two });
+    ok("bare follow-up: only the last exchange is shown", /chronic fatigue/i.test(bare) && !/carvedilol/i.test(bare));
+    const named = L.buildPrompt({ question: "carvedilol dose for varices?", history: two });
+    ok("a named subject still gets the fuller window", /carvedilol/i.test(named));
+  }
+  {
+    const w = load({ tokens: ["ok"] });
+    await w.L.answer({ question: "Treatment of STEMI" }, { pack: "maik-lite", depth: "detailed" });
+    ok("no token cap: the answer may use the context the prompt leaves free (>= 1024)", w.calls.generate[0].nPredict >= 1024);
+    ok("... but never more than the context window", w.calls.generate[0].nPredict < 4096);
+    const c = load({ tokens: ["ok"] });
+    await c.L.answer({ question: "Treatment of STEMI" }, { pack: "maik-lite" });
+    ok("a concise ask gets the same open budget (owner: no limits for offline models)", c.calls.generate[0].nPredict >= 1024);
+  }
   const hist = L.buildPrompt({ question: "and the dose?", history: [
     { role: "user", text: "meropenem in meningitis" }, { role: "assistant", text: "Meropenem is used for..." }] });
   ok("history kept so bare follow-ups work", /meropenem in meningitis/.test(hist) && /and the dose\?/.test(hist));
@@ -120,7 +139,7 @@ const { L } = load();
      /no section labels/.test(L.SYSTEM) && /ONE plain sentence/.test(L.SYSTEM));
   ok("system prompt makes no promise about retrieved knowledge",
      !/RETRIEVED|knowledge base|grounding/i.test(L.SYSTEM));
-  ok("system prompt stays terse", L.SYSTEM.length < 900);
+  ok("system prompt stays compact (owner 2026-09-21: it now asks for full sections when detail is requested)", L.SYSTEM.length < 1400);
   // Phrased positively: a 4B follows instructions far better than prohibitions. The old negative
   // wording ("not a made-up figure") produced "20 mg/kg" for adult IV magnesium.
   ok("dose rule tells it what TO do", /give the standard flat adult dose/i.test(L.SYSTEM));
@@ -145,7 +164,7 @@ const { L } = load();
     ok(`NOT a greeting: ${JSON.stringify(q)}`, LG.isGreeting(q) === false);
 
   // The fix must not be paid for on every clinical answer: SYSTEM is prefill on the critical path.
-  ok("SYSTEM is untouched by the greeting fix", LG.SYSTEM.length < 900);
+  ok("SYSTEM is untouched by the greeting fix", LG.SYSTEM.length < 1400);
   ok("greetings get their own, shorter prompt", LG.SYSTEM_GREET.length < LG.SYSTEM.length);
   ok("greeting prompt asks for one short sentence", /one short/i.test(LG.SYSTEM_GREET));
   ok("greeting prompt keeps it non-clinical", /nothing clinical/i.test(LG.SYSTEM_GREET));
@@ -182,16 +201,18 @@ const { L } = load();
   ok("answer is tagged engine=local", r.engine === "local");
   ok("answer reports the MAiK tier label", r.model === "MAiK Lite");
   ok("answer reports timing", r.ms === 1234);
-  ok("onDelta called once per token", seen.length === 3);
+  // Coalesced painting (perf plan #1, 2026-09-21): the first token paints at once, later tokens are
+  // batched to ~15 repaints a second, and the final text is always painted when generation ends.
+  ok("onDelta paints the first token at once and the full text at the end", seen.length >= 2 && seen.length <= 3);
   // Right-trimmed, because every delta goes through stripReasoning() on the way to the typewriter -
   // the trade for never rendering a leaked reasoning preamble on screen. The trailing space arrives
   // with the next word, so the render is unaffected.
   ok("onDelta receives ACCUMULATED text, not deltas",
-     seen[0] === "Hel" && seen[1] === "Hello" && seen[2] === "Hello world");
+     seen[0] === "Hel" && seen[seen.length - 1] === "Hello world");
   ok("each onDelta value extends the previous", seen.every((v, i) => i === 0 || v.startsWith(seen[i - 1])));
   ok("listener removed after the answer (no leak across questions)", calls.removed === 1);
   ok("greedy by default (reproducible answers)", calls.generate[0].temperature === 0);
-  ok("nPredict capped from the pack", calls.generate[0].nPredict === 512);
+  ok("no pack cap: the answer gets the context the prompt leaves free (owner 2026-09-21)", calls.generate[0].nPredict >= 512 && calls.generate[0].nPredict < 4096);
   ok("system prompt sent", /clinical decision support/i.test(calls.generate[0].system));
   // Prefill is ~14 tok/s on-device and linear in prompt tokens, so every character here is latency:
   // roughly 1s per 14 tokens (~56 chars). The budget grew 600 -> 750 -> 900: the last step bought the
@@ -201,6 +222,11 @@ const { L } = load();
   // the model was printing. Do not let it creep further without measuring.
   ok("system prompt kept terse (it is prefill on the critical path)", calls.generate[0].system.length < 900);
   ok("model loaded with the clamped context", calls.load[0].nCtx === 4096);
+  // Perf plan 2026-09-21: the load asks for a q8_0 KV cache with flash attention (per-pack opt-out) and
+  // passes the draft path only when the draft is on disk (none in this harness).
+  ok("load asks for q8 KV + flash attention by default", calls.load[0].kvQ8 === true && calls.load[0].flashAttn === true);
+  ok("no draft on disk: draftPath is empty", calls.load[0].draftPath === "");
+  ok("history precedes the evidence in the prompt (KV prefix reuse)", /parts\.history \+ "Reference material from the StewardMD Knowledge Base:/.test(SRC));
 }
 
 // ── the model is loaded once, not per question ──
@@ -636,12 +662,12 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
 // TinyFish's raw sources instead of Gemini. Uses the REAL kb/ai/maik-lite-rag.js evidenceGate (not
 // loadWithRag's book-specific "amoxicillin only" stub), because a web answer's evidence is arbitrary
 // search-snippet text, not the book, and the gate must genuinely catch an unsupported drug in it. ──
-function loadForWeb({ tokens }) {
+function loadForWeb({ tokens, replies }) {   // replies: one string per generate() call (retry tests)
   const calls = { generate: [] };
   const Llama = {
     available: async () => ({ available: true, loaded: true }),
     load: async () => ({ loaded: true }),
-    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    generate: async (o) => { calls.generate.push(o); return { text: replies ? replies[Math.min(calls.generate.length - 1, replies.length - 1)] : tokens.join(""), ms: 500 }; },
     cancel: async () => ({}), release: async () => ({ released: true }),
     addListener: () => ({ remove: () => {} })
   };
@@ -669,6 +695,14 @@ function loadForWeb({ tokens }) {
   const bad = loadForWeb({ tokens: ["Use azithromycin 250 mg once daily instead."] });
   const rb = await bad.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
   ok("a drug not in the web results is caught by the SAME evidence gate the book RAG uses", /could not be verified against the web results/.test(rb.text) && /CDC pneumonia treatment guidance/.test(rb.text));
+  // Owner, 2026-09-21 ("even we search dont show whole topic in detail"): a failed gate retries once,
+  // sources-only at temperature 0; if that fails too, EVERY result is shown in full, not one snippet.
+  ok("a failed gate retries once in STRICT mode at temperature 0", bad.calls.generate.length === 2 && /STRICT MODE: use ONLY facts/.test(bad.calls.generate[1].system) && bad.calls.generate[1].temperature === 0);
+  ok("two failures show every result in full (all titles, snippets, urls)", sources.every((x) => rb.text.indexOf(x.title) >= 0 && rb.text.indexOf(x.snippet) >= 0 && rb.text.indexOf(x.url) >= 0));
+  ok("...and never the old single-snippet text", !/Showing the top result instead/.test(rb.text));
+  const fixed = loadForWeb({ replies: ["Use azithromycin 250 mg once daily instead.", "Amoxicillin 500 mg three times daily [1]; doxycycline for penicillin allergy [2]."] });
+  const rf = await fixed.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
+  ok("a passing STRICT retry is returned as the answer", fixed.calls.generate.length === 2 && /Amoxicillin\*{0,2} \*{0,2}500 mg/.test(rf.text) && !/could not be verified/.test(rf.text));   // emphasize() bolds drug and dose
 
   ok("no question is refused before any generation", (await w.L.webAnswer("", sources)).error === "no-question");
   ok("no sources is an honest no-results, never a hallucinated web answer", (await w.L.webAnswer("Treatment of CAP", [])).error === "no-results");

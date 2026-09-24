@@ -105,6 +105,25 @@
     { cat:"Electrolytes", generic:"Sodium bicarbonate", cls:"Alkalinising agent", brands:["nahco3","sodabicarb"], dose:"50–100 mEq IV for severe metabolic acidosis / hyperkalaemia.", notes:"" },
     { cat:"Electrolytes", generic:"Mannitol", cls:"Osmotic diuretic", brands:["mannitol"], dose:"0.25–1 g/kg IV over 20 min for raised ICP.", notes:"Monitor osmolar gap, volume." },
 
+    /* ---- Antimicrobial (reserve agents also in the gold monograph library) ---- */
+    { cat:"Antimicrobial", generic:"Cefiderocol", cls:"Siderophore cephalosporin", brands:["fetroja","cefiderocol"], dose:"2 g IV every 8 h infused over 3 h.", notes:"Reserve siderophore cephalosporin for carbapenem-resistant Gram-negatives (CRE, CRAB, DTR-P. aeruginosa). Dose adjust in renal impairment." },
+
+    /* ---- Vaccines & Immunobiologicals ---- */
+    { cat:"Vaccine", generic:"Rabies Vaccine", cls:"Inactivated cell-culture viral vaccine", brands:["rabipur","verorab","abhayrab","indirab","rabivax","berab","human rabies vaccine","human + rabies vaccine"], dose:"PEP (Essen): 1 vial IM on Days 0, 3, 7, 14, 28 (deltoid; never gluteal). Updated Thai Red Cross: 2-site ID (0.1 mL left & right deltoid) on Days 0, 3, 7. PrEP: Days 0, 7, 21/28.", notes:"Wound wash >=15 min with soap & water. Category III bites require RIG (HRIG 20 IU/kg or ERIG 40 IU/kg) infiltrated into wound on Day 0. Rabies is 100% fatal: NO contraindications to PEP, pregnancy included." },
+    { cat:"Vaccine", generic:"Tetanus Toxoid", cls:"Inactivated bacterial toxoid (TT / Td / Tdap)", brands:["tetvac","bett","boostrix","adacel","dual antigen","tt","td","tdap"], dose:"0.5 mL IM (deltoid). Primary: 3 doses (0, 1-2, 6-12 mo). Routine adult booster every 10 yr. Clean minor wound: booster if >=10 yr. Dirty/tetanus-prone: booster if >=5 yr + TIG 250-500 IU if unimmunized.", notes:"Maternal immunization in pregnancy (2 doses Td/TT or 1 dose Tdap at 27-36 weeks) prevents neonatal tetanus." },
+    { cat:"Vaccine", generic:"Hepatitis B Vaccine", cls:"Recombinant viral surface antigen (HBsAg)", brands:["engerix-b","genevac-b","shanvac-b","elovac-b","hep b"], dose:"Adults (>=20 yr): 1 mL (20 mcg) IM at 0, 1, 6 months (deltoid). Infants/children: 0.5 mL (10 mcg) IM at birth, 6, 10, 14 weeks. Dialysis/immunocompromised: 40 mcg at 0, 1, 2, 6 months.", notes:"Universal infant birth dose within 24 hours. Anti-HBs titer >=10 mIU/mL indicates seroprotection." },
+    { cat:"Vaccine", generic:"Hepatitis A Vaccine", cls:"Inactivated viral vaccine", brands:["havrix","avaxim","biovac-a","hep a"], dose:"Adults (>=19 yr): 1.0 mL (1440 EL.U) IM at 0 and 6–12 months. Children (1-18 yr): 0.5 mL (720 EL.U) IM at 0 and 6–12 months.", notes:"Pre-exposure prophylaxis for travel, chronic liver disease, MSM, clotting factor disorders. Post-exposure within 14 days of contact." },
+    { cat:"Vaccine", generic:"Influenza Vaccine", cls:"Inactivated quadrivalent influenza vaccine", brands:["vaxigrip","fluarix","influvac","fluquadri","flu"], dose:"0.5 mL IM once annually (deltoid). Children 6 mo–8 yr receiving first-ever flu vaccine require 2 doses >=4 weeks apart.", notes:"Annual vaccination recommended for pregnant women, elderly >=65 yr, chronic pulmonary/cardiac disease, healthcare workers. Safe in pregnancy." },
+    { cat:"Vaccine", generic:"Pneumococcal Conjugate Vaccine", cls:"Bacterial capsular polysaccharide conjugate (PCV13 / PCV15 / PCV20)", brands:["prevenar","prevenar-13","vaxneuvance","synflorix","pcv"], dose:"Infants: 0.5 mL IM at 6, 10, 14 weeks + booster at 9-12 months. Adults >=65 yr or high-risk (asplenia, CKD, CSF leak, immunocompromise): single dose PCV20 IM (or PCV15 followed by PPSV23 >=1 yr later).", notes:"Prevents invasive pneumococcal disease (meningitis, bacteremia, bacteremic pneumonia). Deltoid injection." },
+    { cat:"Vaccine", generic:"Pneumococcal Polysaccharide Vaccine", cls:"Bacterial capsular polysaccharide vaccine (PPSV23)", brands:["pneumovax","pneumovax-23","ppsv23"], dose:"0.5 mL IM or SC single dose in adults >=65 yr, or adults 19-64 with chronic medical conditions (DM, COPD, cirrhosis, heart failure).", notes:"If PCV was given first, give PPSV23 >=1 year later (>=8 weeks in immunocompromised/asplenia). Revaccination after 5 years for asplenia/immunocompromise." },
+    { cat:"Vaccine", generic:"Typhoid Vaccine", cls:"Conjugate / Vi polysaccharide vaccine (TCV / Vi-PS)", brands:["typbar","typbar-tcv","typhivax","typhoid"], dose:"Typhoid Conjugate (TCV): single 0.5 mL IM dose from 6 months of age. Vi Polysaccharide: single 0.5 mL IM/SC dose (>=2 yr), booster every 2-3 years.", notes:"TCV provides superior immunogenicity and long-lasting T-cell dependent memory in young infants and adults." },
+    { cat:"Vaccine", generic:"MMR Vaccine", cls:"Live attenuated viral vaccine (Measles, Mumps, Rubella)", brands:["tresivac","priorix","m-vac","mmr"], dose:"0.5 mL SC. Children: 2 doses (first at 9-12 months, second at 15-18 months). Non-immune adults: 1 or 2 doses SC >=4 weeks apart.", notes:"Live vaccine: CONTRAINDICATED in pregnancy and severe immunocompromise. Avoid pregnancy for 1 month after vaccination." },
+    { cat:"Vaccine", generic:"Varicella Vaccine", cls:"Live attenuated viral vaccine", brands:["varilrix","variped","varicella"], dose:"0.5 mL SC as a 2-dose series separated by 4-8 weeks (first dose at 12-15 months, second at 4-6 years; or unimmunized adolescents/adults).", notes:"Live vaccine: CONTRAINDICATED in pregnancy and severe cell-mediated immunocompromise. Avoid salicylates for 6 weeks (Reye syndrome risk)." },
+    { cat:"Vaccine", generic:"Human Papillomavirus Vaccine", cls:"Recombinant viral capsid L1 VLP vaccine (Gardasil / Cervavac)", brands:["gardasil","gardasil-9","cervavac","hpv"], dose:"Age 9-14 yr: 2 doses (0, 6 months) 0.5 mL IM. Age >=15 yr or immunocompromised: 3 doses (0, 1-2, 6 months) 0.5 mL IM.", notes:"Prevents cervical, anogenital, and oropharyngeal cancers. Observe seated for 15 min post-injection (syncope precaution). Defer in pregnancy." },
+    { cat:"Vaccine", generic:"Herpes Zoster Vaccine", cls:"Recombinant adjuvanted subunit vaccine (Shingrix)", brands:["shingrix","zoster"], dose:"0.5 mL IM as a 2-dose series (Month 0 and Month 2 to 6). Reconstitute antigen with AS01B adjuvant liquid.", notes:"Indicated for adults >=50 yr and immunocompromised >=19 yr to prevent shingles and postherpetic neuralgia. Non-live; safe in immunocompromised." },
+    { cat:"Vaccine", generic:"Rotavirus Vaccine", cls:"Live attenuated oral viral vaccine", brands:["rotavac","rotasiil","rotateq","rotarix"], dose:"STRICTLY ORAL: 3 doses at 6, 10, 14 weeks (Rotavac/Rotasiil/Rotateq) or 2 doses at 6, 10 weeks (Rotarix). Finish series by 8 months (32 weeks).", notes:"NEVER INJECT. Contraindicated in history of intussusception, uncorrected GI malformation, or SCID. Warn parents of intussusception signs." },
+    { cat:"Vaccine", generic:"BCG Vaccine", cls:"Live attenuated bacterial vaccine (Mycobacterium bovis)", brands:["bcg","tubervac"], dose:"STRICTLY INTRADERMAL into left deltoid: neonates <1 mo: 0.05 mL; infants >=1 mo: 0.1 mL as single dose at birth or first contact.", notes:"Prevents TB meningitis and miliary TB. Pale wheal must appear. Never give SC (causes cold abscesses/lymphadenitis). Normal scar evolves by 8-12 weeks." },
+
     /* ---- Oncology (targeted / immunotherapy reference) ---- */
     { cat:"Oncology", generic:"Trastuzumab deruxtecan", cls:"HER2-directed antibody-drug conjugate", brands:["enhertu","her2 adc"], dose:"5.4 mg/kg IV q3w (breast/NSCLC); 6.4 mg/kg IV q3w (gastric).", notes:"Boxed: ILD/pneumonitis (fatal risk, hold early), LVEF decline, embryo-fetal toxicity. Not interchangeable with trastuzumab." },
     { cat:"Oncology", generic:"Zanubrutinib", cls:"BTK inhibitor (2nd generation, covalent)", brands:["brukinsa","btk"], dose:"160 mg PO BD or 320 mg PO once daily.", notes:"B-cell malignancies (MCL, CLL, Waldenstrom, MZL). Bleeding, AF, cytopenias; hold peri-operatively." },
@@ -148,7 +167,30 @@
     });
     return out;
   }
-  function findByName(name){ name=(name||"").toLowerCase(); for(var i=0;i<DRUGS.length;i++) if(DRUGS[i].generic.toLowerCase()===name) return DRUGS[i]; return null; }
+  function findByName(name){
+    if(!name) return null;
+    var n=String(name).toLowerCase().trim();
+    if (/rabies\s*vaccine|human\s*\+\s*rabies|rabies.*human/i.test(n)) n = "rabies vaccine";
+    else if (/tetanus\s*toxoid|tdap|\btt\b|adsorbed\s*tetanus/i.test(n)) n = "tetanus toxoid";
+    else if (/rotavirus\s*vaccine/i.test(n)) n = "rotavirus vaccine";
+    else if (/typhoid\s*vaccine|salmonella\s*typhi|purified\s*vi.*typhoid/i.test(n)) n = "typhoid vaccine";
+    else if (/hepatitis\s*b\s*vaccine|aluminium.*hepatitis\s*b/i.test(n)) n = "hepatitis b vaccine";
+    else if (/hepatitis\s*a\s*vaccine/i.test(n)) n = "hepatitis a vaccine";
+    else if (/influenza\s*vaccine/i.test(n)) n = "influenza vaccine";
+    else if (/pneumococc\w*\s*(?:polysaccharide\s*)?conjugate\s*vaccine/i.test(n)) n = "pneumococcal conjugate vaccine";
+    else if (/pneumococc\w*\s*polysaccharide\s*vaccine/i.test(n)) n = "pneumococcal polysaccharide vaccine";
+    else if (/measles.*mumps.*rubella|mmr/i.test(n)) n = "mmr vaccine";
+    else if (/varicella\s*vaccine/i.test(n)) n = "varicella vaccine";
+    else if (/human\s*papilloma\w*|hpv/i.test(n)) n = "human papillomavirus vaccine";
+    else if (/herpes\s*zoster|shingles/i.test(n)) n = "herpes zoster vaccine";
+    else if (/\bbcg\b/i.test(n)) n = "bcg vaccine";
+    for(var i=0;i<DRUGS.length;i++) if(DRUGS[i].generic.toLowerCase()===n) return DRUGS[i];
+    var baseName=n.replace(/\s*\([^)]*\)/g," ").replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi," ").trim();
+    if(baseName&&baseName!==n){
+      for(var j=0;j<DRUGS.length;j++) if(DRUGS[j].generic.toLowerCase()===baseName) return DRUGS[j];
+    }
+    return null;
+  }
 
   /* ---- structured on-device index search (powers the Drug Index sheet) ----
      Returns ranked rows shaped for the medication-list UI:
@@ -190,12 +232,8 @@
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function detailHTML(d){
-    var realBrands=(d.brands||[]).filter(function(b){return ["ppi","h2","h2 blocker","nsaid","doac","lmwh","ufh","statin","ccb","acei","arb","bb","beta blocker","saba","ics","steroid","antiemetic","laxative","insulin","asa","ntg","gtn","txa","mgso4","kcl","nahco3","pcm","cpm"].indexOf(b.toLowerCase())<0;});
-    return '<div style="font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--teal);margin-bottom:8px">'+esc(d.cls)+'</div>'+
-      '<div style="background:var(--teal-soft);border:1px solid var(--teal);border-radius:10px;padding:12px 14px;margin-bottom:10px"><div style="font:700 11px var(--sans);color:var(--slate-soft);text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px">Adult dose</div><div style="font:600 14px var(--sans);color:var(--ink);line-height:1.5">'+esc(d.dose)+'</div></div>'+
-      (realBrands.length?'<div style="font:500 12.5px var(--sans);color:var(--slate);margin-bottom:8px"><b style="color:var(--ink)">Common brands:</b> '+esc(realBrands.join(", "))+'</div>':"")+
-      (d.notes?'<div style="font:500 12.5px var(--sans);color:var(--slate);line-height:1.55;background:var(--paper);border:1px dashed var(--line);border-radius:9px;padding:10px 12px">'+dIco("warn")+' '+esc(d.notes)+'</div>':"")+
-      '<div style="font:500 11px var(--sans);color:var(--slate-soft);margin-top:12px;line-height:1.5">Adult dosing only — verify against the individual patient, renal/hepatic function and local protocol.</div>';
+    // Legacy formulary card retired — all drugs display the Gold-Standard clinical monograph
+    return "";
   }
 
   /* The Drugs Database is the single browse/dosing surface. Keep the old API

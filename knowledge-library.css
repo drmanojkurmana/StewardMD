@@ -30,8 +30,7 @@ body.dark .kblib-discover { --kl-accent:#bebaff; }
 .kblib-discover .kblib-kicker { font-size:10px; letter-spacing:.12em; color:var(--kl-muted); font-weight:650; }
 .kblib-discover .kblib-search-label { display:block; margin-bottom:7px; font-size:12px; color:var(--kl-muted); }
 .kblib-discover .kblib-search { min-height:48px; border:1px solid var(--kl-line); border-radius:13px; background:var(--kl-paper); color:var(--ink); font-size:16px; margin:0; padding:12px 14px; }
-.kblib-discover .kblib-feature { position:relative; overflow:hidden; isolation:isolate; margin:20px 0; padding:22px; border-radius:22px; background:color-mix(in srgb,var(--kl-accent) 10%,var(--kl-paper)); }
-.kblib-discover .kblib-feature::after { content:''; position:absolute; z-index:-1; width:230px; height:230px; right:-50px; top:-90px; border-radius:50%; background:radial-gradient(circle,color-mix(in srgb,var(--kl-accent) 24%,transparent),transparent 70%); }
+.kblib-discover .kblib-feature { position:relative; overflow:hidden; margin:20px 0; padding:22px; border:1px solid color-mix(in srgb,var(--kl-accent) 18%,var(--kl-line)); border-radius:18px; background:color-mix(in srgb,var(--kl-accent) 8%,var(--kl-paper)); }
 .kblib-discover .kblib-feature h2 { font-size:26px; letter-spacing:-.04em; line-height:1.13; margin:10px 0; }
 .kblib-discover .kblib-feature p { font-size:12px; color:var(--kl-muted); margin:0; }
 .kblib-discover .kblib-section-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin:22px 0 12px; }
@@ -100,3 +99,13 @@ body.dark #sbrefBody.kblib-tool-page { --kl-accent:#bebaff; }
 #sbrefBody.kblib-tool-page :is(button,input,select,a):focus-visible { outline:3px solid var(--kl-accent); outline-offset:3px; }
 @media(max-width:600px) { .kblib-tool-intro { padding-top:22px; } #sbrefBody.kblib-tool-page .sbref-sec { padding:15px; border-radius:16px; } #sbrefBody.kblib-tool-guidelines .sbref-sec { padding:7px 0 0; } }
 @media(max-width:360px) { #sbrefBody.kblib-tool-page { padding-inline:14px; } #sbrefBody.kblib-tool-page .sbref-tab { font-size:10.5px; } }
+
+/* Option A: shared Knowledge Base banner identity. */
+#dxOverlay .dx-reader-hero, #sbrefOverlay :is(.kblib-intro,.kblib-feature,.kblib-tool-intro) { position:relative; isolation:isolate; overflow:hidden; }
+#sbrefOverlay :is(.kblib-intro,.kblib-tool-intro) { padding:22px 18px; margin:18px 0; border:1px solid var(--line,#e1e2ec); border-radius:18px; background:linear-gradient(135deg,var(--panel,#fff),color-mix(in srgb,var(--panel,#fff) 90%,#5954b2)); }
+#dxOverlay .smd-kb-brand, #sbrefOverlay .smd-kb-brand { position:relative; z-index:1; margin-bottom:22px; text-align:left; }
+.smd-kb-brand strong { display:block; color:var(--ink,#202737); font:650 13px/1.4 var(--sans,system-ui); margin-bottom:5px; }
+.smd-kb-brand span { display:block; color:var(--reader-accent,var(--kl-accent,#5954b2)); font:650 11px/1.4 var(--sans,system-ui); letter-spacing:.09em; text-transform:uppercase; }
+#dxOverlay .smd-kb-watermark, #sbrefOverlay .smd-kb-watermark { position:absolute; z-index:-1; width:180px; height:180px; max-width:none; right:-18px; bottom:-23px; object-fit:contain; opacity:.11; mix-blend-mode:multiply; pointer-events:none; user-select:none; }
+body.dark #dxOverlay .smd-kb-watermark, body.dark #sbrefOverlay .smd-kb-watermark { filter:invert(1) grayscale(1); mix-blend-mode:screen; }
+@media(max-width:360px) { #dxOverlay .smd-kb-watermark, #sbrefOverlay .smd-kb-watermark { width:150px; height:150px; } }
