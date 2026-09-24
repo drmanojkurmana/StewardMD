@@ -69,7 +69,37 @@ export async function verifyFirebaseToken(token, env) {
   return claims ? claims.sub : null;
 }
 
+/* Verified Firebase claims for THIS request's bearer token, memoised per Request object so the
+ * several gates one request passes through (authorise, identify, owner, entitlement) verify the token
+ * once, not five times. null when there is no token or it does not verify; never throws (a JWKS
+ * fetch failure is "not verified", and callers fall through to their unauthenticated path). */
+const _claimsMemo = new WeakMap();
+export function verifiedClaimsFor(request, env) {
+  if (!request || typeof request !== "object") return Promise.resolve(null);
+  let p = _claimsMemo.get(request);
+  if (!p) {
+    const tok = ((request.headers && request.headers.get("Authorization")) || "").replace(/^Bearer\s+/i, "");
+    p = tok ? verifyFirebaseClaims(tok, env).catch(() => null) : Promise.resolve(null);
+    _claimsMemo.set(request, p);
+  }
+  return p;
+}
+
+/* The Cloudflare Access email, trusted ONLY when the request also carries Cf-Access-Jwt-Assertion.
+ * Cloudflare Access sets both on requests it authenticated; a bare Cf-Access-Authenticated-User-Email
+ * header on a route Access does not front is just a string any client can send.
+ * ponytail: presence check only. Verifying the assertion against the Access team's certs is the
+ * stronger step if an Access-fronted route ever becomes the only gate. */
+export function cfAccessEmail(request) {
+  const h = request && request.headers;
+  if (!h) return "";
+  const email = h.get("Cf-Access-Authenticated-User-Email");
+  return (email && h.get("Cf-Access-Jwt-Assertion")) ? String(email).toLowerCase() : "";
+}
+
 // Stable, namespaced per-user id — or null if the caller is not authenticated.
+// NOTE: still trusts a bare Cf-Access email header (unlike cfAccessEmail above). Its callers (push,
+// billing, favorites, ward routes...) and their tests rely on that; tightening it is its own change.
 export async function identify(request, env) {
   const email = request.headers.get("Cf-Access-Authenticated-User-Email");
   if (email) return "cfa:" + email.toLowerCase();

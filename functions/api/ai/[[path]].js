@@ -50,13 +50,17 @@ function firewallBlock(q) {
 
 // APP_GATE_KEY secret provisioned in prod 2026-08-16 -> the empty-Origin block below is now ACTIVE
 // (anonymous non-app clients rejected; native X-SMD-App + owner/Cf-Access + named Origins still pass).
-function authorise(request, env) {
-  if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+async function authorise(request, env) {
+  // Cloudflare Access: only with its JWT assertion header alongside (cfAccessEmail). The email header
+  // alone used to pass, and any client can send it.
+  if (cfAccessEmail(request)) return true;
   // A signed-in caller (Firebase Bearer token) is never the anonymous-abuse case the Origin gate guards
   // against — and browsers omit the Origin header on SAME-ORIGIN GETs, which was silently 403-ing the
-  // admin console + web app once APP_GATE_KEY was set. Let authenticated requests through; per-user
-  // quota + the owner check (aiAdminAuthed) downstream are the real controls.
-  if (request.headers.get("Authorization")) return true;
+  // admin console + web app once APP_GATE_KEY was set. The token must VERIFY (T28): ANY Authorization
+  // header used to pass, so "Bearer x" skipped the whole gate. An invalid token is not a hard failure:
+  // it falls through to the app/origin checks below, which the native app and the site pass anyway.
+  // The verification is memoised per request (verifiedClaimsFor), so later gates reuse it.
+  if (await verifiedClaimsFor(request, env)) return true;
   if (env.GHIS_APP_TOKEN && request.headers.get("X-App-Token") === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && request.headers.get("X-App-Token") === env.AI_APP_TOKEN) return true;
   // Exact host allowlist (NOT endsWith — that matched attacker domains like
@@ -119,6 +123,8 @@ import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR } from "../../
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
+import { verifiedClaimsFor, cfAccessEmail } from "../../_fbauth.js";
+import { hitLimit, clientIp } from "../../_ratelimit.js";
 import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
 import { getFeedback, getFeedbackAgg, clearFeedback } from "../../_maik_feedback.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
@@ -1082,12 +1088,23 @@ function routeMemPut(k, v) {
   } catch (e) {}
 }
 
+/* A Cf-Access email header WITHOUT Cloudflare Access's JWT assertion is client-supplied: drop it before
+ * anything reads it, so identify() / quota / wallet (functions/_usage.js) can never be pointed at
+ * another doctor's account by a spoofed header (T28). Access-fronted requests carry both and are kept. */
+function accessSafeRequest(request) {
+  if (!request.headers.get("Cf-Access-Authenticated-User-Email") || cfAccessEmail(request)) return request;
+  const h = new Headers(request.headers);
+  h.delete("Cf-Access-Authenticated-User-Email");
+  return new Request(request, { headers: h });
+}
+
 export async function onRequest(context) {
   const _reqT0 = Date.now();   // request entry — lets headMs separate OUR pre-branch work from network
-  const { request, env, params } = context;
+  const { env, params } = context;
+  const request = accessSafeRequest(context.request);
   // CORS preflight (native WebView streaming) — no auth; must precede authorise.
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
-  if (!authorise(request, env)) return json({ error: "unauthorised" }, 403);
+  if (!(await authorise(request, env))) return json({ error: "unauthorised" }, 403);
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const enabled = aiEnabled(env);
 
@@ -1382,6 +1399,16 @@ export async function onRequest(context) {
     let figures = [];
     try { figures = await findFigures(env, fq, 3, { debug: fdebug }); } catch (e) { figures = []; }
     return json(fdebug ? { figures: figures, debug: figures._debug || [] } : { figures: figures });
+  }
+
+  /* Per-IP burst limit for GUESTS on the two open-ended generation routes (T28). Guests are otherwise
+   * keyed by the client-supplied X-SMD-Device, which a script can rotate per request; this bounds
+   * one address. Generous (a hospital NAT is many doctors) and fails OPEN when KV is unavailable.
+   * Verified Firebase / Cloudflare Access callers are never counted here. */
+  if ((seg === "explain" || seg === "research") && request.method === "POST" && !cfAccessEmail(request) && !(await verifiedClaimsFor(request, env))) {
+    const _lim = Number(env.MAIK_GUEST_BURST_PER_MIN) > 0 ? Number(env.MAIK_GUEST_BURST_PER_MIN) : 20;
+    const _b = await hitLimit(usageKv(env), "gburst", clientIp(request), _lim, 60, typeof context.waitUntil === "function" ? context.waitUntil.bind(context) : null);
+    if (!_b.ok) return json({ error: "quota", reason: "rate", message: "Too many requests from this network. Please wait a minute and try again." }, 429);
   }
 
   const _hm = {};   // sub-stage marks inside the "head" region, so its ~1.1s is attributable
