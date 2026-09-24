@@ -125,6 +125,29 @@ static std::string piece_of(const llama_vocab* vocab, llama_token tok) {
     return std::string(buf, (size_t) n);
 }
 
+/* UTF-8 ACROSS TOKENS (audit T54). `full` concatenates raw bytes, so the final text is intact; but
+ * each STREAMED piece went to NewStringUTF on its own, and a character split across two tokens
+ * (≥, µ, °, any Indic letter) is not valid UTF-8 in either half (CheckJNI aborts on it, release
+ * builds show garbage). Pieces are therefore held back until they end on a character boundary.
+ * Returns the length of the longest prefix of `s` that does not end inside a multi-byte character;
+ * any other invalid sequence is passed through rather than stalling the stream. */
+static size_t utf8_complete_prefix(const std::string& s) {
+    long i = (long) s.size() - 1;
+    int back = 0;
+    while (i >= 0 && back < 3 && (((unsigned char) s[(size_t) i]) & 0xC0) == 0x80) { i--; back++; }
+    if (i < 0) return s.size();
+    const unsigned char lead = (unsigned char) s[(size_t) i];
+    const long need = lead >= 0xF0 ? 4 : lead >= 0xE0 ? 3 : lead >= 0xC0 ? 2 : 1;
+    return ((long) s.size() - i) < need ? (size_t) i : s.size();
+}
+
+/* Repetition penalty for every sampler chain (audit T55). It is NOT optional, even for greedy: a
+ * bare greedy chain answered "insulin insulin insulin ..." to a DKA question on a Pixel 9. But 1.15
+ * over the last 128 tokens also penalised the digits, units and drug names a dose line legitimately
+ * repeats ("500 mg ... 500 mg"), nudging the model to a different number. 1.05 still breaks the
+ * loop and barely touches a regimen. Mirrors LlamaEngine.swift repeatPenalty. */
+static const float kRepeatPenalty = 1.05f;
+
 extern "C" {
 
 JNIEXPORT void JNICALL
@@ -334,11 +357,11 @@ Java_in_stewardmd_llama_LlamaNative_generate(
     // Pixel 9: asked for first-line treatment of DKA it emitted "insulin insulin insulin ..." for
     // the whole budget. Greedy always takes the argmax, so once a token becomes locally most-likely
     // it can lock in forever; llama.cpp's own examples always include penalties. These are
-    // deterministic transforms, so greedy stays reproducible.
+    // deterministic transforms, so greedy stays reproducible. Strength: see kRepeatPenalty (T55).
     llama_sampler* smpl = llama_sampler_chain_init(llama_sampler_chain_default_params());
     const int32_t n_vocab = llama_vocab_n_tokens(vocab);
     llama_sampler_chain_add(smpl, llama_sampler_init_penalties(
-        n_vocab, /*penalty_last_n=*/128, /*penalty_repeat=*/1.15f,
+        n_vocab, /*penalty_last_n=*/128, /*penalty_repeat=*/kRepeatPenalty,
         /*penalty_freq=*/0.0f, /*penalty_present=*/0.0f));
     if (temp > 0.0f) {
         llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40));
@@ -380,18 +403,23 @@ Java_in_stewardmd_llama_LlamaNative_generate(
     const int budget = (nPredict > 0) ? nPredict : 512;
     const auto _dc0 = std::chrono::steady_clock::now();
 
+    std::string pend;   // streamed bytes not yet ending on a character boundary (T54)
+    auto send = [&](const std::string& out) {
+        if (onToken == nullptr || out.empty()) return;
+        jstring js = env->NewStringUTF(out.c_str());
+        if (js != nullptr) {
+            env->CallVoidMethod(callback, onToken, js);
+            if (env->ExceptionCheck()) { env->ExceptionClear(); onToken = nullptr; }   // stop calling back, keep generating
+            env->DeleteLocalRef(js);
+        }
+    };
     auto emit = [&](llama_token id) {
         std::string piece = piece_of(vocab, id);
         full += piece;
         produced++;
-        if (onToken != nullptr && !piece.empty()) {
-            jstring js = env->NewStringUTF(piece.c_str());
-            if (js != nullptr) {
-                env->CallVoidMethod(callback, onToken, js);
-                if (env->ExceptionCheck()) { env->ExceptionClear(); onToken = nullptr; }   // stop calling back, keep generating
-                env->DeleteLocalRef(js);
-            }
-        }
+        pend += piece;
+        const size_t n = utf8_complete_prefix(pend);
+        if (n > 0) { send(pend.substr(0, n)); pend.erase(0, n); }
     };
 
     /* SPECULATIVE DECODING (perf plan #6). A small same-vocabulary draft proposes up to K tokens; the
@@ -496,6 +524,10 @@ Java_in_stewardmd_llama_LlamaNative_generate(
             if (nap > 0) usleep((useconds_t) nap);
         }
     }
+    // A character still incomplete when generation stopped can never complete: drop its bytes from
+    // both the stream and the returned text rather than hand NewStringUTF an invalid sequence.
+    pend.clear();
+    full.resize(utf8_complete_prefix(full));
     if (stoppedHot) {
         LOGI("stopping at %d tokens: thermal status critical", produced);
         full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._";
@@ -628,7 +660,7 @@ Java_in_stewardmd_llama_LlamaNative_generateWithImage(
     // Same sampler as the text path, so image answers cannot drift in sampling or repetition.
     llama_sampler* smpl = llama_sampler_chain_init(llama_sampler_chain_default_params());
     const int32_t n_vocab = llama_vocab_n_tokens(vocab);
-    llama_sampler_chain_add(smpl, llama_sampler_init_penalties(n_vocab, 128, 1.15f, 0.0f, 0.0f));
+    llama_sampler_chain_add(smpl, llama_sampler_init_penalties(n_vocab, 128, kRepeatPenalty, 0.0f, 0.0f));
     if (temp > 0.0f) {
         llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40));
         llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95f, 1));
@@ -645,16 +677,20 @@ Java_in_stewardmd_llama_LlamaNative_generateWithImage(
         if (env->ExceptionCheck()) env->ExceptionClear();
     }
 
-    std::string full;
+    std::string full, pend;   // pend: streamed bytes not yet ending on a character boundary (T54)
     int produced = 0;
     const int budget = nPredict > 0 ? nPredict : 512;
     while (produced < budget && ((int) n_past + produced) < n_ctx) {
         if (g_cancel.load(std::memory_order_relaxed)) break;
         llama_token id = llama_sampler_sample(smpl, ctx, -1);
         if (llama_vocab_is_eog(vocab, id)) break;
-        std::string piece = piece_of(vocab, id);
-        full += piece;
+        std::string raw = piece_of(vocab, id);
+        full += raw;
         produced++;
+        pend += raw;
+        const size_t cut = utf8_complete_prefix(pend);
+        std::string piece = pend.substr(0, cut);
+        pend.erase(0, cut);
         if (onToken != nullptr && !piece.empty()) {
             jstring js = env->NewStringUTF(piece.c_str());
             if (js != nullptr) {
@@ -667,6 +703,7 @@ Java_in_stewardmd_llama_LlamaNative_generateWithImage(
         if (llama_decode(ctx, nb) != 0) { LOGE("mtmd decode failed at %d", produced); break; }
         if ((produced & 7) == 0 && thermal_should_stop()) {
             LOGI("mtmd stopping at %d tokens: thermal critical", produced);
+            full.resize(utf8_complete_prefix(full));
             full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._";
             break;
         }
@@ -676,5 +713,6 @@ Java_in_stewardmd_llama_LlamaNative_generateWithImage(
 
     llama_sampler_free(smpl);
     mtmd_free(mctx);        // projector freed immediately; see the note above
+    full.resize(utf8_complete_prefix(full));   // never hand NewStringUTF half a character (T54)
     return env->NewStringUTF(full.c_str());
 }
