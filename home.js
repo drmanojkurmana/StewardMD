@@ -4447,11 +4447,12 @@
    * sprint, auscultating the screen with a bpm report), and reacts when tapped
    * (startle, wave, hearts). Sub-pixel travel + real jump arcs over hand-placed
    * 12x16 frames; one rAF loop that tears itself down when his node is gone.
-   * Flag smd_maik_live_doc, "0" restores the stationary Stetho Buddy resident.
+   * Flag smd_maik_live_doc: default is the stationary Stetho Buddy resident (audit T33, 2026-09-25);
+   * "1" turns the live doctor on.
    * Under prefers-reduced-motion the resident is used instead (he stands still).
    * Taps on the thread/composer are NEVER intercepted: only the doctor himself
    * (a ~44px hit inset around him) is tappable. */
-  function maikLiveDocOn() { try { return localStorage.getItem("smd_maik_live_doc") !== "0"; } catch (e) { return true; } }
+  function maikLiveDocOn() { try { return localStorage.getItem("smd_maik_live_doc") === "1"; } catch (e) { return false; } }   // default: stationary resident (audit T33); "1" = live doctor
   var MAIK_DOC_PAL = {
     h: "#25333B", s: "#E9B48C", k: "#0A1519", w: "#F2F6F7", c: "#C9D6DA",
     g: "#2DD4BF", d: "#0E6E63", r: "#E05252", p: "#22333C"
@@ -4728,6 +4729,9 @@
     var sayBub = null;
     setTimeout(function () {
       if (_mkdState !== D) return;
+      // Greet only on an empty sheet: over a conversation the bubble covered the latest answer's
+      // actions (Regenerate, Create prescription) for four seconds (audit T06).
+      try { var _bd = document.getElementById("maikBody"); if (_bd && _bd.querySelector(".maik-b")) return; } catch (e) {}
       var first = false;
       try { first = !localStorage.getItem("smd_maik_doc_hi"); if (first) localStorage.setItem("smd_maik_doc_hi", "1"); } catch (e) {}
       var msg = first ? "Hi, I am MaiK, your medical AI assistant. Tap me any time."
@@ -5584,6 +5588,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * composer session so a long edit cannot fan out into many router calls. */
     var _preT = null, _preLast = "", _preN = 0;
     if (qEl) qEl.addEventListener("input", function () {
+      if (maikLLMFirst()) return;   // nobody reads the route in LLM-first mode (audit T08)
       var q = String(qEl.value || "").trim();
       if (q.length < 15 || q === _preLast || _preN >= 3) return;
       if (_preT) clearTimeout(_preT);
@@ -5905,12 +5910,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // onto the drug name, so retrieval searched for "Ok tell metoprolol" instead of "metoprolol".
         // Request-frame words added so any phrasing of the same question extracts the same drug.
         var _drug = q.replace(/\?+/g, " ").replace(/\b(dose|dosage|doses|dosing|of|the|a|an|in|for|adult|paediatric|pediatric|child|neonatal|neonate|renal|dialysis|ckd|hepatic|liver|pregnancy|pregnant|how|much|what|whats|is|are|please|pls|plz|give|me|and|standard|its|it|treatment|treatments|therapy|regimen|regimens|drug|drugs|medication|medications|agent|agents|antibiotic|antibiotics|tell|ok|okay|so|can|could|you|show|us|kindly)\b/gi, " ").replace(/\s+/g, " ").trim();
-        _drug = _drug || t.lastDrug;
-        if (_drug) return { question: _pop + " dosing of " + _drug + " for " + t.topic + " \u2014 dose, route, titration and renal-adjustment principles. Verify locally.", depth: "concise", topic: "dose of " + _drug, retrieval: _drug + " " + t.topic + " dose dosing route renal adjustment" };
+        // A drug conversation ("metoprolol" then "dose?") still means that drug (audit T21).
+        if (!_drug && t.lastDrug && String(t.topic).toLowerCase().indexOf(String(t.lastDrug).toLowerCase()) >= 0) _drug = t.lastDrug;
+        if (_drug) return { question: _pop + " dosing of " + _drug + " for " + t.topic + " \u2014 dose, route, titration and renal-adjustment principles. Verify locally.", depth: "concise", topic: t.topic, retrieval: _drug + " " + t.topic + " dose dosing route renal adjustment" };
         // No drug named and none remembered: "and the dose?" right after a treatment answer means the
         // first-line drug for the topic we are on. Asking "which drug?" back was the single most
         // assistant-unlike thing in the owner's live battery (2026-09-04); ChatGPT resolves it in one hop.
-        return { question: _pop + " first-line drug and dose for " + t.topic + ": drug, dose, route, frequency and duration. Verify locally.", depth: "concise", topic: t.topic, retrieval: t.topic + " first line drug dose duration" };
+        // A condition conversation: the doses of the regimen just discussed, every drug in it, not one
+        // drug's label dose (audit T21). "regimen" keeps the Drug Index shortcut out of it (drug-dose.js).
+        return { question: _pop + " doses for the first-line regimen for " + t.topic + ": each drug with dose, route, frequency and duration. Verify locally.", depth: "concise", topic: t.topic, retrieval: t.topic + " first line regimen drug dose route frequency duration" };
       }
       if (/^(what next|whats next|next|next steps?|then( what)?|and then|what to do next)\b/.test(n) || (/\bnext\b/.test(n) && wc <= 4)) {
         return { question: "Next steps, ongoing management and monitoring for " + t.topic + ".", depth: "concise", topic: "next steps for " + t.topic, retrieval: t.topic + " monitoring ongoing management next steps escalation" };
@@ -6522,7 +6530,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> · not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference. Verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
-      if (maikLazyOn()) {
+      if (maikLazyOn() && depth !== "detailed") {
         // Lazy: only the bottom line was fetched (tier 1). The tier-2 detail is fetched on demand when
         // "Know more" is tapped — most reads stop here, so we never spend those output tokens.
         var _lg = "lz" + (++_maikLazySeq); _maikLazyCtx[_lg] = { pkg: pkg, question: question, lead: md };
@@ -6673,7 +6681,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Hard client-side ceiling: the grounding chain (KB index load → buildPackage → grounded call)
       // must never leave the user stuck on 'Searching…' forever if a promise never settles (BUG-05).
       // On timeout we surface a clear message + a one-tap retry, and free the composer.
-      var _maikDone = false, MAIK_TO_MS = 90000, _maikTO = null, _streamStarted = false, _stageT = [];
+      // Local answers get 3 minutes before the no-progress watchdog: a cold 4B load plus index build plus
+      // prefill was measured at 130 s on a Pixel 9 with no token yet (audit T13).
+      var _maikLocalTurn = (function () { try { return !!(window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective && window.SMD_MAIK_ENGINE.effective() === "local"); } catch (e) { return false; } })();
+      var _maikDone = false, MAIK_TO_MS = _maikLocalTurn ? 180000 : 90000, _maikTO = null, _streamStarted = false, _stageT = [];
+      var _maikStopped = false;   // set only by Stop: a cloud answer that arrives afterwards is dropped (audit T03)
       // SPEED: a signed-in session's Firestore sync hogs the single JS thread and delays the AI
       // answer's callback — guest is fast precisely BECAUSE it has no Firestore. Pause Firestore for
       // the duration of one answer so the AI call runs on a clear thread like guest, then resume.
@@ -6688,6 +6700,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // no-op); the on-device engine is cancelled by maikStopNow itself.
       _maikStop = function () {
         if (_maikDone) return;
+        _maikStopped = true;
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _fsResume();
         try {
           var h = _live(), s = h.querySelector(".maik-streaming");
@@ -6762,6 +6775,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // nuked in-flight answers ("took too long" WHILE it was still generating). Fires only if truly stuck.
       function _maikTimedOut() {
         if (_maikDone) return; _maikDone = true; _clearStages(); _fsResume();
+        // Cancel the on-device job too: left running it kept burning battery, and "Tap to retry" queued
+        // behind it on the engine's single queue (audit T13).
+        try { if (_maikLocalTurn && window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.cancel) window.SMD_MAIK_LOCAL.cancel(); } catch (e) {}
         try {
           var _tw = _live();
           _tw.innerHTML = '<div class="maik-welcome">MaiK took too long to respond. The knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
@@ -6938,7 +6954,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               p.audience = MaiKEvidence.personalize({ query: { raw: question } }).audience;
               var evid = [];
               (p.grounding || []).forEach(function (g) {
-                var txt = (g.knowledge && g.knowledge.join ? g.knowledge.join(" ") : (g.knowledge || g.summary || "")) || "";
+                // Knowledge items are {section, text, source}; joining the objects sent "[object Object]" x8
+                // to the model as "ranked evidence" (audit T04).
+                var txt = (g.knowledge && g.knowledge.map ? g.knowledge.map(function (k) { return (k && typeof k === "object") ? (k.text || "") : String(k || ""); }).filter(Boolean).join(" ") : (g.summary || "")) || "";
                 if (txt) evid.push({ source: "kb", ref: "StewardMD KB · " + (g.name || g.diseaseId), data: { text: String(txt), disease: g.name || g.diseaseId } });
                 try { var gl = MaiKEvidence.guideline(g.diseaseId); if (gl && gl.recommendation) evid.push({ source: "guideline", society: gl.society, year: gl.year, ref: (gl.society || "guideline") + (gl.year ? " (" + gl.year + ")" : ""), data: { recommendation: gl.recommendation, recommendations: gl.recommendations } }); } catch (e) {}
               });
@@ -7109,12 +7127,22 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           }
           function _gemini() {
             try { _brainEnrichPkg(pkg); } catch (e) {}
-            var _tier = maikLazyOn() ? 1 : undefined;   // lazy: first call fetches ONLY the bottom line
+            var _tier = (maikLazyOn() && depth !== "detailed") ? 1 : undefined;   // lazy: bottom line first, except when the doctor asked for detail (audit T17)
             var _regen = _maikRegen; _maikRegen = false;
             var call = (window.SMD_AI.explainGroundedStream && maikStreamOn())
               ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth, tier: _tier, regen: _regen }, onDelta)
               : window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier, regen: _regen });
             return call.then(function (r) {
+              // Stopped (audit T03): the request could not be recalled (CapacitorHttp ignores abort), so
+              // its answer is dropped here. Rendering it overwrote "Stopped" and freed the composer while a
+              // newer question could be running.
+              if (_maikStopped) return;
+              // Network gone (audit T18): the provider call resolves {error} rather than rejecting, so the
+              // Knowledge Base fallback in .catch below never ran and the doctor got "MaiK is unavailable".
+              // Answer from the on-device Knowledge Base instead, labelled as the offline answer.
+              if (r && r.error && !active && window.MaiKKB && /timeout|fetch|network|load failed|offline|internet|connection/i.test(String(r.error))) {
+                try { var _kbN = window.MaiKKB.compose(question, pkg, {}); if (_kbN && _kbN.text) { finishKB(_kbN, pkg, "offline"); return; } } catch (e) {}
+              }
               var _h = _live();
               maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
               try { _brainAugment(_h, pkg); } catch (e) {}
@@ -7150,6 +7178,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 }
               } catch (e) {}
             }).catch(function (eGen) {
+              if (_maikStopped) return;
               // LLM path failed (offline / provider error). Fall back to the on-device KB so the clinician
               // still gets an answer instead of a bare "unavailable". Rethrow if the KB has nothing, so the
               // outer catch shows the graceful message.
@@ -7425,13 +7454,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     }
     function maikRestoreThread() {
       _maikTurns = [];
-      var q = "";
+      var q = "", lastQ = "";
       Array.prototype.forEach.call(body.children, function (n) {
         if (!n.classList || !n.classList.contains("maik-b")) return;
-        if (n.classList.contains("you")) { q = (n.textContent || "").replace(/\s+/g, " ").trim(); return; }
+        if (n.classList.contains("you")) { q = (n.textContent || "").replace(/\s+/g, " ").trim(); lastQ = q; return; }
         maikRewire(n, q);
         if (q) { maikRememberTurn(q, maikAnswerText(n)); q = ""; }
       });
+      // The topic, so a bare follow-up ("dose?", "side effects?") continues the reopened conversation
+      // instead of asking what it is about (audit T22).
+      try { if (lastQ && maikV2()) _maikTopic = { topic: maikCanonTopic(lastQ), question: lastQ, depth: "concise", lastDrug: null, ts: Date.now() }; } catch (e) {}
     }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask MaiK…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
@@ -7721,11 +7753,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikNotifyReady(q) {
       try {
         var key = String(q || ""); if (_maikNotified[key]) return; _maikNotified[key] = 1;
-        var label = key ? (key.length > 46 ? key.slice(0, 46) + "…" : key) : "your question";
-        maikToastAction("MaiK answered — tap to view", function () { try { openAskAi(); } catch (e) {} });
+        // No question text on the lock screen or in the toast (audit T11): a question can carry patient
+        // details, and a notification is readable without unlocking the phone.
+        maikToastAction("MaiK answered. Tap to view.", function () { try { openAskAi(); } catch (e) {} });
         try {
           var LN = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.LocalNotifications;
-          if (LN && LN.schedule) LN.schedule({ notifications: [{ id: (Date.now() % 100000) + 1, title: "MaiK", body: "Your answer is ready — " + label }] }).catch(function () {});
+          if (LN && LN.schedule) LN.schedule({ notifications: [{ id: (Date.now() % 100000) + 1, title: "MaiK", body: "Your MaiK answer is ready." }] }).catch(function () {});
         } catch (e) {}
       } catch (e) {}
     }
@@ -7907,7 +7940,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} }
             try { delete _maikLazyCtx[_lgid]; } catch (e) {}
             know.remove();
+            try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}   // keep the detail in the saved conversation (audit T17)
           }).catch(function () { know.textContent = "Know more →"; know.disabled = false; });
+          return;
+        }
+        // A reopened conversation has no lazy context (it lived in memory), and its detail was never
+        // fetched: ask the same question again in full rather than revealing an empty box (audit T17).
+        if (_lgid && kdet && !kdet.textContent.trim()) {
+          if (_maikBusy) return;
+          var _kq = "", _kp = kbub && kbub.previousElementSibling;
+          while (_kp && !(_kp.classList && _kp.classList.contains("you"))) _kp = _kp.previousElementSibling;
+          _kq = _kp ? (_kp.textContent || "").replace(/\s+/g, " ").trim() : "";
+          know.remove();
+          if (_kq) { bubble("you", maikEscH(_kq + " (in detail)")); runClinical(_kq, _kq, "detailed", maikActiveCase(), maikV2() ? maikCanonTopic(_kq) : _kq); }
           return;
         }
         if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} } know.remove(); return;
