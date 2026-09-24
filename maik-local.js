@@ -1676,11 +1676,55 @@
   function opdSuggest(assessment, opts) {
     var a = String(assessment == null ? "" : assessment).slice(0, 8000).trim();
     if (!a) return Promise.resolve({ error: "no-text" });
+    var packId = (opts && opts.pack) || currentPack();
     return generateJSON("=== ASSESSMENT ===\n" + a, OPD_SYS, 900, opts).then(function (p) {
       var out = sanitizeOpd(p);
       out.kind = "opd-suggest"; out.mode = "opd-suggest"; out.engine = "local";
-      return out;
+      return opdDoseCheck(out, a, packId);
     }, parseFailure);
+  }
+
+  /* OPD DOSES ARE CHECKED LIKE ANSWER DOSES (audit T34, 2026-09-25). The differential's treatment[]
+   * came back with drug, dose, route and frequency straight from the model's weights, with no
+   * evidence and no number check, into a prescribing screen. Each treatment line that states a
+   * figure is now checked claim by claim (kb/ai/maik-grounding.js) against the Knowledge Base
+   * passages for the provisional diagnosis, the clinician's own assessment counting as support for
+   * figures they entered. A line whose dose is not supported keeps its drug and loses the dose, with
+   * a note to take it from the Drug Index. No evidence retrieved = no dose is supported. */
+  var OPD_DOSE_NOTE = " (dose: verify in Drug Index)";
+  function stripDose(t) {
+    var head = String(t).split(/\d/)[0].replace(/[\s,;:(\-–]+$/, "").trim();
+    if (head.length >= 3) return head;
+    return String(t).replace(/\S*\d\S*/g, " ")
+      .replace(/\b(?:mg|mcg|g|ml|l|iu|units?|kg|po|iv|im|sc|od|bd|bid|tds|tid|qid|daily|hourly|hours?|days?|weeks?)\b/gi, " ")
+      .replace(/\s+/g, " ").trim();
+  }
+  function opdDoseCheck(out, assessment, packId) {
+    var dosed = (out.treatment || []).some(function (t) { return /\d/.test(t); });
+    if (!dosed) return Promise.resolve(out);
+    var dx = out.provisionalDx || (out.ddx[0] && out.ddx[0].dx) || "";
+    var G = (typeof window !== "undefined") && window.SMD_MAIK_GROUND;
+    var lex = (typeof window !== "undefined" && window.SMD_DRUG_LEXICON) || null;
+    return Promise.resolve(dx ? retrieveGrounding(packId, "treatment of " + dx, dx, null) : null)
+      .then(null, function () { return null; })
+      .then(function (gr) {
+        var passages = (gr && gr.passages) || [], stripped = 0;
+        out.treatment = out.treatment.map(function (t) {
+          if (!/\d/.test(t)) return t;
+          var ok = false;
+          if (passages.length && G && G.groundAnswer) {
+            try {
+              var g = G.groundAnswer(t, passages, assessment, { lexicon: lex, inlineRefs: false });
+              ok = g.claims.length > 0 && g.claims.every(function (c) { return c.status === "supported" || c.status === "clinician" || c.status === "meta"; });
+            } catch (e) { ok = false; }
+          }
+          if (ok) return t;
+          stripped++;
+          return (stripDose(t) || "Treatment") + OPD_DOSE_NOTE;
+        });
+        out.doseCheck = { evidence: passages.length, stripped: stripped };
+        return out;
+      });
   }
 
   /* READABLE EMPHASIS for on-device answers (owner, 2026-09-04: "Answer can show Bold Italic etc
