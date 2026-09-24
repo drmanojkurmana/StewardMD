@@ -76,6 +76,14 @@ const LOCALITY = Object.freeze({
  * the binding is the primary path and the process variable is what makes the evaluation harness and
  * local development work.
  */
+/** The Vertex AI express-mode key (owner, 2026-09-24): the Vertex credential when the project path is
+ *  not configured. Same binding-then-process resolution as geminiKey. */
+function vertexKey(env) {
+  const fromEnv = env && env.VERTEX_API_KEY;
+  if (str(fromEnv)) return str(fromEnv);
+  if (typeof process !== "undefined" && process && process.env) return str(process.env.VERTEX_API_KEY) || null;
+  return null;
+}
 function geminiKey(env) {
   const fromEnv = env && (env.GEMINI_API_KEY || env.MAIK_GEMINI_API_KEY);
   if (str(fromEnv)) return str(fromEnv);
@@ -188,8 +196,8 @@ function maikStatus(env, config) {
         credentialSource: "GEMINI_API_KEY (environment binding)",
         surface: "AI Studio (generativelanguage.googleapis.com)",
         detail: keyPresent ? "an API key is present in the environment" : "no GEMINI_API_KEY is set in the environment" },
-      { provider: "vertex", configured: keyPresent || !vertexMissing.length,
-        credentialSource: vertexMissing.length ? "GEMINI_API_KEY (environment binding)" : "GCP_PROJECT and service account (environment bindings)",
+      { provider: "vertex", configured: keyPresent || !!vertexKey(env) || !vertexMissing.length,
+        credentialSource: vertexMissing.length ? (vertexKey(env) ? "VERTEX_API_KEY (environment binding)" : "GEMINI_API_KEY (environment binding)") : "GCP_PROJECT and service account (environment bindings)",
         surface: vertexMissing.length
           ? "Vertex AI express mode (aiplatform.googleapis.com), publisher path, no project or region in the URL"
           : `Vertex AI project endpoint (${vertexEndpoint(env, byId("vertex-flash")).host}), location ${vertexEndpoint(env, byId("vertex-flash")).location}`,
@@ -512,8 +520,8 @@ async function googleGenerate(req, opts) {
   let bearer = null;
   try { bearer = opts.bearer ? await opts.bearer() : null; }
   catch (e) { throw new Error(`${opts.surface} could not be authorised: ${str(e && e.message)}`); }
-  const key = bearer ? null : geminiKey(req.env);
-  if (!bearer && !key) throw new Error(`no Google API key is present in the environment (GEMINI_API_KEY) for ${opts.surface}`);
+  const key = bearer ? null : (opts.apiKey || geminiKey(req.env));
+  if (!bearer && !key) throw new Error(`no Google API key is present in the environment (${opts.apiKeyName || "GEMINI_API_KEY"}) for ${opts.surface}`);
   const model = str(req.model && req.model.model) || "gemini-3.6-flash";
   const url = opts.urlFor(model);
   const controller = typeof AbortController === "function" ? new AbortController() : null;
@@ -629,8 +637,10 @@ const PROVIDERS = Object.freeze({
         });
       }
       if (req.phi) throw new Error(`patient data is not sent to Vertex express mode; the project credentials are missing (${vertexProjectMissing(env).join(", ")})`);
+      // Express mode: the Vertex key when there is one, else the Gemini key (as before).
       return googleGenerate(req, {
         providerId: "vertex",
+        apiKey: vertexKey(env) || null, apiKeyName: "VERTEX_API_KEY or GEMINI_API_KEY",
         urlFor: (model) => `https://aiplatform.googleapis.com/v1/publishers/google/models/${encodeURIComponent(model)}:generateContent`,
         surface: "Vertex AI express mode (aiplatform.googleapis.com)",
       });

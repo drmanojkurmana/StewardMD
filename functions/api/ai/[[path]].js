@@ -14,7 +14,9 @@
  * Config (Pages env / encrypted secrets):
  *   AI_PROVIDER     (optional, 'vertex' [primary, default] | 'developer')
  *   GEMINI_MODEL    (optional, default 'gemini-2.5-flash'; do NOT use gemini-2.0-flash)
- *   Vertex (primary):  GCP_PROJECT, GCP_LOCATION (default us-central1), GCP_SA_EMAIL.
+ *   Vertex (primary):  EITHER an API key, VERTEX_API_KEY (Vertex AI express mode, publisher path,
+ *     no project or region in the URL; owner 2026-09-24, replaces the old account's project
+ *     credentials), OR the project path: GCP_PROJECT, GCP_LOCATION (default us-central1), GCP_SA_EMAIL.
  *     KEYLESS (production): Workload Identity Federation — GCP_WIF_PRIVATE_KEY (PKCS8 PEM,
  *       Cloudflare secret; public JWK uploaded to the WIF provider), GCP_WIF_AUDIENCE,
  *       GCP_WIF_KID, GCP_WIF_ISSUER, GCP_WIF_SUBJECT. No GCP SA key exists.
@@ -317,26 +319,36 @@ async function vertexAccessToken(env) {
   _vTok = env.GCP_WIF_PRIVATE_KEY ? await wifAccessToken(env) : await saJwtAccessToken(env);
   return _vTok.value;
 }
+/* VERTEX_API_KEY = Vertex AI express mode: the publisher path on aiplatform.googleapis.com with the key
+ * in the x-goog-api-key header (never in the URL, so it cannot land in a log). When it is set it is
+ * THE Vertex credential; the project/service-account path below is used only when it is absent. */
+const VERTEX_EXPRESS = "https://aiplatform.googleapis.com/v1/publishers/google/models";
+function vertexKey(env) { return String((env && env.VERTEX_API_KEY) || "").trim(); }
+function vertexProjectReady(env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); }
+async function vertexCall(env, opts, method) {
+  const key = vertexKey(env);
+  const loc = env.GCP_LOCATION || "asia-south1";
+  if (key) return { url: `${VERTEX_EXPRESS}/${modelFor(env, opts)}:${method}`, headers: { "x-goog-api-key": key, "Content-Type": "application/json" } };
+  const token = await vertexAccessToken(env);
+  return { url: `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:${method}`,
+           headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" } };
+}
 const vertexProvider = {
   name: "vertex",
-  available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
+  available: function (env) { return !!vertexKey(env) || vertexProjectReady(env); },
   generate: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "asia-south1";
-    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:generateContent`;
-    const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
-    const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
+    const c = await vertexCall(env, o, "generateContent");
+    const jr = await fetchJsonWithTimeout(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
     { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "asia-south1";
-    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:streamGenerateContent?alt=sse`;
-    const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
-    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
+    const c = await vertexCall(env, o, "streamGenerateContent?alt=sse");
+    return fetch(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
@@ -509,7 +521,8 @@ function providerOrder(env, opts) {
   // Azure/Foundry FIRST (Vertex→Developer as fallback) ONLY for a MaiK call (opts.maik). Every other
   // module (Vision, ECG/KardiQ, ThoreX, FundX, scribe, router, …) stays on Gemini/Vertex exactly as
   // before, regardless of AI_PROVIDER. AI_PROVIDER=developer uses the Developer API directly.
-  const sel = String(env.AI_PROVIDER || "developer").toLowerCase();
+  // Owner, 2026-09-24: Vertex is the main provider and the Gemini (AI Studio) key is the fallback.
+  const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
   const forMaik = !!(opts && opts.maik);
   let order = sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];   // AZURE REMOVED: developer-primary (edge, fast in India) + vertex failover
   if (!forMaik) order = order.filter(function (n) { return n !== "azure"; });              // non-MaiK → never Azure
@@ -1313,6 +1326,7 @@ export async function onRequest(context) {
       token_cache: true,
       last_failover: _lastFailover,
       vertex_status: vAvail ? "healthy" : "unavailable",
+      vertex_mode: vertexKey(env) ? "api-key (express mode)" : (vertexProjectReady(env) ? "project (service account)" : null),
       developer_status: dAvail ? "ready" : "not_configured",
       authentication: vAvail ? (env.GCP_WIF_PRIVATE_KEY ? "Workload Identity Federation" : "Service Account JWT") : "none"
     });
