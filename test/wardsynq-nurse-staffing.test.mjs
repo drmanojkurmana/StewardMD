@@ -147,7 +147,11 @@ const localDay = (t) => new Date(t + IST_MIN * 60000).toISOString().slice(0, 10)
 const META = () => { const at = new Date().toISOString(); return { meta: { recordedAt: at }, writtenBy: { id: "seed", kind: "human", at } }; };
 const TOOL = { id: "dep", name: "Dependency", version: "1", items: [{ key: "care", options: [{ value: "self", score: 1 }, { value: "full", score: 6 }] }], bands: [{ band: "Level 1", min: 0, max: 3, actions: ["Routine"] }, { band: "Level 2", min: 4, max: 10, actions: ["Close"] }] };
 
-async function setup() {
+/* F2: the scenario is a shift that started an hour ago. Just after local midnight that hour is yesterday and the
+ * shift is not today's, so every test that builds it pins the clock to the middle of a (past) hospital day. */
+const MIDDAY = (() => { const d = new Date(Date.now() + IST_MIN * 60000 - 86400000).toISOString().slice(0, 10); return Date.parse(d + "T12:00:00+05:30"); })();
+async function setup(t) {
+  t.mock.timers.enable({ apis: ["Date"], now: MIDDAY });
   seedHospital();
   patchOrgConfig(ORG, { riskTools: [TOOL] });
   const now = Date.now(), startAt = now - 60 * 60000;
@@ -167,8 +171,8 @@ async function setup() {
   return { date };
 }
 
-test("GET and POST /api/queue/org/staffing-norms: 401, 403 for a nurse and another hospital with nothing saved; the admin saves the hospital's own norms", async () => {
-  await setup();
+test("GET and POST /api/queue/org/staffing-norms: 401, 403 for a nurse and another hospital with nothing saved; the admin saves the hospital's own norms", async (ctx) => {
+  await setup(ctx);
   const body = { orgId: ORG, settings: NORMS };
   assert.equal((await as(null, "/org/staffing-norms", "POST", body)).__status, 401);
   assert.equal((await as(U.NURSE, "/org/staffing-norms", "POST", body)).__status, 403);
@@ -183,8 +187,8 @@ test("GET and POST /api/queue/org/staffing-norms: 401, 403 for a nurse and anoth
   assert.equal(ok.__status, 200, JSON.stringify(ok)); assert.equal(ok.settings.norms.length, 2);
 });
 
-test("GET /api/queue/ward/nurse-staffing and POST /ward/nurse-staffing-record: 401, 403 for a cashier and another hospital, nothing written; not configured, then required against rostered and on duty with the in-charge left out; #21 computes", async () => {
-  const { date } = await setup();
+test("GET /api/queue/ward/nurse-staffing and POST /ward/nurse-staffing-record: 401, 403 for a cashier and another hospital, nothing written; not configured, then required against rostered and on duty with the in-charge left out; #21 computes", async (ctx) => {
+  const { date } = await setup(ctx);
   const q = `/ward/nurse-staffing?orgId=${ORG}&date=${date}`;
   assert.equal((await as(null, q)).__status, 401);
   assert.equal((await as(U.CASHIER, q)).__status, 403);
@@ -227,8 +231,8 @@ test("GET /api/queue/ward/nurse-staffing and POST /ward/nurse-staffing-record: 4
   assert.deepEqual([k21.months[0].numerator, k21.months[0].denominator, k21.months[0].value], [1, 3, 0.33]);
 });
 
-test("R2-1 POST /api/queue/ward/nurse-staffing-record on an ICU unit type: 2 ventilated and 3 other patients give both ratios through GET /ward/nabh-indicators; a ward shift records no split; a store keeper gets 403 on GET /ward/nurse-staffing", async () => {
-  const { date } = await setup();
+test("R2-1 POST /api/queue/ward/nurse-staffing-record on an ICU unit type: 2 ventilated and 3 other patients give both ratios through GET /ward/nabh-indicators; a ward shift records no split; a store keeper gets 403 on GET /ward/nurse-staffing", async (ctx) => {
+  const { date } = await setup(ctx);
   assert.equal((await as(U.STORE, `/ward/nurse-staffing?orgId=${ORG}&date=${date}`)).__status, 403, "same hospital, a role with no business with the census");
   const ICU = { dependencyToolId: null, wardTypes: { "Ward A": "ICU" }, norms: [{ unitType: "ICU", shiftId: "*", band: "*", patientsPerNurse: 1 }], icuUnitTypes: ["ICU"] };
   const badIcu = await as(U.ADMIN, "/org/staffing-norms", "POST", { orgId: ORG, settings: { ...ICU, icuUnitTypes: ["HDU"] } });
@@ -254,8 +258,8 @@ test("R2-1 POST /api/queue/ward/nurse-staffing-record on an ICU unit type: 2 ven
   assert.equal(ward.__status, 200, JSON.stringify(ward)); assert.equal(ward.record.ventilation, null, "a ward shift records no split");
 });
 
-test("R2-1 POST /api/queue/org/reporting-year: 401, 403 for a nurse and another hospital, a reason required, nothing saved when refused; the admin sets April and #30 is year to date; saving the norms keeps it", async () => {
-  await setup();
+test("R2-1 POST /api/queue/org/reporting-year: 401, 403 for a nurse and another hospital, a reason required, nothing saved when refused; the admin sets April and #30 is year to date; saving the norms keeps it", async (ctx) => {
+  await setup(ctx);
   const body = { orgId: ORG, month: 4, reason: "Financial year reporting" };
   assert.equal((await as(null, "/org/reporting-year", "POST", body)).__status, 401);
   assert.equal((await as(U.NURSE, "/org/reporting-year", "POST", body)).__status, 403);
@@ -273,8 +277,8 @@ test("R2-1 POST /api/queue/org/reporting-year: 401, 403 for a nurse and another 
   assert.equal(k30.months[0].yearToDateFrom, `${mo >= 4 ? y : y - 1}-04`);
 });
 
-test("GET /api/queue/ward/staffing-draft and POST /roster/draft-publish: 401, 403 for a nurse and another hospital, nothing written; the draft skips a nurse on approved leave and publishing needs staff.admin", async () => {
-  const { date } = await setup();
+test("GET /api/queue/ward/staffing-draft and POST /roster/draft-publish: 401, 403 for a nurse and another hospital, nothing written; the draft skips a nurse on approved leave and publishing needs staff.admin", async (ctx) => {
+  const { date } = await setup(ctx);
   assert.equal((await as(U.ADMIN, "/org/staffing-norms", "POST", { orgId: ORG, settings: NORMS })).__status, 200);
   await H.RECORD.append(TENANT, [{ resourceType: "RiskAssessment", id: "ra-3", version: 1, patientId: "opd-pat-mrn-3", encounterId: "enc-3", toolId: "dep", band: "Level 2", total: 6, assessedAt: new Date(Date.now() - 5 * 60000).toISOString(), ...META() }]);
   const tomorrow = new Date(Date.parse(date + "T00:00:00Z") + 86400000).toISOString().slice(0, 10);
@@ -307,8 +311,8 @@ test("GET /api/queue/ward/staffing-draft and POST /roster/draft-publish: 401, 40
   assert.equal(mine.assignments.filter((a) => a.date === tomorrow).length, 1);
 });
 
-test("POST /api/queue/ward/staff-injury and GET /ward/staff-injuries: 401, 403 for a cashier and another hospital with nothing written; a nurse reports, the quality team reads, #30 computes", async () => {
-  await setup();
+test("POST /api/queue/ward/staff-injury and GET /ward/staff-injuries: 401, 403 for a cashier and another hospital with nothing written; a nurse reports, the quality team reads, #30 computes", async (ctx) => {
+  await setup(ctx);
   const body = { orgId: ORG, occurredAt: new Date(Date.now() - 3600000).toISOString(), kind: "needlestick", injuredStaff: "Staff 114", unit: "Ward A", device: "Insulin syringe", description: "Recapping after a dose", sourceKnown: "yes", firstAid: "Washed, reported to casualty" };
   assert.equal((await as(null, "/ward/staff-injury", "POST", body)).__status, 401);
   assert.equal((await as(U.CASHIER, "/ward/staff-injury", "POST", body)).__status, 403);

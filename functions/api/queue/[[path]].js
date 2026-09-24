@@ -328,7 +328,9 @@ async function opdResultBack(env, org, patientId) {
   let n = 0;
   for (const s1 of sessions) {
     for (const t of await Q.listTickets(env, s1.id).catch(() => [])) {
-      if (!t || t.status !== "investigation" || String(t.patientId) !== String(patientId)) continue;
+      if (!t || t.status !== "investigation") continue;
+      // F3: the result names the RECORD's patient (opd-pat-<mrn>); a desk ticket carries the MRN. Either identifies them.
+      if (String(t.patientId) !== String(patientId) && patientIdForMrn(t.ghisPatientId || t.mrn) !== String(patientId)) continue;
       try { await Q.setStatus(env, s1, t.id, "waiting", "system:result-released"); await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { resultReadyAt: Date.now() })]); n++; } catch (e) {}
     }
   }
