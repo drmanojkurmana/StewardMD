@@ -43,10 +43,19 @@
   // ── Stage 3 — synthesis bundle: dedupe + merge overlapping recommendations ──
   // Turns ranked evidence into one coherent, non-duplicated claim set for the writer. Never
   // concatenates chunks; never invents. Each claim keeps its supporting sources + top tier.
+  // A treatment recommendation is an object {tier, line, drugRefs:[{regimenLabel, dose, route, freq, duration}]};
+  // stringified raw it was "[object Object]" (audit T04). Render it as the regimen a clinician reads.
+  function recText(r) {
+    if (!r) return "";
+    if (typeof r === "string") return r;
+    if (r.text) return String(r.text);
+    var d = (r.drugRefs || []).map(function (x) { return x ? [x.regimenLabel || x.composition, x.dose, x.route, x.freq, x.duration].filter(Boolean).join(" ") : ""; }).filter(Boolean).join(", ");
+    return d ? ((r.line ? r.line + ": " : "") + d) : "";
+  }
   function claimText(e) {
     if (!e || !e.data) return "";
     if (typeof e.data === "string") return e.data;
-    return e.data.text || e.data.recommendation || e.data.interpretation || (e.data.recommendations && e.data.recommendations.join ? e.data.recommendations.join("; ") : "") || "";
+    return e.data.text || recText(e.data.recommendation) || e.data.interpretation || (e.data.recommendations && e.data.recommendations.map ? e.data.recommendations.map(recText).filter(Boolean).join("; ") : "") || "";
   }
   function bundle(rankedEvidence, opts) {
     var ranked = rank(rankedEvidence);
@@ -94,7 +103,7 @@
     var t = KR.treatments[conceptId]; if (!t) return null;
     return {
       conceptId: conceptId,
-      recommendation: (t.recommendations && t.recommendations[0]) || (t.precedence && t.precedence[0]) || null,
+      recommendation: (t.recommendations && t.recommendations[0]) || null,   // precedence lists society ids, not recommendations
       recommendations: t.recommendations || [],
       precedence: t.precedence || [],
       year: t.year || (t.source && (String(t.source).match(/\b(19|20)\d\d\b/) || [])[0]) || null,
