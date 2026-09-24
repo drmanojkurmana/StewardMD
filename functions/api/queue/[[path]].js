@@ -891,7 +891,9 @@ export async function onRequest(context) {
 
   // When deployed under an auxiliary domain/project (e.g. wardsynq.com) without direct Firebase service account credentials,
   // proxy the queue request upstream to stewardmd.in where the service account and databases are configured.
-  if (!env.FIREBASE_SERVICE_ACCOUNT && url.hostname.includes("wardsynq")) {
+  // Only the real deployment hosts (wardsynq.com, www.wardsynq.com, *.wardsynq.pages.dev; vault/Infra.md): a substring
+  // match sent every in-memory test on a "wardsynq.test" origin out to the live server.
+  if (!env.FIREBASE_SERVICE_ACCOUNT && /^(www\.)?wardsynq\.com$|(^|\.)wardsynq\.pages\.dev$/.test(url.hostname)) {
     const target = new URL(`https://stewardmd.in${url.pathname}${url.search}`);
     const h = new Headers(request.headers);
     h.set("host", "stewardmd.in");

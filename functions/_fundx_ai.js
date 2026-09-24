@@ -137,13 +137,16 @@ function geminiText(data) { const c = data && data.candidates && data.candidates
 
 const vertexProvider = {
   name: "vertex", modalities: ["vision", "text"],
-  available: (env) => !!(env && env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)),
+  // VERTEX_API_KEY (express mode) or the project/service-account path; same rule as functions/api/ai.
+  available: (env) => !!(env && (String(env.VERTEX_API_KEY || "").trim() || (env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)))),
   generate: async (env, req, opts) => {
+    const key = String(env.VERTEX_API_KEY || "").trim();
     const loc = env.GCP_LOCATION || "us-central1";
-    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
-    const token = await vertexAccessToken(env);
+    const url = key ? `https://aiplatform.googleapis.com/v1/publishers/google/models/${modelId(env)}:generateContent`
+                    : `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
+    const auth = key ? { "x-goog-api-key": key } : { "Authorization": "Bearer " + await vertexAccessToken(env) };
     return withTimeout(async (signal) => {
-      const r = await fetch(url, { method: "POST", signal, headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(geminiBody(geminiParts(req), opts && opts.maxTokens, env)) });
+      const r = await fetch(url, { method: "POST", signal, headers: { ...auth, "Content-Type": "application/json" }, body: JSON.stringify(geminiBody(geminiParts(req), opts && opts.maxTokens, env)) });
       if (!r.ok) throw new Error("vertex HTTP " + r.status);
       return geminiText(await r.json());
     }, timeoutMs(env));

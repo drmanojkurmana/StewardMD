@@ -119,6 +119,9 @@
     var t = norm(text);
     if (_expand) { try { t = String(_expand(t) || t); } catch (e) {} }
     t = expandAbbr(t);
+    // An ICD code is not a figure: "T42.4" read as 42.4 was stripped as an unverified number
+    // (owner report 2026-09-24, the BZD poisoning code). Masked before the number pass.
+    t = t.replace(/\b[a-z]\d{2}(?:\.\d{1,2})?\b/gi, " icdcode ");
     var out = { nums: [], drugs: [], freq: [], terms: {}, t: t };
     var m;
     NUM.lastIndex = 0;

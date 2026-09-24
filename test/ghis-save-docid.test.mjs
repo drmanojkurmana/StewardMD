@@ -53,7 +53,13 @@ test("every assessment-save call sends the record id", () => {
   const calls = OPD.match(/postWrite\("\/assessment-save",[^)]*/g) || [];
   assert.ok(calls.length >= 3, "found the save call sites (" + calls.length + ")");
   // NB: the capture stops at the first ")" — which is oeDocId's own — so match the call, not "()".
-  calls.forEach((c) => assert.match(c, /docId: oeDocId\(/, "a save without the id has no fallback: " + c.slice(0, 90)));
+  // A call may pass a named body (`var _body = {...}; postWrite("/assessment-save", _body, ...)`)
+  // so the follow-up link can be attached first; resolve it to its declaration.
+  calls.forEach((c) => {
+    var m = /postWrite\("\/assessment-save",\s*([A-Za-z_$][\w$]*)\s*,/.exec(c);
+    var body = m ? (new RegExp("var " + m[1].replace(/\$/g, "\\$") + " = \\{[^\\n]*").exec(OPD) || [""])[0] : c;
+    assert.match(body, /docId: oeDocId\(/, "a save without the id has no fallback: " + c.slice(0, 90));
+  });
 });
 
 test("SERVER: the doc_id-0 refusal is still in force, and still honours a client id", () => {

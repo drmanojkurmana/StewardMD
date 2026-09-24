@@ -669,7 +669,7 @@
           if (root.StewardIdentityResolver && root.StewardIdentityResolver.resolvePatientIdentity) {
             var res = root.StewardIdentityResolver.resolvePatientIdentity({ type: carrierType || "qr", value: code });
             if (res && !res.then && res.ok === false && res.error === "CARRIER_REVOKED") {
-              if (root.toast) root.toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card.");
+              if (root.toast) root.toast(wT("ward.reg-carrier-revoked", "CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."));
               return;
             }
             if (res && !res.then && res.ok && res.patient) hit = res;
@@ -693,21 +693,21 @@
         if (nameInput && !nameInput.value) nameInput.value = code;
         var followBtn = host.querySelector('[data-f="visitType"] [data-v="followup"]');
         if (followBtn) followBtn.click();
-        if (root.toast) root.toast((carrierType === "nfc" ? "Ni-Key Tag read: " : "Scanned code: ") + code);
+        if (root.toast) root.toast(carrierType === "nfc" ? wT("ward.reg-tag-read", "Ni-Key Tag read: {code}", { code: code }) : wT("ward.reg-scanned-code", "Scanned code: {code}", { code: code }));
       }
       if (a === "scan-qr") {
         if (root.WARD_LABELS && root.WARD_LABELS.cameraSupported && root.WARD_LABELS.cameraSupported()) {
           root.WARD_LABELS.scan().then(function (res) {
             if (res && res.code) applyResolvedIdentity(res.code, res.format || "qr");
             else if (res && res.error === "denied") {
-              if (root.toast) root.toast("Camera permission denied. Tap 🔒 in address bar → Site Settings → set Camera to Allow.");
+              if (root.toast) root.toast(wT("ward.reg-camera-denied", "Camera permission denied. Tap the lock icon in the address bar, open Site Settings and set Camera to Allow."));
             } else if (res && !res.cancelled) {
-              if (root.toast) root.toast("Camera scan failed.");
+              if (root.toast) root.toast(wT("ward.reg-camera-scan-failed", "Camera scan failed."));
             }
           });
           return;
         }
-        var pVal = prompt("Scan or type QR / Barcode / StewardID:");
+        var pVal = prompt(wT("ward.reg-scan-or-type", "Scan or type QR / Barcode / StewardID:"));
         if (pVal && pVal.trim()) applyResolvedIdentity(pVal.trim(), "qr");
         return;
       }
@@ -719,14 +719,14 @@
         var NFC = root.SMD_NFC || root.NiKey;
         if (!NFC || typeof NFC.startScan !== "function") {
           resetScan();
-          if (root.toast) root.toast("Ni-Key NFC reading is not available on this device");
+          if (root.toast) root.toast(wT("ward.reg-nfc-unavailable", "NFC is not available on this device"));
           return;
         }
         NFC.startScan(function (tag) {
           var uhid = (NFC.parseTagUhid && NFC.parseTagUhid(tag)) || "";
           if (!uhid) {
             resetScan();
-            if (root.toast) root.toast("Ni-Key tag is empty / unassigned.");
+            if (root.toast) root.toast(wT("ward.reg-tag-empty", "Ni-Key tag is empty / unassigned."));
             return;
           }
           /* Universal Patient Identity: resolve the tag to a canonical record first. A revoked
@@ -739,7 +739,7 @@
               var res = root.StewardIdentityResolver.resolvePatientIdentity({ type: "nfc", value: uhid });
               if (res && !res.then && res.ok === false && res.error === "CARRIER_REVOKED") {
                 resetScan();
-                if (root.toast) root.toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card.");
+                if (root.toast) root.toast(wT("ward.reg-carrier-revoked", "CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."));
                 return;
               }
               if (res && !res.then && res.ok && res.patient) hit = res;
@@ -753,10 +753,10 @@
           resetScan();
           var msg = (err && err.message) ? err.message : String(err || "");
           if (/permission.*denied/i.test(msg) || (err && (err.name === "NotAllowedError" || err.code === "PERMISSION_DENIED"))) {
-            if (root.toast) root.toast("NFC permission denied. Tap 🔒 in address bar → Site Settings → set NFC to Allow.");
+            if (root.toast) root.toast(wT("ward.reg-nfc-denied", "NFC permission denied. Tap the lock icon in the address bar, open Site Settings and set NFC to Allow."));
             return;
           }
-          if (root.toast) root.toast("Ni-Key NFC read error: " + msg);
+          if (root.toast) root.toast(wT("ward.reg-nfc-read-error", "Ni-Key NFC read error: {msg}", { msg: msg }));
         });
         return;
       }
