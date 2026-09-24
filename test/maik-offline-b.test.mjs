@@ -128,6 +128,20 @@ test("T24: a past turn renders identically whether or not it is the latest", () 
   assert.ok(p2.includes(turn1), "the first answer keeps its bytes when a newer turn follows it");
 });
 
+// ── T27: MaiK Lite is the default pin; five packs move to a collapsed Labs group ──
+test("T27: default pin is MaiK Lite; Neural, Horizon, Swift, Max and Max 2 are labs; the picker collapses them", () => {
+  const M = require("../maik-models.js");
+  assert.equal(M.activePack(), "maik-lite");
+  const labs = Object.keys(M.PACKS).filter((id) => M.PACKS[id].labs).sort();
+  assert.deepEqual(labs, ["bonsai-27b", "bonsai-8b", "bonsai2-27b", "maik-horizon", "maik-neural"]);
+  for (const id of labs) assert.ok(M.PACKS[id].files.length, id + " is still downloadable");
+  const ENG = readFileSync(new URL("../maik-engine.js", import.meta.url), "utf8");
+  assert.match(ENG, /var PACK_ID = "maik-lite";/);
+  assert.match(ENG, /if \(isLabs\(o\)\) \{ labs\.push\(o\); return; \}/);
+  assert.match(ENG, /'<details data-mk-labs' \+ \(open \? " open" : ""\)/, "collapsed unless the current choice is a labs pack");
+  assert.match(ENG, /\}\)\.join\(""\) \+ labsHTML\(labs\);/);
+});
+
 // ── T60: warm state follows the native side ──
 test("T60: a native release (llamaReleased) or a model found unloaded makes the next warm() load again", async () => {
   const e = engine({ loaded: false });
