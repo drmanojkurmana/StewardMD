@@ -10392,6 +10392,7 @@
       // This sheet is shared with the OPD front desk, whose verb is "Add to queue". Opened from the
       // bed board the act is an admission, and the button now says which bed it is admitting to.
       submitLabel: st.admitTarget && st.admitTarget.bed ? wT("ward.register-admit-to", "Register & admit to {bed}", { bed: st.admitTarget.bed }) : wT("ward.register-and-admit", "Register & admit"),
+      resolve: function (id) { return apiGet("/patient/resolve?orgId=" + encodeURIComponent(st.orgId) + "&id=" + encodeURIComponent(id)); },
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
       // S6 A5: the same ABHA verify and create as the Patients page, through abdm-desk.js.
       abdm: {

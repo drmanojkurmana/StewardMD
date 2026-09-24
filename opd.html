@@ -145,7 +145,7 @@
   @media(min-width:600px){.scrim{align-items:center}.sheet{border-radius:20px;transform:translateY(14px) scale(.98)}}
   .sheet h3{margin:0 0 12px;font-size:18px;letter-spacing:-.01em}
   .cats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-  .cats button{background:var(--btn);color:var(--ink);padding:9px 14px;font-weight:600;font-size:13px;border:1.5px solid var(--line);border-radius:10px}
+  .cats button{background:var(--btn);color:var(--ink);padding:9px 14px;min-height:44px;font-weight:600;font-size:13px;border:1.5px solid var(--line);border-radius:10px}
   .cats button.on{border-color:var(--tl);background:var(--tl-soft);color:var(--tl);font-weight:700}
   .sheet .row2{display:flex;gap:12px;margin-top:18px}.sheet .row2 button{flex:1;padding:13px;font-weight:700}
   .cancel{background:var(--btn);color:var(--ink);border:1.5px solid var(--line)}
@@ -324,11 +324,12 @@
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
-<script src="/patient-register.js?v=preg7-sid1" defer></script>
+<script src="/opd-pulse-model.js?v=1" defer></script>
+<script src="/patient-register.js?v=preg7-sid1-sid1" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
-<script src="/steward-identity-resolver.js?v=sir-1"></script>
+<script src="/steward-identity-resolver.js?v=sir-1-sid1-phi1"></script>
 <script src="/smd-identity-scanner.js?v=sis-1"></script>
 </head>
 <body>
@@ -447,6 +448,8 @@
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
   function logout(msg){
+    // The next person at this desk must not inherit the last one's patient lookups (steward-identity-resolver.js).
+    try{ if(window.StewardIdentityResolver&&window.StewardIdentityResolver.clearCache) window.StewardIdentityResolver.clearCache(); }catch(e){}
     if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} }
     st.tok=""; st.tokType=""; st.who=null;
     try{
@@ -729,35 +732,29 @@
     if(!st.orgId||st.orgId==="demo") return;
     api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
+      // Plan item 11: follow-ups promised and never booked (silent when the hospital has no record).
+      var now=new Date().toISOString();
+      if(st.pulse.ok) api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok&&st.pulse&&st.pulse.ok){ st.pulse.followups={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; paintPulse(); } }).catch(function(){});
     }).catch(function(){ st.pulse={failed:true}; paintPulse(); });
   }
   function paintPulse(){
     var host=document.getElementById("opdPulse"); if(host) host.innerHTML=pulseInner();
+    var rb=document.getElementById("opdRecon");
+    if(rb) rb.onclick=function(){ api("opd-reconcile",{method:"POST",body:{orgId:st.orgId}}).then(function(r){ toast(r&&r.ok?(r.landed+" of "+r.retried+" visits now in the record"+(r.stillFailed?"; "+r.stillFailed+" still failing":"")):"Could not retry now"); loadPulse(); }); };
   }
   function pnum(v,unit){ return v==null?'<i class="p-none">not yet</i>':esc(v)+(unit?'<u>'+unit+'</u>':''); }
   function pulseInner(){
-    var r=st.pulse; if(!r) return '';
-    if(r.failed) return '<div class="p-warn">Could not read the OPD figures. Do not read this as a quiet clinic.</div>';
-    var p=r.pulse||{},hall=p.waitingNow||{},d2d=p.doorToDoctor||{},desk=p.deskWait||{},doc=p.doctorWait||{};
-    var blame=desk.medianMin==null||doc.medianMin==null?''
-      :desk.medianMin>doc.medianMin*2?'the wait is at the desk'
-      :doc.medianMin>desk.medianMin*2?'the wait is for the doctor':'desk and doctor are even';
-    var tile=function(label,value,sub,warn){
-      return '<div class="p-t'+(warn?' warn':'')+'"><div class="p-l">'+esc(label)+'</div><div class="p-v">'+value+'</div><div class="p-s">'+(sub||'')+'</div></div>';
-    };
-    return '<div class="p-row">'+
-      tile('In the hall',esc(p.waiting||0),hall.longestMin?'longest '+esc(hall.longestMin)+'m':'nobody waiting',hall.over60>0)+
-      tile('Waiting over 1h',esc(hall.over60||0),(hall.over30||0)+' over 30m',(hall.over60||0)>0)+
-      tile('Door to doctor',pnum(d2d.medianMin,'m'),d2d.p90Min==null?'median':'9 in 10 within '+esc(d2d.p90Min)+'m')+
-      tile('Seen',esc(p.completed||0),(p.inConsultation||0)+' in the room')+
-      tile('Did not wait',p.abandonedPct==null?'<i class="p-none">not yet</i>':esc(p.abandonedPct)+'<u>%</u>',esc(p.noShow||0)+' no-show'+((p.noShow||0)===1?'':'s'),(p.abandonedPct||0)>=10)+
-      (p.held?tile('Awaiting result',esc(p.held),'sent for a test or booked back'):'')+
-      '</div>'+(blame?'<div class="p-note">Desk '+pnum(desk.medianMin,'m')+', doctor '+pnum(doc.medianMin,'m')+' · '+esc(blame)+'</div>':'')+
-      (r.unread&&r.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>':'');
+    var M=window.SMD_OPD_PULSE, m=st.pulse&&M?M.model(st.pulse):null; if(!m) return '';
+    if(m.failed) return '<div class="p-warn">'+esc(m.message)+'</div>';
+    var tiles=m.tiles.map(function(t){
+      var v=t.value==null?'<i class="p-none">not yet</i>':esc(t.value)+(t.unit?'<u>'+esc(t.unit)+'</u>':'');
+      var sub=t.action==="reconcile"?'<button class="ghost" id="opdRecon" style="padding:2px 8px">Send again</button>':esc(t.sub||'');
+      return '<div class="p-t'+(t.warn?' warn':'')+'"><div class="p-l">'+esc(t.label)+'</div><div class="p-v">'+v+'</div><div class="p-s">'+sub+'</div></div>';
+    }).join('');
+    return '<div class="p-row">'+tiles+'</div>'+
+      (m.note?'<div class="p-note">Desk '+pnum(m.note.deskMin,'m')+', doctor '+pnum(m.note.doctorMin,'m')+' · '+esc(m.note.text)+'</div>':'')+
+      (m.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(m.unread.join(", "))+'), so these figures are short.</div>':'');
   }
-  /* D13: RECALL NO-SHOWS. Every queue in this hospital today; a patient marked no-show in the last 4 hours
-   * (and before the session ended) goes back to waiting with the SAME token, at the head of their priority
-   * band. A reason is required and recorded with who and when. A failed load is said, never "nobody". */
   function openNoShows(){
     open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
     sheet.querySelector("#cx").onclick=close;
@@ -860,7 +857,7 @@
   function labBadges(t){
     var h="";
     if(t.status==="at_diagnostics") h+=' <span class="chip" style="background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700">At Lab / Tests</span>';
-    if(t.priority===1) h+=' <span class="chip" style="background:#fef9c3;color:#854d0e;font-size:11px;font-weight:700">★ Results Ready</span>';
+    if(t.priority===1) h+=' <span class="chip" style="background:#fef9c3;color:#854d0e;font-size:11px;font-weight:700">'+(t.priorityReason&&t.priorityReason!=="results"?esc(prioLabel(t)):"★ Results Ready")+'</span>';
     return h;
   }
   function ticketRow(s,t,i,n){
@@ -874,7 +871,7 @@
     if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
     if(!atLab&&can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
     if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
-    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear urgent":"Urgent")+'</button>');
+    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority||0)+'">'+(t.priority?"Change priority":"Priority")+'</button>');
     if(!consult&&!atLab&&can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');   // an in-consultation patient isn't queued -> assign always failed; hide it
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // reroute from the room back to the waiting hall (in_consultation -> waiting)
     if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // out to diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
@@ -905,9 +902,9 @@
         else if(a==="sendback") post("status",{sessionId:sid,ticketId:tid,status:"waiting"});
         else if(a==="senddiag") post("status",{sessionId:sid,ticketId:tid,status:"at_diagnostics"});
         // Tests done: back to the doctor's queue first, then flagged priority 1 so the row reads Results Ready.
-        else if(a==="diagdone") post("status",{sessionId:sid,ticketId:tid,status:"waiting"},function(){ post("priority",{sessionId:sid,ticketId:tid,priority:1}); });
+        else if(a==="diagdone") post("status",{sessionId:sid,ticketId:tid,status:"waiting"},function(){ post("priority",{sessionId:sid,ticketId:tid,reason:"results"}); });
         else if(a==="noshow") openNoShowMark(sid,tid,btn.getAttribute("data-n"));
-        else if(a==="prio") post("priority",{sessionId:sid,ticketId:tid,priority:+btn.getAttribute("data-p")});
+        else if(a==="prio") openPriority(sid,tid,+btn.getAttribute("data-p"));
         else if(a==="up") openMove(sid,tid,+btn.getAttribute("data-i")-1);
         else if(a==="down") openMove(sid,tid,+btn.getAttribute("data-i")+1);
         else if(a==="top") openMove(sid,tid,0);
@@ -934,8 +931,27 @@
     });
   }
   function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
-  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why.",weak_pin:"PIN must be 4-8 digits; avoid simple repeated digits like 1111.",weak_password:"Password is too weak or common. Use at least 10 characters.",member_not_found:"Staff member not found."}[e]||e; }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required.",ticket_changed:"This patient changed meanwhile. Reload and try again.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why.",weak_pin:"PIN must be 4-8 digits; avoid simple repeated digits like 1111.",weak_password:"Password is too weak or common. Use at least 10 characters.",member_not_found:"Staff member not found."}[e]||e; }
 
+  // ---- plan item 12: priority with a reason. The reason sets the level on the server (_queue_eta.js
+  // priorityRule): an emergency goes first, the rest ahead of the ordinary queue; "clear" is a reason too.
+  var PRIO=[["emergency","Emergency"],["senior","Senior citizen"],["pregnant","Pregnant"],["disability","Disability"],["child","Child"],["results","Results ready"],["other","Other"]];
+  function prioLabel(t){ if(!t||!t.priority) return ""; if(t.priority>=2) return "Emergency"; var m=PRIO.filter(function(p){return p[0]===t.priorityReason;})[0]; return m?m[1]:"Priority"; }
+  function openPriority(sid,tid,cur){
+    var chosen="", list=PRIO.slice(); if(cur) list.push(["clear","Clear priority"]);
+    open('<h3>Priority <span style="color:var(--mut);font-weight:600;font-size:13px">(reason required)</span></h3><p style="color:var(--mut);margin:0 0 8px">The reason sets the place: an emergency goes first, the others ahead of the ordinary queue. Recorded in the audit trail.</p>'+
+      '<div class="cats" role="group" aria-label="Priority reason">'+list.map(function(p){return '<button type="button" aria-pressed="false" data-c="'+p[0]+'">'+p[1]+'</button>';}).join("")+'</div>'+
+      '<input id="pnote" aria-label="Priority note" placeholder="Note (required for Other)">'+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Set priority</button></div>');
+    Array.prototype.forEach.call(sheet.querySelectorAll(".cats [data-c]"),function(b){b.onclick=function(){chosen=b.getAttribute("data-c");Array.prototype.forEach.call(sheet.querySelectorAll(".cats button"),function(x){x.classList.remove("on");x.setAttribute("aria-pressed","false");});b.classList.add("on");b.setAttribute("aria-pressed","true");};});
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var note=sheet.querySelector("#pnote").value.trim();
+      if(!chosen){toast("Pick a reason");return;}
+      if(chosen==="other"&&note.length<3){toast("Say why in the note");return;}
+      close(); post("priority",{sessionId:sid,ticketId:tid,reason:chosen,note:note});
+    };
+  }
   // ---- reorder-with-reason modal (anti-misuse) ----
   var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
   function openMove(sid,tid,toIndex){
@@ -1759,6 +1775,8 @@
             '<div style="display:flex;align-items:center;gap:6px">' +
               '<span style="font-weight:700">₹</span>' +
               '<input type="number" min="0" step="50" style="width:90px;padding:6px 8px;margin:0" value="' + fee + '" data-docfee-id="' + esc(doc.id) + '" data-docfee-name="' + esc(doc.name) + '" data-docfee-tid="' + esc(curItem ? curItem.id : "") + '">' +
+              // OPD plan item 9: the follow-up fee (blank = same as a new visit). The free-review window is the hospital setting.
+              '<input type="number" min="0" step="50" placeholder="Follow-up" title="Follow-up fee (blank = same as new)" style="width:90px;padding:6px 8px;margin:0 0 0 6px" value="' + (curItem && curItem.followupPrice != null ? Math.round(curItem.followupPrice / 100) : "") + '" data-docfee-fu="' + esc(doc.id) + '">' +
               '<button class="btn" style="margin:0;width:auto;padding:6px 12px;font-size:12px" data-save-docfee="' + esc(doc.id) + '">Save</button>' +
             '</div>' +
           '</div>';
@@ -1806,6 +1824,7 @@
               kind: "consultation",
               code: "CONS-" + docId.replace(/[^a-zA-Z0-9]/g, "").slice(0, 10),
               price: amt,
+              followupPrice: (function(){ var fu = host.querySelector('[data-docfee-fu="' + docId + '"]'); return fu && fu.value !== "" ? Math.round(Number(fu.value) * 100) : ""; })(),
               doctorId: docId,
               doctorName: docName
             };
@@ -2167,7 +2186,7 @@
     if(atLab&&can("queue.status")) b.push('<button class="pri" data-a="diagdone" data-s="'+s.id+'" data-t="'+t.id+'">Tests Done → Return</button>');
     if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">No-show</button>');   // D13: called and did not come; recallable with the same token
     if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
-    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
+    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority||0)+'">'+(t.priority?"Change priority":"Priority")+'</button>');
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // room -> waiting hall (in_consultation -> waiting)
     if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // room -> diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
@@ -2556,14 +2575,14 @@
     rooms.sort(function(a,b){ return (match(b)?1:0)-(match(a)?1:0) || (a.waiting||0)-(b.waiting||0); });
     var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+(match(r)?"✓ ":"")+esc(r.room.name||"Room")+(r.room.department?" ("+esc(r.room.department)+")":"")+' - '+esc(STATUS_LABEL[r.status]||r.status)+' · '+r.waiting+' waiting</option>';}).join("");
     open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first."+(pt.token?" A room in another department keeps token "+esc(pt.token)+".":""):"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
-      (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px"><input type="checkbox" id="urg"> Urgent (front of the room queue)</label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
+      (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px">Priority<select id="prsel" style="margin-top:6px"><option value="">None (arrival order)</option>'+PRIO.map(function(p){return '<option value="'+p[0]+'">'+p[1]+'</option>';}).join("")+'</select></label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
       '<input id="arz" placeholder="Optional note" style="margin-top:6px">'+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
       var sel=sheet.querySelector("#rsel"); if(!sel){toast("No room available");return;}
       var body={orgId:st.orgId,ticketId:tid,roomId:sel.value,date:st.date,reason:sheet.querySelector("#arz").value.trim()};
-      var urg=sheet.querySelector("#urg"); if(urg&&urg.checked) body.priority=2;
+      var prs=sheet.querySelector("#prsel"); if(prs&&prs.value){ if(prs.value==="other"&&body.reason.length<3){toast("Say why in the note");return;} body.priorityReason=prs.value; }
       close();
       api("assign-room",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Assign failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
     };
@@ -2583,6 +2602,7 @@
         clinicName: st.orgCode||"Check-in",
         departments: o?(o.departments||[]):null,
         departmentRequired: perDept,
+        resolve: function(id){ return api("patient/resolve?orgId="+encodeURIComponent(st.orgId)+"&id="+encodeURIComponent(id)); },
         submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue="pool"; return api("patient/register",{method:"POST",body:b}); },
         onAdded: function(r,sent){
           // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
@@ -2819,6 +2839,6 @@
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
 <script src="/wardsynq/site/bug-reporter.js?v=4"></script>
-<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1" defer></script>
+<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1-sid1" defer></script>
 </body>
 </html>

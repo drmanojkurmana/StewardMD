@@ -235,9 +235,30 @@
     }
     return { version: ver, mask: best.mask, size: size, modules: best.m };
   }
+  /* THE CODE ON A LABEL IS DRAWN BY THE SAME LIBRARY AS THE PRESCRIPTION'S (owner, 2026-09-24: "the QR
+   * generated doesn't work, use the same mechanism we use in Prescription"). This file assembled its own
+   * matrix from the primitives above - the exact approach pglog-qr.js abandoned after its codes turned out
+   * unreadable, because nothing ever checked the finished code could be scanned back. The primitives stay
+   * exported for their tests; the drawing now goes through vendor/qrcode-generator.js (MIT), error
+   * correction M so a creased wristband or a smudged card still scans.
+   *
+   * When the library has not loaded yet the StewardID is printed as TEXT and the library is fetched:
+   * a readable number beats a code that looks fine and scans as nothing. */
+  function qrLib() {
+    if (typeof window !== "undefined" && window.qrcode) return window.qrcode;
+    if (typeof require === "function") { try { return require("./vendor/qrcode-generator.js"); } catch (e) {} }
+    return null;
+  }
+  function ensureQrLib() {
+    if (qrLib() || typeof document === "undefined" || !document.createElement || document.getElementById("smdQrLib")) return;
+    try { var s = document.createElement("script"); s.id = "smdQrLib"; s.src = "/vendor/qrcode-generator.js?v=qrgen1"; (document.head || document.body).appendChild(s); } catch (e) {}
+  }
   function qrSvg(text, opts) {
-    var q = qr(text), quiet = 4, n = q.size + quiet * 2, d = "";
-    for (var y = 0; y < q.size; y++) for (var x = 0; x < q.size; x++) if (q.modules[y][x]) d += "M" + (x + quiet) + " " + (y + quiet) + "h1v1h-1z";
+    var lib = qrLib();
+    if (!lib) { ensureQrLib(); return '<div class="' + esc((opts && opts.cls) || "qr") + ' qr-text">' + esc(text) + "</div>"; }
+    var code = lib(0, "M"); code.addData(String(text)); code.make();
+    var size = code.getModuleCount(), quiet = 4, n = size + quiet * 2, d = "";
+    for (var y = 0; y < size; y++) for (var x = 0; x < size; x++) if (code.isDark(y, x)) d += "M" + (x + quiet) + " " + (y + quiet) + "h1v1h-1z";
     return '<svg xmlns="http://www.w3.org/2000/svg" class="' + esc((opts && opts.cls) || "qr") + '" viewBox="0 0 ' + n + " " + n + '" shape-rendering="crispEdges" role="img" aria-label="' + esc(text) + '">' +
       '<rect width="' + n + '" height="' + n + '" fill="#fff"/><path fill="#000" d="' + d + '"/></svg>';
   }

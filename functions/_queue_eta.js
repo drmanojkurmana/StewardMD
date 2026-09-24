@@ -44,6 +44,18 @@ export function recallRefusal(ticket, session, nowMs) {
   return null;
 }
 // Tickets still waiting for the doctor (get a position + ETA). in_consultation/investigation/terminal excluded.
+/* Plan item 12: priority follows a stated reason, never a bare number. The reason decides the level
+ * (an emergency goes above everyone, the others above the ordinary queue), so two desks give the same
+ * patient the same place, and "clear" is itself a reason: taking priority away is an override too.
+ * "other" needs words. Returns null when no acceptable reason was given. */
+export const PRIORITY_LEVEL = { emergency: 2, senior: 1, pregnant: 1, disability: 1, child: 1, results: 1, other: 1, clear: 0 };
+export function priorityRule(reason, note) {
+  const r = String(reason || "").trim().toLowerCase();
+  const n = String(note || "").trim().slice(0, 100);
+  if (!Object.prototype.hasOwnProperty.call(PRIORITY_LEVEL, r)) return null;
+  if (r === "other" && n.length < 3) return null;
+  return { priority: PRIORITY_LEVEL[r], reason: r, note: n };
+}
 export function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
 
 // ---- ordering: emergency/priority first, then MANUAL order, then arrival --------------------
@@ -238,7 +250,7 @@ export function opdPulse(tickets, nowMs) {
   const rows = tickets || [], now = Number.isFinite(nowMs) ? nowMs : Date.now();
   const WAIT = ["registered", "waiting", "called"];
   const doorToSeen = [], doorToCalled = [], calledToSeen = [], consults = [], waitingNow = [];
-  let waiting = 0, inConsultation = 0, completed = 0, noShow = 0, cancelled = 0, recalls = 0, held = 0;
+  let waiting = 0, inConsultation = 0, completed = 0, noShow = 0, cancelled = 0, recalls = 0, held = 0, syncFailed = 0, resultsBack = 0;
 
   for (const t of rows) {
     if (!t) continue;
@@ -250,6 +262,8 @@ export function opdPulse(tickets, nowMs) {
     // Waiting on a result, at the lab, or booked back: still the hospital's open work, counted apart from the hall.
     else if (t.status === "investigation" || t.status === "followup" || t.status === "at_diagnostics") held++;
     recalls += Number(t.recallCount) || 0;
+    if (t.encounterSync === "failed") syncFailed++;   // seen or queued, but the visit is not in the clinical record
+    if (t.resultReadyAt && WAIT.indexOf(t.status) > -1) resultsBack++;   // plan item 10: back from a test, result ready
 
     if (t.registeredAt && t.consultStartAt) doorToSeen.push(t.consultStartAt - t.registeredAt);
     if (t.registeredAt && t.calledAt) doorToCalled.push(t.calledAt - t.registeredAt);
@@ -262,7 +276,7 @@ export function opdPulse(tickets, nowMs) {
   return {
     at: now,
     registered: rows.length,
-    waiting, inConsultation, completed, noShow, cancelled, held, recalls,
+    waiting, inConsultation, completed, noShow, cancelled, held, recalls, syncFailed, resultsBack,
     seen: completed + inConsultation,
     // History: how long it took the people already seen.
     doorToDoctor: { medianMin: percentileMin(doorToSeen, 50), p90Min: percentileMin(doorToSeen, 90), n: doorToSeen.length },

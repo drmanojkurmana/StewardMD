@@ -96,8 +96,12 @@
     return finishNorm(str);
   }
 
+  /* SMP-XXXX-XXXXC is the StewardID, minted and reserved by the SERVER (functions/_steward_id.js), with
+   * a Luhn mod-32 check character. The legacy SMD- form is still RECOGNISED so a card printed before
+   * the move keeps scanning, but no new ID is ever issued in it: SMD- is the clinic-code namespace. */
   function isStewardId(v) {
-    return /^SMD-[0-9A-Z][0-9A-Z-]*$/.test(String(v || ""));
+    var s = String(v || "");
+    return /^SMP-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{5}$/.test(s) || /^SMD-[0-9A-Z][0-9A-Z-]*$/.test(s);
   }
 
   function normType(t) {
@@ -119,20 +123,27 @@
     return Math.floor(Math.random() * n);
   }
 
-  /* Canonical patient identifier: SMD- + 6 Crockford Base32 chars (no I/L/O/U). */
+  /* NOT HOW A PATIENT GETS A STEWARDID. Registration IDs are minted and reserved by the server
+   * (functions/_steward_id.js), because an ID minted here was unique only within this tab and was never
+   * stored. This produces the same SMP-XXXX-XXXXC shape, check character included, for tests and
+   * previews only; nothing that registers a patient calls it. */
+  function luhn32(body) {
+    var factor = 2, sum = 0;
+    for (var i = body.length - 1; i >= 0; i--) {
+      var addend = factor * CROCKFORD.indexOf(body.charAt(i));
+      factor = factor === 2 ? 1 : 2;
+      sum += Math.floor(addend / 32) + (addend % 32);
+    }
+    return CROCKFORD.charAt((32 - (sum % 32)) % 32);
+  }
   function mintStewardId() {
     for (var tries = 0; tries < 64; tries++) {
-      var s = "SMD-";
-      for (var i = 0; i < 6; i++) s += CROCKFORD.charAt(randInt(CROCKFORD.length));
-      if (!minted[s]) {
-        minted[s] = true;
-        return s;
-      }
+      var b = "";
+      for (var i = 0; i < 8; i++) b += CROCKFORD.charAt(randInt(CROCKFORD.length));
+      var s = "SMP-" + b.slice(0, 4) + "-" + b.slice(4) + luhn32(b);
+      if (!minted[s]) { minted[s] = true; return s; }
     }
-    var f = "SMD-";
-    for (var k = 0; k < 6; k++) f += CROCKFORD.charAt(Math.floor(Math.random() * CROCKFORD.length));
-    minted[f] = true;
-    return f;
+    throw new Error("could not mint a preview StewardID");
   }
 
   /* ---- carrier registry + revocation ---- */
@@ -301,18 +312,28 @@
     } catch (e) {}
   }
 
+  /* NO PATIENT DATA ON THE DISK. This cache used to write the whole record - name, phone, encounter,
+   * admission, queue ticket - to localStorage in plain text, keyed by the card, never cleared on sign-out:
+   * on a shared reception PC that is a DPDP breach waiting for the next person to open DevTools. The full
+   * record now lives in memory only (gone with the tab); the disk keeps a HINT - which StewardID is which
+   * patient id - that expires after 12 hours. The server (GET /patient/resolve) is the source of truth. */
+  var HINT_TTL_MS = 12 * 3600 * 1000;
   function cacheGet(key) {
     if (!key) return null;
     if (memCache[key]) return memCache[key];
-    var hit = lsGet(key);
-    if (hit) memCache[key] = hit;
-    return hit;
+    var hint = lsGet(key);
+    if (!hint) return null;
+    if (!hint.exp || hint.exp < Date.now() || hint.patient) { lsDel(key); return null; }   // expired, or a pre-fix full record
+    return hint;
   }
 
   function cacheSet(key, val) {
     if (!key || !val) return;
     memCache[key] = val;
-    lsSet(key, val);
+    lsSet(key, { stewardId: val.stewardId || null, patientId: val.patientId || null, exp: Date.now() + HINT_TTL_MS });
+  }
+  function lsDel(key) {
+    try { if (typeof localStorage !== "undefined" && localStorage.removeItem) localStorage.removeItem(CACHE_PREFIX + key); } catch (e) {}
   }
 
   function cacheClear() {

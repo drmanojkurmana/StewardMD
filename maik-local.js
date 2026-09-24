@@ -94,7 +94,8 @@
     "clinical questions.\"\n" +
     "Give the final answer only, never your reasoning.\n" +
     "Open with ONE plain sentence answering the question, then as much well-organised detail as the " +
-    "question deserves: a quick question gets a few short bullets; a request for detail, an essay or a " +
+    "question deserves: a single fact (one dose, one code, a yes or no) gets a short answer; any other question " +
+    "gets a balanced answer covering the key points a clinician needs; a request for detail, an essay or a " +
     "complete overview gets full sections (pathophysiology, clinical features, diagnosis, treatment and " +
     "whatever else was asked), each written to the end. Never stop part-way through a section. Use no " +
     "section labels such as \"Bottom Line\", \"Answer\" or \"Summary\".\n" +
@@ -459,15 +460,18 @@
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
     var L = [];
     var hist = histTurns(pkg.history);
+    // An 8K window carries twice the turns and more of each (owner, 2026-09-24); 4K keeps the old budget.
+    var bigCtx = ctxOf(models() && packId && models().PACKS[packId]) >= 8192;
+    var TURNS = bigCtx ? 4 : HISTORY_TURNS, HCLIP = bigCtx ? 400 : HISTORY_CLIP, CCAP = bigCtx ? 1400 : CARRY_CAP;
     if (continues(question, hist)) {
       L.push("Recent conversation:");
       // An aspect-only follow-up ("Drugs?", "side effects?") is about the answer just given. Showing
       // the exchange before it too made "Drugs?" after a CFS answer come back about carvedilol from the
       // varices turn (owner transcript, 2026-09-21). Corrections and named subjects keep both turns.
-      var turns = hist.slice(subjectTokens(question).length ? -HISTORY_TURNS * 2 : -2);
+      var turns = hist.slice(subjectTokens(question).length ? -TURNS * 2 : -2);
       turns.forEach(function (h, i) {
         var isA = h.role === "assistant", lastA = isA && i === turns.length - 1 - (turns[turns.length - 1].role === "assistant" ? 0 : 1);
-        L.push((isA ? "MaiK: " : "Doctor: ") + (lastA ? carry(h.text || h.content) : clip(h.text || h.content, HISTORY_CLIP)));
+        L.push((isA ? "MaiK: " : "Doctor: ") + (lastA ? carry(h.text || h.content, CCAP) : clip(h.text || h.content, HCLIP)));
       });
       L.push("");
     }
@@ -559,12 +563,14 @@
      * free. So the plugin declares which kind of number it is and the soft case only refuses the
      * region where thrashing is certain rather than possible.
      */
+    var _mem = null;
     return Promise.resolve()
       .then(function () { return L.available(); })
       // A plugin that cannot answer the question has no opinion on memory. Failing to MEASURE must
       // never become a reason not to ANSWER.
       .then(function (a) { return a; }, function () { return null; })
       .then(function (a) {
+        _mem = a;
         var avail = 0, need = 0;
         try {
           avail = (a && Number(a.availableMemory)) || 0;
@@ -583,14 +589,19 @@
         return null;
       })
       .then(function () { return Promise.all([M.pathFor(packId), draftPathFor(packId)]); }).then(function (pp) {
-      return L.load({ path: pp[0], nCtx: pk.nCtx || 4096,
-        // perf plan #4: a q8_0 KV cache halves the cache and the memory traffic per decoded token;
-        // flash attention is what makes a quantised V cache legal. A pack may opt out (kvQ8: false).
-        kvQ8: pk.kvQ8 !== false, flashAttn: pk.flashAttn !== false,
-        // perf plan #5: prefill knobs per pack; 0 = the plugin's measured default.
-        nBatch: pk.nBatch || 0, nUbatch: pk.nUbatch || 0,
-        // perf plan #6: same-tokeniser draft for speculative decoding, when it is on disk.
-        draftPath: pp[1] || "" });
+      function loadAt(n) {
+        return L.load({ path: pp[0], nCtx: n,
+          // perf plan #4: a q8_0 KV cache halves the cache and the memory traffic per decoded token;
+          // flash attention is what makes a quantised V cache legal. A pack may opt out (kvQ8: false).
+          kvQ8: pk.kvQ8 !== false, flashAttn: pk.flashAttn !== false,
+          // perf plan #5: prefill knobs per pack; 0 = the plugin's measured default.
+          nBatch: pk.nBatch || 0, nUbatch: pk.nUbatch || 0,
+          // perf plan #6: same-tokeniser draft for speculative decoding, when it is on disk.
+          draftPath: pp[1] || "" }).then(function (r) { pk._ctx = n; return r; });
+      }
+      // A bigger window the device then refuses falls back to the proven size rather than failing.
+      var base = pk.nCtx || 4096, want = wantCtx(packId, pk, _mem);
+      return want > base ? loadAt(want).catch(function () { return loadAt(base); }) : loadAt(base);
     }).then(function () { _loadedPack = packId; fetchDraftOnce(packId); return null; }, function (err) {
       /* A CORRUPT MODEL IS A DEAD END UNLESS WE CLEAR IT.
        *
@@ -1076,6 +1087,21 @@
         // they are designed to". No per-pack cap: the answer may use every token the prompt leaves
         // free in the context window. (A 512 cap cut "tell me in detail" mid-sentence.)
         common.nPredict = openBudget(pk, common.system, common.prompt);
+        // Answer length (owner, 2026-09-24): Balanced by default, Short or Detailed on request. The
+        // token budget follows the words so a short answer cannot ramble and a detailed one is never
+        // cut; images, persona modes (their own "two to five sentences"), greetings and overrides keep
+        // their own prompts untouched.
+        if (!images.length && !(opts && (opts.systemOverride || (opts.mode && MODE_SYS[opts.mode]))) && !isGreeting(pkg && pkg.question)) {
+          var depth = opts && opts.depth;
+          if (depth === "brief") { common.nPredict = Math.min(common.nPredict, 400); common.system += "\nLENGTH: SHORT. Answer directly in 3 to 6 sentences or a few bullets; no sections or background; keep safety-critical caveats."; }
+          else if (depth === "detailed") { common.system += "\nLENGTH: DETAILED. Cover every relevant aspect in full sections; do not stop early."; }
+          // Balanced (owner, 2026-09-25: "answer balanced rather than short"): "essential points only"
+          // read to a small model as "a few bullets". Say what balanced covers, and how much.
+          else { common.nPredict = Math.min(common.nPredict, 1100); common.system += "\nLENGTH: BALANCED. Open with one plain sentence that answers the question, then cover the key points a clinician needs in 2 to 4 short sections or 6 to 12 bullets, as the question calls for (key facts, diagnosis, management, doses, cautions); about 200 to 350 words. Do not stop after two or three bullets."; }
+          // About me: the doctor's saved preferences (home.js maikMeLine). Stable across a thread, so it
+          // sits in the system prompt, inside the reused KV prefix.
+          if (pkg && pkg.doctor) { var _me = "\nABOUT THE CLINICIAN (their saved preferences; tailor to them, never mention this): " + String(pkg.doctor).slice(0, 400); common.system += _me; common.nPredict = Math.max(256, common.nPredict - estTokens(_me)); }
+        }
         if (!images.length) return L.generate(common);
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone
         // photo is several MB and marshalling that as a string is what made the old downloader
@@ -1494,8 +1520,26 @@
   var WEB_MAX = 0;   // 0 = whatever the context window has left (owner, 2026-09-21: no token limits offline)
   /** Tokens the answer may use: the context window minus the prompt, with a margin for the chat
    * template and the estimator's error. Never below the pack's old default. */
+  /* A BIGGER WINDOW WHEN THE PHONE HAS ROOM (owner, 2026-09-24: "context as big as it permits and
+   * keeps functioning"). The q8_0 KV cache (perf plan #4) halves the cache, so 8192 costs about what
+   * 4096 did in f16. Headroom is still checked against the f16 figure (kvGBat4k): a device that
+   * refuses q8 falls back to f16, and an iOS jetsam kill cannot be caught and retried. No memory
+   * reading means stay at the proven 4096. */
+  var BIG_CTX = 8192;
+  function wantCtx(packId, pk, a) {
+    var base = (pk && pk.nCtx) || 4096, big = (pk && pk.nCtxMax) || BIG_CTX;
+    if (big <= base || pk.kvQ8 === false || pk.flashAttn === false) return base;
+    var avail = (a && Number(a.availableMemory)) || 0; if (!avail) return base;
+    var M = models(), c = (M && M.caps && M.caps(packId)) || {};
+    var extra = (c.kvGBat4k || 0.6) * 1e9 * (big - base) / 4096, need = 0;
+    try { need = (M.totalBytes(packId) || 0) + draftBytes(M, packId); } catch (e) {}
+    // ponytail: margins are estimates (KV is dirty memory, never evicted); retune from device logs.
+    if (a.memoryIsHardLimit) return avail >= need * 1.15 + extra * 1.25 ? big : base;
+    return avail >= need * 0.35 + extra * 2 ? big : base;
+  }
+  function ctxOf(pk) { return (pk && (pk._ctx || pk.nCtx)) || 4096; }
   function openBudget(pk, system, prompt) {
-    var ctx = (pk && pk.nCtx) || 4096;
+    var ctx = ctxOf(pk);
     return Math.max((pk && pk.nPredict) || 512, ctx - estTokens(String(system || "")) - estTokens(String(prompt || "")) - 256);
   }
   function generateText(prompt, system, nPredict, opts) {
@@ -1762,7 +1806,7 @@
     return Math.ceil((s.length - non) / 3.6 + non * 1.2);
   }
   function windowBudget(packId, systemText, nPredict) {
-    var pk = (models() && models().PACKS[packId]) || {}; var ctx = pk.nCtx || 4096;
+    var pk = (models() && models().PACKS[packId]) || {}; var ctx = ctxOf(pk);
     return Math.max(400, ctx - estTokens(systemText) - (nPredict || 512) - 160);   // 160: chat template + margin
   }
   function splitWindows(text, tokenBudget) {

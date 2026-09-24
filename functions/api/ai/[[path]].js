@@ -14,7 +14,9 @@
  * Config (Pages env / encrypted secrets):
  *   AI_PROVIDER     (optional, 'vertex' [primary, default] | 'developer')
  *   GEMINI_MODEL    (optional, default 'gemini-2.5-flash'; do NOT use gemini-2.0-flash)
- *   Vertex (primary):  GCP_PROJECT, GCP_LOCATION (default us-central1), GCP_SA_EMAIL.
+ *   Vertex (primary):  EITHER an API key, VERTEX_API_KEY (Vertex AI express mode, publisher path,
+ *     no project or region in the URL; owner 2026-09-24, replaces the old account's project
+ *     credentials), OR the project path: GCP_PROJECT, GCP_LOCATION (default us-central1), GCP_SA_EMAIL.
  *     KEYLESS (production): Workload Identity Federation — GCP_WIF_PRIVATE_KEY (PKCS8 PEM,
  *       Cloudflare secret; public JWK uploaded to the WIF provider), GCP_WIF_AUDIENCE,
  *       GCP_WIF_KID, GCP_WIF_ISSUER, GCP_WIF_SUBJECT. No GCP SA key exists.
@@ -317,26 +319,36 @@ async function vertexAccessToken(env) {
   _vTok = env.GCP_WIF_PRIVATE_KEY ? await wifAccessToken(env) : await saJwtAccessToken(env);
   return _vTok.value;
 }
+/* VERTEX_API_KEY = Vertex AI express mode: the publisher path on aiplatform.googleapis.com with the key
+ * in the x-goog-api-key header (never in the URL, so it cannot land in a log). When it is set it is
+ * THE Vertex credential; the project/service-account path below is used only when it is absent. */
+const VERTEX_EXPRESS = "https://aiplatform.googleapis.com/v1/publishers/google/models";
+function vertexKey(env) { return String((env && env.VERTEX_API_KEY) || "").trim(); }
+function vertexProjectReady(env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); }
+async function vertexCall(env, opts, method) {
+  const key = vertexKey(env);
+  const loc = env.GCP_LOCATION || "asia-south1";
+  if (key) return { url: `${VERTEX_EXPRESS}/${modelFor(env, opts)}:${method}`, headers: { "x-goog-api-key": key, "Content-Type": "application/json" } };
+  const token = await vertexAccessToken(env);
+  return { url: `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:${method}`,
+           headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" } };
+}
 const vertexProvider = {
   name: "vertex",
-  available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
+  available: function (env) { return !!vertexKey(env) || vertexProjectReady(env); },
   generate: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "asia-south1";
-    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:generateContent`;
-    const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
-    const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
+    const c = await vertexCall(env, o, "generateContent");
+    const jr = await fetchJsonWithTimeout(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
     { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "asia-south1";
-    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:streamGenerateContent?alt=sse`;
-    const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
-    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
+    const c = await vertexCall(env, o, "streamGenerateContent?alt=sse");
+    return fetch(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
@@ -509,7 +521,8 @@ function providerOrder(env, opts) {
   // Azure/Foundry FIRST (Vertex→Developer as fallback) ONLY for a MaiK call (opts.maik). Every other
   // module (Vision, ECG/KardiQ, ThoreX, FundX, scribe, router, …) stays on Gemini/Vertex exactly as
   // before, regardless of AI_PROVIDER. AI_PROVIDER=developer uses the Developer API directly.
-  const sel = String(env.AI_PROVIDER || "developer").toLowerCase();
+  // Owner, 2026-09-24: Vertex is the main provider and the Gemini (AI Studio) key is the fallback.
+  const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
   const forMaik = !!(opts && opts.maik);
   let order = sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];   // AZURE REMOVED: developer-primary (edge, fast in India) + vertex failover
   if (!forMaik) order = order.filter(function (n) { return n !== "azure"; });              // non-MaiK → never Azure
@@ -781,6 +794,10 @@ function renderGroundedPrompt(pkg) {
   // The clinician's actual question MUST lead the prompt — otherwise the model answers from
   // whatever was retrieved and (with a vague follow-up) narrates unrelated retrieved diseases.
   if (pkg.question) L.push("=== CLINICIAN QUESTION (answer THIS specifically and completely) ===\n" + clip(pkg.question, 500) + "\n");
+  if (pkg.doctor) {
+    // About me (owner, 2026-09-25): the doctor's own saved preferences, never patient data.
+    L.push("=== ABOUT THE CLINICIAN (their saved preferences: tailor setting, guideline choice and emphasis to them; never mention this block) ===\n" + clip(String(pkg.doctor), 400) + "\n");
+  }
   if (pkg.history && pkg.history.length) {
     // pkg.newTopic: the client's continuity classifier judged this a NEW question (it names a subject
     // the thread never mentioned). The turns still travel as background, but the model must not
@@ -788,8 +805,15 @@ function renderGroundedPrompt(pkg) {
     L.push(pkg.newTopic
       ? "=== RECENT CONVERSATION (background only: the clinician has moved to a NEW question; answer it on its own and do NOT merge it with the earlier condition unless they explicitly link the two) ==="
       : "=== RECENT CONVERSATION (for context/continuity; do not repeat it back) ===");
-    pkg.history.slice(-4).forEach(function (h) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, 300)); });
+    // Memory (owner, 2026-09-24): the client sends answer GISTS (opening line + key points), not whole
+    // answers. The latest answer is what a follow-up refers to, so it keeps the most; older ones less.
+    const H = pkg.history.slice(-6);
+    H.forEach(function (h, i) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, i === H.length - 1 ? 1200 : 450)); });
     L.push("");
+  }
+  if (Array.isArray(pkg.earlier) && pkg.earlier.length) {
+    L.push("=== EARLIER IN THIS CONVERSATION the clinician also asked about (context only) ===\n" +
+      pkg.earlier.slice(-12).map(function (x) { return clip(String(x || ""), 100); }).filter(Boolean).join("; ") + "\n");
   }
   L.push("=== DETERMINISTIC ENGINE OUTPUT (AUTHORITATIVE — do not change the diagnosis) ===");
   if (r.gate) L.push("Gate: " + clip(JSON.stringify(r.gate), 300));
@@ -1313,6 +1337,7 @@ export async function onRequest(context) {
       token_cache: true,
       last_failover: _lastFailover,
       vertex_status: vAvail ? "healthy" : "unavailable",
+      vertex_mode: vertexKey(env) ? "api-key (express mode)" : (vertexProjectReady(env) ? "project (service account)" : null),
       developer_status: dAvail ? "ready" : "not_configured",
       authentication: vAvail ? (env.GCP_WIF_PRIVATE_KEY ? "Workload Identity Federation" : "Service Account JWT") : "none"
     });
@@ -1418,7 +1443,9 @@ export async function onRequest(context) {
   // bedside answer); streaming keeps perceived speed fine, and the model still adapts short answers
   // short. "detailed" depth doubles it. Override with MAIK_MAX_OUTPUT_TOKENS. Was 768/1400.
   const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1100));
-  const MAX_OUT = (body && body.depth === "detailed") ? Math.max(OUT_BASE, Math.min(8192, Number(env.MAIK_MAX_OUTPUT_TOKENS_DETAILED) || 6000)) : OUT_BASE;
+  const MAX_OUT = (body && body.depth === "detailed") ? Math.max(OUT_BASE, Math.min(8192, Number(env.MAIK_MAX_OUTPUT_TOKENS_DETAILED) || 6000))
+    : (body && body.depth === "brief") ? Math.min(OUT_BASE, 480)   // owner 2026-09-24: "Short" = to the point
+    : OUT_BASE;
   // Non-stream output cap. Native (capacitor://) CANNOT stream (CapacitorHttp buffers SSE) so it waits
   // for the ENTIRE answer before rendering; a bigger cap = a longer blank wait, so we keep it as tight
   // as SAFELY possible. BUT: gemini-2.5-flash on Vertex currently spends output tokens on internal
@@ -1529,6 +1556,9 @@ export async function onRequest(context) {
         let sysA = sys;
         try {
           if (pkg.audience) sysA = sys + "\n\nAUDIENCE: write for a " + String(pkg.audience).slice(0, 20) + " — adapt depth and tone accordingly; never ask which.";
+          // Answer length (owner, 2026-09-24): Short / Balanced (default, the prompt's own two-tier shape) / Detailed.
+          if (body && body.depth === "brief") sysA = sysA + "\n\nLENGTH: SHORT. Answer the question directly in 3 to 6 sentences or a handful of bullets. No sections, no background, no restating the question; keep only safety-critical caveats.";
+          else if (body && body.depth === "detailed") sysA = sysA + "\n\nLENGTH: DETAILED. Cover the topic fully in clear sections (pathophysiology, presentation, diagnosis, management, pitfalls, as relevant); do not stop until every relevant aspect is covered.";
           if (pkg.evidenceBundle && Array.isArray(pkg.evidenceBundle.claims) && pkg.evidenceBundle.claims.length) {
             const ebLines = pkg.evidenceBundle.claims.slice(0, 20).map((c, i) => (i + 1) + ". [" + (c.tier ? "tier " + c.tier : "kb") + "] " + String(c.text || "").slice(0, 320)).join("\n");
             grounded = ("RANKED EVIDENCE (StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from this ranked evidence — do not copy any single item verbatim; merge overlapping points; cite sources; if items conflict, state the disagreement and the higher-authority position:\n" + ebLines + "\n\n" + grounded).slice(0, MAX_IN_CHARS);
@@ -1629,7 +1659,7 @@ export async function onRequest(context) {
         // Non-stream is now the default delivery (native, and stream requests routed here), so a
         // concise answer uses the TIGHTER cap → generation finishes ~2x faster (the ~10-15s native
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
-        const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
+        const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : (body && body.depth === "brief") ? Math.min(NONSTREAM_BASE, 480) : NONSTREAM_BASE;
         const nsSys = sysA;
         _at("preGen");
         const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)

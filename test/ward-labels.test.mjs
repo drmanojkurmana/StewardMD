@@ -15,7 +15,10 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
 const SRC = readFileSync(new URL("../ward-labels.js", import.meta.url), "utf8");
-function load(extra) { const sb = { ...(extra || {}) }; sb.window = sb; vm.createContext(sb); vm.runInContext(SRC, sb); return sb.WARD_LABELS; }
+import { createRequire } from "node:module";
+/* Pages load vendor/qrcode-generator.js beside ward-labels.js; the labels draw their QR with it (2026-09-24). */
+const qrcode = createRequire(import.meta.url)("../vendor/qrcode-generator.js");
+function load(extra) { const sb = { qrcode, ...(extra || {}) }; sb.window = sb; vm.createContext(sb); vm.runInContext(SRC, sb); return sb.WARD_LABELS; }
 const WL = load();
 // The sandbox has its own Array and Object, so values are compared as plain data.
 const deq = (a, b, m) => assert.deepEqual(JSON.parse(JSON.stringify(a)), JSON.parse(JSON.stringify(b)), m);

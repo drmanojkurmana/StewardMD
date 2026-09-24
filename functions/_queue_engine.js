@@ -11,7 +11,7 @@ import { readAllOrThrow } from "./_fs_read_all.js";
 import { brandingFor } from "./_clinic_branding.js";
 import { writeOrgAudit, appendOrgAudit } from "./_q_audit_chain.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
-import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, recallRefusal, NO_SHOW_RECALL_MS, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
+import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, recallRefusal, NO_SHOW_RECALL_MS, DEFAULT_CONSULT_MIN, priorityRule } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 import { isRole } from "./_queue_roles.js";
 import { resolveRoomDoctor, tokenScope, tokenConfig, formatToken, resolveTokenDepartment, department as M_department } from "./_opd_org.js";
@@ -162,11 +162,14 @@ async function allocateToken(env, session, f, id, cfg, dept, unmatched) {
 
 // ---- add a ticket (manual or import) ------------------------------------------------------
 export async function addTicket(env, session, body, actor, org) {
+  // Plan item 12: a patient registered ahead of the queue says why, and the reason sets the level.
+  const prio = clampPriority(body.priority) > 0 || body.priorityReason ? priorityRule(body.priorityReason, body.priorityNote) : null;
+  if ((clampPriority(body.priority) > 0 || body.priorityReason) && !(prio && prio.priority > 0)) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Say why this patient goes ahead of the queue." });
   const id = newId();
   const mrn = String(body.mrn || "");
   const f = {
     sessionId: session.id, hospitalId: session.hospitalId, status: "registered", position: 0,
-    visitType: body.visitType === "followup" ? "followup" : "new", priority: clampPriority(body.priority),
+    visitType: body.visitType === "followup" ? "followup" : "new", priority: 0,
     tokenVer: 1, encName: await encPHI(env, body.name), encMobile: await encPHI(env, body.mobile),
     mrn: mrn,
     patientId: String(body.patientId || mrn || id),
@@ -188,8 +191,9 @@ export async function addTicket(env, session, body, actor, org) {
   const td = await tokenDepartment(env, session, body, org);
   // The ticket carries the resolved department's id and its CURRENT name; the name is display only.
   if (td.department) { f.departmentId = td.department.id; f.department = td.department.name; }
+  if (prio) { f.priority = prio.priority; f.priorityReason = prio.reason; }
   await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
-  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token });
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token + (prio ? " priority:" + prio.reason + (prio.note ? " (" + prio.note.slice(0, 60) + ")" : "") : "") });
   await recompute(env, session);
   const ticket = withId(id, f);
   try { await notifyTicket(env, session, ticket, "registered", {}); } catch (e) {}   // best-effort SMS/WhatsApp
@@ -276,11 +280,20 @@ export async function revokeTicket(env, session, ticketId, actor) {
   await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "revoke", meta: "erase" });
   return { ok: true };
 }
-export async function setPriority(env, session, ticketId, priority, actor) {
-  const t = await getTicket(env, ticketId);
+/* Plan item 12: every priority change carries a reason from the rule list, the reason sets the level, and
+ * the change and its hash-chained audit row (who, when, from, to, why) are ONE commit guarded on the
+ * ticket being unchanged since it was read. `opts` = { reason, note }. */
+export async function setPriority(env, session, ticketId, opts, actor) {
+  const rule = priorityRule(opts && opts.reason, opts && opts.note);
+  if (!rule) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Pick why this patient's priority changes." });
+  const d = await fsGet(env, "q_tickets/" + ticketId);
+  const t = d ? withId(ticketId, d.fields) : null;
   if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
-  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { priority: clampPriority(priority), updatedAt: now() })]);
-  await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "priority", meta: String(clampPriority(priority)) });
+  const meta = JSON.stringify({ from: t.priority || 0, to: rule.priority, reason: rule.reason, note: rule.note });
+  const ev = { ts: now(), hospitalId: session.hospitalId || "", ticketId, actor: String(actor || ""), action: "priority", meta };
+  const patch = { priority: rule.priority, priorityReason: rule.priority ? rule.reason : "", updatedAt: now() };
+  try { await appendOrgAudit(env, ev, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime })]); }
+  catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were setting priority. Reload and try again." }); throw e; }
   return recompute(env, session);
 }
 
@@ -430,6 +443,7 @@ export async function getOrCreateRoomSession(env, org, room, date, doctorName) {
 // resets to registered at arrival order (or front if priority), audits from->to, reflows both queues.
 export async function assignToRoom(env, org, ticketId, room, opts, actor) {
   opts = opts || {};
+  if (opts.priorityReason && !priorityRule(opts.priorityReason, opts.reason)) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Say why this patient goes ahead of the queue." });
   const t = await getTicket(env, ticketId);
   if (!t) throw Object.assign(new Error("not_found"), { status: 404 });
   if (t.hospitalId && String(t.hospitalId) !== String(org.id)) throw Object.assign(new Error("cross_org"), { status: 403 });
@@ -443,7 +457,7 @@ export async function assignToRoom(env, org, ticketId, room, opts, actor) {
     sessionId: target.id, roomId: room.id, department: room.department || t.department || "", departmentId: room.departmentId || t.departmentId || "",
     status: "registered", position: 0, seq: (t.registeredAt || now()), updatedAt: now(), expiresAt: target.expiresAt
   })]);
-  if (opts.priority) { try { await setPriority(env, target, ticketId, opts.priority, actor); } catch (e) {} }   // priority -> front
+  if (opts.priorityReason) await setPriority(env, target, ticketId, { reason: opts.priorityReason, note: opts.reason }, actor);   // priority -> front, with its reason on the audit row
   await qAudit(env, { hospitalId: org.id, ticketId: ticketId, actor: actor, action: "assign_room", meta: JSON.stringify({ room: room.id, doctor: doctorUid, reason: String(opts.reason || "").slice(0, 120) }) });
   if (fromSessionId && fromSessionId !== target.id) { const src = await getSession(env, fromSessionId); if (src) await recompute(env, src); }
   return recompute(env, target);

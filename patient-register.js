@@ -346,18 +346,13 @@
     function val(id) { var n = q(id); return n ? n.value.trim() : ""; }
 
     function payload() {
-      /* Universal Patient Identity (StewardID 2.0): every registration carries the canonical
-       * StewardID. Minted once per sheet (not per call) so a retry never invents a second one;
-       * a Ni-Key read that resolved an existing patient reuses theirs instead. Without the
-       * resolver bundle the field stays blank and the server owns identity as before. */
-      if (!state.stewardId && root.StewardIdentityResolver && root.StewardIdentityResolver.mintStewardId) {
-        try { state.stewardId = root.StewardIdentityResolver.mintStewardId(); } catch (e) { state.stewardId = ""; }
-      }
+      /* The StewardID is minted and reserved by the SERVER at registration (functions/_steward_id.js) and
+       * shown from its answer. It used to be minted here, unique only within this browser tab, and the
+       * server dropped it - so the number on the card resolved nowhere. Nothing is minted on the device. */
       return {
         name: val("name"), mobile: val("mobile"), gender: state.gender,
         ageYears: val("ageYears"), ageMonths: val("ageMonths"),
         visitType: state.visitType, mrn: val("mrn"),
-        stewardId: state.stewardId || "",
         abhaNumber: val("abhaNumber"), abhaAddress: val("abhaAddress"),
         abhaConsent: !!(q("abhaConsent") && q("abhaConsent").checked),
         address: val("address"), district: val("district"), state: val("state"), pincode: val("pincode"),
@@ -665,54 +660,71 @@
         } catch (e) {}
         if (!code) code = String(uhid == null ? "" : uhid).trim().toUpperCase();
         if (!code) return;
+        state.lastScanCode = code; state.lastCarrierType = carrierType || "qr";
         /* Universal Patient Identity: resolve the carrier to a canonical record first. A revoked
          * tag stops here; an existing patient prefills the sheet (and is a follow-up, reusing
          * their StewardID so this registration never mints a duplicate identity). An unknown
          * tag keeps the fast path: stamp the id and queue as follow-up. */
-        var hit = null;
+        /* THE SERVER IS ASKED FIRST (opts.resolve -> GET /patient/resolve), for every carrier alike: QR,
+         * Ni-Key, barcode or typed. The device's own store only knows patients this device registered,
+         * which is why a card scanned on a second device found nobody. A typo, a revoked card and an
+         * unknown number each come back with the server's own sentence and STOP - nothing is prefilled
+         * from a guess. Only when the server cannot be reached does the device store answer, as before. */
+        if (opts && typeof opts.resolve === "function") {
+          Promise.resolve(opts.resolve(code)).then(function (r) {
+            if (r && r.ok && r.patient) { fillFromPatient(r.patient, r.stewardId || code); return; }
+            if (root.toast) root.toast((r && r.message) || wT("ward.reg-scanned-code", "Scanned code: {code}", { code: code }));
+          }, function () { localResolve(); });
+          return;
+        }
+        localResolve();
+      }
+      function fillFromPatient(p, sid) {
+        state.stewardId = sid || "";
+        if (p.name && q("name")) q("name").value = p.name;
+        if ((p.mobile || p.phone) && q("mobile")) q("mobile").value = p.mobile || p.phone;
+        if ((p.ageYears || p.age) && q("ageYears")) q("ageYears").value = p.ageYears || p.age;
+        var g = String(p.gender || p.sex || "").toLowerCase();
+        if (g === "female" || g === "male" || g === "other") {
+          var gb = host.querySelector('[data-seg="gender"] [data-v="' + g + '"]');
+          if (gb) gb.click();
+        }
+        var mrnIn = host.querySelector('[data-f="mrn"] input');
+        if (mrnIn && p.mrn) mrnIn.value = p.mrn;
+        var fu = host.querySelector('[data-f="visitType"] [data-v="followup"]');
+        if (fu) fu.click();
+        if (root.toast) root.toast(wT("ward.reg-scanned-code", "Scanned code: {code}", { code: (p.name ? p.name + " · " : "") + (sid || "") }));
+      }
+      /* Offline only: the device's own store. A found patient fills the sheet; anything else leaves the
+       * sheet alone and says what was read. The scanned code is never typed into the NAME field - a
+       * patient named "SMP-4K7Q-2M9X7" is how a wrong-patient chart starts. */
+      function localResolve() {
+        var code = state.lastScanCode || "", carrierType = state.lastCarrierType || "qr";
         try {
           if (root.StewardIdentityResolver && root.StewardIdentityResolver.resolvePatientIdentity) {
-            var res = root.StewardIdentityResolver.resolvePatientIdentity({ type: carrierType || "qr", value: code });
+            var res = root.StewardIdentityResolver.resolvePatientIdentity({ type: carrierType, value: code });
             if (res && !res.then && res.ok === false && res.error === "CARRIER_REVOKED") {
-              if (root.toast) root.toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card.");
+              if (root.toast) root.toast(wT("ward.reg-carrier-revoked", "CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."));
               return;
             }
-            if (res && !res.then && res.ok && res.patient) hit = res;
+            if (res && !res.then && res.ok && res.patient) { fillFromPatient(res.patient, res.stewardId || code); return; }
           }
-        } catch (e) { hit = null; }
-        if (hit && hit.patient) {
-          var p = hit.patient;
-          state.stewardId = hit.stewardId || uhid;
-          if (p.name && q("name") && !q("name").value) q("name").value = p.name;
-          if ((p.mobile || p.phone) && q("mobile") && !q("mobile").value) q("mobile").value = p.mobile || p.phone;
-          if ((p.ageYears || p.age) && q("ageYears") && !q("ageYears").value) q("ageYears").value = p.ageYears || p.age;
-          var g = String(p.gender || p.sex || "").toLowerCase();
-          if (g === "female" || g === "male" || g === "other") {
-            var gb = host.querySelector('[data-seg="gender"] [data-v="' + g + '"]');
-            if (gb) gb.click();
-          }
-        }
-        var mrnInput = host.querySelector('[data-f="mrn"] input');
-        if (mrnInput) mrnInput.value = code;
-        var nameInput = host.querySelector('[data-f="name"] input');
-        if (nameInput && !nameInput.value) nameInput.value = code;
-        var followBtn = host.querySelector('[data-f="visitType"] [data-v="followup"]');
-        if (followBtn) followBtn.click();
-        if (root.toast) root.toast((carrierType === "nfc" ? "Ni-Key Tag read: " : "Scanned code: ") + code);
+        } catch (e) {}
+        if (root.toast) root.toast(carrierType === "nfc" ? wT("ward.reg-tag-read", "Ni-Key Tag read: {code}", { code: code }) : wT("ward.reg-scanned-code", "Scanned code: {code}", { code: code }));
       }
       if (a === "scan-qr") {
         if (root.WARD_LABELS && root.WARD_LABELS.cameraSupported && root.WARD_LABELS.cameraSupported()) {
           root.WARD_LABELS.scan().then(function (res) {
             if (res && res.code) applyResolvedIdentity(res.code, res.format || "qr");
             else if (res && res.error === "denied") {
-              if (root.toast) root.toast("Camera permission denied. Tap 🔒 in address bar → Site Settings → set Camera to Allow.");
+              if (root.toast) root.toast(wT("ward.reg-camera-denied", "Camera permission denied. Tap the lock icon in the address bar, open Site Settings and set Camera to Allow."));
             } else if (res && !res.cancelled) {
-              if (root.toast) root.toast("Camera scan failed.");
+              if (root.toast) root.toast(wT("ward.reg-camera-scan-failed", "Camera scan failed."));
             }
           });
           return;
         }
-        var pVal = prompt("Scan or type QR / Barcode / StewardID:");
+        var pVal = prompt(wT("ward.reg-scan-or-type", "Scan or type QR / Barcode / StewardID:"));
         if (pVal && pVal.trim()) applyResolvedIdentity(pVal.trim(), "qr");
         return;
       }
@@ -724,14 +736,14 @@
         var NFC = root.SMD_NFC || root.NiKey;
         if (!NFC || typeof NFC.startScan !== "function") {
           resetScan();
-          if (root.toast) root.toast("Ni-Key NFC reading is not available on this device");
+          if (root.toast) root.toast(wT("ward.reg-nfc-unavailable", "NFC is not available on this device"));
           return;
         }
         NFC.startScan(function (tag) {
           var uhid = (NFC.parseTagUhid && NFC.parseTagUhid(tag)) || "";
           if (!uhid) {
             resetScan();
-            if (root.toast) root.toast("Ni-Key tag is empty / unassigned.");
+            if (root.toast) root.toast(wT("ward.reg-tag-empty", "Ni-Key tag is empty / unassigned."));
             return;
           }
           /* Universal Patient Identity: resolve the tag to a canonical record first. A revoked
@@ -744,7 +756,7 @@
               var res = root.StewardIdentityResolver.resolvePatientIdentity({ type: "nfc", value: uhid });
               if (res && !res.then && res.ok === false && res.error === "CARRIER_REVOKED") {
                 resetScan();
-                if (root.toast) root.toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card.");
+                if (root.toast) root.toast(wT("ward.reg-carrier-revoked", "CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."));
                 return;
               }
               if (res && !res.then && res.ok && res.patient) hit = res;
@@ -758,10 +770,10 @@
           resetScan();
           var msg = (err && err.message) ? err.message : String(err || "");
           if (/permission.*denied/i.test(msg) || (err && (err.name === "NotAllowedError" || err.code === "PERMISSION_DENIED"))) {
-            if (root.toast) root.toast("NFC permission denied. Tap 🔒 in address bar → Site Settings → set NFC to Allow.");
+            if (root.toast) root.toast(wT("ward.reg-nfc-denied", "NFC permission denied. Tap the lock icon in the address bar, open Site Settings and set NFC to Allow."));
             return;
           }
-          if (root.toast) root.toast("Ni-Key NFC read error: " + msg);
+          if (root.toast) root.toast(wT("ward.reg-nfc-read-error", "Ni-Key NFC read error: {msg}", { msg: msg }));
         });
         return;
       }

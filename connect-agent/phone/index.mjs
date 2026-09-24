@@ -7,6 +7,7 @@ import { deepCrawlClinical, captureView, enrichView, exploreDetailOf, GUIDE_SOUR
 import { verifyViews } from './verify.mjs';
 import { createProofBook, navToReplayEntries, INJECT_REPLAY_SRC } from './prove.mjs';
 import { PATIENT_KEY, VISIT_KEY } from './adapter-runtime.mjs';
+import { createRunTimer } from './timing.mjs';
 /* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
  * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
  * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
@@ -134,6 +135,15 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   }
   const origins = deployment?.origins;
   if (!Array.isArray(origins) || origins.length === 0) throw new Error('runPhoneDiscovery requires deployment.origins');
+  /* TIME THE RUN (owner, 2026-09-24), before anyone swaps the AI provider for a faster one: that only
+   * pays if the run is waiting on the AI. Rebinding here, ahead of the proof book, the crawl and
+   * verification, times every call in every module with one change. The doctor's own taps get a
+   * bucket too, so the AI's share can be read excluding time no model could ever shorten. */
+  const timer = createRunTimer();
+  plugin = timer.wrap(plugin, 'browser');
+  brain = timer.wrap(brain, 'ai');
+  api = timer.wrap(api, 'server');
+  if (typeof askDoctor === 'function') askDoctor = timer.wrap({ askDoctor }, 'doctor').askDoctor;
   const manual = mode === 'manual';
   /* START WHERE THE DOCTOR ALREADY IS, NOT AT THE ADDRESS THEY TYPED.
    *
@@ -488,7 +498,14 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
 
   await collector.detach().catch(() => {});
 
+  // Where the run spent its time. Method names, counts and seconds only - no patient data - so it is
+  // safe to log and to read back over the debug bridge after a live run.
+  const timing = timer.report();
+  try { console.info('[connect-agent] run timing ' + JSON.stringify(timing)); } catch { /* logging must never fail a run */ }
+  try { if (typeof globalThis !== 'undefined') globalThis.__smdRunTiming = timing; } catch { /* same */ }
+
   return Object.freeze({
+    timing,
     spec, steps: explored.steps, stopReason: explored.stopReason, visitedUrls: explored.visitedUrls,
     // The version row is created by the evidence call, not discovery: without this the phone's Approve
     // posted /versions/undefined/approve and said "Could not approve" (live GHIS run, 2026-09-13).

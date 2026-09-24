@@ -80,12 +80,10 @@ function loadWardBedside(doc) {
 
 /* ── 1. front desk: mint, done card, duplicate warning ────────────────────── */
 
-test("registration payload mints a canonical StewardID via the resolver", () => {
-  assert.match(REG_SRC, /root\.StewardIdentityResolver/);
-  assert.match(REG_SRC, /mintStewardId\(\)/);
-  assert.match(REG_SRC, /stewardId: state\.stewardId \|\| ""/);
-  // Minted once per sheet (a retry must not invent a second identity).
-  assert.match(REG_SRC, /if \(!state\.stewardId && root\.StewardIdentityResolver/);
+test("registration never mints a StewardID on the device: the server mints and reserves it", () => {
+  // 2026-09-24: a device-minted ID was unique only within its tab and the server dropped it.
+  assert.doesNotMatch(REG_SRC, /mintStewardId\(\)/);
+  assert.doesNotMatch(REG_SRC, /stewardId: state\.stewardId \|\| ""/, "the payload no longer carries a device-made ID");
 });
 
 test("done card shows single canonical StewardID with Ni-Key write + file label", () => {
@@ -142,10 +140,11 @@ test("duplicate banner names StewardID, MRN and phone", () => {
   assert.match(REG_SRC, /var who = dup\.mrn \|\| dup\.stewardId \|\| dup\.mobile/);
 });
 
-test("Ni-Key read resolves through the resolver, prefills, and is a follow-up", () => {
-  assert.match(REG_SRC, /StewardIdentityResolver\.resolvePatientIdentity\(\{ type: "nfc", value: uhid \}\)/);
-  assert.match(REG_SRC, /state\.stewardId = hit\.stewardId \|\| uhid/);
-  assert.match(REG_SRC, /CARRIER REVOKED: This tag was marked lost or deactivated\. Please issue a replacement card\./);
+test("Ni-Key read goes through the same SERVER lookup as every carrier, prefills, and is a follow-up", () => {
+  // 2026-09-24: one flow for QR, Ni-Key, barcode and typed (behaviour pinned in patient-scan-flow.test.mjs).
+  assert.match(REG_SRC, /applyResolvedIdentity\(uhid, "nfc"/, "the tag lands on the shared flow");
+  assert.match(REG_SRC, /opts\.resolve\(code\)/, "which asks the server first");
+  assert.match(REG_SRC, /CARRIER REVOKED: This tag was marked lost or deactivated\. Please issue a replacement card\./, "offline, a revoked tag still stops");
 });
 
 /* ── 2. doctor desk: context-aware scan sheet + follow-up linkage ─────────── */
