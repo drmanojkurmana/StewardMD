@@ -122,27 +122,29 @@
   function css() {
     if (!W || !W.document || W.document.getElementById("smd-druglink-css")) return;
     var st = W.document.createElement("style"); st.id = "smd-druglink-css";
-    // At rest a drug name is only BOLD. When it scrolls into view (and on hover) a band of gold light
-    // FLOWS through its letters, left to right, for GLOW_MS, then it rests as plain bold again: no box,
+    // At rest a drug name is only BOLD. When it scrolls into view (and on hover) a band of light
+    // FLOWS through its letters, left to right, for GLOW_MS (two slow passes, multicolour), then it rests as plain bold again: no box,
     // no permanent yellow (owner, 2026-09-24: "letters to glow in a flow"). The letters keep their own
     // ink colour (currentColor) outside the moving band, so the word stays readable throughout.
-    var SWEEP = "linear-gradient(100deg,currentColor 0%,currentColor 38%,#f59e0b 44%,#fde047 50%,#f59e0b 56%,currentColor 62%,currentColor 100%)";
+    // Multicolour light (teal, sky, violet, rose): mid-tones, so the word stays readable on white and dark.
+    var SWEEP = "linear-gradient(100deg,currentColor 0%,currentColor 30%,#14b8a6 38%,#0ea5e9 45%,#8b5cf6 52%,#ec4899 59%,currentColor 68%,currentColor 100%)";
     st.textContent =
       ".smd-drug{font-weight:700;color:inherit;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}" +
       ".smd-drug.smd-glow{background-image:" + SWEEP + ";background-size:250% 100%;background-repeat:no-repeat;" +
         "-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;" +
-        "animation:smdDrugFlow 1.6s ease-in-out 3,smdDrugHalo " + (GLOW_MS / 1000) + "s ease-out 1}" +
+        "animation:smdDrugFlow 2.5s cubic-bezier(.45,.05,.35,1) 2,smdDrugHalo " + (GLOW_MS / 1000) + "s ease-out 1}" +
       "@keyframes smdDrugFlow{0%{background-position:100% 0}100%{background-position:0 0}}" +
-      "@keyframes smdDrugHalo{0%{filter:drop-shadow(0 0 0 rgba(250,204,21,0))}" +
-        "15%{filter:drop-shadow(0 0 6px rgba(250,204,21,.85))}70%{filter:drop-shadow(0 0 4px rgba(250,204,21,.5))}" +
-        "100%{filter:drop-shadow(0 0 0 rgba(250,204,21,0))}}" +
+      "@keyframes smdDrugHalo{0%{filter:drop-shadow(0 0 0 rgba(139,92,246,0))}" +
+        "20%{filter:drop-shadow(0 0 5px rgba(56,189,248,.45)) drop-shadow(0 0 9px rgba(139,92,246,.3))}" +
+        "70%{filter:drop-shadow(0 0 4px rgba(236,72,153,.28)) drop-shadow(0 0 7px rgba(20,184,166,.22))}" +
+        "100%{filter:drop-shadow(0 0 0 rgba(139,92,246,0))}}" +
       "@media (hover:hover){.smd-drug:hover{background-image:" + SWEEP + ";background-size:250% 100%;background-repeat:no-repeat;" +
         "-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;" +
-        "animation:smdDrugFlow 1.6s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(250,204,21,.6))}}" +
+        "animation:smdDrugFlow 2.5s cubic-bezier(.45,.05,.35,1) infinite;filter:drop-shadow(0 0 5px rgba(139,92,246,.35))}}" +
       ".smd-drug:focus-visible{outline:2px solid #0e6e63;outline-offset:1px;border-radius:3px}" +
       // Reduced motion: no moving light, a still gold word for the same 5 s.
       "@media (prefers-reduced-motion:reduce){.smd-drug.smd-glow,.smd-drug:hover{animation:none;background-image:none;" +
-        "-webkit-text-fill-color:#b45309;filter:none}}" +
+        "-webkit-text-fill-color:#7c3aed;filter:none}}" +
       // Printed protocol sheets, discharge notes and PDFs: plain text.
       "@media print{.smd-drug{background:none!important;animation:none!important;filter:none!important;" +
         "-webkit-text-fill-color:currentColor!important;color:inherit!important;font-weight:inherit!important}}";
