@@ -1078,8 +1078,9 @@
         common.nPredict = openBudget(pk, common.system, common.prompt);
         // Answer length (owner, 2026-09-24): Balanced by default, Short or Detailed on request. The
         // token budget follows the words so a short answer cannot ramble and a detailed one is never
-        // cut; images keep their own prompts untouched.
-        if (!images.length) {
+        // cut; images, persona modes (their own "two to five sentences"), greetings and overrides keep
+        // their own prompts untouched.
+        if (!images.length && !(opts && (opts.systemOverride || (opts.mode && MODE_SYS[opts.mode]))) && !isGreeting(pkg && pkg.question)) {
           var depth = opts && opts.depth;
           if (depth === "brief") { common.nPredict = Math.min(common.nPredict, 400); common.system += "\nLENGTH: SHORT. Answer directly in 3 to 6 sentences or a few bullets; no sections or background; keep safety-critical caveats."; }
           else if (depth === "detailed") { common.system += "\nLENGTH: DETAILED. Cover every relevant aspect in full sections; do not stop early."; }
