@@ -6454,6 +6454,13 @@ export async function onRequest(context) {
       const { rows, unread } = await opdDay(org, url.searchParams.get("date") || "");
       return json({ ok: true, pulse: opdPulse(rows, Date.now()), ...(unread.length ? { unread } : {}) }, 200, request);
     }
+    if (method === "GET" && seg === "opd-board") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      return json(Object.assign({ ok: true }, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
+    }
     /* Plan item 15: the owner's day close. The OPD by room, the day's money (takings, refunds, net, by method) and
      * what is still open, in one read. analytics.view, the owner's and the administrator's right. The money is
      * TODAY's on the hospital's clock (the cashier's shift report); a read that fails is said, never shown as zero. */
@@ -6475,13 +6482,6 @@ export async function onRequest(context) {
         } catch (e) { out.moneyUnread = true; }
       }
       return json(out, 200, request);
-    }
-    if (method === "GET" && seg === "opd-board") {
-      const orgId = url.searchParams.get("orgId") || "";
-      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
-      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
-      const org = await ORG.getOrg(env, orgId);
-      return json(Object.assign({ ok: true }, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
     }
     // The doctor's OWN room session in an org — the exact queue the sister routes into on the console.
     // Resolves WHICH room by normalized identity (fb uid / email / ghis id); ?roomId= loads a specific
