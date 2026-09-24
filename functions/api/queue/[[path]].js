@@ -5638,7 +5638,7 @@ export async function onRequest(context) {
       const aid = actor.id || "";
       if (sub === "patient" && method === "POST") { const org = await ORG.getOrg(env, bOrg); return json(await BILL.registerPatient(env, bOrg, (org && org.code) || bOrg, { name: body.name, mobile: body.mobile, sex: body.sex, ageYears: body.ageYears, actor: aid }), 200, request); }
       if (sub === "patient" && method === "GET") { const p = await BILL.getPatient(env, bOrg, url.searchParams.get("id") || ""); return json(p ? Object.assign({ ok: true }, p) : { ok: false, error: "not_found" }, 200, request); }
-      if (sub === "order" && method === "POST") return json(await BILL.createOrder(env, bOrg, body, aid), 200, request);
+      if (sub === "order" && method === "POST") { const bo = await ORG.getOrg(env, bOrg); return json(await BILL.createOrder(env, bOrg, body, aid, { freeReviewDays: (bo && bo.wardsynq && bo.wardsynq.freeReviewDays) || 0 }), 200, request); }
       if (sub === "orders" && method === "GET") {
         const patientId = url.searchParams.get("patientId") || "";
         const status = url.searchParams.get("status") || "";
