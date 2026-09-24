@@ -185,6 +185,11 @@ window.SMD_CONNECT_AGENT.__setApi(function (path, opts) {
   if (path.indexOf("/connections/dep-") === 0 && opts && opts.method === "DELETE") {
     window.__removed = path; return Promise.resolve({ s: 200, d: { ok: true, deploymentId: path.slice(13), removedVersionId: "ver-old", discarded: 0 } });
   }
+  // the per-organisation probe the app runs before asking "Which hospital?"
+  if (path.indexOf("/connections?tenant=") === 0) {
+    var ptid = decodeURIComponent(path.split("=")[1] || "");
+    return Promise.resolve({ s: 200, d: { ok: true, connections: (window.__probeConns && window.__probeConns[ptid]) || [] } });
+  }
   if (path === "/connections" && (!opts || !opts.method || opts.method === "GET")) {
     return Promise.resolve({ s: 200, d: window.__connections || [] });
   }
@@ -727,6 +732,21 @@ try {
   ok(await waitFor(`return localStorage.getItem("smd_connect_agent_tenant")==="t-b" && window.__calls.some(function(c){return c.path==="/connections";});`, 6000), "picking a hospital stores the choice and loads its connections");
   ok(await waitFor(`return document.getElementById("smd-connect-ov").innerText.indexOf("Switch hospital")>=0;`, 4000), "the list offers Switch hospital");
   await ev(`window.__tenants = null; localStorage.removeItem("smd_connect_agent_tenant"); return 1;`);
+
+  /* THE DOCTOR IS CONNECTING THEIR OWN HOSPITAL, NOT CHOOSING ONE OF OUR TENANTS. The owner's account
+   * spans a HAPI sandbox, an E2E test hospital, KGH twice and a WardSynQ demo; a fresh phone stopped
+   * on "Which hospital?" before showing a single hospital (Pixel 9, 2026-09-25). The organisation
+   * already holding the doctor's approved hospital is the answer, and duplicate rows are one row. */
+  await ev(`if(window.SMD_CONNECT_AGENT) window.SMD_CONNECT_AGENT.close(); return 1;`);
+  await sleep(600);
+  await ev(`window.__tenants = [{ tenantId: "t-a", name: "Demo Hospital", role: "owner" }, { tenantId: "t-k", name: "KGH", role: "owner" }, { tenantId: "t-k", name: "KGH", role: "owner" }, { tenantId: "t-g", name: "GITAM", role: "owner" }];
+    window.__probeConns = { "t-a": [{ deploymentId: "dep-h", activeVersionId: null }], "t-g": [{ deploymentId: "dep-g", activeVersionId: "ver-1" }] };
+    localStorage.removeItem("smd_connect_agent_tenant"); window.__calls = []; window.SMD_CONNECT_AGENT.open(); return 1;`);
+  ok(await waitFor(`return localStorage.getItem("smd_connect_agent_tenant")==="t-g";`, 6000),
+     "the organisation holding the doctor's approved hospital is chosen without asking");
+  ok(await ev(`return document.getElementById("smd-connect-ov").innerText.indexOf("Which hospital?")<0;`) === true,
+     "...so the doctor never sees Which hospital?");
+  await ev(`window.__tenants = null; window.__probeConns = null; localStorage.removeItem("smd_connect_agent_tenant"); return 1;`);
 
   // What the doctor watches while the agent works: a bar that moves, a sentence in their own
   // vocabulary, and a time. A screen that only counted pages read as frozen.
