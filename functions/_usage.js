@@ -17,6 +17,7 @@ import { proFromRequest, proMessageFor } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
 import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
+import { bump, readDay, mergeCounters, MAIK_GROUPS } from "./_counters.js";
 import { verifiedClaimsFor } from "./_fbauth.js";
 
 
@@ -301,7 +302,13 @@ export async function recordUsage(gate, info) {
   const dayTtl = 60 * 60 * 26, monTtl = 60 * 60 * 24 * 32;
   await writeJson(store, "maik:u:" + gate.id + ":" + gate._day, u, dayTtl);
   await writeJson(store, "maik:m:" + gate.id + ":" + gate._month, m, monTtl);
-  await writeJson(store, "maik:global:" + gate._day, g, dayTtl);
+  // Project-wide rollup: atomic D1 counters when available (T53). The KV maik:global object was
+  // read in checkQuota and written back here SECONDS later, so concurrent requests overwrote each
+  // other; it is now only the fallback.
+  const st = info.status || "success";
+  const gi = { "maik.cost": cost, "maik.req": 1, "maik.blocked": st === "blocked" ? 1 : 0 };
+  gi["maik.type." + gate.type] = 1; gi["maik.status." + st] = 1;
+  if (!(await bump(gate.env, gate._day, gi))) await writeJson(store, "maik:global:" + gate._day, g, dayTtl);
   try { await addDailyCostInr(gate.env, gate._day, cost); } catch (e) {}   // atomic mirror (exact under concurrency)
   // Per-USER spend, for the cost cap / prepaid wallet / AI Usage dashboard. Without this the aiu:doc
   // rollup those three read carries only request COUNTS (see addAiSpend), so the cap never fires.
@@ -323,7 +330,8 @@ export async function meterTokens(env, id, inTok, outTok) {
   const cost = ((inTok || 0) / 1000) * cfg.priceInInrPer1k + ((outTok || 0) / 1000) * cfg.priceOutInrPer1k;
   u.tokens += tot; m.tokens += tot; g.cost += cost; g.req += 1;
   const dayTtl = 60 * 60 * 26, monTtl = 60 * 60 * 24 * 32;
-  await writeJson(store, uKey, u, dayTtl); await writeJson(store, mKey, m, monTtl); await writeJson(store, "maik:global:" + day, g, dayTtl);
+  await writeJson(store, uKey, u, dayTtl); await writeJson(store, mKey, m, monTtl);
+  if (!(await bump(env, day, { "maik.cost": cost, "maik.req": 1 }))) await writeJson(store, "maik:global:" + day, g, dayTtl);   // T53
   try { await addDailyCostInr(env, day, cost); } catch (e) {}   // atomic mirror for the global breaker
 }
 
@@ -333,7 +341,9 @@ export async function adminReport(env) {
   const store = usageKv(env); if (!store) return { enabled: false };
   const cfg = usageConfig(env);
   const now = new Date(), day = dayKey(now), month = monthKey(now);
-  const g = (await readJson(store, "maik:global:" + day)) || { cost: 0, req: 0, blocked: 0, byType: {}, byStatus: {} };
+  const g0 = (await readJson(store, "maik:global:" + day)) || { cost: 0, req: 0, blocked: 0, byType: {}, byStatus: {} };
+  const d1 = await readDay(env, day, "maik.");
+  const g = d1 ? mergeCounters(g0, d1, "maik", MAIK_GROUPS) : g0;   // KV (fallback) + D1 atomic counters (T53)
   // list per-user day keys (best-effort; KV list is paginated)
   let users = [], cursor, dayTokens = 0;
   try {
