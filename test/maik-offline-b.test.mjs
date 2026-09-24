@@ -76,6 +76,58 @@ test("T58: a tutor turn is never replaced by a passage or given a Source line; a
   assert.match(rp.text, /reference passage on this topic instead/);
 });
 
+// ── T23: Balanced follows the evidence; curated disease grounding joins it ──
+const CURATED_PKG = () => ({ question: "treatment of hypertension", topicMatch: { matched: true, topic: "Hypertension", grounded: "Hypertension" },
+  grounding: [{ name: "Hypertension", diseaseId: "HTN", knowledge: [{ section: "management", text: "Start with lifestyle change. Thiazide-like diuretics such as chlorthalidone 12.5 to 25 mg once daily, ACE inhibitors or calcium channel blockers are first-line agents for most adults with hypertension." }] }] });
+test("T23: the router's curated disease text joins the book passages inside the same passage budget", async () => {
+  const e = engine({ book: BOOK });
+  await e.L.answer(CURATED_PKG(), { pack: "maik-lite" }, null);
+  const p = e.calls.generate[0].prompt;
+  assert.match(p, /\[1\] \(Hypertension > Treatment\) Amlodipine/);
+  assert.match(p, /\[2\] \(StewardMD Knowledge Base > Hypertension\) Start with lifestyle change\. Thiazide-like diuretics such as chlorthalidone/);
+  assert.doesNotMatch(p, /\[4\]/, "never more than TOPK passages");
+  const sys = e.calls.generate[0].system;
+  assert.match(sys, /cover it as fully as the reference material supports/);
+  assert.doesNotMatch(sys, /200 to 350 words/);
+});
+test("T23: curated text alone grounds the answer when the book has nothing; the claim check uses it", async () => {
+  const e = engine({ text: "Chlorthalidone 12.5 to 25 mg once daily is a first-line agent.\nVerify against local protocol." });
+  const r = await e.L.answer(CURATED_PKG(), { pack: "maik-lite" }, null);
+  assert.equal(r.grounded, true);
+  assert.match(r.text, /Chlorthalidone \*\*12\.5 to 25 mg\*\* once daily is a first-line agent\. \[1\]/);
+  const none = engine();
+  const r2 = await none.L.answer({ question: "treatment of hypertension", grounding: CURATED_PKG().grounding }, { pack: "maik-lite" }, null);
+  assert.equal(r2.grounded, false, "no router verdict: the curated text is not used");
+});
+test("T23: an ungrounded Balanced answer keeps the 200 to 350 word guidance", async () => {
+  const e = engine();
+  await e.L.answer({ question: "treatment of hypertension" }, { pack: "maik-lite" }, null);
+  assert.match(e.calls.generate[0].system, /about 200 to 350 words/);
+});
+
+// ── T24: a thread's prompt prefix is byte-stable ──
+test("T24: the system prompt differs between a treatment and a definition question only at its END", async () => {
+  const e = engine();
+  await e.L.answer({ question: "treatment of hypertension", doctor: "Speciality: Medicine" }, { pack: "maik-mxcore" }, null);
+  await e.L.answer({ question: "what is IRIS", doctor: "Speciality: Medicine" }, { pack: "maik-mxcore" }, null);
+  const [a, b] = e.calls.generate.map((c) => c.system);
+  let i = 0; while (i < a.length && a[i] === b[i]) i++;
+  assert.ok(a.slice(i).split("\n").length <= 1 && b.slice(i).split("\n").length <= 1, "only the last line differs");
+  assert.match(a.slice(0, i), /ABOUT THE CLINICIAN .*\n.*LENGTH: BALANCED/);
+  assert.match(a, /first-line regimen[^\n]*$/);
+  assert.match(b, /Answer the question that was asked[^\n]*$/);
+});
+test("T24: a past turn renders identically whether or not it is the latest", () => {
+  const e = engine();
+  const long = "Amlodipine is first line.\n- Amlodipine 5 mg daily\n- " + "Losartan 50 mg daily as an alternative for patients who cannot take a calcium channel blocker. ".repeat(3);
+  const t1 = [{ q: "treatment of hypertension", a: long }];
+  const t2 = t1.concat([{ q: "hypertension losartan side effects", a: "Hyperkalaemia and a rise in creatinine." }]);
+  const p1 = e.L.buildPrompt({ question: "hypertension amlodipine dose", history: t1 }, "maik-mxcore");
+  const p2 = e.L.buildPrompt({ question: "hypertension losartan dose", history: t2 }, "maik-mxcore");
+  const turn1 = p1.split("\n").find((l) => l.startsWith("MaiK: "));
+  assert.ok(p2.includes(turn1), "the first answer keeps its bytes when a newer turn follows it");
+});
+
 // ── T62: the web prompt asks for what the web gate checks ──
 test("T62: WEB_SYS no longer tells the model to go beyond the snippets for specifics", () => {
   const W = engine().L.WEB_SYS;

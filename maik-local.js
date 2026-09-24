@@ -112,8 +112,16 @@
   var SYSTEM_TREAT = "Name the first-line regimen most guidelines agree on. Where unsure of a figure, give the range and say it varies.\n";
   var SYSTEM_ASK = "Answer the question that was asked. Do not switch to treatment or drug regimens unless the question asks for them.\n";
   var SYSTEM_END = "End with one line: \"Verify against local protocol.\"";
-  var SYSTEM = SYSTEM_CORE + SYSTEM_TREAT + SYSTEM_END;
-  function systemFor(question) { return SYSTEM_CORE + (TREAT_Q.test(String(question || "")) ? SYSTEM_TREAT : SYSTEM_ASK) + SYSTEM_END; }
+  /* BYTE-STABLE PREFIX (audit T24, 2026-09-25). The native engine reuses the KV cache for the
+   * longest token prefix a new prompt shares with the last one, and the system prompt comes first.
+   * The TREAT/ASK line used to sit in the MIDDLE of it and flips with every question, so reuse ended
+   * inside the system prompt and the whole history was prefilled again on every turn. The stable
+   * part (SYSTEM_STABLE) now comes first; the per-clinician (ABOUT), per-request (LENGTH) and
+   * per-question (TREAT/ASK) lines are appended after it, in that order, by answer(). */
+  var SYSTEM_STABLE = SYSTEM_CORE + SYSTEM_END;
+  var SYSTEM = SYSTEM_STABLE + "\n" + SYSTEM_TREAT.replace(/\n$/, "");
+  function treatAskLine(question) { return "\n" + (TREAT_Q.test(String(question || "")) ? SYSTEM_TREAT : SYSTEM_ASK).replace(/\n$/, ""); }
+  function systemFor(question) { return SYSTEM_STABLE + treatAskLine(question); }
 
   /* A PURE greeting: the whole message is hello-ish with no clinical substance. Deliberately TIGHT -
    * "hi rx of uti" must NOT match. test/maik-greeting-route.test.mjs guards exactly that: a greeting
@@ -470,18 +478,21 @@
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
     var L = [];
     var hist = histTurns(pkg.history);
-    // An 8K window carries twice the turns and more of each (owner, 2026-09-24); 4K keeps the old budget.
-    var bigCtx = ctxOf(models() && packId && models().PACKS[packId]) >= 8192;
-    var TURNS = bigCtx ? 4 : HISTORY_TURNS, HCLIP = bigCtx ? 400 : HISTORY_CLIP, CCAP = bigCtx ? 1400 : CARRY_CAP;
+    /* ONE RENDERING PER TURN (audit T24, 2026-09-25). The last answer used to be carried at 700
+     * chars (1400 at 8K) and re-clipped to 180 (400) the next turn, and an 8K window slid 4 turns:
+     * every turn changed the bytes of the turns before it, so the reused KV prefix ended at the
+     * system prompt. Every assistant turn is now carried the same way (carry, CARRY_CAP) and every
+     * doctor turn clipped the same way (HISTORY_CLIP), whether it is the latest or not, and 8K keeps
+     * the 4K budget of HISTORY_TURNS until measured (the 8K window itself stays). */
     if (continues(question, hist)) {
       L.push("Recent conversation:");
       // An aspect-only follow-up ("Drugs?", "side effects?") is about the answer just given. Showing
       // the exchange before it too made "Drugs?" after a CFS answer come back about carvedilol from the
       // varices turn (owner transcript, 2026-09-21). Corrections and named subjects keep both turns.
-      var turns = hist.slice(subjectTokens(question).length ? -TURNS * 2 : -2);
-      turns.forEach(function (h, i) {
-        var isA = h.role === "assistant", lastA = isA && i === turns.length - 1 - (turns[turns.length - 1].role === "assistant" ? 0 : 1);
-        L.push((isA ? "MaiK: " : "Doctor: ") + (lastA ? carry(h.text || h.content, CCAP) : clip(h.text || h.content, HCLIP)));
+      var turns = hist.slice(subjectTokens(question).length ? -HISTORY_TURNS * 2 : -2);
+      turns.forEach(function (h) {
+        var isA = h.role === "assistant";
+        L.push((isA ? "MaiK: " : "Doctor: ") + (isA ? carry(h.text || h.content, CARRY_CAP) : clip(h.text || h.content, HISTORY_CLIP)));
       });
       L.push("");
     }
@@ -976,6 +987,42 @@
     }).catch(function () { return null; });
   }
 
+  /* CURATED DISEASE GROUNDING IN THE EVIDENCE (audit T23, 2026-09-25). The package already carries
+   * the router's curated StewardMD material for the matched disease (pkg.grounding knowledge, the
+   * text the cloud engine is grounded on), and answer() used to throw it away and ground only on up
+   * to three BM25 book passages. When the router named a disease, its curated text now joins the
+   * evidence as one passage (700 chars, the same per-passage cap), inside the SAME budget of
+   * RAG.TOPK passages: it takes the third book slot, or stands alone (up to two passages) when the
+   * book had nothing. No router verdict = no curated passage (relevance cannot be shown). */
+  var PASSAGE_CHARS = 700;
+  function curatedPassages(pkg) {
+    var topic = routerTopic(pkg), gs = (pkg && pkg.grounding) || [];
+    if (!topic || !gs.length) return [];
+    var t = topic.toLowerCase(), g = null;
+    for (var i = 0; i < gs.length && !g; i++) { var nm = String((gs[i] && gs[i].name) || "").toLowerCase(); if (nm && (nm === t || nm.indexOf(t) !== -1 || t.indexOf(nm) !== -1)) g = gs[i]; }
+    g = g || gs[0];
+    var body = cleanPassage(((g && g.knowledge) || []).map(function (k) { return (k && (k.text || k)) || ""; }).join(" "));
+    if (body.length < 80) return [];
+    var head = "StewardMD Knowledge Base > " + String(g.name || topic).slice(0, 60), out = [];
+    for (var at = 0; at < body.length && out.length < 2; at += PASSAGE_CHARS) out.push({ heading: head, text: body.slice(at, at + PASSAGE_CHARS), curated: true });
+    return out;
+  }
+  function evidenceOf(passages) {
+    return passages.map(function (p, n) {
+      var head = String(p.heading || "").trim(), headPart = head ? " (" + head.slice(0, 90) + ")" : "";
+      return "[" + (n + 1) + "]" + headPart + " " + p.text.slice(0, Math.max(400, PASSAGE_CHARS - headPart.length - 1));
+    }).join("\n\n");
+  }
+  function withCurated(g, pkg, packId) {
+    var cur = ragEligible(packId) ? curatedPassages(pkg) : [];
+    if (!cur.length) return g;
+    var RAG = (g && g.RAG) || ((typeof window !== "undefined") && window.SMD_MAIK_RAG);
+    if (!RAG) return g;
+    var cap = RAG.TOPK || 3, book = (g && g.passages) || [];
+    var merged = book.length ? book.slice(0, 1).concat(cur.slice(0, 1), book.slice(1)).slice(0, cap) : cur.slice(0, Math.min(2, cap));
+    return { evidenceText: evidenceOf(merged), passages: merged, RAG: RAG, anchors: (g && g.anchors) || [], expansion: (g && g.expansion) || [], curated: true };
+  }
+
   function answer(pkg, opts, onDelta) {
     var L = llama();
     if (!L) return Promise.resolve({ error: "on-device inference needs the native app" });
@@ -1000,7 +1047,7 @@
       : (images.length || (opts && opts._ungrounded) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
       // pkg goes in so expansionTerms() can mine RAG #1's own vocabulary. It is read HERE, before
       // the citation-bearing fields are stripped off the package further down.
-      : retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg);
+      : retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg).then(function (g) { return withCurated(g, pkg, packId); });
 
     return groundingP.then(function (grounding) {
     /** The claim-check options, shared by the live stream view and the final check. */
@@ -1136,7 +1183,8 @@
                 // A pack can carry its own system prompt (registry-driven, like noThink).
                 // MaiK Lite was TRAINED with its prompt, so the shared one would be a
                 // distribution shift - and its dose example was parroted as a real dose.
-                : !images.length ? (pk.system || systemFor(pkg && pkg.question))
+                // TREAT/ASK is appended at the END below (T24), after ABOUT and LENGTH.
+                : !images.length ? (pk.system || SYSTEM_STABLE)
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
           // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
@@ -1158,14 +1206,21 @@
         // their own prompts untouched.
         if (!images.length && !(opts && (opts.systemOverride || (opts.mode && MODE_SYS[opts.mode]))) && !isGreeting(pkg && pkg.question)) {
           var depth = opts && opts.depth;
+          // About me: the doctor's saved preferences (home.js maikMeLine). Stable across a thread, so it
+          // comes FIRST after the stable system prompt, inside the reused KV prefix (T24).
+          if (pkg && pkg.doctor) { var _me = "\nABOUT THE CLINICIAN (their saved preferences; tailor to them, never mention this): " + String(pkg.doctor).slice(0, 400); common.system += _me; common.nPredict = Math.max(256, common.nPredict - estTokens(_me)); }
           if (depth === "brief") { common.nPredict = Math.min(common.nPredict, 400); common.system += "\nLENGTH: SHORT. Answer directly in 3 to 6 sentences or a few bullets; no sections or background; keep safety-critical caveats."; }
           else if (depth === "detailed") { common.system += "\nLENGTH: DETAILED. Cover every relevant aspect in full sections; do not stop early."; }
           // Balanced (owner, 2026-09-25: "answer balanced rather than short"): "essential points only"
           // read to a small model as "a few bullets". Say what balanced covers, and how much.
+          // GROUNDED BALANCED FOLLOWS THE EVIDENCE (audit T23, 2026-09-25): a 200 to 350 word target
+          // across diagnosis, management, doses and cautions, against at most three short passages,
+          // made the model write past its evidence and the claim check then stripped or regenerated
+          // it. With reference material the answer covers what the material supports, no word target.
+          else if (grounding) { common.nPredict = Math.min(common.nPredict, 1100); common.system += "\nLENGTH: BALANCED. Open with one plain sentence that answers the question, then cover it as fully as the reference material supports, in short bullets or sections. Do not add sections, figures or drugs the material does not contain."; }
           else { common.nPredict = Math.min(common.nPredict, 1100); common.system += "\nLENGTH: BALANCED. Open with one plain sentence that answers the question, then cover the key points a clinician needs in 2 to 4 short sections or 6 to 12 bullets, as the question calls for (key facts, diagnosis, management, doses, cautions); about 200 to 350 words. Do not stop after two or three bullets."; }
-          // About me: the doctor's saved preferences (home.js maikMeLine). Stable across a thread, so it
-          // sits in the system prompt, inside the reused KV prefix.
-          if (pkg && pkg.doctor) { var _me = "\nABOUT THE CLINICIAN (their saved preferences; tailor to them, never mention this): " + String(pkg.doctor).slice(0, 400); common.system += _me; common.nPredict = Math.max(256, common.nPredict - estTokens(_me)); }
+          // The per-question line goes LAST, so a thread's prompts share everything before it (T24).
+          if (!pk.system) common.system += treatAskLine(pkg && pkg.question);
         }
         if (!images.length) return L.generate(common);
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone
