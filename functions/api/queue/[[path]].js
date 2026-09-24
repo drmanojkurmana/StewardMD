@@ -6552,6 +6552,12 @@ export async function onRequest(context) {
       }
       return json({ ok: true, retried, landed, stillFailed: retried - landed }, 200, request);
     }
+    if (method === "GET" && seg === "live") {   // plan item 16: the consoles' live stream (queue.view on the hospital)
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      return liveStream(env, orgId, request);
+    }
     if (method === "GET" && seg === "opd-pulse") {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
