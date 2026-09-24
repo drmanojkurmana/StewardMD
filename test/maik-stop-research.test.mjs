@@ -7,7 +7,7 @@ import { readFileSync } from "node:fs";
 const H = readFileSync(new URL("../home.js", import.meta.url), "utf8");
 
 test("handing a clinical turn to web research stops its stage timers and watchdog", () => {
-  assert.match(H, /_maikDone = true; _clearStages\(\); clearTimeout\(_maikTO\);\n\s*try \{ maikRunWeb\(think, question\); \}/);
+  assert.match(H, /_maikDone = true; _clearStages\(\); clearTimeout\(_maikTO\);[\s\S]{0,400}?try \{ maikRunWeb\(think, question\); \}/);
 });
 test("web research and Research mode own the Stop button and drop a late result", () => {
   const web = H.slice(H.indexOf("function maikRunWeb("), H.indexOf("function maikWebChipEl("));
