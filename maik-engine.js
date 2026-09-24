@@ -595,7 +595,10 @@
   // If on-device is already the chosen engine at startup, warm it before the first question.
   function warmIfLocal() {
     try {
-      if (getPref() !== "local" || !localReady()) return;
+      // effective(), not the preference (audit T60, 2026-09-25): the offline stand-in (Cloud chosen,
+      // no network, a pack ready) answers on device too, and was never warmed, so its first answer
+      // always paid the cold load.
+      if (effective() !== "local") return;
       if (window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.warm) window.SMD_MAIK_LOCAL.warm(activePack());
     } catch (e) {}
   }

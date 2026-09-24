@@ -54,6 +54,11 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         NotificationCenter.default.addObserver(
             self, selector: #selector(appDidEnterBackground),
             name: UIApplication.didEnterBackgroundNotification, object: nil)
+        // A quick trip to background (photo picker, permission dialog, app switcher) must not cut
+        // off an answer that is one token from done (audit T59, 2026-09-25).
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
     /**
@@ -137,9 +142,95 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
 
     @objc private func appDidEnterBackground() {
         idleTimer?.invalidate(); idleTimer = nil
+        if engine.isGenerating {
+            beginBackgroundGrace()
+        } else {
+            engine.cancel()
+            // Queued behind the in-flight generation on the engine's work queue, never freed under it (T12).
+            engine.release { [weak self] in self?.notifyListeners("llamaReleased", data: ["reason": "background"]) }
+        }
+    }
+
+    /* BACKGROUND GRACE (audit T59, 2026-09-25).
+     *
+     * Backgrounding used to cancel + release immediately, throwing away an answer that might be one
+     * token from done. If a generation is in flight when we background, keep the process alive with
+     * beginBackgroundTask and let it run. bgGraceSeconds is the ceiling: 25s, comfortably under iOS's
+     * ~30s background-task budget, after which we cancel and release ourselves rather than wait for
+     * the OS to kill us mid-write. release() is already an async barrier on the engine's serial `work`
+     * queue (T12), so queuing it right after cancel() is safe even while the decode loop is still
+     * spinning down.
+     *
+     * bgGracePending marks "a background task is open, waiting on either the deadline or the
+     * generation finishing" - owned by the main queue only (Timer callbacks, the foreground
+     * notification, and the two places below that clear it all run there).
+     */
+    private static let bgGraceSeconds: TimeInterval = 25
+    private var bgTaskID: UIBackgroundTaskIdentifier = .invalid
+    private var bgDeadlineTimer: Timer?
+    private var bgGracePending = false
+
+    private func beginBackgroundGrace() {
+        let id = UIApplication.shared.beginBackgroundTask(withName: "maik-answer") { [weak self] in
+            // Expiration: iOS suspends us regardless of the deadline. Tear down right now.
+            DispatchQueue.main.async { self?.bgDeadlineFired() }
+        }
+        guard id != .invalid else {
+            // No background time granted (e.g. already out of budget) - fall back to today's behaviour.
+            engine.cancel()
+            engine.release { [weak self] in self?.notifyListeners("llamaReleased", data: ["reason": "background"]) }
+            return
+        }
+        bgTaskID = id
+        bgGracePending = true
+        bgDeadlineTimer?.invalidate()
+        bgDeadlineTimer = Timer.scheduledTimer(withTimeInterval: Self.bgGraceSeconds, repeats: false) { [weak self] _ in
+            self?.bgDeadlineFired()
+        }
+    }
+
+    /// Deadline (or expiration handler) fired while still backgrounded: stop waiting on the answer.
+    private func bgDeadlineFired() {
+        guard bgGracePending else { return }
+        bgGracePending = false
+        bgDeadlineTimer?.invalidate(); bgDeadlineTimer = nil
         engine.cancel()
-        // Queued behind the in-flight generation on the engine's work queue, never freed under it (T12).
-        engine.release()
+        engine.release { [weak self] in
+            self?.notifyListeners("llamaReleased", data: ["reason": "background"])
+            DispatchQueue.main.async { self?.endBackgroundTask() }
+        }
+    }
+
+    @objc private func appWillEnterForeground() {
+        guard bgGracePending else { return }
+        // Cancel the deadline only - the answer is allowed to finish now. Do NOT release here; the
+        // background task is ended from generate()/generateWithImage()'s own completion once the
+        // answer actually lands (endBackgroundTaskIfGracePending below).
+        bgDeadlineTimer?.invalidate(); bgDeadlineTimer = nil
+    }
+
+    private func endBackgroundTaskIfGracePending() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self, self.bgGracePending else { return }
+            self.bgGracePending = false
+            self.bgDeadlineTimer?.invalidate(); self.bgDeadlineTimer = nil
+            // Finished while STILL in the background: drop the model now (the reason the background
+            // path releases at all), then end the task. Back in the foreground: keep it warm.
+            if UIApplication.shared.applicationState == .background {
+                self.engine.release { [weak self] in
+                    self?.notifyListeners("llamaReleased", data: ["reason": "background"])
+                    DispatchQueue.main.async { self?.endBackgroundTask() }
+                }
+            } else {
+                self.endBackgroundTask()
+            }
+        }
+    }
+
+    private func endBackgroundTask() {
+        guard bgTaskID != .invalid else { return }
+        UIApplication.shared.endBackgroundTask(bgTaskID)
+        bgTaskID = .invalid
     }
 
     /* IDLE RELEASE.
@@ -150,10 +241,13 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
      *
      * mmap makes the reload cheap, so the trade is clearly worth it: a couple of seconds on the next
      * question against not holding a multi-GB GPU allocation open while a clinician reads the answer.
-     * 120 s is long enough that a normal back-and-forth never pays the reload.
+     *
+     * 180 s here is only a BACKSTOP (audit T60, 2026-09-25): the JS layer (maik-local.js) owns the
+     * real 3-minute idle-release policy. Native firing first would silently override it, so this is
+     * kept a beat above JS's own timer and only catches JS not running the timer at all.
      */
     private var idleTimer: Timer?
-    private static let idleSeconds: TimeInterval = 120
+    private static let idleSeconds: TimeInterval = 180
 
     private func armIdleRelease() {
         DispatchQueue.main.async { [weak self] in
@@ -162,7 +256,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
             self.idleTimer = Timer.scheduledTimer(withTimeInterval: Self.idleSeconds, repeats: false) { [weak self] _ in
                 guard let self, !self.engine.isGenerating else { return }
                 llamaPerf("PERF idle release after \(Int(Self.idleSeconds))s")
-                self.engine.release()
+                self.engine.release { [weak self] in self?.notifyListeners("llamaReleased", data: ["reason": "idle"]) }
             }
         }
     }
@@ -192,6 +286,9 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
             "debugBuild": isDebug,
             "loaded": engine.isLoaded,
             "availableMemory": avail,
+            // Total RAM on the device (audit T61, 2026-09-25) - JS uses this alongside availableMemory
+            // to size which model shard to offer, not just whether one currently fits.
+            "totalMemory": Int(ProcessInfo.processInfo.physicalMemory),
             // HARD: os_proc_available_memory() is what jetsam enforces. Exceed it and the app is
             // killed, so JS may refuse the load outright.
             "memoryIsHardLimit": true,
@@ -279,6 +376,9 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         engine.generateWithImages(system: system, user: prompt, imagePaths: paths, mmprojPath: mmproj,
                                   nPredict: nPredict, temperature: temperature, seed: seed,
                                   onToken: onToken) { [weak self] result in
+            // If backgrounding let this generation run past its deadline (T59), the answer landed:
+            // release the background task we borrowed to finish it.
+            self?.endBackgroundTaskIfGracePending()
             switch result {
             case .success(let g):
                 self?.armIdleRelease()
@@ -309,6 +409,9 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
 
         engine.generate(system: system, user: prompt, nPredict: nPredict, temperature: temperature,
                         seed: seed, prefillEmptyThink: prefillEmptyThink, onToken: onToken) { [weak self] result in
+            // If backgrounding let this generation run past its deadline (T59), the answer landed:
+            // release the background task we borrowed to finish it.
+            self?.endBackgroundTaskIfGracePending()
             switch result {
             case .success(let g):
                 self?.armIdleRelease()

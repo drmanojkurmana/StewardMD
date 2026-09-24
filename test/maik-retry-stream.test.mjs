@@ -34,7 +34,7 @@ function engine(attempts) {
       return { text: full, ms: 5 };
     },
     cancel: async () => ({}), release: async () => ({ released: true }),
-    addListener: (name, cb) => { listeners.add(cb); return { remove: () => listeners.delete(cb) }; }
+    addListener: (name, cb) => { if (name !== "llamaToken") return { remove: () => {} }; listeners.add(cb); return { remove: () => listeners.delete(cb) }; }
   };
   const passage = { heading: "Hypertension > Treatment", page: "p.1", chunk: 1,
     text: "Amlodipine 5 to 10 mg once daily is a first-line drug for hypertension. Thiazide diuretics are an alternative." };

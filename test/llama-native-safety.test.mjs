@@ -43,6 +43,16 @@ test("T54: tokens are buffered as bytes until a character boundary, on both plat
   assert.equal((JNI.match(/full\.resize\(utf8_complete_prefix\(full\)\)/g) || []).length >= 2, true, "returned text never ends in half a character");
 });
 
+test("T59: backgrounding lets an in-flight answer finish (iOS 25 s background task, Android 20 s), then releases", () => {
+  assert.match(PLUG, /beginBackgroundTask\(withName: "maik-answer"\)/);
+  assert.match(PLUG, /bgGraceSeconds: TimeInterval = 25/);
+  assert.match(PLUG, /applicationState == \.background/, "an answer that finishes in the background still releases the model");
+  assert.match(AJ, /PAUSE_GRACE_SECONDS = 20/);
+  assert.match(AJ, /protected void handleOnResume\(\)/);
+  assert.match(AJ, /pauseScheduler\.schedule\(this::cancelAndRelease, PAUSE_GRACE_SECONDS, TimeUnit\.SECONDS\)/);
+  assert.match(AJ, /\.put\("totalMemory", totalMem\)/, "T61: Android reports total RAM too");
+});
+
 test("T55: repetition penalty is 1.05 on both platforms and still in every chain", () => {
   assert.match(ENG, /static let repeatPenalty: Float = 1\.05/);
   assert.match(ENG, /llama_sampler_init_penalties\(\s*llama_vocab_n_tokens\(vocab\), 128, Self\.repeatPenalty/);
