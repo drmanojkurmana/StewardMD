@@ -57,3 +57,34 @@ test("text leaving the page (PDF, share, clipboard, notifications) is stripped a
   for (const hook of ['W.SMD_PDF, "fromHtml"', 'W.SMD_NATIVE, "sharePdfFromHtml"', 'W.navigator, "share"', '"writeText"', 'P.Share, "share"', 'P.LocalNotifications, "schedule"'])
     assert.ok(src.includes(hook), hook);
 });
+
+test("AI dashes: asides become commas, ranges and empty values keep their meaning", () => {
+  const T = [
+    ["Surgical intelligence — notes", "Surgical intelligence, notes"], ["AMR—the silent pandemic", "AMR, the silent pandemic"],
+    ["Use it -- carefully", "Use it, carefully"], ["x — y — z.", "x, y, z."], ["Warfarin — avoid; INR — check", "Warfarin, avoid; INR, check"],
+    ["Dose 5—10 mg", "Dose 5-10 mg"], ["Age 5 – 10 years", "Age 5-10 years"], ["Duration 7–10 days", "Duration 7–10 days"],
+    ["—", "–"], ["HR: —", "HR: –"], ["SBP/DBP —/—", "SBP/DBP –/–"], ["MAP (—)", "MAP (–)"], ["K+ — 2.9 — low", "K+, 2.9, low"],
+    ["End of line —", "End of line"], ["— leading", "leading"],
+    ["Low-dose aspirin", "Low-dose aspirin"], ["a--b", "a--b"], ["CSS --var stays", "CSS --var stays"], ["no dashes here", "no dashes here"],
+  ];
+  for (const [a, b] of T) assert.equal(E.tidy(a), b, a);
+  assert.equal(E.tidy("Title —", { next: true }), "Title, ", "text continues in the next element");
+  assert.equal(E.tidy("— avoid with", { prev: true }), ", avoid with", "text continues from the previous element");
+  for (const [, b] of T) assert.equal(E.tidy(b), b, "idempotent: " + b);
+});
+
+test("same(): code that reads screen text back still matches what it rendered", () => {
+  assert.ok(E.same("  Wells score, PE ", "Wells score — PE"));
+  assert.ok(E.same(" Notifications", "🔔 Notifications"));
+  assert.ok(!E.same("Wells score, DVT", "Wells score — PE"));
+  for (const [f, needle] of [["search.js", "SMD_EMOJI_ICONS.same(els[i].textContent, t.title)"], ["home.js", "SMD_EMOJI_ICONS.norm(x.textContent)"],
+    ["medlist.js", "SMD_EMOJI_ICONS.same(x.textContent, draft.route)"], ["medlist.js", "SMD_EMOJI_ICONS.same(x.textContent, draft.freq)"],
+    ["opd-emr.js", "SMD_EMOJI_ICONS.same(el.textContent, txt)"]])
+    assert.ok(readFileSync(new URL("../" + f, import.meta.url), "utf8").includes(needle), f + ": " + needle);
+});
+
+test("flag smd_nodash=0 leaves dashes as authored", () => {
+  assert.equal(E.dashOn(), true);
+  store.set("smd_nodash", "0"); assert.equal(E.dashOn(), false); assert.equal(E.display("A — B"), "A — B"); store.clear();
+  assert.equal(E.display("🔔 A — B"), "A, B");
+});

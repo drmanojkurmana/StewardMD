@@ -123,6 +123,52 @@
     var out = s.replace(CLUSTER, function (m) { var c = classify(m); return c.keep ? m : (c.text != null ? c.text : "\u0000"); });
     return out.replace(/\u0000[ \u00A0]?/g, "").replace(/ {2,}/g, " ").replace(/^ +/, "");
   }
+  // ── AI-style dashes (owner, 2026-09-24: "remove AI slop like -- AI dashes all over the app without
+  // causing malfunction"). Flag smd_nodash, DEFAULT ON, "0" = dashes as authored. Rules keep meaning:
+  //   5—10 / 5 – 10          -> 5-10            (a range stays a range; a plain 7–10 en dash is untouched)
+  //   "HR: —" / a lone "—"   -> "HR: –" / "–"   (an empty value stays visibly empty)
+  //   X — Y, X—Y, X -- Y     -> X, Y            (the aside dash becomes a comma)
+  //   leading/trailing dash  -> ", " when text continues in the next/previous element, else removed
+  function dashOn() { return lget("smd_nodash") !== "0"; }
+  var DASH = /[\u2014\u2015]|(^|\s)--(\s|$)|\s\u2013\s/;
+  function hasDash(s) { return DASH.test(String(s || "")); }
+  function tidy(text, ctx) {
+    var t = String(text == null ? "" : text);
+    if (!hasDash(t)) return t;
+    ctx = ctx || {};
+    // numeric ranges first: 5—10, 5 – 10, 5 -- 10 -> 5-10 (a tight 7–10 en dash is not matched by DASH)
+    t = t.replace(/(\d)\s*[\u2014\u2015]\s*(\d)/g, "$1-$2").replace(/(\d)\s+(?:\u2013|--)\s+(\d)/g, "$1-$2");
+    // then every remaining dash token, judged by its neighbours (spaces skipped)
+    var WORD = /[A-Za-z0-9\u00C0-\u024F\u0370-\u03FF\u0900-\u0D7F\)\]%+\u00B0"'\u2019\u201D]/;
+    var TOK = /[\u2014\u2015]|(^|\s)--(?=\s|$)|\s\u2013(?=\s)/g;
+    var out = "", at = 0, m;
+    while ((m = TOK.exec(t)) !== null) {
+      var st = m.index + (m[1] ? m[1].length : 0) + (m[0].charAt(0) === " " && m[0].charAt(1) === "\u2013" ? 1 : 0), en = m.index + m[0].length;
+      var i = st - 1; while (i >= 0 && /\s/.test(t.charAt(i))) i--;
+      var j = en; while (j < t.length && /\s/.test(t.charAt(j))) j++;
+      var pc = i >= 0 ? t.charAt(i) : "", nc = j < t.length ? t.charAt(j) : "";
+      var pw = !!pc && WORD.test(pc), nw = !!nc && (WORD.test(nc) || /[(\["'\u2018\u201C]/.test(nc));
+      var rep;
+      if (pw && nw) { out += t.slice(at, i + 1) + ", "; at = j; continue; }                         // X — Y
+      if (pw && !nc) { out += t.slice(at, i + 1) + (ctx.next ? ", " : t.slice(en, j)); at = j; continue; }  // X —
+      if (!pc && nw) { out += (ctx.prev ? ", " : ""); at = j; continue; }                              // — Y
+      rep = "\u2013";                                                                                  // empty value
+      out += t.slice(at, st) + rep; at = en;
+    }
+    out += t.slice(at);
+    return out.replace(/,\s*([,.;:!?)])/g, "$1");
+  }
+  /** What a string should read as on screen with the current flags: emoji removed, dashes tidied. */
+  function display(text) {
+    var s = String(text == null ? "" : text);
+    if (enabled()) s = strip(s);
+    if (dashOn()) s = tidy(s);
+    return s;
+  }
+  /** For code that reads screen text back and compares it with the string it rendered: both sides are
+   *  normalised the way the screen shows them (emoji out, dashes tidied, whitespace collapsed). */
+  function norm(v) { return display(v).replace(/\s+/g, " ").trim(); }
+  function same(domText, expected) { return norm(domText) === norm(expected); }
   /** Rich version: [{t: text} | {icon, tone} | {dot}] for a text node. */
   function segments(text) {
     var s = String(text == null ? "" : text), out = [], at = 0, m;
@@ -170,11 +216,18 @@
     if (svg && svg.setAttribute) svg.setAttribute("aria-hidden", "true");
     return svg;
   }
+  function needs(v) { return !!v && ((enabled() && has(v)) || (dashOn() && hasDash(v))); }
   function fixText(tn) {
     var v = tn.nodeValue;
-    if (!v || !has(v)) return;
+    if (!needs(v)) return;
     var p = tn.parentNode;
     if (!p || (p.closest && p.closest(SKIP))) return;
+    if (dashOn() && hasDash(v)) {
+      var nx = tn.nextSibling, pv = tn.previousSibling;
+      var t2 = tidy(v, { next: !!(nx && (nx.nodeType === 1 || /\S/.test(nx.nodeValue || ""))), prev: !!(pv && (pv.nodeType === 1 || /\S/.test(pv.nodeValue || ""))) });
+      if (t2 !== v) { tn.nodeValue = t2; v = t2; }
+    }
+    if (!(enabled() && has(v))) return;
     if (p.closest && p.closest(STRIP_ONLY)) { tn.nodeValue = strip(v); return; }
     var segs = segments(v), doc = W.document, frag = doc.createDocumentFragment();
     segs.forEach(function (sg) {
@@ -188,12 +241,12 @@
     if (!el || el.nodeType !== 1) return;
     for (var i = 0; i < ATTRS.length; i++) {
       var a = el.getAttribute(ATTRS[i]);
-      if (a && has(a)) el.setAttribute(ATTRS[i], strip(a));
+      if (a && needs(a)) { var d = display(a); if (d !== a) el.setAttribute(ATTRS[i], d); }
     }
-    if (el.tagName === "INPUT" && /^(button|submit|reset)$/i.test(el.type) && has(el.value)) el.value = strip(el.value);
+    if (el.tagName === "INPUT" && /^(button|submit|reset)$/i.test(el.type) && needs(el.value)) el.value = display(el.value);
   }
   function fixTree(rootEl) {
-    if (!rootEl || !enabled()) return;
+    if (!rootEl || !(enabled() || dashOn())) return;
     if (rootEl.nodeType === 3) { fixText(rootEl); return; }
     if (rootEl.nodeType !== 1 && rootEl.nodeType !== 9 && rootEl.nodeType !== 11) return;
     css();
@@ -204,7 +257,7 @@
     var doc = W.document, tw = doc.createTreeWalker(rootEl, 5 /* ELEMENT | TEXT */, null, false), n, texts = [];
     while ((n = tw.nextNode())) {
       if (n.nodeType === 1) fixAttrs(n);
-      else if (n.nodeValue && n.nodeValue.length && has(n.nodeValue)) texts.push(n);
+      else if (n.nodeValue && n.nodeValue.length && needs(n.nodeValue)) texts.push(n);
     }
     texts.forEach(fixText);
   }
@@ -214,7 +267,7 @@
     scheduled = false;
     var list = pending; pending = [];
     for (var i = 0; i < list.length; i++) { try { if (list[i].isConnected !== false) fixTree(list[i]); } catch (e) {} }
-    try { if (has(W.document.title)) W.document.title = strip(W.document.title); } catch (e) {}
+    try { if (needs(W.document.title)) W.document.title = display(W.document.title); } catch (e) {}
   }
   function queue(n) {
     pending.push(n);
@@ -224,14 +277,14 @@
     ["alert", "confirm", "prompt"].forEach(function (k) {
       var orig = W[k];
       if (typeof orig !== "function" || orig._smdNoEmoji) return;
-      var f = function (msg) { var a = Array.prototype.slice.call(arguments); if (enabled() && typeof msg === "string") a[0] = strip(msg); return orig.apply(W, a); };
+      var f = function (msg) { var a = Array.prototype.slice.call(arguments); if (typeof msg === "string") a[0] = display(msg); return orig.apply(W, a); };
       f._smdNoEmoji = true; W[k] = f;
     });
   }
   // Text that leaves the page as a string, not DOM: PDFs, native share sheets, the clipboard and phone
   // notifications. Wrapped at their single shared entry points, so the 100+ callers need no change.
   function stripDeep(v, depth) {
-    if (typeof v === "string") return strip(v);
+    if (typeof v === "string") return display(v);
     if (!v || typeof v !== "object" || depth > 3) return v;
     if (Array.isArray(v)) return v.map(function (x) { return stripDeep(x, depth + 1); });
     var o = {};
@@ -242,17 +295,17 @@
     try {
       if (!obj || typeof obj[name] !== "function" || obj[name]._smdNoEmoji) return;
       var orig = obj[name];
-      var f = function () { var a = Array.prototype.slice.call(arguments); if (enabled()) a = how(a); return orig.apply(this, a); };
+      var f = function () { var a = Array.prototype.slice.call(arguments); a = how(a); return orig.apply(this, a); };
       f._smdNoEmoji = true; obj[name] = f;
     } catch (e) {}
   }
-  var html0 = function (a) { if (typeof a[0] === "string") a[0] = strip(a[0]); if (typeof a[2] === "string") a[2] = strip(a[2]); return a; };
+  var html0 = function (a) { if (typeof a[0] === "string") a[0] = display(a[0]); if (typeof a[2] === "string") a[2] = display(a[2]); return a; };
   var obj0 = function (a) { a[0] = stripDeep(a[0], 0); return a; };
   function wrapOutbound() {
     wrapMethod(W.SMD_PDF, "fromHtml", html0);
     wrapMethod(W.SMD_NATIVE, "sharePdfFromHtml", html0);
     wrapMethod(W.navigator, "share", obj0);
-    try { if (W.navigator && W.navigator.clipboard) wrapMethod(W.navigator.clipboard, "writeText", function (a) { a[0] = strip(a[0]); return a; }); } catch (e) {}
+    try { if (W.navigator && W.navigator.clipboard) wrapMethod(W.navigator.clipboard, "writeText", function (a) { a[0] = display(a[0]); return a; }); } catch (e) {}
     var P = W.Capacitor && W.Capacitor.Plugins;
     if (P) { wrapMethod(P.Share, "share", obj0); wrapMethod(P.LocalNotifications, "schedule", obj0); }
   }
@@ -270,7 +323,7 @@
     } catch (e) {}
   }
   function boot() {
-    if (!enabled() || !W.document || !W.document.body) return;
+    if (!(enabled() || dashOn()) || !W.document || !W.document.body) return;
     wrapDialogs();
     // the bridges load after this file (deferred): wrap now and again as they appear
     wrapOutbound(); [500, 2000, 6000, 15000].forEach(function (ms) { W.setTimeout(wrapOutbound, ms); });
@@ -299,5 +352,5 @@
   if (W && W.document) {
     if (W.document.readyState === "loading") W.document.addEventListener("DOMContentLoaded", boot); else boot();
   }
-  return { strip: strip, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
+  return { strip: strip, tidy: tidy, display: display, norm: norm, same: same, hasDash: hasDash, dashOn: dashOn, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
 });

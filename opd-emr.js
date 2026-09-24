@@ -4628,7 +4628,7 @@
     _fmicT0 = 0;
     if (!txt) { fmicSay(""); return; }
     fmicSay(txt, kind);
-    setTimeout(function () { var el = document.getElementById("oeFmicBar"); if (el && el.textContent === txt) fmicSay(""); }, 3200);
+    setTimeout(function () { var el = document.getElementById("oeFmicBar"); if (el && ((window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.same) ? SMD_EMOJI_ICONS.same(el.textContent, txt) : el.textContent === txt)) fmicSay(""); }, 3200);
   }
   function stopFieldMic() {
     if (_fieldSession) { try { _fieldSession.stop(); } catch (x) {} _fieldSession = null; }

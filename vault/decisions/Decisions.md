@@ -199,6 +199,22 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-24 · No AI-style dashes in the app
+
+**Decision.** Owner: "remove AI slop like -- AI dashes all over the app without causing malfunction".
+Same rendered-DOM layer as the emoji swap (`emoji-icons.js`, flag `smd_nodash`, default ON). Each dash is
+judged by its neighbours: an aside (X — Y, X—Y, X -- Y) becomes a comma; a range (5—10, 5 – 10) becomes
+5-10 and a tight 7–10 en dash is untouched; an empty value (a lone —, HR: —, —/—) becomes – so empty
+still reads as empty; a dash at the start/end of a text node becomes a comma only when the text continues
+in the neighbouring element. Hyphens, CSS `--vars` and `a--b` are untouched; inputs/code are skipped.
+Also applied to attributes, document.title, dialogs and outbound text (PDF, share, clipboard, notifications).
+
+**Malfunction guard.** Code that compares screen text with the string it rendered would stop matching once
+the text is rewritten (this affects the emoji swap too). The five such sites (search.js scroll-to-result,
+home.js menu match, medlist.js route/frequency chips, opd-emr.js dictation bar) now compare via
+`SMD_EMOJI_ICONS.same()/norm()`, which normalises both sides; without the module they fall back to the
+original comparison. Comparisons on data values (not screen text) are unaffected.
+
 ## 2026-09-24 · No emoji in the app: rendered emoji become line icons
 
 **Decision.** Owner: "remove emoji all over the app and replace with icons". ~1,500 emoji sit in 71

@@ -134,7 +134,7 @@
           if (t.group === "exp" && G.SMD_openExperimental) G.SMD_openExperimental(); else if (G.SMD_openSettings) G.SMD_openSettings();
           setTimeout(function () {                       // scroll the row into view; the title is rendered in .sbr-tg-t
             var els = document.querySelectorAll(".sbr-tg-t"), i;
-            for (i = 0; i < els.length; i++) if (els[i].textContent.trim() === t.title) { els[i].scrollIntoView({ block: "center" }); els[i].classList.add("us-flash"); break; }
+            for (i = 0; i < els.length; i++) if ((window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.same) ? SMD_EMOJI_ICONS.same(els[i].textContent, t.title) : els[i].textContent.trim() === t.title) { els[i].scrollIntoView({ block: "center" }); els[i].classList.add("us-flash"); break; }
           }, 120);
         } };
     });

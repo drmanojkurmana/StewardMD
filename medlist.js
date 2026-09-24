@@ -948,11 +948,11 @@
     grid.appendChild(field("Unit", unitInp));
     var routeRow = el("div", { cls: "ml-chip-row" });
     ROUTE_OPTS.forEach(function (rt) { var c = el("button", { cls: "ml-chip" + (draft.route === rt ? " on" : ""), text: rt, attrs: { type: "button" } });
-      c.addEventListener("click", function () { draft.route = draft.route === rt ? "" : rt; routeRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", x.textContent === draft.route); }); }); routeRow.appendChild(c); });
+      c.addEventListener("click", function () { draft.route = draft.route === rt ? "" : rt; routeRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", (window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.same) ? SMD_EMOJI_ICONS.same(x.textContent, draft.route) : x.textContent === draft.route); }); }); routeRow.appendChild(c); });
     grid.appendChild(field("Route", routeRow, true));
     var freqRow = el("div", { cls: "ml-chip-row" });
     FREQ_OPTS.forEach(function (fq) { var c = el("button", { cls: "ml-chip" + (draft.freq === fq ? " on" : ""), text: fq, attrs: { type: "button" } });
-      c.addEventListener("click", function () { draft.freq = draft.freq === fq ? "" : fq; freqRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", x.textContent === draft.freq); }); }); freqRow.appendChild(c); });
+      c.addEventListener("click", function () { draft.freq = draft.freq === fq ? "" : fq; freqRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", (window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.same) ? SMD_EMOJI_ICONS.same(x.textContent, draft.freq) : x.textContent === draft.freq); }); }); freqRow.appendChild(c); });
     grid.appendChild(field("Frequency", freqRow, true));
     var indInp = el("input", { cls: "ml-input", type: "text", placeholder: "Optional — why it's prescribed" });
     indInp.addEventListener("input", function () { draft.indication = indInp.value; });

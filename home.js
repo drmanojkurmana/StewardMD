@@ -241,7 +241,7 @@
 
       // 1c) Drop the redundant per-category calculator shortcuts (Browse-all covers them).
       ["Cardiovascular", "Critical care & sepsis", "Renal & electrolytes", "Neurology & stroke"].forEach(function (t) {
-        var b = Array.prototype.slice.call(menu.querySelectorAll(".sb-subitem, .sb-main-link")).filter(function (x) { return x.textContent.replace(/\s+/g, " ").indexOf(t) >= 0; })[0];
+        var b = Array.prototype.slice.call(menu.querySelectorAll(".sb-subitem, .sb-main-link")).filter(function (x) { return (window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.same) ? SMD_EMOJI_ICONS.norm(x.textContent).indexOf(SMD_EMOJI_ICONS.norm(t)) >= 0 : x.textContent.replace(/\s+/g, " ").indexOf(t) >= 0; })[0];
         if (b) b.style.display = "none";
       });
 
