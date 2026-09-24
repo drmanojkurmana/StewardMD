@@ -28,7 +28,7 @@ for (const label of ["Copy", "Regenerate", "Edit"]) ok(`"${label}" action presen
 ok("Copy strips chips, sources and chrome before copying (answer text only)", /\.maik-fb,\.maik-followups,\.maik-tools,\.maik-refine,\.maik-chip,\.maik-src/.test(f) && /navigator\.clipboard/.test(f));
 // Owner transcript (2026-09-20): Regenerate used to push the topic-PREFIXED question through send(), so
 // the clinician's own bubble reappeared as "IRIS: Iris in aids" and was prefixed again on the way through.
-ok("Regenerate drops the cached render for this question, flags regen, re-runs the SAME resolved call (never send())", /delete _maikCache\[maikNorm\(question\)/.test(f) && /_maikRegen = true;/.test(f) && /runClinical\(question, retrieval, depth, active, topicLabel\)/.test(f) && !/send\(\);/.test(f));
+ok("Regenerate drops the cached render for this question, flags regen, re-runs the SAME resolved call (never send())", /delete _maikCache\[maikCacheKey\(question/.test(f) && /_maikRegen = true;/.test(f) && /runClinical\(question, retrieval, depth, active, topicLabel\)/.test(f) && !/send\(\);/.test(f));
 ok("Edit puts the TYPED text back in the composer (userQ, not the rewritten question) and focuses it", /qEl\.value = userQ; qEl\.focus\(\)/.test(f) && !/qEl\.value = question/.test(f));
 ok("runClinical captures the typed text before the cache lookup", /var userQ = _maikUserQ \|\| question; _maikUserQ = null;/.test(home));
 ok("the regen flag is consumed for exactly the next send and passed to the engine", /var _regen = _maikRegen; _maikRegen = false;/.test(home) && /regen: _regen \}, onDelta\)/.test(home));
