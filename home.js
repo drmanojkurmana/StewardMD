@@ -6562,6 +6562,28 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _fsResumed = false;
       function _fsResume() { if (_fsResumed) return; _fsResumed = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} }
       function _clearStages() { _stageT.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); _stageT = []; }
+      // STOP (owner, 2026-09-24: "I click stop, it still says searching evidence and the orbs keep
+      // running"). The composer's Stop button calls _maikStop; nothing ever assigned it, so the bubble,
+      // the orbs, the stage timers and the watchdog all ran on. This ends the RENDER at once: whatever
+      // has streamed so far stays as the answer and is marked stopped; an empty wait becomes one line.
+      // A cloud call already in flight is left to finish silently (_maikDone makes every later paint a
+      // no-op); the on-device engine is cancelled by maikStopNow itself.
+      _maikStop = function () {
+        if (_maikDone) return;
+        _maikDone = true; _clearStages(); clearTimeout(_maikTO); _fsResume();
+        try {
+          var h = _live(), s = h.querySelector(".maik-streaming");
+          if (s && s.textContent.trim()) {
+            var c = s.querySelector(".maik-caret"); if (c) c.parentNode.removeChild(c);
+            s.className = "maik-stopped-answer";
+            h.insertAdjacentHTML("beforeend", '<div class="maik-stopped">Stopped</div>');
+          } else {
+            h.innerHTML = '<div class="maik-welcome">Stopped.</div>';
+          }
+        } catch (e) {}
+        _persist();
+        _maikBusy = false; maikSetSendMode(false);
+      };
       // ── SCOPE GATE (clinician-only): an obviously NON-clinical request (code, creative writing,
       // "integrate X into my project", lay self-help) is refused INSTANTLY here — BEFORE the KB engine,
       // the semantic router, and any Vertex call — so it can never fuzzy-match a disease name in the
