@@ -130,7 +130,7 @@ import { getFeedback, getFeedbackAgg, clearFeedback } from "../../_maik_feedback
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
-import { sseFrames, sseFrameText } from "../../_sse_parse.js";
+import { sseFrames, sseFrameText, sseFrameUsage } from "../../_sse_parse.js";
 import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg, cacheEligibleCtx, kbFingerprint } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
@@ -235,6 +235,13 @@ function aiTimeoutMs(env) { const v = Number(env.MAIK_AI_TIMEOUT_MS); return Num
  * native client gives up at ~25-35s, so the doctor saw a failure the server was still working on.
  * 28s stays under the client's timeout. Env override: MAIK_AI_DEADLINE_MS. */
 function aiDeadlineMs(env) { const v = Number(env && env.MAIK_AI_DEADLINE_MS); return Number.isFinite(v) && v > 0 ? v : 28000; }
+/* Metered tokens (T40): Gemini's own usageMetadata when the response carried it (output = visible +
+ * thinking tokens, both billed as output), else the chars/4 estimate as before. */
+function usageTokens(meta, inChars, outText) {
+  const u = meta && meta.usage;
+  if (!u || u.promptTokenCount == null) return { inTok: estTokens(inChars), outTok: estTokens(String(outText || "").length) };
+  return { inTok: u.promptTokenCount, outTok: (u.candidatesTokenCount || 0) + (u.thoughtsTokenCount || 0), cachedTok: u.cachedContentTokenCount || 0 };
+}
 // Deliver an already-computed answer over the SSE channel as one {delta}+{done} event. Lets the
 // client's stream consumer render a whole-answer (non-stream) result — the reliable path — with no
 // empty stream and no hang.
@@ -257,15 +264,17 @@ function streamTextAsSSE(text, diag) {
 // consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
 // These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
 // so disabling also cuts latency + cost.
-function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; var b = { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; if (opts && opts.tools) b.tools = opts.tools; return b; }
-// Latency/token instrumentation: last Gemini call's usageMetadata (promptTokenCount / thoughtsTokenCount
-// / candidatesTokenCount) + finishReason, surfaced via ?diag=1. thoughtsTokenCount reveals how much time
-// is spent on invisible "thinking" (the suspected latency sink) vs visible output. No content, no PHI.
-let _lastGenMeta = null;
-function parseCandidates(data, status) {
+// opts.json: ask for application/json output (JSON mode) so a parse-only call cannot wrap its JSON in prose.
+function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; var b = { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; if (opts && opts.json) b.generationConfig.responseMimeType = "application/json"; if (opts && opts.tools) b.tools = opts.tools; return b; }
+/* Latency/token instrumentation: a Gemini call's usageMetadata (promptTokenCount / thoughtsTokenCount /
+ * candidatesTokenCount / cachedContentTokenCount) + finishReason + model, written into the CALLER's
+ * opts.meta object (T41). It used to be a module-level global (_lastGenMeta), so a concurrent request
+ * could overwrite it between another request's call and its read (scribe truncation flag, ?diag=1).
+ * No content, no PHI. */
+function parseCandidates(data, status, meta) {
   if (status >= 400 || !data || data.error) { const err = new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : "")); err.status = status; throw err; }
   const cand = data.candidates && data.candidates[0];
-  _lastGenMeta = { finishReason: (cand && cand.finishReason) || "", usage: (data && data.usageMetadata) || null };
+  if (meta) { meta.finishReason = (cand && cand.finishReason) || ""; meta.usage = (data && data.usageMetadata) || null; }
   return (cand && cand.content && cand.content.parts) ? cand.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
 }
 
@@ -278,7 +287,7 @@ const developerProvider = {
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
     const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelFor(env, o)}:generateContent?key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, o.timeoutMs || aiTimeoutMs(env));
-    { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
+    { const _t = parseCandidates(jr.data, jr.status, o.meta); if (o.meta) o.meta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: function (env, parts, maxTokens, opts) {
@@ -360,7 +369,7 @@ const vertexProvider = {
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
     const c = await vertexCall(env, o, "generateContent");
     const jr = await fetchJsonWithTimeout(c.url, { method: "POST", headers: c.headers, body: JSON.stringify(genBody(parts, maxTokens, o)) }, o.timeoutMs || aiTimeoutMs(env));
-    { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
+    { const _t = parseCandidates(jr.data, jr.status, o.meta); if (o.meta) o.meta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
@@ -468,7 +477,7 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
   const IDLE = (lim && lim.idleMs) || 12000;          // max gap BETWEEN chunks
   const DEADLINE = _t0 + ((lim && lim.totalMs) || 60000);   // max life of the whole stream
   let _tHdr = Date.now(), _tFirst = 0;
-  let buf = "", full = "", closed = false;
+  let buf = "", full = "", closed = false, usage = null;   // usage: Gemini's usageMetadata, carried by the LAST chunk
   /* One exit for every ending — upstream done, idle stall, or total deadline. Always emits a done
    * event and closes, so the client settles deterministically and never waits on a dead socket. */
   function finish(controller, reason) {
@@ -485,7 +494,7 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
     if (reason) _tm.endedBy = reason;
     try { controller.enqueue(enc.encode("data: " + JSON.stringify(reason ? { done: true, stalled: true, _t: _tm } : { done: true, _t: _tm }) + "\n\n")); } catch (e) {}
     try { controller.close(); } catch (e) {}
-    try { if (onText) onText(full); } catch (e) {}
+    try { if (onText) onText(full, usage); } catch (e) {}
   }
   const rs = new ReadableStream({
     async pull(controller) {
@@ -513,6 +522,7 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
         const { frames, rest } = sseFrames(buf); buf = rest;
         for (const frame of frames) {
           const txt = sseFrameText(frame);
+          const fu = sseFrameUsage(frame); if (fu) usage = fu;
           if (txt) { if (!_tFirst) _tFirst = Date.now(); full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
         }
       } catch (e) {
@@ -571,8 +581,10 @@ function failoverAllowed(e) { return httpStatusOf(e) !== 400; }
 // Facade — callers (RAG explain / legacy explain / vision) are unchanged. Provider priority:
 // Vertex → Developer hot standby, inside one deadline; see the retry policy above.
 export async function callGemini(env, parts, maxTokens, opts) {
+  if (opts && opts.meta) { opts.meta.usage = null; opts.meta.finishReason = ""; opts.meta.model = ""; }   // never report a previous call's figures
   // Tiered routing: a complex clinical query escalates to the stronger model, if the owner enabled one.
-  if (opts && !opts.model) {
+  // opts.noTier: the caller passed no options at all (the gen() wrapper sets it), which never tiered.
+  if (opts && !opts.model && !opts.noTier) {
     if (opts.complex) { const sm = strongModel(env); if (sm) opts = Object.assign({}, opts, { model: sm }); }        // hard query -> stronger model (opt-in)
     else { const fm = fastModel(env); if (fm) opts = Object.assign({}, opts, { model: fm }); }                        // simple query -> cheaper/faster non-thinking model (opt-in)
   }
@@ -1123,6 +1135,11 @@ export async function onRequest(context) {
   if (!(await authorise(request, env))) return json({ error: "unauthorised" }, 403);
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const enabled = aiEnabled(env);
+  // This request's generation metadata (T41) and the call wrapper that fills it. Each recordUsage runs
+  // right after its own call, so one object per request is enough; it is never shared across requests.
+  const _gm = {};
+  const gen = (parts, max, opts) => callGemini(env, parts, max, Object.assign(opts ? {} : { noTier: true }, opts || {}, { meta: _gm }));
+  const tokens = (inChars, text) => usageTokens(_gm, inChars, text);
 
   // AI Control Center: apply the admin model + emergency mode for THIS request. Emergency "cheap"
   // forces the cheapest model (overriding the admin choice); "pause" is enforced at dispatch below.
@@ -1724,7 +1741,7 @@ export async function onRequest(context) {
           const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {}
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full, usage) { try { recordUsage(gate, { ...usageTokens({ usage: usage }, sysA.length + grounded.length, full), status: "success" }); } catch (e) {}
             // Populate the answer cache from the STREAM path too. waitUntil, because the response has
             // already been handed to the client by the time the last token lands (same pattern as the
             // router cache write below, which is why that one has always worked and this one did not).
@@ -1752,9 +1769,9 @@ export async function onRequest(context) {
         // 3.3s of pure generation for a 68-token, "keep it short" answer with a 901-token prompt -
         // the model tier, not the output cap, was the real cost; the answer already finished at
         // STOP well under the 2560-token cap). isTutor takes precedence over complex-based tiering.
-        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); }
+        try { text = await gen([{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(nsSys.length + grounded.length, text), status: "success" });
         if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
         // Client asked for a stream: hand the reliable whole-answer back over the SSE channel it's
         // already listening on (one delta + done). Renders immediately — no empty stream, no hang.
@@ -1762,21 +1779,21 @@ export async function onRequest(context) {
           _at("gen");
           return withCors(request, streamTextAsSSE(text, _wantDiag ? {
             ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,
-            model: (_lastGenMeta && _lastGenMeta.model) || modelId(env),
-            finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
-            promptTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).promptTokenCount || 0,
-            thoughtsTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).thoughtsTokenCount || 0,
-            candTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).candidatesTokenCount || 0,
+            model: (_gm && _gm.model) || modelId(env),
+            finishReason: (_gm && _gm.finishReason) || "",
+            promptTok: ((_gm && _gm.usage) || {}).promptTokenCount || 0,
+            thoughtsTok: ((_gm && _gm.usage) || {}).thoughtsTokenCount || 0,
+            candTok: ((_gm && _gm.usage) || {}).candidatesTokenCount || 0,
             chars: (text || "").length
           } : null));
         }
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         if (_wantDiag) {
-          const u = (_lastGenMeta && _lastGenMeta.usage) || {};
+          const u = (_gm && _gm.usage) || {};
           _at("gen");
           const _diag = { ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,
-            cap: nsCap, chars: (text || "").length, model: (_lastGenMeta && _lastGenMeta.model) || modelId(env), finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
+            cap: nsCap, chars: (text || "").length, model: (_gm && _gm.model) || modelId(env), finishReason: (_gm && _gm.finishReason) || "",
             promptTok: u.promptTokenCount || 0, thoughtsTok: u.thoughtsTokenCount || 0, candTok: u.candidatesTokenCount || 0, totalTok: u.totalTokenCount || 0 };
           return json({ text: text, mode: "grounded", citations: cites, _diag: _diag });
         }
@@ -1788,8 +1805,8 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "case");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "");
-      const text = await callGemini(env, [{ text: prompt }], MAX_OUT, { maik: true, complex: looksComplex(pkg && pkg.question) });   // MaiK explain (legacy path)
-      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+      const text = await gen([{ text: prompt }], MAX_OUT, { maik: true, complex: looksComplex(pkg && pkg.question) });   // MaiK explain (legacy path)
+      await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
       return json({ text: text, mode: "summary" });
     }
     if (seg === "verify") {
@@ -1854,9 +1871,9 @@ export async function onRequest(context) {
       // (intent -9pts, entity -10pts) WITHOUT cutting latency (the ~5-6s is Vertex serving/network/failover
       // overhead, not model compute), so the router uses full flash. Overridable via env.
       const routerModel = env.MAIK_ROUTER_MODEL || "gemini-2.5-flash";
-      try { text = await callGemini(env, [{ text: sys }], 200, { temperature: 0, model: routerModel }); }
+      try { text = await gen([{ text: sys }], 200, { temperature: 0, model: routerModel }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "route-failed" }, 502); }
-      await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(sys.length, text), status: "success" });
       const p = parseJsonLoose(text) || {};
       const concept = String(p.primaryConcept || p.topic || "").slice(0, 140);
       const opts = Array.isArray(p.options) ? p.options.map(function (x) { return String(x).slice(0, 80); }).filter(Boolean).slice(0, 4) : [];
@@ -1911,9 +1928,9 @@ export async function onRequest(context) {
         "QUESTION: " + q + (key ? ("\nKEY POINTS: " + key) : "") + "\nSTUDENT'S ANSWER: " + given;
       const judgeModel = env.VIVA_JUDGE_MODEL || CHEAP_MODEL;
       let text;
-      try { text = await callGemini(env, [{ text: sys }], 120, { temperature: 0, model: judgeModel }); }
+      try { text = await gen([{ text: sys }], 120, { temperature: 0, model: judgeModel }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "judge-failed" }, 502); }
-      await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(sys.length, text), status: "success" });
       const p = parseJsonLoose(text) || {};
       const verdict = ["correct", "partial", "incorrect"].indexOf(p.verdict) >= 0 ? p.verdict : null;
       if (!verdict) return json({ error: "parse" }, 502);
@@ -1941,9 +1958,9 @@ export async function onRequest(context) {
       const prompt = IMAGING_SYS + "\n\n=== CONTEXT (de-identified) ===\n" + ctx.join("\n") +
         "\n\n=== RADIOLOGY REPORT TEXT ===\n" + reportText + "\n\n=== TASK ===\n" + IMAGING_TASK;
       let text;
-      try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, { temperature: 0.3 }); }
+      try { text = await gen([{ text: prompt }], MAX_OUT, { temperature: 0.3 }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
       const parsed = parseJsonLoose(text);
       return json(parsed ? { summary: parsed, mode: "imaging" } : { error: "parse", raw: String(text || "").slice(0, 1200), mode: "imaging" });
     }
@@ -1964,9 +1981,9 @@ export async function onRequest(context) {
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = CORRELATE_SYS + "\n\n" + L.join("\n").slice(0, MAX_IN_CHARS) + "\n\n=== TASK ===\n" + CORRELATE_TASK;
       let text;
-      try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, { temperature: 0.3 }); }
+      try { text = await gen([{ text: prompt }], MAX_OUT, { temperature: 0.3 }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
       const parsed = parseJsonLoose(text);
       return json(parsed ? { correlation: parsed, mode: "correlate" } : { error: "parse", raw: String(text || "").slice(0, 1200), mode: "correlate" });
     }
@@ -1996,9 +2013,9 @@ export async function onRequest(context) {
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         const prompt = visionTextPrompt(kind, ocr);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, { model: visionModel(env) }); }
+        try { text = await gen([{ text: prompt }], MAX_OUT, { model: visionModel(env) }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         return json({ kind: kind, fields: parseJsonLoose(text) || {}, mode: "text" });
       }
       // IMAGE mode (legacy / web): unchanged.
@@ -2009,10 +2026,10 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       let text;
-      try { text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT, { model: visionModel(env) }); }
+      try { text = await gen([{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT, { model: visionModel(env) }); }
       catch (e) { await recordUsage(gate, { inTok: 1000, outTok: 0, status: "failed" }); throw e; }
       // image input ≈ a fixed token block (~1.3k) + the prompt; approximate for cost metering.
-      await recordUsage(gate, { inTok: 1000 + estTokens(VISION_SYS[kind].length), outTok: estTokens((text || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(4000 + VISION_SYS[kind].length, text), status: "success" });
       return json({ kind: kind, fields: parseJsonLoose(text) || {}, mode: "image" });
     }
     if (seg === "research") {
@@ -2090,9 +2107,9 @@ export async function onRequest(context) {
         const prompt = EVIDENCE_REVIEW_SYS + histBlock + "\n\n=== CLINICIAN QUESTION ===\n" + q + srcBlock;
         const inTok = estTokens(prompt.length);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], ERE_MAX, { temperature: 0.2 }); }
+        try { text = await gen([{ text: prompt }], ERE_MAX, { temperature: 0.2 }); }
         catch (e) { try { console.warn("[ai] evidence-review-failed", String(e && e.message || e).slice(0, 200)); } catch (_e) {} try { await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" }); } catch (x) {} return json({ error: "research-failed", mode: "evidence-review" }, 502); }
-        try { await recordUsage(gate, { inTok: inTok, outTok: estTokens((text || "").length), status: "success" }); } catch (e) {}
+        try { await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" }); } catch (e) {}
         // (5) Cache the synthesized answer (~7-day TTL) so a repeat is free AND slot-free.
         if (store && text) { try { await store.put(cacheKey, JSON.stringify({ text: text, sources: sources, ts: Date.now() }), { expirationTtl: 7 * 24 * 60 * 60 }); } catch (e) {} }
         return json({ text: text, mode: "evidence-review", sources: sources, cached: false, usage: { module: "research", used: usedNow, limit: capNow } });
@@ -2130,14 +2147,14 @@ export async function onRequest(context) {
       const inTok = estTokens(prompt.length);
       let text = null, sources = [];
       try {
-        text = await callGemini(env, [{ text: prompt }], RES_MAX, { temperature: 0.2 });
+        text = await gen([{ text: prompt }], RES_MAX, { temperature: 0.2 });
         sources = results.map(function (r) { return { title: r.title, url: r.url, site: r.site }; });
       } catch (e) {
         try { console.warn("[ai] research-failed", String(e && e.message || e).slice(0, 200)); } catch (_e) {}
         await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" });
         return json({ error: "research-failed" }, 502);
       }
-      await recordUsage(gate, { inTok: inTok, outTok: estTokens((text || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
       return json({ text: text, mode: "web-tinyfish", sources: sources });
     }
     if (seg === "summary") {
@@ -2149,9 +2166,9 @@ export async function onRequest(context) {
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = "You are MaiK, a clinical assistant. Summarise this patient's longitudinal record for the treating doctor, using ONLY the entries below. Do NOT invent any finding, diagnosis, drug, dose or date. Be concise. Structure with short headed lines: Active problems; Course; Current medications; Pending investigations / follow-ups.\n\nRECORD (newest first):\n" + src;
       let out;
-      try { out = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+      try { out = await gen([{ text: prompt }], MAX_OUT); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); return json({ error: "summary-failed" }, 502); }
-      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((out || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(prompt.length, out), status: "success" });
       return json({ text: out, mode: "summary" });
     }
     if (seg === "extract") {
@@ -2203,9 +2220,9 @@ export async function onRequest(context) {
         const catalog = Array.isArray(body.catalog) ? body.catalog.slice(0, 500) : [];
         const prompt = reasoningExtractPrompt(transcript, catalog).slice(0, MAX_IN_CHARS + 12000);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        try { text = await gen([{ text: prompt }], MAX_OUT); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         const parsed = parseJsonLoose(text) || {};
         // SAFETY: only keys that actually exist in the catalog survive (no invented findings).
         const valid = {}; catalog.forEach((c) => { if (c && c.key) valid[c.key] = 1; });
@@ -2226,9 +2243,9 @@ export async function onRequest(context) {
         // fields so no invented finding/vital/dx can reach the app.
         const prompt = assessmentExtractPrompt(transcript);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
+        try { text = await gen([{ text: prompt }], MAX_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         await _chargeScribe();
         return json({ kind: "assessment", fields: sanitizeAssessmentFields(parseJsonLoose(text)), mode: "assessment" });
       }
@@ -2263,16 +2280,16 @@ export async function onRequest(context) {
         // both bounded by it). Tune with SCRIBE_MAX_OUTPUT_TOKENS.
         const SCRIBE_OUT = Math.max(OUT_BASE, Math.min(8192, Number(env.SCRIBE_MAX_OUTPUT_TOKENS) || 6000));
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], SCRIBE_OUT, _scribeOpts); }
+        try { text = await gen([{ text: prompt }], SCRIBE_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         await _chargeScribe();
         // Truncation-tolerant parse (keeps the completed fields instead of returning nothing), then
         // the grounding pass the client's "not found in the recording" badge depends on. Grounding
         // is withheld whenever it would be incomplete -- see attachGrounding. SCRIBE_GROUND="0"
         // (default ON) turns the whole signal off without touching the prompt.
         const _parsed = parseScribeJson(text);
-        const _truncated = _parsed.truncated || /MAX_TOKENS/i.test((_lastGenMeta && _lastGenMeta.finishReason) || "");
+        const _truncated = _parsed.truncated || /MAX_TOKENS/i.test((_gm && _gm.finishReason) || "");
         const _out = sanitizeScribeOutput(_parsed.parsed);
         if (_isDelta) {
           // Merge the delta into the running draft and return the WHOLE merged draft (same JSON
@@ -2301,9 +2318,9 @@ export async function onRequest(context) {
         if (!allowed.length) return json({ error: "no allowedFields" }, 400);
         const prompt = surgxNotePrompt(transcript, { noteType: body.noteType, allowedFields: allowed });
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
+        try { text = await gen([{ text: prompt }], MAX_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         const clean = sanitizeSurgxNote(parseJsonLoose(text), allowed);
         return json({ kind: "surgx-note", fields: clean.fields, dropped: clean.dropped, mode: "surgx-note" });
       }
@@ -2314,9 +2331,9 @@ export async function onRequest(context) {
         const ctx = (body.ctx && typeof body.ctx === "object") ? body.ctx : {};
         const prompt = maikNextPrompt(ctx);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], 512); }
+        try { text = await gen([{ text: prompt }], 512); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         return json({ kind: "maik-ask-next", ...sanitizeMaikNext(parseJsonLoose(text)), mode: "maik-ask-next" });
       }
       if (body.kind === "maik-ask-extract") {
@@ -2325,9 +2342,9 @@ export async function onRequest(context) {
         const ctx = (body.ctx && typeof body.ctx === "object") ? body.ctx : {};
         const prompt = maikExtractPrompt(ctx, transcript);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], 512); }
+        try { text = await gen([{ text: prompt }], 512); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         return json({ kind: "maik-ask-extract", ...sanitizeMaikExtract(parseJsonLoose(text), ctx.allowedFields), mode: "maik-ask-extract" });
       }
       if (body.kind === "opd-suggest") {
@@ -2336,9 +2353,9 @@ export async function onRequest(context) {
         // data), advisory only. EMR corrections stay on-device (deterministic), never from the LLM.
         const prompt = opdSuggestPrompt(transcript);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        try { text = await gen([{ text: prompt }], MAX_OUT); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         return json({ kind: "opd-suggest", ...sanitizeOpdSuggest(parseJsonLoose(text)), mode: "opd-suggest" });
       }
       if (body.kind === "icd-suggest") {
@@ -2351,9 +2368,9 @@ export async function onRequest(context) {
         const candidates = icdRepo.hasDb(env) ? await icdRepo.searchCodes(env, { q: transcript, limit: 30 }) : [];
         const prompt = icdSuggestPrompt(transcript, candidates);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], 1024); }
+        try { text = await gen([{ text: prompt }], 1024); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         return json({ kind: "icd-suggest", ...sanitizeIcdSuggest(parseJsonLoose(text), candidates), mode: "icd-suggest" });
       }
       if (body.kind === "translate") {
@@ -2362,18 +2379,18 @@ export async function onRequest(context) {
           "numbers and standard abbreviations (BP, IV, BD, OD) exactly. If it is already English, return it unchanged. " +
           "Output ONLY the translation — no preamble, labels or quotes.\n\n=== TEXT ===\n" + transcript;
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
+        try { text = await gen([{ text: prompt }], MAX_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
         await _chargeScribe();
         return json({ text: String(text || "").replace(/^["']+|["']+$/g, "").trim(), mode: "translate" });
       }
       const k = VISION_SYS[body.kind] ? body.kind : "monitor";
       const prompt = transcriptExtractPrompt(k, transcript);
       let text;
-      try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+      try { text = await gen([{ text: prompt }], MAX_OUT); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(prompt.length, text), status: "success" });
       return json({ kind: k, fields: parseJsonLoose(text) || {}, mode: "extract" });
     }
     if (seg === "transcribe") {
@@ -2388,9 +2405,9 @@ export async function onRequest(context) {
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const sys = "Transcribe this clinical dictation audio to plain text, VERBATIM. Return ONLY the transcript text — no preamble, labels, quotes, or commentary. If the audio is empty or inaudible, return an empty string.";
       let text;
-      try { text = await callGemini(env, [{ text: sys }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
+      try { text = await gen([{ text: sys }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
       catch (e) { await recordUsage(gate, { inTok: 1200, outTok: 0, status: "failed" }); throw e; }
-      await recordUsage(gate, { inTok: 1200, outTok: estTokens((text || "").length), status: "success" });
+      await recordUsage(gate, { ...tokens(4800, text), status: "success" });
       return json({ transcript: String(text || "").trim(), mode: "ai" });
     }
     return json({ error: "unknown endpoint", seg: seg }, 404);

@@ -42,7 +42,7 @@ test("every ending goes through one exit that ALWAYS closes the stream", () => {
   const fin = API.slice(iFin, API.indexOf("const rs = new ReadableStream", iFin));
   assert.match(fin, /controller\.close\(\)/, "must close");
   assert.match(fin, /done: true/, "must emit a done event so the client settles");
-  assert.match(fin, /onText\(full\)/, "usage must still be recorded on every path");
+  assert.match(fin, /onText\(full(, usage)?\)/, "usage must still be recorded on every path");
   // the error path must use it too, rather than its own ad-hoc close
   const blk = API.slice(API.indexOf("function streamGeminiToSSE"), API.indexOf("// Azure circuit breaker"));
   assert.match(blk, /catch \(e\) \{\s*try \{ reader\.cancel\(\); \} catch \(e2\) \{\}\s*finish\(controller, "error"\);/,
