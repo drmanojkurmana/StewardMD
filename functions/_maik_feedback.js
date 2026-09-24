@@ -5,12 +5,14 @@
  * admin console section, and for a "No" tap to ask why and store the reason. This is that store.
  *
  * METADATA + the doctor's own free-text reason, NEVER patient data: helpful (up/down), the QUESTION
- * the doctor typed (clipped, same practice as _clientlog.js's message field - a clinical question is
- * not itself PHI, but is still clipped defensively), an OPTIONAL reason typed after a "No", which
+ * the doctor typed (identifier-stripped via _deid.js, then clipped - a clinical question is not
+ * itself PHI, but doctors paste bed/UHID numbers), an OPTIONAL reason typed after a "No", which
  * engine/pack answered, and a server timestamp. No identity is required or stored (mirrors
  * functions/api/ws-feedback.js's anonymous-signal stance) - this is product-quality signal, not a
  * user record. Ring buffer + aggregate, same shape as _clientlog.js so the admin console pattern
  * (getX/recordX/clearX) is identical across both panes. */
+
+import { stripIdentifiers } from "./_deid.js";
 
 export const FEEDBACK_KEY = "maikfb:recent";
 export const FEEDBACK_AGG_KEY = "maikfb:agg";
@@ -28,8 +30,10 @@ export function sanitizeFeedback(rec, now) {
     id: genId(now || Date.now()),
     ts: now || Date.now(),
     helpful,
-    question: clip(rec.question, 300),
-    reason: clip(rec.reason, 500),
+    // Identifier-like content (MRN/UHID/bed, phone, email, 4+ digit runs, "patient name ...") is
+    // stripped BEFORE storage: this row is kept 90 days and read in the admin console (T10).
+    question: clip(stripIdentifiers(rec.question), 300),
+    reason: clip(stripIdentifiers(rec.reason), 500),
     engine: clip(rec.engine, 20),   // "cloud" | "local" | "kb" | "rag" - never a raw model name
     pack: clip(rec.pack, 40),       // on-device pack label, when engine is local
   };
@@ -72,7 +76,7 @@ export async function amendFeedbackReason(store, id, reason, now) {
     if (!Array.isArray(list)) return false;
     let found = false, hadReason = false;
     list = list.map(function (e) {
-      if (e && e.id === id) { found = true; hadReason = !!e.reason; return Object.assign({}, e, { reason: clip(reason, 500) }); }
+      if (e && e.id === id) { found = true; hadReason = !!e.reason; return Object.assign({}, e, { reason: clip(stripIdentifiers(reason), 500) }); }
       return e;
     });
     if (!found) return false;

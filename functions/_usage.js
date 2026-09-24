@@ -89,6 +89,13 @@ function emailFromBearer(tok) {
   } catch (e) { return null; }
 }
 
+/* TRUST NOTE (T28, 2026-09-25): this trusts a Cf-Access-Authenticated-User-Email header as-is. That is
+ * only safe behind Cloudflare Access, which also sets Cf-Access-Jwt-Assertion; elsewhere any client can
+ * send the header and pick whose quota and wallet it spends. /api/ai strips an UNASSERTED Cf-Access
+ * email before calling this (accessSafeRequest in functions/api/ai/[[path]].js), and its authorise()
+ * no longer lets any Authorization header through: a bearer must verify as a Firebase ID token.
+ * The other callers (license, billing, ward, queue...) still rely on the bare header; tightening them
+ * is a separate change with its own tests. */
 export async function identify(request, env) {
   const email = request.headers.get("Cf-Access-Authenticated-User-Email");
   if (email) return { id: "cfa:" + (await sha256hex(email.toLowerCase())), guest: false, email: email.toLowerCase() };
