@@ -15,6 +15,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import { createRequire } from "node:module";
 
 function loadQueue() {
   const src = readFileSync(fileURLToPath(new URL("../queue.js", import.meta.url)), "utf8");
@@ -26,6 +27,7 @@ function loadQueue() {
     fetch: () => Promise.resolve({ json: () => Promise.resolve({}) }),
     setTimeout, clearTimeout, setInterval, clearInterval, console, Promise, Date, JSON, Math,
   };
+  sb.SMD_OPD_PULSE = createRequire(import.meta.url)("../opd-pulse-model.js");   // the shared pulse logic, loaded before queue.js on the page
   sb.window = sb; sb.self = sb; vm.createContext(sb); vm.runInContext(src, sb);
   return sb.window.QUEUE;
 }
@@ -90,6 +92,14 @@ test("a personal clinic with no hospital behind it shows no OPD card at all, and
   const html = Q._render({ ...Q._st, view: "dashboard", orgId: "", session: { id: "s1" }, tickets: [], pulse: PULSE });
   assert.ok(!/q-pulse/.test(html), "no hospital, no hospital-wide day");
   assert.match(html, /Patients Waiting/, "the doctor's own KPIs are still there");
+});
+
+test("visits missing from the clinical record are shown as a warning with a one-tap retry", () => {
+  const Q = loadQueue();
+  const html = dash(Q, { ok: true, pulse: { ...PULSE.pulse, syncFailed: 2 } });
+  assert.match(html, /Not in record/);
+  assert.ok(html.includes('data-q-act="reconcile"'), "the retry is right there");
+  assert.ok(!/Not in record/.test(dash(Q, PULSE)), "and absent when every visit landed");
 });
 
 test("rooms that could not be read are flagged rather than quietly making the day look light", () => {

@@ -302,13 +302,26 @@ import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.j
 // this is one function, not several. Best-effort and silent on failure at every call site: a missed
 // WardSynQ sync must never block or alter the underlying queue action that triggered it, the same
 // contract every other shadow-mode write already keeps.
+/* THE VISIT RECORD IS BEST-EFFORT, BUT NO LONGER SILENT (OPD plan item 6, 2026-09-24).
+ *
+ * This swallowed every failure and returned null, so a patient could be registered, queued and seen
+ * while their visit never reached the clinical record - and nothing anywhere said so. Registration still
+ * never fails on it (the desk must keep moving), but when a hospital's record is switched on, the outcome
+ * is now written onto the ticket: encounterSync "ok" or "failed" with the reason. The OPD pulse counts the
+ * failures and POST /opd-reconcile retries them. A hospital with the record off is untouched. */
 async function syncEncounter(request, env, s, ticket) {
+  let mig = null;
+  const mark = async (fields) => { try { if (ticket && ticket.id) await fsCommit(env, [wUpdate(env, "q_tickets/" + ticket.id, Object.assign({ encounterSyncAt: Date.now() }, fields))]); } catch (e) { /* the mark is advisory */ } };
   try {
-    const mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+    mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
     if (!mig || mig.mode === "off") return null;
-    if (mig.error) return null;   // wardsynq org with no tenant linked yet — best-effort, silent, like every other syncEncounter failure
-    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+    if (mig.error) { await mark({ encounterSync: "failed", encounterSyncError: String(mig.error).slice(0, 120) }); return null; }
+    const r = await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+    if (r && r.ok === false) await mark({ encounterSync: "failed", encounterSyncError: String(r.error || r.detail || "refused").slice(0, 120) });
+    else if (r) await mark({ encounterSync: "ok", encounterSyncError: "" });
+    return r;
   } catch (e) {
+    if (mig && mig.mode !== "off") await mark({ encounterSync: "failed", encounterSyncError: String((e && e.message) || e).slice(0, 120) });
     return null;
   }
 }
@@ -4425,6 +4438,18 @@ export async function onRequest(context) {
       }
       if (sub === "appointment" && method === "POST") {
         const r = await setAppointmentState(request, env, { ...deps, appointmentId: body.appointmentId, state: body.state, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        /* OPD plan item 8: A BOOKED PATIENT WHO ARRIVES JOINS THE QUEUE. Marking an appointment arrived used
+         * to update the record only, so the patient then had to be registered again at the desk as a walk-in.
+         * Now the arrival adds them to the OPD pool (which routes straight to a single staffed room) and the
+         * answer carries the token. Only a REAL change adds one - a retried arrival ("unchanged") does not -
+         * and a failed token never undoes the arrival; it is said instead. */
+        if (r.ok && r.state === "arrived" && r.written === 1 && wOrg) {
+          try {
+            const pt = r.patient || {};
+            const t = await Q.addToPool(env, wOrg, { name: pt.name || "", mrn: pt.mrn || "", mobile: pt.mobile || "", patientId: r.patientId || "" }, actor.id || "");
+            r.queueTicket = { id: t && t.id, token: t && (t.token || t.tokenNo) };
+          } catch (e) { r.queueError = "could_not_add_to_queue"; }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "follow-up" && method === "POST") {
@@ -5600,7 +5625,7 @@ export async function onRequest(context) {
         patient: method === "POST" ? CAPS.QUEUE_ADD : CAPS.ORDER_READ,
         order: CAPS.ORDER_CREATE, orders: CAPS.ORDER_READ, queue: CAPS.BILLING_VIEW,
         tariff: method === "POST" ? CAPS.STAFF_ADMIN : CAPS.BILLING_VIEW,
-        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE,
+        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE, refund: CAPS.BILLING_CHARGE,   // OPD plan item 9: the cashier who takes money gives it back, with a reason
         // Day-end shift report: read-only takings by tender for the cashier closing the drawer.
         shift: CAPS.BILLING_VIEW,
         // Pharmacy station: read what is owed, and hand it over. Separate caps from billing on purpose -
@@ -5613,7 +5638,7 @@ export async function onRequest(context) {
       const aid = actor.id || "";
       if (sub === "patient" && method === "POST") { const org = await ORG.getOrg(env, bOrg); return json(await BILL.registerPatient(env, bOrg, (org && org.code) || bOrg, { name: body.name, mobile: body.mobile, sex: body.sex, ageYears: body.ageYears, actor: aid }), 200, request); }
       if (sub === "patient" && method === "GET") { const p = await BILL.getPatient(env, bOrg, url.searchParams.get("id") || ""); return json(p ? Object.assign({ ok: true }, p) : { ok: false, error: "not_found" }, 200, request); }
-      if (sub === "order" && method === "POST") return json(await BILL.createOrder(env, bOrg, body, aid), 200, request);
+      if (sub === "order" && method === "POST") { const bo = await ORG.getOrg(env, bOrg); return json(await BILL.createOrder(env, bOrg, body, aid, { freeReviewDays: (bo && bo.wardsynq && bo.wardsynq.freeReviewDays) || 0 }), 200, request); }
       if (sub === "orders" && method === "GET") {
         const patientId = url.searchParams.get("patientId") || "";
         const status = url.searchParams.get("status") || "";
@@ -5679,6 +5704,7 @@ export async function onRequest(context) {
       }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid, body.split), 200, request);
+      if (sub === "refund" && method === "POST") { const rf = await BILL.refundOrder(env, bOrg, body.orderId || "", body.reason, aid); return json(rf, rf.ok ? 200 : rf.error === "not_found" ? 404 : 422, request); }
       if (sub === "shift" && method === "GET") {
         const rep = await BILL.shiftReport(env, bOrg).catch((e) => { if (e && e.status === 507) throw e; return null; });
         return json(rep ? Object.assign({ ok: true }, rep) : { ok: false, error: "shift_unreadable", message: "Today's takings could not be read. Do not read this as zero collected." }, 200, request);
@@ -6342,6 +6368,34 @@ export async function onRequest(context) {
      *
      * Every room's session plus the pool, exactly as boardForOrg walks them, but the tickets are NOT
      * filtered to the active ones: a day with 40 completed and 9 no-shows is the day being measured. */
+    /* RECONCILE: re-send today's visits whose clinical record did not land (syncEncounter marked them
+     * "failed"). The desk's authority, because it is the desk's patients; bounded to 50 per call so one
+     * tap cannot become a long request. Says how many landed and how many still did not. */
+    if (method === "POST" && seg === "opd-reconcile") {
+      const rb = await readBody(request);
+      const orgId = String(rb.orgId || "");
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_ADD);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      const sessions = [];
+      for (const rm of await ORG.listRooms(env, orgId)) {
+        if (!resolveRoomDoctor(rm)) continue;
+        try { const s1 = await Q.getOrCreateRoomSession(env, org, rm, rb.date || ""); if (s1) sessions.push(s1); } catch (e) {}
+      }
+      try { const p1 = await Q.getOrCreatePoolSession(env, org, rb.date || ""); if (p1) sessions.push(p1); } catch (e) {}
+      let retried = 0, landed = 0;
+      for (const s1 of sessions) {
+        for (const t of await Q.listTickets(env, s1.id)) {
+          if (retried >= 50) break;
+          if (!t || t.encounterSync !== "failed") continue;
+          retried++;
+          const r = await syncEncounter(request, env, s1, t);
+          if (r && r.ok !== false) landed++;
+        }
+      }
+      return json({ ok: true, retried, landed, stillFailed: retried - landed }, 200, request);
+    }
     if (method === "GET" && seg === "opd-pulse") {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);

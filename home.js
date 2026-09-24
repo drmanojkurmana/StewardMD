@@ -4204,6 +4204,28 @@
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
   var _maikSkipCalc = false;          // set true for ONE send by "Ask MaiK anyway" on a calculator card → bypass the zero-token calculator route once
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
+  /* CONVERSATION MEMORY (owner, 2026-09-24: "remember the conversation without eating tokens").
+   * Each turn keeps `a` (320 chars, what the follow-up detector reads) and `g`, a GIST of the answer:
+   * its opening line plus the bullet / numbered / number-bearing / short lines (the drug list, the
+   * doses), without citations or footers. The engines get the gist, never the whole answer, so a long
+   * thread costs a few hundred tokens, not thousands. 16 turns kept; older ones travel as a topic list. */
+  function maikGist(text, cap) {
+    var lines = String(text == null ? "" : text).replace(/\s*\[\s*\d+(?:\s*[,;&]\s*\d+)*\s*\]/g, "").split(/\n+/)
+      .map(function (x) { return x.replace(/[#*_`>]/g, "").replace(/\s+/g, " ").trim(); })
+      .filter(function (x) { return x && !/^(source|sources|verify against|left out|not in the stewardmd)/i.test(x); });
+    if (!lines.length) return "";
+    var keep = [lines[0]];
+    for (var i = 1; i < lines.length; i++) if (/^([-•]|\d+[.)])\s/.test(lines[i]) || /\d/.test(lines[i]) || lines[i].length < 60) keep.push(lines[i]);
+    var out = keep.join("\n"); cap = cap || 1200;
+    return out.length > cap ? out.slice(0, cap).replace(/\s+\S*$/, "") + "…" : out;
+  }
+  function maikRememberTurn(q, text) {
+    try {
+      text = String(text == null ? "" : text);
+      _maikTurns.push({ q: String(q || "").slice(0, 300), a: text.replace(/\s+/g, " ").slice(0, 320), g: maikGist(text, 1200) });
+      if (_maikTurns.length > 16) _maikTurns.shift();
+    } catch (e) {}
+  }
   var _maikUserQ = null;          // the text the clinician actually typed for the send in flight (Edit/Regenerate must reuse THIS, never the topic-prefixed rewrite)
   var _maikFollowUp = false;      // true when the send in flight was resolved as a follow-up on _maikTopic; false = a new question (pkg.newTopic tells the server)
   // Factors the clinician has ALREADY answered in this conversation. The model re-emits its
@@ -4810,6 +4832,21 @@
   };
   // §3 sheet shell — markup verbatim from IMPLEMENTATION.md (kept the app's extract label so it
   // stays consistent with the extract handler's own text; #maikClose replaces the old #maikX id).
+  /* ANSWER LENGTH PREFERENCE. "medium" (balanced) is the default: a lead sentence plus the essential
+   * points. "short" answers to the point in a few sentences; "long" covers everything in full sections.
+   * It rides the existing depth channel, so cloud and on-device engines both honour it: long forces
+   * depth "detailed", short maps concise asks to "brief" but leaves an explicit "in detail" alone.
+   * MODULE scope: maikShellHTML() (module level) reads maikLenLabel() to draw the pill. Defined inside
+   * openAskAi it was a ReferenceError that stopped the MaiK sheet opening at all (caught 2026-09-24). */
+  var MAIK_LEN = ["short", "medium", "long"], MAIK_LEN_LABEL = { short: "Short", medium: "Balanced", long: "Detailed" };
+  function maikLenPref() { try { var v = localStorage.getItem("smd_maik_len"); return MAIK_LEN.indexOf(v) >= 0 ? v : "medium"; } catch (e) { return "medium"; } }
+  function maikLenLabel() { return MAIK_LEN_LABEL[maikLenPref()]; }
+  function maikApplyLen(depth) {
+    var p = maikLenPref();
+    if (p === "long") return "detailed";
+    if (p === "short") return depth === "detailed" ? "detailed" : "brief";
+    return depth;
+  }
   function maikShellHTML() {
     return '' +
       '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
@@ -5581,19 +5618,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * RENDER and frees the composer. That is an honest partial: the tokens are already being spent,
      * and pretending otherwise would be worse than saying so.
      */
-    /* ANSWER LENGTH PREFERENCE. "medium" (balanced) is the default: a lead sentence plus the essential
-     * points. "short" answers to the point in a few sentences; "long" covers everything in full sections.
-     * It rides the existing depth channel, so cloud and on-device engines both honour it: long forces
-     * depth "detailed", short maps concise asks to "brief" but leaves an explicit "in detail" alone. */
-    var MAIK_LEN = ["short", "medium", "long"], MAIK_LEN_LABEL = { short: "Short", medium: "Balanced", long: "Detailed" };
-    function maikLenPref() { try { var v = localStorage.getItem("smd_maik_len"); return MAIK_LEN.indexOf(v) >= 0 ? v : "medium"; } catch (e) { return "medium"; } }
-    function maikLenLabel() { return MAIK_LEN_LABEL[maikLenPref()]; }
-    function maikApplyLen(depth) {
-      var p = maikLenPref();
-      if (p === "long") return "detailed";
-      if (p === "short") return depth === "detailed" ? "detailed" : "brief";
-      return depth;
-    }
     function maikCycleLen() {
       var next = MAIK_LEN[(MAIK_LEN.indexOf(maikLenPref()) + 1) % MAIK_LEN.length];
       try { localStorage.setItem("smd_maik_len", next); } catch (e) {}
@@ -6034,7 +6058,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div class="maik-attr" style="display:flex;align-items:center;gap:6px;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK</span><span style="opacity:.7">· web-sourced, verify independently</span></div>' + bd + srcHTML + '</div>');
           // Remember the topic after a web answer too, so a follow-up ("what medicines?", "dose?") stays in
           // context instead of being resolved cold. (KB answers already set _maikTopic via maikRenderAnswer.)
-          try { if (maikV2()) { _maikTopic = { topic: maikCanonTopic(q), question: q, depth: "concise", lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; _maikTurns.push({ q: q, a: String(r.text).replace(/\s+/g, " ").slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift(); } } catch (e) {}
+          try { if (maikV2()) { _maikTopic = { topic: maikCanonTopic(q), question: q, depth: "concise", lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; maikRememberTurn(q, r.text); } } catch (e) {}
           try { scroll(); } catch (e) {} _persistWeb();
         } else if (r && r.reason === "quota") {
           container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now (usage limit reached). Please verify against a reference source.</div>');
@@ -6046,7 +6070,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     }
     function maikWebChipEl(q) {
       var rb = document.createElement("button"); rb.className = "maik-chip maik-webchip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research";
-      rb.addEventListener("click", function () { maikRunWeb(rb.parentNode || body, q, rb); });
+      rb.setAttribute("data-maik-web", q);   // delegated body listener: survives a reopened thread
       return rb;
     }
     // ── Research Mode (Evidence Review) — trusted medical-literature synthesis (PubMed / guidelines).
@@ -6084,7 +6108,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           if (r.usage && r.usage.limit) { meta = ' <span style="opacity:.7">· ' + (r.usage.used || 0) + ' of ' + r.usage.limit + ' today' + (r.cached ? ', cached' : '') + '</span>'; }
           else if (r.cached) { meta = ' <span style="opacity:.7">· cached</span>'; }
           think.innerHTML = '<div class="maik-attr" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK Evidence Review</span><span style="opacity:.7">· trusted literature, verify independently</span>' + meta + '</div>' + bd + srcHTML;
-          try { _maikTurns.push({ q: q, a: String(r.text).replace(/\s+/g, " ").slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift(); } catch (e) {}
+          try { maikRememberTurn(q, r.text); } catch (e) {}
         } else {
           think.innerHTML = '<div class="maik-welcome">' + ((r && r.error === "LOCAL_CAPABILITY_REQUIRED" && r.message) ? maikEscH(r.message) : 'Evidence review is unavailable right now') + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>';
         }
@@ -6304,10 +6328,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (!cards) return;
         var strip = document.createElement("div"); strip.className = "maik-figs" + (figs.length === 1 ? " one" : "");
         strip.innerHTML = '<div class="maik-figs-h">Related figures from trusted sources</div><div class="maik-figs-row">' + cards + '</div>';
-        strip.addEventListener("click", function (e) {
-          var b = e.target && e.target.closest ? e.target.closest(".maik-fig") : null;
-          if (b) maikFigLightbox(b.getAttribute("data-fig-img"), b.getAttribute("data-fig-page"), b.getAttribute("data-fig-site"), b.getAttribute("data-fig-title"));
-        });
+        // Figure taps are handled by the delegated body listener, so they work in a reopened thread.
         // A hotlink the source blocks removes its own card; an empty strip removes itself.
         strip.querySelectorAll("img").forEach(function (im) {
           im.addEventListener("error", function () { var a = im.closest(".maik-fig"); if (a) a.remove(); if (!strip.querySelector(".maik-fig")) strip.remove(); _persist(); });
@@ -6527,7 +6548,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           }).catch(function () {});
         }
       } catch (e) {}
-      _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
+      maikRememberTurn(question, md);
       try { if (window.SMD_KU && question) { var _kh = 0, _ks = String(question); for (var _ki = 0; _ki < _ks.length; _ki++) { _kh = ((_kh << 5) - _kh + _ks.charCodeAt(_ki)) | 0; } SMD_KU.emit("maik", "q" + (_kh >>> 0).toString(36)); } } catch (e) {}   // KU: read a MaiK answer
       if (maikV2()) {
         // Capture MaiK's own closing offer ("Would you like to discuss X?") so a bare "yes"/"sure"
@@ -6649,17 +6670,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           _br.ambiguity.options.slice(0, 5).forEach(function (o) {
             var lbl = (typeof o === "string") ? o : (o.label || o.name || o.value);
             var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl;
-            b.addEventListener("click", function () {
-              // Resubmit the DISAMBIGUATION as an answer, not a new query: fold the chosen option
-              // back into the ORIGINAL question (else "Treatment of Tuberculosis" → tap "Pulmonary"
-              // sent just "Pulmonary" and re-disambiguated into pulmonary-anatomy). Skip the re-ask.
-              try {
-                var q0 = String(question || "").trim();
-                qEl.value = (!q0 || q0.toLowerCase().indexOf(lbl.toLowerCase()) >= 0) ? (q0 || lbl) : (lbl + " " + q0);
-              } catch (e) { try { qEl.value = lbl; } catch (e2) {} }
-              _maikDisambigResolved = true;
-              send();
-            });
+            // Resubmit the DISAMBIGUATION as an answer, not a new query: fold the chosen option
+            // back into the ORIGINAL question (else "Treatment of Tuberculosis" → tap "Pulmonary"
+            // sent just "Pulmonary" and re-disambiguated into pulmonary-anatomy). Skip the re-ask.
+            // Sent by the delegated body listener (data-maik-send), so it works in a reopened thread.
+            var q0 = String(question || "").trim();
+            b.setAttribute("data-maik-send", (!q0 || q0.toLowerCase().indexOf(String(lbl).toLowerCase()) >= 0) ? (q0 || lbl) : (lbl + " " + q0));
+            b.setAttribute("data-maik-disambig", "1");
             _w.appendChild(b);
           });
           think.appendChild(_w); try { scroll(); } catch (e) {}
@@ -6770,7 +6787,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             try { scroll(); } catch (e) {}
             return;
           }
-          if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4);
+          // Memory: the last 6 turns as gists, and every older question as a one-line topic list.
+          // Each engine clips to its own budget (the cloud route and maik-local.js).
+          if (pkg && maikV2() && _maikTurns.length) {
+            pkg.history = _maikTurns.slice(-6).map(function (t) { return { q: t.q, a: t.g || t.a }; });
+            var _older = _maikTurns.slice(0, -6).map(function (t) { return String(t.q || "").slice(0, 100); }).filter(Boolean);
+            if (_older.length) pkg.earlier = _older;
+          }
           // The recent turns still travel (a colleague remembers the conversation), but a NEW question must
           // not be merged with the previous condition. The server prompt reads this flag.
           if (pkg && pkg.history && pkg.history.length && !_maikFollowUp) pkg.newTopic = true;
@@ -6879,7 +6902,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 // the resolved disease, else the conversation topic, else the question itself.
                 var base = (res.primary && res.primary.canonicalName) ? res.primary.canonicalName + " " : (((_maikTopic && _maikTopic.topic) || question || "") + " ");
                 base = base.trim() ? base.trim() + ": " : "";
-                wf.steps.slice(0, 6).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s; b.addEventListener("click", function () { try { qEl.value = base + s; } catch (e) {} send(); }); row.appendChild(b); });
+                wf.steps.slice(0, 6).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s; b.setAttribute("data-maik-send", base + s); row.appendChild(b); });
                 box.appendChild(row); host.appendChild(box);
               }
               // launchable StewardMD tools
@@ -7061,7 +7084,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false);
             think.innerHTML = '<div class="maik-welcome">' + maikEscH(header || "Did you mean:") + '</div>';
             var w = document.createElement("div"); w.className = "maik-fus";
-            (options || []).slice(0, 5).forEach(function (o) { var lbl = (typeof o === "string") ? o : (o.label || o.name); var val = (typeof o === "string") ? o : (o.name || o.value || o.label); var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl; b.addEventListener("click", function () { try { qEl.value = val; } catch (e) {} send(); }); w.appendChild(b); });
+            (options || []).slice(0, 5).forEach(function (o) { var lbl = (typeof o === "string") ? o : (o.label || o.name); var val = (typeof o === "string") ? o : (o.name || o.value || o.label); var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl; b.setAttribute("data-maik-send", val); w.appendChild(b); });
             think.appendChild(w); try { scroll(); } catch (e) {}
           }
           // Subtype drill-down chips appended below a broad-concept OVERVIEW answer (tap → re-run on that type).
@@ -7071,7 +7094,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               var w = document.createElement("div"); w.className = "maik-refine";
               var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Narrow to a type of " + term + ":"; w.appendChild(lbl);
               var row = document.createElement("div"); row.className = "maik-followups";
-              subtypes.slice(0, 6).forEach(function (s) { var lbl = (typeof s === "string") ? s : (s.label || s.name); var val = (typeof s === "string") ? s : (s.name || s.label); var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl; b.addEventListener("click", function () { try { qEl.value = val; } catch (e) {} send(); }); row.appendChild(b); });
+              subtypes.slice(0, 6).forEach(function (s) { var lbl = (typeof s === "string") ? s : (s.label || s.name); var val = (typeof s === "string") ? s : (s.name || s.label); var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl; b.setAttribute("data-maik-send", val); row.appendChild(b); });
               w.appendChild(row); think.appendChild(w); try { scroll(); } catch (e) {}
             } catch (e) {}
           }
@@ -7287,9 +7310,52 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
-    if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
+    if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); } else { emptyState(); }
+    /* A REOPENED CONVERSATION (owner, 2026-09-24): a saved thread comes back as HTML, which carries
+     * no memory and no listeners, so MaiK forgot the conversation and Copy / Regenerate / Edit /
+     * Yes / No / Create prescription did nothing. Rebuild both from what is on screen. Chips that
+     * resend a question and figure cards are delegated (see the body click listener) instead. */
+    function maikAnswerText(host) {
+      try { var cl = host.cloneNode(true); Array.prototype.forEach.call(cl.querySelectorAll(".maik-fb,.maik-followups,.maik-tools,.maik-refine,.maik-chip,.maik-src,.maik-attr,.maik-edu,.maik-know,.maik-perf,.maik-webbusy,.maik-kbmore,.maik-figs,.maik-fus"), function (x) { x.remove(); }); return (cl.innerText || cl.textContent || "").trim(); } catch (e) { return ""; }
+    }
+    function maikRewire(host, q) {
+      var rx = host.querySelector(".maik-rx");
+      if (rx) rx.addEventListener("click", function () { try { SMD_RX.open({ topic: q, answerText: maikAnswerText(host) }); } catch (e) {} });
+      Array.prototype.forEach.call(host.querySelectorAll(".maik-fb-b"), function (b) {
+        var label = b.textContent.trim();
+        b.addEventListener("click", function () {
+          if (label === "Copy") {
+            var txt = maikAnswerText(host), ok = function () { try { toast("Copied"); } catch (e) {} };
+            try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, ok); else ok(); } catch (e) { ok(); }
+          } else if (label === "Regenerate") {
+            if (_maikBusy || !q) return;
+            try { delete _maikCache[maikNorm(q) + (maikActiveCase() ? "|case" : "")]; } catch (e) {}
+            _maikRegen = true; runClinical(q, q, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(q) : q);
+          } else if (label === "Edit") {
+            try { qEl.value = q; qEl.focus(); qEl.setSelectionRange(q.length, q.length); } catch (e) {}
+          } else if (label === "Yes" || label === "No") {
+            try { if (window.SMD_track) SMD_track(label === "Yes" ? "maik_feedback_up" : "maik_feedback_down"); } catch (e) {}
+            try { fetch("/api/maik-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true, body: JSON.stringify({ helpful: label === "Yes" ? "up" : "down", question: q, engine: "", pack: "" }) }).catch(function () {}); } catch (e) {}
+            var fb = b.closest(".maik-fb");
+            if (fb) { Array.prototype.forEach.call(fb.querySelectorAll(".maik-fb-b:not(.maik-act)"), function (x) { x.remove(); }); var fq = fb.querySelector(".maik-fb-q"); if (fq) fq.textContent = "Thanks, noted."; }
+            return;
+          } else return;
+          try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
+        });
+      });
+    }
+    function maikRestoreThread() {
+      _maikTurns = [];
+      var q = "";
+      Array.prototype.forEach.call(body.children, function (n) {
+        if (!n.classList || !n.classList.contains("maik-b")) return;
+        if (n.classList.contains("you")) { q = (n.textContent || "").replace(/\s+/g, " ").trim(); return; }
+        maikRewire(n, q);
+        if (q) { maikRememberTurn(q, maikAnswerText(n)); q = ""; }
+      });
+    }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask MaiK…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
@@ -7395,7 +7461,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikOpenConv(id) {
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
       maikSetActive(id); _maikBodyHTML = rec.html || ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {};
-      if (body) { body.innerHTML = _maikBodyHTML; scroll(); }
+      if (body) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); }
       try { localStorage.setItem(maikThreadKey(), _maikBodyHTML); } catch (e) {}
       maikCloseSide();
     }
@@ -7627,6 +7693,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
     // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
     body.addEventListener("click", function (ev) {
+      // Chips that resend a question (did-you-mean, workflow steps, subtypes) and figure cards.
+      var sendChip = ev.target && ev.target.closest ? ev.target.closest("[data-maik-send]") : null;
+      if (sendChip) {
+        ev.preventDefault(); if (_maikBusy) return;
+        if (sendChip.hasAttribute("data-maik-disambig")) _maikDisambigResolved = true;
+        try { qEl.value = sendChip.getAttribute("data-maik-send"); } catch (e) {}
+        send(); return;
+      }
+      var figEl = ev.target && ev.target.closest ? ev.target.closest(".maik-fig") : null;
+      if (figEl) { maikFigLightbox(figEl.getAttribute("data-fig-img"), figEl.getAttribute("data-fig-page"), figEl.getAttribute("data-fig-site"), figEl.getAttribute("data-fig-title")); return; }
       // data-maik-calc / data-maik-calcask chips (calculator cards, 2026-09-02) are routed by the shared
       // delegated handler below, not by the copilot launch path: exclude them here or they are swallowed.
       var launch = ev.target && ev.target.closest ? ev.target.closest(".maik-tool:not([data-maik-tool]):not([data-maik-calc]):not([data-maik-calcask])") : null;
@@ -7795,7 +7871,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         runClinical(fq, fq, dp, maikActiveCase(), tpc); return;
       }
       var wq = el.getAttribute("data-maik-web");
-      if (wq) { el.disabled = true; maikRunWeb(el.closest(".maik-b.ai") || body, wq, el); }
+      if (wq) { el.disabled = true; maikRunWeb(el.closest(".maik-b.ai") || el.parentNode || body, wq, el); }
     });
     // ---- MaiK Research Mode toggle (flag smd_maik_research; button only present when enabled) ----
     var researchBtn = sheet.querySelector("#maikResearch");

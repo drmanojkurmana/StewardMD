@@ -324,11 +324,12 @@
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
+<script src="/opd-pulse-model.js?v=1" defer></script>
 <script src="/patient-register.js?v=preg7-sid1-sid1" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
-<script src="/steward-identity-resolver.js?v=sir-1-sid1"></script>
+<script src="/steward-identity-resolver.js?v=sir-1-sid1-phi1"></script>
 <script src="/smd-identity-scanner.js?v=sis-1"></script>
 </head>
 <body>
@@ -447,6 +448,8 @@
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
   function logout(msg){
+    // The next person at this desk must not inherit the last one's patient lookups (steward-identity-resolver.js).
+    try{ if(window.StewardIdentityResolver&&window.StewardIdentityResolver.clearCache) window.StewardIdentityResolver.clearCache(); }catch(e){}
     if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} }
     st.tok=""; st.tokType=""; st.who=null;
     try{
@@ -733,31 +736,22 @@
   }
   function paintPulse(){
     var host=document.getElementById("opdPulse"); if(host) host.innerHTML=pulseInner();
+    var rb=document.getElementById("opdRecon");
+    if(rb) rb.onclick=function(){ api("opd-reconcile",{method:"POST",body:{orgId:st.orgId}}).then(function(r){ toast(r&&r.ok?(r.landed+" of "+r.retried+" visits now in the record"+(r.stillFailed?"; "+r.stillFailed+" still failing":"")):"Could not retry now"); loadPulse(); }); };
   }
   function pnum(v,unit){ return v==null?'<i class="p-none">not yet</i>':esc(v)+(unit?'<u>'+unit+'</u>':''); }
   function pulseInner(){
-    var r=st.pulse; if(!r) return '';
-    if(r.failed) return '<div class="p-warn">Could not read the OPD figures. Do not read this as a quiet clinic.</div>';
-    var p=r.pulse||{},hall=p.waitingNow||{},d2d=p.doorToDoctor||{},desk=p.deskWait||{},doc=p.doctorWait||{};
-    var blame=desk.medianMin==null||doc.medianMin==null?''
-      :desk.medianMin>doc.medianMin*2?'the wait is at the desk'
-      :doc.medianMin>desk.medianMin*2?'the wait is for the doctor':'desk and doctor are even';
-    var tile=function(label,value,sub,warn){
-      return '<div class="p-t'+(warn?' warn':'')+'"><div class="p-l">'+esc(label)+'</div><div class="p-v">'+value+'</div><div class="p-s">'+(sub||'')+'</div></div>';
-    };
-    return '<div class="p-row">'+
-      tile('In the hall',esc(p.waiting||0),hall.longestMin?'longest '+esc(hall.longestMin)+'m':'nobody waiting',hall.over60>0)+
-      tile('Waiting over 1h',esc(hall.over60||0),(hall.over30||0)+' over 30m',(hall.over60||0)>0)+
-      tile('Door to doctor',pnum(d2d.medianMin,'m'),d2d.p90Min==null?'median':'9 in 10 within '+esc(d2d.p90Min)+'m')+
-      tile('Seen',esc(p.completed||0),(p.inConsultation||0)+' in the room')+
-      tile('Did not wait',p.abandonedPct==null?'<i class="p-none">not yet</i>':esc(p.abandonedPct)+'<u>%</u>',esc(p.noShow||0)+' no-show'+((p.noShow||0)===1?'':'s'),(p.abandonedPct||0)>=10)+
-      (p.held?tile('Awaiting result',esc(p.held),'sent for a test or booked back'):'')+
-      '</div>'+(blame?'<div class="p-note">Desk '+pnum(desk.medianMin,'m')+', doctor '+pnum(doc.medianMin,'m')+' · '+esc(blame)+'</div>':'')+
-      (r.unread&&r.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>':'');
+    var M=window.SMD_OPD_PULSE, m=st.pulse&&M?M.model(st.pulse):null; if(!m) return '';
+    if(m.failed) return '<div class="p-warn">'+esc(m.message)+'</div>';
+    var tiles=m.tiles.map(function(t){
+      var v=t.value==null?'<i class="p-none">not yet</i>':esc(t.value)+(t.unit?'<u>'+esc(t.unit)+'</u>':'');
+      var sub=t.action==="reconcile"?'<button class="ghost" id="opdRecon" style="padding:2px 8px">Send again</button>':esc(t.sub||'');
+      return '<div class="p-t'+(t.warn?' warn':'')+'"><div class="p-l">'+esc(t.label)+'</div><div class="p-v">'+v+'</div><div class="p-s">'+sub+'</div></div>';
+    }).join('');
+    return '<div class="p-row">'+tiles+'</div>'+
+      (m.note?'<div class="p-note">Desk '+pnum(m.note.deskMin,'m')+', doctor '+pnum(m.note.doctorMin,'m')+' · '+esc(m.note.text)+'</div>':'')+
+      (m.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(m.unread.join(", "))+'), so these figures are short.</div>':'');
   }
-  /* D13: RECALL NO-SHOWS. Every queue in this hospital today; a patient marked no-show in the last 4 hours
-   * (and before the session ended) goes back to waiting with the SAME token, at the head of their priority
-   * band. A reason is required and recorded with who and when. A failed load is said, never "nobody". */
   function openNoShows(){
     open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
     sheet.querySelector("#cx").onclick=close;
@@ -1759,6 +1753,8 @@
             '<div style="display:flex;align-items:center;gap:6px">' +
               '<span style="font-weight:700">₹</span>' +
               '<input type="number" min="0" step="50" style="width:90px;padding:6px 8px;margin:0" value="' + fee + '" data-docfee-id="' + esc(doc.id) + '" data-docfee-name="' + esc(doc.name) + '" data-docfee-tid="' + esc(curItem ? curItem.id : "") + '">' +
+              // OPD plan item 9: the follow-up fee (blank = same as a new visit). The free-review window is the hospital setting.
+              '<input type="number" min="0" step="50" placeholder="Follow-up" title="Follow-up fee (blank = same as new)" style="width:90px;padding:6px 8px;margin:0 0 0 6px" value="' + (curItem && curItem.followupPrice != null ? Math.round(curItem.followupPrice / 100) : "") + '" data-docfee-fu="' + esc(doc.id) + '">' +
               '<button class="btn" style="margin:0;width:auto;padding:6px 12px;font-size:12px" data-save-docfee="' + esc(doc.id) + '">Save</button>' +
             '</div>' +
           '</div>';
@@ -1806,6 +1802,7 @@
               kind: "consultation",
               code: "CONS-" + docId.replace(/[^a-zA-Z0-9]/g, "").slice(0, 10),
               price: amt,
+              followupPrice: (function(){ var fu = host.querySelector('[data-docfee-fu="' + docId + '"]'); return fu && fu.value !== "" ? Math.round(Number(fu.value) * 100) : ""; })(),
               doctorId: docId,
               doctorName: docName
             };
