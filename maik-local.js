@@ -1076,6 +1076,15 @@
         // they are designed to". No per-pack cap: the answer may use every token the prompt leaves
         // free in the context window. (A 512 cap cut "tell me in detail" mid-sentence.)
         common.nPredict = openBudget(pk, common.system, common.prompt);
+        // Answer length (owner, 2026-09-24): Balanced by default, Short or Detailed on request. The
+        // token budget follows the words so a short answer cannot ramble and a detailed one is never
+        // cut; images keep their own prompts untouched.
+        if (!images.length) {
+          var depth = opts && opts.depth;
+          if (depth === "brief") { common.nPredict = Math.min(common.nPredict, 400); common.system += "\nLENGTH: SHORT. Answer directly in 3 to 6 sentences or a few bullets; no sections or background; keep safety-critical caveats."; }
+          else if (depth === "detailed") { common.system += "\nLENGTH: DETAILED. Cover every relevant aspect in full sections; do not stop early."; }
+          else { common.nPredict = Math.min(common.nPredict, 1100); common.system += "\nLENGTH: BALANCED. A lead sentence, then the essential points only; sections only when the question needs them."; }
+        }
         if (!images.length) return L.generate(common);
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone
         // photo is several MB and marshalling that as a string is what made the old downloader

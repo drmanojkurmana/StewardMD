@@ -4851,6 +4851,9 @@
           // composer's bottom row has a flexible cell between the tool buttons and Send; that is
           // where a chat app keeps its model picker, and it is next to the thumb that sends.
           ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.chipHTML) ? SMD_MAIK_ENGINE.chipHTML() : "") +
+          // Answer length (owner, 2026-09-24): balanced by default; one tap cycles Short, Balanced,
+          // Detailed. Applies to every engine, cloud and on-device alike (see maikApplyLen).
+          '<button class="maik-chip maik-len" id="maikLen" type="button" title="Answer length" aria-label="Answer length">' + maikLenLabel() + '</button>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask MaiK…"></textarea>' +
           '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
@@ -5482,6 +5485,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
+    try { var _lenBtn = sheet.querySelector("#maikLen"); if (_lenBtn) _lenBtn.addEventListener("click", function (ev) { ev.preventDefault(); maikCycleLen(); }); } catch (e) {}
     // Drug names in questions and answers: bold yellow, tap opens the monograph (drug-link.js).
     try { if (window.SMD_DRUGLINK && body) SMD_DRUGLINK.watch(body); } catch (e) {}
 
@@ -5577,6 +5581,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * RENDER and frees the composer. That is an honest partial: the tokens are already being spent,
      * and pretending otherwise would be worse than saying so.
      */
+    /* ANSWER LENGTH PREFERENCE. "medium" (balanced) is the default: a lead sentence plus the essential
+     * points. "short" answers to the point in a few sentences; "long" covers everything in full sections.
+     * It rides the existing depth channel, so cloud and on-device engines both honour it: long forces
+     * depth "detailed", short maps concise asks to "brief" but leaves an explicit "in detail" alone. */
+    var MAIK_LEN = ["short", "medium", "long"], MAIK_LEN_LABEL = { short: "Short", medium: "Balanced", long: "Detailed" };
+    function maikLenPref() { try { var v = localStorage.getItem("smd_maik_len"); return MAIK_LEN.indexOf(v) >= 0 ? v : "medium"; } catch (e) { return "medium"; } }
+    function maikLenLabel() { return MAIK_LEN_LABEL[maikLenPref()]; }
+    function maikApplyLen(depth) {
+      var p = maikLenPref();
+      if (p === "long") return "detailed";
+      if (p === "short") return depth === "detailed" ? "detailed" : "brief";
+      return depth;
+    }
+    function maikCycleLen() {
+      var next = MAIK_LEN[(MAIK_LEN.indexOf(maikLenPref()) + 1) % MAIK_LEN.length];
+      try { localStorage.setItem("smd_maik_len", next); } catch (e) {}
+      try { var b = document.getElementById("maikLen"); if (b) b.textContent = MAIK_LEN_LABEL[next]; } catch (e) {}
+      try { maikHaptic("pick"); } catch (e) {}
+      try { toast(next === "short" ? "Short answers: to the point." : next === "long" ? "Detailed answers: everything, in full." : "Balanced answers."); } catch (e) {}
+    }
     function maikStopNow() {
       var stopped = false;
       try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.cancel) { SMD_MAIK_LOCAL.cancel(); stopped = true; } } catch (e) {}
@@ -6538,6 +6562,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { scroll(); } catch (e) {}
     }
     function runClinical(question, retrieval, depth, active, topicLabel) {
+      depth = maikApplyLen(depth);   // the length preference rides the depth channel (Short / Balanced / Detailed)
       var userQ = _maikUserQ || question; _maikUserQ = null;   // what the clinician typed, before any topic prefix
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }

@@ -1432,7 +1432,9 @@ export async function onRequest(context) {
   // bedside answer); streaming keeps perceived speed fine, and the model still adapts short answers
   // short. "detailed" depth doubles it. Override with MAIK_MAX_OUTPUT_TOKENS. Was 768/1400.
   const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1100));
-  const MAX_OUT = (body && body.depth === "detailed") ? Math.max(OUT_BASE, Math.min(8192, Number(env.MAIK_MAX_OUTPUT_TOKENS_DETAILED) || 6000)) : OUT_BASE;
+  const MAX_OUT = (body && body.depth === "detailed") ? Math.max(OUT_BASE, Math.min(8192, Number(env.MAIK_MAX_OUTPUT_TOKENS_DETAILED) || 6000))
+    : (body && body.depth === "brief") ? Math.min(OUT_BASE, 480)   // owner 2026-09-24: "Short" = to the point
+    : OUT_BASE;
   // Non-stream output cap. Native (capacitor://) CANNOT stream (CapacitorHttp buffers SSE) so it waits
   // for the ENTIRE answer before rendering; a bigger cap = a longer blank wait, so we keep it as tight
   // as SAFELY possible. BUT: gemini-2.5-flash on Vertex currently spends output tokens on internal
@@ -1543,6 +1545,9 @@ export async function onRequest(context) {
         let sysA = sys;
         try {
           if (pkg.audience) sysA = sys + "\n\nAUDIENCE: write for a " + String(pkg.audience).slice(0, 20) + " — adapt depth and tone accordingly; never ask which.";
+          // Answer length (owner, 2026-09-24): Short / Balanced (default, the prompt's own two-tier shape) / Detailed.
+          if (body && body.depth === "brief") sysA = sysA + "\n\nLENGTH: SHORT. Answer the question directly in 3 to 6 sentences or a handful of bullets. No sections, no background, no restating the question; keep only safety-critical caveats.";
+          else if (body && body.depth === "detailed") sysA = sysA + "\n\nLENGTH: DETAILED. Cover the topic fully in clear sections (pathophysiology, presentation, diagnosis, management, pitfalls, as relevant); do not stop until every relevant aspect is covered.";
           if (pkg.evidenceBundle && Array.isArray(pkg.evidenceBundle.claims) && pkg.evidenceBundle.claims.length) {
             const ebLines = pkg.evidenceBundle.claims.slice(0, 20).map((c, i) => (i + 1) + ". [" + (c.tier ? "tier " + c.tier : "kb") + "] " + String(c.text || "").slice(0, 320)).join("\n");
             grounded = ("RANKED EVIDENCE (StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from this ranked evidence — do not copy any single item verbatim; merge overlapping points; cite sources; if items conflict, state the disagreement and the higher-authority position:\n" + ebLines + "\n\n" + grounded).slice(0, MAX_IN_CHARS);
@@ -1643,7 +1648,7 @@ export async function onRequest(context) {
         // Non-stream is now the default delivery (native, and stream requests routed here), so a
         // concise answer uses the TIGHTER cap → generation finishes ~2x faster (the ~10-15s native
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
-        const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
+        const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : (body && body.depth === "brief") ? Math.min(NONSTREAM_BASE, 480) : NONSTREAM_BASE;
         const nsSys = sysA;
         _at("preGen");
         const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)
