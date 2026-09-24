@@ -318,7 +318,9 @@ def build(src, write=False):
                 blob.extend(data)
             raw = bytes(blob)
             gz = gzip.compress(raw, compresslevel=9, mtime=0)
-            name = f"{cur['name']}.bin.gz"
+            # Content-hashed filename: an R2 object is never overwritten in place, so an app still
+            # holding the previous manifest keeps loading the bytes it expects (2026-09-25 outage).
+            name = f"{cur['name']}.{hashlib.sha256(gz).hexdigest()[:8]}.bin.gz"
             files[name] = gz
             chunks.append({"id": cur["name"], "url": f"/atlas/3d/{name}", "system": sys_id,
                            "bytes": len(raw), "gz": len(gz), "sha256": hashlib.sha256(gz).hexdigest(),

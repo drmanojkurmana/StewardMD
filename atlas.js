@@ -509,7 +509,7 @@
     st.sel = null;                      // selection is per-slice; Lock survives instead
     var s = curSlice();
     var img = G.document.getElementById("atlasImg");
-    if (img && s) img.src = imgUrl(s.img);
+    if (img && s) gateImg(img, imgUrl(s.img));
     var c = G.document.getElementById("atlasCount");
     if (c) c.textContent = i + "/" + n;
     var r = G.document.getElementById("atlasRange");
@@ -519,6 +519,23 @@
     drawOverlay();
     closeSheet();
     preloadAround(i);
+  }
+
+  // After the visible slice is up, warm the rest of the module in the background (once), one
+  // every 120 ms so the frame the user is looking at always wins the connection. Scrubbing
+  // through a warmed module is then instant regardless of the origin's cold latency.
+  var _warmed = {};
+  function warmModule() {
+    var a = st.atlas, id = st.moduleId;
+    if (!a || !id || _warmed[id]) return;
+    _warmed[id] = 1;
+    var sl = a.slices || [], k = 0;
+    (function next() {
+      if (k >= sl.length) return;
+      var s = sl[k++];
+      if (s && !_pre[s.img]) { _pre[s.img] = 1; try { var im = new G.Image(); im.src = imgUrl(s.img); } catch (e) {} }
+      G.setTimeout(next, 120);
+    })();
   }
 
   // Keep i±1 and i±2 warm so dragging never shows a white frame.
@@ -721,6 +738,7 @@
   function afterViewerPaint() {
     var stage = G.document.getElementById("atlasStage");
     if (!stage) return;
+    gateImg(G.document.getElementById("atlasImg"));
     drawOverlay();
 
     var r = G.document.getElementById("atlasRange");
@@ -751,6 +769,23 @@
       _ro = new G.ResizeObserver(function () { drawOverlay(); });
       _ro.observe(stage);
     }
+  }
+
+  // The pin overlay is built from local slice metadata, so it paints instantly; the slice
+  // image is a network load from the live origin. Without gating, the pins render "ahead"
+  // of the image and point at black until it arrives (or forever, if it 404s). Tie the pins
+  // to the image: hide them (is-loading) until the image's load event, reveal on load, and
+  // show an error state on failure. Cached/preloaded frames (img.complete) reveal at once.
+  function gateImg(img, url) {
+    if (!img) return;
+    var stage = G.document.getElementById("atlasStage");
+    function cls(add, name) { if (stage) stage.classList[add ? "add" : "remove"](name); }
+    function show() { cls(false, "is-loading"); cls(false, "is-error"); drawOverlay(); warmModule(); }
+    function fail() { cls(false, "is-loading"); cls(true, "is-error"); }
+    img.onload = show; img.onerror = fail;
+    if (url != null) { cls(false, "is-error"); cls(true, "is-loading"); img.src = url; }
+    if (img.complete && img.naturalWidth > 0) show();
+    else cls(true, "is-loading");
   }
 
   function drawOverlay() {

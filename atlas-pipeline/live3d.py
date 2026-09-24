@@ -95,11 +95,33 @@ def mesh_label(seg, value):
     return mesh_mask(seg == value)
 
 
-def mesh_mask(mask, sigma=SMOOTH_SIGMA, step=1):
+def taubin_smooth(v, f, iters=12, lamb=0.5, mu=-0.53):
+    """Taubin lambda/mu smoothing: alternating Laplacian passes whose signs cancel the
+    shrinkage a plain Laplacian causes, so the mesh keeps its volume while the marching-cubes
+    voxel staircase melts away. Uniform (umbrella) weights, built once as a sparse operator."""
+    from scipy import sparse
+    n = len(v)
+    i = np.concatenate([f[:, 0], f[:, 1], f[:, 2], f[:, 1], f[:, 2], f[:, 0]])
+    j = np.concatenate([f[:, 1], f[:, 2], f[:, 0], f[:, 0], f[:, 1], f[:, 2]])
+    A = sparse.coo_matrix((np.ones(len(i), np.float32), (i, j)), shape=(n, n)).tocsr()
+    A.data[:] = 1.0                                   # collapse duplicate edges to 1
+    deg = np.asarray(A.sum(1)).ravel()
+    deg[deg == 0] = 1.0
+    W = sparse.diags(1.0 / deg) @ A                   # row-normalised neighbour average
+    v = v.astype(np.float32)
+    for _ in range(iters):
+        v = v + lamb * (W @ v - v)
+        v = v + mu * (W @ v - v)
+    return v
+
+
+def mesh_mask(mask, sigma=SMOOTH_SIGMA, step=1, smooth=12):
     m = mask.astype(np.float32)
     if sigma:
         m = ndimage.gaussian_filter(m, sigma)
     v, f, _, _ = measure.marching_cubes(m, level=0.5, spacing=(1.0, 1.0, 1.0), step_size=step)
+    if smooth and len(v) > 8:
+        v = taubin_smooth(v, f, iters=smooth)
     w = world_from_voxel(v[:, 0], v[:, 1], v[:, 2]).astype(np.float32)
     # (x, y, z) -> (-x, -z, y): a swap plus two sign flips = three reflections = a reflection,
     # so marching_cubes' outward winding must be flipped to keep faces outward.

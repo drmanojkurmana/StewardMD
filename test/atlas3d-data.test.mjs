@@ -63,6 +63,10 @@ const allChunks = manifest.chunks.concat(manifest.lod ? manifest.lod.chunks : []
 ok("every chunk file (full + LOD) is referenced and vice versa", files.length === allChunks.length && allChunks.every((c) => files.includes(c.url.split("/").pop())));
 ok("LOD set: 20 reference-body chunks at ~60% of the triangles", manifest.lod && manifest.lod.chunks.length === 20 && manifest.lod.stats.triangles < manifest.stats.triangles * 0.7);
 ok("living-CT chunks carry the source flag and never mix systems", manifest.chunks.filter((c) => c.src === 1).length === 13 && manifest.chunks.every((c) => c.system));
+// Re-uploading re-meshed bytes under an old filename broke every installed app on 2026-09-06
+// (its bundled manifest rejected the new sizes). Hashed names make that impossible.
+ok("living-CT chunk filenames carry their own content hash, so R2 objects are never overwritten",
+  manifest.chunks.filter((c) => c.src === 1).every((c) => c.url.endsWith(`.${c.sha256.slice(0, 8)}.bin.gz`)));
 let maxIdxOk = true, sizeOk = true, shaOk = true, triangles = 0;
 const partsByChunk = new Map();
 parts.forEach((p, i) => { (partsByChunk.get(p[5]) ?? partsByChunk.set(p[5], []).get(p[5])).push(i); });

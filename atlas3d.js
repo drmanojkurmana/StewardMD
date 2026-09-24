@@ -218,6 +218,8 @@
   }
   // Chunk URLs are "/atlas/3d/<file>"; R2 keys are "atlas3d/<file>", so a non-empty base
   // replaces the path prefix rather than prepending to it.
+  // Chunk filenames carry their content hash (pack3d.mjs / bp3d_import.py), so a re-mesh lands
+  // under a new URL and never overwrites the R2 object an installed app's manifest points at.
   function dataUrl(u, base) { return base ? base + u.replace(/^\/atlas\/3d/, "") : u; }
   function imgUrl(u) {
     try { if (G.SMD_IS_NATIVE && u.indexOf("/atlas/") === 0) return "https://stewardmd.in" + u; } catch (e) {}
@@ -404,11 +406,20 @@
     " vec3 H = normalize(L + V); float spec = pow(max(dot(n, H), 0.0), 40.0) * 0.22;",
     " vec3 c = uColor * (0.32 + 0.22 * hemi + 0.58 * diff) + spec;",
     " c = mix(c, uSel * (0.55 + 0.6 * diff) + spec, vState.g * 0.72);",
-    " c = mix(c, uBg, vState.b * 0.35);",
-    // The living body's outline fades out over the last ~4 cm at the scan's top and bottom
-    // (y 0.62 .. 1.058 m in live.json's frame), so the shell reads as a body, not a cut tube.
+    " float dim = shell > 0.5 ? 0.0 : vState.b;",                   // the membrane is never the dim-unselected grey
+    " c = mix(c, uBg, dim * 0.35);",
     " float a = uPass > 1.5 ? uGhost : 1.0;",
-    " if (shell > 0.5) a *= smoothstep(0.62, 0.665, vP.y) * (1.0 - smoothstep(1.01, 1.058, vP.y));",
+    // The skin is a translucent envelope, not a solid coat: a fresnel term makes it clear where
+    // you look straight through (so the organs read) and bright at the silhouette (so the body
+    // reads). Warm skin tone, independent of the dim logic.
+    " if (shell > 0.5) {",
+    "   float fres = pow(1.0 - max(dot(n, V), 0.0), 1.8);",
+    "   c = mix(vec3(0.93, 0.76, 0.66), vec3(1.0, 0.95, 0.90), fres) * (0.72 + 0.5 * hemi);",
+    "   a = uGhost * (0.42 + 1.7 * fres);",
+    // the outline fades out over the last ~4 cm at the scan's cut top/bottom (y 0.62 .. 1.058 m
+    // in live.json's frame), so the shell reads as a body and not a sawn-off tube.
+    "   a *= smoothstep(0.62, 0.665, vP.y) * (1.0 - smoothstep(1.01, 1.058, vP.y));",
+    " }",
     " gl_FragColor = vec4(c, a);",
     "}"].join("\n");
   var FS_PICK = [
@@ -544,7 +555,7 @@
       gl.uniform3f(prog.u.uBg, 0.07, 0.08, 0.09);
       gl.uniform3fv(prog.u.uSel, new Float32Array(SEL_TINT));
       gl.uniform1f(prog.u.uPass, pass || 0);
-      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.22 : 0.16);
+      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.26 : 0.16);
     }
     var sysIdx = {}; d.systems.forEach(function (s, i) { sysIdx[s.id] = i; });
     var want = srcIndex();
@@ -772,9 +783,12 @@
     var cw = st.canvas.clientWidth, ch = st.canvas.clientHeight;
     var sx = (x / wv + 1) / 2 * cw, sy = (1 - y / wv) / 2 * ch;
     el.hidden = false;
-    el.textContent = subjectTitle(d, st.subject);
-    el.style.left = Math.max(8, Math.min(cw - 8, sx)) + "px";
-    el.style.top = Math.max(8, Math.min(ch - 8, sy)) + "px";
+    if (el._t !== st.subject) { el.textContent = subjectTitle(d, st.subject); el._t = st.subject; }
+    // Position with a compositor transform, not left/top: the canvas is GPU-composited, so a
+    // main-thread layout property lands a frame behind it under motion and the label visibly
+    // trails the mesh. translate3d promotes the label to its own layer, locked to the canvas.
+    var lx = Math.round(Math.max(8, Math.min(cw - 8, sx))), ly = Math.round(Math.max(8, Math.min(ch - 8, sy)));
+    el.style.transform = "translate3d(" + lx + "px," + ly + "px,0) translate(-50%,-140%)";
   }
 
   function tick() {

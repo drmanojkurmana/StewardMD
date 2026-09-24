@@ -82,7 +82,8 @@ class Packer {
     const bufs = [], offs = {}; let len = 0;
     for (const [k, a] of parts) { const pad = (4 - len % 4) % 4; if (pad) { bufs.push(Buffer.alloc(pad)); len += pad; } offs[k] = len; const b = Buffer.from(a.buffer, a.byteOffset, a.byteLength); bufs.push(b); len += b.length; }
     const raw = Buffer.concat(bufs), gz = gzipSync(raw, { level: 9 });
-    const name = c.name + this.suffix;
+    // Content-hashed filename (see bp3d_import.py): a re-mesh never overwrites an R2 object in place.
+    const name = `${c.name}.${createHash("sha256").update(gz).digest("hex").slice(0, 8)}${this.suffix}`;
     this.files[name] = gz;
     this.chunks.push({ id: c.name, url: `/atlas/3d/${name}`, system: c.system, bytes: raw.length, gz: gz.length, sha256: createHash("sha256").update(gz).digest("hex"), v: c.v, i: parts[3][1].length, ...offs });
     this.cur = null;
@@ -104,7 +105,7 @@ if (mode === "live") {
     const pos0 = new Float32Array(bin.buffer.slice(bin.byteOffset + p.pos, bin.byteOffset + p.pos + p.nv * 12));
     const idx0 = new Uint32Array(bin.buffer.slice(bin.byteOffset + p.idx, bin.byteOffset + p.idx + p.ni * 4));
     srcTris += idx0.length / 3;
-    const s = simplify(pos0, idx0, 0.3, 0.005);
+    const s = simplify(pos0, idx0, +opt("ratio", 0.28), +opt("error", 0.008));
     maxErr = Math.max(maxErr, s.err); tris += s.idx.length / 3;
     const nrm = smoothNormals(s.pos, s.idx);
     const gi = base + parts.length;
