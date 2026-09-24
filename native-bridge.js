@@ -1005,8 +1005,25 @@
         if (tries++ < 40) setTimeout(go, 250);
       })();
     }
-    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) { feed(r.url); routeDeepLink(r.url); } }).catch(function () {}); } catch (e) {}
-    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) { feed(d.url); routeDeepLink(d.url); } }); } catch (e) {}
+    // Patient scan deep links: https://stewardmd.in/opd?uid=... or ?scan=... or ?stewardid=...
+    function routePatientScan(u) {
+      if (!u) return;
+      var str = String(u);
+      var m = /[?&](uid|scan|stewardid|mrn|patientid)=([^&#]*)/i.exec(str);
+      if (!m) return;
+      var id = "";
+      try { id = decodeURIComponent(m[2]).trim(); } catch (e) { id = String(m[2] || "").trim(); }
+      if (!id) return;
+      var tries = 0;
+      (function go() {
+        if (window.SMD_handleScanUid) { try { window.SMD_handleScanUid(id); } catch (e) {} return; }
+        if (window.onNfcUhid) { try { window.onNfcUhid(id); } catch (e) {} return; }
+        if (window.handleScannedUid) { try { window.handleScannedUid(id); } catch (e) {} return; }
+        if (tries++ < 40) setTimeout(go, 250);
+      })();
+    }
+    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) { feed(r.url); routeDeepLink(r.url); routePatientScan(r.url); } }).catch(function () {}); } catch (e) {}
+    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) { feed(d.url); routeDeepLink(d.url); routePatientScan(d.url); } }); } catch (e) {}
     /* RE-WARM THE NATIVE RESOLVER ON RESUME.
      *
      * The sleep/wake DNS failure above is recoverable, but only after something has already failed -

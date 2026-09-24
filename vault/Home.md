@@ -12,6 +12,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[MaiK Intent Firewall]] — clinician-only scope gate (allow-list)
 - [[AI Control Center]] — usage engine: per-module caps, model switch, admin console
 - [[Medical Knowledge Base]] — the KB / RAG brain + clinical content
+- [[OpenMed-Evaluation]] - which OpenMed PII/NER models fit StewardMD, and the India-ID redaction shipped from it
 
 ### Clinical modules
 - [[Scan-Meds and Drug Index]] — prescription/med scan, drug DB, interactions

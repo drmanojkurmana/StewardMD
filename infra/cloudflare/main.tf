@@ -20,7 +20,7 @@ locals {
     "accelerometer=()", "ambient-light-sensor=()", "autoplay=()", "battery=()",
     "camera=()", "display-capture=()", "document-domain=()", "encrypted-media=()",
     "fullscreen=(self)", "geolocation=()", "gyroscope=()", "magnetometer=()",
-    "microphone=()", "midi=()", "payment=()", "picture-in-picture=()", "usb=()",
+    "microphone=()", "midi=()", "nfc=(self)", "payment=()", "picture-in-picture=()", "usb=()",
     "xr-spatial-tracking=()", "interest-cohort=()",
   ])
 

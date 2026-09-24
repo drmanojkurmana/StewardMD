@@ -14,9 +14,10 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   DECORATES `window.SMD_AI` rather than branching in home.js. Pref `stewardmd.maikEngine`, default `cloud`
 - `maik-models.js` / `maik-local.js` — on-device model packs (resumable Range download) + llama.cpp
   inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
-  `docs/MAIK_OFFLINE_RUNBOOK.md`. Nine packs (2026-09-18): `maik-lite` (our fine-tune, default),
-  `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers, `medmo-4b`
-  (**MAiK Cortex**, text-only), `maik-apex`, `bonsai-27b`. EVERY text pack reads the on-device book
+  `docs/MAIK_OFFLINE_RUNBOOK.md`. Nine packs (2026-09-23): `maik-lite` (our fine-tune, default),
+  `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers,
+  `maik-apex`, `bonsai-27b`, `bonsai2-27b`
+  (`medmo-4b` / MAiK Cortex removed 2026-09-23). EVERY text pack reads the on-device book
   (`kb/ai/maik-lite-rag.js` BM25 retrieval, `kb/ai/maik-lite-kb-store.js` 38 MB asset): `ragEligible`
   in `maik-local.js` is capability-based and reads `CAPS[pack].kb` (changed 2026-09-18 from
   Lite-only). The whole-answer wording gate was replaced for these packs by claim-level grounding

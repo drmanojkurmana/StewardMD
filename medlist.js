@@ -864,7 +864,7 @@
   }
 
   function buildIndexSheet() {
-    var s = buildSheet({ title: "Search Drug Index", sub: "On-device formulary — instant, works offline" });
+    var s = buildSheet({ title: "Search Drug Index", sub: "Clinical Drug Index — instant, works offline" });
     s.sheet.classList.add("ml-sheet-tall");                 // tall surface: scrollable typeahead
     // Fixed search bar (stays put); the suggestion list below it scrolls.
     var bar = el("div", { cls: "ml-searchbar" });
@@ -878,7 +878,7 @@
     function drawState(node, kind) {
       var box = el("div", { cls: "ml-state" + (kind === "offline" ? " ml-state-offline" : "") });
       if (kind === "loading") { box.innerHTML = '<span class="ml-spin" aria-hidden="true"></span>'; box.appendChild(el("span", { text: " Searching…" })); }
-      else if (kind === "offline") { box.appendChild(el("span", { text: "Search unavailable — showing offline formulary." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Type the medicine name manually if it isn't listed." })); }
+      else if (kind === "offline") { box.appendChild(el("span", { text: "Search unavailable — showing offline clinical index." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Type the medicine name manually if it isn't listed." })); }
       else { box.appendChild(el("span", { text: "No medicines found." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Check spelling, or add it via Type / Paste." })); }
       node.appendChild(box);
     }

@@ -174,14 +174,11 @@ export const ROLE_CAPS = {
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
            C.EMR_VITALS, C.EMR_TREAT, C.EMR_IMMUNISE, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE,
-           C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD, C.DEPT_REQUEST],
+           C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD, C.DEPT_REQUEST, C.BILLING_VIEW, C.BILLING_CHARGE, C.ORDER_DISPENSE],
   // OPD supervisor: full queue control + analytics + READ clinical notes/history. NO EMR treatment.
   supervisor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY,
                C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.REGISTER_NDPS,
-               // A department's in-charge approves its indents; the supervisor role is how a hospital names one,
-               // and the membership's department scope decides WHICH departments (stores.js, route check).
-               C.DEPT_REQUEST, C.INDENT_APPROVE,
-               C.HOUSEKEEPING_INSPECT],
+               C.DEPT_REQUEST, C.INDENT_APPROVE, C.HOUSEKEEPING_INSPECT, C.BILLING_VIEW, C.BILLING_CHARGE, C.ORDER_DISPENSE],
   // Nurse ("sister"): runs the queue at the desk — add/reorder/assign/status/priority — may record
   // vitals/temperature, and may READ a patient's clinical notes/history (view-only, e.g. from the
   // console). Explicitly NO emr.treat (no orders/prescriptions/edits). This is the owner's core ask.

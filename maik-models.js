@@ -127,6 +127,14 @@
   var DEVICE_WARNING = "Built for flagship, AI-enabled phones: " + DEVICE_SUPPORTED +
     " On any other phone this is at your own risk. It may hang or crash the phone.";
 
+  /* SPECULATIVE-DECODING DRAFTS (perf plan #6). A tiny model with the SAME tokeniser proposes a few
+   * tokens; the real model verifies them in one batched pass and keeps only what it would have
+   * produced itself, so under greedy sampling the answer is byte-identical, just faster. The native
+   * engine checks vocabulary compatibility at load and silently runs without the draft otherwise.
+   * Sizes are exact (Hugging Face API, 2026-09-21). MaiK Lite (1.7B) and the 27B Bonsai packs
+   * (different backbone vocabularies) carry none. */
+  var DRAFT_GEMMA3 = { name: "gemma-3-270m-it-Q8_0.gguf", url: HF + "/unsloth/gemma-3-270m-it-GGUF/resolve/main/gemma-3-270m-it-Q8_0.gguf?download=true", bytes: 291546144 };
+  var DRAFT_QWEN3 = { name: "Qwen3-0.6B-Q8_0.gguf", url: HF + "/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf?download=true", bytes: 639446688 };
   var PACKS = {
     /* FLAGSHIP: StewardMD's OWN model (weights replaced 2026-08-31; the pack previously pointed at
      * the upstream MedPsy 1.7B base). This is our LoRA fine-tune of that base, trained on the
@@ -181,6 +189,7 @@
     "maik-mxcore": {
       label: "MAiK MxCore",
       actual: "MedGemma 1.5 4B (Q4_K_M)",
+      draft: DRAFT_GEMMA3,
       tier: 1,
       note: "Lightest of the 4B medical packs. Reads the Knowledge Base and is checked against it claim by claim. Optional photo reading with the vision download.",
       guide: {
@@ -209,6 +218,7 @@
     "maik-neural": {
       label: "MAiK Neural",
       actual: "MedGemma 1.5 4B (Q5_K_M)",
+      draft: DRAFT_GEMMA3,
       tier: 2,
       note: "MxCore at higher precision: fewer numeric slips, a little slower, more RAM and storage. Checked against the Knowledge Base.",
       guide: {
@@ -278,6 +288,7 @@
     "maik-apex": {
       label: "MAiK Apex",
       actual: "MedPsy 4B (Q5_K_M, imatrix)",
+      draft: DRAFT_QWEN3,
       tier: 4,
       noThink: true,
       note: "Strongest of the medical fine-tunes and the slowest of them. Flagship phones only. Checked against the Knowledge Base.",
@@ -294,33 +305,6 @@
         url: HF + "/qvac/MedPsy-4B-GGUF/resolve/main/medpsy-4b-q5_k_m-imat.gguf?download=true",
         bytes: 3156921120,   // exact: HuggingFace paths-info AND a live content-length check agree
         sha256: "68bd5e14cd87ff40bba5d08fbef2da9a6088b11aacab8466ef3f13a602e2d868"   // lfs.oid from the HF API
-      }]
-    },
-    /* MedMO-4B (MBZUAI, 2026): a medical multimodal foundation model on a Qwen3-VL-4B base, added
-     * 2026-09-18 on the owner's decision as a text-only pack. The only published GGUF is a community
-     * Q4_K_M with NO vision projector, so this pack cannot read images (no `vision` key; the
-     * chooser already handles that). Model-card text QA: MedQA 78.5, MMLU-Med 75.7, PubMedQA 78.0,
-     * MedMCQA 58.0. bytes and sha256 are the HF API's exact size and lfs.oid. UNVERIFIED on device:
-     * a qwen3vl-architecture GGUF loading text-only in the plugin's llama.cpp has not been run here. */
-    "medmo-4b": {
-      label: "MAiK Cortex",   // owner, 2026-09-18: shipped under the MAiK name; `actual` keeps the honest provenance
-      actual: "MedMO-4B (MBZUAI, Qwen3-VL-4B base, Q4_K_M)",
-      tier: 2.5,
-      noThink: true,
-      note: "A medical foundation model, strong on medical text questions, with every answer checked claim by claim against the Knowledge Base. Text only: this download carries no vision file.",
-      guide: {
-        speed: 2, medical: 3, general: 2,
-        bestFor: "Clinical questions answered from a medical foundation model, checked against the Knowledge Base.",
-        why: "Trained on 26M medical samples; MedQA 78.5 and MMLU-Med 75.7 on its model card, the strongest text scores of the 4B packs.",
-        pick: "Pick this for medical depth without a 3 GB download, answered from the Knowledge Base. Expect 30 to 50 seconds per answer. It cannot read photos."
-      },
-      nCtx: 4096,
-      nPredict: 768,
-      files: [{
-        name: "medmo-4b-q4_k_m.gguf",
-        url: HF + "/BrazosDeDios/MedMO-4B-Q4_K_M-GGUF/resolve/main/medmo-4b-q4_k_m.gguf?download=true",
-        bytes: 2716064480,   // exact: HF API size
-        sha256: "359d1369a2f2c9f083bb58f1d81b283c28a779a54286834781a23014c075607c"   // lfs.oid from the HF API
       }]
     },
     /* BONSAI (PrismML, Apache-2.0): models TRAINED at 1 bit or ternary, not quantized afterwards.
@@ -343,6 +327,7 @@
     "bonsai-ternary-8b": {
       label: "MAiK Prime",
       actual: "Ternary Bonsai 8B (PrismML, GGUF Q2_0 g64, 1.58-bit)",
+      draft: DRAFT_QWEN3,
       tier: 0.5,
       flagship: true,
       noThink: true,
@@ -365,6 +350,7 @@
     "bonsai-8b": {
       label: "MAiK Swift",
       actual: "Bonsai 8B (PrismML, GGUF Q1_0 g128, 1-bit)",
+      draft: DRAFT_QWEN3,
       tier: 0.7,
       noThink: true,
       note: "Fastest and smallest of the general models, noticeably less accurate than MAiK Prime. Checked against the Knowledge Base.",
@@ -489,7 +475,6 @@
     "maik-lite":         { medical: true,  kb: true,  json: 2, reasoning: 1, ramGB: 6,  kvGBat4k: 0.47, lang: [] },
     "maik-mxcore":       { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
     "maik-neural":       { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [] },
-    "medmo-4b":          { medical: true,  kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.60, lang: [] },
     "maik-horizon":      { medical: false, kb: true,  json: 2, reasoning: 2, ramGB: 8,  kvGBat4k: 0.55, lang: [],
                            warn8: "On an 8 GB phone this pack needs the increased-memory entitlement and is unloaded whenever you switch apps." },
     "maik-apex":         { medical: true,  kb: true,  json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [],
@@ -509,7 +494,7 @@
     var out = {};
     for (var k in c) if (Object.prototype.hasOwnProperty.call(c, k)) out[k] = c[k];
     out.id = base; out.label = p.label; out.vision = !!p.vision; out.nCtx = p.nCtx || 4096;
-    out.bytes = totalBytes(base); out.visionBytes = p.vision ? (p.vision.bytes || 0) : 0;
+    out.bytes = totalBytes(base); out.visionBytes = p.vision ? (p.vision.bytes || 0) : 0; out.draftBytes = p.draft ? (p.draft.bytes || 0) : 0;
     return out;
   }
   /* GRADES (owner, 2026-09-21: "Like MBBS MD DM give some name"). The clinician's own ladder, used
@@ -662,13 +647,22 @@
    * one-at-a-time queue, chunked ranged parts, the .parts sidecar, resume, the progress rows - works
    * on it unchanged, because as far as those are concerned it is just another pack with one file.
    */
-  var VISION_SUFFIX = "#vision";
+  var VISION_SUFFIX = "#vision", DRAFT_SUFFIX = "#draft";   // the speed draft rides the same sub-pack machinery
   function isVisionId(id) { return String(id || "").slice(-VISION_SUFFIX.length) === VISION_SUFFIX; }
-  function baseIdOf(id) { return isVisionId(id) ? String(id).slice(0, -VISION_SUFFIX.length) : String(id); }
+  function isDraftId(id) { return String(id || "").slice(-DRAFT_SUFFIX.length) === DRAFT_SUFFIX; }
+  function baseIdOf(id) {
+    if (isVisionId(id)) return String(id).slice(0, -VISION_SUFFIX.length);
+    if (isDraftId(id)) return String(id).slice(0, -DRAFT_SUFFIX.length);
+    return String(id);
+  }
   function visionIdOf(id) { return baseIdOf(id) + VISION_SUFFIX; }
+  function draftIdOf(id) { return baseIdOf(id) + DRAFT_SUFFIX; }
   /** The vision file for a pack, or null when that model cannot see (Apex is text-only). */
   function visionFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.vision) || null; }
   function hasVision(id) { return !!visionFile(id); }
+  /** The speculative-decoding draft for a pack, or null when it has none. */
+  function draftFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.draft) || null; }
+  function hasDraft(id) { return !!draftFile(id); }
 
   function pack(id) {
     if (isVisionId(id)) {
@@ -677,6 +671,12 @@
       // A one-file synthetic pack. nPredict/nCtx are irrelevant here (nothing generates from it).
       return { label: base.label + " vision", actual: base.actual + " projector", tier: base.tier,
                files: [vf], visionOf: baseIdOf(id) };
+    }
+    if (isDraftId(id)) {
+      var baseD = PACKS[baseIdOf(id)], df = baseD && baseD.draft;
+      if (!df) throw new Error("no draft pack for: " + id);
+      return { label: baseD.label + " speed draft", actual: df.name + " (speculative-decoding draft)", tier: baseD.tier,
+               files: [df], draftOf: baseIdOf(id) };
     }
     var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p;
   }
@@ -1300,6 +1300,7 @@
   var API = {
     PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, DEVICE_WARNING: DEVICE_WARNING, DEVICE_SUPPORTED: DEVICE_SUPPORTED,
     hasVision: hasVision, visionFile: visionFile, visionIdOf: visionIdOf, isVisionId: isVisionId, baseIdOf: baseIdOf,
+    hasDraft: hasDraft, draftFile: draftFile, draftIdOf: draftIdOf, isDraftId: isDraftId,
     activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,

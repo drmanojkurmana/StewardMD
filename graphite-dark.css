@@ -1,14 +1,12 @@
 /* StewardMD Graphite dark appearance. Neutral surfaces only; clinical status ramps stay unchanged. */
 html:has(body.dark), html:has(body.v3-dark) { background:#000000; }
 
-html body.dark,
-html body.v3-dark,
-html body.ui-v2.dark,
-html body.ui-v2.v3-dark,
-html[data-theme] body.dark,
-html[data-theme] body.v3-dark,
-html[data-theme] body.ui-v2.dark,
-html[data-theme] body.ui-v2.v3-dark {
+/* A saved accent theme keeps its own accent: only the neutral graphite surfaces
+   are enforced here so Settings -> Display & Accessibility themes still apply. */
+html[data-theme]:not([data-theme="classic"]) body.dark,
+html[data-theme]:not([data-theme="classic"]) body.v3-dark,
+html[data-theme]:not([data-theme="classic"]) body.ui-v2.dark,
+html[data-theme]:not([data-theme="classic"]) body.ui-v2.v3-dark {
   color-scheme:dark;
   --paper:#000000;
   --panel:#0c0c0e;
@@ -16,8 +14,35 @@ html[data-theme] body.ui-v2.v3-dark {
   --slate:#c0c0c5;
   --slate-soft:#9a9aa1;
   --line:#303034;
-  --teal:#57d3bd;
-  --teal-soft:#203a36;
+  --rds-bg:#000000;
+  --rds-surface:#0c0c0e;
+  --rds-surface-2:#161618;
+  --rds-line:#303034;
+  --rds-line-soft:#303034;
+  --rds-ink:#f4f4f5;
+  --rds-muted:#c0c0c5;
+  --rds-faint:#9a9aa1;
+}
+
+/* Default dark (no data-theme, or classic): deep Clinical Tools sphere green,
+   never neon. Sphere tokens also drive the home badges/hero/FAB. */
+html body.dark,
+html body.v3-dark,
+html body.ui-v2.dark,
+html body.ui-v2.v3-dark,
+html[data-theme="classic"] body.dark,
+html[data-theme="classic"] body.v3-dark,
+html[data-theme="classic"] body.ui-v2.dark,
+html[data-theme="classic"] body.ui-v2.v3-dark {
+  color-scheme:dark;
+  --paper:#000000;
+  --panel:#0c0c0e;
+  --ink:#f4f4f5;
+  --slate:#c0c0c5;
+  --slate-soft:#9a9aa1;
+  --line:#303034;
+  --teal:#2f9184;
+  --teal-soft:#0e2924;
   --amber:#f0c060;
 
   --v3-bg:#000000;
@@ -26,10 +51,10 @@ html[data-theme] body.ui-v2.v3-dark {
   --v3-border:#303034;
   --v3-ink:#f4f4f5;
   --v3-muted:#a6a6ad;
-  --v3-primary:#57d3bd;
-  --v3-primary-2:#39b9a4;
-  --v3-primary-3:#83e3d3;
-  --v3-primary-soft:#203a36;
+  --v3-primary:#2f9184;
+  --v3-primary-2:#12564a;
+  --v3-primary-3:#2f9184;
+  --v3-primary-soft:#0e2924;
 
   --rds-bg:#000000;
   --rds-surface:#0c0c0e;
@@ -39,9 +64,14 @@ html[data-theme] body.ui-v2.v3-dark {
   --rds-ink:#f4f4f5;
   --rds-muted:#c0c0c5;
   --rds-faint:#9a9aa1;
-  --rds-primary:#57d3bd;
-  --rds-primary-2:#39b9a4;
-  --rds-primary-soft:#203a36;
+  --rds-primary:#2f9184;
+  --rds-primary-2:#12564a;
+  --rds-primary-soft:#0e2924;
+
+  --sphere-hi:#2f9184;
+  --sphere-mid:#12564a;
+  --sphere-base:#06231e;
+  --sphere-glow:rgba(8,40,35,.6);
 }
 
 /* Home and app sheets declare local tokens, so map those to the same graphite scale. */
@@ -70,10 +100,10 @@ html body.mk2.v3-dark #maikSheet {
   --mk-bd:#303034;
   --mk-soft:#0c0c0e;
   --mk-field:#161618;
-  --mk-teal:#57d3bd;
-  --mk-tsoft:#203a36;
-  --mk-acc:#8ccbc0;
-  --mk-glow:rgba(87,211,189,.3);
+  --mk-teal:var(--teal, #2f9184);
+  --mk-tsoft:var(--teal-soft, #0e2924);
+  --mk-acc:var(--teal, #2f9184);
+  --mk-glow:rgba(47,145,132,.3);
 }
 
 html body.dark .sbr-set-ov,
@@ -88,7 +118,7 @@ html body.v3-dark .sbr-set-ov .smd-nav-btn:hover { background:#202023; }
 html body.dark .ai-usage,
 html body.dark .aic { --aiuCard:#0c0c0e; --aiuBg:#000000; --card:#0c0c0e; --bg:#000000; }
 html body.dark .sbref-sec { background:#0c0c0e; }
-html body.dark #smdBackToTop { background:#161618; color:#57d3bd; }
+html body.dark #smdBackToTop { background:#161618; color:var(--teal, #2f9184); }
 
 /* Module palettes that previously bypassed the shared surface tokens. */
 html body.dark #sknxRoot {
@@ -133,8 +163,8 @@ html body.v3-dark .cs-ov {
   --ink:#f4f4f5;
   --mut:#a6a6ad;
   --line:#303034;
-  --tl:#57d3bd;
-  --tls:#203a36;
+  --tl:var(--teal, #2f9184);
+  --tls:var(--teal-soft, #0e2924);
 }
 html body.dark .smdonb-card,
 html body.v3-dark .smdonb-card,
@@ -165,9 +195,9 @@ html body.dark.abx-ui #abxWizard {
   --w-muted:#8d8d94;
   --w-line:#303034;
   --w-linesoft:#303034;
-  --w-tealsoft:#203a36;
-  --w-tealbd:#32665d;
-  --w-teal-ink:#57d3bd;
+  --w-tealsoft:var(--teal-soft, #0e2924);
+  --w-tealbd:#12564a;
+  --w-teal-ink:var(--teal, #2f9184);
 }
 
 @media (prefers-color-scheme:dark) { html { background:#000000; } }

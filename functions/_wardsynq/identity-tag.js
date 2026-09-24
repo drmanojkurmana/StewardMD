@@ -26,6 +26,11 @@ import {
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "PatientTag";
 
+// Wave 2 (Universal Patient Identity): "barcode" is the linear barcode wristband - the same
+// physical tag "wristband" names. Aliased at the boundary so callers specifying either
+// succeed transparently; stored records always carry "wristband".
+const resolveTagType = (t) => (str(t) === "barcode" ? "wristband" : str(t));
+
 function tagIdFor(patientId, tagType, at, salt) {
   const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   const p = slug(patientId), t = slug(tagType), a = slug(at), s = slug(salt || "");
@@ -71,6 +76,7 @@ async function assignPatientTag(request, env, ctx) {
 
   const patientId = str(ctx.patientId);
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", written: 0 };
+  const tagType = resolveTagType(ctx.tagType);
 
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
@@ -83,15 +89,15 @@ async function assignPatientTag(request, env, ctx) {
   let existing;
   try { existing = await tagsForPatient(svc, patientId); }
   catch (e) { return { ...base, ...writeFailure(e, { written: 0 }) }; }
-  const activeSameType = existing.find((t) => t.tagType === ctx.tagType && t.status === STATUS.ACTIVE);
+  const activeSameType = existing.find((t) => t.tagType === tagType && t.status === STATUS.ACTIVE);
   if (activeSameType) {
-    return { ...base, ok: false, status: 409, error: "active_tag_exists", detail: `this patient already holds an active ${ctx.tagType} tag (${activeSameType.id}) - replace or deactivate it first, a second active tag is never assigned silently`, written: 0, tag: activeSameType };
+    return { ...base, ok: false, status: 409, error: "active_tag_exists", detail: `this patient already holds an active ${tagType} tag (${activeSameType.id}) - replace or deactivate it first, a second active tag is never assigned silently`, written: 0, tag: activeSameType };
   }
 
   let draft;
-  try { draft = assignTag({ patientId, tagType: ctx.tagType, code: ctx.code, assignedBy: resolved.actor.id, now: new Date().toISOString() }); }
+  try { draft = assignTag({ patientId, tagType, code: ctx.code, assignedBy: resolved.actor.id, now: new Date().toISOString() }); }
   catch (e) { return { ...base, ...writeFailure(e, { written: 0 }) }; }
-  const id = tagIdFor(patientId, ctx.tagType, draft.assignedAt, draft.id);
+  const id = tagIdFor(patientId, tagType, draft.assignedAt, draft.id);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
   draft.id = id;
 
@@ -113,6 +119,7 @@ async function verifyPatientTag(request, env, ctx) {
 
   const patientId = str(ctx.patientId);
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", matches: false };
+  const tagType = resolveTagType(ctx.tagType);
 
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, matches: false };
@@ -120,7 +127,7 @@ async function verifyPatientTag(request, env, ctx) {
   let existing;
   try { existing = await tagsForPatient(svc, patientId); }
   catch (e) { return { ...base, ...writeFailure(e, { matches: false }) }; }
-  const active = existing.find((t) => t.tagType === ctx.tagType && t.status === STATUS.ACTIVE) || null;
+  const active = existing.find((t) => t.tagType === tagType && t.status === STATUS.ACTIVE) || null;
   const result = verifyTag(active, ctx.scannedCode);
   return { ...base, ok: true, ...result, tagId: active ? active.id : null };
 }

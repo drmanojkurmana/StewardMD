@@ -110,6 +110,11 @@
 
   /** Every checkable fact in a piece of text, positions kept so a drug and its dose can be paired. */
   var _expand = null;   // optional richer expander from the retrieval module, set per groundAnswer call
+  // Optional extra drug names (lowercase) found by an on-device drug tagger (openmed-ner.js pharma pack),
+  // set per groundAnswer call. They are matched as whole words in claim, passage and question ALIKE, so
+  // the result stays deterministic for a given list; an empty or absent list is the suffix rule alone.
+  var _extraDrugs = null;
+  function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
   function facts(text) {
     var t = norm(text);
     if (_expand) { try { t = String(_expand(t) || t); } catch (e) {} }
@@ -130,6 +135,16 @@
     }
     DRUG_SUFFIX.lastIndex = 0;
     while ((m = DRUG_SUFFIX.exec(t)) !== null) if (!NOT_DRUG[m[0]]) out.drugs.push({ name: m[0], pos: m.index });
+    if (_extraDrugs) {
+      for (var d = 0; d < _extraDrugs.length; d++) {
+        var re = new RegExp("(^|[^a-z0-9])(" + escRe(_extraDrugs[d]) + ")(?![a-z0-9])", "g");
+        while ((m = re.exec(t)) !== null) {
+          var at = m.index + m[1].length, dup = false;
+          for (var q = 0; q < out.drugs.length; q++) if (out.drugs[q].pos === at) { dup = true; break; }
+          if (!dup) out.drugs.push({ name: m[2], pos: at });
+        }
+      }
+    }
     var fq = t.match(/\b(?:oncedaily|twicedaily|thricedaily|fourtimesdaily|sixtimesdaily|onceweekly|singledose|iv|im|po|sc)\b/g) || [];
     for (var j = 0; j < fq.length; j++) out.freq.push(fq[j]);
     var words = t.replace(/-/g, " ").match(/[a-z][a-z0-9]+/g) || [];   // "low-molecular-weight" == "low molecular weight"
@@ -283,6 +298,14 @@
   function groundAnswer(answer, passages, question, opts) {
     opts = opts || {};
     _expand = typeof opts.expand === "function" ? opts.expand : null;
+    _extraDrugs = null;
+    if (opts.drugs && opts.drugs.length) {
+      _extraDrugs = [];
+      for (var xd = 0; xd < opts.drugs.length; xd++) {
+        var nm = String(opts.drugs[xd] || "").toLowerCase().replace(/\s+/g, " ").trim();
+        if (nm.length >= 3 && !NOT_DRUG[nm] && _extraDrugs.indexOf(nm) < 0) _extraDrugs.push(nm);
+      }
+    }
     var pf = (passages || []).map(function (p) { return facts(p && p.text || ""); });
     var qf = facts(question || "");
     var claims = splitClaims(answer), stats = { supported: 0, clinician: 0, unsupported: 0, contradicted: 0, meta: 0 };

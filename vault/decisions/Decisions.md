@@ -199,6 +199,86 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-24 · No emoji in the app: rendered emoji become line icons
+
+**Decision.** Owner: "remove emoji all over the app and replace with icons". ~1,500 emoji sit in 71
+source files, many in non-HTML strings (toasts, textContent, titles, <option>, PDF text), so a source
+rewrite would break them. `emoji-icons.js` works on the rendered DOM instead: an emoji in visible text
+becomes the matching `window.ICONS` line icon (bell, steth, pills, lungs...), status emoji keep their
+colour (green check, amber warn, red cross; coloured circles become solid dots), anything unmapped is
+removed. Attributes (title, placeholder, aria-label, alt), <option> text, document.title and
+alert/confirm/prompt are stripped. Typography (arrows, triangles, check/cross marks, stars, (c)(tm)) is
+kept. User input is never touched. Flag `smd_noemoji`, default ON, "0" restores the emoji.
+
+**Trade-off / status.** The source still contains the emoji; a later clean-up can replace them file by
+file. Not covered: PDF/print text built from strings (jsPDF) and the separate web pages
+(admin/, followcare.html, opd.html), which do not load it. Recovery point: main at c149bb42 (the tag
+push was refused by the session proxy). Tests: `test/emoji-icons.test.mjs`, `test/run-noemoji-ui.mjs`.
+
+## 2026-09-23 · Drug names are links: highlight + monograph-first in MaiK
+
+**Decision.** Owner: every drug name in a question, answer or page is BOLD and opens that drug's
+monograph. Revised 2026-09-24 (owner: "bold and glow for 5 sec ... rather than keep it highlighted
+forever", then "letters to glow in a flow"): no permanent yellow and no box; for 5 s after it
+scrolls into view a gold band flows through the LETTERS left to right (background-clip:text sweep,
+three passes, soft halo) (IntersectionObserver,
+re-armed only after it fully leaves the view) and on hover, then rests as plain bold. Reduced motion:
+a steady glow, no animation. Earlier wording, kept for history: the name was bold yellow and opened that drug's
+monograph (`MEDDB.openComposition`). A MaiK question naming a drug first shows a card: open the
+monograph, Just answer, or answer and don't ask again. `drug-link.js` + generated `drug-lexicon.js`
+(2,213 generics + 180 brands from `data/interaction-rules.json`, public domain), plus the Drug Index
+formulary, `SMD_BRANDS`, and fuzzy spelling for the doctor's own question ("paracetomol"). Surfaces:
+`#maikBody` (MaiK), the ICU MaiK/evidence/AI-discharge sheets, `#sbrefBody` (Knowledge Library with
+its Syndromes, Antibiogram, AWaRe and Guidelines tabs), `#dxOverlay` (disease reader), `#refOverlay`,
+`#abgBody`, `#smdProtoSheet` (chemotherapy protocols), `#smdOncoHome`, `#clinixScroll`, `#surgxScroll`.
+Editors and the Drugs Database itself are excluded. The highlight is a `<span>` (a bare `<mark>` would
+print yellow in exported HTML) with a print rule that removes it; the database is lifted above any
+surface it opens from and restored on close. British/Indian spellings come from api.js `CLIN_SYN`.
+Flags `smd_druglink` and `smd_druglink_ask`, both default ON, "0" to turn off.
+
+**Trade-off / status.** Detection is a lexicon, not the OpenMed tagger: it works offline today, and the
+tagger (still fail-closed, licence unverified) only adds names via `SMD_DRUGLINK.learn()` once enabled.
+Lab analytes (sodium, potassium, glucose) are deliberately not highlighted. Tests:
+`test/drug-link.test.mjs`, `test/run-druglink-ui.mjs` (real app, MaiK send path, Chromium 390 px).
+
+## 2026-09-23 · OpenMed drug + disease taggers wired in, off and fail-closed
+
+**Decision.** Owner: integrate PharmaDetect-TinyMed-65M and DiseaseDetect-TinyMed-65M. `openmed-ner.js`
+runs them on the vendored onnxruntime-web. Pharma feeds extra drug names to claim grounding (stricter
+only: fixes the aspirin-for-paracetamol swap that grounding graded supported). Disease splits a combined
+diagnosis for ICD suggestions (offered, never assigned). Flags `smd_openmed_pharma` / `smd_openmed_disease`
+default OFF.
+
+**Trade-off / status.** The owner's rule (no model unless its exact checkpoint licence is verified
+Apache-2.0) is enforced in code: `licence.verified:false` and null sha256s make every call return []
+without a download. Hugging Face was unreachable from this session. The pipeline is proven on the real
+runtime with a fixture model, not on the real weights. The aspirin gap could also be closed without a
+model by passing drug-DB names (`MEDDRUGS._list`) as `opts.drugs`; not done, owner asked for the models.
+
+## 2026-09-23 · OpenMed: rules now, models only after licence check and benchmark
+
+**Decision.** From the OpenMed catalog (2,255 of 2,266 checkpoints declared Apache-2.0), nothing
+replaces MaiK, MedGemma, Bonsai or the deterministic engines: every OpenMed model is a token tagger.
+Shipped now: `phi-india.js`, OpenMed's India health-ID coverage re-implemented as rules inside
+`redactPHI()` (flag `smd_phi_india`, default ON, "0" restores the old output exactly). It closes real
+leaks: `name@abdm` ABHA Addresses, UPI IDs, PAN, and Aadhaar/phone numbers in Indic digits all used to
+reach the cloud from AI Vision. PII models (ClinicalE5-Small-33M en/hi/te) are BENCHMARK FIRST.
+
+**Trade-off / status.** No OpenMed weights are bundled or downloaded: the per-checkpoint Hugging Face
+licence and the Nemotron-PII dataset licence could not be verified from this session. Full table and
+next steps: [[OpenMed-Evaluation]]. Tests: `test/phi-india.test.mjs`.
+
+## 2026-09-23 · MAiK Cortex (`medmo-4b`) removed from the offline model list
+
+**Decision.** Owner: remove MAiK Cortex from the offline models. The `medmo-4b` entry is gone from
+`PACKS` and `CAPS` in `maik-models.js`, so it no longer appears in the picker or grades. Supersedes
+the 2026-09-18 entry below.
+
+**Trade-off / status.** A phone that had Cortex selected falls back to MxCore (`activePack()` returns
+`maik-mxcore` for an unknown id). A previously downloaded `medmo-4b-q4_k_m.gguf` (2.7 GB) is not
+deleted automatically; it is orphaned on disk until the app data is cleared. Pinned in
+`test/maik-models.test.mjs`.
+
 ## 2026-09-18 · MedMO-4B ships as MAiK Cortex, RAG-connected like every other text pack
 
 **Decision.** The `medmo-4b` pack is labelled **MAiK Cortex** in the offline model list; `actual`
@@ -8988,3 +9068,55 @@ those models never had. The grade is derived from the registry (`own`, `caps.med
 hand-kept, so a new pack cannot land ungraded. The Knowledge Base switch became a positive label
 ("Check answers against the Knowledge Base"): a switch whose label reads the state it is NOT in is
 what "Disconnected" with a tick beside it looked like on the phone.
+
+
+**Tours fit every phone, and the first guide is a hands-on demo (2026-09-21).** Owner: *"the tour
+you created doesnt fit the screen it should work and auto adjust on all phone screens and guide the
+user thru a demo like make him use a start a case and see diagnosis of meningitis ... stewardship
+console clinical reasoning everything in a demo to be made step by step by the user so he learns
+after one learn."* Engine (`onboarding.js`): the coach-mark is capped to the VISIBLE viewport
+(`window.visualViewport`, which shrinks for the keyboard; `env(safe-area-inset-bottom)` via a probe
+element) and scrolls inside itself; when neither side of a target has room, `fitTargetAndCard()`
+scrolls the target's own scroll parent so the spotlight sits at the top and the card takes the room
+below, once per step so it never fights the student. A step may ask `place:"above"|"below"|"bottom"`;
+"bottom" pins the card to the foot of the viewport so a search box and its dropdown stay tappable.
+Guides gained hands-on steps: `kind:"tap"` with `done()` (the step advances on its OUTCOME, however
+the student got there, never on a click the engine happened to see), `find()` resolvers for targets a
+selector cannot name (the top infectious card, stewardship card 05), and `gotoScreen()` no longer
+closes and re-opens a screen the student opened themselves (`SCREEN_OPEN`). The demo
+(`DEMO_GUIDE`, first in the chooser) walks the real app: Dx Patient, Add New Patient, type four
+findings (fever, headache, neck stiffness, photophobia, the set that makes `SYNDROMES.MENINGITIS`
+lead), Review differential, the antibiotic gate, open the top card, commit, then six cards of the
+real stewardship console (04 pathogens, 05 empiric antibiotics, 07 stewardship comment, 08
+investigations, 09 de-escalation, 10 evidence). The student's own open findings are parked at the
+start and restored at the end; the demo case, the stewardship page and the workspace are cleared.
+The tour copy never states a dose; the console does, with its source. Pointing hand is an inline
+SVG, not an emoji. Verified in `test/run-feature-guide-ui.mjs` at 320x568, 360x640, 390x844 and
+430x932.
+
+## 2026-09-21 - QA bug sheet: AgentConnect needs written hospital permission before it can be started
+The internal QA sheet (BUG-012, Critical) called the EMR Website Login copy unacceptable: it claimed
+"no IT approvals required" and "zero changes to your hospital's EMR", which reads as a promise that
+the doctor may connect a hospital EMR on their own authority. The feature itself is correct and was
+NOT changed (owner's instruction: "Agent Connect is working correctly dont change any function of
+it just change the wording"). What changed is the wording plus a gate:
+- The card now says the link uses only the access the doctor's own login already has, and that it is
+  for hospitals with a web/online/cloud EMR, used only after hospital administration has permitted it.
+- A full small-font disclaimer sits above the button: permission must come from the hospital
+  administration or the authority that controls the EMR; StewardMD neither obtains nor can confirm
+  that permission; the doctor is responsible for their credentials, for every screen read while
+  signed in, and for hospital IT/privacy policy and the DPDP Act 2023; MAIKNOWLEDGE LLP accepts no
+  responsibility for use without permission.
+- A tick ("I have permission ... and I take responsibility") enables the Start button. The button is
+  disabled and dimmed until then, and the click handler returns early if it is not ticked.
+The existing in-flow consent screen (connect-agent-onboarding.js) is unchanged and still applies.
+
+## 2026-09-21 - The Knowledge Library and the disease reader get CALM glass, not the app-hub aurora
+BUG-011 ("Liquid Glass ... absurd", owner: "fix it properly"). appearance.css painted every
+full-screen root with the same four-blob radial aurora. Behind paragraphs of reference text that is
+noise, and the library's own `.kblib-feature` added a second blurred blob on top of it. The library
+home, the library tool pages and the disease reader now get: one quiet top wash, hairline
+translucent cards on a single radius, blur on the sticky chrome ONLY (no per-row blur - WKWebView
+perf), a segmented tab pill, and no decorative blobs anywhere. The app hubs keep the aurora.
+Also BUG-013: the library home's `<h1>` said "Knowledge Library" directly under the sheet chrome
+that already says "Knowledge Library"; the page heading is now "Find any disease".

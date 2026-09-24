@@ -1,12 +1,14 @@
 // Clinic BILLING - Firestore/PHI I/O (the impure half; pure logic is in _clinic_billing.js).
 // Collections: q_patients (registry, PHI-encrypted), q_orders, q_tariff, q_invoices, q_patient_seq.
 // Not node-testable (needs Firestore) - verify on-device. Additive + gated by CLINIC_BILLING_ENABLED.
-import { fsGet, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsCommit, wCreate, wUpdate, fsQuery } from "./_fbfirestore.js";
 import { PAGE_SIZE, readAll } from "./_fs_read_all.js";
 import { encPHI, decPHI } from "./_queue.js";
 import { qAudit, getSession, getTicket } from "./_queue_engine.js";
 import { appendTimeline } from "./_queue_timeline.js";
 import { postBillingEvent } from "./_accounts_store.js";
+
+function sanitize(s) { return String(s == null ? "" : s).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80); }
 
 /* Billing -> the hospital's books. The invoice or payment is already recorded when this runs; a posting
  * that fails is audited as accounts:posting_failed so finance sees exactly which event is missing from the
@@ -54,9 +56,59 @@ export async function registerPatient(env, orgId, orgCode, p) {
   return { ok: true, id, name: p.name || "" };
 }
 export async function getPatient(env, orgId, id) {
-  const d = await fsGet(env, "q_patients/" + id);
-  if (!d || !d.fields || d.fields.orgId !== orgId) return null;   // org-scoped
-  return { id, orgId, name: await decPHI(env, d.fields.encName), mobile: await decPHI(env, d.fields.encMobile), sex: d.fields.sex || "", ageYears: d.fields.ageYears || 0 };
+  if (!id) return null;
+  const cleanId = sanitize(id);
+  const cleanOrg = sanitize(orgId);
+
+  // 1. Direct match in q_patients/
+  let d = await fsGet(env, "q_patients/" + cleanId).catch(() => null);
+
+  // 2. OPD patient record: q_patients/<orgId>__<mrn>
+  if (!d || !d.fields) {
+    d = await fsGet(env, "q_patients/" + sanitize(cleanOrg + "__" + cleanId)).catch(() => null);
+  }
+
+  // 3. Ticket lookup (if caller passed a ticketId)
+  if (!d || !d.fields) {
+    const t = await fsGet(env, "q_tickets/" + cleanId).catch(() => null);
+    if (t && t.fields && String(t.fields.hospitalId || "") === String(orgId)) {
+      const tf = t.fields;
+      const tMrn = tf.mrn || tf.ghisPatientId || "";
+      if (tMrn) {
+        d = await fsGet(env, "q_patients/" + sanitize(cleanOrg + "__" + String(tMrn))).catch(() => null);
+      }
+      if (!d || !d.fields) {
+        return {
+          id: tMrn || cleanId,
+          ticketId: cleanId,
+          orgId,
+          name: (tf.encName ? await decPHI(env, tf.encName) : "") || tf.name || "Patient",
+          mobile: (tf.encMobile ? await decPHI(env, tf.encMobile) : "") || tf.mobile || "",
+          sex: tf.gender || tf.sex || "",
+          ageYears: tf.ageYears || 0
+        };
+      }
+    }
+  }
+
+  // 4. Query q_patients by mrn in this org
+  if (!d || !d.fields) {
+    const qRes = await fsQuery(env, "q_patients", { where: [{ field: "orgId", value: orgId }, { field: "mrn", value: id }], limit: 1 }).catch(() => []);
+    if (qRes && qRes.length) d = qRes[0];
+  }
+
+  if (!d || !d.fields || (d.fields.orgId && String(d.fields.orgId) !== String(orgId))) return null;
+  const f = d.fields;
+  const pName = f.encName ? await decPHI(env, f.encName) : (f.name || "");
+  const pMobile = f.encMobile ? await decPHI(env, f.encMobile) : (f.mobile || "");
+  return {
+    id: f.mrn || id,
+    orgId,
+    name: pName || "Patient",
+    mobile: pMobile || "",
+    sex: f.gender || f.sex || "",
+    ageYears: f.ageYears || 0
+  };
 }
 
 // ---- orders (first-class; the station work item) ----
@@ -91,6 +143,14 @@ export async function ordersForPatient(env, orgId, patientId, status) {
   if (truncated) throw Object.assign(new Error("orders_too_many"), { status: 507 });
   let list = asOrders(rows).filter((o) => o.orgId === orgId);
   if (status) list = list.filter((o) => o.status === status);
+  if (!list.length && patientId) {
+    const byTicket = await readAll(env, "q_orders", [{ field: "ticketId", value: patientId }, ...(status ? [{ field: "status", value: status }] : [])], 50).catch(() => ({ rows: [] }));
+    if (byTicket.rows && byTicket.rows.length) {
+      let tList = asOrders(byTicket.rows).filter((o) => o.orgId === orgId);
+      if (status) tList = tList.filter((o) => o.status === status);
+      if (tList.length) return tList;
+    }
+  }
   return list;
 }
 /* Billing station inbox: every 'ordered' order in the org, asked for by status (orgId AND status, both equality, so no
@@ -109,13 +169,32 @@ export async function pharmacyQueue(env, orgId) {
 }
 // Hand the medicines over. Guarded by the state machine rather than by the pharmacist remembering:
 // only paid + medication can reach "dispensed", so an unpaid order cannot be released.
-export async function dispenseOrder(env, orgId, orderId, actor) {
+// The station names who the row is for (patientId): a row that names a different patient than
+// the order is refused, so a stale screen can never dispense patient A's drugs to patient B.
+// The handover is recorded as dispensedBy/dispensedAt - the pharmacy act, distinct from the
+// bedside administeredBy/At the eMAR records when the dose is actually given (which this
+// station never writes).
+export async function dispenseOrder(env, orgId, orderId, actor, claim) {
   const d = await fsGet(env, "q_orders/" + orderId).catch(() => null);
   if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
   const o = d.fields;
+  const claimedPatient = claim && claim.patientId ? String(claim.patientId).trim() : "";
+  if (claimedPatient && o.patientId && claimedPatient !== String(o.patientId)) {
+    return { ok: false, error: "patient_mismatch", message: "That order belongs to a different patient. Nothing was dispensed." };
+  }
   if (o.status === "dispensed") return { ok: true, already: true };
-  if (!isDispensable(Object.assign({ id: orderId }, o))) return { ok: false, error: "not_dispensable", status: o.status, kind: o.kind };
-  await fsCommit(env, [wUpdate(env, "q_orders/" + orderId, { status: "dispensed", dispensedAt: Date.now(), dispensedBy: actor || "", updatedAt: Date.now() })]);
+  const updates = [wUpdate(env, "q_orders/" + orderId, { status: "dispensed", dispensedAt: Date.now(), dispensedBy: actor || "", updatedAt: Date.now() })];
+  if (o.tariffId) {
+    try {
+      const trf = await fsGet(env, "q_tariff/" + o.tariffId).catch(() => null);
+      if (trf && trf.fields && typeof trf.fields.stock === "number") {
+        const curStock = Number(trf.fields.stock) || 0;
+        const decQty = Math.max(1, Number(o.qty) || 1);
+        updates.push(wUpdate(env, "q_tariff/" + o.tariffId, { stock: Math.max(0, curStock - decQty), updatedAt: Date.now() }));
+      }
+    } catch (e) {}
+  }
+  await fsCommit(env, updates);
   await qAudit(env, { hospitalId: orgId, ticketId: o.patientId || "", actor: actor || "pharmacy", action: "order_dispense", meta: o.name || "" });
   return { ok: true };
 }
@@ -162,17 +241,27 @@ export async function createInvoice(env, orgId, patientId, actor) {
   if (inv.total > 0) await toBooks(env, orgId, { kind: "invoice_posted", id, amountPaise: inv.total, date: today(), category: "consultation", payer: "patient" }, actor);
   return { ok: true, id, invoice: Object.assign({ id, status: "open" }, inv) };
 }
-export async function payInvoice(env, orgId, invoiceId, method, actor) {
+export async function payInvoice(env, orgId, invoiceId, method, actor, split) {
   const d = await fsGet(env, "q_invoices/" + invoiceId);
   if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
   if (d.fields.status === "paid") return { ok: true, already: true };
   const lines = JSON.parse(d.fields.lines || "[]");
   const paidAt = Date.now();
-  const writes = [wUpdate(env, "q_invoices/" + invoiceId, { status: "paid", paidMethod: method || "cash", paidAt, paidUtcDay: utcDay(paidAt) })];
+  // Split tender (Cash + UPI): the two parts must add up to the invoice total to the paise, so the
+  // day-end report can never disagree with what was billed. Anything else is refused, unpaid.
+  let paidMethod = method || "cash", paidSplit = "";
+  if (paidMethod === "split") {
+    const cash = Math.round(Number((split && split.cash) || 0));
+    const upi = Math.round(Number((split && split.upi) || 0));
+    if (!isFinite(cash) || !isFinite(upi) || cash < 0 || upi < 0 || cash + upi !== (d.fields.total || 0))
+      return { ok: false, error: "split_mismatch", message: "Cash + UPI must add up to the invoice total." };
+    paidSplit = JSON.stringify({ cash, upi });
+  }
+  const writes = [wUpdate(env, "q_invoices/" + invoiceId, Object.assign({ status: "paid", paidMethod, paidAt, paidUtcDay: utcDay(paidAt) }, paidSplit ? { paidSplit } : {}))];
   lines.forEach((l) => { if (l.orderId) writes.push(wUpdate(env, "q_orders/" + l.orderId, { status: "paid", updatedAt: Date.now() })); });
   await fsCommit(env, writes);
-  await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId, actor: actor || "cashier", action: "invoice_pay", meta: method || "cash" });
-  if (d.fields.total > 0) await toBooks(env, orgId, { kind: "payment", id: invoiceId, amountPaise: d.fields.total, date: today(), method: method || "cash", payer: "patient" }, actor);
+  await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId, actor: actor || "cashier", action: "invoice_pay", meta: paidSplit ? ("split cash:" + JSON.parse(paidSplit).cash + " upi:" + JSON.parse(paidSplit).upi) : paidMethod });
+  if (d.fields.total > 0) await toBooks(env, orgId, { kind: "payment", id: invoiceId, amountPaise: d.fields.total, date: today(), method: paidMethod, payer: "patient" }, actor);
   // Tell the VISIT the money is in. The cashier deliberately holds no queue capability - taking payment
   // is not queue authority - so this is emitted by the payment itself, not by a person clicking twice.
   // Only possible for orders the doctor raised from the EMR, which carry ticketId/sessionId; an order
@@ -186,7 +275,7 @@ export async function payInvoice(env, orgId, invoiceId, method, actor) {
       if (!f || !f.ticketId || !f.sessionId || seen.indexOf(f.ticketId) > -1) continue;
       seen.push(f.ticketId);
       const [sess, tkt] = await Promise.all([getSession(env, f.sessionId), getTicket(env, f.ticketId)]);
-      if (sess && tkt) await appendTimeline(env, sess, tkt, "status", "Payment received - " + (method || "cash"), actor || "Billing desk");
+      if (sess && tkt) await appendTimeline(env, sess, tkt, "status", "Payment received - " + (paidSplit ? ("split cash:" + JSON.parse(paidSplit).cash + " upi:" + JSON.parse(paidSplit).upi) : paidMethod), actor || "Billing desk");
     }
   } catch (e) { /* the payment is already recorded; the visit note is best-effort */ }
   return { ok: true };
@@ -206,6 +295,11 @@ export async function getInvoice(env, orgId, invoiceId) {
  * paidUtcDay existed have none and are not counted: only the deploy day itself can be short. */
 export const REVENUE_CAP = 20000;
 const utcDay = (ms) => new Date(ms).toISOString().slice(0, 10);
+const dayBounds = (offsetMinutes) => {
+  const off = (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000;
+  const now = Date.now(), dayStart = now - ((((now + off) % 86400000) + 86400000) % 86400000);
+  return { dayStart, dayEnd: dayStart + 86400000, date: new Date(dayStart + off).toISOString().slice(0, 10) };
+};
 export async function revenueToday(env, orgId, offsetMinutes) {
   if (!billingEnabled(env) || !orgId) return null;
   const off = (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000;
@@ -218,4 +312,39 @@ export async function revenueToday(env, orgId, offsetMinutes) {
     rows.forEach((r) => { const f = r.fields || {}; if (f.orgId === orgId && f.status === "paid" && (f.paidAt || 0) >= dayStart && f.paidAt < dayEnd) { paise += (f.total || 0); count++; } });
   }
   return { revenueToday: Math.round(paise / 100), invoicesPaidToday: count };
+}
+/* The cashier's day-end shift report: today's PAID invoices grouped by tender (Cash, UPI, Card, Split),
+ * plus a per-invoice list for reconciliation. Same day bounds + paging discipline as revenueToday: past
+ * REVENUE_CAP invoices paid in one UTC day it throws rather than show a short total. Invoice rows carry
+ * no patient identity (suffix + amount + method + time is enough to reconcile the drawer). */
+const SHIFT_METHODS = ["cash", "upi", "card", "split"];
+export async function shiftReport(env, orgId, offsetMinutes) {
+  if (!billingEnabled(env) || !orgId) return null;
+  const { dayStart, dayEnd, date } = dayBounds(offsetMinutes);
+  const days = [...new Set([utcDay(dayStart), utcDay(dayEnd - 1)])];
+  const byMethod = { cash: 0, upi: 0, card: 0, split: 0, other: 0 };
+  const byCount = { cash: 0, upi: 0, card: 0, split: 0, other: 0 };
+  const invoices = [];
+  const seen = new Set();
+  let paise = 0, count = 0;
+  for (const day of days) {
+    const { rows, truncated } = await readAll(env, "q_invoices", [{ field: "orgId", value: orgId }, { field: "paidUtcDay", value: day }], REVENUE_CAP);
+    if (truncated) throw Object.assign(new Error("revenue_too_many_invoices"), { status: 507, detail: `More than ${REVENUE_CAP} invoices paid on ${day}.` });
+    rows.forEach((r) => {
+      const f = r.fields || {};
+      if (f.orgId !== orgId || f.status !== "paid" || (f.paidAt || 0) < dayStart || f.paidAt >= dayEnd) return;
+      // One invoice, one paidUtcDay: a page overlap must never count the same bill twice in a money report.
+      if (!r.id || seen.has(r.id)) return;
+      seen.add(r.id);
+      const m = String(f.paidMethod || "");
+      const key = SHIFT_METHODS.indexOf(m) > -1 ? m : "other";
+      const tot = f.total || 0;
+      byMethod[key] += tot; byCount[key]++; paise += tot; count++;
+      let split = null;
+      try { split = f.paidSplit ? JSON.parse(f.paidSplit) : null; } catch (e) { split = null; }
+      invoices.push({ id: r.id, shortId: String(r.id || "").slice(-6).toUpperCase(), total: tot, paidMethod: m || "other", paidAt: f.paidAt || 0, split });
+    });
+  }
+  invoices.sort((a, b) => (b.paidAt || 0) - (a.paidAt || 0));
+  return { date, total: paise, count, byMethod, byCount, invoices };
 }

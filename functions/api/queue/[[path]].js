@@ -40,10 +40,11 @@ import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, notAName, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
+import { resolveRoomDoctor, normDocId, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, notAName, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
+import { fsCommit, wUpdate } from "../../_fbfirestore.js";
 import { orderQueue, orderRoomView, displayBoard, opdPulse } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge, deviceLabel } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
@@ -636,25 +637,73 @@ async function requireOrgOrGlobal(env, actor, orgId, cap, resourceOwnerUid) {
   if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
 }
 async function ticketView(env, tickets) { return Q.decorateForDoctor(env, tickets); }
-const ACTIVE = ["registered", "waiting", "called", "in_consultation"];
+const ACTIVE = ["registered", "waiting", "called", "in_consultation", "at_diagnostics"];
 const WAITING = ["registered", "waiting", "called"];
 // The nurse-station board for an org: each room (its resolved-doctor session) with count + status, plus
 // the central unassigned pool. Status uses the org's CONFIGURABLE thresholds (Phase 3), not hard-codes.
 async function boardForOrg(env, org, date) {
   const rooms = await ORG.listRooms(env, org.id);
+  let brand = null;
+  try { brand = await brandingFor(env, org.id); } catch (e) {}
+  const effectiveOrgName = (brand && brand.clinicName) || org.name || "";
+  const hasLogo = !!(brand && brand.ext);
+  const members = await ORG.listMembers(env, org.id).catch(() => []);
+  const memberMap = new Map();
+  for (const m of (members || [])) {
+    if (m.identity) memberMap.set(normDocId(m.identity), m.displayName || m.name || "");
+  }
   const out = [];
+  let unbilledByPatient = new Map();
+  let paidPatients = new Set();
+  try {
+    const bQ = await BILL.billingQueue(env, org.id);
+    (bQ.orders || []).forEach((o) => {
+      if (o.patientId) unbilledByPatient.set(o.patientId, (unbilledByPatient.get(o.patientId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
+      if (o.ticketId) unbilledByPatient.set(o.ticketId, (unbilledByPatient.get(o.ticketId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
+    });
+    const { rows: paidOrders } = await readAll(env, "q_orders", [{ field: "orgId", value: org.id }, { field: "status", value: "paid" }], 500).catch(() => ({ rows: [] }));
+    (paidOrders || []).forEach((r) => {
+      const f = r.fields || {};
+      if (f.patientId) paidPatients.add(f.patientId);
+      if (f.ticketId) paidPatients.add(f.ticketId);
+    });
+  } catch (e) {}
+  const annotateTickets = (tickets) => {
+    return (tickets || []).map((t) => {
+      const pid = t.mrn || t.ghisPatientId || t.id;
+      const unbilled = (unbilledByPatient.get(t.id) || 0) + (pid ? (unbilledByPatient.get(pid) || 0) : 0);
+      const isPaid = !unbilled && (paidPatients.has(t.id) || (pid && paidPatients.has(pid)));
+      return Object.assign({}, t, {
+        billingStatus: unbilled > 0 ? "unbilled" : (isPaid ? "paid" : ""),
+        unbilledAmount: unbilled
+      });
+    });
+  };
   for (const rm of rooms) {
     const doctorUid = resolveRoomDoctor(rm);
+    const a = rm.assignment || {};
+    const docName = rm.doctorName || a.doctorName || (doctorUid ? memberMap.get(normDocId(doctorUid)) : "") || (doctorUid && normDocId(doctorUid) === normDocId(org.ownerUid) ? (org.doctorName || "") : "") || null;
     let tickets = [], sess = null;
-    if (doctorUid) { sess = await Q.getOrCreateRoomSession(env, org, rm, date); if (sess) tickets = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1); }
+    if (doctorUid) { sess = await Q.getOrCreateRoomSession(env, org, rm, date, docName || ""); if (sess) tickets = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1); }
     const waiting = tickets.filter((t) => WAITING.indexOf(t.status) > -1).length;
     const inConsult = tickets.some((t) => t.status === "in_consultation");
-    out.push({ room: rm, doctorUid: doctorUid || null, sessionId: sess ? sess.id : null, waiting: waiting,
-      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: await ticketView(env, orderRoomView(tickets)) });
+    out.push({ room: rm, doctorUid: doctorUid || null, doctorName: docName, sessionId: sess ? sess.id : null, waiting: waiting,
+      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: annotateTickets(await ticketView(env, orderRoomView(tickets))) });
   }
   const pool = await Q.getOrCreatePoolSession(env, org, date);
   const poolTickets = (await Q.listTickets(env, pool.id)).filter((t) => WAITING.indexOf(t.status) > -1);
-  return { mode: org.mode, thresholds: org.thresholds, rooms: out, pool: await ticketView(env, orderQueue(poolTickets)), poolSessionId: pool.id };
+  return {
+    mode: org.mode,
+    orgName: effectiveOrgName,
+    orgCode: org.code,
+    hasLogo: hasLogo,
+    thresholds: org.thresholds,
+    opdBillingMode: org.opdBillingMode || "pay_first",
+    defaultConsultationFee: org.defaultConsultationFee || 0,
+    rooms: out,
+    pool: annotateTickets(await ticketView(env, orderQueue(poolTickets))),
+    poolSessionId: pool.id
+  };
 }
 // Org config → OPD connector. Read from env OPD_CONNECTORS (JSON: { "<hospitalId>": "ghis", "*": "..." });
 // native by default. NO hard-coded GHIS org/user id — a hospital is wired to a connector purely by config.
@@ -839,6 +888,30 @@ export async function onRequest(context) {
   const seg = parts[0] || "", sub = parts[1] || "";
 
   if (method === "GET" && seg === "ready") return json({ ok: true, enabled: queueEnabled(env), configured: isQueueConfigured(env), documentStorage: await documentStorageProbe(env) }, 200, request);
+
+  // When deployed under an auxiliary domain/project (e.g. wardsynq.com) without direct Firebase service account credentials,
+  // proxy the queue request upstream to stewardmd.in where the service account and databases are configured.
+  if (!env.FIREBASE_SERVICE_ACCOUNT && url.hostname.includes("wardsynq")) {
+    const target = new URL(`https://stewardmd.in${url.pathname}${url.search}`);
+    const h = new Headers(request.headers);
+    h.set("host", "stewardmd.in");
+    const init = {
+      method: request.method,
+      headers: h,
+      body: request.method !== "GET" && request.method !== "HEAD" ? await request.clone().arrayBuffer() : undefined,
+      redirect: "follow"
+    };
+    try {
+      const res = await fetch(target.toString(), init);
+      const rh = new Headers(res.headers);
+      const cors = corsHeaders(request);
+      Object.keys(cors).forEach((k) => rh.set(k, cors[k]));
+      return new Response(res.body, { status: res.status, headers: rh });
+    } catch (err) {
+      return json({ ok: false, error: "upstream_proxy_error", message: err.message }, 502, request);
+    }
+  }
+
   if (!queueEnabled(env)) return json({ ok: false, error: "disabled" }, 404, request);
 
   try {
@@ -850,6 +923,7 @@ export async function onRequest(context) {
       const b = await readBody(request);
       if (sub === "pin") {
         const orgId = await ORG.resolveOrgId(env, b.clinicCode || b.orgId || "");   // accept the SMD-XXXXXX clinic code
+        if (!orgId) return json({ ok: false, error: "invalid_login" }, 401, request);
         /* THE LOGIN NAME IS MATCHED EXACTLY FIRST, THEN IN LOWER CASE.
          *
          * The staff console lowercases a login name when it creates the member (mobile keyboards
@@ -859,9 +933,9 @@ export async function onRequest(context) {
          *
          * Exact match still wins, so an org that already holds both "Nurse1" and "nurse1" keeps
          * answering as it did; the fallback only runs when the name as typed matches nobody. */
-        const typed = String(b.identity || "");
+        const typed = String(b.identity || "").trim();
         const auth = (await ORG.getMemberAuth(env, orgId, typed))
-          || (typed !== typed.trim().toLowerCase() ? await ORG.getMemberAuth(env, orgId, typed.trim().toLowerCase()) : null);
+          || (typed !== typed.toLowerCase() ? await ORG.getMemberAuth(env, orgId, typed.toLowerCase()) : null);
         /* EVERY OUTCOME IS AUDITED under the hospital, so "who tried to get in as this nurse at 3am"
          * has an answer. Unknown IDs are recorded too when the hospital resolved. Never the PIN. */
         if (!auth || !auth.active || !auth.pinHash) {
@@ -870,13 +944,16 @@ export async function onRequest(context) {
         }
         const gate = pinLocked(auth, Date.now());
         if (gate.locked) { await loginAudit(auth.orgId, auth.identity, "login:pin_locked", ""); return json({ ok: false, error: "locked", retryInMs: gate.remainingMs }, 429, request); }
-        const ok = await verifySecret(String(b.pin || ""), auth.pinSalt, auth.pinHash);
+        const cleanPin = String(b.pin || "").trim();
+        const ok = await verifySecret(cleanPin, auth.pinSalt, auth.pinHash);
         const nx = nextPinState(auth, Date.now(), ok);
         await ORG.recordMemberPinAttempt(env, auth.orgId, auth.identity, nx);
         await loginAudit(auth.orgId, auth.identity, ok ? "login:pin_ok" : nx.pinLockedUntil ? "login:pin_lockout" : "login:pin_failed", ok ? "" : "attempt " + nx.pinAttempts);
         if (!ok) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - nx.pinAttempts) }, 401, request);
         if (auth.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, auth.orgId, auth.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
-        return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, identity: auth.identity }, 200, request);
+        let orgCode = "";
+        try { const o = await ORG.getOrg(env, auth.orgId); if (o) orgCode = o.code || ""; } catch (e) {}
+        return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, orgCode: orgCode, identity: auth.identity }, 200, request);
       }
       const m = await ORG.findMemberByEmail(env, b.email || "");
       if (!m || !m.active || !m.passHash) {
@@ -1077,18 +1154,30 @@ export async function onRequest(context) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
       if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+      const name = url.searchParams.get("name") || "";
+      const ct = request.headers.get("Content-Type") || "";
+      if (ct.indexOf("application/json") > -1) {
+        const b = await readBody(request).catch(() => ({}));
+        const clinicName = (b && b.name) || name;
+        if (clinicName) await ORG.updateOrg(env, orgId, { name: clinicName }, actor.id);
+        return json({ ok: true, clinicName: clinicName }, 200, request);
+      }
       let _pg = { ok: false, reason: "none" };
       try { _pg = await requirePro(env, request); } catch (e) {}
       // Keep the legacy `error: "pro_required"` key for any older client, and add the reason.
       if (!_pg.ok) return json(needsProBody(_pg, { ok: false, error: "pro_required", feature: "queue-branding" }), 402, request);
       const bkt = brandBucket(env);
       if (!bkt) return json({ ok: false, error: "storage_unavailable" }, 503, request);
-      const ct = request.headers.get("Content-Type") || "";
       const bytes = await request.arrayBuffer();
+      if (!bytes.byteLength && name) {
+        await ORG.updateOrg(env, orgId, { name: name }, actor.id);
+        return json({ ok: true, clinicName: name }, 200, request);
+      }
       const v = validateLogo(ct, bytes.byteLength);
       if (!v.ok) return json({ ok: false, error: v.error }, 400, request);
       await bkt.put(logoKey(orgId, v.ext), bytes, { httpMetadata: { contentType: ct } });
-      const res = await putBranding(env, orgId, { clinicName: url.searchParams.get("name") || "", ext: v.ext, updatedBy: actor.id || "" });
+      const res = await putBranding(env, orgId, { clinicName: name, ext: v.ext, updatedBy: actor.id || "" });
+      if (name) await ORG.updateOrg(env, orgId, { name: name }, actor.id);
       return json(Object.assign({ ok: true }, res), 200, request);
     }
 
@@ -5492,6 +5581,8 @@ export async function onRequest(context) {
         order: CAPS.ORDER_CREATE, orders: CAPS.ORDER_READ, queue: CAPS.BILLING_VIEW,
         tariff: method === "POST" ? CAPS.STAFF_ADMIN : CAPS.BILLING_VIEW,
         invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE,
+        // Day-end shift report: read-only takings by tender for the cashier closing the drawer.
+        shift: CAPS.BILLING_VIEW,
         // Pharmacy station: read what is owed, and hand it over. Separate caps from billing on purpose -
         // the person releasing medicines is never the person taking the money.
         pharmacy: CAPS.ORDER_READ, dispense: CAPS.ORDER_DISPENSE
@@ -5503,9 +5594,49 @@ export async function onRequest(context) {
       if (sub === "patient" && method === "POST") { const org = await ORG.getOrg(env, bOrg); return json(await BILL.registerPatient(env, bOrg, (org && org.code) || bOrg, { name: body.name, mobile: body.mobile, sex: body.sex, ageYears: body.ageYears, actor: aid }), 200, request); }
       if (sub === "patient" && method === "GET") { const p = await BILL.getPatient(env, bOrg, url.searchParams.get("id") || ""); return json(p ? Object.assign({ ok: true }, p) : { ok: false, error: "not_found" }, 200, request); }
       if (sub === "order" && method === "POST") return json(await BILL.createOrder(env, bOrg, body, aid), 200, request);
-      if (sub === "orders" && method === "GET") return json({ ok: true, orders: await BILL.ordersForPatient(env, bOrg, url.searchParams.get("patientId") || "", url.searchParams.get("status") || "") }, 200, request);
-      if (sub === "queue" && method === "GET") return json({ ok: true, ...(await BILL.billingQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
-      if (sub === "tariff" && method === "GET") return json({ ok: true, items: await BILL.listTariff(env, bOrg) }, 200, request);
+      if (sub === "orders" && method === "GET") {
+        const patientId = url.searchParams.get("patientId") || "";
+        const status = url.searchParams.get("status") || "";
+        const orders = await BILL.ordersForPatient(env, bOrg, patientId, status).catch(() => []);
+        return json({ ok: true, orders }, 200, request);
+      }
+      if (sub === "tariff" && method === "GET") {
+        const items = await BILL.listTariff(env, bOrg).catch(() => []);
+        return json({ ok: true, items }, 200, request);
+      }
+      if (sub === "queue" && method === "GET") {
+        const bQ = await BILL.billingQueue(env, bOrg);
+        const org = await ORG.getOrg(env, bOrg).catch(() => null);
+        let opdPatients = [];
+        if (org) {
+          try {
+            const bd = await boardForOrg(env, org, url.searchParams.get("date") || "");
+            const seen = new Set();
+            const addTkt = (t) => {
+              if (!t || seen.has(t.id)) return;
+              seen.add(t.id);
+              const tMrn = t.mrn || t.ghisPatientId || "";
+              const patientOrders = (bQ.orders || []).filter((o) => o.patientId === t.id || (tMrn && o.patientId === tMrn));
+              const unbilledTot = patientOrders.reduce((s, o) => s + (o.unitPrice || 0) * (o.qty || 1), 0);
+              opdPatients.push({
+                id: t.id,
+                mrn: tMrn,
+                name: t.name || "Patient",
+                mobile: t.mobile || "",
+                token: t.token || "",
+                status: t.status || "registered",
+                department: t.department || "",
+                roomId: t.roomId || "",
+                unbilledCount: patientOrders.length,
+                unbilledTotal: unbilledTot
+              });
+            };
+            (bd.pool || []).forEach(addTkt);
+            (bd.rooms || []).forEach((rm) => (rm.tickets || []).forEach(addTkt));
+          } catch (e) {}
+        }
+        return json({ ok: true, ...bQ, opdPatients, cap: BILL.QUEUE_CAP }, 200, request);
+      }
       if (sub === "tariff" && method === "POST") return json(await BILL.upsertTariff(env, bOrg, body, aid), 200, request);
       if (sub === "invoice" && method === "POST") {
         /* BNSS 2023 s.397 (legal review D.4.2): the OPD clinic invoice is locked like the ward invoice while a rape, acid
@@ -5527,9 +5658,13 @@ export async function onRequest(context) {
         return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
       }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
-      if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
+      if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid, body.split), 200, request);
+      if (sub === "shift" && method === "GET") {
+        const rep = await BILL.shiftReport(env, bOrg).catch((e) => { if (e && e.status === 507) throw e; return null; });
+        return json(rep ? Object.assign({ ok: true }, rep) : { ok: false, error: "shift_unreadable", message: "Today's takings could not be read. Do not read this as zero collected." }, 200, request);
+      }
       if (sub === "pharmacy" && method === "GET") return json({ ok: true, ...(await BILL.pharmacyQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
-      if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid), 200, request);
+      if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid, { patientId: body.patientId || "", encounterId: body.encounterId || "" }), 200, request);
       return json({ ok: false, error: "not_found" }, 404, request);
     }
 
@@ -5564,8 +5699,14 @@ export async function onRequest(context) {
       // re-checks every mutation; this only tells the UI what to offer.
       if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; orgOwner = !!(az.ok && az.owner); }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
-      let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
+      let orgCode = "", orgName = ""; const o = orgId ? await ORG.getOrg(env, orgId) : null;
+      if (o) { orgCode = o.code || ""; orgName = o.name || ""; }
+      let brand = null;
+      try { if (orgId) brand = await brandingFor(env, orgId); } catch (e) {}
+      const effectiveOrgName = (brand && brand.clinicName) || orgName || "";
+      const hasLogo = !!(brand && brand.ext);
+      const doctorName = (o && o.doctorName) || (actor.name && actor.name !== "Doctor" ? actor.name : "");
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, orgName: effectiveOrgName, hasLogo: hasLogo, mode: (o && o.mode) || "native", smdId: smdId, name: actor.name, doctorName: doctorName, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
         // UI hints for Remove hospital only; POST /org/delete re-checks both.
         ...(orgOwner ? { orgOwner: true } : {}), ...(actor.isOwner === true ? { platformOwner: true } : {}), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
     }
@@ -6132,14 +6273,25 @@ export async function onRequest(context) {
     // added the same way any tariff item is (bill/tariff POST). ?kind=medication added 2026-09-06
     // for native prescribing; investigation stays the default (unchanged for every existing caller).
     if (method === "GET" && seg === "inv-catalog") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
-      await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
-      const orgId = s.orgId || s.hospitalId;
+      // MaikOS unified catalog: phone app and web share the org's ONE tariff catalog (q_tariff).
+      // The org resolves from the queue session when opened from a ticket, or directly from
+      // ?orgId= for an on-device EMR with no queue session in scope. Rich rows carry what the
+      // doctor's picker shows: formulation, unit price and stock — never gated behind the billing flag.
+      const sessionId = url.searchParams.get("sessionId");
+      let orgId = url.searchParams.get("orgId") || "";
+      if (sessionId) {
+        const { s, err } = await loadSessionFor(env, sessionId, actor, request); if (err) return err;
+        await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+        orgId = orgId || s.orgId || s.hospitalId;
+      } else {
+        if (!orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        await requireOrgOrGlobal(env, actor, orgId, CAPS.EMR_TREAT);
+      }
       const q = String(url.searchParams.get("q") || "").trim().toLowerCase();
       const wantKind = url.searchParams.get("kind") === "medication" ? "medication" : "investigation";
       let rows = (await BILL.listTariff(env, orgId)).filter((t) => t.kind === wantKind);
       if (q) rows = rows.filter((t) => (t.name || "").toLowerCase().indexOf(q) > -1 || (t.code || "").toLowerCase().indexOf(q) > -1);
-      return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "" })) }, 200, request);
+      return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "", kind: t.kind, pricePaise: (t.pricePaise != null ? t.pricePaise : (t.price || 0)), dosageForm: t.dosageForm || "", stock: t.stock != null ? t.stock : null, unit: t.unit || "" })) }, 200, request);
     }
     // Native prescribing's advisory-only CDSS pre-check (WardSynQ-native hospitals). NEVER gates -
     // see functions/_wardsynq/rx-safety.js's header (unapproved clinical content, per
@@ -6859,6 +7011,13 @@ export async function onRequest(context) {
         await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : isImmunization ? CAPS.EMR_IMMUNISE : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        // MaikOS vitals sync: the nurse's structured vitals ride on the ticket itself, so the
+        // doctor's EMR (queue.js -> opd-emr.js "Initial Assessment") prefills BP/Pulse/Temp/SpO2/
+        // RR/Weight/GRBS without re-parsing timeline text. The ticket mirror is best-effort and
+        // never fails the save; the same payload also travels as the timeline entry's structured
+        // data (appendTimeline's `data`), so a reader can prefer either source.
+        const vitalsData = (isVitals && body.vitals && typeof body.vitals === "object") ? { vitals: body.vitals } : null;
+        if (vitalsData) { try { await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { vitals: body.vitals, updatedAt: Date.now() })]); } catch (e) {} }
         if (isImmunization) {
           // The CODE is validated against the IG's value set server-side. A client-supplied code is a
           // claim, and an unrecognised one would put an invented SNOMED concept into a patient's PHR - so
@@ -6932,14 +7091,17 @@ export async function onRequest(context) {
             if (isAssessment && !isSignOff && wsqMig) {
               try { await recordAllergiesFromAssessment(request, env, { migration: mig, ticket: t, vals: body.vals, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), rulePack: getRulePack() }); } catch (e) {}
             }
-            const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+            const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData || undefined);
             return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
           }
           // shadow: the timeline is still what the ward reads; the record write reports, never throws.
-          const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+          const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData || undefined);
           const rec = await migrator(request, env, ctx);
           return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
         }
+        // Off (no migration): the original single line, unchanged for every pre-existing payload.
+        // Only a vitals write carrying structured values takes the data-carrying variant above it.
+        if (vitalsData) return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData)), 200, request);
         return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
       }
       // A mirror of a READ, not of a write (migrate-results.js's header explains why this is its own

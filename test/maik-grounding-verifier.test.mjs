@@ -105,7 +105,7 @@ function loadLocal({ replies, kb = true }) {
   const win = {
     Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
     SMD_MAIK_RAG: R, SMD_MAIK_GROUND: G, SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(book) },
-    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true }, "medmo-4b": { label: "MAiK Cortex", nCtx: 4096, nPredict: 768, noThink: true } },
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true }, "maik-mxcore": { label: "MAiK MxCore", nCtx: 4096, nPredict: 768 } },
       caps: (id) => ({ id, kb: kb }), pathFor: async () => "/tmp/x.gguf", totalBytes: () => 1e9 },
     localStorage: { getItem: () => null, setItem() {}, removeItem() {} }
   };
@@ -118,7 +118,7 @@ test("answer(): a non-Lite pack with CAPS.kb is grounded, its paraphrase is kept
   // passage never mentions. NOTE a reply saying "1 g bd" here would be a CONTRADICTION of the 500 mg
   // passage and rightly end in the reference-passage fallback; that is the next test, not this one.
   const { L, calls } = loadLocal({ replies: ["Amoxicillin 500 mg PO tid for a week is first-line.\n- Add azithromycin 500 mg for atypicals.\nVerify against local protocol."] });
-  const r = await L.answer({ question: "Treatment of pneumonia?" }, { pack: "medmo-4b" }, null);
+  const r = await L.answer({ question: "Treatment of pneumonia?" }, { pack: "maik-mxcore" }, null);
   assert.match(calls.generate[0].prompt, /Reference material from the StewardMD Knowledge Base/);
   assert.equal(r.grounded, true);
   assert.equal(r.grounding.verdict, "partial");
@@ -142,7 +142,7 @@ test("answer(): nothing supported -> ONE constrained regeneration, then the refe
 
 test("answer(): a pack without the kb capability is not grounded at all (no retrieval, no source line)", async () => {
   const { L, calls } = loadLocal({ replies: ["Anything at all."], kb: false });
-  const r = await L.answer({ question: "Treatment of pneumonia?" }, { pack: "medmo-4b" }, null);
+  const r = await L.answer({ question: "Treatment of pneumonia?" }, { pack: "maik-mxcore" }, null);
   assert.doesNotMatch(calls.generate[0].prompt, /Reference material/);
   assert.equal(r.grounded, false);
   assert.doesNotMatch(r.text, /Source: StewardMD/);

@@ -425,11 +425,21 @@
     if (!id) { toast("MaiK Ask does not have a question pathway for this complaint yet."); return; }
     var pathway = root.SMD_PATHWAYS.get(id);
     var known = root.SMD_PATHWAYS.knownFrom(opts.known || {}, pathway);
-    var detected = opts.language || (root.SMD_MAIK_REASON.detectLanguage(complaint || "").primary) || "";
+    // QA BUG-008: detection keeps the code-switch. A Telugu-English complaint ("nenu 3 days nundi fever
+    // tho unnanu") used to collapse to plain "telugu", so the questions came back in textbook Telugu
+    // and the English half of what the patient said was dropped. The provider now receives the
+    // mixed code (te-en / hi-en), which both the local and the server prompt already understand.
+    var det = root.SMD_MAIK_REASON.detectLanguage(complaint || "") || {};
+    var detected = opts.language || det.primary || "";
+    var detCode = ({ telugu: "te", hindi: "hi", english: "en" })[det.primary] || "";
+    if (detCode && det.style === "mixed" && detCode !== "en") detCode += "-en";
+    if (opts.language) detCode = String(opts.language);
     // Doctor's explicit pick wins over detection, and is remembered for the next consult.
     var sel = { lang: prefGet("smd_maik_ask_lang", "auto"), speak: prefGet("smd_maik_ask_voice", "1") !== "0" };
-    function askLangName() { return sel.lang === "auto" ? detected : (LANG_NAME[sel.lang] || detected); }
-    function askLangCode() { return sel.lang === "auto" ? "auto" : sel.lang; }
+    function askLangName() { return sel.lang === "auto" ? (detCode || detected) : (sel.lang || detected); }
+    // ASR takes a base language only ("te", "hi", "en") or "auto"; the "-en" mix marker is for the
+    // question generator, not the recogniser.
+    function askLangCode() { return sel.lang === "auto" ? (detCode ? detCode.split("-")[0] : "auto") : sel.lang; }
 
     var el = overlay(); el.classList.add("on");
     el.innerHTML = renderConfirm(pathway, sel);

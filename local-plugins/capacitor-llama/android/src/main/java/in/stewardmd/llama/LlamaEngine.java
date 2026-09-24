@@ -24,6 +24,11 @@ public final class LlamaEngine {
     private long model = 0;
     private long ctx = 0;
     private String loadedPath = null;
+    /** Speculative-decoding draft (perf plan #6): 0 when the pack has none, it is not downloaded, or
+     *  its vocabulary did not match the model's. */
+    private long draftModel = 0;
+    private long draftCtx = 0;
+    private String loadedDraftPath = null;
     private volatile boolean generating = false;
 
     public boolean isAvailable() {
@@ -50,12 +55,24 @@ public final class LlamaEngine {
 
     /** Full form: nBatch/nUbatch/nThreadsBatch drive PREFILL cost (0 = library default). */
     public void load(String path, int nCtx, int nThreads, int nBatch, int nUbatch, int nThreadsBatch) throws LlamaException {
+        load(path, nCtx, nThreads, nBatch, nUbatch, nThreadsBatch, true, true, null);
+    }
+
+    /**
+     * Full form (perf plan, 2026-09-21). {@code kvQ8}/{@code flashAttn} select a q8_0 KV cache with
+     * flash attention (the JNI falls back to the plain context if the device refuses). {@code draftPath}
+     * names a same-tokeniser draft for speculative decoding; a missing or incompatible draft is skipped.
+     */
+    public void load(String path, int nCtx, int nThreads, int nBatch, int nUbatch, int nThreadsBatch,
+                     boolean kvQ8, boolean flashAttn, String draftPath) throws LlamaException {
         if (!LlamaNative.isAvailable()) throw new LlamaException(LlamaErr.UNSUPPORTED_ARCHITECTURE, "libllama_jni.so missing for this ABI");
         File f = new File(path);
         if (!f.exists() || f.length() == 0) throw new LlamaException(LlamaErr.MODEL_MISSING, "no model at the given path");
+        String wantDraft = (draftPath != null && !draftPath.isEmpty() && new File(draftPath).exists()) ? draftPath : null;
 
         synchronized (lock) {
-            if (model != 0 && path.equals(loadedPath) && ctx != 0) return;   // already warm
+            if (model != 0 && path.equals(loadedPath) && ctx != 0
+                && ((wantDraft == null && loadedDraftPath == null) || (wantDraft != null && wantDraft.equals(loadedDraftPath)))) return;   // already warm
             releaseLocked();
             LlamaNative.initBackend();
 
@@ -64,15 +81,32 @@ public final class LlamaEngine {
             if (model == 0) throw new LlamaException(LlamaErr.MODEL_CORRUPTED, "model failed to load");
 
             ctx = LlamaNative.newContext(model, nCtx > 0 ? nCtx : DEFAULT_N_CTX, Math.max(1, nThreads),
-                                         nBatch, nUbatch, nThreadsBatch);
+                                         nBatch, nUbatch, nThreadsBatch, kvQ8, flashAttn);
             if (ctx == 0) {
                 LlamaNative.freeModel(model); model = 0;
                 throw new LlamaException(LlamaErr.LOW_MEMORY, "context allocation failed (n_ctx too large for this device?)");
             }
             loadedPath = path;
-            Log.i(TAG, "model loaded, n_ctx=" + (nCtx > 0 ? nCtx : DEFAULT_N_CTX) + " threads=" + nThreads);
+
+            if (wantDraft != null) {
+                long dm = LlamaNative.loadModel(wantDraft, 0);
+                if (dm != 0 && LlamaNative.vocabCompatible(model, dm)) {
+                    long dc = LlamaNative.newContext(dm, nCtx > 0 ? nCtx : DEFAULT_N_CTX, Math.max(1, nThreads),
+                                                     nBatch, nUbatch, nThreadsBatch, kvQ8, flashAttn);
+                    if (dc != 0) { draftModel = dm; draftCtx = dc; loadedDraftPath = wantDraft; }
+                    else { LlamaNative.freeModel(dm); Log.i(TAG, "draft skipped: its context failed"); }
+                } else {
+                    if (dm != 0) LlamaNative.freeModel(dm);
+                    Log.i(TAG, "draft skipped: not loadable or vocabulary mismatch");
+                }
+            }
+            Log.i(TAG, "model loaded, n_ctx=" + (nCtx > 0 ? nCtx : DEFAULT_N_CTX) + " threads=" + nThreads
+                + " kvQ8=" + kvQ8 + " flashAttn=" + flashAttn + " draft=" + (draftCtx != 0));
         }
     }
+
+    /** The last generate()'s measurements as JSON, or null. */
+    public String lastStats() { return LlamaNative.isAvailable() ? LlamaNative.lastStats() : null; }
 
     /**
      * Generate an answer. Applies the GGUF's own chat template when it has one, so we do not
@@ -106,7 +140,7 @@ public final class LlamaEngine {
              * turn, actually pre-empts the model's own thinking. */
             if (prefillEmptyThink) prompt = prompt + "<think>\n\n</think>\n\n";
             String out = LlamaNative.generate(c, m, prompt,
-                    nPredict > 0 ? nPredict : DEFAULT_N_PREDICT, temp, seed, sink);
+                    nPredict > 0 ? nPredict : DEFAULT_N_PREDICT, temp, seed, draftCtx, draftModel, sink);
             if (out == null) throw new LlamaException(LlamaErr.GENERATION_FAILURE, "generation returned null");
             return out;
         } finally {
@@ -170,6 +204,9 @@ public final class LlamaEngine {
     private void releaseLocked() {
         if (ctx != 0) { LlamaNative.freeContext(ctx); ctx = 0; }
         if (model != 0) { LlamaNative.freeModel(model); model = 0; }
+        if (draftCtx != 0) { LlamaNative.freeContext(draftCtx); draftCtx = 0; }
+        if (draftModel != 0) { LlamaNative.freeModel(draftModel); draftModel = 0; }
         loadedPath = null;
+        loadedDraftPath = null;
     }
 }

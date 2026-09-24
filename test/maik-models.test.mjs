@@ -88,14 +88,9 @@ function fakeModel(n) {
   ok("primary pack exact byte count", M.totalBytes("maik-mxcore") === 2489894976);
   ok("primary pack sizeLabel", M.sizeLabel("maik-mxcore") === "2.49 GB");
   ok("third tier is MAiK Horizon", M.PACKS["maik-horizon"].label === "MAiK Horizon");
-  // MedMO-4B ships in the offline model list as MAiK Cortex (owner, 2026-09-18), RAG-connected:
-  // CAPS.kb is what maik-local.ragEligible() reads, so the pack is checked against the KB like Lite.
-  ok("MedMO-4B ships as MAiK Cortex", M.PACKS["medmo-4b"].label === "MAiK Cortex");
-  ok("Cortex keeps its honest provenance in `actual`", /MedMO-4B \(MBZUAI/.test(M.PACKS["medmo-4b"].actual));
-  ok("Cortex is RAG-connected (CAPS.kb)", M.caps("medmo-4b").kb === true);
-  ok("Cortex is text-only (no vision file)", !M.PACKS["medmo-4b"].vision);
+  ok("MAiK Cortex (MedMO-4B) was removed from the offline list", !M.PACKS["medmo-4b"] && !M.caps("medmo-4b"));
   // maik-lite (MedPsy 1.7B) is tier 0: the entry pack, smallest download, offered first.
-  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-lite,bonsai-ternary-8b,bonsai-8b,maik-mxcore,maik-neural,medmo-4b,maik-horizon,maik-apex,bonsai-27b,bonsai2-27b");
+  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-lite,bonsai-ternary-8b,bonsai-8b,maik-mxcore,maik-neural,maik-horizon,maik-apex,bonsai-27b,bonsai2-27b");
   ok("MAiK Neural (Q5) present with the exact size", M.totalBytes("maik-neural") === 2829699136);
   ok("Neural still fits the 8 GB iPhone budget", M.totalBytes("maik-neural") < 3.0e9);
   ok("Neural sha256 is explicitly null (unverified), not a guess", M.PACKS["maik-neural"].files[0].sha256 === null);
@@ -528,7 +523,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   const p = M.PACKS["maik-apex"];
   ok("Apex exists as a fourth tier", !!p && p.tier === 4);
   ok("Apex sits after the MedGemma tiers, before only the 27B Bonsai",
-     M.packIds().join(",") === "maik-lite,bonsai-ternary-8b,bonsai-8b,maik-mxcore,maik-neural,medmo-4b,maik-horizon,maik-apex,bonsai-27b,bonsai2-27b");
+     M.packIds().join(",") === "maik-lite,bonsai-ternary-8b,bonsai-8b,maik-mxcore,maik-neural,maik-horizon,maik-apex,bonsai-27b,bonsai2-27b");
   ok("Apex byte count is the exact verified value", M.totalBytes("maik-apex") === 3156921120);
   ok("Apex carries a real sha256, not null",
      /^[0-9a-f]{64}$/.test(p.files[0].sha256 || "") &&
@@ -696,6 +691,19 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   M.ensure("maik-mxcore").catch(() => {});
   await new Promise((r) => setTimeout(r, 60));
   ok("a LIVE transfer is re-attached to, never duplicated", calls.start === 0);
+}
+
+{
+  // Speculative-decoding drafts (perf plan #6, 2026-09-21): a same-tokeniser sub-pack "<id>#draft".
+  const M = (await import("node:module")).createRequire(import.meta.url)("../maik-models.js");
+  ok("MedGemma packs carry the Gemma 3 270M draft", M.hasDraft("maik-mxcore") && M.hasDraft("maik-neural"));
+  ok("Qwen3-family packs carry the Qwen3 0.6B draft", ["maik-apex", "bonsai-ternary-8b", "bonsai-8b"].every((id) => M.hasDraft(id)));
+  ok("MaiK Lite and the 27B Bonsai packs carry none", !M.hasDraft("maik-lite") && !M.hasDraft("bonsai2-27b") && !M.hasDraft("bonsai-27b"));
+  const did = M.draftIdOf("maik-mxcore");
+  ok("draft id is the base id plus #draft and maps back", did === "maik-mxcore#draft" && M.isDraftId(did) && M.baseIdOf(did) === "maik-mxcore");
+  ok("the draft sub-pack resolves to the draft file's exact size", M.totalBytes(did) === 291546144 && M.totalBytes(M.draftIdOf("maik-apex")) === 639446688);
+  ok("caps() reports draftBytes", M.caps("maik-mxcore").draftBytes === 291546144 && M.caps("maik-lite").draftBytes === 0);
+  ok("a draft id is neither a vision id nor a base pack", !M.isVisionId(did) && M.PACKS[did] === undefined);
 }
 
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);

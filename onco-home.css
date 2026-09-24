@@ -194,6 +194,10 @@ body.dark .ctc-grow, body.dark .stg-trow, body.dark .stg-grow, body.dark .rec-ou
    instead of closing, so dismissing the sub-view returns here rather than to the app home. */
 .oh-overlay.oh-bg { z-index: 865; }
 .oh-overlay.on { display: flex; animation: ohIn .28s cubic-bezier(.2,.7,.2,1); }
+/* QA BUG-017: Staging opens from inside the pathway navigator (.ot-overlay, z-index 14000). At the
+   shared 875 it rendered BEHIND the navigator, so the Staging tab looked dead. Staging is a leaf
+   overlay, so it sits above the navigator unconditionally. */
+#smdOncoStaging.oh-overlay { z-index: 14100; }
 @keyframes ohIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 body.oh-lock { overflow: hidden; }
 

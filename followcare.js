@@ -684,6 +684,10 @@
       body.appendChild(field("Max simultaneous calls", conc));
       var attempts = numIn(v.maxAttempts == null ? 2 : v.maxAttempts, 1, 5);
       body.appendChild(field("Retry attempts if unanswered (within the call windows)", attempts));
+      // QA BUG-009: a fixed, explicitly configured test destination so "Place test call" never dials
+      // whatever number happens to be in a box.
+      var tDest = h("input", { type: "tel", inputmode: "numeric", value: v.testPhone || "", placeholder: "10-digit test handset number" });
+      body.appendChild(field("Test-call destination (a handset you control; used by Place test call)", tDest));
       body.appendChild(h("div", { style: "margin:2px 0 14px;color:var(--slate,#5a7184);font-size:12px", text: "Maximum 1 call per patient per day (fixed for safety)." }));
 
       body.appendChild(h("div", { style: "margin:12px 0 6px;font-weight:800;font-size:15px;color:#0e6e63", text: "Emergency / Ambulance" }));
@@ -715,7 +719,7 @@
         err.innerHTML = ""; save.disabled = true; save.textContent = "Saving…";
         var payload = {
           name: hName.value,
-          voice: { enabled: vEnable.checked, noResponseDays: +ndays.value, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value, maxAttempts: +attempts.value },
+          voice: { enabled: vEnable.checked, noResponseDays: +ndays.value, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value, maxAttempts: +attempts.value, testPhone: String(tDest.value || "").replace(/[^\d]/g, "") },
           ambulance: { enabled: aEnable.checked, contactName: aName.value, phone: aPhone.value, method: aMethod.value },
           escalation: { enabled: eEnable.checked, contactName: eName.value, phone: ePhone.value, method: eMethod.value }
         };
@@ -736,21 +740,34 @@
        * the access control. */
       body.appendChild(h("div", { style: "margin:18px 0 6px;font-weight:800;font-size:15px;color:#0e6e63", text: "Test call" }));
       body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px",
-        text: "Places a real AI follow-up call to the number below, using a test episode discharged 3 days ago. Use your own number." }));
-      var tPhone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Your mobile number" });
+        text: "Places a real AI follow-up call using a test episode discharged 3 days ago. It dials the saved test-call destination above. Calling any other number (including your own) needs the explicit choice below." }));
+      /* QA BUG-009: the destination is the SAVED test number by default. Typing a different number
+       * (own handset included) is a deliberate, visible choice, never the default. */
+      var savedDest = String(v.testPhone || "");
+      var tDestLine = h("div", { style: "margin:0 0 8px;font-size:13px;font-weight:700;color:var(--ink,#14202b)",
+        text: savedDest ? ("Will call: " + savedDest.replace(/(\d{2})(\d{3})(\d{5})$/, "$1 $2 $3") + " (saved test destination)") : "No test destination saved yet. Save one above, or choose a number for this call below." });
+      body.appendChild(tDestLine);
+      var tOther = h("input", { type: "checkbox" });
+      body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:8px" }, [tOther, document.createTextNode("Call a different number for this test (for example my own handset)")]));
+      var tPhone = h("input", { type: "tel", inputmode: "numeric", placeholder: "10-digit mobile number for this test only" });
+      var tPhoneField = field("Number for this test call", tPhone);
+      tPhoneField.style.display = "none";
+      tOther.addEventListener("change", function () { tPhoneField.style.display = tOther.checked ? "" : "none"; if (tOther.checked) { try { tPhone.focus(); } catch (e) {} } });
       var tPath = h("select", {}, [
         h("option", { value: "heart_failure", text: "Heart failure" }),
         h("option", { value: "copd", text: "COPD" }),
         h("option", { value: "post_op", text: "Post-op" })
       ]);
-      body.appendChild(field("Call this number", tPhone));
+      body.appendChild(tPhoneField);
       body.appendChild(field("Pathway", tPath));
       var tErr = h("div", { role: "alert", tabindex: "-1" });
       var tBtn = h("button", { "class": "fc-btn sec", style: "margin-top:6px", text: "Place test call" });
       tBtn.addEventListener("click", function () {
         tErr.innerHTML = "";
-        var ph = String(tPhone.value || "").replace(/[^\d]/g, "");
+        var ph = tOther.checked ? String(tPhone.value || "").replace(/[^\d]/g, "") : savedDest;
+        if (!ph) { tErr.appendChild(h("div", { "class": "fc-err", text: "Save a test-call destination first, or tick the box to choose a number for this call." })); return; }
         if (ph.length < 10) { tErr.appendChild(h("div", { "class": "fc-err", text: "Enter a 10-digit mobile number." })); return; }
+        if (!confirm("Place a real AI test call to " + ph + " now?")) return;
         tBtn.disabled = true; tBtn.textContent = "Calling…";
         API.voiceTest(ph, tPath.value, "Test Patient").then(function (r) {
           tBtn.disabled = false; tBtn.textContent = "Place test call";

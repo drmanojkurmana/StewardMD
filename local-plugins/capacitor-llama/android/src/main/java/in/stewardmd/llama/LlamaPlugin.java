@@ -175,13 +175,19 @@ public class LlamaPlugin extends Plugin {
         final int nBatch = call.getInt("nBatch", 512);
         final int nUbatch = call.getInt("nUbatch", 512);
         final int nThreadsBatch = call.getInt("nThreadsBatch", Runtime.getRuntime().availableProcessors());
+        // Perf plan (2026-09-21): q8_0 KV + flash attention (default on), and the optional
+        // speculative-decoding draft. See LlamaEngine.load.
+        final boolean kvQ8 = Boolean.TRUE.equals(call.getBoolean("kvQ8", true));
+        final boolean flashAttn = Boolean.TRUE.equals(call.getBoolean("flashAttn", true));
+        final String draftPath = call.getString("draftPath", "");
         android.util.Log.i("LlamaPlugin", "load: queued " + path);
         worker.execute(() -> {
             try {
-                engine.load(path, nCtx, nThreads, nBatch, nUbatch, nThreadsBatch);
+                engine.load(path, nCtx, nThreads, nBatch, nUbatch, nThreadsBatch, kvQ8, flashAttn, draftPath);
                 android.util.Log.i("LlamaPlugin", "load: resolving");
                 call.resolve(new JSObject().put("loaded", true).put("nCtx", nCtx).put("nThreads", nThreads)
-                    .put("nBatch", nBatch).put("nUbatch", nUbatch).put("nThreadsBatch", nThreadsBatch));
+                    .put("nBatch", nBatch).put("nUbatch", nUbatch).put("nThreadsBatch", nThreadsBatch)
+                    .put("kvQ8", kvQ8).put("flashAttn", flashAttn).put("draft", draftPath != null && !draftPath.isEmpty()));
             } catch (LlamaException e) {
                 emitError(e);
                 call.reject(e.detail, e.err.code);
@@ -303,8 +309,10 @@ public class LlamaPlugin extends Plugin {
                     : null;
                 String text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, sink);
                 long ms = System.currentTimeMillis() - t0;
-                call.resolve(new JSObject().put("text", text).put("ms", ms)
-                    .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens()));
+                JSObject out = new JSObject().put("text", text).put("ms", ms)
+                    .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens());
+                try { String s = engine.lastStats(); if (s != null) out.put("perf", new JSObject(s)); } catch (Throwable ignore) {}
+                call.resolve(out);
             } catch (LlamaException e) {
                 emitError(e);
                 call.reject(e.detail, e.err.code);

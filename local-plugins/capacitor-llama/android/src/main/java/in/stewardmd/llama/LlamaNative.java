@@ -79,7 +79,14 @@ public final class LlamaNative {
      * dirty allocation that triggers jetsam on an 8 GB phone, and it scales with context.
      */
     public static native long newContext(long model, int nCtx, int nThreads,
-                                        int nBatch, int nUbatch, int nThreadsBatch);
+                                        int nBatch, int nUbatch, int nThreadsBatch,
+                                        boolean kvQ8, boolean flashAttn);
+
+    /** Same tokeniser (type, size, BOS, EOS)? Gate for using {@code b} as a speculative draft of {@code a}. */
+    public static native boolean vocabCompatible(long modelA, long modelB);
+
+    /** The last generate()'s measurements as a JSON object string (perf plan #8). */
+    public static native String lastStats();
 
     /** Milliseconds the last generate() spent in prefill (-1 if none yet). For tuning sweeps. */
     public static native long lastPrefillMs();
@@ -112,6 +119,8 @@ public final class LlamaNative {
         int nPredict,
         float temp,
         int seed,
+        long draftCtx,     // 0 = no speculative decoding
+        long draftModel,
         TokenSink sink
     );
 }

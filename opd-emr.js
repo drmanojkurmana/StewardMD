@@ -49,6 +49,10 @@
   }
   function patientHead(p, phone) {
     var line = '<span>' + ms("badge") + ' MR# <b class="mono">' + esc(p.displayId || p.mrn || "-") + "</b></span>";
+    // Universal Patient Identity: the canonical StewardID rides next to the MRN (hidden when it
+    // is the MRN itself, so pre-identity records render exactly as before).
+    if (p.stewardId && p.stewardId !== p.mrn) line += '<span>StewardID <b class="mono">' + esc(p.stewardId) + "</b></span>";
+    if (p.isFollowUp) line += '<span class="oe-tag">Follow-up</span>';
     if (phone) line += '<span>' + ms("call") + ' <span class="mono">' + esc(phone) + "</span></span>";
     return '<section class="oe-phead"><div class="oe-avatar">' + esc(initials(p.name)) + "</div>" +
       '<div class="oe-pmeta"><h2>' + esc(p.name || "Patient") + "</h2><div class=\"oe-prow\">" + line + "</div></div></section>";
@@ -127,9 +131,20 @@
   function resultList(kind, results) {
     if (!results || !results.length) return "";
     return '<div class="oe-results">' + results.map(function (r, i) {
-      return '<button class="oe-result" data-oe-act="' + kind + '-pick:' + i + '">' + ms("add") + "<span>" + esc(r.name) + "</span></button>";
+      // MaikOS unified catalog: a medication row carries its formulation, unit price and stock,
+      // so the doctor picks from the clinic's real pharmacy stock, not a bare name.
+      var extra = "";
+      if (kind === "med" && r) {
+        if (r.dosageForm) extra += ' <span class="oe-tag">' + esc(r.dosageForm) + "</span>";
+        var pp = (r.pricePaise != null && r.pricePaise !== "") ? r.pricePaise : r.price;
+        if (pp != null && pp !== "" && !isNaN(Number(pp)) && Number(pp) > 0) extra += ' <span class="oe-tag">' + esc(fmtPaise(pp)) + "</span>";
+        if (r.stock != null && r.stock !== "") extra += ' <span class="oe-tag">' + esc(Number(r.stock) > 0 ? ("stock " + r.stock) : "out of stock") + "</span>";
+      }
+      return '<button class="oe-result" data-oe-act="' + kind + '-pick:' + i + '">' + ms("add") + "<span>" + esc(r.name) + extra + "</span></button>";
     }).join("") + "</div>";
   }
+  // Paise (integer, the tariff store's unit) -> "₹4" / "₹4.50". Zero/blank prices stay unshown.
+  function fmtPaise(p) { var n = Math.round(Number(p) || 0); if (!(n > 0)) return ""; var rs = n / 100; return "₹" + (rs % 1 ? rs.toFixed(2) : String(rs)); }
   function fieldRow(label, inp, req, reqEmpty) { return '<label class="oe-field' + (reqEmpty ? " req-empty" : "") + '"><span>' + esc(label) + (req ? ' <b class="oe-req">*</b>' : "") + "</span>" + inp + "</label>"; }
   function textInp(name, value, ph) { return '<input class="oe-inp" data-oe-inp="' + esc(name) + '" value="' + esc(value || "") + '" placeholder="' + esc(ph || "") + '">'; }
 
@@ -1023,7 +1038,7 @@
       '</div>';
     }
 
-    if (!st.writeOn) return triageHtml + allergyHtml + '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
+    if (!st.writeOn) return triageHtml + allergyHtml + vitalsSyncBanner() + '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     // Ask MaiK: its own glowing AI banner (Option C), separate from the save actions.
     var maikCta = (maikOn() && G.DX) ?
       '<button class="oe-maik-cta' + (st.maikBusy ? " busy" : "") + '" data-oe-act="assess-maik"' + (st.maikBusy ? " disabled" : "") + ' aria-label="Ask MaiK">' +
@@ -1056,7 +1071,7 @@
         '<button class="oe-btn ghost" data-oe-act="rx-summary" title="View, print, or share patient consultation summary">' + ms("print") + "Summary</button>" +
         saveBtn + authBtn + "</div>";
     }
-    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + vitalsSyncBanner() + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
   // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
@@ -1550,16 +1565,19 @@
     ekg: "electrocardiogram", cxr: "chest x ray", usg: "ultrasound", lipid: "lipid profile", "pt inr": "prothrombin",
     inr: "prothrombin", bun: "blood urea", "urine r/e": "urine routine", "2d echo": "echocardiogram" };
   function expandQuery(kind, q) { if (kind !== "inv") return q; var k = String(q || "").toLowerCase().trim(); return INV_ABBREV[k] || q; }
-  // WardSynQ-native hospital: the org's own billing-tariff catalog (kind:"investigation" or
+  // MaikOS unified catalog: the org's own billing-tariff catalog (kind:"investigation" or
   // "medication" rows), Firebase-authed, via GET /api/queue/inv-catalog?kind=. Same catalog
   // mechanism for both - investigation ordering and prescribing both need SOMETHING to search that
-  // isn't GHIS's, which is meaningless for a hospital with no GHIS.
+  // isn't GHIS's, which is meaningless for a hospital with no GHIS. Every non-GHIS source
+  // (wardsynq, personal-clinic local/shared, decision-support) searches here; GHIS keeps its
+  // hospital lookup in runSearch below. The org travels as ?orgId= as well as ?sessionId= so an
+  // on-device record with no queue session in scope still resolves its own catalog.
   function runWardsynqCatalogSearch(kind, q) {
     var key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg", tariffKind = kind === "inv" ? "investigation" : "medication";
     st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
     fbTok().then(function (t) {
       if (!t) { st[key] = []; st[mkey] = "login"; renderSearchOut(kind); return; }
-      fetch(qBase() + "/api/queue/inv-catalog?kind=" + tariffKind + "&sessionId=" + encodeURIComponent(st.sessionId || "") + "&q=" + encodeURIComponent(q), { headers: { Authorization: "Bearer " + t } })
+      fetch(qBase() + "/api/queue/inv-catalog?kind=" + tariffKind + "&sessionId=" + encodeURIComponent(st.sessionId || "") + "&orgId=" + encodeURIComponent(st.orgId || st.hospitalId || "") + "&q=" + encodeURIComponent(q), { headers: { Authorization: "Bearer " + t } })
         .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
         .then(function (res) {
           if (!res.ok || (res.d && res.d.error)) { st[key] = []; st[mkey] = "error"; }
@@ -1573,8 +1591,10 @@
     var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg";
     if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; renderSearchOut(kind); return; }
     if (st.source === "wardsynq") { runWardsynqCatalogSearch(kind, q); return; }
-    // Search is a GHIS (hospital) lookup — needs a live Ward Sync session + is meaningless off-hospital.
-    if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; renderSearchOut(kind); return; }
+    // MaikOS unified catalog: every non-GHIS source (personal-clinic local/shared, decision-support
+    // with no store, any future native source) searches the org's own tariff catalog — the same
+    // ONE catalog the web Admin configures — instead of hitting the "not available" wall.
+    if (st.source && st.source !== "ghis") { runWardsynqCatalogSearch(kind, q); return; }
     st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
     var a = ghisAuth(), path = kind === "inv" ? "/inv-search" : "/drug-search", qsend = expandQuery(kind, q);
     fetch(a.base + path + "?q=" + encodeURIComponent(qsend), { headers: authHeaders(), credentials: "include" })
@@ -2558,6 +2578,70 @@
       })
       .catch(function () { if (st !== forPatient) return; st.loading = false; st.error = "Could not load the patient profile."; paint(); });
   }
+  // MaikOS vitals sync: fold the nurse's triage vitals into the assessment form (blank fields
+  // only - anything the doctor or the store already filled wins). Triage keys are opd.html's
+  // vitals object ({sbp,dbp,pulse,temp,spo2,rr,weight,grbs}); legacy aliases tolerated.
+  function applyTicketVitals(v) {
+    if (!v || typeof v !== "object") return false;
+    st.ticketVitals = v;
+    st.assessVals = st.assessVals || {};
+    var fills = { BP_SYS: v.sbp || v.bpSys || "", BP_dia: v.dbp || v.bpDia || "", Pulse: v.pulse || "",
+      Temp: v.temp || "", spo2: v.spo2 || "", respiratory: v.rr || "",
+      Weight: v.weight || v.weightKg || "", grbs: v.grbs || "" };
+    var changed = false, k;
+    for (k in fills) { if (fills.hasOwnProperty(k) && !st.assessVals[k] && fills[k]) { st.assessVals[k] = fills[k]; changed = true; } }
+    return changed;
+  }
+  // Last-resort parse of the nurse's one-line vitals text ("BP 128/82 mmHg · Pulse 78/min · …").
+  // Structured data.vitals is always preferred; this covers entries written before it existed.
+  function parseVitalsText(text) {
+    var t = String(text || ""), v = {}, m;
+    m = /BP\s*(\d+)\s*\/\s*(\d+)/i.exec(t); if (m) { v.sbp = m[1]; v.dbp = m[2]; }
+    m = /Pulse\s*([\d.]+)/i.exec(t); if (m) v.pulse = m[1];
+    m = /Temp\s*([\d.]+)/i.exec(t); if (m) v.temp = m[1];
+    m = /SpO2\s*([\d.]+)/i.exec(t); if (m) v.spo2 = m[1];
+    m = /\bRR\s*([\d.]+)/i.exec(t); if (m) v.rr = m[1];
+    m = /\bWt\s*([\d.]+)/i.exec(t); if (m) v.weight = m[1];
+    return v;
+  }
+  // No vitals rode on the ticket (older visit, or recorded after the queue list was read): read
+  // the visit timeline for the nurse's kind:"vitals" entry instead. Once per open; prefills blank
+  // fields and repaints so the banner + values appear without reopening the tab.
+  function prefillVitalsFromTimeline() {
+    if (!st.ticketId || !st.sessionId || st._vitalsPrefilled) return;
+    st._vitalsPrefilled = true;
+    var forPatient = st;
+    fbTok().then(function (t) {
+      if (st !== forPatient || !t) return;
+      return fetch(qBase() + "/api/queue/timeline?sessionId=" + encodeURIComponent(st.sessionId) + "&ticketId=" + encodeURIComponent(st.ticketId), { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (st !== forPatient || !d) return;
+          var tl = (d && d.timeline) || {};
+          var entries = tl.entries || (Array.isArray(tl) ? tl : []);
+          var found = null;
+          for (var i = entries.length - 1; i >= 0; i--) {
+            var e = entries[i] || {};
+            if (String(e.kind || "").toLowerCase() !== "vitals") continue;
+            found = (e.data && e.data.vitals) || parseVitalsText(e.text);
+            break;
+          }
+          if (found && (found.sbp || found.pulse || found.temp || found.spo2 || found.rr || found.weight || found.grbs)) {
+            if (applyTicketVitals(found) && st.assessLoaded) paint();
+            else if (st.tab === "assess") paint();
+          }
+        });
+    }).catch(function () {});
+  }
+  // Green "synced from triage" banner above the Initial Assessment when triage vitals exist.
+  function vitalsSyncBanner() {
+    var v = st.ticketVitals;
+    if (!v || typeof v !== "object") return "";
+    var sbp = v.sbp || v.bpSys || "", dbp = v.dbp || v.bpDia || "", pulse = v.pulse || "",
+      temp = v.temp || "", spo2 = v.spo2 || "";
+    if (!sbp && !dbp && !pulse && !temp && !spo2) return "";
+    return '<div class="oe-vitals-synced" style="background:#e8f5e9;border:1px solid #a5d6a7;color:#2e7d32;padding:8px 12px;border-radius:8px;margin-bottom:12px;font-size:13px;font-weight:500;">✓ Vitals synced from triage: BP ' + esc(sbp || "?") + '/' + esc(dbp || "?") + ' · Pulse ' + esc(pulse || "?") + ' · Temp ' + esc(temp || "?") + '°F · SpO2 ' + esc(spo2 || "?") + '%</div>';
+  }
   function loadAssessment() {
     // Personal/shared clinic: prefill from the on-device store (no GHIS fetch). WardSynQ-native
     // hospital: no on-device store either, and no GHIS draft to prefill from - a blank form for this
@@ -2565,6 +2649,7 @@
     if (usesLocal(st.source) || st.source === "wardsynq") {
       st.assessLoaded = true; st.assessLoading = false; st.assessErr = "";
       st.assessVals = (_localStore && _localStore.getConsult) ? (_localStore.getConsult(st.patient.mrn) || {}) : {};
+      if (st.ticketVitals) applyTicketVitals(st.ticketVitals); else prefillVitalsFromTimeline();
       paint(); return;
     }
     st.assessLoading = true; st.assessErr = ""; paint();
@@ -2578,6 +2663,8 @@
         if (!res.ok || res.d.error === "login_required") st.assessErr = "Connect Ward Sync (GHIS) first, then reopen this tab.";
         else {
           st.assessVals = buildAssessVals(res.d.fields || []);
+          // MaikOS vitals sync: triage vitals fill what the hospital draft left blank.
+          if (st.ticketVitals) applyTicketVitals(st.ticketVitals); else prefillVitalsFromTimeline();
           // Keep the record id this form was loaded under. The save re-activates the visit server-side,
           // but if that activation does not stick (session moved on, another tab, a slow GHIS) the form
           // comes back blank with doc_id 0 and the server REFUSES rather than write an orphan — which is
@@ -2671,6 +2758,7 @@
   }
   function postWardsynqAssessment(vals, okMsg, signOff, onOk) {
     var extra = {}; if (vals) extra.vals = vals; if (signOff) extra.signOff = true;
+    if (followUpLink()) extra.parentEncounterId = followUpLink();
     postWardsynqTimeline("assessment", assessSummary(st.assessVals), extra, okMsg, onOk);
   }
   // Advisory-only CDSS pre-check (functions/_wardsynq/rx-safety.js) - shown to the doctor BEFORE
@@ -2765,12 +2853,17 @@
       { kind: "medication", text: rxText,
         rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.sub || "", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } });
   }
+  // Follow-up linkage (Wave 3): the new note carries its parent encounter so the record can
+  // reference prior history instead of overwriting it. Absent on a fresh consult.
+  function followUpLink() { return (st.isFollowUp && st.parentEncounterId) ? st.parentEncounterId : ""; }
   function submitAssessment() {
     // An authorised record is locked in GHIS — a write would be rejected. Say so instead of failing.
     if (st.assessAuthorized) { toast("This assessment is authorised and locked in " + emrLabel() + ". It can no longer be edited."); return; }
     if (usesLocal(st.source)) {   // personal/shared clinic: save the consult on-device (Shared syncs via the store)
       if (!confirmed("Save this consult to " + emrLabel() + " on this phone?")) return;
-      try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload(st.assessVals || {}), st.assessVals || {}, { author: st.author || "" }); } catch (e) {}
+      var _meta = { author: st.author || "" };
+      if (followUpLink()) _meta.parentEncounterId = followUpLink();
+      try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload(st.assessVals || {}), st.assessVals || {}, _meta); } catch (e) {}
       st.savedConsult = true; loadTimeline(); toast("Saved to " + emrLabel() + " on this device."); paint(); return;
     }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
@@ -2780,7 +2873,9 @@
       postWardsynqAssessment(buildAssessPayload(st.assessVals || {}), "Saved to " + emrLabel() + ".", false, function () { st.savedConsult = true; paint(); });
       return;
     }
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
+    var _body = { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) };
+    if (followUpLink()) _body.parentEncounterId = followUpLink();
+    postWrite("/assessment-save", _body, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals), vals: buildAssessPayload(st.assessVals || {}) }, function () { st.savedConsult = true; paint(); });
   }
   // Clear every field and save the blank assessment to GHIS (deliberate wipe of the current Initial Assessment).
@@ -4130,7 +4225,10 @@
     if (!(G.SMD_SCRIBEICD && G.SMD_SCRIBEICD.suggest && G.SMD_ICD && G.SMD_ICD.localSearch)) return;
     var forPatient = st;
     try {
-      G.SMD_SCRIBEICD.suggest(text, { search: G.SMD_ICD.localSearch }).then(function (rows) {
+      // OpenMed disease tagger (openmed-ner.js, flag smd_openmed_disease, DEFAULT OFF, fails closed until
+      // its licence and checksums are pinned) splits a combined diagnosis into conditions for the search.
+      var N = G.SMD_OPENMED_NER, ext = (N && N.status && N.status("disease").ok) ? N.diseases : undefined;
+      G.SMD_SCRIBEICD.suggest(text, { search: G.SMD_ICD.localSearch, extract: ext }).then(function (rows) {
         if (st !== forPatient) return;
         var out = _icdCandidateRows(rows);
         if (!out.length) return;                               // nothing found: show nothing, never a guess
@@ -4433,11 +4531,17 @@
     st = freshState();
     // age/sex are carried ONLY when the caller actually has them (the scribe safety check reads them);
     // nothing infers them, so an absent age stays absent rather than becoming a guessed one.
-    st.patient = { name: opts.name || "", mrn: opts.patientId || "", displayId: opts.displayId || "", age: opts.age != null ? opts.age : "", sex: opts.sex || opts.gender || "" };   // displayId = human hospital id (SMD-XXX-nnn) for no-MRN clinic patients; mrn stays the storage key
+    st.patient = { name: opts.name || "", mrn: opts.patientId || "", stewardId: opts.stewardId || opts.patientId || "", displayId: opts.displayId || "", age: opts.age != null ? opts.age : "", sex: opts.sex || opts.gender || "" };   // displayId = human hospital id (SMD-XXX-nnn) for no-MRN clinic patients; mrn stays the storage key
+    // Follow-up consult (Wave 3): a NEW encounter linked to the prior one via parentEncounterId,
+    // so the new note references history instead of overwriting it.
+    st.isFollowUp = !!opts.isFollowUp;
+    st.parentEncounterId = opts.parentEncounterId || null;
+    if (st.isFollowUp) st.patient.isFollowUp = true;   // the header names it a follow-up consult
     st.recordNo = opts.recordNo || "";
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.visitId = opts.visitId || opts.episodeId || "";        // GHIS OPMR visit number — the Getopcard id for the history timeline
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
+    st.ticketVitals = opts.vitals || null; st.orgId = opts.orgId || "";   // MaikOS: triage vitals prefill the assessment; orgId scopes the unified catalog
     st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device | "wardsynq" (WardSynQ-native hospital)
     st.noStore = !!opts.noStore && !usesLocal(st.source);    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
     _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;   // "wardsynq" never gets a localStore - it writes to the WardSynQ record, not this device
@@ -4453,7 +4557,7 @@
     if (opts.oncoCycle) st.oncoCycle = opts.oncoCycle;         // test/Phase-5 seam: inject a cycle already in state (nurse view)
     if (opts.oncoView) st.oncoView = opts.oncoView;            // test/Phase-5 seam: open directly on the nurse view
     if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
-    if (st.noStore) { st.loading = false; st.tab = "assess"; st.assessLoaded = true; st.assessVals = {}; paint(); return; }   // blank form for Ask MaiK; skip GHIS/local load
+    if (st.noStore) { st.loading = false; st.tab = "assess"; st.assessLoaded = true; st.assessVals = {}; applyTicketVitals(st.ticketVitals); paint(); return; }   // blank form for Ask MaiK; skip GHIS/local load
     paint();
     loadProfile(opts);
     loadTimeline();                                           // visit timeline (queue-ticket encounters only)
@@ -4664,6 +4768,6 @@
   // support/debug screen) can read or wipe it without reaching into OPDEMR internals.
   G.SMD_SCRIBE_FEEDBACK = { list: scribeFeedbackRead, clear: function () { scribeFeedbackWrite([]); } };
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
 })();

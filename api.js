@@ -76,6 +76,18 @@
   }
   function clearBox() { if (box) box.innerHTML = ""; suppressLocalEmpty(false); }
 
+  function compClass(comp, fallback) {
+    if (fallback) return fallback;
+    try {
+      var g = typeof goldFor === "function" && goldFor(comp);   // bundled gold library first (1,530+ molecules)
+      if (g && g.cls) return g.cls;
+      var M = window.MEDDRUGS;
+      if (!M || !M.findByName) return "";
+      var d = M.findByName(comp) || (typeof clinicalKey === "function" && M.findByName(clinicalKey(comp)));
+      return (d && d.cls) || "";
+    } catch (e) { return ""; }
+  }
+
   function renderSearch(data) {
     if (!ensureBox()) return;
     var list = (data && data.results) || [];
@@ -83,7 +95,8 @@
     if (!list.length) { box.innerHTML = ""; return; }
     var html = '<div class="sp-section-label">Drugs · national database</div>';
     list.forEach(function (r) {
-      var sub = [r["class"], (r.brands != null ? r.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
+      var cls = compClass(r.composition, r["class"]);
+      var sub = [cls, (r.brands != null ? r.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
       html += '<div class="sp-card smddb-hit" data-comp="' + esc(r.composition) + '">' +
         '<div class="sp-card-top"><div><div class="sp-card-type">Generic - tap for brands &amp; prices</div><div class="sp-card-title">' + esc(r.composition) + '</div></div></div>' +
         '<div class="sp-card-desc">' + esc(sub) + '</div></div>';
@@ -428,7 +441,8 @@
     t2 = setTimeout(function () { if (q === q2) runList(q); }, DEBOUNCE);
   }
   function compCardHTML(x) {
-    var sub = [x["class"], (x.brands != null ? x.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
+    var cls = compClass(x.composition, x["class"]);
+    var sub = [cls, (x.brands != null ? x.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
     return '<button class="db-comp" data-comp="' + esc(x.composition) + '"><span class="db-comp-ic">' + dbIco("pills") + '</span><span class="db-comp-main"><span class="db-comp-name">' + esc(x.composition) + '</span><span class="db-comp-sub">' + esc(sub) + '</span></span><span class="db-chev">' + dbIco("chev") + '</span></button>';
   }
   // Brand hit: brand name (carries the dose, e.g. "Pantocid 40 Tablet") on top,
@@ -441,6 +455,34 @@
         '<span class="db-comp-sub"><b class="db-bh-comp">' + esc(bd.composition || "—") + '</b>' + (meta ? ' · ' + esc(meta) : '') + '</span>' +
       '</span><span class="db-chev">' + dbIco("chev") + '</span></button>';
   }
+  // Local/offline search fallback: find matching molecules from the local clinical index or brand aliases.
+  function localSearch(q) {
+    try { return (window.MEDDRUGS && MEDDRUGS.searchIndex) ? (MEDDRUGS.searchIndex(q) || []) : []; }
+    catch (e) { return []; }
+  }
+  function renderLocalHits(r, q, local) {
+    var brandHits = [], compHits = [], seen = {};
+    var ql = (q || "").toLowerCase();
+    local.forEach(function (x) {
+      var gen = x.generic || "";
+      if (!gen || seen[gen.toLowerCase()]) return;
+      seen[gen.toLowerCase()] = 1;
+      var matchedBrand = (x.brands || []).find(function (b) { return String(b).toLowerCase().indexOf(ql) >= 0; });
+      if (matchedBrand) {
+        brandHits.push({ brand: titleCase(matchedBrand), composition: gen, manufacturer: "", form: x.form || "", mrp: null });
+      }
+      compHits.push({ composition: gen, "class": x.cls || "" });
+    });
+    var html = "";
+    if (brandHits.length) {
+      html += '<div class="db-sec-l">' + dbIco("pills") + ' Brands matching “' + esc(q) + '”</div>' + brandHits.map(brandHitHTML).join("");
+    }
+    if (compHits.length) {
+      html += '<div class="db-sec-l">' + dbIco("flask") + ' Molecules &amp; compositions</div>' + compHits.map(compCardHTML).join("");
+    }
+    r.innerHTML = html;
+    r.querySelectorAll(".db-comp").forEach(function (b) { b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); }); });
+  }
   function runList(q) {
     // brand-name hits + molecule/composition hits in parallel; brands shown first
     // so doctors who type a brand (e.g. "pantocid") see the brand itself on top.
@@ -448,20 +490,62 @@
       if (q !== q2 || (st.name && !isWide())) return;
       var r = root.querySelector("#dbResults"); if (!r) return;
       var brands = (arr[0] && arr[0].results) || [], comps = (arr[1] && arr[1].results) || [];
-      if (!brands.length && !comps.length) { r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>'; return; }
+      if (!brands.length && !comps.length) {
+        var local = localSearch(q);
+        if (local.length) { renderLocalHits(r, q, local); return; }
+        r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>'; return;
+      }
       var html = "";
       if (brands.length) html += '<div class="db-sec-l">' + dbIco("pills") + ' Brands matching “' + esc(q) + '”</div>' + brands.map(brandHitHTML).join("");
       if (comps.length) html += '<div class="db-sec-l">' + dbIco("flask") + ' Molecules &amp; compositions</div>' + comps.map(compCardHTML).join("");
       r.innerHTML = html;
       r.querySelectorAll(".db-comp").forEach(function (b) { b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); }); });
+    }).catch(function () {
+      if (q !== q2 || (st.name && !isWide())) return;
+      var r = root.querySelector("#dbResults"); if (!r) return;
+      var local = localSearch(q);
+      if (local.length) { renderLocalHits(r, q, local); return; }
+      r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>';
     });
+  }
+
+  // Resolve molecule detail when bare composition has no direct D1 row (e.g. "Tirzepatide")
+  function resolveMoleculeDetail(name) {
+    var base = (typeof clinicalKey === "function") ? clinicalKey(name) : name;
+    MEDAPI.searchCompositions(base, 8).then(function (res) {
+      var hits = (res && res.results) || [];
+      var withBrands = hits.filter(function (h) { return (h.brands || 0) > 0; });
+      if (withBrands.length) {
+        var top = withBrands[0];
+        st._variantComp = top.composition;
+        MEDAPI.composition(top.composition, st.sort, st.tier, PAGE, 0, st.bq).then(function (vd) {
+          if (vd && vd.brands && vd.brands.length) {
+            st.info = { composition: name, "class": vd["class"] || compClass(name, ""), action_class: vd.action_class, habit_forming: vd.habit_forming };
+            st.total = vd.total || vd.brands.length;
+            st.brands = vd.brands;
+            renderDetail();
+            return;
+          }
+          fallbackMoleculeDetail(name);
+        }).catch(function () { fallbackMoleculeDetail(name); });
+        return;
+      }
+      fallbackMoleculeDetail(name);
+    }).catch(function () { fallbackMoleculeDetail(name); });
+  }
+
+  function fallbackMoleculeDetail(name) {
+    st.info = { composition: name, "class": compClass(name, "") };
+    st.total = 0;
+    st.brands = [];
+    renderDetail();
   }
 
   /* ---- composition detail view ---- */
   function openComposition(name, sort, tier) {
     ensureRoot();
     if (!root.classList.contains("on")) { root.classList.add("on"); document.body.classList.add("db-lock"); }
-    if (st.name !== name) st.bq = "";   // fresh molecule → clear the brand filter; sort/tier changes keep it
+    if (st.name !== name) { st.bq = ""; st._variantComp = null; }
     st.name = name; st.sort = sort || "relevance"; st.tier = tier || "all"; st.info = null; st.brands = []; st.total = 0; st.offset = 0;
     setTitle(name, true);
     detailHost().innerHTML = '<div class="db-empty">Loading ' + esc(name) + '…</div>';
@@ -474,7 +558,7 @@
       st.loading = false;
       if (!d || st.name !== d.composition) {
         if (first) {
-          openList(st.name);
+          resolveMoleculeDetail(st.name);
           return;
         }
         return;
@@ -484,7 +568,7 @@
     }).catch(function () {
       st.loading = false;
       if (first) {
-        openList(st.name);
+        resolveMoleculeDetail(st.name);
       }
     });
   }
@@ -505,7 +589,8 @@
   }
   function renderDetail() {
     var d = st.info, b = detailHost();
-    var chips = [d["class"], d.action_class].filter(Boolean).map(function (c) { return '<span class="db-chip">' + esc(c) + '</span>'; }).join("");
+    var cls = compClass(d.composition, d["class"]);
+    var chips = [cls, d.action_class].filter(Boolean).map(function (c) { return '<span class="db-chip">' + esc(c) + '</span>'; }).join("");
     var brandsBody = st.brands.length ? st.brands.map(brandHTML).join("")
       : '<div class="db-empty">No ' + (TIER_LABEL[st.tier] ? TIER_LABEL[st.tier] + " " : "") + 'brands listed for this generic.</div>';
     var cnt = st.total ? st.total.toLocaleString() : st.brands.length;
@@ -611,8 +696,9 @@
   function reloadBrands() {
     var myq = st.bq; st.offset = 0;
     var list = root.querySelector("#dbBrands"); if (list) list.innerHTML = '<div class="db-empty">Searching…</div>';
-    MEDAPI.composition(st.name, st.sort, st.tier, PAGE, 0, myq).then(function (d) {
-      if (myq !== st.bq || !d || st.name !== d.composition) return;   // superseded or stale
+    var compName = st._variantComp || st.name;
+    MEDAPI.composition(compName, st.sort, st.tier, PAGE, 0, myq).then(function (d) {
+      if (myq !== st.bq || !d) return;
       st.total = d.total || 0; st.brands = d.brands || [];
       var l = root.querySelector("#dbBrands");
       if (l) l.innerHTML = st.brands.length ? st.brands.map(brandHTML).join("")
@@ -671,13 +757,63 @@
     });
     return html;
   }
+  // Bundled gold monograph library (data/gold-monographs.js, 1,530+ molecules).
+  // Looked up by the canonical clinical key so strength variants ("Tirzepatide
+  // (10mg)") and corrupted composition strings ("Human + Rabies Vaccine") still
+  // resolve to the base molecule's full monograph.
+  function goldFor(name) {
+    try {
+      var G = window.SMD_GOLD_MONOGRAPHS;
+      if (!G) return null;
+      var base = clinicalKey(name), raw = String(name || "").trim();
+      var cands = [base, raw, titleCase(base), titleCase(raw)];
+      synVariants(base).forEach(function (v) { cands.push(v, titleCase(v)); });
+      for (var i = 0; i < cands.length; i++) {
+        var k = String(cands[i] || "");
+        if (G[k] || G[k.toLowerCase()]) return G[k] || G[k.toLowerCase()];
+      }
+    } catch (e) {}
+    return null;
+  }
+  function goldSection(g) {
+    return goldHTML(g);
+  }
+  // Last resort: a molecule the gold library misses still gets a
+  // structured reference card from the database's own class fields — never a dead end.
+  // Class/action text only; no dosing is ever invented.
+  function synthHTML() {
+    var info = st.info || {}, name = st.name || (info.composition || "");
+    var chips = [compClass(name, info["class"]), info.action_class].filter(Boolean)
+      .map(function (c) { return '<span class="db-chip">' + esc(c) + '</span>'; }).join("");
+    return '<div class="db-msrc">℞ <b>Clinical reference</b><span>Full monograph pending for this molecule; class reference below. Verify against local guidance.</span></div>' +
+      '<div class="db-msec"><div class="db-msec-h open">Drug class</div><div class="db-msec-b">' +
+      (chips || esc(info["class"] || info.action_class || "See brand pack insert")) +
+      (info.habit_forming ? '<div style="margin-top:8px">Habit forming: <b>' + esc(info.habit_forming) + '</b></div>' : '') +
+      '<div style="margin-top:8px;color:var(--slate-soft,#888)">Dosing, contraindications and monitoring for ' + esc(name) + ' are not in the bundled reference yet — check the pack insert or a full drug reference before prescribing.</div>' +
+      '</div></div>';
+  }
   function renderStructured(c, resp) {
-    if (!resp || !resp.found) { c.innerHTML = '<div class="db-mono-none">No structured clinical record for this molecule yet (India-only or not matched). Brand &amp; price data below.</div>'; return; }
+    if (!resp || !resp.found) {
+      // Gold bundle first, then synthesized class reference. Never a dead-end notice or archaic formulary.
+      var g0 = goldFor(st.name);
+      if (g0) { c.innerHTML = goldSection(g0); return; }
+      c.innerHTML = synthHTML(); return;
+    }
     if (resp.combo) {
+      var hasAny = resp.components && resp.components.some(function (cp) { return cp && cp.data; });
+      if (!hasAny) {
+        // Combo with zero remote data — the canonical single (e.g. "Human + Rabies
+        // Vaccine" → Rabies Vaccine) may still have a full gold monograph.
+        var g1 = goldFor(st.name);
+        if (g1) { c.innerHTML = goldSection(g1); return; }
+        c.innerHTML = synthHTML(); return;
+      }
       var html = '<div class="db-msrc">Combination product — clinical details per component. Verify locally.</div>';
       (resp.components || []).forEach(function (cp) {
-        html += '<div class="db-cmono"><div class="db-cmono-h">' + dbIco("pills") + ' ' + esc(cp.name) + '</div>' +
-          (cp.data ? ((cp.data.gold && parseGold(cp.data.gold)) ? goldHTML(parseGold(cp.data.gold)) : (qfGrid(cp.data) + stSections(cp.data, { summary: 1 }))) : '<div class="db-mono-none">No structured record for this component yet.</div>') + '</div>';
+        var body;
+        if (cp.data) body = (cp.data.gold && parseGold(cp.data.gold)) ? goldHTML(parseGold(cp.data.gold)) : (qfGrid(cp.data) + stSections(cp.data, { summary: 1 }));
+        else { var gc = goldFor(cp.name); body = gc ? goldSection(gc) : '<div class="db-mono-none">No structured record for this component yet.</div>'; }
+        html += '<div class="db-cmono"><div class="db-cmono-h">' + dbIco("pills") + ' ' + esc(cp.name) + '</div>' + body + '</div>';
       });
       c.innerHTML = html; wireToggles(c); return;
     }
@@ -692,6 +828,39 @@
   // worked. Verified vs the live API: /structured?name=Ceftriaxone → found; "Ceftriaxone (1000mg)" → not.
   function clinicalKey(name) {
     var s = String(name || "");
+    // Canonicalize vaccines and corrupted/scraped Indian brand composition strings
+    if (/^sacubitril\s*[\/|+]\s*valsartan/i.test(s)) return "Sacubitril + Valsartan";
+    if (/rabies\s*vaccine|human\s*\+\s*rabies|rabies.*human/i.test(s)) return "Rabies Vaccine";
+    if (/tetanus\s*toxoid|tdap|\btt\b|adsorbed\s*tetanus/i.test(s)) return "Tetanus Toxoid";
+    if (/rotavirus\s*vaccine/i.test(s)) return "Rotavirus Vaccine";
+    if (/typhoid\s*vaccine|salmonella\s*typhi|purified\s*vi.*typhoid/i.test(s)) return "Typhoid Vaccine";
+    if (/hepatitis\s*b\s*vaccine|aluminium.*hepatitis\s*b/i.test(s)) return "Hepatitis B Vaccine";
+    if (/hepatitis\s*a\s*vaccine/i.test(s)) return "Hepatitis A Vaccine";
+    if (/influenza\s*vaccine/i.test(s)) return "Influenza Vaccine";
+    if (/pneumococc\w*\s*(?:polysaccharide\s*)?conjugate\s*vaccine/i.test(s)) return "Pneumococcal Conjugate Vaccine";
+    if (/pneumococc\w*\s*polysaccharide\s*vaccine/i.test(s)) return "Pneumococcal Polysaccharide Vaccine";
+    if (/measles.*mumps.*rubella|mmr/i.test(s)) return "MMR Vaccine";
+    if (/varicella\s*vaccine/i.test(s)) return "Varicella Vaccine";
+    if (/human\s*papilloma\w*|hpv/i.test(s)) return "Human Papillomavirus Vaccine";
+    if (/herpes\s*zoster|shingles/i.test(s)) return "Herpes Zoster Vaccine";
+    if (/\bbcg\b/i.test(s)) return "BCG Vaccine";
+    if (/cholera\s*vaccine/i.test(s)) return "Cholera Vaccine";
+    if (/polio\s*vaccine/i.test(s)) return "Polio Vaccine";
+    // Generic corrupted-combo rule: a "+" string that contains exactly one known single
+    // ("Human + Rabies Vaccine", "Aluminium Hydroxide + Hepatitis B Vaccine", "Oral) +
+    // Rotavirus Vaccine (Live Attenuated") is that single, not a combination product.
+    // True combos ("Paracetamol + Ibuprofen") match nothing here and pass through.
+    if (/\S\s*\+\s*\S/.test(s)) {
+      var KNOWN = ["Pneumococcal Conjugate Vaccine", "Pneumococcal Polysaccharide Vaccine",
+        "Human Papillomavirus Vaccine", "Herpes Zoster Vaccine", "Hepatitis B Vaccine",
+        "Hepatitis A Vaccine", "Rabies Vaccine", "Tetanus Toxoid", "Rotavirus Vaccine",
+        "Typhoid Vaccine", "Influenza Vaccine", "MMR Vaccine", "Varicella Vaccine",
+        "BCG Vaccine", "Cholera Vaccine", "Polio Vaccine"];
+      for (var ki = 0; ki < KNOWN.length; ki++) {
+        if (s.toLowerCase().indexOf(KNOWN[ki].toLowerCase()) > -1) return KNOWN[ki];
+      }
+    }
+
     s = s.replace(/\s*\([^)]*\)/g, " ");                                                 // ANY parenthetical → base molecule: strength "(1000mg)"/"(5 mg/ml)"/"(60000IU)" OR qualifier "(NA)"/"(Micronized)"/"(Natural Micronized)". Safe because clinicalLookup tries the ORIGINAL name first, so a paren-specific record still wins.
     s = s.replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi, " "); // trailing "500 mg", "1 g", "0.5%"
     return s.replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();                 // tidy combo spacing after strips
@@ -710,7 +879,14 @@
     ["Sulfamethoxazole", "Sulphamethoxazole"], ["Sulfasalazine", "Sulphasalazine"],
     ["Noradrenaline", "Norepinephrine"], ["Adrenaline", "Epinephrine"], ["Beclometasone", "Beclomethasone"],
     ["Guaifenesin", "Guaiphenesin"], ["Oestradiol", "Estradiol"], ["Ciclosporin", "Cyclosporine"],
-    ["Glyceryl Trinitrate", "Nitroglycerin"]
+    ["Glyceryl Trinitrate", "Nitroglycerin"],
+    ["Dabigatran", "Dabigatran Etexilate"],
+    ["Metoprolol", "Metoprolol Succinate"],
+    ["Metoprolol", "Metoprolol Tartrate"],
+    ["Chlorpheniramine", "Chlorpheniramine Maleate"],
+    ["Levothyroxine", "Thyroxine"],
+    ["Insulin", "Human Insulin"],
+    ["Magnesium Sulfate", "Magnesium Sulphate"]
   ];
   function synVariants(name) {
     var out = [], nm = String(name || "");
@@ -990,6 +1166,7 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 
   window.MEDAPI = MEDAPI;
-  var MEDDB = { openList: openList, openComposition: openComposition, close: close };
+  var MEDDB = { openList: openList, openComposition: openComposition, close: close,
+    _clinical: { clinicalKey: clinicalKey, goldFor: goldFor, compClass: compClass } };   // test seam (node --test)
   window.MEDDB = MEDDB;
 })();

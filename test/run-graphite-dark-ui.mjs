@@ -27,6 +27,12 @@ try{
  ok(palette['--rds-bg']==='#000000'&&palette['--rds-surface']==='#0c0c0e','module design system uses Graphite');
  const themes=JSON.parse(await ev(`JSON.stringify(['blue','ocean','tiranga','amber','slate','contrast'].map(t=>{document.documentElement.dataset.theme=t;const s=getComputedStyle(document.body);return [s.getPropertyValue('--paper').trim(),s.getPropertyValue('--panel').trim()]}))`));
  ok(themes.every(x=>x[0]==='#000000'&&x[1]==='#0c0c0e'),'Graphite remains consistent across accent preferences');
+ const accent=JSON.parse(await ev(`JSON.stringify((()=>{const g=k=>getComputedStyle(document.body).getPropertyValue(k).trim();document.documentElement.removeAttribute('data-theme');const classic={teal:g('--teal'),rds:g('--rds-primary'),hi:g('--sphere-hi'),mid:g('--sphere-mid')};document.documentElement.dataset.theme='blue';const blue={teal:g('--teal'),rds:g('--rds-primary'),rds2:g('--rds-primary-2'),hi:g('--sphere-hi'),mid:g('--sphere-mid')};document.documentElement.dataset.theme='ocean';const ocean={hi:g('--sphere-hi')};document.documentElement.removeAttribute('data-theme');return {classic,blue,ocean}})()`));
+ ok(accent.classic.teal==='#2f9184'&&accent.classic.rds==='#2f9184','default dark uses deep sphere green, never neon');
+ ok(accent.classic.hi==='#2f9184'&&accent.classic.mid==='#12564a','default dark sphere tokens resolve');
+ ok(accent.blue.teal==='#5aa9f0','saved theme accent applies in dark mode (not stomped)');
+ ok(accent.blue.rds==='#4a9ee6'&&accent.blue.rds2==='#1d4ed8'&&accent.blue.hi==='#3b82f6'&&accent.blue.mid==='#1d4ed8','spheres follow the saved theme in dark mode');
+ ok(accent.ocean.hi==='#06b6d4','second theme also recolors spheres in dark mode');
  await ev(`document.documentElement.removeAttribute('data-theme')`);
  const status=JSON.parse(await ev(`JSON.stringify(['--red','--orange','--yellow','--green'].map(k=>getComputedStyle(document.body).getPropertyValue(k).trim()))`));
  ok(JSON.stringify(status)===JSON.stringify(['#e85070','#f07040','#f0c060','#4dd68c']),'clinical status colors are preserved');

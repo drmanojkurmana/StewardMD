@@ -545,7 +545,9 @@
     // App Lock — PIN keypad + biometric fingerprint (no emoji in security UI).
     keypad: '<circle cx="7" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="18" r="1.3" fill="currentColor" stroke="none"/>',
     fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>',
-    hub: '<circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M12 9V6M12 15v3M10 10.5 6.5 7.5M14 10.5l3.5-3M10 13.5l-3.5 3M14 13.5l3.5 3"/>'
+    hub: '<circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M12 9V6M12 15v3M10 10.5 6.5 7.5M14 10.5l3.5-3M10 13.5l-3.5 3M14 13.5l3.5 3"/>',
+    receipt_long: '<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>',
+    bill: '<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
@@ -825,30 +827,40 @@
       intro.style.cssText = "margin-bottom:20px;text-align:center";
       intro.innerHTML = '<div style="font:700 13px var(--sans,sans-serif);color:var(--teal,#0e6e63);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Unified Hospital Link</div>' +
         '<div style="font:800 22px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.02em">Choose how your hospital connects</div>' +
-        '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--slate,#64748b);margin-top:6px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.5">Link your hospital\'s EMR to auto-sync inpatient ward lists, real-time lab reports, and vitals directly into StewardMD.</div>';
+        '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--slate,#64748b);margin-top:6px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.5">Link your hospital\'s EMR to bring inpatient ward lists, lab reports and vitals into StewardMD. Every pathway needs your hospital\'s permission and uses only the access it grants.</div>';
       scroll.appendChild(intro);
 
       // Pathway 1: EMR Website Login (Connect Agent)
       var card1 = document.createElement("div");
       card1.style.cssText = "background:var(--panel,#fff);border:1.5px solid var(--teal,#0e6e63);border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 4px 16px rgba(14,110,99,0.08);position:relative";
+      // QA BUG-012: wording only. The agent's behaviour is unchanged; the doctor must confirm
+      // hospital-administration permission (tick) before the Start button becomes usable.
       card1.innerHTML =
         '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
-          '<span style="background:var(--teal,#0e6e63);color:#fff;font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">RECOMMENDED &middot; ZERO IT SETUP</span>' +
-          '<span style="font:600 12px var(--sans,sans-serif);color:var(--slate,#64748b);margin-left:auto">Doctor Self-Service</span>' +
+          '<span style="background:var(--teal,#0e6e63);color:#fff;font:700 11px var(--sans,sans-serif);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:6px">WITH HOSPITAL PERMISSION</span>' +
+          '<span style="font:600 12px var(--sans,sans-serif);color:var(--slate,#64748b);margin-left:auto">Doctor-led setup</span>' +
         '</div>' +
         '<div style="font:800 18px var(--hfont,sans-serif);color:var(--ink,#0f172a);letter-spacing:-0.01em;display:flex;align-items:center;gap:8px">' +
           'Connect by EMR Website Login' +
         '</div>' +
-        '<div style="font:600 13.5px var(--sans,sans-serif);color:var(--teal,#0e6e63);margin:4px 0 10px">Sign in to your hospital portal &mdash; AI agent does the rest</div>' +
+        '<div style="font:600 13.5px var(--sans,sans-serif);color:var(--teal,#0e6e63);margin:4px 0 10px">Sign in to your hospital portal yourself. StewardMD reads what your login can already see.</div>' +
         '<div style="font:500 13.5px var(--sans,sans-serif);color:var(--ink,#334155);line-height:1.55;margin-bottom:14px">' +
-          'Sign in to your hospital\'s web portal or HIS in a private, encrypted in-app browser. Our AI agent autonomously explores your hospital screens, discovers patient rosters and lab results, and creates a verified read-only adapter tailored to your hospital. Zero changes to your hospital\'s EMR and no IT approvals required.' +
+          'For hospitals with a web, online or cloud EMR. You sign in to your hospital\'s portal in a private, encrypted in-app browser using your own credentials. StewardMD then reads patient rosters and lab results through that login and builds a read-only link for your account. It does not change your hospital\'s EMR and does not grant itself any access beyond what your login already has. Use this only after your hospital administration has permitted it.' +
         '</div>' +
-        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:16px">' +
-          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> 100% Private In-App Login</div>' +
-          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Autonomous Screen Discovery</div>' +
-          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Verified with Real Patients</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:14px">' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Private in-app sign-in, password never stored</div>' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Read-only: cannot order, prescribe or edit</div>' +
+          '<div style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;font:600 12px var(--sans,sans-serif);color:var(--ink,#1e293b);display:flex;align-items:center;gap:8px"><span style="color:var(--teal,#0e6e63);font-size:16px">&check;</span> Uses only the access your login already has</div>' +
         '</div>' +
-        '<button id="smdBtnAgentLogin" type="button" style="width:100%;min-height:46px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:12px;font:700 15px var(--sans,sans-serif);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 2px 8px rgba(14,110,99,0.3)">' +
+        '<div id="smdAgentDisclaimer" style="background:var(--paper,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px 12px;margin-bottom:12px;font:400 10.5px/1.5 var(--sans,sans-serif);color:var(--slate,#475569)">' +
+          '<div style="font-weight:700;color:var(--ink,#1e293b);margin-bottom:4px;font-size:11px">Disclaimer. Please read before you continue.</div>' +
+          'EMR Website Login must be used only after you have obtained permission from your hospital administration, or from the authority that controls your hospital\'s EMR, to connect it to StewardMD. StewardMD does not obtain this permission for you and cannot confirm that it has been given. You sign in with your own credentials and you alone are responsible for their use, for every screen the link reads while you are signed in, and for complying with your hospital\'s IT, information-security, privacy and data-protection policies and with applicable law, including the Digital Personal Data Protection Act, 2023. StewardMD reads only what your login can already see, cannot add, change or grant any access, and does not alter your hospital\'s EMR. Patient data read through this link is used only inside your StewardMD account. MAIKNOWLEDGE LLP and StewardMD accept no responsibility for any use of this feature without the required permission, or for any breach of hospital policy or law arising from such use. You can stop the link at any time from this screen.' +
+        '</div>' +
+        '<label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;cursor:pointer;font:600 12.5px/1.45 var(--sans,sans-serif);color:var(--ink,#1e293b)">' +
+          '<input id="smdAgentConsent" type="checkbox" style="width:20px;height:20px;margin:1px 0 0;flex-shrink:0;accent-color:var(--teal,#0e6e63)">' +
+          '<span>I have permission from my hospital administration to connect this EMR, I have read the disclaimer above, and I take responsibility for this connection.</span>' +
+        '</label>' +
+        '<button id="smdBtnAgentLogin" type="button" disabled aria-disabled="true" style="width:100%;min-height:46px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:12px;font:700 15px var(--sans,sans-serif);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 2px 8px rgba(14,110,99,0.3);opacity:.45">' +
           '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>' +
           'Start EMR Web Login &amp; Discovery' +
         '</button>';
@@ -917,8 +929,18 @@
 
       // Event handlers
       var btnAgent = card1.querySelector("#smdBtnAgentLogin");
+      var agentConsent = card1.querySelector("#smdAgentConsent");
+      if (btnAgent && agentConsent) {
+        agentConsent.onchange = function () {
+          var ok = !!agentConsent.checked;
+          btnAgent.disabled = !ok;
+          btnAgent.setAttribute("aria-disabled", ok ? "false" : "true");
+          btnAgent.style.opacity = ok ? "1" : ".45";
+        };
+      }
       if (btnAgent) {
         btnAgent.onclick = function () {
+          if (agentConsent && !agentConsent.checked) return;
           closeHub();
           setTimeout(function () {
             if (window.SMD_CONNECT_AGENT_BOOT && SMD_CONNECT_AGENT_BOOT.open) {
@@ -1103,6 +1125,9 @@
         (queueOn ? tile("list", "OPD Queue", "Outpatient visits", "opd") : "") +
         tile("ward", "Ward Sync", "Labs &amp; imaging (GHIS)", "ward") +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
+        (wardsynqWorkplace()
+          ? tile("receipt_long", "Hospital Billing", "OPD & IPD cashier & bills", "billing")
+          : tile("receipt_long", "Clinic Billing", "Cashier & invoices", "billing")) +
         '</div></section><section aria-labelledby="rdsHospitalTreatment"><h3 id="rdsHospitalTreatment" class="rds-hospital-label">Treatment &amp; reference</h3>' +
         // The Rx pad was only reachable from inside a MaiK answer or a consult, so writing a
         // prescription for the patient in front of you meant going through something else first.
@@ -1134,6 +1159,16 @@
             if (a === "rxverify") { ACT.prescriptionVerify(); return; }
             if (a === "govschemes") { ACT.govschemes(); return; }
             if (a === "icdsearch") { ACT.icdsearch(); return; }
+            if (a === "billing") {
+              if (wardsynqWorkplace()) {
+                if (window.WARD && WARD.open) WARD.open({ act: "cashier" });
+                else toast("Hospital Billing loading…");
+              } else {
+                location.href = "/clinic-billing";
+              }
+              return;
+            }
+            if (a === "pharmacy") { location.href = "/clinic-billing?station=pharmacy"; return; }
             if (a === "agentconnect" || a === "connect") { ACT.agentconnect(); return; }
             ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.agentconnect)();
           }, 70);
@@ -2179,7 +2214,7 @@
           '<button class="rnav-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + ric("medication") + '<span>Drugs</span></button>' +
           '<button class="rnav-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
         '</div>' +
-        '<section class="rnav-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b style="color:#0a2320">MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
+        '<section class="rnav-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b>MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
         '<div class="rnav-qrow">' +
           '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
@@ -3169,7 +3204,7 @@
   function openAccount() {
     var a = readAccount();
     var P = (window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile()) || null;
-    var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple"));
+    var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple" || a.type === "email" || a.providerType === "email"));
     var dangerBtn = 'style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer"';
 
     if (!signedIn) {
@@ -3806,7 +3841,7 @@
         '<li><b>v8.2</b> · Scores wired to diagnoses: relevant clinical scores are suggested on every diagnosis, and the ICU dashboard now auto-computes scores (SOFA, qSOFA, NEWS2, APACHE II, BISAP, MELD…) from fetched labs and vitals, tap any score to open the calculator pre-filled.</li>' +
         '<li><b>v8.3</b> · Management for every reference condition: condition-specific, guideline-aligned management now appears on all <b>4,600+</b> reference diseases (AI-drafted decision-support, verify before acting).</li>' +
       '</ul></div>' +
-      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v9 · Clinical command centre (current)</span></div><ul>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v9 · Clinical command centre</div><ul>' +
         '<li><b>v9.0</b> · ICU &amp; Ward dashboard: real-time collaborative unit boards (ICU / MICU / wards), a live care team with clinical designations &amp; permissions, shift handover, and task instructions with native push.</li>' +
         '<li><b>v9.1</b> · Ward Sync 2.0: tick a GHIS patient to add them straight to your unit board; per-patient, device-secure auto-fetch keeps their labs &amp; imaging fresh; full patient info (MR, treating doctor, department) imported.</li>' +
         '<li><b>v9.2</b> · Doctor verification: an NMC registration check unlocks verified access, with an owner admin console.</li>' +
@@ -3816,6 +3851,8 @@
         '<li><b>v9.6</b> · KardioX AI: 12-lead ECG interpretation with a Learn-ECG atlas and hybrid STEMI detection (gated clinical preview).</li>' +
         '<li><b>v9.7</b> · Apple Watch app: patient watchlist, tasks and criticals on the wrist, plus a Code Blue CPR assistant with an iPhone Command Center.</li>' +
         '<li><b>v9.8</b> · FundX AI: guided retinal image capture and analysis (experimental).</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v10 · Clinical command centre &amp; specialty expansion</div><ul>' +
         '<li><b>v10.0</b> · Reliability and polish: faster, flicker-free assessment; an editable profile with a searchable hospital directory; and a broad bug-fix sweep across the app and watch.</li>' +
         // Only SHIPPED, flag-ON work belongs here. Anything still behind a default-OFF flag is not
         // released and must not be announced as though it were.
@@ -3823,33 +3860,41 @@
         '<li><b>v10.2</b> · Insulin dosing support: basal initiation, correction, meal and combined boluses with the working shown step by step, an insulin library and guided conversion, active-insulin (IOB) accounting, and safety interrupts that stop an unsafe dose rather than footnoting it.</li>' +
         '<li><b>v10.3</b> · Field-report sweep: buttons that used to fail silently now say what is wrong; long AI steps show what they are working on instead of a frozen line; the notification and update prompts wait until you are signed in and on the home screen; and the surgical evidence review reads as prose rather than raw markup.</li>' +
       '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v11 · Enterprise, Inpatient &amp; Universal Search (current)</span></div><ul>' +
+        '<li><b>v11.0</b> · Universal Search across clinical guidelines, the drug index, ICD-10, and bedside calculators — one search box for the whole engine.</li>' +
+        '<li><b>v11.1</b> · WardSynQ inpatient collaborative command centre: digital twin, bed board, shift handovers, and discharge workflow.</li>' +
+        '<li><b>v11.2</b> · OncoTree comprehensive guideline navigation covering all 65 cancer types and 124+ chemo protocols, with cycle timeline, organ dose adjustment, and DDI sentry.</li>' +
+        '<li><b>v11.3</b> · Scribe 1.8 ambient multilingual clinical note generation with ICD auto-suggestion.</li>' +
+        '<li><b>v11.4</b> · ICU Snapshot multi-format upload supporting PDF ABG and laboratory reports.</li>' +
+      '</ul></div>' +
     '</div>' +
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD, built and refined case by case at the bedside.</p>';
   }
   function aboutFactsHTML() {
+    // BUG-023: curated, non-duplicative verified facts + a dedicated chronological milestones
+    // timeline. Figures are COUNTED from the repository, not estimated — if one stops being
+    // true, change the code or change the number.
     return '<span class="smd-ab-badge">By the numbers</span>' +
       '<ul class="smd-facts">' +
       '<li><span class="fn">4,804</span> searchable conditions: 140 with full diagnostic reasoning plus 4,664 reference conditions, each with a page-cited reference panel and condition-specific management.</li>' +
-      '<li><span class="fn">51</span> infective syndromes, each with a full empiric-therapy stewardship rationale.</li>' +
-      '<li><span class="fn">21,487</span> page-cited Harrison 22e knowledge chunks, RAG-ready with no AI required.</li>' +
-      '<li><span class="fn">1,465</span> drug monographs in structured &quot;gold&quot; format.</li>' +
+      '<li><span class="fn">1,466+</span> drug monographs in structured &quot;gold&quot; format.</li>' +
       '<li><span class="fn">405</span> bedside clinical calculators at MDCalc scale, every formula executed &amp; checked.</li>' +
+      '<li><span class="fn">124</span> cancer protocols across <span class="fn">65</span> OncoTree guidelines, each carrying its own lifecycle state instead of being presented as settled fact.</li>' +
+      '<li><span class="fn">51</span> infective syndromes, each with a full empiric-therapy stewardship rationale.</li>' +
+      '<li><span class="fn">15</span> insulins across <span class="fn">7</span> classes, with guided conversion, active-insulin accounting and the arithmetic shown line by line.</li>' +
       '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
       '<li><span class="fn">47</span> antibiotics × <span class="fn">23</span> organisms (6 clinical groups) in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources: ICMR AMRSN 2024 national and GIMSR hospital resistance rates.</li>' +
       '<li><span class="fn">3</span> native apps — iPhone, Android and Apple Watch — from a single clinical engine, plus an installable web app.</li>' +
-      '<li><span class="fn">100%</span> on-device: the full engine runs locally and works with no signal at the bedside.</li>' +
-      '<li><span class="fn">1</span> Apple Watch Code Blue assistant with live CPR rate coaching, a resus timeline and an iPhone Command Center.</li>' +
-      '<li><span class="fn">2</span> imaging AIs at the point of care — KardioX 12-lead ECG interpretation and FundX retinal analysis (clinical preview).</li>' +
-      '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic, with no frameworks and no build step.</li>' +
-      '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
-      // Every figure below is COUNTED from the repository, not estimated. If one stops being true,
-      // change the code or change the number - a fact panel that drifts is worse than none.
-      '<li><span class="fn">124</span> cancer treatment protocols in the oncology library, each carrying its own lifecycle state instead of being presented as settled fact.</li>' +
-      '<li><span class="fn">15</span> insulins across <span class="fn">7</span> classes, with guided conversion, active-insulin accounting and the arithmetic shown line by line.</li>' +
-      '<li><span class="fn">4,804</span> conditions and <span class="fn">405</span> calculators, and not one of them answers without showing where the answer came from.</li>' +
-      '<li><span class="fn">3,884</span> automated checks run against every change — including <span class="fn">163</span> that drive a real browser, because a clinical tool that only passes in theory has not been tested.</li>' +
-      '<li><span class="fn">0</span> doses, stages or scores invented by AI. Every number is computed by validated code a clinician can read, or it is not shown at all — the AI fills the form, the engine does the maths.</li>' +
-      '<li><span class="fn">1</span> clinician built the entire engine end to end.</li>' +
+      '<li><span class="fn">100%</span> on-device core engines: the full engine runs locally and works with no signal at the bedside.</li>' +
+      '<li><span class="fn">0</span> doses hallucinated. Every number is computed by validated code a clinician can read, or it is not shown at all — the AI fills the form, the engine does the maths.</li>' +
+      '</ul>' +
+      '<div class="smd-modal-section" style="margin-top:18px">Verified Milestones</div>' +
+      '<ul class="smd-facts">' +
+      '<li><span class="fn">Jul 2026</span> Genesis of StewardMD and the Stanford antimicrobial stewardship framework.</li>' +
+      '<li><span class="fn">Aug 2026</span> Harrison 22e &amp; Nelson knowledge base expansion; Apple Watch Code Blue assistant; iOS &amp; Android native apps.</li>' +
+      '<li><span class="fn">Early Sep 2026</span> KardioX ECG AI and FundX retinal preview; 400+ MDCalc clinical calculators; doctor NMC verification gate.</li>' +
+      '<li><span class="fn">Mid Sep 2026</span> Comprehensive OncoTree guidelines &amp; 124 chemo protocols; WardSynQ inpatient digital twin.</li>' +
+      '<li><span class="fn">Sep 2026</span> Universal Search, Scribe 1.8 ambient multilingual documentation, and EMR integration.</li>' +
       '</ul>' +
       '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
       '<p>StewardMD is one of the most content-dense clinical decision tools ever built — now shipping as native iPhone, Android and Apple Watch apps as well as an installable web app, all driven by one hand-authored engine. Every syndrome, drug, calculator and reasoning rule runs on-device, so it works fully offline at the bedside. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
@@ -5437,6 +5482,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
+    // Drug names in questions and answers: bold yellow, tap opens the monograph (drug-link.js).
+    try { if (window.SMD_DRUGLINK && body) SMD_DRUGLINK.watch(body); } catch (e) {}
 
     /* ROUTE PREFETCH (2026-08-24, measured on device).
      *
@@ -6937,6 +6984,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   var _replayed = !!(r && r.replayed);
                   el.textContent = "⏱ " + (ttft ? ((_replayed ? "answer " : "first token ") + ttft + "s · ") : "") +
                     (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "") +
+                    // On-device engine measurements (perf plan #8): prefill and how much of it was reused,
+                    // decode rate, thermal state across the answer, and the draft's acceptance rate.
+                    (function (p) {
+                      if (!p) return "";
+                      var s = "";
+                      if (p.promptTokens != null) s += " · prompt " + p.promptTokens + " tok" + (p.reusedTokens ? " (" + p.reusedTokens + " reused)" : "") + (p.prefillMs != null ? " in " + (p.prefillMs / 1000).toFixed(1) + "s" : "");
+                      if (p.tokPerSec) s += " · " + Number(p.tokPerSec).toFixed(1) + " tok/s";
+                      if (p.draftProposed) s += " · draft " + Math.round(100 * (p.draftAccepted || 0) / p.draftProposed) + "% accepted";
+                      if (p.thermalStart) s += " · " + p.thermalStart + (p.thermalEnd && p.thermalEnd !== p.thermalStart ? " to " + p.thermalEnd : "");
+                      if (p.kvQ8) s += " · kv q8";
+                      return s;
+                    })(r && r.perf) +
                     ((r && r.grounding && r.grounding.removed && r.grounding.removed.length) ? " · " + r.grounding.removed.length + " unsupported statement" + (r.grounding.removed.length === 1 ? "" : "s") + " left out" : "");
                   _h.appendChild(el);
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
@@ -7063,6 +7122,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       bubble("ai", html); scroll();
       try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
     }
+    function maikDrugAskCard(drugs, question) {
+      var list = drugs.slice(0, 3);
+      var fz = list.filter(function (d) { return d.fuzzy; });
+      var html = '<div class="maik-dosecard maik-drugask">' +
+        '<div class="maik-dose-h">' + MK.book + '<span>' + (list.length > 1 ? "Drugs in your question" : "Drug in your question") + '</span></div>' +
+        '<div class="maik-dose-n">' + list.map(function (d) { return maikEscH(d.name); }).join(", ") + '</div>' +
+        (fz.length ? '<div class="maik-dose-c">Read "' + maikEscH(fz[0].typed) + '" as ' + maikEscH(fz[0].name) + '</div>' : '') +
+        '<div class="maik-dose-note">Do you want to see the drug monograph first?</div>' +
+        '<div class="maik-dose-acts">' +
+          list.map(function (d) { return '<button class="maik-fu maik-dose-go" data-maik-drugidx="' + maikEscH(d.name) + '">Open ' + maikEscH(d.name) + ' monograph</button>'; }).join("") +
+          '<button class="maik-fu" data-maik-drugcont="' + maikEscH(question) + '">Just answer</button>' +
+          '<button class="maik-fu maik-drugask-no" data-maik-drugnoask="' + maikEscH(question) + '">Answer, don\'t ask again</button>' +
+        '</div></div>';
+      bubble("ai", html); scroll();
+    }
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
@@ -7081,6 +7155,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { maikDocCue(maikDocClassify(q)); } catch (e) {}   // the doctor acts out the question
       bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
+      // Drug named in the question (drug-link.js, flag smd_druglink / smd_druglink_ask, default ON):
+      // offer the drug's monograph FIRST, then answer on "Just answer". Misspellings count
+      // ("dose of paracetomol"). Not for image questions or Evidence Review.
+      if (!_researchMode && !_sentThumb) {
+        var _drugs = [];
+        try { if (window.SMD_DRUGLINK && SMD_DRUGLINK.askEnabled()) _drugs = SMD_DRUGLINK.drugsIn(q, { fuzzy: true }); } catch (e) { _drugs = []; }
+        if (_drugs.length) { maikDrugAskCard(_drugs, q); return; }
+      }
+      maikSendRest(q, false);
+    }
+    // Everything send() does after the question bubble. Split out so the drug-monograph card can
+    // resume the exact same path ("Just answer") without re-posting the question.
+    function maikSendRest(q, fromDrugAsk) {
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
       if (_researchMode) {
         // Evidence Review is a cloud feature. With an on-device engine selected the old path refused
@@ -7145,7 +7232,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         }
         bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return;
       }
-      var _lk = maikDoseLookup(q);
+      var _lk = fromDrugAsk ? null : maikDoseLookup(q);   // the drug card already offered the Drug Index
       if (_lk) { maikDoseCard(_lk, q); return; }
       var topic = maikV2() ? maikCanonTopic(q) : q;
       var depth = MAIK_DETAIL_ASK.test(maikNorm(q)) ? "detailed" : "concise";
@@ -7591,6 +7678,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             else if (window.toast) toast("Drug Index loading…");
           } catch (e) {}
         }, 180);
+        return;
+      }
+      var dcont = ev.target && ev.target.closest ? ev.target.closest("[data-maik-drugcont],[data-maik-drugnoask]") : null;
+      if (dcont) {
+        ev.preventDefault();
+        if (_maikBusy) return;
+        var noask = dcont.hasAttribute("data-maik-drugnoask");
+        var cq = dcont.getAttribute(noask ? "data-maik-drugnoask" : "data-maik-drugcont") || "";
+        if (noask) { try { localStorage.setItem("smd_druglink_ask", "0"); toast("MaiK will not ask about drug monographs again. Drug names stay highlighted."); } catch (e) {} }
+        var dcard = dcont.closest(".maik-dosecard"); if (dcard) { var da = dcard.querySelector(".maik-dose-acts"); if (da) da.remove(); }
+        maikSendRest(cq, true);
         return;
       }
       var anyway = ev.target && ev.target.closest ? ev.target.closest("[data-maik-anyway]") : null;
@@ -9343,9 +9441,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var pid = u && u.providerData && u.providerData[0] && u.providerData[0].providerId;
       if (pid === "apple.com") return "apple";
       if (pid === "google.com") return "google";
-      if (pid === "password") return "email";
+      if (pid === "password" || (pid && pid.indexOf("email") > -1)) return "email";
     } catch (e) {}
-    return (a && a.type) || "";
+    return (a && a.providerType) || (a && a.type) || "";
   }
   function acctProviderLabel(a, withSync) {
     var p = acctProvider(a);
@@ -9359,7 +9457,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var box = document.getElementById("smdSbAccount");
     if (!box) { box = document.createElement("div"); box.id = "smdSbAccount"; box.className = "smd-sba"; head.insertAdjacentElement("afterend", box); }
     var a = readAccount();
-    if (a && (a.email || a.type === "google" || a.type === "apple")) {
+    if (a && (a.email || a.type === "google" || a.type === "apple" || a.type === "email" || a.providerType === "email")) {
       var initial = (((a.name || a.email).trim()[0]) || "U").toUpperCase();
       var pic = a.picture
         ? '<img class="smd-sba-pic" src="' + smdEsc(a.picture) + '" alt="" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=&quot;smd-sba-pic smd-sba-ph&quot;>' + smdEsc(initial) + '</div>\'">'

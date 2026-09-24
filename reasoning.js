@@ -2793,7 +2793,8 @@
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<section class="dx-reader-hero"><div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<section class="dx-reader-hero"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div>' +
+        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
         '<div class="dx-reader-glance"><h3>At a glance</h3>' +
@@ -3437,7 +3438,7 @@
       else button.removeAttribute("aria-current");
     });
     var intro = document.createElement("div"); intro.className = "kblib-tool-intro";
-    intro.innerHTML = '<span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
+    intro.innerHTML = '<img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
       '<label for="kblibToolSearch">Search this collection</label><input id="kblibToolSearch" class="kblib-tool-search" type="search" autocomplete="off" placeholder="' + spec.search + '"><div id="kblibToolCount" class="kblib-tool-count" role="status"></div>';
     tabs.insertAdjacentElement("afterend", intro);
     function paint() {
@@ -3472,7 +3473,10 @@
     body.className = "sbref-body";
     var sec = body.querySelector(".sbref-sec"); if (!sec) return;
     sec.classList.add("kblib-discover");
-    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
+    /* Discover renders its own <h1>Knowledge Library</h1> hero directly below the bar, so setting the
+     * bar title here printed the same words twice on one screen. The tool tabs (Syndromes /
+     * Antibiogram / AWaRe / Guidelines) have no hero, so they keep their bar title. */
+    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = ""; } catch (e) {}
     var branches = [], seen = {}, entries = kbBuildIndex();
     entries.forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 0; branches.push(d.branch); } seen[d.branch]++; });
     branches.sort();
@@ -3480,10 +3484,10 @@
     var featured = ["Cardiology", "Neurology", "Respiratory", "GI / Hepatology"].filter(function (b) { return !!seen[b]; });
     var tile = function (b) { return f(_libState.branch === b, "br", b, '<span class="kblib-tile-icon" aria-hidden="true">' + rIco("book") + '</span><span>' + esc(b) + '</span><small>' + seen[b].toLocaleString() + ' entries</small>'); };
     sec.innerHTML =
-      '<header class="kblib-intro"><span class="kblib-kicker">STEWARDMD · DISCOVER</span><h1>Knowledge Library</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
+      '<header class="kblib-intro"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-kicker">DISCOVER</span><h1>Find any disease</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
       '<label class="kblib-search-label" for="kblibQ">Search the full library</label><input id="kblibQ" class="kblib-search" type="search" placeholder="Disease, syndrome or clinical detail" autocomplete="off" value="' + esc(_libState.q) + '">' +
       kbPersonalHTML(entries) +
-      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
+      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
       '<div class="kblib-section-heading"><h2>Explore a branch</h2><span>' + branches.length + ' branches</span></div><div class="kblib-tiles">' + featured.map(tile).join("") + '</div>' +
       '<details class="kblib-all-branches"><summary>See all medical branches</summary><div class="kblib-tiles">' + branches.filter(function (b) { return featured.indexOf(b) < 0; }).map(tile).join("") + '</div></details></div>' +
       '<div class="kblib-section-heading"><h2 id="kblibResultsTitle">Disease index</h2><button type="button" id="kblibClear" class="kblib-clear">Clear filters</button></div>' +
@@ -3921,6 +3925,9 @@
     t = t.replace(/\b(DOB|D\.?O\.?B|Date of Birth|Age\/Sex)\b\s*[:]?\s*\S+/gi, "$1: [redacted]");
     t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, "[redacted]");                                          // phone / 10+ digit id runs
     t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");                            // dd/mm/yyyy
+    // Indian identifiers (ABHA Address, UPI, PAN, Indic-script digits, labelled IDs): phi-india.js,
+    // additive only. Flag smd_phi_india, default ON; "0" restores the output above exactly.
+    try { var PI = window.SMD_PHI_INDIA; if (PI && PI.enabled()) t = PI.apply(t); } catch (e) {}
     return t;
   }
   window.SMD_redactPHI = redactPHI;
@@ -5837,20 +5844,36 @@
   function smdInjectSafetyCSS() {
     if (document.getElementById("smd-safety-css")) return;
     var st = document.createElement("style"); st.id = "smd-safety-css";
+    // BUG-019: one card language with #saveCasePrompt — 14px radius, subtle premium border,
+    // cohesive shadow; structured parameter grid; switch-style Liver/Cardiac toggles.
     st.textContent =
-      ".smd-safety-card{margin:0 0 14px;padding:13px 15px;border:1px solid var(--line,#e2e8f0);border-left:4px solid #d97706;border-radius:11px;background:var(--panel,#fff)}" +
-      ".smd-safety-h{font:800 13px var(--sans,system-ui);color:#b45309;letter-spacing:.02em;margin:0 0 8px}" +
-      ".smd-safety-row{display:flex;gap:9px;align-items:flex-start;padding:5px 0;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--ink,#14202b)}" +
+      ".smd-safety-card{margin:0 0 14px;padding:16px 18px;border:1px solid var(--line,#e2e8f0);border-top:3px solid #d97706;border-radius:14px;background:var(--panel,#fff);box-shadow:0 1px 2px rgba(15,23,42,.05),0 8px 24px rgba(15,23,42,.07)}" +
+      ".smd-safety-eyebrow{font:800 10px var(--sans,system-ui);letter-spacing:.09em;text-transform:uppercase;color:#b45309;margin:0 0 3px}" +
+      ".smd-safety-h{display:flex;align-items:center;gap:8px;font:800 15px var(--sans,system-ui);letter-spacing:-.01em;color:var(--ink,#14202b);margin:0 0 2px}" +
+      ".smd-safety-h .smd-safety-ic{width:30px;height:30px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;background:#fef3c7;border:1px solid #f0d49b;border-radius:9px;color:#b45309}" +
+      ".smd-safety-tag{font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#64748b);margin:0 0 12px}" +
+      ".smd-safety-row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font:500 13px/1.55 var(--sans,system-ui);color:var(--ink,#14202b);border-top:1px solid var(--line,#eef2f5)}" +
+      ".smd-safety-row:first-child{border-top:none}" +
       ".smd-safety-row b{color:var(--ink,#14202b)}.smd-safety-ic{flex:0 0 auto}" +
-      ".smd-safety-ul{margin:5px 0 0;padding-left:18px}.smd-safety-ul li{margin:2px 0}" +
+      ".smd-safety-ul{margin:6px 0 0;padding-left:18px}.smd-safety-ul li{margin:3px 0}" +
       ".smd-safety-sub{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#64748b);letter-spacing:0}" +
-      ".smd-safety-inputs{display:flex;flex-wrap:wrap;gap:9px 12px;margin:2px 0 10px;padding:0 0 11px;border-bottom:1px dashed var(--line,#e2e8f0)}" +
-      ".smd-safety-inputs label{display:flex;flex-direction:column;gap:3px;font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748b);text-transform:uppercase;letter-spacing:.02em}" +
-      ".smd-safety-inputs input[type=number],.smd-safety-inputs select{width:78px;padding:5px 7px;border:1px solid var(--line,#d7dee3);border-radius:7px;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 13px var(--sans,system-ui)}" +
-      ".smd-safety-inputs label.chk{flex-direction:row;align-items:center;gap:6px;text-transform:none;font:600 12px var(--sans,system-ui);color:var(--ink,#14202b);align-self:flex-end;padding-bottom:5px}" +
-      ".smd-safety-inputs label.chk input{width:16px;height:16px}" +
+      ".smd-safety-grid-h{font:800 10px var(--sans,system-ui);letter-spacing:.09em;text-transform:uppercase;color:var(--slate-soft,#64748b);margin:0 0 8px}" +
+      ".smd-safety-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:10px;margin:0 0 12px;padding:12px;border:1px solid var(--line,#e2e8f0);border-radius:12px;background:var(--paper,#f6f7f5)}" +
+      ".smd-safety-inputs label{display:flex;flex-direction:column;gap:4px;font:700 10px var(--sans,system-ui);color:var(--slate-soft,#64748b);text-transform:uppercase;letter-spacing:.05em}" +
+      ".smd-safety-inputs input[type=number],.smd-safety-inputs select{width:100%;box-sizing:border-box;padding:8px 9px;border:1px solid var(--line,#d7dee3);border-radius:9px;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 13.5px var(--sans,system-ui);transition:border-color .15s,box-shadow .15s}" +
+      ".smd-safety-inputs input[type=number]:focus,.smd-safety-inputs select:focus{outline:none;border-color:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,.16)}" +
+      ".smd-safety-inputs label.chk{grid-column:1/-1;position:relative;flex-direction:row;align-items:center;gap:10px;text-transform:none;letter-spacing:0;background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:7px 14px 7px 7px;cursor:pointer;transition:border-color .15s,background .15s}" +
+      ".smd-safety-inputs label.chk:has(input:checked){border-color:#d97706;background:#fffbeb}" +
+      ".smd-safety-inputs label.chk input{position:absolute;opacity:0;width:1px;height:1px;margin:0}" +
+      ".smd-safety-inputs label.chk input:focus-visible+.smd-tgl-track{outline:2px solid #d97706;outline-offset:2px}" +
+      ".smd-tgl-track{width:34px;height:20px;flex:0 0 auto;border-radius:999px;background:var(--line,#d7dee3);position:relative;transition:background .15s}" +
+      ".smd-tgl-track::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .15s}" +
+      ".smd-safety-inputs label.chk input:checked+.smd-tgl-track{background:#d97706}" +
+      ".smd-safety-inputs label.chk input:checked+.smd-tgl-track::after{left:16px}" +
+      ".smd-tgl-txt{font:600 12.5px var(--sans,system-ui);color:var(--ink,#14202b)}" +
       ".smd-safety-empty{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}" +
-      ".smd-safety-draft{display:inline-block;font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;background:#fef3c7;border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}";
+      ".smd-safety-draft{display:inline-block;font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;background:#fef3c7;border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}" +
+      "@media(max-width:420px){.smd-safety-card{padding:14px 15px}.smd-safety-inputs{grid-template-columns:repeat(2,1fr);padding:10px}}";
     document.head.appendChild(st);
   }
   // render-time findings + syndrome id; the read-only base the card's own inputs are overlaid onto.
@@ -6001,15 +6024,72 @@
     function val(k) { var v = e && e[k]; return v == null ? "" : String(v); }
     var sexF = String((e && e.sex) || "").toLowerCase().charAt(0) === "f";
     var cardiacOn = !!(e && (e.knownCAD || e.knownHeartFailure || e.atrialFibHx));
-    return '<div class="smd-safety-inputs" id="smdSafetyInputs">' +
-      '<label>Age<input type="number" inputmode="numeric" data-sfx="age" value="' + esc(val("age")) + '"></label>' +
+    // BUG-019: checkbox inputs keep their data-sfx hooks (tests + recalc drive them); the
+    // switch chrome is pure CSS around a visually-hidden input.
+    return '<div class="smd-safety-grid-h">Patient parameters</div><div class="smd-safety-inputs" id="smdSafetyInputs">' +
+      '<label>Age<input type="number" inputmode="numeric" data-sfx="age" value="' + esc(val("age")) + '" placeholder="yrs"></label>' +
       '<label>Sex<select data-sfx="sex"><option value="m"' + (sexF ? "" : " selected") + '>M</option><option value="f"' + (sexF ? " selected" : "") + '>F</option></select></label>' +
-      '<label>Weight kg<input type="number" inputmode="decimal" data-sfx="weight" value="' + esc(val("weight")) + '"></label>' +
-      '<label>Creatinine<input type="number" inputmode="decimal" step="0.1" data-sfx="creatinine" value="' + esc(val("creatinine")) + '"></label>' +
-      '<label>Bilirubin<input type="number" inputmode="decimal" step="0.1" data-sfx="bilirubin" value="' + esc(val("bilirubin")) + '"></label>' +
-      '<label class="chk"><input type="checkbox" data-sfx="liverDisease"' + (e && e.liverDisease ? " checked" : "") + '>Liver disease</label>' +
-      '<label class="chk"><input type="checkbox" data-sfx="cardiac"' + (cardiacOn ? " checked" : "") + '>Cardiac (CAD/HF/AF)</label>' +
+      '<label>Weight kg<input type="number" inputmode="decimal" data-sfx="weight" value="' + esc(val("weight")) + '" placeholder="kg"></label>' +
+      '<label>Creatinine<input type="number" inputmode="decimal" step="0.1" data-sfx="creatinine" value="' + esc(val("creatinine")) + '" placeholder="mg/dL"></label>' +
+      '<label>Bilirubin<input type="number" inputmode="decimal" step="0.1" data-sfx="bilirubin" value="' + esc(val("bilirubin")) + '" placeholder="mg/dL"></label>' +
+      '<label class="chk"><input type="checkbox" data-sfx="liverDisease"' + (e && e.liverDisease ? " checked" : "") + '><span class="smd-tgl-track" aria-hidden="true"></span><span class="smd-tgl-txt">Liver disease</span></label>' +
+      '<label class="chk"><input type="checkbox" data-sfx="cardiac"' + (cardiacOn ? " checked" : "") + '><span class="smd-tgl-track" aria-hidden="true"></span><span class="smd-tgl-txt">Cardiac (CAD / HF / AF)</span></label>' +
       '</div>';
+  }
+  // BUG-019: Age/Sex stay in sync between the Save Case prompt (#scpAge/#scpSex) and the
+  // safety card, so the clinician never types them twice. Programmatic .value sets do not
+  // fire events, so the two directions cannot loop; the guard is belt-and-braces.
+  var _smdSyncing = false;
+  function smdSyncAgeSex() {
+    if (_smdSyncing) return;
+    var scpAge = document.getElementById("scpAge"), scpSex = document.getElementById("scpSex");
+    var box = document.getElementById("smdSafetyInputs");
+    if (!box) return;
+    function sfx(k) { return box.querySelector('[data-sfx="' + k + '"]'); }
+    // One-time wiring in each direction (the safety box is rebuilt per render; scp is static).
+    if (!box._smdSyncWired) {
+      box._smdSyncWired = true;
+      ["age", "sex"].forEach(function (k) {
+        var el = sfx(k);
+        if (el) { el.addEventListener("input", smdSyncAgeSex); el.addEventListener("change", smdSyncAgeSex); }
+      });
+    }
+    [["scpAge", scpAge], ["scpSex", scpSex]].forEach(function (pair) {
+      var el = pair[1];
+      if (el && !el._smdSyncWired) {
+        el._smdSyncWired = true;
+        el.addEventListener("input", smdSyncAgeSex); el.addEventListener("change", smdSyncAgeSex);
+      }
+    });
+    _smdSyncing = true;
+    try {
+      var src = null;
+      try { src = document.activeElement; } catch (e) {}
+      var sAge = sfx("age"), sSex = sfx("sex");
+      var scpSide = src === scpAge || src === scpSex;
+      if (scpSide) {
+        // Save Case → safety. scpSex "O"/empty has no safety equivalent; leave safety sex alone.
+        if (sAge && scpAge) sAge.value = scpAge.value || "";
+        if (sSex && scpSex) {
+          var v = String(scpSex.value || "").toUpperCase();
+          if (v === "M" || v === "F") sSex.value = v.toLowerCase();
+        }
+      } else if (src === sAge || src === sSex) {
+        // Safety → Save Case, mirroring exactly what the clinician just entered.
+        if (scpAge && sAge) scpAge.value = sAge.value || "";
+        if (scpSex && sSex) scpSex.value = String(sSex.value || "").toLowerCase() === "f" ? "F" : "M";
+      } else {
+        // Initial fill (neither side focused): fill empties only, never invent. Sex copies
+        // only when the engine actually knew it — the safety select defaults to "m".
+        if (scpAge && sAge && !scpAge.value && sAge.value) scpAge.value = sAge.value;
+        var eSex = (_safetyE && _safetyE.sex) ? String(_safetyE.sex).toLowerCase().charAt(0) : "";
+        if (scpSex && !scpSex.value && (eSex === "m" || eSex === "f")) scpSex.value = eSex.toUpperCase();
+        // Explicit scp entries win over engine defaults on the safety side.
+        if (sAge && scpAge && scpAge.value) sAge.value = scpAge.value;
+        if (sSex && scpSex && (scpSex.value === "M" || scpSex.value === "F")) sSex.value = scpSex.value.toLowerCase();
+      }
+      smdSafetyRecalc();
+    } finally { _smdSyncing = false; }
   }
   function smdSafetyOverlay(e, synId) {
     var oa = document.getElementById("outputArea"); if (!oa) return false;
@@ -6022,8 +6102,11 @@
     var fires = !!renalCheck(e) || !!hepaticCheck(e, drugs) || !!cardioCheck(e, drugs);
     if (!drugs.length && !fires) return false;
     smdInjectSafetyCSS();
+    var wIco = rIco("warn");
     var html = '<div id="smdSafetyCard" class="smd-safety-card">' +
-      '<div class="smd-safety-h">' + rIco("warn") + ' Patient-specific safety <span class="smd-safety-sub">— enter values to check; does not change the recommendation</span></div>' +
+      '<div class="smd-safety-eyebrow">Patient safety</div>' +
+      '<div class="smd-safety-h">' + (wIco ? '<span class="smd-safety-ic">' + wIco + '</span>' : '') + 'Patient-specific safety</div>' +
+      '<div class="smd-safety-tag">Enter values to check — this does not change the recommendation. Age and sex stay in sync with Save Case.</div>' +
       smdSafetyInputsHTML(e) +
       '<div class="smd-safety-lines" id="smdSafetyLines"></div></div>';
     // Sit the card with the recommendation: directly under the (relocated) Save-case box when
@@ -6035,7 +6118,7 @@
     if (box) Array.prototype.forEach.call(box.querySelectorAll("[data-sfx]"), function (el) {
       el.addEventListener("input", smdSafetyRecalc); el.addEventListener("change", smdSafetyRecalc);
     });
-    smdSafetyRecalc();
+    try { smdSyncAgeSex(); } catch (e2) { smdSafetyRecalc(); }
     return true;
   }
 

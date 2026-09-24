@@ -29,6 +29,7 @@ public class MainActivity extends BridgeActivity {
         // local-plugins/capacitor-whisper/package.json) is on-device Whisper as the production
         // ASR target on Android too, matching iOS.
         registerPlugin(WhisperPlugin.class);
+        registerPlugin(NfcPlugin.class);
         super.onCreate(savedInstanceState);
         setupSafeAreaInsets();
         setupRenderProcessRecovery();
