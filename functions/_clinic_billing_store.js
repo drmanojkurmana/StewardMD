@@ -183,6 +183,7 @@ export async function dispenseOrder(env, orgId, orderId, actor, claim) {
     return { ok: false, error: "patient_mismatch", message: "That order belongs to a different patient. Nothing was dispensed." };
   }
   if (o.status === "dispensed") return { ok: true, already: true };
+  if (!isDispensable(Object.assign({ id: orderId }, o))) return { ok: false, error: "not_dispensable", status: o.status, kind: o.kind };
   const updates = [wUpdate(env, "q_orders/" + orderId, { status: "dispensed", dispensedAt: Date.now(), dispensedBy: actor || "", updatedAt: Date.now() })];
   if (o.tariffId) {
     try {
