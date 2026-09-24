@@ -262,7 +262,30 @@
         if (!p || !p.ok) { document.getElementById("err").textContent = p && p.error === "billing_disabled" ? "Billing is not enabled for this clinic yet." : p && p.error === "not_found" ? "No patient found with that ID." : "The patient could not be looked up. Try again."; return; }
         if (!o || !o.ok) { document.getElementById("err").textContent = "This patient's orders could not be loaded. Do not read this as nothing to bill."; return; }
         review({ patient: p, orders: o.orders || [] });
+        loadRefunds(id);
       });
+  }
+  /* OPD plan item 9: what this patient PAID for, each with a Refund button. The cashier states why; the
+   * amount is the order's own, never typed. A dispensed medicine is refused by the server as a return. */
+  function loadRefunds(id){
+    api("orders?orgId="+encodeURIComponent(orgId)+"&patientId="+encodeURIComponent(id)+"&status=paid").then(function(r){
+      var old = document.getElementById("refunds"); if (old && old.parentNode) old.parentNode.removeChild(old);
+      if (!r || !r.ok || !(r.orders || []).length) return;
+      var html = '<div id="refunds" class="card" style="margin-top:12px"><b>Paid - refund only if not delivered</b>' + r.orders.map(function(o){
+        return orderLine(o).replace(/<\/div>$/, ' <button class="ghost" data-refund="'+esc(o.id)+'" style="margin-left:8px">Refund</button></div>');
+      }).join("") + '</div>';
+      document.getElementById("err").insertAdjacentHTML("afterend", html);
+      Array.prototype.forEach.call(document.querySelectorAll("[data-refund]"), function(b){
+        b.onclick = function(){
+          var why = prompt("Why is this refunded? (for example: doctor unavailable, test not done)");
+          if (!why || !why.trim()) return;
+          api("refund", { method:"POST", body:{ orgId:orgId, orderId:b.getAttribute("data-refund"), reason:why.trim() } }).then(function(x){
+            document.getElementById("err").textContent = x && x.ok ? "Refunded " + rupees(x.refundAmount || 0) + "." : ((x && x.message) || "Not refunded.");
+            loadRefunds(id);
+          });
+        };
+      });
+    });
   }
 
   function orderLine(o){

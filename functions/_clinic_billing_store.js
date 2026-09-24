@@ -215,7 +215,7 @@ export async function refundOrder(env, orgId, orderId, reason, actor) {
   if (!canOrderTransition(o.status, "refunded")) return { ok: false, error: "not_refundable", status: o.status, message: o.status === "dispensed" ? "This medicine was handed over. Record it as a return, not a refund." : "Only a paid order can be refunded." };
   const amount = Math.max(0, Math.round(Number(o.unitPrice) || 0)) * Math.max(1, Math.round(Number(o.qty) || 1));
   try {
-    await fsCommit(env, [wUpdate(env, "q_orders/" + orderId, { status: "refunded", refundAmount: amount, refundReason: why.slice(0, 200), refundedBy: actor || "", refundedAt: Date.now(), updatedAt: Date.now() }, { updateTime: d.updateTime })]);
+    await fsCommit(env, [wUpdate(env, "q_orders/" + orderId, { status: "refunded", refundAmount: amount, refundReason: why.slice(0, 200), refundedBy: actor || "", refundedAt: Date.now(), refundedUtcDay: utcDay(Date.now()), updatedAt: Date.now() }, { updateTime: d.updateTime })]);
   } catch (e) {
     if (e && e.code === "precondition") return { ok: false, error: "changed", message: "This order changed while you were refunding it. Reload and try again." };
     throw e;
@@ -371,5 +371,17 @@ export async function shiftReport(env, orgId, offsetMinutes) {
     });
   }
   invoices.sort((a, b) => (b.paidAt || 0) - (a.paidAt || 0));
-  return { date, total: paise, count, byMethod, byCount, invoices };
+  /* OPD plan item 9: the day's REFUNDS, netted. A drawer that counts takings and not what was handed back
+   * never balances, and the gap reads as missing cash. Found by the refundedUtcDay refundOrder writes. */
+  let refundPaise = 0, refundCount = 0;
+  const seenR = new Set();
+  for (const day of days) {
+    const { rows } = await readAll(env, "q_orders", [{ field: "orgId", value: orgId }, { field: "refundedUtcDay", value: day }], REVENUE_CAP);
+    rows.forEach((r) => {
+      const f = r.fields || {};
+      if (f.orgId !== orgId || f.status !== "refunded" || (f.refundedAt || 0) < dayStart || f.refundedAt >= dayEnd || !r.id || seenR.has(r.id)) return;
+      seenR.add(r.id); refundPaise += Math.max(0, Number(f.refundAmount) || 0); refundCount++;
+    });
+  }
+  return { date, total: paise, count, byMethod, byCount, invoices, refunds: { total: refundPaise, count: refundCount }, net: paise - refundPaise };
 }
