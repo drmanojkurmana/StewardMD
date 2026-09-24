@@ -32,7 +32,7 @@
   var KEY_ENGINE = "stewardmd.maikEngine";
   var KEY_LLM_FIRST = "smd_maik_llm_first";      // home.js maikLLMFirst() reads this
   var ENGINES = { rag: 1, cloud: 1, local: 1 };
-  var PACK_ID = "maik-mxcore";
+  var PACK_ID = "maik-lite";   // default pin (audit T27, 2026-09-25); maik-models.js activePack() agrees
   // The pack the clinician ASKED for that is not installed yet. Kept separate from the ANSWERING
   // pack (SMD_MAIK_MODELS.activePack) on purpose: picking a model to download must never pull the
   // rug from under the model currently answering. That exact confusion presented as "no answer".
@@ -1419,6 +1419,17 @@
      * instead of two. Headings only: the rows are unchanged and nothing is collapsed here, because a
      * picker that hides the thing you came to tap is worse than a long one.
      */
+    /* LABS (audit T27, 2026-09-25, owner: keep the picker, no automatic tiering). Packs the registry
+     * marks `labs` (Neural, Horizon, Swift, Max, Max 2) sit in one collapsed "Labs" group at the end,
+     * still selectable and downloadable; it opens by itself when the current choice is one of them. */
+    function isLabs(o) { try { var M = window.SMD_MAIK_MODELS; return !!(o.pack && M && M.PACKS[o.pack] && M.PACKS[o.pack].labs); } catch (e) { return false; } }
+    function labsHTML(rows) {
+      if (!rows.length) return "";
+      var open = rows.some(function (o) { return o.id === cur; });
+      return '<details data-mk-labs' + (open ? " open" : "") + '><summary style="cursor:pointer;list-style:none;font:700 10.5px/1.2 var(--sans,system-ui);letter-spacing:.05em;' +
+        'text-transform:uppercase;color:var(--mk-mut,#5a7184);background:var(--mk-bg,#fff);padding:12px 16px 5px">Labs (' + rows.length + ')</summary>' +
+        rows.map(oneRowHTML).join("") + '</details>';
+    }
     function pickerGroupOf(o) {
       if (!o.pack) return "";
       // Same three shelves as Settings, from the same registry-derived grade.
@@ -1436,8 +1447,9 @@
     // registry's. "" is the hosted pair (Cloud, KB only), which stays first and unlabelled.
     var PICKER_ORDER = [""].concat(libGroups().map(function (g) { return g.title; }));
     function rowsHTML() {
-      var all = options(), bucket = {}, extra = [];
+      var all = options(), bucket = {}, extra = [], labs = [];
       all.forEach(function (o) {
+        if (isLabs(o)) { labs.push(o); return; }
         var g = pickerGroupOf(o);
         if (PICKER_ORDER.indexOf(g) === -1) { extra.push(g); }
         (bucket[g] = bucket[g] || []).push(o);
@@ -1448,7 +1460,7 @@
         var rows = bucket[g];
         if (!rows || !rows.length) return "";
         return (g ? groupHeadHTML(g) : "") + rows.map(oneRowHTML).join("");
-      }).join("");
+      }).join("") + labsHTML(labs);
     }
     /* Bars instead of prose (owner, 2026-09-21: "telling about model in simple bars or words").
      * Depth is the caps table's reasoning tier; Speed is its inverse. ponytail: speed is a proxy from

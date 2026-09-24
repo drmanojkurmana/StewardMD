@@ -216,6 +216,9 @@
       }
     },
     "maik-neural": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Neural",
       actual: "MedGemma 1.5 4B (Q5_K_M)",
       draft: DRAFT_GEMMA3,
@@ -246,6 +249,9 @@
       }
     },
     "maik-horizon": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Horizon",
       actual: "Gemma 4 E2B (Q4_K_M)",
       tier: 3,
@@ -348,6 +354,9 @@
       }]
     },
     "bonsai-8b": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Swift",
       actual: "Bonsai 8B (PrismML, GGUF Q1_0 g128, 1-bit)",
       draft: DRAFT_QWEN3,
@@ -380,6 +389,9 @@
      * are exercised on a phone. UNVERIFIED on device at the time of writing: the fork runtime was
      * built, the 5.95 GB pack itself has not yet been loaded on a 12 GB phone. */
     "bonsai2-27b": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Max 2",
       actual: "Ternary Bonsai 2 27B (PrismML, GGUF PTQ1_0, 1.75-bit ternary, Qwen3.8-27B base)",
       tier: 5.5,
@@ -401,6 +413,9 @@
       }]
     },
     "bonsai-27b": {
+      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
+      // group rather than beside the recommended packs.
+      labs: true,
       label: "MAiK Max",
       actual: "Bonsai 27B (PrismML, GGUF Q1_0 g128, 1-bit, Qwen3.6 backbone)",
       tier: 5,
@@ -798,7 +813,9 @@
   }
 
   /** Which pack the on-device engine should run. Defaults to the primary (MedGemma). */
-  function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-mxcore"; }
+  // Default pin (audit T27, 2026-09-25): MaiK Lite, our own model and the smallest and fastest
+  // pack, not MxCore. A clinician's own choice (KEY_ACTIVE) is untouched.
+  function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-lite"; }
   function setActivePack(id) { if (PACKS[id]) lset(KEY_ACTIVE, id); return activePack(); }
 
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
