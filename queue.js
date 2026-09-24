@@ -1003,7 +1003,10 @@
         loadPulse(true);
         st.pollId = setInterval(function () {
           apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (n) {
-            if (n && n.ok) { st.board = n; var e2 = root(); if (e2 && e2.querySelector(".q-fd")) e2.innerHTML = renderFrontDesk(n); }
+            /* The board is kept fresh, but never rebuilt over a field somebody is typing in: the same rule that
+             * fixed the staff form (paint) and the pulse (pulsePaint). The next pass paints it. */
+            var ae = document.activeElement, typing = !!(ae && ae.closest && ae.closest("input, textarea, select"));
+            if (n && n.ok) { st.board = n; var e2 = root(); if (e2 && e2.querySelector(".q-fd") && !typing) e2.innerHTML = renderFrontDesk(n); }
           }).catch(function () {});
           loadPulse();
         }, POLL_MS);
