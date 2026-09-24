@@ -112,7 +112,7 @@ test("the three boards are wired: the console, the app (room and front desk, qui
   assert.match(q, /if \(liveQuiet\(\)\) return;   \/\/ plan item 16/);
   assert.match(q, /liveStart\(refresh\);/);
   assert.match(q, /liveStart\(fdPoll\);/);
-  assert.match(q, /cmd === "staffout"\) \{ if \(!offSignOut\(\)\) return; liveStop\(\);/);
+  assert.match(q, /function signOutDesk\(\) \{ if \(!offSignOut\(\)\) return false; liveStop\(\); return true; \}/, "signing out ends the live stream");
   assert.match(tv, /<script src="\/opd-live\.js\?v=/);
   assert.match(tv, /SMD_OPD_LIVE\.connect\(\{ url: "\/api\/queue\/live\?t="/);
   assert.match(read("scripts/build-wardsynq-site.sh"), /opd-live\.js/);

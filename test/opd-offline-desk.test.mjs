@@ -165,7 +165,8 @@ test("the check-in sheet keeps an unreachable check-in offline with its number a
   assert.match(q, /offline: function \(sent\) \{ var d = offDesk\(\); return d \? d\.issue\(sent\) : null; \}/);
   assert.match(q, /printToken: printTokenSlip/);
   assert.match(q, /loadPulse\(\);\n\s+offTick\(\);/, "each front-desk poll sends what is waiting");
-  assert.match(q, /cmd === "staffout"\) \{ if \(!offSignOut\(\)\) return;/, "signing out with unsent check-ins asks first");
+  assert.match(q, /cmd === "staffout"\) \{ if \(!signOutDesk\(\)\) return;/, "signing out with unsent check-ins asks first");
+  assert.match(q, /function signOutDesk\(\) \{ if \(!offSignOut\(\)\) return false;/);
   assert.match(q, /function offSignOut\(\) \{[\s\S]{0,120}if \(d\.pending\(\)\)[\s\S]{0,80}window\.confirm/);
   assert.match(idx, /<script src="\/opd-offline-desk\.js\?v=/);
 });
