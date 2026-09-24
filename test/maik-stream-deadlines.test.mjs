@@ -73,7 +73,7 @@ test("the streaming call site passes the deadlines through", () => {
   // and a length-capped regex silently stops matching as soon as anything is added to it.
   const i = API.indexOf("streamGeminiToSSE(up,");
   assert.ok(i > 0, "the live-stream call site must exist");
-  const call = API.slice(i, i + 700);
+  const call = API.slice(i, i + 1400);
   assert.match(call, /idleMs: streamIdleMs\(env\)/, "defaults in the helper are useless if the call site does not pass them");
   assert.match(call, /totalMs: streamTotalMs\(env\)/, "both bounds must be passed");
 });

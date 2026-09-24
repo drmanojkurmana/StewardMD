@@ -1110,6 +1110,22 @@ const ROUTE_MEM_MAX = 500;
  * identical for every user, and previously read from KV serially in front of every single request. */
 let _cfgCache = null;
 const CFG_TTL_MS = 30000;
+/* The MaiK runtime config (answer cache / abstain / cache version; one KV read) was read on EVERY
+ * /explain (T15). Cached per isolate for 45s, keyed by the KV binding object plus the env flags it
+ * layers over, so a console change reaches a warm isolate within 45s and the admin POST below drops
+ * the entry at once. */
+const _maikCfgMem = new WeakMap();
+const MAIK_CFG_TTL_MS = 45000;
+async function maikCfg(env) {
+  const store = usageKv(env);
+  if (!store || typeof store !== "object") return getMaikCfg(store, env);
+  const sig = [env.MAIK_ANSWER_CACHE, env.MAIK_ABSTAIN, env.MAIK_CACHE_VERSION].join("|");
+  const hit = _maikCfgMem.get(store), now = Date.now();
+  if (hit && hit.sig === sig && now < hit.exp) return hit.v;
+  const v = await getMaikCfg(store, env);
+  _maikCfgMem.set(store, { sig, v, exp: now + MAIK_CFG_TTL_MS });
+  return v;
+}
 function routeMemPut(k, v) {
   try {
     if (_routeMem.has(k)) _routeMem.delete(k);
@@ -1209,6 +1225,7 @@ export async function onRequest(context) {
       if (request.method === "POST") {
         let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
         const cfg = await setMaikCfg(store, { answerCache: b.answerCache, abstain: b.abstain, clearCache: b.clearCache === true, cacheVersion: b.cacheVersion }, Date.now());
+        try { _maikCfgMem.delete(store); } catch (e) {}   // this isolate sees the change at once
         await auditRecord(store, "maik-config", "cache=" + cfg.answerCache + " abstain=" + cfg.abstain + (b.clearCache ? " cache-cleared" : ""), actorId, Date.now());
         return json({ ok: true, config: await getMaikCfg(store, env) });
       }
@@ -1454,6 +1471,11 @@ export async function onRequest(context) {
   }
 
   const _hm = {};   // sub-stage marks inside the "head" region, so its ~1.1s is attributable
+  // Deferred per-module question count for /explain (T36): committed once, only for a generated answer.
+  let _moduleCommit = null;
+  const _countQuestion = () => { const c = _moduleCommit; _moduleCommit = null; if (c) { try { context.waitUntil(Promise.resolve().then(c).catch(() => {})); } catch (e) {} } };
+  // Metering writes never delay the answer (T15).
+  const _later = (p) => { try { context.waitUntil(Promise.resolve(p).catch(() => {})); } catch (e) {} };
   let body = {};
   try { if (request.method === "POST") body = await request.json(); } catch (e) {}
   _hm.body = Date.now() - _reqT0;
@@ -1501,11 +1523,19 @@ export async function onRequest(context) {
       : null;
     // No .catch() here on purpose: it is awaited inside the try below, so a failure still fails open
     // exactly as before. Swallowing it to null here would instead skip metering with a bad key.
-    const _whoP = (_mod && !_isEvidReview) ? identify(request, env) : null;
+    /* What counts as a doctor's QUESTION against the daily module cap (T36). /refine + /route (the
+     * router), /verify (grounding check) and a tier-2 "Know more" (body.tier 2 + priorLead: the same
+     * question's detail) are not new questions: they still get the pause switch and device cap above,
+     * but never consume or get blocked by the question cap. For /explain the count is DEFERRED and
+     * committed only when an answer is actually generated (_countQuestion), so a cache hit or a failed
+     * generation never uses up one of the doctor's questions. */
+    const _skipCap = seg === "refine" || seg === "route" || seg === "verify" || (seg === "explain" && !!(body && body.tier === 2 && body.priorLead));
+    const _capped = _mod && !_isEvidReview && !_skipCap;
+    const _whoP = _capped ? identify(request, env) : null;
     // Owner check runs alongside the others so the exemption costs no extra wall time. checkQuota
     // (_usage.js) already exempts owners from ITS per-user throttles; this makes the second cap
     // system agree, instead of capping an owner one layer down.
-    const _ownerP = (_mod && !_isEvidReview) ? Promise.resolve(ownerOK(request, env)).catch(function () { return false; }) : null;
+    const _ownerP = _capped ? Promise.resolve(ownerOK(request, env)).catch(function () { return false; }) : null;
     if (_dcP) {
       try {
         const _dc = await _dcP;
@@ -1513,10 +1543,11 @@ export async function onRequest(context) {
         if (!_dc.ok) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
       } catch (e) { /* fail-open */ }
     }
-    if (_mod && !_isEvidReview) {
+    if (_capped) {
       try {
         const _who = await _whoP;
-        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context), await _ownerP);
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context), await _ownerP, seg === "explain");
+        if (_mq && typeof _mq.commit === "function") _moduleCommit = _mq.commit;
         try { _hm.gateMs = _mq && _mq._ms; } catch (e) {}
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
         if (!_mq.ok) {
@@ -1583,9 +1614,54 @@ export async function onRequest(context) {
          * touches no PHI, and a refused request is the rare case. Never reordered the other way -
          * the gate's REFUSAL still happens before any answer is generated. */
         const _gateP = checkQuota(env, request, hasDx ? "case" : "general", { waitUntil: context.waitUntil.bind(context) });
-        const _rerankP = (pkg.retrieved && pkg.retrieved.length > 1 && !isTutor)
-          ? rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null)
-          : null;
+        // Effective MaiK config = owner runtime overrides (AI Control Center, KV) layered over env,
+        // cached per isolate like the other config (T15; maikCfg).
+        const _mcfg = await maikCfg(env);
+        _at("cfg");
+        const wantStream = (new URL(request.url).searchParams.get("stream") === "1") && (((request.headers.get("Accept")) || "").indexOf("text/event-stream") >= 0);
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0
+          || new URL(request.url).searchParams.get("livestream") === "1";
+        // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
+        // This MUST sit above the live-stream early return. It used to sit under it, so whenever
+        // MAIK_LIVE_STREAM (or ?livestream=1) was on the handler returned the SSE response before ever
+        // reading or writing the cache - the "maik:ans:* stays empty though the KV binding is proven"
+        // bug. The stream path now writes the finished answer back from its completion callback.
+        /* Only GENERIC knowledge answers: no computed Dx (case commentary), and never when
+         * Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
+         *
+         * LAZY TIERS USED TO BE EXCLUDED WHOLESALE, and that quietly disabled the cache for EVERYONE.
+         * maikLazyOn() in home.js defaults TRUE (`localStorage.getItem("smd_maik_lazy") !== "0"`), so
+         * the client sends `tier: 1` on essentially every question, `!(body.tier)` was therefore false
+         * on essentially every request, and `maik:ans:*` could never fill no matter what else was
+         * fixed. The exclusion was right in spirit and too blunt in practice.
+         *
+         * What actually must not be cached is a tier whose output depends on state NOT in the key:
+         * the tier-2 "more" call is conditioned on `priorLead` (the lead already shown), so two
+         * requests with the same question can legitimately need different detail. Tier 1 is a pure
+         * function of the question, exactly like an untiered answer.
+         *
+         * So: cache tier 1 and untiered, refuse anything carrying priorLead, and put the tier IN THE
+         * KEY so a short lead can never be served to a request that wanted the full answer.
+         *
+         * The cache is SHARED ACROSS USERS, so a request carrying the asker's own context (history,
+         * About-me, earlier topics) is never read or written (cacheEligibleCtx), and the key carries a
+         * KB fingerprint so an answer is only reused for the same evidence. body.regen (Regenerate)
+         * skips the READ but still writes, so the fresh answer replaces the one the doctor rejected. */
+        const _tier = (body && body.tier) || 0;
+        const _tierCacheable = (_tier === 0 || _tier === 1) && !(body && body.priorLead);
+        const _cacheEligible = _mcfg.answerCache && !hasDx && _tierCacheable && !maikWiringOn(env) && cacheEligibleCtx(pkg);
+        let _ckey = null, _hitP = null;
+        if (_cacheEligible) {
+          try {
+            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier, kb: kbFingerprint(pkg) });
+            if (_ckey && !(body && body.regen)) _hitP = getCachedAnswer(usageKv(env), _ckey).catch(() => null);
+          } catch (e) { _ckey = null; }
+        }
+        /* The answer-cache read runs alongside the gate and BEFORE the re-rank (T15): a hit returns
+         * without ever calling Workers AI. With a cache read pending, the re-rank starts only after a
+         * miss; otherwise it still overlaps the gate as before. */
+        const _wantRerank = !!(pkg.retrieved && pkg.retrieved.length > 1 && !isTutor);
+        let _rerankP = (_wantRerank && !_hitP) ? rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null) : null;
         /* BOUND THE GATE (2026-08-24). Measured on production: Gemini's first token is 2.0-4.2s, but
          * the clinician waited up to 7.7s — because the quota gate's KV reads have a long tail (p95
          * seen at several seconds, p50 ~400ms). That tail is dead time before Gemini is even called.
@@ -1606,6 +1682,17 @@ export async function onRequest(context) {
         try { _mark.qms = gate._qms; } catch (e) {}
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         _at("gate");
+        if (_hitP) {
+          const _hit = await _hitP;
+          if (_hit && _hit.text) {
+            _later(recordUsage(gate, { inTok: 0, outTok: 0, status: "cache" }));   // metered, never counted as a question (T36)
+            const _cc = []; (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && _cc.indexOf(p) < 0) _cc.push(p); }));
+            if (wantStream) return withCors(request, streamTextAsSSE(_hit.text));
+            return json({ text: _hit.text, mode: "grounded", citations: _cc, cached: true });
+          }
+          if (_wantRerank) _rerankP = rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null);   // miss: now the re-rank
+          _at("cache");
+        }
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
         // SKIP for the CliniX tutor: rerankRetrieved() is a real extra network round-trip to a
         // separate Workers AI model (@cf/baai/bge-reranker-base), paid SEQUENTIALLY before the
@@ -1664,9 +1751,6 @@ export async function onRequest(context) {
           if (body && body.tier === 1) sysA = sysA + "\n\nOUTPUT MODE — BOTTOM LINE ONLY: give ONLY tier 1 (the direct answer PLUS all safety-critical information — red flags, contraindications, time-critical 'refer/admit/treat now' actions, key drug cautions). Do NOT write @@MORE@@ and do NOT write any tier-2 detail; a separate follow-up will request the depth.";
           else if (body && body.tier === 2) sysA = sysA + "\n\nOUTPUT MODE — DETAIL ONLY: the clinician already has your concise bottom line" + (body.priorLead ? (" (\"" + String(body.priorLead).slice(0, 400).replace(/"/g, "'") + "\")") : "") + ". Now give ONLY the tier-2 depth for this question — rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note, and nuance. Do NOT repeat the bottom line and do NOT write @@MORE@@.";
         } catch (e) {}
-        // Effective MaiK config = owner runtime overrides (AI Control Center, KV) layered over env.
-        const _mcfg = await getMaikCfg(usageKv(env), env);
-        _at("cfg");
         // Cite-or-abstain safety directive (toggle in AI Control Center / MAIK_ABSTAIN). Never fabricate.
         try {
           if (_mcfg.abstain) {
@@ -1676,7 +1760,7 @@ export async function onRequest(context) {
         // Phase 2 — opt-in streaming (client sends ?stream=1 + Accept: text/event-stream). If the
         // provider can't stream we fall straight through to the unchanged JSON path below, so the
         // answer never fails to arrive.
-        const wantStream = (new URL(request.url).searchParams.get("stream") === "1") && (((request.headers.get("Accept")) || "").indexOf("text/event-stream") >= 0);
+        // (wantStream is computed above, before the cache read.)
         // True live token streaming from the provider is UNRELIABLE in production (the SSE upstream
         // opens then delivers zero bytes, so the client stalls on an empty stream and only recovers via
         // a late fallback — the "MaiK took too long" hang, first diagnosed and fixed in #554/#559).
@@ -1692,58 +1776,14 @@ export async function onRequest(context) {
         // (aiEnabled is false there), so a preview is not a usable staging environment for this.
         // Default stays OFF: absent the param and the env flag, behaviour is byte-identical, so a
         // regression here cannot reach a clinician who did not ask for it.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0
-          || new URL(request.url).searchParams.get("livestream") === "1";
-        // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
-        // This MUST sit above the live-stream early return below. It used to sit under it, so whenever
-        // MAIK_LIVE_STREAM (or ?livestream=1) was on the handler returned the SSE response before ever
-        // reading or writing the cache - the "maik:ans:* stays empty though the KV binding is proven"
-        // bug. The stream path now writes the finished answer back from its completion callback.
-        /* Only GENERIC knowledge answers: no computed Dx (case commentary), and never when
-         * Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
-         *
-         * LAZY TIERS USED TO BE EXCLUDED WHOLESALE, and that quietly disabled the cache for EVERYONE.
-         * maikLazyOn() in home.js defaults TRUE (`localStorage.getItem("smd_maik_lazy") !== "0"`), so
-         * the client sends `tier: 1` on essentially every question, `!(body.tier)` was therefore false
-         * on essentially every request, and `maik:ans:*` could never fill no matter what else was
-         * fixed. The exclusion was right in spirit and too blunt in practice.
-         *
-         * What actually must not be cached is a tier whose output depends on state NOT in the key:
-         * the tier-2 "more" call is conditioned on `priorLead` (the lead already shown), so two
-         * requests with the same question can legitimately need different detail. Tier 1 is a pure
-         * function of the question, exactly like an untiered answer.
-         *
-         * So: cache tier 1 and untiered, refuse anything carrying priorLead, and put the tier IN THE
-         * KEY so a short lead can never be served to a request that wanted the full answer.
-         *
-         * The cache is SHARED ACROSS USERS, so a request carrying the asker's own context (history,
-         * About-me, earlier topics) is never read or written (cacheEligibleCtx), and the key carries a
-         * KB fingerprint so an answer is only reused for the same evidence. body.regen (Regenerate)
-         * skips the READ but still writes, so the fresh answer replaces the one the doctor rejected. */
-        const _tier = (body && body.tier) || 0;
-        const _tierCacheable = (_tier === 0 || _tier === 1) && !(body && body.priorLead);
-        const _cacheEligible = _mcfg.answerCache && !hasDx && _tierCacheable && !maikWiringOn(env) && cacheEligibleCtx(pkg);
-        let _ckey = null;
-        if (_cacheEligible) {
-          try {
-            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier, kb: kbFingerprint(pkg) });
-            if (_ckey && !(body && body.regen)) {
-              const _hit = await getCachedAnswer(usageKv(env), _ckey);
-              if (_hit && _hit.text) {
-                try { await recordUsage(gate, { inTok: 0, outTok: 0, status: "cache" }); } catch (e) {}
-                const _cc = []; (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && _cc.indexOf(p) < 0) _cc.push(p); }));
-                if (wantStream) return withCors(request, streamTextAsSSE(_hit.text));
-                return json({ text: _hit.text, mode: "grounded", citations: _cc, cached: true });
-              }
-            }
-          } catch (e) { _ckey = null; }
-        }
+        // (liveStream is computed above, before the cache read.)
         if (wantStream && liveStream) {
           let up = null;
           const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full, usage) { try { recordUsage(gate, { ...usageTokens({ usage: usage }, sysA.length + grounded.length, full), status: "success" }); } catch (e) {}
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full, usage) { try { _later(recordUsage(gate, { ...usageTokens({ usage: usage }, sysA.length + grounded.length, full), status: full ? "success" : "failed", noCount: _tier === 2 })); } catch (e) {}
+            if (full) _countQuestion();
             // Populate the answer cache from the STREAM path too. waitUntil, because the response has
             // already been handed to the client by the time the last token lands (same pattern as the
             // router cache write below, which is why that one has always worked and this one did not).
@@ -1772,9 +1812,10 @@ export async function onRequest(context) {
         // the model tier, not the output cap, was the real cost; the answer already finished at
         // STOP well under the 2560-token cap). isTutor takes precedence over complex-based tiering.
         try { text = await gen([{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); }
-        catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { ...tokens(nsSys.length + grounded.length, text), status: "success" });
-        if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
+        catch (e) { _later(recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" })); throw e; }
+        _later(recordUsage(gate, { ...tokens(nsSys.length + grounded.length, text), status: text ? "success" : "failed", noCount: _tier === 2 }));
+        if (text) _countQuestion();
+        if (_ckey && text) _later(putCachedAnswer(usageKv(env), _ckey, { text: text }, env));   // store for the next identical question
         // Client asked for a stream: hand the reliable whole-answer back over the SSE channel it's
         // already listening on (one delta + done). Renders immediately — no empty stream, no hang.
         if (wantStream) {

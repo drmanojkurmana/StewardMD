@@ -282,11 +282,16 @@ export async function recordUsage(gate, info) {
   const inTok = Math.max(0, info.inTok | 0), outTok = Math.max(0, info.outTok | 0);
   const cost = estCostInr(cfg, inTok, outTok);
   const u = gate.u, m = gate.m, g = gate.g;
-  if (gate.type === "general" || gate.type === "intent") u.general += 1;
-  else if (gate.type === "case") u.case += 1;
-  if (gate.type === "intent") u.intent += 1;
-  if (gate.type === "ocr") u.ocr += 1;
-  if (gate.type === "pdf") u.pdfPages += (info.pages || 1);
+  /* Only a GENERATED result counts against the per-user daily request caps (T36): a cache hit
+   * (status "cache"), a failed call, and a continuation the caller marks noCount (MaiK's tier-2
+   * "Know more") are metered for tokens/cost below but are not a new request. */
+  if (info.status === "success" && !info.noCount) {
+    if (gate.type === "general" || gate.type === "intent") u.general += 1;
+    else if (gate.type === "case") u.case += 1;
+    if (gate.type === "intent") u.intent += 1;
+    if (gate.type === "ocr") u.ocr += 1;
+    if (gate.type === "pdf") u.pdfPages += (info.pages || 1);
+  }
   u.tokens += inTok + outTok; m.tokens += inTok + outTok;
   g.cost += cost; g.req += 1;
   // per-request-type + status tallies for the admin view (no content)

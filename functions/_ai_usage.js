@@ -454,7 +454,10 @@ export async function poolKeyFor(store, doctorId) {
  * cap and the per-USER cost cap. It does NOT skip metering — recordAiUsage still runs, so owner spend
  * is still counted in the dashboards and still feeds the PROJECT-WIDE daily-cost circuit breaker,
  * which nothing exempts anybody from. An owner can be uncapped without being invisible. */
-export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt) {
+/* deferRecord (optional, T36): check the cap now but DON'T count yet. The result carries commit(), which
+ * the caller runs only once an answer was actually generated, so a cache hit or a failed generation
+ * never uses up one of the doctor's daily questions. The cap check itself is unchanged. */
+export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt, deferRecord) {
   const _t = { t0: Date.now() };
   const [, pooled] = await Promise.all([
     warmBillingCfg(store).catch(function () {}),           // live enforce/cost-cap flags (cached 30s)
@@ -476,7 +479,8 @@ export async function gateAndCount(env, store, moduleId, doctorId, subscription,
   const rec = function () {
     return recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now);
   };
-  if (typeof waitUntil === "function") { try { waitUntil(rec().catch(function () {})); } catch (e) {} }
+  if (deferRecord) { try { q.commit = rec; } catch (e) {} }
+  else if (typeof waitUntil === "function") { try { waitUntil(rec().catch(function () {})); } catch (e) {} }
   else { try { await rec(); } catch (e) {} }
   _t.rec = Date.now() - _t.t0;
   try { q._ms = _t; } catch (e) {}                         // stage attribution; callers ignore extras

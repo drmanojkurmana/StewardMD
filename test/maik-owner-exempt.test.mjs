@@ -60,6 +60,6 @@ test("the owner check is started in PARALLEL, so the fix costs no wall time", ()
 
 test("appending the parameter cannot break existing callers", () => {
   // Several tests call gateAndCount with the shorter signature; ownerExempt must be last and optional.
-  assert.match(AIU, /gateAndCount\(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt\)/,
+  assert.match(AIU, /gateAndCount\(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt(, deferRecord)?\)/,
     "ownerExempt must be the LAST parameter so shorter calls still work");
 });
