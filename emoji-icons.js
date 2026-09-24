@@ -123,6 +123,182 @@
     var out = s.replace(CLUSTER, function (m) { var c = classify(m); return c.keep ? m : (c.text != null ? c.text : "\u0000"); });
     return out.replace(/\u0000[ \u00A0]?/g, "").replace(/ {2,}/g, " ").replace(/^ +/, "");
   }
+  // ── AI-style dashes (owner, 2026-09-24: "remove AI slop like -- AI dashes all over the app without
+  // causing malfunction"). Flag smd_nodash, DEFAULT ON, "0" = dashes as authored. Rules keep meaning:
+  //   5—10 / 5 \u2013 10          -> 5-10            (a range stays a range; a plain 7\u201310 en dash is untouched)
+  //   "HR: —" / a lone "—"   -> "HR: \u2013" / "\u2013"   (an empty value stays visibly empty)
+  //   X — Y, X—Y, X -- Y     -> X, Y            (the aside dash becomes a comma)
+  //   leading/trailing dash  -> ", " when text continues in the next/previous element, else removed
+  function dashOn() { return lget("smd_nodash") !== "0"; }
+  var DASH = /[\u2014\u2015]|(^|\s)--(\s|$)|\s\u2013\s/;
+  function hasDash(s) { return DASH.test(String(s || "")); }
+  function tidy(text, ctx) {
+    var t = String(text == null ? "" : text);
+    if (!hasDash(t)) return t;
+    ctx = ctx || {};
+    // numeric ranges first: 5—10, 5 \u2013 10, 5 -- 10 -> 5-10 (a tight 7\u201310 en dash is not matched by DASH)
+    t = t.replace(/(\d)\s*[\u2014\u2015]\s*(\d)/g, "$1-$2").replace(/(\d)\s+(?:\u2013|--)\s+(\d)/g, "$1-$2");
+    // then every remaining dash token, judged by its neighbours (spaces skipped)
+    var WORD = /[A-Za-z0-9\u00C0-\u024F\u0370-\u03FF\u0900-\u0D7F\)\]%+\u00B0"'\u2019\u201D]/;
+    var TOK = /[\u2014\u2015]|(^|\s)--(?=\s|$)|\s\u2013(?=\s)/g;
+    var out = "", at = 0, m;
+    while ((m = TOK.exec(t)) !== null) {
+      var st = m.index + (m[1] ? m[1].length : 0) + (m[0].charAt(0) === " " && m[0].charAt(1) === "\u2013" ? 1 : 0), en = m.index + m[0].length;
+      var i = st - 1; while (i >= 0 && /\s/.test(t.charAt(i))) i--;
+      var j = en; while (j < t.length && /\s/.test(t.charAt(j))) j++;
+      var pc = i >= 0 ? t.charAt(i) : "", nc = j < t.length ? t.charAt(j) : "";
+      var pw = !!pc && WORD.test(pc), nw = !!nc && (WORD.test(nc) || /[(\["'\u2018\u201C]/.test(nc));
+      var rep;
+      if (pw && nw) { out += t.slice(at, i + 1) + ", "; at = j; continue; }                         // X — Y
+      if (pw && !nc) { out += t.slice(at, i + 1) + (ctx.next ? ", " : t.slice(en, j)); at = j; continue; }  // X —
+      if (!pc && nw) { out += (ctx.prev ? ", " : ""); at = j; continue; }                              // — Y
+      rep = "\u2013";                                                                                  // empty value
+      out += t.slice(at, st) + rep; at = en;
+    }
+    out += t.slice(at);
+    return out.replace(/,\s*([,.;:!?)])/g, "$1");
+  }
+  // ── Textbooks as sources, and page numbers (owner, 2026-09-24: "I shouldn't find Harrison or any text
+  // book as source but reference, as copyright problem, and no page numbers anywhere"). Flag smd_nobooks,
+  // DEFAULT ON. Specific citations become one generic line, GENERIC_REF (owner, 2026-09-24: "reference
+  // standard textbooks: harrison, oxford, davidson"); the bare name in prose ("per Harrison")
+  // becomes "the reference"; page / chapter / edition locators are removed. Clinical eponyms that share
+  // an author's name are protected: Harrison's groove/sulcus/sign, Fitzpatrick skin type, Braunwald
+  // classification, Kaplan-Meier, Brenner tumour, Nelson syndrome, Rockwood classification.
+  function booksOn() { return lget("smd_nobooks") !== "0"; }
+  var AP = "(?:'|\\u2019)";
+  var EDN = "\\d{1,2}(?:st|nd|rd|th)?\\s*(?:e|ed\\.?|edn\\.?|edition)\\b";
+  var ED = "(?:,?\\s*(?:\\(\\s*" + EDN + "\\s*\\)|" + EDN + ")(?:\\s*\\(\\d{4}\\))?)?";
+  var BOOK_TITLES = [
+    "Harrison" + AP + "?s?\\s+Principles\\s+of\\s+Internal\\s+Medicine",
+    "Nelson\\s+Textbook\\s+of\\s+Pa?ediatrics",
+    "Mandell,?\\s+Douglas,?\\s+(?:and|&)\\s+Bennett" + AP + "?s?\\s+Principles\\s+and\\s+Practice\\s+of\\s+Infectious\\s+Diseases",
+    "Campbell[-\\s]Walsh(?:[-\\s]Wein)?\\s+Urology",
+    "Sleisenger\\s+(?:and|&)\\s+Fordtran" + AP + "?s?\\s+Gastrointestinal\\s+and\\s+Liver\\s+Disease",
+    "Adams\\s+(?:and|&)\\s+Victor" + AP + "?s?\\s+Principles\\s+of\\s+Neurology",
+    "Williams\\s+Obstetrics", "Williams\\s+Textbook\\s+of\\s+Endocrinology",
+    "Bailey\\s+(?:and|&)\\s+Love(?:" + AP + "?s?\\s+Short\\s+Practice\\s+of\\s+Surgery)?",
+    "Murray\\s+(?:and|&)\\s+Nadel" + AP + "?s?\\s+Textbook\\s+of\\s+Respiratory\\s+Medicine",
+    "Sabiston\\s+Textbook\\s+of\\s+Surgery", "Schwartz" + AP + "?s?\\s+Principles\\s+of\\s+Surgery",
+    "Oxford\\s+Handbook\\s+of(?:\\s+[A-Z][A-Za-z]+)+", "Oxford\\s+Textbook\\s+of(?:\\s+[A-Z][A-Za-z]+)+",
+    "Tintinalli" + AP + "?s?\\s+Emergency\\s+Medicine", "Rosen" + AP + "?s?\\s+Emergency\\s+Medicine",
+    "Davidson" + AP + "?s?\\s+Principles\\s+and\\s+Practice\\s+of\\s+Medicine",
+    "Robbins(?:\\s+(?:and|&)\\s+Cotran)?\\s+(?:Basic\\s+Pathology|Pathologic\\s+Basis\\s+of\\s+Disease)",
+    "Guyton\\s+(?:and|&)\\s+Hall\\s+Textbook\\s+of\\s+Medical\\s+Physiology",
+    "Goodman\\s+(?:and|&)\\s+Gilman" + AP + "?s?\\s+The\\s+Pharmacological\\s+Basis\\s+of\\s+Therapeutics",
+    "(?:The\\s+)?Washington\\s+Manual(?:\\s+of\\s+Medical\\s+Therapeutics)?",
+    "Kumar\\s+(?:and|&)\\s+Clark" + AP + "?s?\\s+Clinical\\s+Medicine",
+    "Katzung" + AP + "?s?\\s+Basic\\s+(?:and|&)\\s+Clinical\\s+Pharmacology",
+    "Braunwald" + AP + "s\\s+Heart\\s+Disease(?::\\s+A\\s+Textbook\\s+of\\s+Cardiovascular\\s+Medicine)?",
+    "Fitzpatrick" + AP + "s\\s+Dermatology(?:\\s+in\\s+General\\s+Medicine)?",
+    "Sherlock" + AP + "s\\s+Diseases\\s+of\\s+the\\s+Liver\\s+and\\s+Biliary\\s+System",
+    "Brenner\\s+(?:and|&)\\s+Rector" + AP + "?s?\\s+The\\s+Kidney",
+    "Rockwood\\s+(?:and|&)\\s+Green" + AP + "?s?\\s+Fractures\\s+in\\s+Adults",
+    "(?:Berek\\s+(?:and|&)\\s+)?Novak" + AP + "s\\s+Gyn(?:a|ae)?ecology",
+    "Cecil\\s+(?:Textbook\\s+of\\s+Medicine|Medicine)", "Current\\s+Medical\\s+Diagnosis\\s+(?:and|&)\\s+Treatment",
+    "Grainger\\s+(?:and|&)\\s+Allison" + AP + "?s?\\s+Diagnostic\\s+Radiology"
+  ];
+  var BOOK_RE = new RegExp("(?:" + BOOK_TITLES.join("|") + ")" + ED, "gi");
+  // Short forms seen in the knowledge base and in model answers: "Harrison 22e", "Harrison's", "Harrison".
+  var HARRISON_RE = new RegExp("\\bHarrison(?:" + AP + "s)?(?!" + AP + "?s?\\s+(?:groove|sulcus|sign|line))\\b" + ED, "g");
+  var NELSON_RE = /\bNelson(?:'s|\u2019s)?\s+(?:\d{1,2}(?:st|nd|rd|th)?\s*(?:e|ed\.?|edition)\b|Pa?ediatrics\b)/gi;
+  // Locators: "p. 1234", "pp. 12-15", "pg 45", "page 123" (not "page 2 of 5"), "Chapter 45", "Ch. 12".
+  var PAGE_RE = /\s*[,;(]?\s*\b(?:pp?\.|pg\.?)\s*\d{1,4}(?:\s*[-\u2013]\s*\d{1,4})?\)?|\s*[,;(]?\s*\bpages?\s+\d{1,4}(?:\s*[-\u2013]\s*\d{1,4})?(?!\s+of\b)\)?/gi;
+  // Chapter locators are case-SENSITIVE: "CH50" (complement assay) must never read as "Ch 50".
+  var CHAP_RE = /\s*[,;(]?\s*\b(?:[Cc]hapter|[Cc]hap\.|Ch\.|Ch(?= \d))\s*\d{1,4}[A-Za-z]?\)?/g;
+  var BOOKS_TEST = new RegExp(BOOK_RE.source + "|\\bSanford\\b|\\bHarrison\\b|\\bNelson(?:'s|\\u2019s)?\\s+(?:\\d|Pa?ediatrics)|\\b(?:pp?\\.|pg\\.?)\\s*\\d|\\bpages?\\s+\\d", "i");
+  var BOOKS_TEST2 = /\b(?:[Cc]hapter|[Cc]hap\.|Ch\.)\s*\d|\bCh \d/;
+  // Subject-appropriate standard textbooks (owner, 2026-09-24: "general medicine these three, genetics the
+  // top genetics books, neuro a neuro book, cardio Braunwald"). Named as the standard texts of the field,
+  // never with edition, chapter or page. A KB entry's `system` picks the subject (genetics first, so
+  // "Cardiovascular / Genetics" gets the genetics texts); no context = general medicine.
+  var SUBJECTS = [
+    ["genetics", /genetic|dysmorpholog|ciliopath|inborn|chromosom/i, ["Thompson & Thompson Genetics and Genomics in Medicine", "Emery's Elements of Medical Genetics", "Harper's Practical Genetic Counselling"]],
+    ["cardiology", /cardio|cardiac|heart|vascular/i, ["Braunwald's Heart Disease", "Hurst's The Heart", "Oxford Handbook of Cardiology"]],
+    ["neurology", /neuro|nervous|cerebro|epilep|stroke|spastic|ataxia/i, ["Adams and Victor's Principles of Neurology", "Bradley and Daroff's Neurology in Clinical Practice", "Oxford Handbook of Neurology"]],
+    ["respiratory", /respirat|pulmon|lung|thoracic/i, ["Murray and Nadel's Textbook of Respiratory Medicine", "Fishman's Pulmonary Diseases and Disorders", "Oxford Handbook of Respiratory Medicine"]],
+    ["gastroenterology", /gastro|hepat|liver|biliar|pancrea|intestin|digestive/i, ["Sleisenger and Fordtran's Gastrointestinal and Liver Disease", "Sherlock's Diseases of the Liver and Biliary System", "Yamada's Textbook of Gastroenterology"]],
+    ["nephrology", /renal|nephro|kidney/i, ["Brenner and Rector's The Kidney", "Comprehensive Clinical Nephrology", "Oxford Handbook of Nephrology and Hypertension"]],
+    ["endocrinology", /endocrin|diabet|thyroid|adrenal|metabolic|nutrition/i, ["Williams Textbook of Endocrinology", "Greenspan's Basic and Clinical Endocrinology", "Oxford Handbook of Endocrinology and Diabetes"]],
+    ["infectious", /infect|tropical|microb|parasit/i, ["Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases", "Oxford Handbook of Infectious Diseases and Microbiology", "Harrison's Principles of Internal Medicine"]],
+    ["oncology", /oncolog|cancer|sarcoma|tumou?r|breast/i, ["DeVita, Hellman, and Rosenberg's Cancer: Principles and Practice of Oncology", "Abeloff's Clinical Oncology", "Oxford Handbook of Oncology"]],
+    ["haematology", /haemat|hemat|transfus|blood/i, ["Williams Hematology", "Hoffman's Hematology: Basic Principles and Practice", "Oxford Handbook of Clinical Haematology"]],
+    ["paediatrics", /paediat|pediat|neonat|child/i, ["Nelson Textbook of Pediatrics", "Rudolph's Pediatrics", "Oxford Handbook of Paediatrics"]],
+    ["obgyn", /obstet|gyna?ec|reproduct|pregnan/i, ["Williams Obstetrics", "Berek and Novak's Gynecology", "Dewhurst's Textbook of Obstetrics and Gynaecology"]],
+    ["urology", /urolog|androlog|genitourin/i, ["Campbell-Walsh-Wein Urology", "Smith and Tanagho's General Urology", "Oxford Handbook of Urology"]],
+    ["dermatology", /dermat|skin|integument|trichol|nail/i, ["Fitzpatrick's Dermatology", "Rook's Textbook of Dermatology", "Andrews' Diseases of the Skin"]],
+    ["rheumatology", /rheumat|immunolog|autoimmun|connective/i, ["Kelley and Firestein's Textbook of Rheumatology", "Oxford Textbook of Rheumatology", "Hochberg's Rheumatology"]],
+    ["psychiatry", /psychiat|mental|psycholog|behaviou?r/i, ["Kaplan and Sadock's Comprehensive Textbook of Psychiatry", "New Oxford Textbook of Psychiatry", "Oxford Handbook of Psychiatry"]],
+    ["ophthalmology", /ophthal|\beye\b|retin|ocular/i, ["Kanski's Clinical Ophthalmology", "Parsons' Diseases of the Eye", "Oxford Handbook of Ophthalmology"]],
+    ["ent", /\bENT\b|otorhino|otolaryng|audiolog|\bear\b/i, ["Scott-Brown's Otorhinolaryngology Head and Neck Surgery", "Cummings Otolaryngology", "Dhingra's Diseases of Ear, Nose and Throat"]],
+    ["orthopaedics", /musculoskel|orthop|spine|fractur|bone|trauma/i, ["Rockwood and Green's Fractures in Adults", "Campbell's Operative Orthopaedics", "Apley and Solomon's System of Orthopaedics and Trauma"]],
+    ["surgery", /surg/i, ["Bailey and Love's Short Practice of Surgery", "Sabiston Textbook of Surgery", "Schwartz's Principles of Surgery"]],
+    ["dental", /dental|dentist|oral|maxillofac/i, ["Peterson's Principles of Oral and Maxillofacial Surgery", "Shafer's Textbook of Oral Pathology", "Burket's Oral Medicine"]],
+    ["emergency", /emergen|toxicol|envenom|poison|environment|critical care/i, ["Tintinalli's Emergency Medicine", "Rosen's Emergency Medicine", "Goldfrank's Toxicologic Emergencies"]],
+    ["pharmacology", /pharmacol/i, ["Goodman and Gilman's The Pharmacological Basis of Therapeutics", "Katzung's Basic and Clinical Pharmacology", "Rang and Dale's Pharmacology"]],
+    ["general", /./, ["Harrison's Principles of Internal Medicine", "Oxford Handbook of Clinical Medicine", "Davidson's Principles and Practice of Medicine"]]
+  ];
+  function lineOf(books) { return "Standard textbooks: " + books.join("; "); }
+  /** The standard-textbook line for a subject, chosen from a KB entry's system/class/name. */
+  function refFor(system) {
+    var s = String(system || "");
+    for (var i = 0; i < SUBJECTS.length; i++) if (SUBJECTS[i][1].test(s)) return lineOf(SUBJECTS[i][2]);
+    return lineOf(SUBJECTS[SUBJECTS.length - 1][2]);
+  }
+  var GENERIC_REF = lineOf(SUBJECTS[SUBJECTS.length - 1][2]);
+  // Every subject line is protected from re-scrubbing (its titles would otherwise match BOOK_RE).
+  var LINES_RE = new RegExp(SUBJECTS.map(function (x) { return lineOf(x[2]).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|"), "gi");
+  function hasBooks(v) { var s = String(v || "").replace(LINES_RE, ""); LINES_RE.lastIndex = 0; return (BOOKS_TEST.test(s) || BOOKS_TEST2.test(s)) && !/^\s*page\s+\d+\s+of\s+\d+\s*$/i.test(s); }
+  function scrubBooks(text, opts) {
+    var t = String(text == null ? "" : text);
+    if (!hasBooks(t)) return t;
+    var o = t, REF = (opts && opts.ref) || GENERIC_REF, kept = [];
+    t = t.replace(LINES_RE, function (m) { if (m === REF) return "\u0003"; kept.push(m); return "\u0004" + (kept.length - 1) + "\u0004"; });
+    t = t.replace(/\bTinsley\s+R(?:andolph|\.)?\s+Harrison\b/g, function (m) { kept.push(m); return "\u0004" + (kept.length - 1) + "\u0004"; });   // the physician, not the book
+    t = t.replace(/\bHarrison(?:'s|\u2019s)?\s+line\s+\d+/g, "\u0001");
+    var unwrap = function (m) { var a = /^\s*\(/.test(m), z = /\)\s*$/.test(m); return a && z ? "" : a ? "(" : z ? ")" : ""; };
+    t = t.replace(PAGE_RE, unwrap).replace(CHAP_RE, unwrap);
+    t = t.replace(BOOK_RE, "\u0001").replace(NELSON_RE, "\u0001");
+    t = t.replace(HARRISON_RE, function (m, off, str) {
+      // "Source: Harrison 22e" / list item -> the generic source; prose "per Harrison" -> "the reference"
+      // A name followed by a lowercase word is prose ("Harrison notes that ...") even at a slot.
+      var before = str.slice(0, off), after = str.slice(off + m.length);
+      var slot = /(?:^|[:;,(\u2022\u00B7|]\s*)$/.test(before) && !/\b(?:per|by|from|in|see|according to|instead)\s*$/i.test(before);
+      return slot && !/^\s+[a-z]/.test(after) ? "\u0001" : "\u0002";
+    });
+    t = t.replace(/\bSanford[-\s]aligned\b/g, "Guideline-aligned").replace(/\bsanford[-\s]aligned\b/g, "guideline-aligned")
+      .replace(/\b(?:The\s+)?Sanford\s+Guide(?:\s+to\s+Antimicrobial\s+Therapy)?(?:\s+\d{4})?/gi, "\u0001")
+      .replace(/\bSanford\b(?:\s*\/\s*)?/g, function (m) { return /\//.test(m) ? "" : "\u0001"; });
+    t = t.replace(/\(\s*[\u0001\u0002]\s*\)/g, "").replace(/\(\s*\)/g, "");   // a bracket that only held a citation goes
+    // merge runs of generic sources ("Harrison; Nelson" -> one), then write them out
+    t = t.replace(/\u0001(?:\s*(?:[;,&\u00B7|]|and)\s*\u0001)+/g, "\u0001");
+    t = t.replace(/\u0003/g, "\u0001").replace(/\u0001(?:\s*(?:[;,&\u00B7|]|and)\s*\u0001)+/g, "\u0001");
+    // The subject line goes where a source stands on its own: the whole text, or after a Source/Reference
+    // label. A citation in the middle of a sentence is simply dropped (no book list inside prose).
+    if (/^[\s\u0001;,&\u00B7|/.-]*$/.test(t.replace(/and/g, ""))) t = REF;
+    else {
+      t = t.replace(/^(\s*)\u0001/, "$1" + REF);                                    // a list that opens with the book
+      t = t.replace(/((?:^|[\s(])(?:Sources?|References?|Refs?|Reference texts?|Based on|Adapted from|Evidence|Src)\s*:\s*)\u0001/gi, "$1" + REF);
+      t = t.replace(/\s*[,;/&\u00B7|]?\s*\u0001\s*(?=[,;/&\u00B7|)]|$)/g, "").replace(/\u0001\s*[,;/&\u00B7|]\s*/g, "").replace(/\u0001/g, "");
+      t = t.replace(/^[\s,;/&|\u00B7]+/, "").replace(/\(\s*[,;/]?\s*\)/g, "").replace(/\(\s*[,;/]\s*/g, "(").replace(/\s*[,;/]\s*\)/g, ")").replace(/[\s,;/&|\u00B7]+$/, function (m) { return /\n/.test(m) ? m : ""; });
+    }
+    t = t.replace(/\u0004(\d+)\u0004/g, function (m, i) { return kept[+i]; });
+    t = t.replace(/(^|[.!?]\s+)\u0002/g, "$1The reference").replace(/\u0002/g, "the reference");
+    t = t.replace(/\(\s*\)/g, "").replace(/\s+([,.;:)])/g, "$1").replace(/,\s*,/g, ",").replace(/ {2,}/g, " ");
+    return t === o ? o : t;
+  }
+  /** What a string should read as on screen with the current flags: emoji removed, dashes tidied. */
+  function display(text) {
+    var s = String(text == null ? "" : text);
+    if (enabled()) s = strip(s);
+    if (dashOn()) s = tidy(s);
+    if (booksOn()) s = scrubBooks(s);
+    return s;
+  }
+  /** For code that reads screen text back and compares it with the string it rendered: both sides are
+   *  normalised the way the screen shows them (emoji out, dashes tidied, whitespace collapsed). */
+  function norm(v) { return display(v).replace(/\s+/g, " ").trim(); }
+  function same(domText, expected) { return norm(domText) === norm(expected); }
   /** Rich version: [{t: text} | {icon, tone} | {dot}] for a text node. */
   function segments(text) {
     var s = String(text == null ? "" : text), out = [], at = 0, m;
@@ -170,11 +346,19 @@
     if (svg && svg.setAttribute) svg.setAttribute("aria-hidden", "true");
     return svg;
   }
+  function needs(v) { return !!v && ((enabled() && has(v)) || (dashOn() && hasDash(v)) || (booksOn() && hasBooks(v))); }
   function fixText(tn) {
     var v = tn.nodeValue;
-    if (!v || !has(v)) return;
+    if (!needs(v)) return;
     var p = tn.parentNode;
     if (!p || (p.closest && p.closest(SKIP))) return;
+    if (dashOn() && hasDash(v)) {
+      var nx = tn.nextSibling, pv = tn.previousSibling;
+      var t2 = tidy(v, { next: !!(nx && (nx.nodeType === 1 || /\S/.test(nx.nodeValue || ""))), prev: !!(pv && (pv.nodeType === 1 || /\S/.test(pv.nodeValue || ""))) });
+      if (t2 !== v) { tn.nodeValue = t2; v = t2; }
+    }
+    if (booksOn() && hasBooks(v)) { var b3 = scrubBooks(v); if (b3 !== v) { tn.nodeValue = b3; v = b3; } }
+    if (!(enabled() && has(v))) return;
     if (p.closest && p.closest(STRIP_ONLY)) { tn.nodeValue = strip(v); return; }
     var segs = segments(v), doc = W.document, frag = doc.createDocumentFragment();
     segs.forEach(function (sg) {
@@ -188,12 +372,12 @@
     if (!el || el.nodeType !== 1) return;
     for (var i = 0; i < ATTRS.length; i++) {
       var a = el.getAttribute(ATTRS[i]);
-      if (a && has(a)) el.setAttribute(ATTRS[i], strip(a));
+      if (a && needs(a)) { var d = display(a); if (d !== a) el.setAttribute(ATTRS[i], d); }
     }
-    if (el.tagName === "INPUT" && /^(button|submit|reset)$/i.test(el.type) && has(el.value)) el.value = strip(el.value);
+    if (el.tagName === "INPUT" && /^(button|submit|reset)$/i.test(el.type) && needs(el.value)) el.value = display(el.value);
   }
   function fixTree(rootEl) {
-    if (!rootEl || !enabled()) return;
+    if (!rootEl || !(enabled() || dashOn() || booksOn())) return;
     if (rootEl.nodeType === 3) { fixText(rootEl); return; }
     if (rootEl.nodeType !== 1 && rootEl.nodeType !== 9 && rootEl.nodeType !== 11) return;
     css();
@@ -204,7 +388,7 @@
     var doc = W.document, tw = doc.createTreeWalker(rootEl, 5 /* ELEMENT | TEXT */, null, false), n, texts = [];
     while ((n = tw.nextNode())) {
       if (n.nodeType === 1) fixAttrs(n);
-      else if (n.nodeValue && n.nodeValue.length && has(n.nodeValue)) texts.push(n);
+      else if (n.nodeValue && n.nodeValue.length && needs(n.nodeValue)) texts.push(n);
     }
     texts.forEach(fixText);
   }
@@ -214,7 +398,7 @@
     scheduled = false;
     var list = pending; pending = [];
     for (var i = 0; i < list.length; i++) { try { if (list[i].isConnected !== false) fixTree(list[i]); } catch (e) {} }
-    try { if (has(W.document.title)) W.document.title = strip(W.document.title); } catch (e) {}
+    try { if (needs(W.document.title)) W.document.title = display(W.document.title); } catch (e) {}
   }
   function queue(n) {
     pending.push(n);
@@ -224,14 +408,14 @@
     ["alert", "confirm", "prompt"].forEach(function (k) {
       var orig = W[k];
       if (typeof orig !== "function" || orig._smdNoEmoji) return;
-      var f = function (msg) { var a = Array.prototype.slice.call(arguments); if (enabled() && typeof msg === "string") a[0] = strip(msg); return orig.apply(W, a); };
+      var f = function (msg) { var a = Array.prototype.slice.call(arguments); if (typeof msg === "string") a[0] = display(msg); return orig.apply(W, a); };
       f._smdNoEmoji = true; W[k] = f;
     });
   }
   // Text that leaves the page as a string, not DOM: PDFs, native share sheets, the clipboard and phone
   // notifications. Wrapped at their single shared entry points, so the 100+ callers need no change.
   function stripDeep(v, depth) {
-    if (typeof v === "string") return strip(v);
+    if (typeof v === "string") return display(v);
     if (!v || typeof v !== "object" || depth > 3) return v;
     if (Array.isArray(v)) return v.map(function (x) { return stripDeep(x, depth + 1); });
     var o = {};
@@ -242,17 +426,17 @@
     try {
       if (!obj || typeof obj[name] !== "function" || obj[name]._smdNoEmoji) return;
       var orig = obj[name];
-      var f = function () { var a = Array.prototype.slice.call(arguments); if (enabled()) a = how(a); return orig.apply(this, a); };
+      var f = function () { var a = Array.prototype.slice.call(arguments); a = how(a); return orig.apply(this, a); };
       f._smdNoEmoji = true; obj[name] = f;
     } catch (e) {}
   }
-  var html0 = function (a) { if (typeof a[0] === "string") a[0] = strip(a[0]); if (typeof a[2] === "string") a[2] = strip(a[2]); return a; };
+  var html0 = function (a) { if (typeof a[0] === "string") a[0] = display(a[0]); if (typeof a[2] === "string") a[2] = display(a[2]); return a; };
   var obj0 = function (a) { a[0] = stripDeep(a[0], 0); return a; };
   function wrapOutbound() {
     wrapMethod(W.SMD_PDF, "fromHtml", html0);
     wrapMethod(W.SMD_NATIVE, "sharePdfFromHtml", html0);
     wrapMethod(W.navigator, "share", obj0);
-    try { if (W.navigator && W.navigator.clipboard) wrapMethod(W.navigator.clipboard, "writeText", function (a) { a[0] = strip(a[0]); return a; }); } catch (e) {}
+    try { if (W.navigator && W.navigator.clipboard) wrapMethod(W.navigator.clipboard, "writeText", function (a) { a[0] = display(a[0]); return a; }); } catch (e) {}
     var P = W.Capacitor && W.Capacitor.Plugins;
     if (P) { wrapMethod(P.Share, "share", obj0); wrapMethod(P.LocalNotifications, "schedule", obj0); }
   }
@@ -270,7 +454,7 @@
     } catch (e) {}
   }
   function boot() {
-    if (!enabled() || !W.document || !W.document.body) return;
+    if (!(enabled() || dashOn() || booksOn()) || !W.document || !W.document.body) return;
     wrapDialogs();
     // the bridges load after this file (deferred): wrap now and again as they appear
     wrapOutbound(); [500, 2000, 6000, 15000].forEach(function (ms) { W.setTimeout(wrapOutbound, ms); });
@@ -299,5 +483,5 @@
   if (W && W.document) {
     if (W.document.readyState === "loading") W.document.addEventListener("DOMContentLoaded", boot); else boot();
   }
-  return { strip: strip, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
+  return { strip: strip, scrubBooks: scrubBooks, GENERIC_REF: GENERIC_REF, refFor: refFor, SUBJECTS: SUBJECTS, hasBooks: hasBooks, booksOn: booksOn, tidy: tidy, display: display, norm: norm, same: same, hasDash: hasDash, dashOn: dashOn, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
 });

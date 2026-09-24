@@ -1220,7 +1220,7 @@
     });
 
     h += '</tbody></table></div>';
-    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable / not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Spectrum reference — verify against local antibiogram · Sanford / IDSA / CLSI M100 (2024)</span></div>';
+    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable / not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Spectrum reference, verify against local antibiogram · IDSA / CLSI M100 (2024)</span></div>';
     return h;
   }
 

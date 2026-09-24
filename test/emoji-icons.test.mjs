@@ -57,3 +57,61 @@ test("text leaving the page (PDF, share, clipboard, notifications) is stripped a
   for (const hook of ['W.SMD_PDF, "fromHtml"', 'W.SMD_NATIVE, "sharePdfFromHtml"', 'W.navigator, "share"', '"writeText"', 'P.Share, "share"', 'P.LocalNotifications, "schedule"'])
     assert.ok(src.includes(hook), hook);
 });
+
+test("AI dashes: asides become commas, ranges and empty values keep their meaning", () => {
+  const T = [
+    ["Surgical intelligence — notes", "Surgical intelligence, notes"], ["AMR—the silent pandemic", "AMR, the silent pandemic"],
+    ["Use it -- carefully", "Use it, carefully"], ["x — y — z.", "x, y, z."], ["Warfarin — avoid; INR — check", "Warfarin, avoid; INR, check"],
+    ["Dose 5—10 mg", "Dose 5-10 mg"], ["Age 5 – 10 years", "Age 5-10 years"], ["Duration 7–10 days", "Duration 7–10 days"],
+    ["—", "–"], ["HR: —", "HR: –"], ["SBP/DBP —/—", "SBP/DBP –/–"], ["MAP (—)", "MAP (–)"], ["K+ — 2.9 — low", "K+, 2.9, low"],
+    ["End of line —", "End of line"], ["— leading", "leading"],
+    ["Low-dose aspirin", "Low-dose aspirin"], ["a--b", "a--b"], ["CSS --var stays", "CSS --var stays"], ["no dashes here", "no dashes here"],
+  ];
+  for (const [a, b] of T) assert.equal(E.tidy(a), b, a);
+  assert.equal(E.tidy("Title —", { next: true }), "Title, ", "text continues in the next element");
+  assert.equal(E.tidy("— avoid with", { prev: true }), ", avoid with", "text continues from the previous element");
+  for (const [, b] of T) assert.equal(E.tidy(b), b, "idempotent: " + b);
+});
+
+test("same(): code that reads screen text back still matches what it rendered", () => {
+  assert.ok(E.same("  Wells score, PE ", "Wells score — PE"));
+  assert.ok(E.same(" Notifications", "🔔 Notifications"));
+  assert.ok(!E.same("Wells score, DVT", "Wells score — PE"));
+  for (const [f, needle] of [["search.js", "SMD_EMOJI_ICONS.same(els[i].textContent, t.title)"], ["home.js", "SMD_EMOJI_ICONS.norm(x.textContent)"],
+    ["medlist.js", "SMD_EMOJI_ICONS.same(x.textContent, draft.route)"], ["medlist.js", "SMD_EMOJI_ICONS.same(x.textContent, draft.freq)"],
+    ["opd-emr.js", "SMD_EMOJI_ICONS.same(el.textContent, txt)"]])
+    assert.ok(readFileSync(new URL("../" + f, import.meta.url), "utf8").includes(needle), f + ": " + needle);
+});
+
+test("flag smd_nodash=0 leaves dashes as authored", () => {
+  assert.equal(E.dashOn(), true);
+  store.set("smd_nodash", "0"); assert.equal(E.dashOn(), false); assert.equal(E.display("A — B"), "A — B"); store.clear();
+  assert.equal(E.display("🔔 A — B"), "A, B");
+});
+
+test("textbooks as sources become generic references; page numbers go; clinical eponyms stay", () => {
+  const G = E.GENERIC_REF;
+  
+  assert.equal(E.scrubBooks(G), G, "the generic line is never re-scrubbed");
+  assert.equal(E.scrubBooks("Clostridial myositis (Harrison 22e p.1096)."), "Clostridial myositis.");
+  assert.equal(E.scrubBooks("infection (p.123, p.456). Next"), "infection. Next");
+  assert.equal(E.scrubBooks("Harrison 22e p.302"), G);
+  assert.equal(E.scrubBooks("Harrison's Principles of Internal Medicine, 22e (2025)"), G);
+  const T = [
+    ["Harrison's Principles of Internal Medicine, 22e, p. 1234", G],
+    ["Source: Harrison 22e; IDSA Practice Guidelines", "Source: " + G + "; IDSA Practice Guidelines"],
+    ["instead Harrison enumerates risk factors", "instead the reference enumerates risk factors"],
+    ["Harrison notes that sepsis", "The reference notes that sepsis"],
+    ["Nelson Textbook of Pediatrics", G],
+    ["Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases", G],
+    ["Adams and Victor's Principles of Neurology, 11th ed, Chapter 16", G],
+    ["See Harrison (pp. 152-153) for details.", "See the reference for details."],
+    ["Harrison; Nelson Textbook of Pediatrics; IDSA", G + "; IDSA"],
+    ["Regimens · Sanford-aligned", "Regimens · Guideline-aligned"],
+  ];
+  for (const [a, b] of T) assert.equal(E.scrubBooks(a), b, a);
+  for (const keep of ["Harrison's groove in rickets", "Fitzpatrick skin type IV", "Braunwald classification of unstable angina", "Kaplan-Meier survival",
+    "Brenner tumour of ovary", "Nelson syndrome after adrenalectomy", "Rockwood classification type III", "Page 2 of 5", "p53 mutation and p = 0.05"])
+    assert.equal(E.scrubBooks(keep), keep, keep);
+  store.set("smd_nobooks", "0"); assert.equal(E.display("Harrison 22e, p. 12"), "Harrison 22e, p. 12"); store.clear();
+});

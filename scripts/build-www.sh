@@ -176,13 +176,22 @@ fi
 # the evidence the provenance test checks the packs against, not a runtime asset, and it lives outside
 # pglog/ precisely so this line cannot pick it up.
 
+# ── 5a. No textbook citations or page numbers in the shipped bundle (copyright, owner 2026-09-24) ─────
+# Specific citations become the subject's standard-textbook line, page/chapter locators are removed;
+# the repo keeps its authoring provenance. Runs BEFORE encryption so the .enc blobs are clean too.
+# SMD_KEEP_SOURCES=1 skips it (internal/debug builds only).
+if [ "${SMD_KEEP_SOURCES:-}" != "1" ]; then
+  node "$ROOT/scripts/sanitize-sources.mjs" "$WWW" || { echo "  source sanitize FAILED"; exit 1; }
+fi
+
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
 # base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),
 # and flip window.SMD_KB_ENC=1 so kb-loader.js takes the licensed path. Default (unset) = plaintext, unchanged.
 if [ "${KB_ENCRYPT:-}" = "1" ]; then
   [ -n "${KB_KEY:-}" ] || { echo "  KB_ENCRYPT=1 requires env KB_KEY (base64 32-byte key = the APP_KB_KEY Pages secret)"; exit 1; }
   KBENC="kb/dist/kb.core.js kb/dist/kb.clinical.js kb/dist/kb.enrichment.js kb/dist/kb.enrichment.2.js kb/dist/kb.expanded.js"
-  node "$ROOT/scripts/encrypt-kb.mjs" --out "$WWW" $KBENC >/dev/null || { echo "  KB encrypt FAILED"; exit 1; }
+  # read the SANITIZED copies in www/ (not the repo sources), so the encrypted KB carries no citations
+  ( cd "$WWW" && node "$ROOT/scripts/encrypt-kb.mjs" --out "$WWW" $KBENC >/dev/null ) || { echo "  KB encrypt FAILED"; exit 1; }
   for f in $KBENC; do rm -f "$WWW/$f"; done   # ship ONLY the .enc; the plaintext KB never reaches the bundle
   [ -f "$WWW/index.html" ] && sed -i.bak 's/window\.SMD_KB_ENC=0;/window.SMD_KB_ENC=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
   echo "  KB ENCRYPTED (SMD_KB_ENC=1, .enc only; plaintext KB dropped from www/)"

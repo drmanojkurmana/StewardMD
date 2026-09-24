@@ -199,6 +199,66 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-24 · Bundle carries subject-appropriate standard textbooks, never specific citations
+
+**Decision.** Owner revised the reference style: not one generic line but the standard textbooks of the
+subject (general medicine Harrison/Oxford Handbook of Clinical Medicine/Davidson; cardiology Braunwald/
+Hurst/Oxford Cardiology; genetics Thompson & Thompson/Emery/Harper; neurology Adams and Victor/Bradley and
+Daroff/Oxford Neurology; ... 23 subjects in `emoji-icons.js` SUBJECTS). Never an edition, chapter or page.
+Labelled "Standard textbooks", not "Source": they are the field's standard texts, not a claim that an
+entry was taken from them.
+
+**How.** `scripts/sanitize-sources.mjs` runs in `build-www.sh` on the assembled www/ (and KB encryption now
+reads the sanitized copies): specific citations in KB data become the entry's subject line (by `system`;
+genetics first), page/pages/chapter fields are emptied, source/reference fields that name any book become
+the subject line, inline citations inside prose are dropped, comments are cleaned too. kb/dist bundles are
+evaluated, rewritten as data and re-emitted with the same wrapper and entry counts; JSON must re-parse; JS
+is rewritten only inside string literals/comments (lexer skips regex/template literals) and must parse, or
+the file is kept and reported. Result on the bundle: 377 files, 0 failures; ~13,700 textbook mentions and
+~15,000 page locators down to 13 intentional leftovers (regex patterns in code, the physician Tinsley R.
+Harrison, the Davidson 1800/1500 insulin rule). The repo keeps its authoring provenance.
+
+**Not covered.** The on-device RAG book (`maik-lite-kb.jsonl`, 38 MB, downloaded from models.stewardmd.in,
+sha256-pinned in `kb/ai/maik-lite-kb-store.js`) is not in this repo; it must be regenerated and re-uploaded
+with its page groups remapped (maik-lite-rag.js uses `rows[].pages` only to cap chunks per page, so opaque
+group ids keep behaviour) and the new sha256/size pinned.
+
+## 2026-09-24 · No textbooks named as sources, no page numbers (copyright)
+
+**Decision.** Owner: "I shouldn't find Harrison or any text book as source but reference, as copyright
+problem, and no page numbers anywhere." Our own copy was rewritten at source (About changelog in home.js,
+About text and demo notes in index.html). Data-driven text (knowledge-base reader footers, "Source:"
+lines, MaiK answers) is scrubbed on the rendered DOM by `emoji-icons.js` (flag `smd_nobooks`, default ON):
+full textbook titles (Harrison, Nelson, Mandell, Campbell-Walsh, Sleisenger, Adams and Victor, Williams,
+Bailey and Love, Murray and Nadel, Sabiston, Oxford Handbooks, Tintinalli, Davidson, Robbins, Guyton,
+Goodman and Gilman, Washington Manual, Kumar and Clark, Katzung, Braunwald's Heart Disease, Fitzpatrick's
+Dermatology, Sherlock, Brenner and Rector, Rockwood and Green, Novak, Sanford Guide...) become "Standard
+medical references"; the bare name in prose becomes "the reference"; p./pp./page/Chapter/Ch. locators are
+removed. Clinical eponyms are protected (Harrison's groove, Fitzpatrick skin type, Braunwald
+classification, Kaplan-Meier, Brenner tumour, Nelson syndrome, Rockwood classification, "Page 2 of 5").
+
+**Trade-off / status.** The shipped knowledge-base DATA still carries the source metadata (about 30,700
+textbook mentions and 41,000 page locators in kb/ files, mostly `kb/dist/*`); nothing displays it, but
+anyone unpacking the app bundle can read it. Removing it from the data is a separate, larger change
+(the RAG and reader code read those fields), not done yet. The underlying question of whether the KB
+prose itself is paraphrased closely enough is a legal review, not a display fix.
+
+## 2026-09-24 · No AI-style dashes in the app
+
+**Decision.** Owner: "remove AI slop like -- AI dashes all over the app without causing malfunction".
+Same rendered-DOM layer as the emoji swap (`emoji-icons.js`, flag `smd_nodash`, default ON). Each dash is
+judged by its neighbours: an aside (X — Y, X—Y, X -- Y) becomes a comma; a range (5—10, 5 – 10) becomes
+5-10 and a tight 7–10 en dash is untouched; an empty value (a lone —, HR: —, —/—) becomes – so empty
+still reads as empty; a dash at the start/end of a text node becomes a comma only when the text continues
+in the neighbouring element. Hyphens, CSS `--vars` and `a--b` are untouched; inputs/code are skipped.
+Also applied to attributes, document.title, dialogs and outbound text (PDF, share, clipboard, notifications).
+
+**Malfunction guard.** Code that compares screen text with the string it rendered would stop matching once
+the text is rewritten (this affects the emoji swap too). The five such sites (search.js scroll-to-result,
+home.js menu match, medlist.js route/frequency chips, opd-emr.js dictation bar) now compare via
+`SMD_EMOJI_ICONS.same()/norm()`, which normalises both sides; without the module they fall back to the
+original comparison. Comparisons on data values (not screen text) are unaffected.
+
 ## 2026-09-24 · No emoji in the app: rendered emoji become line icons
 
 **Decision.** Owner: "remove emoji all over the app and replace with icons". ~1,500 emoji sit in 71

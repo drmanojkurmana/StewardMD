@@ -47,10 +47,28 @@
 
   // notifyAppReady EVERY launch, before anything else. Fire-and-forget — a missing/broken plugin
   // must never block app boot.
+  /* THE UPDATER IS THE TRUTH, NOT LOCALSTORAGE. install() saved the new version number in the .then()
+   * AFTER set() - but set() reloads the WebView into the new bundle at once, so that line usually
+   * never ran. The phone then booted bundle 132, still remembered 131, showed "4.9", told the server
+   * it was on 131, was offered 132 again, and the doctor installed it again, for ever (owner's Pixel 9,
+   * 2026-09-25: running 132, saved 131). Every launch now reads the running bundle from the plugin and
+   * rewrites the saved number; check() waits for that so it never asks with a stale version. */
+  var _truth = Promise.resolve();
+  function reconcileVersion() {
+    var p = plugin();
+    if (!p || !p.current) return Promise.resolve();
+    return Promise.resolve(p.current()).then(function (c) {
+      var b = (c && c.bundle) || {};
+      if (!b.id || b.id === "builtin") { setMyVersion(0); return; }
+      var n = parseInt(b.version, 10);
+      if (n > 0) setMyVersion(n);
+    }, function () {});
+  }
   (function callAppReady() {
     if (!isNative()) return;
     var p = plugin();
     if (p && p.notifyAppReady) { try { p.notifyAppReady().catch(function () {}); } catch (e) {} }
+    _truth = reconcileVersion();
     // Reclaim space from bundles nothing will load again — well after launch, never blocking it.
     setTimeout(function () { try { purgeOld(); } catch (e) {} }, 8000);
   })();
@@ -58,7 +76,7 @@
   function check() {
     if (!isNative() || !plugin()) return Promise.resolve({ status: "unavailable" });
     try { localStorage.setItem(LASTCHECK, String(Date.now())); } catch (e) {}
-    return nativeBuild().then(function (build) {
+    return _truth.then(nativeBuild).then(function (build) {
       var v = myVersion();
       var url = API_BASE + "/api/ota/check?version=" + v + "&nativeBuild=" + build;
       return fetch(url).then(function (r) { return r.json(); }).then(function (j) {
@@ -167,7 +185,13 @@
     if (!p || !p.list || !p.delete) return Promise.resolve({ removed: 0 });
     return p.list().then(function (r) {
       var doomed = ((r && r.bundles) || []).filter(function (b) {
-        return b && b.id && b.id !== "builtin" && DOOMED_STATUS[String(b.status || "").toLowerCase()];
+        if (!b || !b.id || b.id === "builtin") return false;
+        if (DOOMED_STATUS[String(b.status || "").toLowerCase()]) return true;
+        /* A 'pending' bundle OLDER than the one running is a leftover from an earlier auto-update: the
+         * Pixel 9 carried bundle 127 as pending while running 132. Nothing should ever switch back to it.
+         * A NEWER pending bundle is what next() queued for the next restart, and is kept. */
+        var n = parseInt(b.version, 10), cur = myVersion();
+        return String(b.status || "").toLowerCase() === "pending" && n > 0 && cur > 0 && n < cur;
       });
       return Promise.all(doomed.map(function (b) {
         return p.delete({ id: b.id }).then(function () { return 1; }, function () { return 0; });
@@ -185,6 +209,7 @@
     currentVersion: function () { var v = myVersion(); return v > 0 ? v : null; },
     versionLabel: function (v) { return versionLabel(arguments.length ? v : myVersion()); },
     purgeOld: purgeOld,
+    reconcile: function () { _truth = reconcileVersion(); return _truth; },
     check: check, install: install,
   };
 
