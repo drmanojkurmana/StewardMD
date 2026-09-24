@@ -209,3 +209,28 @@ the cheap retry is any commit merged to main. Confirm the agent flags with
 `GET /api/connect/agent/connections` (401 = bound, 404 = not).
 
 Re-uploaded CONNECT_AGENT_FLAG and CONNECT_BROWSER_SESSION_FLAG with value `1` via stdin on 2026-09-12; a value typed interactively had not gated the route open.
+
+## MaiK AI provider credentials (2026-09-24)
+
+Vertex is the main provider and the Gemini (AI Studio) key the fallback: `AI_PROVIDER = "vertex"` in
+wrangler.toml (both envs), failover to `developer` on any Vertex error. Vertex authenticates with ONE of:
+
+- `VERTEX_API_KEY` (Pages secret): Vertex AI express mode, publisher path on aiplatform.googleapis.com,
+  key sent in the `x-goog-api-key` header. This is the current credential. Read by functions/api/ai,
+  functions/_fundx_ai.js and functions/_wardsynq/maik-gateway.js.
+- the project path (`GCP_PROJECT`, `GCP_SA_EMAIL`, WIF or SA key): used only when no VERTEX_API_KEY is set.
+  These belonged to the retired owner-account project and are to be deleted once the key is verified.
+
+Rotate the key without it touching a terminal history or a chat:
+
+```
+npx wrangler pages secret put VERTEX_API_KEY --project-name stewardmd      # prompts; paste the key
+```
+
+then any commit to main redeploys Pages; verify with `GET /api/ai/health` (`vertex_mode: "api-key (express mode)"`).
+The gcloud CLI on the owner's Mac was logged out of the old account the same day; nothing in the app or
+this repo uses gcloud.
+
+Patient data (WardSynQ MaiK gateway): the S7 rule stands. PHI goes to Vertex ONLY through the project's
+regional endpoint under a service account; express mode never carries PHI. With only an API key
+configured, PHI-carrying MaiK requests in WardSynQ refuse Vertex rather than use the key.
