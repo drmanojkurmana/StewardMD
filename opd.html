@@ -735,6 +735,8 @@
   }
   function paintPulse(){
     var host=document.getElementById("opdPulse"); if(host) host.innerHTML=pulseInner();
+    var rb=document.getElementById("opdRecon");
+    if(rb) rb.onclick=function(){ api("opd-reconcile",{method:"POST",body:{orgId:st.orgId}}).then(function(r){ toast(r&&r.ok?(r.landed+" of "+r.retried+" visits now in the record"+(r.stillFailed?"; "+r.stillFailed+" still failing":"")):"Could not retry now"); loadPulse(); }); };
   }
   function pnum(v,unit){ return v==null?'<i class="p-none">not yet</i>':esc(v)+(unit?'<u>'+unit+'</u>':''); }
   function pulseInner(){
@@ -754,6 +756,7 @@
       tile('Seen',esc(p.completed||0),(p.inConsultation||0)+' in the room')+
       tile('Did not wait',p.abandonedPct==null?'<i class="p-none">not yet</i>':esc(p.abandonedPct)+'<u>%</u>',esc(p.noShow||0)+' no-show'+((p.noShow||0)===1?'':'s'),(p.abandonedPct||0)>=10)+
       (p.held?tile('Awaiting result',esc(p.held),'sent for a test or booked back'):'')+
+      (p.syncFailed?tile('Not in record',esc(p.syncFailed),'<button class="ghost" id="opdRecon" style="padding:2px 8px">Send again</button>',true):'')+
       '</div>'+(blame?'<div class="p-note">Desk '+pnum(desk.medianMin,'m')+', doctor '+pnum(doc.medianMin,'m')+' · '+esc(blame)+'</div>':'')+
       (r.unread&&r.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>':'');
   }

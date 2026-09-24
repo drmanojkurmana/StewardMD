@@ -115,3 +115,18 @@ test("a doctor of the hospital may read it too: it is the queue they are working
   seedHospital();
   assert.equal((await pulse(DOCTOR)).__status, 200);
 });
+
+/* ---- plan item 6: visits that did not reach the clinical record ------------------------------- */
+test("a visit whose record sync failed is counted, so it is seen instead of silently missing", () => {
+  const p = opdPulse([t({ encounterSync: "failed" }), t({ encounterSync: "ok" }), t({})], NOW);
+  assert.equal(p.syncFailed, 1);
+});
+
+test("POST /opd-reconcile: the desk's authority, never another hospital, and it says what it did", async () => {
+  seedHospital();
+  assert.equal((await as(null, "/opd-reconcile", "POST", { orgId: ORG })).__status, 401);
+  assert.equal((await as(ADMIN, "/opd-reconcile", "POST", { orgId: OTHER_ORG })).__status, 403);
+  const r = await as(ADMIN, "/opd-reconcile", "POST", { orgId: ORG });
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.deepEqual([r.retried, r.landed, r.stillFailed], [0, 0, 0], "nothing failed, nothing retried");
+});

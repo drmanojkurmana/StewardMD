@@ -302,13 +302,26 @@ import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.j
 // this is one function, not several. Best-effort and silent on failure at every call site: a missed
 // WardSynQ sync must never block or alter the underlying queue action that triggered it, the same
 // contract every other shadow-mode write already keeps.
+/* THE VISIT RECORD IS BEST-EFFORT, BUT NO LONGER SILENT (OPD plan item 6, 2026-09-24).
+ *
+ * This swallowed every failure and returned null, so a patient could be registered, queued and seen
+ * while their visit never reached the clinical record - and nothing anywhere said so. Registration still
+ * never fails on it (the desk must keep moving), but when a hospital's record is switched on, the outcome
+ * is now written onto the ticket: encounterSync "ok" or "failed" with the reason. The OPD pulse counts the
+ * failures and POST /opd-reconcile retries them. A hospital with the record off is untouched. */
 async function syncEncounter(request, env, s, ticket) {
+  let mig = null;
+  const mark = async (fields) => { try { if (ticket && ticket.id) await fsCommit(env, [wUpdate(env, "q_tickets/" + ticket.id, Object.assign({ encounterSyncAt: Date.now() }, fields))]); } catch (e) { /* the mark is advisory */ } };
   try {
-    const mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+    mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
     if (!mig || mig.mode === "off") return null;
-    if (mig.error) return null;   // wardsynq org with no tenant linked yet — best-effort, silent, like every other syncEncounter failure
-    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+    if (mig.error) { await mark({ encounterSync: "failed", encounterSyncError: String(mig.error).slice(0, 120) }); return null; }
+    const r = await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+    if (r && r.ok === false) await mark({ encounterSync: "failed", encounterSyncError: String(r.error || r.detail || "refused").slice(0, 120) });
+    else if (r) await mark({ encounterSync: "ok", encounterSyncError: "" });
+    return r;
   } catch (e) {
+    if (mig && mig.mode !== "off") await mark({ encounterSync: "failed", encounterSyncError: String((e && e.message) || e).slice(0, 120) });
     return null;
   }
 }
@@ -6342,6 +6355,34 @@ export async function onRequest(context) {
      *
      * Every room's session plus the pool, exactly as boardForOrg walks them, but the tickets are NOT
      * filtered to the active ones: a day with 40 completed and 9 no-shows is the day being measured. */
+    /* RECONCILE: re-send today's visits whose clinical record did not land (syncEncounter marked them
+     * "failed"). The desk's authority, because it is the desk's patients; bounded to 50 per call so one
+     * tap cannot become a long request. Says how many landed and how many still did not. */
+    if (method === "POST" && seg === "opd-reconcile") {
+      const rb = await readBody(request);
+      const orgId = String(rb.orgId || "");
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_ADD);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      const sessions = [];
+      for (const rm of await ORG.listRooms(env, orgId)) {
+        if (!resolveRoomDoctor(rm)) continue;
+        try { const s1 = await Q.getOrCreateRoomSession(env, org, rm, rb.date || ""); if (s1) sessions.push(s1); } catch (e) {}
+      }
+      try { const p1 = await Q.getOrCreatePoolSession(env, org, rb.date || ""); if (p1) sessions.push(p1); } catch (e) {}
+      let retried = 0, landed = 0;
+      for (const s1 of sessions) {
+        for (const t of await Q.listTickets(env, s1.id)) {
+          if (retried >= 50) break;
+          if (!t || t.encounterSync !== "failed") continue;
+          retried++;
+          const r = await syncEncounter(request, env, s1, t);
+          if (r && r.ok !== false) landed++;
+        }
+      }
+      return json({ ok: true, retried, landed, stillFailed: retried - landed }, 200, request);
+    }
     if (method === "GET" && seg === "opd-pulse") {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);

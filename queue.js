@@ -276,6 +276,8 @@
         tile("Seen", "check_circle", esc(p.completed || 0), (p.inConsultation || 0) + " in the room") +
         tile("Did not wait", "person_off", p.abandonedPct == null ? '<u style="opacity:.5">not yet</u>' : esc(p.abandonedPct) + "<u>%</u>", esc(p.noShow || 0) + " no-show" + ((p.noShow || 0) === 1 ? "" : "s"), (p.abandonedPct || 0) >= 10) +
         (p.held ? tile("Awaiting result", "science", esc(p.held), "sent for a test or booked back") : "") +
+        // Visits that did not reach the clinical record (plan item 6): shown, with the one-tap retry.
+        (p.syncFailed ? tile("Not in record", "sync_problem", esc(p.syncFailed), '<button class="q-ic" data-q-act="reconcile" title="Send these visits to the record again">' + ms("sync") + "</button> send again", true) : "") +
       "</div>" +
       (blame ? '<div class="q-pulse-note">' + ms("insights") + "Desk " + pulseNum(desk.medianMin, "m") + ", doctor " + pulseNum(doc.medianMin, "m") + " &middot; " + esc(blame) + "</div>" : "") +
       "</section>";
@@ -656,7 +658,14 @@
     if (cmd === "stafflogin") { staffLogin(); return; }
     if (cmd === "staffout") { wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); try { if (G.StewardIdentityResolver && G.StewardIdentityResolver.clearCache) G.StewardIdentityResolver.clearCache(); } catch (e) {} st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
     if (cmd === "fdrefresh") { loadFrontDesk(); return; }
-    if (cmd === "pulse") { loadPulse(true); return; }   // the OPD figures, now rather than on the next pass
+    if (cmd === "pulse") { loadPulse(true); return; }
+    if (cmd === "reconcile") {
+      apiPost("/opd-reconcile", { orgId: st.orgId }).then(function (r) {
+        try { G.toast && G.toast(r && r.ok ? (r.landed + " of " + r.retried + " visits now in the record" + (r.stillFailed ? "; " + r.stillFailed + " still failing" : "")) : "Could not retry now"); } catch (e) {}
+        loadPulse(true);
+      }).catch(function () { try { G.toast && G.toast("Could not retry now"); } catch (e) {} });
+      return;
+    }   // the OPD figures, now rather than on the next pass
     if (cmd === "fdadd") { frontDeskAdd(); return; }
     if (cmd === "fdroute") { frontDeskRoute(arg); return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }

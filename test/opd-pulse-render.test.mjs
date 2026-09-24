@@ -92,6 +92,14 @@ test("a personal clinic with no hospital behind it shows no OPD card at all, and
   assert.match(html, /Patients Waiting/, "the doctor's own KPIs are still there");
 });
 
+test("visits missing from the clinical record are shown as a warning with a one-tap retry", () => {
+  const Q = loadQueue();
+  const html = dash(Q, { ok: true, pulse: { ...PULSE.pulse, syncFailed: 2 } });
+  assert.match(html, /Not in record/);
+  assert.ok(html.includes('data-q-act="reconcile"'), "the retry is right there");
+  assert.ok(!/Not in record/.test(dash(Q, PULSE)), "and absent when every visit landed");
+});
+
 test("rooms that could not be read are flagged rather than quietly making the day look light", () => {
   const Q = loadQueue();
   const html = dash(Q, { ...PULSE, unread: ["Room 3"] });
