@@ -4438,6 +4438,18 @@ export async function onRequest(context) {
       }
       if (sub === "appointment" && method === "POST") {
         const r = await setAppointmentState(request, env, { ...deps, appointmentId: body.appointmentId, state: body.state, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        /* OPD plan item 8: A BOOKED PATIENT WHO ARRIVES JOINS THE QUEUE. Marking an appointment arrived used
+         * to update the record only, so the patient then had to be registered again at the desk as a walk-in.
+         * Now the arrival adds them to the OPD pool (which routes straight to a single staffed room) and the
+         * answer carries the token. Only a REAL change adds one - a retried arrival ("unchanged") does not -
+         * and a failed token never undoes the arrival; it is said instead. */
+        if (r.ok && r.state === "arrived" && r.written === 1 && wOrg) {
+          try {
+            const pt = r.patient || {};
+            const t = await Q.addToPool(env, wOrg, { name: pt.name || "", mrn: pt.mrn || "", mobile: pt.mobile || "", patientId: r.patientId || "" }, actor.id || "");
+            r.queueTicket = { id: t && t.id, token: t && (t.token || t.tokenNo) };
+          } catch (e) { r.queueError = "could_not_add_to_queue"; }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "follow-up" && method === "POST") {
