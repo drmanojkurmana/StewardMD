@@ -228,9 +228,54 @@
       f._smdNoEmoji = true; W[k] = f;
     });
   }
+  // Text that leaves the page as a string, not DOM: PDFs, native share sheets, the clipboard and phone
+  // notifications. Wrapped at their single shared entry points, so the 100+ callers need no change.
+  function stripDeep(v, depth) {
+    if (typeof v === "string") return strip(v);
+    if (!v || typeof v !== "object" || depth > 3) return v;
+    if (Array.isArray(v)) return v.map(function (x) { return stripDeep(x, depth + 1); });
+    var o = {};
+    for (var k in v) if (Object.prototype.hasOwnProperty.call(v, k)) o[k] = (k === "title" || k === "text" || k === "body" || k === "subject" || k === "dialogTitle" || k === "largeBody" || k === "summaryText" || k === "notifications") ? stripDeep(v[k], depth + 1) : v[k];
+    return o;
+  }
+  function wrapMethod(obj, name, how) {
+    try {
+      if (!obj || typeof obj[name] !== "function" || obj[name]._smdNoEmoji) return;
+      var orig = obj[name];
+      var f = function () { var a = Array.prototype.slice.call(arguments); if (enabled()) a = how(a); return orig.apply(this, a); };
+      f._smdNoEmoji = true; obj[name] = f;
+    } catch (e) {}
+  }
+  var html0 = function (a) { if (typeof a[0] === "string") a[0] = strip(a[0]); if (typeof a[2] === "string") a[2] = strip(a[2]); return a; };
+  var obj0 = function (a) { a[0] = stripDeep(a[0], 0); return a; };
+  function wrapOutbound() {
+    wrapMethod(W.SMD_PDF, "fromHtml", html0);
+    wrapMethod(W.SMD_NATIVE, "sharePdfFromHtml", html0);
+    wrapMethod(W.navigator, "share", obj0);
+    try { if (W.navigator && W.navigator.clipboard) wrapMethod(W.navigator.clipboard, "writeText", function (a) { a[0] = strip(a[0]); return a; }); } catch (e) {}
+    var P = W.Capacitor && W.Capacitor.Plugins;
+    if (P) { wrapMethod(P.Share, "share", obj0); wrapMethod(P.LocalNotifications, "schedule", obj0); }
+  }
+  // SMD_PDF / SMD_NATIVE are assigned by native-bridge.js, possibly long after boot: wrap them the
+  // moment they are assigned instead of polling.
+  function trapGlobal(name, wrapFn) {
+    try {
+      if (W[name]) { wrapFn(W[name]); return; }
+      var d = Object.getOwnPropertyDescriptor(W, name);
+      if (d && !d.configurable) return;
+      var val;
+      Object.defineProperty(W, name, { configurable: true, enumerable: true,
+        get: function () { return val; },
+        set: function (v) { val = v; try { wrapFn(v); } catch (e) {} } });
+    } catch (e) {}
+  }
   function boot() {
     if (!enabled() || !W.document || !W.document.body) return;
     wrapDialogs();
+    // the bridges load after this file (deferred): wrap now and again as they appear
+    wrapOutbound(); [500, 2000, 6000, 15000].forEach(function (ms) { W.setTimeout(wrapOutbound, ms); });
+    trapGlobal("SMD_PDF", function (o) { wrapMethod(o, "fromHtml", html0); });
+    trapGlobal("SMD_NATIVE", function (o) { wrapMethod(o, "sharePdfFromHtml", html0); });
     var start = function () {
       fixTree(W.document.body);
       if (!W.MutationObserver) return;
@@ -254,5 +299,5 @@
   if (W && W.document) {
     if (W.document.readyState === "loading") W.document.addEventListener("DOMContentLoaded", boot); else boot();
   }
-  return { strip: strip, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
+  return { strip: strip, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
 });

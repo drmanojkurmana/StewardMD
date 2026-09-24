@@ -49,3 +49,11 @@ test("flag smd_noemoji=0 disables it", () => {
   assert.equal(E.enabled(), true);
   store.set("smd_noemoji", "0"); assert.equal(E.enabled(), false); store.clear();
 });
+
+test("text leaving the page (PDF, share, clipboard, notifications) is stripped at the shared entry points", () => {
+  const out = E.stripDeep({ title: "✅ Saved", text: "🩺 Note for 💊 dose", url: "https://x", notifications: [{ title: "🔔 Rounds", body: "⚠️ K 2.9", id: 1 }] }, 0);
+  assert.deepEqual(out, { title: "Saved", text: "Note for dose", url: "https://x", notifications: [{ title: "Rounds", body: "K 2.9", id: 1 }] });
+  const src = readFileSync(new URL("../emoji-icons.js", import.meta.url), "utf8");
+  for (const hook of ['W.SMD_PDF, "fromHtml"', 'W.SMD_NATIVE, "sharePdfFromHtml"', 'W.navigator, "share"', '"writeText"', 'P.Share, "share"', 'P.LocalNotifications, "schedule"'])
+    assert.ok(src.includes(hook), hook);
+});

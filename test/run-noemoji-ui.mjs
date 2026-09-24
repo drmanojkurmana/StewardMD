@@ -61,7 +61,14 @@ async function run(flagOff) {
     res[name] = await page.evaluate(COUNT);
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/noemoji-${name}-${flagOff ? "before" : "after"}.png` });
   }
-  const dialog = await page.evaluate(() => { let got = null; const o = window.confirm; return typeof o === "function" && o._smdNoEmoji === true; });
+  const dialog = await page.evaluate(async () => {
+    await new Promise((r) => setTimeout(r, 2500));
+    let sent = null; const orig = window.SMD_PDF && window.SMD_PDF.fromHtml;
+    return typeof window.confirm === "function" && window.confirm._smdNoEmoji === true
+      && (window.SMD_PDF = { fromHtml: function (h) { return h; } }, window.SMD_PDF.fromHtml._smdNoEmoji === true && window.SMD_PDF.fromHtml("<p>✅ Done</p>") === "<p>Done</p>")
+      && (window.SMD_NATIVE = { sharePdfFromHtml: function (h) { return h; } }, window.SMD_NATIVE.sharePdfFromHtml("<b>🩺 Note</b>") === "<b>Note</b>")
+      && !!(navigator.clipboard && navigator.clipboard.writeText && navigator.clipboard.writeText._smdNoEmoji);
+  });
   res.dialogWrapped = { left: 0, icons: 0, wrapped: dialog };
   await browser.close();
   return { res, errs };
@@ -71,7 +78,7 @@ const on = await run(false);
 for (const [k, v] of Object.entries(on.res)) ok(v.left === 0, `${k}: no emoji left in visible text (${v.icons} icons on screen)` + (v.left ? " " + JSON.stringify(v.sample) : ""));
 ok(on.res.contact.icons >= 5, "Contact Us shows icons where emoji were: " + on.res.contact.icons);
 ok(Object.values(on.res).reduce((a, v) => a + v.icons, 0) > 0, "icons are drawn in place of emoji");
-ok(on.res.dialogWrapped.wrapped, "alert/confirm/prompt messages are emoji-stripped");
+ok(on.res.dialogWrapped.wrapped, "alert/confirm/prompt, PDF export and clipboard are emoji-stripped at their entry points");
 delete on.res.dialogWrapped;
 const off = await run(true);
 const offLeft = Object.values(off.res).reduce((a, v) => a + v.left, 0);
