@@ -679,7 +679,7 @@
     if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
     if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "stafflogin") { staffLogin(); return; }
-    if (cmd === "staffout") { wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); try { if (G.StewardIdentityResolver && G.StewardIdentityResolver.clearCache) G.StewardIdentityResolver.clearCache(); } catch (e) {} st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
+    if (cmd === "staffout") { if (!offSignOut()) return; wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); try { if (G.StewardIdentityResolver && G.StewardIdentityResolver.clearCache) G.StewardIdentityResolver.clearCache(); } catch (e) {} st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
     if (cmd === "fdrefresh") { loadFrontDesk(); return; }
     if (cmd === "pulse") { loadPulse(true); return; }
     if (cmd === "reconcile") {
@@ -1041,7 +1041,9 @@
             if (n && n.ok) { st.board = n; var e2 = root(); if (e2 && e2.querySelector(".q-fd") && !typing) e2.innerHTML = renderFrontDesk(n); }
           }).catch(function () {});
           loadPulse();
+          offTick();
         }, POLL_MS);
+        offTick();
       });
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-btn" data-q-act="fdrefresh">Retry</button>'); });
   }
@@ -1164,6 +1166,38 @@
     '</div>';
   }
 
+  /* Plan item 13: the front desk keeps checking patients in when the server cannot be reached, with the same
+   * offline desk as the web console (opd-offline-desk.js): a series reserved while online, a numbered slip
+   * offline, and each poll sends what is waiting. */
+  var OFFD = null;
+  function offDesk() {
+    if (!G.SMD_OPD_OFFLINE || !st.orgId) return null;
+    var day = new Date(Date.now() + 19800000).toISOString().slice(0, 10);   // the IST day the server numbers by
+    if (!OFFD || OFFD._org !== st.orgId || OFFD._date !== day) {
+      var ss = null; try { ss = G.sessionStorage; } catch (e) {}
+      if (!ss) return null;
+      OFFD = G.SMD_OPD_OFFLINE.desk({ storage: ss, orgId: st.orgId, date: day, call: function (p, b) { return apiPost("/" + p, b); } });
+      OFFD._org = st.orgId; OFFD._date = day;
+    }
+    return OFFD;
+  }
+  function offTick() {
+    var d = offDesk(); if (!d) return;
+    d.prepare();
+    if (d.pending()) d.sync().then(function (r) { if (r.synced) { toast(r.synced + (r.synced === 1 ? " offline check-in" : " offline check-ins") + " sent to the queue" + (r.review ? ": " + r.review + " to check" : "")); } });
+  }
+  // Sign-out with offline check-ins not yet sent asks first: each one is a patient's place in the queue.
+  function offSignOut() {
+    var d = offDesk(); if (!d) return true;
+    if (d.pending()) { var sure = true; try { sure = window.confirm(d.pending() + " offline check-in(s) have not reached the queue yet and will be lost. Sign out anyway?"); } catch (e) {} if (!sure) return false; }
+    d.clear(); OFFD = null; return true;
+  }
+  function printTokenSlip(o) {
+    var okp = false;
+    try { okp = !!(G.WARD_LABELS && G.WARD_LABELS.print("token", { hospital: (st.staffWho && (st.staffWho.orgName || st.staffWho.orgCode)) || "", token: o.token, name: o.name || "", issuedAt: new Date(o.at || Date.now()).toLocaleString() })); } catch (e) {}
+    if (!okp) toast("Printing is not available here. Write " + o.token + " on the patient's slip.");
+  }
+
   // Add a patient from the front desk: the SAME ABDM-ready check-in sheet the doctor uses, then into
   // the central pool (a one-room clinic auto-routes server-side).
   function frontDeskAdd() {
@@ -1175,6 +1209,8 @@
         departments: dp.departments, departmentRequired: dp.required,
         resolve: function (id) { return apiGet("/patient/resolve?orgId=" + encodeURIComponent(st.orgId) + "&id=" + encodeURIComponent(id)); },
         submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; body.forQueue = "pool"; return apiPost("/patient/register", body); },
+        offline: function (sent) { var d = offDesk(); return d ? d.issue(sent) : null; },
+        printToken: printTokenSlip,
         onAdded: function (r, sent) {
           apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
             mrn: r.mrn, visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", departmentId: (sent && sent.departmentId) || "" })

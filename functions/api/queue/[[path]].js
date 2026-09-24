@@ -572,6 +572,8 @@ const TOKEN_SAY = {
   token_department_required: "Choose a department to give a token. Each department in this hospital numbers its own tokens.",
   token_prefix_missing: "This department has no token prefix, so its numbers would collide with another department's. An administrator sets one under Admin Center, Hospital, OPD token numbers.",
   token_contention: "Another desk registered at the same moment. Try again.",
+  bad_offline_token: "That offline token was not reserved by a desk of this hospital today.",
+  offline_token_used: "This offline token is already in the queue.",
 };
 function tokenRefusalFor(request) {
   return (e) => json({ ok: false, error: e.message, message: TOKEN_SAY[e.message] || e.detail || "The patient could not be added to the queue.", ...(e.departmentName ? { department: e.departmentName } : {}) }, e.status, request);
@@ -6888,6 +6890,11 @@ export async function onRequest(context) {
         return json({ ok: true, org: await ORG.backfillOrg(env, body.hospitalId, actor.id, body.mode, body.connectorId) }, 200, request);
       }
       // ---- nurse-station runtime: register into the pool + assign a patient to a room ----
+      if (seg === "offline-series") {   // plan item 13: a desk reserves today's offline token series while it is still online
+        const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
+        try { return json({ ok: true, ...(await Q.reserveOfflineSeries(env, body.orgId, Q.opdDate(body.date), actor.id)) }, 200, request); }
+        catch (e) { if (e && e.status) return json({ ok: false, error: e.message, message: e.detail || "" }, e.status, request); throw e; }
+      }
       if (seg === "pool") {   // register a department-level walk-in into the central unassigned pool
         const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
         // Plan item 12: registering ahead of the queue is the priority right, not the desk's; dropped (the patient is still registered) without it.

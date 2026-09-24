@@ -152,6 +152,11 @@
   .cancel:hover{background:var(--line)}
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(8px);background:var(--ink);color:var(--card);padding:12px 18px;border-radius:12px;font-weight:600;font-size:13.5px;z-index:40;opacity:0;transition:.24s var(--ease);max-width:90%;box-shadow:var(--sh-lg)}
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  .offbar{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:39;max-width:min(560px,calc(100% - 32px));background:#fff7e6;color:#7a4b00;border:1px solid #f3d19c;border-radius:14px;padding:10px 14px;box-shadow:var(--sh-lg);font-size:13.5px;font-weight:600}
+  .offbar[hidden]{display:none}
+  .offbar .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .offbar button{min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #e0b36a;background:#fff;color:#7a4b00;font-weight:700}
+  .offbar .rv{margin-top:6px;font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .drawer{padding:6px 0}
   .ev{border-left:3px solid var(--tl);padding:8px 0 8px 12px;margin-left:4px}
   .ev b{color:var(--ink)}.ev .t{color:var(--mut);font-size:12px}
@@ -324,8 +329,10 @@
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
-<script src="/opd-pulse-model.js?v=1" defer></script>
-<script src="/patient-register.js?v=preg7-sid1-sid1" defer></script>
+<script src="/opd-pulse-model.js?v=2" defer></script>
+<script src="/opd-offline-desk.js?v=1" defer></script>
+<script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
+<script src="/patient-register.js?v=preg7-sid1-sid1-off1" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
@@ -448,6 +455,9 @@
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
   function logout(msg){
+    // Plan item 13: an offline check-in not yet sent is the patient's place in the queue; say so before it is dropped.
+    // A forced sign-out (msg: the session ended) keeps them for the next sign-in at this desk instead.
+    try{ var od=offDesk(); if(od&&od.pending()){ if(!msg){ if(!window.confirm(od.pending()+" offline check-in(s) have not reached the queue yet and will be lost. Sign out anyway?")) return; od.clear(); } } else if(od) od.clear(); OFF=null; }catch(e){}
     // The next person at this desk must not inherit the last one's patient lookups (steward-identity-resolver.js).
     try{ if(window.StewardIdentityResolver&&window.StewardIdentityResolver.clearCache) window.StewardIdentityResolver.clearCache(); }catch(e){}
     if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} }
@@ -721,7 +731,49 @@
     }
     enhanceOpdShell();
   }
-  function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); }
+  function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); offTick(); }
+
+  /* ---- plan item 13: degraded desk mode (opd-offline-desk.js). While online the desk holds today's offline
+   * series; when the server cannot be reached a check-in still completes with a number from it and a printed
+   * slip, and every refresh (and the browser's "online" event) sends what is waiting. ---- */
+  var OFF=null;
+  function offDesk(){
+    if(!window.SMD_OPD_OFFLINE||!st.orgId||!(st.who&&can("queue.add"))) return null;
+    if(!OFF||OFF._org!==st.orgId||OFF._date!==st.date){
+      var ss=null; try{ ss=window.sessionStorage; }catch(e){}
+      if(!ss) return null;
+      OFF=SMD_OPD_OFFLINE.desk({storage:ss,orgId:st.orgId,date:st.date,call:function(path,body){ return api(path,{method:"POST",body:body}); }});
+      OFF._org=st.orgId; OFF._date=st.date;
+    }
+    return OFF;
+  }
+  function offTick(){
+    var d=offDesk(); if(!d){ paintOffline(); return; }
+    d.prepare().then(function(){ paintOffline(); });
+    if(d.pending()) d.sync().then(function(r){
+      if(r.synced) toast(r.synced+(r.synced===1?" offline check-in":" offline check-ins")+" sent to the queue"+(r.review?" - "+r.review+" to check":""));
+      paintOffline(); if(r.synced){ st.opd?loadDash():loadBoard(); }
+    });
+    paintOffline();
+  }
+  try{ window.addEventListener("online",function(){ offTick(); }); window.addEventListener("offline",function(){ paintOffline(); }); }catch(e){}
+  function paintOffline(){
+    var bar=document.getElementById("offBar");
+    if(!bar){ bar=document.createElement("div"); bar.id="offBar"; bar.className="offbar"; bar.setAttribute("role","status"); bar.setAttribute("aria-live","polite"); bar.hidden=true; document.body.appendChild(bar);
+      bar.onclick=function(e){ var b=e.target.closest&&e.target.closest("[data-off]"); if(!b) return; var a=b.getAttribute("data-off"), d=offDesk(); if(!d) return;
+        if(a==="send") offTick(); else if(a==="dismiss"){ d.dismiss(b.getAttribute("data-tok")); paintOffline(); } }; }
+    var d=offDesk(), n=d?d.pending():0, rv=d?d.review():[], down=(typeof navigator!=="undefined"&&navigator.onLine===false);
+    if(!d||(!n&&!rv.length&&!down)){ bar.hidden=true; bar.innerHTML=""; return; }
+    var h='<div class="row"><span>'+(down?(d.ready()?"Offline. Check-in continues on this desk.":"Offline. This desk has no offline series yet: check-in needs the connection."):"Back online.")+'</span>'+
+      (n?'<span>'+n+(n===1?" check-in":" check-ins")+' waiting to be sent</span>'+(down?"":'<button data-off="send">Send now</button>'):"")+'</div>';
+    h+=rv.map(function(x){ return '<div class="rv"><b>'+esc(x.token)+'</b> '+esc(x.name||"")+': '+esc(x.why)+' <button data-off="dismiss" data-tok="'+esc(x.token)+'">Done</button></div>'; }).join("");
+    bar.innerHTML=h; bar.hidden=false;
+  }
+  function printTokenSlip(o){
+    var ok=false;
+    try{ ok=!!(window.WARD_LABELS&&WARD_LABELS.print("token",{hospital:st.orgName||st.orgCode||"",token:o.token,name:o.name||"",issuedAt:new Date(o.at||Date.now()).toLocaleString()})); }catch(e){}
+    if(!ok) toast("Printing is not available here. Write "+o.token+" on the patient's slip.");
+  }
 
   /* ---- THE OPD PULSE (server: /opd-pulse, figures: functions/_queue_eta.js opdPulse) -------------
    * The same card the app shows, on the desk that can act on it first. Counts and durations only - it
@@ -2604,6 +2656,8 @@
         departmentRequired: perDept,
         resolve: function(id){ return api("patient/resolve?orgId="+encodeURIComponent(st.orgId)+"&id="+encodeURIComponent(id)); },
         submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue="pool"; return api("patient/register",{method:"POST",body:b}); },
+        offline: function(sent){ var d=offDesk(), r=d?d.issue(sent):null; paintOffline(); return r; },
+        printToken: function(o){ printTokenSlip(o); },
         onAdded: function(r,sent){
           // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
           api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",

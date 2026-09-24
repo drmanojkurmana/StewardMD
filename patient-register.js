@@ -315,6 +315,23 @@
       "</div></div>";
   }
 
+  /* Plan item 13: the server could not be reached and the host kept the check-in offline (opts.offline). The
+   * number shown is the one printed on the slip; it is the patient's token once the desk syncs. */
+  function offlineDoneHtml(res, canPrint) {
+    return '<div class="pr-wrap" role="dialog" aria-modal="true" aria-labelledby="prTitle">' +
+      '<div class="pr-card pr-done">' +
+        '<h2 id="prTitle">' + wTH("ward.reg-offline-title", "{name} checked in offline", { name: res.name ? esc(res.name) : wTH("ward.reg-patient", "Patient") }) + "</h2>" +
+        '<p class="pr-mrlabel">' + wTH("ward.reg-offline-token", "Offline token") + "</p>" +
+        '<p class="pr-mr" lang="en">' + esc(res.token) + "</p>" +
+        '<p class="pr-warn">' + wTH("ward.reg-offline-explain", "The connection is down. This check-in is kept on this desk and goes into the queue as soon as the connection is back. The patient keeps this number and their place.") + "</p>" +
+        '<div class="pr-actions">' +
+          (canPrint ? '<button type="button" class="pr-btn" data-a="print-token">' + wTH("ward.reg-offline-print", "Print token slip") + "</button>" : "") +
+          '<button type="button" class="pr-btn ghost" data-a="another">' + wTH("ward.reg-add-another", "Add another") + "</button>" +
+          '<button type="button" class="pr-btn primary" data-a="close">' + wTH("ward.reg-done", "Done") + "</button>" +
+        "</div>" +
+      "</div></div>";
+  }
+
   // ---- controller -----------------------------------------------------------------------------
   // opts: { mode:"native"|"ghis"|"connect", clinicName, submit(payload)->Promise, onAdded(res) }
   /* What the submit button says. The OPD front desk queues a patient; a ward admits one to a bed.
@@ -585,6 +602,14 @@
               : wT("ward.reg-could-not-add", "Could not add the patient. Check your connection and try again.");
       }).catch(function () {
         reset();
+        // Plan item 13: unreachable is not refused. A desk holding an offline series keeps the check-in and prints its number.
+        var off = null;
+        try { off = opts.offline ? opts.offline(sent) : null; } catch (e) { off = null; }
+        if (off && off.token) {
+          state.offline = { token: off.token, at: off.at, name: val("name") };
+          host.innerHTML = offlineDoneHtml(state.offline, typeof opts.printToken === "function");
+          return;
+        }
         host.querySelector("#prFerr").textContent = wT("ward.reg-could-not-reach-server", "Could not reach the server. Try again.");
       });
     }
@@ -778,6 +803,7 @@
         return;
       }
       if (a === "write-nfc") return writeNfc(b);
+      if (a === "print-token") { try { if (opts.printToken && state.offline) opts.printToken(state.offline); } catch (e) {} return; }
       if (a === "print-label") { try { if (root.openFileLabel) root.openFileLabel(state.doneMrn, state.doneStewardId); } catch (e) {} return; }
       if (a === "dup-continue") { state.confirmDuplicate = true; host.querySelector("#prDup").hidden = true; return save(); }
       if (a === "more") {

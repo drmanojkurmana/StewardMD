@@ -267,7 +267,7 @@
   /* What a hospital that set nothing gets: 75 x 25 mm wristband insert, 50 x 25 mm tube label, 75 x 50 mm pharmacy
    * label, 80 x 60 mm slip on a receipt printer. Admin > Hospital changes them (functions/_wardsynq/labels.js
    * bounds them on the server; the same bounds apply here to a size that arrives without them). */
-  var DEFAULT_SIZES = { wristband: { widthMm: 75, heightMm: 25 }, specimen: { widthMm: 50, heightMm: 25 }, pharmacy: { widthMm: 75, heightMm: 50 }, slip: { widthMm: 80, heightMm: 60 } };
+  var DEFAULT_SIZES = { wristband: { widthMm: 75, heightMm: 25 }, specimen: { widthMm: 50, heightMm: 25 }, pharmacy: { widthMm: 75, heightMm: 50 }, slip: { widthMm: 80, heightMm: 60 }, token: { widthMm: 80, heightMm: 60 } };
   function sizeOf(kind, sizes) {
     var d = DEFAULT_SIZES[kind], s = sizes && sizes[kind], ok = function (v) { return typeof v === "number" && isFinite(v) && v >= 15 && v <= 300; };
     return s && ok(s.widthMm) && ok(s.heightMm) ? { widthMm: s.widthMm, heightMm: s.heightMm } : { widthMm: d.widthMm, heightMm: d.heightMm };
@@ -309,7 +309,16 @@
       (d.ward ? "<div><i>Ward</i> " + esc(d.ward) + (d.bed ? " <i>bed</i> " + esc(d.bed) : "") + "</div>" : "") +
       "<div><i>Issued</i> " + esc(d.issuedAt) + "</div>";
   }
-  var RENDER = { wristband: wristbandHtml, specimen: specimenHtml, pharmacy: pharmacyHtml, slip: slipHtml };
+  /* OPD plan item 13: the slip a desk prints for a check-in taken while offline. The number on it becomes the patient's
+   * token when the desk syncs, so it is the largest thing on the slip. */
+  function tokenHtml(d) {
+    return (d.hospital ? '<div class="hosp">' + esc(d.hospital) + "</div>" : "") +
+      '<div class="tok">' + esc(d.token) + "</div>" +
+      '<div class="nm">' + esc(d.name) + "</div>" +
+      "<div><i>Checked in</i> " + esc(d.issuedAt) + "</div>" +
+      "<div>Keep this slip. Your number is called in order of arrival.</div>";
+  }
+  var RENDER = { wristband: wristbandHtml, specimen: specimenHtml, pharmacy: pharmacyHtml, slip: slipHtml, token: tokenHtml };
   /* A whole print document: the page IS the label (@page size, no margin), so the browser prints only the label. */
   function labelDocument(kind, data, sizes) {
     var sz = sizeOf(kind, sizes), h = sz.heightMm, pad = 1.5, inner = h - pad * 2;
@@ -324,7 +333,7 @@
       ".al{background:#000;color:#fff;font-weight:700;padding:0 1mm}.nal{border:0.3mm solid #000;padding:0 1mm}" +
       ".bc{display:block;width:100%;height:" + Math.max(6, Math.round(h * 0.32)) + "mm;margin:0.5mm 0}" +
       ".acc{font-family:'Courier New',monospace;font-weight:700;text-align:center}.drug{font-weight:700;font-size:" + (base * 1.3).toFixed(1) + "pt}" +
-      ".hosp{font-weight:700;text-transform:uppercase}" +
+      ".hosp{font-weight:700;text-transform:uppercase}.tok{font-weight:800;text-align:center;font-size:" + (base * 3.2).toFixed(1) + "pt;line-height:1.1}" +
       "</style></head><body><div class=\"lbl " + esc(kind) + "\">" + RENDER[kind](data || {}) + "</div></body></html>";
   }
   /* Prints one label through a hidden frame, so the page behind it never reaches the printer. Returns false when
