@@ -252,36 +252,22 @@
   function pulseNum(v, unit) { return v == null ? '<u style="opacity:.5">not yet</u>' : esc(v) + (unit ? "<u>" + unit + "</u>" : ""); }
   function pulseCard(state) {
     if (!state.orgId) return "";                      // a personal clinic with no hospital has no OPD-wide day
-    var r = state.pulse;
-    if (!r) return "";
-    /* A pulse that could not be read says so. An empty strip here would read as a quiet OPD, which is
-     * the one thing this card must never say by accident. */
-    if (r.failed) return '<section class="q-pulse"><div class="q-pulse-h"><b>OPD today</b><button class="q-ic" data-q-act="pulse" title="Retry">' + ms("refresh") + '</button></div><div class="q-pulse-warn">' + ms("error") + "Could not read the OPD figures. Do not read this as a quiet clinic.</div></section>";
-    var p = r.pulse || {}, hall = p.waitingNow || {}, d2d = p.doorToDoctor || {}, desk = p.deskWait || {}, doc = p.doctorWait || {};
-    // Which half of the building is slow: stated in words, because "45 and 15" means nothing at a glance.
-    var blame = desk.medianMin == null || doc.medianMin == null ? ""
-      : desk.medianMin > doc.medianMin * 2 ? "the wait is at the desk"
-      : doc.medianMin > desk.medianMin * 2 ? "the wait is for the doctor"
-      : "desk and doctor are even";
-    var tile = function (label, icon, value, sub, warn) {
-      return '<div class="q-pulse-t' + (warn ? " warn" : "") + '"><div class="q-pulse-l">' + ms(icon) + esc(label) + "</div><div class=\"q-pulse-v\">" + value + "</div>" + (sub ? '<div class="q-pulse-s">' + sub + "</div>" : "") + "</div>";
-    };
-    return '<section class="q-pulse"><div class="q-pulse-h"><b>OPD today</b>' +
-      (r.unread && r.unread.length ? '<span class="q-pulse-warn-i" title="Some rooms could not be read: ' + esc(r.unread.join(", ")) + '">' + ms("error") + "</span>" : "") +
+    var M = G.SMD_OPD_PULSE, m = state.pulse && M ? M.model(state.pulse) : null;
+    if (!m) return "";
+    var head = '<div class="q-pulse-h"><b>OPD today</b>';
+    if (m.failed) return '<section class="q-pulse">' + head + '<button class="q-ic" data-q-act="pulse" title="Retry">' + ms("refresh") + '</button></div><div class="q-pulse-warn">' + ms("error") + esc(m.message) + "</div></section>";
+    var tiles = m.tiles.map(function (t) {
+      var v = t.value == null ? '<u style="opacity:.5">not yet</u>' : esc(t.value) + (t.unit ? "<u>" + esc(t.unit) + "</u>" : "");
+      var sub = t.action === "reconcile" ? '<button class="q-ic" data-q-act="reconcile" title="Send these visits to the record again">' + ms("sync") + "</button> " + esc(t.sub) : esc(t.sub || "");
+      return '<div class="q-pulse-t' + (t.warn ? " warn" : "") + '"><div class="q-pulse-l">' + ms(t.icon) + esc(t.label) + '</div><div class="q-pulse-v">' + v + '</div><div class="q-pulse-s">' + sub + "</div></div>";
+    }).join("");
+    var note = m.note ? '<div class="q-pulse-note">' + ms("insights") + "Desk " + pulseNum(m.note.deskMin, "m") + ", doctor " + pulseNum(m.note.doctorMin, "m") + " &middot; " + esc(m.note.text) + "</div>" : "";
+    return '<section class="q-pulse">' + head +
+      (m.unread.length ? '<span class="q-pulse-warn-i" title="Some rooms could not be read: ' + esc(m.unread.join(", ")) + '">' + ms("error") + "</span>" : "") +
       '<button class="q-ic" data-q-act="pulse" title="Refresh the OPD figures">' + ms("refresh") + "</button></div>" +
-      '<div class="q-pulse-row">' +
-        tile("In the hall", "groups", esc(p.waiting || 0), hall.longestMin ? "longest " + esc(hall.longestMin) + "m" : "nobody waiting", hall.over60 > 0) +
-        tile("Waiting over 1h", "hourglass_bottom", esc(hall.over60 || 0), (hall.over30 || 0) + " over 30m", (hall.over60 || 0) > 0) +
-        tile("Door to doctor", "schedule", pulseNum(d2d.medianMin, "m"), d2d.p90Min == null ? "median" : "9 in 10 within " + esc(d2d.p90Min) + "m") +
-        tile("Seen", "check_circle", esc(p.completed || 0), (p.inConsultation || 0) + " in the room") +
-        tile("Did not wait", "person_off", p.abandonedPct == null ? '<u style="opacity:.5">not yet</u>' : esc(p.abandonedPct) + "<u>%</u>", esc(p.noShow || 0) + " no-show" + ((p.noShow || 0) === 1 ? "" : "s"), (p.abandonedPct || 0) >= 10) +
-        (p.held ? tile("Awaiting result", "science", esc(p.held), "sent for a test or booked back") : "") +
-        // Visits that did not reach the clinical record (plan item 6): shown, with the one-tap retry.
-        (p.syncFailed ? tile("Not in record", "sync_problem", esc(p.syncFailed), '<button class="q-ic" data-q-act="reconcile" title="Send these visits to the record again">' + ms("sync") + "</button> send again", true) : "") +
-      "</div>" +
-      (blame ? '<div class="q-pulse-note">' + ms("insights") + "Desk " + pulseNum(desk.medianMin, "m") + ", doctor " + pulseNum(doc.medianMin, "m") + " &middot; " + esc(blame) + "</div>" : "") +
-      "</section>";
+      '<div class="q-pulse-row">' + tiles + "</div>" + note + "</section>";
   }
+
   function addStaff() {
     var nameEl = document.getElementById("qStaffName"), roleEl = document.getElementById("qStaffRole"), pinEl = document.getElementById("qStaffPin");
     var identity = ((nameEl && nameEl.value) || "").trim().toLowerCase(), role = (roleEl && roleEl.value) || "nurse", pin = ((pinEl && pinEl.value) || "").trim();   // lowercase so it always matches the staff login (mobile keyboards auto-capitalize; server match is case-sensitive)

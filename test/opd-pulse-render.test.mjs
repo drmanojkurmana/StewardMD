@@ -15,6 +15,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import { createRequire } from "node:module";
 
 function loadQueue() {
   const src = readFileSync(fileURLToPath(new URL("../queue.js", import.meta.url)), "utf8");
@@ -26,6 +27,7 @@ function loadQueue() {
     fetch: () => Promise.resolve({ json: () => Promise.resolve({}) }),
     setTimeout, clearTimeout, setInterval, clearInterval, console, Promise, Date, JSON, Math,
   };
+  sb.SMD_OPD_PULSE = createRequire(import.meta.url)("../opd-pulse-model.js");   // the shared pulse logic, loaded before queue.js on the page
   sb.window = sb; sb.self = sb; vm.createContext(sb); vm.runInContext(src, sb);
   return sb.window.QUEUE;
 }
