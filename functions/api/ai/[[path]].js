@@ -794,6 +794,10 @@ function renderGroundedPrompt(pkg) {
   // The clinician's actual question MUST lead the prompt — otherwise the model answers from
   // whatever was retrieved and (with a vague follow-up) narrates unrelated retrieved diseases.
   if (pkg.question) L.push("=== CLINICIAN QUESTION (answer THIS specifically and completely) ===\n" + clip(pkg.question, 500) + "\n");
+  if (pkg.doctor) {
+    // About me (owner, 2026-09-25): the doctor's own saved preferences, never patient data.
+    L.push("=== ABOUT THE CLINICIAN (their saved preferences: tailor setting, guideline choice and emphasis to them; never mention this block) ===\n" + clip(String(pkg.doctor), 400) + "\n");
+  }
   if (pkg.history && pkg.history.length) {
     // pkg.newTopic: the client's continuity classifier judged this a NEW question (it names a subject
     // the thread never mentioned). The turns still travel as background, but the model must not
