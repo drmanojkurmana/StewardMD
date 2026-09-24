@@ -1,7 +1,8 @@
 /* StewardMD — MaiK usage metering, quotas & circuit breaker (server-side).
  *
- * Cloudflare KV backed (MAIK_KV, falling back to CASES_KV/GHIS_KV — NOT D1). Identity is
- * derived SERVER-SIDE from the Firebase ID token (same verification as functions/api/cases)
+ * Cloudflare KV backed (MAIK_KV, falling back to CASES_KV/GHIS_KV); the project-wide daily rollup and
+ * breaker mirror use D1 when bound (_counters.js). Identity is derived SERVER-SIDE from the Firebase ID
+ * token (_fbauth.js verifiedClaimsFor, memoised per request)
  * or Cf-Access email; unauthenticated callers fall back to a hashed client IP with a small
  * guest quota. The browser-supplied userId is NEVER trusted.
  *
@@ -32,7 +33,6 @@ export function usageConfig(env) {
     monthlyTokens: n("MAIK_MONTHLY_TOKEN_LIMIT", 3000000),
     freeMonthlyTokens: n("MAIK_FREE_MONTHLY_TOKEN_LIMIT", 30000),   // non-Pro: ~one full case / month
     maxInputTokens: n("MAIK_MAX_INPUT_TOKENS", 4000),
-    maxOutputTokens: n("MAIK_MAX_OUTPUT_TOKENS", 800),
     ocrDaily: n("MAIK_OCR_DAILY_LIMIT", 10),
     pdfPagesPerReport: n("MAIK_PDF_PAGES_PER_REPORT_LIMIT", 10),
     pdfPagesDaily: n("MAIK_PDF_PAGES_DAILY_LIMIT", 30),
@@ -360,7 +360,7 @@ export async function adminReport(env) {
     daily: { requests: g.req || 0, tokens: dayTokens, estCostInr: Math.round((g.cost || 0) * 100) / 100, blocked: g.blocked || 0 },
     byType: g.byType || {}, byStatus: g.byStatus || {},
     circuitBreaker: { status: breaker, dailyCostInr: Math.round((g.cost || 0) * 100) / 100, alertInr: cfg.costAlertInr, hardStopInr: cfg.costHardStopInr },
-    limits: { generalDaily: cfg.generalDaily, caseDaily: cfg.caseDaily, dailyTokens: cfg.dailyTokens, monthlyTokens: cfg.monthlyTokens, maxOutputTokens: cfg.maxOutputTokens },
+    limits: { generalDaily: cfg.generalDaily, caseDaily: cfg.caseDaily, dailyTokens: cfg.dailyTokens, monthlyTokens: cfg.monthlyTokens },
     accounts: users.slice(0, 50), accountCount: users.length,
     note: "Costs are ESTIMATED from token counts; no prompts, patient data, or PHI are stored.",
   };

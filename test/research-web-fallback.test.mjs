@@ -42,7 +42,7 @@ ok("snippetsOnly is handled BEFORE the quota gate (it must cost nothing)", quota
 }
 ok("the plain-web (cloud) path calls Gemini exactly once, Evidence Review's own call is untouched",
    (plainWeb.match(/await gen\(/g) || []).length === 1 && (body.match(/await gen\(/g) || []).length === 2);
-ok("RESEARCH_SYS_SNIPPETS is still the writer prompt for the cloud path", /RESEARCH_SYS_SNIPPETS \+ "\\n\\nQuestion: "/.test(body));
+ok("RESEARCH_SYS_SNIPPETS is still the writer prompt for the cloud path (sent as systemInstruction since T20)", /system: RESEARCH_SYS_SNIPPETS/.test(body));
 ok("the dead RESEARCH_SYS constant (only the removed fallback used it) is gone", !/const RESEARCH_SYS =/.test(SRC));
 
 console.log(`research-web-fallback: ${pass} passed, ${fail} failed`);

@@ -441,7 +441,8 @@ export async function poolKeyFor(store, doctorId) {
 // Returns { ok:true, used, limit, remaining } when allowed (and increments the counters), or
 // { ok:false, reason:"module-daily", module, used, limit } when the doctor is at the cap. FAIL-OPEN:
 // no store / unknown module / unlimited (daily=0) → allowed, uncounted. The count is per ATTEMPT
-// (recorded before the AI call) so the cap can never be exceeded by a slow/failed call; token/cost
+// (recorded before the AI call) so the cap can never be exceeded by a slow/failed call, EXCEPT with
+// deferRecord (MaiK /explain), where it is committed only for a generated answer; token/cost
 // detail is layered on separately by the endpoint's own precise metering.
 /* waitUntil (optional): defer the ANALYTICS rollup past the response. Measured on production, this
  * whole function cost ~1.1s in front of every answer — the single largest non-model stage.
