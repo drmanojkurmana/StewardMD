@@ -6030,7 +6030,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       });
       function _clr() { _wt.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); }
       function _persistWeb() { try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} }
+      /* STOP (owner, 2026-09-25: "fix stop for research and web search too"). The Research chip never
+       * put the composer into its Stop state, so there was nothing to press, and nothing ended the
+       * "Researching the web" line. Now this turn owns the Stop button. CapacitorHttp ignores
+       * AbortController (see SMD_AI.research), so Stop ends the TURN: the line goes, the composer is
+       * free, and a result that lands afterwards is dropped. */
+      var _stopped = false;
+      function _unlive() { try { Array.prototype.forEach.call(container.querySelectorAll(".maik-live-dot"), function (d) { d.remove(); }); } catch (e) {} }
+      function _webDone() { _unlive(); _maikBusy = false; maikSetSendMode(false); }
+      _maikBusy = true; maikSetSendMode(true);
+      _maikStop = function () {
+        if (_stopped) return; _stopped = true;
+        _clr(); _fsResumeW(); _unlive();
+        if (busy && busy.parentNode) busy.parentNode.removeChild(busy);
+        try { container.insertAdjacentHTML("beforeend", '<div class="maik-stopped">Stopped</div>'); } catch (e) {}
+        if (srcEl) srcEl.disabled = false;
+        _persistWeb(); _maikBusy = false; maikSetSendMode(false);
+      };
       function _webFail() {
+        _webDone();
         _clr(); if (busy && busy.parentNode) busy.parentNode.removeChild(busy);
         var w = document.createElement("div"); w.className = "maik-welcome"; w.style.marginTop = "8px";
         w.innerHTML = 'Web research didn’t come back in time. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a>';
@@ -6039,6 +6057,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         try { scroll(); } catch (e) {} _persistWeb();
       }
       return window.SMD_AI.research(q).then(function (r) {
+        if (_stopped) return;
+        _webDone();
         _fsResumeW(); _clr(); if (busy && busy.parentNode) busy.parentNode.removeChild(busy);
         if (r && r.text) {
           var bd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
@@ -6066,7 +6086,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         } else {
           _webFail();   // timeout / network error / empty result → clear spinner + one-tap retry
         }
-      }).catch(function () { _fsResumeW(); _webFail(); });
+      }).catch(function () { if (_stopped) return; _fsResumeW(); _webFail(); });
     }
     function maikWebChipEl(q) {
       var rb = document.createElement("button"); rb.className = "maik-chip maik-webchip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research";
@@ -6084,7 +6104,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _fsR2 = false, _fsResumeR = function () { if (_fsR2) return; _fsR2 = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} };
       try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResumeR, 60000); } } catch (e) {}
       var think = bubble("ai", maikBufferHTML("Reviewing the evidence", "maik-webbusy"));
+      // Stop ends the turn (see maikRunWeb): the bubble says so, the composer is free, a late result is
+      // dropped. The server may still count the review against the daily cap; it cannot be recalled.
+      var _stopped = false;
+      _maikStop = function () {
+        if (_stopped) return; _stopped = true; _fsResumeR();
+        try { think.innerHTML = '<div class="maik-welcome">Stopped.</div>'; _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+        _maikBusy = false; maikSetSendMode(false);
+      };
       window.SMD_AI.research(q, "evidence-review", _maikTurns.slice(-4)).then(function (r) {
+        if (_stopped) return;
         _fsResumeR(); _maikBusy = false; maikSetSendMode(false);
         // Over the 2/day cap -> a clear message, NOT an error.
         if (r && r.over) {
@@ -6115,6 +6144,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         try { scroll(); } catch (e) {}
         try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
       }).catch(function () {
+        if (_stopped) return;
         _maikBusy = false; maikSetSendMode(false);
         try { think.innerHTML = '<div class="maik-welcome">Evidence review is unavailable right now. Please verify against a reference source.</div>'; scroll(); _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
       });
@@ -6783,6 +6813,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           if (!(maikLLMFirst() && !active) && tm && tm.matched === false && tm.mode !== "assume") {   // LLM-first standalone: let Gemini answer off-KB topics directly (skip the slower web-research tier)
             var tp = maikEscH(tm.topic || question);
             think.innerHTML = '<div class="maik-welcome"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Researching <b>' + tp + '</b>…</div>';
+            // Hand the turn to web research: this turn's "Reviewing the evidence" stage timers and its
+            // watchdog would otherwise keep rewriting the bubble, and maikRunWeb now owns Stop.
+            _maikDone = true; _clearStages(); clearTimeout(_maikTO);
             try { maikRunWeb(think, question); } catch (e) { think.appendChild(maikWebChipEl(question)); }
             try { scroll(); } catch (e) {}
             return;
@@ -7871,7 +7904,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         runClinical(fq, fq, dp, maikActiveCase(), tpc); return;
       }
       var wq = el.getAttribute("data-maik-web");
-      if (wq) { el.disabled = true; maikRunWeb(el.closest(".maik-b.ai") || el.parentNode || body, wq, el); }
+      if (wq) { if (_maikBusy) return; el.disabled = true; maikRunWeb(el.closest(".maik-b.ai") || el.parentNode || body, wq, el); }
     });
     // ---- MaiK Research Mode toggle (flag smd_maik_research; button only present when enabled) ----
     var researchBtn = sheet.querySelector("#maikResearch");
