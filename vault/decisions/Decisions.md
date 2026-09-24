@@ -203,7 +203,9 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 
 **Decision.** Owner: every drug name in a question, answer or page is BOLD and opens that drug's
 monograph. Revised 2026-09-24 (owner: "bold and glow for 5 sec ... rather than keep it highlighted
-forever"): no permanent yellow; a name glows for 5 s when it scrolls into view (IntersectionObserver,
+forever", then "letters to glow in a flow"): no permanent yellow and no box; for 5 s after it
+scrolls into view a gold band flows through the LETTERS left to right (background-clip:text sweep,
+three passes, soft halo) (IntersectionObserver,
 re-armed only after it fully leaves the view) and on hover, then rests as plain bold. Reduced motion:
 a steady glow, no animation. Earlier wording, kept for history: the name was bold yellow and opened that drug's
 monograph (`MEDDB.openComposition`). A MaiK question naming a drug first shows a card: open the
