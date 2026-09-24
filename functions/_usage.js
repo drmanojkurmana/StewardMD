@@ -17,9 +17,8 @@ import { proFromRequest, proMessageFor } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
 import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
+import { verifiedClaimsFor } from "./_fbauth.js";
 
-const FB_PROJECT_DEFAULT = "stewardmd-498ec";
-const JWK_URL = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
 
 export function usageKv(env) { return env.MAIK_KV || env.CASES_KV || env.GHIS_KV || env.UPDATES_KV || null; }
 
@@ -47,48 +46,11 @@ export function usageConfig(env) {
 }
 
 // ---- identity (server-derived; browser userId never trusted) ----
-let _jwks = null, _jwksExp = 0;
-function b64urlToBytes(s) { s = String(s).replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; const bin = atob(s); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; }
-function b64urlToString(s) { return new TextDecoder().decode(b64urlToBytes(s)); }
-async function getJwks() {
-  const now = Date.now(); if (_jwks && now < _jwksExp) return _jwks;
-  const r = await fetch(JWK_URL); const data = await r.json(); const map = {};
-  for (const k of (data.keys || [])) map[k.kid] = k;
-  const cc = r.headers.get("Cache-Control") || "", m = cc.match(/max-age=(\d+)/);
-  _jwksExp = now + (m ? parseInt(m[1], 10) * 1000 : 3600 * 1000); _jwks = map; return map;
-}
-async function verifyFirebaseToken(token, env) {
-  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
-  const parts = String(token || "").split("."); if (parts.length !== 3) return null;
-  let header, payload;
-  try { header = JSON.parse(b64urlToString(parts[0])); payload = JSON.parse(b64urlToString(parts[1])); } catch (e) { return null; }
-  if (header.alg !== "RS256" || !header.kid) return null;
-  const now = Math.floor(Date.now() / 1000);
-  if (payload.aud !== project) return null;
-  if (payload.iss !== "https://securetoken.google.com/" + project) return null;
-  if (!payload.sub || !(typeof payload.exp === "number" && payload.exp > now)) return null;
-  const jwk = (await getJwks())[header.kid]; if (!jwk) return null;
-  try {
-    const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
-    const ok = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, b64urlToBytes(parts[2]), new TextEncoder().encode(parts[0] + "." + parts[1]));
-    return ok ? { uid: payload.sub, email: (typeof payload.email === "string" ? payload.email : null), name: (typeof payload.name === "string" ? payload.name : null) } : null;
-  } catch (e) { return null; }
-}
+// Firebase ID tokens are verified by _fbauth.js verifiedClaimsFor, memoised per Request (T52). This file
+// used to carry its own second copy of the verifier, so one AI request verified the same token ~5 times.
 export async function sha256hex(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s))); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("").slice(0, 24); }
 
 // Returns { id, guest } — id is an opaque, non-PHI key. Never the raw email/IP in the clear.
-// Pull the email out of an ALREADY-VERIFIED Firebase token payload (verifyFirebaseToken checked the
-// signature/aud/iss/exp before we get here, so decoding the payload is safe).
-function emailFromBearer(tok) {
-  try {
-    const p = String(tok || "").split("."); if (p.length < 2) return null;
-    let s = p[1].replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "=";
-    const bin = atob(s), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-    const j = JSON.parse(new TextDecoder().decode(u));
-    return j && j.email ? String(j.email).toLowerCase() : null;
-  } catch (e) { return null; }
-}
-
 /* TRUST NOTE (T28, 2026-09-25): this trusts a Cf-Access-Authenticated-User-Email header as-is. That is
  * only safe behind Cloudflare Access, which also sets Cf-Access-Jwt-Assertion; elsewhere any client can
  * send the header and pick whose quota and wallet it spends. /api/ai strips an UNASSERTED Cf-Access
@@ -99,12 +61,10 @@ function emailFromBearer(tok) {
 export async function identify(request, env) {
   const email = request.headers.get("Cf-Access-Authenticated-User-Email");
   if (email) return { id: "cfa:" + (await sha256hex(email.toLowerCase())), guest: false, email: email.toLowerCase() };
-  const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  // verifyFirebaseToken (THIS file's copy, ~line 59) returns an OBJECT { uid, email } or null. Read the
-  // .uid off it. Coercing the whole object into the key ("fb:" + obj → "fb:[object Object]") collapsed
-  // EVERY signed-in user onto ONE shared id, so all accounts shared a single KU ledger + quota bucket
-  // (balances appeared to "reset" to the shared total; metering merged). Per-account key = "fb:<uid>".
-  if (tok) { const fb = await verifyFirebaseToken(tok, env); if (fb && fb.uid) return { id: "fb:" + fb.uid, guest: false, email: fb.email || emailFromBearer(tok), name: fb.name || null }; }
+  // Verified claims (memoised per request). Key on the uid ("fb:<uid>"), never the whole object:
+  // "fb:" + obj once collapsed EVERY signed-in user onto one shared "fb:[object Object]" bucket.
+  const fb = await verifiedClaimsFor(request, env);
+  if (fb && fb.sub) return { id: "fb:" + fb.sub, guest: false, email: typeof fb.email === "string" ? fb.email.toLowerCase() : null, name: typeof fb.name === "string" ? fb.name : null };
   /* GUEST IDENTITY: per DEVICE when we have one, per IP only as a fallback (2026-08-25).
    *
    * It used to be IP-only, which meant everyone behind one public address shared a SINGLE guest
