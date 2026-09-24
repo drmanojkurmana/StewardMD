@@ -328,7 +328,7 @@
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
-<script src="/steward-identity-resolver.js?v=sir-1-sid1"></script>
+<script src="/steward-identity-resolver.js?v=sir-1-sid1-phi1"></script>
 <script src="/smd-identity-scanner.js?v=sis-1"></script>
 </head>
 <body>
@@ -447,6 +447,8 @@
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
   function logout(msg){
+    // The next person at this desk must not inherit the last one's patient lookups (steward-identity-resolver.js).
+    try{ if(window.StewardIdentityResolver&&window.StewardIdentityResolver.clearCache) window.StewardIdentityResolver.clearCache(); }catch(e){}
     if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} }
     st.tok=""; st.tokType=""; st.who=null;
     try{

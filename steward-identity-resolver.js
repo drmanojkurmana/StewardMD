@@ -312,18 +312,28 @@
     } catch (e) {}
   }
 
+  /* NO PATIENT DATA ON THE DISK. This cache used to write the whole record - name, phone, encounter,
+   * admission, queue ticket - to localStorage in plain text, keyed by the card, never cleared on sign-out:
+   * on a shared reception PC that is a DPDP breach waiting for the next person to open DevTools. The full
+   * record now lives in memory only (gone with the tab); the disk keeps a HINT - which StewardID is which
+   * patient id - that expires after 12 hours. The server (GET /patient/resolve) is the source of truth. */
+  var HINT_TTL_MS = 12 * 3600 * 1000;
   function cacheGet(key) {
     if (!key) return null;
     if (memCache[key]) return memCache[key];
-    var hit = lsGet(key);
-    if (hit) memCache[key] = hit;
-    return hit;
+    var hint = lsGet(key);
+    if (!hint) return null;
+    if (!hint.exp || hint.exp < Date.now() || hint.patient) { lsDel(key); return null; }   // expired, or a pre-fix full record
+    return hint;
   }
 
   function cacheSet(key, val) {
     if (!key || !val) return;
     memCache[key] = val;
-    lsSet(key, val);
+    lsSet(key, { stewardId: val.stewardId || null, patientId: val.patientId || null, exp: Date.now() + HINT_TTL_MS });
+  }
+  function lsDel(key) {
+    try { if (typeof localStorage !== "undefined" && localStorage.removeItem) localStorage.removeItem(CACHE_PREFIX + key); } catch (e) {}
   }
 
   function cacheClear() {
