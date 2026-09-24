@@ -1963,8 +1963,10 @@
         } else {
           openWardPatientPicker();
         }
-      } else if (G.toast) {
-        G.toast("WardSynQ is not connected on this device. Open Ward Sync from Home and sign in first.");
+      } else {
+        // No provider on this device: still route to the ward list (it asks for the hospital and the
+        // sign-in itself) rather than ending in a toast (test/calvert-wardsync-picker.test.mjs).
+        openWardPatientPicker();
       }
       return;
     }
