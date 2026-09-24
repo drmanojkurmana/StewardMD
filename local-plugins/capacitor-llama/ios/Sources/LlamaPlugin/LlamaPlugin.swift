@@ -138,6 +138,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc private func appDidEnterBackground() {
         idleTimer?.invalidate(); idleTimer = nil
         engine.cancel()
+        // Queued behind the in-flight generation on the engine's work queue, never freed under it (T12).
         engine.release()
     }
 
@@ -327,8 +328,8 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
 
     @objc func release(_ call: CAPPluginCall) {
         engine.cancel()
-        engine.release()
-        call.resolve(["released": true])
+        // Resolved once the model is actually freed, after any in-flight generation returned (T12).
+        engine.release { call.resolve(["released": true]) }
     }
 
     // MARK: - Background model download (background URLSession)

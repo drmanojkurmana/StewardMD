@@ -152,8 +152,12 @@ final class LlamaEngine {
     /// Draft tokens proposed per verify step. Six is the usual sweet spot for a ~4B target.
     static let draftK = 6
 
-    /// llama.cpp contexts are NOT thread-safe: inference runs on `work`, but load/release can be
-    /// called from another thread. Same hazard capacitor-whisper hit (BUG-13, use-after-free).
+    /// llama.cpp contexts are NOT thread-safe. Same hazard capacitor-whisper hit (BUG-13,
+    /// use-after-free). The rule (audit T12, 2026-09-25): everything that CREATES or FREES the model
+    /// or a context runs on the serial `work` queue, the same queue generation runs on. A release is
+    /// then a barrier that can only run after an in-flight generation has returned; the lock alone
+    /// was not enough, because generateSync takes it only to read the pointers and then decodes for
+    /// minutes without it, while release() used to free them from the main thread.
     private let lock = NSLock()
     private let work = DispatchQueue(label: "in.stewardmd.llama.infer", qos: .userInitiated)
 
@@ -164,13 +168,27 @@ final class LlamaEngine {
     static let defaultNPredict: Int32 = 512
 
     var isLoaded: Bool { lock.lock(); defer { lock.unlock() }; return model != nil && ctx != nil }
-    private(set) var isGenerating = false
+    /// Read by the idle timer on the main thread and written by the work queue: always under `lock`.
+    private var generating = false
+    var isGenerating: Bool { lock.lock(); defer { lock.unlock() }; return generating }
 
     // MARK: - Lifecycle
 
+    /// Blocks the CALLER until any in-flight generation has finished, then loads on `work` (T12).
+    /// Callers are background threads (the plugin's load(), the self-test); never call it from `work`.
     func load(path: String, nCtx: Int32, nThreads: Int32, nGpuLayers: Int32,
               kvQ8: Bool = true, flashAttn: Bool = true, nBatch: Int32 = 0, nUbatch: Int32 = 0,
               draftPath: String = "") throws {
+        dispatchPrecondition(condition: .notOnQueue(work))
+        try work.sync {
+            try loadOnWork(path: path, nCtx: nCtx, nThreads: nThreads, nGpuLayers: nGpuLayers, kvQ8: kvQ8,
+                           flashAttn: flashAttn, nBatch: nBatch, nUbatch: nUbatch, draftPath: draftPath)
+        }
+    }
+
+    private func loadOnWork(path: String, nCtx: Int32, nThreads: Int32, nGpuLayers: Int32,
+                            kvQ8: Bool, flashAttn: Bool, nBatch: Int32, nUbatch: Int32,
+                            draftPath: String) throws {
         guard FileManager.default.fileExists(atPath: path) else {
             throw LlamaError(.modelMissing, "no model at the given path")
         }
@@ -268,7 +286,16 @@ final class LlamaEngine {
 
     /// Drop the context and model. Called on app pause: iOS kills large-footprint backgrounded apps
     /// first, and mmap makes the reload cheap enough that this is a clear win.
-    func release() { lock.lock(); releaseLocked(); lock.unlock() }
+    ///
+    /// ASYNC BARRIER (T12): queued on `work`, so it runs only after an in-flight generation returns
+    /// (call cancel() first to make that quick). It never blocks the caller, which is usually the
+    /// main thread (background notification, idle timer). `completion` runs on `work` once freed.
+    func release(completion: (() -> Void)? = nil) {
+        work.async { [weak self] in
+            if let self { self.lock.lock(); self.releaseLocked(); self.lock.unlock() }
+            completion?()
+        }
+    }
 
     private func releaseLocked() {
         if let c = ctx { llama_free(c); ctx = nil }
@@ -370,12 +397,14 @@ final class LlamaEngine {
                               prefillEmptyThink: Bool = false,
                               onToken: ((String) -> Void)?,
                               imagePaths: [String] = [], mmprojPath: String = "") throws -> GenStats {
+        // Runs on `work`. The pointers read here stay valid for the whole call: load and release are
+        // queued on `work` too (T12), so neither can run until this returns.
         lock.lock()
         guard let m = model, let c = ctx else { lock.unlock(); throw LlamaError(.modelMissing, "model not loaded") }
-        if isGenerating { lock.unlock(); throw LlamaError(.busy, "a generation is already running") }
-        isGenerating = true
+        if generating { lock.unlock(); throw LlamaError(.busy, "a generation is already running") }
+        generating = true
         lock.unlock()
-        defer { isGenerating = false }
+        defer { lock.lock(); generating = false; lock.unlock() }
 
         cancelFlag.value = false
         let vocab = llama_model_get_vocab(m)
