@@ -98,6 +98,21 @@ ok("72 slice planes: 24 per living-torso module", Object.keys(planes).length ===
 ok("planes are monotonic along their axis and carry a textured quad frame", Object.values(planes).every((m) => { const ks = Object.keys(m).map(Number).sort((a, b) => a - b); const pos = ks.map((k) => m[k].pos); const inc = pos.every((v, i) => !i || v > pos[i - 1]), dec = pos.every((v, i) => !i || v < pos[i - 1]); return (inc || dec) && ks.every((k) => m[k].tl && m[k].u && m[k].v && ["x", "y", "z"].includes(m[k].axis)); }));
 ok("living-CT parts sit inside the registered slab (axial plane range)", (() => { const ax = planes["ct-live-torso-axial"]; const ys = Object.values(ax).map((p) => p.pos); const lo = Math.min(...ys) - 0.05, hi = Math.max(...ys) + 0.05; return live.every((p) => p[8][1] >= lo && p[8][4] <= hi); })());
 ok("bones and skin come from the same scan: bone canonicals now carry living surfaces", ["LUMBAR_VERTEBRA", "THORACIC_VERTEBRA", "SACRUM", "RIB", "HIP_BONE", "FEMUR"].every((k) => manifest.canon[k] && manifest.canon[k].live && manifest.canon[k].live.length));
+// The cut plane and the 2D slice frame are ONE geometry: atlas-pipeline/living.py derives both
+// from the exact crop / reformat / pick chain. The first registration fitted slices by image
+// correlation and framed the axial quad on the uncropped grid, 39 mm off at the corners.
+let planeQ = true, planeN = 0;
+for (const [mid, byI] of Object.entries(planes)) {
+  const a = JSON.parse(readFileSync(join(ROOT, "atlas", mid, "atlas.json"), "utf8"));
+  for (const s of a.slices) {
+    const p = byI[String(s.i)], q = s.q;
+    if (!p || !q) { planeQ = false; continue; }
+    const mine = p.tl.concat(p.u, p.v);
+    if (mine.some((x, k) => Math.abs(x - q[k]) > 1e-6) || Math.abs(p.pos - p.tl["xyz".indexOf(p.axis)]) > 1e-9) planeQ = false;
+    planeN++;
+  }
+}
+ok("every torso cut plane equals its slice's q in atlas.json (tl/u/v within 1e-6 m, pos on the plane)", planeQ && planeN === 72);
 ok("every CT link into a living-torso module carries a plane flag", Object.values(manifest.links).flat().filter((l) => planes[l.m]).every((l) => l.plane === 1));
 ok("no single chunk exceeds 4 MB raw (Pages 25 MiB file cap, mobile memory)", manifest.chunks.every((c) => c.bytes <= 4.2e6));
 

@@ -38,6 +38,23 @@ Dev-only tooling. Turns a licence-cleared volume into `atlas/<id>/atlas.json` pl
     node test/serve.mjs . 8903     # open /atlas-pipeline/atlas-author.html
     node test/atlas-data.test.mjs
 
+## After a build: frames, windows, 3D planes, search index
+
+    # Living modules (ct-live-torso-*, mri-brain-*): proves every module volume is an exact
+    # re-indexing of its source and that the committed images reproduce byte-for-byte, then
+    # writes per-slice `q`, modules.json group/plane/mm/windows, the lung + bone windows
+    # (atlas/<id>/w/<win>/) and the 3D cut planes. Without --write it only verifies.
+    atlas-pipeline/.venv/bin/python atlas-pipeline/living.py --work /abs/path/to/atlas-pipeline/work --write
+
+    # Search index (test/atlas-data.test.mjs fails when it is stale)
+    node atlas-pipeline/atlas-index.mjs
+
+Orientation (`flipX`, `orient`) is hand-set from evidence recorded in
+`docs/radioanatome/ORIENTATION.md`; the data test re-checks it against the pins.
+Never overwrite an existing image path: images are served `immutable`, and installed apps
+pair their bundled atlas.json with images fetched live. A rebuilt stack goes under a new
+directory (e.g. `atlas/<id>/v2/`), and the data test checks every pre-upgrade image by hash.
+
 ## Rules this tooling enforces
 
 - `sources.json` is a **gate, not documentation**. `require_clear()` refuses any source

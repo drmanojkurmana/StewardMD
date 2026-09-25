@@ -266,6 +266,11 @@ cat = upsert_module(cat, dict(META, slices=7, thumb="/atlas/x/t/001.webp"))
 ok("upsert replaces rather than duplicates", len(cat["modules"]) == 1 and cat["modules"][0]["slices"] == 7)
 cat["credits"] = ["keep me"]
 ok("upsert preserves credits", upsert_module(cat, dict(META, slices=7, thumb="/t.webp"))["credits"] == ["keep me"])
+cat["modules"][0].update({"flipX": True, "orient": {"top": "A"}, "hidden": True, "q_not_a_row_key": 1})
+_row = upsert_module(cat, dict(META, slices=9, thumb="/t.webp"))["modules"][0]
+ok("upsert keeps verified display fields a rebuild does not produce",
+   _row["flipX"] is True and _row["orient"] == {"top": "A"} and _row["hidden"] is True and _row["slices"] == 9)
+ok("upsert still drops unknown keys", "q_not_a_row_key" not in _row)
 
 # ---------- every shipped label mapping must be self-consistent ----------
 import glob
@@ -354,6 +359,27 @@ with tempfile.TemporaryDirectory() as tmp:
     ok("e2e: aspect is positive", all(s["aspect"] > 0 for s in stubs))
     # anisotropic 0.5 x 0.5 in-plane is isotropic, so display aspect = 60/80 = 0.75
     ok("e2e: aspect reflects PHYSICAL extent, not voxel counts", abs(stubs[0]["aspect"] - 0.75) < 0.02)
+    # The extra CT windows re-render fixed picks. That path must reproduce the normal one
+    # byte for byte, and write no thumbnails when asked not to.
+    rep = os.path.join(tmp, "rep")
+    again = extract_slices(os.path.join(tmp, "vol.nii.gz"), rep, "selftest", 4, None, "visible-human",
+                           picks=[s["_z"] for s in stubs], thumbs=False)
+    ok("picks path reproduces the same slices byte for byte",
+       [s["_z"] for s in again] == [s["_z"] for s in stubs] and all(
+           open(os.path.join(rep, "%03d.webp" % s["i"]), "rb").read() ==
+           open(os.path.join(out_dir, "%03d.webp" % s["i"]), "rb").read() for s in stubs))
+    ok("thumbs=False writes no thumbnails", not os.path.exists(os.path.join(rep, "t")))
+    # Image paths are immutable: re-running into the same directory passes (same bytes), but a
+    # different window over the same paths must refuse rather than overwrite.
+    extract_slices(os.path.join(tmp, "vol.nii.gz"), rep, "selftest", 4, None, "visible-human",
+                   picks=[s["_z"] for s in stubs], thumbs=False)
+    ok("re-running over identical images is allowed", True)
+    try:
+        extract_slices(os.path.join(tmp, "vol.nii.gz"), rep, "selftest", 4, (0, 50), "visible-human",
+                       picks=[s["_z"] for s in stubs], thumbs=False)
+        ok("changing the bytes under an existing image path is refused", False)
+    except SystemExit as e:
+        ok("changing the bytes under an existing image path is refused", "immutable" in str(e))
 
     zooms = nib.load(os.path.join(tmp, "vol.nii.gz")).header.get_zooms()[:3]
     pins = pins_from_segmentation(os.path.join(tmp, "seg.nii.gz"), stubs, MAP, (zooms[1], zooms[0]))
