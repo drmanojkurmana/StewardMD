@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "b3b2fffed9e5",
- "count": 82,
+ "version": "96bb483f2038",
+ "count": 87,
  "subjects": [
   {
    "key": "emergency",
@@ -21,12 +21,12 @@
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 1
+   "count": 2
   },
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 8
+   "count": 10
   },
   {
    "key": "gastroenterology",
@@ -46,7 +46,7 @@
   {
    "key": "neurology",
    "label": "Neurology",
-   "count": 6
+   "count": 7
   },
   {
    "key": "haematology-oncology",
@@ -56,7 +56,7 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 3
+   "count": 4
   },
   {
    "key": "surgery-trauma",
@@ -650,6 +650,32 @@
    "status": "ai_drafted"
   },
   {
+   "id": "asthma-long-term-management",
+   "title": "Asthma long-term management (adults and adolescents)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "chronic asthma",
+    "GINA steps",
+    "GINA Track 1",
+    "GINA Track 2",
+    "MART",
+    "SMART",
+    "AIR",
+    "anti-inflammatory reliever",
+    "ICS-formoterol",
+    "budesonide-formoterol",
+    "asthma step down",
+    "NG245"
+   ],
+   "summary": "Every adult or adolescent with asthma needs ICS-containing treatment. GINA 2026 prefers Track 1: as-needed low-dose ICS-formoterol (Steps 1 to 2), then ICS-formoterol maintenance and reliever therapy (Steps 3 to 5); step up only after checking technique and adherence, and step down after 3 months of good control.",
+   "sources": [
+    "GINA 2026",
+    "BTS / NICE / SIGN 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "atrial-fibrillation",
    "title": "Atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation",
    "subject": "cardiology",
@@ -757,6 +783,28 @@
     "American Burn Association 2024",
     "American Burn Association 2022",
     "WHO 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "candidaemia",
+   "title": "Candidaemia and invasive candidiasis (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "candidemia",
+    "Candida bloodstream infection",
+    "invasive candidiasis",
+    "fungaemia",
+    "Candida auris",
+    "C. auris",
+    "echinocandin",
+    "caspofungin"
+   ],
+   "summary": "Treat every Candida-positive blood culture: start an echinocandin, remove the central line, repeat cultures until negative, arrange a dilated eye examination, step down to fluconazole after 5 to 7 days if stable and susceptible, and treat for 14 days after the first negative culture.",
+   "sources": [
+    "IDSA 2016",
+    "CDC 2024"
    ],
    "status": "ai_drafted"
   },
@@ -1008,6 +1056,31 @@
     "IDSA 2011",
     "ASCO / IDSA 2018",
     "ICMR 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "gestational-diabetes",
+   "title": "Gestational diabetes mellitus (GDM): India DIPSI pathway",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "aliases": [
+    "GDM",
+    "DIPSI",
+    "gestational diabetes",
+    "hyperglycaemia in pregnancy",
+    "HIP",
+    "75 g OGTT pregnancy",
+    "diabetes in pregnancy",
+    "MNT",
+    "metformin in pregnancy",
+    "insulin in pregnancy",
+    "postpartum OGTT"
+   ],
+   "summary": "Test every pregnant woman with a single-step 75 g oral glucose load, fasting or not; GDM if the 2-hour plasma glucose is 140 mg/dL (7.8 mmol/L) or more. Start MNT and exercise for 2 weeks, then add insulin (any gestation) or metformin (from 20 weeks) if 2-hour PPBS stays 120 mg/dL (6.7 mmol/L) or more.",
+   "sources": [
+    "MoHFW, Government of India 2018",
+    "American Diabetes Association 2026"
    ],
    "status": "ai_drafted"
   },
@@ -1546,6 +1619,38 @@
    "status": "ai_drafted"
   },
   {
+   "id": "malaria",
+   "title": "Malaria: uncomplicated and severe (India)",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "aliases": [
+    "P. vivax",
+    "P. falciparum",
+    "Pv",
+    "Pf",
+    "mixed malaria",
+    "severe malaria",
+    "cerebral malaria",
+    "ACT",
+    "ACT-SP",
+    "ACT-AL",
+    "artemether lumefantrine",
+    "artesunate",
+    "primaquine",
+    "chloroquine",
+    "NVBDCP",
+    "NCVBDC drug policy"
+   ],
+   "summary": "Confirm every case by microscopy or RDT. Vivax: chloroquine 3 days plus primaquine 0.25 mg/kg for 14 days. Falciparum: ACT-AL in the North-East, ACT-SP elsewhere, plus single-dose primaquine. Severe malaria: IV artesunate 2.4 mg/kg (3 mg/kg under 20 kg) at 0, 12 and 24 hours, then daily.",
+   "sources": [
+    "NCVBDC, MoHFW 2014",
+    "NCVBDC, MoHFW 2013",
+    "NCVBDC, MoHFW 2025",
+    "WHO 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "malignant-hyperthermia",
    "title": "Malignant hyperthermia crisis",
    "subject": "anaesthesia",
@@ -1589,6 +1694,31 @@
    "sources": [
     "NICE 2023",
     "NICE 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "myasthenic-crisis",
+   "title": "Myasthenic crisis",
+   "subject": "neurology",
+   "population": "Adults",
+   "aliases": [
+    "MG crisis",
+    "myasthenia gravis",
+    "myasthenia gravis exacerbation",
+    "impending myasthenic crisis",
+    "cholinergic crisis",
+    "pyridostigmine",
+    "PLEX",
+    "IVIg",
+    "MGFA class V",
+    "MuSK"
+   ],
+   "summary": "Myasthenic weakness threatening breathing or swallowing: monitor FVC and NIF serially in ICU, give plasma exchange or IVIg 2 g/kg, treat the trigger, stop drugs that worsen myasthenia, and hold pyridostigmine once intubated.",
+   "sources": [
+    "MGFA international consensus 2021",
+    "MGFA international consensus 2016",
+    "Neurocritical Care 2021"
    ],
    "status": "ai_drafted"
   },
