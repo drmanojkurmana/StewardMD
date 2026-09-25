@@ -158,11 +158,13 @@ test("review sync: keeps valid decisions only; the owner export applies with app
   assert.deepEqual(AR.validateExport(all[0]), []);
 });
 
-test("router: off unless KITS_SHARE_ON=1, and needs a verified token", async () => {
+test("router: ON by default, KITS_SHARE_ON=0 is the kill switch, and it needs a verified token", async () => {
   const { onRequest } = await import("../functions/api/kits/[[path]].js");
   const req = (url, init) => new Request("https://stewardmd.in/api/kits/" + url, init);
-  let r = await onRequest({ request: req("msg/list"), env: {}, params: { path: ["msg", "list"] } });
+  let r = await onRequest({ request: req("msg/list"), env: { KITS_SHARE_ON: "0" }, params: { path: ["msg", "list"] } });
   assert.equal(r.status, 404); assert.equal((await r.json()).error, "disabled");
+  r = await onRequest({ request: req("status"), env: {}, params: { path: ["status"] } });
+  assert.deepEqual(await r.json(), { enabled: true, signedIn: false, verified: false }, "no variable set: on (production is at the binding cap)");
   r = await onRequest({ request: req("status"), env: { KITS_SHARE_ON: "1" }, params: { path: ["status"] } });
   assert.deepEqual(await r.json(), { enabled: true, signedIn: false, verified: false });
   r = await onRequest({ request: req("msg/list", { headers: { "Cf-Access-Authenticated-User-Email": "a@b.c" } }), env: { KITS_SHARE_ON: "1" }, params: { path: ["msg", "list"] } });
@@ -171,4 +173,36 @@ test("router: off unless KITS_SHARE_ON=1, and needs a verified token", async () 
   assert.equal(r.status, 403);
   const src = (await import("node:fs")).readFileSync(new URL("../kits-share.js", import.meta.url), "utf8");
   assert.match(src, /fetch\("\/api\/kits\/" \+ path/, "the client calls a relative /api path (native transport, no CORS)");
+});
+
+test("a colleague can be addressed by sign-in email; lookups are rate-limited before they happen", async () => {
+  const w = world();
+  const r = await K.msgSend(w.ctx("uA"), { ...REF, to: { email: "Bala@City.example" } });
+  assert.equal(r.status, 200);
+  assert.equal(w.docs.get("kx_msgs/" + r.body.id).fields.toLabel, "bala@city.example");
+  assert.equal((await K.msgSend(w.ctx("uA"), { ...REF, to: { email: "nobody@city.example" } })).status, 404);
+  w.limits.block = true;
+  assert.equal((await K.msgSend(w.ctx("uA"), { ...REF, to: { smdId: "SMD-NOPE00" } })).status, 429, "a blocked caller learns nothing about the ID");
+  w.limits.block = false;
+  const c = await K.caseCreate(w.ctx("uA"), { title: "Wound dehiscence", question: "Resuture or VAC?", invite: ["chitra@city.example"] });
+  assert.equal(c.body.invited, 1);
+  const inv = await K.caseInvite(w.ctx("uA"), { id: c.body.id, smdIds: ["bala@city.example", "nobody@city.example"] });
+  assert.equal(inv.body.invited, 1); assert.equal(inv.body.notFound[0].error, "recipient_not_found");
+  w.limits.block = true;
+  assert.equal((await K.caseInvite(w.ctx("uA"), { id: c.body.id, smdIds: ["SMD-CCC333"] })).status, 429);
+});
+
+test("client flag smd_kits_share: ON by default, \"0\" on the device turns it off", async () => {
+  const { createRequire } = await import("node:module");
+  const req = createRequire(import.meta.url);
+  const store = {};
+  globalThis.localStorage = { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); } };
+  try {
+    const S = req("../kits-share.js");
+    assert.equal(S.on(), true, "nothing set: on");
+    store.smd_kits_share = "0"; assert.equal(S.on(), false, "per-device kill switch");
+    store.smd_kits_share = "1"; assert.equal(S.on(), true);
+    const home = (await import("node:fs")).readFileSync(new URL("../home.js", import.meta.url), "utf8");
+    assert.match(home, /act: "kxinbox"[^\n]*defOn: true/, "the Colleagues tile is on Home by default");
+  } finally { delete globalThis.localStorage; }
 });

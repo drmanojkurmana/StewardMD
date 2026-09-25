@@ -18,6 +18,14 @@
  * NOTHING IS ISSUED BEYOND WHAT WAS APPROVED, and nothing is reported issued that was not written. An issue of
  * several lines writes each line's two movements in turn; if any write fails the answer is a failure that names the
  * lines that DID land, because those boxes left the shelf on the record and a retry must not issue them twice.
+ *
+ * A RECEIPT CAN BE COUNTED IN A PACK UNIT, ISSUES NEVER ARE. The item master (StoreItem) may declare `packs`
+ * (stock.js: packFactors/toBaseUnit) - a box of 10 sleeves of 20 gloves, say - and storeMovement() converts a
+ * receipt entered in a declared pack unit to the item's base unit before it reaches the one ledger, keeping what
+ * was actually counted in (`receivedAs`) for the audit and the screen's dual display ("25 sleeves (500 gloves)").
+ * An indent's issue and a department's acknowledgement stay in the base unit throughout, unconverted, because that
+ * is what the store level and the consumption report are already counted in. An item with no `packs` declared
+ * behaves exactly as before: the unit is the item's own, and nothing here converts anything.
  */
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
@@ -25,7 +33,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { levelsFrom, flagLevels, nearExpiry, recordMovement, MOVE_TYPE } from "./stock.js";
+import { levelsFrom, flagLevels, nearExpiry, recordMovement, MOVE_TYPE, validatePacks, toBaseUnit, dualDisplay } from "./stock.js";
 import { raisePurchaseOrder } from "./purchasing.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -177,11 +185,18 @@ async function storesOverview(request, env, ctx) {
   const subLevels = computed.levels.filter((r) => !central.has(key(r.location)));
   const indents = all.Indent.filter(Boolean).map((i) => indentState(i, all.IndentDecision, all[MOVE_TYPE], all.IndentReceipt, all.IndentClosure))
     .sort((a, b) => b.raisedAt.localeCompare(a.raisedAt));
+  /* A level's dual display ("25 strip (250 tablet)") needs the item's own packs, looked up by code. */
+  const itemByCode = new Map(items.map((i) => [key(i.code), i]));
+  const withDisplay = (rows) => rows.map((r) => {
+    const it = itemByCode.get(key(r.code));
+    const disp = it ? dualDisplay(it.unit, it.packs, r.level) : null;
+    return disp ? { ...r, packDisplay: disp } : r;
+  });
   return {
     ...base, ok: true, categories: CATEGORIES,
-    items: items.map((i) => ({ code: i.code, name: i.name, category: i.category, unit: i.unit, reorderLevel: i.reorderLevel == null ? null : i.reorderLevel, active: i.active !== false })),
+    items: items.map((i) => ({ code: i.code, name: i.name, category: i.category, unit: i.unit, reorderLevel: i.reorderLevel == null ? null : i.reorderLevel, packs: Array.isArray(i.packs) && i.packs.length ? i.packs : null, active: i.active !== false })),
     locations: locations.map((l) => ({ code: l.code, name: l.name, kind: l.kind, departmentId: l.departmentId || null, departmentName: l.departmentName || null, active: l.active !== false })),
-    levels: [...flagged.levels, ...subLevels].sort((a, b) => str(a.display).localeCompare(str(b.display))),
+    levels: withDisplay([...flagged.levels, ...subLevels]).sort((a, b) => str(a.display).localeCompare(str(b.display))),
     belowReorder: flagged.belowReorder, negative: flagged.negative,
     expiring: nearExpiry(storeMoves, ctx.nearExpiryDays, ctx.now),
     indents, problems: computed.problems,
@@ -198,9 +213,20 @@ async function saveStoreItem(request, env, ctx) {
   if (!CATEGORIES.includes(category)) return { ...base, ok: false, status: 422, error: "bad_category", detail: `category must be one of ${CATEGORIES.join(", ")}.`, written: 0 };
   const reorder = str(ctx.reorderLevel) === "" ? null : Number(ctx.reorderLevel);
   if (reorder !== null && !(Number.isFinite(reorder) && reorder >= 0)) return { ...base, ok: false, status: 422, error: "bad_reorder_level", written: 0 };
+  /* PACK SIZES (optional): unit is a positive whole count of packUnit (or of `unit` itself, when packUnit is
+   * omitted) in one pack. Sanitised before validation so a stray field cannot smuggle something unchecked in. */
+  const rawPacks = Array.isArray(ctx.packs) ? ctx.packs : [];
+  const packs = rawPacks.map((p) => ({ unit: str(p && p.unit), of: Number(p && p.of), ...(str(p && p.packUnit) ? { packUnit: str(p.packUnit) } : {}) })).filter((p) => p.unit);
+  if (packs.length) {
+    const v = validatePacks(unit, packs);
+    if (!v.ok) {
+      return { ...base, ok: false, status: 422, error: "bad_packs", problems: v.problems, written: 0,
+        detail: "Pack sizes could not be resolved to the base unit. Each pack needs a positive whole number of the unit (or pack) it is made of, no pack may share a name with another or with the base unit, and none may loop back on itself." };
+    }
+  }
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
-  const record = { resourceType: "StoreItem", id: `wsq-store-item-${code.toLowerCase()}`, code, name, unit, category, reorderLevel: reorder, active: ctx.active !== false, by: resolved.actor.id, at: new Date().toISOString() };
+  const record = { resourceType: "StoreItem", id: `wsq-store-item-${code.toLowerCase()}`, code, name, unit, category, reorderLevel: reorder, packs: packs.length ? packs : null, active: ctx.active !== false, by: resolved.actor.id, at: new Date().toISOString() };
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, item: record, version: out.record.version };
@@ -250,7 +276,20 @@ async function storeMovement(request, env, ctx) {
   if (!loc) return { ...base, ok: false, status: 422, error: "unknown_location", detail: "That store location does not exist.", written: 0 };
   const qty = kind === "adjustment" ? Number(ctx.quantity) : positive(ctx.quantity);
   if (qty === null || !Number.isFinite(qty) || qty === 0) return { ...base, ok: false, status: 422, error: "quantity_required", written: 0 };
-  return recordMovement(request, env, { ...ctx, kind, code: item.code, display: item.name, quantity: { value: qty, unit: item.unit }, location: loc.code });
+  /* A receipt may be entered in a pack unit the item declares (ctx.unit); adjustment and wastage stay in the
+   * item's own base unit, same as always - the count they correct or destroy is already in that unit. */
+  let baseQty = qty, receivedAs = null;
+  const enteredUnit = str(ctx.unit);
+  if (kind === "receipt" && enteredUnit && key(enteredUnit) !== key(item.unit)) {
+    const converted = toBaseUnit(item.unit, item.packs, { value: qty, unit: enteredUnit });
+    if (!converted.ok) {
+      return { ...base, ok: false, status: 422, error: "unknown_unit", written: 0,
+        detail: converted.detail || `"${enteredUnit}" is not ${item.unit} or a pack size declared for this item.` };
+    }
+    baseQty = converted.value;
+    receivedAs = { value: qty, unit: enteredUnit };
+  }
+  return recordMovement(request, env, { ...ctx, kind, code: item.code, display: item.name, quantity: { value: baseQty, unit: item.unit }, location: loc.code, ...(receivedAs ? { receivedAs } : {}) });
 }
 
 /**

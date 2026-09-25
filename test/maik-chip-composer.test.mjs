@@ -32,6 +32,8 @@ test("the polished grid puts the chip in the flexible bottom-row cell, hugging S
 });
 
 test("the header grid no longer reserves a third column for it", () => {
-  assert.match(CSS, /\.maik-hd-row\{grid-template-columns:44px 1fr;gap:4px 8px\}/);
+  // Two tracks, no third for the chip. The second is minmax(0,1fr) since #1236 made every grid column
+  // track minmax(0,1fr) repo-wide (a bare 1fr keeps its min-content width and can overflow the phone).
+  assert.match(CSS, /\.maik-hd-row\{grid-template-columns:44px minmax\(0,1fr\);gap:4px 8px\}/);
   assert.doesNotMatch(CSS, /minmax\(110px,150px\)/);
 });

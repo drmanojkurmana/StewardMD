@@ -7,8 +7,10 @@
  * (OHIF's documented URL). Study UIDs and accession numbers are identifiers, not names: no template
  * may carry a patient name or MRN (imaging-viewer.js refuses any other placeholder).
  *
- * dicom.js still holds: pixel data is never fetched, proxied or stored here. The WADO-RS URL is
- * configuration kept for the viewer and the archive's own tools; nothing in this build retrieves from it.
+ * Pixel data is never fetched here and never STORED anywhere. Since 2026-09-25 the in-app viewer
+ * (dicom-viewer.js) PROXIES the series list (QIDO-RS) and single instances (WADO-RS, or the QIDO base when no
+ * WADO URL is set) through the server with this connector's sealed credential, for a caller who may read the
+ * study; nothing is cached (no-store).
  *
  * TEST CONNECTION. One QIDO-RS Search for Studies (`GET <qido>/studies?limit=1`, Accept
  * application/dicom+json, PS3.18 10.6), made server-side after the webhooks' destination rules, no

@@ -252,8 +252,8 @@ and `CF_ACCESS_AUD` (the Access application's AUD tag; comma-separate several). 
 identity off; callers fall through to Firebase / staff sessions. The bare email header is never read.
 
 ## KITS_SHARE_ON (wave 2 kits sharing, 2026-09-25)
-Pages env var (plain var, not a secret) that turns on `/api/kits/*` ([[Colleagues]]). Unset = every
-route answers 404 `{error:"disabled"}`. Uses the existing `FOLLOWCARE_PHI_KEY` secret for sealing and
-`FIREBASE_SERVICE_ACCOUNT` for Firestore REST and recipient claims; rate limits use `CASES_KV` /
-`GHIS_KV` / `MAIK_KV` (first present). Collections `kx_*` are server-only (rules catch-all deny).
-It counts toward the Pages variables-plus-secrets cap above: count before adding it.
+Kill switch for `/api/kits/*` ([[Colleagues]]). **Unset = ON** (owner turned it on 2026-09-25); `"0"` = every
+route answers 404 `{error:"disabled"}`. Deliberately NOT a wrangler.toml var: production is at the 128
+text-binding cap, so the default lives in code and setting the switch needs a free binding. Uses the
+existing `FOLLOWCARE_PHI_KEY` (sealing) and `FIREBASE_SERVICE_ACCOUNT` (Firestore REST, recipient claims);
+rate limits use `CASES_KV` / `GHIS_KV` / `MAIK_KV` (first present). Collections `kx_*` are server-only.

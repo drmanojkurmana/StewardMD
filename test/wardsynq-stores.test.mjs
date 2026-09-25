@@ -141,6 +141,56 @@ test("indent authority: POST /api/queue/ward/indent 401/403 (cashier, other hosp
   assert.equal((await as(U.NURSE, "/ward/indent-issue", "POST", { orgId: ORG, indentId: own.indentId, lines: [{ code: "GLOVE-M", quantity: 1 }] })).__status, 403);
 });
 
+test("PACK SIZES: POST /ward/store-item refuses a bad packs declaration with nothing written; a good one lets /ward/store-move receive in a pack unit, converts to the base unit, and GET /ward/stores shows a dual display", async () => {
+  seedHospital();
+  const badCycle = await as(U.STORE, "/ward/store-item", "POST", { orgId: ORG, code: "GLOVE-L", name: "Gloves, large", unit: "box", category: "consumables", packs: [{ unit: "box", of: 5 }] });
+  assert.equal(badCycle.__status, 422);
+  assert.equal(badCycle.error, "bad_packs");
+  assert.ok(badCycle.problems.some((p) => p.reason === "pack_is_base_unit"));
+  assert.equal((await recordsOf("StoreItem")).length, 0, "a bad declaration is refused before anything is written");
+
+  // box of 10 sleeves of 20 gloves each: 200 gloves to a box.
+  const good = await as(U.STORE, "/ward/store-item", "POST", { orgId: ORG, code: "GLOVE-L", name: "Gloves, large", unit: "glove", category: "consumables",
+    packs: [{ unit: "sleeve", of: 20 }, { unit: "box", of: 10, packUnit: "sleeve" }] });
+  assert.equal(good.__status, 200, JSON.stringify(good));
+  assert.deepEqual(good.item.packs, [{ unit: "sleeve", of: 20 }, { unit: "box", of: 10, packUnit: "sleeve" }]);
+
+  let r = await as(U.STORE, "/ward/store-location", "POST", { orgId: ORG, code: "CS", name: "Central store", kind: "central" });
+  assert.equal(r.__status, 200, JSON.stringify(r));
+
+  const wrongUnit = await as(U.STORE, "/ward/store-move", "POST", { orgId: ORG, kind: "receipt", code: "GLOVE-L", quantity: 5, unit: "carton", location: "CS" });
+  assert.equal(wrongUnit.__status, 422);
+  assert.equal(wrongUnit.error, "unknown_unit");
+  assert.match(wrongUnit.detail, /"carton" is not glove or a pack size declared for this item/);
+
+  const receipt = await as(U.STORE, "/ward/store-move", "POST", { orgId: ORG, kind: "receipt", code: "GLOVE-L", quantity: 25, unit: "sleeve", location: "CS" });
+  assert.equal(receipt.__status, 200, JSON.stringify(receipt));
+
+  const view = await as(U.STORE, `/ward/stores?orgId=${ORG}`);
+  assert.equal(view.__status, 200, JSON.stringify(view));
+  const row = view.levels.find((l) => l.code === "GLOVE-L" && l.location === "CS");
+  assert.equal(row.level, 500, "25 sleeves of 20 gloves converted to the base unit before it reached the one ledger");
+  assert.equal(row.unit, "glove");
+  assert.equal(row.packDisplay, "25 sleeve (500 glove)");
+
+  // An item with no packs behaves exactly as before: a receipt naming any unit but its own is left alone
+  // (storeMovement only converts when the entered unit differs AND the item declares packs to convert through);
+  // it is booked in the unit typed, unconverted - the item master decides the level's unit, not the receipt.
+  const noPacks = await as(U.STORE, "/ward/store-item", "POST", { orgId: ORG, code: "BEDPAN", name: "Bedpan", unit: "piece", category: "consumables" });
+  assert.equal(noPacks.__status, 200, JSON.stringify(noPacks));
+  const plain = await as(U.STORE, "/ward/store-move", "POST", { orgId: ORG, kind: "receipt", code: "BEDPAN", quantity: 5, unit: "piece", location: "CS" });
+  assert.equal(plain.__status, 200, JSON.stringify(plain));
+  const bedpanRow = (await as(U.STORE, `/ward/stores?orgId=${ORG}`)).levels.find((l) => l.code === "BEDPAN");
+  assert.equal(bedpanRow.level, 5);
+  assert.equal(bedpanRow.packDisplay, undefined, "no packs declared, no dual display");
+
+  // A unit that is neither the item's own nor a declared pack is refused, even for an item with no packs at all -
+  // there is nothing here to convert it through, so it is refused rather than silently booked in as the base unit.
+  const noPacksBadUnit = await as(U.STORE, "/ward/store-move", "POST", { orgId: ORG, kind: "receipt", code: "BEDPAN", quantity: 3, unit: "carton", location: "CS" });
+  assert.equal(noPacksBadUnit.__status, 422);
+  assert.equal(noPacksBadUnit.error, "unknown_unit");
+});
+
 test("indentState and consumptionByDepartment are derived from the records, never stored", () => {
   const indent = { id: "i1", departmentId: "d1", lines: [{ code: "A", unit: "box", quantity: 10 }] };
   assert.equal(indentState(indent, [], [], [], []).state, "awaiting-approval");

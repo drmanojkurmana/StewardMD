@@ -5,6 +5,34 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-25 · Radiology images: PROXIED for an in-app viewer, still never STORED
+
+**Decision.** WardSynQ now shows DICOM images inside the app. The server reads them from the hospital's own
+DICOMweb archive (the Imaging connector, `functions/_wardsynq/dicomweb.js`) and passes them to the signed-in clinician:
+`GET /ward/imaging-series` (QIDO-RS series + instances) and `GET /ward/imaging-instance` (WADO-RS, one instance,
+`application/dicom`, `Cache-Control: private, no-store`), both `emr.view`, in `functions/_wardsynq/dicom-viewer.js`.
+The browser names OUR ImagingStudy record id, never a study UID; the UID always comes from this hospital's governed
+row, so another hospital's study is unreachable. PACS address and credential stay server-side. Opening a study is
+audited (`imaging.study.open`); per-image reads are not (a CT is hundreds). The archive's patient header is returned
+only when the caller may read that Patient record.
+
+**Supersedes** "No pixels in WardSynQ" (2026-09-13 P1.10 and S5 "nothing retrieves pixel data") for the VIEWING
+part only. What stays: nothing is written to the record, KV, R2 or any cache; the client (`ward-dicom-viewer.js`)
+holds decoded images in memory and drops them on close (FIFO cap of 48 decoded slices). The launch link into the
+hospital's own viewer is still offered beside it.
+
+**Why.** Radiologists and ward doctors asked to look at the images where they write the report, and many small
+hospitals have no web viewer to link to. Proxying keeps the credential off the device and the study scoped by our
+own governance; storing would make us a PACS (retention, QA, medico-legal custody) and that is not this product.
+
+**Trade-offs / limits.** 48 MB per instance (whole instance in Worker memory), 60 series and 1500 instances per
+study, QIDO 8 s and WADO 20 s timeouts. Client decodes uncompressed little/big endian and JPEG baseline only;
+JPEG 2000, JPEG-LS, RLE and lossless JPEG are refused naming the transfer syntax (open the hospital viewer).
+dicom-parser 1.8.21 (MIT) from jsdelivr with SRI, loaded on first open (dwv is GPL-3.0; cornerstone3D's worker/WASM
+codecs do not suit a Capacitor WebView loading from a CDN). Not a diagnostic-grade viewer (no MPR, no calibration
+checks, no hanging protocols). NOT tried against a real PACS; mocked transport and a synthetic 16-bit CT in
+headless Chrome (`test/run-ward-dicom-viewer-ui.mjs`). **Status:** draft PR, awaiting owner approval.
+
 ## 2026-09-18 · Deferring a payload without deferring the contract (PDF engines off cold start)
 
 **Measured first, because the received wisdom was wrong.** `stewardmd.in` is a MARKETING PAGE (3
@@ -5954,7 +5982,7 @@ bug - not re-verified live on device this session.
 
 ## 2026-09-13 WardSynQ P1.10 imaging viewer launch and P1.5 payer adapters (branch p1-rad-tpa)
 - Images open in the hospital's own viewer via `wardsynq.imagingViewer.urlTemplate` (https only; placeholders
-  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged.
+  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged. (Viewing superseded 2026-09-25: proxied, still not stored.)
 - Study-to-order linkage is done at read time (`_wardsynq/imaging-viewer.js` studyForOrder): serviceRequestId, else
   accession equal to the order id the worklist issued, else the order's external identifiers. Exact only.
 - Structured report templates are hospital content (`wardsynq.radiologyTemplates`); report stores template id/version
@@ -6449,7 +6477,7 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   hospital whose org template used it now gets "template_unsupported_placeholder" and no link, stated.
 - Test connection = one `GET <qido>/studies?limit=1`, Accept `application/dicom+json` (PS3.18 10.6), 5 s, no
   redirect. Reports passed/failed, HTTP status, study count; the body is never returned (it names a patient).
-- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged).
+- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged). **Superseded 2026-09-25:** WADO-RS is now read by the in-app viewer, proxied and never stored.
 - NOT verified against a real PACS; mocked transport only.
 
 ### S4 Payers and TPAs (functions/_wardsynq/payer-connectors.js, wardsynq/wardsynq-nhcx-adapter.js)
@@ -9210,6 +9238,46 @@ floor; closing the app re-locks it. The backup holds only what exists nowhere el
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
 
+## 2026-09-25 - The OPD dashboard proxies the console's buttons; it never re-implements an action
+The operations dashboard's occupancy rows, sidebar, palette and task inbox call `.click()` on the console's
+existing, permission-gated buttons (or its named functions: reconcileNow, offTick). A second copy of an action
+is how two screens drift into different payloads or permissions. Month and yesterday figures come from sessions
+that already exist (read-only), so viewing history never creates a queue session for a past day. Default on
+behind `smd_opd_dash`, classic layout one click away, until the owner approves it permanently.
+
+## 2026-09-25: Video visits are off by default, the room name is the lock, the patient gets it only in consultation
+Jitsi rooms are open to anyone with the name, so the name is 128 random bits (`wsq-` + hex), minted per visit,
+never built from patient data, and never sent to staff lists or in the SMS. The patient's link is the ticket's
+own signed token on stewardmd.in (`/tele?t=`), which hands out the room only while the visit is in consultation
+and dies when the visit completes or is cancelled. A public server (meet.jit.si) is allowed but the settings
+screen says the video then passes through a server the hospital does not run. Consent (who agreed, who recorded
+it) is required and audited in the same commit. Which server to run, and whether native clinics get a settings
+screen, are owner decisions still open.
+**Owner, 2026-09-25: ships as COMING SOON.** Off for every hospital until the deployment sets
+`TELEHEALTH_READY=1`; Admin shows "Coming soon" instead of the settings form.
+
+## 2026-09-25 — Stores/pharmacy stock gets OPT-IN pack-size conversion; the "no unit conversion" rule narrows, it does not fall
+stock.js, purchasing.js and stores.js said "UNITS ARE NOT CONVERTED" since they were written: guessing
+that a box is twenty-eight tablets produces a confident number that is wrong by a factor of twenty-
+eight, and that mapping was a product catalogue the build did not have. It still does not GUESS. What
+changed is that an item can now SAY the mapping itself: `StoreItem.packs` (general stores only, not a
+pharmacy drug's own record - no drug item master exists yet) declares
+`[{ unit: "strip", of: 10 }, { unit: "box", of: 10, packUnit: "strip" }]`, positive integer factors
+only, packs may chain, a cycle or an unresolved reference is refused at the item level
+(`stock.js: validatePacks`) before anything is ever received against it, and an item with no `packs`
+behaves exactly as it always did - this is additive, not a relaxation of the old rule. Receiving in a
+declared pack unit converts to the base unit before the movement reaches the one ledger (stock.js's
+own invariant: stock, reorder levels and valuation stay in the base unit, never a pack); what was
+actually counted at the hatch is kept alongside as `receivedAs`, and `dualDisplay()` reads it back as
+"25 strip (250 tablet)". Valuation divides the ordered line's own price by the pack factor into
+integer paise (rounded, comment states the rounding) rather than carrying a second price field that
+could drift from the first. `pharmacy-dispense.js` deliberately gained NO conversion: a dispense is an
+issue, and issues were never re-entered in a different unit even before this - if a drug item master
+grows `packs` one day, that conversion still belongs at the point of receipt, not dispense.
+ward.js's purchasing screen (`poReceive`) reads the general stores item master once so the unit prompt
+can offer an item's own declared packs instead of a blind box/strip/vial guess, and shows the server's
+`packDisplay` back after a receipt books in.
+
 ## 2026-09-25 — A Cloudflare Access identity counts only when its JWT verifies
 Roughly 25 routes (queue, wardsynq, connect incl. super-admin, license, billing, push, cases, and the
 coarse gates of experimental/fundx/followcare/icd/schemes/retrieve) took `Cf-Access-Authenticated-User-Email`
@@ -9509,6 +9577,28 @@ for 3. The rnav grid is visible so it worked; the split now ignores spaces insid
 (`INSULIN`/`ICU`, not `SMD_*`) and were re-run rather than left unverified, which mattered: they hold
 14 of the 168 rewrites. One grid, `.ml-dose-grid`, needs a dose-editor state the harness does not
 reach and was not exercised.
+
+## 2026-09-25 - Wave 2 turned on by code default, not a Cloudflare variable
+The owner asked to turn wave 2 on. The planned switch was a Pages variable `KITS_SHARE_ON=1`, but
+production already uses all 128 text bindings (vars + secrets) and one more fails every deployment. So
+the server route and the client flag now default ON in code; `KITS_SHARE_ON=0` and `smd_kits_share="0"`
+are the kill switches. Before switching on, a colleague became addressable by sign-in email as well as
+StewardMD ID (most doctors have no ID yet), the sheet shows your own ID, and sends and invites spend
+the rate limit before the directory lookup so the directory cannot be probed for free.
+
+## 2026-09-26 - RadioAnatome: unverified modules say Beta, they are not hidden
+
+**Context.** The radiologist's sign-off on /validation (2026-08-19, head CT notes updated 2026-08-25)
+rejected 13 modules and marked 16 "needs fix"; nothing in the app read those verdicts, so every
+module looked equally finished to a student.
+
+**Decision (owner).** Do not hide rejected modules. Every module shows a "Beta" pill on its catalog
+row and in the viewer header, and the viewer footer reads "Beta · Unverified, may contain mistakes.
+Not for diagnosis." A module drops the label only when `modules.json` carries `verified: true`, which
+is set by hand after a "verified" verdict on /validation. New modules are Beta by default.
+
+**Consequence.** Only the three living-torso modules are verified. The label is static data, not a
+live read of /api/validation, so a new sign-off needs a `modules.json` edit and an app update.
 
 ## 2026-09-25 — Four deferred calls, taken
 

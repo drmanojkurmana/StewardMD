@@ -70,10 +70,11 @@ try {
   ws = new WebSocket(version.webSocketDebuggerUrl); await new Promise((r) => { ws.onopen = r; }); ws.onmessage = (e) => { const m = JSON.parse(e.data); if (pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
   const created = await call('Target.createTarget', { url: 'about:blank' }); sid = (await call('Target.attachToTarget', { targetId: created.result.targetId, flatten: true })).result.sessionId;
   await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
-  await call('Page.navigate', { url: `http://localhost:${PORT}/?share=1` });
+  await call('Page.navigate', { url: `http://localhost:${PORT}/` });
   ok(await until('!!(window.SMD_SHARE&&window.SMD_KITS&&window.OPDEMR&&window.SMD_DOCS&&window.SMD_REVIEW)', 25000), 'app loaded with kits sharing');
   await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());document.body.classList.remove('dark');1`);
-  ok(await ev('SMD_SHARE.on()'), '?share=1 turns sharing on for this load');
+  ok(await ev('SMD_SHARE.on()'), 'sharing is on by default (no flag set)');
+  ok(await until(`!!document.querySelector('#rnavToolsGrid .rnav-tile[data-act="kxinbox"]')`, 8000), 'the Colleagues tile is on Home by default');
   await as('uA');
 
   /* ---- the hospital's version inside the kit, kit history ---- */
@@ -114,8 +115,12 @@ try {
 
   /* ---- Bala: inbox, accept ---- */
   await ev(`OPDEMR.close();1`); await as('uB');
+  await ev(`window.SMD_STEWARD_ID={my:function(){return 'SMD-BBB222'},ensure:function(d,cb){cb&&cb('SMD-BBB222')}};1`);
   await ev(`SMD_SHARE.openInbox('in');1`);
   ok(await until(`/Referral: Urgent \\(within 24 hours\\)/.test(document.querySelector('#smdShare')?.textContent||'')&&/Dr Asha/.test(document.querySelector('#smdShare').textContent)`), "Bala's inbox lists the urgent referral from Dr Asha");
+  ok(/Your StewardMD ID: SMD-BBB222/.test(await text('#smdShare')), 'the inbox shows your own StewardMD ID to give to colleagues');
+  await armToasts(); await click('#smdShare [data-sh-act="copyid"]');
+  ok(await toastHas(/SMD-BBB222/), 'your ID can be copied');
   await click('#smdShare .rv-row');
   ok(await until(`/Lakshmi Devi/.test(document.querySelector('#smdShare').textContent)&&/Severe pre-eclampsia/.test(document.querySelector('#smdShare').textContent)`), 'opening it shows the letter');
   await setVal('#sh_note', 'Bed ready in the labour ward.'); await click('#smdShare [data-sh-act="st:accepted"]');
@@ -129,8 +134,8 @@ try {
   await until(`!!document.querySelector('#smdDocs [data-dl-h="0:bed"]')`);
   await setVal('#smdDocs [data-dl-h="0:bed"]', 'LW 3'); await setVal('#smdDocs [data-dl-h="0:summary"]', '34 weeks, severe pre-eclampsia on magnesium'); await setVal('#smdDocs [data-dl-h="0:actions"]', 'BP every 15 min; urine output hourly');
   await click('#smdDocs [data-dl-act="kxsend"]'); await until(`document.querySelector('#smdShare.on')`);
-  await setVal('#sh_to', 'SMD-AAA111'); await armToasts(); await click('#smdShare [data-sh-act="send"]');
-  ok(await toastHas(/Handover sent/), 'handover sent to the receiving doctor');
+  await setVal('#sh_to', 'Asha@City.example'); await armToasts(); await click('#smdShare [data-sh-act="send"]');
+  ok(await toastHas(/Handover sent/), 'handover sent to the receiving doctor by her sign-in email');
   await click('#smdShare [data-sh-act="close"]'); await click('#smdDocs [data-dl-act="close"]');
   await as('uA'); await ev(`SMD_SHARE.openInbox('in');1`);
   await until(`/Handover/.test(document.querySelector('#smdShare').textContent)`);

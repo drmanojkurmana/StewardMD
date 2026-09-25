@@ -731,11 +731,16 @@
       '<span><b>3D Anatomy</b><span>Reference body · 2,200+ structures · linked to CT and MRI</span></span></button>';
   }
 
+  // A module is Beta until a radiologist marks it verified on /validation; only then does
+  // modules.json carry `verified: true`. New modules are Beta by default.
+  function isBeta(m) { return !!m && !m.verified; }
+  var BETA_PILL = '<span class="atlas-beta">Beta<span class="atlas-sr">, unverified, may contain mistakes.</span></span>';
+
   function moduleRow(m) {
     if (!m) return "";
     return '<button class="atlas-row" data-atlas-act="mod" data-atlas-mod="' + esc(m.id) + '">' +
       '<span' + flipCls(m, "atlas-row-th") + (m.thumb ? ' style="background-image:url(' + cssUrl(imgUrl(m.thumb)) + ')"' : "") + "></span>" +
-      '<span class="atlas-row-txt"><span class="atlas-row-ttl">' + esc(m.title) + "</span>" +
+      '<span class="atlas-row-txt"><span class="atlas-row-ttl">' + esc(m.title) + (isBeta(m) ? " " + BETA_PILL : "") + "</span>" +
       '<span class="atlas-row-sub">' + esc(m.subtitle || m.modality) + "</span>" +
       '<span class="atlas-row-off" data-off="' + esc(m.id) + '">' + offBadge(m.id) + "</span></span>" +
       '<span class="atlas-row-n">' + (m.slices || 0) + "</span></button>";
@@ -793,6 +798,10 @@
         "RadioAnatome is an educational cross-sectional anatomy reference. It is not a " +
         "diagnostic tool and must not be used to interpret a patient's imaging." +
       "</p>" +
+      (st.view === "viewer" && isBeta(mod)
+        ? '<p class="atlas-prose atlas-notice">Beta: this module has not yet been verified by a radiologist ' +
+          "and may contain mistakes in its images or labels.</p>"
+        : "") +
       (notice
         ? '<p class="atlas-prose atlas-notice">' + esc(notice) + "</p>"
         : "") +
@@ -983,7 +992,7 @@
     return '<div class="atlas-top">' +
         '<button class="atlas-back" data-atlas-act="close" aria-label="Back">‹</button>' +
         '<span class="atlas-hd"><span class="atlas-ttl">' + esc(m.title || "") + "</span>" +
-        '<span class="atlas-sub">' + esc(m.subtitle || "") + "</span></span>" +
+        '<span class="atlas-sub">' + (isBeta(m) ? BETA_PILL + " " : "") + esc(m.subtitle || "") + "</span></span>" +
         '<button class="atlas-info" data-atlas-act="search" aria-label="Search">' + (ico("search") || "Find") + "</button>" +
         (s ? '<button class="atlas-info" id="atlasStar" data-atlas-act="star" aria-label="Bookmark this view" aria-pressed="' +
           !!bmFind() + '"' + (bmFind() ? ' data-on="1"' : "") + ">" + (ico("star") || "Save") + "</button>" : "") +
@@ -996,7 +1005,9 @@
         '<div class="atlas-ov" id="atlasOv"></div><div class="atlas-hud" id="atlasHud"></div>' +
       "</div>" +
       scrubHtml() +
-      '<div class="atlas-foot">Educational reference only, not for diagnosis.</div>' +
+      (isBeta(m)
+        ? '<div class="atlas-foot is-beta">Beta · Unverified, may contain mistakes. Not for diagnosis.</div>'
+        : '<div class="atlas-foot">Educational reference only, not for diagnosis.</div>') +
       '<div class="atlas-sr" id="atlasLive" aria-live="polite" aria-atomic="true"></div>';
   }
 

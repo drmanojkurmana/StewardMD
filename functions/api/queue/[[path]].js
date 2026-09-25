@@ -16,7 +16,7 @@
  *   GET  /api/queue/portal?t=<token>                       -> PHI-free live snapshot  (PATIENT, no auth)
  *   GET  /api/queue/live?orgId= | ?t=<display token>        -> text/event-stream of { rev } (plan item 16)
  */
-import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
+import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken, ticketIdFromToken } from "../../_queue.js";
 import { identify, sha256hex } from "../../_usage.js";
 import { ownerEmails, ownerOK } from "../../_adminauth.js";
 import { lookupUidByEmail } from "../../_fbadmin.js";
@@ -32,7 +32,8 @@ import * as FORMS from "../../_forms_store.js";
 import * as PATHWAYS from "../../_pathways_store.js";
 import { submitFormResponse, patientFormResponses, intakeResponses, reviewIntake, intakeSettings } from "../../_wardsynq/form-response.js";
 import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
-import { notifyTimeline } from "../../_queue_notify.js";
+import { notifyTimeline, notifyTeleLink } from "../../_queue_notify.js";
+import * as TELE from "../../_telehealth.js";
 import { msgRefusalIfOut } from "../../_quota.js";
 import { getEntitlement as msgEntitlement } from "../../_entitlements.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
@@ -47,7 +48,8 @@ import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js"
 import * as BILL from "../../_clinic_billing_store.js";
 import { fsCommit, wUpdate } from "../../_fbfirestore.js";
 import * as DC from "../../_day_close.js";
-import { orderQueue, orderRoomView, displayBoard, opdPulse, dayClose } from "../../_queue_eta.js";
+import * as INS from "../../_opd_insights.js";
+import { orderQueue, orderRoomView, displayBoard, opdPulse, dayClose, canTransition } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge, deviceLabel } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
@@ -245,6 +247,7 @@ import { registerSettings, validateRegisterSettings, rmiStatus, NOTES as REGISTE
 import { legalView, validateStateConfig, stateConfigFor } from "../../_wardsynq/legal-requirements.js";
 import { controlledSet, isControlledDrug, regimeOf, quarantineRefusal, estimateRefusal } from "../../_wardsynq/controlled-drugs.js";
 import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
+import { imagingSeries, imagingInstance } from "../../_wardsynq/dicom-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
 /* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
@@ -354,6 +357,38 @@ async function dayCloseReport(env, org) {
   }
   return out;
 }
+/* The OPD dashboard (GET /opd-insights). Today comes from opdDay (the pulse's own walk); a PAST day is read from the
+ * sessions that already exist (listSessions, read-only: looking at last Tuesday must never create a session for it).
+ * A past day cannot change much, so each isolate keeps its slimmed tickets (no patient data) for ten minutes. */
+const INSIGHT_CACHE = new Map(), INSIGHT_TTL = 10 * 60000;
+async function pastDayTickets(env, orgId, date) {
+  const key = orgId + "|" + date, hit = INSIGHT_CACHE.get(key);
+  if (hit && Date.now() - hit.at < INSIGHT_TTL) return hit.rows;
+  const rows = [];
+  for (const s of await Q.listSessions(env, orgId, date)) {
+    if (String(s.hospitalId) !== String(orgId)) continue;
+    rows.push(...(await Q.listTickets(env, s.id)).map(INS.slim));
+  }
+  if (INSIGHT_CACHE.size > 2000) INSIGHT_CACHE.clear();
+  INSIGHT_CACHE.set(key, { at: Date.now(), rows });
+  return rows;
+}
+async function opdInsights(env, org) {
+  const date = Q.opdDate(""), { rows, unread } = await opdDay(env, org, "");
+  const yDate = INS.prevDate(date), past = INS.monthDates(date).slice(0, -1), month = [];
+  const unreadDays = [];
+  let yesterday = null;
+  for (const d of past) {
+    try { month.push({ date: d, tickets: await pastDayTickets(env, org.id, d) }); } catch (e) { unreadDays.push(d); }
+  }
+  const inMonth = month.find((m) => m.date === yDate);
+  if (inMonth) yesterday = inMonth.tickets;
+  else { try { yesterday = await pastDayTickets(env, org.id, yDate); } catch (e) { unreadDays.push(yDate); yesterday = []; } }
+  const out = { ok: true, ...INS.insights({ today: rows, yesterday, month, date, nowMs: Date.now(), offsetMin: orgOffsetMinutes(org) }) };
+  if (unread.length) out.unread = unread;
+  if (unreadDays.length) out.unreadDays = unreadDays;   // a day that could not be read is said, never drawn as zero
+  return out;
+}
 async function opdResultBack(env, org, patientId) {
   if (!org || !org.id || !patientId) return 0;
   const sessions = [];
@@ -378,6 +413,14 @@ async function opdResultBack(env, org, patientId) {
   return n;
 }
 
+/* A video visit's consent on the patient's WardSynQ record (consent.js scope teleconsult). Best-effort, never throws:
+ * { ok, written } or { ok:false, error }, so the caller can say it without undoing the visit. */
+async function recordTeleConsent(request, env, deps, patientId, givenBy) {
+  try {
+    const r = await recordConsent(request, env, { ...deps, patientId, scope: "teleconsult", decision: "granted", givenBy, dpdp: deps.wsqCfg && deps.wsqCfg.dpdp });
+    return r && r.ok ? { ok: true, written: r.written || 0 } : { ok: false, error: (r && r.error) || "refused" };
+  } catch (e) { return { ok: false, error: "record_write_failed" }; }
+}
 async function syncEncounter(request, env, s, ticket) {
   let mig = null;
   const mark = async (fields) => { try { if (ticket && ticket.id) await fsCommit(env, [wUpdate(env, "q_tickets/" + ticket.id, Object.assign({ encounterSyncAt: Date.now() }, fields))]); } catch (e) { /* the mark is advisory */ } };
@@ -808,6 +851,7 @@ async function boardForOrg(env, org, date) {
     orgCode: org.code,
     hasLogo: hasLogo,
     thresholds: org.thresholds,
+    telehealth: TELE.telehealthSettings(org, env).on,   // video visits offered only when the hospital named a video server
     opdBillingMode: org.opdBillingMode || "pay_first",
     defaultConsultationFee: org.defaultConsultationFee || 0,
     rooms: out,
@@ -1241,6 +1285,31 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "portal") {   // PHI-free live position
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
       return json(await Q.portalContext(env, url.searchParams.get("t") || ""), 200, request);
+    }
+    /* VIDEO VISIT, THE PATIENT'S SIDE (functions/_telehealth.js). The ticket's own signed token, no login. /tele/wait is the
+     * waiting page's poll: the portal's PHI-free snapshot plus whether the doctor has started. /tele/room hands out the
+     * room address ONLY while the visit is in consultation, and records that the patient joined. A closed visit's token
+     * is already dead (tokenVer), and a hospital that switched video off gets no room either. */
+    if (seg === "tele" && (sub === "wait" || sub === "room")) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
+      const tk = url.searchParams.get("t") || "";
+      const snap = await Q.portalContext(env, tk);
+      if (!snap.ok) return json({ ok: false, error: snap.error }, 200, request);
+      const t = await Q.getTicket(env, ticketIdFromToken(tk));
+      const js = TELE.joinState(t);
+      if (js.reason === "not_teleconsult") return json({ ok: false, error: "invalid_link" }, 200, request);
+      const cfg = TELE.telehealthSettings(await ORG.getOrg(env, t.hospitalId), env);
+      if (!cfg.on) return json({ ok: false, error: "video_off" }, 200, request);
+      if (sub === "wait" && method === "GET") {
+        return json({ ok: true, video: true, ready: js.ready, closed: !js.live, status: snap.status, position: snap.position, ahead: snap.ahead,
+          clinicName: snap.clinicName, clinicLogo: snap.clinicLogo, doctorStatus: snap.doctorStatus, lastUpdated: snap.lastUpdated }, 200, request);
+      }
+      if (sub === "room" && method === "POST") {
+        if (!js.ready) return json({ ok: false, error: js.live ? "not_started" : "visit_closed" }, 409, request);
+        await Q.qAudit(env, { hospitalId: t.hospitalId, ticketId: t.id, actor: "patient", action: "tele_join", meta: "patient" });
+        return json({ ok: true, roomUrl: TELE.roomUrl(cfg.baseUrl, t.teleRoom) }, 200, request, { "Cache-Control": "no-store" });
+      }
+      return json({ ok: false, error: "not_found" }, 404, request);
     }
     // Patient's own sealed encounter timeline (their data, secure token, 7-30d window). No auth/login.
     if (method === "GET" && seg === "timeline" && url.searchParams.get("t")) {
@@ -2046,6 +2115,9 @@ export async function onRequest(context) {
         /* P1.10: which study answers each imaging order, and a launch link into the hospital's own
          * viewer. Reading an order and its study is reading the chart: emr.view, the worklist's bar. */
         "imaging-studies": CAPS.EMR_VIEW,
+        /* The in-app viewer (dicom-viewer.js): the study's series and each image, proxied from the hospital's
+         * archive. Looking at a study is reading the chart, so it is the same bar as the link above. */
+        "imaging-series": CAPS.EMR_VIEW, "imaging-instance": CAPS.EMR_VIEW,
         /* TASK 8. ASKING reads the chart and writes no clinical content, so it is emr.view - the same
          * capability that reads the record it summarises, and no wider. REVIEWING is emr.treat:
          * accepting a drafted note puts an unsigned note on the chart, which is a clinical act, and
@@ -2591,9 +2663,9 @@ export async function onRequest(context) {
         const deptsFailed = () => json({ ok: false, error: "departments_unreadable", detail: "The hospital's departments could not be read. Nothing was recorded." }, 502, request);
         const key = body.idempotencyKey || null;
         if (sub === "stores" && method === "GET") return R(await storesOverview(request, env, { ...deps, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null }));
-        if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, active: body.active, idempotencyKey: key }));
+        if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, packs: body.packs, active: body.active, idempotencyKey: key }));
         if (sub === "store-location" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveStoreLocation(request, env, { ...deps, departments: d, code: body.code, name: body.name, kind: body.kind, departmentId: body.departmentId, active: body.active, idempotencyKey: key })); }
-        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
+        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
         if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines }));
@@ -4425,8 +4497,18 @@ export async function onRequest(context) {
         try { dicomConn = (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "dicom"))[0] || null; }
         catch { return json({ ok: false, error: "record_read_failed", message: "The imaging connector could not be read." }, 502, request); }
         const r = await imagingStudies(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", serviceRequestId: url.searchParams.get("serviceRequestId") || "",
-          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null,
+          inAppViewer: !!dicomConn });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-series" && method === "GET") {
+        const r = await imagingSeries(request, env, { ...deps, studyId: url.searchParams.get("studyId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-instance" && method === "GET") {
+        const r = await imagingInstance(request, env, { ...deps, studyId: url.searchParams.get("studyId") || "", seriesUid: url.searchParams.get("seriesUid") || "", sopUid: url.searchParams.get("sopUid") || "" });
+        if (!r.ok) return json(r, r.status || 502, request);
+        return new Response(r.bytes, { status: 200, headers: Object.assign({ "Content-Type": r.contentType, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" }, corsHeaders(request)) });
       }
       if (sub === "report-imaging" && method === "POST") {
         const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null,
@@ -4562,7 +4644,11 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "book" && method === "POST") {
-        const r = await bookAppointment(request, env, { ...deps, patientId: body.patientId, clinicianId: body.clinicianId, startAt: body.startAt, minutes: body.minutes, reason: body.reason, requestId: body.requestId, overbook: !!body.overbook, overbookReason: body.overbookReason, idempotencyKey: body.idempotencyKey || null });
+        const r = await bookAppointment(request, env, { ...deps, patientId: body.patientId, clinicianId: body.clinicianId, startAt: body.startAt, minutes: body.minutes, reason: body.reason, requestId: body.requestId, overbook: !!body.overbook, overbookReason: body.overbookReason,
+          teleconsult: !!body.teleconsult, teleConsent: body.teleConsent, telehealthOn: TELE.telehealthSettings(wOrg, env).on, idempotencyKey: body.idempotencyKey || null });
+        /* A video visit's consent also goes on the patient's record (scope teleconsult), best-effort: the appointment
+         * already carries it, so a record that refuses is said (teleConsentRecord) and never undoes the booking. */
+        if (r.ok && r.written === 1 && r.teleconsult) r.teleConsentRecord = await recordTeleConsent(request, env, deps, r.patientId, r.teleConsentBy);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "appointment" && method === "POST") {
@@ -4575,8 +4661,13 @@ export async function onRequest(context) {
         if (r.ok && r.state === "arrived" && r.written === 1 && wOrg) {
           try {
             const pt = r.patient || {};
-            const t = await Q.addToPool(env, wOrg, { name: pt.name || "", mrn: pt.mrn || "", mobile: pt.mobile || "", patientId: r.patientId || "" }, actor.id || "");
-            r.queueTicket = { id: t && t.id, token: t && (t.token || t.tokenNo) };
+            /* A video appointment arrives as a video visit, with the consent taken at booking, while the hospital still has
+             * video on. Switched off since: the patient joins as an ordinary visit and the answer says so. */
+            const teleOn = TELE.telehealthSettings(wOrg, env).on;
+            const tele = r.teleconsult && teleOn ? { givenBy: r.teleConsentBy, by: actor.id || "" } : undefined;
+            const t = await Q.addToPool(env, wOrg, { name: pt.name || "", mrn: pt.mrn || "", mobile: pt.mobile || "", patientId: r.patientId || "" }, actor.id || "", tele);
+            r.queueTicket = { id: t && t.id, token: t && (t.token || t.tokenNo), teleconsult: !!(t && t.teleconsult) };
+            if (r.teleconsult && !teleOn) r.teleNote = "video_off";
           } catch (e) { r.queueError = "could_not_add_to_queue"; }
         }
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -4587,6 +4678,7 @@ export async function onRequest(context) {
       }
       if (sub === "diary" && method === "GET") {
         const r = await listSchedule(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", clinicianId: url.searchParams.get("clinicianId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        r.telehealth = TELE.telehealthSettings(wOrg, env).on;   // the booking form offers a video visit only when on
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "block-period" && method === "POST") {
@@ -5882,7 +5974,7 @@ export async function onRequest(context) {
       const effectiveOrgName = (brand && brand.clinicName) || orgName || "";
       const hasLogo = !!(brand && brand.ext);
       const doctorName = (o && o.doctorName) || (actor.name && actor.name !== "Doctor" ? actor.name : "");
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, orgName: effectiveOrgName, hasLogo: hasLogo, mode: (o && o.mode) || "native", smdId: smdId, name: actor.name, doctorName: doctorName, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, orgName: effectiveOrgName, hasLogo: hasLogo, mode: (o && o.mode) || "native", telehealth: TELE.telehealthSettings(o, env).on, smdId: smdId, name: actor.name, doctorName: doctorName, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
         // UI hints for Remove hospital only; POST /org/delete re-checks both.
         ...(orgOwner ? { orgOwner: true } : {}), ...(actor.isOwner === true ? { platformOwner: true } : {}), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
     }
@@ -6228,6 +6320,33 @@ export async function onRequest(context) {
       if (saved.forAppointments !== v) return json({ ok: false, error: "not_saved", message: "The setting did not read back as sent, so do not rely on it. Try again." }, 502, request);
       return json({ ok: true, changed: ["forAppointments"], settings: saved }, 200, request);
     }
+    /* Video visits (functions/_telehealth.js), on Admin > Hospital. Off unless a video server is saved. staff.admin reads and
+     * saves with a reason; the audit names the change; the answer carries publicServer so the screen can say the video then
+     * passes through a server the hospital does not run. /org/update refuses wardsynq.telehealth. */
+    if (seg === "org" && sub === "telehealth-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Video visit settings belong to a WardSynQ hospital." }, 409, request);
+      const before = TELE.telehealthSettings(o, env);
+      if (method === "GET") return json({ ok: true, settings: before }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      if (before.comingSoon) return json({ ok: false, error: "coming_soon", message: "Video visits are coming soon. Nothing was saved." }, 409, request);
+      const p = TELE.providerFrom(cb.settings && cb.settings.baseUrl);
+      if (!p.ok) {
+        const say = { invalid_url: "That is not a web address.", https_required: "The video server address must start with https://.", plain_address_required: "Give the server address only, with no sign-in, ? or # part." };
+        return json({ ok: false, error: p.error, message: (say[p.error] || "The video server address was not accepted.") + " Nothing was saved." }, 422, request);
+      }
+      if (p.baseUrl === before.baseUrl) return json({ ok: true, changed: [], settings: before }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the video visit settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { telehealth: { baseUrl: p.baseUrl } } }, actor.id, { action: "org:telehealth_settings", meta: JSON.stringify({ changed: ["baseUrl"], on: !!p.baseUrl, publicServer: p.publicServer, reason: reason.slice(0, 80) }) });
+      const saved = TELE.telehealthSettings((await ORG.getOrg(env, orgId)) || {}, env);
+      if (saved.baseUrl !== p.baseUrl) return json({ ok: false, error: "not_saved", message: "The setting did not read back as sent, so do not rely on it. Try again." }, 502, request);
+      return json({ ok: true, changed: ["baseUrl"], settings: saved }, 200, request);
+    }
     if (seg === "org" && sub === "gst-settings") {
       const cb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || cb.orgId || "";
@@ -6571,6 +6690,16 @@ export async function onRequest(context) {
       const { rows, unread } = await opdDay(env, org, url.searchParams.get("date") || "");
       return json({ ok: true, pulse: opdPulse(rows, Date.now()), ...(unread.length ? { unread } : {}) }, 200, request);
     }
+    /* The console's dashboard: hourly registrations, the month, the visit mix and today against the same time
+     * yesterday. Counts and durations only (no names), so queue.view like the pulse. */
+    if (method === "GET" && seg === "opd-insights") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      return json(await opdInsights(env, org), 200, request);
+    }
     if (method === "GET" && seg === "opd-board") {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
@@ -6878,6 +7007,9 @@ export async function onRequest(context) {
         /* R4-5 follow-up: forms before an appointment are switched on Admin > Hospital (POST /org/intake-settings), with a reason. */
         if (wb && typeof wb === "object" && "intake" in wb)
           return json({ ok: false, error: "use_intake_settings_route", message: "Patient forms before an appointment are switched on Admin Center > Hospital (POST /org/intake-settings), where the change is recorded with its reason. Nothing was saved." }, 422, request);
+        /* Video visits are switched on Admin > Hospital (POST /org/telehealth-settings): checked, with a reason, audited. */
+        if (wb && typeof wb === "object" && "telehealth" in wb)
+          return json({ ok: false, error: "use_telehealth_settings_route", message: "Video visits are set on Admin Center > Hospital (POST /org/telehealth-settings), where the address is checked and the change is recorded with its reason. Nothing was saved." }, 422, request);
         /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
         const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
         if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);
@@ -7171,6 +7303,46 @@ export async function onRequest(context) {
         return json({ ok: false, error: "not_found" }, 404, request);
       }
       const { s, err } = await loadSessionFor(env, body.sessionId, actor, request); if (err) return err;
+      /* VIDEO VISIT, THE HOSPITAL'S SIDE (functions/_telehealth.js). Every route refuses with 409 while the hospital has no
+       * video server saved. enable: the desk records who agreed (the consent and its audit row are one commit) and the visit
+       * gets its room. start: the doctor takes the patient in and gets the room address (audited). send-link: the patient's
+       * waiting-page link by SMS/WhatsApp, no name or MR number in it. */
+      if (seg === "tele" && (sub === "enable" || sub === "start" || sub === "send-link")) {
+        const cfg = TELE.telehealthSettings(await ORG.getOrg(env, s.orgId || s.hospitalId), env);
+        if (!cfg.on) return json({ ok: false, error: "video_off", message: "Video visits are off for this hospital. An administrator turns them on under Admin Center > Hospital > Video visits." }, 409, request);
+        await requireSessionCap(env, actor, s, sub === "enable" ? CAPS.QUEUE_ADD : CAPS.QUEUE_STATUS);
+        const t0 = await Q.getTicket(env, body.ticketId || "");
+        if (!t0 || t0.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        if (sub === "enable") {
+          const c = TELE.consentFrom(body.teleConsent);
+          if (!c.ok) return json({ ok: false, error: c.error, message: c.error === "unknown_giver" ? "Pick who agreed to the video visit from the list." : "Record who agreed to a video visit before it becomes one. Nothing was saved." }, 422, request);
+          let t;
+          try { t = await Q.makeTeleconsult(env, s, t0.id, { givenBy: c.givenBy, by: actor.id }, actor.id); }
+          catch (e) { if (e && e.status === 409) return json({ ok: false, error: e.message, message: e.detail || "" }, 409, request); throw e; }
+          await syncEncounter(request, env, s, t);   // the record's Encounter learns it is a virtual visit
+          // A WardSynQ hospital also keeps the consent on the patient's record (best-effort; the ticket already carries it).
+          let teleConsentRecord = null;
+          const tOrg = await ORG.getOrg(env, s.orgId || s.hospitalId), tMig = await wsqForcedMigration(env, tOrg);
+          if (tMig && !tMig.error && t.patientId) teleConsentRecord = await recordTeleConsent(request, env, { migration: tMig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, tMig.tenantId), orgId: tOrg.id, wsqCfg: tOrg.wardsynq || null }, t.patientId, c.givenBy);
+          if (teleConsentRecord) return json({ ok: true, ticket: (await ticketView(env, [t]))[0], teleConsentRecord }, 200, request);
+          return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request);
+        }
+        if (!t0.teleconsult) return json({ ok: false, error: "not_teleconsult", message: "This is not a video visit. Tap Video visit and record the consent first." }, 409, request);
+        if (sub === "start") {
+          if (t0.status !== "in_consultation") {
+            if (!canTransition(t0.status, "in_consultation")) return json({ ok: false, error: "visit_closed", message: "This visit is not waiting, so the video call cannot start." }, 409, request);
+            await Q.setStatus(env, s, t0.id, "in_consultation", actor.id);
+          }
+          const t = (await Q.getTicket(env, t0.id)) || t0;
+          await Q.qAudit(env, { hospitalId: s.hospitalId, ticketId: t.id, actor: actor.id, action: "tele_start", meta: "" });
+          if (t0.status !== "in_consultation") await syncEncounter(request, env, s, t);
+          return json({ ok: true, roomUrl: TELE.roomUrl(cfg.baseUrl, t.teleRoom), tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request, { "Cache-Control": "no-store" });
+        }
+        if (!TELE.joinState(t0).live) return json({ ok: false, error: "visit_closed", message: "This visit has ended, so no link was sent." }, 409, request);
+        const link = TELE.patientLink(env.QUEUE_LINK_BASE, (await Q.linkFor(env, t0)).token);
+        const sent = await notifyTeleLink(env, s, t0, TELE.inviteText(link), link);
+        return json({ ok: true, sent: !!(sent && sent.ok), reason: (sent && sent.reason) || "", url: link }, 200, request);
+      }
       if (seg === "ticket") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
         if (body.priority || body.priorityReason) { try { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); } catch (e) { body.priority = 0; body.priorityReason = ""; } }   // plan item 12, as /pool

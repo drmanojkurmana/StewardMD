@@ -59,6 +59,9 @@ const SCOPES = Object.freeze({
   /* DPDP Act 2023 s7(a): sending a patient offers and news is a purpose they must agree to, unlike treatment,
    * which s7 lets a hospital process without consent. Withdrawable by the patient in the portal. */
   "marketing": "Offers and news from the hospital",
+  /* A consultation by video (functions/_telehealth.js). Telemedicine Practice Guidelines 2020: a patient who starts or
+   * accepts a video consultation consents to it, and the doctor records that. It is care, so never child-gated. */
+  "teleconsult": "A consultation by video",
   "other": "Other",
 });
 

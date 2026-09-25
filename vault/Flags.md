@@ -169,7 +169,7 @@ leaving it present:
 | `smd_specialty_kits` | **ON** | The OPD EMR Specialty tab, the Home "Specialty Kits" tile and its sheet. Additive and write-safe: a kit only appends text to the assessment the doctor then saves, and is disabled until the assessment has loaded. Content `ai_drafted` pending clinical review, shown on every kit. Force off per device with `?kits=0`. See [[Specialty Kits]]. |
 | `smd_clinical_docs` | **ON** | The Home "Documents" tile and the kit Documents button ([[Clinical Documents]]). Additive; nothing is stored. Force off with `?docs=0`. |
 | `smd_review_desk` | **ON** | The Review Desk ([[Review Desk]]). Its Home tile is defOn false (reviewers add it). Local only. Force off with `?review=0`. |
-| `smd_kits_share` | off | [[Colleagues]]: referrals, handovers, case rooms, hospital kit versions, kit history, review sync. Needs the server env `KITS_SHARE_ON=1` too (route 404s without it). Try per device with `?share=1`. |
+| `smd_kits_share` | **ON** | [[Colleagues]]: referrals, handovers, case rooms, hospital kit versions, kit history, review sync, and the Home "Colleagues" tile. Server route also defaults on (env `KITS_SHARE_ON=0` is its kill switch). Off per device with `smd_kits_share = "0"` or `?share=0`. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 

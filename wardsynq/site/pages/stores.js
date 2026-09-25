@@ -29,6 +29,31 @@
   function failed(c, what) { return '<div class="msg err">' + TS(c, "site.stores.failedWhat", "Could not load {what}. Do not read this as none.", { what: what }) + "</div>"; }
   function loading(c) { return '<p><span class="spin"></span> ' + c.esc(T(c, "site.stores.loading", "Loading...")) + "</p>"; }
 
+  /* Pack sizes, typed as compact text: "strip:10, box:10:strip" - unit:of[:packUnit], one per pack. Parsed
+   * client-side; the server (stores.js saveStoreItem, stock.js validatePacks) is the one that actually checks it. */
+  function parsePacksInput(s) {
+    return String(s || "").split(",").map(function (part) {
+      var bits = part.split(":").map(function (x) { return x.replace(/^\s+|\s+$/g, ""); });
+      if (!bits[0]) return null;
+      var p = { unit: bits[0], of: Number(bits[1]) };
+      if (bits[2]) p.packUnit = bits[2];
+      return p;
+    }).filter(function (p) { return p; });
+  }
+  function formatPacksInput(packs) {
+    return (packs || []).map(function (p) { return p.unit + ":" + p.of + (p.packUnit ? ":" + p.packUnit : ""); }).join(", ");
+  }
+  /* Every unit an item can be counted in for a picker: its own base unit first, then each declared pack. */
+  function unitOptions(c, item, selected) {
+    if (!item) return "";
+    var units = [item.unit].concat((item.packs || []).map(function (p) { return p.unit; }));
+    return units.map(function (u) { return '<option value="' + c.esc(u) + '"' + (u === selected ? " selected" : "") + ">" + EN(c, c.esc(u)) + "</option>"; }).join("");
+  }
+  function packsSummary(c, item) {
+    if (!item.packs || !item.packs.length) return "";
+    return EN(c, c.esc(item.packs.map(function (p) { return "1 " + p.unit + " = " + p.of + " " + (p.packUnit || item.unit); }).join("; ")));
+  }
+
   /* The indents, with the actions each capability may take on each. */
   function indentsHtml(c, d, can) {
     if (d == null) return loading(c);
@@ -66,7 +91,7 @@
     var warn = (d.truncatedWarning ? '<div class="msg note">' + EN(c, esc(d.truncatedWarning)) + "</div>" : "") +
       (d.negative && d.negative.length ? '<div class="msg err">' + esc(T(c, "site.stores.negativeLevels", "{n} level(s) are negative, which cannot be true: stock left that was never recorded as received.", { n: d.negative.length })) + "</div>" : "");
     var levels = d.levels.length ? '<div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.colStore", "Store")) + "</th><th>" + esc(T(c, "site.stores.colLevel", "Level")) + "</th><th></th></tr>" + d.levels.map(function (l) {
-      return "<tr" + (l.belowReorder || l.impossible ? ' class="warn"' : "") + "><td>" + EN(c, esc(l.display)) + "</td><td>" + EN(c, esc(l.location || "")) + "</td><td>" + EN(c, esc(l.level + " " + l.unit)) + "</td><td>" + (l.belowReorder ? esc(T(c, "site.stores.reorderNow", "At or below reorder level")) : "") + "</td></tr>";
+      return "<tr" + (l.belowReorder || l.impossible ? ' class="warn"' : "") + "><td>" + EN(c, esc(l.display)) + "</td><td>" + EN(c, esc(l.location || "")) + "</td><td>" + EN(c, esc(l.packDisplay || (l.level + " " + l.unit))) + "</td><td>" + (l.belowReorder ? esc(T(c, "site.stores.reorderNow", "At or below reorder level")) : "") + "</td></tr>";
     }).join("") + "</table></div>" : "<p>" + esc(T(c, "site.stores.noStock", "No stores movements recorded yet.")) + "</p>";
     var exp = d.expiring && d.expiring.length ? "<h3>" + esc(T(c, "site.stores.nearExpiry", "Near expiry")) + "</h3><ul>" + d.expiring.map(function (x) {
       return "<li>" + EN(c, esc(x.display + " · " + (x.location || "") + " · " + (x.batch || ""))) + " · " + (x.expired ? esc(T(c, "site.stores.expired", "expired")) : esc(T(c, "site.stores.daysLeft", "{n} days left", { n: x.daysRemaining }))) + "</li>";
@@ -78,12 +103,14 @@
     if (d == null) return loading(c);
     if (!d.ok) return failed(c, T(c, "site.stores.itemsPhrase", "the item master"));
     var esc = c.esc;
-    return (d.items.length ? '<div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colCode", "Code")) + "</th><th>" + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.colCategory", "Category")) + "</th><th>" + esc(T(c, "site.stores.colUnit", "Unit")) + "</th><th>" + esc(T(c, "site.stores.colReorder", "Reorder at")) + "</th></tr>" + d.items.map(function (i) {
-      return "<tr><td>" + EN(c, esc(i.code)) + "</td><td>" + EN(c, esc(i.name)) + "</td><td>" + categoryWord(c, i.category) + "</td><td>" + EN(c, esc(i.unit)) + "</td><td>" + esc(i.reorderLevel == null ? "" : i.reorderLevel) + "</td></tr>";
+    return (d.items.length ? '<div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colCode", "Code")) + "</th><th>" + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.colCategory", "Category")) + "</th><th>" + esc(T(c, "site.stores.colUnit", "Unit")) + "</th><th>" + esc(T(c, "site.stores.colReorder", "Reorder at")) + "</th><th>" + esc(T(c, "site.stores.packsCol", "Packs")) + "</th></tr>" + d.items.map(function (i) {
+      return "<tr><td>" + EN(c, esc(i.code)) + "</td><td>" + EN(c, esc(i.name)) + "</td><td>" + categoryWord(c, i.category) + "</td><td>" + EN(c, esc(i.unit)) + "</td><td>" + esc(i.reorderLevel == null ? "" : i.reorderLevel) + "</td><td>" + packsSummary(c, i) + "</td></tr>";
     }).join("") + "</table></div>" : "<p>" + esc(T(c, "site.stores.noItems", "No items in the stores item master yet.")) + "</p>") +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.stores.colCode", "Code")) + '</span><input id="stItCode"></label><label class="f"><span>' + esc(T(c, "site.stores.colItem", "Item")) + '</span><input id="stItName"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.stores.colCategory", "Category")) + '</span><select id="stItCat">' + d.categories.map(function (k) { return '<option value="' + esc(k) + '">' + categoryWord(c, k) + "</option>"; }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.stores.colUnit", "Unit")) + '</span><input id="stItUnit"></label><label class="f"><span>' + esc(T(c, "site.stores.colReorder", "Reorder at")) + '</span><input id="stItReorder" type="number" min="0"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.stores.packs", "Pack sizes (optional)")) + '</span><input id="stItPacks" placeholder="' + esc(T(c, "site.stores.packsPlaceholder", "strip:10, box:10:strip")) + '"></label>' +
+      "<p class=\"note\">" + esc(T(c, "site.stores.packsHelp", "One pack per unit:count, or unit:count:packUnit for a pack of a pack. Example: strip:10, box:10:strip.")) + "</p>" +
       '<button class="btn" type="button" data-st="item">' + esc(T(c, "site.stores.saveItem", "Save item")) + "</button></div>";
   }
 
@@ -102,7 +129,9 @@
       '<label class="f"><span>' + esc(T(c, "site.stores.kind", "Kind")) + '</span><select id="stMvKind"><option value="receipt">' + esc(T(c, "site.stores.receipt", "Receipt")) + '</option><option value="adjustment">' + esc(T(c, "site.stores.adjustment", "Adjustment (+/-)")) + '</option><option value="wastage">' + esc(T(c, "site.stores.wastage", "Wastage")) + "</option></select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.stores.colItem", "Item")) + '</span><select id="stMvItem">' + d.items.map(function (i) { return '<option value="' + esc(i.code) + '">' + EN(c, esc(i.name + " (" + i.unit + ")")) + "</option>"; }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.stores.colStore", "Store")) + '</span><select id="stMvLoc">' + d.locations.map(function (l) { return '<option value="' + esc(l.code) + '">' + EN(c, esc(l.name)) + "</option>"; }).join("") + "</select></label>" +
-      '<label class="f"><span>' + esc(T(c, "site.stores.quantity", "Quantity")) + '</span><input id="stMvQty" type="number"></label><label class="f"><span>' + esc(T(c, "site.stores.batch", "Batch")) + '</span><input id="stMvBatch"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.stores.quantity", "Quantity")) + '</span><input id="stMvQty" type="number"></label>' +
+      '<label class="f" id="stMvUnitWrap"><span>' + esc(T(c, "site.stores.colUnit", "Unit")) + '</span><select id="stMvUnit">' + unitOptions(c, d.items[0], d.items[0] && d.items[0].unit) + "</select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.stores.batch", "Batch")) + '</span><input id="stMvBatch"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.stores.expiry", "Expiry")) + '</span><input id="stMvExpiry" type="date"></label><label class="f"><span>' + esc(T(c, "site.stores.reason", "Reason (needed for adjustment or wastage)")) + '</span><input id="stMvReason"></label>' +
       '<button class="btn" type="button" data-st="move">' + esc(T(c, "site.stores.record", "Record")) + "</button></div>";
   }
@@ -155,8 +184,10 @@
       return '<div class="card"><h3>' + EN(c, esc(o.vendor)) + " · " + (Object.prototype.hasOwnProperty.call(stateWords, o.state) ? esc(stateWords[o.state]) : EN(c, esc(o.state))) + "</h3>" +
         '<p class="note">' + (o.location ? esc(T(c, "site.stores.po.forStore", "For store {store}", { store: o.location })) : esc(T(c, "site.stores.po.noStore", "Names no store"))) + "</p>" +
         '<div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.colOrdered", "Ordered")) + "</th><th>" + esc(T(c, "site.stores.colReceived", "Received")) + "</th><th></th></tr>" + o.lines.map(function (l) {
-          var book = canBook && l.outstanding > 0 ? '<input type="number" min="1" id="stPoQty-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.quantity", "Quantity")) + '"> <select id="stPoLoc-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colStore", "Store")) + '">' + locs + "</select> " +
-            '<button class="btn quiet" type="button" data-st="bookin" data-id="' + id + '" data-po-line="' + esc(l.index) + '" data-item="' + esc(l.item) + '" data-unit="' + esc(l.unit) + '">' + esc(T(c, "site.stores.bookIn", "Book in")) + "</button>" : "";
+          var matchItem = d && d.ok && d.items ? d.items.filter(function (i) { return i.code === l.item; })[0] : null;
+          var unitSel = '<select id="stPoUnit-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colUnit", "Unit")) + '">' + (matchItem ? unitOptions(c, matchItem, l.unit) : '<option value="' + esc(l.unit) + '">' + EN(c, esc(l.unit)) + "</option>") + "</select>";
+          var book = canBook && l.outstanding > 0 ? '<input type="number" min="1" id="stPoQty-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.quantity", "Quantity")) + '"> ' + unitSel + ' <select id="stPoLoc-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colStore", "Store")) + '">' + locs + "</select> " +
+            '<button class="btn quiet" type="button" data-st="bookin" data-id="' + id + '" data-po-line="' + esc(l.index) + '" data-item="' + esc(l.item) + '">' + esc(T(c, "site.stores.bookIn", "Book in")) + "</button>" : "";
           return "<tr><td>" + EN(c, esc(l.item)) + "</td><td>" + EN(c, esc(l.ordered + " " + l.unit)) + "</td><td>" + esc(l.received) + "</td><td>" + book + "</td></tr>";
         }).join("") + "</table></div></div>";
     }).join("");
@@ -259,10 +290,17 @@
       (can.admin ? '<div class="card"><h2>' + esc(T(c, "site.stores.sc.policyCard", "Reorder settings")) + '</h2><div id="stPolicy"></div></div>' : "");
     var set = function (id, html) { var e = document.getElementById(id); if (e) e.innerHTML = html; };
     var data = null, depts = [], orders = null, sc = null, policy = null;
+    var refreshMvUnit = function () {
+      var sel = document.getElementById("stMvItem"), u = document.getElementById("stMvUnit");
+      if (!sel || !u || !data || !data.ok) return;
+      var item = data.items.filter(function (i) { return i.code === sel.value; })[0];
+      u.innerHTML = unitOptions(c, item, item && item.unit);
+    };
     var paint = function () {
       set("stIndents", indentsHtml(c, data, can)); set("stRaise", raiseHtml(c, data)); set("stStock", stockHtml(c, data));
       set("stItems", masterHtml(c, data)); set("stLocs", locationsHtml(c, data, depts)); set("stOrders", ordersHtml(c, orders, data));
       set("stReturns", returnsHtml(c, sc)); set("stContracts", contractsHtml(c, sc)); set("stPolicy", policyHtml(c, policy));
+      refreshMvUnit();
     };
     var load = function () {
       data = null; orders = null; sc = null; policy = null; paint();
@@ -282,6 +320,7 @@
       for (var i = 0; i < inputs.length; i++) if (inputs[i].getAttribute("data-indent") === id) { var o = { code: inputs[i].getAttribute("data-code") }; o[field] = String(inputs[i].value || "").trim(); out.push(o); }
       return out;
     };
+    el.onchange = function (ev) { if (ev.target && ev.target.id === "stMvItem") refreshMvUnit(); };
     el.onclick = function (ev) {
       var b = ev.target.closest && ev.target.closest("[data-st]"); if (!b) return;
       var act = b.getAttribute("data-st"), id = b.getAttribute("data-id");
@@ -291,9 +330,9 @@
       if (act === "ack") return c.api("/ward/indent-acknowledge", { orgId: org, indentId: id, lines: lines("ack", id, "received") }).then(after(T(c, "site.stores.acknowledged", "Receipt confirmed.")));
       if (act === "order") return c.api("/ward/store-purchase-order", { orgId: org, indentId: id, vendor: val("stVendor-" + id) }).then(after(T(c, "site.stores.ordered", "Purchase order raised. It still needs approval on the Purchasing screen.")));
       if (act === "close") return c.api("/ward/indent-close", { orgId: org, indentId: id, reason: val("stClose-" + id) }).then(after(T(c, "site.stores.closed", "Back-order closed.")));
-      if (act === "item") return c.api("/ward/store-item", { orgId: org, code: val("stItCode"), name: val("stItName"), category: val("stItCat"), unit: val("stItUnit"), reorderLevel: val("stItReorder") }).then(after(T(c, "site.stores.itemSaved", "Item saved.")));
+      if (act === "item") return c.api("/ward/store-item", { orgId: org, code: val("stItCode"), name: val("stItName"), category: val("stItCat"), unit: val("stItUnit"), reorderLevel: val("stItReorder"), packs: parsePacksInput(val("stItPacks")) }).then(after(T(c, "site.stores.itemSaved", "Item saved.")));
       if (act === "location") return c.api("/ward/store-location", { orgId: org, code: val("stLoCode"), name: val("stLoName"), kind: val("stLoKind"), departmentId: val("stLoDept") }).then(after(T(c, "site.stores.locationSaved", "Location saved.")));
-      if (act === "move") return c.api("/ward/store-move", { orgId: org, kind: val("stMvKind"), code: val("stMvItem"), location: val("stMvLoc"), quantity: val("stMvQty"), batch: val("stMvBatch"), expiry: val("stMvExpiry"), reason: val("stMvReason") }).then(after(T(c, "site.stores.recorded", "Recorded.")));
+      if (act === "move") return c.api("/ward/store-move", { orgId: org, kind: val("stMvKind"), code: val("stMvItem"), location: val("stMvLoc"), quantity: val("stMvQty"), unit: val("stMvUnit"), batch: val("stMvBatch"), expiry: val("stMvExpiry"), reason: val("stMvReason") }).then(after(T(c, "site.stores.recorded", "Recorded.")));
       if (act === "raise") {
         var to = document.getElementById("stRqTo"), opt = to && to.options ? to.options[to.selectedIndex] : null, rl = [];
         for (var n = 0; n < 5; n++) { if (val("stRqItem" + n)) rl.push({ code: val("stRqItem" + n), quantity: val("stRqQty" + n) }); }
@@ -301,7 +340,7 @@
       }
       if (act === "bookin") {
         var ln = b.getAttribute("data-po-line");
-        return c.api("/ward/goods-receive", { orgId: org, purchaseOrderId: id, line: ln, item: b.getAttribute("data-item"), unit: b.getAttribute("data-unit"), quantity: val("stPoQty-" + id + "-" + ln), location: val("stPoLoc-" + id + "-" + ln) }).then(after(T(c, "site.stores.bookedIn", "Booked in.")));
+        return c.api("/ward/goods-receive", { orgId: org, purchaseOrderId: id, line: ln, item: b.getAttribute("data-item"), unit: val("stPoUnit-" + id + "-" + ln), quantity: val("stPoQty-" + id + "-" + ln), location: val("stPoLoc-" + id + "-" + ln) }).then(after(T(c, "site.stores.bookedIn", "Booked in.")));
       }
       if (act === "return") return c.api("/ward/supplier-return", { orgId: org, receiptId: val("stRtReceipt"), quantity: val("stRtQty"), reason: val("stRtReason"), debitNoteNo: val("stRtNote"), supplier: val("stRtSupplier"), witnessId: val("stRtWitness"), controllerApprovalRef: val("stRtCdRef") }).then(after(T(c, "site.stores.sc.returned", "Returned to the supplier.")));
       if (act === "contract") {

@@ -24,6 +24,9 @@ const check=async(name,fn)=>{try{const r=await fn();results.push([r===true?'PASS
 try{
  b=await launch({port:Number(process.env.CDP_PORT||9493),width:1440,height:1000});
  await b.call('Network.setBlockedURLs',{urls:['*gstatic.com*']});
+ // This suite pins the Flow Board layout; the operations dashboard over it has its own (run-opd-dashboard-ui.mjs).
+ await b.nav('http://127.0.0.1:'+server.address().port+'/opd.html');
+ await b.ev(`localStorage.setItem('smd_opd_dash','0');return true;`);
  await b.nav('http://127.0.0.1:'+server.address().port+'/opd.html?mock=1');
  await b.until('return !!window.__opdUITest && !!document.querySelector(".opd-flow-board")');
  await check('actual page boots without JS errors',async()=>!b.consoleLines.some(l=>l.startsWith('EXC')));
