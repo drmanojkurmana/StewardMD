@@ -40,7 +40,44 @@ also had to read together as one platform, following one patient and one clinici
   all real, but each is either less visual in 4 seconds, flag- or content-gated, or aimed at a
   different audience (students, residents, patients).
 
-## Story and timeline (exact cues: `film/lib.js` `F.T`)
+## 9:16 Instagram Reel (`reel/` → `out/stewardmd-reel-45s-9x16.mp4`)
+
+1080x1920, 30 fps, exactly 45.000 s (1350 frames), H.264 + AAC, about -15.5 LUFS. The five
+capabilities, story and real screens are the same as the film. It is re-authored for vertical and
+for how StewardMD actually ships:
+
+- **Platforms.** StewardMD is a mobile app (iOS and Android) with an Apple Watch and a Wear OS
+  companion; only OPD is on the web. The reel therefore shows phones and a watch only: no tablet
+  and no desktop. The antibiogram grid is shown on the phone turned to landscape, which the app
+  itself prompts ("Rotate for a wider view"). It is captured at 844x390 (iPhone landscape) with
+  iOS landscape safe-area insets. The finale adds an Android phone (punch-hole body) running the
+  same app bundle. The end card names the real platforms (iPhone, Android, Apple Watch, Wear OS)
+  and the one web surface ("OPD on the web · stewardmd.in").
+- **Wear OS** is real (`android/wear`: labs, Code Blue, watchlist), but the repo has no render of
+  its UI. It is therefore named in the copy, in the site's own words ("The same alert reaches
+  your phone and your Apple Watch or Wear OS"), not drawn.
+- **Pacing about 0.8x the film.** Motion runs about 1.25x longer, and each capability holds 6-7 s,
+  so copy and UI read on a phone.
+- **Look.** White background (the app's paper and ink), the site's serif headlines with a teal
+  italic, headlines revealed word by word through masks, large lifted UI cards, and soft shadows.
+  All key text sits inside Instagram's safe area (y 230-1480).
+- **MaiK** uses the site's higher-resolution capture `_site/assets/s/maik.png` (dengue question,
+  Evidence Review, Bottom Line, citations) so it stays sharp at 1.3x phone scale.
+
+| Time | Section (`reel/sections/`) | Beat | Device moves |
+|---|---|---|---|
+| 0-4.5 | `01-open.js` | Teal mark on two heartbeat pulses, wordmark with clipped sheen, *Clinical intelligence workspace*; the iPhone rises with the home screen. | phone rises |
+| 4.5-11.5 | `02-reason.js` | **01 Reason**: tap Dx Patient, the guided question, *Present · add*, lifted findings, Review differential, lifted "What changed", tap *Open full stewardship page*. | in-screen pushes |
+| 11.5-18.5 | `03-steward.js` | **02 Steward**: stewardship page, QUICK DECISION lifts, then the phone turns to landscape for the ICMR coverage grid, panning. | rotate to landscape |
+| 18.5-25.5 | `04-maik.js` | **03 Ask MaiK** (MaiK wordmark): the phone turns upright into MaiK; the question lifts, the answer streams, the Bottom Line and Evidence Review header lift. | rotate upright, tumble out |
+| 25.5-32.5 | `05-icu.js` | **04 Monitor**: ICU dashboard; the vitals strip, Current status (NEWS2 10) and qSOFA 2/3 alert lift. | tumble in, step back |
+| 32.5-38.5 | `06-watch.js` | **05 On the wrist**: Apple Watch rises in front of the ICU phone; critical labs, then a wrist flick to Code Blue. | watch rises |
+| 38.5-45 | `07-finale.js` | "One workspace, *pocket to wrist.*": iPhone, Android and Watch together with the five named; then the end card: "When the clinical decision matters, *open StewardMD.*", platforms, OPD on the web, fine print. | converge, recede |
+
+Render: `python3 audio/soundtrack.py reel && node render/render.mjs --comp reel`.
+Preview: `http://localhost:8991/launch-film/reel/index.html#play` (or `?section=r04-maik`, `?t=21`).
+
+## Story and timeline, 16:9 film (exact cues: `film/lib.js` `F.T`)
 
 | Time | Section file | Beat | Devices |
 |---|---|---|---|
@@ -115,9 +152,10 @@ Nothing is drawn by the film. Each screen is one of these real captures:
 | `stewardship-tall.jpg` | *Open full stewardship page* for that case | clicked from the differential |
 | `antibiogram-resistance-tall.jpg` | Antibiogram → Resistance rates (`antibiogram.js`, ICMR AMRSN 2024) | home tile → tab |
 | `antibiogram-grid-ipad-tall.jpg` | Antibiogram → Antibiotic coverage | 1180-wide iPad landscape viewport |
+| `antibiogram-grid-phone-landscape-tall.jpg` (reel) | Antibiogram → Antibiotic coverage | 844-wide iPhone landscape viewport, after the rotate hint times out |
 | `icu-overview-tall.jpg` | ICU workstation overview (`icu.js`) | **synthetic** patient "Demo Patient", charted through `ICU.ingestPatient/Monitor/Labs/Flowsheet/Ventilator`. Every score and alert on screen is the app's own computation from those values. |
 | `site-desktop.jpg` | stewardmd.in home page (`_site/index.html`) | 1440x900 @2x desktop |
-| `/_site/assets/s/maik-2.png` | MaiK answer screen | a repo asset: the StewardMD site's own MaiK capture, used unchanged |
+| `/_site/assets/s/maik-2.png` (film), `maik.png` (reel) | MaiK answer screen | a repo asset: the StewardMD site's own MaiK capture, used unchanged |
 | `/_site/assets/s/watch-frame-critical.png`, `watch-frame-codeblue.png` | watchOS app (`ios/StewardMDWatch/CriticalLabsView.swift`, `CodeBlueView.swift`) | repo assets: the site's own Apple Watch Ultra renders, used unchanged |
 
 Crop rectangles for the lifted UI cards are measured from the live DOM during capture
@@ -152,7 +190,8 @@ node launch-film/capture/capture-screens.mjs       # -> assets/screens/raw/*.png
 python3 launch-film/capture/prepare-screens.py     # -> assets/screens/*.jpg
 
 # 2. sound
-python3 launch-film/audio/soundtrack.py            # -> audio/soundtrack.wav
+python3 launch-film/audio/soundtrack.py            # -> audio/soundtrack.wav (film)
+python3 launch-film/audio/soundtrack.py reel       # -> audio/soundtrack-reel.wav (reel)
 
 # 3. preview in a browser
 #    http://localhost:8991/launch-film/film/index.html#play            whole film, real time
@@ -161,6 +200,8 @@ python3 launch-film/audio/soundtrack.py            # -> audio/soundtrack.wav
 
 # 4. render
 node launch-film/render/render.mjs                 # -> out/stewardmd-launch-30s.mp4 (30 fps)
+python3 launch-film/audio/soundtrack.py reel
+node launch-film/render/render.mjs --comp reel     # -> out/stewardmd-reel-45s-9x16.mp4
 node launch-film/render/render.mjs --fps 24        # 24 fps variant
 node launch-film/render/render.mjs --stills 3.5,14.2   # PNG stills for review
 ```

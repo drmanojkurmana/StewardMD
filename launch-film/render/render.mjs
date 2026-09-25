@@ -7,8 +7,10 @@
  *   node test/serve.mjs . 8991 &                     # repo root (film loads repo assets in place)
  *   python3 launch-film/audio/soundtrack.py          # -> launch-film/audio/soundtrack.wav
  *   node launch-film/render/render.mjs               # -> launch-film/out/stewardmd-launch-30s.mp4
+ *   python3 launch-film/audio/soundtrack.py reel && node launch-film/render/render.mjs --comp reel
+ *                                                    # -> launch-film/out/stewardmd-reel-45s-9x16.mp4
  *
- * Options:  --fps 30   --stills 0,3.5,8.2   (PNG stills only, into out/stills/)
+ * Options:  --comp film|reel   --fps 30   --stills 0,3.5,8.2   (PNG stills only, into out/stills[-reel]/)
  *           --from 0 --to 30 (seconds, for a partial preview)   --out path.mp4
  * Env: BASE (default http://localhost:8991/), FFMPEG (default "ffmpeg"), CHROME (optional).
  */
@@ -24,10 +26,14 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((a, v, i, all) => (
 const BASE = (process.env.BASE || "http://localhost:8991/").replace(/\/?$/, "/");
 const FFMPEG = process.env.FFMPEG || "ffmpeg";
 const FPS = +(args.fps || 30);
-const URL = BASE + "launch-film/film/index.html";
+// --comp film (16:9, 30 s, default) | reel (9:16 Instagram Reel, 45 s)
+const COMP = args.comp === "reel"
+  ? { url: "launch-film/reel/index.html", w: 1080, h: 1920, audio: "soundtrack-reel.wav", out: "stewardmd-reel-45s-9x16.mp4" }
+  : { url: "launch-film/film/index.html", w: 1920, h: 1080, audio: "soundtrack.wav", out: "stewardmd-launch-30s.mp4" };
+const URL = BASE + COMP.url;
 
 const browser = await chromium.launch({ ...(process.env.CHROME ? { executablePath: process.env.CHROME } : {}), args: ["--force-color-profile=srgb", "--disable-lcd-text", "--font-render-hinting=none"] });
-const page = await (await browser.newContext({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 })).newPage();
+const page = await (await browser.newContext({ viewport: { width: COMP.w, height: COMP.h }, deviceScaleFactor: 1 })).newPage();
 page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(URL, { waitUntil: "load" });
 await page.waitForFunction(() => window.__filmReady === true, null, { timeout: 60000 });
@@ -35,7 +41,7 @@ const duration = await page.evaluate(() => window.__timelines.root.duration());
 const seek = (t) => page.evaluate((t) => { window.__timelines.root.seek(t, false); return new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); }, t);
 
 if (args.stills) {
-  const dir = join(ROOT, "out", "stills"); mkdirSync(dir, { recursive: true });
+  const dir = join(ROOT, "out", "stills" + (args.comp === "reel" ? "-reel" : "")); mkdirSync(dir, { recursive: true });
   for (const t of String(args.stills).split(",").map(Number)) {
     await seek(t);
     await page.screenshot({ path: join(dir, `t${t.toFixed(2).padStart(5, "0")}.png`) });
@@ -45,10 +51,10 @@ if (args.stills) {
   process.exit(0);
 }
 
-const from = +(args.from || 0), to = Math.min(+(args.to || duration), 30);
+const from = +(args.from || 0), to = Math.min(+(args.to || duration), duration);
 const frames = Math.round((to - from) * FPS);
-const out = args.out || join(ROOT, "out", "stewardmd-launch-30s.mp4");
-const audio = join(ROOT, "audio", "soundtrack.wav");
+const out = args.out || join(ROOT, "out", COMP.out);
+const audio = join(ROOT, "audio", COMP.audio);
 mkdirSync(dirname(out), { recursive: true });
 
 const ff = [

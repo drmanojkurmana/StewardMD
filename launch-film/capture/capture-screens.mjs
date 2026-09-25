@@ -119,6 +119,17 @@ async function dxConfirm(p) {
   await ctx.close();
 }
 
+// 4b. The same grid on a phone turned to landscape (the app itself prompts "Rotate for a wider
+// view"), for the vertical reel. 844 x 390 is an iPhone in landscape; captured tall and panned.
+{
+  const { ctx, p } = await boot({ w: 844, h: 1600 });
+  await p.evaluate(() => document.querySelector('[data-act="antibiogram"]').click());
+  await p.waitForTimeout(5000);
+  await shot(p, "antibiogram-grid-phone-landscape-tall");
+  await rect(p, "abgLand", "grid", "table");
+  await ctx.close();
+}
+
 // 5. ICU workstation, synthetic septic-shock patient (tall phone)
 {
   const { ctx, p } = await boot({ h: 2600 });
