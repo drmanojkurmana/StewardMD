@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "319b0009c552",
- "count": 133,
+ "version": "8a6ed67dfd50",
+ "count": 140,
  "subjects": [
   {
    "key": "emergency",
@@ -21,12 +21,12 @@
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 6
+   "count": 8
   },
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 18
+   "count": 19
   },
   {
    "key": "gastroenterology",
@@ -51,7 +51,7 @@
   {
    "key": "toxicology",
    "label": "Toxicology and Envenomation",
-   "count": 8
+   "count": 9
   },
   {
    "key": "haematology-oncology",
@@ -61,6 +61,11 @@
   {
    "key": "rheumatology-dermatology",
    "label": "Rheumatology and Dermatology",
+   "count": 3
+  },
+  {
+   "key": "psychiatry",
+   "label": "Psychiatry",
    "count": 3
   },
   {
@@ -131,6 +136,33 @@
     "ESC 2026",
     "ESC 2021",
     "ESC 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-agitation",
+   "title": "Acute agitation and rapid tranquillisation (adult)",
+   "subject": "psychiatry",
+   "population": "Adults",
+   "aliases": [
+    "rapid tranquillisation",
+    "RT",
+    "agitated patient",
+    "violent patient",
+    "aggression",
+    "chemical restraint",
+    "acute behavioural disturbance",
+    "haloperidol promethazine",
+    "IM lorazepam",
+    "IM olanzapine",
+    "Project BETA",
+    "NICE NG10"
+   ],
+   "summary": "Look for medical causes and de-escalate first; offer oral medication; if rapid tranquillisation is needed use IM lorazepam alone or IM haloperidol with IM promethazine (NICE NG10), with olanzapine or midazolam as alternatives. Use lower doses in the elderly, avoid haloperidol without an ECG or with cardiac disease, and monitor vital signs afterwards.",
+   "sources": [
+    "NICE 2015",
+    "American Association for Emergency Psychiatry (Project BETA) 2012",
+    "JACEP Open (Roppolo et al.) 2020"
    ],
    "status": "ai_drafted"
   },
@@ -751,6 +783,31 @@
     "European Resuscitation Council 2025",
     "Resuscitation Council UK 2025",
     "Resuscitation Council UK 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "alcohol-withdrawal",
+   "title": "Alcohol withdrawal and delirium tremens",
+   "subject": "psychiatry",
+   "population": "Adults",
+   "aliases": [
+    "AWS",
+    "alcohol withdrawal syndrome",
+    "delirium tremens",
+    "DTs",
+    "CIWA-Ar",
+    "withdrawal seizures",
+    "alcohol detoxification",
+    "chlordiazepoxide",
+    "Wernicke encephalopathy",
+    "thiamine",
+    "alcohol hallucinosis"
+   ],
+   "summary": "Grade severity with CIWA-Ar and treat with benzodiazepines, preferably symptom-triggered (chlordiazepoxide or diazepam; lorazepam in liver disease or the elderly). Give parenteral thiamine to prevent or treat Wernicke encephalopathy, and manage delirium tremens with IV benzodiazepines in a monitored setting (ASAM 2020, NICE CG100).",
+   "sources": [
+    "ASAM 2020",
+    "NICE 2010"
    ],
    "status": "ai_drafted"
   },
@@ -2443,6 +2500,31 @@
    "status": "ai_drafted"
   },
   {
+   "id": "massive-haemoptysis",
+   "title": "Massive (life-threatening) haemoptysis (adult)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "massive hemoptysis",
+    "life-threatening haemoptysis",
+    "haemoptysis",
+    "hemoptysis",
+    "coughing blood",
+    "bronchial artery embolisation",
+    "BAE",
+    "Rasmussen aneurysm",
+    "post-TB haemoptysis"
+   ],
+   "summary": "The threat is asphyxia, not blood loss: protect the airway, lie the patient bleeding side down, intubate early with a large tube, reverse anticoagulation, give tranexamic acid as a bridge, obtain CT angiography when stable, and arrange bronchial artery embolisation as first-line definitive control.",
+   "sources": [
+    "Society of Chest Imaging and Interventions (India) 2023",
+    "Singapore Medical Journal 2026",
+    "Lung India 2026",
+    "Cureus 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "malignant-spinal-cord-compression",
    "title": "Metastatic spinal cord compression (MSCC)",
    "subject": "haematology-oncology",
@@ -2968,6 +3050,29 @@
    "status": "ai_drafted"
   },
   {
+   "id": "serotonin-syndrome",
+   "title": "Serotonin syndrome (serotonin toxicity)",
+   "subject": "psychiatry",
+   "population": "Adults",
+   "aliases": [
+    "serotonin toxicity",
+    "serotonergic toxicity",
+    "Hunter criteria",
+    "cyproheptadine",
+    "SSRI toxicity",
+    "MAOI interaction",
+    "linezolid serotonin",
+    "tramadol serotonin",
+    "clonus"
+   ],
+   "summary": "Diagnose clinically with the Hunter criteria (clonus, hyperreflexia, tremor with agitation or sweating), stop all serotonergic drugs and give benzodiazepines with supportive care. Cyproheptadine 12 mg then 2 mg every 2 hours may help moderate cases; severe hyperthermia with rigidity needs rapid cooling, paralysis and ventilation.",
+   "sources": [
+    "Br J Clin Pharmacol (Chiew and Isbister) 2025",
+    "Curr Neuropharmacol (Tse et al.) 2015"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "alcohol-associated-hepatitis",
    "title": "Severe alcohol-associated hepatitis",
    "subject": "gastroenterology",
@@ -3069,6 +3174,29 @@
     "NICE 2019",
     "NCS / SCCM 2016",
     "Healio 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "spontaneous-pneumothorax",
+   "title": "Spontaneous pneumothorax (adult)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "pneumothorax",
+    "PSP",
+    "SSP",
+    "primary spontaneous pneumothorax",
+    "secondary spontaneous pneumothorax",
+    "collapsed lung",
+    "tension pneumothorax",
+    "ambulatory pneumothorax",
+    "BTS pleural 2023"
+   ],
+   "summary": "BTS 2023: size no longer dictates intervention. High-risk patients (tension, significant hypoxia, bilateral, underlying lung disease, age 50 or more with smoking history, haemopneumothorax) get a chest drain; others choose conservative care, an ambulatory device or needle aspiration according to symptoms and preference.",
+   "sources": [
+    "BTS 2023",
+    "BTS 2017"
    ],
    "status": "ai_drafted"
   },
@@ -3203,6 +3331,32 @@
    "status": "ai_drafted"
   },
   {
+   "id": "tetanus",
+   "title": "Tetanus: wound prophylaxis and established disease",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "aliases": [
+    "tetanus prophylaxis",
+    "Td",
+    "TT",
+    "tetanus toxoid",
+    "TIG",
+    "HTIG",
+    "tetanus immunoglobulin",
+    "lockjaw",
+    "trismus",
+    "neonatal tetanus",
+    "wound management tetanus"
+   ],
+   "summary": "Wounds: give Td if fewer than 3 prior doses, unknown history, or last dose 10 years ago (5 years for dirty wounds); add TIG 250 IU for dirty wounds in the incompletely vaccinated or immunodeficient. Established tetanus: human TIG, wound debridement, metronidazole, benzodiazepines and magnesium for spasms, early airway control, then complete vaccination.",
+   "sources": [
+    "WHO 2010",
+    "CDC 2026",
+    "WHO 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "thrombotic-thrombocytopenic-purpura",
    "title": "Thrombotic thrombocytopenic purpura (TTP)",
    "subject": "haematology-oncology",
@@ -3331,6 +3485,32 @@
     "NICE 2023",
     "CRASH-3 trial collaborators (Lancet) 2019",
     "European Task Force for Advanced Bleeding Care in Trauma 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "tricyclic-antidepressant-overdose",
+   "title": "Tricyclic antidepressant (TCA) overdose",
+   "subject": "toxicology",
+   "population": "Adults",
+   "aliases": [
+    "TCA overdose",
+    "TCA poisoning",
+    "tricyclic poisoning",
+    "amitriptyline overdose",
+    "imipramine",
+    "dothiepin",
+    "dosulepin",
+    "nortriptyline",
+    "sodium channel blocker poisoning",
+    "QRS widening",
+    "sodium bicarbonate"
+   ],
+   "summary": "TCA overdose causes coma, seizures, hypotension and sodium channel blockade with QRS widening. Give sodium bicarbonate 1 to 2 mEq/kg IV boluses for QRS above 100 ms, arrhythmia or hypotension, targeting pH 7.45 to 7.55; treat seizures with benzodiazepines; avoid physostigmine, flumazenil, phenytoin and class IA or IC antiarrhythmics.",
+   "sources": [
+    "AHA 2023",
+    "EXTRIP Workgroup (Seminars in Dialysis) 2014",
+    "ISCCM 2024"
    ],
    "status": "ai_drafted"
   },

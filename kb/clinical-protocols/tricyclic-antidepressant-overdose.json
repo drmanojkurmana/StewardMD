@@ -1,0 +1,87 @@
+{
+ "id": "tricyclic-antidepressant-overdose",
+ "title": "Tricyclic antidepressant (TCA) overdose",
+ "subject": "toxicology",
+ "population": "Adults",
+ "setting": "Emergency department, ICU",
+ "aliases": ["TCA overdose", "TCA poisoning", "tricyclic poisoning", "amitriptyline overdose", "imipramine", "dothiepin", "dosulepin", "nortriptyline", "sodium channel blocker poisoning", "QRS widening", "sodium bicarbonate"],
+ "summary": "TCA overdose causes coma, seizures, hypotension and sodium channel blockade with QRS widening. Give sodium bicarbonate 1 to 2 mEq/kg IV boluses for QRS above 100 ms, arrhythmia or hypotension, targeting pH 7.45 to 7.55; treat seizures with benzodiazepines; avoid physostigmine, flumazenil, phenytoin and class IA or IC antiarrhythmics.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise",
+   "items": [
+    "Severe toxicity develops within the first few hours: anticholinergic features (tachycardia, mydriasis, dry skin, urinary retention, delirium), then coma, seizures, hypotension and arrhythmias.",
+    "The reported ingested dose is unreliable; the ECG predicts risk better than drug levels.",
+    "ECG danger signs: QRS above 100 ms (seizure risk) and above 160 ms (ventricular arrhythmia risk), terminal R wave in aVR above 3 mm, right axis deviation of the terminal QRS, Brugada-like pattern.",
+    "Common agents in India: amitriptyline, imipramine, dothiepin (dosulepin), nortriptyline, clomipramine."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "Immediate management",
+   "items": [
+    "ABC; continuous ECG monitoring and a 12-lead ECG on arrival, repeated serially. Check glucose and a blood gas.",
+    "Intubate early for reduced consciousness, seizures or haemodynamic instability. After intubation, ventilate to keep pH 7.45 to 7.55 and avoid respiratory acidosis, which worsens cardiotoxicity.",
+    "Activated charcoal 50 g within 1 hour of ingestion only if the airway is protected.",
+    "Hypotension: crystalloid boluses and sodium bicarbonate, then a direct-acting vasopressor (noradrenaline) if still hypotensive."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Sodium bicarbonate",
+   "items": [
+    "Indications: QRS above 100 ms, ventricular arrhythmia, hypotension not responding to fluids, or seizures with ECG changes.",
+    "Give 8.4% sodium bicarbonate 1 to 2 mEq/kg (1 to 2 mL/kg) IV over a few minutes; repeat every few minutes until the QRS narrows and BP improves.",
+    "Target arterial pH 7.45 to 7.55; do not exceed about 7.55. Check blood gas, sodium and potassium frequently (alkalosis causes hypokalaemia).",
+    "Once stable, maintain alkalaemia with further boluses or an infusion guided by ECG and pH; hyperventilation can be used in ventilated patients who cannot tolerate more sodium or fluid.",
+    "Hypertonic saline is an alternative sodium load when alkalosis limits further bicarbonate."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Arrhythmias, seizures and refractory toxicity",
+   "items": [
+    "Ventricular tachycardia: sodium bicarbonate first; lidocaine 1 to 1.5 mg/kg IV if refractory. Avoid class IA (procainamide) and IC (flecainide) antiarrhythmics and amiodarone.",
+    "Seizures: benzodiazepines (lorazepam 2 to 4 mg IV or diazepam 10 mg IV); give bicarbonate as seizure-induced acidosis worsens cardiotoxicity. Do not use phenytoin.",
+    "Refractory shock or arrhythmia despite bicarbonate and vasopressors: consider VA-ECMO where available; lipid emulsion (20%, 1.5 mL/kg) has weak evidence. In cardiac arrest continue prolonged CPR.",
+    "Haemodialysis and haemoperfusion are not recommended: TCAs are not dialysable (EXTRIP)."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Monitoring and disposition",
+   "items": [
+    "Continuous ECG and BP; repeat 12-lead ECGs and blood gases while on bicarbonate.",
+    "Asymptomatic patients with a normal ECG and normal mental state 6 hours after ingestion can be medically cleared, then psychiatric assessment.",
+    "Symptomatic patients: HDU or ICU until the ECG has normalised and they are clinically stable off bicarbonate.",
+    "Anticholinergic delirium may persist for days; manage with benzodiazepines and nursing care."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Physostigmine for anticholinergic delirium in TCA overdose: risk of bradycardia and asystole.",
+    "Flumazenil in a mixed benzodiazepine and TCA overdose: precipitates seizures.",
+    "Phenytoin or class IA/IC antiarrhythmics, which worsen sodium channel blockade.",
+    "Allowing acidosis from hypoventilation or seizures.",
+    "Relying on a urine TCA immunoassay: many drugs (carbamazepine, antipsychotics, antihistamines) cross-react."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Sodium bicarbonate 8.4%", "dose": "1 to 2 mEq/kg (1 to 2 mL/kg) IV bolus, repeated until QRS narrows", "notes": "Target pH 7.45 to 7.55; monitor sodium and potassium." },
+  { "name": "Lidocaine", "dose": "1 to 1.5 mg/kg IV bolus", "notes": "Ventricular arrhythmia refractory to bicarbonate." },
+  { "name": "Lorazepam", "dose": "2 to 4 mg IV (0.1 mg/kg, max 4 mg), repeat once", "notes": "Seizures; alternative diazepam 10 mg IV." },
+  { "name": "Noradrenaline (norepinephrine)", "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP 65 mmHg", "notes": "Hypotension after fluids and bicarbonate." },
+  { "name": "Activated charcoal", "dose": "50 g orally once, within 1 hour", "notes": "Only with a protected airway." },
+  { "name": "Lipid emulsion 20%", "dose": "1.5 mL/kg IV bolus, then 0.25 mL/kg/min", "notes": "Rescue only; weak evidence." }
+ ],
+ "sources": [
+  { "org": "AHA", "title": "2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning", "year": 2023, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001161" },
+  { "org": "EXTRIP Workgroup (Seminars in Dialysis)", "title": "Extracorporeal Treatment for Tricyclic Antidepressant Poisoning: Recommendations from the EXTRIP Workgroup", "year": 2014, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4282541/" },
+  { "org": "ISCCM", "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}
