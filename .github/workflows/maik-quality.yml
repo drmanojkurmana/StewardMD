@@ -5,9 +5,22 @@ name: MaiK quality & latency
 #     for a human to mark correct / incomplete / unsafe (test/maik-quality-run.test.mjs covers the maths).
 #   - DAILY (04:43 UTC): a cheap synthetic latency check (--latency) - p50/p95 of total time, time to
 #     first streamed byte, and output tokens, over 5 fixed short questions.
-# Needs repo secret MAIK_EVAL_TOKEN (a signed-in Firebase ID token - see the header of
-# scripts/maik-quality-run.mjs for how to obtain one). Without it this workflow SKIPS CLEANLY (a
-# passing run with a ::notice::), so it never goes red before the secret is added.
+#
+# Needs repo secret MAIK_EVAL_REFRESH_TOKEN (a long-lived Firebase refresh token for a dedicated test
+# clinician account - NOT a Firebase ID token, which expires in ~1 hour and would be dead on arrival in
+# a weekly cron; see the PR/README for how to obtain one). The "Mint a short-lived ID token" step below
+# exchanges it for a fresh ID token on every run via the Secure Token API (the same endpoint Firebase
+# Auth SDKs use internally: POST https://securetoken.googleapis.com/v1/token?key=<web API key>, body
+# grant_type=refresh_token&refresh_token=<refresh token>, response field id_token - verified against
+# Google's Identity Platform REST API docs, which document the same Secure Token API Firebase sits on).
+# The web API key is FB_CONFIG.apiKey from app.js - a public per-project client identifier, not a
+# secret (Firebase's own docs: it identifies the project, Firebase Auth/rules are the real access
+# control). Neither the refresh token nor the minted ID token is ever echoed to the log; the ID token
+# is explicitly ::add-mask::'d since GitHub only auto-masks the literal secrets.* values, not tokens
+# derived from them.
+#
+# Without the secret this workflow SKIPS CLEANLY (a passing run with a ::notice::), so it never goes
+# red before the secret is added.
 # Both modes hit the LIVE /api/ai/explain endpoint and cost real Gemini tokens, so this is deliberately
 # separate from ci.yml and never runs on push/PR - schedule + manual dispatch only.
 
@@ -32,13 +45,13 @@ jobs:
     timeout-minutes: 15
     steps:
       # Never fails the job - a missing secret is an expected pre-setup state, not a CI failure.
-      - name: Check for MAIK_EVAL_TOKEN
+      - name: Check for MAIK_EVAL_REFRESH_TOKEN
         id: gate
         env:
-          TOKEN_SET: ${{ secrets.MAIK_EVAL_TOKEN != '' }}
+          TOKEN_SET: ${{ secrets.MAIK_EVAL_REFRESH_TOKEN != '' }}
         run: |
           if [ "$TOKEN_SET" != "true" ]; then
-            echo "::notice::MAIK_EVAL_TOKEN secret is not set - skipping the MaiK quality/latency run. Add it under repo Settings > Secrets and variables > Actions (see scripts/maik-quality-run.mjs header for how to obtain the token) to enable this workflow."
+            echo "::notice::MAIK_EVAL_REFRESH_TOKEN secret is not set - skipping the MaiK quality/latency run. Add it under repo Settings > Secrets and variables > Actions (see the PR description / README for how to obtain a refresh token for the dedicated test clinician account) to enable this workflow."
             echo "skip=1" >> "$GITHUB_OUTPUT"
           else
             echo "skip=0" >> "$GITHUB_OUTPUT"
@@ -50,6 +63,36 @@ jobs:
         if: steps.gate.outputs.skip == '0'
         with:
           node-version: '22'
+
+      # Long-lived refresh token -> short-lived ID token, minted fresh on every run so a weekly/daily
+      # cron never runs against a token that died an hour after the secret was saved. Never prints the
+      # refresh token or the minted ID token - see the header comment for the endpoint shape + source.
+      - name: Mint a short-lived ID token from the refresh token
+        if: steps.gate.outputs.skip == '0'
+        env:
+          REFRESH_TOKEN: ${{ secrets.MAIK_EVAL_REFRESH_TOKEN }}
+          # Firebase Web API key - public client identifier (FB_CONFIG.apiKey in app.js), not a secret.
+          FIREBASE_API_KEY: AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I
+        run: |
+          set -euo pipefail
+          RESP=$(curl -sS -X POST "https://securetoken.googleapis.com/v1/token?key=${FIREBASE_API_KEY}" \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode "grant_type=refresh_token" \
+            --data-urlencode "refresh_token=${REFRESH_TOKEN}")
+          ID_TOKEN=$(printf '%s' "$RESP" | node -e '
+            let s = "";
+            process.stdin.on("data", (d) => { s += d; });
+            process.stdin.on("end", () => {
+              try {
+                const j = JSON.parse(s);
+                if (j && j.id_token) { process.stdout.write(j.id_token); return; }
+              } catch (e) {}
+              console.error("token exchange failed: response had no id_token");
+              process.exit(1);
+            });
+          ')
+          echo "::add-mask::${ID_TOKEN}"
+          echo "MAIK_EVAL_TOKEN=${ID_TOKEN}" >> "$GITHUB_ENV"
 
       - name: Determine mode (full vs latency)
         if: steps.gate.outputs.skip == '0'
@@ -65,17 +108,14 @@ jobs:
 
       # Weekly: clinician gold-set run (test/maik-eval/cases.json) - answers, objective checks, cloud
       # timing, and a grading sheet. Writes docs/maik-eval/run-<date>.json + run-<date>-grading.md.
+      # MAIK_EVAL_TOKEN is already in the job environment (set by the mint step above via $GITHUB_ENV).
       - name: Weekly gold-set run (accuracy + parity checks, grading sheet)
         if: steps.gate.outputs.skip == '0' && steps.mode.outputs.mode == 'full'
-        env:
-          MAIK_EVAL_TOKEN: ${{ secrets.MAIK_EVAL_TOKEN }}
         run: node scripts/maik-quality-run.mjs
 
       # Daily: 5 short fixed questions against the streaming endpoint. Writes docs/maik-eval/latency-<date>.json.
       - name: Daily synthetic latency check (p50/p95 total ms, TTFB, output tokens)
         if: steps.gate.outputs.skip == '0' && steps.mode.outputs.mode == 'latency'
-        env:
-          MAIK_EVAL_TOKEN: ${{ secrets.MAIK_EVAL_TOKEN }}
         run: node scripts/maik-quality-run.mjs --latency
 
       - uses: actions/upload-artifact@v4
