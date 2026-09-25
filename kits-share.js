@@ -9,8 +9,9 @@
  *   History     kit values saved per patient across visits (the antenatal card), OPD only.
  *   Reviews     the review desk sends its decisions to the owner.
  *
- * Flag smd_kits_share, default OFF (?share=1 turns it on for this device, ?share=0 off). The server
- * route is also off until KITS_SHARE_ON=1. Nothing here is stored on the phone except the flag; lists
+ * Flag smd_kits_share, default ON since the owner turned wave 2 on (2026-09-25). Off for this device
+ * with localStorage smd_kits_share = "0" or ?share=0 (one load). The server route has its own kill
+ * switch, env KITS_SHARE_ON = "0". Nothing here is stored on the phone except the flag; lists
  * and messages are fetched when opened and dropped when the sheet closes. Patient ids go in POST bodies,
  * never URLs. Buildless ES5.
  */
@@ -24,8 +25,8 @@
     try {
       var q = (G.location && (G.location.search.match(/[?&]share=([^&]+)/) || [])[1]);
       if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false;
-      return !!(G.localStorage && G.localStorage.getItem("smd_kits_share") === "1");
-    } catch (e) { return false; }
+      return !(G.localStorage && G.localStorage.getItem("smd_kits_share") === "0");
+    } catch (e) { return true; }
   }
   function fmt(ms_) { try { var d = new Date(ms_); return d.getDate() + " " + ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][d.getMonth()] + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2); } catch (e) { return ""; } }
   var ERR = {

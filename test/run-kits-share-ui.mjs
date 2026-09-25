@@ -70,10 +70,11 @@ try {
   ws = new WebSocket(version.webSocketDebuggerUrl); await new Promise((r) => { ws.onopen = r; }); ws.onmessage = (e) => { const m = JSON.parse(e.data); if (pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
   const created = await call('Target.createTarget', { url: 'about:blank' }); sid = (await call('Target.attachToTarget', { targetId: created.result.targetId, flatten: true })).result.sessionId;
   await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
-  await call('Page.navigate', { url: `http://localhost:${PORT}/?share=1` });
+  await call('Page.navigate', { url: `http://localhost:${PORT}/` });
   ok(await until('!!(window.SMD_SHARE&&window.SMD_KITS&&window.OPDEMR&&window.SMD_DOCS&&window.SMD_REVIEW)', 25000), 'app loaded with kits sharing');
   await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());document.body.classList.remove('dark');1`);
-  ok(await ev('SMD_SHARE.on()'), '?share=1 turns sharing on for this load');
+  ok(await ev('SMD_SHARE.on()'), 'sharing is on by default (no flag set)');
+  ok(await until(`!!document.querySelector('#rnavToolsGrid .rnav-tile[data-act="kxinbox"]')`, 8000), 'the Colleagues tile is on Home by default');
   await as('uA');
 
   /* ---- the hospital's version inside the kit, kit history ---- */
