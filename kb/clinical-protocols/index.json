@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "5921acfe3783",
- "count": 141,
+ "version": "e143172e9ed6",
+ "count": 156,
  "subjects": [
   {
    "key": "emergency",
@@ -21,12 +21,12 @@
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 8
+   "count": 9
   },
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 19
+   "count": 22
   },
   {
    "key": "gastroenterology",
@@ -72,6 +72,11 @@
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
    "count": 6
+  },
+  {
+   "key": "paediatrics",
+   "label": "Paediatrics and Neonatology",
+   "count": 11
   },
   {
    "key": "surgery-trauma",
@@ -268,6 +273,31 @@
    "status": "ai_drafted"
   },
   {
+   "id": "acute-asthma-child",
+   "title": "Acute asthma in children",
+   "subject": "paediatrics",
+   "population": "Children",
+   "aliases": [
+    "acute asthma",
+    "asthma exacerbation",
+    "asthma attack child",
+    "acute severe asthma",
+    "status asthmaticus",
+    "preschool wheeze",
+    "salbutamol",
+    "magnesium sulphate asthma",
+    "GINA 2026",
+    "BTS SIGN asthma"
+   ],
+   "summary": "Assess severity, give salbutamol by pMDI and spacer repeated every 20 to 30 minutes in the first hour, and oral prednisolone 1 to 2 mg/kg (max 20 mg under 2 years, 30 mg at 2 to 5 years, 40 mg at 6 to 11 years). Add ipratropium for moderate to severe attacks and IV magnesium 40 to 50 mg/kg (max 2 g) if not responding (GINA 2026, BTS/SIGN).",
+   "sources": [
+    "GINA 2026",
+    "BTS / SIGN 2024",
+    "Royal Children's Hospital Melbourne 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "acute-bacterial-meningitis",
    "title": "Acute bacterial meningitis (adult)",
    "subject": "infectious-disease",
@@ -338,6 +368,34 @@
    "sources": [
     "British Orthopaedic Association 2025",
     "NICE 2016"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "paediatric-dehydration-diarrhoea",
+   "title": "Acute diarrhoea with dehydration in children",
+   "subject": "paediatrics",
+   "population": "Children",
+   "aliases": [
+    "acute gastroenteritis",
+    "AGE",
+    "acute diarrhoea",
+    "dehydration",
+    "ORS",
+    "ORT",
+    "plan A",
+    "plan B",
+    "plan C",
+    "IMNCI diarrhoea",
+    "zinc",
+    "dysentery",
+    "cholera",
+    "Shigella"
+   ],
+   "summary": "Classify dehydration as none, some or severe and treat with WHO plans: extra ORS after each stool, low-osmolarity ORS 75 mL/kg over 4 hours, or IV Ringer lactate 100 mL/kg over 3 to 6 hours by age. Give zinc, continue feeding, and give antibiotics only for bloody diarrhoea or suspected cholera.",
+   "sources": [
+    "WHO 2013",
+    "WHO 2024"
    ],
    "status": "ai_drafted"
   },
@@ -1135,6 +1193,29 @@
    "status": "ai_drafted"
   },
   {
+   "id": "bronchiolitis",
+   "title": "Bronchiolitis",
+   "subject": "paediatrics",
+   "population": "Children",
+   "aliases": [
+    "acute bronchiolitis",
+    "RSV bronchiolitis",
+    "viral bronchiolitis",
+    "RSV",
+    "wheezy infant",
+    "HFNC bronchiolitis",
+    "high-flow nasal cannula",
+    "NICE NG9"
+   ],
+   "summary": "Clinical diagnosis in children under 2 years (peak 3 to 6 months) after a coryzal prodrome. Care is supportive: oxygen only if SpO2 stays below 90% (below 92% under 6 weeks or with comorbidity), NG or IV fluids for poor intake, and no salbutamol, steroids, adrenaline, hypertonic saline or antibiotics (NICE NG9 2021, AAP 2014).",
+   "sources": [
+    "NICE 2021",
+    "AAP 2014",
+    "Royal Children's Hospital Melbourne 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "burns-initial-management",
    "title": "Burns: initial assessment and fluid resuscitation",
    "subject": "surgery-trauma",
@@ -1551,6 +1632,29 @@
    "status": "ai_drafted"
   },
   {
+   "id": "paediatric-dka",
+   "title": "Diabetic ketoacidosis (child)",
+   "subject": "paediatrics",
+   "population": "Children",
+   "aliases": [
+    "DKA",
+    "paediatric DKA",
+    "pediatric DKA",
+    "ISPAD DKA",
+    "DKA cerebral oedema",
+    "cerebral edema DKA",
+    "type 1 diabetes ketoacidosis",
+    "HHS child",
+    "hyperglycaemic hyperosmolar state child"
+   ],
+   "summary": "Glucose above 200 mg/dL (11 mmol/L), venous pH below 7.3 or bicarbonate below 18 mmol/L, and ketonaemia: 0.9% saline 10 to 20 mL/kg over 20 to 30 minutes, replace the deficit over 24 to 48 hours, start IV insulin 0.05 to 0.1 units/kg/h 1 hour after fluids with potassium, and watch hourly for cerebral oedema (ISPAD 2022).",
+   "sources": [
+    "ISPAD 2022",
+    "ISPAD / Pediatric Diabetes 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "drowning",
    "title": "Drowning (adults and children)",
    "subject": "emergency",
@@ -1700,6 +1804,28 @@
     "IDSA 2011",
     "ASCO / IDSA 2018",
     "ICMR 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "febrile-seizure",
+   "title": "Febrile seizures",
+   "subject": "paediatrics",
+   "population": "Children",
+   "aliases": [
+    "febrile convulsion",
+    "febrile convulsions",
+    "simple febrile seizure",
+    "complex febrile seizure",
+    "febrile status epilepticus",
+    "fever fit",
+    "FS"
+   ],
+   "summary": "A seizure with fever of 38 °C or more in a child aged 6 to 60 months without CNS infection. After a simple febrile seizure, look for the cause of fever; do LP only if meningitis is suspected (an option if Hib or pneumococcal immunisation is incomplete or after antibiotics); no routine EEG, imaging or preventive antiepileptics.",
+   "sources": [
+    "AAP 2011",
+    "AAP 2008",
+    "Royal Children's Hospital Melbourne 2026"
    ],
    "status": "ai_drafted"
   },
@@ -2643,6 +2769,88 @@
    "status": "ai_drafted"
   },
   {
+   "id": "neonatal-jaundice",
+   "title": "Neonatal jaundice (hyperbilirubinaemia)",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "aliases": [
+    "neonatal hyperbilirubinemia",
+    "newborn jaundice",
+    "physiological jaundice",
+    "phototherapy",
+    "exchange transfusion",
+    "TSB",
+    "TcB",
+    "kernicterus",
+    "bilirubin encephalopathy",
+    "ABO incompatibility",
+    "Rh isoimmunisation",
+    "G6PD deficiency",
+    "prolonged jaundice"
+   ],
+   "summary": "For babies of 35 weeks or more, measure TcB or TSB in every newborn before discharge and urgently if jaundice appears in the first 24 hours. Plot by age in hours on the AAP 2022 curves for gestation and neurotoxicity risk factors to decide phototherapy, escalation of care (2 mg/dL below the exchange level) or exchange transfusion.",
+   "sources": [
+    "AAP 2022",
+    "NICE 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "neonatal-resuscitation",
+   "title": "Neonatal resuscitation at birth",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "aliases": [
+    "NRP",
+    "NRP 2025",
+    "newborn resuscitation",
+    "golden minute",
+    "NSSK",
+    "Navjaat Shishu Suraksha Karyakram",
+    "birth asphyxia",
+    "PPV",
+    "bag and mask ventilation",
+    "neonatal CPR",
+    "neonatal adrenaline",
+    "neonatal epinephrine"
+   ],
+   "summary": "Keep the baby warm, dry and stimulate, and start effective ventilation within the golden minute; start 3:1 chest compressions only if heart rate stays below 60/min after 30 seconds of ventilation that moves the chest, then give IV adrenaline 0.01 to 0.03 mg/kg (AHA/AAP 2025).",
+   "sources": [
+    "AHA / AAP 2025",
+    "AAP 2025",
+    "MoHFW, Government of India 2020",
+    "IAP / NNF India 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "neonatal-sepsis",
+   "title": "Neonatal sepsis",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "aliases": [
+    "EOS",
+    "LOS",
+    "EONS",
+    "LONS",
+    "early-onset sepsis",
+    "late-onset sepsis",
+    "PSBI",
+    "possible serious bacterial infection",
+    "neonatal meningitis",
+    "sick young infant",
+    "ampicillin gentamicin",
+    "newborn sepsis"
+   ],
+   "summary": "Suspect sepsis in any unwell neonate; take a blood culture and start ampicillin plus gentamicin (WHO 2024 first choice; NNF for SNCUs), escalating by local antibiogram in NICUs. Do an LP when meningitis is possible. Stop at 36 hours if culture is sterile and the baby is well; treat culture-positive sepsis 10 to 14 days and meningitis at least 21 days.",
+   "sources": [
+    "WHO 2024",
+    "NNF India 2021",
+    "IAP / NNF India 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "neuroleptic-malignant-syndrome",
    "title": "Neuroleptic malignant syndrome",
    "subject": "psychiatry",
@@ -2763,6 +2971,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "paediatric-cardiac-arrest",
+   "title": "Paediatric cardiac arrest (PALS)",
+   "subject": "paediatrics",
+   "population": "Children",
+   "aliases": [
+    "PALS",
+    "PALS 2025",
+    "paediatric CPR",
+    "pediatric cardiac arrest",
+    "child CPR",
+    "paediatric BLS",
+    "PBLS",
+    "pulseless arrest child",
+    "paediatric VF",
+    "PEA child",
+    "asystole child",
+    "paediatric defibrillation"
+   ],
+   "summary": "High-quality CPR (15:2 with two rescuers), adrenaline 0.01 mg/kg IV/IO (max 1 mg) every 3 to 5 minutes and early for non-shockable rhythms, shocks of 2 J/kg then 4 J/kg (max 10 J/kg or adult dose), and amiodarone 5 mg/kg or lidocaine 1 mg/kg for refractory VF or pulseless VT (AHA/AAP 2025).",
+   "sources": [
+    "AHA / AAP 2025",
+    "AHA / AAP 2025",
+    "Anesth Pain Med (Seoul) 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "paracetamol-overdose",
    "title": "Paracetamol (acetaminophen) overdose",
    "subject": "toxicology",
@@ -2814,6 +3049,30 @@
     "ASRA Pain Medicine 2018",
     "ASRA Pain Medicine 2025",
     "Dtsch Arztebl Int (Kellert et al.) 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "pleural-infection-empyema",
+   "title": "Pleural infection and empyema (adult)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "empyema",
+    "empyema thoracis",
+    "parapneumonic effusion",
+    "complicated parapneumonic effusion",
+    "CPPE",
+    "pleural infection",
+    "pyothorax",
+    "tPA DNase",
+    "MIST2",
+    "RAPID score"
+   ],
+   "summary": "Aspirate any effusion with suspected infection under ultrasound and measure pH immediately: frank pus or pH 7.2 or less needs a small-bore chest drain; pH above 7.2 to below 7.4 needs LDH and clinical review. Give antibiotics with anaerobic cover for 2 to 6 weeks, tPA plus DNase for residual collections, and refer early for VATS when medical treatment fails.",
+   "sources": [
+    "BTS 2023",
+    "ICMR 2019"
    ],
    "status": "ai_drafted"
   },
@@ -2928,6 +3187,37 @@
    "status": "ai_drafted"
   },
   {
+   "id": "pulmonary-tuberculosis",
+   "title": "Pulmonary tuberculosis, drug-susceptible (adult, NTEP)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "TB",
+    "PTB",
+    "tuberculosis",
+    "koch's",
+    "DS-TB",
+    "NTEP",
+    "RNTCP",
+    "ATT",
+    "anti-tubercular treatment",
+    "HRZE",
+    "CBNAAT",
+    "Truenat",
+    "Ni-kshay",
+    "Nikshay Poshan Yojana",
+    "UDST"
+   ],
+   "summary": "Test every presumptive TB patient upfront with NAAT (CBNAAT or Truenat) and rapid drug resistance testing, notify on Ni-kshay, triage for severe illness, and treat drug-susceptible pulmonary TB with daily 2HRZE/4HRE fixed-dose combinations by weight band, with nutrition support (Rs 1000/month), monthly review and post-treatment follow-up.",
+   "sources": [
+    "NTEP, MoHFW (Central TB Division) 2025",
+    "NTEP, MoHFW (Central TB Division) 2025",
+    "NTEP, MoHFW (Central TB Division) 2023",
+    "WHO 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "rapid-sequence-intubation",
    "title": "Rapid sequence induction and failed intubation (adult)",
    "subject": "anaesthesia",
@@ -3029,6 +3319,34 @@
    "status": "ai_drafted"
   },
   {
+   "id": "influenza",
+   "title": "Seasonal influenza including H1N1 (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "flu",
+    "swine flu",
+    "H1N1",
+    "H3N2",
+    "influenza A",
+    "influenza B",
+    "ILI",
+    "influenza-like illness",
+    "SARI",
+    "oseltamivir",
+    "Tamiflu",
+    "category A B C influenza"
+   ],
+   "summary": "Categorise every influenza-like illness as MoHFW Category A (symptomatic care), B (oseltamivir without testing: high fever with severe sore throat, or high-risk group) or C (red flags: test, start oseltamivir empirically, admit). Oseltamivir 75 mg twice daily for 5 days, reduced in renal impairment; no corticosteroids.",
+   "sources": [
+    "MoHFW / NCDC 2019",
+    "MoHFW / NCDC 2019",
+    "IDSA 2019",
+    "CDC 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "sepsis-septic-shock",
    "title": "Sepsis and septic shock: initial management",
    "subject": "critical-care",
@@ -3071,6 +3389,31 @@
    "status": "ai_drafted"
   },
   {
+   "id": "paediatric-septic-shock",
+   "title": "Septic shock in children",
+   "subject": "paediatrics",
+   "population": "Children",
+   "aliases": [
+    "paediatric sepsis",
+    "pediatric sepsis",
+    "pediatric septic shock",
+    "SSC children 2026",
+    "Surviving Sepsis children",
+    "Phoenix sepsis criteria",
+    "fluid refractory shock",
+    "catecholamine resistant shock",
+    "warm shock",
+    "cold shock"
+   ],
+   "summary": "Recognise sepsis early (Phoenix criteria), measure lactate, take cultures and give antimicrobials within 1 hour for suspected septic shock. Give 10 to 20 mL/kg balanced crystalloid boluses up to 40 to 60 mL/kg in the first hour where ICU care exists (no boluses without hypotension where it does not), then adrenaline or noradrenaline (SSC Children 2026).",
+   "sources": [
+    "SCCM / ESICM 2026",
+    "SCCM / ESICM 2026",
+    "WHO 2013"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "serotonin-syndrome",
    "title": "Serotonin syndrome (serotonin toxicity)",
    "subject": "psychiatry",
@@ -3090,6 +3433,34 @@
    "sources": [
     "Br J Clin Pharmacol (Chiew and Isbister) 2025",
     "Curr Neuropharmacol (Tse et al.) 2015"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "severe-acute-malnutrition",
+   "title": "Severe acute malnutrition: inpatient care",
+   "subject": "paediatrics",
+   "population": "Children",
+   "aliases": [
+    "SAM",
+    "severe wasting",
+    "kwashiorkor",
+    "marasmus",
+    "nutritional oedema",
+    "complicated SAM",
+    "F-75",
+    "F-100",
+    "RUTF",
+    "ReSoMal",
+    "NRC",
+    "nutrition rehabilitation centre",
+    "WHO 10 steps"
+   ],
+   "summary": "Children 6 to 59 months with weight-for-height below -3 SD, MUAC below 11.5 cm or bilateral pitting oedema: admit if complicated or the appetite test fails, then follow the WHO 10 steps: treat hypoglycaemia and hypothermia, rehydrate slowly with ReSoMal, antibiotics for all, F-75 then F-100 or RUTF, and no iron during stabilisation.",
+   "sources": [
+    "WHO 2023",
+    "WHO 2013",
+    "WHO 2013"
    ],
    "status": "ai_drafted"
   },
@@ -3348,6 +3719,37 @@
     "American Heart Association 2025",
     "European Resuscitation Council 2025",
     "Resuscitation Council UK 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "tb-preventive-treatment",
+   "title": "TB preventive treatment (NTEP)",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "aliases": [
+    "TPT",
+    "latent TB",
+    "LTBI",
+    "TB infection",
+    "TBI",
+    "IPT",
+    "isoniazid preventive therapy",
+    "3HP",
+    "6H",
+    "1HP",
+    "3RH",
+    "4R",
+    "6Lfx",
+    "PMTPT",
+    "household contact TB"
+   ],
+   "summary": "Rule out active TB (symptoms, chest X-ray, NAAT if symptomatic), then give TPT to people with HIV, all household contacts of pulmonary TB (testing for infection when available but never a barrier) and tested high-risk groups, using 3HP or 6H (or 1HP, 3RH), with 6Lfx or 4R for contacts of drug-resistant TB.",
+   "sources": [
+    "NTEP, MoHFW (Central TB Division) 2021",
+    "NTEP, MoHFW (Central TB Division) 2024",
+    "NTEP, MoHFW (Central TB Division) 2024",
+    "NTEP, MoHFW (Central TB Division) 2025"
    ],
    "status": "ai_drafted"
   },
