@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "00bb0af59c93",
- "count": 211,
+ "version": "7221407509fc",
+ "count": 222,
  "subjects": [
   {
    "key": "emergency",
@@ -26,7 +26,7 @@
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 26
+   "count": 33
   },
   {
    "key": "gastroenterology",
@@ -56,7 +56,7 @@
   {
    "key": "haematology-oncology",
    "label": "Haematology and Oncology",
-   "count": 11
+   "count": 12
   },
   {
    "key": "rheumatology-dermatology",
@@ -96,14 +96,14 @@
   {
    "key": "ophthalmology-ent",
    "label": "Ophthalmology and ENT",
-   "count": 3
+   "count": 6
   }
  ],
  "bases": [
   {
    "key": "international",
    "label": "International",
-   "count": 193
+   "count": 204
   },
   {
    "key": "india",
@@ -497,12 +497,41 @@
    "status": "ai_drafted"
   },
   {
+   "id": "acute-encephalitis-international",
+   "title": "Acute encephalitis (IDSA and BIA/ABN)",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": "acute-encephalitis-syndrome",
+   "aliases": [
+    "encephalitis",
+    "HSV encephalitis",
+    "herpes simplex encephalitis",
+    "viral encephalitis",
+    "aciclovir",
+    "acyclovir",
+    "autoimmune encephalitis",
+    "anti-NMDA receptor encephalitis",
+    "ADEM",
+    "IDSA encephalitis",
+    "ABN BIA encephalitis"
+   ],
+   "summary": "Altered mental status for 24 hours or more with fever, seizures, focal signs, CSF pleocytosis or imaging change. Start IV aciclovir 10 mg/kg 8-hourly (500 mg/m2 in children 3 months to 12 years, 20 mg/kg in neonates) at once, add antibacterials if meningitis is possible, do LP and MRI promptly, and treat confirmed HSV for 14 to 21 days.",
+   "sources": [
+    "IDSA 2008",
+    "ABN / BIA 2012",
+    "ABN / BPAIIG 2012",
+    "International Encephalitis Consortium 2013"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "acute-encephalitis-syndrome",
    "title": "Acute encephalitis syndrome (AES) and Japanese encephalitis",
    "subject": "infectious-disease",
    "population": "Adults and children",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "acute-encephalitis-international",
    "aliases": [
     "AES",
     "JE",
@@ -776,6 +805,35 @@
    "status": "ai_drafted"
   },
   {
+   "id": "acute-pharyngitis",
+   "title": "Acute pharyngitis and tonsillitis (sore throat)",
+   "subject": "ophthalmology-ent",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "sore throat",
+    "tonsillitis",
+    "strep throat",
+    "GAS pharyngitis",
+    "group A streptococcus",
+    "streptococcal pharyngitis",
+    "Centor",
+    "McIsaac",
+    "FeverPAIN",
+    "quinsy",
+    "peritonsillar abscess",
+    "scarlet fever"
+   ],
+   "summary": "Most sore throats are viral and settle within a week. Use Centor or FeverPAIN to decide who to test or treat, confirm group A streptococcus by rapid test or culture where available, and treat it with penicillin V or amoxicillin for 10 days (IDSA). Refer quinsy, airway compromise or sepsis the same day.",
+   "sources": [
+    "IDSA 2012",
+    "IDSA 2025",
+    "NICE 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "poisoning-general-approach",
    "title": "Acute poisoning: general approach (adult)",
    "subject": "toxicology",
@@ -857,6 +915,32 @@
     "European Respiratory Society 2022",
     "British Thoracic Society / Intensive Care Society 2016",
     "ESICM 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-rhinosinusitis",
+   "title": "Acute rhinosinusitis (adult)",
+   "subject": "ophthalmology-ent",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "sinusitis",
+    "acute sinusitis",
+    "ABRS",
+    "acute bacterial rhinosinusitis",
+    "rhinosinusitis",
+    "double worsening",
+    "double sickening",
+    "sinus infection",
+    "periorbital cellulitis"
+   ],
+   "summary": "Most acute rhinosinusitis is viral. Diagnose bacterial rhinosinusitis when symptoms persist 10 days or more without improvement or worsen after initial improvement; offer watchful waiting or amoxicillin with or without clavulanate for 5 to 7 days, avoid imaging unless a complication is suspected, and refer orbital or intracranial red flags the same day.",
+   "sources": [
+    "AAO-HNSF 2025",
+    "IDSA 2012",
+    "NICE 2017"
    ],
    "status": "ai_drafted"
   },
@@ -1398,6 +1482,33 @@
     "AAO-HNSF 2013",
     "American Academy of Neurology 2012",
     "Lancet Neurology (Engström et al.) 2008"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "bppv-vertigo",
+   "title": "Benign paroxysmal positional vertigo (BPPV)",
+   "subject": "ophthalmology-ent",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "BPPV",
+    "positional vertigo",
+    "vertigo",
+    "dizziness",
+    "Dix-Hallpike",
+    "Epley manoeuvre",
+    "Epley maneuver",
+    "canalith repositioning",
+    "supine roll test",
+    "HINTS"
+   ],
+   "summary": "Diagnose posterior canal BPPV when the Dix-Hallpike test provokes vertigo with torsional upbeating nystagmus, and treat with the Epley manoeuvre rather than vestibular suppressants or imaging. Continuous vertigo, atypical nystagmus or any neurological sign points to a central cause: HINTS by a trained clinician and MRI, not CT.",
+   "sources": [
+    "AAO-HNSF 2017",
+    "AAO-HNSF 2017",
+    "SAEM 2023"
    ],
    "status": "ai_drafted"
   },
@@ -2423,11 +2534,11 @@
   },
   {
    "id": "enteric-fever",
-   "title": "Enteric fever (typhoid and paratyphoid)",
+   "title": "Enteric fever (typhoid and paratyphoid, India)",
    "subject": "infectious-disease",
    "population": "Adults and children",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "enteric-fever-international",
    "aliases": [
     "typhoid",
     "paratyphoid",
@@ -2446,6 +2557,36 @@
     "ICMR 2019",
     "Indian Academy of Pediatrics 2006",
     "CDC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "enteric-fever-international",
+   "title": "Enteric fever: typhoid and paratyphoid (international guidance)",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": "enteric-fever",
+   "aliases": [
+    "typhoid",
+    "paratyphoid",
+    "enteric fever",
+    "Salmonella Typhi",
+    "Salmonella Paratyphi A",
+    "XDR typhoid",
+    "MDR typhoid",
+    "returning traveller fever",
+    "typhoid perforation",
+    "TCV",
+    "Typhim Vi",
+    "Ty21a"
+   ],
+   "summary": "Take blood cultures before antibiotics and a detailed travel history. Avoid empirical fluoroquinolones. Uncomplicated: oral azithromycin. Complicated: IV ceftriaxone, or a carbapenem if acquired in Pakistan or Iraq (XDR risk). Tailor to susceptibility, give dexamethasone for severe typhoid with encephalopathy or shock, and follow public health clearance rules.",
+   "sources": [
+    "CDC 2025",
+    "CDC 2024",
+    "UKHSA 2024",
+    "WHO 2023"
    ],
    "status": "ai_drafted"
   },
@@ -2996,6 +3137,38 @@
     "WHO 2024",
     "CDC 2025",
     "CDC / ACIP 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hiv-antiretroviral-therapy",
+   "title": "HIV: starting and monitoring antiretroviral therapy (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "ART",
+    "HAART",
+    "antiretroviral therapy",
+    "PLHIV",
+    "TLD",
+    "dolutegravir",
+    "HIV treatment",
+    "advanced HIV disease",
+    "AHD",
+    "viral load",
+    "treatment failure",
+    "IRIS",
+    "co-trimoxazole prophylaxis",
+    "CPT",
+    "rapid ART"
+   ],
+   "summary": "Offer ART to everyone with confirmed HIV within 7 days of diagnosis (same day if ready) using TLD (tenofovir DF, lamivudine, dolutegravir) once daily, screen for TB and cryptococcal antigen when CD4 is low, give co-trimoxazole prophylaxis, and monitor viral load, switching only after confirmed failure.",
+   "sources": [
+    "WHO 2021",
+    "WHO 2025",
+    "US DHHS Panel on Antiretroviral Guidelines for Adults and Adolescents 2024"
    ],
    "status": "ai_drafted"
   },
@@ -4768,7 +4941,7 @@
    "subject": "infectious-disease",
    "population": "Adults",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "pulmonary-tuberculosis-international",
    "aliases": [
     "TB",
     "PTB",
@@ -4792,6 +4965,38 @@
     "NTEP, MoHFW (Central TB Division) 2025",
     "NTEP, MoHFW (Central TB Division) 2023",
     "WHO 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "pulmonary-tuberculosis-international",
+   "title": "Pulmonary tuberculosis, drug-susceptible (WHO)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": "pulmonary-tuberculosis",
+   "aliases": [
+    "TB",
+    "PTB",
+    "tuberculosis",
+    "DS-TB",
+    "HRZE",
+    "RIPE",
+    "2HRZE/4HR",
+    "HPMZ",
+    "2HPMZ/2HPM",
+    "4-month TB regimen",
+    "rifapentine moxifloxacin",
+    "Study 31",
+    "ATT",
+    "anti-tubercular treatment"
+   ],
+   "summary": "Confirm TB with a rapid molecular test that also detects rifampicin resistance, then treat drug-susceptible pulmonary TB with daily 2HRZE/4HR for 6 months, or the 4-month 2HPMZ/2HPM regimen in eligible patients aged 12 or more weighing over 40 kg, with ART within 2 weeks for people with HIV and monthly review.",
+   "sources": [
+    "WHO 2025",
+    "WHO 2025",
+    "CDC 2022",
+    "ATS / CDC / IDSA (ERS endorsed) 2016"
    ],
    "status": "ai_drafted"
   },
@@ -5031,12 +5236,43 @@
    "status": "ai_drafted"
   },
   {
+   "id": "influenza-international",
+   "title": "Seasonal influenza (WHO, IDSA and CDC)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": "influenza",
+   "aliases": [
+    "flu",
+    "influenza A",
+    "influenza B",
+    "H1N1",
+    "H3N2",
+    "oseltamivir",
+    "Tamiflu",
+    "baloxavir",
+    "Xofluza",
+    "zanamivir",
+    "peramivir",
+    "ILI",
+    "SARI",
+    "influenza prophylaxis"
+   ],
+   "summary": "Treat severe or hospitalised influenza with oseltamivir as early as possible whatever the illness duration. For non-severe illness, WHO 2024 suggests single-dose baloxavir only for high-risk patients and no antiviral for others, whereas CDC and IDSA recommend oseltamivir for all higher-risk outpatients.",
+   "sources": [
+    "WHO 2024",
+    "IDSA 2018",
+    "CDC 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "influenza",
-   "title": "Seasonal influenza including H1N1 (adult)",
+   "title": "Seasonal influenza including H1N1 (adult, India)",
    "subject": "infectious-disease",
    "population": "Adults",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "influenza-international",
    "aliases": [
     "flu",
     "swine flu",
@@ -5241,6 +5477,42 @@
    "sources": [
     "American College of Gastroenterology 2024",
     "AASLD 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "sexually-transmitted-infections",
+   "title": "Sexually transmitted infections: treatment and partner management (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "STI",
+    "STD",
+    "gonorrhoea",
+    "gonorrhea",
+    "chlamydia",
+    "syphilis",
+    "trichomonas",
+    "trichomoniasis",
+    "PID",
+    "pelvic inflammatory disease",
+    "urethral discharge",
+    "vaginal discharge",
+    "genital ulcer",
+    "syndromic management",
+    "EPT",
+    "NGU",
+    "bacterial vaginosis",
+    "LGV",
+    "chancroid"
+   ],
+   "summary": "Test and treat at the same visit: gonorrhoea with ceftriaxone 500 mg IM (1 g if 150 kg or more), chlamydia with doxycycline for 7 days, syphilis with benzathine penicillin by stage, trichomonas with metronidazole, and PID with a 14-day triple regimen, plus HIV testing and partner treatment.",
+   "sources": [
+    "CDC 2021",
+    "WHO 2024",
+    "WHO 2021"
    ],
    "status": "ai_drafted"
   },
@@ -5532,7 +5804,7 @@
    "subject": "infectious-disease",
    "population": "Adults and children",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "tb-preventive-treatment-international",
    "aliases": [
     "TPT",
     "latent TB",
@@ -5556,6 +5828,38 @@
     "NTEP, MoHFW (Central TB Division) 2024",
     "NTEP, MoHFW (Central TB Division) 2024",
     "NTEP, MoHFW (Central TB Division) 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "tb-preventive-treatment-international",
+   "title": "TB preventive treatment (WHO)",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": "tb-preventive-treatment",
+   "aliases": [
+    "TPT",
+    "LTBI",
+    "latent TB",
+    "latent tuberculosis infection",
+    "TB infection",
+    "IPT",
+    "3HP",
+    "1HP",
+    "3HR",
+    "4R",
+    "6H",
+    "6Lfx",
+    "isoniazid preventive therapy",
+    "IGRA",
+    "TST"
+   ],
+   "summary": "Rule out active TB, then offer preventive treatment to people with HIV, household contacts of pulmonary TB and other high-risk groups, using 3HP, 6H, 3HR, 1HP or 4R (CDC prefers the short rifamycin regimens), and 6 months of daily levofloxacin for contacts of MDR/RR-TB.",
+   "sources": [
+    "WHO 2024",
+    "WHO 2024",
+    "NTCA / CDC 2020"
    ],
    "status": "ai_drafted"
   },
@@ -5930,6 +6234,38 @@
     "NICE 2018",
     "NICE 2018",
     "AAP 2011"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "vitamin-b12-and-folate-deficiency",
+   "title": "Vitamin B12 and folate deficiency (adult)",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "B12 deficiency",
+    "vitamin B12",
+    "cobalamin",
+    "pernicious anaemia",
+    "autoimmune gastritis",
+    "folate deficiency",
+    "folic acid",
+    "megaloblastic anaemia",
+    "macrocytic anaemia",
+    "macrocytosis",
+    "hydroxocobalamin",
+    "subacute combined degeneration",
+    "SACD",
+    "nitrous oxide",
+    "methylmalonic acid",
+    "holotranscobalamin"
+   ],
+   "summary": "Test when a symptom and a risk factor coexist. Treat B12 deficiency with IM hydroxocobalamin 1 mg (three times weekly for 2 weeks, or alternate days if neurological, then every 2 to 3 months) or oral B12 at least 1 mg daily where suitable; never give folic acid alone until B12 deficiency is excluded or treated.",
+   "sources": [
+    "NICE 2024",
+    "British Society for Haematology 2014"
    ],
    "status": "ai_drafted"
   },
