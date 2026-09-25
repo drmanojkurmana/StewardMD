@@ -140,8 +140,16 @@ set nothing), marks the fields touched (so the scribe never overwrites them) and
   WHO numbers are used (no package code); the kit cites WHO. The same method reproduces WHO's anthro
   README examples and all 2101 z-scores of WHO's 2007 reference survey (`survey_who2007_z.csv`); a
   35-child sample of that survey is embedded in the unit test.
+- Clinical audit 2026-09-25 (AI audit applied as proposals; see `vault/handoff/2026-09-25-clinical-audit-fixes.md`):
+  LA table gained levobupivacaine (2 mg/kg, max 150 mg), lidocaine with adrenaline is 7 mg/kg max 500 mg,
+  bupivacaine with adrenaline 150 mg ceiling, ropivacaine 3 mg/kg with or without adrenaline, AAGBI lipid
+  rescue note. Data keys added: a drug or preparation may carry `ref` (shown by `laSrc()` in the tool
+  output); `data-mccd.json` has `vagueAtStart` (terms such as "fever" flagged only when they start the
+  lowest line) and `mccdCheck` also flags an arrest-type mode of dying on ANY Part I line. Notifiable list
+  now adds scrub typhus, kala-azar, KFD, Nipah (keyword "nipah" only: "niv" is non-invasive ventilation),
+  leprosy and SARI under ARI/ILI (no "sari" keyword). The points below are partly superseded by this.
 - Wave 1 authors' open points (review these first): LA doses from Williams and Walker 2014 only (BNF
-  403; no levobupivacaine; lidocaine with adrenaline 6 mg/kg); ASA class wording not checked against
+  403; no levobupivacaine; lidocaine with adrenaline 6 mg/kg; both since changed, see above); ASA class wording not checked against
   ASA text (paywall); surgical pre-op panel includes HIV/HBsAg/HCV (Indian practice); MoHFW 2014 sexual
   violence guideline PDF unreachable (kit uses statements quoted by the Supreme Court 2022 and the UNFPA
   2017 handbook); MCCD modes of dying partly from ICMR-NCDIR 2022, "fever" deliberately not a vague term;

@@ -214,6 +214,13 @@ try{
  await until(`!!document.querySelector('${R} [data-kit-f="la:strength"] option[value="1%"]')`);
  await setF('la','adr','Plain',R); await setF('la','strength','1%',R);
  ok(await until(`/200 mg/.test((document.querySelector('${R} [data-kit-out="la-dose"]')||{}).textContent||'')&&/20 mL/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)&&/70 kg/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)`),'LA dose: 200 mg ceiling, 20 mL of 1%, worked out for 70 kg');
+ // Audit 2026-09-25: lidocaine with adrenaline 7 mg/kg (70 x 7 = 490 mg, 49 mL of 1%); levobupivacaine is offered and credits its own source.
+ await setF('la','adr','With adrenaline',R); await setF('la','strength','1%',R);
+ ok(await until(`/490 mg/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)&&/49 mL/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)`),'LA dose: lidocaine with adrenaline 7 mg/kg gives 490 mg (49 mL of 1%) at 70 kg');
+ ok(await ev(`[...document.querySelectorAll('${R} [data-kit-f="la:drug"] option')].some(o=>o.value==='Levobupivacaine')`),'LA dose: levobupivacaine is in the drug list');
+ await setF('la','drug','Levobupivacaine',R); await until(`!!document.querySelector('${R} [data-kit-f="la:strength"] option[value="0.5%"]')`);
+ await setF('la','adr','Plain',R); await setF('la','strength','0.5%',R);
+ ok(await until(`/140 mg/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)&&/28 mL/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)&&/BJA Education 2020/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)`),'LA dose: levobupivacaine 2 mg/kg is 140 mg (28 mL of 0.5%) at 70 kg, citing BJA Education 2020');
  // Burns: adult anterior trunk all burnt = 13%; Parkland 4 x 70 x 13 = 3640 mL.
  await pickKit(R,'emergency'); await until(`!!document.querySelector('${R} [data-kit-f="burns:age"]')`);
  await setF('burns','age','Adult',R); await until(`!!document.querySelector('${R} [data-kit-f="burns:r_ant-trunk"]')`);
@@ -242,6 +249,8 @@ try{
  if(await ev(`!!document.querySelector('${R} [data-kit-f="mccd:c0"]')`)){
   await setF('mccd','c0','Cardiac arrest',R);
   ok(await until(`/mode of dying/.test(document.querySelector('${R} [data-kit-out="mccd"]').textContent)`),'MCCD: a mode of dying as the only cause is flagged');
+  await setF('mccd','c0','Cardiorespiratory arrest',R); await setF('mccd','c1','Acute myocardial infarction',R); await setF('mccd','i1','2 hours',R);
+  ok(await until(`/Line \\(a\\) \\(Cardiorespiratory arrest\\) is a mode of dying/.test(document.querySelector('${R} [data-kit-out="mccd"]').textContent)`),'MCCD: an arrest on line (a) is flagged even with a real cause below it');
  }
  await shot('opd-forensic-tools-390');
  // Labour Care Guide: a time point with FHR 170 shows as an alert.

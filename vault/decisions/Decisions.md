@@ -9881,3 +9881,17 @@ Headless Chrome against the real app: fresh device shows CliniX and SURGX, hides
 tiles; a flag-set device without a token shows the KardiQ X tile and tapping it opens the access gate,
 not the module (15/15; the same check run on the parent commit fails exactly the imaging and CliniX-tile
 rows). Recovery point: parent commit `ed38b5c2`.
+
+## 2026-09-25 - An AI clinical audit is applied as proposals, never as a sign-off
+The owner uploaded an AI-written "master sign-off audit" of the review PDFs (43 review-first items,
+19 protocol packs, kits, consent, translations) and asked for everything to be fixed. Decision: every
+finding was checked against the guideline it names or the file's own cited source. It was applied where
+it matched, declined where it was outdated or wrong, and anything unverifiable was left for a clinician.
+Examples of declined findings: aggressive pancreatitis fluids 5 to 10 mL/kg/h (WATERFALL, ACG 2024);
+epidural second-stage limits in the WHO Labour Care Guide table (not WHO values); a new "5 then 15
+minutes" nosebleed scheme; half-dose alteplase for PE as a recommendation; TTM 32 to 36 C for 72 h;
+KCl 20 to 30 mEq/h and the 2009 HHS glucose target; snakebite notifiable "March 2024" (it was Nov 2024).
+`review.status` stays `ai_drafted` everywhere: the audit names no clinician, and `apply-reviews.mjs`
+needs a named reviewer with a registration number. Before re-applying a later audit, read
+`vault/handoff/2026-09-25-clinical-audit-fixes.md` so declined items are not re-litigated.
+Recovery point: main at `ad26d2523` (before the audit commits).
