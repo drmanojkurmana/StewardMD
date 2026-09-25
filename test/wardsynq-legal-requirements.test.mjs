@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-legal-requirements.test.mjs - the legal requirement registry and the State/UT configuration layered on it
  * (functions/_wardsynq/legal-requirements.js, owner's legal guidance of 2026-09-17), the hospital's State/UT on its region
  * profile, item 52 of the donor criteria, and the /org/legal-requirements route. Real router, in-memory store.

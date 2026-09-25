@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-trends.test.mjs — P2.10 hospital intelligence: trends with drill-down.
  *
  * Pure: bucketing in the hospital's clock (fixed offset and a DST zone), the 30-day readmission

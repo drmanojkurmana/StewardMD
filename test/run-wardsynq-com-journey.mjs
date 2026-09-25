@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/run-wardsynq-com-journey.mjs - ONE real-browser acceptance journey through wardsynq.com.
  *
  *   BASE=https://wardsynq.com WSQ_EMAIL=... WSQ_PASSWORD=...   node test/run-wardsynq-com-journey.mjs

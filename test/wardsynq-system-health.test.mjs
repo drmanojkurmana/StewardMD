@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-system-health.test.mjs - P2.15: per-dependency health. Each probe down and timed out,
  * GET /api/queue/ward/system-health authorization, and the Admin System health card.
  *

@@ -45,7 +45,7 @@ export async function onRequest(context) {
 
   let who = null;
   try { who = await identify(request, env); } catch (e) { who = null; }
-  // identify() -> { id, guest, email }: Cf-Access (verified header) or Firebase (verified token) only; a guest
+  // identify() -> { id, guest, email }: a verified Access JWT or a verified Firebase token only; a guest
   // (ip:hash) or missing id is never entitled. The email is server-derived, never a request-body value.
   if (!who || who.guest || !who.id) return json({ error: "auth" }, 401);
   if (!(await isPro(who, env))) return json({ ok: false, pro: false, error: "not_pro" }, 402);

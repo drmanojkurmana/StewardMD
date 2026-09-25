@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-digital-twin.test.mjs — TASK 10: the fused hospital snapshot, driven for real.
  *
  * THE PROPERTY UNDER TEST IS FUSION, NOT COMPUTATION. Every number in a twin snapshot is computed by

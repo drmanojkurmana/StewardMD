@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-apgar.test.mjs - structured APGAR on the newborn record, through the REAL routes.
  *
  * Validation and the server-side total, each minute saved on its own, a correction as a new version with a

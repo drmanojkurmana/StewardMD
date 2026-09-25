@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-twin-copilot.test.mjs — TASK 10.17: MaiK Command Copilot, driven for real.
  *
  * NOT A FORK OF THE PATIENT-LEVEL MaiK PATH. This drives the SAME maik-gateway.js route()/invoke()

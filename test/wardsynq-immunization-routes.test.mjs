@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-immunization-routes.test.mjs - G6 immunizations through the REAL routes
  * (/api/queue/ward/immunization, /ward/immunization-error, /ward/immunizations) and the ward FHIR door
  * (/api/queue/ward/fhir/Immunization), with the authorisation separations proved.

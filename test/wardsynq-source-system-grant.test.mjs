@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-source-system-grant.test.mjs — TASK 7 STEP 1: the source-system impersonation
  * vulnerability, closed. A skeptical audit of fhir-inbound.js and hl7-inbound.js found that a
  * feed's claimed identity (X-Source-System header, Bundle.meta.source, or HL7 MSH-3/MSH-4) was

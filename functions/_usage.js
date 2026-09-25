@@ -3,7 +3,7 @@
  * Cloudflare KV backed (MAIK_KV, falling back to CASES_KV/GHIS_KV); the project-wide daily rollup and
  * breaker mirror use D1 when bound (_counters.js). Identity is derived SERVER-SIDE from the Firebase ID
  * token (_fbauth.js verifiedClaimsFor, memoised per request)
- * or Cf-Access email; unauthenticated callers fall back to a hashed client IP with a small
+ * or a verified Cloudflare Access JWT (_fbauth.js cfAccessEmail); unauthenticated callers fall back to a hashed client IP with a small
  * guest quota. The browser-supplied userId is NEVER trusted.
  *
  * PRIVACY: only aggregate counters are stored — request counts, token estimates, cost,
@@ -19,7 +19,7 @@ import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
 import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
 import { bump, readDay, mergeCounters, MAIK_GROUPS } from "./_counters.js";
-import { verifiedClaimsFor } from "./_fbauth.js";
+import { verifiedClaimsFor, cfAccessEmail } from "./_fbauth.js";
 
 
 export function usageKv(env) { return env.MAIK_KV || env.CASES_KV || env.GHIS_KV || env.UPDATES_KV || null; }
@@ -52,16 +52,13 @@ export function usageConfig(env) {
 export async function sha256hex(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s))); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("").slice(0, 24); }
 
 // Returns { id, guest } — id is an opaque, non-PHI key. Never the raw email/IP in the clear.
-/* TRUST NOTE (T28, 2026-09-25): this trusts a Cf-Access-Authenticated-User-Email header as-is. That is
- * only safe behind Cloudflare Access, which also sets Cf-Access-Jwt-Assertion; elsewhere any client can
- * send the header and pick whose quota and wallet it spends. /api/ai strips an UNASSERTED Cf-Access
- * email before calling this (accessSafeRequest in functions/api/ai/[[path]].js), and its authorise()
- * no longer lets any Authorization header through: a bearer must verify as a Firebase ID token.
- * The other callers (license, billing, ward, queue...) still rely on the bare header; tightening them
- * is a separate change with its own tests. */
+/* TRUST NOTE: a Cloudflare Access identity counts only when its Cf-Access-Jwt-Assertion VERIFIES
+ * (_fbauth.js cfAccessEmail). The bare Cf-Access-Authenticated-User-Email header used to be trusted
+ * here as-is, which let any client pick whose account, org membership, quota and wallet a request
+ * ran as on every route that calls this (queue, wardsynq, connect, license, billing, push...). */
 export async function identify(request, env) {
-  const email = request.headers.get("Cf-Access-Authenticated-User-Email");
-  if (email) return { id: "cfa:" + (await sha256hex(email.toLowerCase())), guest: false, email: email.toLowerCase() };
+  const email = await cfAccessEmail(request, env);
+  if (email) return { id: "cfa:" + (await sha256hex(email)), guest: false, email };
   // Verified claims (memoised per request). Key on the uid ("fb:<uid>"), never the whole object:
   // "fb:" + obj once collapsed EVERY signed-in user onto one shared "fb:[object Object]" bucket.
   const fb = await verifiedClaimsFor(request, env);

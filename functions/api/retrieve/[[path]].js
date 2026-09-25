@@ -10,12 +10,13 @@
  * client silently degrades to lexical-only — never a 5xx, never a broken answer.
  * Only KB reference text (query + chunks) is involved; no patient data.
  */
+import { cfAccessEmail } from "../../_fbauth.js";
 const EMBED_MODEL = "@cf/baai/bge-base-en-v1.5";
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
-// Same coarse gate as the AI Function (origin allowlist / Cf-Access / app token).
-function authorise(request, env) {
-  if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+// Same coarse gate as the AI Function (origin allowlist / verified Cf-Access JWT / app token).
+async function authorise(request, env) {
+  if (await cfAccessEmail(request, env)) return true;   // a VERIFIED Access JWT; the bare email header is forgeable
   const tok = request.headers.get("X-App-Token");
   if (env.GHIS_APP_TOKEN && tok === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && tok === env.AI_APP_TOKEN) return true;
@@ -25,7 +26,7 @@ function authorise(request, env) {
 
 export async function onRequest(context) {
   const { request, env } = context;
-  if (!authorise(request, env)) return json({ matches: [] });      // fail-safe, not 403 — client falls back
+  if (!(await authorise(request, env))) return json({ matches: [] });      // fail-safe, not 403 — client falls back
   if (request.method !== "POST") return json({ matches: [] });
   if (!env.AI || !env.KB_VECTORIZE) return json({ matches: [] });   // infra not provisioned yet → lexical-only
 

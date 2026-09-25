@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-claims-ops.test.mjs - rcm-claims-ops: the claim checklist, payer queries and enhancements, denial reasons,
  * receivables ageing, the desk's lists, coding candidates and the evidence pack. PURE, then through the real routes
  * (/ward/claim-state, /ward/claim-checks, /ward/preauth-event, /ward/claim-evidence, /ward/rcm-worklists, /ward/cashless-stays,

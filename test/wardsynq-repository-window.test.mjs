@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-repository-window.test.mjs - R5-3 period-scoped reports.
  *
  * Every NABH / HMIS / trend / quality report read the hospital's WHOLE history of each source type to answer a

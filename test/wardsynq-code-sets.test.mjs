@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-code-sets.test.mjs - hospital-loaded SNOMED CT, ICD-10 and LOINC codes, through the REAL routes.
  *
  * CSV parsing, POST /api/queue/ward/code-set-import (licence confirmed, chunked, re-import replaces), GET /api/queue/ward/code-sets
