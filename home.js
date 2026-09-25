@@ -4500,7 +4500,7 @@
   }
   /* ── The Live Doctor (2026-08-29) ──────────────────────────────────────────
    * A pixel physician who LIVES on the composer's top edge while MaiK is open:
-   * walks his ward round right to left, freelances stunts (hop, backflip,
+   * walks his ward round right to left, freelances stunts (hop,
    * sprint, auscultating the screen with a bpm report), and reacts when tapped
    * (startle, wave, hearts). Sub-pixel travel + real jump arcs over hand-placed
    * 12x16 frames; one rAF loop that tears itself down when his node is gone.
@@ -4580,6 +4580,15 @@
   };
   var MAIK_DOC_SC = 2.75, MAIK_DOC_W = 12 * MAIK_DOC_SC, MAIK_DOC_H = 16 * MAIK_DOC_SC;
   var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null, _mkdOnTap = null, _mkdResume = null, _mkdOnVis = null;
+  /* MaiK companion v2 (owner, 2026-09-25: "redesign him ... more professional, more lively and
+   * understanding ... I will select one from 3"). maik-companion.js draws three styles on one engine;
+   * localStorage smd_maik_doc_style picks attending | oncall | bot, and "classic" (the default until
+   * the owner chooses) keeps the Fable pixel doctor below. _mkc is the mounted companion, if any. */
+  var _mkc = null;
+  function maikDocStyle() { try { var v = localStorage.getItem("smd_maik_doc_style"); return (v === "attending" || v === "oncall" || v === "bot") ? v : "classic"; } catch (e) { return "classic"; } }
+  function maikCompanionStop() { if (_mkc) { try { _mkc.destroy(); } catch (e) {} _mkc = null; } }
+  // What MaiK is doing, for the companion only (typing, stream, error, offline, stop, rate-yes/no).
+  function maikBuddyCue(kind, data) { try { if (_mkc) _mkc.cue(kind, data); } catch (e) {} }
   function maikDocStop() {
     if (_mkdRaf) { cancelAnimationFrame(_mkdRaf); _mkdRaf = 0; }
     if (_mkdOnRz) { try { window.removeEventListener("resize", _mkdOnRz); } catch (e) {} _mkdOnRz = null; }
@@ -4600,7 +4609,7 @@
     if (/\b(dose|dosing|dosage|mg\b|drug|tablet|antibiotic|infusion|prescri)/.test(s)) return "rx";
     return "think";
   }
-  function maikDocCue(kind) { try { if (_mkdCueFn) _mkdCueFn(kind); } catch (e) {} }
+  function maikDocCue(kind) { try { if (_mkc) { _mkc.cue(kind); return; } if (_mkdCueFn) _mkdCueFn(kind); } catch (e) {} }
   /* What he says when the sheet opens: an introduction the very first time,
    * then one random rounds-thought per open. Playful, never clinical advice. */
   var MAIK_DOC_SAY = [
@@ -4626,8 +4635,9 @@
     } catch (e) {}
   }
   function maikDocMount(cmp) {
-    maikDocStop();
+    maikDocStop(); maikCompanionStop();
     var old = cmp.querySelector(".mkdoc"); if (old) old.remove();
+    Array.prototype.forEach.call(cmp.querySelectorAll(".mkc, .mkc-tab"), function (n) { n.remove(); });
     var box = document.createElement("div"); box.className = "mkdoc";
     var svg = '<svg class="mkdoc-svg" width="' + MAIK_DOC_W + '" height="' + MAIK_DOC_H +
       '" viewBox="0 0 12 16" shape-rendering="crispEdges" aria-hidden="true">';
@@ -4707,7 +4717,7 @@
       }
       var r = Math.random();
       if (r < 0.30) setSt("jump", JUMP_MS);
-      else if (r < 0.52) setSt("flip", FLIP_MS);
+      else if (r < 0.52) setSt("jump", JUMP_MS);   // owner, 2026-09-25: "only jump rather than circle" (no backflips)
       else if (r < 0.68) setSt("run", rnd(700, 1200));
       else if (r < 0.84) setSt("listen", 1800);
       else setSt("idle", rnd(900, 1500));
@@ -4866,7 +4876,7 @@
           var sp = Math.min(1, (now - D.t0) / 340);
           D.x += RUN_V * (1 - sp) * D.dir * dt;   // bleeding off speed
           rot = -D.dir * 14 * (1 - sp * 0.4);     // leaned back against the slide
-          if (sp >= 1) { sq = 0.86; if (Math.random() < 0.35) setSt("flip", FLIP_MS); else setSt("walk", 0); }
+          if (sp >= 1) { sq = 0.86; if (Math.random() < 0.35) setSt("jump", JUMP_MS); else setSt("walk", 0); }
           break;
         }
         case "jump": case "flip":
@@ -4975,6 +4985,8 @@
           '<button class="maik-side-row maik-side-new" id="maikSideNew" type="button">' + MK.plus + '<span>New conversation</span></button>' +
           '<button class="maik-side-row" id="maikSideMe" type="button" aria-controls="maikMe">' + svg("user", "smd-ico") + '<span>About me</span><span class="maik-side-meta" id="maikSideMeState"></span></button>' +
           '<div class="maik-me" id="maikMe" hidden></div>' +
+          '<button class="maik-side-row" id="maikSideBuddy" type="button" aria-controls="maikBuddyPick"><svg class="smd-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/><path d="M9 9.5h.01M15 9.5h.01"/></svg><span>MaiK buddy</span><span class="maik-side-meta" id="maikSideBuddyState"></span></button>' +
+          '<div class="maik-me" id="maikBuddyPick" hidden></div>' +
           '<div class="maik-side-srch">' + MK.search + '<input id="maikSideSearch" type="search" placeholder="Search conversations" autocomplete="off" spellcheck="false"></div>' +
           '<div class="maik-side-lbl">Your conversations</div>' +
           '<div class="maik-side-list" id="maikSideList"></div>' +
@@ -5048,7 +5060,16 @@
       ".maik-side-priv{display:flex;align-items:center;gap:7px;padding:10px 16px;font:600 11.5px 'Inter',system-ui;color:var(--mk-teal,#0e6e63);border-top:1px solid var(--mk-line,#eef2f7)}" +
       ".maik-side-acct{display:flex;align-items:center;gap:10px;padding:10px 16px 15px}" +
       ".maik-side-meta{margin-left:auto;font:700 11px 'Inter',system-ui;color:var(--mk-teal,#0e6e63)}" +
-      ".maik-side.me-open .maik-side-srch,.maik-side.me-open .maik-side-lbl,.maik-side.me-open .maik-side-list,.maik-side.me-open #maikSideMe,.maik-side.me-open #maikSideNew{display:none}" +
+      ".maik-side.me-open .maik-side-srch,.maik-side.me-open .maik-side-lbl,.maik-side.me-open .maik-side-list,.maik-side.me-open #maikSideMe,.maik-side.me-open #maikSideNew,.maik-side.me-open #maikSideBuddy{display:none}" +
+      ".maik-side.bd-open .maik-side-srch,.maik-side.bd-open .maik-side-lbl,.maik-side.bd-open .maik-side-list,.maik-side.bd-open #maikSideMe,.maik-side.bd-open #maikSideNew,.maik-side.bd-open #maikSideBuddy{display:none}" +
+      ".maik-bd-opt{display:flex;align-items:center;gap:12px;width:100%;min-height:66px;margin:6px 0;padding:8px 12px;border:1.5px solid var(--mk-bd);border-radius:14px;background:transparent;text-align:left;cursor:pointer;color:var(--mk-ink,#0f172a);font:inherit}" +
+      ".maik-bd-opt.on{border-color:var(--mk-teal,#0e6e63);background:rgba(14,110,99,.07)}" +
+      ".maik-bd-th{flex:0 0 46px;height:54px;display:flex;align-items:flex-end;justify-content:center;overflow:visible}.maik-bd-th svg{display:block;overflow:visible}" +
+      ".maik-bd-tx{display:flex;flex-direction:column;gap:2px;min-width:0}.maik-bd-tx b{font:700 14px 'Inter',system-ui}.maik-bd-tx span{font:500 12px/1.35 'Inter',system-ui;color:var(--mk-mut,#5a7184)}" +
+      ".maik-bd-ck{margin-left:auto;flex:0 0 20px;height:20px;border-radius:50%;border:1.5px solid var(--mk-bd);display:flex;align-items:center;justify-content:center;box-sizing:border-box}" +
+      ".maik-bd-opt.on .maik-bd-ck{background:var(--mk-teal,#0e6e63);border-color:var(--mk-teal,#0e6e63)}" +
+      ".maik-bd-opt.on .maik-bd-ck::after{content:'';width:8px;height:4px;border:2px solid #fff;border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg)}" +
+      "body.dark .maik-bd-opt,body.v3-dark .maik-bd-opt{color:var(--mk-ink,#e6edf3)}" +
       ".maik-me{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px 16px 16px}" +
       ".maik-me-hd{display:flex;align-items:center;gap:6px;margin:0 0 4px -8px}" +
       ".maik-me-hd b{font:800 16px 'Inter',system-ui;color:var(--mk-ink,#0f172a)}" +
@@ -5700,7 +5721,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * each other over opacity. */
     // Stetho Buddy is mounted here but CLOCKED at module scope (maikBuddyStart): a per-sheet timer
     // died whenever a second MaiK sheet was created, leaving him frozen mid-step.
-    function maikBuddyMount() {
+    function maikBuddyMount(greetNow) {
       try {
         var cmp = sheet && sheet.querySelector(".maik-cmp"); if (!cmp) return;
         var old = cmp.querySelector(".mkw"); if (old) old.remove();
@@ -5708,6 +5729,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // clinician asked for reduced motion (he only travels; standing still is Buddy's job).
         var reduce = false;
         try { reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        // A v2 companion handles reduced motion itself (he stays put; expressions still change).
+        var style = maikDocStyle();
+        if (maikLiveDocOn() && style !== "classic" && window.MaiKCompanion) { maikCompanionMount(cmp, style, reduce, greetNow); return; }
         if (maikLiveDocOn() && !reduce) { maikDocMount(cmp); return; }
         var box = document.createElement("div"); box.className = "mkw";
         // +15% over the original 2x: vector rects, so a fractional scale stays sharp.
@@ -5716,7 +5740,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         maikBuddyStart();
       } catch (e) {}
     }
+    function maikCompanionMount(cmp, style, reduce, greetNow) {
+      maikDocStop(); maikCompanionStop();
+      Array.prototype.forEach.call(cmp.querySelectorAll(".mkdoc, .mkdoc-tab, .mkw, .mkc, .mkc-tab"), function (n) { n.remove(); });
+      var _sms = 0; try { _sms = +localStorage.getItem("smd_maik_doc_sleepms") || 0; } catch (e) {}
+      var _empty = !(body && body.querySelector(".maik-b"));
+      _mkc = window.MaiKCompanion.mount(cmp, {
+        style: style, reduceMotion: reduce, sleepMs: _sms,
+        greet: !!greetNow || _empty,   // the greeting bubble never covers an answer's actions (audit T06)
+        sheet: sheet, scroller: body,
+        onLongPress: function () { try { maikOpenSide(); setTimeout(function () { maikBuddyShow(true); }, 60); } catch (e) {} }
+      });
+    }
     function maikBuddyUnmount() {
+      maikCompanionStop();
       try { var old = sheet && sheet.querySelector(".mkw"); if (old) old.remove(); } catch (e) {}
       try { var od = sheet && sheet.querySelector(".mkdoc"); if (od) od.remove(); } catch (e) {}
       maikBuddyStop(); maikDocStop();
@@ -5726,6 +5763,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikBuddyBusy(on) {
       try { var b = sheet && sheet.querySelector(".mkw, .mkdoc"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
       try { if (on && _mkdResume) _mkdResume(); } catch (e) {}   // a parked, sleeping doctor wakes for work
+      try { if (_mkc) _mkc.busy(!!on); } catch (e) {}
     }
     function maikSetSendMode(busy) {
       var was = _maikBusy;
@@ -6597,7 +6635,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
         think.appendChild(onBtn); scroll(); return;
       }
-      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; return; }
+      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; maikBuddyCue("error"); return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
@@ -6805,7 +6843,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // no-op); the on-device engine is cancelled by maikStopNow itself.
       _maikStop = function () {
         if (_maikDone) return;
-        _maikStopped = true;
+        _maikStopped = true; maikBuddyCue("stop");
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _fsResume();
         try {
           var h = _live(), s = h.querySelector(".maik-streaming");
@@ -7016,7 +7054,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var onDelta = function (acc) {
             if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
             _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
-            if (!_perfTTFT) { _perfTTFT = maikNow(); try { maikHaptic("start"); } catch (e) {} }   // first chunk: the answer is coming
+            if (!_perfTTFT) { _perfTTFT = maikNow(); try { maikHaptic("start"); } catch (e) {} maikBuddyCue("stream"); }   // first chunk: the answer is coming
             // Paint at most every 50 ms, always the latest text (audit T47): every chunk used to re-render
             // the whole answer's markdown. The first chunk paints at once. A pending paint never runs after
             // Stop or once the final answer is being rendered.
@@ -7174,6 +7212,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b"; b.textContent = label; b.setAttribute("aria-label", label + ": was this answer helpful?");
                 b.addEventListener("click", function () {
                   try { if (window.SMD_track) SMD_track(kind === "up" ? "maik_feedback_up" : "maik_feedback_down"); } catch (e) {}
+                  maikBuddyCue(kind === "up" ? "rate-yes" : "rate-no");
                   try { if (up.parentNode) up.parentNode.removeChild(up); } catch (e) {}
                   try { if (dn.parentNode) dn.parentNode.removeChild(dn); } catch (e) {}
                   if (kind === "up") { _postFeedback("up", meta); q.textContent = "Thanks, noted."; return; }
@@ -7266,7 +7305,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               // Answer from the on-device Knowledge Base instead, labelled as the offline answer.
               if (r && r.error && _pvKB) { finishKB(_pvKB, pkg, "preview"); return; }   // the KB preview already on screen stays as the answer
               if (r && r.error && !active && window.MaiKKB && /timeout|fetch|network|load failed|offline|internet|connection/i.test(String(r.error))) {
-                try { var _kbN = window.MaiKKB.compose(question, pkg, {}); if (_kbN && _kbN.text) { finishKB(_kbN, pkg, "offline"); return; } } catch (e) {}
+                try { var _kbN = window.MaiKKB.compose(question, pkg, {}); if (_kbN && _kbN.text) { maikBuddyCue("offline"); finishKB(_kbN, pkg, "offline"); return; } } catch (e) {}
               }
               var _h = _live();
               maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
@@ -7422,7 +7461,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             return _gemini();
           });
         })
-        .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now. Clinical reasoning, calculators, and reference tools remain available.</div>'; } })
+        .catch(function (e) { if (!_maikDone) { _clearStages(); maikBuddyCue("error"); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now. Clinical reasoning, calculators, and reference tools remain available.</div>'; } })
         .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false); });
     }
     // The two doors, as one card in the thread. Both are data-attribute buttons so they survive a
@@ -7472,7 +7511,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _sentThumb = "";
       try { if (window.__MAIK_IMAGES && window.__MAIK_IMAGES.attached().length) _sentThumb = window.__MAIK_IMAGES.thumb() || ""; } catch (e) {}
       _maikHist.push({ q: q });
-      try { maikDocCue(maikDocClassify(q)); } catch (e) {}   // the doctor acts out the question
+      try { if (_mkc) _mkc.cue("send", q); else maikDocCue(maikDocClassify(q)); } catch (e) {}   // the doctor acts out the question (on-device keywords; nothing leaves the phone)
       bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
       // Drug named in the question (drug-link.js, flag smd_druglink / smd_druglink_ask, default ON):
@@ -7559,7 +7598,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; }, companion: function () { return _mkc ? _mkc.state() : null; }, buddySet: function (v) { maikBuddySet(v); } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); } else { emptyState(); }
     /* A REOPENED CONVERSATION (owner, 2026-09-24): a saved thread comes back as HTML, which carries
@@ -7731,7 +7770,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).join("") : ('<div class="maik-side-empty">' + (q ? "No matching conversations." : "No saved conversations yet. Ask MaiK anything to start.") + '</div>');
       if (e.acct) { var em = maikAcctLabel(); e.acct.innerHTML = em ? ('<div class="maik-side-av">' + maikEscH(em.slice(0, 2).toUpperCase()) + '</div><div class="maik-side-em"><b>' + maikEscH(em) + '</b><span>Signed in &middot; history on this device</span></div>') : '<div class="maik-side-av">?</div><div class="maik-side-em"><b>Guest</b><span>History saved on this device</span></div>'; }
     }
-    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; try { maikMeShow(false); } catch (e2) {} maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
+    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; try { maikMeShow(false); maikBuddyShow(false); } catch (e2) {} maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
     function maikCloseSide() { var e = maikSideEls(); if (!e.wrap) return; e.wrap.classList.remove("open"); setTimeout(function () { try { e.wrap.hidden = true; } catch (x) {} }, 220); }
     function maikOpenConv(id) {
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
@@ -7768,6 +7807,53 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         '<div class="maik-me-acts"><button type="button" class="maik-me-save" id="maikMeSave">Save</button><button type="button" class="maik-me-clear" id="maikMeClear">Clear</button></div>';
     }
     var _sideMe = sheet.querySelector("#maikSideMe"); if (_sideMe) _sideMe.addEventListener("click", function () { maikMeShow(true); });
+    /* ---- MaiK buddy chooser. Classic stays the default until the owner picks one of the three. ---- */
+    var MAIK_BD_SHORT = { attending: "Attending", oncall: "On-Call", bot: "Bot", classic: "Classic", off: "Standing" };
+    function maikBuddyChoice() { return maikLiveDocOn() ? maikDocStyle() : "off"; }
+    function maikBuddyThumb(v) {
+      if (v === "classic") return '<svg width="33" height="44" viewBox="0 0 12 16" shape-rendering="crispEdges" aria-hidden="true">' + maikPixG(MAIK_DOC_F[0], "", MAIK_DOC_PAL) + '</svg>';
+      if (v === "off") return maikPixSVG([MAIK_BUDDY[0]], 2);
+      return (window.MaiKCompanion && MaiKCompanion.thumb) ? MaiKCompanion.thumb(v) : "";
+    }
+    function maikBuddyShow(on) {
+      var side = sheet.querySelector("#maikSide"), el = sheet.querySelector("#maikBuddyPick"); if (!side || !el) return;
+      side.classList.toggle("bd-open", !!on); el.hidden = !on;
+      if (!on) { maikBuddyState(); return; }
+      var cur = maikBuddyChoice(), C = window.MaiKCompanion;
+      var opts = [
+        ["attending", C ? C.LABEL.attending : "Dr. MaiK, Attending", C ? C.BLURB.attending : ""],
+        ["oncall", C ? C.LABEL.oncall : "Dr. MaiK, On-Call", C ? C.BLURB.oncall : ""],
+        ["bot", C ? C.LABEL.bot : "MaiK Bot", C ? C.BLURB.bot : ""],
+        ["classic", "Classic pixel doctor (default)", "The original pixel doctor: walks, jumps and waves."],
+        ["off", "Standing buddy", "A quiet Stetho Buddy who stays in one place."]
+      ].filter(function (o) { return C || o[0] === "classic" || o[0] === "off"; });
+      el.innerHTML = '<div class="maik-me-hd"><button type="button" class="maik-me-back" id="maikBdBack" aria-label="Back to conversations">&#8249;</button><b>MaiK buddy</b></div>' +
+        '<p class="maik-me-help">Choose who keeps you company in MaiK. Tap him any time; press and hold him to come back here.</p>' +
+        '<div role="radiogroup" aria-label="Choose your MaiK buddy">' + opts.map(function (o) {
+          var sel = o[0] === cur;
+          return '<button type="button" class="maik-bd-opt' + (sel ? " on" : "") + '" role="radio" aria-checked="' + sel + '" data-bd="' + o[0] + '">' +
+            '<span class="maik-bd-th">' + maikBuddyThumb(o[0]) + '</span><span class="maik-bd-tx"><b>' + maikEscH(o[1]) + '</b><span>' + maikEscH(o[2]) + '</span></span><span class="maik-bd-ck" aria-hidden="true"></span></button>';
+        }).join("") + '</div>';
+    }
+    function maikBuddyState() { var s = sheet.querySelector("#maikSideBuddyState"); if (s) s.textContent = MAIK_BD_SHORT[maikBuddyChoice()] || ""; }
+    function maikBuddySet(v) {
+      try {
+        if (v === "off") localStorage.setItem("smd_maik_live_doc", "0");
+        else { localStorage.setItem("smd_maik_live_doc", "1"); localStorage.setItem("smd_maik_doc_style", v); localStorage.setItem("smd_maik_doc_off", "0"); }
+      } catch (e) {}
+      try { maikBuddyUnmount(); maikBuddyMount(true); } catch (e) {}
+      maikBuddyState();
+    }
+    var _sideBd = sheet.querySelector("#maikSideBuddy"); if (_sideBd) _sideBd.addEventListener("click", function () { maikBuddyShow(true); });
+    var _bdEl = sheet.querySelector("#maikBuddyPick");
+    if (_bdEl) _bdEl.addEventListener("click", function (ev) {
+      var t = ev.target && ev.target.closest ? ev.target : null; if (!t) return;
+      if (t.closest("#maikBdBack")) { maikBuddyShow(false); return; }
+      var o = t.closest(".maik-bd-opt"); if (!o) return;
+      maikBuddySet(o.getAttribute("data-bd"));
+      maikBuddyShow(false); maikCloseSide();
+    });
+    maikBuddyState();
     var _meEl = sheet.querySelector("#maikMe");
     if (_meEl) _meEl.addEventListener("input", function () { var er = _meEl.querySelector("#maikMeErr"); if (er) er.textContent = ""; });
     if (_meEl) _meEl.addEventListener("click", function (ev) {
@@ -8233,7 +8319,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     }
     (function () {
       var off = sheet.querySelector("#maikOffline");
-      function sync() { try { if (off && off.isConnected) off.hidden = navigator.onLine !== false; } catch (e) {} }
+      function sync() { try { if (off && off.isConnected) { var was = off.hidden; off.hidden = navigator.onLine !== false; if (was && !off.hidden) maikBuddyCue("offline"); } } catch (e) {} }
       sync();
       try { window.addEventListener("online", sync); window.addEventListener("offline", sync); } catch (e) {}
     })();
@@ -8553,7 +8639,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         d.appendChild(ob); scroll(); extractBtn.classList.remove("show");
       }).catch(function () { extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
     });
-    qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); });
+    qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); maikBuddyCue("typing"); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
     if (prefill && typeof prefill === "string") { try { qEl.value = prefill; autosizeQ(); } catch (e) {} }
     setTimeout(function () { try { qEl.focus({ preventScroll: true }); } catch (e) {} }, 300);
