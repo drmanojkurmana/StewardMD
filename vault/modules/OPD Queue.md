@@ -84,3 +84,17 @@ node/action parity for admin, doctor, nurse, cashier and pharmacy, view switchin
 filter/focus retention, 320-1440px, dark/reduced-motion and fallback. The existing
 `test/run-opd-clinic-billing-ui.mjs` exercises the real mocked router through clinic registration,
 vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both browser suites.
+
+## Telehealth: video visits (2026-09-25, draft PR, branch worktree-agent-ab0e68a15cab7320e)
+Off by default. A WardSynQ hospital turns it on by saving `org.wardsynq.telehealth.baseUrl` (https,
+Jitsi-compatible) through `GET/POST /api/queue/org/telehealth-settings` (staff.admin, reason, audited,
+read back; `/org/update` refuses `wardsynq.telehealth`). `functions/_telehealth.js` holds the pure rules:
+`telehealthSettings(org) -> {on, baseUrl, publicServer}` (publicServer for meet.jit.si / 8x8.vc so the
+screen warns), room `wsq-` + 32 hex minted on the ticket (`teleRoom`, never in the staff view), consent
+`{givenBy, agreed:true}` required. Routes: `/tele/enable` (consent + `tele_consent` audit, one commit),
+`/tele/start` (to in_consultation, `tele_start` audit, returns room URL), `/tele/send-link` (the ticket's
+own signed token at `/tele?t=`, no PHI), patient `GET /tele/wait` + `POST /tele/room` (room only while
+in_consultation; the link dies with the visit via tokenVer). Appointments carry `teleconsult` +
+`teleConsent`; arrival passes the consent to the queue ticket; the record gets a `teleconsult` consent
+(care purpose) and `Encounter.virtual`. Day close counts video visits. Tests: `test/telehealth*.test.mjs`,
+`test/run-tele-wait-ui.mjs`. Open owner decisions: which video server; native clinics have no settings screen.

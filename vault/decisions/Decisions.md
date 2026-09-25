@@ -9209,3 +9209,12 @@ takes the password once per app session and, while unlocked, backs up on change 
 floor; closing the app re-locks it. The backup holds only what exists nowhere else (drafts, queue,
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
+
+## 2026-09-25: Video visits are off by default, the room name is the lock, the patient gets it only in consultation
+Jitsi rooms are open to anyone with the name, so the name is 128 random bits (`wsq-` + hex), minted per visit,
+never built from patient data, and never sent to staff lists or in the SMS. The patient's link is the ticket's
+own signed token on stewardmd.in (`/tele?t=`), which hands out the room only while the visit is in consultation
+and dies when the visit completes or is cancelled. A public server (meet.jit.si) is allowed but the settings
+screen says the video then passes through a server the hospital does not run. Consent (who agreed, who recorded
+it) is required and audited in the same commit. Which server to run, and whether native clinics get a settings
+screen, are owner decisions still open.
