@@ -66,7 +66,7 @@ html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){color:va
 /* Compact app navigation: menu + logo on the first row, caption + actions on the second. The model
    chip moved to the composer (2026-09-20): its 150px header slot truncated every label. */
 html body #maikSheet.maik-polished .maik-hd{padding:8px 16px 4px;padding-top:max(8px,env(safe-area-inset-top))}
-html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px 1fr;gap:4px 8px}
+html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(0,1fr);gap:4px 8px}
 html body #maikSheet.maik-polished .maik-logo-wrap{grid-column:2;grid-row:1;padding:0}
 html body #maikSheet.maik-polished #maikMenu{grid-column:1;grid-row:1}
 html body #maikSheet.maik-polished .maik-nav-actions{grid-column:1/-1;display:flex;align-items:center;gap:4px;min-width:0}
@@ -75,7 +75,7 @@ html body #maikSheet.maik-polished .maik-hd-btn{flex:0 0 44px}
 html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send){touch-action:manipulation;transition:background .15s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
 html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send):active{transform:scale(.97);background:var(--mk-tsoft)!important}
 html body #maikSheet.maik-polished .maik-body{-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-@media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px 1fr;column-gap:6px}html body #maikSheet.maik-polished .maik-nav-caption{font-size:11px}}
+@media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(0,1fr);column-gap:6px}html body #maikSheet.maik-polished .maik-nav-caption{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send){transition:none;transform:none}}
 
 html body #maikSheet.maik-polished .maik-ta{resize:none;scrollbar-width:none;background:transparent;border:0;box-shadow:none}

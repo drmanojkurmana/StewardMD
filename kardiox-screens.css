@@ -52,7 +52,7 @@
 #kardioxRoot .kx-cta-go .material-symbols-rounded { font-size: 22px; }
 
 /* 2×2 quick-actions grid */
-#kardioxRoot .kx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#kardioxRoot .kx-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-top: 12px; }
 #kardioxRoot .kx-tile {
   display: flex; flex-direction: column; align-items: flex-start; text-align: left;
   min-height: 44px; padding: 14px; cursor: pointer;
@@ -158,7 +158,7 @@
 #kardioxRoot .kx-drop-sub { font-size: 12px; font-weight: 500; color: var(--kx-text-2); max-width: 24ch; }
 
 /* 2x2 source cards */
-#kardioxRoot .kx-src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#kardioxRoot .kx-src-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-top: 12px; }
 #kardioxRoot .kx-src-card {
   display: flex; flex-direction: column; align-items: flex-start; gap: 0;
   min-height: 44px; padding: 16px 14px; text-align: left; cursor: pointer;
@@ -533,7 +533,7 @@
 #kardioxRoot .kx-strip-svg { display: block; width: 100%; height: 76px; }
 #kardioxRoot .kx-strip-label { text-align: center; font-size: 9.5px; font-weight: 600; letter-spacing: .04em; color: color-mix(in srgb, var(--kx-cardiac) 55%, var(--kx-muted)); }
 
-#kardioxRoot .kx-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+#kardioxRoot .kx-metrics { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr); gap: 8px; }
 #kardioxRoot .kx-metric { padding: 11px; border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl); background: var(--kx-card); }
 #kardioxRoot .kx-metric-k { font: 700 9px var(--kx-sans); text-transform: uppercase; letter-spacing: .05em; color: var(--kx-text-2); }
 #kardioxRoot .kx-metric-v { font-size: 20px; font-weight: 700; line-height: 1.2; margin: 1px 0; color: var(--kx-text); }
@@ -820,7 +820,7 @@
 
 /* Two side-by-side ECG panels */
 #kardioxRoot .kx-cmp-panels {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px;
 }
 #kardioxRoot .kx-cmp-plabel {
   margin-bottom: 6px; font-size: 10.5px; font-weight: 700;
@@ -858,7 +858,7 @@
   overflow: hidden; background: var(--kx-card);
 }
 #kardioxRoot .kx-cmp-row {
-  display: grid; grid-template-columns: 1fr auto auto auto; gap: 8px;
+  display: grid; grid-template-columns: minmax(0,1fr) auto auto auto; gap: 8px;
   align-items: center; padding: 11px 14px; font-size: 13px;
   border-bottom: 1px solid var(--kx-hairline);
 }
@@ -1564,7 +1564,7 @@
   color: var(--kx-text-2); margin: 18px 2px 9px;
 }
 #kardioxRoot .kx-fc-grades {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px;
+  display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 7px;
 }
 #kardioxRoot .kx-fc-grade {
   min-height: 48px; text-align: center; padding: 8px 4px; border-radius: 11px; cursor: pointer;
@@ -1673,7 +1673,7 @@
 #kardioxRoot .kx-week-l.is-off { color: var(--kx-muted); }
 
 /* Achievements grid */
-#kardioxRoot .kx-ach-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; }
+#kardioxRoot .kx-ach-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr); gap: 9px; }
 #kardioxRoot .kx-ach {
   text-align: center; padding: 13px 6px; border: 1px solid var(--kx-hairline);
   border-radius: 13px; background: var(--kx-card);

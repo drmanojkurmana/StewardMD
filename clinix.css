@@ -131,7 +131,7 @@
 
 /* ── systems grid ─────────────────────────────────────────────────────────── */
 
-#clinixRoot .cx-sys-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#clinixRoot .cx-sys-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
 #clinixRoot .cx-sys {
   display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
   padding: 16px 14px; background: var(--cx-surface);
@@ -865,10 +865,10 @@ html.cx-lock .mc-overlay { z-index: 1300; }
 }
 
 #clinixRoot .cx-teach-sensory {
-  margin: 14px 0; display: grid; grid-template-columns: 1fr; gap: 10px;
+  margin: 14px 0; display: grid; grid-template-columns: minmax(0,1fr); gap: 10px;
 }
 @media (min-width: 600px) {
-  #clinixRoot .cx-teach-sensory { grid-template-columns: 1fr 1fr; }
+  #clinixRoot .cx-teach-sensory { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
 }
 #clinixRoot .cx-sensory-box {
   padding: 12px 14px; border-radius: var(--cx-r); border: 1px solid var(--cx-line);

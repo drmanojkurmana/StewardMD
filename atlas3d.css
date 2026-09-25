@@ -99,7 +99,7 @@
 .a3d-canon b { color: #fff; }
 .a3d-links { display: flex; flex-direction: column; gap: 8px; }
 .a3d-link {
-  display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 10px; width: 100%; min-height: 48px;
+  display: grid; grid-template-columns: 44px minmax(0,1fr) auto; align-items: center; gap: 10px; width: 100%; min-height: 48px;
   padding: 8px 12px; border-radius: 12px; border: 1px solid #3a3a3a; background: #333; color: #f2f2f2; text-align: left; cursor: pointer; font-size: 14px;
 }
 .a3d-link b { display: inline-block; padding: 3px 0; border-radius: 6px; background: #43d9c6; color: #062; text-align: center; font-size: 12px; font-weight: 700; }

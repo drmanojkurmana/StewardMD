@@ -111,7 +111,7 @@
 #thorexRoot .tx-drop-sub { font-size: 12px; font-weight: 500; color: var(--tx-text-2); max-width: 26ch; }
 
 /* 2x2 source cards: camera / library / files / PDF */
-#thorexRoot .tx-src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#thorexRoot .tx-src-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-top: 12px; }
 #thorexRoot .tx-src-card {
   display: flex; flex-direction: column; align-items: flex-start; gap: 0;
   min-height: 44px; padding: 16px 14px; text-align: left; cursor: pointer;
@@ -521,7 +521,7 @@
    ranked differential + AI narrative, inside the same .tx-report-wrap toggle shell as the radiology
    report above. */
 #thorexRoot .tx-corr-form { margin-top: 10px; padding: 16px; border: 1px solid var(--tx-hairline); border-radius: var(--tx-r); background: var(--tx-card); animation: txRise .28s var(--tx-ease) both; }
-#thorexRoot .tx-corr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+#thorexRoot .tx-corr-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
 #thorexRoot .tx-corr-field { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; font-weight: 600; color: var(--tx-text-2); }
 #thorexRoot .tx-corr-field input, #thorexRoot .tx-corr-field textarea {
   font: 600 14px var(--tx-mono); color: var(--tx-text); background: var(--tx-surf-2);

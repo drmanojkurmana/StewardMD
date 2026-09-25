@@ -240,7 +240,7 @@ body:has(#wsqBugFab) #smdDischarge .d-actions { padding-right: 170px; }
   #smdDischarge .d-shell { display: none !important; }
   #smdDischarge .d-print { display: block !important; font: 400 11pt/1.5 Georgia, "Times New Roman", serif; color: #000; }
   #smdDischarge .d-print h1 { font: 700 17pt var(--d-sans); margin: 0 0 3mm; padding-bottom: 2mm; border-bottom: 2px solid #000; letter-spacing: -.01em; }
-  #smdDischarge .d-print .p-head { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5mm 8mm; margin: 0 0 5mm; padding-bottom: 3mm; border-bottom: 1px solid #999; }
+  #smdDischarge .d-print .p-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 1.5mm 8mm; margin: 0 0 5mm; padding-bottom: 3mm; border-bottom: 1px solid #999; }
   #smdDischarge .d-print .p-f { display: flex; gap: 2mm; align-items: baseline; }
   #smdDischarge .d-print .p-f span { font: 700 8.5pt var(--d-sans); text-transform: uppercase; letter-spacing: .06em; color: #333; min-width: 22mm; }
   #smdDischarge .d-print .p-f b { font: 600 10.5pt var(--d-sans); }

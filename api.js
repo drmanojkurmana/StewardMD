@@ -1123,7 +1123,7 @@
       ".db-cmono{border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:10px;margin-bottom:9px;background:var(--paper,#f7f7f5)}",
       ".db-cmono-h{font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);margin-bottom:7px}",
       ".db-qf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:4px 0 11px}",
-      "@media(min-width:560px){.db-qf{grid-template-columns:repeat(4,1fr)}}",
+      "@media(min-width:560px){.db-qf{grid-template-columns:repeat(4,minmax(0,1fr))}}",
       ".db-qf>div{background:var(--paper,#f7f7f5);border:1px solid var(--line,#e5e5e0);border-radius:9px;padding:7px 9px}",
       ".db-qf-k{font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888)}",
       ".db-qf-v{font:700 12px var(--sans,system-ui);color:var(--ink,#1a1a1a);margin-top:2px;line-height:1.35}",

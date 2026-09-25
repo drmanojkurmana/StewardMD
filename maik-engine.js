@@ -878,7 +878,7 @@
         '<span style="display:block;font:500 11.5px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + esc(G[code].blurb) + '</span></div>';
     }
     return '<div style="font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin:0 0 8px 2px">Every model here is a MaiK. The grade says how it was trained: MBBS, MD and DM are doctors, PhD is a scholar.</div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">' +
+      '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;margin-bottom:10px">' +
       rung("MBBS", "MAiK Lite") + rung("MD", "Medical specialists") + rung("DM", "MaiK Cloud") + rung("PhD", "General models") + '</div>';
   }
 
