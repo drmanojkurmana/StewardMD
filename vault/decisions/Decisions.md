@@ -9831,3 +9831,20 @@ composer's tool row was unbalanced and shifted when typing.
 **Trade-off.** The Close pill is deliberately the loudest control in the header. At 320px the model
 chip truncates ("MaiK C...") and drops its caret, as it truncated before. Status: PR maik-ui-close-bg,
 browser-verified in headless Chrome, not yet on a device.
+
+## 2026-09-26 - MaiK Cloud: the Knowledge Base is MaiK's private notes, never "the passage you sent"
+
+**Decision.** The retrieved Knowledge Base text reaches the model as "YOUR REFERENCE NOTES (private;
+the clinician cannot see them)", not "RETRIEVED STEWARDMD KNOWLEDGE (PRIMARY SOURCE)". KNOWLEDGE_SYS,
+RAG_SYS, TUTOR_SYS, ABSTAIN_RULE and the CITE-OR-ABSTAIN suffix say: prefer the notes where they fit,
+silently set aside the ones that do not, never mention them, and state any abstention about the
+medicine. A server post-filter (`functions/_maik_metatalk.js`) removes remaining sentences about the
+material on every /explain exit (whole answer, SSE, live stream, cache hit). Empty engine/patient/notes
+headers are no longer sent on knowledge questions.
+**Why.** Owner, 2026-09-26: "wont the user think we are using rag or sending rag? why is agent tell the
+passage yu sent is irrelavant?" A lexical mis-route ("RA factor" name-matched Factor XII deficiency)
+was narrated to the doctor as "the provided StewardMD knowledge focuses on ...".
+**Trade-off.** The filter is precision-first: an ambiguous phrase ("the information you provided")
+is kept, so a rare slip can still get through. The mis-route itself is unchanged (a safe relevance gate
+needs a scored check, see Roadmap "MaiK Cloud: relevance gate and input cost"). Live streaming now releases whole lines, not tokens.
+Status: PR maik-no-passage-talk; unit + handler tests, not model-evaluated on live Gemini.
