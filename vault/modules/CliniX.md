@@ -79,6 +79,12 @@ stony dullness". That indirection is what makes the fourth disease cheap.
   replaced WHOLESALE with a teaching refusal, client side, before it can render. Tested against 10
   real dose shapes and 12 legitimate lesson strings (saturation targets, FEV1 bands, PaCO2
   thresholds, pack-years, Harrison page numbers) that must NOT trip it. Mirrors SknX Phase 2.
+- **Every body diagram is in the EXAMINER'S view, and both chest sweeps start on the patient's
+  RIGHT.** Patient's right renders on the VIEWER'S left (the radiograph convention).
+  `test/clinix-diagrams.test.mjs` asserts it in both directions off the `side` field now carried by
+  `ZONES`, `AUSC` and `ABD_REGIONS`, cross-checks `side` against the side named in the label, and
+  checks the precordial areas and the liver/spleen geometry. Percussion and auscultation are both
+  numbered starting on the patient's right and alternating across at matched levels.
 
 ## Why this is NOT built like the KardiQ Learn atlas
 Measured, not stylistic. `kardiox-content-pack.js` is 1.9 MB of JS parsed on every page load for
@@ -118,6 +124,21 @@ catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared
   `CHROME=/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
 - The CDP helper `ev()` wraps its argument in `return (...)`, so a multi-statement snippet must be
   written as an IIFE expression.
+- **A mirrored anatomical diagram reads as correct.** `percussionMap`, `liverPalp` and `spleenPalp`
+  were drawn in the PATIENT's frame while `auscultationMap`, `abdRegions` and `precordiumMap` were
+  in the examiner's, so one file taught both conventions at once and three diagrams sent a student
+  to the wrong side of the bed. Nothing failed: a mirrored diagram is internally consistent and only
+  becomes wrong once you say the sides out loud. It was found by LOOKING at a rendered screenshot,
+  not by any assertion. If you add a body diagram, give it side data and extend the orientation
+  test; if it has no side data, render it and look at it.
+- Percussion used to number from the patient's LEFT and auscultation from the patient's RIGHT, which
+  taught two different sweeps over the same chest. Both start on the RIGHT now, which is where the
+  examiner stands.
+- The comparative connector in `percussionMap`/`auscultationMap` offsets 17px from each circle. That
+  offset must follow the direction of the pair, or a right-to-left pair draws the line back out
+  across both circles instead of between them.
+- `DERMATOMES` entries contain em-dashes, which the app-facing text rule forbids. Not fixed here (it
+  is another session's content and the registry test does not cover it); worth a pass.
 
 ## Phase 2: MaiK as tutor
 CliniX builds **no chatbot**; it calls `SMD_AI.explainGroundedStream` exactly as `icu.js:7231` does.
