@@ -9509,3 +9509,50 @@ for 3. The rnav grid is visible so it worked; the split now ignores spaces insid
 (`INSULIN`/`ICU`, not `SMD_*`) and were re-run rather than left unverified, which mattered: they hold
 14 of the 168 rewrites. One grid, `.ml-dose-grid`, needs a dose-editor state the harness does not
 reach and was not exercised.
+
+## 2026-09-25 — Four deferred calls, taken
+
+Owner delegated the four items left open after the bug-sheet work. What was decided and why.
+
+**1. `api.js goldFor()` was dead code. Repointed, not deleted.** It read
+`window.SMD_GOLD_MONOGRAPHS` from `data/gold-monographs.js`, a file that has never existed here, so
+it always returned null and `compClass()` fell through to a 109-molecule formulary. The library it
+wanted does exist under another name: `data/clinical-index.js` now exposes `get()` and `goldFor()`
+reads that, so a molecule's class comes from the authored record for 1,592 molecules. Deleting it
+would have been the smaller change and lost that. The two call sites in `renderStructured()` that
+wanted a WHOLE record were deleted instead: `offline-clinical.js` wraps `MEDAPI.structured` and has
+already merged the bundled record into the response by then, so they were reaching a second time for
+something already in hand.
+
+*Caught in passing:* the first `get()` shipped `/s*(.*?)s*/` because the builder emits this code
+inside a JS template literal, which ate the backslashes. It silently matched nothing. Escapes in the
+generator must be doubled; there is a test for the strength-suffixed lookup now.
+
+**2. `/monograph` is dead in production; the client stops asking.** The `monographs` table was never
+loaded, so it answers `found:false` for every molecule, Amoxicillin included. The bundle already
+covers it, but every drug opened still paid for a doomed round trip, up to api.js's 20s timeout.
+`offline-clinical.js` now opens a per-session circuit breaker after three consecutive empty answers
+and serves the bundle directly; any hit re-arms it. Deliberately session-scoped and never persisted,
+so **loading the table server-side needs no client change** — the next launch asks again. Measured:
+3 network calls for 6 lookups instead of 6. Retiring the endpoint was rejected as a one-way door.
+
+**3. Legal em-dashes rewritten.** All 19 prose em-dashes in the disclaimer, terms, privacy,
+verification and onboarding copy, each to the punctuation its own sentence wants. No clause added,
+removed, softened or strengthened. The five placeholder dashes (`<option>—</option>`, a value not yet
+loaded) are a glyph, not punctuation, and are kept; the en dash in "doctor–patient" is correct
+typography and is kept.
+
+**4. Salt-form duplicates: dropped from the supplement, not merged in the data.** 53 of the 104
+supplement records were a counter-ion of a molecule the bundle already carried ("Atropine sulfate" IS
+atropine), which put two rows for one drug in every search. All 53 were reviewed individually and the
+bundle's copy was equal or richer in every sampled pair. They are no longer shipped.
+
+The rule compares **supplement rows against bundle keys only**, so it can never merge two bundle rows:
+Calcium Acetate / Chloride / Gluconate, Fluticasone Furoate vs Propionate and Metoprolol succinate vs
+tartrate are genuinely different products, and none of them appear in the dropped set.
+
+**Dropping the rows introduced a regression, which is the part worth remembering:** "Atropine sulfate"
+became unfindable. Stripping the counter-ion is therefore done on the QUERY as a last resort, never on
+the stored names, in `clinical-index.js` (`search`, `get`) and in `offline-clinical.js`
+(`lookStruct`, `lookMono`) so a composition from the brand catalogue still resolves. An exact name
+still wins first, so a distinct salt with its own record is matched before any stripping happens.
