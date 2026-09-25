@@ -82,7 +82,7 @@ test("the cache key carries the tier, so a bottom line cannot be served as a ful
  * window silently stops covering the code when anything above it grows, which is exactly how these
  * four broke when the gate was bounded. */
 const iGateStart = API.indexOf("const _gateP = checkQuota(");
-const iRerank = API.indexOf("const _rerankP =");
+const iRerank = API.search(/(const|let) _rerankP =/);   // let since T15: a cache miss may start it later
 const iAwait = API.indexOf("const gate = await");
 
 test("the quota gate and the re-rank are started together, not serially", () => {
@@ -112,13 +112,13 @@ test("SAFETY: bounding the gate fails OPEN only on timeout, and says so", () => 
 });
 
 test("a failed re-rank degrades to the original order, never to an empty list", () => {
-  const blk = API.slice(iGateStart, iGateStart + 4000);
+  const blk = API.slice(iGateStart, API.indexOf('_at("rerank")', iGateStart));   // T15 moved the cache read in between
   assert.match(blk, /\.catch\(\(\) => null\)/, "a rejected re-rank resolves to null");
   assert.match(blk, /if \(_r\) pkg\.retrieved = _r;/, "null keeps the retrieved evidence untouched");
 });
 
 test("the tutor path still skips the Workers AI round trip (main's optimisation survives)", () => {
-  const blk = API.slice(iGateStart, iGateStart + 4000);
+  const blk = API.slice(iGateStart, API.indexOf('_at("rerank")', iGateStart));
   assert.match(blk, /!isTutor/, "tutor never starts the cross-encoder");
   assert.match(blk, /isTutor && pkg\.retrieved && pkg\.retrieved\.length > 1\) pkg\.retrieved = lexicalRank/,
     "tutor still gets a sensible in-memory order");

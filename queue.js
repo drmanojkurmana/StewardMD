@@ -1197,9 +1197,10 @@
     if (!G.SMD_OPD_OFFLINE || !st.orgId) return null;
     var day = new Date(Date.now() + 19800000).toISOString().slice(0, 10);   // the IST day the server numbers by
     if (!OFFD || OFFD._org !== st.orgId || OFFD._date !== day) {
-      var ss = null; try { ss = G.sessionStorage; } catch (e) {}
-      if (!ss) return null;
-      OFFD = G.SMD_OPD_OFFLINE.desk({ storage: ss, orgId: st.orgId, date: day, call: function (p, b) { return apiPost("/" + p, b); } });
+      var ss = null, idb = null; try { ss = G.sessionStorage; } catch (e) {} try { idb = G.indexedDB || null; } catch (e) {}
+      if (!ss && !idb) return null;
+      // IndexedDB first, so a check-in taken offline survives the app being closed; the tab's storage when it cannot open.
+      OFFD = G.SMD_OPD_OFFLINE.desk({ indexedDB: idb, storage: ss, orgId: st.orgId, date: day, call: function (p, b) { return apiPost("/" + p, b); } });
       OFFD._org = st.orgId; OFFD._date = day;
     }
     return OFFD;

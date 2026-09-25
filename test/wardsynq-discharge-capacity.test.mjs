@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-discharge-capacity.test.mjs - discharge milestones, the transfer centre and the governed forecasts.
  *
  * POST /api/queue/ward/discharge-milestone and GET /api/queue/ward/discharge-progress (each step by its own role, never

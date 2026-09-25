@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* Plan item 16: the live board. The OPD boards are told when the hospital's queue changes instead of polling.
  *
  * What these defend:

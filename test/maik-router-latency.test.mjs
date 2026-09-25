@@ -24,7 +24,7 @@ test("the cache is consulted BEFORE the router model call, or it saves nothing",
   const iSeg = API.indexOf('if (seg === "refine" || seg === "route")');
   assert.ok(iSeg > 0, "router handler must exist");
   const iMem = API.indexOf("_routeMem.get(_rkey)", iSeg);
-  const iCall = API.indexOf("callGemini(env, [{ text: sys }]", iSeg);
+  const iCall = API.indexOf("await gen([{ text: sys }]", iSeg);
   assert.ok(iMem > iSeg, "in-isolate lookup must be in the router handler");
   assert.ok(iCall > iMem, "the model call must come AFTER the cache lookup");
 });

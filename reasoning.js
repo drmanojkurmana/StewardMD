@@ -6111,7 +6111,7 @@
     var html = '<div id="smdSafetyCard" class="smd-safety-card">' +
       '<div class="smd-safety-eyebrow">Patient safety</div>' +
       '<div class="smd-safety-h">' + (wIco ? '<span class="smd-safety-ic">' + wIco + '</span>' : '') + 'Patient-specific safety</div>' +
-      '<div class="smd-safety-tag">Enter values to check — this does not change the recommendation. Age and sex stay in sync with Save Case.</div>' +
+      '<div class="smd-safety-tag">These values are checked against the regimen. They do not change the recommendation.</div>' +
       smdSafetyInputsHTML(e) +
       '<div class="smd-safety-lines" id="smdSafetyLines"></div></div>';
     // Sit the card with the recommendation: directly under the (relocated) Save-case box when

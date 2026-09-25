@@ -532,6 +532,7 @@ export default {
     if (event.cron === "0 * * * *") {
       ctx.waitUntil(post("/api/connect/admin/sweep"));     // Connect ABDM reconciliation GC (flag-gated, no-op-safe, fail-safe)
       ctx.waitUntil(post("/api/queue/ops/backup-all"));    // WardSynQ: daily per-hospital backup, retried hourly until done (a no-op when not due)
+      ctx.waitUntil(post("/api/queue/ops/day-close-all")); // OPD: the owner's day close on WhatsApp at the hour each hospital chose (a no-op when not due)
       return;
     }
     if (event.cron === "*/15 * * * *") {

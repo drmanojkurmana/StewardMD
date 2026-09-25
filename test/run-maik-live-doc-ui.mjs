@@ -1,6 +1,6 @@
 /* MaiK Live Doctor — real headless browser.
  *
- * The Live Doctor (flag smd_maik_live_doc = "1"; default is the stationary resident since audit T33, 2026-09-25) replaces the stationary resident:
+ * The Live Doctor (flag smd_maik_live_doc, default ON; "0" = stationary resident) replaces the stationary resident:
  * a 12x16 pixel physician who walks the composer's top edge right to left, freelances
  * stunts (hop/backflip/sprint/auscultate with a bpm bubble), reacts to a tap on himself
  * (startle/wave/hearts), and never intercepts taps anywhere else. Pinned because the
@@ -33,7 +33,7 @@ try {
   await call("Page.navigate", { url: BASE });
   for (let i = 0; i < 75; i++) { await sleep(400); if (await ev(`return !!window.SMD_askMaik`) === true) break; }
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); document.body.classList.add("dark"); return 1;`);
-  await ev(`localStorage.setItem("smd_maik_live_doc","1"); return 1;`); // opt in (default is the resident since audit T33)
+  await ev(`localStorage.removeItem("smd_maik_live_doc"); return 1;`); // default = ON
   await ev(`SMD_askMaik(""); return 1;`); await sleep(1400);
 
   // ── he is there by default, and the old resident is not ──
@@ -108,7 +108,7 @@ try {
     var d=__MAIK_TEST.docState(); return d&&d.state;`);
   ok(tap === "run", "a tap on the sheet floor sends him running — " + tap);
   const skidSeen = {};
-  for (let i = 0; i < 30; i++) { const s = await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`); if (s) skidSeen[s] = 1; await sleep(90); }
+  for (let i = 0; i < 45; i++) { const s = await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`); if (s) skidSeen[s] = 1; if (skidSeen.skid) break; await sleep(90); }   // up to ~4 s: from the far right he needs ~2.8 s at run speed
   ok(!!skidSeen.skid, "he skids in on arrival — states: " + Object.keys(skidSeen).sort().join(","));
 
   // ── busy: a question in flight puts him to WORK ──

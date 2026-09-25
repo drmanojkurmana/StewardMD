@@ -71,7 +71,7 @@ test("parseScribeJson: genuine garbage is still null (never a silent empty note)
 
 test("the handler asks for a scribe-sized output budget, not the chat one", () => {
   assert.match(API_SRC, /SCRIBE_OUT = Math\.max\(OUT_BASE, Math\.min\(8192, Number\(env\.SCRIBE_MAX_OUTPUT_TOKENS\) \|\| 6000\)\)/);
-  assert.match(API_SRC, /callGemini\(env, \[\{ text: prompt \}\], SCRIBE_OUT, _scribeOpts\)/);
+  assert.match(API_SRC, /gen\(\[\{ text: prompt \}\], SCRIBE_OUT, _scribeOpts\)/);
 });
 
 /* ── 2. grounding ──────────────────────────────────────────────────────────────────────────── */

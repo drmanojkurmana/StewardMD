@@ -367,7 +367,9 @@
   }
 
   // keep the handle synced as screens open/close (cheap DOM poll; also refreshed after each goBack)
-  setInterval(syncHandle, 900);
+  // Skip while backgrounded: nothing can touch the DOM while hidden, and syncHandle re-reconciles
+  // on the next tick after resume anyway.
+  setInterval(function () { if (document.hidden) return; syncHandle(); }, 900);
   if (document.readyState !== "loading") syncHandle();
   else document.addEventListener("DOMContentLoaded", syncHandle);
 

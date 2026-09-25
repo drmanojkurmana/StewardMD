@@ -817,6 +817,7 @@
     // First time the live ICU board opens (outside a tour), offer the ICU tour.
     var last = false;
     setInterval(function () {
+      if (document.hidden) return;
       if (!flagOn()) return;
       var open = liveIcuOpen();
       if (open && !last && !_run && !icuTipSeen()) { setTimeout(function () { if (liveIcuOpen() && !_run) showIcuTip(); }, 700); }

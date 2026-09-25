@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-scheduling-blackout.test.mjs — TASK 4.5: blackout periods, through the REAL
  * routes, against real appointment and resource bookings. Proves the one hard safeguard this task
  * added: a blackout is a REFUSAL, never an override - unlike an appointment clash (which a human

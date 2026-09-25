@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-icu.test.mjs — the ICU vertical, through the REAL routes.
  *
  * ICU admission (class:"ICU", explicit and never inferred from a ward name) -> bed occupancy across

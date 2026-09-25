@@ -20,15 +20,17 @@ const req = (h) => ({ headers: { get: (k) => h[k] ?? h[String(k).toLowerCase()] 
 const guest = await identify(req({ "CF-Connecting-IP": "1.2.3.4" }), {});
 ok(guest.guest === true && guest.id.startsWith("ip:"), "no token -> guest, id 'ip:<hash>'");
 
-// Cloudflare-Access email -> identified, not guest
+// A bare Cloudflare-Access email header is forgeable -> still a guest (verified Access JWTs:
+// test/cf-access-verify.test.mjs)
 const cfa = await identify(req({ "Cf-Access-Authenticated-User-Email": "Doc@Hosp.org" }), {});
-ok(cfa.guest === false && cfa.id.startsWith("cfa:") && cfa.email === "doc@hosp.org", "CF-Access email -> non-guest cfa id");
+ok(cfa.guest === true && !cfa.email, "bare CF-Access email header -> guest, not that account");
 
 // source guard: verifyFirebaseToken returns an OBJECT { uid, email }; identify() reads .uid and keys
 // per-account. Never "fb:" + the raw object (→ "fb:[object Object]", shared bucket for all users).
 const src = readFileSync(join(ROOT, "functions/_usage.js"), "utf8");
-ok(/return ok \? \{ uid: payload\.sub/.test(src), "verifyFirebaseToken returns an object { uid, email }");
-ok(/if \(fb && fb\.uid\) return \{ id: "fb:" \+ fb\.uid/.test(src), "identify keys signed-in users per-account: 'fb:'+fb.uid");
+// (T52: identify now reads the shared, per-request-memoised claims from _fbauth.js verifiedClaimsFor.)
+ok(/verifiedClaimsFor\(request, env\)/.test(src), "identify uses the shared memoised verifier");
+ok(/if \(fb && fb\.sub\) return \{ id: "fb:" \+ fb\.sub/.test(src), "identify keys signed-in users per-account: 'fb:'+claims.sub");
 ok(!/return \{ id: "fb:" \+ uid,/.test(src), "no 'fb:'+<object> coercion (that made fb:[object Object] for ALL signed-in users)");
 
 ok(usageKeyFor({ id: "fb:abc", email: "Dr.X@Gmail.com", guest: false }) === "em:dr.x@gmail.com",

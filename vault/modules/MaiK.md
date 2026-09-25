@@ -17,7 +17,8 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   `docs/MAIK_OFFLINE_RUNBOOK.md`. Nine packs (2026-09-23): `maik-lite` (our fine-tune, default),
   `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers,
   `maik-apex`, `bonsai-27b`, `bonsai2-27b`
-  (`medmo-4b` / MAiK Cortex removed 2026-09-23). EVERY text pack reads the on-device book
+  (`medmo-4b` / MAiK Cortex removed 2026-09-23). Tenth pack 2026-09-25: `mimo-cortex-9b`, a new
+  "MAiK Cortex" (MiMo V2.6 Distill Qwen 9B, Q4_1, 5.94 GB, qwen35, Labs, 12 GB phones, unmeasured). EVERY text pack reads the on-device book
   (`kb/ai/maik-lite-rag.js` BM25 retrieval, `kb/ai/maik-lite-kb-store.js` 38 MB asset): `ragEligible`
   in `maik-local.js` is capability-based and reads `CAPS[pack].kb` (changed 2026-09-18 from
   Lite-only). The whole-answer wording gate was replaced for these packs by claim-level grounding
@@ -201,3 +202,14 @@ installed files, sidecars and `KEY_ACTIVE` carry over. `actual` still records pr
 The "Which one should I download?" panel (`guideHTML`, pips) is gone; orientation is the ladder, one
 note per shelf and one footer line. Gotcha: `GUIDE_INTRO` is still exported and still used by
 `test/maik-engine.test.mjs`; keep it vendor-free.
+
+## Native energy savings (2026-09-25, branch maik-native-energy, device-unverified)
+`capacitor-llama`, no change to output text, tok/s or time-to-first-token:
+- iOS `ThermalGovernor.budget` floor is 1, not 64: the warm-up (`nPredict: 1`) no longer decodes 64
+  tokens holding the serial queue. Real callers all ask >= 120. Android already honoured 1.
+- Speculative loop breaks on a spent budget right after `emit(committed)`, as the plain loop does.
+- Adaptive draft-off: after 8 verify steps with < 15% acceptance the draft is dropped for that
+  generation (`PERF draft off:` log line). Greedy output is identical either way.
+- `llamaToken` events are batched natively (`TokenBatcher`, 40 ms; first piece immediate; flushed
+  before resolve/reject). Payload gains `count` (pieces in the event); JS only appends `text`.
+Pins: `test/maik-native-energy.test.mjs`.

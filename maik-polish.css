@@ -57,6 +57,11 @@ html body #maikSheet.maik-polished .maik-fb-b{min-width:44px;min-height:44px;pad
 html body #maikSheet.maik-polished .maik-acts{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0}
 html body #maikSheet.maik-polished .maik-acts .maik-act{width:100%;padding:10px 4px;border-radius:12px;background:var(--mk-soft);color:var(--mk-mut)}
 html body #maikSheet.maik-polished :is(.maik-fb-reason,.maik-fb-reasonrow){grid-column:1/-1;font-size:16px}
+/* Acting before rating (audit T30): Copy / Regenerate / Edit are what a doctor uses 50 times a day, so
+   they take the first row; "Was this helpful?" with Yes / No sits under them, quieter. */
+html body #maikSheet.maik-polished .maik-acts{grid-row:1}
+html body #maikSheet.maik-polished .maik-fb-q,html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){grid-row:2;font-size:12.5px}
+html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){color:var(--mk-mut)}
 
 /* Compact app navigation: menu + logo on the first row, caption + actions on the second. The model
    chip moved to the composer (2026-09-20): its 150px header slot truncated every label. */
@@ -112,3 +117,5 @@ html body #maikSheet.maik-polished .maik-side-wrap.open .maik-side{transform:tra
 html body #maikSheet.maik-polished .maik-side-hd{padding:max(15px,calc(env(safe-area-inset-top) + 8px)) 12px 8px 14px;display:flex;align-items:center;justify-content:space-between;gap:9px}
 html body #maikSheet.maik-polished .maik-side-hd .maik-side-logo{height:26px;margin:0}
 html body #maikSheet.maik-polished #maikSideClose{margin-left:auto;flex:0 0 44px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+/* Offline notice above the composer (audit T31). */
+html body #maikSheet .maik-offline{margin:0 4px 6px;padding:8px 12px;border-radius:12px;font:600 12.5px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--mk-ink);background:var(--mk-soft,rgba(148,163,184,.14));border:1px solid var(--mk-bd)}

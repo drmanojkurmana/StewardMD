@@ -11,10 +11,12 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **Flag:** `smd_atlas3d` · default **ON** (owner's 2026-09-04 no-per-device-gating order) · `?atlas3d=0` / `localStorage smd_atlas3d=0` closes it per device · `DEFAULT_ON` constant in `atlas3d.js`
 - **Entry points:** "3D Anatomy" card at the top of the RadioAnatome catalog · "3D" pill on a slice sheet (only when the structure maps) · `ATLAS3D.open({canon:"KIDNEY"})` / `{region:"BRAIN"}` / `{partId:"FJ3145"}`
 - **Files:** `atlas3d.js` (renderer + UI, ES5, no three.js) · `atlas3d.css` · `atlas/3d/manifest.json` (parts, concepts, systems, canon map, CT/MRI links, `sources`, `planes`, `lod`) · `atlas/3d/index.json` (canonical → kind, 2 KB) · geometry chunks: `<system>-N.bin.gz` (27 reference, 31.8 MB) · `<system>-N.lo.bin.gz` (20 reference LOD at 60% of the triangles, 19.6 MB) · `live-<system>-N.bin.gz` (11 living-CT, 4.5 MB) · `atlas/3d/live.json` + `lod.json` (pipeline outputs merged by the importer) · `atlas/3d/provenance.json`
-- **Hosting:** geometry is served from the R2 bucket `stewardmd-models` under `atlas3d/` at `https://models.stewardmd.in/atlas3d/<file>` (`R2_BASE` in `atlas3d.js`; `dataBases()` tries same-origin first, then R2). Upload with `npx wrangler r2 object put stewardmd-models/atlas3d/<file> --file atlas/3d/<file> --content-type application/gzip --remote` for every `*.bin.gz` after a pipeline run. The files are ALSO committed (repo = source of truth; Pages serves them same-origin on the web).
+- **Chunk filenames are content-hashed** (`<id>.<sha256[:8]>.bin.gz`, written by `pack3d.mjs` and `bp3d_import.py` since 2026-09-25). NEVER upload different bytes under an existing R2 key: native builds fetch geometry ONLY from R2 and check sizes against their BUNDLED manifest. On 2026-09-06 re-meshed living-CT chunks were uploaded under the old names without the matching manifest reaching main, and every native install without cached geometry got "3D chunk size mismatch" on the Living CT body for 19 days. Deploy order for new geometry: upload the new hashed files to R2 FIRST, then ship the build whose manifest names them; never delete the old keys (installed apps still use them).
+- **Hosting:** geometry is served from the R2 bucket `stewardmd-models` under `atlas3d/` at `https://models.stewardmd.in/atlas3d/<file>` (`R2_BASE` in `atlas3d.js`; `dataBases()` tries same-origin first on the web, R2 only natively). Upload with `npx wrangler r2 object put stewardmd-models/atlas3d/<file> --file atlas/3d/<file> --content-type application/gzip --remote` for every `*.bin.gz` after a pipeline run. The files are ALSO committed (repo = source of truth; Pages serves them same-origin on the web).
 - **Pipeline:** `atlas-pipeline/bp3d-map.json` (HAND-CURATED canonical ↔ FMA mapping) → `atlas-pipeline/bp3d_import.py --src <human-atlas checkout> --write` → `atlas-pipeline/ontology.py --write` (merges `bp3d` + the `3D` modality into `ontology.json`). Living body: `atlas-pipeline/live3d.py --work atlas-pipeline/work/tsd --out <dir>` (marching cubes on the masks + slice-plane registration; needs the `.venv` with nibabel/scipy/skimage and the downloaded s0108 volumes) → `node atlas-pipeline/pack3d.mjs live --in <dir> --out atlas/3d --base 2227` (meshoptimizer simplify + pack) → `bp3d_import.py --write` picks up `live.json`. LOD: `node atlas-pipeline/pack3d.mjs lod --out atlas/3d` (writes `lod.json` + `*.lo.bin.gz`), then `bp3d_import.py --write`.
 - **Provenance / licence:** `HUMAN_ATLAS_PROVENANCE.md` (repo root) — upstream commit, checksums, rejects, modifications, the verbatim CC BY attribution
-- **Tests:** `test/atlas3d-data.test.mjs` (55) · `test/atlas3d-pure.test.mjs` (33) · `test/run-atlas3d-ui.mjs` (60, real headless WebGL via SwiftShader; port 8995)
+- **Tests:** `test/atlas3d-data.test.mjs` (57) · `test/atlas3d-pure.test.mjs` (57) · `test/run-atlas3d-ui.mjs` (133, real headless WebGL via SwiftShader; serves on 8995; `CDP_PORT=<port>` picks the Chrome debug port and refuses a busy one, `SHOTS=<dir>` saves screenshots)
+- **Premium pass (2026-09-25):** WebGL context restore in place (plus a fresh canvas if never restored), per-chunk failure with Retry, byte progress, first-open gesture hint (`smd_atlas3d_hint`), X-ray slider + per-structure Fade, Undo, free Axial/Coronal/Sagittal cut plane, saved views (`smd_atlas3d_views`), snapshot/share with the CC BY credit drawn into the PNG (never in the DOM), Find it quiz, Taubin-smoothed living surfaces + fresnel skin.
 - **Status (2026-09-06):** built + RUN ON THE iPhone 15 Pro (build a3d8, iOS 27). Living body (66 parts: organs + skeleton + skin shell) streams in ~2 s from R2, 60 fps, cut planes register on the meshes, no JS errors. Reinstall after each web change: `build:www` → `cap copy ios` → rebuild `App` scheme → `devicectl uninstall` + `install` (wipes device-local data).
 
 ## Numbers
@@ -33,6 +35,21 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 
 ## Gotchas
 
+- **The living-torso cut planes come from `atlas-pipeline/living.py`, not a fit.** Until 2026-09-25
+  the axial quad was framed on the full 288x288 grid while the module is a 277x240 crop, and slice
+  levels came from a linear fit: worst corner error 39.2 mm axial. A test now binds every plane to
+  the slice's `q` frame in `atlas.json`, and each plane carries the exact `img` it textures
+  (`loadSliceTexture` falls back to `/atlas/<m>/NNN.webp` for old bundled manifests).
+- **A cached chunk that decompresses to the wrong size is purged and fetched once more.** The
+  on-device cache (`SMD_THOREX_MODEL_CACHE`) is read BEFORE the network, and the 2026-09-06
+  mismatched bytes were valid gzip, so phones that opened Living CT during the outage cached them
+  and kept failing even after R2 was restored (2026-09-25). `loadChunk` now clears `atlas3d-v1` and
+  refetches on a size mismatch; the headless test plants a wrong-size chunk and proves recovery.
+  Installed builds without this fix recover only by reinstalling or clearing app data.
+- **`clearModels({cacheName})` must stay scoped.** It used to delete ThoreX's shared IndexedDB on
+  every call, so one bad 3D chunk purged ThoreX's models. Fixed in `thorex-model-cache.js`.
+- **A fetch from a closed session is dropped** (`session` counter bumped by `close()`); context
+  loss keeps the session so the restore still receives in-flight chunks.
 - **BodyParts3D "isa" has NO liver, lung or lung-lobe surface** — only the biliary tree,
   bronchial tree and caudate lobe. LIVER / LUNG / the four lobes are `kind: related` in the
   map: the sheet says so and never claims the mesh IS the organ. HEART is `partial` (chambers,
@@ -71,10 +88,11 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
   in the first attempt). `plane_for()` derives each plane's `tl/u/v` from the SAME display chain
   the pipeline draws with (`to_display = flipud(slab.T)`), so texture and meshes coincide.
 - **The living-torso 2D modules show the patient's RIGHT on the image's RIGHT** (liver at column
-  205 of 277 in the displayed coronal slab; `orient.to_display` keeps X unflipped), i.e. NOT
-  radiological convention. Pins are unaffected and no side is asserted, but a radiologist expects
-  the liver on the image left. Pre-existing, logged in [[Roadmap]]; the 3D cut plane shows the
-  slice in true 3D orientation, so from the front the liver is on the viewer's left there.
+  205 of 277 in the displayed coronal slab; `orient.to_display` keeps X unflipped) in the FILES.
+  Since 2026-09-25 the 2D viewer mirrors axial + coronal at display time (`flipX` in
+  `modules.json`, evidence in `docs/radioanatome/ORIENTATION.md`), so the student sees
+  radiological convention with R/L edge letters. The files and the 3D cut-plane textures stay
+  unflipped; the 3D plane shows the slice in true 3D orientation.
 - **Cut plane rendering:** `clipPlane()` discards the half of the body on the camera's side of
   the plane, the slice quad is drawn at 88% alpha, then the SELECTION is redrawn as a 42% ghost
   with depth test off (pass 3), so the selected structure stays readable through the slice

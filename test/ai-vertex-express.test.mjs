@@ -54,7 +54,7 @@ test("health names the mode and the fallback; the default provider order is Vert
   try {
     const h = await (await onRequest({ request: health(), env: ENV, params: { path: ["health"] } })).json();
     assert.equal(h.provider, "vertex"); assert.equal(h.fallback_provider, "developer");
-    assert.equal(h.vertex_status, "healthy"); assert.equal(h.vertex_mode, "api-key (express mode)"); assert.equal(h.fallback_available, true);
+    assert.equal(h.vertex_status, h.vertex_last_success ? "healthy" : "configured");   // healthy only after a real success (T51) assert.equal(h.authentication, "API key (Vertex express mode)"); assert.equal(h.vertex_mode, "api-key (express mode)"); assert.equal(h.fallback_available, true);
     const g = await (await onRequest({ request: health(), env: { GEMINI_API_KEY: "dev-key" }, params: { path: ["health"] } })).json();
     assert.equal(g.vertex_status, "unavailable"); assert.equal(g.vertex_mode, null);
   } finally { globalThis.fetch = realFetch; }

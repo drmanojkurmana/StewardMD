@@ -50,9 +50,9 @@ test("T45: a dose question that names a condition, or a regimen, is not read as 
   assert.equal(D.intent("dose of metoprolol").name, "metoprolol");
 });
 
-test("T06 / T33: the mascot greets only an empty sheet, and the stationary resident is the default", () => {
+test("T06: the mascot greets only an empty sheet; the live doctor stays the default (owner, 2026-09-25)", () => {
   assert.match(H, /if \(_bd && _bd\.querySelector\("\.maik-b"\)\) return;/);
-  assert.match(H, /function maikLiveDocOn\(\) \{ try \{ return localStorage\.getItem\("smd_maik_live_doc"\) === "1";/);
+  assert.match(H, /function maikLiveDocOn\(\) \{ try \{ return localStorage\.getItem\("smd_maik_live_doc"\) !== "0";/);
 });
 
 test("T13: the watchdog cancels the on-device job and on-device turns get a longer budget", () => {

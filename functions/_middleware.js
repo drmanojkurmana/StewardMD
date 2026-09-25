@@ -240,6 +240,14 @@ export async function onRequest(context) {
       url.pathname === "/smd-nfc.js" ||
       url.pathname === "/steward-identity-resolver.js" ||
       url.pathname === "/smd-identity-scanner.js" ||
+      // SAME TRAP a fourth time (found 2026-09-25): the OPD console's pulse model, offline desk and live stream,
+      // the wall display's live stream, and the token-slip printer. Blocked, the console showed no pulse, the desk
+      // could not check in offline and the boards never went live, all without an error.
+      // test/public-page-scripts-served.test.mjs now asks this gate for every asset each public page loads.
+      url.pathname === "/opd-pulse-model.js" ||
+      url.pathname === "/opd-offline-desk.js" ||
+      url.pathname === "/opd-live.js" ||
+      url.pathname === "/ward-labels.js" ||
       // Self-hosted fonts (Inter Variable body text + Material Symbols Rounded icon font, both
       // @font-face'd by every PUBLIC_PAGE: opd/opd-display/queue/subscribe). Public, non-sensitive
       // font files - not app code - same reasoning as the brand-image allowlist below. Missing this

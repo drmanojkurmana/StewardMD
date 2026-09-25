@@ -54,8 +54,8 @@ def validate(payload, rules_with_origin):
         for s in r.get("subjects", []):
             if s.get("kind") == "class":
                 tag = s.get("value")
-                if tag not in live_tags:
-                    warnings.append(f"{rid}: class '{tag}' has no members — rule can never fire")
+                if tag.startswith("epc:") or tag not in live_tags:
+                    errors.append(f"{rid}: class '{tag}' has no members — rule can never fire")
         # sign-off gate
         if r.get("severity") in ("contraindicated", "major"):
             if r.get("_origin") == "legacy" and grandfather:

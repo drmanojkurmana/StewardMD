@@ -9,7 +9,7 @@
  * overridable via env.PRO_FREE_UNTIL (ms epoch or ISO string) without a code change.
  */
 import { mergeUserClaims, getUserClaims } from "./_fbadmin.js";
-import { verifyFirebaseToken } from "./_fbauth.js";
+import { verifiedClaimsFor } from "./_fbauth.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
 import { ownerEmails } from "./_adminauth.js";
 
@@ -202,16 +202,6 @@ export async function revokePro(env, uid) {
   return { ok: true, uid };
 }
 
-// Decode a JWT payload WITHOUT verifying (caller must verify the signature first).
-function decodeJwtPayload(tok) {
-  try {
-    const p = String(tok || "").split(".")[1]; if (!p) return null;
-    let s = p.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "=";
-    const bin = atob(s); const u = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-    return JSON.parse(new TextDecoder().decode(u));
-  } catch (e) { return null; }
-}
 
 // Verify the caller's Firebase ID token and read its Pro entitlement (+ launch promo). Fast enough
 // for hot endpoints (JWKS is cached in _fbauth). Returns { pro, uid, claims }. A guest (no/invalid
@@ -224,9 +214,10 @@ export async function proFromRequest(env, request) {
   // entitlementFor (the /billing/status path), not here, so this gate never writes.
   const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
   if (!tok) return { pro: promoActive(env), uid: null, claims: null };
-  const uid = await verifyFirebaseToken(tok, env);   // verifies RS256 signature + aud/iss/exp
+  const verified = await verifiedClaimsFor(request, env);   // RS256 + aud/iss/exp, memoised per request (T52)
+  const uid = verified && verified.sub;
   if (!uid) return { pro: promoActive(env), uid: null, claims: null };
-  const claims = decodeJwtPayload(tok) || {};
+  const claims = verified;
   return { pro: isPro(env, claims), uid, claims };
 }
 

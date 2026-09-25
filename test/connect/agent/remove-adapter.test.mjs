@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect/agent/remove-adapter.test.mjs -- DELETE /connections/:deploymentId removes a hospital's
 // adapter: approved version revoked, active pointer cleared, drafts discarded, row kept as Not connected.
 //   node --test test/connect/agent/remove-adapter.test.mjs

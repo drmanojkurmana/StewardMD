@@ -41,6 +41,51 @@ or import from Ward Sync → interaction/duplicate/QT/renal/bleeding checks.
   Until deployed, BOTH browse tabs degrade to the on-device formulary (`MEDDRUGS._list`, grouped by
   its own `cls` labels), marked "offline list". Test: `test/run-drugs-az.mjs`.
 
+## The bundled monograph library became searchable (2026-09-25, BUG-002)
+
+QA searched **Cefiderocol** and got "No drugs match" although we ship a full authored monograph for
+it. Three separate things were true, and only the third was the real fault:
+
+1. The worker's `/search` runs `drugs_fts JOIN drugs`, i.e. the Indian **brand** catalogue. A molecule
+   nobody sells here has no row, so the server can never find it. `worker/scripts/import_gold_to_d1.mjs`
+   has its own hardcoded list of 68 such molecules, Cefiderocol among them.
+2. `/monograph` answers `found:false` for **everything**, including Amoxicillin: the `monographs` table
+   was never loaded in prod. Verified against `https://api.stewardmd.in` directly.
+3. `api.js` `goldFor()` reads `window.SMD_GOLD_MONOGRAPHS`, sourced from `data/gold-monographs.js`.
+   **That file has never existed in this repo** (no git history for it), so `goldFor()` always returned
+   null and was dead code. The only client fallback left was `MEDDRUGS.searchIndex`, which knows
+   **109 molecules**.
+
+The data was never missing. `data/offline-clinical.json.gz` already held 1,541 molecules with full
+gold records and `offline-clinical.js` already rendered them. Nothing could **search** them.
+
+### What now ships
+- `data/clinical-index.js` (`window.SMD_CLINICAL_INDEX`, 1,645 molecules, 331 KB) — name, class and
+  the full tag list, nothing else. Loaded lazily by `offline-clinical.js` on the first search, so
+  searching costs 331 KB rather than the 6 MB bundle. Built by `scripts/build-clinical-index.mjs`
+  FROM the shipped gz, so the index can never list a molecule the app cannot then open.
+- `data/clinical-supplement.json.gz` (104 molecules, 271 KB) — authored gold records that were in **no**
+  bundle, because the bundle is keyed by the SQL `composition` string while `worker/data/gold/` is keyed
+  by `generic`. Among them **Atropine sulfate, Enoxaparin sodium, Clopidogrel bisulfate, Caspofungin
+  acetate, Fludrocortisone acetate**. Built by `scripts/build-clinical-supplement.mjs`; merged UNDER the
+  bundle at load, so a bundled record always wins. Optional: if the fetch fails the app is exactly as before.
+- `SMD_OFFLINE_CLINICAL.search(q, limit)` — what `api.js` calls.
+- `api.js` `goldSearch()` / `goldHitsHTML()` / `exactish()`: a "Clinical monographs" section appended
+  when the server returns nothing, and (for an exact or prefix name match only) when it returns
+  something that does not include the molecule the doctor typed.
+
+### Gotchas
+- **`goldFor()` / `SMD_GOLD_MONOGRAPHS` in api.js is still dead code.** It was left alone rather than
+  deleted in the same change; the working path is `SMD_OFFLINE_CLINICAL`. Remove it or build the file.
+- The supplement leaves ~68 salt-form pairs visible as two rows ("Atropine" and "Atropine sulfate").
+  Deliberate: collapsing on a salt suffix would also merge Calcium Acetate / Chloride / Gluconate,
+  which are different products. Two accurate rows beats one hidden monograph.
+- `test/serve.mjs` now falls back to `data/` for a root-level request, because `build-www.sh` copies
+  these payloads to the bundle root. Before this, every UI test 404'd the gz and silently ran with the
+  offline clinical library switched off.
+- `build-www.sh` must copy both new files, or the phone 404s them.
+- Tests: `test/clinical-index.test.mjs` (15), `test/run-drug-gold-ui.mjs` (browser, search + open).
+
 ## Gotchas
 - `resolveGeneric` matches the CLINICAL layer — `normIngredient` before grouping (product vs clinical). Compositions bake strength inline.
 - run-drug-index / run-maik-explain unreliable in sandbox.
