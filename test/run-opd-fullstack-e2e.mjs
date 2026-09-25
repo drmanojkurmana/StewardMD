@@ -20,7 +20,7 @@ const { docs, sent, ORG, ADMIN, DOCTOR, LAB, ENV, as } = H;
 
 const PORT = Number(process.env.OPD_E2E_PORT || 8933), CDP = PORT + 1000;
 const BASE = `http://localhost:${PORT}`;
-const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME = process.env.CHROME || (process.platform === "darwin" ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" : "/opt/pw-browsers/chromium");
 const SHOT = process.argv.includes("--shot") ? process.argv[process.argv.indexOf("--shot") + 1] : ((process.env.CLAUDE_JOB_DIR || "/tmp") + "/opd-fullstack-shots");
 mkdirSync(SHOT, { recursive: true });
 
@@ -36,7 +36,7 @@ const decName = async (t) => { try { const { decPHI } = await import("../functio
 // ---- CDP: one browser, several tabs, each with its own flat session ----
 const userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/opd-fullstack-chrome-" + CDP;
 rmSync(userDir, { recursive: true, force: true });
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${CDP}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--mute-audio", "--window-size=1400,1000"], { stdio: "ignore" });
+const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${CDP}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--mute-audio", "--window-size=1400,1000"].concat(process.platform === "linux" ? ["--no-sandbox"] : []), { stdio: "ignore" });
 let ws, msgId = 1;
 const pending = new Map(), tabs = new Map();
 const raw = (method, params, sessionId) => { const id = msgId++; return new Promise((r) => { pending.set(id, r); ws.send(JSON.stringify({ id, method, params: params || {}, sessionId })); }); };
@@ -97,7 +97,8 @@ async function main() {
   ok(!!(await c.until(`return document.querySelector("#opdPulse .p-row") ? 1 : 0`, 6000)), "the pulse card renders its tiles");
   const txt1 = await boardText(c);
   await c.click('[data-opd-view="rooms"]');
-  ok(/Room 1[\s\S]*Room 2/.test(await boardText(c)), "the Rooms view lists both rooms with their doctors");
+  const rv = await boardText(c);   // the board lists Room 2 first, so each room is looked for on its own
+  ok(/Room 1/.test(rv) && /Room 2/.test(rv), "the Rooms view lists both rooms");
   await c.shot("1b-rooms-view");
   await c.click('[data-opd-view="flow"]');
   await c.shot("1-console-boot");

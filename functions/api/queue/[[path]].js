@@ -313,7 +313,7 @@ import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.j
  * failures and POST /opd-reconcile retries them. A hospital with the record off is untouched. */
 /* OPD plan item 10, THE INVESTIGATION LOOP. A patient sent for a test sits in "investigation" and used to
  * stay there until somebody remembered them. When the result is released, every one of today's OPD tickets
- * for that patient that is in "investigation" goes back to "waiting" (the state machine's own edge) with
+ * for that patient that is in "investigation" or "at_diagnostics" (the console's Send for Tests) goes back to "waiting" (the state machine's own edge) with
  * resultReadyAt stamped, so the doctor sees them again and the pulse counts "results back". Matched on the
  * ticket's patientId; best-effort, never fails the release. */
 /* The day's tickets across every staffed room and the walk-in pool, for the pulse and the day close. A room whose
@@ -368,7 +368,8 @@ async function opdResultBack(env, org, patientId) {
   let n = 0;
   for (const s1 of sessions) {
     for (const t of await Q.listTickets(env, s1.id).catch(() => [])) {
-      if (!t || t.status !== "investigation") continue;
+      // The console's "Send for Tests" parks the patient in at_diagnostics; "investigation" is the older state. Both wait on a result.
+      if (!t || (t.status !== "investigation" && t.status !== "at_diagnostics")) continue;
       // F3: the result names the RECORD's patient (opd-pat-<mrn>); a desk ticket carries the MRN. Either identifies them.
       if (String(t.patientId) !== String(patientId) && patientIdForMrn(t.ghisPatientId || t.mrn) !== String(patientId)) continue;
       try { await Q.setStatus(env, s1, t.id, "waiting", "system:result-released"); await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { resultReadyAt: Date.now() })]); n++; } catch (e) {}
