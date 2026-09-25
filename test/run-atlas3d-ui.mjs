@@ -45,6 +45,14 @@ const shot = async (name) => { if (!SHOTS) return; const { mkdirSync, writeFileS
 // Frame signature from a synchronous render + readPixels: a hash, and how many sampled pixels are lit (not background).
 const SIG = `var f=ATLAS3D._readFrame(); if(!f) return null; var h=0, lit=0; for (var i=0;i<f.px.length;i+=4*7){ h=(h*31 + f.px[i]*3 + f.px[i+1]*5 + f.px[i+2]*7)>>>0; if (f.px[i]+f.px[i+1]+f.px[i+2] > 90) lit++; } return JSON.stringify({h:h, lit:lit});`;
 const sig = async () => JSON.parse(await ev(SIG) || "null");
+const BP3D_CREDIT = "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International";
+const SNAP = `var r = await ATLAS3D._snapshot(); var u = new Uint8Array(await r.blob.arrayBuffer()); var b=''; for (var i=0;i<u.length;i+=32768) b += String.fromCharCode.apply(null, u.subarray(i, i+32768));
+  var bm = await createImageBitmap(r.blob), c = document.createElement('canvas'); c.width = bm.width; c.height = bm.height; var x = c.getContext('2d'); x.drawImage(bm, 0, 0);
+  var bandTop = bm.height - r.bandH, px = r.bandH ? x.getImageData(0, bandTop, bm.width, r.bandH).data : [], text = 0, dark = 0;
+  for (var j=0;j<px.length;j+=4){ var s = px[j]+px[j+1]+px[j+2]; if (s > 450) text++; else if (s < 60) dark++; }
+  var fh = ATLAS3D._state.canvas.height;
+  return JSON.stringify({size:u.length, png:u[0]===0x89&&u[1]===0x50&&u[2]===0x4e&&u[3]===0x47, name:r.name, credit:r.credit, lines:r.lines, bandH:r.bandH, h:bm.height, frameH:fh, text:text, dark:dark, b64:btoa(b)});`;
+const snapProbe = async () => JSON.parse(await evp(SNAP) || "{}");
 const settled = (ms = 90000) => until(`var s=ATLAS3D._state; return !s.camTo && Object.keys(s.loading).length===0 && (!s.plane || s.plane.ready===true);`, ms);   // the slice texture lands asynchronously too
 try {
   let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -153,10 +161,13 @@ try {
   ok(await until(`return !document.querySelector('#a3dSystems [data-a3d-act=vload]') && JSON.parse(localStorage.getItem('smd_atlas3d_views')).length===0`), "deleting the view removes it from the list and storage");
   await ev(`document.querySelector('#a3dSystems [data-a3d-act=panelclose]').click(); return 1;`);
   // snapshot: a real PNG with the structure name in the file name, shared as a File
-  const snap = JSON.parse(await evp(`var r = await ATLAS3D._snapshot(); var u = new Uint8Array(await r.blob.arrayBuffer()); var b=''; for (var i=0;i<u.length;i+=32768) b += String.fromCharCode.apply(null, u.subarray(i, i+32768)); return JSON.stringify({size:u.length, png:u[0]===0x89&&u[1]===0x50&&u[2]===0x4e&&u[3]===0x47, name:r.name, b64:btoa(b)});`) || "{}");
+  const snap = await snapProbe();
   const partSlug = (await ev(`var s=ATLAS3D._state; return s.data.parts[` + other + `].name;`) || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48);
   ok(snap.png && snap.size > 5000, "snapshot is a non-empty PNG (" + snap.size + " bytes)");
   ok(typeof snap.name === "string" && snap.name.indexOf(partSlug) >= 0 && /\.png$/.test(snap.name), "snapshot filename carries the selected structure: " + snap.name);
+  ok(snap.credit === BP3D_CREDIT, "reference-body snapshot carries the verbatim BodyParts3D CC BY credit");
+  ok(snap.bandH > 0 && snap.h === snap.frameH + snap.bandH && snap.lines >= 1, "the credit is a band added below the frame (" + snap.lines + " lines, " + snap.bandH + " px), not over the view");
+  ok(snap.text > 150 && snap.dark > snap.text, "the credit band in the decoded PNG has text on a dark band (" + snap.text + " text px)");
   if (SHOTS && snap.b64) { const { writeFileSync } = await import("node:fs"); writeFileSync(join(SHOTS, "04-snapshot-output.png"), Buffer.from(snap.b64, "base64")); }
   await ev(`window.__shared=null; navigator.canShare=function(){return true}; navigator.share=function(d){ window.__shared={n:d.files.length, name:d.files[0].name, type:d.files[0].type, size:d.files[0].size}; return Promise.resolve(); }; document.querySelector('#a3dBar [data-a3d-act=snap]').click(); return 1;`);
   ok(await until(`return !!window.__shared && window.__shared.n===1 && window.__shared.type==='image/png' && window.__shared.size>5000`), "the image button shares a PNG File through Web Share");
@@ -225,6 +236,14 @@ try {
   ok(l2.h !== l3.h && l2.lit < l3.lit, "with the slice gone the free cut cuts the living body (" + l3.lit + " -> " + l2.lit + ")");
   await ev(`ATLAS3D.setPlane('ct-live-torso-axial', 12, {noFocus:true}); return 1;`);
   ok(await until(`return !!ATLAS3D._state.plane && ATLAS3D._state.plane.i===12 && ATLAS3D._state.plane.ready===true`, 30000), "slice 12 back on the living body");
+  // living-CT snapshot: credit from live.json's source fields (dataset, licence, doi)
+  const { readFileSync } = await import("node:fs");
+  const liveSrc = JSON.parse(readFileSync(join(HERE, "..", "atlas/3d/live.json"), "utf8")).source;
+  const lsnap = await snapProbe();
+  ok(lsnap.png && lsnap.credit === `${liveSrc.dataset}, ${liveSrc.licence}, doi:${liveSrc.doi}`, "living-CT snapshot credits live.json: " + lsnap.credit);
+  ok(lsnap.bandH > 0 && lsnap.text > 150 && lsnap.dark > lsnap.text, "its credit band is drawn in the PNG (" + lsnap.text + " text px)");
+  if (SHOTS && lsnap.b64) { const { writeFileSync } = await import("node:fs"); writeFileSync(join(SHOTS, "08-snapshot-living-ct.png"), Buffer.from(lsnap.b64, "base64")); }
+  ok(await ev(`var t=document.getElementById('smdAtlas3d').textContent; return t.indexOf('zenodo.10047292')<0 && t.indexOf('Database Center for Life Science')<0;`) === true, "no credit text leaked into the DOM");
   await ev(`document.querySelector('#a3dSheet [data-tab=correlate]').click(); return 1;`);
   ok(await until(`return document.querySelectorAll('#a3dSheet .a3d-link.a3d-plane').length >= 3`), "CT rows into living-torso modules offer Show in 3D");
   await ev(`document.querySelector('#a3dSrc .a3d-srcbtn[data-id=bp3d]').click(); return 1;`);

@@ -149,5 +149,21 @@ ok("quizPool drops a structure with any mesh off screen", P.quizPool(qd, 0, (i) 
 ok("quizPool on the living body asks from the live surfaces (a partial reference mesh is fine there)", P.quizPool(qd, 1, () => true).join() === "KIDNEY");
 ok("fileSlug makes a safe filename part", P.fileSlug("Left kidney (FMA7205)") === "left-kidney-fma7205" && P.fileSlug("") === "view");
 
+// CC BY credit burned into exported images, per body, from the real manifest + live.json
+const BP3D = "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International";
+const realM = JSON.parse(readFileSync(join(ROOT, "atlas/3d/manifest.json"), "utf8"));
+const liveSrc = JSON.parse(readFileSync(join(ROOT, "atlas/3d/live.json"), "utf8")).source;
+const realD = P.parseManifest(realM);
+ok("creditLine: reference body is the licence-mandated string, verbatim", P.creditLine(realD, "bp3d") === BP3D);
+ok("creditLine: reference falls back to the verbatim string when the manifest has no source", P.creditLine(P.parseManifest({ parts: [], concepts: [] }), "bp3d") === BP3D);
+const liveLine = P.creditLine(realD, "live");
+ok("creditLine: living CT is built from live.json (dataset, licence, doi): " + liveLine,
+  liveLine === `${liveSrc.dataset}, ${liveSrc.licence}, doi:${liveSrc.doi}` && /TotalSegmentator/.test(liveLine) && /CC BY 4\.0/.test(liveLine) && /10\.5281\/zenodo\.10047292/.test(liveLine));
+ok("credit lines carry no em dash", !/[—–]/.test(P.creditLine(realD, "bp3d") + liveLine));
+const mono = (s) => s.length * 6;
+const wl = P.wrapLines(BP3D, 300, mono);
+ok("wrapLines keeps every word, in order, within the width", wl.join(" ") === BP3D && wl.length > 1 && wl.every((l) => mono(l) <= 300 || !/ /.test(l)));
+ok("wrapLines: short text is one line, empty is none", P.wrapLines("a b", 300, mono).length === 1 && P.wrapLines("", 300, mono).length === 0);
+
 console.log(`atlas3d-pure: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

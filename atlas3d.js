@@ -236,6 +236,27 @@
   }
   function quizParts(e, want) { return want === 1 ? (e.live || []) : (e.coverage === "full" ? (e.parts || []) : []); }
   function fileSlug(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48) || "view"; }
+  // CC BY 4.0 credit burned into an exported image (a redistribution), per body. Reference: the
+  // licence-mandated string, verbatim. Living CT: built from the source fields the pipeline wrote
+  // into live.json (dataset, licence, doi), never a hand-written paraphrase.
+  var BP3D_ATTRIBUTION = "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International";
+  function creditLine(d, src) {
+    if (src === "live") {
+      var s = (d && d.live && d.live.source) || {};
+      return [s.dataset, s.licence, s.doi ? "doi:" + s.doi : ""].filter(Boolean).join(", ");
+    }
+    return (d && d.source && d.source.attribution) || BP3D_ATTRIBUTION;
+  }
+  // Greedy word wrap with an injected width measure (canvas measureText in the app).
+  function wrapLines(text, maxW, measure) {
+    var out = [], cur = "";
+    String(text || "").split(" ").forEach(function (w) {
+      var t = cur ? cur + " " + w : w;
+      if (cur && measure(t) > maxW) { out.push(cur); cur = w; } else cur = t;
+    });
+    if (cur) out.push(cur);
+    return out;
+  }
 
   /* ---------- tiny mat4 (column-major, WebGL order) ---------- */
   function perspective(fovDeg, aspect, near, far) {
@@ -1332,14 +1353,27 @@
   // GL rows come back bottom-up; flip into a 2D canvas, caption with the selected structure.
   function snapshot() {
     var f = readFrame(); if (!f) return Promise.reject(new Error("The 3D view is not ready."));
-    var cv = G.document.createElement("canvas"); cv.width = f.w; cv.height = f.h;
-    var ctx = cv.getContext("2d"), img = ctx.createImageData(f.w, f.h), row = f.w * 4;
+    var k = f.w / Math.max(1, st.canvas.clientWidth), FONT = "px -apple-system, system-ui, sans-serif";
+    // The credit is a band ADDED below the frame (the view is not covered). It lives only in the
+    // exported pixels, never in the DOM, so the in-app attribution still renders once (About).
+    var credit = creditLine(st.data, st.src), cfs = Math.max(10, Math.round(11 * k)), cpad = Math.round(7 * k), lh = Math.round(cfs * 1.35);
+    var cv = G.document.createElement("canvas"), ctx = cv.getContext("2d");
+    ctx.font = "500 " + cfs + FONT;
+    var lines = wrapLines(credit, f.w - cpad * 2, function (s) { return ctx.measureText(s).width; });
+    var bandH = lines.length ? lines.length * lh + cpad * 2 : 0;
+    cv.width = f.w; cv.height = f.h + bandH;   // resizing resets the context state
+    var img = ctx.createImageData(f.w, f.h), row = f.w * 4;
     for (var y = 0; y < f.h; y++) img.data.set(f.px.subarray((f.h - 1 - y) * row, (f.h - y) * row), y * row);
     ctx.putImageData(img, 0, 0);
+    if (bandH) {
+      ctx.fillStyle = "#0d0f11"; ctx.fillRect(0, f.h, f.w, bandH);
+      ctx.fillStyle = "#e6e6e6"; ctx.font = "500 " + cfs + FONT; ctx.textBaseline = "top";
+      lines.forEach(function (ln, j) { ctx.fillText(ln, cpad, f.h + cpad + j * lh); });
+    }
     var name = st.subject && st.data ? subjectTitle(st.data, st.subject) : "";
     if (name) {
-      var k = f.w / Math.max(1, st.canvas.clientWidth), fs = Math.round(15 * k), pad = Math.round(10 * k);
-      ctx.font = "600 " + fs + "px -apple-system, system-ui, sans-serif";
+      var fs = Math.round(15 * k), pad = Math.round(10 * k);
+      ctx.font = "600 " + fs + FONT;
       var tw = ctx.measureText(name).width;
       ctx.fillStyle = "rgba(6,102,90,0.9)"; ctx.fillRect(pad, f.h - pad * 2 - fs * 1.6, tw + pad * 2, fs * 1.6 + pad);
       ctx.fillStyle = "#fff"; ctx.textBaseline = "middle"; ctx.fillText(name, pad * 2, f.h - pad * 1.5 - fs * 0.8);
@@ -1347,7 +1381,7 @@
     var d = new Date(), stamp = d.getFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + ("0" + d.getDate()).slice(-2) + "-" + ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2);
     var fname = "radioanatome-3d-" + fileSlug(name || (st.src === "live" ? "living-ct" : "reference-body")) + "-" + stamp + ".png";
     return new Promise(function (res, rej) {
-      cv.toBlob(function (b) { if (b) res({ blob: b, name: fname, title: name || "3D Anatomy" }); else rej(new Error("The image could not be encoded.")); }, "image/png");
+      cv.toBlob(function (b) { if (b) res({ blob: b, name: fname, title: name || "3D Anatomy", credit: credit, lines: lines.length, bandH: bandH }); else rej(new Error("The image could not be encoded.")); }, "image/png");
     });
   }
   // Same share ladder as share-card.js: Capacitor Share on a file (native), Web Share with a
@@ -1475,7 +1509,7 @@
       '<span class="atlas-hd"><span class="atlas-ttl">About 3D Anatomy</span></span></div>' +
       '<div class="atlas-scroll">' +
       '<p class="atlas-prose">A 3D reference body linked to the RadioAnatome CT and MRI modules through one shared anatomy ontology. It is an adult male reference model, not a patient, and it is educational only.</p>' +
-      '<p class="atlas-prose atlas-credit">' + esc(s.attribution || "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International") + "<br>" +
+      '<p class="atlas-prose atlas-credit">' + esc(s.attribution || BP3D_ATTRIBUTION) + "<br>" +
         "Licence: " + esc(s.licenceUrl || "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html") + "<br>" +
         "Dataset: " + esc(s.dataset || "BodyParts3D 4.0") + " · " + esc(s.datasetUrl || "") + "<br>" +
         "Changes: geometry simplified and repacked for mobile; duplicate meshes removed; display-system labels corrected. Packaging derived from Human Atlas (" + esc((s.via && s.via.repo) || "github.com/ashemag/human-atlas") + ", MIT).</p>" +
@@ -1785,7 +1819,7 @@
     linksFor: linksFor, regionParts: regionParts, perspective: perspective, lookAt: lookAt, mul: mul, eyeFrom: eyeFrom,
     looksLikeChunk: looksLikeChunk, dataBases: dataBases, dataUrl: dataUrl,
     ghostAlpha: ghostAlpha, freeClip: freeClip, layerSnap: layerSnap, pushHist: pushHist, progressLabel: progressLabel,
-    serializeView: serializeView, restoreView: restoreView, quizPool: quizPool, fileSlug: fileSlug
+    serializeView: serializeView, restoreView: restoreView, quizPool: quizPool, fileSlug: fileSlug, creditLine: creditLine, wrapLines: wrapLines
   };
   G.ATLAS3D._version = "1.0";
 
