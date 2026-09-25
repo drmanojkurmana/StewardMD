@@ -129,6 +129,18 @@ export async function notifyTimeline(env, session, ticket, url) {
   await auditNotify(env, session, ticket, "timeline", res, mask(mobile));
   return res;
 }
+// The video visit's waiting-page link (functions/_telehealth.js inviteText: no name, no MR number). Same channels, meter
+// and masked audit as every queue message. Returns { ok } or { skipped, reason }; never throws.
+export async function notifyTeleLink(env, session, ticket, body, url) {
+  var mobile = "";
+  try { mobile = await decPHI(env, ticket.encMobile); } catch (e) {}
+  if (!mobile) return { skipped: true, reason: "no_phone" };
+  if (!(await chargeVisit(env, session, ticket))) return { skipped: true, reason: "quota-exhausted" };
+  var res;
+  try { res = await send(env, mobile, body, url); } catch (e) { res = { ok: false, reason: "exception" }; }
+  await auditNotify(env, session, ticket, "tele_link", res, mask(mobile));
+  return res;
+}
 
 // Send one event for one ticket (idempotent, best-effort — never throws to the caller).
 export async function notifyTicket(env, session, ticket, event, vars) {

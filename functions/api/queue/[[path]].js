@@ -32,7 +32,8 @@ import * as FORMS from "../../_forms_store.js";
 import * as PATHWAYS from "../../_pathways_store.js";
 import { submitFormResponse, patientFormResponses, intakeResponses, reviewIntake, intakeSettings } from "../../_wardsynq/form-response.js";
 import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
-import { notifyTimeline } from "../../_queue_notify.js";
+import { notifyTimeline, notifyTeleLink } from "../../_queue_notify.js";
+import * as TELE from "../../_telehealth.js";
 import { msgRefusalIfOut } from "../../_quota.js";
 import { getEntitlement as msgEntitlement } from "../../_entitlements.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
@@ -804,6 +805,7 @@ async function boardForOrg(env, org, date) {
     orgCode: org.code,
     hasLogo: hasLogo,
     thresholds: org.thresholds,
+    telehealth: TELE.telehealthSettings(org).on,   // video visits offered only when the hospital named a video server
     opdBillingMode: org.opdBillingMode || "pay_first",
     defaultConsultationFee: org.defaultConsultationFee || 0,
     rooms: out,
@@ -1237,6 +1239,31 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "portal") {   // PHI-free live position
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
       return json(await Q.portalContext(env, url.searchParams.get("t") || ""), 200, request);
+    }
+    /* VIDEO VISIT, THE PATIENT'S SIDE (functions/_telehealth.js). The ticket's own signed token, no login. /tele/wait is the
+     * waiting page's poll: the portal's PHI-free snapshot plus whether the doctor has started. /tele/room hands out the
+     * room address ONLY while the visit is in consultation, and records that the patient joined. A closed visit's token
+     * is already dead (tokenVer), and a hospital that switched video off gets no room either. */
+    if (seg === "tele" && (sub === "wait" || sub === "room")) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
+      const tk = url.searchParams.get("t") || "";
+      const snap = await Q.portalContext(env, tk);
+      if (!snap.ok) return json({ ok: false, error: snap.error }, 200, request);
+      const t = await Q.getTicket(env, Q.ticketIdFromToken(tk));
+      const js = TELE.joinState(t);
+      if (js.reason === "not_teleconsult") return json({ ok: false, error: "invalid_link" }, 200, request);
+      const cfg = TELE.telehealthSettings(await ORG.getOrg(env, t.hospitalId));
+      if (!cfg.on) return json({ ok: false, error: "video_off" }, 200, request);
+      if (sub === "wait" && method === "GET") {
+        return json({ ok: true, video: true, ready: js.ready, closed: !js.live, status: snap.status, position: snap.position, ahead: snap.ahead,
+          clinicName: snap.clinicName, clinicLogo: snap.clinicLogo, doctorStatus: snap.doctorStatus, lastUpdated: snap.lastUpdated }, 200, request);
+      }
+      if (sub === "room" && method === "POST") {
+        if (!js.ready) return json({ ok: false, error: js.live ? "not_started" : "visit_closed" }, 409, request);
+        await Q.qAudit(env, { hospitalId: t.hospitalId, ticketId: t.id, actor: "patient", action: "tele_join", meta: "patient" });
+        return json({ ok: true, roomUrl: TELE.roomUrl(cfg.baseUrl, t.teleRoom) }, 200, request, { "Cache-Control": "no-store" });
+      }
+      return json({ ok: false, error: "not_found" }, 404, request);
     }
     // Patient's own sealed encounter timeline (their data, secure token, 7-30d window). No auth/login.
     if (method === "GET" && seg === "timeline" && url.searchParams.get("t")) {
