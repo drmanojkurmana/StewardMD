@@ -116,7 +116,12 @@ try {
 
   /* ── the library really is the whole library ────────────────────────────────────────── */
   const stats = await page.evaluate(() => SMD_OFFLINE_CLINICAL.stats());
-  ok(stats && stats.struct > 1600 && stats.index > 1600, "bundle + supplement + index all loaded: " + JSON.stringify(stats));
+  // 1,592 = the 1,541-row bundle plus the 51 supplement rows that are a genuinely new molecule.
+  // The other 53 authored records are salt forms of a molecule the bundle already carries
+  // ("Atropine sulfate" IS atropine) and are deliberately not shipped as a second row; the index
+  // strips the counter-ion from a query instead, so those names are still findable.
+  ok(stats && stats.struct > 1500 && stats.index === stats.struct,
+    "bundle + supplement + index all loaded and agree: " + JSON.stringify(stats));
 
   console.log(fails ? "\n" + fails + " FAILED" : "\nall passed");
 } finally {

@@ -334,15 +334,18 @@ try {
   ok(await ev(`return ATLAS._state.view==='catalog' && window.__roDisc>${disc0}`), "leaving the viewer disconnects the ResizeObserver");
   await ev(`window.__of=window.__of||window.fetch; window.fetch=function(u){ var d=/ct-head-axial\\/atlas\\.json/.test(String(u))?1500:/ct-abdomen-axial\\/atlas\\.json/.test(String(u))?700:0; var a=arguments, self=this; return new Promise(function(r){setTimeout(r,d)}).then(function(){return window.__of.apply(self,a)}); }; return 1;`);
   await until(`return !!document.querySelector('#smdAtlas .atlas-row[data-atlas-mod="ct-head-axial"]')`);
+  ok(await ev(`var b=document.querySelector('#smdAtlas .atlas-row[data-atlas-mod="ct-head-axial"] .atlas-beta'); return !!b && /^Beta/.test(b.textContent) && /unverified, may contain mistakes/.test(b.textContent) && !document.querySelector('#smdAtlas .atlas-row[data-atlas-mod="ct-live-torso-axial"] .atlas-beta')`), "an unverified module's row says Beta (with the full meaning for screen readers); a verified one does not");
   // Tap a module, back, tap another, back, tap a third: all within one tick, while the first two
   // module fetches are still in flight (1.5 s and 0.7 s) and the last resolves at once.
   await ev(`['ct-head-axial','ct-abdomen-axial','ct-knee-axial'].forEach(function(id, i){ if (i) ATLAS.back(); document.querySelector('#smdAtlas .atlas-row[data-atlas-mod="'+id+'"]').click(); }); return 1;`);
   await sleep(2200);
   ok(await ev(`var s=ATLAS._state; return s.moduleId==='ct-knee-axial' && !!s.atlas && s.atlas.id==='ct-knee-axial' && /ct-knee-axial/.test(document.getElementById('atlasImg').getAttribute('src'))`), "rapid switching (slow, slower, fast) ends on the LAST module" + (process.env.DIAG ? await ev('var s=ATLAS._state; return JSON.stringify({m:s.moduleId, a:s.atlas&&s.atlas.id, v:s.view, src:(document.getElementById("atlasImg")||{}).src, rows:document.querySelectorAll("#smdAtlas .atlas-row").length})') : ""));
+  ok(await ev(`var f=document.querySelector('#smdAtlas .atlas-foot'); return !!f && f.classList.contains('is-beta') && /Beta · Unverified, may contain mistakes/.test(f.textContent) && !!document.querySelector('#smdAtlas .atlas-sub .atlas-beta')`), "an unverified module's viewer says Beta in the header and the footer");
   await ev(`window.fetch=window.__of; return 1;`);
   await ev(`ATLAS.openAt('ct-live-torso-axial','kidney',5); return 1;`);
   ok(await until(`var sh=document.getElementById('atlasSheet'); return ATLAS._state.moduleId==='ct-live-torso-axial' && ATLAS._state.locked==='kidney' && ATLAS._state.sel==='kidney' && ATLAS._state.slice===5 && !!sh && sh.classList.contains('on')`), "openAt(module, structure, slice) still opens, jumps and locks");
   ok(await ev(`return ATLAS._state.z.s===1 && ATLAS._state.quiz===null && ATLAS._state.ruler===null`), "a new module visit starts clean (zoom, quiz, ruler reset)");
+  ok(await ev(`var f=document.querySelector('#smdAtlas .atlas-foot'); return !!f && !f.classList.contains('is-beta') && /Educational reference only/.test(f.textContent) && !document.querySelector('#smdAtlas .atlas-sub .atlas-beta')`), "a verified module's viewer carries no Beta label");
   await ev(`ATLAS.close(); return 1;`);
   ok(await ev(`return !ATLAS.isOpen() && !document.body.classList.contains('atlas-lock')`), "close() closes the atlas");
 

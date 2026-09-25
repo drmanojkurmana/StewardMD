@@ -37,17 +37,31 @@ function norm(s) {
     .replace(/[^a-z0-9]+/g, " ").trim();
 }
 
+/* A counter-ion, not a different drug. "Atropine sulfate" IS atropine; the bundle already carries
+ * the molecule under its plain name, and shipping both put two rows for one drug in every search.
+ * Comparing this way is only safe because it is applied to SUPPLEMENT rows against BUNDLE keys:
+ * it never merges two bundle rows, so the genuinely distinct products that differ by salt --
+ * Calcium Acetate / Chloride / Gluconate, Fluticasone Furoate vs Propionate, Metoprolol succinate
+ * vs tartrate -- are untouched, and none of them appear in the set this drops.
+ * All 53 rows it removes were reviewed one by one: every one is the same therapeutic entity, and
+ * the bundle's copy was equal or richer in every sampled pair (same section count, marginally more
+ * text). Salts that CHANGE the clinical use must never be added to this list. */
+const SALT = /\s+(sodium|potassium|calcium|disodium|hydrochloride|hcl|sulfate|sulphate|acetate|citrate|tartrate|maleate|besilate|besylate|mesylate|mesilate|phosphate|succinate|fumarate|bisulfate|bitartrate|dipropionate|propionate|valerate|furoate|tromethamine|pivoxil|axetil|etexilate|decanoate|palmitate|monohydrate|dihydrate|xinafoate|bromide|chloride|nitrate|oxide|gluconate|lactate|malate|oxalate|pamoate|stearate|trometamol)$/i;
+function saltBase(s) { return norm(s).replace(SALT, "").trim(); }
+
 const bundle = JSON.parse(gunzipSync(readFileSync(BUNDLE)).toString("utf8"));
 const have = new Set(Object.keys(bundle.struct || {}).map(norm));
+const haveSalted = new Set(Object.keys(bundle.struct || {}).map(saltBase));
 
 const struct = {};
-let scanned = 0, skipped = 0;
+let scanned = 0, skipped = 0, salted = 0;
 for (const f of readdirSync(GOLD).filter((x) => x.endsWith(".json")).sort()) {
   let g;
   try { g = JSON.parse(readFileSync(join(GOLD, f), "utf8")); } catch { skipped++; continue; }
   scanned++;
   const name = String(g.generic || "").trim();
   if (!name || have.has(norm(name))) continue;
+  if (haveSalted.has(saltBase(name))) { salted++; continue; }   // same molecule, different counter-ion
   struct[name] = { gold: JSON.stringify(g) };     // same {gold:"<json string>"} shape as the bundle
   have.add(norm(name));                            // two gold files for one molecule must not both ship
 }
@@ -58,5 +72,6 @@ writeFileSync(OUT, gz);
 
 const names = Object.keys(struct);
 console.log(`scanned ${scanned} gold files (${skipped} unreadable); bundle already had ${Object.keys(bundle.struct || {}).length}`);
+console.log(`skipped ${salted} salt-form duplicates of a molecule the bundle already carries`);
 console.log(`data/clinical-supplement.json.gz: ${names.length} molecules, ${(statSync(OUT).size / 1024).toFixed(0)} KB gzipped`);
 console.log(`first few: ${names.slice(0, 6).join(", ")}`);

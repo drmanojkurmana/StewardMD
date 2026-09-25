@@ -9238,6 +9238,24 @@ floor; closing the app re-locks it. The backup holds only what exists nowhere el
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
 
+## 2026-09-25 - The OPD dashboard proxies the console's buttons; it never re-implements an action
+The operations dashboard's occupancy rows, sidebar, palette and task inbox call `.click()` on the console's
+existing, permission-gated buttons (or its named functions: reconcileNow, offTick). A second copy of an action
+is how two screens drift into different payloads or permissions. Month and yesterday figures come from sessions
+that already exist (read-only), so viewing history never creates a queue session for a past day. Default on
+behind `smd_opd_dash`, classic layout one click away, until the owner approves it permanently.
+
+## 2026-09-25: Video visits are off by default, the room name is the lock, the patient gets it only in consultation
+Jitsi rooms are open to anyone with the name, so the name is 128 random bits (`wsq-` + hex), minted per visit,
+never built from patient data, and never sent to staff lists or in the SMS. The patient's link is the ticket's
+own signed token on stewardmd.in (`/tele?t=`), which hands out the room only while the visit is in consultation
+and dies when the visit completes or is cancelled. A public server (meet.jit.si) is allowed but the settings
+screen says the video then passes through a server the hospital does not run. Consent (who agreed, who recorded
+it) is required and audited in the same commit. Which server to run, and whether native clinics get a settings
+screen, are owner decisions still open.
+**Owner, 2026-09-25: ships as COMING SOON.** Off for every hospital until the deployment sets
+`TELEHEALTH_READY=1`; Admin shows "Coming soon" instead of the settings form.
+
 ## 2026-09-25 — Stores/pharmacy stock gets OPT-IN pack-size conversion; the "no unit conversion" rule narrows, it does not fall
 stock.js, purchasing.js and stores.js said "UNITS ARE NOT CONVERTED" since they were written: guessing
 that a box is twenty-eight tablets produces a confident number that is wrong by a factor of twenty-
@@ -9567,6 +9585,67 @@ the server route and the client flag now default ON in code; `KITS_SHARE_ON=0` a
 are the kill switches. Before switching on, a colleague became addressable by sign-in email as well as
 StewardMD ID (most doctors have no ID yet), the sheet shows your own ID, and sends and invites spend
 the rate limit before the directory lookup so the directory cannot be probed for free.
+
+## 2026-09-26 - RadioAnatome: unverified modules say Beta, they are not hidden
+
+**Context.** The radiologist's sign-off on /validation (2026-08-19, head CT notes updated 2026-08-25)
+rejected 13 modules and marked 16 "needs fix"; nothing in the app read those verdicts, so every
+module looked equally finished to a student.
+
+**Decision (owner).** Do not hide rejected modules. Every module shows a "Beta" pill on its catalog
+row and in the viewer header, and the viewer footer reads "Beta · Unverified, may contain mistakes.
+Not for diagnosis." A module drops the label only when `modules.json` carries `verified: true`, which
+is set by hand after a "verified" verdict on /validation. New modules are Beta by default.
+
+**Consequence.** Only the three living-torso modules are verified. The label is static data, not a
+live read of /api/validation, so a new sign-off needs a `modules.json` edit and an app update.
+
+## 2026-09-25 — Four deferred calls, taken
+
+Owner delegated the four items left open after the bug-sheet work. What was decided and why.
+
+**1. `api.js goldFor()` was dead code. Repointed, not deleted.** It read
+`window.SMD_GOLD_MONOGRAPHS` from `data/gold-monographs.js`, a file that has never existed here, so
+it always returned null and `compClass()` fell through to a 109-molecule formulary. The library it
+wanted does exist under another name: `data/clinical-index.js` now exposes `get()` and `goldFor()`
+reads that, so a molecule's class comes from the authored record for 1,592 molecules. Deleting it
+would have been the smaller change and lost that. The two call sites in `renderStructured()` that
+wanted a WHOLE record were deleted instead: `offline-clinical.js` wraps `MEDAPI.structured` and has
+already merged the bundled record into the response by then, so they were reaching a second time for
+something already in hand.
+
+*Caught in passing:* the first `get()` shipped `/s*(.*?)s*/` because the builder emits this code
+inside a JS template literal, which ate the backslashes. It silently matched nothing. Escapes in the
+generator must be doubled; there is a test for the strength-suffixed lookup now.
+
+**2. `/monograph` is dead in production; the client stops asking.** The `monographs` table was never
+loaded, so it answers `found:false` for every molecule, Amoxicillin included. The bundle already
+covers it, but every drug opened still paid for a doomed round trip, up to api.js's 20s timeout.
+`offline-clinical.js` now opens a per-session circuit breaker after three consecutive empty answers
+and serves the bundle directly; any hit re-arms it. Deliberately session-scoped and never persisted,
+so **loading the table server-side needs no client change** — the next launch asks again. Measured:
+3 network calls for 6 lookups instead of 6. Retiring the endpoint was rejected as a one-way door.
+
+**3. Legal em-dashes rewritten.** All 19 prose em-dashes in the disclaimer, terms, privacy,
+verification and onboarding copy, each to the punctuation its own sentence wants. No clause added,
+removed, softened or strengthened. The five placeholder dashes (`<option>—</option>`, a value not yet
+loaded) are a glyph, not punctuation, and are kept; the en dash in "doctor–patient" is correct
+typography and is kept.
+
+**4. Salt-form duplicates: dropped from the supplement, not merged in the data.** 53 of the 104
+supplement records were a counter-ion of a molecule the bundle already carried ("Atropine sulfate" IS
+atropine), which put two rows for one drug in every search. All 53 were reviewed individually and the
+bundle's copy was equal or richer in every sampled pair. They are no longer shipped.
+
+The rule compares **supplement rows against bundle keys only**, so it can never merge two bundle rows:
+Calcium Acetate / Chloride / Gluconate, Fluticasone Furoate vs Propionate and Metoprolol succinate vs
+tartrate are genuinely different products, and none of them appear in the dropped set.
+
+**Dropping the rows introduced a regression, which is the part worth remembering:** "Atropine sulfate"
+became unfindable. Stripping the counter-ion is therefore done on the QUERY as a last resort, never on
+the stored names, in `clinical-index.js` (`search`, `get`) and in `offline-clinical.js`
+(`lookStruct`, `lookMono`) so a composition from the brand catalogue still resolves. An exact name
+still wins first, so a distinct salt with its own record is matched before any stripping happens.
 ## 2026-09-19 — Medical Core Phase 1: deterministic first, on the device, no model
 
 **Decision.** The Medical Core ML layer is built in the order deterministic → baseline → model, and
