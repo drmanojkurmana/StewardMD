@@ -47,6 +47,7 @@ import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js"
 import * as BILL from "../../_clinic_billing_store.js";
 import { fsCommit, wUpdate } from "../../_fbfirestore.js";
 import * as DC from "../../_day_close.js";
+import * as INS from "../../_opd_insights.js";
 import { orderQueue, orderRoomView, displayBoard, opdPulse, dayClose } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge, deviceLabel } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
@@ -352,6 +353,38 @@ async function dayCloseReport(env, org) {
       out.unbilled = (await BILL.billingQueue(env, org.id)).orders.length;
     } catch (e) { out.moneyUnread = true; }
   }
+  return out;
+}
+/* The OPD dashboard (GET /opd-insights). Today comes from opdDay (the pulse's own walk); a PAST day is read from the
+ * sessions that already exist (listSessions, read-only: looking at last Tuesday must never create a session for it).
+ * A past day cannot change much, so each isolate keeps its slimmed tickets (no patient data) for ten minutes. */
+const INSIGHT_CACHE = new Map(), INSIGHT_TTL = 10 * 60000;
+async function pastDayTickets(env, orgId, date) {
+  const key = orgId + "|" + date, hit = INSIGHT_CACHE.get(key);
+  if (hit && Date.now() - hit.at < INSIGHT_TTL) return hit.rows;
+  const rows = [];
+  for (const s of await Q.listSessions(env, orgId, date)) {
+    if (String(s.hospitalId) !== String(orgId)) continue;
+    rows.push(...(await Q.listTickets(env, s.id)).map(INS.slim));
+  }
+  if (INSIGHT_CACHE.size > 2000) INSIGHT_CACHE.clear();
+  INSIGHT_CACHE.set(key, { at: Date.now(), rows });
+  return rows;
+}
+async function opdInsights(env, org) {
+  const date = Q.opdDate(""), { rows, unread } = await opdDay(env, org, "");
+  const yDate = INS.prevDate(date), past = INS.monthDates(date).slice(0, -1), month = [];
+  const unreadDays = [];
+  let yesterday = null;
+  for (const d of past) {
+    try { month.push({ date: d, tickets: await pastDayTickets(env, org.id, d) }); } catch (e) { unreadDays.push(d); }
+  }
+  const inMonth = month.find((m) => m.date === yDate);
+  if (inMonth) yesterday = inMonth.tickets;
+  else { try { yesterday = await pastDayTickets(env, org.id, yDate); } catch (e) { unreadDays.push(yDate); yesterday = []; } }
+  const out = { ok: true, ...INS.insights({ today: rows, yesterday, month, date, nowMs: Date.now(), offsetMin: orgOffsetMinutes(org) }) };
+  if (unread.length) out.unread = unread;
+  if (unreadDays.length) out.unreadDays = unreadDays;   // a day that could not be read is said, never drawn as zero
   return out;
 }
 async function opdResultBack(env, org, patientId) {
@@ -6566,6 +6599,16 @@ export async function onRequest(context) {
       if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
       const { rows, unread } = await opdDay(env, org, url.searchParams.get("date") || "");
       return json({ ok: true, pulse: opdPulse(rows, Date.now()), ...(unread.length ? { unread } : {}) }, 200, request);
+    }
+    /* The console's dashboard: hourly registrations, the month, the visit mix and today against the same time
+     * yesterday. Counts and durations only (no names), so queue.view like the pulse. */
+    if (method === "GET" && seg === "opd-insights") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      return json(await opdInsights(env, org), 200, request);
     }
     if (method === "GET" && seg === "opd-board") {
       const orgId = url.searchParams.get("orgId") || "";

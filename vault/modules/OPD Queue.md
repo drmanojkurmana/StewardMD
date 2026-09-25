@@ -84,3 +84,21 @@ node/action parity for admin, doctor, nurse, cashier and pharmacy, view switchin
 filter/focus retention, 320-1440px, dark/reduced-motion and fallback. The existing
 `test/run-opd-clinic-billing-ui.mjs` exercises the real mocked router through clinic registration,
 vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both browser suites.
+
+## Operations dashboard (2026-09-25, branch opd-premium-dashboard, draft PR)
+`opd-dashboard.js` (window.SMD_OPD_DASH) + `opd-dashboard.css`, over the Flow Board layout above. Flag
+`localStorage.smd_opd_dash` (default on; "0", or the sidebar's "Classic layout", returns the Flow Board;
+"New dashboard" in that sidebar comes back). `smd_opd_flow_ui = "0"` still restores the original board under both.
+- Cards: KPI strip (pulse + day-close money + /opd-insights deltas vs the same time yesterday), Live occupancy
+  (st.opd rooms + pool or the legacy board; each row's action is the console's OWN button clicked via
+  `dashHost.actionsFor`, so handlers, payloads and permissions are the console's), Peak hours, Month volume,
+  Visit mix, Tasks and approvals (reconcile, offline desk, results back, recallable no-shows, follow-ups via
+  WARD.open act "scheduling", unpaid orders, refunds). Sidebar groups move the console's buttons in by id.
+  Ctrl/Cmd-K palette runs the same buttons and finds a patient on the board.
+- Server: GET /opd-insights (queue.view) in the queue router, pure figures in `functions/_opd_insights.js`.
+  Past days read through `Q.listSessions` (read-only; never getOrCreate for a past day) and are cached per isolate
+  for 10 min as slimmed rows (no PHI). Counts only.
+- The script loads WITHOUT defer: the ?mock=1 preview renders during parse.
+- GOTCHA: ward.css styles every `<header>`; the cards' own `<header class="dz-ch">` is reset in opd-dashboard.css.
+- Tests: test/opd-insights.test.mjs (router harness), test/opd-dashboard-model.test.mjs, browser
+  test/run-opd-dashboard-ui.mjs (26 checks, screenshots). test/run-opd-console-flow-ui.mjs pins smd_opd_dash=0.

@@ -2,10 +2,10 @@ name: OPD console UI
 on:
   pull_request:
     branches: [main]
-    paths: ['opd.html', 'test/run-opd-clinic-billing-ui.mjs', 'test/run-opd-console-flow-ui.mjs', '.github/workflows/opd-console-ui.yml']
+    paths: ['opd.html', 'opd-dashboard.js', 'opd-dashboard.css', 'test/run-opd-clinic-billing-ui.mjs', 'test/run-opd-console-flow-ui.mjs', 'test/run-opd-dashboard-ui.mjs', '.github/workflows/opd-console-ui.yml']
   push:
     branches: [main, feat/opd-flow-revamp]
-    paths: ['opd.html', 'test/run-opd-clinic-billing-ui.mjs', 'test/run-opd-console-flow-ui.mjs', '.github/workflows/opd-console-ui.yml']
+    paths: ['opd.html', 'opd-dashboard.js', 'opd-dashboard.css', 'test/run-opd-clinic-billing-ui.mjs', 'test/run-opd-console-flow-ui.mjs', 'test/run-opd-dashboard-ui.mjs', '.github/workflows/opd-console-ui.yml']
 permissions:
   contents: read
 jobs:
@@ -22,10 +22,14 @@ jobs:
           node-version: '24'
       - name: OPD presentation and permission parity
         run: node test/run-opd-console-flow-ui.mjs
+      - name: Operations dashboard (cards, row actions, palette, themes, phone)
+        run: node test/run-opd-dashboard-ui.mjs
       - name: Real clinic registration, vitals, billing and pharmacy journey
         run: node --experimental-test-module-mocks test/run-opd-clinic-billing-ui.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: opd-console-screenshots
-          path: test-output/opd-flow-*.png
+          path: |
+            test-output/opd-flow-*.png
+            test-output/opd-dash-*.png

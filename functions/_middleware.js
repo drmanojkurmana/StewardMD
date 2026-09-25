@@ -247,6 +247,9 @@ export async function onRequest(context) {
       url.pathname === "/opd-pulse-model.js" ||
       url.pathname === "/opd-offline-desk.js" ||
       url.pathname === "/opd-live.js" ||
+      // The console's operations dashboard (2026-09-25): the same gate, the same silent failure if missed.
+      url.pathname === "/opd-dashboard.js" ||
+      url.pathname === "/opd-dashboard.css" ||
       url.pathname === "/ward-labels.js" ||
       // Self-hosted fonts (Inter Variable body text + Material Symbols Rounded icon font, both
       // @font-face'd by every PUBLIC_PAGE: opd/opd-display/queue/subscribe). Public, non-sensitive

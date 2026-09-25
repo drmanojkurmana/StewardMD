@@ -9209,3 +9209,10 @@ takes the password once per app session and, while unlocked, backs up on change 
 floor; closing the app re-locks it. The backup holds only what exists nowhere else (drafts, queue,
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
+
+## 2026-09-25 - The OPD dashboard proxies the console's buttons; it never re-implements an action
+The operations dashboard's occupancy rows, sidebar, palette and task inbox call `.click()` on the console's
+existing, permission-gated buttons (or its named functions: reconcileNow, offTick). A second copy of an action
+is how two screens drift into different payloads or permissions. Month and yesterday figures come from sessions
+that already exist (read-only), so viewing history never creates a queue session for a past day. Default on
+behind `smd_opd_dash`, classic layout one click away, until the owner approves it permanently.
