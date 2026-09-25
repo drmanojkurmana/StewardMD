@@ -8,7 +8,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-const { seedHospital, as, admittedPatient, docs, ORG, DOCTOR, LAB, ADMIN } = await import("./_wardsynq-alert-harness.mjs");
+const { seedHospital, as, admittedPatient, docs, ORG, DOCTOR, LAB, ADMIN, staffToken, idFor } = await import("./_wardsynq-alert-harness.mjs");
 
 test("a released result recalls today's OPD ticket for that patient, matched from the record id to the ticket's MRN", async () => {
   seedHospital();
@@ -16,9 +16,16 @@ test("a released result recalls today's OPD ticket for that patient, matched fro
   const q = await as(ADMIN, "/pool", "POST", { orgId: ORG, name: "Ravi", mobile: "9876543299", mrn: p.mrn });
   assert.equal(q.__status, 200, JSON.stringify(q));
   const t = q.ticket;
-  // Sent for tests by the doctor (the status walk has its own tests; this one is about finding the patient again).
-  const d = docs.get("q_tickets/" + t.id); d.fields.status = "investigation";
-  assert.equal(d.fields.mrn, p.mrn, "the desk's ticket carries the MRN");
+  // Sent for tests the way the console does it (opd.html "Send for Tests"): called, in with the doctor, then at_diagnostics,
+  // every step through the real /status route. The recall used to look for "investigation" only and never fired from here.
+  const sid = docs.get("q_tickets/" + t.id).fields.sessionId;
+  const desk = { "X-Staff-Token": await staffToken(ORG, idFor(DOCTOR)) };   // signed in at the console, as opd.html sends it
+  for (const status of ["called", "in_consultation", "at_diagnostics"]) {
+    const st = await as(null, "/status", "POST", { sessionId: sid, ticketId: t.id, status }, desk);
+    assert.equal(st.__status, 200, status + " " + JSON.stringify(st));
+  }
+  assert.equal(docs.get("q_tickets/" + t.id).fields.status, "at_diagnostics");
+  assert.equal(docs.get("q_tickets/" + t.id).fields.mrn, p.mrn, "the desk's ticket carries the MRN");
   const order = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: p.encounterId, code: "Haemoglobin", category: "laboratory" });
   assert.equal(order.__status, 200, JSON.stringify(order));
   assert.equal((await as(LAB, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: order.orderId, specimenType: "Whole blood" })).__status, 200);
