@@ -103,7 +103,10 @@
   function sources() {
     var out = [];
     try {
-      var H = G.SMD_HOSPITALS;
+      /* SMD_HOSPITAL_DIRECTORY is the directory's own global. SMD_HOSPITALS is checked second and
+       * only when it looks like the directory (it has .all), because hospital-registry.js owns that
+       * name for the CONNECTED-hospital registry — reading .all() off the registry would throw. */
+      var H = G.SMD_HOSPITAL_DIRECTORY || (G.SMD_HOSPITALS && G.SMD_HOSPITALS.all ? G.SMD_HOSPITALS : null);
       if (H && H.all) {
         H.all().forEach(function (h) {
           out.push({ name: str(h.name), city: str(h.city), state: str(h.state), type: h.type || "hospital", src: "curated" });
@@ -251,7 +254,42 @@
     return out;
   }
 
+  /* ── one line for every surface in the app ────────────────────────────────────────────────
+   * The directory is heavy, so it stays lazy — but nothing should have to know that, or know which
+   * files to load, or which global holds what. Any screen that needs an institution calls
+   * SMD_INSTITUTIONS.ensure().then(...) and gets the whole merged directory. This module itself is
+   * tiny and loads with the app, so the entry point is always there.
+   * The reason this exists: the list was in the build all along and only two screens could reach
+   * it, because reaching it meant knowing three private details. */
+  var _ensure = null;
+  function loadScript(src) {
+    return new Promise(function (resolve) {
+      try {
+        if (typeof G.smdLazy === "function") {
+          Promise.resolve(G.smdLazy(src)).then(function () { resolve(true); }, function () { resolve(false); });
+          return;
+        }
+        if (!G.document) { resolve(false); return; }
+        var el = G.document.createElement("script");
+        el.src = src;
+        el.onload = function () { resolve(true); };
+        el.onerror = function () { resolve(false); };
+        (G.document.head || G.document.documentElement).appendChild(el);
+      } catch (e) { resolve(false); }
+    });
+  }
+  function loaded() { return !!(G.SMD_HOSPITAL_DIRECTORY || (G.SMD_HOSPITALS && G.SMD_HOSPITALS.all)); }
+  function ensure() {
+    if (loaded()) { refresh(); return Promise.resolve(API); }
+    if (_ensure) return _ensure;
+    _ensure = loadScript("/hospitals-in.js?v=hin2")
+      .then(function () { return loadScript("/smd-geo.js?v=gold472"); })
+      .then(function () { refresh(); return API; });
+    return _ensure;
+  }
+
   var API = {
+    ensure: ensure, loaded: loaded,
     states: states, cities: cities, allCities: allCities, searchCities: searchCities,
     stateOf: stateOf, cityCount: cityCount,
     all: all, refresh: refresh, count: count, search: search, options: options, remember: remember,

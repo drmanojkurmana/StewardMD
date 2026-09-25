@@ -140,6 +140,42 @@ try {
   ok(await ev(`return SMD_INSTITUTIONS.search("Sunrise Rural").some(function(h){return h.name==="Sunrise Rural Trust Hospital";});`) === true,
     "and it is remembered, so the next colleague there finds it");
 
+  /* ── the directory must be reachable from ANYWHERE, not just this form ──
+   * Reported: "we already have whole india college and hospital list, why isn't it universally
+   * available in app". It was in the build all along; three things kept it from the rest of the app
+   * and all three are asserted here. */
+  await ev(`var b=document.getElementById("pfsBack"); if(b) b.click(); return 1;`); await sleep(400);
+  ok(await ev(`return typeof (window.SMD_INSTITUTIONS||{}).ensure;`) === "function",
+    "every screen has a one-line way in: SMD_INSTITUTIONS.ensure()");
+  ok(await ev(`return !!window.SMD_HOSPITAL_DIRECTORY;`) === true,
+    "the directory has its own global instead of borrowing one");
+
+  // The collision: hospital-registry.js owns SMD_HOSPITALS for CONNECTED hospitals. Loading the
+  // directory used to delete setActive() off it, and ghis-ward.js then silently stopped
+  // remembering the doctor's active hospital.
+  const reg = await ev(`return JSON.stringify({
+    setActive: typeof (window.SMD_HOSPITALS||{}).setActive,
+    list: typeof (window.SMD_HOSPITALS||{}).list,
+    dirAll: typeof (window.SMD_HOSPITAL_DIRECTORY||{}).all
+  });`);
+  const r = JSON.parse(reg);
+  ok(r.setActive === "function" && r.list === "function",
+    "the connected-hospital registry survives the directory loading " + reg);
+  ok(r.dirAll === "function", "and the directory is loaded at the same time");
+
+  // A surface that is not the profile form can reach the whole list in one call.
+  const anywhere = await ev(`
+    window.__any = null;
+    SMD_INSTITUTIONS.ensure().then(function (I) {
+      window.__any = { count: I.count(), kgh: I.search("King George", { limit: 3 }).length, cities: I.allCities().length };
+    });
+    return 1;`);
+  await sleep(1200);
+  const any = JSON.parse(await ev(`return JSON.stringify(window.__any);`) || "null");
+  ok(any && any.count > 2000, "any screen gets the whole merged directory " + JSON.stringify(any));
+  ok(any && any.kgh > 0, "and can search it");
+  ok(any && any.cities > 1000, "and the city list with it");
+
   if (process.env.SHOT) {
     const shot = await call("Page.captureScreenshot", { format: "png" });
     (await import("node:fs")).writeFileSync(process.env.SHOT, Buffer.from(shot.result.data, "base64"));

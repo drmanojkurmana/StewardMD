@@ -272,12 +272,15 @@
     });
     return _loaded[src];
   }
+  /* SMD_INSTITUTIONS ships with the app and pulls the heavy data in itself, so this is one call.
+   * The script load below is only for the case where that module failed to load at all. */
   function loadDirectory() {
-    if (INST()) return Promise.resolve(true);
-    return loadScript("/hospitals-in.js?v=1")
-      .then(function () { return loadScript("/smd-geo.js?v=gold472"); })
-      .then(function () { return loadScript("/institutions-in.js?v=inst1"); })
-      .then(function () { return !!INST(); });
+    var I = INST();
+    if (I && I.ensure) return I.ensure().then(function () { return true; });
+    return loadScript("/institutions-in.js?v=inst1").then(function () {
+      var J = INST();
+      return J && J.ensure ? J.ensure().then(function () { return true; }) : false;
+    });
   }
 
   function form(force) {
