@@ -281,7 +281,11 @@ export async function recordUsage(gate, info) {
   if (!gate || !gate.meter || !gate.store) return;
   const cfg = gate.cfg, store = gate.store;
   const inTok = Math.max(0, info.inTok | 0), outTok = Math.max(0, info.outTok | 0);
-  const cost = estCostInr(cfg, inTok, outTok);
+  /* Implicit prompt caching (audit section 7): Vertex caches a repeated prompt prefix automatically
+   * and bills those input tokens at a 90% discount (usageMetadata.cachedContentTokenCount). Price
+   * them at 10% and count them, so the report shows whether the static system prompt is being hit. */
+  const cachedTok = Math.min(inTok, Math.max(0, info.cachedTok | 0));
+  const cost = estCostInr(cfg, inTok - cachedTok * 0.9, outTok);
   const u = gate.u, m = gate.m, g = gate.g;
   /* Only a GENERATED result counts against the per-user daily request caps (T36): a cache hit
    * (status "cache"), a failed call, and a continuation the caller marks noCount (MaiK's tier-2
@@ -294,7 +298,7 @@ export async function recordUsage(gate, info) {
     if (gate.type === "pdf") u.pdfPages += (info.pages || 1);
   }
   u.tokens += inTok + outTok; m.tokens += inTok + outTok;
-  g.cost += cost; g.req += 1;
+  g.cost += cost; g.req += 1; g.inTok = (g.inTok || 0) + inTok; g.cachedTok = (g.cachedTok || 0) + cachedTok;
   // per-request-type + status tallies for the admin view (no content)
   g.byType = g.byType || {}; g.byType[gate.type] = (g.byType[gate.type] || 0) + 1;
   g.byStatus = g.byStatus || {}; g.byStatus[info.status || "success"] = (g.byStatus[info.status || "success"] || 0) + 1;
@@ -306,7 +310,7 @@ export async function recordUsage(gate, info) {
   // read in checkQuota and written back here SECONDS later, so concurrent requests overwrote each
   // other; it is now only the fallback.
   const st = info.status || "success";
-  const gi = { "maik.cost": cost, "maik.req": 1, "maik.blocked": st === "blocked" ? 1 : 0 };
+  const gi = { "maik.cost": cost, "maik.req": 1, "maik.blocked": st === "blocked" ? 1 : 0, "maik.inTok": inTok, "maik.cachedTok": cachedTok };
   gi["maik.type." + gate.type] = 1; gi["maik.status." + st] = 1;
   if (!(await bump(gate.env, gate._day, gi))) await writeJson(store, "maik:global:" + gate._day, g, dayTtl);
   try { await addDailyCostInr(gate.env, gate._day, cost); } catch (e) {}   // atomic mirror (exact under concurrency)
@@ -359,6 +363,7 @@ export async function adminReport(env) {
     enabled: true, day, month,
     daily: { requests: g.req || 0, tokens: dayTokens, estCostInr: Math.round((g.cost || 0) * 100) / 100, blocked: g.blocked || 0 },
     byType: g.byType || {}, byStatus: g.byStatus || {},
+    promptCache: { inputTokens: g.inTok || 0, cachedTokens: g.cachedTok || 0, hitPct: g.inTok ? Math.round((g.cachedTok || 0) / g.inTok * 1000) / 10 : 0 },
     circuitBreaker: { status: breaker, dailyCostInr: Math.round((g.cost || 0) * 100) / 100, alertInr: cfg.costAlertInr, hardStopInr: cfg.costHardStopInr },
     limits: { generalDaily: cfg.generalDaily, caseDaily: cfg.caseDaily, dailyTokens: cfg.dailyTokens, monthlyTokens: cfg.monthlyTokens },
     accounts: users.slice(0, 50), accountCount: users.length,
