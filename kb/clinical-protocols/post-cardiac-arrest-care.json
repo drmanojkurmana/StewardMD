@@ -1,0 +1,95 @@
+{
+ "id": "post-cardiac-arrest-care",
+ "title": "Post-cardiac arrest care (adult)",
+ "subject": "critical-care",
+ "population": "Adults",
+ "setting": "Emergency department, cath lab, ICU",
+ "aliases": ["post-ROSC care", "post resuscitation care", "ROSC", "temperature control", "targeted temperature management", "TTM", "neuroprognostication", "post-cardiac arrest syndrome"],
+ "summary": "After ROSC: secure the airway, titrate oxygen to SpO2 90 to 98% (ERC 94 to 98%), keep PaCO2 35 to 45 mmHg and MAP 65 mmHg or more, use the 12-lead ECG to decide on emergency angiography, prevent fever in comatose patients for at least 36 to 72 hours, and delay multimodal neuroprognostication to 72 hours or more.",
+ "sections": [
+  {
+   "kind": "immediate",
+   "title": "Immediate stabilisation",
+   "items": [
+    "ABCDE. In patients who remain comatose, place or confirm an advanced airway with waveform capnography; ventilate with tidal volume 6 to 8 mL/kg predicted body weight.",
+    "Oxygen: 100% until SpO2 can be measured reliably, then titrate to SpO2 90 to 98% (PaO2 60 to 105 mmHg) per AHA 2025, or 94 to 98% (PaO2 75 to 100 mmHg) per ERC-ESICM 2025. Avoid hypoxaemia (PaO2 below 60 mmHg).",
+    "Ventilation: normocapnia, PaCO2 35 to 45 mmHg (4.7 to 6.0 kPa), unless there is severe acidaemia.",
+    "Circulation: MAP 65 mmHg or more (ERC above 60 to 65) with fluids and noradrenaline; add dobutamine for low cardiac output. Arterial line early.",
+    "12-lead ECG, echocardiography as soon as possible, blood gas with lactate, glucose, electrolytes, troponin."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Find the cause",
+   "items": [
+    "Persistent ST elevation with a likely cardiac cause: immediate coronary angiography and PCI.",
+    "No ST elevation: delay angiography unless acute coronary occlusion is likely (cardiogenic shock, recurrent VT/VF, ongoing ischaemia). If the cause is unclear, ERC-ESICM prioritises dual-phase whole-body CT including head and CT pulmonary angiography.",
+    "Treat reversible causes: PE, hyperkalaemia, tamponade, haemorrhage, hypoxia, poisoning; CT head for suspected intracranial haemorrhage."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Temperature control",
+   "items": [
+    "Patients not following commands after ROSC: use a deliberate temperature control strategy. AHA 2025: maintain 32 to 37.5 degrees C for at least 36 hours. ERC-ESICM 2025: actively prevent fever, keeping 37.5 degrees C or below, for 36 to 72 hours.",
+    "Do not actively rewarm comatose patients with mild hypothermia (32 to 36 degrees C) after ROSC; do not give rapid large-volume cold IV fluid in the prehospital setting.",
+    "Monitor core temperature continuously; use a feedback-controlled device where available, otherwise protocolised surface cooling with close temperature checks.",
+    "Treat shivering with analgesia and sedation, adding neuromuscular blockade if needed."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "ICU care",
+   "items": [
+    "Use short-acting sedatives and analgesics with daily sedation holds.",
+    "EEG from day 1 in comatose patients to detect seizures; treat clinical or electrographic seizures with levetiracetam or sodium valproate first-line. Do not give seizure prophylaxis.",
+    "Glucose 70 to 180 mg/dL (3.9 to 10 mmol/L); avoid hypoglycaemia.",
+    "Consider antibiotics if aspiration or infection is suspected; lung-protective ventilation, VTE prophylaxis, stress ulcer prophylaxis if at risk, early enteral feeding."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Neuroprognostication",
+   "items": [
+    "Do not prognosticate before 72 hours after ROSC, and only after normothermia and clearance of sedatives and neuromuscular blockers. Use several tests; never rely on one.",
+    "ERC-ESICM predictors of poor outcome in a patient who is not obeying commands: bilateral absent pupillary and corneal reflexes at 72 hours or more; bilateral absent N20 SSEP; highly malignant EEG after 24 hours (suppressed background with or without periodic discharges, or burst suppression).",
+    "Further predictors: NSE above 60 micrograms/L at 48 and/or 72 hours; status myoclonus within 72 hours; diffuse, extensive anoxic injury on CT or MRI. Two or more make a poor outcome likely.",
+    "Myoclonus with a benign EEG background: attempt a wake-up trial (may be Lance-Adams syndrome with good recovery).",
+    "Decisions on withdrawing life-sustaining treatment are separate from prognostication; involve senior clinicians and the family."
+   ]
+  },
+  {
+   "kind": "disposition",
+   "title": "Recovery, rehabilitation and donation",
+   "items": [
+    "Assess physical and cognitive or emotional impairment before discharge and arrange follow-up within 3 months.",
+    "Assess for an ICD; investigate unexplained arrest in young people for inherited heart disease and screen first-degree relatives.",
+    "Evaluate every patient who progresses to death for organ donation (after brain death or circulatory death)."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Hyperoxia, hyperventilation or hypotension in the first hours.",
+    "Early (under 72 hours) or single-test prognostication confounded by sedation or hypothermia.",
+    "Rushing to the cath lab without considering subarachnoid haemorrhage, PE or aortic dissection when the ECG is non-diagnostic.",
+    "Allowing fever in comatose patients after the first day."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Noradrenaline (norepinephrine)", "dose": "Start 0.05 to 0.1 micrograms/kg/min IV, titrate to MAP 65 mmHg or more", "notes": "Peripheral large vein acceptable while central access is arranged." },
+  { "name": "Dobutamine", "dose": "2.5 to 20 micrograms/kg/min IV", "notes": "Low cardiac output with adequate MAP (post-arrest myocardial stunning)." },
+  { "name": "Levetiracetam", "dose": "60 mg/kg IV (maximum 4500 mg) over 10 to 15 minutes for seizures", "notes": "First-line for post-arrest seizures (ERC-ESICM). Reduce maintenance dose in renal impairment." },
+  { "name": "Sodium valproate", "dose": "40 mg/kg IV (maximum 3000 mg) over 10 minutes for seizures", "notes": "Alternative first-line. Avoid in liver disease, pregnancy and mitochondrial disorders." },
+  { "name": "Propofol", "dose": "5 to 50 micrograms/kg/min IV (0.3 to 3 mg/kg/h)", "notes": "Short-acting sedation; watch for hypotension." },
+  { "name": "Fentanyl", "dose": "0.7 to 10 micrograms/kg/h IV infusion, or 25 to 50 microgram boluses", "notes": "Analgesia and shivering control." }
+ ],
+ "sources": [
+  { "org": "American Heart Association", "title": "Part 11: Post-Cardiac Arrest Care. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care", "year": 2025, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001375" },
+  { "org": "ERC / ESICM", "title": "European Resuscitation Council and European Society of Intensive Care Medicine guidelines 2025: post-resuscitation care", "year": 2025, "url": "https://link.springer.com/article/10.1007/s00134-025-08117-3" },
+  { "org": "Resuscitation Council UK", "title": "2025 Post-resuscitation care guidelines", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

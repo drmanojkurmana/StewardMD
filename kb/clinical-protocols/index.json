@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "36db33b6cbea",
- "count": 126,
+ "version": "6c69ee649c06",
+ "count": 128,
  "subjects": [
   {
    "key": "emergency",
@@ -11,7 +11,7 @@
   {
    "key": "critical-care",
    "label": "Critical Care",
-   "count": 4
+   "count": 5
   },
   {
    "key": "cardiology",
@@ -51,7 +51,7 @@
   {
    "key": "toxicology",
    "label": "Toxicology and Envenomation",
-   "count": 5
+   "count": 6
   },
   {
    "key": "haematology-oncology",
@@ -2480,6 +2480,32 @@
    "status": "ai_drafted"
   },
   {
+   "id": "opioid-overdose",
+   "title": "Opioid overdose (adult)",
+   "subject": "toxicology",
+   "population": "Adults",
+   "aliases": [
+    "opioid toxicity",
+    "opiate overdose",
+    "heroin overdose",
+    "fentanyl overdose",
+    "tramadol overdose",
+    "methadone overdose",
+    "naloxone",
+    "Narcan",
+    "respiratory depression",
+    "opioid reversal",
+    "naloxone infusion"
+   ],
+   "summary": "Support ventilation first, then give naloxone titrated to adequate breathing rather than full wakefulness (0.04 to 0.4 mg IV increments in hospital, or 0.4 to 2 mg IM, IV, SC or intranasal). Start an infusion at two-thirds of the effective reversal dose per hour if toxicity recurs, and observe until fully recovered.",
+   "sources": [
+    "WHO 2014",
+    "Utah Poison Control Center 2026",
+    "AHA 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "organophosphate-poisoning",
    "title": "Organophosphate and carbamate poisoning",
    "subject": "toxicology",
@@ -2558,6 +2584,29 @@
     "ASRA Pain Medicine 2018",
     "ASRA Pain Medicine 2025",
     "Dtsch Arztebl Int (Kellert et al.) 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "post-cardiac-arrest-care",
+   "title": "Post-cardiac arrest care (adult)",
+   "subject": "critical-care",
+   "population": "Adults",
+   "aliases": [
+    "post-ROSC care",
+    "post resuscitation care",
+    "ROSC",
+    "temperature control",
+    "targeted temperature management",
+    "TTM",
+    "neuroprognostication",
+    "post-cardiac arrest syndrome"
+   ],
+   "summary": "After ROSC: secure the airway, titrate oxygen to SpO2 90 to 98% (ERC 94 to 98%), keep PaCO2 35 to 45 mmHg and MAP 65 mmHg or more, use the 12-lead ECG to decide on emergency angiography, prevent fever in comatose patients for at least 36 to 72 hours, and delay multimodal neuroprognostication to 72 hours or more.",
+   "sources": [
+    "American Heart Association 2025",
+    "ERC / ESICM 2025",
+    "Resuscitation Council UK 2025"
    ],
    "status": "ai_drafted"
   },
