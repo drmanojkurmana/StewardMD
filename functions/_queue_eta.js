@@ -260,7 +260,8 @@ export function dayClose(tickets, nowMs, roomOf) {
   }).sort((a, b) => b.seen - a.seen || b.registered - a.registered);
   const priority = {};
   tickets.forEach((t) => { if ((t.priority || 0) > 0) { const r = t.priorityReason || "unstated"; priority[r] = (priority[r] || 0) + 1; } });
-  return { pulse: opdPulse(tickets, nowMs), rooms, priority, offline: tickets.filter((t) => t.offline).length };
+  // teleconsult: the visits held by video (functions/_telehealth.js), counted apart like the offline tokens.
+  return { pulse: opdPulse(tickets, nowMs), rooms, priority, offline: tickets.filter((t) => t.offline).length, teleconsult: tickets.filter((t) => t && t.teleconsult).length };
 }
 export function opdPulse(tickets, nowMs) {
   const rows = tickets || [], now = Number.isFinite(nowMs) ? nowMs : Date.now();

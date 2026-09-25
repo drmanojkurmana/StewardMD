@@ -273,6 +273,10 @@ export async function onRequest(context) {
   // from an SMS/WhatsApp link (…/queue?t=<opaque token>) with no app/account/cookie, so it must resolve
   // for anonymous visitors. Safe to expose — no PHI in the URL, and /api/queue/* self-authorises via the
   // signed token (only position/ETA/status are returned, never name/MRN/phone).
+  // "tele" is the login-free patient VIDEO waiting page (telehealth, tele.html): the SMS/WhatsApp link from
+  // POST /api/queue/tele/send-link (…/tele?t=<the ticket's opaque token>). Same reasoning as "queue": no PHI in
+  // the URL, and /api/queue/tele/wait + /tele/room self-authorise via the signed token. Everything it loads is
+  // inline or already allowed (self-hosted fonts, logo.png).
   // "opd" is the staff OPD operations console (opd.stewardmd.in / stewardmd.in/opd): staff sign in with
   // their GHIS employee-id inside the page; /api/queue/* + /api/ghis/staff-login self-authorise. The shell
   // must load for anonymous visitors (no StewardMD account). No PHI in the URL.
@@ -288,7 +292,7 @@ export async function onRequest(context) {
   // "subscribe" is the login-free (Google sign-in happens ON the page) web checkout for StewardMD Pro —
   // stewardmd.in/subscribe — Razorpay Standard Checkout. Must resolve for anonymous visitors since the
   // clinical app itself stays native-only; this is the ONLY way to buy Pro from a browser.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display", "clinic-billing", "validation", "subscribe"];
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "tele", "opd", "opd-display", "clinic-billing", "validation", "subscribe"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }

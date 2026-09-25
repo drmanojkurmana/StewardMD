@@ -155,6 +155,9 @@ function encounterFromTicket(input) {
    * into in_consultation), so the OPD waiting time survives the ticket's expiry. periodStart is the arrival. A ticket sent
    * back to the waiting hall drops its consult start, and so does this; a close keeps the last one recorded. */
   enc.consultStartAt = toIso(ticket.consultStartAt);
+  /* A video visit (functions/_telehealth.js): the consultation happened by video, a fact the record keeps. The room name
+   * never leaves the ticket. */
+  enc.virtual = !!ticket.teleconsult;
   return enc;
 }
 
@@ -166,6 +169,8 @@ function sameEncounter(a, b) {
     && (a.attendingId || null) === (b.attendingId || null)
     // An encounter written before consultStartAt existed is not "changed" by the field appearing.
     && (a.consultStartAt === undefined || (a.consultStartAt || null) === (b.consultStartAt || null))
+    // A visit that became a video visit is a change; an encounter written before virtual existed reads as in person.
+    && !!a.virtual === !!b.virtual
     && JSON.stringify(a.location || null) === JSON.stringify(b.location || null)
     && JSON.stringify(a.identifiers || []) === JSON.stringify(b.identifiers || []);
 }

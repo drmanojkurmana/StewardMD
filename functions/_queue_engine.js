@@ -15,6 +15,7 @@ import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTermina
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 import { isRole } from "./_queue_roles.js";
 import { resolveRoomDoctor, tokenScope, tokenConfig, formatToken, resolveTokenDepartment, department as M_department } from "./_opd_org.js";
+import { newRoomName, joinState } from "./_telehealth.js";
 
 const now = () => Date.now();
 const EMERGENCY_PAD_MIN = 10;
@@ -55,6 +56,8 @@ export async function decorateForDoctor(env, tickets) {
     const mrn = t.mrn || t.ghisPatientId || "";
     return Object.assign({}, t, {
       name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
+      // The room name is the room's only lock: it leaves the server only through /tele/start (audited) and the patient's link.
+      teleRoom: undefined, teleconsult: !!t.teleconsult,
       mrn: mrn,
       patientId: t.patientId || mrn || t.id,
       ghisPatientId: mrn,   // full MR# for the View-EMR-profile action (smd_opd_emr)
@@ -190,7 +193,12 @@ async function commitOfflineTicket(env, session, f, id, body) {
 }
 
 // ---- add a ticket (manual or import) ------------------------------------------------------
-export async function addTicket(env, session, body, actor, org) {
+/* Video visit fields. `tele` = { givenBy, by } comes only from the router after it has checked the hospital's video
+ * setting and the consent, never from a request body, so a crafted /pool body cannot make a ticket a teleconsult. */
+function teleFields(tele, actor) {
+  return { teleconsult: true, teleRoom: newRoomName(), teleConsentBy: String(tele.givenBy || "patient"), teleConsentAt: now(), teleConsentRecordedBy: String(tele.by || actor || "") };
+}
+export async function addTicket(env, session, body, actor, org, tele) {
   // Plan item 12: a patient registered ahead of the queue says why, and the reason sets the level.
   const prio = clampPriority(body.priority) > 0 || body.priorityReason ? priorityRule(body.priorityReason, body.priorityNote) : null;
   if ((clampPriority(body.priority) > 0 || body.priorityReason) && !(prio && prio.priority > 0)) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Say why this patient goes ahead of the queue." });
@@ -221,9 +229,10 @@ export async function addTicket(env, session, body, actor, org) {
   // The ticket carries the resolved department's id and its CURRENT name; the name is display only.
   if (td.department) { f.departmentId = td.department.id; f.department = td.department.name; }
   if (prio) { f.priority = prio.priority; f.priorityReason = prio.reason; }
+  if (tele) Object.assign(f, teleFields(tele, actor));
   if (body.offlineToken) await commitOfflineTicket(env, session, f, id, body);
   else await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
-  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token + (prio ? " priority:" + prio.reason + (prio.note ? " (" + prio.note.slice(0, 60) + ")" : "") : "") });
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + (f.teleconsult ? " video consent:" + f.teleConsentBy : "") + " token:" + f.token + (prio ? " priority:" + prio.reason + (prio.note ? " (" + prio.note.slice(0, 60) + ")" : "") : "") });
   await recompute(env, session);
   const ticket = withId(id, f);
   try { await notifyTicket(env, session, ticket, "registered", {}); } catch (e) {}   // best-effort SMS/WhatsApp
@@ -455,9 +464,25 @@ export async function getOrCreatePoolSession(env, org, date) {
   return getOrCreateSession(env, { hospitalId: org.id, doctorUid: POOL_DOCTOR, department: "", date: opdDate(date), source: "pool", doctorName: "Unassigned" });
 }
 // Register an unassigned (department-level) patient into the central pool.
-export async function addToPool(env, org, body, actor) {
+export async function addToPool(env, org, body, actor, tele) {
   const pool = await getOrCreatePoolSession(env, org, body && body.date);
-  return addTicket(env, pool, body || {}, actor, org);
+  return addTicket(env, pool, body || {}, actor, org, tele);
+}
+/* Make a registered visit a video visit. The consent (who gave it, who took it) and its audit row are ONE commit,
+ * guarded on the ticket being unchanged since it was read. Already a video visit: returned unchanged, so a double tap
+ * mints no second room. Refused once the visit has ended. */
+export async function makeTeleconsult(env, session, ticketId, tele, actor) {
+  const d = await fsGet(env, "q_tickets/" + ticketId);
+  const t = d ? withId(ticketId, d.fields) : null;
+  if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
+  if (t.teleconsult) return t;
+  const patch = Object.assign(teleFields(tele, actor), { updatedAt: now() });
+  if (!joinState(Object.assign({}, t, patch)).live) throw Object.assign(new Error("visit_closed"), { status: 409, detail: "This visit has ended, so it cannot become a video visit." });
+  const ev = { ts: now(), hospitalId: session.hospitalId || "", ticketId, actor: String(actor || ""), action: "tele_consent", meta: "given by " + patch.teleConsentBy };
+  try { await appendOrgAudit(env, ev, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime })]); }
+  catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were saving. Reload and try again." }); throw e; }
+  await liveBump(env, session.hospitalId);
+  return Object.assign({}, t, patch);
 }
 // The session backing a room = its resolved doctor's session (roomId stamped for the board label).
 export async function getOrCreateRoomSession(env, org, room, date, doctorName) {
