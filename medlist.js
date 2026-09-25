@@ -954,7 +954,7 @@
     FREQ_OPTS.forEach(function (fq) { var c = el("button", { cls: "ml-chip" + (draft.freq === fq ? " on" : ""), text: fq, attrs: { type: "button" } });
       c.addEventListener("click", function () { draft.freq = draft.freq === fq ? "" : fq; freqRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", (window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.same) ? SMD_EMOJI_ICONS.same(x.textContent, draft.freq) : x.textContent === draft.freq); }); }); freqRow.appendChild(c); });
     grid.appendChild(field("Frequency", freqRow, true));
-    var indInp = el("input", { cls: "ml-input", type: "text", placeholder: "Optional — why it's prescribed" });
+    var indInp = el("input", { cls: "ml-input", type: "text", placeholder: "Optional, why it's prescribed" });
     indInp.addEventListener("input", function () { draft.indication = indInp.value; });
     grid.appendChild(field("Indication (optional)", indInp, true));
     s.body.appendChild(grid);
@@ -1870,9 +1870,9 @@
 ".ml-spin{display:inline-block;width:14px;height:14px;box-sizing:border-box;border:2px solid var(--line,#d7dee3);border-top-color:var(--teal,#0e6e63);border-radius:50%;vertical-align:-2px;animation:mlspin 1s linear infinite}@keyframes mlspin{to{transform:rotate(360deg)}}",
 /* dose sheet */
 ".ml-dose-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:6px}",
-".ml-field{display:flex;flex-direction:column;gap:5px}",
+".ml-field{display:flex;flex-direction:column;gap:5px;min-width:0}",
 ".ml-field-full{grid-column:1/-1}",
-".ml-field-label{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
+".ml-field-label{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184);overflow-wrap:anywhere}",
 ".ml-chip-row{display:flex;flex-wrap:wrap;gap:6px}",
 ".ml-chip{background:var(--paper,#f6f7f5);color:var(--slate,#2d4356);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:7px 12px;font:600 12.5px var(--sans);cursor:pointer;min-height:34px}",
 ".ml-chip.on{background:var(--teal,#0e6e63);color:#fff;border-color:var(--teal,#0e6e63)}",
