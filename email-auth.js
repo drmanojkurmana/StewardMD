@@ -407,98 +407,49 @@
   // ---- 3. profile (name · hospital · state · city) -----------------------------------------
   function curUid() { try { var u = auth() && auth().currentUser; return u ? u.uid : null; } catch (e) { return null; } }
 
+  /* ONE PROFILE FORM (2026-09-25).
+   * This file used to render its own "Complete your profile" — name, state, city, hospital —
+   * against SMD_GEO, and profile-setup.js then asked the same doctor for their college/hospital
+   * again on the next app start, against a different list. Two forms, two directories, and the
+   * institution asked twice. Reported from a device. profile-setup.js is now the only form, and it
+   * reads the merged directory (institutions-in.js), so there is one question and one answer.
+   *
+   * This wrapper keeps the old entry points working: SMD_openProfile() and the first-run prompt
+   * still call openProfile(), it just delegates. The skip/seen bookkeeping stays here because it is
+   * this module's own (localStorage key per account), and the firstRun app-lock prompt still fires.
+   */
   function openProfile(opts) {
     opts = opts || {};
     _state.firstRunProfile = !!opts.firstRun;
-    _state.profile = _state.profile || {};
-    var g = geo();
-    var uid = curUid();
-    var prefName = opts.name || _state.name || "";
-    // pre-fill from any existing profile + Firebase displayName
-    (uid ? loadProfile(uid) : Promise.resolve({})).then(function (p) {
-      p = p || {};
-      var name = p.name || prefName || (auth() && auth().currentUser && auth().currentUser.displayName) || "";
-      var stateOpts = ['<option value="">Select state…</option>'].concat((g ? g.states() : []).map(function (s) { return '<option value="' + esc(s) + '"' + (p.state === s ? " selected" : "") + ">" + esc(s) + "</option>"; })).join("");
-      shell().innerHTML =
-        '<div class="smdea-card">' +
-          '<div class="smdea-h">Complete your profile</div>' +
-          '<div class="smdea-sub">Tell us where you practise — it tailors StewardMD to your setting. You can change this anytime.</div>' +
-          '<label class="smdea-lbl">Full name</label><input class="smdea-in" id="pfName" type="text" value="' + esc(name) + '" placeholder="Dr Jane Doe">' +
-          '<label class="smdea-lbl">State / UT</label><select class="smdea-in" id="pfState">' + stateOpts + "</select>" +
-          '<label class="smdea-lbl">City</label><div class="smdea-ac"><input class="smdea-in" id="pfCity" type="text" value="' + esc(p.city || "") + '" placeholder="City" autocomplete="off"><div class="smdea-list" id="pfCityList"></div></div>' +
-          '<label class="smdea-lbl">Hospital / Institution</label><div class="smdea-ac"><input class="smdea-in" id="pfHosp" type="text" value="' + esc(p.hospital || "") + '" placeholder="Search your hospital…" autocomplete="off"><div class="smdea-list" id="pfHospList"></div></div>' +
-          '<div class="smdea-err"></div>' +
-          '<button class="smdea-btn" data-ea="saveProfile">Save &amp; continue</button>' +
-          (opts.firstRun ? '<button class="smdea-ghost" data-ea="skipProfile">Skip for now</button>' : '<button class="smdea-ghost" data-ea="cancel">Close</button>') +
-        "</div>";
-      wireProfile(g);
-      _el.onclick = function (e) {
-        var b = e.target.closest && e.target.closest("[data-ea]"); if (!b) return;
-        var a = b.getAttribute("data-ea");
-        if (a === "cancel") return close();
-        if (a === "skipProfile") { markProfileSeen(); applyUser(auth() && auth().currentUser); close(); toast("You can complete your profile later from Account"); try { window.SMD_APPLOCK && window.SMD_APPLOCK.promptSetup({ hospital: "" }); } catch (e) {} return; }
-        if (a === "saveProfile") return submitProfile();
-      };
-    });
+    var P = null;
+    try { P = window.SMD_PROFILE_SETUP; } catch (e) {}
+    if (P && P.open) {
+      close();                                   // never stack the two sheets
+      markProfileSeen();                         // asked, whatever the doctor does next
+      var hadName = opts.name || _state.name || "";
+      try {
+        if (hadName && curUid()) saveProfile(curUid(), { name: hadName });
+      } catch (e) {}
+      P.open();
+      return;
+    }
+    /* profile-setup.js absent (it is a normal deferred script, so this is a load failure rather
+     * than a normal state): say so instead of showing a second, divergent form. */
+    shell().innerHTML =
+      '<div class="smdea-card">' +
+        '<div class="smdea-h">Complete your profile</div>' +
+        '<div class="smdea-sub">The profile form could not load. Check your connection and reopen it from the account menu.</div>' +
+        '<button class="smdea-btn" data-ea="cancel">Close</button>' +
+      "</div>";
+    _el.onclick = function (e) {
+      var b = e.target.closest && e.target.closest("[data-ea]"); if (!b) return;
+      if (b.getAttribute("data-ea") === "cancel") close();
+    };
   }
 
-  // typeahead wiring for city + hospital
-  function wireProfile(g) {
-    var stateSel = _el.querySelector("#pfState");
-    var cityIn = _el.querySelector("#pfCity"), cityList = _el.querySelector("#pfCityList");
-    var hospIn = _el.querySelector("#pfHosp"), hospList = _el.querySelector("#pfHospList");
-    function renderList(listEl, items, onPick) {
-      if (!items.length) { listEl.classList.remove("on"); listEl.innerHTML = ""; return; }
-      listEl.innerHTML = items.map(function (it, i) {
-        return '<button type="button" class="smdea-opt' + (it.add ? " add" : "") + '" data-i="' + i + '">' + esc(it.label) + (it.sub ? '<span class="c">' + esc(it.sub) + "</span>" : "") + "</button>";
-      }).join("");
-      listEl.classList.add("on");
-      listEl.querySelectorAll("[data-i]").forEach(function (b) { b.addEventListener("mousedown", function (ev) { ev.preventDefault(); onPick(items[+b.getAttribute("data-i")]); listEl.classList.remove("on"); }); });
-    }
-    function cities() { return g ? g.cities(stateSel.value) : []; }
-    function refreshCities() {
-      var q = cityIn.value.trim().toLowerCase();
-      var base = cities();
-      var items = base.filter(function (c) { return !q || c.toLowerCase().indexOf(q) >= 0; }).slice(0, 8).map(function (c) { return { label: c, value: c }; });
-      renderList(cityList, items, function (it) { cityIn.value = it.value; });
-    }
-    function refreshHosp() {
-      if (!g) return;
-      var q = hospIn.value.trim();
-      var res = g.searchHospitals(q, { state: stateSel.value || null, limit: 8 });
-      var items = res.map(function (h) { return { label: h.name, sub: h.city + " · " + h.state, value: h.name, city: h.city, state: h.state }; });
-      if (q.length >= 3) items.push({ add: true, label: 'Use "' + q + '"', value: q });
-      renderList(hospList, items, function (it) {
-        hospIn.value = it.value;
-        if (!it.add) { if (it.city && !cityIn.value) cityIn.value = it.city; if (it.state) { stateSel.value = it.state; } }
-      });
-    }
-    cityIn.addEventListener("focus", refreshCities); cityIn.addEventListener("input", refreshCities);
-    cityIn.addEventListener("blur", function () { setTimeout(function () { cityList.classList.remove("on"); }, 150); });
-    hospIn.addEventListener("focus", refreshHosp); hospIn.addEventListener("input", refreshHosp);
-    hospIn.addEventListener("blur", function () { setTimeout(function () { hospList.classList.remove("on"); }, 150); });
-    stateSel.addEventListener("change", function () { cityIn.value = ""; });
-  }
-
-  function submitProfile() {
-    var uid = curUid(); if (!uid) { err("Please sign in first."); return; }
-    var name = (_el.querySelector("#pfName") || {}).value.trim();
-    var state = (_el.querySelector("#pfState") || {}).value;
-    var city = (_el.querySelector("#pfCity") || {}).value.trim();
-    var hospital = (_el.querySelector("#pfHosp") || {}).value.trim();
-    if (!name) { err("Please enter your name."); return; }
-    err(""); busy(true);
-    var data = { name: name, state: state || "", city: city, hospital: hospital, profileComplete: true, updatedAt: Date.now() };
-    saveProfile(uid, data).then(function () {
-      try { var u = auth().currentUser; if (u && u.updateProfile && name) u.updateProfile({ displayName: name }); } catch (e) {}
-      markProfileSeen();
-      applyUser(auth() && auth().currentUser);
-      busy(false); close();
-      toast("Profile saved");
-      try { window.dispatchEvent(new CustomEvent("smd:profile", { detail: data })); } catch (e) {}
-      if (_state.firstRunProfile) { try { window.SMD_APPLOCK && window.SMD_APPLOCK.promptSetup({ hospital: hospital }); } catch (e) {} }
-    }).catch(function () { busy(false); err("Couldn’t save your profile. Please try again."); });
-  }
+  /* The city/hospital typeahead and the profile save that lived here are gone with the form they
+   * served: profile-setup.js owns both now, against the merged directory. Keeping a second copy
+   * would be keeping the bug. */
 
   // ---- profile prompt for ALL new users (incl. Google/Apple) -------------------------------
   function seenKey(uid) { return "smd_profile_prompted:" + (uid || "anon"); }
