@@ -1308,6 +1308,21 @@
       var map = { criticallabs: "icu", patients: "icu", tasks: "icu", ward: "ward",
                   askai: "askai", drugs: "drugs", drugmenu: "drugmenu", calculators: "calculators",
                   antibiogram: "antibiogram", home: "home" };
+      // The "Before you delete us" Home Screen quick action lands here. It is not an ACT overlay,
+      // so it is handled before the ACT lookup. SMD_openFeedback is referenced across the app but
+      // defined nowhere, so this mirrors the sidebar's three-step chain (sidebar-redesign.js
+      // feedback:) rather than calling it and silently doing nothing: the global if some build
+      // provides it, then an in-page feedback button, then mailto as the floor. A doctor who taps
+      // this on the way to deleting the app must always land somewhere they can type.
+      if (r === "feedback") {
+        try {
+          if (window.SMD_openFeedback) return SMD_openFeedback();
+          var fb = document.querySelector('[data-act="feedback"],#v3FeedbackBtn');
+          if (fb) return fb.click();
+          location.href = "mailto:hello@maiknowledge.com?subject=StewardMD%20feedback";
+        } catch (e) {}
+        return;
+      }
       var key = map[r] || (ACT[r] ? r : null);
       if (key === "home") { try { closeAllModules && closeAllModules(); } catch (e) {} return; }
       if (key && ACT[key]) { try { ACT[key](); } catch (e) {} }
@@ -1968,7 +1983,7 @@
     { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, beta: true, anim: "derm",
       eligible: function () { return expTileOn("smd_sknx", "sknx", "SKNX"); } },
     { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
-      eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") === "1"); } catch (e) { return false; } } },
+      eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") !== "0"); } catch (e) { return true; } } },
     // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
     // SMD_SURGX_FLAGS, because home.js loads at index.html:1587, BEFORE the SURGX block: the flag
     // object does not exist yet at tile-render time. Same fallback pattern as ThoreX/CliniX above.
@@ -9517,6 +9532,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return fetch(NOTIF_API + "/prefs", { method: "POST", headers: h, body: JSON.stringify(p) }).then(function (r) { return r.json().catch(function () { return {}; }); });
       }).then(function (j) {
         syncPushWorkspaces();
+        // REGISTER THE DEVICE, not just the preference.
+        //
+        // This screen used to POST push_enabled:true and stop there. The server then believed push
+        // was on for this account while holding no APNs token for the handset, so it had nothing to
+        // deliver to and said nothing about it: the doctor ticks every category, sees "Saved", and
+        // never receives a notification. Registration only ever happened if they wandered into a
+        // particular ICU or Ward Sync flow.
+        //
+        // Turning notifications on is what this screen is FOR, so it asks the OS here, and reports
+        // what actually happened rather than a blanket "Saved".
+        var setMsg = function (t) { if (msg) msg.textContent = t; };
+        if (window.SMD_enableNativePush) {
+          setMsg("Saving\u2026");
+          window.SMD_enableNativePush().then(function (on) {
+            setMsg(on ? "\u2705 Saved. This phone is registered for alerts."
+                      : "Saved, but iOS has notifications turned off for StewardMD. Enable them in Settings \u203a Notifications \u203a StewardMD.");
+          }, function () { setMsg((j && j.ok) ? "\u2705 Saved" : "Saved on this device"); });
+          return;
+        }
         if (msg) msg.textContent = (j && j.ok) ? "✅ Saved" : "Saved on this device";
         try { toast("Notification preferences saved"); } catch (e) {}
       }).catch(function () { syncPushWorkspaces(); if (msg) msg.textContent = "Saved on this device"; });
