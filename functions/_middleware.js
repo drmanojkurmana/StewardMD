@@ -247,6 +247,9 @@ export async function onRequest(context) {
       url.pathname === "/opd-pulse-model.js" ||
       url.pathname === "/opd-offline-desk.js" ||
       url.pathname === "/opd-live.js" ||
+      // The console's operations dashboard (2026-09-25): the same gate, the same silent failure if missed.
+      url.pathname === "/opd-dashboard.js" ||
+      url.pathname === "/opd-dashboard.css" ||
       url.pathname === "/ward-labels.js" ||
       // The in-app DICOM viewer engine ward.js loads on first "View images" (no words, no PHI: parse, decode, draw).
       url.pathname === "/ward-dicom-viewer.js" ||

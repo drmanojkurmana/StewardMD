@@ -355,6 +355,8 @@
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
+<link rel="stylesheet" href="/opd-dashboard.css?v=2">
+<script src="/opd-dashboard.js?v=2"></script>
 <script src="/opd-pulse-model.js?v=2" defer></script>
 <script src="/opd-offline-desk.js?v=3" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
@@ -642,6 +644,75 @@
     var toolbar=main.querySelector(".toolbar"), grow=toolbar.querySelector(".grow");
     if(grow){var title=document.createElement("h1");title.textContent="Patient flow";grow.insertBefore(title,grow.firstChild);}
     document.getElementById("opdHome").onclick=function(){flowUI.query="";flowUI.filter="all";flowUI.view="flow";mountOpdFlow();};
+    // The operations dashboard (opd-dashboard.js) over this layout; "0" keeps the Flow Board, one click from either.
+    if(dashOn()){ SMD_OPD_DASH.shell(dashHost); return; }
+    if(window.SMD_OPD_DASH){ var back=document.createElement("button"); back.type="button"; back.id="opdDashBack"; back.innerHTML='<span class="ms" aria-hidden="true">space_dashboard</span>New dashboard'; back.onclick=function(){ SMD_OPD_DASH.enable(); dashHost.rerender(); }; nav.appendChild(back); }
+  }
+  /* ---- the operations dashboard's view of this console. Everything it shows is read from st (the board, the pulse,
+   * /opd-insights, the day close); everything it does is one of the console's OWN buttons, clicked. ---- */
+  function dashOn(){ return flowEnabled()&&!!window.SMD_OPD_DASH&&SMD_OPD_DASH.enabled(); }
+  function dashPaint(){ if(dashOn()&&app.classList.contains("opd-dash-on")) SMD_OPD_DASH.paint(); }
+  var ACTIVE=["registered","waiting","called","in_consultation","at_diagnostics","investigation","followup"];
+  var dashHost={
+    app:app,
+    clinicName:function(){ return st.orgName||(st.who&&st.who.orgName)||st.orgCode||""; },
+    tickets:function(){
+      var out=[];
+      if(st.opd){
+        (st.opd.pool||[]).forEach(function(t){ out.push({t:t,pool:true,room:"",doctor:"",sid:null}); });
+        (st.opd.rooms||[]).forEach(function(r){ (r.tickets||[]).forEach(function(t){ if(ACTIVE.indexOf(t.status)>-1) out.push({t:t,pool:false,room:(r.room.name||"Room")+(r.room.number?" "+r.room.number:""),doctor:docLabel(r.doctorUid,r.doctorName)||"",sid:r.sessionId}); }); });
+      } else (st.board||[]).forEach(function(b){ (b.tickets||[]).forEach(function(t){ if(ACTIVE.indexOf(t.status)>-1) out.push({t:t,pool:false,room:"",doctor:docLabel(b.session.doctorUid,b.session.doctorName)||"Doctor",sid:b.session.id}); }); });
+      return out;
+    },
+    actionsFor:function(r){
+      var id=String(r.t.id).replace(/["\\]/g,""), node=null, hit;
+      if(r.pool){ hit=app.querySelector('[data-assign="'+id+'"]')||app.querySelector('.pcard [data-t="'+id+'"]'); node=hit&&hit.closest(".pcard"); }
+      else { hit=app.querySelector('.row [data-t="'+id+'"][data-s="'+String(r.sid).replace(/["\\]/g,"")+'"]'); node=hit&&hit.closest(".row"); }
+      return node?Array.prototype.slice.call(node.querySelectorAll("button[data-a],button[data-assign]")):[];
+    },
+    pulse:function(){ return st.pulse||null; },
+    insights:function(){ return st.insights||null; },
+    money:function(){ return st.dayMoney||null; },
+    taskSources:function(){
+      var d=offDesk(), off=st.dashMockOffline||(d?{pending:d.pending(),review:d.review().length}:null);
+      var unpaid=st.dayUnbilled!=null?st.dayUnbilled:dashHost.tickets().filter(function(x){ return x.t.unbilledAmount>0; }).length;
+      var m=st.dayMoney&&!st.dayMoney.unread?st.dayMoney:null;
+      return {pulse:st.pulse,followups:st.pulse&&st.pulse.followups,offline:off,unpaid:unpaid,recallable:st.insights?st.insights.recallableNoShows||0:0,refunds:m&&m.refunds?m.refunds.count||0:0,refundTotal:m&&m.refunds?m.refunds.total||0:0};
+    },
+    click:function(id){ var b=document.getElementById(id); if(b) b.click(); },
+    task:function(a){
+      if(a==="reconcile") reconcileNow();
+      else if(a==="offline") offTick();
+      else if(a==="noshows") dashHost.click("noshows");
+      else if(a==="billing") dashHost.click("billing");
+      else if(a==="dayclose") dashHost.click(document.getElementById("dayclose")?"dayclose":"billing");
+      else if(a==="schedule"){ if(window.WARD&&window.WARD.open) window.WARD.open({orgId:st.orgId,act:"scheduling",returnToOpd:true}); else toast("Book follow-ups in WardSynQ, Scheduling."); }
+    },
+    boardView:function(v){ var b=app.querySelector('[data-opd-view="'+v+'"]'); if(b) b.click(); },
+    search:function(q){ var i=document.getElementById("opdPatientSearch"); if(i){ i.value=q; i.dispatchEvent(new Event("input",{bubbles:true})); } },
+    rerender:function(){ if(st.opd) renderNurseStation(st.opd); else if(st.board&&st.board.length) renderBoard(); else loadDash(); },
+    toast:toast,
+    isLive:function(){ return !!(LIVE&&LIVE.isLive()); },
+    retry:function(){ st.insAt=0; st.moneyAt=0; refresh(); }
+  };
+  function loadInsights(force){
+    if(!dashOn()||!st.orgId||st.orgId==="demo") return;
+    if(!force&&st.insAt&&Date.now()-st.insAt<60000) return;
+    st.insAt=Date.now();
+    // A failed read is said on the cards, never left as "Reading...", and the next refresh tries again.
+    var failed=function(){ st.insights={failed:true}; st.insAt=0; dashPaint(); };
+    api("opd-insights?orgId="+encodeURIComponent(st.orgId)).then(function(r){ if(r&&r.ok){ st.insights=r; dashPaint(); } else failed(); },failed);
+  }
+  // Collected today: the day close's money (analytics.view). null hides the tile (billing off); a failed read says so.
+  function loadMoney(){
+    if(!dashOn()||!st.orgId||st.orgId==="demo"||!can("analytics.view")) return;
+    if(st.moneyAt&&Date.now()-st.moneyAt<180000) return;
+    st.moneyAt=Date.now();
+    var failed=function(){ st.moneyAt=0; if(st.billingOn){ st.dayMoney={unread:true}; dashPaint(); } };
+    api("day-close?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      if(!r||!r.ok){ failed(); return; }
+      st.dayMoney=r.money?r.money:(r.moneyUnread?{unread:true}:null); st.dayUnbilled=r.unbilled!=null?r.unbilled:null; dashPaint();
+    },failed);
   }
   function mountOpdFlow(){
     if(!flowEnabled()||!app.classList.contains("opd-modern")) return;
@@ -704,7 +775,7 @@
 
   function renderShell(inner){
     flowUI.focusSearch=!!(document.activeElement&&document.activeElement.id==="opdPatientSearch");
-    app.classList.remove("opd-modern");
+    app.classList.remove("opd-modern","opd-dash-on","dz-v-overview","dz-v-flow","dz-drawer-open");
     var name=st.who?(st.who.name||"Staff"):"", role=st.who?st.who.role:"";
     var cName=st.orgName || (st.who && st.who.orgName) || "";
     var logoHtml=(st.hasLogo || (st.who && st.who.hasLogo)) ? '<img class="clogo" src="/api/queue/branding/logo?orgId='+encodeURIComponent(st.orgId)+'" alt="" style="height:26px;max-width:100px;object-fit:contain;border-radius:4px;margin-right:8px;vertical-align:middle" onerror="this.style.display=\'none\'">' : '';
@@ -799,11 +870,12 @@
       bar.onclick=function(e){ var b=e.target.closest&&e.target.closest("[data-off]"); if(!b) return; var a=b.getAttribute("data-off"), d=offDesk(); if(!d) return;
         if(a==="send") offTick(); else if(a==="dismiss"){ d.dismiss(b.getAttribute("data-tok")); paintOffline(); } }; }
     var d=offDesk(), n=d?d.pending():0, rv=d?d.review():[], down=(typeof navigator!=="undefined"&&navigator.onLine===false);
-    if(!d||(!n&&!rv.length&&!down)){ bar.hidden=true; bar.innerHTML=""; return; }
+    if(!d||(!n&&!rv.length&&!down)){ bar.hidden=true; bar.innerHTML=""; dashPaint(); return; }
     var h='<div class="row"><span>'+(down?(d.ready()?"Offline. Check-in continues on this desk.":"Offline. This desk has no offline series yet: check-in needs the connection."):"Back online.")+'</span>'+
       (n?'<span>'+n+(n===1?" check-in":" check-ins")+' waiting to be sent</span>'+(down?"":'<button data-off="send">Send now</button>'):"")+'</div>';
     h+=rv.map(function(x){ return '<div class="rv"><b>'+esc(x.token)+'</b> '+esc(x.name||"")+': '+esc(x.why)+' <button data-off="dismiss" data-tok="'+esc(x.token)+'">Done</button></div>'; }).join("");
     bar.innerHTML=h; bar.hidden=false;
+    dashPaint();
   }
   function printTokenSlip(o){
     var ok=false;
@@ -838,7 +910,7 @@
   try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&(liveMissed||!(LIVE&&LIVE.isLive()))) liveRefresh(); },60000); }catch(e){}
   function loadPulse(){
     if(!st.orgId||st.orgId==="demo") return;
-    liveStart();
+    liveStart(); loadInsights(); loadMoney();
     api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
       // Plan item 11: follow-ups promised and never booked (silent when the hospital has no record).
@@ -846,10 +918,12 @@
       if(st.pulse.ok) api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok&&st.pulse&&st.pulse.ok){ st.pulse.followups={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; paintPulse(); } }).catch(function(){});
     }).catch(function(){ st.pulse={failed:true}; paintPulse(); });
   }
+  function reconcileNow(){ api("opd-reconcile",{method:"POST",body:{orgId:st.orgId}}).then(function(r){ toast(r&&r.ok?(r.landed+" of "+r.retried+" visits now in the record"+(r.stillFailed?"; "+r.stillFailed+" still failing":"")):"Could not retry now"); loadPulse(); }); }
   function paintPulse(){
     var host=document.getElementById("opdPulse"); if(host) host.innerHTML=pulseInner();
     var rb=document.getElementById("opdRecon");
-    if(rb) rb.onclick=function(){ api("opd-reconcile",{method:"POST",body:{orgId:st.orgId}}).then(function(r){ toast(r&&r.ok?(r.landed+" of "+r.retried+" visits now in the record"+(r.stillFailed?"; "+r.stillFailed+" still failing":"")):"Could not retry now"); loadPulse(); }); };
+    if(rb) rb.onclick=reconcileNow;
+    dashPaint();
   }
   function pnum(v,unit){ return v==null?'<i class="p-none">not yet</i>':esc(v)+(unit?'<u>'+unit+'</u>':''); }
   function pulseInner(){
@@ -3082,24 +3156,38 @@
   // Rooms / Branding controls render in full and a staff member landing on this URL would
   // otherwise believe they had been given admin rights and report the failures as bugs.
   if(new URLSearchParams(location.search||"").get("mock")==="1"){
-    st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals","emr.view"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo";
+    st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals","emr.view"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo"; st.orgName="Preview Clinic";
     try { var pv=document.createElement("div"); pv.setAttribute("role","status");
       pv.style.cssText="position:sticky;top:0;z-index:99;background:#8a5208;color:#fff;padding:8px 14px;font:700 12px/1.4 -apple-system,system-ui,sans-serif;text-align:center";
       pv.textContent="Preview with sample data - not your clinic. Nothing here is saved.";
       document.body.insertBefore(pv, document.body.firstChild); } catch(e){}
     var nm=Date.now();
+    // Sample figures so every dashboard card has something to show (preview only; nothing is read or saved).
+    (function(){
+      // The sample clock reads 11:00 at the earliest: before the OPD opens the sample day would be empty and the cards blank.
+      var istNow=new Date(nm+19800000), hr=Math.max(11,istNow.getUTCHours()), today=istNow.toISOString().slice(0,10), dnum=+today.slice(8,10);
+      var shape=[0,0,0,0,0,0,0,1,4,9,12,10,7,5,6,8,7,5,3,2,1,0,0,0], hourly=shape.map(function(v,i){ return i<hr?v:i===hr?Math.max(1,Math.round(v*0.6)):0; });
+      var reg=hourly.reduce(function(a,b){return a+b;},0), month=[];
+      for(var d=1;d<=dnum;d++){ var dt=today.slice(0,8)+("0"+d).slice(-2), dow=new Date(dt+"T12:00:00Z").getUTCDay(), r=d===dnum?reg:(dow===0?0:48+((d*37)%29)); month.push({date:dt,registered:r,seen:d===dnum?Math.round(reg*0.62):Math.max(0,r-((d*7)%4))}); }
+      st.insights={ok:true,date:today,currentHour:hr,hourly:hourly,month:month,mix:{"new":Math.round(reg*0.58),followup:Math.round(reg*0.34),appointment:reg-Math.round(reg*0.58)-Math.round(reg*0.34),priority:{senior:4,emergency:2,pregnant:1,child:2}},
+        today:{registered:reg,seen:Math.round(reg*0.62)},yesterday:{registered:reg-3,seen:Math.round(reg*0.62)-4},delta:{registered:3,seen:4,doorToDoctorMin:-3,abandonedPct:1},recallableNoShows:2};
+      st.pulse={ok:true,pulse:{registered:reg,seen:Math.round(reg*0.62),completed:Math.round(reg*0.62)-2,inConsultation:2,waiting:6,noShow:3,held:1,resultsBack:1,syncFailed:1,abandonedPct:6,
+        doorToDoctor:{medianMin:24,p90Min:52},deskWait:{medianMin:9},doctorWait:{medianMin:14},consult:{medianMin:8},waitingNow:{longestMin:48,medianMin:18,over30:2,over60:0}},followups:{unbooked:5,overdue:2}};
+      st.dayMoney={total:4868000,count:31,net:4718000,refunds:{count:1,total:150000},byMethod:{cash:1840000,upi:2728000,card:300000},byCount:{cash:12,upi:17,card:2}}; st.dayUnbilled=3;
+      st.dashMockOffline={pending:2,review:1};
+    })();
     renderNurseStation({mode:"native",rooms:[
-      {room:{id:"r1",name:"Medicine 1",number:"101",department:"General",assignment:{primary:"drA"}},doctorUid:"drA",sessionId:"s1",waiting:3,status:"moderate",tickets:[
-        {id:"t1",name:"Ramesh Kumar",mrnLast4:"4821",status:"in_consultation",priority:0,registeredAt:nm-22*60000},
-        {id:"t2",name:"Lakshmi Devi",mrnLast4:"7734",status:"called",priority:0,registeredAt:nm-14*60000},
-        {id:"t3",name:"Abdul Rahman",mrnLast4:"1902",status:"waiting",priority:2,registeredAt:nm-30*60000}]},
-      {room:{id:"r2",name:"Cardiology",number:"104",department:"Cardiology",assignment:{primary:"drB"}},doctorUid:"drB",sessionId:"s2",waiting:1,status:"normal",tickets:[
-        {id:"t4",name:"Sita Mahalakshmi",mrnLast4:"5560",status:"waiting",priority:0,registeredAt:nm-6*60000}]},
+      {room:{id:"r1",name:"Medicine 1",number:"101",department:"General",assignment:{primary:"drA"}},doctorUid:"drA",doctorName:"Anitha Rao",sessionId:"s1",waiting:3,status:"moderate",tickets:[
+        {id:"t1",name:"Ramesh Kumar",token:"A-14",ageYears:54,sex:"M",visitType:"followup",mrnLast4:"4821",status:"in_consultation",priority:0,registeredAt:nm-22*60000},
+        {id:"t2",name:"Lakshmi Devi",token:"A-15",ageYears:67,sex:"F",visitType:"new",mrnLast4:"7734",status:"called",priority:1,priorityReason:"senior",registeredAt:nm-14*60000},
+        {id:"t3",name:"Abdul Rahman",token:"A-16",ageYears:41,sex:"M",visitType:"new",mrnLast4:"1902",status:"waiting",priority:2,priorityReason:"emergency",registeredAt:nm-30*60000,unbilledAmount:50000}]},
+      {room:{id:"r2",name:"Cardiology",number:"104",department:"Cardiology",assignment:{primary:"drB"}},doctorUid:"drB",doctorName:"Suresh Menon",sessionId:"s2",waiting:1,status:"normal",tickets:[
+        {id:"t4",name:"Sita Mahalakshmi",token:"C-07",ageYears:36,sex:"F",visitType:"followup",mrnLast4:"5560",status:"waiting",priority:1,priorityReason:"results",resultReadyAt:nm-3*60000,registeredAt:nm-48*60000}]},
       {room:{id:"r3",name:"Dermatology",number:"106",department:"Dermatology",assignment:{}},doctorUid:null,sessionId:null,waiting:0,status:"unavailable",tickets:[]}],
       pool:[
-        {id:"p1",name:"John Peter",mrnLast4:"3341",department:"Cardiology",priority:0,registeredAt:nm-4*60000},
-        {id:"p2",name:"Fatima Begum",mrnLast4:"9021",department:"General",priority:2,registeredAt:nm-18*60000},
-        {id:"p3",name:"Vikram Rao",mrnLast4:"6655",department:"Dermatology",priority:0,registeredAt:nm-2*60000}]});
+        {id:"p1",name:"John Peter",token:"C-09",ageYears:61,sex:"M",visitType:"new",mrnLast4:"3341",department:"Cardiology",priority:0,registeredAt:nm-4*60000},
+        {id:"p2",name:"Fatima Begum",token:"G-21",ageYears:72,sex:"F",visitType:"followup",mrnLast4:"9021",department:"General",priority:2,priorityReason:"emergency",registeredAt:nm-18*60000},
+        {id:"p3",name:"Vikram Rao",token:"D-03",ageYears:8,sex:"M",visitType:"new",mrnLast4:"6655",department:"Dermatology",priority:1,priorityReason:"child",registeredAt:nm-2*60000,unbilledAmount:30000}]});
     consumePendingScan();
     return;
   }
