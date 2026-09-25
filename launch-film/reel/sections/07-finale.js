@@ -1,14 +1,17 @@
-/* 07 · Finale (38.5-45 s). One workspace, pocket to wrist: iPhone (home), an Android phone (the
-   same app, ranked differential) and Apple Watch (Code Blue) converge with the five capabilities
-   named; then the end card on white with the site's own line, the real platforms (iPhone, Android,
-   Apple Watch, Wear OS) and the one web surface, OPD. */
+/* 07 · Finale (38.5-45 s). One workspace, pocket to wrist: iPad (antibiogram), iPhone (home), an
+   Android phone (the same app, ranked differential) and Apple Watch (Code Blue) converge with the five capabilities
+   named; then the end card on white with the site's own line, the real platforms (iPhone, iPad,
+   Android, Apple Watch, Wear OS) and the one web surface, OPD. */
 FILM.section({
   id: "r07-finale", start: FILM.T.finale, duration: FILM.T.end - FILM.T.finale, z: 3,
   build: function (root, tl) {
     var F = FILM, R = F.RECTS.icu;
     var rig = F.el(root, "", "position:absolute;inset:0;transform-style:flat");
 
-    // Android (behind), iPhone, Watch (front): flat rig, own perspective each, DOM stacking.
+    // iPad (back), Android, iPhone, Watch (front): flat rig, own perspective each, DOM stacking.
+    var tab = F.tablet(rig, 720, 500);
+    var g = document.createElement("img"); g.src = F.A.abgGrid; g.style.cssText = "position:absolute;left:0;top:0;width:100%";
+    tab.screen.appendChild(g);
     var an = F.android(rig);
     var dxr = F.layer(an.screen, F.A.dxr, { bar: "#ffffff" });
     gsap.set(dxr.img, { y: -470 * F.PS });
@@ -19,21 +22,24 @@ FILM.section({
     ph.status.style.zIndex = 8;
     var H = 980, W = H * 720 / 1172;
     var w = F.watch(rig, F.A.watchCode, H);
-    [an.wrap, ph.wrap, w].forEach(function (d) { d.style.transformStyle = "flat"; });
+    [tab.wrap, an.wrap, ph.wrap, w].forEach(function (d) { d.style.transformStyle = "flat"; });
 
     tl.fromTo(ph.wrap, { x: 96, y: 490, scale: 0.72, rotationY: 16, filter: "blur(2px)", transformPerspective: 2600 },
-      { x: 196, y: 590, scale: 0.8, rotationY: 10, filter: "blur(0px)", duration: 1.2, ease: "expo.out" }, 0);
+      { x: 176, y: 745, scale: 0.78, rotationY: 10, filter: "blur(0px)", duration: 1.2, ease: "expo.out" }, 0);
+    tl.fromTo(tab.wrap, { x: 162, y: 1300, opacity: 0, rotationX: 24, transformPerspective: 2600 },
+      { x: 162, y: 625, opacity: 1, rotationX: 0, duration: 1.3, ease: "expo.out" }, 0.05);
+    tl.to(g, { y: -260, duration: 2.6, ease: "power1.inOut" }, 0.5);
     tl.fromTo(home, { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.25);
     tl.fromTo(ph.status, { color: "#ffffff" }, { color: "#0D1B24", duration: 0.3 }, 0.3);
     tl.fromTo(an.wrap, { x: 1300, y: 560, scale: 0.74, rotationY: -40, transformPerspective: 2600 },
-      { x: 500, y: 540, scale: 0.74, rotationY: -12, duration: 1.35, ease: "expo.out" }, 0.12);
+      { x: 516, y: 705, scale: 0.74, rotationY: -12, duration: 1.35, ease: "expo.out" }, 0.12);
     tl.fromTo(w, { x: 790 - W / 2, y: 1000, scale: 0.34, rotationZ: -4, transformPerspective: 2000 },
-      { x: 815 - W / 2, y: 860, scale: 0.36, rotationZ: -6, duration: 1.2, ease: "expo.out" }, 0);
+      { x: 870 - W / 2, y: 1000, scale: 0.36, rotationZ: -6, duration: 1.2, ease: "expo.out" }, 0);
     tl.fromTo(rig, { y: 0, scale: 1 }, { y: -18, scale: 1.03, duration: 3.1, ease: "sine.inOut" }, 0);
 
     // Top: the platforms and the five, named once.
     var top = F.el(root, "", "position:absolute;left:70px;right:70px;top:250px;text-align:center");
-    var plat = F.el(top, "", "font:600 19px Inter;letter-spacing:.26em;color:#0F766E;margin-bottom:26px", "IPHONE · ANDROID · APPLE WATCH · WEAR OS");
+    var plat = F.el(top, "", "font:600 19px Inter;letter-spacing:.26em;color:#0F766E;margin-bottom:26px", "IPHONE · IPAD · ANDROID · APPLE WATCH · WEAR OS");
     var head = F.el(top, "headline", "font-size:74px", "One workspace, <em>pocket to wrist.</em>");
     var words = F.splitWords(head);
     var row = F.el(top, "", "margin:34px auto 0;max-width:640px;display:flex;flex-wrap:wrap;justify-content:center;gap:14px");
@@ -54,7 +60,7 @@ FILM.section({
     var line = F.el(end, "headline", "position:absolute;left:40px;right:40px;top:760px;font-size:98px;line-height:1.03",
       "When the clinical<br>decision matters,<br><em>open StewardMD.</em>");
     var lw = F.splitWords(line);
-    var p1 = F.el(end, "", "position:absolute;left:0;right:0;top:1112px;font:600 22px Inter;letter-spacing:.24em;color:#0D1B24;opacity:.8", "IPHONE · ANDROID · APPLE WATCH · WEAR OS");
+    var p1 = F.el(end, "", "position:absolute;left:0;right:0;top:1112px;font:600 22px Inter;letter-spacing:.24em;color:#0D1B24;opacity:.8", "IPHONE · IPAD · ANDROID · APPLE WATCH · WEAR OS");
     var p2 = F.el(end, "", "position:absolute;left:0;right:0;top:1164px;font:600 22px Inter;letter-spacing:.24em;color:#0F766E", "OPD ON THE WEB · STEWARDMD.IN");
     var fine = F.el(end, "fine", "position:absolute;left:0;right:0;top:1395px", "Clinical decision support for registered medical practitioners.");
 

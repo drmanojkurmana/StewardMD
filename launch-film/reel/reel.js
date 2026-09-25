@@ -23,14 +23,6 @@
 
   F.placeHero = function (wrap) { gsap.set(wrap, { x: F.RP.x, y: F.RP.y, scale: F.RP.s, transformPerspective: 2600 }); };
 
-  // Android phone body (punch-hole camera, flatter corners). Same WebView bundle, same screens.
-  F.android = function (parent) {
-    var ph = F.phone(parent);
-    ph.wrap.classList.add("android");
-    var isl = ph.screen.querySelector(".island"); if (isl) isl.className = "punch";
-    return ph;
-  };
-
   // Landscape layer inside a portrait screen: rotated +90deg so that when the phone body turns
   // -90deg the content reads upright. iOS landscape: no status bar, 44 px safe-area insets.
   F.landLayer = function (screen, src, cssW) {

@@ -127,6 +127,14 @@
     return F.crop(parent, src, 390, x, y, w, h, scale, "left:" + (right - w * scale) + "px;top:" + top + "px;" + (css || ""));
   };
 
+  // Android phone body (punch-hole camera, flatter corners). Same WebView bundle, same screens.
+  F.android = function (parent) {
+    var ph = F.phone(parent);
+    ph.wrap.classList.add("android");
+    var isl = ph.screen.querySelector(".island"); if (isl) isl.className = "punch";
+    return ph;
+  };
+
   /* ---- tablet (iPad, landscape) ----------------------------------------------------------- */
   F.tablet = function (parent, w, h, css) {
     var wrap = F.el(parent, "dev tablet", "position:absolute;left:0;top:0;width:" + (w + 36) + "px;height:" + (h + 36) + "px;" + (css || ""));

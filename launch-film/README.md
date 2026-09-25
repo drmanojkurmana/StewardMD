@@ -46,12 +46,13 @@ also had to read together as one platform, following one patient and one clinici
 capabilities, story and real screens are the same as the film. It is re-authored for vertical and
 for how StewardMD actually ships:
 
-- **Platforms.** StewardMD is a mobile app (iOS and Android) with an Apple Watch and a Wear OS
-  companion; only OPD is on the web. The reel therefore shows phones and a watch only: no tablet
-  and no desktop. The antibiogram grid is shown on the phone turned to landscape, which the app
+- **Platforms.** StewardMD runs on iPhone, iPad and Android, with an Apple Watch and a Wear OS
+  companion; only OPD is on the web. The reel therefore shows phones, an iPad and a watch: no
+  desktop. The antibiogram grid is shown on the phone turned to landscape, which the app
   itself prompts ("Rotate for a wider view"). It is captured at 844x390 (iPhone landscape) with
-  iOS landscape safe-area insets. The finale adds an Android phone (punch-hole body) running the
-  same app bundle. The end card names the real platforms (iPhone, Android, Apple Watch, Wear OS)
+  iOS landscape safe-area insets. The finale brings in the iPad (antibiogram coverage grid, the real iPad
+  capture) and an Android phone (punch-hole body) running the same app bundle. The end card names
+  the real platforms (iPhone, iPad, Android, Apple Watch, Wear OS)
   and the one web surface ("OPD on the web · stewardmd.in").
 - **Wear OS** is real (`android/wear`: labs, Code Blue, watchlist), but the repo has no render of
   its UI. It is therefore named in the copy, in the site's own words ("The same alert reaches
@@ -72,7 +73,7 @@ for how StewardMD actually ships:
 | 18.5-25.5 | `04-maik.js` | **03 Ask MaiK** (MaiK wordmark): the phone turns upright into MaiK; the question lifts, the answer streams, the Bottom Line and Evidence Review header lift. | rotate upright, tumble out |
 | 25.5-32.5 | `05-icu.js` | **04 Monitor**: ICU dashboard; the vitals strip, Current status (NEWS2 10) and qSOFA 2/3 alert lift. | tumble in, step back |
 | 32.5-38.5 | `06-watch.js` | **05 On the wrist**: Apple Watch rises in front of the ICU phone; critical labs, then a wrist flick to Code Blue. | watch rises |
-| 38.5-45 | `07-finale.js` | "One workspace, *pocket to wrist.*": iPhone, Android and Watch together with the five named; then the end card: "When the clinical decision matters, *open StewardMD.*", platforms, OPD on the web, fine print. | converge, recede |
+| 38.5-45 | `07-finale.js` | "One workspace, *pocket to wrist.*": iPad, iPhone, Android and Watch together with the five named; then the end card: "When the clinical decision matters, *open StewardMD.*", platforms, OPD on the web, fine print. | converge, recede |
 
 Reel review pass (first full render → final):
 
