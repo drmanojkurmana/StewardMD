@@ -7,9 +7,14 @@ html body #maikSheet.maik-polished .maik-hd-row>span{display:none}
 html body #maikSheet.maik-polished .maik-logo-wrap{min-width:0;padding:0 4px}
 html body #maikSheet.maik-polished .maik-logo{height:auto;width:88px;max-width:100%;object-fit:contain}
 html body #maikSheet.maik-polished :is(.maik-logo-glow,.maik-hero-glow){display:none}
-html body #maikSheet.maik-polished .maik-hd-btn{width:44px;height:44px;border:0;border-radius:14px;background:transparent}
-html body #maikSheet.maik-polished .maik-hd-btn:hover{background:var(--mk-soft)}
-html body #maikSheet.maik-polished #maikModelChip{grid-column:1/-1;grid-row:2;justify-self:start;max-width:100%!important;min-height:44px;padding:8px 12px!important;font-size:12px!important;background:var(--mk-soft)!important;border-radius:12px!important}
+/* One control surface for the header and the composer, derived from the ink so it reads on the
+   aurora, on glass and on a plain page, light or dark. */
+html body #maikSheet.maik-polished{--mk-ctl-bg:color-mix(in srgb,var(--mk-ink) 7%,transparent);--mk-ctl-bd:color-mix(in srgb,var(--mk-ink) 16%,transparent)}
+/* Header buttons: a 44px target that draws a 40px round fill (transparent border, padding-box fill),
+   bolder 18px icons, full ink. */
+html body #maikSheet.maik-polished .maik-hd-btn{width:44px;height:44px;border:2px solid transparent;border-radius:22px;background:var(--mk-ctl-bg);background-clip:padding-box;color:var(--mk-ink)}
+html body #maikSheet.maik-polished .maik-hd-btn:hover{background-color:var(--mk-ctl-bd)}
+html body #maikSheet.maik-polished .maik-hd-btn svg{width:18px;height:18px;stroke-width:2.5}
 html body #maikSheet.maik-polished .maik-disc{padding:9px 20px;background:var(--mk-bg);border-top:0;border-bottom:1px solid var(--mk-bd)}
 html body #maikSheet.maik-polished .maik-disc span{font-size:11px;line-height:1.45;font-weight:400;color:var(--mk-mut)}
 html body #maikSheet.maik-polished .maik-body{padding:22px 20px 64px;gap:18px;overscroll-behavior:contain}
@@ -63,19 +68,25 @@ html body #maikSheet.maik-polished .maik-acts{grid-row:1}
 html body #maikSheet.maik-polished .maik-fb-q,html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){grid-row:2;font-size:12.5px}
 html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){color:var(--mk-mut)}
 
-/* Compact app navigation: menu + logo on the first row, caption + actions on the second. The model
-   chip moved to the composer (2026-09-20): its 150px header slot truncated every label. */
+/* Compact app navigation: menu + logo + Close on the first row, caption + actions on the second. The
+   model chip moved to the composer (2026-09-20): its 150px header slot truncated every label.
+   Close sits top right, opposite the menu, filled and labelled (owner, 2026-09-26: "x close button
+   etc are not visible to many and many are confused how to close"): ink on the page colour in both
+   themes, so it stands out over any aurora or background. */
 html body #maikSheet.maik-polished .maik-hd{padding:8px 16px 4px;padding-top:max(8px,env(safe-area-inset-top))}
-html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(0,1fr);gap:4px 8px}
+html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(0,1fr) auto;gap:4px 8px}
 html body #maikSheet.maik-polished .maik-logo-wrap{grid-column:2;grid-row:1;padding:0}
 html body #maikSheet.maik-polished #maikMenu{grid-column:1;grid-row:1}
-html body #maikSheet.maik-polished .maik-nav-actions{grid-column:1/-1;display:flex;align-items:center;gap:4px;min-width:0}
+html body #maikSheet.maik-polished #maikClose{grid-column:3;grid-row:1;width:auto;min-width:44px;gap:6px;padding:0 15px 0 12px;background-color:var(--mk-ink);color:var(--mk-bg);font:600 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.01em;white-space:nowrap}
+html body #maikSheet.maik-polished #maikClose svg{width:16px;height:16px}
+html body #maikSheet.maik-polished .maik-nav-actions{grid-column:1/-1;grid-row:2;display:flex;align-items:center;gap:8px;min-width:0}
 html body #maikSheet.maik-polished .maik-nav-caption{flex:1;min-width:0;padding-left:8px;color:var(--mk-mut);font-size:12px;font-weight:500;letter-spacing:.01em}
 html body #maikSheet.maik-polished .maik-hd-btn{flex:0 0 44px}
 html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send){touch-action:manipulation;transition:background .15s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
-html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send):active{transform:scale(.97);background:var(--mk-tsoft)!important}
+html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send):active{transform:scale(.97);background-color:var(--mk-tsoft)!important}
+html body #maikSheet.maik-polished #maikClose:is(:hover,:active){background-color:var(--mk-ink)!important;opacity:.84}
 html body #maikSheet.maik-polished .maik-body{-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-@media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(0,1fr);column-gap:6px}html body #maikSheet.maik-polished .maik-nav-caption{font-size:11px}}
+@media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(0,1fr) auto;column-gap:6px}html body #maikSheet.maik-polished .maik-nav-caption{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send){transition:none;transform:none}}
 
 html body #maikSheet.maik-polished .maik-ta{resize:none;scrollbar-width:none;background:transparent;border:0;box-shadow:none}
@@ -89,24 +100,42 @@ html body #maikSheet.maik-polished .maik-hd{padding:8px 12px 0;padding-top:max(8
 html body #maikSheet.maik-polished .maik-disc{padding:6px 16px}
 html body #maikSheet.maik-polished .maik-body{min-height:0;min-width:0;padding-bottom:40px}
 html body #maikSheet.maik-polished .maik-cmp{flex:0 0 auto;padding:8px 12px max(8px,env(safe-area-inset-bottom))}
-html body #maikSheet.maik-polished .maik-cmp-in{display:grid;grid-template-columns:44px 44px auto auto minmax(44px,1fr) 44px;grid-template-rows:64px 44px;gap:4px 0;padding:8px;border:1px solid var(--mk-bd);border-radius:22px;box-shadow:none;transition:none}
+/* Composer (owner, 2026-09-26: "the button UI doesnt look well aligned in symmetry in ask maik text
+   box"). Row 1 is the text; row 2 is one line of controls: dictate, research, image and answer length
+   on the left, the model chip and Send on the right. Every control is 44px tall and fully round, the
+   secondary ones share one surface and one 1px border, and Send alone is filled. Spacing is margin,
+   not column gap, so a hidden or absent control (image, research) collapses its auto track and
+   leaves no hole; 8px apart, 4px on phones up to 370px wide. The chip's track is minmax(0,auto): it
+   gets its full width before the spacer gets any and truncates only when the row is truly full.
+   Extract findings sits at the right end of the TEXT row, over Send's column, so typing never
+   reflows the tool row (it used to take 52px from the chip). The text starts 12px in, level with
+   the icons inside the round buttons below it. */
+html body #maikSheet.maik-polished .maik-cmp-in{display:grid;grid-template-columns:auto auto auto auto minmax(8px,1fr) minmax(0,auto) 44px;grid-template-rows:64px 44px;gap:4px 0;padding:8px;border:1px solid var(--mk-bd);border-radius:24px;box-shadow:none;transition:none}
 html body #maikSheet.maik-polished .maik-cmp-in:focus-within{border-color:var(--mk-bd);box-shadow:none;outline:none}
-html body #maikSheet.maik-polished #maikQ{grid-column:1/-1;grid-row:1;order:0;box-sizing:border-box;width:100%;height:64px!important;min-height:64px;max-height:64px;margin:0;padding:8px;font-size:16px;line-height:24px;text-align:left;border:0!important;border-radius:0;background:transparent!important;outline:none!important;box-shadow:none!important;overflow-y:auto;resize:none}
+html body #maikSheet.maik-polished #maikQ{grid-column:1/-1;grid-row:1;order:0;box-sizing:border-box;width:100%;height:64px!important;min-height:64px;max-height:64px;margin:0;padding:8px 12px;font-size:16px;line-height:24px;text-align:left;border:0!important;border-radius:0;background:transparent!important;outline:none!important;box-shadow:none!important;overflow-y:auto;resize:none}
+html body #maikSheet.maik-polished .maik-cmp-in:has(#maikExtract.show) #maikQ{padding-right:56px}
 html body #maikSheet.maik-polished #maikMic{grid-column:1;grid-row:2}
 html body #maikSheet.maik-polished #maikResearch{grid-column:2;grid-row:2}
 html body #maikSheet.maik-polished #maikImg{grid-column:3;grid-row:2}
-html body #maikSheet.maik-polished #maikLen{grid-column:4;grid-row:2;align-self:center;justify-self:start;min-height:44px;height:44px;margin:0 0 0 4px;padding:0 12px;white-space:nowrap;font-size:12px;border-radius:16px}
-html body #maikSheet.maik-polished #maikExtract{grid-column:5;grid-row:2;justify-self:start;display:flex;align-items:center;justify-content:center;visibility:hidden;width:44px;height:44px;min-height:44px;margin:0;padding:10px;border:0;background:transparent;color:var(--mk-mut)}
+html body #maikSheet.maik-polished #maikLen{grid-column:4;grid-row:2;align-self:center;justify-self:start;min-height:44px;height:44px;margin:0;padding:0 14px;white-space:nowrap}
+html body #maikSheet.maik-polished #maikExtract{grid-column:7;grid-row:1;align-self:center;display:flex;align-items:center;justify-content:center;visibility:hidden;margin:0;padding:0}
 html body #maikSheet.maik-polished #maikExtract.show{visibility:visible}
-html body #maikSheet.maik-polished #maikSend{grid-column:6;grid-row:2;order:0;box-shadow:none}
-/* Model chip in the composer's flexible cell, hugging Send. Shares the cell with the extract
-   button (start-aligned, hidden until there is text); when that shows, the chip yields 52px. */
-html body #maikSheet.maik-polished #maikModelChip{grid-column:5;grid-row:2;justify-self:end;align-self:center;min-width:0;max-width:100%!important;min-height:44px;height:44px;margin:0 8px 0 0;padding:8px 12px!important;border-radius:16px!important;font-size:12px!important;justify-content:center}
+html body #maikSheet.maik-polished #maikSend{grid-column:7;grid-row:2;order:0}
+html body #maikSheet.maik-polished #maikModelChip{grid-column:6;grid-row:2;align-self:center;min-width:0;max-width:100%!important;min-height:44px;height:44px;margin:0 8px 0 0;padding:0 12px 0 14px!important;justify-content:center}
 html body #maikSheet.maik-polished #maikModelChipLbl{min-width:0}
-/* Very narrow phones (under 350 px): the length pill and the model chip share the last flexible space,
-   so both tighten rather than the chip sliding under the pill (audit T05). */
-@media (max-width:350px){html body #maikSheet.maik-polished #maikLen{padding:0 8px;font-size:11px;margin-right:4px}html body #maikSheet.maik-polished #maikModelChip{padding:8px 8px!important;margin-right:0}}
-html body #maikSheet.maik-polished .maik-cmp-in:has(#maikExtract.show) #maikModelChip{max-width:calc(100% - 52px)!important}
+html body #maikSheet.maik-polished .maik-cmp-in :is(#maikMic,#maikResearch,#maikImg){margin-right:8px}
+html body #maikSheet.maik-polished .maik-cmp-in :is(#maikMic,#maikResearch,#maikImg,#maikExtract,#maikLen,#maikModelChip,#maikSend){box-sizing:border-box;min-width:44px;height:44px;border-radius:22px!important}
+html body #maikSheet.maik-polished .maik-cmp-in :is(#maikMic,#maikResearch,#maikImg,#maikExtract){width:44px;flex:none}
+html body #maikSheet.maik-polished .maik-cmp-in :is(#maikMic:not(.live):not(.prep),#maikResearch:not(.on),#maikImg:not(.has),#maikExtract,#maikLen,#maikModelChip){border:1px solid var(--mk-ctl-bd)!important;background:var(--mk-ctl-bg)!important;color:var(--mk-ink)!important;box-shadow:none!important}
+html body #maikSheet.maik-polished .maik-cmp-in :is(#maikMic:not(.live):not(.prep),#maikResearch:not(.on),#maikImg:not(.has),#maikExtract,#maikLen,#maikModelChip):active{background:var(--mk-ctl-bd)!important}
+html body #maikSheet.maik-polished .maik-cmp-in :is(#maikLen,#maikModelChip){font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important;letter-spacing:0}
+html body #maikSheet.maik-polished .maik-cmp-in :is(#maikMic,#maikResearch,#maikImg,#maikExtract) svg{width:20px;height:20px}
+html body #maikSheet.maik-polished #maikModelChip>span[aria-hidden="true"]{font-size:10px!important;opacity:.75!important}
+@media (max-width:370px){html body #maikSheet.maik-polished .maik-cmp-in{grid-template-columns:auto auto auto auto minmax(4px,1fr) minmax(0,auto) 44px}html body #maikSheet.maik-polished .maik-cmp-in :is(#maikMic,#maikResearch,#maikImg){margin-right:4px}html body #maikSheet.maik-polished #maikModelChip{margin-right:4px;padding:0 10px 0 12px!important}html body #maikSheet.maik-polished #maikLen{padding:0 12px}}
+/* Under 350px the engine's name matters more than the caret: the pill already reads as a button. */
+@media (max-width:350px){html body #maikSheet.maik-polished .maik-cmp-in :is(#maikLen,#maikModelChip){font-size:12px!important}html body #maikSheet.maik-polished #maikLen{padding:0 8px}html body #maikSheet.maik-polished #maikModelChip{padding:0 10px!important}html body #maikSheet.maik-polished #maikModelChip>span[aria-hidden="true"]{display:none}}
+/* Keyboard focus shows a round ring on these buttons only (a tap never triggers :focus-visible). */
+html body #maikSheet.maik-polished :is(.maik-hd-btn,.maik-cmp-in button):focus-visible{outline:2px solid var(--mk-teal)!important;outline-offset:2px!important}
 html body #maikSheet.maik-polished .maik-fb-b[aria-pressed="true"]{color:var(--mk-bg)}
 
 html body #maikSheet.maik-polished .maik-side-wrap.open .maik-side{transform:translate3d(0,0,0)}

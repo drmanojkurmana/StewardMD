@@ -213,3 +213,31 @@ note per shelf and one footer line. Gotcha: `GUIDE_INTRO` is still exported and 
 - `llamaToken` events are batched natively (`TokenBatcher`, 40 ms; first piece immediate; flushed
   before resolve/reject). Payload gains `count` (pieces in the event); JS only appends `text`.
 Pins: `test/maik-native-energy.test.mjs`.
+
+## Close, composer symmetry, backgrounds per theme (2026-09-26, branch maik-ui-close-bg)
+Owner: the composer buttons were not symmetric, many could not find how to close MaiK, and dark mode
+had no background choice.
+- **Close** is a filled, labelled pill ("X Close", `aria-label="Close MaiK"`) at the header's top right,
+  opposite the menu: `.maik-hd-row` is `44px minmax(0,1fr) auto`, `#maikClose` grid column 3, row 1.
+  Ink fill on the page colour, so it reads over any aurora (measured 17.9:1 light, 19.1:1 dark). It is
+  second in the markup, so focus order follows the screen. Every header button draws a 40px round
+  fill inside a 44px target (2px transparent border, `background-clip:padding-box`).
+- **Other ways out:** Escape (`maikOnKey`, document listener removed in `close()`) steps back a sidebar
+  panel, then closes the sidebar, then MaiK, and never fires while a question is typed or when the key
+  belongs to another overlay. Android back already reached `#maikClose` through swipe-back.js
+  (`[aria-label^="Close"]`); it closes the sidebar first. The header swipe-down still works; the
+  full-screen sheet shows no grab handle.
+- **Composer** (`maik-polish.css`): tool row is `auto auto auto auto minmax(8px,1fr) minmax(0,auto) 44px`
+  (mic, research, image, length | spacer | model chip, Send). Spacing is margin, not column gap, so a
+  hidden control leaves no hole; 8px, 4px at <=370px; under 350px the chip's caret hides so the engine
+  name shows. Every control 44px tall and fully round; one surface (`--mk-ctl-bg` / `--mk-ctl-bd`,
+  mixed from `--mk-ink`) for all secondaries, Send alone filled. **Extract findings moved to the text
+  row** (grid row 1, column 7, above Send), so typing no longer reflows the tool row.
+- **Backgrounds:** sidebar row "Background" (`#maikSideBg`, next to MaiK buddy) opens a radiogroup:
+  Tiranga Fusion (default), the four Display presets, Plain. It edits the theme ON SCREEN: dark and
+  light each keep their own choice in `smd_maik_atmo_cfg` (`plain` flag per theme). Dark "default"
+  is `DEFAULT_CONFIG.dark`, byte-identical to the old computed background. Plain hides `.mk-atmo` and
+  runs no rAF loop. API in `maik-atmosphere.js`: `backgrounds / choice / choiceLabel / choose`. The
+  Display sheet's MaiK section now also edits the theme on screen (it used to edit only light, so in
+  dark mode it silently did nothing).
+Pins: `test/maik-close-bg.test.mjs`; browser: `test/run-maik-close-bg-ui.mjs`.
