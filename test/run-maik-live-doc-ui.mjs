@@ -108,7 +108,7 @@ try {
     var d=__MAIK_TEST.docState(); return d&&d.state;`);
   ok(tap === "run", "a tap on the sheet floor sends him running — " + tap);
   const skidSeen = {};
-  for (let i = 0; i < 30; i++) { const s = await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`); if (s) skidSeen[s] = 1; await sleep(90); }
+  for (let i = 0; i < 45; i++) { const s = await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`); if (s) skidSeen[s] = 1; if (skidSeen.skid) break; await sleep(90); }   // up to ~4 s: from the far right he needs ~2.8 s at run speed
   ok(!!skidSeen.skid, "he skids in on arrival — states: " + Object.keys(skidSeen).sort().join(","));
 
   // ── busy: a question in flight puts him to WORK ──

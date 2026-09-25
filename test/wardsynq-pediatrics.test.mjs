@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-pediatrics.test.mjs — the pediatrics/NICU vertical, through the REAL routes.
  *
  * PEDIATRICS/NICU admission (reusing migrate-inpatient.js UNCHANGED) -> PEWS already reachable at

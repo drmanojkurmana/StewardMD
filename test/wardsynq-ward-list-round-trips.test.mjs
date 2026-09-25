@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-ward-list-round-trips.test.mjs - R7-2: the ward list costs a FIXED number of reads.
  *
  * THE BUG THIS PINS. Opening the ward list took 5-8 seconds on a real hospital, and none of it was

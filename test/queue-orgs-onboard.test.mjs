@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/queue-orgs-onboard.test.mjs — GET /api/queue/orgs (owner + member visibility) and
  * POST /api/queue/onboard/wardsynq (self-service WardSynQ-native hospital), through the REAL routes.
  *

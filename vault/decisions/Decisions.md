@@ -9216,3 +9216,150 @@ existing, permission-gated buttons (or its named functions: reconcileNow, offTic
 is how two screens drift into different payloads or permissions. Month and yesterday figures come from sessions
 that already exist (read-only), so viewing history never creates a queue session for a past day. Default on
 behind `smd_opd_dash`, classic layout one click away, until the owner approves it permanently.
+
+## 2026-09-25 — A Cloudflare Access identity counts only when its JWT verifies
+Roughly 25 routes (queue, wardsynq, connect incl. super-admin, license, billing, push, cases, and the
+coarse gates of experimental/fundx/followcare/icd/schemes/retrieve) took `Cf-Access-Authenticated-User-Email`
+at face value, and /api/ai (T28) accepted any value in `Cf-Access-Jwt-Assertion`. Both are plain request
+headers on a route Access does not front. `_fbauth.js cfAccessEmail(request, env)` now verifies the
+assertion (RS256 against `https://<team>/cdn-cgi/access/certs`, iss, aud, exp) and takes the email from
+its claims; both `identify()` helpers and every gate go through it. Access identity is OFF unless
+`CF_ACCESS_TEAM_DOMAIN` and `CF_ACCESS_AUD` are set. In-process test suites opt back into header trust
+with `test/helpers/trust-cf-access-header.mjs` (a global nothing in `functions/` sets).
+
+## 2026-09-25 — One profile form, one institution directory
+Reported from a device: "all cities in India not covered and all medical colleges and hospitals not
+covered, and bug can't see and can't search college, and why two times institution is asked, I need
+one unified institution/hospital directory." Four separate faults, three of them real bugs.
+
+1. **Two forms.** `email-auth.js` asked a new doctor at sign-up for name/state/city/hospital against
+   `SMD_GEO` (107 hospitals, 184 cities); `profile-setup.js` then asked the SAME doctor on the next
+   app start for "college / hospital" against `SMD_HOSPITALS` (2,405 entries). Two questions, two
+   answers, two lists that disagreed. `profile-setup.js` is now the only form and asks the whole
+   profile once (name, phone, state, city, institution, degree, speciality). `email-auth.js`
+   delegates to it; its own form, typeahead and save were deleted rather than left as a second copy.
+   Both wrote the same Firestore doc already, so no profile is orphaned.
+
+2. **The college picker never opened.** `profile-setup.js` called the bare global `smdLazy(...)`,
+   but `lazy-load.js` is NOT among the scripts `index.html` loads, so the call threw ReferenceError
+   inside the click handler and nothing happened. The field looked focused and did nothing — that is
+   the "can't see and can't search college" report. It now loads the script itself when the helper
+   is absent. **Never reach for a global the page does not definitely define.**
+
+3. **The picker rows were invisible in dark mode.** `.pfs-opt b` and `.pfs-opt span` took their
+   colour from `--hink` / `--hmut`, the LIGHT theme's near-black, on a card the dark block had
+   already repainted `#111b2e`. Labels were black on black while the `--hbd` borders stayed light,
+   which is exactly what the screenshots showed: bright separator lines and no text. Every colour
+   inside the sheet is now restated under `body.dark`; the harness asserts a contrast ratio >= 4.5
+   (it measures 14.6) so this cannot regress silently.
+
+4. **Coverage.** `institutions-in.js` is the single directory. It does not copy the curated lists —
+   it reads whichever are loaded and merges them de-duplicated on normalised name+city, so the
+   curated data keeps living in one file each (2,462 institutions after the merge). What it adds is
+   the geography those lists lacked: every district headquarters of every state and UT, 1,241
+   entries against the previous 184, with no state left empty.
+
+**What "covered" is allowed to mean.** India has ~780 NMC medical colleges and on the order of
+70,000 hospitals. No bundled list is ever complete, and a picker that silently lacks your hospital
+is worse than one that admits it. So: cities are bounded public geography and are complete;
+institutions are curated and are NOT claimed to be exhaustive; free text is a first-class answer
+that is always offered; and what a doctor types is remembered on that device so the next colleague
+at the same hospital finds it. That last part also shows the owner what the curated list is missing.
+
+## 2026-09-25 — The India directory was in the build all along; three faults kept it from the app
+Owner: *"we already have whole india college and hospital list, why isn't it universally available
+in app."* They were right. `hospitals-in.js` has carried 2,405 curated institutions for a long time.
+Three separate faults meant only two screens could ever reach it, and one of those was broken too.
+
+**1. A GLOBAL NAME COLLISION, and it broke BOTH modules.** `hospital-registry.js` (the registry of
+hospitals this doctor has CONNECTED: `list/get/register/setActive`) and `hospitals-in.js` (the
+DIRECTORY of institutions in India: `all/search/byState/states`) both assigned
+`window.SMD_HOSPITALS`. The registry loads on every page; the directory is lazy. Proven in the
+running app:
+  - before the directory loads, `SMD_HOSPITALS.search` is `undefined`, so every picker found nothing;
+  - the moment it loads, `SMD_HOSPITALS.setActive` **disappears**, so `ghis-ward.js:334` silently
+    stopped remembering the doctor's active hospital.
+Each module broke the other, depending only on timing. The directory now owns
+`SMD_HOSPITAL_DIRECTORY` and claims the legacy name only when nothing else holds it.
+
+**2. `smdLazy` IS NOT DEFINED ON THE PAGE.** `lazy-load.js` is not among the scripts `index.html`
+loads, yet `home.js`'s hospital picker and `profile-setup.js` both called the bare global. Both
+threw ReferenceError inside their click handlers, so the picker never opened. This is the same
+root cause as the "can't see and can't search college" report. **Never reach for a global the page
+does not definitely define** — both call sites now load the script themselves.
+
+**3. NO UNIVERSAL ENTRY POINT.** Reaching the list meant knowing three private details: which file
+to lazy-load, which global it lands on, and that a different module owns that name. So only the two
+screens whose authors happened to know all three could use it. `SMD_INSTITUTIONS.ensure()` is now
+the one line any surface calls; `institutions-in.js` is tiny and loads with the app, and it pulls
+the heavy data in itself.
+
+**The lesson worth keeping:** "we already have the data" and "the app can use the data" are
+different claims. A dataset reachable only through undocumented private knowledge is, from every
+other screen's point of view, not there at all. The test that matters is not "does the file exist"
+but "can a screen that knows nothing get it in one call".
+
+## 2026-09-25 - Geometry and slice images are never overwritten in place
+The Living CT 3D body failed on every native install without cached geometry from 2026-09-06 to
+2026-09-25: re-meshed chunks were uploaded to R2 under the old filenames while the manifest that
+matched them sat on an unmerged branch, and native builds check chunk sizes against their BUNDLED
+manifest. Rule: 3D chunk filenames carry their content hash (`pack3d.mjs`, `bp3d_import.py`), and
+2D slice images (served `immutable` for a year) are never rewritten; new stacks go under
+`atlas/<id>/v2/`. Upload new R2 objects before shipping the build that names them; never delete
+the old keys. Tests enforce both.
+
+## 2026-09-25 - RadioAnatome shows radiological convention by flipping at display time
+Files stay as the pipeline wrote them (the 3D cut planes texture the same images); `flipX`/`flipY`
+in `modules.json` mirror at display time. Edge letters only where anatomy proves the side
+(`docs/radioanatome/ORIENTATION.md`); no cadaver module asserts left/right. Clinical notes
+(`atlas/notes.json`) ship ai_drafted behind `smd_atlas_notes` (default OFF), like CliniX/SURGX.
+Shared 3D snapshots carry the CC BY credit inside the PNG, since CC BY 4.0 requires attribution on
+redistribution; the on-screen rule (attribution only on the About screen) is unchanged.
+
+## 2026-09-25 - Living neck CT: one command per TotalSegmentator subject, axes from anatomy
+`ct-live-neck-*` (s0021, `ct neck`, contrast) and `ct-live-thorax-neck-*` (s0897, `ct thorax-neck`,
+unenhanced) are built by `atlas-pipeline/tsd_living.py`, which measures each axis from the masks
+(C2 vs T4; trachea vs cord; descending aorta, SVC, brachiocephalic trunk course and heart, compared
+level by level) and re-indexes the CT into the torso convention before cutting, so every downstream
+tool (orient, reformat, living.py proofs, flipX) is reused unchanged. Masks mapped to null are
+dropped before the crop and slice pick: the first build spent 8 of 48 axial slices on the brain.
+New canonical ids (trachea, thyroid, neck vessels, right upper lobe) are 2D only for now: listed in
+`bp3d-map.json` `_pending_3d`, not mapped by name similarity. The 3D layer was out of scope.
+
+## 2026-09-25 — The offline clinical bundle is the drug database's search fallback, not just its detail source
+
+**Context.** QA reported "No drugs match Cefiderocol" (BUG-002). Investigation found the monograph was
+already shipped and already renderable; what did not exist was any way to *search* the 1,541 molecules
+in `data/offline-clinical.json.gz`. The server's `/search` is a brand-catalogue search and structurally
+cannot find a molecule with no Indian brand, and `/monograph` returns `found:false` for every molecule
+in production because the `monographs` table was never loaded.
+
+**Decision.** Ship a small separate index (`data/clinical-index.js`, name + class + tags, 331 KB) and
+have `api.js` fall back to it whenever the server returns nothing. The index is generated FROM the
+shipped bundle, not from `worker/data/gold/`, so it can never advertise a molecule the app cannot open.
+
+**Rejected:** bundling the 13 MB gold corpus as a client search index (too large, and a second copy of
+the same content that would drift); regenerating `offline-clinical.json.gz` from SQL to pick up the 104
+missing records (rewrites rows that currently match prod, needs the sqlite3 toolchain, and is not
+reversible in review). Instead the 104 ship as an additive supplement that merges under the bundle.
+
+**Consequence.** Search results can now include a molecule with zero brands. It is labelled
+"monograph" rather than "0 brands", which would read as "not available".
+
+**Still open.** `api.js` `goldFor()` / `window.SMD_GOLD_MONOGRAPHS` remains dead code pointing at
+`data/gold-monographs.js`, a file that has never existed in this repo. Either delete it or build it.
+
+## 2026-09-25 — Save Case and Patient Safety are one panel, and the patient is described once (BUG-019)
+
+**Context.** The two cards were reported as looking generic / AI-generated. Rendered side by side they
+were the same template twice (white card, coloured top rule, eyebrow, icon, title, subtitle) and BOTH
+asked for Age and Sex, to the point where the safety card's subtitle apologised for it: "Age and sex
+stay in sync with Save Case." A UI explaining its own duplication is the defect.
+
+**Decision.** When the safety card is present, draw the two as one panel (`:has(~ #smdSafetyCard)`)
+and hide the Save Case copy of Age/Sex. The inputs stay in the DOM: `app.js` clears `#scpAge`/`#scpSex`
+on every new case and `reasoning.js smdSyncAgeSex()` keeps them in step, so deleting them would break
+saving. `app.js` is a built artifact here and is not safely editable.
+
+**Consequence.** Age and Sex are asked once, in the card that is actually about the patient. Where
+`:has()` is unsupported the rules do not apply and the old two-card layout stands.

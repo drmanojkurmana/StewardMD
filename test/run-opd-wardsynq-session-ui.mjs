@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/run-opd-wardsynq-session-ui.mjs - LT-01 (live test 2026-09-15): the OPD desk honours a wardsynq.com sign-in.
  *
  * Real headless Chrome, the REAL opd.html over the REAL /api/queue router (in-memory Firestore, as run-opd-dept-ui.mjs).

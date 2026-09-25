@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-portal-gaps.test.mjs - the three patient-portal gaps: OPD queue status, released
  * documents, and the full discharge summary. Driven through the real routers - POST /api/portal/queue,
  * POST /api/portal/document, POST /api/portal/record, POST /api/queue/ward/document-release and

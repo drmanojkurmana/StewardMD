@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-icu-care.test.mjs - P1.12 ICU bedside record (icu-care.js) through the REAL routes:
  * blood gas, ventilator, sedation, round checklist, vasopressor dose, SOFA and the advisory sepsis
  * screen. Harness copied from wardsynq-icu.test.mjs.

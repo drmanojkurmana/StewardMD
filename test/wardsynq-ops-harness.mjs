@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-ops-harness.mjs - the real router over an in-memory hospital, for the stores, assets and blood bank
  * route tests. Same shape as test/wardsynq-billing-reports-livefix.test.mjs: Firestore and the record deps are mocked,
  * everything between the request and the record (authorization, capability map, modules, RecordService) is real.

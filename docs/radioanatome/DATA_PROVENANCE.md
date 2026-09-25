@@ -1,6 +1,6 @@
 # Data provenance
 
-GENERATED on 2026-08-19.
+GENERATED on 2026-09-25.
 
 | dataset | licence | licence URL | redistribute? | derivatives? | used for |
 |---|---|---|---|---|---|
@@ -10,9 +10,23 @@ GENERATED on 2026-08-19.
 | `openneuro-cc0` | CC0 1.0 Public Domain Dedication (verified in the dataset's own dataset_description.json) | https://openneuro.org/datasets/ds003563/versions/1.1.0 ; https://openneuro.org/faq | yes | yes | living brain MRI (planned) |
 | `spl-nac-brain-atlas` | 3D Slicer License Part B | https://github.com/Slicer/Slicer/blob/main/License.txt | yes | yes | not currently used |
 | `tcia` | Per-collection CC BY 3.0/4.0, some NC | https://www.cancerimagingarchive.net/data-usage-policies-and-restrictions/ | NO | NO | not used |
-| `totalsegmentator-dataset` | CC BY 4.0 | https://zenodo.org/records/10047292 | yes | yes | living-patient CT soft tissue, organs, vessels |
+| `totalsegmentator-dataset` | CC BY 4.0 | https://zenodo.org/records/10047292 | yes | yes | living-patient CT soft tissue, organs, vessels, neck |
 | `visible-human` | US Government work, no copyright; NLM download Terms and Conditions apply | https://www.nlm.nih.gov/databases/download/terms_and_conditions.html | yes | yes | whole-body + regional CT skeleton, all planes |
 | `wikimedia-cc0` | CC0 / Public Domain (hard-filtered) | https://commons.wikimedia.org/wiki/Commons:Licensing | yes | yes | not currently used |
+
+## Living-patient subjects in shipped modules
+
+Every living CT module is one subject of the TotalSegmentator dataset v2.0.1 (Zenodo
+record 10047292, doi:10.5281/zenodo.10047292, CC BY 4.0), shown with the dataset's own
+expert masks; no model was run. The same subject id is in each module's atlas.json
+`provenance`; why each subject was chosen is in its label file under
+`atlas-pipeline/labels/`.
+
+| modules | subject | study type (meta.csv) | pathology | notes |
+|---|---|---|---|---|
+| `ct-live-torso-*` | `s0108` | ct neck-thorax-abdomen-pelvis | no_pathology | Siemens, 100 kVp |
+| `ct-live-neck-*` | `s0021` | ct neck | no_pathology | 46 y male, Siemens Sensation 64, 120 kVp, contrast-enhanced |
+| `ct-live-thorax-neck-*` | `s0897` | ct thorax-neck | no_pathology | 40 y female, Siemens Somatom Definition Flash, 80 kVp, unenhanced |
 
 ## Notes per dataset
 

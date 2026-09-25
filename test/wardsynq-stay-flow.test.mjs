@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-stay-flow.test.mjs - the expected discharge date and the transfer request workflow, through the REAL routes.
  *
  * POST /api/queue/ward/expected-discharge, GET /api/queue/ward/expected-discharge-history, the date on GET /api/queue/ward/list

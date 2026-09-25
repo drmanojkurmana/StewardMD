@@ -13,8 +13,8 @@
 (function () {
   "use strict";
   window.INTERACTION_RULES = {
-  "version": "1.0.0",
-  "generated": "2026-07-10",
+  "version": "1.0.1",
+  "generated": "2026-09-25",
   "sources": [
     {
       "id": "onc-nlm-hpddi",
@@ -27271,6 +27271,31 @@
       "sourceId": "rxnorm-rxclass",
       "evidence": "class-based",
       "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-tirzepatide-glp1",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "tirzepatide"
+        },
+        {
+          "kind": "class",
+          "value": "glp1_agonist"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "Tirzepatide and GLP-1 receptor agonists have overlapping GLP-1 receptor activity.",
+      "effect": "Coadministration is not recommended in the Zepbound prescribing information. This includes tirzepatide with semaglutide.",
+      "action": "Do not use this screen as approval to combine these medicines. Review with the prescriber or pharmacist before coadministration. If switching treatment, obtain a specific transition plan.",
+      "monitoring": "Review the indication, intended regimen and whether this is a planned switch.",
+      "sourceId": "openfda-labeling",
+      "sourceUrl": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=487cd7e7-434c-4925-99fa-aa80b1cc776b",
+      "evidence": "Product labeling: Zepbound, Indications and Usage, Limitations of Use. Label updated 2026-08-28.",
+      "reviewDate": "2026-09-25",
       "doseTimingSeparation": false,
       "specialistReview": false
     }

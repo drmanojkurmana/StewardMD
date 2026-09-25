@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-initial-assessment.test.mjs - NABH KPI 1, time to initial assessment (admission-times.js).
  *
  * POST /api/queue/ward/bed-arrival (the nurse, default now, a change needs a reason), POST /api/queue/ward/initial-assessment

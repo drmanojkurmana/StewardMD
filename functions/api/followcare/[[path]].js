@@ -24,7 +24,7 @@
  */
 import * as FC from "../../_followcare.js";
 import Pathways from "../../../followcare-pathways.js";
-import { verifyFirebaseToken } from "../../_fbauth.js";
+import { verifyFirebaseToken, cfAccessEmail } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { quotaOn, quotaKv, consume as quotaConsume, quotaRefusal } from "../../_quota.js";
 import { getEntitlement } from "../../_entitlements.js";
@@ -60,9 +60,9 @@ function json(obj, status, request) { return new Response(JSON.stringify(obj), {
 async function readBody(request) { try { return await request.json(); } catch (e) { return {}; } }
 function enabled(env) { return String((env && env.FOLLOWCARE_ENABLED) == null ? "1" : env.FOLLOWCARE_ENABLED) !== "0"; }
 
-// App gate (same posture as /api/experimental + /api/fundx): Cf-Access email, a matching app token, or an allowed Origin.
-function authorise(request, env) {
-  if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+// App gate (same posture as /api/experimental + /api/fundx): verified Cf-Access JWT, a matching app token, or an allowed Origin.
+async function authorise(request, env) {
+  if (await cfAccessEmail(request, env)) return true;   // a VERIFIED Access JWT; the bare email header is forgeable
   const tok = request.headers.get("X-App-Token");
   if (tok && (tok === env.FOLLOWCARE_APP_TOKEN || tok === env.AI_APP_TOKEN || tok === env.FUNDX_APP_TOKEN)) return true;
   const o = request.headers.get("Origin") || "";
@@ -366,7 +366,7 @@ export async function onRequest(context) {
     }
 
     // ---------------- CLINICIAN (app-gated + Firebase uid) ----------------
-    if (!authorise(request, env)) return json({ error: "unauthorized" }, 401, request);
+    if (!(await authorise(request, env))) return json({ error: "unauthorized" }, 401, request);
     if (request.method === "GET" && seg === "ready") {
       // `media` = is the R2 photo bucket bound? (lets the app tell if Request-Photo is fully provisioned)
       return json({ ready: FC.isConfigured(env), enabled: enabled(env), media: !!(env && env.FOLLOWCARE_R2), photoViewOnce: String((env && env.FOLLOWCARE_PHOTO_VIEW_ONCE) || "") === "1" }, 200, request);

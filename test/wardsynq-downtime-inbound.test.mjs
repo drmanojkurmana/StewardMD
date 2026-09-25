@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-downtime-inbound.test.mjs — TASK 7.15: what the INBOUND doors do when something is
  * down, exercised through the real routes.
  *

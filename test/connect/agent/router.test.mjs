@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect/agent/router.test.mjs -- Connect Hospital agent-broker HTTP router tests.
 // Tests flag gating, authentication, RBAC, consent verification, viewer-token binding,
 // pause/resume ownership transfer, delete/revoke cleanup, and leak-free hospital resolution.

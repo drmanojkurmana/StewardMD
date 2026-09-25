@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/_wardsynq-alert-harness.mjs — one hospital, two routers, real push senders, for the S3 P0 tests.
  *
  * Import this FIRST (it registers the module mocks before either router loads). In-memory Firestore,

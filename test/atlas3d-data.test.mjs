@@ -63,6 +63,10 @@ const allChunks = manifest.chunks.concat(manifest.lod ? manifest.lod.chunks : []
 ok("every chunk file (full + LOD) is referenced and vice versa", files.length === allChunks.length && allChunks.every((c) => files.includes(c.url.split("/").pop())));
 ok("LOD set: 20 reference-body chunks at ~60% of the triangles", manifest.lod && manifest.lod.chunks.length === 20 && manifest.lod.stats.triangles < manifest.stats.triangles * 0.7);
 ok("living-CT chunks carry the source flag and never mix systems", manifest.chunks.filter((c) => c.src === 1).length === 13 && manifest.chunks.every((c) => c.system));
+// Re-uploading re-meshed bytes under an old filename broke every installed app on 2026-09-06
+// (its bundled manifest rejected the new sizes). Hashed names make that impossible.
+ok("living-CT chunk filenames carry their own content hash, so R2 objects are never overwritten",
+  manifest.chunks.filter((c) => c.src === 1).every((c) => c.url.endsWith(`.${c.sha256.slice(0, 8)}.bin.gz`)));
 let maxIdxOk = true, sizeOk = true, shaOk = true, triangles = 0;
 const partsByChunk = new Map();
 parts.forEach((p, i) => { (partsByChunk.get(p[5]) ?? partsByChunk.set(p[5], []).get(p[5])).push(i); });
@@ -90,10 +94,28 @@ ok("triangle total matches stats", Math.round(triangles) === manifest.stats.tria
 ok("full set under 40 MB and LOD set under 25 MB gzipped (streamed from R2 per system, never bundled)", manifest.stats.gz_bytes < 40e6 && manifest.lod.stats.gz < 25e6);
 // --- slice planes (living CT): every torso slice registered, on a monotonic line ---
 const planes = manifest.planes;
-ok("72 slice planes: 24 per living-torso module", Object.keys(planes).length === 3 && Object.values(planes).every((m) => Object.keys(m).length === 24));
+const torsoSlices = (m) => JSON.parse(readFileSync(join(ROOT, "atlas", m, "atlas.json"), "utf8")).slices;
+ok("one registered plane per slice of each living-torso module", Object.keys(planes).length === 3 &&
+  Object.entries(planes).every(([m, byI]) => Object.keys(byI).length === torsoSlices(m).length && torsoSlices(m).length >= 24));
 ok("planes are monotonic along their axis and carry a textured quad frame", Object.values(planes).every((m) => { const ks = Object.keys(m).map(Number).sort((a, b) => a - b); const pos = ks.map((k) => m[k].pos); const inc = pos.every((v, i) => !i || v > pos[i - 1]), dec = pos.every((v, i) => !i || v < pos[i - 1]); return (inc || dec) && ks.every((k) => m[k].tl && m[k].u && m[k].v && ["x", "y", "z"].includes(m[k].axis)); }));
 ok("living-CT parts sit inside the registered slab (axial plane range)", (() => { const ax = planes["ct-live-torso-axial"]; const ys = Object.values(ax).map((p) => p.pos); const lo = Math.min(...ys) - 0.05, hi = Math.max(...ys) + 0.05; return live.every((p) => p[8][1] >= lo && p[8][4] <= hi); })());
 ok("bones and skin come from the same scan: bone canonicals now carry living surfaces", ["LUMBAR_VERTEBRA", "THORACIC_VERTEBRA", "SACRUM", "RIB", "HIP_BONE", "FEMUR"].every((k) => manifest.canon[k] && manifest.canon[k].live && manifest.canon[k].live.length));
+// The cut plane and the 2D slice frame are ONE geometry: atlas-pipeline/living.py derives both
+// from the exact crop / reformat / pick chain. The first registration fitted slices by image
+// correlation and framed the axial quad on the uncropped grid, 39 mm off at the corners.
+let planeQ = true, planeN = 0;
+for (const [mid, byI] of Object.entries(planes)) {
+  const a = JSON.parse(readFileSync(join(ROOT, "atlas", mid, "atlas.json"), "utf8"));
+  for (const s of a.slices) {
+    const p = byI[String(s.i)], q = s.q;
+    if (!p || !q || p.img !== s.img || !existsSync(join(ROOT, s.img.slice(1)))) { planeQ = false; continue; }
+    const mine = p.tl.concat(p.u, p.v);
+    if (mine.some((x, k) => Math.abs(x - q[k]) > 1e-6) || Math.abs(p.pos - p.tl["xyz".indexOf(p.axis)]) > 1e-9) planeQ = false;
+    planeN++;
+  }
+}
+ok("every torso cut plane equals its slice's q in atlas.json (tl/u/v within 1e-6 m, pos on the plane) and textures that slice's own image (img, on disk)",
+  planeQ && planeN === Object.keys(planes).reduce((t, m) => t + torsoSlices(m).length, 0));
 ok("every CT link into a living-torso module carries a plane flag", Object.values(manifest.links).flat().filter((l) => planes[l.m]).every((l) => l.plane === 1));
 ok("no single chunk exceeds 4 MB raw (Pages 25 MiB file cap, mobile memory)", manifest.chunks.every((c) => c.bytes <= 4.2e6));
 
@@ -103,7 +125,11 @@ ok("every concept element is a shipped part", manifest.concepts.every((c) => c[2
 
 // --- canonical mapping ---
 const canon = manifest.canon;
-ok("every ontology structure has a mapping row (mapped or explicitly unmapped)", Object.keys(onto).every((k) => canon[k]) && Object.keys(canon).every((k) => onto[k]));
+// A structure added to the 2D atlas after the last 3D import is listed, with a reason, in
+// bp3d-map.json _pending_3d until someone chooses its BodyParts3D row; it must not ALSO be mapped.
+const pending = map._pending_3d || {};
+ok("every ontology structure has a mapping row (mapped, explicitly unmapped, or pending with a reason)",
+  Object.keys(onto).every((k) => canon[k] || (pending[k] && !map.structures[k])) && Object.keys(canon).every((k) => onto[k]));
 ok("every mapping row in bp3d-map.json reached the manifest", Object.keys(map.structures).every((k) => canon[k] && canon[k].kind === map.structures[k].kind));
 const meshKinds = Object.values(canon).filter((e) => e.kind === "concept" || e.kind === "composite");
 ok("67 canonical structures have a mesh (58 full + 9 partial)", meshKinds.length === 67 && manifest.stats.mapped_full === 58 && manifest.stats.mapped_partial === 9);
