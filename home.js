@@ -2004,8 +2004,8 @@
     { act: "review", ic: "rate_review", tt: "Review content", sub: "Approve protocols and kits", defOn: false,
       eligible: function () { try { var q = (location.search.match(/[?&]review=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_review_desk") !== "0"; } catch (e) { return true; } } },
     // Colleagues (kits-share.js, wave 2): referrals, handovers and case rooms. Only when smd_kits_share is on.
-    { act: "kxinbox", ic: "groups", tt: "Colleagues", sub: "Referrals, handovers, cases", defOn: false,
-      eligible: function () { try { var q = (location.search.match(/[?&]share=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_kits_share") === "1"; } catch (e) { return false; } } },
+    { act: "kxinbox", ic: "groups", tt: "Colleagues", sub: "Referrals, handovers, cases", defOn: true,
+      eligible: function () { try { var q = (location.search.match(/[?&]share=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_kits_share") !== "0"; } catch (e) { return true; } } },
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },

@@ -7,6 +7,7 @@ if (!globalThis.crypto) globalThis.crypto = webcrypto;
 export const KEY = Buffer.from(new Uint8Array(32).map((_, i) => (i * 37 + 11) & 255)).toString("base64url");
 export const ENV = { FOLLOWCARE_PHI_KEY: KEY };
 export const DIR = { "SMD-AAA111": "uA", "SMD-BBB222": "uB", "SMD-CCC333": "uC", "SMD-UNV000": "uU" };
+export const EMAILS = { "asha@city.example": "uA", "bala@city.example": "uB", "chitra@city.example": "uC" };
 export const CLAIMS = { uA: { verified: true, name: "Dr Asha" }, uB: { verified: true, name: "Dr Bala" }, uC: { verified: true, name: "Dr Chitra" }, uU: { verified: false, name: "Unverified" } };
 
 export function world() {
@@ -41,7 +42,7 @@ export function world() {
     wCreate: (path, fields) => ({ path, fields, cd: { exists: false } }),
     wUpdate: (path, fields, o) => ({ path, fields, merge: true, cd: o && o.updateTime ? { updateTime: o.updateTime } : null }),
     wDelete: (path) => ({ delete: path }),
-    resolveUid: async (ident) => (ident.smdId ? DIR[String(ident.smdId).toUpperCase()] || null : null),
+    resolveUid: async (ident) => (ident.smdId ? DIR[String(ident.smdId).toUpperCase()] || null : ident.email ? EMAILS[String(ident.email).toLowerCase()] || null : null),
     getClaims: async (uid) => CLAIMS[uid] || {},
     listOrgsForMember: async (ids) => (ids.includes("uB") ? [{ id: "org1", name: "City Hospital", memberRole: "doctor" }] : ids.includes("uC") ? [{ id: "org1", name: "City Hospital", memberRole: "pg_hod" }] : []),
     listOrgsForOwner: async (uid) => (uid === "uA" ? [{ id: "org1", name: "City Hospital" }] : []),

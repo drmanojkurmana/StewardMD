@@ -37,7 +37,7 @@ export const LIMITS = {
   unitInvestigations: 30, unitContacts: 10, histKeys: 80, histValue: 600, histEntries: 40, reviews: 600
 };
 export const TTL = { referral: 31 * 864e5, handover: 3 * 864e5, caseIdle: 90 * 864e5, hist: 400 * 864e5 };
-export const RATE = { send: [30, 3600], caseCreate: [10, 3600], casePost: [60, 3600], histAdd: [120, 3600], publish: [20, 3600] };
+export const RATE = { send: [30, 3600], caseCreate: [10, 3600], caseInvite: [30, 3600], casePost: [60, 3600], histAdd: [120, 3600], publish: [20, 3600] };
 const KINDS = ["referral", "handover"];
 const URGENCY = ["Routine", "Soon (within 2 weeks)", "Urgent (within 24 hours)", "Emergency (now)"];
 const MSG_STATUS = { referral: ["seen", "accepted", "declined", "withdrawn"], handover: ["seen", "acknowledged", "withdrawn"] };
@@ -129,7 +129,7 @@ async function resolveColleague(ctx, to) {
   if (uid === ctx.uid) return { error: "cannot_send_to_self" };
   const c = (await d.getClaims(uid)) || {};
   if (c.verified !== true) return { error: "recipient_not_verified" };
-  return { uid, label: ident.smdId ? String(ident.smdId).toUpperCase() : "email", name: cleanText(c.name || "", 80) };
+  return { uid, label: ident.smdId ? String(ident.smdId).toUpperCase() : cleanText(ident.email, 120).toLowerCase(), name: cleanText(c.name || "", 80) };
 }
 function push(ctx, uid, kind, data) {
   const d = ctx.deps; if (!d.push) return;
@@ -164,8 +164,9 @@ export function validateMessage(body) {
 export async function msgSend(ctx, body) {
   if (!verifiedDoctor(ctx.claims)) return R(403, { error: "verify_required" });
   const v = validateMessage(body); if (v.error) return bad(v.error);
-  const to = await resolveColleague(ctx, body.to); if (to.error) return R(to.error === "recipient_not_found" ? 404 : 400, { error: to.error });
+  // Rate-limited BEFORE the lookup, so failed lookups count too: nobody can probe the directory for free.
   if (await limited(ctx, "send")) return R(429, { error: "rate_limited" });
+  const to = await resolveColleague(ctx, body.to); if (to.error) return R(to.error === "recipient_not_found" ? 404 : 400, { error: to.error });
   const d = ctx.deps, id = newId(18), now = ctx.now;
   const doc = {
     kind: body.kind, fromUid: ctx.uid, toUid: to.uid, fromName: senderName(ctx.claims), fromRegNo: cleanText(ctx.claims.regNo || "", 40),
@@ -235,7 +236,7 @@ async function caseFor(ctx, id) {
 async function invite(ctx, caseId, smdIds, existing) {
   const d = ctx.deps, invited = [], notFound = [], writes = [];
   for (const s of (Array.isArray(smdIds) ? smdIds : []).slice(0, LIMITS.caseMembers)) {
-    const to = await resolveColleague(ctx, { smdId: s });
+    const to = await resolveColleague(ctx, String(s).indexOf("@") > 0 ? { email: s } : { smdId: s });
     if (to.error) { notFound.push({ smdId: String(s).slice(0, 20), error: to.error }); continue; }
     if (existing.indexOf(to.uid) >= 0 || invited.some((x) => x.uid === to.uid)) continue;
     if (existing.length + invited.length >= LIMITS.caseMembers) { notFound.push({ smdId: String(s).slice(0, 20), error: "room_full" }); continue; }
@@ -305,6 +306,7 @@ export async function caseInvite(ctx, body) {
   const c = await caseFor(ctx, body && body.id); if (!c) return R(404, { error: "not_found" });
   if (c.role !== "owner") return R(403, { error: "owner_only" });
   if (c.f.status !== "open") return R(409, { error: "case_closed" });
+  if (await limited(ctx, "caseInvite")) return R(429, { error: "rate_limited" });
   const d = ctx.deps, mems = await d.fsQuery("kx_case_mem", { where: { field: "caseId", value: c.id }, limit: 50 });
   const inv = await invite(ctx, c.id, body.smdIds, mems.map((m) => m.fields && m.fields.uid).filter(Boolean));
   if (inv.writes.length) await d.fsCommit(inv.writes);

@@ -1218,7 +1218,7 @@
     }).join("") + '</ol><p class="kit-muted">Decision support only. The kit adds text for you to check and edit; it never saves, signs or orders anything.</p></section>';
     var share = shareHtml(kit, k, host);
     if (share) setTimeout(fillUnits, 0);
-    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + head + reviewNote(kit, host) + blocked + docs + share + tools + secs + adv + osets + inv + protos + calcs + src + "</div>";
+    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + head + reviewNote(kit, host) + blocked + docs + tools + secs + adv + osets + share + inv + protos + calcs + src + "</div>";
   }
 
   /* ---- wave 2 (kits-share.js, flag smd_kits_share, default OFF): the hospital's own version of the kit,
