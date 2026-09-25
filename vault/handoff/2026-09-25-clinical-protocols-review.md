@@ -3,7 +3,7 @@ tags: [handoff, clinical-content, review]
 ---
 # 2026-09-25 - Clinical Protocols: clinical review worklist
 
-156 protocols across 18 subjects shipped in `kb/clinical-protocols/` ([[Clinical Protocols]]), all
+233 protocols across 19 subjects shipped (215 international, 18 India national; 15 topics paired across both) in `kb/clinical-protocols/` ([[Clinical Protocols]]), all
 `review.status: "ai_drafted"`. Each was written by a research agent against the cited guideline on
 the web. **Every agent hit the shared 200-search web limit partway**, then continued by fetching
 publisher/society pages directly; several publishers (AHA, ESC/OUP, JACC, ASH, Springer, PubMed)
@@ -85,3 +85,36 @@ Edit the file: `"review": { "status": "reviewed", "compiled": "2026-09-25", "rev
 - Newer: Surviving Sepsis Children 2026 (no adrenaline vs noradrenaline preference; hydrocortisone only for adrenal insufficiency), GINA 2026, WHO 2024 zinc 5 mg option, WHO 2023 SAM, WHO 2024 neonatal sepsis. DKA stays ISPAD 2022.
 - doi-only (publisher blocked): AAP jaundice 2022, bronchiolitis 2014, febrile seizures 2011/2008, SSC Children 2026.
 - Unsure: AAP 2022 jaundice thresholds/IVIG/irradiance (from knowledge), neonatal SpO2 targets by minute (secondary), max doses ceftriaxone/ampicillin/amoxicillin, adrenaline/noradrenaline starting rates, hydrocortisone, benzodiazepines. Preterm gentamicin intervals omitted.
+
+# INTERNATIONAL WAVE (2026-09-25)
+## gastroenterology (8, international)
+- Newer: ACG July 2026 diverticulitis (cited from summaries; paywalled), ASCRS 2026 update not cited (unread). AASLD/IDSA 2025 HBV cited with WHO 2024.
+- Unsure: AGA diverticulitis antibiotic cut-offs (CRP >140, WBC >15) from memory; vonoprazan GERD + resmetirom statin limits from FDA labels; RYGB preferred for GERD in obesity (ACG 2022) from memory; Rome IV/alarm features standard references; HBIG within 12 h (CDC practice).
+## cardio-respiratory (7, international)
+- Bronchiectasis on ERS 2025 (replaced ERS 2017). ESC/ERS 2022 PH full text unread: echo probability thresholds, 4-strata cut-offs and PH drug doses from knowledge/labels.
+- Unsure: antianginal doses (GTN, bisoprolol, ranolazine, ivabradine) label/standard; heparin ALI 80 units/kg then 18 units/kg/h (standard nomogram); nerandomilast 18 mg BD (secondary source); OSA driving/perioperative advice and tirzepatide titration not from cited guidelines. Nebulised antibiotic doses omitted.
+## malaria (WHO) counterpart
+- Checked: WHO 2025 AL weight bands, DHA-PPQ, PQ 0.25 mg/kg single (Pf), radical cure 0.5 mg/kg x14 d or 1 mg/kg x7 d (G6PD >=70%), tafenoquine bands.
+## women's health + urology (8, international)
+- Stones cite AUA 2026 (not 2016). ED cites EAU 2025 x3 (no AUA 2018). NG118 URL fetched via NICE standard address.
+- From standard prescribing references: HRT + vaginal oestradiol doses, bladder antimuscarinic/mirabegron doses, TXA max 4 g/day, DMPA 13-weekly, implant 3 years, FSRH contraception-to-menopause rule, nitrates 24/48 h after PDE5i, morphine titration. Check UKMEC migraine without aura (CHC category 2 to start) and centchroman dosing.
+## endocrine (7, international)
+- Unsure: PCOS letrozole 2.5-7.5 mg d3-7 and clomiphene 50-150 mg (standard, not guideline text); vitamin D UK loading examples (50,000 IU weekly x6 or 4,000 IU daily x10 wk) from memory (only ~300,000 IU total + 800-2000 IU maintenance checked); ATA 2016 methimazole-by-FT4 doses via search summaries; ATA 2026 pregnancy details via secondary summaries; T1D sick-day uses ketones >=3.0 only; semaglutide stop 2 months pre-pregnancy + liraglutide titration from labels.
+## neurology + psychiatry (9, international)
+- Depression cites NICE NG222 + CANMAT 2023 (APA page failed). Migraine prevention uses AAN/AHS 2026 (summary only).
+- From memory: Bell's aciclovir 400 mg 5x/day 10 d, propranolol 40 mg BD-TDS start, amitriptyline titration, venlafaxine max 375 mg, pregabalin titration (GAD), crisis diazepam 2 mg up to TDS, galcanezumab 240 mg load then 120 mg. Epilepsy folic acid deliberately soft.
+## rheumatology + dermatology + B12 (9, international)
+- Newer editions: EULAR RA 2025 update, ACR 2026 OA (summary), ACR SLE 2025, AAD AD 2025 focused update, NICE NG198 Aug 2026.
+- Unsure: folic acid 5 mg weekly with MTX (UK), no RA bridge steroid dose, IA steroid 3-monthly limit, paeds flucloxacillin 12.5-25 mg/kg, IV aciclovir 5 mg/kg (no paeds dose), spironolactone 50-100 mg acne, cyanocobalamin regimen, hydroxocobalamin regimens per BNF (not opened).
+## paediatrics + ENT + eye (8, international)
+- Newer: AAO-HNS 2025 sinusitis update, IDSA 2025 pharyngitis Part 1 (scoring only; 2012 for treatment), NICE NG250 (2025) pneumonia, NICE NG254 (2025) sepsis doses.
+- Unsure: amoxicillin max 2 g/dose (US high-dose practice; WHO none), AOM ceftriaxone max 2 g (AAP) vs 1 g (CHOP), adult gonococcal conjunctivitis ceftriaxone 1 g (CDC) vs 500 mg (AAO) both stated; from BNF/labels: ampicillin 50 mg/kg q6h (1-3 months), pre-hospital benzylpenicillin, aciclovir, eye-drop doses, cefpodoxime 200 mg BD, sinusitis amoxicillin regimens, prochlorperazine short course.
+## international counterparts: tropical (7)
+- Enteric: BIA 2022 paywalled; azithro 20 mg/kg x7 d, paeds ceftriaxone 50-80 mg/kg, paeds meropenem, 10-14 d total are standard values. Encephalitis: BIA/ABN + Kneen cited by DOI only; 6-h LP/aciclovir targets, 21 d children, stop criteria, MRI 24-48 h from memory. Chikungunya: MTX/HCQ are RA doses; prednisolone range from a 2022 SR. Rabies: immunocompromised schedule omitted (WHO wording ambiguous); US schedule note unsourced. Malaria: artesunate 0/12/24 h timing from CDC; CDC 5-day AL for travellers noted.
+## HIV / STI / OI (6, international)
+- PCP doses from the 2009 MMWR NIH/CDC/HIVMA-IDSA edition (clinicalinfo.hiv.gov blocked); current edition may differ (e.g. primaquine flat 30 mg). ART within 2 weeks of PCP treatment rests on WHO rapid-ART, not the 2009 source. DHHS cited as Sept 2024 (May 2026 update unread).
+- Not checked: 3HP doses (INH 900 + rifapentine 900 weekly), early syphilis partner 90-day rule, RCOG/BASHH caesarean after third-trimester first-episode HSV. CDC Aug 2026 change: AL 5 days for Pf (noted in traveller protocol).
+## international counterparts: TB, flu, heat, tox, obstetric (8)
+- AHA 2023 poisoning update + 2026 charcoal paper cited by doi.org (publisher blocked). AHA 2023, BSH 2020, ACOG 2021, WMS 2024 full texts not read (abstracts/summaries).
+- WHO 2025 TB weight bands: HRZE 4 tabs 35-64 kg; TPT rifampicin 750 mg (INH 375 mg) >=65 kg (two WHO documents agree). WHO 2024 6Lfx 500 mg 25-49.9 kg, 750 mg >=50 kg.
+- From standard references: antidote doses (HDI, lipid emulsion, calcium, naloxone, digoxin Fab), heat-stroke benzodiazepine + fluid doses, metformin max 2-2.5 g/day.

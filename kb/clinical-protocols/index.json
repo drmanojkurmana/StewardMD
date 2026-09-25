@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "557b0dd9f7d0",
- "count": 232,
+ "version": "e5da2d353fda",
+ "count": 233,
  "subjects": [
   {
    "key": "emergency",
@@ -71,7 +71,7 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 12
+   "count": 13
   },
   {
    "key": "paediatrics",
@@ -103,7 +103,7 @@
   {
    "key": "international",
    "label": "International",
-   "count": 214
+   "count": 215
   },
   {
    "key": "india",
@@ -1198,12 +1198,41 @@
    "status": "ai_drafted"
   },
   {
+   "id": "anaemia-in-pregnancy-international",
+   "title": "Anaemia in pregnancy (BSH, WHO and ACOG)",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "basis": "international",
+   "counterpart": "anaemia-in-pregnancy",
+   "aliases": [
+    "anemia in pregnancy",
+    "iron deficiency anaemia",
+    "IDA",
+    "iron deficiency in pregnancy",
+    "IV iron",
+    "ferric carboxymaltose",
+    "ferric derisomaltose",
+    "iron sucrose",
+    "ferritin",
+    "IFA",
+    "postpartum anaemia"
+   ],
+   "summary": "Anaemia in pregnancy is haemoglobin below 110 g/L in the first trimester and below 105 g/L later (BSH). Give all women daily iron and folic acid (WHO), treat iron deficiency with 40 to 80 mg elemental iron daily or on alternate days, recheck Hb at 2 to 3 weeks, and use IV iron from the second trimester for non-response, intolerance or late presentation.",
+   "sources": [
+    "British Society for Haematology 2020",
+    "WHO 2016",
+    "ACOG 2021",
+    "WHO 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "anaemia-in-pregnancy",
    "title": "Anaemia in pregnancy: Anaemia Mukt Bharat protocol",
    "subject": "obstetrics-gynaecology",
    "population": "Pregnancy",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "anaemia-in-pregnancy-international",
    "aliases": [
     "anemia in pregnancy",
     "AMB",

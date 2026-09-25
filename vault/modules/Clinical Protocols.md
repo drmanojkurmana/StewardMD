@@ -66,7 +66,10 @@ regimens count as International in the OPD filter (NCCN-based).
   `swipe-back.js` matches those substrings. `.kbp-back` is the reader's Back on purpose.
 
 ## Content status
-- **156 protocols across 18 subjects** (2026-09-25). Review worklist, including every figure the
+- **233 protocols across 19 subjects** (2026-09-25): 215 international, 18 India national, 15 topics paired
+  (malaria, dengue, chikungunya, leptospirosis, enteric fever, AES/encephalitis, rabies PEP, TB, TPT,
+  influenza, heat stroke, poisoning, snakebite, GDM, anaemia in pregnancy). India-only because no
+  international guideline exists: scrub typhus, scorpion sting, massive haemoptysis. Review worklist, including every figure the
   authoring agents could not verify: `vault/handoff/2026-09-25-clinical-protocols-review.md`.
 - All protocols are `review.status: "ai_drafted"`: compiled with AI assistance from the cited
   guidelines (researched on the web, each source URL retrieved), NOT clinically reviewed. The list and
