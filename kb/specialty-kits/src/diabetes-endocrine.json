@@ -1,0 +1,172 @@
+{
+ "id": "diabetes-endocrine",
+ "label": "Diabetes and Endocrinology",
+ "short": "Diabetes",
+ "icon": "glucose",
+ "group": "medical",
+ "subject": "endocrinology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "glycaemic-control",
+   "title": "Glycaemic control and hypoglycaemia",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "dm_type", "label": "Type of diabetes", "type": "select", "opts": ["Type 2", "Type 1", "Gestational (current pregnancy)", "Other specific type", "Prediabetes"] },
+    { "id": "dm_duration", "label": "Known diabetes for", "type": "number", "unit": "years" },
+    { "id": "hba1c_latest", "label": "Latest HbA1c", "type": "number", "unit": "%" },
+    { "id": "hba1c_date", "label": "HbA1c date", "type": "date" },
+    { "id": "home_glucose", "label": "Home glucose (meter or CGM) summary", "type": "select", "opts": ["Not monitoring", "Mostly in target", "Mostly above target", "Frequent lows", "Wide swings"] },
+    { "id": "glucose_readings", "label": "Typical fasting and post-meal readings", "type": "text", "hint": "e.g. fasting 130 to 150, 2 hours after meals 180 to 220 mg/dL" },
+    { "id": "dm_treatment", "label": "Current glucose-lowering treatment", "type": "text" },
+    { "id": "dm_adherence", "label": "Taking treatment", "type": "select", "opts": ["Regularly", "Misses doses sometimes", "Often misses doses", "Rationing because of cost"] },
+    { "id": "hypo_episodes", "label": "Hypoglycaemia episodes since last visit", "type": "number" },
+    { "id": "hypo_worst", "label": "Worst hypoglycaemia (ADA level)", "type": "select", "opts": ["None", "Level 1: below 70 mg/dL", "Level 2: below 54 mg/dL", "Level 3: needed help from another person"] },
+    { "id": "hypo_awareness", "label": "Hypoglycaemia awareness", "type": "select", "opts": ["Normal warning symptoms", "Reduced warning symptoms", "No warning symptoms"] }
+   ]
+  },
+  {
+   "id": "diabetic-foot",
+   "title": "Diabetic foot examination (IWGDF)",
+   "target": "local_examination",
+   "fields": [
+    { "id": "mono_right", "label": "10 g monofilament, right foot: sites felt", "type": "number", "unit": "of 3", "hint": "IWGDF: test 3 sites on each foot, never on callus, ulcer or scar" },
+    { "id": "mono_left", "label": "10 g monofilament, left foot: sites felt", "type": "number", "unit": "of 3" },
+    { "id": "vibration", "label": "Vibration (128 Hz tuning fork)", "type": "select", "opts": ["Felt both feet", "Reduced or absent right", "Reduced or absent left", "Reduced or absent both", "Not tested"] },
+    { "id": "pedal_pulses", "label": "Pedal pulses (dorsalis pedis, posterior tibial)", "type": "select", "opts": ["All palpable", "Reduced or absent right", "Reduced or absent left", "Reduced or absent both"] },
+    { "id": "claudication", "label": "Intermittent claudication", "type": "check" },
+    { "id": "foot_deformity", "label": "Deformity", "type": "select", "opts": ["None", "Claw or hammer toes", "Hallux valgus", "Prominent metatarsal heads", "Charcot foot", "Previous amputation"] },
+    { "id": "foot_skin", "label": "Skin", "type": "select", "opts": ["Normal", "Dry or fissured", "Callus", "Fungal infection", "Pre-ulcerative sign (blister, bleeding under callus)"] },
+    { "id": "foot_ulcer", "label": "Ulcer", "type": "select", "opts": ["No ulcer", "Active ulcer, right", "Active ulcer, left", "Active ulcers, both", "Healed ulcer (in remission)"] },
+    { "id": "footwear", "label": "Footwear", "type": "select", "opts": ["Appropriate", "Ill-fitting or inadequate", "Walks barefoot or in thin slippers"] },
+    { "id": "iwgdf_risk", "label": "IWGDF risk category", "type": "select", "opts": ["0 Very low: no LOPS and no PAD (screen yearly)", "1 Low: LOPS or PAD (every 6 to 12 months)", "2 Moderate: LOPS and PAD, or either with deformity (every 3 to 6 months)", "3 High: LOPS or PAD with previous ulcer, amputation or end-stage kidney disease (every 1 to 3 months)"], "hint": "LOPS: loss of protective sensation; PAD: peripheral artery disease" }
+   ]
+  },
+  {
+   "id": "annual-review",
+   "title": "Annual review: complications and risk factors",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "eye_screen_date", "label": "Last retinal screening", "type": "date" },
+    { "id": "eye_screen_result", "label": "Retinal screening result", "type": "select", "opts": ["No retinopathy", "Mild non-proliferative", "Moderate or severe non-proliferative", "Proliferative", "Maculopathy or macular oedema", "Not done or ungradable"] },
+    { "id": "egfr", "label": "Latest eGFR", "type": "number", "unit": "mL/min/1.73 m2" },
+    { "id": "urine_acr", "label": "Latest urine ACR", "type": "text", "hint": "value and unit, e.g. 45 mg/g" },
+    { "id": "ldl", "label": "LDL cholesterol", "type": "number", "unit": "mg/dL" },
+    { "id": "bp_sys", "label": "BP systolic", "type": "number", "unit": "mmHg", "set": "BP_SYS" },
+    { "id": "bp_dia", "label": "BP diastolic", "type": "number", "unit": "mmHg", "set": "BP_dia" },
+    { "id": "weight", "label": "Weight", "type": "number", "unit": "kg", "set": "Weight" },
+    { "id": "waist", "label": "Waist circumference", "type": "number", "unit": "cm", "set": "waist_cm" },
+    { "id": "tobacco", "label": "Tobacco", "type": "select", "opts": ["Never", "Ex-user", "Current smoker", "Smokeless tobacco"] },
+    { "id": "vaccinations", "label": "Vaccinations (influenza, pneumococcal, hepatitis B, COVID-19)", "type": "text", "set": "immunization_status" },
+    { "id": "sick_day_rules", "label": "Sick-day rules and hypoglycaemia treatment explained", "type": "check" }
+   ]
+  },
+  {
+   "id": "thyroid-history",
+   "title": "Thyroid review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "thyroid_dx", "label": "Thyroid diagnosis", "type": "select", "opts": ["Primary hypothyroidism", "Subclinical hypothyroidism", "Graves' disease", "Toxic nodular goitre", "Thyroiditis", "Thyroid nodule or goitre", "After thyroidectomy or radioiodine", "Under evaluation"] },
+    { "id": "thyroid_symptoms", "label": "Symptoms", "type": "select", "opts": ["None", "Hypothyroid (tiredness, weight gain, cold intolerance, constipation)", "Hyperthyroid (weight loss, palpitations, heat intolerance, tremor)", "Mixed or non-specific"] },
+    { "id": "thyroid_pressure", "label": "Neck pressure symptoms: difficulty swallowing or breathing, hoarse voice", "type": "check" },
+    { "id": "thyroid_treatment", "label": "Current thyroid treatment", "type": "text" },
+    { "id": "tsh", "label": "Latest TSH", "type": "number", "unit": "mIU/L" },
+    { "id": "ft4_ft3", "label": "Free T4 and T3", "type": "text" },
+    { "id": "tft_date", "label": "Date of thyroid tests", "type": "date" },
+    { "id": "thyroid_pregnancy", "label": "Pregnant or planning pregnancy", "type": "check" },
+    { "id": "biotin", "label": "Takes biotin supplements (can distort thyroid test results)", "type": "check" }
+   ]
+  },
+  {
+   "id": "thyroid-examination",
+   "title": "Thyroid examination",
+   "target": "head_neck_exam",
+   "fields": [
+    { "id": "goitre", "label": "Thyroid gland", "type": "select", "opts": ["Not enlarged", "Diffuse goitre", "Single nodule", "Multinodular goitre"] },
+    { "id": "goitre_details", "label": "Size, consistency, retrosternal extension, bruit", "type": "text" },
+    { "id": "neck_nodes", "label": "Cervical lymph nodes", "type": "select", "opts": ["Not palpable", "Palpable"] },
+    { "id": "thyroid_eye", "label": "Eye signs", "type": "select", "opts": ["None", "Lid retraction or lid lag", "Proptosis", "Double vision or restricted eye movement", "Reduced vision or colour vision"] },
+    { "id": "tremor", "label": "Tremor", "type": "select", "opts": ["None", "Fine tremor"] },
+    { "id": "ankle_reflex", "label": "Ankle reflex relaxation", "type": "select", "opts": ["Normal", "Slow-relaxing", "Brisk"] },
+    { "id": "pretibial", "label": "Pretibial myxoedema", "type": "select", "opts": ["Absent", "Present"] }
+   ]
+  },
+  {
+   "id": "endocrine-red-flags",
+   "title": "Diabetes and endocrine red flags",
+   "target": "sys_examination",
+   "alert": "Diabetes or endocrine emergency: suspected DKA, HHS, severe hypoglycaemia, thyroid storm, myxoedema coma or adrenal crisis needs emergency care now; follow the protocol. An infected or ischaemic foot ulcer needs same-day referral to a diabetic foot team or vascular surgeon. Reduced vision in thyroid eye disease needs urgent ophthalmology review.",
+   "fields": [
+    { "id": "rf_foot_infection", "label": "Foot ulcer with spreading redness, swelling, pus, fever or crepitus (infection)", "type": "check" },
+    { "id": "rf_foot_ischaemia", "label": "Foot ulcer or rest pain with absent pulses, or a pale, cold or dusky foot (ischaemia)", "type": "check" },
+    { "id": "rf_gangrene", "label": "Gangrene or black toe", "type": "check" },
+    { "id": "rf_charcot", "label": "Hot, red, swollen foot with intact skin (possible active Charcot foot)", "type": "check" },
+    { "id": "rf_dka", "label": "High glucose with vomiting, abdominal pain, deep fast breathing or ketones (possible DKA)", "type": "check" },
+    { "id": "rf_hhs", "label": "Very high glucose with marked dehydration, drowsiness or confusion (possible HHS)", "type": "check" },
+    { "id": "rf_severe_hypo", "label": "Severe hypoglycaemia: needed help from another person, fits or unconsciousness", "type": "check" },
+    { "id": "rf_thyroid_storm", "label": "Hyperthyroid with fever, fast or irregular pulse, agitation or confusion", "type": "check" },
+    { "id": "rf_myxoedema", "label": "Hypothyroid with drowsiness, low temperature or slow pulse", "type": "check" },
+    { "id": "rf_adrenal", "label": "Vomiting, low BP or collapse in a patient on long-term steroids or with adrenal insufficiency", "type": "check" },
+    { "id": "rf_eye_vision", "label": "Reduced vision or colour vision in thyroid eye disease", "type": "check" },
+    { "id": "rf_stridor", "label": "Stridor or rapidly enlarging neck swelling", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "Fasting blood glucose", "query": "FBS" },
+  { "label": "Post-prandial blood glucose", "query": "PPBS" },
+  { "label": "Lipid profile", "query": "lipid profile" },
+  { "label": "Serum creatinine and eGFR", "query": "creatinine" },
+  { "label": "Urine albumin-creatinine ratio", "query": "urine ACR" },
+  { "label": "Liver function tests", "query": "LFT" },
+  { "label": "TSH", "query": "TSH" },
+  { "label": "Free T4", "query": "FT4" },
+  { "label": "Anti-TPO antibodies", "query": "anti TPO" },
+  { "label": "Vitamin B12", "query": "vitamin B12" },
+  { "label": "Fundus photography", "query": "fundus" },
+  { "label": "ECG", "query": "ECG" },
+  { "label": "Ultrasound thyroid", "query": "USG thyroid" }
+ ],
+ "orderSets": [
+  { "id": "diabetes-annual-review", "label": "Diabetes annual review panel", "tests": ["HbA1c", "FBS", "PPBS", "lipid profile", "creatinine", "electrolytes", "urine ACR", "urine routine", "LFT", "CBC", "vitamin B12", "ECG", "fundus"] },
+  { "id": "thyroid-panel", "label": "Thyroid panel", "tests": ["TSH", "FT4", "FT3", "anti TPO", "TRAb", "USG thyroid"] },
+  { "id": "new-diabetes-work-up", "label": "New diabetes work-up", "tests": ["FBS", "PPBS", "HbA1c", "lipid profile", "creatinine", "urine ACR", "urine routine", "urine ketones", "LFT", "TSH", "CBC", "ECG", "fundus", "C-peptide", "GAD antibody"] }
+ ],
+ "protocols": ["type-2-diabetes-management", "type-1-diabetes-management", "diabetic-ketoacidosis", "hyperosmolar-hyperglycaemic-state", "hypoglycaemia", "inpatient-hyperglycaemia", "paediatric-dka", "gestational-diabetes", "gestational-diabetes-international", "hypothyroidism", "hyperthyroidism-graves", "thyroid-storm", "myxoedema-coma", "adrenal-crisis", "osteoporosis", "vitamin-d-deficiency", "obesity-management", "polycystic-ovary-syndrome", "hypercalcaemia", "hypocalcaemia", "dyslipidaemia-management", "hypertension-management", "chronic-kidney-disease", "masld-fatty-liver", "vitamin-b12-and-folate-deficiency", "cellulitis-skin-soft-tissue", "type-2-diabetes-management-india", "hypertension-type-2-diabetes-india", "dyslipidaemia-management-india"],
+ "calculators": ["hba1c", "eag", "insulin_rules", "findrisc", "homa_ir", "homa_b", "quicki", "burch", "steroid_conv", "corr_na", "effective_osm", "osm", "anion_gap", "corr_ca", "fai", "ferriman_gallwey", "bmi", "whr", "whtr", "ckdepi", "uacr", "abi", "ldl_friedewald", "non_hdl", "ascvd", "fib4"],
+ "advice": [
+  {
+   "id": "diabetic-foot-care",
+   "title": "Caring for your feet",
+   "target": "diet_lifestyle_advice",
+   "text": "Look at both feet every day, including between the toes, or ask someone to help. Do not walk barefoot, in socks only or in thin slippers, at home or outside. Feel inside your shoes before wearing them. Wash your feet daily in water that is not hot and dry well between the toes. Do not warm your feet with a heater or hot-water bottle. Do not cut corns yourself or use corn plasters. Use moisturiser, but not between the toes, and cut nails straight across. Show a doctor at once any blister, cut, scratch or sore."
+  },
+  {
+   "id": "low-sugar",
+   "title": "Low sugar (hypoglycaemia)",
+   "target": "follow_up_advice",
+   "text": "If you feel shaky, sweaty, confused or suddenly hungry, check your sugar if you can and take glucose or sugar dissolved in water at once. Check again after 15 minutes and repeat if still low, then eat a snack or meal. Teach your family what to do. Tell your doctor about every low, and come at once if you needed help from someone or became unconscious."
+  },
+  {
+   "id": "sick-day-rules",
+   "title": "When you are unwell (sick-day rules)",
+   "target": "follow_up_advice",
+   "text": "When you have fever, vomiting, diarrhoea or cannot eat, never stop your insulin. Check your sugar more often, and ketones if you have been told how. Drink plenty of fluids and ask your doctor which tablets to pause while unwell. Come to hospital at once if you keep vomiting or cannot keep fluids down, have abdominal pain, fast deep breathing, drowsiness or confusion, or your sugar stays very high."
+  },
+  {
+   "id": "thyroid-treatment",
+   "title": "Thyroid treatment and tests",
+   "target": "follow_up_advice",
+   "text": "Take your thyroid medicine every day as prescribed, even when you feel well. After a dose change it can take several weeks to months for symptoms to settle, so keep your blood test appointments. Tell your doctor if you take biotin (often in hair, skin and nail supplements), as it can make thyroid blood tests wrong."
+  }
+ ],
+ "sources": [
+  { "org": "American Diabetes Association", "title": "Standards of Care in Diabetes 2026, section 4: Comprehensive medical evaluation and assessment of comorbidities", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690184/" },
+  { "org": "American Diabetes Association", "title": "Standards of Care in Diabetes 2026, section 6: Glycemic goals, hypoglycemia and hyperglycemic crises", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178" },
+  { "org": "International Working Group on the Diabetic Foot (IWGDF)", "title": "Practical guidelines on the prevention and management of diabetes-related foot disease (IWGDF 2023 update)", "year": 2023, "url": "https://iwgdfguidelines.org/wp-content/uploads/2023/07/IWGDF-2023-01-Practical-Guidelines.pdf" },
+  { "org": "ADA, EASD, JBDS, AACE and DTS", "title": "Hyperglycaemic crises in adults with diabetes: a consensus report", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11343900/" },
+  { "org": "NICE", "title": "NG145 Thyroid disease: assessment and management", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng145" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

@@ -1,0 +1,187 @@
+{
+ "id": "geriatrics",
+ "label": "Geriatric Medicine",
+ "short": "Geriatrics",
+ "icon": "elderly",
+ "group": "care",
+ "subject": "neurology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "function",
+   "title": "Function (daily activities)",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "adl_bathing", "label": "Needs help with bathing", "type": "check" },
+    { "id": "adl_dressing", "label": "Needs help with dressing", "type": "check" },
+    { "id": "adl_toileting", "label": "Needs help using the toilet", "type": "check" },
+    { "id": "adl_transfer", "label": "Needs help getting in and out of bed or a chair", "type": "check" },
+    { "id": "adl_feeding", "label": "Needs help with eating", "type": "check" },
+    { "id": "iadl_phone", "label": "Needs help using the telephone", "type": "check" },
+    { "id": "iadl_shopping", "label": "Needs help with shopping", "type": "check" },
+    { "id": "iadl_cooking", "label": "Needs help preparing meals", "type": "check" },
+    { "id": "iadl_housework", "label": "Needs help with housework", "type": "check" },
+    { "id": "iadl_transport", "label": "Needs help travelling outside the home", "type": "check" },
+    { "id": "iadl_medicines", "label": "Needs help managing medicines", "type": "check" },
+    { "id": "iadl_money", "label": "Needs help managing money", "type": "check" }
+   ]
+  },
+  {
+   "id": "falls",
+   "title": "Falls, gait and balance",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "falls_count", "label": "Falls in the past 12 months", "type": "number", "unit": "falls" },
+    { "id": "fall_injury", "label": "Worst injury from a fall", "type": "select", "opts": ["No fall", "No injury", "Minor injury", "Fracture", "Head injury"] },
+    { "id": "long_lie", "label": "Unable to get up from the floor without help", "type": "check" },
+    { "id": "fall_blackout", "label": "Blackout, dizziness or palpitations before a fall", "type": "check" },
+    { "id": "fear_falling", "label": "Concern about falling", "type": "select", "opts": ["None", "Some concern", "High concern, limits activity"] },
+    { "id": "gait_observed", "label": "Gait", "type": "select", "opts": ["Normal", "Slow", "Unsteady or wide-based", "Shuffling", "Antalgic", "Hemiplegic", "Unable to walk"], "set": "gait" },
+    { "id": "standing_balance", "label": "Standing balance", "type": "select", "opts": ["Normal", "Mildly impaired", "Markedly impaired", "Unable to stand"] },
+    { "id": "tug", "label": "Timed Up and Go", "type": "number", "unit": "seconds" },
+    { "id": "walking_aid", "label": "Walking aid", "type": "select", "opts": ["None", "Stick", "Walker or frame", "Wheelchair", "Needs another person"] },
+    { "id": "postural_drop", "label": "Systolic drop on standing", "type": "number", "unit": "mmHg", "hint": "lying, then standing BP at 1 and 3 minutes" },
+    { "id": "home_hazards", "label": "Home hazards (poor lighting, loose rugs, no grab rails, Indian-style toilet, unsafe footwear)", "type": "check" }
+   ]
+  },
+  {
+   "id": "frailty-nutrition",
+   "title": "Frailty and nutrition",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "cfs", "label": "Clinical Frailty Scale", "type": "select", "opts": ["1: Very fit", "2: Fit", "3: Managing well", "4: Living with very mild frailty", "5: Living with mild frailty", "6: Living with moderate frailty", "7: Living with severe frailty", "8: Living with very severe frailty", "9: Terminally ill"] },
+    { "id": "weight_loss", "label": "Unintentional weight loss in the past 3 months", "type": "select", "opts": ["None", "1 to 3 kg", "Over 3 kg", "Does not know"] },
+    { "id": "food_intake", "label": "Food intake", "type": "select", "opts": ["Normal", "Reduced", "Severely reduced"] },
+    { "id": "mna_sf", "label": "MNA-SF score", "type": "number", "unit": "/14", "hint": "total of the 6 MNA-SF items; interpret with the MNA-SF calculator" },
+    { "id": "calf_circumference", "label": "Calf circumference", "type": "number", "unit": "cm" },
+    { "id": "dentition", "label": "Teeth and dentures", "type": "select", "opts": ["Own teeth, chews well", "Dentures fit well", "Poorly fitting dentures", "Chewing difficulty"] },
+    { "id": "swallowing", "label": "Coughing or choking on food or drink", "type": "check" },
+    { "id": "chair_rise", "label": "Cannot rise from a chair without using the arms", "type": "check" }
+   ]
+  },
+  {
+   "id": "cognition-mood",
+   "title": "Cognition and mood",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "cog_concern", "label": "Memory or thinking concern", "type": "select", "opts": ["None", "Raised by the patient", "Raised by family", "Known dementia"] },
+    { "id": "cog_course", "label": "Course of the change", "type": "select", "opts": ["Not applicable", "Gradual over months or years", "Stepwise", "Sudden or fluctuating over hours to days"] },
+    { "id": "cog_screen", "label": "Cognitive screen used and score", "type": "text", "hint": "e.g. AMTS 7/10, Mini-Cog 3/5, MoCA 22/30" },
+    { "id": "education_years", "label": "Years of formal education", "type": "number", "unit": "years" },
+    { "id": "capacity", "label": "Capacity for today's decisions", "type": "select", "opts": ["Has capacity", "Lacks capacity for the decision in question", "Not assessed"] },
+    { "id": "mood_screen", "label": "Mood screen used and score", "type": "text", "hint": "e.g. GDS-15 6/15, PHQ-2 3/6" },
+    { "id": "low_mood", "label": "Low mood or loss of interest on most days", "type": "check" },
+    { "id": "anxiety", "label": "Anxiety or constant worry", "type": "check" },
+    { "id": "sleep_pattern", "label": "Sleep", "type": "select", "opts": ["Normal", "Difficulty falling asleep", "Early waking", "Daytime sleepiness"] },
+    { "id": "bpsd", "label": "Wandering, agitation or hallucinations", "type": "check" }
+   ]
+  },
+  {
+   "id": "continence-senses",
+   "title": "Continence, senses and skin",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "urinary_continence", "label": "Urinary continence", "type": "select", "opts": ["Continent", "Urge incontinence", "Stress incontinence", "Mixed incontinence", "Overflow or retention", "Functional (cannot reach the toilet in time)", "Catheter"] },
+    { "id": "nocturia", "label": "Nocturia", "type": "number", "unit": "times a night" },
+    { "id": "bowel_status", "label": "Bowels", "type": "select", "opts": ["Normal", "Constipated", "Faecal incontinence", "Diarrhoea"] },
+    { "id": "vision", "label": "Vision", "type": "select", "opts": ["Adequate", "Impaired, glasses need review", "Impaired, cataract suspected", "Severe impairment or blind"] },
+    { "id": "hearing", "label": "Hearing", "type": "select", "opts": ["Adequate", "Impaired, no hearing aid", "Uses a hearing aid", "Wax in the ears"] },
+    { "id": "pressure_areas", "label": "Skin and pressure areas", "type": "select", "opts": ["Intact", "Redness over pressure areas", "Pressure ulcer present"] }
+   ]
+  },
+  {
+   "id": "medicines-review",
+   "title": "Medicines review (documentation only)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "med_count", "label": "Regular medicines", "type": "number", "unit": "medicines" },
+    { "id": "otc_herbal", "label": "Also takes over-the-counter, ayurvedic or other herbal medicines", "type": "check" },
+    { "id": "hr_anticoag", "label": "Takes an anticoagulant or antiplatelet", "type": "check" },
+    { "id": "hr_sedative", "label": "Takes a sedative, sleeping tablet or antipsychotic", "type": "check" },
+    { "id": "hr_anticholinergic", "label": "Takes an anticholinergic medicine (e.g. for bladder, allergy or older antidepressants)", "type": "check" },
+    { "id": "hr_bp_drop", "label": "Blood pressure medicines with dizziness or postural drop", "type": "check" },
+    { "id": "hr_hypoglycaemia", "label": "Insulin or sulfonylurea with low sugars", "type": "check" },
+    { "id": "med_adherence", "label": "Adherence", "type": "select", "opts": ["Takes as prescribed", "Misses doses", "Needs help (pill organiser or carer)"] },
+    { "id": "deprescribing", "label": "Deprescribing reviewed and discussed", "type": "check" },
+    { "id": "med_review_notes", "label": "Medicines identified for review", "type": "text", "hint": "record the discussion; any change is made on the prescription" }
+   ]
+  },
+  {
+   "id": "social-acp",
+   "title": "Social support and advance care planning",
+   "target": "management_plan",
+   "fields": [
+    { "id": "lives_with", "label": "Lives", "type": "select", "opts": ["Alone", "With spouse only", "With family", "In an old age home or care home"] },
+    { "id": "main_carer", "label": "Main carer and relationship", "type": "text" },
+    { "id": "carer_coping", "label": "Carer coping", "type": "select", "opts": ["Coping", "Strained", "Not coping", "No carer"] },
+    { "id": "income", "label": "Income", "type": "select", "opts": ["Own income or pension", "Dependent on family", "No regular income"] },
+    { "id": "neglect_concern", "label": "Concern about neglect or abuse", "type": "check" },
+    { "id": "acp_discussed", "label": "Advance care planning discussed", "type": "check" },
+    { "id": "acp_preferences", "label": "Preferences recorded", "type": "text", "hint": "e.g. wishes about hospital admission, resuscitation, place of care" },
+    { "id": "advance_directive", "label": "Advance directive", "type": "select", "opts": ["None", "Discussed", "Documented"] },
+    { "id": "decision_maker", "label": "Nominated person for health decisions", "type": "text" }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags",
+   "target": "History_present_illness",
+   "alert": "Red flag present. Acute confusion: assess with the 4AT and look for the cause today (infection, medicines, urinary retention, constipation, dehydration, pain); do not assume it is dementia. Head injury on an anticoagulant or antiplatelet: CT head within 8 hours of the injury. Possible hip fracture, or a fall with blackout, chest pain or palpitations: same-day emergency assessment.",
+   "fields": [
+    { "id": "rf_delirium", "label": "Acute confusion, drowsiness or change in behaviour over hours to days (possible delirium)", "type": "check" },
+    { "id": "rf_head_injury_anticoag", "label": "Fall with head injury while taking an anticoagulant or antiplatelet (other than aspirin alone)", "type": "check" },
+    { "id": "rf_hip", "label": "Fall with hip or groin pain, or unable to bear weight (possible hip fracture)", "type": "check" },
+    { "id": "rf_syncope", "label": "Fall with blackout, chest pain or palpitations", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "CBC", "query": "CBC" },
+  { "label": "Serum sodium and potassium", "query": "electrolytes" },
+  { "label": "Serum creatinine", "query": "creatinine" },
+  { "label": "Serum calcium", "query": "calcium" },
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "TSH", "query": "TSH" },
+  { "label": "Vitamin B12", "query": "vitamin B12" },
+  { "label": "Vitamin D (25-hydroxy)", "query": "vitamin D" },
+  { "label": "LFT", "query": "LFT" },
+  { "label": "Urine routine", "query": "urine routine" },
+  { "label": "ECG", "query": "ECG" },
+  { "label": "DEXA scan (bone density)", "query": "DEXA" },
+  { "label": "CT brain", "query": "CT brain" }
+ ],
+ "orderSets": [
+  { "id": "falls-workup", "label": "Falls work-up", "tests": ["CBC", "RBS", "electrolytes", "creatinine", "calcium", "vitamin D", "vitamin B12", "TSH", "ECG", "DEXA"] },
+  { "id": "cognitive-workup", "label": "Cognitive impairment work-up", "tests": ["CBC", "ESR", "electrolytes", "calcium", "creatinine", "LFT", "HbA1c", "TSH", "vitamin B12", "folate", "urine routine", "CT brain"] }
+ ],
+ "protocols": ["delirium", "dementia", "parkinsons-disease", "depression-adult", "osteoporosis", "vitamin-d-deficiency", "vitamin-b12-and-folate-deficiency", "iron-deficiency-anaemia", "hypothyroidism", "hyponatraemia", "urinary-incontinence-women", "benign-prostatic-hyperplasia", "chronic-constipation", "syncope-evaluation", "traumatic-brain-injury", "anticoagulant-associated-bleeding"],
+ "calculators": ["cfs", "frail_scale", "prisma7", "katz_adl", "lawton_iadl", "barthel", "tug", "morse_falls", "4at", "cam", "amts", "mmse", "moca", "ad8", "cdr", "gds15", "gds30", "phq2", "phq9", "mna_sf", "must", "nrs2002", "sarcf", "bmi", "crcl", "ckdepi", "charlson", "braden", "norton", "zarit", "pps"],
+ "advice": [
+  {
+   "id": "falls-prevention",
+   "title": "Preventing falls",
+   "target": "diet_lifestyle_advice",
+   "text": "Do the balance and strength exercises you have been shown, regularly. Keep floors clear and dry, use a night light, fit grab rails near the toilet and bath, and wear well-fitting shoes with a firm sole. Get up slowly from lying or sitting. Have your eyes checked, and bring all your medicines, including herbal ones, to every visit."
+  },
+  {
+   "id": "after-a-fall",
+   "title": "After a fall",
+   "target": "follow_up_advice",
+   "text": "If you fall and hit your head while taking a blood thinner, come to hospital the same day even if you feel well. Come at once for new confusion, drowsiness, severe headache or vomiting, or if you cannot stand or walk after a fall. Keep a phone within reach and tell your family how to help you."
+  },
+  {
+   "id": "sudden-confusion",
+   "title": "Sudden confusion: advice for family",
+   "target": "follow_up_advice",
+   "text": "If your relative suddenly becomes confused, very sleepy, restless or not their usual self over hours or days, bring them to hospital the same day. This can be a sign of infection, dehydration or a medicine side effect, and it can often be treated."
+  }
+ ],
+ "sources": [
+  { "org": "British Geriatrics Society", "title": "Comprehensive Geriatric Assessment toolkit for primary care practitioners", "year": 2019, "url": "https://www.bgs.org.uk/resources/resource-series/comprehensive-geriatric-assessment-toolkit-for-primary-care-practitioners" },
+  { "org": "World Falls Guidelines Task Force, Age and Ageing", "title": "World guidelines for falls prevention and management for older adults: a global initiative", "year": 2022, "url": "https://academic.oup.com/ageing/article/51/9/afac205/6730755" },
+  { "org": "NICE", "title": "NG249 Falls: assessment and prevention in older people and in people 50 and over at higher risk", "year": 2025, "url": "https://www.nice.org.uk/guidance/ng249" },
+  { "org": "Dalhousie University", "title": "Clinical Frailty Scale, version 2.0", "year": 2020, "url": "https://www.dal.ca/sites/gmr/our-tools/clinical-frailty-scale.html" },
+  { "org": "NICE", "title": "NG232 Head injury: assessment and early management", "year": 2023, "url": "https://www.nice.org.uk/guidance/ng232/chapter/recommendations" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

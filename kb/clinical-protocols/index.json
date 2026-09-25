@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "e5da2d353fda",
- "count": 233,
+ "version": "af54c76deb25",
+ "count": 248,
  "subjects": [
   {
    "key": "emergency",
@@ -16,7 +16,7 @@
   {
    "key": "cardiology",
    "label": "Cardiology",
-   "count": 17
+   "count": 20
   },
   {
    "key": "respiratory",
@@ -31,7 +31,7 @@
   {
    "key": "gastroenterology",
    "label": "Gastroenterology and Hepatology",
-   "count": 17
+   "count": 19
   },
   {
    "key": "nephrology",
@@ -41,7 +41,7 @@
   {
    "key": "endocrinology",
    "label": "Endocrinology and Diabetes",
-   "count": 14
+   "count": 16
   },
   {
    "key": "neurology",
@@ -71,12 +71,12 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 13
+   "count": 15
   },
   {
    "key": "paediatrics",
    "label": "Paediatrics and Neonatology",
-   "count": 15
+   "count": 21
   },
   {
    "key": "surgery-trauma",
@@ -108,7 +108,7 @@
   {
    "key": "india",
    "label": "India",
-   "count": 18
+   "count": 33
   }
  ],
  "protocols": [
@@ -501,7 +501,7 @@
    "subject": "paediatrics",
    "population": "Children",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "paediatric-dehydration-diarrhoea-india",
    "aliases": [
     "acute gastroenteritis",
     "AGE",
@@ -522,6 +522,38 @@
    "sources": [
     "WHO 2013",
     "WHO 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "paediatric-dehydration-diarrhoea-india",
+   "title": "Acute diarrhoea with dehydration in children (India, IAP)",
+   "subject": "paediatrics",
+   "population": "Children",
+   "basis": "india",
+   "counterpart": "paediatric-dehydration-diarrhoea",
+   "aliases": [
+    "acute watery diarrhoea",
+    "AWD",
+    "acute gastroenteritis",
+    "AGE",
+    "dehydration",
+    "ORS",
+    "low osmolarity ORS",
+    "plan A",
+    "plan B",
+    "plan C",
+    "zinc diarrhoea",
+    "IAP STG diarrhoea",
+    "ICMR STW diarrhoea",
+    "dysentery",
+    "cholera",
+    "ReSoMal"
+   ],
+   "summary": "Classify dehydration, rehydrate with low osmolarity ORS (Plan A at home, Plan B 75 mL/kg over 4 hours) or Ringer lactate for severe dehydration (Plan C), give zinc for 14 days, keep feeding, and reserve antibiotics for dysentery, cholera and other specific indications.",
+   "sources": [
+    "Indian Academy of Pediatrics 2022",
+    "ICMR / DHR, MoHFW 2019"
    ],
    "status": "ai_drafted"
   },
@@ -1374,6 +1406,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "antithrombotics-gi-bleeding-endoscopy-india",
+   "title": "Antiplatelets and anticoagulants in GI bleeding and endoscopy (India, ISG and CSI)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "india",
+   "counterpart": null,
+   "aliases": [
+    "GI bleed on aspirin",
+    "GI bleed on clopidogrel",
+    "DAPT and GI bleeding",
+    "warfarin GI bleed",
+    "DOAC GI bleed",
+    "anticoagulant endoscopy",
+    "antiplatelet endoscopy",
+    "bridging LMWH endoscopy",
+    "ISG CSI position statement",
+    "restart anticoagulation after GI bleed",
+    "high bleeding risk endoscopy",
+    "thrombotic risk"
+   ],
+   "summary": "Grade the bleed and the patient's thrombotic risk. Keep aspirin for secondary prevention, stop the second antiplatelet and anticoagulants until haemostasis, avoid platelet transfusion, reverse anticoagulation only for severe bleeding, and restart DAPT within 5 days, DOACs at 3 days and warfarin at 3 to 7 days. Plan endoscopy by urgency and procedural bleeding risk.",
+   "sources": [
+    "Indian Society of Gastroenterology, Cardiological Society of India, Indian Academy of Neurology, Vascular Society of India 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "aortic-stenosis",
    "title": "Aortic stenosis (adult): assessment and timing of intervention",
    "subject": "cardiology",
@@ -1725,7 +1784,7 @@
    "subject": "paediatrics",
    "population": "Children",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "bronchiolitis-india",
    "aliases": [
     "acute bronchiolitis",
     "RSV bronchiolitis",
@@ -1741,6 +1800,31 @@
     "NICE 2021",
     "AAP 2014",
     "Royal Children's Hospital Melbourne 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "bronchiolitis-india",
+   "title": "Bronchiolitis (India, IAP)",
+   "subject": "paediatrics",
+   "population": "Children",
+   "basis": "india",
+   "counterpart": "bronchiolitis",
+   "aliases": [
+    "acute bronchiolitis",
+    "viral bronchiolitis",
+    "RSV",
+    "RSV bronchiolitis",
+    "wheezy infant",
+    "HFNC bronchiolitis",
+    "CPAP bronchiolitis",
+    "nebulised hypertonic saline",
+    "palivizumab",
+    "IAP STG bronchiolitis"
+   ],
+   "summary": "Bronchiolitis is a clinical diagnosis in children under 2 years with coryza followed by cough, fast breathing, recession and wheeze or crackles. Care is supportive: nasal saline and suction, feeding support, oxygen below SpO2 90% (92% under 6 weeks or with comorbidity), and CPAP or high-flow for impending failure; antibiotics, steroids and routine bronchodilators have no role.",
+   "sources": [
+    "Indian Academy of Pediatrics 2022"
    ],
    "status": "ai_drafted"
   },
@@ -1957,7 +2041,7 @@
    "subject": "cardiology",
    "population": "Adults",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "chronic-heart-failure-hfref-india",
    "aliases": [
     "HFrEF",
     "heart failure",
@@ -1977,6 +2061,40 @@
     "ESC 2026",
     "ESC 2021",
     "AHA / ACC / HFSA 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "chronic-heart-failure-hfref-india",
+   "title": "Chronic heart failure with reduced ejection fraction (India, HFAI)",
+   "subject": "cardiology",
+   "population": "Adults",
+   "basis": "india",
+   "counterpart": "chronic-heart-failure-hfref",
+   "aliases": [
+    "HFrEF",
+    "heart failure",
+    "CHF",
+    "LV dysfunction",
+    "four pillars",
+    "GDMT",
+    "ARNI",
+    "sacubitril valsartan",
+    "SGLT2 inhibitor heart failure",
+    "dapagliflozin",
+    "empagliflozin",
+    "MRA",
+    "spironolactone",
+    "beta-blocker heart failure",
+    "vericiguat",
+    "ivabradine",
+    "ferric carboxymaltose",
+    "HFAI 2025",
+    "NT-proBNP"
+   ],
+   "summary": "HFrEF is LVEF 40% or below. Start all four pillars (ARNI or ACEI/ARB, beta-blocker, MRA, SGLT2 inhibitor) at low dose as early as possible, preferably before discharge, and titrate to target or maximum tolerated doses within 4 to 6 weeks, using loop diuretics only for congestion.",
+   "sources": [
+    "Heart Failure Association of India (HFAI) 2025"
    ],
    "status": "ai_drafted"
   },
@@ -2596,7 +2714,7 @@
    "subject": "cardiology",
    "population": "Adults",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "dyslipidaemia-management-india",
    "aliases": [
     "dyslipidaemia",
     "dyslipidemia",
@@ -2620,6 +2738,39 @@
     "ESC / EAS 2025",
     "ESC / EAS 2019",
     "ACC / AHA and multisociety 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "dyslipidaemia-management-india",
+   "title": "Dyslipidaemia: risk categories, LDL-C goals and lipid-lowering therapy (India, CSI)",
+   "subject": "cardiology",
+   "population": "Adults",
+   "basis": "india",
+   "counterpart": "dyslipidaemia-management",
+   "aliases": [
+    "dyslipidemia",
+    "hyperlipidaemia",
+    "high cholesterol",
+    "LDL-C target",
+    "non-HDL cholesterol",
+    "statin",
+    "atorvastatin",
+    "rosuvastatin",
+    "ezetimibe",
+    "bempedoic acid",
+    "PCSK9 inhibitor",
+    "evolocumab",
+    "inclisiran",
+    "hypertriglyceridaemia",
+    "familial hypercholesterolaemia",
+    "Lp(a)",
+    "CSI lipid guidelines 2024",
+    "atherogenic dyslipidaemia"
+   ],
+   "summary": "Use non-fasting lipids, place the patient in one of five CSI risk categories and treat to LDL-C and non-HDL-C goals (below 55 and 85 mg/dL in very high risk). Start with a statin, add ezetimibe early (at initiation after ACS), then bempedoic acid, a PCSK9 inhibitor or inclisiran if the goal is not met by 4 weeks.",
+   "sources": [
+    "Cardiological Society of India 2024"
    ],
    "status": "ai_drafted"
   },
@@ -2828,7 +2979,7 @@
    "subject": "paediatrics",
    "population": "Children",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "febrile-seizure-india",
    "aliases": [
     "febrile convulsion",
     "febrile convulsions",
@@ -2843,6 +2994,34 @@
     "AAP 2011",
     "AAP 2008",
     "Royal Children's Hospital Melbourne 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "febrile-seizure-india",
+   "title": "Febrile seizures (India, IAP)",
+   "subject": "paediatrics",
+   "population": "Children",
+   "basis": "india",
+   "counterpart": "febrile-seizure",
+   "aliases": [
+    "febrile convulsion",
+    "fever fit",
+    "simple febrile seizure",
+    "complex febrile seizure",
+    "febrile status epilepticus",
+    "FS",
+    "FSE",
+    "GEFS+",
+    "febrile seizure plus",
+    "intranasal midazolam",
+    "clobazam prophylaxis",
+    "IAP STG febrile seizure",
+    "AOCN febrile seizure"
+   ],
+   "summary": "Febrile seizures occur with fever in children aged 6 months to 6 years without CNS infection. Stop an ongoing seizure with intranasal midazolam, look for the fever source and red flags, investigate simple seizures minimally, and reserve intermittent clobazam or continuous prophylaxis for selected children; antipyretics do not prevent recurrence.",
+   "sources": [
+    "Indian Academy of Pediatrics 2022"
    ],
    "status": "ai_drafted"
   },
@@ -3536,12 +3715,39 @@
    "status": "ai_drafted"
   },
   {
+   "id": "hypertension-type-2-diabetes-india",
+   "title": "Hypertension in type 2 diabetes (India, API-ICP)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "basis": "india",
+   "counterpart": null,
+   "aliases": [
+    "diabetic hypertension",
+    "hypertension with diabetes",
+    "T2DM hypertension",
+    "API guideline hypertension diabetes 2024",
+    "ICP",
+    "ACEI ARB diabetes",
+    "ARB plus CCB",
+    "cilnidipine",
+    "albuminuria hypertension",
+    "masked hypertension diabetes",
+    "white coat hypertension diabetes",
+    "finerenone"
+   ],
+   "summary": "In type 2 diabetes aim for BP below 130/80 mmHg (systolic not below 120, diastolic not below 70). Try 3 months of lifestyle change for 130 to 139/80 to 89, and start most patients on a combination of an ACEI or ARB with a dihydropyridine CCB or thiazide-like diuretic, adding beta-blockers only for compelling cardiac indications.",
+   "sources": [
+    "Association of Physicians of India and Indian College of Physicians 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "hypertension-management",
    "title": "Hypertension: diagnosis and outpatient management",
    "subject": "cardiology",
    "population": "Adults",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "hypertension-management-india",
    "aliases": [
     "hypertension",
     "HTN",
@@ -3560,6 +3766,35 @@
     "ESC 2024",
     "AHA / ACC 2025",
     "ICMR / MoHFW (IHCI) 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypertension-management-india",
+   "title": "Hypertension: diagnosis and outpatient management (India, InSH)",
+   "subject": "cardiology",
+   "population": "Adults",
+   "basis": "india",
+   "counterpart": "hypertension-management",
+   "aliases": [
+    "hypertension",
+    "HTN",
+    "high blood pressure",
+    "stage 1 hypertension",
+    "stage 2 hypertension",
+    "InSH 2025",
+    "Indian Society of Hypertension",
+    "single pill combination",
+    "SPC",
+    "resistant hypertension",
+    "HBPM",
+    "ABPM",
+    "white coat hypertension",
+    "BP target 130/80"
+   ],
+   "summary": "InSH 2025 defines stage 1 hypertension as 130 to 139/80 to 89 and stage 2 as 140/90 or more. Confirm with repeat office and out-of-office readings, start drugs at 140/90 (above 130/80 if high risk), begin with a low-dose two-drug single pill combination (ACEI or ARB with a CCB or thiazide), and treat most adults to below 130/80 mmHg.",
+   "sources": [
+    "Indian Society of Hypertension (InSH) 2025"
    ],
    "status": "ai_drafted"
   },
@@ -4235,12 +4470,43 @@
    "status": "ai_drafted"
   },
   {
+   "id": "masld-fatty-liver-india",
+   "title": "Metabolic dysfunction-associated steatotic liver disease (India, INASL)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "india",
+   "counterpart": "masld-fatty-liver",
+   "aliases": [
+    "MASLD",
+    "NAFLD",
+    "fatty liver",
+    "MASH",
+    "NASH",
+    "MetALD",
+    "lean NAFLD",
+    "hepatic steatosis",
+    "FIB-4",
+    "APRI",
+    "FibroScan",
+    "VCTE",
+    "liver stiffness",
+    "saroglitazar",
+    "INASL guidance"
+   ],
+   "summary": "MASLD is steatosis with at least one cardiometabolic risk factor (Asian Indian cut-offs) and limited alcohol. Stage fibrosis with FIB-4 or APRI and refer indeterminate or high results for VCTE. Treat with 7 to 10% weight loss and at least 200 minutes a week of exercise; consider vitamin E, pioglitazone or saroglitazar for steatohepatitis with F1 to F3 fibrosis.",
+   "sources": [
+    "Indian National Association for Study of the Liver (INASL) 2023",
+    "Indian National Association for Study of the Liver (INASL) 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "masld-fatty-liver",
    "title": "Metabolic dysfunction-associated steatotic liver disease (MASLD)",
    "subject": "gastroenterology",
    "population": "Adults",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "masld-fatty-liver-india",
    "aliases": [
     "MASLD",
     "NAFLD",
@@ -4430,7 +4696,7 @@
    "subject": "paediatrics",
    "population": "Neonates",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "neonatal-jaundice-india",
    "aliases": [
     "neonatal hyperbilirubinemia",
     "newborn jaundice",
@@ -4450,6 +4716,39 @@
    "sources": [
     "AAP 2022",
     "NICE 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "neonatal-jaundice-india",
+   "title": "Neonatal jaundice (India, IAP)",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "basis": "india",
+   "counterpart": "neonatal-jaundice",
+   "aliases": [
+    "neonatal hyperbilirubinaemia",
+    "newborn jaundice",
+    "physiological jaundice",
+    "phototherapy",
+    "exchange transfusion",
+    "EBT",
+    "TSB",
+    "TcB",
+    "Kramer zones",
+    "kernicterus",
+    "acute bilirubin encephalopathy",
+    "ABO incompatibility",
+    "Rh isoimmunisation",
+    "G6PD deficiency",
+    "prolonged jaundice",
+    "IAP STG jaundice",
+    "ICMR STW jaundice"
+   ],
+   "summary": "Examine every newborn for jaundice at least every 12 hours for the first 3 to 5 days and before discharge. Jaundice in the first 24 hours, yellow palms and soles or signs of encephalopathy are serious: start intensive phototherapy, measure TSB, plot it on hour-specific charts, and refer early for exchange transfusion when indicated.",
+   "sources": [
+    "Indian Academy of Pediatrics 2022",
+    "ICMR / DHR, MoHFW 2020"
    ],
    "status": "ai_drafted"
   },
@@ -5028,7 +5327,7 @@
    "subject": "obstetrics-gynaecology",
    "population": "Pregnancy",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "postpartum-haemorrhage-india",
    "aliases": [
     "PPH",
     "E-MOTIVE",
@@ -5052,12 +5351,43 @@
    "status": "ai_drafted"
   },
   {
+   "id": "postpartum-haemorrhage-india",
+   "title": "Postpartum haemorrhage (PPH): first response and escalation (India, ICMR)",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "basis": "india",
+   "counterpart": "postpartum-haemorrhage",
+   "aliases": [
+    "PPH",
+    "atonic PPH",
+    "traumatic PPH",
+    "retained placenta",
+    "obstetric haemorrhage",
+    "shock index",
+    "oxytocin drip",
+    "methylergometrine",
+    "methergine",
+    "carboprost",
+    "misoprostol PPH",
+    "tranexamic acid PPH",
+    "condom catheter tamponade",
+    "UBT",
+    "NASG",
+    "ICMR STW PPH"
+   ],
+   "summary": "PPH is blood loss over 500 mL or any bleeding that deranges vital signs. Call for help, resuscitate through two wide-bore lines, start an oxytocin infusion, massage the uterus, give tranexamic acid 1 g IV within 3 hours of birth, identify the cause, and escalate through uterotonics, balloon tamponade and surgery or referral.",
+   "sources": [
+    "ICMR / DHR, MoHFW 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "pre-eclampsia-eclampsia",
    "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia",
    "subject": "obstetrics-gynaecology",
    "population": "Pregnancy",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "pre-eclampsia-eclampsia-india",
    "aliases": [
     "pre-eclampsia",
     "preeclampsia",
@@ -5080,6 +5410,37 @@
     "NICE 2019",
     "WHO 2011",
     "FOGSI / Gestosis / ICOG 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "pre-eclampsia-eclampsia-india",
+   "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia (India, FOGSI)",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "basis": "india",
+   "counterpart": "pre-eclampsia-eclampsia",
+   "aliases": [
+    "HDP",
+    "hypertensive disorders of pregnancy",
+    "PIH",
+    "pre-eclampsia",
+    "preeclampsia",
+    "severe pre-eclampsia",
+    "eclampsia",
+    "gestational hypertension",
+    "HDP Gestosis score",
+    "MgSO4",
+    "magnesium sulphate",
+    "Pritchard regimen",
+    "Zuspan regimen",
+    "FOGSI GCPR HDP",
+    "labetalol pregnancy",
+    "nifedipine pregnancy"
+   ],
+   "summary": "Screen every pregnancy with the HDP-Gestosis score and give aspirin 75 to 150 mg plus calcium to women at risk. Treat BP of 140/90 or more to a target of 140/90 or below, control severe hypertension with oral nifedipine or IV labetalol, give magnesium sulphate (Pritchard or Zuspan) for severe pre-eclampsia and eclampsia, and deliver at 37 weeks (non-severe) or after 34 weeks (severe).",
+   "sources": [
+    "FOGSI, Gestosis (India) and ICOG 2019"
    ],
    "status": "ai_drafted"
   },
@@ -5727,7 +6088,7 @@
    "subject": "paediatrics",
    "population": "Children",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "severe-acute-malnutrition-india",
    "aliases": [
     "SAM",
     "severe wasting",
@@ -5748,6 +6109,37 @@
     "WHO 2023",
     "WHO 2013",
     "WHO 2013"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "severe-acute-malnutrition-india",
+   "title": "Severe acute malnutrition: inpatient care (India, ICMR and IAP)",
+   "subject": "paediatrics",
+   "population": "Children",
+   "basis": "india",
+   "counterpart": "severe-acute-malnutrition",
+   "aliases": [
+    "SAM",
+    "complicated SAM",
+    "severe wasting",
+    "MUAC",
+    "bilateral pitting oedema",
+    "kwashiorkor",
+    "marasmus",
+    "NRC",
+    "F-75",
+    "F-100",
+    "appetite test",
+    "ICMR STW SAM",
+    "IAP STG SAM",
+    "CSAM",
+    "10 steps"
+   ],
+   "summary": "Diagnose SAM by MUAC below 11.5 cm, weight for height below -3 SD or bilateral pitting oedema. Admit to an NRC if there are complications or the appetite test fails; treat hypoglycaemia, hypothermia, dehydration, electrolytes and infection, then feed cautiously with F-75 before catch-up F-100.",
+   "sources": [
+    "ICMR / DHR, MoHFW 2019",
+    "Indian Academy of Pediatrics 2022"
    ],
    "status": "ai_drafted"
   },
@@ -6454,7 +6846,7 @@
    "subject": "endocrinology",
    "population": "Adults",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "type-2-diabetes-management-india",
    "aliases": [
     "T2DM",
     "T2D",
@@ -6474,6 +6866,41 @@
     "ADA 2026",
     "RSSDI 2022",
     "ADA 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "type-2-diabetes-management-india",
+   "title": "Type 2 diabetes: outpatient management (India, RSSDI)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "basis": "india",
+   "counterpart": "type-2-diabetes-management",
+   "aliases": [
+    "T2DM",
+    "type 2 diabetes",
+    "diabetes mellitus",
+    "DM2",
+    "RSSDI 2022",
+    "prediabetes",
+    "IFG",
+    "IGT",
+    "HbA1c target",
+    "postprandial hyperglycaemia",
+    "PPG",
+    "metformin",
+    "SGLT2 inhibitor",
+    "DPP-4 inhibitor",
+    "sulfonylurea",
+    "basal insulin",
+    "premix insulin",
+    "diabetes remission",
+    "ICMR STW diabetes"
+   ],
+   "summary": "Diagnose with FPG 126 mg/dL, 2-hour OGTT glucose 200 mg/dL or HbA1c 6.5% or more. Start lifestyle therapy and metformin at diagnosis, escalate by HbA1c (dual therapy, then a third agent or basal insulin), prefer SGLT2 inhibitors or GLP-1 RAs with ASCVD, heart failure or kidney disease, and aim for HbA1c below 7%, BP below 130/80 and LDL-C below 100 mg/dL.",
+   "sources": [
+    "Research Society for the Study of Diabetes in India (RSSDI) 2022",
+    "ICMR / DHR, MoHFW 2022"
    ],
    "status": "ai_drafted"
   },
@@ -6542,7 +6969,7 @@
    "subject": "paediatrics",
    "population": "Children",
    "basis": "international",
-   "counterpart": null,
+   "counterpart": "urinary-tract-infection-children-india",
    "aliases": [
     "UTI child",
     "paediatric UTI",
@@ -6562,6 +6989,37 @@
     "NICE 2018",
     "NICE 2018",
     "AAP 2011"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "urinary-tract-infection-children-india",
+   "title": "Urinary tract infection in children (India, ISPN)",
+   "subject": "paediatrics",
+   "population": "Children",
+   "basis": "india",
+   "counterpart": "urinary-tract-infection-children",
+   "aliases": [
+    "UTI child",
+    "paediatric UTI",
+    "pediatric UTI",
+    "febrile UTI",
+    "acute pyelonephritis child",
+    "cystitis child",
+    "VUR",
+    "vesicoureteric reflux",
+    "MCU",
+    "MCUG",
+    "DMSA scan",
+    "bladder bowel dysfunction",
+    "BBD",
+    "ISPN 2023",
+    "antibiotic prophylaxis UTI"
+   ],
+   "summary": "Screen with dipstick and confirm by culture of a properly collected sample. Treat febrile UTI promptly with an oral third-generation cephalosporin or co-amoxiclav for 7 to 10 days, do an ultrasound for all, reserve MCU for selected children, and limit prophylaxis to high-grade VUR or recurrent UTI with bladder-bowel dysfunction.",
+   "sources": [
+    "Indian Society of Pediatric Nephrology (ISPN) 2024",
+    "Indian Academy of Pediatrics 2022"
    ],
    "status": "ai_drafted"
   },

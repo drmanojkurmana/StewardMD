@@ -3,10 +3,11 @@
  "label": "Obstetrics and Gynaecology",
  "short": "O&G",
  "icon": "pregnant_woman",
+ "group": "women-children",
  "subject": "obstetrics-gynaecology",
  "workspace": "obstetrics_gynaecology",
  "scribe": "obgyn",
- "tools": ["pregnancy-dating"],
+ "tools": ["pregnancy-dating", "labour-care"],
  "sections": [
   {
    "id": "obstetric-history",
@@ -137,8 +138,8 @@
   { "label": "Pelvic ultrasound", "query": "USG pelvis" },
   { "label": "Pap smear", "query": "Pap smear" }
  ],
- "protocols": ["routine-antenatal-care", "pre-eclampsia-eclampsia", "postpartum-haemorrhage", "gestational-diabetes", "gestational-diabetes-international", "anaemia-in-pregnancy", "anaemia-in-pregnancy-international", "preterm-labour", "ectopic-pregnancy", "contraception", "heavy-menstrual-bleeding", "polycystic-ovary-syndrome", "menopause"],
- "calculators": ["edd", "ga_crl", "bishop", "iom_weight_gain", "apgar", "epds"],
+ "protocols": ["routine-antenatal-care", "pre-eclampsia-eclampsia", "postpartum-haemorrhage", "gestational-diabetes", "gestational-diabetes-international", "anaemia-in-pregnancy", "anaemia-in-pregnancy-international", "preterm-labour", "ectopic-pregnancy", "contraception", "heavy-menstrual-bleeding", "polycystic-ovary-syndrome", "menopause", "postpartum-haemorrhage-india", "pre-eclampsia-eclampsia-india"],
+ "calculators": ["edd", "ga_crl", "bishop", "iom_weight_gain", "apgar", "epds", "meows", "ctg"],
  "advice": [
   {
    "id": "antenatal-danger-signs",

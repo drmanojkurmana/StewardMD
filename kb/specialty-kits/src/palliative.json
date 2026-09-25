@@ -1,0 +1,179 @@
+{
+ "id": "palliative",
+ "label": "Palliative Care",
+ "short": "Palliative",
+ "icon": "volunteer_activism",
+ "group": "care",
+ "subject": "haematology-oncology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "esas",
+   "title": "Symptom assessment (ESAS-r)",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "esas_pain", "label": "Pain", "type": "number", "unit": "/10", "set": "pain_score", "hint": "0 = none, 10 = worst possible; rate how the patient feels now" },
+    { "id": "esas_tiredness", "label": "Tiredness (lack of energy)", "type": "number", "unit": "/10" },
+    { "id": "esas_drowsiness", "label": "Drowsiness (feeling sleepy)", "type": "number", "unit": "/10" },
+    { "id": "esas_nausea", "label": "Nausea", "type": "number", "unit": "/10" },
+    { "id": "esas_appetite", "label": "Lack of appetite", "type": "number", "unit": "/10" },
+    { "id": "esas_breath", "label": "Shortness of breath", "type": "number", "unit": "/10" },
+    { "id": "esas_depression", "label": "Depression (feeling sad)", "type": "number", "unit": "/10" },
+    { "id": "esas_anxiety", "label": "Anxiety (feeling nervous)", "type": "number", "unit": "/10" },
+    { "id": "esas_wellbeing", "label": "Wellbeing (how you feel overall)", "type": "number", "unit": "/10", "hint": "0 = best, 10 = worst" },
+    { "id": "esas_other", "label": "Other problem", "type": "text", "hint": "e.g. constipation, itch, cough" },
+    { "id": "esas_other_score", "label": "Other problem score", "type": "number", "unit": "/10" },
+    { "id": "esas_completed", "label": "Completed by", "type": "select", "opts": ["Patient", "Patient with help", "Carer or health worker"] }
+   ]
+  },
+  {
+   "id": "performance-status",
+   "title": "Performance status",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "pps", "label": "Palliative Performance Scale (PPSv2)", "type": "select", "opts": ["100%: full ambulation, normal activity and work, no evidence of disease", "90%: full ambulation, normal activity and work, some evidence of disease", "80%: full ambulation, normal activity with effort, some evidence of disease", "70%: reduced ambulation, unable to do normal job or work, significant disease", "60%: reduced ambulation, unable to do hobby or housework, occasional assistance", "50%: mainly sit or lie, unable to do any work, considerable assistance", "40%: mainly in bed, unable to do most activity, mainly assistance", "30%: totally bed bound, total care, normal or reduced intake", "20%: totally bed bound, total care, minimal to sips", "10%: totally bed bound, total care, mouth care only, drowsy or coma", "0%: death"], "hint": "read across the levels for the best fit; ambulation and activity take precedence" },
+    { "id": "pps_change", "label": "Change since last assessment", "type": "select", "opts": ["First assessment", "Improved", "Unchanged", "Declined"] },
+    { "id": "trajectory", "label": "Overall trajectory", "type": "select", "opts": ["Stable", "Gradual decline over months", "Rapid decline over weeks", "Likely last days of life"] },
+    { "id": "place_of_care", "label": "Current place of care", "type": "select", "opts": ["Home", "Hospital ward", "Hospice", "Care home"] }
+   ]
+  },
+  {
+   "id": "pain-assessment",
+   "title": "Pain assessment",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "pain_site", "label": "Site and radiation", "type": "text", "hint": "record each pain separately, e.g. 1) right hip radiating to knee, 2) upper abdomen" },
+    { "id": "pain_type", "label": "Type", "type": "select", "opts": ["Somatic (well localised, aching)", "Visceral (poorly localised, cramping)", "Neuropathic (burning, shooting, numbness)", "Bone pain", "Mixed"] },
+    { "id": "pain_worst", "label": "Worst pain in the last 24 hours", "type": "number", "unit": "/10" },
+    { "id": "pain_pattern", "label": "Pattern", "type": "select", "opts": ["Constant", "Intermittent", "Constant with flares", "On movement (incident pain)"] },
+    { "id": "breakthrough", "label": "Breakthrough pain episodes", "type": "select", "opts": ["None", "1 to 2 a day", "3 or more a day"] },
+    { "id": "breakthrough_trigger", "label": "Breakthrough triggers", "type": "text", "hint": "e.g. turning in bed, dressing change, eating" },
+    { "id": "pain_modifiers", "label": "What helps and what worsens it", "type": "text" },
+    { "id": "pain_sleep", "label": "Effect on sleep", "type": "select", "opts": ["Sleeps well", "Wakes with pain", "Unable to sleep"] }
+   ]
+  },
+  {
+   "id": "opioid-review",
+   "title": "Current opioid use (documentation only)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "opioid_in_use", "label": "Opioid in use", "type": "select", "opts": ["None", "Weak opioid (tramadol or codeine)", "Oral morphine, immediate release", "Oral morphine, sustained release", "Transdermal patch", "Other strong opioid", "Subcutaneous infusion"] },
+    { "id": "opioid_regimen", "label": "Regimen as prescribed", "type": "text", "hint": "copy from the current prescription; this kit does not calculate or change doses" },
+    { "id": "breakthrough_used", "label": "Breakthrough doses used in the last 24 hours", "type": "number", "unit": "doses" },
+    { "id": "laxative", "label": "Regular laxative prescribed with the opioid", "type": "check" },
+    { "id": "opioid_bowels", "label": "Bowels", "type": "select", "opts": ["Regular", "Constipated", "No stool for 3 days or more"] },
+    { "id": "opioid_effects", "label": "Side effects", "type": "select", "opts": ["None", "Nausea", "Drowsiness", "Confusion or hallucinations", "Myoclonic jerks"] },
+    { "id": "opioid_supply", "label": "Regular supply", "type": "select", "opts": ["Assured", "Difficulty obtaining", "Not applicable"] },
+    { "id": "opioid_understanding", "label": "Patient and family understand when and how to take each medicine", "type": "check" }
+   ]
+  },
+  {
+   "id": "psychosocial",
+   "title": "Psychosocial, spiritual and carer support",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "illness_understanding", "label": "Understanding of illness", "type": "select", "opts": ["Aware of diagnosis and prognosis", "Aware of diagnosis only", "Does not wish to know", "Family has asked that the patient is not told"] },
+    { "id": "main_worries", "label": "Main worries and concerns", "type": "text" },
+    { "id": "low_mood", "label": "Persistent low mood or hopelessness", "type": "check" },
+    { "id": "spiritual", "label": "Spiritual needs", "type": "select", "opts": ["None expressed", "Supported by faith or community", "Spiritual distress expressed", "Wishes to see a faith leader"] },
+    { "id": "financial_hardship", "label": "Financial hardship from illness or treatment", "type": "check" },
+    { "id": "dependants", "label": "Children or other dependants affected", "type": "check" },
+    { "id": "main_carer", "label": "Main carer and relationship", "type": "text" },
+    { "id": "carer_coping", "label": "Carer coping", "type": "select", "opts": ["Coping", "Strained", "Not coping", "No carer"] },
+    { "id": "carer_trained", "label": "Carer shown care tasks (feeding, turning, mouth care)", "type": "check" },
+    { "id": "home_support", "label": "Home support", "type": "select", "opts": ["None", "Home-care team visiting", "Community health worker (ASHA) involved", "Hospice at home"] },
+    { "id": "equipment", "label": "Equipment needs", "type": "text", "hint": "e.g. air mattress, commode, wheelchair, suction" }
+   ]
+  },
+  {
+   "id": "goals-of-care",
+   "title": "Goals of care and advance care planning",
+   "target": "management_plan",
+   "fields": [
+    { "id": "goals", "label": "Goals of care", "type": "select", "opts": ["Disease-directed treatment continuing", "Comfort-focused care", "Comfort with selected treatments", "Not yet discussed"] },
+    { "id": "what_matters", "label": "What matters most to the patient", "type": "text" },
+    { "id": "preferred_place_care", "label": "Preferred place of care", "type": "select", "opts": ["Home", "Hospital", "Hospice", "Not yet decided"] },
+    { "id": "preferred_place_death", "label": "Preferred place of death", "type": "select", "opts": ["Home", "Hospital", "Hospice", "Not discussed"] },
+    { "id": "resus_decision", "label": "Resuscitation decision", "type": "select", "opts": ["For CPR", "Not for CPR, documented", "Not yet discussed"] },
+    { "id": "advance_directive", "label": "Advance directive", "type": "select", "opts": ["None", "Discussed", "Documented"] },
+    { "id": "decision_maker", "label": "Nominated person for health decisions", "type": "text" },
+    { "id": "treatment_limits", "label": "Treatment limits agreed", "type": "text", "hint": "e.g. no ventilation or ICU, IV antibiotics acceptable" }
+   ]
+  },
+  {
+   "id": "end-of-life",
+   "title": "End-of-life checklist",
+   "target": "management_plan",
+   "fields": [
+    { "id": "eol_recognised", "label": "Likely last days of life recognised and discussed with the patient and family", "type": "check" },
+    { "id": "eol_meds_reviewed", "label": "Non-essential medicines reviewed", "type": "check" },
+    { "id": "eol_anticipatory", "label": "Anticipatory medicines available for pain, breathlessness, nausea, agitation and secretions", "type": "check" },
+    { "id": "eol_hydration", "label": "Hydration and oral intake discussed; sips and mouth care encouraged", "type": "check" },
+    { "id": "eol_care_taught", "label": "Mouth care and pressure care taught to the family", "type": "check" },
+    { "id": "eol_contact", "label": "Family know whom to call, day and night", "type": "check" },
+    { "id": "eol_wishes", "label": "Religious, cultural and personal wishes noted", "type": "check" },
+    { "id": "eol_resus", "label": "Resuscitation decision documented and shared", "type": "check" },
+    { "id": "eol_after_death", "label": "Family told what to do after death, including the death certificate", "type": "check" }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags",
+   "target": "History_present_illness",
+   "alert": "Red flag present. Spinal pain with limb weakness, numbness, difficulty walking or bladder or bowel disturbance: suspected spinal cord compression, contact the oncology or MSCC team immediately for whole-spine MRI within 24 hours. Spinal pain suggesting metastases without neurological features: seek advice within 24 hours and MRI within 1 week. Possible hypercalcaemia: check calcium, albumin and creatinine the same day. Pain crisis: same-day palliative care review. Suspected opioid toxicity: urgent review, and treat as an emergency if breathing is slow.",
+   "fields": [
+    { "id": "rf_mscc_neuro", "label": "Back or neck pain with limb weakness, numbness, difficulty walking or bladder or bowel disturbance", "type": "check" },
+    { "id": "rf_spinal_pain", "label": "Severe, progressive or night-time spinal pain in a person with cancer", "type": "check" },
+    { "id": "rf_hypercalcaemia", "label": "Thirst, passing a lot of urine, constipation or nausea with new confusion or drowsiness (possible hypercalcaemia)", "type": "check" },
+    { "id": "rf_pain_crisis", "label": "Severe pain not controlled by breakthrough doses (pain crisis)", "type": "check" },
+    { "id": "rf_opioid_toxicity", "label": "Pinpoint pupils, new confusion, myoclonic jerks or slow breathing on an opioid", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "CBC", "query": "CBC" },
+  { "label": "Serum creatinine", "query": "creatinine" },
+  { "label": "Serum sodium and potassium", "query": "electrolytes" },
+  { "label": "Serum calcium", "query": "calcium" },
+  { "label": "Serum albumin", "query": "albumin" },
+  { "label": "LFT", "query": "LFT" },
+  { "label": "Random blood sugar", "query": "RBS" },
+  { "label": "Urine routine", "query": "urine routine" },
+  { "label": "Chest X-ray", "query": "X-ray chest" },
+  { "label": "Ultrasound abdomen (ascites)", "query": "USG abdomen" },
+  { "label": "MRI whole spine", "query": "MRI spine" }
+ ],
+ "orderSets": [
+  { "id": "symptom-review", "label": "Symptom review panel", "tests": ["CBC", "creatinine", "electrolytes", "calcium", "albumin", "LFT", "RBS", "urine routine"] }
+ ],
+ "protocols": ["malignant-spinal-cord-compression", "hypercalcaemia", "febrile-neutropenia", "tumour-lysis-syndrome", "opioid-overdose", "delirium", "depression-adult", "generalised-anxiety-disorder", "chronic-constipation", "hyponatraemia", "deep-vein-thrombosis", "pulmonary-embolism", "blood-transfusion", "dementia"],
+ "calculators": ["karnofsky", "ecog", "mme", "corr_ca", "dn4", "hads", "phq2", "phq9", "4at", "cam", "braden", "norton", "zarit", "must", "mgps", "sins", "steroid_conv", "crcl", "ckdepi", "esas", "pps"],
+ "advice": [
+  {
+   "id": "pain-medicines",
+   "title": "Taking pain medicines",
+   "target": "follow_up_advice",
+   "text": "Take the regular pain medicine at the times written, even when the pain is less, and use the extra (breakthrough) dose when pain comes through, as explained. Take the laxative every day while on morphine or similar medicines. Keep all medicines safely away from children. Tell us if you need extra doses often, or if you become very sleepy or confused."
+  },
+  {
+   "id": "when-to-call",
+   "title": "When to contact the team at once",
+   "target": "follow_up_advice",
+   "text": "Contact the palliative care team or come to hospital at once for new back or neck pain with weakness or numbness in the legs, difficulty walking, or problems passing urine or stools. Also come for pain that the extra doses do not control, new confusion, severe drowsiness, great thirst or repeated vomiting."
+  },
+  {
+   "id": "last-days",
+   "title": "The last days of life: advice for family",
+   "target": "follow_up_advice",
+   "text": "In the last days of life it is usual to sleep more, eat and drink less, and for breathing to become shallow, irregular or noisy. Keep the mouth and lips moist, turn gently, and call the team if there is pain, distress or restlessness. Keep the team's phone number where everyone can find it."
+  }
+ ],
+ "sources": [
+  { "org": "Alberta Health Services and University of Alberta", "title": "Edmonton Symptom Assessment System Revised (ESAS-r) administration manual", "year": 2019, "url": "https://www.albertahealthservices.ca/assets/info/peolc/if-peolc-ed-esasr-admin-manual.pdf" },
+  { "org": "Victoria Hospice Society", "title": "Palliative Performance Scale version 2 (PPSv2)", "year": 2001, "url": "https://victoriahospice.org/wp-content/uploads/2019/12/PPSv2-English-Sample.pdf" },
+  { "org": "NICE", "title": "CG140 Palliative care for adults: strong opioids for pain relief", "year": 2012, "url": "https://www.nice.org.uk/guidance/cg140/chapter/Recommendations" },
+  { "org": "NICE", "title": "NG31 Care of dying adults in the last days of life", "year": 2015, "url": "https://www.nice.org.uk/guidance/ng31" },
+  { "org": "NICE", "title": "NG234 Spinal metastases and metastatic spinal cord compression", "year": 2023, "url": "https://www.nice.org.uk/guidance/ng234" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

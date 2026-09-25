@@ -608,3 +608,10 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-proto-bpill.oe-b-india { color: #a15c07; background: color-mix(in srgb, #b45309 13%, transparent); }
 body.dark #smdOpdEmr .oe-proto-bpill.oe-b-international { color: #93b8ff; }
 body.dark #smdOpdEmr .oe-proto-bpill.oe-b-india { color: #f5c26b; }
+
+/* Notifiable disease reminder (Specialty Kits data-notifiable.json), shown with the provisional diagnosis. */
+#smdOpdEmr .oe-notif { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0; padding: 10px 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, #8a5300 35%, var(--outline-variant)); background: color-mix(in srgb, #f5c26b 16%, var(--sc-lowest)); color: var(--on-surface); font: 500 13px/1.5 var(--q-sans); }
+#smdOpdEmr .oe-notif .material-symbols-outlined { color: #8a5300; font-size: 20px; }
+body.dark #smdOpdEmr .oe-notif .material-symbols-outlined { color: #f5c26b; }
+#smdOpdEmr .oe-notif b { display: block; }
+#smdOpdEmr .oe-notif p { margin: 2px 0 0; }

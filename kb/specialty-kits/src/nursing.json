@@ -1,0 +1,177 @@
+{
+ "id": "nursing",
+ "label": "Nursing Assessment",
+ "short": "Nursing",
+ "icon": "medical_services",
+ "group": "community",
+ "subject": "critical-care",
+ "tools": [],
+ "sections": [
+  {
+   "id": "vital-signs-news2",
+   "title": "Vital signs and NEWS2",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "rr", "label": "Respiration rate", "type": "number", "unit": "/min", "set": "respiratory" },
+    { "id": "spo2", "label": "SpO2", "type": "number", "unit": "%", "set": "spo2" },
+    { "id": "spo2_scale", "label": "SpO2 scale", "type": "select", "opts": ["Scale 1", "Scale 2 (prescribed target 88 to 92%)"], "hint": "Scale 2 only for confirmed hypercapnic respiratory failure, on a clinician's decision" },
+    { "id": "air_oxygen", "label": "Air or oxygen", "type": "select", "opts": ["Air", "Oxygen"] },
+    { "id": "sbp", "label": "BP systolic", "type": "number", "unit": "mmHg", "set": "BP_SYS" },
+    { "id": "dbp", "label": "BP diastolic", "type": "number", "unit": "mmHg", "set": "BP_dia" },
+    { "id": "pulse", "label": "Pulse", "type": "number", "unit": "/min", "set": "Pulse" },
+    { "id": "acvpu", "label": "Consciousness (ACVPU)", "type": "select", "opts": ["Alert", "New confusion", "Responds to voice", "Responds to pain", "Unresponsive"] },
+    { "id": "temp_c", "label": "Temperature", "type": "number", "unit": "°C" },
+    { "id": "news2_score", "label": "NEWS2 aggregate score", "type": "number", "hint": "5 or more, or 3 in any single parameter, needs an urgent review" },
+    { "id": "pain", "label": "Pain score (0 to 10)", "type": "number", "unit": "/10", "set": "pain_score" },
+    { "id": "cbg", "label": "Capillary blood glucose", "type": "number", "unit": "mg/dL", "set": "grbs" }
+   ]
+  },
+  {
+   "id": "pressure-skin",
+   "title": "Pressure injury risk (Braden) and skin",
+   "target": "skin",
+   "fields": [
+    { "id": "braden_sensory", "label": "Sensory perception", "type": "select", "opts": ["Completely limited (1)", "Very limited (2)", "Slightly limited (3)", "No impairment (4)"] },
+    { "id": "braden_moisture", "label": "Moisture", "type": "select", "opts": ["Constantly moist (1)", "Often moist (2)", "Occasionally moist (3)", "Rarely moist (4)"] },
+    { "id": "braden_activity", "label": "Activity", "type": "select", "opts": ["Bedfast (1)", "Chairfast (2)", "Walks occasionally (3)", "Walks frequently (4)"] },
+    { "id": "braden_mobility", "label": "Mobility", "type": "select", "opts": ["Completely immobile (1)", "Very limited (2)", "Slightly limited (3)", "No limitations (4)"] },
+    { "id": "braden_nutrition", "label": "Nutrition", "type": "select", "opts": ["Very poor (1)", "Probably inadequate (2)", "Adequate (3)", "Excellent (4)"] },
+    { "id": "braden_friction", "label": "Friction and shear", "type": "select", "opts": ["Problem (1)", "Potential problem (2)", "No apparent problem (3)"] },
+    { "id": "braden_total", "label": "Braden score", "type": "number", "unit": "/23", "hint": "15 to 18 mild, 13 to 14 moderate, 10 to 12 high, 9 or less severe risk" },
+    { "id": "skin_inspection", "label": "Skin inspection", "type": "select", "opts": ["Intact", "Redness that blanches", "Non-blanching redness", "Blister or broken skin", "Pressure ulcer or wound", "Moisture damage"] },
+    { "id": "skin_details", "label": "Site and details", "type": "text", "hint": "e.g. sacrum 3 x 2 cm non-blanching redness; heels intact" }
+   ]
+  },
+  {
+   "id": "falls-mobility",
+   "title": "Falls risk (Morse) and mobility",
+   "target": "musculo_skeletal_system",
+   "fields": [
+    { "id": "morse_history", "label": "History of falling", "type": "select", "opts": ["No (0)", "Yes (25)"] },
+    { "id": "morse_secondary", "label": "Secondary diagnosis", "type": "select", "opts": ["No (0)", "Yes (15)"] },
+    { "id": "morse_aid", "label": "Ambulatory aid", "type": "select", "opts": ["None, bed rest or nurse assist (0)", "Crutches, cane or walker (15)", "Furniture (30)"] },
+    { "id": "morse_iv", "label": "IV or IV access", "type": "select", "opts": ["No (0)", "Yes (20)"] },
+    { "id": "morse_gait", "label": "Gait", "type": "select", "opts": ["Normal, bed rest or wheelchair (0)", "Weak (10)", "Impaired (20)"] },
+    { "id": "morse_mental", "label": "Mental status", "type": "select", "opts": ["Knows own limits (0)", "Overestimates or forgets limits (15)"] },
+    { "id": "morse_total", "label": "Morse fall score", "type": "number", "unit": "/125", "hint": "Repeat at a change of condition, transfer to a new unit and after a fall" },
+    { "id": "mobility", "label": "Mobility", "type": "select", "opts": ["Independent", "Needs help of one", "Needs help of two or a hoist", "Bedbound"] },
+    { "id": "falls_measures", "label": "Falls precautions in place", "type": "text", "hint": "e.g. bed low, call bell and water in reach, non-slip footwear" }
+   ]
+  },
+  {
+   "id": "nutrition-must",
+   "title": "Nutrition screen (MUST)",
+   "target": "Nutrtion",
+   "fields": [
+    { "id": "must_weight", "label": "Weight", "type": "number", "unit": "kg", "set": "Weight" },
+    { "id": "must_height", "label": "Height", "type": "number", "unit": "cm", "set": "Height" },
+    { "id": "must_bmi", "label": "BMI score", "type": "select", "opts": ["BMI over 20 (0)", "BMI 18.5 to 20 (1)", "BMI under 18.5 (2)"] },
+    { "id": "must_weight_loss", "label": "Unplanned weight loss in past 3 to 6 months", "type": "select", "opts": ["Under 5% (0)", "5 to 10% (1)", "Over 10% (2)"] },
+    { "id": "must_acute", "label": "Acute disease effect", "type": "select", "opts": ["Not present (0)", "Acutely ill with no nutritional intake, or likely none, for over 5 days (2)"] },
+    { "id": "must_total", "label": "MUST score", "type": "number" },
+    { "id": "must_risk", "label": "Risk of malnutrition", "type": "select", "opts": ["Low (0)", "Medium (1)", "High (2 or more)"] },
+    { "id": "must_diet", "label": "Diet and intake", "type": "text", "hint": "e.g. soft diet, eating half of meals, nil by mouth since" },
+    { "id": "must_dietitian", "label": "Referred to dietitian or nutrition team", "type": "check" }
+   ]
+  },
+  {
+   "id": "lines-catheters",
+   "title": "IV cannula and urinary catheter",
+   "target": "local_examination",
+   "fields": [
+    { "id": "iv_site", "label": "IV cannula site", "type": "select", "opts": ["No cannula", "Back of hand", "Forearm", "Wrist", "Antecubital fossa", "Foot", "Central venous catheter"] },
+    { "id": "iv_side", "label": "Side", "type": "select", "opts": ["Right", "Left"] },
+    { "id": "iv_date", "label": "Cannula inserted on", "type": "date" },
+    { "id": "vip_score", "label": "VIP score", "type": "select", "opts": ["0: site appears healthy", "1: slight pain or slight redness near the site (possible first sign of phlebitis)", "2: two of pain, redness or swelling (early phlebitis)", "3: pain along the vein, redness and induration (medium stage phlebitis)", "4: as 3 plus a palpable venous cord (advanced phlebitis or early thrombophlebitis)", "5: as 4 plus fever (advanced thrombophlebitis)"], "hint": "Score 2 or more: remove the cannula and re-site if still needed" },
+    { "id": "iv_dressing", "label": "Dressing", "type": "select", "opts": ["Clean, dry and intact", "Soiled or loose, changed"] },
+    { "id": "iv_needed", "label": "Cannula still needed", "type": "check" },
+    { "id": "cath_type", "label": "Urinary catheter", "type": "select", "opts": ["None", "Indwelling urethral", "Suprapubic", "Intermittent catheterisation"] },
+    { "id": "cath_date", "label": "Catheter inserted on", "type": "date" },
+    { "id": "cath_urine", "label": "Urine in bag", "type": "select", "opts": ["Clear", "Cloudy", "Blood-stained", "Low output"] },
+    { "id": "cath_needed", "label": "Catheter still needed", "type": "check" }
+   ]
+  },
+  {
+   "id": "elimination",
+   "title": "Bladder and bowels",
+   "target": "Mic_abnorml_details",
+   "fields": [
+    { "id": "micturition", "label": "Micturition", "type": "select", "opts": ["Normal", "Dysuria", "Frequency", "Hesitancy"], "set": "Micturition" },
+    { "id": "continence", "label": "Continence", "type": "select", "opts": ["Continent", "Urinary incontinence", "Faecal incontinence", "Both"] },
+    { "id": "bowels", "label": "Bowels", "type": "select", "opts": ["Regular", "Constipated", "Loose stools"], "set": "Bowels" },
+    { "id": "last_bowel", "label": "Bowels last opened", "type": "text", "hint": "e.g. 2 days ago" },
+    { "id": "intake_output", "label": "Intake and output chart started", "type": "check" }
+   ]
+  },
+  {
+   "id": "patient-education",
+   "title": "Patient and carer education",
+   "target": "management_plan",
+   "fields": [
+    { "id": "edu_orientation", "label": "Oriented to the ward and call bell", "type": "check" },
+    { "id": "edu_falls", "label": "Falls prevention explained", "type": "check" },
+    { "id": "edu_pressure", "label": "Pressure area care and turning explained", "type": "check" },
+    { "id": "edu_iv", "label": "Told to report pain, redness or swelling at the drip site", "type": "check" },
+    { "id": "edu_diet", "label": "Diet and fluids explained", "type": "check" },
+    { "id": "edu_hand_hygiene", "label": "Hand hygiene explained", "type": "check" },
+    { "id": "edu_understood", "label": "Understanding", "type": "select", "opts": ["Understood (repeated back)", "Partly understood, to reinforce", "Not understood, carer informed"] }
+   ]
+  },
+  {
+   "id": "escalation",
+   "title": "Escalation triggers",
+   "target": "sys_examination",
+   "alert": "NEWS2 5 or more, 3 in any single parameter, or clinical concern: escalate now per protocol for an urgent review by a doctor competent in acute illness, and increase monitoring. NEWS2 7 or more needs an emergency review by a critical care team.",
+   "fields": [
+    { "id": "esc_news5", "label": "NEWS2 aggregate 5 or more", "type": "check" },
+    { "id": "esc_red", "label": "Score of 3 in any single parameter", "type": "check" },
+    { "id": "esc_news7", "label": "NEWS2 aggregate 7 or more", "type": "check" },
+    { "id": "esc_confusion", "label": "New confusion", "type": "check" },
+    { "id": "esc_concern", "label": "Clinical concern about the patient, whatever the score", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "CBC", "query": "CBC" },
+  { "label": "Random blood sugar", "query": "RBS" },
+  { "label": "Serum electrolytes", "query": "electrolytes" },
+  { "label": "Serum albumin", "query": "albumin" },
+  { "label": "Urine routine", "query": "urine routine" },
+  { "label": "Urine culture", "query": "urine culture" },
+  { "label": "Blood culture", "query": "blood culture" },
+  { "label": "Catheter tip culture", "query": "catheter tip culture" },
+  { "label": "Wound swab culture", "query": "pus culture" },
+  { "label": "Arterial blood gas", "query": "ABG" },
+  { "label": "Serum lactate", "query": "lactate" }
+ ],
+ "protocols": ["sepsis-septic-shock", "catheter-related-bloodstream-infection", "urinary-tract-infection", "cellulitis-skin-soft-tissue", "delirium", "vte-prophylaxis-medical-inpatients", "perioperative-vte-prophylaxis", "deep-vein-thrombosis", "blood-transfusion", "hypoglycaemia", "inpatient-hyperglycaemia", "anaphylaxis", "acute-kidney-injury"],
+ "calculators": ["news2", "mews", "qsofa", "gcs", "braden", "braden_q", "norton", "morse_falls", "must", "nrs2002", "mna_sf", "flacc", "rass", "cam", "4at", "barthel", "katz_adl", "bmi", "tug", "pews", "meows"],
+ "advice": [
+  {
+   "id": "falls-in-hospital",
+   "title": "Preventing falls in hospital",
+   "target": "follow_up_advice",
+   "text": "Call the nurse before getting out of bed or going to the toilet if you feel weak or dizzy. Keep the call bell and water within reach, wear non-slip slippers or your own shoes, and keep the room clear of clutter."
+  },
+  {
+   "id": "drip-site",
+   "title": "Your drip (cannula)",
+   "target": "follow_up_advice",
+   "text": "Tell the nurse at once if the skin around the drip becomes painful, red, swollen or hard, if you feel a cord along the vein, or if you get a fever. Do not remove or adjust the drip yourself."
+  },
+  {
+   "id": "eating-in-hospital",
+   "title": "Eating and drinking in hospital",
+   "target": "diet_lifestyle_advice",
+   "text": "Try to eat and drink regularly. Tell the nurse if you cannot finish your meals, have lost weight without trying, or have not been able to eat for several days, so that we can help."
+  }
+ ],
+ "sources": [
+  { "org": "Royal College of Physicians", "title": "National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS", "year": 2017, "url": "https://www.rcp.ac.uk/resources/national-early-warning-score-news-2/" },
+  { "org": "Braden B, Bergstrom N (form reproduced by Indiana Department of Health)", "title": "Braden Scale for predicting pressure sore risk", "year": 1988, "url": "https://www.in.gov/health/files/Braden_Scale.pdf" },
+  { "org": "US Department of Veterans Affairs, National Center for Patient Safety", "title": "Morse Fall Scale pocket card", "year": 2004, "url": "https://www.patientsafety.va.gov/docs/fallsToolkit/morse_falls_pocket_card.pdf" },
+  { "org": "BAPEN", "title": "Malnutrition Universal Screening Tool (MUST) flowchart", "year": 2003, "url": "https://www.bapen.org.uk/pdfs/must/must_page3.pdf" },
+  { "org": "IVTEAM", "title": "Visual Infusion Phlebitis (VIP) score (Jackson 1998)", "year": 1998, "url": "https://ivteam.com/vip-score/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

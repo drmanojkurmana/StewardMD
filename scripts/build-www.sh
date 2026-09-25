@@ -131,6 +131,8 @@ done
 # scripts/build-specialty-kits.mjs (kits) and scripts/build-who-growth.mjs (growth tables).
 [ -f kb/specialty-kits/kits.json ] && mkdir -p "$WWW/kb/specialty-kits" && cp kb/specialty-kits/kits.json "$WWW/kb/specialty-kits/"
 [ -f kb/growth/who-growth.json ] && mkdir -p "$WWW/kb/growth" && cp kb/growth/who-growth.json "$WWW/kb/growth/"
+# Clinical documents (clinical-docs.js): consent templates + handout translations. scripts/build-documents.mjs.
+[ -f kb/documents/documents.json ] && mkdir -p "$WWW/kb/documents" && cp kb/documents/documents.json "$WWW/kb/documents/"
 # ONCOTREE navigator graphs (static JSON; same trust tier as kb/protocols).
 [ -d kb/oncotree ] && mkdir -p "$WWW/kb/oncotree" && cp -R kb/oncotree/. "$WWW/kb/oncotree/"
 # Oncology reference catalogs: AJCC/TNM staging index, CTCAE catalog, irAE (IO toxicity) catalog -

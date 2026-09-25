@@ -12,6 +12,7 @@
     { key: "drugs",    label: "Drugs",        icon: "pills",    weight: 0 },
     { key: "kb",       label: "Diseases",     icon: "book",     weight: -5 },
     { key: "proto",    label: "Protocols",    icon: "list",     weight: 0 },
+    { key: "kits",     label: "Specialty kits", icon: "grid",   weight: 0 },
     { key: "syn",      label: "Syndromes",    icon: "microbe",  weight: 0 },
     { key: "icd",      label: "ICD codes",    icon: "list",     weight: -2 },
     { key: "settings", label: "Settings",     icon: "settings", weight: 0 }
@@ -173,6 +174,28 @@
       });
     }, function () { return []; });
   }
+  // Specialty kits (specialty-kits.js): every kit and every kit tool ("growth chart", "EDD", "burns").
+  // The bundle loads once on first use. Hidden when smd_specialty_kits is off.
+  function kitsProvider() {
+    var K = G.SMD_KITS;
+    try { if (!K || !K.loadKits || (K.on && !K.on())) return Promise.resolve([]); } catch (e) { return Promise.resolve([]); }
+    return K.loadKits().then(function () {
+      var groups = {}, out = [];
+      (K.groups() || []).forEach(function (g) { groups[g[0]] = g[1]; });
+      (K.kits() || []).forEach(function (k) {
+        var toolNames = (k.tools || []).map(function (t) { var T = K._tools[t]; return T ? T.title : ""; });
+        out.push({ cat: "kits", id: k.id, title: k.label, sub: "Specialty kit" + (groups[k.group] ? " \u00b7 " + groups[k.group] : ""),
+          kw: [k.short, k.id].concat(toolNames, (k.sections || []).map(function (x) { return x.title; })).join(" "),
+          open: (function (id) { return function () { K.open({ kit: id }); }; })(k.id) });
+        (k.tools || []).forEach(function (t) {
+          var T = K._tools[t]; if (!T || T.opdOnly) return;
+          out.push({ cat: "kits", id: k.id + ":" + t, title: T.title, sub: "Kit tool \u00b7 " + k.label, kw: (T.kw || "") + " " + t.replace(/-/g, " "),
+            open: (function (id, tool) { return function () { K.open({ kit: id, tool: tool }); }; })(k.id, t) });
+        });
+      });
+      return out;
+    }, function () { return []; });
+  }
   function icdProvider(q) {
     if (!G.SMD_ICD || !G.SMD_ICD.localSearch) return Promise.resolve([]);
     return G.SMD_ICD.localSearch(q, 10).then(function (rows) {
@@ -183,7 +206,7 @@
     return [
       { cat: "tools", items: toolsProvider }, { cat: "calcs", items: calcsProvider },
       { cat: "drugs", query: drugsProvider }, { cat: "kb", query: kbProvider },
-      { cat: "proto", query: protoProvider },
+      { cat: "proto", query: protoProvider }, { cat: "kits", query: kitsProvider },
       { cat: "syn", items: synProvider }, { cat: "icd", query: icdProvider },
       { cat: "settings", items: settingsProvider }
     ];

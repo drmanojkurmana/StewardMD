@@ -1,0 +1,184 @@
+{
+ "id": "rheumatology",
+ "label": "Rheumatology",
+ "short": "Rheum",
+ "icon": "rheumatology",
+ "group": "medical",
+ "subject": "rheumatology-dermatology",
+ "tools": ["joint-chart"],
+ "sections": [
+  {
+   "id": "inflammatory-joint-history",
+   "title": "Inflammatory joint history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "morning_stiffness", "label": "Early morning stiffness", "type": "number", "unit": "minutes", "hint": "time from waking until maximal improvement" },
+    { "id": "joint_pattern", "label": "Pattern", "type": "select", "opts": ["Monoarthritis", "Oligoarthritis (2 to 4 joints)", "Polyarthritis (5 or more joints)", "Axial (spine and sacroiliac joints)", "Axial with peripheral joints", "Migratory", "Palindromic (recurrent short attacks)"] },
+    { "id": "joint_distribution", "label": "Distribution", "type": "select", "opts": ["Symmetrical small joints of hands and feet", "Asymmetrical, mainly lower limb large joints", "Distal interphalangeal joints", "Shoulder and hip girdle", "Large joints only"] },
+    { "id": "symptom_duration", "label": "Duration of joint symptoms", "type": "select", "opts": ["Under 6 weeks", "6 weeks to 3 months", "3 to 12 months", "Over 1 year"] },
+    { "id": "onset", "label": "Onset", "type": "select", "opts": ["Gradual", "Acute (hours to days)", "Recurrent flares with symptom-free intervals"] },
+    { "id": "inflammatory_back_pain", "label": "Inflammatory back pain (onset before 40, insidious, better with exercise, pain at night)", "type": "check" },
+    { "id": "preceding_infection", "label": "Diarrhoea, urethritis or sore throat in the 4 weeks before onset", "type": "check" },
+    { "id": "family_history_rheum", "label": "Family history of inflammatory arthritis, psoriasis or inflammatory bowel disease", "type": "check" },
+    { "id": "function_limit", "label": "Functional limitation", "type": "select", "opts": ["None", "Difficulty with fine hand tasks", "Difficulty walking or climbing stairs", "Needs help with self-care", "Unable to work"] },
+    { "id": "prior_treatment", "label": "Treatment so far", "type": "text", "hint": "e.g. NSAIDs, steroid tablets or injections, ayurvedic or other traditional remedies" }
+   ]
+  },
+  {
+   "id": "musculoskeletal-examination",
+   "title": "Examination beyond the 28-joint count",
+   "target": "musculo_skeletal_system",
+   "fields": [
+    { "id": "mtp_squeeze", "label": "MTP squeeze test", "type": "select", "opts": ["Negative", "Positive right", "Positive left", "Positive both sides"] },
+    { "id": "ankles_feet", "label": "Ankles and feet", "type": "text", "hint": "e.g. swollen left ankle, tender 2nd to 4th MTP joints" },
+    { "id": "hand_deformity", "label": "Hand deformity", "type": "select", "opts": ["None", "Ulnar deviation", "Swan neck", "Boutonniere", "Z-thumb", "Heberden or Bouchard nodes", "Arthritis mutilans"] },
+    { "id": "si_joints", "label": "Sacroiliac joints", "type": "select", "opts": ["Not tender", "Tender right", "Tender left", "Tender both sides"] },
+    { "id": "schober", "label": "Modified Schober test (increase on forward flexion)", "type": "number", "unit": "cm" },
+    { "id": "chest_expansion", "label": "Chest expansion", "type": "number", "unit": "cm" },
+    { "id": "tragus_wall", "label": "Tragus to wall distance", "type": "number", "unit": "cm" },
+    { "id": "enthesitis_sites", "label": "Enthesitis sites", "type": "text", "hint": "e.g. right Achilles insertion, left lateral epicondyle" },
+    { "id": "proximal_power", "label": "Proximal muscle power", "type": "select", "opts": ["Normal", "Mildly reduced", "Markedly reduced"] }
+   ]
+  },
+  {
+   "id": "extra-articular",
+   "title": "Extra-articular features",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "ea_nodules", "label": "Rheumatoid nodules", "type": "check" },
+    { "id": "ea_psoriasis", "label": "Psoriasis, nail pitting or onycholysis", "type": "check" },
+    { "id": "ea_dactylitis", "label": "Dactylitis (sausage digit)", "type": "check" },
+    { "id": "ea_enthesitis", "label": "Heel or other enthesis pain", "type": "check" },
+    { "id": "ea_eye", "label": "Red painful eye or blurred vision (uveitis or scleritis)", "type": "check" },
+    { "id": "ea_bowel", "label": "Chronic diarrhoea or blood in stools", "type": "check" },
+    { "id": "ea_lung", "label": "Dry cough, exertional breathlessness or basal crackles", "type": "check" },
+    { "id": "ea_constitutional", "label": "Fever, weight loss or night sweats", "type": "check" },
+    { "id": "ea_lymph", "label": "Lymphadenopathy or splenomegaly", "type": "check" },
+    { "id": "ea_neuropathy", "label": "Numbness or tingling (neuropathy or carpal tunnel)", "type": "check" },
+    { "id": "ea_urogenital", "label": "Urethritis or genital ulcers", "type": "check" }
+   ]
+  },
+  {
+   "id": "dmard-monitoring",
+   "title": "DMARD monitoring review (documentation only)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "dmard_names", "label": "DMARDs currently taken", "type": "text", "hint": "names and start dates only, e.g. methotrexate since March 2024, hydroxychloroquine since 2023" },
+    { "id": "dmard_adherence", "label": "Taking as prescribed", "type": "select", "opts": ["Yes", "Missed doses", "Stopped by patient"] },
+    { "id": "bloods_date", "label": "Date of last monitoring blood tests", "type": "date" },
+    { "id": "bloods_result", "label": "Last FBC, liver tests and creatinine", "type": "select", "opts": ["Within normal limits", "Abnormal, see details", "Overdue or not done"] },
+    { "id": "bloods_details", "label": "Abnormal results", "type": "text", "hint": "e.g. ALT twice the upper limit, neutrophils 1.8" },
+    { "id": "ae_gi", "label": "Nausea, vomiting or abdominal pain", "type": "check" },
+    { "id": "ae_mouth", "label": "Mouth ulcers", "type": "check" },
+    { "id": "ae_infection", "label": "Infections since the last visit", "type": "check" },
+    { "id": "ae_lung", "label": "New cough or breathlessness", "type": "check" },
+    { "id": "ae_other", "label": "Other adverse effects", "type": "text", "hint": "e.g. rash, hair thinning, visual change" },
+    { "id": "hcq_eye", "label": "Hydroxychloroquine eye screening", "type": "select", "opts": ["Not on hydroxychloroquine", "Baseline done", "Screening up to date", "Due or overdue"] },
+    { "id": "pregnancy_plan", "label": "Pregnancy plans and contraception discussed", "type": "check" }
+   ]
+  },
+  {
+   "id": "gout-review",
+   "title": "Gout review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "flares_year", "label": "Flares in the past 12 months", "type": "number", "unit": "flares" },
+    { "id": "last_flare", "label": "Last flare (date and joint)", "type": "text" },
+    { "id": "gout_joints", "label": "Joints usually affected", "type": "select", "opts": ["First MTP joint only", "Foot and ankle", "Knee", "Upper limb joints", "Several joints"] },
+    { "id": "tophi", "label": "Tophi", "type": "select", "opts": ["None", "Present, not discharging", "Present, discharging or infected"] },
+    { "id": "tophi_sites", "label": "Tophus sites", "type": "text", "hint": "e.g. right first MTP, both olecranon bursae, helix of ear" },
+    { "id": "urate_latest", "label": "Latest serum urate", "type": "number", "unit": "mg/dL" },
+    { "id": "urate_date", "label": "Date of latest serum urate", "type": "date" },
+    { "id": "urate_target", "label": "Serum urate target recorded", "type": "select", "opts": ["Below 6 mg/dL", "Other target documented", "Not yet set"] },
+    { "id": "ult_status", "label": "Urate-lowering therapy", "type": "select", "opts": ["Not started", "Taking regularly", "Taking irregularly", "Stopped"] },
+    { "id": "gout_kidney", "label": "Kidney disease or kidney stones", "type": "check" },
+    { "id": "gout_lifestyle", "label": "Alcohol, sugary drinks and diet", "type": "text", "hint": "e.g. beer 3 times a week, 2 sweetened drinks a day" }
+   ]
+  },
+  {
+   "id": "ctd-screen",
+   "title": "Connective tissue disease screen",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "ctd_raynaud", "label": "Raynaud phenomenon (fingers turn white, then blue or red, in the cold)", "type": "check" },
+    { "id": "ctd_rash", "label": "Rash on the face or sun-exposed skin", "type": "check" },
+    { "id": "ctd_photosensitivity", "label": "Photosensitivity", "type": "check" },
+    { "id": "ctd_oral_ulcers", "label": "Oral or nasal ulcers", "type": "check" },
+    { "id": "ctd_sicca", "label": "Dry eyes or dry mouth (sicca)", "type": "check" },
+    { "id": "ctd_alopecia", "label": "Hair loss", "type": "check" },
+    { "id": "ctd_serositis", "label": "Pleuritic chest pain", "type": "check" },
+    { "id": "ctd_skin_tight", "label": "Skin thickening or tightness of the fingers", "type": "check" },
+    { "id": "ctd_digital_ulcers", "label": "Fingertip ulcers or pitting scars", "type": "check" },
+    { "id": "ctd_dysphagia", "label": "Difficulty swallowing or reflux", "type": "check" },
+    { "id": "ctd_weakness", "label": "Proximal muscle weakness (difficulty rising from a chair or combing hair)", "type": "check" },
+    { "id": "ctd_thrombosis", "label": "Previous blood clot or recurrent miscarriage", "type": "check" }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags",
+   "target": "sys_examination",
+   "alert": "Red flag present. Hot swollen joint: treat as septic arthritis, aspirate before any antibiotic and arrange same-day orthopaedic or rheumatology review. Suspected giant cell arteritis: start high-dose glucocorticoids at once without waiting for results and refer the same day; visual symptoms need same-day ophthalmology review. Vasculitic rash with organ involvement: same-day specialist referral. Fever, sore throat or bruising on a DMARD: full blood count the same day.",
+   "fields": [
+    { "id": "rf_hot_joint", "label": "Acute hot, swollen joint (septic arthritis until proven otherwise)", "type": "check" },
+    { "id": "rf_gca_visual", "label": "Suspected giant cell arteritis with visual loss, blurring or double vision", "type": "check" },
+    { "id": "rf_gca", "label": "Suspected giant cell arteritis: age 50 or over with new headache, jaw claudication or scalp tenderness", "type": "check" },
+    { "id": "rf_vasc_renal", "label": "Vasculitic rash with blood or protein in the urine or rising creatinine", "type": "check" },
+    { "id": "rf_vasc_lung", "label": "Vasculitic rash with haemoptysis or breathlessness", "type": "check" },
+    { "id": "rf_vasc_nerve", "label": "Vasculitic rash with new foot drop, wrist drop or patchy numbness", "type": "check" },
+    { "id": "rf_dmard_sepsis", "label": "On a DMARD or biologic with fever, sore throat or unexplained bruising", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "CBC", "query": "CBC" },
+  { "label": "ESR", "query": "ESR" },
+  { "label": "CRP", "query": "CRP" },
+  { "label": "Rheumatoid factor", "query": "RA factor" },
+  { "label": "Anti-CCP antibody", "query": "anti-CCP" },
+  { "label": "ANA (immunofluorescence)", "query": "ANA" },
+  { "label": "Anti-dsDNA", "query": "anti-dsDNA" },
+  { "label": "Serum uric acid", "query": "uric acid" },
+  { "label": "HLA-B27", "query": "HLA B27" },
+  { "label": "LFT", "query": "LFT" },
+  { "label": "Serum creatinine", "query": "creatinine" },
+  { "label": "Urine routine", "query": "urine routine" },
+  { "label": "X-ray both hands (PA)", "query": "X-ray hands" },
+  { "label": "Synovial fluid analysis (cells, Gram stain, crystals)", "query": "synovial fluid" }
+ ],
+ "orderSets": [
+  { "id": "new-inflammatory-arthritis", "label": "New inflammatory arthritis panel", "tests": ["CBC", "ESR", "CRP", "RA factor", "anti-CCP", "ANA", "uric acid", "LFT", "creatinine", "urine routine", "HBsAg", "anti-HCV", "HIV", "X-ray hands", "X-ray feet"] },
+  { "id": "dmard-monitoring", "label": "DMARD monitoring panel", "tests": ["CBC", "LFT", "albumin", "creatinine", "ESR", "CRP"] },
+  { "id": "ctd-screen", "label": "Connective tissue disease screen", "tests": ["ANA", "ENA profile", "anti-dsDNA", "C3", "C4", "CBC", "ESR", "CRP", "creatinine", "urine routine", "urine protein creatinine ratio", "CPK"] }
+ ],
+ "protocols": ["rheumatoid-arthritis", "acute-gout", "osteoarthritis", "polymyalgia-rheumatica", "giant-cell-arteritis", "systemic-lupus-erythematosus", "septic-arthritis", "psoriasis", "osteoporosis", "vitamin-d-deficiency", "tb-preventive-treatment", "tb-preventive-treatment-international", "chronic-hepatitis-b"],
+ "calculators": ["das28", "cdai_ra", "sdai", "acr_eular_ra", "caspar", "dapsa", "basdai", "basfi", "asdas_crp", "womac", "steroid_conv", "ckdepi", "crcl", "feua"],
+ "advice": [
+  {
+   "id": "dmard-safety",
+   "title": "Staying safe on DMARD medicines",
+   "target": "follow_up_advice",
+   "text": "Have your blood tests done on the dates given and bring your monitoring record to every visit. Contact the clinic at once if you get a sore throat, fever or other infection, mouth ulcers, unexplained bruising or bleeding, yellow eyes, or a new cough or breathlessness. Do not start or stop any medicine, including herbal remedies, without asking, and tell us before planning a pregnancy."
+  },
+  {
+   "id": "gout-lifestyle",
+   "title": "Living with gout",
+   "target": "diet_lifestyle_advice",
+   "text": "Take the urate-lowering tablets every day, even when you have no pain. Attacks can happen more often in the first few months; this does not mean the medicine is failing, so do not stop it. Cut down on alcohol, especially beer, on sugary drinks, and on red meat and seafood, and lose weight if you are overweight."
+  },
+  {
+   "id": "urgent-symptoms",
+   "title": "When to come at once",
+   "target": "follow_up_advice",
+   "text": "Come to hospital the same day if a joint suddenly becomes hot, swollen and very painful, especially with fever or if you take medicines that lower immunity. If you are over 50 and get a new headache, pain in the jaw when chewing, a tender scalp, or any loss or blurring of vision or double vision, come at once: this can cause blindness if not treated quickly."
+  }
+ ],
+ "sources": [
+  { "org": "EULAR", "title": "EULAR recommendations for the management of rheumatoid arthritis with synthetic and biologic disease-modifying antirheumatic drugs: 2025 update", "year": 2026, "url": "https://pubmed.ncbi.nlm.nih.gov/41826212/" },
+  { "org": "American College of Rheumatology", "title": "2019 update of the American College of Rheumatology recommended rheumatoid arthritis disease activity measures", "year": 2019, "url": "https://acrjournals.onlinelibrary.wiley.com/doi/epdf/10.1002/acr.24042" },
+  { "org": "American College of Rheumatology", "title": "2020 American College of Rheumatology guideline for the management of gout", "year": 2020, "url": "https://acrjournals.onlinelibrary.wiley.com/doi/10.1002/acr.24180" },
+  { "org": "British Society for Rheumatology", "title": "2025 British Society for Rheumatology guideline for the prescription and monitoring of conventional synthetic disease-modifying anti-rheumatic drugs", "year": 2026, "url": "https://academic.oup.com/rheumatology/article/65/2/keaf522/8322743" },
+  { "org": "British Society for Rheumatology", "title": "British Society for Rheumatology guideline on diagnosis and treatment of giant cell arteritis", "year": 2020, "url": "https://academic.oup.com/rheumatology/article/59/3/e1/5714024" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

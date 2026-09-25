@@ -3,7 +3,7 @@
  *   - the standalone sheet #smdKit opened from Home, which defines the same palette itself.
  * Material Symbols come from redesign-system.css. Every tap target is at least 40px high. */
 
-#smdKit {
+:is(#smdKit, #smdDocs, #smdReview) {
   --primary: #00685f; --on-primary: #fff; --primary-container: #008378;
   --secondary: #565e74; --error: #ba1a1a; --error-container: #ffdad6; --on-error-container: #93000a;
   --bg: #f7f9fb; --surface: #f7f9fb; --on-surface: #191c1e; --on-surface-variant: #3d4947;
@@ -11,17 +11,17 @@
   --q-sans: 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   position: fixed; inset: 0; z-index: 880; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--q-sans);
 }
-#smdKit.on { display: block; }
-body.dark #smdKit { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; --on-surface-variant: #bcc9c6;
+:is(#smdKit, #smdDocs, #smdReview).on { display: block; }
+body.dark :is(#smdKit, #smdDocs, #smdReview) { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; --on-surface-variant: #bcc9c6;
   --sc-lowest: #1f2325; --sc-low: #23272a; --sc-high: #2d3133; --outline-variant: #3d4947; --secondary: #bec6e0;
   --primary: #3fc7b3; --on-primary: #04322c; --error: #ffb4ab; --error-container: #5c1712; --on-error-container: #ffdad6; }
-#smdKit .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
-#smdKit *, #smdKit *::before, #smdKit *::after { box-sizing: border-box; }
-#smdKit .kit-sheet { display: flex; flex-direction: column; height: 100%; }
-#smdKit .kit-sheet-top { display: flex; align-items: center; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; background: var(--surface); border-bottom: 1px solid var(--sc-low); }
-#smdKit .kit-sheet-top h1 { flex: 1; margin: 0; font: 700 17px var(--q-sans); }
-#smdKit .kit-x { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 12px; background: transparent; color: var(--on-surface); cursor: pointer; }
-#smdKit .kit-sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 12px 16px calc(28px + env(safe-area-inset-bottom)); }
+:is(#smdKit, #smdDocs, #smdReview) .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
+:is(#smdKit, #smdDocs, #smdReview) *, #smdKit *::before, #smdKit *::after { box-sizing: border-box; }
+:is(#smdKit, #smdDocs, #smdReview) .kit-sheet { display: flex; flex-direction: column; height: 100%; }
+:is(#smdKit, #smdDocs, #smdReview) .kit-sheet-top { display: flex; align-items: center; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; background: var(--surface); border-bottom: 1px solid var(--sc-low); }
+:is(#smdKit, #smdDocs, #smdReview) .kit-sheet-top h1 { flex: 1; margin: 0; font: 700 17px var(--q-sans); }
+:is(#smdKit, #smdDocs, #smdReview) .kit-x { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 12px; background: transparent; color: var(--on-surface); cursor: pointer; }
+:is(#smdKit, #smdDocs, #smdReview) .kit-sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 12px 16px calc(28px + env(safe-area-inset-bottom)); }
 /* Surfaces the kit links into sit below #smdKit (880) by default: lift them while the sheet is open,
    the same way surgx.css lifts .mc-overlay above SURGX. Far below the prescription pad (16000). */
 html.kit-lock .mc-overlay { z-index: 1300; }
@@ -129,3 +129,67 @@ body.dark .kit { --kit-amber: #f5c26b; --kit-amber-bg: #33270f; }
    Below the discharge (12020) and MaiK (12030) overlays and far below the prescription pad (16000). */
 html.oe-kit-calc .mc-overlay { z-index: 12015; }
 .kit .kit-hint { display: block; margin-top: 2px; color: var(--secondary); font: 500 11.5px/1.35 var(--q-sans); }
+/* Kit picker (26 kits): quick chips + "All kits" panel grouped by specialty area. */
+.kit .kit-all .kit-ic { font-size: 18px; }
+.kit .kit-picker { display: flex; flex-direction: column; gap: 10px; padding: 12px; border: 1px solid var(--outline-variant); border-radius: 14px; background: var(--sc-lowest); }
+.kit .kit-pgroup h4 { margin: 4px 0 6px; color: var(--secondary); font: 700 11.5px var(--q-sans); letter-spacing: .05em; text-transform: uppercase; }
+.kit .kit-pill .kit-ic { font-size: 17px; margin-right: 4px; vertical-align: -3px; }
+.kit .kit-pill.on { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--surface)); color: var(--primary); }
+.kit .kit-oset { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid var(--sc-low); }
+.kit .kit-oset:first-of-type { border-top: 0; }
+.kit .kit-oset > div { min-width: 0; flex: 1 1 220px; }
+.kit .kit-oset b { font: 700 14px var(--q-sans); }
+.kit .kit-oset p { margin: 2px 0 0; color: var(--on-surface-variant); font: 500 13px/1.45 var(--q-sans); }
+
+/* ---- tools added 2026-09-25: LA dose, burns, CKD grid, joints, body chart, MCCD, Labour Care Guide ---- */
+html.kit-lock .icd-overlay { z-index: 1300; }
+html.oe-kit-calc .icd-overlay { z-index: 12015; }
+.kit .kit-tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+.kit .kit-ckd { width: auto; min-width: 240px; }
+.kit .kit-ckd th, .kit .kit-ckd td { text-align: center; padding: 6px 8px; }
+.kit .kit-ckd td { min-width: 56px; height: 34px; border: 2px solid var(--sc-lowest); font: 700 12px var(--q-sans); color: #111; }
+.kit .kit-r0 { background: #7cc47f; } .kit .kit-r1 { background: #f2dd6b; } .kit .kit-r2 { background: #f2a45a; } .kit .kit-r3 { background: #e0635a; }
+.kit .kit-ckd td.kit-here { outline: 3px solid var(--on-surface); outline-offset: -3px; }
+.kit .kit-joints th, .kit .kit-joints td { padding: 4px 6px; }
+.kit .kit-joint { min-width: 56px; min-height: 40px; border: 1px solid var(--outline-variant); border-radius: 9px; background: var(--surface); color: var(--on-surface); font: 700 12.5px var(--q-sans); cursor: pointer; }
+.kit .kit-joint.s-T { border-color: var(--kit-amber); color: var(--kit-amber); background: var(--kit-amber-bg); }
+.kit .kit-joint.s-S { border-color: var(--primary); color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--surface)); }
+.kit .kit-joint.s-TS { border-color: var(--error); color: var(--error); background: color-mix(in srgb, var(--error) 12%, var(--surface)); }
+.kit .kit-body { width: 100%; max-width: 520px; height: auto; align-self: center; touch-action: manipulation; }
+.kit .kit-bz { fill: color-mix(in srgb, var(--primary) 6%, var(--sc-lowest)); stroke: var(--outline-variant); stroke-width: 1.2; cursor: pointer; }
+.kit .kit-bz:hover, .kit .kit-bz:focus { stroke: var(--primary); outline: none; }
+.kit .kit-bz.on { fill: color-mix(in srgb, var(--error) 22%, var(--sc-lowest)); stroke: var(--error); }
+.kit .kit-bzn { fill: var(--error); font: 800 9px var(--q-sans); pointer-events: none; }
+.kit .kit-bzl { fill: var(--secondary); font: 700 9px var(--q-sans); }
+.kit .kit-lcg { font-size: 12.5px; }
+.kit .kit-lcg th { white-space: nowrap; }
+.kit .kit-lcg td { text-align: center; min-width: 48px; }
+.kit .kit-lcg-sec th { padding-top: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: .04em; font-size: 11px; }
+.kit .kit-lcg td.kit-alertcell { background: var(--error-container); color: var(--on-error-container); font-weight: 800; }
+.kit .kit-lcg-t { min-height: 36px; padding: 4px 8px; border: 1px solid var(--outline-variant); border-radius: 8px; background: var(--surface); color: var(--on-surface); font: 700 12px var(--q-sans); cursor: pointer; }
+.kit .kit-lcg-t.on { border-color: var(--primary); color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--surface)); }
+.kit .kit-lcg-h { margin: 6px 0 0; color: var(--primary); font: 700 12px var(--q-sans); letter-spacing: .04em; text-transform: uppercase; }
+
+/* WHO growth chart (E1): reference SD curves recessive, the child's measurements in the accent. */
+.kit .kit-gc { margin: 4px 0 0; }
+.kit .kit-gc figcaption { color: var(--on-surface-variant); font: 600 12.5px var(--q-sans); margin-bottom: 2px; }
+.kit .kit-gc svg { width: 100%; max-width: 560px; height: auto; display: block; }
+.kit .kit-gc-grid { stroke: var(--sc-high); stroke-width: 1; }
+.kit .kit-gc-tick { fill: var(--secondary); font: 500 9px var(--q-sans); }
+.kit .kit-gc-z { fill: none; stroke: var(--on-surface-variant); }
+.kit .kit-gc-z0 { stroke-width: 2; }
+.kit .kit-gc-z2 { stroke-width: 1.5; stroke-dasharray: 5 3; }
+.kit .kit-gc-z3 { stroke-width: 1; opacity: .55; }
+.kit .kit-gc-zl { fill: var(--secondary); font: 700 9px var(--q-sans); }
+.kit .kit-gc-line { fill: none; stroke: var(--primary); stroke-width: 2; }
+.kit .kit-gc-pt { fill: var(--primary); stroke: var(--sc-lowest); stroke-width: 2; }
+.kit .kit-gc-pick { gap: 6px; }
+.kit .kit-gc-pick .kit-seg { min-height: 36px; padding: 6px 10px; font-size: 12.5px; }
+
+/* E5: dictation mic beside free-text kit fields */
+.kit .kit-micwrap { position: relative; min-width: 0; }
+.kit .kit-micwrap.wide { grid-column: 1 / -1; }
+.kit .kit-micwrap .kit-inp { padding-right: 46px; }
+.kit .kit-mic { position: absolute; right: 4px; bottom: 4px; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 9px; background: transparent; color: var(--secondary); cursor: pointer; }
+.kit .kit-mic.on { color: var(--error); background: color-mix(in srgb, var(--error) 12%, transparent); }
+.kit .kit-micwrap .kit-hint + .kit-mic, .kit .kit-micwrap:has(.kit-hint) .kit-mic { bottom: 22px; }

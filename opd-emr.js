@@ -311,7 +311,7 @@
     }
     var dictatedShelf = "";
     if (st.dictatedInv && st.dictatedInv.length) {
-      dictatedShelf = '<div class="oe-vc-orders" style="margin:0 0 12px;background:#f8fafc;padding:9px 12px;border-radius:8px;border:1px solid #e2e8ec"><div class="oe-vc-orders-h" style="font-size:12px;font-weight:600;color:#475569;display:flex;gap:6px;align-items:center;margin-bottom:6px">' + ms("record_voice_over") + '<span>Dictated in consultation:</span></div><div class="oe-vc-chips" style="display:flex;flex-wrap:wrap;gap:6px">' +
+      dictatedShelf = '<div class="oe-vc-orders" style="margin:0 0 12px;background:#f8fafc;padding:9px 12px;border-radius:8px;border:1px solid #e2e8ec"><div class="oe-vc-orders-h" style="font-size:12px;font-weight:600;color:#475569;display:flex;gap:6px;align-items:center;margin-bottom:6px">' + ms("playlist_add_check") + '<span>Queued in this consultation (dictated or from an order set):</span></div><div class="oe-vc-chips" style="display:flex;flex-wrap:wrap;gap:6px">' +
         st.dictatedInv.map(function (nm, i) {
           return '<button class="oe-btn ghost" data-oe-act="ivorder:' + i + '" style="font-size:12px;padding:4px 9px;border-radius:6px;cursor:pointer" title="Search and order ' + esc(nm) + '">' + ms("add") + esc(nm) + '</button>';
         }).join("") + '</div></div>';
@@ -1039,7 +1039,8 @@
       '</div>';
     }
 
-    if (!st.writeOn) return triageHtml + allergyHtml + vitalsSyncBanner() + '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
+    var notifHtml = '<div id="oeNotif">' + notifiableHtml(vals) + "</div>";
+    if (!st.writeOn) return triageHtml + allergyHtml + notifHtml + vitalsSyncBanner() + '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     // Ask MaiK: its own glowing AI banner (Option C), separate from the save actions.
     var maikCta = (maikOn() && G.DX) ?
       '<button class="oe-maik-cta' + (st.maikBusy ? " busy" : "") + '" data-oe-act="assess-maik"' + (st.maikBusy ? " disabled" : "") + ' aria-label="Ask MaiK">' +
@@ -1072,7 +1073,7 @@
         '<button class="oe-btn ghost" data-oe-act="rx-summary" title="View, print, or share patient consultation summary">' + ms("print") + "Summary</button>" +
         saveBtn + authBtn + "</div>";
     }
-    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + vitalsSyncBanner() + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + notifHtml + vitalsSyncBanner() + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
   // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
@@ -1351,6 +1352,21 @@
     if (!kitsOn()) return errorBox("Specialty kits are turned off on this device.");
     return '<div class="oe-kit">' + G.SMD_KITS.html({ host: kitHost, key: kitKey(), defaultKit: G.SMD_KITS.mySpecialty() || scribeSpecialtyId() }) + "</div>";
   }
+  // Notifiable disease reminder (C6): the provisional diagnosis names a condition India requires to be
+  // reported (IDSP/IHIP, Ni-kshay). Data: kb/specialty-kits/src/data-notifiable.json via SMD_KITS.
+  function notifiableHtml(vals) {
+    if (!kitsOn() || !G.SMD_KITS.notifiable) return "";
+    var dx = String((vals && vals.provisional_diagnosis) || "").trim(); if (!dx) return "";
+    var hits = G.SMD_KITS.notifiable(dx);
+    if (!hits.length && !st._kitsLoadAsked && G.SMD_KITS.loadKits && !(G.SMD_KITS.kits() || []).length) {
+      st._kitsLoadAsked = true; var mine = st;
+      G.SMD_KITS.loadKits().then(function () { if (mine === st) refreshNotifiable(); }, function () {});
+    }
+    if (!hits.length) return "";
+    return '<div class="oe-notif" role="note">' + ms("campaign") + "<div><b>Notifiable disease: " + esc(hits.map(function (h) { return h.label; }).join(", ")) + "</b>" +
+      hits.map(function (h) { return "<p>" + esc(h.report) + "</p>"; }).join("") + "</div></div>";
+  }
+  function refreshNotifiable() { try { var el = document.getElementById("oeNotif"); if (el) el.innerHTML = notifiableHtml(st.assessVals); } catch (e) {} }
   function kitAppend(field, text) {
     if (OPD_KIND[field] === "textarea") { appendPlan(field, text); return; }
     var cur = String(st.assessVals[field] || "").trim();            // single-line field: no newlines
@@ -1377,14 +1393,26 @@
       toast("Added to " + kitHost.fieldLabel(field) + (n ? " and " + n + " more field" + (n > 1 ? "s" : "") : "") + ". Save the assessment to keep it.");
     },
     repaint: function () { if (st.tab === "kit") paint(); },
-    protocol: function (id) { st.tab = "protocol"; paint(); openKbProtocol(id); },
+    protocol: function (id) { st._protoInit = true; st.tab = "protocol"; paint(); openKbProtocol(id); },
     // Calculators render in the MEDCALC overlay (z 870), under this overlay (12010): lift it for the
     // rest of this consult (html.oe-kit-calc in specialty-kits.css; removed by close()).
     calculator: function (id) { if (!(G.MEDCALC && G.MEDCALC.open)) { toast("Calculators are not available."); return; } document.documentElement.classList.add("oe-kit-calc"); G.MEDCALC.open(id); },
+    canDictate: function () { return !st.voiceOn && !st.voiceProcessing && !st.fieldMic; },
+    icd: function () { if (!(G.SMD_ICD && G.SMD_ICD.open)) { toast("ICD search is not available."); return; } document.documentElement.classList.add("oe-kit-calc"); G.SMD_ICD.open(); },
     investigate: function (q) { st.tab = "inv"; st.invQuery = q; paint(); runSearch("inv"); },
+    // Order set (B6): queue the tests on the Investigations tab (same shelf as dictated tests, with the
+    // same "Ix:" plan line); each is still searched and ordered by the doctor. Nothing is ordered here.
+    queueTests: function (tests, label) {
+      st.dictatedInv = st.dictatedInv || []; var added = 0, plan = kitHost.canWrite() && kitHost.ready();
+      (tests || []).forEach(function (n) { if (st.dictatedInv.indexOf(n) < 0) { st.dictatedInv.push(n); added++; } if (plan) appendPlan("management_plan", "Ix: " + n); });
+      st.tab = "inv"; paint();
+      toast(added ? added + " tests queued from " + label + ". Tap each one to search and order it." : "These tests are already queued.");
+    },
     openTab: function (t) { if (t === "immun" && !immunFlagOn()) { toast("The Immunisation tab is turned off on this device."); return; } switchTab(t); },
     setScribe: function (id) { if (scribeClinicalOn() && G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.list && G.SMD_SCRIBETPL.list().some(function (x) { return x.id === id; })) { try { if (G.localStorage) G.localStorage.setItem(_specialtyKey(st && st.author), id); } catch (e) {} } },
-    patient: function () { return { sex: (st.patient && st.patient.sex) || "", age: (st.patient && st.patient.age) || "" }; }
+    patient: function () { return { sex: (st.patient && st.patient.sex) || "", age: (st.patient && st.patient.age) || "" }; },
+    // For clinical-docs.js prefill (certificates, referral letter): kept in memory, printed only by the doctor.
+    consult: function () { return { patient: { name: (st.patient && st.patient.name) || "", age: (st.patient && st.patient.age) || "", sex: (st.patient && st.patient.sex) || "" }, vals: st.assessVals || {} }; }
   };
 
   function _render(state) {
@@ -1690,6 +1718,7 @@
       var an = inp.slice(7);
       st.assessVals = st.assessVals || {};
       st.assessVals[an] = val;
+      if (an === "provisional_diagnosis") refreshNotifiable();
       st.assessTouched = st.assessTouched || {};
       // Item 15: the FIRST manual edit of a field the scribe filled is a correction signal worth
       // logging (field key + action only - see logScribeFeedback). Gated on the touched flag not yet
@@ -1980,7 +2009,12 @@
     switchTab("assess");
   }
 
-  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } if (t === "kit" && !st.assessLoaded && !st.assessLoading) loadAssessment(); if (t === "note") loadNoteTemplates(); if (t === "immun") loadVaccineCatalogue(); }
+  // A1: the first time the Protocol tab opens in a consult, start on the doctor's own specialty branch.
+  function protoDefaultBranch() {
+    if (st._protoInit) return; st._protoInit = true;
+    try { if (st.protoBranch === "all" && kitsOn()) { var mk = G.SMD_KITS.kit(G.SMD_KITS.mySpecialty()); if (mk && mk.subject) st.protoBranch = mk.subject; } } catch (e) {}
+  }
+  function switchTab(t) { if (t === "protocol") protoDefaultBranch(); st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } if (t === "kit" && !st.assessLoaded && !st.assessLoading) loadAssessment(); if (t === "note") loadNoteTemplates(); if (t === "immun") loadVaccineCatalogue(); }
 
   // Tap a dose-matrix cell: build the drawer PURELY from the plan already in state - no fetch, no
   // write. drugId may itself contain ":" so re-join everything after the cycle number.
@@ -4531,7 +4565,10 @@
   function _specialtyKey(author) { return "smd_scribe_specialty" + (author ? ":" + String(author).replace(/\s+/g, "_") : ""); }
   function scribeSpecialtyId() {
     if (!scribeClinicalOn() || !(G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.get)) return "";
-    try { return (G.localStorage && G.localStorage.getItem(_specialtyKey(st && st.author))) || ""; } catch (e) { return ""; }
+    var v = ""; try { v = (G.localStorage && G.localStorage.getItem(_specialtyKey(st && st.author))) || ""; } catch (e) { v = ""; }
+    // A1: no template picked yet -> the template of the doctor's specialty kit (e.g. obgyn), if any.
+    if (!v && kitsOn() && G.SMD_KITS.myScribe) { try { v = G.SMD_KITS.myScribe() || ""; } catch (e) { v = ""; } }
+    return v;
   }
   function setScribeSpecialty(id) {
     try { if (G.localStorage) G.localStorage.setItem(_specialtyKey(st && st.author), id || ""); } catch (e) {}

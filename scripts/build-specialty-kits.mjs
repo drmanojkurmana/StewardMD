@@ -20,6 +20,7 @@
  *   subject      clinical-protocols subject key (kb/clinical-protocols/index.json subjects)
  *   workspace    optional specialty workspace id (workspaces.js REG)
  *   scribe       optional MaiK Scribe template id (scribe-templates.js)
+ *   group        picker group id (KIT_GROUPS below)
  *   tools        tool ids implemented in specialty-kits.js (TOOL_IDS below)
  *   sections     [{ id, title, target, alert?, fields: [{ id, label, type, opts?, unit?, set?, hint? }] }]
  *                alert  = optional warning shown when any "check" field in the section is ticked
@@ -27,6 +28,8 @@
  *                set    = optional assessment field this one value is written to directly.
  *                type in FIELD_TYPES; opts required for select.
  *   investigations [{ label, query }]   query = what is typed into the Investigations search
+ *   orderSets    optional [{ id, label, tests: [query, ...] }]: a panel of investigations queued together
+ *                (each test is still searched and ordered by the doctor, one by one)
  *   protocols    [clinical-protocol ids]
  *   calculators  [calculators.js ids]
  *   advice       [{ id, title, target, text }]  patient advice added to an assessment field
@@ -46,10 +49,18 @@ const JS_FILE = join(ROOT, "specialty-kits.js");
 const HTML_FILE = join(ROOT, "index.html");
 const GROWTH_FILE = join(ROOT, "kb/growth/who-growth.json");
 
-export const TOOL_IDS = ["pregnancy-dating", "growth-who", "milestones", "immunisation", "visual-acuity", "hearing", "odontogram", "pasi"];
+export const TOOL_IDS = ["pregnancy-dating", "growth-who", "milestones", "immunisation", "visual-acuity", "hearing", "odontogram", "pasi",
+  "la-dose", "burns-chart", "ckd-grid", "joint-chart", "body-chart", "mccd", "labour-care"];
 export const FIELD_TYPES = ["text", "textarea", "number", "select", "check", "date"];
-export const KIT_ORDER = ["obgyn", "paediatrics", "orthopaedics", "ophthalmology", "ent", "dermatology", "psychiatry", "dental"];
-const TOP_KEYS = ["id", "label", "short", "icon", "subject", "workspace", "scribe", "tools", "sections", "investigations", "protocols", "calculators", "advice", "sources", "review"];
+export const KIT_ORDER = ["obgyn", "paediatrics", "orthopaedics", "ophthalmology", "ent", "dermatology", "psychiatry", "dental",
+  "anaesthesia", "emergency", "general-surgery", "cardiology", "pulmonology", "neurology", "nephrology-urology", "diabetes-endocrine",
+  "gastro-hepatology", "rheumatology", "geriatrics", "palliative", "rehabilitation", "community-medicine", "cancer-screening",
+  "nursing", "pharmacy", "forensic"];
+/** Kit groups, in picker order: [id, label]. Every kit names one. */
+export const KIT_GROUPS = [["women-children", "Women and children"], ["acute", "Acute care and theatre"], ["surgical", "Surgical"],
+  ["medical", "Medical"], ["senses", "Eye, ENT, skin and teeth"], ["care", "Mind, ageing and rehabilitation"],
+  ["community", "Community, nursing, pharmacy and legal"]];
+const TOP_KEYS = ["id", "label", "short", "icon", "group", "subject", "workspace", "scribe", "tools", "sections", "investigations", "orderSets", "protocols", "calculators", "advice", "sources", "review"];
 
 /** Initial Assessment field names, read from opd-emr.js ASSESS_SCHEMA (the form kits write into). */
 export function assessmentFields() {
@@ -100,6 +111,7 @@ export function validateKit(k, fileId, refs) {
   if (!isStr(k.label)) e.push(`${tag}: label required`);
   if (!isStr(k.short) || k.short.length > 16) e.push(`${tag}: short must be 1..16 chars`);
   if (!/^[a-z_]+$/.test(k.icon || "")) e.push(`${tag}: icon must be a Material Symbols name`);
+  if (!KIT_GROUPS.some((g) => g[0] === k.group)) e.push(`${tag}: group must be one of ${KIT_GROUPS.map((g) => g[0]).join(", ")}`);
   if (!isStr(k.subject)) e.push(`${tag}: subject required`);
   else if (refs && refs.subjects && !refs.subjects.has(k.subject)) e.push(`${tag}: unknown protocol subject "${k.subject}"`);
   if (k.workspace != null && refs && !refs.workspaces.has(k.workspace)) e.push(`${tag}: unknown workspace "${k.workspace}"`);
@@ -131,6 +143,13 @@ export function validateKit(k, fileId, refs) {
     });
   });
   (k.investigations || []).forEach((x, i) => { if (!isStr(x.label) || !isStr(x.query) || Object.keys(x).length !== 2) e.push(`${tag}.investigations[${i}]: needs exactly label + query`); });
+  (k.orderSets || []).forEach((o, i) => {
+    const w = `${tag}.orderSets[${i}]`;
+    Object.keys(o || {}).forEach((key) => { if (["id", "label", "tests"].indexOf(key) < 0) e.push(`${w}: unknown key "${key}"`); });
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test((o && o.id) || "")) e.push(`${w}: id must be kebab-case`);
+    if (!isStr(o.label)) e.push(`${w}: label required`);
+    if (!Array.isArray(o.tests) || o.tests.length < 2 || o.tests.length > 15 || !o.tests.every(isStr)) e.push(`${w}: tests must be 2 to 15 search terms`);
+  });
   (k.protocols || []).forEach((p) => { if (refs && !refs.protocols.has(p)) e.push(`${tag}: unknown protocol "${p}"`); });
   (k.calculators || []).forEach((c) => { if (refs && !refs.calcs.has(c)) e.push(`${tag}: unknown calculator "${c}"`); });
   (k.advice || []).forEach((a, i) => {
@@ -182,8 +201,9 @@ export function loadAll(dir = SRC, refs = refsNow()) {
 }
 
 export function buildBundle(kits, data) {
-  const hash = createHash("sha256").update(JSON.stringify({ kits, data })).digest("hex").slice(0, 12);
-  return { schema: 1, version: hash, kits, data };
+  const groups = KIT_GROUPS.filter((g) => kits.some((k) => k.group === g[0]));
+  const hash = createHash("sha256").update(JSON.stringify({ kits, data, groups })).digest("hex").slice(0, 12);
+  return { schema: 1, version: hash, groups, kits, data };
 }
 
 function main() {

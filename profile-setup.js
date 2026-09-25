@@ -229,6 +229,7 @@
           close(); toast("Profile saved");
           // phone-verify.js waits for this to ask for the code, so the two sheets never stack.
           try { document.dispatchEvent(new CustomEvent("smd:profile-saved", { detail: { phone: draft.phone } })); } catch (e) {}
+          announce(draft);
         })
         .catch(function () { btn.disabled = false; btn.textContent = "Save"; toast("Couldn't save. Check your connection."); });
     });
@@ -245,6 +246,11 @@
     }).catch(function () { draft = {}; form(true); });
   }
 
+  /* Tell the rest of the app the clinician's degree and speciality (specialty-kits.js personalises
+   * Home, the default kit and MaiK from it). Professional details only, never patient data. */
+  function announce(d) {
+    try { document.dispatchEvent(new CustomEvent("smd:profile-loaded", { detail: { degree: (d && d.degree) || "", speciality: (d && d.speciality) || "" } })); } catch (e) {}
+  }
   /* Should we ask? Signed in, not snoozed this app-open, and something is genuinely missing. */
   function needed(cb) {
     var ref = docRef();
@@ -252,6 +258,7 @@
     try { if (sessionStorage.getItem(SNOOZE_KEY)) { cb(false); return; } } catch (e) {}
     ref.get().then(function (snap) {
       var d = (snap && snap.exists && snap.data()) || {};
+      announce(d);
       cb(missing(d).length > 0, d);
     }).catch(function () { cb(false); });
   }

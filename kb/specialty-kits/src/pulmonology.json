@@ -1,0 +1,188 @@
+{
+ "id": "pulmonology",
+ "label": "Pulmonology",
+ "short": "Chest",
+ "icon": "pulmonology",
+ "group": "medical",
+ "subject": "respiratory",
+ "tools": [],
+ "sections": [
+  {
+   "id": "respiratory-history",
+   "title": "Respiratory history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "cough", "label": "Cough", "type": "select", "opts": ["None", "Dry", "Productive"] },
+    { "id": "cough_weeks", "label": "Cough duration", "type": "number", "unit": "weeks" },
+    { "id": "sputum", "label": "Sputum", "type": "select", "opts": ["None", "Mucoid", "Purulent", "Blood-streaked", "Frothy pink", "Large daily volume"] },
+    { "id": "haemoptysis_amount", "label": "Haemoptysis", "type": "select", "opts": ["None", "Streaks in sputum", "Frank blood, small amount", "Large amount (a cupful or more)"] },
+    { "id": "mmrc", "label": "Breathlessness (mMRC)", "type": "select", "opts": ["Grade 0: only with strenuous exercise", "Grade 1: when hurrying on the level or walking up a slight hill", "Grade 2: walks slower than people of the same age, or stops for breath at own pace", "Grade 3: stops for breath after about 100 metres or a few minutes on the level", "Grade 4: too breathless to leave the house, or breathless when dressing"] },
+    { "id": "wheeze", "label": "Wheeze", "type": "select", "opts": ["None", "Intermittent", "Persistent", "Mainly at night", "With exercise"] },
+    { "id": "biomass", "label": "Biomass smoke exposure (wood, dung, crop residue cooking fuel)", "type": "select", "opts": ["None", "Past", "Current"] },
+    { "id": "occupation_exposure", "label": "Occupation and dust or fume exposure", "type": "text", "hint": "e.g. stone cutting, mining, construction, textile mill, farming" },
+    { "id": "smoking_status", "label": "Smoking", "type": "select", "opts": ["Never", "Ex-smoker", "Current: cigarettes", "Current: beedi", "Current: hookah or other"] },
+    { "id": "pack_years", "label": "Pack-years", "type": "number", "hint": "use the pack-years calculator" },
+    { "id": "other_exposures", "label": "Other exposures", "type": "text", "hint": "birds, mould, pets, TB contact, travel" }
+   ]
+  },
+  {
+   "id": "respiratory-red-flags",
+   "title": "Respiratory red flags",
+   "target": "History_present_illness",
+   "alert": "Respiratory red flag. SpO2 below 92%, a silent chest, cyanosis, exhaustion or drowsiness: give oxygen, start emergency treatment and arrange emergency admission; in acute asthma these are life-threatening. Haemoptysis: chest X-ray and sputum NAAT for TB today; follow the massive haemoptysis protocol if bleeding is large.",
+   "fields": [
+    { "id": "rf_spo2", "label": "SpO2 below 92% on room air", "type": "check" },
+    { "id": "rf_haemoptysis", "label": "Haemoptysis", "type": "check" },
+    { "id": "rf_silent_chest", "label": "Silent chest or feeble respiratory effort", "type": "check" },
+    { "id": "rf_sentences", "label": "Cannot complete sentences in one breath", "type": "check" },
+    { "id": "rf_drowsy", "label": "Drowsy, confused or exhausted", "type": "check" },
+    { "id": "rf_cyanosis", "label": "Central cyanosis", "type": "check" },
+    { "id": "rf_rr", "label": "Respiratory rate over 30/min", "type": "check" },
+    { "id": "rf_pleuritic", "label": "Sudden breathlessness with pleuritic chest pain", "type": "check" }
+   ]
+  },
+  {
+   "id": "respiratory-examination",
+   "title": "Respiratory examination",
+   "target": "respiratory_exam",
+   "fields": [
+    { "id": "resp_rate", "label": "Respiratory rate", "type": "number", "unit": "/min", "set": "respiratory" },
+    { "id": "spo2_air", "label": "SpO2 on room air", "type": "number", "unit": "%", "set": "spo2" },
+    { "id": "accessory_muscles", "label": "Using accessory muscles", "type": "check" },
+    { "id": "trachea", "label": "Trachea", "type": "select", "opts": ["Central", "Deviated to right", "Deviated to left"] },
+    { "id": "expansion", "label": "Chest expansion", "type": "select", "opts": ["Normal and symmetrical", "Reduced on right", "Reduced on left", "Reduced both sides"] },
+    { "id": "percussion", "label": "Percussion note", "type": "select", "opts": ["Resonant", "Dull", "Stony dull", "Hyper-resonant"] },
+    { "id": "breath_sounds", "label": "Breath sounds", "type": "select", "opts": ["Vesicular", "Reduced", "Bronchial", "Absent"] },
+    { "id": "added_sounds", "label": "Added sounds", "type": "select", "opts": ["None", "Wheeze", "Fine crackles", "Coarse crackles", "Pleural rub", "Stridor"] },
+    { "id": "findings_site", "label": "Side and zones", "type": "text", "hint": "e.g. right lower zone" },
+    { "id": "resp_clubbing", "label": "Clubbing", "type": "check" }
+   ]
+  },
+  {
+   "id": "copd-review",
+   "title": "COPD review (GOLD)",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "copd_spirometry", "label": "Spirometry", "type": "select", "opts": ["Confirmed: post-bronchodilator FEV1/FVC below 0.7", "Not yet done", "Done, not confirmed"] },
+    { "id": "fev1_percent", "label": "Post-bronchodilator FEV1", "type": "number", "unit": "% predicted" },
+    { "id": "copd_exacerbations", "label": "Moderate or severe exacerbations in the past year", "type": "number" },
+    { "id": "copd_admissions", "label": "Hospital admissions for COPD in the past year", "type": "number" },
+    { "id": "cat_score", "label": "CAT score", "type": "number", "hint": "0 to 40" },
+    { "id": "gold_group", "label": "GOLD group", "type": "select", "opts": ["A: 0 or 1 moderate exacerbation, none admitted; mMRC 0 to 1 and CAT below 10", "B: 0 or 1 moderate exacerbation, none admitted; mMRC 2 or more or CAT 10 or more", "E: 2 or more moderate exacerbations, or 1 or more leading to admission"] },
+    { "id": "copd_inhalers", "label": "Current inhalers", "type": "text" },
+    { "id": "home_oxygen", "label": "Oxygen at home", "type": "select", "opts": ["None", "Long-term oxygen therapy", "Ambulatory oxygen", "Home NIV"] },
+    { "id": "copd_vaccines", "label": "Vaccines up to date (influenza, pneumococcal and others as per local guidance)", "type": "check" },
+    { "id": "pulm_rehab", "label": "Pulmonary rehabilitation", "type": "select", "opts": ["Referred", "Attending", "Completed", "Declined", "Not available"] },
+    { "id": "copd_action_plan", "label": "Written action plan given", "type": "check" }
+   ]
+  },
+  {
+   "id": "asthma-control",
+   "title": "Asthma control (GINA, past 4 weeks)",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "gina_daytime", "label": "Daytime symptoms more than twice a week", "type": "check" },
+    { "id": "gina_night", "label": "Any night waking due to asthma", "type": "check" },
+    { "id": "gina_reliever", "label": "SABA reliever needed more than twice a week", "type": "check", "hint": "only for patients using a SABA reliever (not ICS-formoterol); do not count use before exercise" },
+    { "id": "gina_activity", "label": "Any activity limitation due to asthma", "type": "check" },
+    { "id": "gina_level", "label": "Symptom control", "type": "select", "opts": ["Well controlled (none of these)", "Partly controlled (1 or 2 of these)", "Uncontrolled (3 or 4 of these)"] },
+    { "id": "asthma_exacerbations", "label": "Exacerbations needing oral steroids in the past year", "type": "number" },
+    { "id": "severe_exacerbation", "label": "Severe exacerbation in the past year, or ever intubated or in ICU for asthma", "type": "check" },
+    { "id": "asthma_treatment", "label": "Current treatment", "type": "text" },
+    { "id": "asthma_adherence", "label": "Adherence", "type": "select", "opts": ["Good", "Missed doses", "Uses reliever only", "Stopped"] },
+    { "id": "asthma_action_plan", "label": "Written asthma action plan", "type": "select", "opts": ["Has one", "Given today", "None"] },
+    { "id": "asthma_triggers", "label": "Triggers and comorbidities", "type": "text", "hint": "allergens, smoke, rhinitis, reflux, obesity, sleep apnoea, anxiety" }
+   ]
+  },
+  {
+   "id": "inhaler-technique",
+   "title": "Inhaler technique (ticked steps done correctly)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "inhaler_device", "label": "Device checked", "type": "select", "opts": ["pMDI", "pMDI with spacer", "Dry powder inhaler", "Soft mist inhaler", "Nebuliser"] },
+    { "id": "it_prepare", "label": "Removes cap and shakes (pMDI) or loads the dose (DPI)", "type": "check" },
+    { "id": "it_exhale", "label": "Breathes out fully, away from the mouthpiece", "type": "check" },
+    { "id": "it_seal", "label": "Seals lips around the mouthpiece or spacer", "type": "check" },
+    { "id": "it_pmdi_breath", "label": "pMDI: presses once at the start of a slow, deep breath", "type": "check" },
+    { "id": "it_dpi_breath", "label": "DPI: breathes in fast and deep", "type": "check" },
+    { "id": "it_hold", "label": "Holds breath for up to 10 seconds", "type": "check" },
+    { "id": "it_rinse", "label": "Rinses mouth after an inhaled steroid", "type": "check" },
+    { "id": "it_counter", "label": "Checks the dose counter", "type": "check" },
+    { "id": "it_outcome", "label": "Outcome", "type": "select", "opts": ["Correct technique", "Errors corrected, demonstrated and rechecked", "Needs review next visit", "Device change needed"] }
+   ]
+  },
+  {
+   "id": "tb-screening",
+   "title": "TB symptom screen (NTEP four symptoms)",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "tb_cough", "label": "Cough for more than 2 weeks (any current cough in people with HIV)", "type": "check" },
+    { "id": "tb_fever", "label": "Fever for more than 2 weeks (any current fever in people with HIV)", "type": "check" },
+    { "id": "tb_night_sweats", "label": "Night sweats", "type": "check" },
+    { "id": "tb_weight_loss", "label": "Weight loss", "type": "check" },
+    { "id": "tb_cxr", "label": "Chest X-ray abnormality suggestive of TB", "type": "check" },
+    { "id": "tb_contact", "label": "Household or close contact of a TB patient", "type": "check" },
+    { "id": "tb_previous", "label": "Previous TB treatment", "type": "select", "opts": ["Never", "Treated, completed", "Treated, not completed", "On treatment now"] },
+    { "id": "hiv_status", "label": "HIV status", "type": "select", "opts": ["Negative", "Positive", "Not known"] },
+    { "id": "tb_screen_result", "label": "Screen result and action", "type": "select", "opts": ["Negative: no symptom", "Presumptive TB: sputum sent for NAAT", "Presumptive TB: referred to a TB diagnostic centre"] }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Chest X-ray PA view", "query": "chest X-ray" },
+  { "label": "Spirometry with bronchodilator reversibility", "query": "spirometry" },
+  { "label": "Sputum NAAT for TB (CBNAAT or Truenat)", "query": "CBNAAT" },
+  { "label": "Sputum AFB smear", "query": "sputum AFB" },
+  { "label": "Sputum culture and sensitivity", "query": "sputum culture" },
+  { "label": "HRCT chest", "query": "HRCT chest" },
+  { "label": "CT pulmonary angiography", "query": "CTPA" },
+  { "label": "Arterial blood gas", "query": "ABG" },
+  { "label": "CBC", "query": "CBC" },
+  { "label": "Absolute eosinophil count", "query": "absolute eosinophil count" },
+  { "label": "DLCO (diffusion capacity)", "query": "DLCO" },
+  { "label": "6-minute walk test", "query": "6 minute walk test" },
+  { "label": "2D echocardiography", "query": "echocardiography" },
+  { "label": "Polysomnography (sleep study)", "query": "polysomnography" }
+ ],
+ "orderSets": [
+  { "id": "copd-review-panel", "label": "COPD review", "tests": ["spirometry", "chest X-ray", "CBC", "absolute eosinophil count", "ECG", "echocardiography", "ABG", "alpha-1 antitrypsin", "6 minute walk test"] },
+  { "id": "tb-work-up", "label": "TB work-up", "tests": ["CBNAAT", "Truenat", "sputum AFB", "chest X-ray", "HIV", "RBS", "HbA1c", "CBC", "LFT", "creatinine"] },
+  { "id": "ild-work-up", "label": "ILD work-up", "tests": ["HRCT chest", "spirometry", "DLCO", "6 minute walk test", "ANA", "RA factor", "anti-CCP", "ENA profile", "CPK", "ESR", "CRP", "echocardiography"] }
+ ],
+ "protocols": ["asthma-long-term-management", "acute-asthma-adult", "copd-stable-management", "copd-exacerbation", "community-acquired-pneumonia", "pulmonary-tuberculosis", "pulmonary-tuberculosis-international", "tb-preventive-treatment", "tb-preventive-treatment-international", "bronchiectasis", "idiopathic-pulmonary-fibrosis", "pulmonary-hypertension", "obstructive-sleep-apnoea", "spontaneous-pneumothorax", "pleural-infection-empyema", "massive-haemoptysis", "pulmonary-embolism", "hospital-acquired-ventilator-pneumonia", "acute-respiratory-failure-niv-hfnc", "ards-lung-protective-ventilation", "influenza", "influenza-international", "covid-19", "pneumocystis-pneumonia"],
+ "calculators": ["mmrc_dyspnoea", "cat_copd", "gold_group", "bode", "decaf", "bap65", "pack_years", "smoking_index", "fagerstrom", "borg", "curb65", "crb65", "psi", "smartcop", "drip", "isaric_4c", "gap_ipf", "stopbang", "epworth", "lights", "wells_pe", "perc", "geneva", "years_pe", "hestia", "spesi", "pesi", "sf_ratio", "pf_ratio", "aa_gradient", "rox", "hacor", "winters", "berlin_ards", "murray", "cpis", "pbw_ardsnet", "cao2", "rvsp", "mpap", "pvr", "act_asthma"],
+ "advice": [
+  {
+   "id": "inhaler-use",
+   "title": "Using your inhaler",
+   "target": "diet_lifestyle_advice",
+   "text": "Use your inhaler the way you were shown today. Breathe out fully first, seal your lips around the mouthpiece or spacer, breathe in as taught and hold your breath for a few seconds. Use a spacer with a spray inhaler if you were given one, and rinse your mouth after a preventer inhaler. Bring all your inhalers to every visit so we can check how you use them."
+  },
+  {
+   "id": "breathing-danger-signs",
+   "title": "Breathing danger signs",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if you are too breathless to speak in full sentences, your lips or fingers turn blue, you feel drowsy or confused, your reliever inhaler is not helping, or you cough up blood."
+  },
+  {
+   "id": "smoke-and-air",
+   "title": "Smoke, air and vaccines",
+   "target": "diet_lifestyle_advice",
+   "text": "Stop smoking cigarettes, beedis and hookah, and ask us for help to quit. Avoid smoke from wood, dung or crop fires used for cooking: use LPG or another clean fuel if you can, and keep the kitchen well ventilated. Take the vaccines your doctor advises, such as the yearly flu vaccine."
+  },
+  {
+   "id": "tb-cough",
+   "title": "Cough for more than 2 weeks",
+   "target": "follow_up_advice",
+   "text": "If you have a cough for more than 2 weeks, fever, night sweats or weight loss, get your sputum tested for TB. Cover your mouth and nose when you cough and keep rooms airy. If TB is found, take every dose for the full course, even when you feel better."
+  }
+ ],
+ "sources": [
+  { "org": "GOLD", "title": "Global Strategy for the Diagnosis, Management, and Prevention of COPD, 2026 report", "year": 2026, "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf" },
+  { "org": "GINA", "title": "Summary Guide for Asthma Management and Prevention (adults, adolescents and children 6 to 11 years), 2025 update", "year": 2025, "url": "https://ginasthma.org/wp-content/uploads/2025/11/GINA-Summary-Guide-2025-WEB_FINAL-WMS.pdf" },
+  { "org": "BTS / SIGN (NHS Scotland Right Decisions)", "title": "Acute asthma in adults: severity features and admission (British guideline on the management of asthma, SIGN 158)", "year": 2019, "url": "https://www.rightdecisions.scot.nhs.uk/asthma-pathway-bts-nice-sign-sign-244/managing-acute-asthma/management-of-acute-asthma-in-adults/acute-asthma-in-adults/" },
+  { "org": "Central TB Division, MoHFW, Government of India (NTEP)", "title": "Guidelines for Programmatic Management of TB Preventive Treatment in India (four-symptom screen)", "year": 2021, "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/Guidelines-for-Programmatic-Management-of-Tuberculosis-Preventive-Treatment-in-India.pdf" },
+  { "org": "ATS / ERS / JRS / ALAT", "title": "Idiopathic pulmonary fibrosis (an update) and progressive pulmonary fibrosis in adults: an official clinical practice guideline", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9851481/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

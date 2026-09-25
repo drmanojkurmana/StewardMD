@@ -1,0 +1,171 @@
+{
+ "id": "emergency",
+ "label": "Emergency Medicine",
+ "short": "Emergency",
+ "icon": "emergency",
+ "group": "acute",
+ "subject": "emergency",
+ "tools": ["burns-chart"],
+ "sections": [
+  {
+   "id": "triage-arrival",
+   "title": "Triage and arrival",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "triage_category", "label": "Triage category", "type": "select", "opts": ["Red: emergency, immediate care", "Yellow: priority", "Green: non-urgent", "No signs of life on arrival"] },
+    { "id": "arrival_time", "label": "Time of arrival", "type": "text", "hint": "24-hour clock, e.g. 14:35" },
+    { "id": "arrival_mode", "label": "Mode of arrival", "type": "select", "opts": ["Ambulance", "Private vehicle", "Walked in", "Referred from another hospital", "Brought by police"] },
+    { "id": "chief_complaint", "label": "Presenting complaint and duration", "type": "text" },
+    { "id": "informant", "label": "Brought by (name)", "type": "text", "set": "informany_attendant" },
+    { "id": "informant_relation", "label": "Relation to patient", "type": "text", "set": "informant_relation" },
+    { "id": "allergies", "label": "Allergies", "type": "text", "set": "Known_allergies_details" },
+    { "id": "last_oral_intake", "label": "Last oral intake (time)", "type": "text" },
+    { "id": "events", "label": "Events leading to presentation", "type": "textarea" }
+   ]
+  },
+  {
+   "id": "primary-survey",
+   "title": "Primary survey (ABCDE)",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "airway", "label": "A: Airway", "type": "select", "opts": ["Patent, talking", "At risk: noisy breathing, secretions, blood or vomit", "Obstructed", "Maintained with adjunct or positioning", "Supraglottic airway or tracheal tube in place"] },
+    { "id": "breathing", "label": "B: Breathing", "type": "select", "opts": ["Normal", "Fast breathing", "Increased work of breathing", "Reduced or absent air entry on one side", "Wheeze", "Inadequate, needs assisted ventilation"] },
+    { "id": "resp_rate", "label": "Respiratory rate", "type": "number", "unit": "/min", "set": "respiratory" },
+    { "id": "spo2", "label": "SpO2", "type": "number", "unit": "%", "set": "spo2", "hint": "note room air or oxygen flow" },
+    { "id": "circulation", "label": "C: Circulation", "type": "select", "opts": ["Warm, well perfused", "Cold peripheries or slow capillary refill", "Signs of shock", "External bleeding, controlled", "Active external bleeding"] },
+    { "id": "pulse", "label": "Pulse", "type": "number", "unit": "/min", "set": "Pulse" },
+    { "id": "bp_sys", "label": "Systolic BP", "type": "number", "unit": "mmHg", "set": "BP_SYS" },
+    { "id": "bp_dia", "label": "Diastolic BP", "type": "number", "unit": "mmHg", "set": "BP_dia" },
+    { "id": "avpu", "label": "D: Disability (AVPU)", "type": "select", "opts": ["Alert", "Responds to voice", "Responds to pain", "Unresponsive"] },
+    { "id": "pupils", "label": "Pupils", "type": "select", "opts": ["Equal and reacting", "Unequal", "Both fixed and dilated", "Pinpoint"] },
+    { "id": "glucose", "label": "Capillary glucose", "type": "number", "unit": "mg/dL", "set": "grbs" },
+    { "id": "temperature", "label": "E: Exposure, temperature", "type": "number", "unit": "F", "set": "Temp" }
+   ]
+  },
+  {
+   "id": "gcs",
+   "title": "Glasgow Coma Scale",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "gcs_eye", "label": "Eye opening (E)", "type": "select", "opts": ["4 Spontaneous", "3 To sound", "2 To pressure", "1 None", "NT Not testable"] },
+    { "id": "gcs_verbal", "label": "Verbal response (V)", "type": "select", "opts": ["5 Orientated", "4 Confused", "3 Words", "2 Sounds", "1 None", "NT Not testable (e.g. intubated)"] },
+    { "id": "gcs_motor", "label": "Best motor response (M)", "type": "select", "opts": ["6 Obeys commands", "5 Localising", "4 Normal flexion", "3 Abnormal flexion", "2 Extension", "1 None", "NT Not testable"] },
+    { "id": "gcs_total", "label": "GCS total", "type": "number", "unit": "/15", "set": "glasgow_scale", "hint": "record as E, V, M and total, e.g. E3 V4 M6 = 13" }
+   ]
+  },
+  {
+   "id": "efast",
+   "title": "eFAST findings",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "fast_ruq", "label": "Right upper quadrant (hepatorenal)", "type": "select", "opts": ["No free fluid", "Free fluid", "Not assessed"] },
+    { "id": "fast_luq", "label": "Left upper quadrant (splenorenal)", "type": "select", "opts": ["No free fluid", "Free fluid", "Not assessed"] },
+    { "id": "fast_pelvis", "label": "Pelvis", "type": "select", "opts": ["No free fluid", "Free fluid", "Not assessed"] },
+    { "id": "fast_pericardium", "label": "Pericardium (subxiphoid)", "type": "select", "opts": ["No effusion", "Pericardial effusion", "Not assessed"] },
+    { "id": "lung_sliding_right", "label": "Right lung sliding", "type": "select", "opts": ["Present", "Absent (possible pneumothorax)", "Not assessed"] },
+    { "id": "lung_sliding_left", "label": "Left lung sliding", "type": "select", "opts": ["Present", "Absent (possible pneumothorax)", "Not assessed"] },
+    { "id": "pleural_fluid", "label": "Pleural fluid", "type": "select", "opts": ["None", "Right", "Left", "Both sides", "Not assessed"] },
+    { "id": "efast_result", "label": "eFAST overall", "type": "select", "opts": ["Negative", "Positive", "Indeterminate"] },
+    { "id": "efast_time", "label": "Time and operator", "type": "text" }
+   ]
+  },
+  {
+   "id": "trauma-history",
+   "title": "Trauma history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "mechanism", "label": "Mechanism of injury", "type": "select", "opts": ["Road traffic collision: two-wheeler", "Road traffic collision: car or heavy vehicle", "Road traffic collision: pedestrian", "Fall from height", "Fall on level ground", "Assault, blunt", "Assault, sharp or stab", "Gunshot", "Burn", "Crush injury", "Blast", "Animal attack or bite", "Industrial or farm injury"] },
+    { "id": "injury_time", "label": "Date and time of injury", "type": "text", "hint": "e.g. 25/09 at 21:10" },
+    { "id": "injury_place", "label": "Place of injury", "type": "text" },
+    { "id": "protection", "label": "Helmet or seat belt", "type": "select", "opts": ["Helmet worn", "No helmet", "Seat belt worn", "No seat belt", "Not applicable"] },
+    { "id": "fall_height", "label": "Height of fall", "type": "number", "unit": "m" },
+    { "id": "loc", "label": "Loss of consciousness", "type": "select", "opts": ["No", "Yes, brief", "Yes, prolonged", "Not known"] },
+    { "id": "intoxication", "label": "Alcohol or drugs", "type": "select", "opts": ["No", "Smell of alcohol", "Alcohol or drug use reported", "Not known"] },
+    { "id": "cspine", "label": "Cervical spine", "type": "select", "opts": ["Not indicated", "Spinal motion restriction applied", "Cleared clinically", "Imaging needed"] },
+    { "id": "injuries", "label": "Injuries found (head to toe)", "type": "textarea" },
+    { "id": "prehospital_care", "label": "Care before arrival", "type": "text", "hint": "e.g. splint, dressing, IV fluid at another hospital" },
+    { "id": "tetanus", "label": "Tetanus immunisation", "type": "select", "opts": ["Up to date", "Not up to date", "Not known"] }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags: resuscitation area now",
+   "target": "sys_examination",
+   "alert": "Emergency: move to the resuscitation (red) area, call the senior emergency physician, treat ABCDE problems as you find them, and follow the relevant protocol.",
+   "fields": [
+    { "id": "rf_airway", "label": "Airway obstructed or at risk", "type": "check" },
+    { "id": "rf_breathing", "label": "Severe breathing difficulty, cyanosis or low SpO2", "type": "check" },
+    { "id": "rf_shock", "label": "Signs of shock: low BP, cold clammy skin, weak fast pulse", "type": "check" },
+    { "id": "rf_bleeding", "label": "Uncontrolled bleeding", "type": "check" },
+    { "id": "rf_consciousness", "label": "Reduced or falling consciousness, or seizure", "type": "check" },
+    { "id": "rf_focal", "label": "Unequal pupils or new focal weakness", "type": "check" },
+    { "id": "rf_chest_pain", "label": "Chest pain suggesting acute coronary syndrome or aortic dissection", "type": "check" },
+    { "id": "rf_sepsis", "label": "Suspected sepsis", "type": "check" },
+    { "id": "rf_poisoning", "label": "Poisoning or snakebite with abnormal vital signs or reduced consciousness", "type": "check" },
+    { "id": "rf_major_trauma", "label": "High-energy mechanism or penetrating injury to head, neck, chest or abdomen", "type": "check" },
+    { "id": "rf_burn", "label": "Airway burn or large-area burn", "type": "check" }
+   ]
+  },
+  {
+   "id": "mlc-disposition",
+   "title": "Medico-legal status and disposition",
+   "target": "management_plan",
+   "fields": [
+    { "id": "mlc", "label": "Medico-legal case: police intimation needed", "type": "check" },
+    { "id": "mlc_details", "label": "MLC number and police station informed", "type": "text" },
+    { "id": "police_informed_time", "label": "Police informed (date and time)", "type": "text" },
+    { "id": "disposition", "label": "Disposition", "type": "select", "opts": ["Discharged home", "Admitted to ward", "Admitted to ICU or HDU", "Taken to theatre", "Referred to another hospital", "Left against medical advice", "Died in the emergency department"] },
+    { "id": "admitting_team", "label": "Admitting or receiving team", "type": "text" },
+    { "id": "condition_at_disposition", "label": "Condition at disposition", "type": "select", "opts": ["Stable", "Stable, needs close monitoring", "Unstable"] },
+    { "id": "disposition_time", "label": "Time of disposition", "type": "text" },
+    { "id": "handover", "label": "Handover given to", "type": "text" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Complete blood count", "query": "CBC" },
+  { "label": "Random blood sugar", "query": "RBS" },
+  { "label": "Serum creatinine", "query": "creatinine" },
+  { "label": "Serum electrolytes", "query": "electrolytes" },
+  { "label": "Arterial blood gas", "query": "ABG" },
+  { "label": "Serum lactate", "query": "lactate" },
+  { "label": "12-lead ECG", "query": "ECG" },
+  { "label": "hs-troponin", "query": "troponin" },
+  { "label": "Blood culture", "query": "blood culture" },
+  { "label": "Blood group and cross-match", "query": "cross match" },
+  { "label": "Chest X-ray", "query": "X-ray chest" },
+  { "label": "CT head", "query": "CT head" },
+  { "label": "Serum cholinesterase", "query": "cholinesterase" },
+  { "label": "Urine pregnancy test", "query": "urine pregnancy test" }
+ ],
+ "orderSets": [
+  { "id": "trauma-panel", "label": "Trauma panel", "tests": ["CBC", "blood group", "cross match", "PT INR", "APTT", "creatinine", "electrolytes", "ABG", "lactate", "RBS", "urine pregnancy test", "X-ray chest", "X-ray pelvis", "CT head"] },
+  { "id": "chest-pain-panel", "label": "Chest pain panel", "tests": ["ECG", "troponin", "CBC", "creatinine", "electrolytes", "RBS", "PT INR", "X-ray chest"] },
+  { "id": "poisoning-panel", "label": "Poisoning panel", "tests": ["ECG", "ABG", "RBS", "creatinine", "electrolytes", "calcium", "magnesium", "LFT", "serum osmolality", "lactate", "CPK", "cholinesterase", "paracetamol level", "urine pregnancy test"] },
+  { "id": "sepsis-panel", "label": "Sepsis panel", "tests": ["blood culture", "lactate", "CBC", "creatinine", "electrolytes", "LFT", "PT INR", "ABG", "RBS", "urine routine", "urine culture", "X-ray chest"] }
+ ],
+ "protocols": ["trauma-primary-survey", "major-haemorrhage-trauma", "traumatic-brain-injury", "burns-initial-management", "open-fracture", "acute-compartment-syndrome", "adult-cardiac-arrest", "paediatric-cardiac-arrest", "post-cardiac-arrest-care", "rapid-sequence-intubation", "anaphylaxis", "bradycardia-with-pulse", "tachycardia-with-pulse", "sepsis-septic-shock", "stemi", "nste-acs", "acute-aortic-syndrome", "pulmonary-embolism", "acute-heart-failure", "hypertensive-emergency", "acute-ischaemic-stroke", "intracerebral-haemorrhage", "subarachnoid-haemorrhage", "status-epilepticus", "syncope-evaluation", "acute-asthma-adult", "copd-exacerbation", "spontaneous-pneumothorax", "massive-haemoptysis", "diabetic-ketoacidosis", "hypoglycaemia", "hyperkalaemia", "upper-gi-bleeding-nonvariceal", "acute-variceal-bleeding", "poisoning-general-approach", "poisoning-general-approach-international", "organophosphate-poisoning", "aluminium-phosphide-poisoning", "paracetamol-overdose", "opioid-overdose", "methanol-poisoning", "tricyclic-antidepressant-overdose", "snakebite-envenomation", "snakebite-envenomation-international", "scorpion-sting", "heat-stroke", "heat-stroke-international", "accidental-hypothermia", "drowning", "tetanus", "rabies-post-exposure-prophylaxis", "acute-agitation", "alcohol-withdrawal", "self-harm-and-suicide-risk"],
+ "calculators": ["gcs", "gcs_p", "news2", "mews", "qsofa", "sirs", "shock_index", "modified_shock_index", "rts", "canadian_ct_head", "pecarn_head", "nexus_cspine", "canadian_cspine", "nexus_chest", "heart", "edacs", "timi_nstemi", "wells_pe", "perc", "years_pe", "add_rs", "sf_syncope", "canadian_syncope", "ottawa_sah", "rosier", "cpss", "lams", "ottawa_ankle", "ottawa_knee", "curb65", "gbs", "aims65", "anion_gap", "osm", "rumack", "hunter_serotonin", "ciwa", "burn_tbsa", "parkland", "paeds_weight", "ett_size", "four_score", "lund_browder", "lrinec", "pews", "meows"],
+ "advice": [
+  {
+   "id": "head-injury-warning-signs",
+   "title": "After a head injury: when to come back at once",
+   "target": "follow_up_advice",
+   "text": "Come back at once or call an ambulance if the person cannot stay awake, has a fit, has problems with vision, hearing, walking, balance, speaking or understanding, has new numbness or weakness, has clear fluid coming from the ears or nose or bleeding from the ears, or their behaviour changes. Also get help if they keep vomiting or feel dizzy. An adult should stay with them for the first 24 hours, and they should rest and not drink alcohol until better."
+  },
+  {
+   "id": "sepsis-warning-signs",
+   "title": "Signs of serious infection (sepsis)",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if you are breathing very fast, become confused or have slurred speech, have blue, pale or blotchy skin, have a rash that does not fade when you press it, or feel very hot or very cold and shivery."
+  }
+ ],
+ "sources": [
+  { "org": "WHO and ICRC", "title": "Basic emergency care: approach to the acutely ill and injured", "year": 2018, "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured" },
+  { "org": "Society of Critical Care Medicine", "title": "Surviving Sepsis Campaign: international guidelines for management of sepsis and septic shock 2026", "year": 2026, "url": "https://www.sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026" },
+  { "org": "ISCCM", "title": "Position statement: approach to a patient with poisoning in the emergency room and intensive care unit", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/" },
+  { "org": "NHS", "title": "Head injury and concussion", "year": 2025, "url": "https://www.nhs.uk/conditions/head-injury-and-concussion/" },
+  { "org": "NHS", "title": "Sepsis", "year": 2026, "url": "https://www.nhs.uk/conditions/sepsis/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

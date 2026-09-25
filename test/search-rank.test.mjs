@@ -43,7 +43,7 @@ test("rank: sorts by score then category weight then title, applies limit", () =
 });
 
 test("CATS is ordered and every entry has key, label, icon", () => {
-  assert.deepEqual(S.CATS.map(c => c.key), ["tools", "calcs", "drugs", "kb", "proto", "syn", "icd", "settings"]);
+  assert.deepEqual(S.CATS.map(c => c.key), ["tools", "calcs", "drugs", "kb", "proto", "kits", "syn", "icd", "settings"]);
   for (const c of S.CATS) { assert.ok(c.label && c.icon); }
 });
 

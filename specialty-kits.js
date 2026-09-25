@@ -23,7 +23,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var KITS_V = "3217163932b5";
+  var KITS_V = "96ad851442e9";
   var GROWTH_V = "3f0c86f21010";
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -205,6 +205,87 @@
     return out;
   }
 
+  // ---- growth chart: WHO SD curves (-3, -2, 0, +2, +3) with the child's measurements over time ----
+  var CHARTS = { wfa: ["Weight-for-age", "kg", "weight"], lhfa: ["Length/height-for-age", "cm", "lenhei"], wflh: ["Weight-for-length/height", "kg", "weight"],
+    bfa: ["BMI-for-age", "kg/m2", "bmi"], hcfa: ["Head circumference-for-age", "cm", "hc"], hfa07: ["Height-for-age", "cm", "lenhei"], wfa07: ["Weight-for-age", "kg", "weight"], bfa07: ["BMI-for-age", "kg/m2", "bmi"] };
+  function sdValue(p, z) { return Math.abs(p.l) < 1e-12 ? p.m * Math.exp(p.s * z) : p.m * Math.pow(1 + p.l * p.s * z, 1 / p.l); }
+  function growthPoints(t, W) {
+    var dob = parseISO(t.dob); if (!dob) return [];
+    var rows = [{ date: t.asOf || todayISO(), weight: t.weight, lenhei: t.lenhei, hc: t.hc, now: true }].concat((t.hist || []).map(function (h) { return { date: h.date, weight: h.weight, lenhei: h.lenhei, hc: h.hc }; }));
+    return rows.map(function (r) {
+      var d = parseISO(r.date); if (!d) return null;
+      var days = dayDiff(dob, d), w = num(r.weight), lh = num(r.lenhei), hc = num(r.hc);
+      if (days < 0) return null;
+      return { date: d, days: days, months: days / DAYS_PER_MONTH, weight: w, lenhei: lh, hc: hc, bmi: w && lh ? w / Math.pow(lh / 100, 2) : null, now: !!r.now };
+    }).filter(Boolean).sort(function (a, b) { return a.days - b.days; });
+  }
+  function chartKeysFor(months) { return months < 60 ? ["wfa", "lhfa", "wflh", "bfa", "hcfa"] : ["hfa07", "wfa07", "bfa07"]; }
+  /** Pure: series geometry for one chart. Returns { key, xLabel, unit, x0, x1, curves: [{z, pts:[[x,y]...]}], points: [{x,y,label}] } or null. */
+  function growthChart(W, t, key) {
+    if (!W || !CHARTS[key]) return null;
+    var sex = t.sex === "Male" ? "1" : t.sex === "Female" ? "2" : ""; if (!sex) return null;
+    var pts = growthPoints(t, W); if (!pts.length) return null;
+    var def = CHARTS[key], curves = [], x0, x1, xs = [], tab, byX;
+    var maxDays = pts[pts.length - 1].days;
+    if (key === "wflh") {
+      var useL = pts[pts.length - 1].days < 731; tab = useL ? W.wfl : W.wfh; x0 = useL ? 45 : 65; x1 = useL ? 110 : 120;
+      for (var cm = x0; cm <= x1 + 1e-9; cm += 1) xs.push(cm);
+      byX = function (x) { return byCm(tab, sex, x); };
+    } else if (/07$/.test(key)) {
+      tab = W[key]; x0 = 61; x1 = key === "wfa07" ? 120 : 228;
+      for (var mo = x0; mo <= x1; mo += 1) xs.push(mo);
+      byX = function (x) { return byMonth(tab, sex, x); };
+    } else {
+      tab = W[key]; x0 = key === "hcfa" || key === "wfa" || key === "lhfa" || key === "bfa" ? 0 : 0; x1 = maxDays < 731 ? 730 : 1826;
+      for (var dd = x0; dd <= x1; dd += 7) xs.push(dd);
+      if (xs[xs.length - 1] !== x1) xs.push(x1);
+      byX = function (x) { return byDay(tab, sex, Math.round(x)); };
+    }
+    [-3, -2, 0, 2, 3].forEach(function (z) {
+      var line = []; xs.forEach(function (x) { var p = byX(x); if (p) line.push([x, sdValue(p, z)]); });
+      curves.push({ z: z, pts: line });
+    });
+    var points = [];
+    pts.forEach(function (p) {
+      var y = p[def[2]], x;
+      if (y == null || y <= 0) return;
+      if (key === "wflh") { x = p.lenhei; if (x == null) return; } else if (/07$/.test(key)) x = p.months; else x = p.days;
+      if (x < x0 || x > x1) return;
+      points.push({ x: x, y: y, label: fmtDate(p.date) + ": " + r2(y) + " " + def[1] + (p.now ? " (this visit)" : "") });
+    });
+    return { key: key, title: def[0], unit: def[1], xLabel: key === "wflh" ? "Length/height (cm)" : /07$/.test(key) ? "Age (years)" : x1 > 730 ? "Age (years)" : "Age (months)",
+      xUnit: key === "wflh" ? "cm" : /07$/.test(key) ? "month" : "day", x0: x0, x1: x1, curves: curves, points: points };
+  }
+  function niceStep(span, n) { var raw = span / n, p = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10)), f = raw / p; return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * p; }
+  function growthChartSvg(c) {
+    if (!c || !c.curves.length) return "";
+    var L = 38, R = 312, T = 12, B = 186, ys = [];
+    c.curves.forEach(function (cv) { cv.pts.forEach(function (p) { ys.push(p[1]); }); }); c.points.forEach(function (p) { ys.push(p.y); });
+    var y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys), pad = (y1 - y0) * 0.04; y0 = Math.max(0, y0 - pad); y1 += pad;
+    var sx = function (x) { return L + (x - c.x0) / (c.x1 - c.x0) * (R - L); }, sy = function (y) { return B - (y - y0) / (y1 - y0) * (B - T); };
+    var f1 = function (v) { return Math.round(v * 10) / 10; };
+    var g = "", step = niceStep(y1 - y0, 5), v;
+    for (v = Math.ceil(y0 / step) * step; v <= y1 + 1e-9; v += step) g += '<line class="kit-gc-grid" x1="' + L + '" x2="' + R + '" y1="' + f1(sy(v)) + '" y2="' + f1(sy(v)) + '"/><text class="kit-gc-tick" x="' + (L - 4) + '" y="' + f1(sy(v) + 3) + '" text-anchor="end">' + r2(v) + "</text>";
+    // x ticks: months (0 to 24), years (0 to 5, 5 to 19) or cm
+    var xt = [];
+    if (c.xUnit === "cm") { for (v = Math.ceil(c.x0 / 10) * 10; v <= c.x1; v += 10) xt.push([v, String(v)]); }
+    else if (c.xUnit === "month") { for (v = 72; v <= c.x1; v += 24) xt.push([v, String(v / 12)]); }
+    else if (c.x1 <= 730) { for (v = 0; v <= 24; v += 3) xt.push([v * DAYS_PER_MONTH, String(v)]); }
+    else { for (v = 0; v <= 5; v += 1) xt.push([v * 365.25, String(v)]); }
+    xt.forEach(function (x) { if (x[0] < c.x0 - 1e-9 || x[0] > c.x1 + 1e-9) return; g += '<line class="kit-gc-grid" y1="' + T + '" y2="' + B + '" x1="' + f1(sx(x[0])) + '" x2="' + f1(sx(x[0])) + '"/><text class="kit-gc-tick" x="' + f1(sx(x[0])) + '" y="' + (B + 13) + '" text-anchor="middle">' + x[1] + "</text>"; });
+    var curves = c.curves.map(function (cv) {
+      if (!cv.pts.length) return "";
+      var d = cv.pts.map(function (p, i) { return (i ? "L" : "M") + f1(sx(p[0])) + " " + f1(sy(p[1])); }).join("");
+      var last = cv.pts[cv.pts.length - 1];
+      return '<path class="kit-gc-z kit-gc-z' + Math.abs(cv.z) + '" d="' + d + '"/><text class="kit-gc-zl" x="' + (R + 4) + '" y="' + f1(sy(last[1]) + 3) + '">' + (cv.z > 0 ? "+" + cv.z : String(cv.z)) + "</text>";
+    }).join("");
+    var pts = c.points.slice().sort(function (a, b) { return a.x - b.x; });
+    var path = pts.length > 1 ? '<path class="kit-gc-line" d="' + pts.map(function (p, i) { return (i ? "L" : "M") + f1(sx(p.x)) + " " + f1(sy(p.y)); }).join("") + '"/>' : "";
+    var dots = pts.map(function (p) { return '<circle class="kit-gc-pt" cx="' + f1(sx(p.x)) + '" cy="' + f1(sy(p.y)) + '" r="4.5"><title>' + esc(p.label) + "</title></circle>"; }).join("");
+    return '<figure class="kit-gc"><figcaption>' + esc(c.title) + " (WHO), " + esc(c.unit) + '</figcaption><svg viewBox="0 0 340 206" role="img" aria-label="' + esc(c.title + " chart with WHO standard deviation curves and " + pts.length + " measurement" + (pts.length === 1 ? "" : "s")) + '">' +
+      g + curves + path + dots + '<text class="kit-gc-tick" x="' + ((L + R) / 2) + '" y="' + (B + 26) + '" text-anchor="middle">' + esc(c.xLabel) + "</text></svg></figure>";
+  }
+
   // ---- vision: Snellen to logMAR, WHO ICD-11 category from presenting VA in the better eye ----
   var SNELLEN = ["6/5", "6/6", "6/7.5", "6/9", "6/12", "6/18", "6/24", "6/36", "6/60", "5/60", "4/60", "3/60", "2/60", "1/60", "CF", "HM", "PL", "NPL"];
   function snellenDecimal(v) { var m = /^(\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/.exec(String(v || "")); return m ? (+m[1]) / (+m[2]) : (v === "CF" ? 0.014 : v === "HM" ? 0.005 : v === "PL" ? 0.002 : v === "NPL" ? 0 : null); }
@@ -267,6 +348,159 @@
     return { d: d, m: m, f: f, total: d + m + f };
   }
 
+  // ---- reference-data tools (numbers come from kb/specialty-kits/src/data-*.json, each with its source) ----
+  function DATA(name) { return (BUNDLE && BUNDLE.data && BUNDLE.data[name]) || null; }
+  function srcName(d) { var s = d && d.source; if (Array.isArray(s)) s = s[0]; return s ? s.org + (s.year ? " " + s.year : "") : "reference"; }
+  function pad2(n) { return ("0" + n).slice(-2); }
+  function nowLocal() { var d = new Date(); return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()) + "T" + pad2(d.getHours()) + ":" + pad2(d.getMinutes()); }
+
+  // Local anaesthetic maximum dose: min(mg/kg x weight, ceiling); volume from the % strength (1% = 10 mg/mL).
+  function laDrug(t) { var d = DATA("la-doses"); return d ? (d.drugs.filter(function (x) { return x.label === t.drug; })[0] || null) : null; }
+  // Williams and Walker 2014 (and the BNF) dose on ideal body weight, counting nobody above 70 kg. Without this
+  // cap the preparations that have no mg ceiling (with adrenaline, ropivacaine) would grow without limit.
+  var LA_WEIGHT_CAP = 70;
+  function laCalc(t) {
+    var drug = laDrug(t), w0 = num(t.weight); if (!drug || w0 == null || w0 <= 0) return null;
+    var withA = t.adr === "With adrenaline" && !!drug.withAdrenaline, p = withA ? drug.withAdrenaline : drug.plain; if (!p) return null;
+    var w = Math.min(w0, LA_WEIGHT_CAP), byWt = p.mgPerKg != null ? p.mgPerKg * w : null;
+    var mg = byWt == null ? p.maxMg : (p.maxMg != null ? Math.min(byWt, p.maxMg) : byWt); if (mg == null) return null;
+    var pct = num(String(t.strength || "").replace("%", "")); if (pct != null && (drug.strengths || []).indexOf(pct) < 0) pct = null;
+    return { drug: drug, withA: withA, p: p, w: w, wCapped: w0 > LA_WEIGHT_CAP, mg: Math.round(mg * 10) / 10, capped: byWt != null && p.maxMg != null && byWt > p.maxMg, pct: pct, ml: pct ? Math.round(mg / (pct * 10) * 10) / 10 : null };
+  }
+
+  // Burns: Lund and Browder chart (region % by age column) x fraction burnt; Parkland 4 mL x kg x %TBSA.
+  var FRAC = { "1/4": 0.25, "1/2": 0.5, "3/4": 0.75, "All": 1 };
+  function burnsAgeLabel(a) { var n = +a; return isNaN(n) ? String(a) : n === 0 ? "Under 1 year" : "Age " + n + (n === 1 ? " year" : " years"); }
+  function burnsAge(t, d) { return d.ages.map(burnsAgeLabel).indexOf(t.age); }
+  function burnsCalc(t) {
+    var d = DATA("lund-browder"); if (!d) return null; var ai = burnsAge(t, d); if (ai < 0) return null;
+    var tbsa = 0, parts = [];
+    d.regions.forEach(function (r) { var f = FRAC[t["r_" + r.id]]; if (f) { tbsa += r.percent[ai] * f; parts.push(r.label + " " + (t["r_" + r.id] === "All" ? "all" : t["r_" + r.id])); } });
+    tbsa = Math.round(tbsa * 10) / 10;
+    var w = num(t.weight), pk = w && tbsa ? Math.round(4 * w * tbsa) : null;
+    return { tbsa: tbsa, parts: parts, ageLabel: burnsAgeLabel(d.ages[ai]), parkland: pk, first8: pk != null ? Math.round(pk / 2) : null };
+  }
+
+  // CKD: KDIGO G and A categories and the heat-map risk; eGFR by CKD-EPI 2021 (race-free) from creatinine.
+  function ckdEpi2021(scr, age, female) {
+    var k = female ? 0.7 : 0.9, a = female ? -0.241 : -0.302;
+    return 142 * Math.pow(Math.min(scr / k, 1), a) * Math.pow(Math.max(scr / k, 1), -1.2) * Math.pow(0.9938, age) * (female ? 1.012 : 1);
+  }
+  var CKD_RISK = [[0, 1, 2], [0, 1, 2], [1, 2, 3], [2, 3, 3], [3, 3, 3], [3, 3, 3]];
+  var RISK_LABEL = ["Low", "Moderately increased", "High", "Very high"];
+  function ckdCalc(t) {
+    var e = num(t.egfr), computed = false;
+    if (e == null) {
+      var scr = num(t.scr), age = num(t.age);
+      if (scr != null && scr > 0 && age != null && age >= 18 && (t.sex === "Male" || t.sex === "Female")) { e = ckdEpi2021(scr, age, t.sex === "Female"); computed = true; }
+    }
+    if (e == null || e < 0) return null; e = Math.round(e);
+    var gi = e >= 90 ? 0 : e >= 60 ? 1 : e >= 45 ? 2 : e >= 30 ? 3 : e >= 15 ? 4 : 5;
+    var acr = num(t.acr), unit = t.acrUnit === "mg/mmol" ? "mg/mmol" : "mg/g", ai = -1;
+    if (acr != null && acr >= 0) { var lo = unit === "mg/g" ? 30 : 3, hi = unit === "mg/g" ? 300 : 30; ai = acr < lo ? 0 : acr <= hi ? 1 : 2; }
+    return { egfr: e, computed: computed, g: ["G1", "G2", "G3a", "G3b", "G4", "G5"][gi], a: ai >= 0 ? "A" + (ai + 1) : "", acrText: ai >= 0 ? acr + " " + unit : "", risk: ai >= 0 ? CKD_RISK[gi][ai] : null };
+  }
+
+  // 28-joint count: DAS28-ESR, DAS28-CRP (CRP mg/L), CDAI, SDAI (CRP mg/dL). Patient global 0 to 100 mm.
+  var JOINTS = [["shoulder", "Shoulder"], ["elbow", "Elbow"], ["wrist", "Wrist"], ["mcp1", "MCP 1"], ["mcp2", "MCP 2"], ["mcp3", "MCP 3"], ["mcp4", "MCP 4"], ["mcp5", "MCP 5"],
+    ["pip1", "Thumb IP"], ["pip2", "PIP 2"], ["pip3", "PIP 3"], ["pip4", "PIP 4"], ["pip5", "PIP 5"], ["knee", "Knee"]];
+  var JOINT_STATE = { "": "not involved", T: "tender", S: "swollen", TS: "tender and swollen" };
+  var DAS_BANDS = [[2.6, "Remission", 1], [3.2, "Low activity"], [5.1, "Moderate activity"], [1e9, "High activity"]];
+  var CDAI_BANDS = [[2.8, "Remission"], [10, "Low activity"], [22, "Moderate activity"], [1e9, "High activity"]];
+  var SDAI_BANDS = [[3.3, "Remission"], [11, "Low activity"], [26, "Moderate activity"], [1e9, "High activity"]];
+  function activity(v, b) { for (var i = 0; i < b.length; i++) if (b[i][2] ? v < b[i][0] : v <= b[i][0]) return b[i][1]; return b[b.length - 1][1]; }
+  function jointCalc(t) {
+    var j = t.j || {}, tender = [], swollen = [];
+    JOINTS.forEach(function (jt) {
+      ["R", "L"].forEach(function (s) { var c = j[s + ":" + jt[0]] || "", nm = s + " " + jt[1]; if (c.indexOf("T") >= 0) tender.push(nm); if (c.indexOf("S") >= 0) swollen.push(nm); });
+    });
+    var tjc = tender.length, sjc = swollen.length, esr = num(t.esr), crp = num(t.crp), pg = num(t.ptga), eg = num(t.evga);
+    var base = 0.56 * Math.sqrt(tjc) + 0.28 * Math.sqrt(sjc), rd = function (x) { return Math.round(x * 100) / 100; };
+    return {
+      tjc: tjc, sjc: sjc, tender: tender, swollen: swollen,
+      das28esr: esr != null && esr > 0 && pg != null ? rd(base + 0.70 * Math.log(esr) + 0.014 * pg) : null,
+      das28crp: crp != null && crp >= 0 && pg != null ? rd(base + 0.36 * Math.log(crp + 1) + 0.014 * pg + 0.96) : null,
+      cdai: pg != null && eg != null ? rd(tjc + sjc + pg / 10 + eg) : null,
+      sdai: pg != null && eg != null && crp != null ? rd(tjc + sjc + pg / 10 + eg + crp / 10) : null
+    };
+  }
+
+  // Injury body chart: front view (patient's right on the viewer's left) and back view (right on the right).
+  var BODY = [
+    ["f-head", "Head and face", "f", ["e", 60, 22, 14, 17]], ["f-neck", "Front of neck", "f", ["r", 53, 40, 14, 10]],
+    ["f-chest-r", "Right chest", "f", ["r", 36, 51, 24, 34]], ["f-chest-l", "Left chest", "f", ["r", 60, 51, 24, 34]],
+    ["f-abdomen", "Abdomen", "f", ["r", 38, 86, 44, 30]], ["f-pelvis", "Groin and genitalia", "f", ["r", 38, 117, 44, 18]],
+    ["f-uarm-r", "Right upper arm, front", "f", ["r", 20, 52, 14, 42]], ["f-uarm-l", "Left upper arm, front", "f", ["r", 86, 52, 14, 42]],
+    ["f-farm-r", "Right forearm, front", "f", ["r", 16, 96, 14, 38]], ["f-farm-l", "Left forearm, front", "f", ["r", 90, 96, 14, 38]],
+    ["f-hand-r", "Right palm", "f", ["e", 22, 145, 8, 10]], ["f-hand-l", "Left palm", "f", ["e", 98, 145, 8, 10]],
+    ["f-thigh-r", "Right thigh, front", "f", ["r", 40, 137, 19, 56]], ["f-thigh-l", "Left thigh, front", "f", ["r", 61, 137, 19, 56]],
+    ["f-leg-r", "Right shin", "f", ["r", 42, 195, 16, 56]], ["f-leg-l", "Left shin", "f", ["r", 62, 195, 16, 56]],
+    ["f-foot-r", "Right foot", "f", ["e", 50, 259, 10, 6]], ["f-foot-l", "Left foot", "f", ["e", 70, 259, 10, 6]],
+    ["b-head", "Back of head", "b", ["e", 200, 22, 14, 17]], ["b-neck", "Back of neck", "b", ["r", 193, 40, 14, 10]],
+    ["b-back-l", "Left upper back", "b", ["r", 176, 51, 24, 34]], ["b-back-r", "Right upper back", "b", ["r", 200, 51, 24, 34]],
+    ["b-lback", "Lower back", "b", ["r", 178, 86, 44, 30]], ["b-butt", "Buttocks", "b", ["r", 178, 117, 44, 18]],
+    ["b-uarm-l", "Left upper arm, back", "b", ["r", 160, 52, 14, 42]], ["b-uarm-r", "Right upper arm, back", "b", ["r", 226, 52, 14, 42]],
+    ["b-farm-l", "Left forearm, back", "b", ["r", 156, 96, 14, 38]], ["b-farm-r", "Right forearm, back", "b", ["r", 230, 96, 14, 38]],
+    ["b-hand-l", "Back of left hand", "b", ["e", 162, 145, 8, 10]], ["b-hand-r", "Back of right hand", "b", ["e", 238, 145, 8, 10]],
+    ["b-thigh-l", "Left thigh, back", "b", ["r", 180, 137, 19, 56]], ["b-thigh-r", "Right thigh, back", "b", ["r", 201, 137, 19, 56]],
+    ["b-leg-l", "Left calf", "b", ["r", 182, 195, 16, 56]], ["b-leg-r", "Right calf", "b", ["r", 202, 195, 16, 56]],
+    ["b-heel-l", "Left heel", "b", ["e", 190, 259, 10, 6]], ["b-heel-r", "Right heel", "b", ["e", 210, 259, 10, 6]]
+  ];
+  var INJURY_TYPES = ["Abrasion", "Contusion (bruise)", "Laceration", "Incised wound", "Stab wound", "Firearm wound", "Burn or scald", "Bite mark", "Swelling", "Deformity", "Other"];
+  function regionName(id) { var r = BODY.filter(function (x) { return x[0] === id; })[0]; return r ? r[1] : id; }
+
+  // MCCD Form 4: order of Part I, the lowest used line as the underlying cause, no mode of dying there.
+  function mccdCheck(t) {
+    var d = DATA("mccd") || {}, lines = [], warn = [], i, n = (d.partI || []).length || 3;   // Form 4: (a) to (c)
+    for (i = 0; i < n; i++) { var c = String(t["c" + i] || "").trim(); if (c) lines.push({ i: i, c: c, iv: String(t["i" + i] || "").trim() }); }
+    if (!lines.length) return { lines: lines, warnings: warn, underlying: "" };
+    for (i = 0; i < lines.length; i++) if (lines[i].i !== i) { warn.push("Fill Part I from line (a) downward, without gaps."); break; }
+    var low = lines[lines.length - 1], lc = norm(low.c);
+    var bad = (d.modesOfDying || []).concat(d.vagueTerms || []).filter(function (m) { var k = norm(m); return lc.indexOf(k) >= 0 && low.c.length <= String(m).length + 12; });
+    if (bad.length) warn.push("The lowest line (" + low.c + ") is a mode of dying or a vague term. Enter the disease or injury that started the sequence as the underlying cause.");
+    if (lines.some(function (x) { return !x.iv; })) warn.push("Give the approximate interval between onset and death on each line.");
+    return { lines: lines, warnings: warn, underlying: low.c };
+  }
+
+  // WHO Labour Care Guide: alert values per row, and the time-based cervix and second-stage alerts.
+  function lcgAlert(row, v) {
+    var a = row && row.alert; if (!a || v == null || v === "") return false;
+    if (a.is) return a.is.indexOf(String(v)) >= 0;
+    var n = num(v); if (n == null) return false;
+    return (a.below != null && n < a.below) || (a.atOrAbove != null && n >= a.atOrAbove) || (a.above != null && n > a.above) || (a.atOrBelow != null && n <= a.atOrBelow);
+  }
+  function lcgMs(at) { var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(String(at || "")); return m ? new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]).getTime() : null; }
+  function lcgTime(at, short) { var ms_ = lcgMs(at); if (ms_ == null) return "time not set"; var d = new Date(ms_), hm = pad2(d.getHours()) + ":" + pad2(d.getMinutes()); return short ? hm : d.getDate() + " " + MON[d.getMonth()] + " " + hm; }
+  function lcgSorted(t) {
+    return (t.e || []).map(function (x, i) { return { i: i, at: x.at, v: x.v || {}, ss: !!x.ss, ms: lcgMs(x.at) }; })
+      .sort(function (a, b) { return (a.ms == null ? 1e15 : a.ms) - (b.ms == null ? 1e15 : b.ms); });
+  }
+  function lcgLabel(d, id) { var r = null; (d.sections || []).forEach(function (s) { s.rows.forEach(function (x) { if (x.id === id) r = x; }); }); return r ? r.label : id; }
+  function lcgAlerts(t) {
+    var d = DATA("lcg"); if (!d) return [];
+    var e = lcgSorted(t), out = [], hrs = function (a, b) { return Math.round((b - a) / 36e5 * 10) / 10; };
+    e.forEach(function (x) {
+      d.sections.forEach(function (s) { s.rows.forEach(function (r) { var v = x.v[r.id]; if (lcgAlert(r, v)) out.push(r.label + " " + v + (r.unit && !r.alert.is ? " " + r.unit : "") + " at " + lcgTime(x.at, true)); }); });
+    });
+    var cx = e.filter(function (x) { return x.ms != null && num(x.v.cervix) != null; });
+    (d.cervixAlertHours || []).forEach(function (c) {
+      var at = cx.filter(function (x) { return num(x.v.cervix) === c.cm; }); if (at.length < 2) return;
+      var first = at[0], later = cx.filter(function (x) { return x.ms > first.ms && num(x.v.cervix) > c.cm; })[0];
+      var last = at.filter(function (x) { return !later || x.ms < later.ms; }).pop(), span = hrs(first.ms, last.ms);
+      if (span >= c.hours) out.push("cervix at " + c.cm + " cm for " + span + " h (alert at " + c.hours + " h)");
+    });
+    var ss = e.filter(function (x) { return x.ss && x.ms != null; })[0], lastT = e.filter(function (x) { return x.ms != null; }).pop(), s2 = d.secondStage || {};
+    if (ss && lastT && lastT.ms > ss.ms) {
+      var par = num((t.b || {}).parity), lim = par === 0 ? s2.alertHoursNulliparous : s2.alertHoursMultiparous, span2 = hrs(ss.ms, lastT.ms);
+      if (lim != null && par != null && span2 >= lim) out.push("second stage " + span2 + " h without birth recorded (alert at " + lim + " h)");
+    }
+    return out;
+  }
+  function lcgField(f, v, fid) {
+    var map = { number: "number", text: "text", datetime: "datetime", check: "check", select: "select" };
+    return fieldHtml({ id: fid, label: f.label, type: map[f.type] || "text", unit: f.unit, opts: f.options, optLabels: f.optionLabels }, v, "lcg");
+  }
+
   // ---- section text: only what was filled in, in the kit's order ----
   function composeSection(sec, vals) {
     var parts = [];
@@ -299,11 +533,63 @@
       .then(function (g) { GROWTH = g; pendGrowth = null; return g; }, function (e) { pendGrowth = null; throw e; });
     return pendGrowth;
   }
-  var MINE_KEY = "smd_my_specialty";
+  var MINE_KEY = "smd_my_specialty", RECENT_KEY = "smd_kit_recent";
+  // Recently opened kits (ids only, never patient data) so the chip row stays short with 26 kits.
+  function recentKits() { try { var a = JSON.parse((G.localStorage && G.localStorage.getItem(RECENT_KEY)) || "[]"); return Array.isArray(a) ? a.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
+  function pushRecent(id) {
+    try { if (!G.localStorage || !id) return; var a = recentKits().filter(function (x) { return x !== id; }); a.unshift(id); G.localStorage.setItem(RECENT_KEY, JSON.stringify(a.slice(0, 6))); } catch (e) {}
+  }
+  function groupList() { return (BUNDLE && BUNDLE.groups) || []; }
+  // Notifiable diseases (data-notifiable.json): conditions whose keywords appear as whole words in text.
+  function norm(t) { return " " + String(t || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim() + " "; }
+  function notifiable(text) {
+    var d = BUNDLE && BUNDLE.data && BUNDLE.data.notifiable, t = norm(text);
+    if (!d || !d.conditions || t.length < 3) return [];
+    return d.conditions.filter(function (c) { return (c.keywords || []).some(function (kw) { var k = norm(kw); return k.length > 2 && t.indexOf(k) >= 0; }); });
+  }
   function mySpecialty() { try { return (G.localStorage && G.localStorage.getItem(MINE_KEY)) || ""; } catch (e) { return ""; } }
-  function setMySpecialty(id) { try { if (G.localStorage) { if (id) G.localStorage.setItem(MINE_KEY, id); else G.localStorage.removeItem(MINE_KEY); } } catch (e) {} }
+  // src "manual" (Set as my specialty) always wins over "profile" (mapped from the sign-up speciality).
+  function setMySpecialty(id, src) {
+    try {
+      if (!G.localStorage) return;
+      if (id) G.localStorage.setItem(MINE_KEY, id); else G.localStorage.removeItem(MINE_KEY);
+      G.localStorage.setItem(MINE_KEY + "_src", src || "manual");
+    } catch (e) {}
+  }
+  // A1: the profile's speciality (profile-setup.js SPECIALITIES) and degree -> the matching kit.
+  var SPEC_TO_KIT = {
+    "Obstetrics & Gynaecology": "obgyn", "Paediatrics": "paediatrics", "Neonatology": "paediatrics", "Paediatric Cardiology": "paediatrics",
+    "Paediatric Surgery": "paediatrics", "Orthopaedics": "orthopaedics", "Sports Medicine": "orthopaedics", "Trauma Surgery": "emergency",
+    "Ophthalmology": "ophthalmology", "Otorhinolaryngology (ENT)": "ent", "Dermatology, Venereology & Leprosy": "dermatology",
+    "Psychiatry": "psychiatry", "Dentistry / OMFS": "dental", "Anaesthesiology": "anaesthesia", "Critical Care Medicine": "anaesthesia",
+    "Emergency Medicine": "emergency", "General Surgery": "general-surgery", "Surgical Oncology": "general-surgery",
+    "Surgical Gastroenterology": "general-surgery", "Endocrine Surgery": "general-surgery", "Plastic & Reconstructive Surgery": "general-surgery",
+    "Vascular Surgery": "general-surgery", "Cardiothoracic & Vascular Surgery": "cardiology", "Cardiology": "cardiology",
+    "Respiratory Medicine": "pulmonology", "Neurology": "neurology", "Neurosurgery": "neurology", "Nephrology": "nephrology-urology",
+    "Urology": "nephrology-urology", "Endocrinology": "diabetes-endocrine", "Gastroenterology": "gastro-hepatology", "Hepatology": "gastro-hepatology",
+    "Rheumatology": "rheumatology", "Clinical Immunology": "rheumatology", "Geriatric Medicine": "geriatrics", "Palliative Medicine": "palliative",
+    "Physical Medicine & Rehabilitation": "rehabilitation", "Community Medicine": "community-medicine", "Family Medicine": "community-medicine",
+    "Forensic Medicine": "forensic", "Medical Oncology": "cancer-screening", "Radiation Oncology": "cancer-screening"
+  };
+  function kitForProfile(spec, degree) { return SPEC_TO_KIT[String(spec || "").trim()] || (/\b(BDS|MDS)\b/.test(String(degree || "")) ? "dental" : ""); }
+  function onProfile(e) {
+    var d = (e && e.detail) || {}, id = kitForProfile(d.speciality, d.degree);
+    try { if (!id || (G.localStorage && G.localStorage.getItem(MINE_KEY + "_src") === "manual")) return; } catch (x) { return; }
+    if (id !== mySpecialty()) setMySpecialty(id, "profile");
+  }
+  // The MaiK Scribe template for my specialty, when the kit names one (A1: the scribe's default).
+  function myScribe() {
+    var id = mySpecialty(); if (!id) return "";
+    var k = kitById(id); if (k) return k.scribe || "";
+    try { var L = G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.list(); return L && L.some(function (x) { return x.id === id; }) ? id : ""; } catch (e) { return ""; }
+  }
+  function myLabel() {
+    var id = mySpecialty(); if (!id) return ""; var k = kitById(id); if (k) return k.label;
+    for (var s in SPEC_TO_KIT) if (SPEC_TO_KIT[s] === id) return s;
+    return id;
+  }
   function ks(key) {
-    if (!KS[key]) KS[key] = { kitId: "", vals: {}, tools: {} };
+    if (!KS[key]) KS[key] = { kitId: "", vals: {}, tools: {}, picker: false, pickerQ: "" };
     return KS[key];
   }
   // Kit values can be clinical findings: memory only, and dropped when the consult they belong to ends.
@@ -367,10 +653,43 @@
     var hint = below ? '<small class="kit-hint">' + esc(f.hint) + "</small>" : "", ph = below ? "" : esc(f.hint || "");
     if (f.type === "check") return '<label class="kit-check"><input type="checkbox" data-kit-f="' + name + '"' + (val ? " checked" : "") + "><span>" + esc(f.label) + hint + "</span></label>";
     if (f.type === "select") return '<label class="kit-field" for="' + id + '">' + lab + '<select id="' + id + '" class="kit-inp" data-kit-f="' + name + '"><option value=""></option>' +
-      f.opts.map(function (o) { return '<option value="' + esc(o) + '"' + (o === val ? " selected" : "") + ">" + esc(o) + "</option>"; }).join("") + "</select>" + hint + "</label>";
-    if (f.type === "textarea") return '<label class="kit-field wide" for="' + id + '">' + lab + '<textarea id="' + id + '" rows="2" class="kit-inp" data-kit-f="' + name + '" placeholder="' + ph + '">' + esc(val) + "</textarea>" + hint + "</label>";
-    var type = f.type === "number" ? 'type="number" inputmode="decimal" step="any"' : f.type === "date" ? 'type="date"' : 'type="text"';
-    return '<label class="kit-field" for="' + id + '">' + lab + "<input " + type + ' id="' + id + '" class="kit-inp" data-kit-f="' + name + '" value="' + esc(val) + '" placeholder="' + ph + '">' + hint + "</label>";
+      (f.opts || []).map(function (o, oi) { return '<option value="' + esc(o) + '"' + (String(o) === String(val) ? " selected" : "") + ">" + esc(f.optLabels ? f.optLabels[oi] : o) + "</option>"; }).join("") + "</select>" + hint + "</label>";
+    if (f.type === "textarea") return micWrap(f, name, '<label class="kit-field wide" for="' + id + '">' + lab + '<textarea id="' + id + '" rows="2" class="kit-inp" data-kit-f="' + name + '" placeholder="' + ph + '">' + esc(val) + "</textarea>" + hint + "</label>", true);
+    var type = f.type === "number" ? 'type="number" inputmode="decimal" step="any"' : f.type === "date" ? 'type="date"' : f.type === "datetime" ? 'type="datetime-local"' : 'type="text"';
+    var html = '<label class="kit-field" for="' + id + '">' + lab + "<input " + type + ' id="' + id + '" class="kit-inp" data-kit-f="' + name + '" value="' + esc(val) + '" placeholder="' + ph + '">' + hint + "</label>";
+    return f.type === "text" ? micWrap(f, name, html, false) : html;
+  }
+  // E5: a mic beside free-text kit fields, on the app's on-device voice engine (SMD_VOICE, no cloud).
+  function voiceOK() { try { return !!(G.SMD_VOICE && G.SMD_VOICE.listen); } catch (e) { return false; } }
+  function micWrap(f, name, html, wide) {
+    if (!voiceOK()) return html;
+    return '<div class="kit-micwrap' + (wide ? " wide" : "") + '">' + html + '<button type="button" class="kit-mic' + (MIC.name === name ? " on" : "") + '" data-kit-act="mic:' + esc(name) + '" aria-label="Dictate ' + esc(f.label) + '" aria-pressed="' + (MIC.name === name) + '">' + ms(MIC.name === name ? "stop_circle" : "mic") + "</button></div>";
+  }
+  var MIC = { name: "", session: null };
+  function micStop() { if (MIC.session) { try { MIC.session.stop(); } catch (e) {} } MIC.session = null; var n = MIC.name; MIC.name = ""; micUI(n, false); }
+  function micUI(name, on) {
+    if (!D || !name) return;
+    Array.prototype.forEach.call(D.querySelectorAll('[data-kit-act="mic:' + name + '"]'), function (b) { b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); b.innerHTML = ms(on ? "stop_circle" : "mic"); });
+  }
+  function micPut(root, name, text) {
+    var el = root && root.querySelector('[data-kit-f="' + name + '"]'); if (!el || !text) return;
+    var cur = String(el.value || "").trim(); el.value = cur ? cur + (el.tagName === "TEXTAREA" ? "\n" : "; ") + text : text;
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+  function micStart(btn, name, host) {
+    if (MIC.name === name) { micStop(); return; }
+    micStop();
+    if (host.canDictate && !host.canDictate()) { toast("Stop MaiK Scribe first to dictate a single field."); return; }
+    var root = btn.closest("[data-kit-root]"); MIC.name = name; micUI(name, true);
+    toast("Listening. Tap the mic again when you finish.");
+    var done = function (t) {
+      var s = String(t || "").trim(); micStop(); if (!s) { toast("Nothing was heard. Try again, closer to the mic."); return; }
+      if (/[\u0900-\u097F\u0C00-\u0C7F]/.test(s) && G.SMD_AI && G.SMD_AI.translate) {     // the record is in English
+        G.SMD_AI.translate(s).then(function (r) { micPut(root, name, (r && r.text && !r.error) ? r.text : s); }, function () { micPut(root, name, s); });
+      } else micPut(root, name, s);
+    };
+    MIC.session = G.SMD_VOICE.listen({ noCloud: true, onFinal: done, onError: function () { micStop(); toast("Dictation stopped. Try again, or type it."); } });
+    if (!MIC.session) { micStop(); toast("On-device voice could not start. Type it instead."); }
   }
   function addBtn(act, host, label) {
     var dis = !host.canWrite() || !host.ready();
@@ -389,7 +708,7 @@
   // ---- tools ----
   var TOOLS = {
     "pregnancy-dating": {
-      title: "Pregnancy dating", icon: "event",
+      title: "Pregnancy dating", icon: "event", kw: "EDD due date gestational age LMP ultrasound redate ACOG",
       form: function (t) {
         return '<div class="kit-grid">' +
           fieldHtml({ id: "lmp", label: "LMP", type: "date" }, t.lmp, "dating") +
@@ -420,7 +739,7 @@
       sets: function (t) { return t.lmp && parseISO(t.lmp) ? { LMP: fmtDate(parseISO(t.lmp)) } : {}; }
     },
     "growth-who": {
-      title: "Growth (WHO z-scores)", icon: "monitoring",
+      title: "Growth (WHO z-scores)", icon: "monitoring", kw: "growth chart z score centile weight for age height for age BMI MUAC stunting wasting malnutrition WHO",
       form: function (t) {
         return '<div class="kit-grid">' +
           fieldHtml({ id: "sex", label: "Sex", type: "select", opts: ["Male", "Female"] }, t.sex, "growth") +
@@ -431,8 +750,15 @@
           fieldHtml({ id: "measured", label: "Measured", type: "select", opts: ["Lying (length)", "Standing (height)"] }, t.measured, "growth") +
           fieldHtml({ id: "hc", label: "Head circumference", type: "number", unit: "cm" }, t.hc, "growth") +
           fieldHtml({ id: "muac", label: "MUAC", type: "number", unit: "cm" }, t.muac, "growth") +
-          fieldHtml({ id: "oedema", label: "Bilateral pitting oedema", type: "check" }, t.oedema, "growth") + "</div>";
+          fieldHtml({ id: "oedema", label: "Bilateral pitting oedema", type: "check" }, t.oedema, "growth") + "</div>" +
+          (t.hist || []).map(function (h, i) {
+            return '<fieldset class="kit-ms"><legend>Earlier measurement ' + (i + 1) + '</legend><div class="kit-grid">' +
+              fieldHtml({ id: "h:" + i + ":date", label: "Date", type: "date" }, h.date, "growth") + fieldHtml({ id: "h:" + i + ":weight", label: "Weight", type: "number", unit: "kg" }, h.weight, "growth") +
+              fieldHtml({ id: "h:" + i + ":lenhei", label: "Length / height", type: "number", unit: "cm" }, h.lenhei, "growth") + fieldHtml({ id: "h:" + i + ":hc", label: "Head circumference", type: "number", unit: "cm" }, h.hc, "growth") +
+              '</div><div class="kit-row"><button type="button" class="kit-clear" data-kit-act="ghrm:' + i + '">Remove</button></div></fieldset>';
+          }).join("") + '<div class="kit-row"><button type="button" class="kit-clear" data-kit-act="ghadd">' + ms("add") + "Add an earlier measurement for the chart</button></div>";
       },
+      set: function (t, fid, val) { var m = /^h:(\d+):(\w+)$/.exec(fid); if (m) { if (t.hist && t.hist[+m[1]]) t.hist[+m[1]][m[2]] = val; } else t[fid] = val; },
       compute: function (t) {
         if (!GROWTH) return null;
         var dob = parseISO(t.dob), asOf = parseISO(t.asOf) || parseISO(todayISO());
@@ -446,7 +772,7 @@
         return '<p class="kit-muted">' + esc(r.reference) + ", age " + esc(ageText(r.months)) + (r.bmi ? ", BMI " + esc(r.bmi) : "") + ".</p>" +
           '<table class="kit-table"><thead><tr><th>Indicator</th><th>z</th><th>Centile</th><th>Interpretation</th></tr></thead><tbody>' +
           r.rows.map(function (x) { return '<tr class="' + (x.z < -2 || x.z > 2 ? "kit-abn" : "") + '"><td>' + esc(x.label) + "</td><td>" + esc(x.z.toFixed(2)) + "</td><td>" + esc(x.pct) + "</td><td>" + esc(x.cls) + "</td></tr>"; }).join("") +
-          "</tbody></table>" + notes(r.notes);
+          "</tbody></table>" + notes(r.notes) + growthChartBlock(t, r);
       },
       text: function (t) {
         var r = TOOLS["growth-who"].compute(t); if (!r || !r.rows.length) return "";
@@ -457,7 +783,7 @@
       sets: function (t) { var o = {}; if (num(t.weight) != null) o.Weight = String(num(t.weight)); if (num(t.lenhei) != null) o.Height = String(num(t.lenhei)); if (num(t.muac) != null) o.muac_cm = String(num(t.muac)); return o; }
     },
     "milestones": {
-      title: "Developmental milestones (CDC 2022)", icon: "child_care",
+      title: "Developmental milestones (CDC 2022)", icon: "child_care", kw: "developmental milestones delay CDC act early",
       form: function (t) {
         var ages = msAges(); if (!ages.length) return '<p class="kit-muted">Milestone data not loaded.</p>';
         var cur = t.age || String(ages[0].months);
@@ -490,7 +816,7 @@
       out: function () { return ""; }
     },
     "visual-acuity": {
-      title: "Visual acuity and IOP", icon: "visibility",
+      title: "Visual acuity and IOP", icon: "visibility", kw: "visual acuity Snellen logMAR IOP intraocular pressure blindness low vision",
       form: function (t) {
         var sel = function (id, label) { return fieldHtml({ id: id, label: label, type: "select", opts: SNELLEN }, t[id], "vision"); };
         return '<div class="kit-grid">' + sel("re", "Right eye (presenting)") + sel("le", "Left eye (presenting)") + sel("rePh", "Right, pinhole") + sel("lePh", "Left, pinhole") +
@@ -517,7 +843,7 @@
       target: "local_examination"
     },
     "hearing": {
-      title: "Hearing (tuning forks and audiometry)", icon: "hearing",
+      title: "Hearing (tuning forks and audiometry)", icon: "hearing", kw: "hearing loss Rinne Weber audiometry deafness grade",
       form: function (t) {
         var rin = ["Positive", "Negative"];
         return '<div class="kit-grid">' +
@@ -543,7 +869,7 @@
       target: "ENT_exam"
     },
     "odontogram": {
-      title: "Dental chart (FDI) and DMFT", icon: "dentistry",
+      title: "Dental chart (FDI) and DMFT", icon: "dentistry", kw: "dental chart odontogram DMFT caries teeth FDI",
       form: function (t) {
         var prim = !!t.primary, chart = t.chart || {}, teeth = prim ? PRIMARY : PERMANENT, q = teeth.length / 4;
         var cell = function (n) { var c = chart[n] || ""; return '<button type="button" class="kit-tooth' + (c ? " s-" + c : "") + '" data-kit-act="tooth:' + n + '" aria-label="Tooth ' + n + ": " + esc(toothLabel(c)) + '"><small>' + n + "</small><b>" + esc(c || "") + "</b></button>"; };
@@ -571,7 +897,7 @@
       target: "teeth_exam"
     },
     "pasi": {
-      title: "PASI (psoriasis severity)", icon: "dermatology",
+      title: "PASI (psoriasis severity)", icon: "dermatology", kw: "PASI psoriasis area severity index",
       form: function (t) {
         var sc = ["0", "1", "2", "3", "4"];
         return PASI_REGIONS.map(function (r) {
@@ -588,8 +914,251 @@
       },
       text: function (t) { var p = pasi(t); return p == null ? "" : "PASI " + p.toFixed(1) + "."; },
       target: "skin"
+    }    ,
+    "la-dose": {
+      title: "Local anaesthetic maximum dose", icon: "vaccines", reform: ["drug"],
+      kw: "local anaesthetic anesthetic lignocaine lidocaine bupivacaine ropivacaine prilocaine maximum safe dose toxic LAST",
+      form: function (t) {
+        var d = DATA("la-doses"); if (!d) return '<p class="kit-muted">Reference data not loaded.</p>';
+        var cur = laDrug(t);
+        return '<div class="kit-grid">' +
+          fieldHtml({ id: "weight", label: "Ideal body weight", type: "number", unit: "kg", hint: "Doses count nobody above 70 kg." }, t.weight, "la") +
+          fieldHtml({ id: "drug", label: "Drug", type: "select", opts: d.drugs.map(function (x) { return x.label; }) }, t.drug, "la") +
+          fieldHtml({ id: "adr", label: "Preparation", type: "select", opts: cur && cur.withAdrenaline ? ["Plain", "With adrenaline"] : ["Plain"] }, t.adr, "la") +
+          fieldHtml({ id: "strength", label: "Strength", type: "select", opts: ((cur && cur.strengths) || []).map(function (x) { return x + "%"; }) }, t.strength, "la") + "</div>";
+      },
+      out: function (t) {
+        var r = laCalc(t), d = DATA("la-doses");
+        if (!r) return '<p class="kit-muted">Enter the weight and choose the drug.</p>';
+        var basis = (r.p.mgPerKg != null ? r.p.mgPerKg + " mg/kg" : "") + (r.p.maxMg != null ? (r.p.mgPerKg != null ? ", not more than " : "at most ") + r.p.maxMg + " mg" : "");
+        return '<div class="kit-result"><div><span>Maximum dose</span><strong>' + esc(r.mg) + ' mg</strong><small>' + esc(r.drug.label + (r.withA ? " with adrenaline" : ", plain")) + "</small></div>" +
+          (r.ml != null ? "<div><span>Volume</span><strong>" + esc(r.ml) + " mL</strong><small>of " + esc(r.pct) + "% (" + esc(r.pct * 10) + " mg/mL)</small></div>" : "") + "</div>" +
+          '<p class="kit-muted">' + esc(basis) + (r.capped ? ": the weight-based dose is above the ceiling, so the ceiling applies" : "") + (r.wCapped ? ". Worked out for 70 kg, the most the source counts" : "") + ". Source: " + esc(srcName(d)) + ".</p>" + notes(d.notes);
+      },
+      text: function (t) {
+        var r = laCalc(t); if (!r) return "";
+        return "Local anaesthetic maximum dose (" + srcName(DATA("la-doses")) + "): " + r.drug.label + (r.withA ? " with adrenaline" : " plain") + ", dosing weight " + r.w + " kg" + (r.wCapped ? " (capped at 70)" : "") + ": " + r.mg + " mg" +
+          (r.ml != null ? " = " + r.ml + " mL of " + r.pct + "%" : "") + ".";
+      },
+      target: "management_plan"
+    },
+    "burns-chart": {
+      title: "Burns area (Lund and Browder)", icon: "local_fire_department", reform: ["age"],
+      kw: "burns burn tbsa lund browder parkland fluid resuscitation child",
+      form: function (t) {
+        var d = DATA("lund-browder"); if (!d) return '<p class="kit-muted">Reference data not loaded.</p>';
+        var ai = burnsAge(t, d), fr = ["1/4", "1/2", "3/4", "All"];
+        return '<div class="kit-grid">' + fieldHtml({ id: "age", label: "Age column", type: "select", opts: d.ages.map(burnsAgeLabel) }, t.age, "burns") +
+          fieldHtml({ id: "weight", label: "Weight", type: "number", unit: "kg" }, t.weight, "burns") + "</div>" +
+          '<p class="kit-muted">For each region, how much has partial or full thickness burn (not simple redness).</p><div class="kit-grid">' +
+          d.regions.map(function (r) { return fieldHtml({ id: "r_" + r.id, label: r.label + (ai >= 0 ? " (" + r.percent[ai] + "%)" : ""), type: "select", opts: fr }, t["r_" + r.id], "burns"); }).join("") + "</div>";
+      },
+      out: function (t) {
+        var r = burnsCalc(t); if (!r) return '<p class="kit-muted">Choose the age column, then mark the burnt regions.</p>';
+        return '<div class="kit-result"><div><span>Total burn area</span><strong>' + esc(r.tbsa) + '% TBSA</strong><small>Lund and Browder, ' + esc(r.ageLabel) + "</small></div>" +
+          (r.parkland != null ? "<div><span>Parkland estimate</span><strong>" + esc(r.parkland) + " mL / 24 h</strong><small>" + esc(r.first8) + " mL in the first 8 h from the time of burn</small></div>" : "") + "</div>" +
+          notes(["Parkland: 4 mL x kg x % TBSA of crystalloid over 24 hours, half in the first 8 hours from the time of the burn, then titrate to urine output. Check the burns unit's protocol for children and for maintenance fluid."]);
+      },
+      text: function (t) {
+        var r = burnsCalc(t); if (!r) return "";
+        return "Burns (Lund and Browder, " + r.ageLabel + "): " + r.tbsa + "% TBSA partial and full thickness" + (r.parts.length ? " (" + r.parts.join(", ") + ")" : "") +
+          (r.parkland != null ? "; Parkland estimate " + r.parkland + " mL over 24 h, " + r.first8 + " mL in the first 8 h from the time of burn" : "") + ".";
+      },
+      target: "local_examination"
+    },
+    "ckd-grid": {
+      title: "CKD stage (KDIGO)", icon: "grid_view",
+      kw: "ckd chronic kidney disease stage kdigo egfr ckd-epi albuminuria acr heat map",
+      form: function (t) {
+        return '<div class="kit-grid">' +
+          fieldHtml({ id: "egfr", label: "eGFR, if known", type: "number", unit: "mL/min/1.73 m2" }, t.egfr, "ckd") +
+          fieldHtml({ id: "scr", label: "or serum creatinine", type: "number", unit: "mg/dL" }, t.scr, "ckd") +
+          fieldHtml({ id: "age", label: "Age", type: "number", unit: "years" }, t.age, "ckd") +
+          fieldHtml({ id: "sex", label: "Sex", type: "select", opts: ["Male", "Female"] }, t.sex, "ckd") +
+          fieldHtml({ id: "acr", label: "Urine albumin-creatinine ratio", type: "number" }, t.acr, "ckd") +
+          fieldHtml({ id: "acrUnit", label: "ACR unit", type: "select", opts: ["mg/g", "mg/mmol"] }, t.acrUnit, "ckd") + "</div>";
+      },
+      out: function (t) {
+        var r = ckdCalc(t); if (!r) return '<p class="kit-muted">Enter the eGFR (or creatinine with age and sex) and, if known, the ACR.</p>';
+        var G = ["G1", "G2", "G3a", "G3b", "G4", "G5"], A = ["A1", "A2", "A3"];
+        var html = '<div class="kit-tablewrap"><table class="kit-table kit-ckd"><thead><tr><th>eGFR</th>' + A.map(function (a) { return "<th>" + a + "</th>"; }).join("") + "</tr></thead><tbody>" +
+          G.map(function (g, gi) {
+            return "<tr><th>" + g + "</th>" + A.map(function (a, ai) {
+              var risk = CKD_RISK[gi][ai], on = r.g === g && r.a === a;
+              return '<td class="kit-r' + risk + (on ? " kit-here" : "") + '">' + (on ? "Here" : "") + "</td>";
+            }).join("") + "</tr>";
+          }).join("") + "</tbody></table></div>";
+        return '<div class="kit-result"><div><span>Stage</span><strong>' + esc(r.g + (r.a ? " " + r.a : "")) + "</strong><small>eGFR " + esc(r.egfr) + (r.computed ? " (CKD-EPI 2021)" : "") + (r.a ? ", ACR " + esc(r.acrText) : "") + "</small></div>" +
+          (r.a ? "<div><span>Risk</span><strong>" + esc(RISK_LABEL[r.risk]) + "</strong><small>KDIGO heat map</small></div>" : "") + "</div>" +
+          (r.a ? html : "") + notes(["CKD needs abnormal kidney markers or eGFR below 60 for more than 3 months: confirm with repeat tests before labelling.", "Legend: green low, yellow moderately increased, orange high, red very high risk."]);
+      },
+      text: function (t) {
+        var r = ckdCalc(t); if (!r) return "";
+        return "CKD staging (KDIGO): eGFR " + r.egfr + " mL/min/1.73 m2" + (r.computed ? " (CKD-EPI 2021)" : "") + " (" + r.g + ")" + (r.a ? ", ACR " + r.acrText + " (" + r.a + "): " + RISK_LABEL[r.risk].toLowerCase() + " risk" : "") + ".";
+      },
+      target: "Renal_details"
+    },
+    "joint-chart": {
+      title: "28-joint count (DAS28, CDAI, SDAI)", icon: "back_hand",
+      kw: "das28 cdai sdai 28 joint count tender swollen rheumatoid arthritis disease activity",
+      form: function (t) {
+        var j = t.j || {};
+        var cell = function (side, jt) {
+          var key = side + ":" + jt[0], c = j[key] || "";
+          return '<td><button type="button" class="kit-joint' + (c ? " s-" + c : "") + '" data-kit-act="joint:' + key + '" aria-label="' + esc((side === "R" ? "Right " : "Left ") + jt[1] + ": " + JOINT_STATE[c]) + '">' + esc(c === "TS" ? "T+S" : c || " ") + "</button></td>";
+        };
+        return '<div class="kit-tablewrap"><table class="kit-table kit-joints"><thead><tr><th>Joint</th><th>Right</th><th>Left</th></tr></thead><tbody>' +
+          JOINTS.map(function (jt) { return "<tr><th>" + esc(jt[1]) + "</th>" + cell("R", jt) + cell("L", jt) + "</tr>"; }).join("") + "</tbody></table></div>" +
+          '<p class="kit-muted">Tap a joint to cycle: tender (T), swollen (S), both, none.</p><div class="kit-grid">' +
+          fieldHtml({ id: "esr", label: "ESR", type: "number", unit: "mm/h" }, t.esr, "joints") +
+          fieldHtml({ id: "crp", label: "CRP", type: "number", unit: "mg/L" }, t.crp, "joints") +
+          fieldHtml({ id: "ptga", label: "Patient global", type: "number", unit: "0 to 100 mm" }, t.ptga, "joints") +
+          fieldHtml({ id: "evga", label: "Evaluator global", type: "number", unit: "0 to 10" }, t.evga, "joints") + "</div>";
+      },
+      out: function (t) {
+        var r = jointCalc(t);
+        var rows = [["DAS28-ESR", r.das28esr, DAS_BANDS], ["DAS28-CRP", r.das28crp, DAS_BANDS], ["CDAI", r.cdai, CDAI_BANDS], ["SDAI", r.sdai, SDAI_BANDS]].filter(function (x) { return x[1] != null; });
+        return '<p class="kit-strong">Tender ' + r.tjc + ", swollen " + r.sjc + " of 28</p>" + (rows.length ? '<table class="kit-table"><thead><tr><th>Score</th><th>Value</th><th>Activity</th></tr></thead><tbody>' +
+          rows.map(function (x) { return "<tr><td>" + x[0] + "</td><td>" + esc(x[1]) + "</td><td>" + esc(activity(x[1], x[2])) + "</td></tr>"; }).join("") + "</tbody></table>" : '<p class="kit-muted">Add ESR or CRP and the global assessments for the scores.</p>');
+      },
+      text: function (t) {
+        var r = jointCalc(t); if (!r.tjc && !r.sjc && r.das28esr == null && r.cdai == null) return "";
+        var parts = ["tender " + r.tjc + (r.tender.length ? " (" + r.tender.join(", ") + ")" : ""), "swollen " + r.sjc + (r.swollen.length ? " (" + r.swollen.join(", ") + ")" : "")];
+        [["DAS28-ESR", r.das28esr, DAS_BANDS], ["DAS28-CRP", r.das28crp, DAS_BANDS], ["CDAI", r.cdai, CDAI_BANDS], ["SDAI", r.sdai, SDAI_BANDS]].forEach(function (x) { if (x[1] != null) parts.push(x[0] + " " + x[1] + " (" + activity(x[1], x[2]).toLowerCase() + ")"); });
+        return "28-joint count: " + parts.join("; ") + ".";
+      },
+      target: "musculo_skeletal_system"
+    },
+    "body-chart": {
+      title: "Injury body chart", icon: "accessibility",
+      kw: "injury chart body diagram mlc medico legal wound abrasion laceration contusion",
+      set: function (t, fid, val) { var m = /^inj:(\d+):(\w+)$/.exec(fid); if (m && t.inj && t.inj[+m[1]]) t.inj[+m[1]][m[2]] = val; },
+      form: function (t) {
+        var inj = t.inj || [], marks = {};
+        inj.forEach(function (x, i) { (marks[x.r] = marks[x.r] || []).push(i + 1); });
+        var shape = function (r) {
+          var c = r[3], m = marks[r[0]], cls = "kit-bz" + (m ? " on" : ""), a = 'data-kit-act="bodyreg:' + r[0] + '" role="button" tabindex="0" aria-label="' + esc(r[1] + (m ? ", injuries " + m.join(", ") : "")) + '"';
+          var el = c[0] === "e" ? '<ellipse class="' + cls + '" ' + a + ' cx="' + c[1] + '" cy="' + c[2] + '" rx="' + c[3] + '" ry="' + c[4] + '"><title>' + esc(r[1]) + "</title></ellipse>"
+            : '<rect class="' + cls + '" ' + a + ' x="' + c[1] + '" y="' + c[2] + '" width="' + c[3] + '" height="' + c[4] + '" rx="4"><title>' + esc(r[1]) + "</title></rect>";
+          var cx = c[0] === "e" ? c[1] : c[1] + c[3] / 2, cy = c[0] === "e" ? c[2] : c[2] + c[4] / 2;
+          return el + (m ? '<text class="kit-bzn" x="' + cx + '" y="' + (cy + 4) + '" text-anchor="middle">' + m.join(",") + "</text>" : "");
+        };
+        return '<p class="kit-muted">Tap the region of each injury. Front view on the left, back view on the right; the patient\'s right is marked R.</p>' +
+          '<svg class="kit-body" viewBox="0 0 270 290" role="group" aria-label="Body chart">' +
+          '<text class="kit-bzl" x="60" y="286" text-anchor="middle">Front</text><text class="kit-bzl" x="200" y="286" text-anchor="middle">Back</text>' +
+          '<text class="kit-bzl" x="8" y="60">R</text><text class="kit-bzl" x="104" y="60">L</text><text class="kit-bzl" x="148" y="60">L</text><text class="kit-bzl" x="246" y="60">R</text>' +
+          BODY.map(shape).join("") + "</svg>" +
+          inj.map(function (x, i) {
+            return '<fieldset class="kit-ms"><legend>Injury ' + (i + 1) + ": " + esc(regionName(x.r)) + '</legend><div class="kit-grid">' +
+              fieldHtml({ id: "inj:" + i + ":type", label: "Type", type: "select", opts: INJURY_TYPES }, x.type, "body") +
+              fieldHtml({ id: "inj:" + i + ":size", label: "Size", type: "text", hint: "e.g. 4 x 1 cm" }, x.size, "body") +
+              fieldHtml({ id: "inj:" + i + ":desc", label: "Description", type: "textarea", hint: "shape, margins, colour, depth, direction, surroundings" }, x.desc, "body") +
+              '</div><div class="kit-row"><button type="button" class="kit-clear" data-kit-act="bodyrm:' + i + '">Remove injury ' + (i + 1) + "</button></div></fieldset>";
+          }).join("");
+      },
+      out: function (t) {
+        var n = (t.inj || []).length;
+        return n ? '<p class="kit-strong">' + n + " injur" + (n > 1 ? "ies" : "y") + " charted</p>" + notes(["Describe what you see. The chart records findings only; any opinion on the nature or cause of an injury is yours to write."]) : '<p class="kit-muted">No injuries charted yet.</p>';
+      },
+      text: function (t) {
+        var list = (t.inj || []).map(function (x, i) { return (i + 1) + ". " + [x.type || "Injury", x.size, regionName(x.r)].filter(Boolean).join(", ") + (x.desc ? ": " + String(x.desc).trim() : ""); });
+        return list.length ? "Injuries (body chart): " + list.join("; ") + "." : "";
+      },
+      target: "local_examination"
+    },
+    "mccd": {
+      title: "Cause of death (MCCD Form 4)", icon: "description",
+      kw: "mccd death certificate cause of death form 4 underlying cause icd",
+      form: function (t) {
+        var d = DATA("mccd"); if (!d) return '<p class="kit-muted">Reference data not loaded.</p>';
+        var labels = d.partI || [];
+        return '<p class="kit-muted">Part I: one condition per line, the immediate cause on line (a), the underlying cause on the lowest line used. Part II: other significant conditions.</p>' +
+          labels.map(function (lab, i) {
+            return '<div class="kit-grid">' + fieldHtml({ id: "c" + i, label: lab, type: "text" }, t["c" + i], "mccd") +
+              fieldHtml({ id: "i" + i, label: "Interval from onset to death", type: "text", hint: "e.g. 2 days" }, t["i" + i], "mccd") + "</div>";
+          }).join("") + '<div class="kit-grid">' +
+          fieldHtml({ id: "p2", label: "Part II: other significant conditions", type: "textarea" }, t.p2, "mccd") +
+          fieldHtml({ id: "manner", label: "Manner of death", type: "select", opts: d.manner || [] }, t.manner, "mccd") +
+          ((d.maternal || []).length ? fieldHtml({ id: "maternal", label: "If a woman: pregnancy", type: "select", opts: d.maternal }, t.maternal, "mccd") : "") + "</div>" +
+          '<div class="kit-row"><button type="button" class="kit-pill" data-kit-act="icd">' + ms("search") + "Look up ICD codes</button></div>";
+      },
+      out: function (t) {
+        var r = mccdCheck(t), d = DATA("mccd") || {};
+        if (!r.lines.length) return '<p class="kit-muted">Start with line (a), the disease or condition directly leading to death.</p>' + notes(d.tips);
+        return '<p class="kit-strong">Underlying cause: ' + esc(r.underlying) + "</p>" + notes(r.warnings) + (r.warnings.length ? "" : notes(d.tips));
+      },
+      text: function (t) {
+        var r = mccdCheck(t), d = DATA("mccd") || {}; if (!r.lines.length) return "";
+        var s = "MCCD (Form 4) draft: Part I " + r.lines.map(function (x) { return "(" + "abcd".charAt(x.i) + ") " + x.c + (x.iv ? " (" + x.iv + ")" : ""); }).join("; ");
+        if (t.p2 && String(t.p2).trim()) s += "; Part II " + String(t.p2).trim();
+        if (t.manner) s += "; manner: " + t.manner;
+        if (t.maternal) s += "; pregnancy: " + t.maternal;
+        return s + ".";
+      },
+      target: "management_plan"
+    },
+    "labour-care": {
+      title: "WHO Labour Care Guide", icon: "monitor_heart",
+      kw: "labour care guide lcg partograph active labour fetal heart cervix alert",
+      set: function (t, fid, val) {
+        var m = /^e:(\d+):(\w+)$/.exec(fid), b = /^b:(\w+)$/.exec(fid);
+        if (b) { t.b = t.b || {}; t.b[b[1]] = val; return; }
+        if (m && t.e && t.e[+m[1]]) { var e = t.e[+m[1]]; if (m[2] === "at") e.at = val; else if (m[2] === "ss") e.ss = !!val; else { e.v = e.v || {}; e.v[m[2]] = val; } }
+      },
+      form: function (t) {
+        var d = DATA("lcg"); if (!d) return '<p class="kit-muted">Reference data not loaded.</p>';
+        var b = t.b || {}, e = t.e || [], cur = t.cur != null && e[t.cur] ? t.cur : e.length - 1;
+        var base = '<div class="kit-grid">' + d.baseline.map(function (f) { return lcgField(f, b[f.id], "b:" + f.id); }).join("") + "</div>";
+        var edit = "";
+        if (cur >= 0) {
+          var en = e[cur];
+          edit = '<fieldset class="kit-ms"><legend>Observations at ' + esc(lcgTime(en.at)) + '</legend><div class="kit-grid">' +
+            lcgField({ id: "at", label: "Time", type: "datetime" }, en.at, "e:" + cur + ":at") +
+            lcgField({ id: "ss", label: "Second stage (pushing) began at this time", type: "check" }, en.ss, "e:" + cur + ":ss") + "</div>" +
+            d.sections.map(function (s) {
+              return "<h4 class=\"kit-lcg-h\">" + esc(s.label) + '</h4><div class="kit-grid">' + s.rows.map(function (r) { return lcgField(r, (en.v || {})[r.id], "e:" + cur + ":" + r.id); }).join("") + "</div>";
+            }).join("") + '<div class="kit-row"><button type="button" class="kit-clear" data-kit-act="lcgdel:' + cur + '">Delete this time point</button></div></fieldset>';
+        }
+        return '<p class="kit-muted">Start at active first stage (cervix 5 cm or more). Add a time point for each set of observations; alert values are highlighted.</p>' + base +
+          '<div class="kit-row"><button type="button" class="kit-add" data-kit-act="lcgadd">' + ms("more_time") + "Add time point</button></div>" + edit;
+      },
+      out: function (t) {
+        var d = DATA("lcg"); if (!d) return "";
+        var e = lcgSorted(t);
+        if (!e.length) return '<p class="kit-muted">No observations yet.</p>' + notes(d.notes);
+        var cur = t.cur != null && t.e[t.cur] ? t.cur : t.e.length - 1;
+        var head = "<tr><th>Time</th>" + e.map(function (x) { return '<th><button type="button" class="kit-lcg-t' + (x.i === cur ? " on" : "") + '" data-kit-act="lcgsel:' + x.i + '">' + esc(lcgTime(x.at, true)) + "</button></th>"; }).join("") + "</tr>";
+        var body = d.sections.map(function (s) {
+          return '<tr class="kit-lcg-sec"><th colspan="' + (e.length + 1) + '">' + esc(s.label) + "</th></tr>" + s.rows.map(function (r) {
+            return "<tr><th>" + esc(r.label) + "</th>" + e.map(function (x) {
+              var v = (x.v || {})[r.id], a = lcgAlert(r, v);
+              return '<td class="' + (a ? "kit-alertcell" : "") + '">' + esc(v == null ? "" : v) + "</td>";
+            }).join("") + "</tr>";
+          }).join("");
+        }).join("");
+        var al = lcgAlerts(t);
+        return (al.length ? '<div class="kit-alert" role="alert">' + ms("warning") + "<span><b>" + al.length + " alert" + (al.length > 1 ? "s" : "") + ":</b> " + esc(al.join("; ")) + ". Reassess and record the plan (shared decision-making).</span></div>" : "") +
+          '<div class="kit-tablewrap"><table class="kit-table kit-lcg"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>" + notes(d.notes);
+      },
+      text: function (t) {
+        var d = DATA("lcg"), e = lcgSorted(t); if (!d || !e.length) return "";
+        var b = t.b || {}, last = e[e.length - 1], lv = last.v || {}, show = [];
+        [["cervix", " cm"], ["fhr", " bpm"], ["contractions", " per 10 min"], ["sbp", ""], ["pulse", " bpm"]].forEach(function (k) { if (lv[k[0]] != null && lv[k[0]] !== "") show.push(lcgLabel(d, k[0]).toLowerCase() + " " + lv[k[0]] + k[1]); });
+        var al = lcgAlerts(t);
+        return "Labour care (WHO LCG): " + (b.activeLabour ? "active labour from " + lcgTime(b.activeLabour) + "; " : "") + (b.parity !== undefined && b.parity !== "" ? "parity " + b.parity + "; " : "") +
+          e.length + " time points, last " + lcgTime(last.at) + (show.length ? ": " + show.join(", ") : "") + (al.length ? "; alerts: " + al.join("; ") : "; no alerts") + ".";
+      },
+      target: "History_present_illness"
     }
   };
+  function growthChartBlock(t, r) {
+    var keys = chartKeysFor(r.months), key = keys.indexOf(t.chart) >= 0 ? t.chart : keys[0];
+    var c = growthChart(GROWTH, t, key); if (!c) return "";
+    return '<div class="kit-row kit-gc-pick" role="group" aria-label="Chart">' + keys.map(function (k) {
+      return '<button type="button" class="kit-seg' + (k === key ? " on" : "") + '" data-kit-act="gchart:' + k + '" aria-pressed="' + (k === key) + '">' + esc(CHARTS[k][0].replace("-for-", " for ")) + "</button>";
+    }).join("") + "</div>" + growthChartSvg(c) +
+      (c.points.length ? '<table class="kit-table"><thead><tr><th>Date</th><th>' + esc(CHARTS[key][0].split("-for-")[0]) + "</th></tr></thead><tbody>" + c.points.map(function (p) { var s = p.label.split(": "); return "<tr><td>" + esc(s[0]) + "</td><td>" + esc(s.slice(1).join(": ")) + "</td></tr>"; }).join("") + "</tbody></table>" : "");
+  }
   function notes(list) { return (list && list.length) ? '<ul class="kit-notes">' + list.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : ""; }
   function ageText(months) { var y = Math.floor(months / 12), m = Math.floor(months - y * 12); return (y ? y + " y " : "") + m + " m"; }
   function msAges() { return (BUNDLE && BUNDLE.data && BUNDLE.data.milestones && BUNDLE.data.milestones.ages) || []; }
@@ -619,16 +1188,22 @@
     if (!k.kitId) k.kitId = (kitById(ctx.defaultKit) && ctx.defaultKit) || (kitById(mySpecialty()) && mySpecialty()) || (list[0] && list[0].id) || "";
     var kit = kitById(k.kitId);
     var mine = mySpecialty();
-    var chips = '<div class="kit-chips" role="group" aria-label="Specialty">' + list.map(function (x) {
-      return '<button type="button" class="kit-chip' + (x.id === k.kitId ? " on" : "") + '" data-kit-act="kit:' + esc(x.id) + '" aria-pressed="' + (x.id === k.kitId) + '">' + esc(x.short) + (x.id === mine ? ' <span class="kit-star" aria-label="my specialty">' + ms("star") + "</span>" : "") + "</button>";
-    }).join("") + "</div>";
-    if (!kit) return chips + '<div class="kit-empty">No kit selected.</div>';
+    var chips = chipRow(k, mine) + (k.picker ? pickerHtml(k, mine) : "");
+    if (!kit) return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + '<div class="kit-empty">No kit selected.</div></div>';
     var blocked = host.kind === "opd" && !host.canWrite() ? '<div class="kit-status">' + ms("lock") + "<span>" + esc(writeNote(host)) + "</span></div>"
       : host.kind === "opd" && !host.ready() ? '<div class="kit-status">' + ms("hourglass_top") + "<span>" + esc(host.readyNote ? host.readyNote() : "Loading the assessment…") + "</span></div>" : "";
     var head = '<div class="kit-head"><div><span class="kit-kicker">Specialty kit</span><h2>' + esc(kit.label) + "</h2></div>" +
       (kit.id === mine ? '<span class="kit-mine">' + ms("star") + "My specialty</span>" : '<button type="button" class="kit-link" data-kit-act="mine:' + esc(kit.id) + '">Set as my specialty</button>') + "</div>";
     var tools = (kit.tools || []).map(function (id) { return toolHtml(id, k, host); }).join("");
+    var docs = (G.SMD_DOCS && G.SMD_DOCS.on && G.SMD_DOCS.on()) ? '<button type="button" class="kit-pill kit-docs" data-kit-act="docs">' + ms("description") +
+      (host.kind === "opd" ? "Certificate, referral letter, consent form or handout for this patient" : "Certificates, consent forms and handouts") + "</button>" : "";
     var secs = (kit.sections || []).map(function (s) { return sectionHtml(kit, s, k, host); }).join("");
+    var osets = (host.queueTests && (kit.orderSets || []).length) ? '<section class="kit-card"><h3>' + ms("playlist_add_check") + "Order sets</h3>" +
+      '<p class="kit-muted">Queues the tests on the Investigations tab; you still search and order each one.</p>' +
+      kit.orderSets.map(function (o) {
+        return '<div class="kit-oset"><div><b>' + esc(o.label) + "</b><p>" + esc(o.tests.join(", ")) + "</p></div>" +
+          '<button type="button" class="kit-pill" data-kit-act="oset:' + esc(o.id) + '">' + ms("playlist_add") + "Queue " + o.tests.length + " tests</button></div>";
+      }).join("") + "</section>" : "";
     var inv = (host.investigate && (kit.investigations || []).length) ? '<section class="kit-card"><h3>' + ms("biotech") + "Investigations</h3><p class=\"kit-muted\">Opens the investigation search with the test name filled in.</p><div class=\"kit-links\">" +
       kit.investigations.map(function (x, i) { return '<button type="button" class="kit-pill" data-kit-act="inv:' + i + '">' + esc(x.label) + "</button>"; }).join("") + "</div></section>" : "";
     var protos = (kit.protocols || []).length ? '<section class="kit-card"><h3>' + ms("account_tree") + "Protocols</h3><div class=\"kit-links\">" +
@@ -641,13 +1216,45 @@
     var src = '<section class="kit-card kit-src"><h3>' + ms("menu_book") + "Sources</h3><ol>" + (kit.sources || []).map(function (s) {
       return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + "</a><span>" + esc(s.org) + " · " + esc(s.year) + "</span></li>";
     }).join("") + '</ol><p class="kit-muted">Decision support only. The kit adds text for you to check and edit; it never saves, signs or orders anything.</p></section>';
-    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + head + reviewNote(kit, host) + blocked + tools + secs + adv + inv + protos + calcs + src + "</div>";
+    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + head + reviewNote(kit, host) + blocked + docs + tools + secs + adv + osets + inv + protos + calcs + src + "</div>";
+  }
+  // Quick chips: the current kit, my specialty and recent kits (at most 5), then "All kits".
+  function chipRow(k, mine) {
+    var ids = [k.kitId, mine].concat(recentKits()), seen = {}, quick = [];
+    ids.forEach(function (id) { if (id && !seen[id] && kitById(id) && quick.length < 5) { seen[id] = 1; quick.push(kitById(id)); } });
+    if (quick.length < 3) kitList().forEach(function (x) { if (!seen[x.id] && quick.length < 3) { seen[x.id] = 1; quick.push(x); } });
+    return '<div class="kit-chips" role="group" aria-label="Specialty">' + quick.map(function (x) {
+      return '<button type="button" class="kit-chip' + (x.id === k.kitId ? " on" : "") + '" data-kit-act="kit:' + esc(x.id) + '" aria-pressed="' + (x.id === k.kitId) + '">' + esc(x.short) + (x.id === mine ? ' <span class="kit-star" aria-label="my specialty">' + ms("star") + "</span>" : "") + "</button>";
+    }).join("") + '<button type="button" class="kit-chip kit-all' + (k.picker ? " on" : "") + '" data-kit-act="picker" aria-expanded="' + !!k.picker + '">' + ms("apps") + "All " + kitList().length + " kits</button></div>";
+  }
+  function pickerList(k, mine) {
+    var q = String(k.pickerQ || "").toLowerCase().trim(), groups = groupList(), html = "";
+    // Matches the kit name and what its tools do, so "burns" finds Emergency and "partograph" O&G.
+    var match = function (x) {
+      if (!q) return true;
+      var hay = x.label + " " + x.short + " " + x.id + " " + (x.tools || []).map(function (id) { var T = TOOLS[id]; return T ? T.title + " " + (T.kw || "") : ""; }).join(" ");
+      return hay.toLowerCase().indexOf(q) >= 0;
+    };
+    groups.forEach(function (g) {
+      var items = kitList().filter(function (x) { return x.group === g[0] && match(x); });
+      if (!items.length) return;
+      html += '<div class="kit-pgroup"><h4>' + esc(g[1]) + '</h4><div class="kit-links">' + items.map(function (x) {
+        return '<button type="button" class="kit-pill' + (x.id === k.kitId ? " on" : "") + '" data-kit-act="kit:' + esc(x.id) + '">' + ms(x.icon) + esc(x.label) + (x.id === mine ? " " + ms("star") : "") + "</button>";
+      }).join("") + "</div></div>";
+    });
+    return html || '<p class="kit-muted">No kit matches "' + esc(k.pickerQ) + '".</p>';
+  }
+  function pickerHtml(k, mine) {
+    return '<div class="kit-picker" data-kit-picker><label class="kit-field wide" for="kit_picker_q"><span class="kit-fl">Find a specialty kit</span>' +
+      '<input id="kit_picker_q" type="search" class="kit-inp" data-kit-f="picker:q" value="' + esc(k.pickerQ || "") + '" placeholder="e.g. cardiology, burns, palliative" autocomplete="off"></label>' +
+      '<div data-kit-pickerlist>' + pickerList(k, mine) + "</div></div>";
   }
   function protoTitle(id) {
     try { var idx = G.SMD_KBPROTO && G.SMD_KBPROTO.index && G.SMD_KBPROTO.index(); if (idx) { var p = idx.protocols.filter(function (x) { return x.id === id; })[0]; if (p) return p.title; } } catch (e) {}
     return id.replace(/-/g, " ").replace(/^./, function (c) { return c.toUpperCase(); });
   }
-  function calcTitle(id) { try { var c = G.MEDCALC && G.MEDCALC.get && G.MEDCALC.get(id); if (c && c.title) return c.title; } catch (e) {} return id; }
+  // Some older calculator titles carry em or en dashes; the kit shows them without (app text rule).
+  function calcTitle(id) { try { var c = G.MEDCALC && G.MEDCALC.get && G.MEDCALC.get(id); if (c && c.title) return String(c.title).replace(/\s+[\u2013\u2014]\s+/g, ", ").replace(/[\u2013\u2014]/g, "-"); } catch (e) {} return id; }
 
   function refreshAllTools() {
     if (!D) return;
@@ -677,10 +1284,15 @@
       el.innerHTML = '<div class="kit-sheet"><header class="kit-sheet-top"><button type="button" class="kit-x" data-kit-act="close" aria-label="Close specialty kit">' + ms("close") + '</button><h1>Specialty kit</h1><span></span></header><div class="kit-sheet-body"></div></div>';
       D.body.appendChild(el);
     }
-    if (opts && opts.kit) ks("standalone").kitId = opts.kit;
+    if (opts && opts.kit && kitById(opts.kit)) { ks("standalone").kitId = opts.kit; pushRecent(opts.kit); }
+    else if (opts && opts.kit) ks("standalone").kitId = opts.kit;     // bundle not loaded yet: kitBody resolves it
     el.classList.add("on"); D.body.style.overflow = "hidden"; D.documentElement.classList.add("kit-lock");
     renderSheet();
     var b = el.querySelector(".kit-sheet-body"); if (b) b.scrollTop = 0;
+    if (opts && opts.tool) {                 // deep link to a tool (Universal Search, MaiK)
+      var go = function () { var t = el.querySelector('[data-kit-tool="' + opts.tool + '"]'); if (t && t.scrollIntoView) t.scrollIntoView({ block: "start" }); return !!t; };
+      if (!go()) loadKits().then(function () { renderSheet(); go(); }, function () {});
+    }
   }
   function close() { var el = sheetEl(); if (el) el.classList.remove("on"); if (D) { D.body.style.overflow = ""; D.documentElement.classList.remove("kit-lock"); } }
 
@@ -692,6 +1304,12 @@
     var key = keyOf(el); if (!key) return;
     var k = ks(key), val = el.type === "checkbox" ? el.checked : el.value;
     var i = name.indexOf(":"), scope = name.slice(0, i), fid = name.slice(i + 1);
+    if (scope === "picker") {
+      k.pickerQ = val;
+      var pl = el.closest("[data-kit-root]").querySelector("[data-kit-pickerlist]");
+      if (pl) pl.innerHTML = pickerList(k, mySpecialty());
+      return;
+    }
     if (scope === "f") {
       k.vals[fid] = val;
       if (el.type === "checkbox") {        // a ticked red flag shows the section alert without a repaint
@@ -703,22 +1321,27 @@
       }
       return;
     }
-    var toolId = { dating: "pregnancy-dating", growth: "growth-who", milestones: "milestones", vision: "visual-acuity", hearing: "hearing", pasi: "pasi" }[scope];
+    var toolId = { dating: "pregnancy-dating", growth: "growth-who", milestones: "milestones", vision: "visual-acuity", hearing: "hearing", pasi: "pasi",
+      la: "la-dose", burns: "burns-chart", ckd: "ckd-grid", joints: "joint-chart", body: "body-chart", mccd: "mccd", lcg: "labour-care" }[scope];
     if (!toolId) return;
-    var t = toolState(k, toolId);
+    var t = toolState(k, toolId), TT = TOOLS[toolId];
     if (toolId === "milestones" && fid.indexOf("done:") === 0) { t.done = t.done || {}; t.done[fid.slice(5)] = val; return; }
-    t[fid] = val;
+    if (TT.set) TT.set(t, fid, val); else t[fid] = val;
+    if (TT.reform && TT.reform.indexOf(fid) >= 0) { hostFor(el).repaint(); return; }
     var out = el.closest("[data-kit-root]").querySelector('[data-kit-out="' + toolId + '"]');
     if (out) out.innerHTML = TOOLS[toolId].out(t);
   }
   function onClick(e) {
     var btn = e.target && e.target.closest && e.target.closest("[data-kit-act]"); if (!btn) return;
     var act = btn.getAttribute("data-kit-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
-    if (cmd === "close") { close(); return; }
+    if (cmd === "close") { micStop(); close(); return; }
     var key = keyOf(btn); if (!key) return;
     var host = hostFor(btn), k = ks(key), kit = kitById(k.kitId);
-    if (cmd === "kit") { k.kitId = arg; var kk = kitById(arg); if (kk && kk.scribe && host.setScribe) host.setScribe(kk.scribe); host.repaint(); return; }
-    if (cmd === "mine") { setMySpecialty(arg); toast("Saved as your specialty."); host.repaint(); return; }
+    if (cmd === "kit") { k.kitId = arg; k.picker = false; k.pickerQ = ""; pushRecent(arg); var kk = kitById(arg); if (kk && kk.scribe && host.setScribe) host.setScribe(kk.scribe); host.repaint(); return; }
+    if (cmd === "mic") { micStart(btn, arg, host); return; }
+    if (cmd === "docs") { if (G.SMD_DOCS) G.SMD_DOCS.open({ ctx: host.patient && host.kind === "opd" && host.consult ? host.consult() : null }); return; }
+    if (cmd === "picker") { k.picker = !k.picker; host.repaint(); if (k.picker && D) { var qi = D.getElementById("kit_picker_q"); if (qi) try { qi.focus(); } catch (e) {} } return; }
+    if (cmd === "mine") { setMySpecialty(arg, "manual"); toast("Saved as your specialty."); host.repaint(); return; }
     if (!kit) return;
     if (cmd === "sec") {
       var sec = findSection(kit, arg); if (!sec) return;
@@ -737,6 +1360,7 @@
     }
     if (cmd === "adv") { var a = (kit.advice || []).filter(function (x) { return x.id === arg; })[0]; if (a) apply(host, a.target, a.text, {}); return; }
     if (cmd === "inv") { var inv = (kit.investigations || [])[+arg]; if (inv && host.investigate) host.investigate(inv.query); return; }
+    if (cmd === "oset") { var os = (kit.orderSets || []).filter(function (x) { return x.id === arg; })[0]; if (os && host.queueTests) host.queueTests(os.tests, os.label); return; }
     if (cmd === "proto") { if (host.protocol) host.protocol(arg); return; }
     if (cmd === "calc") { if (host.calculator) host.calculator(arg); return; }
     if (cmd === "imm") { if (host.openTab) host.openTab("immun"); return; }
@@ -747,6 +1371,20 @@
       host.repaint(); return;
     }
     if (cmd === "dent") { var td = toolState(k, "odontogram"); td.primary = arg === "prim"; host.repaint(); return; }
+    if (cmd === "gchart") { toolState(k, "growth-who").chart = arg; var go = btn.closest("[data-kit-root]").querySelector('[data-kit-out="growth-who"]'); if (go) go.innerHTML = TOOLS["growth-who"].out(toolState(k, "growth-who")); return; }
+    if (cmd === "ghadd") { var tg = toolState(k, "growth-who"); tg.hist = tg.hist || []; tg.hist.push({}); host.repaint(); return; }
+    if (cmd === "ghrm") { var th = toolState(k, "growth-who"); if (th.hist) th.hist.splice(+arg, 1); host.repaint(); return; }
+    if (cmd === "joint") {
+      var tj = toolState(k, "joint-chart"), cyc = ["", "T", "S", "TS"]; tj.j = tj.j || {};
+      var nj = cyc[(cyc.indexOf(tj.j[arg] || "") + 1) % cyc.length]; if (nj) tj.j[arg] = nj; else delete tj.j[arg];
+      host.repaint(); return;
+    }
+    if (cmd === "bodyreg") { var tb = toolState(k, "body-chart"); tb.inj = tb.inj || []; tb.inj.push({ r: arg }); host.repaint(); return; }
+    if (cmd === "bodyrm") { var tr = toolState(k, "body-chart"); if (tr.inj) tr.inj.splice(+arg, 1); host.repaint(); return; }
+    if (cmd === "lcgadd") { var tl = toolState(k, "labour-care"); tl.e = tl.e || []; tl.e.push({ at: nowLocal(), v: {} }); tl.cur = tl.e.length - 1; host.repaint(); return; }
+    if (cmd === "lcgsel") { toolState(k, "labour-care").cur = +arg; host.repaint(); return; }
+    if (cmd === "lcgdel") { var tx = toolState(k, "labour-care"); if (tx.e) { tx.e.splice(+arg, 1); tx.cur = tx.e.length ? Math.min(+arg, tx.e.length - 1) : null; } host.repaint(); return; }
+    if (cmd === "icd") { if (host.icd) host.icd(); else if (G.SMD_ICD && G.SMD_ICD.open) G.SMD_ICD.open(); return; }
   }
   function writeNote(host) { return host.writeNote ? host.writeNote() : "Open the patient in write mode to add kit findings to the assessment."; }
   function apply(host, target, text, sets) {
@@ -761,16 +1399,18 @@
     D.addEventListener("input", onInput, false);
     D.addEventListener("change", onInput, false);
     D.addEventListener("click", onClick, false);
+    D.addEventListener("smd:profile-loaded", onProfile, false);
   }
 
   var API = {
     open: open, close: close, html: kitBody, loadKits: loadKits, loadGrowth: loadGrowth, kits: kitList, kit: kitById,
-    mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, state: ks, forget: forget, on: flagOn,
+    mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, myScribe: myScribe, myLabel: myLabel, kitForProfile: kitForProfile, state: ks, forget: forget, on: flagOn, notifiable: notifiable, groups: groupList,
     KITS_V: KITS_V, GROWTH_V: GROWTH_V, TOOL_IDS: Object.keys(TOOLS),
     // pure, for tests
     _dating: dating, _acogThreshold: acogThreshold, _growth: growth, _lmsZ: lmsZ, _lmsZAdj: lmsZAdj, _pct: pct,
     _whoVision: whoVision, _logmar: logmar, _whoHearing: whoHearing, _tuningFork: tuningFork, _pasi: pasi, _pasiArea: pasiArea,
-    _dmft: dmft, _composeSection: composeSection, _tools: TOOLS, _setBundle: function (b) { BUNDLE = b; }, _setGrowth: function (g) { GROWTH = g; }
+    _dmft: dmft, _composeSection: composeSection, _laCalc: laCalc, _burnsCalc: burnsCalc, _ckdCalc: ckdCalc, _ckdEpi2021: ckdEpi2021,
+    _jointCalc: jointCalc, _growthChart: growthChart, _sdValue: sdValue, _activity: activity, _mccdCheck: mccdCheck, _lcgAlert: lcgAlert, _lcgAlerts: lcgAlerts, _BODY: BODY, _BANDS: { das: DAS_BANDS, cdai: CDAI_BANDS, sdai: SDAI_BANDS }, _SPEC_TO_KIT: SPEC_TO_KIT, _tools: TOOLS, _setBundle: function (b) { BUNDLE = b; }, _setGrowth: function (g) { GROWTH = g; }
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_KITS = API;

@@ -1,0 +1,188 @@
+{
+ "id": "gastro-hepatology",
+ "label": "Gastroenterology and Hepatology",
+ "short": "GI/Liver",
+ "icon": "gastroenterology",
+ "group": "medical",
+ "subject": "gastroenterology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "gi-bleed",
+   "title": "GI bleed assessment (Glasgow-Blatchford)",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "bleed_presentation", "label": "Presentation", "type": "select", "opts": ["Haematemesis", "Coffee-ground vomit", "Melaena", "Haematemesis and melaena", "Fresh blood per rectum", "Maroon stools"] },
+    { "id": "bleed_onset", "label": "Onset, episodes and estimated volume", "type": "text" },
+    { "id": "gbs_urea", "label": "Blood urea", "type": "number", "unit": "mmol/L", "hint": "Glasgow-Blatchford uses urea in mmol/L (urea in mg/dL divided by 6)" },
+    { "id": "gbs_hb", "label": "Haemoglobin", "type": "number", "unit": "g/dL" },
+    { "id": "gbs_sbp", "label": "Systolic BP", "type": "number", "unit": "mmHg" },
+    { "id": "gbs_pulse", "label": "Pulse", "type": "number", "unit": "/min" },
+    { "id": "gbs_melaena", "label": "Melaena", "type": "check" },
+    { "id": "gbs_syncope", "label": "Syncope", "type": "check" },
+    { "id": "gbs_hepatic", "label": "Liver disease (history or clinical evidence)", "type": "check" },
+    { "id": "gbs_cardiac", "label": "Cardiac failure", "type": "check" },
+    { "id": "bleed_drugs", "label": "Relevant medicines", "type": "select", "opts": ["None", "NSAID or aspirin", "Other antiplatelet", "Anticoagulant", "Steroid", "More than one of these"] },
+    { "id": "pr_exam", "label": "Per rectal examination", "type": "select", "opts": ["Not done", "Normal brown stool", "Melaena", "Fresh blood", "Haemorrhoids", "Mass felt"], "set": "examination" }
+   ]
+  },
+  {
+   "id": "dyspepsia",
+   "title": "Dyspepsia and alarm features",
+   "target": "History_present_illness",
+   "alert": "Alarm feature present: arrange upper GI endoscopy. NICE NG12: dysphagia, or age 55 or over with weight loss and upper abdominal pain, reflux or dyspepsia, needs endoscopy within 2 weeks. If bleeding now, assess and manage as an acute GI bleed.",
+   "fields": [
+    { "id": "dys_symptom", "label": "Main symptom", "type": "select", "opts": ["Epigastric pain or burning", "Fullness after meals or early satiety", "Heartburn or regurgitation", "Nausea", "Mixed"] },
+    { "id": "dys_duration", "label": "Duration and pattern", "type": "text" },
+    { "id": "dys_hpylori", "label": "H. pylori status", "type": "select", "opts": ["Not tested", "Positive, treated", "Positive, not yet treated", "Negative"] },
+    { "id": "dys_medicines", "label": "Medicines that can cause dyspepsia", "type": "select", "opts": ["None", "NSAID or aspirin", "Bisphosphonate", "Steroid", "Iron or potassium", "Other"] },
+    { "id": "alarm_dysphagia", "label": "Dysphagia", "type": "check" },
+    { "id": "alarm_55_weight_loss", "label": "Age 55 or over with weight loss and upper abdominal pain, reflux or dyspepsia", "type": "check" },
+    { "id": "alarm_mass", "label": "Upper abdominal mass", "type": "check" },
+    { "id": "alarm_bleeding", "label": "Haematemesis or melaena", "type": "check" },
+    { "id": "alarm_anaemia", "label": "Iron deficiency anaemia or low haemoglobin", "type": "check" },
+    { "id": "alarm_vomiting", "label": "Persistent vomiting", "type": "check" },
+    { "id": "alarm_resistant", "label": "Age 55 or over with dyspepsia not responding to treatment", "type": "check" }
+   ]
+  },
+  {
+   "id": "ibd-review",
+   "title": "IBD review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "ibd_type", "label": "Diagnosis", "type": "select", "opts": ["Ulcerative colitis", "Crohn's disease", "IBD unclassified", "Suspected, not yet confirmed"] },
+    { "id": "ibd_extent", "label": "Extent or location", "type": "text", "hint": "e.g. proctitis, left-sided, extensive colitis; ileal, ileocolonic, perianal" },
+    { "id": "stool_frequency", "label": "Stool frequency", "type": "number", "unit": "per day" },
+    { "id": "nocturnal_stools", "label": "Stools at night", "type": "select", "opts": ["No", "Yes"] },
+    { "id": "rectal_bleeding", "label": "Blood in stool", "type": "select", "opts": ["None", "Streaks, less than half the time", "Obvious, most of the time", "Blood alone passed"] },
+    { "id": "ibd_pain", "label": "Abdominal pain", "type": "select", "opts": ["None", "Mild", "Moderate", "Severe"] },
+    { "id": "ibd_wellbeing", "label": "General well-being", "type": "select", "opts": ["Very well", "Slightly below par", "Poor", "Very poor", "Terrible"] },
+    { "id": "eim_joints", "label": "Joint pain or swelling, or back pain", "type": "check" },
+    { "id": "eim_eyes", "label": "Red or painful eye", "type": "check" },
+    { "id": "eim_skin", "label": "Erythema nodosum or pyoderma gangrenosum", "type": "check" },
+    { "id": "eim_mouth", "label": "Mouth ulcers", "type": "check" },
+    { "id": "ibd_treatment", "label": "Current IBD treatment", "type": "text" }
+   ]
+  },
+  {
+   "id": "abdominal-examination",
+   "title": "Abdominal examination",
+   "target": "per_abdomen_exam",
+   "fields": [
+    { "id": "abd_stigmata", "label": "Signs of chronic liver disease", "type": "select", "opts": ["None", "Spider naevi", "Palmar erythema", "Gynaecomastia", "Several signs"] },
+    { "id": "abd_tenderness", "label": "Tenderness", "type": "select", "opts": ["None", "Epigastric", "Right upper quadrant", "Right iliac fossa", "Left iliac fossa", "Diffuse"] },
+    { "id": "abd_liver", "label": "Liver", "type": "select", "opts": ["Not palpable", "Enlarged, smooth", "Enlarged, hard or nodular", "Tender enlargement"] },
+    { "id": "abd_liver_cm", "label": "Liver below costal margin", "type": "number", "unit": "cm" },
+    { "id": "abd_spleen", "label": "Spleen", "type": "select", "opts": ["Not palpable", "Just palpable", "Moderately enlarged", "Massive"] },
+    { "id": "abd_mass", "label": "Mass (site, size, consistency)", "type": "text" },
+    { "id": "abd_bowel_sounds", "label": "Bowel sounds", "type": "select", "opts": ["Normal", "Increased", "Reduced", "Absent"] }
+   ]
+  },
+  {
+   "id": "liver-function",
+   "title": "Liver function summary",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "lft_date", "label": "Date of tests", "type": "date" },
+    { "id": "lft_bilirubin", "label": "Total bilirubin", "type": "number", "unit": "mg/dL" },
+    { "id": "lft_alt", "label": "ALT", "type": "number", "unit": "U/L" },
+    { "id": "lft_ast", "label": "AST", "type": "number", "unit": "U/L" },
+    { "id": "lft_alp", "label": "ALP", "type": "number", "unit": "U/L" },
+    { "id": "lft_ggt", "label": "GGT", "type": "number", "unit": "U/L" },
+    { "id": "lft_platelets", "label": "Platelets", "type": "number", "unit": "x 10^3 per microlitre" },
+    { "id": "lft_pattern", "label": "Pattern", "type": "select", "opts": ["Normal", "Hepatocellular (ALT or AST raised most)", "Cholestatic (ALP and GGT raised most)", "Mixed", "Isolated raised bilirubin"] },
+    { "id": "viral_markers", "label": "HBsAg and anti-HCV", "type": "text" },
+    { "id": "fibrosis", "label": "Fibrosis assessment (FIB-4 or elastography kPa)", "type": "text" },
+    { "id": "usg_liver", "label": "Ultrasound liver", "type": "text", "hint": "echotexture, surface, portal vein, spleen size, ascites, focal lesion" }
+   ]
+  },
+  {
+   "id": "cirrhosis-review",
+   "title": "Cirrhosis review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "cld_aetiology", "label": "Aetiology", "type": "select", "opts": ["Alcohol", "Hepatitis B", "Hepatitis C", "MASLD (fatty liver)", "Alcohol and MASLD", "Autoimmune hepatitis", "PBC or PSC", "Wilson disease or haemochromatosis", "Cryptogenic"] },
+    { "id": "cp_bilirubin", "label": "Bilirubin (Child-Pugh)", "type": "number", "unit": "mg/dL" },
+    { "id": "cp_albumin", "label": "Albumin (Child-Pugh)", "type": "number", "unit": "g/dL" },
+    { "id": "cp_inr", "label": "INR (Child-Pugh)", "type": "number" },
+    { "id": "cp_ascites", "label": "Ascites (EASL grade)", "type": "select", "opts": ["None", "Grade 1: mild, seen only on ultrasound", "Grade 2: moderate, symmetrical distension", "Grade 3: large, marked distension", "Refractory"] },
+    { "id": "cp_encephalopathy", "label": "Hepatic encephalopathy (West Haven)", "type": "select", "opts": ["None", "Covert (minimal or grade 1)", "Grade 2: disoriented to time, asterixis", "Grade 3: somnolent, grossly disoriented", "Grade 4: coma"] },
+    { "id": "child_pugh", "label": "Child-Pugh class", "type": "select", "opts": ["A", "B", "C", "Not calculated"] },
+    { "id": "varices", "label": "Varices", "type": "select", "opts": ["Not screened", "No varices", "Small varices", "Large varices", "On band ligation programme", "Previous variceal bleed"] },
+    { "id": "hcc_surveillance_date", "label": "Last HCC surveillance ultrasound", "type": "date", "hint": "AASLD: ultrasound with AFP about every 6 months in cirrhosis" },
+    { "id": "hcc_result", "label": "HCC surveillance result", "type": "select", "opts": ["No focal lesion", "Lesion under 1 cm", "Lesion 1 cm or more: needs multiphasic CT or MRI", "AFP 20 ng/mL or more, or rising"] },
+    { "id": "alcohol_now", "label": "Alcohol now", "type": "select", "opts": ["Never drank", "Abstinent", "Cutting down", "Still drinking"] }
+   ]
+  },
+  {
+   "id": "gi-liver-red-flags",
+   "title": "GI and liver red flags",
+   "target": "sys_examination",
+   "alert": "GI or liver emergency: resuscitate and send to emergency care now. Unstable upper GI bleeding needs endoscopy immediately after resuscitation (NICE CG141); follow the variceal bleeding protocol in known or suspected cirrhosis. Suspected SBP, encephalopathy, acute liver failure, cholangitis, hepatorenal syndrome or acute severe colitis: admit and follow the protocol.",
+   "fields": [
+    { "id": "rf_unstable_bleed", "label": "Haematemesis or melaena with fast pulse, low BP or fainting", "type": "check" },
+    { "id": "rf_variceal", "label": "GI bleed in known cirrhosis or varices", "type": "check" },
+    { "id": "rf_encephalopathy", "label": "New confusion or drowsiness in liver disease", "type": "check" },
+    { "id": "rf_sbp", "label": "Fever, abdominal pain or tenderness with ascites (possible SBP)", "type": "check" },
+    { "id": "rf_alf", "label": "New jaundice with confusion or bleeding tendency (possible acute liver failure)", "type": "check" },
+    { "id": "rf_cholangitis", "label": "Fever with jaundice and right upper quadrant pain (possible cholangitis)", "type": "check" },
+    { "id": "rf_hrs", "label": "Falling urine output or rising creatinine in cirrhosis", "type": "check" },
+    { "id": "rf_severe_colitis", "label": "6 or more bloody stools a day with fever, fast pulse or anaemia (possible acute severe colitis)", "type": "check" },
+    { "id": "rf_acute_abdomen", "label": "Severe abdominal pain with guarding, distension or absent bowel sounds", "type": "check" },
+    { "id": "rf_food_bolus", "label": "Food stuck, unable to swallow saliva", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Liver function tests", "query": "LFT" },
+  { "label": "PT and INR", "query": "PT INR" },
+  { "label": "CBC", "query": "CBC" },
+  { "label": "HBsAg", "query": "HBsAg" },
+  { "label": "Anti-HCV", "query": "anti HCV" },
+  { "label": "Ultrasound abdomen", "query": "USG abdomen" },
+  { "label": "Upper GI endoscopy", "query": "upper GI endoscopy" },
+  { "label": "Colonoscopy", "query": "colonoscopy" },
+  { "label": "H. pylori stool antigen", "query": "H pylori stool antigen" },
+  { "label": "Faecal calprotectin", "query": "faecal calprotectin" },
+  { "label": "Stool routine", "query": "stool routine" },
+  { "label": "Serum ferritin", "query": "ferritin" },
+  { "label": "Alpha-fetoprotein", "query": "AFP" },
+  { "label": "Liver elastography", "query": "fibroscan" }
+ ],
+ "orderSets": [
+  { "id": "liver-screen", "label": "Liver screen", "tests": ["LFT", "PT INR", "CBC", "HBsAg", "anti HCV", "USG abdomen", "ferritin", "transferrin saturation", "ANA", "anti smooth muscle antibody", "AMA", "IgG", "HbA1c", "lipid profile"] },
+  { "id": "gi-bleed-panel", "label": "GI bleed panel", "tests": ["CBC", "blood group", "crossmatch", "PT INR", "urea", "creatinine", "electrolytes", "LFT", "upper GI endoscopy"] },
+  { "id": "dyspepsia-work-up", "label": "Dyspepsia work-up", "tests": ["CBC", "ferritin", "H pylori stool antigen", "urea breath test", "LFT", "USG abdomen", "upper GI endoscopy"] },
+  { "id": "ibd-flare-panel", "label": "IBD flare panel", "tests": ["CBC", "CRP", "ESR", "albumin", "LFT", "electrolytes", "faecal calprotectin", "stool culture", "C difficile toxin", "colonoscopy"] }
+ ],
+ "protocols": ["upper-gi-bleeding-nonvariceal", "acute-variceal-bleeding", "lower-gi-bleeding", "anticoagulant-associated-bleeding", "ascites-and-sbp", "hepatic-encephalopathy", "acute-liver-failure", "alcohol-associated-hepatitis", "chronic-hepatitis-b", "hepatitis-c", "masld-fatty-liver", "gastro-oesophageal-reflux-disease", "helicobacter-pylori", "irritable-bowel-syndrome", "chronic-constipation", "acute-severe-ulcerative-colitis", "acute-diverticulitis", "acute-pancreatitis", "acute-cholecystitis-cholangitis", "acute-infectious-diarrhoea-adult", "clostridioides-difficile-infection", "iron-deficiency-anaemia", "masld-fatty-liver-india", "antithrombotics-gi-bleeding-endoscopy-india"],
+ "calculators": ["gbs", "rockall", "aims65", "forrest", "childpugh", "meld", "meld_na", "meld3", "maddrey", "gahs", "west_haven", "saag", "albi", "milan", "kings", "fib4", "apri", "nafld_fibrosis", "bard", "fli", "hsi", "aar", "harvey_bradshaw", "truelove_witts", "mayo_uc", "bristol", "rome4_ibs", "stool_osmotic_gap", "wexner", "bisap", "ranson", "glasgow_imrie", "auditc", "audit_full", "alcohol_units", "ciwa"],
+ "advice": [
+  {
+   "id": "dyspepsia-lifestyle",
+   "title": "Indigestion and acidity",
+   "target": "diet_lifestyle_advice",
+   "text": "Eat healthy, regular meals, lose weight if you are overweight and stop smoking. Avoid things that bring on your symptoms, such as alcohol, coffee, chocolate and fatty food. Have your main meal at least 3 hours before going to bed, and raise the head end of your bed."
+  },
+  {
+   "id": "liver-care",
+   "title": "Looking after your liver",
+   "target": "diet_lifestyle_advice",
+   "text": "Stop alcohol completely. If you have fluid in the abdomen, do not add salt at the table and avoid pickles, papads and ready-made or packaged foods, but do not stop salt completely. Do not take painkillers such as ibuprofen or diclofenac (NSAIDs), and ask your doctor before starting any new medicine."
+  },
+  {
+   "id": "gi-liver-warning-signs",
+   "title": "Bleeding and liver warning signs",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if you vomit blood or dark coffee-ground material, pass black tarry stools or a lot of blood, feel faint, become confused or unusually sleepy, or have fever with abdominal pain or swelling, or yellow eyes that are getting worse."
+  }
+ ],
+ "sources": [
+  { "org": "NICE", "title": "CG141 Acute upper gastrointestinal bleeding in over 16s: management", "year": 2012, "url": "https://www.nice.org.uk/guidance/cg141/chapter/Recommendations" },
+  { "org": "NICE", "title": "CG184 Gastro-oesophageal reflux disease and dyspepsia in adults: investigation and management", "year": 2014, "url": "https://www.nice.org.uk/guidance/cg184" },
+  { "org": "NICE", "title": "NG12 Suspected cancer: recognition and referral", "year": 2015, "url": "https://www.nice.org.uk/guidance/ng12/chapter/Recommendations-organised-by-site-of-cancer" },
+  { "org": "EASL", "title": "EASL Clinical Practice Guidelines for the management of patients with decompensated cirrhosis", "year": 2018, "url": "https://easl.eu/wp-content/uploads/2018/10/decompensated-cirrhosis-English-report.pdf" },
+  { "org": "AASLD", "title": "AASLD Practice Guidance on prevention, diagnosis, and treatment of hepatocellular carcinoma", "year": 2023, "url": "https://journals.lww.com/hep/fulltext/2023/12000/aasld_practice_guidance_on_prevention,_diagnosis,.27.aspx" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}
