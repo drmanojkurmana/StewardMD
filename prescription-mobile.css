@@ -42,7 +42,7 @@ html body #rxSheet .rx-tpl-row{flex-wrap:wrap}
 html body #rxSheet .rx-sign-bar{flex-wrap:wrap;gap:8px;color:var(--rx-muted);border-color:var(--rx-line);padding:12px 2px}
 html body #rxSheet .rx-sign-dr{color:var(--rx-ink)}
 html body #rxSheet :is(button,select):focus-visible{outline:2px solid var(--rx-accent);outline-offset:3px}
-@media(max-width:640px){html body #rxSheet{height:calc(100dvh - max(12px,env(safe-area-inset-top)))!important;max-height:calc(100dvh - max(12px,env(safe-area-inset-top)))!important;border-radius:24px 24px 0 0!important}html body #rxSheet .rx-title-main{display:block}html body #rxSheet .rx-saved-indicator{display:flex;margin-top:3px}html body #rxSheet .rx-pt-grid{grid-template-columns:1fr}html body #rxSheet .rx-title-sub{max-width:210px}}
+@media(max-width:640px){html body #rxSheet{height:calc(100dvh - max(12px,env(safe-area-inset-top)))!important;max-height:calc(100dvh - max(12px,env(safe-area-inset-top)))!important;border-radius:24px 24px 0 0!important}html body #rxSheet .rx-title-main{display:block}html body #rxSheet .rx-saved-indicator{display:flex;margin-top:3px}html body #rxSheet .rx-pt-grid{grid-template-columns:minmax(0,1fr)}html body #rxSheet .rx-title-sub{max-width:210px}}
 @media(prefers-reduced-motion:reduce){html body #rxSheet,html body #rxSheet *{transition:none!important}}
 }
 @media screen {

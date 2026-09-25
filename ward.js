@@ -4824,8 +4824,205 @@
     var link = v.available
       ? '<a class="w-btn go" href="' + esc(v.url) + '" target="_blank" rel="noopener noreferrer">' + ms("open_in_new") + wTH("ward.open-images", "Open images") + "</a>"
       : '<p class="w-hint warn">' + ms("visibility_off") + wTH("ward.no-image-link", "No image link.") + " " + esc(v.detail || wT("ward.the-viewer-is-not-available", "The viewer is not available.")) + "</p>";
-    return studyLine + link;
+    /* The in-app viewer (ward-dicom-viewer.js): only when the server says this hospital's archive is connected and the
+     * study has a UID. The images are proxied from the archive for the view and never stored. */
+    var inApp = radInApp(entry)
+      ? '<button type="button" class="w-btn go" data-w-act="dicomview:' + esc(sd.id) + '">' + ms("radiology") + wTH("ward.dv-view-images", "View images") + "</button>" +
+        '<p class="w-hint">' + ms("info") + wTH("ward.dv-not-stored", "Images are read from the hospital's archive for this view and are not stored by WardSynQ.") + "</p>"
+      : "";
+    return studyLine + inApp + link;
   }
+
+  /* ---- IN-APP DICOM VIEWER ----------------------------------------------------------------------------------------
+   * A dark full-screen layer on document.body, outside #smdWard, so a ward paint() never wipes it. The engine
+   * (ward-dicom-viewer.js, loaded on first open) has no words: every label and error sentence is here. Images are
+   * fetched with this file's own credential from GET ward/imaging-instance, held in memory only, and dropped on close. */
+  var dv = null, dvEngineP = null;
+  function dvEngine() {
+    if (G.WardDicom) return Promise.resolve(G.WardDicom);
+    if (dvEngineP) return dvEngineP;
+    dvEngineP = new Promise(function (res, rej) {
+      var s = document.createElement("script");
+      s.src = "/ward-dicom-viewer.js?v=dv1";
+      s.onload = function () { if (G.WardDicom) res(G.WardDicom); else { dvEngineP = null; rej(dvErr("parser_load_failed")); } };
+      s.onerror = function () { dvEngineP = null; rej(dvErr("parser_load_failed")); };
+      document.body.appendChild(s);
+    });
+    return dvEngineP;
+  }
+  function dvErr(code, detail) { var e = new Error(code); e.code = code; if (detail) e.detail = detail; return e; }
+  function dvErrorText(code, detail) {
+    switch (code) {
+      case "unsupported_transfer_syntax": return wT("ward.dv-err-transfer-syntax", "This image uses a compression the viewer cannot decode ({syntax}). Open it in the hospital's own viewer.", { syntax: detail || "" });
+      case "unsupported_image": return wT("ward.dv-err-unsupported-image", "This image layout is not supported here. Open it in the hospital's own viewer.");
+      case "not_dicom": case "archive_not_dicom": case "archive_not_dicom_json": return wT("ward.dv-err-not-dicom", "The archive did not send a readable DICOM image.");
+      case "no_pixel_data": return wT("ward.dv-err-no-pixels", "This item has no picture in it. It may be a report or a structured document.");
+      case "decode_failed": case "truncated": return wT("ward.dv-err-decode", "The image could not be decoded.");
+      case "parser_load_failed": return wT("ward.dv-err-engine", "The viewer could not be loaded. Check the connection and try again.");
+      case "too_large": return wT("ward.dv-err-too-large", "This image is too large to open here.");
+      case "not_in_archive": case "study_not_found": return wT("ward.dv-err-not-in-archive", "The archive does not have this study or image.");
+      case "no_archive": case "not_enabled": return wT("ward.dv-err-no-archive", "No imaging archive is connected for this hospital.");
+      case "study_uid_missing": return wT("ward.dv-err-no-uid", "This study has no study identifier on record, so the archive cannot be asked for it.");
+      case "auth": case "permission": return wT("ward.dv-err-permission", "You do not have access to this study.");
+      case "archive_timeout": case "archive_unreachable": case "archive_auth_refused": case "archive_error": case "archive_refused":
+        return wT("ward.dv-err-archive", "The hospital's archive did not answer. Try again, or use the hospital's own viewer.");
+      default: return wT("ward.dv-err-load", "The images could not be loaded.");
+    }
+  }
+  /* GET a JSON answer or raw bytes with this file's credential. A refusal comes back as an Error carrying the server's code. */
+  function dvFetch(path, bytes) {
+    return authHeaders().then(function (h) { return fetchRetry(API + path, { headers: h, credentials: "include" }); }).then(function (r) {
+      if (r.ok) return bytes ? r.arrayBuffer() : r.json();
+      return r.json().then(function (j) { throw dvErr((j && j.error) || "load_failed"); }, function () { throw dvErr("load_failed"); });
+    }, function () { throw dvErr("load_failed"); });
+  }
+  function dvClose() {
+    if (!dv) return;
+    if (dv.viewer) dv.viewer.destroy();
+    if (dv.el && dv.el.parentNode) dv.el.parentNode.removeChild(dv.el);
+    if (dv.back && dv.back.focus) try { dv.back.focus(); } catch (e) {}
+    dv = null;
+  }
+  function dvTool(t, icon, label) {
+    return '<button type="button" class="w-dv-b" data-dv-tool="' + t + '" aria-pressed="false" aria-label="' + label + '" title="' + label + '">' + ms(icon) + "</button>";
+  }
+  function dvBtn(act, icon, label) {
+    return '<button type="button" class="w-dv-b" data-dv-act="' + act + '" aria-label="' + label + '" title="' + label + '">' + ms(icon) + "</button>";
+  }
+  /* z-index above #smdWard (12000, ward.css) and the camera layer (13000): the viewer is opened from the ward and sits on it. */
+  var DV_CSS = "#wDicom{position:fixed;inset:0;z-index:13500;background:#000;color:#e8eef2;display:flex;flex-direction:column;font:14px system-ui,-apple-system,sans-serif}" +
+    "#wDicom .w-dv-top,#wDicom .w-dv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:4px 8px;background:#11181d}" +
+    "#wDicom .w-dv-top{justify-content:space-between}#wDicom .w-dv-hd{flex:1;min-width:0;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+    "#wDicom .w-dv-b{min-width:44px;min-height:44px;border:0;border-radius:10px;background:#1f2a31;color:#e8eef2;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:0 10px;font:inherit}" +
+    "#wDicom .w-dv-b[aria-pressed=true]{background:#0e6e63}#wDicom .w-dv-sep{width:1px;height:28px;background:#34424b;margin:0 4px}" +
+    "#wDicom .w-dv-main{flex:1;display:flex;min-height:0}#wDicom .w-dv-series{width:190px;overflow:auto;background:#0b1114;padding:6px;display:flex;flex-direction:column;gap:4px}" +
+    "#wDicom .w-dv-series .w-dv-b{justify-content:flex-start;text-align:left;width:100%;flex-direction:column;align-items:flex-start;padding:6px 10px}" +
+    "#wDicom .w-dv-series small{color:#9fb3bf}#wDicom .w-dv-stage{flex:1;position:relative;min-width:0}" +
+    "#wDicom canvas{position:absolute;inset:0;width:100%;height:100%;display:block}" +
+    "#wDicom .w-dv-ro{position:absolute;left:8px;bottom:8px;font-size:12px;color:#cfe3ec;text-shadow:0 1px 2px #000;pointer-events:none;line-height:1.5}" +
+    "#wDicom .w-dv-msg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:80%;text-align:center;background:#1f2a31;padding:12px 16px;border-radius:10px}" +
+    "#wDicom .w-dv-note{padding:4px 8px;font-size:12px;color:#cfe3ec;background:#1f2a31}" +
+    "@media (max-width:640px){#wDicom .w-dv-main{flex-direction:column}#wDicom .w-dv-series{width:auto;max-height:96px;flex-direction:row}#wDicom .w-dv-series .w-dv-b{width:auto;flex:none}}";
+  function dvOpen(studyId) {
+    if (!studyId) return;
+    dvClose();
+    if (!document.getElementById("wDicomCss")) { var css = document.createElement("style"); css.id = "wDicomCss"; css.textContent = DV_CSS; document.head.appendChild(css); }
+    var el = document.createElement("div");
+    el.id = "wDicom"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
+    el.setAttribute("aria-label", wT("ward.dv-viewer", "Image viewer"));
+    el.innerHTML =
+      '<div class="w-dv-top"><div class="w-dv-hd" id="wDvHd"></div>' + dvBtn("close", "close", wTA("ward.dv-close", "Close viewer")) + "</div>" +
+      '<div class="w-dv-bar" role="toolbar" aria-label="' + wTA("ward.dv-tools", "Viewer tools") + '">' +
+      dvTool("scroll", "swap_vert", wTA("ward.dv-tool-scroll", "Scroll through images")) + dvTool("wl", "contrast", wTA("ward.dv-tool-wl", "Window and level")) +
+      dvTool("pan", "pan_tool", wTA("ward.dv-tool-pan", "Move the image")) + dvTool("zoom", "search", wTA("ward.dv-tool-zoom", "Zoom by dragging")) +
+      dvTool("measure", "straighten", wTA("ward.dv-tool-measure", "Measure a distance")) + '<span class="w-dv-sep"></span>' +
+      dvBtn("prev", "chevron_left", wTA("ward.dv-prev", "Previous image")) + dvBtn("next", "chevron_right", wTA("ward.dv-next", "Next image")) +
+      dvBtn("zoomin", "zoom_in", wTA("ward.dv-zoom-in", "Zoom in")) + dvBtn("zoomout", "zoom_out", wTA("ward.dv-zoom-out", "Zoom out")) +
+      dvBtn("reset", "restart_alt", wTA("ward.dv-reset", "Reset the view")) + '<span class="w-dv-sep"></span>' +
+      ["brain", "lung", "bone", "abdomen"].map(function (p) {
+        var label = { brain: wTA("ward.dv-preset-brain", "Brain"), lung: wTA("ward.dv-preset-lung", "Lung"), bone: wTA("ward.dv-preset-bone", "Bone"), abdomen: wTA("ward.dv-preset-abdomen", "Abdomen") }[p];
+        return '<button type="button" class="w-dv-b" data-dv-preset="' + p + '" aria-label="' + wTA("ward.dv-preset", "CT window: {name}", { name: label }) + '">' + label + "</button>";
+      }).join("") +
+      "</div>" +
+      '<div class="w-dv-note" id="wDvNote" hidden></div>' +
+      '<div class="w-dv-main"><div class="w-dv-series" id="wDvSeries" role="list" aria-label="' + wTA("ward.dv-series-list", "Series") + '"></div>' +
+      '<div class="w-dv-stage"><canvas id="wDvCanvas" tabindex="0" aria-label="' + wTA("ward.dv-image", "Image") + '"></canvas>' +
+      '<div class="w-dv-ro" id="wDvRo" aria-live="polite"></div><div class="w-dv-msg" id="wDvMsg" role="status">' + wTH("ward.dv-loading", "Loading images&hellip;") + "</div></div></div>";
+    document.body.appendChild(el);
+    dv = { el: el, studyId: studyId, series: [], seriesIndex: -1, viewer: null, back: document.activeElement, raw: null };
+    el.addEventListener("click", dvClick);
+    var mine = dv;
+    Promise.all([dvEngine(), dvFetch("/ward/imaging-series?orgId=" + encodeURIComponent(st.orgId) + "&studyId=" + encodeURIComponent(studyId))])
+      .then(function (r) {
+        if (dv !== mine) return;
+        var j = r[1] || {};
+        dv.series = (j.series || []).filter(function (s) { return s.instances && s.instances.length; });
+        dvHeader(j);
+        var notes = [];
+        if (j.headerHidden) notes.push(wT("ward.dv-header-hidden", "Patient details are not shown: you do not have access to this patient's record."));
+        if (j.truncated) notes.push(wT("ward.dv-truncated", "Not all of this study is listed. It is larger than the viewer shows at once."));
+        var note = document.getElementById("wDvNote"); if (notes.length) { note.textContent = notes.join(" "); note.hidden = false; }
+        document.getElementById("wDvSeries").innerHTML = dv.series.map(function (s, i) {
+          var name = s.description || (s.number != null ? wT("ward.dv-series-n", "Series {number}", { number: s.number }) : wT("ward.dv-series-list", "Series"));
+          return '<button type="button" class="w-dv-b" role="listitem" data-dv-series="' + i + '" aria-pressed="false"><b>' + esc(name) + "</b><small>" +
+            (s.modality ? esc(s.modality) + " &middot; " : "") + wTH("ward.images", "{instanceCount} images", { instanceCount: esc(s.instances.length) }, "instanceCount") + "</small></button>";
+        }).join("");
+        if (!dv.series.length) { dvMessage(wT("ward.dv-no-series", "The archive returned no images for this study.")); return; }
+        dvPickSeries(0);
+      })
+      .catch(function (e) { if (dv === mine) dvMessage(dvErrorText(e && e.code, e && e.detail)); });
+  }
+  function dvHeader(j) {
+    var h = j.header, s = j.study || {}, bits = [];
+    if (h) { [h.patientName, h.patientId, h.sex, h.birthDate].forEach(function (x) { if (x) bits.push(esc(x)); }); }
+    [(h && h.studyDescription) || null, s.modality, (h && h.studyDate) || s.started, h && h.accessionNumber].forEach(function (x) { if (x) bits.push(esc(x)); });
+    document.getElementById("wDvHd").innerHTML = bits.join(" &middot; ");
+  }
+  function dvMessage(text) {
+    var m = dv && document.getElementById("wDvMsg"); if (!m) return;
+    if (text) { m.textContent = text; m.hidden = false; } else m.hidden = true;
+  }
+  function dvPickSeries(i) {
+    if (!dv || !dv.series[i]) return;
+    if (dv.viewer) { dv.viewer.destroy(); dv.viewer = null; }
+    dv.seriesIndex = i; dv.raw = null;
+    var s = dv.series[i], slices = [];
+    s.instances.forEach(function (inst) { for (var f = 0; f < Math.max(1, inst.frames || 1); f++) slices.push({ sop: inst.sopUid, frame: f }); });
+    var sb = dv.el.querySelectorAll("[data-dv-series]");
+    for (var k = 0; k < sb.length; k++) sb[k].setAttribute("aria-pressed", String(+sb[k].getAttribute("data-dv-series") === i));
+    var mine = dv, canvas = document.getElementById("wDvCanvas");
+    dvMessage(wT("ward.dv-loading-plain", "Loading images..."));
+    dv.viewer = new G.WardDicom.Viewer(canvas, {
+      count: slices.length,
+      frameOf: function (n) { return slices[n].frame; },
+      load: function (n) {
+        /* A multi-frame instance is one download: the last one is kept while its frames are read. */
+        var sop = slices[n].sop;
+        if (mine.raw && mine.raw.sop === sop) return mine.raw.p;
+        var p = dvFetch("/ward/imaging-instance?orgId=" + encodeURIComponent(st.orgId) + "&studyId=" + encodeURIComponent(mine.studyId) +
+          "&seriesUid=" + encodeURIComponent(s.seriesUid) + "&sopUid=" + encodeURIComponent(sop), true);
+        if (slices.length > s.instances.length) mine.raw = { sop: sop, p: p };
+        return p;
+      },
+      onChange: dvReadout,
+      onClose: dvClose
+    });
+    dvReadout({ tool: dv.viewer.tool });
+    dv.viewer.go(0);
+    try { canvas.focus(); } catch (e) {}
+  }
+  function dvReadout(s) {
+    if (!dv) return;
+    var tb = dv.el.querySelectorAll("[data-dv-tool]");
+    for (var k = 0; k < tb.length; k++) tb[k].setAttribute("aria-pressed", String(tb[k].getAttribute("data-dv-tool") === s.tool));
+    if (s.error) dvMessage(dvErrorText(s.error.code, s.error.detail));
+    else if (s.loading && !(dv.viewer && dv.viewer.img)) dvMessage(wT("ward.dv-loading-plain", "Loading images..."));
+    else dvMessage(null);
+    if (s.count == null) return;
+    var lines = [wTH("ward.dv-slice", "Image {index} of {count}", { index: s.index + 1, count: s.count })];
+    if (s.ww != null) lines.push(wTH("ward.dv-wl", "Window {ww}, level {wc}", { ww: s.ww, wc: s.wc }));
+    if (s.zoom != null && s.zoom !== 1) lines.push(wTH("ward.dv-zoom", "Zoom {zoom}%", { zoom: Math.round(s.zoom * 100) }));
+    if (s.length) lines.push(s.length.unit === "mm"
+      ? wTH("ward.dv-length-mm", "Length {value} mm", { value: s.length.value.toFixed(1) })
+      : wTH("ward.dv-length-px", "Length {value} pixels (no pixel spacing in this image)", { value: s.length.value.toFixed(0) }));
+    document.getElementById("wDvRo").innerHTML = lines.join("<br>");
+  }
+  function dvClick(e) {
+    if (!dv) return;
+    var b = e.target.closest && e.target.closest("[data-dv-act],[data-dv-tool],[data-dv-preset],[data-dv-series]"); if (!b) return;
+    var v = dv.viewer, a = b.getAttribute("data-dv-act");
+    if (a === "close") { dvClose(); return; }
+    if (b.hasAttribute("data-dv-series")) { dvPickSeries(+b.getAttribute("data-dv-series")); return; }
+    if (!v) return;
+    if (b.hasAttribute("data-dv-tool")) v.setTool(b.getAttribute("data-dv-tool"));
+    else if (b.hasAttribute("data-dv-preset")) v.preset(b.getAttribute("data-dv-preset"));
+    else if (a === "prev") v.scroll(-1);
+    else if (a === "next") v.scroll(1);
+    else if (a === "zoomin") v.zoomBy(1.25);
+    else if (a === "zoomout") v.zoomBy(1 / 1.25);
+    else if (a === "reset") v.reset();
+  }
+  function radInApp(entry) { return !!(entry && entry.study && entry.study.inAppViewer && entry.study.id); }
   function radTemplateFor(templates, id) {
     for (var i = 0; i < (templates || []).length; i++) if (templates[i].id === id) return templates[i];
     return null;
@@ -4902,7 +5099,7 @@
 
         '<div class="w-card"><div class="w-card-h">' + ms("image") + "<h3>" + wTH("ward.study-images", "Study images") + "</h3></div>" +
         radViewerHtml(radStudyEntry(rad.studies, picked), rad.studies === undefined, !!rad.studiesFailed) +
-        '<p class="w-hint">' + ms("info") + wTH("ward.images-open-in-the-hospital-s", "Images open in the hospital's own viewer. WardSynQ holds the report, never the pixels.") + "</p>" +
+        (radInApp(radStudyEntry(rad.studies, picked)) ? "" : '<p class="w-hint">' + ms("info") + wTH("ward.images-open-in-the-hospital-s", "Images open in the hospital's own viewer. WardSynQ holds the report, never the pixels.") + "</p>") +
         "</div>" +
 
         '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>" + wTH("ward.report", "Report") + "</h3></div>" +
@@ -7787,6 +7984,7 @@
       '<p class="w-hint">' + ms("info") + wTH("ward.po-store-hint", "With a store named, the reorder suggestions count this order as on its way to that store only. Without one, it counts for every store that holds the item.") + "</p>" +
       '<p class="w-hint">' + ms("info") + wTH("ward.one-item-per-order-for-now", "One item per order for now. The unit is recorded as you type it and is never converted, so a delivery in a different unit will not count against this line. Without a price the order total is unknown, and the hospital's strictest approval level applies.") +
       "</p><button class=\"w-btn\" data-w-act=\"poraise\">" + ms("save") + wTH("ward.raise", "Raise") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + wTH("ward.po-packs-hint", "An item with declared pack sizes (a strip, a box) converts automatically when booked in against one of its own packs; every other item still receives exactly as typed, in the unit it was ordered in.") + "</p>" +
       (state.purchaseOrdersFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.purchase-orders-could-not-be-loaded", "Purchase orders could not be loaded. Do not read this as none.", null, "", 1) + (state.purchaseOrders ? " " + wTH("ward.the-list-below-may-be-out", "The list below may be out of date.") : "") + "</p>" : "") +
       (state.purchaseOrders == null ? (state.purchaseOrdersFailed ? "" : "<p class=\"w-empty\">" + wTH("ward.loading-purchase-orders", "Loading purchase orders...") + "</p>")
         : rows ? '<ul class="w-mini">' + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-purchase-orders", "No purchase orders.") + "</p>") +
@@ -12450,7 +12648,7 @@
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
   function purchasingOpen() {
-    st.view = "purchasing"; st.purchaseOrders = null; st.poStores = null; paint(); loadPurchaseOrders();
+    st.view = "purchasing"; st.purchaseOrders = null; st.poStores = null; st.poPackItems = null; paint(); loadPurchaseOrders();
     apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) {
         var seen = {};
@@ -12458,6 +12656,24 @@
           .filter(function (n) { return n && !seen[n.toLowerCase()] && (seen[n.toLowerCase()] = 1); }).sort() : false;
         paint();
       }, function () { st.poStores = false; paint(); });
+    /* PACK SIZES: the general stores item master (stores.js), read once so "book stock in" can offer the pack
+     * units an item declares (stock.js: packFactors) instead of a blind free-text unit. Best effort: an item
+     * with no packs, or a hospital this could not be read for, still receives exactly as it always has. */
+    apiGet("/ward/stores?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        var m = {};
+        (r && r.ok ? r.items || [] : []).forEach(function (it) { if (it && it.code && it.packs && it.packs.length) m[String(it.code).toUpperCase()] = it; });
+        st.poPackItems = m; paint();
+      }, function () { st.poPackItems = {}; paint(); });
+  }
+  /* PACK SIZES: an item's own declared packs, as words for the receive prompt - the declared shape, never
+   * resolved into a single factor here (that arithmetic is the server's, stock.js: packFactors), so a store
+   * keeper sees what a box or a strip IS for this item before typing which one arrived. */
+  function poPacksWords(item) {
+    var base = String(item.unit || ""), parts = (item.packs || []).map(function (p) {
+      return "(" + p.unit + " = " + p.of + " " + (p.packUnit || base) + ")";
+    });
+    return parts.length ? base + " " + parts.join(" ") : base;
   }
   function loadPurchaseOrders() {
     st.busy = true; paint();
@@ -12498,14 +12714,25 @@
     if (!item) return;
     var qty = prompt(wTD("ward.how-many", "How many?")) || "";
     if (!qty) return;
-    var unit = prompt(wTD("ward.counted-in-what-box-strip-vial", "Counted in what? (box, strip, vial)")) || "";
+    /* PACK SIZES: an item the general stores item master declares packs for is offered ITS OWN declared units
+     * here, instead of the generic box/strip/vial hint - so the unit typed is one the server can actually
+     * resolve, never a guess at what "a pack" means for this item. An item with no packs, or one this
+     * hospital's fetch never came back for, keeps the plain hint exactly as before. */
+    var packItem = st.poPackItems && st.poPackItems[String(item).trim().toUpperCase()];
+    var unit = prompt(packItem
+      ? wTD("ward.counted-in-what-pack-sizes", "Counted in what? Declared for this item: {packs}", { packs: poPacksWords(packItem) })
+      : wTD("ward.counted-in-what-box-strip-vial", "Counted in what? (box, strip, vial)")) || "";
     if (!unit) return;
     st.busy = true; paint();
     apiPost("/ward/goods-receive", { orgId: st.orgId, purchaseOrderId: id, item: item, quantity: qty, unit: unit })
       .then(function (r) {
         // r.detail carries the over-delivery / wrong-unit warning when there is one; it is shown
         // rather than swallowed, because both mean real stock the record has to account for.
-        if (settle(r, r && r.ok ? (r.detail || wT("ward.booked-in", "Booked in.")) : null)) loadPurchaseOrders();
+        var okMsg = r && r.ok ? (r.detail || wT("ward.booked-in", "Booked in.")) : null;
+        // PACK SIZES: what was typed converted to the item's base unit before it reached stock.js - the
+        // dual display, so the store keeper sees what the shelf now actually holds, not only what they typed.
+        if (okMsg && r.packDisplay) okMsg += " " + wT("ward.counted-as", "Counted as {packDisplay}.", { packDisplay: r.packDisplay });
+        if (settle(r, okMsg)) loadPurchaseOrders();
         else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-book-that-in", "Could not book that in."); paint(); });
@@ -16186,6 +16413,7 @@
     if (cmd === "radiologyopen") { radiologyOpen(arg); return; }
     if (cmd === "radiologyload") { loadInvestigations().then(loadRadiology); return; }
     if (cmd === "radpick") { radiologyPick(arg); return; }
+    if (cmd === "dicomview") { dvOpen(arg); return; }
     if (cmd === "radprotocolsave") { radiologyProtocolSave(); return; }
     if (cmd === "radreportsave") { radiologyReportSave(); return; }
     if (cmd === "pharmacyopen") { pharmacyOpen(); return; }
@@ -16716,6 +16944,7 @@
   }
   function close() {
     closeSummaryLayer();
+    dvClose();   // the image viewer lives on document.body, outside the ward's root, so it goes explicitly
     // Closing mid-recording must stop the mic too, else SMD_AMBIENT keeps chunking and paint() keeps
     // firing into a screen that no longer exists. Same shape as discharge.js's close() -> stopScribe().
     if (st.wardScribeCapture) stopWardScribe();

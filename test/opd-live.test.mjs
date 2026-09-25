@@ -108,6 +108,11 @@ test("the three boards are wired: the console, the app (room and front desk, qui
   assert.match(opd, /<script src="\/opd-live\.js\?v=/);
   assert.match(opd, /SMD_OPD_LIVE\.connect\(\{url:queueApiUrl\("live\?orgId="/);
   assert.match(opd, /closest\("input, textarea, select"\)\);\s*if\(!document\.hidden&&!typing/, "a change never repaints over someone typing");
+  // A change heard while hidden or typing is kept, not dropped: shown again, field left, or the minute's pass catches up.
+  assert.match(opd, /else if\(st\.orgId\) liveMissed=true;/);
+  assert.match(opd, /addEventListener\("visibilitychange",function\(\)\{ if\(!document\.hidden&&liveMissed\) liveRefresh\(\); \}\)/);
+  assert.match(opd, /addEventListener\("focusout",function\(\)\{ if\(liveMissed\) liveRefresh\(\); \}\)/);
+  assert.match(opd, /\(liveMissed\|\|!\(LIVE&&LIVE\.isLive\(\)\)\)\) liveRefresh\(\);/, "the minute's pass runs while a change is owed, even with the stream up");
   assert.match(opd, /function logout\(msg\)\{\n\s+liveStop\(\);/);
   assert.match(idx, /<script src="\/opd-live\.js\?v=/);
   assert.match(q, /if \(liveQuiet\(\)\) return;   \/\/ plan item 16/);

@@ -1,0 +1,90 @@
+{
+ "id": "hypomagnesaemia",
+ "title": "Hypomagnesaemia (adult)",
+ "subject": "nephrology",
+ "population": "Adults",
+ "basis": "international",
+ "setting": "Emergency department, ward, ICU",
+ "aliases": ["hypomagnesemia", "low magnesium", "low Mg", "magnesium sulphate", "MgSO4", "torsades de pointes", "PPI hypomagnesaemia", "refractory hypokalaemia"],
+ "summary": "Give IV magnesium sulphate 1 to 2 g for arrhythmia, torsades or seizures followed by 4 to 8 g over 12 to 24 hours, use oral magnesium for mild deficiency, correct linked hypokalaemia and hypocalcaemia, and stop culprit drugs such as PPIs and diuretics.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise",
+   "items": [
+    "Serum magnesium below 0.7 mmol/L (1.7 mg/dL). Symptoms are usual below 0.5 mmol/L (1.2 mg/dL). Serum levels underestimate the total body deficit.",
+    "Features: tremor, tetany, Chvostek and Trousseau signs, seizures, weakness, confusion, arrhythmias (atrial fibrillation, ventricular tachycardia, torsades de pointes) and prolonged QT.",
+    "Often coexists with hypokalaemia and hypocalcaemia, which stay refractory until magnesium is corrected.",
+    "Causes: GI losses (diarrhoea, malabsorption, PPIs), renal losses (loop and thiazide diuretics, alcohol, aminoglycosides, amphotericin B, cisplatin, calcineurin inhibitors, EGFR antibodies), refeeding, pancreatitis, and after parathyroidectomy."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Investigations",
+   "items": [
+    "Check potassium, calcium, phosphate, creatinine and a 12-lead ECG for QT prolongation.",
+    "Cause unclear: fractional excretion of magnesium (FEMg) = (urine Mg x plasma creatinine) / (0.7 x plasma Mg x urine creatinine) x 100. Above 2% during hypomagnesaemia suggests renal wasting.",
+    "Low FEMg or a 24-hour urine magnesium below 12 mg suggests GI loss or poor intake."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "Severe or symptomatic",
+   "items": [
+    "Torsades de pointes, unstable arrhythmia or seizures: magnesium sulphate 1 to 2 g (4 to 8 mmol) IV over 15 minutes; give as a rapid bolus in pulseless torsades during resuscitation.",
+    "Symptomatic but stable severe hypomagnesaemia: magnesium sulphate 1 to 2 g IV over 1 hour.",
+    "Then magnesium sulphate 4 to 8 g (16 to 32 mmol) IV over 12 to 24 hours, repeated daily as needed, continuing for 1 to 2 days after serum magnesium normalises to replete stores.",
+    "50% magnesium sulphate contains 1 g (about 4 mmol) in 2 mL; dilute it (to 20% or weaker) for IV use.",
+    "Continuous cardiac monitoring for arrhythmia, and correct potassium and calcium in parallel."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Mild or asymptomatic",
+   "items": [
+    "Oral magnesium salts: about 5 to 14 mmol elemental magnesium daily for mild deficiency, up to 15 to 28 mmol daily in divided doses for larger deficits. Diarrhoea limits the dose; slow-release forms are better tolerated.",
+    "Continue for 1 to 2 weeks after normalisation for a transient cause, or long term for ongoing losses.",
+    "Stop or switch culprit drugs: change a PPI to an H2 blocker where possible and review diuretics. Amiloride can reduce renal magnesium wasting.",
+    "Refeeding risk: replace magnesium, phosphate and potassium alongside thiamine and cautious feeding."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Monitoring",
+   "items": [
+    "In severe cases, check magnesium every 4 to 6 hours during IV replacement with cardiac monitoring.",
+    "Watch for hypermagnesaemia: loss of deep tendon reflexes, hypotension, bradycardia and respiratory depression, especially in renal impairment.",
+    "Recheck potassium and calcium after magnesium is corrected."
+   ]
+  },
+  {
+   "kind": "special",
+   "title": "Renal impairment and pregnancy",
+   "items": [
+    "eGFR below 30 mL/min/1.73 m2: reduce the IV dose by 25 to 50% and monitor levels closely.",
+    "Magnesium sulphate for eclampsia or pre-eclampsia follows the obstetric regimen (see the eclampsia protocol), not this replacement schedule.",
+    "Patients on cisplatin or anti-EGFR antibodies need regular magnesium monitoring and often supplementation."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Treating refractory hypokalaemia or hypocalcaemia without checking magnesium.",
+    "Stopping replacement as soon as the serum level is normal, before intracellular stores recover.",
+    "Missing long-term PPI use, especially with diuretics in older adults.",
+    "Fast IV infusion in a conscious patient without arrhythmia, causing flushing and hypotension."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Magnesium sulphate IV (bolus)", "dose": "1 to 2 g (4 to 8 mmol) IV over 15 minutes for arrhythmia, torsades or seizures; over 1 hour if stable", "notes": "Rapid bolus in pulseless torsades. Dilute 50% solution before IV use." },
+  { "name": "Magnesium sulphate IV (infusion)", "dose": "4 to 8 g (16 to 32 mmol) IV over 12 to 24 hours", "notes": "Continue 1 to 2 days after normalisation. Reduce by 25 to 50% if eGFR below 30." },
+  { "name": "Oral magnesium salts", "dose": "5 to 14 mmol elemental magnesium daily (mild); 15 to 28 mmol daily in divided doses (larger deficits)", "notes": "Diarrhoea is dose limiting." }
+ ],
+ "sources": [
+  { "org": "Biomedicines (review)", "title": "The Clinical Spectrum of Acquired Hypomagnesemia: From Etiology to Therapeutic Approaches", "year": 2025, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12383300/" },
+  { "org": "Biomedicines (review)", "title": "The Role of Hypomagnesemia in Cardiac Arrhythmias: A Clinical Perspective", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9598104/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

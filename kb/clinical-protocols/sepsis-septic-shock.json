@@ -1,0 +1,106 @@
+{
+ "id": "sepsis-septic-shock",
+ "title": "Sepsis and septic shock: initial management",
+ "subject": "critical-care",
+ "population": "Adults",
+ "basis": "international",
+ "setting": "Emergency department, ward, ICU",
+ "aliases": ["septic shock", "SSC 2021", "hour-1 bundle", "sepsis bundle", "vasopressor", "noradrenaline"],
+ "summary": "Early recognition, cultures, antimicrobials within 1 hour for suspected septic shock or probable sepsis, 30 mL/kg crystalloid for hypoperfusion, noradrenaline to a MAP of 65 mmHg, and urgent source control.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise",
+   "items": [
+    "Sepsis: life-threatening organ dysfunction caused by a dysregulated host response to infection (acute SOFA score rise of 2 or more points).",
+    "Septic shock: sepsis needing vasopressors to keep MAP at or above 65 mmHg AND lactate above 2 mmol/L despite adequate fluid resuscitation.",
+    "Do not use qSOFA alone as a screening tool; it is specific but not sensitive. Use it with NEWS2, SIRS criteria and clinical judgement.",
+    "Hypoperfusion clues: hypotension, lactate 4 mmol/L or more, prolonged capillary refill, mottling, reduced urine output, altered mentation."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "First hour",
+   "items": [
+    "Measure lactate; re-measure within 2 to 4 hours if the first value is above 2 mmol/L and use the trend to guide resuscitation.",
+    "Take blood cultures (at least 2 sets) and site-specific cultures before antimicrobials, provided this does not delay treatment.",
+    "Probable sepsis or possible septic shock: give broad-spectrum IV antimicrobials immediately, ideally within 1 hour of recognition.",
+    "Possible sepsis without shock: rapid assessment for infective versus non-infective causes; if concern for infection persists, give antimicrobials within 3 hours.",
+    "Hypotension or lactate 4 mmol/L or more: give 30 mL/kg IV balanced crystalloid (Ringer lactate or Plasma-Lyte preferred over 0.9% saline) within the first 3 hours, reassessing after each bolus.",
+    "Start noradrenaline if MAP stays below 65 mmHg during or after fluids. A peripheral cannula in a large proximal vein is acceptable while central access is arranged; do not delay vasopressors."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Investigations",
+   "items": [
+    "CBC, renal and liver function, electrolytes, glucose, coagulation profile, arterial or venous blood gas with lactate.",
+    "Blood cultures x 2, urine culture, sputum or other site cultures as indicated; procalcitonin may help decide when to stop antibiotics but not when to start.",
+    "Imaging to find a source needing control: chest X-ray, point-of-care ultrasound, CT abdomen as indicated."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Antimicrobials and source control",
+   "items": [
+    "Choose the empiric regimen by suspected source, recent antibiotic exposure, healthcare contact and the local antibiogram (see the Antibiogram tab and ICMR treatment guidelines).",
+    "Add MRSA cover only when MRSA risk is high. Use two gram-negative agents only for patients at high risk of multidrug-resistant organisms.",
+    "For beta-lactams, use prolonged infusion for maintenance dosing after the initial bolus.",
+    "Identify or exclude an anatomical source needing drainage, debridement or device removal and act as soon as medically and logistically practical.",
+    "Reassess daily for de-escalation; prefer shorter courses with adequate source control."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Haemodynamic and adjunctive care",
+   "items": [
+    "Target an initial MAP of 65 mmHg. Guide further fluids by dynamic measures (passive leg raise, stroke volume or pulse pressure variation) and capillary refill time rather than static CVP alone.",
+    "Consider albumin when large volumes of crystalloid have been given. Avoid starches and gelatin.",
+    "Add vasopressin 0.03 units/min when noradrenaline reaches 0.25 to 0.5 mcg/kg/min, rather than escalating noradrenaline alone.",
+    "Cardiac dysfunction with persistent hypoperfusion despite adequate MAP and volume: add dobutamine or switch to adrenaline.",
+    "Hydrocortisone 200 mg/day IV (50 mg every 6 hours) when noradrenaline or adrenaline of 0.25 mcg/kg/min or more has been needed for at least 4 hours.",
+    "Start insulin when blood glucose is 180 mg/dL (10 mmol/L) or higher; target 144 to 180 mg/dL.",
+    "Transfuse red cells at haemoglobin below 7 g/dL in most adults.",
+    "Give pharmacological VTE prophylaxis (LMWH preferred) and stress ulcer prophylaxis in patients with GI bleeding risk factors. Do not give IV vitamin C."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Monitoring and targets",
+   "items": [
+    "MAP 65 mmHg or more, urine output 0.5 mL/kg/h or more, falling lactate, capillary refill time normalising.",
+    "Invasive arterial monitoring as soon as practical for patients on vasopressors.",
+    "Sepsis-induced ARDS: tidal volume 6 mL/kg predicted body weight, plateau pressure below 30 cmH2O."
+   ]
+  },
+  {
+   "kind": "escalate",
+   "title": "Escalate to ICU",
+   "items": [
+    "Any vasopressor requirement, lactate 4 mmol/L or more after fluids, rising oxygen requirement, reduced consciousness or new organ failure.",
+    "Admit to ICU within 6 hours for patients who need intensive care."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Waiting for cultures or imaging before the first antimicrobial dose in suspected shock.",
+    "Repeated fluid boluses without reassessment in patients with heart failure, ARDS or oligo-anuric AKI.",
+    "Missing a drainable source (obstructed kidney, cholangitis, empyema, abscess, necrotising soft tissue infection)."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Balanced crystalloid (Ringer lactate)", "dose": "30 mL/kg IV within the first 3 hours for hypotension or lactate 4 mmol/L or more", "notes": "Give in boluses of 250 to 500 mL with reassessment after each." },
+  { "name": "Noradrenaline (norepinephrine)", "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP 65 mmHg", "notes": "First-line vasopressor." },
+  { "name": "Vasopressin", "dose": "0.03 units/min IV fixed rate", "notes": "Add when noradrenaline is 0.25 to 0.5 mcg/kg/min." },
+  { "name": "Hydrocortisone", "dose": "50 mg IV every 6 hours (200 mg/day)", "notes": "Septic shock with ongoing vasopressor need of 0.25 mcg/kg/min or more for 4 hours." },
+  { "name": "Dobutamine", "dose": "2.5 to 20 mcg/kg/min IV", "notes": "Myocardial dysfunction with persistent hypoperfusion." }
+ ],
+ "sources": [
+  { "org": "SCCM / ESICM", "title": "Surviving Sepsis Campaign: international guidelines for management of sepsis and septic shock 2021", "year": 2021, "url": "https://link.springer.com/article/10.1007/s00134-021-06506-y" },
+  { "org": "SCCM", "title": "Surviving Sepsis Campaign Adult Guidelines 2021 (resources page)", "year": 2021, "url": "https://www.sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-guidelines-2021" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

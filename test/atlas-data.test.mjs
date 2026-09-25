@@ -547,5 +547,14 @@ ok("names are present as text, not colour alone", ovs.includes("Fornix") && ovs.
 A.close();
 ok("close() restores focus tracking", A._state._prevFocus === null);
 
+// /validation loads the same viewer from stewardmd.in, and .js/.css are served immutable for a
+// year, so a stale ?v= there pins returning reviewers to the old viewer.
+{
+  const tok = (f, a) => (readFileSync(join(ROOT, f), "utf8").match(new RegExp("/?" + a.replace(".", "\\.") + "\\?v=([\\w.-]+)")) || [])[1];
+  for (const a of ["atlas.js", "atlas.css"]) {
+    ok("validation page " + a + " token matches index.html", tok("index.html", a) && tok("validation/index.html", a) === tok("index.html", a));
+  }
+}
+
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);

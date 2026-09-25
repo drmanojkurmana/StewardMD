@@ -52,6 +52,23 @@ test("the series is reserved online once; offline numbers come from it in order,
   assert.equal(await OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: "2099-01-01" }).issue({}), null, "yesterday's series is not today's");
 });
 
+test("two prepares in flight (the console's load and its first refresh) reserve one series, not two", async () => {
+  let n = 0;
+  const sv = server({ "offline-series": () => ({ ok: true, series: "O" + String.fromCharCode(65 + n++) }) });
+  const d = OFF.desk({ storage: mem(), call: sv.call, orgId: "org-a", date: DAY });
+  const [a, b] = await Promise.all([d.prepare(), d.prepare()]);
+  assert.equal(a && b, true);
+  assert.equal(sv.calls.length, 1, "one reservation");
+  assert.equal((await d.issue({ name: "Asha" })).token, "OA-1");
+});
+
+test("the console reserves the series when the desk loads, before any refresh", () => {
+  const opd = read("opd.html");
+  assert.match(opd, /renderNurseStation\(r\); consumePendingScan\(\); if\(!st\.pulse\) loadPulse\(\); offPrepare\(\); return;/, "the rooms dashboard");
+  assert.match(opd, /renderBoard\(\); consumePendingScan\(\); if\(!st\.pulse\) loadPulse\(\); offPrepare\(\);/, "the doctor board");
+  assert.match(opd, /function offPrepare\(\)\{ var d=offDesk\(\); if\(d&&navigator\.onLine!==false\) d\.prepare\(\)/);
+});
+
 test("durable: kept in the device store; shown as taken only once written; the tab's storage only as a stated fallback", async () => {
   const sv = server({ "offline-series": () => ({ ok: true, series: "OA" }) });
   const store = durableMem();

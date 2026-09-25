@@ -1,0 +1,737 @@
+---
+tags: [handoff, clinical-content, sources]
+---
+# Guideline source watch, 2026-09-25
+
+Checked 719 of 719 cited URLs against `kb/source-watch.json`. A changed page is a prompt to re-read the source and
+check the protocol or kit that cites it; dynamic pages (news, cookie banners) can show as changed without a real update.
+
+## Broken now (7)
+
+- https://ameriburn.org/resources/burnreferral/ (fetch failed); cited by protocol `burns-initial-management`
+- https://cdsco.gov.in/opencms/opencms/en/PvPI/ (fetch failed); cited by kit `pharmacy`
+- https://censusindia.gov.in/2011-Documents/mccd_Report1/Physician's_Manual_MCCD.pdf (fetch failed); cited by kit `forensic`
+- https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/5341.pdf (fetch failed); cited by protocol `snakebite-envenomation`
+- https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf (fetch failed); cited by kit `forensic`
+- https://jcsm.aasm.org/doi/10.5664/jcsm.6506 (HTTP 503); cited by protocol `obstructive-sleep-apnoea`
+- https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD014960.pub2/full (HTTP 412); cited by protocol `leptospirosis-international`
+
+## New (no baseline yet) (537)
+
+- https://9vom.in/journals/index.php/htnj/article/view/1097; cited by protocol `hypertension-management-india`
+- https://aam.mohfw.gov.in/download/document/Operational_Guidelines_for_Oral_Health_Care_at_HWCs__2020_.pdf; cited by kit `dental`
+- https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_01_Hypo_Guideline_with_QR_code_January_2023.pdf; cited by protocol `hypoglycaemia`
+- https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_02_DKA_Guideline_with_QR_code_March_2023.pdf; cited by protocol `diabetic-ketoacidosis`
+- https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_06_The_Management_of_Hyperosmolar_Hyperglycaemic_State_HHS_%20in_Adults_FINAL_0.pdf; cited by protocol `hyperosmolar-hyperglycaemic-state`
+- https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_08_Management_of_Hyperglycaemia_and_Steroid_(Glucocorticoid)_Therapy_with_QR_code_January_2023.pdf; cited by protocol `inpatient-hyperglycaemia`
+- https://americanheadachesociety.org/resources/clinicians/guidelines; cited by protocol `acute-migraine`
+- https://amrtg.icmr.org.in/chapter11-bone-marrow.html; cited by protocol `febrile-neutropenia`
+- https://amrtg.icmr.org.in/chapter5-acute-diarrhea-treatment.html; cited by protocol `acute-infectious-diarrhoea-adult`
+- https://amrtg.icmr.org.in/chapter6-table1.html; cited by protocol `cellulitis-skin-soft-tissue`
+- https://amrtg.icmr.org.in/chapter8-abm-investigations.html; cited by protocol `acute-bacterial-meningitis`
+- https://amrtg.icmr.org.in/chapter9-syndromes-management-table2.html; cited by protocol `urinary-tract-infection`
+- https://anaesthetists.org/Home/Resources-publications/Guidelines/Archived-guidelines/Management-of-severe-local-anaesthetic-toxicity; cited by protocol `local-anaesthetic-systemic-toxicity`
+- https://apps.who.int/iris/handle/10665/76887; cited by protocol `dengue-international`
+- https://asra.com/docs/default-source/guidelines-articles/local-anesthetic-systemic-toxicity-rgb.pdf?sfvrsn=33b348e_2; cited by protocol `local-anaesthetic-systemic-toxicity`
+- https://asra.com/guidelines-articles/guidelines/guideline-item/guidelines/2018/04/01/regional-anesthesia-in-the-patient-receiving-antithrombotic-or-thrombolytic-therapy-american-society-of-regional-anesthesia-and-pain-medicine-evidence-based-guidelines; cited by protocol `perioperative-anticoagulation-management`
+- https://asra.com/news-publications/asra-updates/blog-landing/guidelines/2020/11/01/checklist-for-treatment-of-local-anesthetic-systemic-toxicity; cited by protocol `local-anaesthetic-systemic-toxicity`
+- https://asra.com/news-publications/asra-updates/blog-landing/guidelines/2025/01/31/regional-anesthesia-in-the-patient-receiving-antithrombotic-or-thrombolytic-therapy-american-society-of-regional-anesthesia-and-pain-medicine-evidence-based-guidelines-(fifth-edition); cited by protocol `perioperative-anticoagulation-management`
+- https://assets.contentstack.io/v3/assets/bltee37abb6b278ab2c/bltb3d12c34020da842/oa-guideline-summary-2026.pdf; cited by protocol `osteoarthritis`
+- https://associationofbreastsurgery.org.uk/media/cvtju1zs/best-practice-diagnostic-guidelines-for-patients-presenting-with-breast-symptoms.pdf; cited by kit `general-surgery`
+- https://b-s-h.org.uk/guidelines/guidelines/uk-guidelines-on-the-management-of-iron-deficiency-in-pregnancy; cited by protocol `anaemia-in-pregnancy-international`
+- https://cdn.who.int/media/docs/default-source/patient-safety/high5s/h5s-sop.pdf?sfvrsn=594d8e49_4; cited by kit `pharmacy`
+- https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/516.pdf; cited by kit `dermatology`
+- https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/919.pdf; cited by protocol `leptospirosis`
+- https://csi.org.in/frontend/assets/assets/CSI-clinical-practice-guidelines-for-dyslipidemia-_240413_141815.pdf; cited by protocol `dyslipidaemia-management-india`
+- https://d56bochluxqnz.cloudfront.net/documents/EAU-Pocket-on-Non-Neurogenic-Male-LUTS-2025.pdf; cited by protocol `benign-prostatic-hyperplasia`
+- https://d56bochluxqnz.cloudfront.net/documents/EAU-Pocket-on-Sexual-Reproductive-Health-2025.pdf; cited by protocol `erectile-dysfunction`
+- https://d56bochluxqnz.cloudfront.net/documents/full-guideline/EAU-Guidelines-on-Urolithiasis-2026.pdf; cited by protocol `renal-colic-and-kidney-stones`
+- https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f8e0d8f8-cb73-4206-a484-88f5c4fbd719; cited by protocol `herpes-simplex-infections`
+- https://dghs.mohfw.gov.in/national-mental-health-programme.php; cited by kit `psychiatry`
+- https://doclibrary-rcht.cornwall.nhs.uk/DocumentsLibrary/RoyalCornwallHospitalsTrust/Clinical/Pharmacy/ManagementOfHypokalaemiaInAdultsClinicalGuideline.pdf; cited by protocol `hypokalaemia`
+- https://doi.org/10.1007/s00134-026-08360-2; cited by protocol `paediatric-septic-shock`
+- https://doi.org/10.1016/j.ard.2026.06.009; cited by protocol `giant-cell-arteritis`
+- https://doi.org/10.1016/j.jinf.2011.11.013; cited by protocol `acute-encephalitis-international`
+- https://doi.org/10.1016/j.jinf.2011.11.014; cited by protocol `acute-encephalitis-international`
+- https://doi.org/10.1016/j.resuscitation.2025.110753; cited by protocol `accidental-hypothermia`, protocol `drowning`
+- https://doi.org/10.1136/annrheumdis-2016-209707; cited by protocol `acute-gout`
+- https://doi.org/10.1136/ard-2023-224543; cited by protocol `giant-cell-arteritis`
+- https://doi.org/10.15585/mmwr.rr7004a1; cited by protocol `acute-conjunctivitis`
+- https://easl.eu/wp-content/uploads/2018/10/decompensated-cirrhosis-English-report.pdf; cited by kit `gastro-hepatology`
+- https://eqipp.aap.org/File%20Library/Courses/Antibiotics/FlowchartAOM.pdf; cited by protocol `acute-otitis-media`
+- https://gastro.org/clinical-guidance/de-prescribing-proton-pump-inhibitors-ppis/; cited by protocol `gastro-oesophageal-reflux-disease`
+- https://gettingitrightfirsttime.co.uk/wp-content/uploads/2026/04/National-Suspected-Cauda-Equina-Pathway-March-2026.pdf; cited by kit `orthopaedics`
+- https://gi.org/wp-content/uploads/2025/01/ACG-Hpylori-Guidelines-Highlights-2024-FINAL.pdf.pdf; cited by protocol `helicobacter-pylori`
+- https://ginasthma.org/2026-gina-strategy-report/; cited by protocol `acute-asthma-child`
+- https://ginasthma.org/wp-content/uploads/2025/11/GINA-Summary-Guide-2025-WEB_FINAL-WMS.pdf; cited by kit `pulmonology`
+- https://ginasthma.org/wp-content/uploads/2026/05/GINA-2026-Strategy-Report-WMS.pdf; cited by protocol `acute-asthma-adult`, protocol `asthma-long-term-management`
+- https://globalheartjournal.com/articles/10.5334/gh.1305; cited by protocol `hypertension-management`
+- https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf; cited by protocol `copd-stable-management`
+- https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf; cited by protocol `copd-exacerbation`, protocol `copd-stable-management`, kit `pulmonology`
+- https://guidelines.ukkidney.org/hyperkalaemia/; cited by protocol `hyperkalaemia`
+- https://handbook.ggcmedicines.org.uk/guidelines/drug-overdose-and-toxicity/treatment-of-paracetamol-overdose/; cited by protocol `paracetamol-overdose`
+- https://hfai.co.in/wp-content/uploads/2025/07/HFAI-Guidelines.pdf; cited by protocol `chronic-heart-failure-hfref-india`
+- https://iamrsn.icmr.org.in/index.php/resources/guidelines; cited by protocol `community-acquired-pneumonia`, protocol `copd-exacerbation`, protocol `hospital-acquired-ventilator-pneumonia`, protocol `pleural-infection-empyema`
+- https://iapindia.org/pdf/Ch-020-STG-Acute-Watery-Diarrhea.pdf; cited by protocol `paediatric-dehydration-diarrhoea-india`
+- https://iapindia.org/pdf/Ch-085-Scorpion-Envenomation.pdf; cited by protocol `scorpion-sting`
+- https://iapindia.org/pdf/Ch-136-Severe-Acute-Malnutrition.pdf; cited by protocol `severe-acute-malnutrition-india`
+- https://icogonline.org/wp-content/uploads/pdf/gcpr/hdp_fogsi_gestosis_icog_gcpr_2019.pdf; cited by protocol `pre-eclampsia-eclampsia-india`
+- https://ijmr.org.in/dhr-icmr-guidelines-for-diagnosis-management-of-rickettsial-diseases-in-india/; cited by protocol `scrub-typhus`
+- https://india.unfpa.org/sites/default/files/pub-pdf/handbook_final_design.pdf; cited by kit `forensic`
+- https://indiankanoon.org/doc/196199017/; cited by kit `forensic`
+- https://iris.who.int/bitstream/handle/10665/382254/B09514-eng.pdf?sequence=1; cited by protocol `malaria-international`
+- https://iris.who.int/handle/10665/381804; cited by protocol `chikungunya-international`, protocol `chikungunya`, protocol `dengue-international`, protocol `dengue`
+- https://iris.who.int/handle/10665/97035; cited by kit `dental`
+- https://iris.who.int/server/api/core/bitstreams/f9f77952-80b0-4a25-92d7-edce3241af13/content; cited by protocol `tetanus`
+- https://iusti.org/wp-content/uploads/2019/12/Scabies.pdf; cited by protocol `scabies`
+- https://ivteam.com/vip-score/; cited by kit `nursing`
+- https://iwgdfguidelines.org/wp-content/uploads/2023/07/IWGDF-2023-01-Practical-Guidelines.pdf; cited by kit `diabetes-endocrine`
+- https://journal.paho.org/en/articles/evidence-synthesis-guidelines-diagnosis-and-treatment-dengue-chikungunya-and-zika-region; cited by protocol `chikungunya-international`
+- https://kdigo.org/guidelines/acute-kidney-injury/; cited by protocol `acute-kidney-injury`
+- https://kdigo.org/guidelines/anemia-in-ckd/; cited by protocol `chronic-kidney-disease`
+- https://kdigo.org/guidelines/ckd-evaluation-and-management/; cited by protocol `chronic-kidney-disease`, kit `nephrology-urology`
+- https://kdigo.org/guidelines/ckd-mbd/; cited by protocol `chronic-kidney-disease`
+- https://kdigo.org/guidelines/diabetes-ckd/; cited by protocol `chronic-kidney-disease`
+- https://kdigo.org/wp-content/uploads/2016/10/KDIGO-2012-AKI-Guideline-English.pdf; cited by protocol `acute-kidney-injury`
+- https://kdigo.org/wp-content/uploads/2026/03/KDIGO-2026-AKI-AKD-Guideline-Public-Review-Draft-March-2026.pdf; cited by protocol `acute-kidney-injury`, protocol `rhabdomyolysis`
+- https://kentandmedwayformulary.nhs.uk/media/02rlgfzp/treatment-of-acute-hypocalcaemia-in-adults-2024.pdf; cited by protocol `hypocalcaemia`
+- https://link.springer.com/article/10.1007/s00125-026-06833-z; cited by protocol `type-1-diabetes-management`
+- https://link.springer.com/article/10.1007/s00134-021-06506-y; cited by protocol `sepsis-septic-shock`
+- https://link.springer.com/article/10.1007/s00134-025-08117-3; cited by protocol `post-cardiac-arrest-care`
+- https://link.springer.com/article/10.1007/s12028-015-0222-x; cited by protocol `anticoagulant-associated-bleeding`
+- https://link.springer.com/article/10.1007/s13410-022-01129-5; cited by protocol `type-2-diabetes-management`
+- https://ncdc.mohfw.gov.in/uploads/pdf/66872871241561442115.pdf; cited by protocol `influenza`
+- https://ncdc.mohfw.gov.in/uploads/pdf/72513234671561442053-1.pdf; cited by protocol `influenza`
+- https://ncdc.mohfw.gov.in/uploads/pdf/heat11.pdf; cited by protocol `heat-stroke`
+- https://ncdc.mohfw.gov.in/uploads/pdf/heat12.pdf; cited by protocol `heat-stroke`
+- https://ncdc.mohfw.gov.in/uploads/pdf/heat2.pdf; cited by protocol `heat-stroke`
+- https://ncdc.mohfw.gov.in/uploads/pdf/NATIONAL-ACTION-PLAN-FOR-PREVENTION-AND-CONTROL-OF-SNAKEBITE-ENVENOMING-NAPSE.pdf; cited by protocol `snakebite-envenomation`
+- https://ncdc.mohfw.gov.in/uploads/resource/1769332447_National-Guidelines-for-Rabies-Prophylaxis.pdf; cited by protocol `rabies-post-exposure-prophylaxis`
+- https://ncvbdc.mohfw.gov.in/Doc/Malaria-Training-Module-MPHW-2025.pdf; cited by protocol `malaria`
+- https://ncvbdc.mohfw.gov.in/Doc/National-Guidelines-for-Clinical-Management-of-Chikungunya-Fever-2023.pdf; cited by protocol `chikungunya`
+- https://ncvbdc.mohfw.gov.in/Doc/National%20Guidelines%20for%20Clinical%20Management%20of%20Dengue%20Fever%202023.pdf; cited by protocol `dengue`
+- https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/20627628441542176662.pdf; cited by protocol `malaria`
+- https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/JE-AES-Prevention-Control(NPPCJA).pdf; cited by protocol `acute-encephalitis-syndrome`
+- https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/National-Drug-Policy-2013.pdf; cited by protocol `malaria`
+- https://nhm.gov.in/images/pdf/programmes/child-health/guidelines/NSSK/NSSK-Resource-Manual.pdf; cited by protocol `neonatal-resuscitation`
+- https://nhm.gov.in/images/pdf/programmes/maternal-health/guidelines/sba_guidelines_for_skilled_attendance_at_birth.pdf; cited by kit `obgyn`
+- https://nhm.gov.in/New_Updates_2018/NHM_Components/RMNCH_MH_Guidelines/Gestational-Diabetes-Mellitus.pdf; cited by protocol `gestational-diabetes`
+- https://nhm.gov.in/New-Update-2025-26/Whats-new/Training-Modules-NCDs.pdf; cited by kit `cancer-screening`, kit `community-medicine`
+- https://nhsrcindia.org/sites/default/files/2021-03/Operational%20Framework%20Management%20of%20Common%20Cancers.pdf; cited by kit `cancer-screening`, kit `community-medicine`
+- https://nhsrcindia.org/sites/default/files/2021-03/Revised%20Community%20Based%20Assessment%20Checklist%20%28CBAC%29-9th%20Oct%202020.pdf; cited by kit `cancer-screening`, kit `community-medicine`
+- https://nhsrcindia.org/sites/default/files/2023-07/Operational%20Guidelines%20for%20National%20Programme%20for%20Prevention%20and%20Management%20of%20Sickle%20Cell%20Disease.pdf.pdf; cited by protocol `sickle-cell-vaso-occlusive-crisis`
+- https://nnfi.org/assests/upload/usefull-links-pdf/Diagnosis_and_Management_of_Neonatal_Sepsis_NNFI_CPG_Dec2021.pdf; cited by protocol `neonatal-sepsis`
+- https://nssg.oxford-haematology.org.uk/general-haematology/clinical-care/H-8-tumour-lysis-syndrome.pdf; cited by protocol `tumour-lysis-syndrome`
+- https://oarsi.org/research-oarsi-success/oarsi-guidelines-non-surgical-management-knee-hip-and-polyarticular; cited by protocol `osteoarthritis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10025685/; cited by protocol `masld-fatty-liver-india`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10240467/; cited by protocol `antithrombotics-gi-bleeding-endoscopy-india`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10268379/; cited by protocol `drowning`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10289864/; cited by protocol `massive-haemoptysis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10354163/; cited by protocol `acute-respiratory-failure-niv-hfnc`, protocol `ards-lung-protective-ventilation`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10477934/; cited by protocol `polycystic-ovary-syndrome`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10524408/; cited by protocol `ascites-and-sbp`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10544839/; cited by protocol `chronic-constipation`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10588975/; cited by kit `general-surgery`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10625249/; cited by protocol `aluminium-phosphide-poisoning`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10870872/; cited by protocol `ards-lung-protective-ventilation`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10870893/; cited by protocol `ards-lung-protective-ventilation`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC10961935/; cited by protocol `hypernatraemia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11180513/; cited by protocol `adrenal-crisis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11306879/; cited by protocol `epistaxis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11343900/; cited by kit `diabetes-endocrine`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11351064/; cited by protocol `depression-adult`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/; cited by protocol `aluminium-phosphide-poisoning`, protocol `organophosphate-poisoning`, protocol `poisoning-general-approach`, protocol `tricyclic-antidepressant-overdose`, kit `emergency`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11519095/; cited by protocol `masld-fatty-liver`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11725680/; cited by protocol `epistaxis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11862804/; cited by protocol `serotonin-syndrome`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC11933575/; cited by protocol `hypoglycaemia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12173646/; cited by protocol `masld-fatty-liver-india`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12383300/; cited by protocol `hypomagnesaemia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12417299/; cited by protocol `osteoporosis`, protocol `vitamin-d-deficiency`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12643155/; cited by protocol `rapid-sequence-intubation`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12690172/; cited by protocol `obesity-management`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178; cited by kit `diabetes-endocrine`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178/; cited by protocol `hypoglycaemia`, protocol `type-1-diabetes-management`, protocol `type-2-diabetes-management`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12690180/; cited by protocol `diabetic-ketoacidosis`, protocol `inpatient-hyperglycaemia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12690181/; cited by protocol `gestational-diabetes-international`, protocol `gestational-diabetes`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12690183/; cited by protocol `gestational-diabetes-international`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12690184/; cited by kit `diabetes-endocrine`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12690185/; cited by protocol `type-1-diabetes-management`, protocol `type-2-diabetes-management`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC12908895/; cited by protocol `massive-haemoptysis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC13151662/; cited by protocol `acute-ischaemic-stroke`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC13175904/; cited by protocol `paediatric-cardiac-arrest`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC13215261/; cited by protocol `perioperative-anticoagulation-management`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC13262689/; cited by protocol `massive-haemoptysis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC13367543/; cited by protocol `massive-haemoptysis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC13452032/; cited by protocol `myxoedema-coma`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC13506520/; cited by protocol `thyroid-storm`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC13534892/; cited by protocol `hepatic-encephalopathy`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC2696321/; cited by protocol `organophosphate-poisoning`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3162709/; cited by protocol `aluminium-phosphide-poisoning`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3189485/; cited by protocol `acute-liver-failure`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3278061/; cited by protocol `perioperative-vte-prophylaxis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3278063/; cited by protocol `perioperative-vte-prophylaxis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3298219/; cited by protocol `acute-agitation`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3730223; cited by protocol `paracetamol-overdose`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3779420/; cited by protocol `chemical-eye-injury`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3783060/; cited by protocol `acute-encephalitis-international`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4267409/; cited by protocol `hypothyroidism`, protocol `myxoedema-coma`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4282541/; cited by protocol `tricyclic-antidepressant-overdose`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4409581/; cited by protocol `first-unprovoked-seizure`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4593854/; cited by protocol `stemi`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4749120/; cited by protocol `status-epilepticus`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4806829/; cited by protocol `methanol-poisoning`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4812801/; cited by protocol `neuroleptic-malignant-syndrome`, protocol `serotonin-syndrome`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4880116/; cited by protocol `adrenal-crisis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4977114/; cited by protocol `myasthenic-crisis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC4981759/; cited by protocol `hospital-acquired-ventilator-pneumonia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC5225774/; cited by protocol `aluminium-phosphide-poisoning`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC5314807/; cited by protocol `hypercalcaemia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC5450933/; cited by protocol `idiopathic-pulmonary-fibrosis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6057051/; cited by kit `dermatology`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6087022/; cited by protocol `local-anaesthetic-systemic-toxicity`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6140607/; cited by protocol `hyperthyroidism-graves`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6295010/; cited by protocol `necrotising-soft-tissue-infection`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6326298/; cited by protocol `bronchiectasis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6374094/; cited by protocol `obstructive-sleep-apnoea`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6610779; cited by protocol `paracetamol-overdose`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6653685/; cited by protocol `influenza`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/; cited by protocol `community-acquired-pneumonia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6821638/; cited by protocol `guillain-barre-syndrome`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6853170/; cited by protocol `traumatic-brain-injury`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6963238/; cited by protocol `perioperative-vte-prophylaxis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7098487/; cited by protocol `status-epilepticus`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/; cited by protocol `acute-appendicitis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7593430/; cited by protocol `acute-agitation`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/; cited by protocol `anaphylaxis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7619135/; cited by protocol `acute-severe-ulcerative-colitis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7643471/; cited by protocol `acute-cholecystitis-cholangitis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7784957/; cited by protocol `chemical-eye-injury`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7788190/; cited by protocol `ascites-and-sbp`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC7884987/; cited by protocol `myasthenic-crisis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC8117371/; cited by protocol `hypocalcaemia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC8187162/; cited by protocol `methanol-poisoning`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC8297431/; cited by protocol `myasthenic-crisis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC8744717/; cited by protocol `accidental-hypothermia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC8754510/; cited by protocol `gastro-oesophageal-reflux-disease`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC8804685/; cited by protocol `rhabdomyolysis`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC9313855/; cited by protocol `postpartum-haemorrhage`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC9526181/; cited by protocol `chikungunya-international`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC9598104/; cited by protocol `hypomagnesaemia`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC9851481/; cited by protocol `idiopathic-pulmonary-fibrosis`, kit `pulmonology`
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC9977110/; cited by protocol `major-haemorrhage-trauma`, protocol `trauma-primary-survey`, protocol `traumatic-brain-injury`
+- https://poisoncontrol.utah.edu/news/2026/02/naloxone-dosing-strategies; cited by protocol `opioid-overdose`
+- https://pro.aace.com/sites/default/files/2020-05/Vol%2026%20Supplement%201%20(May%202020)%20GL-2019-0524_0.pdf; cited by protocol `osteoporosis`
+- https://professional.diabetes.org/standards-of-care; cited by protocol `type-2-diabetes-management`
+- https://pubmed.ncbi.nlm.nih.gov/10816188/; cited by protocol `hypernatraemia`
+- https://pubmed.ncbi.nlm.nih.gov/18849193/; cited by protocol `bells-palsy`
+- https://pubmed.ncbi.nlm.nih.gov/21903691/; cited by protocol `childhood-pneumonia`
+- https://pubmed.ncbi.nlm.nih.gov/23136264/; cited by protocol `bells-palsy`
+- https://pubmed.ncbi.nlm.nih.gov/24550184/; cited by protocol `scorpion-sting`
+- https://pubmed.ncbi.nlm.nih.gov/26177183/; cited by protocol `idiopathic-pulmonary-fibrosis`
+- https://pubmed.ncbi.nlm.nih.gov/27062097/; cited by protocol `acute-bacterial-meningitis`
+- https://pubmed.ncbi.nlm.nih.gov/27654000/; cited by protocol `traumatic-brain-injury`
+- https://pubmed.ncbi.nlm.nih.gov/29405329/; cited by protocol `chronic-hepatitis-b`
+- https://pubmed.ncbi.nlm.nih.gov/29570866/; cited by protocol `parkinsons-disease`
+- https://pubmed.ncbi.nlm.nih.gov/30792244/; cited by protocol `lower-gi-bleeding`
+- https://pubmed.ncbi.nlm.nih.gov/32443079/; cited by protocol `pre-eclampsia-eclampsia`
+- https://pubmed.ncbi.nlm.nih.gov/33567467/; cited by protocol `upper-gi-bleeding-nonvariceal`
+- https://pubmed.ncbi.nlm.nih.gov/33903147/; cited by protocol `irritable-bowel-syndrome`
+- https://pubmed.ncbi.nlm.nih.gov/34497146/; cited by protocol `iron-deficiency-anaemia`
+- https://pubmed.ncbi.nlm.nih.gov/35120736/; cited by protocol `acute-variceal-bleeding`
+- https://pubmed.ncbi.nlm.nih.gov/35944925/; cited by protocol `helicobacter-pylori`
+- https://pubmed.ncbi.nlm.nih.gov/36028254/; cited by protocol `pulmonary-hypertension`
+- https://pubmed.ncbi.nlm.nih.gov/36655570/; cited by protocol `transient-ischaemic-attack`
+- https://pubmed.ncbi.nlm.nih.gov/37364790/; cited by protocol `masld-fatty-liver`
+- https://pubmed.ncbi.nlm.nih.gov/37707379/; cited by protocol `rapid-sequence-intubation`
+- https://pubmed.ncbi.nlm.nih.gov/37824153/; cited by protocol `blood-transfusion`
+- https://pubmed.ncbi.nlm.nih.gov/37827694/; cited by protocol `systemic-lupus-erythematosus`
+- https://pubmed.ncbi.nlm.nih.gov/3809245/; cited by kit `rehabilitation`
+- https://pubmed.ncbi.nlm.nih.gov/38864796/; cited by protocol `iron-deficiency-anaemia`
+- https://pubmed.ncbi.nlm.nih.gov/39269391/; cited by protocol `gastro-oesophageal-reflux-disease`
+- https://pubmed.ncbi.nlm.nih.gov/40340108/; cited by protocol `erectile-dysfunction`
+- https://pubmed.ncbi.nlm.nih.gov/40440268/; cited by protocol `blood-transfusion`
+- https://pubmed.ncbi.nlm.nih.gov/40956256/; cited by protocol `obesity-management`
+- https://pubmed.ncbi.nlm.nih.gov/41182321/; cited by protocol `systemic-lupus-erythematosus`
+- https://pubmed.ncbi.nlm.nih.gov/41826212/; cited by kit `rheumatology`
+- https://pubmed.ncbi.nlm.nih.gov/42219800/; cited by protocol `hypothyroidism`
+- https://pure.eur.nl/en/publications/462a1486-f219-4513-a0e1-6ed36b7cb85d; cited by protocol `guillain-barre-syndrome`
+- https://register.awmf.org/assets/guidelines/060_D_Ges_fuer_Rheumatologie/060-006a1_S2e_Behandlung-der-Polymyalgia-rheumatica_2025-04.pdf; cited by protocol `polymyalgia-rheumatica`
+- https://resource.anemiamuktbharat.info/Training%20Tool%20Kit/Training%20Manual/English.pdf; cited by protocol `anaemia-in-pregnancy`
+- https://sccm.org/clinical-resources/guidelines/guidelines/guidelines-for-the-prevention-and-management-of-pa; cited by protocol `icu-sedation-analgesia-delirium`
+- https://sickle.nhm.gov.in/home/about; cited by protocol `sickle-cell-vaso-occlusive-crisis`
+- https://sps.nhs.uk/articles/hypokalaemia/; cited by protocol `hypokalaemia`
+- https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/7702334778Training_Module_on_Extrapulmonary_TB_-_Book_24032023.pdf; cited by protocol `pulmonary-tuberculosis`
+- https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/Guidelines-for-Programmatic-Management-of-Tuberculosis-Preventive-Treatment-in-India.pdf; cited by protocol `tb-preventive-treatment`, kit `pulmonology`
+- https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/03/National-Guidelines-for-Management-of-DR-TB_27-3-2025.pdf; cited by protocol `pulmonary-tuberculosis`
+- https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/07/National-Guidance-on-Differential-TB-Care_Final_March-2025-3.pdf; cited by protocol `pulmonary-tuberculosis`
+- https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/08/DO-Letter_Expansion-of-TB-Preventive-Treatment-TPT.pdf; cited by protocol `tb-preventive-treatment`
+- https://tbcindia.nikshay.in/wp-content/uploads/2024/12/Technical-and-Operational-Guidance-on-1HP-TPT-regimen_addendum-to-National-PMTPT-guidelines.pdf; cited by protocol `tb-preventive-treatment`
+- https://tbcindia.nikshay.in/wp-content/uploads/2024/12/Technical-and-Operational-Guidance-on-3RH-TPT-regimen_addendum-to-national-PMTPT-guidelines.pdf; cited by protocol `tb-preventive-treatment`
+- https://tbksp.who.int/en/node/2951; cited by protocol `pulmonary-tuberculosis-international`
+- https://uroweb.org/guidelines/management-of-non-neurogenic-male-luts; cited by kit `nephrology-urology`
+- https://uroweb.org/guidelines/sexual-and-reproductive-health/chapter/management-of-erectile-dysfunction; cited by protocol `erectile-dysfunction`
+- https://uroweb.org/guidelines/urolithiasis; cited by kit `nephrology-urology`
+- https://uroweb.org/guidelines/urological-infections; cited by kit `nephrology-urology`
+- https://victoriahospice.org/wp-content/uploads/2019/12/PPSv2-English-Sample.pdf; cited by kit `palliative`
+- https://wms.org/magazine/magazine/1540/Heat-Illness-CPG/default.aspx; cited by protocol `heat-stroke-international`
+- https://www.aabb.org/news-resources/news/article/2025/12/23/astrazeneca-withdraws-factor-xa-reversal-agent-from-u.s.-market; cited by protocol `anticoagulant-associated-bleeding`
+- https://www.aafp.org/pubs/afp/issues/2013/1001/p435.html; cited by protocol `acute-otitis-media`
+- https://www.aao.org/Assets/76c4baa7-869e-42ad-9ffc-215781185a7b/638434228319430000/conjunctivitis-ppp-pdf; cited by protocol `acute-conjunctivitis`
+- https://www.aao.org/education/preferred-practice-pattern/comprehensive-adult-medical-eye-evaluation-ppp; cited by kit `ophthalmology`
+- https://www.aao.org/education/preferred-practice-pattern/conjunctivitis-ppp-2023; cited by kit `ophthalmology`
+- https://www.aao.org/education/preferred-practice-pattern/diabetic-retinopathy-ppp; cited by kit `ophthalmology`
+- https://www.aao.org/education/preferred-practice-pattern/posterior-vitreous-detachment-retinal-breaks-latti; cited by kit `ophthalmology`
+- https://www.aao.org/education/preferred-practice-pattern/primary-angle-closure-disease-ppp; cited by protocol `acute-angle-closure-glaucoma`
+- https://www.aao.org/education/summary-benchmark-detail/cornea-external-disease-summary-benchmarks-2020; cited by protocol `acute-conjunctivitis`
+- https://www.aap.org/en/pedialink/neonatal-resuscitation-program/neonatal-resuscitation-guidelines/; cited by protocol `neonatal-resuscitation`
+- https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2017/05/methods-for-estimating-the-due-date; cited by kit `obgyn`
+- https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2021/08/anemia-in-pregnancy; cited by protocol `anaemia-in-pregnancy-international`
+- https://www.acutedentalproblems.sdcep.org.uk/; cited by kit `dental`
+- https://www.albertahealthservices.ca/assets/info/peolc/if-peolc-ed-esasr-admin-manual.pdf; cited by kit `palliative`
+- https://www.asam.org/quality-care/clinical-guidelines/alcohol-withdrawal-management-guideline; cited by protocol `alcohol-withdrawal`
+- https://www.auanet.org/documents/Guidelines/PDF/2025%20Guidelines/Surgical%20Stones%20Unabridged%202026.pdf; cited by protocol `renal-colic-and-kidney-stones`
+- https://www.auanet.org/guidelines-and-quality/guidelines/microhematuria; cited by kit `nephrology-urology`
+- https://www.bad.org.uk/pils/scabies/; cited by kit `dermatology`
+- https://www.bad.org.uk/pils/sjs-ten; cited by kit `dermatology`
+- https://www.bapen.org.uk/pdfs/must/must_page3.pdf; cited by kit `nursing`
+- https://www.bashh.org/resources/23/anogenital_herpes_2024_updated_guideline; cited by protocol `herpes-simplex-infections`
+- https://www.bgs.org.uk/resources/resource-series/comprehensive-geriatric-assessment-toolkit-for-primary-care-practitioners; cited by kit `geriatrics`
+- https://www.boa.ac.uk/asset/3B91AD0A%2D9081%2D4253%2D92F7D90E8DF0FB2C/; cited by protocol `open-fracture`
+- https://www.boa.ac.uk/asset/A04FA82B%2D859C%2D44C7%2D96F76BB381637E30/; cited by protocol `necrotising-soft-tissue-infection`, protocol `septic-arthritis`
+- https://www.boa.ac.uk/asset/D0432D40%2D5D99%2D4B64%2D9952F6EB1B60C166/; cited by protocol `acute-compartment-syndrome`
+- https://www.boa.ac.uk/resource/boast-10-pdf.html; cited by kit `orthopaedics`
+- https://www.boa.ac.uk/resource/boast-4-pdf.html; cited by kit `orthopaedics`
+- https://www.boa.ac.uk/resource/boast-6-pdf.html; cited by kit `orthopaedics`
+- https://www.boa.ac.uk/static/cf78e85d-92e9-443b-a1aebd8fa0ae5c09/BOA-National-Casting-Standards.pdf; cited by kit `orthopaedics`
+- https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/; cited by protocol `copd-exacerbation`, protocol `spontaneous-pneumothorax`
+- https://www.brit-thoracic.org.uk/clinical-resources/guidelines/pleural-disease/; cited by protocol `pleural-infection-empyema`, protocol `spontaneous-pneumothorax`
+- https://www.brit-thoracic.org.uk/document-library/guidelines/niv/btsics-guideline-for-the-ventilatory-management-of-acute-hypercapnic-respiratory-failure-in-adults/; cited by protocol `acute-respiratory-failure-niv-hfnc`
+- https://www.cdc.gov/act-early/milestones/index.html; cited by kit `paediatrics`
+- https://www.cdc.gov/candida-auris/hcp/clinical-care/index.html; cited by protocol `candidaemia`
+- https://www.cdc.gov/chikungunya/hcp/treatment-prevention/index.html; cited by protocol `chikungunya-international`
+- https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html; cited by protocol `influenza-international`, protocol `influenza`
+- https://www.cdc.gov/leptospirosis/hcp/clinical-overview/index.html; cited by protocol `leptospirosis-international`, protocol `leptospirosis`
+- https://www.cdc.gov/malaria/hcp/clinical-guidance/appendix-a-treatment-tables.html; cited by protocol `fever-in-returned-traveller`, protocol `malaria-international`
+- https://www.cdc.gov/malaria/hcp/clinical-guidance/treatment-of-severe-malaria-1.html; cited by protocol `malaria-international`
+- https://www.cdc.gov/mmwr/preview/mmwrhtml/rr5804a1.htm; cited by protocol `pneumocystis-pneumonia`
+- https://www.cdc.gov/mmwr/volumes/67/rr/rr6701a1.htm; cited by protocol `hiv-post-exposure-prophylaxis`
+- https://www.cdc.gov/mmwr/volumes/69/rr/rr6901a1.htm; cited by protocol `tb-preventive-treatment-international`
+- https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm; cited by protocol `sexually-transmitted-infections`
+- https://www.cdc.gov/mmwr/volumes/71/wr/pdfs/mm7108a1-H.pdf; cited by protocol `pulmonary-tuberculosis-international`
+- https://www.cdc.gov/mmwr/volumes/74/rr/rr7401a1.htm; cited by protocol `hiv-post-exposure-prophylaxis`
+- https://www.cdc.gov/scabies/hcp/clinical-care/index.html; cited by protocol `scabies`
+- https://www.cdc.gov/shingles/hcp/clinical-overview/index.html; cited by protocol `herpes-zoster`
+- https://www.cdc.gov/shingles/hcp/vaccine-considerations/index.html; cited by protocol `herpes-zoster`
+- https://www.cdc.gov/std/treatment-guidelines/ectoparasitic.htm; cited by protocol `scabies`
+- https://www.cdc.gov/std/treatment-guidelines/herpes.htm; cited by protocol `herpes-simplex-infections`
+- https://www.cdc.gov/tetanus/hcp/clinical-guidance/index.html; cited by protocol `tetanus`
+- https://www.cdc.gov/typhoid-fever/hcp/clinical-guidance/index.html; cited by protocol `enteric-fever-international`
+- https://www.cdc.gov/yellow-book/hcp/post-travel-evaluation/post-travel-evaluation-of-the-ill-traveler.html; cited by protocol `fever-in-returned-traveller`
+- https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/travelers-diarrhea.html; cited by protocol `acute-infectious-diarrhoea-adult`
+- https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/leptospirosis.html; cited by protocol `leptospirosis-international`
+- https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/malaria.html; cited by protocol `malaria-international`
+- https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html; cited by protocol `enteric-fever-international`, protocol `enteric-fever`, protocol `fever-in-returned-traveller`
+- https://www.chestnet.org/guidelines-and-topic-collections/guidelines/pulmonary-vascular/perioperative-management-of-antithrombotic-therapy; cited by protocol `perioperative-anticoagulation-management`
+- https://www.childhealthtaskforce.org/sites/default/files/2018-11/India%20MCP%20Card_English_5.28.2018.pdf; cited by kit `community-medicine`
+- https://www.clintox.org/resources/position-statements; cited by protocol `poisoning-general-approach-international`
+- https://www.cosrh.org/Common/Uploaded%20files/documents/fsrh-guideline-emergency-contraception03dec2020-amendedjuly2023-11jul.pdf; cited by protocol `contraception`
+- https://www.cosrh.org/Common/Uploaded%20files/documents/UKMEC_2025_Summary_Tables.pdf; cited by protocol `contraception`
+- https://www.dal.ca/sites/gmr/our-tools/clinical-frailty-scale.html; cited by kit `geriatrics`
+- https://www.emhg.org/recommendations-1; cited by protocol `malignant-hyperthermia`
+- https://www.emhg.org/recommendations-1/2024/11/4/recognising-and-managing-a-malignant-hyperthermia-crisis-v2024; cited by protocol `malignant-hyperthermia`
+- https://www.england.nhs.uk/long-read/harm-from-delayed-administration-of-rasburicase-for-tumour-lysis-syndrome-natpsa-2025-005-nhsps/; cited by protocol `tumour-lysis-syndrome`
+- https://www.entnet.org/resource/clinical-practice-guideline-nosebleed-epistaxis/; cited by protocol `epistaxis`
+- https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/chronic-coronary-syndromes/; cited by protocol `chronic-coronary-syndrome`
+- https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/dyslipidaemias-management/; cited by protocol `dyslipidaemia-management`
+- https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/endocarditis/; cited by protocol `infective-endocarditis`
+- https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/myocarditis-and-pericarditis/; cited by protocol `acute-pericarditis`
+- https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/valvular-heart-disease/; cited by protocol `aortic-stenosis`
+- https://www.eugs.org/pages/guidelines; cited by protocol `acute-angle-closure-glaucoma`
+- https://www.extrip-workgroup.org/methanol; cited by protocol `methanol-poisoning`
+- https://www.extrip-workgroup.org/recommendations; cited by protocol `poisoning-general-approach-international`
+- https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/atls-11/; cited by protocol `trauma-primary-survey`
+- https://www.gov.uk/drug-safety-update/haloperidol-haldol-reminder-of-risks-when-used-in-elderly-patients-for-the-acute-treatment-of-delirium; cited by protocol `delirium`
+- https://www.gov.uk/government/collections/valproate-safety-measures; cited by protocol `epilepsy-long-term-management`
+- https://www.gov.uk/government/publications/typhoid-and-paratyphoid-public-health-operational-guidelines/public-health-operational-guidelines-for-typhoid-and-paratyphoid-enteric-fever; cited by protocol `enteric-fever-international`
+- https://www.gov.uk/government/publications/viral-haemorrhagic-fever-algorithm-and-guidance-on-management-of-patients; cited by protocol `fever-in-returned-traveller`
+- https://www.gov.uk/guidance/neurological-disorders-assessing-fitness-to-drive; cited by protocol `first-unprovoked-seizure`
+- https://www.guidelinecentral.com/guideline/41531/; cited by protocol `intracerebral-haemorrhage`
+- https://www.hcvguidelines.org/guidance/simplified-hcv-treatment-algorithm-for-treatment-naive-adults-with-compensated-cirrhosis/; cited by protocol `hepatitis-c`
+- https://www.hcvguidelines.org/guidance/simplified-hcv-treatment-for-treatment-naive-adults-without-cirrhosis/; cited by protocol `hepatitis-c`
+- https://www.hdft.nhs.uk/wp-content/uploads/2016/02/you-and-your-anaesthetic.pdf; cited by kit `anaesthesia`
+- https://www.healio.com/news/cardiology/20251223/andexanet-alfa-pulled-from-us-market-due-to-thromboembolic-risk; cited by protocol `intracerebral-haemorrhage`
+- https://www.hematology.org/-/media/hematology/files/clinicians/guidelines/vte/2018ash_clinical_practice_guidelinesvte_heparin-induced-snapshot.pdf; cited by protocol `heparin-induced-thrombocytopenia`
+- https://www.hematology.org/education/clinicians/guidelines-and-quality-care/clinical-practice-guidelines/venous-thromboembolism-guidelines/prophylaxis-for-medical-patients; cited by protocol `vte-prophylaxis-medical-inpatients`
+- https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/Treatment_Guidelines_2019_Final.pdf; cited by protocol `acute-encephalitis-syndrome`, protocol `enteric-fever`, protocol `leptospirosis`
+- https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952337_paediatrics_severe_acute_malnutrition.pdf; cited by protocol `severe-acute-malnutrition-india`
+- https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952338_paediatrics_diarrhea.pdf; cited by protocol `paediatric-dehydration-diarrhoea-india`
+- https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952343_neurology_neuroinfections.pdf; cited by protocol `acute-encephalitis-syndrome`
+- https://www.icmr.gov.in/icmrobject/uploads/STWs/1725959608_paediatrics_acute_encephalitis_syndrome.pdf; cited by protocol `acute-encephalitis-syndrome`
+- https://www.icmr.gov.in/icmrobject/uploads/STWs/1726567245_diabetes_mellitus_type_2.pdf; cited by protocol `type-2-diabetes-management-india`
+- https://www.icmr.gov.in/icmrobject/uploads/STWs/1768382528_updatedpostpartumhaemorrhage.pdf; cited by protocol `postpartum-haemorrhage-india`
+- https://www.idsociety.org/practice-guideline/candidiasis/; cited by protocol `candidaemia`
+- https://www.idsociety.org/practice-guideline/clostridioides-difficile-2021-focused-update/; cited by protocol `clostridioides-difficile-infection`
+- https://www.idsociety.org/practice-guideline/clostridium-difficile/; cited by protocol `clostridioides-difficile-infection`
+- https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/; cited by protocol `urinary-tract-infection`
+- https://www.idsociety.org/practice-guideline/covid-19-guideline-treatment-and-management/; cited by protocol `covid-19`
+- https://www.idsociety.org/practice-guideline/fever-and-neutropenia-in-adults-with-cancer/; cited by protocol `febrile-neutropenia`
+- https://www.idsociety.org/practice-guideline/influenza/; cited by protocol `influenza-international`
+- https://www.idsociety.org/practice-guideline/staphylococcus-aureus-bacteremia/; cited by protocol `catheter-related-bloodstream-infection`
+- https://www.idsociety.org/practice-guideline/streptococcal-pharyngitis2/; cited by protocol `acute-pharyngitis`
+- https://www.idsociety.org/practice-guideline/treatment-of-drug-susceptible-tb/; cited by protocol `pulmonary-tuberculosis-international`
+- https://www.in.gov/health/files/Braden_Scale.pdf; cited by kit `nursing`
+- https://www.indianpediatrics.net/mar2017/223.pdf; cited by protocol `scrub-typhus`
+- https://www.indianpediatrics.net/oct2006/884.pdf; cited by protocol `enteric-fever`
+- https://www.ismp.org/system/files/resources/2024-01/ISMP_HighAlert_AcuteCare_List_010924_MS5760.pdf; cited by kit `pharmacy`
+- https://www.ispad.org/resource/chapter-11-diabetic-ketoacidosis.html; cited by protocol `paediatric-dka`
+- https://www.jstage.jst.go.jp/article/endocrj/63/12/63_EJ16-0336/_article; cited by protocol `thyroid-storm`
+- https://www.mhaus.org/healthcare-professionals/after-a-crisis/post-acute-phase/; cited by protocol `malignant-hyperthermia`
+- https://www.mhaus.org/healthcare-professionals/managing-a-crisis/; cited by protocol `malignant-hyperthermia`
+- https://www.ncbi.nlm.nih.gov/books/NBK140561/; cited by protocol `pre-eclampsia-eclampsia`
+- https://www.ncbi.nlm.nih.gov/books/NBK572659/; cited by protocol `sexually-transmitted-infections`
+- https://www.ncbi.nlm.nih.gov/books/NBK586306/; cited by protocol `hiv-antiretroviral-therapy`
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11082770/; cited by protocol `systemic-lupus-erythematosus`
+- https://www.nhs.uk/conditions/head-injury-and-concussion/; cited by kit `emergency`
+- https://www.nhs.uk/conditions/hernia/; cited by kit `general-surgery`
+- https://www.nhs.uk/conditions/sepsis/; cited by kit `emergency`
+- https://www.nice.org.uk/guidance/cg100; cited by protocol `alcohol-withdrawal`
+- https://www.nice.org.uk/guidance/cg103/chapter/Recommendations; cited by protocol `delirium`
+- https://www.nice.org.uk/guidance/cg113/chapter/Recommendations; cited by protocol `generalised-anxiety-disorder`
+- https://www.nice.org.uk/guidance/cg140/chapter/Recommendations; cited by kit `palliative`
+- https://www.nice.org.uk/guidance/cg141/chapter/Recommendations; cited by kit `gastro-hepatology`
+- https://www.nice.org.uk/guidance/cg150/chapter/Recommendations; cited by protocol `acute-migraine`, protocol `migraine-prevention`
+- https://www.nice.org.uk/guidance/cg153/chapter/recommendations; cited by protocol `psoriasis`
+- https://www.nice.org.uk/guidance/cg184; cited by kit `gastro-hepatology`
+- https://www.nice.org.uk/guidance/cg57; cited by protocol `atopic-dermatitis`
+- https://www.nice.org.uk/guidance/cg95; cited by kit `cardiology`
+- https://www.nice.org.uk/guidance/cg98; cited by protocol `neonatal-jaundice`
+- https://www.nice.org.uk/guidance/ng10; cited by protocol `acute-agitation`
+- https://www.nice.org.uk/guidance/ng106/chapter/recommendations; cited by kit `cardiology`
+- https://www.nice.org.uk/guidance/ng109/chapter/Recommendations; cited by protocol `urinary-tract-infection-children`
+- https://www.nice.org.uk/guidance/ng111/chapter/recommendations; cited by protocol `urinary-tract-infection-children`
+- https://www.nice.org.uk/guidance/ng118/chapter/Recommendations; cited by protocol `renal-colic-and-kidney-stones`
+- https://www.nice.org.uk/guidance/ng12; cited by kit `ent`
+- https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer; cited by kit `general-surgery`
+- https://www.nice.org.uk/guidance/ng12/chapter/Recommendations-organised-by-site-of-cancer; cited by kit `gastro-hepatology`
+- https://www.nice.org.uk/guidance/ng123/chapter/Recommendations; cited by protocol `urinary-incontinence-women`
+- https://www.nice.org.uk/guidance/ng125; cited by kit `general-surgery`
+- https://www.nice.org.uk/guidance/ng126/chapter/Anti-D-immunoglobulin-prophylaxis; cited by protocol `ectopic-pregnancy`
+- https://www.nice.org.uk/guidance/ng126/chapter/Management-of-tubal-ectopic-pregnancy; cited by protocol `ectopic-pregnancy`
+- https://www.nice.org.uk/guidance/ng128/chapter/recommendations; cited by protocol `acute-ischaemic-stroke`, protocol `intracerebral-haemorrhage`, protocol `transient-ischaemic-attack`
+- https://www.nice.org.uk/guidance/ng133/chapter/recommendations; cited by protocol `pre-eclampsia-eclampsia`, protocol `routine-antenatal-care`
+- https://www.nice.org.uk/guidance/ng143; cited by kit `paediatrics`
+- https://www.nice.org.uk/guidance/ng143/chapter/recommendations; cited by protocol `fever-in-under-5s`
+- https://www.nice.org.uk/guidance/ng145; cited by kit `diabetes-endocrine`
+- https://www.nice.org.uk/guidance/ng145/chapter/recommendations; cited by protocol `hyperthyroidism-graves`, protocol `hypothyroidism`
+- https://www.nice.org.uk/guidance/ng158; cited by kit `rehabilitation`
+- https://www.nice.org.uk/guidance/ng185; cited by kit `cardiology`
+- https://www.nice.org.uk/guidance/ng198; cited by protocol `acne-vulgaris`
+- https://www.nice.org.uk/guidance/ng201; cited by protocol `routine-antenatal-care`, kit `obgyn`
+- https://www.nice.org.uk/guidance/ng217/chapter/1-Diagnosis-and-assessment-of-epilepsy; cited by protocol `first-unprovoked-seizure`, kit `neurology`
+- https://www.nice.org.uk/guidance/ng217/chapter/4-Principles-of-treatment-safety-monitoring-and-withdrawal; cited by protocol `first-unprovoked-seizure`
+- https://www.nice.org.uk/guidance/ng217/chapter/5-Treating-epileptic-seizures-in-children-young-people-and-adults; cited by protocol `epilepsy-long-term-management`
+- https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures; cited by protocol `status-epilepticus`
+- https://www.nice.org.uk/guidance/ng222/chapter/Recommendations; cited by protocol `depression-adult`
+- https://www.nice.org.uk/guidance/ng224; cited by protocol `urinary-tract-infection-children`
+- https://www.nice.org.uk/guidance/ng225; cited by kit `psychiatry`
+- https://www.nice.org.uk/guidance/ng225/chapter/Recommendations; cited by protocol `self-harm-and-suicide-risk`
+- https://www.nice.org.uk/guidance/ng226; cited by protocol `osteoarthritis`
+- https://www.nice.org.uk/guidance/ng23; cited by protocol `menopause`
+- https://www.nice.org.uk/guidance/ng232/chapter/recommendations; cited by protocol `traumatic-brain-injury`, kit `geriatrics`
+- https://www.nice.org.uk/guidance/ng234; cited by kit `palliative`
+- https://www.nice.org.uk/guidance/ng234/chapter/Recommendations; cited by protocol `malignant-spinal-cord-compression`
+- https://www.nice.org.uk/guidance/ng234/resources/spinal-metastases-and-metastatic-spinal-cord-compression-pdf-66143896133317; cited by protocol `malignant-spinal-cord-compression`
+- https://www.nice.org.uk/guidance/ng236; cited by kit `rehabilitation`
+- https://www.nice.org.uk/guidance/ng239; cited by protocol `vitamin-b12-and-folate-deficiency`
+- https://www.nice.org.uk/guidance/ng24/chapter/recommendations; cited by protocol `blood-transfusion`
+- https://www.nice.org.uk/guidance/ng240/chapter/Recommendations; cited by protocol `acute-bacterial-meningitis`
+- https://www.nice.org.uk/guidance/ng245; cited by protocol `asthma-long-term-management`
+- https://www.nice.org.uk/guidance/ng246/resources/overweight-and-obesity-management-pdf-66143959958725; cited by protocol `obesity-management`
+- https://www.nice.org.uk/guidance/ng247/chapter/Recommendations; cited by protocol `routine-antenatal-care`
+- https://www.nice.org.uk/guidance/ng249; cited by kit `geriatrics`
+- https://www.nice.org.uk/guidance/ng250; cited by protocol `childhood-pneumonia`
+- https://www.nice.org.uk/guidance/ng254/chapter/Antibiotic-therapy-intravenous-fluid-and-oxygen; cited by protocol `fever-in-under-5s`
+- https://www.nice.org.uk/guidance/ng3/chapter/Recommendations; cited by protocol `gestational-diabetes-international`
+- https://www.nice.org.uk/guidance/ng31; cited by kit `palliative`
+- https://www.nice.org.uk/guidance/NG37/chapter/recommendations; cited by protocol `acute-compartment-syndrome`, protocol `open-fracture`
+- https://www.nice.org.uk/guidance/ng39/chapter/recommendations; cited by protocol `major-haemorrhage-trauma`, protocol `trauma-primary-survey`
+- https://www.nice.org.uk/guidance/ng45; cited by kit `anaesthesia`
+- https://www.nice.org.uk/guidance/ng71/chapter/Recommendations; cited by protocol `parkinsons-disease`
+- https://www.nice.org.uk/guidance/ng79/chapter/Recommendations; cited by protocol `acute-rhinosinusitis`
+- https://www.nice.org.uk/guidance/ng84/chapter/recommendations; cited by protocol `acute-pharyngitis`
+- https://www.nice.org.uk/guidance/ng88/chapter/recommendations; cited by protocol `heavy-menstrual-bleeding`
+- https://www.nice.org.uk/guidance/ng89/chapter/Recommendations; cited by protocol `perioperative-vte-prophylaxis`
+- https://www.nice.org.uk/guidance/ng9; cited by protocol `bronchiolitis`
+- https://www.nice.org.uk/guidance/ng97/chapter/Recommendations; cited by protocol `dementia`
+- https://www.nice.org.uk/guidance/ng98; cited by kit `ent`
+- https://www.nice.org.uk/guidance/ta1143/chapter/1-Recommendations; cited by protocol `menopause`
+- https://www.nnfi.org/assests/upload/announcement-pdf/Bi0OuzaE3bNFsTk_042.pdf; cited by protocol `neonatal-resuscitation`
+- https://www.nnfi.org/assests/upload/announcement-pdf/EdX0Ro9QaLCDMYi_030.pdf; cited by protocol `neonatal-sepsis`
+- https://www.ovid.com/jnls/ajg/fulltext/10.14309/ajg.0000000000002340~acute-liver-failure-guidelines; cited by protocol `acute-liver-failure`
+- https://www.ovid.com/jnls/ajg/fulltext/10.14309/ajg.0000000000002572~acg-clinical-guideline-alcohol-associated-liver-disease; cited by protocol `alcohol-associated-hepatitis`
+- https://www.ovid.com/jnls/ajg/fulltext/10.14309/ajg.0000000000003463~acg-clinical-guideline-update-ulcerative-colitis-in-adults; cited by protocol `acute-severe-ulcerative-colitis`
+- https://www.ovid.com/jnls/ajg/fulltext/10.14309/ajg.0000000000003899~acg-clinical-guideline-hepatic-encephalopathy; cited by protocol `hepatic-encephalopathy`
+- https://www.ovid.com/jnls/hep/fulltext/10.1002/hep.25551~introduction-to-the-revised-american-association-for-the; cited by protocol `acute-liver-failure`
+- https://www.ovid.com/jnls/hep/fulltext/10.1002/hep.30866~diagnosis-and-treatment-of-alcoholassociated-liver-diseases; cited by protocol `alcohol-associated-hepatitis`
+- https://www.ovid.com/jnls/hep/fulltext/10.1002/hep.31884~diagnosis-evaluation-and-management-of-ascites-spontaneous; cited by protocol `ascites-and-sbp`
+- https://www.patientsafety.va.gov/docs/fallsToolkit/morse_falls_pocket_card.pdf; cited by kit `nursing`
+- https://www.rch.org.au/clinicalguide/guideline_index/Acute_asthma/; cited by protocol `acute-asthma-child`
+- https://www.rch.org.au/clinicalguide/guideline_index/bronchiolitis/; cited by protocol `bronchiolitis`
+- https://www.rch.org.au/clinicalguide/guideline_index/Febrile_seizure/; cited by protocol `febrile-seizure`
+- https://www.rcp.ac.uk/resources/national-early-warning-score-news-2/; cited by kit `nursing`
+- https://www.rcpsych.ac.uk/mental-health/treatments-and-wellbeing/antidepressants; cited by kit `psychiatry`
+- https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines; cited by protocol `adult-cardiac-arrest`, protocol `bradycardia-with-pulse`, protocol `tachycardia-with-pulse`
+- https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines; cited by protocol `post-cardiac-arrest-care`
+- https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines; cited by protocol `accidental-hypothermia`, protocol `adult-cardiac-arrest`, protocol `anaphylaxis`, protocol `bradycardia-with-pulse`, protocol `drowning`, protocol `heat-stroke`
+- https://www.resus.org.uk/sites/default/files/2021-05/Emergency%20Treatment%20of%20Anaphylaxis%20May%202021_0.pdf; cited by protocol `anaphylaxis`
+- https://www.rightdecisions.scot.nhs.uk/asthma-pathway-bts-nice-sign-sign-244/managing-acute-asthma/management-of-acute-asthma-in-adults/acute-asthma-in-adults/; cited by kit `pulmonology`
+- https://www.rssdi.in/newwebsite/RSSDI-Clinical-Practice-Recommendations-2022%20(1).pdf; cited by protocol `type-2-diabetes-management-india`
+- https://www.sccm.org/clinical-resources/guidelines/guidelines/focused-update-padis-guideline; cited by protocol `icu-sedation-analgesia-delirium`
+- https://www.sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026; cited by kit `emergency`
+- https://www.sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-guidelines-2021; cited by protocol `sepsis-septic-shock`
+- https://www.sccm.org/survivingsepsiscampaign/guidelines-and-resources/surviving-sepsis-campaign-pediatric-guidelines; cited by protocol `paediatric-septic-shock`
+- https://www.sdcep.org.uk/published-guidance/anticoagulants-and-antiplatelets/; cited by kit `dental`
+- https://www.sign.ac.uk/guidelines/british-guideline-on-the-management-of-asthma/; cited by protocol `acute-asthma-adult`, protocol `acute-asthma-child`
+- https://www.sign.ac.uk/media/2066/sign-155-qrg-2023-update-0-2.pdf; cited by protocol `migraine-prevention`
+- https://www.sign.ac.uk/sign-157-delirium; cited by protocol `delirium`
+- https://www.sralab.org/sites/default/files/2017-07/barthel.pdf; cited by kit `rehabilitation`
+- https://www.ukkidney.org/sites/default/files/FINAL%20VERSION%20-%20UKKA%20CLINICAL%20PRACTICE%20GUIDELINE%20-%20MANAGEMENT%20OF%20HYPERKALAEMIA%20IN%20ADULTS%20-%20191223_0.pdf; cited by protocol `hyperkalaemia`
+- https://www.ukri.org/councils/mrc/facilities-and-resources/find-an-mrc-facility-or-resource/mrc-muscle-scale/; cited by kit `rehabilitation`
+- https://www.ukri.org/publications/aids-to-the-examination-of-the-peripheral-nervous-system/; cited by kit `neurology`
+- https://www.who.int/docs/default-source/reproductive-health/maternal-health/anc.pdf?sfvrsn=5e2c740e_2; cited by protocol `routine-antenatal-care`
+- https://www.who.int/europe/publications/i/item/9789241548373; cited by protocol `paediatric-dehydration-diarrhoea`, protocol `paediatric-septic-shock`, protocol `severe-acute-malnutrition`
+- https://www.who.int/news-room/fact-sheets/detail/burns; cited by protocol `burns-initial-management`
+- https://www.who.int/news-room/fact-sheets/detail/cholera; cited by protocol `acute-infectious-diarrhoea-adult`
+- https://www.who.int/news-room/fact-sheets/detail/infant-and-young-child-feeding; cited by kit `paediatrics`
+- https://www.who.int/news-room/fact-sheets/detail/oral-health; cited by kit `dental`, kit `ent`
+- https://www.who.int/news-room/fact-sheets/detail/rabies; cited by protocol `rabies-post-exposure-prophylaxis-international`, protocol `rabies-post-exposure-prophylaxis`
+- https://www.who.int/news-room/fact-sheets/detail/scabies; cited by protocol `scabies`
+- https://www.who.int/news-room/fact-sheets/detail/tetanus; cited by protocol `tetanus`
+- https://www.who.int/news-room/fact-sheets/detail/typhoid; cited by protocol `enteric-fever-international`
+- https://www.who.int/publications-detail-redirect/9789241547871; cited by protocol `dengue-international`
+- https://www.who.int/publications/b/77823; cited by protocol `pulmonary-tuberculosis-international`
+- https://www.who.int/publications/b/81082; cited by protocol `contraception`
+- https://www.who.int/publications/i/item/978-92-4-154837-3; cited by kit `paediatrics`
+- https://www.who.int/publications/i/item/9789240020481; cited by kit `ent`
+- https://www.who.int/publications/i/item/9789240031593; cited by protocol `cryptococcal-meningitis`, protocol `hiv-antiretroviral-therapy`, protocol `pneumocystis-pneumonia`
+- https://www.who.int/publications/i/item/9789240048126; cited by protocol `pulmonary-tuberculosis`
+- https://www.who.int/publications/i/item/9789240052178; cited by protocol `cryptococcal-meningitis`
+- https://www.who.int/publications/i/item/9789240052734; cited by protocol `hepatitis-c`
+- https://www.who.int/publications/i/item/9789240057227; cited by protocol `preterm-labour`
+- https://www.who.int/publications/i/item/9789240057296; cited by protocol `preterm-labour`
+- https://www.who.int/publications/i/item/9789240082830; cited by protocol `severe-acute-malnutrition`, kit `paediatrics`
+- https://www.who.int/publications/i/item/9789240085398; cited by protocol `postpartum-haemorrhage`
+- https://www.who.int/publications/i/item/9789240088542; cited by protocol `anaemia-in-pregnancy-international`, protocol `anaemia-in-pregnancy`
+- https://www.who.int/publications/i/item/9789240090767; cited by protocol `sexually-transmitted-infections`
+- https://www.who.int/publications/i/item/9789240090903; cited by protocol `chronic-hepatitis-b`
+- https://www.who.int/publications/i/item/9789240095137; cited by protocol `hiv-post-exposure-prophylaxis`
+- https://www.who.int/publications/i/item/9789240096196; cited by protocol `tb-preventive-treatment-international`
+- https://www.who.int/publications/i/item/9789240097759; cited by protocol `influenza-international`
+- https://www.who.int/publications/i/item/9789240097773; cited by protocol `tb-preventive-treatment-international`
+- https://www.who.int/publications/i/item/9789240102903; cited by protocol `neonatal-sepsis`
+- https://www.who.int/publications/i/item/9789240103412; cited by protocol `childhood-pneumonia`, protocol `paediatric-dehydration-diarrhoea`
+- https://www.who.int/publications/i/item/9789240115637; cited by protocol `anaemia-in-pregnancy`, protocol `postpartum-haemorrhage`
+- https://www.who.int/publications/i/item/9789240119468; cited by protocol `hiv-antiretroviral-therapy`
+- https://www.who.int/publications/i/item/9789241506328; cited by protocol `severe-acute-malnutrition`
+- https://www.who.int/publications/i/item/9789241507813; cited by protocol `childhood-pneumonia`
+- https://www.who.int/publications/i/item/9789241508988; cited by protocol `preterm-labour`
+- https://www.who.int/publications/i/item/9789241516570; cited by kit `ophthalmology`
+- https://www.who.int/publications/i/item/9789241548816; cited by protocol `opioid-overdose`
+- https://www.who.int/publications/i/item/9789241549912; cited by protocol `anaemia-in-pregnancy-international`, kit `obgyn`
+- https://www.who.int/publications/i/item/9789241550475; cited by protocol `surgical-antibiotic-prophylaxis`
+- https://www.who.int/publications/i/item/9789290225300; cited by protocol `snakebite-envenomation-international`
+- https://www.who.int/publications/i/item/B09018; cited by protocol `rabies-post-exposure-prophylaxis-international`
+- https://www.who.int/publications/i/item/B09467; cited by protocol `covid-19`
+- https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured; cited by kit `emergency`
+- https://www.who.int/publications/i/item/guidelines-for-malaria; cited by protocol `malaria`
+- https://www.who.int/publications/i/item/human-leptospirosis-guidance-for-diagnosis-surveillance-and-control; cited by protocol `leptospirosis-international`
+- https://www.who.int/publications/i/item/WHO-2019-nCoV-clinical-2023.2; cited by protocol `covid-19`
+- https://www.who.int/publications/i/item/WHO-NMH-MND-13.2; cited by protocol `gestational-diabetes-international`
+- https://www.who.int/publications/i/item/WHO-TRS-1012; cited by protocol `rabies-post-exposure-prophylaxis-international`, protocol `rabies-post-exposure-prophylaxis`
+- https://www.who.int/publications/i/item/WHO-UHC-SDS-2019.10; cited by kit `pharmacy`
+- https://www.who.int/publications/i/item/WHO-UHC-SDS-2019.9; cited by kit `pharmacy`
+- https://www.who.int/publications/i/item/who-wer9316; cited by protocol `rabies-post-exposure-prophylaxis-international`
+- https://www.who.int/publications/m/item/integrated-management-of-childhood-illness---chart-booklet-(march-2014); cited by kit `paediatrics`
+- https://www.who.int/tools/child-growth-standards; cited by kit `paediatrics`
+- https://www.who.int/tools/growth-reference-data-for-5to19-years; cited by kit `paediatrics`
+
+## Blocked to automated checks (403) (175)
+
+- https://aao-hnsfjournals.onlinelibrary.wiley.com/doi/10.1002/ohn.1344; cited by protocol `acute-rhinosinusitis`
+- https://aao-hnsfjournals.onlinelibrary.wiley.com/doi/10.1177/0194599813505967; cited by protocol `bells-palsy`
+- https://aao-hnsfjournals.onlinelibrary.wiley.com/doi/10.1177/0194599819890327; cited by kit `ent`
+- https://academic.oup.com/ageing/article/43/5/592/2812265; cited by protocol `vitamin-d-deficiency`
+- https://academic.oup.com/ageing/article/51/9/afac205/6730755; cited by kit `geriatrics`
+- https://academic.oup.com/ajhp/article/70/3/195/5112717; cited by protocol `acute-appendicitis`, protocol `surgical-antibiotic-prophylaxis`
+- https://academic.oup.com/ajrccm/article/212/1/24/8435770; cited by protocol `community-acquired-pneumonia`
+- https://academic.oup.com/bjd/article/174/6/1194/6617016; cited by kit `dermatology`
+- https://academic.oup.com/cid/article-abstract/68/10/e83/5407612; cited by protocol `urinary-tract-infection`
+- https://academic.oup.com/cid/article/39/9/1267/402080; cited by protocol `acute-bacterial-meningitis`
+- https://academic.oup.com/cid/article/44/Supplement_1/S1/290669; cited by protocol `herpes-zoster`
+- https://academic.oup.com/cid/article/47/3/303/313455; cited by protocol `acute-encephalitis-international`
+- https://academic.oup.com/cid/article/49/1/1/288390; cited by protocol `catheter-related-bloodstream-infection`
+- https://academic.oup.com/cid/article/52/4/e56/382256; cited by protocol `febrile-neutropenia`
+- https://academic.oup.com/cid/article/52/5/e103/388285; cited by protocol `urinary-tract-infection`
+- https://academic.oup.com/cid/article/54/8/e72/367144; cited by protocol `acute-rhinosinusitis`
+- https://academic.oup.com/cid/article/55/10/e86/321183; cited by protocol `acute-pharyngitis`
+- https://academic.oup.com/cid/article/59/2/e10/2895845; cited by protocol `cellulitis-skin-soft-tissue`, protocol `necrotising-soft-tissue-infection`
+- https://academic.oup.com/cid/article/65/12/e45/4557073; cited by protocol `acute-infectious-diarrhoea-adult`
+- https://academic.oup.com/ehjcvp/article/10/7/572/7759705; cited by protocol `chronic-coronary-syndrome`
+- https://academic.oup.com/ejendo/article/170/3/G1/6668028; cited by protocol `hyponatraemia`
+- https://academic.oup.com/ejendo/article/185/4/G43/6654384; cited by protocol `hyperthyroidism-graves`
+- https://academic.oup.com/eurheartj/advance-article/doi/10.1093/eurheartj/ehag100/8766302; cited by protocol `acute-heart-failure`, protocol `chronic-heart-failure-hfref`
+- https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehad193; cited by protocol `infective-endocarditis`
+- https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehae179; cited by protocol `acute-aortic-syndrome`
+- https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehaf190; cited by protocol `dyslipidaemia-management`
+- https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehaf192; cited by protocol `acute-pericarditis`
+- https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehy037; cited by protocol `syncope-evaluation`
+- https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehz405; cited by protocol `deep-vein-thrombosis`, protocol `pulmonary-embolism`
+- https://academic.oup.com/eurheartj/article/42/36/3599/6358045; cited by protocol `acute-heart-failure`, protocol `chronic-heart-failure-hfref`
+- https://academic.oup.com/eurheartj/article/43/38/3618/6673929; cited by protocol `pulmonary-hypertension`
+- https://academic.oup.com/eurheartj/article/43/39/3826/6675076; cited by kit `anaesthesia`
+- https://academic.oup.com/eurheartj/article/44/37/3627/7246292; cited by protocol `acute-heart-failure`
+- https://academic.oup.com/eurheartj/article/44/38/3720/7243210; cited by protocol `nste-acs`, protocol `stemi`
+- https://academic.oup.com/eurheartj/article/45/36/3314/7738779; cited by protocol `atrial-fibrillation`, kit `cardiology`
+- https://academic.oup.com/eurheartj/article/45/36/3415/7743115; cited by protocol `chronic-coronary-syndrome`
+- https://academic.oup.com/eurheartj/article/45/36/3538/7738955; cited by protocol `peripheral-arterial-disease`
+- https://academic.oup.com/eurheartj/article/45/38/3912/7741010; cited by protocol `hypertension-management`, protocol `hypertensive-emergency`
+- https://academic.oup.com/eurheartj/article/46/44/4635/8234488; cited by protocol `aortic-stenosis`
+- https://academic.oup.com/europace/article/23/10/1612/6247378; cited by protocol `anticoagulant-associated-bleeding`
+- https://academic.oup.com/jbcr/article/45/3/565/7458089; cited by protocol `burns-initial-management`
+- https://academic.oup.com/jcem/article/105/3/587/5739968; cited by protocol `osteoporosis`
+- https://academic.oup.com/jcem/article/107/8/2101/6605637; cited by protocol `inpatient-hyperglycaemia`
+- https://academic.oup.com/jcem/article/108/3/507/6916871; cited by protocol `hypercalcaemia`
+- https://academic.oup.com/jcem/article/109/8/1907/7685305; cited by protocol `vitamin-d-deficiency`
+- https://academic.oup.com/rheumatology/article/45/8/1039/1784962; cited by protocol `septic-arthritis`
+- https://academic.oup.com/rheumatology/article/59/3/e1/5714024; cited by kit `rheumatology`
+- https://academic.oup.com/rheumatology/article/65/2/keaf522/8322743; cited by kit `rheumatology`
+- https://acrjournals.onlinelibrary.wiley.com/doi/10.1002/acr.24131; cited by protocol `osteoarthritis`
+- https://acrjournals.onlinelibrary.wiley.com/doi/10.1002/acr.24180; cited by kit `rheumatology`
+- https://acrjournals.onlinelibrary.wiley.com/doi/10.1002/acr.24596; cited by protocol `rheumatoid-arthritis`
+- https://acrjournals.onlinelibrary.wiley.com/doi/epdf/10.1002/acr.24042; cited by kit `rheumatology`
+- https://ard.eular.org/article/S0003-4967(24)02544-5/fulltext; cited by protocol `polymyalgia-rheumatica`
+- https://ard.eular.org/article/S0003-4967(24)08619-9/fulltext; cited by protocol `rheumatoid-arthritis`
+- https://ard.eular.org/article/S0003-4967(26)00075-0/fulltext; cited by protocol `rheumatoid-arthritis`
+- https://ashpublications.org/bloodadvances/article/2/22/3198/16115/American-Society-of-Hematology-2018-guidelines-for; cited by protocol `vte-prophylaxis-medical-inpatients`
+- https://ashpublications.org/bloodadvances/article/2/22/3226/16134/American-Society-of-Hematology-2018-guidelines-for?searchresult=1; cited by protocol `deep-vein-thrombosis`
+- https://ashpublications.org/bloodadvances/article/2/22/3360/16129/American-Society-of-Hematology-2018-guidelines-for; cited by protocol `heparin-induced-thrombocytopenia`, protocol `vte-prophylaxis-medical-inpatients`
+- https://ashpublications.org/bloodadvances/article/3/23/3829/429213/American-Society-of-Hematology-2019-guidelines-for; cited by protocol `immune-thrombocytopenia`
+- https://ashpublications.org/bloodadvances/article/4/12/2656/460974/American-Society-of-Hematology-2020-guidelines-for; cited by protocol `sickle-cell-vaso-occlusive-crisis`
+- https://ashpublications.org/bloodadvances/article/4/19/4693/463998; cited by protocol `deep-vein-thrombosis`, protocol `pulmonary-embolism`
+- https://ashpublications.org/bloodadvances/article/8/13/3578/515729/The-2022-review-of-the-2019-American-Society-of; cited by protocol `immune-thrombocytopenia`
+- https://associationofanaesthetists-publications.onlinelibrary.wiley.com/doi/10.1111/anae.12679; cited by kit `anaesthesia`
+- https://cpr.heart.org/-/media/CPR-Files/CPR-Guidelines-Files/2025-Algorithms/Algorithm-ACLS-Bradycardia-250514.pdf?sc_lang=en; cited by protocol `bradycardia-with-pulse`
+- https://cpr.heart.org/-/media/CPR-Files/CPR-Guidelines-Files/2025-Algorithms/Algorithm-ACLS-Tachycardia-250514.pdf?sc_lang=en; cited by protocol `tachycardia-with-pulse`
+- https://diabetesjournals.org/care/article/44/11/2589/138492/The-Management-of-Type-1-Diabetes-in-Adults-A; cited by protocol `type-1-diabetes-management`
+- https://diabetesjournals.org/care/article/47/8/1257/156808/Hyperglycemic-Crises-in-Adults-With-Diabetes-A; cited by protocol `diabetic-ketoacidosis`, protocol `hyperosmolar-hyperglycaemic-state`
+- https://doi.org/10.1080/15563650.2025.2609807; cited by protocol `poisoning-general-approach-international`
+- https://doi.org/10.1093/rheumatology/kez672; cited by protocol `giant-cell-arteritis`
+- https://doi.org/10.1097/AOG.0000000000002560; cited by protocol `ectopic-pregnancy`
+- https://doi.org/10.1097/AOG.0000000000003668; cited by protocol `preterm-labour`
+- https://doi.org/10.1111/1471-0528.14189; cited by protocol `ectopic-pregnancy`
+- https://doi.org/10.1111/acem.14728; cited by protocol `bppv-vertigo`
+- https://doi.org/10.1111/bjd.14530; cited by protocol `sjs-ten`
+- https://doi.org/10.1111/bjd.19893; cited by protocol `sjs-ten`
+- https://doi.org/10.1111/bjh.12959; cited by protocol `vitamin-b12-and-folate-deficiency`
+- https://doi.org/10.1111/pedi.13406; cited by protocol `paediatric-dka`
+- https://doi.org/10.1161/CIR.0000000000001161; cited by protocol `poisoning-general-approach-international`
+- https://doi.org/10.1177/0194599816689660; cited by protocol `bppv-vertigo`
+- https://doi.org/10.1177/0194599816689667; cited by protocol `bppv-vertigo`
+- https://doi.org/10.1183/13993003.01574-2021; cited by protocol `acute-respiratory-failure-niv-hfnc`
+- https://doi.org/10.1183/13993003.02426-2016; cited by protocol `acute-respiratory-failure-niv-hfnc`
+- https://doi.org/10.1542/peds.2008-0939; cited by protocol `febrile-seizure`
+- https://doi.org/10.1542/peds.2010-3318; cited by protocol `febrile-seizure`
+- https://doi.org/10.1542/peds.2014-2742; cited by protocol `bronchiolitis`
+- https://doi.org/10.1542/peds.2022-058859; cited by protocol `neonatal-jaundice`
+- https://europepmc.org/articles/PMC10563586; cited by protocol `acute-gout`
+- https://europepmc.org/articles/PMC11986972; cited by protocol `sjs-ten`
+- https://europepmc.org/articles/PMC12344504; cited by protocol `giant-cell-arteritis`
+- https://headachejournal.onlinelibrary.wiley.com/doi/10.1111/head.14692; cited by protocol `migraine-prevention`
+- https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2808062; cited by protocol `paracetamol-overdose`
+- https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2809955; cited by protocol `hypernatraemia`
+- https://journals.bioscientifica.com/ec/article/5/5/G7/35180/SOCIETY-FOR-ENDOCRINOLOGY-ENDOCRINE-EMERGENCY; cited by protocol `hypocalcaemia`
+- https://journals.lww.com/acsm-csmr/fulltext/2023/04000/acsm_expert_consensus_statement_on_exertional_heat.10.aspx; cited by protocol `heat-stroke-international`
+- https://journals.lww.com/ajg/fulltext/10.14309/ajg.0000000000001036~acg-clinical-guideline-management-of-irritable-bowel; cited by protocol `irritable-bowel-syndrome`
+- https://journals.lww.com/ajg/fulltext/10.14309/ajg.0000000000002968~acg-clinical-guideline-treatment-of-helicobacter-pylori; cited by protocol `helicobacter-pylori`
+- https://journals.lww.com/ajg/fulltext/2021/05000/acg_clinical_guideline__upper_gastrointestinal_and.14.aspx; cited by protocol `upper-gi-bleeding-nonvariceal`
+- https://journals.lww.com/ajg/fulltext/2023/02000/management_of_patients_with_acute_lower.14.aspx; cited by protocol `lower-gi-bleeding`
+- https://journals.lww.com/ajg/fulltext/2024/03000/american_college_of_gastroenterology_guidelines_.14.aspx; cited by protocol `acute-pancreatitis`
+- https://journals.lww.com/ajg/fulltext/2026/07000/acg_clinical_guideline__colonic_diverticulitis.13.aspx; cited by protocol `acute-diverticulitis`
+- https://journals.lww.com/dcrjournal/fulltext/10.1097/dcr.0000000000001679~the-american-society-of-colon-and-rectal-surgeons-clinical; cited by protocol `acute-diverticulitis`
+- https://journals.lww.com/hep/fulltext/10.1002/hep.28906~portal-hypertensive-bleeding-in-cirrhosis-risk; cited by protocol `acute-variceal-bleeding`
+- https://journals.lww.com/hep/fulltext/10.1097/hep.0000000000000647~aasld-practice-guidance-on-risk-stratification-and; cited by protocol `acute-variceal-bleeding`
+- https://journals.lww.com/hep/fulltext/10.1097/hep.0000000000001549~aasld-idsa-practice-guideline-on-treatment-of-chronic; cited by protocol `chronic-hepatitis-b`
+- https://journals.lww.com/hep/fulltext/2023/05000/aasld_practice_guidance_on_the_clinical_assessment.31.aspx; cited by protocol `masld-fatty-liver`
+- https://journals.lww.com/hep/fulltext/2023/12000/aasld_practice_guidance_on_prevention,_diagnosis,.27.aspx; cited by kit `gastro-hepatology`
+- https://journals.lww.com/menopausejournal/fulltext/2022/07000/the_2022_hormone_therapy_position_statement_of_the.4.aspx; cited by protocol `menopause`
+- https://journals.sagepub.com/doi/10.1089/thy.2016.0229; cited by protocol `hyperthyroidism-graves`
+- https://journals.sagepub.com/doi/10.1177/10806032241227924; cited by protocol `heat-stroke-international`
+- https://movementdisorders.onlinelibrary.wiley.com/doi/10.1002/mds.26424; cited by protocol `parkinsons-disease`
+- https://obgyn.onlinelibrary.wiley.com/doi/10.1002/ijgo.12666; cited by protocol `heavy-menstrual-bleeding`
+- https://onlinelibrary.wiley.com/doi/10.1111/bjh.13403; cited by protocol `tumour-lysis-syndrome`
+- https://onlinelibrary.wiley.com/doi/10.1111/bjh.70092; cited by protocol `tumour-lysis-syndrome`
+- https://onlinelibrary.wiley.com/doi/10.1111/epi.18338; cited by kit `neurology`
+- https://onlinelibrary.wiley.com/doi/10.1111/jth.15006; cited by protocol `thrombotic-thrombocytopenic-purpura`
+- https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1528-1167.2009.02397.x; cited by protocol `epilepsy-long-term-management`
+- https://onlinelibrary.wiley.com/doi/full/10.1111/bjh.18789; cited by protocol `blood-transfusion`
+- https://onlinelibrary.wiley.com/doi/full/10.1111/jth.15010; cited by protocol `thrombotic-thrombocytopenic-purpura`
+- https://professional.heart.org/en/science-news/2023-guideline-for-the-management-of-patients-with-aneurysmal-subarachnoid-hemorrhage; cited by protocol `subarachnoid-haemorrhage`
+- https://professional.heart.org/en/science-news/2026-guideline-for-the-early-management-of-patients-with-acute-ischemic-stroke; cited by protocol `acute-ischaemic-stroke`
+- https://psychiatryonline.org/doi/book/10.1176/appi.books.9780890426760; cited by kit `psychiatry`
+- https://publications.aap.org/pediatrics/article/127/3/e20103852/65016/Fever-and-Antipyretic-Use-in-Children; cited by protocol `fever-in-under-5s`
+- https://publications.aap.org/pediatrics/article/128/3/595/30724/Urinary-Tract-Infection-Clinical-Practice; cited by protocol `urinary-tract-infection-children`
+- https://publications.aap.org/pediatrics/article/131/3/e964/30912/The-Diagnosis-and-Management-of-Acute-Otitis-Media; cited by protocol `acute-otitis-media`
+- https://publications.ersnet.org/content/erj/50/3/1700629; cited by protocol `bronchiectasis`
+- https://publications.ersnet.org/content/erj/66/6/2501126; cited by protocol `bronchiectasis`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001161; cited by protocol `opioid-overdose`, protocol `poisoning-general-approach`, protocol `tricyclic-antidepressant-overdose`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001193; cited by protocol `atrial-fibrillation`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001251; cited by protocol `peripheral-arterial-disease`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309; cited by protocol `nste-acs`, protocol `stemi`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001356; cited by protocol `hypertension-management`, protocol `hypertensive-emergency`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001367; cited by protocol `neonatal-resuscitation`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001368; cited by protocol `paediatric-cardiac-arrest`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001370; cited by protocol `paediatric-cardiac-arrest`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001375; cited by protocol `post-cardiac-arrest-care`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376; cited by protocol `adult-cardiac-arrest`, protocol `bradycardia-with-pulse`, protocol `tachycardia-with-pulse`
+- https://www.ahajournals.org/doi/10.1161/CIR.0000000000001423; cited by protocol `dyslipidaemia-management`
+- https://www.ahajournals.org/doi/10.1161/STR.0000000000000375; cited by protocol `transient-ischaemic-attack`
+- https://www.ahajournals.org/doi/10.1161/STR.0000000000000407; cited by protocol `intracerebral-haemorrhage`
+- https://www.ahajournals.org/doi/10.1161/STR.0000000000000436; cited by protocol `subarachnoid-haemorrhage`
+- https://www.ahajournals.org/doi/10.1161/STR.0000000000000513; cited by protocol `acute-ischaemic-stroke`, protocol `transient-ischaemic-attack`, kit `neurology`
+- https://www.amjmed.com/article/S0002-9343(13)00605-0/fulltext; cited by protocol `hyponatraemia`
+- https://www.asahq.org/standards-and-practice-parameters/statement-on-asa-physical-status-classification-system; cited by kit `anaesthesia`
+- https://www.auajournals.org/doi/10.1097/JU.0000000000003698; cited by protocol `benign-prostatic-hyperplasia`
+- https://www.bjanaesthesia.org/article/S0007-0912(17)54060-X/fulltext; cited by protocol `rapid-sequence-intubation`
+- https://www.fogsi.org/fogsi-hdp-gcpr-2019/; cited by protocol `pre-eclampsia-eclampsia`
+- https://www.gastrojournal.org/article/S0016-5085(20)34847-2/fulltext; cited by protocol `iron-deficiency-anaemia`
+- https://www.gastrojournal.org/article/S0016-5085(20)35512-8/fulltext; cited by protocol `acute-diverticulitis`
+- https://www.indiacode.nic.in/bitstream/123456789/2249/1/A2017-10.pdf; cited by kit `psychiatry`
+- https://www.jaad.org/article/S0190-9622(20)30284-X/fulltext; cited by protocol `psoriasis`
+- https://www.jaad.org/article/S0190-9622(20)32288-X/fulltext; cited by protocol `psoriasis`
+- https://www.jaad.org/article/S0190-9622(23)00004-X/fulltext; cited by protocol `atopic-dermatitis`
+- https://www.jaad.org/article/S0190-9622(23)02878-5/fulltext; cited by protocol `atopic-dermatitis`
+- https://www.jaad.org/article/S0190-9622(23)03389-3/fulltext; cited by protocol `acne-vulgaris`
+- https://www.jaad.org/article/S0190-9622(25)02125-5/fulltext; cited by protocol `atopic-dermatitis`
+- https://www.jaad.org/article/S0190-9622%2818%2933001-9/fulltext; cited by protocol `psoriasis`
+- https://www.jacc.org/doi/10.1016/j.jacc.2017.03.003; cited by protocol `syncope-evaluation`
+- https://www.jacc.org/doi/10.1016/j.jacc.2020.04.053; cited by protocol `anticoagulant-associated-bleeding`
+- https://www.jacc.org/doi/10.1016/j.jacc.2021.12.012; cited by protocol `chronic-heart-failure-hfref`
+- https://www.jacc.org/doi/10.1016/j.jacc.2022.08.004; cited by protocol `acute-aortic-syndrome`
+- https://www.journal-of-hepatology.eu/article/S0168-8278(24)00329-5/fulltext; cited by protocol `masld-fatty-liver`
+- https://www.mohfw.gov.in/sites/default/files/953522324.pdf; cited by kit `forensic`
+- https://www.nejm.org/doi/full/10.1056/NEJMoa2202884; cited by protocol `acute-pancreatitis`
+- https://www.nejm.org/doi/full/10.1056/NEJMoa2208449; cited by protocol `scrub-typhus`
+- https://www.nejm.org/doi/full/10.1056/NEJMoa2303966; cited by protocol `postpartum-haemorrhage`
+- https://www.nejm.org/doi/full/10.1056/NEJMra1401108; cited by protocol `scorpion-sting`
+- https://www.neurology.org/doi/10.1212/WNL.0000000000006697; cited by kit `neurology`
+- https://www.neurology.org/doi/10.1212/WNL.0000000000214881; cited by protocol `migraine-prevention`
+- https://www.resuscitationjournal.com/article/S0300-9572(25)00281-3/fulltext; cited by protocol `adult-cardiac-arrest`, protocol `tachycardia-with-pulse`
+- https://www.sciencedirect.com/science/article/pii/S0007091225006932; cited by protocol `rapid-sequence-intubation`
+- https://www.sciencedirect.com/science/article/pii/S016752731300315X; cited by kit `cardiology`
+- https://www.sciencedirect.com/science/article/pii/S1538783625003605; cited by protocol `thrombotic-thrombocytopenic-purpura`
+- https://www.the-rheumatologist.org/article/fda-approves-sarilumab-for-adults-with-glucocorticoid-resistant-polymyalgia-rheumatica/; cited by protocol `polymyalgia-rheumatica`
+- https://www.thelancet.com/commissions-do/dementia-prevention-intervention-and-care; cited by protocol `dementia`
+- https://www.thelancet.com/journals/lancet/article/PIIS0140673607612021/fulltext; cited by protocol `organophosphate-poisoning`
+
+Unchanged: 0.

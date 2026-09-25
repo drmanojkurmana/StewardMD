@@ -1,0 +1,97 @@
+{
+ "id": "hypernatraemia",
+ "title": "Hypernatraemia (adult)",
+ "subject": "nephrology",
+ "population": "Adults",
+ "basis": "international",
+ "setting": "Emergency department, ward, ICU",
+ "aliases": ["hypernatremia", "high sodium", "free water deficit", "water deficit", "dehydration", "diabetes insipidus", "Adrogue-Madias formula"],
+ "summary": "Restore circulation first if shocked, then replace the free water deficit with enteral water or hypotonic IV fluid, lowering sodium by about 10 mmol/L per day in chronic cases and faster in acute salt loading, while treating the cause and ongoing losses.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise",
+   "items": [
+    "Hypernatraemia: serum sodium above 145 mmol/L; cohort studies define severe as 155 mmol/L or more.",
+    "It reflects a water deficit relative to sodium, usually with impaired thirst or access to water: older adults, dementia, stroke, sedated or ventilated patients.",
+    "Causes: pure water loss (diabetes insipidus, fever, heat, tachypnoea), hypotonic fluid loss (diarrhoea, vomiting, osmotic diuresis from hyperglycaemia or mannitol, loop diuretics, lactulose, post-obstructive diuresis) or sodium gain (hypertonic saline, sodium bicarbonate, salt ingestion).",
+    "Features: thirst, lethargy, irritability, weakness, confusion, seizures and coma; brain shrinkage can cause intracranial haemorrhage.",
+    "Duration decides the safe rate: acute (developed over hours, for example accidental salt loading) versus chronic (over 48 hours or unknown)."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "Initial assessment and calculation",
+   "items": [
+    "Shock or poor perfusion: first restore circulation with a limited volume of isotonic crystalloid, then switch to hypotonic fluid once haemodynamically stable.",
+    "Total body water (TBW) = weight in kg x 0.6 in younger men, 0.5 in younger women and older men, 0.45 in older women.",
+    "Free water deficit (litres) = TBW x (serum sodium / 140 minus 1).",
+    "Expected change in serum sodium from 1 litre of infusate = (infusate sodium minus serum sodium) / (TBW + 1). Infusate sodium: 5% dextrose 0, 0.2% saline 34, 0.45% saline 77 mmol/L.",
+    "Set the rate from the formula to reach the daily target, then add maintenance needs and measured ongoing losses (urine, stool, drains)."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Fluids and correction rate",
+   "items": [
+    "Route: oral or nasogastric water is preferred. If not feasible, give IV 5% dextrose for pure water loss, or 0.45% saline when sodium has also been lost (diarrhoea, osmotic diuresis).",
+    "Chronic or unknown duration: aim to lower sodium by about 10 mmol/L per day (classically no faster than 0.5 mmol/L/h) towards 145 mmol/L.",
+    "Acute hypernatraemia developing over hours: lowering by about 1 mmol/L/h is appropriate because brain adaptation has not occurred.",
+    "Adult cohort data (Feigin 2023, systematic review 2024) found no cerebral oedema attributable to correction faster than 0.5 mmol/L/h and higher mortality with slow correction: avoid under-treatment as well as overshoot.",
+    "Isotonic 0.9% saline is unsuitable for correcting hypernatraemia except for circulatory compromise."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Treat the cause",
+   "items": [
+    "Stop gastrointestinal losses, control fever and hyperglycaemia, and withhold lactulose and diuretics where possible.",
+    "Correct hypercalcaemia and hypokalaemia, which impair urine concentration.",
+    "Suspected central diabetes insipidus (large volumes of dilute urine, head injury or pituitary surgery): give water and seek endocrine advice on desmopressin.",
+    "Nephrogenic diabetes insipidus (lithium, hypercalcaemia, hypokalaemia): treat the cause and ensure free access to water.",
+    "Tube-fed or ICU patients: prescribe adequate free water with feeds and review hypertonic fluids and sodium-containing drugs."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Monitoring",
+   "items": [
+    "Recheck sodium frequently (for example every 4 hours) during active IV correction and reassess the prescription each time.",
+    "Measure urine output and ongoing losses; a large dilute urine output suggests diabetes insipidus.",
+    "Check glucose when giving 5% dextrose: hyperglycaemia causes osmotic diuresis and worsens hypernatraemia.",
+    "Watch for seizures or falling consciousness during treatment."
+   ]
+  },
+  {
+   "kind": "special",
+   "title": "Indian context",
+   "items": [
+    "Heat stroke, diarrhoeal illness in older adults, and uncontrolled diabetes with osmotic diuresis are common precipitants in summer; check creatinine, glucose and CK.",
+    "Half-strength (0.45%) saline and 5% dextrose are widely available; 0.2% saline often is not, so use enteral water where the gut works.",
+    "Older adults with dementia, stroke or immobility need scheduled water intake, especially during heat waves and febrile illness."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Correcting with 0.9% saline in a stable patient, which worsens or fails to correct sodium.",
+    "Ignoring ongoing losses, so sodium does not fall as calculated.",
+    "Unduly slow correction in hospital-acquired hypernatraemia.",
+    "Missing hyperglycaemia or hypercalcaemia as the driver of polyuria."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Enteral water (oral or nasogastric)", "dose": "Volume from the free water deficit plus ongoing losses, spread to lower sodium about 10 mmol/L per day", "notes": "Preferred route when the gut works." },
+  { "name": "Glucose 5% IV", "dose": "Rate set by the Adrogue-Madias formula to lower sodium about 10 mmol/L per day (chronic) or 1 mmol/L/h (acute)", "notes": "Pure water loss. Monitor glucose." },
+  { "name": "Sodium chloride 0.45% IV", "dose": "Rate set by the Adrogue-Madias formula", "notes": "When sodium has also been lost; a larger volume is needed than with 5% dextrose." },
+  { "name": "Isotonic crystalloid", "dose": "Limited IV boluses until perfusion is restored", "notes": "Shock only; then change to hypotonic fluid." }
+ ],
+ "sources": [
+  { "org": "N Engl J Med (Adrogue and Madias)", "title": "Hypernatremia", "year": 2000, "url": "https://pubmed.ncbi.nlm.nih.gov/10816188/" },
+  { "org": "JAMA Network Open (Feigin et al)", "title": "Rate of Correction and All-Cause Mortality in Patients With Severe Hypernatremia", "year": 2023, "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2809955" },
+  { "org": "Cureus (systematic review)", "title": "Hypernatremia and Its Rate of Correction: The Evidence So Far", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10961935/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

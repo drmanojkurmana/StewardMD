@@ -1,0 +1,26 @@
+{
+ "source": { "org": "Wounds UK", "title": "Miminas DA. A critical evaluation of the Lund and Browder chart. Wounds UK 2007; 3(3): 58 to 68 (Figure 1 reproduces the Lund and Browder chart)", "year": 2007, "url": "https://wounds-uk.com/wp-content/uploads/2023/02/content_9151.pdf" },
+ "verified": "Fetched and text-extracted on 2026-09-25. Age-dependent regions come from the source's Figure 1 table (relative percentage of body surface area affected by growth, ages 0, 1, 5, 10, 15 and adult): A, half of head 9.5, 8.5, 6.5, 5.5, 4.5, 3.5; B, half of one thigh 2.75, 3.25, 4, 4.25, 4.5, 4.75; C, half of one lower leg 2.5, 2.5, 2.75, 3, 3.25, 3.5. Here they are doubled to whole regions (head 2A, each thigh 2B, each lower leg 2C). Fixed regions are the chart's body diagram values summed front and back; the extracted diagram labels (13, 2, 1.5, 1.75, 2.5, 1) match trunk 13 each side, upper arm 2 per surface, lower arm 1.5 per surface, foot 1.75 per surface, buttock 2.5, neck and genitalia 1, but the hand label was not legible in the extracted text. Every per-side value was therefore cross-checked against two further fetched tables that list each region separately: the Vanderbilt University Medical Center Pediatric Burn Fluid Resuscitation protocol, March 2025 (modified Lund and Browder table, birth to 15 years, citing Lund and Browder 1944; https://www.vumc.org/burn/sites/default/files/public_files/Protocols/Pediatric-Burn-Fluid-Resuscitation-3.2025.pdf) and Burn Protocol 23, How to complete a Lund and Browder diagram, 2024 (15 years and adult columns; https://wsusurgery.com/wp-content/uploads/2024/02/Burn-Protocol-23-How-to-Complete-a-Lund-and-Browder-Diagram.pdf). All values agree, including hand 2.5 per hand. Column sums checked with node on 2026-09-25: each of the six age columns totals exactly 100. Not used: the MSF clinical guideline table, whose 5 to 9 years column sums to 101, and a textbook table giving B as 4.5 at age 10.",
+ "ages": ["0", "1", "5", "10", "15", "Adult"],
+ "regions": [
+  { "id": "head", "label": "Head", "percent": [19, 17, 13, 11, 9, 7] },
+  { "id": "neck", "label": "Neck", "percent": [2, 2, 2, 2, 2, 2] },
+  { "id": "ant-trunk", "label": "Anterior trunk", "percent": [13, 13, 13, 13, 13, 13] },
+  { "id": "post-trunk", "label": "Posterior trunk", "percent": [13, 13, 13, 13, 13, 13] },
+  { "id": "r-buttock", "label": "Right buttock", "percent": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5] },
+  { "id": "l-buttock", "label": "Left buttock", "percent": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5] },
+  { "id": "genitalia", "label": "Genitalia", "percent": [1, 1, 1, 1, 1, 1] },
+  { "id": "r-upper-arm", "label": "Right upper arm", "percent": [4, 4, 4, 4, 4, 4] },
+  { "id": "l-upper-arm", "label": "Left upper arm", "percent": [4, 4, 4, 4, 4, 4] },
+  { "id": "r-lower-arm", "label": "Right lower arm", "percent": [3, 3, 3, 3, 3, 3] },
+  { "id": "l-lower-arm", "label": "Left lower arm", "percent": [3, 3, 3, 3, 3, 3] },
+  { "id": "r-hand", "label": "Right hand", "percent": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5] },
+  { "id": "l-hand", "label": "Left hand", "percent": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5] },
+  { "id": "r-thigh", "label": "Right thigh", "percent": [5.5, 6.5, 8, 8.5, 9, 9.5] },
+  { "id": "l-thigh", "label": "Left thigh", "percent": [5.5, 6.5, 8, 8.5, 9, 9.5] },
+  { "id": "r-leg", "label": "Right lower leg", "percent": [5, 5, 5.5, 6, 6.5, 7] },
+  { "id": "l-leg", "label": "Left lower leg", "percent": [5, 5, 5.5, 6, 6.5, 7] },
+  { "id": "r-foot", "label": "Right foot", "percent": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5] },
+  { "id": "l-foot", "label": "Left foot", "percent": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5] }
+ ]
+}

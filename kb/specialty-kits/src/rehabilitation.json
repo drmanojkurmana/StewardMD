@@ -1,0 +1,181 @@
+{
+ "id": "rehabilitation",
+ "label": "Physical Medicine and Rehabilitation",
+ "short": "Rehab",
+ "icon": "accessibility_new",
+ "group": "care",
+ "subject": "neurology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "rehab-history",
+   "title": "Rehabilitation history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "rehab_condition", "label": "Main condition", "type": "select", "opts": ["Stroke", "Traumatic brain injury", "Spinal cord injury", "Peripheral nerve injury or neuropathy", "Parkinson's disease or other movement disorder", "Amputation", "Fracture or joint replacement", "Arthritis", "Back or neck pain", "Cerebral palsy", "Deconditioning after illness"] },
+    { "id": "rehab_onset", "label": "Date of onset or surgery", "type": "date" },
+    { "id": "rehab_prior", "label": "Therapy received so far", "type": "text", "hint": "e.g. inpatient physiotherapy for 2 weeks, home exercises since discharge" },
+    { "id": "hand_dominance", "label": "Hand dominance", "type": "select", "opts": ["Right-handed", "Left-handed", "Ambidextrous"] },
+    { "id": "occupation", "label": "Occupation and roles", "type": "text", "hint": "e.g. farmer, homemaker, driver; wishes to return to work" },
+    { "id": "home_setting", "label": "Home setting", "type": "text", "hint": "e.g. first floor, 12 steps, Indian-style toilet, lives with son" },
+    { "id": "swallow_communication", "label": "Swallowing and communication", "type": "select", "opts": ["No difficulty", "Swallowing difficulty", "Speech or language difficulty", "Both"] },
+    { "id": "cognition_therapy", "label": "Cognition for therapy", "type": "select", "opts": ["Follows multi-step commands", "Follows 1-step commands", "Unable to follow commands"] }
+   ]
+  },
+  {
+   "id": "barthel",
+   "title": "Functional assessment (Barthel Index)",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "bi_feeding", "label": "Feeding", "type": "select", "opts": ["0: Unable", "5: Needs help cutting, spreading butter, or modified diet", "10: Independent"] },
+    { "id": "bi_bathing", "label": "Bathing", "type": "select", "opts": ["0: Dependent", "5: Independent (or in shower)"] },
+    { "id": "bi_grooming", "label": "Grooming", "type": "select", "opts": ["0: Needs help with personal care", "5: Independent face, hair, teeth, shaving"] },
+    { "id": "bi_dressing", "label": "Dressing", "type": "select", "opts": ["0: Dependent", "5: Needs help but can do about half unaided", "10: Independent (including buttons, zips, laces)"] },
+    { "id": "bi_bowels", "label": "Bowels", "type": "select", "opts": ["0: Incontinent (or needs to be given enemas)", "5: Occasional accident", "10: Continent"] },
+    { "id": "bi_bladder", "label": "Bladder", "type": "select", "opts": ["0: Incontinent, or catheterised and unable to manage alone", "5: Occasional accident", "10: Continent"] },
+    { "id": "bi_toilet", "label": "Toilet use", "type": "select", "opts": ["0: Dependent", "5: Needs some help, but can do something alone", "10: Independent (on and off, dressing, wiping)"] },
+    { "id": "bi_transfers", "label": "Transfers (bed to chair and back)", "type": "select", "opts": ["0: Unable, no sitting balance", "5: Major help (one or two people, physical), can sit", "10: Minor help (verbal or physical)", "15: Independent"] },
+    { "id": "bi_mobility", "label": "Mobility on level surfaces", "type": "select", "opts": ["0: Immobile or under 50 yards", "5: Wheelchair independent, including corners, over 50 yards", "10: Walks with help of one person (verbal or physical), over 50 yards", "15: Independent (may use any aid, e.g. stick), over 50 yards"] },
+    { "id": "bi_stairs", "label": "Stairs", "type": "select", "opts": ["0: Unable", "5: Needs help (verbal, physical, carrying aid)", "10: Independent"] },
+    { "id": "bi_total", "label": "Barthel total", "type": "number", "unit": "/100", "hint": "sum of the item scores; record what the patient does, not what they could do" }
+   ]
+  },
+  {
+   "id": "range-of-movement",
+   "title": "Range of movement",
+   "target": "musculo_skeletal_system",
+   "fields": [
+    { "id": "rom_shoulder", "label": "Shoulder", "type": "text", "hint": "e.g. right shoulder flexion 0 to 120 degrees, abduction 0 to 90 degrees" },
+    { "id": "rom_elbow", "label": "Elbow and forearm", "type": "text", "hint": "e.g. left elbow flexion 10 to 130 degrees, supination full" },
+    { "id": "rom_wrist_hand", "label": "Wrist and hand", "type": "text", "hint": "e.g. right wrist extension 0 to 40 degrees, incomplete fist" },
+    { "id": "rom_hip", "label": "Hip", "type": "text", "hint": "e.g. left hip flexion 0 to 90 degrees, fixed flexion 10 degrees" },
+    { "id": "rom_knee", "label": "Knee", "type": "text", "hint": "e.g. right knee flexion 5 to 100 degrees" },
+    { "id": "rom_ankle", "label": "Ankle and foot", "type": "text", "hint": "e.g. left ankle dorsiflexion to neutral only" },
+    { "id": "rom_spine", "label": "Cervical and lumbar spine", "type": "text", "hint": "e.g. lumbar flexion fingertips to mid-shin" },
+    { "id": "contractures", "label": "Contractures", "type": "select", "opts": ["None", "Present, not limiting function", "Present, limiting function"] },
+    { "id": "rom_method", "label": "Measured with", "type": "select", "opts": ["Goniometer", "Visual estimate"] }
+   ]
+  },
+  {
+   "id": "power-tone",
+   "title": "Muscle power and spasticity",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "mrc_rul", "label": "Right upper limb (MRC grade, weakest key group)", "type": "select", "opts": ["5: Normal power", "4: Active movement against gravity and resistance", "3: Active movement against gravity", "2: Active movement with gravity eliminated", "1: Flicker or trace of contraction", "0: No contraction", "Not tested"] },
+    { "id": "mrc_lul", "label": "Left upper limb (MRC grade, weakest key group)", "type": "select", "opts": ["5: Normal power", "4: Active movement against gravity and resistance", "3: Active movement against gravity", "2: Active movement with gravity eliminated", "1: Flicker or trace of contraction", "0: No contraction", "Not tested"] },
+    { "id": "mrc_rll", "label": "Right lower limb (MRC grade, weakest key group)", "type": "select", "opts": ["5: Normal power", "4: Active movement against gravity and resistance", "3: Active movement against gravity", "2: Active movement with gravity eliminated", "1: Flicker or trace of contraction", "0: No contraction", "Not tested"] },
+    { "id": "mrc_lll", "label": "Left lower limb (MRC grade, weakest key group)", "type": "select", "opts": ["5: Normal power", "4: Active movement against gravity and resistance", "3: Active movement against gravity", "2: Active movement with gravity eliminated", "1: Flicker or trace of contraction", "0: No contraction", "Not tested"] },
+    { "id": "power_details", "label": "Muscle groups and grades", "type": "text", "hint": "e.g. right shoulder abductors 3, wrist extensors 2, hip flexors 4", "set": "motor_sys" },
+    { "id": "mas_grade", "label": "Spasticity (Modified Ashworth Scale), most affected group", "type": "select", "opts": ["0: No increase in muscle tone", "1: Slight increase, catch and release or minimal resistance at the end of the range", "1+: Slight increase, catch then minimal resistance through less than half the range", "2: More marked increase through most of the range, but part easily moved", "3: Considerable increase, passive movement difficult", "4: Rigid in flexion or extension"] },
+    { "id": "mas_muscles", "label": "Muscle groups tested for spasticity", "type": "text", "hint": "e.g. right elbow flexors 1+, right ankle plantar flexors 2" },
+    { "id": "clonus", "label": "Ankle clonus", "type": "select", "opts": ["Absent", "Present, unsustained", "Present, sustained"] },
+    { "id": "sensation", "label": "Sensation in the affected limbs", "type": "select", "opts": ["Intact", "Impaired", "Absent"] }
+   ]
+  },
+  {
+   "id": "gait-balance",
+   "title": "Gait, balance and aids",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "gait_pattern", "label": "Gait", "type": "select", "opts": ["Normal", "Hemiplegic (circumduction)", "Antalgic", "Trendelenburg", "High-stepping (foot drop)", "Shuffling", "Ataxic", "Spastic (scissoring)", "Non-ambulant"], "set": "gait" },
+    { "id": "sitting_balance", "label": "Sitting balance", "type": "select", "opts": ["Good", "Fair (needs hand support)", "Poor"] },
+    { "id": "standing_balance", "label": "Standing balance", "type": "select", "opts": ["Good", "Fair (needs support)", "Poor", "Unable to stand"] },
+    { "id": "walking_distance", "label": "Walking distance", "type": "number", "unit": "metres" },
+    { "id": "tug_time", "label": "Timed Up and Go", "type": "number", "unit": "seconds" },
+    { "id": "walking_aid", "label": "Walking aid", "type": "select", "opts": ["None", "Stick", "Quadripod", "Walking frame", "Crutches", "Wheelchair"] },
+    { "id": "orthosis", "label": "Orthosis or prosthesis", "type": "select", "opts": ["None", "Ankle-foot orthosis", "Knee brace", "Spinal brace", "Upper limb splint", "Prosthesis"] },
+    { "id": "falls_6m", "label": "Falls in the past 6 months", "type": "number", "unit": "falls" }
+   ]
+  },
+  {
+   "id": "pain",
+   "title": "Pain",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "pain_site", "label": "Site", "type": "text", "hint": "e.g. right shoulder, lower back radiating to left leg" },
+    { "id": "pain_score", "label": "Pain score (0 to 10)", "type": "number", "unit": "/10", "set": "pain_score" },
+    { "id": "pain_type", "label": "Type", "type": "select", "opts": ["Musculoskeletal", "Neuropathic", "Hemiplegic shoulder pain", "Phantom limb pain", "Spasm-related", "Mixed"] },
+    { "id": "pain_effect", "label": "Effect on therapy", "type": "select", "opts": ["Does not limit therapy", "Limits therapy", "Prevents therapy"] },
+    { "id": "pain_modifiers", "label": "Aggravating and relieving factors", "type": "text" }
+   ]
+  },
+  {
+   "id": "goals-plan",
+   "title": "Goals, devices and home programme",
+   "target": "management_plan",
+   "fields": [
+    { "id": "patient_goal", "label": "Patient's own goal", "type": "text", "hint": "in their words, e.g. walk to the temple, use the toilet alone" },
+    { "id": "rehab_goals", "label": "Rehabilitation goals (specific, measurable, time-bound)", "type": "textarea", "hint": "e.g. walk 50 metres with a stick within 4 weeks" },
+    { "id": "therapy_plan", "label": "Therapy", "type": "select", "opts": ["Physiotherapy", "Occupational therapy", "Physiotherapy and occupational therapy", "Multidisciplinary, with speech and language therapy", "Review only"] },
+    { "id": "therapy_setting", "label": "Setting", "type": "select", "opts": ["Outpatient", "Home-based", "Inpatient rehabilitation", "Tele-rehabilitation"] },
+    { "id": "devices", "label": "Assistive devices provided or needed", "type": "text", "hint": "e.g. walker, commode chair, raised toilet seat, wheelchair, ankle-foot orthosis" },
+    { "id": "hep_given", "label": "Home exercise programme given (written or pictorial)", "type": "check" },
+    { "id": "carer_trained", "label": "Carer trained in transfers and exercises", "type": "check" },
+    { "id": "home_modification", "label": "Home modification advice given", "type": "check" },
+    { "id": "disability_certificate", "label": "Disability certificate (UDID) discussed", "type": "check" },
+    { "id": "review_date", "label": "Review date", "type": "date" }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags",
+   "target": "History_present_illness",
+   "alert": "Red flag present. New neurological deficit, reduced consciousness or seizure: stop therapy and arrange emergency medical assessment now (possible stroke, bleed or cord compression). Suspected DVT: pause lower-limb exercise, apply the two-level Wells score and arrange a proximal leg vein ultrasound, ideally within 4 hours. Sudden breathlessness, chest pain or haemoptysis: emergency assessment for pulmonary embolism.",
+   "fields": [
+    { "id": "rf_new_deficit", "label": "New or worsening weakness, numbness, facial droop, speech or vision problem", "type": "check" },
+    { "id": "rf_cord", "label": "New bladder or bowel disturbance or saddle numbness", "type": "check" },
+    { "id": "rf_consciousness", "label": "Reduced consciousness, sudden severe headache or new seizure", "type": "check" },
+    { "id": "rf_dvt", "label": "Calf pain, swelling, warmth or redness in one leg (suspected DVT)", "type": "check" },
+    { "id": "rf_pe", "label": "Sudden breathlessness, chest pain or coughing blood", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "CBC", "query": "CBC" },
+  { "label": "Vitamin D (25-hydroxy)", "query": "vitamin D" },
+  { "label": "Vitamin B12", "query": "vitamin B12" },
+  { "label": "CPK", "query": "CPK" },
+  { "label": "Nerve conduction study", "query": "nerve conduction" },
+  { "label": "EMG", "query": "EMG" },
+  { "label": "MRI brain", "query": "MRI brain" },
+  { "label": "MRI spine", "query": "MRI spine" },
+  { "label": "Venous Doppler of the leg", "query": "venous Doppler" },
+  { "label": "D-dimer", "query": "D-dimer" },
+  { "label": "Urine routine", "query": "urine routine" },
+  { "label": "USG KUB with post-void residual", "query": "USG KUB" },
+  { "label": "DEXA scan (bone density)", "query": "DEXA" }
+ ],
+ "orderSets": [
+  { "id": "suspected-dvt", "label": "Suspected DVT panel", "tests": ["venous Doppler", "D-dimer", "CBC", "creatinine", "LFT", "PT INR", "APTT"] }
+ ],
+ "protocols": ["acute-ischaemic-stroke", "intracerebral-haemorrhage", "transient-ischaemic-attack", "traumatic-brain-injury", "guillain-barre-syndrome", "parkinsons-disease", "osteoarthritis", "rheumatoid-arthritis", "osteoporosis", "vitamin-d-deficiency", "deep-vein-thrombosis", "pulmonary-embolism", "vte-prophylaxis-medical-inpatients", "perioperative-vte-prophylaxis", "malignant-spinal-cord-compression", "urinary-tract-infection", "chronic-constipation"],
+ "calculators": ["barthel", "katz_adl", "lawton_iadl", "mrc_power", "ashworth", "ninds_reflex", "mrs", "nihss", "asia_impairment", "rancho", "gos", "gose", "hoehn_yahr", "mjoa", "tug", "morse_falls", "sarcf", "odi", "ndi", "womac", "oxford_knee", "oxford_hip", "harris_hip", "lysholm", "constant_shoulder", "quickdash", "tampa", "dn4", "braden", "norton", "wells_dvt", "wells_pe", "padua", "caprini"],
+ "advice": [
+  {
+   "id": "home-exercise",
+   "title": "Your home exercise programme",
+   "target": "diet_lifestyle_advice",
+   "text": "Do the exercises you have been shown every day, a little at a time, and rest if the pain becomes sharp or much worse. Use your walking aid, brace or splint exactly as shown. Practise everyday tasks such as washing and dressing yourself as much as you safely can: regular practice between sessions helps recovery."
+  },
+  {
+   "id": "clot-warning",
+   "title": "Signs of a blood clot",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if one leg becomes painful, swollen, warm or red, or if you suddenly feel breathless, have chest pain or cough up blood."
+  },
+  {
+   "id": "new-weakness",
+   "title": "New weakness: come at once",
+   "target": "follow_up_advice",
+   "text": "Call an ambulance or come to hospital at once if you notice new weakness or numbness of the face, arm or leg, slurred speech, loss of vision, a sudden severe headache, a fit, or new difficulty passing urine or stools."
+  }
+ ],
+ "sources": [
+  { "org": "Maryland State Medical Society (Mahoney FI, Barthel DW)", "title": "Functional evaluation: the Barthel Index (scoring form and guidelines)", "year": 1965, "url": "https://www.sralab.org/sites/default/files/2017-07/barthel.pdf" },
+  { "org": "Physical Therapy (Bohannon RW, Smith MB)", "title": "Interrater reliability of a modified Ashworth scale of muscle spasticity", "year": 1987, "url": "https://pubmed.ncbi.nlm.nih.gov/3809245/" },
+  { "org": "Medical Research Council, UKRI", "title": "MRC Muscle Scale (Aids to the examination of the peripheral nervous system, Memorandum No. 45)", "year": 1976, "url": "https://www.ukri.org/councils/mrc/facilities-and-resources/find-an-mrc-facility-or-resource/mrc-muscle-scale/" },
+  { "org": "NICE", "title": "NG236 Stroke rehabilitation in adults", "year": 2023, "url": "https://www.nice.org.uk/guidance/ng236" },
+  { "org": "NICE", "title": "NG158 Venous thromboembolic diseases: diagnosis, management and thrombophilia testing", "year": 2020, "url": "https://www.nice.org.uk/guidance/ng158" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

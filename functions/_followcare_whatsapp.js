@@ -29,8 +29,12 @@ export function toWaNumber(phone, defaultCc) {
   return d;
 }
 // Fill a {{token}} template from a values map (used by the `custom` BSP body). Deterministic + testable.
-export function fillTemplate(tpl, vals) {
-  return String(tpl || "").replace(/\{\{\s*(\w+)\s*\}\}/g, function (_, k) { return vals[k] != null ? String(vals[k]) : ""; });
+// opts.json: the body is JSON and each {{token}} sits inside a JSON string, so a value is escaped as JSON string
+// content. Pasted raw, a newline or a quote (the day close is several lines) made the body invalid JSON and the
+// provider refused the message.
+export function fillTemplate(tpl, vals, opts) {
+  var json = !!(opts && opts.json);
+  return String(tpl || "").replace(/\{\{\s*(\w+)\s*\}\}/g, function (_, k) { var v = vals[k] != null ? String(vals[k]) : ""; return json ? JSON.stringify(v).slice(1, -1) : v; });
 }
 
 export async function sendWhatsApp(env, msg) {
@@ -59,9 +63,10 @@ async function sendCallMeBot(env, to, msg) {
 async function sendCustom(env, to, msg) {
   var vars = msg.vars || {};
   var vals = { to: to, name: vars.name != null ? vars.name : (vars.var1 || ""), link: vars.link != null ? vars.link : (vars.var2 || ""), text: msg.body || "" };
-  var body = fillTemplate(env.FOLLOWCARE_WA_BODY, vals);
   var headers = { "Content-Type": "application/json" };
   try { if (env.FOLLOWCARE_WA_HEADERS) Object.assign(headers, JSON.parse(env.FOLLOWCARE_WA_HEADERS)); } catch (e) {}
+  var ctype = ""; Object.keys(headers).forEach(function (h) { if (h.toLowerCase() === "content-type") ctype = String(headers[h]); });
+  var body = fillTemplate(env.FOLLOWCARE_WA_BODY, vals, { json: /json/i.test(ctype) });
   var r = await fetch(env.FOLLOWCARE_WA_URL, { method: "POST", headers: headers, body: body });
   var text = await r.text();
   return { ok: r.ok, providerId: null, status: r.status, detail: r.ok ? null : String(text).slice(0, 200) };

@@ -1048,6 +1048,10 @@
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
     govschemes: function () { if (window.SMD_GOVSCHEMES) SMD_GOVSCHEMES.open(); },
+    docs: function () { if (window.SMD_DOCS && SMD_DOCS.open) SMD_DOCS.open(); else toast("Documents loading…"); },
+    review: function () { if (window.SMD_REVIEW && SMD_REVIEW.open) SMD_REVIEW.open(); else toast("Review desk loading…"); },
+    kxinbox: function () { if (window.SMD_SHARE && SMD_SHARE.openInbox) SMD_SHARE.openInbox(); else toast("Loading…"); },
+    speckit: function () { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open(); else toast("Specialty kits loading…"); },
     icdsearch: function () { if (window.SMD_ICD) SMD_ICD.open(); },
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
@@ -1419,7 +1423,7 @@
       ".hv-hero{background:var(--hpanel);border:1px solid var(--hbd);border-radius:16px;box-shadow:var(--hsh);padding:20px;display:flex;align-items:center;gap:14px}",
       ".hv-hero h1{font:800 28px/1.05 var(--hfont);letter-spacing:-.02em;margin:0}.hv-tag{display:inline-block;margin-top:10px;font:700 11px var(--hfont);text-transform:uppercase;letter-spacing:.06em;color:var(--hp);background:var(--hps);padding:4px 10px;border-radius:999px}.hv-hero p{font:500 14px/1.45 var(--hfont);color:var(--hmut);margin:10px 0 0}",
       ".hv-shield{width:74px;height:74px;border-radius:20px;background:linear-gradient(135deg,var(--hp),var(--hp2));display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:var(--hslg)}.hv-shield svg{width:38px;height:38px;stroke:#fff}",
-      ".hv-qrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}",
+      ".hv-qrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}",
       ".hv-qc{height:62px;background:var(--hpanel);border:1px solid var(--hbd);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;color:var(--hink);transition:transform .15s,box-shadow .18s}.hv-qc:active{transform:scale(.96)}.hv-qc:hover{box-shadow:var(--hsh)}.hv-qc svg{width:19px;height:19px;color:var(--hp)}.hv-qc span{font:600 11px var(--hfont);color:var(--hmut)}",
       ".hv-primary{display:flex;align-items:center;gap:15px;padding:20px;border:none;border-radius:18px;background:linear-gradient(135deg,#14B8A6,var(--hp) 55%,var(--hp2));color:#fff;box-shadow:var(--hslg);cursor:pointer;width:100%;text-align:left;transition:transform .15s,filter .18s}.hv-primary:active{transform:scale(.985)}.hv-primary:hover{filter:brightness(1.04)}",
       ".hv-pic{width:52px;height:52px;border-radius:15px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto}.hv-pic svg{width:27px;height:27px;stroke:#fff}",
@@ -1427,7 +1431,7 @@
       ".hv-sec{display:flex;align-items:center;gap:15px;padding:18px 20px;border:1px solid var(--hbd);border-radius:18px;background:var(--hpanel);color:var(--hink);box-shadow:var(--hsh);cursor:pointer;width:100%;text-align:left;transition:transform .15s,box-shadow .18s}.hv-sec:active{transform:scale(.985)}",
       ".hv-sic{width:52px;height:52px;border-radius:15px;background:var(--hps);display:flex;align-items:center;justify-content:center;flex:0 0 auto}.hv-sic svg{stroke:var(--hp);width:26px;height:26px}.hv-stit{font:700 17px/1.1 var(--hfont)}.hv-ssub{font:500 13px/1.35 var(--hfont);color:var(--hmut);margin-top:3px}.hv-sarr svg{stroke:var(--hmut)}",
       ".hv-lbl{font:700 12px var(--hfont);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut);margin:2px 2px -4px}",
-      ".hv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}",
+      ".hv-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}",
       ".hv-tile{background:var(--hpanel);border:1px solid var(--hbd);border-radius:16px;box-shadow:var(--hsh);padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;color:var(--hink);transition:transform .15s,box-shadow .18s}.hv-tile:active{transform:scale(.97)}",
       ".hv-tic{width:42px;height:42px;border-radius:12px;background:var(--hbg);display:flex;align-items:center;justify-content:center;flex:0 0 auto;border:1px solid var(--hbd)}.hv-tic svg{width:21px;height:21px;color:var(--hp)}.hv-tl{font:600 14px var(--hfont)}.hv-tc{font:500 11.5px var(--hfont);color:var(--hmut);margin-top:1px}",
       ".hv-info{font:500 12px/1.6 var(--hfont);color:var(--hmut);text-align:center;padding:4px 8px}.hv-info b{color:var(--hink)}",
@@ -1450,7 +1454,7 @@
       ".hv-mi{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:transparent;border:none;border-radius:12px;padding:13px 8px;cursor:pointer;color:var(--hink)}.hv-mi:hover{background:var(--hbg)}.hv-mi:active{transform:scale(.99)}.hv-mi svg{width:21px;height:21px;color:var(--hp)}.hv-mi .ml{flex:1;font:600 14.5px var(--hfont)}.hv-mi .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:1px}.hv-mi .marr svg{stroke:var(--hmut);width:18px;height:18px}",
       ".hv-mi+.hv-mi{border-top:1px solid var(--hbd)}",
       // Hospital hub — 2x2 tile grid (signature tile = teal). svg fill-fix so stroke icons don't render solid black.
-      ".hv-tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:2px 0 6px}",
+      ".hv-tiles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;margin:2px 0 6px}",
       ".hv-tile{display:flex;flex-direction:column;align-items:flex-start;text-align:left;background:var(--hbg);border:1.5px solid var(--hbd);border-radius:16px;padding:13px 13px;min-height:98px;cursor:pointer;color:var(--hink);transition:transform .12s,border-color .12s,box-shadow .12s}",
       ".hv-tile:hover{border-color:var(--hp)}.hv-tile:active{transform:scale(.975)}",
       ".hv-tile svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--hp)}",
@@ -1486,8 +1490,8 @@
       ".hv-d-sec{margin:6px 0 16px}.hv-d-sec h4{font:800 11px var(--hfont);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut);margin:0 0 9px}",
       ".hv-d-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.hv-d-val{font:800 14px var(--hfont);color:var(--hp)}",
       "#homeV2 input[type=range],.hv-sheet input[type=range]{width:100%;accent-color:var(--hp);height:30px}",
-      ".hv-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.hv-seg button,.hv-pre button{background:var(--hbg);border:1.5px solid var(--hbd);border-radius:10px;padding:9px 6px;font:700 12px var(--hfont);color:var(--hmut);cursor:pointer}.hv-seg button.on{background:var(--hp);border-color:var(--hp);color:#fff}",
-      ".hv-pre{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.hv-pre button{padding:12px 8px}",
+      ".hv-seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.hv-seg button,.hv-pre button{background:var(--hbg);border:1.5px solid var(--hbd);border-radius:10px;padding:9px 6px;font:700 12px var(--hfont);color:var(--hmut);cursor:pointer}.hv-seg button.on{background:var(--hp);border-color:var(--hp);color:#fff}",
+      ".hv-pre{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.hv-pre button{padding:12px 8px}",
       ".hv-sw{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--hbg);border:1px solid var(--hbd);border-radius:12px;padding:11px 13px;margin-top:6px}.hv-sw .lab{font:700 13px var(--hfont)}.hv-sw .sub{font:500 11px var(--hfont);color:var(--hmut);margin-top:2px}.hv-tg{position:relative;width:48px;height:28px;flex:0 0 auto;border-radius:999px;background:var(--hbd);border:none;cursor:pointer;transition:.18s}.hv-tg.on{background:var(--hp)}.hv-tg:after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.18s}.hv-tg.on:after{left:23px}",
       ".hv-reset{width:100%;background:#fbe7e9;color:#ab1c2c;border:1px solid #efa9b1;border-radius:11px;padding:12px;font:700 13px var(--hfont);cursor:pointer;margin-top:6px}",
       ".hv-back{display:block;width:100%;text-align:center;color:var(--hmut);background:transparent;border:none;font:600 12px var(--hfont);padding:10px;cursor:pointer;margin-top:4px}",
@@ -1987,6 +1991,21 @@
       eligible: function () { try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
     { act: "staging", ic: "stairs", tt: "Cancer Staging", sub: "AJCC/TNM 32 Sites", feat: true, defOn: true,
       eligible: function () { return true; } },
+    // Specialty kits (specialty-kits.js): O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology,
+    // Psychiatry, Dental. eligible() reads the flag directly: home.js loads before specialty-kits-flags.js,
+    // so SMD_KITS_FLAGS may not exist yet at tile-render time. Same resolution: ?kits= then localStorage.
+    { act: "speckit", ic: "medical_services", tt: "Specialty Kits", sub: "O&G · Paeds · Eye · ENT · more", defOn: true,
+      eligible: function () { try { var q = (location.search.match(/[?&]kits=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_specialty_kits") !== "0"; } catch (e) { return true; } } },
+    // Clinical documents (clinical-docs.js): certificates, consent forms, handouts, MLC, MCCD draft.
+    { act: "docs", ic: "description", tt: "Documents", sub: "Certificates · consent · handouts", defOn: true,
+      eligible: function () { try { var q = (location.search.match(/[?&]docs=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_clinical_docs") !== "0"; } catch (e) { return true; } } },
+    // Clinical review desk (review-desk.js): approve or comment on AI-drafted content. Off by default on
+    // Home (reviewers add it from Add Tool); flag smd_review_desk / ?review=0 hides it entirely.
+    { act: "review", ic: "rate_review", tt: "Review content", sub: "Approve protocols and kits", defOn: false,
+      eligible: function () { try { var q = (location.search.match(/[?&]review=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_review_desk") !== "0"; } catch (e) { return true; } } },
+    // Colleagues (kits-share.js, wave 2): referrals, handovers and case rooms. Only when smd_kits_share is on.
+    { act: "kxinbox", ic: "groups", tt: "Colleagues", sub: "Referrals, handovers, cases", defOn: true,
+      eligible: function () { try { var q = (location.search.match(/[?&]share=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_kits_share") !== "0"; } catch (e) { return true; } } },
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
@@ -2124,7 +2143,7 @@
       var tile=e.target.closest("#rnavToolsGrid .rnav-tile:not(.addtool)");
       if(tile&&e.key===" "&&!_reorderMode){e.preventDefault();homeEditMode(true);return;}
       if(!_reorderMode||!tile||!/^Arrow/.test(e.key))return;
-      e.preventDefault();var grid=tile.parentElement,list=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")),at=list.indexOf(tile),cols=getComputedStyle(grid).gridTemplateColumns.split(" ").length,delta=e.key==="ArrowLeft"?-1:e.key==="ArrowRight"?1:e.key==="ArrowUp"?-cols:cols,target=list[at+delta];
+      e.preventDefault();var grid=tile.parentElement,list=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")),at=list.indexOf(tile),cols=getComputedStyle(grid).gridTemplateColumns.split(/\s+(?![^(]*\))/).length,delta=e.key==="ArrowLeft"?-1:e.key==="ArrowRight"?1:e.key==="ArrowUp"?-cols:cols,target=list[at+delta];
       if(target){grid.insertBefore(tile,delta>0?target.nextSibling:target);var next=list.map(function(n){return n.getAttribute("data-act");});next=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")).map(function(n){return n.getAttribute("data-act");});orderedHomeTools().forEach(function(t){if(next.indexOf(t.act)<0)next.push(t.act);});setToolOrder(next);tile.focus();}
     });
   }
@@ -2155,6 +2174,8 @@
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
+    // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
+    if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
     // that renders it (access code, tester flag, Physician Pro early access). Not dismissible.
     return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + (t.beta ? ', beta' : '') + '">' +
@@ -4148,7 +4169,9 @@
   function maikMeHasPHI(s) { return /\d{6,}/.test(String(s || "")) || /\b(mrn|uhid|ip ?no|op ?no|reg(istration)? ?no|patient'?s? name|bed ?(no|number)? ?\d)/i.test(String(s || "")); }
   function maikMeLine(m) {
     m = m || maikMeLoad(); var P = [];
-    if (m.spec) P.push("Speciality: " + String(m.spec).slice(0, 60));
+    // F4: with no speciality typed in About me, use the doctor's specialty kit (profile or chosen).
+    var kitSpec = ""; if (!m.spec) { try { kitSpec = (window.SMD_KITS && SMD_KITS.myLabel && (!SMD_KITS.on || SMD_KITS.on())) ? SMD_KITS.myLabel() : ""; } catch (e) {} }
+    if (m.spec || kitSpec) P.push("Speciality: " + String(m.spec || kitSpec).slice(0, 60) + (kitSpec ? "; prefer that specialty's guidelines and name the relevant specialty society where guidance differs" : ""));
     if (m.work && m.work.length) P.push("Works in: " + m.work.filter(function (w) { return MAIK_ME_WORK.indexOf(w) >= 0; }).join(", "));
     if (m.guide && MAIK_ME_GUIDE[m.guide]) P.push("Prefers " + MAIK_ME_GUIDE[m.guide] + " guidelines where guidance differs; name the major alternative when it matters");
     if (m.notes) P.push("Notes: " + String(m.notes).slice(0, 200));
@@ -6485,6 +6508,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // offer a one-tap "open in app" chip (drug interactions, calculators/scores, Drug Index dosing).
     // The chip routes through the delegated handler (data-maik-tool) → the ACT map, exactly like the
     // antibiogram refine route. Additive: chips only appear when the intent clearly matches.
+    function maikKitTool(n) {
+      var MAP = [
+        [/\b(edd|due date|expected date of delivery|gestational age|redat(e|ing)|dating scan)\b/, "obgyn", "pregnancy-dating"],
+        [/\b(partograph|labour care guide|labor care guide)\b/, "obgyn", "labour-care"],
+        [/\b(growth chart|z ?score|weight for age|height for age|length for age|weight for height|stunt(ed|ing)|wasting|muac)\b/, "paediatrics", "growth-who"],
+        [/\b(milestones?|developmental delay)\b/, "paediatrics", "milestones"],
+        [/\b(visual acuity|snellen|logmar)\b/, "ophthalmology", "visual-acuity"],
+        [/\b(rinne|weber test|hearing (loss )?grade|audiogram)\b/, "ent", "hearing"],
+        [/\bpasi\b|psoriasis (area|severity)/, "dermatology", "pasi"],
+        [/\b(dmft|dental chart|tooth chart|odontogram)\b/, "dental", "odontogram"],
+        [/\b(max(imum)? (safe )?dose|toxic dose)\b.*\b(lignocaine|lidocaine|bupivacaine|ropivacaine|local an(a)?esthetic)|\b(lignocaine|lidocaine|bupivacaine|ropivacaine|local an(a)?esthetic)\b.*\bmax(imum)? (safe )?dose/, "anaesthesia", "la-dose"],
+        [/\b(tbsa|lund (and )?browder|burns? (area|percentage|chart))\b/, "emergency", "burns-chart"],
+        [/\b(ckd stag(e|ing)|kdigo stag|albuminuria category)\b/, "nephrology-urology", "ckd-grid"],
+        [/\b(das ?28|cdai|joint count)\b/, "rheumatology", "joint-chart"],
+        [/\b(mccd|death certificate|certify(ing)? (the )?cause of death)\b/, "forensic", "mccd"],
+        [/\b(injury chart|body chart|mlc|medico ?legal)\b/, "forensic", "body-chart"]
+      ];
+      for (var i = 0; i < MAP.length; i++) if (MAP[i][0].test(n)) return [MAP[i][1], MAP[i][2]];
+      return null;
+    }
     function maikToolChipsHTML(question) {
       var n = maikNorm(question || ""), chips = [], seen = {};
       function add(tool, label) { if (seen[tool]) return; seen[tool] = 1; chips.push('<button class="maik-fu maik-tool" data-maik-tool="' + tool + '">' + maikEscH(label) + '</button>'); }
@@ -6496,6 +6539,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         else add("calculators", "Open calculators");
       }
       if (/\bdose|dosing|dosage|how much|mg\/kg|titrat/.test(n)) add("drugs", "Open Drug Index");
+      // Specialty kit tools (specialty-kits.js): questions a kit tool answers exactly (EDD, WHO z-scores,
+      // burns TBSA, DAS28, MCCD...). The chip opens the kit at that tool; it never answers by itself.
+      var K = window.SMD_KITS, kitHit = null;
+      try { if (K && K._tools && (!K.on || K.on())) kitHit = maikKitTool(n); } catch (e) { kitHit = null; }
+      if (kitHit && K._tools[kitHit[1]] && !seen["kit:" + kitHit[1]]) { seen["kit:" + kitHit[1]] = 1; chips.unshift('<button class="maik-fu maik-tool" data-maik-kit="' + kitHit[0] + ":" + kitHit[1] + '">' + maikEscH("Open " + K._tools[kitHit[1]].title) + '</button>'); }
       if (!chips.length) return "";
       return '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' + chips.slice(0, 2).join("") + '</div>';
     }
@@ -8115,7 +8163,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (figEl) { maikFigLightbox(figEl.getAttribute("data-fig-img"), figEl.getAttribute("data-fig-page"), figEl.getAttribute("data-fig-site"), figEl.getAttribute("data-fig-title")); return; }
       // data-maik-calc / data-maik-calcask chips (calculator cards, 2026-09-02) are routed by the shared
       // delegated handler below, not by the copilot launch path: exclude them here or they are swallowed.
-      var launch = ev.target && ev.target.closest ? ev.target.closest(".maik-tool:not([data-maik-tool]):not([data-maik-calc]):not([data-maik-calcask])") : null;
+      var launch = ev.target && ev.target.closest ? ev.target.closest(".maik-tool:not([data-maik-tool]):not([data-maik-calc]):not([data-maik-calcask]):not([data-maik-kit])") : null;
       if (launch) {
         ev.preventDefault();
         var kind = launch.getAttribute("data-maik-copilot"), arg = launch.getAttribute("data-maik-arg");
@@ -8253,9 +8301,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // [data-maik-tool] MUST be in this selector: the "Open Drug Index" chip carries only that
       // attribute, so without it the tool branch below was unreachable and the chip did nothing
       // (found live on the owner's phone, 2026-09-03).
-      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine],[data-maik-calc],[data-maik-calcask]") : null;
+      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine],[data-maik-calc],[data-maik-calcask],[data-maik-kit]") : null;
       if (!el) return;
       ev.preventDefault();
+      // "Open <kit tool>": close MaiK first (its sheet sits above the kit sheet), then open the kit at the tool.
+      var kitRef = el.getAttribute("data-maik-kit");
+      if (kitRef) { var kp = kitRef.split(":"); close(); setTimeout(function () { try { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open({ kit: kp[0], tool: kp[1] }); } catch (e) {} }, 180); return; }
       /* "Open <calculator>" straight into that calculator (reported 2026-09-02: the generic chip below
        * was dead - see the selector above, which used to stop at data-maik-q/data-maik-web so the
        * data-maik-tool branch was never reached). Close MaiK FIRST: the sheet is z-index 999 and the

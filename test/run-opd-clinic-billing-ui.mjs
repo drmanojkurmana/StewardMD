@@ -85,6 +85,15 @@ const server = createServer(async (req, res) => {
     for (const [k, v] of Object.entries(req.headers)) if (typeof v === "string") headers.set(k, v);
     const r = await onRequest({ request: new Request("http://localhost" + req.url,
       { method: req.method, headers, body: req.method === "GET" ? undefined : Buffer.concat(chunks) }), env: H.ENV, waitUntil() {} });
+    /* GET /live is a Server-Sent Events stream (plan item 16) that runs for minutes. Buffered, each console page held a
+     * browser connection with no answer; past Chrome's six per host the next request (the check-in sheet's /org) hung. */
+    if (/event-stream/.test(r.headers.get("Content-Type") || "") && r.body) {
+      res.writeHead(r.status, { "Content-Type": "text/event-stream", "Cache-Control": "no-store" });
+      const reader = r.body.getReader();
+      res.on("close", () => { try { reader.cancel(); } catch {} });
+      for (;;) { const { done, value } = await reader.read().catch(() => ({ done: true })); if (done) break; res.write(Buffer.from(value)); }
+      res.end(); return;
+    }
     res.writeHead(r.status, { "Content-Type": "application/json" }); res.end(Buffer.from(await r.arrayBuffer())); return;
   }
   let p = join(ROOT, normalize(decodeURIComponent(url.pathname)).replace(/^(\.\.[/\\])+/, ""));
@@ -267,6 +276,8 @@ try {
     return (await ev(`return !!document.querySelector('a[href="/opd"]');`)) === true ? true : "no back-to-OPD link";
   });
   await step("cashier: invoice + Cash marks the orders paid", async () => {
+    // "260.00" is also on the queue row, so the review step can pass before the review (and #inv) has rendered.
+    await until(`return document.getElementById('inv') ? 'y' : null;`, 8000);
     const invClicked = await click("#inv");
     if (invClicked !== 1) return "no invoice button: " + invClicked;
     const pays = await until(`return document.querySelectorAll('.pays button').length===3 ? 'y' : null;`, 15000);
