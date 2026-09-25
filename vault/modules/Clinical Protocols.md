@@ -58,6 +58,8 @@ timeline entry); a clinical protocol never writes to the patient record.
   `swipe-back.js` matches those substrings. `.kbp-back` is the reader's Back on purpose.
 
 ## Content status
+- **156 protocols across 18 subjects** (2026-09-25). Review worklist, including every figure the
+  authoring agents could not verify: `vault/handoff/2026-09-25-clinical-protocols-review.md`.
 - All protocols are `review.status: "ai_drafted"`: compiled with AI assistance from the cited
   guidelines (researched on the web, each source URL retrieved), NOT clinically reviewed. The list and
   every reader show that status. Marking one `reviewed`/`approved` requires a named reviewer
