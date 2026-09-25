@@ -126,6 +126,11 @@ done
 # Knowledge Library clinical protocols (kb-protocols.js): the catalogue + one JSON per protocol, plain
 # static content in the same trust tier. Built/validated by scripts/build-clinical-protocols.mjs.
 [ -d kb/clinical-protocols ] && mkdir -p "$WWW/kb/clinical-protocols" && cp kb/clinical-protocols/*.json "$WWW/kb/clinical-protocols/"
+# Specialty kits (specialty-kits.js): the built kit bundle, plus the WHO growth-standard LMS tables the
+# paediatric growth tool fetches on first use. Plain static content, same trust tier. Built/validated by
+# scripts/build-specialty-kits.mjs (kits) and scripts/build-who-growth.mjs (growth tables).
+[ -f kb/specialty-kits/kits.json ] && mkdir -p "$WWW/kb/specialty-kits" && cp kb/specialty-kits/kits.json "$WWW/kb/specialty-kits/"
+[ -f kb/growth/who-growth.json ] && mkdir -p "$WWW/kb/growth" && cp kb/growth/who-growth.json "$WWW/kb/growth/"
 # ONCOTREE navigator graphs (static JSON; same trust tier as kb/protocols).
 [ -d kb/oncotree ] && mkdir -p "$WWW/kb/oncotree" && cp -R kb/oncotree/. "$WWW/kb/oncotree/"
 # Oncology reference catalogs: AJCC/TNM staging index, CTCAE catalog, irAE (IO toxicity) catalog -

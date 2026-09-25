@@ -1,0 +1,167 @@
+{
+ "id": "paediatrics",
+ "label": "Paediatrics",
+ "short": "Paeds",
+ "icon": "child_care",
+ "subject": "paediatrics",
+ "scribe": "paediatrics",
+ "tools": ["growth-who", "milestones", "immunisation"],
+ "sections": [
+  {
+   "id": "emergency-signs",
+   "title": "Emergency signs (WHO ETAT)",
+   "target": "sys_examination",
+   "alert": "Emergency sign present: give emergency treatment now and follow the emergency triage (ETAT) steps.",
+   "fields": [
+    { "id": "etat_airway", "label": "Obstructed or absent breathing", "type": "check" },
+    { "id": "etat_distress", "label": "Severe respiratory distress", "type": "check" },
+    { "id": "etat_cyanosis", "label": "Central cyanosis", "type": "check" },
+    { "id": "etat_shock", "label": "Signs of shock: cold hands, capillary refill over 3 seconds, weak fast pulse", "type": "check" },
+    { "id": "etat_coma", "label": "Coma or seriously reduced consciousness", "type": "check" },
+    { "id": "etat_convulsing", "label": "Convulsing now", "type": "check" },
+    { "id": "etat_dehydration", "label": "Severe dehydration: two of lethargy, sunken eyes, very slow skin pinch", "type": "check" }
+   ]
+  },
+  {
+   "id": "danger-signs",
+   "title": "General danger signs (WHO IMCI, 2 months to 5 years)",
+   "target": "sys_examination",
+   "alert": "General danger sign present: the child needs urgent treatment and referral (WHO IMCI).",
+   "fields": [
+    { "id": "ds_drink", "label": "Not able to drink or breastfeed", "type": "check" },
+    { "id": "ds_vomit", "label": "Vomits everything", "type": "check" },
+    { "id": "ds_convulsions", "label": "Convulsions in this illness", "type": "check" },
+    { "id": "ds_lethargic", "label": "Lethargic or unconscious", "type": "check" }
+   ]
+  },
+  {
+   "id": "young-infant",
+   "title": "Young infant under 2 months: signs of serious illness (WHO IMCI)",
+   "target": "sys_examination",
+   "alert": "Sign of very severe disease in a young infant: urgent treatment and referral (WHO IMCI).",
+   "fields": [
+    { "id": "yi_feeding", "label": "Not feeding well", "type": "check" },
+    { "id": "yi_convulsions", "label": "Convulsions", "type": "check" },
+    { "id": "yi_fast_breathing", "label": "Fast breathing (60 or more per minute)", "type": "check" },
+    { "id": "yi_indrawing", "label": "Severe chest indrawing", "type": "check" },
+    { "id": "yi_fever", "label": "Temperature 37.5 C or above", "type": "check" },
+    { "id": "yi_hypothermia", "label": "Temperature below 35.5 C", "type": "check" },
+    { "id": "yi_movement", "label": "Moves only when stimulated, or not at all", "type": "check" }
+   ]
+  },
+  {
+   "id": "paediatric-examination",
+   "title": "Paediatric examination",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "activity", "label": "Activity", "type": "select", "opts": ["Alert and playful", "Irritable", "Drowsy", "Lethargic or unconscious"] },
+    { "id": "fontanelle", "label": "Anterior fontanelle", "type": "select", "opts": ["Open and flat", "Bulging", "Sunken", "Closed"] },
+    { "id": "hydration_status", "label": "Hydration", "type": "select", "opts": ["No dehydration", "Some dehydration", "Severe dehydration"], "set": "hydration" },
+    { "id": "skin_pinch", "label": "Skin pinch", "type": "select", "opts": ["Goes back immediately", "Goes back slowly", "Goes back very slowly (over 2 seconds)"] },
+    { "id": "capillary_refill", "label": "Capillary refill", "type": "select", "opts": ["3 seconds or less", "Over 3 seconds"] },
+    { "id": "fast_breathing", "label": "Fast breathing for age (50 or more at 2 to 11 months, 40 or more at 1 to 5 years)", "type": "check" },
+    { "id": "chest_indrawing", "label": "Chest indrawing", "type": "check" },
+    { "id": "stridor", "label": "Stridor in a calm child", "type": "check" },
+    { "id": "palmar_pallor", "label": "Palmar pallor", "type": "select", "opts": ["None", "Some", "Severe"] },
+    { "id": "dysmorphism", "label": "Dysmorphic features", "type": "text" },
+    { "id": "other_findings", "label": "Other findings", "type": "textarea" }
+   ]
+  },
+  {
+   "id": "birth-history",
+   "title": "Birth history",
+   "target": "History_past_illness",
+   "fields": [
+    { "id": "gest_weeks", "label": "Gestation at birth", "type": "number", "unit": "weeks" },
+    { "id": "birth_weight", "label": "Birth weight", "type": "number", "unit": "kg" },
+    { "id": "delivery", "label": "Mode of delivery", "type": "select", "opts": ["Normal vaginal", "Assisted vaginal", "Caesarean"] },
+    { "id": "birth_place", "label": "Place of birth", "type": "select", "opts": ["Hospital", "Home", "Other"] },
+    { "id": "cried_at_birth", "label": "Cried at birth", "type": "select", "opts": ["Cried immediately", "Needed resuscitation", "Not known"] },
+    { "id": "nicu", "label": "Admitted to NICU or SNCU", "type": "check" },
+    { "id": "phototherapy", "label": "Jaundice needing phototherapy", "type": "check" },
+    { "id": "antenatal_problems", "label": "Antenatal problems", "type": "text" },
+    { "id": "neonatal_problems", "label": "Other neonatal problems", "type": "text" }
+   ]
+  },
+  {
+   "id": "feeding-history",
+   "title": "Feeding history",
+   "target": "History_past_illness",
+   "fields": [
+    { "id": "breastfeeding", "label": "Breastfeeding", "type": "select", "opts": ["Exclusive breastfeeding", "Breastfeeding with other milk or foods", "Stopped", "Never breastfed"] },
+    { "id": "breastfed_until", "label": "Breastfed until", "type": "text", "hint": "e.g. ongoing, or 18 months" },
+    { "id": "other_milk", "label": "Other milk (type, dilution, bottle)", "type": "text" },
+    { "id": "complementary_age", "label": "Complementary feeding started at", "type": "number", "unit": "months" },
+    { "id": "meals_per_day", "label": "Meals and snacks per day", "type": "number" },
+    { "id": "diet_details", "label": "Usual diet (foods and amounts)", "type": "textarea" },
+    { "id": "supplements", "label": "Iron, vitamin A or other supplements", "type": "text" },
+    { "id": "deworming", "label": "Last deworming", "type": "text" }
+   ]
+  },
+  {
+   "id": "immunisation-status",
+   "title": "Immunisation",
+   "target": "immunization_status",
+   "fields": [
+    { "id": "imm_status", "label": "Status for age", "type": "select", "opts": ["Complete for age", "Partially immunised", "Not immunised", "Not known"] },
+    { "id": "imm_card", "label": "Card or record seen", "type": "check" },
+    { "id": "imm_due", "label": "Missed or due vaccines", "type": "text" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "CBC", "query": "CBC" },
+  { "label": "CRP", "query": "CRP" },
+  { "label": "Urine routine", "query": "urine routine" },
+  { "label": "Urine culture", "query": "urine culture" },
+  { "label": "Blood culture", "query": "blood culture" },
+  { "label": "Serum electrolytes", "query": "electrolytes" },
+  { "label": "Blood glucose", "query": "blood sugar" },
+  { "label": "Serum bilirubin", "query": "bilirubin" },
+  { "label": "Malaria test", "query": "malaria" },
+  { "label": "Dengue NS1 / IgM", "query": "dengue" },
+  { "label": "Stool routine", "query": "stool routine" },
+  { "label": "Chest X-ray", "query": "X-ray chest" },
+  { "label": "Serum ferritin", "query": "ferritin" },
+  { "label": "TSH", "query": "TSH" }
+ ],
+ "protocols": ["fever-in-under-5s", "childhood-pneumonia", "bronchiolitis", "acute-asthma-child", "paediatric-dehydration-diarrhoea", "severe-acute-malnutrition", "febrile-seizure", "urinary-tract-infection-children", "acute-otitis-media", "acute-pharyngitis", "neonatal-jaundice", "neonatal-sepsis", "paediatric-septic-shock", "paediatric-dka", "dengue", "dengue-international", "malaria", "enteric-fever"],
+ "calculators": ["paeds_weight", "holliday", "corrected_age", "westley_croup", "pecarn_head", "pas", "flacc", "kawasaki", "rochester_criteria", "bacterial_meningitis_score", "schwartz", "ballard", "silverman", "downes", "apgar"],
+ "advice": [
+  {
+   "id": "fever-home-care",
+   "title": "Fever: care at home and when to come back",
+   "target": "follow_up_advice",
+   "text": "Give plenty of fluids and keep feeding or breastfeeding. Give fever medicine only as prescribed for the child's weight. Come back at once if the child cannot drink or breastfeed, vomits everything, has a fit, becomes very sleepy or hard to wake, breathes fast or with difficulty, or has a rash that does not fade when pressed."
+  },
+  {
+   "id": "diarrhoea-home-care",
+   "title": "Diarrhoea: ORS, zinc and when to come back",
+   "target": "follow_up_advice",
+   "text": "Give ORS after every loose stool and keep feeding or breastfeeding. Give the zinc tablets every day for as many days as prescribed, even after the diarrhoea stops. Come back at once if the child drinks poorly, becomes sicker, has blood in the stool, or passes very little urine."
+  },
+  {
+   "id": "infant-feeding",
+   "title": "Breastfeeding and complementary feeding",
+   "target": "diet_lifestyle_advice",
+   "text": "Give only breast milk, no water or other milk, for the first 6 months. From 6 months add soft family foods, 2 to 3 meals a day at 6 to 8 months and 3 to 4 meals a day from 9 months with 1 to 2 snacks, and keep breastfeeding to 2 years or beyond. During illness give more fluids and more frequent breastfeeds."
+  },
+  {
+   "id": "newborn-danger-signs",
+   "title": "Newborn danger signs",
+   "target": "follow_up_advice",
+   "text": "Bring the baby at once if the baby is not feeding well, has a fit, breathes fast or with difficulty, feels hot or cold, moves less than usual, has yellow palms or soles, or has redness or pus around the cord."
+  }
+ ],
+ "sources": [
+  { "org": "WHO", "title": "WHO Child Growth Standards", "year": 2006, "url": "https://www.who.int/tools/child-growth-standards" },
+  { "org": "WHO", "title": "Growth reference data for 5 to 19 years", "year": 2007, "url": "https://www.who.int/tools/growth-reference-data-for-5to19-years" },
+  { "org": "CDC", "title": "Learn the Signs. Act Early: developmental milestones", "year": 2022, "url": "https://www.cdc.gov/act-early/milestones/index.html" },
+  { "org": "WHO", "title": "Integrated management of childhood illness: chart booklet", "year": 2014, "url": "https://www.who.int/publications/m/item/integrated-management-of-childhood-illness---chart-booklet-(march-2014)" },
+  { "org": "WHO", "title": "Pocket book of hospital care for children, second edition", "year": 2013, "url": "https://www.who.int/publications/i/item/978-92-4-154837-3" },
+  { "org": "WHO", "title": "Guideline on the prevention and management of wasting and nutritional oedema in infants and children under 5 years", "year": 2023, "url": "https://www.who.int/publications/i/item/9789240082830" },
+  { "org": "WHO", "title": "Infant and young child feeding (fact sheet)", "year": 2026, "url": "https://www.who.int/news-room/fact-sheets/detail/infant-and-young-child-feeding" },
+  { "org": "NICE", "title": "NG143 Fever in under 5s: assessment and initial management", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng143" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

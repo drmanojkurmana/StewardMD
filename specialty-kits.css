@@ -1,0 +1,131 @@
+/* Specialty kits (specialty-kits.js, window.SMD_KITS). Two hosts share the .kit-* rules:
+ *   - the OPD EMR Specialty tab, inside #smdOpdEmr, which already defines the palette below;
+ *   - the standalone sheet #smdKit opened from Home, which defines the same palette itself.
+ * Material Symbols come from redesign-system.css. Every tap target is at least 40px high. */
+
+#smdKit {
+  --primary: #00685f; --on-primary: #fff; --primary-container: #008378;
+  --secondary: #565e74; --error: #ba1a1a; --error-container: #ffdad6; --on-error-container: #93000a;
+  --bg: #f7f9fb; --surface: #f7f9fb; --on-surface: #191c1e; --on-surface-variant: #3d4947;
+  --sc-lowest: #fff; --sc-low: #f2f4f6; --sc-high: #e6e8ea; --outline-variant: #bcc9c6;
+  --q-sans: 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  position: fixed; inset: 0; z-index: 880; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--q-sans);
+}
+#smdKit.on { display: block; }
+body.dark #smdKit { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; --on-surface-variant: #bcc9c6;
+  --sc-lowest: #1f2325; --sc-low: #23272a; --sc-high: #2d3133; --outline-variant: #3d4947; --secondary: #bec6e0;
+  --primary: #3fc7b3; --on-primary: #04322c; --error: #ffb4ab; --error-container: #5c1712; --on-error-container: #ffdad6; }
+#smdKit .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
+#smdKit *, #smdKit *::before, #smdKit *::after { box-sizing: border-box; }
+#smdKit .kit-sheet { display: flex; flex-direction: column; height: 100%; }
+#smdKit .kit-sheet-top { display: flex; align-items: center; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; background: var(--surface); border-bottom: 1px solid var(--sc-low); }
+#smdKit .kit-sheet-top h1 { flex: 1; margin: 0; font: 700 17px var(--q-sans); }
+#smdKit .kit-x { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 12px; background: transparent; color: var(--on-surface); cursor: pointer; }
+#smdKit .kit-sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 12px 16px calc(28px + env(safe-area-inset-bottom)); }
+/* Surfaces the kit links into sit below #smdKit (880) by default: lift them while the sheet is open,
+   the same way surgx.css lifts .mc-overlay above SURGX. Far below the prescription pad (16000). */
+html.kit-lock .mc-overlay { z-index: 1300; }
+/* home.js injects body.ui-v2 .sbref-overlay { z-index:140 !important }: only a more specific
+   !important can lift the Knowledge Library above the sheet. Scoped to html.kit-lock like the rest. */
+html.kit-lock body .sbref-overlay, html.kit-lock body.ui-v2 .sbref-overlay { z-index: 1300 !important; }
+
+/* ---- shared kit body ---- */
+.kit { --kit-amber: #8a5300; --kit-amber-bg: #fff4e0; max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+body.dark .kit { --kit-amber: #f5c26b; --kit-amber-bg: #33270f; }
+.kit .kit-ic { font-size: 20px; }
+.kit .kit-empty { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 36px 12px; color: var(--secondary); font: 500 14px var(--q-sans); }
+.kit .kit-chips { display: flex; gap: 6px; overflow-x: auto; overflow-y: hidden; padding: 2px 0 4px; scrollbar-width: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+.kit .kit-chips::-webkit-scrollbar { display: none; }
+.kit .kit-chip { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 3px; min-height: 40px; padding: 7px 14px; border: 1px solid var(--outline-variant); border-radius: 999px; background: var(--sc-lowest); color: var(--on-surface); font: 600 13.5px var(--q-sans); white-space: nowrap; cursor: pointer; }
+.kit .kit-chip.on { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--sc-lowest)); color: var(--primary); }
+.kit .kit-star .kit-ic { font-size: 15px; color: var(--primary); font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20; }
+.kit .kit-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.kit .kit-kicker { display: block; color: var(--secondary); font: 700 11.5px var(--q-sans); letter-spacing: .06em; text-transform: uppercase; }
+.kit .kit-head h2 { margin: 2px 0 0; font: 750 22px/1.2 var(--q-sans); letter-spacing: -.01em; color: var(--on-surface); overflow-wrap: anywhere; }
+.kit .kit-link { min-height: 40px; padding: 6px 4px; border: 0; background: transparent; color: var(--primary); font: 600 13.5px var(--q-sans); cursor: pointer; }
+.kit .kit-mine { display: inline-flex; align-items: center; gap: 4px; min-height: 40px; color: var(--primary); font: 600 13.5px var(--q-sans); }
+.kit .kit-mine .kit-ic { font-size: 18px; font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20; }
+.kit .kit-status { display: flex; align-items: flex-start; gap: 8px; padding: 11px 13px; border: 1px solid color-mix(in srgb, var(--kit-amber) 35%, var(--outline-variant)); border-radius: 14px; background: var(--kit-amber-bg); color: var(--on-surface); font: 500 13px/1.5 var(--q-sans); }
+.kit .kit-status .kit-ic { color: var(--kit-amber); font-size: 19px; }
+.kit .kit-status strong { color: var(--kit-amber); }
+.kit .kit-status.ok { border-color: color-mix(in srgb, var(--primary) 35%, var(--outline-variant)); background: color-mix(in srgb, var(--primary) 8%, var(--sc-lowest)); }
+.kit .kit-status.ok .kit-ic, .kit .kit-status.ok strong { color: var(--primary); }
+
+.kit .kit-card { display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 1px solid var(--outline-variant); border-radius: 16px; background: var(--sc-lowest); box-shadow: 0 1px 3px rgba(20,32,43,.05); min-width: 0; }
+.kit .kit-card h3 { display: flex; align-items: center; gap: 6px; margin: 0; font: 700 15px/1.3 var(--q-sans); color: var(--on-surface); }
+.kit .kit-card h3 .kit-ic { color: var(--primary); }
+.kit .kit-tool { border-color: color-mix(in srgb, var(--primary) 30%, var(--outline-variant)); }
+.kit .kit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.kit .kit-field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.kit .kit-field.wide { grid-column: 1 / -1; }
+.kit .kit-fl { color: var(--on-surface-variant); font: 600 12.5px/1.3 var(--q-sans); }
+.kit .kit-fl small { color: var(--secondary); font-weight: 500; }
+.kit .kit-inp { width: 100%; min-width: 0; min-height: 42px; border: 1px solid var(--outline-variant); background: var(--surface); color: var(--on-surface); font: 400 15px var(--q-sans); border-radius: 10px; padding: 9px 11px; outline: none; }
+.kit textarea.kit-inp { min-height: 64px; resize: vertical; }
+.kit .kit-inp:focus { border-color: var(--primary); }
+.kit .kit-check { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 4px 2px; color: var(--on-surface); font: 500 14px/1.35 var(--q-sans); cursor: pointer; }
+.kit .kit-check input { flex: 0 0 auto; width: 20px; height: 20px; margin: 0; accent-color: var(--primary); }
+.kit .kit-grid > .kit-check { grid-column: auto; }
+.kit .kit-alert { display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--error-container); color: var(--on-error-container); font: 600 13px/1.45 var(--q-sans); }
+.kit .kit-alert[hidden] { display: none; }
+.kit .kit-alert .kit-ic { font-size: 19px; }
+.kit .kit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.kit .kit-add { display: inline-flex; align-items: center; gap: 6px; min-height: 42px; padding: 8px 14px; border: 0; border-radius: 12px; background: var(--primary); color: var(--on-primary); font: 650 14px var(--q-sans); cursor: pointer; max-width: 100%; text-align: left; }
+.kit .kit-add .kit-ic { font-size: 19px; }
+.kit .kit-add:disabled { opacity: .45; cursor: not-allowed; }
+.kit .kit-clear, .kit .kit-seg { min-height: 42px; padding: 8px 14px; border: 1px solid var(--outline-variant); border-radius: 12px; background: transparent; color: var(--on-surface); font: 600 13.5px var(--q-sans); cursor: pointer; }
+.kit .kit-seg.on { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--sc-lowest)); color: var(--primary); }
+.kit .kit-muted { margin: 0; color: var(--secondary); font: 500 13px/1.5 var(--q-sans); }
+.kit .kit-strong { margin: 0; color: var(--on-surface); font: 700 14.5px/1.45 var(--q-sans); }
+.kit .kit-out { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.kit .kit-out:empty { display: none; }
+.kit .kit-result { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.kit .kit-result > div { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--primary) 8%, var(--sc-lowest)); }
+.kit .kit-result span { color: var(--secondary); font: 700 11px var(--q-sans); letter-spacing: .05em; text-transform: uppercase; }
+.kit .kit-result strong { color: var(--primary); font: 750 18px/1.25 var(--q-sans); }
+.kit .kit-result small { color: var(--on-surface-variant); font: 500 12px var(--q-sans); }
+.kit .kit-dates { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.kit .kit-dates li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 8px 0; border-top: 1px solid var(--sc-low); font: 500 13px/1.4 var(--q-sans); }
+.kit .kit-dates li:first-child { border-top: 0; }
+.kit .kit-dates li span { color: var(--on-surface-variant); min-width: 0; overflow-wrap: anywhere; }
+.kit .kit-dates li b { flex: 0 0 auto; max-width: 55%; text-align: right; color: var(--on-surface); font-weight: 650; }
+.kit .kit-notes { margin: 0; padding: 10px 12px 10px 28px; border-radius: 12px; background: var(--kit-amber-bg); color: var(--on-surface); font: 500 13px/1.5 var(--q-sans); }
+.kit .kit-notes li + li { margin-top: 4px; }
+.kit .kit-table { width: 100%; border-collapse: collapse; font: 500 13px/1.35 var(--q-sans); }
+.kit .kit-table th { padding: 6px 6px 6px 0; color: var(--secondary); font: 700 11px var(--q-sans); letter-spacing: .04em; text-transform: uppercase; text-align: left; border-bottom: 1px solid var(--outline-variant); }
+.kit .kit-table td { padding: 8px 6px 8px 0; border-bottom: 1px solid var(--sc-low); vertical-align: top; overflow-wrap: anywhere; }
+.kit .kit-table td:nth-child(2), .kit .kit-table td:nth-child(3) { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.kit .kit-table tr.kit-abn td { color: var(--error); font-weight: 650; }
+.kit .kit-ms { margin: 0; padding: 8px 10px 6px; border: 1px solid var(--sc-high); border-radius: 12px; min-width: 0; }
+.kit .kit-ms legend { padding: 0 4px; color: var(--primary); font: 700 12.5px var(--q-sans); }
+.kit .kit-jaw { display: flex; flex-wrap: wrap; gap: 6px 12px; }
+.kit .kit-quad { flex: 1 1 250px; display: grid; grid-template-columns: repeat(var(--q, 8), minmax(0, 1fr)); gap: 3px; }
+.kit .kit-jaw-label { margin: 4px 0 0; color: var(--secondary); font: 700 11px var(--q-sans); letter-spacing: .05em; text-transform: uppercase; }
+.kit .kit-tooth { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; min-width: 0; min-height: 46px; padding: 3px 0; border: 1px solid var(--outline-variant); border-radius: 9px; background: var(--surface); color: var(--on-surface); font: 600 11px var(--q-sans); cursor: pointer; }
+.kit .kit-tooth small { color: var(--secondary); font: 600 10.5px var(--q-sans); }
+.kit .kit-tooth b { min-height: 15px; font: 800 13px var(--q-sans); }
+.kit .kit-tooth.s-D { border-color: var(--error); background: color-mix(in srgb, var(--error) 12%, var(--surface)); color: var(--error); }
+.kit .kit-tooth.s-F, .kit .kit-tooth.s-C, .kit .kit-tooth.s-R { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--surface)); color: var(--primary); }
+.kit .kit-tooth.s-M, .kit .kit-tooth.s-X { background: var(--sc-high); color: var(--secondary); text-decoration: line-through; }
+.kit .kit-tooth.s-T { border-color: var(--kit-amber); color: var(--kit-amber); }
+.kit .kit-tooth.s-U { border-style: dashed; color: var(--secondary); }
+.kit .kit-adv { display: flex; flex-direction: column; gap: 6px; padding: 10px 0 2px; border-top: 1px solid var(--sc-low); }
+.kit .kit-adv:first-of-type { border-top: 0; padding-top: 0; }
+.kit .kit-adv b { font: 700 14px var(--q-sans); color: var(--on-surface); }
+.kit .kit-adv p { margin: 0; color: var(--on-surface-variant); font: 500 13.5px/1.55 var(--q-sans); }
+.kit .kit-adv .kit-add { align-self: flex-start; }
+.kit .kit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.kit .kit-pill { min-height: 40px; max-width: 100%; padding: 7px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--surface); color: var(--on-surface); font: 600 13px/1.3 var(--q-sans); text-align: left; overflow-wrap: anywhere; cursor: pointer; }
+.kit .kit-pill:hover { border-color: var(--primary); color: var(--primary); }
+.kit .kit-src ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font: 500 13px/1.45 var(--q-sans); }
+.kit .kit-src a { color: var(--primary); overflow-wrap: anywhere; }
+.kit .kit-src li span { display: block; color: var(--secondary); font-size: 12px; }
+@media (max-width: 380px) {
+  .kit .kit-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); }
+  .kit .kit-card { padding: 12px; }
+}
+/* Calculators opened from the OPD Specialty tab: MEDCALC (870) must sit above the OPD EMR overlay
+   (12010). opd-emr.js adds html.oe-kit-calc on the first calculator tap and removes it on close().
+   Below the discharge (12020) and MaiK (12030) overlays and far below the prescription pad (16000). */
+html.oe-kit-calc .mc-overlay { z-index: 12015; }
+.kit .kit-hint { display: block; margin-top: 2px; color: var(--secondary); font: 500 11.5px/1.35 var(--q-sans); }

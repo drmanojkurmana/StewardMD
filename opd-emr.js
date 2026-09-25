@@ -24,6 +24,7 @@
   function tabsNav(active) {
     var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["note", "Note", "edit_note"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]];
     if (immunFlagOn()) defs.splice(3, 0, ["immun", "Immunisation", "vaccines"]);
+    if (kitsOn()) defs.splice(defs.map(function (d) { return d[0]; }).indexOf("assess") + 1, 0, ["kit", "Specialty", "stethoscope"]);
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -1332,6 +1333,60 @@
     }).catch(function () { toast("Could not complete the request. Please try again."); });
   }
 
+  // ---- Specialty kit tab (specialty-kits.js, window.SMD_KITS; flag smd_specialty_kits, default ON) ----
+  // The kit is a structured specialty history/exam form plus tools (pregnancy dating, WHO growth, ...).
+  // It never saves anything itself: "Add" appends composed text to an Initial Assessment field (and
+  // fills the odd single-value field, e.g. LMP), exactly as if the doctor had typed it, so the normal
+  // Save to GHIS/EMR path saves it. Kit state lives in memory per consult (kitKey), never in storage.
+  function kitsOn() { try { return !!(G.SMD_KITS && G.SMD_KITS.on && G.SMD_KITS.on()); } catch (e) { return false; } }
+  var kitSeq = 0, kitLastKey = "";
+  function kitKey() {
+    if (!st.kitKey) {
+      if (kitLastKey && G.SMD_KITS && G.SMD_KITS.forget) G.SMD_KITS.forget(kitLastKey);   // previous consult's kit values go
+      st.kitKey = kitLastKey = "opd-" + (++kitSeq);
+    }
+    return st.kitKey;
+  }
+  function kitTab(st) {
+    if (!kitsOn()) return errorBox("Specialty kits are turned off on this device.");
+    return '<div class="oe-kit">' + G.SMD_KITS.html({ host: kitHost, key: kitKey(), defaultKit: G.SMD_KITS.mySpecialty() || scribeSpecialtyId() }) + "</div>";
+  }
+  function kitAppend(field, text) {
+    if (OPD_KIND[field] === "textarea") { appendPlan(field, text); return; }
+    var cur = String(st.assessVals[field] || "").trim();            // single-line field: no newlines
+    if (cur.indexOf(text) !== -1) return;
+    st.assessVals[field] = cur ? cur.replace(/[\s;]+$/, "") + "; " + text : text;
+    st.assessTouched[field] = true;
+  }
+  var kitHost = {
+    kind: "opd",
+    canWrite: function () { return !!st.writeOn && !st.assessAuthorized; },
+    writeNote: function () { return st.assessAuthorized ? "This assessment is authorised and locked in " + emrLabel() + "." : "Open the patient in write mode to add kit findings to the assessment."; },
+    ready: function () { return !!st.assessLoaded && !st.assessLoading && !st.assessErr; },
+    readyNote: function () { return st.assessErr ? "The assessment could not be loaded, so kit findings cannot be added yet." : "Loading the assessment…"; },
+    addLabel: function () { return "Add"; },
+    // The form's own label ("Present history", "Nutrition"). Not fieldLabel(): opd-emr.js declares that
+    // name twice and the later, DOM-reading one wins, which off the Assessment tab returns the raw key.
+    fieldLabel: function (n) { return OPD_LABEL[n] || String(n).replace(/_/g, " "); },
+    insert: function (field, text, sets) {
+      st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+      if (text) kitAppend(field, text);
+      var n = 0;
+      Object.keys(sets || {}).forEach(function (name) { var v = voiceCoerce(name, sets[name]); if (v != null) { st.assessVals[name] = v; st.assessTouched[name] = true; n++; } });
+      paint();
+      toast("Added to " + kitHost.fieldLabel(field) + (n ? " and " + n + " more field" + (n > 1 ? "s" : "") : "") + ". Save the assessment to keep it.");
+    },
+    repaint: function () { if (st.tab === "kit") paint(); },
+    protocol: function (id) { st.tab = "protocol"; paint(); openKbProtocol(id); },
+    // Calculators render in the MEDCALC overlay (z 870), under this overlay (12010): lift it for the
+    // rest of this consult (html.oe-kit-calc in specialty-kits.css; removed by close()).
+    calculator: function (id) { if (!(G.MEDCALC && G.MEDCALC.open)) { toast("Calculators are not available."); return; } document.documentElement.classList.add("oe-kit-calc"); G.MEDCALC.open(id); },
+    investigate: function (q) { st.tab = "inv"; st.invQuery = q; paint(); runSearch("inv"); },
+    openTab: function (t) { if (t === "immun" && !immunFlagOn()) { toast("The Immunisation tab is turned off on this device."); return; } switchTab(t); },
+    setScribe: function (id) { if (scribeClinicalOn() && G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.list && G.SMD_SCRIBETPL.list().some(function (x) { return x.id === id; })) { try { if (G.localStorage) G.localStorage.setItem(_specialtyKey(st && st.author), id); } catch (e) {} } },
+    patient: function () { return { sex: (st.patient && st.patient.sex) || "", age: (st.patient && st.patient.age) || "" }; }
+  };
+
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
     if (st.loading) body = loadingBox();
@@ -1345,6 +1400,7 @@
       else if (active === "protocol") body = head + protocolTab(st);
       else if (active === "onco") body = head + oncoTab(st);
       else if (active === "immun") body = head + immunTab(st);
+      else if (active === "kit") body = head + kitTab(st);
       else body = head + profileTab(st);
     }
     var app = '<div class="oe-app">' + header() + recordingBanner(st) + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
@@ -1381,8 +1437,15 @@
   function paint() {
     var r = root();
     var prev = r.querySelector(".oe-canvas"), top = prev ? prev.scrollTop : 0;
+    var prevTabs = r.querySelector(".oe-tabs"), tabsLeft = prevTabs ? prevTabs.scrollLeft : 0;
     r.innerHTML = _render(st);
     if (top) { var next = r.querySelector(".oe-canvas"); if (next) next.scrollTop = top; }
+    // Nine tabs overflow a phone: keep the strip where it was, and bring the active tab into view
+    // (a tab opened from a shortcut, e.g. the Specialty kit's investigation link, may be off-screen).
+    try {
+      var tabs = r.querySelector(".oe-tabs"), on = tabs && tabs.querySelector(".oe-tab.on");
+      if (tabs) { tabs.scrollLeft = tabsLeft; if (on && (on.offsetLeft < tabs.scrollLeft || on.offsetLeft + on.offsetWidth > tabs.scrollLeft + tabs.clientWidth)) tabs.scrollLeft = Math.max(0, on.offsetLeft - 12); }
+    } catch (e) {}
     try { initCloseSwipe(); } catch (e) {}
   }
   function paintKeepFocus(kind) {
@@ -1917,7 +1980,7 @@
     switchTab("assess");
   }
 
-  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } if (t === "note") loadNoteTemplates(); if (t === "immun") loadVaccineCatalogue(); }
+  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } if (t === "kit" && !st.assessLoaded && !st.assessLoading) loadAssessment(); if (t === "note") loadNoteTemplates(); if (t === "immun") loadVaccineCatalogue(); }
 
   // Tap a dose-matrix cell: build the drawer PURELY from the plan already in state - no fetch, no
   // write. drugId may itself contain ":" so re-join everything after the cycle number.
@@ -4879,7 +4942,7 @@
     track.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); endConsult(); } });
   }
 
-  function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
+  function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); try { document.documentElement.classList.remove("oe-kit-calc"); } catch (e) {} }
 
   // Thin delegate so tests/callers can reach the matrix builder off OPDEMR without reaching into
   // window.SMD_ONCOUI directly (onco-protocols.js owns the real, pure implementation).
@@ -4892,6 +4955,6 @@
   // support/debug screen) can read or wipe it without reaching into OPDEMR internals.
   G.SMD_SCRIBE_FEEDBACK = { list: scribeFeedbackRead, clear: function () { scribeFeedbackWrite([]); } };
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
+  G.OPDEMR = { openProfile: openProfile, close: close, kitHost: kitHost, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
+  if (typeof module !== "undefined" && module.exports) module.exports = { kitHost: kitHost, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
 })();
