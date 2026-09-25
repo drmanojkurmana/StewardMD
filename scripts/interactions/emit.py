@@ -13,7 +13,7 @@ import datetime
 import os
 import _lib as L
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 RXCLASS_SOURCE = {
     "id": "rxnorm-rxclass",
     "title": "RxNorm / RxClass drug classification",

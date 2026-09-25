@@ -21,7 +21,7 @@ body.dark .mkp-overlay, body.v3-dark .mkp-overlay, html.dark .mkp-overlay { --mk
 
 .mkp-section { max-width: 780px; margin: 0 auto 16px; background: var(--mkp-card); border: 1px solid var(--mkp-line); border-radius: 14px; padding: 14px 15px 16px; }
 .mkp-sec-h { font: 800 11px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--mkp-muted); margin-bottom: 10px; }
-.mkp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mkp-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; }
 .mkp-f { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .mkp-f.mkp-wide { grid-column: 1 / -1; }
 .mkp-f > span { font: 600 11px system-ui; color: var(--mkp-muted); }
@@ -30,7 +30,7 @@ body.dark .mkp-overlay, body.v3-dark .mkp-overlay, html.dark .mkp-overlay { --mk
 .mkp-f textarea { resize: vertical; font-size: 13px; }
 
 /* drug card */
-.mkp-drug { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; border: 1px solid var(--mkp-line); border-left: 3px solid var(--mkp-primary); border-radius: 12px; margin-bottom: 12px; background: color-mix(in srgb, var(--mkp-primary) 3%, var(--mkp-card)); }
+.mkp-drug { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; padding: 12px; border: 1px solid var(--mkp-line); border-left: 3px solid var(--mkp-primary); border-radius: 12px; margin-bottom: 12px; background: color-mix(in srgb, var(--mkp-primary) 3%, var(--mkp-card)); }
 .mkp-drug .mkp-f.mkp-wide { grid-column: 1 / -1; }
 .mkp-drug-hd { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; }
 .mkp-drug-n { font: 800 11px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--mkp-primary); }
@@ -60,4 +60,4 @@ body.dark .mkp-overlay, body.v3-dark .mkp-overlay, html.dark .mkp-overlay { --mk
 .mkp-btn.primary { background: var(--mkp-primary); color: #fff; }
 .mkp-btn:active { transform: scale(.99); }
 
-@media (max-width: 520px) { .mkp-drug { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .mkp-drug { grid-template-columns: minmax(0,1fr); } }

@@ -94,3 +94,22 @@ Deps: [[AI Control Center]] (ocr cap) · [[Medical Knowledge Base]].
 ## Single drug lookup surface (2026-09-10)
 - Removed the separate Drug Doses overlay. Drugs Database (`MEDDB`) is the single browse/dosing module.
 - `MEDDRUGS.openList/close` remain compatibility redirects for existing callers (including Oncology). Shared formulary data, matching, detail helpers, offline fallback, and Drug Interactions remain available.
+
+## Drug Interactions review (2026-09-25, branch codex/drug-interactions-medapi-openmed)
+- `ddi-catalog.js` routes interaction search through both existing MEDAPI methods, preserving offline DB wrappers. Local vocabulary/fuzzy suggestions appear immediately; remote requests are debounced and bounded. Confirm spelling suggestions explicitly.
+- `medlist.js` now preserves a medicine when Edit is cancelled, requires explicit fuzzy confirmation in typed/pasted entries, restores eager interaction rules, shows progress/error feedback, and rejects prefix-only automatic brand mapping.
+- `interactions.js` enumerates all distinct matching product sets per rule. Verified browser example: warfarin + ibuprofen + naproxen now shows both warfarin pairs rather than only the first.
+- Per-card severity pills and colored edge bars removed at owner's request. Subtle glows, textual section headings, and severity in clinical details remain.
+- The optional OpenMed button in paste review uses a pinned, verified PharmaDetect pack defined in `ddi-catalog.js`; it does not enable the separate global disease/grounding flags. Exact upstream model SHA/revision and all artifact hashes are pinned. Download only on tap. NER identifies candidate names, not doses, negation, or interaction severity. Results start unchecked; clinician review required.
+- Real PharmaDetect weights ran through the browser WASM runtime and extracted metformin + atorvastatin from synthetic text. This is a functional smoke check, not a clinical accuracy benchmark or phone performance validation.
+- Patient-context rules remain unwired in this standalone screen; wording now states this honestly. Catalogue coverage is not interaction coverage.
+- ARTEMIS device QA blocked: missing provider key and no active Android device. Do not claim native release validation.
+
+### 2026-09-25 coverage audit and GLP-1 repair
+
+- Added a label-sourced tirzepatide × GLP-1 rule using the curated runtime tag, including semaglutide and liraglutide. Direct source and evidence are displayed in Clinical details.
+- Browser audit: 257 EPC duplicate rules are intentionally excluded by the browser engine; 70 rules are eligible there. Retain all 327 source rules and both consumers' original classifications because WardSynq also consumes the JSON pack. The browser and WardSynq assets have pre-existing differences; do not overwrite one with the other. No claim of 327 active browser rules is made.
+- Removed the ingredient-overlap suppression between distinct products; distinct assignment already prevents self-matching. Shared ingredients must not suppress an independent warfarin/NSAID finding.
+- Empty results explicitly start with “Safety not established”. Moderate/monitor findings are grouped as “Review required”, not permission to coadminister with monitoring.
+- Audit limitations: 69 existing rules lack direct source URLs, 33 curated classification tags are not referenced by class rules (some have generic-specific rules), patient-context inputs remain unwired, and single-product internal interactions are outside distinct-product matching. Existing signoff validation reports 19 high-severity rules without a signed entry when reconstructed from committed sources. These are pre-existing provenance gaps; no reviewer approval was invented.
+- Verification: 81 existing focused unit checks pass after integrating current main; browser interaction harness passes; manual browser review of semaglutide + tirzepatide shows the new label warning. ARTEMIS unavailable; no new test files authored. This is not comprehensive clinical validation.

@@ -103,3 +103,18 @@ in_consultation; the link dies with the visit via tokenVer). Appointments carry 
 `teleConsent`; arrival passes the consent to the queue ticket; the record gets a `teleconsult` consent
 (care purpose) and `Encounter.virtual`. Day close counts video visits. Tests: `test/telehealth*.test.mjs`,
 `test/run-tele-wait-ui.mjs`. Open owner decisions: which video server; native clinics have no settings screen.
+
+## Protocol tab = clinical protocols + oncology regimens (2026-09-25)
+The EMR Protocol tab is no longer oncology-only: see [[Clinical Protocols]]. Branch chips, a cancer-type
+picker, one search, and an in-tab read-only reader for clinical protocols. Assign exists only on
+oncology rows. The tab needs `smd_kb_protocols` OR `smd_onco_protocols`; with both off it says so.
+Regimens now also load in read-only mode (rows say "view only"); `maybeLoadOncoProtocols(anyMode)`.
+
+## Specialty tab (2026-09-25)
+A "Specialty" tab after Assessment hosts the [[Specialty Kits]] (O&G, Paediatrics, Ortho, Eye, ENT,
+Derm, Psych, Dental). The kit appends composed text to Initial Assessment fields through
+`OPDEMR.kitHost.insert` (the only write) and is disabled until `loadAssessment()` has finished. Flag
+`smd_specialty_kits`. `paint()` now also keeps the tab strip's horizontal scroll across a repaint and
+brings the active tab into view (nine tabs overflow a phone). Gotcha found on the way: `fieldLabel` is
+declared twice in `opd-emr.js` and the later, DOM-reading one wins everywhere; see the kit note.
+

@@ -1,0 +1,97 @@
+{
+ "id": "influenza",
+ "title": "Seasonal influenza including H1N1 (adult, India)",
+ "subject": "infectious-disease",
+ "population": "Adults",
+ "basis": "india",
+ "counterpart": "influenza-international",
+ "setting": "Outpatient, emergency department, ward, ICU",
+ "aliases": ["flu", "swine flu", "H1N1", "H3N2", "influenza A", "influenza B", "ILI", "influenza-like illness", "SARI", "oseltamivir", "Tamiflu", "category A B C influenza"],
+ "summary": "Categorise every influenza-like illness as MoHFW Category A (symptomatic care), B (oseltamivir without testing: high fever with severe sore throat, or high-risk group) or C (red flags: test, start oseltamivir empirically, admit). Oseltamivir 75 mg twice daily for 5 days, reduced in renal impairment; no corticosteroids.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise and categorise (MoHFW/NCDC 2019)",
+   "items": [
+    "Influenza-like illness: sudden cough and sore throat with measured fever of 100.4 F (38 C) or more, onset within 10 days; often myalgia, headache, fatigue, rhinorrhoea, vomiting or diarrhoea.",
+    "Category A (mild): mild fever with cough or sore throat, with or without body ache, headache, diarrhoea or vomiting. No test, no oseltamivir; symptomatic care, home isolation, reassess in 24 to 48 hours.",
+    "Category B: B1, Category A plus high-grade fever (102 F, 38.9 C, or more) and severe sore throat; B2, Category A plus a high-risk condition. Give oseltamivir without testing; home isolation.",
+    "Category C (complicated): breathlessness, haemoptysis, altered mental state, seizures, reduced urine output, symptoms persisting or worsening beyond 72 hours, or worsening of a chronic disease; signs of tachypnoea, SpO2 below 90%, hypotension or cyanosis. Test, start oseltamivir empirically, admit.",
+    "High-risk groups: age 65 or more, pregnancy and up to 2 weeks postpartum, children under 5, chronic lung, heart, kidney, liver or neurological disease, diabetes, blood disorders including haemoglobinopathies, immunosuppression (HIV, steroids for 2 weeks or more, transplant), BMI 40 or more, malignancy."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Investigations",
+   "items": [
+    "Test Category C and hospitalised patients by real-time RT-PCR or another molecular assay on a nasopharyngeal or throat swab, ideally within 4 days of onset; never delay treatment for the result.",
+    "Molecular tests are preferred over rapid antigen tests; a negative upper-airway test does not exclude influenza in a ventilated patient with pneumonia, so send a lower respiratory sample.",
+    "Admitted patients: CBC, renal and liver function, blood gas, chest X-ray; blood and sputum cultures if pneumonia or suspected bacterial co-infection."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Antiviral treatment",
+   "items": [
+    "Oseltamivir 75 mg orally twice daily for 5 days for Categories B and C, all hospitalised patients, severe or progressive illness, and high-risk outpatients.",
+    "Start as early as possible, preferably within 48 hours of onset, but still treat hospitalised, severe and high-risk patients presenting later (benefit is seen up to 4 to 5 days after onset).",
+    "Otherwise healthy outpatients: treatment can be considered if seen within 2 days of onset (IDSA).",
+    "Renal dosing (treatment): creatinine clearance 31 to 60 mL/min, 30 mg twice daily; 11 to 30 mL/min, 30 mg once daily; haemodialysis, 30 mg after every dialysis session; CAPD, a single 30 mg dose after a dialysis exchange.",
+    "Consider a longer course for immunocompromised patients and those admitted with severe lower respiratory disease, pneumonia or ARDS."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Supportive care and complications",
+   "items": [
+    "Categories A and B: oral fluids, paracetamol, saline nasal drops, lozenges and steam inhalation; closely monitor the underlying high-risk condition.",
+    "Category C: oxygen for hypoxaemia, IV fluids, electrolyte balance, nutrition; monitor respiratory rate, SpO2 and consciousness. ICU for respiratory failure needing ventilation, haemodynamic instability or multi-organ dysfunction.",
+    "Antibiotics (as for community-acquired pneumonia, covering S. aureus) if severe at presentation (extensive pneumonia, respiratory failure, hypotension, fever), deterioration after initial improvement, or no improvement after 3 to 5 days of antiviral treatment.",
+    "No corticosteroids for influenza, influenza pneumonia or ARDS unless indicated for another reason (low-dose hydrocortisone only for septic shock). No IVIG.",
+    "Influenza ARDS: lung-protective ventilation with tidal volume 6 mL/kg ideal body weight, plateau pressure not above 30 cmH2O, PEEP titration; recruitment, neuromuscular blockade and prone ventilation if oxygen goals are not met."
+   ]
+  },
+  {
+   "kind": "prevention",
+   "title": "Isolation, prophylaxis and vaccination",
+   "items": [
+    "Home isolation for 7 days from onset with droplet precautions; no repeat test is needed before discharge.",
+    "In hospital, isolate or cohort patients with beds at least 1 metre apart; staff use PPE and hand hygiene.",
+    "Post-exposure chemoprophylaxis: oseltamivir 75 mg once daily for 7 days after the last exposure for unprotected or unvaccinated exposed health workers and high-risk contacts during outbreaks.",
+    "Annual influenza vaccination for high-risk groups and health workers, using the composition recommended for the season by NCDC."
+   ]
+  },
+  {
+   "kind": "special",
+   "title": "Special groups",
+   "items": [
+    "Pregnancy and up to 2 weeks postpartum: high risk; start oseltamivir promptly without waiting for tests, whatever the illness duration.",
+    "Immunocompromised patients shed virus longer: treat for longer and consider antiviral resistance if not improving.",
+    "Children (for paediatric carers): oseltamivir by weight for 5 days, 15 kg or less 30 mg twice daily, 16 to 23 kg 45 mg, 24 to 40 kg 60 mg, above 40 kg 75 mg; avoid aspirin (Reye syndrome)."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Waiting for PCR before treating Category C, pregnant or other high-risk patients.",
+    "Withholding oseltamivir from hospitalised patients because more than 48 hours have passed.",
+    "Giving corticosteroids for influenza pneumonia; missing secondary S. aureus or pneumococcal pneumonia.",
+    "Testing and treating every mild Category A patient, wasting tests and antivirals."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Oseltamivir (treatment)", "dose": "75 mg orally twice daily for 5 days", "notes": "CrCl 31 to 60 mL/min: 30 mg twice daily; 11 to 30: 30 mg once daily; haemodialysis: 30 mg after each session. Nausea and vomiting common; take with food." },
+  { "name": "Oseltamivir (post-exposure prophylaxis)", "dose": "75 mg orally once daily for 7 days after the last exposure", "notes": "Reduce in renal impairment." },
+  { "name": "Oseltamivir (children, NCDC)", "dose": "Twice daily for 5 days: below 15 kg 30 mg; 15 to 23 kg 45 mg; 24 to under 40 kg 60 mg; above 40 kg 75 mg. Infants: under 3 months 12 mg, 3 to 5 months 20 mg, 6 to 11 months 25 mg twice daily", "notes": "Syrup available; CDC infant dose 3 mg/kg twice daily." },
+  { "name": "Paracetamol", "dose": "500 mg to 1 g orally every 6 hours as needed, maximum 4 g/day", "notes": "Avoid salicylates in children." }
+ ],
+ "sources": [
+  { "org": "MoHFW / NCDC", "title": "Guidelines on categorization of seasonal influenza cases during screening for home isolation, testing, treatment and hospitalization", "year": 2019, "url": "https://ncdc.mohfw.gov.in/uploads/pdf/72513234671561442053-1.pdf" },
+  { "org": "MoHFW / NCDC", "title": "Clinical management protocol for seasonal influenza (revised 25.02.2019)", "year": 2019, "url": "https://ncdc.mohfw.gov.in/uploads/pdf/66872871241561442115.pdf" },
+  { "org": "IDSA", "title": "Clinical practice guidelines by IDSA: 2018 update on diagnosis, treatment, chemoprophylaxis and institutional outbreak management of seasonal influenza", "year": 2019, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6653685/" },
+  { "org": "CDC", "title": "Influenza antiviral medications: summary for clinicians (renal dosing)", "year": 2026, "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

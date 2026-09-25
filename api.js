@@ -29,10 +29,10 @@
   }
   var MEDAPI = {
     base: API_BASE,
-    searchCompositions: function (q, limit) { return api("/search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 20)).then(function (d) { return d || { results: [] }; }); },
+    searchCompositions: function (q, limit) { return api("/search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 20)).then(function (d) { return d || { results: [], unavailable: true }; }); },
     // Brand-name search — returns individual brands whose name matches q (e.g.
     // "pantocid"). Degrades to empty if the API predates the endpoint (404 → null).
-    searchBrands: function (q, limit) { return api("/brand-search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 12)).then(function (d) { return d || { results: [] }; }); },
+    searchBrands: function (q, limit) { return api("/brand-search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 12)).then(function (d) { return d || { results: [], unavailable: true }; }); },
     composition: function (name, sort, tier, limit, offset, q) {
       return api("/composition?name=" + encodeURIComponent(name) + "&sort=" + (sort || "relevance") + "&tier=" + (tier || "all") + "&limit=" + (limit || PAGE) + "&offset=" + (offset || 0) + (q ? "&q=" + encodeURIComponent(q) : ""));
     },
@@ -699,7 +699,14 @@
     });
     // glowing "Available brands (N)" button in the header
     var bb = root.querySelector("#dbBrandBtn");
-    if (bb) { bb.style.display = ""; bb.innerHTML = dbIco("pills") + ' Available brands <span class="db-bb-ct">' + cnt + '</span>'; }
+    // A molecule with no Indian brand (a reserve antibiotic, an IV-only salt) is not "unavailable",
+    // and a glowing pill reading "Available brands 0" says exactly that. Hide it when there is
+    // nothing behind it rather than advertise a zero.
+    var nBrands = st.total || st.brands.length || 0;
+    if (bb) {
+      if (!nBrands) { bb.style.display = "none"; }
+      else { bb.style.display = ""; bb.innerHTML = dbIco("pills") + '<span class="db-bb-lbl"><span class="db-bb-long">Available </span>Brands</span><span class="db-bb-ct">' + cnt + '</span>'; }
+    }
     if (dwOpen) openDrawer();
     loadStructured(d.composition);
     renderMore();
@@ -1115,8 +1122,8 @@
       ".db-mono-none{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--paper,#f7f7f5);border:1px dashed var(--line,#e5e5e0);border-radius:9px;padding:10px 12px}",
       ".db-cmono{border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:10px;margin-bottom:9px;background:var(--paper,#f7f7f5)}",
       ".db-cmono-h{font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);margin-bottom:7px}",
-      ".db-qf{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:4px 0 11px}",
-      "@media(min-width:560px){.db-qf{grid-template-columns:repeat(4,1fr)}}",
+      ".db-qf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:4px 0 11px}",
+      "@media(min-width:560px){.db-qf{grid-template-columns:repeat(4,minmax(0,1fr))}}",
       ".db-qf>div{background:var(--paper,#f7f7f5);border:1px solid var(--line,#e5e5e0);border-radius:9px;padding:7px 9px}",
       ".db-qf-k{font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888)}",
       ".db-qf-v{font:700 12px var(--sans,system-ui);color:var(--ink,#1a1a1a);margin-top:2px;line-height:1.35}",
@@ -1124,18 +1131,18 @@
       ".gd-sec{background:var(--panel,#fff);border:1px solid var(--line,#e4eaed);border-radius:11px;padding:11px 13px;margin-bottom:9px}",
       ".gd-h{font:800 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--teal,#0a9396);display:flex;align-items:center;gap:6px;margin-bottom:8px}",
       ".gd-h .gd-q{margin-left:auto;font-weight:600;letter-spacing:0;text-transform:none;color:var(--slate-soft,#8aa0ab);font-size:10px}",
-      ".gd-2{display:grid;grid-template-columns:1fr;gap:9px}@media(min-width:620px){.gd-2{grid-template-columns:1fr 1fr}}",
+      ".gd-2{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}@media(min-width:620px){.gd-2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}",
       ".gd-b{margin:0;padding-left:16px}.gd-b li{margin:2px 0;font-size:13px}",
-      ".gd-qf{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}@media(min-width:620px){.gd-qf{grid-template-columns:repeat(4,1fr)}}",
-      ".gd-qf>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:7px 9px}",
-      ".gd-qk{font:700 9px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#8aa0ab)}",
-      ".gd-qv{font:800 12.5px var(--sans,system-ui);color:var(--ink,#15242b);margin-top:2px;line-height:1.3}",
+      ".gd-qf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}@media(min-width:620px){.gd-qf{grid-template-columns:repeat(4,minmax(0,1fr))}}",
+      ".gd-qf>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:7px 9px;min-width:0}",
+      ".gd-qk{font:700 9px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#8aa0ab);overflow-wrap:anywhere}",
+      ".gd-qv{font:800 12.5px var(--sans,system-ui);color:var(--ink,#15242b);margin-top:2px;line-height:1.3;overflow-wrap:anywhere}",
       ".gd-tw{overflow-x:auto}.gd-t{width:100%;border-collapse:collapse;font-size:12.5px}",
       ".gd-t th{text-align:left;font:700 9px var(--sans,system-ui);text-transform:uppercase;color:var(--slate-soft,#8aa0ab);padding:6px 8px;border-bottom:1px solid var(--line,#e4eaed)}",
       ".gd-t td{padding:6px 8px;border-bottom:1px solid var(--line,#e4eaed);vertical-align:top}",
-      ".gd-chk{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:4px}@media(min-width:560px){.gd-chk{grid-template-columns:1fr 1fr}}",
+      ".gd-chk{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:4px}@media(min-width:560px){.gd-chk{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}",
       ".gd-chk li{padding-left:20px;position:relative;font-size:13px}.gd-chk li:before{content:'✓';position:absolute;left:0;color:var(--green,#1f8a4c);font-weight:800}",
-      ".gd-mon{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px}",
+      ".gd-mon{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px}",
       ".gd-mon li{padding-left:20px;position:relative;font-size:13px}.gd-mon li:before{content:'☐';position:absolute;left:0;color:#1f6feb;font-weight:700}",
       ".gd-sev{border-radius:8px;padding:8px 10px;margin-bottom:7px}.gd-sev h4{margin:0 0 4px;font:800 10px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em}.gd-sev .gd-b li{font-size:12.5px}",
       ".gd-sev.red{background:#fdecea;border:1px solid #f3c2bb}.gd-sev.red h4{color:#c0392b}",
@@ -1143,16 +1150,19 @@
       ".gd-sev.blue{background:#e9f1fe;border:1px solid #bcd4fb}.gd-sev.blue h4{color:#1f6feb}",
       ".gd-sev.green{background:#e8f6ee;border:1px solid #bfe3cd}.gd-sev.green h4{color:#1f8a4c}",
       ".gd-sev.grey{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed)}.gd-sev.grey h4{color:var(--slate,#4b5b66)}",
-      ".gd-kv{display:grid;grid-template-columns:74px 1fr;gap:8px;padding:4px 0;border-top:1px dashed var(--line,#e4eaed);font-size:12.5px}.gd-kv:first-child{border-top:none}.gd-kv b{color:var(--slate-soft,#8aa0ab);font:700 9.5px var(--sans,system-ui);text-transform:uppercase;padding-top:2px}",
-      ".gd-pk{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}@media(min-width:560px){.gd-pk{grid-template-columns:repeat(5,1fr)}}",
-      ".gd-pk>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:6px;text-align:center}",
+      ".gd-kv{display:grid;grid-template-columns:74px minmax(0,1fr);gap:8px;padding:4px 0;border-top:1px dashed var(--line,#e4eaed);font-size:12.5px}.gd-kv:first-child{border-top:none}.gd-kv b{color:var(--slate-soft,#8aa0ab);font:700 9.5px var(--sans,system-ui);text-transform:uppercase;padding-top:2px}",
+      ".gd-pk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}@media(min-width:560px){.gd-pk{grid-template-columns:repeat(5,minmax(0,1fr))}}",
+      ".gd-pk>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:6px;text-align:center;min-width:0}",
       ".gd-pearls{background:linear-gradient(135deg,#e7f3f3,#eef7ee);border:1px solid #bfe3e3}",
       ".gd-src a{color:var(--teal,#0a9396)}.gd-foot{font:500 10px var(--sans,system-ui);color:var(--slate-soft,#8aa0ab);margin-top:5px}",
       // severity/pearls blocks have fixed light pastel backgrounds — force dark text so they stay readable in dark mode
       ".gd-sev{color:#1f2d34}.gd-sev .gd-b li{color:#1f2d34}.gd-pearls,.gd-pearls .gd-b li{color:#173a36}",
       ".db-sev{color:#1f2d34}.db-sev .db-b li,.db-sev li{color:#1f2d34}",
       ".db-hf{font:600 12px var(--sans,system-ui);color:var(--slate,#555);margin:0 2px 10px}",
-      ".db-brandbtn{display:inline-flex;align-items:center;gap:6px;background:var(--teal,#0a9396);color:#fff;border:none;border-radius:10px;height:34px;padding:0 13px;font:700 12.5px var(--sans,system-ui);cursor:pointer;animation:dbGlow 1.8s ease-in-out infinite}",
+      ".db-brandbtn{display:inline-flex;align-items:center;gap:6px;background:var(--teal,#0a9396);color:#fff;border:none;border-radius:10px;height:34px;padding:0 13px;font:700 12.5px var(--sans,system-ui);cursor:pointer;animation:dbGlow 1.8s ease-in-out infinite;flex:0 1 auto;min-width:0;overflow:hidden}",
+      ".db-bb-lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}",
+      "@media(max-width:430px){.db-brandbtn{padding:0 10px}.db-bb-long{display:none}}",
+      ".db-title{flex:1 1 auto;min-width:0}",
       ".db-brandbtn:hover{filter:brightness(1.06)}",
       ".db-bb-ct{background:rgba(255,255,255,.24);border-radius:6px;padding:1px 7px;font-size:11.5px}",
       "@keyframes dbGlow{0%,100%{box-shadow:0 0 0 0 rgba(10,147,150,.55)}50%{box-shadow:0 0 0 7px rgba(10,147,150,0)}}",

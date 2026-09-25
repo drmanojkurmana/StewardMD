@@ -1,0 +1,162 @@
+{
+ "id": "psychiatry",
+ "label": "Psychiatry",
+ "short": "Psych",
+ "icon": "psychology",
+ "group": "care",
+ "subject": "psychiatry",
+ "scribe": "psychiatry",
+ "tools": [],
+ "sections": [
+  {
+   "id": "presenting-illness",
+   "title": "Presenting illness",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "informant_name", "label": "Informant (name)", "type": "text", "set": "informany_attendant" },
+    { "id": "informant_relationship", "label": "Informant's relationship to patient", "type": "text", "hint": "and how long they have lived with the patient" },
+    { "id": "information_reliability", "label": "Information", "type": "select", "opts": ["Reliable and adequate", "Reliable but inadequate", "Unreliable", "No informant, patient only"] },
+    { "id": "presenting_symptoms", "label": "Presenting symptoms", "type": "textarea", "hint": "in time order, from the patient and the informant" },
+    { "id": "illness_duration", "label": "Duration of illness", "type": "text", "hint": "e.g. 2 years; current episode 3 weeks" },
+    { "id": "onset", "label": "Onset", "type": "select", "opts": ["Abrupt (within 48 hours)", "Acute (within 2 weeks)", "Subacute", "Insidious"] },
+    { "id": "course", "label": "Course", "type": "select", "opts": ["Continuous", "Episodic", "Fluctuating"] },
+    { "id": "progression", "label": "Progression", "type": "select", "opts": ["Improving", "Static", "Deteriorating"] },
+    { "id": "precipitants", "label": "Precipitating and maintaining factors", "type": "text", "hint": "stressors, physical illness, substance use, stopping medicines" },
+    { "id": "sleep", "label": "Sleep", "type": "select", "opts": ["Normal", "Disturbed", "Insomnia"], "set": "Sleep" },
+    { "id": "appetite", "label": "Appetite", "type": "select", "opts": ["Normal", "Reduced", "Increased"], "set": "Appetite" },
+    { "id": "functioning", "label": "Current functioning (self-care, work, social)", "type": "select", "opts": ["Not affected", "Mildly affected", "Moderately affected", "Severely affected"] }
+   ]
+  },
+  {
+   "id": "treatment-review",
+   "title": "Treatment review",
+   "target": "management_plan",
+   "fields": [
+    { "id": "adherence", "label": "Adherence to medicines", "type": "select", "opts": ["Regular", "Irregular", "Stopped", "Not on medicines"] },
+    { "id": "response", "label": "Response to treatment", "type": "select", "opts": ["Remission", "Good response", "Partial response", "No response", "Worse"] },
+    { "id": "adverse_effect", "label": "Main adverse effect", "type": "select", "opts": ["None reported", "Sedation", "Tremor, stiffness or restlessness", "Weight gain", "Sexual dysfunction", "Menstrual change or breast discharge", "Other"] },
+    { "id": "adverse_details", "label": "Adverse effect details", "type": "text" },
+    { "id": "rating_scores", "label": "Rating scale scores", "type": "text", "hint": "e.g. PHQ-9 16, GAD-7 11, AUDIT 21" },
+    { "id": "monitoring_due", "label": "Physical health monitoring due", "type": "text", "hint": "weight, waist, BP, glucose, lipids, ECG, lithium or valproate level, TSH, creatinine" },
+    { "id": "psychosocial", "label": "Psychosocial intervention", "type": "select", "opts": ["Psychoeducation", "Supportive counselling", "Structured psychotherapy (CBT or other)", "Family intervention", "De-addiction services", "Referred to psychologist"] }
+   ]
+  },
+  {
+   "id": "past-personal-family",
+   "title": "Past, personal and family history",
+   "target": "History_past_illness",
+   "fields": [
+    { "id": "past_psychiatric", "label": "Past psychiatric history", "type": "textarea", "hint": "previous episodes, diagnoses, admissions, medicines and response, ECT, adherence" },
+    { "id": "medical_neurological", "label": "Medical and neurological history", "type": "text", "hint": "head injury, epilepsy, thyroid disease, HIV, other illness, current medicines" },
+    { "id": "alcohol_use", "label": "Alcohol", "type": "select", "opts": ["None", "Occasional", "Harmful use", "Dependence", "Abstinent (past use)"] },
+    { "id": "last_drink", "label": "Last drink and withdrawal history", "type": "text", "hint": "time of last drink; past fits or delirium tremens" },
+    { "id": "tobacco_use", "label": "Tobacco", "type": "select", "opts": ["None", "Smoking", "Smokeless", "Smoking and smokeless", "Stopped"] },
+    { "id": "other_substances", "label": "Other substances", "type": "text", "hint": "cannabis (bhang, ganja), opioids, sedatives, inhalants: route, amount, last use" },
+    { "id": "family_history", "label": "Family history", "type": "text", "hint": "psychiatric illness, suicide, substance use, epilepsy" },
+    { "id": "personal_history", "label": "Personal and social history", "type": "text", "hint": "birth and development, education, work, marriage, living situation, trauma or abuse" },
+    { "id": "premorbid_personality", "label": "Premorbid personality", "type": "text", "hint": "relationships, interests, usual mood, character, coping" },
+    { "id": "illness_beliefs", "label": "Illness beliefs and help sought", "type": "text", "hint": "patient's and family's view of the cause; faith healer or traditional treatment" }
+   ]
+  },
+  {
+   "id": "mental-status-examination",
+   "title": "Mental status examination",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "appearance_behaviour", "label": "Appearance and behaviour", "type": "select", "opts": ["Kempt, cooperative, good eye contact", "Unkempt or poor self-care", "Poor eye contact", "Guarded or suspicious", "Hostile or uncooperative", "Withdrawn or preoccupied", "Disinhibited or bizarre"] },
+    { "id": "psychomotor", "label": "Psychomotor activity", "type": "select", "opts": ["Normal", "Increased (restless or agitated)", "Decreased (retarded)", "Catatonic signs", "Abnormal involuntary movements"] },
+    { "id": "rapport", "label": "Rapport", "type": "select", "opts": ["Established easily", "Established with difficulty", "Not established"] },
+    { "id": "speech", "label": "Speech", "type": "select", "opts": ["Normal rate, volume and tone", "Increased rate or pressured", "Decreased rate or volume", "Poverty of speech", "Mute", "Slurred or dysarthric"] },
+    { "id": "mood_subjective", "label": "Mood (subjective, in the patient's words)", "type": "text", "hint": "e.g. 'I feel empty all the time'" },
+    { "id": "affect", "label": "Affect (objective, range and congruence)", "type": "select", "opts": ["Euthymic, full range, congruent", "Depressed", "Anxious", "Elated or expansive", "Irritable", "Restricted range", "Blunted or flat", "Labile", "Incongruent with thought content"] },
+    { "id": "thought_form", "label": "Thought form and stream", "type": "select", "opts": ["Normal, goal directed", "Pressure of thought or flight of ideas", "Poverty of thought", "Thought block", "Circumstantiality", "Tangentiality", "Loosening of associations", "Incoherence"] },
+    { "id": "thought_content", "label": "Thought content (delusions, obsessions, preoccupations)", "type": "textarea", "hint": "type and conviction of delusions, obsessions and compulsions, worthlessness, guilt, hopelessness" },
+    { "id": "perception", "label": "Perception", "type": "select", "opts": ["No abnormality elicited", "Auditory hallucinations, second person", "Auditory hallucinations, third person or commentary", "Visual hallucinations", "Tactile, olfactory or gustatory hallucinations", "Illusions", "Depersonalisation or derealisation"] },
+    { "id": "cognition", "label": "Cognition (orientation, attention, memory)", "type": "select", "opts": ["Oriented, attention and memory intact", "Disoriented (time, place or person)", "Impaired attention", "Impaired recent memory", "Globally impaired", "Could not be assessed"], "hint": "score with MMSE or MoCA if impaired" },
+    { "id": "insight", "label": "Insight", "type": "select", "opts": ["Grade 1: complete denial of illness", "Grade 2: slight awareness, yet denies", "Grade 3: aware, blames others or external factors", "Grade 4: aware, cause unknown within self", "Grade 5: intellectual insight", "Grade 6: true emotional insight"] },
+    { "id": "judgement", "label": "Judgement", "type": "select", "opts": ["Intact (personal, social and test)", "Personal judgement impaired", "Social judgement impaired", "Test judgement impaired", "Globally impaired"] }
+   ]
+  },
+  {
+   "id": "risk-assessment",
+   "title": "Risk assessment",
+   "target": "management_plan",
+   "alert": "Follow the self-harm and suicide risk protocol. If suicidal intent is high, do not leave the patient unsupervised: keep them with staff in a safe area, remove means, and arrange urgent psychiatric assessment. Act on safeguarding concerns under local procedures.",
+   "fields": [
+    { "id": "risk_suicidal_thoughts", "label": "Suicidal thoughts", "type": "check" },
+    { "id": "risk_plan", "label": "Plan or method decided", "type": "check" },
+    { "id": "risk_intent", "label": "Intent to act", "type": "check" },
+    { "id": "risk_means", "label": "Access to means (pesticides, medicines, ropes, weapons)", "type": "check" },
+    { "id": "risk_self_harm_now", "label": "Self-harm or suicide attempt in this episode", "type": "check", "hint": "MHCA 2017 section 115: presume severe stress; provide care, not punishment" },
+    { "id": "risk_self_harm_past", "label": "Previous self-harm or suicide attempt", "type": "check" },
+    { "id": "risk_harm_others", "label": "Thoughts, threats or acts of harm to others", "type": "check" },
+    { "id": "risk_command_hallucinations", "label": "Command hallucinations to harm self or others", "type": "check" },
+    { "id": "risk_safeguarding", "label": "Safeguarding concern (abuse, violence, exploitation or neglect)", "type": "check" },
+    { "id": "risk_formulation", "label": "Risk formulation", "type": "textarea", "hint": "current dangers, what could change them, protective factors and reasons for living; avoid low, medium or high labels (NICE NG225)" },
+    { "id": "safety_plan", "label": "Safety plan", "type": "select", "opts": ["Agreed, copy given to patient", "Agreed and shared with family (with consent)", "Not yet agreed"] }
+   ]
+  },
+  {
+   "id": "mhca-2017",
+   "title": "Mental Healthcare Act 2017",
+   "target": "management_plan",
+   "fields": [
+    { "id": "mhca_capacity", "label": "Capacity for mental healthcare and treatment decisions (section 4)", "type": "select", "opts": ["Can decide independently", "Can decide with minimal support", "Needs very high support from nominated representative", "Not yet assessed"] },
+    { "id": "capacity_findings", "label": "Capacity findings", "type": "text", "hint": "can the person understand the relevant information, appreciate the foreseeable consequences, and communicate the decision (section 4(1))" },
+    { "id": "advance_directive", "label": "Advance directive (section 5)", "type": "select", "opts": ["Checked, none made", "Checked, copy on record", "Exists, copy awaited"], "hint": "ask the patient and family; Boards keep an online register (section 7)" },
+    { "id": "nominated_representative", "label": "Nominated representative (name, relationship)", "type": "text" },
+    { "id": "nominated_rep_basis", "label": "Nominated representative basis (sections 14 and 15)", "type": "select", "opts": ["Appointed in writing by the patient", "Named in the advance directive", "Relative", "Care-giver", "Appointed by the Mental Health Review Board", "Legal guardian of a minor"] },
+    { "id": "admission_category", "label": "Admission category", "type": "select", "opts": ["Outpatient care, no admission", "Independent admission (section 86)", "Admission of a minor (section 87)", "Supported admission up to 30 days (section 89)", "Supported admission beyond 30 days (section 90)", "Emergency treatment (section 94), up to 72 hours"] },
+    { "id": "treatment_consent", "label": "Informed consent for treatment given by", "type": "select", "opts": ["Patient", "Patient with support of nominated representative", "Nominated representative, temporarily (section 89(7))", "Nominated representative of a minor (section 87(7))", "Emergency treatment (section 94)"] },
+    { "id": "rights_informed", "label": "Right to information given (section 22)", "type": "check", "hint": "provision and criteria for admission, right to apply to the Board for review, nature of illness, treatment and side effects, in a language the person understands" },
+    { "id": "board_report", "label": "Report to Mental Health Review Board", "type": "select", "opts": ["Not required", "Due", "Sent"], "hint": "minor admitted: within 72 hours (section 87(9)); supported admission: within 3 days for a woman or minor, 7 days for others (section 89(9))" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Complete blood count", "query": "CBC" },
+  { "label": "Liver function tests", "query": "LFT" },
+  { "label": "Renal function (urea, creatinine)", "query": "creatinine" },
+  { "label": "Serum electrolytes (sodium)", "query": "electrolytes" },
+  { "label": "Thyroid function (TSH)", "query": "TSH" },
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "Fasting lipid profile", "query": "lipid profile" },
+  { "label": "Serum lithium level", "query": "lithium" },
+  { "label": "Vitamin B12", "query": "vitamin B12" },
+  { "label": "Serum prolactin", "query": "prolactin" },
+  { "label": "ECG (QTc)", "query": "ECG" },
+  { "label": "Urine drug screen", "query": "urine drug screen" },
+  { "label": "HIV", "query": "HIV" },
+  { "label": "CT brain", "query": "CT brain" }
+ ],
+ "protocols": ["depression-adult", "generalised-anxiety-disorder", "self-harm-and-suicide-risk", "acute-agitation", "alcohol-withdrawal", "delirium", "dementia", "serotonin-syndrome", "neuroleptic-malignant-syndrome", "tricyclic-antidepressant-overdose", "opioid-overdose", "poisoning-general-approach"],
+ "calculators": ["phq9", "phq2", "gad7", "gad2", "epds", "gds15", "gds30", "hamd", "madrs", "bdi", "hama", "bai", "hads", "mdq", "ymrs", "ybocs", "pcl5", "phq15", "isi", "psqi", "auditc", "audit_full", "cage", "alcohol_units", "ciwa", "cows", "fagerstrom", "mmse", "moca", "amts", "ad8", "cdr", "lawton_iadl", "4at", "cam", "zarit", "hunter_serotonin", "qtc"],
+ "advice": [
+  {
+   "id": "crisis-help",
+   "title": "Help in a crisis",
+   "target": "follow_up_advice",
+   "text": "If you have thoughts of harming yourself or ending your life, tell someone you trust and get help straight away: go to the nearest hospital emergency department, or call Tele MANAS on 14416 or 1800-89-14416 (free, 24 hours a day). Keep your safety plan and these numbers with you."
+  },
+  {
+   "id": "safe-home",
+   "title": "Keeping the home safe",
+   "target": "follow_up_advice",
+   "text": "Ask a family member to lock away all medicines, pesticides, acids and other poisons, and to remove anything else you might use to harm yourself. Share your safety plan with them so they know your warning signs and whom to call."
+  },
+  {
+   "id": "taking-antidepressants",
+   "title": "Taking antidepressants",
+   "target": "follow_up_advice",
+   "text": "Antidepressants usually take 1 to 2 weeks to start working and up to 6 weeks for the full effect, so take them every day even if you notice no change at first. Do not stop them suddenly, and do not take extra to make up for a missed dose. Carry on for as long as your doctor advises, usually at least six months after you feel better. Tell your doctor straight away about troublesome side effects or any thoughts of harming yourself, and ask before drinking alcohol or driving."
+  }
+ ],
+ "sources": [
+  { "org": "Ministry of Law and Justice, Government of India", "title": "The Mental Healthcare Act, 2017 (No. 10 of 2017)", "year": 2017, "url": "https://www.indiacode.nic.in/bitstream/123456789/2249/1/A2017-10.pdf" },
+  { "org": "NICE", "title": "NG225 Self-harm: assessment, management and preventing recurrence", "year": 2022, "url": "https://www.nice.org.uk/guidance/ng225" },
+  { "org": "American Psychiatric Association", "title": "Practice guidelines for the psychiatric evaluation of adults, third edition", "year": 2016, "url": "https://psychiatryonline.org/doi/book/10.1176/appi.books.9780890426760" },
+  { "org": "Royal College of Psychiatrists", "title": "Antidepressants (patient information)", "year": 2025, "url": "https://www.rcpsych.ac.uk/mental-health/treatments-and-wellbeing/antidepressants" },
+  { "org": "DGHS, MoHFW, Government of India", "title": "National Mental Health Programme: Tele MANAS helpline", "year": 2024, "url": "https://dghs.mohfw.gov.in/national-mental-health-programme.php" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

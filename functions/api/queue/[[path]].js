@@ -246,6 +246,7 @@ import { registerSettings, validateRegisterSettings, rmiStatus, NOTES as REGISTE
 import { legalView, validateStateConfig, stateConfigFor } from "../../_wardsynq/legal-requirements.js";
 import { controlledSet, isControlledDrug, regimeOf, quarantineRefusal, estimateRefusal } from "../../_wardsynq/controlled-drugs.js";
 import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
+import { imagingSeries, imagingInstance } from "../../_wardsynq/dicom-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
 /* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
@@ -314,7 +315,7 @@ import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.j
  * failures and POST /opd-reconcile retries them. A hospital with the record off is untouched. */
 /* OPD plan item 10, THE INVESTIGATION LOOP. A patient sent for a test sits in "investigation" and used to
  * stay there until somebody remembered them. When the result is released, every one of today's OPD tickets
- * for that patient that is in "investigation" goes back to "waiting" (the state machine's own edge) with
+ * for that patient that is in "investigation" or "at_diagnostics" (the console's Send for Tests) goes back to "waiting" (the state machine's own edge) with
  * resultReadyAt stamped, so the doctor sees them again and the pulse counts "results back". Matched on the
  * ticket's patientId; best-effort, never fails the release. */
 /* The day's tickets across every staffed room and the walk-in pool, for the pulse and the day close. A room whose
@@ -369,7 +370,8 @@ async function opdResultBack(env, org, patientId) {
   let n = 0;
   for (const s1 of sessions) {
     for (const t of await Q.listTickets(env, s1.id).catch(() => [])) {
-      if (!t || t.status !== "investigation") continue;
+      // The console's "Send for Tests" parks the patient in at_diagnostics; "investigation" is the older state. Both wait on a result.
+      if (!t || (t.status !== "investigation" && t.status !== "at_diagnostics")) continue;
       // F3: the result names the RECORD's patient (opd-pat-<mrn>); a desk ticket carries the MRN. Either identifies them.
       if (String(t.patientId) !== String(patientId) && patientIdForMrn(t.ghisPatientId || t.mrn) !== String(patientId)) continue;
       try { await Q.setStatus(env, s1, t.id, "waiting", "system:result-released"); await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { resultReadyAt: Date.now() })]); n++; } catch (e) {}
@@ -768,13 +770,15 @@ async function boardForOrg(env, org, date) {
     if (m.identity) memberMap.set(normDocId(m.identity), m.displayName || m.name || "");
   }
   const out = [];
-  let unbilledByPatient = new Map();
+  /* Unpaid orders by the keys a ticket is found by (its id, its patient). An order carries BOTH (the console's
+   * consultation fee is raised with the MRN and the ticket), so a ticket sums each order ONCE: adding the two
+   * lookups showed a 500 fee as 1000 unbilled, and Quick Pay asked the patient for that. */
+  const unbilledByKey = new Map();
   let paidPatients = new Set();
   try {
     const bQ = await BILL.billingQueue(env, org.id);
     (bQ.orders || []).forEach((o) => {
-      if (o.patientId) unbilledByPatient.set(o.patientId, (unbilledByPatient.get(o.patientId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
-      if (o.ticketId) unbilledByPatient.set(o.ticketId, (unbilledByPatient.get(o.ticketId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
+      for (const k of [o.patientId, o.ticketId]) if (k) { if (!unbilledByKey.has(k)) unbilledByKey.set(k, new Set()); unbilledByKey.get(k).add(o); }
     });
     const { rows: paidOrders } = await readAll(env, "q_orders", [{ field: "orgId", value: org.id }, { field: "status", value: "paid" }], 500).catch(() => ({ rows: [] }));
     (paidOrders || []).forEach((r) => {
@@ -786,7 +790,8 @@ async function boardForOrg(env, org, date) {
   const annotateTickets = (tickets) => {
     return (tickets || []).map((t) => {
       const pid = t.mrn || t.ghisPatientId || t.id;
-      const unbilled = (unbilledByPatient.get(t.id) || 0) + (pid ? (unbilledByPatient.get(pid) || 0) : 0);
+      const mine = new Set([...(unbilledByKey.get(t.id) || []), ...((pid && unbilledByKey.get(pid)) || [])]);
+      let unbilled = 0; for (const o of mine) unbilled += (o.unitPrice || 0) * (o.qty || 1);
       const isPaid = !unbilled && (paidPatients.has(t.id) || (pid && paidPatients.has(pid)));
       return Object.assign({}, t, {
         billingStatus: unbilled > 0 ? "unbilled" : (isPaid ? "paid" : ""),
@@ -2077,6 +2082,9 @@ export async function onRequest(context) {
         /* P1.10: which study answers each imaging order, and a launch link into the hospital's own
          * viewer. Reading an order and its study is reading the chart: emr.view, the worklist's bar. */
         "imaging-studies": CAPS.EMR_VIEW,
+        /* The in-app viewer (dicom-viewer.js): the study's series and each image, proxied from the hospital's
+         * archive. Looking at a study is reading the chart, so it is the same bar as the link above. */
+        "imaging-series": CAPS.EMR_VIEW, "imaging-instance": CAPS.EMR_VIEW,
         /* TASK 8. ASKING reads the chart and writes no clinical content, so it is emr.view - the same
          * capability that reads the record it summarises, and no wider. REVIEWING is emr.treat:
          * accepting a drafted note puts an unsigned note on the chart, which is a clinical act, and
@@ -2622,9 +2630,9 @@ export async function onRequest(context) {
         const deptsFailed = () => json({ ok: false, error: "departments_unreadable", detail: "The hospital's departments could not be read. Nothing was recorded." }, 502, request);
         const key = body.idempotencyKey || null;
         if (sub === "stores" && method === "GET") return R(await storesOverview(request, env, { ...deps, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null }));
-        if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, active: body.active, idempotencyKey: key }));
+        if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, packs: body.packs, active: body.active, idempotencyKey: key }));
         if (sub === "store-location" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveStoreLocation(request, env, { ...deps, departments: d, code: body.code, name: body.name, kind: body.kind, departmentId: body.departmentId, active: body.active, idempotencyKey: key })); }
-        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
+        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
         if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines }));
@@ -4456,8 +4464,18 @@ export async function onRequest(context) {
         try { dicomConn = (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "dicom"))[0] || null; }
         catch { return json({ ok: false, error: "record_read_failed", message: "The imaging connector could not be read." }, 502, request); }
         const r = await imagingStudies(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", serviceRequestId: url.searchParams.get("serviceRequestId") || "",
-          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null,
+          inAppViewer: !!dicomConn });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-series" && method === "GET") {
+        const r = await imagingSeries(request, env, { ...deps, studyId: url.searchParams.get("studyId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-instance" && method === "GET") {
+        const r = await imagingInstance(request, env, { ...deps, studyId: url.searchParams.get("studyId") || "", seriesUid: url.searchParams.get("seriesUid") || "", sopUid: url.searchParams.get("sopUid") || "" });
+        if (!r.ok) return json(r, r.status || 502, request);
+        return new Response(r.bytes, { status: 200, headers: Object.assign({ "Content-Type": r.contentType, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" }, corsHeaders(request)) });
       }
       if (sub === "report-imaging" && method === "POST") {
         const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null,

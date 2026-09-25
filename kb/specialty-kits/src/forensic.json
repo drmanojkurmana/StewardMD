@@ -1,0 +1,177 @@
+{
+ "id": "forensic",
+ "label": "Forensic Medicine and Medico-legal",
+ "short": "Medico-legal",
+ "icon": "gavel",
+ "group": "community",
+ "subject": "emergency",
+ "tools": ["body-chart", "mccd"],
+ "sections": [
+  {
+   "id": "mlc-registration",
+   "title": "Medico-legal case registration",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "mlc_number", "label": "MLC number", "type": "text" },
+    { "id": "mlc_arrival", "label": "Date and time of arrival", "type": "text", "hint": "e.g. 25-09-2026, 14:05" },
+    { "id": "mlc_brought_by", "label": "Brought by", "type": "select", "opts": ["Self", "Relative or friend", "Police", "Ambulance", "Bystander", "Referred from another hospital"] },
+    { "id": "mlc_police_informed", "label": "Police station informed", "type": "check" },
+    { "id": "mlc_police_details", "label": "Police station, time and mode of intimation", "type": "text", "hint": "name of the station, time, telephone or written memo, name of the officer" },
+    { "id": "mlc_id_mark_1", "label": "Identification mark 1", "type": "text", "hint": "e.g. black mole 0.5 cm below the left ear lobe" },
+    { "id": "mlc_id_mark_2", "label": "Identification mark 2", "type": "text", "hint": "e.g. linear scar 3 cm on the front of the right forearm" },
+    { "id": "mlc_consent", "label": "Consent for examination", "type": "select", "opts": ["Given by patient", "Given by parent or guardian", "Given for part of the examination only", "Refused (informed refusal recorded)", "Not required: emergency treatment"] },
+    { "id": "mlc_history_by", "label": "History given by", "type": "select", "opts": ["Patient", "Relative", "Friend", "Police", "Bystander", "Referring doctor"] },
+    { "id": "mlc_informant", "label": "Informant name", "type": "text", "set": "informany_attendant" },
+    { "id": "mlc_incident", "label": "Alleged incident as stated (date, time, place, how it happened)", "type": "textarea", "hint": "record in the informant's own words" }
+   ]
+  },
+  {
+   "id": "injury-examination",
+   "title": "Injury examination notes",
+   "target": "local_examination",
+   "fields": [
+    { "id": "inj_general_condition", "label": "General condition", "type": "select", "opts": ["Good", "Fair", "Sick / Poor", "Moribund"], "set": "general_condition" },
+    { "id": "inj_consciousness", "label": "Consciousness", "type": "select", "opts": ["Conscious and oriented", "Conscious, not oriented", "Drowsy", "Unconscious"] },
+    { "id": "inj_fit_statement", "label": "Fit to give a statement (doctor's opinion)", "type": "select", "opts": ["Yes", "No", "Not assessed"] },
+    { "id": "inj_clothing", "label": "Clothing", "type": "select", "opts": ["Intact", "Torn", "Stained", "Torn and stained", "Changed since the incident", "Not available"] },
+    { "id": "inj_clothing_details", "label": "Clothing details (tears, stains, items preserved)", "type": "text" },
+    { "id": "inj_alcohol_smell", "label": "Smell of alcohol in the breath", "type": "check" },
+    { "id": "inj_speech_gait", "label": "Slurred speech or unsteady gait", "type": "check" },
+    { "id": "inj_sample_blood", "label": "Blood sample preserved, sealed and labelled", "type": "check" },
+    { "id": "inj_sample_urine", "label": "Urine sample preserved, sealed and labelled", "type": "check" },
+    { "id": "inj_sample_gastric", "label": "Vomitus or gastric aspirate preserved", "type": "check" },
+    { "id": "inj_sample_articles", "label": "Clothes, weapon or foreign body sealed and handed over", "type": "check" },
+    { "id": "inj_sample_handover", "label": "Samples handed to (name, number, date and time)", "type": "text", "hint": "chain of custody" }
+   ]
+  },
+  {
+   "id": "age-estimation",
+   "title": "Age estimation notes",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "age_stated", "label": "Age as stated", "type": "number", "unit": "years" },
+    { "id": "age_document", "label": "Documentary proof of age", "type": "select", "opts": ["Seen", "Not available", "Disputed"] },
+    { "id": "age_document_details", "label": "Document seen and date of birth recorded on it", "type": "text" },
+    { "id": "age_height", "label": "Height", "type": "number", "unit": "cm", "set": "Height" },
+    { "id": "age_weight", "label": "Weight", "type": "number", "unit": "kg", "set": "Weight" },
+    { "id": "age_teeth", "label": "Teeth erupted (FDI notation)", "type": "text", "hint": "e.g. 28 permanent teeth; third molars 18, 28, 38 and 48 not erupted" },
+    { "id": "age_secondary_sex", "label": "Secondary sexual characters", "type": "text", "hint": "pubic and axillary hair, breast development or facial hair, voice" },
+    { "id": "age_xray", "label": "X-rays requested for ossification", "type": "text", "hint": "e.g. wrist, elbow, shoulder, pelvis, knee. No age is computed here: the opinion is the examining doctor's, after the reports" },
+    { "id": "age_referral", "label": "Referred for age opinion to", "type": "select", "opts": ["Not referred", "Forensic medicine", "Radiology", "Dental surgeon", "Medical board"] }
+   ]
+  },
+  {
+   "id": "sexual-violence-history",
+   "title": "Sexual violence: consent and history (MoHFW 2014)",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "sv_consent", "label": "Informed consent for examination, evidence collection and treatment", "type": "select", "opts": ["Given by the survivor", "Given by parent or guardian (child under 12)", "Given for part only (recorded)", "Informed refusal recorded"] },
+    { "id": "sv_police", "label": "Police intimation", "type": "select", "opts": ["Brought by police with requisition", "Informed by the hospital"] },
+    { "id": "sv_declines_investigation", "label": "Survivor does not wish to take part in the police investigation (recorded)", "type": "check" },
+    { "id": "sv_time_since", "label": "Time since the assault", "type": "select", "opts": ["Within 24 hours", "24 to 72 hours", "72 to 96 hours", "More than 96 hours"] },
+    { "id": "sv_history", "label": "History in the survivor's own words", "type": "textarea", "hint": "record what the survivor says, in quotes where possible; ask only what is needed for care and evidence, never about past sexual conduct" },
+    { "id": "sv_post_activities", "label": "Since the assault: bathed, washed, douched, changed clothes, passed urine or stool", "type": "text" }
+   ]
+  },
+  {
+   "id": "sexual-violence-examination",
+   "title": "Sexual violence: examination and evidence (MoHFW 2014)",
+   "target": "local_examination",
+   "alert": "MoHFW 2014: never do a per-vaginal (two-finger) test to establish sexual violence; a per-vaginal examination is done only in an adult woman when medically indicated. The size of the vaginal introitus and the state of the hymen have no bearing on sexual violence, so document only findings relevant to this assault, such as fresh tears, bleeding or oedema. Do not record past sexual conduct or give any opinion on habituation to sexual intercourse. First aid and treatment are free and must not wait for a police requisition or FIR: inform the police, and give full care even if the survivor does not wish to take part in the investigation.",
+   "fields": [
+    { "id": "sv_consent_recorded", "label": "Written informed consent recorded (of the parent or guardian for a child under 12)", "type": "check" },
+    { "id": "sv_female_present", "label": "Examined by a woman doctor, or with a female attendant present", "type": "check" },
+    { "id": "sv_body_findings", "label": "Body (non-genital) findings by region", "type": "textarea", "hint": "site, size, colour and type of each injury; mark them on the body chart" },
+    { "id": "sv_oral_findings", "label": "Mouth findings", "type": "text" },
+    { "id": "sv_genital_findings", "label": "Genital findings", "type": "text", "hint": "only findings relevant to this assault, such as fresh tears, bleeding or oedema" },
+    { "id": "sv_anal_findings", "label": "Anal findings", "type": "text" },
+    { "id": "sv_ev_swabs", "label": "Swabs and slides collected, air-dried, sealed and labelled", "type": "check" },
+    { "id": "sv_ev_clothes", "label": "Clothes worn at the time collected and sealed", "type": "check" },
+    { "id": "sv_ev_blood_urine", "label": "Blood and urine samples collected", "type": "check" },
+    { "id": "sv_ev_trace", "label": "Debris, loose hair and nail clippings collected", "type": "check" },
+    { "id": "sv_ev_handover", "label": "Sealed evidence handed to (name, number, date and time)", "type": "text", "hint": "chain of custody" }
+   ]
+  },
+  {
+   "id": "sexual-violence-care",
+   "title": "Sexual violence: treatment and support",
+   "target": "management_plan",
+   "fields": [
+    { "id": "sv_injuries_treated", "label": "Injuries treated", "type": "check" },
+    { "id": "sv_upt", "label": "Urine pregnancy test done", "type": "check" },
+    { "id": "sv_ec", "label": "Emergency contraception offered", "type": "check" },
+    { "id": "sv_sti", "label": "STI prophylaxis offered", "type": "check" },
+    { "id": "sv_pep", "label": "HIV post-exposure prophylaxis offered (within 72 hours, after risk assessment)", "type": "check" },
+    { "id": "sv_tt_hepb", "label": "Tetanus and hepatitis B prevention offered", "type": "check" },
+    { "id": "sv_pfa", "label": "Psychological first aid given", "type": "check" },
+    { "id": "sv_counselling", "label": "Referred for counselling", "type": "check" },
+    { "id": "sv_report_copy", "label": "Copy of the examination report given to the survivor, free of cost", "type": "check" },
+    { "id": "sv_followup", "label": "Follow-up plan (tests, dates, place)", "type": "text" }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags",
+   "target": "management_plan",
+   "alert": "Treat first: first aid and life-saving treatment need no consent and must not wait for the police or paperwork. Child under 18: inform the police; a woman doctor examines a girl, with a parent or a person the child trusts present; when the child needs care and protection, involve the Child Welfare Committee through the police, and inform the Committee if a parent or guardian is acting against the child's interest. Poisoning: follow the acute poisoning protocol and preserve samples. Possible self-harm: follow the self-harm and suicide risk protocol. Death with injury, poisoning or an unclear cause: inform the police and the Registrar; the cause of death is certified through the police and post-mortem process, and a manner not yet known is shown as Pending investigation.",
+   "fields": [
+    { "id": "rf_unstable", "label": "Airway, breathing or circulation compromised, or consciousness falling", "type": "check" },
+    { "id": "rf_child_sexual", "label": "Child under 18 with suspected sexual abuse", "type": "check" },
+    { "id": "rf_child_protection", "label": "Child who needs care and protection (unsafe at home, or a carer may be the abuser)", "type": "check" },
+    { "id": "rf_poisoning", "label": "Suspected poisoning", "type": "check" },
+    { "id": "rf_self_harm", "label": "Suicidal thoughts, or the injury may be self-inflicted", "type": "check" },
+    { "id": "rf_death", "label": "Death, or brought dead, with injury, poisoning or an unclear cause", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "X-ray of the injured part", "query": "X-ray" },
+  { "label": "CT brain (head injury)", "query": "CT brain" },
+  { "label": "Blood alcohol", "query": "blood alcohol" },
+  { "label": "Serum cholinesterase", "query": "cholinesterase" },
+  { "label": "Urine pregnancy test", "query": "urine pregnancy test" },
+  { "label": "HIV", "query": "HIV" },
+  { "label": "HBsAg", "query": "HBsAg" },
+  { "label": "Anti-HCV", "query": "HCV" },
+  { "label": "Syphilis (VDRL / RPR)", "query": "VDRL" },
+  { "label": "X-ray wrist (ossification)", "query": "X-ray wrist" },
+  { "label": "X-ray elbow (ossification)", "query": "X-ray elbow" },
+  { "label": "X-ray pelvis (iliac crest)", "query": "X-ray pelvis" },
+  { "label": "Orthopantomogram (OPG)", "query": "OPG" }
+ ],
+ "orderSets": [
+  { "id": "sexual-violence-baseline", "label": "Sexual violence: baseline tests", "tests": ["urine pregnancy test", "HIV", "HBsAg", "anti-HBs", "HCV", "VDRL", "creatinine", "ALT"] },
+  { "id": "age-estimation-x-rays", "label": "Age estimation X-rays", "tests": ["X-ray wrist", "X-ray elbow", "X-ray shoulder", "X-ray pelvis", "X-ray knee", "OPG"] },
+  { "id": "suspected-poisoning", "label": "Suspected poisoning", "tests": ["CBC", "RBS", "creatinine", "electrolytes", "LFT", "ABG", "ECG", "CK", "cholinesterase", "urine pregnancy test"] }
+ ],
+ "protocols": ["trauma-primary-survey", "traumatic-brain-injury", "major-haemorrhage-trauma", "open-fracture", "burns-initial-management", "drowning", "poisoning-general-approach", "poisoning-general-approach-international", "organophosphate-poisoning", "aluminium-phosphide-poisoning", "methanol-poisoning", "paracetamol-overdose", "opioid-overdose", "tricyclic-antidepressant-overdose", "snakebite-envenomation", "snakebite-envenomation-international", "hiv-post-exposure-prophylaxis", "sexually-transmitted-infections", "contraception", "tetanus", "self-harm-and-suicide-risk"],
+ "calculators": ["gcs", "gcs_p", "rts", "burn_tbsa", "widmark", "rumack"],
+ "advice": [
+  {
+   "id": "care-after-sexual-violence",
+   "title": "Care after sexual violence",
+   "target": "follow_up_advice",
+   "text": "What happened is not your fault. Your treatment here is free, and you will be cared for whether or not you take part in a police case. Take all the medicines given to you for the full course, and come back for the follow-up tests on the dates written here. You can ask for counselling support at any time."
+  },
+  {
+   "id": "examination-report-copy",
+   "title": "Your examination report",
+   "target": "follow_up_advice",
+   "text": "You have a right to a free copy of your medical examination report. Keep it safely with your other papers, and bring it to your follow-up visits."
+  },
+  {
+   "id": "cause-of-death-certificate",
+   "title": "Cause of death certificate (for the family)",
+   "target": "follow_up_advice",
+   "text": "The doctor gives the medical certificate of cause of death to the Registrar with the death report, and a copy to the nearest relative. The cause of death is kept confidential and is not shown on the death certificate issued by the Registrar."
+  }
+ ],
+ "sources": [
+  { "org": "Ministry of Health and Family Welfare, Government of India", "title": "Guidelines and Protocols: Medico-legal care for survivors/victims of sexual violence", "year": 2014, "url": "https://www.mohfw.gov.in/sites/default/files/953522324.pdf" },
+  { "org": "Supreme Court of India", "title": "State of Jharkhand v. Shailendra Kumar Rai (two-finger test; quotes the MoHFW 2014 guidelines)", "year": 2022, "url": "https://indiankanoon.org/doc/196199017/" },
+  { "org": "UNFPA India and Government of Maharashtra", "title": "Medical Examination of Survivors / Victims of Sexual Violence: A Handbook for Medical Officers", "year": 2017, "url": "https://india.unfpa.org/sites/default/files/pub-pdf/handbook_final_design.pdf" },
+  { "org": "Office of the Registrar General, India", "title": "Physicians' Manual on Medical Certification of Cause of Death, fifth edition", "year": 2012, "url": "https://censusindia.gov.in/2011-Documents/mccd_Report1/Physician's_Manual_MCCD.pdf" },
+  { "org": "Office of the Registrar General, India", "title": "Form No. 4 and 4A: Medical Certificate of Cause of Death (Registration of Births and Deaths Act, 1969, amended in 2023)", "year": 2023, "url": "https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

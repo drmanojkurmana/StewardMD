@@ -1,0 +1,186 @@
+{
+ "id": "anaesthesia",
+ "label": "Anaesthesia",
+ "short": "Anaes",
+ "icon": "airwave",
+ "group": "acute",
+ "scribe": "anaesthesia",
+ "subject": "anaesthesia",
+ "tools": ["la-dose"],
+ "sections": [
+  {
+   "id": "planned-procedure",
+   "title": "Planned procedure",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "procedure", "label": "Planned procedure", "type": "text", "hint": "e.g. laparoscopic cholecystectomy" },
+    { "id": "indication", "label": "Diagnosis or indication", "type": "text" },
+    { "id": "surgery_grade", "label": "Surgery grade", "type": "select", "opts": ["Minor (e.g. excision of skin lesion, drainage of breast abscess)", "Intermediate (e.g. inguinal hernia repair, tonsillectomy, knee arthroscopy)", "Major or complex (e.g. hysterectomy, thyroidectomy, joint replacement, colonic resection)"] },
+    { "id": "urgency", "label": "Urgency", "type": "select", "opts": ["Elective", "Expedited (within days)", "Urgent (within hours)", "Immediate (life, limb or organ saving)"] },
+    { "id": "setting", "label": "Setting", "type": "select", "opts": ["Day care", "Inpatient", "Inpatient with planned HDU or ICU bed"] },
+    { "id": "surgery_date", "label": "Planned date of surgery", "type": "date" },
+    { "id": "surgical_unit", "label": "Surgical unit and surgeon", "type": "text" }
+   ]
+  },
+  {
+   "id": "history-asa",
+   "title": "History and ASA physical status",
+   "target": "History_past_illness",
+   "fields": [
+    { "id": "asa_class", "label": "ASA physical status", "type": "select", "opts": ["ASA I: a normal healthy patient", "ASA II: a patient with mild systemic disease", "ASA III: a patient with severe systemic disease", "ASA IV: a patient with severe systemic disease that is a constant threat to life", "ASA V: a moribund patient who is not expected to survive without the operation", "ASA VI: a declared brain-dead patient whose organs are being removed for donor purposes"] },
+    { "id": "asa_emergency", "label": "Emergency operation (add E to the ASA class)", "type": "check" },
+    { "id": "comorbidities", "label": "Comorbidities and how well controlled", "type": "textarea", "hint": "e.g. type 2 diabetes on insulin, HbA1c 8.2%; hypertension, BP 150/90 today" },
+    { "id": "frailty", "label": "Clinical Frailty Scale (65 and over)", "type": "number", "unit": "/9" },
+    { "id": "previous_anaesthetics", "label": "Previous anaesthetics", "type": "select", "opts": ["None before", "Uneventful", "Postoperative nausea and vomiting", "Difficult airway or intubation", "Delayed waking or prolonged paralysis", "Allergic reaction during anaesthesia", "Other problem"] },
+    { "id": "anaesthetic_details", "label": "Previous anaesthetic details", "type": "text", "hint": "year, operation, type of anaesthetic, any problem" },
+    { "id": "family_anaesthetic", "label": "Family history of anaesthetic problems", "type": "select", "opts": ["None known", "Malignant hyperthermia", "Prolonged paralysis after suxamethonium", "Other"] },
+    { "id": "allergies", "label": "Allergies (drug, latex, food) and reaction", "type": "text", "set": "Known_allergies_details" },
+    { "id": "habits", "label": "Smoking, tobacco and alcohol", "type": "text", "hint": "e.g. smokes 10 a day, advised to stop" }
+   ]
+  },
+  {
+   "id": "airway",
+   "title": "Airway assessment",
+   "target": "head_neck_exam",
+   "fields": [
+    { "id": "mallampati", "label": "Mallampati class", "type": "select", "opts": ["Class I: soft palate, fauces, uvula and pillars seen", "Class II: soft palate, fauces and uvula seen", "Class III: soft palate and base of uvula seen", "Class IV: soft palate not seen"] },
+    { "id": "mouth_opening", "label": "Mouth opening (inter-incisor gap)", "type": "select", "opts": ["3 cm or more (3 finger breadths)", "Under 3 cm", "Severely limited"] },
+    { "id": "thyromental", "label": "Thyromental distance", "type": "select", "opts": ["6 cm or more", "Under 6 cm"] },
+    { "id": "neck_movement", "label": "Neck movement", "type": "select", "opts": ["Full flexion and extension", "Reduced extension", "Fixed neck (e.g. ankylosing spondylitis, previous fusion)", "Unstable or immobilised neck"] },
+    { "id": "jaw_protrusion", "label": "Jaw protrusion (upper lip bite test)", "type": "select", "opts": ["Class 1: lower incisors bite above the vermilion border", "Class 2: lower incisors bite below the vermilion border", "Class 3: cannot bite the upper lip"] },
+    { "id": "dentition", "label": "Dentition", "type": "select", "opts": ["Normal", "Edentulous", "Removable dentures", "Loose or damaged teeth", "Prominent upper incisors", "Crowns, bridges or implants"] },
+    { "id": "dental_details", "label": "Teeth details", "type": "text", "hint": "e.g. loose upper left central incisor, upper denture" },
+    { "id": "airway_other", "label": "Other airway features", "type": "text", "hint": "e.g. beard, short thick neck, goitre, facial or neck surgery or radiotherapy" },
+    { "id": "difficult_airway_history", "label": "Previous difficult airway", "type": "select", "opts": ["None known", "Yes, documented in records or alert letter", "Yes, reported by the patient"] }
+   ]
+  },
+  {
+   "id": "cardiac-risk",
+   "title": "Cardiac risk and functional capacity",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "rcri_surgery", "label": "High-risk surgery (intraperitoneal, intrathoracic or suprainguinal vascular)", "type": "check" },
+    { "id": "rcri_ihd", "label": "History of ischaemic heart disease", "type": "check" },
+    { "id": "rcri_hf", "label": "History of heart failure", "type": "check" },
+    { "id": "rcri_cvd", "label": "History of stroke or TIA", "type": "check" },
+    { "id": "rcri_insulin", "label": "Diabetes treated with insulin", "type": "check" },
+    { "id": "rcri_creatinine", "label": "Creatinine over 2.0 mg/dL (177 micromol/L)", "type": "check" },
+    { "id": "functional_capacity", "label": "Functional capacity", "type": "select", "opts": ["4 METs or more: climbs two flights of stairs without stopping", "Under 4 METs: cannot climb two flights of stairs", "Cannot be assessed (limited by joints, pain or disability)"] },
+    { "id": "cvs_findings", "label": "Heart and lung examination", "type": "text", "hint": "e.g. S1 S2 normal, no murmur; chest clear" },
+    { "id": "ecg_findings", "label": "ECG findings", "type": "text", "hint": "e.g. sinus rhythm 78/min, no ischaemic changes" }
+   ]
+  },
+  {
+   "id": "osa-screen",
+   "title": "Obstructive sleep apnoea screen (STOP-BANG)",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "sb_snoring", "label": "Snores loudly", "type": "check" },
+    { "id": "sb_tired", "label": "Tired or sleepy in the daytime", "type": "check" },
+    { "id": "sb_observed", "label": "Observed to stop breathing or choke in sleep", "type": "check" },
+    { "id": "sb_pressure", "label": "Treated for high blood pressure", "type": "check" },
+    { "id": "sb_bmi", "label": "BMI over 35", "type": "check" },
+    { "id": "sb_age", "label": "Age over 50", "type": "check" },
+    { "id": "sb_neck", "label": "Neck circumference over 40 cm", "type": "check" },
+    { "id": "sb_male", "label": "Male", "type": "check" },
+    { "id": "osa_known", "label": "Known sleep apnoea", "type": "select", "opts": ["No", "Yes, uses CPAP at night (bring machine)", "Yes, not on CPAP"] }
+   ]
+  },
+  {
+   "id": "fasting-medicines",
+   "title": "Fasting and medicines",
+   "target": "management_plan",
+   "fields": [
+    { "id": "fasting_instructions", "label": "Fasting instructions", "type": "select", "opts": ["Given verbally and in writing", "Given verbally", "Not yet given"] },
+    { "id": "last_food", "label": "Last food (date and time)", "type": "text" },
+    { "id": "last_clear_fluid", "label": "Last clear fluid (date and time)", "type": "text" },
+    { "id": "meds_continue", "label": "Medicines to continue, including the morning of surgery", "type": "textarea" },
+    { "id": "meds_stop", "label": "Medicines to stop or change, and when", "type": "textarea", "hint": "as agreed with the prescribing team, per protocol" },
+    { "id": "antithrombotic", "label": "Anticoagulant or antiplatelet", "type": "select", "opts": ["None", "Aspirin", "Other antiplatelet", "Dual antiplatelet therapy", "Warfarin or acenocoumarol", "Direct oral anticoagulant", "Heparin"] },
+    { "id": "antithrombotic_plan", "label": "Anticoagulant or antiplatelet plan", "type": "text", "hint": "follow the perioperative anticoagulation protocol; record who advised" },
+    { "id": "diabetes_plan", "label": "Diabetes medicines plan", "type": "text", "hint": "e.g. insulin and SGLT2 inhibitor plan as per protocol, first on the list" }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags before anaesthesia",
+   "target": "management_plan",
+   "alert": "Red flag present: discuss with the consultant anaesthetist and the surgeon before listing. Defer elective surgery until the problem is assessed and optimised; for urgent surgery, plan senior-led anaesthesia.",
+   "fields": [
+    { "id": "rf_difficult_airway", "label": "Anticipated difficult airway or previous failed intubation", "type": "check" },
+    { "id": "rf_hypertension", "label": "Uncontrolled hypertension", "type": "check" },
+    { "id": "rf_chest_infection", "label": "Active chest infection, or asthma or COPD not controlled", "type": "check" },
+    { "id": "rf_mi", "label": "Recent myocardial infarction, unstable angina or new chest pain", "type": "check" },
+    { "id": "rf_heart_failure", "label": "New or worsening heart failure", "type": "check" },
+    { "id": "rf_valve", "label": "Murmur with symptoms (breathlessness, chest pain, syncope), e.g. aortic stenosis", "type": "check" },
+    { "id": "rf_arrhythmia", "label": "New or uncontrolled arrhythmia", "type": "check" },
+    { "id": "rf_stroke", "label": "Recent stroke or TIA", "type": "check" },
+    { "id": "rf_diabetes", "label": "Poorly controlled diabetes or ketosis", "type": "check" },
+    { "id": "rf_anaemia", "label": "Severe or unexplained anaemia", "type": "check" },
+    { "id": "rf_mh", "label": "Personal or family history of malignant hyperthermia", "type": "check" },
+    { "id": "rf_pregnancy", "label": "Possible pregnancy not yet excluded", "type": "check" }
+   ]
+  },
+  {
+   "id": "plan-consent",
+   "title": "Anaesthetic plan and consent",
+   "target": "management_plan",
+   "fields": [
+    { "id": "pac_outcome", "label": "Pre-anaesthetic check outcome", "type": "select", "opts": ["Fit for the planned procedure", "Fit after optimisation", "Deferred pending investigations or referral", "Not fit at present"] },
+    { "id": "technique", "label": "Planned anaesthetic technique", "type": "select", "opts": ["General anaesthesia with tracheal tube", "General anaesthesia with supraglottic airway", "Spinal anaesthesia", "Epidural or combined spinal-epidural", "Peripheral nerve block", "Local anaesthesia with sedation", "Local anaesthesia alone", "Monitored anaesthesia care"] },
+    { "id": "analgesia_plan", "label": "Pain relief plan after surgery", "type": "text", "hint": "e.g. multimodal analgesia, wound infiltration, nerve block" },
+    { "id": "apfel", "label": "PONV risk (Apfel score)", "type": "number", "unit": "/4" },
+    { "id": "special_requirements", "label": "Special requirements", "type": "text", "hint": "e.g. difficult airway trolley, blood cross-matched, HDU or ICU bed, CPAP after surgery" },
+    { "id": "pending", "label": "Investigations or referrals awaited", "type": "text" },
+    { "id": "consent_discussed", "label": "Anaesthetic options, benefits and risks discussed", "type": "check" },
+    { "id": "consent_taken", "label": "Written informed consent for anaesthesia taken", "type": "check" },
+    { "id": "review_date", "label": "Review before surgery on", "type": "date" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Complete blood count", "query": "CBC" },
+  { "label": "Random blood sugar", "query": "RBS" },
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "Serum creatinine", "query": "creatinine" },
+  { "label": "Serum electrolytes", "query": "electrolytes" },
+  { "label": "PT and INR", "query": "PT INR" },
+  { "label": "APTT", "query": "APTT" },
+  { "label": "Blood group and cross-match", "query": "blood group" },
+  { "label": "12-lead ECG", "query": "ECG" },
+  { "label": "hs-troponin", "query": "troponin" },
+  { "label": "NT-proBNP", "query": "NT-proBNP" },
+  { "label": "Echocardiography", "query": "echocardiography" },
+  { "label": "Chest X-ray", "query": "X-ray chest" },
+  { "label": "Urine pregnancy test", "query": "urine pregnancy test" }
+ ],
+ "orderSets": [
+  { "id": "preop-fit-adult", "label": "Pre-op: fit adult, minor or intermediate surgery (only if indicated)", "tests": ["CBC", "RBS", "urine pregnancy test"] },
+  { "id": "preop-major", "label": "Pre-op: major surgery or ASA III and above", "tests": ["CBC", "creatinine", "electrolytes", "RBS", "HbA1c", "PT INR", "APTT", "blood group", "ECG", "urine pregnancy test"] },
+  { "id": "preop-cardiac", "label": "Pre-op: heart disease, cardiac risk factors or age 65 and over", "tests": ["ECG", "troponin", "NT-proBNP", "echocardiography", "creatinine", "CBC"] }
+ ],
+ "protocols": ["local-anaesthetic-systemic-toxicity", "malignant-hyperthermia", "rapid-sequence-intubation", "anaphylaxis", "perioperative-anticoagulation-management", "perioperative-vte-prophylaxis", "surgical-antibiotic-prophylaxis", "inpatient-hyperglycaemia", "obstructive-sleep-apnoea", "aortic-stenosis", "chronic-coronary-syndrome", "chronic-heart-failure-hfref", "hypertension-management", "blood-transfusion", "major-haemorrhage-trauma", "hyperkalaemia", "adult-cardiac-arrest", "paediatric-cardiac-arrest", "bradycardia-with-pulse", "tachycardia-with-pulse", "icu-sedation-analgesia-delirium"],
+ "calculators": ["rcri", "dasi", "stopbang", "apfel", "cfs", "frail_scale", "nyha", "ccs_angina", "bmi", "ibw", "lbm", "adjbw", "ebv", "allowable_blood_loss", "caprini", "ckdepi", "crcl", "qtc", "steroid_conv", "mme", "epworth", "pack_years", "paeds_weight", "ett_size", "mallampati", "possum", "p_possum"],
+ "advice": [
+  {
+   "id": "before-anaesthetic",
+   "title": "Getting ready for your anaesthetic",
+   "target": "diet_lifestyle_advice",
+   "text": "If you smoke, stopping for several weeks before the operation makes your anaesthetic safer, and do not smoke on the day of the operation. If you are very overweight, losing weight lowers the risks. Get loose teeth or crowns seen by a dentist before the operation. Bring a list of all your medicines, or the medicines in their boxes, and your recent blood pressure readings if you have high blood pressure."
+  },
+  {
+   "id": "nil-by-mouth",
+   "title": "Eating, drinking and medicines before the operation",
+   "target": "follow_up_advice",
+   "text": "Follow the eating and drinking instructions you are given exactly. If there is food or liquid in your stomach during the anaesthetic, it can come up into your throat and damage your lungs. Most medicines are continued, but some must be stopped: take only the medicines you were told to take. If you feel unwell before the operation date, contact the hospital."
+  }
+ ],
+ "sources": [
+  { "org": "American Society of Anesthesiologists", "title": "Statement on ASA Physical Status Classification System (last amended 13 December 2020)", "year": 2020, "url": "https://www.asahq.org/standards-and-practice-parameters/statement-on-asa-physical-status-classification-system" },
+  { "org": "ESC / ESAIC", "title": "2022 ESC Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery", "year": 2022, "url": "https://academic.oup.com/eurheartj/article/43/39/3826/6675076" },
+  { "org": "NICE", "title": "NG45 Routine preoperative tests for elective surgery", "year": 2016, "url": "https://www.nice.org.uk/guidance/ng45" },
+  { "org": "Royal College of Anaesthetists and Association of Anaesthetists", "title": "You and your anaesthetic: information to help patients prepare for an anaesthetic, fourth edition", "year": 2014, "url": "https://www.hdft.nhs.uk/wp-content/uploads/2016/02/you-and-your-anaesthetic.pdf" },
+  { "org": "Association of Anaesthetists", "title": "A nomogram for calculating the maximum dose of local anaesthetic (Anaesthesia 2014)", "year": 2014, "url": "https://associationofanaesthetists-publications.onlinelibrary.wiley.com/doi/10.1111/anae.12679" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

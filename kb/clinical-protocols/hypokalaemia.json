@@ -1,0 +1,95 @@
+{
+ "id": "hypokalaemia",
+ "title": "Hypokalaemia (adult)",
+ "subject": "nephrology",
+ "population": "Adults",
+ "basis": "international",
+ "setting": "Emergency department, ward, ICU",
+ "aliases": ["hypokalemia", "low potassium", "low K", "KCl", "potassium chloride infusion", "hypokalaemic paralysis", "periodic paralysis", "potassium replacement"],
+ "summary": "Grade severity, check magnesium, replace orally when possible and give IV potassium chloride for severe, symptomatic or ECG-affected cases at no more than 10 mmol/h and 40 mmol/L peripherally, while treating the cause.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise",
+   "items": [
+    "Severity: mild 3.0 to 3.4 mmol/L, moderate 2.5 to 2.9 mmol/L, severe below 2.5 mmol/L.",
+    "Symptoms: weakness, cramps, constipation, ileus, flaccid paralysis including respiratory muscles, rhabdomyolysis and arrhythmias.",
+    "ECG: flat or inverted T waves, ST depression, prominent U waves. Arrhythmia risk is higher with ischaemic heart disease, heart failure, LVH and digoxin.",
+    "Causes, GI and intake: diarrhoea, vomiting, laxative use, fistulae, poor intake. Shift into cells: insulin, beta-agonists, alkalosis, refeeding, thyrotoxic or familial periodic paralysis.",
+    "Causes, renal losses: loop and thiazide diuretics, hyperaldosteronism, Cushing syndrome, renal tubular acidosis, Gitelman or Bartter syndrome, amphotericin B, aminoglycosides and hypomagnesaemia."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "Initial assessment",
+   "items": [
+    "Check magnesium, phosphate, creatinine, glucose, bicarbonate and a 12-lead ECG. Hypokalaemia is hard to correct until hypomagnesaemia is corrected.",
+    "Give IV potassium for severe hypokalaemia (below 2.5 mmol/L), symptoms, ECG changes or arrhythmia, or when the oral route is not possible.",
+    "Paralysis, respiratory weakness or arrhythmia: monitored bed with continuous ECG and assessment of ventilation.",
+    "Identify and stop or reduce the cause where possible before relying on supplements alone."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Oral replacement",
+   "items": [
+    "Mild: potassium chloride 24 mmol orally two to three times daily (NHS SPS).",
+    "Moderate and asymptomatic: potassium chloride 24 to 36 mmol orally three to four times daily.",
+    "Give with or after food to reduce gastric irritation; liquid or effervescent preparations are preferred to slow-release tablets.",
+    "Recheck potassium within 1 to 3 days and continue until stable in the reference range.",
+    "Ongoing diuretic-induced loss: consider adding amiloride or spironolactone, or an ACE inhibitor or ARB where indicated, with potassium monitoring."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "IV replacement",
+   "items": [
+    "Use premixed potassium chloride bags where possible (20 to 40 mmol/L in 0.9% saline). Avoid glucose-containing diluents initially because glucose lowers potassium further.",
+    "Potassium 2.5 to 3.4 mmol/L and unable to take oral: 20 to 40 mmol KCl in 1 L 0.9% saline over at least 8 hours.",
+    "Below 2.5 mmol/L or symptomatic: 40 mmol KCl in 1 L 0.9% saline over 6 hours, then recheck.",
+    "Maximum peripheral concentration 40 mmol/L. Maximum routine rate 10 mmol/h; up to 20 mmol/h only in emergencies for short periods with continuous ECG monitoring, preferably via a central line.",
+    "Maximum 2 to 3 mmol/kg in 24 hours with normal renal function; use lower doses and close monitoring in renal impairment.",
+    "In India, KCl 15% ampoules (10 mL = 20 mmol) must always be diluted in the bag and mixed thoroughly; never give as an IV push or bolus."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Monitoring",
+   "items": [
+    "Recheck potassium about 6 hours after each infusion for severe hypokalaemia, and within 24 hours for milder cases on IV therapy.",
+    "Continuous ECG with emergency rates, existing cardiac disease or digoxin therapy.",
+    "Check the cannula site for pain, phlebitis and extravasation.",
+    "Monitor magnesium and acid-base: persistent metabolic alkalosis suggests ongoing chloride and potassium depletion."
+   ]
+  },
+  {
+   "kind": "special",
+   "title": "Special situations",
+   "items": [
+    "Thyrotoxic or familial periodic paralysis: potassium shifts back out of cells as the attack ends, so use modest doses and monitor closely for rebound hyperkalaemia. Treat thyrotoxicosis.",
+    "DKA and HHS: follow the DKA protocol; potassium is added to IV fluids and insulin is delayed when potassium is low.",
+    "Renal impairment: replace with caution, at lower doses, with frequent monitoring and renal advice."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Not checking or correcting magnesium, so potassium stays low.",
+    "Diluting potassium in 5% dextrose, which can lower potassium further.",
+    "Undiluted concentrated KCl given IV is fatal; keep concentrated ampoules controlled.",
+    "Overshooting to hyperkalaemia in renal impairment, periodic paralysis, or when the cause (insulin, beta-agonist) is withdrawn."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Potassium chloride IV", "dose": "20 to 40 mmol in 1 L 0.9% saline; 40 mmol over 6 hours if below 2.5 mmol/L", "notes": "Max 40 mmol/L peripherally; max 10 mmol/h routinely (20 mmol/h in emergencies with ECG monitoring); max 2 to 3 mmol/kg/day." },
+  { "name": "Potassium chloride oral", "dose": "Mild: 24 mmol two to three times daily. Moderate: 24 to 36 mmol three to four times daily", "notes": "Take with food; recheck within 1 to 3 days." },
+  { "name": "Magnesium sulphate IV", "dose": "If magnesium is low: see Hypomagnesaemia protocol", "notes": "Correct magnesium alongside potassium." }
+ ],
+ "sources": [
+  { "org": "NHS Specialist Pharmacy Service", "title": "Treating acute hypokalaemia in adults", "year": 2024, "url": "https://sps.nhs.uk/articles/hypokalaemia/" },
+  { "org": "Royal Cornwall Hospitals NHS Trust", "title": "Management of Hypokalaemia in Adults Clinical Guideline V4.0", "year": 2025, "url": "https://doclibrary-rcht.cornwall.nhs.uk/DocumentsLibrary/RoyalCornwallHospitalsTrust/Clinical/Pharmacy/ManagementOfHypokalaemiaInAdultsClinicalGuideline.pdf" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}
