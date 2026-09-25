@@ -135,6 +135,9 @@ done
 if [ -d atlas ]; then
   mkdir -p "$WWW/atlas"
   cp atlas/modules.json "$WWW/atlas/" 2>/dev/null || true
+  # Structure search index + review-gated clinical notes (explicit allowlist: a new file here
+  # silently does not ship unless it is named).
+  for f in index.json notes.json; do [ -f "atlas/$f" ] && cp "atlas/$f" "$WWW/atlas/"; done
   for d in atlas/*/; do [ -f "$d/atlas.json" ] && mkdir -p "$WWW/$d" && cp "$d/atlas.json" "$WWW/$d"; done
   # 3D layer (atlas3d.js): ship the manifest + canonical index, NOT the 31 MB of .bin.gz
   # geometry -- atlas3d.js dataUrl() fetches those from the live origin natively.

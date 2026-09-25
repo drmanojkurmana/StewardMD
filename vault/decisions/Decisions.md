@@ -9281,3 +9281,30 @@ the heavy data in itself.
 different claims. A dataset reachable only through undocumented private knowledge is, from every
 other screen's point of view, not there at all. The test that matters is not "does the file exist"
 but "can a screen that knows nothing get it in one call".
+
+## 2026-09-25 - Geometry and slice images are never overwritten in place
+The Living CT 3D body failed on every native install without cached geometry from 2026-09-06 to
+2026-09-25: re-meshed chunks were uploaded to R2 under the old filenames while the manifest that
+matched them sat on an unmerged branch, and native builds check chunk sizes against their BUNDLED
+manifest. Rule: 3D chunk filenames carry their content hash (`pack3d.mjs`, `bp3d_import.py`), and
+2D slice images (served `immutable` for a year) are never rewritten; new stacks go under
+`atlas/<id>/v2/`. Upload new R2 objects before shipping the build that names them; never delete
+the old keys. Tests enforce both.
+
+## 2026-09-25 - RadioAnatome shows radiological convention by flipping at display time
+Files stay as the pipeline wrote them (the 3D cut planes texture the same images); `flipX`/`flipY`
+in `modules.json` mirror at display time. Edge letters only where anatomy proves the side
+(`docs/radioanatome/ORIENTATION.md`); no cadaver module asserts left/right. Clinical notes
+(`atlas/notes.json`) ship ai_drafted behind `smd_atlas_notes` (default OFF), like CliniX/SURGX.
+Shared 3D snapshots carry the CC BY credit inside the PNG, since CC BY 4.0 requires attribution on
+redistribution; the on-screen rule (attribution only on the About screen) is unchanged.
+
+## 2026-09-25 - Living neck CT: one command per TotalSegmentator subject, axes from anatomy
+`ct-live-neck-*` (s0021, `ct neck`, contrast) and `ct-live-thorax-neck-*` (s0897, `ct thorax-neck`,
+unenhanced) are built by `atlas-pipeline/tsd_living.py`, which measures each axis from the masks
+(C2 vs T4; trachea vs cord; descending aorta, SVC, brachiocephalic trunk course and heart, compared
+level by level) and re-indexes the CT into the torso convention before cutting, so every downstream
+tool (orient, reformat, living.py proofs, flipX) is reused unchanged. Masks mapped to null are
+dropped before the crop and slice pick: the first build spent 8 of 48 axial slices on the brain.
+New canonical ids (trachea, thyroid, neck vessels, right upper lobe) are 2D only for now: listed in
+`bp3d-map.json` `_pending_3d`, not mapped by name similarity. The 3D layer was out of scope.
