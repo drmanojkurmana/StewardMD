@@ -514,7 +514,14 @@
     if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { evaluate(); }); }
     else if (n < 80) { setTimeout(function () { boot(n + 1); }, 250); return; }
     try { if (window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange) window.SMD_ACCOUNT.onChange(function () { evaluate(); }); } catch (e) {}
-    try { new MutationObserver(function () { if (fbUser()) wire(); }).observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+    // #verifyGate's fields are static markup, already parsed (scripts load `defer`) — this only
+    // waits for Firebase Auth to resolve async and give us a user. wire()'s listeners are bound
+    // once per element (_smdWired) and keep working for every later sign-in, so once we've wired
+    // them the observer's job is done — disconnect instead of rescanning the whole DOM forever.
+    try {
+      var wireObs = new MutationObserver(function () { if (fbUser()) { wire(); wireObs.disconnect(); } });
+      wireObs.observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
     evaluate();
   })(0);
   (function hookMenu(n) { if (wrapSBOpen()) { injectMenu(); return; } if (n < 120) setTimeout(function () { hookMenu(n + 1); }, 250); })(0);

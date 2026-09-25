@@ -3,14 +3,14 @@
  *   node test/serve.mjs [repoRoot] [port]
  */
 import http from "node:http";
-import { readFile } from "node:fs";
+import { readFile, existsSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 
 const root = process.argv[2] || join(dirname(fileURLToPath(import.meta.url)), "..");
 const port = Number(process.argv[3] || 8799);
-const TYPES = { ".html": "text/html", ".js": "application/javascript", ".mjs": "application/javascript", ".css": "text/css", ".png": "image/png", ".webp": "image/webp", ".json": "application/json", ".ico": "image/x-icon", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
+const TYPES = { ".gz": "application/gzip", ".html": "text/html", ".js": "application/javascript", ".mjs": "application/javascript", ".css": "text/css", ".png": "image/png", ".webp": "image/webp", ".json": "application/json", ".ico": "image/x-icon", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
 
 import https from "node:https";
 
@@ -33,6 +33,12 @@ http.createServer((req, res) => {
   }
   if (p === "/") p = "/index.html";
   let fp = join(root, normalize(p).replace(/^(\.\.[/\\])+/, ""));
+  // scripts/build-www.sh copies data/ payloads to the bundle ROOT, so the app asks for
+  // "/offline-clinical.json.gz" and "/clinical-index.js". Serving the repo verbatim 404s them,
+  // which silently turned off the offline clinical library in every UI test. Fall back to data/.
+  if (!existsSync(fp) && extname(p) && existsSync(join(root, "data", p.replace(/^\//, "")))) {
+    fp = join(root, "data", p.replace(/^\//, ""));
+  }
   readFile(fp, (err, data) => {
     if (err && !extname(p)) {
       const htmlFp = fp + ".html";

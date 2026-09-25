@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-twin-agent.test.mjs — TASK 10.18: the governed agent, draft-only.
  *
  * node --test --experimental-test-module-mocks test/wardsynq-twin-agent.test.mjs

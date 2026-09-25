@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-oncology.test.mjs — the ONCqis bridge, through the REAL routes.
  *
  * ONCqis is not rebuilt: this proves the LINKAGE (resolving a bare ghisPatientId to the real

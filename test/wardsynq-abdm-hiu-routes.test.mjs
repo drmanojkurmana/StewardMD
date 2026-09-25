@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-abdm-hiu-routes.test.mjs — the ABDM HIU doors that START an exchange.
  *
  * WHAT THIS CLOSES. requestConsent and requestHealthInformation existed, with real consent binding,

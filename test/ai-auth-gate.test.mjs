@@ -1,7 +1,7 @@
 /* ai-auth-gate.test.mjs - /api/ai authorise() (audit T28).
  * Any Authorization header, or a bare Cf-Access email header, used to pass the gate. Now a bearer
  * passes only if it verifies as a Firebase ID token (an invalid one falls through to the app/origin
- * checks), Cf-Access needs its JWT assertion alongside, and guests get a per-IP burst limit. */
+ * checks), Cf-Access needs a VERIFIED Access JWT, and guests get a per-IP burst limit. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { verifiedClaimsFor, cfAccessEmail } from "../functions/_fbauth.js";
@@ -47,10 +47,11 @@ test("a VERIFIED Firebase token passes with no Origin (same-origin GET from the 
   assert.equal(await status({ Authorization: "Bearer " + (await mint({ exp: 1 })) }), 403, "an expired token does not");
 });
 
-test("Cf-Access email is trusted only with Cf-Access-Jwt-Assertion alongside", async () => {
+test("Cf-Access headers alone (email, or email + an unverified assertion) never pass", async () => {
   assert.equal(await status({ "Cf-Access-Authenticated-User-Email": "a@b.c" }), 403);
-  assert.equal(await status({ "Cf-Access-Authenticated-User-Email": "a@b.c", "Cf-Access-Jwt-Assertion": "x.y.z" }), 200);
-  assert.equal(cfAccessEmail(new Request("https://x", { headers: { "Cf-Access-Authenticated-User-Email": "A@B.c" } })), "");
+  assert.equal(await status({ "Cf-Access-Authenticated-User-Email": "a@b.c", "Cf-Access-Jwt-Assertion": "x.y.z" }), 403);
+  assert.equal(await cfAccessEmail(new Request("https://x", { headers: { "Cf-Access-Authenticated-User-Email": "A@B.c" } }), {}), "");
+  // A VERIFIED Access JWT passing is covered in test/cf-access-verify.test.mjs.
 });
 
 test("/api/ai never meters a bare (unasserted) Cf-Access email as that user", async () => {
@@ -65,9 +66,9 @@ test("/api/ai never meters a bare (unasserted) Cf-Access email as that user", as
     await send({ "Cf-Access-Authenticated-User-Email": "victim@x.com" });
     await Promise.allSettled(waits);
     assert.ok(![...kv._m.keys()].some((k) => k.indexOf("victim@x.com") >= 0), "spoofed email must not own any usage key");
-    await send({ "Cf-Access-Authenticated-User-Email": "owner@x.com", "Cf-Access-Jwt-Assertion": "a.b.c" });
+    await send({ "Cf-Access-Authenticated-User-Email": "victim@x.com", "Cf-Access-Jwt-Assertion": "a.b.c" });
     await Promise.allSettled(waits);
-    assert.ok([...kv._m.keys()].some((k) => k.indexOf("owner@x.com") >= 0), "an Access-asserted email is still metered as that user");
+    assert.ok(![...kv._m.keys()].some((k) => k.indexOf("victim@x.com") >= 0), "nor with a junk assertion beside it");
   } finally { globalThis.fetch = real; }
 });
 

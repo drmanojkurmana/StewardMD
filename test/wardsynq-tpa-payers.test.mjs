@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-tpa-payers.test.mjs - P1.5: the FHIR Claim adapter, the payer registry, settlement
  * and pre-admission cost estimates, PURE + through the real routes with a mocked payer transport.
  *

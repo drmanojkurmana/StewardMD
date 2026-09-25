@@ -1,3 +1,4 @@
+import "../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect/superadmin.test.mjs — platform Super Admin (spec: owner-EMAIL allow-list, FULL Connect
 // permissions on every tenant, WITHOUT a per-tenant connect_membership row). SECURITY-CRITICAL: this is
 // an authorization-boundary change, so every scenario below is a DENY or an ALLOW pinned against the

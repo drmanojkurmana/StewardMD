@@ -332,7 +332,19 @@
     var gate = document.getElementById("accountGate");
     if (gate) { var note = gate.querySelector(".ag-guest-note, #guestNote"); if (note) note.style.display = "none"; }
   }
-  try { new MutationObserver(enforceGuestGate).observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+  // All scripts load `defer`, so #guestBlock/#guestBtn are already parsed by the time this runs
+  // (the readyState/DOMContentLoaded call below finds them immediately) — the observer exists only
+  // as a defensive wait in case that's ever not true; stop it the moment the elements show up
+  // instead of re-scanning the whole document on every future mutation forever.
+  if (!(document.getElementById("guestBlock") || document.getElementById("guestBtn"))) {
+    try {
+      var guestGateObs = new MutationObserver(function () {
+        enforceGuestGate();
+        if (document.getElementById("guestBlock") || document.getElementById("guestBtn")) guestGateObs.disconnect();
+      });
+      guestGateObs.observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+  }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", enforceGuestGate); else enforceGuestGate();
 
   // Boot: wrap the seams as soon as app.js has defined them; set persistence + migrate on sign-in.

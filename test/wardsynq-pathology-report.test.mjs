@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-pathology-report.test.mjs - cultures, histopathology and the stewardship review, through the REAL routes. Harness copied from wardsynq-inpatient-emar.test.mjs.
  *
  * No actor is the org owner, so every 403 below is the role's own capabilities refusing it.

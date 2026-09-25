@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect/agent/brain.test.mjs -- the Connect Agent brain: PHI gate, cache, clamped answers, route.
 //   node --test test/connect/agent/brain.test.mjs
 import { test } from "node:test";

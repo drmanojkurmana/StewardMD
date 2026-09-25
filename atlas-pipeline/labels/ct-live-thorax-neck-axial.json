@@ -1,0 +1,346 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Existing structures reuse the definitions already in this repo (Gray's Anatomy 1918, PD-US). New neck structures (trachea, thyroid gland, common carotid artery, brachiocephalic trunk, subclavian artery, brachiocephalic vein, superior vena cava, upper lobe of right lung) carry original one-sentence definitions written for this atlas in the same style.",
+  "_geometry": "EXPERT MASKS SUPPLIED WITH THE DATASET - no segmentation model was run. Subject s0897 of the TotalSegmentator dataset v2.0.1 (Zenodo 10047292), CC BY 4.0: a LIVING patient, study type 'ct thorax-neck', pathology field 'no_pathology', age 40, female, Siemens Somatom Definition Flash, 80 kVp, no intravenous contrast (vessels about 45 HU), resampled to 1.5 mm isotropic by the dataset authors. Masks were drawn and reviewed by the dataset's authors, not by us.",
+  "_why_this_subject": "Chosen from the 36 no_pathology ct thorax-neck studies in meta.csv: it is the only one whose field reaches C2, so the thyroid (3,696 voxels), both common carotid arteries, the trachea along its whole length and both upper lobes are all in view, with the whole thorax and the upper abdomen below. It is unenhanced, which is the point of the pair: next to the enhanced neck study it shows what the same vessels look like without contrast.",
+  "_region": "Thorax",
+  "_student_notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. This scan was done without intravenous contrast, so vessels are the same grey as muscle: the vessel labels come from the dataset's masks, not from anything the image highlights. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+  "_why_bone_kept": "Unlike the torso module, the cervical and upper thoracic vertebrae, clavicle and sternum ARE pinned: they are the landmarks a student uses to find the level in the neck, and no Visible Human module labels the cervical spine in three planes. Individual levels (C1 to C7) are collapsed to one id because the atlas names no vertebral level anywhere. Skull, mandible, brain, ribs, scapula and humerus stay unpinned (mapped to null).",
+  "_why_no_sides": "Sides are COLLAPSED (kidney_left + kidney_right -> `kidney`) to match the rest of the atlas, which asserts no laterality anywhere. Unlike the cadaver, this living scan HAS a trustworthy DICOM orientation, so laterality is genuinely available here and is recorded as a field in ontology.json - but introducing sided structures is a product-wide change (search, browser, filters) and is deliberately NOT half-done in this module. Named lung LOBES are not laterality and keep their own identity.",
+  "_absent_from_dataset": "TotalSegmentator v2.0.1 has no mask for the larynx, internal jugular vein, vertebral artery, salivary glands or pharynx, so these are not labelled (a gap, not a guess).",
+  "categories": {
+    "viscus": {
+      "label": "Viscus",
+      "color": "#ffd479"
+    },
+    "gi-tract": {
+      "label": "GI tract",
+      "color": "#c9a06a"
+    },
+    "vessel-artery": {
+      "label": "Artery",
+      "color": "#ff8080"
+    },
+    "vessel-vein": {
+      "label": "Vein",
+      "color": "#8fb8ff"
+    },
+    "airway": {
+      "label": "Airway",
+      "color": "#7ee081"
+    },
+    "muscle": {
+      "label": "Muscle",
+      "color": "#e0a0c0"
+    },
+    "csf": {
+      "label": "Cord",
+      "color": "#b0c4de"
+    },
+    "bone": {
+      "label": "Bone",
+      "color": "#ffffff"
+    }
+  },
+  "structures": {
+    "trachea": {
+      "name": "Trachea",
+      "category": "airway",
+      "definition": "The trachea is a tube of incomplete cartilaginous rings and membrane that descends from the lower border of the larynx to divide into the two main bronchi in the thorax."
+    },
+    "thyroid-gland": {
+      "name": "Thyroid gland",
+      "category": "viscus",
+      "definition": "The thyroid gland is a vascular endocrine gland of two lateral lobes joined by an isthmus, clasping the front and sides of the upper trachea."
+    },
+    "esophagus": {
+      "name": "Oesophagus",
+      "category": "gi-tract",
+      "definition": "The oesophagus is a muscular canal passing from the pharynx through the posterior mediastinum to the stomach."
+    },
+    "common-carotid-artery": {
+      "name": "Common carotid artery",
+      "category": "vessel-artery",
+      "definition": "The common carotid arteries ascend in the neck within the carotid sheath beside the trachea and larynx, the right arising from the brachiocephalic trunk and the left from the aortic arch."
+    },
+    "brachiocephalic-trunk": {
+      "name": "Brachiocephalic trunk",
+      "category": "vessel-artery",
+      "definition": "The brachiocephalic trunk is the first and largest branch of the aortic arch, ascending to the right of the trachea to divide into the right common carotid and right subclavian arteries."
+    },
+    "subclavian-artery": {
+      "name": "Subclavian artery",
+      "category": "vessel-artery",
+      "definition": "The subclavian arteries arch over the apex of each lung to supply the upper limb, the right arising from the brachiocephalic trunk and the left from the aortic arch."
+    },
+    "aorta": {
+      "name": "Aorta",
+      "category": "vessel-artery",
+      "definition": "The aorta is the main arterial trunk, conveying blood from the left ventricle to the body."
+    },
+    "brachiocephalic-vein": {
+      "name": "Brachiocephalic vein",
+      "category": "vessel-vein",
+      "definition": "The brachiocephalic veins form behind the sternal ends of the clavicles from the internal jugular and subclavian veins and unite to form the superior vena cava."
+    },
+    "superior-vena-cava": {
+      "name": "Superior vena cava",
+      "category": "vessel-vein",
+      "definition": "The superior vena cava returns blood from the head, neck and upper limbs to the right atrium, formed by the union of the two brachiocephalic veins."
+    },
+    "heart": {
+      "name": "Heart",
+      "category": "viscus",
+      "definition": "The heart is a hollow muscular organ enclosed in the pericardium, occupying the middle mediastinum."
+    },
+    "upper-lobe-left": {
+      "name": "Upper lobe of left lung",
+      "category": "airway",
+      "definition": "The left lung is divided by the oblique fissure into an upper and a lower lobe; the upper lobe includes the lingula."
+    },
+    "upper-lobe-right": {
+      "name": "Upper lobe of right lung",
+      "category": "airway",
+      "definition": "The upper lobe of the right lung lies above the horizontal fissure and in front of the upper part of the oblique fissure."
+    },
+    "lower-lobe-left": {
+      "name": "Lower lobe of left lung",
+      "category": "airway",
+      "definition": "The lower lobe of the left lung lies posteroinferior to the oblique fissure."
+    },
+    "lower-lobe-right": {
+      "name": "Lower lobe of right lung",
+      "category": "airway",
+      "definition": "The lower lobe of the right lung lies below and behind the oblique fissure."
+    },
+    "middle-lobe-right": {
+      "name": "Middle lobe of right lung",
+      "category": "airway",
+      "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures."
+    },
+    "spinal-cord": {
+      "name": "Spinal cord",
+      "category": "csf",
+      "definition": "The spinal cord is the elongated part of the central nervous system occupying the upper two-thirds of the vertebral canal."
+    },
+    "autochthonous-back-muscle": {
+      "name": "Deep back muscles",
+      "category": "muscle",
+      "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+    },
+    "cervical-vertebra": {
+      "name": "Cervical vertebra",
+      "category": "bone",
+      "definition": "The cervical vertebrae are the smallest of the movable vertebrae and bear foramina in their transverse processes."
+    },
+    "thoracic-vertebra": {
+      "name": "Thoracic vertebra",
+      "category": "bone",
+      "definition": "The thoracic vertebrae are distinguished by costal facets on the sides of their bodies."
+    },
+    "clavicle": {
+      "name": "Clavicle",
+      "category": "bone",
+      "definition": "The clavicle forms the anterior portion of the shoulder girdle."
+    },
+    "sternum": {
+      "name": "Sternum",
+      "category": "bone",
+      "definition": "The sternum is a flat narrow bone forming the middle of the anterior thoracic wall."
+    },
+    "liver": {
+      "name": "Liver",
+      "category": "viscus",
+      "definition": "The liver is the largest gland in the body, occupying the right hypochondrium and extending into the epigastrium."
+    },
+    "spleen": {
+      "name": "Spleen",
+      "category": "viscus",
+      "definition": "The spleen is a highly vascular organ situated in the left hypochondrium between the fundus of the stomach and the diaphragm."
+    },
+    "stomach": {
+      "name": "Stomach",
+      "category": "gi-tract",
+      "definition": "The stomach is the most dilated part of the digestive tube, lying between the oesophagus and the duodenum."
+    },
+    "inferior-vena-cava": {
+      "name": "Inferior vena cava",
+      "category": "vessel-vein",
+      "definition": "The inferior vena cava returns blood from the lower half of the body to the right atrium."
+    }
+  },
+  "model_values": {
+    "16": "trachea",
+    "17": "thyroid_gland",
+    "15": "esophagus",
+    "58": "common_carotid_artery_left",
+    "57": "common_carotid_artery_right",
+    "54": "brachiocephalic_trunk",
+    "56": "subclavian_artery_left",
+    "55": "subclavian_artery_right",
+    "52": "aorta",
+    "59": "brachiocephalic_vein_left",
+    "60": "brachiocephalic_vein_right",
+    "62": "superior_vena_cava",
+    "51": "heart",
+    "10": "lung_upper_lobe_left",
+    "12": "lung_upper_lobe_right",
+    "11": "lung_lower_lobe_left",
+    "14": "lung_lower_lobe_right",
+    "13": "lung_middle_lobe_right",
+    "79": "spinal_cord",
+    "86": "autochthon_left",
+    "87": "autochthon_right",
+    "73": "clavicula_left",
+    "74": "clavicula_right",
+    "116": "sternum",
+    "50": "vertebrae_C1",
+    "49": "vertebrae_C2",
+    "48": "vertebrae_C3",
+    "47": "vertebrae_C4",
+    "46": "vertebrae_C5",
+    "45": "vertebrae_C6",
+    "44": "vertebrae_C7",
+    "43": "vertebrae_T1",
+    "42": "vertebrae_T2",
+    "41": "vertebrae_T3",
+    "40": "vertebrae_T4",
+    "39": "vertebrae_T5",
+    "38": "vertebrae_T6",
+    "37": "vertebrae_T7",
+    "36": "vertebrae_T8",
+    "35": "vertebrae_T9",
+    "34": "vertebrae_T10",
+    "33": "vertebrae_T11",
+    "32": "vertebrae_T12",
+    "91": "skull",
+    "90": "brain",
+    "71": "scapula_left",
+    "72": "scapula_right",
+    "69": "humerus_left",
+    "70": "humerus_right",
+    "53": "pulmonary_vein",
+    "117": "costal_cartilages",
+    "92": "rib_left_1",
+    "93": "rib_left_2",
+    "94": "rib_left_3",
+    "95": "rib_left_4",
+    "96": "rib_left_5",
+    "97": "rib_left_6",
+    "98": "rib_left_7",
+    "99": "rib_left_8",
+    "100": "rib_left_9",
+    "101": "rib_left_10",
+    "102": "rib_left_11",
+    "103": "rib_left_12",
+    "104": "rib_right_1",
+    "105": "rib_right_2",
+    "106": "rib_right_3",
+    "107": "rib_right_4",
+    "108": "rib_right_5",
+    "109": "rib_right_6",
+    "110": "rib_right_7",
+    "111": "rib_right_8",
+    "112": "rib_right_9",
+    "113": "rib_right_10",
+    "114": "rib_right_11",
+    "115": "rib_right_12",
+    "5": "liver",
+    "1": "spleen",
+    "6": "stomach",
+    "63": "inferior_vena_cava"
+  },
+  "model_labels": {
+    "trachea": "trachea",
+    "thyroid_gland": "thyroid-gland",
+    "esophagus": "esophagus",
+    "common_carotid_artery_left": "common-carotid-artery",
+    "common_carotid_artery_right": "common-carotid-artery",
+    "brachiocephalic_trunk": "brachiocephalic-trunk",
+    "subclavian_artery_left": "subclavian-artery",
+    "subclavian_artery_right": "subclavian-artery",
+    "aorta": "aorta",
+    "brachiocephalic_vein_left": "brachiocephalic-vein",
+    "brachiocephalic_vein_right": "brachiocephalic-vein",
+    "superior_vena_cava": "superior-vena-cava",
+    "heart": "heart",
+    "lung_upper_lobe_left": "upper-lobe-left",
+    "lung_upper_lobe_right": "upper-lobe-right",
+    "lung_lower_lobe_left": "lower-lobe-left",
+    "lung_lower_lobe_right": "lower-lobe-right",
+    "lung_middle_lobe_right": "middle-lobe-right",
+    "spinal_cord": "spinal-cord",
+    "autochthon_left": "autochthonous-back-muscle",
+    "autochthon_right": "autochthonous-back-muscle",
+    "clavicula_left": "clavicle",
+    "clavicula_right": "clavicle",
+    "sternum": "sternum",
+    "vertebrae_C1": "cervical-vertebra",
+    "vertebrae_C2": "cervical-vertebra",
+    "vertebrae_C3": "cervical-vertebra",
+    "vertebrae_C4": "cervical-vertebra",
+    "vertebrae_C5": "cervical-vertebra",
+    "vertebrae_C6": "cervical-vertebra",
+    "vertebrae_C7": "cervical-vertebra",
+    "vertebrae_T1": "thoracic-vertebra",
+    "vertebrae_T2": "thoracic-vertebra",
+    "vertebrae_T3": "thoracic-vertebra",
+    "vertebrae_T4": "thoracic-vertebra",
+    "vertebrae_T5": "thoracic-vertebra",
+    "vertebrae_T6": "thoracic-vertebra",
+    "vertebrae_T7": "thoracic-vertebra",
+    "vertebrae_T8": "thoracic-vertebra",
+    "vertebrae_T9": "thoracic-vertebra",
+    "vertebrae_T10": "thoracic-vertebra",
+    "vertebrae_T11": "thoracic-vertebra",
+    "vertebrae_T12": "thoracic-vertebra",
+    "skull": null,
+    "brain": null,
+    "scapula_left": null,
+    "scapula_right": null,
+    "humerus_left": null,
+    "humerus_right": null,
+    "pulmonary_vein": null,
+    "costal_cartilages": null,
+    "rib_left_1": null,
+    "rib_left_2": null,
+    "rib_left_3": null,
+    "rib_left_4": null,
+    "rib_left_5": null,
+    "rib_left_6": null,
+    "rib_left_7": null,
+    "rib_left_8": null,
+    "rib_left_9": null,
+    "rib_left_10": null,
+    "rib_left_11": null,
+    "rib_left_12": null,
+    "rib_right_1": null,
+    "rib_right_2": null,
+    "rib_right_3": null,
+    "rib_right_4": null,
+    "rib_right_5": null,
+    "rib_right_6": null,
+    "rib_right_7": null,
+    "rib_right_8": null,
+    "rib_right_9": null,
+    "rib_right_10": null,
+    "rib_right_11": null,
+    "rib_right_12": null,
+    "liver": "liver",
+    "spleen": "spleen",
+    "stomach": "stomach",
+    "inferior_vena_cava": "inferior-vena-cava"
+  },
+  "_why_caps": "A coronal or sagittal cut shows several vertebrae and both sides of each paired vessel at once; the largest cross-sections are kept so identical labels do not saturate the gutters.",
+  "max_pins_per_slice": {
+    "cervical-vertebra": 2,
+    "thoracic-vertebra": 2,
+    "common-carotid-artery": 2,
+    "subclavian-artery": 2,
+    "brachiocephalic-vein": 2,
+    "clavicle": 2,
+    "autochthonous-back-muscle": 2
+  },
+  "_why_no_container": "No container structure: the scan spans neck, thorax and upper abdomen, and neither \"Thorax\" nor \"Neck\" is true of every label.",
+  "_definitions_short": "Gray's Anatomy (1918); trachea, thyroid gland, neck vessels and right upper lobe written for this atlas"
+}

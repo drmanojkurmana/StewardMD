@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-livefix-boards.test.mjs — the live test of 2026-09-15 (docs/wardsynq/LIVE_TEST_2026-09-15.md),
  * LT-21 to LT-28, through the REAL router: /api/queue/ward/release-result, /ward/collect, /ward/collections,
  * /ward/pending-tests, /ward/criticals, /ward/acknowledge, /ward/imaging-worklist, /ward/report-imaging,

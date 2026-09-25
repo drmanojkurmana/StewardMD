@@ -202,3 +202,14 @@ installed files, sidecars and `KEY_ACTIVE` carry over. `actual` still records pr
 The "Which one should I download?" panel (`guideHTML`, pips) is gone; orientation is the ladder, one
 note per shelf and one footer line. Gotcha: `GUIDE_INTRO` is still exported and still used by
 `test/maik-engine.test.mjs`; keep it vendor-free.
+
+## Native energy savings (2026-09-25, branch maik-native-energy, device-unverified)
+`capacitor-llama`, no change to output text, tok/s or time-to-first-token:
+- iOS `ThermalGovernor.budget` floor is 1, not 64: the warm-up (`nPredict: 1`) no longer decodes 64
+  tokens holding the serial queue. Real callers all ask >= 120. Android already honoured 1.
+- Speculative loop breaks on a spent budget right after `emit(committed)`, as the plain loop does.
+- Adaptive draft-off: after 8 verify steps with < 15% acceptance the draft is dropped for that
+  generation (`PERF draft off:` log line). Greedy output is identical either way.
+- `llamaToken` events are batched natively (`TokenBatcher`, 40 ms; first piece immediate; flushed
+  before resolve/reject). Payload gains `count` (pieces in the event); JS only appends `text`.
+Pins: `test/maik-native-energy.test.mjs`.

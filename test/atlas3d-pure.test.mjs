@@ -91,5 +91,79 @@ ok("dataUrl maps the /atlas/3d path onto the R2 key prefix", P.dataUrl("/atlas/3
 const m2 = P.parseManifest({ parts: [["LIVE_liver", "Liver", "FMA7197", 0, 1, 0, 0, 3, [0, 0, 0, 1, 1, 1], "LIVER", 1, null]], concepts: [], sources: [{ id: "bp3d" }, { id: "live" }], planes: { "ct-live-torso-axial": { "5": { axis: "y", pos: 0.9 } } } });
 ok("parseManifest reads the source flag, sources and planes", m2.parts[0].src === 1 && m2.sources.length === 2 && m2.planes["ct-live-torso-axial"]["5"].axis === "y");
 
+// --- premium controls ---
+ok("ghostAlpha: untouched X-ray keeps today's view (16% ghost with a selection, opaque without)", P.ghostAlpha(true, null) === 0.16 && P.ghostAlpha(false, null) === 1 && P.ghostAlpha(false, undefined) === 1);
+ok("ghostAlpha: the slider value wins and is clamped to [0.04, 1]", P.ghostAlpha(true, 0.5) === 0.5 && P.ghostAlpha(false, 0) === 0.04 && P.ghostAlpha(true, 7) === 1);
+
+const box = [-1, 0, -2, 1, 2, 2];
+const cutAt = (pl, p) => p[0] * pl[0] + p[1] * pl[1] + p[2] * pl[2] > pl[3];   // the shader's discard test
+const ax = P.freeClip("y", 0.5, false, box);
+ok("freeClip axial at 50% sits at mid height and removes the upper half", ax[1] === 1 && near(ax[3], 1) && cutAt(ax, [0, 1.5, 0]) && !cutAt(ax, [0, 0.5, 0]));
+const axf = P.freeClip("y", 0.5, true, box);
+ok("freeClip flip keeps the other half", cutAt(axf, [0, 0.5, 0]) && !cutAt(axf, [0, 1.5, 0]));
+const cor = P.freeClip("z", 0.25, false, box), sag = P.freeClip("x", 1, false, box);
+ok("freeClip coronal cuts along z (anterior removed), sagittal along x", cor[2] === 1 && near(cor[3], -1) && cutAt(cor, [0, 1, 0]) && sag[0] === 1 && near(sag[3], 1) && !cutAt(sag, [0.99, 1, 0]));
+ok("freeClip clamps t and returns null without bounds", near(P.freeClip("y", 5, false, box)[3], 2) && P.freeClip("y", 0.5, false, null) === null);
+
+const hs = { hidden: { 3: true }, faded: { 4: 1 }, isolate: true, bowel: false };
+const snap = P.layerSnap(hs);
+hs.hidden[9] = true; hs.faded = {};
+ok("layerSnap copies hidden/faded so later edits do not leak into history", !snap.hidden[9] && snap.faded[4] === 1 && snap.isolate === true && snap.bowel === false);
+const stack = [];
+for (let i = 0; i < 35; i++) P.pushHist(stack, { i }, 30);
+ok("pushHist keeps the newest 30 and pops newest first", stack.length === 30 && stack[0].i === 5 && stack.pop().i === 34);
+
+const pl0 = P.progressLabel(0, 0), pl1 = P.progressLabel(5 * 1048576, 20 * 1048576), pl2 = P.progressLabel(30, 20);
+ok("progressLabel reports bytes and percent", pl0.pct === 0 && pl1.pct === 25 && /25%/.test(pl1.text) && /5\.0 of 20\.0 MB/.test(pl1.text) && pl2.pct === 100);
+ok("progressLabel has no em dash or ellipsis", !/[—–…]/.test(pl1.text));
+
+// saved views round trip through part ids
+const vd = P.parseManifest({ ...m, sources: [{ id: "bp3d" }, { id: "live" }], planes: { "ct-live-torso-axial": { "5": { axis: "y", pos: 0.9 } } } });
+const vs = { src: "bp3d", cam: { target: [0.1, 0.9, 0], yaw: 1.2, pitch: 0.3, dist: 1.5 }, sel: [0, 1], subject: { kind: "canon", cid: "KIDNEY" },
+  hidden: { 2: true }, faded: { 3: 1 }, isolate: true, clip: { axis: "z", t: 0.3, flip: true }, xray: 0.4, region: "ABDOMEN", explodeTarget: 0.2, bowel: false, shell: true, plane: { m: "ct-live-torso-axial", i: 5 } };
+const ser = P.serializeView(vs, vd, "  Kidneys from behind  ");
+ok("serializeView stores part ids, not indices, and trims the name", ser.name === "Kidneys from behind" && ser.sel.join() === "FJ1,FJ2" && ser.hidden.join() === "FJ3" && ser.faded.join() === "FJ4" && ser.subject.cid === "KIDNEY");
+const json = JSON.parse(JSON.stringify(ser));
+const back = P.restoreView(json, vd);
+ok("restoreView round-trips camera, selection, hidden, faded, isolate, clip, x-ray, region, plane",
+  back.src === "bp3d" && near(back.cam.yaw, 1.2) && near(back.cam.dist, 1.5) && back.cam.target[0] === 0.1 && back.sel.join() === "0,1" && back.hidden[2] === 1 && back.faded[3] === 1 &&
+  back.isolate === true && back.clip.axis === "z" && near(back.clip.t, 0.3) && back.clip.flip === true && near(back.xray, 0.4) && back.region === "ABDOMEN" && near(back.explode, 0.2) && back.plane.i === 5 && back.subject.cid === "KIDNEY");
+const shuffled = P.parseManifest({ ...m, parts: [m.parts[3], m.parts[2], m.parts[1], m.parts[0]] });
+ok("a saved view survives a manifest that re-orders parts", P.restoreView(json, shuffled).sel.sort().join() === "2,3");
+ok("restoreView drops unknown parts, bad axes, unknown sources and planes; rejects junk", (() => {
+  const r = P.restoreView({ ...json, sel: ["NOPE"], hidden: ["FJ3", "GONE"], clip: { axis: "q" }, src: "mars", plane: { m: "x", i: 1 }, cam: { ...json.cam, dist: 999, pitch: 9 } }, vd);
+  return r.sel.length === 0 && r.subject === null && r.isolate === false && Object.keys(r.hidden).join() === "2" && r.clip === null && r.src === "bp3d" && r.plane === null && r.cam.dist === 12 && r.cam.pitch === 1.45 &&
+    P.restoreView(null, vd) === null && P.restoreView({ v: 2 }, vd) === null && P.restoreView({ v: 1, cam: {} }, vd) === null;
+})());
+
+// quiz pool: unique names, whole structures only, all meshes on screen
+const qd = P.parseManifest({ ...m, canon: {
+  KIDNEY: { kind: "concept", name: "Kidney", parts: [0, 1], coverage: "full", live: [3] },
+  BRAIN: { kind: "concept", name: "Brain", parts: [2], coverage: "partial" },
+  LIVER: { kind: "related", name: "Liver", related: [3] },
+  A: { kind: "concept", name: "Twin", parts: [2], coverage: "full" }, B: { kind: "composite", name: "twin", parts: [3], coverage: "full" },
+  SKULL: { kind: "concept", name: "Skull", parts: [2], coverage: "full" }, VD: { kind: "composite", name: "Ventral (composite)", parts: [2], coverage: "full" },
+  CHEST: { kind: "region", name: "Chest" } } });
+ok("quizPool keeps unique, whole, fully visible structures only", P.quizPool(qd, 0, () => true).join() === "KIDNEY,SKULL");
+ok("quizPool drops a structure with any mesh off screen", P.quizPool(qd, 0, (i) => i !== 1).join() === "SKULL");
+ok("quizPool on the living body asks from the live surfaces (a partial reference mesh is fine there)", P.quizPool(qd, 1, () => true).join() === "KIDNEY");
+ok("fileSlug makes a safe filename part", P.fileSlug("Left kidney (FMA7205)") === "left-kidney-fma7205" && P.fileSlug("") === "view");
+
+// CC BY credit burned into exported images, per body, from the real manifest + live.json
+const BP3D = "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International";
+const realM = JSON.parse(readFileSync(join(ROOT, "atlas/3d/manifest.json"), "utf8"));
+const liveSrc = JSON.parse(readFileSync(join(ROOT, "atlas/3d/live.json"), "utf8")).source;
+const realD = P.parseManifest(realM);
+ok("creditLine: reference body is the licence-mandated string, verbatim", P.creditLine(realD, "bp3d") === BP3D);
+ok("creditLine: reference falls back to the verbatim string when the manifest has no source", P.creditLine(P.parseManifest({ parts: [], concepts: [] }), "bp3d") === BP3D);
+const liveLine = P.creditLine(realD, "live");
+ok("creditLine: living CT is built from live.json (dataset, licence, doi): " + liveLine,
+  liveLine === `${liveSrc.dataset}, ${liveSrc.licence}, doi:${liveSrc.doi}` && /TotalSegmentator/.test(liveLine) && /CC BY 4\.0/.test(liveLine) && /10\.5281\/zenodo\.10047292/.test(liveLine));
+ok("credit lines carry no em dash", !/[—–]/.test(P.creditLine(realD, "bp3d") + liveLine));
+const mono = (s) => s.length * 6;
+const wl = P.wrapLines(BP3D, 300, mono);
+ok("wrapLines keeps every word, in order, within the width", wl.join(" ") === BP3D && wl.length > 1 && wl.every((l) => mono(l) <= 300 || !/ /.test(l)));
+ok("wrapLines: short text is one line, empty is none", P.wrapLines("a b", 300, mono).length === 1 && P.wrapLines("", 300, mono).length === 0);
+
 console.log(`atlas3d-pure: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

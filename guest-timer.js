@@ -141,7 +141,7 @@
 
   function tick() {
     var ms = msLeft();
-    if (ms === null) { if (bar()) { unmount(); lastAnnounced = null; } return; }
+    if (ms === null) { if (bar()) { unmount(); lastAnnounced = null; } stop(); return; }
     if (ms <= 0) { endSession(); return; }
 
     var el = mount();
@@ -160,10 +160,13 @@
   }
 
   var timer = null;
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
   function start() {
     if (timer) return;
     tick();
-    timer = setInterval(tick, 1000);
+    // Not (or no longer) a guest — tick() already stopped/unmounted; nothing to count down.
+    if (msLeft() === null) return;
+    timer = setInterval(function () { if (document.hidden) return; tick(); }, 1000);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
@@ -171,6 +174,11 @@
   // A guest session can begin long after load (the sign-in gate is in-page), and the tab can be
   // backgrounded across the whole 300 s, so re-check on wake instead of trusting the interval.
   try { document.addEventListener("visibilitychange", function () { if (!document.hidden) tick(); }); } catch (e) {}
+  // start() is a no-op once signed in / no active guest session (the interval is stopped above),
+  // so re-arm it right when a fresh guest session is granted — app.js writes the guest account
+  // synchronously inside its own #guestBtn click handler, which has already run by the time this
+  // bubble-phase listener fires.
+  try { document.addEventListener("click", function (e) { if (e.target && e.target.closest && e.target.closest("#guestBtn")) start(); }); } catch (e) {}
 
   window.SMD_GUEST_BAR = { msLeft: msLeft, tick: tick, mmss: mmss, usesToday: usesToday, MAX_PER_DAY: MAX_PER_DAY };
 })();

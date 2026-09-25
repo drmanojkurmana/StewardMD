@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-4-18-unified-patient-journey.test.mjs — TASK 4.18: the whole enterprise journey,
  * end to end, through the REAL routes, in one flow:
  *

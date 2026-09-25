@@ -502,9 +502,14 @@
     if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(b, anchor.nextSibling);
     else card.appendChild(b);
   }
+  function gateButtonWired() { return !!document.querySelector("#accountGate .account-card #smdEmailBtn"); }
   function watchGate() {
     injectGateButton();
-    try { var mo = new MutationObserver(function () { injectGateButton(); }); mo.observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+    if (gateButtonWired()) return;   // #accountGate is static markup (defer-loaded) — usually already done
+    try {
+      var mo = new MutationObserver(function () { injectGateButton(); if (gateButtonWired()) mo.disconnect(); });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
   }
 
   // ---- public API + boot -------------------------------------------------------------------
