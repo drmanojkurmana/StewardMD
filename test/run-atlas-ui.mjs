@@ -461,6 +461,12 @@ try {
   await ready();
   ok(await ev(`return document.querySelector('#atlasLoc [data-atlas-act=plane][aria-pressed=true]').getAttribute('data-v')==='ct-live-torso-coronal' && !!document.querySelector('#atlasScout line')`), "the coronal view has its own scout (on the axial)");
   await sleep(600); await shot("390-coronal-scout-on-axial.png");
+  // A plane answer resolves after the tap's script; whatever the user did in between wins.
+  await ev(`document.querySelector('#atlasLoc [data-atlas-act=plane][data-v="ct-live-torso-sagittal"]').click(); document.querySelector('#atlasLoc [data-atlas-act=plane][data-v="ct-live-torso-axial"]').click(); return 1;`);
+  ok(await until(`return ATLAS._state.moduleId==='ct-live-torso-axial'`) && (await sleep(400), await ev(`return ATLAS._state.moduleId`)) === "ct-live-torso-axial", "two quick plane taps: the latest one wins");
+  await ev(`document.querySelector('#atlasLoc [data-atlas-act=plane][data-v="ct-live-torso-sagittal"]').click(); ATLAS.close(); return 1;`);
+  await sleep(500);
+  ok(await ev(`return !ATLAS.isOpen() && !document.querySelector('#smdAtlas.on')`) === true, "closing right after a plane tap stays closed (the late answer is dropped)");
   await ev(`ATLAS.openAt('ct-head-axial', null, 3); return 1;`); await ready();
   ok(await ev(`return !document.getElementById('atlasLoc')`), "modules without group/plane get no localizer");
   await ev(`ATLAS.close(); return 1;`);

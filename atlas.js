@@ -2216,10 +2216,14 @@
     });
     return qPoint(s.q, pin ? pin.x / 100 : 0.5, pin ? pin.y / 100 : 0.5);
   }
+  // A sibling's atlas.json may still be downloading: drop the answer if the user left the viewer
+  // (st.req moves on every navigation) or tapped another plane chip since (the latest tap wins).
+  var _planeTap = 0;
   function switchPlane(id) {
     if (!id || id === st.moduleId) return;
-    var p = anchorPoint(), keep = st.sel || st.locked;
+    var p = anchorPoint(), keep = st.sel || st.locked, req = st.req, tap = ++_planeTap;
     atlasJson(id).then(function (a) {
+      if (req !== st.req || tap !== _planeTap) return;
       var i = (p && a) ? nearestSlice(a.slices, p) || 1 : 1;
       openAt(id, keep && a && a.structures && a.structures[keep] ? keep : null, i);
     });
