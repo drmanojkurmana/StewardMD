@@ -73,3 +73,24 @@ UI changed) in `index.html`, then run the CDP tests:
 CHROME=... node test/run-interactions.mjs
 CHROME=... node test/run-medlist.mjs
 ```
+
+## Coverage auditing and evidence review
+
+`node scripts/interactions/audit_coverage.mjs /output/directory` inventories every
+name in the shipped rules, ward formulary and offline index. It writes coverage
+CSV, rule inventory, consumer differences and a monograph-prose review queue.
+These are structural diagnostics, NOT a gold-standard accuracy benchmark. A name
+mention, a taxonomy match or an absent pair never establishes clinical safety.
+
+`python scripts/interactions/collect_label_evidence.py coverage.csv /output/labels --limit 20`
+collects bounded openFDA label candidates, preserving identity, route, version,
+sections and truncation. Repeated `--drug` values restrict collection to named
+public medicines. Never pass patient lists. Existing outputs are skipped; use a
+new output directory for a fresh snapshot. Observe openFDA daily quotas. Text is
+never promoted automatically to executable advice.
+
+The two shipped consumers have existing class/rule differences. For a narrowly
+reviewed change, use `python scripts/interactions/sync_curated_rules.py RULE_ID ...`
+to update explicit source-backed mechanism rules while preserving both class maps.
+It validates all selected rules against both consumers before writing either.
+A full `emit` must not be used to erase consumer differences without review.
