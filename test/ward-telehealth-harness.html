@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ video visits: scheduling harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js scheduling screen booking a video visit, against an in-memory stub whose answers follow
+ * functions/_wardsynq/scheduling.js (bookAppointment's video_off / consent_required / giver_required) and the
+ * router's /ward/diary (telehealth) and /ward/appointment (teleNote "video_off"); the server half is proven in
+ * test/telehealth-wardsynq.test.mjs. window.__teleOn switches the hospital's video on and off. */
+window.__calls = [];
+window.__teleOn = true;
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+window.prompt = function () { return "Patient called to cancel."; };
+var APPTS = [];
+var GIVERS = ["patient", "parent", "legal-guardian", "next-of-kin", "power-of-attorney"];
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null, post = (opts && opts.method) === "POST";
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, wards: [] });
+  if (u.indexOf("/ward/resource-schedule") >= 0) return reply({ ok: true, resources: [], resourcesConfigured: false });
+  if (u.indexOf("/ward/blackouts") >= 0) return reply({ ok: true, blackouts: [] });
+  if (u.indexOf("/ward/access-times") >= 0) return reply({ ok: true, opd: [], diagnostics: [], openVisits: [] });
+  if (u.indexOf("/ward/book") >= 0 && post) {
+    if (body.teleconsult) {
+      if (!window.__teleOn) return reply({ ok: false, status: 409, error: "video_off", detail: "video visits are off for this hospital" });
+      var c = body.teleConsent;
+      if (!c || c.agreed !== true) return reply({ ok: false, status: 422, error: "consent_required", detail: "record who agreed to a video visit before booking one" });
+      if (!c.givenBy) return reply({ ok: false, status: 422, error: "giver_required", detail: "record who agreed to a video visit before booking one" });
+      if (GIVERS.indexOf(c.givenBy) < 0) return reply({ ok: false, status: 422, error: "unknown_giver", detail: "record who agreed to a video visit before booking one" });
+    }
+    var a = { appointmentId: "appt-" + (APPTS.length + 1), patientId: body.patientId, clinicianId: body.clinicianId, startAt: body.startAt, minutes: body.minutes, reason: body.reason || null, state: "booked",
+      overbooked: !!body.overbook, overbookReason: body.overbook ? body.overbookReason : null, teleconsult: !!body.teleconsult, teleConsentBy: body.teleconsult ? body.teleConsent.givenBy : null };
+    APPTS.push(a);
+    return reply({ ok: true, written: 1, appointmentId: a.appointmentId, teleconsult: a.teleconsult, teleConsentBy: a.teleConsentBy, teleConsentRecord: a.teleconsult ? { ok: body.patientId !== "pat-norecord" } : undefined });
+  }
+  if (u.indexOf("/ward/appointment") >= 0 && post) {
+    var t = APPTS.filter(function (x) { return x.appointmentId === body.appointmentId; })[0];
+    if (t) t.state = body.state;
+    var r = { ok: true, written: 1, state: body.state, teleconsult: !!(t && t.teleconsult) };
+    if (t && body.state === "arrived") {
+      r.queueTicket = { id: "tk-1", token: 7, teleconsult: !!(t.teleconsult && window.__teleOn) };
+      if (t.teleconsult && !window.__teleOn) r.teleNote = "video_off";
+    }
+    return reply(r);
+  }
+  if (u.indexOf("/ward/diary") >= 0) return reply({ ok: true, telehealth: window.__teleOn, appointments: APPTS, recalls: [] });
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>window.__ready = !!(window.WARD && window.WARD.open);</script>
+</body></html>

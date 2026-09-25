@@ -1252,6 +1252,57 @@
     }, failed);
   }
   WSQ._intakeSettings = renderIntakeSettings;
+  /* VIDEO VISITS (functions/_telehealth.js): GET/POST /org/telehealth-settings. Off unless a video server is saved; a
+   * save needs a reason, and an empty address turns video off. A public service (publicServer) is warned about: the
+   * video then passes through a server this hospital does not run. A failed load is said, never read as off. */
+  function teleSettingsError(c, code) {
+    if (code === "invalid_url") return T(c, "site.admin.telehealth.errInvalidUrl", "That is not a web address. Nothing was saved.");
+    if (code === "https_required") return T(c, "site.admin.telehealth.errHttps", "The video server address must start with https://. Nothing was saved.");
+    if (code === "plain_address_required") return T(c, "site.admin.telehealth.errPlain", "Give the server address only, with no sign-in, ? or # part. Nothing was saved.");
+    if (code === "reason_required") return T(c, "site.admin.telehealth.errReason", "Say why the video visit settings are being changed. Nothing was saved.");
+    if (code === "address_required") return T(c, "site.admin.telehealth.errAddress", "Type the video server address, or use Turn off video visits.");
+    return null;
+  }
+  function renderTelehealthSettings(c, host) {
+    if (!host) return;
+    var esc = c.esc, tap = ' style="min-height:44px"';
+    var title = "<h2>" + esc(T(c, "site.admin.telehealth.title", "Video visits")) + "</h2>";
+    var failed = function () { host.innerHTML = '<div class="card">' + title + '<div class="msg err">' + esc(T(c, "site.admin.telehealth.loadFailed", "The video visit setting could not be loaded. Do not read this as off.")) + "</div></div>"; };
+    host.innerHTML = '<div class="card">' + title + '<span class="spin"></span></div>';
+    return c.api("/org/telehealth-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok || !r.settings) { failed(); return; }
+      var s = r.settings;
+      host.innerHTML = '<div class="card">' + title +
+        '<p class="quiet">' + esc(T(c, "site.admin.telehealth.intro", "When a video server is saved, the front desk can book a video visit and records who agreed to it. The call runs on the server named here. Every change is recorded with its reason.")) + "</p>" +
+        '<div class="msg ' + (s.on ? "ok" : "note") + '">' + esc(s.on ? T(c, "site.admin.telehealth.on", "Video visits are on.") : T(c, "site.admin.telehealth.off", "Video visits are off.")) + "</div>" +
+        (s.on ? "<dl><dt>" + esc(T(c, "site.admin.telehealth.saved", "Saved video server")) + '</dt><dd lang="en">' + esc(s.baseUrl) + "</dd></dl>" : "") +
+        (s.on && s.publicServer ? '<div class="msg err" role="alert">' + esc(T(c, "site.admin.telehealth.publicWarn", "This is a public video service. Video visits then pass through a server this hospital does not run. A video server run by this hospital is recommended.")) + "</div>" : "") +
+        '<label class="f"><span>' + esc(T(c, "site.admin.telehealth.address", "Video server address (https://)")) + '</span><input id="admTeleUrl" type="url" inputmode="url" autocomplete="off" placeholder="https://"' + tap + ' value="' + esc(s.baseUrl || "") + '"></label>' +
+        '<label class="f"><span>' + esc(T(c, "site.admin.telehealth.reason", "Why is this setting changing?")) + '</span><input id="admTeleReason" aria-required="true"' + tap + "></label>" +
+        '<div class="row"><button type="button" class="btn" id="admTeleSave"' + tap + ">" + esc(T(c, "site.admin.telehealth.save", "Save")) + "</button>" +
+        (s.on ? '<button type="button" class="btn danger" id="admTeleOff"' + tap + ">" + esc(T(c, "site.admin.telehealth.turnOff", "Turn off video visits")) + "</button>" : "") +
+        '</div><div id="admTeleMsg" aria-live="polite"></div></div>';
+      var send = function (baseUrl) {
+        var out = document.getElementById("admTeleMsg"), reason = document.getElementById("admTeleReason").value.trim();
+        var say = function (text) { out.innerHTML = '<div class="msg err">' + esc(text) + "</div>"; };
+        if (baseUrl === null) { say(teleSettingsError(c, "address_required")); return; }
+        if (!reason) { say(teleSettingsError(c, "reason_required")); return; }
+        out.innerHTML = '<span class="spin"></span>';
+        c.api("/org/telehealth-settings", { orgId: c.state.orgId, settings: { baseUrl: baseUrl }, reason: reason }).then(function (x) {
+          if (!x || !x.ok) {
+            var e = x && teleSettingsError(c, x.error);
+            if (e) say(e); else out.innerHTML = '<div class="msg err">' + EN(c, esc(refusal(c, x))) + "</div>";
+            return;
+          }
+          c.toast(x.changed && x.changed.length ? T(c, "site.admin.saved", "Saved.") : T(c, "site.admin.telehealth.nothingChanged", "Nothing changed.")); renderTelehealthSettings(c, host);
+        }, function () { say(T(c, "site.admin.telehealth.noResponse", "No response from the server. The setting may not have been saved; reload to check.")); });
+      };
+      document.getElementById("admTeleSave").onclick = function () { var u = document.getElementById("admTeleUrl").value.trim(); send(u ? u : null); };
+      var off = document.getElementById("admTeleOff");
+      if (off) off.onclick = function () { send(""); };
+    }, failed);
+  }
+  WSQ._telehealthSettings = renderTelehealthSettings;
   /* BLOOD DONOR CRITERIA (functions/_wardsynq/blood-bank.js, owner decision 2026-09-17). WHO 2012 by default; this
    * hospital may only make a criterion stricter. The table is the blood bank page's own (WSQ._bloodbank), so both
    * screens name each criterion and its source the same way. r: undefined = loading, null = could not be loaded (said,
@@ -1488,7 +1539,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="intakeCard"></div><div id="fmlCard"></div>' + CCS_KEYS.map(function (k) { return '<div id="ccsCard-' + k + '"></div>'; }).join("") + '<div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="intakeCard"></div><div id="teleCard"></div><div id="fmlCard"></div>' + CCS_KEYS.map(function (k) { return '<div id="ccsCard-' + k + '"></div>'; }).join("") + '<div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -1512,6 +1563,7 @@
     };
     wireClinicalSettings(c);
     renderIntakeSettings(c, document.getElementById("intakeCard"));
+    renderTelehealthSettings(c, document.getElementById("teleCard"));
     wireFormulary(c);
     CCS_KEYS.forEach(function (k) { wireContentSetting(c, k); });
     wireDonorCriteria(c); wireBloodCentre(c);

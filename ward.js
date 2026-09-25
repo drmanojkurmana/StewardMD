@@ -6924,6 +6924,35 @@
    * reschedules-by-state-change, marks did-not-attend, and blocks/unblocks a period, and shows the
    * server's own refusal reason verbatim on a clash or a blackout. */
   var APPT_STATE_WORDS = { booked: "Booked", arrived: "Arrived", completed: "Completed", cancelled: "Cancelled", "did-not-attend": "Did not attend" };
+  /* VIDEO VISITS (functions/_telehealth.js). The booking form offers one only when the diary says this hospital has
+   * video on, and a video booking carries who agreed to it (TELE_GIVERS) and that they agreed: the server refuses
+   * either missing, and the screen asks for both before sending. */
+  var TELE_GIVERS = ["patient", "parent", "legal-guardian", "next-of-kin", "power-of-attorney"];
+  function teleGiverWord(g) {
+    if (g === "patient") return wT("ward.tele-giver-patient", "The patient");
+    if (g === "parent") return wT("ward.tele-giver-parent", "A parent");
+    if (g === "legal-guardian") return wT("ward.tele-giver-guardian", "A legal guardian");
+    if (g === "next-of-kin") return wT("ward.tele-giver-kin", "Next of kin");
+    if (g === "power-of-attorney") return wT("ward.tele-giver-poa", "Holder of a power of attorney");
+    return String(g || "");
+  }
+  function teleBookFields(sc) {
+    if (!(sc.diary && sc.diary.telehealth)) return "";
+    var h = '<label class="w-chk" style="min-height:44px"><input type="checkbox" id="wSchedTele"' + (sc.tele ? " checked" : "") + "> " + ms("videocam") + wTH("ward.tele-video-visit", "Video visit") + "</label>";
+    if (!sc.tele) return h;
+    return h + '<div class="w-grid"><label class="w-f"><span>' + wTH("ward.tele-who-agreed", "Who agreed") + '</span><select id="wSchedTeleGiver" aria-required="true" style="min-height:44px">' +
+      '<option value="">' + wTH("ward.tele-choose", "Choose") + "</option>" +
+      TELE_GIVERS.map(function (g) { return '<option value="' + esc(g) + '">' + esc(teleGiverWord(g)) + "</option>"; }).join("") + "</select></label></div>" +
+      '<label class="w-chk" style="min-height:44px"><input type="checkbox" id="wSchedTeleAgreed" aria-required="true"> ' + wTH("ward.tele-agreed", "They agreed to a video consultation") + "</label>";
+  }
+  /* The server's refusal of a video booking, in words; null for any other refusal. */
+  function teleBookError(code) {
+    if (code === "video_off") return wT("ward.tele-err-off", "Video visits are turned off for this hospital. Book an in-person visit instead.");
+    if (code === "consent_required") return wT("ward.tele-err-consent", "Record that they agreed to a video consultation before booking one.");
+    if (code === "giver_required") return wT("ward.tele-err-giver", "Choose who agreed to the video consultation.");
+    if (code === "unknown_giver") return wT("ward.tele-err-unknown-giver", "Choose who agreed from the list.");
+    return null;
+  }
   function schedulingView(state) {
     var sc = state.scheduling || {};
     var diary = sc.diary || {};
@@ -6932,7 +6961,9 @@
       return "<li><b>" + esc(when(a.startAt)) + "</b> &middot; " + esc(a.minutes) + "m &middot; " + esc(a.clinicianId) +
         '<span class="w-st ' + esc(a.state) + '">' + esc(wTEn(APPT_STATE_WORDS[a.state]) || a.state) + "</span>" +
         (a.overbooked ? "<span class=\"w-tag warn\">" + wTH("ward.overbooked", "overbooked:") + " " + esc(a.overbookReason || "") + "</span>" : "") +
+        (a.teleconsult ? '<span class="w-tag">' + ms("videocam") + wTH("ward.tele-chip", "Video") + "</span>" : "") +
         (a.reason ? "<br><small>" + esc(a.reason) + "</small>" : "") +
+        (a.teleconsult && a.teleConsentBy ? "<br><small>" + wTH("ward.tele-consent-by", "Agreed to a video visit: {who}", { who: esc(teleGiverWord(a.teleConsentBy)) }) + "</small>" : "") +
         (a.arrivedAt ? "<br><small>" + wTH("ward.appt-arrived-at", "arrived {at}", { at: esc(when(a.arrivedAt)) }, "at") + "</small>" : "") +
         (live ? '<div class="w-actions">' +
           (a.state === "booked" ? '<button class="w-btn tiny" data-w-act="apptarrived:' + esc(a.appointmentId) + '">' + ms("how_to_reg") + wTH("ward.appt-mark-arrived", "Arrived") + "</button>" : "") +
@@ -6964,6 +6995,7 @@
       "<div><b>" + wTH("ward.scheduling", "Scheduling") + "</b><small>" + wTH("ward.hospital-wide", "hospital-wide") + "</small></div>" +
       "<button class=\"w-ic\" data-w-act=\"schedload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       (sc.err ? '<p class="w-hint warn">' + ms("warning") + esc(sc.err) + "</p>" : "") +
+      (sc.note ? '<p class="w-hint">' + ms("info") + esc(sc.note) + "</p>" : "") +
 
       '<div class="w-card"><div class="w-card-h">' + ms("event") + "<h3>" + wTH("ward.appointments", "Appointments") + "</h3></div>" +
       (apptRows ? '<ul class="w-mini">' + apptRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-appointments-loaded-set-a-clinician", "No appointments loaded. Set a clinician and load.") + "</p>") +
@@ -6976,6 +7008,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.minutes", "Minutes") + "</span><input id=\"wSchedMinutes\" type=\"text\" inputmode=\"numeric\" autocomplete=\"off\" value=\"15\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.reason4", "Reason") + "</span><input id=\"wSchedReason\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
+      teleBookFields(sc) +
       '<div class="w-actions">' +
       '<button class="w-btn go" data-w-act="schedload2">' + ms("search") + wTH("ward.load-this-clinician-s-diary", "Load this clinician's diary") + "</button>" +
       '<button class="w-btn" data-w-act="apptbook">' + ms("add") + wTH("ward.book", "Book") + "</button>" +
@@ -11708,12 +11741,24 @@
   function apptBookOrOverbook(overbook) {
     var clinicianId = val("wSchedClinician"), patientId = val("wSchedPatient"), startAt = val("wSchedStart"), minutes = val("wSchedMinutes"), reason = val("wSchedReason");
     if (!clinicianId || !patientId || !startAt || !minutes) { st.scheduling.err = wT("ward.a-clinician-a-patient-a-start", "A clinician, a patient, a start time and a length are all required."); paint(); return; }
-    st.scheduling.err = ""; st.busy = true; paint();
-    apiPost("/ward/book", { orgId: st.orgId, clinicianId: clinicianId, patientId: patientId, startAt: startAt, minutes: Number(minutes), reason: reason || undefined, overbook: !!overbook, overbookReason: overbook ? (reason || "Overbooked at the desk's request") : undefined })
+    var sc = st.scheduling, tele = !!(sc.diary && sc.diary.telehealth && sc.tele), giver = tele ? val("wSchedTeleGiver") : "";
+    if (tele && !giver) { sc.err = teleBookError("giver_required"); paint(); return; }
+    if (tele && !checked("wSchedTeleAgreed")) { sc.err = teleBookError("consent_required"); paint(); return; }
+    var body = { orgId: st.orgId, clinicianId: clinicianId, patientId: patientId, startAt: startAt, minutes: Number(minutes), reason: reason || undefined, overbook: !!overbook, overbookReason: overbook ? (reason || "Overbooked at the desk's request") : undefined };
+    if (tele) { body.teleconsult = true; body.teleConsent = { givenBy: giver, agreed: true }; }
+    sc.err = ""; sc.note = ""; st.busy = true; paint();
+    apiPost("/ward/book", body)
       .then(function (r) {
         st.busy = false;
-        if (r && r.ok) { loadScheduling(); return; }
-        st.scheduling.err = r && (r.detail || r.error) || wT("ward.could-not-book-that-slot", "Could not book that slot.");
+        if (r && r.ok) {
+          sc.tele = false;
+          // The consent is on the appointment either way; a patient record that refused it is said, never hidden.
+          if (r.teleConsentRecord && !r.teleConsentRecord.ok) sc.note = wT("ward.tele-consent-record-failed", "Booked as a video visit. The consent is kept on the appointment, but it could not be added to the patient's record.");
+          loadScheduling(); return;
+        }
+        sc.err = (r && teleBookError(r.error)) || (r && (r.detail || r.error)) || wT("ward.could-not-book-that-slot", "Could not book that slot.");
+        // Video was turned off since the diary loaded: reload it, so the form stops offering a video visit.
+        if (r && r.error === "video_off") { sc.tele = false; loadScheduling(); return; }
         paint();
       })
       .catch(function () { st.busy = false; st.scheduling.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
@@ -11725,9 +11770,13 @@
       try { reason = G.prompt(wTD("ward.reason", "Reason ({state}):", { state: state })) || ""; } catch (e) {}
       if (!reason.trim()) { st.scheduling.err = wT("ward.a-reason-is-required", "A reason is required."); paint(); return; }
     }
-    st.busy = true; paint();
+    st.busy = true; st.scheduling.note = ""; paint();
     apiPost("/ward/appointment", { orgId: st.orgId, appointmentId: appointmentId, state: state, reason: reason.trim() || undefined })
-      .then(function (r) { st.busy = false; if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || wT("ward.could-not-update-that-appointment", "Could not update that appointment."); paint(); } })
+      .then(function (r) {
+        st.busy = false;
+        // A video appointment whose hospital has since turned video off joins the queue as an ordinary visit: say so.
+        if (r && r.ok && r.teleNote === "video_off") st.scheduling.note = wT("ward.tele-arrived-in-person", "The patient joined the queue as an in-person visit, because video visits are now turned off for this hospital.");
+        if (r && r.ok) loadScheduling(); else { st.scheduling.err = (r && r.detail) || wT("ward.could-not-update-that-appointment", "Could not update that appointment."); paint(); } })
       .catch(function () { st.busy = false; st.scheduling.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
   }
   function resBook() {
@@ -14180,6 +14229,8 @@
     /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
     if (st.view === "board" && t && t.id === "wBoardDept") { st.boardDept = t.value; paint(); return; }
     if (t && t.id === "wNoteTpl") { st.noteTemplateId = t.value; st.noteResult = null; paint(); return; }
+    // A video visit asks who agreed and that they agreed; the other booking boxes keep what was typed (typedRestore).
+    if (t && t.id === "wSchedTele" && st.scheduling) { st.scheduling.tele = !!t.checked; paint(); return; }
     var ROSTER_FILTER = { wRosterWardFilter: "ward", wRosterStayFilter: "stay", wRosterDeptFilter: "dept" };
     if (t && ROSTER_FILTER[t.id]) {
       st.rosterFilters = st.rosterFilters || {};
