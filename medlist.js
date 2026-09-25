@@ -1659,7 +1659,7 @@
     var chips = el("div", { cls: "mlr-chips" });
     summaryChip(chips, "critical", "Critical", res.critical.length);
     summaryChip(chips, "major", "Major", res.major.length);
-    summaryChip(chips, "monitor", "Monitoring", monitorCount);
+    summaryChip(chips, "monitor", "Review", monitorCount);
     summaryChip(chips, "duplicate", "Duplicate", (res.duplicates || []).length);
     panel.appendChild(chips);
     panel.appendChild(el("div", { cls: "ml-aside-note",
@@ -1695,7 +1695,7 @@
     var monitoring = res.monitor.filter(notDuplicate).concat(res.moderate.filter(notDuplicate), minorFindings);
     resultsSection(main, "Critical — act now", res.critical);
     resultsSection(main, "Major — review before prescribing", res.major);
-    resultsSection(main, "Monitoring required", monitoring);
+    resultsSection(main, "Review required", monitoring);
     resultsSection(main, "Duplicate therapy", (res.duplicates || []).slice());
 
     var anyShown = res.critical.length || res.major.length || monitoring.length || (res.duplicates || []).length;

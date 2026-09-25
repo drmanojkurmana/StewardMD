@@ -104,3 +104,12 @@ Deps: [[AI Control Center]] (ocr cap) · [[Medical Knowledge Base]].
 - Real PharmaDetect weights ran through the browser WASM runtime and extracted metformin + atorvastatin from synthetic text. This is a functional smoke check, not a clinical accuracy benchmark or phone performance validation.
 - Patient-context rules remain unwired in this standalone screen; wording now states this honestly. Catalogue coverage is not interaction coverage.
 - ARTEMIS device QA blocked: missing provider key and no active Android device. Do not claim native release validation.
+
+### 2026-09-25 coverage audit and GLP-1 repair
+
+- Added a label-sourced tirzepatide × GLP-1 rule using the curated runtime tag, including semaglutide and liraglutide. Direct source and evidence are displayed in Clinical details.
+- Retired 257 inert EPC duplicate candidates from active assets to `scripts/interactions/curated/deferred_epc_rules.json`; they were already excluded at runtime. The generator no longer emits them, and validation rejects EPC/unreachable class subjects. There are now 70 active rules, with no unreachable class subjects in the shipped asset.
+- Removed the ingredient-overlap suppression between distinct products; distinct assignment already prevents self-matching. Shared ingredients must not suppress an independent warfarin/NSAID finding.
+- Empty results explicitly start with “Safety not established”. Moderate/monitor findings are grouped as “Review required”, not permission to coadminister with monitoring.
+- Audit limitations: 69 existing rules lack direct source URLs, 33 curated classification tags are not referenced by class rules (some have generic-specific rules), patient-context inputs remain unwired, and single-product internal interactions are outside distinct-product matching. Existing signoff validation reports 19 high-severity rules without a signed entry when reconstructed from committed sources. These are pre-existing provenance gaps; no reviewer approval was invented.
+- Verification: 81 existing focused unit checks pass after integrating current main; browser interaction harness passes; manual browser review of semaglutide + tirzepatide shows the new label warning. ARTEMIS unavailable; no new test files authored. This is not comprehensive clinical validation.
