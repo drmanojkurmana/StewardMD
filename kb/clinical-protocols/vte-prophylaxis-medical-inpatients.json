@@ -1,0 +1,95 @@
+{
+ "id": "vte-prophylaxis-medical-inpatients",
+ "title": "VTE prophylaxis in medical inpatients",
+ "subject": "haematology-oncology",
+ "population": "Adults",
+ "setting": "Medical ward, ICU",
+ "aliases": ["DVT prophylaxis", "thromboprophylaxis", "venous thromboembolism prevention", "Padua score", "IMPROVE score", "IMPROVE bleeding score", "enoxaparin prophylaxis", "heparin prophylaxis", "LMWH prophylaxis", "mechanical prophylaxis", "IPC"],
+ "summary": "Assess VTE risk (Padua 4 or more, or IMPROVE 2 or more) and bleeding risk (IMPROVE bleeding 7 or more) on admission; give LMWH (preferred), fondaparinux or UFH to at-risk acutely or critically ill medical patients, mechanical prophylaxis when bleeding risk is high, and stop at discharge.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Assess VTE risk on admission",
+   "items": [
+    "Padua score: active cancer 3, previous VTE 3, reduced mobility 3, known thrombophilia 3, trauma or surgery within 1 month 2, age above 70 years 1, heart or respiratory failure 1, acute MI or ischaemic stroke 1, acute infection or rheumatological disorder 1, BMI above 30 1, ongoing hormonal treatment 1.",
+    "Padua 4 or more = high risk (VTE about 11% without prophylaxis versus 0.3% for scores of 0 to 3).",
+    "IMPROVE VTE score: previous VTE 3, known thrombophilia 2, lower limb paralysis 2, active cancer 2, immobilisation 7 days or more 1, ICU or CCU stay 1, age above 60 years 1. Score 2 or more: prophylaxis indicated.",
+    "Critically ill medical patients (ICU) are at risk: give prophylaxis unless contraindicated."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Assess bleeding risk",
+   "items": [
+    "IMPROVE bleeding score, major factors: active gastroduodenal ulcer 4.5, bleeding in the 3 months before admission 4, platelets below 50 x 10^9/L 4, age 85 or more 3.5, hepatic failure (INR above 1.5) 2.5, GFR below 30 2.5, ICU or CCU stay 2.5.",
+    "IMPROVE bleeding score, other factors: central venous catheter 2, rheumatic disease 2, current cancer 2, age 40 to 84 1.5, male sex 1, GFR 30 to 59 1.",
+    "IMPROVE bleeding 7 or more = high bleeding risk (major bleeding about 4.1% versus 0.4%): prefer mechanical prophylaxis.",
+    "Before starting: Hb, platelet count, creatinine clearance and INR. Active bleeding is a contraindication to pharmacological prophylaxis."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Pharmacological prophylaxis (ASH 2018)",
+   "items": [
+    "Acutely ill at-risk medical patients: LMWH or fondaparinux rather than UFH (conditional); UFH is acceptable when cost or availability is a barrier. Also applies to stroke patients.",
+    "Critically ill medical patients: UFH or LMWH (strong recommendation), with LMWH preferred.",
+    "Enoxaparin 40 mg SC once daily; if CrCl is below 30 mL/min use 20 mg SC once daily or UFH.",
+    "UFH 5000 units SC every 8 to 12 hours; fondaparinux 2.5 mg SC once daily (avoid if CrCl below 30 mL/min); dalteparin 5000 units SC once daily.",
+    "Use LMWH rather than a DOAC for inpatient prophylaxis, and do not routinely extend prophylaxis after discharge (strong recommendations).",
+    "Seek pharmacy advice for body weight below 50 kg or above 150 kg."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Mechanical prophylaxis",
+   "items": [
+    "If pharmacological prophylaxis is not given (high bleeding risk or contraindication), use intermittent pneumatic compression or graduated compression stockings rather than nothing.",
+    "In acute stroke prefer intermittent pneumatic compression; graduated stockings are ineffective in stroke.",
+    "Do not routinely combine mechanical and pharmacological prophylaxis.",
+    "Avoid stockings with peripheral arterial disease, leg ulcers or fragile skin, severe oedema or leg deformity. Switch to pharmacological prophylaxis once bleeding risk falls."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Monitoring and reassessment",
+   "items": [
+    "Reassess VTE and bleeding risk at 24 hours and whenever the clinical picture changes.",
+    "UFH: check platelets every 2 to 3 days from day 4 to day 14 (HIT risk). LMWH in medical patients carries low HIT risk and does not need routine platelet monitoring.",
+    "Monitor renal function and adjust doses.",
+    "Neuraxial procedures: wait 12 hours after prophylactic LMWH before a spinal or epidural puncture or catheter removal, and give the next dose no sooner than 4 hours afterwards."
+   ]
+  },
+  {
+   "kind": "special",
+   "title": "Special situations",
+   "items": [
+    "Chronically ill medical patients and nursing home residents: no routine prophylaxis. Medical outpatients with minor provoking factors: no prophylaxis.",
+    "Long-distance travel (more than 4 hours) with substantially increased risk: graduated compression stockings or prophylactic LMWH; aspirin only if these are not feasible.",
+    "Previous HIT: use fondaparinux or another non-heparin agent.",
+    "Pregnancy and postpartum patients: follow obstetric VTE guidance."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Blanket prophylaxis for low-risk patients, or none for high-risk ones; failure to reassess daily.",
+    "Not reducing enoxaparin when CrCl is below 30 mL/min.",
+    "Continuing prophylaxis after discharge by default, or using aspirin or a DOAC for inpatient medical prophylaxis.",
+    "Graduated stockings in stroke or peripheral arterial disease."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Enoxaparin", "dose": "40 mg SC once daily; 20 mg SC once daily if CrCl below 30 mL/min", "notes": "Preferred agent. Stop at discharge unless another indication." },
+  { "name": "Unfractionated heparin", "dose": "5000 units SC every 8 to 12 hours", "notes": "Useful in severe renal impairment or when cost limits LMWH. Monitor platelets for HIT." },
+  { "name": "Fondaparinux", "dose": "2.5 mg SC once daily", "notes": "Avoid if CrCl below 30 mL/min. Option after previous HIT." },
+  { "name": "Dalteparin", "dose": "5000 units SC once daily", "notes": "Alternative LMWH." }
+ ],
+ "sources": [
+  { "org": "American Society of Hematology", "title": "ASH 2018 guidelines for management of venous thromboembolism: prophylaxis for hospitalized and nonhospitalized medical patients", "year": 2018, "url": "https://ashpublications.org/bloodadvances/article/2/22/3198/16115/American-Society-of-Hematology-2018-guidelines-for" },
+  { "org": "American Society of Hematology", "title": "ASH VTE guidelines: prophylaxis for medical patients (clinician resources)", "year": 2018, "url": "https://www.hematology.org/education/clinicians/guidelines-and-quality-care/clinical-practice-guidelines/venous-thromboembolism-guidelines/prophylaxis-for-medical-patients" },
+  { "org": "American Society of Hematology", "title": "ASH 2018 guidelines for management of venous thromboembolism: heparin-induced thrombocytopenia (platelet monitoring)", "year": 2018, "url": "https://ashpublications.org/bloodadvances/article/2/22/3360/16129/American-Society-of-Hematology-2018-guidelines-for" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

@@ -9223,3 +9223,13 @@ en dash, no unknown keys. Everything shipped is `ai_drafted` (AI-assisted, web-r
 cited guideline) and every screen says it is pending clinical review; that label changes only when a
 clinician reviews a protocol and the file names them. Flag default ON because the tab is additive and
 honest about its status; `?kbproto=0` removes it.
+
+## 2026-09-25 - Amended the same day: the OPD Protocol tab lists clinical protocols too
+The owner sent a screenshot of the OPD Protocol tab ("Search &amp; assign", oncology only) and asked for
+the protocols there, with a branch filter and working search. So the tab is now one list of clinical
+protocols + oncology regimens. The earlier concern (reference vs order) is kept by the UI, not by
+separation: clinical rows open a read-only reader in the tab and have no Assign; only oncology rows can
+Assign, and that still creates a DRAFT plan the ONCQIS tab must confirm. Also fixed: the double-escaped
+"&amp;" header, em dashes and the placeholder dash under every regimen, a search that missed cancer
+types written with spaces ("breast cancer" vs `breast_cancer`) and drug names, and a read-only profile
+that sat on "Loading the protocol library..." forever (the loader required write mode).

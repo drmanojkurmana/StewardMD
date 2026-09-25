@@ -1,0 +1,91 @@
+{
+ "id": "rhabdomyolysis",
+ "title": "Rhabdomyolysis (adult)",
+ "subject": "nephrology",
+ "population": "Adults",
+ "setting": "Emergency department, ward, ICU",
+ "aliases": ["rhabdo", "raised CK", "creatine kinase", "myoglobinuria", "crush injury", "crush syndrome", "pigment nephropathy", "exertional rhabdomyolysis", "McMahon score"],
+ "summary": "Confirm with CK above 5 times normal, start early isotonic crystalloid titrated to urine output 1 to 3 mL/kg/h (up to 300 mL/h), treat hyperkalaemia, look for compartment syndrome, and avoid routine bicarbonate, mannitol and diuretics.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise",
+   "items": [
+    "Diagnosis: CK above 5 times the upper limit of normal or above 1000 U/L, with muscle pain, weakness or swelling. Dark (tea-coloured) urine that is dipstick positive for blood without red cells on microscopy suggests myoglobinuria.",
+    "AKI risk rises with CK: about 10% develop kidney failure with CK above 5000 U/L, and CK above 16,000 U/L is more strongly associated. A McMahon score of 6 or more predicts need for dialysis and death.",
+    "CK peaks at 24 to 72 hours, so a modest early CK can rise further.",
+    "Causes: crush and prolonged immobilisation, compartment syndrome, vascular injury, extreme exertion, seizures, heat stroke, alcohol and drugs (cocaine, statins), neuroleptic malignant syndrome, malignant hyperthermia, infections, electrolyte disorders and genetic myopathies.",
+    "Indian context: consider leptospirosis, dengue, falciparum malaria and scrub typhus, sea snake envenomation, multiple wasp or hornet stings, heat stroke in outdoor workers, and severe hypokalaemia."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "Immediate management",
+   "items": [
+    "Start isotonic crystalloid early: 0.9% saline or Ringer lactate are both acceptable. Begin at about 400 mL/h and titrate between 200 and 1000 mL/h.",
+    "Target urine output 1 to 3 mL/kg/h, up to 300 mL/h (about 200 to 300 mL/h in most adults), and continue until CK is reliably falling.",
+    "Check potassium and ECG immediately and repeat often; treat hyperkalaemia per the Hyperkalaemia protocol (IV calcium for ECG changes, insulin-glucose).",
+    "Examine every limb for compartment syndrome: pain out of proportion, pain on passive stretch, tense swelling. Get urgent surgical review for fasciotomy; delay beyond 6 hours risks irreversible muscle damage.",
+    "Stop causative drugs (statins and others), cool heat stroke, control seizures and agitation, and treat infection."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Investigations",
+   "items": [
+    "CK at presentation and serially (for example daily) until it has peaked and is reliably falling.",
+    "Creatinine, potassium, calcium, phosphate, urate, bicarbonate or blood gas, LFTs (AST rises from muscle), CBC and coagulation profile for DIC.",
+    "Urine dipstick and microscopy, and 12-lead ECG.",
+    "Cause-directed tests: drug and toxicology screen, TSH, tropical fever work-up, and metabolic myopathy testing if episodes recur or follow mild exertion."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Supportive care",
+   "items": [
+    "Do not routinely give sodium bicarbonate or mannitol: they have not reduced AKI or dialysis. Avoid loop diuretics except for fluid overload.",
+    "Treat early hypocalcaemia only if symptomatic or with severe hyperkalaemia; calcium given early deposits in injured muscle, and rebound hypercalcaemia can occur in the recovery phase.",
+    "Hyperphosphataemia is common: avoid calcium supplements that increase calcium phosphate deposition.",
+    "If oliguric AKI develops, stop escalating fluids, reassess volume, and prepare for dialysis rather than pushing fluid into an anuric patient."
+   ]
+  },
+  {
+   "kind": "escalate",
+   "title": "Escalate",
+   "items": [
+    "Dialysis for standard indications: refractory hyperkalaemia, acidosis, fluid overload or uraemia. There is no role for dialysis to prevent AKI.",
+    "HDU or ICU for rapidly rising CK with AKI, hyperkalaemia, crush injury, compartment syndrome, or McMahon score 6 or more.",
+    "Crush injury in a mass casualty setting: early fluids and triage to a centre with dialysis capacity."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Monitoring",
+   "items": [
+    "Hourly urine output (catheter), fluid balance and daily weight; examine for pulmonary oedema, especially in older adults and heart failure.",
+    "Potassium frequently in the first 24 to 48 hours (every 4 to 6 hours in severe cases), with creatinine, calcium and phosphate at least daily.",
+    "Repeat limb checks for evolving compartment syndrome, particularly in sedated, intoxicated or intubated patients."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Missing compartment syndrome in patients who cannot report pain.",
+    "Stopping monitoring after one CK value before the peak.",
+    "Fluid overload from fixed high-rate fluids in oliguric AKI or heart failure.",
+    "Routine bicarbonate causing alkalosis and worsening ionised hypocalcaemia."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Isotonic crystalloid (0.9% saline or Ringer lactate)", "dose": "Start about 400 mL/h IV, titrate 200 to 1000 mL/h to urine output 1 to 3 mL/kg/h (up to 300 mL/h)", "notes": "Continue until CK is reliably falling; reduce if overload or oliguric AKI." },
+  { "name": "Calcium gluconate 10%", "dose": "30 mL IV over 10 minutes", "notes": "Only for hyperkalaemia with ECG changes or symptomatic hypocalcaemia." },
+  { "name": "Soluble insulin with glucose", "dose": "10 units soluble insulin IV with 25 g glucose", "notes": "Hyperkalaemia; monitor glucose for 6 hours (see Hyperkalaemia protocol)." }
+ ],
+ "sources": [
+  { "org": "American Association for the Surgery of Trauma", "title": "Rhabdomyolysis: an AAST Critical Care Committee Clinical Consensus Document", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8804685/" },
+  { "org": "KDIGO", "title": "KDIGO 2026 Clinical Practice Guideline for AKI and AKD (public review draft): rhabdomyolysis-associated AKI", "year": 2026, "url": "https://kdigo.org/wp-content/uploads/2026/03/KDIGO-2026-AKI-AKD-Guideline-Public-Review-Draft-March-2026.pdf" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

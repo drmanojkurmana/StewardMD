@@ -1,0 +1,102 @@
+{
+ "id": "clostridioides-difficile-infection",
+ "title": "Clostridioides difficile infection (adult)",
+ "subject": "infectious-disease",
+ "population": "Adults",
+ "setting": "Ward, ICU, outpatient",
+ "aliases": ["CDI", "C. diff", "C difficile", "Clostridium difficile", "CDAD", "pseudomembranous colitis", "antibiotic-associated diarrhoea", "fidaxomicin", "oral vancomycin"],
+ "summary": "Test only new unexplained diarrhoea (3 or more unformed stools in 24 hours), stop the inciting antibiotic, and treat with fidaxomicin 200 mg twice daily or oral vancomycin 125 mg four times daily for 10 days. Fulminant disease needs high-dose enteral vancomycin, IV metronidazole and early surgical review.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise and grade",
+   "items": [
+    "Suspect CDI with new unexplained diarrhoea (3 or more unformed stools in 24 hours) after antibiotics in the past 3 months or a hospital stay, especially in older, immunocompromised or PPI-treated patients.",
+    "Non-severe: WBC 15,000 cells/mm3 or less and creatinine below 1.5 mg/dL. Severe: WBC 15,000 or more, or creatinine above 1.5 mg/dL (IDSA/SHEA).",
+    "Fulminant: hypotension or shock, ileus or megacolon. It may present with little diarrhoea because of ileus: distension, pain, fever, rising lactate.",
+    "Recurrence: symptoms return within 8 weeks after a previous episode resolved."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Investigations",
+   "items": [
+    "Test only unformed stool, and not within 48 hours of a laxative. Do not test asymptomatic patients, do not repeat within 7 days, and do not do a test of cure.",
+    "Use a multistep algorithm (GDH plus toxin; GDH plus toxin arbitrated by NAAT; or NAAT plus toxin). NAAT alone overcalls colonisation unless strict testing criteria are applied.",
+    "CBC, creatinine, electrolytes, albumin and lactate. Abdominal X-ray or CT for distension, severe pain or suspected megacolon."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "General measures",
+   "items": [
+    "Stop the inciting antibiotic as soon as possible; if antibiotics must continue, use the narrowest effective agent.",
+    "Stop unnecessary PPIs; avoid loperamide and opioids.",
+    "Rehydrate and correct potassium.",
+    "Contact precautions (single room with its own toilet, gloves and gown) and soap-and-water hand washing from the moment CDI is suspected."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Initial episode",
+   "items": [
+    "Preferred: fidaxomicin 200 mg orally twice daily for 10 days (IDSA/SHEA 2021).",
+    "Alternative: vancomycin 125 mg orally four times daily for 10 days. Where capsules are unavailable, the IV vancomycin powder can be reconstituted and given orally or by nasogastric tube. IV vancomycin does not reach the colon.",
+    "Metronidazole 500 mg orally three times daily for 10 days only for non-severe CDI when fidaxomicin and vancomycin are unavailable. Avoid repeated or prolonged courses (neurotoxicity).",
+    "In India fidaxomicin may be unavailable or costly, so oral vancomycin is the usual first-line agent."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Fulminant CDI",
+   "items": [
+    "Vancomycin 500 mg orally or by nasogastric tube four times daily PLUS metronidazole 500 mg IV every 8 hours.",
+    "With ileus, add rectal vancomycin 500 mg in about 100 mL 0.9% saline as a retention enema every 6 hours.",
+    "Manage in ICU and involve surgeons early. Options are subtotal colectomy with rectal preservation, or diverting loop ileostomy with colonic lavage and antegrade vancomycin flushes, for perforation, peritonitis, toxic megacolon, shock or failure to improve."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Recurrence",
+   "items": [
+    "First recurrence: fidaxomicin, either standard 10 days or extended-pulsed (200 mg twice daily on days 1 to 5, then 200 mg once daily on alternate days from day 7 to day 25), or a vancomycin taper and pulse.",
+    "Vancomycin taper and pulse example: 125 mg four times daily for 10 to 14 days, then twice daily for 7 days, once daily for 7 days, then every 2 to 3 days for 2 to 8 weeks.",
+    "Second or later recurrence: fidaxomicin, vancomycin taper and pulse, or vancomycin 125 mg four times daily for 10 days followed by rifaximin 400 mg three times daily for 20 days.",
+    "Offer faecal microbiota transplantation after 2 or more recurrences that were treated appropriately.",
+    "Bezlotoxumab 10 mg/kg IV once, with standard antibiotics, may be considered for recurrence within 6 months where available; caution in heart failure."
+   ]
+  },
+  {
+   "kind": "prevention",
+   "title": "Infection prevention",
+   "items": [
+    "Continue contact precautions until at least 48 hours after diarrhoea resolves; use dedicated equipment and chlorine-based (sporicidal) cleaning.",
+    "Wash hands with soap and water: alcohol hand rub does not kill spores.",
+    "Antimicrobial stewardship: limit clindamycin, fluoroquinolones, cephalosporins and carbapenems, and review PPI use."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Oral metronidazole for severe or fulminant CDI.",
+    "Using IV vancomycin for CDI: only enteral vancomycin works.",
+    "Testing formed stool, patients on laxatives, or doing a test of cure (carriage persists after cure).",
+    "Missing fulminant colitis because stool frequency falls with ileus."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Fidaxomicin", "dose": "200 mg orally twice daily for 10 days; extended-pulsed: 200 mg twice daily days 1 to 5, then 200 mg once daily on alternate days days 7 to 25", "notes": "Preferred for initial and recurrent CDI (IDSA/SHEA 2021)." },
+  { "name": "Vancomycin (oral)", "dose": "125 mg orally four times daily for 10 days; fulminant: 500 mg orally or by nasogastric tube four times daily", "notes": "IV formulation can be reconstituted for oral use. Minimal systemic absorption." },
+  { "name": "Vancomycin (rectal)", "dose": "500 mg in about 100 mL 0.9% saline per rectum every 6 hours", "notes": "Fulminant CDI with ileus, in addition to oral or nasogastric vancomycin." },
+  { "name": "Metronidazole", "dose": "500 mg orally three times daily for 10 days (non-severe, only if others unavailable); 500 mg IV every 8 hours (fulminant, with enteral vancomycin)", "notes": "Neurotoxicity with repeated or prolonged use." },
+  { "name": "Rifaximin", "dose": "400 mg orally three times daily for 20 days", "notes": "After a 10-day vancomycin course for multiple recurrences." },
+  { "name": "Bezlotoxumab", "dose": "10 mg/kg IV, single infusion", "notes": "Adjunct for recurrence risk, where available; caution in heart failure." }
+ ],
+ "sources": [
+  { "org": "IDSA / SHEA", "title": "Clinical practice guideline: 2021 focused update on management of Clostridioides difficile infection in adults", "year": 2021, "url": "https://www.idsociety.org/practice-guideline/clostridioides-difficile-2021-focused-update/" },
+  { "org": "IDSA / SHEA", "title": "Clinical practice guidelines for Clostridium difficile infection in adults and children: 2017 update", "year": 2018, "url": "https://www.idsociety.org/practice-guideline/clostridium-difficile/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

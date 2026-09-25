@@ -1,15 +1,1622 @@
 {
  "schema": 1,
- "version": "f1a8098de82d",
- "count": 1,
+ "version": "5fc3c4320f73",
+ "count": 76,
  "subjects": [
+  {
+   "key": "emergency",
+   "label": "Emergency and Resuscitation",
+   "count": 1
+  },
   {
    "key": "critical-care",
    "label": "Critical Care",
    "count": 1
+  },
+  {
+   "key": "cardiology",
+   "label": "Cardiology",
+   "count": 14
+  },
+  {
+   "key": "respiratory",
+   "label": "Respiratory Medicine",
+   "count": 1
+  },
+  {
+   "key": "infectious-disease",
+   "label": "Infectious Diseases",
+   "count": 7
+  },
+  {
+   "key": "gastroenterology",
+   "label": "Gastroenterology and Hepatology",
+   "count": 8
+  },
+  {
+   "key": "nephrology",
+   "label": "Nephrology and Electrolytes",
+   "count": 10
+  },
+  {
+   "key": "endocrinology",
+   "label": "Endocrinology and Diabetes",
+   "count": 8
+  },
+  {
+   "key": "neurology",
+   "label": "Neurology",
+   "count": 5
+  },
+  {
+   "key": "haematology-oncology",
+   "label": "Haematology and Oncology",
+   "count": 11
+  },
+  {
+   "key": "obstetrics-gynaecology",
+   "label": "Obstetrics and Gynaecology",
+   "count": 3
+  },
+  {
+   "key": "surgery-trauma",
+   "label": "Surgery, Trauma and Orthopaedics",
+   "count": 4
+  },
+  {
+   "key": "anaesthesia",
+   "label": "Anaesthesia and Perioperative",
+   "count": 3
   }
  ],
  "protocols": [
+  {
+   "id": "acute-heart-failure",
+   "title": "Acute (decompensated) heart failure and pulmonary oedema",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "AHF",
+    "ADHF",
+    "DHF",
+    "decompensated heart failure",
+    "acute pulmonary oedema",
+    "acute LVF",
+    "flash pulmonary oedema",
+    "cardiogenic shock",
+    "IV furosemide",
+    "diuretic resistance"
+   ],
+   "summary": "Treat the precipitant, give oxygen or NIV for hypoxaemia and respiratory distress, IV loop diuretic at 1 to 2 times the oral dose (20 to 40 mg furosemide if naive) with natriuresis-guided escalation, IV nitrate if SBP is above 110 mmHg, and reserve inotropes for hypotension with hypoperfusion.",
+   "sources": [
+    "ESC 2026",
+    "ESC 2021",
+    "ESC 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-aortic-syndrome",
+   "title": "Acute aortic syndrome and aortic dissection",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "AAS",
+    "aortic dissection",
+    "AD",
+    "type A dissection",
+    "type B dissection",
+    "Stanford A",
+    "Stanford B",
+    "intramural haematoma",
+    "IMH",
+    "penetrating aortic ulcer",
+    "PAU",
+    "ADD-RS",
+    "impulse control",
+    "TEVAR"
+   ],
+   "summary": "Suspect aortic dissection in any severe abrupt chest, back or abdominal pain; use the ADD-RS with D-dimer and urgent CT angiography, give IV opioid and IV beta-blocker to heart rate below 60/min and SBP 100 to 120 mmHg, send type A for emergency surgery and treat uncomplicated type B medically with TEVAR for complications.",
+   "sources": [
+    "ESC 2024",
+    "ACC / AHA 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-asthma-adult",
+   "title": "Acute asthma exacerbation (adult)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "acute severe asthma",
+    "asthma attack",
+    "life-threatening asthma",
+    "near-fatal asthma",
+    "status asthmaticus",
+    "asthma exacerbation",
+    "bronchial asthma",
+    "wheeze",
+    "GINA 2026",
+    "SIGN 158"
+   ],
+   "summary": "Grade severity by speech, respiratory rate, SpO2 and PEF; give inhaled salbutamol (with ipratropium if moderate or severe), oxygen only if SpO2 is below 92% (target 92 to 95%), prednisolone 40 to 50 mg within 1 hour, IV magnesium for poor responders, and discharge on ICS-containing treatment with review in 2 to 7 days.",
+   "sources": [
+    "GINA 2026",
+    "SIGN / BTS 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-bacterial-meningitis",
+   "title": "Acute bacterial meningitis (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "ABM",
+    "bacterial meningitis",
+    "pyogenic meningitis",
+    "meningococcal meningitis",
+    "pneumococcal meningitis",
+    "Listeria meningitis",
+    "CT before LP",
+    "meningitis dexamethasone",
+    "meningococcal prophylaxis"
+   ],
+   "summary": "Blood cultures, then IV ceftriaxone plus vancomycin with dexamethasone within 1 hour of arrival; add amoxicillin when Listeria is possible (age over 50, pregnancy, immunocompromise). Do the LP at once unless CT criteria are met, and never let imaging delay antibiotics.",
+   "sources": [
+    "ESCMID 2016",
+    "NICE 2024",
+    "ICMR 2022",
+    "IDSA 2004"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-infectious-diarrhoea-adult",
+   "title": "Acute infectious diarrhoea and dysentery (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "acute gastroenteritis",
+    "AGE",
+    "acute diarrhoea",
+    "dysentery",
+    "bloody diarrhoea",
+    "cholera",
+    "shigellosis",
+    "travellers diarrhoea",
+    "ORS",
+    "food poisoning"
+   ],
+   "summary": "Rehydrate first (ORS, or Ringer lactate for severe dehydration). Most watery diarrhoea needs no stool test or antibiotic; treat cholera with dehydration, dysentery, severe travellers' diarrhoea and sepsis, preferring azithromycin where fluoroquinolone resistance is common.",
+   "sources": [
+    "IDSA 2017",
+    "ICMR 2022",
+    "CDC 2025",
+    "WHO 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-ischaemic-stroke",
+   "title": "Acute ischaemic stroke: thrombolysis and thrombectomy",
+   "subject": "neurology",
+   "population": "Adults",
+   "aliases": [
+    "AIS",
+    "stroke",
+    "CVA",
+    "brain attack",
+    "code stroke",
+    "thrombolysis",
+    "IVT",
+    "tPA",
+    "alteplase",
+    "tenecteplase",
+    "TNK",
+    "mechanical thrombectomy",
+    "EVT",
+    "LVO",
+    "wake-up stroke",
+    "cerebral infarction"
+   ],
+   "summary": "Time-critical reperfusion: IV tenecteplase 0.25 mg/kg (max 25 mg) or alteplase 0.9 mg/kg (max 90 mg) within 4.5 hours for disabling deficits with BP below 185/110 mmHg, thrombectomy for large vessel occlusion up to 24 hours in selected patients, then aspirin and stroke unit care.",
+   "sources": [
+    "AHA/ASA 2026",
+    "AHA 2026",
+    "ESO 2026",
+    "NICE 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-kidney-injury",
+   "title": "Acute kidney injury (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "AKI",
+    "acute renal failure",
+    "ARF",
+    "KDIGO staging",
+    "rising creatinine",
+    "oliguria",
+    "AKD",
+    "acute kidney disease",
+    "prerenal AKI",
+    "ATN",
+    "AEIOU dialysis"
+   ],
+   "summary": "Diagnose and stage AKI with KDIGO creatinine and urine output criteria, find the prerenal, renal or postrenal cause, restore volume with buffered crystalloid, stop nephrotoxins, and start dialysis for life-threatening complications refractory to medical therapy.",
+   "sources": [
+    "KDIGO 2012",
+    "KDIGO 2026",
+    "KDIGO 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-liver-failure",
+   "title": "Acute liver failure",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "ALF",
+    "fulminant hepatic failure",
+    "FHF",
+    "acute hepatic failure",
+    "paracetamol liver failure",
+    "acetaminophen hepatotoxicity",
+    "King's College criteria",
+    "KCC",
+    "cerebral oedema liver failure",
+    "N-acetylcysteine",
+    "NAC",
+    "hepatitis E liver failure"
+   ],
+   "summary": "INR 1.5 or more with any encephalopathy and no prior liver disease: contact a transplant centre early, give IV N-acetylcysteine (paracetamol and early-grade non-paracetamol ALF), move to ICU at grade 2 encephalopathy, protect against cerebral oedema (sodium 145 to 150 mmol/L, early CRRT for hyperammonaemia) and apply King's College criteria.",
+   "sources": [
+    "American College of Gastroenterology 2023",
+    "AASLD 2012",
+    "US Acute Liver Failure Study Group 2009"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "lower-gi-bleeding",
+   "title": "Acute lower GI bleeding",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "LGIB",
+    "LGI bleed",
+    "lower GI haemorrhage",
+    "haematochezia",
+    "hematochezia",
+    "rectal bleeding",
+    "PR bleed",
+    "diverticular bleeding",
+    "Oakland score",
+    "shock index",
+    "CT angiography",
+    "CTA"
+   ],
+   "summary": "Classify by shock index; unstable patients (shock index above 1) get CT angiography then embolisation, stable patients are scored with Oakland (8 or less: outpatient investigation). Transfuse restrictively and perform non-urgent inpatient colonoscopy for major bleeds.",
+   "sources": [
+    "American College of Gastroenterology 2023",
+    "British Society of Gastroenterology 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-pancreatitis",
+   "title": "Acute pancreatitis",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "AP",
+    "pancreatitis",
+    "gallstone pancreatitis",
+    "biliary pancreatitis",
+    "alcoholic pancreatitis",
+    "necrotising pancreatitis",
+    "revised Atlanta",
+    "WATERFALL",
+    "infected necrosis",
+    "hypertriglyceridaemia pancreatitis"
+   ],
+   "summary": "Diagnose with 2 of 3 criteria, grade severity by revised Atlanta (persistent organ failure over 48 hours = severe), give moderate goal-directed Ringer lactate, feed orally early, avoid prophylactic antibiotics, ERCP within 24 hours only for cholangitis, and cholecystectomy before discharge in mild gallstone pancreatitis.",
+   "sources": [
+    "American College of Gastroenterology 2024",
+    "NEJM (WATERFALL trial) 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-pericarditis",
+   "title": "Acute pericarditis",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "pericarditis",
+    "acute pericarditis",
+    "recurrent pericarditis",
+    "myopericarditis",
+    "viral pericarditis",
+    "pericardial effusion",
+    "colchicine",
+    "tuberculous pericarditis",
+    "TB pericarditis"
+   ],
+   "summary": "Diagnose with 2 of 4 criteria (typical pain, rub, widespread ST elevation or PR depression, effusion), admit if red flags, otherwise treat as an outpatient with high-dose aspirin or an NSAID plus colchicine for 3 months, tapering by symptoms and CRP; avoid corticosteroids as first line.",
+   "sources": [
+    "ESC 2025",
+    "ESC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "pulmonary-embolism",
+   "title": "Acute pulmonary embolism: risk stratification and treatment",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "PE",
+    "pulmonary embolism",
+    "VTE",
+    "PTE",
+    "massive PE",
+    "submassive PE",
+    "high-risk PE",
+    "PESI",
+    "sPESI",
+    "Wells score",
+    "thrombolysis PE",
+    "CTPA"
+   ],
+   "summary": "Assess clinical probability, use D-dimer and CT pulmonary angiography, stratify by haemodynamic status, sPESI, RV dysfunction and troponin; give systemic thrombolysis plus UFH for high-risk (shocked) PE, anticoagulation with monitoring for intermediate risk, and early discharge on a DOAC for low risk.",
+   "sources": [
+    "ESC / ERS 2019",
+    "ASH 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "upper-gi-bleeding-nonvariceal",
+   "title": "Acute upper GI bleeding (non-variceal)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "UGIB",
+    "UGI bleed",
+    "NVUGIB",
+    "NVUGIH",
+    "peptic ulcer bleeding",
+    "bleeding ulcer",
+    "haematemesis",
+    "hematemesis",
+    "melaena",
+    "melena",
+    "Glasgow-Blatchford score",
+    "GBS",
+    "Forrest classification"
+   ],
+   "summary": "Resuscitate, risk-stratify with the Glasgow-Blatchford score (discharge if 0 to 1), transfuse restrictively (Hb below 7 g/dL, or below 8 g/dL with cardiovascular disease), endoscopy within 24 hours, then high-dose PPI for 72 hours after endoscopic haemostasis.",
+   "sources": [
+    "American College of Gastroenterology 2021",
+    "ESGE 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-variceal-bleeding",
+   "title": "Acute variceal bleeding in cirrhosis",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "AVB",
+    "AVH",
+    "variceal haemorrhage",
+    "variceal hemorrhage",
+    "oesophageal varices",
+    "esophageal varices",
+    "gastric varices",
+    "portal hypertensive bleeding",
+    "EVL",
+    "band ligation",
+    "pre-emptive TIPS",
+    "terlipressin",
+    "Baveno VII"
+   ],
+   "summary": "Suspected variceal bleeding: start a vasoactive drug (terlipressin, octreotide or somatostatin) and IV ceftriaxone immediately, transfuse restrictively (Hb 7 to 8 g/dL), band ligation within 12 hours, pre-emptive TIPS for high-risk patients, then beta-blocker plus EVL.",
+   "sources": [
+    "Baveno VII Faculty 2022",
+    "AASLD 2024",
+    "AASLD 2017"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "adrenal-crisis",
+   "title": "Adrenal crisis",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "aliases": [
+    "Addisonian crisis",
+    "acute adrenal insufficiency",
+    "adrenal insufficiency",
+    "steroid withdrawal",
+    "glucocorticoid-induced adrenal insufficiency",
+    "sick day rules",
+    "stress dose steroids",
+    "steroid emergency card"
+   ],
+   "summary": "Suspect in anyone with adrenal insufficiency or current or recent glucocorticoid use who has unexplained shock, vomiting or collapse; give hydrocortisone 100 mg IV or IM at once, 1 L saline in the first hour, then 200 mg/24 hours, and prevent recurrence with sick-day rules and an emergency card.",
+   "sources": [
+    "Endocrine Society 2016",
+    "ESE / Endocrine Society 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "adult-cardiac-arrest",
+   "title": "Adult cardiac arrest (ALS/ACLS)",
+   "subject": "emergency",
+   "population": "Adults",
+   "aliases": [
+    "cardiac arrest",
+    "ACLS",
+    "ALS",
+    "CPR",
+    "code blue",
+    "VF",
+    "pulseless VT",
+    "PEA",
+    "asystole",
+    "cardiopulmonary resuscitation",
+    "4 Hs and 4 Ts",
+    "defibrillation"
+   ],
+   "summary": "High-quality CPR with minimal interruptions, early defibrillation for VF/pVT, adrenaline 1 mg every 3 to 5 minutes (as soon as possible for non-shockable rhythms, after failed initial shocks for shockable rhythms), amiodarone or lidocaine for refractory VF/pVT, and an active search for reversible causes.",
+   "sources": [
+    "American Heart Association 2025",
+    "European Resuscitation Council 2025",
+    "Resuscitation Council UK 2025",
+    "Resuscitation Council UK 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "subarachnoid-haemorrhage",
+   "title": "Aneurysmal subarachnoid haemorrhage (SAH)",
+   "subject": "neurology",
+   "population": "Adults",
+   "aliases": [
+    "SAH",
+    "aSAH",
+    "subarachnoid hemorrhage",
+    "thunderclap headache",
+    "worst headache of life",
+    "ruptured aneurysm",
+    "berry aneurysm",
+    "nimodipine",
+    "vasospasm",
+    "DCI",
+    "delayed cerebral ischaemia"
+   ],
+   "summary": "Thunderclap headache needs CT, with LP if CT beyond 6 hours is negative; secure the aneurysm within 24 hours, avoid severe hypertension, hypotension and BP swings before securing, give oral nimodipine 60 mg every 4 hours for 21 days, keep euvolaemia and watch for delayed cerebral ischaemia on days 4 to 14.",
+   "sources": [
+    "AHA/ASA 2023",
+    "AHA 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "anticoagulant-associated-bleeding",
+   "title": "Anticoagulant-associated bleeding: reversal",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "anticoagulant reversal",
+    "warfarin reversal",
+    "high INR bleeding",
+    "DOAC reversal",
+    "PCC",
+    "4F-PCC",
+    "idarucizumab",
+    "Praxbind",
+    "andexanet",
+    "protamine",
+    "apixaban bleeding",
+    "rivaroxaban bleeding",
+    "dabigatran bleeding",
+    "heparin reversal",
+    "acenocoumarol"
+   ],
+   "summary": "Classify the bleed; for major or critical-site bleeding stop the anticoagulant and reverse it: warfarin with vitamin K 5 to 10 mg IV plus 4-factor PCC dosed by INR, dabigatran with idarucizumab 5 g, factor Xa inhibitors with 4F-PCC (andexanet is largely unavailable), and heparins with protamine.",
+   "sources": [
+    "American College of Cardiology 2020",
+    "European Heart Rhythm Association 2021",
+    "Neurocritical Care Society / SCCM 2016",
+    "AABB 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "ascites-and-sbp",
+   "title": "Ascites, SBP and hepatorenal syndrome in cirrhosis",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "cirrhotic ascites",
+    "SBP",
+    "spontaneous bacterial peritonitis",
+    "SAAG",
+    "serum ascites albumin gradient",
+    "LVP",
+    "large-volume paracentesis",
+    "HRS",
+    "HRS-AKI",
+    "hepatorenal syndrome",
+    "refractory ascites",
+    "terlipressin albumin",
+    "diuretics cirrhosis"
+   ],
+   "summary": "Tap every new or admitted ascites (SAAG, PMN count, protein, culture); treat with 2 g sodium diet and spironolactone plus furosemide (100:40); give albumin 6 to 8 g per litre after paracentesis over 5 L; treat SBP (PMN above 250) with antibiotics plus albumin 1.5 g/kg day 1 and 1 g/kg day 3; treat HRS-AKI with terlipressin plus albumin.",
+   "sources": [
+    "AASLD 2021",
+    "British Society of Gastroenterology 2021",
+    "Gastroenterology and Hepatology (N Y) 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "atrial-fibrillation",
+   "title": "Atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "AF",
+    "AFib",
+    "atrial fibrillation",
+    "fast AF",
+    "AF with RVR",
+    "rapid ventricular rate",
+    "CHA2DS2-VA",
+    "CHA2DS2-VASc",
+    "DOAC",
+    "NOAC",
+    "cardioversion",
+    "rate control",
+    "AF-CARE"
+   ],
+   "summary": "Cardiovert immediately if unstable; otherwise control rate (initial target below 110/min) with a beta-blocker, diltiazem or verapamil (LVEF above 40%) or digoxin, delay cardioversion beyond 24 hours unless anticoagulated for 3 weeks or TOE-cleared, and anticoagulate with a DOAC when CHA2DS2-VA is 2 or more.",
+   "sources": [
+    "ESC / EACTS 2024",
+    "ACC / AHA / ACCP / HRS 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "blood-transfusion",
+   "title": "Blood transfusion: thresholds, components and acute reactions",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "transfusion",
+    "PRBC",
+    "packed red cells",
+    "platelet transfusion",
+    "FFP",
+    "fresh frozen plasma",
+    "cryoprecipitate",
+    "transfusion reaction",
+    "TACO",
+    "TRALI",
+    "FNHTR",
+    "haemolytic transfusion reaction",
+    "AABB 2023"
+   ],
+   "summary": "Use restrictive red cell thresholds (Hb below 7 g/dL for most stable inpatients, 7.5 for cardiac surgery, 8 for orthopaedic surgery or cardiovascular disease), single units with reassessment, evidence-based platelet, plasma and cryoprecipitate triggers, and stop the transfusion at once if an acute reaction is suspected.",
+   "sources": [
+    "AABB 2023",
+    "AABB / ICTMG 2025",
+    "NICE 2015",
+    "British Society for Haematology 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "burns-initial-management",
+   "title": "Burns: initial assessment and fluid resuscitation",
+   "subject": "surgery-trauma",
+   "population": "Adults and children",
+   "aliases": [
+    "burns",
+    "burn injury",
+    "thermal burn",
+    "scald",
+    "Parkland formula",
+    "modified Brooke",
+    "TBSA",
+    "rule of nines",
+    "Lund and Browder",
+    "inhalation injury",
+    "escharotomy",
+    "electrical burn",
+    "chemical burn"
+   ],
+   "summary": "Stop the burning and cool with running water, secure the airway early if inhalation injury is suspected, estimate TBSA (rule of nines, Lund and Browder in children), start formal fluid resuscitation at 2 to 4 mL/kg/%TBSA titrated hourly to urine output, and refer early to a burns unit.",
+   "sources": [
+    "American Burn Association 2024",
+    "American Burn Association 2022",
+    "WHO 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "catheter-related-bloodstream-infection",
+   "title": "Catheter-related bloodstream infection (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "CRBSI",
+    "CLABSI",
+    "central line infection",
+    "line sepsis",
+    "PICC infection",
+    "dialysis catheter infection",
+    "port infection",
+    "catheter bacteraemia"
+   ],
+   "summary": "Take paired catheter and peripheral blood cultures, start vancomycin plus gram-negative cover guided by severity and local resistance, remove the catheter for S. aureus, Pseudomonas, Candida or complicated infection, and set duration by organism and complications.",
+   "sources": [
+    "IDSA 2009",
+    "IDSA / ESCMID 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "cellulitis-skin-soft-tissue",
+   "title": "Cellulitis, erysipelas and skin abscess (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "cellulitis",
+    "erysipelas",
+    "SSTI",
+    "skin and soft tissue infection",
+    "skin abscess",
+    "boil",
+    "furuncle",
+    "carbuncle",
+    "MRSA skin infection",
+    "I&D"
+   ],
+   "summary": "Separate non-purulent cellulitis (streptococcal: beta-lactam, 5 days, extend only if not improving) from abscess (incision and drainage; MRSA-active antibiotic only with systemic signs or risk factors), and exclude necrotising infection early.",
+   "sources": [
+    "IDSA 2014",
+    "ICMR 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "chronic-heart-failure-hfref",
+   "title": "Chronic heart failure with reduced ejection fraction (HFrEF)",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "HFrEF",
+    "heart failure",
+    "CHF",
+    "LV systolic dysfunction",
+    "GDMT",
+    "foundational medical therapy",
+    "four pillars",
+    "ARNI",
+    "sacubitril valsartan",
+    "SGLT2 inhibitor",
+    "MRA",
+    "HFmrEF"
+   ],
+   "summary": "Start all four foundational drug classes early (ARNI or ACE inhibitor or ARB, beta-blocker, MRA, SGLT2 inhibitor), up-titrate every 1 to 2 weeks to target or highest tolerated doses with potassium and creatinine checks, use diuretics only for congestion, and add iron, devices or other agents where indicated.",
+   "sources": [
+    "ESC 2026",
+    "ESC 2021",
+    "AHA / ACC / HFSA 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "chronic-kidney-disease",
+   "title": "Chronic kidney disease: evaluation and management (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "CKD",
+    "chronic renal failure",
+    "CRF",
+    "KDIGO 2024",
+    "eGFR",
+    "albuminuria",
+    "ACR",
+    "diabetic kidney disease",
+    "SGLT2 inhibitor",
+    "finerenone",
+    "renal anaemia",
+    "CKD-MBD",
+    "KFRE"
+   ],
+   "summary": "Stage CKD by cause, GFR and albuminuria (KDIGO 2024), then slow progression with BP control, maximum tolerated ACE inhibitor or ARB, an SGLT2 inhibitor, finerenone in albuminuric type 2 diabetes and a statin, manage anaemia, acidosis and mineral bone disease, and refer on KDIGO criteria.",
+   "sources": [
+    "KDIGO 2024",
+    "KDIGO 2022",
+    "KDIGO 2026",
+    "KDIGO 2017"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "clostridioides-difficile-infection",
+   "title": "Clostridioides difficile infection (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "CDI",
+    "C. diff",
+    "C difficile",
+    "Clostridium difficile",
+    "CDAD",
+    "pseudomembranous colitis",
+    "antibiotic-associated diarrhoea",
+    "fidaxomicin",
+    "oral vancomycin"
+   ],
+   "summary": "Test only new unexplained diarrhoea (3 or more unformed stools in 24 hours), stop the inciting antibiotic, and treat with fidaxomicin 200 mg twice daily or oral vancomycin 125 mg four times daily for 10 days. Fulminant disease needs high-dose enteral vancomycin, IV metronidazole and early surgical review.",
+   "sources": [
+    "IDSA / SHEA 2021",
+    "IDSA / SHEA 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "status-epilepticus",
+   "title": "Convulsive status epilepticus",
+   "subject": "neurology",
+   "population": "Adults and children",
+   "aliases": [
+    "SE",
+    "CSE",
+    "status",
+    "prolonged seizure",
+    "continuous seizures",
+    "refractory status epilepticus",
+    "RSE",
+    "ESETT",
+    "fits not stopping",
+    "seizure cluster"
+   ],
+   "summary": "Seizure of 5 minutes or more: benzodiazepine within 5 to 20 minutes (IV lorazepam, IM or buccal midazolam), repeat once, then one second-line IV drug by 20 to 40 minutes (levetiracetam 60 mg/kg, fosphenytoin 20 mg PE/kg or valproate 40 mg/kg), then anaesthetic infusion with EEG for refractory status.",
+   "sources": [
+    "American Epilepsy Society 2016",
+    "NEJM (ESETT investigators) 2019",
+    "NICE 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "deep-vein-thrombosis",
+   "title": "Deep vein thrombosis of the leg: diagnosis and treatment",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "DVT",
+    "deep vein thrombosis",
+    "VTE",
+    "leg DVT",
+    "Wells DVT score",
+    "compression ultrasound",
+    "DOAC",
+    "anticoagulation duration",
+    "provoked DVT",
+    "unprovoked DVT",
+    "phlegmasia"
+   ],
+   "summary": "Use the Wells score to choose D-dimer or compression ultrasound, treat confirmed proximal DVT at home when appropriate with a DOAC (preferred over warfarin) for at least 3 months, stop after 3 to 6 months if provoked by a transient factor, and consider indefinite treatment if unprovoked or with persistent risk.",
+   "sources": [
+    "ASH 2020",
+    "ASH 2018",
+    "ESC / ERS 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "diabetic-ketoacidosis",
+   "title": "Diabetic ketoacidosis (adult)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "aliases": [
+    "DKA",
+    "ketoacidosis",
+    "euglycaemic DKA",
+    "euDKA",
+    "SGLT2 inhibitor ketoacidosis",
+    "FRIII",
+    "fixed rate insulin infusion",
+    "hyperglycaemic crisis"
+   ],
+   "summary": "Confirm DKA by glucose or known diabetes, ketones and acidosis; give crystalloid, check potassium before insulin, start fixed-rate IV insulin 0.1 units/kg/h, add dextrose when glucose falls below 250 mg/dL (13.9 mmol/L) and continue insulin until ketoacidosis resolves.",
+   "sources": [
+    "ADA / EASD / JBDS / AACE / DTS 2024",
+    "JBDS-IP 2023",
+    "ADA 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "dyslipidaemia-management",
+   "title": "Dyslipidaemia: risk categories, LDL-C goals and lipid-lowering therapy",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "dyslipidaemia",
+    "dyslipidemia",
+    "hyperlipidaemia",
+    "hypercholesterolaemia",
+    "high cholesterol",
+    "LDL",
+    "LDL-C target",
+    "statin",
+    "ezetimibe",
+    "PCSK9 inhibitor",
+    "inclisiran",
+    "bempedoic acid",
+    "familial hypercholesterolaemia",
+    "FH",
+    "Lp(a)",
+    "hypertriglyceridaemia"
+   ],
+   "summary": "Classify cardiovascular risk, set a risk-based LDL-C goal (below 55 mg/dL (1.4 mmol/L) with at least 50% reduction for very high risk), start a statin at the right intensity, then add ezetimibe and a PCSK9 inhibitor or inclisiran if not at goal; measure Lp(a) once and check lipids 4 to 12 weeks after each change.",
+   "sources": [
+    "ESC / EAS 2025",
+    "ESC / EAS 2019",
+    "ACC / AHA and multisociety 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "febrile-neutropenia",
+   "title": "Febrile neutropenia (adult)",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "FN",
+    "neutropenic fever",
+    "neutropenic sepsis",
+    "fever and neutropenia",
+    "MASCC",
+    "chemotherapy fever"
+   ],
+   "summary": "Fever (single oral 38.3°C, or 38.0°C for 1 hour) with ANC below 500 cells/mm3 is an emergency: cultures and an IV anti-pseudomonal beta-lactam within 1 hour, MASCC risk scoring (21 or more is low risk), vancomycin or antifungals only for specific indications, and oral outpatient therapy only for selected low-risk patients.",
+   "sources": [
+    "IDSA 2011",
+    "ASCO / IDSA 2018",
+    "ICMR 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "heparin-induced-thrombocytopenia",
+   "title": "Heparin-induced thrombocytopenia (HIT)",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "HIT",
+    "HITT",
+    "HIT type 2",
+    "4Ts score",
+    "PF4 antibody",
+    "anti-PF4 heparin",
+    "heparin allergy",
+    "argatroban",
+    "bivalirudin",
+    "fondaparinux HIT"
+   ],
+   "summary": "Calculate the 4Ts score; if intermediate or high, stop all heparin and start a non-heparin anticoagulant (argatroban, bivalirudin, fondaparinux or a DOAC) while testing for PF4/heparin antibodies. Avoid warfarin until platelets recover and avoid routine platelet transfusion.",
+   "sources": [
+    "American Society of Hematology 2018",
+    "American Society of Hematology 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hepatic-encephalopathy",
+   "title": "Hepatic encephalopathy in cirrhosis",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "HE",
+    "OHE",
+    "overt hepatic encephalopathy",
+    "portosystemic encephalopathy",
+    "hepatic coma",
+    "West Haven",
+    "lactulose",
+    "rifaximin",
+    "covert HE",
+    "minimal HE"
+   ],
+   "summary": "Grade with West Haven, protect the airway in grade 3 to 4, search for and treat precipitants (infection, bleeding, constipation, electrolytes, sedatives), give lactulose to 2 to 3 soft stools a day with early rifaximin, and continue secondary prophylaxis after the first episode.",
+   "sources": [
+    "American College of Gastroenterology 2026",
+    "Journal of Hospital Medicine 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hiv-post-exposure-prophylaxis",
+   "title": "HIV post-exposure prophylaxis and hepatitis B exposure (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "PEP",
+    "HIV PEP",
+    "nPEP",
+    "needle-stick injury",
+    "NSI",
+    "sharps injury",
+    "occupational exposure",
+    "TLD",
+    "sexual assault PEP",
+    "hepatitis B exposure",
+    "HBIG"
+   ],
+   "summary": "After a significant exposure, give first aid and start TLD (tenofovir DF, lamivudine, dolutegravir) one tablet daily for 28 days as soon as possible and no later than 72 hours; test at baseline and follow-up, and manage hepatitis B by vaccination and anti-HBs status.",
+   "sources": [
+    "WHO 2024",
+    "CDC 2025",
+    "CDC / ACIP 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypercalcaemia",
+   "title": "Hypercalcaemia (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "hypercalcemia",
+    "high calcium",
+    "hypercalcaemia of malignancy",
+    "HCM",
+    "zoledronic acid",
+    "denosumab",
+    "calcitonin",
+    "PTHrP",
+    "primary hyperparathyroidism",
+    "vitamin D toxicity"
+   ],
+   "summary": "Rehydrate with IV 0.9% saline, stop calcium-raising drugs, give zoledronic acid or denosumab for hypercalcaemia of malignancy (adding calcitonin when severe), and use PTH to separate PTH-mediated from PTH-independent causes.",
+   "sources": [
+    "Endocrine Society 2023",
+    "Society for Endocrinology 2016"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hyperkalaemia",
+   "title": "Hyperkalaemia: acute management (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "hyperkalemia",
+    "high potassium",
+    "raised K",
+    "calcium gluconate",
+    "insulin dextrose",
+    "insulin glucose",
+    "SZC",
+    "sodium zirconium cyclosilicate",
+    "Lokelma",
+    "patiromer",
+    "UKKA hyperkalaemia"
+   ],
+   "summary": "Protect the heart with IV calcium when the ECG shows changes, shift potassium into cells with insulin-glucose and nebulised salbutamol, remove potassium with binders or dialysis, and monitor glucose closely to prevent hypoglycaemia (UKKA 2023).",
+   "sources": [
+    "UK Kidney Association 2023",
+    "UK Kidney Association 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypernatraemia",
+   "title": "Hypernatraemia (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "hypernatremia",
+    "high sodium",
+    "free water deficit",
+    "water deficit",
+    "dehydration",
+    "diabetes insipidus",
+    "Adrogue-Madias formula"
+   ],
+   "summary": "Restore circulation first if shocked, then replace the free water deficit with enteral water or hypotonic IV fluid, lowering sodium by about 10 mmol/L per day in chronic cases and faster in acute salt loading, while treating the cause and ongoing losses.",
+   "sources": [
+    "N Engl J Med (Adrogue and Madias) 2000",
+    "JAMA Network Open (Feigin et al) 2023",
+    "Cureus (systematic review) 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hyperosmolar-hyperglycaemic-state",
+   "title": "Hyperosmolar hyperglycaemic state (adult)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "aliases": [
+    "HHS",
+    "HONK",
+    "HHNS",
+    "hyperosmolar non-ketotic coma",
+    "hyperglycaemic hyperosmolar state",
+    "mixed DKA HHS",
+    "hyperglycaemic crisis"
+   ],
+   "summary": "Restore volume with 0.9% saline first, lower osmolality slowly (3 to 8 mOsm/kg/h), start low-dose insulin 0.05 units/kg/h only once glucose stops falling with fluids (earlier if ketonaemic), and give LMWH and foot protection.",
+   "sources": [
+    "ADA / EASD / JBDS / AACE / DTS 2024",
+    "JBDS-IP 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypertension-management",
+   "title": "Hypertension: diagnosis and outpatient management",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "hypertension",
+    "HTN",
+    "high blood pressure",
+    "BP",
+    "essential hypertension",
+    "elevated blood pressure",
+    "resistant hypertension",
+    "single pill combination",
+    "SPC",
+    "IHCI",
+    "antihypertensive"
+   ],
+   "summary": "Confirm raised office BP with home or ambulatory readings, assess cardiovascular risk and organ damage, start lifestyle measures, begin most patients with confirmed hypertension on a two-drug single-pill combination (RAS blocker with a calcium channel blocker or thiazide-like diuretic), and aim for SBP 120 to 129 mmHg if tolerated.",
+   "sources": [
+    "ESC 2024",
+    "AHA / ACC 2025",
+    "ICMR / MoHFW (IHCI) 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypertensive-emergency",
+   "title": "Hypertensive emergency and severe asymptomatic hypertension",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "hypertensive crisis",
+    "hypertensive urgency",
+    "malignant hypertension",
+    "accelerated hypertension",
+    "hypertensive encephalopathy",
+    "severe hypertension",
+    "IV labetalol",
+    "nicardipine",
+    "nitroprusside"
+   ],
+   "summary": "Hypertensive emergency is severe hypertension with acute organ damage: admit, use titratable IV drugs and lower BP to condition-specific targets (usually MAP down 20 to 25% over hours; immediately in aortic dissection, pulmonary oedema and ACS). Severe hypertension without organ damage is treated orally and gradually.",
+   "sources": [
+    "ESC 2024",
+    "AHA / ACC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypocalcaemia",
+   "title": "Hypocalcaemia (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "hypocalcemia",
+    "low calcium",
+    "tetany",
+    "post-thyroidectomy hypocalcaemia",
+    "hungry bone syndrome",
+    "calcium gluconate infusion",
+    "hypoparathyroidism",
+    "alfacalcidol"
+   ],
+   "summary": "Treat severe or symptomatic hypocalcaemia with 10 to 20 mL of 10% calcium gluconate IV over 10 minutes then a calcium gluconate infusion, correct magnesium, and treat the cause with oral calcium, active vitamin D or vitamin D repletion.",
+   "sources": [
+    "Society for Endocrinology 2016",
+    "Society for Endocrinology 2019",
+    "Kent and Medway NHS (formulary) 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypoglycaemia",
+   "title": "Hypoglycaemia in diabetes (adult)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "aliases": [
+    "hypo",
+    "low blood sugar",
+    "low glucose",
+    "insulin reaction",
+    "sulfonylurea hypoglycaemia",
+    "sulphonylurea overdose",
+    "glucagon",
+    "D25",
+    "neuroglycopenia"
+   ],
+   "summary": "Treat any glucose below 70 mg/dL (3.9 mmol/L): 15 to 20 g fast-acting glucose by mouth if alert, otherwise IV 10% or 20% glucose (or IM glucagon), recheck in 10 to 15 minutes, follow with longer-acting carbohydrate, and watch for recurrence with sulfonylureas.",
+   "sources": [
+    "ADA 2026",
+    "JBDS-IP 2023",
+    "Journal of Medical Toxicology 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypokalaemia",
+   "title": "Hypokalaemia (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "hypokalemia",
+    "low potassium",
+    "low K",
+    "KCl",
+    "potassium chloride infusion",
+    "hypokalaemic paralysis",
+    "periodic paralysis",
+    "potassium replacement"
+   ],
+   "summary": "Grade severity, check magnesium, replace orally when possible and give IV potassium chloride for severe, symptomatic or ECG-affected cases at no more than 10 mmol/h and 40 mmol/L peripherally, while treating the cause.",
+   "sources": [
+    "NHS Specialist Pharmacy Service 2024",
+    "Royal Cornwall Hospitals NHS Trust 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hypomagnesaemia",
+   "title": "Hypomagnesaemia (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "hypomagnesemia",
+    "low magnesium",
+    "low Mg",
+    "magnesium sulphate",
+    "MgSO4",
+    "torsades de pointes",
+    "PPI hypomagnesaemia",
+    "refractory hypokalaemia"
+   ],
+   "summary": "Give IV magnesium sulphate 1 to 2 g for arrhythmia, torsades or seizures followed by 4 to 8 g over 12 to 24 hours, use oral magnesium for mild deficiency, correct linked hypokalaemia and hypocalcaemia, and stop culprit drugs such as PPIs and diuretics.",
+   "sources": [
+    "Biomedicines (review) 2025",
+    "Biomedicines (review) 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hyponatraemia",
+   "title": "Hyponatraemia (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "hyponatremia",
+    "low sodium",
+    "SIADH",
+    "SIAD",
+    "3% saline",
+    "hypertonic saline",
+    "ODS",
+    "osmotic demyelination",
+    "overcorrection",
+    "tolvaptan"
+   ],
+   "summary": "Treat severe symptoms with 150 mL 3% saline boluses aiming for a 5 mmol/L rise, classify by osmolality and volume status, then correct by no more than 10 mmol/L in 24 hours (8 mmol/L in high ODS risk) and re-lower promptly if overcorrected.",
+   "sources": [
+    "ESE / ESICM / ERA (ERBP) 2014",
+    "US Expert Panel (Am J Med) 2013"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "immune-thrombocytopenia",
+   "title": "Immune thrombocytopenia (ITP) in adults",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "ITP",
+    "idiopathic thrombocytopenic purpura",
+    "immune thrombocytopenic purpura",
+    "autoimmune thrombocytopenia",
+    "low platelets",
+    "IVIg",
+    "dexamethasone pulse",
+    "eltrombopag",
+    "romiplostim",
+    "TPO-RA"
+   ],
+   "summary": "ITP is a diagnosis of exclusion. Treat newly diagnosed adults with platelets below 30 x 10^9/L or bleeding using prednisolone 0.5 to 2 mg/kg/day (6 weeks or less in total) or dexamethasone 40 mg daily for 4 days, add IVIg 1 g/kg for bleeding or when a rapid rise is needed, and escalate urgently for life-threatening bleeding.",
+   "sources": [
+    "American Society of Hematology 2019",
+    "American Society of Hematology 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "infective-endocarditis",
+   "title": "Infective endocarditis: diagnosis, empirical therapy and surgery",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "IE",
+    "infective endocarditis",
+    "bacterial endocarditis",
+    "SBE",
+    "Duke criteria",
+    "modified Duke",
+    "Duke-ISCVID",
+    "prosthetic valve endocarditis",
+    "PVE",
+    "vegetation",
+    "endocarditis prophylaxis"
+   ],
+   "summary": "Take 3 sets of blood cultures before antibiotics, image with TTE then TOE, apply the 2023 ESC modified Duke criteria, start empirical IV antibiotics by setting (native or late prosthetic versus early prosthetic or healthcare-associated), and involve an Endocarditis Team early for surgery indications: heart failure, uncontrolled infection and embolic risk.",
+   "sources": [
+    "ESC 2023",
+    "ESC 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "inpatient-hyperglycaemia",
+   "title": "Inpatient hyperglycaemia and perioperative glucose management",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "aliases": [
+    "inpatient diabetes",
+    "hospital hyperglycaemia",
+    "basal bolus",
+    "basal plus",
+    "sliding scale",
+    "correction insulin",
+    "steroid-induced hyperglycaemia",
+    "perioperative diabetes",
+    "stress hyperglycaemia",
+    "VRIII"
+   ],
+   "summary": "Treat persistent glucose of 180 mg/dL (10 mmol/L) or more with scheduled insulin (basal plus prandial plus correction if eating, basal plus correction if not), aiming for 100 to 180 mg/dL on wards and 140 to 180 mg/dL in ICU, avoid sliding scale alone, and match insulin to steroids and surgery.",
+   "sources": [
+    "ADA 2026",
+    "Endocrine Society 2022",
+    "JBDS-IP 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "iron-deficiency-anaemia",
+   "title": "Iron deficiency anaemia (adult)",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "IDA",
+    "iron deficiency",
+    "microcytic anaemia",
+    "low ferritin",
+    "oral iron",
+    "IV iron",
+    "ferric carboxymaltose",
+    "FCM",
+    "iron sucrose",
+    "Anaemia Mukt Bharat",
+    "AMB"
+   ],
+   "summary": "Confirm iron deficiency with ferritin (below 15 micrograms/L diagnostic, below 45 suggestive, higher with inflammation), start once-daily or alternate-day oral iron, switch to IV iron if oral fails or is unsuitable, and always find the cause, including bidirectional endoscopy in men and postmenopausal women.",
+   "sources": [
+    "British Society of Gastroenterology 2021",
+    "American Gastroenterological Association 2024",
+    "American Gastroenterological Association 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "local-anaesthetic-systemic-toxicity",
+   "title": "Local anaesthetic systemic toxicity (LAST)",
+   "subject": "anaesthesia",
+   "population": "Adults",
+   "aliases": [
+    "LAST",
+    "local anesthetic toxicity",
+    "LA toxicity",
+    "lignocaine toxicity",
+    "lidocaine toxicity",
+    "bupivacaine toxicity",
+    "lipid emulsion",
+    "Intralipid",
+    "lipid rescue",
+    "maximum dose local anaesthetic"
+   ],
+   "summary": "Stop the injection, call for help, secure the airway with 100% oxygen, treat seizures with a benzodiazepine, give 20% lipid emulsion early (1.5 mL/kg bolus then 0.25 mL/kg/min under 70 kg), and run modified resuscitation with small adrenaline doses and no vasopressin or lidocaine.",
+   "sources": [
+    "ASRA Pain Medicine 2020",
+    "ASRA Pain Medicine 2020",
+    "Local and Regional Anesthesia (El-Boghdadly, Pawa, Chin) 2018",
+    "Association of Anaesthetists 2010"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "major-haemorrhage-trauma",
+   "title": "Major haemorrhage in trauma (massive transfusion)",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "MTP",
+    "massive transfusion protocol",
+    "MHP",
+    "major haemorrhage protocol",
+    "haemorrhagic shock",
+    "damage control resuscitation",
+    "trauma-induced coagulopathy",
+    "TXA",
+    "1:1:1",
+    "ROTEM",
+    "TEG",
+    "cryoprecipitate"
+   ],
+   "summary": "Damage control resuscitation: stop the bleeding fast, activate the major haemorrhage protocol, replace crystalloid with blood products in a high plasma ratio, give tranexamic acid within 3 hours, accept permissive hypotension, and correct fibrinogen, platelets, calcium and temperature guided by lab or viscoelastic tests.",
+   "sources": [
+    "European Task Force for Advanced Bleeding Care in Trauma 2023",
+    "NICE 2016"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "malignant-hyperthermia",
+   "title": "Malignant hyperthermia crisis",
+   "subject": "anaesthesia",
+   "population": "Adults and children",
+   "aliases": [
+    "MH",
+    "MH crisis",
+    "malignant hyperpyrexia",
+    "dantrolene",
+    "hypermetabolic crisis",
+    "masseter spasm",
+    "volatile anaesthetic reaction",
+    "suxamethonium reaction",
+    "RYR1"
+   ],
+   "summary": "Suspect MH with unexplained rising end-tidal CO2, tachycardia and rigidity after a volatile agent or suxamethonium. Stop triggers, hyperventilate with 100% O2, give dantrolene 2 to 2.5 mg/kg IV every 10 minutes until controlled, cool, treat hyperkalaemia and acidosis, and monitor in critical care for at least 24 hours.",
+   "sources": [
+    "European Malignant Hyperthermia Group 2024",
+    "MHAUS 2026",
+    "MHAUS 2026",
+    "European Malignant Hyperthermia Group 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "malignant-spinal-cord-compression",
+   "title": "Metastatic spinal cord compression (MSCC)",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "MSCC",
+    "malignant spinal cord compression",
+    "malignant cord compression",
+    "spinal metastases",
+    "cord compression",
+    "cancer back pain",
+    "oncological emergency",
+    "NICE NG234"
+   ],
+   "summary": "In a person with cancer, back pain with neurological symptoms is an emergency: give dexamethasone 16 mg at once, immobilise if instability is suspected, get whole-spine MRI within 24 hours, and arrange surgery or radiotherapy (within 24 hours) through the oncology or MSCC team.",
+   "sources": [
+    "NICE 2023",
+    "NICE 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "myxoedema-coma",
+   "title": "Myxoedema coma",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "aliases": [
+    "myxedema coma",
+    "myxoedema crisis",
+    "decompensated hypothyroidism",
+    "severe hypothyroidism",
+    "hypothyroid coma",
+    "IV levothyroxine",
+    "liothyronine"
+   ],
+   "summary": "Suspect in a hypothermic, drowsy patient with hypothyroidism and a precipitant; give stress-dose hydrocortisone and IV levothyroxine 200 to 400 mcg loading (100 to 200 mcg if older or cardiac), then 1.6 mcg/kg/day (75% if IV), with ICU supportive care and passive rewarming.",
+   "sources": [
+    "ETA / BTA / Society for Endocrinology 2026",
+    "American Thyroid Association 2014"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "nste-acs",
+   "title": "Non-ST-elevation acute coronary syndrome (NSTEMI and unstable angina)",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "NSTEMI",
+    "NSTE-ACS",
+    "non-STEMI",
+    "unstable angina",
+    "UA",
+    "ACS",
+    "GRACE score",
+    "hs-troponin",
+    "0h/1h algorithm",
+    "early invasive strategy"
+   ],
+   "summary": "Confirm with serial high-sensitivity troponin, stratify risk, give aspirin and a parenteral anticoagulant, time angiography to risk (within 2 hours if very high risk, within 24 hours if high risk, otherwise selective), and use DAPT for 12 months by default.",
+   "sources": [
+    "ESC 2023",
+    "ACC / AHA / ACEP / NAEMSP / SCAI 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "postpartum-haemorrhage",
+   "title": "Postpartum haemorrhage (PPH): first response and escalation",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "aliases": [
+    "PPH",
+    "E-MOTIVE",
+    "MOTIVE bundle",
+    "atonic PPH",
+    "uterine atony",
+    "obstetric haemorrhage",
+    "4 Ts",
+    "tranexamic acid PPH",
+    "carboprost",
+    "calibrated drape",
+    "massive obstetric haemorrhage"
+   ],
+   "summary": "Measure blood loss objectively and act at 300 mL with an abnormal vital sign or at 500 mL. Start the whole first-response bundle within 15 minutes: uterine massage, IV oxytocin, tranexamic acid 1 g within 3 hours of birth, IV crystalloid, genital tract examination and escalation.",
+   "sources": [
+    "WHO / FIGO / ICM 2025",
+    "WHO 2023",
+    "E-MOTIVE Trial Collaborators (NEJM) 2023",
+    "FIGO 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "pre-eclampsia-eclampsia",
+   "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "aliases": [
+    "pre-eclampsia",
+    "preeclampsia",
+    "PIH",
+    "PET",
+    "eclampsia",
+    "HELLP",
+    "severe pre-eclampsia",
+    "gestational hypertension",
+    "HDP",
+    "hypertensive disorders of pregnancy",
+    "MgSO4",
+    "magnesium sulphate",
+    "Pritchard regimen",
+    "Zuspan regimen"
+   ],
+   "summary": "Treat BP of 160/110 mmHg or more within 30 to 60 minutes (IV labetalol, oral nifedipine or IV hydralazine), give magnesium sulphate for severe features or eclampsia (Pritchard or Zuspan), and plan birth: 37 weeks without severe features, 34 weeks with severe features, after stabilisation for eclampsia.",
+   "sources": [
+    "ACOG 2020",
+    "NICE 2019",
+    "WHO 2011",
+    "FOGSI / Gestosis / ICOG 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "preterm-labour",
+   "title": "Preterm labour and PPROM: corticosteroids, tocolysis and neuroprotection",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "aliases": [
+    "preterm labor",
+    "threatened preterm labour",
+    "PTL",
+    "PPROM",
+    "preterm prelabour rupture of membranes",
+    "antenatal corticosteroids",
+    "ACS",
+    "antenatal steroids",
+    "dexamethasone",
+    "tocolysis",
+    "nifedipine tocolysis",
+    "magnesium sulphate neuroprotection",
+    "GBS prophylaxis",
+    "group B streptococcus"
+   ],
+   "summary": "If birth is likely within 7 days at 24 to 34 weeks and dating is reliable, give dexamethasone 6 mg IM 12-hourly x4. Use nifedipine tocolysis (24 to 33+6 weeks) only to complete steroids or allow transfer, magnesium sulphate before 32 weeks, erythromycin for PPROM and intrapartum GBS prophylaxis.",
+   "sources": [
+    "WHO 2022",
+    "WHO 2022",
+    "WHO 2015",
+    "ACOG 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "rapid-sequence-intubation",
+   "title": "Rapid sequence induction and failed intubation (adult)",
+   "subject": "anaesthesia",
+   "population": "Adults",
+   "aliases": [
+    "RSI",
+    "rapid sequence intubation",
+    "emergency intubation",
+    "failed intubation",
+    "difficult airway",
+    "CICO",
+    "cannot intubate cannot oxygenate",
+    "eFONA",
+    "front of neck access",
+    "DAS 2025",
+    "Plan A B C D"
+   ],
+   "summary": "Plan and brief before induction, preoxygenate head-up to an end-tidal O2 of 0.9, give an induction agent and a full dose of rocuronium or suxamethonium without delay, intubate with a videolaryngoscope, confirm with waveform capnography, and move promptly through DAS Plans A to D if intubation fails.",
+   "sources": [
+    "Difficult Airway Society 2025",
+    "DAS / ICS / FICM / RCoA 2018",
+    "All India Difficult Airway Association 2025",
+    "SCCM 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "rhabdomyolysis",
+   "title": "Rhabdomyolysis (adult)",
+   "subject": "nephrology",
+   "population": "Adults",
+   "aliases": [
+    "rhabdo",
+    "raised CK",
+    "creatine kinase",
+    "myoglobinuria",
+    "crush injury",
+    "crush syndrome",
+    "pigment nephropathy",
+    "exertional rhabdomyolysis",
+    "McMahon score"
+   ],
+   "summary": "Confirm with CK above 5 times normal, start early isotonic crystalloid titrated to urine output 1 to 3 mL/kg/h (up to 300 mL/h), treat hyperkalaemia, look for compartment syndrome, and avoid routine bicarbonate, mannitol and diuretics.",
+   "sources": [
+    "American Association for the Surgery of Trauma 2022",
+    "KDIGO 2026"
+   ],
+   "status": "ai_drafted"
+  },
   {
    "id": "sepsis-septic-shock",
    "title": "Sepsis and septic shock: initial management",
@@ -27,6 +1634,370 @@
    "sources": [
     "SCCM / ESICM 2021",
     "SCCM 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "alcohol-associated-hepatitis",
+   "title": "Severe alcohol-associated hepatitis",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "AH",
+    "alcoholic hepatitis",
+    "severe alcoholic hepatitis",
+    "ASH",
+    "Maddrey discriminant function",
+    "MDF",
+    "Maddrey 32",
+    "MELD",
+    "Lille score",
+    "prednisolone alcoholic hepatitis",
+    "alcohol-related liver disease",
+    "ALD"
+   ],
+   "summary": "Diagnose clinically (NIAAA criteria), grade with MELD (above 20 severe) or Maddrey (32 or more), screen for infection, then give prednisolone 40 mg daily for 28 days (plus IV N-acetylcysteine for 5 days) if no contraindication; stop steroids if Lille score at day 7 is above 0.45. Nutrition and abstinence drive survival.",
+   "sources": [
+    "American College of Gastroenterology 2024",
+    "AASLD 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "sickle-cell-vaso-occlusive-crisis",
+   "title": "Sickle cell disease: vaso-occlusive crisis (adult)",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "VOC",
+    "sickle cell crisis",
+    "painful crisis",
+    "SCD pain",
+    "sickle cell anaemia",
+    "HbSS",
+    "acute chest syndrome",
+    "ACS sickle",
+    "hydroxyurea",
+    "NSCAEM"
+   ],
+   "summary": "Assess and give analgesia within 60 minutes of arrival, tailor opioids to the patient's previous needs and reassess every 30 to 60 minutes, give oxygen only if hypoxic, avoid overhydration, watch closely for acute chest syndrome, and start or optimise hydroxyurea.",
+   "sources": [
+    "American Society of Hematology 2020",
+    "MoHFW / NHM, Government of India 2023",
+    "NHM, Government of India 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "intracerebral-haemorrhage",
+   "title": "Spontaneous intracerebral haemorrhage (ICH)",
+   "subject": "neurology",
+   "population": "Adults",
+   "aliases": [
+    "ICH",
+    "haemorrhagic stroke",
+    "hemorrhagic stroke",
+    "intracerebral hemorrhage",
+    "brain haemorrhage",
+    "hypertensive bleed",
+    "anticoagulant reversal",
+    "PCC",
+    "warfarin bleed",
+    "DOAC bleed"
+   ],
+   "summary": "Rapid CT diagnosis, early smooth systolic BP lowering to 140 mmHg (keep 130 to 150, avoid below 130), immediate anticoagulant reversal with PCC plus vitamin K or specific agents, and early neurosurgical referral for cerebellar haematoma, hydrocephalus or deterioration.",
+   "sources": [
+    "AHA/ASA 2022",
+    "NICE 2019",
+    "NCS / SCCM 2016",
+    "Healio 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "stemi",
+   "title": "ST-elevation myocardial infarction (STEMI): reperfusion",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "STEMI",
+    "acute MI",
+    "AMI",
+    "heart attack",
+    "primary PCI",
+    "PPCI",
+    "thrombolysis",
+    "fibrinolysis",
+    "pharmacoinvasive",
+    "tenecteplase",
+    "streptokinase",
+    "rescue PCI",
+    "STEMI equivalent"
+   ],
+   "summary": "Read the ECG within 10 minutes; primary PCI if it can be done within 120 minutes of diagnosis, otherwise fibrinolysis within 10 minutes and transfer for angiography at 2 to 24 hours (pharmacoinvasive), with aspirin, a P2Y12 inhibitor and a parenteral anticoagulant.",
+   "sources": [
+    "ESC 2023",
+    "ACC / AHA / ACEP / NAEMSP / SCAI 2025",
+    "STEMI INDIA / CSI / API 2015"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "syncope-evaluation",
+   "title": "Syncope: initial evaluation and risk stratification",
+   "subject": "cardiology",
+   "population": "Adults",
+   "aliases": [
+    "syncope",
+    "fainting",
+    "blackout",
+    "transient loss of consciousness",
+    "TLOC",
+    "vasovagal",
+    "reflex syncope",
+    "orthostatic hypotension",
+    "cardiac syncope",
+    "collapse"
+   ],
+   "summary": "Confirm true syncope, then do a history, examination with lying and standing BP, and ECG; identify high-risk features suggesting cardiac syncope needing admission or urgent evaluation, and discharge low-risk reflex or orthostatic syncope with education and follow-up.",
+   "sources": [
+    "ESC 2018",
+    "ACC / AHA / HRS 2017"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "thrombotic-thrombocytopenic-purpura",
+   "title": "Thrombotic thrombocytopenic purpura (TTP)",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "TTP",
+    "iTTP",
+    "immune TTP",
+    "acquired TTP",
+    "congenital TTP",
+    "ADAMTS13",
+    "PLASMIC score",
+    "plasma exchange",
+    "TPE",
+    "PEX",
+    "caplacizumab",
+    "thrombotic microangiopathy",
+    "TMA",
+    "MAHA"
+   ],
+   "summary": "Suspect TTP in microangiopathic haemolytic anaemia with severe thrombocytopenia; send ADAMTS13 before treatment, use the PLASMIC score, start urgent plasma exchange with corticosteroids, add rituximab and caplacizumab where available, and avoid platelet transfusion unless bleeding is life-threatening.",
+   "sources": [
+    "ISTH 2025",
+    "ISTH 2020",
+    "ISTH 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "thyroid-storm",
+   "title": "Thyroid storm",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "aliases": [
+    "thyrotoxic crisis",
+    "thyroid crisis",
+    "Burch-Wartofsky",
+    "BWPS",
+    "severe thyrotoxicosis",
+    "Graves crisis",
+    "Lugol iodine",
+    "PTU"
+   ],
+   "summary": "Clinical diagnosis aided by the Burch-Wartofsky score (45 or more) or JTA/JES criteria; treat in HDU or ICU with beta-blockade, high-dose thionamide, iodine at least 1 hour after the thionamide, hydrocortisone, cooling and treatment of the precipitant.",
+   "sources": [
+    "ETA / BTA / Society for Endocrinology 2026",
+    "Japan Thyroid Association / Japan Endocrine Society 2016"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "transient-ischaemic-attack",
+   "title": "Transient ischaemic attack (TIA)",
+   "subject": "neurology",
+   "population": "Adults",
+   "aliases": [
+    "TIA",
+    "mini stroke",
+    "ministroke",
+    "amaurosis fugax",
+    "ABCD2",
+    "high-risk TIA",
+    "minor stroke",
+    "DAPT",
+    "CHANCE",
+    "POINT",
+    "transient ischemic attack"
+   ],
+   "summary": "Treat every suspected TIA as a stroke warning: aspirin immediately, same-day brain and vessel imaging and ECG, and aspirin plus clopidogrel for 21 days for high-risk TIA (ABCD2 4 or more) or minor stroke, started within 24 hours.",
+   "sources": [
+    "AHA/ASA 2021",
+    "AHA 2023",
+    "NICE 2019",
+    "AHA/ASA 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "trauma-primary-survey",
+   "title": "Trauma primary survey (xABCDE)",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "ATLS",
+    "ATLS 11",
+    "xABCDE",
+    "cABCDE",
+    "primary survey",
+    "secondary survey",
+    "major trauma",
+    "polytrauma",
+    "trauma call",
+    "eFAST",
+    "tension pneumothorax"
+   ],
+   "summary": "Team-based xABCDE primary survey (ATLS 11th edition): control exsanguinating external bleeding first, then airway with spinal protection, breathing, circulation with blood-based resuscitation and haemorrhage control, disability and exposure, treating each life threat as it is found before the secondary survey.",
+   "sources": [
+    "American College of Surgeons 2025",
+    "NICE 2016",
+    "European Task Force for Advanced Bleeding Care in Trauma 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "traumatic-brain-injury",
+   "title": "Traumatic brain injury (adult): acute management",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "TBI",
+    "head injury",
+    "head trauma",
+    "raised ICP",
+    "intracranial pressure",
+    "Canadian CT Head Rule",
+    "CT head criteria",
+    "CRASH-3",
+    "mannitol",
+    "hypertonic saline",
+    "extradural haematoma",
+    "subdural haematoma"
+   ],
+   "summary": "Classify by GCS, scan with CT using NICE 2023 criteria (derived from the Canadian CT Head Rule), prevent secondary brain injury by avoiding hypoxia and hypotension, give tranexamic acid within 3 hours for mild to moderate TBI, and treat raised ICP in tiers with early neurosurgical input.",
+   "sources": [
+    "Brain Trauma Foundation 2017",
+    "NICE 2023",
+    "CRASH-3 trial collaborators (Lancet) 2019",
+    "European Task Force for Advanced Bleeding Care in Trauma 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "tumour-lysis-syndrome",
+   "title": "Tumour lysis syndrome (adult)",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "TLS",
+    "tumor lysis syndrome",
+    "Cairo-Bishop",
+    "rasburicase",
+    "hyperuricaemia",
+    "laboratory TLS",
+    "clinical TLS",
+    "oncological emergency"
+   ],
+   "summary": "Risk-stratify every patient before anti-cancer therapy; hydrate and give allopurinol for low or intermediate risk, rasburicase for high risk or established TLS (after excluding G6PD deficiency), monitor electrolytes closely and involve renal and ICU teams early for dialysis.",
+   "sources": [
+    "British Society for Haematology 2025",
+    "British Committee for Standards in Haematology 2015",
+    "Oxford University Hospitals NHS Foundation Trust 2026",
+    "NHS England 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "type-2-diabetes-management",
+   "title": "Type 2 diabetes: outpatient management",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "aliases": [
+    "T2DM",
+    "T2D",
+    "type 2 diabetes mellitus",
+    "DM2",
+    "NIDDM",
+    "diabetes management",
+    "oral hypoglycaemic agents",
+    "OHA",
+    "insulin initiation",
+    "SGLT2 inhibitor",
+    "GLP-1 RA"
+   ],
+   "summary": "Aim for HbA1c below 7% in most adults, start metformin with lifestyle change, add SGLT2 inhibitors or GLP-1 RAs for ASCVD, heart failure, CKD or obesity irrespective of HbA1c, start basal insulin at 10 units or 0.1 to 0.2 units/kg when needed, and screen yearly for complications.",
+   "sources": [
+    "ADA 2026",
+    "ADA 2026",
+    "RSSDI 2022",
+    "ADA 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "urinary-tract-infection",
+   "title": "Urinary tract infection (adult): cystitis, pyelonephritis, complicated and catheter UTI",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "UTI",
+    "cUTI",
+    "complicated UTI",
+    "acute pyelonephritis",
+    "cystitis",
+    "CAUTI",
+    "catheter-associated UTI",
+    "asymptomatic bacteriuria",
+    "ASB",
+    "urosepsis"
+   ],
+   "summary": "Treat afebrile cystitis with nitrofurantoin or fosfomycin. For complicated UTI (fever, flank pain, systemic signs) culture first, choose empirical therapy by sepsis status, prior cultures and local resistance, switch to oral when improving and stop at 7 days in most. Do not treat asymptomatic bacteriuria.",
+   "sources": [
+    "IDSA 2025",
+    "ICMR 2022",
+    "IDSA 2019",
+    "IDSA / ESCMID 2011"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "vte-prophylaxis-medical-inpatients",
+   "title": "VTE prophylaxis in medical inpatients",
+   "subject": "haematology-oncology",
+   "population": "Adults",
+   "aliases": [
+    "DVT prophylaxis",
+    "thromboprophylaxis",
+    "venous thromboembolism prevention",
+    "Padua score",
+    "IMPROVE score",
+    "IMPROVE bleeding score",
+    "enoxaparin prophylaxis",
+    "heparin prophylaxis",
+    "LMWH prophylaxis",
+    "mechanical prophylaxis",
+    "IPC"
+   ],
+   "summary": "Assess VTE risk (Padua 4 or more, or IMPROVE 2 or more) and bleeding risk (IMPROVE bleeding 7 or more) on admission; give LMWH (preferred), fondaparinux or UFH to at-risk acutely or critically ill medical patients, mechanical prophylaxis when bleeding risk is high, and stop at discharge.",
+   "sources": [
+    "American Society of Hematology 2018",
+    "American Society of Hematology 2018",
+    "American Society of Hematology 2018"
    ],
    "status": "ai_drafted"
   }

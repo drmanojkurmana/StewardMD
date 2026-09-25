@@ -11,7 +11,8 @@
  *
  * The index carries a content hash ("version"). kb-protocols.js fetches with ?v=<version> because
  * sw.js caches static files by full URL, so a content change must change the URL. The build rewrites
- * CONTENT_V in kb-protocols.js and the kb-protocols.js ?v= token in index.html to match; the unit test
+ * CONTENT_V in kb-protocols.js and the hash half of the kb-protocols.js ?v=<code>.<hash> token in
+ * index.html to match; the unit test
  * (test/kb-clinical-protocols.test.mjs) fails if they drift.
  *
  * SCHEMA (unknown keys are errors, so the renderer and the content cannot silently diverge):
@@ -204,7 +205,9 @@ export function syncVersion(version, { write }) {
   }
   if (existsSync(HTML_FILE)) {
     const html = readFileSync(HTML_FILE, "utf8");
-    const next = html.replace(/kb-protocols\.js\?v=[^"]*/, `kb-protocols.js?v=kbp-${version}`);
+    // Token = "<code version>.<content hash>": bump the code part by hand when kb-protocols.js changes;
+    // the build owns the hash part so a content-only change also changes the URL.
+    const next = html.replace(/(kb-protocols\.js\?v=[^".]*)\.[^"]*/, `$1.${version}`);
     if (next !== html) { drift.push("index.html kb-protocols.js ?v= token"); if (write) writeFileSync(HTML_FILE, next); }
   }
   return drift;

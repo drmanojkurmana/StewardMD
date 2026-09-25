@@ -44,7 +44,7 @@ test("catalogue (index.json) is up to date with the protocol files", () => {
 test("CONTENT_V and the index.html ?v= token match the catalogue version (sw.js caches by URL)", () => {
   const idx = JSON.parse(readFileSync(INDEX, "utf8"));
   assert.match(read("kb-protocols.js"), new RegExp(`var CONTENT_V = "${idx.version}";`));
-  assert.match(read("index.html"), new RegExp(`kb-protocols\\.js\\?v=kbp-${idx.version}"`));
+  assert.match(read("index.html"), new RegExp(`kb-protocols\\.js\\?v=[a-z0-9]+\\.${idx.version}"`));
 });
 
 test("catalogue: unique ids, known subjects, counts add up, every entry cites a source", () => {

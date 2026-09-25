@@ -9,9 +9,13 @@ Bedside protocols for every specialty (sepsis, DKA, STEMI, stroke, snakebite, PP
 resuscitation, ...), as a fifth tab in the [[Knowledge Library]] beside Syndromes, Antibiogram, AWaRe
 and Guidelines. Also found by [[Universal Search]] (category "Protocols").
 
-**Not the OPD Protocol tab.** The OPD EMR "Protocol" tab (`opd-emr.js protocolTab`) is the ONCOLOGY
-regimen library (`kb/protocols/*.json`, flag `smd_onco_protocols`), which assigns a dosed chemo plan to
-a patient. This module is reference content only: it never writes to a patient record.
+**Also in the OPD EMR Protocol tab (owner, 2026-09-25).** `opd-emr.js protocolTab` lists these
+clinical protocols AND the oncology regimens (`kb/protocols/*.json`, flag `smd_onco_protocols`) in one
+list: branch chips (All / Oncology / each subject), a cancer-type picker under Oncology, and one search
+over titles, aliases, humanised cancer type and regimen drug names. A clinical protocol opens READ-ONLY
+inside the tab via `SMD_KBPROTO.readerHTML(p, { idPrefix: "oeKbp" })` (the Knowledge Library sheet sits
+below the EMR's z-index, so it cannot be opened on top). Only oncology rows have Assign (a draft plan +
+timeline entry); a clinical protocol never writes to the patient record.
 
 ## Key files
 - `kb/clinical-protocols/<id>.json` - one protocol per file. Content as data.
@@ -23,8 +27,10 @@ a patient. This module is reference content only: it never writes to a patient r
 - `kb-protocols.css` - protocol-specific styles on top of the shared `.kblib-tool-page` system.
 - `kb-protocols-flags.js` - `smd_kb_protocols`.
 - `search.js` - `protoProvider` (Universal Search category `proto`).
+- `opd-emr.js` `protocolTab` / `protoResults` / `protoReader` + `opd-emr.css` `.oe-proto-*` - the OPD tab.
 - Tests: `test/kb-clinical-protocols.test.mjs` (schema, catalogue freshness, version sync, search,
-  wiring), `test/run-kb-protocols-ui.mjs` (headless Chrome against the real `index.html`).
+  wiring), `test/run-kb-protocols-ui.mjs` (headless Chrome against the real `index.html`),
+  `test/opd-protocol-tab.test.mjs` + `test/run-opd-protocol-ui.mjs` (+ `opd-protocol-ui-harness.html`) for the OPD tab.
 
 ## Adding or editing a protocol
 1. Write/edit `kb/clinical-protocols/<id>.json` per the schema in the build script header.
@@ -34,6 +40,8 @@ a patient. This module is reference content only: it never writes to a patient r
 4. Native: `build-www` copies `kb/clinical-protocols/*.json` (step 5 of `scripts/build-www.sh`).
 
 ## Gotchas
+- **Two-part cache token.** `index.html` loads `kb-protocols.js?v=<code>.<hash>`: bump `<code>` by hand
+  when the JS changes; the build rewrites `<hash>` (and `CONTENT_V`) when content changes.
 - **Cache busting is by content hash.** `sw.js` caches static files by full URL, so the index and
   every protocol are fetched with `?v=CONTENT_V`. Forgetting the build step after a content edit means
   devices keep the old text; the unit test fails if `CONTENT_V` or the `index.html` token drifts.
@@ -59,3 +67,7 @@ a patient. This module is reference content only: it never writes to a patient r
 - No em/en dashes (validator-enforced), British spelling, glucose in mg/dL with mmol/L.
 
 Deps: [[Knowledge Library]] · [[Universal Search]] · [[Medical Knowledge Base]].
+- OPD harness gotcha: `index.html` sets `*{box-sizing:border-box}` globally; a harness without it
+  makes `.oe-canvas` (width 100% + padding) overflow and every layout assertion lies.
+- Long regimen names are slash-joined with no spaces ("Daratumumab/Cyclophosphamide/..."): `.oe-proto-t`
+  needs `overflow-wrap:anywhere` or the row scrolls the whole canvas sideways.

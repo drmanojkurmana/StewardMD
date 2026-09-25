@@ -11,8 +11,8 @@
 #sbrefOverlay #sbrefBody .sbref-tabs.kbp-5 .sbref-tab { flex:1 0 auto; min-width:0; padding:7px 6px!important; white-space:nowrap; }
 @media(max-width:429px) { #sbrefOverlay #sbrefBody .sbref-tabs.kbp-5 .sbref-tab { font-size:10.5px; padding:7px 4px!important; } }
 
-#sbrefBody.kblib-tool-protocols { --kbp-red:#b42318; --kbp-amber:#a15c07; --kbp-teal:#0f766e; --kbp-blue:#2556a8; --kbp-slate:#5b6472; }
-body.dark #sbrefBody.kblib-tool-protocols { --kbp-red:#ff8a80; --kbp-amber:#f5c26b; --kbp-teal:#5eead4; --kbp-blue:#93b8ff; --kbp-slate:#a9b1bd; }
+.kblib-tool-protocols { --kbp-red:#b42318; --kbp-amber:#a15c07; --kbp-teal:#0f766e; --kbp-blue:#2556a8; --kbp-slate:#5b6472; }
+body.dark .kblib-tool-protocols { --kbp-red:#ff8a80; --kbp-amber:#f5c26b; --kbp-teal:#5eead4; --kbp-blue:#93b8ff; --kbp-slate:#a9b1bd; }
 
 .kblib-tool-protocols .kbp-status { margin:0 0 14px; padding:13px 15px; border-radius:14px; font-size:13px; line-height:1.55; color:var(--ink); border:1px solid color-mix(in srgb,var(--kbp-amber) 38%,var(--kl-line)); background:color-mix(in srgb,var(--kbp-amber) 9%,var(--kl-paper)); }
 .kblib-tool-protocols .kbp-status strong { color:var(--kbp-amber); }
@@ -83,3 +83,11 @@ body.dark #sbrefBody.kblib-tool-protocols { --kbp-red:#ff8a80; --kbp-amber:#f5c2
   .kblib-tool-protocols .kbp-subjects, .kblib-tool-protocols .kbp-toc { margin-inline:-14px; padding-inline:14px; }
   .kblib-tool-protocols .kbp-sec { padding:14px 13px 12px 16px; }
 }
+
+/* Embedded reader (OPD EMR Protocol tab, opd-emr.js). The Knowledge Library tokens are defined on
+   #sbrefBody.kblib-tool-page, so the embed maps them onto the host's own palette. */
+.kbp-embed { --kl-accent:var(--primary,#00685f); --kl-muted:var(--secondary,#565e74); --kl-paper:var(--sc-lowest,#fff); --kl-line:var(--outline-variant,#d8dee4); color:var(--on-surface,#191c1e); --ink:var(--on-surface,#191c1e); }
+.kbp-embed .kbp-hero { padding:16px 16px 14px; margin:0 0 12px; border:1px solid var(--kl-line); border-radius:16px; background:var(--kl-paper); }
+.kbp-embed .kbp-hero .kblib-tool-kicker { color:var(--kl-muted); font-size:10.5px; font-weight:650; letter-spacing:.12em; text-transform:uppercase; }
+.kbp-embed .kbp-hero h1 { margin:6px 0 10px; font-size:22px; line-height:1.2; letter-spacing:-.02em; color:var(--ink); }
+.kbp-embed .kbp-toc { margin:0 0 12px; padding:2px 0 4px; }

@@ -576,3 +576,25 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-sev.critical, #smdOpdEmr .oe-sev.major { background:var(--error-container, #fdecec); color:var(--on-error-container, #93000a); }
 #smdOpdEmr .oe-scx-miss .oe-ai-label { color:var(--on-surface); }
 #smdOpdEmr .oe-scx-miss .oe-ai-label .material-symbols-outlined { font-size:16px; margin-right:4px; }
+
+/* Protocol tab (2026-09-25): clinical protocols (Knowledge Library) + oncology regimens, filtered by
+   branch. The reader for a clinical protocol is kb-protocols.js readerHTML() inside .kbp-embed. */
+#smdOpdEmr .oe-proto-branches { display: flex; gap: 6px; overflow-x: auto; overflow-y: hidden; margin: 10px 0 4px; padding: 2px 0 6px; scrollbar-width: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+#smdOpdEmr .oe-proto-branches::-webkit-scrollbar { display: none; }
+#smdOpdEmr .oe-proto-chip { flex: 0 0 auto; min-height: 36px; padding: 6px 12px; border: 1px solid var(--outline-variant); border-radius: 999px; background: var(--sc-lowest); color: var(--on-surface); font: 600 13px var(--q-sans); white-space: nowrap; cursor: pointer; }
+#smdOpdEmr .oe-proto-chip small { margin-left: 4px; color: var(--secondary); font-weight: 500; }
+#smdOpdEmr .oe-proto-chip[aria-pressed="true"] { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--sc-lowest)); color: var(--primary); }
+#smdOpdEmr .oe-proto-chip[aria-pressed="true"] small { color: var(--primary); }
+#smdOpdEmr .oe-proto-type { width: 100%; min-height: 44px; margin: 6px 0 2px; padding: 8px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-lowest); color: var(--on-surface); font: 500 14px var(--q-sans); }
+#smdOpdEmr .oe-proto-grp { margin: 16px 2px 2px; color: var(--secondary); font: 700 11.5px var(--q-sans); letter-spacing: .06em; text-transform: uppercase; }
+#smdOpdEmr .oe-proto-sub { margin: 14px 2px 0; color: var(--on-surface-variant); font: 650 12.5px var(--q-sans); }
+#smdOpdEmr .oe-proto-row { display: flex; align-items: center; gap: 12px; width: 100%; margin: 0; padding: 11px 2px; border: 0; border-bottom: 1px solid var(--outline-variant); background: transparent; color: inherit; text-align: left; font: inherit; cursor: pointer; }
+#smdOpdEmr .oe-proto-row.static { cursor: default; }
+#smdOpdEmr .oe-proto-row > .material-symbols-outlined { color: var(--secondary); }
+#smdOpdEmr .oe-proto-b { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#smdOpdEmr .oe-proto-t { color: var(--on-surface); font: 700 14px/1.3 var(--q-sans); overflow-wrap: anywhere; }
+#smdOpdEmr .oe-proto-m, #smdOpdEmr .oe-proto-s { overflow-wrap: anywhere; }
+#smdOpdEmr .oe-proto-m { color: var(--secondary); font: 600 12px/1.4 var(--q-sans); }
+#smdOpdEmr .oe-proto-s { color: var(--on-surface-variant); font: 500 12.5px/1.45 var(--q-sans); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#smdOpdEmr .oe-proto-back { margin: 0 0 12px; }
+#smdOpdEmr .kbp-embed .kbp-sec li { font-size: 14px; }

@@ -16,7 +16,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var CONTENT_V = "f1a8098de82d";
+  var CONTENT_V = "5fc3c4320f73";
   var BASE = "/kb/clinical-protocols/";
 
   var KINDS = {
@@ -185,30 +185,39 @@
     return '<div class="kbp-status kbp-status-ai_drafted" role="note"><strong>Draft, pending clinical review.</strong> Compiled' + (date ? " " + date : "") +
       " with AI assistance from the guidelines cited below. Verify every dose and threshold against the source and your local protocol before use.</div>";
   }
-  function renderReader(p) {
-    st.view = "reader"; st.openId = p.id;
+  /** The protocol reader as an HTML string. Shared by the Knowledge Library and the OPD Protocol tab.
+   *  opts.idPrefix  prefix for section ids (jump targets), so two readers in one DOM never collide
+   *  opts.back      render the "All protocols" Back control (the Knowledge Library owns it)
+   *  opts.brand     render the StewardMD Knowledge Base banner (its styles live under #sbrefOverlay) */
+  function readerHTML(p, opts) {
+    opts = opts || {};
+    var pre = opts.idPrefix || "kbp";
     var meta = [p.population, p.setting].filter(Boolean).map(function (m) { return '<span class="kbp-meta">' + esc(m) + "</span>"; }).join("");
     var secs = (p.sections || []).map(function (s, i) {
       var tag = s.kind === "immediate" ? "ol" : "ul";
-      return '<section class="kbp-sec kbp-k-' + esc(s.kind) + '" id="kbpSec' + i + '"><h2><span class="kbp-kind">' + esc(KINDS[s.kind] || s.kind) + "</span>" + esc(s.title) + "</h2><" + tag + ">" +
+      return '<section class="kbp-sec kbp-k-' + esc(s.kind) + '" id="' + pre + "Sec" + i + '"><h2><span class="kbp-kind">' + esc(KINDS[s.kind] || s.kind) + "</span>" + esc(s.title) + "</h2><" + tag + ">" +
         (s.items || []).map(function (it) { return "<li>" + esc(it) + "</li>"; }).join("") + "</" + tag + "></section>";
     }).join("");
-    var toc = (p.sections || []).map(function (s, i) { return '<button type="button" class="kbp-jump" data-kbp-jump="kbpSec' + i + '">' + esc(s.title) + "</button>"; });
+    var toc = (p.sections || []).map(function (s, i) { return '<button type="button" class="kbp-jump" data-kbp-jump="' + pre + "Sec" + i + '">' + esc(s.title) + "</button>"; });
     var drugs = (p.drugs && p.drugs.length)
-      ? '<section class="kbp-sec kbp-drugs" id="kbpDrugs"><h2><span class="kbp-kind">Drugs</span>Key drugs and doses</h2><dl>' + p.drugs.map(function (d) {
+      ? '<section class="kbp-sec kbp-drugs" id="' + pre + 'Drugs"><h2><span class="kbp-kind">Drugs</span>Key drugs and doses</h2><dl>' + p.drugs.map(function (d) {
           return '<div class="kbp-drug"><dt>' + esc(d.name) + '</dt><dd class="kbp-dose">' + esc(d.dose) + "</dd>" + (d.notes ? '<dd class="kbp-note">' + esc(d.notes) + "</dd>" : "") + "</div>";
         }).join("") + "</dl></section>"
       : "";
-    if (drugs) toc.push('<button type="button" class="kbp-jump" data-kbp-jump="kbpDrugs">Drugs</button>');
-    toc.push('<button type="button" class="kbp-jump" data-kbp-jump="kbpSources">Sources</button>');
-    var sources = '<section class="kbp-sec kbp-sources" id="kbpSources"><h2><span class="kbp-kind">Evidence</span>Sources</h2><ol>' + (p.sources || []).map(function (s) {
+    if (drugs) toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Drugs">Drugs</button>');
+    toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Sources">Sources</button>');
+    var sources = '<section class="kbp-sec kbp-sources" id="' + pre + 'Sources"><h2><span class="kbp-kind">Evidence</span>Sources</h2><ol>' + (p.sources || []).map(function (s) {
       return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a><span>' + esc(s.org) + " · " + esc(s.year) + "</span></li>";
     }).join("") + '</ol><p class="kbp-foot">Links open the official source. Always consult the current published version. Decision support only: not a substitute for clinical judgement.</p></section>';
-    shell('<div class="kbp-reader">' +
-      '<button type="button" class="kbp-back" data-kbp-back aria-label="Back to protocols"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>All protocols</span></button>' +
-      '<header class="kblib-tool-intro kbp-hero">' + brandHTML() + '<span class="kblib-tool-kicker">' + esc(subjectLabel(p.subject)) + "</span><h1>" + esc(p.title) + "</h1>" +
+    return '<div class="kbp-reader">' +
+      (opts.back ? '<button type="button" class="kbp-back" data-kbp-back aria-label="Back to protocols"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>All protocols</span></button>' : "") +
+      '<header class="kblib-tool-intro kbp-hero">' + (opts.brand ? brandHTML() : "") + '<span class="kblib-tool-kicker">' + esc(subjectLabel(p.subject)) + "</span><h1>" + esc(p.title) + "</h1>" +
       (meta ? '<div class="kbp-metas">' + meta + "</div>" : "") + '<p class="kbp-summary">' + esc(p.summary) + "</p></header>" +
-      statusHTML(p) + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + drugs + sources + "</div>");
+      statusHTML(p) + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + drugs + sources + "</div>";
+  }
+  function renderReader(p) {
+    st.view = "reader"; st.openId = p.id;
+    shell(readerHTML(p, { idPrefix: "kbp", back: true, brand: true }));
     var body = bodyEl(); if (body) body.scrollTop = 0;
   }
   // Every navigation bumps st.nav, so a protocol that finishes loading after the user moved on
@@ -282,6 +291,9 @@
     }
     D.addEventListener("click", function (e) {
       var t = e.target; if (!t || !t.closest) return;
+      // Section jumps work wherever a reader is embedded (Knowledge Library, OPD Protocol tab).
+      var jump = t.closest("[data-kbp-jump]");
+      if (jump) { var sec = D.getElementById(jump.getAttribute("data-kbp-jump")); if (sec && sec.scrollIntoView) sec.scrollIntoView({ block: "start", behavior: "smooth" }); return; }
       if (!t.closest("#sbrefBody")) return;
       if (t.closest("[data-kbp-tab]")) { e.preventDefault(); if (G.SB && G.SB.openRef) G.SB.openRef("protocols"); else open(); return; }
       var go = t.closest("[data-kbp-go]"); if (go) { if (G.SB && G.SB.openRef) G.SB.openRef(go.getAttribute("data-kbp-go")); return; }
@@ -294,8 +306,6 @@
         Array.prototype.forEach.call(D.querySelectorAll("[data-kbp-subject]"), function (c) { var on = c === chip; c.classList.toggle("on", on); c.setAttribute("aria-pressed", String(on)); });
         paintList(); return;
       }
-      var jump = t.closest("[data-kbp-jump]");
-      if (jump) { var sec = D.getElementById(jump.getAttribute("data-kbp-jump")); if (sec && sec.scrollIntoView) sec.scrollIntoView({ block: "start", behavior: "smooth" }); }
     }, false);
     D.addEventListener("input", function (e) {
       if (e.target && e.target.id === "kbpQ") { st.q = String(e.target.value || "").trim(); paintList(); }
@@ -307,7 +317,7 @@
     var n = 0, iv = setInterval(function () { if (wrapOpenRef() || ++n > 120) clearInterval(iv); }, 250);
   }
 
-  var API = { open: open, search: function (q, subject) { return searchIndex(st.index, q, subject || "all"); }, loadIndex: loadIndex, subjectLabel: subjectLabel, CONTENT_V: CONTENT_V, _searchIndex: searchIndex, _rank: rank, _kinds: KINDS, _state: st };
+  var API = { open: open, search: function (q, subject) { return searchIndex(st.index, q, subject || "all"); }, loadIndex: loadIndex, loadProtocol: loadProtocol, readerHTML: readerHTML, subjectLabel: subjectLabel, index: function () { return st.index; }, CONTENT_V: CONTENT_V, _searchIndex: searchIndex, _rank: rank, _kinds: KINDS, _state: st };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_KBPROTO = API;
   if (D && D.addEventListener) {

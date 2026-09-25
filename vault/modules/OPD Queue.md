@@ -84,3 +84,9 @@ node/action parity for admin, doctor, nurse, cashier and pharmacy, view switchin
 filter/focus retention, 320-1440px, dark/reduced-motion and fallback. The existing
 `test/run-opd-clinic-billing-ui.mjs` exercises the real mocked router through clinic registration,
 vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both browser suites.
+
+## Protocol tab = clinical protocols + oncology regimens (2026-09-25)
+The EMR Protocol tab is no longer oncology-only: see [[Clinical Protocols]]. Branch chips, a cancer-type
+picker, one search, and an in-tab read-only reader for clinical protocols. Assign exists only on
+oncology rows. The tab needs `smd_kb_protocols` OR `smd_onco_protocols`; with both off it says so.
+Regimens now also load in read-only mode (rows say "view only"); `maybeLoadOncoProtocols(anyMode)`.
