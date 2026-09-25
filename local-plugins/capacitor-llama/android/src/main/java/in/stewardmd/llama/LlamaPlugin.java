@@ -24,7 +24,8 @@ import java.util.concurrent.TimeUnit;
  * reads it from a local path.
  *
  * Methods (Promise): available, load, generate, cancel, release.
- * Events: llamaToken {text}, llamaError {code, message}.
+ * Events: llamaToken {text, count}, llamaError {code, message}. A llamaToken event may carry several
+ * pieces concatenated; {@code count} says how many (see TokenBatcher).
  *
  * No permissions are declared: no mic, no camera, no storage. INTERNET belongs to the host app.
  */
@@ -38,6 +39,41 @@ public class LlamaPlugin extends Plugin {
     /** Delayed cancel+release for a pause that catches a generation mid-answer (audit T59, 2026-09-25). */
     private final ScheduledExecutorService pauseScheduler = Executors.newSingleThreadScheduledExecutor();
     private ScheduledFuture<?> pendingPauseRelease;
+    /** Flush timer for {@link TokenBatcher}. */
+    private final ScheduledExecutorService tokenFlush = Executors.newSingleThreadScheduledExecutor();
+    static final int TOKEN_FLUSH_MS = 40;
+
+    /**
+     * TOKEN BATCHING (energy, 2026-09-25), mirrors the iOS TokenBatcher. One WebView JS evaluation per
+     * token was wasted work: JS repaints at most every 66 ms (PAINT_MS in maik-local.js) and only ever
+     * appends {@code text}. The first piece goes out at once, so time-to-first-token is unchanged; later
+     * pieces are coalesced and sent every TOKEN_FLUSH_MS. The caller must flush() before it resolves or
+     * rejects, so the last text always lands before the promise does. Events are sent under the lock,
+     * so they can never reorder.
+     */
+    private final class TokenBatcher implements LlamaNative.TokenSink {
+        private final StringBuilder buf = new StringBuilder();
+        private int count = 0;
+        private boolean sentFirst = false, scheduled = false;
+
+        @Override public synchronized void onToken(String piece) {
+            buf.append(piece); count++;
+            if (!sentFirst) { sentFirst = true; flush(); return; }
+            if (scheduled) return;
+            scheduled = true;
+            try { tokenFlush.schedule(this::tick, TOKEN_FLUSH_MS, TimeUnit.MILLISECONDS); }
+            catch (Throwable t) { scheduled = false; flush(); }
+        }
+
+        private synchronized void tick() { scheduled = false; flush(); }
+
+        synchronized void flush() {
+            if (count == 0) return;
+            String text = buf.toString(); int n = count;
+            buf.setLength(0); count = 0;
+            notifyListeners("llamaToken", new JSObject().put("text", text).put("count", n));
+        }
+    }
     private static final long PAUSE_GRACE_SECONDS = 20;
 
     @Override
@@ -280,10 +316,10 @@ public class LlamaPlugin extends Plugin {
             long t0 = System.currentTimeMillis();
             startThermalWatch();
             try {
-                LlamaNative.TokenSink sink = stream
-                    ? (piece) -> notifyListeners("llamaToken", new JSObject().put("text", piece))
-                    : null;
-                String text = engine.generateWithImage(system, user, mmproj, arrPaths, nPredict, temp, seed, sink);
+                TokenBatcher sink = stream ? new TokenBatcher() : null;
+                String text;
+                try { text = engine.generateWithImage(system, user, mmproj, arrPaths, nPredict, temp, seed, sink); }
+                finally { if (sink != null) sink.flush(); }   // the last pieces land before the promise settles
                 call.resolve(new JSObject().put("text", text)
                     .put("ms", System.currentTimeMillis() - t0)
                     .put("images", arrPaths.length)
@@ -314,10 +350,10 @@ public class LlamaPlugin extends Plugin {
             long t0 = System.currentTimeMillis();
             startThermalWatch();
             try {
-                LlamaNative.TokenSink sink = stream
-                    ? (piece) -> notifyListeners("llamaToken", new JSObject().put("text", piece))
-                    : null;
-                String text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, sink);
+                TokenBatcher sink = stream ? new TokenBatcher() : null;
+                String text;
+                try { text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, sink); }
+                finally { if (sink != null) sink.flush(); }   // the last pieces land before the promise settles
                 long ms = System.currentTimeMillis() - t0;
                 JSObject out = new JSObject().put("text", text).put("ms", ms)
                     .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens());
