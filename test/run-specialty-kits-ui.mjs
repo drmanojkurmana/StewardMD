@@ -273,8 +273,10 @@ try{
  await until(`!!document.querySelector('#smdDocs [data-dl-act="lang:te"]')`);
  await click('#smdDocs [data-dl-act="lang:te"]'); await click('#smdDocs [data-dl-act="consent:caesarean-section"]');
  ok(await until(`/native-speaker check of the Telugu/.test(document.querySelector('#smdDocs').textContent)`),'a Telugu consent form says its translation needs a native-speaker check');
+ ok(await ev(`(()=>{const el=document.querySelector('#smdDocs [data-dl-f="risks"], #smdDocs #dl_risks');if(!el)return false;el.value='Placenta accreta risk discussed';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));return true})()`),'consent form has a box for procedure-specific risks');
  await click('#smdDocs [data-dl-act="preview"]');
  ok(await until(`/[\u0C00-\u0C7F]{4}/.test((document.querySelector('#smdDocs iframe.dl-frame')||{}).srcdoc||'')&&/Kit Patient/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)`),'consent preview is in Telugu with the patient named');
+ ok(await until(`/\u0C08 \u0C2A\u0C4D\u0C30\u0C15\u0C4D\u0C30\u0C3F\u0C2F\u0C15\u0C41 \u0C38\u0C02\u0C2C\u0C02\u0C27\u0C3F\u0C02\u0C1A\u0C3F \u0C35\u0C3F\u0C35\u0C30\u0C3F\u0C02\u0C1A\u0C3F\u0C28 \u0C07\u0C24\u0C30 \u0C2A\u0C4D\u0C30\u0C2E\u0C3E\u0C26\u0C3E\u0C32\u0C41/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)&&/Placenta accreta risk discussed/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)`),'the risks entered print under a Telugu heading in the consent preview');
  await click('#smdDocs [data-dl-act="back"]'); await click('#smdDocs [data-dl-act="type:handout"]');
  await until(`!!document.querySelector('#smdDocs [data-dl-act="lang:hi"]')`);
  await click('#smdDocs [data-dl-act="lang:hi"]');

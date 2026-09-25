@@ -210,6 +210,16 @@ test("documents: every type renders, patient text is escaped, and the Reg. No. i
   assert.match(DOCS._bodyHtml("consent", {}, {}), /Choose a consent template/);
 });
 
+test("consent: procedure-specific risks print under their own heading, in the form's language, escaped", () => {
+  const consent = { procedure: { en: "Lap chole", te: "ల్యాప్ కోలి", hi: "लैप कोली" }, sections: [], declaration: { en: "I agree.", te: "నేను అంగీకరిస్తున్నాను.", hi: "मैं सहमत हूं।" } };
+  const en = DOCS._bodyHtml("consent", { risks: "Bile leak\n<b>x</b>" }, { consent, lang: "en" });
+  assert.match(en, /<h3>Other risks discussed for this procedure<\/h3><p>Bile leak<br>&lt;b&gt;x&lt;\/b&gt;<\/p>/);
+  assert.ok(en.indexOf("Bile leak") < en.indexOf("I agree."), "risks come before the declaration");
+  assert.match(DOCS._bodyHtml("consent", { risks: "Bile leak" }, { consent, lang: "hi" }), /इस प्रक्रिया के लिए बताए गए अन्य जोखिम/);
+  assert.ok(!/Other risks discussed/.test(DOCS._bodyHtml("consent", {}, { consent, lang: "en" })), "no empty heading when nothing was entered");
+  assert.ok(DOCS._forms.consent.some((f) => f[0] === "risks" && f[2] === "textarea"), "the consent form offers the risks box");
+});
+
 test("consent and handout validators: three languages, same item counts, no dashes, advice ids that exist", () => {
   const ok = {
     id: "demo-procedure", title: { en: "Consent", te: "సమ్మతి", hi: "सहमति" }, procedure: { en: "Demo", te: "డెమో", hi: "डेमो" },
