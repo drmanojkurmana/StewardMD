@@ -7984,6 +7984,7 @@
       '<p class="w-hint">' + ms("info") + wTH("ward.po-store-hint", "With a store named, the reorder suggestions count this order as on its way to that store only. Without one, it counts for every store that holds the item.") + "</p>" +
       '<p class="w-hint">' + ms("info") + wTH("ward.one-item-per-order-for-now", "One item per order for now. The unit is recorded as you type it and is never converted, so a delivery in a different unit will not count against this line. Without a price the order total is unknown, and the hospital's strictest approval level applies.") +
       "</p><button class=\"w-btn\" data-w-act=\"poraise\">" + ms("save") + wTH("ward.raise", "Raise") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + wTH("ward.po-packs-hint", "An item with declared pack sizes (a strip, a box) converts automatically when booked in against one of its own packs; every other item still receives exactly as typed, in the unit it was ordered in.") + "</p>" +
       (state.purchaseOrdersFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.purchase-orders-could-not-be-loaded", "Purchase orders could not be loaded. Do not read this as none.", null, "", 1) + (state.purchaseOrders ? " " + wTH("ward.the-list-below-may-be-out", "The list below may be out of date.") : "") + "</p>" : "") +
       (state.purchaseOrders == null ? (state.purchaseOrdersFailed ? "" : "<p class=\"w-empty\">" + wTH("ward.loading-purchase-orders", "Loading purchase orders...") + "</p>")
         : rows ? '<ul class="w-mini">' + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-purchase-orders", "No purchase orders.") + "</p>") +
@@ -12647,7 +12648,7 @@
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
   function purchasingOpen() {
-    st.view = "purchasing"; st.purchaseOrders = null; st.poStores = null; paint(); loadPurchaseOrders();
+    st.view = "purchasing"; st.purchaseOrders = null; st.poStores = null; st.poPackItems = null; paint(); loadPurchaseOrders();
     apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) {
         var seen = {};
@@ -12655,6 +12656,24 @@
           .filter(function (n) { return n && !seen[n.toLowerCase()] && (seen[n.toLowerCase()] = 1); }).sort() : false;
         paint();
       }, function () { st.poStores = false; paint(); });
+    /* PACK SIZES: the general stores item master (stores.js), read once so "book stock in" can offer the pack
+     * units an item declares (stock.js: packFactors) instead of a blind free-text unit. Best effort: an item
+     * with no packs, or a hospital this could not be read for, still receives exactly as it always has. */
+    apiGet("/ward/stores?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        var m = {};
+        (r && r.ok ? r.items || [] : []).forEach(function (it) { if (it && it.code && it.packs && it.packs.length) m[String(it.code).toUpperCase()] = it; });
+        st.poPackItems = m; paint();
+      }, function () { st.poPackItems = {}; paint(); });
+  }
+  /* PACK SIZES: an item's own declared packs, as words for the receive prompt - the declared shape, never
+   * resolved into a single factor here (that arithmetic is the server's, stock.js: packFactors), so a store
+   * keeper sees what a box or a strip IS for this item before typing which one arrived. */
+  function poPacksWords(item) {
+    var base = String(item.unit || ""), parts = (item.packs || []).map(function (p) {
+      return "(" + p.unit + " = " + p.of + " " + (p.packUnit || base) + ")";
+    });
+    return parts.length ? base + " " + parts.join(" ") : base;
   }
   function loadPurchaseOrders() {
     st.busy = true; paint();
@@ -12695,14 +12714,25 @@
     if (!item) return;
     var qty = prompt(wTD("ward.how-many", "How many?")) || "";
     if (!qty) return;
-    var unit = prompt(wTD("ward.counted-in-what-box-strip-vial", "Counted in what? (box, strip, vial)")) || "";
+    /* PACK SIZES: an item the general stores item master declares packs for is offered ITS OWN declared units
+     * here, instead of the generic box/strip/vial hint - so the unit typed is one the server can actually
+     * resolve, never a guess at what "a pack" means for this item. An item with no packs, or one this
+     * hospital's fetch never came back for, keeps the plain hint exactly as before. */
+    var packItem = st.poPackItems && st.poPackItems[String(item).trim().toUpperCase()];
+    var unit = prompt(packItem
+      ? wTD("ward.counted-in-what-pack-sizes", "Counted in what? Declared for this item: {packs}", { packs: poPacksWords(packItem) })
+      : wTD("ward.counted-in-what-box-strip-vial", "Counted in what? (box, strip, vial)")) || "";
     if (!unit) return;
     st.busy = true; paint();
     apiPost("/ward/goods-receive", { orgId: st.orgId, purchaseOrderId: id, item: item, quantity: qty, unit: unit })
       .then(function (r) {
         // r.detail carries the over-delivery / wrong-unit warning when there is one; it is shown
         // rather than swallowed, because both mean real stock the record has to account for.
-        if (settle(r, r && r.ok ? (r.detail || wT("ward.booked-in", "Booked in.")) : null)) loadPurchaseOrders();
+        var okMsg = r && r.ok ? (r.detail || wT("ward.booked-in", "Booked in.")) : null;
+        // PACK SIZES: what was typed converted to the item's base unit before it reached stock.js - the
+        // dual display, so the store keeper sees what the shelf now actually holds, not only what they typed.
+        if (okMsg && r.packDisplay) okMsg += " " + wT("ward.counted-as", "Counted as {packDisplay}.", { packDisplay: r.packDisplay });
+        if (settle(r, okMsg)) loadPurchaseOrders();
         else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-book-that-in", "Could not book that in."); paint(); });

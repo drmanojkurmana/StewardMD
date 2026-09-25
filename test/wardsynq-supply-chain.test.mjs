@@ -204,3 +204,49 @@ test("R4-5 POST /api/queue/ward/purchase-order with location (the ward screen's 
   assert.equal(at("CS").onOrder, 15);
   assert.equal(at("OT").onOrder, 0, "the other store is not told stock is coming");
 });
+
+test("PACK SIZES: POST /ward/goods-receive converts a receipt entered in a declared pack unit to the item's base unit before it reaches stock.js, keeps what was actually counted (receivedAs) and prices per base unit", async () => {
+  seedHospital();
+  const item = await as(U.STORE, "/ward/store-item", "POST", { orgId: ORG, code: "SYR-10", name: "Syringe 10ml", unit: "syringe", category: "consumables", packs: [{ unit: "box", of: 50 }] });
+  assert.equal(item.__status, 200, JSON.stringify(item));
+
+  const po = await as(U.PHARMACY, "/ward/purchase-order", "POST", { orgId: ORG, vendor: "MedSupply", lines: [{ item: "SYR-10", quantity: 5, unit: "box", unitPricePaise: 100000 }] });
+  assert.equal(po.__status, 200, JSON.stringify(po));
+  const ask = await as(U.PHARMACY, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "PurchaseOrder", subjectId: po.purchaseOrderId, reason: "Restock syringes" });
+  assert.equal(ask.__status, 200, JSON.stringify(ask));
+  assert.equal((await as(U.DOCTOR, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: ask.verificationId, decision: "approved" })).__status, 200);
+
+  // Receiving the wrong unit for this item (neither its own nor a declared pack) is refused, nothing written.
+  const badUnit = await as(U.PHARMACY, "/ward/goods-receive", "POST", { orgId: ORG, purchaseOrderId: po.purchaseOrderId, item: "SYR-10", quantity: 5, unit: "carton", line: 0, location: "CS" });
+  assert.equal(badUnit.__status, 422);
+  assert.equal(badUnit.error, "unknown_unit");
+  assert.equal((await recordsOf("StockMovement")).length, 0, "a refused receipt writes nothing");
+
+  const rcpt = await as(U.PHARMACY, "/ward/goods-receive", "POST", { orgId: ORG, purchaseOrderId: po.purchaseOrderId, item: "SYR-10", quantity: 5, unit: "box", line: 0, location: "CS" });
+  assert.equal(rcpt.__status, 200, JSON.stringify(rcpt));
+  assert.equal(rcpt.quantity, 250, "5 boxes of 50 converted to the base unit before reaching stock.js");
+  assert.equal(rcpt.unit, "syringe");
+  assert.deepEqual(rcpt.receivedAs, { value: 5, unit: "box" });
+  assert.equal(rcpt.packDisplay, "5 box (250 syringe)");
+  assert.equal(rcpt.state, "received", "the order was fully received in the unit it was ordered in (box)");
+  // Rs 1000 a box / 50 syringes a box = Rs 20.00 a syringe = 2000 paise, rounded (comment in purchasing.js states the rounding).
+  assert.deepEqual(rcpt.valuation, { unitPricePaiseBase: 2000, baseUnit: "syringe" });
+
+  const stock = await as(U.PHARMACY, `/ward/stock?orgId=${ORG}`);
+  assert.equal(stock.__status, 200, JSON.stringify(stock));
+  const row = stock.levels.find((r) => r.code === "SYR-10");
+  assert.equal(row.level, 250, "stock is kept in the base unit, never the pack unit it was received in");
+  assert.equal(row.unit, "syringe");
+
+  // An item the PO's line names that is NOT in the general stores item master (every pharmacy drug, today) receives
+  // exactly as before: no pack lookup, no conversion, the unit typed is the unit recorded.
+  const drugPo = await as(U.PHARMACY, "/ward/purchase-order", "POST", { orgId: ORG, vendor: "Acme Pharma", lines: [{ item: "Paracetamol 500mg", quantity: 10, unit: "strip", unitPricePaise: 1500 }] });
+  assert.equal(drugPo.__status, 200, JSON.stringify(drugPo));
+  const drugAsk = await as(U.PHARMACY, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "PurchaseOrder", subjectId: drugPo.purchaseOrderId, reason: "Restock" });
+  await as(U.DOCTOR, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: drugAsk.verificationId, decision: "approved" });
+  const drugRcpt = await as(U.PHARMACY, "/ward/goods-receive", "POST", { orgId: ORG, purchaseOrderId: drugPo.purchaseOrderId, item: "Paracetamol 500mg", quantity: 10, unit: "strip", line: 0, location: "Main" });
+  assert.equal(drugRcpt.__status, 200, JSON.stringify(drugRcpt));
+  assert.equal(drugRcpt.quantity, 10);
+  assert.equal(drugRcpt.unit, "strip");
+  assert.equal(drugRcpt.receivedAs, undefined, "no item master entry to convert through, so nothing was converted");
+});
