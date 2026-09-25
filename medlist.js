@@ -1646,7 +1646,7 @@
     var cov = res.coverage || { submittedCount: res.reviewedCount, reviewedCount: res.reviewedCount, classifiedCount: res.reviewedCount, unclassified: [], unchecked: [], datasetVersion: "" };
 
     var work = el("div", { cls: "ml-work" });
-    work.style.gridTemplateColumns = "1fr";              // results are single-column
+    work.style.gridTemplateColumns = "minmax(0,1fr)";    // results are single-column; minmax so a long drug name wraps instead of widening the track
     var main = el("div", { cls: "ml-main" });
 
     // ---- strong summary panel: title + reviewed count + severity count chips ----
@@ -1744,15 +1744,15 @@
 ".ddi-advisory{padding:7px 16px;font:600 11.5px var(--sans);color:var(--slate,#2d4356);background:var(--paper,#f6f7f5);border-bottom:1px solid var(--line,#d7dee3)}",
 ".ddi-body{flex:1;min-height:0}",
 /* ---- workspace layout ---- */
-".ml-work{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box;padding:14px 16px 18px;display:grid;grid-template-columns:1fr;gap:14px;align-content:start}",
-"@media(min-width:900px){.ml-work{grid-template-columns:63fr 37fr;gap:20px;padding:18px 22px 0}}",
+".ml-work{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box;padding:14px 16px 18px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-content:start}",
+"@media(min-width:900px){.ml-work{grid-template-columns:minmax(0,63fr) minmax(0,37fr);gap:20px;padding:18px 22px 0}}",
 ".ml-main{min-width:0}.ml-aside{min-width:0}",
 "@media(max-width:899px){.ml-aside{order:2}}",
 /* ---- empty state ---- */
 ".ml-empty-head{margin:2px 0 12px}",
 ".ml-empty-title{font:800 18px var(--sans);color:var(--ink,#14202b)}",
 ".ml-empty-sub{font:500 13px var(--sans);color:var(--slate,#2d4356);margin-top:3px;line-height:1.45}",
-".ml-action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}",
+".ml-action-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}",
 ".ml-action-card{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .12s,box-shadow .12s;min-height:88px}",
 ".ml-action-card:hover{border-color:var(--teal,#0e6e63);box-shadow:0 2px 10px rgba(14,110,99,.08)}",
 ".ml-action-card:active{transform:scale(.99)}",
@@ -1869,7 +1869,7 @@
 ".ml-state-offline{color:var(--amber,#92620a)}",
 ".ml-spin{display:inline-block;width:14px;height:14px;box-sizing:border-box;border:2px solid var(--line,#d7dee3);border-top-color:var(--teal,#0e6e63);border-radius:50%;vertical-align:-2px;animation:mlspin 1s linear infinite}@keyframes mlspin{to{transform:rotate(360deg)}}",
 /* dose sheet */
-".ml-dose-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}",
+".ml-dose-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:6px}",
 ".ml-field{display:flex;flex-direction:column;gap:5px}",
 ".ml-field-full{grid-column:1/-1}",
 ".ml-field-label{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
