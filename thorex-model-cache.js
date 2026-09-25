@@ -183,7 +183,11 @@
     if (cachesImpl && cachesImpl.delete) {
       jobs.push(Promise.resolve(cachesImpl.delete(cacheName)).then(function (r) { return !!r; }, function () { return false; }));
     }
-    if (idbImpl && idbImpl.deleteDatabase) {
+    // A clear scoped to another module's cache (RadioAnatome 3D purges "atlas3d-v1" after one bad
+    // chunk) must not delete the shared IndexedDB, which holds ThoreX's own models.
+    // ponytail: that IDB is only the no-Cache-API fallback; per-URL deletes if a scoped caller ever needs it.
+    var scoped = cacheName !== DEFAULT_CACHE_NAME;
+    if (!scoped && idbImpl && idbImpl.deleteDatabase) {
       jobs.push(new Promise(function (resolve) {
         try {
           var req = idbImpl.deleteDatabase(IDB_DB_NAME);
