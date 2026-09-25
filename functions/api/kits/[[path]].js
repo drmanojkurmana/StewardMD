@@ -11,8 +11,10 @@
  *   POST /api/kits/hist/add|read|forget   per-patient kit history (E3, E4); patient id only in the body
  *   POST /api/kits/reviews             review-desk decisions (F1);  GET /api/kits/reviews/all (owner)
  *
- * Off unless env KITS_SHARE_ON = "1" (404 { error: "disabled" }), so merging this changes nothing until
- * the owner turns it on. Caller identity is the verified Firebase ID token only (verifiedClaimsFor),
+ * ON by default since the owner turned wave 2 on (2026-09-25). Kill switch: env KITS_SHARE_ON = "0" makes
+ * every route answer 404 { error: "disabled" }. The default lives here rather than in a wrangler.toml var
+ * because production sits at Cloudflare's 128 text-binding cap, and one more binding fails every
+ * deployment ("Too many text bindings"). Caller identity is the verified Firebase ID token only (verifiedClaimsFor),
  * never the Cf-Access email header. Errors are { error: code }; nothing clinical is logged.
  */
 import { verifiedClaimsFor } from "../../_fbauth.js";
@@ -44,7 +46,7 @@ export async function onRequest(context) {
   const waitUntil = context.waitUntil ? (p) => context.waitUntil(p) : null;
   const path = (Array.isArray(params.path) ? params.path.join("/") : String(params.path || "")).replace(/\/+$/, "").slice(0, 60);
   const method = request.method;
-  if (String(env.KITS_SHARE_ON || "") !== "1") return json({ enabled: false, error: "disabled" }, 404);
+  if (String(env.KITS_SHARE_ON || "") === "0") return json({ enabled: false, error: "disabled" }, 404);
 
   const claims = await verifiedClaimsFor(request, env);
   const uid = claims && typeof claims === "object" && typeof claims.sub === "string" ? claims.sub : "";
