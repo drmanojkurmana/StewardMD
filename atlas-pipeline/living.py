@@ -75,9 +75,28 @@ MODULES = {
                                seg="brain/br_sagittal_seg.nii.gz", window=None,
                                M=[[0, 0, 1, 0], [-1, 0, 0, 352], [0, -1, 0, 319]]),
 }
-SOURCE = {"live-torso": "totalsegmentator-dataset", "live-brain": "openneuro-cc0"}
+# Neck and thorax-neck (2026-09-25): tsd_living.py re-indexes the subject's CT into the torso
+# convention (x = patient right, y = anterior, z index 0 = superior, axes MEASURED from the masks)
+# as tsd/<group>/vol.nii.gz, and cuts the planes with the same crop_pair/reformat. M below is what
+# it wrote to tsd/<group>/group.json; verify_map() re-proves each voxel for voxel.
+#   live-neck (s0021):        axial = vol[:, 0:171, :]; coronal and sagittal then drop their 6 most inferior rows
+#   live-thorax-neck (s0897): axial = vol[7:216, 10:190, :]; the sagittal then drops 1 anterior column and 1 posterior
+_TSD_GROUPS = {
+    "live-neck": ("ct-live-neck", [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0]],
+                  [[1, 0, 0, 0], [0, 0, -1, 170], [0, -1, 0, 217]], [[0, 0, 1, 0], [-1, 0, 0, 170], [0, -1, 0, 217]]),
+    "live-thorax-neck": ("ct-live-thorax-neck", [[1, 0, 0, 7], [0, 1, 0, 10], [0, 0, 1, 0]],
+                         [[1, 0, 0, 7], [0, 0, -1, 189], [0, -1, 0, 262]], [[0, 0, 1, 7], [-1, 0, 0, 188], [0, -1, 0, 262]]),
+}
+for _g, (_pre, _ax, _co, _sa) in _TSD_GROUPS.items():
+    for _plane, _M in (("axial", _ax), ("coronal", _co), ("sagittal", _sa)):
+        MODULES["%s-%s" % (_pre, _plane)] = dict(group=_g, plane=_plane, vol="tsd/%s/%s.nii.gz" % (_g, _plane),
+                                                  seg="tsd/%s/%s_seg.nii.gz" % (_g, _plane), window="soft-tissue", M=_M)
+SOURCE = {"live-torso": "totalsegmentator-dataset", "live-brain": "openneuro-cc0",
+          "live-neck": "totalsegmentator-dataset", "live-thorax-neck": "totalsegmentator-dataset"}
 ORIG = {"live-torso": ("tsd/live_vol.nii.gz", "tsd/live_seg.nii.gz"),
-        "live-brain": ("brain/br_vol.nii.gz", "brain/br_seg.nii.gz")}
+        "live-brain": ("brain/br_vol.nii.gz", "brain/br_seg.nii.gz"),
+        "live-neck": ("tsd/live-neck/vol.nii.gz", "tsd/live-neck/vol_seg.nii.gz"),
+        "live-thorax-neck": ("tsd/live-thorax-neck/vol.nii.gz", "tsd/live-thorax-neck/vol_seg.nii.gz")}
 WINDOWS = [{"id": "soft", "label": "Soft tissue"}, {"id": "lung", "label": "Lung"}, {"id": "bone", "label": "Bone"}]
 EXTRA_WINDOWS = {"lung": "lung", "bone": "bone"}          # window id -> slices.WINDOWS key
 PLANE_AXIS = {"axial": 1, "coronal": 2, "sagittal": 0}    # frame axis normal to each plane
@@ -104,8 +123,19 @@ def brain_frame(work):
     return ras_to_frame @ t1.affine @ zflip
 
 
+def tsd_frame(work, group):
+    """Neck groups: the torso's axis convention (x = patient left, y = superior, z = anterior, metres)
+    centred on the group volume. It only relates the three planes to one another; no 3D body uses it."""
+    import nibabel as nib
+    nx, ny, nz = nib.load(os.path.join(work, ORIG[group][0])).shape
+    return np.array([[-MM, 0, 0, (nx - 1) / 2.0 * MM], [0, 0, -MM, (nz - 1) * MM], [0, MM, 0, -(ny - 1) / 2.0 * MM],
+                     [0, 0, 0, 1.0]])
+
+
 def frame_of(group, work):
-    return F_TORSO if group == "live-torso" else brain_frame(work)
+    if group == "live-torso":
+        return F_TORSO
+    return tsd_frame(work, group) if group in _TSD_GROUPS else brain_frame(work)
 
 
 def m4(M):
@@ -163,7 +193,8 @@ def assemble_stack(work, mid, n, out_dir):
     stubs = extract_slices(os.path.join(work, m["vol"]), out_dir, rel, n, m["window"], SOURCE[m["group"]],
                            os.path.join(work, m["seg"]))
     zooms = nib.load(os.path.join(work, m["vol"])).header.get_zooms()[:3]
-    mapping = load_mapping("ct-live-torso-axial" if m["group"] == "live-torso" else "mri-brain-axial")
+    mapping = load_mapping({"live-torso": "ct-live-torso-axial", "live-brain": "mri-brain-axial"}.get(
+        m["group"], mid.rsplit("-", 1)[0] + "-axial"))
     pins = pins_from_segmentation(os.path.join(work, m["seg"]), stubs, mapping, (zooms[1], zooms[0]))
     fresh = assemble({"id": mid}, stubs, pins, mapping)
     structures = dict(old["structures"])
@@ -313,6 +344,11 @@ EVIDENCE = {
     # label sets (integer mask values) used for the orientation evidence in ORIENTATION.md
     "live-torso": {"liver": [5], "spleen": [1], "heart": [51], "spinal cord": [79],
                    "urinary bladder": [21], "right middle lobe": [13], "left upper lobe": [10]},
+    "live-neck": {"trachea": [16], "spinal cord": [79], "thyroid gland": [17], "aorta": [52],
+                  "superior vena cava": [62], "heart": [51], "cervical vertebrae": [44, 45, 46, 47, 48, 49, 50]},
+    "live-thorax-neck": {"trachea": [16], "spinal cord": [79], "thyroid gland": [17], "aorta": [52],
+                         "superior vena cava": [62], "heart": [51], "liver": [5], "spleen": [1],
+                         "cervical vertebrae": [44, 45, 46, 47, 48, 49, 50]},
     "live-brain": {"caudate": [11, 50], "cerebellar cortex": [8, 47], "brainstem": [16],
                    "cerebral cortex": [3, 42], "hemisphere labelled LEFT": [2, 3], "hemisphere labelled RIGHT": [41, 42]},
 }
@@ -467,22 +503,27 @@ def main():
                     help="only prove the build reproduces every shipped module (paths, aspects, pins)")
     ap.add_argument("--densify", type=int, metavar="N",
                     help="with --write: rebuild each module as an N-slice stack under atlas/<id>/v2/")
+    ap.add_argument("--group", action="append", choices=sorted(ORIG),
+                    help="only these groups (repeatable). Default: torso and brain, the groups whose "
+                         "3D planes and links this script also writes")
     a = ap.parse_args()
+    groups = tuple(a.group or ("live-torso", "live-brain"))
+    mids = [m for m in MODULES if MODULES[m]["group"] in groups]
     if a.prove_rebuild or a.densify:
-        for mid in MODULES:
+        for mid in mids:
             prove_rebuild(os.path.abspath(a.work), mid)
         if a.prove_rebuild:
             return 0
         if not a.write:
             ap.error("--densify writes; pass --write")
-        for mid in MODULES:
+        for mid in mids:
             densify(os.path.abspath(a.work), mid, a.densify)
-    info = build(os.path.abspath(a.work))
+    info = build(os.path.abspath(a.work), groups)
     if not a.write:
         print("verified; nothing written (pass --write)")
         return 0
     work = os.path.abspath(a.work)
-    for mid in MODULES:
+    for mid in mids:
         if MODULES[mid]["window"]:
             windows(work, mid, info[mid]["picks"], info[mid]["stack"], info[mid]["dims"])
         p = os.path.join(_REPO, "atlas", mid, "atlas.json")
@@ -497,12 +538,15 @@ def main():
     cat = json.load(open(cp, encoding="utf-8"))
     for row in cat["modules"]:
         m = MODULES.get(row["id"])
-        if m:
+        if m and row["id"] in mids:
             row.update({"group": m["group"], "plane": m["plane"], "mm": info[row["id"]]["mm"]})
             if m["window"]:
                 row["windows"] = WINDOWS
     with open(cp, "w", encoding="utf-8") as fh:
         json.dump(cat, fh, indent=1, ensure_ascii=False)
+    if "live-torso" not in groups:
+        print("wrote q, group/plane/mm/windows and window images (no 3D body for %s)" % ", ".join(groups))
+        return 0
     from bp3d_import import replace_key, relink
     planes = torso_planes(info)
     replace_key(os.path.join(_REPO, "atlas", "3d", "manifest.json"), "planes", planes, "live")

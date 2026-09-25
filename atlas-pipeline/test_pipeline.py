@@ -427,4 +427,27 @@ try:
 except ImportError:
     pass
 
+# --- tsd_living: the index maps it writes must equal what crop_pair + reformat actually do ---
+import numpy as _np2
+from vhp_volume import crop_pair as _cp, reformat as _rf
+from tsd_living import module_maps as _mm, canonical as _canon
+_rng = _np2.random.default_rng(7)
+_v = _rng.integers(-1000, 1000, size=(23, 19, 17)).astype(_np2.int16)
+_g = _np2.zeros_like(_v, dtype=_np2.uint16); _g[4:18, 3:11, 2:15] = 1; _g[9, 6, 5] = 2
+_ax_v, _ax_g, _bax = _cp(_v, _g, margin=2)
+_co_v, _co_g, _ = _rf(_ax_v, _ax_g, "coronal", (1.5, 1.5, 1.5)); _co_v, _co_g, _bco = _cp(_co_v, _co_g, margin=2)
+_sa_v, _sa_g, _ = _rf(_ax_v, _ax_g, "sagittal", (1.5, 1.5, 1.5)); _sa_v, _sa_g, _bsa = _cp(_sa_v, _sa_g, margin=2)
+_maps = _mm(_v.shape, _bax, _bco, _bsa)
+def _mapped_ok(ref, M):
+    A, B, N = ref.shape
+    ii, jj, kk = _np2.meshgrid(_np2.arange(A), _np2.arange(B), _np2.arange(N), indexing="ij")
+    M = _np2.asarray(M)
+    idx = tuple(M[r, 0] * ii + M[r, 1] * jj + M[r, 2] * kk + M[r, 3] for r in range(3))
+    return _np2.array_equal(_v[idx], ref)
+ok("tsd_living axial map re-indexes the crop exactly", _mapped_ok(_ax_v, _maps["axial"]))
+ok("tsd_living coronal map re-indexes reformat + crop exactly", _mapped_ok(_co_v, _maps["coronal"]))
+ok("tsd_living sagittal map re-indexes reformat + crop exactly", _mapped_ok(_sa_v, _maps["sagittal"]))
+_c = _canon(_v, (2, 0, 1), (True, False, True))
+ok("canonical() permutes then reverses the named axes", _c.shape == (17, 23, 19) and _c[0, 0, 0] == _v[0, 18, 16] and _c[16, 22, 18] == _v[22, 0, 0])
+
 print("ALL %d PASS" % PASS[0])
