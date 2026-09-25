@@ -9509,3 +9509,11 @@ for 3. The rnav grid is visible so it worked; the split now ignores spaces insid
 (`INSULIN`/`ICU`, not `SMD_*`) and were re-run rather than left unverified, which mattered: they hold
 14 of the 168 rewrites. One grid, `.ml-dose-grid`, needs a dose-editor state the harness does not
 reach and was not exercised.
+
+## 2026-09-25 - Wave 2 turned on by code default, not a Cloudflare variable
+The owner asked to turn wave 2 on. The planned switch was a Pages variable `KITS_SHARE_ON=1`, but
+production already uses all 128 text bindings (vars + secrets) and one more fails every deployment. So
+the server route and the client flag now default ON in code; `KITS_SHARE_ON=0` and `smd_kits_share="0"`
+are the kill switches. Before switching on, a colleague became addressable by sign-in email as well as
+StewardMD ID (most doctors have no ID yet), the sheet shows your own ID, and sends and invites spend
+the rate limit before the directory lookup so the directory cannot be probed for free.

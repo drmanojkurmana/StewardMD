@@ -1,7 +1,7 @@
 ---
 tags: [module, opd, sharing, server]
-status: built 2026-09-25, OFF (client flag smd_kits_share default OFF; server KITS_SHARE_ON unset). Owner turns on.
-flag: smd_kits_share (client, def:false, ?share=1 per load) + env KITS_SHARE_ON="1" (server route /api/kits)
+status: ON since 2026-09-25 (owner: "turn on wave 2"). Client flag and server route both default ON.
+flag: smd_kits_share (client, def:true; "0" on a device or ?share=0 turns it off) + env KITS_SHARE_ON (server; "0" = kill switch)
 ---
 # Colleagues (kits sharing, wave 2)
 
@@ -44,15 +44,16 @@ have no StewardMD ID until something mints one (ICU groups, ID onboarding), so t
   doctor cannot probe which IDs or emails belong to verified doctors without spending the limit. Payloads capped (24 KB message, field caps); router refuses bodies over 64 KB.
 - Expired items drop out of lists and are deleted on the next list.
 
-## Turning it on (owner)
-The owner asked to turn it on on 2026-09-25. Two switches, both still OFF:
-1. **Server.** The route needs `KITS_SHARE_ON=1`. **Production is at Cloudflare's 128 text-binding cap**
-   (vars + secrets; see [[Infra]]), so adding this var as a new binding fails every deployment with
-   "Too many text bindings". Either free one binding first (remove a var that equals its code default),
-   or change the gate in `functions/api/kits/[[path]].js` to "on unless `KITS_SHARE_ON` is `"0"`" (no new
-   binding). `FOLLOWCARE_PHI_KEY` and `FIREBASE_SERVICE_ACCOUNT` are already set in production.
-2. **Client.** `smd_kits_share` defaults OFF in `kits-share.js` `flagOn()` and the Home tile `eligible`.
-   Per device: `?share=1` or `localStorage.smd_kits_share = "1"`. Native users need a rebuild either way.
+## On, and how to switch it off
+The owner turned it on on 2026-09-25. Both defaults are in code:
+- **Server** `functions/api/kits/[[path]].js`: on unless `KITS_SHARE_ON` is `"0"`. Not a wrangler.toml
+  var because production sits at Cloudflare's 128 text-binding cap ([[Infra]]); one more binding fails
+  every deployment. To switch off: set `KITS_SHARE_ON=0` (free a binding first) or revert the default.
+- **Client** `kits-share.js` `flagOn()` and the Home tile `eligible` (tile `defOn: true`): on unless the
+  device has `smd_kits_share = "0"` or the URL has `?share=0`. Native users get it with the next build.
+- Needs no new secret: `FOLLOWCARE_PHI_KEY` and `FIREBASE_SERVICE_ACCOUNT` were already set.
+- In a kit, the card sits after the order sets, before investigations, so the kit's clinical content
+  stays at the top.
 Optional: deploy `firestore.rules` (the kx_* lines only document the catch-all deny).
 
 ## Tests
