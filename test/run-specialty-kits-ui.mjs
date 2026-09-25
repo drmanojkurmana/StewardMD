@@ -259,6 +259,7 @@ try{
  ok(await ev(`document.activeElement&&document.activeElement.getAttribute('data-oe-inp')==='assess:provisional_diagnosis'`),'typing keeps focus in the diagnosis field');
  await click(`${R} [data-oe-act="tab:kit"]`); await until(`!!document.querySelector('${R} .kit')`);
  // Documents from the consult: above the OPD EMR, prefilled with the patient.
+ await pickKit(R,'forensic');
  await click(`${R} [data-kit-act="docs"]`);
  ok(await until(`document.querySelector('#smdDocs.on')`)&&await topIs('#smdDocs'),'documents open above the consult');
  await click('#smdDocs [data-dl-act="type:leave"]');
@@ -267,6 +268,25 @@ try{
  ok(await until(`!!document.querySelector('#smdDocs iframe.dl-frame')&&/Medical leave certificate/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)`),'the preview shows the certificate');
  ok(!/[–—]/.test(await ev(`document.querySelector('#smdDocs').innerText`)),'documents: no em or en dash on screen');
  await shot('docs-leave-390');
+ // Consent form in Telugu and a handout in Hindi: the preview is in that script and says it is machine-drafted.
+ await click('#smdDocs [data-dl-act="back"]'); await click('#smdDocs [data-dl-act="type:consent"]');
+ await until(`!!document.querySelector('#smdDocs [data-dl-act="lang:te"]')`);
+ await click('#smdDocs [data-dl-act="lang:te"]'); await click('#smdDocs [data-dl-act="consent:caesarean-section"]');
+ ok(await until(`/native-speaker check of the Telugu/.test(document.querySelector('#smdDocs').textContent)`),'a Telugu consent form says its translation needs a native-speaker check');
+ await click('#smdDocs [data-dl-act="preview"]');
+ ok(await until(`/[\u0C00-\u0C7F]{4}/.test((document.querySelector('#smdDocs iframe.dl-frame')||{}).srcdoc||'')&&/Kit Patient/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)`),'consent preview is in Telugu with the patient named');
+ await click('#smdDocs [data-dl-act="back"]'); await click('#smdDocs [data-dl-act="type:handout"]');
+ await until(`!!document.querySelector('#smdDocs [data-dl-act="lang:hi"]')`);
+ await click('#smdDocs [data-dl-act="lang:hi"]');
+ await until(`!!document.querySelector('#smdDocs [data-dl-adv]')`);
+ ok(await ev(`document.querySelector('#smdDocs [data-dl-adv]').getAttribute('data-dl-adv').startsWith('forensic/')`),'the kit the documents came from lists its advice first');
+ await ev(`(()=>{const c=document.querySelector('#smdDocs [data-dl-adv]');c.checked=true;c.dispatchEvent(new Event('change',{bubbles:true}));return 1})()`);
+ await ev(`(()=>{const el=document.querySelector('#smdDocs [data-dl-q]');el.focus();el.value='xyzzy';el.dispatchEvent(new Event('input',{bubbles:true}));return 1})()`);
+ ok(await until(`document.querySelectorAll('#smdDocs [data-dl-adv]').length===1&&document.activeElement===document.querySelector('#smdDocs [data-dl-q]')`),'advice search filters, keeps the ticked item and keeps focus');
+ await click('#smdDocs [data-dl-act="preview"]');
+ ok(await until(`/[\u0900-\u097F]{4}/.test((document.querySelector('#smdDocs iframe.dl-frame')||{}).srcdoc||'')`),'handout preview is in Hindi');
+ ok(await ev(`!document.querySelector('#smdDocs [data-dl-adv]').parentElement.textContent.includes('(English)')`),'the advice text has a Hindi translation (no English fallback marker)');
+ await shot('docs-handout-hi-390');
  await click('#smdDocs [data-dl-act="close"]');
  ok(await until(`!document.querySelector('#smdDocs.on')`)&&await topIs('#smdOpdEmr'),'closing documents returns to the consult');
  // Read-only consult (a GHIS consult without the write flag has writeOn false): the kit explains,

@@ -46,6 +46,15 @@ print dialog on the web.
   VTE rates were left out (no fetchable Indian source). NACO pages refused connections (read from search
   results).
 - Telugu and Hindi are machine-drafted (`review.translation`): a native-speaker clinician must check
-  them. The sheet says so on every non-English form.
+  them. The sheet says so on every non-English form. Handouts: 88 of 88 advice texts in each language;
+  numbers kept as digits. Check first (translator's own list): `nephrology-urology/stone-prevention`
+  (2 to 2.5 L is urine output, not intake), `cardiology/after-heart-attack` ("vanaspati" avoided: patients
+  read it as Dalda), `neurology/headache-warning` and `palliative/when-to-call` (English is ambiguous;
+  pick one reading, the second is the cord compression warning), `ent/nosebleed-first-aid` (15 minutes in
+  total), `neurology/seizure-safety` (bucket baths), `nephrology-urology/urology-warning-signs` (fistula
+  thrill, PD fluid, "bagal" avoided), `emergency/sepsis-warning-signs` ("pale"), `cardiology/heart-failure-self-care`
+  (low sodium salt gloss), `community-medicine/anc-care` (a quarter more food), `forensic/cause-of-death-certificate`
+  (official form names), and the narrower words chosen for ringworm, scabies, gout and anaesthetic.
+- The handout list puts the kit the sheet was opened from first and has a search box; ticked items stay.
 
 Deps: [[Specialty Kits]] · [[OPD Queue]] · [[Home Tools]] · [[Review Desk]].

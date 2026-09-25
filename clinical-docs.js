@@ -15,7 +15,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var DOCS_V = "342ceedc8694";
+  var DOCS_V = "fa0f388bfcd3";
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function ms(n) { return '<span class="material-symbols-outlined kit-ic" aria-hidden="true">' + n + "</span>"; }
@@ -143,7 +143,7 @@
   /* ======================================== state ======================================== */
   var BUNDLE = null, pend = null, PROF = {}, KITB = null;
   // handover: kept in memory only (never stored on the phone); the doctor shares it before closing.
-  var S = { type: "", vals: {}, lang: "en", consentId: "", adviceSel: {}, ctx: null, regNo: "", handover: [] };
+  var S = { type: "", vals: {}, lang: "en", consentId: "", adviceSel: {}, advQ: "", kitId: "", ctx: null, regNo: "", handover: [] };
   function load() {
     if (BUNDLE) return Promise.resolve(BUNDLE); if (pend) return pend;
     pend = fetch("/kb/documents/documents.json?v=" + encodeURIComponent(DOCS_V)).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
@@ -166,15 +166,24 @@
   function consentList() { return (BUNDLE && BUNDLE.consent) || []; }
   function consentById(id) { return consentList().filter(function (c) { return c.id === id; })[0] || null; }
   // Every advice text in every kit, in the chosen language when a translation exists.
+  // The kit the documents were opened from comes first, so its advice is at the top of the list.
   function adviceAll() {
-    var out = [], tr = (BUNDLE && BUNDLE.handouts && BUNDLE.handouts[S.lang]) || null;
-    ((KITB && KITB.kits) || []).forEach(function (k) {
+    var out = [], tr = (BUNDLE && BUNDLE.handouts && BUNDLE.handouts[S.lang]) || null, first = S.kitId;
+    ((KITB && KITB.kits) || []).slice().sort(function (a, b) { return (b.id === first) - (a.id === first); }).forEach(function (k) {
       (k.advice || []).forEach(function (a) {
         var key = k.id + "/" + a.id, t = tr && tr.texts && tr.texts[key];
         out.push({ key: key, kit: k.short || k.label, title: t ? t.title : a.title, text: t ? t.text : a.text, translated: !!t || S.lang === "en" });
       });
     });
     return out;
+  }
+  // Ticked items always stay visible; the search matches the specialty, title and text.
+  function adviceListHtml() {
+    var q = String(S.advQ || "").toLowerCase().trim();
+    var list = adviceAll().filter(function (a) { return !q || S.adviceSel[a.key] || (a.kit + " " + a.title + " " + a.text).toLowerCase().indexOf(q) >= 0; });
+    return list.length ? list.map(function (a) {
+      return '<label class="kit-check"><input type="checkbox" data-dl-adv="' + esc(a.key) + '"' + (S.adviceSel[a.key] ? " checked" : "") + "><span><b>" + esc(a.kit) + ":</b> " + esc(a.title) + (a.translated ? "" : " (English)") + "</span></label>";
+    }).join("") : '<p class="kit-muted">No advice matches.</p>';
   }
   // Prefill from the open consult (OPD host passes patient + assessment values; nothing is stored).
   function prefill(type) {
@@ -222,9 +231,8 @@
       }
       if (S.type === "handout") {
         if (!BUNDLE || !KITB) { Promise.all([load().catch(function () { return null; }), kitsBundle()]).then(render); extra = '<p class="kit-muted">Loading advice texts…</p>'; }
-        else extra = langRow() + adviceAll().map(function (a) {
-          return '<label class="kit-check"><input type="checkbox" data-dl-adv="' + esc(a.key) + '"' + (S.adviceSel[a.key] ? " checked" : "") + "><span><b>" + esc(a.kit) + ":</b> " + esc(a.title) + (a.translated ? "" : " (English)") + "</span></label>";
-        }).join("");
+        else extra = langRow() + '<label class="kit-field wide" for="dl_advq"><span class="kit-fl">Find advice</span><input id="dl_advq" type="search" class="kit-inp" data-dl-q value="' + esc(S.advQ) + '" placeholder="e.g. fever, diabetes, wound" autocomplete="off"></label>' +
+          '<div data-dl-advlist>' + adviceListHtml() + "</div>";
       }
       if (S.type === "handover") extra = handoverHtml();
       html = '<button type="button" class="kit-link" data-dl-act="back">' + ms("arrow_back") + "All documents</button><h2 class=\"dl-h\">" + esc(t[1]) + "</h2>" + reviewNote() +
@@ -266,11 +274,12 @@
     }
     S.ctx = opts.ctx || null; S.type = opts.type || ""; S.vals = S.type ? prefill(S.type) : {};
     if (opts.consentId) S.consentId = opts.consentId;
+    S.kitId = opts.kitId || ""; S.advQ = "";
     el.classList.add("on");
     if (G.SMD_RX && G.SMD_RX.verifiedInfo) G.SMD_RX.verifiedInfo().then(function (v) { S.regNo = (v && v.verified && v.regNo) || ""; }, function () {});
     render();
   }
-  function close() { var el = D && D.getElementById("smdDocs"); if (el) el.classList.remove("on"); S.ctx = null; S.vals = {}; S.adviceSel = {}; S.handover = []; }
+  function close() { var el = D && D.getElementById("smdDocs"); if (el) el.classList.remove("on"); S.ctx = null; S.vals = {}; S.adviceSel = {}; S.advQ = ""; S.handover = []; }
 
   // Output exactly as the prescription does: native = file + OS share sheet; web = hidden iframe print.
   function output(html, name) {
@@ -313,7 +322,8 @@
     var el = e.target; if (!el || !el.closest || !el.closest("#smdDocs")) return;
     var f = el.getAttribute("data-dl-f"); if (f) { S.vals[f] = el.value; return; }
     var h = el.getAttribute("data-dl-h"); if (h) { var hp = h.split(":"), row = S.handover[+hp[0]]; if (row) row[hp[1]] = el.value; return; }
-    var a = el.getAttribute("data-dl-adv"); if (a) { if (el.checked) S.adviceSel[a] = true; else delete S.adviceSel[a]; }
+    var a = el.getAttribute("data-dl-adv"); if (a) { if (el.checked) S.adviceSel[a] = true; else delete S.adviceSel[a]; return; }
+    if (el.hasAttribute("data-dl-q")) { S.advQ = el.value; var box = D.querySelector("#smdDocs [data-dl-advlist]"); if (box) box.innerHTML = adviceListHtml(); }
   }
   if (D && D.addEventListener && !G.__smdDocsWired) {
     G.__smdDocsWired = true;

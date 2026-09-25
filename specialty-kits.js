@@ -1339,7 +1339,7 @@
     var host = hostFor(btn), k = ks(key), kit = kitById(k.kitId);
     if (cmd === "kit") { k.kitId = arg; k.picker = false; k.pickerQ = ""; pushRecent(arg); var kk = kitById(arg); if (kk && kk.scribe && host.setScribe) host.setScribe(kk.scribe); host.repaint(); return; }
     if (cmd === "mic") { micStart(btn, arg, host); return; }
-    if (cmd === "docs") { if (G.SMD_DOCS) G.SMD_DOCS.open({ ctx: host.patient && host.kind === "opd" && host.consult ? host.consult() : null }); return; }
+    if (cmd === "docs") { if (G.SMD_DOCS) G.SMD_DOCS.open({ ctx: host.patient && host.kind === "opd" && host.consult ? host.consult() : null, kitId: kit.id }); return; }
     if (cmd === "picker") { k.picker = !k.picker; host.repaint(); if (k.picker && D) { var qi = D.getElementById("kit_picker_q"); if (qi) try { qi.focus(); } catch (e) {} } return; }
     if (cmd === "mine") { setMySpecialty(arg, "manual"); toast("Saved as your specialty."); host.repaint(); return; }
     if (!kit) return;
