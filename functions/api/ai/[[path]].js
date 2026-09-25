@@ -23,7 +23,7 @@
  *     Legacy (only if org allows SA keys): GCP_SA_PRIVATE_KEY.
  *   Developer (fallback): GEMINI_API_KEY (AI Studio).
  * Enabled if EITHER provider is configured. Vertex → Developer failover on error.
- * Auth: authorise() below (verified Firebase token, Cf-Access with its JWT assertion, X-App-Token,
+ * Auth: authorise() below (verified Firebase token, verified Cf-Access JWT, X-App-Token,
  *   X-SMD-App, or an allowed Origin).
  *
  * PHI NOTE: /vision sends a clinical IMAGE and /explain sends clinical FINDINGS
@@ -52,9 +52,9 @@ function firewallBlock(q) {
 // APP_GATE_KEY secret provisioned in prod 2026-08-16 -> the empty-Origin block below is now ACTIVE
 // (anonymous non-app clients rejected; native X-SMD-App + owner/Cf-Access + named Origins still pass).
 async function authorise(request, env) {
-  // Cloudflare Access: only with its JWT assertion header alongside (cfAccessEmail). The email header
-  // alone used to pass, and any client can send it.
-  if (cfAccessEmail(request)) return true;
+  // Cloudflare Access: only when its JWT assertion VERIFIES (cfAccessEmail). The email header alone, or
+  // with any junk in the assertion header, used to pass, and any client can send both.
+  if (await cfAccessEmail(request, env)) return true;
   // A signed-in caller (Firebase Bearer token) is never the anonymous-abuse case the Origin gate guards
   // against — and browsers omit the Origin header on SAME-ORIGIN GETs, which was silently 403-ing the
   // admin console + web app once APP_GATE_KEY was set. The token must VERIFY (T28): ANY Authorization
@@ -1124,20 +1124,11 @@ function routeMemPut(k, v) {
   } catch (e) {}
 }
 
-/* A Cf-Access email header WITHOUT Cloudflare Access's JWT assertion is client-supplied: drop it before
- * anything reads it, so identify() / quota / wallet (functions/_usage.js) can never be pointed at
- * another doctor's account by a spoofed header (T28). Access-fronted requests carry both and are kept. */
-function accessSafeRequest(request) {
-  if (!request.headers.get("Cf-Access-Authenticated-User-Email") || cfAccessEmail(request)) return request;
-  const h = new Headers(request.headers);
-  h.delete("Cf-Access-Authenticated-User-Email");
-  return new Request(request, { headers: h });
-}
-
 export async function onRequest(context) {
   const _reqT0 = Date.now();   // request entry — lets headMs separate OUR pre-branch work from network
-  const { env, params } = context;
-  const request = accessSafeRequest(context.request);
+  // No header stripping needed: identify() (functions/_usage.js) takes a Cf-Access identity only from a
+  // VERIFIED Access JWT (_fbauth.js cfAccessEmail), so a spoofed email header is simply ignored (T28).
+  const { env, params, request } = context;
   // CORS preflight (native WebView streaming) — no auth; must precede authorise.
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
   if (!(await authorise(request, env))) return json({ error: "unauthorised" }, 403);
@@ -1459,7 +1450,7 @@ export async function onRequest(context) {
    * keyed by the client-supplied X-SMD-Device, which a script can rotate per request; this bounds
    * one address. Generous (a hospital NAT is many doctors) and fails OPEN when KV is unavailable.
    * Verified Firebase / Cloudflare Access callers are never counted here. */
-  if ((seg === "explain" || seg === "research") && request.method === "POST" && !cfAccessEmail(request) && !(await verifiedClaimsFor(request, env))) {
+  if ((seg === "explain" || seg === "research") && request.method === "POST" && !(await cfAccessEmail(request, env)) && !(await verifiedClaimsFor(request, env))) {
     const _lim = Number(env.MAIK_GUEST_BURST_PER_MIN) > 0 ? Number(env.MAIK_GUEST_BURST_PER_MIN) : 20;
     const _b = await hitLimit(usageKv(env), "gburst", clientIp(request), _lim, 60, typeof context.waitUntil === "function" ? context.waitUntil.bind(context) : null);
     if (!_b.ok) return json({ error: "quota", reason: "rate", message: "Too many requests from this network. Please wait a minute and try again." }, 429);

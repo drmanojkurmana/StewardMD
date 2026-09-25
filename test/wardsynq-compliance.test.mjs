@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-compliance.test.mjs - NABH indicators, the HMIS monthly return, the DHS self-assessment and the report
  * builder: the pure calculations, and the routes through the real /api/queue handler with their authorization.
  *

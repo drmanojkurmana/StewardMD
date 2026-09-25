@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-cardiology.test.mjs — the KardiQ X bridge, through the REAL routes.
  *
  * KardiQ X is not rebuilt: this proves the LINKAGE (resolving a bare mrn to the real canonical

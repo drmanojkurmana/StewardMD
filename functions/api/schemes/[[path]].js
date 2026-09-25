@@ -22,6 +22,7 @@
  *                                            -> { results:[...packages], total }                  (no free text, paginated)
  */
 import * as repo from "../../_schemes_repo.js";
+import { cfAccessEmail } from "../../_fbauth.js";
 
 const json = (obj, opts) => {
   opts = opts || {};
@@ -32,10 +33,10 @@ const json = (obj, opts) => {
 };
 const PUB_CACHE = "public, max-age=300";
 
-// Coarse app gate — same shape as functions/api/retrieve/[[path]].js: Cf-Access, X-App-Token,
+// Coarse app gate — same shape as functions/api/retrieve/[[path]].js: verified Cf-Access JWT, X-App-Token,
 // or an allowed/empty Origin (native app requests carry no Origin header).
-function authorise(request, env) {
-  if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+async function authorise(request, env) {
+  if (await cfAccessEmail(request, env)) return true;   // a VERIFIED Access JWT; the bare email header is forgeable
   const tok = request.headers.get("X-App-Token");
   if (env.GHIS_APP_TOKEN && tok === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && tok === env.AI_APP_TOKEN) return true;
@@ -61,7 +62,7 @@ function validState(raw) {
 // a 200, per the fail-safe contract (auth failure degrades the same as any other unavailability,
 // same as functions/api/retrieve/[[path]].js — never a 403/5xx on this public read surface).
 async function safeRead(request, env, empty, fn) {
-  if (!authorise(request, env) || !repo.hasDb(env)) return Object.assign({}, empty, { error: "unavailable" });
+  if (!(await authorise(request, env)) || !repo.hasDb(env)) return Object.assign({}, empty, { error: "unavailable" });
   try { return await fn(); } catch (e) { return Object.assign({}, empty, { error: "unavailable" }); }
 }
 

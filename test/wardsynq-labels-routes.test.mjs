@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-labels-routes.test.mjs - printed labels and camera scanning, the server side, through the REAL router.
  *
  * Routes: GET /api/queue/ward/label-data (what a wristband, tube label or ID slip says about the patient),

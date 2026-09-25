@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-chart-completion-bridge.test.mjs — TASK 4.11: chart completion through the REAL
  * route, reading real ClinicalNote/CriticalResultLoop/MedicationReconciliation/PatientConsent rows
  * via MemoryRepository directly (the same seeding style test/wardsynq-roi-bridge.test.mjs uses),

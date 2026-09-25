@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-ed.test.mjs — the emergency department vertical, through the REAL routes.
  *
  * ED arrival (known and unidentified) -> triage acuity -> vitals -> doctor assessment (note) ->

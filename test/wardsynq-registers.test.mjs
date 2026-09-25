@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-registers.test.mjs - the statutory registers (registers.js, register-routes.js, controlled-drugs.js,
  * notifiable.js). Real router, real RecordService, in-memory repository.
  *

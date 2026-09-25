@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-maternity.test.mjs — the OB-GYN/maternity vertical, through the REAL routes.
  *
  * Admission (class:MATERNITY, reusing migrate-inpatient.js unchanged) -> pregnancy episode -> a

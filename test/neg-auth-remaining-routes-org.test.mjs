@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/neg-auth-remaining-routes-org.test.mjs — negative-authorization coverage for the remaining
  * routes that scripts/wardsynq-reachability.mjs listed as untested and that sit OUTSIDE the WardSynQ
  * clinical record store: GET+POST /bill/tariff, POST /bill/invoice, POST /bill/dispense, GET /bill/shift,

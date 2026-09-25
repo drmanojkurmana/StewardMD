@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-rbac-4-13-bridge.test.mjs — TASK 4.13: the new alternative-authority fallbacks
  * through the REAL routes - a `him` role member reaching ROI routes without staff.admin, a
  * `blood_bank` role member reaching transfusion routes without emr.treat, and confirming neither

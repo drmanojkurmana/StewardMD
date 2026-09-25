@@ -49,6 +49,7 @@ FAMILY = {
     "superior_vena_cava": "vessel", "brachiocephalic_trunk": "vessel",
     "common_carotid_artery_left": "vessel", "common_carotid_artery_right": "vessel",
     "subclavian_artery_left": "vessel", "subclavian_artery_right": "vessel",
+    "brachiocephalic_vein_left": "vessel", "brachiocephalic_vein_right": "vessel",
     "iliac_artery_left": "vessel", "iliac_artery_right": "vessel",
     "iliac_vena_left": "vessel", "iliac_vena_right": "vessel",
     "atrial_appendage_left": "soft", "pulmonary_artery": "vessel",

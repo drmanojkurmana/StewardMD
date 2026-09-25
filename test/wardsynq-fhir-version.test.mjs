@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-fhir-version.test.mjs - D9: R4B and R5 by the fhirVersion MIME parameter.
  *
  * Pure: header negotiation, the R5 transforms validated against the generated R5 tables (and the R4 shape

@@ -9210,6 +9210,16 @@ floor; closing the app re-locks it. The backup holds only what exists nowhere el
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
 
+## 2026-09-25 — A Cloudflare Access identity counts only when its JWT verifies
+Roughly 25 routes (queue, wardsynq, connect incl. super-admin, license, billing, push, cases, and the
+coarse gates of experimental/fundx/followcare/icd/schemes/retrieve) took `Cf-Access-Authenticated-User-Email`
+at face value, and /api/ai (T28) accepted any value in `Cf-Access-Jwt-Assertion`. Both are plain request
+headers on a route Access does not front. `_fbauth.js cfAccessEmail(request, env)` now verifies the
+assertion (RS256 against `https://<team>/cdn-cgi/access/certs`, iss, aud, exp) and takes the email from
+its claims; both `identify()` helpers and every gate go through it. Access identity is OFF unless
+`CF_ACCESS_TEAM_DOMAIN` and `CF_ACCESS_AUD` are set. In-process test suites opt back into header trust
+with `test/helpers/trust-cf-access-header.mjs` (a global nothing in `functions/` sets).
+
 ## 2026-09-25 — One profile form, one institution directory
 Reported from a device: "all cities in India not covered and all medical colleges and hospitals not
 covered, and bug can't see and can't search college, and why two times institution is asked, I need
@@ -9281,3 +9291,68 @@ the heavy data in itself.
 different claims. A dataset reachable only through undocumented private knowledge is, from every
 other screen's point of view, not there at all. The test that matters is not "does the file exist"
 but "can a screen that knows nothing get it in one call".
+
+## 2026-09-25 - Geometry and slice images are never overwritten in place
+The Living CT 3D body failed on every native install without cached geometry from 2026-09-06 to
+2026-09-25: re-meshed chunks were uploaded to R2 under the old filenames while the manifest that
+matched them sat on an unmerged branch, and native builds check chunk sizes against their BUNDLED
+manifest. Rule: 3D chunk filenames carry their content hash (`pack3d.mjs`, `bp3d_import.py`), and
+2D slice images (served `immutable` for a year) are never rewritten; new stacks go under
+`atlas/<id>/v2/`. Upload new R2 objects before shipping the build that names them; never delete
+the old keys. Tests enforce both.
+
+## 2026-09-25 - RadioAnatome shows radiological convention by flipping at display time
+Files stay as the pipeline wrote them (the 3D cut planes texture the same images); `flipX`/`flipY`
+in `modules.json` mirror at display time. Edge letters only where anatomy proves the side
+(`docs/radioanatome/ORIENTATION.md`); no cadaver module asserts left/right. Clinical notes
+(`atlas/notes.json`) ship ai_drafted behind `smd_atlas_notes` (default OFF), like CliniX/SURGX.
+Shared 3D snapshots carry the CC BY credit inside the PNG, since CC BY 4.0 requires attribution on
+redistribution; the on-screen rule (attribution only on the About screen) is unchanged.
+
+## 2026-09-25 - Living neck CT: one command per TotalSegmentator subject, axes from anatomy
+`ct-live-neck-*` (s0021, `ct neck`, contrast) and `ct-live-thorax-neck-*` (s0897, `ct thorax-neck`,
+unenhanced) are built by `atlas-pipeline/tsd_living.py`, which measures each axis from the masks
+(C2 vs T4; trachea vs cord; descending aorta, SVC, brachiocephalic trunk course and heart, compared
+level by level) and re-indexes the CT into the torso convention before cutting, so every downstream
+tool (orient, reformat, living.py proofs, flipX) is reused unchanged. Masks mapped to null are
+dropped before the crop and slice pick: the first build spent 8 of 48 axial slices on the brain.
+New canonical ids (trachea, thyroid, neck vessels, right upper lobe) are 2D only for now: listed in
+`bp3d-map.json` `_pending_3d`, not mapped by name similarity. The 3D layer was out of scope.
+
+## 2026-09-25 — The offline clinical bundle is the drug database's search fallback, not just its detail source
+
+**Context.** QA reported "No drugs match Cefiderocol" (BUG-002). Investigation found the monograph was
+already shipped and already renderable; what did not exist was any way to *search* the 1,541 molecules
+in `data/offline-clinical.json.gz`. The server's `/search` is a brand-catalogue search and structurally
+cannot find a molecule with no Indian brand, and `/monograph` returns `found:false` for every molecule
+in production because the `monographs` table was never loaded.
+
+**Decision.** Ship a small separate index (`data/clinical-index.js`, name + class + tags, 331 KB) and
+have `api.js` fall back to it whenever the server returns nothing. The index is generated FROM the
+shipped bundle, not from `worker/data/gold/`, so it can never advertise a molecule the app cannot open.
+
+**Rejected:** bundling the 13 MB gold corpus as a client search index (too large, and a second copy of
+the same content that would drift); regenerating `offline-clinical.json.gz` from SQL to pick up the 104
+missing records (rewrites rows that currently match prod, needs the sqlite3 toolchain, and is not
+reversible in review). Instead the 104 ship as an additive supplement that merges under the bundle.
+
+**Consequence.** Search results can now include a molecule with zero brands. It is labelled
+"monograph" rather than "0 brands", which would read as "not available".
+
+**Still open.** `api.js` `goldFor()` / `window.SMD_GOLD_MONOGRAPHS` remains dead code pointing at
+`data/gold-monographs.js`, a file that has never existed in this repo. Either delete it or build it.
+
+## 2026-09-25 — Save Case and Patient Safety are one panel, and the patient is described once (BUG-019)
+
+**Context.** The two cards were reported as looking generic / AI-generated. Rendered side by side they
+were the same template twice (white card, coloured top rule, eyebrow, icon, title, subtitle) and BOTH
+asked for Age and Sex, to the point where the safety card's subtitle apologised for it: "Age and sex
+stay in sync with Save Case." A UI explaining its own duplication is the defect.
+
+**Decision.** When the safety card is present, draw the two as one panel (`:has(~ #smdSafetyCard)`)
+and hide the Save Case copy of Age/Sex. The inputs stay in the DOM: `app.js` clears `#scpAge`/`#scpSex`
+on every new case and `reasoning.js smdSyncAgeSex()` keeps them in step, so deleting them would break
+saving. `app.js` is a built artifact here and is not safely editable.
+
+**Consequence.** Age and Sex are asked once, in the card that is actually about the patient. Where
+`:has()` is unsupported the rules do not apply and the old two-card layout stands.
