@@ -3672,7 +3672,11 @@
       closeSheet(); setTimeout(function () { try { onPick(val); } catch (er) {} }, 60);
     });
   }
-  // Searchable hospital / medical-college picker (data: window.SMD_HOSPITALS — hospitals-in.js).
+  /* Searchable hospital / medical-college picker.
+   * Data: SMD_INSTITUTIONS (institutions-in.js), the ONE merged directory — every curated list plus
+   * whatever doctors have typed. It used to read window.SMD_HOSPITALS directly, which
+   * hospital-registry.js also owns, so before the lazy directory loaded .search was undefined and
+   * this picker found nothing. */
   function openHospitalPicker(onPick) {
     function opt(h) {
       return '<button class="hosp-opt" data-h="' + smdEsc(h.name) + '" style="display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--hbd,#e2e8f0);background:none;padding:11px 4px;cursor:pointer">' +
@@ -3680,8 +3684,9 @@
         '<span style="display:block;font:500 11px var(--hfont,system-ui);color:var(--hmut,#64748b)">' + smdEsc((h.city || "") + (h.state ? ", " + h.state : "")) + (h.type === "medical_college" ? " · Medical college" : "") + '</span></button>';
     }
     function render(q) {
-      var api = window.SMD_HOSPITALS;
-      var hits = (api && api.search) ? api.search(q) : (api && api.all ? api.all().slice(0, 50) : []);
+      var api = window.SMD_INSTITUTIONS ||
+        (window.SMD_HOSPITAL_DIRECTORY || (window.SMD_HOSPITALS && window.SMD_HOSPITALS.all ? window.SMD_HOSPITALS : null));
+      var hits = (api && api.search) ? api.search(q, { limit: 60 }) : (api && api.all ? api.all().slice(0, 50) : []);
       if (!hits.length) {
         var qq = smdEsc((q || "").trim());
         return '<div style="padding:14px 4px;color:var(--hmut,#64748b);font:500 12.5px var(--hfont,system-ui)">No match for &ldquo;' + qq + '&rdquo;.' +
@@ -3692,7 +3697,13 @@
       }
       return hits.map(opt).join("");
     }
-    smdLazy('/hospitals-in.js?v=1').then(function() {
+    /* ensure() loads the directory itself; the bare `smdLazy` this used to call is not defined on
+     * the page (lazy-load.js is not in index.html), so this handler threw and the picker never
+     * opened at all. */
+    (window.SMD_INSTITUTIONS && window.SMD_INSTITUTIONS.ensure
+      ? window.SMD_INSTITUTIONS.ensure()
+      : Promise.resolve()
+    ).then(function() {
       openSheet('<div class="hv-sh-t">Choose your hospital</div>' +
         '<input id="hospSearch" type="search" placeholder="Search hospital or medical college" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
         '<div id="hospList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + '</div>');
