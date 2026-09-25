@@ -8,9 +8,12 @@
  * This proves: (a) a session that builds fresh persists an index whose search() results are
  * bit-identical to a plain from-scratch Book; (b) the NEXT session (a fresh module instance, same
  * backing IndexedDB - simulating an app relaunch) loads that persisted index WITHOUT constructing
- * a Worker at all, and its search() results are bit-identical to session (a)'s; (c) a persisted
- * index under a stale/mismatched SHA256 is ignored and a fresh build (and re-persist) happens
- * instead, exactly as a KB version bump must invalidate the cache.
+ * a Worker at all, and its search() results are bit-identical to session (a)'s; (c)/(d) a persisted
+ * index under a stale/mismatched SHA256, or a structurally corrupt payload, is ignored and a fresh
+ * build (and re-persist) happens instead; (e) the FLAG_IDX_CACHE="0" kill switch means pure
+ * previous behaviour - IndexedDB is never even opened; (f)/(g) a device reporting too little free
+ * storage quota never gets the (potentially 80MB+) index written to it, while a device with ample
+ * quota does.
  *
  * Node has no Worker, so a small in-process fake stands in for it - it runs the exact same
  * RAG.buildIndex() production code the real worker source string calls, just synchronously in
@@ -82,6 +85,7 @@ class FakeWorker {
 // like loadBook()'s own module-level cache resets on every app launch). ──
 function makeFakeIndexedDB() {
   const databases = new Map();
+  let openCalls = 0;
   function fireAsync(req, ok2, value) {
     queueMicrotask(function () {
       if (ok2) { req.result = value; if (req.onsuccess) req.onsuccess({ target: req }); }
@@ -89,7 +93,9 @@ function makeFakeIndexedDB() {
     });
   }
   return {
+    get openCalls() { return openCalls; }, // spy: proves the flag-off path never even opens the DB
     open(name) {
+      openCalls++;
       const req = { onsuccess: null, onerror: null, onupgradeneeded: null, result: undefined };
       queueMicrotask(function () {
         let rec = databases.get(name);
@@ -143,6 +149,12 @@ function makeFakeIndexedDB() {
       let store = rec.stores.get(storeName);
       if (!store) { store = { keyPath: "sha", rows: new Map() }; rec.stores.set(storeName, store); }
       store.rows.set(key !== undefined ? key : value[store.keyPath], value);
+    },
+    // test-only: peek at a stored record without going through kb-store.js at all.
+    _peek(dbName, storeName, key) {
+      const rec = databases.get(dbName);
+      const store = rec && rec.stores.get(storeName);
+      return store ? store.rows.get(key) : undefined;
     }
   };
 }
@@ -150,25 +162,30 @@ function makeFakeIndexedDB() {
 const rows = makeRows();
 const jsonl = rows.map((r) => JSON.stringify(r)).join("\n");
 
-function makeKbStore(fakeIDB) {
+// opts.localStorage: extra/overriding seed keys (e.g. the FLAG_IDX_CACHE flag).
+// opts.navigator: a fake `navigator` (e.g. { storage: { estimate } }) for the quota-headroom
+// check; passed as an explicit sandbox parameter so it shadows Node's own real `navigator`
+// (which has no `.storage`) exactly the way `indexedDB` already does below.
+function makeKbStore(fakeIDB, opts) {
+  opts = opts || {};
   const Filesystem = {
     stat: async () => ({ size: 37976783 }),
     mkdir: async () => ({}),
     readFile: async (o) => ({ data: o.encoding === "utf8" ? jsonl : Buffer.from(jsonl, "utf8").toString("base64") }),
     appendFile: async () => ({}), deleteFile: async () => ({})
   };
-  const store = { smd_maik_kb_installed: "1", smd_maik_kb_sha: GOOD_SHA };
+  const store = Object.assign({ smd_maik_kb_installed: "1", smd_maik_kb_sha: GOOD_SHA }, opts.localStorage);
   const ls = { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } };
   const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Filesystem } }, localStorage: ls };
   win.window = win; win.self = win;
   const fs = require("node:fs");
   const src = fs.readFileSync(require.resolve("../kb/ai/maik-lite-kb-store.js"), "utf8");
   const mod = { exports: {} };
-  new Function("module", "self", "window", "localStorage", "btoa", "atob", "indexedDB", src)(
+  new Function("module", "self", "window", "localStorage", "btoa", "atob", "indexedDB", "navigator", src)(
     mod, win, win, ls,
     (s) => Buffer.from(s, "binary").toString("base64"),
     (s) => Buffer.from(s, "base64").toString("binary"),
-    fakeIDB);
+    fakeIDB, opts.navigator);
   return mod.exports;
 }
 
@@ -232,6 +249,44 @@ try {
   for (const q of QUERIES) {
     const a = bkFresh.search(q, 5), b = book4.search(q, 5);
     ok("session 4 (corrupt cache -> rebuild): search('" + q + "') matches a from-scratch Book", JSON.stringify(a) === JSON.stringify(b));
+  }
+
+  // (e) FLAG OFF ("0"): pure previous behaviour - the worker still builds the book normally, but
+  // IndexedDB is never touched at all (not "ignored", never even opened) for either the read or
+  // the deferred write.
+  {
+    const idbFlagOff = makeFakeIndexedDB();
+    const KB5 = makeKbStore(idbFlagOff, { localStorage: { smd_maik_kb_idx_cache: "0" } });
+    const workerCountBefore5 = workerCount;
+    const book5 = await KB5.loadBook(R);
+    ok("flag off: the worker still ran (the book still gets built)", workerCount === workerCountBefore5 + 1);
+    ok("flag off: the book still works", book5.rows.length === ROWS);
+    // give any (wrongly) scheduled deferred write time to land before checking for it.
+    await new Promise((r) => setTimeout(r, 20));
+    ok("flag off: IndexedDB was NEVER opened (not read, not written)", idbFlagOff.openCalls === 0);
+    for (const q of QUERIES) {
+      const a = bkFresh.search(q, 5), b = book5.search(q, 5);
+      ok("flag off: search('" + q + "') matches a from-scratch Book", JSON.stringify(a) === JSON.stringify(b));
+    }
+  }
+
+  // (f)/(g) quota headroom: a device reporting almost no free storage quota must not have the
+  // (potentially 80MB+) index written to it; a device reporting ample quota must.
+  {
+    const idbTight = makeFakeIndexedDB();
+    const KB6 = makeKbStore(idbTight, { navigator: { storage: { estimate: async () => ({ quota: 10, usage: 9 }) } } });
+    await KB6.loadBook(R);
+    // the write is deferred (onIdle) past the point loadBook() resolves - give it time to (not) land.
+    await new Promise((r) => setTimeout(r, 50));
+    ok("tight quota: nothing was persisted", idbTight._peek("smd-maik-kb", "kb-index", GOOD_SHA) === undefined);
+
+    const idbRoomy = makeFakeIndexedDB();
+    const KB7 = makeKbStore(idbRoomy, { navigator: { storage: { estimate: async () => ({ quota: 1e15, usage: 0 }) } } });
+    await KB7.loadBook(R);
+    await new Promise((r) => setTimeout(r, 50));
+    const persisted = idbRoomy._peek("smd-maik-kb", "kb-index", GOOD_SHA);
+    ok("ample quota: the index WAS persisted (proves the tight-quota case above was the quota check, not a general bug)",
+       persisted && persisted.sha === GOOD_SHA && persisted.idx && persisted.idx.terms);
   }
 } finally {
   if (RealWorker === undefined) delete globalThis.Worker; else globalThis.Worker = RealWorker;

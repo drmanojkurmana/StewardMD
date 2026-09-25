@@ -47,6 +47,10 @@
   // extra to ship, nothing extra to invalidate.
   var IDB_NAME = "smd-maik-kb";
   var IDB_STORE = "kb-index";
+  // Risky-change flag (project convention): "0" is PURE PREVIOUS BEHAVIOUR - neither the
+  // IndexedDB read nor the write ever happens, not just "ignore what's there". Default ON.
+  var FLAG_IDX_CACHE = "smd_maik_kb_idx_cache";
+  function idxCacheEnabled() { return lget(FLAG_IDX_CACHE) !== "0"; }
 
   function idbOpen() {
     return new Promise(function (resolve, reject) {
@@ -89,6 +93,53 @@
         store.put({ sha: SHA256, idx: idx });
       } catch (e) {}
     }).catch(function () {});
+  }
+
+  /** Rough byte estimate of a buildIndex() result - each typed array's own .byteLength (free,
+   * no copy) plus the sorted-terms string's worst-case UTF-16 size (2 bytes/code unit). NEVER
+   * JSON.stringify(idx) here: that would allocate a second full copy of an 80MB+ structure just
+   * to size the first one, exactly what this whole feature exists to avoid holding. */
+  function idxByteSize(idx) {
+    try {
+      return idx.off.byteLength + idx.idf.byteLength + idx.pd.byteLength + idx.pf.byteLength +
+        idx.len.byteLength + idx.starts.byteLength + idx.terms.length * 2;
+    } catch (e) { return 0; }
+  }
+
+  /** True when there's roughly 3x the payload free in storage quota - the persisted index can be
+   * 80MB+ (see the comment above), so writing it blind on a near-full device risks a
+   * QuotaExceededError mid-write or evicting something else's data. Fails OPEN (permits the
+   * write) when the Storage API is unavailable or the check itself throws: this is only ever a
+   * pre-emptive skip, never a requirement - idbPutIndex's own try/catch already swallows a
+   * QuotaExceededError from the write itself, so an unchecked device is no worse off than before
+   * this existed. */
+  function hasQuotaHeadroom(bytes) {
+    try {
+      if (!(typeof navigator !== "undefined" && navigator.storage && navigator.storage.estimate)) return Promise.resolve(true);
+      return navigator.storage.estimate().then(function (est) {
+        var free = (est && typeof est.quota === "number" && typeof est.usage === "number")
+          ? (est.quota - est.usage) : Infinity;
+        return free >= bytes * 3;
+      }).catch(function () { return true; });
+    } catch (e) { return Promise.resolve(true); }
+  }
+
+  /** Run `fn` once the current task has finished and the thread is otherwise idle - used so
+   * persisting the index never delays handing the just-built Book back to the caller that is
+   * waiting on it to answer a question. */
+  function onIdle(fn) {
+    if (typeof requestIdleCallback === "function") requestIdleCallback(function () { try { fn(); } catch (e) {} });
+    else setTimeout(function () { try { fn(); } catch (e) {} }, 0);
+  }
+
+  /** Fire-and-forget: called from buildBookAsync's onIndex hook, deferred (onIdle) to run AFTER
+   * the Book built from this same idx has already resolved to the caller. Flag- and quota-gated;
+   * every failure past that point is swallowed inside idbPutIndex itself. */
+  function persistIndexDeferred(idx) {
+    if (!idxCacheEnabled()) return;
+    onIdle(function () {
+      hasQuotaHeadroom(idxByteSize(idx)).then(function (ok) { if (ok) idbPutIndex(idx); });
+    });
   }
 
   function cap() { return (typeof window !== "undefined" && window.Capacitor) || null; }
@@ -256,9 +307,13 @@
       // already built and saved the index for THIS EXACT SHA256, skip the build entirely - rows
       // still have to be parsed (cite() needs the text/pages regardless) but the ~3s tokenization
       // pass is gone. A corrupt/mismatched cache entry just falls through to a normal rebuild.
+      // Gated behind FLAG_IDX_CACHE ("0" = neither read nor write ever happens - pure previous
+      // behaviour); the write itself is deferred off this task and quota-checked (see
+      // persistIndexDeferred).
       function buildFresh() {
-        return RAG.buildBookAsync ? RAG.buildBookAsync(rows, r.data, function (idx) { idbPutIndex(idx); }) : new RAG.Book(rows);
+        return RAG.buildBookAsync ? RAG.buildBookAsync(rows, r.data, persistIndexDeferred) : new RAG.Book(rows);
       }
+      if (!idxCacheEnabled()) return buildFresh();
       return idbGetIndex().then(function (cachedIdx) {
         if (!cachedIdx) return buildFresh();
         try { return new RAG.Book(rows, cachedIdx); } catch (e) { return buildFresh(); }
