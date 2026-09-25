@@ -68,7 +68,9 @@ export function joinState(ticket) {
 /** PURE. The consent the desk recorded, or why it cannot be taken. body.teleConsent = { givenBy, agreed: true }. */
 export function consentFrom(c) {
   if (!c || c.agreed !== true) return { ok: false, error: "consent_required" };
-  const givenBy = String(c.givenBy || "patient");
+  // Who agreed is part of the consent: never assumed to be the patient.
+  if (!c.givenBy) return { ok: false, error: "giver_required" };
+  const givenBy = String(c.givenBy);
   if (!TELE_GIVERS.includes(givenBy)) return { ok: false, error: "unknown_giver" };
   return { ok: true, givenBy };
 }
