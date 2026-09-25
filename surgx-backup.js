@@ -123,9 +123,9 @@
    * worth protecting and refuse whitespace padding that the surgeon will not reproduce later. */
   function checkPassword(pw) {
     var p = String(pw == null ? "" : pw);
-    if (!p) return { ok: false, error: "password_required" };
-    if (p !== p.trim()) return { ok: false, error: "password_padded" };
-    if (p.length < MIN_PASSWORD) return { ok: false, error: "weak_password" };
+    if (!p) return { ok: false, error: "pass_required" };
+    if (p !== p.trim()) return { ok: false, error: "pass_padded" };
+    if (p.length < MIN_PASSWORD) return { ok: false, error: "weak_pass" };
     return { ok: true, error: "" };
   }
 
@@ -263,7 +263,7 @@
   function restoreNow(opts) {
     opts = opts || {};
     if (opts.confirmed !== true) return Promise.resolve({ ok: false, error: "not_confirmed" });
-    if (!String(opts.password || "")) return Promise.resolve({ ok: false, error: "password_required" });
+    if (!String(opts.password || "")) return Promise.resolve({ ok: false, error: "pass_required" });
     if (!cryptoBox()) return Promise.resolve({ ok: false, error: "no_crypto" });
     var st = STORE();
     if (!st) return Promise.resolve({ ok: false, error: "store_unavailable" });
@@ -302,7 +302,7 @@
           }, function () {
             // The only realistic causes are a wrong password or a damaged file, and we cannot tell
             // them apart without weakening the format. Say the likely one, mention the other.
-            return { ok: false, error: "wrong_password" };
+            return { ok: false, error: "wrong_pass" };
           });
         });
       });
@@ -340,10 +340,10 @@
       all_notes_locked: "None of the notes on this device could be read.",
       no_drive_account: "No Google Drive account is connected on this device.",
       no_backup_found: "No SURGX backup was found in your Drive.",
-      password_required: "Enter your backup password.",
-      weak_password: "Use at least 8 characters, so the backup is worth protecting.",
-      password_padded: "Remove the spaces at the start or end - they are easy to lose later.",
-      wrong_password: "That password did not unlock the backup. Check it and try again; if it is definitely right, the file may be damaged.",
+      pass_required: "Enter your backup password.",
+      weak_pass: "Use at least 8 characters, so the backup is worth protecting.",
+      pass_padded: "Remove the spaces at the start or end - they are easy to lose later.",
+      wrong_pass: "That password did not unlock the backup. Check it and try again; if it is definitely right, the file may be damaged.",
       encrypt_failed: "The notes could not be encrypted, so nothing was sent.",
       plaintext_refused: "That file is not an encrypted StewardMD backup, so it will not be imported.",
       malformed_backup: "That backup file is not a StewardMD backup.",
