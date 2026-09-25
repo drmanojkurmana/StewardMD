@@ -122,8 +122,46 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let urlContext = connectionOptions.urlContexts.first {
             _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, open: urlContext.url, options: [:])
         }
+        // COLD LAUNCH from a Home Screen quick action. Because this app declares a
+        // UIApplicationSceneManifest, UIKit delivers shortcuts to the scene, never to
+        // application(_:performActionFor:) - wiring only that older callback is why quick actions
+        // commonly show a menu that does nothing when tapped.
+        if let shortcut = connectionOptions.shortcutItem {
+            handleShortcut(shortcut)
+        }
         if let userActivity = connectionOptions.userActivities.first {
             _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, continue: userActivity, restorationHandler: { _ in })
+        }
+    }
+
+    /// WARM path: the app was already running when the quick action was tapped.
+    func windowScene(_ windowScene: UIWindowScene,
+                     performActionFor shortcutItem: UIApplicationShortcutItem,
+                     completionHandler: @escaping (Bool) -> Void) {
+        handleShortcut(shortcutItem)
+        completionHandler(true)
+    }
+
+    /// Quick actions reuse the stewardmd:// deep-link path rather than inventing a second routing
+    /// mechanism: the URL goes through Capacitor's ApplicationDelegateProxy, reaches the App
+    /// plugin's appUrlOpen listener, and native-bridge.js routeDeepLink() hands it to
+    /// SMD_openRoute() - the same code that already serves widget taps and Control Center. Every
+    /// route below is one SMD_openRoute actually accepts.
+    private func handleShortcut(_ item: UIApplicationShortcutItem) {
+        guard let route = SceneDelegate.route(for: item.type),
+              let url = URL(string: "stewardmd://\(route)") else { return }
+        // A cold launch reaches here before the web view has booted; native-bridge.js retries
+        // SMD_openRoute for ~10s, so the deep link is safe to fire immediately either way.
+        _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, open: url, options: [:])
+    }
+
+    static func route(for type: String) -> String? {
+        switch type {
+        case "in.stewardmd.shortcut.askmaik":  return "askai"
+        case "in.stewardmd.shortcut.drugs":    return "drugs"
+        case "in.stewardmd.shortcut.icu":      return "icu"
+        case "in.stewardmd.shortcut.feedback": return "feedback"
+        default:                               return nil
         }
     }
 

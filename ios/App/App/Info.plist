@@ -59,6 +59,58 @@
 	<string>StewardMD uses on-device speech recognition to turn your dictation into text for MaiK Scribe. Audio stays on your device so only the transcribed text is used, and you review it before anything is applied.</string>
 	<key>NSSupportsLiveActivities</key>
 	<true/>
+	<!-- Home Screen quick actions (long-press the icon). Delivered to SceneDelegate, NOT to
+	     application(_:performActionFor:) - this app uses UIApplicationSceneManifest, so the
+	     pre-scene callback is never called and items declared here would silently do nothing.
+	     Each type is mapped to an existing stewardmd:// route in SceneDelegate.route(for:).
+
+	     ORDER IS DELIBERATE. Rapido puts its retention row first because a ride app is opened
+	     rarely. StewardMD is a work tool opened many times a shift, so the three clinical actions
+	     come first and the feedback row sits last, where it is still seen on the way to Delete App
+	     but never costs a doctor a tap during a round. iOS shows at most four. -->
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>in.stewardmd.shortcut.askmaik</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Ask MaiK</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Dose, interaction, guideline</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>sparkles</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>in.stewardmd.shortcut.drugs</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Drug lookup</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Works without a signal</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>pills.fill</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>in.stewardmd.shortcut.icu</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>ICU dashboard</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Vitals, labs, drips</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>waveform.path.ecg</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>in.stewardmd.shortcut.feedback</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>🥺 Before you delete us</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Tell us what went wrong, we will fix it</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>heart.text.square.fill</string>
+		</dict>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

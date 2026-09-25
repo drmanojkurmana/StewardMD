@@ -21,6 +21,9 @@ public struct GlanceState: Codable, Equatable, Sendable {
     public var watchlistNews: Int?       // that patient's NEWS2, for tint/urgency
     public var antibioticRec: String?    // last on-device MARINAM recommendation (Antibiotic Rec tile)
     public var briefText: String?        // AI morning-brief one-liner (Morning Brief tile)
+    public var drugCount: Int            // molecules in the bundled monograph library (Drugs tile).
+                                         // 0 means "the app has not published it": the tile then shows
+                                         // no number rather than inventing one.
     public var updatedAt: Double
 
     public init(criticalCount: Int = 0, topCritical: String? = nil, patientCount: Int = 0,
@@ -28,7 +31,8 @@ public struct GlanceState: Codable, Equatable, Sendable {
                 censusOccupied: Int = 0, censusTotal: Int = 0, shiftEndsAt: Double? = nil,
                 onCall: Bool = false, ward: String? = nil, bleep: String? = nil,
                 watchlistTop: String? = nil, watchlistNews: Int? = nil,
-                antibioticRec: String? = nil, briefText: String? = nil, updatedAt: Double = 0) {
+                antibioticRec: String? = nil, briefText: String? = nil,
+                drugCount: Int = 0, updatedAt: Double = 0) {
         self.criticalCount = criticalCount; self.topCritical = topCritical
         self.patientCount = patientCount; self.tasksDue = tasksDue
         self.roundsDone = roundsDone; self.roundsTotal = roundsTotal
@@ -37,6 +41,7 @@ public struct GlanceState: Codable, Equatable, Sendable {
         self.ward = ward; self.bleep = bleep
         self.watchlistTop = watchlistTop; self.watchlistNews = watchlistNews
         self.antibioticRec = antibioticRec; self.briefText = briefText
+        self.drugCount = drugCount
         self.updatedAt = updatedAt
     }
 
@@ -71,6 +76,7 @@ public struct GlanceState: Codable, Equatable, Sendable {
         if let v = int("watchlistNews") { g.watchlistNews = v }
         if let v = dict["antibioticRec"] as? String { g.antibioticRec = v }
         if let v = dict["briefText"] as? String { g.briefText = v }
+        if let v = int("drugCount") { g.drugCount = v }
         if let v = dbl("updatedAt") { g.updatedAt = v }
         return g
     }
