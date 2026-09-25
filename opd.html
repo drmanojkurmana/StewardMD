@@ -3082,7 +3082,8 @@
     var nm=Date.now();
     // Sample figures so every dashboard card has something to show (preview only; nothing is read or saved).
     (function(){
-      var istNow=new Date(nm+19800000), hr=istNow.getUTCHours(), today=istNow.toISOString().slice(0,10), dnum=+today.slice(8,10);
+      // The sample clock reads 11:00 at the earliest: before the OPD opens the sample day would be empty and the cards blank.
+      var istNow=new Date(nm+19800000), hr=Math.max(11,istNow.getUTCHours()), today=istNow.toISOString().slice(0,10), dnum=+today.slice(8,10);
       var shape=[0,0,0,0,0,0,0,1,4,9,12,10,7,5,6,8,7,5,3,2,1,0,0,0], hourly=shape.map(function(v,i){ return i<hr?v:i===hr?Math.max(1,Math.round(v*0.6)):0; });
       var reg=hourly.reduce(function(a,b){return a+b;},0), month=[];
       for(var d=1;d<=dnum;d++){ var dt=today.slice(0,8)+("0"+d).slice(-2), dow=new Date(dt+"T12:00:00Z").getUTCDay(), r=d===dnum?reg:(dow===0?0:48+((d*37)%29)); month.push({date:dt,registered:r,seen:d===dnum?Math.round(reg*0.62):Math.max(0,r-((d*7)%4))}); }
