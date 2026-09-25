@@ -66,6 +66,92 @@
       ],
       requiredFields: ["localExam", "managementPlan"],
       checklist: ["Wound examined", "Drain output recorded (if a drain is present)", "Suture/staple removal status recorded", "Pathology report reviewed"]
+    },
+    // 2026-09-25: one template per specialty kit (specialty-kits.js). Picking a kit in the OPD Specialty
+    // tab selects the matching template, so the scribe listens for what that kit documents. Same rule
+    // as above: documentation prompts only, never a diagnosis, grade or dose that was not said.
+    {
+      id: "orthopaedics", label: "Orthopaedics",
+      description: "Mechanism of injury, joint and spine examination, neurovascular status, fracture and immobilisation.",
+      promptLines: [
+        "This is an ORTHOPAEDIC consultation.",
+        "- presentHx: record the site and side, the mechanism of injury or mode of onset, duration, pain pattern and weight bearing, as stated.",
+        "- musculoskeletal: record the joint or limb examination as dictated (swelling, deformity, tenderness, range of movement in degrees, special tests such as Lachman or McMurray, gait), naming the side.",
+        "- localExam: record a fracture or wound description and the distal neurovascular status (pulses, capillary refill, sensation, movement) exactly as stated.",
+        "- motorSystem / sensorySystem / reflexes / plantars: for spine complaints, record myotome power, dermatomal sensation, reflexes and plantar response as dictated.",
+        "- managementPlan: record any splint, slab or cast applied, the weight-bearing instruction and the review date as stated. Never state a fracture classification that was not said.",
+        "- painScore: the pain score only if a number out of 10 was stated."
+      ],
+      requiredFields: ["cc", "presentHx", "musculoskeletal"],
+      checklist: ["Side, site and mechanism recorded", "Joint or spine examination documented", "Distal neurovascular status documented", "Immobilisation and weight bearing documented"]
+    },
+    {
+      id: "ophthalmology", label: "Ophthalmology",
+      description: "Visual acuity for each eye, anterior segment, pupils, intraocular pressure and fundus.",
+      promptLines: [
+        "This is an OPHTHALMOLOGY consultation.",
+        "- presentHx: record which eye (right, left or both), onset, change in vision, pain, redness, discharge, photophobia, floaters or flashes, and any injury, as stated.",
+        "- localExam: record visual acuity for EACH eye exactly as stated (e.g. 'RE 6/9, LE 6/60, pinhole 6/12'), intraocular pressure for each eye with the method, and anterior segment, pupil (including RAPD) and fundus findings for each eye as dictated. Never convert or infer an acuity or a pressure.",
+        "- headNeckExam: record lid, lacrimal and orbit findings as dictated.",
+        "- managementPlan: record eye drops or medicines exactly as stated, including which eye and how often."
+      ],
+      requiredFields: ["cc", "presentHx", "localExam"],
+      checklist: ["Visual acuity recorded for each eye", "Pupils and RAPD checked", "Intraocular pressure recorded where measured", "Fundus findings documented"]
+    },
+    {
+      id: "ent", label: "ENT",
+      description: "Ear, nose and throat symptoms, otoscopy, rhinoscopy, oral cavity, neck and hearing tests.",
+      promptLines: [
+        "This is an ENT consultation.",
+        "- presentHx: record ear pain, discharge, hearing loss, tinnitus, vertigo, nasal obstruction, nosebleeds, sore throat, swallowing and voice symptoms with side and duration, as stated.",
+        "- entExam: record otoscopy for each ear (canal, tympanic membrane, perforation), anterior rhinoscopy (septum, turbinates, discharge, polyps) and laryngoscopy findings as dictated, and tuning-fork results (Rinne each ear, Weber) and audiometry values exactly as stated. Never infer a hearing grade.",
+        "- teethExam: record oral cavity and oropharynx findings (tonsils, oral mucosa, any lesion) as dictated.",
+        "- headNeckExam: record neck nodes, thyroid, other neck swellings and the facial nerve grade as dictated.",
+        "- tobacco: record tobacco and areca nut use only as stated."
+      ],
+      requiredFields: ["cc", "presentHx", "entExam"],
+      checklist: ["Side of ear or nose symptoms recorded", "Otoscopy documented for both ears", "Neck examined", "Tobacco and areca nut use asked"]
+    },
+    {
+      id: "dermatology", label: "Dermatology",
+      description: "Lesion history, morphology and distribution, special signs, drug history and leprosy screen.",
+      promptLines: [
+        "This is a DERMATOLOGY consultation.",
+        "- presentHx: record onset, duration, spread, itch (including night itch or itching contacts), triggers and treatment already used, including steroid or mixed creams, as stated.",
+        "- treatmentReceived: record every medicine taken recently, including over-the-counter and traditional remedies, with start dates if stated.",
+        "- localExam: record the lesions as dictated: primary lesion, colour, size, surface change, border, arrangement, distribution and body sites, and special signs (Nikolsky, Auspitz, Koebner) as stated. For a hypopigmented or red patch, record sensation over the patch and any thickened nerve exactly as examined; never infer a leprosy classification.",
+        "- skin: record hair, nail and mucosal findings as dictated."
+      ],
+      requiredFields: ["cc", "presentHx", "localExam"],
+      checklist: ["Morphology and distribution documented", "Recent drug history taken", "Topical steroid use asked", "Mucosa, hair and nails examined"]
+    },
+    {
+      id: "psychiatry", label: "Psychiatry",
+      description: "History from patient and informant, mental status examination, risk, and the Mental Healthcare Act 2017.",
+      promptLines: [
+        "This is a PSYCHIATRY consultation.",
+        "- presentHx: record the symptoms in time order from the patient and the informant, saying who reported what where stated, with onset, course and precipitants.",
+        "- systemicExam: record the mental status examination as dictated: appearance and behaviour, psychomotor activity, speech, mood in the patient's own words, affect, thought form and content, perception, cognition, insight and judgement. Quote the patient's words where the doctor does.",
+        "- managementPlan: record any suicidal thoughts, plan, intent, self-harm or thoughts of harming others EXACTLY as stated, and the safety plan agreed. Never omit a stated risk, and never write a risk level (low, medium or high) that was not said.",
+        "- habits, alcohol, tobacco, recDrug: record substance use, amounts and last use only as stated.",
+        "- familyPsych: 'Yes'/'No' for psychiatric illness in the family only if it was discussed."
+      ],
+      requiredFields: ["cc", "presentHx", "systemicExam"],
+      checklist: ["Informant and reliability noted", "Mental status examination documented", "Suicide and self-harm risk asked", "Capacity and consent (MHCA 2017) considered"]
+    },
+    {
+      id: "dental", label: "Dental",
+      description: "Dental pain history, medical risks for dental care, oral soft tissues, tooth chart and periodontal status.",
+      promptLines: [
+        "This is a DENTAL consultation.",
+        "- presentHx: record the pain (character, trigger, duration), swelling, bleeding gums and previous dental treatment, as stated.",
+        "- pastHx: record anticoagulant, antiplatelet, bisphosphonate or denosumab use, heart valve disease or endocarditis, diabetes and bleeding disorders, if stated.",
+        "- teethExam: record teeth findings with FDI tooth numbers exactly as dictated (e.g. '36 deep caries, 46 missing'), plus oral soft tissue and periodontal findings. Never renumber or infer a tooth.",
+        "- headNeckExam: record facial swelling, lymph nodes, the temporomandibular joint and mouth opening in mm, as dictated.",
+        "- tobacco: record tobacco and areca nut use (type, how often) only as stated."
+      ],
+      requiredFields: ["cc", "presentHx", "teethExam"],
+      checklist: ["Tooth numbers recorded (FDI)", "Anticoagulants and bleeding risk asked", "Oral soft tissues examined", "Tobacco and areca nut use asked"]
     }
   ];
   var DEFAULT_ID = "general";

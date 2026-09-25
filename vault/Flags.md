@@ -162,6 +162,12 @@ leaving it present:
 |---|---|---|
 | `smd_kb_protocols` | **ON** | The Protocols tab in the Knowledge Library + the Protocols category in Universal Search. Additive: off removes the tab, nothing else changes. Content is `ai_drafted` pending clinical review and every screen says so. Force off per device with `?kbproto=0`. See [[Clinical Protocols]]. |
 
+### Specialty Kits  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-25)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_specialty_kits` | **ON** | The OPD EMR Specialty tab, the Home "Specialty Kits" tile and its sheet. Additive and write-safe: a kit only appends text to the assessment the doctor then saves, and is disabled until the assessment has loaded. Content `ai_drafted` pending clinical review, shown on every kit. Force off per device with `?kits=0`. See [[Specialty Kits]]. |
+
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 
 | Flag | Def | Why |

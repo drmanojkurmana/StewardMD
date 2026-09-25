@@ -151,6 +151,7 @@ try{
  // O&G in the consult: dating Add fills LMP; a section with set fields fills children alive.
  await click('#smdOpdEmr [data-kit-act="kit:obgyn"]');
  await until(`/Obstetrics/.test(document.querySelector('#smdOpdEmr .kit-head h2').textContent)`);
+ ok(await ev(`localStorage.getItem(OPDEMR._specialtyKey(OPDEMR._state().author))==='obgyn'`),'picking the O&G kit selects the O&G MaiK Scribe template');
  await setF('dating','lmp','2026-01-01','#smdOpdEmr'); await setF('dating','asOf','2026-03-12','#smdOpdEmr');
  await click('#smdOpdEmr [data-kit-act="tool:pregnancy-dating"]');
  await setF('f','gravida','2','#smdOpdEmr'); await setF('f','living','1','#smdOpdEmr');

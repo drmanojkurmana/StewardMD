@@ -9242,3 +9242,18 @@ single protocol with "India says X, WHO says Y" on every line is hard to follow 
 guideline family gets its own file (`basis`), paired by `counterpart`, with a filter and a one-tap link
 between them. A protocol is never silently a blend: its primary source decides its basis.
 
+## 2026-09-25 - Specialty kits write into the existing assessment, not a new schema
+The owner asked what would make the app useful beyond surgery, medicine and critical care, then asked
+for the O&G and Paediatrics kits first and all eight completed ([[Specialty Kits]]). A kit could have
+had its own saved record per specialty, but GHIS/EMR saves one Initial Assessment form, and a second
+record would need a server schema, sync and a second Save that doctors would miss. So a kit is a
+structured front end to fields that already exist: sections compose only what was filled and APPEND it
+to a named assessment field, and a few values fill single form fields (LMP, weight, hydration). Nothing
+is saved until the doctor saves the assessment; the kit is disabled until that form has loaded, because
+loading it replaces every value. Tools whose answer is a number (WHO z-scores, ACOG redating, WHO vision
+and hearing grades, PASI, DMFT) are computed in code and tested against the publishers' own examples
+(WHO's anthro README cases and all 2101 z-scores of the WHO 2007 survey), not written by a model at run
+time. The WHO growth numbers are taken from WHO's official R packages' data tables, which are identical
+to the who.int expanded tables; no package code is used. Picking a kit also picks the matching MaiK
+Scribe template. Everything is `ai_drafted` and says so; flag default ON because it is additive.
+

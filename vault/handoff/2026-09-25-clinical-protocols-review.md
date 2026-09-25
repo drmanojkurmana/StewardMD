@@ -118,3 +118,20 @@ Edit the file: `"review": { "status": "reviewed", "compiled": "2026-09-25", "rev
 - AHA 2023 poisoning update + 2026 charcoal paper cited by doi.org (publisher blocked). AHA 2023, BSH 2020, ACOG 2021, WMS 2024 full texts not read (abstracts/summaries).
 - WHO 2025 TB weight bands: HRZE 4 tabs 35-64 kg; TPT rifampicin 750 mg (INH 375 mg) >=65 kg (two WHO documents agree). WHO 2024 6Lfx 500 mg 25-49.9 kg, 750 mg >=50 kg.
 - From standard references: antidote doses (HDI, lipid emulsion, calcium, naloxone, digoxin Fab), heat-stroke benzodiazepine + fluid doses, metformin max 2-2.5 g/day.
+
+# Specialty kits (8, added 2026-09-25) - what a reviewer must check
+Kits hold no drug doses. Review the red-flag thresholds, the alert wording, the advice texts and the
+field lists. Sources are listed in each kit; all are `ai_drafted`. See [[Specialty Kits]].
+## Computed tools (tested against oracles; review the interpretation text, not the maths)
+- Pregnancy dating: ACOG CO 700 thresholds (5/7/7/10/14/21 days). Milestone windows use NICE/WHO timing (GDM test 24+0 to 28+0, anti-D 28+0, induction offer 41+0): confirm against local practice.
+- Growth: WHO method reproduces WHO's own outputs exactly. Review the labels ("Possible risk of overweight" above +1 SD for weight-for-length, WHO; BMI-for-age 5 to 19 y: overweight above +1 SD, obesity above +2 SD).
+- Vision: WHO ICD-11 categories from presenting VA in the better eye; IOP above 21 mmHg flag. Hearing: WHO 2021 grades; tuning-fork interpretation text is generic.
+## Per kit, open points from the authors
+- O&G: risk-factor list and "high-risk pregnancy" alert; antenatal advice texts (MoHFW/WHO wording).
+- Paediatrics: ETAT and IMCI sign wording (WHO 2013 pocket book, IMCI 2014); fast-breathing thresholds; feeding advice from the WHO fact sheet (dated 2026).
+- Orthopaedics: compartment syndrome and cauda equina alerts (BOAST 2025, GIRFT 2026 pathway "MRI within 4 hours"); cast advice from BOA casting standards 2015; NICE NG59 not readable (only CES warning signs used); investigation search terms ("X-ray LS spine", "RA factor") may not match a hospital catalogue.
+- Ophthalmology: red flags (giant cell arteritis, third nerve palsy with dilated pupil, retinal detachment, orbital cellulitis) added by the author; RCOphth guidance not cited (PDFs 404).
+- ENT: extra laryngeal section; sudden hearing loss (NICE NG98) and mucormycosis red flags; 2-week referral wording from NICE NG12.
+- Dermatology: ticking "Fever" alone shows the SJS/TEN or DRESS alert (wording is conditional); leprosy content from the 2012 NLEP guideline; ringworm advice follows ECTODERM India 2018.
+- Psychiatry: Mental Healthcare Act 2017 section numbers checked against the Gazette text (India Code refused the PDF); insight grades 1 to 6 are a textbook convention, uncited; no low/medium/high risk label (NICE NG225); Tele MANAS 14416 / 1800-89-14416.
+- Dental: anticoagulant alert follows SDCEP 2022 (INR within 24 h, 72 h if stable; delay if 4 or above; DOAC morning dose rule); ulcer/patch threshold 2 weeks (MoHFW) where SDCEP says 3; tooth mobility grades uncited.
