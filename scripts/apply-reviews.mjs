@@ -5,6 +5,8 @@
  *   node scripts/apply-reviews.mjs <export.json> --dry            print the plan, write nothing
  *   node scripts/apply-reviews.mjs <export.json> --include-minor  also mark "approve after minor edits"
  *                                                                 items reviewed (only once the edits are made)
+ *   node scripts/apply-reviews.mjs <reviews-all.json>             the server download (GET /api/kits/reviews/all,
+ *                                                                 owner only): { reviews: [export, ...] }, applied in turn
  *   node scripts/apply-reviews.mjs <export.json> --accept-unverified
  *                                                                 accept a reviewer whose registration the app
  *                                                                 did not verify (you vouch for them)
@@ -140,13 +142,23 @@ function main() {
   const args = process.argv.slice(2), file = args.find((a) => !a.startsWith("--"));
   const dry = args.includes("--dry"), includeMinor = args.includes("--include-minor"), acceptUnverified = args.includes("--accept-unverified");
   if (!file) { console.error("Usage: node scripts/apply-reviews.mjs <export.json> [--dry] [--include-minor] [--accept-unverified]"); process.exit(2); }
-  let x; try { x = JSON.parse(readFileSync(file, "utf8")); } catch (e) { console.error("Cannot read " + file + ": " + e.message); process.exit(1); }
-  const errs = validateExport(x);
-  if (errs.length) { console.error(errs.length + " problem(s) in the export:\n  " + errs.join("\n  ")); process.exit(1); }
-  if (!x.reviewer.verified && !acceptUnverified) {
-    console.error(`Reviewer "${x.reviewer.name}" was not verified in the app. Check their registration yourself, then rerun with --accept-unverified.`);
-    process.exit(1);
+  let raw; try { raw = JSON.parse(readFileSync(file, "utf8")); } catch (e) { console.error("Cannot read " + file + ": " + e.message); process.exit(1); }
+  const exports = raw && Array.isArray(raw.reviews) ? raw.reviews : [raw];
+  for (const x of exports) {
+    const errs = validateExport(x);
+    if (errs.length) { console.error(errs.length + " problem(s) in the export" + (x && x.reviewer ? " from " + x.reviewer.name : "") + ":\n  " + errs.join("\n  ")); process.exit(1); }
+    if (!x.reviewer.verified && !acceptUnverified) {
+      console.error(`Reviewer "${x.reviewer.name}" was not verified in the app. Check their registration yourself, then rerun with --accept-unverified.`);
+      process.exit(1);
+    }
   }
+  const kinds = new Set();
+  for (const x of exports) applyOne(x, { dry, includeMinor }, kinds);
+  if (dry) return;
+  [...kinds].forEach((k) => { console.log("Rebuilding: " + KINDS[k].build); execFileSync(process.execPath, [join(ROOT, KINDS[k].build)], { stdio: "inherit" }); });
+  if (kinds.size) console.log("Done. Run the unit tests, then commit the changed files.");
+}
+function applyOne(x, { dry, includeMinor }, kinds) {
   const p = plan(x, { includeMinor });
   p.updates.forEach((u) => console.log(`${dry ? "Would mark" : "Marking"} ${u.kind} ${u.id} reviewed (${u.review.reviewer})`));
   p.feedback.forEach((d) => console.log(`Feedback: ${d.kind} ${d.id} (${d.decision})`));
@@ -160,8 +172,6 @@ function main() {
     appendFileSync(f, feedbackMarkdown(x, p, new Date().toISOString().slice(0, 10)));
     console.log("Feedback written to " + FEEDBACK);
   }
-  const kinds = [...new Set(p.updates.map((u) => u.kind))];
-  kinds.forEach((k) => { console.log("Rebuilding: " + KINDS[k].build); execFileSync(process.execPath, [join(ROOT, KINDS[k].build)], { stdio: "inherit" }); });
-  if (kinds.length) console.log("Done. Run the unit tests, then commit the changed files.");
+  p.updates.forEach((u) => kinds.add(u.kind));
 }
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main();

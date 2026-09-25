@@ -37,9 +37,10 @@ artifact, nothing committed. Refresh the baseline locally with `--update` after 
 - Baseline of 2026-09-25 (from the cloud sandbox): 537 ok, 175 blocked, 7 broken. Locally, set
   `NODE_USE_ENV_PROXY=1` behind a proxy (Node's fetch ignores HTTPS_PROXY otherwise).
 
-## Wave 2 (server, not built)
-Sync decisions to the server so the owner sees them without a file; reviewer identity from the
-verified claim server-side. See [[Roadmap]].
+## Server sync (wave 2, built, OFF)
+With [[Colleagues]] on, "Send to StewardMD" posts the decisions (`kx_reviews/<uid>`); the reviewer's name,
+Reg. No. and verified state come from the ID token, not the phone. The owner downloads
+`GET /api/kits/reviews/all` (owner only) and runs `node scripts/apply-reviews.mjs <file>` on it as is.
 
 Key files: `review-desk.js`, `clinical-docs.css` (styles), `scripts/apply-reviews.mjs`,
 `scripts/check-guideline-updates.mjs`, tests in `test/kit-tools-docs.test.mjs` and

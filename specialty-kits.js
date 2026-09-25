@@ -593,7 +593,7 @@
     return KS[key];
   }
   // Kit values can be clinical findings: memory only, and dropped when the consult they belong to ends.
-  function forget(key) { delete KS[key]; }
+  function forget(key) { delete KS[key]; if (G.SMD_SHARE && G.SMD_SHARE.forgetPatient) G.SMD_SHARE.forgetPatient(); }
   function toolState(k, id) { k.tools[id] = k.tools[id] || {}; return k.tools[id]; }
 
   /* ======================================== hosts ======================================== */
@@ -1216,7 +1216,70 @@
     var src = '<section class="kit-card kit-src"><h3>' + ms("menu_book") + "Sources</h3><ol>" + (kit.sources || []).map(function (s) {
       return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + "</a><span>" + esc(s.org) + " · " + esc(s.year) + "</span></li>";
     }).join("") + '</ol><p class="kit-muted">Decision support only. The kit adds text for you to check and edit; it never saves, signs or orders anything.</p></section>';
-    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + head + reviewNote(kit, host) + blocked + docs + tools + secs + adv + osets + inv + protos + calcs + src + "</div>";
+    var share = shareHtml(kit, k, host);
+    if (share) setTimeout(fillUnits, 0);
+    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + head + reviewNote(kit, host) + blocked + docs + share + tools + secs + adv + osets + inv + protos + calcs + src + "</div>";
+  }
+
+  /* ---- wave 2 (kits-share.js, flag smd_kits_share, default OFF): the hospital's own version of the kit,
+   * the patient's kit history across visits, and case rooms. All server data is fetched on demand and
+   * kept in memory; nothing here writes the assessment. ---- */
+  function shareOn() { return !!(G.SMD_SHARE && G.SMD_SHARE.on && G.SMD_SHARE.on()); }
+  /** Plain text of everything filled in this kit (sections, then tools). Memory only. */
+  function kitSummary(kit, k) {
+    var parts = [];
+    (kit.sections || []).forEach(function (s) { var t = composeSection(s, k.vals); if (t) parts.push(t); });
+    (kit.tools || []).forEach(function (id) { var T = TOOLS[id]; if (T && T.text && k.tools[id]) { try { var t = T.text(k.tools[id]); if (t) parts.push(t); } catch (e) {} } });
+    return parts.join("\n");
+  }
+  function shareHtml(kit, k, host) {
+    if (!shareOn()) return "";
+    var pid = host.kind === "opd" && host.patientKey ? host.patientKey() : "";
+    return '<section class="kit-card kit-share"><h3>' + ms("groups") + "Colleagues and your hospital</h3>" +
+      '<div data-kit-unit="' + esc(kit.id) + '">' + (UNITRES[kit.id] !== undefined ? unitHtml(UNITRES[kit.id], kit) : '<p class="kit-muted">Checking for your hospital\'s version of this kit…</p>') + "</div>" +
+      '<div class="kit-links"><button type="button" class="kit-pill" data-kit-act="askcase">' + ms("forum") + "Ask colleagues about this case</button>" +
+      (pid ? '<button type="button" class="kit-pill" data-kit-act="histsave">' + ms("save") + "Save this visit to the patient's kit history</button>" +
+        '<button type="button" class="kit-pill" data-kit-act="histshow">' + ms("history") + (kit.id === "obgyn" ? "Antenatal card (previous visits)" : "Previous visits") + "</button>" : "") +
+      "</div>" + (pid ? "<div data-kit-hist></div>" : "") + "</section>";
+  }
+  var UNITRES = {};
+  function unitHtml(res, kit) {
+    if (!res) return "";
+    var h = (res.versions || []).map(function (v, vi) {
+      var c = v.content || {};
+      return '<div class="kit-unit"><b>' + esc(v.orgName) + "</b> <span class=\"kit-muted\">version " + esc(v.version) + ", published by " + esc(v.publishedBy) + ", " + esc(fmtDate(new Date(v.publishedAt))) + "</span>" +
+        (c.notes ? "<p>" + esc(c.notes).replace(/\n/g, "<br>") + "</p>" : "") +
+        ((c.contacts || []).length ? "<ul>" + c.contacts.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") +
+        ((c.investigations || []).length ? '<div class="kit-links">' + c.investigations.map(function (x, ii) { return '<button type="button" class="kit-pill" data-kit-act="unitinv:' + vi + ":" + ii + '">' + esc(x.label) + "</button>"; }).join("") + "</div>" : "") +
+        (c.orderSets || []).map(function (o, oi) { return '<div class="kit-oset"><div><b>' + esc(o.label) + "</b><p>" + esc(o.tests.join(", ")) + '</p></div><button type="button" class="kit-pill" data-kit-act="unitos:' + vi + ":" + oi + '">' + ms("playlist_add") + "Queue " + o.tests.length + " tests</button></div>"; }).join("") + "</div>";
+    }).join("");
+    var pub = (res.canPublish || []).map(function (o, ci) { return '<button type="button" class="kit-pill" data-kit-act="unitedit:' + ci + '">' + ms("edit_note") + "Edit " + esc(o.orgName) + "'s version</button>"; }).join("");
+    if (!h && !pub) return "";
+    return (h || '<p class="kit-muted">Your hospital has no version of this kit yet.</p>') + (pub ? '<div class="kit-links">' + pub + "</div>" : "");
+  }
+  function fillUnits() {
+    if (!D || !shareOn()) return;
+    Array.prototype.forEach.call(D.querySelectorAll("[data-kit-unit]"), function (el) {
+      var id = el.getAttribute("data-kit-unit"), kit = kitById(id); if (!kit || UNITRES[id] !== undefined) return;
+      G.SMD_SHARE.unitFor(id).then(function (res) {
+        UNITRES[id] = res || null;
+        Array.prototype.forEach.call(D.querySelectorAll('[data-kit-unit="' + id + '"]'), function (x) { x.innerHTML = unitHtml(UNITRES[id], kit); });
+      });
+    });
+  }
+  function refresh() { UNITRES = {}; fillUnits(); }
+  function histHtml(kit, entries) {
+    if (!entries || entries.error) return '<p class="kit-muted">' + esc(entries && entries.error ? G.SMD_SHARE.errText(entries.error) : "Could not load the history.") + "</p>";
+    if (!entries.length) return '<p class="kit-muted">No saved visits for this patient in this kit yet.</p>';
+    var labels = {}, order = [];
+    (kit.sections || []).forEach(function (s) { (s.fields || []).forEach(function (f) { labels[f.id] = f.label + (f.unit ? " (" + f.unit + ")" : ""); order.push(f.id); }); });
+    var used = order.filter(function (id) { return entries.some(function (e) { var v = (e.entry.vals || {})[id]; return v != null && v !== "" && v !== false; }); }).slice(0, 12);
+    var rows = entries.slice().sort(function (a, b) { return a.at - b.at; });
+    return '<div class="kit-tablewrap"><table class="kit-table"><thead><tr><th>Visit</th>' + used.map(function (id) { return "<th>" + esc(labels[id]) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      rows.map(function (e) { return "<tr><td>" + esc(fmtDate(new Date(e.at))) + "</td>" + used.map(function (id) { var v = (e.entry.vals || {})[id]; return "<td>" + esc(v === true ? "Yes" : v == null ? "" : v) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>" +
+      rows.filter(function (e) { return e.entry.tools && Object.keys(e.entry.tools).length; }).map(function (e) {
+        return '<p class="kit-muted"><b>' + esc(fmtDate(new Date(e.at))) + ":</b> " + Object.keys(e.entry.tools).map(function (id) { return esc(e.entry.tools[id]); }).join(" ") + "</p>";
+      }).join("");
   }
   // Quick chips: the current kit, my specialty and recent kits (at most 5), then "All kits".
   function chipRow(k, mine) {
@@ -1339,7 +1402,7 @@
     var host = hostFor(btn), k = ks(key), kit = kitById(k.kitId);
     if (cmd === "kit") { k.kitId = arg; k.picker = false; k.pickerQ = ""; pushRecent(arg); var kk = kitById(arg); if (kk && kk.scribe && host.setScribe) host.setScribe(kk.scribe); host.repaint(); return; }
     if (cmd === "mic") { micStart(btn, arg, host); return; }
-    if (cmd === "docs") { if (G.SMD_DOCS) G.SMD_DOCS.open({ ctx: host.patient && host.kind === "opd" && host.consult ? host.consult() : null, kitId: kit.id }); return; }
+    if (cmd === "docs") { if (G.SMD_DOCS) G.SMD_DOCS.open({ ctx: host.patient && host.kind === "opd" && host.consult ? host.consult() : null, kitId: kit.id, kitSummary: host.kind === "opd" ? kitSummary(kit, k) : "" }); return; }
     if (cmd === "picker") { k.picker = !k.picker; host.repaint(); if (k.picker && D) { var qi = D.getElementById("kit_picker_q"); if (qi) try { qi.focus(); } catch (e) {} } return; }
     if (cmd === "mine") { setMySpecialty(arg, "manual"); toast("Saved as your specialty."); host.repaint(); return; }
     if (!kit) return;
@@ -1385,6 +1448,40 @@
     if (cmd === "lcgsel") { toolState(k, "labour-care").cur = +arg; host.repaint(); return; }
     if (cmd === "lcgdel") { var tx = toolState(k, "labour-care"); if (tx.e) { tx.e.splice(+arg, 1); tx.cur = tx.e.length ? Math.min(+arg, tx.e.length - 1) : null; } host.repaint(); return; }
     if (cmd === "icd") { if (host.icd) host.icd(); else if (G.SMD_ICD && G.SMD_ICD.open) G.SMD_ICD.open(); return; }
+    if (!shareOn()) return;
+    if (cmd === "askcase") {
+      var sum = kitSummary(kit, k), nm = host.consult ? ((host.consult().patient || {}).name || "") : "";
+      if (nm && nm.length > 2) sum = sum.split(nm).join("the patient");   // the room is de-identified; the server strips more
+      G.SMD_SHARE.newCase({ kitId: kit.id, summary: sum }); return;
+    }
+    if (cmd === "histsave" || cmd === "histshow") {
+      var pid = host.patientKey ? host.patientKey() : ""; if (!pid) return;
+      var box = btn.closest("[data-kit-root]").querySelector("[data-kit-hist]");
+      if (cmd === "histsave") {
+        var vals = {}, tools = {};
+        Object.keys(k.vals).forEach(function (id) { var v = k.vals[id]; if (v === true || (v != null && v !== false && String(v).trim() !== "")) vals[id] = v === true ? true : String(v).trim(); });
+        (kit.tools || []).forEach(function (id) { var T = TOOLS[id]; if (T && T.text && k.tools[id]) { try { var t = T.text(k.tools[id]); if (t) tools[id] = t; } catch (e) {} } });
+        if (!Object.keys(vals).length && !Object.keys(tools).length) { toast("Fill in at least one finding first."); return; }
+        G.SMD_SHARE.histAdd(pid, kit.id, { vals: vals, tools: tools, summary: "" }).then(function (r) {
+          toast(r.status === 200 ? "Saved to the patient's kit history (" + r.body.count + " visit" + (r.body.count === 1 ? "" : "s") + ")." : G.SMD_SHARE.errText(r.body.error));
+        });
+        return;
+      }
+      if (box) { box.innerHTML = '<p class="kit-muted">Loading…</p>'; G.SMD_SHARE.histRead(pid, kit.id).then(function (list) { box.innerHTML = histHtml(kit, list); }); }
+      return;
+    }
+    var ur = UNITRES[kit.id];
+    if ((cmd === "unitinv" || cmd === "unitos") && ur) {
+      var pp = arg.split(":"), v = (ur.versions || [])[+pp[0]], c = (v && v.content) || {};
+      if (cmd === "unitinv") { var x = (c.investigations || [])[+pp[1]]; if (x) { if (host.investigate) host.investigate(x.query || x.label); else toast(x.label); } }
+      else { var o = (c.orderSets || [])[+pp[1]]; if (o && host.queueTests) host.queueTests(o.tests, o.label); else if (o) toast("Order sets queue tests inside a consultation."); }
+      return;
+    }
+    if (cmd === "unitedit" && ur) {
+      var org = (ur.canPublish || [])[+arg]; if (!org) return;
+      var cur = (ur.versions || []).filter(function (vv) { return vv.orgId === org.orgId; })[0];
+      G.SMD_SHARE.editUnit({ orgId: org.orgId, orgName: org.orgName, kitId: kit.id, kitLabel: kit.label, version: cur ? cur.version : 0, content: cur ? cur.content : {} });
+    }
   }
   function writeNote(host) { return host.writeNote ? host.writeNote() : "Open the patient in write mode to add kit findings to the assessment."; }
   function apply(host, target, text, sets) {
@@ -1405,7 +1502,7 @@
   var API = {
     open: open, close: close, html: kitBody, loadKits: loadKits, loadGrowth: loadGrowth, kits: kitList, kit: kitById,
     mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, myScribe: myScribe, myLabel: myLabel, kitForProfile: kitForProfile, state: ks, forget: forget, on: flagOn, notifiable: notifiable, groups: groupList,
-    KITS_V: KITS_V, GROWTH_V: GROWTH_V, TOOL_IDS: Object.keys(TOOLS),
+    KITS_V: KITS_V, GROWTH_V: GROWTH_V, TOOL_IDS: Object.keys(TOOLS), refresh: refresh, _kitSummary: kitSummary, _histHtml: histHtml, _unitHtml: unitHtml,
     // pure, for tests
     _dating: dating, _acogThreshold: acogThreshold, _growth: growth, _lmsZ: lmsZ, _lmsZAdj: lmsZAdj, _pct: pct,
     _whoVision: whoVision, _logmar: logmar, _whoHearing: whoHearing, _tuningFork: tuningFork, _pasi: pasi, _pasiArea: pasiArea,

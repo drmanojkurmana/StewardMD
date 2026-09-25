@@ -238,7 +238,9 @@
       html = '<button type="button" class="kit-link" data-dl-act="back">' + ms("arrow_back") + "All documents</button><h2 class=\"dl-h\">" + esc(t[1]) + "</h2>" + reviewNote() +
         '<div class="kit-grid">' + FORMS[S.type].map(fieldHtml).join("") + "</div>" + extra +
         '<div class="kit-row"><button type="button" class="kit-add" data-dl-act="print">' + ms("ios_share") + "Print or share</button>" +
-        '<button type="button" class="kit-clear" data-dl-act="preview">Preview</button></div><div class="dl-preview" hidden></div>';
+        '<button type="button" class="kit-clear" data-dl-act="preview">Preview</button>' +
+        ((S.type === "referral" || S.type === "handover") && G.SMD_SHARE && G.SMD_SHARE.on && G.SMD_SHARE.on() ? '<button type="button" class="kit-pill" data-dl-act="kxsend">' + ms("send") + (S.type === "referral" ? "Send to a colleague in StewardMD" : "Send to the receiving doctor") + "</button>" : "") +
+        '</div><div class="dl-preview" hidden></div>';
     }
     body.innerHTML = '<div class="kit dl">' + html + "</div>";
     body.scrollTop = top;
@@ -274,12 +276,12 @@
     }
     S.ctx = opts.ctx || null; S.type = opts.type || ""; S.vals = S.type ? prefill(S.type) : {};
     if (opts.consentId) S.consentId = opts.consentId;
-    S.kitId = opts.kitId || ""; S.advQ = "";
+    S.kitId = opts.kitId || ""; S.kitSummary = opts.kitSummary || ""; S.advQ = "";
     el.classList.add("on");
     if (G.SMD_RX && G.SMD_RX.verifiedInfo) G.SMD_RX.verifiedInfo().then(function (v) { S.regNo = (v && v.verified && v.regNo) || ""; }, function () {});
     render();
   }
-  function close() { var el = D && D.getElementById("smdDocs"); if (el) el.classList.remove("on"); S.ctx = null; S.vals = {}; S.adviceSel = {}; S.advQ = ""; S.handover = []; }
+  function close() { var el = D && D.getElementById("smdDocs"); if (el) el.classList.remove("on"); S.ctx = null; S.vals = {}; S.adviceSel = {}; S.advQ = ""; S.kitSummary = ""; S.handover = []; }
 
   // Output exactly as the prescription does: native = file + OS share sheet; web = hidden iframe print.
   function output(html, name) {
@@ -308,6 +310,14 @@
     if (cmd === "hadd") { S.handover.push({}); render(); return; }
     if (cmd === "hrm") { S.handover.splice(+arg, 1); render(); return; }
     if (cmd === "consent") { S.consentId = arg; render(); return; }
+    // Wave 2 (kits-share.js): the same content, sent to a verified colleague instead of printed.
+    if (cmd === "kxsend" && G.SMD_SHARE) {
+      var v = S.vals;
+      if (S.type === "referral") G.SMD_SHARE.compose({ kind: "referral", kitId: S.kitId, urgency: v.urgency || "Routine", payload: { patient: { name: v.name || "", age: v.age || "", sex: v.sex || "" },
+        reason: v.reason || "", history: v.history || "", investigations: v.investigations || "", treatment: v.treatment || "", question: v.question || "", kitSummary: S.kitSummary || "" } });
+      else { if (!S.handover.length) { toast("Add at least one patient."); return; } G.SMD_SHARE.compose({ kind: "handover", payload: { unit: v.unit || "", shift: v.shift || "", rows: S.handover.slice() } }); }
+      return;
+    }
     if (cmd === "preview" || cmd === "print") {
       if (S.type === "consent" && !consentById(S.consentId)) { toast("Choose a consent template first."); return; }
       if (S.type === "handover" && !S.handover.length) { toast("Add at least one patient."); return; }

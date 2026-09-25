@@ -243,3 +243,9 @@ Retry after removing the AI_PROVIDER Pages secret that collided with the wrangle
 Pages caps variables plus secrets at 128 bindings; adding VERTEX_API_KEY made 129 and every deployment failed with
 "Too many text bindings". GCP_WIF_ISSUER and GCP_WIF_SUBJECT (code defaults exist) were deleted on 2026-09-24 to get back
 under it; delete the rest of the GCP_* set once the key is verified, and count before adding any new secret.
+
+## KITS_SHARE_ON (wave 2 kits sharing, 2026-09-25)
+Pages env var (plain var, not a secret) that turns on `/api/kits/*` ([[Colleagues]]). Unset = every
+route answers 404 `{error:"disabled"}`. Uses the existing `FOLLOWCARE_PHI_KEY` secret for sealing and
+`FIREBASE_SERVICE_ACCOUNT` for Firestore REST and recipient claims; rate limits use `CASES_KV` /
+`GHIS_KV` / `MAIK_KV` (first present). Collections `kx_*` are server-only (rules catch-all deny).

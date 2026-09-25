@@ -119,16 +119,11 @@ Engineering that is deliberately NOT started:
 - [ ] Scheme Search provider (`/api/schemes/search`), CliniX/SURGX content providers (manifest is lazy; needs a cached title index), OPD/ICU patient jump (PHI review first).
 
 ## Every branch, wave 2: needs the server (owner's ticked list, 2026-09-25)
-Wave 1 (everything that works on the phone alone) is built: [[Specialty Kits]] (26),
-[[Clinical Documents]], [[Review Desk]], source watch. Wave 2, not started:
-- **B1 Referral with context**: send a referral (kit findings + letter) to a named colleague's StewardMD
-  inbox, with consent and no PHI in the notification text.
-- **B2 Case room**: a shared, de-identified case thread across branches for an opinion.
-- **B7 Unit versions**: a hospital or unit publishes its own edited kit/protocol version to its doctors.
-- **E3 Antenatal card across visits / E4 kit history**: kit values saved per patient across visits
-  (today they are memory only, per consult, on purpose). Needs a server record, consent and sync.
-- **F1 sync**: review-desk decisions to the server, reviewer identity from the verified claim.
-- **B3 sync**: shared handover lists for a unit (today the handover is memory only).
+Wave 1 is built and ON: [[Specialty Kits]] (26), [[Clinical Documents]], [[Review Desk]], source watch.
+Wave 2 is **built and OFF** ([[Colleagues]]): B1 referral, B2 case room, B3 handover sync, B7 hospital
+kit versions, E3/E4 kit history, F1 review sync. To go live: owner review, `KITS_SHARE_ON=1`, then flip
+`smd_kits_share` on. Follow-ups: an in-app badge for new items; a per-uid push token directory instead of
+the token scan; unit-level (not per-doctor) history if hospitals ask for it.
 Not ticked (owner left them out): B4 audit dashboard, B5 case library.
 Also pending on people, not code: clinical review of all ai_drafted content (use the Review Desk),
 native-speaker check of the Telugu and Hindi consent forms and handouts.

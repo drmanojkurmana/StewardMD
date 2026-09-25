@@ -9280,3 +9280,16 @@ source and a `verified` note saying how it was read, and the maths is tested aga
 published values. Where a source was silent the tool is conservative: the LA dose counts nobody above
 70 kg (Williams and Walker 2014) because the with-adrenaline rows have no mg ceiling; MCCD Part I has
 three lines because India's Form 4 has three, not WHO's four.
+
+## 2026-09-25 - Wave 2 sharing: server-side, verified doctors only, sealed, off by default
+[[Colleagues]] could have extended the client-side Firestore patterns (`referrals.js`, `sharedCases`),
+but those store patient data readable by rules, and `referrals.js` puts the full ICU entry in Firestore
+unencrypted. So wave 2 is one server route family (`/api/kits`) with deny-all collections: every write is
+validated on the server, patient data only moves between registration-verified doctors (both ends
+checked from Firebase claims), everything clinical is AES-GCM sealed with the existing PHI key, pushes are
+fixed text, and the patient's record number never leaves a POST body (history is keyed by an HMAC under
+an HKDF-derived key). Identity is the verified ID token only; the older `identify()` that also trusts a
+bare Cf-Access email header is deliberately not used. A hospital's kit version is published by the
+org owner or an `admin`/`pg_hod` member who is also a verified doctor, without adding a new capability
+to `_queue_roles.js` (a central security file). Kit history is per doctor, not per hospital, until a
+hospital asks. The whole thing is off twice (server env and client flag) until the owner approves.

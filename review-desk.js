@@ -64,7 +64,8 @@
     } else {
       var q = S.q.toLowerCase(), shown = list.filter(function (x) { return !q || (x.title + " " + x.id).toLowerCase().indexOf(q) >= 0; });
       html = '<p class="kit-muted">Read each item, then approve it or say what needs to change. Your decisions stay on this phone until you export them.</p>' +
-        '<div class="kit-row"><button type="button" class="kit-add" data-rv-act="export"' + (n ? "" : " disabled") + ">" + ms("ios_share") + "Export " + n + " decision" + (n === 1 ? "" : "s") + "</button></div>" + tabs +
+        '<div class="kit-row"><button type="button" class="kit-add" data-rv-act="export"' + (n ? "" : " disabled") + ">" + ms("ios_share") + "Export " + n + " decision" + (n === 1 ? "" : "s") + "</button>" +
+        (G.SMD_SHARE && G.SMD_SHARE.on && G.SMD_SHARE.on() ? '<button type="button" class="kit-pill" data-rv-act="sync"' + (n ? "" : " disabled") + ">" + ms("cloud_upload") + "Send to StewardMD</button>" : "") + "</div>" + tabs +
         '<label class="kit-field wide" for="rv_q"><span class="kit-fl">Search</span><input id="rv_q" type="search" class="kit-inp" value="' + esc(S.q) + '" autocomplete="off"></label>' +
         '<p class="kit-muted">' + shown.length + " of " + list.length + "</p><div class=\"rv-list\">" + shown.map(function (x) {
           return '<button type="button" class="rv-row" data-rv-act="sel:' + esc(x.id) + '"><span class="rv-t">' + esc(x.title) + '</span><span class="rv-s">' + esc(x.sub || "") + "</span><span>" + statusPill(x.status) + decPill(dec[S.kind + ":" + x.id]) + "</span></button>";
@@ -121,6 +122,11 @@
       toast("Decision saved on this phone."); S.sel = ""; render(); return;
     }
     if (cmd === "undo") { var d2 = loadDecisions(); delete d2[S.kind + ":" + S.sel]; saveDecisions(d2); render(); return; }
+    if (cmd === "sync" && G.SMD_SHARE) {
+      var sx = buildExport(loadDecisions(), reviewer());
+      G.SMD_SHARE.sendReviews(sx.decisions).then(function (r) { toast(r.status === 200 ? "Sent " + r.body.count + " decision" + (r.body.count === 1 ? "" : "s") + " to StewardMD." : G.SMD_SHARE.errText(r.body.error)); });
+      return;
+    }
     if (cmd === "export") {
       var ex = buildExport(loadDecisions(), reviewer());
       if (!ex.reviewer.name) { toast("Open an item and add your name first."); return; }

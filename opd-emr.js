@@ -1411,6 +1411,8 @@
     openTab: function (t) { if (t === "immun" && !immunFlagOn()) { toast("The Immunisation tab is turned off on this device."); return; } switchTab(t); },
     setScribe: function (id) { if (scribeClinicalOn() && G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.list && G.SMD_SCRIBETPL.list().some(function (x) { return x.id === id; })) { try { if (G.localStorage) G.localStorage.setItem(_specialtyKey(st && st.author), id); } catch (e) {} } },
     patient: function () { return { sex: (st.patient && st.patient.sex) || "", age: (st.patient && st.patient.age) || "" }; },
+    // Kit history (kits-share.js): the record number, sent only in a POST body and hashed on the server.
+    patientKey: function () { return (st.patient && st.patient.mrn) || ""; },
     // For clinical-docs.js prefill (certificates, referral letter): kept in memory, printed only by the doctor.
     consult: function () { return { patient: { name: (st.patient && st.patient.name) || "", age: (st.patient && st.patient.age) || "", sex: (st.patient && st.patient.sex) || "" }, vals: st.assessVals || {} }; }
   };

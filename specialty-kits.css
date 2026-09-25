@@ -3,7 +3,7 @@
  *   - the standalone sheet #smdKit opened from Home, which defines the same palette itself.
  * Material Symbols come from redesign-system.css. Every tap target is at least 40px high. */
 
-:is(#smdKit, #smdDocs, #smdReview) {
+:is(#smdKit, #smdDocs, #smdReview, #smdShare) {
   --primary: #00685f; --on-primary: #fff; --primary-container: #008378;
   --secondary: #565e74; --error: #ba1a1a; --error-container: #ffdad6; --on-error-container: #93000a;
   --bg: #f7f9fb; --surface: #f7f9fb; --on-surface: #191c1e; --on-surface-variant: #3d4947;
@@ -11,17 +11,17 @@
   --q-sans: 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   position: fixed; inset: 0; z-index: 880; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--q-sans);
 }
-:is(#smdKit, #smdDocs, #smdReview).on { display: block; }
-body.dark :is(#smdKit, #smdDocs, #smdReview) { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; --on-surface-variant: #bcc9c6;
+:is(#smdKit, #smdDocs, #smdReview, #smdShare).on { display: block; }
+body.dark :is(#smdKit, #smdDocs, #smdReview, #smdShare) { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; --on-surface-variant: #bcc9c6;
   --sc-lowest: #1f2325; --sc-low: #23272a; --sc-high: #2d3133; --outline-variant: #3d4947; --secondary: #bec6e0;
   --primary: #3fc7b3; --on-primary: #04322c; --error: #ffb4ab; --error-container: #5c1712; --on-error-container: #ffdad6; }
-:is(#smdKit, #smdDocs, #smdReview) .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
-:is(#smdKit, #smdDocs, #smdReview) *, #smdKit *::before, #smdKit *::after { box-sizing: border-box; }
-:is(#smdKit, #smdDocs, #smdReview) .kit-sheet { display: flex; flex-direction: column; height: 100%; }
-:is(#smdKit, #smdDocs, #smdReview) .kit-sheet-top { display: flex; align-items: center; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; background: var(--surface); border-bottom: 1px solid var(--sc-low); }
-:is(#smdKit, #smdDocs, #smdReview) .kit-sheet-top h1 { flex: 1; margin: 0; font: 700 17px var(--q-sans); }
-:is(#smdKit, #smdDocs, #smdReview) .kit-x { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 12px; background: transparent; color: var(--on-surface); cursor: pointer; }
-:is(#smdKit, #smdDocs, #smdReview) .kit-sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 12px 16px calc(28px + env(safe-area-inset-bottom)); }
+:is(#smdKit, #smdDocs, #smdReview, #smdShare) .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
+:is(#smdKit, #smdDocs, #smdReview, #smdShare) *, #smdKit *::before, #smdKit *::after { box-sizing: border-box; }
+:is(#smdKit, #smdDocs, #smdReview, #smdShare) .kit-sheet { display: flex; flex-direction: column; height: 100%; }
+:is(#smdKit, #smdDocs, #smdReview, #smdShare) .kit-sheet-top { display: flex; align-items: center; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; background: var(--surface); border-bottom: 1px solid var(--sc-low); }
+:is(#smdKit, #smdDocs, #smdReview, #smdShare) .kit-sheet-top h1 { flex: 1; margin: 0; font: 700 17px var(--q-sans); }
+:is(#smdKit, #smdDocs, #smdReview, #smdShare) .kit-x { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 12px; background: transparent; color: var(--on-surface); cursor: pointer; }
+:is(#smdKit, #smdDocs, #smdReview, #smdShare) .kit-sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 12px 16px calc(28px + env(safe-area-inset-bottom)); }
 /* Surfaces the kit links into sit below #smdKit (880) by default: lift them while the sheet is open,
    the same way surgx.css lifts .mc-overlay above SURGX. Far below the prescription pad (16000). */
 html.kit-lock .mc-overlay { z-index: 1300; }
@@ -193,3 +193,8 @@ html.oe-kit-calc .icd-overlay { z-index: 12015; }
 .kit .kit-mic { position: absolute; right: 4px; bottom: 4px; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 9px; background: transparent; color: var(--secondary); cursor: pointer; }
 .kit .kit-mic.on { color: var(--error); background: color-mix(in srgb, var(--error) 12%, transparent); }
 .kit .kit-micwrap .kit-hint + .kit-mic, .kit .kit-micwrap:has(.kit-hint) .kit-mic { bottom: 22px; }
+/* Wave 2 (kits-share.js): the hospital's version of the kit and the patient's kit history, inside the kit. */
+.kit .kit-share .kit-unit { margin: 6px 0 12px; padding: 10px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-lowest); }
+.kit .kit-share .kit-unit p { margin: 6px 0; font-size: 14px; line-height: 1.45; }
+.kit .kit-share .kit-unit ul { margin: 4px 0 8px 18px; padding: 0; font-size: 13.5px; }
+.kit .kit-share [data-kit-hist] { margin-top: 10px; }

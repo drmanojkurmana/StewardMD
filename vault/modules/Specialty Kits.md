@@ -68,7 +68,9 @@ A kit is:
    "Specialty kits" category (kits and their tools, deep-linking `SMD_KITS.open({kit, tool})`), and MaiK
    Home chips can open a kit tool.
 9. **Voice** (E5): mic buttons on long kit fields use `SMD_VOICE.listen({noCloud:true})` (on-device only).
-10. **Documents** button: opens [[Clinical Documents]] prefilled from the consult.
+10. **Documents** button: opens [[Clinical Documents]] prefilled from the consult (and the kit summary).
+11. **Colleagues and your hospital** card (wave 2, [[Colleagues]], flag off): the hospital's version of
+    the kit, "Ask colleagues about this case", and in the OPD the patient's kit history (O&G: antenatal card).
 
 ## Key files
 - `specialty-kits.js` (`window.SMD_KITS`) - engine: pure maths (exported `_dating`, `_growth`, ...),

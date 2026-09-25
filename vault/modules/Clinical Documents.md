@@ -57,4 +57,7 @@ print dialog on the web.
   (official form names), and the narrower words chosen for ringworm, scabies, gout and anaesthetic.
 - The handout list puts the kit the sheet was opened from first and has a search box; ticked items stay.
 
-Deps: [[Specialty Kits]] · [[OPD Queue]] · [[Home Tools]] · [[Review Desk]].
+With [[Colleagues]] on (wave 2), the referral letter and the handover also have "Send to a colleague in
+StewardMD" / "Send to the receiving doctor"; the handover is then no longer only on paper.
+
+Deps: [[Specialty Kits]] · [[OPD Queue]] · [[Home Tools]] · [[Review Desk]] · [[Colleagues]].
