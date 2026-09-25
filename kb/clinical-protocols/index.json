@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "0d8dbe7ac78e",
- "count": 114,
+ "version": "6c8e46657e3e",
+ "count": 117,
  "subjects": [
   {
    "key": "emergency",
@@ -11,7 +11,7 @@
   {
    "key": "critical-care",
    "label": "Critical Care",
-   "count": 1
+   "count": 2
   },
   {
    "key": "cardiology",
@@ -51,7 +51,7 @@
   {
    "key": "toxicology",
    "label": "Toxicology and Envenomation",
-   "count": 2
+   "count": 3
   },
   {
    "key": "haematology-oncology",
@@ -61,7 +61,7 @@
   {
    "key": "rheumatology-dermatology",
    "label": "Rheumatology and Dermatology",
-   "count": 1
+   "count": 2
   },
   {
    "key": "obstetrics-gynaecology",
@@ -807,6 +807,32 @@
    "status": "ai_drafted"
   },
   {
+   "id": "ards-lung-protective-ventilation",
+   "title": "ARDS: lung-protective ventilation (adult)",
+   "subject": "critical-care",
+   "population": "Adults",
+   "aliases": [
+    "ARDS",
+    "acute respiratory distress syndrome",
+    "lung protective ventilation",
+    "low tidal volume",
+    "ARDSNet",
+    "prone ventilation",
+    "proning",
+    "PEEP",
+    "VV-ECMO",
+    "driving pressure",
+    "neuromuscular blockade"
+   ],
+   "summary": "Ventilate ARDS with tidal volume 4 to 8 mL/kg predicted body weight (start at 6) and plateau pressure below 30 cmH2O, use higher PEEP in moderate to severe ARDS without prolonged recruitment manoeuvres, prone for 16 hours or more when PaO2/FiO2 stays below 150 mmHg, and consider corticosteroids, early neuromuscular blockade and VV-ECMO in selected patients.",
+   "sources": [
+    "American Thoracic Society 2024",
+    "ESICM 2023",
+    "Matthay MA, et al. Am J Respir Crit Care Med 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "ascites-and-sbp",
    "title": "Ascites, SBP and hepatorenal syndrome in cirrhosis",
    "subject": "gastroenterology",
@@ -1462,6 +1488,34 @@
    "sources": [
     "MoHFW, Government of India 2018",
     "American Diabetes Association 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "giant-cell-arteritis",
+   "title": "Giant cell arteritis (GCA): urgent assessment and treatment",
+   "subject": "rheumatology-dermatology",
+   "population": "Adults",
+   "aliases": [
+    "GCA",
+    "temporal arteritis",
+    "cranial arteritis",
+    "Horton disease",
+    "jaw claudication",
+    "large vessel vasculitis",
+    "LVV",
+    "halo sign",
+    "temporal artery biopsy",
+    "TAB",
+    "tocilizumab GCA",
+    "polymyalgia rheumatica"
+   ],
+   "summary": "In anyone aged 50 or over with new headache, jaw claudication, scalp tenderness or visual symptoms and raised ESR or CRP, start prednisolone 40 to 60 mg at once (IV methylprednisolone if vision is threatened), refer the same day, confirm by temporal and axillary ultrasound or biopsy, and consider tocilizumab to spare steroids.",
+   "sources": [
+    "EULAR 2026",
+    "ACR / Vasculitis Foundation 2021",
+    "British Society for Rheumatology 2020",
+    "EULAR 2023"
    ],
    "status": "ai_drafted"
   },
@@ -2298,6 +2352,33 @@
     "The Lancet (Eddleston et al.) 2008",
     "PLoS Medicine (Eddleston et al.) 2009",
     "ISCCM 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "paracetamol-overdose",
+   "title": "Paracetamol (acetaminophen) overdose",
+   "subject": "toxicology",
+   "population": "Adults",
+   "aliases": [
+    "paracetamol poisoning",
+    "acetaminophen overdose",
+    "APAP",
+    "NAC",
+    "N-acetylcysteine",
+    "acetylcysteine",
+    "Rumack-Matthew nomogram",
+    "treatment line",
+    "SNAP regimen",
+    "staggered overdose",
+    "paracetamol hepatotoxicity"
+   ],
+   "summary": "Measure paracetamol at 4 hours or later and plot on the nomogram (US/Canada treatment line 150 mg/L, UK line 100 mg/L at 4 hours). Give IV acetylcysteine (at least 300 mg/kg over 20 to 24 hours, or the 12-hour SNAP regimen) ideally within 8 hours, and continue until stopping criteria are met.",
+   "sources": [
+    "America's Poison Centers, AACT, ACMT, CAPCC 2023",
+    "NHS Greater Glasgow and Clyde 2026",
+    "eClinicalMedicine (Pettie et al.) 2019",
+    "ISRN Toxicology 2013"
    ],
    "status": "ai_drafted"
   },
