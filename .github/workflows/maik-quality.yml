@@ -1,0 +1,86 @@
+name: MaiK quality & latency
+
+# T19: schedules scripts/maik-quality-run.mjs, the live-production measurement the audit found missing.
+#   - WEEKLY (Monday 03:17 UTC): the clinician gold-set run - accuracy/parity checks + a grading sheet
+#     for a human to mark correct / incomplete / unsafe (test/maik-quality-run.test.mjs covers the maths).
+#   - DAILY (04:43 UTC): a cheap synthetic latency check (--latency) - p50/p95 of total time, time to
+#     first streamed byte, and output tokens, over 5 fixed short questions.
+# Needs repo secret MAIK_EVAL_TOKEN (a signed-in Firebase ID token - see the header of
+# scripts/maik-quality-run.mjs for how to obtain one). Without it this workflow SKIPS CLEANLY (a
+# passing run with a ::notice::), so it never goes red before the secret is added.
+# Both modes hit the LIVE /api/ai/explain endpoint and cost real Gemini tokens, so this is deliberately
+# separate from ci.yml and never runs on push/PR - schedule + manual dispatch only.
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'   # weekly: Monday 03:17 UTC - full gold-set run
+    - cron: '43 4 * * *'   # daily: 04:43 UTC - synthetic latency check
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Which run to force (manual dispatch only; a scheduled run picks its mode from which cron fired)'
+        type: choice
+        options: [full, latency]
+        default: full
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # Never fails the job - a missing secret is an expected pre-setup state, not a CI failure.
+      - name: Check for MAIK_EVAL_TOKEN
+        id: gate
+        env:
+          TOKEN_SET: ${{ secrets.MAIK_EVAL_TOKEN != '' }}
+        run: |
+          if [ "$TOKEN_SET" != "true" ]; then
+            echo "::notice::MAIK_EVAL_TOKEN secret is not set - skipping the MaiK quality/latency run. Add it under repo Settings > Secrets and variables > Actions (see scripts/maik-quality-run.mjs header for how to obtain the token) to enable this workflow."
+            echo "skip=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.skip == '0'
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.skip == '0'
+        with:
+          node-version: '22'
+
+      - name: Determine mode (full vs latency)
+        if: steps.gate.outputs.skip == '0'
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "43 4 * * *" ]; then
+            echo "mode=latency" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Weekly: clinician gold-set run (test/maik-eval/cases.json) - answers, objective checks, cloud
+      # timing, and a grading sheet. Writes docs/maik-eval/run-<date>.json + run-<date>-grading.md.
+      - name: Weekly gold-set run (accuracy + parity checks, grading sheet)
+        if: steps.gate.outputs.skip == '0' && steps.mode.outputs.mode == 'full'
+        env:
+          MAIK_EVAL_TOKEN: ${{ secrets.MAIK_EVAL_TOKEN }}
+        run: node scripts/maik-quality-run.mjs
+
+      # Daily: 5 short fixed questions against the streaming endpoint. Writes docs/maik-eval/latency-<date>.json.
+      - name: Daily synthetic latency check (p50/p95 total ms, TTFB, output tokens)
+        if: steps.gate.outputs.skip == '0' && steps.mode.outputs.mode == 'latency'
+        env:
+          MAIK_EVAL_TOKEN: ${{ secrets.MAIK_EVAL_TOKEN }}
+        run: node scripts/maik-quality-run.mjs --latency
+
+      - uses: actions/upload-artifact@v4
+        if: steps.gate.outputs.skip == '0'
+        with:
+          name: maik-quality-${{ steps.mode.outputs.mode }}-${{ github.run_id }}
+          path: docs/maik-eval/*
+          retention-days: 30
