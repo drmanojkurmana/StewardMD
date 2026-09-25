@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "e72b9472108a",
- "count": 229,
+ "version": "557b0dd9f7d0",
+ "count": 232,
  "subjects": [
   {
    "key": "emergency",
@@ -26,7 +26,7 @@
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 37
+   "count": 38
   },
   {
    "key": "gastroenterology",
@@ -51,7 +51,7 @@
   {
    "key": "toxicology",
    "label": "Toxicology and Envenomation",
-   "count": 10
+   "count": 11
   },
   {
    "key": "haematology-oncology",
@@ -71,7 +71,7 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 11
+   "count": 12
   },
   {
    "key": "paediatrics",
@@ -103,7 +103,7 @@
   {
    "key": "international",
    "label": "International",
-   "count": 211
+   "count": 214
   },
   {
    "key": "india",
@@ -2954,12 +2954,42 @@
    "status": "ai_drafted"
   },
   {
+   "id": "gestational-diabetes-international",
+   "title": "Gestational diabetes (ADA, NICE and WHO)",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "basis": "international",
+   "counterpart": "gestational-diabetes",
+   "aliases": [
+    "GDM",
+    "gestational diabetes mellitus",
+    "OGTT",
+    "75 g OGTT",
+    "IADPSG",
+    "one-step",
+    "two-step",
+    "Carpenter-Coustan",
+    "diabetes in pregnancy",
+    "hyperglycaemia in pregnancy",
+    "NICE NG3",
+    "WHO 2013 criteria"
+   ],
+   "summary": "Exclude overt diabetes early, then diagnose GDM at 24 to 28 weeks with the one-step 75 g OGTT (WHO 2013 and IADPSG, preferred by ADA), a two-step test, or NICE risk-based testing. Treat with nutrition, activity and glucose monitoring; add insulin (ADA first line) or metformin (NICE first drug) if targets are missed, and retest after birth.",
+   "sources": [
+    "American Diabetes Association 2026",
+    "American Diabetes Association 2026",
+    "NICE 2020",
+    "WHO 2013"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "gestational-diabetes",
    "title": "Gestational diabetes mellitus (GDM): India DIPSI pathway",
    "subject": "obstetrics-gynaecology",
    "population": "Pregnancy",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "gestational-diabetes-international",
    "aliases": [
     "GDM",
     "DIPSI",
@@ -3229,6 +3259,38 @@
    "sources": [
     "American College of Gastroenterology 2026",
     "Journal of Hospital Medicine 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "herpes-simplex-infections",
+   "title": "Herpes simplex: genital herpes and cold sores (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "HSV",
+    "HSV-1",
+    "HSV-2",
+    "genital herpes",
+    "herpes genitalis",
+    "herpes labialis",
+    "cold sore",
+    "fever blister",
+    "herpes proctitis",
+    "aciclovir",
+    "acyclovir",
+    "valaciclovir",
+    "valacyclovir",
+    "famciclovir",
+    "suppressive therapy"
+   ],
+   "summary": "Treat first-episode genital herpes with oral aciclovir, valaciclovir or famciclovir (CDC 7 to 10 days; BASHH 5 days with review), use short episodic courses or daily suppression for recurrences, give suppression from 36 weeks of pregnancy, and treat cold sores early with high-dose valaciclovir.",
+   "sources": [
+    "CDC 2021",
+    "BASHH 2024",
+    "US FDA (DailyMed) 2025"
    ],
    "status": "ai_drafted"
   },
@@ -5757,7 +5819,7 @@
    "subject": "toxicology",
    "population": "Adults and children",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "snakebite-envenomation-international",
    "aliases": [
     "snake bite",
     "snakebite",
@@ -5778,6 +5840,35 @@
    "sources": [
     "MoHFW, Government of India 2016",
     "NCDC, MoHFW 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "snakebite-envenomation-international",
+   "title": "Snakebite envenoming (WHO)",
+   "subject": "toxicology",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": "snakebite-envenomation",
+   "aliases": [
+    "snake bite",
+    "snakebite",
+    "envenomation",
+    "antivenom",
+    "ASV",
+    "anti-snake venom",
+    "20WBCT",
+    "neurotoxic envenoming",
+    "haemotoxic envenoming",
+    "cobra",
+    "krait",
+    "Russell's viper",
+    "saw-scaled viper",
+    "pressure pad immobilisation"
+   ],
+   "summary": "Reassure, immobilise and transport without cutting, sucking or tight tourniquets. Give IV antivenom (no skin test) for systemic or severe local envenoming, the same dose for children, repeat by 20WBCT and clinical response, try atropine-neostigmine in neurotoxicity, and treat antivenom anaphylaxis with IM adrenaline.",
+   "sources": [
+    "WHO Regional Office for South-East Asia 2016"
    ],
    "status": "ai_drafted"
   },
