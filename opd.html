@@ -811,7 +811,11 @@
    * stream is down a slow pass keeps it from going stale. ---- */
   var LIVE=null, liveOrg="", liveT=null;
   function liveHdrs(){ var h={}; if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return h; }); if(st.tok) h["X-Staff-Token"]=st.tok; return Promise.resolve(h); }
-  function liveRefresh(){ clearTimeout(liveT); liveT=setTimeout(function(){ var ae=document.activeElement, typing=!!(ae&&ae.closest&&ae.closest("input, textarea, select")); if(!document.hidden&&!typing&&st.orgId) refresh(); },300); }
+  // A change heard while the tab is hidden or someone is typing is remembered (liveMissed), not dropped: the board catches
+  // up when the tab is shown again, the field is left, or at the minute's pass. Dropped, it stayed stale until the next change.
+  var liveMissed=false;
+  function liveRefresh(){ clearTimeout(liveT); liveT=setTimeout(function(){ var ae=document.activeElement, typing=!!(ae&&ae.closest&&ae.closest("input, textarea, select")); if(!document.hidden&&!typing&&st.orgId){ liveMissed=false; refresh(); } else if(st.orgId) liveMissed=true; },300); }
+  try{ document.addEventListener("visibilitychange",function(){ if(!document.hidden&&liveMissed) liveRefresh(); }); document.addEventListener("focusout",function(){ if(liveMissed) liveRefresh(); }); }catch(e){}
   function liveStart(){
     if(!window.SMD_OPD_LIVE||!st.orgId||st.orgId==="demo") return;
     if(LIVE&&liveOrg===st.orgId) return;
@@ -820,7 +824,7 @@
     LIVE=SMD_OPD_LIVE.connect({url:queueApiUrl("live?orgId="+encodeURIComponent(st.orgId)),headers:liveHdrs,onChange:liveRefresh});
   }
   function liveStop(){ if(LIVE) LIVE.stop(); LIVE=null; liveOrg=""; }
-  try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&!(LIVE&&LIVE.isLive())) liveRefresh(); },60000); }catch(e){}
+  try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&(liveMissed||!(LIVE&&LIVE.isLive()))) liveRefresh(); },60000); }catch(e){}
   function loadPulse(){
     if(!st.orgId||st.orgId==="demo") return;
     liveStart();
