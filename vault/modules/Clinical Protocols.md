@@ -17,6 +17,14 @@ inside the tab via `SMD_KBPROTO.readerHTML(p, { idPrefix: "oeKbp" })` (the Knowl
 below the EMR's z-index, so it cannot be opened on top). Only oncology rows have Assign (a draft plan +
 timeline entry); a clinical protocol never writes to the patient record.
 
+**Guideline basis (owner, 2026-09-25: "I want international guidelines based protocols too").**
+Every protocol declares `basis`: `international` (WHO, NICE, AHA, ESC, IDSA, ADA...) or `india`
+(national programme / Indian society guidance as the PRIMARY source). The Knowledge Library and the OPD
+tab have an All / International / India control; rows and readers carry a basis pill. When the same
+topic exists under both, the files name each other in `counterpart` (validator: must exist, point
+back, differ in basis) and the reader shows an "Also available" link to the other version. Oncology
+regimens count as International in the OPD filter (NCCN-based).
+
 ## Key files
 - `kb/clinical-protocols/<id>.json` - one protocol per file. Content as data.
 - `kb/clinical-protocols/index.json` - GENERATED catalogue (never hand-edit).

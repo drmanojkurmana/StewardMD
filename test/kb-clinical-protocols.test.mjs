@@ -2,7 +2,8 @@
 // flag default, and bundle wiring. Content: kb/clinical-protocols/*.json. UI: kb-protocols.js.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, mkdtempSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { join, dirname } from "node:path";
@@ -17,6 +18,7 @@ const good = () => ({
   title: "Demo protocol",
   subject: "cardiology",
   population: "Adults",
+  basis: "international",
   aliases: ["DP"],
   summary: "A demonstration protocol used only by this test file.",
   sections: [
@@ -83,7 +85,10 @@ test("validator rejects the failure modes it exists for", () => {
     [(p) => { p.subject = "astrology"; }, /subject "astrology"/],
     [(p) => { p.drugs[0].dose = ""; }, /dose required/],
     [(p) => { p.sections[0].items[0] = "See <b>bold</b>"; }, /HTML-like/],
-    [(p) => { p.summary = "TODO write this summary later on"; }, /placeholder/]
+    [(p) => { p.summary = "TODO write this summary later on"; }, /placeholder/],
+    [(p) => { delete p.basis; }, /basis must be one of/],
+    [(p) => { p.basis = "usa"; }, /basis must be one of/],
+    [(p) => { p.counterpart = "demo-protocol"; }, /counterpart must be another protocol id/]
   ];
   cases.forEach(([mut, re]) => {
     const p = good(); mut(p);
@@ -91,6 +96,30 @@ test("validator rejects the failure modes it exists for", () => {
     assert.ok(errs.some((e) => re.test(e)), `${re} not raised; got ${JSON.stringify(errs)}`);
   });
   assert.ok(validateProtocol(good(), "other-name").some((e) => /file name/.test(e)));
+});
+
+test("counterparts must exist, point back, and differ in basis", () => {
+  const dir = mkdtempSync(join(tmpdir(), "kbp-"));
+  try {
+    const write = (p) => writeFileSync(join(dir, p.id + ".json"), JSON.stringify(p));
+    const a = Object.assign(good(), { id: "topic-a", title: "Topic A", basis: "india", counterpart: "topic-b" });
+    const b = Object.assign(good(), { id: "topic-b", title: "Topic B", basis: "international", counterpart: "topic-a" });
+    write(a); write(b);
+    assert.deepEqual(loadAll(dir).errors, []);
+    write(Object.assign({}, b, { counterpart: undefined }));
+    assert.ok(loadAll(dir).errors.some((e) => /does not point back/.test(e)));
+    write(Object.assign({}, b, { basis: "india" }));
+    assert.ok(loadAll(dir).errors.some((e) => /same basis/.test(e)));
+    rmSync(join(dir, "topic-b.json"));
+    assert.ok(loadAll(dir).errors.some((e) => /topic-b does not exist/.test(e)));
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("catalogue reports both guideline bases and every protocol carries one", () => {
+  const idx = JSON.parse(readFileSync(INDEX, "utf8"));
+  assert.deepEqual(idx.bases.map((b) => b.key), ["international", "india"]);
+  assert.equal(idx.bases.reduce((n, b) => n + b.count, 0), idx.count);
+  idx.protocols.forEach((p) => assert.ok(["international", "india"].includes(p.basis), p.id));
 });
 
 test("search: whole-word short tokens, aliases, subject filter, title ranking", () => {
@@ -110,6 +139,13 @@ test("search: whole-word short tokens, aliases, subject filter, title ranking", 
   assert.deepEqual(api._searchIndex(idx, "", "endocrinology").map((p) => p.id), ["c", "d"]);
   assert.deepEqual(api._searchIndex(idx, "insulin potassium", "all").map((p) => p.id), ["c"], "every token must match");
   assert.equal(api._searchIndex(idx, "zzzz", "all").length, 0);
+  // Guideline basis filter and basis/source words in the query.
+  idx.protocols[2].basis = "india"; idx.protocols.forEach((p) => { p.basis = p.basis || "international"; });
+  idx.protocols[3].sources = ["JBDS 2023"];
+  assert.deepEqual(api._searchIndex(idx, "", "all", "india").map((p) => p.id), ["c"]);
+  assert.deepEqual(api._searchIndex(idx, "", "endocrinology", "international").map((p) => p.id), ["d"]);
+  assert.deepEqual(api._searchIndex(idx, "dka india", "all").map((p) => p.id), ["c"], "basis word narrows");
+  assert.deepEqual(api._searchIndex(idx, "jbds", "all").map((p) => p.id), ["d"], "cited body is searchable");
 });
 
 test("reader labels every schema section kind", async () => {

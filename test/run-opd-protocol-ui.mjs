@@ -72,6 +72,16 @@ try{
  await ev(`document.querySelector('[data-oe-act="proto-branch:all"]').click()`);
  ok(await until(`!document.querySelector('[data-oe-inp="proto-type"]')&&document.querySelectorAll('#oe-out-proto .oe-proto-row').length>${idx.count}`),'back to All restores both lists');
 
+ // Guideline basis: India shows only India-based clinical protocols (regimens are international).
+ const indiaN=idx.bases.find(b=>b.key==='india').count;
+ ok(await ev(`[...document.querySelectorAll('.oe-proto-seg')].every(b=>b.scrollWidth<=b.clientWidth+1)`),'basis labels are not cut off at 390px');
+ await ev(`document.querySelector('[data-oe-act="proto-basis:india"]').click()`);
+ ok(await until(`document.querySelectorAll('#oe-out-proto .oe-proto-row').length===${indiaN}&&!document.querySelector('#oe-out-proto [data-oe-act^="proto-assign:"]')`),`India basis: ${indiaN} protocols, no regimens`);
+ ok(await ev(`[...document.querySelectorAll('#oe-out-proto .oe-proto-row')].every(r=>r.querySelector('.oe-proto-bpill.oe-b-india'))`),'India rows carry the India pill');
+ await shot('basis-india-390');
+ await ev(`document.querySelector('[data-oe-act="proto-basis:all"]').click()`);
+ ok(await until(`document.querySelectorAll('#oe-out-proto .oe-proto-row').length>${idx.count}`),'All guidelines restores both lists');
+
  // Reader inside the tab.
  await ev(`document.querySelector('[data-oe-act="proto-open:${sepsis.id}"]').click()`);
  ok(await until(`!!document.querySelector('#smdOpdEmr .kbp-embed .kbp-reader h1')`),'clinical protocol opens inside the OPD tab');

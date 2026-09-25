@@ -16,7 +16,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var CONTENT_V = "42bd6701950b";
+  var CONTENT_V = "dd929d29309e";
   var BASE = "/kb/clinical-protocols/";
 
   var KINDS = {
@@ -24,6 +24,9 @@
     monitoring: "Monitor", escalate: "Escalate", disposition: "Disposition", special: "Special situations",
     prevention: "Prevent", pitfalls: "Pitfalls"
   };
+  // Guideline basis: which family of guidance a protocol follows (schema field "basis").
+  var BASIS = { international: "International", india: "India" };
+  var BASIS_LONG = { international: "International guidelines", india: "India national guidelines" };
   var TABS = [["syndromes", "Syndromes"], ["antibiogram", "Antibiogram"], ["aware", "AWaRe"], ["guidelines", "Guidelines"], ["protocols", "Protocols"]];
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -46,7 +49,10 @@
     var toks = nq.split(" ");
     var title = norm(entry.title), aliases = norm((entry.aliases || []).join(" | "));
     var head = title + " " + aliases;
-    var all = head + " " + norm(entry.summary) + " " + norm(subjectLabel || "") + " " + norm(entry.population);
+    // Body text also carries the guideline family and the cited bodies, so "malaria WHO",
+    // "dengue india" or "hypertension ESC" narrow to the right version.
+    var all = head + " " + norm(entry.summary) + " " + norm(subjectLabel || "") + " " + norm(entry.population) + " " +
+      norm(BASIS_LONG[entry.basis] || "") + " " + norm((entry.sources || []).join(" "));
     for (var i = 0; i < toks.length; i++) if (!hasTok(all, toks[i])) return -1;
     if (title.indexOf(nq) === 0) return 100;
     if ((nq.length > 3 && title.indexOf(nq) >= 0) || hasTok(title, nq)) return 85;
@@ -56,13 +62,15 @@
     if (toks.every(function (t) { return hasTok(head, t); })) return 60;
     return 20;
   }
-  /** Filter + rank the catalogue. subject "all" or a subject key. Returns index entries. */
-  function searchIndex(index, q, subject) {
+  /** Filter + rank the catalogue. subject: "all" or a subject key; basis: "all", "international" or
+   *  "india" (the guideline family a protocol follows). Returns index entries. */
+  function searchIndex(index, q, subject, basis) {
     if (!index || !index.protocols) return [];
     var labels = {}; (index.subjects || []).forEach(function (s) { labels[s.key] = s.label; });
     var out = [];
     index.protocols.forEach(function (p, i) {
       if (subject && subject !== "all" && p.subject !== subject) return;
+      if (basis && basis !== "all" && p.basis !== basis) return;
       var s = rank(p, q, labels[p.subject]);
       if (s < 0) return;
       out.push({ p: p, s: s, i: i });
@@ -72,7 +80,7 @@
   }
 
   /* ---- state + data ---------------------------------------------------------------------------- */
-  var st = { index: null, loading: false, error: "", q: "", subject: "all", view: "list", openId: null, cache: {}, listScroll: 0, pending: null, nav: 0 };
+  var st = { index: null, loading: false, error: "", q: "", subject: "all", basis: "all", view: "list", openId: null, cache: {}, listScroll: 0, pending: null, nav: 0 };
 
   function getJSON(path) {
     return fetch(BASE + path + "?v=" + encodeURIComponent(CONTENT_V)).then(function (r) {
@@ -144,27 +152,38 @@
       var on = st.subject === key;
       return '<button type="button" class="kbp-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-kbp-subject="' + esc(key) + '">' + esc(label) + (count != null ? " <small>" + count + "</small>" : "") + "</button>";
     };
-    var chips = '<div class="kbp-subjects" role="group" aria-label="Filter by subject">' + chip("all", "All", total) +
-      idx.subjects.map(function (s) { return chip(s.key, s.label, s.count); }).join("") + "</div>";
-    shell(intro + notice + chips + '<div id="kbpList" class="kbp-list"></div>');
+    // Subject counts follow the International / India choice, so a chip never promises rows it hides.
+    var inBasis = idx.protocols.filter(function (p) { return st.basis === "all" || p.basis === st.basis; });
+    var per = {}; inBasis.forEach(function (p) { per[p.subject] = (per[p.subject] || 0) + 1; });
+    var chips = '<div class="kbp-subjects" role="group" aria-label="Filter by subject">' + chip("all", "All", inBasis.length) +
+      idx.subjects.filter(function (s) { return per[s.key] || st.subject === s.key; }).map(function (s) { return chip(s.key, s.label, per[s.key] || 0); }).join("") + "</div>";
+    var seg = function (key, label, count) {
+      var on = st.basis === key;
+      return '<button type="button" class="kbp-seg' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-kbp-basis="' + key + '">' + esc(label) + (count != null ? " <small>" + count + "</small>" : "") + "</button>";
+    };
+    var bases = idx.bases || [];
+    var basisBar = bases.length ? '<div class="kbp-basis" role="group" aria-label="Guideline basis">' + seg("all", "All", total) +
+      bases.map(function (b) { return seg(b.key, b.label, b.count); }).join("") + "</div>" : "";
+    shell(intro + notice + basisBar + chips + '<div id="kbpList" class="kbp-list"></div>');
     paintList();
   }
 
   function rowHTML(p) {
     var src = (p.sources || []).slice(0, 2).join(" · ") + ((p.sources || []).length > 2 ? " · +" + (p.sources.length - 2) : "");
     return '<button type="button" class="kbp-row" data-kbp-open="' + esc(p.id) + '">' +
-      '<span class="kbp-row-eye">' + esc(subjectLabel(p.subject)) + " · " + esc(p.population) + "</span>" +
+      '<span class="kbp-row-eye">' + esc(subjectLabel(p.subject)) + " · " + esc(p.population) +
+      (BASIS[p.basis] ? ' <span class="kbp-basis-pill kbp-b-' + esc(p.basis) + '">' + esc(BASIS[p.basis]) + "</span>" : "") + "</span>" +
       '<span class="kbp-row-title">' + esc(p.title) + "</span>" +
       '<span class="kbp-row-sum">' + esc(p.summary) + "</span>" +
       (src ? '<span class="kbp-row-src">' + esc(src) + "</span>" : "") + "</button>";
   }
   function paintList() {
     var list = D.getElementById("kbpList"); if (!list || !st.index) return;
-    var res = searchIndex(st.index, st.q, st.subject);
+    var res = searchIndex(st.index, st.q, st.subject, st.basis);
     var cnt = D.getElementById("kbpCount");
-    if (cnt) cnt.textContent = res.length ? (st.q || st.subject !== "all" ? "Showing " + res.length + " of " + plural(st.index.count, "protocol") : plural(st.index.count, "protocol")) : "";
+    if (cnt) cnt.textContent = res.length ? (st.q || st.subject !== "all" || st.basis !== "all" ? "Showing " + res.length + " of " + plural(st.index.count, "protocol") : plural(st.index.count, "protocol")) : "";
     if (!res.length) { list.innerHTML = '<div class="kbp-empty">No protocol matches. Try a broader term or another subject.</div>'; return; }
-    if (st.q || st.subject !== "all") { list.innerHTML = '<div class="kbp-group">' + res.map(rowHTML).join("") + "</div>"; return; }
+    if (st.q || st.subject !== "all" || st.basis !== "all") { list.innerHTML = '<div class="kbp-group">' + res.map(rowHTML).join("") + "</div>"; return; }
     // Browsing everything: group under subject headings, in the catalogue's subject order.
     list.innerHTML = st.index.subjects.map(function (s) {
       var rows = res.filter(function (p) { return p.subject === s.key; });
@@ -188,11 +207,22 @@
   /** The protocol reader as an HTML string. Shared by the Knowledge Library and the OPD Protocol tab.
    *  opts.idPrefix  prefix for section ids (jump targets), so two readers in one DOM never collide
    *  opts.back      render the "All protocols" Back control (the Knowledge Library owns it)
-   *  opts.brand     render the StewardMD Knowledge Base banner (its styles live under #sbrefOverlay) */
+   *  opts.brand     render the StewardMD Knowledge Base banner (its styles live under #sbrefOverlay)
+   *  opts.openAttr  function(id) -> attribute string that opens another protocol in the host
+   *                 (default data-kbp-open, handled by the Knowledge Library) */
   function readerHTML(p, opts) {
     opts = opts || {};
     var pre = opts.idPrefix || "kbp";
-    var meta = [p.population, p.setting].filter(Boolean).map(function (m) { return '<span class="kbp-meta">' + esc(m) + "</span>"; }).join("");
+    var meta = (BASIS_LONG[p.basis] ? '<span class="kbp-meta kbp-b-' + esc(p.basis) + '">' + esc(BASIS_LONG[p.basis]) + "</span>" : "") +
+      [p.population, p.setting].filter(Boolean).map(function (m) { return '<span class="kbp-meta">' + esc(m) + "</span>"; }).join("");
+    // The same topic under the other guideline family (e.g. malaria: India NCVBDC and WHO).
+    var twin = "";
+    if (p.counterpart) {
+      var other = ((st.index && st.index.protocols) || []).filter(function (x) { return x.id === p.counterpart; })[0];
+      var attr = opts.openAttr ? opts.openAttr(p.counterpart) : 'data-kbp-open="' + esc(p.counterpart) + '"';
+      var ob = other ? other.basis : (p.basis === "india" ? "international" : "india");
+      twin = '<button type="button" class="kbp-twin" ' + attr + '><span>Also available · ' + esc(BASIS_LONG[ob] || "another guideline") + "</span><strong>" + esc(other ? other.title : "Open the other version") + "</strong></button>";
+    }
     var secs = (p.sections || []).map(function (s, i) {
       var tag = s.kind === "immediate" ? "ol" : "ul";
       return '<section class="kbp-sec kbp-k-' + esc(s.kind) + '" id="' + pre + "Sec" + i + '"><h2><span class="kbp-kind">' + esc(KINDS[s.kind] || s.kind) + "</span>" + esc(s.title) + "</h2><" + tag + ">" +
@@ -213,7 +243,7 @@
       (opts.back ? '<button type="button" class="kbp-back" data-kbp-back aria-label="Back to protocols"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>All protocols</span></button>' : "") +
       '<header class="kblib-tool-intro kbp-hero">' + (opts.brand ? brandHTML() : "") + '<span class="kblib-tool-kicker">' + esc(subjectLabel(p.subject)) + "</span><h1>" + esc(p.title) + "</h1>" +
       (meta ? '<div class="kbp-metas">' + meta + "</div>" : "") + '<p class="kbp-summary">' + esc(p.summary) + "</p></header>" +
-      statusHTML(p) + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + drugs + sources + "</div>";
+      statusHTML(p) + twin + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + drugs + sources + "</div>";
   }
   function renderReader(p) {
     st.view = "reader"; st.openId = p.id;
@@ -300,6 +330,8 @@
       var row = t.closest("[data-kbp-open]"); if (row) { openProtocol(row.getAttribute("data-kbp-open")); return; }
       if (t.closest("[data-kbp-back]")) { backToList(); return; }
       if (t.closest("[data-kbp-retry]")) { open(); return; }
+      var seg = t.closest("[data-kbp-basis]");
+      if (seg) { st.basis = seg.getAttribute("data-kbp-basis") || "all"; renderList(); return; }
       var chip = t.closest("[data-kbp-subject]");
       if (chip) {
         st.subject = chip.getAttribute("data-kbp-subject");
@@ -317,7 +349,7 @@
     var n = 0, iv = setInterval(function () { if (wrapOpenRef() || ++n > 120) clearInterval(iv); }, 250);
   }
 
-  var API = { open: open, search: function (q, subject) { return searchIndex(st.index, q, subject || "all"); }, loadIndex: loadIndex, loadProtocol: loadProtocol, readerHTML: readerHTML, subjectLabel: subjectLabel, index: function () { return st.index; }, CONTENT_V: CONTENT_V, _searchIndex: searchIndex, _rank: rank, _kinds: KINDS, _state: st };
+  var API = { open: open, search: function (q, subject, basis) { return searchIndex(st.index, q, subject || "all", basis || "all"); }, BASIS: BASIS, loadIndex: loadIndex, loadProtocol: loadProtocol, readerHTML: readerHTML, subjectLabel: subjectLabel, index: function () { return st.index; }, CONTENT_V: CONTENT_V, _searchIndex: searchIndex, _rank: rank, _kinds: KINDS, _state: st };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_KBPROTO = API;
   if (D && D.addEventListener) {

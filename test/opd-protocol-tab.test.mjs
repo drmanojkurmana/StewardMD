@@ -18,11 +18,12 @@ const SEPSIS = JSON.parse(readFileSync(new URL("../kb/clinical-protocols/sepsis-
 
 const INDEX = {
   count: 3,
+  bases: [{ key: "international", label: "International", count: 2 }, { key: "india", label: "India", count: 1 }],
   subjects: [{ key: "critical-care", label: "Critical Care", count: 1 }, { key: "endocrinology", label: "Endocrinology and Diabetes", count: 2 }],
   protocols: [
-    { id: "sepsis-septic-shock", title: SEPSIS.title, subject: "critical-care", population: "Adults", aliases: SEPSIS.aliases, summary: SEPSIS.summary, sources: ["SCCM 2021"], status: "ai_drafted" },
-    { id: "diabetic-ketoacidosis", title: "Diabetic ketoacidosis (adult)", subject: "endocrinology", population: "Adults", aliases: ["DKA"], summary: "Fluids, fixed-rate insulin and potassium.", sources: ["ADA 2024"], status: "ai_drafted" },
-    { id: "thyroid-storm", title: "Thyroid storm", subject: "endocrinology", population: "Adults", aliases: [], summary: "Thionamide, iodine after, beta-blocker, steroid.", sources: ["ATA 2016"], status: "ai_drafted" }
+    { id: "sepsis-septic-shock", title: SEPSIS.title, subject: "critical-care", population: "Adults", basis: "international", aliases: SEPSIS.aliases, summary: SEPSIS.summary, sources: ["SCCM 2021"], status: "ai_drafted" },
+    { id: "diabetic-ketoacidosis", title: "Diabetic ketoacidosis (adult)", subject: "endocrinology", population: "Adults", basis: "international", aliases: ["DKA"], summary: "Fluids, fixed-rate insulin and potassium.", sources: ["ADA 2024"], status: "ai_drafted" },
+    { id: "thyroid-storm", title: "Thyroid storm", subject: "endocrinology", population: "Adults", basis: "india", counterpart: "sepsis-septic-shock", aliases: [], summary: "Thionamide, iodine after, beta-blocker, steroid.", sources: ["ATA 2016"], status: "ai_drafted" }
   ]
 };
 const state = (extra) => Object.assign({ tab: "protocol", loading: false, error: "", patient: { name: "T", mrn: "M1" }, writeOn: true,
@@ -96,3 +97,27 @@ test("flags: oncology off keeps clinical protocols; both off says so", () => {
     try { assert.match(render(), /Protocols are not enabled/); } finally { globalThis.SMD_KBPROTO_FLAGS.on = on; }
   } finally { globalThis.__off = {}; }
 });
+
+test("guideline basis: International / India filter, row pills, oncology counts as International", () => {
+  let html = render();
+  assert.deepEqual([...html.matchAll(/data-oe-act="proto-basis:([^"]+)"/g)].map((m) => m[1]), ["all", "international", "india"]);
+  assert.ok(html.includes('oe-proto-bpill oe-b-international') && html.includes('oe-proto-bpill oe-b-india'));
+  html = render({ protoBasis: "india" });
+  assert.equal(count(html, /data-oe-act="proto-open:/g), 1);
+  assert.ok(html.includes("proto-open:thyroid-storm"));
+  assert.equal(count(html, /data-oe-act="proto-assign:/g), 0, "regimens are international, hidden under India");
+  html = render({ protoBasis: "international" });
+  assert.equal(count(html, /data-oe-act="proto-open:/g), 2);
+  assert.equal(count(html, /data-oe-act="proto-assign:/g), 2);
+});
+
+test("reader links the other guideline version through the OPD action system", () => {
+  const doc = Object.assign({}, SEPSIS, { basis: "international", counterpart: "thyroid-storm" });
+  globalThis.SMD_KBPROTO._state.index = INDEX;
+  try {
+    const html = render({ protoOpenId: doc.id, protoDoc: doc });
+    assert.ok(html.includes('class="kbp-twin" data-oe-act="proto-open:thyroid-storm"'));
+    assert.ok(html.includes("India national guidelines") && html.includes("Thyroid storm"));
+  } finally { globalThis.SMD_KBPROTO._state.index = null; }
+});
+

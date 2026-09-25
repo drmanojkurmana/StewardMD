@@ -9233,3 +9233,12 @@ Assign, and that still creates a DRAFT plan the ONCQIS tab must confirm. Also fi
 "&amp;" header, em dashes and the placeholder dash under every regimen, a search that missed cancer
 types written with spaces ("breast cancer" vs `breast_cancer`) and drug names, and a read-only profile
 that sat on "Loading the protocol library..." forever (the loader required write mode).
+
+## 2026-09-25 - International and India protocols are separate files, not one file with two columns
+Owner asked for international-guideline protocols as well. 138 of the first 156 were already built on
+international guidance; 18 were built on Indian national programmes (NCVBDC, NTEP, NCDC, MoHFW...).
+Where both exist and differ (malaria primaquine dose, TB regimens, rabies schedules, GDM criteria), a
+single protocol with "India says X, WHO says Y" on every line is hard to follow at the bedside. So each
+guideline family gets its own file (`basis`), paired by `counterpart`, with a filter and a one-tap link
+between them. A protocol is never silently a blend: its primary source decides its basis.
+

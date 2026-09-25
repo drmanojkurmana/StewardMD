@@ -91,3 +91,21 @@ body.dark .kblib-tool-protocols { --kbp-red:#ff8a80; --kbp-amber:#f5c26b; --kbp-
 .kbp-embed .kbp-hero .kblib-tool-kicker { color:var(--kl-muted); font-size:10.5px; font-weight:650; letter-spacing:.12em; text-transform:uppercase; }
 .kbp-embed .kbp-hero h1 { margin:6px 0 10px; font-size:22px; line-height:1.2; letter-spacing:-.02em; color:var(--ink); }
 .kbp-embed .kbp-toc { margin:0 0 12px; padding:2px 0 4px; }
+
+/* Guideline basis (2026-09-25): International vs India national guidance. A segmented control above
+   the subject rail, a small pill on every row, a pill in the reader, and a link to the other version. */
+.kblib-tool-protocols { --kbp-intl:#2556a8; --kbp-india:#a15c07; }
+body.dark .kblib-tool-protocols { --kbp-intl:#93b8ff; --kbp-india:#f5c26b; }
+.kblib-tool-protocols .kbp-basis { display:flex; gap:3px; margin:0 0 10px; padding:3px; border-radius:13px; background:color-mix(in srgb,var(--ink,#000) 6%,transparent); }
+.kblib-tool-protocols .kbp-seg { flex:1 1 auto; min-width:0; min-height:40px; padding:6px 8px; border:0; border-radius:10px; background:transparent; color:var(--kl-muted); font:inherit; font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; }
+.kblib-tool-protocols .kbp-seg small { font-weight:500; margin-left:3px; }
+.kblib-tool-protocols .kbp-seg.on { background:var(--kl-paper); color:var(--ink); box-shadow:0 1px 3px #0000001f; }
+.kblib-tool-protocols .kbp-basis-pill { display:inline-block; margin-left:4px; padding:0 7px; border-radius:999px; font-size:10.5px; font-weight:650; letter-spacing:.02em; line-height:17px; vertical-align:1px; }
+.kblib-tool-protocols .kbp-basis-pill.kbp-b-international { color:var(--kbp-intl); background:color-mix(in srgb,var(--kbp-intl) 12%,transparent); }
+.kblib-tool-protocols .kbp-basis-pill.kbp-b-india { color:var(--kbp-india); background:color-mix(in srgb,var(--kbp-india) 13%,transparent); }
+.kblib-tool-protocols .kbp-meta.kbp-b-international { color:var(--kbp-intl); background:color-mix(in srgb,var(--kbp-intl) 12%,var(--kl-paper)); }
+.kblib-tool-protocols .kbp-meta.kbp-b-india { color:var(--kbp-india); background:color-mix(in srgb,var(--kbp-india) 13%,var(--kl-paper)); }
+.kblib-tool-protocols .kbp-twin { display:flex; flex-direction:column; gap:2px; width:100%; margin:0 0 14px; padding:12px 14px; border:1px dashed color-mix(in srgb,var(--kl-accent) 45%,var(--kl-line)); border-radius:14px; background:transparent; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }
+.kblib-tool-protocols .kbp-twin span { color:var(--kl-muted); font-size:12px; }
+.kblib-tool-protocols .kbp-twin strong { color:var(--kl-accent); font-size:14.5px; font-weight:650; }
+@media(max-width:360px) { .kblib-tool-protocols .kbp-seg { font-size:12px; padding-inline:5px; } }

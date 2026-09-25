@@ -1212,14 +1212,25 @@
     if (!clinOn && !oncOn) return section("account_tree", "Protocol", "", "", "Protocols are not enabled for this account.");
     if (ps.protoOpenId) return section("account_tree", "Protocol", "", protoReader(ps), "");
     var idx = clinOn ? ps.kbpIndex : null, onc = oncOn ? (ps.oncoProtocols || []) : [];
-    var br = ps.protoBranch || "all";
+    var br = ps.protoBranch || "all", basis = ps.protoBasis || "all";
+    // Oncology regimens are built on NCCN / international references, so they count as International.
+    var clinIn = idx ? idx.protocols.filter(function (p) { return basis === "all" || p.basis === basis; }) : [];
+    var oncIn = basis === "india" ? [] : onc;
+    var per = {}; clinIn.forEach(function (p) { per[p.subject] = (per[p.subject] || 0) + 1; });
     var total = (idx ? idx.count : 0) + onc.length;
     var chip = function (key, label, n) {
       var on = br === key;
       return '<button type="button" class="oe-proto-chip" data-oe-act="proto-branch:' + esc(key) + '" aria-pressed="' + on + '">' + esc(label) + (n != null ? " <small>" + n + "</small>" : "") + "</button>";
     };
-    var chips = chip("all", "All", total || null) + (oncOn ? chip("oncology", "Oncology", onc.length || null) : "") +
-      (idx ? idx.subjects.map(function (sj) { return chip(sj.key, sj.label, sj.count); }).join("") : "");
+    var chips = chip("all", "All", (clinIn.length + oncIn.length) || null) + (oncOn && (oncIn.length || br === "oncology") ? chip("oncology", "Oncology", oncIn.length || null) : "") +
+      (idx ? idx.subjects.filter(function (sj) { return per[sj.key] || br === sj.key; }).map(function (sj) { return chip(sj.key, sj.label, per[sj.key] || 0); }).join("") : "");
+    var seg = function (key, label, n) {
+      return '<button type="button" class="oe-proto-seg" data-oe-act="proto-basis:' + key + '" aria-pressed="' + (basis === key) + '">' + esc(label) + (n != null ? " <small>" + n + "</small>" : "") + "</button>";
+    };
+    var bases = (idx && idx.bases) || [];
+    // Labels only: with counts, "International" is cut off on a phone (counts are on the branch chips).
+    var basisBar = bases.length ? '<div class="oe-proto-basis" role="group" aria-label="Guideline basis">' + seg("all", "All") +
+      bases.map(function (b) { return seg(b.key, b.label); }).join("") + "</div>" : "";
     var note = br === "oncology"
       ? "Oncology regimens: verify doses, BSA/AUC/carboplatin target, eligibility and local protocol before administering. Assign attaches the regimen to this patient as a draft and records it in the timeline."
       : br === "all"
@@ -1235,14 +1246,15 @@
     }
     return section("account_tree", "Protocol", total ? total + " protocols" : "",
       '<div class="oe-search-note" style="margin:0 0 8px">' + ms("info") + esc(note) + "</div>" +
-      searchBox("proto", ps.protoQuery, "Search condition, cancer or drug") +
+      searchBox("proto", ps.protoQuery, "Search condition, cancer or drug") + basisBar +
       '<div class="oe-proto-branches" role="group" aria-label="Filter by branch">' + chips + "</div>" + typePicker +
       '<div class="oe-searchout" id="oe-out-proto">' + protoResults(ps) + "</div>", "");
   }
   function clinRow(p, idx) {
     var subj = ((idx.subjects || []).filter(function (x) { return x.key === p.subject; })[0] || {}).label || p.subject;
     return '<button type="button" class="oe-proto-row" data-oe-act="proto-open:' + esc(p.id) + '"><span class="oe-proto-b">' +
-      '<span class="oe-proto-t">' + esc(p.title) + '</span><span class="oe-proto-m">' + esc(subj) + " · " + esc(p.population) + "</span>" +
+      '<span class="oe-proto-t">' + esc(p.title) + '</span><span class="oe-proto-m">' + esc(subj) + " · " + esc(p.population) +
+      (p.basis ? ' <span class="oe-proto-bpill oe-b-' + esc(p.basis) + '">' + (p.basis === "india" ? "India" : "International") + "</span>" : "") + "</span>" +
       '<span class="oe-proto-s">' + esc(p.summary) + "</span></span>" + ms("chevron_right") + "</button>";
   }
   function oncoRow(p, writeOn) {
@@ -1255,11 +1267,11 @@
       (meta ? '<span class="oe-proto-m">' + meta + "</span>" : "") + "</span>" + right + "</div>";
   }
   function protoResults(ps) {
-    var br = ps.protoBranch || "all", q = String(ps.protoQuery || "").trim();
+    var br = ps.protoBranch || "all", q = String(ps.protoQuery || "").trim(), basis = ps.protoBasis || "all";
     var clinOn = kbpOn(), oncOn = oncoFlagOn(), idx = clinOn ? ps.kbpIndex : null, html = "", shown = 0, waiting = false;
     if (clinOn && br !== "oncology") {
       if (idx) {
-        var clin = G.SMD_KBPROTO._searchIndex(idx, q, br === "all" ? "all" : br);
+        var clin = G.SMD_KBPROTO._searchIndex(idx, q, br === "all" ? "all" : br, basis);
         shown += clin.length;
         if (clin.length) {
           html += '<div class="oe-proto-grp">Clinical protocols · ' + clin.length + "</div>";
@@ -1273,7 +1285,7 @@
       } else if (ps.kbpError) { waiting = true; html += '<div class="oe-search-note err">' + ms("error") + "Clinical protocols could not be loaded. Check your connection and reopen this tab.</div>"; }
       else { waiting = true; html += '<div class="oe-search-note">' + ms("hourglass_top") + "Loading clinical protocols…</div>"; }
     }
-    if (oncOn && (br === "all" || br === "oncology")) {
+    if (oncOn && basis !== "india" && (br === "all" || br === "oncology")) {
       var onc = (ps.oncoProtocols || []).filter(function (p) { return oncoMatches(p, q) && (br !== "oncology" || !ps.protoOncoType || p.diseaseId === ps.protoOncoType); });
       shown += onc.length;
       if (onc.length) html += '<div class="oe-proto-grp">Oncology regimens · ' + onc.length + "</div>" + onc.map(function (p) { return oncoRow(p, ps.writeOn); }).join("");
@@ -1286,7 +1298,7 @@
     var back = '<button type="button" class="oe-btn ghost oe-proto-back" data-oe-act="proto-close" aria-label="Back to protocols">' + ms("arrow_back") + "All protocols</button>";
     if (ps.protoDocErr) return back + '<div class="oe-search-note err">' + ms("error") + esc(ps.protoDocErr) + "</div>";
     if (!ps.protoDoc || !G.SMD_KBPROTO || !G.SMD_KBPROTO.readerHTML) return back + '<div class="oe-search-note">' + ms("hourglass_top") + "Loading protocol…</div>";
-    return back + '<div class="kbp-embed kblib-tool-protocols">' + G.SMD_KBPROTO.readerHTML(ps.protoDoc, { idPrefix: "oeKbp" }) + "</div>";
+    return back + '<div class="kbp-embed kblib-tool-protocols">' + G.SMD_KBPROTO.readerHTML(ps.protoDoc, { idPrefix: "oeKbp", openAttr: function (id) { return 'data-oe-act="proto-open:' + esc(id) + '"'; } }) + "</div>";
   }
   function renderProtoOut() { try { var el = document.querySelector("#smdOpdEmr #oe-out-proto"); if (el) el.innerHTML = protoResults(st); } catch (e) {} }
   function canvasTop(v) { try { var c = document.querySelector("#smdOpdEmr .oe-canvas"); if (c) c.scrollTop = v || 0; } catch (e) {} }
@@ -1356,7 +1368,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, scribeFilledFields: [], scribeGround: null, scribeOfflineDraft: false, scribeReview: {}, scribeDrugFixes: [], scribeDrugFixUndone: {}, scribeDrugFixSrc: "", scribeRx: null, scribeSafety: null, scribeIcd: null, scribeSpeakerFix: {}, scribeDraft: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, oncoProtocolsReady: false, protoQuery: "", protoBranch: "all", protoOncoType: "", protoOpenId: "", protoDoc: null, protoDocErr: "", protoListScroll: 0, kbpIndex: null, kbpLoading: false, kbpError: false, oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, scribeFilledFields: [], scribeGround: null, scribeOfflineDraft: false, scribeReview: {}, scribeDrugFixes: [], scribeDrugFixUndone: {}, scribeDrugFixSrc: "", scribeRx: null, scribeSafety: null, scribeIcd: null, scribeSpeakerFix: {}, scribeDraft: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, oncoProtocolsReady: false, protoQuery: "", protoBasis: "all", protoBranch: "all", protoOncoType: "", protoOpenId: "", protoDoc: null, protoDocErr: "", protoListScroll: 0, kbpIndex: null, kbpLoading: false, kbpError: false, oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
   /* Keep the scroll position across a repaint.
    *
    * Every action in a consultation repaints the whole overlay with one innerHTML swap, and the new
@@ -1811,6 +1823,7 @@
     if (cmd === "proto-assign") return assignProtocol(arg);
     if (cmd === "proto-open") return openKbProtocol(arg);
     if (cmd === "proto-close") return closeKbProtocol();
+    if (cmd === "proto-basis") { st.protoBasis = arg || "all"; if (st.protoBasis === "india" && st.protoBranch === "oncology") { st.protoBranch = "all"; st.protoOncoType = ""; } paint(); return; }
     if (cmd === "proto-branch") { st.protoBranch = arg || "all"; if (st.protoBranch !== "oncology") st.protoOncoType = ""; paint(); return; }
     if (cmd === "onco-apply") return oncoApply(arg);
     if (cmd === "onco-tree-open") return openOncoTree();

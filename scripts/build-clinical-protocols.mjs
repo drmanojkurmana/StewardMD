@@ -20,6 +20,10 @@
  *   title       3..120 chars
  *   subject     one of SUBJECTS keys
  *   population  one of POPULATIONS
+ *   basis       "international" (WHO, NICE, AHA, ESC, IDSA...) or "india" (national programme / Indian
+ *               society guidance as the PRIMARY source); drives the International / India filter
+ *   counterpart optional id of the same topic under the other basis; must exist, point back, and
+ *               differ in basis (checked across files by loadAll)
  *   setting     optional string ("Emergency, ward, ICU")
  *   aliases     optional string[] (abbreviations, synonyms; used by search)
  *   summary     20..400 chars, one or two sentences
@@ -57,13 +61,17 @@ export const SUBJECTS = [
   ["obstetrics-gynaecology", "Obstetrics and Gynaecology"],
   ["paediatrics", "Paediatrics and Neonatology"],
   ["surgery-trauma", "Surgery, Trauma and Orthopaedics"],
+  ["urology", "Urology"],
   ["anaesthesia", "Anaesthesia and Perioperative"],
   ["ophthalmology-ent", "Ophthalmology and ENT"]
 ];
 export const POPULATIONS = ["Adults", "Children", "Neonates", "Pregnancy", "Adults and children", "All ages"];
 export const SECTION_KINDS = ["recognise", "immediate", "investigations", "treatment", "monitoring", "escalate", "disposition", "special", "prevention", "pitfalls"];
 export const REVIEW_STATUS = ["ai_drafted", "reviewed", "approved"];
-const TOP_KEYS = ["id", "title", "subject", "population", "setting", "aliases", "summary", "sections", "drugs", "sources", "review"];
+// Labels are app-facing text (filter chips, row and reader pills).
+export const BASES = [["international", "International"], ["india", "India"]];
+const TOP_KEYS = ["id", "title", "subject", "population", "basis", "counterpart", "setting", "aliases", "summary", "sections", "drugs", "sources", "review"];
+const BASIS_KEYS = BASES.map((b) => b[0]);
 
 const SUBJECT_KEYS = SUBJECTS.map((s) => s[0]);
 const isStr = (v) => typeof v === "string" && v.trim().length > 0;
@@ -89,6 +97,8 @@ export function validateProtocol(p, fileId) {
   if (!isStr(p.title) || p.title.length < 3 || p.title.length > 120) e.push(`${tag}: title must be 3..120 chars`);
   if (SUBJECT_KEYS.indexOf(p.subject) < 0) e.push(`${tag}: subject "${p.subject}" is not one of ${SUBJECT_KEYS.join(", ")}`);
   if (POPULATIONS.indexOf(p.population) < 0) e.push(`${tag}: population must be one of ${POPULATIONS.join(", ")}`);
+  if (BASIS_KEYS.indexOf(p.basis) < 0) e.push(`${tag}: basis must be one of ${BASIS_KEYS.join(", ")}`);
+  if (p.counterpart != null && (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.counterpart) || p.counterpart === p.id)) e.push(`${tag}: counterpart must be another protocol id`);
   if (p.setting != null && !isStr(p.setting)) e.push(`${tag}: setting must be a string`);
   if (p.aliases != null && (!Array.isArray(p.aliases) || !p.aliases.every(isStr))) e.push(`${tag}: aliases must be a string array`);
   if (!isStr(p.summary) || p.summary.length < 20 || p.summary.length > 400) e.push(`${tag}: summary must be 20..400 chars`);
@@ -166,6 +176,15 @@ export function loadAll(dir = DIR) {
     seenTitles.set(t, fileId);
     protocols.push(p);
   }
+  // Counterparts pair the same topic across bases: both files must exist and point at each other.
+  const byId = new Map(protocols.map((p) => [p.id, p]));
+  protocols.forEach((p) => {
+    if (p.counterpart == null) return;
+    const q = byId.get(p.counterpart);
+    if (!q) errors.push(`${p.id}: counterpart ${p.counterpart} does not exist`);
+    else if (q.counterpart !== p.id) errors.push(`${p.id}: counterpart ${q.id} does not point back`);
+    else if (q.basis === p.basis) errors.push(`${p.id}: counterpart ${q.id} has the same basis`);
+  });
   return { protocols, errors };
 }
 
@@ -181,11 +200,14 @@ export function buildIndex(protocols) {
     version: hash.digest("hex").slice(0, 12),
     count: sorted.length,
     subjects: SUBJECTS.filter(([k]) => counts[k]).map(([key, label]) => ({ key, label, count: counts[key] })),
+    bases: BASES.map(([key, label]) => ({ key, label, count: sorted.filter((p) => p.basis === key).length })),
     protocols: sorted.map((p) => ({
       id: p.id,
       title: p.title,
       subject: p.subject,
       population: p.population,
+      basis: p.basis,
+      counterpart: p.counterpart || null,
       aliases: p.aliases || [],
       summary: p.summary,
       sources: p.sources.map((s) => s.org + " " + s.year),

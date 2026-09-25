@@ -62,6 +62,18 @@ try{
  ok(await ev(`document.querySelectorAll('#kbpList .kbp-row').length===${subj.count}&&document.querySelector('[data-kbp-subject="${subj.key}"]').getAttribute('aria-pressed')==='true'`),`subject filter narrows to ${subj.label}`);
  await ev(`document.querySelector('[data-kbp-subject="all"]').click()`);
 
+ // 3b. Guideline basis: International / India segmented control, pills, subject counts follow it.
+ const india=idx.bases.find(b=>b.key==='india');
+ ok(await ev(`[...document.querySelectorAll('[data-kbp-basis]')].map(b=>b.dataset.kbpBasis).join(',')`)==='all,international,india','basis control: All guidelines, International, India');
+ ok(await ev(`[...document.querySelectorAll('.kbp-seg')].every(b=>b.scrollWidth<=b.clientWidth+1)&&getComputedStyle(document.querySelector('.kbp-basis')).display==='flex'`),'basis control is styled and no label is cut off');
+ await ev(`document.querySelector('[data-kbp-basis="india"]').click()`);
+ ok(await until(`document.querySelectorAll('#kbpList .kbp-row').length===${india.count}`),`India shows its ${india.count} protocols`);
+ ok(await ev(`[...document.querySelectorAll('#kbpList .kbp-row')].every(r=>r.querySelector('.kbp-basis-pill.kbp-b-india'))`),'every India row carries the India pill');
+ ok(await ev(`[...document.querySelectorAll('[data-kbp-subject]:not([data-kbp-subject="all"]) small')].reduce((n,x)=>n+ +x.textContent,0)===${india.count}`),'subject chip counts follow the basis');
+ await shot('basis-india-390');
+ await ev(`document.querySelector('[data-kbp-basis="all"]').click()`);
+ ok(await until(`document.querySelectorAll('#kbpList .kbp-row').length===${idx.count}`),'All guidelines restores the full list');
+
  // 4. Reader.
  const sepsis=idx.protocols.find(p=>p.id==='sepsis-septic-shock')||first;
  await ev(`document.querySelector('#sbrefBody').scrollTop=400`);
@@ -81,6 +93,20 @@ try{
  ok(await ev(`document.querySelector('#sbrefBody').scrollTop>0`),'section jump scrolls to the section');
  for(const w of [320,375,390,430,768,1280]){await size(w);await sleep(120);ok(await ev(`noOverflow()`),`reader: no horizontal overflow at ${w}px`);}
  await size(390);
+
+ // 4b. A protocol with a counterpart links the other guideline version.
+ const pair=idx.protocols.find(p=>p.counterpart);
+ if(pair){
+  const other=idx.protocols.find(p=>p.id===pair.counterpart);
+  await ev(`SB.openRef('protocols')`);await until(`document.querySelectorAll('#kbpList .kbp-row').length>0`);
+  await ev(`document.querySelector('[data-kbp-open="${pair.id}"]').click()`);
+  ok(await until(`!!document.querySelector('.kbp-twin')`),`${pair.id} shows the link to its other version`);
+  await ev(`document.querySelector('.kbp-twin').click()`);
+  ok(await until(`document.querySelector('.kbp-reader h1')&&document.querySelector('.kbp-reader h1').textContent===${JSON.stringify(other.title)}`),'the link opens the other guideline version');
+  ok(await ev(`!!document.querySelector('.kbp-meta.kbp-b-${other.basis}')`),'the reader names its guideline basis');
+  await ev(`SB.openRef('protocols')`);await until(`document.querySelectorAll('#kbpList .kbp-row').length>0`);
+  await ev(`document.querySelector('[data-kbp-open="${sepsis.id}"]').click()`);await until(`!!document.querySelector('.kbp-reader h1')`);
+ } else console.log('SKIP counterpart link (no paired protocols in the catalogue yet)');
 
  // 5. Back returns to the list where the user left it (and is the control swipe-back would click).
  ok(await ev(`document.querySelector('.kbp-back').matches('[aria-label^="Back"]')`),'reader back is a Back control for swipe-back');

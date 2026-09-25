@@ -169,7 +169,7 @@
     try { if (!P || !P.loadIndex || (G.SMD_KBPROTO_FLAGS && !G.SMD_KBPROTO_FLAGS.on())) return Promise.resolve([]); } catch (e) { return Promise.resolve([]); }
     return P.loadIndex().then(function () {
       return P.search(q).slice(0, 12).map(function (p) {
-        return { cat: "proto", id: p.id, title: p.title, sub: P.subjectLabel(p.subject) + " \u00b7 " + p.population, kw: (p.aliases || []).join(" "), open: function () { P.open({ id: p.id }); } };
+        return { cat: "proto", id: p.id, title: p.title, sub: P.subjectLabel(p.subject) + " \u00b7 " + p.population + (P.BASIS && P.BASIS[p.basis] ? " \u00b7 " + P.BASIS[p.basis] : ""), kw: (p.aliases || []).concat(p.sources || []).join(" "), open: function () { P.open({ id: p.id }); } };
       });
     }, function () { return []; });
   }
