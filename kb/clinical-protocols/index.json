@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "e8091be9a9a8",
- "count": 118,
+ "version": "b724eea6cacc",
+ "count": 125,
  "subjects": [
   {
    "key": "emergency",
@@ -11,7 +11,7 @@
   {
    "key": "critical-care",
    "label": "Critical Care",
-   "count": 2
+   "count": 4
   },
   {
    "key": "cardiology",
@@ -21,12 +21,12 @@
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 4
+   "count": 5
   },
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 15
+   "count": 16
   },
   {
    "key": "gastroenterology",
@@ -51,7 +51,7 @@
   {
    "key": "toxicology",
    "label": "Toxicology and Envenomation",
-   "count": 3
+   "count": 4
   },
   {
    "key": "haematology-oncology",
@@ -61,7 +61,7 @@
   {
    "key": "rheumatology-dermatology",
    "label": "Rheumatology and Dermatology",
-   "count": 2
+   "count": 3
   },
   {
    "key": "obstetrics-gynaecology",
@@ -81,7 +81,7 @@
   {
    "key": "ophthalmology-ent",
    "label": "Ophthalmology and ENT",
-   "count": 2
+   "count": 3
   }
  ],
  "protocols": [
@@ -565,6 +565,34 @@
    "sources": [
     "ESC / ERS 2019",
     "ASH 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-respiratory-failure-niv-hfnc",
+   "title": "Acute respiratory failure: NIV and high-flow nasal oxygen (adult)",
+   "subject": "critical-care",
+   "population": "Adults",
+   "aliases": [
+    "NIV",
+    "BiPAP",
+    "CPAP",
+    "HFNC",
+    "HFNO",
+    "high flow nasal cannula",
+    "non-invasive ventilation",
+    "hypercapnic respiratory failure",
+    "type 2 respiratory failure",
+    "type 1 respiratory failure",
+    "AHRF",
+    "ROX index"
+   ],
+   "summary": "Use bilevel NIV for COPD exacerbation with respiratory acidosis persisting after medical therapy and CPAP or NIV for cardiogenic pulmonary oedema. In hypoxaemic respiratory failure, prefer high-flow nasal oxygen over conventional oxygen. Reassess early and do not let non-invasive support delay intubation.",
+   "sources": [
+    "ERS / ATS 2017",
+    "European Respiratory Society 2022",
+    "British Thoracic Society / Intensive Care Society 2016",
+    "ESICM 2023"
    ],
    "status": "ai_drafted"
   },
@@ -1066,6 +1094,52 @@
    "status": "ai_drafted"
   },
   {
+   "id": "chemical-eye-injury",
+   "title": "Chemical eye injury (acid and alkali burns)",
+   "subject": "ophthalmology-ent",
+   "population": "Adults and children",
+   "aliases": [
+    "chemical burn eye",
+    "ocular chemical injury",
+    "alkali burn eye",
+    "acid burn eye",
+    "lime in eye",
+    "chuna eye injury",
+    "cement in eye",
+    "acid attack eye",
+    "eye irrigation",
+    "Roper-Hall",
+    "Dua classification"
+   ],
+   "summary": "Irrigate immediately and copiously (at least 30 minutes, or longer until the conjunctival pH is 7.0 to 7.5 five minutes after stopping), remove trapped particles from the everted lids and fornices, then grade limbal and conjunctival damage (Roper-Hall or Dua) and refer urgently to ophthalmology. Alkali injuries are usually worse than acid.",
+   "sources": [
+    "Eye (Dua, Ting, Al Saadi, Said) 2020",
+    "Oman J Ophthalmol (Singh et al., India) 2013"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "chikungunya",
+   "title": "Chikungunya: acute, subacute and chronic",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "aliases": [
+    "CHIKV",
+    "chikungunya fever",
+    "post-chikungunya arthritis",
+    "pCHIK-CIR",
+    "chronic chikungunya arthritis",
+    "arboviral arthritis",
+    "NCVBDC chikungunya 2023"
+   ],
+   "summary": "Fever with severe symmetrical polyarthralgia. Acute phase: rest, fluids and paracetamol, no NSAIDs until dengue is excluded and no steroids. Subacute phase: NSAIDs, short prednisolone course for severe synovitis. Chronic phase beyond 3 months: hydroxychloroquine and other DMARDs with rheumatology input.",
+   "sources": [
+    "NCVBDC, MoHFW 2023",
+    "WHO 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "chronic-heart-failure-hfref",
    "title": "Chronic heart failure with reduced ejection fraction (HFrEF)",
    "subject": "cardiology",
@@ -1141,6 +1215,30 @@
    "sources": [
     "IDSA / SHEA 2021",
     "IDSA / SHEA 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "community-acquired-pneumonia",
+   "title": "Community-acquired pneumonia (adult)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "CAP",
+    "pneumonia",
+    "lobar pneumonia",
+    "severe CAP",
+    "CURB-65",
+    "CRB-65",
+    "IDSA ATS criteria",
+    "LRTI",
+    "ICMR pneumonia"
+   ],
+   "summary": "Stratify by CURB-65 and IDSA/ATS criteria; outpatients get co-amoxiclav (plus a macrolide or doxycycline if comorbid), inpatients ceftriaxone plus a macrolide or doxycycline, with anti-pseudomonal or MRSA cover only for specific risks. Avoid empirical fluoroquinolones in India (TB), and stop at 5 days (outpatient) or about 7 days (inpatient) once stable.",
+   "sources": [
+    "ATS / IDSA 2019",
+    "ATS 2025",
+    "ICMR 2019"
    ],
    "status": "ai_drafted"
   },
@@ -1982,6 +2080,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "icu-sedation-analgesia-delirium",
+   "title": "ICU pain, sedation and delirium (PADIS)",
+   "subject": "critical-care",
+   "population": "Adults",
+   "aliases": [
+    "PADIS",
+    "analgosedation",
+    "ICU sedation",
+    "ICU delirium",
+    "CAM-ICU",
+    "RASS",
+    "CPOT",
+    "BPS",
+    "ICU liberation",
+    "ABCDEF bundle",
+    "dexmedetomidine",
+    "propofol",
+    "agitation"
+   ],
+   "summary": "Assess pain, sedation and delirium with validated tools, treat pain first (analgesia-first sedation), keep ventilated adults lightly sedated with propofol or dexmedetomidine rather than benzodiazepines, prevent delirium with non-drug bundles, mobilise early and protect sleep.",
+   "sources": [
+    "Society of Critical Care Medicine 2025",
+    "Society of Critical Care Medicine 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "immune-thrombocytopenia",
    "title": "Immune thrombocytopenia (ITP) in adults",
    "subject": "haematology-oncology",
@@ -2693,6 +2818,34 @@
    "status": "ai_drafted"
   },
   {
+   "id": "snakebite-envenomation",
+   "title": "Snakebite envenoming (India)",
+   "subject": "toxicology",
+   "population": "Adults and children",
+   "aliases": [
+    "snake bite",
+    "snakebite",
+    "ASV",
+    "anti snake venom",
+    "antivenom",
+    "20WBCT",
+    "20 minute whole blood clotting test",
+    "cobra bite",
+    "krait bite",
+    "Russell's viper",
+    "saw-scaled viper",
+    "neuroparalytic envenomation",
+    "vasculotoxic envenomation",
+    "NAPSE"
+   ],
+   "summary": "Immobilise and transport without tourniquets or incisions. Give polyvalent ASV IV, without a test dose, for systemic envenoming (incoagulable 20WBCT, bleeding, neuroparalysis, rapidly progressive swelling), same dose in children and pregnancy; add atropine-neostigmine and ventilation for neuroparalysis and be ready to treat ASV anaphylaxis.",
+   "sources": [
+    "MoHFW, Government of India 2016",
+    "NCDC, MoHFW 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "intracerebral-haemorrhage",
    "title": "Spontaneous intracerebral haemorrhage (ICH)",
    "subject": "neurology",
@@ -2743,6 +2896,33 @@
     "ESC 2023",
     "ACC / AHA / ACEP / NAEMSP / SCAI 2025",
     "STEMI INDIA / CSI / API 2015"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "sjs-ten",
+   "title": "Stevens-Johnson syndrome and toxic epidermal necrolysis (SJS/TEN)",
+   "subject": "rheumatology-dermatology",
+   "population": "Adults",
+   "aliases": [
+    "SJS",
+    "TEN",
+    "SJS/TEN",
+    "SJS-TEN overlap",
+    "epidermal necrolysis",
+    "Lyell syndrome",
+    "SCORTEN",
+    "severe cutaneous adverse reaction",
+    "SCAR",
+    "drug-induced skin peeling",
+    "ALDEN",
+    "Nikolsky sign"
+   ],
+   "summary": "Stop every suspect drug at once, score SCORTEN, and manage SJS/TEN like a major burn in a specialised unit: warm room, careful fluids, early feeding, analgesia, conservative skin care, daily eye, mouth and genital care, and infection surveillance. Ciclosporin, etanercept and IVIg have limited, mixed evidence.",
+   "sources": [
+    "British Association of Dermatologists 2016",
+    "International Delphi consensus (BJD) 2021",
+    "Latin American expert panel (World Allergy Organization Journal) 2025"
    ],
    "status": "ai_drafted"
   },
