@@ -9219,3 +9219,75 @@ assertion (RS256 against `https://<team>/cdn-cgi/access/certs`, iss, aud, exp) a
 its claims; both `identify()` helpers and every gate go through it. Access identity is OFF unless
 `CF_ACCESS_TEAM_DOMAIN` and `CF_ACCESS_AUD` are set. In-process test suites opt back into header trust
 with `test/helpers/trust-cf-access-header.mjs` (a global nothing in `functions/` sets).
+
+## 2026-09-25 — One profile form, one institution directory
+Reported from a device: "all cities in India not covered and all medical colleges and hospitals not
+covered, and bug can't see and can't search college, and why two times institution is asked, I need
+one unified institution/hospital directory." Four separate faults, three of them real bugs.
+
+1. **Two forms.** `email-auth.js` asked a new doctor at sign-up for name/state/city/hospital against
+   `SMD_GEO` (107 hospitals, 184 cities); `profile-setup.js` then asked the SAME doctor on the next
+   app start for "college / hospital" against `SMD_HOSPITALS` (2,405 entries). Two questions, two
+   answers, two lists that disagreed. `profile-setup.js` is now the only form and asks the whole
+   profile once (name, phone, state, city, institution, degree, speciality). `email-auth.js`
+   delegates to it; its own form, typeahead and save were deleted rather than left as a second copy.
+   Both wrote the same Firestore doc already, so no profile is orphaned.
+
+2. **The college picker never opened.** `profile-setup.js` called the bare global `smdLazy(...)`,
+   but `lazy-load.js` is NOT among the scripts `index.html` loads, so the call threw ReferenceError
+   inside the click handler and nothing happened. The field looked focused and did nothing — that is
+   the "can't see and can't search college" report. It now loads the script itself when the helper
+   is absent. **Never reach for a global the page does not definitely define.**
+
+3. **The picker rows were invisible in dark mode.** `.pfs-opt b` and `.pfs-opt span` took their
+   colour from `--hink` / `--hmut`, the LIGHT theme's near-black, on a card the dark block had
+   already repainted `#111b2e`. Labels were black on black while the `--hbd` borders stayed light,
+   which is exactly what the screenshots showed: bright separator lines and no text. Every colour
+   inside the sheet is now restated under `body.dark`; the harness asserts a contrast ratio >= 4.5
+   (it measures 14.6) so this cannot regress silently.
+
+4. **Coverage.** `institutions-in.js` is the single directory. It does not copy the curated lists —
+   it reads whichever are loaded and merges them de-duplicated on normalised name+city, so the
+   curated data keeps living in one file each (2,462 institutions after the merge). What it adds is
+   the geography those lists lacked: every district headquarters of every state and UT, 1,241
+   entries against the previous 184, with no state left empty.
+
+**What "covered" is allowed to mean.** India has ~780 NMC medical colleges and on the order of
+70,000 hospitals. No bundled list is ever complete, and a picker that silently lacks your hospital
+is worse than one that admits it. So: cities are bounded public geography and are complete;
+institutions are curated and are NOT claimed to be exhaustive; free text is a first-class answer
+that is always offered; and what a doctor types is remembered on that device so the next colleague
+at the same hospital finds it. That last part also shows the owner what the curated list is missing.
+
+## 2026-09-25 — The India directory was in the build all along; three faults kept it from the app
+Owner: *"we already have whole india college and hospital list, why isn't it universally available
+in app."* They were right. `hospitals-in.js` has carried 2,405 curated institutions for a long time.
+Three separate faults meant only two screens could ever reach it, and one of those was broken too.
+
+**1. A GLOBAL NAME COLLISION, and it broke BOTH modules.** `hospital-registry.js` (the registry of
+hospitals this doctor has CONNECTED: `list/get/register/setActive`) and `hospitals-in.js` (the
+DIRECTORY of institutions in India: `all/search/byState/states`) both assigned
+`window.SMD_HOSPITALS`. The registry loads on every page; the directory is lazy. Proven in the
+running app:
+  - before the directory loads, `SMD_HOSPITALS.search` is `undefined`, so every picker found nothing;
+  - the moment it loads, `SMD_HOSPITALS.setActive` **disappears**, so `ghis-ward.js:334` silently
+    stopped remembering the doctor's active hospital.
+Each module broke the other, depending only on timing. The directory now owns
+`SMD_HOSPITAL_DIRECTORY` and claims the legacy name only when nothing else holds it.
+
+**2. `smdLazy` IS NOT DEFINED ON THE PAGE.** `lazy-load.js` is not among the scripts `index.html`
+loads, yet `home.js`'s hospital picker and `profile-setup.js` both called the bare global. Both
+threw ReferenceError inside their click handlers, so the picker never opened. This is the same
+root cause as the "can't see and can't search college" report. **Never reach for a global the page
+does not definitely define** — both call sites now load the script themselves.
+
+**3. NO UNIVERSAL ENTRY POINT.** Reaching the list meant knowing three private details: which file
+to lazy-load, which global it lands on, and that a different module owns that name. So only the two
+screens whose authors happened to know all three could use it. `SMD_INSTITUTIONS.ensure()` is now
+the one line any surface calls; `institutions-in.js` is tiny and loads with the app, and it pulls
+the heavy data in itself.
+
+**The lesson worth keeping:** "we already have the data" and "the app can use the data" are
+different claims. A dataset reachable only through undocumented private knowledge is, from every
+other screen's point of view, not there at all. The test that matters is not "does the file exist"
+but "can a screen that knows nothing get it in one call".
