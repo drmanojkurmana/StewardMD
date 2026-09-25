@@ -127,6 +127,77 @@
        * A fundamental plus its octave reads as ONE harsh note rather than as a polyphonic chord,
        * which is what makes stridor sound strained rather than musical. */
       wheezeHz: [1000, 2000], wheezePhase: "insp", wheezeGain: 0.30
+    },
+    s1_s2_normal: {
+      label: "Normal S1 and S2 heart sounds",
+      hint: "Normal 'lub-dub'. S1 marks mitral/tricuspid closure (start of systole); S2 marks aortic/pulmonary closure (start of diastole). Diastole is longer than systole at resting heart rates.",
+      cardiac: true, cycle: 0.85, sysLen: 0.32,
+      s1Hz: 82, s1HzEnd: 55, s1Dur: 0.09, s1Gain: 0.65,
+      s2Hz: 135, s2HzEnd: 105, s2Dur: 0.07, s2Gain: 0.6
+    },
+    s1_s2_split: {
+      label: "Physiological S2 splitting",
+      hint: "Inspiration increases venous return to the right heart, delaying pulmonary valve closure (P2) relative to aortic closure (A2). The split widens on inspiration and closes on expiration.",
+      cardiac: true, cycle: 0.85, sysLen: 0.32,
+      s1Hz: 82, s1HzEnd: 55, s1Dur: 0.09, s1Gain: 0.65,
+      s2Hz: 140, s2HzEnd: 110, s2Dur: 0.065, s2Gain: 0.6,
+      s2Split: 0.045
+    },
+    s3_gallop: {
+      label: "S3 ventricular gallop ('Kentucky')",
+      hint: "Dull, low-frequency sound in early diastole caused by rapid ventricular filling into a non-compliant or volume-overloaded ventricle (heart failure, severe regurgitation). Normal in young athletes.",
+      cardiac: true, cycle: 0.85, sysLen: 0.32,
+      s1Hz: 82, s1HzEnd: 55, s1Dur: 0.09, s1Gain: 0.65,
+      s2Hz: 135, s2HzEnd: 105, s2Dur: 0.07, s2Gain: 0.6,
+      s3: true
+    },
+    s4_gallop: {
+      label: "S4 atrial gallop ('Tennessee')",
+      hint: "Low-frequency presystolic sound in late diastole caused by active atrial contraction against a stiff, hypertrophied ventricle (hypertension, aortic stenosis, HOCM). Never present in atrial fibrillation.",
+      cardiac: true, cycle: 0.85, sysLen: 0.32,
+      s1Hz: 82, s1HzEnd: 55, s1Dur: 0.09, s1Gain: 0.65,
+      s2Hz: 135, s2HzEnd: 105, s2Dur: 0.07, s2Gain: 0.6,
+      s4: true
+    },
+    mitral_stenosis: {
+      label: "Mitral stenosis: loud S1, Opening Snap and mid-diastolic rumble",
+      hint: "Loud S1 (flexible leaflets snapping shut), followed after S2 by an Opening Snap (high-pitched click of stenotic valve opening), then a low-pitched rumbling murmur with presystolic accentuation in sinus rhythm.",
+      cardiac: true, cycle: 0.85, sysLen: 0.32,
+      s1Hz: 95, s1HzEnd: 65, s1Dur: 0.09, s1Gain: 0.85,
+      s2Hz: 135, s2HzEnd: 105, s2Dur: 0.07, s2Gain: 0.6,
+      openingSnap: 0.075, diaMurmur: "mid_rumble", murmurBand: 120, murmurGain: 0.28
+    },
+    mitral_regurgitation: {
+      label: "Mitral regurgitation: pansystolic murmur",
+      hint: "Blowing holosystolic murmur beginning with a soft S1 and continuing through S2, radiating to the axilla. Backflow through incompetent mitral valve throughout ventricular systole.",
+      cardiac: true, cycle: 0.85, sysLen: 0.32,
+      s1Hz: 75, s1HzEnd: 50, s1Dur: 0.08, s1Gain: 0.45,
+      s2Hz: 135, s2HzEnd: 105, s2Dur: 0.07, s2Gain: 0.55,
+      sysMurmur: "pansystolic", murmurBand: 480, murmurGain: 0.26
+    },
+    aortic_stenosis: {
+      label: "Aortic stenosis: ejection systolic crescendo-decrescendo murmur",
+      hint: "Harsh diamond-shaped murmur starting after S1, peaking in mid-systole and ending before S2. Radiates to carotids. Often associated with a soft or absent A2 and slow rising pulse (pulsus parvus et tardus).",
+      cardiac: true, cycle: 0.85, sysLen: 0.34,
+      s1Hz: 80, s1HzEnd: 55, s1Dur: 0.085, s1Gain: 0.6,
+      s2Hz: 125, s2HzEnd: 100, s2Dur: 0.065, s2Gain: 0.45,
+      sysMurmur: "ejection", murmurBand: 320, murmurGain: 0.32
+    },
+    aortic_regurgitation: {
+      label: "Aortic regurgitation: early diastolic decrescendo murmur",
+      hint: "High-pitched, blowing murmur starting immediately at S2 and fading during diastole. Best heard with diaphragm at left sternal edge (Erb's point) with patient sitting forward in full expiration.",
+      cardiac: true, cycle: 0.85, sysLen: 0.32,
+      s1Hz: 82, s1HzEnd: 55, s1Dur: 0.09, s1Gain: 0.65,
+      s2Hz: 140, s2HzEnd: 110, s2Dur: 0.07, s2Gain: 0.65,
+      diaMurmur: "early_decrescendo", murmurBand: 580, murmurGain: 0.27
+    },
+    pericardial_rub: {
+      label: "Pericardial friction rub (triphasic scratch)",
+      hint: "Superficial, scratchy, high-pitched sound with up to three components per cardiac cycle: atrial systole, ventricular systole, and early diastolic filling. Best heard with patient leaning forward in expiration.",
+      cardiac: true, cycle: 0.85, sysLen: 0.32,
+      s1Hz: 80, s1HzEnd: 55, s1Dur: 0.085, s1Gain: 0.55,
+      s2Hz: 130, s2HzEnd: 105, s2Dur: 0.065, s2Gain: 0.55,
+      frictionRub: true, murmurBand: 620, murmurGain: 0.24
     }
   };
 
@@ -220,8 +291,124 @@
     return spec.insp + (spec.gap || 0) + spec.exp + spec.rest;
   }
 
+  /* ── Cardiac Sound Synthesis ─────────────────────────────────────────── */
+
+  // Low/mid frequency resonant pulse with chest-wall damping for heart sounds
+  function heartSound(c, dest, hzStart, hzEnd, t0, dur, gain) {
+    if (dur <= 0 || gain <= 0) return;
+    var osc = c.createOscillator();
+    osc.type = "sine";
+    try {
+      osc.frequency.setValueAtTime(hzStart, t0);
+      osc.frequency.exponentialRampToValueAtTime(Math.max(20, hzEnd), t0 + dur);
+    } catch (e) {}
+
+    var lp = c.createBiquadFilter();
+    lp.type = "lowpass";
+    lp.frequency.value = Math.max(hzStart, hzEnd) * 2.2;
+
+    var g = c.createGain();
+    try {
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.linearRampToValueAtTime(gain, t0 + dur * 0.15);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    } catch (e) {}
+
+    osc.connect(lp); lp.connect(g); g.connect(dest);
+    try { osc.start(t0); osc.stop(t0 + dur + 0.02); } catch (e) {}
+  }
+
+  // Shaped bandpass noise for cardiac murmurs (pansystolic, ejection diamond, diastolic decrescendo/rumble)
+  function murmurNoise(c, dest, band, q, t0, dur, gainStart, gainPeak, gainEnd) {
+    if (dur <= 0 || (gainStart <= 0 && gainPeak <= 0 && gainEnd <= 0)) return;
+    var src = c.createBufferSource();
+    src.buffer = noise(c);
+    src.loop = true;
+
+    var bp = c.createBiquadFilter();
+    bp.type = "bandpass";
+    bp.frequency.value = band;
+    bp.Q.value = q || 1.2;
+
+    var g = c.createGain();
+    try {
+      g.gain.setValueAtTime(Math.max(0.0001, gainStart), t0);
+      if (gainPeak != null) {
+        g.gain.linearRampToValueAtTime(gainPeak, t0 + dur * 0.5);
+        g.gain.linearRampToValueAtTime(Math.max(0.0001, gainEnd || 0.0001), t0 + dur);
+      } else {
+        g.gain.linearRampToValueAtTime(Math.max(0.0001, gainEnd || gainStart), t0 + dur);
+      }
+      g.gain.setValueAtTime(0.0001, t0 + dur + 0.01);
+    } catch (e) {}
+
+    src.connect(bp); bp.connect(g); g.connect(dest);
+    try { src.start(t0); src.stop(t0 + dur + 0.02); } catch (e) {}
+  }
+
+  function scheduleBeat(c, dest, spec, t0) {
+    var cycle = spec.cycle || 0.85;
+    var sysLen = spec.sysLen || 0.32;
+    var tS1 = t0;
+    var tS2 = t0 + sysLen;
+
+    // S4 (late diastolic / presystolic gallop, just before S1)
+    if (spec.s4) {
+      heartSound(c, dest, 55, 40, t0 + 0.01, 0.065, 0.35);
+      tS1 = t0 + 0.08;
+      tS2 = tS1 + sysLen;
+    }
+
+    // S1 (mitral/tricuspid closure)
+    heartSound(c, dest, spec.s1Hz || 82, spec.s1HzEnd || 55, tS1, spec.s1Dur || 0.09, spec.s1Gain || 0.65);
+
+    // Systolic Murmur
+    if (spec.sysMurmur === "pansystolic") {
+      murmurNoise(c, dest, spec.murmurBand || 480, 1.2, tS1 + 0.04, sysLen - 0.02, spec.murmurGain || 0.26, spec.murmurGain || 0.26, spec.murmurGain || 0.22);
+    } else if (spec.sysMurmur === "ejection") {
+      murmurNoise(c, dest, spec.murmurBand || 320, 1.6, tS1 + 0.06, sysLen - 0.08, 0.001, spec.murmurGain || 0.32, 0.001);
+    }
+
+    // S2 (aortic/pulmonary closure)
+    heartSound(c, dest, spec.s2Hz || 135, spec.s2HzEnd || 105, tS2, spec.s2Dur || 0.07, spec.s2Gain || 0.6);
+    if (spec.s2Split) {
+      heartSound(c, dest, (spec.s2Hz || 135) * 0.9, (spec.s2HzEnd || 105) * 0.9, tS2 + spec.s2Split, spec.s2Dur || 0.06, (spec.s2Gain || 0.6) * 0.7);
+    }
+
+    // Diastolic Events
+    var diaStart = tS2 + (spec.s2Dur || 0.07);
+    var diaLen = Math.max(0.1, (t0 + cycle) - diaStart);
+
+    // Opening Snap (MS)
+    if (spec.openingSnap) {
+      heartSound(c, dest, 220, 180, tS2 + spec.openingSnap, 0.025, 0.45);
+    }
+
+    // S3 (early diastolic gallop)
+    if (spec.s3) {
+      heartSound(c, dest, 50, 36, tS2 + 0.14, 0.075, 0.36);
+    }
+
+    // Diastolic Murmurs
+    if (spec.diaMurmur === "early_decrescendo") {
+      murmurNoise(c, dest, spec.murmurBand || 580, 1.0, tS2 + 0.03, diaLen * 0.75, spec.murmurGain || 0.27, null, 0.0001);
+    } else if (spec.diaMurmur === "mid_rumble") {
+      var rumbleStart = tS2 + (spec.openingSnap ? spec.openingSnap + 0.02 : 0.08);
+      murmurNoise(c, dest, spec.murmurBand || 120, 2.2, rumbleStart, diaLen * 0.85, spec.murmurGain || 0.28, (spec.murmurGain || 0.28) * 0.6, (spec.murmurGain || 0.28) * 1.3);
+    }
+
+    // Pericardial Friction Rub (triphasic scratch)
+    if (spec.frictionRub) {
+      murmurNoise(c, dest, spec.murmurBand || 620, 2.0, tS1 + 0.06, 0.16, spec.murmurGain || 0.24, spec.murmurGain || 0.24, 0.001);
+      murmurNoise(c, dest, spec.murmurBand || 620, 2.0, tS2 + 0.08, 0.14, (spec.murmurGain || 0.24) * 0.8, (spec.murmurGain || 0.24) * 0.8, 0.001);
+      murmurNoise(c, dest, spec.murmurBand || 620, 2.0, t0 + cycle - 0.12, 0.10, (spec.murmurGain || 0.24) * 0.9, (spec.murmurGain || 0.24) * 0.9, 0.001);
+    }
+
+    return cycle;
+  }
+
   /* play(kind, opts) -> { stop, cycle, spec }
-   * opts.breaths (default 3), opts.slow (stretches everything, for learning the timing),
+   * opts.breaths (default 3), opts.beats (default 4 for cardiac), opts.slow (stretches everything),
    * opts.onEnd, opts.onPhase(name) so the UI can show which phase is sounding. */
   function play(kind, opts) {
     opts = opts || {};
@@ -233,16 +420,24 @@
 
     var s = {}, key;
     for (key in spec) if (Object.prototype.hasOwnProperty.call(spec, key)) s[key] = spec[key];
-    if (opts.slow) { s.insp *= 1.6; s.exp *= 1.6; s.gap = (s.gap || 0) * 1.6; s.rest *= 1.2; }
+    if (opts.slow) {
+      if (s.cardiac) {
+        s.cycle = (s.cycle || 0.85) * 1.4;
+        s.sysLen = (s.sysLen || 0.32) * 1.3;
+      } else {
+        s.insp *= 1.6; s.exp *= 1.6; s.gap = (s.gap || 0) * 1.6; s.rest *= 1.2;
+      }
+    }
 
     var master = c.createGain();
     master.gain.value = typeof opts.volume === "number" ? opts.volume : 0.9;
     master.connect(c.destination);
 
-    var breaths = opts.breaths || 3;
+    var isCardiac = !!s.cardiac;
+    var cycles = isCardiac ? (opts.beats || opts.cycles || 4) : (opts.breaths || 3);
     var t = c.currentTime + 0.08, total = 0, i;
-    for (i = 0; i < breaths; i++) {
-      var len = scheduleBreath(c, master, s, t + total);
+    for (i = 0; i < cycles; i++) {
+      var len = isCardiac ? scheduleBeat(c, master, s, t + total) : scheduleBreath(c, master, s, t + total);
       total += len;
     }
 
@@ -250,7 +445,7 @@
     if (opts.onEnd) timer = setTimeout(opts.onEnd, (total + 0.2) * 1000);
 
     var handle = {
-      cycle: s.insp + (s.gap || 0) + s.exp + s.rest,
+      cycle: s.cycle || (s.insp + (s.gap || 0) + s.exp + s.rest),
       spec: s,
       stop: function () {
         try { master.gain.setTargetAtTime(0.0001, c.currentTime, 0.02); } catch (e) {}

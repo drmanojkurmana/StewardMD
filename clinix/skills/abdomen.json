@@ -603,6 +603,9 @@
       "title": "Detecting ascites",
       "oneLine": "Shifting dullness needs about 1500 mL; a fluid thrill needs more",
       "why": "Ascites is missed less often than it is over-called. Knowing how much fluid each test actually requires stops you diagnosing ascites in a patient who is simply obese, and stops you missing an early effusion that has not yet reached the volume a simple test can detect.",
+      "calcs": [
+        "saag"
+      ],
       "steps": [
         {
           "text": "Percuss from the midline outward to the flanks, marking where resonant becomes dull."
@@ -648,6 +651,45 @@
             ]
           },
           "note": "A negative shifting dullness in a patient you strongly suspect has ascites does not exclude a smaller volume. Ultrasound is far more sensitive and is the right next step."
+        },
+        {
+          "heading": "The Serum-Ascites Albumin Gradient (SAAG) diagnostic matrix",
+          "body": "SAAG = (Serum albumin) minus (Ascitic fluid albumin). It directly measures portal venous pressure.",
+          "table": {
+            "cols": [
+              "SAAG Category",
+              "Pathophysiology",
+              "Ascites Protein",
+              "Classic Causes"
+            ],
+            "rows": [
+              [
+                "High SAAG (>= 1.1 g/dL)",
+                "Portal hypertension: sinusoidal / pre-sinusoidal",
+                "Low (< 2.5 g/dL)",
+                "Liver cirrhosis, alcoholic hepatitis, massive liver metastases"
+              ],
+              [
+                "High SAAG (>= 1.1 g/dL)",
+                "Portal hypertension: post-sinusoidal / cardiac",
+                "High (>= 2.5 g/dL)",
+                "Congestive heart failure, constrictive pericarditis, Budd-Chiari syndrome"
+              ],
+              [
+                "Low SAAG (< 1.1 g/dL)",
+                "Normal portal pressure: increased peritoneal permeability",
+                "High (>= 2.5 g/dL)",
+                "Peritoneal carcinomatosis, tuberculous peritonitis, serositis (SLE), pancreatic ascites"
+              ],
+              [
+                "Low SAAG (< 1.1 g/dL)",
+                "Normal portal pressure: severe systemic hypoalbuminemia",
+                "Low (< 2.5 g/dL)",
+                "Nephrotic syndrome, severe protein-losing enteropathy, severe malnutrition"
+              ]
+            ]
+          },
+          "note": "A high SAAG (>= 1.1 g/dL) is 97% accurate for diagnosing portal hypertension. Combining SAAG with ascitic total protein instantly differentiates cirrhosis from cardiac ascites and peritoneal malignancy."
         }
       ],
       "pitfalls": [
@@ -704,6 +746,7 @@
         }
       ],
       "media": [
+        "media.dia.shiftingdullness",
         "media.gi.ascites.1",
         "media.gi.ascites.2",
         "media.gi.ascites.3"
@@ -1295,6 +1338,63 @@
             ]
           },
           "note": "No single feature is absolute on its own; use the whole table together, and the inability to insinuate fingers above the mass is usually the most reliable single discriminator."
+        },
+        {
+          "heading": "Spleen versus kidney versus left lobe of liver: master differentiation",
+          "body": "Left upper quadrant masses often deceive examiners. This multi-organ comparison matrix prevents misidentifying retroperitoneal renal masses and hepatic enlargement as splenic pathology.",
+          "wideTable": {
+            "cols": [
+              "Diagnostic Feature",
+              "Enlarged Spleen",
+              "Enlarged Left Kidney",
+              "Enlarged Left Lobe of Liver"
+            ],
+            "rows": [
+              [
+                "Direction of expansion",
+                "Diagonally towards right iliac fossa",
+                "Vertically downwards into lumbar gutter",
+                "Downwards and across the epigastrium"
+              ],
+              [
+                "Movement with respiration",
+                "Moves diagonally on inspiration",
+                "Moves vertically downwards",
+                "Moves vertically downwards with diaphragm"
+              ],
+              [
+                "Getting above the mass",
+                "CANNOT get above it (emerges from under costal margin)",
+                "Can often get above upper pole",
+                "CANNOT get above it"
+              ],
+              [
+                "Splenic notch",
+                "Present on anterior-medial border (pathognomonic)",
+                "Absent",
+                "Absent"
+              ],
+              [
+                "Bimanual ballottement",
+                "NOT ballottable",
+                "BALLOTTABLE in lumbar fossa (push anterior, feel posterior)",
+                "Not ballottable"
+              ],
+              [
+                "Percussion note over mass",
+                "Dull throughout (solid contact with abdominal wall)",
+                "Band of colonic resonance anteriorly (descending colon)",
+                "Dull, continuous with hepatic dullness"
+              ],
+              [
+                "Insinuation of fingers",
+                "Cannot pass fingers between costal margin and mass",
+                "Fingers easily insinuate between ribs and kidney",
+                "Cannot insinuate fingers"
+              ]
+            ]
+          },
+          "note": "Exam pearl: if you can feel a notch, it is a spleen. If you can ballot it bimanually and find an overlying band of colonic resonance on percussion, it is a kidney."
         }
       ],
       "pitfalls": [

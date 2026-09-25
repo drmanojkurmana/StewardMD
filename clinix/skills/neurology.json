@@ -181,6 +181,10 @@
       "title": "Higher mental functions: consciousness, orientation, memory and speech",
       "oneLine": "The GCS, orientation in three domains, three types of memory, and the six-domain language screen",
       "why": "Higher mental function is examined before anything else, because an unreliable historian changes how you interpret every symptom that follows. A structured screen, level of consciousness, orientation, memory, calculation, and language, turns a vague impression of 'confused' into a testable, reproducible finding.",
+      "calcs": [
+        "gcs",
+        "gcs_p"
+      ],
       "steps": [
         {
           "text": "Note the level of consciousness first, in the patient's own words if possible, and score it on the Glasgow Coma Scale (eye, verbal, motor) if there is any doubt."
@@ -764,6 +768,7 @@
         }
       ],
       "media": [
+        "media.dia.cngaze",
         "media.neuro.cn346.gaze"
       ],
       "sources": [
@@ -1074,6 +1079,7 @@
         }
       ],
       "media": [
+        "media.dia.facialpalsy",
         "media.neuro.cn7.palsy1",
         "media.neuro.cn7.palsy2"
       ],
@@ -1604,6 +1610,63 @@
           "note": "Learn this as ONE pattern, not five separate facts. A patient either fits the upper motor neurone row across the board or the lower motor neurone row; a mixed picture should make you reconsider the localisation."
         },
         {
+          "heading": "UMN versus LMN lesion: master comparative grid",
+          "body": "Every physical finding in the motor examination derives from whether the lesion is supranuclear (corticospinal) or infranuclear (anterior horn cell or peripheral nerve).",
+          "wideTable": {
+            "cols": [
+              "Motor Sign",
+              "Upper Motor Neurone (UMN)",
+              "Lower Motor Neurone (LMN)",
+              "Pathophysiological Basis"
+            ],
+            "rows": [
+              [
+                "Bulk / Wasting",
+                "Preserved; mild generalized disuse atrophy only late",
+                "Early, prominent and severe wasting of affected muscles",
+                "Loss of anterior horn cell neurotrophic factor"
+              ],
+              [
+                "Muscle Tone",
+                "Hypertonia: Spasticity (clasp-knife, velocity-dependent)",
+                "Hypotonia: Flaccidity (decreased resistance throughout)",
+                "Loss of cortical inhibition to reticulospinal/vestibulospinal tracts"
+              ],
+              [
+                "Weakness Pattern",
+                "Pyramidal distribution: Arm extensors weaker than flexors; Leg flexors weaker than extensors",
+                "Individual muscle, root (myotome), or peripheral nerve distribution",
+                "Corticospinal tract preferentially activates non-antigravity muscles"
+              ],
+              [
+                "Deep Tendon Reflexes",
+                "Hyperactive / Brisk (3+ or 4+) with clonus and spread",
+                "Hypoactive or completely absent (0 or 1+)",
+                "Disinhibition of gamma loop vs interruption of monosynaptic reflex arc"
+              ],
+              [
+                "Plantar Response",
+                "Extensor (Babinski sign positive: great toe dorsiflexion, fanning)",
+                "Flexor (normal downgoing) or absent",
+                "Primitive nociceptive flexion reflex released from cortical suppression"
+              ],
+              [
+                "Fasciculations",
+                "Absent",
+                "Present (spontaneous visible subcutaneous muscle twitches)",
+                "Irritation / denervation hypersensitivity of dying anterior horn cells"
+              ],
+              [
+                "Superficial Reflexes",
+                "Lost (abdominal and cremasteric reflexes lost early)",
+                "Intact unless the local reflex segment is involved",
+                "Interruption of polysynaptic cortical pathway"
+              ]
+            ]
+          },
+          "note": "A mixed picture (UMN signs in legs + LMN wasting/fasciculations in arms) is the classic hallmark of cervical spondylotic myelopathy or Amyotrophic Lateral Sclerosis (ALS/MND)."
+        },
+        {
           "heading": "Spasticity is not the same thing as rigidity",
           "table": {
             "cols": [
@@ -1836,6 +1899,57 @@
             ]
           },
           "note": "A reflex that is absent at one specific level with normal reflexes above and below points precisely at that segment, which is exactly how a single nerve root lesion is localised. Mnemonic, reading bottom to top: S1,2 : L3,4 : C5,6 : C7,8."
+        },
+        {
+          "heading": "Deep tendon reflex arcs and inverted reflexes",
+          "body": "A reflex tests the integrity of the peripheral nerve, spinal cord segment, and descending corticospinal control.",
+          "wideTable": {
+            "cols": [
+              "Reflex Jerk",
+              "Cord Root Segment",
+              "Peripheral Nerve",
+              "Normal Motor Response",
+              "Inverted Reflex / Clinical Sign"
+            ],
+            "rows": [
+              [
+                "Biceps Jerk",
+                "C5, C6",
+                "Musculocutaneous nerve",
+                "Brachialis / biceps contraction, elbow flexion",
+                "Inverted: finger flexion with absent elbow flexion (C5 LMN lesion + C6 cord compression)"
+              ],
+              [
+                "Supinator (Brachioradialis)",
+                "C5, C6",
+                "Radial nerve",
+                "Elbow flexion and forearm semipronation",
+                "Inverted supinator: tap radius produces isolated finger flexion with no elbow flexion (C5 lesion with C6 cord compression)"
+              ],
+              [
+                "Triceps Jerk",
+                "C7, C8",
+                "Radial nerve",
+                "Triceps contraction, elbow extension",
+                "Paradoxical triceps: elbow flexion instead of extension (C7 root lesion with hyperactive C5/C6 response)"
+              ],
+              [
+                "Knee (Patellar) Jerk",
+                "L3, L4",
+                "Femoral nerve",
+                "Quadriceps femoris contraction, knee extension",
+                "Pendular knee jerk (cerebellar disease: limb oscillates > 4 times due to hypotonia); Westphal sign (absent in tabes dorsalis)"
+              ],
+              [
+                "Ankle (Achilles) Jerk",
+                "S1, S2",
+                "Tibial / Sciatic nerve",
+                "Gastrocnemius-soleus contraction, plantarflexion",
+                "Hung-up ankle jerk: delayed relaxation phase pathognomonic for hypothyroidism"
+              ]
+            ]
+          },
+          "note": "The inverted supinator jerk (Babinski of the upper limb) is a classic exam pearl: tapping the styloid process of the radius causes finger flexion without elbow flexion. It localises a lesion to C5 (LMN lesion of supinator reflex arc) with compression of the spinal cord below it producing UMN finger hyperreflexia."
         },
         {
           "heading": "Grade every reflex on the same 0 to 4+ scale",
@@ -2168,6 +2282,7 @@
         }
       ],
       "media": [
+        "media.dia.sensorylevel",
         "media.img.dermatomes"
       ],
       "sources": [
@@ -2742,6 +2857,9 @@
       "title": "The vascular risk history",
       "oneLine": "The questions that explain WHY this happened, and that a preceding TIA is a missed warning, not a footnote",
       "why": "The presenting complaint tells you a stroke happened; the risk history tells you why, and it is what secondary prevention is actually built on. A preceding TIA, in particular, is commonly under-reported by patients as 'nothing', because it resolved, and it is the single most important thing to ask about directly.",
+      "calcs": [
+        "nihss"
+      ],
       "asks": [
         {
           "text": "Do you have high blood pressure, for how long, and do you take your tablets regularly?"

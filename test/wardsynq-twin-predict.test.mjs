@@ -115,7 +115,7 @@ test("4. five of the seven named metrics are wired, from real data; the remainin
 
 test("5. discharge-volume is predicted from REAL Encounter periodEnd dates, through the real route", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  const now = Date.now();
   for (let d = 0; d < 10; d++) {
     const dischargedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-enc-${d}`, version: 1, patientId: `predict-pat-${d}`, class: "IPD", status: "discharged", identifiers: [], periodStart: dischargedAt, periodEnd: dischargedAt, meta: meta() }]);
@@ -131,7 +131,7 @@ test("5. discharge-volume is predicted from REAL Encounter periodEnd dates, thro
 
 test("5b. bed-demand is predicted from REAL Encounter periodStart dates, through the real route", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  const now = Date.now();
   for (let d = 0; d < 10; d++) {
     const admittedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-bed-${d}`, version: 1, patientId: `predict-bed-pat-${d}`, class: "IPD", status: "in-progress", identifiers: [], periodStart: admittedAt, periodEnd: null, meta: meta() }]);
@@ -145,7 +145,7 @@ test("5b. bed-demand is predicted from REAL Encounter periodStart dates, through
 
 test("5c. ed-load is predicted from REAL ED-class Encounters, and a non-ED admission never counts", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  const now = Date.now();
   for (let d = 0; d < 10; d++) {
     const arrivedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-ed-${d}`, version: 1, patientId: `predict-ed-pat-${d}`, class: "ED", status: "in-progress", identifiers: [], periodStart: arrivedAt, periodEnd: null, meta: meta() }]);
@@ -160,7 +160,7 @@ test("5c. ed-load is predicted from REAL ED-class Encounters, and a non-ED admis
 
 test("5d. diagnostic-workload is predicted from REAL ServiceRequest lab/imaging orders, and other categories are excluded", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  const now = Date.now();
   for (let d = 0; d < 10; d++) {
     const orderedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "ServiceRequest", id: `predict-lab-${d}`, version: 1, patientId: `predict-dx-pat-${d}`, code: "58410-2", category: "laboratory", priority: "routine", requesterId: "cfa:doc", status: "active", meta: { ...meta(), effectiveAt: orderedAt } }]);
@@ -175,7 +175,7 @@ test("5d. diagnostic-workload is predicted from REAL ServiceRequest lab/imaging 
 
 test("5e. pharmacy-workload is predicted from REAL MedicationDispense.dispensedAt, not the order date", async () => {
   seed();
-  const now = Date.parse("2026-09-10T08:00:00.000Z");
+  const now = Date.now();
   for (let d = 0; d < 10; d++) {
     const dispensedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "MedicationDispense", id: `predict-disp-${d}`, version: 1, patientId: `predict-rx-pat-${d}`, orderId: `predict-ord-${d}`, drug: "Amoxicillin", quantity: { value: 30, unit: "tablet" }, state: "issued", dispensedBy: "cfa:pharm", dispensedAt, source: { system: "wardsynq-native", sourceId: `predict-disp-${d}` } }]);

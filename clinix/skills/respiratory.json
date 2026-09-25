@@ -1318,6 +1318,81 @@
         "media.snd.reduced",
         "media.snd.vesicular"
       ],
+      "teach": [
+        {
+          "heading": "Vesicular versus bronchial breath sounds",
+          "body": "Normal breath sounds are filtered by healthy alveoli. When alveoli are replaced by solid tissue, high-frequency sounds from central airways reach the surface unfiltered.",
+          "table": {
+            "cols": [
+              "Feature",
+              "Vesicular Breathing (Normal)",
+              "Bronchial Breathing (Consolidation)"
+            ],
+            "rows": [
+              [
+                "Character",
+                "Gentle rustling, low pitch",
+                "Harsh, hollow, blowing, high pitch"
+              ],
+              [
+                "Inspiratory phase",
+                "Long, heard through the whole of inspiration",
+                "Heard through whole inspiration"
+              ],
+              [
+                "Pause / gap",
+                "NO gap: expiration follows inspiration directly",
+                "Distinct SILENT GAP between inspiration and expiration"
+              ],
+              [
+                "Expiratory phase",
+                "Short and quiet: only the initial 1/3 is heard",
+                "Long, loud and harsh: audible throughout expiration"
+              ],
+              [
+                "Vocal resonance",
+                "Muffled, indistinct voice sounds",
+                "Markedly increased: Whispering pectoriloquy & bronchophony"
+              ],
+              [
+                "Classic causes",
+                "Normal healthy lung parenchyma",
+                "Lobar pneumonia, large cavity with patent bronchus, top of an effusion"
+              ]
+            ]
+          },
+          "note": "The presence of a distinct silent pause between inspiration and expiration is what definitively separates bronchial from vesicular breathing at the bedside."
+        },
+        {
+          "heading": "Types of crackles: timing, mechanism and causes",
+          "body": "Crackles (crepitations) are explosive opening sounds of small airways or bubbling through secretions.",
+          "table": {
+            "cols": [
+              "Type of Crackle",
+              "Acoustic Quality & Timing",
+              "Clinical Significance & Etiology"
+            ],
+            "rows": [
+              [
+                "Fine crackles",
+                "High pitch, crisp, like rubbing hair between fingers. Late inspiratory.",
+                "Interstitial lung disease / IPF (Velcro crackles), early pulmonary edema. Unchanged after coughing."
+              ],
+              [
+                "Coarse crackles",
+                "Low pitch, bubbling, louder, early-to-mid inspiratory and often expiratory.",
+                "Bronchiectasis, COPD, resolving pneumonia. Frequently shift or clear after coughing."
+              ],
+              [
+                "Pleural rub",
+                "Leathery, creaking, heard during both inspiration and expiration, localized.",
+                "Pleurisy, pulmonary embolism with infarction, acute chest syndrome. Persists when breathing through open mouth."
+              ]
+            ]
+          },
+          "note": "Always ask the patient to cough and listen again: coarse crackles from secretions alter or clear with a cough, whereas fine Velcro crackles of pulmonary fibrosis never clear."
+        }
+      ],
       "probes": [
         {
           "level": 1,
@@ -1385,8 +1460,16 @@
       ],
       "sources": [
         {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: auscultation of breath sounds"
+        },
+        {
           "source": "Macleod's Clinical Examination",
           "locator": "The respiratory system"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Approach to the patient with respiratory disease"
         }
       ],
       "review": {
@@ -2108,6 +2191,9 @@
       "title": "Risk factors and severity clues",
       "oneLine": "What made this patient get pneumonia, and what makes it dangerous",
       "why": "The same syndrome in a fit 30-year-old and a frail 80-year-old with diabetes is a different disease in terms of the likely organism, the risk of deterioration, and the required level of care. These questions change the management plan, not just the differential.",
+      "calcs": [
+        "curb65"
+      ],
       "asks": [
         {
           "text": "Age, and whether the patient is normally independent or frail."

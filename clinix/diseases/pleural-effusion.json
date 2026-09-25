@@ -537,6 +537,9 @@
       "title": "Pleural aspiration and Light's criteria",
       "oneLine": "The one test that answers why the fluid is there",
       "why": "Everything before this narrows the possibilities; the tap decides. Light's criteria are worth knowing exactly, because they are highly sensitive for an exudate and misapplying them sends the whole workup down the wrong branch.",
+      "calcs": [
+        "lights"
+      ],
       "body": "A diagnostic aspiration under ultrasound guidance, sent for the tests that actually change management.",
       "keyPoints": [
         "LIGHT'S CRITERIA: the fluid is an EXUDATE if ANY ONE of these holds. Pleural fluid protein divided by serum protein greater than 0.5. Pleural fluid LDH divided by serum LDH greater than 0.6. Pleural fluid LDH greater than two thirds of the upper limit of the normal serum LDH.",
@@ -555,6 +558,86 @@
         "Treating a complicated parapneumonic effusion with antibiotics alone when the pH and glucose say it needs a drain."
       ],
       "media": [],
+      "teach": [
+        {
+          "heading": "Light's criteria: separating exudate from transudate",
+          "body": "An effusion is an EXUDATE if ANY ONE of the three rules is met. Always draw simultaneous serum protein and LDH.",
+          "table": {
+            "cols": [
+              "Parameter",
+              "Transudate (All 3 must be met)",
+              "Exudate (Any 1 makes it an exudate)"
+            ],
+            "rows": [
+              [
+                "Pleural / Serum Protein ratio",
+                "<= 0.5",
+                "> 0.5"
+              ],
+              [
+                "Pleural / Serum LDH ratio",
+                "<= 0.6",
+                "> 0.6"
+              ],
+              [
+                "Pleural fluid LDH level",
+                "<= 2/3 upper normal limit of serum LDH",
+                "> 2/3 upper normal limit of serum LDH"
+              ],
+              [
+                "Serum-Pleural Albumin Gradient",
+                "> 1.2 g/dL (supports transudate)",
+                "<= 1.2 g/dL (confirms true exudate)"
+              ],
+              [
+                "Classic causes",
+                "Congestive heart failure, Cirrhosis (hepatic hydrothorax), Nephrotic syndrome, Malnutrition",
+                "Parapneumonic effusion, Tuberculosis, Malignancy, Pulmonary infarction, Autoimmune (RA/SLE)"
+              ]
+            ]
+          },
+          "note": "Diuretic trap: in heart failure treated with diuretics, protein concentrates and Light's criteria may falsely call it an exudate. The Serum-Pleural Albumin Gradient (> 1.2 g/dL) correctly reclassifies it as a transudate."
+        },
+        {
+          "heading": "Pleural fluid chemistry and microbiology tests",
+          "body": "Beyond Light's criteria, specific markers determine whether an effusion needs immediate intercostal chest tube drainage or urgent targeted therapy.",
+          "table": {
+            "cols": [
+              "Pleural Test",
+              "Critical Threshold",
+              "Clinical Action / Implication"
+            ],
+            "rows": [
+              [
+                "pH",
+                "< 7.20",
+                "Complicated parapneumonic effusion: indicates urgent chest tube drainage required"
+              ],
+              [
+                "Glucose",
+                "< 60 mg/dL (< 3.3 mmol/L)",
+                "Seen in empyema, rheumatoid pleurisy, TB, malignancy, or esophageal rupture"
+              ],
+              [
+                "Adenosine Deaminase (ADA)",
+                "> 40 U/L",
+                "Highly sensitive and specific for Tuberculous pleurisy in endemic areas"
+              ],
+              [
+                "Amylase",
+                "Higher than serum amylase",
+                "Points to acute pancreatitis, pancreatic pseudocyst, or esophageal rupture"
+              ],
+              [
+                "Triglycerides",
+                "> 110 mg/dL",
+                "Confirms chylothorax (thoracic duct disruption, lymphoma, trauma)"
+              ]
+            ]
+          },
+          "note": "Frank pus or microorganisms seen on Gram stain/culture equals empyema: place an intercostal drain immediately. Antibiotics alone never sterilize an enclosed pleural empyema."
+        }
+      ],
       "probes": [
         {
           "level": 1,

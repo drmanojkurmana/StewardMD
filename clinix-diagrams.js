@@ -458,9 +458,398 @@
       '<div class="cx-dia-note">A spleen you can feel has already doubled or tripled in size, and it enlarges along this one diagonal, from the left costal margin towards the umbilicus and the right iliac fossa, never in a random direction.</div>';
   }
 
+  /* ── 16. JVP Waveform & Mechanical Cycle (interactive) ───────────────────── */
+
+  var JVP_POINTS = [
+    { id: "a", cx: 62, cy: 50, label: "a wave", time: "Presystole", mech: "Right atrial contraction", clin: "Precedes S1 and carotid upstroke. GIANT in pulmonary hypertension and tricuspid stenosis. CANNON waves in complete heart block (atrium contracting against shut tricuspid valve). ABSENT in atrial fibrillation." },
+    { id: "c", cx: 108, cy: 78, label: "c wave", time: "Early systole", mech: "Tricuspid valve bulging during isovolumetric RV contraction + transmitted carotid pulsation", clin: "Marks the onset of ventricular systole. Usually small and hidden in clinical examination; coincides with S1." },
+    { id: "x", cx: 154, cy: 124, label: "x descent", time: "Mid systole", mech: "Atrial relaxation & downward displacement of tricuspid ring during RV ejection", clin: "The predominant descent in normal JVP. OBLITERATED and replaced by systolic surge in tricuspid regurgitation. Exaggerated in cardiac tamponade." },
+    { id: "v", cx: 215, cy: 62, label: "v wave", time: "Late systole", mech: "Passive venous filling of right atrium against closed tricuspid valve", clin: "Peaks just after S2. GIANT and fused with c wave in tricuspid regurgitation (Lancisi sign), causing systolic neck vein pulsation." },
+    { id: "y", cx: 268, cy: 122, label: "y descent", time: "Early diastole", mech: "Rapid passive emptying of right atrium into RV immediately following tricuspid valve opening", clin: "Precipitous, sharp & deep in constrictive pericarditis (Friedreich's sign). SLOW / BLUNTED in cardiac tamponade and tricuspid stenosis." }
+  ];
+
+  function jvpWave(o) {
+    var mode = (o && o.focus) || "normal"; // normal | tr | constriction | chb
+    var sel = (o && o.selected) || null;
+    var html = '<svg class="cx-dia" viewBox="0 0 340 240" role="img" aria-label="Jugular venous pulse waveform correlated with cardiac cycle">';
+    html += '<rect class="cx-dia-skin" x="10" y="10" width="320" height="220" rx="10"/>';
+    html += '<line class="cx-dia-axis" x1="20" y1="135" x2="320" y2="135"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="22" y="130">Venous zero</text>';
+
+    html += '<line class="cx-dia-soundmark" x1="108" y1="18" x2="108" y2="215"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="108" y="28" text-anchor="middle">S1</text>';
+    html += '<line class="cx-dia-soundmark" x1="215" y1="18" x2="215" y2="215"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="215" y="28" text-anchor="middle">S2</text>';
+
+    if (mode === "tr") {
+      html += '<path class="cx-dia-wave cx-dia-wave--bad" d="M24 100 C38 98 48 85 62 82 C74 80 84 92 98 88 C115 82 135 30 175 30 C205 30 225 65 240 85 C252 102 260 130 272 130 C288 130 300 115 320 110"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--copd" x="175" y="24" text-anchor="middle">Giant c-v wave (Lancisi sign)</text>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="130" y="92">x descent lost</text>';
+    } else if (mode === "constriction") {
+      html += '<path class="cx-dia-wave cx-dia-wave--bad" d="M24 100 C40 95 50 50 62 50 C74 50 88 95 98 90 C104 88 108 80 112 80 C120 80 135 136 150 136 C165 136 195 55 215 55 C230 55 242 142 260 142 C275 142 295 105 320 100"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="260" y="155" text-anchor="middle">Friedreich sign (steep y descent)</text>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--copd" x="175" y="44" text-anchor="middle">"M" / "W" contour</text>';
+    } else if (mode === "chb") {
+      html += '<path class="cx-dia-wave cx-dia-wave--alert" d="M24 105 C35 100 45 75 55 75 C65 75 75 105 85 100 C92 98 100 90 108 90 C116 90 125 15 140 15 C155 15 168 125 180 125 C195 125 208 70 218 70 C232 70 248 120 262 120 C280 120 300 105 320 105"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="140" y="10" text-anchor="middle">CANNON a wave (Atrium vs shut valve)</text>';
+    } else {
+      html += '<path class="cx-dia-wave" d="M24 105 C40 102 52 50 62 50 C72 50 84 94 96 94 C102 94 105 78 110 78 C118 78 135 124 154 124 C175 124 198 62 215 62 C232 62 250 122 268 122 C285 122 300 100 320 100"/>';
+    }
+
+    for (var i = 0; i < JVP_POINTS.length; i++) {
+      var p = JVP_POINTS[i], on = sel === p.id;
+      html += '<g class="cx-dia-zone' + (on ? " cx-dia-zone--on" : "") + '" data-act="cx-dia-zone" data-id="' + p.id + '" role="button" tabindex="0" aria-label="' + esc(p.label) + '">' +
+        '<circle cx="' + p.cx + '" cy="' + p.cy + '" r="13"/>' +
+        '<text x="' + p.cx + '" y="' + (p.cy + 4) + '" text-anchor="middle">' + p.id + '</text></g>';
+    }
+
+    html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="22" y="170">Synchronous ECG</text>';
+    html += '<line class="cx-dia-div" x1="20" y1="195" x2="320" y2="195"/>';
+    html += '<path class="cx-dia-ecg" d="M24 195 L40 195 C46 195 50 183 56 183 C62 183 66 195 72 195 L98 195 L102 202 L108 165 L114 205 L118 195 L180 195 C190 195 198 180 208 180 C218 180 224 195 234 195 L320 195"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--faint" x="56" y="178" text-anchor="middle">P</text>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--faint" x="108" y="160" text-anchor="middle">QRS</text>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--faint" x="208" y="175" text-anchor="middle">T</text>';
+
+    html += '</svg>';
+
+    html += '<div class="cx-dia-toggle">' +
+      btn("cx-dia-focus", "normal", "Normal", mode === "normal") +
+      btn("cx-dia-focus", "tr", "TR (Lancisi)", mode === "tr") +
+      btn("cx-dia-focus", "constriction", "Constriction", mode === "constriction") +
+      btn("cx-dia-focus", "chb", "Cannon waves", mode === "chb") +
+      '</div>';
+
+    var chosen = null;
+    for (i = 0; i < JVP_POINTS.length; i++) if (JVP_POINTS[i].id === sel) chosen = JVP_POINTS[i];
+    html += '<div class="cx-dia-note">' + (chosen
+      ? '<b>' + esc(chosen.label) + ' (' + esc(chosen.time) + '):</b> ' + esc(chosen.mech) + '. <span class="cx-dia-lbl--copd">Clinical:</span> ' + esc(chosen.clin)
+      : 'Tap any letter (<b>a, c, x, v, y</b>) or switch pathological modes above. The JVP reflects right atrial pressure changes, synchronized with the carotid upstroke and ECG.') + '</div>';
+
+    return html;
+  }
+
+  /* ── 17. Cardiac Auscultation Areas & Murmur Radiation ──────────────────── */
+
+  var CARDIAC_AREAS = [
+    { id: "aortic", cx: 132, cy: 76, label: "Aortic", ic: "2nd RICS", bell: "Diaphragm firmly", posture: "Sitting up, leaning forward in end-expiration", rad: "Radiates up into RIGHT CAROTID ARTERY", murmur: "Aortic Stenosis: harsh crescendo-decrescendo ejection systolic murmur. Slow-rising pulse (pulsus parvus et tardus).", sound: "as" },
+    { id: "pulmonary", cx: 196, cy: 76, label: "Pulmonary", ic: "2nd LICS", bell: "Diaphragm", posture: "Supine 45 deg", rad: "Radiates toward left shoulder / back", murmur: "Pulmonary Stenosis ejection murmur; wide fixed split S2 in ASD; continuous machinery murmur of PDA.", sound: "normal" },
+    { id: "erbs", cx: 190, cy: 112, label: "Erb's Point", ic: "3rd LICS", bell: "Diaphragm firmly pressed", posture: "Sitting up, leaning forward in full expiration", rad: "Localized along left sternal border", murmur: "Aortic Regurgitation: high-pitched early diastolic decrescendo murmur. Also HOCM systolic murmur (loudest between Erb's and apex).", sound: "ar" },
+    { id: "tricuspid", cx: 178, cy: 154, label: "Tricuspid", ic: "4th-5th LICS", bell: "Diaphragm / Bell", posture: "Supine, note respiratory changes", rad: "Lower sternum / xiphisternum", murmur: "Tricuspid Regurgitation: pansystolic murmur. Carvallo sign: LOUDER on inspiration (increased RV venous return).", sound: "normal" },
+    { id: "mitral", cx: 236, cy: 184, label: "Mitral (Apex)", ic: "5th LICS MCL", bell: "Bell for MS, Diaphragm for MR", posture: "LEFT LATERAL DECUBITUS position", rad: "MR radiates directly into LEFT AXILLA", murmur: "Mitral Regurgitation: pansystolic blowing murmur radiating to axilla. Mitral Stenosis: localized low-pitched mid-diastolic rumble with opening snap (best heard with light bell pressure).", sound: "mr" }
+  ];
+
+  function auscultAreas(o) {
+    var sel = (o && o.selected) || null;
+    var html = '<svg class="cx-dia cx-dia--chest" viewBox="0 0 340 250" role="img" aria-label="Cardiac auscultation areas on chest wall with murmur radiation vectors">';
+    html += '<path class="cx-dia-body" d="M170 14 C120 14 78 30 70 52 C60 82 62 178 74 206 C82 222 120 226 170 226 C220 226 258 222 266 206 C278 178 280 82 270 52 C262 30 220 14 170 14 Z"/>';
+    html += '<path class="cx-dia-clav" d="M90 44 C130 52 160 52 170 54 C180 52 210 52 250 44"/>';
+    html += '<rect class="cx-dia-skin" x="162" y="52" width="16" height="120" rx="4"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="170" y="105" text-anchor="middle">Sternum</text>';
+    html += '<line class="cx-dia-div" x1="100" y1="76" x2="240" y2="76"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--faint" x="84" y="80">2nd ICS</text>';
+    html += '<line class="cx-dia-div" x1="100" y1="112" x2="240" y2="112"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--faint" x="84" y="116">3rd ICS</text>';
+    html += '<line class="cx-dia-div" x1="100" y1="154" x2="240" y2="154"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--faint" x="84" y="158">4th/5th</text>';
+
+    html += '<path class="cx-dia-cardiac" d="M156 80 C190 75 220 100 226 140 C230 165 240 180 236 186 C215 198 175 190 156 168 Z" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="1.5" stroke-dasharray="4 3"/>';
+
+    html += '<path class="cx-dia-rad-arrow" d="M132 64 L122 28" marker-end="url(#cxRadArrow)"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--copd" x="110" y="24" text-anchor="end">To carotids (AS)</text>';
+    html += '<path class="cx-dia-rad-arrow" d="M246 180 L292 144" marker-end="url(#cxRadArrow)"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--copd" x="296" y="140">To axilla (MR)</text>';
+
+    html += '<defs><marker id="cxRadArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">' +
+      '<path d="M0 0 L10 5 L0 10 z" class="cx-dia-rad-arrowhead"/></marker></defs>';
+
+    for (var i = 0; i < CARDIAC_AREAS.length; i++) {
+      var a = CARDIAC_AREAS[i], on = sel === a.id;
+      html += '<g class="cx-dia-zone cx-dia-zone--ausc cx-dia-zone--cardiac' + (on ? " cx-dia-zone--on" : "") + '" data-act="cx-dia-ausc" data-id="' + a.id + '" role="button" tabindex="0" aria-label="' + esc(a.label) + '">' +
+        '<circle cx="' + a.cx + '" cy="' + a.cy + '" r="16"/>' +
+        '<text x="' + a.cx + '" y="' + (a.cy + 4) + '" text-anchor="middle">' + a.label.charAt(0) + '</text></g>';
+    }
+
+    html += '</svg>';
+
+    var chosen = null;
+    for (i = 0; i < CARDIAC_AREAS.length; i++) if (CARDIAC_AREAS[i].id === sel) chosen = CARDIAC_AREAS[i];
+    html += '<div class="cx-dia-note">' + (chosen
+      ? '<b>' + esc(chosen.label) + ' (' + esc(chosen.ic) + '):</b> ' + esc(chosen.murmur) +
+        '<br><b>Position & Maneuver:</b> ' + esc(chosen.posture) + ' (' + esc(chosen.bell) + ').' +
+        '<br><b>Radiation:</b> <span class="cx-dia-lbl--copd">' + esc(chosen.rad) + '</span>'
+      : 'Tap an area (<b>A</b>ortic, <b>P</b>ulmonary, <b>E</b>rb\'s, <b>T</b>ricuspid, <b>M</b>itral) to hear the classic murmur and see position, bell vs diaphragm, and radiation vectors.') + '</div>';
+
+    return html;
+  }
+
+  /* ── 18. Cranial Nerves III, IV, VI & Cardinal Gaze Positions ────────────── */
+
+  var GAZE_POSITIONS = [
+    { id: "up_r", cx: 65, cy: 45, label: "Up & Right", muscles: "R Superior Rectus (CN III) + L Inferior Oblique (CN III)", clin: "Tests elevation in abduction for right eye, elevation in adduction for left eye." },
+    { id: "lat_r", cx: 45, cy: 110, label: "Right Lateral", muscles: "R Lateral Rectus (CN VI) + L Medial Rectus (CN III)", clin: "Pure horizontal abduction (VI) vs adduction (III). Horizontal uncrossed diplopia in right CN VI palsy." },
+    { id: "dn_r", cx: 65, cy: 175, label: "Down & Right", muscles: "R Inferior Rectus (CN III) + L Superior Oblique (CN IV)", clin: "Tests depression in abduction for right eye, depression in adduction for left eye (SO4)." },
+    { id: "up_l", cx: 275, cy: 45, label: "Up & Left", muscles: "L Superior Rectus (CN III) + R Inferior Oblique (CN III)", clin: "Tests elevation in abduction for left eye, elevation in adduction for right eye." },
+    { id: "lat_l", cx: 295, cy: 110, label: "Left Lateral", muscles: "L Lateral Rectus (CN VI) + R Medial Rectus (CN III)", clin: "Horizontal gaze to the left. In left CN VI palsy, left eye fails to abduct beyond midline." },
+    { id: "dn_l", cx: 275, cy: 175, label: "Down & Left", muscles: "L Inferior Rectus (CN III) + R Superior Oblique (CN IV)", clin: "Crucial for CN IV (trochlear): tests right Superior Oblique in adduction (reading, walking down stairs)." }
+  ];
+
+  function cnGaze(o) {
+    var mode = (o && o.mode) || "hpattern"; // hpattern | cn3palsy | cn4palsy | cn6palsy | horner
+    var sel = (o && o.selected) || null;
+    var html = '<svg class="cx-dia" viewBox="0 0 340 230" role="img" aria-label="Cranial nerves 3, 4 and 6 six cardinal gaze positions">';
+
+    html += '<rect class="cx-dia-skin" x="10" y="10" width="320" height="210" rx="10"/>';
+    html += '<path class="cx-dia-div" d="M65 45 L65 175 M275 45 L275 175 M65 110 L275 110" stroke-width="2"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="170" y="24" text-anchor="middle">"H" in space: isolator of ocular muscles</text>';
+
+    var rPupilX = 135, rPupilY = 110, rPupilR = 6, rPtosis = false;
+    var lPupilX = 205, lPupilY = 110, lPupilR = 6;
+
+    if (mode === "cn3palsy") {
+      rPupilX = 125; rPupilY = 118; rPupilR = 10; rPtosis = true;
+    } else if (mode === "cn6palsy") {
+      rPupilX = 142; rPupilY = 110;
+    } else if (mode === "cn4palsy") {
+      rPupilX = 135; rPupilY = 103;
+    } else if (mode === "horner") {
+      rPtosis = true; rPupilR = 3.5;
+    }
+
+    html += '<ellipse cx="135" cy="110" rx="22" ry="16" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="1.5"/>';
+    html += '<circle cx="' + rPupilX + '" cy="' + rPupilY + '" r="' + rPupilR + '" class="' + (rPupilR > 7 ? "cx-dia-pupil--dilated" : "cx-dia-pupil") + '"/>';
+    if (rPtosis) {
+      html += '<path d="M113 104 C125 114 145 114 157 104" stroke="var(--cx-teach)" stroke-width="2.5" fill="none"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--copd" x="135" y="94" text-anchor="middle">Ptosis</text>';
+    }
+    html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="135" y="136" text-anchor="middle">R Eye</text>';
+
+    html += '<ellipse cx="205" cy="110" rx="22" ry="16" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="1.5"/>';
+    html += '<circle cx="' + lPupilX + '" cy="' + lPupilY + '" r="' + lPupilR + '" class="cx-dia-pupil"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="205" y="136" text-anchor="middle">L Eye</text>';
+
+    for (var i = 0; i < GAZE_POSITIONS.length; i++) {
+      var g = GAZE_POSITIONS[i], on = sel === g.id;
+      html += '<g class="cx-dia-gaze-box' + (on ? " cx-dia-gaze-box--on" : "") + '" data-act="cx-dia-zone" data-id="' + g.id + '" role="button" tabindex="0">' +
+        '<rect x="' + (g.cx - 38) + '" y="' + (g.cy - 18) + '" width="76" height="36" rx="6"/>' +
+        '<text class="cx-dia-lbl cx-dia-lbl--normal" x="' + g.cx + '" y="' + (g.cy - 2) + '" text-anchor="middle">' + esc(g.label) + '</text>' +
+        '<text class="cx-dia-lbl--faint" x="' + g.cx + '" y="' + (g.cy + 10) + '" text-anchor="middle">Tap to check</text></g>';
+    }
+
+    html += '</svg>';
+
+    html += '<div class="cx-dia-toggle">' +
+      btn("cx-dia-mode", "hpattern", "H-Pattern", mode === "hpattern") +
+      btn("cx-dia-mode", "cn3palsy", "CN III Palsy", mode === "cn3palsy") +
+      btn("cx-dia-mode", "cn4palsy", "CN IV Palsy", mode === "cn4palsy") +
+      btn("cx-dia-mode", "cn6palsy", "CN VI Palsy", mode === "cn6palsy") +
+      btn("cx-dia-mode", "horner", "Horner Syn.", mode === "horner") +
+      '</div>';
+
+    var chosen = null;
+    for (i = 0; i < GAZE_POSITIONS.length; i++) if (GAZE_POSITIONS[i].id === sel) chosen = GAZE_POSITIONS[i];
+    html += '<div class="cx-dia-note">' + (chosen
+      ? '<b>' + esc(chosen.label) + ':</b> ' + esc(chosen.muscles) + '. <br><span class="cx-dia-lbl--copd">Exam Pearl:</span> ' + esc(chosen.clin)
+      : (mode === "cn3palsy"
+        ? '<b>CN III (Oculomotor) Palsy:</b> Resting "Down and Out" eye position (due to unopposed LR6 and SO4). Complete ptosis (levator palpebrae paralysis) and dilated, fixed pupil (loss of parasympathetic pupilloconstrictor fibers).'
+        : (mode === "cn4palsy"
+          ? '<b>CN IV (Trochlear) Palsy:</b> Superior oblique paralysis. Vertical/torsional diplopia, worst when looking down and inward (reading, walking downstairs). Patient tilts head to opposite shoulder (Bielschowsky test).'
+          : (mode === "cn6palsy"
+            ? '<b>CN VI (Abducens) Palsy:</b> Inability to abduct the affected eye. Horizontal uncrossed diplopia on lateral gaze. Most sensitive to raised intracranial pressure (false localizing sign).'
+            : (mode === "horner"
+              ? '<b>Horner Syndrome (Sympathetic tract lesion):</b> Mild partial ptosis (Müller\'s muscle), miosis (pupillodilator loss), facial anhidrosis, and apparent enophthalmos.'
+              : 'Hold your finger 30-40 cm from the patient\'s face. Trace a broad "H" in the air. Pause at the 6 cardinal endpoints to look for paresis or nystagmus.'))))) + '</div>';
+
+    return html;
+  }
+
+  /* ── 19. UMN vs LMN Facial Nerve Palsy (Forehead Sparing) ────────────────── */
+
+  function facialPalsy(o) {
+    var mode = (o && o.mode) || "umn"; // normal | umn | lmn
+    var html = '<svg class="cx-dia" viewBox="0 0 340 240" role="img" aria-label="UMN vs LMN facial palsy mechanism and forehead sparing">';
+
+    html += '<rect class="cx-dia-skin" x="10" y="10" width="320" height="220" rx="10"/>';
+
+    html += '<rect class="cx-dia-organ" x="60" y="24" width="80" height="34" rx="6"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="100" y="44" text-anchor="middle">R Cortex</text>';
+    html += '<rect class="cx-dia-organ" x="200" y="24" width="80" height="34" rx="6"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="240" y="44" text-anchor="middle">L Cortex</text>';
+
+    html += '<path d="M100 58 L150 110 M240 58 L190 110" stroke="var(--cx-primary)" stroke-width="2" fill="none"/>';
+    html += '<path d="M100 58 L190 125 M240 58 L150 125" stroke="var(--cx-teach)" stroke-width="2" fill="none"/>';
+
+    html += '<rect class="cx-dia-organ" x="135" y="102" width="70" height="36" rx="6"/>';
+    html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="170" y="124" text-anchor="middle">Pons (VII Nucleus)</text>';
+
+    if (mode === "umn") {
+      html += '<path d="M90 64 L110 84 M110 64 L90 84" stroke="var(--cx-bad)" stroke-width="3"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="35" y="76">UMN Lesion (Stroke)</text>';
+    } else if (mode === "lmn") {
+      html += '<path d="M195 136 L215 156 M215 136 L195 156" stroke="var(--cx-bad)" stroke-width="3"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="235" y="146">LMN Lesion (Bell\'s)</text>';
+    }
+
+    html += '<path d="M150 138 L90 168 M190 138 L250 168" stroke="var(--cx-ink)" stroke-width="2" fill="none"/>';
+
+    html += '<circle cx="170" cy="192" r="34" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="1.5"/>';
+
+    if (mode === "lmn") {
+      html += '<line x1="150" y1="172" x2="162" y2="172" stroke="var(--cx-line)" stroke-width="1.5"/>';
+      html += '<line x1="150" y1="176" x2="162" y2="176" stroke="var(--cx-line)" stroke-width="1.5"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="215" y="174">Wrinkles LOST</text>';
+    } else {
+      html += '<line x1="150" y1="172" x2="162" y2="172" stroke="var(--cx-line)" stroke-width="1.5"/>';
+      html += '<line x1="178" y1="172" x2="190" y2="172" stroke="var(--cx-line)" stroke-width="1.5"/>';
+      html += '<line x1="150" y1="176" x2="162" y2="176" stroke="var(--cx-line)" stroke-width="1.5"/>';
+      html += '<line x1="178" y1="176" x2="190" y2="176" stroke="var(--cx-line)" stroke-width="1.5"/>';
+      if (mode === "umn") {
+        html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="170" y="165" text-anchor="middle">FOREHEAD SPARED</text>';
+      }
+    }
+
+    if (mode === "lmn") {
+      html += '<circle cx="156" cy="186" r="3" class="cx-dia-pupil"/>';
+      html += '<ellipse cx="184" cy="186" rx="5" ry="3" fill="none" stroke="var(--cx-teach)" stroke-width="1.5"/>';
+      html += '<circle cx="184" cy="184" r="2" fill="var(--cx-muted)"/>';
+    } else {
+      html += '<circle cx="156" cy="186" r="3" class="cx-dia-pupil"/>';
+      html += '<circle cx="184" cy="186" r="3" class="cx-dia-pupil"/>';
+    }
+
+    if (mode === "normal") {
+      html += '<path d="M158 210 Q170 218 182 210" stroke="var(--cx-primary)" stroke-width="2" fill="none"/>';
+    } else {
+      html += '<path d="M158 208 Q170 212 184 218" stroke="var(--cx-bad)" stroke-width="2" fill="none"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="215" y="215">Mouth droop</text>';
+    }
+
+    html += '</svg>';
+
+    html += '<div class="cx-dia-toggle">' +
+      btn("cx-dia-mode", "normal", "Normal", mode === "normal") +
+      btn("cx-dia-mode", "umn", "UMN (Stroke: Forehead Spared)", mode === "umn") +
+      btn("cx-dia-mode", "lmn", "LMN (Bell\'s: Forehead Lost)", mode === "lmn") +
+      '</div>';
+
+    html += '<div class="cx-dia-note">' + (mode === "umn"
+      ? '<b>Upper Motor Neuron Lesion (e.g. Stroke):</b> The upper facial nucleus receives <b>bilateral</b> cortical innervation. The uninjured hemisphere still drives the forehead, so forehead wrinkling and eye closure are <b>SPARED</b>. Weakness is confined to the contralateral lower face.'
+      : (mode === "lmn"
+        ? '<b>Lower Motor Neuron Lesion (e.g. Bell\'s Palsy):</b> The final common peripheral pathway is transected or inflamed. The <b>ENTIRE ipsilateral hemiface is paralyzed</b>: forehead wrinkles are wiped out, the eye cannot close (Bell\'s phenomenon), and the corner of the mouth droops.'
+        : 'Compare the wiring: bilateral supranuclear supply to the forehead vs strictly contralateral supranuclear supply to the mouth.')) + '</div>';
+
+    return html;
+  }
+
+  /* ── 20. Ascites: Shifting Dullness & Fluid Thrill ────────────────────────── */
+
+  function shiftingDullness(o) {
+    var mode = (o && o.mode) || "supine"; // supine | shift | thrill
+    var html = '<svg class="cx-dia" viewBox="0 0 340 220" role="img" aria-label="Shifting dullness and fluid thrill physical diagnosis in ascites">';
+
+    html += '<rect class="cx-dia-skin" x="10" y="10" width="320" height="200" rx="10"/>';
+
+    if (mode === "supine") {
+      html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="170" y="28" text-anchor="middle">Patient SUPINE: Gas floats, fluid sinks</text>';
+      html += '<path d="M40 140 C50 65 290 65 300 140 C280 175 60 175 40 140 Z" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="2"/>';
+      html += '<path class="cx-dia-fluid--ascites" d="M40 140 C45 95 90 120 100 140 C105 160 55 165 40 140 Z"/>';
+      html += '<path class="cx-dia-fluid--ascites" d="M300 140 C295 95 250 120 240 140 C235 160 285 165 300 140 Z"/>';
+      html += '<circle class="cx-dia-bowel" cx="150" cy="105" r="16"/>';
+      html += '<circle class="cx-dia-bowel" cx="185" cy="105" r="16"/>';
+      html += '<circle class="cx-dia-bowel" cx="168" cy="130" r="15"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="65" y="130">DULL</text>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="170" y="110" text-anchor="middle">TYMPANITIC (Air)</text>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="275" y="130">DULL</text>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="170" y="188" text-anchor="middle">Percuss from midline outwards until note turns dull. Keep finger there!</text>';
+    } else if (mode === "shift") {
+      html += '<text class="cx-dia-lbl cx-dia-lbl--copd" x="170" y="28" text-anchor="middle">Patient ROLLED into lateral decubitus</text>';
+      html += '<path d="M50 160 C30 90 230 40 280 110 C300 170 110 195 50 160 Z" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="2"/>';
+      html += '<path class="cx-dia-fluid--ascites" d="M50 160 C38 120 120 140 160 160 C180 175 80 195 50 160 Z"/>';
+      html += '<circle class="cx-dia-bowel" cx="215" cy="85" r="16"/>';
+      html += '<circle class="cx-dia-bowel" cx="245" cy="100" r="16"/>';
+      html += '<circle class="cx-dia-bowel" cx="210" cy="115" r="15"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="90" y="165">DULL (Fluid shifted down)</text>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="235" y="70">TURNS TYMPANITIC!</text>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="170" y="195" text-anchor="middle">Wait 30-60s for viscous fluid to settle before re-percussing.</text>';
+    } else if (mode === "thrill") {
+      html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="170" y="28" text-anchor="middle">Fluid Thrill (Fluid Wave): 3-hand technique</text>';
+      html += '<path d="M40 135 C50 70 290 70 300 135 C280 175 60 175 40 135 Z" fill="var(--cx-surface)" stroke="var(--cx-line)" stroke-width="2"/>';
+      html += '<path class="cx-dia-fluid--ascites" d="M40 135 C55 85 285 85 300 135 C275 165 65 165 40 135 Z"/>';
+      html += '<rect class="cx-dia-hand" x="25" y="105" width="22" height="46" rx="4"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--normal" x="22" y="98">Receiving palm</text>';
+      html += '<path d="M305 125 L285 120" stroke="var(--cx-teach)" stroke-width="2.5" marker-end="url(#cxThrillArrow)"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--copd" x="310" y="98">Flicking finger</text>';
+      html += '<rect class="cx-dia-damphand" x="164" y="60" width="12" height="65" rx="3"/>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--bad" x="170" y="52" text-anchor="middle">Assistant ulnar hand (Damps fat wave)</text>';
+      html += '<defs><marker id="cxThrillArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="cx-dia-rad-arrowhead"/></marker></defs>';
+      html += '<text class="cx-dia-lbl cx-dia-lbl--mute" x="170" y="190" text-anchor="middle">Without the midline hand, an impulse easily travels through subcutaneous fat alone!</text>';
+    }
+
+    html += '</svg>';
+
+    html += '<div class="cx-dia-toggle">' +
+      btn("cx-dia-mode", "supine", "1. Supine Percussion", mode === "supine") +
+      btn("cx-dia-mode", "shift", "2. Roll (Shifted)", mode === "shift") +
+      btn("cx-dia-mode", "thrill", "3. Fluid Thrill", mode === "thrill") +
+      '</div>';
+
+    html += '<div class="cx-dia-note">' + (mode === "supine"
+      ? '<b>Supine:</b> Intraperitoneal fluid is governed by gravity. Free fluid fills the paracolic gutters in both flanks, giving a <b>dull note</b>, while gas-filled loops of bowel float to the surface around the umbilicus, giving a <b>tympanitic note</b>.'
+      : (mode === "shift"
+        ? '<b>Shifting Dullness:</b> Roll the patient towards you. Gravity moves the fluid column to the bottom (now duller), while buoyant bowel floats to the top flank—which switches from <b>dull to resonant</b>! Wait 30 seconds before percussing.'
+        : '<b>Fluid Thrill:</b> Detects tense, massive ascites (> 1.5 - 2 Litres). The assistant\'s ulnar border firmly dampens fat ripples across the abdominal wall. An impulse reaching the opposite palm confirms a true fluid wave.')) + '</div>';
+
+    return html;
+  }
+
+  /* ── 21. Spinal Cord Sensory Levels & Dermatome Landmarks ────────────────── */
+
+  var DERMATOMES = [
+    { id: "c2", cx: 170, cy: 30, label: "C2", desc: "Occipital protuberance", motor: "Neck flexion / extension", reflex: "None", clin: "Upper cervical landmark." },
+    { id: "c4", cx: 170, cy: 62, label: "C4", desc: "Acromioclavicular joint & clavicle", motor: "Diaphragm (C3, C4, C5 keep diaphragm alive)", reflex: "None", clin: "Lesions at or above C4 cause respiratory arrest." },
+    { id: "c6", cx: 95, cy: 110, label: "C6", desc: "Thumb & lateral forearm", motor: "Wrist extensors (extensor carpi radialis)", reflex: "Biceps & Supinator (C5, C6)", clin: "C6 radiculopathy: weak wrist extension, sensory loss in thumb." },
+    { id: "c7", cx: 80, cy: 135, label: "C7", desc: "Middle finger", motor: "Elbow extension (Triceps), wrist flexors", reflex: "Triceps reflex (C7, C8)", clin: "Commonest cervical disc herniation." },
+    { id: "c8", cx: 90, cy: 160, label: "C8", desc: "Little finger & hypothenar border", motor: "Finger flexors (flexor digitorum profundus)", reflex: "Finger jerk", clin: "Klumpke palsy; Horner syndrome if T1 white rami involved." },
+    { id: "t4", cx: 170, cy: 98, label: "T4", desc: "Nipple line / 4th intercostal space", motor: "Intercostal muscles", reflex: "Superficial abdominal (upper: T7-T9)", clin: "Classic thoracic sensory level in transverse myelitis / cord compression." },
+    { id: "t10", cx: 170, cy: 140, label: "T10", desc: "Umbilicus", motor: "Lower abdominal wall", reflex: "Superficial abdominal (lower: T10-T12)", clin: "Beevor sign: umbilicus pulled UPWARD on neck flexion if lower cord (T10-T12) weak." },
+    { id: "l1", cx: 170, cy: 170, label: "L1", desc: "Inguinal ligament crease", motor: "Hip flexion (L1, L2 psoas)", reflex: "Cremasteric reflex (L1, L2)", clin: "Marks the junction between thoracic cord and lumbar enlargement." },
+    { id: "l4", cx: 148, cy: 215, label: "L4", desc: "Medial malleolus & knee", motor: "Ankle dorsiflexion (tibialis anterior), knee extension (quadriceps)", reflex: "Knee jerk (L3, L4)", clin: "Foot drop with loss of knee jerk." },
+    { id: "l5", cx: 192, cy: 215, label: "L5", desc: "Dorsum of foot & great toe", motor: "Great toe extension (extensor hallucis longus)", reflex: "None (internal hamstring)", clin: "L5 radiculopathy: foot drop with intact knee and ankle reflexes." },
+    { id: "s1", cx: 215, cy: 232, label: "S1", desc: "Lateral malleolus & sole of foot", motor: "Ankle plantarflexion (gastrocnemius / soleus)", reflex: "Ankle jerk (S1, S2)", clin: "Sciatica; lost ankle jerk with sole numbness." }
+  ];
+
+  function sensoryLevel(o) {
+    var sel = (o && o.selected) || "t10";
+    var html = '<svg class="cx-dia" viewBox="0 0 340 260" role="img" aria-label="Spinal cord sensory levels and landmark dermatomes">';
+
+    html += '<rect class="cx-dia-skin" x="10" y="8" width="320" height="244" rx="10"/>';
+    html += '<path class="cx-dia-body" d="M170 14 C158 14 150 24 150 36 C150 48 135 55 125 58 L100 85 L76 135 L68 175 L80 178 L92 145 L115 105 L125 105 L125 175 L145 178 L140 245 L160 245 L165 185 L175 185 L180 245 L200 245 L195 178 L215 175 L215 105 L225 105 L248 145 L260 178 L272 175 L264 135 L240 85 L215 58 C205 55 190 48 190 36 C190 24 182 14 170 14 Z"/>';
+
+    html += '<line class="cx-dia-div" x1="120" y1="98" x2="220" y2="98"/>';
+    html += '<line class="cx-dia-div" x1="125" y1="140" x2="215" y2="140"/>';
+    html += '<line class="cx-dia-div" x1="130" y1="170" x2="210" y2="170"/>';
+
+    for (var i = 0; i < DERMATOMES.length; i++) {
+      var d = DERMATOMES[i], on = sel === d.id;
+      html += '<g class="cx-dia-zone cx-dia-zone--derm' + (on ? " cx-dia-zone--on" : "") + '" data-act="cx-dia-zone" data-id="' + d.id + '" role="button" tabindex="0" aria-label="' + esc(d.label) + '">' +
+        '<circle cx="' + d.cx + '" cy="' + d.cy + '" r="12"/>' +
+        '<text x="' + d.cx + '" y="' + (d.cy + 3.5) + '" text-anchor="middle" font-size="9" font-weight="700">' + d.label + '</text></g>';
+    }
+
+    html += '</svg>';
+
+    var chosen = null;
+    for (i = 0; i < DERMATOMES.length; i++) if (DERMATOMES[i].id === sel) chosen = DERMATOMES[i];
+    html += '<div class="cx-dia-note">' + (chosen
+      ? '<b>Level ' + esc(chosen.label) + ' (' + esc(chosen.desc) + '):</b> ' +
+        '<br><b>Motor Root:</b> ' + esc(chosen.motor) + '.' +
+        '<br><b>Reflex Arc:</b> ' + esc(chosen.reflex) + '.' +
+        '<br><b>Exam Pearl:</b> <span class="cx-dia-lbl--copd">' + esc(chosen.clin) + '</span>'
+      : 'Tap any landmark circle (C6, T4, T10, L4, etc.) to view cord segment, motor testing, reflex arcs, and classic clinical signs.') + '</div>';
+
+    return html;
+  }
+
   /* ── registry ────────────────────────────────────────────────────────────── */
-
-
 
   var DIAGRAMS = {
     "diagram.flowvolume":   { title: "Flow-volume loop", render: flowVolume, interactive: true },
@@ -478,7 +867,13 @@
     "diagram.abdregions":    { title: "Nine regions of the abdomen", render: abdRegions, interactive: true },
     "diagram.liverpalp":     { title: "Liver palpation, preferred method", render: liverPalp },
     "diagram.spleenpalp":    { title: "Splenic enlargement, direction of spread", render: spleenPalp },
-    "diagram.stemi":         { title: "STEMI evolution on serial ECGs", render: stemiEvolution }
+    "diagram.stemi":         { title: "STEMI evolution on serial ECGs", render: stemiEvolution },
+    "diagram.jvpwave":       { title: "JVP waveform and mechanical events", render: jvpWave, interactive: true },
+    "diagram.auscultareas":  { title: "Cardiac auscultation areas and murmur radiation", render: auscultAreas, interactive: true, audio: true },
+    "diagram.cngaze":        { title: "Cranial nerves III, IV, VI cardinal gazes", render: cnGaze, interactive: true },
+    "diagram.facialpalsy":   { title: "UMN vs LMN facial palsy (forehead sparing)", render: facialPalsy, interactive: true },
+    "diagram.shiftingdullness": { title: "Ascites: shifting dullness and fluid thrill", render: shiftingDullness, interactive: true },
+    "diagram.sensorylevel":  { title: "Spinal cord sensory levels & dermatomes", render: sensoryLevel, interactive: true }
   };
 
   function has(id) { return Object.prototype.hasOwnProperty.call(DIAGRAMS, id); }
@@ -489,10 +884,23 @@
   function titleOf(id) { return has(id) ? DIAGRAMS[id].title : ""; }
   function soundFor(zoneId) {
     for (var i = 0; i < AUSC.length; i++) if (AUSC[i].id === zoneId) return AUSC[i].sound;
+    for (var j = 0; j < CARDIAC_AREAS.length; j++) if (CARDIAC_AREAS[j].id === zoneId) return CARDIAC_AREAS[j].sound;
     return null;
   }
 
-  var API = { DIAGRAMS: DIAGRAMS, ZONES: ZONES, AUSC: AUSC, has: has, render: render, titleOf: titleOf, soundFor: soundFor };
+  var API = {
+    DIAGRAMS: DIAGRAMS,
+    ZONES: ZONES,
+    AUSC: AUSC,
+    CARDIAC_AREAS: CARDIAC_AREAS,
+    JVP_POINTS: JVP_POINTS,
+    GAZE_POSITIONS: GAZE_POSITIONS,
+    DERMATOMES: DERMATOMES,
+    has: has,
+    render: render,
+    titleOf: titleOf,
+    soundFor: soundFor
+  };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_CLINIX_DIAGRAMS = API;
 })();
