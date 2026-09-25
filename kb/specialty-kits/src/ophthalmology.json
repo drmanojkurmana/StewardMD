@@ -1,0 +1,165 @@
+{
+ "id": "ophthalmology",
+ "label": "Ophthalmology",
+ "short": "Eye",
+ "icon": "visibility",
+ "group": "senses",
+ "subject": "ophthalmology-ent",
+ "workspace": "ophthalmology",
+ "scribe": "ophthalmology",
+ "tools": ["visual-acuity"],
+ "sections": [
+  {
+   "id": "ocular-history",
+   "title": "Ocular history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "eye_affected", "label": "Eye affected", "type": "select", "opts": ["Right", "Left", "Both"] },
+    { "id": "onset", "label": "Onset", "type": "select", "opts": ["Sudden", "Over hours to days", "Gradual", "Recurrent"] },
+    { "id": "vision_change", "label": "Vision", "type": "select", "opts": ["Unchanged", "Blurred", "Sudden loss", "Gradual loss", "Transient loss", "Distortion", "Haloes around lights"] },
+    { "id": "eye_pain", "label": "Pain or discomfort", "type": "select", "opts": ["None", "Itching", "Gritty or foreign body feeling", "Aching", "Severe, with headache or vomiting", "Pain on eye movement"] },
+    { "id": "redness", "label": "Redness", "type": "check" },
+    { "id": "discharge", "label": "Discharge", "type": "select", "opts": ["None", "Watery", "Mucoid or stringy", "Mucopurulent", "Copious pus"] },
+    { "id": "photophobia", "label": "Photophobia", "type": "check" },
+    { "id": "diplopia", "label": "Double vision", "type": "select", "opts": ["None", "Binocular (goes when one eye is closed)", "Monocular (persists with one eye closed)"] },
+    { "id": "flashes_floaters", "label": "Flashes or floaters", "type": "select", "opts": ["None", "Floaters", "Flashes", "Flashes and floaters", "Shadow or curtain over vision"] },
+    { "id": "contact_lens", "label": "Contact lenses", "type": "select", "opts": ["Not a wearer", "Soft lenses", "Rigid lenses", "Sleeps or swims in lenses"] },
+    { "id": "eye_injury", "label": "Injury", "type": "select", "opts": ["None", "Blunt", "Sharp or penetrating", "Chemical", "Foreign body", "Vegetative (plant or crop)", "Welding arc (UV)"] },
+    { "id": "dm_htn", "label": "Diabetes or hypertension", "type": "select", "opts": ["Neither", "Diabetes", "Hypertension", "Both"] }
+   ]
+  },
+  {
+   "id": "lids-adnexa",
+   "title": "Lids, adnexa and orbit",
+   "target": "head_neck_exam",
+   "fields": [
+    { "id": "r_lids", "label": "Right lids", "type": "select", "opts": ["Normal", "Ptosis", "Lid retraction", "Entropion or trichiasis", "Ectropion", "Incomplete closure", "Blepharitis", "Stye or chalazion", "Lid swelling with redness", "Lid mass"] },
+    { "id": "l_lids", "label": "Left lids", "type": "select", "opts": ["Normal", "Ptosis", "Lid retraction", "Entropion or trichiasis", "Ectropion", "Incomplete closure", "Blepharitis", "Stye or chalazion", "Lid swelling with redness", "Lid mass"] },
+    { "id": "r_lacrimal", "label": "Right lacrimal sac", "type": "select", "opts": ["Normal", "Regurgitation on pressure", "Mucocele", "Acute dacryocystitis", "Watering, sac normal"] },
+    { "id": "l_lacrimal", "label": "Left lacrimal sac", "type": "select", "opts": ["Normal", "Regurgitation on pressure", "Mucocele", "Acute dacryocystitis", "Watering, sac normal"] },
+    { "id": "globe_position", "label": "Globe position", "type": "select", "opts": ["Normal", "Proptosis, right", "Proptosis, left", "Proptosis, both", "Enophthalmos", "Displaced globe"] },
+    { "id": "preauricular_node", "label": "Tender preauricular node", "type": "check" },
+    { "id": "adnexa_details", "label": "Lid and adnexa details", "type": "text", "hint": "e.g. MRD1 2 mm right, lid lesion site and size, lagophthalmos gap" }
+   ]
+  },
+  {
+   "id": "ocular-motility",
+   "title": "Ocular motility and alignment",
+   "target": "local_examination",
+   "fields": [
+    { "id": "alignment", "label": "Alignment (Hirschberg or cover test)", "type": "select", "opts": ["Straight", "Esotropia", "Exotropia", "Hypertropia", "Phoria only on cover test"] },
+    { "id": "eye_movements", "label": "Eye movements", "type": "select", "opts": ["Full in all gazes", "Restricted, right eye", "Restricted, left eye", "Restricted, both eyes"] },
+    { "id": "motility_pattern", "label": "Pattern of restriction", "type": "select", "opts": ["Third nerve palsy, pupil spared", "Third nerve palsy, pupil involved", "Fourth nerve palsy", "Sixth nerve palsy", "Restrictive (thyroid, orbital or trauma)", "Internuclear ophthalmoplegia", "Variable and fatigable (myasthenic)"] },
+    { "id": "nystagmus", "label": "Nystagmus", "type": "select", "opts": ["None", "Horizontal", "Vertical", "Torsional", "Pendular"] },
+    { "id": "convergence", "label": "Convergence", "type": "select", "opts": ["Normal", "Reduced"] },
+    { "id": "motility_details", "label": "Motility details", "type": "text", "hint": "e.g. prism cover test, direction of maximum diplopia" }
+   ]
+  },
+  {
+   "id": "anterior-segment",
+   "title": "Anterior segment",
+   "target": "local_examination",
+   "fields": [
+    { "id": "as_method", "label": "Examined with", "type": "select", "opts": ["Slit lamp", "Torch", "Torch and loupe"] },
+    { "id": "r_conjunctiva", "label": "Right conjunctiva", "type": "select", "opts": ["Normal", "Diffuse congestion", "Ciliary flush", "Chemosis", "Follicles or papillae", "Subconjunctival haemorrhage", "Pterygium", "Foreign body or laceration"] },
+    { "id": "r_cornea", "label": "Right cornea (with fluorescein)", "type": "select", "opts": ["Clear, no staining", "Punctate staining", "Epithelial defect", "Dendritic ulcer", "Infiltrate or ulcer", "Oedema or haze", "Foreign body", "Scar or opacity", "Seidel positive (leak)"], "hint": "stain with fluorescein in every red eye" },
+    { "id": "r_anterior_chamber", "label": "Right anterior chamber", "type": "select", "opts": ["Normal depth, quiet", "Shallow (van Herick 2 or less)", "Cells or flare", "Hypopyon", "Hyphaema", "Flat"] },
+    { "id": "r_pupil", "label": "Right pupil", "type": "select", "opts": ["Round, reacting", "Sluggish", "RAPD", "Fixed, mid-dilated", "Irregular (synechiae)", "Dilated, not reacting", "Not assessable"], "hint": "swinging light test for RAPD" },
+    { "id": "r_lens", "label": "Right lens", "type": "select", "opts": ["Clear", "Immature cataract", "Mature cataract", "Hypermature cataract", "Pseudophakia (IOL)", "Posterior capsule opacification", "Aphakia", "Subluxated or dislocated"] },
+    { "id": "l_conjunctiva", "label": "Left conjunctiva", "type": "select", "opts": ["Normal", "Diffuse congestion", "Ciliary flush", "Chemosis", "Follicles or papillae", "Subconjunctival haemorrhage", "Pterygium", "Foreign body or laceration"] },
+    { "id": "l_cornea", "label": "Left cornea (with fluorescein)", "type": "select", "opts": ["Clear, no staining", "Punctate staining", "Epithelial defect", "Dendritic ulcer", "Infiltrate or ulcer", "Oedema or haze", "Foreign body", "Scar or opacity", "Seidel positive (leak)"], "hint": "stain with fluorescein in every red eye" },
+    { "id": "l_anterior_chamber", "label": "Left anterior chamber", "type": "select", "opts": ["Normal depth, quiet", "Shallow (van Herick 2 or less)", "Cells or flare", "Hypopyon", "Hyphaema", "Flat"] },
+    { "id": "l_pupil", "label": "Left pupil", "type": "select", "opts": ["Round, reacting", "Sluggish", "RAPD", "Fixed, mid-dilated", "Irregular (synechiae)", "Dilated, not reacting", "Not assessable"] },
+    { "id": "l_lens", "label": "Left lens", "type": "select", "opts": ["Clear", "Immature cataract", "Mature cataract", "Hypermature cataract", "Pseudophakia (IOL)", "Posterior capsule opacification", "Aphakia", "Subluxated or dislocated"] }
+   ]
+  },
+  {
+   "id": "fundus",
+   "title": "Fundus",
+   "target": "local_examination",
+   "fields": [
+    { "id": "fundus_method", "label": "Examined with", "type": "select", "opts": ["Direct ophthalmoscope, undilated", "Direct ophthalmoscope, dilated", "Slit lamp with 90D lens", "Indirect ophthalmoscope", "No view (media opacity)"] },
+    { "id": "r_disc", "label": "Right disc", "type": "select", "opts": ["Healthy", "Swollen", "Pale", "Glaucomatous cupping", "New vessels on disc", "Not seen"] },
+    { "id": "r_cdr", "label": "Right cup-disc ratio (vertical)", "type": "select", "opts": ["0.3 or less", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9 or more", "Not assessable"] },
+    { "id": "r_macula", "label": "Right macula", "type": "select", "opts": ["Normal foveal reflex", "Centre-involving oedema or exudates", "Oedema or exudates, not centre-involving", "Drusen or pigment changes", "Haemorrhage or scar", "Macular hole", "Not seen"] },
+    { "id": "r_vessels", "label": "Right vessels", "type": "select", "opts": ["Normal", "Arteriolar narrowing or AV nipping", "Flame haemorrhages or cotton wool spots", "Vein occlusion", "Artery occlusion (cherry-red spot)", "Emboli", "Not seen"] },
+    { "id": "r_dr_grade", "label": "Right diabetic retinopathy grade", "type": "select", "opts": ["No apparent retinopathy", "Mild NPDR", "Moderate NPDR", "Severe NPDR", "Proliferative DR", "Ungradable"] },
+    { "id": "l_disc", "label": "Left disc", "type": "select", "opts": ["Healthy", "Swollen", "Pale", "Glaucomatous cupping", "New vessels on disc", "Not seen"] },
+    { "id": "l_cdr", "label": "Left cup-disc ratio (vertical)", "type": "select", "opts": ["0.3 or less", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9 or more", "Not assessable"] },
+    { "id": "l_macula", "label": "Left macula", "type": "select", "opts": ["Normal foveal reflex", "Centre-involving oedema or exudates", "Oedema or exudates, not centre-involving", "Drusen or pigment changes", "Haemorrhage or scar", "Macular hole", "Not seen"] },
+    { "id": "l_vessels", "label": "Left vessels", "type": "select", "opts": ["Normal", "Arteriolar narrowing or AV nipping", "Flame haemorrhages or cotton wool spots", "Vein occlusion", "Artery occlusion (cherry-red spot)", "Emboli", "Not seen"] },
+    { "id": "l_dr_grade", "label": "Left diabetic retinopathy grade", "type": "select", "opts": ["No apparent retinopathy", "Mild NPDR", "Moderate NPDR", "Severe NPDR", "Proliferative DR", "Ungradable"] },
+    { "id": "retinal_periphery", "label": "Vitreous and retinal periphery", "type": "text", "hint": "e.g. PVD, vitreous haemorrhage, retinal tear or detachment; state the eye" }
+   ]
+  },
+  {
+   "id": "eye-red-flags",
+   "title": "Red flags",
+   "target": "History_present_illness",
+   "alert": "Sight-threatening or life-threatening: arrange same-day ophthalmology or emergency assessment. Irrigate a chemical injury with water or saline before anything else.",
+   "fields": [
+    { "id": "rf_sudden_vision_loss", "label": "Sudden loss of vision, even if it has recovered", "type": "check" },
+    { "id": "rf_painful_red_eye", "label": "Painful red eye with reduced vision", "type": "check" },
+    { "id": "rf_chemical_injury", "label": "Chemical injury (acid, alkali, lime or cement)", "type": "check" },
+    { "id": "rf_penetrating_injury", "label": "Penetrating injury or suspected intraocular foreign body", "type": "check" },
+    { "id": "rf_new_rapd", "label": "New relative afferent pupillary defect (RAPD)", "type": "check" },
+    { "id": "rf_retinal_detachment", "label": "Flashes with new floaters, or a shadow or curtain over vision", "type": "check" },
+    { "id": "rf_orbital_cellulitis", "label": "Proptosis or painful restricted eye movements with lid swelling or fever", "type": "check" },
+    { "id": "rf_giant_cell_arteritis", "label": "Age 50 or over with new headache, jaw claudication or scalp tenderness", "type": "check" },
+    { "id": "rf_third_nerve_palsy", "label": "New ptosis or double vision with a dilated pupil", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Blood sugar (fasting and postprandial)", "query": "blood sugar" },
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "Lipid profile", "query": "lipid profile" },
+  { "label": "ESR", "query": "ESR" },
+  { "label": "CRP", "query": "CRP" },
+  { "label": "Thyroid function (TSH)", "query": "TSH" },
+  { "label": "Corneal scraping: Gram stain and KOH mount", "query": "KOH mount" },
+  { "label": "OCT macula and optic disc", "query": "OCT" },
+  { "label": "Visual fields (perimetry)", "query": "perimetry" },
+  { "label": "Fundus fluorescein angiography", "query": "FFA" },
+  { "label": "B-scan ultrasound of the eye", "query": "B scan" },
+  { "label": "A-scan biometry (IOL power)", "query": "biometry" },
+  { "label": "CT orbit", "query": "CT orbit" },
+  { "label": "MRI brain and orbits", "query": "MRI orbit" }
+ ],
+ "protocols": ["acute-angle-closure-glaucoma", "chemical-eye-injury", "acute-conjunctivitis", "giant-cell-arteritis", "herpes-zoster", "transient-ischaemic-attack", "hyperthyroidism-graves", "hypertensive-emergency", "methanol-poisoning", "sjs-ten", "bells-palsy"],
+ "calculators": ["logmar", "spherical_equivalent", "srk2_iol"],
+ "advice": [
+  {
+   "id": "eye-danger-signs",
+   "title": "When to come back at once",
+   "target": "follow_up_advice",
+   "text": "Come back the same day if your sight gets worse, the eye becomes more painful or red, light starts to hurt your eyes, or you notice new floaters, flashes of light or a shadow spreading across your vision. Any sudden loss of sight needs to be seen the same day, even if it recovers."
+  },
+  {
+   "id": "red-eye-hygiene",
+   "title": "Red eye: stopping the spread",
+   "target": "diet_lifestyle_advice",
+   "text": "Wash your hands often, use your own towel and pillow, and avoid close contact with others for 10 to 14 days while the eye is red and watery. Do not put steroid drops, leftover drops or home remedies in the eye unless your eye doctor has advised them."
+  },
+  {
+   "id": "diabetes-eye-check",
+   "title": "Diabetes and your eyes",
+   "target": "follow_up_advice",
+   "text": "If you have diabetes, have a dilated eye examination at least once a year, even when you see well, because early damage gives no symptoms and early treatment works best. Keeping blood sugar and blood pressure under control lowers the risk of losing sight."
+  },
+  {
+   "id": "eye-protection",
+   "title": "Protecting your eyes",
+   "target": "diet_lifestyle_advice",
+   "text": "Wear protective glasses for farm work, grinding, welding and sport, and keep children away from firecrackers. Stopping smoking lowers the risk of cataract and macular disease. Have eye problems checked by a trained eye doctor rather than using remedies from untrained providers."
+  }
+ ],
+ "sources": [
+  { "org": "American Academy of Ophthalmology", "title": "Comprehensive Adult Medical Eye Evaluation Preferred Practice Pattern", "year": 2025, "url": "https://www.aao.org/education/preferred-practice-pattern/comprehensive-adult-medical-eye-evaluation-ppp" },
+  { "org": "American Academy of Ophthalmology", "title": "Conjunctivitis Preferred Practice Pattern", "year": 2023, "url": "https://www.aao.org/education/preferred-practice-pattern/conjunctivitis-ppp-2023" },
+  { "org": "American Academy of Ophthalmology", "title": "Diabetic Retinopathy Preferred Practice Pattern", "year": 2024, "url": "https://www.aao.org/education/preferred-practice-pattern/diabetic-retinopathy-ppp" },
+  { "org": "American Academy of Ophthalmology", "title": "Posterior Vitreous Detachment, Retinal Breaks, and Lattice Degeneration Preferred Practice Pattern", "year": 2024, "url": "https://www.aao.org/education/preferred-practice-pattern/posterior-vitreous-detachment-retinal-breaks-latti" },
+  { "org": "WHO", "title": "World report on vision (ICD-11 vision impairment categories, Box 1.2)", "year": 2019, "url": "https://www.who.int/publications/i/item/9789241516570" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "cancer-screening",
+ "label": "Cancer Screening",
+ "short": "Screening",
+ "icon": "health_and_safety",
+ "group": "community",
+ "subject": "haematology-oncology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "risk-factors",
+   "title": "Cancer risk factors",
+   "target": "History_past_illness",
+   "fields": [
+    { "id": "cs_tobacco", "label": "Tobacco use", "type": "select", "opts": ["Never", "Smoking", "Smokeless (gutka, khaini, betel quid with tobacco)", "Smoking and smokeless", "Quit"] },
+    { "id": "cs_areca", "label": "Areca nut (supari, paan masala)", "type": "select", "opts": ["Never", "Current", "Past"] },
+    { "id": "cs_alcohol", "label": "Alcohol", "type": "select", "opts": ["Never", "Occasional", "Regular", "Past"] },
+    { "id": "cs_habit_years", "label": "Duration of habit", "type": "number", "unit": "years" },
+    { "id": "cs_sharp_tooth", "label": "Sharp tooth or ill-fitting denture", "type": "check" },
+    { "id": "cs_family_history", "label": "Family history of breast, ovarian or colon cancer", "type": "check" },
+    { "id": "cs_menstrual", "label": "Menarche before 12 or menopause after 55 years", "type": "check" },
+    { "id": "cs_hrt", "label": "Menopausal hormone therapy for 5 years or more", "type": "check" },
+    { "id": "cs_hiv", "label": "HIV or other immunosuppression", "type": "check" },
+    { "id": "cs_cervix_risk", "label": "Many births, early first intercourse or multiple partners", "type": "check" },
+    { "id": "cs_last_screen", "label": "Last screening (test, year, result)", "type": "text", "hint": "e.g. VIA negative 2022, CBE normal 2022" }
+   ]
+  },
+  {
+   "id": "oral-visual-examination",
+   "title": "Oral visual examination",
+   "target": "teeth_exam",
+   "fields": [
+    { "id": "ove_result", "label": "Result", "type": "select", "opts": ["Normal", "Potentially malignant lesion", "Suspected oral cancer", "Clinically diagnosed oral cancer"] },
+    { "id": "ove_lesion", "label": "Lesion", "type": "select", "opts": ["None", "Leukoplakia (white patch)", "Erythroplakia (red patch)", "Oral submucous fibrosis", "Lichen planus", "Palatal change (smoker's palate)", "Non-healing ulcer", "Growth or mass"] },
+    { "id": "ove_site", "label": "Site", "type": "select", "opts": ["Buccal mucosa", "Tongue", "Floor of mouth", "Gingiva or alveolus", "Hard palate", "Soft palate", "Lip", "Retromolar area", "Multiple sites"] },
+    { "id": "ove_side", "label": "Side", "type": "select", "opts": ["Right", "Left", "Both sides", "Midline"] },
+    { "id": "ove_size", "label": "Size", "type": "number", "unit": "cm" },
+    { "id": "ove_mouth_opening", "label": "Mouth opening", "type": "select", "opts": ["Normal", "Reduced", "Severely reduced"] },
+    { "id": "ove_neck_nodes", "label": "Neck lymph nodes", "type": "select", "opts": ["Not palpable", "Palpable, soft and mobile", "Palpable, hard or fixed"] },
+    { "id": "ove_details", "label": "Details", "type": "text", "hint": "e.g. 2 x 1 cm homogeneous white patch, left buccal mucosa, does not rub off" }
+   ]
+  },
+  {
+   "id": "clinical-breast-examination",
+   "title": "Clinical breast examination",
+   "target": "breast_exam",
+   "fields": [
+    { "id": "cbe_result", "label": "Result", "type": "select", "opts": ["Normal", "Abnormal"] },
+    { "id": "cbe_side", "label": "Side", "type": "select", "opts": ["Right", "Left", "Both"] },
+    { "id": "cbe_quadrant", "label": "Location", "type": "select", "opts": ["Upper outer", "Upper inner", "Lower outer", "Lower inner", "Central (behind the areola)", "Axillary tail"] },
+    { "id": "cbe_lump_size", "label": "Lump size", "type": "number", "unit": "cm" },
+    { "id": "cbe_consistency", "label": "Consistency", "type": "select", "opts": ["Soft", "Firm", "Hard"] },
+    { "id": "cbe_mobility", "label": "Mobility", "type": "select", "opts": ["Mobile", "Fixed to skin", "Fixed to chest wall"] },
+    { "id": "cbe_skin", "label": "Skin", "type": "select", "opts": ["Normal", "Dimpling or puckering", "Thickening or oedema (peau d'orange)", "Redness", "Ulcer", "Satellite nodules"] },
+    { "id": "cbe_nipple", "label": "Nipple and areola", "type": "select", "opts": ["Normal", "Retraction", "Blood-stained discharge", "Other discharge", "Ulcer or eczema"] },
+    { "id": "cbe_nodes", "label": "Axillary or supraclavicular nodes", "type": "select", "opts": ["Not palpable", "Palpable, mobile", "Palpable, matted or fixed"] },
+    { "id": "cbe_asymmetry", "label": "Asymmetry in breast size or shape", "type": "select", "opts": ["None", "Present, long-standing", "Present, recent"] }
+   ]
+  },
+  {
+   "id": "cervical-screening-via",
+   "title": "Cervical screening (VIA)",
+   "target": "external_genitilia_perineum",
+   "fields": [
+    { "id": "via_result", "label": "VIA result", "type": "select", "opts": ["VIA negative", "VIA positive", "Suspicious of invasive cancer"] },
+    { "id": "via_scj", "label": "Squamocolumnar junction", "type": "select", "opts": ["Fully visible", "Partly visible", "Not visible"] },
+    { "id": "via_speculum", "label": "Cervix on speculum", "type": "select", "opts": ["Healthy", "Cervicitis or discharge", "Ectropion", "Polyp", "Growth", "Irregular surface", "Bleeds on touch"] },
+    { "id": "via_extent", "label": "Acetowhite lesion extent", "type": "select", "opts": ["No lesion", "1 quadrant", "2 quadrants", "More than 2 quadrants", "Extends into the canal or vagina"] },
+    { "id": "via_ablation", "label": "Eligibility for ablation (cryotherapy or thermal)", "type": "select", "opts": ["Not applicable", "Eligible", "Not eligible, needs colposcopy and biopsy"] },
+    { "id": "via_pap", "label": "Pap smear or HPV sample taken", "type": "check" },
+    { "id": "via_details", "label": "Details", "type": "text", "hint": "e.g. dense acetowhite area at 3 to 6 o'clock touching the SCJ" }
+   ]
+  },
+  {
+   "id": "referral-pathway",
+   "title": "Referral and follow-up",
+   "target": "refered_management_plan",
+   "fields": [
+    { "id": "ref_to", "label": "Referred to", "type": "select", "opts": ["Not referred, rescreen in 5 years", "Dentist, surgeon or ENT specialist at CHC or DH (oral biopsy)", "Surgeon at CHC or DH (breast ultrasound and biopsy)", "Gynaecologist or trained medical officer (colposcopy, ablation)", "Medical college or regional cancer centre", "Tobacco cessation centre"] },
+    { "id": "ref_urgency", "label": "Urgency", "type": "select", "opts": ["Urgent", "Routine"] },
+    { "id": "ref_facility", "label": "Facility and department", "type": "text" },
+    { "id": "ref_date", "label": "Date referred", "type": "date" },
+    { "id": "ref_reason", "label": "Reason", "type": "text", "hint": "e.g. VIA positive, lesion more than 2 quadrants" },
+    { "id": "ref_counselled", "label": "Result explained and referral counselled", "type": "check" },
+    { "id": "ref_tobacco_advice", "label": "Tobacco and areca nut cessation advised", "type": "check" },
+    { "id": "ref_follow_up", "label": "Follow-up or rescreen date", "type": "date" }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Screen positive or suspicious findings",
+   "target": "sys_examination",
+   "alert": "Screen positive or suspicious finding: refer for confirmation (oral lesion to a dentist, surgeon or ENT specialist for biopsy; breast lump to a surgeon for ultrasound and biopsy; VIA positive to a gynaecologist for colposcopy or ablation) and follow up that the patient attends.",
+   "fields": [
+    { "id": "rf_oral_lesion", "label": "Oral ulcer, white or red patch, or growth not healed in 2 weeks", "type": "check" },
+    { "id": "rf_trismus", "label": "Restricted mouth opening or tongue movement", "type": "check" },
+    { "id": "rf_neck_node", "label": "Hard or fixed neck lymph node", "type": "check" },
+    { "id": "rf_breast_lump", "label": "Breast lump", "type": "check" },
+    { "id": "rf_nipple", "label": "Blood-stained nipple discharge or new nipple retraction", "type": "check" },
+    { "id": "rf_breast_skin", "label": "Breast skin dimpling, thickening, ulcer or satellite nodules", "type": "check" },
+    { "id": "rf_axillary", "label": "Axillary or supraclavicular lymph node", "type": "check" },
+    { "id": "rf_via_positive", "label": "VIA positive", "type": "check" },
+    { "id": "rf_cervix", "label": "Cervical growth, irregular surface or bleeding on touch", "type": "check" },
+    { "id": "rf_bleeding", "label": "Bleeding after intercourse, between periods or after menopause", "type": "check" },
+    { "id": "rf_discharge", "label": "Foul-smelling vaginal discharge", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Biopsy for histopathology", "query": "biopsy" },
+  { "label": "FNAC", "query": "FNAC" },
+  { "label": "Ultrasound breast", "query": "USG breast" },
+  { "label": "Mammography", "query": "mammography" },
+  { "label": "Colposcopy", "query": "colposcopy" },
+  { "label": "Pap smear", "query": "Pap smear" },
+  { "label": "HPV DNA test", "query": "HPV DNA" },
+  { "label": "Orthopantomogram (OPG)", "query": "OPG" },
+  { "label": "CT face and neck", "query": "CT neck" },
+  { "label": "Ultrasound neck", "query": "USG neck" },
+  { "label": "Chest X-ray", "query": "X-ray chest" },
+  { "label": "CBC", "query": "CBC" },
+  { "label": "Liver function tests", "query": "LFT" },
+  { "label": "HIV", "query": "HIV" }
+ ],
+ "orderSets": [
+  { "id": "breast-cancer-work-up", "label": "Suspected breast cancer work-up", "tests": ["USG breast", "mammography", "biopsy", "FNAC", "CBC", "LFT", "X-ray chest"] },
+  { "id": "oral-cancer-work-up", "label": "Suspected oral cancer work-up", "tests": ["biopsy", "OPG", "CT neck", "USG neck", "X-ray chest", "CBC", "LFT"] }
+ ],
+ "protocols": ["heavy-menstrual-bleeding", "menopause", "sexually-transmitted-infections", "hiv-antiretroviral-therapy"],
+ "calculators": ["pack_years", "smoking_index", "fagerstrom", "auditc", "alcohol_units", "bmi", "ecog", "karnofsky", "cbac"],
+ "advice": [
+  {
+   "id": "mouth-and-tobacco",
+   "title": "Tobacco, areca nut and your mouth",
+   "target": "diet_lifestyle_advice",
+   "text": "Almost all mouth cancers are linked to tobacco, and areca nut (supari, paan masala) also raises the risk. Stop both completely; ask us about the nearest tobacco cessation centre. See a doctor if a mouth ulcer, white or red patch or lump does not heal in 2 weeks, or if it becomes hard to open your mouth."
+  },
+  {
+   "id": "breast-awareness",
+   "title": "Know your breasts",
+   "target": "follow_up_advice",
+   "text": "See a doctor without delay if you notice a lump in the breast or armpit, a change in the shape or size of a breast, dimpling or thickening of the skin, a nipple that pulls in, or blood-stained discharge from the nipple."
+  },
+  {
+   "id": "cervical-screening",
+   "title": "Cervical cancer screening",
+   "target": "follow_up_advice",
+   "text": "Women aged 30 to 65 years should have a cervical screening test once every 5 years. See a doctor early for bleeding after intercourse, bleeding between periods or after menopause, or a foul-smelling discharge."
+  },
+  {
+   "id": "screen-positive",
+   "title": "If your screening test is positive",
+   "target": "follow_up_advice",
+   "text": "A positive screening test does not mean you have cancer. It means you need a further test at the referral hospital to confirm. Go on the date given and take this record with you; early treatment works best."
+  }
+ ],
+ "sources": [
+  { "org": "MoHFW, Government of India", "title": "Operational framework: management of common cancers", "year": 2016, "url": "https://nhsrcindia.org/sites/default/files/2021-03/Operational%20Framework%20Management%20of%20Common%20Cancers.pdf" },
+  { "org": "MoHFW, Government of India", "title": "National Programme for Prevention and Control of Non-Communicable Diseases (NP-NCD): Training module for programme managers", "year": 2025, "url": "https://nhm.gov.in/New-Update-2025-26/Whats-new/Training-Modules-NCDs.pdf" },
+  { "org": "MoHFW, Government of India (NHSRC)", "title": "Revised Community Based Assessment Checklist (CBAC), 9 October 2020", "year": 2020, "url": "https://nhsrcindia.org/sites/default/files/2021-03/Revised%20Community%20Based%20Assessment%20Checklist%20%28CBAC%29-9th%20Oct%202020.pdf" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

@@ -1,0 +1,166 @@
+{
+ "id": "dermatology",
+ "label": "Dermatology",
+ "short": "Derm",
+ "icon": "dermatology",
+ "group": "senses",
+ "subject": "rheumatology-dermatology",
+ "scribe": "dermatology",
+ "tools": ["pasi"],
+ "sections": [
+  {
+   "id": "lesion-history",
+   "title": "Lesion history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "onset", "label": "Onset", "type": "select", "opts": ["Sudden", "Gradual"] },
+    { "id": "duration", "label": "Duration", "type": "text", "hint": "e.g. 5 days, 3 months, recurring for 2 years" },
+    { "id": "spread", "label": "Spread", "type": "select", "opts": ["Not spreading", "Spreading slowly", "Spreading rapidly", "Generalised"] },
+    { "id": "course", "label": "Course", "type": "select", "opts": ["Continuous", "Relapsing and remitting", "Improving", "Worsening"] },
+    { "id": "itch", "label": "Itch", "type": "select", "opts": ["None", "Mild", "Moderate", "Severe"] },
+    { "id": "itch_night", "label": "Itch worse at night", "type": "check" },
+    { "id": "contacts_itch", "label": "Family members or close contacts also itching", "type": "check" },
+    { "id": "trigger", "label": "Aggravating factor", "type": "select", "opts": ["None identified", "Sunlight", "Heat or sweating", "Soap, cosmetics, metal or plants", "Food", "Medicine", "Stress", "Seasonal", "Occupational exposure"] },
+    { "id": "recent_drugs", "label": "Medicines taken in the last 2 months (name, start date)", "type": "textarea", "hint": "include over-the-counter, Ayurvedic, homoeopathic and other traditional remedies" },
+    { "id": "steroid_cream", "label": "Steroid or mixed cream used (prescribed or over the counter)", "type": "check" },
+    { "id": "atopy", "label": "Personal or family history of eczema, asthma or hay fever", "type": "check" },
+    { "id": "previous_treatment", "label": "Previous treatment and response", "type": "text", "hint": "e.g. antifungal cream for 2 weeks, partial response" }
+   ]
+  },
+  {
+   "id": "morphology",
+   "title": "Morphology",
+   "target": "local_examination",
+   "fields": [
+    { "id": "primary_lesion", "label": "Primary lesion", "type": "select", "opts": ["Macule", "Patch (large macule)", "Papule", "Plaque", "Nodule", "Weal", "Vesicle", "Bulla", "Pustule", "Purpura", "Comedo", "Burrow", "Cyst"] },
+    { "id": "colour", "label": "Colour", "type": "select", "opts": ["Skin-coloured", "Red (erythematous)", "Pink", "Violaceous", "Brown (hyperpigmented)", "Black or blue-black", "Hypopigmented", "Depigmented (white)", "Yellow"] },
+    { "id": "size", "label": "Size of largest lesion", "type": "number", "unit": "cm" },
+    { "id": "lesion_number", "label": "Number of lesions", "type": "select", "opts": ["Single", "Few", "Multiple", "Numerous"] },
+    { "id": "surface", "label": "Surface or secondary change", "type": "select", "opts": ["Smooth", "Scale", "Crust", "Erosion", "Ulcer", "Excoriation", "Lichenification", "Fissure", "Warty (verrucous)", "Umbilicated", "Atrophy", "Scar"] },
+    { "id": "border", "label": "Border", "type": "select", "opts": ["Well defined", "Ill defined", "Raised active edge"] },
+    { "id": "arrangement", "label": "Shape or arrangement", "type": "select", "opts": ["Discrete", "Grouped (herpetiform)", "Annular", "Arciform", "Polycyclic", "Linear", "Serpiginous", "Target (iris)", "Reticulate", "Confluent"] },
+    { "id": "distribution", "label": "Distribution", "type": "select", "opts": ["Localised", "Generalised", "Symmetrical", "Asymmetrical", "Dermatomal", "Flexural", "Extensor", "Photo-exposed", "Acral", "Follicular"] },
+    { "id": "body_sites", "label": "Body sites", "type": "text", "hint": "e.g. scalp, face, trunk, flexures, palms and soles, genitals" },
+    { "id": "bsa", "label": "Body surface area involved", "type": "number", "unit": "%", "hint": "the patient's palm and fingers are about 1%" },
+    { "id": "palpation", "label": "On palpation", "type": "select", "opts": ["Soft", "Firm", "Indurated", "Fluctuant", "Tender", "Warm"] }
+   ]
+  },
+  {
+   "id": "special-signs",
+   "title": "Special signs",
+   "target": "local_examination",
+   "fields": [
+    { "id": "nikolsky", "label": "Nikolsky sign", "type": "select", "opts": ["Negative", "Positive"] },
+    { "id": "asboe_hansen", "label": "Bulla spread (Asboe-Hansen) sign", "type": "select", "opts": ["Negative", "Positive"] },
+    { "id": "auspitz", "label": "Auspitz sign", "type": "select", "opts": ["Negative", "Positive"] },
+    { "id": "grattage", "label": "Grattage test (candle grease sign)", "type": "select", "opts": ["Negative", "Positive"] },
+    { "id": "koebner", "label": "Koebner phenomenon", "type": "select", "opts": ["Absent", "Present"] },
+    { "id": "dermographism", "label": "Dermographism", "type": "select", "opts": ["Negative", "Positive"] },
+    { "id": "diascopy", "label": "Diascopy (glass slide pressure)", "type": "select", "opts": ["Blanches", "Does not blanch (purpura)", "Apple-jelly colour"] },
+    { "id": "woods_lamp", "label": "Wood's lamp", "type": "text", "hint": "e.g. chalk-white in vitiligo, coral-red in erythrasma" }
+   ]
+  },
+  {
+   "id": "hair-nails-mucosa",
+   "title": "Hair, nails and mucosa",
+   "target": "skin",
+   "fields": [
+    { "id": "scalp_hair", "label": "Scalp and hair", "type": "select", "opts": ["Normal", "Diffuse thinning", "Patchy non-scarring loss", "Scarring loss", "Scalp scaling", "Excess hair (hirsutism)"] },
+    { "id": "hair_pull", "label": "Hair pull test", "type": "select", "opts": ["Negative", "Positive"] },
+    { "id": "nails", "label": "Nails", "type": "select", "opts": ["Normal", "Pitting", "Onycholysis", "Subungual hyperkeratosis", "Thickened and discoloured", "Paronychia", "Ridging or dystrophy"] },
+    { "id": "nail_details", "label": "Nail details", "type": "text", "hint": "which nails and how many" },
+    { "id": "oral_mucosa", "label": "Oral mucosa", "type": "select", "opts": ["Normal", "Erosions or ulcers", "White lacy streaks", "White plaques", "Pigmentation"] },
+    { "id": "eyes", "label": "Eyes", "type": "select", "opts": ["Normal", "Red eye", "Erosions or discharge"] },
+    { "id": "genital_mucosa", "label": "Genital mucosa", "type": "select", "opts": ["Not examined", "Normal", "Erosions or ulcers", "Warts", "Discharge"] }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags: severe skin reaction",
+   "target": "skin",
+   "alert": "These features with a rash may mean SJS/TEN or DRESS: stop all suspected drugs now and arrange same-day dermatology assessment for admission. Skin loss over 10% needs a burns unit or ICU.",
+   "fields": [
+    { "id": "rf_mucosal", "label": "Erosions of the mouth, eyes or genitals", "type": "check" },
+    { "id": "rf_skin_pain", "label": "Skin pain or burning", "type": "check" },
+    { "id": "rf_blisters", "label": "Blisters, peeling or detaching skin", "type": "check" },
+    { "id": "rf_atypical_targets", "label": "Dusky purple spots or atypical target lesions", "type": "check" },
+    { "id": "rf_fever", "label": "Fever", "type": "check" },
+    { "id": "rf_facial_swelling", "label": "Facial swelling", "type": "check" },
+    { "id": "rf_lymph_nodes", "label": "Enlarged lymph nodes", "type": "check" },
+    { "id": "rf_widespread", "label": "Rash over more than half the body, or generalised redness", "type": "check" },
+    { "id": "detached_skin", "label": "Detached or detachable skin", "type": "number", "unit": "% body surface" }
+   ]
+  },
+  {
+   "id": "leprosy-screen",
+   "title": "Leprosy screen",
+   "target": "local_examination",
+   "fields": [
+    { "id": "patch_type", "label": "Skin patch", "type": "select", "opts": ["No patch", "Hypopigmented", "Reddish (erythematous)", "Infiltrated or nodular skin"] },
+    { "id": "patch_sensation", "label": "Sensation over patch (touch, temperature)", "type": "select", "opts": ["Normal", "Reduced", "Absent"], "hint": "test with a wisp of cotton and compare with normal skin" },
+    { "id": "patch_count", "label": "Number of patches", "type": "select", "opts": ["1 to 5", "6 or more"] },
+    { "id": "nerves_thickened", "label": "Thickened peripheral nerves", "type": "select", "opts": ["None", "One nerve", "Two or more nerves"] },
+    { "id": "nerve_names", "label": "Nerves thickened or tender", "type": "text", "hint": "e.g. right ulnar, left common peroneal, great auricular" },
+    { "id": "nerve_pain", "label": "Nerve pain or tenderness", "type": "select", "opts": ["Absent", "Present"] },
+    { "id": "glove_stocking_loss", "label": "Sensory loss in hands or feet", "type": "select", "opts": ["None", "Hands", "Feet", "Hands and feet"] },
+    { "id": "weakness_deformity", "label": "Weakness or deformity", "type": "select", "opts": ["None", "Weak or clawed fingers", "Wrist drop", "Foot drop", "Weak eye closure (lagophthalmos)"] },
+    { "id": "disability_grade", "label": "WHO disability grade", "type": "select", "opts": ["Grade 0 (no sensory loss, no visible damage)", "Grade 1 (sensory loss in hands or feet, no visible damage)", "Grade 2 (weakness or visible deformity, or eye damage)"] },
+    { "id": "lepra_reaction", "label": "Reaction", "type": "select", "opts": ["None", "Type 1 (red, swollen patches or nerve pain)", "Type 2 (tender nodules with fever)"] },
+    { "id": "leprosy_contact", "label": "Household or close contact with leprosy", "type": "check" },
+    { "id": "leprosy_class", "label": "Classification, if leprosy", "type": "select", "opts": ["Paucibacillary (PB)", "Multibacillary (MB)"] }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "KOH mount of skin scraping", "query": "KOH" },
+  { "label": "Slit-skin smear for AFB", "query": "slit skin smear" },
+  { "label": "Tzanck smear", "query": "Tzanck" },
+  { "label": "Skin biopsy (histopathology)", "query": "skin biopsy" },
+  { "label": "Direct immunofluorescence", "query": "immunofluorescence" },
+  { "label": "Pus Gram stain and culture", "query": "pus culture" },
+  { "label": "CBC with eosinophil count", "query": "CBC" },
+  { "label": "Liver function tests", "query": "LFT" },
+  { "label": "Renal function tests", "query": "RFT" },
+  { "label": "Syphilis (VDRL / RPR)", "query": "VDRL" },
+  { "label": "HIV", "query": "HIV" },
+  { "label": "Fasting blood sugar", "query": "FBS" },
+  { "label": "TSH", "query": "TSH" },
+  { "label": "ANA", "query": "ANA" }
+ ],
+ "protocols": ["psoriasis", "atopic-dermatitis", "acne-vulgaris", "scabies", "sjs-ten", "herpes-zoster", "herpes-simplex-infections", "cellulitis-skin-soft-tissue", "necrotising-soft-tissue-infection", "sexually-transmitted-infections", "systemic-lupus-erythematosus", "anaphylaxis", "polycystic-ovary-syndrome"],
+ "calculators": ["scorad", "dlqi", "uas7", "scorten", "naranjo", "glasgow_7point", "fitzpatrick", "caspar", "ferriman_gallwey", "lrinec"],
+ "advice": [
+  {
+   "id": "drug-reaction-warning",
+   "title": "Serious drug reaction: warning signs",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if you get fever with a sore throat or sore red eyes, a painful red or purple rash, blisters or peeling skin, or sores in the mouth, eyes or genitals. If a medicine caused your skin reaction, keep a record of its name, tell every doctor and pharmacist, and do not start any new medicine, even one bought without a prescription, before asking your doctor."
+  },
+  {
+   "id": "leprosy-care",
+   "title": "Leprosy: treatment and self-care",
+   "target": "follow_up_advice",
+   "text": "Leprosy is curable. Take the multidrug treatment regularly until the full course is finished. If your hands or feet are numb, check them every day for cuts, burns, blisters or red spots, soak dry skin in water and then apply oil or moisturiser, and wear footwear with a soft inner sole. Come back at once if patches become red and swollen, or you get nerve pain, new numbness or weakness, painful lumps with fever, or red eyes."
+  },
+  {
+   "id": "ringworm-care",
+   "title": "Fungal skin infection (ringworm)",
+   "target": "diet_lifestyle_advice",
+   "text": "Use the antifungal medicine regularly and continue it as advised, usually for 2 weeks after the rash clears. Do not apply steroid or mixed creams bought without a prescription. Wear loose clothes and change them when sweaty, do not share towels, bed linen or clothes, wash undergarments and socks often and dry them in the sun, and get family members with a similar rash examined."
+  },
+  {
+   "id": "scabies-care",
+   "title": "Scabies: treat everyone together",
+   "target": "follow_up_advice",
+   "text": "Everyone in the household and other close contacts must be treated at the same time, even if they do not itch. Wash clothes, towels and bed linen when you start treatment, and seal anything that cannot be washed in a bag for 3 days. Itching often carries on for a few weeks after the mites are killed."
+  }
+ ],
+ "sources": [
+  { "org": "British Association of Dermatologists", "title": "U.K. guidelines for the management of Stevens-Johnson syndrome/toxic epidermal necrolysis in adults 2016", "year": 2016, "url": "https://academic.oup.com/bjd/article/174/6/1194/6617016" },
+  { "org": "British Association of Dermatologists", "title": "Patient information leaflet: Stevens-Johnson syndrome and toxic epidermal necrolysis", "year": 2023, "url": "https://www.bad.org.uk/pils/sjs-ten" },
+  { "org": "British Association of Dermatologists", "title": "Patient information leaflet: Scabies", "year": 2023, "url": "https://www.bad.org.uk/pils/scabies/" },
+  { "org": "Indian expert panel, BMC Dermatology", "title": "Expert consensus on the management of dermatophytosis in India (ECTODERM India)", "year": 2018, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6057051/" },
+  { "org": "National Leprosy Eradication Programme, MoHFW, Government of India", "title": "Guidelines for primary, secondary and tertiary level care: disability prevention and medical rehabilitation", "year": 2012, "url": "https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/516.pdf" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

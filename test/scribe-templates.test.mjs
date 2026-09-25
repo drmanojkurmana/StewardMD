@@ -5,7 +5,9 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const SMD_SCRIBETPL = require("../scribe-templates.js");
 
-const IDS = ["general", "paediatrics", "obgyn", "surgery-followup"];
+const IDS = ["general", "paediatrics", "obgyn", "surgery-followup", "orthopaedics", "ophthalmology", "ent", "dermatology", "psychiatry", "dental",
+  "general-surgery", "anaesthesia", "emergency", "cardiology", "pulmonology", "neurology", "nephrology-urology", "diabetes-endocrine",
+  "gastro-hepatology", "rheumatology", "geriatrics", "palliative"];
 
 test("list() returns every template as {id, label, description}, general first", () => {
   const rows = SMD_SCRIBETPL.list();
@@ -82,4 +84,22 @@ test("get() never returns a live reference into the registry -- callers can muta
   const b = SMD_SCRIBETPL.get("paediatrics");
   assert.ok(!b.promptLines.includes("mutated"));
   assert.ok(!b.requiredFields.includes("mutated"));
+});
+
+test("specialty-kit templates: every requiredField is a real voice field, and none prompts a guess", async () => {
+  const { createRequire } = await import("node:module");
+  const OE = createRequire(import.meta.url)("../opd-emr.js");
+  ["orthopaedics", "ophthalmology", "ent", "dermatology", "psychiatry", "dental", "general-surgery", "anaesthesia", "emergency", "cardiology", "pulmonology", "neurology",
+    "nephrology-urology", "diabetes-endocrine", "gastro-hepatology", "rheumatology", "geriatrics", "palliative"].forEach((id) => {
+    const t = SMD_SCRIBETPL.get(id);
+    assert.equal(t.id, id);
+    t.requiredFields.forEach((f) => assert.ok(OE.VOICE_MAP[f], `${id}: ${f} is a VOICE_MAP key`));
+    t.promptLines.slice(1).forEach((l) => {
+      const key = l.replace(/^- /, "").split(":")[0];
+      key.split(/\s*[\/,]\s*/).forEach((k) => assert.ok(OE.VOICE_MAP[k.trim()], `${id}: prompt names ${k} as a field`));
+    });
+    assert.match(t.promptLines.join(" "), /as stated|as dictated|exactly/);
+    assert.doesNotMatch(t.promptLines.join(" ") + t.description + t.checklist.join(" "), /[\u2013\u2014]/);
+  });
+  assert.match(SMD_SCRIBETPL.get("psychiatry").promptLines.join(" "), /Never omit a stated risk/);
 });

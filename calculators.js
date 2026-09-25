@@ -6835,9 +6835,403 @@
     compute:function(v){
       var s=v.score||"0"; var map={"0":"No dementia","0.5":"Questionable / very mild impairment (often MCI)","1":"Mild dementia","2":"Moderate dementia","3":"Severe dementia"};
       return { v:"CDR "+s, u:"", i:(map[s]||"")+". Derived from the standard box-scoring algorithm across six domains. Ref: Morris JC. Neurology 1993 (CDR)." };
+    } },
+
+  /* ===== Added 2026-09-25: urology, airway, obstetric, paediatric, burns, surgical, palliative and
+     NCD-screening tools. Every threshold, point value and equation was checked against the source
+     named in its Ref; worked examples and band edges are pinned in test/calculators-added.test.mjs.
+     POSSUM and P-POSSUM share possumInputs()/possumScores() (hoisted, defined after this array). ===== */
+  { id:"ipss", cat:"Renal", icon:"", title:"International Prostate Symptom Score (IPSS)",
+    desc:"Seven urinary symptom questions about the past month (0 to 5 each, total 0 to 35) plus the quality of life question (0 to 6, reported separately).",
+    inputs:[
+      { id:"q1", label:"1. Incomplete emptying: sensation of not emptying the bladder", type:"select", opts:ipssFreqOpts() },
+      { id:"q2", label:"2. Frequency: had to urinate less than every two hours", type:"select", opts:ipssFreqOpts() },
+      { id:"q3", label:"3. Intermittency: stopped and started again several times when urinating", type:"select", opts:ipssFreqOpts() },
+      { id:"q4", label:"4. Urgency: found it difficult to postpone urination", type:"select", opts:ipssFreqOpts() },
+      { id:"q5", label:"5. Weak stream", type:"select", opts:ipssFreqOpts() },
+      { id:"q6", label:"6. Straining: had to strain to start urination", type:"select", opts:ipssFreqOpts() },
+      { id:"q7", label:"7. Nocturia: times typically got up at night to urinate", type:"select", opts:[{v:"0",t:"None (0)"},{v:"1",t:"1 time (1)"},{v:"2",t:"2 times (2)"},{v:"3",t:"3 times (3)"},{v:"4",t:"4 times (4)"},{v:"5",t:"5 times (5)"}] },
+      { id:"qol", label:"Quality of life: if you spent the rest of your life with your urinary condition as it is now", type:"select", opts:[{v:"0",t:"Delighted (0)"},{v:"1",t:"Pleased (1)"},{v:"2",t:"Mostly satisfied (2)"},{v:"3",t:"Mixed (3)"},{v:"4",t:"Mostly dissatisfied (4)"},{v:"5",t:"Unhappy (5)"},{v:"6",t:"Terrible (6)"}] }
+    ],
+    compute:function(v){
+      var s=0;
+      for(var i=1;i<=7;i++) s+=Number(v["q"+i])||0;
+      var q=Number(v.qol)||0;
+      var qn=["Delighted","Pleased","Mostly satisfied","Mixed","Mostly dissatisfied","Unhappy","Terrible"][q]||"";
+      var b=s<=7?"Mild":s<=19?"Moderate":"Severe";
+      return { v:s, u:"/35", i:"<b>"+b+"</b> symptoms (0 to 7 mild, 8 to 19 moderate, 20 to 35 severe). Quality of life score "+q+" ("+qn+"), reported separately and not added to the total. Ref: Barry MJ, et al. J Urol 1992 (AUA Symptom Index, adopted as the I-PSS)." };
+    } },
+
+  { id:"mallampati", cat:"Critical care", icon:"", title:"Mallampati Score (modified)",
+    desc:"Oropharyngeal view with the patient seated upright, mouth opened fully and tongue maximally protruded, without phonation (Samsoon and Young 4-class modification).",
+    inputs:[
+      { id:"cls", label:"Structures visible", type:"select", opts:[
+        {v:"1",t:"Class I: soft palate, fauces, uvula and pillars"},
+        {v:"2",t:"Class II: soft palate, fauces and uvula"},
+        {v:"3",t:"Class III: soft palate and base of uvula"},
+        {v:"4",t:"Class IV: soft palate not visible (hard palate only)"} ] }
+    ],
+    compute:function(v){
+      var c=Number(v.cls);
+      if(!(c>=1&&c<=4)) return ERR;
+      var nm=["","I","II","III","IV"][c];
+      var imp=c<=2?"Classes I and II are associated with easier laryngoscopy.":c===3?"Class III is associated with difficult laryngoscopy and intubation.":"Class IV is associated with the greatest laryngoscopy and intubation difficulty.";
+      return { v:"Class "+nm, u:"", i:imp+" Used alone the test has limited accuracy: in a Cochrane review the modified Mallampati test had a sensitivity of 0.51 and specificity of 0.87 for difficult tracheal intubation, so a low class does not exclude a difficult airway. Ref: Samsoon GL, Young JR. Anaesthesia 1987; Roth D, et al. Cochrane Database Syst Rev 2018 (CD008874)." };
+    } },
+
+  { id:"meows", cat:"Obstetrics", icon:"", title:"MEOWS (Modified Early Obstetric Warning System)",
+    desc:"Counts red and yellow triggers on the CEMACH-recommended MEOWS chart validated by Singh et al. (Anaesthesia 2012). A trigger is one red or two yellow parameters.",
+    inputs:[
+      { id:"temp", label:"Temperature", type:"number", unit:"°C", step:"0.1" },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg" },
+      { id:"dbp", label:"Diastolic BP", type:"number", unit:"mmHg" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
+      { id:"rr", label:"Respiratory rate", type:"number", unit:"/min" },
+      { id:"spo2", label:"SpO₂", type:"number", unit:"%" },
+      { id:"pain", label:"Pain score (0 to 3)", type:"select", opts:[{v:"0",t:"0: no pain"},{v:"1",t:"1: slight pain on movement"},{v:"2",t:"2: intermittent pain at rest or moderate pain on movement"},{v:"3",t:"3"}] },
+      { id:"avpu", label:"Neurological response (AVPU)", type:"select", opts:[{v:"a",t:"Alert"},{v:"v",t:"Responds to voice"},{v:"p",t:"Responds to pain"},{v:"u",t:"Unresponsive"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.temp)||!ok(v.sbp)||!ok(v.dbp)||!ok(v.hr)||!ok(v.rr)||!ok(v.spo2)) return ERR;
+      var red=[], yel=[];
+      function chk(name, isRed, isYel){ if(isRed) red.push(name); else if(isYel) yel.push(name); }
+      chk("temperature", v.temp<35||v.temp>38, v.temp>=35&&v.temp<=36);
+      chk("systolic BP", v.sbp<90||v.sbp>160, (v.sbp>=150&&v.sbp<=160)||(v.sbp>=90&&v.sbp<=100));
+      chk("diastolic BP", v.dbp>100, v.dbp>=90&&v.dbp<=100);
+      chk("heart rate", v.hr<40||v.hr>120, (v.hr>=100&&v.hr<=120)||(v.hr>=40&&v.hr<=50));
+      chk("respiratory rate", v.rr<10||v.rr>30, v.rr>=21&&v.rr<=30);
+      chk("SpO₂", v.spo2<95, false);
+      chk("pain score", false, (Number(v.pain)||0)>=2);
+      chk("neurological response", v.avpu==="p"||v.avpu==="u", v.avpu==="v");
+      var trig=red.length>=1||yel.length>=2;
+      var list=(red.length?" Red: "+red.join(", ")+".":"")+(yel.length?" Yellow: "+yel.join(", ")+".":"");
+      var head=trig?"<b>Trigger met</b> (one red or two yellow). The chart's action rule for a trigger is prompt clinical evaluation.":"No trigger (the chart triggers on one red or two yellow).";
+      return { v:red.length+" red, "+yel.length+" yellow", u:"triggers", i:head+list+" Chart bands: red = temperature below 35 or above 38 °C, systolic below 90 or above 160, diastolic above 100, heart rate below 40 or above 120, respiratory rate below 10 or above 30, SpO₂ below 95%, responds to pain or unresponsive; yellow = temperature 35 to 36 °C, systolic 150 to 160 or 90 to 100, diastolic 90 to 100, heart rate 100 to 120 or 40 to 50, respiratory rate 21 to 30, pain score 2 to 3, responds to voice. Local MEOWS charts differ; the chart adopted by your unit takes precedence. Ref: Singh S, et al. Anaesthesia 2012 (CEMACH-recommended MEOWS)." };
+    } },
+
+  { id:"pews", cat:"Paediatrics", icon:"", title:"Brighton PEWS (Paediatric Early Warning Score)",
+    desc:"Brighton Paediatric Early Warning Score (Monaghan 2005): behaviour, cardiovascular and respiratory domains (0 to 3 each) plus 2 points each for quarter-hourly nebulisers and persistent vomiting after surgery (range 0 to 13).",
+    inputs:[
+      { id:"beh", label:"Behaviour", type:"select", opts:[{v:"0",t:"Playing or appropriate (0)"},{v:"1",t:"Sleeping (1)"},{v:"2",t:"Irritable (2)"},{v:"3",t:"Lethargic, confused, or reduced response to pain (3)"}] },
+      { id:"cvs", label:"Cardiovascular", type:"select", opts:[{v:"0",t:"Pink, or capillary refill 1 to 2 s (0)"},{v:"1",t:"Pale, or capillary refill 3 s (1)"},{v:"2",t:"Grey, or capillary refill 4 s, or heart rate 20 or more above normal (2)"},{v:"3",t:"Grey and mottled, or capillary refill 5 s or more, or heart rate 30 or more above normal, or bradycardia (3)"}] },
+      { id:"resp", label:"Respiratory", type:"select", opts:[{v:"0",t:"Rate within normal parameters, no recession or tracheal tug (0)"},{v:"1",t:"Rate 10 or more above normal, using accessory muscles, or FiO₂ 30% or more, or 3 L/min or more (1)"},{v:"2",t:"Rate 20 or more above normal, recession, tracheal tug, or FiO₂ 40% or more, or 6 L/min or more (2)"},{v:"3",t:"Rate 5 below normal with recession, or grunting, or FiO₂ 50% or more, or 8 L/min or more (3)"}] },
+      { id:"neb", label:"Quarter-hourly (every 15 min) nebulisers (+2)", type:"check" },
+      { id:"vom", label:"Persistent vomiting after surgery (+2)", type:"check" }
+    ],
+    compute:function(v){
+      var b=Number(v.beh)||0, c=Number(v.cvs)||0, r=Number(v.resp)||0;
+      var s=b+c+r+(v.neb?2:0)+(v.vom?2:0);
+      var crit=s>=4||Math.max(b,c,r)===3;
+      var head=crit?"<b>Critical PEWS</b> (total 4 or more, or 3 in any single domain): in the Akre 2010 algorithm this level prompts a consult.":"Below the critical level used by Akre 2010 (total 4 or more, or 3 in any single domain).";
+      return { v:s, u:"/13", i:head+" \"Normal parameters\" are age-specific. Oxygen-flow cut-offs differ between published versions; this table follows the Brighton PEWS as reproduced by Shafi et al. (Cureus 2020), citing Monaghan 2005 and Akre 2010. Ref: Monaghan A. Paediatr Nurs 2005; Akre M, et al. Pediatrics 2010." };
+    } },
+
+  { id:"lund_browder", cat:"General", icon:"", title:"Lund and Browder Burn Chart (TBSA, Parkland)",
+    desc:"Burned % of total body surface area by the Lund and Browder chart with its age columns, plus the Parkland 24-hour fluid estimate when weight is entered. Enter the percentage of each region that is burned (leave unburned regions blank).",
+    inputs:[
+      { id:"age", label:"Age column", type:"select", opts:[{v:"",t:"Select age"},{v:"0",t:"Under 1 year (chart column 0)"},{v:"1",t:"1 to 4 years (column 1)"},{v:"5",t:"5 to 9 years (column 5)"},{v:"10",t:"10 to 14 years (column 10)"},{v:"15",t:"15 years (column 15)"},{v:"adult",t:"Adult"}] },
+      { id:"wt", label:"Weight (for Parkland; optional)", type:"number", unit:"kg", step:"0.1" },
+      { id:"head", label:"Head: % of region burned", type:"number", unit:"%" },
+      { id:"neck", label:"Neck: % of region burned", type:"number", unit:"%" },
+      { id:"atrunk", label:"Anterior trunk: % burned", type:"number", unit:"%" },
+      { id:"ptrunk", label:"Posterior trunk: % burned", type:"number", unit:"%" },
+      { id:"rbut", label:"Right buttock: % burned", type:"number", unit:"%" },
+      { id:"lbut", label:"Left buttock: % burned", type:"number", unit:"%" },
+      { id:"gen", label:"Genitalia: % burned", type:"number", unit:"%" },
+      { id:"rua", label:"Right upper arm: % burned", type:"number", unit:"%" },
+      { id:"lua", label:"Left upper arm: % burned", type:"number", unit:"%" },
+      { id:"rfa", label:"Right forearm: % burned", type:"number", unit:"%" },
+      { id:"lfa", label:"Left forearm: % burned", type:"number", unit:"%" },
+      { id:"rhand", label:"Right hand: % burned", type:"number", unit:"%" },
+      { id:"lhand", label:"Left hand: % burned", type:"number", unit:"%" },
+      { id:"rthigh", label:"Right thigh: % burned", type:"number", unit:"%" },
+      { id:"lthigh", label:"Left thigh: % burned", type:"number", unit:"%" },
+      { id:"rleg", label:"Right lower leg: % burned", type:"number", unit:"%" },
+      { id:"lleg", label:"Left lower leg: % burned", type:"number", unit:"%" },
+      { id:"rfoot", label:"Right foot: % burned", type:"number", unit:"%" },
+      { id:"lfoot", label:"Left foot: % burned", type:"number", unit:"%" }
+    ],
+    compute:function(v){
+      // Age-dependent chart values A (half of head), B (half of one thigh), C (half of one lower leg).
+      // 10-year thigh 4.25 (Artz and Moncrief version) and hand 1.25 per side (Lundin 2013) make every
+      // column total exactly 100%; the widely copied 4.5 / 1.5 values sum to 101%.
+      var ABC={ "0":[9.5,2.75,2.5], "1":[8.5,3.25,2.5], "5":[6.5,4,2.75], "10":[5.5,4.25,3], "15":[4.5,4.5,3.25], "adult":[3.5,4.75,3.5] }[v.age];
+      if(!ABC) return { err:"Choose the age column." };
+      var A=2*ABC[0], B=2*ABC[1], C=2*ABC[2];
+      var area={ head:A, neck:2, atrunk:13, ptrunk:13, rbut:2.5, lbut:2.5, gen:1, rua:4, lua:4, rfa:3, lfa:3, rhand:2.5, lhand:2.5, rthigh:B, lthigh:B, rleg:C, lleg:C, rfoot:3.5, lfoot:3.5 };
+      var s=0, bad=false;
+      Object.keys(area).forEach(function(k){
+        var p=v[k];
+        if(!ok(p)) return;
+        if(p<0||p>100){ bad=true; return; }
+        s+=area[k]*p/100;
+      });
+      if(bad) return { err:"Each region's burned percentage must be between 0 and 100." };
+      var t=r1(s);
+      var msg="Region areas for this age column: head "+A+"%, each thigh "+B+"%, each lower leg "+C+"% (each includes front and back).";
+      if(ok(v.wt)&&v.wt>0){
+        var tot=4*v.wt*t;
+        msg+=" <b>Parkland estimate</b>: 4 mL × "+v.wt+" kg × "+t+"% = <b>"+r0(tot)+" mL</b> over the first 24 h from the time of burn: half ("+r0(tot/2)+" mL) in the first 8 h and the remainder over the next 16 h (lactated Ringer's in the original formula).";
+      } else msg+=" Enter weight for the Parkland estimate.";
+      return { v:t, u:"% TBSA", i:msg+" Ref: Lund CC, Browder NC. Surg Gynecol Obstet 1944; Lundin K, Alsbjørn B. Burns 2013 (hand 1.25% per side); Parkland formula as in Alharbi Z, et al. World J Emerg Surg 2012." };
+    } },
+
+  { id:"possum", cat:"General", icon:"", title:"POSSUM (morbidity and mortality)",
+    desc:"Physiological score (12 variables) and operative severity score (6 variables) with the POSSUM morbidity and mortality equations (Copeland 1991).",
+    inputs:possumInputs(),
+    compute:function(v){
+      var sc=possumScores(v); if(!sc) return ERR;
+      var morb=1/(1+Math.exp(-(-5.91+0.16*sc.ps+0.19*sc.os)));
+      var mort=1/(1+Math.exp(-(-7.04+0.13*sc.ps+0.16*sc.os)));
+      return { v:r1(morb*100), u:"% predicted morbidity", i:"Physiological score <b>"+sc.ps+"</b> (range 12 to 88), operative severity score <b>"+sc.os+"</b> (range 6 to 48). Predicted morbidity "+r1(morb*100)+"%, predicted mortality "+r1(mort*100)+"%. Equations: ln[R/(1-R)] = -5.91 + 0.16 × PS + 0.19 × OS (morbidity) and -7.04 + 0.13 × PS + 0.16 × OS (mortality). POSSUM over-predicts death, by more than twofold overall and more than sevenfold in the lowest-risk patients; P-POSSUM is the recalibrated mortality equation. Ref: Copeland GP, et al. Br J Surg 1991; Prytherch DR, et al. Br J Surg 1998." };
+    } },
+
+  { id:"p_possum", cat:"General", icon:"", title:"P-POSSUM (Portsmouth POSSUM, in-hospital mortality)",
+    desc:"Portsmouth recalibration of POSSUM for predicted in-hospital mortality, using the same 18 POSSUM variables (Prytherch 1998).",
+    inputs:possumInputs(),
+    compute:function(v){
+      var sc=possumScores(v); if(!sc) return ERR;
+      var m=1/(1+Math.exp(-(-9.065+0.1692*sc.ps+0.1550*sc.os)));
+      return { v:r1(m*100), u:"% predicted mortality", i:"Physiological score <b>"+sc.ps+"</b>, operative severity score <b>"+sc.os+"</b>. Equation: ln[R/(1-R)] = -9.065 + 0.1692 × PS + 0.1550 × OS. In its derivation and validation (10,000 general surgical cases) P-POSSUM closely fitted observed in-hospital mortality, where the original POSSUM over-predicted it. Ref: Prytherch DR, et al. Br J Surg 1998." };
+    } },
+
+  { id:"clavien_dindo", cat:"General", icon:"", title:"Clavien-Dindo Classification (surgical complications)",
+    desc:"Grades a postoperative complication by the therapy needed to treat it (Dindo, Demartines, Clavien 2004).",
+    inputs:[
+      { id:"g", label:"Grade", type:"select", opts:[
+        {v:"I",t:"I: deviation from normal course, no specific treatment beyond allowed regimens"},
+        {v:"II",t:"II: needs drugs beyond grade I, transfusion or TPN"},
+        {v:"IIIa",t:"IIIa: surgical, endoscopic or radiological intervention, not under general anaesthesia"},
+        {v:"IIIb",t:"IIIb: intervention under general anaesthesia"},
+        {v:"IVa",t:"IVa: life-threatening, needing IC/ICU care, single organ dysfunction"},
+        {v:"IVb",t:"IVb: life-threatening, needing IC/ICU care, multiorgan dysfunction"},
+        {v:"V",t:"V: death of the patient"} ] },
+      { id:"d", label:"Complication still present at discharge (suffix \"d\", disability)", type:"check" }
+    ],
+    compute:function(v){
+      var DEF={
+        "I":"Any deviation from the normal postoperative course without the need for pharmacological treatment or surgical, endoscopic or radiological intervention. Allowed regimens: antiemetics, antipyretics, analgesics, diuretics, electrolytes and physiotherapy; also includes wound infections opened at the bedside.",
+        "II":"Requiring pharmacological treatment with drugs other than those allowed for grade I. Blood transfusions and total parenteral nutrition are also included.",
+        "IIIa":"Requiring surgical, endoscopic or radiological intervention, not under general anaesthesia.",
+        "IIIb":"Requiring surgical, endoscopic or radiological intervention under general anaesthesia.",
+        "IVa":"Life-threatening complication (including central nervous system complications) requiring intermediate or intensive care management: single organ dysfunction (including dialysis).",
+        "IVb":"Life-threatening complication (including central nervous system complications) requiring intermediate or intensive care management: multiorgan dysfunction.",
+        "V":"Death of the patient."
+      };
+      var g=v.g; if(!DEF[g]) return ERR;
+      var d=v.d&&g!=="V";
+      return { v:"Grade "+g+(d?"-d":""), u:"", i:DEF[g]+(d?" Suffix \"d\" (disability): the complication persists at discharge, indicating the need for follow-up to fully evaluate it.":"")+" Ref: Dindo D, Demartines N, Clavien PA. Ann Surg 2004." };
+    } },
+
+  { id:"lrinec", cat:"Infectious disease", icon:"", title:"LRINEC Score (necrotising fasciitis)",
+    desc:"Laboratory Risk Indicator for Necrotising Fasciitis: six admission blood tests distinguishing necrotising fasciitis from other severe soft tissue infections (Wong 2004).",
+    inputs:[
+      { id:"crp", label:"CRP 150 mg/L or more (+4)", type:"check" },
+      { id:"wbc", label:"White cell count", type:"select", opts:[{v:"0",t:"Below 15 ×10⁹/L (0)"},{v:"1",t:"15 to 25 ×10⁹/L (1)"},{v:"2",t:"Above 25 ×10⁹/L (2)"}] },
+      { id:"hb", label:"Haemoglobin", type:"select", opts:[{v:"0",t:"Above 13.5 g/dL (0)"},{v:"1",t:"11 to 13.5 g/dL (1)"},{v:"2",t:"Below 11 g/dL (2)"}] },
+      { id:"na", label:"Sodium below 135 mmol/L (+2)", type:"check" },
+      { id:"cr", label:"Creatinine above 141 µmol/L (about 1.6 mg/dL) (+2)", type:"check" },
+      { id:"glu", label:"Glucose above 10 mmol/L (180 mg/dL) (+1)", type:"check" }
+    ],
+    compute:function(v){
+      var s=(v.crp?4:0)+(Number(v.wbc)||0)+(Number(v.hb)||0)+(v.na?2:0)+(v.cr?2:0)+(v.glu?1:0);
+      var b=s>=8?"<b>High risk</b> (8 or more; probability above 75%)":s>=6?"<b>Intermediate risk</b> (6 to 7; probability 50% to 75%)":"Low risk (5 or less; probability below 50%)";
+      return { v:s, u:"/13", i:b+". In the derivation study a cut-off of 6 gave a positive predictive value of 92% and negative predictive value of 96%, and the authors advise careful evaluation for necrotising fasciitis at 6 or more. Later validation studies report lower accuracy, so a low score does not exclude the diagnosis. Ref: Wong CH, et al. Crit Care Med 2004." };
+    } },
+
+  { id:"esas", cat:"Oncology", icon:"", title:"ESAS-r (Edmonton Symptom Assessment System, revised)",
+    desc:"Nine core symptoms rated now from 0 (none) to 10 (worst possible). Total 0 to 90; items of 7 or more are flagged as severe.",
+    inputs:[
+      { id:"pain", label:"Pain", type:"number", unit:"/10", step:"1" },
+      { id:"tired", label:"Tiredness (lack of energy)", type:"number", unit:"/10", step:"1" },
+      { id:"drowsy", label:"Drowsiness (feeling sleepy)", type:"number", unit:"/10", step:"1" },
+      { id:"nausea", label:"Nausea", type:"number", unit:"/10", step:"1" },
+      { id:"appetite", label:"Lack of appetite", type:"number", unit:"/10", step:"1" },
+      { id:"sob", label:"Shortness of breath", type:"number", unit:"/10", step:"1" },
+      { id:"depress", label:"Depression (feeling sad)", type:"number", unit:"/10", step:"1" },
+      { id:"anx", label:"Anxiety (feeling nervous)", type:"number", unit:"/10", step:"1" },
+      { id:"well", label:"Wellbeing (how you feel overall; 0 best, 10 worst)", type:"number", unit:"/10", step:"1" }
+    ],
+    compute:function(v){
+      var items=[["pain","pain"],["tired","tiredness"],["drowsy","drowsiness"],["nausea","nausea"],["appetite","lack of appetite"],["sob","shortness of breath"],["depress","depression"],["anx","anxiety"],["well","wellbeing"]];
+      var s=0, sev=[], mod=[], bad=false;
+      items.forEach(function(it){
+        var x=v[it[0]];
+        if(!ok(x)||x<0||x>10){ bad=true; return; }
+        s+=x;
+        if(x>=7) sev.push(it[1]+" "+x); else if(x>=4) mod.push(it[1]+" "+x);
+      });
+      if(bad) return { err:"Enter all nine items, each from 0 to 10." };
+      var msg=sev.length?"<b>Severe (7 or more)</b>: "+sev.join(", ")+".":"No item scored 7 or more.";
+      if(mod.length) msg+=" Moderate (4 to 6): "+mod.join(", ")+".";
+      return { v:r1(s), u:"/90", i:msg+" Item bands: 0 none, 1 to 3 mild, 4 to 6 moderate, 7 to 10 severe. Ref: Watanabe SM, et al. J Pain Symptom Manage 2011 (ESAS-r); Hui D, Bruera E. J Pain Symptom Manage 2017." };
+    } },
+
+  { id:"pps", cat:"Oncology", icon:"", title:"Palliative Performance Scale (PPSv2)",
+    desc:"Functional level in 10% steps from 100% to 0%, read across five columns: ambulation / activity and evidence of disease / self-care / intake / conscious level. Choose the best horizontal fit; leftward columns take precedence.",
+    inputs:[
+      { id:"lvl", label:"PPS level (ambulation / activity & evidence of disease / self-care / intake / conscious level)", type:"select", opts:[
+        {v:"100",t:"100%: Full / Normal activity & work, no evidence of disease / Full / Normal / Full"},
+        {v:"90",t:"90%: Full / Normal activity & work, some evidence of disease / Full / Normal / Full"},
+        {v:"80",t:"80%: Full / Normal activity with effort, some evidence of disease / Full / Normal or reduced / Full"},
+        {v:"70",t:"70%: Reduced / Unable normal job/work, significant disease / Full / Normal or reduced / Full"},
+        {v:"60",t:"60%: Reduced / Unable hobby/house work, significant disease / Occasional assistance necessary / Normal or reduced / Full or confusion"},
+        {v:"50",t:"50%: Mainly sit/lie / Unable to do any work, extensive disease / Considerable assistance required / Normal or reduced / Full or confusion"},
+        {v:"40",t:"40%: Mainly in bed / Unable to do most activity, extensive disease / Mainly assistance / Normal or reduced / Full or drowsy +/- confusion"},
+        {v:"30",t:"30%: Totally bed bound / Unable to do any activity, extensive disease / Total care / Normal or reduced / Full or drowsy +/- confusion"},
+        {v:"20",t:"20%: Totally bed bound / Unable to do any activity, extensive disease / Total care / Minimal to sips / Full or drowsy +/- confusion"},
+        {v:"10",t:"10%: Totally bed bound / Unable to do any activity, extensive disease / Total care / Mouth care only / Drowsy or coma +/- confusion"},
+        {v:"0",t:"0%: Death"} ] }
+    ],
+    compute:function(v){
+      var ROW={
+        "100":["Full","Normal activity &amp; work; no evidence of disease","Full","Normal","Full"],
+        "90":["Full","Normal activity &amp; work; some evidence of disease","Full","Normal","Full"],
+        "80":["Full","Normal activity with effort; some evidence of disease","Full","Normal or reduced","Full"],
+        "70":["Reduced","Unable normal job/work; significant disease","Full","Normal or reduced","Full"],
+        "60":["Reduced","Unable hobby/house work; significant disease","Occasional assistance necessary","Normal or reduced","Full or confusion"],
+        "50":["Mainly sit/lie","Unable to do any work; extensive disease","Considerable assistance required","Normal or reduced","Full or confusion"],
+        "40":["Mainly in bed","Unable to do most activity; extensive disease","Mainly assistance","Normal or reduced","Full or drowsy +/- confusion"],
+        "30":["Totally bed bound","Unable to do any activity; extensive disease","Total care","Normal or reduced","Full or drowsy +/- confusion"],
+        "20":["Totally bed bound","Unable to do any activity; extensive disease","Total care","Minimal to sips","Full or drowsy +/- confusion"],
+        "10":["Totally bed bound","Unable to do any activity; extensive disease","Total care","Mouth care only","Drowsy or coma +/- confusion"]
+      };
+      var l=v.lvl;
+      if(l==="0") return { v:"PPS 0%", u:"", i:"Death. Ref: Victoria Hospice Society, PPSv2 (2001)." };
+      var r=ROW[l]; if(!r) return ERR;
+      return { v:"PPS "+l+"%", u:"", i:"Ambulation: "+r[0]+". Activity and evidence of disease: "+r[1]+". Self-care: "+r[2]+". Intake: "+r[3]+". Conscious level: "+r[4]+". PPS is scored in 10% steps only (no half-fit values such as 45%), by best horizontal fit with leftward columns taking precedence. It describes current functional level and appears to have prognostic value. PPSv2 © Victoria Hospice Society, used with recognition. Ref: Victoria Hospice Society, Palliative Performance Scale version 2 (2001)." };
+    } },
+
+  { id:"cbac", cat:"General", icon:"", title:"CBAC Part A (NCD risk score, India)",
+    desc:"Community Based Assessment Checklist Part A risk assessment from the Indian NCD programme (revised CBAC form, MoHFW 2020). Score 0 to 10.",
+    inputs:[
+      { id:"age", label:"Age (complete years)", type:"number", unit:"yrs", step:"1", demo:"age" },
+      { id:"tob", label:"Smokes or consumes smokeless products such as gutka or khaini", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Used to consume in the past, or sometimes now (1)"},{v:"2",t:"Daily (2)"}] },
+      { id:"alc", label:"Consumes alcohol daily", type:"select", opts:[{v:"0",t:"No (0)"},{v:"1",t:"Yes (1)"}] },
+      { id:"sex", label:"Sex (sets the waist bands)", type:"select", opts:[{v:"",t:"Select sex"},{v:"f",t:"Female"},{v:"m",t:"Male"}], demo:"sex" },
+      { id:"waist", label:"Waist circumference", type:"number", unit:"cm", step:"0.5" },
+      { id:"pa", label:"Physical activity (minimum 150 min a week: daily 30 min, 5 days a week)", type:"select", opts:[{v:"0",t:"At least 150 min a week (0)"},{v:"1",t:"Less than 150 min a week (1)"}] },
+      { id:"fh", label:"Family history (any parent or sibling) of high blood pressure, diabetes or heart disease", type:"select", opts:[{v:"0",t:"No (0)"},{v:"2",t:"Yes (2)"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||v.age<0||!ok(v.waist)||v.waist<=0) return ERR;
+      if(v.sex!=="m"&&v.sex!=="f") return { err:"Select sex (the waist bands differ for women and men)." };
+      var a=Math.floor(v.age);
+      var pa=a<=29?0:a<=39?1:a<=49?2:a<=59?3:4;
+      var w=v.sex==="f"?(v.waist<=80?0:v.waist<=90?1:2):(v.waist<=90?0:v.waist<=100?1:2);
+      var s=pa+(Number(v.tob)||0)+(Number(v.alc)||0)+w+(Number(v.pa)||0)+(Number(v.fh)||0);
+      var b=s>4?"<b>Score above 4</b>: the person may be at higher risk of NCDs and is prioritised for the weekly NCD screening day.":"Score 4 or less: not in the programme's higher-risk group on Part A.";
+      return { v:s, u:"/10", i:b+" Points: age "+pa+", waist "+w+" (women: 80 cm or less 0, 81 to 90 cm 1, above 90 cm 2; men: 90 cm or less 0, 91 to 100 cm 1, above 100 cm 2). The form states that every individual is screened irrespective of score. Ref: MoHFW, National Health Mission, revised Community Based Assessment Checklist (CBAC), 9 Oct 2020 (NHSRC)." };
+    } },
+
+  { id:"ctg", cat:"Obstetrics", icon:"", title:"CTG Classification (FIGO 2015)",
+    desc:"Classifies an intrapartum cardiotocograph as normal, suspicious or pathological by the FIGO 2015 consensus criteria. FIGO advises re-evaluating the tracing at least every 30 minutes in labour.",
+    inputs:[
+      { id:"base", label:"Baseline fetal heart rate", type:"select", opts:[{v:"n",t:"110 to 160 bpm"},{v:"hi",t:"Above 160 bpm for more than 10 min (tachycardia)"},{v:"lo",t:"100 to 109 bpm"},{v:"p",t:"Below 100 bpm"}] },
+      { id:"vari", label:"Variability (bandwidth)", type:"select", opts:[{v:"n",t:"5 to 25 bpm"},{v:"s",t:"Outside 5 to 25 bpm, but not for the durations below"},{v:"red",t:"Below 5 bpm for more than 50 min (reduced variability)"},{v:"inc",t:"Above 25 bpm for more than 30 min (increased variability, saltatory)"}] },
+      { id:"sin", label:"Sinusoidal pattern for more than 30 min", type:"check" },
+      { id:"dec", label:"Decelerations (repetitive = with more than 50% of contractions)", type:"select", opts:[{v:"n",t:"None, or not repetitive"},{v:"s",t:"Repetitive, but not meeting a pathological criterion below"},{v:"p30",t:"Repetitive late or prolonged decelerations for more than 30 min"},{v:"p20",t:"Repetitive late or prolonged decelerations for more than 20 min with reduced variability"},{v:"p5",t:"One prolonged deceleration lasting more than 5 min"}] },
+      { id:"acc", label:"Accelerations", type:"select", opts:[{v:"y",t:"Present"},{v:"n",t:"Absent"}] }
+    ],
+    compute:function(v){
+      var path=[], susp=[];
+      if(v.base==="p") path.push("baseline below 100 bpm");
+      else if(v.base==="hi"||v.base==="lo") susp.push("baseline outside 110 to 160 bpm");
+      if(v.vari==="red") path.push("reduced variability for more than 50 min");
+      else if(v.vari==="inc") path.push("increased variability for more than 30 min");
+      else if(v.vari==="s") susp.push("variability outside 5 to 25 bpm");
+      if(v.sin) path.push("sinusoidal pattern for more than 30 min");
+      if(v.dec==="p30") path.push("repetitive late or prolonged decelerations for more than 30 min");
+      else if(v.dec==="p20") path.push("repetitive late or prolonged decelerations for more than 20 min with reduced variability");
+      else if(v.dec==="p5") path.push("one prolonged deceleration of more than 5 min");
+      else if(v.dec==="s") susp.push("repetitive decelerations");
+      var cls, meaning, mgmt;
+      if(path.length){ cls="Pathological"; meaning="fetus with a high probability of having hypoxia/acidosis"; mgmt="immediate action to correct reversible causes, additional methods to evaluate fetal oxygenation, or, if this is not possible, expedited delivery; in acute situations (cord prolapse, uterine rupture or placental abruption) immediate delivery"; }
+      else if(susp.length){ cls="Suspicious"; meaning="fetus with a low probability of having hypoxia/acidosis"; mgmt="action to correct reversible causes if identified, close monitoring or additional methods to evaluate fetal oxygenation"; }
+      else { cls="Normal"; meaning="fetus with no hypoxia/acidosis"; mgmt="no intervention necessary to improve fetal oxygenation state"; }
+      var why=path.length?" Pathological feature(s): "+path.join("; ")+".":susp.length?" Lacks a feature of normality ("+susp.join("; ")+") with no pathological feature.":"";
+      var acc=v.acc==="y"?" Accelerations present denote a fetus that does not have hypoxia/acidosis.":" Absence of accelerations during labour is of uncertain significance.";
+      return { v:cls, u:"", i:"<b>"+cls+"</b>: "+meaning+"."+why+" FIGO management for this class: "+mgmt+"."+acc+" Ref: Ayres-de-Campos D, Spong CY, Chandraharan E. FIGO consensus guidelines on intrapartum fetal monitoring: cardiotocography. Int J Gynaecol Obstet 2015 (Table 1)." };
+    } },
+
+  { id:"act_asthma", cat:"Respiratory", icon:"", title:"Asthma Control Test (ACT)",
+    desc:"Adds the five ACT items (each 1 to 5, past 4 weeks; for age 12 and over). Administer the official ACT questionnaire (© QualityMetric; reproduction requires a licence) and enter each item's points.",
+    inputs:[
+      { id:"q1", label:"Item 1: activity limitation at work, school or home", type:"select", opts:actItemOpts() },
+      { id:"q2", label:"Item 2: shortness of breath", type:"select", opts:actItemOpts() },
+      { id:"q3", label:"Item 3: night-time or early-morning waking from symptoms", type:"select", opts:actItemOpts() },
+      { id:"q4", label:"Item 4: rescue inhaler or nebuliser use", type:"select", opts:actItemOpts() },
+      { id:"q5", label:"Item 5: self-rated asthma control", type:"select", opts:actItemOpts() }
+    ],
+    compute:function(v){
+      var s=0;
+      for(var i=1;i<=5;i++){ var x=Number(v["q"+i]); if(!(x>=1&&x<=5)) return ERR; s+=x; }
+      var b=s===25?"<b>Total control</b> (25)":s>=20?"<b>Well controlled</b> (20 to 24)":"<b>Not well controlled</b> (19 or less)";
+      return { v:s, u:"/25", i:b+". A score of 19 or less is the developers' screening cut-point for poorly controlled asthma (sensitivity 72%, specificity 74% against specialist rating). Ref: Nathan RA, et al. J Allergy Clin Immunol 2004; Kosinski M, et al. Asthma Control Test User's Guide, QualityMetric 2004." };
     } }
 
   ];
+
+  /* Shared option lists and inputs for the 2026-09-25 additions at the end of CALCS. These are
+     function declarations, so they are hoisted and callable while the CALCS literal is built. */
+  function ipssFreqOpts(){
+    return [{v:"0",t:"Not at all (0)"},{v:"1",t:"Less than 1 time in 5 (1)"},{v:"2",t:"Less than half the time (2)"},{v:"3",t:"About half the time (3)"},{v:"4",t:"More than half the time (4)"},{v:"5",t:"Almost always (5)"}];
+  }
+  function actItemOpts(){
+    return [{v:"5",t:"5 (best)"},{v:"4",t:"4"},{v:"3",t:"3"},{v:"2",t:"2"},{v:"1",t:"1 (worst)"}];
+  }
+  // POSSUM: 12 physiological and 6 operative severity variables, scored 1/2/4/8 (Copeland 1991).
+  function possumInputs(){
+    return [
+      { id:"age", label:"Age", type:"number", unit:"yrs", step:"1", demo:"age" },
+      { id:"cardiac", label:"Cardiac signs (clinical and chest X-ray)", type:"select", opts:[{v:"1",t:"No failure (1)"},{v:"2",t:"Diuretic, digoxin, antianginal or antihypertensive therapy (2)"},{v:"4",t:"Peripheral oedema, warfarin therapy, or borderline cardiomegaly (4)"},{v:"8",t:"Raised jugular venous pressure or cardiomegaly (8)"}] },
+      { id:"resp", label:"Respiratory history (and chest X-ray)", type:"select", opts:[{v:"1",t:"No dyspnoea (1)"},{v:"2",t:"Dyspnoea on exertion, or mild COAD (2)"},{v:"4",t:"Limiting dyspnoea (one flight), or moderate COAD (4)"},{v:"8",t:"Dyspnoea at rest (rate 30/min or more), fibrosis or consolidation (8)"}] },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg" },
+      { id:"hr", label:"Pulse", type:"number", unit:"bpm" },
+      { id:"gcs", label:"Glasgow Coma Scale", type:"number", step:"1" },
+      { id:"hb", label:"Haemoglobin", type:"number", unit:"g/dL", step:"0.1", lab:"hb" },
+      { id:"wcc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1", lab:"wbc" },
+      { id:"urea", label:"Urea (unit below)", type:"number", step:"0.1" },
+      { id:"urea_u", label:"Urea unit", type:"select", opts:[{v:"mmol",t:"Urea mmol/L"},{v:"mgdl",t:"Urea mg/dL"},{v:"bun",t:"BUN mg/dL"}] },
+      { id:"na", label:"Sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"k", label:"Potassium", type:"number", unit:"mmol/L", step:"0.1", lab:"k" },
+      { id:"ecg", label:"ECG", type:"select", opts:[{v:"1",t:"Normal (1)"},{v:"4",t:"Atrial fibrillation, rate 60 to 90 (4)"},{v:"8",t:"Any other abnormal rhythm, 5 or more ectopics/min, Q waves or ST/T wave changes (8)"}] },
+      { id:"sev", label:"Operative severity", type:"select", opts:[{v:"1",t:"Minor (1)"},{v:"2",t:"Moderate (2)"},{v:"4",t:"Major (4)"},{v:"8",t:"Major+ (8)"}] },
+      { id:"multi", label:"Number of procedures", type:"select", opts:[{v:"1",t:"1 (1)"},{v:"4",t:"2 (4)"},{v:"8",t:"More than 2 (8)"}] },
+      { id:"ebl", label:"Total blood loss", type:"number", unit:"mL" },
+      { id:"soil", label:"Peritoneal soiling", type:"select", opts:[{v:"1",t:"None (1)"},{v:"2",t:"Minor, serous fluid (2)"},{v:"4",t:"Local pus (4)"},{v:"8",t:"Free bowel content, pus or blood (8)"}] },
+      { id:"malig", label:"Malignancy", type:"select", opts:[{v:"1",t:"None (1)"},{v:"2",t:"Primary only (2)"},{v:"4",t:"Nodal metastases (4)"},{v:"8",t:"Distant metastases (8)"}] },
+      { id:"mode", label:"Mode of surgery", type:"select", opts:[{v:"1",t:"Elective (1)"},{v:"4",t:"Emergency, resuscitation of more than 2 h possible, operation within 24 h of admission (4)"},{v:"8",t:"Emergency, immediate surgery within 2 h needed (8)"}] }
+    ];
+  }
+  // Returns { ps, os } (physiological 12 to 88, operative 6 to 48) or null when a number is missing.
+  // Numeric bands follow Copeland's table; values falling between printed bands (e.g. Hb 12.95)
+  // go to the band whose lower edge they have passed.
+  function possumScores(v){
+    if(!ok(v.age)||!ok(v.sbp)||!ok(v.hr)||!ok(v.gcs)||!ok(v.hb)||!ok(v.wcc)||!ok(v.urea)||!ok(v.na)||!ok(v.k)||!ok(v.ebl)) return null;
+    var urea=v.urea_u==="bun"?v.urea/2.8:v.urea_u==="mgdl"?v.urea/6.006:v.urea;   // mmol/L
+    urea=Math.round(urea*100)/100;   // drop float noise so BUN 21 mg/dL is exactly 7.5 mmol/L (1 point)
+    var ps=0, os=0;
+    ps+=v.age<=60?1:v.age<=70?2:4;
+    ps+=Number(v.cardiac)||1;
+    ps+=Number(v.resp)||1;
+    ps+=(v.sbp>=110&&v.sbp<=130)?1:((v.sbp>130&&v.sbp<=170)||(v.sbp>=100&&v.sbp<110))?2:(v.sbp>170||(v.sbp>=90&&v.sbp<100))?4:8;
+    ps+=(v.hr>=50&&v.hr<=80)?1:((v.hr>80&&v.hr<=100)||(v.hr>=40&&v.hr<50))?2:(v.hr>100&&v.hr<=120)?4:8;
+    ps+=v.gcs>=15?1:v.gcs>=12?2:v.gcs>=9?4:8;
+    ps+=(v.hb>=13&&v.hb<=16)?1:((v.hb>=11.5&&v.hb<13)||(v.hb>16&&v.hb<=17))?2:((v.hb>=10&&v.hb<11.5)||(v.hb>17&&v.hb<=18))?4:8;
+    ps+=(v.wcc>=4&&v.wcc<=10)?1:((v.wcc>10&&v.wcc<=20)||(v.wcc>3&&v.wcc<4))?2:4;
+    ps+=urea<=7.5?1:urea<=10?2:urea<=15?4:8;
+    ps+=v.na>=136?1:v.na>=131?2:v.na>=126?4:8;
+    ps+=(v.k>=3.5&&v.k<=5)?1:((v.k>=3.2&&v.k<3.5)||(v.k>5&&v.k<=5.3))?2:((v.k>=2.9&&v.k<3.2)||(v.k>5.3&&v.k<6))?4:8;
+    ps+=Number(v.ecg)||1;
+    os+=Number(v.sev)||1;
+    os+=Number(v.multi)||1;
+    os+=v.ebl<=100?1:v.ebl<=500?2:v.ebl<1000?4:8;
+    os+=Number(v.soil)||1;
+    os+=Number(v.malig)||1;
+    os+=Number(v.mode)||1;
+    return { ps:ps, os:os };
+  }
 
   /* search keywords / synonyms per calculator id, so common phrases
      (e.g. "ideal body weight", "creatinine clearance", "egfr") find the calc */
@@ -7215,7 +7609,21 @@
     tug:["timed up and go","tug","fall risk mobility","gait speed"],
     prisma7:["prisma-7","frailty screen","older adult frailty","disability screen"],
     gds30:["geriatric depression scale","gds-30","gds 30","elderly depression"],
-    cdr:["clinical dementia rating","cdr","dementia staging","dementia severity"]
+    cdr:["clinical dementia rating","cdr","dementia staging","dementia severity"],
+    ipss:["ipss","i-pss","aua symptom index","prostate symptom score","bph","luts","lower urinary tract symptoms","prostatism"],
+    mallampati:["mallampati","airway assessment","difficult airway","difficult intubation","samsoon young"],
+    meows:["meows","obstetric early warning","maternal early warning","maternal deterioration","cemach"],
+    pews:["pews","paediatric early warning","pediatric early warning","brighton pews","child deterioration"],
+    lund_browder:["lund browder","lund and browder","burn chart","paediatric burns","burn surface area","tbsa","parkland","burn fluid"],
+    possum:["possum","surgical risk","operative mortality","postoperative morbidity","copeland"],
+    p_possum:["p-possum","p possum","portsmouth possum","surgical mortality","prytherch"],
+    clavien_dindo:["clavien dindo","clavien-dindo","surgical complication grade","postoperative complication"],
+    lrinec:["lrinec","necrotising fasciitis","necrotizing fasciitis","nec fasc","soft tissue infection"],
+    esas:["esas","esas-r","edmonton symptom","symptom burden","palliative symptoms"],
+    pps:["ppsv2","palliative performance","victoria hospice","palliative functional status"],
+    cbac:["cbac","community based assessment checklist","ncd screening","ncd risk","asha checklist","npcdcs"],
+    ctg:["ctg","cardiotocograph","cardiotocography","fetal heart rate","figo ctg","intrapartum fetal monitoring"],
+    act_asthma:["asthma control test","asthma control","act score"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -7551,7 +7959,21 @@
     tug:"Podsiadlo D, Richardson S. J Am Geriatr Soc 1991;39(2):142–8 (TUG).",
     prisma7:"Raîche M, et al. Arch Gerontol Geriatr 2008;47(1):9–18 (PRISMA-7).",
     gds30:"Yesavage JA, et al. J Psychiatr Res 1982;17(1):37–49 (GDS).",
-    cdr:"Morris JC. Neurology 1993;43(11):2412–4 (Clinical Dementia Rating)."
+    cdr:"Morris JC. Neurology 1993;43(11):2412–4 (Clinical Dementia Rating).",
+    ipss:"Barry MJ, et al. J Urol 1992;148(5):1549 (AUA Symptom Index, adopted as the I-PSS).",
+    mallampati:"Samsoon GL, Young JR. Anaesthesia 1987;42(5):487; Roth D, et al. Cochrane Database Syst Rev 2018;5:CD008874.",
+    meows:"Singh S, McGlennan A, England A, Simons R. Anaesthesia 2012;67(1):12 (CEMACH-recommended MEOWS).",
+    pews:"Monaghan A. Paediatr Nurs 2005;17(1):32; Akre M, et al. Pediatrics 2010;125(4):e763; table as in Shafi OM, et al. Cureus 2020;12(11):e11339.",
+    lund_browder:"Lund CC, Browder NC. Surg Gynecol Obstet 1944;79:352; Lundin K, Alsbjørn B. Burns 2013;39(4):819; Parkland: Alharbi Z, et al. World J Emerg Surg 2012;7:13.",
+    possum:"Copeland GP, et al. Br J Surg 1991;78(3):355 (POSSUM).",
+    p_possum:"Prytherch DR, et al. Br J Surg 1998;85(9):1217 (P-POSSUM).",
+    clavien_dindo:"Dindo D, Demartines N, Clavien PA. Ann Surg 2004;240(2):205.",
+    lrinec:"Wong CH, et al. Crit Care Med 2004;32(7):1535 (LRINEC).",
+    esas:"Watanabe SM, et al. J Pain Symptom Manage 2011;41(2):456 (ESAS-r); Hui D, Bruera E. J Pain Symptom Manage 2017;53(3):630.",
+    pps:"Victoria Hospice Society. Palliative Performance Scale version 2 (PPSv2), 2001.",
+    cbac:"MoHFW, National Health Mission. Revised Community Based Assessment Checklist (CBAC), 9 Oct 2020 (NHSRC).",
+    ctg:"Ayres-de-Campos D, Spong CY, Chandraharan E. Int J Gynaecol Obstet 2015;131(1):13 (FIGO CTG consensus).",
+    act_asthma:"Nathan RA, et al. J Allergy Clin Immunol 2004;113(1):59 (Asthma Control Test)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 

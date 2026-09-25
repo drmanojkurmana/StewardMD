@@ -289,6 +289,10 @@
           window.SMD_WSQ_ALERT.delivered(data);
           if (window.SMD_WSQ_ALERT.handle(data)) return;
         }
+        // Kits sharing push (referral, handover, case room) → the item itself; fixed text, ids only.
+        if (data && data.type === "kits" && window.SMD_SHARE && window.SMD_SHARE.openFromPush) {
+          try { if (window.SMD_SHARE.openFromPush(data)) return; } catch (e) {}
+        }
         // FollowCare push → deep-link straight to that patient's recovery detail in-app (covers cold-launch).
         if (data && data.type === "followcare" && data.episodeId && window.FollowCare && window.FollowCare.openDetail) {
           try { window.FollowCare.openDetail(data.episodeId); return; } catch (e) {}

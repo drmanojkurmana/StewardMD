@@ -1048,6 +1048,10 @@
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
     govschemes: function () { if (window.SMD_GOVSCHEMES) SMD_GOVSCHEMES.open(); },
+    docs: function () { if (window.SMD_DOCS && SMD_DOCS.open) SMD_DOCS.open(); else toast("Documents loading…"); },
+    review: function () { if (window.SMD_REVIEW && SMD_REVIEW.open) SMD_REVIEW.open(); else toast("Review desk loading…"); },
+    kxinbox: function () { if (window.SMD_SHARE && SMD_SHARE.openInbox) SMD_SHARE.openInbox(); else toast("Loading…"); },
+    speckit: function () { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open(); else toast("Specialty kits loading…"); },
     icdsearch: function () { if (window.SMD_ICD) SMD_ICD.open(); },
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
@@ -1987,6 +1991,21 @@
       eligible: function () { try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
     { act: "staging", ic: "stairs", tt: "Cancer Staging", sub: "AJCC/TNM 32 Sites", feat: true, defOn: true,
       eligible: function () { return true; } },
+    // Specialty kits (specialty-kits.js): O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology,
+    // Psychiatry, Dental. eligible() reads the flag directly: home.js loads before specialty-kits-flags.js,
+    // so SMD_KITS_FLAGS may not exist yet at tile-render time. Same resolution: ?kits= then localStorage.
+    { act: "speckit", ic: "medical_services", tt: "Specialty Kits", sub: "O&G · Paeds · Eye · ENT · more", defOn: true,
+      eligible: function () { try { var q = (location.search.match(/[?&]kits=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_specialty_kits") !== "0"; } catch (e) { return true; } } },
+    // Clinical documents (clinical-docs.js): certificates, consent forms, handouts, MLC, MCCD draft.
+    { act: "docs", ic: "description", tt: "Documents", sub: "Certificates · consent · handouts", defOn: true,
+      eligible: function () { try { var q = (location.search.match(/[?&]docs=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_clinical_docs") !== "0"; } catch (e) { return true; } } },
+    // Clinical review desk (review-desk.js): approve or comment on AI-drafted content. Off by default on
+    // Home (reviewers add it from Add Tool); flag smd_review_desk / ?review=0 hides it entirely.
+    { act: "review", ic: "rate_review", tt: "Review content", sub: "Approve protocols and kits", defOn: false,
+      eligible: function () { try { var q = (location.search.match(/[?&]review=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_review_desk") !== "0"; } catch (e) { return true; } } },
+    // Colleagues (kits-share.js, wave 2): referrals, handovers and case rooms. Only when smd_kits_share is on.
+    { act: "kxinbox", ic: "groups", tt: "Colleagues", sub: "Referrals, handovers, cases", defOn: false,
+      eligible: function () { try { var q = (location.search.match(/[?&]share=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_kits_share") === "1"; } catch (e) { return false; } } },
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
@@ -2155,6 +2174,8 @@
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
+    // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
+    if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
     // that renders it (access code, tester flag, Physician Pro early access). Not dismissible.
     return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + (t.beta ? ', beta' : '') + '">' +
@@ -4148,7 +4169,9 @@
   function maikMeHasPHI(s) { return /\d{6,}/.test(String(s || "")) || /\b(mrn|uhid|ip ?no|op ?no|reg(istration)? ?no|patient'?s? name|bed ?(no|number)? ?\d)/i.test(String(s || "")); }
   function maikMeLine(m) {
     m = m || maikMeLoad(); var P = [];
-    if (m.spec) P.push("Speciality: " + String(m.spec).slice(0, 60));
+    // F4: with no speciality typed in About me, use the doctor's specialty kit (profile or chosen).
+    var kitSpec = ""; if (!m.spec) { try { kitSpec = (window.SMD_KITS && SMD_KITS.myLabel && (!SMD_KITS.on || SMD_KITS.on())) ? SMD_KITS.myLabel() : ""; } catch (e) {} }
+    if (m.spec || kitSpec) P.push("Speciality: " + String(m.spec || kitSpec).slice(0, 60) + (kitSpec ? "; prefer that specialty's guidelines and name the relevant specialty society where guidance differs" : ""));
     if (m.work && m.work.length) P.push("Works in: " + m.work.filter(function (w) { return MAIK_ME_WORK.indexOf(w) >= 0; }).join(", "));
     if (m.guide && MAIK_ME_GUIDE[m.guide]) P.push("Prefers " + MAIK_ME_GUIDE[m.guide] + " guidelines where guidance differs; name the major alternative when it matters");
     if (m.notes) P.push("Notes: " + String(m.notes).slice(0, 200));
@@ -6485,6 +6508,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // offer a one-tap "open in app" chip (drug interactions, calculators/scores, Drug Index dosing).
     // The chip routes through the delegated handler (data-maik-tool) → the ACT map, exactly like the
     // antibiogram refine route. Additive: chips only appear when the intent clearly matches.
+    function maikKitTool(n) {
+      var MAP = [
+        [/\b(edd|due date|expected date of delivery|gestational age|redat(e|ing)|dating scan)\b/, "obgyn", "pregnancy-dating"],
+        [/\b(partograph|labour care guide|labor care guide)\b/, "obgyn", "labour-care"],
+        [/\b(growth chart|z ?score|weight for age|height for age|length for age|weight for height|stunt(ed|ing)|wasting|muac)\b/, "paediatrics", "growth-who"],
+        [/\b(milestones?|developmental delay)\b/, "paediatrics", "milestones"],
+        [/\b(visual acuity|snellen|logmar)\b/, "ophthalmology", "visual-acuity"],
+        [/\b(rinne|weber test|hearing (loss )?grade|audiogram)\b/, "ent", "hearing"],
+        [/\bpasi\b|psoriasis (area|severity)/, "dermatology", "pasi"],
+        [/\b(dmft|dental chart|tooth chart|odontogram)\b/, "dental", "odontogram"],
+        [/\b(max(imum)? (safe )?dose|toxic dose)\b.*\b(lignocaine|lidocaine|bupivacaine|ropivacaine|local an(a)?esthetic)|\b(lignocaine|lidocaine|bupivacaine|ropivacaine|local an(a)?esthetic)\b.*\bmax(imum)? (safe )?dose/, "anaesthesia", "la-dose"],
+        [/\b(tbsa|lund (and )?browder|burns? (area|percentage|chart))\b/, "emergency", "burns-chart"],
+        [/\b(ckd stag(e|ing)|kdigo stag|albuminuria category)\b/, "nephrology-urology", "ckd-grid"],
+        [/\b(das ?28|cdai|joint count)\b/, "rheumatology", "joint-chart"],
+        [/\b(mccd|death certificate|certify(ing)? (the )?cause of death)\b/, "forensic", "mccd"],
+        [/\b(injury chart|body chart|mlc|medico ?legal)\b/, "forensic", "body-chart"]
+      ];
+      for (var i = 0; i < MAP.length; i++) if (MAP[i][0].test(n)) return [MAP[i][1], MAP[i][2]];
+      return null;
+    }
     function maikToolChipsHTML(question) {
       var n = maikNorm(question || ""), chips = [], seen = {};
       function add(tool, label) { if (seen[tool]) return; seen[tool] = 1; chips.push('<button class="maik-fu maik-tool" data-maik-tool="' + tool + '">' + maikEscH(label) + '</button>'); }
@@ -6496,6 +6539,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         else add("calculators", "Open calculators");
       }
       if (/\bdose|dosing|dosage|how much|mg\/kg|titrat/.test(n)) add("drugs", "Open Drug Index");
+      // Specialty kit tools (specialty-kits.js): questions a kit tool answers exactly (EDD, WHO z-scores,
+      // burns TBSA, DAS28, MCCD...). The chip opens the kit at that tool; it never answers by itself.
+      var K = window.SMD_KITS, kitHit = null;
+      try { if (K && K._tools && (!K.on || K.on())) kitHit = maikKitTool(n); } catch (e) { kitHit = null; }
+      if (kitHit && K._tools[kitHit[1]] && !seen["kit:" + kitHit[1]]) { seen["kit:" + kitHit[1]] = 1; chips.unshift('<button class="maik-fu maik-tool" data-maik-kit="' + kitHit[0] + ":" + kitHit[1] + '">' + maikEscH("Open " + K._tools[kitHit[1]].title) + '</button>'); }
       if (!chips.length) return "";
       return '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' + chips.slice(0, 2).join("") + '</div>';
     }
@@ -8115,7 +8163,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (figEl) { maikFigLightbox(figEl.getAttribute("data-fig-img"), figEl.getAttribute("data-fig-page"), figEl.getAttribute("data-fig-site"), figEl.getAttribute("data-fig-title")); return; }
       // data-maik-calc / data-maik-calcask chips (calculator cards, 2026-09-02) are routed by the shared
       // delegated handler below, not by the copilot launch path: exclude them here or they are swallowed.
-      var launch = ev.target && ev.target.closest ? ev.target.closest(".maik-tool:not([data-maik-tool]):not([data-maik-calc]):not([data-maik-calcask])") : null;
+      var launch = ev.target && ev.target.closest ? ev.target.closest(".maik-tool:not([data-maik-tool]):not([data-maik-calc]):not([data-maik-calcask]):not([data-maik-kit])") : null;
       if (launch) {
         ev.preventDefault();
         var kind = launch.getAttribute("data-maik-copilot"), arg = launch.getAttribute("data-maik-arg");
@@ -8253,9 +8301,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // [data-maik-tool] MUST be in this selector: the "Open Drug Index" chip carries only that
       // attribute, so without it the tool branch below was unreachable and the chip did nothing
       // (found live on the owner's phone, 2026-09-03).
-      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine],[data-maik-calc],[data-maik-calcask]") : null;
+      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine],[data-maik-calc],[data-maik-calcask],[data-maik-kit]") : null;
       if (!el) return;
       ev.preventDefault();
+      // "Open <kit tool>": close MaiK first (its sheet sits above the kit sheet), then open the kit at the tool.
+      var kitRef = el.getAttribute("data-maik-kit");
+      if (kitRef) { var kp = kitRef.split(":"); close(); setTimeout(function () { try { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open({ kit: kp[0], tool: kp[1] }); } catch (e) {} }, 180); return; }
       /* "Open <calculator>" straight into that calculator (reported 2026-09-02: the generic chip below
        * was dead - see the selector above, which used to stop at data-maik-q/data-maik-web so the
        * data-maik-tool branch was never reached). Close MaiK FIRST: the sheet is z-index 999 and the

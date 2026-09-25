@@ -1,0 +1,29 @@
+name: Guideline source watch
+
+# Weekly: fetch every URL that a protocol, specialty kit or consent template cites and compare it with the
+# committed baseline kb/source-watch.json. The report goes to the job summary and an artifact; nothing is
+# committed or deployed. After reading it, refresh the baseline locally:
+#   node scripts/check-guideline-updates.mjs --update   (then commit kb/source-watch.json)
+on:
+  schedule:
+    - cron: '17 3 * * 1'   # Mondays 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check cited sources
+        run: node scripts/check-guideline-updates.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source-watch-report
+          path: vault/handoff/source-watch-report.md

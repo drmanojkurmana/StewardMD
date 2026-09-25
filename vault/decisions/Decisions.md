@@ -9356,3 +9356,86 @@ saving. `app.js` is a built artifact here and is not safely editable.
 
 **Consequence.** Age and Sex are asked once, in the card that is actually about the patient. Where
 `:has()` is unsupported the rules do not apply and the old two-card layout stands.
+## 2026-09-25 - General clinical protocols live in the Knowledge Library, not the OPD Protocol tab
+Owner asked for protocols for every subject (sepsis and the rest), noting the OPD Protocol tab only
+has oncology. The OPD tab stays oncology-only: it ASSIGNS a dosed chemotherapy plan to a patient
+record (`smd_onco_protocols`), and mixing reference protocols into it would blur "reference" with
+"order". General protocols are reference content in a fifth Knowledge Library tab ([[Clinical
+Protocols]]), reachable from Universal Search and deep-linkable (`SMD_KBPROTO.open({id})`) if the OPD
+later wants a read-only link.
+Content is data (one JSON per protocol) with a validator that makes the unsafe states unrepresentable:
+no protocol without a cited https source, no "reviewed"/"approved" without a named reviewer, no em or
+en dash, no unknown keys. Everything shipped is `ai_drafted` (AI-assisted, web-researched against the
+cited guideline) and every screen says it is pending clinical review; that label changes only when a
+clinician reviews a protocol and the file names them. Flag default ON because the tab is additive and
+honest about its status; `?kbproto=0` removes it.
+
+## 2026-09-25 - Amended the same day: the OPD Protocol tab lists clinical protocols too
+The owner sent a screenshot of the OPD Protocol tab ("Search &amp; assign", oncology only) and asked for
+the protocols there, with a branch filter and working search. So the tab is now one list of clinical
+protocols + oncology regimens. The earlier concern (reference vs order) is kept by the UI, not by
+separation: clinical rows open a read-only reader in the tab and have no Assign; only oncology rows can
+Assign, and that still creates a DRAFT plan the ONCQIS tab must confirm. Also fixed: the double-escaped
+"&amp;" header, em dashes and the placeholder dash under every regimen, a search that missed cancer
+types written with spaces ("breast cancer" vs `breast_cancer`) and drug names, and a read-only profile
+that sat on "Loading the protocol library..." forever (the loader required write mode).
+
+## 2026-09-25 - International and India protocols are separate files, not one file with two columns
+Owner asked for international-guideline protocols as well. 138 of the first 156 were already built on
+international guidance; 18 were built on Indian national programmes (NCVBDC, NTEP, NCDC, MoHFW...).
+Where both exist and differ (malaria primaquine dose, TB regimens, rabies schedules, GDM criteria), a
+single protocol with "India says X, WHO says Y" on every line is hard to follow at the bedside. So each
+guideline family gets its own file (`basis`), paired by `counterpart`, with a filter and a one-tap link
+between them. A protocol is never silently a blend: its primary source decides its basis.
+
+## 2026-09-25 - Specialty kits write into the existing assessment, not a new schema
+The owner asked what would make the app useful beyond surgery, medicine and critical care, then asked
+for the O&G and Paediatrics kits first and all eight completed ([[Specialty Kits]]). A kit could have
+had its own saved record per specialty, but GHIS/EMR saves one Initial Assessment form, and a second
+record would need a server schema, sync and a second Save that doctors would miss. So a kit is a
+structured front end to fields that already exist: sections compose only what was filled and APPEND it
+to a named assessment field, and a few values fill single form fields (LMP, weight, hydration). Nothing
+is saved until the doctor saves the assessment; the kit is disabled until that form has loaded, because
+loading it replaces every value. Tools whose answer is a number (WHO z-scores, ACOG redating, WHO vision
+and hearing grades, PASI, DMFT) are computed in code and tested against the publishers' own examples
+(WHO's anthro README cases and all 2101 z-scores of the WHO 2007 survey), not written by a model at run
+time. The WHO growth numbers are taken from WHO's official R packages' data tables, which are identical
+to the who.int expanded tables; no package code is used. Picking a kit also picks the matching MaiK
+Scribe template. Everything is `ai_drafted` and says so; flag default ON because it is additive.
+
+
+## 2026-09-25 - "Every branch" list: phone-only work first, server work second
+The owner ticked 42 of 44 proposals and wrote "do all which need server first then all server needed
+works as second wave". Read as: first everything that needs no server, then the server items as a
+second wave (the sentence only parses that way with "all server needed works as second wave"). Told
+the owner that reading. Wave 1 is built; wave 2 is in [[Roadmap]].
+
+## 2026-09-25 - Documents and handover are never stored; review decisions leave by file
+Certificates, consent forms, MLC letters and the I-PASS handover hold patient identifiers. They are
+filled in memory, printed or shared by the doctor, and dropped on close ([[Clinical Documents]]), so
+there is no PHI at rest to secure, sync or delete. The Reg. No. prints only when the app verified it;
+a typed one could be anyone's. The [[Review Desk]] keeps content ids and comments only, and a reviewer's
+decisions reach the repo as an exported file the owner applies with `scripts/apply-reviews.mjs`, which
+never downgrades an approved item and needs `--accept-unverified` for an unverified reviewer. Server
+sync of either is wave 2.
+
+## 2026-09-25 - Reference numbers from a source file, not from the model
+Every number a wave 1 tool uses (LA mg/kg and ceilings, Lund and Browder columns, WHO Labour Care Guide
+alert values, notifiable list, MCCD modes of dying) sits in `kb/specialty-kits/src/data-*.json` with its
+source and a `verified` note saying how it was read, and the maths is tested against hand-worked
+published values. Where a source was silent the tool is conservative: the LA dose counts nobody above
+70 kg (Williams and Walker 2014) because the with-adrenaline rows have no mg ceiling; MCCD Part I has
+three lines because India's Form 4 has three, not WHO's four.
+
+## 2026-09-25 - Wave 2 sharing: server-side, verified doctors only, sealed, off by default
+[[Colleagues]] could have extended the client-side Firestore patterns (`referrals.js`, `sharedCases`),
+but those store patient data readable by rules, and `referrals.js` puts the full ICU entry in Firestore
+unencrypted. So wave 2 is one server route family (`/api/kits`) with deny-all collections: every write is
+validated on the server, patient data only moves between registration-verified doctors (both ends
+checked from Firebase claims), everything clinical is AES-GCM sealed with the existing PHI key, pushes are
+fixed text, and the patient's record number never leaves a POST body (history is keyed by an HMAC under
+an HKDF-derived key). Identity is the verified ID token only; the older `identify()` that also trusts a
+bare Cf-Access email header is deliberately not used. A hospital's kit version is published by the
+org owner or an `admin`/`pg_hod` member who is also a verified doctor, without adding a new capability
+to `_queue_roles.js` (a central security file). Kit history is per doctor, not per hospital, until a
+hospital asks. The whole thing is off twice (server env and client flag) until the owner approves.

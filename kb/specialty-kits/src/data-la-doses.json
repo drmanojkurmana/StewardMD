@@ -1,0 +1,16 @@
+{
+ "source": { "org": "Association of Anaesthetists", "title": "Williams DJ, Walker JD. A nomogram for calculating the maximum dose of local anaesthetic. Anaesthesia 2014; 69: 847 to 853 (Table 1 and Discussion)", "year": 2014, "url": "https://associationofanaesthetists-publications.onlinelibrary.wiley.com/doi/10.1111/anae.12679" },
+ "verified": "Read on 2026-09-25 from the full-text PDF of the article (the publisher page and the BNF site both returned HTTP 403, so the BNF could not be checked directly). mgPerKg and strengths: Table 1, Commonly used preparations of local anaesthetics: lidocaine 3 mg/kg at 1% and 2%; lidocaine with adrenaline 6 mg/kg at 1% and 2%; prilocaine 6 mg/kg and with adrenaline 8 mg/kg at 1% and 2%; bupivacaine 2 mg/kg and with adrenaline 2.5 mg/kg at 0.25% and 0.5%; ropivacaine 3 mg/kg and with adrenaline 4 mg/kg at 0.75% (the only ropivacaine strength in the table). Each row was checked against the table's dosage factor column (maximum dose divided by concentration, e.g. lidocaine 1% 0.3 mL/kg = 3 mg/kg). maxMg: the Discussion quotes the BNF 63rd edition maxima lidocaine 200 mg, bupivacaine 150 mg and prilocaine 400 mg and pairs them with 67, 75 and 67 kg, i.e. the plain mg/kg doses, so they are entered as plain-solution ceilings only. The source gives no mg ceiling for solutions with adrenaline or for ropivacaine, so those are null. Levobupivacaine is not in this source and is left out. Body weight rule and mixture rule in notes are from the section Instructions for use and the Discussion.",
+ "drugs": [
+  { "id": "lidocaine", "label": "Lidocaine (lignocaine)", "plain": { "mgPerKg": 3, "maxMg": 200 }, "withAdrenaline": { "mgPerKg": 6, "maxMg": null }, "strengths": [1, 2] },
+  { "id": "prilocaine", "label": "Prilocaine", "plain": { "mgPerKg": 6, "maxMg": 400 }, "withAdrenaline": { "mgPerKg": 8, "maxMg": null }, "strengths": [1, 2] },
+  { "id": "bupivacaine", "label": "Bupivacaine", "plain": { "mgPerKg": 2, "maxMg": 150 }, "withAdrenaline": { "mgPerKg": 2.5, "maxMg": null }, "strengths": [0.25, 0.5] },
+  { "id": "ropivacaine", "label": "Ropivacaine", "plain": { "mgPerKg": 3, "maxMg": null }, "withAdrenaline": { "mgPerKg": 4, "maxMg": null }, "strengths": [0.75] }
+ ],
+ "notes": [
+  "Use ideal body weight, and use 70 kg for anyone weighing 70 kg or more: the source and the BNF base these doses on ideal body weight. This matters most where no mg ceiling is given (with adrenaline, and ropivacaine).",
+  "Mixtures: calculate as if the whole volume were the agent with the greater toxic potential.",
+  "Toxicity varies with each patient's pharmacokinetics and pharmacodynamics, so a dose within the maximum can still cause toxicity.",
+  "If toxicity is suspected, stop injecting and follow the local anaesthetic systemic toxicity (LAST) protocol."
+ ]
+}

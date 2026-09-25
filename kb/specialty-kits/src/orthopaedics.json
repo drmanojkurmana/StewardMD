@@ -1,0 +1,170 @@
+{
+ "id": "orthopaedics",
+ "label": "Orthopaedics",
+ "short": "Ortho",
+ "icon": "orthopedics",
+ "group": "surgical",
+ "subject": "surgery-trauma",
+ "scribe": "orthopaedics",
+ "tools": [],
+ "sections": [
+  {
+   "id": "presenting-complaint",
+   "title": "Presenting complaint",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "complaint", "label": "Main complaint", "type": "select", "opts": ["Pain", "Swelling", "Deformity", "Stiffness", "Instability or giving way", "Locking", "Weakness", "Numbness or tingling", "Limp", "Wound or discharge"] },
+    { "id": "site", "label": "Site", "type": "select", "opts": ["Shoulder", "Arm", "Elbow", "Forearm", "Wrist", "Hand and fingers", "Neck", "Upper back", "Lower back", "Pelvis", "Hip", "Thigh", "Knee", "Leg", "Ankle", "Foot", "Multiple sites"] },
+    { "id": "side", "label": "Side", "type": "select", "opts": ["Right", "Left", "Both sides", "Midline"] },
+    { "id": "mechanism", "label": "Onset or mechanism of injury", "type": "select", "opts": ["No injury, gradual onset", "No injury, sudden onset", "Fall on outstretched hand", "Slip or trip on level ground", "Fall from height", "Road traffic accident", "Twisting injury", "Direct blow", "Sports injury", "Crush injury", "Assault"] },
+    { "id": "duration", "label": "Duration", "type": "text", "hint": "e.g. 2 hours, 3 days, 6 months" },
+    { "id": "pain_score", "label": "Pain score (0 to 10)", "type": "number", "unit": "/10", "set": "pain_score" },
+    { "id": "pain_pattern", "label": "Pain pattern", "type": "select", "opts": ["Mechanical, worse with activity", "Inflammatory, morning stiffness over 30 minutes", "Constant, at rest and at night", "Radiating down a limb"] },
+    { "id": "weight_bearing", "label": "Weight bearing (lower limb)", "type": "select", "opts": ["Bearing weight normally", "Bearing weight with a limp", "Unable to bear weight"] },
+    { "id": "hand_dominance", "label": "Hand dominance", "type": "select", "opts": ["Right-handed", "Left-handed", "Ambidextrous"] },
+    { "id": "occupation", "label": "Occupation and activity level", "type": "text", "hint": "e.g. farmer, labourer, desk work, sport played" },
+    { "id": "constitutional", "label": "Constitutional symptoms", "type": "select", "opts": ["None", "Fever", "Weight loss", "Fever and weight loss", "Night sweats"] },
+    { "id": "prior_treatment", "label": "Treatment so far", "type": "text", "hint": "e.g. traditional bone setter bandage, massage, injections, previous surgery or implant" }
+   ]
+  },
+  {
+   "id": "joint-examination",
+   "title": "Joint examination (look, feel, move)",
+   "target": "musculo_skeletal_system",
+   "fields": [
+    { "id": "joint", "label": "Joint examined", "type": "select", "opts": ["Shoulder", "Elbow", "Wrist", "Hand and fingers", "Hip", "Knee", "Ankle", "Foot"] },
+    { "id": "swelling", "label": "Swelling", "type": "select", "opts": ["None", "Soft tissue", "Effusion", "Bony", "Diffuse"] },
+    { "id": "deformity", "label": "Deformity", "type": "select", "opts": ["None", "Varus", "Valgus", "Fixed flexion", "Rotational", "Angular", "Shortening"] },
+    { "id": "skin_over_joint", "label": "Skin", "type": "select", "opts": ["Normal", "Redness", "Bruising", "Scar", "Sinus or discharge", "Wound"] },
+    { "id": "wasting", "label": "Muscle wasting", "type": "select", "opts": ["None", "Mild", "Marked"] },
+    { "id": "local_temperature", "label": "Local temperature", "type": "select", "opts": ["Normal", "Raised"] },
+    { "id": "tenderness", "label": "Tenderness", "type": "select", "opts": ["None", "Joint line", "Localised bony", "Diffuse", "Over tendon or ligament"] },
+    { "id": "crepitus", "label": "Crepitus", "type": "select", "opts": ["None", "Present"] },
+    { "id": "rom", "label": "Range of movement", "type": "select", "opts": ["Full, painless", "Full, painful", "Restricted, painful", "Restricted, painless", "No movement (ankylosed)"] },
+    { "id": "rom_degrees", "label": "Range in degrees (active and passive)", "type": "text", "hint": "e.g. knee flexion 0 to 90 degrees, fixed flexion 10 degrees" },
+    { "id": "special_tests", "label": "Stability and special tests", "type": "text", "hint": "e.g. Lachman positive, McMurray negative, empty can positive" },
+    { "id": "gait", "label": "Gait", "type": "select", "opts": ["Normal", "Antalgic", "Trendelenburg", "Short-limb", "High-stepping", "Waddling", "Unable to walk"], "set": "gait" }
+   ]
+  },
+  {
+   "id": "fracture",
+   "title": "Fracture description",
+   "target": "local_examination",
+   "fields": [
+    { "id": "fracture_bone", "label": "Bone", "type": "text", "hint": "e.g. right distal radius, left tibia" },
+    { "id": "fracture_segment", "label": "Segment", "type": "select", "opts": ["Proximal end", "Shaft (diaphysis)", "Distal end", "Malleolar (ankle)"] },
+    { "id": "fracture_articular", "label": "Joint surface", "type": "select", "opts": ["Extra-articular", "Partial articular", "Complete articular"] },
+    { "id": "fracture_pattern", "label": "Pattern", "type": "select", "opts": ["Transverse", "Oblique", "Spiral", "Wedge (butterfly fragment)", "Comminuted", "Segmental", "Avulsion", "Impacted or compression", "Greenstick", "Buckle (torus)", "Physeal (growth plate)"] },
+    { "id": "displacement", "label": "Displacement", "type": "select", "opts": ["Undisplaced", "Minimally displaced", "Displaced", "Angulated", "Shortened or overlapping", "Rotated", "Fracture-dislocation"] },
+    { "id": "displacement_details", "label": "Displacement details", "type": "text", "hint": "e.g. 20 degrees dorsal angulation, 5 mm shortening" },
+    { "id": "open_closed", "label": "Open or closed", "type": "select", "opts": ["Closed", "Open"] },
+    { "id": "gustilo", "label": "Gustilo-Anderson type (open fractures)", "type": "select", "opts": ["Type I (wound under 1 cm, clean)", "Type II (wound over 1 cm, no extensive soft-tissue damage)", "Type IIIA (extensive soft-tissue damage, bone covered)", "Type IIIB (periosteal stripping, needs flap cover)", "Type IIIC (arterial injury needing repair)"], "hint": "Confirm the type at surgical debridement" },
+    { "id": "soft_tissue", "label": "Skin and soft tissue", "type": "select", "opts": ["Intact", "Abrasion or bruising", "Fracture blisters", "Tented skin at risk", "Wound over fracture"] },
+    { "id": "wound", "label": "Wound (size, contamination, bone exposed)", "type": "text", "hint": "Photograph the wound before dressing it" },
+    { "id": "fracture_classification", "label": "Named classification", "type": "text", "hint": "e.g. AO/OTA 23A2, Garden III, Weber B, Schatzker II" }
+   ]
+  },
+  {
+   "id": "neurovascular",
+   "title": "Neurovascular status distal to injury",
+   "target": "local_examination",
+   "alert": "Suspected compartment syndrome or arterial injury: release all circumferential dressings and split the cast to skin, realign and splint a deformed limb, and get immediate consultant orthopaedic review, with vascular surgery if pulseless. Decompression and revascularisation are emergencies.",
+   "fields": [
+    { "id": "distal_pulses", "label": "Distal pulses (compare with other side)", "type": "select", "opts": ["Palpable, equal to other side", "Palpable, weaker than other side"], "hint": "e.g. radial, dorsalis pedis, posterior tibial" },
+    { "id": "capillary_refill", "label": "Capillary refill", "type": "select", "opts": ["2 seconds or less", "Over 2 seconds"] },
+    { "id": "distal_sensation", "label": "Sensation distal to injury", "type": "select", "opts": ["Intact", "Reduced", "Absent"] },
+    { "id": "nerve_territory", "label": "Nerve territory affected", "type": "select", "opts": ["None", "Median", "Anterior interosseous", "Ulnar", "Radial or posterior interosseous", "Axillary", "Sciatic", "Common peroneal", "Tibial", "Femoral"] },
+    { "id": "distal_motor", "label": "Active finger or toe movement", "type": "select", "opts": ["Normal", "Weak", "Absent"] },
+    { "id": "compartments", "label": "Compartments on palpation", "type": "select", "opts": ["Soft", "Swollen but compressible"] },
+    { "id": "cs_pain_disproportion", "label": "Pain out of proportion to the injury or rising analgesic need", "type": "check" },
+    { "id": "cs_passive_stretch", "label": "Pain on passive stretch of the compartment muscles", "type": "check" },
+    { "id": "cs_tense", "label": "Tense, swollen compartment", "type": "check" },
+    { "id": "pulseless_limb", "label": "Pulse not palpable, or limb pale or cold", "type": "check" },
+    { "id": "progressive_deficit", "label": "New or worsening numbness or weakness", "type": "check" }
+   ]
+  },
+  {
+   "id": "spine",
+   "title": "Spine examination",
+   "target": "musculo_skeletal_system",
+   "alert": "Suspected cauda equina syndrome: refer as an emergency now to a hospital with emergency MRI and a spinal surgical team (MRI within 4 hours of request), and keep nil by mouth.",
+   "fields": [
+    { "id": "spine_region", "label": "Region", "type": "select", "opts": ["Cervical", "Thoracic", "Lumbar", "Sacroiliac"] },
+    { "id": "spine_tenderness", "label": "Tenderness", "type": "select", "opts": ["None", "Midline bony", "Paraspinal muscle", "Sacroiliac joint"], "hint": "note the level, e.g. L4 to L5" },
+    { "id": "spine_deformity", "label": "Deformity", "type": "select", "opts": ["None", "Loss of lordosis", "Scoliosis", "Kyphosis", "Gibbus (angular kyphosis)", "Step"] },
+    { "id": "slr", "label": "Straight leg raise", "type": "select", "opts": ["Negative both sides", "Positive right", "Positive left", "Positive both sides", "Crossed straight leg raise positive"] },
+    { "id": "motor_deficit", "label": "Motor deficit (myotome, MRC grade)", "type": "text", "hint": "e.g. right L5, big toe extension 3/5", "set": "motor_sys" },
+    { "id": "sensory_deficit", "label": "Sensory deficit (dermatome)", "type": "text", "hint": "e.g. reduced over right L5 dermatome", "set": "sensory_sys" },
+    { "id": "reflexes", "label": "Reflexes", "type": "text", "hint": "e.g. right ankle jerk absent, knee jerks normal", "set": "reflexes" },
+    { "id": "plantar", "label": "Plantar response", "type": "select", "opts": ["Flexor both sides", "Extensor right", "Extensor left", "Extensor both sides", "Equivocal"], "set": "plantar" },
+    { "id": "ces_saddle", "label": "Numbness in the saddle, perianal or genital area", "type": "check", "hint": "a rectal examination is not needed; record reported perianal sensation" },
+    { "id": "ces_bladder_bowel", "label": "New bladder or bowel disturbance (difficulty, retention, incontinence or loss of sensation)", "type": "check" },
+    { "id": "ces_bilateral_legs", "label": "Severe or progressive weakness or numbness in both legs", "type": "check" },
+    { "id": "ces_sexual", "label": "New sexual dysfunction", "type": "check" }
+   ]
+  },
+  {
+   "id": "immobilisation",
+   "title": "Splint, cast or immobilisation applied",
+   "target": "management_plan",
+   "fields": [
+    { "id": "immobilisation", "label": "Immobilisation", "type": "select", "opts": ["None", "Crepe bandage or strapping", "Buddy strapping", "Arm sling", "Collar and cuff", "Slab (back slab)", "Complete cast", "Brace or splint", "Cervical collar", "Spinal brace", "Skin traction"] },
+    { "id": "extent", "label": "Extent", "type": "select", "opts": ["Below elbow", "Above elbow", "Thumb spica", "Below knee", "Above knee", "Cylinder", "Hip spica"] },
+    { "id": "cast_material", "label": "Material", "type": "select", "opts": ["Plaster of Paris", "Fibreglass or resin", "Prefabricated"] },
+    { "id": "position", "label": "Position of immobilisation", "type": "text", "hint": "e.g. wrist neutral, elbow at 90 degrees, ankle plantigrade" },
+    { "id": "reduction", "label": "Reduction", "type": "select", "opts": ["Not required", "Closed reduction, position acceptable", "Closed reduction, position not acceptable"] },
+    { "id": "nv_after", "label": "Neurovascular status after application", "type": "select", "opts": ["Intact, unchanged", "Changed, escalated"] },
+    { "id": "weight_bearing_allowed", "label": "Weight bearing allowed", "type": "select", "opts": ["Non-weight bearing", "Touch weight bearing", "Partial weight bearing", "Weight bearing as tolerated", "Full weight bearing"] },
+    { "id": "vte_assessed", "label": "VTE risk assessed (lower limb cast)", "type": "check" },
+    { "id": "cast_advice", "label": "Verbal and written cast care advice given", "type": "check" },
+    { "id": "review_date", "label": "Cast check or review date", "type": "date" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "X-ray knee (standing AP and lateral)", "query": "X-ray knee" },
+  { "label": "X-ray LS spine (AP and lateral)", "query": "X-ray LS spine" },
+  { "label": "X-ray cervical spine", "query": "X-ray cervical spine" },
+  { "label": "X-ray pelvis with both hips", "query": "X-ray pelvis" },
+  { "label": "MRI LS spine", "query": "MRI LS spine" },
+  { "label": "MRI knee", "query": "MRI knee" },
+  { "label": "CBC", "query": "CBC" },
+  { "label": "ESR", "query": "ESR" },
+  { "label": "CRP", "query": "CRP" },
+  { "label": "Serum uric acid", "query": "uric acid" },
+  { "label": "Rheumatoid factor", "query": "RA factor" },
+  { "label": "Vitamin D (25-hydroxy)", "query": "vitamin D" },
+  { "label": "DEXA scan (bone density)", "query": "DEXA" },
+  { "label": "Synovial fluid analysis", "query": "synovial fluid" }
+ ],
+ "protocols": ["open-fracture", "acute-compartment-syndrome", "septic-arthritis", "trauma-primary-survey", "tetanus", "necrotising-soft-tissue-infection", "osteoarthritis", "acute-gout", "rheumatoid-arthritis", "polymyalgia-rheumatica", "osteoporosis", "vitamin-d-deficiency", "malignant-spinal-cord-compression", "surgical-antibiotic-prophylaxis", "perioperative-vte-prophylaxis", "deep-vein-thrombosis"],
+ "calculators": ["ottawa_ankle", "ottawa_knee", "pittsburgh_knee", "salter_harris", "kocher", "nexus_cspine", "canadian_cspine", "mrc_power", "pulse_grade", "asia_impairment", "mjoa", "odi", "ndi", "womac", "oxford_knee", "oxford_hip", "harris_hip", "lysholm", "constant_shoulder", "quickdash", "tampa", "mirels", "sins", "caprini", "wells_dvt"],
+ "advice": [
+  {
+   "id": "cast-care",
+   "title": "Caring for your plaster",
+   "target": "diet_lifestyle_advice",
+   "text": "Keep the limb raised, especially for the first few days, and do not let it hang down. Move the fingers or toes and the joints outside the plaster often. Keep the plaster dry and away from fire, and contact the hospital if it cracks, becomes soft, loose or tight, or anything falls inside it."
+  },
+  {
+   "id": "cast-warning-signs",
+   "title": "Plaster warning signs",
+   "target": "follow_up_advice",
+   "text": "Come back at once if the pain keeps getting worse, the fingers or toes become blue, swollen, numb or tingling or you cannot move them, you get pain in the calf, chest pain or breathlessness, or there is rubbing, discharge, wetness or a bad smell under the plaster."
+  },
+  {
+   "id": "back-pain-warning-signs",
+   "title": "Back pain or sciatica: when to come at once",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if you get numbness between your legs or around your back passage or genitals, difficulty passing or controlling urine, leaking urine or stools, loss of feeling when you pass urine or stools, new weakness in both legs, or a change in sexual function."
+  }
+ ],
+ "sources": [
+  { "org": "British Orthopaedic Association", "title": "BOAST: Diagnosis and management of compartment syndrome of the extremities", "year": 2025, "url": "https://www.boa.ac.uk/resource/boast-10-pdf.html" },
+  { "org": "British Orthopaedic Association", "title": "BOAST: Diagnosis and management of arterial injuries associated with musculoskeletal trauma", "year": 2026, "url": "https://www.boa.ac.uk/resource/boast-6-pdf.html" },
+  { "org": "British Orthopaedic Association / BAPRAS", "title": "BOAST: Open fractures", "year": 2017, "url": "https://www.boa.ac.uk/resource/boast-4-pdf.html" },
+  { "org": "British Orthopaedic Association", "title": "Casting standards", "year": 2015, "url": "https://www.boa.ac.uk/static/cf78e85d-92e9-443b-a1aebd8fa0ae5c09/BOA-National-Casting-Standards.pdf" },
+  { "org": "GIRFT, NHS England", "title": "National suspected cauda equina syndrome (CES) pathway, updated March 2026", "year": 2026, "url": "https://gettingitrightfirsttime.co.uk/wp-content/uploads/2026/04/National-Suspected-Cauda-Equina-Pathway-March-2026.pdf" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}
