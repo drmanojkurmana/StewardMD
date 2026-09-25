@@ -9485,6 +9485,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return fetch(NOTIF_API + "/prefs", { method: "POST", headers: h, body: JSON.stringify(p) }).then(function (r) { return r.json().catch(function () { return {}; }); });
       }).then(function (j) {
         syncPushWorkspaces();
+        // REGISTER THE DEVICE, not just the preference.
+        //
+        // This screen used to POST push_enabled:true and stop there. The server then believed push
+        // was on for this account while holding no APNs token for the handset, so it had nothing to
+        // deliver to and said nothing about it: the doctor ticks every category, sees "Saved", and
+        // never receives a notification. Registration only ever happened if they wandered into a
+        // particular ICU or Ward Sync flow.
+        //
+        // Turning notifications on is what this screen is FOR, so it asks the OS here, and reports
+        // what actually happened rather than a blanket "Saved".
+        var setMsg = function (t) { if (msg) msg.textContent = t; };
+        if (window.SMD_enableNativePush) {
+          setMsg("Saving\u2026");
+          window.SMD_enableNativePush().then(function (on) {
+            setMsg(on ? "\u2705 Saved. This phone is registered for alerts."
+                      : "Saved, but iOS has notifications turned off for StewardMD. Enable them in Settings \u203a Notifications \u203a StewardMD.");
+          }, function () { setMsg((j && j.ok) ? "\u2705 Saved" : "Saved on this device"); });
+          return;
+        }
         if (msg) msg.textContent = (j && j.ok) ? "✅ Saved" : "Saved on this device";
         try { toast("Notification preferences saved"); } catch (e) {}
       }).catch(function () { syncPushWorkspaces(); if (msg) msg.textContent = "Saved on this device"; });
