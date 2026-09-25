@@ -34,6 +34,63 @@
   var MARK = "smd_maik_kb_installed";
   var MARK_SHA = "smd_maik_kb_sha";
 
+  // ── persisted BM25 index (audit T25 follow-up, 2026-09-25) ──────────────────────────────────
+  // The audit's stronger recommendation was a PRECOMPUTED index shipped with the app, so the
+  // first offline question never pays the ~3s build. Not done that way: the 42,176-row book
+  // (maik-lite-kb.jsonl) is not in this repo and is not a build-time asset - it is downloaded
+  // once per device from models.stewardmd.in and its raw text/pages are needed at query time
+  // regardless (Book.cite() reads rows[i].text), so a precomputed index would ship ALONGSIDE the
+  // 38 MB download, not instead of it, and (per buildIndex()'s own comment: ~1.6M terms, mostly
+  // bigrams) would be roughly as large as the corpus itself - a second big asset for a ~3s save.
+  // Persisting the ALREADY-BUILT index to IndexedDB, keyed to the same SHA256 that pins the
+  // download, gets the same outcome (only the first session ever tokenizes) for free: nothing
+  // extra to ship, nothing extra to invalidate.
+  var IDB_NAME = "smd-maik-kb";
+  var IDB_STORE = "kb-index";
+
+  function idbOpen() {
+    return new Promise(function (resolve, reject) {
+      if (typeof indexedDB === "undefined") { reject(new Error("no indexedDB")); return; }
+      var req;
+      try { req = indexedDB.open(IDB_NAME, 1); } catch (e) { reject(e); return; }
+      req.onupgradeneeded = function () {
+        if (!req.result.objectStoreNames.contains(IDB_STORE)) req.result.createObjectStore(IDB_STORE, { keyPath: "sha" });
+      };
+      req.onsuccess = function () { resolve(req.result); };
+      req.onerror = function () { reject(req.error || new Error("indexedDB open failed")); };
+    });
+  }
+
+  /** The persisted index for the CURRENTLY pinned SHA256, or null on any miss/mismatch/error - a
+   * cache miss must never block loadBook(), only cost it the rebuild every session used to pay
+   * before this. */
+  function idbGetIndex() {
+    return idbOpen().then(function (db) {
+      return new Promise(function (resolve) {
+        try {
+          var store = db.transaction(IDB_STORE, "readonly").objectStore(IDB_STORE);
+          var req = store.get(SHA256);
+          req.onsuccess = function () { resolve(req.result && req.result.sha === SHA256 ? req.result.idx : null); };
+          req.onerror = function () { resolve(null); };
+        } catch (e) { resolve(null); }
+      });
+    }).catch(function () { return null; });
+  }
+
+  /** Best-effort: persisting the index is an optimization, never a requirement, so any failure
+   * (quota, private mode, no IndexedDB) is swallowed. Only one entry is ever kept - a stale
+   * (superseded SHA256) entry is worthless, so the store is cleared before the new one goes in
+   * rather than accumulating one per KB version ever shipped. */
+  function idbPutIndex(idx) {
+    return idbOpen().then(function (db) {
+      try {
+        var store = db.transaction(IDB_STORE, "readwrite").objectStore(IDB_STORE);
+        store.clear();
+        store.put({ sha: SHA256, idx: idx });
+      } catch (e) {}
+    }).catch(function () {});
+  }
+
   function cap() { return (typeof window !== "undefined" && window.Capacitor) || null; }
   function isNative() { var c = cap(); return !!(c && c.isNativePlatform && c.isNativePlatform()); }
   function fs() { var c = cap(); return (c && c.Plugins && c.Plugins.Filesystem) || null; }
@@ -194,7 +251,18 @@
       // blocked the WebView main thread for ~3s on the real 42,176-row book. buildBookAsync
       // falls back to the synchronous new RAG.Book(rows) itself when a worker can't be used, so
       // this call site does not need to know which path actually ran.
-      return RAG.buildBookAsync ? RAG.buildBookAsync(rows, r.data) : new RAG.Book(rows);
+      //
+      // Persisted-index fast path (audit T25 follow-up, 2026-09-25): if a previous session
+      // already built and saved the index for THIS EXACT SHA256, skip the build entirely - rows
+      // still have to be parsed (cite() needs the text/pages regardless) but the ~3s tokenization
+      // pass is gone. A corrupt/mismatched cache entry just falls through to a normal rebuild.
+      function buildFresh() {
+        return RAG.buildBookAsync ? RAG.buildBookAsync(rows, r.data, function (idx) { idbPutIndex(idx); }) : new RAG.Book(rows);
+      }
+      return idbGetIndex().then(function (cachedIdx) {
+        if (!cachedIdx) return buildFresh();
+        try { return new RAG.Book(rows, cachedIdx); } catch (e) { return buildFresh(); }
+      });
     }).then(function (book) {
       _book = book; _loading = null;
       return _book;
