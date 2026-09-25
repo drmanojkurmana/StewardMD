@@ -22,11 +22,11 @@
   },
   {
    "kind": "immediate",
-   "title": "First-response bundle (start all within 15 minutes)",
+   "title": "E-MOTIVE first-response bundle (start all within 15 minutes)",
    "items": [
     "Call for help (senior obstetrician, anaesthetist, midwife). Two large-bore IV cannulae; send group and crossmatch, CBC, coagulation screen and fibrinogen. Empty the bladder with a catheter.",
     "Massage: rub the uterine fundus through the abdomen until it is firm and bleeding slows; repeat or continue intermittently as needed.",
-    "Oxytocin: 10 IU IV, diluted and given slowly over 1 to 2 minutes (or in a small crystalloid volume over 5 to 10 minutes), even if prophylactic oxytocin was already given. Then 10 to 20 IU in crystalloid over the next 4 hours, titrated to uterine tone.",
+    "Oxytocin: 10 IU IV, diluted and given slowly over 1 to 2 minutes (or in a small crystalloid volume over 5 to 10 minutes), even if prophylactic oxytocin was already given; never as a rapid undiluted IV bolus (profound hypotension and collapse). No IV access: 10 IU IM. Then 10 to 20 IU in crystalloid over the next 4 hours, titrated to uterine tone.",
     "Tranexamic acid: 1 g IV over 10 minutes as soon as PPH is diagnosed and within 3 hours of birth, whatever the cause (atony or trauma). Give a second 1 g if bleeding continues after 30 minutes or restarts within 24 hours. Do not start it more than 3 hours after birth.",
     "IV fluids: warmed isotonic crystalloid (Ringer lactate or 0.9% saline) in preference to colloids; reassess after each bolus and avoid overload, especially in pre-eclampsia or heart disease.",
     "Examine: check the placenta and membranes for completeness and inspect the vagina, cervix and perineum for tears and haematoma; repair bleeding tears promptly.",
@@ -39,8 +39,8 @@
    "title": "Second-line uterotonics",
    "items": [
     "If IV oxytocin is unavailable or bleeding does not respond, WHO 2025 recommends IV ergometrine, oxytocin-ergometrine fixed-dose combination, or a prostaglandin including sublingual misoprostol 800 mcg. No sequence is proven; choose by availability and contraindications.",
-    "Methylergometrine 0.2 mg IM or slow IV. Do not use in hypertension, pre-eclampsia or heart disease.",
-    "Carboprost (15-methyl prostaglandin F2 alpha) 250 mcg deep IM, repeated every 15 minutes if needed, maximum 8 doses (2 mg). Avoid in asthma.",
+    "Methylergometrine 0.2 mg IM or slow IV. Contraindicated in any hypertension (chronic or gestational hypertension, pre-eclampsia, eclampsia) and in heart disease: risk of severe hypertension, stroke and coronary spasm.",
+    "Carboprost (15-methyl prostaglandin F2 alpha) 250 mcg deep IM, repeated every 15 minutes if needed, maximum 8 doses (2 mg). Contraindicated in asthma (bronchospasm).",
     "Misoprostol 800 mcg sublingual once. Adding misoprostol to oxytocin already given for treatment brings no extra benefit; expect shivering and fever.",
     "Carbetocin given as prophylaxis should not be repeated for treatment (not adequately studied)."
    ]
@@ -94,17 +94,17 @@
    "items": [
     "Waiting for 500 mL, hypotension or a falling Hb before acting, or relying on visual estimation.",
     "Giving bundle components one after another instead of together, and missing the 3-hour tranexamic acid window.",
-    "Methylergometrine in pre-eclampsia or hypertension; carboprost in asthma.",
+    "Methylergometrine in pre-eclampsia or hypertension; carboprost in asthma; oxytocin as a rapid undiluted IV bolus.",
     "Assuming atony when the uterus is firm: look for trauma, retained tissue, uterine inversion or a concealed haematoma.",
     "Repeated crystalloid boluses without reassessment, causing dilutional coagulopathy and pulmonary oedema."
    ]
   }
  ],
  "drugs": [
-  { "name": "Oxytocin", "dose": "Treatment: 10 IU IV diluted, slowly over 1 to 2 minutes, then 10 to 20 IU in crystalloid over 4 hours titrated to tone. Prevention: 10 IU IM or slow IV", "notes": "First-line for prevention and treatment. Repeat dosing is safe after prophylaxis. Avoid rapid undiluted IV push (hypotension)." },
+  { "name": "Oxytocin", "dose": "Treatment: 10 IU IV diluted, slowly over 1 to 2 minutes, then 10 to 20 IU in crystalloid over 4 hours titrated to tone. Prevention: 10 IU IM or slow IV", "notes": "First-line for prevention and treatment. Repeat dosing is safe after prophylaxis. Never give as a rapid undiluted IV bolus (hypotension)." },
   { "name": "Tranexamic acid", "dose": "1 g IV over 10 minutes; second 1 g if bleeding continues after 30 minutes or restarts within 24 hours", "notes": "Start within 3 hours of birth for every PPH. Not for routine prevention. Avoid with a known thromboembolic event in this pregnancy." },
-  { "name": "Methylergometrine", "dose": "0.2 mg IM or slow IV; may repeat after 15 minutes, then every 2 to 4 hours if needed; maximum 5 doses (1 mg in total)", "notes": "Contraindicated in hypertension, pre-eclampsia and heart disease." },
-  { "name": "Carboprost (15-methyl PGF2 alpha)", "dose": "250 mcg deep IM every 15 minutes as needed; maximum 8 doses (2 mg)", "notes": "Avoid in asthma. Diarrhoea, vomiting, fever and bronchospasm are common." },
+  { "name": "Methylergometrine", "dose": "0.2 mg IM or slow IV; may repeat after 15 minutes, then every 2 to 4 hours if needed; maximum 5 doses (1 mg in total)", "notes": "Contraindicated in hypertension (including gestational hypertension, pre-eclampsia and eclampsia) and heart disease." },
+  { "name": "Carboprost (15-methyl PGF2 alpha)", "dose": "250 mcg deep IM every 15 minutes as needed; maximum 8 doses (2 mg)", "notes": "Contraindicated in asthma. Diarrhoea, vomiting, fever and bronchospasm are common." },
   { "name": "Misoprostol", "dose": "Treatment: 800 mcg sublingual once. Prevention: 400 or 600 mcg orally once", "notes": "Use when injectable uterotonics are unavailable. Shivering and pyrexia common." },
   { "name": "Carbetocin (heat-stable)", "dose": "100 mcg IM or IV once, for prevention only", "notes": "Alternative to oxytocin where the cold chain cannot be guaranteed. Not for treatment after prophylactic carbetocin." }
  ],
