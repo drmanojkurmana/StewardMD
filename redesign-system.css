@@ -850,6 +850,12 @@ html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
 }
 
 
+/* Energy (2026-09-25): the looping tile icons pause while the home is not what is on screen
+ * (home.js refreshTileAnim sets .hv-still) and per icon when scrolled out of view (.ai-offscreen).
+ * A paused CSS animation costs nothing per frame; wherever an icon can be seen it animates as before. */
+#homeV2.hv-still .ai-anim, #homeV2.hv-still .ai-anim *, #homeV2.hv-still .ai-clinix-img, #homeV2.hv-still .tx-tile-lungs,
+#homeV2 .ai-offscreen, #homeV2 .ai-offscreen * { animation-play-state: paused !important; }
+
 /* iPad / Tablet layout expansions */
 @media (min-width: 768px) {
   #homeV2.rnav .rnav-stack { max-width: 820px; }
