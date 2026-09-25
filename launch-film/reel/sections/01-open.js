@@ -1,5 +1,5 @@
 /* 01 · Opening (0-4.5 s). On white: the StewardMD mark resolves on two heartbeat pulses, the
-   wordmark (app header style, "Steward" + teal "MD") wipes in with a letter-clipped sheen, the
+   wordmark (app header style, "Steward" + teal "MD") wipes in with a letter-clipped teal glint, the
    site's kicker lands; the identity lifts away as the iPhone rises with the real home screen. */
 FILM.section({
   id: "r01-open", start: FILM.T.open, duration: FILM.T.reason - FILM.T.open, z: 2,
@@ -16,7 +16,7 @@ FILM.section({
 
     var WM = "position:absolute;left:0;right:0;top:268px;font:700 128px/1 Inter;letter-spacing:-.035em;white-space:nowrap;";
     var word = F.el(group, "", WM + "color:#0D1B24", 'Steward<span style="color:#0F766E">MD</span>');
-    var sheen = F.el(group, "", WM + "color:transparent;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.9) 50%,transparent 60%);" +
+    var sheen = F.el(group, "", WM + "color:transparent;background:linear-gradient(100deg,transparent 45%,rgba(95,212,194,.95) 50%,transparent 55%);" +
       "background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text", "Steward<span>MD</span>");
     var kick = F.el(group, "", "position:absolute;left:0;right:0;top:440px;font:600 21px Inter;letter-spacing:.34em;color:#0F766E",
       '<span style="display:inline-block;width:52px;height:1px;background:#0F766E;vertical-align:middle;margin-right:24px;opacity:.6"></span>CLINICAL INTELLIGENCE WORKSPACE<span style="display:inline-block;width:52px;height:1px;background:#0F766E;vertical-align:middle;margin-left:24px;opacity:.6"></span>');

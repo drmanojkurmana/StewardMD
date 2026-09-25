@@ -74,6 +74,16 @@ for how StewardMD actually ships:
 | 32.5-38.5 | `06-watch.js` | **05 On the wrist**: Apple Watch rises in front of the ICU phone; critical labs, then a wrist flick to Code Blue. | watch rises |
 | 38.5-45 | `07-finale.js` | "One workspace, *pocket to wrist.*": iPhone, Android and Watch together with the five named; then the end card: "When the clinical decision matters, *open StewardMD.*", platforms, OPD on the web, fine print. | converge, recede |
 
+Reel review pass (first full render → final):
+
+| Problem in reel v1 | Fix |
+|---|---|
+| The phone peeked in at the bottom edge during the logo (about 1.5 s) | Rise starts from y 2250, fully off-frame |
+| On white, the white wordmark sheen erased letters mid-sweep ("Ste ardMD" at about 2 s) | Sheen is a narrow teal glint, clipped to the letterforms |
+| MaiK "Bottom Line" card rendered behind the phone screen (shared 3D space z-sorted the screen above it) | Reel sections are flat; stacking follows DOM order and each device and card has its own perspective |
+| Stray outline ring on the finale's first frames; chips wrapped 4+1 | Ring starts hidden; chip row balanced 3+2 |
+| Phone small for a phone-sized screen; kicker small; orphan word in the ICU subline | Phone 1.2x → 1.3x, kicker 19 → 22 px, subline shortened |
+
 Render: `python3 audio/soundtrack.py reel && node render/render.mjs --comp reel`.
 Preview: `http://localhost:8991/launch-film/reel/index.html#play` (or `?section=r04-maik`, `?t=21`).
 

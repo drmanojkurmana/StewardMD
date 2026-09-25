@@ -2,6 +2,10 @@
    (#F5F8F9) and ink (#0D1B24), StewardMD teal #0F766E for accents, the site's Newsreader serif. */
 #root { width: 1080px; height: 1920px; background: #F7FAF9; }
 #stage { perspective: 2600px; }
+/* Flat sections: stacking follows DOM order (lifted cards always above the phone), and every
+   device / card carries its own perspective (transformPerspective). A shared 3D space let the
+   phone screen z-sort above a lifted card in v1. */
+.section { transform-style: flat; }
 
 .bg-base { background:
   radial-gradient(90% 55% at 50% 38%, #FFFFFF 0%, rgba(255,255,255,0) 70%),
