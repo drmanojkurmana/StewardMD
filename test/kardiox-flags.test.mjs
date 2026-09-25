@@ -9,11 +9,10 @@ function load(searchStr) { const win = {}; const ls = fakeLS(); new Function("wi
 
 const { F } = load("");
 ok("flags: exposed", !!F && typeof F.get === "function");
-/* Was "master default OFF for public/release". Owner turned it ON on 2026-08-26, so the module is
- * live for every user of the build rather than only on a passcode-unlocked device. The clinical
- * position did not change with it - the model is still unvalidated and regulatory-pending - so what
- * is pinned now is the escape hatch: ?kardiox=0 must still close it on a given device. */
-ok("flags: master default ON (owner decision 2026-08-26)", F.get("smd_kardiox") === true && F.bool("smd_kardiox") === true);
+/* Master default history: OFF (private beta) -> ON for every user (owner, 2026-08-26) -> OFF again
+ * (owner, 2026-09-25): KardiQ X is a code-gated beta, unlocked per device with a StewardMD access code
+ * (SMD_XACCESS sets smd_kardiox=1 on unlock). The model is still unvalidated and regulatory-pending. */
+ok("flags: master default OFF, code-gated beta (owner decision 2026-09-25)", F.get("smd_kardiox") === false && F.bool("smd_kardiox") === false);
 ok("flags: ?kardiox=0 still closes the module per device", load("?kardiox=0").F.bool("smd_kardiox") === false);
 ok("flags: confidence default true", F.get("smd_kardiox_confidence") === true);
 ok("flags: haptics default true", F.get("smd_kardiox_haptics") === true);
@@ -31,7 +30,7 @@ ls3.setItem("smd_kardiox", "0");
 ok("flags: ?kardiox=1 overrides localStorage off", F3.get("smd_kardiox") === true);
 
 const a = F.all();
-ok("flags: all() lists every flag", Object.keys(a).length === Object.keys(F.DEFS).length && a.smd_kardiox === true);
+ok("flags: all() lists every flag", Object.keys(a).length === Object.keys(F.DEFS).length && a.smd_kardiox === false);
 
 console.log(`\nkardiox-flags: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

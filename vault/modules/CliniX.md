@@ -1,7 +1,7 @@
 ---
 tags: [module, education, respiratory]
-status: phases 1,2,3,5,6,7,8 built (2 diseases) (flag ON for testers since 2026-08-23, content ai_drafted pending R1 clinical sign-off)
-flag: smd_clinix (client, def:TRUE since 2026-08-23 owner decision, ?clinix=1) + smd_clinix_draft (def:TRUE for testers, flip to false before any public release) + smd_clinix_tutor (Phase 2, def:TRUE since 2026-08-26) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
+status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1,2,3,5,6,7,8 built (2 diseases); content still ai_drafted pending R1 clinical sign-off, so every lesson keeps its "Draft, pending clinician review" line
+flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
 ---
 # CliniX
 
