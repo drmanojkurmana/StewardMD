@@ -1761,7 +1761,7 @@
     var missing = (sum.missingInformation || []).slice(0, 4);
     if (!changed.length && !missing.length) return "";
     var label = window.SMD_MEDCORE && SMD_MEDCORE.labelFor ? SMD_MEDCORE.labelFor : function (x) { return x; };
-    var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("refresh", "\u21bb") + ' Medical Core <span style="font-weight:600;text-transform:none;letter-spacing:0">\u00b7 deterministic, no model</span></div>';
+    var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("refresh", "\u21bb") + ' Medical Core <span class="icu-phase">BETA</span> <span style="font-weight:600;text-transform:none;letter-spacing:0">\u00b7 deterministic, no model</span></div>';
     if (changed.length) {
       out += '<div class="icu-mc-sub">What changed</div>';
       out += changed.map(function (c) {
@@ -1782,7 +1782,12 @@
           '<span class="w">' + esc(why) + '</span></div>';
       }).join("");
     }
-    out += '<p class="icu-mc-foot">Observations and gaps only. No prediction, no alert, and nothing here changes a score, a threshold or a prescription.</p>';
+    /* THE MOST IMPORTANT SENTENCE ON THIS PANEL. Both lists are filtered: "what changed" shows only
+     * moves past a magnitude band, and "missing information" shows only what the enabled scores and
+     * outcomes ask for. A clinician who reads a short list as a clear patient has been misled by
+     * omission, and the bands doing the filtering are unapproved seed content. So the panel says so
+     * itself rather than relying on anybody having read the vault. */
+    out += '<p class="icu-mc-foot"><b>Not a complete list.</b> Only changes past a set size and gaps the active scores ask for are shown, so nothing here rules anything out. Observations and gaps only: no prediction, no alert, and nothing here changes a score, a threshold or a prescription.</p>';
     return out + '</div>';
   }
   function fmtMins(m) {

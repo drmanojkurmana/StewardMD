@@ -127,7 +127,9 @@ try {
   ok(on && on.subs.indexOf("Missing information") !== -1, "the Missing information list is painted");
   ok(on && on.rows.some((r) => /MAP/.test(r) && /78/.test(r) && /55/.test(r)), "the falling MAP is shown with both ends: " + JSON.stringify((on && on.rows) || []).slice(0, 220));
   ok(on && on.rows.some((r) => /Respiratory rate|Conscious level/.test(r)), "an uncharted core observation is listed as missing");
-  ok(on && /No prediction, no alert/.test(on.foot), "the panel states what it is not");
+  ok(on && /no prediction, no alert/i.test(on.foot), "the panel states what it is not");
+  ok(on && /Not a complete list/.test(on.foot),
+    "the panel says its lists are FILTERED - a clinician reading a short list as a clear patient has been misled by omission");
   ok(on && on.packs && on.packs.approval.every((a) => a === "unapproved"), "the clinical packs report themselves unapproved");
 
   /* ------------------------------------------------- 3. it is a panel, not a second alert path */
