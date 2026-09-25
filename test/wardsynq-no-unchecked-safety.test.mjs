@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-no-unchecked-safety.test.mjs - R6-1: a safety check that could not read the record
  * says so, and is never presented as a clean one.
  *

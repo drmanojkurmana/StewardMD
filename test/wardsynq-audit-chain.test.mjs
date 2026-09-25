@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-audit-chain.test.mjs - P2.17 immutable audit retention: the hash chain over the
  * clinical audit trail, the database triggers, verification, the retention setting, and where they
  * surface (GET /api/queue/ward/security-report, GET /api/queue/ward/system-health, the Admin screen).

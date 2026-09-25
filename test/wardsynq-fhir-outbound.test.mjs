@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-fhir-outbound.test.mjs — TASK 7.4: the WardSynQ -> external FHIR pipeline.
  *
  * These tests drive the REAL routes (onRequest -> /ward/outbound-destination, /ward/outbound-send,

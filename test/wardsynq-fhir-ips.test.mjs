@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-fhir-ips.test.mjs - Patient/{id}/$summary (IPS), AuditEvent and Consent, through both doors.
  *
  * The ward door (/api/queue/ward/fhir/...) with a staff session and the SMART door (/api/fhir/{org}/...)

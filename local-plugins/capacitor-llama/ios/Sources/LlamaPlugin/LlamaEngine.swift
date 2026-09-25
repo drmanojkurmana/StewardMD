@@ -67,10 +67,12 @@ enum ThermalGovernor {
     /// longer cut an answer short (they trimmed it to ~250 words with no message). The one trim
     /// left is thermal: at .serious the budget is capped so the phone does not climb to .critical,
     /// where the decode loop stops and the OS may kill the app mid-answer. Never raises it.
+    /// Floor is 1, not 64 (energy, 2026-09-25): the warm-up asks nPredict 1 and used to decode 64
+    /// tokens while holding the serial queue. Every real caller asks >= 120, so its budget is unchanged.
     static func budget(_ requested: Int32) -> Int32 {
         var b = requested
         if ProcessInfo.processInfo.thermalState == .serious { b = min(b, 1024) }
-        return max(64, b)
+        return max(1, b)
     }
 }
 
@@ -151,6 +153,11 @@ final class LlamaEngine {
     private var loadedFlashAttn = false
     /// Draft tokens proposed per verify step. Six is the usual sweet spot for a ~4B target.
     static let draftK = 6
+    /// Adaptive draft-off (energy, 2026-09-25): after `draftMinSteps` verify steps, a generation whose
+    /// acceptance is below `draftMinAccept` stops drafting. Greedy output is byte-identical either way,
+    /// so rejected proposals are pure waste; below 15% drafting is slower than plain decode on these packs.
+    static let draftMinSteps = 8
+    static let draftMinAccept = 0.15
 
     /// llama.cpp contexts are NOT thread-safe. Same hazard capacitor-whisper hit (BUG-13,
     /// use-after-free). The rule (audit T12, 2026-09-25): everything that CREATES or FREES the model
@@ -568,11 +575,14 @@ final class LlamaEngine {
 
             var committed = llama_sampler_sample(smpl, c, -1)
             var n = Int32(kvTokens.count)
+            var verifySteps = 0
             while produced < budget && n + 1 < nCtx {
                 if cancelFlag.value { break }
                 if ThermalGovernor.shouldStop { stoppedHot = true; break }
                 if llama_vocab_is_eog(vocab, committed) { break }
                 emit(committed)
+                // Same stop as the plain loop: a spent budget must not draft and verify another step.
+                if produced >= budget { break }
 
                 // 1. The draft proposes up to k tokens after `committed`. Any failure on its side
                 //    only means fewer proposals; the target never depends on it for correctness.
@@ -625,6 +635,12 @@ final class LlamaEngine {
                 }
                 stats.draftProposed += drafts.count
                 stats.draftAccepted += accepted
+                if !drafts.isEmpty { verifySteps += 1 }
+                if draftOK && verifySteps >= Self.draftMinSteps && stats.draftProposed > 0
+                    && Double(stats.draftAccepted) / Double(stats.draftProposed) < Self.draftMinAccept {
+                    draftOK = false
+                    llamaPerf("PERF draft off: accepted=\(stats.draftAccepted) proposed=\(stats.draftProposed) steps=\(verifySteps)")
+                }
 
                 // 4. Roll both caches back to what was accepted.
                 let keep = n + 1 + Int32(accepted)

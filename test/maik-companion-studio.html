@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MaiK Companion Studio (dev)</title>
+<style>
+  :root { --mk-bg:#fff; --mk-bd:#d5dde6; --mk-ink:#0f172a; --mk-teal:#0e6e63; --panel:#fff; }
+  body { margin:0; font:14px/1.4 Inter,system-ui,sans-serif; background:#eef3f5; color:#0f172a; }
+  body.dark { --mk-bg:#0f1b22; --mk-bd:#26414b; --mk-ink:#e6f1f3; --panel:#0f1b22; background:#081319; color:#e6f1f3; }
+  .row { display:flex; flex-wrap:wrap; gap:14px; padding:14px; }
+  .card { width:360px; background:var(--mk-bg); border:1px solid var(--mk-bd); border-radius:18px; overflow:hidden; }
+  .card h3 { margin:0; padding:10px 14px 0; font-size:13px; }
+  .stage { position:relative; height:190px; transform-origin:0 100%; }
+  .thread { position:absolute; left:12px; right:12px; top:10px; font-size:12px; color:#5a7184; }
+  .cmp { position:absolute; left:10px; right:10px; bottom:12px; height:54px; border:1px solid var(--mk-bd); border-radius:16px; background:var(--panel); }
+  .ctl { padding:10px 14px 14px; display:flex; flex-wrap:wrap; gap:6px; }
+  button.b { font:600 11px Inter,system-ui; border:1px solid var(--mk-bd); background:transparent; color:inherit; border-radius:999px; padding:6px 10px; cursor:pointer; }
+  body.zoom .stage { transform:scale(var(--z,3)); margin-top:calc(190px * (var(--z,3) - 1)); }
+  body.zoom .card { width:auto; }
+</style>
+</head>
+<body>
+<div class="row" id="row"></div>
+<script src="/maik-companion.js"></script>
+<script>
+  var P = new URLSearchParams(location.search);
+  if (P.get("dark") === "1") document.body.classList.add("dark");
+  if (P.get("zoom")) { document.body.classList.add("zoom"); document.body.style.setProperty("--z", P.get("zoom")); }
+  var only = P.get("style");
+  var reduce = P.get("reduce") === "1";
+  var CTL = {};
+  (only ? [only] : MaiKCompanion.STYLES).forEach(function (s) {
+    var c = document.createElement("div"); c.className = "card";
+    c.innerHTML = '<h3>' + MaiKCompanion.LABEL[s] + '</h3><div class="stage"><div class="thread">Ask MaiK anything clinical.</div><div class="cmp"></div></div>';
+    document.getElementById("row").appendChild(c);
+    CTL[s] = MaiKCompanion.mount(c.querySelector(".cmp"), { style: s, greet: P.get("greet") !== "0", reduceMotion: reduce, sheet: c.querySelector(".stage"), sleepMs: +(P.get("sleep") || 45000) });
+  });
+  window.CTL = CTL;
+  window.all = function (fn) { Object.keys(CTL).forEach(function (k) { fn(CTL[k], k); }); };
+</script>
+</body>
+</html>

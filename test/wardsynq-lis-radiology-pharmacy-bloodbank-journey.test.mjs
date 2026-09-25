@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-lis-radiology-pharmacy-bloodbank-journey.test.mjs — TASK 3.7: unified patient
  * journey across TASK 3.1-3.5.
  *

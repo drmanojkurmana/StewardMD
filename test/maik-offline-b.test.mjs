@@ -133,7 +133,7 @@ test("T27: default pin is MaiK Lite; Neural, Horizon, Swift, Max and Max 2 are l
   const M = require("../maik-models.js");
   assert.equal(M.activePack(), "maik-lite");
   const labs = Object.keys(M.PACKS).filter((id) => M.PACKS[id].labs).sort();
-  assert.deepEqual(labs, ["bonsai-27b", "bonsai-8b", "bonsai2-27b", "maik-horizon", "maik-neural"]);
+  assert.deepEqual(labs, ["bonsai-27b", "bonsai-8b", "bonsai2-27b", "maik-horizon", "maik-neural", "mimo-cortex-9b"]);
   for (const id of labs) assert.ok(M.PACKS[id].files.length, id + " is still downloadable");
   const ENG = readFileSync(new URL("../maik-engine.js", import.meta.url), "utf8");
   assert.match(ENG, /var PACK_ID = "maik-lite";/);

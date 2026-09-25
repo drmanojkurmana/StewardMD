@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-adt-bed-master.test.mjs — TASK 4.2: ADT admit/transfer/discharge against the REAL
  * Ward/Bed master data from TASK 4.1 (_opd_org_store.js), through the real routes.
  *

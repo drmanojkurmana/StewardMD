@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-maik-drafts.test.mjs - the P6 MaiK drafting tasks (maik-interaction.js DRAFTS) through the real
  * POST /api/queue/ward/maik-ask and POST /api/queue/ward/maik-review routes: draft-discharge-summary, draft-portal-reply
  * and draft-appeal-letter. Each refuses when no provider is approved for patient data, a Local-routed draft never

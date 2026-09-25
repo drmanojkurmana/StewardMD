@@ -2443,12 +2443,28 @@
     // stuttered the UI. Make it event-driven, rAF-coalesced, and NEVER probe mid-scroll — only
     // once scrolling settles. A slow 1.2s safety net covers anything the events miss.
     var _fabRaf = 0, _fabScrolling = 0, _fabScrollT = 0;
-    function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (!_fabScrolling) refreshFab(); }); }
+    /* Energy (2026-09-25): the FAB is never appended (see above), yet refreshFab ran 4 getComputedStyle
+     * + elementFromPoint every 1.2 s and on every click/scroll/transition. It now runs only if the FAB is
+     * ever attached again. The same events drive the home tile-icon pause: the looping SVG icon
+     * animations cost a style recalc + layout + paint every frame, even under the MaiK sheet, under an
+     * overlay, or with the app in the background. They pause whenever the home is not what is on
+     * screen, and per icon when scrolled out of view; wherever an icon can be seen it animates as before. */
+    var _aiIO = null, _aiSeen = typeof WeakSet === "function" ? new WeakSet() : null;
+    function refreshTileAnim() {
+      var h = document.getElementById("homeV2"); if (!h) return;
+      var still = document.hidden || document.body.classList.contains("maik-open") || !homeIsForeground();
+      if (h.classList.contains("hv-still") !== still) h.classList.toggle("hv-still", still);
+      if (still || !_aiSeen || typeof IntersectionObserver !== "function") return;
+      if (!_aiIO) _aiIO = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle("ai-offscreen", !e.isIntersecting); }); });
+      var els = h.querySelectorAll(".ai-anim, .ai-clinix-img, .tx-tile-lungs");
+      for (var i = 0; i < els.length; i++) if (!_aiSeen.has(els[i])) { _aiSeen.add(els[i]); _aiIO.observe(els[i]); }
+    }
+    function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (_fabScrolling) return; try { refreshTileAnim(); } catch (e) {} if (fab && fab.isConnected) refreshFab(); }); }
     ["click", "hashchange", "transitionend", "animationend"].forEach(function (ev) { window.addEventListener(ev, scheduleFab, true); });
     document.addEventListener("visibilitychange", scheduleFab, true);
     // Capture-phase catches scrolls on inner scroll containers too (ICU, Ward Sync, drawers).
     window.addEventListener("scroll", function () { _fabScrolling = 1; clearTimeout(_fabScrollT); _fabScrollT = setTimeout(function () { _fabScrolling = 0; scheduleFab(); }, 140); }, true);
-    setInterval(scheduleFab, 1200);
+    setInterval(function () { if (!document.hidden) scheduleFab(); }, 1200);
 
     // Notifications: probe once for unread medical updates, then hourly.
     try { setTimeout(refreshBadge, 1500); setInterval(function () { _notifItems = null; refreshBadge(); }, 3600000); } catch (e) {}
@@ -3656,7 +3672,11 @@
       closeSheet(); setTimeout(function () { try { onPick(val); } catch (er) {} }, 60);
     });
   }
-  // Searchable hospital / medical-college picker (data: window.SMD_HOSPITALS — hospitals-in.js).
+  /* Searchable hospital / medical-college picker.
+   * Data: SMD_INSTITUTIONS (institutions-in.js), the ONE merged directory — every curated list plus
+   * whatever doctors have typed. It used to read window.SMD_HOSPITALS directly, which
+   * hospital-registry.js also owns, so before the lazy directory loaded .search was undefined and
+   * this picker found nothing. */
   function openHospitalPicker(onPick) {
     function opt(h) {
       return '<button class="hosp-opt" data-h="' + smdEsc(h.name) + '" style="display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--hbd,#e2e8f0);background:none;padding:11px 4px;cursor:pointer">' +
@@ -3664,8 +3684,9 @@
         '<span style="display:block;font:500 11px var(--hfont,system-ui);color:var(--hmut,#64748b)">' + smdEsc((h.city || "") + (h.state ? ", " + h.state : "")) + (h.type === "medical_college" ? " · Medical college" : "") + '</span></button>';
     }
     function render(q) {
-      var api = window.SMD_HOSPITALS;
-      var hits = (api && api.search) ? api.search(q) : (api && api.all ? api.all().slice(0, 50) : []);
+      var api = window.SMD_INSTITUTIONS ||
+        (window.SMD_HOSPITAL_DIRECTORY || (window.SMD_HOSPITALS && window.SMD_HOSPITALS.all ? window.SMD_HOSPITALS : null));
+      var hits = (api && api.search) ? api.search(q, { limit: 60 }) : (api && api.all ? api.all().slice(0, 50) : []);
       if (!hits.length) {
         var qq = smdEsc((q || "").trim());
         return '<div style="padding:14px 4px;color:var(--hmut,#64748b);font:500 12.5px var(--hfont,system-ui)">No match for &ldquo;' + qq + '&rdquo;.' +
@@ -3676,7 +3697,13 @@
       }
       return hits.map(opt).join("");
     }
-    smdLazy('/hospitals-in.js?v=1').then(function() {
+    /* ensure() loads the directory itself; the bare `smdLazy` this used to call is not defined on
+     * the page (lazy-load.js is not in index.html), so this handler threw and the picker never
+     * opened at all. */
+    (window.SMD_INSTITUTIONS && window.SMD_INSTITUTIONS.ensure
+      ? window.SMD_INSTITUTIONS.ensure()
+      : Promise.resolve()
+    ).then(function() {
       openSheet('<div class="hv-sh-t">Choose your hospital</div>' +
         '<input id="hospSearch" type="search" placeholder="Search hospital or medical college" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
         '<div id="hospList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + '</div>');
@@ -4473,7 +4500,7 @@
   }
   /* ── The Live Doctor (2026-08-29) ──────────────────────────────────────────
    * A pixel physician who LIVES on the composer's top edge while MaiK is open:
-   * walks his ward round right to left, freelances stunts (hop, backflip,
+   * walks his ward round right to left, freelances stunts (hop,
    * sprint, auscultating the screen with a bpm report), and reacts when tapped
    * (startle, wave, hearts). Sub-pixel travel + real jump arcs over hand-placed
    * 12x16 frames; one rAF loop that tears itself down when his node is gone.
@@ -4552,10 +4579,21 @@
     sleep:   { f: [1], fps: 1 }
   };
   var MAIK_DOC_SC = 2.75, MAIK_DOC_W = 12 * MAIK_DOC_SC, MAIK_DOC_H = 16 * MAIK_DOC_SC;
-  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null, _mkdOnTap = null;
+  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null, _mkdOnTap = null, _mkdResume = null, _mkdOnVis = null;
+  /* MaiK companion v2 (owner, 2026-09-25: "redesign him ... more professional, more lively and
+   * understanding ... I will select one from 3"). maik-companion.js draws three styles on one engine;
+   * localStorage smd_maik_doc_style picks attending | oncall | bot, and "classic" (the default until
+   * the owner chooses) keeps the Fable pixel doctor below. _mkc is the mounted companion, if any. */
+  var _mkc = null;
+  function maikDocStyle() { try { var v = localStorage.getItem("smd_maik_doc_style"); return (v === "attending" || v === "oncall" || v === "bot") ? v : "classic"; } catch (e) { return "classic"; } }
+  function maikCompanionStop() { if (_mkc) { try { _mkc.destroy(); } catch (e) {} _mkc = null; } }
+  // What MaiK is doing, for the companion only (typing, stream, error, offline, stop, rate-yes/no).
+  function maikBuddyCue(kind, data) { try { if (_mkc) _mkc.cue(kind, data); } catch (e) {} }
   function maikDocStop() {
     if (_mkdRaf) { cancelAnimationFrame(_mkdRaf); _mkdRaf = 0; }
     if (_mkdOnRz) { try { window.removeEventListener("resize", _mkdOnRz); } catch (e) {} _mkdOnRz = null; }
+    if (_mkdOnVis) { try { document.removeEventListener("visibilitychange", _mkdOnVis); } catch (e) {} _mkdOnVis = null; }
+    _mkdResume = null;
     if (_mkdOnTap) { try { _mkdOnTap.el.removeEventListener("pointerdown", _mkdOnTap.fn); } catch (e) {} _mkdOnTap = null; }
     _mkdState = null; _mkdCueFn = null;
   }
@@ -4571,7 +4609,7 @@
     if (/\b(dose|dosing|dosage|mg\b|drug|tablet|antibiotic|infusion|prescri)/.test(s)) return "rx";
     return "think";
   }
-  function maikDocCue(kind) { try { if (_mkdCueFn) _mkdCueFn(kind); } catch (e) {} }
+  function maikDocCue(kind) { try { if (_mkc) { _mkc.cue(kind); return; } if (_mkdCueFn) _mkdCueFn(kind); } catch (e) {} }
   /* What he says when the sheet opens: an introduction the very first time,
    * then one random rounds-thought per open. Playful, never clinical advice. */
   var MAIK_DOC_SAY = [
@@ -4597,8 +4635,9 @@
     } catch (e) {}
   }
   function maikDocMount(cmp) {
-    maikDocStop();
+    maikDocStop(); maikCompanionStop();
     var old = cmp.querySelector(".mkdoc"); if (old) old.remove();
+    Array.prototype.forEach.call(cmp.querySelectorAll(".mkc, .mkc-tab"), function (n) { n.remove(); });
     var box = document.createElement("div"); box.className = "mkdoc";
     var svg = '<svg class="mkdoc-svg" width="' + MAIK_DOC_W + '" height="' + MAIK_DOC_H +
       '" viewBox="0 0 12 16" shape-rendering="crispEdges" aria-hidden="true">';
@@ -4620,6 +4659,7 @@
         box.style.transition = animate ? "transform .22s ease, opacity .22s ease" : "";
         tab.classList.toggle("on", !!hide);
         try { localStorage.setItem("smd_maik_doc_off", hide ? "1" : "0"); } catch (e) {}
+        if (!hide && _mkdResume) _mkdResume();
       }
       apply(off(), false);
       var sx = 0, dx = 0, drag = false;
@@ -4641,7 +4681,7 @@
     try { var _sms = +localStorage.getItem("smd_maik_doc_sleepms"); if (_sms > 0) SLEEP_MS = _sms; } catch (e) {}
     var lastAct = performance.now();
     function wake() {
-      lastAct = performance.now();
+      lastAct = performance.now(); resume();
       if (D.state === "sleep") { setSt("startle", 420); return true; }
       return false;
     }
@@ -4652,7 +4692,7 @@
     var D = _mkdState = { x: W + MAIK_DOC_W, dir: -1, state: "walk", t0: 0, until: 0, gone: 0, next: 0, target: null };
     function rnd(a, b) { return a + Math.random() * (b - a); }
     function setSt(s, dur) {
-      D.state = s; D.t0 = performance.now(); D.until = dur ? D.t0 + dur : 0;
+      D.state = s; D.t0 = performance.now(); D.until = dur ? D.t0 + dur : 0; resume();
       if (s === "listen") {
         var pts = '<svg width="58" height="20" viewBox="0 0 60 20"><polyline points="0,10 14,10 18,10 21,2 24,17 27,10 40,10 60,10" fill="none" stroke="#2DD4BF" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:90;stroke-dashoffset:90;animation:mkdocEcg 1.2s linear forwards"/></svg>';
         maikDocFx(box, pts, D.dir === -1 ? -62 : MAIK_DOC_W + 4, 4, 1700);
@@ -4677,7 +4717,7 @@
       }
       var r = Math.random();
       if (r < 0.30) setSt("jump", JUMP_MS);
-      else if (r < 0.52) setSt("flip", FLIP_MS);
+      else if (r < 0.52) setSt("jump", JUMP_MS);   // owner, 2026-09-25: "only jump rather than circle" (no backflips)
       else if (r < 0.68) setSt("run", rnd(700, 1200));
       else if (r < 0.84) setSt("listen", 1800);
       else setSt("idle", rnd(900, 1500));
@@ -4779,10 +4819,31 @@
       setTimeout(function () { try { d2.remove(); } catch (e) {} if (sayBub === d2) sayBub = null; }, 4200);
       sched();
     }, 1400);
+    /* Energy (2026-09-25): the loop used to request 60 frames a second for as long as the sheet was
+     * open, including while he was swiped away, asleep (one still pose, the same transform rewritten
+     * every frame) or the app was in the background. It now parks in those three cases and resumes on
+     * anything that changes what he shows: a state change, a wake-up, a question, unhiding him, busy,
+     * or the app coming back. Visible and awake, he runs every frame exactly as before. */
+    function resume() {
+      if (!D.parked || _mkdState !== D) return;
+      D.parked = false; last = performance.now(); _mkdRaf = requestAnimationFrame(tick);
+    }
+    function park() {
+      D.parked = true; _mkdRaf = 0;
+      if (D.state === "sleep") setTimeout(function zz() {   // his "Z z" every 2.6 s while parked asleep
+        if (_mkdState !== D || !D.parked || D.state !== "sleep") return;
+        if (box.classList.contains("busy")) { wake(); return; }
+        if (!document.hidden && !box.classList.contains("mkdoc-hidden")) maikDocFx(box, '<span class="mkdoc-heart"><span class="mkdoc-bub">Z z</span></span>', MAIK_DOC_W + 2, -4, 1700);
+        setTimeout(zz, 2600);
+      }, 2600);
+    }
+    _mkdResume = resume;
+    _mkdOnVis = function () { if (!document.hidden) resume(); };
+    document.addEventListener("visibilitychange", _mkdOnVis);
     function tick(now) {
       if (!box.isConnected) { maikDocStop(); return; }
-      // Screen locked / app occluded: let WebKit's hidden-document throttle idle us (R6 #1).
-      if (document.hidden) { last = now; _mkdRaf = requestAnimationFrame(tick); return; }
+      // Screen locked / app occluded, or swiped away: stop requesting frames until he can be seen.
+      if (document.hidden || box.classList.contains("mkdoc-hidden")) { park(); return; }
       var dt = Math.min(0.05, (now - last) / 1000); last = now;
       var y = 0, rot = 0, sq = 1, W = cmp.clientWidth;
       var busy = box.classList.contains("busy");
@@ -4800,6 +4861,7 @@
             D.zz = now;
             maikDocFx(box, '<span class="mkdoc-heart"><span class="mkdoc-bub">Z z</span></span>', MAIK_DOC_W + 2, -4, 1700);
           }
+          D.sleepPainted = (D.sleepPainted || 0) + 1;   // park once the still pose is on screen
           break;
         case "run":
           D.x += RUN_V * D.dir * dt; rot = D.dir * 6;
@@ -4814,7 +4876,7 @@
           var sp = Math.min(1, (now - D.t0) / 340);
           D.x += RUN_V * (1 - sp) * D.dir * dt;   // bleeding off speed
           rot = -D.dir * 14 * (1 - sp * 0.4);     // leaned back against the slide
-          if (sp >= 1) { sq = 0.86; if (Math.random() < 0.35) setSt("flip", FLIP_MS); else setSt("walk", 0); }
+          if (sp >= 1) { sq = 0.86; if (Math.random() < 0.35) setSt("jump", JUMP_MS); else setSt("walk", 0); }
           break;
         }
         case "jump": case "flip":
@@ -4851,6 +4913,8 @@
       var air = Math.min(1, -y / JUMP_H);
       sh.style.transform = "translateX(" + (D.x + MAIK_DOC_W / 2 - 16.5).toFixed(1) + "px) scaleX(" + (1 - air * 0.45).toFixed(2) + ")";
       sh.style.opacity = (0.8 - air * 0.5).toFixed(2);
+      if (D.state === "sleep" && D.sleepPainted >= 2 && !(sayBub && sayBub.isConnected)) { D.sleepPainted = 0; park(); return; }
+      if (D.state !== "sleep") D.sleepPainted = 0;
       _mkdRaf = requestAnimationFrame(tick);
     }
     _mkdRaf = requestAnimationFrame(tick);
@@ -4921,6 +4985,8 @@
           '<button class="maik-side-row maik-side-new" id="maikSideNew" type="button">' + MK.plus + '<span>New conversation</span></button>' +
           '<button class="maik-side-row" id="maikSideMe" type="button" aria-controls="maikMe">' + svg("user", "smd-ico") + '<span>About me</span><span class="maik-side-meta" id="maikSideMeState"></span></button>' +
           '<div class="maik-me" id="maikMe" hidden></div>' +
+          '<button class="maik-side-row" id="maikSideBuddy" type="button" aria-controls="maikBuddyPick"><svg class="smd-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/><path d="M9 9.5h.01M15 9.5h.01"/></svg><span>MaiK buddy</span><span class="maik-side-meta" id="maikSideBuddyState"></span></button>' +
+          '<div class="maik-me" id="maikBuddyPick" hidden></div>' +
           '<div class="maik-side-srch">' + MK.search + '<input id="maikSideSearch" type="search" placeholder="Search conversations" autocomplete="off" spellcheck="false"></div>' +
           '<div class="maik-side-lbl">Your conversations</div>' +
           '<div class="maik-side-list" id="maikSideList"></div>' +
@@ -4994,7 +5060,16 @@
       ".maik-side-priv{display:flex;align-items:center;gap:7px;padding:10px 16px;font:600 11.5px 'Inter',system-ui;color:var(--mk-teal,#0e6e63);border-top:1px solid var(--mk-line,#eef2f7)}" +
       ".maik-side-acct{display:flex;align-items:center;gap:10px;padding:10px 16px 15px}" +
       ".maik-side-meta{margin-left:auto;font:700 11px 'Inter',system-ui;color:var(--mk-teal,#0e6e63)}" +
-      ".maik-side.me-open .maik-side-srch,.maik-side.me-open .maik-side-lbl,.maik-side.me-open .maik-side-list,.maik-side.me-open #maikSideMe,.maik-side.me-open #maikSideNew{display:none}" +
+      ".maik-side.me-open .maik-side-srch,.maik-side.me-open .maik-side-lbl,.maik-side.me-open .maik-side-list,.maik-side.me-open #maikSideMe,.maik-side.me-open #maikSideNew,.maik-side.me-open #maikSideBuddy{display:none}" +
+      ".maik-side.bd-open .maik-side-srch,.maik-side.bd-open .maik-side-lbl,.maik-side.bd-open .maik-side-list,.maik-side.bd-open #maikSideMe,.maik-side.bd-open #maikSideNew,.maik-side.bd-open #maikSideBuddy{display:none}" +
+      ".maik-bd-opt{display:flex;align-items:center;gap:12px;width:100%;min-height:66px;margin:6px 0;padding:8px 12px;border:1.5px solid var(--mk-bd);border-radius:14px;background:transparent;text-align:left;cursor:pointer;color:var(--mk-ink,#0f172a);font:inherit}" +
+      ".maik-bd-opt.on{border-color:var(--mk-teal,#0e6e63);background:rgba(14,110,99,.07)}" +
+      ".maik-bd-th{flex:0 0 46px;height:54px;display:flex;align-items:flex-end;justify-content:center;overflow:visible}.maik-bd-th svg{display:block;overflow:visible}" +
+      ".maik-bd-tx{display:flex;flex-direction:column;gap:2px;min-width:0}.maik-bd-tx b{font:700 14px 'Inter',system-ui}.maik-bd-tx span{font:500 12px/1.35 'Inter',system-ui;color:var(--mk-mut,#5a7184)}" +
+      ".maik-bd-ck{margin-left:auto;flex:0 0 20px;height:20px;border-radius:50%;border:1.5px solid var(--mk-bd);display:flex;align-items:center;justify-content:center;box-sizing:border-box}" +
+      ".maik-bd-opt.on .maik-bd-ck{background:var(--mk-teal,#0e6e63);border-color:var(--mk-teal,#0e6e63)}" +
+      ".maik-bd-opt.on .maik-bd-ck::after{content:'';width:8px;height:4px;border:2px solid #fff;border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg)}" +
+      "body.dark .maik-bd-opt,body.v3-dark .maik-bd-opt{color:var(--mk-ink,#e6edf3)}" +
       ".maik-me{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px 16px 16px}" +
       ".maik-me-hd{display:flex;align-items:center;gap:6px;margin:0 0 4px -8px}" +
       ".maik-me-hd b{font:800 16px 'Inter',system-ui;color:var(--mk-ink,#0f172a)}" +
@@ -5212,6 +5287,7 @@ body.dark .maik-fu{background:var(--mk-field)}
 /* Phase 3 — grounding advisory (flag-gated; appears only on flagged claims) */
 .maik-conf{margin-top:9px;font:700 10.5px/1.3 'Inter';letter-spacing:.02em;display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px}
 .maik-conf::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.9}
+.maik-kbpreview-h{margin-bottom:6px;font:700 10.5px/1.3 'Inter';letter-spacing:.02em;color:var(--mk-teal,#0e6e63)}
 .maik-conf-high{color:#15803d;background:rgba(21,128,61,.10)}
 .maik-conf-moderate{color:#b45309;background:rgba(180,83,9,.10)}
 .maik-conf-lower{color:#b91c1c;background:rgba(185,28,28,.10)}
@@ -5645,7 +5721,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * each other over opacity. */
     // Stetho Buddy is mounted here but CLOCKED at module scope (maikBuddyStart): a per-sheet timer
     // died whenever a second MaiK sheet was created, leaving him frozen mid-step.
-    function maikBuddyMount() {
+    function maikBuddyMount(greetNow) {
       try {
         var cmp = sheet && sheet.querySelector(".maik-cmp"); if (!cmp) return;
         var old = cmp.querySelector(".mkw"); if (old) old.remove();
@@ -5653,6 +5729,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // clinician asked for reduced motion (he only travels; standing still is Buddy's job).
         var reduce = false;
         try { reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        // A v2 companion handles reduced motion itself (he stays put; expressions still change).
+        var style = maikDocStyle();
+        if (maikLiveDocOn() && style !== "classic" && window.MaiKCompanion) { maikCompanionMount(cmp, style, reduce, greetNow); return; }
         if (maikLiveDocOn() && !reduce) { maikDocMount(cmp); return; }
         var box = document.createElement("div"); box.className = "mkw";
         // +15% over the original 2x: vector rects, so a fractional scale stays sharp.
@@ -5661,7 +5740,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         maikBuddyStart();
       } catch (e) {}
     }
+    function maikCompanionMount(cmp, style, reduce, greetNow) {
+      maikDocStop(); maikCompanionStop();
+      Array.prototype.forEach.call(cmp.querySelectorAll(".mkdoc, .mkdoc-tab, .mkw, .mkc, .mkc-tab"), function (n) { n.remove(); });
+      var _sms = 0; try { _sms = +localStorage.getItem("smd_maik_doc_sleepms") || 0; } catch (e) {}
+      var _empty = !(body && body.querySelector(".maik-b"));
+      _mkc = window.MaiKCompanion.mount(cmp, {
+        style: style, reduceMotion: reduce, sleepMs: _sms,
+        greet: !!greetNow || _empty,   // the greeting bubble never covers an answer's actions (audit T06)
+        sheet: sheet, scroller: body,
+        onLongPress: function () { try { maikOpenSide(); setTimeout(function () { maikBuddyShow(true); }, 60); } catch (e) {} }
+      });
+    }
     function maikBuddyUnmount() {
+      maikCompanionStop();
       try { var old = sheet && sheet.querySelector(".mkw"); if (old) old.remove(); } catch (e) {}
       try { var od = sheet && sheet.querySelector(".mkdoc"); if (od) od.remove(); } catch (e) {}
       maikBuddyStop(); maikDocStop();
@@ -5670,6 +5762,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Medibot appears in the pending bubble (maikBufferHTML).
     function maikBuddyBusy(on) {
       try { var b = sheet && sheet.querySelector(".mkw, .mkdoc"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
+      try { if (on && _mkdResume) _mkdResume(); } catch (e) {}   // a parked, sleeping doctor wakes for work
+      try { if (_mkc) _mkc.busy(!!on); } catch (e) {}
     }
     function maikSetSendMode(busy) {
       var was = _maikBusy;
@@ -6076,6 +6170,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Phase 2 — streaming is ON by default (self-falls-back on any failure); set localStorage
     // smd_maik_stream="0" to force the classic non-stream path.
     function maikStreamOn() { try { return localStorage.getItem("smd_maik_stream") !== "0"; } catch (e) { return true; } }
+    function maikKbPreviewOn() { try { return localStorage.getItem("smd_maik_kb_preview") !== "0"; } catch (e) { return true; } }
     // Diagnostics: when smd_maik_perf="1" (Settings › Interface › "AI response timing"), MaiK prints
     // first-token + full-answer time under each answer so real-device / native TTFT is readable.
     function maikPerfOn() { try { return localStorage.getItem("smd_maik_perf") === "1"; } catch (e) { return false; } }
@@ -6423,13 +6518,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { ov.querySelector(".maik-lb-x").focus(); } catch (e) {}
     }
     function maikFiguresOn() { try { return localStorage.getItem("smd_maik_figures") !== "0"; } catch (e) { return true; } }
+    // Each /figures call is a web search plus up to 9 page reads, and every follow-up on the same topic
+    // used to repeat it and stack an identical strip (audit section 7). One search per topic per session
+    // (the result list only, in memory), and one strip per topic per thread.
+    var _maikFigMemo = {};
     function maikFiguresStrip(bubble, topic) {
       if (!maikFiguresOn() || !topic || !(window.SMD_AI && SMD_AI.figures)) return;
       if (typeof navigator !== "undefined" && navigator.onLine === false) return;
       var E = window.SMD_MAIK_ENGINE; if (E && E.effective && E.effective() !== "cloud") return;   // never on device / KB-only
-      SMD_AI.figures(String(topic).slice(0, 200)).then(function (res) {
+      var fkey = maikNorm(String(topic)).slice(0, 200);
+      var shown = function () { var lb = document.getElementById("maikBody"), all = lb ? lb.querySelectorAll(".maik-figs") : []; for (var i = 0; i < all.length; i++) if (all[i].getAttribute("data-topic") === fkey) return true; return false; };
+      if (shown()) return;
+      var fp = _maikFigMemo[fkey] || (_maikFigMemo[fkey] = SMD_AI.figures(String(topic).slice(0, 200)).then(function (res) { if (!res || res.error) delete _maikFigMemo[fkey]; return res; }, function (e) { delete _maikFigMemo[fkey]; throw e; }));
+      fp.then(function (res) {
         var figs = (res && res.figures) || [];
-        if (!figs.length || !bubble || !bubble.isConnected) return;
+        if (!figs.length || !bubble || !bubble.isConnected || shown()) return;
         var cards = figs.filter(function (f) { return f && /^https:\/\//.test(f.img || "") && /^https:\/\//.test(f.page || ""); }).slice(0, 3).map(function (f) {
           // Tap opens the figure FULL SIZE in a lightbox; tapping it there goes to the source page
           // (owner, 2026-09-19). A flowchart must not be cropped, so the card letterboxes it.
@@ -6438,7 +6541,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             '<span class="maik-fig-cap"><b>' + maikEscH(f.site || "") + '</b> ' + maikEscH((f.title || "").slice(0, 80)) + '</span></button>';
         }).join("");
         if (!cards) return;
-        var strip = document.createElement("div"); strip.className = "maik-figs" + (figs.length === 1 ? " one" : "");
+        var strip = document.createElement("div"); strip.className = "maik-figs" + (figs.length === 1 ? " one" : ""); strip.setAttribute("data-topic", fkey);
         strip.innerHTML = '<div class="maik-figs-h">Related figures from trusted sources</div><div class="maik-figs-row">' + cards + '</div>';
         // Figure taps are handled by the delegated body listener, so they work in a reopened thread.
         // A hotlink the source blocks removes its own card; an empty strip removes itself.
@@ -6532,7 +6635,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
         think.appendChild(onBtn); scroll(); return;
       }
-      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; return; }
+      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; maikBuddyCue("error"); return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
@@ -6740,13 +6843,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // no-op); the on-device engine is cancelled by maikStopNow itself.
       _maikStop = function () {
         if (_maikDone) return;
-        _maikStopped = true;
+        _maikStopped = true; maikBuddyCue("stop");
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _fsResume();
         try {
           var h = _live(), s = h.querySelector(".maik-streaming");
+          var pv = h.querySelector(".maik-kbpreview");
           if (s && s.textContent.trim()) {
             var c = s.querySelector(".maik-caret"); if (c) c.parentNode.removeChild(c);
             s.className = "maik-stopped-answer";
+            h.insertAdjacentHTML("beforeend", '<div class="maik-stopped">Stopped</div>');
+          } else if (pv) {
+            var pvh = pv.querySelector(".maik-kbpreview-h"); if (pvh) pvh.textContent = "From the StewardMD Knowledge Base";
             h.insertAdjacentHTML("beforeend", '<div class="maik-stopped">Stopped</div>');
           } else {
             h.innerHTML = '<div class="maik-welcome">Stopped.</div>';
@@ -6947,7 +7054,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var onDelta = function (acc) {
             if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
             _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
-            if (!_perfTTFT) { _perfTTFT = maikNow(); try { maikHaptic("start"); } catch (e) {} }   // first chunk: the answer is coming
+            if (!_perfTTFT) { _perfTTFT = maikNow(); try { maikHaptic("start"); } catch (e) {} maikBuddyCue("stream"); }   // first chunk: the answer is coming
             // Paint at most every 50 ms, always the latest text (audit T47): every chunk used to re-render
             // the whole answer's markdown. The first chunk paints at once. A pending paint never runs after
             // Stop or once the final answer is being rendered.
@@ -7105,6 +7212,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b"; b.textContent = label; b.setAttribute("aria-label", label + ": was this answer helpful?");
                 b.addEventListener("click", function () {
                   try { if (window.SMD_track) SMD_track(kind === "up" ? "maik_feedback_up" : "maik_feedback_down"); } catch (e) {}
+                  maikBuddyCue(kind === "up" ? "rate-yes" : "rate-no");
                   try { if (up.parentNode) up.parentNode.removeChild(up); } catch (e) {}
                   try { if (dn.parentNode) dn.parentNode.removeChild(dn); } catch (e) {}
                   if (kind === "up") { _postFeedback("up", meta); q.textContent = "Thanks, noted."; return; }
@@ -7178,6 +7286,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               w.appendChild(up); w.appendChild(dn); host.appendChild(w);
             } catch (e) {}
           }
+          var _pvKB = null;   // the Knowledge Base preview on screen while the model writes (see _strictKB)
           function _gemini() {
             try { _brainEnrichPkg(pkg); } catch (e) {}
             var _tier = (maikLazyOn() && depth !== "detailed") ? 1 : undefined;   // lazy: bottom line first, except when the doctor asked for detail (audit T17)
@@ -7194,8 +7303,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               // Network gone (audit T18): the provider call resolves {error} rather than rejecting, so the
               // Knowledge Base fallback in .catch below never ran and the doctor got "MaiK is unavailable".
               // Answer from the on-device Knowledge Base instead, labelled as the offline answer.
+              if (r && r.error && _pvKB) { finishKB(_pvKB, pkg, "preview"); return; }   // the KB preview already on screen stays as the answer
               if (r && r.error && !active && window.MaiKKB && /timeout|fetch|network|load failed|offline|internet|connection/i.test(String(r.error))) {
-                try { var _kbN = window.MaiKKB.compose(question, pkg, {}); if (_kbN && _kbN.text) { finishKB(_kbN, pkg, "offline"); return; } } catch (e) {}
+                try { var _kbN = window.MaiKKB.compose(question, pkg, {}); if (_kbN && _kbN.text) { maikBuddyCue("offline"); finishKB(_kbN, pkg, "offline"); return; } } catch (e) {}
               }
               var _h = _live();
               maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
@@ -7290,8 +7400,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // + a distinctive token of the resolved disease NAME present in the RAW (non-abbrev-expanded)
           // query — so ambiguous acronyms (MS/DM/PE/RA) can NEVER bypass — + retrieval-grounding agreement
           // + the mandatory reviewer. Anything that fails FALLS THROUGH to the router below (unchanged). ──
-          if (_kbOn) {
-            var _lf = (function () {
+          function _strictKB() {
               try {
                 if (window.MaiKKB.isComplex(question)) return null;                       // reasoning/comparison/latest/vignette → router
                 var kb = window.MaiKKB.compose(question, pkg, {});
@@ -7304,8 +7413,27 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 if (!reviewKB(kb, question, { primaryConcept: kb.disease })) return null;
                 return kb;
               } catch (e) { return null; }
-            })();
+          }
+          if (_kbOn) {
+            var _lf = _strictKB();
             if (_lf) { finishKB(_lf, pkg, "instant"); return; }                            // deterministic, unambiguous → instant, no Vertex
+          }
+          // Knowledge Base preview (audit section 8: show the zero-token answer first). In LLM-first mode the
+          // model writes every answer, so an exact, unambiguous KB match (the same gate as the instant path
+          // above) is shown at once, labelled as a preview; the model's first words replace it, and if the
+          // model call fails the preview becomes the answer. Flag smd_maik_kb_preview, default ON; "0" = off.
+          if (!_kbOn && !active && window.MaiKKB && maikKB() && maikKbPreviewOn()) {
+            _pvKB = _strictKB();
+            if (_pvKB) {
+              try {
+                _streamStarted = true; _clearStages();
+                var _pvT = maikParseRefine(String(_pvKB.text).trim()).text, _pvS = maikSplitMore(_pvT);   // same clean-up as the final render
+                _pvT = _pvS.detail ? (_pvS.lead + "\n\n" + _pvS.detail) : _pvS.lead;
+                var _pvMd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_pvT) : maikEscH(_pvT);
+                _live().innerHTML = '<div class="maik-kbpreview"><div class="maik-kbpreview-h">From the StewardMD Knowledge Base. MaiK is writing the full answer.</div>' + _pvMd + '</div>';
+                scroll();
+              } catch (e) {}
+            }
           }
           // ── V4 — the UNIVERSAL SEMANTIC ROUTER runs on EVERY query (cached): parse the medical meaning
           // → canonical concept + intent → deterministic KB retrieval keyed on that concept; genuine
@@ -7333,7 +7461,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             return _gemini();
           });
         })
-        .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now. Clinical reasoning, calculators, and reference tools remain available.</div>'; } })
+        .catch(function (e) { if (!_maikDone) { _clearStages(); maikBuddyCue("error"); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now. Clinical reasoning, calculators, and reference tools remain available.</div>'; } })
         .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false); });
     }
     // The two doors, as one card in the thread. Both are data-attribute buttons so they survive a
@@ -7383,7 +7511,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _sentThumb = "";
       try { if (window.__MAIK_IMAGES && window.__MAIK_IMAGES.attached().length) _sentThumb = window.__MAIK_IMAGES.thumb() || ""; } catch (e) {}
       _maikHist.push({ q: q });
-      try { maikDocCue(maikDocClassify(q)); } catch (e) {}   // the doctor acts out the question
+      try { if (_mkc) _mkc.cue("send", q); else maikDocCue(maikDocClassify(q)); } catch (e) {}   // the doctor acts out the question (on-device keywords; nothing leaves the phone)
       bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
       // Drug named in the question (drug-link.js, flag smd_druglink / smd_druglink_ask, default ON):
@@ -7470,7 +7598,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; }, companion: function () { return _mkc ? _mkc.state() : null; }, buddySet: function (v) { maikBuddySet(v); } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); } else { emptyState(); }
     /* A REOPENED CONVERSATION (owner, 2026-09-24): a saved thread comes back as HTML, which carries
@@ -7642,7 +7770,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).join("") : ('<div class="maik-side-empty">' + (q ? "No matching conversations." : "No saved conversations yet. Ask MaiK anything to start.") + '</div>');
       if (e.acct) { var em = maikAcctLabel(); e.acct.innerHTML = em ? ('<div class="maik-side-av">' + maikEscH(em.slice(0, 2).toUpperCase()) + '</div><div class="maik-side-em"><b>' + maikEscH(em) + '</b><span>Signed in &middot; history on this device</span></div>') : '<div class="maik-side-av">?</div><div class="maik-side-em"><b>Guest</b><span>History saved on this device</span></div>'; }
     }
-    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; try { maikMeShow(false); } catch (e2) {} maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
+    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; try { maikMeShow(false); maikBuddyShow(false); } catch (e2) {} maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
     function maikCloseSide() { var e = maikSideEls(); if (!e.wrap) return; e.wrap.classList.remove("open"); setTimeout(function () { try { e.wrap.hidden = true; } catch (x) {} }, 220); }
     function maikOpenConv(id) {
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
@@ -7679,6 +7807,53 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         '<div class="maik-me-acts"><button type="button" class="maik-me-save" id="maikMeSave">Save</button><button type="button" class="maik-me-clear" id="maikMeClear">Clear</button></div>';
     }
     var _sideMe = sheet.querySelector("#maikSideMe"); if (_sideMe) _sideMe.addEventListener("click", function () { maikMeShow(true); });
+    /* ---- MaiK buddy chooser. Classic stays the default until the owner picks one of the three. ---- */
+    var MAIK_BD_SHORT = { attending: "Attending", oncall: "On-Call", bot: "Bot", classic: "Classic", off: "Standing" };
+    function maikBuddyChoice() { return maikLiveDocOn() ? maikDocStyle() : "off"; }
+    function maikBuddyThumb(v) {
+      if (v === "classic") return '<svg width="33" height="44" viewBox="0 0 12 16" shape-rendering="crispEdges" aria-hidden="true">' + maikPixG(MAIK_DOC_F[0], "", MAIK_DOC_PAL) + '</svg>';
+      if (v === "off") return maikPixSVG([MAIK_BUDDY[0]], 2);
+      return (window.MaiKCompanion && MaiKCompanion.thumb) ? MaiKCompanion.thumb(v) : "";
+    }
+    function maikBuddyShow(on) {
+      var side = sheet.querySelector("#maikSide"), el = sheet.querySelector("#maikBuddyPick"); if (!side || !el) return;
+      side.classList.toggle("bd-open", !!on); el.hidden = !on;
+      if (!on) { maikBuddyState(); return; }
+      var cur = maikBuddyChoice(), C = window.MaiKCompanion;
+      var opts = [
+        ["attending", C ? C.LABEL.attending : "Dr. MaiK, Attending", C ? C.BLURB.attending : ""],
+        ["oncall", C ? C.LABEL.oncall : "Dr. MaiK, On-Call", C ? C.BLURB.oncall : ""],
+        ["bot", C ? C.LABEL.bot : "MaiK Bot", C ? C.BLURB.bot : ""],
+        ["classic", "Classic pixel doctor (default)", "The original pixel doctor: walks, jumps and waves."],
+        ["off", "Standing buddy", "A quiet Stetho Buddy who stays in one place."]
+      ].filter(function (o) { return C || o[0] === "classic" || o[0] === "off"; });
+      el.innerHTML = '<div class="maik-me-hd"><button type="button" class="maik-me-back" id="maikBdBack" aria-label="Back to conversations">&#8249;</button><b>MaiK buddy</b></div>' +
+        '<p class="maik-me-help">Choose who keeps you company in MaiK. Tap him any time; press and hold him to come back here.</p>' +
+        '<div role="radiogroup" aria-label="Choose your MaiK buddy">' + opts.map(function (o) {
+          var sel = o[0] === cur;
+          return '<button type="button" class="maik-bd-opt' + (sel ? " on" : "") + '" role="radio" aria-checked="' + sel + '" data-bd="' + o[0] + '">' +
+            '<span class="maik-bd-th">' + maikBuddyThumb(o[0]) + '</span><span class="maik-bd-tx"><b>' + maikEscH(o[1]) + '</b><span>' + maikEscH(o[2]) + '</span></span><span class="maik-bd-ck" aria-hidden="true"></span></button>';
+        }).join("") + '</div>';
+    }
+    function maikBuddyState() { var s = sheet.querySelector("#maikSideBuddyState"); if (s) s.textContent = MAIK_BD_SHORT[maikBuddyChoice()] || ""; }
+    function maikBuddySet(v) {
+      try {
+        if (v === "off") localStorage.setItem("smd_maik_live_doc", "0");
+        else { localStorage.setItem("smd_maik_live_doc", "1"); localStorage.setItem("smd_maik_doc_style", v); localStorage.setItem("smd_maik_doc_off", "0"); }
+      } catch (e) {}
+      try { maikBuddyUnmount(); maikBuddyMount(true); } catch (e) {}
+      maikBuddyState();
+    }
+    var _sideBd = sheet.querySelector("#maikSideBuddy"); if (_sideBd) _sideBd.addEventListener("click", function () { maikBuddyShow(true); });
+    var _bdEl = sheet.querySelector("#maikBuddyPick");
+    if (_bdEl) _bdEl.addEventListener("click", function (ev) {
+      var t = ev.target && ev.target.closest ? ev.target : null; if (!t) return;
+      if (t.closest("#maikBdBack")) { maikBuddyShow(false); return; }
+      var o = t.closest(".maik-bd-opt"); if (!o) return;
+      maikBuddySet(o.getAttribute("data-bd"));
+      maikBuddyShow(false); maikCloseSide();
+    });
+    maikBuddyState();
     var _meEl = sheet.querySelector("#maikMe");
     if (_meEl) _meEl.addEventListener("input", function () { var er = _meEl.querySelector("#maikMeErr"); if (er) er.textContent = ""; });
     if (_meEl) _meEl.addEventListener("click", function (ev) {
@@ -8144,7 +8319,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     }
     (function () {
       var off = sheet.querySelector("#maikOffline");
-      function sync() { try { if (off && off.isConnected) off.hidden = navigator.onLine !== false; } catch (e) {} }
+      function sync() { try { if (off && off.isConnected) { var was = off.hidden; off.hidden = navigator.onLine !== false; if (was && !off.hidden) maikBuddyCue("offline"); } } catch (e) {} }
       sync();
       try { window.addEventListener("online", sync); window.addEventListener("offline", sync); } catch (e) {}
     })();
@@ -8464,7 +8639,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         d.appendChild(ob); scroll(); extractBtn.classList.remove("show");
       }).catch(function () { extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
     });
-    qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); });
+    qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); maikBuddyCue("typing"); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
     if (prefill && typeof prefill === "string") { try { qEl.value = prefill; autosizeQ(); } catch (e) {} }
     setTimeout(function () { try { qEl.focus({ preventScroll: true }); } catch (e) {} }, 300);

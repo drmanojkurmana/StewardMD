@@ -178,6 +178,63 @@ def region_of(p, concept_members):
     return "BODY"
 
 
+def catalog_links(repo=_REPO):
+    """CT / MRI links from what the catalog actually ships: per structure, the FIRST slice of
+    each module that pins it. living.py re-runs this (with mark_plane_links) after pins or
+    slices change, and swaps only the manifest's "links" value."""
+    cat = json.load(open(os.path.join(repo, "atlas", "modules.json")))
+    links = {}
+    for m in cat["modules"]:
+        ap = os.path.join(repo, "atlas", m["id"], "atlas.json")
+        if not os.path.exists(ap):
+            continue
+        a = json.load(open(ap))
+        first_pin = {}
+        for s in a.get("slices", []):
+            for pin in s.get("pins", []):
+                first_pin.setdefault(pin["s"], s["i"])
+        for sid in a.get("structures", {}):
+            cid = sid.replace("-", "_").upper()
+            if sid not in first_pin:
+                continue  # declared but no geometry: nothing to correlate to
+            links.setdefault(cid, []).append({
+                "m": m["id"], "s": sid, "i": first_pin[sid],
+                "mod": m.get("modality", "?"), "t": (m.get("title", "") + " · " + m.get("subtitle", "")).strip(" ·"),
+            })
+    return links
+
+
+def mark_plane_links(links, planes):
+    for rows in links.values():
+        for l in rows:
+            if planes.get(l["m"], {}).get(str(l["i"])):
+                l["plane"] = 1
+    return links
+
+
+def replace_key(path, key, value, next_key):
+    """Swap ONLY the value of one top-level key in a compact JSON file, leaving every other byte
+    alone (the manifest does not round-trip byte-exact through a re-dump)."""
+    text = open(path, encoding="utf-8").read()
+    i = text.index('"%s":' % key) + len('"%s":' % key)
+    j = text.index(',"%s":' % next_key, i)
+    new = text[:i] + json.dumps(value, separators=(",", ":"), ensure_ascii=False) + text[j:]
+    old, now = json.loads(text), json.loads(new)
+    old.pop(key); now.pop(key)
+    if old != now:
+        sys.exit("%s: surgery touched more than %s" % (path, key))
+    open(path, "w", encoding="utf-8").write(new)
+
+
+def relink():
+    """Pins or slices changed: regenerate ONLY manifest "links" from the shipped modules."""
+    path = os.path.join(OUT_DIR, "manifest.json")
+    planes = json.load(open(path, encoding="utf-8"))["planes"]
+    links = mark_plane_links(catalog_links(), planes)
+    replace_key(path, "links", links, "stats")
+    return links
+
+
 def build(src, write=False):
     up, bufs, inputs = load_upstream(src)
     mp = json.load(open(MAP))
@@ -268,25 +325,7 @@ def build(src, write=False):
         sys.exit(f"ontology structures missing from bp3d-map.json: {unmapped_in_ontology}")
 
     # ---- CT / MRI links (from what the catalog actually ships) ----
-    cat = json.load(open(os.path.join(_REPO, "atlas", "modules.json")))
-    links = {}
-    for m in cat["modules"]:
-        ap = os.path.join(_REPO, "atlas", m["id"], "atlas.json")
-        if not os.path.exists(ap):
-            continue
-        a = json.load(open(ap))
-        first_pin = {}
-        for s in a.get("slices", []):
-            for pin in s.get("pins", []):
-                first_pin.setdefault(pin["s"], s["i"])
-        for sid in a.get("structures", {}):
-            cid = sid.replace("-", "_").upper()
-            if sid not in first_pin:
-                continue  # declared but no geometry: nothing to correlate to
-            links.setdefault(cid, []).append({
-                "m": m["id"], "s": sid, "i": first_pin[sid],
-                "mod": m.get("modality", "?"), "t": (m.get("title", "") + " · " + m.get("subtitle", "")).strip(" ·"),
-            })
+    links = catalog_links()
 
     # ---- repack geometry: per-system chunks, merged vertex streams ----
     order = sorted(kept, key=lambda p: (SYS_INDEX[p["system"]], up["parts"].index(p) if False else 0, p["id"]))
@@ -318,7 +357,9 @@ def build(src, write=False):
                 blob.extend(data)
             raw = bytes(blob)
             gz = gzip.compress(raw, compresslevel=9, mtime=0)
-            name = f"{cur['name']}.bin.gz"
+            # Content-hashed filename: an R2 object is never overwritten in place, so an app still
+            # holding the previous manifest keeps loading the bytes it expects (2026-09-25 outage).
+            name = f"{cur['name']}.{hashlib.sha256(gz).hexdigest()[:8]}.bin.gz"
             files[name] = gz
             chunks.append({"id": cur["name"], "url": f"/atlas/3d/{name}", "system": sys_id,
                            "bytes": len(raw), "gz": len(gz), "sha256": hashlib.sha256(gz).hexdigest(),
@@ -417,11 +458,7 @@ def build(src, write=False):
                         "desc": "Organ surfaces from the SAME living-patient CT as the torso slice modules "
                                 "(TotalSegmentator dataset subject s0108, expert masks, CC BY 4.0)",
                         "frame": "live", "modules": sorted(planes.keys())})
-        for cid, rows in links.items():
-            for l in rows:
-                pl = planes.get(l["m"], {}).get(str(l["i"]))
-                if pl:
-                    l["plane"] = 1
+        mark_plane_links(links, planes)
         total_tris += live["stats"]["triangles"]
 
     # ---- mobile LOD set (pack3d.mjs lod) ----
@@ -490,10 +527,18 @@ def build(src, write=False):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--src", required=True, help="path to a human-atlas checkout")
+    ap.add_argument("--src", help="path to a human-atlas checkout")
+    ap.add_argument("--relink", action="store_true",
+                    help="only regenerate manifest links from the shipped modules (no --src needed)")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--md", action="store_true", help="print a markdown checksum table")
     a = ap.parse_args()
+    if a.relink:
+        links = relink()
+        print("links regenerated: %d structures, %d rows" % (len(links), sum(len(v) for v in links.values())))
+        return 0
+    if not a.src:
+        ap.error("--src is required unless --relink")
     manifest, prov = build(a.src, write=a.write)
     s = manifest["stats"]
     print(json.dumps(s, indent=1))

@@ -29,10 +29,10 @@
   }
   var MEDAPI = {
     base: API_BASE,
-    searchCompositions: function (q, limit) { return api("/search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 20)).then(function (d) { return d || { results: [] }; }); },
+    searchCompositions: function (q, limit) { return api("/search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 20)).then(function (d) { return d || { results: [], unavailable: true }; }); },
     // Brand-name search — returns individual brands whose name matches q (e.g.
     // "pantocid"). Degrades to empty if the API predates the endpoint (404 → null).
-    searchBrands: function (q, limit) { return api("/brand-search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 12)).then(function (d) { return d || { results: [] }; }); },
+    searchBrands: function (q, limit) { return api("/brand-search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 12)).then(function (d) { return d || { results: [], unavailable: true }; }); },
     composition: function (name, sort, tier, limit, offset, q) {
       return api("/composition?name=" + encodeURIComponent(name) + "&sort=" + (sort || "relevance") + "&tier=" + (tier || "all") + "&limit=" + (limit || PAGE) + "&offset=" + (offset || 0) + (q ? "&q=" + encodeURIComponent(q) : ""));
     },
@@ -460,7 +460,40 @@
     try { return (window.MEDDRUGS && MEDDRUGS.searchIndex) ? (MEDDRUGS.searchIndex(q) || []) : []; }
     catch (e) { return []; }
   }
-  function renderLocalHits(r, q, local) {
+  // The bundled monograph library (offline-clinical.js → data/clinical-index.js, 1,645 molecules).
+  // drugs.js only knows 109 molecules, so without this a drug we ship a full monograph for — the
+  // reported case was a reserve antibiotic with no Indian brand — answered "No drugs match".
+  // Never rejects: an unavailable index must cost us extra results, not the screen.
+  function goldSearch(q, limit) {
+    try {
+      var O = window.SMD_OFFLINE_CLINICAL;
+      if (!O || typeof O.search !== "function") return Promise.resolve([]);
+      return O.search(q, limit || 20).catch(function () { return []; });
+    } catch (e) { return Promise.resolve([]); }
+  }
+  // A molecule we hold a monograph for, rendered as a normal result row. `m` marks the ones that
+  // also carry an openFDA monograph; the label says "monograph" rather than a brand count because
+  // there are no brands to count — saying "0 brands" would read as "not available".
+  function goldHitsHTML(q, rows, shownNames) {
+    var seen = {};
+    (shownNames || []).forEach(function (n) { seen[String(n).toLowerCase()] = 1; });
+    var fresh = (rows || []).filter(function (x) {
+      var k = String(x.n || "").toLowerCase();
+      if (!k || seen[k]) return false;
+      seen[k] = 1; return true;
+    });
+    if (!fresh.length) return "";
+    return '<div class="db-sec-l">' + dbIco("flask") + ' Clinical monographs</div>' + fresh.map(function (x) {
+      var sub = [x.c, "monograph"].filter(Boolean).join(" · ");
+      return '<button class="db-comp" data-comp="' + esc(x.n) + '"><span class="db-comp-ic">' + dbIco("pills") +
+        '</span><span class="db-comp-main"><span class="db-comp-name">' + esc(x.n) +
+        '</span><span class="db-comp-sub">' + esc(sub) + '</span></span><span class="db-chev">' + dbIco("chev") + '</span></button>';
+    }).join("");
+  }
+  function wireCompButtons(r) {
+    r.querySelectorAll(".db-comp").forEach(function (b) { b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); }); });
+  }
+  function renderLocalHits(r, q, local, gold) {
     var brandHits = [], compHits = [], seen = {};
     var ql = (q || "").toLowerCase();
     local.forEach(function (x) {
@@ -480,32 +513,72 @@
     if (compHits.length) {
       html += '<div class="db-sec-l">' + dbIco("flask") + ' Molecules &amp; compositions</div>' + compHits.map(compCardHTML).join("");
     }
-    r.innerHTML = html;
-    r.querySelectorAll(".db-comp").forEach(function (b) { b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); }); });
+    html += goldHitsHTML(q, gold, brandHits.map(function (b) { return b.composition; }).concat(compHits.map(function (c) { return c.composition; })));
+    r.innerHTML = html || '<div class="db-empty">No drugs match \u201c' + esc(q) + '\u201d.</div>';
+    wireCompButtons(r);
   }
   function runList(q) {
     // brand-name hits + molecule/composition hits in parallel; brands shown first
     // so doctors who type a brand (e.g. "pantocid") see the brand itself on top.
+    // The bundled monograph library is searched alongside them, because the server searches the
+    // Indian BRAND catalogue: a molecule nobody sells here has no row there and is invisible to it,
+    // however complete our monograph is. Its answer never delays the render.
     Promise.all([MEDAPI.searchBrands(q, 12), MEDAPI.searchCompositions(q, 30)]).then(function (arr) {
       if (q !== q2 || (st.name && !isWide())) return;
       var r = root.querySelector("#dbResults"); if (!r) return;
       var brands = (arr[0] && arr[0].results) || [], comps = (arr[1] && arr[1].results) || [];
       if (!brands.length && !comps.length) {
         var local = localSearch(q);
-        if (local.length) { renderLocalHits(r, q, local); return; }
-        r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>'; return;
+        goldSearch(q).then(function (gold) {
+          if (q !== q2) return;
+          var r2 = root.querySelector("#dbResults"); if (!r2) return;
+          if (local.length || gold.length) { renderLocalHits(r2, q, local, gold); return; }
+          r2.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>';
+        });
+        // Show what is already in hand rather than a blank pane while the index loads.
+        if (local.length) renderLocalHits(r, q, local, []);
+        else r.innerHTML = '<div class="db-empty">Searching\u2026</div>';
+        return;
       }
       var html = "";
       if (brands.length) html += '<div class="db-sec-l">' + dbIco("pills") + ' Brands matching “' + esc(q) + '”</div>' + brands.map(brandHitHTML).join("");
       if (comps.length) html += '<div class="db-sec-l">' + dbIco("flask") + ' Molecules &amp; compositions</div>' + comps.map(compCardHTML).join("");
       r.innerHTML = html;
-      r.querySelectorAll(".db-comp").forEach(function (b) { b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); }); });
+      wireCompButtons(r);
+      // The server answered, but it answered from brands. If the doctor typed the name of a molecule
+      // we hold a monograph for and it is not among those rows, append it rather than let a reserve
+      // drug look absent because nobody in India sells it.
+      var shown = brands.map(function (b) { return b.composition; }).concat(comps.map(function (c) { return c.composition; }));
+      goldSearch(q, 8).then(function (gold) {
+        if (q !== q2) return;
+        var r3 = root.querySelector("#dbResults"); if (!r3 || r3.innerHTML !== html) return;
+        var extra = goldHitsHTML(q, exactish(q, gold), shown);
+        if (!extra) return;
+        r3.innerHTML = html + extra;
+        wireCompButtons(r3);
+      });
     }).catch(function () {
       if (q !== q2 || (st.name && !isWide())) return;
       var r = root.querySelector("#dbResults"); if (!r) return;
       var local = localSearch(q);
-      if (local.length) { renderLocalHits(r, q, local); return; }
-      r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>';
+      goldSearch(q).then(function (gold) {
+        if (q !== q2) return;
+        var r2 = root.querySelector("#dbResults"); if (!r2) return;
+        if (local.length || gold.length) { renderLocalHits(r2, q, local, gold); return; }
+        r2.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>';
+      });
+      if (local.length) renderLocalHits(r, q, local, []);
+    });
+  }
+  // When the server already answered, only a molecule the doctor plainly meant is worth appending:
+  // the name matches the query exactly, or begins with it. A class or tag match would bury a good
+  // brand list under loosely related molecules.
+  function exactish(q, rows) {
+    var nq = String(q || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+    if (!nq) return [];
+    return (rows || []).filter(function (x) {
+      var n = String(x.n || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+      return n === nq || n.indexOf(nq + " ") === 0;
     });
   }
 

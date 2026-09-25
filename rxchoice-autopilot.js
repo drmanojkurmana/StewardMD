@@ -224,7 +224,9 @@
     // The adapter can load before MEDAPI/core because the app boot order is intentionally modular.
     // Polling is only a readiness check; once choices are rendered, run() becomes a no-op until the
     // prescription changes.
-    setInterval(schedule, 1000);
+    // Readiness poll only; MutationObserver + input/change listeners drive real updates, and those
+    // can't fire while the tab is hidden anyway, so skip the tick outright.
+    setInterval(function () { if (document.hidden) return; schedule(); }, 1000);
     schedule();
   }
 

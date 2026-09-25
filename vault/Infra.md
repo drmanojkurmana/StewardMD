@@ -243,3 +243,10 @@ Retry after removing the AI_PROVIDER Pages secret that collided with the wrangle
 Pages caps variables plus secrets at 128 bindings; adding VERTEX_API_KEY made 129 and every deployment failed with
 "Too many text bindings". GCP_WIF_ISSUER and GCP_WIF_SUBJECT (code defaults exist) were deleted on 2026-09-24 to get back
 under it; delete the rest of the GCP_* set once the key is verified, and count before adding any new secret.
+
+## Cloudflare Access identity (2026-09-25)
+The API trusts a Cloudflare Access user ONLY via a verified `Cf-Access-Jwt-Assertion`
+(`functions/_fbauth.js cfAccessEmail`). To put any hostname/path behind Access and have the API
+recognise those users, set both Pages env vars: `CF_ACCESS_TEAM_DOMAIN` (`<team>.cloudflareaccess.com`)
+and `CF_ACCESS_AUD` (the Access application's AUD tag; comma-separate several). Unset = Access
+identity off; callers fall through to Firebase / staff sessions. The bare email header is never read.
