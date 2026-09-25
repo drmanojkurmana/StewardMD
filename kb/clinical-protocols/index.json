@@ -1,12 +1,12 @@
 {
  "schema": 1,
- "version": "7221407509fc",
- "count": 222,
+ "version": "e72b9472108a",
+ "count": 229,
  "subjects": [
   {
    "key": "emergency",
    "label": "Emergency and Resuscitation",
-   "count": 7
+   "count": 8
   },
   {
    "key": "critical-care",
@@ -26,7 +26,7 @@
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 33
+   "count": 37
   },
   {
    "key": "gastroenterology",
@@ -51,7 +51,7 @@
   {
    "key": "toxicology",
    "label": "Toxicology and Envenomation",
-   "count": 9
+   "count": 10
   },
   {
    "key": "haematology-oncology",
@@ -96,14 +96,14 @@
   {
    "key": "ophthalmology-ent",
    "label": "Ophthalmology and ENT",
-   "count": 6
+   "count": 7
   }
  ],
  "bases": [
   {
    "key": "international",
    "label": "International",
-   "count": 204
+   "count": 211
   },
   {
    "key": "india",
@@ -463,6 +463,35 @@
    "sources": [
     "British Orthopaedic Association 2025",
     "NICE 2016"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-conjunctivitis",
+   "title": "Acute conjunctivitis",
+   "subject": "ophthalmology-ent",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "conjunctivitis",
+    "pink eye",
+    "red eye",
+    "viral conjunctivitis",
+    "adenoviral conjunctivitis",
+    "EKC",
+    "bacterial conjunctivitis",
+    "allergic conjunctivitis",
+    "gonococcal conjunctivitis",
+    "chlamydial conjunctivitis",
+    "ophthalmia neonatorum",
+    "Madras eye"
+   ],
+   "summary": "Most acute conjunctivitis in adults is viral and self-limiting: no antibiotics. Treat bacterial conjunctivitis with a 5 to 7 day topical antibiotic, allergic with antihistamine or mast-cell stabiliser drops, and gonococcal or chlamydial infection systemically. Visual loss, pain, corneal involvement, contact lens wear or a neonate need same-day ophthalmology.",
+   "sources": [
+    "American Academy of Ophthalmology 2023",
+    "American Academy of Ophthalmology 2025",
+    "CDC 2021"
    ],
    "status": "ai_drafted"
   },
@@ -835,11 +864,11 @@
   },
   {
    "id": "poisoning-general-approach",
-   "title": "Acute poisoning: general approach (adult)",
+   "title": "Acute poisoning: general approach (adult, India)",
    "subject": "toxicology",
    "population": "Adults",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "poisoning-general-approach-international",
    "aliases": [
     "poisoning",
     "overdose",
@@ -857,6 +886,37 @@
    "sources": [
     "ISCCM 2024",
     "AHA 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "poisoning-general-approach-international",
+   "title": "Acute poisoning: general approach (international)",
+   "subject": "toxicology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": "poisoning-general-approach",
+   "aliases": [
+    "overdose",
+    "poisoning",
+    "self-poisoning",
+    "toxidrome",
+    "activated charcoal",
+    "gastric lavage",
+    "whole bowel irrigation",
+    "decontamination",
+    "antidote",
+    "EXTRIP",
+    "haemodialysis in poisoning",
+    "toxic cardiac arrest",
+    "ECMO in poisoning"
+   ],
+   "summary": "Resuscitate first (ABCDE, glucose, ECG), identify the toxidrome and give specific antidotes early. Give activated charcoal only with a safe airway and an adsorbable poison, usually within 1 hour and up to 6 hours for selected poisons; avoid routine lavage and ipecac; use extracorporeal removal per EXTRIP and seek poison centre advice.",
+   "sources": [
+    "AACT / EAPCCT 2015",
+    "Clinical Toxicology Recommendations Collaborative (AACT, EAPCCT, APAMT) 2026",
+    "AHA 2023",
+    "EXTRIP Workgroup 2015"
    ],
    "status": "ai_drafted"
   },
@@ -1221,11 +1281,11 @@
   },
   {
    "id": "rabies-post-exposure-prophylaxis",
-   "title": "Animal bite: rabies post-exposure prophylaxis",
+   "title": "Animal bite: rabies post-exposure prophylaxis (India, NCDC)",
    "subject": "infectious-disease",
    "population": "All ages",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "rabies-post-exposure-prophylaxis-international",
    "aliases": [
     "rabies PEP",
     "dog bite",
@@ -2226,6 +2286,36 @@
    "status": "ai_drafted"
   },
   {
+   "id": "cryptococcal-meningitis",
+   "title": "Cryptococcal meningitis, HIV-associated (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "cryptococcal meningitis",
+    "crypto meningitis",
+    "CM",
+    "cryptococcosis",
+    "Cryptococcus neoformans",
+    "CrAg",
+    "cryptococcal antigen",
+    "India ink",
+    "liposomal amphotericin",
+    "AmBisome",
+    "flucytosine",
+    "5-FC",
+    "therapeutic lumbar puncture",
+    "raised intracranial pressure"
+   ],
+   "summary": "Diagnose by lumbar puncture with opening pressure and CSF cryptococcal antigen; induce with a single 10 mg/kg dose of liposomal amphotericin B plus 14 days of flucytosine and fluconazole, drain raised pressure by repeated therapeutic lumbar puncture, and defer ART for 4 to 6 weeks.",
+   "sources": [
+    "WHO 2022",
+    "WHO 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "deep-vein-thrombosis",
    "title": "Deep vein thrombosis of the leg: diagnosis and treatment",
    "subject": "cardiology",
@@ -2755,6 +2845,36 @@
    "status": "ai_drafted"
   },
   {
+   "id": "fever-in-returned-traveller",
+   "title": "Fever in the returned traveller (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "returned traveller",
+    "returning traveler",
+    "imported fever",
+    "travel fever",
+    "febrile traveller",
+    "imported malaria",
+    "VHF",
+    "viral haemorrhagic fever",
+    "HCID",
+    "Ebola",
+    "Lassa",
+    "tropical fever"
+   ],
+   "summary": "Exclude malaria first in anyone febrile after travel to an endemic area in the past year, risk-assess for viral haemorrhagic fever if illness began within 21 days of exposure, use itinerary and incubation period to target dengue, enteric fever and rickettsial infection, and admit readily.",
+   "sources": [
+    "CDC 2025",
+    "UK DHSC / ACDP 2026",
+    "CDC 2026",
+    "CDC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "first-unprovoked-seizure",
    "title": "First unprovoked seizure (adult)",
    "subject": "neurology",
@@ -2949,11 +3069,11 @@
   },
   {
    "id": "heat-stroke",
-   "title": "Heat stroke (adults and children)",
+   "title": "Heat stroke (India, NCDC)",
    "subject": "emergency",
    "population": "Adults and children",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "heat-stroke-international",
    "aliases": [
     "heatstroke",
     "exertional heat stroke",
@@ -2973,6 +3093,34 @@
     "NCDC, MoHFW (NPCCHH) 2021",
     "NCDC, MoHFW (NPCCHH) 2025",
     "Resuscitation Council UK / ERC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "heat-stroke-international",
+   "title": "Heat stroke (WMS and ACSM)",
+   "subject": "emergency",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": "heat-stroke",
+   "aliases": [
+    "heatstroke",
+    "exertional heat stroke",
+    "EHS",
+    "classic heat stroke",
+    "non-exertional heat stroke",
+    "hyperthermia",
+    "heat exhaustion",
+    "heat illness",
+    "cold water immersion",
+    "ice water immersion",
+    "sunstroke"
+   ],
+   "summary": "Heat stroke is a rectal temperature above 40 degrees C with CNS dysfunction. Cool first, transport second: start cold or ice-water immersion (or the fastest method available) within minutes, stop at about 38.3 to 38.8 degrees C, then manage organ injury. Antipyretics and dantrolene have no role.",
+   "sources": [
+    "Wilderness Medical Society 2024",
+    "American College of Sports Medicine 2023",
+    "Wilderness Medical Society 2024"
    ],
    "status": "ai_drafted"
   },
@@ -4678,6 +4826,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "pneumocystis-pneumonia",
+   "title": "Pneumocystis pneumonia (PCP) in adults",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "PCP",
+    "PJP",
+    "Pneumocystis jirovecii pneumonia",
+    "Pneumocystis carinii",
+    "co-trimoxazole",
+    "cotrimoxazole",
+    "TMP-SMX",
+    "Septran",
+    "Bactrim",
+    "HIV pneumonia",
+    "PCP prophylaxis"
+   ],
+   "summary": "Treat for 21 days with high-dose co-trimoxazole (trimethoprim 15 to 20 mg/kg/day), add prednisolone within 72 hours if PaO2 is below 70 mmHg or the A-a gradient above 35 mmHg, start ART within 2 weeks, and continue secondary prophylaxis until CD4 recovery.",
+   "sources": [
+    "CDC / NIH / HIVMA-IDSA 2009",
+    "WHO 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "polycystic-ovary-syndrome",
    "title": "Polycystic ovary syndrome (PCOS)",
    "subject": "obstetrics-gynaecology",
@@ -4997,6 +5172,39 @@
     "WHO 2025",
     "CDC 2022",
     "ATS / CDC / IDSA (ERS endorsed) 2016"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "rabies-post-exposure-prophylaxis-international",
+   "title": "Rabies post-exposure prophylaxis (WHO)",
+   "subject": "infectious-disease",
+   "population": "All ages",
+   "basis": "international",
+   "counterpart": "rabies-post-exposure-prophylaxis",
+   "aliases": [
+    "rabies PEP",
+    "dog bite",
+    "cat bite",
+    "bat exposure",
+    "animal bite",
+    "WHO rabies position paper 2018",
+    "IPC regimen",
+    "1-week intradermal",
+    "Essen",
+    "Zagreb",
+    "RIG",
+    "HRIG",
+    "ERIG",
+    "rabies monoclonal antibody",
+    "PrEP rabies"
+   ],
+   "summary": "Classify the exposure, wash every wound with soap and water for 15 minutes, and vaccinate Category II and III exposures at once (WHO 1-week ID: 0.1 mL at 2 sites on days 0, 3 and 7). Add RIG (HRIG 20 IU/kg, ERIG 40 IU/kg) or a monoclonal antibody infiltrated into all Category III wounds in unvaccinated patients.",
+   "sources": [
+    "WHO 2018",
+    "WHO 2018",
+    "WHO 2024",
+    "WHO 2026"
    ],
    "status": "ai_drafted"
   },
