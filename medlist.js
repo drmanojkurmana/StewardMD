@@ -1653,10 +1653,10 @@
 
     // ---- strong summary panel: title + reviewed count + severity count chips ----
     var panel = el("div", { cls: "mlr-summary-panel" });
-    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Medication Safety Summary" }));
+    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Interaction review" }));
     var checkedN = cov.reviewedCount, submittedN = cov.submittedCount || res.reviewedCount;
     panel.appendChild(el("div", { cls: "mlr-summary-sub",
-      text: checkedN + " of " + submittedN + " medicine" + (submittedN !== 1 ? "s" : "") + " checked" }));
+      text: "Limited rule screen: " + submittedN + " medicine" + (submittedN !== 1 ? "s" : "") + " submitted" }));
     var monitorCount = res.monitor.filter(notDuplicate).length + res.moderate.filter(notDuplicate).length;
     var chips = el("div", { cls: "mlr-chips" });
     summaryChip(chips, "critical", "Critical", res.critical.length);
