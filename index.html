@@ -1768,7 +1768,10 @@ html.smd-splash-v2 #splash .splash-module-pill{
   <button class="hqp-close" id="hqpClose">✕</button>
   <span class="hqp-icon">📖</span>
   <div class="hqp-quote" id="hqpQuote"></div>
-  <div class="hqp-source" id="hqpSource"></div>
+  <!-- smd-books-keep: this is a direct quotation, so it keeps the attribution of the book it is
+       quoted from. Without it emoji-icons.js replaced "Harrison's Principles of Internal Medicine"
+       with the general-medicine standard-textbook list, crediting the words to three books. -->
+  <div class="hqp-source smd-books-keep" id="hqpSource"></div>
 </div>
 
 <!-- ===== MY CASES PANEL ===== -->
@@ -2153,7 +2156,7 @@ window.openExternal = function (u) {
 <!-- The ONE brand->generic map (app.js search, medlist.js, rx-validity.js all read it). Must load
      before all three; every tag here is defer, so document order is execution order. -->
 <script src="/brand-generics.js?v=bg1" defer></script>
-<script src="/app.js?v=gold1034-brands1" defer></script>
+<script src="/app.js?v=gold1035-quoteref1" defer></script>
 <!-- Firebase App Check bridge: native App Attest/Play Integrity token -> compat JS SDK. Fail-open,
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
@@ -2220,7 +2223,7 @@ window.openExternal = function (u) {
 <script src="/drug-link.js?v=dl6" defer></script>
 <!-- No emoji in the app (each becomes the matching window.ICONS line icon) and no AI-style dashes
      (emoji-icons.js). Flags smd_noemoji / smd_nodash, default ON; "0" restores either. -->
-<script src="/emoji-icons.js?v=ne9" defer></script>
+<script src="/emoji-icons.js?v=ne10-quoteref1" defer></script>
 <!-- Dose router: a "dose of X" question is answered from the drug database (MEDAPI), never by a
      model. Loads before maik-engine.js, which short-circuits to it; falls open to the normal answer. -->
 <script defer src="/kb/ai/drug-dose.js?v=dose2-audA"></script>
