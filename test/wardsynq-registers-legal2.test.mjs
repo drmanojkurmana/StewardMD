@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-registers-legal2.test.mjs - the statutory registers, second pass of the 2026-09-17 legal review (sections
  * B to F items the first pass left out): the PCPNDT nodal officer, Form F flags on the imaging worklist, foetal sex refused
  * in patient replies and imports; MTP retention and the POCSO task; restricted sexual-offence cases, requisitioned exports,

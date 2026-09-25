@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-webhooks.test.mjs - P2.13: tenant-scoped webhooks through the outbox.
  *
  * Routes: GET /api/queue/ward/webhooks, POST /api/queue/ward/webhook, POST /api/queue/ward/webhook-update,

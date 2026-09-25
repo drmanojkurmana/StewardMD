@@ -1,3 +1,4 @@
+import "../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect/router.test.mjs — Connect HTTP router: flag gate, server-derived identity, reserved ingress, sanitized errors.
 import { test } from "node:test";
 import assert from "node:assert/strict";

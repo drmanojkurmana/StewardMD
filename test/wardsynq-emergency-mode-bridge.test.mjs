@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-emergency-mode-bridge.test.mjs — TASK 4.15: hospital emergency mode through the
  * REAL routes. Same seeding style as test/wardsynq-rbac-4-13-bridge.test.mjs.
  *

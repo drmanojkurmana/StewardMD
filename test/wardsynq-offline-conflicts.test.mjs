@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-offline-conflicts.test.mjs - G2: bedside writes kept on the device while offline, and the
  * conflict review after reconnect.
  *

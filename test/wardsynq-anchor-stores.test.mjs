@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-anchor-stores.test.mjs - G12: a second outside anchor that is neither D1 nor KV (Firestore, behind the
  * {name, get, put} AnchorStore port), both chains anchored into both stores, disagreement between the two copies as its
  * own finding, and the owner acknowledgement across both stores, including POST /api/queue/ward/audit-anchor-acknowledge

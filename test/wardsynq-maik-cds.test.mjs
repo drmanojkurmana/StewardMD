@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-maik-cds.test.mjs — TASK 8.9: MaiK explains a safety verdict it did not compute.
  *
  * THE PROPERTY THIS FILE DEFENDS. MaiK must never become a second clinical rules engine. Every

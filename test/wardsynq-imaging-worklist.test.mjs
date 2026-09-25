@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-imaging-worklist.test.mjs — TASK 7.7: the modality worklist, through the REAL route.
  *
  * The mapping itself is proven in test/wardsynq-dicom-imaging.test.mjs. This file exists because a

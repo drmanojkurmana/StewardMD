@@ -34,6 +34,114 @@
   var MARK = "smd_maik_kb_installed";
   var MARK_SHA = "smd_maik_kb_sha";
 
+  // ── persisted BM25 index (audit T25 follow-up, 2026-09-25) ──────────────────────────────────
+  // The audit's stronger recommendation was a PRECOMPUTED index shipped with the app, so the
+  // first offline question never pays the ~3s build. Not done that way: the 42,176-row book
+  // (maik-lite-kb.jsonl) is not in this repo and is not a build-time asset - it is downloaded
+  // once per device from models.stewardmd.in and its raw text/pages are needed at query time
+  // regardless (Book.cite() reads rows[i].text), so a precomputed index would ship ALONGSIDE the
+  // 38 MB download, not instead of it, and (per buildIndex()'s own comment: ~1.6M terms, mostly
+  // bigrams) would be roughly as large as the corpus itself - a second big asset for a ~3s save.
+  // Persisting the ALREADY-BUILT index to IndexedDB, keyed to the same SHA256 that pins the
+  // download, gets the same outcome (only the first session ever tokenizes) for free: nothing
+  // extra to ship, nothing extra to invalidate.
+  var IDB_NAME = "smd-maik-kb";
+  var IDB_STORE = "kb-index";
+  // Risky-change flag (project convention): "0" is PURE PREVIOUS BEHAVIOUR - neither the
+  // IndexedDB read nor the write ever happens, not just "ignore what's there". Default ON.
+  var FLAG_IDX_CACHE = "smd_maik_kb_idx_cache";
+  function idxCacheEnabled() { return lget(FLAG_IDX_CACHE) !== "0"; }
+
+  function idbOpen() {
+    return new Promise(function (resolve, reject) {
+      if (typeof indexedDB === "undefined") { reject(new Error("no indexedDB")); return; }
+      var req;
+      try { req = indexedDB.open(IDB_NAME, 1); } catch (e) { reject(e); return; }
+      req.onupgradeneeded = function () {
+        if (!req.result.objectStoreNames.contains(IDB_STORE)) req.result.createObjectStore(IDB_STORE, { keyPath: "sha" });
+      };
+      req.onsuccess = function () { resolve(req.result); };
+      req.onerror = function () { reject(req.error || new Error("indexedDB open failed")); };
+    });
+  }
+
+  /** The persisted index for the CURRENTLY pinned SHA256, or null on any miss/mismatch/error - a
+   * cache miss must never block loadBook(), only cost it the rebuild every session used to pay
+   * before this. */
+  function idbGetIndex() {
+    return idbOpen().then(function (db) {
+      return new Promise(function (resolve) {
+        try {
+          var store = db.transaction(IDB_STORE, "readonly").objectStore(IDB_STORE);
+          var req = store.get(SHA256);
+          req.onsuccess = function () { resolve(req.result && req.result.sha === SHA256 ? req.result.idx : null); };
+          req.onerror = function () { resolve(null); };
+        } catch (e) { resolve(null); }
+      });
+    }).catch(function () { return null; });
+  }
+
+  /** Best-effort: persisting the index is an optimization, never a requirement, so any failure
+   * (quota, private mode, no IndexedDB) is swallowed. Only one entry is ever kept - a stale
+   * (superseded SHA256) entry is worthless, so the store is cleared before the new one goes in
+   * rather than accumulating one per KB version ever shipped. */
+  function idbPutIndex(idx) {
+    return idbOpen().then(function (db) {
+      try {
+        var store = db.transaction(IDB_STORE, "readwrite").objectStore(IDB_STORE);
+        store.clear();
+        store.put({ sha: SHA256, idx: idx });
+      } catch (e) {}
+    }).catch(function () {});
+  }
+
+  /** Rough byte estimate of a buildIndex() result - each typed array's own .byteLength (free,
+   * no copy) plus the sorted-terms string's worst-case UTF-16 size (2 bytes/code unit). NEVER
+   * JSON.stringify(idx) here: that would allocate a second full copy of an 80MB+ structure just
+   * to size the first one, exactly what this whole feature exists to avoid holding. */
+  function idxByteSize(idx) {
+    try {
+      return idx.off.byteLength + idx.idf.byteLength + idx.pd.byteLength + idx.pf.byteLength +
+        idx.len.byteLength + idx.starts.byteLength + idx.terms.length * 2;
+    } catch (e) { return 0; }
+  }
+
+  /** True when there's roughly 3x the payload free in storage quota - the persisted index can be
+   * 80MB+ (see the comment above), so writing it blind on a near-full device risks a
+   * QuotaExceededError mid-write or evicting something else's data. Fails OPEN (permits the
+   * write) when the Storage API is unavailable or the check itself throws: this is only ever a
+   * pre-emptive skip, never a requirement - idbPutIndex's own try/catch already swallows a
+   * QuotaExceededError from the write itself, so an unchecked device is no worse off than before
+   * this existed. */
+  function hasQuotaHeadroom(bytes) {
+    try {
+      if (!(typeof navigator !== "undefined" && navigator.storage && navigator.storage.estimate)) return Promise.resolve(true);
+      return navigator.storage.estimate().then(function (est) {
+        var free = (est && typeof est.quota === "number" && typeof est.usage === "number")
+          ? (est.quota - est.usage) : Infinity;
+        return free >= bytes * 3;
+      }).catch(function () { return true; });
+    } catch (e) { return Promise.resolve(true); }
+  }
+
+  /** Run `fn` once the current task has finished and the thread is otherwise idle - used so
+   * persisting the index never delays handing the just-built Book back to the caller that is
+   * waiting on it to answer a question. */
+  function onIdle(fn) {
+    if (typeof requestIdleCallback === "function") requestIdleCallback(function () { try { fn(); } catch (e) {} });
+    else setTimeout(function () { try { fn(); } catch (e) {} }, 0);
+  }
+
+  /** Fire-and-forget: called from buildBookAsync's onIndex hook, deferred (onIdle) to run AFTER
+   * the Book built from this same idx has already resolved to the caller. Flag- and quota-gated;
+   * every failure past that point is swallowed inside idbPutIndex itself. */
+  function persistIndexDeferred(idx) {
+    if (!idxCacheEnabled()) return;
+    onIdle(function () {
+      hasQuotaHeadroom(idxByteSize(idx)).then(function (ok) { if (ok) idbPutIndex(idx); });
+    });
+  }
+
   function cap() { return (typeof window !== "undefined" && window.Capacitor) || null; }
   function isNative() { var c = cap(); return !!(c && c.isNativePlatform && c.isNativePlatform()); }
   function fs() { var c = cap(); return (c && c.Plugins && c.Plugins.Filesystem) || null; }
@@ -194,7 +302,22 @@
       // blocked the WebView main thread for ~3s on the real 42,176-row book. buildBookAsync
       // falls back to the synchronous new RAG.Book(rows) itself when a worker can't be used, so
       // this call site does not need to know which path actually ran.
-      return RAG.buildBookAsync ? RAG.buildBookAsync(rows, r.data) : new RAG.Book(rows);
+      //
+      // Persisted-index fast path (audit T25 follow-up, 2026-09-25): if a previous session
+      // already built and saved the index for THIS EXACT SHA256, skip the build entirely - rows
+      // still have to be parsed (cite() needs the text/pages regardless) but the ~3s tokenization
+      // pass is gone. A corrupt/mismatched cache entry just falls through to a normal rebuild.
+      // Gated behind FLAG_IDX_CACHE ("0" = neither read nor write ever happens - pure previous
+      // behaviour); the write itself is deferred off this task and quota-checked (see
+      // persistIndexDeferred).
+      function buildFresh() {
+        return RAG.buildBookAsync ? RAG.buildBookAsync(rows, r.data, persistIndexDeferred) : new RAG.Book(rows);
+      }
+      if (!idxCacheEnabled()) return buildFresh();
+      return idbGetIndex().then(function (cachedIdx) {
+        if (!cachedIdx) return buildFresh();
+        try { return new RAG.Book(rows, cachedIdx); } catch (e) { return buildFresh(); }
+      });
     }).then(function (book) {
       _book = book; _loading = null;
       return _book;

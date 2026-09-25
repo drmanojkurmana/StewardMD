@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-whole-type-reads.test.mjs - R4-2 whole-type-reads.
  *
  * Every roster read (service.list) was the OLDEST 1,000 records of a type, and callers asking for more compared against

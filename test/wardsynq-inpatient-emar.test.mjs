@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-inpatient-emar.test.mjs — the inpatient vertical, through the REAL routes.
  *
  * admission -> ward list -> ward vitals -> inpatient medication order -> medication round ->

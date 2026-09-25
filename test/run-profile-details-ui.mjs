@@ -67,11 +67,17 @@ try {
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.navigate", { url: BASE });
   let ready = false;
-  for (let i = 0; i < 75; i++) { await sleep(400); if (await ev(`return !!(window.SMD_openProfile && window.SMD_PROFILE_SETUP && window.SMD_HOSPITALS)`) === true) { ready = true; break; } }
-  ok(ready, "app, profile page, setup module and hospital directory all load");
+  for (let i = 0; i < 75; i++) { await sleep(400); if (await ev(`return !!(window.SMD_openProfile && window.SMD_PROFILE_SETUP && window.SMD_INSTITUTIONS)`) === true) { ready = true; break; } }
+  ok(ready, "app, profile page, setup module and institution directory all load");
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
   await ev(`SMD_showHome(); return 1;`); await sleep(700);
-  ok(await ev(`return SMD_HOSPITALS.all().length > 500;`) === true, "the curated hospital/college directory is populated");
+  /* The directory lives behind SMD_INSTITUTIONS now. SMD_HOSPITALS belongs to
+   * hospital-registry.js (connected hospitals); the two used to fight over that one global. */
+  await ev(`window.__dirCount = -1; SMD_INSTITUTIONS.ensure().then(function(I){ window.__dirCount = I.count(); }); return 1;`);
+  await sleep(2500);
+  ok(await ev(`return window.__dirCount;`) > 500, "the merged institution directory is populated");
+  ok(await ev(`return typeof (window.SMD_HOSPITALS||{}).setActive;`) === "function",
+    "and the connected-hospital registry still owns its own global");
 
   // ── 1. the lazy-Firestore case: DB missing at first look, SMD_loadFirebase can supply it ──
   await ev(FAKE_FB);
@@ -135,22 +141,44 @@ try {
 
   // ── 4. the first-run form ──
   await ev(`window.SMD_DB = window.__mkDb(); window.__fakeDoc = { regNo: "TSMC-12345" }; return 1;`);
-  ok(JSON.stringify(await ev(`return SMD_PROFILE_SETUP.missing({});`)) === JSON.stringify(["phone", "hospital", "degree", "speciality"]),
-    "an empty profile is reported as missing all four required fields");
-  ok(JSON.stringify(await ev(`return SMD_PROFILE_SETUP.missing({phone:"9",hospital:"h",degree:"MD",speciality:"Internal Medicine"});`)) === "[]",
+  ok(JSON.stringify(await ev(`return SMD_PROFILE_SETUP.missing({});`)) === JSON.stringify(["name", "phone", "hospital", "degree", "speciality"]),
+    "an empty profile is reported as missing every required field");
+  ok(JSON.stringify(await ev(`return SMD_PROFILE_SETUP.missing({name:"Dr A",phone:"9",hospital:"h",degree:"MD",speciality:"Internal Medicine"});`)) === "[]",
     "a complete profile is not asked again");
+  ok(JSON.stringify(await ev(`return SMD_PROFILE_SETUP.missing({name:"Dr A",phone:"9",hospital:"h",degree:"MD",speciality:"Internal Medicine",state:"",city:""});`)) === "[]",
+    "state and city help the search but never block a doctor whose hospital is already named");
   await ev(`SMD_PROFILE_SETUP.open(); return 1;`); await sleep(1200);
-  ok(await ev(`return document.querySelectorAll('#pfSetupRoot .pfs-f').length;`) === 4, "the form asks for phone, college, degree and speciality");
+  ok(await ev(`return document.querySelectorAll('#pfSetupRoot .pfs-f').length;`) === 7,
+    "the one form asks the whole profile: name, phone, state, city, institution, degree, speciality");
+  ok(await ev(`return document.querySelectorAll('#pfSetupRoot [data-pick="hospital"]').length;`) === 1,
+    "and asks for the institution exactly once");
   // Save with nothing filled must refuse and mark the offending fields.
   await ev(`document.querySelector('#pfSetupRoot #pfsSave').click(); return 1;`); await sleep(500);
-  ok(await ev(`return document.querySelectorAll('#pfSetupRoot .pfs-f.bad').length;`) >= 4, "saving an empty form is refused and the fields are flagged");
+  ok(await ev(`return document.querySelectorAll('#pfSetupRoot .pfs-f.bad').length;`) >= 5, "saving an empty form is refused and the fields are flagged");
   ok(await ev(`return !!document.getElementById("pfSetupRoot").classList.contains("on");`) === true, "the form stays open when invalid");
   // Fill it the way a user would, through the pickers.
+  await ev(`var n=document.querySelector('#pfSetupRoot [data-k="name"]'); n.value="Dr Asha Rao"; n.dispatchEvent(new Event("input")); return 1;`);
   await ev(`var i=document.querySelector('#pfSetupRoot [data-k="phone"]'); i.value="9876543210"; i.dispatchEvent(new Event("input")); return 1;`);
-  await ev(`document.querySelector('#pfSetupRoot [data-pick="hospital"]').click(); return 1;`); await sleep(700);
+  await ev(`document.querySelector('#pfSetupRoot [data-pick="hospital"]').click(); return 1;`); await sleep(2200);
   ok(await ev(`return document.querySelectorAll('#pfSetupRoot .pfs-opt').length > 10;`) === true, "the college/hospital chooser searches the real directory");
-  await ev(`var q=document.querySelector('#pfSetupRoot #pfsQ'); q.value="Gandhi"; q.dispatchEvent(new Event("input")); return 1;`); await sleep(400);
-  await ev(`var b=document.querySelector('#pfSetupRoot .pfs-opt'); if(b) b.click(); return 1;`); await sleep(600);
+  /* Type and tap in ONE evaluation: the chooser re-renders its list on input, so querying the rows
+   * in a separate round trip can read a list that has already been replaced. */
+  const picked = await ev(`
+    var q=document.querySelector('#pfSetupRoot #pfsQ');
+    q.value="Gandhi"; q.dispatchEvent(new Event("input",{bubbles:true}));
+    var rows=[].slice.call(document.querySelectorAll('#pfSetupRoot .pfs-opt'));
+    var narrowed = rows.length > 0 && rows.every(function(b){ return /gandhi/i.test(b.textContent); });
+    var hit = rows.filter(function(x){ return /gandhi/i.test(x.textContent); })[0];
+    var name = hit ? hit.getAttribute("data-v") : "";
+    if (hit) hit.click();
+    return JSON.stringify({ narrowed: narrowed, rows: rows.length, name: name });`);
+  await sleep(700);
+  const pk = JSON.parse(picked || "null");
+  ok(pk && pk.narrowed === true, "typing narrows the directory to matching institutions " + picked);
+  /* "Gandhi" matches on the CITY too (Apollo Hospitals International is in Gandhinagar), which is
+   * the search working as intended — so assert the form holds what was actually tapped. */
+  const afterPick = await ev(`var b=document.querySelector('#pfSetupRoot [data-pick="hospital"]'); return b ? b.textContent.trim() : "missing";`);
+  ok(afterPick === pk.name, "the institution that was tapped lands on the form: " + afterPick);
   await ev(`document.querySelector('#pfSetupRoot [data-pick="degree"]').click(); return 1;`); await sleep(600);
   await ev(`var b=document.querySelector('#pfSetupRoot .pfs-opt[data-v="MD"]'); if(b) b.click(); return 1;`); await sleep(600);
   await ev(`document.querySelector('#pfSetupRoot [data-pick="speciality"]').click(); return 1;`); await sleep(600);
@@ -158,8 +186,8 @@ try {
   await ev(`var b=document.querySelector('#pfSetupRoot .pfs-opt[data-v="Internal Medicine"]'); if(b) b.click(); return 1;`); await sleep(600);
   await ev(`document.querySelector('#pfSetupRoot #pfsSave').click(); return 1;`); await sleep(900);
   const saved = await ev(`return JSON.stringify(window.__fakeDoc);`);
-  ok(saved.indexOf('"phone":"9876543210"') >= 0 && saved.indexOf('"degree":"MD"') >= 0 && saved.indexOf('"speciality":"Internal Medicine"') >= 0 && saved.indexOf("Gandhi") >= 0,
-    "a completed form writes all four fields to the same profile document the card reads");
+  ok(saved.indexOf('"phone":"9876543210"') >= 0 && saved.indexOf('"degree":"MD"') >= 0 && saved.indexOf('"speciality":"Internal Medicine"') >= 0 && saved.indexOf(pk.name) >= 0 && saved.indexOf("Asha Rao") >= 0,
+    "a completed form writes every field to the same profile document the card reads " + saved.slice(0, 200));
   ok(await ev(`return document.getElementById("pfSetupRoot").classList.contains("on");`) === false, "the form closes once saved");
 
   console.log(fails === 0 ? "\nALL GREEN — professional details load, and the first-run form collects them" : `\n${fails} FAILED`);

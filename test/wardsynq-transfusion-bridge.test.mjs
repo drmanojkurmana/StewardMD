@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-transfusion-bridge.test.mjs — TASK 3.5: the blood-bank bridge, through the REAL
  * routes.
  *

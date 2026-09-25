@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-cross-department-journey.test.mjs — TASK 2.9: cross-department patient journey.
  *
  * Proves continuity through the master plan's primary journey - ED -> ICU -> WARD -> SURGERY ->

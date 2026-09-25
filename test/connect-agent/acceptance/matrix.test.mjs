@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect-agent/acceptance/matrix.test.mjs - Connect Hospital acceptance test matrix.
 // Runs the Section 10 scenarios end to end against the multi-tenant synthetic hospital fixture.
 // Integration proof wiring real modules: in-memory D1 testkit + synthetic hospital HTTP server +

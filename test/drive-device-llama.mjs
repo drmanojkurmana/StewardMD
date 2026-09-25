@@ -92,7 +92,7 @@ if (STEP === "infer") {
     var t0 = Date.now();
     var toks = 0;
     var L = Capacitor.Plugins.Llama;
-    var sub = await L.addListener("llamaToken", function(){ toks++; });
+    var sub = await L.addListener("llamaToken", function(e){ toks += (e && e.count) || 1; });   // one event may carry several pieces (native batching)
     var loadT0 = Date.now();
     var path = await SMD_MAIK_MODELS.pathFor("maik-local-v1");
     var lr = await L.load({ path: path, nCtx: 4096 });

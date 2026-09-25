@@ -146,13 +146,20 @@ def required(reg):
     return "\n".join(L) + "\n"
 
 
+SUBJECTS = [
+    ("`ct-live-torso-*`", "s0108", "ct neck-thorax-abdomen-pelvis", "Siemens, 100 kVp"),
+    ("`ct-live-neck-*`", "s0021", "ct neck", "46 y male, Siemens Sensation 64, 120 kVp, contrast-enhanced"),
+    ("`ct-live-thorax-neck-*`", "s0897", "ct thorax-neck", "40 y female, Siemens Somatom Definition Flash, 80 kVp, unenhanced"),
+]
+
+
 def data_prov(reg):
     L = ["# Data provenance", "", f"GENERATED on {date.today()}.", "",
          "| dataset | licence | licence URL | redistribute? | derivatives? | used for |",
          "|---|---|---|---|---|---|"]
     use = {
         "visible-human": "whole-body + regional CT skeleton, all planes",
-        "totalsegmentator-dataset": "living-patient CT soft tissue, organs, vessels",
+        "totalsegmentator-dataset": "living-patient CT soft tissue, organs, vessels, neck",
         "openneuro-cc0": "living brain MRI (planned)",
         "wikimedia-cc0": "not currently used",
         "tcia": "not used",
@@ -163,6 +170,15 @@ def data_prov(reg):
         redis = "yes" if v.get("verdict") == "CLEAR" else "NO"
         L.append(f"| `{k}` | {_fmt(v,'licence')} | {_fmt(v,'verified_from')} | "
                  f"{redis} | {redis} | {use.get(k,'-')} |")
+    L += ["", "## Living-patient subjects in shipped modules", "",
+          "Every living CT module is one subject of the TotalSegmentator dataset v2.0.1 (Zenodo",
+          "record 10047292, doi:10.5281/zenodo.10047292, CC BY 4.0), shown with the dataset's own",
+          "expert masks; no model was run. The same subject id is in each module's atlas.json",
+          "`provenance`; why each subject was chosen is in its label file under",
+          "`atlas-pipeline/labels/`.", "",
+          "| modules | subject | study type (meta.csv) | pathology | notes |",
+          "|---|---|---|---|---|"]
+    L += [f"| {m} | `{s}` | {t} | no_pathology | {n} |" for m, s, t, n in SUBJECTS]
     L += ["", "## Notes per dataset", ""]
     for k, v in sorted(_rows(reg, DATASETS)):
         L += [f"### `{k}`", f"- licence: {_fmt(v,'licence')}",
