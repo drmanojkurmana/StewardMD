@@ -2443,12 +2443,28 @@
     // stuttered the UI. Make it event-driven, rAF-coalesced, and NEVER probe mid-scroll — only
     // once scrolling settles. A slow 1.2s safety net covers anything the events miss.
     var _fabRaf = 0, _fabScrolling = 0, _fabScrollT = 0;
-    function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (!_fabScrolling) refreshFab(); }); }
+    /* Energy (2026-09-25): the FAB is never appended (see above), yet refreshFab ran 4 getComputedStyle
+     * + elementFromPoint every 1.2 s and on every click/scroll/transition. It now runs only if the FAB is
+     * ever attached again. The same events drive the home tile-icon pause: the looping SVG icon
+     * animations cost a style recalc + layout + paint every frame, even under the MaiK sheet, under an
+     * overlay, or with the app in the background. They pause whenever the home is not what is on
+     * screen, and per icon when scrolled out of view; wherever an icon can be seen it animates as before. */
+    var _aiIO = null, _aiSeen = typeof WeakSet === "function" ? new WeakSet() : null;
+    function refreshTileAnim() {
+      var h = document.getElementById("homeV2"); if (!h) return;
+      var still = document.hidden || document.body.classList.contains("maik-open") || !homeIsForeground();
+      if (h.classList.contains("hv-still") !== still) h.classList.toggle("hv-still", still);
+      if (still || !_aiSeen || typeof IntersectionObserver !== "function") return;
+      if (!_aiIO) _aiIO = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle("ai-offscreen", !e.isIntersecting); }); });
+      var els = h.querySelectorAll(".ai-anim, .ai-clinix-img, .tx-tile-lungs");
+      for (var i = 0; i < els.length; i++) if (!_aiSeen.has(els[i])) { _aiSeen.add(els[i]); _aiIO.observe(els[i]); }
+    }
+    function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (_fabScrolling) return; try { refreshTileAnim(); } catch (e) {} if (fab && fab.isConnected) refreshFab(); }); }
     ["click", "hashchange", "transitionend", "animationend"].forEach(function (ev) { window.addEventListener(ev, scheduleFab, true); });
     document.addEventListener("visibilitychange", scheduleFab, true);
     // Capture-phase catches scrolls on inner scroll containers too (ICU, Ward Sync, drawers).
     window.addEventListener("scroll", function () { _fabScrolling = 1; clearTimeout(_fabScrollT); _fabScrollT = setTimeout(function () { _fabScrolling = 0; scheduleFab(); }, 140); }, true);
-    setInterval(scheduleFab, 1200);
+    setInterval(function () { if (!document.hidden) scheduleFab(); }, 1200);
 
     // Notifications: probe once for unread medical updates, then hourly.
     try { setTimeout(refreshBadge, 1500); setInterval(function () { _notifItems = null; refreshBadge(); }, 3600000); } catch (e) {}
@@ -4552,10 +4568,12 @@
     sleep:   { f: [1], fps: 1 }
   };
   var MAIK_DOC_SC = 2.75, MAIK_DOC_W = 12 * MAIK_DOC_SC, MAIK_DOC_H = 16 * MAIK_DOC_SC;
-  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null, _mkdOnTap = null;
+  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null, _mkdOnTap = null, _mkdResume = null, _mkdOnVis = null;
   function maikDocStop() {
     if (_mkdRaf) { cancelAnimationFrame(_mkdRaf); _mkdRaf = 0; }
     if (_mkdOnRz) { try { window.removeEventListener("resize", _mkdOnRz); } catch (e) {} _mkdOnRz = null; }
+    if (_mkdOnVis) { try { document.removeEventListener("visibilitychange", _mkdOnVis); } catch (e) {} _mkdOnVis = null; }
+    _mkdResume = null;
     if (_mkdOnTap) { try { _mkdOnTap.el.removeEventListener("pointerdown", _mkdOnTap.fn); } catch (e) {} _mkdOnTap = null; }
     _mkdState = null; _mkdCueFn = null;
   }
@@ -4620,6 +4638,7 @@
         box.style.transition = animate ? "transform .22s ease, opacity .22s ease" : "";
         tab.classList.toggle("on", !!hide);
         try { localStorage.setItem("smd_maik_doc_off", hide ? "1" : "0"); } catch (e) {}
+        if (!hide && _mkdResume) _mkdResume();
       }
       apply(off(), false);
       var sx = 0, dx = 0, drag = false;
@@ -4641,7 +4660,7 @@
     try { var _sms = +localStorage.getItem("smd_maik_doc_sleepms"); if (_sms > 0) SLEEP_MS = _sms; } catch (e) {}
     var lastAct = performance.now();
     function wake() {
-      lastAct = performance.now();
+      lastAct = performance.now(); resume();
       if (D.state === "sleep") { setSt("startle", 420); return true; }
       return false;
     }
@@ -4652,7 +4671,7 @@
     var D = _mkdState = { x: W + MAIK_DOC_W, dir: -1, state: "walk", t0: 0, until: 0, gone: 0, next: 0, target: null };
     function rnd(a, b) { return a + Math.random() * (b - a); }
     function setSt(s, dur) {
-      D.state = s; D.t0 = performance.now(); D.until = dur ? D.t0 + dur : 0;
+      D.state = s; D.t0 = performance.now(); D.until = dur ? D.t0 + dur : 0; resume();
       if (s === "listen") {
         var pts = '<svg width="58" height="20" viewBox="0 0 60 20"><polyline points="0,10 14,10 18,10 21,2 24,17 27,10 40,10 60,10" fill="none" stroke="#2DD4BF" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:90;stroke-dashoffset:90;animation:mkdocEcg 1.2s linear forwards"/></svg>';
         maikDocFx(box, pts, D.dir === -1 ? -62 : MAIK_DOC_W + 4, 4, 1700);
@@ -4779,10 +4798,31 @@
       setTimeout(function () { try { d2.remove(); } catch (e) {} if (sayBub === d2) sayBub = null; }, 4200);
       sched();
     }, 1400);
+    /* Energy (2026-09-25): the loop used to request 60 frames a second for as long as the sheet was
+     * open, including while he was swiped away, asleep (one still pose, the same transform rewritten
+     * every frame) or the app was in the background. It now parks in those three cases and resumes on
+     * anything that changes what he shows: a state change, a wake-up, a question, unhiding him, busy,
+     * or the app coming back. Visible and awake, he runs every frame exactly as before. */
+    function resume() {
+      if (!D.parked || _mkdState !== D) return;
+      D.parked = false; last = performance.now(); _mkdRaf = requestAnimationFrame(tick);
+    }
+    function park() {
+      D.parked = true; _mkdRaf = 0;
+      if (D.state === "sleep") setTimeout(function zz() {   // his "Z z" every 2.6 s while parked asleep
+        if (_mkdState !== D || !D.parked || D.state !== "sleep") return;
+        if (box.classList.contains("busy")) { wake(); return; }
+        if (!document.hidden && !box.classList.contains("mkdoc-hidden")) maikDocFx(box, '<span class="mkdoc-heart"><span class="mkdoc-bub">Z z</span></span>', MAIK_DOC_W + 2, -4, 1700);
+        setTimeout(zz, 2600);
+      }, 2600);
+    }
+    _mkdResume = resume;
+    _mkdOnVis = function () { if (!document.hidden) resume(); };
+    document.addEventListener("visibilitychange", _mkdOnVis);
     function tick(now) {
       if (!box.isConnected) { maikDocStop(); return; }
-      // Screen locked / app occluded: let WebKit's hidden-document throttle idle us (R6 #1).
-      if (document.hidden) { last = now; _mkdRaf = requestAnimationFrame(tick); return; }
+      // Screen locked / app occluded, or swiped away: stop requesting frames until he can be seen.
+      if (document.hidden || box.classList.contains("mkdoc-hidden")) { park(); return; }
       var dt = Math.min(0.05, (now - last) / 1000); last = now;
       var y = 0, rot = 0, sq = 1, W = cmp.clientWidth;
       var busy = box.classList.contains("busy");
@@ -4800,6 +4840,7 @@
             D.zz = now;
             maikDocFx(box, '<span class="mkdoc-heart"><span class="mkdoc-bub">Z z</span></span>', MAIK_DOC_W + 2, -4, 1700);
           }
+          D.sleepPainted = (D.sleepPainted || 0) + 1;   // park once the still pose is on screen
           break;
         case "run":
           D.x += RUN_V * D.dir * dt; rot = D.dir * 6;
@@ -4851,6 +4892,8 @@
       var air = Math.min(1, -y / JUMP_H);
       sh.style.transform = "translateX(" + (D.x + MAIK_DOC_W / 2 - 16.5).toFixed(1) + "px) scaleX(" + (1 - air * 0.45).toFixed(2) + ")";
       sh.style.opacity = (0.8 - air * 0.5).toFixed(2);
+      if (D.state === "sleep" && D.sleepPainted >= 2 && !(sayBub && sayBub.isConnected)) { D.sleepPainted = 0; park(); return; }
+      if (D.state !== "sleep") D.sleepPainted = 0;
       _mkdRaf = requestAnimationFrame(tick);
     }
     _mkdRaf = requestAnimationFrame(tick);
@@ -5670,6 +5713,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Medibot appears in the pending bubble (maikBufferHTML).
     function maikBuddyBusy(on) {
       try { var b = sheet && sheet.querySelector(".mkw, .mkdoc"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
+      try { if (on && _mkdResume) _mkdResume(); } catch (e) {}   // a parked, sleeping doctor wakes for work
     }
     function maikSetSendMode(busy) {
       var was = _maikBusy;
@@ -7470,7 +7514,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); } else { emptyState(); }
     /* A REOPENED CONVERSATION (owner, 2026-09-24): a saved thread comes back as HTML, which carries
