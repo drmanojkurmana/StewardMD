@@ -134,6 +134,9 @@ for (const e of IDX.structures) {
 }
 ok("every index row points at a visible module slice that pins the structure", idxOk);
 ok("no hidden module appears in the index", !IDX_TEXT.includes("brain-mri-axial-t1"));
+ok("index cats: one {label, color} per category, and every structure's c has one",
+  IDX.cats && Object.values(IDX.cats).every((c) => c.label && /^#[0-9a-f]{6}$/i.test(c.color)) &&
+  IDX.structures.every((e) => IDX.cats[e.c]));
 
 // Slice frames q (inGroup modules): finite, orthogonal, true to the image aspect and to mm.
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -201,24 +204,35 @@ ok("orient letters are from R L A P S I on known edges, opposite edges on one ax
   cat.modules.every((m) => !m.orient || (Object.keys(m.orient).every((k) => ["left", "right", "top", "bottom"].includes(k)) &&
     Object.values(m.orient).every((v) => AXIS[v]) && pairOk(m.orient.left, m.orient.right) && pairOk(m.orient.top, m.orient.bottom) &&
     (!m.orient.left || !m.orient.top || AXIS[m.orient.left] !== AXIS[m.orient.top]))));
-ok("flipX is only ever the literal true", cat.modules.every((m) => m.flipX === undefined || m.flipX === true));
+ok("flipX and flipY are only ever the literal true", cat.modules.every((m) => [m.flipX, m.flipY].every((f) => f === undefined || f === true)));
 const ORIENT_MD = readFileSync(join(ROOT, "docs", "radioanatome", "ORIENTATION.md"), "utf8");
 const rows = new Map();
 for (const line of ORIENT_MD.split("\n")) {
   const c = line.split("|").map((x) => x.trim());
   const id = /^`([a-z0-9-]+)`$/.exec(c[1] || "");
-  if (id && c.length >= 10) rows.set(id[1], { flipX: c[2], left: c[3], right: c[4], top: c[5], bottom: c[6], check: c[7], evidence: c[8] });
+  if (id && c.length >= 11) rows.set(id[1], { flipX: c[2], flipY: c[3], left: c[4], right: c[5], top: c[6], bottom: c[7], check: c[8], evidence: c[9] });
 }
 ok("ORIENTATION.md has a row for every module", cat.modules.every((m) => rows.has(m.id)));
 const cent = (a, sid, ax) => { const v = a.slices.flatMap((s) => s.pins.filter((p) => p.s === sid).map((p) => p[ax])); return v.length ? v.reduce((t, x) => t + x, 0) / v.length : NaN; };
+const HEADER_OK = "header, consistent with anatomy on A/P and S/I";
 for (const m of cat.modules) {
   const r = rows.get(m.id);
   if (!r) continue;
   const o = m.orient || {};
-  ok(m.id + ": modules.json flipX and letters match ORIENTATION.md",
-    (r.flipX === "yes") === (m.flipX === true) && ["left", "right", "top", "bottom"].every((k) => (o[k] || "") === r[k]));
-  if (m.flipX || Object.keys(o).length) ok(m.id + ": asserted orientation has written evidence", r.evidence.length > 20);
-  if (m.flipX) ok(m.id + ": flipX rests on a left-right pin check", /\.x [<>] /.test(r.check));
+  const lr = ["R", "L"].some((x) => Object.values(o).includes(x));
+  ok(m.id + ": modules.json flips and letters match ORIENTATION.md",
+    (r.flipX === "yes") === (m.flipX === true) && (r.flipY === "yes") === (m.flipY === true) &&
+    ["left", "right", "top", "bottom"].every((k) => (o[k] || "") === r[k]));
+  if (m.flipX || m.flipY || Object.keys(o).length) ok(m.id + ": asserted orientation has written evidence", r.evidence.length > 20);
+  // R/L letters are a laterality claim: they need a left-right pin check on this module's own
+  // pins (living torso) or the recorded header provenance (brain, finding 3 in ORIENTATION.md).
+  if (lr) ok(m.id + ": left/right rests on a left-right pin check or the checked header",
+    /\.x [<>] /.test(r.check) || r.evidence.includes(HEADER_OK));
+  // A flipX WITHOUT R/L letters makes no laterality claim: it is half of a 180-degree turn (with
+  // flipY) or a sagittal mirror to anterior-left. Either way the view must end on a known axis.
+  if (m.flipX && !lr) ok(m.id + ": a flipX with no R/L claim is a 180-degree turn or a sagittal mirror",
+    (m.flipY === true && o.top && AXIS[o.top] !== "x") || (o.left && AXIS[o.left] === "y"));
+  if (m.flipY) ok(m.id + ": flipY comes with flipX (a turn, never a lone vertical mirror)", m.flipX === true);
   if (r.check && r.check !== "-") {
     const a = atlasOf(m.id);
     const good = r.check.split(";").map((t) => t.trim()).every((t) => {
@@ -230,7 +244,8 @@ for (const m of cat.modules) {
     ok(m.id + ": ORIENTATION.md pin checks hold on the shipped pins (" + r.check + ")", good);
   }
 }
-ok("no cadaver module asserts left or right", cat.modules.every((m) => !m.orient || /live-torso/.test(m.id) || !["R", "L"].some((x) => Object.values(m.orient).includes(x))));
+ok("no cadaver module asserts left or right",
+  cat.modules.every((m) => !m.orient || /^(ct-live-torso|mri-brain)-/.test(m.id) || !["R", "L"].some((x) => Object.values(m.orient).includes(x))));
 
 // Image immutability. Images are served `immutable` for a year and installed apps pair their
 // bundled atlas.json with images fetched live, so a changed picture under an old path would

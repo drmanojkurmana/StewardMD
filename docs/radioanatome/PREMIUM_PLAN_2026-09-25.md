@@ -21,7 +21,11 @@ plus the UX gaps below. Owner's instruction: "do all fix all".
 - `flipX: true` - viewer mirrors image AND pins horizontally at display time so the module reads in
   radiological convention (patient's right on the viewer's left). Data files are never flipped
   (the 3D cut planes texture the same images).
-- `orient: {"left":"R","right":"L","top":"A","bottom":"P"}` - edge letters AFTER any flipX. Only
+- `flipY: true` - same, vertically. Flips are set per module, from docs/radioanatome/ORIENTATION.md:
+  flipX + flipY = a 180-degree turn (the knee/foot/hand AXIAL stacks, stored posterior-up);
+  flipX alone also mirrors their sagittal stacks to anterior-left. On a cadaver module flipX makes
+  no left/right claim.
+- `orient: {"left":"R","right":"L","top":"A","bottom":"P"}` - edge letters AFTER any flipX/flipY. Only
   set where the data agent VERIFIED it (mask centroids, never the header alone). Letters from
   R L A P S I. A module with unknown laterality may still carry top/bottom (e.g. S/I).
 - `group: "live-torso"`, `plane: "axial"|"coronal"|"sagittal"` - modules cut from one volume.

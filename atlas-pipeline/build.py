@@ -114,14 +114,14 @@ def assemble(module_meta, slice_stubs, pins_by_slice, mapping):
 def upsert_module(catalog, module_meta):
     """Add or replace a module row, keeping the catalog sorted and credits intact.
 
-    Fields this script does not produce (hidden, flipX, orient, group, plane, windows, mm) are
+    Fields this script does not produce (hidden, flipX, flipY, orient, group, plane, windows, mm) are
     carried over from the existing row: they were verified by hand or by living.py, and a
     rebuild silently dropping flipX would mirror a module back to the wrong side."""
     row = {k: module_meta[k] for k in ("id", "title", "subtitle", "region", "modality", "slices",
                                       "thumb", "credit", "notice")
            if k in module_meta}
     old = next((m for m in catalog.get("modules", []) if m["id"] == row["id"]), {})
-    row.update({k: old[k] for k in ("hidden", "flipX", "orient", "group", "plane", "windows", "mm") if k in old})
+    row.update({k: old[k] for k in ("hidden", "flipX", "flipY", "orient", "group", "plane", "windows", "mm") if k in old})
     mods = [m for m in catalog.get("modules", []) if m["id"] != row["id"]]
     mods.append(row)
     mods.sort(key=lambda m: (m.get("region", ""), m.get("title", "")))

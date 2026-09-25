@@ -46,6 +46,16 @@ Dev-only tooling. Turns a licence-cleared volume into `atlas/<id>/atlas.json` pl
     # (atlas/<id>/w/<win>/) and the 3D cut planes. Without --write it only verifies.
     atlas-pipeline/.venv/bin/python atlas-pipeline/living.py --work /abs/path/to/atlas-pipeline/work --write
 
+    # Denser stacks: proves the build reproduces every shipped living module exactly, then writes
+    # N-slice stacks under atlas/<id>/v2/ (old paths untouched) and redoes q, windows, planes, links
+    atlas-pipeline/.venv/bin/python atlas-pipeline/living.py --work /abs/path/to/work --prove-rebuild
+    atlas-pipeline/.venv/bin/python atlas-pipeline/living.py --work /abs/path/to/work --densify 48 --write
+
+    # Pin QA: flag outliers, render each as a crop, LOOK, record decisions in pin_fixes.tsv
+    atlas-pipeline/.venv/bin/python atlas-pipeline/pin_scan.py --out /tmp/pinscan
+    atlas-pipeline/.venv/bin/python atlas-pipeline/pin_fixes.py --write
+    atlas-pipeline/.venv/bin/python atlas-pipeline/bp3d_import.py --relink   # 3D links follow the pins
+
     # Search index (test/atlas-data.test.mjs fails when it is stale)
     node atlas-pipeline/atlas-index.mjs
 

@@ -94,7 +94,9 @@ ok("triangle total matches stats", Math.round(triangles) === manifest.stats.tria
 ok("full set under 40 MB and LOD set under 25 MB gzipped (streamed from R2 per system, never bundled)", manifest.stats.gz_bytes < 40e6 && manifest.lod.stats.gz < 25e6);
 // --- slice planes (living CT): every torso slice registered, on a monotonic line ---
 const planes = manifest.planes;
-ok("72 slice planes: 24 per living-torso module", Object.keys(planes).length === 3 && Object.values(planes).every((m) => Object.keys(m).length === 24));
+const torsoSlices = (m) => JSON.parse(readFileSync(join(ROOT, "atlas", m, "atlas.json"), "utf8")).slices;
+ok("one registered plane per slice of each living-torso module", Object.keys(planes).length === 3 &&
+  Object.entries(planes).every(([m, byI]) => Object.keys(byI).length === torsoSlices(m).length && torsoSlices(m).length >= 24));
 ok("planes are monotonic along their axis and carry a textured quad frame", Object.values(planes).every((m) => { const ks = Object.keys(m).map(Number).sort((a, b) => a - b); const pos = ks.map((k) => m[k].pos); const inc = pos.every((v, i) => !i || v > pos[i - 1]), dec = pos.every((v, i) => !i || v < pos[i - 1]); return (inc || dec) && ks.every((k) => m[k].tl && m[k].u && m[k].v && ["x", "y", "z"].includes(m[k].axis)); }));
 ok("living-CT parts sit inside the registered slab (axial plane range)", (() => { const ax = planes["ct-live-torso-axial"]; const ys = Object.values(ax).map((p) => p.pos); const lo = Math.min(...ys) - 0.05, hi = Math.max(...ys) + 0.05; return live.every((p) => p[8][1] >= lo && p[8][4] <= hi); })());
 ok("bones and skin come from the same scan: bone canonicals now carry living surfaces", ["LUMBAR_VERTEBRA", "THORACIC_VERTEBRA", "SACRUM", "RIB", "HIP_BONE", "FEMUR"].every((k) => manifest.canon[k] && manifest.canon[k].live && manifest.canon[k].live.length));
@@ -106,13 +108,14 @@ for (const [mid, byI] of Object.entries(planes)) {
   const a = JSON.parse(readFileSync(join(ROOT, "atlas", mid, "atlas.json"), "utf8"));
   for (const s of a.slices) {
     const p = byI[String(s.i)], q = s.q;
-    if (!p || !q) { planeQ = false; continue; }
+    if (!p || !q || p.img !== s.img || !existsSync(join(ROOT, s.img.slice(1)))) { planeQ = false; continue; }
     const mine = p.tl.concat(p.u, p.v);
     if (mine.some((x, k) => Math.abs(x - q[k]) > 1e-6) || Math.abs(p.pos - p.tl["xyz".indexOf(p.axis)]) > 1e-9) planeQ = false;
     planeN++;
   }
 }
-ok("every torso cut plane equals its slice's q in atlas.json (tl/u/v within 1e-6 m, pos on the plane)", planeQ && planeN === 72);
+ok("every torso cut plane equals its slice's q in atlas.json (tl/u/v within 1e-6 m, pos on the plane) and textures that slice's own image (img, on disk)",
+  planeQ && planeN === Object.keys(planes).reduce((t, m) => t + torsoSlices(m).length, 0));
 ok("every CT link into a living-torso module carries a plane flag", Object.values(manifest.links).flat().filter((l) => planes[l.m]).every((l) => l.plane === 1));
 ok("no single chunk exceeds 4 MB raw (Pages 25 MiB file cap, mobile memory)", manifest.chunks.every((c) => c.bytes <= 4.2e6));
 

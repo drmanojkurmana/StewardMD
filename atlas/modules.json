@@ -71,7 +71,7 @@
    "slices": 24,
    "thumb": "/atlas/mri-brain-axial/t/013.webp",
    "credit": "",
-   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted.",
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled. Labels do not name a side; the R and L edge markers come from the scan's own orientation record, which was checked against the anatomy front to back and top to bottom.",
    "group": "live-brain",
    "plane": "axial",
    "mm": [
@@ -79,9 +79,12 @@
     200.7
    ],
    "orient": {
+    "left": "R",
+    "right": "L",
     "top": "A",
     "bottom": "P"
-   }
+   },
+   "flipX": true
   },
   {
    "id": "mri-brain-coronal",
@@ -92,7 +95,7 @@
    "slices": 24,
    "thumb": "/atlas/mri-brain-coronal/t/013.webp",
    "credit": "",
-   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted.",
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled. Labels do not name a side; the R and L edge markers come from the scan's own orientation record, which was checked against the anatomy front to back and top to bottom.",
    "group": "live-brain",
    "plane": "coronal",
    "mm": [
@@ -100,9 +103,12 @@
     169.5
    ],
    "orient": {
+    "left": "R",
+    "right": "L",
     "top": "S",
     "bottom": "I"
-   }
+   },
+   "flipX": true
   },
   {
    "id": "mri-brain-sagittal",
@@ -113,7 +119,7 @@
    "slices": 24,
    "thumb": "/atlas/mri-brain-sagittal/t/013.webp",
    "credit": "",
-   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted.",
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled. Labels do not name a side; the R and L edge markers come from the scan's own orientation record, which was checked against the anatomy front to back and top to bottom.",
    "group": "live-brain",
    "plane": "sagittal",
    "mm": [
@@ -185,13 +191,15 @@
    "thumb": "/atlas/ct-foot-axial/t/013.webp",
    "credit": "Courtesy of the U.S. National Library of Medicine",
    "orient": {
-    "top": "P",
-    "bottom": "A"
+    "top": "A",
+    "bottom": "P"
    },
    "mm": [
     438.8,
     380.6
-   ]
+   ],
+   "flipX": true,
+   "flipY": true
   },
   {
    "id": "ct-foot-sagittal",
@@ -203,11 +211,12 @@
    "thumb": "/atlas/ct-foot-sagittal/t/013.webp",
    "credit": "Courtesy of the U.S. National Library of Medicine",
    "orient": {
-    "left": "P",
-    "right": "A",
+    "left": "A",
+    "right": "P",
     "top": "S",
     "bottom": "I"
-   }
+   },
+   "flipX": true
   },
   {
    "id": "ct-foot-coronal",
@@ -237,13 +246,15 @@
    "thumb": "/atlas/ct-knee-axial/t/013.webp",
    "credit": "Courtesy of the U.S. National Library of Medicine",
    "orient": {
-    "top": "P",
-    "bottom": "A"
+    "top": "A",
+    "bottom": "P"
    },
    "mm": [
     394.7,
     343.1
-   ]
+   ],
+   "flipX": true,
+   "flipY": true
   },
   {
    "id": "ct-knee-coronal",
@@ -269,11 +280,12 @@
    "thumb": "/atlas/ct-knee-sagittal/t/013.webp",
    "credit": "Courtesy of the U.S. National Library of Medicine",
    "orient": {
-    "left": "P",
-    "right": "A",
+    "left": "A",
+    "right": "P",
     "top": "S",
     "bottom": "I"
-   }
+   },
+   "flipX": true
   },
   {
    "id": "ct-pelvis-axial",
@@ -369,8 +381,8 @@
    "subtitle": "Axial - living patient",
    "region": "Torso",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-live-torso-axial/t/013.webp",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-torso-axial/v2/t/025.webp",
    "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
    "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (liver on the patient's right, spleen on the left).",
    "group": "live-torso",
@@ -504,13 +516,15 @@
    "thumb": "/atlas/ct-hand-axial/t/013.webp",
    "credit": "Courtesy of the U.S. National Library of Medicine",
    "orient": {
-    "top": "P",
-    "bottom": "A"
+    "top": "A",
+    "bottom": "P"
    },
    "mm": [
     332.8,
     237.2
-   ]
+   ],
+   "flipX": true,
+   "flipY": true
   },
   {
    "id": "ct-hand-sagittal",
@@ -526,11 +540,12 @@
     91.0
    ],
    "orient": {
-    "left": "P",
-    "right": "A",
+    "left": "A",
+    "right": "P",
     "top": "S",
     "bottom": "I"
-   }
+   },
+   "flipX": true
   },
   {
    "id": "ct-wholebody-axial",

@@ -7,6 +7,9 @@
 // left out: a search hit must lead somewhere. Modules may name one structure differently
 // ("Abdominal aorta" on the abdomen stacks, "Aorta" on the torso stacks, which include the
 // thoracic aorta); n is the name most modules use, ties to the shortest, i.e. the general one.
+// cats: one {label, color} per category id. Modules disagree (csf is "CSF", "Canal" or "Cord";
+// airway is two colours), so each takes the value most modules use; a tie goes to the label that
+// spells the id itself (csf -> "CSF"), else to the first module alphabetically.
 // Write: node atlas-pipeline/atlas-index.mjs   (test/atlas-data.test.mjs re-runs buildIndex
 // and fails when the committed file is stale).
 import { readFileSync, writeFileSync } from "node:fs";
@@ -15,10 +18,11 @@ import { dirname, join } from "node:path";
 
 export function buildIndex(root) {
   const cat = JSON.parse(readFileSync(join(root, "atlas", "modules.json"), "utf8"));
-  const by = new Map();
+  const by = new Map(), votes = {};
   for (const mod of cat.modules) {
     if (mod.hidden) continue;
     const a = JSON.parse(readFileSync(join(root, "atlas", mod.id, "atlas.json"), "utf8"));
+    for (const [c, v] of Object.entries(a.categories || {})) (votes[c] = votes[c] || []).push([mod.id, v.label, v.color]);
     const counts = new Map();                       // structure -> [[i, pins on slice i], ...]
     for (const sl of a.slices) {
       const per = new Map();
@@ -41,7 +45,14 @@ export function buildIndex(root) {
     e.n = Object.keys(n).sort((x, y) => n[y] - n[x] || x.length - y.length || cmp(x, y))[0];
     return e;
   });
-  return { v: 1, structures: out.sort((x, y) => cmp(x.s, y.s)) };
+  const pick = (rows, k, id) => {
+    const n = {}, first = {};
+    for (const r of [...rows].sort((x, y) => cmp(x[0], y[0]))) { n[r[k]] = (n[r[k]] || 0) + 1; if (!(r[k] in first)) first[r[k]] = r[0]; }
+    return Object.keys(n).sort((x, y) => n[y] - n[x] || (y.toLowerCase() === id) - (x.toLowerCase() === id) || cmp(first[x], first[y]))[0];
+  };
+  const cats = {};
+  for (const c of Object.keys(votes).sort(cmp)) cats[c] = { label: pick(votes[c], 1, c), color: pick(votes[c], 2, c) };
+  return { v: 1, cats, structures: out.sort((x, y) => cmp(x.s, y.s)) };
 }
 
 export const serialize = (idx) => JSON.stringify(idx) + "\n";
