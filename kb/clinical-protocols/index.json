@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "dd929d29309e",
- "count": 156,
+ "version": "88b1e46070cb",
+ "count": 172,
  "subjects": [
   {
    "key": "emergency",
@@ -16,12 +16,12 @@
   {
    "key": "cardiology",
    "label": "Cardiology",
-   "count": 14
+   "count": 17
   },
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 9
+   "count": 12
   },
   {
    "key": "infectious-disease",
@@ -31,7 +31,7 @@
   {
    "key": "gastroenterology",
    "label": "Gastroenterology and Hepatology",
-   "count": 9
+   "count": 17
   },
   {
    "key": "nephrology",
@@ -71,7 +71,7 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 6
+   "count": 8
   },
   {
    "key": "paediatrics",
@@ -98,7 +98,7 @@
   {
    "key": "international",
    "label": "International",
-   "count": 138
+   "count": 154
   },
   {
    "key": "india",
@@ -378,6 +378,31 @@
    "summary": "Diagnose and grade severity with the Tokyo Guidelines 2018, resuscitate and start antibiotics, perform early laparoscopic cholecystectomy (within 7 days of admission and 10 days of symptoms) for cholecystitis, and arrange biliary drainage, usually ERCP, timed to cholangitis severity.",
    "sources": [
     "WSES 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-diverticulitis",
+   "title": "Acute colonic diverticulitis (adult)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "diverticulitis",
+    "sigmoid diverticulitis",
+    "diverticular abscess",
+    "complicated diverticulitis",
+    "uncomplicated diverticulitis",
+    "Hinchey",
+    "left iliac fossa pain",
+    "LIF pain"
+   ],
+   "summary": "Confirm with CT when the diagnosis or severity is uncertain. Low-risk immunocompetent patients with uncomplicated disease can be managed as outpatients without routine antibiotics; give antibiotics to high-risk or complicated cases, drain abscesses larger than 3 cm, operate for peritonitis, and arrange colonoscopy after recovery when indicated.",
+   "sources": [
+    "American Gastroenterological Association 2021",
+    "American Society of Colon and Rectal Surgeons 2020",
+    "American College of Gastroenterology 2026"
    ],
    "status": "ai_drafted"
   },
@@ -1114,6 +1139,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "aortic-stenosis",
+   "title": "Aortic stenosis (adult): assessment and timing of intervention",
+   "subject": "cardiology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "AS",
+    "aortic valve stenosis",
+    "calcific aortic stenosis",
+    "severe aortic stenosis",
+    "TAVI",
+    "TAVR",
+    "SAVR",
+    "aortic valve replacement",
+    "AVR",
+    "low-flow low-gradient AS",
+    "bicuspid aortic valve"
+   ],
+   "summary": "Severe AS is mean gradient 40 mmHg or more, Vmax 4.0 m/s or more and AVA 1.0 cm2 or less; intervene when symptomatic or LVEF is below 50%, consider early intervention if asymptomatic at low risk, with TAVI at 70 years or older and SAVR below 70 at low surgical risk (ESC/EACTS 2025).",
+   "sources": [
+    "ESC / EACTS 2025",
+    "ESC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "ards-lung-protective-ventilation",
    "title": "ARDS: lung-protective ventilation (adult)",
    "subject": "critical-care",
@@ -1285,6 +1337,31 @@
     "American Heart Association 2025",
     "Resuscitation Council UK 2025",
     "Resuscitation Council UK 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "bronchiectasis",
+   "title": "Bronchiectasis (adult, non-cystic fibrosis)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "non-CF bronchiectasis",
+    "NCFB",
+    "bronchiectasis exacerbation",
+    "chronic productive cough",
+    "Pseudomonas eradication",
+    "long-term azithromycin",
+    "airway clearance",
+    "post-TB bronchiectasis"
+   ],
+   "summary": "Confirm on thin-section CT, test for causes (immunoglobulins, ABPA, NTM), teach airway clearance to all, treat exacerbations with 14 days of culture-guided antibiotics, offer eradication for new Pseudomonas, and give long-term macrolide or inhaled antibiotic to patients at high risk of exacerbations (ERS 2025, BTS 2019).",
+   "sources": [
+    "European Respiratory Society 2025",
+    "British Thoracic Society 2019",
+    "European Respiratory Society 2017"
    ],
    "status": "ai_drafted"
   },
@@ -1468,6 +1545,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "chronic-coronary-syndrome",
+   "title": "Chronic coronary syndrome (stable angina)",
+   "subject": "cardiology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "CCS",
+    "stable angina",
+    "chronic stable angina",
+    "stable CAD",
+    "IHD",
+    "ischaemic heart disease",
+    "angina pectoris",
+    "ANOCA",
+    "INOCA",
+    "ESC 2024 CCS"
+   ],
+   "summary": "Estimate pre-test likelihood, then use CCTA (likelihood above 5 to 50%) or functional imaging (above 15 to 85%); give sublingual nitrate plus a beta-blocker and/or CCB, lifelong aspirin or clopidogrel, high-intensity statin to LDL-C below 55 mg/dL, and revascularise for refractory angina or high-risk anatomy (ESC 2024).",
+   "sources": [
+    "ESC 2024",
+    "ESC 2024",
+    "European Heart Journal: Cardiovascular Pharmacotherapy 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "chronic-heart-failure-hfref",
    "title": "Chronic heart failure with reduced ejection fraction (HFrEF)",
    "subject": "cardiology",
@@ -1493,6 +1597,87 @@
     "ESC 2026",
     "ESC 2021",
     "AHA / ACC / HFSA 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "chronic-hepatitis-b",
+   "title": "Chronic hepatitis B (adult)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "CHB",
+    "HBV",
+    "hepatitis B",
+    "HBsAg positive",
+    "tenofovir",
+    "entecavir",
+    "TAF",
+    "TDF",
+    "HBV DNA",
+    "APRI",
+    "mother-to-child transmission",
+    "PMTCT hepatitis B"
+   ],
+   "summary": "Assess every HBsAg-positive adult with ALT, HBV DNA, APRI or elastography and coinfection tests. WHO 2024 expands treatment to anyone with significant fibrosis, HBV DNA above 2000 IU/mL with raised ALT, or key risk conditions, using tenofovir disoproxil or entecavir long term. Give tenofovir in pregnancy when HBV DNA is 200,000 IU/mL or more.",
+   "sources": [
+    "WHO 2024",
+    "AASLD / IDSA 2025",
+    "AASLD 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hepatitis-c",
+   "title": "Chronic hepatitis C (adult)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "HCV",
+    "hepatitis C",
+    "anti-HCV",
+    "DAA",
+    "direct-acting antivirals",
+    "sofosbuvir velpatasvir",
+    "glecaprevir pibrentasvir",
+    "sofosbuvir daclatasvir",
+    "SVR12",
+    "pangenotypic"
+   ],
+   "summary": "Confirm viraemia (HCV RNA or core antigen) after a positive antibody test, assess for cirrhosis with FIB-4 or APRI, and treat all viraemic patients with a pangenotypic regimen: sofosbuvir/velpatasvir for 12 weeks or glecaprevir/pibrentasvir for 8 weeks. Cure is undetectable HCV RNA 12 weeks after treatment (SVR12).",
+   "sources": [
+    "WHO 2022",
+    "AASLD / IDSA 2023",
+    "AASLD / IDSA 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "chronic-constipation",
+   "title": "Chronic idiopathic constipation (adult)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "CIC",
+    "chronic constipation",
+    "functional constipation",
+    "laxatives",
+    "PEG",
+    "macrogol",
+    "prucalopride",
+    "linaclotide",
+    "dyssynergic defecation",
+    "Rome IV constipation"
+   ],
+   "summary": "Exclude alarm features and secondary causes, then step up: fibre, polyethylene glycol (strong recommendation), magnesium oxide or lactulose, stimulant laxatives (bisacodyl or sodium picosulfate, senna), and for refractory cases linaclotide, plecanatide, lubiprostone or prucalopride. Test for a defecatory disorder if laxatives fail.",
+   "sources": [
+    "American Gastroenterological Association / American College of Gastroenterology 2023"
    ],
    "status": "ai_drafted"
   },
@@ -1575,6 +1760,44 @@
     "ATS / IDSA 2019",
     "ATS 2025",
     "ICMR 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "contraception",
+   "title": "Contraception: method choice, medical eligibility and emergency contraception",
+   "subject": "obstetrics-gynaecology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "family planning",
+    "WHO MEC",
+    "UKMEC",
+    "MEC categories",
+    "emergency contraception",
+    "EC",
+    "morning after pill",
+    "ulipristal",
+    "ellaOne",
+    "levonorgestrel EC",
+    "copper IUD",
+    "Cu-IUD",
+    "LNG-IUD",
+    "LNG-IUS",
+    "COC",
+    "combined pill",
+    "CHC",
+    "POP",
+    "DMPA",
+    "implant",
+    "quick start"
+   ],
+   "summary": "Offer all methods, highlighting long-acting reversible contraception (implant, IUDs) as most effective; check every method against WHO MEC or UKMEC 2025 (category 4 = do not use). For emergency contraception offer a copper IUD first, otherwise ulipristal 30 mg up to 120 hours or levonorgestrel 1.5 mg up to 72 hours.",
+   "sources": [
+    "WHO 2025",
+    "College of Sexual and Reproductive Healthcare (CoSRH) 2025",
+    "FSRH 2017"
    ],
    "status": "ai_drafted"
   },
@@ -2004,6 +2227,34 @@
    "status": "ai_drafted"
   },
   {
+   "id": "gastro-oesophageal-reflux-disease",
+   "title": "Gastro-oesophageal reflux disease (adult)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "GERD",
+    "GORD",
+    "reflux",
+    "acid reflux",
+    "heartburn",
+    "regurgitation",
+    "erosive oesophagitis",
+    "NERD",
+    "PPI trial",
+    "PPI deprescribing",
+    "LA grade"
+   ],
+   "summary": "Classic heartburn or regurgitation without alarm features: 8-week once-daily PPI trial taken 30 to 60 minutes before a meal, then try to stop. Alarm features, non-response or multiple Barrett risk factors need endoscopy (ideally 2 to 4 weeks off PPI). Keep long-term PPI at the lowest effective dose and only with a clear indication.",
+   "sources": [
+    "American College of Gastroenterology 2022",
+    "American Gastroenterological Association 2022",
+    "American Gastroenterological Association 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "gestational-diabetes",
    "title": "Gestational diabetes mellitus (GDM): India DIPSI pathway",
    "subject": "obstetrics-gynaecology",
@@ -2143,6 +2394,34 @@
     "NCDC, MoHFW (NPCCHH) 2021",
     "NCDC, MoHFW (NPCCHH) 2025",
     "Resuscitation Council UK / ERC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "helicobacter-pylori",
+   "title": "Helicobacter pylori infection (adult)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "H. pylori",
+    "H pylori",
+    "HP eradication",
+    "bismuth quadruple therapy",
+    "BQT",
+    "vonoprazan dual therapy",
+    "rifabutin triple",
+    "urea breath test",
+    "stool antigen",
+    "test of cure",
+    "Maastricht VI"
+   ],
+   "summary": "Test with a urea breath test, stool antigen or biopsy (off PPI for 2 weeks), treat every confirmed infection with optimised bismuth quadruple therapy for 14 days (or rifabutin triple or vonoprazan-amoxicillin dual), avoid empiric clarithromycin, and confirm eradication at least 4 weeks after treatment.",
+   "sources": [
+    "American College of Gastroenterology 2024",
+    "European Helicobacter and Microbiota Study Group 2022",
+    "American College of Gastroenterology 2024"
    ],
    "status": "ai_drafted"
   },
@@ -2586,6 +2865,36 @@
    "status": "ai_drafted"
   },
   {
+   "id": "idiopathic-pulmonary-fibrosis",
+   "title": "Idiopathic pulmonary fibrosis (IPF) and progressive pulmonary fibrosis",
+   "subject": "respiratory",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "IPF",
+    "UIP",
+    "usual interstitial pneumonia",
+    "PPF",
+    "progressive pulmonary fibrosis",
+    "ILD",
+    "interstitial lung disease",
+    "fibrotic ILD",
+    "antifibrotic",
+    "nintedanib",
+    "pirfenidone",
+    "AE-IPF",
+    "cryptogenic fibrosing alveolitis"
+   ],
+   "summary": "Diagnose IPF by multidisciplinary discussion from a UIP pattern on HRCT after excluding exposures, drugs and connective tissue disease; offer nintedanib 150 mg twice daily or pirfenidone titrated to 801 mg three times daily with liver test monitoring, plus oxygen, rehabilitation and early transplant or palliative referral.",
+   "sources": [
+    "ATS / ERS / JRS / ALAT 2022",
+    "ATS / ERS / JRS / ALAT 2015",
+    "ATS / ERS / JRS / ALAT 2011"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "immune-thrombocytopenia",
    "title": "Immune thrombocytopenia (ITP) in adults",
    "subject": "haematology-oncology",
@@ -2694,6 +3003,31 @@
    "status": "ai_drafted"
   },
   {
+   "id": "irritable-bowel-syndrome",
+   "title": "Irritable bowel syndrome (adult)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "IBS",
+    "IBS-D",
+    "IBS-C",
+    "IBS-M",
+    "spastic colon",
+    "Rome IV",
+    "low FODMAP",
+    "disorder of gut-brain interaction",
+    "functional bowel disorder"
+   ],
+   "summary": "Make a positive diagnosis from symptoms (Rome IV) after limited tests (blood count, CRP, coeliac serology, faecal calprotectin for diarrhoea), then treat by predominant symptom: soluble fibre, diet, peppermint or antispasmodics, loperamide or laxatives first; low-dose tricyclics, rifaximin, linaclotide and gut-directed psychological therapy second line.",
+   "sources": [
+    "American College of Gastroenterology 2021",
+    "British Society of Gastroenterology 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "leptospirosis",
    "title": "Leptospirosis (adult)",
    "subject": "infectious-disease",
@@ -2745,6 +3079,34 @@
     "ASRA Pain Medicine 2020",
     "Local and Regional Anesthesia (El-Boghdadly, Pawa, Chin) 2018",
     "Association of Anaesthetists 2010"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "peripheral-arterial-disease",
+   "title": "Lower limb peripheral arterial disease (PAD)",
+   "subject": "cardiology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "PAD",
+    "PVD",
+    "peripheral vascular disease",
+    "LEAD",
+    "intermittent claudication",
+    "claudication",
+    "CLTI",
+    "critical limb ischaemia",
+    "acute limb ischaemia",
+    "ALI",
+    "ABI",
+    "ankle brachial index"
+   ],
+   "summary": "Confirm PAD with ABI 0.90 or less (toe-brachial index if ABI above 1.40); give single antiplatelet or rivaroxaban 2.5 mg twice daily plus aspirin, high-intensity statin, BP and smoking control, supervised exercise for claudication, and refer CLTI urgently and acute limb ischaemia as an emergency with IV heparin.",
+   "sources": [
+    "ESC 2024",
+    "ACC / AHA and partner societies 2024"
    ],
    "status": "ai_drafted"
   },
@@ -2861,6 +3223,69 @@
     "Singapore Medical Journal 2026",
     "Lung India 2026",
     "Cureus 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "menopause",
+   "title": "Menopause: diagnosis and hormone replacement therapy",
+   "subject": "obstetrics-gynaecology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "perimenopause",
+    "HRT",
+    "MHT",
+    "menopausal hormone therapy",
+    "hormone replacement therapy",
+    "hot flushes",
+    "night sweats",
+    "vasomotor symptoms",
+    "GSM",
+    "genitourinary syndrome of menopause",
+    "vaginal atrophy",
+    "vaginal oestrogen",
+    "premature ovarian insufficiency",
+    "POI",
+    "early menopause",
+    "fezolinetant",
+    "NG23"
+   ],
+   "summary": "Diagnose perimenopause and menopause clinically at 45 or over without FSH testing. Offer HRT for vasomotor symptoms (combined oestrogen and progestogen if a uterus is present, transdermal oestrogen if VTE risk is raised), vaginal oestrogen for genitourinary symptoms, and review at 3 months then yearly.",
+   "sources": [
+    "NICE 2024",
+    "The North American Menopause Society (The Menopause Society) 2022",
+    "NICE 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "masld-fatty-liver",
+   "title": "Metabolic dysfunction-associated steatotic liver disease (MASLD)",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "MASLD",
+    "NAFLD",
+    "fatty liver",
+    "MASH",
+    "NASH",
+    "MetALD",
+    "steatotic liver disease",
+    "FIB-4",
+    "FibroScan",
+    "resmetirom",
+    "hepatic steatosis"
+   ],
+   "summary": "Steatosis plus at least one cardiometabolic risk factor with little or no alcohol. Stage fibrosis stepwise with FIB-4 then elastography, treat with weight loss (5% for fat, 7 to 10% for inflammation, 10% or more for fibrosis), manage cardiometabolic risk, and refer intermediate or high fibrosis risk to hepatology for MASH-targeted therapy.",
+   "sources": [
+    "American Association for the Study of Liver Diseases 2023",
+    "EASL / EASD / EASO 2024",
+    "EASL / EASD / EASO 2024",
+    "Multisociety Delphi panel (AASLD, EASL, ALEH) 2023"
    ],
    "status": "ai_drafted"
   },
@@ -3439,6 +3864,31 @@
     "WHO 2022",
     "WHO 2015",
     "ACOG 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "pulmonary-hypertension",
+   "title": "Pulmonary hypertension: recognition, referral and basic management",
+   "subject": "respiratory",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "PH",
+    "PAH",
+    "pulmonary arterial hypertension",
+    "CTEPH",
+    "chronic thromboembolic pulmonary hypertension",
+    "cor pulmonale",
+    "right heart failure",
+    "raised PA pressure",
+    "ESC/ERS 2022 PH"
+   ],
+   "summary": "PH is mPAP above 20 mmHg at right heart catheterisation. Estimate probability by echo (TR velocity plus RV and PA signs), classify into groups 1 to 5, treat the underlying heart or lung disease, screen for CTEPH with a V/Q scan, and refer suspected PAH or CTEPH to a PH centre (ESC/ERS 2022).",
+   "sources": [
+    "ESC / ERS 2022",
+    "ESC / ERS 2022"
    ],
    "status": "ai_drafted"
   },
