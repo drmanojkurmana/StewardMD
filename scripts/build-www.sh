@@ -92,6 +92,12 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # ── 4b. Offline clinical bundle (native drug monographs, lazy-loaded by
 # offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
 [ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
+# The 104 authored monographs the SQL-derived bundle never contained (scripts/build-clinical-supplement.mjs)
+# and the name/class search index over both (scripts/build-clinical-index.mjs). Without the index the
+# Drugs Database can only search the 109-molecule formulary in drugs.js and answers "No drugs match"
+# for molecules whose full monograph is sitting in the bundle beside it.
+[ -f data/clinical-supplement.json.gz ] && cp data/clinical-supplement.json.gz "$WWW/"
+[ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 
 # ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
 # The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:
