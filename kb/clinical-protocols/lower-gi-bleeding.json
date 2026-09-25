@@ -4,7 +4,20 @@
  "subject": "gastroenterology",
  "population": "Adults",
  "setting": "Emergency department, ward, endoscopy and interventional radiology",
- "aliases": ["LGIB", "LGI bleed", "lower GI haemorrhage", "haematochezia", "hematochezia", "rectal bleeding", "PR bleed", "diverticular bleeding", "Oakland score", "shock index", "CT angiography", "CTA"],
+ "aliases": [
+  "LGIB",
+  "LGI bleed",
+  "lower GI haemorrhage",
+  "haematochezia",
+  "hematochezia",
+  "rectal bleeding",
+  "PR bleed",
+  "diverticular bleeding",
+  "Oakland score",
+  "shock index",
+  "CT angiography",
+  "CTA"
+ ],
  "summary": "Classify by shock index; unstable patients (shock index above 1) get CT angiography then embolisation, stable patients are scored with Oakland (8 or less: outpatient investigation). Transfuse restrictively and perform non-urgent inpatient colonoscopy for major bleeds.",
  "sections": [
   {
@@ -14,8 +27,9 @@
     "Fresh or maroon blood per rectum. Common causes: diverticular bleeding, angioectasia, ischaemic, infective or inflammatory colitis, post-polypectomy bleeding, haemorrhoids, neoplasia. In India also consider intestinal tuberculosis, amoebic or bacillary colitis and solitary rectal ulcer.",
     "Shock index (heart rate divided by systolic BP) above 1 after initial resuscitation = unstable bleed (BSG 2019).",
     "Stable patients: calculate the Oakland score. 8 points or less with no other reason for admission = minor bleed, suitable for discharge and urgent outpatient colonoscopy. Above 8 = major bleed, admit.",
-    "Oakland points: age below 40 = 0, 40 to 69 = 1, 70 or more = 2; male = 1; previous LGIB admission = 1; blood on rectal examination = 1; heart rate below 70 = 0, 70 to 89 = 1, 90 to 109 = 2, 110 or more = 3; systolic BP below 90 = 5, 90 to 119 = 4, 120 to 129 = 3, 130 to 159 = 2, 160 or more = 0; Hb (g/L) below 70 = 22, 70 to 89 = 17, 90 to 109 = 13, 110 to 129 = 8, 130 to 159 = 4, 160 or more = 0.",
-    "Suspect an upper GI source in brisk haematochezia with instability, especially with raised urea to creatinine ratio (BUN/creatinine above 30), peptic ulcer history, NSAID use or portal hypertension."
+    "Oakland points (1 of 2): age below 40 = 0, 40 to 69 = 1, 70 or more = 2; male = 1; previous LGIB admission = 1; blood on rectal examination = 1; heart rate below 70 = 0, 70 to 89 = 1, 90 to 109 = 2, 110 or more = 3.",
+    "Oakland points (2 of 2): systolic BP below 90 = 5, 90 to 119 = 4, 120 to 129 = 3, 130 to 159 = 2, 160 or more = 0; Hb (g/L) below 70 = 22, 70 to 89 = 17, 90 to 109 = 13, 110 to 129 = 8, 130 to 159 = 4, 160 or more = 0.",
+    "Suspect an upper GI source in brisk haematochezia with instability, especially with a BUN to creatinine ratio above 30 (both in mg/dL), peptic ulcer history, NSAID use or portal hypertension."
    ]
   },
   {
@@ -75,14 +89,38 @@
   }
  ],
  "drugs": [
-  { "name": "Packed red cells", "dose": "Transfuse at Hb below 7 g/dL (below 8 g/dL with cardiovascular disease)", "notes": "Target 7 to 9 g/dL after transfusion; 10 g/dL with cardiovascular disease (BSG)." },
-  { "name": "Prothrombin complex concentrate plus vitamin K", "dose": "PCC per product label (weight and INR based) with IV vitamin K", "notes": "Warfarin-associated unstable bleeding. Preferred over FFP." },
-  { "name": "Idarucizumab", "dose": "5 g IV (two 2.5 g doses)", "notes": "Dabigatran reversal for life-threatening bleeding only." },
-  { "name": "Polyethylene glycol electrolyte solution", "dose": "4 to 6 L orally or by nasogastric tube over 3 to 4 hours", "notes": "Rapid purge before urgent inpatient colonoscopy." }
+  {
+   "name": "Packed red cells",
+   "dose": "Transfuse at Hb below 7 g/dL (below 8 g/dL with cardiovascular disease)",
+   "notes": "Target 7 to 9 g/dL after transfusion; 10 g/dL with cardiovascular disease (BSG)."
+  },
+  {
+   "name": "Idarucizumab",
+   "dose": "5 g IV (two 2.5 g doses)",
+   "notes": "Dabigatran reversal for life-threatening bleeding only."
+  },
+  {
+   "name": "Polyethylene glycol electrolyte solution",
+   "dose": "4 to 6 L orally or by nasogastric tube over 3 to 4 hours",
+   "notes": "Rapid purge before urgent inpatient colonoscopy."
+  }
  ],
  "sources": [
-  { "org": "American College of Gastroenterology", "title": "Management of Patients With Acute Lower Gastrointestinal Bleeding: An Updated ACG Guideline (Sengupta et al., Am J Gastroenterol)", "year": 2023, "url": "https://journals.lww.com/ajg/fulltext/2023/02000/management_of_patients_with_acute_lower.14.aspx" },
-  { "org": "British Society of Gastroenterology", "title": "Diagnosis and management of acute lower gastrointestinal bleeding: guidelines from the BSG (Oakland et al., Gut)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/30792244/" }
+  {
+   "org": "American College of Gastroenterology",
+   "title": "Management of Patients With Acute Lower Gastrointestinal Bleeding: An Updated ACG Guideline (Sengupta et al., Am J Gastroenterol)",
+   "year": 2023,
+   "url": "https://journals.lww.com/ajg/fulltext/2023/02000/management_of_patients_with_acute_lower.14.aspx"
+  },
+  {
+   "org": "British Society of Gastroenterology",
+   "title": "Diagnosis and management of acute lower gastrointestinal bleeding: guidelines from the BSG (Oakland et al., Gut)",
+   "year": 2019,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/30792244/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ }
 }

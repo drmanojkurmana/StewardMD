@@ -1,12 +1,12 @@
 {
  "schema": 1,
- "version": "96bb483f2038",
- "count": 87,
+ "version": "ca0891fad693",
+ "count": 99,
  "subjects": [
   {
    "key": "emergency",
    "label": "Emergency and Resuscitation",
-   "count": 2
+   "count": 4
   },
   {
    "key": "critical-care",
@@ -21,12 +21,12 @@
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 2
+   "count": 3
   },
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 10
+   "count": 12
   },
   {
    "key": "gastroenterology",
@@ -46,7 +46,7 @@
   {
    "key": "neurology",
    "label": "Neurology",
-   "count": 7
+   "count": 9
   },
   {
    "key": "haematology-oncology",
@@ -56,17 +56,17 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 4
+   "count": 5
   },
   {
    "key": "surgery-trauma",
    "label": "Surgery, Trauma and Orthopaedics",
-   "count": 6
+   "count": 8
   },
   {
    "key": "anaesthesia",
    "label": "Anaesthesia and Perioperative",
-   "count": 3
+   "count": 5
   }
  ],
  "protocols": [
@@ -362,6 +362,30 @@
    "status": "ai_drafted"
   },
   {
+   "id": "acute-migraine",
+   "title": "Acute migraine attack (adult)",
+   "subject": "neurology",
+   "population": "Adults",
+   "aliases": [
+    "migraine",
+    "migraine attack",
+    "status migrainosus",
+    "headache in ED",
+    "triptan",
+    "sumatriptan",
+    "prochlorperazine",
+    "metoclopramide",
+    "migraine cocktail",
+    "occipital nerve block"
+   ],
+   "summary": "Screen for secondary headache red flags, then treat in the ED with IV prochlorperazine or metoclopramide, an NSAID (ketorolac or dexketoprofen) or SC sumatriptan, consider a greater occipital nerve block, give dexamethasone to reduce recurrence, and avoid opioids.",
+   "sources": [
+    "American Headache Society 2025",
+    "NICE 2012"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "acute-pancreatitis",
    "title": "Acute pancreatitis",
    "subject": "gastroenterology",
@@ -561,6 +585,29 @@
     "American Heart Association 2025",
     "European Resuscitation Council 2025",
     "Resuscitation Council UK 2025",
+    "Resuscitation Council UK 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "anaphylaxis",
+   "title": "Anaphylaxis (adults and children)",
+   "subject": "emergency",
+   "population": "Adults and children",
+   "aliases": [
+    "anaphylactic shock",
+    "anaphylactic reaction",
+    "severe allergic reaction",
+    "IM adrenaline",
+    "epinephrine",
+    "refractory anaphylaxis",
+    "antivenom reaction",
+    "drug allergy"
+   ],
+   "summary": "Give IM adrenaline into the anterolateral thigh at once (0.01 mg/kg, maximum 0.5 mg; adults 500 micrograms), repeat after 5 minutes if needed, lie the patient flat, give oxygen and IV fluid for shock, and start a low-dose adrenaline infusion if two doses fail. Antihistamines and steroids are not first-line.",
+   "sources": [
+    "Resuscitation Council UK 2021",
+    "World Allergy Organization 2020",
     "Resuscitation Council UK 2025"
    ],
    "status": "ai_drafted"
@@ -959,6 +1006,53 @@
    "status": "ai_drafted"
   },
   {
+   "id": "copd-exacerbation",
+   "title": "COPD exacerbation (adult)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "AECOPD",
+    "acute exacerbation of COPD",
+    "COPD flare",
+    "hypercapnic respiratory failure",
+    "type 2 respiratory failure",
+    "NIV in COPD",
+    "GOLD 2026"
+   ],
+   "summary": "Controlled oxygen to SpO2 88 to 92%, short-acting bronchodilators, prednisolone 40 mg daily for 5 days, antibiotics for 5 days only when sputum is purulent or ventilation is needed, and NIV for respiratory acidosis (PaCO2 45 mmHg or more with pH 7.35 or less). Start LABA+LAMA before discharge.",
+   "sources": [
+    "GOLD 2026",
+    "BTS 2017",
+    "ICMR 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "covid-19",
+   "title": "COVID-19 (adult): severity-based treatment",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "COVID",
+    "SARS-CoV-2",
+    "coronavirus",
+    "COVID pneumonia",
+    "nirmatrelvir",
+    "Paxlovid",
+    "remdesivir",
+    "tocilizumab",
+    "baricitinib",
+    "dexamethasone COVID"
+   ],
+   "summary": "Grade severity by SpO2 and respiratory rate. Non-severe but high risk: nirmatrelvir-ritonavir within 5 days. Severe or critical: oxygen, dexamethasone 6 mg for up to 10 days, an IL-6 receptor blocker or baricitinib, and prophylactic-dose anticoagulation. No steroids or empirical antibiotics for non-severe disease.",
+   "sources": [
+    "WHO 2025",
+    "IDSA 2026",
+    "WHO 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "deep-vein-thrombosis",
    "title": "Deep vein thrombosis of the leg: diagnosis and treatment",
    "subject": "cardiology",
@@ -981,6 +1075,31 @@
     "ASH 2020",
     "ASH 2018",
     "ESC / ERS 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "dengue",
+   "title": "Dengue: assessment and fluid management",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "aliases": [
+    "dengue fever",
+    "DF",
+    "DHF",
+    "DSS",
+    "dengue shock syndrome",
+    "severe dengue",
+    "dengue warning signs",
+    "NS1",
+    "thrombocytopenia",
+    "platelet transfusion dengue",
+    "NCVBDC dengue 2023"
+   ],
+   "summary": "Classify as dengue without warning signs, with warning signs, or severe dengue. Give paracetamol and oral fluids, never NSAIDs. Use haematocrit-guided isotonic crystalloid boluses with stepwise tapering for warning signs and shock, stop IV fluids by 24 to 48 hours, and do not transfuse platelets prophylactically.",
+   "sources": [
+    "NCVBDC, MoHFW 2023",
+    "WHO 2025"
    ],
    "status": "ai_drafted"
   },
@@ -1039,6 +1158,32 @@
    "status": "ai_drafted"
   },
   {
+   "id": "ectopic-pregnancy",
+   "title": "Ectopic pregnancy (tubal): diagnosis and management",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "aliases": [
+    "ectopic",
+    "tubal pregnancy",
+    "ruptured ectopic",
+    "PUL",
+    "pregnancy of unknown location",
+    "methotrexate ectopic",
+    "salpingectomy",
+    "salpingotomy",
+    "EP",
+    "early pregnancy bleeding"
+   ],
+   "summary": "Suspect ectopic pregnancy in any woman of reproductive age with pain, bleeding or collapse and a positive pregnancy test. Unstable: resuscitate and operate. Stable: transvaginal scan plus serial hCG; single-dose methotrexate 50 mg/m2 for small unruptured ectopics with low hCG, surgery otherwise.",
+   "sources": [
+    "NICE 2019",
+    "NICE 2026",
+    "ACOG 2018",
+    "RCOG / AEPU 2016"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "febrile-neutropenia",
    "title": "Febrile neutropenia (adult)",
    "subject": "haematology-oncology",
@@ -1056,6 +1201,30 @@
     "IDSA 2011",
     "ASCO / IDSA 2018",
     "ICMR 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "first-unprovoked-seizure",
+   "title": "First unprovoked seizure (adult)",
+   "subject": "neurology",
+   "population": "Adults",
+   "aliases": [
+    "first seizure",
+    "first fit",
+    "new onset seizure",
+    "single seizure",
+    "unprovoked seizure",
+    "new-onset epilepsy",
+    "convulsion",
+    "blackout with jerking"
+   ],
+   "summary": "Confirm an epileptic seizure, exclude provoking causes (glucose, sodium, calcium, alcohol, drugs, infection), do an ECG and neuroimaging, arrange EEG and specialist review within 2 weeks, give driving and safety advice, and start antiseizure medication only when recurrence risk is high or the patient chooses.",
+   "sources": [
+    "AAN / AES 2015",
+    "NICE 2022",
+    "NICE 2022",
+    "DVLA (UK) 2025"
    ],
    "status": "ai_drafted"
   },
@@ -1768,6 +1937,56 @@
    "status": "ai_drafted"
   },
   {
+   "id": "open-fracture",
+   "title": "Open fractures: emergency management",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "compound fracture",
+    "open fracture",
+    "Gustilo",
+    "Gustilo-Anderson",
+    "BOAST open fractures",
+    "orthoplastic",
+    "open tibia fracture",
+    "open fracture antibiotics"
+   ],
+   "summary": "IV antibiotics within 1 hour of injury, tetanus prophylaxis, photograph then cover the wound with saline-soaked gauze and an occlusive film, realign and splint with repeated neurovascular checks, and arrange orthoplastic debridement: immediately if highly contaminated or ischaemic, within 12 hours if high-energy, otherwise within 24 hours.",
+   "sources": [
+    "British Orthopaedic Association / BAPRAS 2017",
+    "NICE 2016"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "perioperative-anticoagulation-management",
+   "title": "Perioperative management of anticoagulants and antiplatelets (elective surgery)",
+   "subject": "anaesthesia",
+   "population": "Adults",
+   "aliases": [
+    "bridging",
+    "heparin bridging",
+    "stopping warfarin before surgery",
+    "DOAC interruption",
+    "stop apixaban before surgery",
+    "stop rivaroxaban",
+    "dabigatran surgery",
+    "clopidogrel before surgery",
+    "neuraxial anticoagulation",
+    "ASRA anticoagulation",
+    "CHEST 2022 perioperative",
+    "PAUSE"
+   ],
+   "summary": "Classify thrombotic and bleeding risk, stop warfarin 5 days before surgery, stop DOACs 1 to 2 days before by bleeding risk and renal function (longer for dabigatran with low CrCl), avoid heparin bridging except in the highest thrombotic risk, continue aspirin in most cases, and respect neuraxial intervals.",
+   "sources": [
+    "American College of Chest Physicians (CHEST) 2022",
+    "ASRA Pain Medicine 2018",
+    "ASRA Pain Medicine 2025",
+    "Dtsch Arztebl Int (Kellert et al.) 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "postpartum-haemorrhage",
    "title": "Postpartum haemorrhage (PPH): first response and escalation",
    "subject": "obstetrics-gynaecology",
@@ -2030,6 +2249,29 @@
    "status": "ai_drafted"
   },
   {
+   "id": "surgical-antibiotic-prophylaxis",
+   "title": "Surgical antibiotic prophylaxis (adult)",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "SAP",
+    "antibiotic prophylaxis",
+    "perioperative antibiotics",
+    "surgical prophylaxis",
+    "cefazolin prophylaxis",
+    "SSI prevention",
+    "surgical site infection",
+    "antibiotic redosing",
+    "penicillin allergy surgery"
+   ],
+   "summary": "Give one IV dose of the right agent (usually cefazolin 2 g, 3 g if 120 kg or more) within 60 minutes before incision (120 minutes for vancomycin and fluoroquinolones), redose for long operations or blood loss over 1500 mL, and stop within 24 hours.",
+   "sources": [
+    "ASHP / IDSA / SIS / SHEA 2013",
+    "WHO 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "syncope-evaluation",
    "title": "Syncope: initial evaluation and risk stratification",
    "subject": "cardiology",
@@ -2050,6 +2292,34 @@
    "sources": [
     "ESC 2018",
     "ACC / AHA / HRS 2017"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "tachycardia-with-pulse",
+   "title": "Tachycardia with a pulse (adult)",
+   "subject": "emergency",
+   "population": "Adults",
+   "aliases": [
+    "tachyarrhythmia",
+    "SVT",
+    "PSVT",
+    "AF with RVR",
+    "fast AF",
+    "atrial flutter",
+    "VT with pulse",
+    "broad complex tachycardia",
+    "narrow complex tachycardia",
+    "WCT",
+    "synchronised cardioversion",
+    "adenosine"
+   ],
+   "summary": "Unstable tachyarrhythmia (usually 150/min or more with shock, altered mental state, ischaemic pain or acute heart failure) needs synchronised cardioversion under sedation. Stable patients are treated by QRS width and regularity: vagal manoeuvres and adenosine for regular narrow complex, rate control for AF, and antiarrhythmics or elective cardioversion for broad complex.",
+   "sources": [
+    "American Heart Association 2025",
+    "American Heart Association 2025",
+    "European Resuscitation Council 2025",
+    "Resuscitation Council UK 2025"
    ],
    "status": "ai_drafted"
   },
@@ -2285,6 +2555,33 @@
     "American Society of Hematology 2018",
     "American Society of Hematology 2018",
     "American Society of Hematology 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "perioperative-vte-prophylaxis",
+   "title": "VTE prophylaxis in surgical patients",
+   "subject": "anaesthesia",
+   "population": "Adults",
+   "aliases": [
+    "thromboprophylaxis",
+    "DVT prophylaxis",
+    "surgical VTE prophylaxis",
+    "Caprini",
+    "enoxaparin prophylaxis",
+    "LMWH prophylaxis",
+    "extended prophylaxis",
+    "arthroplasty thromboprophylaxis",
+    "hip replacement DVT",
+    "knee replacement DVT",
+    "NICE NG89"
+   ],
+   "summary": "Assess VTE and bleeding risk on admission (Caprini score), start mechanical prophylaxis, add LMWH or UFH when VTE risk outweighs bleeding risk, and extend prophylaxis to 28 days after major abdominal or pelvic cancer surgery and to 4 to 5 weeks after hip arthroplasty or hip fracture.",
+   "sources": [
+    "NICE 2018",
+    "American Society of Hematology 2019",
+    "ACCP 2012",
+    "ACCP 2012"
    ],
    "status": "ai_drafted"
   }

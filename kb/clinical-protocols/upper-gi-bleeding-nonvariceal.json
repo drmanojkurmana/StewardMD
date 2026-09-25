@@ -4,7 +4,21 @@
  "subject": "gastroenterology",
  "population": "Adults",
  "setting": "Emergency department, ward, ICU, endoscopy unit",
- "aliases": ["UGIB", "UGI bleed", "NVUGIB", "NVUGIH", "peptic ulcer bleeding", "bleeding ulcer", "haematemesis", "hematemesis", "melaena", "melena", "Glasgow-Blatchford score", "GBS", "Forrest classification"],
+ "aliases": [
+  "UGIB",
+  "UGI bleed",
+  "NVUGIB",
+  "NVUGIH",
+  "peptic ulcer bleeding",
+  "bleeding ulcer",
+  "haematemesis",
+  "hematemesis",
+  "melaena",
+  "melena",
+  "Glasgow-Blatchford score",
+  "GBS",
+  "Forrest classification"
+ ],
  "summary": "Resuscitate, risk-stratify with the Glasgow-Blatchford score (discharge if 0 to 1), transfuse restrictively (Hb below 7 g/dL, or below 8 g/dL with cardiovascular disease), endoscopy within 24 hours, then high-dose PPI for 72 hours after endoscopic haemostasis.",
  "sections": [
   {
@@ -58,7 +72,8 @@
    "title": "Monitoring for rebleeding",
    "items": [
     "Close monitoring of pulse, BP, urine output and mental state in a monitored bed for high-risk patients; repeat Hb after resuscitation and whenever rebleeding is suspected.",
-    "Rebleeding: fresh haematemesis, recurrent melaena or haematochezia after stool colour normalised, new shock after stabilisation, or Hb fall of 2 g/dL or more after a stable value (ESGE)."
+    "Rebleeding: fresh haematemesis, recurrent melaena or haematochezia after stool colour normalised, new shock after stabilisation, or Hb fall of 2 g/dL or more after a stable value (ESGE).",
+    "Treat suspected rebleeding as an emergency: resuscitate, inform the endoscopist and arrange repeat endoscopy (see escalation)."
    ]
   },
   {
@@ -91,15 +106,43 @@
   }
  ],
  "drugs": [
-  { "name": "Pantoprazole or esomeprazole (IV)", "dose": "80 mg IV bolus, then 8 mg/h continuous infusion for 72 hours after endoscopic haemostasis", "notes": "Alternative: 40 mg IV or oral 2 to 4 times daily (intermittent high-dose). Then oral twice daily until 2 weeks after endoscopy for high-risk ulcers." },
-  { "name": "Erythromycin (IV)", "dose": "250 mg IV single dose, 30 to 120 minutes before endoscopy", "notes": "Prokinetic to clear the stomach. Avoid with prolonged QT, electrolyte disturbance or interacting drugs." },
-  { "name": "Packed red cells", "dose": "Transfuse at Hb 7 g/dL or below (8 g/dL or below with cardiovascular disease)", "notes": "Target 7 to 9 g/dL after transfusion; 10 g/dL or more with cardiovascular disease (ESGE)." },
-  { "name": "Prothrombin complex concentrate plus vitamin K", "dose": "PCC per product label and INR; low-dose IV vitamin K", "notes": "For warfarin-associated bleeding with haemodynamic instability. FFP only if PCC unavailable." },
-  { "name": "Oral PPI (maintenance)", "dose": "e.g. pantoprazole 40 mg orally twice daily until 2 weeks after endoscopy, then 40 mg once daily", "notes": "Duration after 2 weeks depends on ulcer cause, H. pylori status and ongoing antithrombotic or NSAID use." }
+  {
+   "name": "Pantoprazole or esomeprazole (IV)",
+   "dose": "80 mg IV bolus, then 8 mg/h continuous infusion for 72 hours after endoscopic haemostasis",
+   "notes": "Alternative: 40 mg IV or oral 2 to 4 times daily (intermittent high-dose). Then oral twice daily until 2 weeks after endoscopy for high-risk ulcers."
+  },
+  {
+   "name": "Erythromycin (IV)",
+   "dose": "250 mg IV single dose, 30 to 120 minutes before endoscopy",
+   "notes": "Prokinetic to clear the stomach. Avoid with prolonged QT, electrolyte disturbance or interacting drugs."
+  },
+  {
+   "name": "Packed red cells",
+   "dose": "Transfuse at Hb 7 g/dL or below (8 g/dL or below with cardiovascular disease)",
+   "notes": "Target 7 to 9 g/dL after transfusion; 10 g/dL or more with cardiovascular disease (ESGE)."
+  },
+  {
+   "name": "Oral PPI (maintenance)",
+   "dose": "e.g. pantoprazole 40 mg orally twice daily until 2 weeks after endoscopy, then 40 mg once daily",
+   "notes": "Duration after 2 weeks depends on ulcer cause, H. pylori status and ongoing antithrombotic or NSAID use."
+  }
  ],
  "sources": [
-  { "org": "American College of Gastroenterology", "title": "ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding (Laine et al., Am J Gastroenterol)", "year": 2021, "url": "https://journals.lww.com/ajg/fulltext/2021/05000/acg_clinical_guideline__upper_gastrointestinal_and.14.aspx" },
-  { "org": "ESGE", "title": "Endoscopic diagnosis and management of nonvariceal upper gastrointestinal hemorrhage (NVUGIH): ESGE Guideline, Update 2021", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/33567467/" }
+  {
+   "org": "American College of Gastroenterology",
+   "title": "ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding (Laine et al., Am J Gastroenterol)",
+   "year": 2021,
+   "url": "https://journals.lww.com/ajg/fulltext/2021/05000/acg_clinical_guideline__upper_gastrointestinal_and.14.aspx"
+  },
+  {
+   "org": "ESGE",
+   "title": "Endoscopic diagnosis and management of nonvariceal upper gastrointestinal hemorrhage (NVUGIH): ESGE Guideline, Update 2021",
+   "year": 2021,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/33567467/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ }
 }
