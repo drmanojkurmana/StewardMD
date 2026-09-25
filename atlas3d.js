@@ -438,10 +438,15 @@
     }
     return attempt();
   }
+  // Bumped by close(): a fetch from a closed session that lands after a reopen must not upload
+  // into the new context (orphaned GPU buffers, double-counted progress) or clear the new
+  // session's own in-flight entry. Context loss keeps the session, so it never bumps this.
+  var session = 0;
   function loadChunk(c) {
-    var key = c.id;
+    var key = c.id, mine = session;
     if (st.chunks[key] || st.loading[key]) return st.loading[key] || Promise.resolve();
     st.loading[key] = fetchChunk(c).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) {
+      if (mine !== session) return;
       delete st.loading[key];
       // A chunk that lands while the GL context is lost is dropped; the restore re-uploads it
       // (from the on-device cache) into the new context.
@@ -454,6 +459,7 @@
       // the network is slower than the camera animation).
       st.loaded++; settleFrames(); paintProgress();
     }).catch(function (e) {
+      if (mine !== session) return;
       delete st.loading[key];
       // One bad chunk must not blank the whole layer: it is recorded and offered for Retry,
       // everything that loaded stays usable. Only a browser that cannot decompress at all is fatal.
@@ -645,6 +651,7 @@
   }
   function disposeGL() {
     var R = st.gl; if (!R) return;
+    session++;
     var gl = R.gl;
     Object.keys(st.chunks).forEach(function (k) { var c = st.chunks[k]; gl.deleteBuffer(c.vb); gl.deleteBuffer(c.nb); gl.deleteBuffer(c.pb); gl.deleteBuffer(c.ib); });
     st.chunks = {}; st.loaded = 0; st.loading = {};

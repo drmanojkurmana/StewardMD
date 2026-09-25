@@ -305,6 +305,13 @@ try {
   ok(await ev(`var s=ATLAS3D._state; return '` + failedIds + `'.split(',').every(function(id){ return !!s.chunks[id]; });`) === true, "the previously failed chunks are now uploaded (" + failedIds + ")");
   ok(await ev(`return window.__asked.length>0 && window.__asked.every(function(u){ return /cardiac-/.test(u); });`) === true, "Retry re-fetched only the failed chunks: " + await ev(`return window.__asked.length + ' requests';`));
   await ev(`window.fetch = window.__realFetch; return 1;`);
+  // ---- close while chunks are in flight, reopen at once: the closed session must not upload ----
+  await ev(`ATLAS3D.close(); window.fetch = function(){ var a = arguments, t = this; return new Promise(function(r){ setTimeout(r, 1500); }).then(function(){ return window.__realFetch.apply(t, a); }); }; ATLAS3D.open(); return 1;`);
+  ok(await until(`return Object.keys(ATLAS3D._state.loading || {}).length > 0`, 30000), "chunks in flight before the close");
+  await ev(`ATLAS3D.close(); ATLAS3D.open(); return 1;`);
+  ok(await until(`var s=ATLAS3D._state; return !!s.gl && s.loaded>5 && Object.keys(s.loading).length===0`, 120000), "reopened while the closed session's chunks were still downloading");
+  ok(await ev(`var s=ATLAS3D._state; return s.loaded === Object.keys(s.chunks).length;`) === true, "no chunk from the closed session was uploaded into the reopened one (" + await ev(`var s=ATLAS3D._state; return s.loaded + ' loaded / ' + Object.keys(s.chunks).length + ' chunks';`) + ")");
+  await ev(`window.fetch = window.__realFetch; ATLAS3D.close(); return 1;`);
   // ---- flag OFF ----
   ok(await attach(BASE + "?atlas3d=0"), "app reloads with ?atlas3d=0");
   await clearIntro();
