@@ -865,6 +865,7 @@
       k("Did not wait",p.abandonedPct==null?"-":esc(p.abandonedPct)+"%",esc(p.noShow||0)+" no-shows",(p.abandonedPct||0)>=10)+
       k("Door to doctor",dcMin(p.doorToDoctor&&p.doorToDoctor.medianMin),"9 in 10 within "+dcMin(p.doorToDoctor&&p.doorToDoctor.p90Min))+
     '</div>';
+    if(c.teleconsult) h+='<div class="dc-chips"><span>Video visits: <b>'+esc(c.teleconsult)+'</b></span></div>';
     h+='<h4>By room</h4>'+(rooms.length?'<table class="dc-t"><thead><tr><th>Room</th><th>Registered</th><th>Seen</th><th>No-show</th><th>Consult</th><th>Wait</th></tr></thead><tbody>'+
       rooms.map(function(x){ return '<tr><td>'+esc(x.room)+(x.doctor?' <span style="color:var(--mut)">'+esc(x.doctor)+'</span>':'')+'</td><td>'+esc(x.registered)+'</td><td>'+esc(x.seen)+'</td><td>'+esc(x.noShow)+'</td><td>'+dcMin(x.consultMedianMin)+'</td><td>'+dcMin(x.doorToDoctorMedianMin)+'</td></tr>'; }).join("")+
       '</tbody></table>':'<div class="empty">No patients today.</div>');

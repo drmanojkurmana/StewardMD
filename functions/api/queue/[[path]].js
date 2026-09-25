@@ -378,6 +378,14 @@ async function opdResultBack(env, org, patientId) {
   return n;
 }
 
+/* A video visit's consent on the patient's WardSynQ record (consent.js scope teleconsult). Best-effort, never throws:
+ * { ok, written } or { ok:false, error }, so the caller can say it without undoing the visit. */
+async function recordTeleConsent(request, env, deps, patientId, givenBy) {
+  try {
+    const r = await recordConsent(request, env, { ...deps, patientId, scope: "teleconsult", decision: "granted", givenBy, dpdp: deps.wsqCfg && deps.wsqCfg.dpdp });
+    return r && r.ok ? { ok: true, written: r.written || 0 } : { ok: false, error: (r && r.error) || "refused" };
+  } catch (e) { return { ok: false, error: "record_write_failed" }; }
+}
 async function syncEncounter(request, env, s, ticket) {
   let mig = null;
   const mark = async (fields) => { try { if (ticket && ticket.id) await fsCommit(env, [wUpdate(env, "q_tickets/" + ticket.id, Object.assign({ encounterSyncAt: Date.now() }, fields))]); } catch (e) { /* the mark is advisory */ } };
@@ -4585,7 +4593,11 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "book" && method === "POST") {
-        const r = await bookAppointment(request, env, { ...deps, patientId: body.patientId, clinicianId: body.clinicianId, startAt: body.startAt, minutes: body.minutes, reason: body.reason, requestId: body.requestId, overbook: !!body.overbook, overbookReason: body.overbookReason, idempotencyKey: body.idempotencyKey || null });
+        const r = await bookAppointment(request, env, { ...deps, patientId: body.patientId, clinicianId: body.clinicianId, startAt: body.startAt, minutes: body.minutes, reason: body.reason, requestId: body.requestId, overbook: !!body.overbook, overbookReason: body.overbookReason,
+          teleconsult: !!body.teleconsult, teleConsent: body.teleConsent, telehealthOn: TELE.telehealthSettings(wOrg).on, idempotencyKey: body.idempotencyKey || null });
+        /* A video visit's consent also goes on the patient's record (scope teleconsult), best-effort: the appointment
+         * already carries it, so a record that refuses is said (teleConsentRecord) and never undoes the booking. */
+        if (r.ok && r.written === 1 && r.teleconsult) r.teleConsentRecord = await recordTeleConsent(request, env, deps, r.patientId, r.teleConsentBy);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "appointment" && method === "POST") {
@@ -4598,8 +4610,13 @@ export async function onRequest(context) {
         if (r.ok && r.state === "arrived" && r.written === 1 && wOrg) {
           try {
             const pt = r.patient || {};
-            const t = await Q.addToPool(env, wOrg, { name: pt.name || "", mrn: pt.mrn || "", mobile: pt.mobile || "", patientId: r.patientId || "" }, actor.id || "");
-            r.queueTicket = { id: t && t.id, token: t && (t.token || t.tokenNo) };
+            /* A video appointment arrives as a video visit, with the consent taken at booking, while the hospital still has
+             * video on. Switched off since: the patient joins as an ordinary visit and the answer says so. */
+            const teleOn = TELE.telehealthSettings(wOrg).on;
+            const tele = r.teleconsult && teleOn ? { givenBy: r.teleConsentBy, by: actor.id || "" } : undefined;
+            const t = await Q.addToPool(env, wOrg, { name: pt.name || "", mrn: pt.mrn || "", mobile: pt.mobile || "", patientId: r.patientId || "" }, actor.id || "", tele);
+            r.queueTicket = { id: t && t.id, token: t && (t.token || t.tokenNo), teleconsult: !!(t && t.teleconsult) };
+            if (r.teleconsult && !teleOn) r.teleNote = "video_off";
           } catch (e) { r.queueError = "could_not_add_to_queue"; }
         }
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -4610,6 +4627,7 @@ export async function onRequest(context) {
       }
       if (sub === "diary" && method === "GET") {
         const r = await listSchedule(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", clinicianId: url.searchParams.get("clinicianId") || "", from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
+        r.telehealth = TELE.telehealthSettings(wOrg).on;   // the booking form offers a video visit only when on
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "block-period" && method === "POST") {
@@ -7240,6 +7258,11 @@ export async function onRequest(context) {
           try { t = await Q.makeTeleconsult(env, s, t0.id, { givenBy: c.givenBy, by: actor.id }, actor.id); }
           catch (e) { if (e && e.status === 409) return json({ ok: false, error: e.message, message: e.detail || "" }, 409, request); throw e; }
           await syncEncounter(request, env, s, t);   // the record's Encounter learns it is a virtual visit
+          // A WardSynQ hospital also keeps the consent on the patient's record (best-effort; the ticket already carries it).
+          let teleConsentRecord = null;
+          const tOrg = await ORG.getOrg(env, s.orgId || s.hospitalId), tMig = await wsqForcedMigration(env, tOrg);
+          if (tMig && !tMig.error && t.patientId) teleConsentRecord = await recordTeleConsent(request, env, { migration: tMig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, tMig.tenantId), orgId: tOrg.id, wsqCfg: tOrg.wardsynq || null }, t.patientId, c.givenBy);
+          if (teleConsentRecord) return json({ ok: true, ticket: (await ticketView(env, [t]))[0], teleConsentRecord }, 200, request);
           return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request);
         }
         if (!t0.teleconsult) return json({ ok: false, error: "not_teleconsult", message: "This is not a video visit. Tap Video visit and record the consent first." }, 409, request);

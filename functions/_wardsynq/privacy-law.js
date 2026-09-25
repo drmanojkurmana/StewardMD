@@ -120,7 +120,7 @@ function ageAt(dob, atMs) {
 }
 
 /* What is processing for the child's health (Fourth Schedule Part A items 1 and 2) and what is not. */
-const CARE_PURPOSES = Object.freeze(["treatment", "blood-products", "procedure", "share-external", "photography"]);
+const CARE_PURPOSES = Object.freeze(["treatment", "blood-products", "procedure", "share-external", "photography", "teleconsult"]);
 const PARENT_VERIFY = Object.freeze(["id-held", "digilocker-token"]);
 const GUARDIAN_SOURCES = Object.freeze(["court", "designated-authority", "local-level-committee"]);
 
