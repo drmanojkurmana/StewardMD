@@ -9356,3 +9356,49 @@ saving. `app.js` is a built artifact here and is not safely editable.
 
 **Consequence.** Age and Sex are asked once, in the card that is actually about the patient. Where
 `:has()` is unsupported the rules do not apply and the old two-card layout stands.
+
+## 2026-09-25 — The icon font is bound once, globally, not per module
+
+**Context.** A sweep for layout overflow turned up the NMC eLOGBook setup screen rendering the words
+"school", "draw", "chevron_right" and "close" instead of icons. `redesign-system.css` only
+*declared* `@font-face { font-family: 'Material Symbols Rounded' }`; nothing bound the utility
+classes to it outside two module scopes (`queue.css #smdQueue ...`, `oncotree.css .ot-overlay ...`).
+Seven modules never bound it: pglog, thorex, sknx, onco-iotox, onco-recist, onco-nurse,
+onco-protocols. Their icon spans computed `font-family: Inter` and printed the ligature name.
+
+**This would not have been caught by checking that the font loaded.** `material-symbols-rounded.woff2`
+returned 200 and `document.fonts.check()` returned true while the screen showed words. The check that
+works is the computed `font-family` on the span, and its rendered width: a glyph is about one em, the
+word "chevron_right" is about six.
+
+**Decision.** One base rule in `redesign-system.css` binds `.material-symbols-rounded`,
+`.material-symbols-outlined` and `.material-symbols-sharp` to the self-hosted face, at the lowest
+useful specificity so every existing scoped declaration still wins. Adding a module no longer means
+remembering to re-declare it. `test/run-icon-font-ui.mjs` asserts it across the modules that have no
+binding of their own.
+
+**Also found.** `onco-iotox.js` used `icon: "liver"` for hepatitis. Verified against the bundled
+woff2 that neither "liver" nor "hepatitis" is a ligature in it, so it rendered as the word. Changed
+to "labs", which is present, is how irAE hepatitis is actually followed, and is not the
+"gastroenterology" glyph colitis already uses.
+
+## 2026-09-25 — Measure the overflow, do not mass-replace `1fr`
+
+**Context.** After the Quick Facts overflow (BUG report on the Electrolytes card), the obvious move
+was to replace every bare `1fr` grid track in the repo with `minmax(0,1fr)`. There are ~150 of them.
+
+**Decision.** `1fr` is only a bug when the content cannot shrink, so the sweep measures instead: a
+grid or flex row whose `scrollWidth` exceeds its own `clientWidth`. Across 31 surfaces that found
+exactly two, both fixed above; the rest of the `1fr` tracks were left alone.
+
+**The detector had to be validated before it could be trusted.** Two earlier versions reported the app
+clean: one flagged closed off-canvas drawers and missed the real bug because a vertical
+`overflow:auto` ancestor masked it; another rescanned stale DOM because Escape does not close these
+overlays, so every surface returned the previous one's result. Both would have supported "no other
+page has this bug". The working version is checked against the known Electrolytes case with the fix
+reverted, and is clean with it restored.
+
+**Consequence.** `.oh-quick`'s first fix (`overflow-wrap:anywhere`) measured as fixed while wrapping
+"Interactions" to "Interaction" + "s" on screen. A single word should not break; the label fits at
+its existing size once side padding drops from 6px to 4px. A metric improving is not the same as the
+screen improving, and the screenshot is what settles it.
