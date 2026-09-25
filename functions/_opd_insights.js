@@ -1,13 +1,6 @@
-/* functions/_opd_insights.js - the OPD dashboard's figures (GET /api/queue/opd-insights), PURE over tickets.
- *
- * The console's premium dashboard draws four things the pulse does not carry: registrations per hour today, each
- * day of the month (registered / seen), today's visit mix, and today against the SAME TIME yesterday. All of it is
- * counts and durations: no name, token, MRN or mobile leaves this file, so the answer is safe on any desk screen.
- *
- * "Same time yesterday" means yesterday's tickets read as they stood at now minus 24 hours (only what had happened by
- * then counts), so a morning never looks worse than a finished day. Both sides go through ONE function (kpisAt), so
- * a delta is never two differently defined numbers subtracted.
- */
+/* functions/_opd_insights.js - the OPD dashboard's figures (GET /api/queue/opd-insights), pure over tickets.
+ * Counts and durations only: no name, token, MRN or mobile leaves this file.
+ * "Same time yesterday" reads yesterday's tickets as they stood 24 hours ago, through the same kpisAt as today. */
 import { NO_SHOW_RECALL_MS } from "./_queue_eta.js";
 
 const DAY_MS = 86400000, HOUR_MS = 3600000;

@@ -89,10 +89,10 @@ vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both
 `opd-dashboard.js` (window.SMD_OPD_DASH) + `opd-dashboard.css`, over the Flow Board layout above. Flag
 `localStorage.smd_opd_dash` (default on; "0", or the sidebar's "Classic layout", returns the Flow Board;
 "New dashboard" in that sidebar comes back). `smd_opd_flow_ui = "0"` still restores the original board under both.
-- Cards: KPI strip (pulse + day-close money + /opd-insights deltas vs the same time yesterday), Live occupancy
+- Cards (renamed after the anti-slop pass, see docs/opd/ANTISLOP_AUDIT_2026-09-25.md): Today band (pulse + day-close money + /opd-insights deltas vs the same time yesterday), In the OPD now
   (st.opd rooms + pool or the legacy board; each row's action is the console's OWN button clicked via
   `dashHost.actionsFor`, so handlers, payloads and permissions are the console's), Peak hours, Month volume,
-  Visit mix, Tasks and approvals (reconcile, offline desk, results back, recallable no-shows, follow-ups via
+  Visit types, Needs action (reconcile, offline desk, results back, recallable no-shows, follow-ups via
   WARD.open act "scheduling", unpaid orders, refunds). Sidebar groups move the console's buttons in by id.
   Ctrl/Cmd-K palette runs the same buttons and finds a patient on the board.
 - Server: GET /opd-insights (queue.view) in the queue router, pure figures in `functions/_opd_insights.js`.
@@ -101,4 +101,7 @@ vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both
 - The script loads WITHOUT defer: the ?mock=1 preview renders during parse.
 - GOTCHA: ward.css styles every `<header>`; the cards' own `<header class="dz-ch">` is reset in opd-dashboard.css.
 - Tests: test/opd-insights.test.mjs (router harness), test/opd-dashboard-model.test.mjs, browser
-  test/run-opd-dashboard-ui.mjs (26 checks, screenshots). test/run-opd-console-flow-ui.mjs pins smd_opd_dash=0.
+  test/run-opd-dashboard-ui.mjs (28 checks, screenshots). test/run-opd-console-flow-ui.mjs pins smd_opd_dash=0.
+- Colour rule: green = with the doctor, called, this hour, the active view; blue = back with results; red and amber = a
+  patient or record needs someone; everything else neutral. Cards flat (no shadow). Radius: cards 20, controls 10, tags 6.
+  Card names are our own: the brief forbids copying the reference's text, and a browser test checks the titles.

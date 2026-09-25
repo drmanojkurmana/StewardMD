@@ -18,12 +18,12 @@ const D = createRequire(import.meta.url)("../opd-dashboard.js");
 
 const pulse = { ok: true, pulse: { registered: 40, seen: 25, noShow: 2, abandonedPct: 7, doorToDoctor: { medianMin: 22, p90Min: 50 }, waitingNow: { longestMin: 40, medianMin: 15 }, consult: { medianMin: 8 }, syncFailed: 2, resultsBack: 1 } };
 
-test("deltas: better or worse in words and an arrow; null is 'no figure', 0 is 'same'", () => {
-  assert.deepEqual(D.deltaChip(3, "up"), { text: "+3 vs yesterday", dir: "up", tone: "good" });
-  assert.equal(D.deltaChip(-4, "down", "m").tone, "good", "a shorter wait is better");
-  assert.equal(D.deltaChip(2, "down", "%").tone, "bad");
-  assert.equal(D.deltaChip(0, "up").text, "Same as yesterday");
-  assert.equal(D.deltaChip(null, "up").text, "No figure yesterday");
+test("deltas say better or worse in words and an arrow; null is 'no figure', 0 is 'no change'", () => {
+  assert.deepEqual(D.deltaChip(3, "count"), { text: "3 more", dir: "up", tone: "good" });
+  assert.deepEqual(D.deltaChip(-4, "minutes"), { text: "4m quicker", dir: "down", tone: "good" }, "a shorter wait is better");
+  assert.deepEqual(D.deltaChip(1, "points"), { text: "1 point higher", dir: "up", tone: "bad" }, "did-not-wait moves in percentage points, not percent");
+  assert.equal(D.deltaChip(0, "count").text, "No change");
+  assert.equal(D.deltaChip(null, "count").text, "No figure yesterday");
 });
 
 test("KPI strip: money hidden when billing is off, said when unread; a failed read is not a quiet clinic", () => {
@@ -35,10 +35,12 @@ test("KPI strip: money hidden when billing is off, said when unread; a failed re
   assert.equal(k.tiles[2].delta.text, "No figure yesterday");
   const withMoney = D.modelKpis(pulse, ins, { net: 1234500, count: 9, refunds: { count: 1, total: 20000 } });
   assert.equal(withMoney.tiles[1].value, "₹12,345");
-  assert.match(withMoney.tiles[1].sub, /9 bills .* refunded/);
+  assert.equal(withMoney.tiles[1].sub, "Net of ₹200 refunded · 9 bills");
+  assert.equal(k.tiles[0].sub, "15 registered, not seen yet", "the line under a figure adds a fact, it does not repeat the /40");
   assert.equal(D.modelKpis(pulse, ins, { unread: true }).tiles[1].value, null);
   assert.ok(D.modelKpis({ failed: true }).failed);
   assert.match(D.kpiHtml(D.modelKpis({ failed: true })), /Do not read this as a quiet clinic/);
+  assert.match(D.kpiHtml(k), /same time yesterday/, "the comparison period is named once");
   assert.match(D.kpiHtml(D.modelKpis({ ok: true, pulse: { doorToDoctor: {} } }, null, null)), /not yet/, "not measured is drawn as not yet, never 0m");
 });
 
@@ -57,6 +59,7 @@ test("occupancy: emergencies first, every status counted, long waits flagged, po
   assert.equal(o.rows.find((r) => r.t.id === "a").long, true);
   assert.equal(o.rows.find((r) => r.t.id === "b").long, false, "in the room is not waiting");
   assert.equal(o.rows.find((r) => r.t.id === "d").status.label, "To route");
+  assert.equal(o.rows.find((r) => r.t.id === "b").status.label, "With the doctor");
 });
 
 test("hours, month and mix", () => {
@@ -68,17 +71,21 @@ test("hours, month and mix", () => {
   const cal = D.modelMonth({ date: "2026-09-03", month: [{ date: "2026-09-01", registered: 10, seen: 9 }, { date: "2026-09-02", registered: 0, seen: 0 }, { date: "2026-09-03", registered: 4, seen: 1 }] });
   assert.equal(cal.cells.filter(Boolean).length, 30);
   assert.equal(cal.cells.filter((c) => c && c.today).length, 1);
-  assert.equal(cal.cells.filter((c) => c && c.closed).length, 1, "a closed day is a past day that had patients");
+  assert.equal(cal.cells.find((c) => c && c.day === 2).level, -1, "a day with nobody gets no heat step");
+  assert.ok(!/closed/i.test(D.monthHtml(cal)), "the calendar claims nothing it has no data for (no 'day closed')");
   assert.equal(cal.cells[0], null, "1 Sep 2026 is a Tuesday: Monday is blank");
   const mix = D.modelMix({ mix: { new: 6, followup: 3, priority: { senior: 2, emergency: 1 } } });
   assert.deepEqual(mix.segs.map((s) => [s.key, s.pct]), [["new", 67], ["followup", 33]]);
   assert.equal(mix.priority[0].key, "senior");
   assert.match(D.mixHtml(mix), /Senior citizen/);
+  assert.match(D.hoursHtml(m, pulse), /Busiest at 10 am, 8 registered/, "the chart's answer is written above it");
 });
 
 test("tasks: only what has a count, each with its existing action", () => {
   const t = D.modelTasks({ pulse, followups: { unbooked: 3, overdue: 1 }, offline: { pending: 0, review: 0 }, unpaid: 2, recallable: 0, refunds: 0 });
   assert.deepEqual(t.map((x) => x.action), ["reconcile", "results", "schedule", "billing"]);
+  assert.deepEqual(t.map((x) => x.title), ["2 visits not in the clinical record", "1 patient back with results", "3 follow-ups to book, 1 overdue", "2 unpaid orders"]);
+  assert.deepEqual(t.filter((x) => x.urgent).map((x) => x.key), ["sync", "followups"], "red is kept for what is failing or overdue");
   assert.match(D.tasksHtml([]), /Nothing needs you right now/);
 });
 

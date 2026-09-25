@@ -348,8 +348,8 @@
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
-<link rel="stylesheet" href="/opd-dashboard.css?v=1">
-<script src="/opd-dashboard.js?v=1"></script>
+<link rel="stylesheet" href="/opd-dashboard.css?v=2">
+<script src="/opd-dashboard.js?v=2"></script>
 <script src="/opd-pulse-model.js?v=2" defer></script>
 <script src="/opd-offline-desk.js?v=2" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
@@ -684,23 +684,27 @@
     search:function(q){ var i=document.getElementById("opdPatientSearch"); if(i){ i.value=q; i.dispatchEvent(new Event("input",{bubbles:true})); } },
     rerender:function(){ if(st.opd) renderNurseStation(st.opd); else if(st.board&&st.board.length) renderBoard(); else loadDash(); },
     toast:toast,
-    isLive:function(){ return !!(LIVE&&LIVE.isLive()); }
+    isLive:function(){ return !!(LIVE&&LIVE.isLive()); },
+    retry:function(){ st.insAt=0; st.moneyAt=0; refresh(); }
   };
   function loadInsights(force){
     if(!dashOn()||!st.orgId||st.orgId==="demo") return;
     if(!force&&st.insAt&&Date.now()-st.insAt<60000) return;
     st.insAt=Date.now();
-    api("opd-insights?orgId="+encodeURIComponent(st.orgId)).then(function(r){ st.insights=r&&r.ok?r:null; dashPaint(); },function(){});
+    // A failed read is said on the cards, never left as "Reading...", and the next refresh tries again.
+    var failed=function(){ st.insights={failed:true}; st.insAt=0; dashPaint(); };
+    api("opd-insights?orgId="+encodeURIComponent(st.orgId)).then(function(r){ if(r&&r.ok){ st.insights=r; dashPaint(); } else failed(); },failed);
   }
-  // Collected today: the day close's money (analytics.view; billing on). null hides the tile; a failed read says so.
+  // Collected today: the day close's money (analytics.view). null hides the tile (billing off); a failed read says so.
   function loadMoney(){
     if(!dashOn()||!st.orgId||st.orgId==="demo"||!can("analytics.view")) return;
     if(st.moneyAt&&Date.now()-st.moneyAt<180000) return;
     st.moneyAt=Date.now();
+    var failed=function(){ st.moneyAt=0; if(st.billingOn){ st.dayMoney={unread:true}; dashPaint(); } };
     api("day-close?orgId="+encodeURIComponent(st.orgId)).then(function(r){
-      if(!r||!r.ok) return;
+      if(!r||!r.ok){ failed(); return; }
       st.dayMoney=r.money?r.money:(r.moneyUnread?{unread:true}:null); st.dayUnbilled=r.unbilled!=null?r.unbilled:null; dashPaint();
-    },function(){});
+    },failed);
   }
   function mountOpdFlow(){
     if(!flowEnabled()||!app.classList.contains("opd-modern")) return;
