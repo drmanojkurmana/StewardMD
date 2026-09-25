@@ -1,7 +1,7 @@
 ---
 tags: [module, ai, imaging]
-status: live for every user (flag ON); on-device + clinical validation still outstanding
-flag: smd_fundx (def:true — ON)
+status: CODE-GATED BETA since 2026-09-25 (owner decision): hidden by default, unlocked per device with a StewardMD access code (SMD_XACCESS); on-device + clinical validation still outstanding
+flag: smd_fundx (def:false; set to 1 on unlock; debug builds auto-enable). Home tile, Settings and the ICU "launch fundx" entry all pass SMD_XACCESS.gate("fundx")
 ---
 # FundX
 

@@ -23,7 +23,7 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_thorex:            { type: "bool", def: true,     query: "thorex",        desc: "ThoreX AI master flag (home card + module). OWNER DECISION 2026-08-26: def:true, so the module is live for every user of this build rather than only on a passcode-unlocked device. GROQ_API_KEY is provisioned (verified against the Pages secret list); the VALIDATION half of the original gate is still outstanding, so the in-module wording that says the read is unvalidated must stay. Set def:false to close it again; ?thorex=0 disables per device." },
+    smd_thorex:            { type: "bool", def: false,    query: "thorex",        desc: "ThoreX AI master flag (home card + module). OWNER DECISION 2026-09-25: def:false again - code-gated beta, unlocked per device with a StewardMD access code (SMD_XACCESS). (2026-08-26 had set def:true for every user.) GROQ_API_KEY is provisioned (verified against the Pages secret list); the VALIDATION half of the original gate is still outstanding, so the in-module wording that says the read is unvalidated must stay. Set def:false to close it again; ?thorex=0 disables per device." },
     smd_thorex_cloud:      { type: "tri",  def: null,      query: null,            desc: "Cloud analysis consent (null = ask once). Off = offline only." },
     smd_thorex_confidence: { type: "bool", def: true,      query: null,            desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_thorex_haptics:    { type: "bool", def: true,      query: null,            desc: "Haptic feedback for taps / result-ready / urgent." },

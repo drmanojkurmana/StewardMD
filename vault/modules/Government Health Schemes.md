@@ -1,7 +1,7 @@
 ---
 tags: [module, data, clinical]
-status: PHASE 1 in progress. **D1 provisioned 2026-09-02** (`stewardmd-govschemes`, id 2ad07897-93b7-424c-b1fc-e3d9643937f5, binding GOVSCHEMES_DB, region APAC) - schema + all 37 jurisdictions + the first real dataset (Dr. NTR Vaidya Seva Trust, Andhra Pradesh, 3713 packages) are LIVE and verified by remote query (exact-code lookup + FTS both working). **2026-09-03: API + UI + flag built and CDP-tested end to end** (fail-safe GET routes at `functions/api/schemes/[[path]].js`, `SMD_GOVSCHEMES` full-screen overlay, `smd_govt_schemes` flag) - see Key files below. Still OFF by default; admin review pass for Phase 1 hasn't run. See [[Decisions]] (2026-09-02).
-flag: smd_govt_schemes - module master, default OFF (data unverified until Phase 1's review pass exists)
+status: LIVE for all users (client flag default ON since 2026-09-04, owner approved). D1 `stewardmd-govschemes` (binding GOVSCHEMES_DB) provisioned 2026-09-02; Dr. NTR Vaidya Seva Trust (AP, 3713 packages) is the first dataset. Server routes (functions/api/schemes) need only the D1 binding, no env flag
+flag: smd_govt_schemes - module master, default ON since 2026-09-04 (?gs=0 hides per device)
 ---
 # Government Health Schemes
 
