@@ -1,12 +1,12 @@
 {
  "schema": 1,
- "version": "0042db7f9c4f",
- "count": 102,
+ "version": "3b0e5e162a47",
+ "count": 108,
  "subjects": [
   {
    "key": "emergency",
    "label": "Emergency and Resuscitation",
-   "count": 5
+   "count": 6
   },
   {
    "key": "critical-care",
@@ -26,7 +26,7 @@
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 12
+   "count": 13
   },
   {
    "key": "gastroenterology",
@@ -49,9 +49,19 @@
    "count": 9
   },
   {
+   "key": "toxicology",
+   "label": "Toxicology and Envenomation",
+   "count": 1
+  },
+  {
    "key": "haematology-oncology",
    "label": "Haematology and Oncology",
    "count": 11
+  },
+  {
+   "key": "rheumatology-dermatology",
+   "label": "Rheumatology and Dermatology",
+   "count": 1
   },
   {
    "key": "obstetrics-gynaecology",
@@ -61,15 +71,44 @@
   {
    "key": "surgery-trauma",
    "label": "Surgery, Trauma and Orthopaedics",
-   "count": 9
+   "count": 10
   },
   {
    "key": "anaesthesia",
    "label": "Anaesthesia and Perioperative",
    "count": 5
+  },
+  {
+   "key": "ophthalmology-ent",
+   "label": "Ophthalmology and ENT",
+   "count": 1
   }
  ],
  "protocols": [
+  {
+   "id": "accidental-hypothermia",
+   "title": "Accidental hypothermia (adult)",
+   "subject": "emergency",
+   "population": "Adults",
+   "aliases": [
+    "hypothermia",
+    "cold exposure",
+    "hypothermic cardiac arrest",
+    "Swiss staging",
+    "rewarming",
+    "ECLS rewarming",
+    "HOPE score",
+    "cold wave",
+    "afterdrop"
+   ],
+   "summary": "Core temperature below 35 degrees C. Handle gently, prevent further heat loss, stage by core temperature or the Swiss system, rewarm actively in moderate to severe cases, and send patients in or at risk of cardiac arrest to an ECPR centre. Below 30 degrees C, limit shocks to 3 and withhold adrenaline.",
+   "sources": [
+    "European Resuscitation Council 2025",
+    "Resuscitation Council UK 2025",
+    "Paal P, et al. Int J Environ Res Public Health 2022"
+   ],
+   "status": "ai_drafted"
+  },
   {
    "id": "acute-heart-failure",
    "title": "Acute (decompensated) heart failure and pulmonary oedema",
@@ -451,6 +490,31 @@
    "sources": [
     "ESC 2025",
     "ESC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "poisoning-general-approach",
+   "title": "Acute poisoning: general approach (adult)",
+   "subject": "toxicology",
+   "population": "Adults",
+   "aliases": [
+    "poisoning",
+    "overdose",
+    "self-poisoning",
+    "unknown ingestion",
+    "toxidrome",
+    "activated charcoal",
+    "gut decontamination",
+    "gastric lavage",
+    "antidote",
+    "poison information centre",
+    "ISCCM poisoning"
+   ],
+   "summary": "Resuscitate with an ABCDE approach and a bedside glucose, identify the toxidrome, give activated charcoal 50 g only within 1 hour to a patient with a protected airway after a significant adsorbable ingestion, give specific antidotes early, and consider enhanced elimination for selected poisons.",
+   "sources": [
+    "ISCCM 2024",
+    "AHA 2023"
    ],
    "status": "ai_drafted"
   },
@@ -1234,6 +1298,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "epistaxis",
+   "title": "Epistaxis (nosebleed) in adults",
+   "subject": "ophthalmology-ent",
+   "population": "Adults",
+   "aliases": [
+    "nosebleed",
+    "nose bleed",
+    "nasal bleeding",
+    "anterior epistaxis",
+    "posterior epistaxis",
+    "Little's area bleed",
+    "nasal packing",
+    "Merocel",
+    "Rapid Rhino",
+    "silver nitrate cautery",
+    "HHT",
+    "AAO-HNS 2020"
+   ],
+   "summary": "Sit the patient up leaning forward and compress the soft lower nose firmly for at least 5 minutes, then clear clots, apply a topical vasoconstrictor, find the bleeding point and cauterise it; pack if the site cannot be seen or bleeding persists (resorbable packs if anticoagulated), and escalate posterior or refractory bleeds to ENT.",
+   "sources": [
+    "AAO-HNS 2020",
+    "The Laryngoscope (Munroe, Sowerby, Chin) 2024",
+    "Indian J Otolaryngol Head Neck Surg 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "febrile-neutropenia",
    "title": "Febrile neutropenia (adult)",
    "subject": "haematology-oncology",
@@ -1300,6 +1391,33 @@
    "sources": [
     "MoHFW, Government of India 2018",
     "American Diabetes Association 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-gout",
+   "title": "Gout: acute flare and urate-lowering therapy",
+   "subject": "rheumatology-dermatology",
+   "population": "Adults",
+   "aliases": [
+    "gout",
+    "gout flare",
+    "acute gouty arthritis",
+    "podagra",
+    "hyperuricaemia",
+    "colchicine",
+    "allopurinol",
+    "febuxostat",
+    "ULT",
+    "urate lowering therapy",
+    "treat to target",
+    "HLA-B*5801",
+    "tophaceous gout"
+   ],
+   "summary": "Treat a flare early with low-dose colchicine, an NSAID or a glucocorticoid (prednisolone 30 to 35 mg daily for 5 days, or intra-articular). When indicated, start allopurinol at 100 mg/day or less (lower in CKD) and titrate to serum urate below 6 mg/dL, with 3 to 6 months of flare prophylaxis.",
+   "sources": [
+    "American College of Rheumatology 2020",
+    "EULAR 2016"
    ],
    "status": "ai_drafted"
   },
@@ -1990,6 +2108,31 @@
    "status": "ai_drafted"
   },
   {
+   "id": "necrotising-soft-tissue-infection",
+   "title": "Necrotising soft tissue infection (necrotising fasciitis)",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "NSTI",
+    "necrotising fasciitis",
+    "necrotizing fasciitis",
+    "nec fasc",
+    "Fournier gangrene",
+    "gas gangrene",
+    "LRINEC",
+    "flesh-eating infection",
+    "streptococcal toxic shock",
+    "myonecrosis"
+   ],
+   "summary": "A clinical diagnosis driven by pain out of proportion and rapid progression: resuscitate, start broad-spectrum antibiotics including clindamycin or linezolid for toxin suppression, and take the patient for urgent radical debridement without waiting for imaging or scores, with planned re-look within 12 to 24 hours.",
+   "sources": [
+    "IDSA 2014",
+    "WSES / SIS-E 2018",
+    "British Orthopaedic Association 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "nste-acs",
    "title": "Non-ST-elevation acute coronary syndrome (NSTEMI and unstable angina)",
    "subject": "cardiology",
@@ -2197,6 +2340,32 @@
    "sources": [
     "American Association for the Surgery of Trauma 2022",
     "KDIGO 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "scrub-typhus",
+   "title": "Scrub typhus",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "aliases": [
+    "Orientia tsutsugamushi",
+    "rickettsial fever",
+    "rickettsiosis",
+    "eschar",
+    "Weil-Felix",
+    "OX-K",
+    "INTREST",
+    "acute undifferentiated fever",
+    "AUF",
+    "doxycycline",
+    "azithromycin"
+   ],
+   "summary": "Suspect in acute undifferentiated fever, especially with an eschar. Treat empirically without waiting for serology: doxycycline 100 mg twice daily for 7 days (azithromycin in pregnancy). For severe disease give IV doxycycline plus IV azithromycin for 7 days (INTREST).",
+   "sources": [
+    "DHR / ICMR 2015",
+    "NEJM (INTREST Trial Group) 2023",
+    "Indian Academy of Pediatrics 2017"
    ],
    "status": "ai_drafted"
   },
