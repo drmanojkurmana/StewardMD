@@ -104,7 +104,9 @@ try{
   await ev(`document.querySelector('.kbp-twin').click()`);
   ok(await until(`document.querySelector('.kbp-reader h1')&&document.querySelector('.kbp-reader h1').textContent===${JSON.stringify(other.title)}`),'the link opens the other guideline version');
   ok(await ev(`!!document.querySelector('.kbp-meta.kbp-b-${other.basis}')`),'the reader names its guideline basis');
+  // Put the list back where step 4 left it, so step 5 can check that Back restores that position.
   await ev(`SB.openRef('protocols')`);await until(`document.querySelectorAll('#kbpList .kbp-row').length>0`);
+  await ev(`document.querySelector('#sbrefBody').scrollTop=${listScroll}`);
   await ev(`document.querySelector('[data-kbp-open="${sepsis.id}"]').click()`);await until(`!!document.querySelector('.kbp-reader h1')`);
  } else console.log('SKIP counterpart link (no paired protocols in the catalogue yet)');
 

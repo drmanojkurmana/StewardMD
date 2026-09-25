@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "88b1e46070cb",
- "count": 172,
+ "version": "016f37d6ffd7",
+ "count": 179,
  "subjects": [
   {
    "key": "emergency",
@@ -21,12 +21,12 @@
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 12
+   "count": 13
   },
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 22
+   "count": 23
   },
   {
    "key": "gastroenterology",
@@ -41,7 +41,7 @@
   {
    "key": "endocrinology",
    "label": "Endocrinology and Diabetes",
-   "count": 8
+   "count": 10
   },
   {
    "key": "neurology",
@@ -71,7 +71,7 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 8
+   "count": 10
   },
   {
    "key": "paediatrics",
@@ -82,6 +82,11 @@
    "key": "surgery-trauma",
    "label": "Surgery, Trauma and Orthopaedics",
    "count": 11
+  },
+  {
+   "key": "urology",
+   "label": "Urology",
+   "count": 1
   },
   {
    "key": "anaesthesia",
@@ -98,7 +103,7 @@
   {
    "key": "international",
    "label": "International",
-   "count": 154
+   "count": 161
   },
   {
    "key": "india",
@@ -1281,6 +1286,39 @@
    "status": "ai_drafted"
   },
   {
+   "id": "benign-prostatic-hyperplasia",
+   "title": "Benign prostatic hyperplasia and male lower urinary tract symptoms",
+   "subject": "urology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "BPH",
+    "BPE",
+    "BPO",
+    "LUTS",
+    "male LUTS",
+    "prostatism",
+    "enlarged prostate",
+    "IPSS",
+    "tamsulosin",
+    "finasteride",
+    "dutasteride",
+    "5-ARI",
+    "acute urinary retention",
+    "AUR",
+    "TWOC",
+    "TURP",
+    "HoLEP"
+   ],
+   "summary": "Assess male LUTS with history, IPSS, urinalysis, DRE, post-void residual and counselled PSA. Offer watchful waiting for mild symptoms, an alpha-blocker for bothersome moderate to severe LUTS, add a 5-ARI when the prostate is enlarged, and refer for surgery for retention, renal impairment, recurrent UTI, stones or haematuria.",
+   "sources": [
+    "American Urological Association (AUA) 2023",
+    "European Association of Urology (EAU) 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "blood-transfusion",
    "title": "Blood transfusion: thresholds, components and acute reactions",
    "subject": "haematology-oncology",
@@ -2398,6 +2436,34 @@
    "status": "ai_drafted"
   },
   {
+   "id": "heavy-menstrual-bleeding",
+   "title": "Heavy menstrual bleeding (HMB)",
+   "subject": "obstetrics-gynaecology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "HMB",
+    "menorrhagia",
+    "heavy periods",
+    "AUB",
+    "abnormal uterine bleeding",
+    "PALM-COEIN",
+    "LNG-IUS for HMB",
+    "Mirena",
+    "tranexamic acid",
+    "fibroids",
+    "adenomyosis",
+    "NG88"
+   ],
+   "summary": "HMB is menstrual loss that interferes with quality of life. Check FBC in all, start drug treatment without investigation when risk of pathology is low, offer an LNG-IUS first line, otherwise tranexamic acid, NSAIDs, combined hormonal contraception or cyclical progestogen; use hysteroscopy or ultrasound when structural or endometrial pathology is suspected.",
+   "sources": [
+    "NICE 2018",
+    "FIGO 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "helicobacter-pylori",
    "title": "Helicobacter pylori infection (adult)",
    "subject": "gastroenterology",
@@ -2707,6 +2773,41 @@
    "sources": [
     "ESC 2024",
     "AHA / ACC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hyperthyroidism-graves",
+   "title": "Hyperthyroidism and Graves' disease (adult)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "Graves disease",
+    "thyrotoxicosis",
+    "overactive thyroid",
+    "hyperthyroid",
+    "toxic goitre",
+    "toxic nodule",
+    "carbimazole",
+    "methimazole",
+    "thiamazole",
+    "propylthiouracil",
+    "PTU",
+    "antithyroid drugs",
+    "radioiodine",
+    "RAI",
+    "TRAb",
+    "Graves orbitopathy",
+    "thyroid eye disease"
+   ],
+   "summary": "Confirm thyrotoxicosis and its cause (TRAb), control symptoms with a beta-blocker, treat Graves' disease with methimazole or carbimazole for 12 to 18 months (PTU before conception and in the first trimester) or with radioiodine or total thyroidectomy, and warn every patient to stop the drug and get an urgent blood count for fever or sore throat.",
+   "sources": [
+    "European Thyroid Association 2018",
+    "American Thyroid Association 2016",
+    "NICE 2019",
+    "EUGOGO 2021"
    ],
    "status": "ai_drafted"
   },
@@ -3144,7 +3245,7 @@
    "subject": "infectious-disease",
    "population": "Adults and children",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "malaria-international",
    "aliases": [
     "P. vivax",
     "P. falciparum",
@@ -3169,6 +3270,39 @@
     "NCVBDC, MoHFW 2013",
     "NCVBDC, MoHFW 2025",
     "WHO 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "malaria-international",
+   "title": "Malaria: uncomplicated and severe (WHO)",
+   "subject": "infectious-disease",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": "malaria",
+   "aliases": [
+    "WHO malaria guidelines 2025",
+    "P. falciparum",
+    "P. vivax",
+    "P. ovale",
+    "P. knowlesi",
+    "severe malaria",
+    "cerebral malaria",
+    "ACT",
+    "artemether lumefantrine",
+    "artesunate",
+    "primaquine",
+    "tafenoquine",
+    "G6PD",
+    "radical cure",
+    "imported malaria"
+   ],
+   "summary": "Confirm every case by microscopy or RDT. Uncomplicated falciparum: a 3-day ACT (artemether-lumefantrine in the first trimester), plus single-dose primaquine 0.25 mg/kg in low-transmission areas. Vivax and ovale: chloroquine or ACT plus G6PD-guided primaquine or tafenoquine. Severe malaria: IV artesunate 2.4 mg/kg (3 mg/kg under 20 kg) for at least 24 hours, then a full ACT.",
+   "sources": [
+    "WHO 2025",
+    "CDC 2026",
+    "CDC 2026",
+    "CDC 2025"
    ],
    "status": "ai_drafted"
   },
@@ -3555,6 +3689,35 @@
    "status": "ai_drafted"
   },
   {
+   "id": "obstructive-sleep-apnoea",
+   "title": "Obstructive sleep apnoea (adult)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "OSA",
+    "OSAHS",
+    "sleep apnea",
+    "obstructive sleep apnea",
+    "snoring",
+    "CPAP",
+    "APAP",
+    "PAP therapy",
+    "STOP-Bang",
+    "AHI",
+    "polysomnography",
+    "home sleep apnoea test",
+    "HSAT"
+   ],
+   "summary": "Use STOP-Bang to triage but confirm OSA with polysomnography or a home sleep apnoea test; treat OSA with sleepiness, impaired quality of life or hypertension with CPAP or APAP plus education and early adherence support, advise against drowsy driving, and flag suspected OSA before surgery (AASM).",
+   "sources": [
+    "American Academy of Sleep Medicine 2017",
+    "American Academy of Sleep Medicine 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "open-fracture",
    "title": "Open fractures: emergency management",
    "subject": "surgery-trauma",
@@ -3868,6 +4031,34 @@
    "status": "ai_drafted"
   },
   {
+   "id": "hypothyroidism",
+   "title": "Primary hypothyroidism (adult)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "hypothyroid",
+    "underactive thyroid",
+    "Hashimoto thyroiditis",
+    "autoimmune thyroiditis",
+    "subclinical hypothyroidism",
+    "SCH",
+    "levothyroxine",
+    "LT4",
+    "thyroxine dose",
+    "raised TSH",
+    "hypothyroidism in pregnancy"
+   ],
+   "summary": "Confirm with TSH then FT4, start levothyroxine 1.6 mcg/kg/day in adults under 65 without heart disease (25 to 50 mcg/day if older or cardiac), keep TSH within the reference range, recheck 4 to 6 weeks after each dose change, and raise the dose 20 to 30% as soon as pregnancy is confirmed.",
+   "sources": [
+    "American Thyroid Association 2014",
+    "NICE 2019",
+    "American Thyroid Association 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "pulmonary-hypertension",
    "title": "Pulmonary hypertension: recognition, referral and basic management",
    "subject": "respiratory",
@@ -3976,6 +4167,36 @@
    "sources": [
     "American Association for the Surgery of Trauma 2022",
     "KDIGO 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "routine-antenatal-care",
+   "title": "Routine antenatal care (uncomplicated pregnancy)",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "ANC",
+    "antenatal care",
+    "prenatal care",
+    "booking visit",
+    "antenatal check-up",
+    "ANC contacts",
+    "8 contacts",
+    "pregnancy supplements",
+    "folic acid pregnancy",
+    "anomaly scan",
+    "aspirin for pre-eclampsia",
+    "NG201"
+   ],
+   "summary": "WHO recommends at least 8 antenatal contacts. Book by 10 weeks (NICE), give folic acid, iron and (where intake is low) calcium, screen for anaemia, infections, blood group, bacteriuria and gestational diabetes risk, scan before 24 weeks, give aspirin 75 to 150 mg from 12 weeks if at pre-eclampsia risk, and refer promptly for red flags.",
+   "sources": [
+    "WHO 2016",
+    "NICE 2021",
+    "NICE 2019",
+    "NICE 2025"
    ],
    "status": "ai_drafted"
   },
