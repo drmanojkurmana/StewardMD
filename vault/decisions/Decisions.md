@@ -9248,3 +9248,36 @@ is worse than one that admits it. So: cities are bounded public geography and ar
 institutions are curated and are NOT claimed to be exhaustive; free text is a first-class answer
 that is always offered; and what a doctor types is remembered on that device so the next colleague
 at the same hospital finds it. That last part also shows the owner what the curated list is missing.
+
+## 2026-09-25 — The India directory was in the build all along; three faults kept it from the app
+Owner: *"we already have whole india college and hospital list, why isn't it universally available
+in app."* They were right. `hospitals-in.js` has carried 2,405 curated institutions for a long time.
+Three separate faults meant only two screens could ever reach it, and one of those was broken too.
+
+**1. A GLOBAL NAME COLLISION, and it broke BOTH modules.** `hospital-registry.js` (the registry of
+hospitals this doctor has CONNECTED: `list/get/register/setActive`) and `hospitals-in.js` (the
+DIRECTORY of institutions in India: `all/search/byState/states`) both assigned
+`window.SMD_HOSPITALS`. The registry loads on every page; the directory is lazy. Proven in the
+running app:
+  - before the directory loads, `SMD_HOSPITALS.search` is `undefined`, so every picker found nothing;
+  - the moment it loads, `SMD_HOSPITALS.setActive` **disappears**, so `ghis-ward.js:334` silently
+    stopped remembering the doctor's active hospital.
+Each module broke the other, depending only on timing. The directory now owns
+`SMD_HOSPITAL_DIRECTORY` and claims the legacy name only when nothing else holds it.
+
+**2. `smdLazy` IS NOT DEFINED ON THE PAGE.** `lazy-load.js` is not among the scripts `index.html`
+loads, yet `home.js`'s hospital picker and `profile-setup.js` both called the bare global. Both
+threw ReferenceError inside their click handlers, so the picker never opened. This is the same
+root cause as the "can't see and can't search college" report. **Never reach for a global the page
+does not definitely define** — both call sites now load the script themselves.
+
+**3. NO UNIVERSAL ENTRY POINT.** Reaching the list meant knowing three private details: which file
+to lazy-load, which global it lands on, and that a different module owns that name. So only the two
+screens whose authors happened to know all three could use it. `SMD_INSTITUTIONS.ensure()` is now
+the one line any surface calls; `institutions-in.js` is tiny and loads with the app, and it pulls
+the heavy data in itself.
+
+**The lesson worth keeping:** "we already have the data" and "the app can use the data" are
+different claims. A dataset reachable only through undocumented private knowledge is, from every
+other screen's point of view, not there at all. The test that matters is not "does the file exist"
+but "can a screen that knows nothing get it in one call".
