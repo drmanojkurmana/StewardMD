@@ -9437,6 +9437,7 @@
     "site.admin.telehealth.intro": "Cuando se guarda un servidor de video, la recepción puede agendar una visita por video y registra quién la aceptó. La llamada se realiza en el servidor indicado aquí. Cada cambio se registra con su motivo.",
     "site.admin.telehealth.on": "Las visitas por video están activadas.",
     "site.admin.telehealth.off": "Las visitas por video están desactivadas.",
+    "site.admin.telehealth.comingSoon": "Próximamente. Las consultas por video aún no están disponibles.",
     "site.admin.telehealth.saved": "Servidor de video guardado",
     "site.admin.telehealth.publicWarn": "Este es un servicio de video público. Las visitas por video pasan entonces por un servidor que este hospital no administra. Se recomienda un servidor de video administrado por este hospital.",
     "site.admin.telehealth.address": "Dirección del servidor de video (https://)",

@@ -86,6 +86,11 @@ filter/focus retention, 320-1440px, dark/reduced-motion and fallback. The existi
 vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both browser suites.
 
 ## Telehealth: video visits (2026-09-25, draft PR, branch worktree-agent-ab0e68a15cab7320e)
+**COMING SOON (owner, 2026-09-25).** Ships switched off for every hospital: `telehealthSettings(org, env)` reads off
+with `comingSoon: true` unless the deployment sets `TELEHEALTH_READY=1`, so no screen offers video, every tele route
+refuses (`video_off`), `POST /org/telehealth-settings` refuses (`coming_soon`), and Admin > Hospital shows a
+"Coming soon" card with no form. To release: pick the video server, set `TELEHEALTH_READY=1` on Pages, then save
+the server in Admin.
 Off by default. A WardSynQ hospital turns it on by saving `org.wardsynq.telehealth.baseUrl` (https,
 Jitsi-compatible) through `GET/POST /api/queue/org/telehealth-settings` (staff.admin, reason, audited,
 read back; `/org/update` refuses `wardsynq.telehealth`). `functions/_telehealth.js` holds the pure rules:

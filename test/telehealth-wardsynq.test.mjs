@@ -11,7 +11,8 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { docs, seedHospital, as, admittedPatient, ORG, DOCTOR } from "./_wardsynq-alert-harness.mjs";
+import { docs, seedHospital, as, admittedPatient, ORG, DOCTOR, ENV } from "./_wardsynq-alert-harness.mjs";
+ENV.TELEHEALTH_READY = "1";   // these tests are the deployment with video released (see telehealth-routes "coming soon")
 const { SCOPES } = await import("../functions/_wardsynq/consent.js");
 const { CARE_PURPOSES } = await import("../functions/_wardsynq/privacy-law.js");
 const { encounterFromTicket, sameEncounter } = await import("../functions/_wardsynq/migrate-encounter.js");

@@ -9689,6 +9689,7 @@
     "site.admin.telehealth.intro": "When a video server is saved, the front desk can book a video visit and records who agreed to it. The call runs on the server named here. Every change is recorded with its reason.",
     "site.admin.telehealth.on": "Video visits are on.",
     "site.admin.telehealth.off": "Video visits are off.",
+    "site.admin.telehealth.comingSoon": "Coming soon. Video consultations are not available yet.",
     "site.admin.telehealth.saved": "Saved video server",
     "site.admin.telehealth.publicWarn": "This is a public video service. Video visits then pass through a server this hospital does not run. A video server run by this hospital is recommended.",
     "site.admin.telehealth.address": "Video server address (https://)",

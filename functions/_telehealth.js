@@ -36,8 +36,13 @@ export function providerFrom(raw) {
   return { ok: true, baseUrl, publicServer: PUBLIC_HOSTS.includes(u.hostname.toLowerCase()) };
 }
 
+/** COMING SOON (owner, 2026-09-25). Video visits ship switched off for every hospital until the deployment sets
+ * TELEHEALTH_READY=1: no screen offers them, every route refuses, and Admin shows "coming soon" instead of the form. */
+export function telehealthReady(env) { return !!env && String(env.TELEHEALTH_READY || "") === "1"; }
+
 /** PURE. The hospital's video settings as the screens read them. A saved value that no longer validates reads as off. */
-export function telehealthSettings(org) {
+export function telehealthSettings(org, env) {
+  if (!telehealthReady(env)) return { on: false, baseUrl: "", publicServer: false, comingSoon: true };
   const saved = org && org.wardsynq && org.wardsynq.telehealth;
   const p = providerFrom(saved && saved.baseUrl);
   if (!p.ok || !p.baseUrl) return { on: false, baseUrl: "", publicServer: false };

@@ -26,11 +26,21 @@ test("providerFrom: empty turns video off; only a plain https address is accepte
   assert.equal(T.providerFrom("https://MEET.JIT.SI").publicServer, true);
 });
 
+test("telehealthSettings: coming soon (off, whatever is saved) until the deployment sets TELEHEALTH_READY=1", () => {
+  const saved = { wardsynq: { telehealth: { baseUrl: "https://video.example.org" } } };
+  const soon = { on: false, baseUrl: "", publicServer: false, comingSoon: true };
+  assert.deepEqual(T.telehealthSettings(saved), soon);
+  assert.deepEqual(T.telehealthSettings(saved, {}), soon);
+  assert.deepEqual(T.telehealthSettings(saved, { TELEHEALTH_READY: "true" }), soon, "only the exact value 1 turns it on");
+  assert.equal(T.telehealthSettings(saved, { TELEHEALTH_READY: "1" }).on, true);
+});
+
 test("telehealthSettings: off by default and off when the saved value no longer validates", () => {
-  assert.deepEqual(T.telehealthSettings(null), { on: false, baseUrl: "", publicServer: false });
-  assert.deepEqual(T.telehealthSettings({}), { on: false, baseUrl: "", publicServer: false });
-  assert.deepEqual(T.telehealthSettings({ wardsynq: { telehealth: { baseUrl: "http://insecure.example.org" } } }), { on: false, baseUrl: "", publicServer: false });
-  assert.deepEqual(T.telehealthSettings({ wardsynq: { telehealth: { baseUrl: "https://meet.jit.si" } } }), { on: true, baseUrl: "https://meet.jit.si", publicServer: true });
+  const E = { TELEHEALTH_READY: "1" };
+  assert.deepEqual(T.telehealthSettings(null, E), { on: false, baseUrl: "", publicServer: false });
+  assert.deepEqual(T.telehealthSettings({}, E), { on: false, baseUrl: "", publicServer: false });
+  assert.deepEqual(T.telehealthSettings({ wardsynq: { telehealth: { baseUrl: "http://insecure.example.org" } } }, E), { on: false, baseUrl: "", publicServer: false });
+  assert.deepEqual(T.telehealthSettings({ wardsynq: { telehealth: { baseUrl: "https://meet.jit.si" } } }, E), { on: true, baseUrl: "https://meet.jit.si", publicServer: true });
 });
 
 test("room names: wsq- plus 128 random bits, never repeated, nothing else in them", () => {

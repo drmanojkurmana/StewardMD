@@ -1272,6 +1272,10 @@
     return c.api("/org/telehealth-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
       if (!r || !r.ok || !r.settings) { failed(); return; }
       var s = r.settings;
+      if (s.comingSoon) {
+        host.innerHTML = '<div class="card">' + title + '<div class="msg note">' + esc(T(c, "site.admin.telehealth.comingSoon", "Coming soon. Video consultations are not available yet.")) + "</div></div>";
+        return;
+      }
       host.innerHTML = '<div class="card">' + title +
         '<p class="quiet">' + esc(T(c, "site.admin.telehealth.intro", "When a video server is saved, the front desk can book a video visit and records who agreed to it. The call runs on the server named here. Every change is recorded with its reason.")) + "</p>" +
         '<div class="msg ' + (s.on ? "ok" : "note") + '">' + esc(s.on ? T(c, "site.admin.telehealth.on", "Video visits are on.") : T(c, "site.admin.telehealth.off", "Video visits are off.")) + "</div>" +

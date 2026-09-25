@@ -11,7 +11,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { docs, api, seed, org, OWNER_A, HR_A, NURSE_A, DAY } from "./helpers/opd-router-harness.mjs";
+import { docs, api, seed, org, ENV, OWNER_A, HR_A, NURSE_A, DAY } from "./helpers/opd-router-harness.mjs";
 
 const SERVER = "https://video.example.org";
 const events = () => [...docs.entries()].filter(([k]) => k.startsWith("q_events/")).map(([, d]) => d.fields);
@@ -28,9 +28,27 @@ async function oneTicket() {
   return { sid: sess.session.id, tid: t.ticket.id };
 }
 const CONSENT = { givenBy: "patient", agreed: true };
+/* The tests below are the deployment with video released (TELEHEALTH_READY=1); the first one is the shipped default. */
+const videoReleased = () => { ENV.TELEHEALTH_READY = "1"; };
+
+test("coming soon: without TELEHEALTH_READY a saved server still reads off, the settings say so, and nothing can turn it on", async () => {
+  seed(); withVideo(SERVER, "wardsynq");
+  const { sid, tid } = await oneTicket();
+  assert.equal((await api(`/opd-board?orgId=org-a&date=${DAY}`, "GET", null, OWNER_A)).telehealth, false);
+  assert.equal((await api("/whoami?orgId=org-a", "GET", null, OWNER_A)).telehealth, false);
+  const r = await api("/tele/enable", "POST", { sessionId: sid, ticketId: tid, teleConsent: CONSENT }, OWNER_A);
+  assert.equal(r.__status, 409);
+  assert.equal(r.error, "video_off");
+  const get = await api("/org/telehealth-settings?orgId=org-a", "GET", null, OWNER_A);
+  assert.deepEqual(get.settings, { on: false, baseUrl: "", publicServer: false, comingSoon: true });
+  const post = await api("/org/telehealth-settings", "POST", { orgId: "org-a", settings: { baseUrl: "https://other.example.org" }, reason: "try" }, HR_A);
+  assert.equal(post.__status, 409);
+  assert.equal(post.error, "coming_soon");
+  assert.ok(!events().some((e) => e.action === "org:telehealth_settings"), "nothing audited, nothing saved");
+});
 
 test("video off: every video route refuses with 409 and nothing is written", async () => {
-  seed();
+  seed(); videoReleased();
   const { sid, tid } = await oneTicket();
   for (const sub of ["enable", "start", "send-link"]) {
     const r = await api("/tele/" + sub, "POST", { sessionId: sid, ticketId: tid, teleConsent: CONSENT }, OWNER_A);
@@ -46,7 +64,7 @@ test("video off: every video route refuses with 409 and nothing is written", asy
 });
 
 test("enable: consent required; with it the ticket gets a room, the consent and one tele_consent row; the view hides the room", async () => {
-  seed(); withVideo(SERVER);
+  seed(); videoReleased(); withVideo(SERVER);
   const { sid, tid } = await oneTicket();
   const none = await api("/tele/enable", "POST", { sessionId: sid, ticketId: tid }, OWNER_A);
   assert.equal(none.__status, 422, JSON.stringify(none));
@@ -75,7 +93,7 @@ test("enable: consent required; with it the ticket gets a room, the consent and 
 });
 
 test("patient side: wait page before start, room only in consultation, link dead after the visit", async () => {
-  seed(); withVideo(SERVER);
+  seed(); videoReleased(); withVideo(SERVER);
   const { sid, tid } = await oneTicket();
   const link = await api(`/link?sessionId=${sid}&ticketId=${tid}`, "GET", null, OWNER_A);
   const tk = link.token;
@@ -120,7 +138,7 @@ test("patient side: wait page before start, room only in consultation, link dead
 });
 
 test("video switched off after booking: the patient gets no room", async () => {
-  seed(); withVideo(SERVER);
+  seed(); videoReleased(); withVideo(SERVER);
   const { sid, tid } = await oneTicket();
   const tk = (await api(`/link?sessionId=${sid}&ticketId=${tid}`, "GET", null, OWNER_A)).token;
   await api("/tele/enable", "POST", { sessionId: sid, ticketId: tid, teleConsent: CONSENT }, OWNER_A);
@@ -131,7 +149,7 @@ test("video switched off after booking: the patient gets no room", async () => {
 });
 
 test("send-link: not a video visit is refused; the message carries the waiting page link, no name", async () => {
-  seed(); withVideo(SERVER);
+  seed(); videoReleased(); withVideo(SERVER);
   const { sid, tid } = await oneTicket();
   const refused = await api("/tele/send-link", "POST", { sessionId: sid, ticketId: tid }, OWNER_A);
   assert.equal(refused.__status, 409);
@@ -144,7 +162,7 @@ test("send-link: not a video visit is refused; the message carries the waiting p
 });
 
 test("settings: staff.admin only, WardSynQ hospitals, https, a reason, audited, read back; public server flagged; /org/update refuses it", async () => {
-  seed();
+  seed(); videoReleased();
   const native = await api("/org/telehealth-settings?orgId=org-a", "GET", null, OWNER_A);
   assert.equal(native.__status, 409);
   assert.equal(native.error, "not_a_wardsynq_hospital");

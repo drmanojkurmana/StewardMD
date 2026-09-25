@@ -65,6 +65,12 @@ async function admin(lang, answer, post) {
   return { site, host, sent, toasts, el: (id) => site.doc.getElementById(id) };
 }
 
+test("Admin > Hospital video card: coming soon shows the words and no form", async () => {
+  const a = await admin("en", { ok: true, settings: { on: false, baseUrl: "", publicServer: false, comingSoon: true } });
+  assert.match(a.host.innerHTML, /Coming soon\. Video consultations are not available yet\./);
+  for (const id of ["admTeleUrl", "admTeleReason", "admTeleSave", "admTeleOff"]) assert.doesNotMatch(a.host.innerHTML, new RegExp('id="' + id + '"'), id);
+});
+
 test("Admin > Hospital video card: reads, saves with a reason, turns off with an empty address", async () => {
   const a = await admin("en", { ok: true, settings: { on: true, baseUrl: "https://video.example.org", publicServer: false } });
   assert.equal(a.sent[0][0], "/org/telehealth-settings?orgId=o1");
@@ -129,7 +135,7 @@ test("every word on the video card and the video booking form is translated", as
   assert.match(read("wardsynq/site/pages/admin.js"), /<div id="intakeCard"><\/div><div id="teleCard"><\/div>/, "the card is on Admin > Hospital");
   const en = (() => { const w = {}; vm.runInNewContext(read("wardsynq/site/i18n.js"), { window: w }); return w.WSQI18n._catalogs.en; })();
   const keys = Object.keys(en).filter((k) => k.startsWith("ward.tele-") || k.startsWith("site.admin.telehealth."));
-  assert.equal(keys.length, 35);
+  assert.equal(keys.length, 36);
   for (const code of ["bn", "es", "hi", "kn", "ml", "mr", "ta", "te"]) {
     const I = { register(c, n, cat) { I.cat = cat; } };
     vm.runInNewContext(read("wardsynq/site/i18n/" + code + ".js"), { window: { WSQI18n: I } });
