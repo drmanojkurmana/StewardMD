@@ -11,6 +11,7 @@
     { key: "calcs",    label: "Calculators",  icon: "calc",     weight: 0 },
     { key: "drugs",    label: "Drugs",        icon: "pills",    weight: 0 },
     { key: "kb",       label: "Diseases",     icon: "book",     weight: -5 },
+    { key: "proto",    label: "Protocols",    icon: "list",     weight: 0 },
     { key: "syn",      label: "Syndromes",    icon: "microbe",  weight: 0 },
     { key: "icd",      label: "ICD codes",    icon: "list",     weight: -2 },
     { key: "settings", label: "Settings",     icon: "settings", weight: 0 }
@@ -161,6 +162,17 @@
       return local;
     }, function () { return local; });
   }
+  // Knowledge Library clinical protocols (kb-protocols.js). The catalogue loads once on first use;
+  // aliases ride in kw so "DKA" or "STEMI" finds the protocol. Hidden when smd_kb_protocols is off.
+  function protoProvider(q) {
+    var P = G.SMD_KBPROTO;
+    try { if (!P || !P.loadIndex || (G.SMD_KBPROTO_FLAGS && !G.SMD_KBPROTO_FLAGS.on())) return Promise.resolve([]); } catch (e) { return Promise.resolve([]); }
+    return P.loadIndex().then(function () {
+      return P.search(q).slice(0, 12).map(function (p) {
+        return { cat: "proto", id: p.id, title: p.title, sub: P.subjectLabel(p.subject) + " \u00b7 " + p.population, kw: (p.aliases || []).join(" "), open: function () { P.open({ id: p.id }); } };
+      });
+    }, function () { return []; });
+  }
   function icdProvider(q) {
     if (!G.SMD_ICD || !G.SMD_ICD.localSearch) return Promise.resolve([]);
     return G.SMD_ICD.localSearch(q, 10).then(function (rows) {
@@ -171,6 +183,7 @@
     return [
       { cat: "tools", items: toolsProvider }, { cat: "calcs", items: calcsProvider },
       { cat: "drugs", query: drugsProvider }, { cat: "kb", query: kbProvider },
+      { cat: "proto", query: protoProvider },
       { cat: "syn", items: synProvider }, { cat: "icd", query: icdProvider },
       { cat: "settings", items: settingsProvider }
     ];

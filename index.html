@@ -2211,9 +2211,15 @@ window.openExternal = function (u) {
 <script src="/id-token.js?v=idtok2" defer></script>
 <link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2">
+<link rel="stylesheet" href="/kb-protocols.css?v=kbp1">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
 <script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA" defer></script>
+<!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
+     Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
+     step with the content hash by scripts/build-clinical-protocols.mjs. -->
+<script src="/kb-protocols-flags.js?v=kbpf1" defer></script>
+<script src="/kb-protocols.js?v=kbp-f1a8098de82d" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2279,7 +2285,7 @@ window.openExternal = function (u) {
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
 <script src="/icd.js?v=hardlocal3-us1" defer></script>
 <link rel="stylesheet" href="/search.css?v=us2">
-<script src="/search.js?v=us2-nodash1" defer></script>
+<script src="/search.js?v=us2-nodash1-kbproto1" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
 <script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>

@@ -9209,3 +9209,17 @@ takes the password once per app session and, while unlocked, backs up on change 
 floor; closing the app re-locks it. The backup holds only what exists nowhere else (drafts, queue,
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
+
+## 2026-09-25 - General clinical protocols live in the Knowledge Library, not the OPD Protocol tab
+Owner asked for protocols for every subject (sepsis and the rest), noting the OPD Protocol tab only
+has oncology. The OPD tab stays oncology-only: it ASSIGNS a dosed chemotherapy plan to a patient
+record (`smd_onco_protocols`), and mixing reference protocols into it would blur "reference" with
+"order". General protocols are reference content in a fifth Knowledge Library tab ([[Clinical
+Protocols]]), reachable from Universal Search and deep-linkable (`SMD_KBPROTO.open({id})`) if the OPD
+later wants a read-only link.
+Content is data (one JSON per protocol) with a validator that makes the unsafe states unrepresentable:
+no protocol without a cited https source, no "reviewed"/"approved" without a named reviewer, no em or
+en dash, no unknown keys. Everything shipped is `ai_drafted` (AI-assisted, web-researched against the
+cited guideline) and every screen says it is pending clinical review; that label changes only when a
+clinician reviews a protocol and the file names them. Flag default ON because the tab is additive and
+honest about its status; `?kbproto=0` removes it.

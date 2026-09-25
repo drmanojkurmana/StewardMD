@@ -150,11 +150,17 @@ leaving it present:
 | `smd_fundx_spatial_ar` | OFF | **INCOMPLETE.** True 3D AR corridor, iOS + ARKit only. |
 | `smd_fundx_telemetry` | OFF | **PRIVACY DEFAULT.** Acquisition telemetry. No PHI, but off unless wanted. |
 
-### Government Health Schemes  <sub>0 ON · 1 OFF</sub>
+### Government Health Schemes  <sub>1 ON · 0 OFF</sub>
 
 | Flag | Def | Why |
 |---|---|---|
-| `smd_govt_schemes` | OFF | **OWNER DECISION.** Government Health Schemes module master flag. DEFAULT OFF on purpose: scheme rates/codes are unverified government reference data until an admin review pass exists (vault/decisions 2026-09-02). Turn on per device with `?gs=1`. |
+| `smd_govt_schemes` | **ON** | Government Health Schemes (Scheme Search) master flag. DEFAULT ON since 2026-09-04 (owner approved going live, per `govschemes-flags.js`; this row said OFF until 2026-09-25). Force off per device with `?gs=0`. |
+
+### Knowledge Library Protocols  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-25)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_kb_protocols` | **ON** | The Protocols tab in the Knowledge Library + the Protocols category in Universal Search. Additive: off removes the tab, nothing else changes. Content is `ai_drafted` pending clinical review and every screen says so. Force off per device with `?kbproto=0`. See [[Clinical Protocols]]. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 

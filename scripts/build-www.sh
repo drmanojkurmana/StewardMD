@@ -123,6 +123,9 @@ done
 # Oncology protocol templates (static, plain JSON - same trust tier as kb/treatments, NOT the
 # encrypted Pro KB). Fetched directly by the client, no kb-loader.js change (Phase 3).
 [ -d kb/protocols ] && cp -R kb/protocols/. "$WWW/kb/protocols/"
+# Knowledge Library clinical protocols (kb-protocols.js): the catalogue + one JSON per protocol, plain
+# static content in the same trust tier. Built/validated by scripts/build-clinical-protocols.mjs.
+[ -d kb/clinical-protocols ] && mkdir -p "$WWW/kb/clinical-protocols" && cp kb/clinical-protocols/*.json "$WWW/kb/clinical-protocols/"
 # ONCOTREE navigator graphs (static JSON; same trust tier as kb/protocols).
 [ -d kb/oncotree ] && mkdir -p "$WWW/kb/oncotree" && cp -R kb/oncotree/. "$WWW/kb/oncotree/"
 # Oncology reference catalogs: AJCC/TNM staging index, CTCAE catalog, irAE (IO toxicity) catalog -
