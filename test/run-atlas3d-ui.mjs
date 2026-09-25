@@ -324,6 +324,29 @@ try {
   await ev(`ATLAS.openAt('ct-live-torso-axial','kidney',5); return 1;`);
   ok(await until(`var sh=document.getElementById('atlasSheet'); return ATLAS._state.locked==='kidney' && !!sh && sh.classList.contains('on')`), "openAt still works with the flag off");
   ok(await ev(`return !document.querySelector('#atlasSheet [data-atlas-act="3d"]');`) === true, "flag off: no 3D pill on the slice sheet");
+  // ---- a device that cached a wrong-size chunk (the 2026-09-06 R2 overwrite) recovers ----
+  // Geometry is pointed at the R2 base so the on-device cache is used, R2 URLs are served from this
+  // server, and one living chunk's cache entry holds another chunk's valid gzip (wrong size).
+  ok(await attach(BASE + "?atlas3d=1"), "fresh page for the poisoned-cache check");
+  await clearIntro();
+  await ev(`var R2='https://models.stewardmd.in/atlas3d', d=null; localStorage.setItem('smd_atlas3d_hint','1'); localStorage.setItem('smd_atlas3d_base', R2);
+    window.__real = window.fetch; window.__net = {};
+    window.fetch = function(u, o){ var s = String(u && u.url || u); if (s.indexOf(R2) === 0) { var f = s.slice(R2.length); window.__net[f] = (window.__net[f] || 0) + 1; return window.__real('/atlas/3d' + f, o); } return window.__real.apply(this, arguments); };
+    window.__real('/atlas/3d/manifest.json').then(function(r){ return r.json(); }).then(function(m){
+      var live = m.chunks.filter(function(c){ return /\\/live-/.test(c.url); }), bad = live[0], other = live[1];
+      window.__bad = bad.url.split('/').pop();
+      return window.__real(other.url).then(function(r){ return r.arrayBuffer(); }).then(function(b){
+        return caches.open('atlas3d-v1').then(function(c){ return c.put(R2 + '/' + window.__bad, new Response(b)); });
+      });
+    }).then(function(){ window.__poisoned = true; });
+    return 1;`);
+  ok(await until(`return window.__poisoned === true`, 30000), "a wrong-size (valid gzip) chunk is planted in the 3D cache: " + await ev(`return window.__bad`));
+  await ev(`ATLAS3D.open(); return 1;`);
+  await until(`return !!ATLAS3D._state.gl`, 30000);
+  await ev(`ATLAS3D.setSource('live'); return 1;`);
+  ok(await until(`var s=ATLAS3D._state; return s.src==='live' && s.loaded>5 && Object.keys(s.loading).length===0`, 120000), "living body loads");
+  ok(await ev(`var s=ATLAS3D._state, id=s.data.chunks.filter(function(c){ return c.url.split('/').pop()===window.__bad; })[0].id; return !!s.chunks[id] && !s.failed[id] && Object.keys(s.failed).length===0;`) === true, "the poisoned chunk was purged and refetched: nothing failed (network fetches of it: " + await ev(`return window.__net['/' + window.__bad] || 0`) + ")");
+  await ev(`ATLAS3D.close(); localStorage.removeItem('smd_atlas3d_base'); window.fetch = window.__real; return 1;`);
   // ---- GPU context loss and restore (WEBGL_lose_context), last and in a fresh page ----
   ok(await attach(BASE + "?atlas3d=1"), "fresh page for the context-loss checks");
   await clearIntro();

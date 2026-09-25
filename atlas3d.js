@@ -386,22 +386,6 @@
       return out;
     });
   }
-  function fetchChunk(c) {
-    var bases = st.base != null ? [st.base] : dataBases(), i = 0;
-    function attempt() {
-      if (i >= bases.length) return Promise.reject(new Error("The 3D geometry is not published on this server yet."));
-      var base = bases[i++];
-      return G.fetch(dataUrl(c.url, base)).then(function (r) {
-        if (!r || !r.ok) throw new Error("http " + (r && r.status));
-        return r.arrayBuffer();
-      }).then(function (buf) {
-        if (!looksLikeChunk(buf, c.bytes)) throw new Error("not a chunk");
-        st.base = base;
-        return buf;
-      }).catch(function () { return attempt(); });
-    }
-    return attempt();
-  }
   // The active chunk set: LOD chunks stand in for the reference body's full chunks on phones;
   // living-CT chunks (src 1) have one level only. Chunks are keyed by id so sets can coexist.
   function chunkSet() {
@@ -445,7 +429,18 @@
   function loadChunk(c) {
     var key = c.id, mine = session;
     if (st.chunks[key] || st.loading[key]) return st.loading[key] || Promise.resolve();
-    st.loading[key] = fetchChunk(c).then(function (buf) { return inflate(buf, c.bytes); }).then(function (raw) {
+    st.loading[key] = fetchChunk(c).then(function (buf) {
+      return inflate(buf, c.bytes).catch(function (e) {
+        // Valid gzip that decompresses to the wrong size is stale bytes the device cached (R2 once
+        // served re-meshed chunks under old names, 2026-09-06): purge the 3D cache and fetch once
+        // more from the network, or every later open re-reads the same bad copy.
+        var mc = G.SMD_THOREX_MODEL_CACHE;
+        if ((e && e.fatal) || !mc || !mc.clearModels) throw e;
+        return Promise.resolve(mc.clearModels({ cacheName: CACHE_NAME }))
+          .then(function () { return fetchChunk(c); })
+          .then(function (again) { return inflate(again, c.bytes); });
+      });
+    }).then(function (raw) {
       if (mine !== session) return;
       delete st.loading[key];
       // A chunk that lands while the GL context is lost is dropped; the restore re-uploads it

@@ -15,7 +15,7 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **Hosting:** geometry is served from the R2 bucket `stewardmd-models` under `atlas3d/` at `https://models.stewardmd.in/atlas3d/<file>` (`R2_BASE` in `atlas3d.js`; `dataBases()` tries same-origin first on the web, R2 only natively). Upload with `npx wrangler r2 object put stewardmd-models/atlas3d/<file> --file atlas/3d/<file> --content-type application/gzip --remote` for every `*.bin.gz` after a pipeline run. The files are ALSO committed (repo = source of truth; Pages serves them same-origin on the web).
 - **Pipeline:** `atlas-pipeline/bp3d-map.json` (HAND-CURATED canonical ↔ FMA mapping) → `atlas-pipeline/bp3d_import.py --src <human-atlas checkout> --write` → `atlas-pipeline/ontology.py --write` (merges `bp3d` + the `3D` modality into `ontology.json`). Living body: `atlas-pipeline/live3d.py --work atlas-pipeline/work/tsd --out <dir>` (marching cubes on the masks + slice-plane registration; needs the `.venv` with nibabel/scipy/skimage and the downloaded s0108 volumes) → `node atlas-pipeline/pack3d.mjs live --in <dir> --out atlas/3d --base 2227` (meshoptimizer simplify + pack) → `bp3d_import.py --write` picks up `live.json`. LOD: `node atlas-pipeline/pack3d.mjs lod --out atlas/3d` (writes `lod.json` + `*.lo.bin.gz`), then `bp3d_import.py --write`.
 - **Provenance / licence:** `HUMAN_ATLAS_PROVENANCE.md` (repo root) — upstream commit, checksums, rejects, modifications, the verbatim CC BY attribution
-- **Tests:** `test/atlas3d-data.test.mjs` (57) · `test/atlas3d-pure.test.mjs` (57) · `test/run-atlas3d-ui.mjs` (129, real headless WebGL via SwiftShader; serves on 8995; `CDP_PORT=<port>` picks the Chrome debug port and refuses a busy one, `SHOTS=<dir>` saves screenshots)
+- **Tests:** `test/atlas3d-data.test.mjs` (57) · `test/atlas3d-pure.test.mjs` (57) · `test/run-atlas3d-ui.mjs` (133, real headless WebGL via SwiftShader; serves on 8995; `CDP_PORT=<port>` picks the Chrome debug port and refuses a busy one, `SHOTS=<dir>` saves screenshots)
 - **Premium pass (2026-09-25):** WebGL context restore in place (plus a fresh canvas if never restored), per-chunk failure with Retry, byte progress, first-open gesture hint (`smd_atlas3d_hint`), X-ray slider + per-structure Fade, Undo, free Axial/Coronal/Sagittal cut plane, saved views (`smd_atlas3d_views`), snapshot/share with the CC BY credit drawn into the PNG (never in the DOM), Find it quiz, Taubin-smoothed living surfaces + fresnel skin.
 - **Status (2026-09-06):** built + RUN ON THE iPhone 15 Pro (build a3d8, iOS 27). Living body (66 parts: organs + skeleton + skin shell) streams in ~2 s from R2, 60 fps, cut planes register on the meshes, no JS errors. Reinstall after each web change: `build:www` → `cap copy ios` → rebuild `App` scheme → `devicectl uninstall` + `install` (wipes device-local data).
 
@@ -40,6 +40,12 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
   levels came from a linear fit: worst corner error 39.2 mm axial. A test now binds every plane to
   the slice's `q` frame in `atlas.json`, and each plane carries the exact `img` it textures
   (`loadSliceTexture` falls back to `/atlas/<m>/NNN.webp` for old bundled manifests).
+- **A cached chunk that decompresses to the wrong size is purged and fetched once more.** The
+  on-device cache (`SMD_THOREX_MODEL_CACHE`) is read BEFORE the network, and the 2026-09-06
+  mismatched bytes were valid gzip, so phones that opened Living CT during the outage cached them
+  and kept failing even after R2 was restored (2026-09-25). `loadChunk` now clears `atlas3d-v1` and
+  refetches on a size mismatch; the headless test plants a wrong-size chunk and proves recovery.
+  Installed builds without this fix recover only by reinstalling or clearing app data.
 - **`clearModels({cacheName})` must stay scoped.** It used to delete ThoreX's shared IndexedDB on
   every call, so one bad 3D chunk purged ThoreX's models. Fixed in `thorex-model-cache.js`.
 - **A fetch from a closed session is dropped** (`session` counter bumped by `close()`); context
