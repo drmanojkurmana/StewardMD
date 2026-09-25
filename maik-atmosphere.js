@@ -119,6 +119,7 @@
     layer.appendChild(aurora); layer.appendChild(code); layer.appendChild(veil); sheet.insertBefore(layer, sheet.firstChild); sheet.classList.add('mk-atmosphere');
     var ctx = code.getContext('2d'), gl = null, program = null, buffer = null, shaders = [], uniforms = {};
     var dead = false, busy = false, dark = false, raf = 0, last = 0, elapsed = 0, width = 1, height = 1, cols = 1, letters = [];
+    var FONT = '14px ui-monospace, SFMono-Regular, monospace', CELL_L = 1.25, CELL_T = 2, cellsFit = false, fresh = true;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}[]<>/=+;:.*';
     function randomChar() { return chars.charAt(Math.floor(Math.random() * chars.length)); }
@@ -167,19 +168,42 @@
         gl.uniform3fv(uniforms['uColorStops[0]'], new Float32Array(getPaletteArray(cfg)));
         gl.drawArrays(gl.TRIANGLES, 0, 3);
       } else if (busy && ctx) {
-        ctx.clearRect(0, 0, width, height); ctx.font = '14px ui-monospace, SFMono-Regular, monospace'; ctx.textBaseline = 'top';
+        ctx.font = FONT; ctx.textBaseline = 'top';
         var shades = dark ? ['#3b7560', '#70c4a1', '#6c9cb5'] : [cfg.color1, cfg.color2, cfg.color3];
+        /* Energy: repaint only the cells whose glyph, colour or 8-bit alpha changed since they were
+         * last painted. Cells never overlap (cellsFit), so clearing a cell's box and redrawing it gives
+         * the same pixels as the full clear + redraw (test/run-maik-atmosphere-pixels.mjs). */
+        var full = !cellsFit || fresh;
+        if (full) ctx.clearRect(0, 0, width, height);
         letters.forEach(function (l, i) {
           l.value += (l.target - l.value) * .14;
-          ctx.globalAlpha = .3 + l.value * .6;
-          ctx.fillStyle = shades[i % 3];
-          ctx.fillText(l.char, (i % cols) * 11, Math.floor(i / cols) * 20);
+          var a = .3 + l.value * .6, q = Math.round(a * 255), fill = shades[i % 3], x = (i % cols) * 11, y = Math.floor(i / cols) * 20;
+          if (!full) { if (l.pc === l.char && l.pq === q && l.pf === fill) return; ctx.clearRect(x - CELL_L, y - CELL_T, 11, 20); }
+          ctx.globalAlpha = a;
+          ctx.fillStyle = fill;
+          ctx.fillText(l.char, x, y);
+          l.pc = l.char; l.pq = q; l.pf = fill;
         });
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha = 1; fresh = false;
       }
     }
+    // A cell's clear box is [x - CELL_L, x - CELL_L + 11) x [y - CELL_T, y - CELL_T + 20); the boxes
+    // tile the canvas. Every glyph's ink must sit at least one device pixel inside its box, so the
+    // box's (possibly fractional) edge never shares a pixel with ink. Otherwise: full redraws only.
+    function measureCells(dpr) {
+      var m = 1 / dpr + .05; ctx.font = FONT; ctx.textBaseline = 'top';
+      for (var k = 0; k < chars.length; k++) {
+        var t = ctx.measureText(chars.charAt(k));
+        if (t.actualBoundingBoxLeft == null) return false;
+        if (t.actualBoundingBoxLeft > CELL_L - m || t.actualBoundingBoxRight > 11 - CELL_L - m ||
+            t.actualBoundingBoxAscent > CELL_T - m || t.actualBoundingBoxDescent > 20 - CELL_T - m) return false;
+      }
+      return true;
+    }
 
-    function active() { return !dead && sheet.isConnected && sheet.classList.contains('on') && !document.hidden && !reduced.matches; }
+    // body.maik-lb-on: MaiK's full-screen figure viewer is over the sheet (home.js maikFigLightbox).
+    // themeObserver already watches body's class, so opening/closing it pauses/resumes via sync().
+    function active() { return !dead && sheet.isConnected && sheet.classList.contains('on') && !document.hidden && !reduced.matches && !document.body.classList.contains('maik-lb-on'); }
     function frame(t) {
       raf = 0; if (!sheet.isConnected) { destroy(); return; } if (!active()) return;
       if (t - last >= 24) {
@@ -191,6 +215,7 @@
     }
     function sync() {
       if (dead) return;
+      fresh = true;
       dark = document.body.classList.contains('dark') || document.body.classList.contains('v3-dark');
       layer.classList.toggle('mk-atmo-dark', dark);
       var cfg = dark ? currentConfig.dark : currentConfig.light;
@@ -203,7 +228,7 @@
     function resize() {
       if (dead) return;
       width = Math.max(1, sheet.clientWidth); height = Math.max(1, sheet.clientHeight); var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      code.width = Math.round(width * dpr); code.height = Math.round(height * dpr); if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      code.width = Math.round(width * dpr); code.height = Math.round(height * dpr); if (ctx) { ctx.setTransform(dpr, 0, 0, dpr, 0, 0); cellsFit = measureCells(dpr); }
       cols = Math.ceil(width / 11); letters = []; for (var n = 0; n < cols * Math.ceil(height / 20); n++) letters.push({ char: randomChar(), value: Math.random(), target: Math.random() });
       if (gl) { aurora.width = Math.round(width * dpr); aurora.height = Math.round(height * dpr); gl.viewport(0, 0, aurora.width, aurora.height); gl.uniform2f(uniforms.uResolution, aurora.width, aurora.height); }
       sync();
@@ -217,7 +242,7 @@
       syncConfig: function () {
         var cfg = dark ? currentConfig.dark : currentConfig.light;
         applyCssGlow(cfg);
-        paint();
+        fresh = true; paint();
       },
       setBusy: function (on) {
         busy = !!on;
