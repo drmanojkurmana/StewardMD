@@ -36,12 +36,14 @@ test("LA maximum dose: mg/kg, the mg ceiling, and nobody counted above 70 kg", (
   assert.equal(r.mg, 150); assert.equal(r.ml, 15); assert.equal(r.capped, false);
   r = la("Lidocaine (lignocaine)", 80, "Plain", "2%");               // 70 x 3 = 210, ceiling 200
   assert.equal(r.w, 70); assert.equal(r.wCapped, true); assert.equal(r.mg, 200); assert.equal(r.capped, true); assert.equal(r.ml, 10);
-  r = la("Lidocaine (lignocaine)", 120, "With adrenaline", "1%");     // no mg ceiling: the 70 kg cap is the only limit
-  assert.equal(r.mg, 420); assert.equal(r.ml, 42);
+  r = la("Lidocaine (lignocaine)", 120, "With adrenaline", "1%");     // 70 x 7 = 490, under the 500 mg ceiling
+  assert.equal(r.mg, 490); assert.equal(r.ml, 49); assert.equal(r.capped, false);
+  r = la("Lidocaine (lignocaine)", 69, "With adrenaline", "2%");      // 69 x 7 = 483
+  assert.equal(r.mg, 483);
   r = la("Bupivacaine", 60, "Plain", "0.5%");
   assert.equal(r.mg, 120); assert.equal(r.ml, 24);
-  r = la("Ropivacaine", 40, "With adrenaline", "0.75%");
-  assert.equal(r.mg, 160); assert.equal(r.ml, 21.3);
+  r = la("Ropivacaine", 40, "With adrenaline", "0.75%");            // 3 mg/kg with or without adrenaline
+  assert.equal(r.mg, 120); assert.equal(r.ml, 16);
   assert.equal(la("Bupivacaine", 60, "Plain", "2%").pct, null, "a strength the drug does not come in gives no volume");
   assert.equal(la("Bupivacaine", 0, "Plain", "0.5%"), null);
   const d = BUNDLE.data["la-doses"];
@@ -124,6 +126,48 @@ test("MCCD check: order of Part I, intervals, and a mode of dying as the underly
   assert.ok(r.warnings.some((w) => /interval/.test(w)));
   r = K._mccdCheck({ c0: "Acute myocardial infarction with cardiac arrest", i0: "1 hour" });
   assert.deepEqual(r.warnings, [], "a named disease that mentions arrest is not flagged");
+  r = K._mccdCheck({ c0: "Cardiorespiratory arrest", i0: "minutes", c1: "Acute myocardial infarction", i1: "2 hours", c2: "Type 2 diabetes mellitus", i2: "12 years" });
+  assert.ok(r.warnings.some((w) => /^Line \(a\) \(Cardiorespiratory arrest\) is a mode of dying/.test(w)), "an arrest on line (a) is flagged too");
+  r = K._mccdCheck({ c0: "Heart failure", i0: "2 days", c1: "Ischaemic cardiomyopathy", i1: "5 years" });
+  assert.deepEqual(r.warnings, [], "heart failure due to a named disease on an upper line is allowed");
+});
+
+/* The source data (not the built kits.json), so these hold before the bundle is rebuilt. Oracles:
+ * levobupivacaine 2 mg/kg (BJA Educ 2020 Table 1), 150 mg single dose (UK SmPC); bupivacaine with adrenaline
+ * 150 mg single dose (UK SmPC); AAGBI 2010 lipid regimen; IDSP P form case definitions 2024. */
+test("LA doses, MCCD vague terms and notifiable conditions read from the source data", () => {
+  const { kits, data } = BK.loadAll();
+  K._setBundle(BK.buildBundle(kits, data));
+  try {
+    const la = (drug, weight, adr, strength) => K._laCalc({ drug, weight: String(weight), adr, strength });
+    let r = la("Levobupivacaine", 60, "Plain", "0.5%");
+    assert.equal(r.mg, 120); assert.equal(r.ml, 24);
+    r = la("Levobupivacaine", 90, "With adrenaline", "0.25%");            // no premix with adrenaline: plain, 70 kg
+    assert.equal(r.withA, false); assert.equal(r.mg, 140); assert.equal(r.ml, 56);
+    r = la("Bupivacaine", 70, "With adrenaline", "0.5%");                 // 2.5 x 70 = 175, SmPC ceiling 150
+    assert.equal(r.mg, 150); assert.equal(r.capped, true); assert.equal(r.ml, 30);
+    assert.equal(la("Bupivacaine", 50, "With adrenaline", "0.5%").mg, 125);
+    const T = K._tools["la-dose"];
+    assert.match(T.text({ drug: "Levobupivacaine", weight: "60", adr: "Plain", strength: "0.5%" }), /^Local anaesthetic maximum dose \(BJA Education 2020/);
+    assert.match(T.text({ drug: "Lidocaine (lignocaine)", weight: "60", adr: "Plain", strength: "1%" }), /^Local anaesthetic maximum dose \(Association of Anaesthetists 2014\)/);
+    assert.ok(data["la-doses"].notes.some((n) => /1\.5 mL\/kg IV over 1 min/.test(n) && /15 mL\/kg\/h/.test(n) && /30 mL\/kg\/h/.test(n) && /12 mL\/kg/.test(n)), "lipid rescue note");
+
+    const flagged = (c) => K._mccdCheck({ c0: c, i0: "2 days" }).warnings.some((w) => /mode of dying or a vague term/.test(w));
+    ["Fever", "Fever with chills", "Fever of unknown origin", "PUO", "Abdominal pain", "Altered sensorium", "Cardiopulmonary arrest", "Multiple organ dysfunction syndrome"]
+      .forEach((c) => assert.ok(flagged(c), c + " should be flagged"));
+    ["Dengue fever", "Enteric fever", "Rheumatic fever", "Scrub typhus", "Plasmodium falciparum malaria"]
+      .forEach((c) => assert.ok(!flagged(c), c + " is a specific disease"));
+
+    const ids = (t) => K.notifiable(t).map((c) => c.id);
+    assert.deepEqual(ids("Scrub typhus with ARDS"), ["scrub-typhus"]);
+    assert.deepEqual(ids("Kala-azar"), ["kala-azar"]);
+    assert.deepEqual(ids("Suspected KFD"), ["kyasanur-forest-disease"]);
+    assert.ok(ids("Nipah virus encephalitis").includes("nipah"));
+    assert.deepEqual(ids("Borderline lepromatous leprosy"), ["leprosy"]);
+    assert.deepEqual(ids("Type 2 respiratory failure on NIV"), [], "NIV is not Nipah");
+    assert.deepEqual(ids("Flame burns 35 percent, sari caught fire"), []);
+    assert.deepEqual(ids("Insect bite"), [], "bite alone is not a snake or dog bite");
+  } finally { K._setBundle(BUNDLE); }
 });
 
 /* ================================ Labour Care Guide ================================ */

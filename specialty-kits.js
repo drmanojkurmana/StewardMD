@@ -23,7 +23,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var KITS_V = "236992a6fc7f";
+  var KITS_V = "a7f8d122f7d5";
   var GROWTH_V = "3f0c86f21010";
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -367,6 +367,8 @@
     var pct = num(String(t.strength || "").replace("%", "")); if (pct != null && (drug.strengths || []).indexOf(pct) < 0) pct = null;
     return { drug: drug, withA: withA, p: p, w: w, wCapped: w0 > LA_WEIGHT_CAP, mg: Math.round(mg * 10) / 10, capped: byWt != null && p.maxMg != null && byWt > p.maxMg, pct: pct, ml: pct ? Math.round(mg / (pct * 10) * 10) / 10 : null };
   }
+  // A drug or preparation from another source than the file's first (e.g. levobupivacaine) names it in "ref".
+  function laSrc(r, d) { return (r.p && r.p.ref) || r.drug.ref || srcName(d); }
 
   // Burns: Lund and Browder chart (region % by age column) x fraction burnt; Parkland 4 mL x kg x %TBSA.
   var FRAC = { "1/4": 0.25, "1/2": 0.5, "3/4": 0.75, "All": 1 };
@@ -456,8 +458,18 @@
     if (!lines.length) return { lines: lines, warnings: warn, underlying: "" };
     for (i = 0; i < lines.length; i++) if (lines[i].i !== i) { warn.push("Fill Part I from line (a) downward, without gaps."); break; }
     var low = lines[lines.length - 1], lc = norm(low.c);
-    var bad = (d.modesOfDying || []).concat(d.vagueTerms || []).filter(function (m) { var k = norm(m); return lc.indexOf(k) >= 0 && low.c.length <= String(m).length + 12; });
+    // vagueAtStart counts only at the start of the line: "Fever" or "Fever with chills", not "Dengue fever".
+    var short_ = function (m) { return low.c.length <= String(m).length + 12; };
+    var bad = (d.modesOfDying || []).concat(d.vagueTerms || []).filter(function (m) { return lc.indexOf(norm(m)) >= 0 && short_(m); })
+      .concat((d.vagueAtStart || []).filter(function (m) { return lc.indexOf(norm(m)) === 0 && short_(m); }));
     if (bad.length) warn.push("The lowest line (" + low.c + ") is a mode of dying or a vague term. Enter the disease or injury that started the sequence as the underlying cause.");
+    // An arrest ("cardiac arrest", "cardiorespiratory arrest") is how everyone dies, so it belongs on no line of Part I.
+    var arrests = (d.modesOfDying || []).filter(function (m) { return /arrest/.test(m); });
+    lines.slice(0, -1).forEach(function (x) {
+      var xc = norm(x.c);
+      if (arrests.some(function (m) { return xc.indexOf(norm(m)) >= 0 && x.c.length <= String(m).length + 12; }))
+        warn.push("Line (" + "abcdefgh".charAt(x.i) + ") (" + x.c + ") is a mode of dying, not a cause. Leave it out and enter the condition that led to death.");
+    });
     if (lines.some(function (x) { return !x.iv; })) warn.push("Give the approximate interval between onset and death on each line.");
     return { lines: lines, warnings: warn, underlying: low.c };
   }
@@ -917,7 +929,7 @@
     }    ,
     "la-dose": {
       title: "Local anaesthetic maximum dose", icon: "vaccines", reform: ["drug"],
-      kw: "local anaesthetic anesthetic lignocaine lidocaine bupivacaine ropivacaine prilocaine maximum safe dose toxic LAST",
+      kw: "local anaesthetic anesthetic lignocaine lidocaine bupivacaine levobupivacaine ropivacaine prilocaine maximum safe dose toxic LAST lipid emulsion",
       form: function (t) {
         var d = DATA("la-doses"); if (!d) return '<p class="kit-muted">Reference data not loaded.</p>';
         var cur = laDrug(t);
@@ -933,11 +945,11 @@
         var basis = (r.p.mgPerKg != null ? r.p.mgPerKg + " mg/kg" : "") + (r.p.maxMg != null ? (r.p.mgPerKg != null ? ", not more than " : "at most ") + r.p.maxMg + " mg" : "");
         return '<div class="kit-result"><div><span>Maximum dose</span><strong>' + esc(r.mg) + ' mg</strong><small>' + esc(r.drug.label + (r.withA ? " with adrenaline" : ", plain")) + "</small></div>" +
           (r.ml != null ? "<div><span>Volume</span><strong>" + esc(r.ml) + " mL</strong><small>of " + esc(r.pct) + "% (" + esc(r.pct * 10) + " mg/mL)</small></div>" : "") + "</div>" +
-          '<p class="kit-muted">' + esc(basis) + (r.capped ? ": the weight-based dose is above the ceiling, so the ceiling applies" : "") + (r.wCapped ? ". Worked out for 70 kg, the most the source counts" : "") + ". Source: " + esc(srcName(d)) + ".</p>" + notes(d.notes);
+          '<p class="kit-muted">' + esc(basis) + (r.capped ? ": the weight-based dose is above the ceiling, so the ceiling applies" : "") + (r.wCapped ? ". Worked out for 70 kg, the most the source counts" : "") + ". Source: " + esc(laSrc(r, d)) + ".</p>" + notes(d.notes);
       },
       text: function (t) {
         var r = laCalc(t); if (!r) return "";
-        return "Local anaesthetic maximum dose (" + srcName(DATA("la-doses")) + "): " + r.drug.label + (r.withA ? " with adrenaline" : " plain") + ", dosing weight " + r.w + " kg" + (r.wCapped ? " (capped at 70)" : "") + ": " + r.mg + " mg" +
+        return "Local anaesthetic maximum dose (" + laSrc(r, DATA("la-doses")) + "): " + r.drug.label + (r.withA ? " with adrenaline" : " plain") + ", dosing weight " + r.w + " kg" + (r.wCapped ? " (capped at 70)" : "") + ": " + r.mg + " mg" +
           (r.ml != null ? " = " + r.ml + " mL of " + r.pct + "%" : "") + ".";
       },
       target: "management_plan"
