@@ -6,7 +6,8 @@
  *   - the patient keeps the number on the slip AND their place (the time the slip was printed),
  *   - a check-in is never dropped: a sync that cannot finish keeps it, one the server questions goes to review,
  *   - a register that landed is not sent twice when only the queue step failed,
- *   - the day's numbered sequence is untouched by offline slips.
+ *   - the day's numbered sequence is untouched by offline slips,
+ *   - a check-in outlives a closed tab (the device store), and is shown as taken only once it is written.
  *
  * node --test --experimental-test-module-mocks test/opd-offline-desk.test.mjs
  */
@@ -28,19 +29,58 @@ function server(answers) {
 }
 const DOWN = () => { throw new Error("down"); };
 
+/* A durable store as the desk sees one (IndexedDB in a browser: test/run-opd-offline-desk-ui.mjs closes the tab). */
+function durableMem(opts) {
+  let v = null;
+  return { durable: true, load: async () => (v ? JSON.parse(v) : { series: null, n: 0, items: [], review: [] }),
+    update: async (fn) => { if (opts && opts.failWrites) throw new Error("disk full"); const s = v ? JSON.parse(v) : { series: null, n: 0, items: [], review: [] }; fn(s); v = JSON.stringify(s); return s; },
+    clear: async () => { v = null; } };
+}
+
 test("the series is reserved online once; offline numbers come from it in order, and none without it", async () => {
   const st = mem(), sv = server({ "offline-series": () => ({ ok: true, series: "OB" }) });
   const d = OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: DAY });
-  assert.equal(d.issue({ name: "Asha" }), null, "no series in hand: nothing to promise");
+  assert.equal(await d.issue({ name: "Asha" }), null, "no series in hand: nothing to promise");
   assert.equal(await d.prepare(), true);
   assert.equal(await d.prepare(), true);
   assert.equal(sv.calls.length, 1, "reserved once, not on every refresh");
-  assert.equal(d.issue({ name: "Asha" }).token, "OB-1");
-  assert.equal(d.issue({ name: "Ravi" }).token, "OB-2");
+  assert.equal((await d.issue({ name: "Asha" })).token, "OB-1");
+  assert.equal((await d.issue({ name: "Ravi" })).token, "OB-2");
   assert.equal(d.pending(), 2);
   // A reload of the desk tab keeps the series and the outbox.
-  assert.equal(OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: DAY }).issue({ name: "Mohan" }).token, "OB-3");
-  assert.equal(OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: "2099-01-01" }).issue({}), null, "yesterday's series is not today's");
+  assert.equal((await OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: DAY }).issue({ name: "Mohan" })).token, "OB-3");
+  assert.equal(await OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: "2099-01-01" }).issue({}), null, "yesterday's series is not today's");
+});
+
+test("durable: kept in the device store; shown as taken only once written; the tab's storage only as a stated fallback", async () => {
+  const sv = server({ "offline-series": () => ({ ok: true, series: "OA" }) });
+  const store = durableMem();
+  const d = OFF.desk({ store, call: sv.call, orgId: "org-a", date: DAY });
+  await d.prepare();
+  const got = await d.issue({ name: "Asha" });
+  assert.deepEqual([got.token, got.durable], ["OA-1", true]);
+  const again = OFF.desk({ store, call: sv.call, orgId: "org-a", date: DAY });   // the tab closed and reopened
+  await again.loaded;
+  assert.equal(again.pending(), 1, "the check-in outlives the tab");
+  assert.equal(again.durable(), true);
+  const broken = OFF.desk({ store: durableMem({ failWrites: true }), call: sv.call, orgId: "org-a", date: DAY });
+  await broken.prepare();
+  assert.equal(await broken.issue({ name: "Ravi" }), null, "a write that failed promises the patient nothing");
+  const tabOnly = OFF.desk({ storage: mem(), call: sv.call, orgId: "org-a", date: DAY });
+  await tabOnly.prepare();
+  assert.equal((await tabOnly.issue({ name: "Mohan" })).durable, false, "the sheet can say: keep this tab open");
+});
+
+test("an outbox a tab kept in sessionStorage is handed to the durable store on opening, not stranded", async () => {
+  const st = mem(), sv = server({ "offline-series": () => ({ ok: true, series: "OA" }) });
+  const old = OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: DAY });
+  await old.prepare(); await old.issue({ name: "Asha" });
+  const store = durableMem();
+  const d = OFF.desk({ store, storage: st, call: sv.call, orgId: "org-a", date: DAY });
+  await d.loaded;
+  assert.equal(d.pending(), 1);
+  assert.equal(st.getItem(OFF.KEY), null, "and the tab's copy is gone");
+  assert.equal((await d.issue({ name: "Ravi" })).token, "OA-2", "numbering continues from the handed-over series");
 });
 
 test("sync sends each check-in the online way, with its slip number and the time it was taken; unreachable stops and keeps the rest", async () => {
@@ -51,7 +91,7 @@ test("sync sends each check-in the online way, with its slip number and the time
     "pool": (b) => ({ ok: true, ticket: { token: b.offlineToken } }) });
   const d = OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: DAY, now: () => 1000 });
   await d.prepare();
-  d.issue({ name: "Asha", mobile: "9876543210", visitType: "followup", departmentId: "dcard" }); d.issue({ name: "Ravi" });
+  await d.issue({ name: "Asha", mobile: "9876543210", visitType: "followup", departmentId: "dcard" }); await d.issue({ name: "Ravi" });
   let r = await d.sync();
   assert.deepEqual([r.synced, r.left], [0, 2], "still down: nothing lost");
   up = true;
@@ -68,7 +108,7 @@ test("a register that landed is not sent again when only the queue step failed; 
   const sv = server({ "offline-series": () => ({ ok: true, series: "OA" }), "patient/register": () => ({ ok: true, mrn: "MR9" }),
     "pool": () => { if (!poolUp) throw new Error("down"); return { ok: false, error: "offline_token_used" }; } });
   const d = OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: DAY });
-  await d.prepare(); d.issue({ name: "Asha" });
+  await d.prepare(); await d.issue({ name: "Asha" });
   await d.sync();
   poolUp = true;
   const r = await d.sync();
@@ -84,14 +124,14 @@ test("the same card is the same patient; a shared phone number goes to review, q
     "pool": () => ({ ok: true }) });
   const d = OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: DAY });
   await d.prepare();
-  d.issue({ name: "Asha", stewardId: "SMP-AAAA-BBBBC" }); d.issue({ name: "Ravi", mobile: "9876543210" });
+  await d.issue({ name: "Asha", stewardId: "SMP-AAAA-BBBBC" }); await d.issue({ name: "Ravi", mobile: "9876543210" });
   const r = await d.sync();
   const pools = sv.calls.filter((c) => c.path === "pool").map((c) => c.body.mrn);
   assert.deepEqual(pools, ["MR1", ""], "the card's record is used; a phone match is not trusted");
   assert.equal(r.review, 1);
   const rv = d.review()[0];
   assert.equal(rv.token, "OA-2"); assert.match(rv.why, /Possible duplicate of MR2/);
-  d.dismiss("OA-2");
+  await d.dismiss("OA-2");
   assert.equal(d.review().length, 0);
 });
 
@@ -101,13 +141,14 @@ test("a check-in taken while a sync is in flight is not overwritten; another hos
   const gate = new Promise((r) => { release = r; });
   const sv = server({ "offline-series": () => ({ ok: true, series: "OA" }), "patient/register": () => gate.then(() => ({ ok: true, mrn: "M" })), "pool": () => ({ ok: true }) });
   const d = OFF.desk({ storage: st, call: sv.call, orgId: "org-a", date: DAY });
-  await d.prepare(); d.issue({ name: "First" });
+  await d.prepare(); await d.issue({ name: "First" });
   const p = d.sync();
-  d.issue({ name: "Second" });
+  await d.issue({ name: "Second" });
   release(); await p;
   assert.deepEqual(sv.calls.filter((c) => c.path === "pool").map((c) => c.body.name), ["First", "Second"], "the second check-in was not overwritten: the same sync sent it too");
   assert.equal(d.pending(), 0);
-  assert.equal(OFF.desk({ storage: st, call: sv.call, orgId: "org-b", date: DAY }).pending(), 0, "org-a's check-in is not org-b's to send");
+  const b = OFF.desk({ storage: st, call: sv.call, orgId: "org-b", date: DAY }); await b.loaded;
+  assert.equal(b.pending(), 0, "org-a's check-in is not org-b's to send");
 });
 
 /* ---- the server: POST /offline-series and POST /pool with an offline token ---------------------------- */
@@ -164,8 +205,14 @@ test("the check-in sheet keeps an unreachable check-in offline with its number a
   const q = read("queue.js"), idx = read("index.html");
   assert.match(q, /offline: function \(sent\) \{ var d = offDesk\(\); return d \? d\.issue\(sent\) : null; \}/);
   assert.match(q, /printToken: printTokenSlip/);
+  // Both desks open the device store (IndexedDB) first, and the sheet waits for the write before showing the number.
+  assert.match(opd, /SMD_OPD_OFFLINE\.desk\(\{indexedDB:idb,storage:ss,/);
+  assert.match(q, /G\.SMD_OPD_OFFLINE\.desk\(\{ indexedDB: idb, storage: ss,/);
+  assert.match(pr, /Promise\.resolve\(off\)\.then\(null, function \(\) \{ return null; \}\)\.then\(function \(got\) \{/);
+  assert.match(pr, /res\.durable === false \? " " \+ wTH\("ward\.reg-offline-tab-only"/, "a tab-only check-in says so");
   assert.match(q, /loadPulse\(\);\n\s+offTick\(\);/, "each front-desk poll sends what is waiting");
-  assert.match(q, /cmd === "staffout"\) \{ if \(!offSignOut\(\)\) return;/, "signing out with unsent check-ins asks first");
+  assert.match(q, /cmd === "staffout"\) \{ if \(!signOutDesk\(\)\) return;/, "signing out with unsent check-ins asks first");
+  assert.match(q, /function signOutDesk\(\) \{ if \(!offSignOut\(\)\) return false;/);
   assert.match(q, /function offSignOut\(\) \{[\s\S]{0,120}if \(d\.pending\(\)\)[\s\S]{0,80}window\.confirm/);
   assert.match(idx, /<script src="\/opd-offline-desk\.js\?v=/);
 });

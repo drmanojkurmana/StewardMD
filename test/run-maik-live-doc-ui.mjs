@@ -1,6 +1,6 @@
 /* MaiK Live Doctor — real headless browser.
  *
- * The Live Doctor (flag smd_maik_live_doc, default ON) replaces the stationary resident:
+ * The Live Doctor (flag smd_maik_live_doc, default ON; "0" = stationary resident) replaces the stationary resident:
  * a 12x16 pixel physician who walks the composer's top edge right to left, freelances
  * stunts (hop/backflip/sprint/auscultate with a bpm bubble), reacts to a tap on himself
  * (startle/wave/hearts), and never intercepts taps anywhere else. Pinned because the
@@ -135,7 +135,7 @@ try {
   await ev(`localStorage.setItem("smd_maik_live_doc","0"); SMD_askMaik(""); return 1;`); await sleep(1200);
   ok(await ev(`return !document.querySelector(".mkdoc") && !!document.querySelector(".maik-cmp .mkw");`) === true,
     "flag \"0\" restores the stationary Stetho Buddy");
-  await ev(`localStorage.removeItem("smd_maik_live_doc"); return 1;`);
+  await ev(`localStorage.setItem("smd_maik_live_doc","1"); return 1;`);
 
 } catch (e) { console.log("ERR", e); fails++; }
 finally { chrome.kill(); serve.kill(); }

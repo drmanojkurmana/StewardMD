@@ -57,6 +57,11 @@ html body #maikSheet.maik-polished .maik-fb-b{min-width:44px;min-height:44px;pad
 html body #maikSheet.maik-polished .maik-acts{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0}
 html body #maikSheet.maik-polished .maik-acts .maik-act{width:100%;padding:10px 4px;border-radius:12px;background:var(--mk-soft);color:var(--mk-mut)}
 html body #maikSheet.maik-polished :is(.maik-fb-reason,.maik-fb-reasonrow){grid-column:1/-1;font-size:16px}
+/* Acting before rating (audit T30): Copy / Regenerate / Edit are what a doctor uses 50 times a day, so
+   they take the first row; "Was this helpful?" with Yes / No sits under them, quieter. */
+html body #maikSheet.maik-polished .maik-acts{grid-row:1}
+html body #maikSheet.maik-polished .maik-fb-q,html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){grid-row:2;font-size:12.5px}
+html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){color:var(--mk-mut)}
 
 /* Compact app navigation: menu + logo on the first row, caption + actions on the second. The model
    chip moved to the composer (2026-09-20): its 150px header slot truncated every label. */
@@ -84,19 +89,23 @@ html body #maikSheet.maik-polished .maik-hd{padding:8px 12px 0;padding-top:max(8
 html body #maikSheet.maik-polished .maik-disc{padding:6px 16px}
 html body #maikSheet.maik-polished .maik-body{min-height:0;min-width:0;padding-bottom:40px}
 html body #maikSheet.maik-polished .maik-cmp{flex:0 0 auto;padding:8px 12px max(8px,env(safe-area-inset-bottom))}
-html body #maikSheet.maik-polished .maik-cmp-in{display:grid;grid-template-columns:44px 44px 44px minmax(44px,1fr) 44px;grid-template-rows:64px 44px;gap:4px 0;padding:8px;border:1px solid var(--mk-bd);border-radius:22px;box-shadow:none;transition:none}
+html body #maikSheet.maik-polished .maik-cmp-in{display:grid;grid-template-columns:44px 44px auto auto minmax(44px,1fr) 44px;grid-template-rows:64px 44px;gap:4px 0;padding:8px;border:1px solid var(--mk-bd);border-radius:22px;box-shadow:none;transition:none}
 html body #maikSheet.maik-polished .maik-cmp-in:focus-within{border-color:var(--mk-bd);box-shadow:none;outline:none}
 html body #maikSheet.maik-polished #maikQ{grid-column:1/-1;grid-row:1;order:0;box-sizing:border-box;width:100%;height:64px!important;min-height:64px;max-height:64px;margin:0;padding:8px;font-size:16px;line-height:24px;text-align:left;border:0!important;border-radius:0;background:transparent!important;outline:none!important;box-shadow:none!important;overflow-y:auto;resize:none}
 html body #maikSheet.maik-polished #maikMic{grid-column:1;grid-row:2}
 html body #maikSheet.maik-polished #maikResearch{grid-column:2;grid-row:2}
 html body #maikSheet.maik-polished #maikImg{grid-column:3;grid-row:2}
-html body #maikSheet.maik-polished #maikExtract{grid-column:4;grid-row:2;justify-self:start;display:flex;align-items:center;justify-content:center;visibility:hidden;width:44px;height:44px;min-height:44px;margin:0;padding:10px;border:0;background:transparent;color:var(--mk-mut)}
+html body #maikSheet.maik-polished #maikLen{grid-column:4;grid-row:2;align-self:center;justify-self:start;min-height:44px;height:44px;margin:0 0 0 4px;padding:0 12px;white-space:nowrap;font-size:12px;border-radius:16px}
+html body #maikSheet.maik-polished #maikExtract{grid-column:5;grid-row:2;justify-self:start;display:flex;align-items:center;justify-content:center;visibility:hidden;width:44px;height:44px;min-height:44px;margin:0;padding:10px;border:0;background:transparent;color:var(--mk-mut)}
 html body #maikSheet.maik-polished #maikExtract.show{visibility:visible}
-html body #maikSheet.maik-polished #maikSend{grid-column:5;grid-row:2;order:0;box-shadow:none}
+html body #maikSheet.maik-polished #maikSend{grid-column:6;grid-row:2;order:0;box-shadow:none}
 /* Model chip in the composer's flexible cell, hugging Send. Shares the cell with the extract
    button (start-aligned, hidden until there is text); when that shows, the chip yields 52px. */
-html body #maikSheet.maik-polished #maikModelChip{grid-column:4;grid-row:2;justify-self:end;align-self:center;min-width:0;max-width:100%!important;min-height:44px;height:44px;margin:0 8px 0 0;padding:8px 12px!important;border-radius:16px!important;font-size:12px!important;justify-content:center}
+html body #maikSheet.maik-polished #maikModelChip{grid-column:5;grid-row:2;justify-self:end;align-self:center;min-width:0;max-width:100%!important;min-height:44px;height:44px;margin:0 8px 0 0;padding:8px 12px!important;border-radius:16px!important;font-size:12px!important;justify-content:center}
 html body #maikSheet.maik-polished #maikModelChipLbl{min-width:0}
+/* Very narrow phones (under 350 px): the length pill and the model chip share the last flexible space,
+   so both tighten rather than the chip sliding under the pill (audit T05). */
+@media (max-width:350px){html body #maikSheet.maik-polished #maikLen{padding:0 8px;font-size:11px;margin-right:4px}html body #maikSheet.maik-polished #maikModelChip{padding:8px 8px!important;margin-right:0}}
 html body #maikSheet.maik-polished .maik-cmp-in:has(#maikExtract.show) #maikModelChip{max-width:calc(100% - 52px)!important}
 html body #maikSheet.maik-polished .maik-fb-b[aria-pressed="true"]{color:var(--mk-bg)}
 
@@ -108,3 +117,5 @@ html body #maikSheet.maik-polished .maik-side-wrap.open .maik-side{transform:tra
 html body #maikSheet.maik-polished .maik-side-hd{padding:max(15px,calc(env(safe-area-inset-top) + 8px)) 12px 8px 14px;display:flex;align-items:center;justify-content:space-between;gap:9px}
 html body #maikSheet.maik-polished .maik-side-hd .maik-side-logo{height:26px;margin:0}
 html body #maikSheet.maik-polished #maikSideClose{margin-left:auto;flex:0 0 44px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+/* Offline notice above the composer (audit T31). */
+html body #maikSheet .maik-offline{margin:0 4px 6px;padding:8px 12px;border-radius:12px;font:600 12.5px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--mk-ink);background:var(--mk-soft,rgba(148,163,184,.14));border:1px solid var(--mk-bd)}

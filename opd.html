@@ -154,6 +154,25 @@
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
   .offbar{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:39;max-width:min(560px,calc(100% - 32px));background:#fff7e6;color:#7a4b00;border:1px solid #f3d19c;border-radius:14px;padding:10px 14px;box-shadow:var(--sh-lg);font-size:13.5px;font-weight:600}
   .offbar[hidden]{display:none}
+  .dc h3{margin:0 0 2px}.dc .dc-sub{color:var(--mut);font-size:13px;margin:0 0 14px}
+  .dc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:0 0 16px}
+  .dc-k{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card)}
+  .dc-k .l{font-size:12px;color:var(--mut);font-weight:600}.dc-k .v{font-size:24px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
+  .dc-k .s{font-size:12px;color:var(--mut)}.dc-k.warn{border-color:var(--amber-line);background:var(--amber-soft)}.dc-k.warn .v{color:var(--amber)}
+  .dc h4{margin:18px 0 8px;font-size:14px}
+  .dc-t{width:100%;border-collapse:collapse;font-size:13px}.dc-t th,.dc-t td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+  .dc-t th:first-child,.dc-t td:first-child{text-align:left}.dc-t th{color:var(--mut);font-weight:600;font-size:12px}
+  .dc-chips{display:flex;flex-wrap:wrap;gap:8px}.dc-chips span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}
+  .dc-wa{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:16px 0 4px;background:var(--card)}
+  .dc-wa h4{margin:0 0 4px}.dc-wa .t{color:var(--mut);font-size:13px;margin:0 0 10px}
+  .dc-wa .f{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .dc-wa label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--mut)}
+  .dc-wa select,.dc-wa input[type=tel]{min-height:44px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-size:15px;background:var(--card);color:var(--ink)}
+  .dc-wa .on{flex-direction:row;align-items:center;gap:8px;min-height:44px;font-size:14px;color:var(--ink)}
+  .dc-wa .on input{width:20px;height:20px}
+  .dc-wa .row2{margin-top:12px}.dc-wa .row2 button{min-height:44px}
+  .dc-wa-st{margin-top:8px;font-size:13px;color:var(--mut)}.dc-wa-st.bad{color:var(--amber);font-weight:600}
+  .dc-warn{background:var(--amber-soft);border:1px solid var(--amber-line);color:var(--amber);border-radius:10px;padding:10px 12px;font-size:13px;margin:8px 0}
   .offbar .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .offbar button{min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #e0b36a;background:#fff;color:#7a4b00;font-weight:700}
   .offbar .rv{margin-top:6px;font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -330,9 +349,10 @@
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
 <script src="/opd-pulse-model.js?v=2" defer></script>
-<script src="/opd-offline-desk.js?v=1" defer></script>
+<script src="/opd-offline-desk.js?v=2" defer></script>
+<script src="/opd-live.js?v=1" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
-<script src="/patient-register.js?v=preg7-sid1-sid1-off1" defer></script>
+<script src="/patient-register.js?v=preg7-sid1-sid1-off2" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
@@ -455,6 +475,7 @@
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
   function logout(msg){
+    liveStop();
     // Plan item 13: an offline check-in not yet sent is the patient's place in the queue; say so before it is dropped.
     // A forced sign-out (msg: the session ended) keeps them for the next sign-in at this desk instead.
     try{ var od=offDesk(); if(od&&od.pending()){ if(!msg){ if(!window.confirm(od.pending()+" offline check-in(s) have not reached the queue yet and will be lost. Sign out anyway?")) return; od.clear(); } } else if(od) od.clear(); OFF=null; }catch(e){}
@@ -693,6 +714,7 @@
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="opdScanBtn" title="Scan QR code, barcode, or tap Ni-Key">&#128247; Scan</button>'+
         (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
+        (st.orgId&&st.orgId!=="demo"&&can("analytics.view")?'<button class="ghost" id="dayclose">Close the day</button>':'')+
         '<button class="ghost" id="billing">Billing</button>'+
         '<button class="ghost" id="pharmacy">Pharmacy</button>'+
         '<button class="ghost" id="ref">Refresh</button>'+
@@ -701,6 +723,7 @@
       '<section class="pulse" id="opdPulse">'+pulseInner()+'</section>'+
       inner+'</div>';
     var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
+    var dcb=document.getElementById("dayclose"); if(dcb) dcb.onclick=openDayClose;
     document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var scb=document.getElementById("opdScanBtn"); if(scb) scb.onclick=function(){ openOpdScanner(); };
@@ -740,10 +763,12 @@
   function offDesk(){
     if(!window.SMD_OPD_OFFLINE||!st.orgId||!(st.who&&can("queue.add"))) return null;
     if(!OFF||OFF._org!==st.orgId||OFF._date!==st.date){
-      var ss=null; try{ ss=window.sessionStorage; }catch(e){}
-      if(!ss) return null;
-      OFF=SMD_OPD_OFFLINE.desk({storage:ss,orgId:st.orgId,date:st.date,call:function(path,body){ return api(path,{method:"POST",body:body}); }});
+      var ss=null, idb=null; try{ ss=window.sessionStorage; }catch(e){} try{ idb=window.indexedDB||null; }catch(e){}
+      if(!ss&&!idb) return null;
+      // IndexedDB first, so a check-in taken offline survives the tab being closed; the tab's storage when it cannot open.
+      OFF=SMD_OPD_OFFLINE.desk({indexedDB:idb,storage:ss,orgId:st.orgId,date:st.date,call:function(path,body){ return api(path,{method:"POST",body:body}); }});
       OFF._org=st.orgId; OFF._date=st.date;
+      OFF.loaded.then(function(){ paintOffline(); if(OFF&&OFF.pending()&&navigator.onLine!==false) offTick(); });
     }
     return OFF;
   }
@@ -780,8 +805,25 @@
    * names nobody, so it is safe on a screen the whole waiting hall can see. A read that fails SAYS so:
    * an empty strip here would read as a quiet OPD, which is the one thing it must never say by
    * accident. The preview clinic has no hospital behind it, so it simply does not ask. */
+  /* ---- plan item 16: the console is told when the hospital's queue changes (opd-live.js over GET /live). Before
+   * this it had no timer at all and showed what it last loaded until someone pressed something. A change refreshes
+   * the board unless someone is typing on it (then the next change or the minute's safety pass does); when the
+   * stream is down a slow pass keeps it from going stale. ---- */
+  var LIVE=null, liveOrg="", liveT=null;
+  function liveHdrs(){ var h={}; if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return h; }); if(st.tok) h["X-Staff-Token"]=st.tok; return Promise.resolve(h); }
+  function liveRefresh(){ clearTimeout(liveT); liveT=setTimeout(function(){ var ae=document.activeElement, typing=!!(ae&&ae.closest&&ae.closest("input, textarea, select")); if(!document.hidden&&!typing&&st.orgId) refresh(); },300); }
+  function liveStart(){
+    if(!window.SMD_OPD_LIVE||!st.orgId||st.orgId==="demo") return;
+    if(LIVE&&liveOrg===st.orgId) return;
+    if(LIVE) LIVE.stop();
+    liveOrg=st.orgId;
+    LIVE=SMD_OPD_LIVE.connect({url:queueApiUrl("live?orgId="+encodeURIComponent(st.orgId)),headers:liveHdrs,onChange:liveRefresh});
+  }
+  function liveStop(){ if(LIVE) LIVE.stop(); LIVE=null; liveOrg=""; }
+  try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&!(LIVE&&LIVE.isLive())) liveRefresh(); },60000); }catch(e){}
   function loadPulse(){
     if(!st.orgId||st.orgId==="demo") return;
+    liveStart();
     api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
       // Plan item 11: follow-ups promised and never booked (silent when the hospital has no record).
@@ -806,6 +848,92 @@
     return '<div class="p-row">'+tiles+'</div>'+
       (m.note?'<div class="p-note">Desk '+pnum(m.note.deskMin,'m')+', doctor '+pnum(m.note.doctorMin,'m')+' · '+esc(m.note.text)+'</div>':'')+
       (m.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(m.unread.join(", "))+'), so these figures are short.</div>':'');
+  }
+  /* ---- plan item 15: the owner's day close (server: /day-close; figures: _queue_eta.js dayClose + the cashier's
+   * shift report). Headline first, then each room, the money, what is still open and the exceptions. A read that
+   * failed says so: an empty money box would read as a day with no takings. ---- */
+  function rupees(p){ return "\u20b9"+Math.round((p||0)/100).toLocaleString("en-IN"); }
+  function dcMin(v){ return v==null?"-":esc(v)+"m"; }
+  function dayCloseHtml(r,fu){
+    var c=r.close||{}, p=c.pulse||{}, m=r.money, rooms=c.rooms||[];
+    var k=function(l,v,s,warn){ return '<div class="dc-k'+(warn?' warn':'')+'"><div class="l">'+esc(l)+'</div><div class="v">'+v+'</div>'+(s?'<div class="s">'+s+'</div>':'')+'</div>'; };
+    var h='<div class="dc"><h3>Day close</h3><p class="dc-sub">'+esc(st.orgName||st.orgCode||"")+' &middot; '+esc(r.date||"")+' &middot; as of '+esc(new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}))+'</p>';
+    if(r.unread&&r.unread.length) h+='<div class="dc-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>';
+    h+='<div class="dc-grid">'+
+      k("Patients seen",esc(p.seen||0),esc(p.registered||0)+" registered")+
+      (m?k("Collected (net)",rupees(m.net),esc(m.count||0)+" bills"):r.moneyUnread?k("Collected","-","could not be read",true):"")+
+      k("Did not wait",p.abandonedPct==null?"-":esc(p.abandonedPct)+"%",esc(p.noShow||0)+" no-shows",(p.abandonedPct||0)>=10)+
+      k("Door to doctor",dcMin(p.doorToDoctor&&p.doorToDoctor.medianMin),"9 in 10 within "+dcMin(p.doorToDoctor&&p.doorToDoctor.p90Min))+
+    '</div>';
+    h+='<h4>By room</h4>'+(rooms.length?'<table class="dc-t"><thead><tr><th>Room</th><th>Registered</th><th>Seen</th><th>No-show</th><th>Consult</th><th>Wait</th></tr></thead><tbody>'+
+      rooms.map(function(x){ return '<tr><td>'+esc(x.room)+(x.doctor?' <span style="color:var(--mut)">'+esc(x.doctor)+'</span>':'')+'</td><td>'+esc(x.registered)+'</td><td>'+esc(x.seen)+'</td><td>'+esc(x.noShow)+'</td><td>'+dcMin(x.consultMedianMin)+'</td><td>'+dcMin(x.doorToDoctorMedianMin)+'</td></tr>'; }).join("")+
+      '</tbody></table>':'<div class="empty">No patients today.</div>');
+    h+='<h4>Money</h4>';
+    if(r.moneyUnread) h+='<div class="dc-warn">The day\'s money could not be read. Do not read this as no takings; open Billing, Shift report.</div>';
+    else if(!m) h+='<div class="empty">Billing is not switched on for this hospital.</div>';
+    else h+='<div class="dc-grid">'+k("Takings",rupees(m.total),esc(m.count||0)+" bills")+k("Refunds",rupees(m.refunds&&m.refunds.total),esc((m.refunds&&m.refunds.count)||0)+" refunds",(m.refunds&&m.refunds.count)>0)+k("Net",rupees(m.net),"")+(r.unbilled!=null?k("Not yet paid",esc(r.unbilled),"orders waiting at billing",r.unbilled>0):"")+'</div>'+
+      '<div class="dc-chips">'+["cash","upi","card","split","other"].filter(function(x){ return m.byCount&&m.byCount[x]; }).map(function(x){ return '<span>'+esc(x.toUpperCase())+' '+rupees(m.byMethod[x])+' &middot; '+esc(m.byCount[x])+'</span>'; }).join("")+'</div>';
+    var open=[["Still waiting",p.waiting],["In consultation",p.inConsultation],["At the lab or booked back",p.held],["Back with results",p.resultsBack],["Visits not in the record",p.syncFailed]];
+    if(fu) open.push(["Follow-ups to book",fu.unbooked+(fu.overdue?" ("+fu.overdue+" overdue)":"")]);
+    open=open.filter(function(x){ return x[1]&&x[1]!=="0"; });
+    h+='<h4>Still open</h4>'+(open.length?'<div class="dc-chips">'+open.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">Nothing left open.</div>');
+    var pr=Object.keys(c.priority||{}), ex=pr.map(function(x){ return ["Ahead of the queue: "+prioLabel({priority:x==="emergency"?2:1,priorityReason:x}),c.priority[x]]; });
+    if(p.recalls) ex.push(["No-shows recalled",p.recalls]);
+    if(c.offline) ex.push(["Checked in offline",c.offline]);
+    h+='<h4>Exceptions</h4>'+(ex.length?'<div class="dc-chips">'+ex.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">No one was put ahead of the queue.</div>');
+    return h+'</div>';
+  }
+  /* Owner ask G2: the day close on WhatsApp at a set hour (server: /org/day-close-settings, sent by the hourly job;
+   * Send now: /day-close/send). The saved number only ever comes back masked; leaving the field blank keeps it. */
+  function hourLabel(h){ var a=h%12===0?12:h%12; return a+(h<12?" am":" pm"); }
+  function dcWaHtml(s){
+    var opts=""; for(var h=0;h<24;h++) opts+='<option value="'+h+'"'+(h===s.hour?" selected":"")+'>'+hourLabel(h)+'</option>';
+    var why=function(r){ return {whatsapp_not_configured:"WhatsApp is not set up on the server",not_configured:"WhatsApp is not set up on the server",bad_number:"the number was not accepted"}[r]||r||"no reason given"; };
+    var last=s.last, st=!last?(s.enabled?"Not sent yet today.":""):last.status==="sent"?"Sent today.":last.status==="failed"?"Today's send failed: "+esc(why(last.reason))+(last.attempts<3?"; it is tried again next hour.":"."):"Sending...";
+    return '<div class="dc-wa" id="dcWa"><h4>Send it to WhatsApp every day</h4><p class="t">The same figures, as counts and totals only (no patient is named), at the hour you pick on the hospital\'s clock.</p>'+
+      '<div class="f"><label class="on"><input type="checkbox" id="dcWaOn"'+(s.enabled?" checked":"")+'> Send daily</label>'+
+      '<label>At<select id="dcWaHour" aria-label="Hour to send">'+opts+'</select></label>'+
+      '<label>WhatsApp number<input type="tel" id="dcWaMob" inputmode="tel" autocomplete="tel" placeholder="'+(s.hasMobile?esc(s.mobileMasked)+" (saved)":"98765 43210")+'"></label></div>'+
+      '<div class="row2">'+(s.hasMobile?'<button class="cancel" id="dcWaNow">Send now</button>':'')+'<button class="btn" id="dcWaSave" style="margin:0">Save</button></div>'+
+      '<div class="dc-wa-st'+(last&&last.status==="failed"?" bad":"")+'" id="dcWaSt" role="status" aria-live="polite">'+st+'</div></div>';
+  }
+  function wireDcWa(){
+    var host=sheet.querySelector("#dcWaHost"); if(!host) return;
+    var say=function(t,bad){ var e=sheet.querySelector("#dcWaSt"); if(e){ e.textContent=t; e.className="dc-wa-st"+(bad?" bad":""); } };
+    function render(s,msg,bad){
+      host.innerHTML=dcWaHtml(s); if(msg) say(msg,bad);
+      sheet.querySelector("#dcWaSave").onclick=function(){
+        var b=this; b.disabled=true;
+        api("org/day-close-settings",{method:"POST",body:{orgId:st.orgId,settings:{enabled:sheet.querySelector("#dcWaOn").checked,hour:+sheet.querySelector("#dcWaHour").value,mobile:sheet.querySelector("#dcWaMob").value.trim()}}}).then(function(x){
+          b.disabled=false;
+          if(!x||!x.ok){ say((x&&x.message)||"Not saved.",true); return; }
+          render(x.settings,x.settings.enabled?"Saved: sent daily at "+hourLabel(x.settings.hour)+" to "+x.settings.mobileMasked+".":"Saved: not sent daily.");
+        },function(){ b.disabled=false; say("Not saved: the server could not be reached.",true); });
+      };
+      var now=sheet.querySelector("#dcWaNow");
+      if(now) now.onclick=function(){ now.disabled=true; api("day-close/send",{method:"POST",body:{orgId:st.orgId}}).then(function(x){ now.disabled=false; say((x&&x.message)||"Not sent.",!(x&&x.ok)); },function(){ now.disabled=false; say("Not sent: the server could not be reached.",true); }); };
+    }
+    api("org/day-close-settings?orgId="+encodeURIComponent(st.orgId)).then(function(r){ if(r&&r.ok) render(r.settings); else host.innerHTML=""; },function(){ host.innerHTML=""; });
+  }
+  function openDayClose(){
+    open('<div class="dc"><h3>Day close</h3><div class="empty">Reading the day...</div></div>',true);
+    var now=new Date().toISOString(), fu=null;
+    var fuP=api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok) fu={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; },function(){});
+    api("day-close?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      return fuP.then(function(){
+        if(!r||!r.ok){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The day could not be read ('+esc((r&&(r.message||r.error))||"no response")+').</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; return; }
+        var body=dayCloseHtml(r,fu);
+        open(body+(can("staff.admin")||st.ownsOrg?'<div id="dcWaHost"></div>':'')+'<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dcPrint" style="margin:0">Print</button></div>',true);
+        wireDcWa();
+        sheet.querySelector("#cx").onclick=close;
+        sheet.querySelector("#dcPrint").onclick=function(){
+          var css=Array.prototype.map.call(document.querySelectorAll("style"),function(x){ return x.textContent; }).join("\n");
+          var doc='<!doctype html><html><head><meta charset="utf-8"><title>Day close</title><style>'+css+'@page{size:A4;margin:14mm}body{background:#fff;color:#111;padding:0}</style></head><body>'+body+'</body></html>';
+          var okp=false; try{ okp=!!(window.WARD_LABELS&&WARD_LABELS.printDocument(doc)); }catch(e){}
+          if(!okp) window.print();
+        };
+      });
+    },function(){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The server could not be reached.</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; });
   }
   function openNoShows(){
     open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
@@ -2656,7 +2784,7 @@
         departmentRequired: perDept,
         resolve: function(id){ return api("patient/resolve?orgId="+encodeURIComponent(st.orgId)+"&id="+encodeURIComponent(id)); },
         submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue="pool"; return api("patient/register",{method:"POST",body:b}); },
-        offline: function(sent){ var d=offDesk(), r=d?d.issue(sent):null; paintOffline(); return r; },
+        offline: function(sent){ var d=offDesk(); if(!d) return null; return d.issue(sent).then(function(r){ paintOffline(); return r; }); },
         printToken: function(o){ printTokenSlip(o); },
         onAdded: function(r,sent){
           // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).

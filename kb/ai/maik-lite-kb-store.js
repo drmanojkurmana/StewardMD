@@ -150,6 +150,7 @@
   }
 
   var _book = null;
+  var _loading = null;
   /** Load (downloading first if needed) and build the BM25 index ONCE per app session.
    *
    * History, all live on the owner's iPhone, 2026-09-03: the first version cached the Book
@@ -158,11 +159,18 @@
    * 2.16 GB, "per-process-limit", the Maps of the previous build not yet collected under the
    * new one. The fix is in maik-lite-rag.js (a compact inverted index); with that, building once
    * and keeping it is the smaller footprint, not the larger one, because nothing is churned.
+   *
+   * In-flight guard (audit T25, 2026-09-25): two concurrent first-question calls used to each
+   * download/parse/build their own copy of the same 38 MB book - wasted work, and a doubled
+   * build is exactly the kind of overlap that caused the jetsam kill above. _loading is shared so
+   * a second call rides the first call's promise instead of starting over; a failed attempt clears
+   * it so the NEXT call retries instead of being stuck replaying the same rejection forever.
    */
   function loadBook(RAG, onProgress) {
     var F = fs();
     if (_book) return Promise.resolve(_book);
-    return ensure(onProgress).then(function () {
+    if (_loading) return _loading;
+    _loading = ensure(onProgress).then(function () {
       // encoding REQUIRED: readFile defaults to base64 (as used deliberately in ensure()'s sha
       // check above), so without this every line failed JSON.parse silently and the book built
       // with zero rows - found live, 2026-09-03, the same night as the base64-chunking crash.
@@ -182,9 +190,19 @@
           throw new Error("KB file corrupt (" + rows.length + " of " + ROWS + " rows), will re-download");
         });
       }
-      _book = new RAG.Book(rows);
+      // Off-main-thread index build when available (audit T25, 2026-09-25): the BM25 build
+      // blocked the WebView main thread for ~3s on the real 42,176-row book. buildBookAsync
+      // falls back to the synchronous new RAG.Book(rows) itself when a worker can't be used, so
+      // this call site does not need to know which path actually ran.
+      return RAG.buildBookAsync ? RAG.buildBookAsync(rows, r.data) : new RAG.Book(rows);
+    }).then(function (book) {
+      _book = book; _loading = null;
       return _book;
+    }, function (e) {
+      _loading = null;
+      throw e;
     });
+    return _loading;
   }
 
   return { installedCached: installedCached, installed: installed, ensure: ensure, state: state,

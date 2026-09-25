@@ -37,12 +37,12 @@ const quotaIdx = plainWeb.indexOf('checkQuota(env, request, "general")');
 ok("snippetsOnly is handled BEFORE the quota gate (it must cost nothing)", quotaIdx > 0);
 {
   const snip = plainWeb.slice(0, quotaIdx);
-  ok("the snippetsOnly branch never calls Gemini", !/callGemini/.test(snip));
+  ok("the snippetsOnly branch never calls Gemini", !/callGemini|await gen\(/.test(snip));
   ok("the snippetsOnly branch returns tinyfishSearch's own fields (including the raw snippet)", /snippet: r\.snippet/.test(snip));
 }
 ok("the plain-web (cloud) path calls Gemini exactly once, Evidence Review's own call is untouched",
-   (plainWeb.match(/callGemini/g) || []).length === 1 && (body.match(/callGemini/g) || []).length === 2);
-ok("RESEARCH_SYS_SNIPPETS is still the writer prompt for the cloud path", /RESEARCH_SYS_SNIPPETS \+ "\\n\\nQuestion: "/.test(body));
+   (plainWeb.match(/await gen\(/g) || []).length === 1 && (body.match(/await gen\(/g) || []).length === 2);
+ok("RESEARCH_SYS_SNIPPETS is still the writer prompt for the cloud path (sent as systemInstruction since T20)", /system: RESEARCH_SYS_SNIPPETS/.test(body));
 ok("the dead RESEARCH_SYS constant (only the removed fallback used it) is gone", !/const RESEARCH_SYS =/.test(SRC));
 
 console.log(`research-web-fallback: ${pass} passed, ${fail} failed`);

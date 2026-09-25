@@ -72,5 +72,5 @@ test("the answer cache is consulted BEFORE the live-stream early return", () => 
 
 test("both answer paths WRITE the cache (stream via waitUntil, non-stream inline)", () => {
   assert.match(HANDLER, /context\.waitUntil\(putCachedAnswer\(/, "the stream path never writes the answer cache");
-  assert.match(HANDLER, /if \(_ckey && text\) \{ try \{ await putCachedAnswer\(/, "the non-stream path never writes the answer cache");
+  assert.match(HANDLER, /if \(_ckey && text\) _later\(putCachedAnswer\(/, "the non-stream path never writes the answer cache (deferred via waitUntil, T15)");
 });

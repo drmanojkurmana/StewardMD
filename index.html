@@ -88,7 +88,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/insulin.css?v=ins15">
 <link rel="stylesheet" href="/clinix.css?v=cx19-sandbox1-prolock">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
-<link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar">
+<link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
 <link rel="stylesheet" href="/icd.css?v=icd1">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
@@ -253,7 +253,7 @@ body.smd-ddi-open #infFab,
 body.smd-ddi-open .ghis-ward-fab,
 body.smd-ddi-open #smdBackToTop{display:none!important}
 </style>
-<link rel="stylesheet" href="/maik-polish.css?v=mkcomposer1-chip1-side1-side2">
+<link rel="stylesheet" href="/maik-polish.css?v=mkcomposer1-chip1-side1-side2-audA-audB">
 <link rel="stylesheet" href="/prescription-mobile.css?v=rxfull1">
 </head>
 
@@ -2163,11 +2163,11 @@ window.openExternal = function (u) {
      update" row in Settings (home.js) + a proactive banner. Inert (no-op) until the owner adds
      @capgo/capacitor-updater via `npm install && npx cap sync` and rebuilds natively — see
      vault/modules/OTA Updates.md. Must load AFTER native-bridge.js (needs window.SMD_IS_NATIVE). -->
-<script src="/native-ota.js?v=ota6-slowdl-ladder" defer></script>
+<script src="/native-ota.js?v=ota7-truth" defer></script>
 <!-- Email sign-up/sign-in + Resend OTP verification + doctor profile (hospital/state/city).
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
-<script src="/email-auth.js?v=gold474" defer></script>
+<script src="/email-auth.js?v=gold474-oneform" defer></script>
 <script src="/applock.js?v=gold8" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold997" defer></script>
@@ -2186,7 +2186,7 @@ window.openExternal = function (u) {
 <script src="/emoji-icons.js?v=ne9" defer></script>
 <!-- Dose router: a "dose of X" question is answered from the drug database (MEDAPI), never by a
      model. Loads before maik-engine.js, which short-circuits to it; falls open to the normal answer. -->
-<script defer src="/kb/ai/drug-dose.js?v=dose2"></script>
+<script defer src="/kb/ai/drug-dose.js?v=dose2-audA"></script>
 <!-- ONE image/PDF compressor for every vision path (Scan-Meds, ICU snapshot, ABG, SknX, PDF reports).
      Vision tokens scale with pixel DIMENSIONS, not file bytes, so the long-edge cap is the token lever and
      JPEG quality is only a bytes lever. pdfParts() reads a PDF's text layer instead of OCR-ing a rasterised
@@ -2213,7 +2213,7 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1" defer></script>
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2226,25 +2226,25 @@ window.openExternal = function (u) {
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1-uigroups1-thread1-gate1-free1-picker1-hap1-onepage1-codedb1" defer></script>
+<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1-uigroups1-thread1-gate1-free1-picker1-hap1-onepage1-codedb1-audOff" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
-<script src="/maik-models.js?v=hardlocal3-ground1-bonsai2-gate1-grades1-perf1-nocortex1" defer></script>
+<script src="/maik-models.js?v=hardlocal3-ground1-bonsai2-gate1-grades1-perf1-nocortex1-audOff-cortex9b1" defer></script>
 <!-- MaiK Lite on-device RAG (window.SMD_MAIK_RAG / SMD_MAIK_KB_STORE): BM25 over the book chunks +
      evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
      actual book text instead of trusting its own recollection. Loaded before maik-local.js, which
      reads these globals lazily (only when a maik-lite question is actually asked). -->
-<script src="/kb/ai/maik-lite-rag.js?v=rag1" defer></script>
+<script src="/kb/ai/maik-lite-rag.js?v=rag1-audOff" defer></script>
 <!-- Claim-level grounding verifier (2026-09-18): checks each statement of an on-device answer against the
      retrieved passages on facts (doses, drugs, figures), not wording. Loaded before maik-local.js. -->
-<script src="/kb/ai/maik-grounding.js?v=ground1-nerdrugs1-codedb1" defer></script>
+<script src="/kb/ai/maik-grounding.js?v=ground1-nerdrugs1-codedb1-audOff" defer></script>
 <!-- OpenMed on-device drug/disease tagger (openmed-ner.js). Flags smd_openmed_pharma / smd_openmed_disease,
      DEFAULT OFF, and fails closed until each checkpoint licence + sha256 is pinned. -->
 <script src="/openmed-ner.js?v=openmedner1" defer></script>
-<script src="/kb/ai/maik-lite-kb-store.js?v=rag1" defer></script>
-<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1" defer></script>
-<script src="/kb/ai/steward-ai.browser.js?v=gold1034-ugib1" defer></script>
+<script src="/kb/ai/maik-lite-kb-store.js?v=rag1-audOff" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff" defer></script>
+<script src="/kb/ai/steward-ai.browser.js?v=gold1034-ugib1-audOff" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
 <script src="/kb/ai/maik-symptoms.js?v=sx2" defer></script><script src="/kb/ai/maik-kb.js?v=gold1060-neg" defer></script>
@@ -2253,12 +2253,12 @@ window.openExternal = function (u) {
 <!-- MaiK Clinical Decision Engine (brain) + Evidence Engine. Deterministic, KB-first.
      Inert until flag smd_maik_brain (?brain=1); defining the globals is harmless when off. -->
 <script src="/kb/ai/ambig-abbrev.js?v=gold1057-lang" defer></script><script src="/kb/ai/maik-brain.js?v=brain-ambig1-find1" defer></script>
-<script src="/kb/ai/maik-evidence.js?v=gold1052-brain" defer></script>
+<script src="/kb/ai/maik-evidence.js?v=gold1052-brain-audA" defer></script>
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/connect-agent-boot.js?v=cab41" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1" defer></script><script src="/profile-setup.js?v=pfs2-phv1" defer></script><script src="/phone-verify.js?v=phv4-sheet" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir" defer></script><script src="/profile-setup.js?v=pfs4-onedir" defer></script><script src="/phone-verify.js?v=phv4-sheet" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2498,7 +2498,7 @@ window.openExternal = function (u) {
 <script src="/clinix-dx.js?v=cx-dx1" defer></script>
 <script src="/clinix-content.js?v=cx16-dxvocab-prolock" defer></script>
 <script src="/clinix-diagrams.js?v=cx13" defer></script>
-<script src="/clinix-audio.js?v=cx-stridor2" defer></script>
+<script src="/clinix-audio.js?v=cx-stridor3-api1" defer></script>
 <script src="/clinix-store.js?v=cx12" defer></script>
 <script src="/clinix-tutor.js?v=cx14" defer></script>
 <script src="/clinix-engine.js?v=cx11-lex1" defer></script>
@@ -2554,9 +2554,13 @@ window.openExternal = function (u) {
 <!-- Prescription validity + schedule rules (pure). Decides which prescriptions get a verification
      QR and how long they stay valid; the QR itself is encoded by pglog-qr.js above. -->
 <script src="/rx-validity.js?v=rxv3-brands" defer></script>
+<script src="/pglog-quick.js?v=pglq1" defer></script>
+<script src="/pglog-analytics.js?v=pgla1" defer></script>
+<script src="/pglog-photos.js?v=pglp1" defer></script>
+<script src="/pglog-backup.js?v=pglb1" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag" defer></script>
 <script src="/pglog-ai.js?v=hardlocal3" defer></script>
-<script src="/pglog-screens.js?v=pgl26-del" defer></script>
+<script src="/pglog-screens.js?v=pgl27-quick" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
@@ -2590,10 +2594,11 @@ window.openExternal = function (u) {
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
-<script src="/patient-register.js?v=preg7-sid1-sid1-off1" defer></script>
+<script src="/patient-register.js?v=preg7-sid1-sid1-off2" defer></script>
 <script src="/opd-pulse-model.js?v=2" defer></script>
-<script src="/opd-offline-desk.js?v=1" defer></script>
-<script src="/queue.js?v=fdesk4-pulse1-profilex1-sid1-phi1-fu1-prio1-off1" defer></script>
+<script src="/opd-offline-desk.js?v=2" defer></script>
+<script src="/opd-live.js?v=1" defer></script>
+<script src="/queue.js?v=fdesk4-pulse1-profilex1-sid1-phi1-fu1-prio1-off2-live1" defer></script>
 <!-- Unified NFC bridge (native Capacitor NfcPlugin + Web NFC). The file-tag tap listener below
      (smdNfcBoot) routes a tapped folder to the patient's full chart, or offers to write a UHID
      to a blank tag. No-op on browsers without NFC. -->

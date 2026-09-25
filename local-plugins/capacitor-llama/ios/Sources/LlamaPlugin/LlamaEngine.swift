@@ -152,25 +152,48 @@ final class LlamaEngine {
     /// Draft tokens proposed per verify step. Six is the usual sweet spot for a ~4B target.
     static let draftK = 6
 
-    /// llama.cpp contexts are NOT thread-safe: inference runs on `work`, but load/release can be
-    /// called from another thread. Same hazard capacitor-whisper hit (BUG-13, use-after-free).
+    /// llama.cpp contexts are NOT thread-safe. Same hazard capacitor-whisper hit (BUG-13,
+    /// use-after-free). The rule (audit T12, 2026-09-25): everything that CREATES or FREES the model
+    /// or a context runs on the serial `work` queue, the same queue generation runs on. A release is
+    /// then a barrier that can only run after an in-flight generation has returned; the lock alone
+    /// was not enough, because generateSync takes it only to read the pointers and then decodes for
+    /// minutes without it, while release() used to free them from the main thread.
     private let lock = NSLock()
     private let work = DispatchQueue(label: "in.stewardmd.llama.infer", qos: .userInitiated)
 
     /// Set from any thread; read by the token loop and by llama.cpp's abort callback.
     private let cancelFlag = CancelBox()
 
+    /// Repetition penalty over the last 128 tokens (audit T55, 2026-09-25). 1.15 also penalised the
+    /// digits, units and drug names a dose line legitimately repeats ("500 mg ... 500 mg"), nudging
+    /// the model to a different number; 1.05 still breaks an "insulin insulin insulin" loop. Kept, not
+    /// removed. Mirrors kRepeatPenalty in llama_jni.cpp.
+    static let repeatPenalty: Float = 1.05
     static let defaultNCtx: Int32 = 4096
     static let defaultNPredict: Int32 = 512
 
     var isLoaded: Bool { lock.lock(); defer { lock.unlock() }; return model != nil && ctx != nil }
-    private(set) var isGenerating = false
+    /// Read by the idle timer on the main thread and written by the work queue: always under `lock`.
+    private var generating = false
+    var isGenerating: Bool { lock.lock(); defer { lock.unlock() }; return generating }
 
     // MARK: - Lifecycle
 
+    /// Blocks the CALLER until any in-flight generation has finished, then loads on `work` (T12).
+    /// Callers are background threads (the plugin's load(), the self-test); never call it from `work`.
     func load(path: String, nCtx: Int32, nThreads: Int32, nGpuLayers: Int32,
               kvQ8: Bool = true, flashAttn: Bool = true, nBatch: Int32 = 0, nUbatch: Int32 = 0,
               draftPath: String = "") throws {
+        dispatchPrecondition(condition: .notOnQueue(work))
+        try work.sync {
+            try loadOnWork(path: path, nCtx: nCtx, nThreads: nThreads, nGpuLayers: nGpuLayers, kvQ8: kvQ8,
+                           flashAttn: flashAttn, nBatch: nBatch, nUbatch: nUbatch, draftPath: draftPath)
+        }
+    }
+
+    private func loadOnWork(path: String, nCtx: Int32, nThreads: Int32, nGpuLayers: Int32,
+                            kvQ8: Bool, flashAttn: Bool, nBatch: Int32, nUbatch: Int32,
+                            draftPath: String) throws {
         guard FileManager.default.fileExists(atPath: path) else {
             throw LlamaError(.modelMissing, "no model at the given path")
         }
@@ -268,7 +291,16 @@ final class LlamaEngine {
 
     /// Drop the context and model. Called on app pause: iOS kills large-footprint backgrounded apps
     /// first, and mmap makes the reload cheap enough that this is a clear win.
-    func release() { lock.lock(); releaseLocked(); lock.unlock() }
+    ///
+    /// ASYNC BARRIER (T12): queued on `work`, so it runs only after an in-flight generation returns
+    /// (call cancel() first to make that quick). It never blocks the caller, which is usually the
+    /// main thread (background notification, idle timer). `completion` runs on `work` once freed.
+    func release(completion: (() -> Void)? = nil) {
+        work.async { [weak self] in
+            if let self { self.lock.lock(); self.releaseLocked(); self.lock.unlock() }
+            completion?()
+        }
+    }
 
     private func releaseLocked() {
         if let c = ctx { llama_free(c); ctx = nil }
@@ -370,12 +402,14 @@ final class LlamaEngine {
                               prefillEmptyThink: Bool = false,
                               onToken: ((String) -> Void)?,
                               imagePaths: [String] = [], mmprojPath: String = "") throws -> GenStats {
+        // Runs on `work`. The pointers read here stay valid for the whole call: load and release are
+        // queued on `work` too (T12), so neither can run until this returns.
         lock.lock()
         guard let m = model, let c = ctx else { lock.unlock(); throw LlamaError(.modelMissing, "model not loaded") }
-        if isGenerating { lock.unlock(); throw LlamaError(.busy, "a generation is already running") }
-        isGenerating = true
+        if generating { lock.unlock(); throw LlamaError(.busy, "a generation is already running") }
+        generating = true
         lock.unlock()
-        defer { isGenerating = false }
+        defer { lock.lock(); generating = false; lock.unlock() }
 
         cancelFlag.value = false
         let vocab = llama_model_get_vocab(m)
@@ -447,9 +481,9 @@ final class LlamaEngine {
         // REPETITION PENALTY IS NOT OPTIONAL, even for greedy. Verified on Android: a bare greedy
         // chain answered "insulin insulin insulin ..." to a DKA question. Greedy takes the argmax
         // every step, so a locally-likely token can lock in forever. Deterministic, so greedy stays
-        // reproducible.
+        // reproducible. Strength: see repeatPenalty (T55).
         llama_sampler_chain_add(smpl, llama_sampler_init_penalties(
-            llama_vocab_n_tokens(vocab), 128, 1.15, 0.0, 0.0))
+            llama_vocab_n_tokens(vocab), 128, Self.repeatPenalty, 0.0, 0.0))
         if temperature > 0 {
             llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40))
             llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95, 1))
@@ -497,9 +531,20 @@ final class LlamaEngine {
         // The governor only ever LOWERS the budget (already hot).
         let budget = ThermalGovernor.budget(nPredict > 0 ? nPredict : Self.defaultNPredict)
         var stoppedHot = false
+        /* UTF-8 ACROSS TOKENS (audit T54). A token is a run of BYTES, and a multi-byte character
+         * (≥, µ, °, any Indic letter) is often split across two tokens. Decoding each piece on its own
+         * turned both halves into U+FFFD, in the stream AND in the final text. Bytes are held here
+         * until they end on a character boundary, then decoded once. */
+        var pendingUtf8: [UInt8] = []
         func emit(_ id: llama_token) {
-            let piece = Self.piece(vocab: vocab, token: id)
-            if !piece.isEmpty { full += piece; onToken?(piece) }
+            pendingUtf8 += Self.pieceBytes(vocab: vocab, token: id)
+            let n = Self.completeUtf8Prefix(pendingUtf8)
+            if n > 0 {
+                let piece = String(decoding: pendingUtf8[0..<n], as: UTF8.self)
+                pendingUtf8.removeFirst(n)
+                full += piece
+                onToken?(piece)
+            }
             produced += 1
         }
 
@@ -623,6 +668,13 @@ final class LlamaEngine {
                 if nap > 0 { usleep(nap) }
             }
         }
+        // A character still incomplete when generation stopped cannot be completed; decode what is there.
+        if !pendingUtf8.isEmpty {
+            let tail = String(decoding: pendingUtf8, as: UTF8.self)
+            pendingUtf8 = []
+            full += tail
+            onToken?(tail)
+        }
         if stoppedHot {
             full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._"
         }
@@ -668,15 +720,28 @@ final class LlamaEngine {
         return String(cString: buf)
     }
 
-    private static func piece(vocab: OpaquePointer?, token: llama_token) -> String {
+    /// The token's raw bytes. NOT decoded here: a piece can end halfway through a character (T54).
+    private static func pieceBytes(vocab: OpaquePointer?, token: llama_token) -> [UInt8] {
         var buf = [CChar](repeating: 0, count: 256)
         var n = llama_token_to_piece(vocab, token, &buf, Int32(buf.count), 0, false)
         if n < 0 {
             buf = [CChar](repeating: 0, count: Int(-n) + 1)
             n = llama_token_to_piece(vocab, token, &buf, Int32(buf.count), 0, false)
         }
-        guard n > 0 else { return "" }
-        return String(decoding: buf.prefix(Int(n)).map { UInt8(bitPattern: $0) }, as: UTF8.self)
+        guard n > 0 else { return [] }
+        return buf.prefix(Int(n)).map { UInt8(bitPattern: $0) }
+    }
+
+    /// Length of the longest prefix of `b` that does not end inside a multi-byte UTF-8 character.
+    /// Only a trailing lead byte plus fewer continuation bytes than it announces is held back; any
+    /// other invalid sequence is passed through for the decoder to replace, so nothing stalls.
+    static func completeUtf8Prefix(_ b: [UInt8]) -> Int {
+        var i = b.count - 1, back = 0
+        while i >= 0 && back < 3 && (b[i] & 0xC0) == 0x80 { i -= 1; back += 1 }
+        if i < 0 { return b.count }
+        let lead = b[i]
+        let need = lead >= 0xF0 ? 4 : lead >= 0xE0 ? 3 : lead >= 0xC0 ? 2 : 1
+        return (b.count - i) < need ? i : b.count
     }
 }
 

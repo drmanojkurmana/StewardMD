@@ -22,8 +22,11 @@ test("the chip is rendered inside the composer, after the tool buttons and befor
 });
 
 test("the polished grid puts the chip in the flexible bottom-row cell, hugging Send, with a 44px target", () => {
-  assert.match(CSS, /#maikModelChip\{grid-column:4;grid-row:2;justify-self:end;[^}]*min-height:44px/);
-  assert.match(CSS, /#maikSend\{grid-column:5;grid-row:2/);
+  assert.match(CSS, /#maikModelChip\{grid-column:5;grid-row:2;justify-self:end;[^}]*min-height:44px/);
+  assert.match(CSS, /#maikSend\{grid-column:6;grid-row:2/);
+  // Audit T05: the length pill has its own content-sized cell (it was auto-placed into a 44 px track and clipped).
+  assert.match(CSS, /grid-template-columns:44px 44px auto auto minmax\(44px,1fr\) 44px/);
+  assert.match(CSS, /#maikLen\{grid-column:4;grid-row:2;[^}]*min-height:44px/);
   assert.match(CSS, /\.maik-cmp-in:has\(#maikExtract\.show\) #maikModelChip\{max-width:calc\(100% - 52px\)!important\}/, "yields to the extract button when it shows");
   assert.doesNotMatch(CSS, /#maikModelChip\{grid-column:3;grid-row:1/, "the old header placement is gone");
 });

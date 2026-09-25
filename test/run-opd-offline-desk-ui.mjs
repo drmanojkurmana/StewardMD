@@ -2,7 +2,8 @@
  *
  * The real check-in sheet (patient-register.js), the real offline desk (opd-offline-desk.js) and the real slip
  * printer (ward-labels.js) in Chrome: the server is unreachable, the desk still completes the check-in with a
- * number from its series, the slip prints, the outbox survives a reload of the desk tab, and sync empties it.
+ * number from its series, the slip prints, the outbox survives the desk tab being CLOSED (IndexedDB), and sync
+ * empties it.
  * The server is a stub (no network), so this checks the screen and the device, not the routes (those are in
  * test/opd-offline-desk.test.mjs).
  *
@@ -47,7 +48,7 @@ async function page() {
   return false;
 }
 const DESK = `window.__calls = []; window.__up = false;
-  window.__desk = SMD_OPD_OFFLINE.desk({ storage: sessionStorage, orgId: "org-a", date: "2026-09-25", call: function (path, body) {
+  window.__desk = SMD_OPD_OFFLINE.desk({ indexedDB: window.indexedDB, storage: sessionStorage, orgId: "org-a", date: "2026-09-25", call: function (path, body) {
     __calls.push(path);
     if (path === "offline-series") return Promise.resolve({ ok: true, series: "OA" });
     if (!__up) return Promise.reject(new Error("down"));
@@ -58,13 +59,20 @@ try {
   let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
   ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
-  const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
-  const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
-  await call("Runtime.enable", {});
-  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  // A desk tab: a new browser tab, attached. Closing it and opening another is how the outbox is proved to outlive it.
+  let targetId = null;
+  async function openTab() {
+    sessionId = undefined;
+    targetId = (await call("Target.createTarget", { url: "about:blank" })).result.targetId;
+    sessionId = (await call("Target.attachToTarget", { targetId, flatten: true })).result.sessionId;
+    await call("Runtime.enable", {});
+    await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  }
+  await openTab();
   ok(await page(), "the check-in sheet, the offline desk and the slip printer load");
   await ev(DESK + ` return 1;`);
-  await ev(`__desk.prepare().then(function (r) { window.__prep = r; }); return 1;`); await sleep(200);
+  await ev(`__desk.prepare().then(function (r) { window.__prep = r; }); return 1;`);
+  for (let i = 0; i < 25 && (await ev(`return window.__prep === undefined;`)); i++) await sleep(100);
   ok(await ev(`return window.__prep === true && __desk.ready();`) === true, "while online the desk reserves its offline series");
 
   await ev(`window.__printed = null;
@@ -89,10 +97,16 @@ try {
   await ev(`document.querySelector('[data-a="print-token"]').click(); return 1;`); await sleep(200);
   ok(await ev(`return !!(window.__printed && __printed.token === "OA-1" && __printed.name === "Asha Rao" && window.__printOk === true);`) === true, "Print token slip prints that number, through the real slip printer");
 
-  // The desk tab is reloaded while still offline: the outbox and the series are still there.
-  ok(await page(), "the desk tab reloads");
-  await ev(DESK + ` return 1;`);
-  ok(await ev(`return __desk.pending() + "|" + __desk.issue({ name: "Ravi" }).token;`) === "1|OA-2", "after a reload the check-in is still waiting and numbering continues");
+  ok(await ev(`return __desk.durable();`) === true, "kept in this browser's IndexedDB, not only the tab");
+
+  // The desk tab is CLOSED while still offline, and a new one opened: the outbox and the series are still there.
+  const closed = targetId; sessionId = undefined;
+  await call("Target.closeTarget", { targetId: closed });
+  await openTab();
+  ok(await page(), "a new desk tab opens after the old one was closed");
+  await ev(DESK + ` __desk.loaded.then(function () { return __desk.issue({ name: "Ravi" }); }).then(function (r) { window.__after = __desk.pending() + "|" + (r && r.token); }); return 1;`);
+  await sleep(400);
+  ok(await ev(`return window.__after;`) === "2|OA-2", "the closed tab's check-in is still waiting, and numbering continues (" + (await ev(`return window.__after;`)) + ")");
   await ev(`window.__up = true; __desk.sync().then(function (r) { window.__sync = r; }); return 1;`); await sleep(400);
   ok(await ev(`return JSON.stringify(window.__sync);`) === JSON.stringify({ synced: 2, left: 0, review: 0 }), "back online, sync sends both and the outbox empties");
   ok(await ev(`return __calls.filter(function (c) { return c === "patient/register"; }).length;`) === 2, "each registered once");

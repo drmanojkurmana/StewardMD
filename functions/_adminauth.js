@@ -6,7 +6,7 @@
  * OWNER_EMAILS (comma-separated) ADDS to the built-in owner list — the two are UNIONED, so the built-in
  * owners always work even if a stale/partial OWNER_EMAILS env is set in the Cloudflare dashboard.
  */
-import { verifyFirebaseToken } from "./_fbauth.js";
+import { verifiedClaimsFor } from "./_fbauth.js";
 
 /* stewardmd.in@gmail.com was REMOVED: the owner describes that account as "a medical college who is
  * buying my product", i.e. a customer. Leaving it here made it a platform owner - able to read every
@@ -26,7 +26,7 @@ export function emailFromToken(idToken) {
     return String(JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(p), (c) => c.charCodeAt(0)))).email || "").toLowerCase();
   } catch (e) { return ""; }
 }
-function tokenMatch(got, want) {
+export function tokenMatch(got, want) {
   if (!want || !got || got.length !== want.length) return false;
   let d = 0; for (let i = 0; i < got.length; i++) d |= got.charCodeAt(i) ^ want.charCodeAt(i);
   return d === 0;
@@ -34,13 +34,10 @@ function tokenMatch(got, want) {
 
 // → true if the caller is an owner (Google login) or holds a valid legacy admin token.
 export async function ownerOK(request, env) {
-  const bearer = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  if (bearer) {
-    const uid = await verifyFirebaseToken(bearer, env);
-    if (uid) {
-      const email = emailFromToken(bearer);
-      if (email && ownerEmails(env).indexOf(email) > -1) return true;
-    }
+  const claims = await verifiedClaimsFor(request, env);   // memoised per request (T52)
+  if (claims) {
+    const email = String(claims.email || "").toLowerCase();
+    if (email && ownerEmails(env).indexOf(email) > -1) return true;
   }
   const tok = request.headers.get("X-Admin-Token") || "";
   if (tokenMatch(tok, env.UPDATES_ADMIN_TOKEN)) return true;

@@ -603,6 +603,25 @@
     try { initConsultSwipe(); } catch (e) {}
   }
 
+  /* Plan item 16: the board is told when the hospital's queue changes (opd-live.js over GET /live) instead of only
+   * finding out at the next 8-second poll. While the stream is live a poll fetches only when told, or once a minute
+   * as a safety net; when it is not live the polls run as before. Hospital modes only (a personal clinic has no org). */
+  var LIVEQ = null, liveOrg = "", lastFull = 0, liveFn = null;   // liveFn: the poll of the screen now showing
+  function liveStart(onChange) {
+    liveFn = onChange;
+    if (!G.SMD_OPD_LIVE || !st.orgId || st.demo) return;
+    if (LIVEQ && liveOrg === st.orgId) return;
+    if (LIVEQ) LIVEQ.stop();
+    liveOrg = st.orgId;
+    LIVEQ = G.SMD_OPD_LIVE.connect({ url: G.SMD_OPD_LIVE.apiUrl(API + "/live?orgId=" + encodeURIComponent(st.orgId)), headers: authHeaders,
+      onChange: function () { lastFull = 0; try { if (liveFn) liveFn(); } catch (e) {} } });
+  }
+  function liveStop() { if (LIVEQ) LIVEQ.stop(); LIVEQ = null; liveOrg = ""; }
+  function liveQuiet() {
+    if (LIVEQ && LIVEQ.isLive() && Date.now() - lastFull < 60000) return true;
+    lastFull = Date.now(); return false;
+  }
+
   function refresh() {
     /* demo has no server session; don't clobber unsaved settings mid-poll; and the profile sheet
      * (Clinic and staff) is a form the owner is filling in, for the same reason settings is. */
@@ -612,6 +631,7 @@
     // registered patients appear without a manual import (dedupes server-side by visit id).
     if (st.ghisToken && st.pollN % 5 === 0 && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(true); } catch (e) {} }
     if (st.openOpts && st.openOpts.source === "connect" && st.pollN % 5 === 0) { try { importFromSource(true); } catch (e) {} }   // re-pull the connected EMR worklist periodically
+    if (liveQuiet()) return;   // plan item 16: live and nothing changed
     apiGet("/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok) { st.tickets = r.tickets || []; paint(); } }).catch(function () {});
     loadPulse();   // every fourth pass, hospital-wide (see loadPulse)
   }
@@ -666,7 +686,7 @@
       act(st.session.id, "/priority", { ticketId: ps.ticketId, reason: ps.reason, note: pnote }).then(function (r) { if (!(r && r.ok)) { try { G.toast && G.toast("Priority not changed: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} } });
       return;
     }
-    if (cmd === "switch") { _setWp(""); clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; st.orgId = null; st.clinicAdmin = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace (forget remembered); drop clinic identity so the next workplace never shows a stale clinic's staff-admin
+    if (cmd === "switch") { liveStop(); _setWp(""); clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; st.orgId = null; st.clinicAdmin = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace (forget remembered); drop clinic identity so the next workplace never shows a stale clinic's staff-admin
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffGate(); prefillStaff(); return; }   // front-desk staff -> sign in HERE
@@ -679,7 +699,7 @@
     if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
     if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "stafflogin") { staffLogin(); return; }
-    if (cmd === "staffout") { if (!offSignOut()) return; wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); try { if (G.StewardIdentityResolver && G.StewardIdentityResolver.clearCache) G.StewardIdentityResolver.clearCache(); } catch (e) {} st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
+    if (cmd === "staffout") { if (!signOutDesk()) return; wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); try { if (G.StewardIdentityResolver && G.StewardIdentityResolver.clearCache) G.StewardIdentityResolver.clearCache(); } catch (e) {} st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
     if (cmd === "fdrefresh") { loadFrontDesk(); return; }
     if (cmd === "pulse") { loadPulse(true); return; }
     if (cmd === "reconcile") {
@@ -1033,7 +1053,8 @@
         el.innerHTML = renderFrontDesk(b);
         clearInterval(st.pollId);
         loadPulse(true);
-        st.pollId = setInterval(function () {
+        var fdPoll = function () {
+          if (liveQuiet()) { offTick(); return; }   // plan item 16: live and nothing changed
           apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (n) {
             /* The board is kept fresh, but never rebuilt over a field somebody is typing in: the same rule that
              * fixed the staff form (paint) and the pulse (pulsePaint). The next pass paints it. */
@@ -1042,7 +1063,9 @@
           }).catch(function () {});
           loadPulse();
           offTick();
-        }, POLL_MS);
+        };
+        st.pollId = setInterval(fdPoll, POLL_MS);
+        liveStart(fdPoll);
         offTick();
       });
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-btn" data-q-act="fdrefresh">Retry</button>'); });
@@ -1174,9 +1197,10 @@
     if (!G.SMD_OPD_OFFLINE || !st.orgId) return null;
     var day = new Date(Date.now() + 19800000).toISOString().slice(0, 10);   // the IST day the server numbers by
     if (!OFFD || OFFD._org !== st.orgId || OFFD._date !== day) {
-      var ss = null; try { ss = G.sessionStorage; } catch (e) {}
-      if (!ss) return null;
-      OFFD = G.SMD_OPD_OFFLINE.desk({ storage: ss, orgId: st.orgId, date: day, call: function (p, b) { return apiPost("/" + p, b); } });
+      var ss = null, idb = null; try { ss = G.sessionStorage; } catch (e) {} try { idb = G.indexedDB || null; } catch (e) {}
+      if (!ss && !idb) return null;
+      // IndexedDB first, so a check-in taken offline survives the app being closed; the tab's storage when it cannot open.
+      OFFD = G.SMD_OPD_OFFLINE.desk({ indexedDB: idb, storage: ss, orgId: st.orgId, date: day, call: function (p, b) { return apiPost("/" + p, b); } });
       OFFD._org = st.orgId; OFFD._date = day;
     }
     return OFFD;
@@ -1192,6 +1216,8 @@
     if (d.pending()) { var sure = true; try { sure = window.confirm(d.pending() + " offline check-in(s) have not reached the queue yet and will be lost. Sign out anyway?"); } catch (e) {} if (!sure) return false; }
     d.clear(); OFFD = null; return true;
   }
+  // Signing out: the unsent check-ins are settled first (offSignOut), then the live stream ends with the session.
+  function signOutDesk() { if (!offSignOut()) return false; liveStop(); return true; }
   function printTokenSlip(o) {
     var okp = false;
     try { okp = !!(G.WARD_LABELS && G.WARD_LABELS.print("token", { hospital: (st.staffWho && (st.staffWho.orgName || st.staffWho.orgCode)) || "", token: o.token, name: o.name || "", issuedAt: new Date(o.at || Date.now()).toLocaleString() })); } catch (e) {}
@@ -1251,6 +1277,7 @@
         st.me = { name: (r.room && r.room.name) || r.session.doctorName || "Room", dept: (r.room && r.room.department) || "" };
         st.view = "dashboard"; paint();
         clearInterval(st.pollId); st.pollId = setInterval(refresh, POLL_MS);   // refresh() polls /list by session id
+        liveStart(refresh);
         return;
       }
       if (r && r.ok && !r.resolved) { _pickRoom(orgId, r.rooms || []); return; }

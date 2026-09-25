@@ -503,6 +503,13 @@
     return res;
   }
 
+  /* RESTORED (2026-09-25). 163e67f41 removed these three while the API below still exported them, so
+   * building API threw "ReferenceError: has is not defined" on every page load and window.SMD_CLINIX_AUDIO
+   * was never set - no CliniX sound anywhere. Definitions as they were in db3004123. */
+  function labelOf(kind) { return KINDS[kind] ? KINDS[kind].label : ""; }
+  function hintOf(kind) { return KINDS[kind] ? KINDS[kind].hint : ""; }
+  function has(kind) { return !!KINDS[kind]; }
+
   var API = {
     KINDS: KINDS, has: has, available: available,
     play: play, stopAll: stopAll, labelOf: labelOf, hintOf: hintOf,

@@ -9181,6 +9181,107 @@ perf), a segmented tab pill, and no decorative blobs anywhere. The app hubs keep
 Also BUG-013: the library home's `<h1>` said "Knowledge Library" directly under the sheet chrome
 that already says "Knowledge Library"; the page heading is now "Find any disease".
 
+## 2026-09-24 — The logbook's numbers are counted, and they say what they counted
+The PG logbook now has an analytics page (`pglog-analytics.js`). Three rules are in the code, not
+just the copy, because a training record that overstates itself is worse than one with no numbers:
+1. Headline figures count VERIFIED entries only, the same rule the progress engine uses, and the
+   unverified remainder is printed on the page rather than quietly dropped.
+2. A rate with no denominator returns null, and below 20 procedures the UI shows "2 of 6" instead of
+   a percentage. `MIN_RATE_N` is the single place that threshold lives.
+3. Complication figures are self-reported training records for reflection and for a conversation
+   with a guide. `DISCLAIMER` travels with every result object and every surface must show it. They
+   are not an audited outcome statistic and must never be presented as one.
+
+## 2026-09-24 — Clinical photographs stay on the device; consent is a gate, not a checkbox
+`pglog-photos.js` encrypts photographs device-local (the SURGX scheme) and adds NO upload endpoint.
+Putting patient photographs on a server is a decision for the institution and the owner, not a side
+effect of a logbook feature. `attach()` refuses without consent AND a de-identification assertion,
+per photograph, with no "remember my answer"; the consent text and timestamp are stored with the
+reference so it can be shown to an examiner. The app strips what it can (a canvas re-encode drops
+all EXIF including GPS) and states plainly what it cannot check: no software here can see whether a
+face is in the frame. The reference carries no filename, because a camera filename can carry a
+patient's name. The cost is that a reinstall destroys them, which is why the Drive backup exists.
+
+## 2026-09-24 — "Automatic" Drive backup means unlocked-this-session, and the UI says so
+The owner asked for auto-sync to Google Drive. A background upload that needs no password would
+mean the key was stored somewhere, which defeats the point of encrypting it. So `pglog-backup.js`
+takes the password once per app session and, while unlocked, backs up on change with a 10-minute
+floor; closing the app re-locks it. The backup holds only what exists nowhere else (drafts, queue,
+photographs) — verified entries stay on the server, because copying them into a file the resident
+can edit is how a logbook stops being evidence.
+
+## 2026-09-25 — One profile form, one institution directory
+Reported from a device: "all cities in India not covered and all medical colleges and hospitals not
+covered, and bug can't see and can't search college, and why two times institution is asked, I need
+one unified institution/hospital directory." Four separate faults, three of them real bugs.
+
+1. **Two forms.** `email-auth.js` asked a new doctor at sign-up for name/state/city/hospital against
+   `SMD_GEO` (107 hospitals, 184 cities); `profile-setup.js` then asked the SAME doctor on the next
+   app start for "college / hospital" against `SMD_HOSPITALS` (2,405 entries). Two questions, two
+   answers, two lists that disagreed. `profile-setup.js` is now the only form and asks the whole
+   profile once (name, phone, state, city, institution, degree, speciality). `email-auth.js`
+   delegates to it; its own form, typeahead and save were deleted rather than left as a second copy.
+   Both wrote the same Firestore doc already, so no profile is orphaned.
+
+2. **The college picker never opened.** `profile-setup.js` called the bare global `smdLazy(...)`,
+   but `lazy-load.js` is NOT among the scripts `index.html` loads, so the call threw ReferenceError
+   inside the click handler and nothing happened. The field looked focused and did nothing — that is
+   the "can't see and can't search college" report. It now loads the script itself when the helper
+   is absent. **Never reach for a global the page does not definitely define.**
+
+3. **The picker rows were invisible in dark mode.** `.pfs-opt b` and `.pfs-opt span` took their
+   colour from `--hink` / `--hmut`, the LIGHT theme's near-black, on a card the dark block had
+   already repainted `#111b2e`. Labels were black on black while the `--hbd` borders stayed light,
+   which is exactly what the screenshots showed: bright separator lines and no text. Every colour
+   inside the sheet is now restated under `body.dark`; the harness asserts a contrast ratio >= 4.5
+   (it measures 14.6) so this cannot regress silently.
+
+4. **Coverage.** `institutions-in.js` is the single directory. It does not copy the curated lists —
+   it reads whichever are loaded and merges them de-duplicated on normalised name+city, so the
+   curated data keeps living in one file each (2,462 institutions after the merge). What it adds is
+   the geography those lists lacked: every district headquarters of every state and UT, 1,241
+   entries against the previous 184, with no state left empty.
+
+**What "covered" is allowed to mean.** India has ~780 NMC medical colleges and on the order of
+70,000 hospitals. No bundled list is ever complete, and a picker that silently lacks your hospital
+is worse than one that admits it. So: cities are bounded public geography and are complete;
+institutions are curated and are NOT claimed to be exhaustive; free text is a first-class answer
+that is always offered; and what a doctor types is remembered on that device so the next colleague
+at the same hospital finds it. That last part also shows the owner what the curated list is missing.
+
+## 2026-09-25 — The India directory was in the build all along; three faults kept it from the app
+Owner: *"we already have whole india college and hospital list, why isn't it universally available
+in app."* They were right. `hospitals-in.js` has carried 2,405 curated institutions for a long time.
+Three separate faults meant only two screens could ever reach it, and one of those was broken too.
+
+**1. A GLOBAL NAME COLLISION, and it broke BOTH modules.** `hospital-registry.js` (the registry of
+hospitals this doctor has CONNECTED: `list/get/register/setActive`) and `hospitals-in.js` (the
+DIRECTORY of institutions in India: `all/search/byState/states`) both assigned
+`window.SMD_HOSPITALS`. The registry loads on every page; the directory is lazy. Proven in the
+running app:
+  - before the directory loads, `SMD_HOSPITALS.search` is `undefined`, so every picker found nothing;
+  - the moment it loads, `SMD_HOSPITALS.setActive` **disappears**, so `ghis-ward.js:334` silently
+    stopped remembering the doctor's active hospital.
+Each module broke the other, depending only on timing. The directory now owns
+`SMD_HOSPITAL_DIRECTORY` and claims the legacy name only when nothing else holds it.
+
+**2. `smdLazy` IS NOT DEFINED ON THE PAGE.** `lazy-load.js` is not among the scripts `index.html`
+loads, yet `home.js`'s hospital picker and `profile-setup.js` both called the bare global. Both
+threw ReferenceError inside their click handlers, so the picker never opened. This is the same
+root cause as the "can't see and can't search college" report. **Never reach for a global the page
+does not definitely define** — both call sites now load the script themselves.
+
+**3. NO UNIVERSAL ENTRY POINT.** Reaching the list meant knowing three private details: which file
+to lazy-load, which global it lands on, and that a different module owns that name. So only the two
+screens whose authors happened to know all three could use it. `SMD_INSTITUTIONS.ensure()` is now
+the one line any surface calls; `institutions-in.js` is tiny and loads with the app, and it pulls
+the heavy data in itself.
+
+**The lesson worth keeping:** "we already have the data" and "the app can use the data" are
+different claims. A dataset reachable only through undocumented private knowledge is, from every
+other screen's point of view, not there at all. The test that matters is not "does the file exist"
+but "can a screen that knows nothing get it in one call".
+
 ## 2026-09-25 - Geometry and slice images are never overwritten in place
 The Living CT 3D body failed on every native install without cached geometry from 2026-09-06 to
 2026-09-25: re-meshed chunks were uploaded to R2 under the old filenames while the manifest that

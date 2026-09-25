@@ -292,6 +292,7 @@ export async function recallNoShow(env, session, ticketId, opts, actor) {
   // G3: the recall and its hash-chained audit row in one commit; the ticket guard's refusal comes back as precondition.
   try { await appendOrgAudit(env, ev, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime })]); }
   catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were recalling them. Reload and try again." }); throw e; }
+  await liveBump(env, session.hospitalId);
   return recompute(env, session);
 }
 // The no-shows still inside their recall window, for the desk's and the doctor's "Recall no-shows" list.
@@ -324,6 +325,7 @@ export async function setPriority(env, session, ticketId, opts, actor) {
   const patch = { priority: rule.priority, priorityReason: rule.priority ? rule.reason : "", updatedAt: now() };
   try { await appendOrgAudit(env, ev, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime })]); }
   catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were setting priority. Reload and try again." }); throw e; }
+  await liveBump(env, session.hospitalId);
   return recompute(env, session);
 }
 
@@ -550,6 +552,20 @@ export async function portalContext(env, token) {
 // G3: each row is hash-chained per hospital (_q_audit_chain.js). Still best-effort; never blocks the action.
 export async function qAudit(env, ev) {
   await writeOrgAudit(env, { ...ev, ts: now() });
+  await liveBump(env, ev && ev.hospitalId);
+}
+/* Plan item 16: the live boards. Every queue change is audited, so the audit is where the hospital's revision stamp
+ * moves: q_live/<hospital> { rev }. The /live stream watches that one small document and tells the boards to
+ * refresh, instead of each board re-reading every room every few seconds. It holds a time, never a patient.
+ * Best-effort: a stamp that failed to move costs a board one slow-poll interval, never a change. */
+export function liveWrite(env, hospitalId) { return wUpdate(env, "q_live/" + sanitize(hospitalId), { rev: now(), hospitalId: String(hospitalId) }); }
+export async function liveBump(env, hospitalId) {
+  if (!hospitalId) return;
+  try { await fsCommit(env, [liveWrite(env, hospitalId)]); } catch (e) {}
+}
+export async function liveRev(env, hospitalId) {
+  const d = await fsGet(env, "q_live/" + sanitize(hospitalId));
+  return (d && d.fields && Number(d.fields.rev)) || 0;
 }
 
 // ---- ABDM Scan and Share: the tokens issued to shared profiles, and their registration ---------------

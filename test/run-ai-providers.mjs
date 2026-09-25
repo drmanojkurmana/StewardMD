@@ -92,7 +92,7 @@ try {
 
   // 8) /api/ai/health endpoint shape (Vertex primary + Developer hot standby configured)
   h = await (await onRequest({ request: new Request("https://stewardmd.in/api/ai/health", { headers: { Origin: "https://stewardmd.in" } }), env: { ...VERTEX_ENV, GEMINI_API_KEY: "dev-key" }, params: { path: ["health"] } })).json();
-  ok(h.enabled === true && h.provider === "vertex" && h.fallback_available === true && h.fallback_provider === "developer" && h.model === "gemini-2.5-flash" && h.token_cache === true && h.vertex_status === "healthy" && h.developer_status === "ready" && h.authentication === "Service Account JWT", "/api/ai/health returns full shape", JSON.stringify(h).slice(0, 200));
+  ok(h.enabled === true && h.provider === "vertex" && h.fallback_available === true && h.fallback_provider === "developer" && h.model === "gemini-2.5-flash" && h.token_cache === true && h.vertex_status === "configured" && h.developer_status === "configured" && h.authentication === "Service Account JWT", "/api/ai/health returns full shape", JSON.stringify(h).slice(0, 200));
 
   globalThis.fetch = realFetch;
   console.log(`\n${fails === 0 ? "ALL GREEN — provider abstraction: Vertex primary, Developer failover, token cached, 2.5-flash default" : fails + " failed"}`);

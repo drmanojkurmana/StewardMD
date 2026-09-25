@@ -323,7 +323,8 @@
         '<h2 id="prTitle">' + wTH("ward.reg-offline-title", "{name} checked in offline", { name: res.name ? esc(res.name) : wTH("ward.reg-patient", "Patient") }) + "</h2>" +
         '<p class="pr-mrlabel">' + wTH("ward.reg-offline-token", "Offline token") + "</p>" +
         '<p class="pr-mr" lang="en">' + esc(res.token) + "</p>" +
-        '<p class="pr-warn">' + wTH("ward.reg-offline-explain", "The connection is down. This check-in is kept on this desk and goes into the queue as soon as the connection is back. The patient keeps this number and their place.") + "</p>" +
+        '<p class="pr-warn">' + wTH("ward.reg-offline-explain", "The connection is down. This check-in is kept on this desk and goes into the queue as soon as the connection is back. The patient keeps this number and their place.") +
+          (res.durable === false ? " " + wTH("ward.reg-offline-tab-only", "This browser cannot keep it after the tab is closed: keep this tab open until the connection is back.") : "") + "</p>" +
         '<div class="pr-actions">' +
           (canPrint ? '<button type="button" class="pr-btn" data-a="print-token">' + wTH("ward.reg-offline-print", "Print token slip") + "</button>" : "") +
           '<button type="button" class="pr-btn ghost" data-a="another">' + wTH("ward.reg-add-another", "Add another") + "</button>" +
@@ -605,12 +606,15 @@
         // Plan item 13: unreachable is not refused. A desk holding an offline series keeps the check-in and prints its number.
         var off = null;
         try { off = opts.offline ? opts.offline(sent) : null; } catch (e) { off = null; }
-        if (off && off.token) {
-          state.offline = { token: off.token, at: off.at, name: val("name") };
-          host.innerHTML = offlineDoneHtml(state.offline, typeof opts.printToken === "function");
-          return;
-        }
-        host.querySelector("#prFerr").textContent = wT("ward.reg-could-not-reach-server", "Could not reach the server. Try again.");
+        // The host answers once the check-in is WRITTEN on this device (a promise); only then is it shown as taken.
+        Promise.resolve(off).then(null, function () { return null; }).then(function (got) {
+          if (got && got.token) {
+            state.offline = { token: got.token, at: got.at, name: val("name"), durable: got.durable !== false };
+            host.innerHTML = offlineDoneHtml(state.offline, typeof opts.printToken === "function");
+            return;
+          }
+          host.querySelector("#prFerr").textContent = wT("ward.reg-could-not-reach-server", "Could not reach the server. Try again.");
+        });
       });
     }
 
