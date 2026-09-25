@@ -125,7 +125,11 @@ ok("every concept element is a shipped part", manifest.concepts.every((c) => c[2
 
 // --- canonical mapping ---
 const canon = manifest.canon;
-ok("every ontology structure has a mapping row (mapped or explicitly unmapped)", Object.keys(onto).every((k) => canon[k]) && Object.keys(canon).every((k) => onto[k]));
+// A structure added to the 2D atlas after the last 3D import is listed, with a reason, in
+// bp3d-map.json _pending_3d until someone chooses its BodyParts3D row; it must not ALSO be mapped.
+const pending = map._pending_3d || {};
+ok("every ontology structure has a mapping row (mapped, explicitly unmapped, or pending with a reason)",
+  Object.keys(onto).every((k) => canon[k] || (pending[k] && !map.structures[k])) && Object.keys(canon).every((k) => onto[k]));
 ok("every mapping row in bp3d-map.json reached the manifest", Object.keys(map.structures).every((k) => canon[k] && canon[k].kind === map.structures[k].kind));
 const meshKinds = Object.values(canon).filter((e) => e.kind === "concept" || e.kind === "composite");
 ok("67 canonical structures have a mesh (58 full + 9 partial)", meshKinds.length === 67 && manifest.stats.mapped_full === 58 && manifest.stats.mapped_partial === 9);

@@ -51,6 +51,14 @@ Dev-only tooling. Turns a licence-cleared volume into `atlas/<id>/atlas.json` pl
     atlas-pipeline/.venv/bin/python atlas-pipeline/living.py --work /abs/path/to/work --prove-rebuild
     atlas-pipeline/.venv/bin/python atlas-pipeline/living.py --work /abs/path/to/work --densify 48 --write
 
+    # A NEW living CT group from one TotalSegmentator subject (fetch it first with tsd_fetch.py
+    # --subject sNNNN --mask ALL). Measures the axes from the masks (prints the evidence for
+    # ORIENTATION.md), re-indexes into the torso convention, cuts axial/coronal/sagittal and writes
+    # 48-slice modules; then register the printed M maps in living.py and run it for the group.
+    .venv/bin/python atlas-pipeline/tsd_living.py --subject s0021 --group live-neck \
+        --prefix ct-live-neck --title "Neck soft tissue - CT" --work /abs/path/to/work --write
+    .venv/bin/python atlas-pipeline/living.py --work /abs/path/to/work --group live-neck --write
+
     # Pin QA: flag outliers, render each as a crop, LOOK, record decisions in pin_fixes.tsv
     atlas-pipeline/.venv/bin/python atlas-pipeline/pin_scan.py --out /tmp/pinscan
     atlas-pipeline/.venv/bin/python atlas-pipeline/pin_fixes.py --write

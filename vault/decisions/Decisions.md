@@ -9197,3 +9197,13 @@ in `modules.json` mirror at display time. Edge letters only where anatomy proves
 (`atlas/notes.json`) ship ai_drafted behind `smd_atlas_notes` (default OFF), like CliniX/SURGX.
 Shared 3D snapshots carry the CC BY credit inside the PNG, since CC BY 4.0 requires attribution on
 redistribution; the on-screen rule (attribution only on the About screen) is unchanged.
+
+## 2026-09-25 - Living neck CT: one command per TotalSegmentator subject, axes from anatomy
+`ct-live-neck-*` (s0021, `ct neck`, contrast) and `ct-live-thorax-neck-*` (s0897, `ct thorax-neck`,
+unenhanced) are built by `atlas-pipeline/tsd_living.py`, which measures each axis from the masks
+(C2 vs T4; trachea vs cord; descending aorta, SVC, brachiocephalic trunk course and heart, compared
+level by level) and re-indexes the CT into the torso convention before cutting, so every downstream
+tool (orient, reformat, living.py proofs, flipX) is reused unchanged. Masks mapped to null are
+dropped before the crop and slice pick: the first build spent 8 of 48 axial slices on the brain.
+New canonical ids (trachea, thyroid, neck vessels, right upper lobe) are 2D only for now: listed in
+`bp3d-map.json` `_pending_3d`, not mapped by name similarity. The 3D layer was out of scope.

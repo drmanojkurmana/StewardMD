@@ -134,6 +134,119 @@
    }
   },
   {
+   "id": "ct-live-neck-axial",
+   "title": "Neck soft tissue - CT",
+   "subtitle": "Axial - living patient",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-neck-axial/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. The upper back is rounded forward in this scan, so the chest sits tilted under the neck and the most posterior coronal slices cut through the back muscles. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-neck",
+   "plane": "axial",
+   "mm": [
+    277.5,
+    256.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "A",
+    "bottom": "P"
+   }
+  },
+  {
+   "id": "ct-live-neck-coronal",
+   "title": "Neck soft tissue - CT",
+   "subtitle": "Coronal - living patient",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-neck-coronal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. The upper back is rounded forward in this scan, so the chest sits tilted under the neck and the most posterior coronal slices cut through the back muscles. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-neck",
+   "plane": "coronal",
+   "mm": [
+    277.5,
+    318.0
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "S",
+    "bottom": "I"
+   }
+  },
+  {
+   "id": "ct-live-neck-sagittal",
+   "title": "Neck soft tissue - CT",
+   "subtitle": "Sagittal - living patient",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-neck-sagittal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. The upper back is rounded forward in this scan, so the chest sits tilted under the neck and the most posterior coronal slices cut through the back muscles. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-neck",
+   "plane": "sagittal",
+   "mm": [
+    256.5,
+    318.0
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
+  },
+  {
    "id": "ct-head-coronal",
    "title": "Skull and sinuses - CT",
    "subtitle": "Coronal",
@@ -373,6 +486,119 @@
    "orient": {
     "top": "A",
     "bottom": "P"
+   }
+  },
+  {
+   "id": "ct-live-thorax-neck-axial",
+   "title": "Thorax and neck - CT",
+   "subtitle": "Axial - living patient",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-thorax-neck-axial/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. This scan was done without intravenous contrast, so vessels are the same grey as muscle: the vessel labels come from the dataset's masks, not from anything the image highlights. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-thorax-neck",
+   "plane": "axial",
+   "mm": [
+    313.5,
+    270.0
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "A",
+    "bottom": "P"
+   }
+  },
+  {
+   "id": "ct-live-thorax-neck-coronal",
+   "title": "Thorax and neck - CT",
+   "subtitle": "Coronal - living patient",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-thorax-neck-coronal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. This scan was done without intravenous contrast, so vessels are the same grey as muscle: the vessel labels come from the dataset's masks, not from anything the image highlights. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-thorax-neck",
+   "plane": "coronal",
+   "mm": [
+    313.5,
+    394.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "S",
+    "bottom": "I"
+   }
+  },
+  {
+   "id": "ct-live-thorax-neck-sagittal",
+   "title": "Thorax and neck - CT",
+   "subtitle": "Sagittal - living patient",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-thorax-neck-sagittal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. This scan was done without intravenous contrast, so vessels are the same grey as muscle: the vessel labels come from the dataset's masks, not from anything the image highlights. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-thorax-neck",
+   "plane": "sagittal",
+   "mm": [
+    267.0,
+    394.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
    }
   },
   {
