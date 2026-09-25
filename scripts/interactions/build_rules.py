@@ -90,9 +90,8 @@ def build():
     curated_dup_tags = {s.get("value") for r in (legacy + mech)
                         if r.get("type") == "duplicate_class"
                         for s in r.get("subjects", [])}
-    # EPC taxonomy is excluded by the runtime; do not count these inert rules
-    # as active coverage. Specific rules belong in mechanism_rules.json.
-    # Historical candidates are retained in curated/deferred_epc_rules.json.
+    for r in _auto_duplicate_rules(curated_dup_tags):
+        tagged.append(r)
 
     by_key = {}
     collisions = 0
