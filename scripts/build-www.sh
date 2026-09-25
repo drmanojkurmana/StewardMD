@@ -108,6 +108,15 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # the StewardMD app links to wardsynq.html and no flag turns it on; it is present so
 # the offline shell and the assets are cached and testable, not so a clinician can
 # open it. Reachability is a separate, deliberate decision that has not been taken.
+# Medical Core: ES modules (dynamic-imported by medcore-boot.js) plus its clinical packs
+# (units / freshness / change bands, fetched at runtime). The root *.js loop above already
+# copies medcore-flags.js and medcore-boot.js; this ships the medcore/ directory they need.
+if [ -d medcore ]; then
+  mkdir -p "$WWW/medcore"
+  cp -R medcore/. "$WWW/medcore/"
+  echo "  medcore: $(find "$WWW/medcore" -type f | wc -l | tr -d ' ') files"
+fi
+
 if [ -d wardsynq ]; then
   mkdir -p "$WWW/wardsynq"
   cp -R wardsynq/. "$WWW/wardsynq/"

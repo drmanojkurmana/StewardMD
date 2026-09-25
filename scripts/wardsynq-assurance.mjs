@@ -73,6 +73,17 @@ const SUITES = [
   "test/wardsynq-oncology.test.mjs",
   "test/wardsynq-cardiology.test.mjs",
   "test/wardsynq-safety-case.test.mjs",
+  // Medical Core (HAZ-ML-01..04). Not wardsynq-* files, so they are named explicitly: the hazards
+  // are argued in the same safety case rather than in a parallel one, which is the whole point.
+  "test/medcore-units.test.mjs",
+  "test/medcore-age.test.mjs",
+  "test/medcore-shortcut.test.mjs",
+  "test/medcore-labels.test.mjs",
+  "test/medcore-pipeline.test.mjs",
+  "test/medcore-models.test.mjs",
+  "test/medcore-gbm.test.mjs",
+  "test/medcore-decide.test.mjs",
+  "test/medcore-shadow.test.mjs",
 ];
 
 /** Runs node --test with the TAP reporter and returns a flat list of {name, passed}. */

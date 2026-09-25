@@ -18,6 +18,9 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[Review Desk]] - clinicians approve AI-drafted content and export decisions; weekly guideline source watch
 - [[Colleagues]] - wave 2 (OFF until the owner turns it on): referrals and handovers between verified doctors, case rooms, a hospital's own kit version, kit history per patient
 - [[OpenMed-Evaluation]] - which OpenMed PII/NER models fit StewardMD, and the India-ID redaction shipped from it
+- [[Medical Core]] — the small ML decision layer under ICU/Ward. Phase 1 (deterministic: what
+  changed, missing information) is BUILT behind `smd_medcore`, default OFF. There is no model, no
+  dataset and no approved outcome; read the note before assuming otherwise.
 
 ### Clinical modules
 - [[Scan-Meds and Drug Index]] — prescription/med scan, drug DB, interactions

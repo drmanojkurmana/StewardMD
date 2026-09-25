@@ -9646,3 +9646,173 @@ became unfindable. Stripping the counter-ion is therefore done on the QUERY as a
 the stored names, in `clinical-index.js` (`search`, `get`) and in `offline-clinical.js`
 (`lookStruct`, `lookMono`) so a composition from the brand catalogue still resolves. An exact name
 still wins first, so a distinct salt with its own record is matched before any stripping happens.
+## 2026-09-19 — Medical Core Phase 1: deterministic first, on the device, no model
+
+**Decision.** The Medical Core ML layer is built in the order deterministic → baseline → model, and
+Phase 1 ships the deterministic part alone, behind `smd_medcore` (default OFF). What a clinician
+sees today is two lists on the ICU overview: "what changed" and "missing information". There is no
+probability in the product and no training data in the repository.
+
+**Why this order.** The two lists are the parts of the proposed AI panel that need no model at all,
+and building them first produces the feature pipeline a model would later consume, so nothing is
+thrown away if the data never arrives. `icu-autoscores.js` already returned `{__missing:[...]}` per
+score and that knowledge was spent greying out cards; it is now answered per PARAMETER, because a
+clinician chases a test, not a card ("GCS - needed by qSOFA, NEWS2 and SOFA" is one line).
+
+**Inference runs on the device.** Model artifacts, when they exist, will be versioned JSON
+(coefficients, tree ensembles, calibration maps) fetched from R2 like the MaiK Lite and KardiQ X
+packs and evaluated in plain JS. There is no Medical Core service and no `patient_id` payload, so
+O3 (thin push, no PHI) and the de-identified MaiK posture hold by construction rather than by
+policy. This also bounds the model size, which is the point: the size falls out of what a phone can
+run and what the dataset supports, not out of a plan.
+
+**`asOf` is an argument, never a default.** `medcore-state.js` reads no clock. A training replay
+passes the historical instant and gets exactly what the bedside would have had. That single
+property is the leakage control, and the test for it greps the file.
+
+**Features are implemented once, in JS.** The trainer will call the shipped `medcore-features.js`
+through `backend/medcore/featurize.mjs` rather than reimplementing anything in Python, so train/serve
+skew stops being a class of bug. Artifacts ship with parity vectors and cannot be loaded without them.
+
+**Normalisation finally happens somewhere a clinician can read.** `wardToSI` in icu.js converts an
+SI-labelled ward result BACK to conventional units, so the GHIS adapter refuses to normalise at all.
+`medcore/data/units.json` is the allow-list, with plausibility bounds as a second net: a creatinine
+measured in umol/L but LABELLED mg/dL passes the allow-list and is caught at 180 > 25 mg/dL.
+
+**Not re-litigated, and not to be:** Medical Core owns no alerting, escalation, deduplication,
+scoring, rules or notification. All of it already exists in `wardsynq/` and stays there. The panel
+carries no status colour, because "what changed" is an observation and "missing information" is a
+to-do list, and status colour is reserved for status.
+
+**Blocked, and not on code:** there is no dataset, no access approval, no adjudication process and
+no named clinician who can approve an outcome. Steps 13 onward of the plan cannot start until there
+is. See [[Medical Core]].
+
+## 2026-09-19 — Medical Core data: a public ICU dataset AND synthetic, with the objection built as a control
+
+**The question.** Step 12 of [[Medical Core]] is a data gate nothing engineering can open. Asked how
+to get past it, the owner chose both a credentialed public ICU dataset and synthetic data generated
+from the StewardMD Knowledge Base, having read the objection to the second.
+
+**The correction that preceded it.** We did not train MedPsy. `qvac/MedPsy-1.7B` is the upstream
+base; what StewardMD trained is MaiK Lite, a LoRA fine-tune of it on the KB corpus (a 42,176-chunk
+textbook JSONL plus SFT pairs). That corpus has no patients, no timestamps and no outcome events, so
+it cannot train a deterioration model at all. It remains what it already is in this architecture:
+the reasoning and evidence layer behind "Review with MaiK", and a drafting aid for the unapproved
+packs.
+
+**The objection, and what was done with it.** A model trained on textbook-derived vignettes learns
+the idealised presentation, which is exactly the patient who was never going to be missed; the
+patient this project exists for is the atypical one. Rather than record that as a caveat somebody
+later forgets, it is a control: `provenance.synthetic` propagates extract → matrix → artifact →
+loader, and `medcore/medcore-models.js` REFUSES a synthetic-provenance artifact for every clinical
+purpose, shadow included, with no flag, option or override. An approval field cannot launder it. A
+test asserts no app file ever asks for the one purpose it may load for.
+
+**What the synthetic cohort is actually for**, and it is worth more than training would have been:
+proving the controls detect the failures they claim to. HAZ-ML-01 and HAZ-ML-02 were both PARTIAL
+because their empirical half had never run. The generator now injects the frequency shortcut, the
+prevalent cases and the treatment paradox deliberately, and the gate is watched firing:
+`test/medcore-pipeline.test.mjs` builds a cohort where the shortcut is the ONLY signal and asserts
+the model is refused. They stay PARTIAL, because data whose observation schedule was written by the
+same author as the control is a demonstrated mechanism, not evidence from a ward.
+
+**The pipeline is Node, not Python.** No numpy or scikit-learn in the environment, and the better
+reason: the trainer calls the app's own `medcore-state.js` and `medcore-features.js` at `asOf = t0`,
+so train/serve skew is not a bug class that exists. A GBM belongs beside the logistic baseline when
+real data and a Python stack arrive; the matrix is already JSONL it can read, parity vectors are
+what will catch the two scorers drifting, and the plan requires it to beat the baseline first.
+
+**Reported as it came out:** on the synthetic cohort the model fails the calibration gate (slope
+0.69, 2.4 events per variable) and does not ship. The pipeline produced a model and refused it.
+
+**Unchanged:** the real data gate. A public dataset proves the pipeline; it does not make a US ICU
+model a predictor for an Indian ward, and nothing reaches a clinician without local revalidation and
+a named approver.
+
+## 2026-09-19 — Medical Core shadow is built and has nothing to run, which is the correct state
+
+Step 18 of [[Medical Core]]. `medcore/medcore-shadow.js` attaches to a real `ClinicalEventBus`,
+debounces 60 s per patient, runs the full decision path and records the result where nobody can see
+it. Five properties, in the order they matter: it reaches nobody (no DOM, no network, no prompt, no
+store, nothing emitted back onto the bus); it cannot throw into the app (failures are counted,
+because a shadow that silently stopped observing reports "nothing went wrong" while looking at
+nothing, a mistake made here once already in `wardsynq-shadow-boot.js`); it is installed from
+outside onto a bus it is handed; it uses wall time for the debounce and NEVER for the decision's
+`asOf`, which stays the caller's leakage control; and its buffer keeps statuses, reasons and a
+probability decile, never a clinical value and never an identifier.
+
+**Today it records nothing but abstentions, and that is the point.** Every artifact in the
+repository is synthetic, `medcore-models.js` refuses them all, so the full chain from bus event to
+buffer produces ABSTAIN / MODEL_UNAVAILABLE with the artifact refusal attached. A probability
+appearing in a shadow buffer right now would mean the refusal had been bypassed somewhere, so the
+test asserts its absence rather than asserting a happy path that does not exist.
+
+**A real bug this found.** The observer first passed the handler's argument straight to the state
+adapter. `ClinicalEventBus` delivers a WRAPPED event (`{id, type, payload, vectorClock, ...}`), not
+the bare payload, so every observation looked like an event with no state - which counts as
+"nothing to do" and reads exactly like "nothing went wrong". Found by testing against the real bus
+rather than a stub, which is the whole reason for doing so.
+
+Step 19 is wired in the same file: an OK decision is handed to `wardsynq-mlops.js`
+`recordShadowPrediction`, and an abstention is never recorded as a prediction, because there is no
+prediction to record.
+
+## 2026-09-19 — The calibration-slope gate stays on the point estimate (status quo, owner may revisit)
+
+**Decision: no change.** The gate remains `0.9 <= slope <= 1.1` on the point estimate. Nothing was
+loosened to make a model pass, and this is recorded so the question is not silently re-opened later
+by whoever next sees a model fail by a rounding error.
+
+**Why it came up.** A model sat at slope 0.8996 against the 0.9 floor - a difference of 0.0004 on an
+estimate whose bootstrap interval was two orders of magnitude wider. The point-estimate gate will
+occasionally reject an adequate model for reasons indistinguishable from noise.
+
+**The alternative, if the owner or the committee wants it:** gate on the bootstrap interval
+overlapping [0.9, 1.1] rather than the point estimate. That is standard practice and it is a
+LOOSENING, so it is a clinical-governance decision rather than an engineering one and needs their
+signature, not ours.
+
+**Why it is not urgent.** With the GBM the slope is 0.926 (95% CI 0.861 to 1.010) and clears the
+point-estimate gate outright. The interval is reported beside every slope either way, so nobody has
+to infer the precision.
+
+## 2026-09-20 — Real ICU data: the frequency shortcut is most of the signal, and four gates caught it
+
+The owner pushed to use public datasets. I had reasoned that public ICU data is credentialed and
+needs a DUA nobody here can sign; that is true of full MIMIC-IV and eICU and FALSE of both demos,
+which are openly licensed and need nothing. They were available the whole time.
+
+**What was run.** The eICU Collaborative Research Database Demo: 2,477 ICU stays across 186
+hospitals, 6,353,242 observations, 225 with a vasopressor start. Adapter at
+`backend/medcore/adapters/eicu-demo.mjs`; MIMIC-IV demo adapter beside it.
+
+**THE RESULT, and it is the most important number this project has produced.** On real data a model
+knowing NOTHING but how often the patient was measured scores AUROC 0.772. The full physiological
+model scores 0.785. Margin 0.013 against a gate of 0.05, so `beatsFrequencyProbe` FAILS. The
+measurement-frequency shortcut (HAZ-ML-01) is not a theoretical risk in ICU data: it is most of the
+apparent signal. A 0.785 would have looked like a good deterioration model while being close to a
+staffing detector.
+
+On the synthetic cohort the same probe scored 0.53 to 0.59, because the generator's observation
+schedule was written by the same person as the control. **No synthetic cohort can surface this.**
+That is now the strongest available argument for the whole real-data gate.
+
+**Second finding: at one hospital the model is worse than chance** (site 420, AUROC 0.248, against
+0.785 overall). A single-site evaluation would have reported 0.785 and shipped it. Multi-site is not
+a nicety; it is how that is visible at all.
+
+Four of seven gates failed (frequency probe, subgroup collapse, calibration slope 1.56, missed
+events reduced 5.9% against 25%). On synthetic data all seven had passed. The gates did their job,
+and the difference between those two runs is the argument for keeping them inconvenient.
+
+**Bugs real data found in our own code, in one session:** the unit table lacked `insp/min` and
+dropped 13,913 respiratory rates; it lacked `units` for pH and dropped 1,013 more; three gates
+PASSED on a test split with zero events (now every evidence-dependent gate fails when it cannot be
+measured); MC-3 required a MAP, which restricted it to patients with an arterial line and refused
+26,467 of 29,823 points until `minimumInputsAnyOf` let a cuff pressure answer the same question;
+and `readFileSync` cannot hold a 560 MB extract, so the featurizer now streams.
+
+**Nothing about this model is clinically usable.** It failed its gates and `medcore-models.js`
+would refuse it. eICU is US ICU data with synthetic dates; StewardMD serves US and Indian wards, and
+site is a gated subgroup precisely so that difference is measured rather than assumed.
