@@ -1,13 +1,19 @@
 ---
 tags: [module, opd, clinical-content]
-status: built 2026-09-25 (flag ON). Content ai_drafted, PENDING clinical review.
+status: built 2026-09-25 (flag ON), 26 kits. Content ai_drafted, PENDING clinical review.
 flag: smd_specialty_kits (client, def:true, ?kits=0 hides the OPD tab, the Home tile and the sheet)
 ---
 # Specialty Kits
 
-The specialty layer of the OPD consult for doctors who are not physicians: **O&G, Paediatrics,
-Orthopaedics, Ophthalmology, ENT, Dermatology, Psychiatry, Dental** (owner, 2026-09-25: "Start with O&G
-and Paediatrics kits and complete all"). Two places:
+The specialty layer of the OPD consult, for every branch. **26 kits in 7 groups** (`KIT_GROUPS` in the
+build script): Women and children (O&G, Paediatrics); Acute care and theatre (Anaesthesia, Emergency);
+Surgical (Orthopaedics, General Surgery); Medical (Cardiology, Respiratory, Neurology, Nephrology and
+Urology, Diabetes and Endocrine, Gastro and Hepatology, Rheumatology); Eye, ENT, skin and teeth
+(Ophthalmology, ENT, Dermatology, Dental); Mind, ageing and rehabilitation (Psychiatry, Geriatrics,
+Palliative, Rehabilitation); Community, nursing, pharmacy and legal (Community Medicine, Cancer
+Screening, Nursing, Pharmacy, Forensic). First 8 on 2026-09-25 ("Start with O&G and Paediatrics kits and
+complete all"); the other 18 the same day from the owner's ticked list ("every branch should make use of
+our app", wave 1). Two places:
 - **OPD EMR "Specialty" tab**, right after Assessment ([[OPD Queue]]). Writes into the consult.
 - **Home tile "Specialty Kits"** (`home.js` `act:"speckit"`, defOn) opening a standalone sheet
   (`#smdKit`), where every Add becomes Copy. For looking things up without a patient open.
@@ -33,13 +39,41 @@ A kit is:
      `immunisation` (OPD only: opens the existing Immunisation tab).
 3. Shortcuts: investigations (fills the OPD investigation search), protocols (opens the reader in the
    OPD Protocol tab, or the Knowledge Library from Home), calculators (MEDCALC), patient-advice texts.
+   - Wave 1 tools: `la-dose` (local anaesthetic maximum dose, Williams and Walker 2014, dosing weight
+     capped at 70 kg because ropivacaine and the with-adrenaline rows have no mg ceiling), `burns-chart`
+     (Lund and Browder by age column + Parkland), `ckd-grid` (CKD-EPI 2021 race-free + KDIGO G/A heat map),
+     `joint-chart` (28-joint tap chart, DAS28-ESR/CRP, CDAI, SDAI), `body-chart` (front/back injury map
+     for MLC notes), `mccd` (Form 4 Part I (a) to (c) with the lowest line as underlying cause; flags a
+     mode of dying there), `labour-care` (WHO Labour Care Guide 2020: alert values per row, cervix
+     plateau hours by dilatation, second stage by parity). Growth also plots **WHO charts** (-3, -2, 0,
+     +2, +3 SD curves, earlier measurements added in the sheet, table view for screen readers).
+   - Data files: `src/data-<name>.json` -> `bundle.data[name]` (`milestones`, `la-doses`,
+     `lund-browder`, `lcg`, `mccd`, `notifiable`). Each carries `source` and `verified` (how it was read).
 4. Sources and a review status on every kit. Picking a kit chip in the OPD also selects the matching
-   [[MaiK Scribe]] specialty template (`scribe` field), so the scribe listens for what the kit documents.
+   [[MaiK Scribe]] specialty template (`scribe` field; 21 kits have one), so the scribe listens for what
+   the kit documents.
+5. **Order sets** (`orderSets`, 2 to 15 tests): "Queue N tests" puts them on the Investigations tab's
+   queued shelf (same shelf as dictated tests, with an "Ix:" plan line). Each is still searched and
+   ordered by the doctor; nothing is ordered automatically.
+6. **Picker**: the chip row shows the current kit, "my specialty" and recent kits (at most 5), plus
+   "All 26 kits", a grouped list with search that also matches what a kit's tools do ("burns" finds
+   Emergency). Recent kit ids live in `smd_kit_recent` (ids only).
+7. **Notifiable-disease reminder** (C6): on the Assessment tab, when the provisional diagnosis names a
+   notifiable disease (`data-notifiable.json`, whole-word keywords), a note says how and where to notify
+   (Ni-kshay, IDSP/IHIP). Reminder only; nothing is sent.
+8. **Personalisation** (A1/F4): the sign-up speciality (`profile-setup.js`, event `smd:profile-loaded`)
+   maps to a kit (`SPEC_TO_KIT`) and becomes "my specialty" unless the doctor set one by hand
+   (`smd_my_specialty_src` "manual" wins). My specialty sets the kit default, the scribe template default,
+   the Home tile subtitle, and MaiK's "prefer that specialty's guidelines" line. Universal Search has a
+   "Specialty kits" category (kits and their tools, deep-linking `SMD_KITS.open({kit, tool})`), and MaiK
+   Home chips can open a kit tool.
+9. **Voice** (E5): mic buttons on long kit fields use `SMD_VOICE.listen({noCloud:true})` (on-device only).
+10. **Documents** button: opens [[Clinical Documents]] prefilled from the consult.
 
 ## Key files
 - `specialty-kits.js` (`window.SMD_KITS`) - engine: pure maths (exported `_dating`, `_growth`, ...),
   rendering for a host, events, the standalone sheet. `specialty-kits.css`, `specialty-kits-flags.js`.
-- `kb/specialty-kits/src/<kit>.json` - one kit per file; `src/data-milestones.json` - CDC checklist data.
+- `kb/specialty-kits/src/<kit>.json` - one kit per file; `src/data-*.json` - reference data (above).
 - `kb/specialty-kits/kits.json` - GENERATED bundle (never hand-edit).
 - `scripts/build-specialty-kits.mjs` - schema (header comment), validator, bundle builder.
   `--validate [ids]` checks only; no flag = validate + write the bundle + sync `KITS_V`, `GROWTH_V` and
@@ -49,8 +83,11 @@ A kit is:
 - `opd-emr.js`: `kitTab`, `kitHost` (the host interface below), the tab in `tabsNav`, `switchTab("kit")`
   loads the assessment. `scribe-templates.js`: one template per kit.
 - Tests: `test/specialty-kits.test.mjs` (maths vs oracles, validator, bundle freshness, rendering, OPD
-  host), `test/run-specialty-kits-ui.mjs` (full app in headless Chrome at 390px: Home tile, sheet,
-  stacking, OPD tab, every kit, read-only, flag off), `test/scribe-templates.test.mjs`.
+  host), `test/kit-tools-docs.test.mjs` (wave 1 tools vs hand-worked published values, picker groups,
+  profile mapping, notifiable matching, documents, review desk, apply script, source watch),
+  `test/run-specialty-kits-ui.mjs` (full app in headless Chrome at 390px: Home tile, sheet, picker,
+  stacking, OPD tab, every kit, the wave 1 tools, order set, notifiable note, documents, review desk,
+  read-only, flag off), `test/scribe-templates.test.mjs`.
 
 ## Adding or editing a kit
 1. Edit `kb/specialty-kits/src/<id>.json` per the schema in the build script header. Targets and `set`
@@ -61,8 +98,9 @@ A kit is:
 
 ## The host interface (what a new surface must provide)
 `kind, canWrite(), writeNote(), ready(), readyNote(), addLabel(), fieldLabel(name), insert(field, text,
-sets), repaint(), protocol(id), calculator(id)|null, investigate(query)|null, openTab(tab)|null,
-setScribe(id)|null, patient()`. `insert` is the only write; the OPD host appends (textarea: new line;
+sets), repaint(), protocol(id), calculator(id)|null, investigate(query)|null, queueTests(tests,
+label)|null, openTab(tab)|null, setScribe(id)|null, patient(), consult()|null, icd()|null,
+canDictate()|null`. `insert` is the only write; the OPD host appends (textarea: new line;
 single-line field: "; "), coerces `sets` through `voiceCoerce` (selects snap to the form's own option or
 set nothing), marks the fields touched (so the scribe never overwrites them) and toasts where it went.
 
@@ -88,7 +126,7 @@ set nothing), marks the fields touched (so the scribe never overwrites them) and
   is found by its `aria-label="Close specialty kit"`.
 
 ## Content status
-- 8 kits, all `review.status: "ai_drafted"` (compiled with AI assistance from the cited sources, each
+- 26 kits, all `review.status: "ai_drafted"` (compiled with AI assistance from the cited sources, each
   URL retrieved), NOT clinically reviewed; every kit says so on screen. `reviewed`/`approved` needs a
   named reviewer (validator-enforced). Kit authors' open points: search terms may not match a
   hospital's catalogue names; Psychiatry insight grades and dental mobility grades are uncited
@@ -100,6 +138,23 @@ set nothing), marks the fields touched (so the scribe never overwrites them) and
   WHO numbers are used (no package code); the kit cites WHO. The same method reproduces WHO's anthro
   README examples and all 2101 z-scores of WHO's 2007 reference survey (`survey_who2007_z.csv`); a
   35-child sample of that survey is embedded in the unit test.
+- Wave 1 authors' open points (review these first): LA doses from Williams and Walker 2014 only (BNF
+  403; no levobupivacaine; lidocaine with adrenaline 6 mg/kg); ASA class wording not checked against
+  ASA text (paywall); surgical pre-op panel includes HIV/HBsAg/HCV (Indian practice); MoHFW 2014 sexual
+  violence guideline PDF unreachable (kit uses statements quoted by the Supreme Court 2022 and the UNFPA
+  2017 handbook); MCCD modes of dying partly from ICMR-NCDIR 2022, "fever" deliberately not a vague term;
+  CBAC scored per the revised 9 Oct 2020 form (max 12, "above 4" high risk; 2025 module says 4 or more);
+  notifiable list is 24 conditions from a 2009 district copy of the IDSP forms (COVID-19, scrub typhus,
+  KFD, Nipah, kala-azar, leprosy left out as unverified); Labour Care Guide choices per WHO 2020;
+  PPSv2 copyright and CFS permission to check; HEART troponin cut-offs; CHA2DS2-VA vs VASc; ILAE 2025
+  generalised types; SpO2 targets 92% vs 90%; AASLD HCC figures read from search results.
+- Calculators added for kits (calculators.js): ipss, mallampati, meows, pews, lund_browder, possum,
+  p_possum, clavien_dindo, lrinec, esas, pps, cbac, ctg, act_asthma (`test/calculators-added.test.mjs`).
+  POSSUM papers paywalled (checked against 4 open copies); PEWS oxygen threshold per Shafi 2020; ACT
+  items are copyrighted so the doctor enters each item's points. The existing `gbs` is Glasgow-Blatchford.
+- Older calculator titles contain em dashes (e.g. "Wells score — PE"); `calcTitle()` strips them for
+  kit screens only. The titles themselves were left alone (other screens use them).
 - No em/en dashes (validator + browser test), British spelling.
 
-Deps: [[OPD Queue]] · [[MaiK Scribe]] · [[Clinical Protocols]] · [[Home Tools]] · [[Knowledge Library]].
+Deps: [[OPD Queue]] · [[MaiK Scribe]] · [[Clinical Protocols]] · [[Home Tools]] · [[Knowledge Library]] ·
+[[Clinical Documents]] · [[Review Desk]] · [[Universal Search]].

@@ -167,6 +167,8 @@ leaving it present:
 | Flag | Def | Why |
 |---|---|---|
 | `smd_specialty_kits` | **ON** | The OPD EMR Specialty tab, the Home "Specialty Kits" tile and its sheet. Additive and write-safe: a kit only appends text to the assessment the doctor then saves, and is disabled until the assessment has loaded. Content `ai_drafted` pending clinical review, shown on every kit. Force off per device with `?kits=0`. See [[Specialty Kits]]. |
+| `smd_clinical_docs` | **ON** | The Home "Documents" tile and the kit Documents button ([[Clinical Documents]]). Additive; nothing is stored. Force off with `?docs=0`. |
+| `smd_review_desk` | **ON** | The Review Desk ([[Review Desk]]). Its Home tile is defOn false (reviewers add it). Local only. Force off with `?review=0`. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 

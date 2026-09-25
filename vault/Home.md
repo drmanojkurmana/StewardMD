@@ -13,7 +13,9 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[AI Control Center]] — usage engine: per-module caps, model switch, admin console
 - [[Medical Knowledge Base]] — the KB / RAG brain + clinical content
 - [[Clinical Protocols]] - the Knowledge Library "Protocols" tab: bedside protocols across every specialty (ai_drafted, pending review)
-- [[Specialty Kits]] - O&G, Paediatrics, Ortho, Eye, ENT, Derm, Psych, Dental: OPD Specialty tab + Home tile; WHO growth, ACOG dating and other tools (ai_drafted, pending review)
+- [[Specialty Kits]] - 26 kits for every branch (O&G to Forensic): OPD Specialty tab + Home tile; WHO growth, ACOG dating, LA dose, burns, CKD, DAS28, MCCD, Labour Care Guide, order sets (ai_drafted, pending review)
+- [[Clinical Documents]] - certificates, referral letter, consent forms (En/Te/Hi), handouts, MLC intimation, MCCD draft, I-PASS handover
+- [[Review Desk]] - clinicians approve AI-drafted content and export decisions; weekly guideline source watch
 - [[OpenMed-Evaluation]] - which OpenMed PII/NER models fit StewardMD, and the India-ID redaction shipped from it
 
 ### Clinical modules

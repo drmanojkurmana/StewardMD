@@ -9257,3 +9257,26 @@ time. The WHO growth numbers are taken from WHO's official R packages' data tabl
 to the who.int expanded tables; no package code is used. Picking a kit also picks the matching MaiK
 Scribe template. Everything is `ai_drafted` and says so; flag default ON because it is additive.
 
+
+## 2026-09-25 - "Every branch" list: phone-only work first, server work second
+The owner ticked 42 of 44 proposals and wrote "do all which need server first then all server needed
+works as second wave". Read as: first everything that needs no server, then the server items as a
+second wave (the sentence only parses that way with "all server needed works as second wave"). Told
+the owner that reading. Wave 1 is built; wave 2 is in [[Roadmap]].
+
+## 2026-09-25 - Documents and handover are never stored; review decisions leave by file
+Certificates, consent forms, MLC letters and the I-PASS handover hold patient identifiers. They are
+filled in memory, printed or shared by the doctor, and dropped on close ([[Clinical Documents]]), so
+there is no PHI at rest to secure, sync or delete. The Reg. No. prints only when the app verified it;
+a typed one could be anyone's. The [[Review Desk]] keeps content ids and comments only, and a reviewer's
+decisions reach the repo as an exported file the owner applies with `scripts/apply-reviews.mjs`, which
+never downgrades an approved item and needs `--accept-unverified` for an unverified reviewer. Server
+sync of either is wave 2.
+
+## 2026-09-25 - Reference numbers from a source file, not from the model
+Every number a wave 1 tool uses (LA mg/kg and ceilings, Lund and Browder columns, WHO Labour Care Guide
+alert values, notifiable list, MCCD modes of dying) sits in `kb/specialty-kits/src/data-*.json` with its
+source and a `verified` note saying how it was read, and the maths is tested against hand-worked
+published values. Where a source was silent the tool is conservative: the LA dose counts nobody above
+70 kg (Williams and Walker 2014) because the with-adrenaline rows have no mg ceiling; MCCD Part I has
+three lines because India's Form 4 has three, not WHO's four.

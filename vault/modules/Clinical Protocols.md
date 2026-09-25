@@ -66,7 +66,12 @@ regimens count as International in the OPD filter (NCCN-based).
   `swipe-back.js` matches those substrings. `.kbp-back` is the reader's Back on purpose.
 
 ## Content status
-- **233 protocols across 19 subjects** (2026-09-25): 215 international, 18 India national, 15 topics paired
+- **248 protocols across 19 subjects** (2026-09-25): 215 international, 33 India (18 national programme,
+  15 Indian society: IAP, ICMR STW, FOGSI-ICOG, CSI, HFAI, InSH, RSSDI, INASL, ISPN, ISG, API-ICP), 28
+  topics paired. The 15 society protocols pair 13 existing international ones (dehydration, SAM, PPH,
+  pre-eclampsia, dyslipidaemia, HFrEF, hypertension, T2DM, MASLD, paediatric UTI, neonatal jaundice,
+  febrile seizure, bronchiolitis) plus 2 India-only (antithrombotics around GI bleeding and endoscopy,
+  hypertension in T2DM). The first 15 pairs
   (malaria, dengue, chikungunya, leptospirosis, enteric fever, AES/encephalitis, rabies PEP, TB, TPT,
   influenza, heat stroke, poisoning, snakebite, GDM, anaemia in pregnancy). India-only because no
   international guideline exists: scrub typhus, scorpion sting, massive haemoptysis. Review worklist, including every figure the

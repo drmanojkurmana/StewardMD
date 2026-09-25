@@ -23,7 +23,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var KITS_V = "96ad851442e9";
+  var KITS_V = "236992a6fc7f";
   var GROWTH_V = "3f0c86f21010";
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }

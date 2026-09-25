@@ -5,7 +5,9 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const SMD_SCRIBETPL = require("../scribe-templates.js");
 
-const IDS = ["general", "paediatrics", "obgyn", "surgery-followup", "orthopaedics", "ophthalmology", "ent", "dermatology", "psychiatry", "dental"];
+const IDS = ["general", "paediatrics", "obgyn", "surgery-followup", "orthopaedics", "ophthalmology", "ent", "dermatology", "psychiatry", "dental",
+  "general-surgery", "anaesthesia", "emergency", "cardiology", "pulmonology", "neurology", "nephrology-urology", "diabetes-endocrine",
+  "gastro-hepatology", "rheumatology", "geriatrics", "palliative"];
 
 test("list() returns every template as {id, label, description}, general first", () => {
   const rows = SMD_SCRIBETPL.list();
@@ -87,7 +89,8 @@ test("get() never returns a live reference into the registry -- callers can muta
 test("specialty-kit templates: every requiredField is a real voice field, and none prompts a guess", async () => {
   const { createRequire } = await import("node:module");
   const OE = createRequire(import.meta.url)("../opd-emr.js");
-  ["orthopaedics", "ophthalmology", "ent", "dermatology", "psychiatry", "dental"].forEach((id) => {
+  ["orthopaedics", "ophthalmology", "ent", "dermatology", "psychiatry", "dental", "general-surgery", "anaesthesia", "emergency", "cardiology", "pulmonology", "neurology",
+    "nephrology-urology", "diabetes-endocrine", "gastro-hepatology", "rheumatology", "geriatrics", "palliative"].forEach((id) => {
     const t = SMD_SCRIBETPL.get(id);
     assert.equal(t.id, id);
     t.requiredFields.forEach((f) => assert.ok(OE.VOICE_MAP[f], `${id}: ${f} is a VOICE_MAP key`));

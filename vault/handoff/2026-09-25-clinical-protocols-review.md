@@ -135,3 +135,16 @@ field lists. Sources are listed in each kit; all are `ai_drafted`. See [[Special
 - Dermatology: ticking "Fever" alone shows the SJS/TEN or DRESS alert (wording is conditional); leprosy content from the 2012 NLEP guideline; ringworm advice follows ECTODERM India 2018.
 - Psychiatry: Mental Healthcare Act 2017 section numbers checked against the Gazette text (India Code refused the PDF); insight grades 1 to 6 are a textbook convention, uncited; no low/medium/high risk label (NICE NG225); Tele MANAS 14416 / 1800-89-14416.
 - Dental: anticoagulant alert follows SDCEP 2022 (INR within 24 h, 72 h if stable; delay if 4 or above; DOAC morning dose rule); ulcer/patch threshold 2 weeks (MoHFW) where SDCEP says 3; tooth mobility grades uncited.
+
+## India society wave (15, added later on 2026-09-25)
+- fogsi.org blocks automated access: FOGSI PPH, preterm labour, PCOS and the 2026 HDP 3rd edition were
+  unreadable; pre-eclampsia-eclampsia-india uses the FOGSI-Gestosis-ICOG 2019 edition and says so. ISG
+  H. pylori and GERD consensus papers are paywalled, so neither was written. MASLD figures come from
+  PMC page readings.
+- Left out because not in the sources read: HF sacubitril/valsartan, ivabradine and digoxin doses; CSI
+  extremely-high-risk LDL goal; all T2DM drug doses, insulin starting dose and metformin eGFR cut-offs;
+  InSH and API-ICP maintenance doses; SAM IV volumes for shock; paediatric maximum doses for
+  ceftriaxone, ciprofloxacin and cefixime; 4F-PCC and FFP doses; neonatal phototherapy and exchange
+  thresholds (chart images).
+- Check: the ICMR PPH "3 mL crystalloid per mL blood lost" advice is included as the STW states it and
+  may be outdated; SAM amoxicillin regimens differ between ICMR and IAP and both are stated.
