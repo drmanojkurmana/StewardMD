@@ -349,7 +349,7 @@
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
 <script src="/opd-pulse-model.js?v=2" defer></script>
-<script src="/opd-offline-desk.js?v=2" defer></script>
+<script src="/opd-offline-desk.js?v=3" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
 <script src="/patient-register.js?v=preg7-sid1-sid1-off2" defer></script>
@@ -593,7 +593,7 @@
         st.opd=r;
         if(r.orgName) st.orgName=r.orgName;
         if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
-        renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); return;
+        renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare(); return;
       }
       if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
@@ -606,7 +606,7 @@
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
       if(!r||!r.ok){ renderShell('<div class="empty">'+(r&&r.error==="forbidden"?"You do not have access to this hospital.":"Could not load the board.")+'</div>'); return; }
-      st.board=r.board||[]; renderBoard(); consumePendingScan(); if(!st.pulse) loadPulse();
+      st.board=r.board||[]; renderBoard(); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare();
     });
   }
 
@@ -772,6 +772,9 @@
     }
     return OFF;
   }
+  // The series is reserved as soon as the desk has loaded, not at the first refresh: a desk that lost the connection
+  // before anyone pressed anything had no series, so its first offline check-in could not be given a number.
+  function offPrepare(){ var d=offDesk(); if(d&&navigator.onLine!==false) d.prepare().then(function(){ paintOffline(); }); }
   function offTick(){
     var d=offDesk(); if(!d){ paintOffline(); return; }
     d.prepare().then(function(){ paintOffline(); });
