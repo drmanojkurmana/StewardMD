@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-twin-predict.test.mjs — TASK 10.12: governed predictions, real data, never facts.
  *
  * node --test --experimental-test-module-mocks test/wardsynq-twin-predict.test.mjs

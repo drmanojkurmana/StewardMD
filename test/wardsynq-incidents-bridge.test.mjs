@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-incidents-bridge.test.mjs — TASK 5.14: wardsynq-incidents.js's engine, reached from
  * the record. The engine's own severity/RCA/CAPA/close rules are proven in
  * test/wardsynq-incidents.test.mjs; this proves the route wiring - persistence, capability gating,

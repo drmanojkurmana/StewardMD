@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-order-close-backfill.test.mjs - closing the orders a hospital resulted before
  * anything closed an order (functions/_wardsynq/order-backfill.js).
  *

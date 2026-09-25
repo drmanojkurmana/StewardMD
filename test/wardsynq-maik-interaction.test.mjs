@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-maik-interaction.test.mjs — TASK 8: the governed AI layer over the clinical record.
  *
  * WHAT THIS FILE IS FOR. StewardMD already had the AI governance PRIMITIVES and nothing that used

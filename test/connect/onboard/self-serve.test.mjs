@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect/onboard/self-serve.test.mjs — P1 self-service tenant creation:
 // any authenticated doctor/owner creates their OWN hospital and becomes its `owner`.
 import { test } from "node:test";

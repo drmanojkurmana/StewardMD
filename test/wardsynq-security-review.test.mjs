@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-security-review.test.mjs - P2.17 security review and P2.15 restore visibility.
  * Pure rules first, then the REAL routes (same seeding style as wardsynq-emergency-mode-bridge),
  * then the Admin screen's loading/failed/unavailable/empty states.

@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-hospital-group.test.mjs — P2.14 hospital groups, through the real router.
  *
  * What is pinned: a hospital is a member only when the group admin invited it AND its owner accepted;

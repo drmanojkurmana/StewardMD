@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/connect-agent/acceptance/e2e-report.mjs - Connect Hospital acceptance runner.
  *
  * Wires the REAL phone engine (connect-agent/phone/**) to the REAL broker

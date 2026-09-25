@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-discharge-billing-livefix.test.mjs - the live test of 2026-09-15 (docs/wardsynq/LIVE_TEST_2026-09-15.md).
  *
  * LT-30: the Price list the Admin Center edits prices the ward bill (bed, nursing and doctor visit per day, a lab or

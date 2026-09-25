@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-hl7-orders-cancellations.test.mjs — TASK 7.6: the HL7 v2 messages this gateway
  * could not previously accept, and the one clinical trap they carry.
  *

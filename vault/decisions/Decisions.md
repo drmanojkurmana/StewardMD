@@ -9210,6 +9210,16 @@ floor; closing the app re-locks it. The backup holds only what exists nowhere el
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
 
+## 2026-09-25 — A Cloudflare Access identity counts only when its JWT verifies
+Roughly 25 routes (queue, wardsynq, connect incl. super-admin, license, billing, push, cases, and the
+coarse gates of experimental/fundx/followcare/icd/schemes/retrieve) took `Cf-Access-Authenticated-User-Email`
+at face value, and /api/ai (T28) accepted any value in `Cf-Access-Jwt-Assertion`. Both are plain request
+headers on a route Access does not front. `_fbauth.js cfAccessEmail(request, env)` now verifies the
+assertion (RS256 against `https://<team>/cdn-cgi/access/certs`, iss, aud, exp) and takes the email from
+its claims; both `identify()` helpers and every gate go through it. Access identity is OFF unless
+`CF_ACCESS_TEAM_DOMAIN` and `CF_ACCESS_AUD` are set. In-process test suites opt back into header trust
+with `test/helpers/trust-cf-access-header.mjs` (a global nothing in `functions/` sets).
+
 ## 2026-09-25 — One profile form, one institution directory
 Reported from a device: "all cities in India not covered and all medical colleges and hospitals not
 covered, and bug can't see and can't search college, and why two times institution is asked, I need

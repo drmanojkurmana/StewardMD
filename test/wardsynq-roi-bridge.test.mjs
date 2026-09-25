@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-roi-bridge.test.mjs — TASK 4.9: HIM/ROI through the REAL routes.
  *
  * node --test --experimental-test-module-mocks test/wardsynq-roi-bridge.test.mjs

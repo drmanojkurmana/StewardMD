@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-acute-care-negative-matrix.test.mjs — TASK 2.10: the mandatory negative-test list.
  *
  * The master plan requires 17 deliberate-failure scenarios proven across the acute-care system.

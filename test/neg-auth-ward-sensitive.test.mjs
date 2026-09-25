@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/neg-auth-ward-sensitive.test.mjs — negative-authorization coverage for six sensitive
  * clinical/financial/records-custody WardSynQ routes: POST /ward/invoice-void, /ward/invoice-writeoff,
  * /ward/invoice-adjustment, /ward/resus-waive, /ward/patient-release, /ward/roi-cancel.

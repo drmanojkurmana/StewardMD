@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/neg-auth-remaining-routes.test.mjs — negative-authorization coverage for the WardSynQ
  * ward-segment routes that scripts/wardsynq-reachability.mjs listed as untested: GET /ward/device-list,
  * GET /ward/risk-tools, POST /ward/risk-action, GET /ward/templates, GET /ward/maik-status,

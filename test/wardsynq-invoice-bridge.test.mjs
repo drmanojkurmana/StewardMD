@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-invoice-bridge.test.mjs — TASK 4.6: the invoice ledger through the REAL routes,
  * against a real administered dose charge-capture.js itself prices from the real record.
  *

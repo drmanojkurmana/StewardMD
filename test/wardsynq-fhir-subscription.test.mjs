@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-fhir-subscription.test.mjs - P2.5 Subscription (R4 backport, rest-hook, id-only) on the webhooks.
  *
  * Routes: POST /api/queue/ward/webhook and /api/queue/ward/webhook-update with payload "fhir-id-only",

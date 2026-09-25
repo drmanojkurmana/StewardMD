@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-reports-bridge.test.mjs — TASK 4.12: hospital reports through the REAL routes,
  * seeding real Invoice/Claim/MedicationDispense/MedicationOrder/ROIRequest rows via MemoryRepository
  * directly (the same style test/wardsynq-roi-bridge.test.mjs and
