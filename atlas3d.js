@@ -845,7 +845,11 @@
   function loadSliceTexture() {
     var R = st.gl, pl = st.plane; if (!R || !pl) return;
     var d = st.data, mod = (G.ATLAS && G.ATLAS._state && G.ATLAS._state.catalog) || null;
-    var url = "/atlas/" + pl.m + "/" + ("00" + pl.i).slice(-3) + ".webp";
+    // A plane names its own image (densified stacks live under v2/ at new indices); an installed
+    // app's bundled manifest has no img, and its old paths are never rewritten, so the pattern
+    // stays as the fallback.
+    var entry = d.planes[pl.m] && d.planes[pl.m][String(pl.i)];
+    var url = (entry && entry.img) || "/atlas/" + pl.m + "/" + ("00" + pl.i).slice(-3) + ".webp";
     var img = new G.Image();
     img.crossOrigin = "anonymous";
     pl.ready = false;
