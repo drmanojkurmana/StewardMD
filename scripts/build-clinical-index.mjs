@@ -79,9 +79,29 @@ const body = `(function () {
   var R = ${JSON.stringify(rows)};
 
   function norm(s) { return String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
+  /* The bundle lists a molecule under its plain name, and the supplement no longer ships the salt
+   * form as a second row (scripts/build-clinical-supplement.mjs). A doctor still types the salt, so
+   * a query that finds nothing is retried with the counter-ion removed: "Atropine sulfate" -> the
+   * Atropine row. Stripping only ever happens on the QUERY, never on the stored names, so two
+   * genuinely distinct products that differ by salt stay separate rows and both remain findable. */
+  var SALT = /\\s+(sodium|potassium|calcium|disodium|hydrochloride|hcl|sulfate|sulphate|acetate|citrate|tartrate|maleate|besilate|besylate|mesylate|mesilate|phosphate|succinate|fumarate|bisulfate|bitartrate|dipropionate|propionate|valerate|furoate|tromethamine|pivoxil|axetil|etexilate|decanoate|palmitate|monohydrate|dihydrate|xinafoate|bromide|chloride|nitrate|oxide|gluconate|lactate|malate|oxalate|pamoate|stearate|trometamol)$/;
+  function deSalt(q) { var t = String(q || "").replace(SALT, "").trim(); return t && t !== q ? t : ""; }
   function all() { return R.slice(); }
   function count() { return R.length; }
-  function has(name) { var q = norm(name); for (var i = 0; i < R.length; i++) if (norm(R[i].n) === q) return true; return false; }
+  function has(name) { return !!get(name); }
+  /* Exact lookup by name. api.js compClass() uses it to show a molecule's authored class, so it
+   * matches the way a composition is written in the brand catalogue as well as the plain name:
+   * "Ceftriaxone (1000mg)" and "ceftriaxone" both resolve to the Ceftriaxone row. */
+  function get(name) {
+    var q = norm(name);
+    if (!q) return null;
+    for (var i = 0; i < R.length; i++) if (norm(R[i].n) === q) return R[i];
+    var base = q.replace(/\\s*\\(.*?\\)\\s*/g, " ").replace(/\\s+\\d+(?:\\.\\d+)?\\s*(?:mg|mcg|g|ml|iu|units?)\\b/g, " ").replace(/\\s+/g, " ").trim();
+    if (base && base !== q) { for (var j = 0; j < R.length; j++) if (norm(R[j].n) === base) return R[j]; }
+    var ds = deSalt(base || q);
+    if (ds) { for (var k = 0; k < R.length; k++) if (norm(R[k].n) === ds) return R[k]; }
+    return null;
+  }
 
   /* Ranked the way a doctor expects: an exact name, then a name that starts with what was typed,
    * then a word inside the name, then anywhere in the name, then the class, then a tag. */
@@ -100,10 +120,11 @@ const body = `(function () {
       if (s >= 0) out.push({ r: r, s: s });
     }
     out.sort(function (a, b) { return a.s - b.s || a.r.n.length - b.r.n.length || a.r.n.localeCompare(b.r.n); });
+    if (!out.length) { var ds = deSalt(nq); if (ds) return search(ds, limit); }
     return out.slice(0, limit || 25).map(function (x) { return x.r; });
   }
 
-  var API = { all: all, search: search, has: has, count: count, VERSION: ${JSON.stringify(bundle.generated || "")} };
+  var API = { all: all, search: search, has: has, get: get, count: count, VERSION: ${JSON.stringify(bundle.generated || "")} };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_CLINICAL_INDEX = API;
 })();

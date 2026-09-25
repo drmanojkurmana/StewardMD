@@ -43,15 +43,56 @@ test("it is the whole library, not the 109-drug formulary that used to be the on
   assert.ok(I.count() > 1500, "only " + I.count() + " molecules");
 });
 
+test("the index exposes the exact lookup api.js compClass() needs", () => {
+  // api.js goldFor() used to read a window global sourced from a file that never existed, so a
+  // molecule's class came back empty. It now reads this.
+  assert.equal(typeof I.get, "function");
+  assert.equal(I.get("Cefiderocol").n, "Cefiderocol");
+  assert.ok(/cephalosporin/i.test(I.get("Cefiderocol").c));
+  assert.equal(I.get("Ceftriaxone (1000mg)").n, "Ceftriaxone", "a strength-suffixed composition resolves to its molecule");
+  assert.equal(I.get("zzznotadrug"), null);
+});
+
 test("the authored monographs the bundle never contained are shipped and listed", () => {
-  // These exist as finished records in worker/data/gold/ and were in NO bundle before the
-  // supplement: the app could not show them however the doctor searched.
-  ["Atropine sulfate", "Enoxaparin sodium", "Clopidogrel bisulfate", "Caspofungin acetate", "Fludrocortisone Acetate"]
-    .forEach((n) => {
-      assert.ok(supplement.struct[n], n + " missing from the supplement");
-      assert.ok(I.has(n), n + " missing from the index");
+  // Finished records in worker/data/gold/ that were in NO bundle: the app could not show them
+  // however the doctor searched. These are the ones that are a genuinely new molecule, not a salt
+  // form of one the bundle already had.
+  ["Human Albumin", "Caspofungin", "Enoxaparin", "Clopidogrel"]
+    .forEach((n) => assert.ok(I.has(n), n + " is not reachable"));
+  assert.ok(Object.keys(supplement.struct).length >= 45, "the supplement lost records");
+});
+
+test("a salt form is one molecule, not two rows", () => {
+  // "Atropine sulfate" IS atropine. Shipping both put two rows for one drug in every search, so the
+  // supplement no longer adds a salt form of a molecule the bundle already carries.
+  ["Atropine sulfate", "Enoxaparin sodium", "Clopidogrel bisulfate", "Metformin hydrochloride"]
+    .forEach((n) => assert.equal(supplement.struct[n], undefined, n + " is a duplicate of the plain molecule"));
+  // and the plain molecule is still there, exactly once
+  ["Atropine", "Enoxaparin", "Clopidogrel", "Metformin"].forEach((n) => {
+    assert.ok(I.has(n), n + " went missing");
+    assert.equal(I.all().filter((r) => r.n === n).length, 1, n + " is listed more than once");
+  });
+});
+
+test("a doctor who types the salt still finds the drug", () => {
+  // Dropping the row must not make the name unfindable: the query is retried without the
+  // counter-ion. This is the regression that dropping the rows would otherwise have introduced.
+  [["Atropine sulfate", "Atropine"], ["Enoxaparin sodium", "Enoxaparin"],
+   ["Clopidogrel bisulfate", "Clopidogrel"], ["Metformin hydrochloride", "Metformin"]]
+    .forEach(([typed, want]) => {
+      assert.equal(I.search(typed, 3)[0] && I.search(typed, 3)[0].n, want, typed + " should reach " + want);
+      assert.equal(I.get(typed) && I.get(typed).n, want, "get(" + typed + ") should reach " + want);
     });
-  assert.ok(Object.keys(supplement.struct).length >= 100, "the supplement lost records");
+});
+
+test("salt stripping never merges two products that genuinely differ by salt", () => {
+  // Calcium Acetate is a phosphate binder; Calcium is a supplement. Fluticasone Furoate and
+  // Propionate are different products. Stripping happens on the QUERY as a last resort, never on
+  // the stored names, so an exact name still wins and both rows survive.
+  ["Calcium Acetate", "Calcium Chloride", "Calcium Gluconate"].forEach((n) => {
+    if (!I.has(n)) return;                       // not every one is in the corpus
+    assert.equal(I.search(n, 3)[0].n, n, n + " must resolve to itself, not to Calcium");
+  });
 });
 
 test("the supplement only adds, never shadows a bundled record", () => {

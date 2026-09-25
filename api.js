@@ -841,22 +841,28 @@
   // Looked up by the canonical clinical key so strength variants ("Tirzepatide
   // (10mg)") and corrupted composition strings ("Human + Rabies Vaccine") still
   // resolve to the base molecule's full monograph.
+  // WAS: a lookup into window.SMD_GOLD_MONOGRAPHS, sourced from data/gold-monographs.js -- a file
+  // that has never existed in this repo. It therefore always returned null and every caller fell
+  // through, which is why a molecule's class read "" on the screens that ask for it.
+  //
+  // The library it reached for does exist, under a different name: data/clinical-index.js
+  // (window.SMD_CLINICAL_INDEX, 1,645 molecules) carries the authored name, class and tags, and
+  // offline-clinical.js loads it. It holds no FULL monograph -- that stays in the gz and arrives
+  // through MEDAPI.structured, which offline-clinical.js already wraps -- so this returns only what
+  // the index has, and the callers that wanted a whole record were removed rather than fed a stub.
   function goldFor(name) {
     try {
-      var G = window.SMD_GOLD_MONOGRAPHS;
-      if (!G) return null;
+      var I = window.SMD_CLINICAL_INDEX;
+      if (!I || typeof I.get !== "function") return null;
       var base = clinicalKey(name), raw = String(name || "").trim();
-      var cands = [base, raw, titleCase(base), titleCase(raw)];
+      var cands = [raw, base, titleCase(base), titleCase(raw)];
       synVariants(base).forEach(function (v) { cands.push(v, titleCase(v)); });
       for (var i = 0; i < cands.length; i++) {
-        var k = String(cands[i] || "");
-        if (G[k] || G[k.toLowerCase()]) return G[k] || G[k.toLowerCase()];
+        var hit = cands[i] && I.get(cands[i]);
+        if (hit) return { generic: hit.n, cls: hit.c, tags: hit.t };
       }
     } catch (e) {}
     return null;
-  }
-  function goldSection(g) {
-    return goldHTML(g);
   }
   // Last resort: a molecule the gold library misses still gets a
   // structured reference card from the database's own class fields — never a dead end.
@@ -874,25 +880,21 @@
   }
   function renderStructured(c, resp) {
     if (!resp || !resp.found) {
-      // Gold bundle first, then synthesized class reference. Never a dead-end notice or archaic formulary.
-      var g0 = goldFor(st.name);
-      if (g0) { c.innerHTML = goldSection(g0); return; }
+      // No gold fallback here on purpose: offline-clinical.js wraps MEDAPI.structured and has
+      // already merged the bundled record into `resp` when the server had none. Reaching for it a
+      // second time is what the dead goldFor() used to do, and it never returned anything.
       c.innerHTML = synthHTML(); return;
     }
     if (resp.combo) {
       var hasAny = resp.components && resp.components.some(function (cp) { return cp && cp.data; });
       if (!hasAny) {
-        // Combo with zero remote data — the canonical single (e.g. "Human + Rabies
-        // Vaccine" → Rabies Vaccine) may still have a full gold monograph.
-        var g1 = goldFor(st.name);
-        if (g1) { c.innerHTML = goldSection(g1); return; }
         c.innerHTML = synthHTML(); return;
       }
       var html = '<div class="db-msrc">Combination product — clinical details per component. Verify locally.</div>';
       (resp.components || []).forEach(function (cp) {
         var body;
         if (cp.data) body = (cp.data.gold && parseGold(cp.data.gold)) ? goldHTML(parseGold(cp.data.gold)) : (qfGrid(cp.data) + stSections(cp.data, { summary: 1 }));
-        else { var gc = goldFor(cp.name); body = gc ? goldSection(gc) : '<div class="db-mono-none">No structured record for this component yet.</div>'; }
+        else body = '<div class="db-mono-none">No structured record for this component yet.</div>';
         html += '<div class="db-cmono"><div class="db-cmono-h">' + dbIco("pills") + ' ' + esc(cp.name) + '</div>' + body + '</div>';
       });
       c.innerHTML = html; wireToggles(c); return;
