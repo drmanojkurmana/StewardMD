@@ -359,8 +359,8 @@ body.oh-lock { overflow: hidden; }
 .ctc-g5 { border-left-color: var(--sev-critical-bd); }.ctc-g5 .ctc-gnum { color: var(--sev-critical-fg); }
 
 /* ===== RECIST 1.1 — severity-tinted result ============================================== */
-.rec-form { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
-@media (min-width: 560px) { .rec-form { grid-template-columns: 1fr 1fr; } }
+.rec-form { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; margin-bottom: 16px; }
+@media (min-width: 560px) { .rec-form { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } }
 .rec-field { display: flex; flex-direction: column; gap: 6px; }
 .rec-field > span { font: 700 11.5px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); }
 .rec-field .oh-search { margin-bottom: 0; padding: 12px 14px; }
@@ -409,8 +409,8 @@ body.oh-lock { overflow: hidden; }
 .oev-ua { border: 1px solid var(--sev-warning-bd); border-radius: 15px; padding: 15px; background: var(--rds-surface, var(--panel, #fff)); }
 .oev-ua-h { display: inline-block; font: 800 10px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .06em; background: var(--sev-warning-bg); color: var(--sev-warning-fg); border-radius: 7px; padding: 3px 9px; }
 .oev-ua-lead { font: 500 12px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); margin: 9px 0 12px; line-height: 1.5; }
-.oev-ua-cols { display: grid; grid-template-columns: 1fr; gap: 10px; }
-@media (min-width: 560px) { .oev-ua-cols { grid-template-columns: 1fr 1fr; } }
+.oev-ua-cols { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; }
+@media (min-width: 560px) { .oev-ua-cols { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } }
 .oev-ua-col { border: 1px solid var(--rds-line, var(--line)); border-radius: 12px; padding: 11px 13px; }
 .oev-ua-col-new { border-color: var(--sev-info-bd); }
 .oev-ua-col-h { font: 800 11px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .04em; color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin-bottom: 7px; }

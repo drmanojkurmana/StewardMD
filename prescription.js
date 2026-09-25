@@ -77,7 +77,7 @@
       ".rx-pt-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:12px;box-sizing:border-box;width:100%}" +
       ".rx-pt-card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748b;margin-bottom:8px}" +
       ".rx-pt-row{margin-bottom:7px;width:100%;box-sizing:border-box}.rx-pt-row:last-child{margin-bottom:0}" +
-      ".rx-pt-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:6px;width:100%;box-sizing:border-box}.rx-pt-grid input{min-width:0;width:100%;box-sizing:border-box}" +
+      ".rx-pt-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:6px;width:100%;box-sizing:border-box}.rx-pt-grid input{min-width:0;width:100%;box-sizing:border-box}" +
       ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:8.5px 11px;font:400 13px var(--hfont,system-ui);background:var(--hpanel,#fff);color:var(--hink,#0f172a);transition:border-color .15s,box-shadow .15s;box-sizing:border-box;width:100%}" +
       ".rx-in::placeholder{color:var(--hmut,#94a3b8)}" +
       ".rx-in:focus{outline:none;border-color:var(--teal,#0e6e63);box-shadow:0 0 0 3px color-mix(in srgb, var(--teal,#0e6e63) 18%, transparent)}" +
@@ -85,8 +85,8 @@
       ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:10px 11px;margin:10px 0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.03);transition:border-color .15s,box-shadow .15s;box-sizing:border-box;width:100%!important;overflow:hidden}" +
       ".rx-line:focus-within{border-color:#cbd5e1;box-shadow:0 3px 10px rgba(0,0,0,.05)}.rx-line.unv{border-color:#f59e0b;background:#fffdfa}.rx-line.adv{background:#f8fafc}" +
       ".rx-line .r1{display:flex;gap:6px;align-items:center;width:100%;box-sizing:border-box}.rx-line .r1 .rx-drug{flex:1.6 1 140px;min-width:0;font-weight:600}.rx-line .r1 .rx-brand{flex:1.4 1 120px;min-width:0}" +
-      ".rx-line .r2{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px;margin-top:8px;width:100%;box-sizing:border-box}.rx-line .r2 input{min-width:0;width:100%;box-sizing:border-box}" +
-      "@media(max-width:500px){.rx-line .r1{display:grid;grid-template-columns:1fr auto;gap:6px}.rx-line .r1 .rx-drug{grid-column:1}.rx-line .r1 .rx-del{grid-column:2;grid-row:1}.rx-line .r1 .rx-brand{grid-column:1/span 2;grid-row:2}}" +
+      ".rx-line .r2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);gap:6px;margin-top:8px;width:100%;box-sizing:border-box}.rx-line .r2 input{min-width:0;width:100%;box-sizing:border-box}" +
+      "@media(max-width:500px){.rx-line .r1{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}.rx-line .r1 .rx-drug{grid-column:1}.rx-line .r1 .rx-del{grid-column:2;grid-row:1}.rx-line .r1 .rx-brand{grid-column:1/span 2;grid-row:2}}" +
       ".rx-timing-tag{margin-top:6px;display:flex;align-items:center;gap:4px}" +
       ".rx-timing-chip{display:inline-flex;align-items:center;gap:3px;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;font:600 10px -apple-system,BlinkMacSystemFont,sans-serif;padding:2px 7px;border-radius:5px;letter-spacing:.01em}" +
       ".rx-freq-pills{display:flex;align-items:center;gap:4px;margin-top:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.rx-freq-pills::-webkit-scrollbar{display:none}" +
@@ -148,7 +148,7 @@
       ".rxdoc-hd-date{font:600 11px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;margin-top:4px}" +
       ".rxdoc-rule{height:1px;background:#e2e8f0;margin:14px 0 16px}" +
       ".rxdoc-meta-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;margin-bottom:16px}" +
-      ".rxdoc-meta-grid{display:grid;grid-template-columns:1.2fr .8fr 1fr;gap:8px 16px}" +
+      ".rxdoc-meta-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr) minmax(0,1fr);gap:8px 16px}" +
       ".rxdoc-meta-cell{min-width:0}" +
       ".rxdoc-meta-lbl{font:700 8px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#64748b;margin-bottom:1.5px}" +
       ".rxdoc-meta-val{font:600 12px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;color:#0f172a}" +
@@ -210,7 +210,7 @@
       ".rxdoc-safety-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}" +
       ".rxdoc-safety-badge{display:inline-flex;align-items:center;gap:4px;font:700 8px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#0e6e63;background:#ecfdf5;border:1px solid #a7f3d0;padding:2px 7px;border-radius:4px}" +
       ".rxdoc-safety-sub{font:500 9px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b}" +
-      ".rxdoc-safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}" +
+      ".rxdoc-safety-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 14px}" +
       ".rxdoc-safety-cell{min-width:0;font-size:9.5px;line-height:1.35;color:#334155}" +
       ".rxdoc-safety-drug{font-weight:700;color:#0f172a;margin-bottom:2px}" +
       ".rxdoc-safety-warn{background:#fffbeb;border:1px solid #fef3c7;border-radius:6px;padding:6px 9px;margin-top:6px;font:500 9px/1.35 -apple-system,BlinkMacSystemFont,sans-serif;color:#92400e}" +
@@ -252,8 +252,8 @@
       ".rxc-itray-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}" +
       ".rxc-itray-pill{font:600 10px -apple-system,BlinkMacSystemFont,system-ui;color:#0071e3;background:rgba(0,113,227,.08);padding:2px 8px;border-radius:999px;letter-spacing:.03em;text-transform:uppercase}" +
       ".rxc-itray-sub{font:400 11px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b}" +
-      ".rxc-icards{display:grid;gap:8px;grid-template-columns:repeat(4,1fr)}" +
-      "@media(max-width:640px){.rxc-icards{grid-template-columns:1fr 1fr;gap:6px}}" +
+      ".rxc-icards{display:grid;gap:8px;grid-template-columns:repeat(4,minmax(0,1fr))}" +
+      "@media(max-width:640px){.rxc-icards{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}}" +
       ".rxc-icard{border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:10px;background:#fff;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all .18s cubic-bezier(0.16,1,0.3,1);box-shadow:0 1px 2px rgba(0,0,0,.02)}" +
       ".rxc-icard:hover{border-color:rgba(0,113,227,.3);box-shadow:0 3px 10px rgba(0,0,0,.05);transform:translateY(-1px)}" +
       ".rxc-icard.rec{border:1px solid rgba(0,113,227,.28);background:#fafcff}" +

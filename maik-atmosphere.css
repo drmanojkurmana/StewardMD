@@ -249,7 +249,7 @@ body.dark .mk-atmo-pre-btn, body.v3-dark .mk-atmo-pre-btn {
 }
 .mk-atmo-colors-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0,1fr));
   gap: 8px;
   margin-bottom: 10px;
 }

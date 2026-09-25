@@ -94,7 +94,7 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-canvas { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 24px; display: flex; flex-direction: column; gap: 24px; max-width: 1440px; margin: 0 auto; width: 100%; }
 
 /* KPI tiles */
-#smdQueue .q-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+#smdQueue .q-kpis { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
 #smdQueue .q-kpi { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 12px; padding: 16px; box-shadow: 0 1px 2px rgba(20,32,43,.04); }
 #smdQueue .q-kpi-l { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
 #smdQueue .q-kpi-l span:first-child { font: 600 12px var(--q-sans); letter-spacing: .05em; text-transform: uppercase; color: var(--on-surface-variant); }
@@ -109,7 +109,7 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-health.late { background: color-mix(in srgb, var(--error) 12%, transparent); color: var(--error); }
 
 /* asymmetric main */
-#smdQueue .q-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; flex: 1; align-items: start; }
+#smdQueue .q-grid { display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: 24px; flex: 1; align-items: start; }
 #smdQueue .q-h2 { font: 600 20px var(--q-sans); color: var(--on-surface); display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
 #smdQueue .q-h2 .material-symbols-outlined { color: var(--primary); }
 #smdQueue .q-h2 .mut { color: var(--secondary); }
@@ -141,8 +141,8 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-swipe-knob:active { cursor: grabbing; }
 #smdQueue .q-swipe-knob .material-symbols-outlined { font-size: 30px; }
 /* Assessment + Emergency, symmetric */
-#smdQueue .q-cta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-#smdQueue .q-cta-row.one { grid-template-columns: 1fr; }
+#smdQueue .q-cta-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; }
+#smdQueue .q-cta-row.one { grid-template-columns: minmax(0,1fr); }
 #smdQueue .q-cta-btn { border: none; border-radius: 14px; padding: 14px; min-height: 68px; font: 600 14px var(--q-sans); display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
 #smdQueue .q-cta-btn .material-symbols-outlined { font-size: 22px; }
 #smdQueue .q-cta-btn.assess { background: var(--primary-container); color: var(--on-primary-container); }
@@ -167,7 +167,7 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-tl-search-x:active { background: var(--sc-highest); }
 #smdQueue .q-tl-search-x .material-symbols-outlined { font-size: 18px; }
 /* Two-line row: [pos][patient] on top, action buttons on a full-width line below so none run off-screen. */
-#smdQueue .q-tl-row { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; row-gap: 8px; padding: 13px 14px; align-items: center; border-bottom: 1px solid var(--sc-low); }
+#smdQueue .q-tl-row { display: grid; grid-template-columns: auto minmax(0,1fr); grid-template-rows: auto auto; column-gap: 12px; row-gap: 8px; padding: 13px 14px; align-items: center; border-bottom: 1px solid var(--sc-low); }
 #smdQueue .q-tl-row > .q-pos { grid-column: 1; grid-row: 1; }
 #smdQueue .q-tl-row > .q-tl-info { grid-column: 2; grid-row: 1; min-width: 0; }
 #smdQueue .q-tl-row > .q-tl-acts { grid-column: 1 / -1; grid-row: 2; }
@@ -220,7 +220,7 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 @keyframes qSh { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
 
 /* analytics + settings views */
-#smdQueue .q-grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; align-items: start; }
+#smdQueue .q-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; align-items: start; }
 #smdQueue .q-card { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 18px; box-shadow: 0 1px 3px rgba(20,32,43,.05); }
 #smdQueue .q-card-h { display: flex; align-items: center; gap: 8px; font: 700 13px var(--q-sans); color: var(--on-surface); margin-bottom: 14px; }
 #smdQueue .q-card-h .material-symbols-outlined { color: var(--primary); font-size: 20px; }
@@ -276,8 +276,8 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
   #smdQueue .q-brand { font-size: 18px; }
   #smdQueue .q-online { display: none; }
   #smdQueue .q-top-r { gap: 10px; }
-  #smdQueue .q-kpis { grid-template-columns: repeat(2, 1fr); }
-  #smdQueue .q-grid, #smdQueue .q-grid2 { grid-template-columns: 1fr; }
+  #smdQueue .q-kpis { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  #smdQueue .q-grid, #smdQueue .q-grid2 { grid-template-columns: minmax(0,1fr); }
   #smdQueue .q-cn h3 { font-size: 28px; }
   #smdQueue .q-canvas { padding: 16px; padding-bottom: 96px; gap: 16px; }
   #smdQueue .q-bottomnav { display: flex; position: absolute; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--sc-lowest); border-top: 1px solid var(--outline-variant); padding: 8px 8px calc(8px + env(safe-area-inset-bottom)); }
@@ -601,7 +601,7 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 /* 4-KPI Grid */
 #smdQueue .q-fd-kpis {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0,1fr));
   gap: 14px;
 }
 
@@ -710,7 +710,7 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 /* Rooms Grid & Room Cards */
 #smdQueue .q-fd-rooms-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0,1fr));
   gap: 14px;
 }
 
@@ -830,7 +830,7 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 
 #smdQueue .q-room-body {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0,1fr) auto;
   align-items: center;
   gap: 12px;
   padding-top: 10px;
@@ -987,11 +987,11 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
     padding: 13px;
   }
   #smdQueue .q-fd-kpis {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0,1fr));
     gap: 10px;
   }
   #smdQueue .q-fd-rooms-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0,1fr);
     gap: 10px;
   }
 }
