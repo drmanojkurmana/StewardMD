@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-surveillance.test.mjs - P2.3 surveillance rules and routes, P2.2 copilot tasks. Real router, real RecordService. */
 import { registerHooks } from "node:module";
 registerHooks({ resolve(spec, ctx, next) { const r = next(spec, ctx); if (r.url.endsWith(".json")) r.importAttributes = { type: "json" }; return r; } });

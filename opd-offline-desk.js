@@ -105,7 +105,14 @@
 
     function ready() { var s = cur.series; return !!(s && s.orgId === o.orgId && s.date === o.date); }
     // Online: make sure today's series is in hand before it is needed. Resolves true when it is.
+    // One reservation at a time: the console asks on load AND on every refresh, and two calls in flight would take two letters.
+    var preparing = null;
     function prepare() {
+      if (preparing) return preparing;
+      preparing = reserve().then(function (v) { preparing = null; return v; });
+      return preparing;
+    }
+    function reserve() {
       return loaded.then(function () {
         if (ready()) return true;
         return Promise.resolve(o.call("offline-series", { orgId: o.orgId, date: o.date })).then(function (r) {

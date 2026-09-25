@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-imaging-viewer.test.mjs - P1.10: the launch link into the hospital's own PACS/OHIF
  * viewer, the order<->study linkage, and hospital report templates, PURE + through the real routes.
  *

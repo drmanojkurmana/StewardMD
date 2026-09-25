@@ -207,9 +207,10 @@
     });
   }
   function defaultLoadBytes(pack, f) {
-    var MC = W && W.SMD_THOREX_MODEL_CACHE, url = HF + pack.repo + "/resolve/main/" + f.name;
+    var MC = W && W.SMD_THOREX_MODEL_CACHE, url = HF + pack.repo + "/resolve/" + (pack.revision || "main") + "/" + f.name;
     var p = MC ? MC.loadModelBytes(url, { cacheName: "openmed-ner" }) : W.fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.arrayBuffer(); });
     return p.then(function (bytes) {
+      if (f.bytes && bytes.byteLength !== f.bytes) throw new Error("size mismatch for " + f.name);
       return sha256Hex(bytes).then(function (h) {
         if (h !== f.sha256) throw new Error("sha256 mismatch for " + f.name);
         return bytes;
@@ -226,7 +227,7 @@
 
   function load(kind, opts) {
     var pack = opts.pack || PACKS[kind];
-    var key = opts.pack ? null : kind;
+    var key = opts.pack ? (opts.pack.revision ? kind + ":" + opts.pack.revision : null) : kind;
     if (key && loaded[key]) return loaded[key];
     var getBytes = opts.loadBytes || defaultLoadBytes;
     var p = Promise.all([
@@ -286,8 +287,9 @@
       var enc = m.tok.encode(str), wins = [], chain = Promise.resolve(), labs = [];
       for (var s = 0; s < enc.ids.length; s += MAX_TOKENS) wins.push(enc.ids.slice(s, s + MAX_TOKENS));
       wins.forEach(function (ids) { chain = chain.then(function () { return runWindow(m, ids).then(function (r) { labs = labs.concat(r); }); }); });
-      return chain.then(function () { if (!opts.pack) touch(kind); return decode(str, enc, labs, m.pack); });
+      return chain.then(function () { if (!opts.pack) touch(kind); else if (opts.pack.revision) touch(kind + ":" + opts.pack.revision); return decode(str, enc, labs, m.pack); });
     }).then(null, function (e) {
+      try { if (opts.onError) opts.onError(e); } catch (_) {}
       try { if (W && W.console) W.console.warn("[openmed-ner] " + kind + ": " + (e && e.message)); } catch (x) {}
       return [];
     });

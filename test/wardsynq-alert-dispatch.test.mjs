@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* S3 P0 server alert path: a critical result, released with the hospital's push setting on, reaches the
  * right clinicians' phones as a thin push; with it off nothing is sent. PUSH-01, 02, 03, 06, 07, 08 and the
  * SMS fallback (owner decision O4). Real routers: /api/queue/ward/release-result, /api/queue/ward/acknowledge,

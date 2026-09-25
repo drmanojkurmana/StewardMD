@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert";
 import { plan, messageBody, maskPhone, redactDigits } from "../functions/_followcare_dispatch.js";
 import { smsConfigured, smsProvider, toDialable } from "../functions/_followcare_sms.js";
-import { waConfigured, waProvider, toWaNumber, fillTemplate } from "../functions/_followcare_whatsapp.js";
+import { waConfigured, waProvider, toWaNumber, fillTemplate, sendWhatsApp } from "../functions/_followcare_whatsapp.js";
 
 const DAY = 86400000;
 const SCHED = [{ dayOffset: 1, dueAtMs: 1000 }, { dayOffset: 2, dueAtMs: 1000 + DAY }, { dayOffset: 3, dueAtMs: 1000 + 2 * DAY }];
@@ -112,4 +112,20 @@ test("WhatsApp: custom-BSP body template fills {{to}} {{name}} {{link}} {{text}}
   assert.equal(j.to, "919876543210");
   assert.equal(j.p.name, "Ramesh");
   assert.equal(j.p.url, "https://s/x?t=abc");
+});
+
+test("WhatsApp: a JSON body stays valid JSON when the text has lines and quotes (the day close is several lines)", async () => {
+  const text = 'Day close, WSQ "Ward" Hospital\nSeen: 12\nNet: \\u20b9 500';
+  const out = fillTemplate('{"to":"{{to}}","text":"{{text}}"}', { to: "919876543210", text }, { json: true });
+  assert.equal(JSON.parse(out).text, text, "round-trips exactly");
+  assert.equal(fillTemplate("to={{to}}&t={{text}}", { to: "91", text: "a b" }), "to=91&t=a b", "a non-JSON template is unchanged");
+  // Through the real sender: what reaches the provider parses.
+  const real = globalThis.fetch; let got = null;
+  globalThis.fetch = async (url, init) => { got = init; return new Response("{}", { status: 200 }); };
+  try {
+    const env = { FOLLOWCARE_WA_PROVIDER: "custom", FOLLOWCARE_WA_URL: "https://bsp.test/send", FOLLOWCARE_WA_BODY: '{"to":"{{to}}","text":"{{text}}"}', FOLLOWCARE_WA_HEADERS: '{"content-type":"application/json"}' };
+    const r = await sendWhatsApp(env, { toE164: "9876543210", body: text });
+    assert.equal(r.ok, true);
+    assert.equal(JSON.parse(got.body).text, text);
+  } finally { globalThis.fetch = real; }
 });

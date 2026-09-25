@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-bidirectional-safety.test.mjs — TASK 7.13: the ten conflict scenarios the master
  * plan names, each with DETERMINISTIC behaviour, each proven through the REAL inbound pipeline
  * (onRequest -> /ward/fhir, /ward/source-grant, /ward/source-revoke, /ward/fhir-exceptions), never

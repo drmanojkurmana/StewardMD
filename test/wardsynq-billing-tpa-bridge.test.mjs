@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-billing-tpa-bridge.test.mjs — TASK 4.8: TPA/claims fields through the REAL routes -
  * claim<->invoice linkage, submitted/approved/denied amounts, adjudication, pre-auth amounts.
  *

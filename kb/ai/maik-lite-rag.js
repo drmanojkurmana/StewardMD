@@ -457,8 +457,16 @@
    * cite()/search() regardless); `text` is the same file's raw content, reparsed independently
    * INSIDE the worker via buildIndex(), which needs its own copy of the rows to tokenize.
    * The worker is built from this module's own recorded factory source (see the UMD wrapper at
-   * the top) since a worker has no require()/import for a sibling file. */
-  function buildBookAsync(rows, text) {
+   * the top) since a worker has no require()/import for a sibling file.
+   *
+   * `onIndex`, if given, is called with the raw worker-built index (buildIndex()'s off/idf/pd/
+   * pf/len/n/avg/terms/starts) right before it is used to construct the Book - so the caller can
+   * persist it (e.g. to IndexedDB) without paying for a second tokenization pass just to get a
+   * persistable shape. Deliberately NOT called on the synchronous fallback path: that path has no
+   * cheaper way to produce the sorted-id shape than running buildIndex() a second time, which
+   * would double the very main-thread cost this function exists to avoid (audit T25 follow-up,
+   * precomputed/persisted index, 2026-09-25). */
+  function buildBookAsync(rows, text, onIndex) {
     return new Promise(function (resolve, reject) {
       function fallback() { try { resolve(new Book(rows)); } catch (e) { reject(e); } }
       if (typeof Worker === "undefined" || typeof Blob === "undefined" ||
@@ -486,6 +494,7 @@
       timer = setTimeout(function () { if (done) return; done = true; cleanup(); fallback(); }, 30000);
       worker.onmessage = function (e) {
         if (done) return; done = true; cleanup();
+        if (onIndex) { try { onIndex(e.data); } catch (e2) {} }
         try { resolve(new Book(rows, e.data)); } catch (err) { reject(err); }
       };
       worker.onerror = function () { if (done) return; done = true; cleanup(); fallback(); };

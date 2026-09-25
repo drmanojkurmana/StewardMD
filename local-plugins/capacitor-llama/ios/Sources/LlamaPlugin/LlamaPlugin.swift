@@ -19,8 +19,48 @@ import Capacitor
  *   release()                                            -> { released }
  *   excludeFromBackup({ path })                          -> { ok }
  *
- * Events (notifyListeners): llamaToken {text}, llamaError {code, message}.
+ * Events (notifyListeners): llamaToken {text, count}, llamaError {code, message}.
+ * A llamaToken event may carry several pieces concatenated; `count` says how many (see TokenBatcher).
  */
+
+/**
+ * TOKEN BATCHING (energy, 2026-09-25). One WebView JS evaluation per token was wasted work: JS
+ * repaints at most every 66 ms (PAINT_MS in maik-local.js) and only ever appends `text`. The first
+ * piece goes out at once, so time-to-first-token is unchanged; later pieces are coalesced and sent
+ * every `intervalMs`. The caller must `flush()` before it resolves or rejects, so the last text always
+ * lands before the promise does. Events are sent under the lock, so they can never reorder.
+ */
+final class TokenBatcher {
+    static let intervalMs = 40
+    private let lock = NSLock()
+    private var buf = "", count = 0, sentFirst = false, scheduled = false
+    private let send: (String, Int) -> Void
+    init(_ send: @escaping (String, Int) -> Void) { self.send = send }
+
+    func add(_ piece: String) {
+        lock.lock(); defer { lock.unlock() }
+        buf += piece; count += 1
+        if !sentFirst { sentFirst = true; flushLocked(); return }
+        if scheduled { return }
+        scheduled = true
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .milliseconds(Self.intervalMs)) { [weak self] in
+            guard let self else { return }
+            self.lock.lock(); defer { self.lock.unlock() }
+            self.scheduled = false
+            self.flushLocked()
+        }
+    }
+
+    func flush() { lock.lock(); defer { lock.unlock() }; flushLocked() }
+
+    private func flushLocked() {
+        guard count > 0 else { return }
+        let text = buf, n = count
+        buf = ""; count = 0
+        send(text, n)
+    }
+}
+
 @objc(LlamaPlugin)
 public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "LlamaPlugin"
@@ -369,13 +409,15 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         let stream = call.getBool("stream") ?? true
 
         let t0 = Date()
-        let onToken: ((String) -> Void)? = stream
-            ? { [weak self] piece in self?.notifyListeners("llamaToken", data: ["text": piece]) }
+        let batcher: TokenBatcher? = stream
+            ? TokenBatcher({ [weak self] text, count in self?.notifyListeners("llamaToken", data: ["text": text, "count": count]) })
             : nil
+        let onToken: ((String) -> Void)? = batcher.map { b in { piece in b.add(piece) } }
 
         engine.generateWithImages(system: system, user: prompt, imagePaths: paths, mmprojPath: mmproj,
                                   nPredict: nPredict, temperature: temperature, seed: seed,
                                   onToken: onToken) { [weak self] result in
+            batcher?.flush()   // the last pieces land before the promise settles
             // If backgrounding let this generation run past its deadline (T59), the answer landed:
             // release the background task we borrowed to finish it.
             self?.endBackgroundTaskIfGracePending()
@@ -403,12 +445,14 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         let prefillEmptyThink = call.getBool("prefillEmptyThink") ?? false
 
         let t0 = Date()
-        let onToken: ((String) -> Void)? = stream
-            ? { [weak self] piece in self?.notifyListeners("llamaToken", data: ["text": piece]) }
+        let batcher: TokenBatcher? = stream
+            ? TokenBatcher({ [weak self] text, count in self?.notifyListeners("llamaToken", data: ["text": text, "count": count]) })
             : nil
+        let onToken: ((String) -> Void)? = batcher.map { b in { piece in b.add(piece) } }
 
         engine.generate(system: system, user: prompt, nPredict: nPredict, temperature: temperature,
                         seed: seed, prefillEmptyThink: prefillEmptyThink, onToken: onToken) { [weak self] result in
+            batcher?.flush()   // the last pieces land before the promise settles
             // If backgrounding let this generation run past its deadline (T59), the answer landed:
             // release the background task we borrowed to finish it.
             self?.endBackgroundTaskIfGracePending()

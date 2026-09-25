@@ -1,9 +1,7 @@
-/* StewardMD — Firebase ID-token verification (shared).
- * RS256 verification against Google's public JWK set. Returns the caller's stable
+/* StewardMD — Firebase ID-token and Cloudflare Access JWT verification (shared).
+ * RS256 verification against the issuer's public JWK set. Returns the caller's stable
  * per-user id, or null if unauthenticated. Used to scope per-user data (saved cases,
  * push tokens, lab-watch alerts) so one account can never receive another's alerts.
- *
- * (Logic mirrors functions/api/cases/[[path]].js so both stay consistent.)
  */
 const FB_PROJECT_DEFAULT = "stewardmd-498ec";
 const JWK_URL = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
@@ -16,18 +14,39 @@ function b64urlToBytes(s) {
 }
 function b64urlToString(s) { return new TextDecoder().decode(b64urlToBytes(s)); }
 
-let _jwks = null, _jwksExp = 0;
-async function getJwks() {
-  const now = Date.now();
-  if (_jwks && now < _jwksExp) return _jwks;
-  const r = await fetch(JWK_URL);
+// JWK sets by URL (Google securetoken for Firebase, the team's /cdn-cgi/access/certs for Access),
+// cached per the response's max-age.
+const _jwks = new Map();
+async function getJwks(url) {
+  const now = Date.now(), hit = _jwks.get(url);
+  if (hit && now < hit.exp) return hit.map;
+  const r = await fetch(url);
   const data = await r.json();
   const map = {};
   for (const k of (data.keys || [])) map[k.kid] = k;
   const cc = r.headers.get("Cache-Control") || "", m = cc.match(/max-age=(\d+)/);
-  _jwksExp = now + (m ? parseInt(m[1], 10) * 1000 : 3600 * 1000);
-  _jwks = map;
+  _jwks.set(url, { map, exp: now + (m ? parseInt(m[1], 10) * 1000 : 3600 * 1000) });
   return map;
+}
+
+// A compact RS256 JWT as { parts, header, payload }, or null when it is not one.
+function parseJwt(token) {
+  const parts = String(token || "").split(".");
+  if (parts.length !== 3) return null;
+  try {
+    const header = JSON.parse(b64urlToString(parts[0])), payload = JSON.parse(b64urlToString(parts[1]));
+    return (header.alg === "RS256" && header.kid && payload && typeof payload === "object") ? { parts, header, payload } : null;
+  } catch (e) { return null; }
+}
+// The RS256 signature check, against the kid's key in the JWK set at jwksUrl.
+async function signatureOk(jwt, jwksUrl) {
+  const jwk = (await getJwks(jwksUrl))[jwt.header.kid];
+  if (!jwk) return false;
+  try {
+    const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
+    return await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, b64urlToBytes(jwt.parts[2]),
+      new TextEncoder().encode(jwt.parts[0] + "." + jwt.parts[1]));
+  } catch (e) { return false; }
 }
 
 /* The verified token payload — uid PLUS the custom claims (name, regNo, verified) that say who the
@@ -40,26 +59,15 @@ async function getJwks() {
  */
 export async function verifyFirebaseClaims(token, env) {
   const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
-  const parts = String(token || "").split(".");
-  if (parts.length !== 3) return null;
-  let header, payload;
-  try { header = JSON.parse(b64urlToString(parts[0])); payload = JSON.parse(b64urlToString(parts[1])); }
-  catch (e) { return null; }
-  if (header.alg !== "RS256" || !header.kid) return null;
-  const now = Math.floor(Date.now() / 1000);
+  const jwt = parseJwt(token);
+  if (!jwt) return null;
+  const payload = jwt.payload, now = Math.floor(Date.now() / 1000);
   if (payload.aud !== project) return null;
   if (payload.iss !== "https://securetoken.google.com/" + project) return null;
   if (!payload.sub) return null;
   if (!(typeof payload.exp === "number" && payload.exp > now)) return null;
   if (typeof payload.iat === "number" && payload.iat > now + 300) return null;
-  const jwk = (await getJwks())[header.kid];
-  if (!jwk) return null;
-  try {
-    const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
-    const ok = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, b64urlToBytes(parts[2]),
-      new TextEncoder().encode(parts[0] + "." + parts[1]));
-    return ok ? payload : null;
-  } catch (e) { return null; }
+  return (await signatureOk(jwt, JWK_URL)) ? payload : null;
 }
 
 /* The uid alone — what _features.js, _adminauth.js and _entitlement.js have always wanted. Kept as
@@ -85,25 +93,56 @@ export function verifiedClaimsFor(request, env) {
   return p;
 }
 
-/* The Cloudflare Access email, trusted ONLY when the request also carries Cf-Access-Jwt-Assertion.
- * Cloudflare Access sets both on requests it authenticated; a bare Cf-Access-Authenticated-User-Email
- * header on a route Access does not front is just a string any client can send.
- * ponytail: presence check only. Verifying the assertion against the Access team's certs is the
- * stronger step if an Access-fronted route ever becomes the only gate. */
-export function cfAccessEmail(request) {
-  const h = request && request.headers;
-  if (!h) return "";
-  const email = h.get("Cf-Access-Authenticated-User-Email");
-  return (email && h.get("Cf-Access-Jwt-Assertion")) ? String(email).toLowerCase() : "";
+/* The Cloudflare Access email, from a VERIFIED Cf-Access-Jwt-Assertion; "" otherwise.
+ *
+ * Neither Cf-Access header proves anything by being present: on a route Cloudflare Access does not
+ * front, both are strings any client can send. The email header alone used to be trusted by ~25
+ * routes (and after T28, any value in the assertion header was enough). So the assertion is verified
+ * like a Firebase token: RS256 against the team's /cdn-cgi/access/certs, iss = the team domain, aud =
+ * one of the Access application AUD tags, unexpired. The email comes from the verified claims; the
+ * Cf-Access-Authenticated-User-Email header is never read.
+ *
+ * Config (both required; unset means Access identity is OFF and callers fall through to Firebase):
+ *   CF_ACCESS_TEAM_DOMAIN  e.g. "<team>.cloudflareaccess.com"
+ *   CF_ACCESS_AUD          the Access application's AUD tag (comma-separated for several apps)
+ * Memoised per Request, like verifiedClaimsFor. Never throws.
+ *
+ * Tests: test/helpers/trust-cf-access-header.mjs sets globalThis.__SMD_TEST_TRUST_CF_ACCESS_HEADER so
+ * the in-process suites keep using the email header as their identity. Nothing under functions/ sets
+ * it, and a request cannot reach a Worker's globals. */
+const _accessMemo = new WeakMap();
+export function cfAccessEmail(request, env) {
+  const h = request && typeof request === "object" && request.headers;
+  if (!h) return Promise.resolve("");
+  if (globalThis.__SMD_TEST_TRUST_CF_ACCESS_HEADER === true) return Promise.resolve(String(h.get("Cf-Access-Authenticated-User-Email") || "").toLowerCase());
+  let p = _accessMemo.get(request);
+  if (!p) {
+    p = verifyAccessJwt(h.get("Cf-Access-Jwt-Assertion"), env || {}).catch(() => "");
+    _accessMemo.set(request, p);
+  }
+  return p;
+}
+
+async function verifyAccessJwt(token, env) {
+  const team = String(env.CF_ACCESS_TEAM_DOMAIN || "").trim().replace(/^https?:\/\//i, "").replace(/\/+$/, "");
+  const auds = String(env.CF_ACCESS_AUD || "").split(",").map((a) => a.trim()).filter(Boolean);
+  if (!team || !auds.length || !token) return "";
+  const jwt = parseJwt(token);
+  if (!jwt) return "";
+  const p = jwt.payload, now = Math.floor(Date.now() / 1000);
+  if (p.iss !== "https://" + team) return "";
+  if (!(Array.isArray(p.aud) ? p.aud : [p.aud]).some((a) => auds.indexOf(a) >= 0)) return "";
+  if (!(typeof p.exp === "number" && p.exp > now)) return "";
+  if (typeof p.nbf === "number" && p.nbf > now + 300) return "";
+  if (typeof p.email !== "string" || !p.email) return "";   // a service token carries no email: not a user
+  return (await signatureOk(jwt, "https://" + team + "/cdn-cgi/access/certs")) ? p.email.toLowerCase() : "";
 }
 
 // Stable, namespaced per-user id — or null if the caller is not authenticated.
-// NOTE: still trusts a bare Cf-Access email header (unlike cfAccessEmail above). Its callers (push,
-// billing, favorites, ward routes...) and their tests rely on that; tightening it is its own change.
+// Access only when its JWT verifies (cfAccessEmail), else a verified Firebase token.
 export async function identify(request, env) {
-  const email = request.headers.get("Cf-Access-Authenticated-User-Email");
-  if (email) return "cfa:" + email.toLowerCase();
-  const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  if (tok) { const uid = await verifyFirebaseToken(tok, env); if (uid) return "fb:" + uid; }
-  return null;
+  const email = await cfAccessEmail(request, env);
+  if (email) return "cfa:" + email;
+  const fb = await verifiedClaimsFor(request, env);
+  return fb && fb.sub ? "fb:" + fb.sub : null;
 }

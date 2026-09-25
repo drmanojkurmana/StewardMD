@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* WardSynQ: persistence across reload and a second browser session, against a REAL local server
  * (test/wardsynq-persistence-server.mjs — real onRequest(), real D1Repository over a real on-disk
  * sqlite file). Two independent headless-Chrome CDP targets act as two independent client

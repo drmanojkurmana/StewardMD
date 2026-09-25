@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-status-scoped-worklists.test.mjs - R5-2: a worklist reads what is OPEN.
  *
  * The laboratory, specimen and imaging boards each read EVERY ServiceRequest the hospital had ever
