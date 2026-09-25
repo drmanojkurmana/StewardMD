@@ -164,6 +164,6 @@ native-speaker check of the Telugu and Hindi consent forms and handouts.
 - **Duplicated KB text**: with `smd_maik_brain` on (default), the grounding is sent twice, once as the
   RANKED REFERENCE NOTES claims and again in the notes block: +1.0k to 1.9k chars (~260-490 tokens)
   per grounded question, measured on 4 questions. Send one or the other.
-- **On-device**: the fine-tuned framing ("Reference material ... above") is unchanged and has no meta-talk
-  filter; only `REGEN_NUDGE` stopped asking the model to "say so". Share `_maik_metatalk.js` as a UMD if
-  the owner sees it offline.
+- [x] **On-device** (PR #1245, 2026-09-26): `maik-local.js` runs an ES5 copy of the meta-talk filter,
+  pinned to the Cloud file by a parity test. Move both copies into one kb/ai UMD file if a third caller
+  appears. The fine-tuned framing ("Reference material ... above") is unchanged.
