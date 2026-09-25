@@ -14,7 +14,9 @@
  *
  * WHAT IS NOT HERE, AND WHY IT IS NOT A GAP TO BE FILLED LATER WITH A STUB.
  *
- *   WADO-RS retrieval. Pixel data is not fetched, proxied, cached or stored anywhere in WardSynQ.
+ *   WADO-RS retrieval. SUPERSEDED 2026-09-25 for viewing only: dicom-viewer.js now PROXIES single
+   instances to the in-app viewer for a caller who may read the study (no-store, never cached or kept).
+   The reasoning below still holds for STORING: pixel data is not cached or stored anywhere in WardSynQ.
  *   This runs on Pages Functions with no object storage, and a field holding a retrieve URL becomes
  *   the path every viewer, cache and log copies a patient's images through. The accession number and
  *   StudyInstanceUID on the ImagingStudy row are what a radiologist opens the study with, in the

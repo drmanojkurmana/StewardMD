@@ -5,6 +5,34 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-25 · Radiology images: PROXIED for an in-app viewer, still never STORED
+
+**Decision.** WardSynQ now shows DICOM images inside the app. The server reads them from the hospital's own
+DICOMweb archive (the Imaging connector, `functions/_wardsynq/dicomweb.js`) and passes them to the signed-in clinician:
+`GET /ward/imaging-series` (QIDO-RS series + instances) and `GET /ward/imaging-instance` (WADO-RS, one instance,
+`application/dicom`, `Cache-Control: private, no-store`), both `emr.view`, in `functions/_wardsynq/dicom-viewer.js`.
+The browser names OUR ImagingStudy record id, never a study UID; the UID always comes from this hospital's governed
+row, so another hospital's study is unreachable. PACS address and credential stay server-side. Opening a study is
+audited (`imaging.study.open`); per-image reads are not (a CT is hundreds). The archive's patient header is returned
+only when the caller may read that Patient record.
+
+**Supersedes** "No pixels in WardSynQ" (2026-09-13 P1.10 and S5 "nothing retrieves pixel data") for the VIEWING
+part only. What stays: nothing is written to the record, KV, R2 or any cache; the client (`ward-dicom-viewer.js`)
+holds decoded images in memory and drops them on close (FIFO cap of 48 decoded slices). The launch link into the
+hospital's own viewer is still offered beside it.
+
+**Why.** Radiologists and ward doctors asked to look at the images where they write the report, and many small
+hospitals have no web viewer to link to. Proxying keeps the credential off the device and the study scoped by our
+own governance; storing would make us a PACS (retention, QA, medico-legal custody) and that is not this product.
+
+**Trade-offs / limits.** 48 MB per instance (whole instance in Worker memory), 60 series and 1500 instances per
+study, QIDO 8 s and WADO 20 s timeouts. Client decodes uncompressed little/big endian and JPEG baseline only;
+JPEG 2000, JPEG-LS, RLE and lossless JPEG are refused naming the transfer syntax (open the hospital viewer).
+dicom-parser 1.8.21 (MIT) from jsdelivr with SRI, loaded on first open (dwv is GPL-3.0; cornerstone3D's worker/WASM
+codecs do not suit a Capacitor WebView loading from a CDN). Not a diagnostic-grade viewer (no MPR, no calibration
+checks, no hanging protocols). NOT tried against a real PACS; mocked transport and a synthetic 16-bit CT in
+headless Chrome (`test/run-ward-dicom-viewer-ui.mjs`). **Status:** draft PR, awaiting owner approval.
+
 ## 2026-09-18 · Deferring a payload without deferring the contract (PDF engines off cold start)
 
 **Measured first, because the received wisdom was wrong.** `stewardmd.in` is a MARKETING PAGE (3
@@ -5954,7 +5982,7 @@ bug - not re-verified live on device this session.
 
 ## 2026-09-13 WardSynQ P1.10 imaging viewer launch and P1.5 payer adapters (branch p1-rad-tpa)
 - Images open in the hospital's own viewer via `wardsynq.imagingViewer.urlTemplate` (https only; placeholders
-  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged.
+  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged. (Viewing superseded 2026-09-25: proxied, still not stored.)
 - Study-to-order linkage is done at read time (`_wardsynq/imaging-viewer.js` studyForOrder): serviceRequestId, else
   accession equal to the order id the worklist issued, else the order's external identifiers. Exact only.
 - Structured report templates are hospital content (`wardsynq.radiologyTemplates`); report stores template id/version
@@ -6449,7 +6477,7 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   hospital whose org template used it now gets "template_unsupported_placeholder" and no link, stated.
 - Test connection = one `GET <qido>/studies?limit=1`, Accept `application/dicom+json` (PS3.18 10.6), 5 s, no
   redirect. Reports passed/failed, HTTP status, study count; the body is never returned (it names a patient).
-- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged).
+- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged). **Superseded 2026-09-25:** WADO-RS is now read by the in-app viewer, proxied and never stored.
 - NOT verified against a real PACS; mocked transport only.
 
 ### S4 Payers and TPAs (functions/_wardsynq/payer-connectors.js, wardsynq/wardsynq-nhcx-adapter.js)

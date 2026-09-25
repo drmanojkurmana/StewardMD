@@ -245,6 +245,7 @@ import { registerSettings, validateRegisterSettings, rmiStatus, NOTES as REGISTE
 import { legalView, validateStateConfig, stateConfigFor } from "../../_wardsynq/legal-requirements.js";
 import { controlledSet, isControlledDrug, regimeOf, quarantineRefusal, estimateRefusal } from "../../_wardsynq/controlled-drugs.js";
 import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
+import { imagingSeries, imagingInstance } from "../../_wardsynq/dicom-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
 /* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
@@ -2046,6 +2047,9 @@ export async function onRequest(context) {
         /* P1.10: which study answers each imaging order, and a launch link into the hospital's own
          * viewer. Reading an order and its study is reading the chart: emr.view, the worklist's bar. */
         "imaging-studies": CAPS.EMR_VIEW,
+        /* The in-app viewer (dicom-viewer.js): the study's series and each image, proxied from the hospital's
+         * archive. Looking at a study is reading the chart, so it is the same bar as the link above. */
+        "imaging-series": CAPS.EMR_VIEW, "imaging-instance": CAPS.EMR_VIEW,
         /* TASK 8. ASKING reads the chart and writes no clinical content, so it is emr.view - the same
          * capability that reads the record it summarises, and no wider. REVIEWING is emr.treat:
          * accepting a drafted note puts an unsigned note on the chart, which is a clinical act, and
@@ -4425,8 +4429,18 @@ export async function onRequest(context) {
         try { dicomConn = (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "dicom"))[0] || null; }
         catch { return json({ ok: false, error: "record_read_failed", message: "The imaging connector could not be read." }, 502, request); }
         const r = await imagingStudies(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", serviceRequestId: url.searchParams.get("serviceRequestId") || "",
-          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null,
+          inAppViewer: !!dicomConn });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-series" && method === "GET") {
+        const r = await imagingSeries(request, env, { ...deps, studyId: url.searchParams.get("studyId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-instance" && method === "GET") {
+        const r = await imagingInstance(request, env, { ...deps, studyId: url.searchParams.get("studyId") || "", seriesUid: url.searchParams.get("seriesUid") || "", sopUid: url.searchParams.get("sopUid") || "" });
+        if (!r.ok) return json(r, r.status || 502, request);
+        return new Response(r.bytes, { status: 200, headers: Object.assign({ "Content-Type": r.contentType, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" }, corsHeaders(request)) });
       }
       if (sub === "report-imaging" && method === "POST") {
         const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null,
