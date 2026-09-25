@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "66a83f3d9741",
- "count": 197,
+ "version": "b4a8a45a7232",
+ "count": 209,
  "subjects": [
   {
    "key": "emergency",
@@ -26,7 +26,7 @@
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 25
+   "count": 26
   },
   {
    "key": "gastroenterology",
@@ -46,7 +46,7 @@
   {
    "key": "neurology",
    "label": "Neurology",
-   "count": 9
+   "count": 14
   },
   {
    "key": "toxicology",
@@ -61,12 +61,12 @@
   {
    "key": "rheumatology-dermatology",
    "label": "Rheumatology and Dermatology",
-   "count": 9
+   "count": 10
   },
   {
    "key": "psychiatry",
    "label": "Psychiatry",
-   "count": 4
+   "count": 8
   },
   {
    "key": "obstetrics-gynaecology",
@@ -76,7 +76,7 @@
   {
    "key": "paediatrics",
    "label": "Paediatrics and Neonatology",
-   "count": 13
+   "count": 14
   },
   {
    "key": "surgery-trauma",
@@ -103,7 +103,7 @@
   {
    "key": "international",
    "label": "International",
-   "count": 179
+   "count": 191
   },
   {
    "key": "india",
@@ -135,6 +135,37 @@
     "European Resuscitation Council 2025",
     "Resuscitation Council UK 2025",
     "Paal P, et al. Int J Environ Res Public Health 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acne-vulgaris",
+   "title": "Acne vulgaris",
+   "subject": "rheumatology-dermatology",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "acne",
+    "pimples",
+    "comedones",
+    "adapalene",
+    "benzoyl peroxide",
+    "BPO",
+    "clindamycin gel",
+    "doxycycline",
+    "lymecycline",
+    "isotretinoin",
+    "acne fulminans",
+    "nodulocystic acne",
+    "acne conglobata",
+    "hormonal acne",
+    "spironolactone"
+   ],
+   "summary": "Offer a 12-week course of a fixed topical combination (retinoid or clindamycin with benzoyl peroxide); add oral doxycycline or lymecycline for moderate to severe acne, never as monotherapy and rarely beyond 6 months; use isotretinoin for severe, scarring or refractory acne with strict pregnancy prevention and mood monitoring.",
+   "sources": [
+    "American Academy of Dermatology 2024",
+    "NICE 2021"
    ],
    "status": "ai_drafted"
   },
@@ -1319,6 +1350,32 @@
    "status": "ai_drafted"
   },
   {
+   "id": "bells-palsy",
+   "title": "Bell's palsy (adult)",
+   "subject": "neurology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "Bell palsy",
+    "facial palsy",
+    "facial nerve palsy",
+    "lower motor neuron facial palsy",
+    "LMN facial palsy",
+    "idiopathic facial paralysis",
+    "seventh nerve palsy",
+    "Ramsay Hunt syndrome",
+    "prednisolone Bell's palsy"
+   ],
+   "summary": "Sudden unilateral lower motor neuron facial weakness with no other cause: give prednisolone within 72 hours of onset, consider an antiviral only together with the steroid, protect the eye if closure is incomplete, avoid routine tests or imaging, and refer if red flags or no recovery by 3 months.",
+   "sources": [
+    "AAO-HNSF 2013",
+    "American Academy of Neurology 2012",
+    "Lancet Neurology (Engström et al.) 2008"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "benign-prostatic-hyperplasia",
    "title": "Benign prostatic hyperplasia and male lower urinary tract symptoms",
    "subject": "urology",
@@ -2060,6 +2117,64 @@
    "status": "ai_drafted"
   },
   {
+   "id": "delirium",
+   "title": "Delirium (adult)",
+   "subject": "psychiatry",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "delirium",
+    "acute confusional state",
+    "acute confusion",
+    "4AT",
+    "CAM",
+    "CAM-ICU",
+    "hypoactive delirium",
+    "hyperactive delirium",
+    "sundowning",
+    "haloperidol delirium",
+    "confusion in the elderly"
+   ],
+   "summary": "Think delirium with any acute change in cognition or behaviour; assess with the 4AT (CAM-ICU in ICU), find and treat the causes, use non-drug care, give short-term low-dose haloperidol only for severe distress or risk, avoid benzodiazepines except for alcohol or benzodiazepine withdrawal, and follow up for dementia.",
+   "sources": [
+    "NICE 2010",
+    "SIGN 2019",
+    "MHRA 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "dementia",
+   "title": "Dementia: assessment and management",
+   "subject": "neurology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "dementia",
+    "Alzheimer's disease",
+    "AD",
+    "memory loss",
+    "cognitive impairment",
+    "vascular dementia",
+    "Lewy body dementia",
+    "DLB",
+    "frontotemporal dementia",
+    "BPSD",
+    "behavioural and psychological symptoms of dementia",
+    "donepezil",
+    "memantine",
+    "rivastigmine"
+   ],
+   "summary": "Take a history from the person and an informant, use a brief cognitive test, exclude delirium, depression, sensory loss, anticholinergic drugs and metabolic causes, image to exclude structural causes, offer a cholinesterase inhibitor or memantine by subtype, and use antipsychotics only for severe distress or risk of harm.",
+   "sources": [
+    "NICE 2018",
+    "Lancet Commission 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "dengue",
    "title": "Dengue: assessment and fluid management (India, NCVBDC)",
    "subject": "infectious-disease",
@@ -2112,6 +2227,36 @@
     "WHO 2025",
     "WHO 2012",
     "WHO / TDR 2009"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "depression-adult",
+   "title": "Depression in adults",
+   "subject": "psychiatry",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "depression",
+    "major depressive disorder",
+    "MDD",
+    "depressive episode",
+    "low mood",
+    "PHQ-9",
+    "PHQ-2",
+    "antidepressant",
+    "SSRI",
+    "sertraline",
+    "escitalopram",
+    "fluoxetine",
+    "treatment-resistant depression",
+    "antidepressant withdrawal"
+   ],
+   "summary": "Screen with 2 questions and the PHQ-9, assess severity, bipolar history and suicide risk, offer psychological therapy for less severe depression and CBT, an SSRI or both for more severe depression, review within 1 to 2 weeks, continue 6 to 12 months after remission, and taper slowly when stopping.",
+   "sources": [
+    "NICE 2022",
+    "CANMAT 2024"
    ],
    "status": "ai_drafted"
   },
@@ -2275,6 +2420,37 @@
     "ICMR 2019",
     "Indian Academy of Pediatrics 2006",
     "CDC 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "epilepsy-long-term-management",
+   "title": "Epilepsy: long-term management (adult)",
+   "subject": "neurology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "epilepsy",
+    "antiseizure medication",
+    "ASM",
+    "AED",
+    "antiepileptic drug",
+    "seizure disorder",
+    "valproate pregnancy prevention",
+    "SUDEP",
+    "drug-resistant epilepsy",
+    "juvenile myoclonic epilepsy",
+    "JME",
+    "lamotrigine",
+    "levetiracetam",
+    "epilepsy and pregnancy"
+   ],
+   "summary": "Classify the seizure type, use one antiseizure medication chosen for that type (lamotrigine or levetiracetam first for most adults), do not start valproate under 55 unless two specialists agree, counsel on SUDEP, driving, contraception and pregnancy, and refer early if two drugs fail.",
+   "sources": [
+    "NICE 2022",
+    "MHRA 2024",
+    "ILAE 2010"
    ],
    "status": "ai_drafted"
   },
@@ -2462,6 +2638,31 @@
     "American College of Gastroenterology 2022",
     "American Gastroenterological Association 2022",
     "American Gastroenterological Association 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "generalised-anxiety-disorder",
+   "title": "Generalised anxiety disorder (adult)",
+   "subject": "psychiatry",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "GAD",
+    "anxiety",
+    "generalized anxiety disorder",
+    "chronic worry",
+    "GAD-7",
+    "GAD-2",
+    "anxiety disorder",
+    "sertraline anxiety",
+    "pregabalin",
+    "benzodiazepine dependence"
+   ],
+   "summary": "Confirm GAD (excessive, hard-to-control worry for months with impairment), exclude medical and substance causes, and follow stepped care: education and monitoring, low-intensity CBT-based help, then CBT, applied relaxation or an SSRI (sertraline first); avoid long-term benzodiazepines and antipsychotics.",
+   "sources": [
+    "NICE 2011"
    ],
    "status": "ai_drafted"
   },
@@ -3303,11 +3504,11 @@
   },
   {
    "id": "leptospirosis",
-   "title": "Leptospirosis (adult)",
+   "title": "Leptospirosis (adult, India)",
    "subject": "infectious-disease",
    "population": "Adults",
    "basis": "india",
-   "counterpart": null,
+   "counterpart": "leptospirosis-international",
    "aliases": [
     "lepto",
     "Weil disease",
@@ -3325,6 +3526,34 @@
     "NCDC, MoHFW 2015",
     "CDC 2026",
     "ICMR 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "leptospirosis-international",
+   "title": "Leptospirosis (international guidance)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": "leptospirosis",
+   "aliases": [
+    "lepto",
+    "Weil disease",
+    "Weil's disease",
+    "leptospiral pulmonary haemorrhage",
+    "pulmonary haemorrhage syndrome",
+    "MAT",
+    "Leptospira PCR",
+    "flood fever",
+    "doxycycline prophylaxis",
+    "WHO ILS leptospirosis"
+   ],
+   "summary": "Suspect after contact with animal urine, floodwater or wet soil in a patient with fever, myalgia and conjunctival suffusion. Start antibiotics on suspicion without waiting for tests: doxycycline for mild disease, IV penicillin or ceftriaxone for severe disease. Early ICU and dialysis for pulmonary haemorrhage and AKI.",
+   "sources": [
+    "WHO / International Leptospirosis Society 2003",
+    "CDC 2026",
+    "CDC 2025",
+    "Cochrane 2024"
    ],
    "status": "ai_drafted"
   },
@@ -3644,6 +3873,39 @@
     "EXTRIP Workgroup 2015",
     "Open Access Emergency Medicine (Megarbane) 2010",
     "Annals of Medicine and Surgery (Nekoukar et al.) 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "migraine-prevention",
+   "title": "Migraine prevention (adult)",
+   "subject": "neurology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "migraine prophylaxis",
+    "preventive treatment of migraine",
+    "chronic migraine",
+    "episodic migraine",
+    "CGRP monoclonal antibody",
+    "erenumab",
+    "fremanezumab",
+    "galcanezumab",
+    "gepant",
+    "atogepant",
+    "propranolol migraine",
+    "topiramate migraine",
+    "flunarizine",
+    "medication overuse headache",
+    "MOH"
+   ],
+   "summary": "Offer prevention for 4 or more migraine days a month or disabling migraine; choose propranolol, amitriptyline, topiramate (not in pregnancy or without highly effective contraception), candesartan or a CGRP-targeted drug by comorbidity and access, treat medication overuse, and judge response after 8 to 12 weeks at target dose.",
+   "sources": [
+    "American Academy of Neurology / American Headache Society 2026",
+    "American Headache Society 2024",
+    "NICE 2012",
+    "SIGN 2018"
    ],
    "status": "ai_drafted"
   },
@@ -4124,6 +4386,39 @@
     "NHS Greater Glasgow and Clyde 2026",
     "eClinicalMedicine (Pettie et al.) 2019",
     "ISRN Toxicology 2013"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "parkinsons-disease",
+   "title": "Parkinson's disease: diagnosis and drug management",
+   "subject": "neurology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "PD",
+    "Parkinson disease",
+    "parkinsonism",
+    "levodopa",
+    "co-careldopa",
+    "carbidopa levodopa",
+    "dopamine agonist",
+    "pramipexole",
+    "ropinirole",
+    "rotigotine",
+    "rasagiline",
+    "MAO-B inhibitor",
+    "impulse control disorder",
+    "wearing off",
+    "dyskinesia",
+    "Parkinson's nil by mouth"
+   ],
+   "summary": "Diagnose clinically (bradykinesia with rest tremor or rigidity), refer untreated to a specialist, offer levodopa when motor symptoms affect quality of life, warn about impulse control disorders and sleepiness with dopamine agonists, never stop dopaminergic drugs abruptly, and give doses on time in hospital.",
+   "sources": [
+    "NICE 2017",
+    "International Parkinson and Movement Disorder Society 2018",
+    "International Parkinson and Movement Disorder Society 2015"
    ],
    "status": "ai_drafted"
   },
@@ -4706,6 +5001,34 @@
     "MoHFW / NCDC 2019",
     "IDSA 2019",
     "CDC 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "self-harm-and-suicide-risk",
+   "title": "Self-harm and suicide risk (adult)",
+   "subject": "psychiatry",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "self-harm",
+    "deliberate self-harm",
+    "DSH",
+    "suicide attempt",
+    "attempted suicide",
+    "suicidal ideation",
+    "overdose",
+    "self-poisoning",
+    "self-injury",
+    "cutting",
+    "suicide risk assessment",
+    "safety plan",
+    "Tele-MANAS"
+   ],
+   "summary": "Treat the injury or poisoning and start a psychosocial assessment at the same time; do not use risk scales or low, medium or high labels to predict suicide or decide discharge; agree a needs-based plan and written safety plan, restrict access to means, and arrange aftercare within 48 hours if concerns remain.",
+   "sources": [
+    "NICE 2022"
    ],
    "status": "ai_drafted"
   },
@@ -5522,6 +5845,35 @@
     "ICMR 2022",
     "IDSA 2019",
     "IDSA / ESCMID 2011"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "urinary-tract-infection-children",
+   "title": "Urinary tract infection (child)",
+   "subject": "paediatrics",
+   "population": "Children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "UTI child",
+    "paediatric UTI",
+    "pediatric UTI",
+    "febrile UTI",
+    "pyelonephritis child",
+    "cystitis child",
+    "VUR",
+    "vesicoureteric reflux",
+    "MCUG",
+    "DMSA scan",
+    "NICE NG224"
+   ],
+   "summary": "Test urine when symptoms suggest UTI or fever has no source, collecting clean catch urine before antibiotics. Under 3 months: refer and give IV antibiotics. Upper UTI: oral cefalexin for 7 to 10 days (IV if vomiting or very unwell); lower UTI: trimethoprim or nitrofurantoin for 3 days. Image by age and atypical or recurrent features.",
+   "sources": [
+    "NICE 2022",
+    "NICE 2018",
+    "NICE 2018",
+    "AAP 2011"
    ],
    "status": "ai_drafted"
   },
