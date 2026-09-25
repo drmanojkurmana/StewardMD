@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-org-audit-chain.test.mjs - G3: the hospital event log (q_events) hash-chained like the
  * clinical audit trail, verified in GET /api/queue/ward/security-report and GET /api/queue/ward/system-health,
  * and shown on Admin Center > Security review.

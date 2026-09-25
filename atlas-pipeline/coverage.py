@@ -59,7 +59,8 @@ GAPS = [
     ("Lung lobes on the CADAVER", "SOURCE DATA (-540 HU, no resolvable fissures)",
      "already solved on living CT: 4 of 5 lobes shipped"),
     ("Airway / trachea / larynx on the CADAVER", "SOURCE DATA (air-in-body measured at "
-     "0 voxels)", "living CT — trachea present but outside s0108's field of view"),
+     "0 voxels)", "living CT: trachea shipped on the neck and thorax-neck subjects "
+     "(s0021, s0897); the dataset has no larynx mask"),
     ("MRI body (spine, joints, musculoskeletal)", "NOT ATTEMPTED YET",
      "TotalSegmentator total_mr is Apache-2.0 and CLEAR; needs a CC0/CC BY MRI source"),
     ("PET / metabolic imaging", "NO COMMERCIALLY CLEAN DATASET EXISTS",
@@ -185,9 +186,9 @@ def main():
           "CC BY-NC.", "",
           "## What would move these numbers most", "",
           "1. **More living-CT subjects, free.** The CC BY 4.0 dataset has 404 studies "
-          "with a `no_pathology` metadata flag, of which one is currently used. Thorax-"
-          "only and neck studies would add the trachea and neck vessels that fall outside "
-          "the present subject's field of view.",
+          "with a `no_pathology` metadata flag, of which three are used (torso s0108, neck "
+          "s0021, thorax-neck s0897); `tsd_living.py` builds a new group from any of them. "
+          "Abdomen-pelvis or pelvis studies would add pelvic organs at higher resolution.",
           "2. **MRI body, free.** TotalSegmentator `total_mr` is Apache-2.0 and already "
           "CLEAR; the whole MRI musculoskeletal region is unattempted.", ""]
 

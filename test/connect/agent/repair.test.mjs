@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect/agent/repair.test.mjs -- POST /versions/:id/repair: a corrected view from a read-time
 // self-repair becomes a NEW awaiting-approval candidate whose replay the phone can use once approved.
 //   node --test test/connect/agent/repair.test.mjs

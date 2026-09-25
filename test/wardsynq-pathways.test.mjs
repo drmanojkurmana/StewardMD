@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-pathways.test.mjs - P2.12 clinical pathways and P2.11 specialty registry. Real router, real RecordService.
  *
  * node --test --experimental-test-module-mocks test/wardsynq-pathways.test.mjs

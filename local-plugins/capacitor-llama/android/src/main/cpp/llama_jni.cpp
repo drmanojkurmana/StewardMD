@@ -431,6 +431,12 @@ Java_in_stewardmd_llama_LlamaNative_generate(
     const bool useDraft = dctx != nullptr && dmdl != nullptr && temp <= 0.0f;
     if (useDraft) {
         constexpr int K = 6;
+        /* Adaptive draft-off (energy, 2026-09-25): after 8 verify steps, a generation whose acceptance
+         * is below 15% stops drafting. Greedy output is byte-identical either way, so rejected proposals
+         * are pure waste; below 15% drafting is slower than plain decode on these packs. */
+        constexpr int DRAFT_MIN_STEPS = 8;
+        constexpr double DRAFT_MIN_ACCEPT = 0.15;
+        int verifySteps = 0;
         bool draftOK = prefill_reuse(dctx, g_dkv, g_dkv_ctx, toks, n_batch) >= 0;
         llama_sampler* dsmpl = llama_sampler_chain_init(llama_sampler_chain_default_params());
         llama_sampler_chain_add(dsmpl, llama_sampler_init_greedy());
@@ -443,6 +449,8 @@ Java_in_stewardmd_llama_LlamaNative_generate(
             if (thermal_should_stop()) { stoppedHot = true; break; }
             if (llama_vocab_is_eog(vocab, committed)) break;
             emit(committed);
+            // Same stop as the plain loop: a spent budget must not draft and verify another step.
+            if (produced >= budget) break;
 
             // 1. The draft proposes up to k tokens after `committed`. A failure on its side only means
             //    fewer proposals; the target never depends on it for correctness.
@@ -489,6 +497,12 @@ Java_in_stewardmd_llama_LlamaNative_generate(
                 next = t; haveNext = true; break;
             }
             st.draftProposed += (int) drafts.size(); st.draftAccepted += accepted;
+            if (!drafts.empty()) verifySteps++;
+            if (draftOK && verifySteps >= DRAFT_MIN_STEPS && st.draftProposed > 0
+                && (double) st.draftAccepted / (double) st.draftProposed < DRAFT_MIN_ACCEPT) {
+                draftOK = false;
+                LOGI("PERF draft off: accepted=%d proposed=%d steps=%d", st.draftAccepted, st.draftProposed, verifySteps);
+            }
 
             // 4. Roll both caches back to what was accepted.
             const int keep = n + 1 + accepted;

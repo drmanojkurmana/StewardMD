@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/run-twin-persistence-restart.mjs — TASK 10: does a Digital Twin fact SURVIVE a restart?
  *
  * EVERY OTHER TWIN TEST WRITES TO A MemoryRepository, WHICH IS A MAP. That proves the write path and

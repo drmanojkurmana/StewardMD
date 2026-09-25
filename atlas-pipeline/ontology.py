@@ -55,7 +55,7 @@ REGION = {
     "septum-pellucidum": "BRAIN", "central-sulcus": "BRAIN",
     "lentiform-nucleus": "BRAIN",
     "cervical-vertebra": "NECK", "thyroid-gland": "NECK", "larynx": "NECK",
-    "trachea": "NECK",
+    "trachea": "NECK", "neck": "NECK",
     "thorax": "CHEST", "lung": "CHEST", "upper-lobe-left": "CHEST",
     "upper-lobe-right": "CHEST", "middle-lobe-right": "CHEST",
     "lower-lobe-left": "CHEST", "lower-lobe-right": "CHEST", "heart": "CHEST",

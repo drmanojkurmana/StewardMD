@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-staff-messaging.test.mjs - staff message threads (staff-messaging.js).
  *
  * GET /api/queue/ward/staff-messages, POST /api/queue/ward/staff-message-send, /api/queue/ward/staff-message-edit,

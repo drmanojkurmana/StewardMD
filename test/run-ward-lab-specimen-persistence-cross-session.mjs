@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* WardSynQ TASK 3.1: persistence across a RELOAD, a second independent browser session ("another
  * device"), and a full SERVER PROCESS RESTART against the same on-disk sqlite file - against a REAL
  * local server (test/wardsynq-persistence-server.mjs: real onRequest(), real D1Repository over a

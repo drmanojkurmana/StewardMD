@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-source-order-close.test.mjs - closing the orders the SENDING system has finished
  * (functions/_wardsynq/source-order-close.js).
  *

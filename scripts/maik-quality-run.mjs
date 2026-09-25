@@ -12,6 +12,13 @@
  * Offline parity: after running the same cases on a phone, pass --offline <answers.json> ({id: text}) to
  * compare drug names and dose numbers between the two engines.
  * Output: docs/maik-eval/run-<date>.json and docs/maik-eval/run-<date>-grading.md
+ *
+ * --latency: a cheap DAILY signal, separate from the WEEKLY gold-set run above. Sends 5 short fixed
+ * questions to the streaming endpoint (?stream=1) and times total ms + time-to-first-byte off the wire;
+ * output tokens are estimated from response length (the reliable-replay stream path carries no
+ * usageMetadata). No grading sheet — this measures speed, not correctness.
+ *   MAIK_EVAL_TOKEN=<firebase id token> node scripts/maik-quality-run.mjs --latency
+ * Output: docs/maik-eval/latency-<date>.json
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -45,7 +52,68 @@ export function parity(cloud, offline) {
   const onlyCloud = a.doses.filter((d) => !b.doses.includes(d)), onlyOffline = b.doses.filter((d) => !a.doses.includes(d));
   return { sharedDrugs: a.drugs.filter((d) => b.drugs.includes(d)), onlyCloudDoses: onlyCloud, onlyOfflineDoses: onlyOffline };
 }
-const pct = (xs, p) => { if (!xs.length) return null; const s = xs.slice().sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.floor(p * s.length))]; };
+export const pct = (xs, p) => { if (!xs.length) return null; const s = xs.slice().sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.floor(p * s.length))]; };
+
+// ── --latency: cheap daily synthetic check (separate from the weekly gold-set run above) ──────────
+export const LATENCY_QUESTIONS = [
+  "What is the first-line treatment for uncomplicated cystitis in adults?",
+  "What is the maximum daily dose of paracetamol (acetaminophen) in adults?",
+  "What are the diagnostic criteria for type 2 diabetes mellitus?",
+  "What is the reversal agent for warfarin-associated major bleeding?",
+  "What is the target INR range for atrial fibrillation on warfarin?",
+];
+// No usageMetadata on the reliable-replay stream path (MAIK_LIVE_STREAM off in prod) - estimate.
+export const estOutTokens = (text) => Math.ceil(String(text || "").length / 4);
+
+// opts lets tests inject base/token/fetch without touching env or the network.
+export async function runOneLatency(q, opts = {}) {
+  const base = opts.base || BASE, token = opts.token || TOKEN, fetchFn = opts.fetch || fetch;
+  const t0 = Date.now();
+  let ttfbMs = null, text = "", err = "";
+  try {
+    const r = await fetchFn(base + "/api/ai/explain?stream=1", { method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: "Bearer " + token, Origin: base, Accept: "text/event-stream" },
+      body: JSON.stringify({ package: { question: q, grounding: [] }, depth: "concise" }) });
+    if (!r.ok || !r.body) { err = "HTTP " + (r && r.status); } else {
+      const reader = r.body.getReader(), dec = new TextDecoder();
+      let buf = "";
+      for (;;) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        if (ttfbMs === null) ttfbMs = Date.now() - t0;
+        buf += dec.decode(value, { stream: true });
+        let idx;
+        while ((idx = buf.indexOf("\n\n")) >= 0) {
+          const frame = buf.slice(0, idx); buf = buf.slice(idx + 2);
+          const line = frame.split("\n").find((l) => l.startsWith("data: "));
+          if (!line) continue;
+          try { const evt = JSON.parse(line.slice(6)); if (evt.delta) text += evt.delta; } catch (e) {}
+        }
+      }
+    }
+  } catch (e) { err = String((e && e.message) || e); }
+  return { question: q, totalMs: Date.now() - t0, ttfbMs, outTokens: estOutTokens(text), error: err };
+}
+export function latencySummary(rows, base) {
+  const ok = rows.filter((r) => !r.error);
+  const totals = ok.map((r) => r.totalMs), ttfbs = ok.filter((r) => r.ttfbMs != null).map((r) => r.ttfbMs), outToks = ok.map((r) => r.outTokens);
+  return { when: new Date().toISOString(), base, mode: "latency", cases: rows.length, errors: rows.length - ok.length,
+    totalMsP50: pct(totals, 0.5), totalMsP95: pct(totals, 0.95), ttfbMsP50: pct(ttfbs, 0.5), ttfbMsP95: pct(ttfbs, 0.95),
+    outTokensP50: pct(outToks, 0.5), outTokensP95: pct(outToks, 0.95) };
+}
+async function runLatency() {
+  if (!TOKEN) { console.log("MAIK_EVAL_TOKEN not set: nothing sent (latency check skipped)."); return; }
+  const rows = [];
+  for (const q of LATENCY_QUESTIONS) {
+    const row = await runOneLatency(q);
+    rows.push(row);
+    console.log(`${row.error || "ok"} total=${row.totalMs} ms ttfb=${row.ttfbMs} ms outTok~${row.outTokens}`);
+  }
+  const summary = latencySummary(rows, BASE);
+  const stamp = summary.when.slice(0, 10), dir = join(ROOT, "docs/maik-eval"); mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, `latency-${stamp}.json`), JSON.stringify({ summary, rows }, null, 1));
+  console.log("\n" + JSON.stringify(summary));
+}
 
 async function main() {
   if (!TOKEN) { console.log("MAIK_EVAL_TOKEN not set: nothing sent (this run costs tokens, so it never runs unattended)."); return; }
@@ -73,4 +141,6 @@ async function main() {
     rows.map((r) => `## ${r.id}: ${r.question}\n\n${r.error ? "_error: " + r.error + "_" : r.text}\n\n**Grade:** \n**Notes:** \n`).join("\n"));
   console.log("\n" + JSON.stringify(summary));
 }
-if (process.argv[1] && process.argv[1].endsWith("maik-quality-run.mjs")) main();
+if (process.argv[1] && process.argv[1].endsWith("maik-quality-run.mjs")) {
+  if (process.argv.includes("--latency")) runLatency(); else main();
+}

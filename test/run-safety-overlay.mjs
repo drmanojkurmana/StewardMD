@@ -1,14 +1,28 @@
 /* StewardMD — patient-specific safety overlay regression test.
  * Loads the app headless, exercises the pure SMD_SAFETY checks with synthetic
  * findings, and (Task 7) drives the injector against a stubbed #outputArea.
- * USAGE: BASE=http://localhost:5173/ node test/run-safety-overlay.mjs
+ * USAGE: node test/run-safety-overlay.mjs   (serves the repo itself when BASE is not already up)
+ *        BASE=http://localhost:5173/ node test/run-safety-overlay.mjs   to point at a running dev server
  */
 import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = (process.env.BASE || "http://localhost:5173/").replace(/\/?$/, "/");
+// Start the repo's own static server when nothing is listening, so the harness is self-contained
+// rather than silently failing every assertion against a dead port.
+let serve = null;
+try { await fetch(BASE); } catch {
+  serve = spawn("node", [join(HERE, "serve.mjs"), join(HERE, ".."), (BASE.match(/:(\d+)/) || [, "5173"])[1]], { stdio: "ignore" });
+  for (let i = 0; i < 40; i++) { try { await fetch(BASE); break; } catch { await sleep(200); } }
+}
 const PORT = Number(process.env.CDP_PORT || 9492);
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${(process.env.CLAUDE_JOB_DIR||"/tmp")}/tmp/safety-chrome`, "--no-first-run", "--disable-gpu"], { stdio: "ignore" });
+// Hardcoding the macOS path meant this harness could not run anywhere else, so the Save Case /
+// safety-card layout had no regression cover on Linux or in CI. $CHROME overrides it.
+const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME_FLAGS = (process.env.CHROME_FLAGS || "").split(/\s+/).filter(Boolean);
+const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${(process.env.CLAUDE_JOB_DIR||"/tmp")}/tmp/safety-chrome`, "--no-first-run", "--disable-gpu", ...CHROME_FLAGS], { stdio: "ignore" });
 let id = 1; const pend = new Map(); let ws, sid;
 const call = (m, p) => { const i = id++; return new Promise((r) => { pend.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId: sid })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return '__ERR__'+x.message}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
@@ -153,5 +167,5 @@ try {
   chk("E2E: NO safety card on the non-infective (isNI) page", await ev(`return !document.getElementById("smdSafetyCard")`) === true);
 
   console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN"}`);
-} finally { try { ws && ws.close(); } catch {} chrome.kill(); }
+} finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serve) serve.kill(); }
 process.exitCode = fails ? 1 : 0;

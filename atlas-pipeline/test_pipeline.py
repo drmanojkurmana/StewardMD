@@ -266,6 +266,11 @@ cat = upsert_module(cat, dict(META, slices=7, thumb="/atlas/x/t/001.webp"))
 ok("upsert replaces rather than duplicates", len(cat["modules"]) == 1 and cat["modules"][0]["slices"] == 7)
 cat["credits"] = ["keep me"]
 ok("upsert preserves credits", upsert_module(cat, dict(META, slices=7, thumb="/t.webp"))["credits"] == ["keep me"])
+cat["modules"][0].update({"flipX": True, "orient": {"top": "A"}, "hidden": True, "q_not_a_row_key": 1})
+_row = upsert_module(cat, dict(META, slices=9, thumb="/t.webp"))["modules"][0]
+ok("upsert keeps verified display fields a rebuild does not produce",
+   _row["flipX"] is True and _row["orient"] == {"top": "A"} and _row["hidden"] is True and _row["slices"] == 9)
+ok("upsert still drops unknown keys", "q_not_a_row_key" not in _row)
 
 # ---------- every shipped label mapping must be self-consistent ----------
 import glob
@@ -354,6 +359,27 @@ with tempfile.TemporaryDirectory() as tmp:
     ok("e2e: aspect is positive", all(s["aspect"] > 0 for s in stubs))
     # anisotropic 0.5 x 0.5 in-plane is isotropic, so display aspect = 60/80 = 0.75
     ok("e2e: aspect reflects PHYSICAL extent, not voxel counts", abs(stubs[0]["aspect"] - 0.75) < 0.02)
+    # The extra CT windows re-render fixed picks. That path must reproduce the normal one
+    # byte for byte, and write no thumbnails when asked not to.
+    rep = os.path.join(tmp, "rep")
+    again = extract_slices(os.path.join(tmp, "vol.nii.gz"), rep, "selftest", 4, None, "visible-human",
+                           picks=[s["_z"] for s in stubs], thumbs=False)
+    ok("picks path reproduces the same slices byte for byte",
+       [s["_z"] for s in again] == [s["_z"] for s in stubs] and all(
+           open(os.path.join(rep, "%03d.webp" % s["i"]), "rb").read() ==
+           open(os.path.join(out_dir, "%03d.webp" % s["i"]), "rb").read() for s in stubs))
+    ok("thumbs=False writes no thumbnails", not os.path.exists(os.path.join(rep, "t")))
+    # Image paths are immutable: re-running into the same directory passes (same bytes), but a
+    # different window over the same paths must refuse rather than overwrite.
+    extract_slices(os.path.join(tmp, "vol.nii.gz"), rep, "selftest", 4, None, "visible-human",
+                   picks=[s["_z"] for s in stubs], thumbs=False)
+    ok("re-running over identical images is allowed", True)
+    try:
+        extract_slices(os.path.join(tmp, "vol.nii.gz"), rep, "selftest", 4, (0, 50), "visible-human",
+                       picks=[s["_z"] for s in stubs], thumbs=False)
+        ok("changing the bytes under an existing image path is refused", False)
+    except SystemExit as e:
+        ok("changing the bytes under an existing image path is refused", "immutable" in str(e))
 
     zooms = nib.load(os.path.join(tmp, "vol.nii.gz")).header.get_zooms()[:3]
     pins = pins_from_segmentation(os.path.join(tmp, "seg.nii.gz"), stubs, MAP, (zooms[1], zooms[0]))
@@ -400,5 +426,28 @@ try:
     ok("no shipped slice renders as an empty frame", not _blank)
 except ImportError:
     pass
+
+# --- tsd_living: the index maps it writes must equal what crop_pair + reformat actually do ---
+import numpy as _np2
+from vhp_volume import crop_pair as _cp, reformat as _rf
+from tsd_living import module_maps as _mm, canonical as _canon
+_rng = _np2.random.default_rng(7)
+_v = _rng.integers(-1000, 1000, size=(23, 19, 17)).astype(_np2.int16)
+_g = _np2.zeros_like(_v, dtype=_np2.uint16); _g[4:18, 3:11, 2:15] = 1; _g[9, 6, 5] = 2
+_ax_v, _ax_g, _bax = _cp(_v, _g, margin=2)
+_co_v, _co_g, _ = _rf(_ax_v, _ax_g, "coronal", (1.5, 1.5, 1.5)); _co_v, _co_g, _bco = _cp(_co_v, _co_g, margin=2)
+_sa_v, _sa_g, _ = _rf(_ax_v, _ax_g, "sagittal", (1.5, 1.5, 1.5)); _sa_v, _sa_g, _bsa = _cp(_sa_v, _sa_g, margin=2)
+_maps = _mm(_v.shape, _bax, _bco, _bsa)
+def _mapped_ok(ref, M):
+    A, B, N = ref.shape
+    ii, jj, kk = _np2.meshgrid(_np2.arange(A), _np2.arange(B), _np2.arange(N), indexing="ij")
+    M = _np2.asarray(M)
+    idx = tuple(M[r, 0] * ii + M[r, 1] * jj + M[r, 2] * kk + M[r, 3] for r in range(3))
+    return _np2.array_equal(_v[idx], ref)
+ok("tsd_living axial map re-indexes the crop exactly", _mapped_ok(_ax_v, _maps["axial"]))
+ok("tsd_living coronal map re-indexes reformat + crop exactly", _mapped_ok(_co_v, _maps["coronal"]))
+ok("tsd_living sagittal map re-indexes reformat + crop exactly", _mapped_ok(_sa_v, _maps["sagittal"]))
+_c = _canon(_v, (2, 0, 1), (True, False, True))
+ok("canonical() permutes then reverses the named axes", _c.shape == (17, 23, 19) and _c[0, 0, 0] == _v[0, 18, 16] and _c[16, 22, 18] == _v[22, 0, 0])
 
 print("ALL %d PASS" % PASS[0])

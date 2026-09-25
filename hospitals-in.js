@@ -2573,7 +2573,18 @@
   }
   HOSPITALS = deduped;
 
-  window.SMD_HOSPITALS = {
+  /* PUBLISHED AS ITS OWN GLOBAL (2026-09-25).
+   * This file and hospital-registry.js both used to assign window.SMD_HOSPITALS, and they are two
+   * completely different things: this is the DIRECTORY of institutions in India (all/search/
+   * byState/states); that is the REGISTRY of hospitals this doctor has connected (list/get/
+   * register/setActive). hospital-registry.js loads on every page; this one is lazy. So before it
+   * loaded, every picker calling .search() found nothing, and the moment it DID load it deleted
+   * .setActive() out from under ghis-ward.js, which then silently stopped remembering the doctor's
+   * active hospital. Each module broke the other, which is why the directory "was not available"
+   * anywhere in the app.
+   * The directory now owns SMD_HOSPITAL_DIRECTORY and only claims the old name if nothing else has
+   * taken it, so neither module can clobber the other again. */
+  var DIRECTORY = {
     all: function () { return HOSPITALS.slice(); },
     search: function (q) {
       q = (q || "").toLowerCase().trim();
@@ -2600,5 +2611,11 @@
       return out;
     }
   };
+
+  window.SMD_HOSPITAL_DIRECTORY = DIRECTORY;
+  // Back-compat for callers written against the old name, but NEVER over the registry.
+  if (!window.SMD_HOSPITALS || typeof window.SMD_HOSPITALS.setActive !== "function") {
+    window.SMD_HOSPITALS = DIRECTORY;
+  }
 
 })();

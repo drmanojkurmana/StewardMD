@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/neg-auth-org-members.test.mjs — negative-authorization coverage for the org/staff-admin
  * routes: POST /member/disable, POST /member/pin, POST /mfa/disable, POST /org/update.
  *

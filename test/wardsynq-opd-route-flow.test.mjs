@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-opd-route-flow.test.mjs — the whole OPD visit, through the REAL route handlers.
  *
  * WHY THIS EXISTS. Every other test in this repo exercises the WardSynQ migrations as pure functions

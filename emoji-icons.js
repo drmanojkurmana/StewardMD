@@ -320,6 +320,11 @@
 
   // ── DOM ──────────────────────────────────────────────────────────────────────────────────────────
   var SKIP = "script,style,textarea,code,pre,svg,[contenteditable],[contenteditable] *,.smd-emo-keep";
+  // Book scrubbing only. A direct QUOTATION must keep the attribution of the book it is quoted from:
+  // replacing it with the subject's standard-textbook list would credit the words to three books, two of
+  // which they did not come from, which is worse than naming the one. Emoji and dash handling still run,
+  // so this is not .smd-emo-keep. See Decisions 2026-09-24 (source vs reference).
+  var BOOKS_KEEP = ".smd-books-keep,.smd-books-keep *";
   var STRIP_ONLY = "option,optgroup,title,select";
   var ATTRS = ["title", "placeholder", "aria-label", "alt", "data-tip"];
   function css() {
@@ -357,7 +362,7 @@
       var t2 = tidy(v, { next: !!(nx && (nx.nodeType === 1 || /\S/.test(nx.nodeValue || ""))), prev: !!(pv && (pv.nodeType === 1 || /\S/.test(pv.nodeValue || ""))) });
       if (t2 !== v) { tn.nodeValue = t2; v = t2; }
     }
-    if (booksOn() && hasBooks(v)) { var b3 = scrubBooks(v); if (b3 !== v) { tn.nodeValue = b3; v = b3; } }
+    if (booksOn() && hasBooks(v) && !(p.closest && p.closest(BOOKS_KEEP))) { var b3 = scrubBooks(v); if (b3 !== v) { tn.nodeValue = b3; v = b3; } }
     if (!(enabled() && has(v))) return;
     if (p.closest && p.closest(STRIP_ONLY)) { tn.nodeValue = strip(v); return; }
     var segs = segments(v), doc = W.document, frag = doc.createDocumentFragment();

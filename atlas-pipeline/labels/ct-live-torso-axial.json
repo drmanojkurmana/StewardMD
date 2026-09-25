@@ -160,7 +160,7 @@
       "definition": "The pancreas is a compound racemose gland lying transversely across the posterior abdominal wall behind the stomach."
     },
     "portal-vein": {
-      "name": "Portal vein",
+      "name": "Portal and splenic veins",
       "category": "vessel-vein",
       "parent": "torso",
       "definition": "The portal vein conveys blood from the abdominal digestive tract and spleen to the liver."
@@ -354,5 +354,5 @@
     "iliopsoas": 2,
     "autochthonous-back-muscle": 2
   },
-  "_student_notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Left and right are not asserted."
+  "_student_notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (liver on the patient's right, spleen on the left)."
 }

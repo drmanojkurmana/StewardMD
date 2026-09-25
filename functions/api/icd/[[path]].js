@@ -12,6 +12,7 @@
  *   /api/icd/code/<id>                  -> the single code row, or 404
  */
 import * as repo from "../../_icd_repo.js";
+import { cfAccessEmail } from "../../_fbauth.js";
 
 const json = (obj, opts) => {
   opts = opts || {};
@@ -23,8 +24,8 @@ const json = (obj, opts) => {
 const PUB_CACHE = "public, max-age=3600"; // static WHO/CMS reference data - safe to cache longer than scheme rates
 
 // Same coarse app gate as functions/api/schemes/[[path]].js.
-function authorise(request, env) {
-  if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+async function authorise(request, env) {
+  if (await cfAccessEmail(request, env)) return true;   // a VERIFIED Access JWT; the bare email header is forgeable
   const tok = request.headers.get("X-App-Token");
   if (env.GHIS_APP_TOKEN && tok === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && tok === env.AI_APP_TOKEN) return true;
@@ -40,7 +41,7 @@ function validQuery(raw) {
 }
 
 async function safeRead(request, env, empty, fn) {
-  if (!authorise(request, env) || !repo.hasDb(env)) return Object.assign({}, empty, { error: "unavailable" });
+  if (!(await authorise(request, env)) || !repo.hasDb(env)) return Object.assign({}, empty, { error: "unavailable" });
   try { return await fn(); } catch (e) { return Object.assign({}, empty, { error: "unavailable" }); }
 }
 

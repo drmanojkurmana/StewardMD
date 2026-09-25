@@ -1,9 +1,17 @@
-/* profile-setup.js — first-run professional details (phone · college/hospital · degree · speciality).
+/* profile-setup.js — THE profile form. Name, phone, place of work, degree, speciality.
  * ============================================================================================
  * WHY: the Profile card already stores these under users/{uid}/profile/self, and the curated
- * institution directory already exists (window.SMD_HOSPITALS, hospitals-in.js). What was missing is
- * anything that ASKS. So the fields sat empty, the directory looked "gone", and nothing in the app
- * knew the clinician's degree or speciality.
+ * institution directory already exists. What was missing is anything that ASKS. So the fields sat
+ * empty, the directory looked "gone", and nothing in the app knew the clinician's degree or
+ * speciality.
+ *
+ * ONE FORM, ONE DIRECTORY (2026-09-25). There used to be two. email-auth.js asked a new doctor for
+ * their state, city and hospital at sign-up, against one list; this file then asked the SAME doctor
+ * on the next app start for their "college / hospital", against a different list. Two questions,
+ * two answers, two lists that disagreed. Reported from a real device: "why two times institution is
+ * asked, I need one unified institution/hospital directory". email-auth.js now calls
+ * SMD_PROFILE_SETUP.open() instead of rendering its own, and both read SMD_INSTITUTIONS
+ * (institutions-in.js), which merges every curated list plus what doctors have typed here.
  *
  * Behaviour: on every app start, once auth has resolved, if a signed-in user is missing any of the
  * four fields we open this form. It can be postponed ("Later") but returns on the next start, which
@@ -56,22 +64,30 @@
   function db() { try { return window.SMD_DB || null; } catch (e) { return null; } }
   function docRef() { var u = uid(), d = db(); return (u && d) ? d.collection("users").doc(u).collection("profile").doc("self") : null; }
 
+  /* The whole profile, asked once. `req` marks what Save insists on; state and city are helpers for
+   * finding the institution, so they are offered but never block a doctor whose hospital is already
+   * named. */
   var FIELDS = [
-    { key: "phone", label: "Phone number", kind: "tel", ph: "10-digit mobile number" },
-    { key: "hospital", label: "College / hospital", kind: "hospital", ph: "Search the directory" },
-    { key: "degree", label: "Degree", kind: "choice", opts: DEGREES, ph: "Choose your qualification" },
-    { key: "speciality", label: "Speciality", kind: "choice", opts: SPECIALITIES, ph: "Choose your speciality" }
+    { key: "name", label: "Full name", kind: "text", ph: "Dr Jane Doe", req: true },
+    { key: "phone", label: "Phone number", kind: "tel", ph: "10-digit mobile number", req: true },
+    { key: "state", label: "State / UT", kind: "state", ph: "Choose your state" },
+    { key: "city", label: "City / district", kind: "city", ph: "Search your city" },
+    { key: "hospital", label: "Hospital / institution", kind: "hospital", ph: "Search the directory", req: true },
+    { key: "degree", label: "Degree", kind: "choice", opts: DEGREES, ph: "Choose your qualification", req: true },
+    { key: "speciality", label: "Speciality", kind: "choice", opts: SPECIALITIES, ph: "Choose your speciality", req: true }
   ];
 
   function missing(d) {
     d = d || {};
     var out = [];
     for (var i = 0; i < FIELDS.length; i++) {
+      if (!FIELDS[i].req) continue;                 // state/city help the search; they never block
       var v = d[FIELDS[i].key];
       if (v == null || String(v).trim() === "") out.push(FIELDS[i].key);
     }
     return out;
   }
+  function INST() { try { return window.SMD_INSTITUTIONS || null; } catch (e) { return null; } }
 
   /* ── the overlay ──────────────────────────────────────────────────────────────────────────── */
   function styleOnce() {
@@ -100,8 +116,28 @@
       "#" + ROOT_ID + " .pfs-opt{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--hbd,#e2e8f0);background:none;padding:12px 4px;cursor:pointer;min-height:46px}",
       "#" + ROOT_ID + " .pfs-opt b{display:block;font:600 13.5px var(--hfont,system-ui);color:var(--hink,#0f172a)}",
       "#" + ROOT_ID + " .pfs-opt span{display:block;font:500 11px var(--hfont,system-ui);color:var(--hmut,#64748b)}",
+      "#" + ROOT_ID + " .pfs-opt:active{background:rgba(15,23,42,.05)}",
+      "#" + ROOT_ID + " .pfs-none{padding:14px 4px;font:500 12.5px/1.5 var(--hfont,system-ui);color:var(--hmut,#64748b)}",
+      "#" + ROOT_ID + " .pfs-hint{font:500 11.5px/1.5 var(--hfont,system-ui);color:var(--hmut,#64748b);margin:8px 2px 0}",
+      "#" + ROOT_ID + " .pfs-use{margin-top:10px;width:100%}",
+      /* DARK MODE. Reported from a device: the degree and speciality pickers showed bright
+       * separator lines and NO TEXT. The rows set their colour from --hink / --hmut, which are the
+       * LIGHT theme's near-black on a card this block had already repainted #111b2e, so every label
+       * was black on black while the --hbd borders stayed light. Every colour inside the sheet is
+       * restated here; none of them may be left to inherit a light-theme token. */
       "body.dark #" + ROOT_ID + " .pfs-card{background:#111b2e;color:#e7edf5}",
-      "body.dark #" + ROOT_ID + " .pfs-in,body.dark #" + ROOT_ID + " .pfs-pick{background:#0b1220;color:#e7edf5;border-color:#1e2b43}"
+      "body.dark #" + ROOT_ID + " .pfs-in,body.dark #" + ROOT_ID + " .pfs-pick{background:#0b1220;color:#e7edf5;border-color:#1e2b43}",
+      "body.dark #" + ROOT_ID + " .pfs-in::placeholder{color:#8797ad}",
+      "body.dark #" + ROOT_ID + " .pfs-pick.unset{color:#8797ad}",
+      "body.dark #" + ROOT_ID + " .pfs-t{color:#f2f6fb}",
+      "body.dark #" + ROOT_ID + " .pfs-s,body.dark #" + ROOT_ID + " .pfs-l{color:#9fb0c6}",
+      "body.dark #" + ROOT_ID + " .pfs-opt{border-top-color:#1e2b43}",
+      "body.dark #" + ROOT_ID + " .pfs-opt b{color:#e7edf5}",
+      "body.dark #" + ROOT_ID + " .pfs-opt span{color:#9fb0c6}",
+      "body.dark #" + ROOT_ID + " .pfs-opt:active{background:#16223a}",
+      "body.dark #" + ROOT_ID + " .pfs-later{border-color:#1e2b43;color:#9fb0c6}",
+      "body.dark #" + ROOT_ID + " .pfs-none{color:#9fb0c6}",
+      "body.dark #" + ROOT_ID + " .pfs-hint{color:#8797ad}"
     ].join("\n");
     (document.head || document.documentElement).appendChild(st);
   }
@@ -120,7 +156,7 @@
   function close() { var el = document.getElementById(ROOT_ID); if (el) { el.classList.remove("on"); el.innerHTML = ""; } }
 
   /* A searchable chooser rendered INSIDE our own overlay, so it never fights the app's sheet. */
-  function chooser(title, items, current, onPick, onCancel) {
+  function chooser(title, items, current, onPick, onCancel, sub) {
     var el = root(); el.classList.add("on");
     /* An option is EITHER a plain string ("MBBS") or an object ({name, sub}). Reading it.sub off a
      * string is the legacy String.prototype.sub trap: that native method is TRUTHY, so `it.sub || ""`
@@ -138,18 +174,27 @@
         if (!q || (name + " " + sub).toLowerCase().indexOf(q) >= 0) hits.push(it);
         if (hits.length >= 80) break;
       }
-      if (!hits.length) {
-        return '<div style="padding:14px 4px;color:var(--hmut,#64748b);font:500 12.5px var(--hfont,system-ui)">No match.' +
-          (q ? '<div style="margin-top:10px"><button class="pfs-btn pfs-save" data-custom="1">Use &ldquo;' + esc(q) + '&rdquo;</button></div>' : "") + "</div>";
-      }
-      return hits.map(function (it) {
+      var out = hits.map(function (it) {
         var name = optName(it), sub = optSub(it);
         return '<button type="button" class="pfs-opt" data-v="' + esc(name) + '"><b>' + esc(name) + "</b>" +
           (sub ? "<span>" + esc(sub) + "</span>" : "") + "</button>";
       }).join("");
+      /* NOBODY IS BLOCKED BY A LIST SOMEBODY ELSE WROTE. No bundled directory holds every hospital
+       * in India, so whatever was typed is always offered as an answer — under the hits when there
+       * are some, on its own when there are none. What is typed here is remembered (see onPick), so
+       * the next colleague at that hospital finds it. */
+      if (!hits.length) {
+        out = '<div class="pfs-none">' + (q ? "Nothing in the directory matches that." : "Start typing to search.") + "</div>";
+      }
+      if (q) {
+        out += '<button type="button" class="pfs-btn pfs-save pfs-use" data-custom="1">Use &ldquo;' + esc(q) + '&rdquo;</button>' +
+          '<div class="pfs-hint">Your hospital is added to the directory on this device, so you only type it once.</div>';
+      }
+      return out;
     }
     el.innerHTML = '<div class="pfs-card">' +
       '<div class="pfs-t">' + esc(title) + "</div>" +
+      (sub ? '<p class="pfs-s">' + esc(sub) + "</p>" : "") +
       '<input class="pfs-in" id="pfsQ" type="search" autocomplete="off" placeholder="Search" value="">' +
       '<div class="pfs-list" id="pfsL">' + rows("") + "</div>" +
       '<div class="pfs-acts"><button type="button" class="pfs-btn pfs-later" id="pfsBack">Back</button></div></div>';
@@ -164,17 +209,79 @@
     });
   }
 
+  /* The ONE directory. Institutions in the doctor's own state (and city, when they gave one) come
+   * first, because a doctor in Visakhapatnam should not scroll past Delhi to reach KGH. Everything
+   * else follows, so the list is still complete. */
   function hospitalItems() {
-    try {
-      var api = window.SMD_HOSPITALS;
-      var all = (api && api.all) ? api.all() : [];
-      return all.map(function (h) {
-        return { name: h.name, sub: (h.city || "") + (h.state ? ", " + h.state : "") + (h.type === "medical_college" ? " · Medical college" : "") };
-      });
-    } catch (e) { return []; }
+    var I = INST();
+    if (!I) {
+      // institutions-in.js not loaded (it is lazy): fall back to the raw curated list.
+      try {
+        var api = window.SMD_HOSPITALS, raw = (api && api.all) ? api.all() : [];
+        return raw.map(function (h) { return { name: h.name, sub: subFor(h) }; });
+      } catch (e) { return []; }
+    }
+    var st = String(draft.state || ""), ct = String(draft.city || "");
+    var near = [], rest = [], seen = {};
+    function push(list, h) {
+      var k = I._norm(h.name) + "|" + I._norm(h.city);
+      if (seen[k]) return;
+      seen[k] = 1;
+      list.push({ name: h.name, sub: subFor(h) });
+    }
+    if (st || ct) I.search("", { state: st, city: ct, limit: 4000 }).forEach(function (h) { push(near, h); });
+    I.all().forEach(function (h) { push(rest, h); });
+    return near.concat(rest);
+  }
+  function subFor(h) {
+    return (h.city || "") + (h.state ? ", " + h.state : "") + (h.type === "medical_college" ? " · Medical college" : "");
+  }
+  function cityItems() {
+    var I = INST(); if (!I) return [];
+    var st = String(draft.state || "");
+    return (st ? I.cities(st) : I.allCities()).map(function (c) {
+      return st ? { name: c, sub: st } : { name: c, sub: I.stateOf(c) || "" };
+    });
   }
 
   var draft = {};
+
+  /* institutions-in.js merges the curated lists; both it and hospitals-in.js are lazy, so a doctor
+   * who never opens this form never downloads them.
+   *
+   * THIS IS THE "can't see and can't search college" BUG. The old code called the bare global
+   * `smdLazy(...)`, but lazy-load.js is not among the scripts index.html loads — so the call threw
+   * ReferenceError inside the click handler and the picker simply never opened. The field looked
+   * focused and did nothing, on every device, for every doctor. Never reach for a global the page
+   * does not definitely define: this loads the script itself when the helper is absent. */
+  var _loaded = {};
+  function loadScript(src) {
+    if (_loaded[src]) return _loaded[src];
+    _loaded[src] = new Promise(function (resolve) {
+      try {
+        if (typeof window.smdLazy === "function") {
+          Promise.resolve(window.smdLazy(src)).then(function () { resolve(true); }, function () { resolve(false); });
+          return;
+        }
+        var el = document.createElement("script");
+        el.src = src;
+        el.onload = function () { resolve(true); };
+        el.onerror = function () { resolve(false); };
+        (document.head || document.documentElement).appendChild(el);
+      } catch (e) { resolve(false); }
+    });
+    return _loaded[src];
+  }
+  /* SMD_INSTITUTIONS ships with the app and pulls the heavy data in itself, so this is one call.
+   * The script load below is only for the case where that module failed to load at all. */
+  function loadDirectory() {
+    var I = INST();
+    if (I && I.ensure) return I.ensure().then(function () { return true; });
+    return loadScript("/institutions-in.js?v=inst1").then(function () {
+      var J = INST();
+      return J && J.ensure ? J.ensure().then(function () { return true; }) : false;
+    });
+  }
 
   function form(force) {
     var el = root(); el.classList.add("on");
@@ -184,11 +291,19 @@
       '<p class="pfs-s">StewardMD uses these to personalise your workspace and to show colleagues who you are. They are stored on your account, never shared publicly.</p>' +
       FIELDS.map(function (f) {
         var v = draft[f.key] || "";
-        var ctl = (f.kind === "tel")
-          ? '<input class="pfs-in" data-k="' + f.key + '" type="tel" inputmode="numeric" autocomplete="tel" placeholder="' + esc(f.ph) + '" value="' + esc(v) + '">'
-          : '<button type="button" class="pfs-pick' + (v ? "" : " unset") + '" data-pick="' + f.key + '">' + esc(v || f.ph) + "</button>";
+        var ctl;
+        if (f.kind === "tel") {
+          ctl = '<input class="pfs-in" data-k="' + f.key + '" type="tel" inputmode="numeric" autocomplete="tel" placeholder="' + esc(f.ph) + '" value="' + esc(v) + '">';
+        } else if (f.kind === "text") {
+          ctl = '<input class="pfs-in" data-k="' + f.key + '" type="text" autocomplete="name" placeholder="' + esc(f.ph) + '" value="' + esc(v) + '">';
+        } else {
+          ctl = '<button type="button" class="pfs-pick' + (v ? "" : " unset") + '" data-pick="' + f.key + '">' + esc(v || f.ph) + "</button>";
+        }
         return '<div class="pfs-f" data-f="' + f.key + '"><label class="pfs-l">' + esc(f.label) + "</label>" + ctl +
-          '<div class="pfs-err">' + (f.key === "phone" ? "Enter a valid phone number." : "Please choose one.") + "</div></div>";
+          '<div class="pfs-err">' + (f.key === "phone" ? "Enter a valid phone number."
+            : f.key === "name" ? "Enter your name."
+            : f.key === "hospital" ? "Choose your hospital, or type its name."
+            : "Please choose one.") + "</div></div>";
       }).join("") +
       '<div class="pfs-acts">' +
         '<button type="button" class="pfs-btn pfs-later" id="pfsLater">Later</button>' +
@@ -202,11 +317,44 @@
       b.addEventListener("click", function () {
         var k = b.getAttribute("data-pick");
         var f = FIELDS.filter(function (x) { return x.key === k; })[0];
-        var p = (f.kind === "hospital") ? smdLazy('/hospitals-in.js?v=1') : Promise.resolve();
-        p.then(function() {
-          var items = (f.kind === "hospital") ? hospitalItems() : f.opts;
-          var title = (f.kind === "hospital") ? "Choose your college or hospital" : ("Choose your " + f.label.toLowerCase());
-          chooser(title, items, draft[k], function (v) { if (v) draft[k] = v; form(force); }, function () { form(force); });
+        var needsDir = (f.kind === "hospital" || f.kind === "city" || f.kind === "state");
+        var p = needsDir ? loadDirectory() : Promise.resolve();
+        p.then(function () {
+          var I = INST();
+          var items, title, sub = "";
+          if (f.kind === "hospital") {
+            items = hospitalItems();
+            title = "Choose your hospital or college";
+            sub = (draft.city || draft.state)
+              ? ("Showing " + [draft.city, draft.state].filter(Boolean).join(", ") + " first. Search anywhere in India, or type your own.")
+              : "Search any hospital or medical college in India, or type your own.";
+          } else if (f.kind === "city") {
+            items = cityItems();
+            title = "Choose your city or district";
+            sub = draft.state ? ("Districts and towns of " + draft.state + ".") : "Type to search anywhere in India.";
+          } else if (f.kind === "state") {
+            items = (I ? I.states() : []);
+            title = "Choose your state or union territory";
+          } else {
+            items = f.opts;
+            title = "Choose your " + f.label.toLowerCase();
+          }
+          chooser(title, items, draft[k], function (v) {
+            if (v) {
+              draft[k] = v;
+              /* Picking a state invalidates a city from a different one; picking a city fills the
+               * state in, so the doctor never has to answer the same geography twice. */
+              if (k === "state") { if (draft.city && I && I.stateOf(draft.city) !== v) draft.city = ""; }
+              if (k === "city" && I && !draft.state) { var g = I.stateOf(v); if (g) draft.state = g; }
+              /* A hospital the doctor typed is added to THIS DEVICE's directory, so the next
+               * colleague at the same hospital finds it instead of typing it again. */
+              if (k === "hospital" && I && I.remember) {
+                var known = I.search(v, { limit: 3 }).some(function (h) { return I._norm(h.name) === I._norm(v); });
+                if (!known) I.remember(v, draft.city, draft.state);
+              }
+            }
+            form(force);
+          }, function () { form(force); }, sub);
         });
       });
     });
@@ -224,7 +372,14 @@
       var ref = docRef();
       if (!ref) { toast("You are offline. Try again once you are connected."); return; }
       var btn = el.querySelector("#pfsSave"); btn.disabled = true; btn.textContent = "Saving…";
-      ref.set({ phone: draft.phone, hospital: draft.hospital, degree: draft.degree, speciality: draft.speciality }, { merge: true })
+      /* The SAME doc email-auth.js used to write, with the same keys, so a profile created by
+       * either path is one profile. profileComplete is what email-auth's own prompt checks. */
+      ref.set({
+        name: draft.name || "", phone: draft.phone || "",
+        state: draft.state || "", city: draft.city || "",
+        hospital: draft.hospital || "", degree: draft.degree || "", speciality: draft.speciality || "",
+        profileComplete: true, updatedAt: Date.now()
+      }, { merge: true })
         .then(function () {
           close(); toast("Profile saved");
           // phone-verify.js waits for this to ask for the code, so the two sheets never stack.

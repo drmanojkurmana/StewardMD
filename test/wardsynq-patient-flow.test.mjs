@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-patient-flow.test.mjs — TASK 4.4: the hospital-wide patient flow command center,
  * through the REAL route, against real ED/admission/discharge/bed-master data. Every count is
  * checked against a real record this test itself created - proving the plan's own requirement
