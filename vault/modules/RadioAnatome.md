@@ -9,8 +9,8 @@ built only from licence-cleared sources.
 - **Pipeline:** `atlas-pipeline/` (dev-only, never shipped); `living.py` is the exact reproduction of the torso/brain chain; `atlas-index.mjs` writes the search index
 - **Spec:** `docs/superpowers/specs/2026-08-17-anatomy-atlas-spec.md` · premium pass contract `docs/radioanatome/PREMIUM_PLAN_2026-09-25.md` · orientation evidence `docs/radioanatome/ORIENTATION.md`
 - **Plans:** `docs/superpowers/plans/2026-08-17-anatomy-atlas-viewer.md` · `…-pipeline.md`
-- **Tests:** `test/atlas-layout.test.mjs` (178) · `test/atlas-data.test.mjs` (490) · `test/atlas-notes.test.mjs` (11) · `test/run-atlas-ui.mjs` (147, real headless CDP touch; localhost:8996, Chrome port 9388) · `atlas-pipeline/test_pipeline.py` (283)
-- **Modules:** 30 in `modules.json`, 29 visible (`brain-mri-axial-t1` is `hidden`: cadaver T1 with 0 pins)
+- **Tests:** `test/atlas-layout.test.mjs` (178) · `test/atlas-data.test.mjs` (491) · `test/atlas-notes.test.mjs` (11) · `test/run-atlas-ui.mjs` (149, real headless CDP touch; localhost:8996, Chrome port 9388) · `atlas-pipeline/test_pipeline.py` (283)
+- **Modules:** 30 in `modules.json`, 29 visible (`brain-mri-axial-t1` is `hidden`: cadaver T1 with 0 pins). Living torso CT and 7T brain MRI have 48-slice stacks under `atlas/<id>/v2/` (proved by `living.py --prove-rebuild`); the older cadaver modules stay at 20-24 because their segmentation came from a 62 GB VM run that cannot be reproduced here. Pin corrections are audited row by row in `atlas-pipeline/pin_fixes.tsv`.
 - **Flags / storage:** `smd_atlas_notes` (default OFF; `?atlasnotes=1`) · `smd_atlas_labels` · `smd_atlas_recent` · `smd_atlas_bookmarks` · `smd_atlas_offline` · offline caches `atlas2d-<id>`
 - **3D layer:** [[RadioAnatome 3D]] — BodyParts3D reference body on the same ontology; "3D Anatomy" card in the catalog, "3D" pill on a slice sheet, `ATLAS.openAt(module, sid, slice)` deep link used by its CT/MRI rows, `ATLAS.back()` unwinds the 3D layer first
 
