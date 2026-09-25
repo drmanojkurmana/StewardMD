@@ -1523,7 +1523,9 @@
     if (finding.monitoring) whyBody.appendChild(detailRow("Monitoring", finding.monitoring));
     if (finding.source) whyBody.appendChild(detailRow("Source", finding.source));
     if (finding.evidence) whyBody.appendChild(detailRow("Evidence", finding.evidence));
-    if (finding.sourceUrl && /^https:\/\//.test(finding.sourceUrl)) whyBody.appendChild(el("a", { text: "Read prescribing information", attrs: { href: finding.sourceUrl, target: "_blank", rel: "noopener noreferrer" } }));
+    (finding.sourceUrls || (finding.sourceUrl ? [finding.sourceUrl] : [])).forEach(function (url, index) {
+      if (/^https:\/\//.test(url)) whyBody.appendChild(el("a", { text: "Read prescribing information" + (index ? " (" + (index + 1) + ")" : ""), attrs: { href: url, target: "_blank", rel: "noopener noreferrer", style: "display:block;margin-top:8px" } }));
+    });
 
     // Optional MaiK "explain this interaction" — DISPLAY-ONLY; can never change the
     // severity/marker above, add/remove findings, or alter the summary counts.
@@ -1651,10 +1653,10 @@
 
     // ---- strong summary panel: title + reviewed count + severity count chips ----
     var panel = el("div", { cls: "mlr-summary-panel" });
-    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Medication Safety Summary" }));
+    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Interaction review" }));
     var checkedN = cov.reviewedCount, submittedN = cov.submittedCount || res.reviewedCount;
     panel.appendChild(el("div", { cls: "mlr-summary-sub",
-      text: checkedN + " of " + submittedN + " medicine" + (submittedN !== 1 ? "s" : "") + " checked" }));
+      text: "Limited rule screen: " + submittedN + " medicine" + (submittedN !== 1 ? "s" : "") + " submitted" }));
     var monitorCount = res.monitor.filter(notDuplicate).length + res.moderate.filter(notDuplicate).length;
     var chips = el("div", { cls: "mlr-chips" });
     summaryChip(chips, "critical", "Critical", res.critical.length);
@@ -1669,14 +1671,16 @@
     main.appendChild(panel);
 
     // ---- coverage warning: any medicine NOT screened must be shown, never hidden ----
-    var unchecked = (cov.unchecked || []), unclassified = (cov.unclassified || []);
-    if (unchecked.length || unclassified.length) {
+    var unchecked = (cov.unchecked || []), unclassified = (cov.unclassified || []), noRuleCoverage = (cov.noRuleCoverage || []);
+    if (unchecked.length || unclassified.length || noRuleCoverage.length) {
       var warn = el("div", { cls: "mlr-coverage-warn" });
       warn.appendChild(el("div", { cls: "mlr-coverage-warn-title", html: mlIco("warn") + " Not fully checked" }));
       if (unchecked.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
         text: "Not recognised — NOT checked for any interaction: " + unchecked.join(", ") + ". Verify the name/spelling or check these manually." }));
       if (unclassified.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
         text: "Limited class coverage for: " + unclassified.map(cap).join(", ") + "." }));
+      if (noRuleCoverage.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
+        text: "No active interaction-rule coverage for: " + noRuleCoverage.map(cap).join(", ") + ". Drug-name recognition does not establish safety." }));
       main.appendChild(warn);
     }
 
@@ -1703,7 +1707,7 @@
     if (!anyShown && !res.minor.length) {
       // NEVER show a reassuring "all clear" — absence of a rule is not proof of safety,
       // and it must read differently when some medicines could not be screened.
-      var incomplete = unchecked.length || unclassified.length;
+      var incomplete = unchecked.length || unclassified.length || noRuleCoverage.length;
       var none = el("div", { cls: "mlr-none" + (incomplete ? " mlr-none-partial" : "") });
       none.appendChild(el("div", { cls: "mlr-none-head",
         text: incomplete

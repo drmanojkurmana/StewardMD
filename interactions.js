@@ -178,6 +178,8 @@
       sourceUrl: rule.sourceUrl || "",
       evidence: rule.evidence || "",
       ruleId: rule.id || "",
+      ruleIds: [rule.id || ""], sourceUrls: rule.sourceUrl ? [rule.sourceUrl] : [],
+      clinicalGroup: rule.clinicalGroup || "",
       ruleType: rule.type
     };
   }
@@ -204,9 +206,23 @@
       coverage: {
         datasetVersion: (IR.version || "") + (IR.generated ? " (" + IR.generated + ")" : ""),
         submittedCount: 0, reviewedCount: 0, classifiedCount: 0,
-        unclassified: [], unchecked: []
+        unclassified: [], unchecked: [], noRuleCoverage: [],
+        datasetAvailable: rules.length > 0, scope: "limited_curated_screen"
       }
     };
+
+    // A taxonomy tag proves identity/classification, not interaction coverage.
+    // Report ingredients that have no subjects in an eligible medication rule.
+    var coveredGenerics = {}, coveredClasses = {};
+    rules.forEach(function (rule) {
+      if (rule.type === "context") return;
+      var subjects = rule.subjects || [];
+      if (subjects.some(function (s) { return s.kind === "class" && s.value.indexOf("epc:") === 0; })) return;
+      subjects.forEach(function (s) {
+        if (s.kind === "generic") coveredGenerics[s.value] = true;
+        if (s.kind === "class") coveredClasses[s.value] = true;
+      });
+    });
 
     // 1. Normalize; entries without a resolved generic are recorded as
     //    "unchecked" (previously silently dropped) so the UI can surface them.
@@ -217,6 +233,10 @@
       var n = normalizeMed(list[i], drugClasses, meddrugsList);
       if (n) {
         norm.push(n);
+        n.ingredients.forEach(function (ingredient) {
+          var tags = drugClasses[ingredient] || [];
+          if (!coveredGenerics[ingredient] && !tags.some(function (tag) { return !!coveredClasses[tag]; }) && result.coverage.noRuleCoverage.indexOf(ingredient) === -1) result.coverage.noRuleCoverage.push(ingredient);
+        });
         if (!n.classes || n.classes.length === 0) {
           if (result.coverage.unclassified.indexOf(n.generic) === -1) result.coverage.unclassified.push(n.generic);
         }
@@ -260,6 +280,15 @@
       // between distinct products must not hide their other interacting ingredients.
       var finding = makeFinding(rule, dedupedNorm, indices, sourceTitles);
       var bucket = SEVERITY_BUCKET[rule.severity] || "monitor";
+      if (finding.clinicalGroup) {
+        var pairKey = finding.drugs.slice().sort().join("|");
+        var existing = result[bucket].filter(function (f) { return f.clinicalGroup === finding.clinicalGroup && f.drugs.slice().sort().join("|") === pairKey; })[0];
+        if (existing) {
+          existing.ruleIds.push(finding.ruleId);
+          finding.sourceUrls.forEach(function (url) { if (existing.sourceUrls.indexOf(url) === -1) existing.sourceUrls.push(url); });
+          return;
+        }
+      }
       result[bucket].push(finding);
       if (rule.type === "duplicate_generic" || rule.type === "duplicate_class") result.duplicates.push(finding);
       if (rule.type === "combination") result.combinations.push(finding);
