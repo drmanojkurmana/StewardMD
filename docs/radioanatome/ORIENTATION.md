@@ -71,6 +71,22 @@ module's own shipped pins, so the doc cannot drift from the data.
    Since the 48-slice stacks (`atlas/<id>/v2/`, 2026-09-25) there is one plane per slice, and
    each plane carries the slice's own `img`, so the 3D layer never guesses an image path.
 
+5. **Living neck (s0021) and thorax-neck (s0897) are re-indexed from anatomy, then stored like the
+   torso.** `atlas-pipeline/tsd_living.py` measures each subject's axes from its own masks before
+   anything is cut, and every available landmark must agree or it stops. S/I: C2 above T4. A/P:
+   trachea in front of the spinal cord. L/R, compared level by level because the neck moves the
+   midline: descending aorta left of the cord, superior vena cava right of the cord, the
+   brachiocephalic trunk climbing toward the right, heart left of the cord. s0021: descending aorta
+   index 81.1 vs cord 103.9 (61 shared levels), SVC 114.4 vs 103.9, trunk origin 93.7 to bifurcation
+   107.7, heart 82.6 vs 103.6, so +x index is the patient's RIGHT. s0897: aorta 102.4 vs cord 110.1
+   (134 levels), SVC 123.2 vs 108.6, trunk 109.0 to 111.7, heart 99.4 vs 109.6; the liver and spleen
+   masks agree independently (x 0.63 vs 0.19 of the stored axial). Both headers say RAS and agree
+   with this on every axis, but they are not the evidence. The volume is then stored in the torso
+   convention (patient right on the image right, anterior up, index 0 superior), so axial and
+   coronal get `flipX` and R/L letters exactly like `ct-live-torso-*`, and the sagittal is
+   anterior-left with no flip. `living.py --group live-neck --group live-thorax-neck` proves the
+   re-indexing voxel for voxel and prints the mask centroids.
+
 ## Per-module table
 
 | module | flipX | flipY | left | right | top | bottom | pin check | evidence |
@@ -78,6 +94,12 @@ module's own shipped pins, so the doc cannot drift from the data.
 | `ct-live-torso-axial` | yes | no | R | L | A | P | liver.x > spleen.x; middle-lobe-right.x > upper-lobe-left.x; heart.y < spinal-cord.y | Masks: liver x 0.70 vs spleen 0.23; heart y 0.27 vs spinal cord 0.69. Spine and CT table at the bottom |
 | `ct-live-torso-coronal` | yes | no | R | L | S | I | liver.x > spleen.x; heart.y < urinary-bladder.y | Masks: liver x 0.70 vs spleen 0.23; heart y 0.02 vs bladder 0.80 |
 | `ct-live-torso-sagittal` | no | no | A | P | S | I | heart.x < spinal-cord.x; heart.y < urinary-bladder.y | Masks: heart x 0.24 vs spinal cord 0.71; heart y 0.02 vs bladder 0.80 |
+| `ct-live-neck-axial` | yes | no | R | L | A | P | superior-vena-cava.x > aorta.x; thyroid-gland.y < spinal-cord.y; trachea.y < spinal-cord.y | Finding 5. Masks: SVC x 0.62 vs aorta 0.48, heart 0.45; thyroid y 0.29 vs spinal cord 0.53. Spine and CT table at the bottom |
+| `ct-live-neck-coronal` | yes | no | R | L | S | I | superior-vena-cava.x > aorta.x; thyroid-gland.y < heart.y | Finding 5. Masks: SVC x 0.62 vs aorta 0.48; cervical vertebrae y 0.33 vs heart 0.92 |
+| `ct-live-neck-sagittal` | no | no | A | P | S | I | trachea.x < spinal-cord.x; thyroid-gland.y < heart.y | Finding 5. Masks: thyroid x 0.29 and trachea 0.41 vs spinal cord 0.53; cervical vertebrae y 0.33 vs heart 0.92 |
+| `ct-live-thorax-neck-axial` | yes | no | R | L | A | P | liver.x > spleen.x; superior-vena-cava.x > aorta.x; trachea.y < spinal-cord.y | Finding 5. Masks: liver x 0.63 vs spleen 0.19; SVC 0.56 vs aorta 0.48; trachea y 0.49 vs spinal cord 0.60 |
+| `ct-live-thorax-neck-coronal` | yes | no | R | L | S | I | liver.x > spleen.x; thyroid-gland.y < heart.y | Finding 5. Masks: liver x 0.63 vs spleen 0.19; thyroid y 0.26 vs heart 0.67 |
+| `ct-live-thorax-neck-sagittal` | no | no | A | P | S | I | trachea.x < spinal-cord.x; thyroid-gland.y < heart.y | Finding 5. Masks: trachea x 0.49 vs spinal cord 0.61, heart 0.34; thyroid y 0.26 vs heart 0.67 |
 | `mri-brain-axial` | yes | no | R | L | A | P | caudate-nucleus.y < cerebellar-cortex.y | Masks: caudate y 0.40 vs cerebellar cortex 0.70; orbits at the top edge. R/L: header, consistent with anatomy on A/P and S/I (finding 3) |
 | `mri-brain-coronal` | yes | no | R | L | S | I | cerebral-white-matter.y < brainstem.y | Masks: cerebral cortex y 0.42 vs brainstem 0.69, cerebellar cortex 0.72. R/L: header, consistent with anatomy on A/P and S/I (finding 3) |
 | `mri-brain-sagittal` | no | no | A | P | S | I | caudate-nucleus.x < cerebellar-cortex.x; cerebral-white-matter.y < brainstem.y | Masks: caudate x 0.40 vs cerebellar cortex 0.70; face on the left |
@@ -109,6 +131,7 @@ module's own shipped pins, so the doc cannot drift from the data.
 ## Re-checking
 
     atlas-pipeline/.venv/bin/python atlas-pipeline/living.py --work /abs/path/to/atlas-pipeline/work
+    atlas-pipeline/.venv/bin/python atlas-pipeline/living.py --work /abs/path/to/atlas-pipeline/work --group live-neck --group live-thorax-neck
     node test/atlas-data.test.mjs
 
 `living.py` without `--write` re-proves the maps, the byte-identical reproduction, q and the

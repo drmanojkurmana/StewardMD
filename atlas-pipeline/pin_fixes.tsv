@@ -225,3 +225,51 @@ mri-brain-axial	26	cerebellar-cortex	48.2	65.7	remove	in the dark fourth ventric
 mri-brain-sagittal	2	cerebral-cortex	35.1	42.2	remove	in dark sulcal CSF near the lateral sulcus, not certainly cortex
 mri-brain-sagittal	6	cerebral-cortex	38.3	72.2	remove	in a region too dark (7 T signal dropout) to confirm cortex
 mri-brain-sagittal	26	caudate-nucleus	36.7	49.1	remove	inside the lateral ventricle (CSF), not caudate
+# Living neck (s0021) and thorax-neck (s0897), 2026-09-25: 46 pin_scan flags plus edge-slice spot checks, each crop LOOKED at.
+# Kept after looking: clavicle and sternum pins in the marrow cavity (neck axial 20, 30, 31x2, 40, 46; neck coronal 8x2, 9x2, 10) and the retrocardiac oesophagus (thorax-neck sagittal 24).
+ct-live-neck-axial	21	thoracic-vertebra	67.3	47.7	remove	small separate bone lateral to T1: transverse process or first rib head, not certain
+ct-live-neck-axial	30	subclavian-artery	84.8	39.4	remove	grey soft tissue above the right apex, no vessel visible under the pin
+ct-live-neck-axial	46	upper-lobe-right	97.5	60.0	remove	sliver of lung at the lateral image edge; lobe not certain at the heart level
+ct-live-neck-axial	47	lower-lobe-right	65.2	51.7	remove	on a hilar vessel, not aerated lung
+ct-live-neck-axial	48	upper-lobe-right	97.0	41.8	remove	sliver of lung at the lateral image edge; lobe not certain at the heart level
+ct-live-neck-axial	48	upper-lobe-right	97.8	43.7	remove	sliver of lung at the lateral image edge; lobe not certain at the heart level
+ct-live-neck-coronal	11	common-carotid-artery	41.8	40.8	remove	grey soft tissue, no vessel visible under the pin
+ct-live-neck-coronal	18	aorta	43.5	98.0	remove	at the bottom edge of the image beside the heart; not certainly aorta
+ct-live-neck-coronal	20	clavicle	94.9	53.7	remove	lateral bone at the image edge: clavicle or acromion not certain
+ct-live-neck-coronal	24	clavicle	17.7	45.3	remove	bone at the acromioclavicular region: clavicle or scapula not certain
+ct-live-neck-sagittal	16	upper-lobe-left	54.2	95.3	remove	tiny air pocket at the hilum; lobe not certain
+ct-live-neck-sagittal	18	upper-lobe-left	33.2	81.4	remove	tiny retrosternal air sliver; lobe not certain
+ct-live-thorax-neck-axial	13	thoracic-vertebra	57.4	59.7	remove	small separate bone lateral to the spine: transverse process or rib not certain
+ct-live-thorax-neck-axial	13	clavicle	14.9	68.4	remove	triangular bone at the shoulder: clavicle or scapula not certain
+ct-live-thorax-neck-axial	14	thoracic-vertebra	38.2	60.7	remove	dark spot beside the vertebra: foramen or rib junction, not certain
+ct-live-thorax-neck-axial	28	upper-lobe-right	84.8	47.9	remove	on chest wall soft tissue beside a rib, not lung
+ct-live-thorax-neck-axial	36	heart	57.8	36.8	remove	at the heart and inferior vena cava junction; not certainly heart
+ct-live-thorax-neck-axial	41	lower-lobe-left	21.1	20.5	remove	anterior air sliver above the liver; lobe not certain
+ct-live-thorax-neck-coronal	15	liver	50.0	99.2	remove	at the bottom edge of the image
+ct-live-thorax-neck-coronal	19	liver	38.5	79.9	remove	under the heart beside the stomach; liver left lobe or stomach not certain on this unenhanced scan
+ct-live-thorax-neck-coronal	35	clavicle	13.3	24.7	remove	posterior coronal cut at the shoulder: clavicle or scapular spine not certain
+ct-live-thorax-neck-coronal	36	clavicle	15.3	25.8	remove	posterior coronal cut at the shoulder: clavicle or scapular spine not certain
+ct-live-thorax-neck-coronal	40	thoracic-vertebra	55.9	40.4	remove	lateral to the spine: transverse process or rib not certain
+ct-live-thorax-neck-sagittal	4	clavicle	68.9	25.8	remove	lateral sagittal at the shoulder: clavicle or acromion not certain
+ct-live-thorax-neck-sagittal	17	autochthonous-back-muscle	63.5	22.6	remove	posterior neck muscle: deep back muscle or trapezius not certain unenhanced
+ct-live-thorax-neck-sagittal	20	thoracic-vertebra	66.0	32.3	remove	paramedian posterior element: vertebra or rib not certain
+ct-live-thorax-neck-sagittal	21	sternum	16.8	61.4	remove	parasagittal bony segment: sternum or calcified costal cartilage not certain
+ct-live-thorax-neck-sagittal	22	esophagus	51.8	34.1	remove	at the edge of the vertebral body behind the trachea; not certainly oesophagus
+ct-live-thorax-neck-sagittal	25	spinal-cord	71.9	43.3	remove	parasagittal cut: dark oval between posterior elements is a foramen, not certainly cord
+ct-live-thorax-neck-sagittal	25	spinal-cord	74.0	48.7	remove	parasagittal cut: dark oval between posterior elements is a foramen, not certainly cord
+ct-live-thorax-neck-sagittal	25	spinal-cord	75.3	53.8	remove	parasagittal cut: dark oval between posterior elements is a foramen, not certainly cord
+ct-live-thorax-neck-sagittal	25	autochthonous-back-muscle	73.7	98.8	remove	at the bottom edge of the image
+ct-live-thorax-neck-sagittal	35	autochthonous-back-muscle	81.7	74.3	remove	lateral posterior chest wall: deep back muscle not certain this far lateral
+ct-live-thorax-neck-sagittal	40	lower-lobe-right	19.4	79.0	remove	on soft tissue at the anterior diaphragm, not lung
+ct-live-thorax-neck-coronal	1	liver	37.5	88.4	remove	anterior-most coronal cut through the abdominal wall muscle and fat, not certainly liver
+ct-live-thorax-neck-coronal	1	liver	52.4	90.1	remove	anterior-most coronal cut through the abdominal wall muscle and fat, not certainly liver
+ct-live-thorax-neck-coronal	1	liver	61.3	89.4	remove	anterior-most coronal cut through the abdominal wall muscle and fat, not certainly liver
+ct-live-thorax-neck-coronal	1	liver	63.7	85.0	remove	anterior-most coronal cut through the abdominal wall muscle and fat, not certainly liver
+ct-live-thorax-neck-coronal	2	sternum	47.3	67.7	remove	xiphoid or calcified costal cartilage not certain
+ct-live-thorax-neck-coronal	2	sternum	51.8	66.7	remove	xiphoid or calcified costal cartilage not certain
+ct-live-thorax-neck-coronal	3	sternum	49.2	73.2	remove	soft tissue below the sternal body, no bone under the pin
+ct-live-thorax-neck-coronal	3	stomach	32.8	99.0	remove	at the bottom edge of the image
+ct-live-neck-axial	1	cervical-vertebra	57.0	35.4	remove	skull base level, pin on soft tissue beside the lateral mass
+ct-live-neck-coronal	1	sternum	52.4	99.2	remove	at the bottom edge of the image
+ct-live-neck-coronal	48	autochthonous-back-muscle	44.6	97.4	remove	posterior-most cut at the bottom edge of the image
+ct-live-thorax-neck-axial	12	clavicle	12.2	67.3	remove	small bone beside the acromion at the shoulder: clavicle or scapula not certain (flagged once its slice-13 neighbour was removed)

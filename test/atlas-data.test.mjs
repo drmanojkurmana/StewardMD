@@ -109,7 +109,7 @@ ok("golden geometry table covers exactly the shipped modules",
 const visible = cat.modules.filter((m) => !m.hidden);
 ok("the 0-pin cadaver brain module is hidden", cat.modules.find((m) => m.id === "brain-mri-axial-t1").hidden === true);
 ok("hidden is only ever the literal true", cat.modules.every((m) => m.hidden === undefined || m.hidden === true));
-ok("29 modules are visible in the catalog", visible.length === 29);
+ok("35 modules are visible in the catalog", visible.length === 35);
 const atlasOf = (id) => JSON.parse(readFileSync(join(ROOT, "atlas", id, "atlas.json"), "utf8"));
 ok("every visible module carries pins", visible.every((m) => atlasOf(m.id).slices.some((s) => s.pins.length)));
 
@@ -142,8 +142,9 @@ ok("index cats: one {label, color} per category, and every structure's c has one
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const len = (a) => Math.sqrt(dot(a, a));
 const inGroup = cat.modules.filter((m) => m.group);
-ok("six inGroup modules: live-torso and live-brain, one per plane",
-  inGroup.length === 6 && ["live-torso", "live-brain"].every((g) =>
+const GROUPS = ["live-torso", "live-brain", "live-neck", "live-thorax-neck"];
+ok("twelve inGroup modules: four living groups, one module per plane",
+  inGroup.length === 12 && GROUPS.every((g) =>
     ["axial", "coronal", "sagittal"].every((p) => inGroup.filter((m) => m.group === g && m.plane === p).length === 1)));
 for (const m of inGroup) {
   const sl = atlasOf(m.id).slices;
@@ -159,7 +160,7 @@ for (const m of inGroup) {
     U.every((u, k) => Math.abs(dot(u, n)) < 1e-9 && Math.abs(dot(V[k], n)) < 1e-9) &&
     (pos.every((p, k) => !k || p > pos[k - 1]) || pos.every((p, k) => !k || p < pos[k - 1])));
 }
-for (const g of ["live-torso", "live-brain"]) {
+for (const g of GROUPS) {
   const nrm = (p) => { const q = atlasOf(inGroup.find((m) => m.group === g && m.plane === p).id).slices[0].q; const u = q.slice(3, 6), v = q.slice(6, 9); const c = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]]; const l = len(c); return c.map((x) => x / l); };
   ok(g + ": the three planes are mutually perpendicular",
     Math.abs(dot(nrm("axial"), nrm("coronal"))) < 1e-9 && Math.abs(dot(nrm("axial"), nrm("sagittal"))) < 1e-9 && Math.abs(dot(nrm("coronal"), nrm("sagittal"))) < 1e-9);
@@ -179,7 +180,8 @@ function webpSize(file) {
   return null;
 }
 const windowed = cat.modules.filter((m) => m.windows);
-ok("the three living-torso CT modules carry windows", windowed.map((m) => m.id).sort().join() === "ct-live-torso-axial,ct-live-torso-coronal,ct-live-torso-sagittal");
+ok("exactly the nine living CT modules carry windows (torso, neck, thorax-neck)",
+  windowed.map((m) => m.id).sort().join() === inGroup.filter((m) => m.modality === "CT").map((m) => m.id).sort().join() && windowed.length === 9);
 for (const m of windowed) {
   ok(m.id + ": first window is the existing soft-tissue set", m.windows[0].id === "soft" && m.windows.every((w) => /^[a-z]+$/.test(w.id) && w.label));
   let same = true, have = true;
@@ -246,7 +248,7 @@ for (const m of cat.modules) {
   }
 }
 ok("no cadaver module asserts left or right",
-  cat.modules.every((m) => !m.orient || /^(ct-live-torso|mri-brain)-/.test(m.id) || !["R", "L"].some((x) => Object.values(m.orient).includes(x))));
+  cat.modules.every((m) => !m.orient || /^(ct-live-torso|ct-live-neck|ct-live-thorax-neck|mri-brain)-/.test(m.id) || !["R", "L"].some((x) => Object.values(m.orient).includes(x))));
 
 // Image immutability. Images are served `immutable` for a year and installed apps pair their
 // bundled atlas.json with images fetched live, so a changed picture under an old path would
