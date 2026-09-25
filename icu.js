@@ -8930,7 +8930,10 @@
         else if (arg === "inf") launch(function () { if (!window.INF) return; INF.open(); infWeightBridge(); installInfBridge(); }, "infOverlay");
         else if (arg === "protocols") launch(function () { if (!window.INF) return; (INF.openProtocols ? INF.openProtocols() : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay");
         else if (arg === "interactions") launch(function () { window.MEDDRUGS && window.MEDDRUGS.openInteractions && window.MEDDRUGS.openInteractions(); }, "miOverlay");
-        else if (arg === "fundx") launch(function () {
+        else if (arg === "fundx") {
+          // Code-gated beta (owner decision 2026-09-25): the same SMD_XACCESS gate as the home tile,
+          // so the ICU entry point cannot open FundX on a device that has not been unlocked.
+          var openIcuFundx = function () { launch(function () {
           if (!window.FUNDX || !FUNDX.open) return;
           var p = (_raw && _raw.patient) || {};
           var meta = [];
@@ -8940,7 +8943,9 @@
           FUNDX.open({ ref: p.mrn || p.name || null, name: p.name || (p.bed ? "Bed " + p.bed : null), meta: meta.join(" · "), age: p.age, sex: p.sex });
           // FundX opens at z-index 10000 like ICU; raise it above the ICU dashboard.
           try { var el = document.getElementById("fundxRoot"); if (el) el.style.zIndex = "10030"; } catch (e) {}
-        }, "fundxRoot");
+          }, "fundxRoot"); };
+          if (window.SMD_XACCESS && SMD_XACCESS.gate) SMD_XACCESS.gate("fundx", openIcuFundx); else openIcuFundx();
+        }
         break;
     }
   }

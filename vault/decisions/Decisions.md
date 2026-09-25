@@ -9040,3 +9040,36 @@ translucent cards on a single radius, blur on the sticky chrome ONLY (no per-row
 perf), a segmented tab pill, and no decorative blobs anywhere. The app hubs keep the aurora.
 Also BUG-013: the library home's `<h1>` said "Knowledge Library" directly under the sheet chrome
 that already says "Knowledge Library"; the page heading is now "Find any disease".
+
+## 2026-09-25 - CliniX and SURGX released to all users; KardiQ X, ThoreX and FundX go back to code-gated beta
+
+**Decision (owner):** CliniX and SURGX are on for every user by default and no longer labelled Beta.
+KardiQ X, ThoreX and FundX are a code-gated beta: hidden by default, unlocked per device with a
+StewardMD access code through the existing `SMD_XACCESS` framework (one code, one device, server-verified).
+
+**What changed:** `smd_kardiox`, `smd_thorex`, `smd_fundx` default to false (they were true for every
+user since 2026-08-26). The tiles now appear only on an unlocked device (`SMD_XACCESS` sets the flag to
+1 on unlock), on the early-access tier, or with `?kardiox=1` style tester overrides, and every open still
+passes `SMD_XACCESS.gate`. The ICU dashboard's `launch fundx` entry was the one path that opened FundX
+without the gate; it now goes through it. CliniX, MaiK Examiner and SURGX lose "(Beta)" in Settings, and
+the stale Settings switches that displayed CliniX as off now match the real default. The CliniX home tile
+read `smd_clinix === "1"` before clinix.js loaded, so a fresh device never saw it; it now uses the same
+`!== "0"` rule as SURGX.
+
+**Deliberately NOT changed:** `smd_clinix_draft` and `smd_surgx_draft` stay ON. All CliniX and SURGX
+content is still `ai_drafted`; turning the draft flags off makes every pathway read "Awaiting clinical
+review", and removing the per-screen "Draft, pending clinician review" line would present unreviewed
+AI-drafted clinical content as approved. The line stays until R1 clinical sign-off.
+
+**Government Health Schemes and Connect Agent:** already default ON in the client (2026-09-04 and
+2026-09-12); the vault notes that said OFF were stale and are corrected. Connect's server features
+(FHIR/HL7 ingest, onboarding, the agent broker) are gated by Cloudflare Pages env vars and secrets
+(`CONNECT_FLAG`, `CONNECT_ONBOARD_FLAG`, `CONNECT_AGENT_FLAG`, `CONNECT_MASTER_KEY`, ...), which live in
+the dashboard, not the repo; they were not changed here.
+
+**Verification:** unit suites CliniX 360/360, SURGX 227/227, access gate 13/13, KardiQ X 22/22,
+FundX 12/12, flag files 3/3, Connect 2031/2034 (the 3 failures reproduce on the parent commit).
+Headless Chrome against the real app: fresh device shows CliniX and SURGX, hides all three imaging
+tiles; a flag-set device without a token shows the KardiQ X tile and tapping it opens the access gate,
+not the module (15/15; the same check run on the parent commit fails exactly the imaging and CliniX-tile
+rows). Recovery point: parent commit `ed38b5c2`.

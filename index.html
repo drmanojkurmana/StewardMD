@@ -2229,11 +2229,11 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/connect-agent-boot.js?v=cab40" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1" defer></script><script src="/profile-setup.js?v=pfs2-phv1" defer></script><script src="/phone-verify.js?v=phv4-sheet" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/connect-agent-boot.js?v=cab40" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb"><script src="/maik-atmosphere.js?v=1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1r925-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1" defer></script><script src="/profile-setup.js?v=pfs2-phv1" defer></script><script src="/phone-verify.js?v=phv4-sheet" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
-<script defer src="/sidebar-redesign.js?v=settings-page3-exp1-clinix3-surgx1-hosp1-ver2-us1"></script>
+<script defer src="/sidebar-redesign.js?v=settingsr925-page3-exp1-clinix3-surgx1-hosp1-ver2-us1"></script>
 <!-- Settings ▸ Apple Watch page (SMD_APPLE_WATCH). Additive; the sidebar's Apple Watch row
      opens it. Auto-detects pairing via the WatchBridge plugin; degrades to an info card on web.
      Must load after sidebar-redesign.js so the row's action resolves. -->
@@ -2264,7 +2264,7 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=hardlocal3-qa24" defer></script>
+<script src="/icu.js?v=hardlocal3r925-qa24" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 
 <!-- WardSynQ shadow observation of GHIS ingest. BOTH DEFAULT OFF and neither ships enabled.
@@ -2367,7 +2367,7 @@ window.openExternal = function (u) {
      persistence (fundx-store.js) + UI/overlay (fundx.js). Loaded after image-engine,
      haptics and swipe-back so those globals are available at runtime. When the flag
      is off, fundx.js returns early and the module is a complete no-op. -->
-<script src="/fundx-flags.js?v=gold1050-edu" defer></script>
+<script src="/fundx-flags.js?v=gold1050r925-edu" defer></script>
 <script src="/fundx-vision.js?v=gold1049-edu" defer></script>
 <script src="/fundx-engine.js?v=gold474" defer></script>
 <script src="/fundx-hud.js?v=gold475" defer></script>
@@ -2382,7 +2382,7 @@ window.openExternal = function (u) {
 <!-- KardioX AI · ECG interpretation + learning module (additive, flag-gated smd_kardiox, DEFAULT OFF;
      enable with ?kardiox=1 or Settings). Sibling of FundX: scoped #kardioxRoot + .kx-* + SMD_KARDIOX_*
      globals + SMD_KARDIOX_PROVIDERS seam. When the flag is off, kardiox.js is a complete no-op. -->
-<script src="/kardiox-flags.js?v=kx11" defer></script>
+<script src="/kardiox-flags.js?v=kx11r925" defer></script>
 <script src="/kardiox-signal.js?v=kx1" defer></script>
 <script src="/kardiox-models.js?v=kx2" defer></script>
 <script src="/kardiox-content.js?v=kx6-realimg" defer></script>
@@ -2409,7 +2409,7 @@ window.openExternal = function (u) {
 <!-- ThoreX AI · chest X-ray interpretation (additive, flag-gated smd_thorex, DEFAULT OFF;
      enable with ?thorex=1 or Settings). Sibling of KardioX: scoped #thorexRoot + .tx-* +
      SMD_THOREX_* globals + SMD_THOREX_PROVIDERS seam. No-op when the flag is off. -->
-<script src="/thorex-flags.js?v=gold1049-edu" defer></script>
+<script src="/thorex-flags.js?v=gold1049r925-edu" defer></script>
 <script src="/thorex-models.js?v=tx3" defer></script>
 <script src="/thorex-entitlement.js?v=tx3" defer></script>
 <script src="/thorex-store.js?v=tx1" defer></script>
@@ -2459,7 +2459,7 @@ window.openExternal = function (u) {
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx14-session" defer></script>
+<script src="/clinix-flags.js?v=cx14r925-session" defer></script>
 <!-- The lexicon must be parsed before the model asks for it (the model resolves it lazily off
      window, so order is for clarity, not correctness). clinix-dx.js holds the differential /
      diagnosis pickers and the management MCQ; its 365-diagnosis vocabulary is NOT bundled and
@@ -2488,7 +2488,7 @@ window.openExternal = function (u) {
      (ws-surgery.js, loaded above at the workspaces block) onto its seven-band spine, so the
      surgical decision engine has exactly one home and parity is structural.
      Content is NOT bundled - it is lazily fetched from /surgx/*.json on first open. -->
-<script src="/surgx-flags.js?v=sg13-backup" defer></script>
+<script src="/surgx-flags.js?v=sg13r925-backup" defer></script>
 <script src="/surgx-model.js?v=sg16-confirm" defer></script>
 <script src="/surgx-content.js?v=sg1" defer></script>
 <script src="/surgx-note-schema.js?v=sg1" defer></script>

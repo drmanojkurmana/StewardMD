@@ -1,7 +1,7 @@
 ---
 tags: [module, connect]
 status: full stack implemented and tested locally; PHONE runner (Connect Hospital) live-proven on GHIS 2026-09-11/12 (doctor signs in, agent auto-builds a validated worklist+labs+meds adapter on the Pixel); explore-then-ask (exhaustive crawl, report blocks, guided asks, progress screen) built and tested 2026-09-12; never deployed to production, never activated
-flag: smd_connect_agent (client launcher, def:FALSE, ?connect_agent=1), CONNECT_AGENT_FLAG (provisional, def:FALSE), CONNECT_BROWSER_SESSION_FLAG (provisional, def:FALSE), CONNECT_AGENT_AUTO_ACTIVATE_FLAG (provisional, def:FALSE)
+flag: smd_connect_agent (client launcher, def:ON since 2026-09-12, ?connect_agent=0 hides), CONNECT_AGENT_FLAG (provisional, def:FALSE), CONNECT_BROWSER_SESSION_FLAG (provisional, def:FALSE), CONNECT_AGENT_AUTO_ACTIVATE_FLAG (provisional, def:FALSE)
 ---
 # Connect Agent
 

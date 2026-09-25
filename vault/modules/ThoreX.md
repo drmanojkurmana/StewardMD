@@ -1,7 +1,7 @@
 ---
 tags: [module, ai, imaging]
-status: live for every user (smd_thorex ON); the read is unvalidated, the in-module wording saying so must stay
-flag: smd_thorex (def:true — ON) · thorex_llm (FEATURES_ON) for the text explainer
+status: CODE-GATED BETA since 2026-09-25 (owner decision): hidden by default, unlocked per device with a StewardMD access code (SMD_XACCESS); the read is unvalidated, the in-module wording saying so must stay
+flag: smd_thorex (def:false; set to 1 on unlock) · thorex_llm (FEATURES_ON) for the text explainer. Every open passes SMD_XACCESS.gate("thorex")
 ---
 # ThoreX
 
