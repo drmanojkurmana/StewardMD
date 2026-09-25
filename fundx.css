@@ -55,7 +55,7 @@
 #fundxRoot .fundx-cta-tx span { display: block; font-weight: 500; font-size: 12px; opacity: .92; margin-top: 2px; }
 
 /* tile row */
-#fundxRoot .fundx-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#fundxRoot .fundx-row2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-top: 12px; }
 #fundxRoot .fundx-tile {
   display: flex; flex-direction: column; gap: 4px; align-items: flex-start; text-align: left; cursor: pointer;
   padding: 14px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px);
@@ -99,7 +99,7 @@
 /* ============ M3 — guided acquisition, review, result ============ */
 
 /* pre-capture: eye picker + 20D-lens primer */
-#fundxRoot .fundx-eyes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#fundxRoot .fundx-eyes { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
 #fundxRoot .fundx-eye {
   display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;
   padding: 16px; border: 1.5px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px);
@@ -214,7 +214,7 @@
 #fundxRoot .fundx-lvl-tx span { display: block; font-weight: 500; font-size: 12px; color: var(--rds-muted, var(--slate-soft)); margin-top: 1px; }
 #fundxRoot .fundx-lvl-go { flex: 0 0 auto; color: var(--rds-primary, var(--teal)); }
 #fundxRoot .fundx-lvl-go .rds-icon { font-size: 26px; }
-#fundxRoot .fundx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+#fundxRoot .fundx-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
 #fundxRoot .fundx-stat { text-align: center; padding: 16px 8px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px); background: var(--rds-surface, var(--panel, #fff)); }
 #fundxRoot .fundx-stat b { display: block; font: 800 24px var(--rds-mono, monospace); color: var(--rds-primary, var(--teal)); }
 #fundxRoot .fundx-stat span { display: block; font-weight: 600; font-size: 11px; color: var(--rds-muted, var(--slate-soft)); margin-top: 2px; }
@@ -240,7 +240,7 @@
 #fundxRoot .fundx-trend-h b { font: 800 20px var(--rds-mono, monospace); color: var(--rds-primary, var(--teal)); }
 #fundxRoot .fundx-spark { display: block; width: 100%; height: 48px; margin-top: 8px; }
 #fundxRoot .fundx-spark polyline { fill: none; stroke: var(--rds-primary, var(--teal)); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-#fundxRoot .fundx-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#fundxRoot .fundx-cmp { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
 #fundxRoot .fundx-cmp-side { min-width: 0; }
 #fundxRoot .fundx-cmp-lbl { font: 700 11px var(--rds-font, system-ui); color: var(--rds-muted, var(--slate-soft)); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
 #fundxRoot .fundx-cmp .fundx-shot { aspect-ratio: 1/1; max-width: none; }

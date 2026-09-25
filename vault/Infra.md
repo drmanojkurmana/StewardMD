@@ -250,3 +250,10 @@ The API trusts a Cloudflare Access user ONLY via a verified `Cf-Access-Jwt-Asser
 recognise those users, set both Pages env vars: `CF_ACCESS_TEAM_DOMAIN` (`<team>.cloudflareaccess.com`)
 and `CF_ACCESS_AUD` (the Access application's AUD tag; comma-separate several). Unset = Access
 identity off; callers fall through to Firebase / staff sessions. The bare email header is never read.
+
+## KITS_SHARE_ON (wave 2 kits sharing, 2026-09-25)
+Kill switch for `/api/kits/*` ([[Colleagues]]). **Unset = ON** (owner turned it on 2026-09-25); `"0"` = every
+route answers 404 `{error:"disabled"}`. Deliberately NOT a wrangler.toml var: production is at the 128
+text-binding cap, so the default lives in code and setting the switch needs a free binding. Uses the
+existing `FOLLOWCARE_PHI_KEY` (sealing) and `FIREBASE_SERVICE_ACCOUNT` (Firestore REST, recipient claims);
+rate limits use `CASES_KV` / `GHIS_KV` / `MAIK_KV` (first present). Collections `kx_*` are server-only.

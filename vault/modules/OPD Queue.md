@@ -105,3 +105,18 @@ vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both
 - Colour rule: green = with the doctor, called, this hour, the active view; blue = back with results; red and amber = a
   patient or record needs someone; everything else neutral. Cards flat (no shadow). Radius: cards 20, controls 10, tags 6.
   Card names are our own: the brief forbids copying the reference's text, and a browser test checks the titles.
+
+## Protocol tab = clinical protocols + oncology regimens (2026-09-25)
+The EMR Protocol tab is no longer oncology-only: see [[Clinical Protocols]]. Branch chips, a cancer-type
+picker, one search, and an in-tab read-only reader for clinical protocols. Assign exists only on
+oncology rows. The tab needs `smd_kb_protocols` OR `smd_onco_protocols`; with both off it says so.
+Regimens now also load in read-only mode (rows say "view only"); `maybeLoadOncoProtocols(anyMode)`.
+
+## Specialty tab (2026-09-25)
+A "Specialty" tab after Assessment hosts the [[Specialty Kits]] (O&G, Paediatrics, Ortho, Eye, ENT,
+Derm, Psych, Dental). The kit appends composed text to Initial Assessment fields through
+`OPDEMR.kitHost.insert` (the only write) and is disabled until `loadAssessment()` has finished. Flag
+`smd_specialty_kits`. `paint()` now also keeps the tab strip's horizontal scroll across a repaint and
+brings the active tab into view (nine tabs overflow a phone). Gotcha found on the way: `fieldLabel` is
+declared twice in `opd-emr.js` and the later, DOM-reading one wins everywhere; see the kit note.
+

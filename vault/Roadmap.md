@@ -117,3 +117,13 @@ Engineering that is deliberately NOT started:
 
 ## Universal Search phase 2 (added 2026-09-21)
 - [ ] Scheme Search provider (`/api/schemes/search`), CliniX/SURGX content providers (manifest is lazy; needs a cached title index), OPD/ICU patient jump (PHI review first).
+
+## Every branch, wave 2: needs the server (owner's ticked list, 2026-09-25)
+Wave 1 is built and ON: [[Specialty Kits]] (26), [[Clinical Documents]], [[Review Desk]], source watch.
+Wave 2 is **built and ON** since 2026-09-25 ([[Colleagues]]): B1 referral, B2 case room, B3 handover sync,
+B7 hospital kit versions, E3/E4 kit history, F1 review sync. Native users get it with the next build.
+Follow-ups: an in-app badge for new items; a per-uid push token directory instead of
+the token scan; unit-level (not per-doctor) history if hospitals ask for it.
+Not ticked (owner left them out): B4 audit dashboard, B5 case library.
+Also pending on people, not code: clinical review of all ai_drafted content (use the Review Desk),
+native-speaker check of the Telugu and Hindi consent forms and handouts.

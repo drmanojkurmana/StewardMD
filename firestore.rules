@@ -318,6 +318,17 @@ service cloud.firestore {
     match /q_invoices/{invoiceId}    { allow read, write: if false; }   // invoices + payment record
     match /q_org_branding/{orgId}    { allow read, write: if false; }   // Pro white-label logo/name
 
+    // Kits sharing, wave 2 (functions/_kits_share.js): server-only, service-account writes. Patient data
+    // inside is AES-GCM sealed; listed here so nobody mistakes them for client collections.
+    match /kx_msgs/{id}        { allow read, write: if false; }   // referrals + handovers
+    match /kx_cases/{id}       { allow read, write: if false; }   // case rooms
+    match /kx_case_mem/{id}    { allow read, write: if false; }
+    match /kx_case_posts/{id}  { allow read, write: if false; }
+    match /kx_unit/{id}        { allow read, write: if false; }   // a hospital's current kit version
+    match /kx_unit_ver/{id}    { allow read, write: if false; }   // immutable versions
+    match /kx_hist/{id}        { allow read, write: if false; }   // per-doctor, per-patient kit history
+    match /kx_reviews/{id}     { allow read, write: if false; }   // review-desk decisions
+
     // Everything else is denied.
     match /{document=**} {
       allow read, write: if false;

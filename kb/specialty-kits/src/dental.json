@@ -1,0 +1,177 @@
+{
+ "id": "dental",
+ "label": "Dentistry and Oral Health",
+ "short": "Dental",
+ "icon": "dentistry",
+ "group": "senses",
+ "subject": "ophthalmology-ent",
+ "workspace": "dentistry_omfs",
+ "scribe": "dental",
+ "tools": ["odontogram"],
+ "sections": [
+  {
+   "id": "dental-history",
+   "title": "Dental history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "pain_character", "label": "Pain", "type": "select", "opts": ["No pain", "Sharp, brief", "Sharp, lingering", "Throbbing, spontaneous", "Dull ache", "Burning"] },
+    { "id": "pain_duration", "label": "Duration", "type": "text", "hint": "e.g. 3 days; on and off for 2 months" },
+    { "id": "pain_trigger", "label": "Brought on or worsened by", "type": "select", "opts": ["Nothing specific", "Cold", "Hot", "Sweet foods", "Biting or chewing", "Lying down or at night"] },
+    { "id": "dental_pain_score", "label": "Pain score", "type": "number", "unit": "/10", "set": "pain_score" },
+    { "id": "analgesics_taken", "label": "Painkillers already taken", "type": "text", "hint": "name and number of tablets in the last 24 hours" },
+    { "id": "swelling_history", "label": "Swelling", "type": "select", "opts": ["None", "Gum swelling", "Facial swelling", "Swelling under the jaw or in the neck"] },
+    { "id": "bleeding_gums", "label": "Bleeding gums", "type": "select", "opts": ["No", "On brushing", "Spontaneous"] },
+    { "id": "previous_dental_treatment", "label": "Previous dental treatment", "type": "text", "hint": "fillings, root canal, extractions, dentures, scaling; problems with past extraction or local anaesthetic" },
+    { "id": "tooth_cleaning", "label": "Tooth cleaning", "type": "select", "opts": ["Toothbrush and toothpaste, twice daily", "Toothbrush and toothpaste, once daily", "Tooth powder, charcoal or finger", "Chewstick (neem or miswak)", "Irregular or none"] },
+    { "id": "sugar_frequency", "label": "Sugary snacks or drinks, including sweet tea", "type": "select", "opts": ["Seldom", "Once a day", "Several times a day"] },
+    { "id": "tobacco_areca", "label": "Tobacco and areca nut", "type": "select", "opts": ["None", "Smoking (cigarette or bidi)", "Smokeless tobacco (gutka, khaini, zarda)", "Areca nut or paan without tobacco", "Smoking and smokeless", "Stopped"] },
+    { "id": "habit_details", "label": "Habit details", "type": "text", "hint": "type, times a day, years, where the quid is kept" }
+   ]
+  },
+  {
+   "id": "medical-history",
+   "title": "Medical history for dental care",
+   "target": "History_past_illness",
+   "alert": "Plan extractions and surgery around these risks, with the physician where needed. Warfarin: INR ideally within 24 hours (72 hours if stable); delay if 4 or above. DOAC: no change for 1 to 3 simple extractions; miss or delay the morning dose for surgical or more extensive work. Antiplatelets: do not stop. Antiresorptive or anti-angiogenic drug, or head and neck radiotherapy: note the risk of jaw osteonecrosis. Prosthetic valve or previous endocarditis: follow the infective endocarditis protocol.",
+   "fields": [
+    { "id": "mh_warfarin", "label": "Warfarin or acenocoumarol", "type": "check" },
+    { "id": "mh_doac", "label": "DOAC (apixaban, rivaroxaban, dabigatran, edoxaban)", "type": "check" },
+    { "id": "mh_antiplatelet", "label": "Antiplatelet (aspirin, clopidogrel, ticagrelor)", "type": "check" },
+    { "id": "mh_antiresorptive", "label": "Bisphosphonate, denosumab or anti-angiogenic drug", "type": "check" },
+    { "id": "mh_radiotherapy", "label": "Head and neck radiotherapy", "type": "check" },
+    { "id": "mh_cardiac", "label": "Heart valve disease, prosthetic valve or previous endocarditis", "type": "check" },
+    { "id": "mh_diabetes", "label": "Diabetes", "type": "check" },
+    { "id": "mh_bleeding", "label": "Bleeding disorder or chronic liver disease", "type": "check" },
+    { "id": "mh_immunosuppressed", "label": "Immunosuppression (steroids, chemotherapy, HIV, transplant)", "type": "check" },
+    { "id": "mh_details", "label": "Details (drug, indication, last INR and date)", "type": "text" }
+   ]
+  },
+  {
+   "id": "extraoral-examination",
+   "title": "Extraoral examination",
+   "target": "head_neck_exam",
+   "fields": [
+    { "id": "face", "label": "Face", "type": "select", "opts": ["Symmetrical, no swelling", "Localised swelling", "Diffuse swelling", "Fluctuant swelling", "Sinus or discharge on the skin"] },
+    { "id": "swelling_details", "label": "Swelling site, size and character", "type": "text", "hint": "e.g. left submandibular, 4 x 3 cm, warm, tender, firm" },
+    { "id": "lymph_nodes", "label": "Lymph nodes", "type": "select", "opts": ["Not palpable", "Tender and mobile", "Hard or fixed, non-tender"] },
+    { "id": "node_details", "label": "Node site and size", "type": "text", "hint": "e.g. right submandibular, 1.5 cm" },
+    { "id": "tmj", "label": "Temporomandibular joint", "type": "select", "opts": ["Normal", "Clicking", "Crepitus", "Tenderness", "Deviation on opening", "Locking"] },
+    { "id": "mouth_opening", "label": "Mouth opening (interincisal)", "type": "number", "unit": "mm", "hint": "at maximum opening, between upper and lower incisal edges" },
+    { "id": "lips_perioral", "label": "Lips and perioral skin", "type": "select", "opts": ["Normal", "Ulcers or sores", "Erosions", "Fissures or angular cheilitis", "Cold sores (herpes labialis)", "Other"] }
+   ]
+  },
+  {
+   "id": "red-flags-infection",
+   "title": "Red flags: spreading infection",
+   "target": "head_neck_exam",
+   "alert": "Possible Ludwig angina or spreading deep neck infection: send to the emergency department now for airway assessment and maxillofacial or ENT surgical care. Do not delay for dental treatment.",
+   "fields": [
+    { "id": "rf_spreading_swelling", "label": "Facial or neck swelling spreading or worsening quickly", "type": "check" },
+    { "id": "rf_floor_of_mouth", "label": "Floor-of-mouth swelling or raised tongue", "type": "check" },
+    { "id": "rf_breathing", "label": "Difficulty breathing, stridor or muffled voice", "type": "check" },
+    { "id": "rf_swallowing", "label": "Difficulty swallowing or drooling", "type": "check" },
+    { "id": "rf_trismus", "label": "Trismus with swelling or fever", "type": "check" },
+    { "id": "rf_eye", "label": "Swelling closing the eye", "type": "check" },
+    { "id": "rf_sepsis", "label": "Fever, rigors or looks unwell (possible sepsis)", "type": "check" }
+   ]
+  },
+  {
+   "id": "intraoral-soft-tissues",
+   "title": "Intraoral soft tissues",
+   "target": "teeth_exam",
+   "fields": [
+    { "id": "oral_mucosa", "label": "Oral mucosa", "type": "select", "opts": ["Healthy", "Aphthous ulcer", "Herpetic ulcers", "Traumatic ulcer (sharp tooth or denture)", "Candidiasis", "Acute necrotising ulcerative gingivitis", "Abscess or sinus", "Growth or swelling", "Potentially malignant disorder (tick below)"] },
+    { "id": "opmd_leukoplakia", "label": "Leukoplakia", "type": "check" },
+    { "id": "opmd_erythroplakia", "label": "Erythroplakia", "type": "check" },
+    { "id": "opmd_osmf", "label": "Oral submucous fibrosis (blanching, palpable bands)", "type": "check" },
+    { "id": "opmd_lichen_planus", "label": "Oral lichen planus or lichenoid lesion", "type": "check" },
+    { "id": "lesion_site", "label": "Lesion site", "type": "select", "opts": ["Lips or vermilion border", "Commissures", "Labial sulci", "Buccal mucosa", "Tongue", "Floor of mouth", "Hard or soft palate", "Alveolar ridge or gingiva"] },
+    { "id": "lesion_description", "label": "Lesion size and description", "type": "text", "hint": "size, colour, homogeneous or speckled, margins, induration, tenderness" },
+    { "id": "tongue_floor", "label": "Tongue and floor of mouth", "type": "select", "opts": ["Normal", "Coated", "Smooth or depapillated", "Fissured", "Restricted movement"] }
+   ]
+  },
+  {
+   "id": "red-flags-cancer",
+   "title": "Red flags: possible oral cancer",
+   "target": "teeth_exam",
+   "alert": "Possible oral cancer or dysplasia: refer urgently to oral and maxillofacial surgery or ENT for biopsy, and advise stopping tobacco and areca nut.",
+   "fields": [
+    { "id": "rf_ulcer", "label": "Ulcer not healed in 2 weeks", "type": "check" },
+    { "id": "rf_patch", "label": "Red or white patch not gone in 2 weeks", "type": "check" },
+    { "id": "rf_growth", "label": "Growth, or ulcer that is hard, bleeding or enlarging", "type": "check" },
+    { "id": "rf_neck_lump", "label": "Lump in the neck", "type": "check" },
+    { "id": "rf_restriction", "label": "New or worsening limit to mouth opening or tongue movement", "type": "check" },
+    { "id": "rf_voice", "label": "Change in voice", "type": "check" },
+    { "id": "rf_numbness", "label": "Numbness of lip, chin or tongue without a dental cause", "type": "check" }
+   ]
+  },
+  {
+   "id": "periodontal-status",
+   "title": "Periodontal status",
+   "target": "teeth_exam",
+   "fields": [
+    { "id": "oral_hygiene", "label": "Oral hygiene", "type": "select", "opts": ["Good", "Fair", "Poor"] },
+    { "id": "gingiva", "label": "Gingiva", "type": "select", "opts": ["Healthy", "Red and swollen", "Enlarged", "Necrotic papillae"] },
+    { "id": "gingival_bleeding", "label": "Bleeding on probing", "type": "select", "opts": ["Absent", "Localised", "Generalised"] },
+    { "id": "calculus", "label": "Calculus", "type": "select", "opts": ["None", "Supragingival", "Subgingival", "Supra and subgingival"] },
+    { "id": "deepest_pocket", "label": "Deepest pocket (WHO CPI probe)", "type": "select", "opts": ["Under 4 mm", "4 to 5 mm", "6 mm or more"] },
+    { "id": "attachment_loss", "label": "Worst loss of attachment", "type": "select", "opts": ["0 to 3 mm", "4 to 5 mm", "6 to 8 mm", "9 to 11 mm", "12 mm or more"], "hint": "record from age 15" },
+    { "id": "mobility", "label": "Tooth mobility (worst tooth)", "type": "select", "opts": ["None", "Grade 1", "Grade 2", "Grade 3"], "hint": "1 just more than normal, 2 up to 1 mm, 3 over 1 mm or vertical" },
+    { "id": "furcation", "label": "Furcation involvement", "type": "check" },
+    { "id": "recession", "label": "Gingival recession", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "IOPA radiograph", "query": "IOPA" },
+  { "label": "OPG (panoramic radiograph)", "query": "OPG" },
+  { "label": "Bitewing radiograph", "query": "bitewing" },
+  { "label": "CBCT", "query": "CBCT" },
+  { "label": "CT neck with contrast", "query": "CT neck" },
+  { "label": "Complete blood count", "query": "CBC" },
+  { "label": "Random blood sugar", "query": "RBS" },
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "PT / INR", "query": "INR" },
+  { "label": "Pus culture and sensitivity", "query": "pus culture" },
+  { "label": "Biopsy (histopathology)", "query": "biopsy" },
+  { "label": "FNAC of neck node", "query": "FNAC" },
+  { "label": "HBsAg", "query": "HBsAg" },
+  { "label": "HIV", "query": "HIV" }
+ ],
+ "protocols": ["cellulitis-skin-soft-tissue", "necrotising-soft-tissue-infection", "sepsis-septic-shock", "infective-endocarditis", "perioperative-anticoagulation-management", "anticoagulant-associated-bleeding", "osteoporosis", "herpes-simplex-infections", "acute-rhinosinusitis", "local-anaesthetic-systemic-toxicity"],
+ "calculators": ["news2", "qsofa", "pack_years", "smoking_index", "fagerstrom", "auditc"],
+ "advice": [
+  {
+   "id": "daily-mouth-care",
+   "title": "Daily care of teeth and gums",
+   "target": "diet_lifestyle_advice",
+   "text": "Brush your teeth twice a day for at least two minutes with a fluoride toothpaste. Cut down sweets, sugary snacks and fizzy drinks, especially between meals, and drink water instead. Have your mouth checked by a dentist regularly."
+  },
+  {
+   "id": "tobacco-areca-nut",
+   "title": "Tobacco, areca nut and mouth cancer",
+   "target": "diet_lifestyle_advice",
+   "text": "Stop all tobacco, smoked or chewed (bidi, cigarettes, gutka, khaini), and areca nut (supari, paan). Tobacco damages the gums, and tobacco and areca nut are leading causes of mouth cancer; ask us for help to quit. Look inside your mouth regularly, and see a dentist or doctor without delay if an ulcer or a white or red patch has not healed in 2 weeks. Do not put tobacco or anything else on it."
+  },
+  {
+   "id": "toothache-swelling",
+   "title": "Toothache and swelling",
+   "target": "follow_up_advice",
+   "text": "Until your treatment, keep the area clean and rinse with warm salt water. Do not put tobacco, camphor, salt, balm or heat on the tooth or the swollen cheek, and take only the medicines prescribed for you. Go to the hospital emergency department at once if the swelling spreads, or you have fever or difficulty opening your mouth, swallowing or breathing."
+  },
+  {
+   "id": "after-extraction",
+   "title": "After a tooth extraction",
+   "target": "follow_up_advice",
+   "text": "If the socket bleeds, place a rolled, damp gauze or clean cotton pad over it and bite firmly for 20 minutes. For the next 24 hours avoid smoking, alcohol and exercise, keep your head raised and do not disturb the clot. If bleeding continues after a second 20 minutes of pressure, come to the hospital straight away; if you take blood-thinning medicine, come as soon as bleeding fails to stop or starts again."
+  }
+ ],
+ "sources": [
+  { "org": "WHO", "title": "Oral health surveys: basic methods, 5th edition", "year": 2013, "url": "https://iris.who.int/handle/10665/97035" },
+  { "org": "WHO", "title": "Oral health fact sheet", "year": 2025, "url": "https://www.who.int/news-room/fact-sheets/detail/oral-health" },
+  { "org": "MoHFW, Government of India", "title": "Operational guidelines for oral health care at Health and Wellness Centres", "year": 2020, "url": "https://aam.mohfw.gov.in/download/document/Operational_Guidelines_for_Oral_Health_Care_at_HWCs__2020_.pdf" },
+  { "org": "SDCEP", "title": "Management of acute dental problems, 2nd edition", "year": 2026, "url": "https://www.acutedentalproblems.sdcep.org.uk/" },
+  { "org": "SDCEP", "title": "Management of dental patients taking anticoagulants or antiplatelet drugs, 2nd edition", "year": 2022, "url": "https://www.sdcep.org.uk/published-guidance/anticoagulants-and-antiplatelets/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

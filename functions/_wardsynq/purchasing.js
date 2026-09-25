@@ -25,10 +25,16 @@
  * shelf that no record knows about, which is the failure mode that makes a count untrustworthy.
  * Same reasoning as stock.js refusing to clamp a negative level.
  *
- * UNITS ARE NOT CONVERTED, for the same reason stock.js will not: a line ordered in boxes and
- * received in tablets are not the same number, and guessing the ratio produces a confident answer
- * that is wrong by a factor of twenty-eight. A receipt in a different unit from its line is
- * recorded and flagged, and it does not count towards that line being fulfilled.
+ * UNITS ARE NOT GUESSED, for the same reason stock.js will not: a line ordered in boxes and received
+ * in tablets are not the same number unless something says how they relate. That something is an
+ * item's own `packs` declaration (stock.js: packFactors/toBaseUnit) - a strip of 10 tablets, a box of
+ * 10 strips. receiveGoods() looks the received item up in the general stores item master (StoreItem)
+ * and, when it declares packs and the unit received differs from its base unit, converts the receipt
+ * to base units before it reaches stock.js, keeping what was actually entered (`receivedAs`) alongside
+ * it. An item with no packs declared, or not found in that master (every pharmacy drug, today - it has
+ * no item master of its own), receives exactly as before: the unit typed is the unit recorded, and a
+ * receipt in a different unit from its line is flagged and does not count towards that line, because
+ * nothing here converts between two units it was never told relate to each other.
  */
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
@@ -37,7 +43,7 @@ import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { chainState, approvalCovers, levelsFor, amountOf, allVerifications } from "./verification.js";
-import { levelsFrom, quantityOf, returnableFrom, MOVE_TYPE as STOCK_TYPE } from "./stock.js";
+import { levelsFrom, quantityOf, returnableFrom, toBaseUnit, dualDisplay, MOVE_TYPE as STOCK_TYPE } from "./stock.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 /* Orders, receipts, approvals and suppliers are read whole (service.listAll, paged): a receipt or approval missed by a
@@ -63,6 +69,10 @@ function qtyOf(v) {
  * 2026-09-13) or as a bare number beside `unit` (older receipts). Both are read. */
 const amountIn = (r) => (r && r.quantity && typeof r.quantity === "object" ? qtyOf(r.quantity.value) : qtyOf(r && r.quantity));
 const unitOf = (r) => str(r && (r.unit || (r.quantity && r.quantity.unit)));
+/* A receipt converted to the item's base unit (stores.js/receiveGoods, pack sizes) still fulfils the line in the
+ * unit it was actually booked in: `receivedAs` carries that, and this is what a line is matched and summed against.
+ * A receipt with no `receivedAs` (the ordinary case) reads exactly as its own quantity and unit, as before. */
+const orderedAmount = (r) => (r && r.receivedAs && r.receivedAs.unit != null ? { value: qtyOf(r.receivedAs.value), unit: str(r.receivedAs.unit) } : { value: amountIn(r), unit: unitOf(r) });
 
 /** PURE. An order's total in paise from its own lines; null when any line has no price, so nothing is
  *  ever approved against a total that silently left something out. */
@@ -105,16 +115,16 @@ function orderState(po, receipts, approval) {
     /* Only receipts in the SAME unit count towards the line being fulfilled. One in a different
      * unit is real stock and is recorded, but adding it here would be the unit guess this file
      * refuses to make. */
-    const same = mine.filter((r) => key(unitOf(r)) === unit);
-    const otherUnits = mine.filter((r) => key(unitOf(r)) !== unit);
-    const received = same.reduce((a, r) => a + (amountIn(r) || 0), 0);
+    const same = mine.filter((r) => key(orderedAmount(r).unit) === unit);
+    const otherUnits = mine.filter((r) => key(orderedAmount(r).unit) !== unit);
+    const received = same.reduce((a, r) => a + (orderedAmount(r).value || 0), 0);
     return {
       index: i, item: str(l && l.item), unit: str(l && l.unit),
       ordered, received,
       outstanding: ordered === null ? null : Math.max(0, ordered - received),
       ...(ordered !== null && received > ordered ? { over: received - ordered } : {}),
       ...(ordered === null ? { unusable: "The quantity on this line is not a plain number, so nothing can be said about what is outstanding." } : {}),
-      ...(otherUnits.length ? { receivedInOtherUnits: otherUnits.map((r) => ({ quantity: amountIn(r), unit: str(unitOf(r)) })) } : {}),
+      ...(otherUnits.length ? { receivedInOtherUnits: otherUnits.map((r) => ({ quantity: orderedAmount(r).value, unit: str(orderedAmount(r).unit) })) } : {}),
     };
   });
 
@@ -249,6 +259,23 @@ async function receiveGoods(request, env, ctx) {
       detail: "This order has not been approved, so stock cannot be booked in against it. If the stock is here, record it as an ordinary receipt." };
   }
 
+  /* PACK SIZES: if the item is in the general stores item master (StoreItem) and declares `packs`, and the unit
+   * received differs from its own base unit, the receipt is converted to base units before it reaches stock.js -
+   * an item with no packs, or not in that master (every pharmacy drug today), receives exactly as before. */
+  let baseUnit = unit, baseQty = quantity, receivedAs = null, packItem = null, packFactor = null;
+  try {
+    const storeItems = await every(svc, "StoreItem");
+    packItem = (storeItems || []).find((si) => si && key(si.code) === key(item) && Array.isArray(si.packs) && si.packs.length) || null;
+  } catch { packItem = null; /* the item master could not be read; received in the unit given, as before */ }
+  if (packItem && key(unit) !== key(packItem.unit)) {
+    const converted = toBaseUnit(packItem.unit, packItem.packs, { value: quantity, unit });
+    if (!converted.ok) {
+      return { ...base, ok: false, status: 422, error: "unknown_unit", written: 0,
+        detail: converted.detail || `"${unit}" is not ${packItem.unit} or a pack size declared for this item.` };
+    }
+    baseUnit = converted.unit; baseQty = converted.value; packFactor = converted.factor; receivedAs = { value: quantity, unit };
+  }
+
   const at = str(ctx.at) || new Date().toISOString();
   const id = `wsq-grn-${poId}-${str(at).replace(/[^0-9a-zA-Z]+/g, "")}`;
   try {
@@ -257,18 +284,26 @@ async function receiveGoods(request, env, ctx) {
      * approved, received order never reached the stock level. item/unit stay for orderState(). */
     const movement = {
       resourceType: MOVE_TYPE, id, kind: "receipt",
-      code: item, display: item, item, quantity: { value: quantity, unit }, unit,
+      code: item, display: item, item, quantity: { value: baseQty, unit: baseUnit }, unit: baseUnit,
       purchaseOrderId: poId,
       ...(str(ctx.line) !== "" ? { purchaseOrderLine: str(ctx.line) } : {}),
       ...(str(ctx.batch) ? { batch: str(ctx.batch) } : {}),
       ...(str(ctx.expiry) ? { expiry: str(ctx.expiry) } : {}),
       ...(str(ctx.location) ? { location: str(ctx.location) } : {}),
+      ...(receivedAs ? { receivedAs } : {}),
       receivedBy: resolved.actor.id, at,
     };
     const out = await svc.put(movement, { idempotencyKey: ctx.idempotencyKey || null });
     const after = await readOrder(svc, poId, ctx);
+    /* Valuation kept in base units: the PO line's own price (per the unit it was ordered in) divided by the pack
+     * factor, rounded to the nearest whole paisa, half a paisa rounding up - the same rounding poTotalPaise's
+     * Math.round already applies elsewhere in this file. */
+    const orderedLine = str(ctx.line) !== "" && po.lines ? po.lines[Number(ctx.line)] : null;
+    const linePricePaise = orderedLine ? qtyOf(orderedLine.unitPricePaise) : null;
     return { ...base, ok: true, written: 1, receiptId: id, purchaseOrderId: poId,
-      item, quantity, unit, state: after ? after.state : null, lines: after ? after.lines : [],
+      item, quantity: baseQty, unit: baseUnit, state: after ? after.state : null, lines: after ? after.lines : [],
+      ...(receivedAs ? { receivedAs, packDisplay: dualDisplay(baseUnit, packItem.packs, baseQty) } : {}),
+      ...(receivedAs && linePricePaise !== null ? { valuation: { unitPricePaiseBase: Math.round(linePricePaise / packFactor), baseUnit } } : {}),
       /* Over-delivery is named, not refused: the boxes are on the shelf either way, and a receipt
        * turned away is stock no record knows about. */
       ...(after && after.overDelivered ? { overDelivered: true, detail: "More arrived than was ordered. It is recorded, because it is on the shelf; the difference is worth a word with the supplier." } : {}),

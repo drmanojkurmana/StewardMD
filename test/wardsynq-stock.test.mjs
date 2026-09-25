@@ -4,7 +4,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { MOVE_TYPE, KINDS, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry } from "../functions/_wardsynq/stock.js";
+import { MOVE_TYPE, KINDS, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, packFactors, validatePacks, toBaseUnit, dualDisplay } from "../functions/_wardsynq/stock.js";
 import { grantForRole } from "../functions/_wardsynq/actor.js";
 import { RESOURCE_TYPES } from "../functions/_wardsynq/service.js";
 
@@ -133,4 +133,71 @@ test("TASK 3.4: NEAR EXPIRY is computed per batch, never guessed for stock with 
   const dupOut = nearExpiry([dup1, dup2], 90, now);
   assert.equal(dupOut.length, 1);
   assert.equal(dupOut[0].expiry, "2026-09-20T00:00:00.000Z");
+});
+
+/* PACK-SIZE CONVERSION: packFactors / validatePacks / toBaseUnit / dualDisplay. An item with no
+ * `packs` is untouched by any of this - covered above, "UNITS ARE NOT CONVERTED". */
+
+test("PURE: packFactors resolves a chain of packs to the base unit, and never guesses a bad one", () => {
+  const strip = { unit: "strip", of: 10 };
+  const box = { unit: "box", of: 10, packUnit: "strip" };
+  const { factors, problems } = packFactors("tablet", [strip, box]);
+  assert.equal(problems.length, 0);
+  assert.deepEqual([...factors.entries()].map(([k, v]) => [k, v.factor]).sort(), [["BOX", 100], ["STRIP", 10], ["TABLET", 1]]);
+});
+
+test("PURE: packFactors names what it refuses, and leaves it out of factors", () => {
+  assert.deepEqual(packFactors("tablet", [{ unit: "tablet", of: 10 }]).problems, [{ unit: "tablet", reason: "pack_is_base_unit" }]);
+  assert.deepEqual(packFactors("tablet", [{ unit: "strip", of: 10 }, { unit: "strip", of: 5 }]).problems, [{ unit: "strip", reason: "duplicate_pack_unit" }]);
+  assert.deepEqual(packFactors("tablet", [{ unit: "strip", of: 0 }]).problems, [{ unit: "strip", reason: "bad_pack_factor" }]);
+  assert.deepEqual(packFactors("tablet", [{ unit: "strip", of: -3 }]).problems, [{ unit: "strip", reason: "bad_pack_factor" }]);
+  assert.deepEqual(packFactors("tablet", [{ unit: "strip", of: 2.5 }]).problems, [{ unit: "strip", reason: "bad_pack_factor" }]);
+  assert.deepEqual(packFactors("tablet", [{ unit: "box", of: 10, packUnit: "strip" }]).problems, [{ unit: "box", reason: "unresolved_pack_unit", packUnit: "strip" }]);
+  assert.ok(packFactors("tablet", [{ unit: "box", of: 5, packUnit: "box" }]).problems.some((p) => p.reason === "pack_cycle"));
+  // A two-step cycle (box needs carton, carton needs box) is caught too, not just a unit naming itself.
+  const cycle = packFactors("tablet", [{ unit: "box", of: 5, packUnit: "carton" }, { unit: "carton", of: 2, packUnit: "box" }]);
+  assert.ok(cycle.problems.some((p) => p.reason === "pack_cycle"));
+  assert.equal(packFactors("", [{ unit: "strip", of: 10 }]).problems[0].reason, "no_base_unit");
+  // A pack with no unit at all is named, never silently dropped.
+  assert.deepEqual(packFactors("tablet", [{ of: 10 }]).problems, [{ reason: "pack_needs_unit" }]);
+});
+
+test("validatePacks: no packs at all is fine; a bad declaration is refused before anything is received against it", () => {
+  assert.deepEqual(validatePacks("tablet", []), { ok: true, problems: [] });
+  assert.deepEqual(validatePacks("tablet", null), { ok: true, problems: [] });
+  assert.equal(validatePacks("tablet", [{ unit: "strip", of: 10 }]).ok, true);
+  const bad = validatePacks("tablet", [{ unit: "strip", of: 10 }, { unit: "box", of: 10, packUnit: "carton" }]);
+  assert.equal(bad.ok, false);
+  assert.ok(bad.problems.some((p) => p.reason === "unresolved_pack_unit"));
+});
+
+test("PURE: toBaseUnit converts a quantity entered in the base unit or any declared pack, and refuses an unknown one by name", () => {
+  const packs = [{ unit: "strip", of: 10 }, { unit: "box", of: 10, packUnit: "strip" }];
+  assert.deepEqual(toBaseUnit("tablet", packs, { value: 5, unit: "tablet" }), { ok: true, value: 5, unit: "tablet", factor: 1, enteredAs: { value: 5, unit: "tablet" } });
+  assert.deepEqual(toBaseUnit("tablet", packs, { value: 25, unit: "strip" }), { ok: true, value: 250, unit: "tablet", factor: 10, enteredAs: { value: 25, unit: "strip" } });
+  assert.deepEqual(toBaseUnit("tablet", packs, { value: 3, unit: "box" }), { ok: true, value: 300, unit: "tablet", factor: 100, enteredAs: { value: 3, unit: "box" } });
+  // Case-insensitive: the same declared unit typed differently still resolves.
+  assert.equal(toBaseUnit("tablet", packs, { value: 1, unit: "Strip" }).value, 10);
+
+  const unknown = toBaseUnit("tablet", packs, { value: 5, unit: "carton" });
+  assert.equal(unknown.ok, false);
+  assert.equal(unknown.reason, "unknown_unit");
+  assert.match(unknown.detail, /"carton" is not tablet or a pack size declared for this item/);
+
+  assert.equal(toBaseUnit("tablet", packs, null).ok, false);
+  assert.equal(toBaseUnit("tablet", packs, null).reason, "no_quantity");
+});
+
+test("PURE: dualDisplay shows the largest pack that divides the quantity exactly, never a fraction of one", () => {
+  const packs = [{ unit: "strip", of: 10 }, { unit: "box", of: 10, packUnit: "strip" }];
+  assert.equal(dualDisplay("tablet", packs, 250), "25 strip (250 tablet)");
+  // 1000 tablets divides evenly by both strip (100) and box (10); the largest pack wins.
+  assert.equal(dualDisplay("tablet", packs, 1000), "10 box (1000 tablet)");
+  // 15 tablets is not a whole number of strips (10) or boxes (100): no pack shown as though it were whole.
+  assert.equal(dualDisplay("tablet", packs, 15), null);
+  // Zero is a real, recordable quantity, but never displayed as "0 strip (0 tablet)".
+  assert.equal(dualDisplay("tablet", packs, 0), null);
+  // No packs declared: nothing to show.
+  assert.equal(dualDisplay("tablet", [], 250), null);
+  assert.equal(dualDisplay("tablet", null, 250), null);
 });

@@ -134,7 +134,11 @@ style like `voice-scribe-ground.js`: `scribe-drugfix.js` (unambiguous drug-name 
 `scribe-rx.js` (dictated treatment to structured rows plus `toRegimen` for `SMD_RX.open`),
 `scribe-icdsug.js`, `scribe-safety.js` (reuses `_analyzeRegimenSafety` + `INTERACTIONS`),
 `scribe-speaker.js` (acoustic path dormant until capture supplies per-segment energy/pitch),
-`scribe-templates.js` (`SMD_SCRIBETPL`: general, paediatrics, obgyn, surgery follow-up).
+`scribe-templates.js` (`SMD_SCRIBETPL`: general, paediatrics, obgyn, surgery follow-up; since
+2026-09-25 also orthopaedics, ophthalmology, ent, dermatology, psychiatry and dental, one per
+[[Specialty Kits]] kit. Picking a kit chip in the OPD Specialty tab selects the matching template.
+Each new template names only real `VOICE_MAP` keys and asks for what was said, never a grade,
+classification or risk level that was not; `test/scribe-templates.test.mjs` enforces both).
 
 Server (`_opd-scribe.js`): a `sources` map quoting the transcript sentence behind every field, plus
 `verifySources` and `flagContradictions`, and prompt rules for negation and time. The review panel

@@ -251,6 +251,8 @@ export async function onRequest(context) {
       url.pathname === "/opd-dashboard.js" ||
       url.pathname === "/opd-dashboard.css" ||
       url.pathname === "/ward-labels.js" ||
+      // The in-app DICOM viewer engine ward.js loads on first "View images" (no words, no PHI: parse, decode, draw).
+      url.pathname === "/ward-dicom-viewer.js" ||
       // Self-hosted fonts (Inter Variable body text + Material Symbols Rounded icon font, both
       // @font-face'd by every PUBLIC_PAGE: opd/opd-display/queue/subscribe). Public, non-sensitive
       // font files - not app code - same reasoning as the brand-image allowlist below. Missing this

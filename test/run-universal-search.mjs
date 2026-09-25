@@ -35,7 +35,7 @@ try {
   chk("header button opens the universal panel", await ev(`var p=document.getElementById("usPanel");return !!p && !p.hidden && p.classList.contains("on")`) === true);
   chk("legacy panel stays closed", await ev(`var p=document.getElementById("smdSearchPanel");return !p || !p.classList.contains("open")`) === true);
   chk("input is focused synchronously", await ev(`return document.activeElement && document.activeElement.id==="usInput"`) === true);
-  chk("empty state shows Browse tiles for every category", await ev(`return document.querySelectorAll("#usBody .us-browse").length`) === 7);
+  chk("empty state shows Browse tiles for every category", await ev(`return document.querySelectorAll("#usBody .us-browse").length`) === 9);   // tools, calcs, drugs, kb, proto, kits, syn, icd, settings
 
   await type("antibiogram");
   const r1 = await rows();

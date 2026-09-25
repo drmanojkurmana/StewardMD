@@ -351,7 +351,7 @@
 <link rel="stylesheet" href="/opd-dashboard.css?v=2">
 <script src="/opd-dashboard.js?v=2"></script>
 <script src="/opd-pulse-model.js?v=2" defer></script>
-<script src="/opd-offline-desk.js?v=2" defer></script>
+<script src="/opd-offline-desk.js?v=3" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
 <script src="/patient-register.js?v=preg7-sid1-sid1-off2" defer></script>
@@ -595,7 +595,7 @@
         st.opd=r;
         if(r.orgName) st.orgName=r.orgName;
         if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
-        renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); return;
+        renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare(); return;
       }
       if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
@@ -608,7 +608,7 @@
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
       if(!r||!r.ok){ renderShell('<div class="empty">'+(r&&r.error==="forbidden"?"You do not have access to this hospital.":"Could not load the board.")+'</div>'); return; }
-      st.board=r.board||[]; renderBoard(); consumePendingScan(); if(!st.pulse) loadPulse();
+      st.board=r.board||[]; renderBoard(); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare();
     });
   }
 
@@ -843,6 +843,9 @@
     }
     return OFF;
   }
+  // The series is reserved as soon as the desk has loaded, not at the first refresh: a desk that lost the connection
+  // before anyone pressed anything had no series, so its first offline check-in could not be given a number.
+  function offPrepare(){ var d=offDesk(); if(d&&navigator.onLine!==false) d.prepare().then(function(){ paintOffline(); }); }
   function offTick(){
     var d=offDesk(); if(!d){ paintOffline(); return; }
     d.prepare().then(function(){ paintOffline(); });
@@ -883,7 +886,11 @@
    * stream is down a slow pass keeps it from going stale. ---- */
   var LIVE=null, liveOrg="", liveT=null;
   function liveHdrs(){ var h={}; if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return h; }); if(st.tok) h["X-Staff-Token"]=st.tok; return Promise.resolve(h); }
-  function liveRefresh(){ clearTimeout(liveT); liveT=setTimeout(function(){ var ae=document.activeElement, typing=!!(ae&&ae.closest&&ae.closest("input, textarea, select")); if(!document.hidden&&!typing&&st.orgId) refresh(); },300); }
+  // A change heard while the tab is hidden or someone is typing is remembered (liveMissed), not dropped: the board catches
+  // up when the tab is shown again, the field is left, or at the minute's pass. Dropped, it stayed stale until the next change.
+  var liveMissed=false;
+  function liveRefresh(){ clearTimeout(liveT); liveT=setTimeout(function(){ var ae=document.activeElement, typing=!!(ae&&ae.closest&&ae.closest("input, textarea, select")); if(!document.hidden&&!typing&&st.orgId){ liveMissed=false; refresh(); } else if(st.orgId) liveMissed=true; },300); }
+  try{ document.addEventListener("visibilitychange",function(){ if(!document.hidden&&liveMissed) liveRefresh(); }); document.addEventListener("focusout",function(){ if(liveMissed) liveRefresh(); }); }catch(e){}
   function liveStart(){
     if(!window.SMD_OPD_LIVE||!st.orgId||st.orgId==="demo") return;
     if(LIVE&&liveOrg===st.orgId) return;
@@ -892,7 +899,7 @@
     LIVE=SMD_OPD_LIVE.connect({url:queueApiUrl("live?orgId="+encodeURIComponent(st.orgId)),headers:liveHdrs,onChange:liveRefresh});
   }
   function liveStop(){ if(LIVE) LIVE.stop(); LIVE=null; liveOrg=""; }
-  try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&!(LIVE&&LIVE.isLive())) liveRefresh(); },60000); }catch(e){}
+  try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&(liveMissed||!(LIVE&&LIVE.isLive()))) liveRefresh(); },60000); }catch(e){}
   function loadPulse(){
     if(!st.orgId||st.orgId==="demo") return;
     liveStart(); loadInsights(); loadMoney();

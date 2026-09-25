@@ -79,6 +79,41 @@ try {
   }
   if (SHOTS) await page.screenshot({ path: SHOTS + "/gold-monograph.png" });
 
+  /* ── the monograph must FIT the phone ───────────────────────────────────────────────── */
+  // A bare `1fr` grid track carries an implicit min-width:auto, so one long value ("Serum
+  // electrolytes, renal function, fluid balance, ECG (K+/Mg2+/Ca2+)") widened its own track and
+  // pushed the right-hand column off the screen edge. Reported on the Electrolytes card.
+  for (const name of ["Electrolytes", "Cefiderocol"]) {
+    await page.evaluate((n) => { MEDDB.openList(); MEDDB.openComposition(n); }, name);
+    await page.waitForTimeout(5000);
+    const fit = await page.evaluate(() => {
+      const host = document.querySelector("#dbMono");
+      if (!host) return { err: "no #dbMono" };
+      const over = [];
+      host.querySelectorAll(".gd-qf,.gd-pk,.gd-2,.gd-chk,.gd-mon,.gd-kv,.gd-qf>div,.gd-pk>div").forEach((el) => {
+        if (el.scrollWidth > el.clientWidth + 1) over.push((el.className || el.tagName).toString().slice(0, 24));
+      });
+      // The dosage table is deliberately scrollable inside .gd-tw, so it is excluded above.
+      return { over: over.slice(0, 6), pageScrolls: document.documentElement.scrollWidth > window.innerWidth + 1 };
+    }, name);
+    ok(fit.over && fit.over.length === 0, name + ": no card grid overflows its column (" + (fit.over || []).join(", ") + ")");
+    ok(!fit.pageScrolls, name + ": the page does not scroll sideways");
+  }
+
+  /* ── the header gives the drug's name priority over the button label ────────────────── */
+  const head = await page.evaluate(() => {
+    const bb = document.querySelector("#dbBrandBtn"), t = document.querySelector("#dbTitle");
+    if (!bb || !t) return { err: "no header" };
+    const zero = getComputedStyle(bb).display === "none";     // no brands -> no "Available brands 0"
+    bb.style.display = "";
+    bb.innerHTML = '<span class="db-bb-lbl"><span class="db-bb-long">Available </span>Brands</span><span class="db-bb-ct">124</span>';
+    return { zeroHidden: zero, title: t.textContent.trim(), clipped: t.scrollWidth > t.clientWidth + 1,
+             pillRight: bb.getBoundingClientRect().right, vw: window.innerWidth };
+  });
+  ok(head.zeroHidden, "a molecule with no Indian brand shows no 'Available brands 0' pill");
+  ok(!head.clipped && /Cefiderocol/i.test(head.title), "the drug name is not truncated by the brands pill: " + head.title);
+  ok(head.pillRight <= head.vw + 1, "the pill stays inside the screen even with a 3-digit count");
+
   /* ── the library really is the whole library ────────────────────────────────────────── */
   const stats = await page.evaluate(() => SMD_OFFLINE_CLINICAL.stats());
   ok(stats && stats.struct > 1600 && stats.index > 1600, "bundle + supplement + index all loaded: " + JSON.stringify(stats));

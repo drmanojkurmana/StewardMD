@@ -30,6 +30,13 @@
  * system and it is deliberately out of scope; this records the ISSUE against the order, which is what
  * the clinical record needs and what an audit asks for.
  *
+ * NO PACK CONVERSION EITHER, and for the same reason: pack sizes (stock.js: packFactors/toBaseUnit,
+ * used when receiving in stores.js and purchasing.js) belong to an item master this file's drugs do
+ * not have. A dispense's quantity is recorded in whatever unit the order and the box in the
+ * pharmacist's hand agree on, same as always; if a drug item master gains `packs` in future, that
+ * conversion still belongs at the point of RECEIPT, not here - a dispense is an issue, and stock.js's
+ * own rule already holds that issues are never re-entered or reconciled against a different unit.
+ *
  * BATCH AND EXPIRY ARE NOT INVENTORY. They are what the pharmacist reads off the box in front of them,
  * and they are the two facts a recall and a harm investigation ask for first: WHICH batch went to
  * which patient. Recording them here needs no stock system, and an EXPIRED one is REFUSED - the one

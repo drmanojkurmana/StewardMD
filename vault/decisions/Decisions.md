@@ -5,6 +5,34 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-25 · Radiology images: PROXIED for an in-app viewer, still never STORED
+
+**Decision.** WardSynQ now shows DICOM images inside the app. The server reads them from the hospital's own
+DICOMweb archive (the Imaging connector, `functions/_wardsynq/dicomweb.js`) and passes them to the signed-in clinician:
+`GET /ward/imaging-series` (QIDO-RS series + instances) and `GET /ward/imaging-instance` (WADO-RS, one instance,
+`application/dicom`, `Cache-Control: private, no-store`), both `emr.view`, in `functions/_wardsynq/dicom-viewer.js`.
+The browser names OUR ImagingStudy record id, never a study UID; the UID always comes from this hospital's governed
+row, so another hospital's study is unreachable. PACS address and credential stay server-side. Opening a study is
+audited (`imaging.study.open`); per-image reads are not (a CT is hundreds). The archive's patient header is returned
+only when the caller may read that Patient record.
+
+**Supersedes** "No pixels in WardSynQ" (2026-09-13 P1.10 and S5 "nothing retrieves pixel data") for the VIEWING
+part only. What stays: nothing is written to the record, KV, R2 or any cache; the client (`ward-dicom-viewer.js`)
+holds decoded images in memory and drops them on close (FIFO cap of 48 decoded slices). The launch link into the
+hospital's own viewer is still offered beside it.
+
+**Why.** Radiologists and ward doctors asked to look at the images where they write the report, and many small
+hospitals have no web viewer to link to. Proxying keeps the credential off the device and the study scoped by our
+own governance; storing would make us a PACS (retention, QA, medico-legal custody) and that is not this product.
+
+**Trade-offs / limits.** 48 MB per instance (whole instance in Worker memory), 60 series and 1500 instances per
+study, QIDO 8 s and WADO 20 s timeouts. Client decodes uncompressed little/big endian and JPEG baseline only;
+JPEG 2000, JPEG-LS, RLE and lossless JPEG are refused naming the transfer syntax (open the hospital viewer).
+dicom-parser 1.8.21 (MIT) from jsdelivr with SRI, loaded on first open (dwv is GPL-3.0; cornerstone3D's worker/WASM
+codecs do not suit a Capacitor WebView loading from a CDN). Not a diagnostic-grade viewer (no MPR, no calibration
+checks, no hanging protocols). NOT tried against a real PACS; mocked transport and a synthetic 16-bit CT in
+headless Chrome (`test/run-ward-dicom-viewer-ui.mjs`). **Status:** draft PR, awaiting owner approval.
+
 ## 2026-09-18 · Deferring a payload without deferring the contract (PDF engines off cold start)
 
 **Measured first, because the received wisdom was wrong.** `stewardmd.in` is a MARKETING PAGE (3
@@ -5954,7 +5982,7 @@ bug - not re-verified live on device this session.
 
 ## 2026-09-13 WardSynQ P1.10 imaging viewer launch and P1.5 payer adapters (branch p1-rad-tpa)
 - Images open in the hospital's own viewer via `wardsynq.imagingViewer.urlTemplate` (https only; placeholders
-  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged.
+  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged. (Viewing superseded 2026-09-25: proxied, still not stored.)
 - Study-to-order linkage is done at read time (`_wardsynq/imaging-viewer.js` studyForOrder): serviceRequestId, else
   accession equal to the order id the worklist issued, else the order's external identifiers. Exact only.
 - Structured report templates are hospital content (`wardsynq.radiologyTemplates`); report stores template id/version
@@ -6449,7 +6477,7 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   hospital whose org template used it now gets "template_unsupported_placeholder" and no link, stated.
 - Test connection = one `GET <qido>/studies?limit=1`, Accept `application/dicom+json` (PS3.18 10.6), 5 s, no
   redirect. Reports passed/failed, HTTP status, study count; the body is never returned (it names a patient).
-- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged).
+- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged). **Superseded 2026-09-25:** WADO-RS is now read by the in-app viewer, proxied and never stored.
 - NOT verified against a real PACS; mocked transport only.
 
 ### S4 Payers and TPAs (functions/_wardsynq/payer-connectors.js, wardsynq/wardsynq-nhcx-adapter.js)
@@ -9217,6 +9245,28 @@ is how two screens drift into different payloads or permissions. Month and yeste
 that already exist (read-only), so viewing history never creates a queue session for a past day. Default on
 behind `smd_opd_dash`, classic layout one click away, until the owner approves it permanently.
 
+## 2026-09-25 — Stores/pharmacy stock gets OPT-IN pack-size conversion; the "no unit conversion" rule narrows, it does not fall
+stock.js, purchasing.js and stores.js said "UNITS ARE NOT CONVERTED" since they were written: guessing
+that a box is twenty-eight tablets produces a confident number that is wrong by a factor of twenty-
+eight, and that mapping was a product catalogue the build did not have. It still does not GUESS. What
+changed is that an item can now SAY the mapping itself: `StoreItem.packs` (general stores only, not a
+pharmacy drug's own record - no drug item master exists yet) declares
+`[{ unit: "strip", of: 10 }, { unit: "box", of: 10, packUnit: "strip" }]`, positive integer factors
+only, packs may chain, a cycle or an unresolved reference is refused at the item level
+(`stock.js: validatePacks`) before anything is ever received against it, and an item with no `packs`
+behaves exactly as it always did - this is additive, not a relaxation of the old rule. Receiving in a
+declared pack unit converts to the base unit before the movement reaches the one ledger (stock.js's
+own invariant: stock, reorder levels and valuation stay in the base unit, never a pack); what was
+actually counted at the hatch is kept alongside as `receivedAs`, and `dualDisplay()` reads it back as
+"25 strip (250 tablet)". Valuation divides the ordered line's own price by the pack factor into
+integer paise (rounded, comment states the rounding) rather than carrying a second price field that
+could drift from the first. `pharmacy-dispense.js` deliberately gained NO conversion: a dispense is an
+issue, and issues were never re-entered in a different unit even before this - if a drug item master
+grows `packs` one day, that conversion still belongs at the point of receipt, not dispense.
+ward.js's purchasing screen (`poReceive`) reads the general stores item master once so the unit prompt
+can offer an item's own declared packs instead of a blind box/strip/vial guess, and shows the server's
+`packDisplay` back after a receipt books in.
+
 ## 2026-09-25 — A Cloudflare Access identity counts only when its JWT verifies
 Roughly 25 routes (queue, wardsynq, connect incl. super-admin, license, billing, push, cases, and the
 coarse gates of experimental/fundx/followcare/icd/schemes/retrieve) took `Cf-Access-Authenticated-User-Email`
@@ -9363,3 +9413,164 @@ saving. `app.js` is a built artifact here and is not safely editable.
 
 **Consequence.** Age and Sex are asked once, in the card that is actually about the patient. Where
 `:has()` is unsupported the rules do not apply and the old two-card layout stands.
+## 2026-09-25 - General clinical protocols live in the Knowledge Library, not the OPD Protocol tab
+Owner asked for protocols for every subject (sepsis and the rest), noting the OPD Protocol tab only
+has oncology. The OPD tab stays oncology-only: it ASSIGNS a dosed chemotherapy plan to a patient
+record (`smd_onco_protocols`), and mixing reference protocols into it would blur "reference" with
+"order". General protocols are reference content in a fifth Knowledge Library tab ([[Clinical
+Protocols]]), reachable from Universal Search and deep-linkable (`SMD_KBPROTO.open({id})`) if the OPD
+later wants a read-only link.
+Content is data (one JSON per protocol) with a validator that makes the unsafe states unrepresentable:
+no protocol without a cited https source, no "reviewed"/"approved" without a named reviewer, no em or
+en dash, no unknown keys. Everything shipped is `ai_drafted` (AI-assisted, web-researched against the
+cited guideline) and every screen says it is pending clinical review; that label changes only when a
+clinician reviews a protocol and the file names them. Flag default ON because the tab is additive and
+honest about its status; `?kbproto=0` removes it.
+
+## 2026-09-25 - Amended the same day: the OPD Protocol tab lists clinical protocols too
+The owner sent a screenshot of the OPD Protocol tab ("Search &amp; assign", oncology only) and asked for
+the protocols there, with a branch filter and working search. So the tab is now one list of clinical
+protocols + oncology regimens. The earlier concern (reference vs order) is kept by the UI, not by
+separation: clinical rows open a read-only reader in the tab and have no Assign; only oncology rows can
+Assign, and that still creates a DRAFT plan the ONCQIS tab must confirm. Also fixed: the double-escaped
+"&amp;" header, em dashes and the placeholder dash under every regimen, a search that missed cancer
+types written with spaces ("breast cancer" vs `breast_cancer`) and drug names, and a read-only profile
+that sat on "Loading the protocol library..." forever (the loader required write mode).
+
+## 2026-09-25 - International and India protocols are separate files, not one file with two columns
+Owner asked for international-guideline protocols as well. 138 of the first 156 were already built on
+international guidance; 18 were built on Indian national programmes (NCVBDC, NTEP, NCDC, MoHFW...).
+Where both exist and differ (malaria primaquine dose, TB regimens, rabies schedules, GDM criteria), a
+single protocol with "India says X, WHO says Y" on every line is hard to follow at the bedside. So each
+guideline family gets its own file (`basis`), paired by `counterpart`, with a filter and a one-tap link
+between them. A protocol is never silently a blend: its primary source decides its basis.
+
+## 2026-09-25 - Specialty kits write into the existing assessment, not a new schema
+The owner asked what would make the app useful beyond surgery, medicine and critical care, then asked
+for the O&G and Paediatrics kits first and all eight completed ([[Specialty Kits]]). A kit could have
+had its own saved record per specialty, but GHIS/EMR saves one Initial Assessment form, and a second
+record would need a server schema, sync and a second Save that doctors would miss. So a kit is a
+structured front end to fields that already exist: sections compose only what was filled and APPEND it
+to a named assessment field, and a few values fill single form fields (LMP, weight, hydration). Nothing
+is saved until the doctor saves the assessment; the kit is disabled until that form has loaded, because
+loading it replaces every value. Tools whose answer is a number (WHO z-scores, ACOG redating, WHO vision
+and hearing grades, PASI, DMFT) are computed in code and tested against the publishers' own examples
+(WHO's anthro README cases and all 2101 z-scores of the WHO 2007 survey), not written by a model at run
+time. The WHO growth numbers are taken from WHO's official R packages' data tables, which are identical
+to the who.int expanded tables; no package code is used. Picking a kit also picks the matching MaiK
+Scribe template. Everything is `ai_drafted` and says so; flag default ON because it is additive.
+
+
+## 2026-09-25 - "Every branch" list: phone-only work first, server work second
+The owner ticked 42 of 44 proposals and wrote "do all which need server first then all server needed
+works as second wave". Read as: first everything that needs no server, then the server items as a
+second wave (the sentence only parses that way with "all server needed works as second wave"). Told
+the owner that reading. Wave 1 is built; wave 2 is in [[Roadmap]].
+
+## 2026-09-25 - Documents and handover are never stored; review decisions leave by file
+Certificates, consent forms, MLC letters and the I-PASS handover hold patient identifiers. They are
+filled in memory, printed or shared by the doctor, and dropped on close ([[Clinical Documents]]), so
+there is no PHI at rest to secure, sync or delete. The Reg. No. prints only when the app verified it;
+a typed one could be anyone's. The [[Review Desk]] keeps content ids and comments only, and a reviewer's
+decisions reach the repo as an exported file the owner applies with `scripts/apply-reviews.mjs`, which
+never downgrades an approved item and needs `--accept-unverified` for an unverified reviewer. Server
+sync of either is wave 2.
+
+## 2026-09-25 - Reference numbers from a source file, not from the model
+Every number a wave 1 tool uses (LA mg/kg and ceilings, Lund and Browder columns, WHO Labour Care Guide
+alert values, notifiable list, MCCD modes of dying) sits in `kb/specialty-kits/src/data-*.json` with its
+source and a `verified` note saying how it was read, and the maths is tested against hand-worked
+published values. Where a source was silent the tool is conservative: the LA dose counts nobody above
+70 kg (Williams and Walker 2014) because the with-adrenaline rows have no mg ceiling; MCCD Part I has
+three lines because India's Form 4 has three, not WHO's four.
+
+## 2026-09-25 - Wave 2 sharing: server-side, verified doctors only, sealed, off by default
+[[Colleagues]] could have extended the client-side Firestore patterns (`referrals.js`, `sharedCases`),
+but those store patient data readable by rules, and `referrals.js` puts the full ICU entry in Firestore
+unencrypted. So wave 2 is one server route family (`/api/kits`) with deny-all collections: every write is
+validated on the server, patient data only moves between registration-verified doctors (both ends
+checked from Firebase claims), everything clinical is AES-GCM sealed with the existing PHI key, pushes are
+fixed text, and the patient's record number never leaves a POST body (history is keyed by an HMAC under
+an HKDF-derived key). Identity is the verified ID token only; the older `identify()` that also trusts a
+bare Cf-Access email header is deliberately not used. A hospital's kit version is published by the
+org owner or an `admin`/`pg_hod` member who is also a verified doctor, without adding a new capability
+to `_queue_roles.js` (a central security file). Kit history is per doctor, not per hospital, until a
+hospital asks. The whole thing is off twice (server env and client flag) until the owner approves.
+
+## 2026-09-25 — The icon font is bound once, globally, not per module
+
+**Context.** A sweep for layout overflow turned up the NMC eLOGBook setup screen rendering the words
+"school", "draw", "chevron_right" and "close" instead of icons. `redesign-system.css` only
+*declared* `@font-face { font-family: 'Material Symbols Rounded' }`; nothing bound the utility
+classes to it outside two module scopes (`queue.css #smdQueue ...`, `oncotree.css .ot-overlay ...`).
+Seven modules never bound it: pglog, thorex, sknx, onco-iotox, onco-recist, onco-nurse,
+onco-protocols. Their icon spans computed `font-family: Inter` and printed the ligature name.
+
+**This would not have been caught by checking that the font loaded.** `material-symbols-rounded.woff2`
+returned 200 and `document.fonts.check()` returned true while the screen showed words. The check that
+works is the computed `font-family` on the span, and its rendered width: a glyph is about one em, the
+word "chevron_right" is about six.
+
+**Decision.** One base rule in `redesign-system.css` binds `.material-symbols-rounded`,
+`.material-symbols-outlined` and `.material-symbols-sharp` to the self-hosted face, at the lowest
+useful specificity so every existing scoped declaration still wins. Adding a module no longer means
+remembering to re-declare it. `test/run-icon-font-ui.mjs` asserts it across the modules that have no
+binding of their own.
+
+**Also found.** `onco-iotox.js` used `icon: "liver"` for hepatitis. Verified against the bundled
+woff2 that neither "liver" nor "hepatitis" is a ligature in it, so it rendered as the word. Changed
+to "labs", which is present, is how irAE hepatitis is actually followed, and is not the
+"gastroenterology" glyph colitis already uses.
+
+## 2026-09-25 — Measure the overflow, do not mass-replace `1fr`
+
+**Context.** After the Quick Facts overflow (BUG report on the Electrolytes card), the obvious move
+was to replace every bare `1fr` grid track in the repo with `minmax(0,1fr)`. There are ~150 of them.
+
+**Decision.** `1fr` is only a bug when the content cannot shrink, so the sweep measures instead: a
+grid or flex row whose `scrollWidth` exceeds its own `clientWidth`. Across 31 surfaces that found
+exactly two, both fixed above; the rest of the `1fr` tracks were left alone.
+
+**The detector had to be validated before it could be trusted.** Two earlier versions reported the app
+clean: one flagged closed off-canvas drawers and missed the real bug because a vertical
+`overflow:auto` ancestor masked it; another rescanned stale DOM because Escape does not close these
+overlays, so every surface returned the previous one's result. Both would have supported "no other
+page has this bug". The working version is checked against the known Electrolytes case with the fix
+reverted, and is clean with it restored.
+
+**Consequence.** `.oh-quick`'s first fix (`overflow-wrap:anywhere`) measured as fixed while wrapping
+"Interactions" to "Interaction" + "s" on screen. A single word should not break; the label fits at
+its existing size once side padding drops from 6px to 4px. A metric improving is not the same as the
+screen improving, and the screenshot is what settles it.
+
+## 2026-09-25 — Every grid column track is minmax(0,1fr), repo-wide
+
+**Context.** The measured sweep fixed only the two grids that were actually overflowing and left ~150
+bare `1fr` tracks alone, on the reasoning that `1fr` is only a bug when content cannot shrink. Owner
+asked for all of them.
+
+**Decision.** 168 declarations across 46 files rewritten by a parser, not a find-and-replace: an `fr`
+already inside `minmax()` is skipped (so `repeat(auto-fill, minmax(120px, 1fr))` survives), only
+`grid-template-columns` / `grid-auto-columns` are touched (row tracks are a vertical concern, not this
+bug), and a value that is entirely a `var()` is left alone. The parser was self-tested on ten shapes
+first. `minmax(0,1fr)` can only remove a minimum, never add width, so it cannot introduce overflow;
+the one behaviour it changes is that content which previously forced a track wider now wraps.
+
+**Two things a CSS regex would have missed.** `medlist.js` sets `gridTemplateColumns` as an inline
+style string. `home.js` READS it back to count columns for arrow-key tile reordering: a visible grid
+resolves to pixels so the old `split(" ")` was right, but a hidden one returns the specified value,
+which the browser normalises to `minmax(0px, 1fr)` WITH a space after the comma, counting 6 tracks
+for 3. The rnav grid is visible so it worked; the split now ignores spaces inside parentheses.
+
+**Verified.** 35 surfaces, 0 overflow. `insulin` and `icu` initially skipped on a wrong global name
+(`INSULIN`/`ICU`, not `SMD_*`) and were re-run rather than left unverified, which mattered: they hold
+14 of the 168 rewrites. One grid, `.ml-dose-grid`, needs a dose-editor state the harness does not
+reach and was not exercised.
+
+## 2026-09-25 - Wave 2 turned on by code default, not a Cloudflare variable
+The owner asked to turn wave 2 on. The planned switch was a Pages variable `KITS_SHARE_ON=1`, but
+production already uses all 128 text bindings (vars + secrets) and one more fails every deployment. So
+the server route and the client flag now default ON in code; `KITS_SHARE_ON=0` and `smd_kits_share="0"`
+are the kill switches. Before switching on, a colleague became addressable by sign-in email as well as
+StewardMD ID (most doctors have no ID yet), the sheet shows your own ID, and sends and invites spend
+the rate limit before the directory lookup so the directory cannot be probed for free.

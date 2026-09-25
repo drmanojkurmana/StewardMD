@@ -32,10 +32,13 @@
  * a pharmacist reads; ordering is a commercial act with an approver, and a system that placed orders
  * on its own would be a system nobody could explain the spending of.
  *
- * UNITS ARE NOT CONVERTED. A movement in boxes and a dispense in tablets are not added together, and
- * this file will not guess how many tablets are in a box - that mapping is a product catalogue this
- * build does not have, and guessing it produces a confident number that is wrong by a factor of
- * twenty-eight. Mixed units are reported per unit, side by side, and flagged.
+ * UNITS ARE NOT GUESSED. A movement in boxes and a dispense in tablets are not added together unless
+ * an item SAYS how they relate (packFactors/toBaseUnit below, of PACK-SIZE CONVERSION): an optional,
+ * per-item `packs` declaration such as a strip of 10 tablets, or a box of 10 strips. An item with no
+ * `packs` behaves exactly as it always did - mixed units are reported per unit, side by side, and
+ * flagged. Even with `packs` declared, a unit this file cannot resolve is refused by name, never
+ * assumed to be one-to-one; a bad or looping declaration is caught at the item level (validatePacks),
+ * before anything is ever received against it.
  */
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
@@ -81,6 +84,89 @@ function quantityOf(q) {
   const unit = str(o.unit);
   if (!Number.isFinite(value) || !unit) return null;
   return { value, unit };
+}
+
+/**
+ * PACK-SIZE CONVERSION (optional, per item). An item's own unit is what stock is counted in (its base
+ * unit); `packs` declares how a purchasing unit ("strip", "box") converts to it:
+ *
+ *   packs: [{ unit: "strip", of: 10 }, { unit: "box", of: 10, packUnit: "strip" }]
+ *
+ * `of` is a positive integer count of `packUnit` (or of the base unit, when `packUnit` is omitted) in
+ * one `unit`. Packs chain (a box of strips of tablets); a chain that loops back on itself is never
+ * resolved. OPT-IN AND NEVER GUESSED: an item that declares no `packs` behaves exactly as before.
+ */
+
+/** PURE. Every unit this item declares, mapped to its factor to the base unit (the base unit itself is
+ *  1). A pack this file cannot resolve - a bad factor, an unresolved packUnit, a unit declared twice,
+ *  or a cycle - is named in `problems` and left out of `factors`, never guessed at. */
+function packFactors(baseUnit, packs) {
+  const base = str(baseUnit);
+  const list = Array.isArray(packs) ? packs : [];
+  const factors = new Map();
+  const problems = [];
+  if (!base) return { factors, problems: [{ reason: "no_base_unit" }] };
+  factors.set(key(base), { unit: base, factor: 1 });
+
+  const byUnit = new Map();
+  for (const p of list) {
+    const u = str(p && p.unit);
+    if (!u) { problems.push({ reason: "pack_needs_unit" }); continue; }
+    if (key(u) === key(base)) { problems.push({ unit: u, reason: "pack_is_base_unit" }); continue; }
+    if (byUnit.has(key(u))) { problems.push({ unit: u, reason: "duplicate_pack_unit" }); continue; }
+    byUnit.set(key(u), p);
+  }
+
+  const resolve = (unit, trail) => {
+    const k = key(unit);
+    if (factors.has(k)) return factors.get(k).factor;
+    if (trail.has(k)) { problems.push({ unit, reason: "pack_cycle" }); return null; }
+    const p = byUnit.get(k);
+    if (!p) return null;
+    const of = Number(p.of);
+    if (!Number.isInteger(of) || of <= 0) { problems.push({ unit, reason: "bad_pack_factor" }); return null; }
+    const via = str(p.packUnit) || base;
+    trail.add(k);
+    const viaFactor = resolve(via, trail);
+    trail.delete(k);
+    if (viaFactor === null) { problems.push({ unit, reason: "unresolved_pack_unit", packUnit: via }); return null; }
+    const factor = of * viaFactor;
+    factors.set(k, { unit, factor });
+    return factor;
+  };
+  for (const p of list) resolve(str(p && p.unit), new Set());
+  return { factors, problems };
+}
+
+/** { ok, problems } - whether an item's own packs are usable, checked when the item is saved so a
+ *  broken declaration is refused before anything is ever received against it. No packs at all is fine. */
+function validatePacks(baseUnit, packs) {
+  if (!Array.isArray(packs) || !packs.length) return { ok: true, problems: [] };
+  return { ok: packFactors(baseUnit, packs).problems.length === 0, problems: packFactors(baseUnit, packs).problems };
+}
+
+/** PURE. A quantity in any unit the item declares (its own base unit, or a pack of it), converted to
+ *  the base unit. Never guesses: a unit that is neither is refused by name, not assumed to be 1:1. */
+function toBaseUnit(baseUnit, packs, quantity) {
+  const q = quantityOf(quantity);
+  if (!q) return { ok: false, reason: "no_quantity" };
+  const { factors } = packFactors(baseUnit, packs);
+  const hit = factors.get(key(q.unit));
+  if (!hit) return { ok: false, reason: "unknown_unit", detail: `"${q.unit}" is not ${str(baseUnit)} or a pack size declared for this item.` };
+  return { ok: true, value: q.value * hit.factor, unit: str(baseUnit), factor: hit.factor, enteredAs: q };
+}
+
+/** PURE. "25 strip (250 tablet)" - the base quantity, and the same amount in the largest declared pack
+ *  that divides it exactly (so 250 tablets with both strip=10 and box=100 declared reads in boxes, not
+ *  strips). null when the item declares no packs, or none divides the quantity exactly - never a
+ *  fraction of a pack shown as though it were whole. */
+function dualDisplay(baseUnit, packs, baseValue) {
+  if (!Array.isArray(packs) || !packs.length || !Number.isFinite(baseValue)) return null;
+  const { factors } = packFactors(baseUnit, packs);
+  const options = [...factors.values()].filter((f) => key(f.unit) !== key(baseUnit)).sort((a, b) => b.factor - a.factor);
+  const pick = options.find((f) => baseValue !== 0 && baseValue % f.factor === 0);
+  if (!pick) return null;
+  return `${baseValue / pick.factor} ${pick.unit} (${baseValue} ${str(baseUnit)})`;
 }
 
 /**
@@ -437,6 +523,10 @@ async function recordMovement(request, env, ctx) {
      * Optional for every drug, kept when given. */
     ...(str(ctx.receivedFrom) ? { receivedFrom: str(ctx.receivedFrom).slice(0, 200) } : {}),
     ...(str(ctx.documentNo) ? { documentNo: str(ctx.documentNo).slice(0, 80) } : {}),
+    /* PACK-SIZE CONVERSION: when a receipt was entered in a pack unit ("strip", "box") and converted to
+     * the item's base unit above `quantity`, the unit and quantity as entered are kept here too - the
+     * fact of what was actually counted at the pharmacy hatch, for the dual display and for an audit. */
+    ...(ctx.receivedAs && quantityOf(ctx.receivedAs) ? { receivedAs: quantityOf(ctx.receivedAs) } : {}),
     /* Drugs and Cosmetics Rules r.65(21)(b)(ii), (v), (vi): a Schedule X receipt names the supplier's address and licence
      * number and the manufacturer (controlled-drugs.js rule65Register). Kept when given, for any drug. */
     ...(str(ctx.supplierAddress) ? { supplierAddress: str(ctx.supplierAddress).slice(0, 300) } : {}),
@@ -622,4 +712,4 @@ async function stockLevels(request, env, ctx) {
   };
 }
 
-export { returnableFrom, returnToSupplier, batchBalances, fefoSuggestion, stockFefo, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount };
+export { returnableFrom, returnToSupplier, batchBalances, fefoSuggestion, stockFefo, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount, packFactors, validatePacks, toBaseUnit, dualDisplay };

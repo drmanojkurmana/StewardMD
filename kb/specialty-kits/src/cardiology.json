@@ -1,0 +1,192 @@
+{
+ "id": "cardiology",
+ "label": "Cardiology",
+ "short": "Cardio",
+ "icon": "cardiology",
+ "group": "medical",
+ "scribe": "cardiology",
+ "subject": "cardiology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "chest-pain",
+   "title": "Chest pain history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "cp_character", "label": "Character", "type": "select", "opts": ["Pressure, tightness or heaviness", "Burning", "Sharp or stabbing", "Pleuritic (worse on breathing)", "Tearing", "Dull ache", "Other"] },
+    { "id": "cp_site", "label": "Site", "type": "select", "opts": ["Central (retrosternal)", "Left chest", "Right chest", "Epigastric", "Diffuse"] },
+    { "id": "cp_radiation", "label": "Radiation", "type": "select", "opts": ["None", "Left arm", "Both arms", "Jaw or neck", "Back (between shoulder blades)", "Epigastrium"] },
+    { "id": "cp_exertion", "label": "Relation to exertion", "type": "select", "opts": ["Brought on by exertion, eases with rest", "At rest", "Both at rest and on exertion", "Not related to exertion"] },
+    { "id": "cp_duration", "label": "Duration of each episode", "type": "select", "opts": ["Seconds", "Under 5 minutes", "5 to 15 minutes", "Over 15 minutes", "Hours or constant"] },
+    { "id": "cp_relief", "label": "Relieved by", "type": "select", "opts": ["Rest within 5 minutes", "Sublingual nitrate within 5 minutes", "Antacids or food", "Sitting forward", "Nothing"] },
+    { "id": "cp_last_episode", "label": "Last episode", "type": "text", "hint": "e.g. 3 hours ago; pain in the last 12 hours matters" },
+    { "id": "cp_sweating", "label": "Sweating", "type": "check" },
+    { "id": "cp_nausea", "label": "Nausea or vomiting", "type": "check" },
+    { "id": "cp_breathless", "label": "Breathlessness", "type": "check" },
+    { "id": "cp_palpitations", "label": "Palpitations", "type": "check" },
+    { "id": "cp_syncope", "label": "Dizziness or fainting", "type": "check" }
+   ]
+  },
+  {
+   "id": "cardiac-red-flags",
+   "title": "Cardiac red flags",
+   "target": "History_present_illness",
+   "alert": "Cardiac red flag: treat as an emergency. Record a 12-lead ECG now without delaying transfer, keep the patient under observation and arrange emergency hospital assessment by ambulance; follow the STEMI, NSTE-ACS, acute heart failure, acute aortic syndrome or syncope protocol. A normal ECG does not exclude an acute coronary syndrome.",
+   "fields": [
+    { "id": "rf_acs", "label": "Suspected acute coronary syndrome: chest pain now, or in the last 12 hours", "type": "check" },
+    { "id": "rf_rest_pain", "label": "Chest pain at rest lasting over 15 minutes", "type": "check" },
+    { "id": "rf_ecg", "label": "ECG: ST elevation, new LBBB or dynamic ST or T wave changes", "type": "check" },
+    { "id": "rf_exertional_syncope", "label": "Syncope on exertion or while lying down", "type": "check" },
+    { "id": "rf_palpitation_syncope", "label": "Syncope preceded by sudden palpitations", "type": "check" },
+    { "id": "rf_breathless", "label": "New severe breathlessness, or breathless at rest or lying flat", "type": "check" },
+    { "id": "rf_tearing", "label": "Sudden tearing chest or back pain", "type": "check" },
+    { "id": "rf_shock", "label": "Low blood pressure or signs of shock", "type": "check" },
+    { "id": "rf_rate", "label": "Very fast or very slow pulse with chest pain, breathlessness or dizziness", "type": "check" }
+   ]
+  },
+  {
+   "id": "heart-failure-review",
+   "title": "Heart failure review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "nyha_class", "label": "NYHA class", "type": "select", "opts": ["I: no limitation of ordinary activity", "II: slight limitation, symptoms on ordinary activity", "III: marked limitation, symptoms on less than ordinary activity", "IV: symptoms at rest or on any activity"] },
+    { "id": "orthopnoea", "label": "Orthopnoea", "type": "check" },
+    { "id": "pnd", "label": "Paroxysmal nocturnal dyspnoea", "type": "check" },
+    { "id": "weight_today", "label": "Weight today", "type": "number", "unit": "kg", "set": "Weight" },
+    { "id": "weight_change", "label": "Weight change since last visit", "type": "number", "unit": "kg", "hint": "minus for a loss" },
+    { "id": "hf_oedema", "label": "Oedema", "type": "select", "opts": ["None", "Ankles", "Up to knees", "Above knees or sacral"] },
+    { "id": "jvp", "label": "JVP", "type": "select", "opts": ["Not raised", "Raised", "Raised with positive hepatojugular reflux", "Not visible"], "set": "JVP" },
+    { "id": "basal_crackles", "label": "Lung crackles", "type": "select", "opts": ["None", "Bibasal", "Up to mid zones", "Widespread"] },
+    { "id": "lvef", "label": "Latest LVEF (echo)", "type": "number", "unit": "%" },
+    { "id": "hf_cause", "label": "Cause of heart failure, if known", "type": "text", "hint": "e.g. ischaemic, valvular, hypertensive" },
+    { "id": "daily_weights", "label": "Keeps a daily weight record", "type": "check" }
+   ]
+  },
+  {
+   "id": "cv-examination",
+   "title": "Cardiovascular examination",
+   "target": "cvs_exam",
+   "fields": [
+    { "id": "pulse_rate", "label": "Pulse rate", "type": "number", "unit": "/min", "set": "Pulse" },
+    { "id": "pulse_rhythm_cv", "label": "Pulse rhythm", "type": "select", "opts": ["Regular", "Irregular"], "set": "pulse_rhythm", "hint": "irregularly irregular suggests atrial fibrillation" },
+    { "id": "pulse_character", "label": "Pulse character", "type": "select", "opts": ["Normal", "Low volume", "Bounding", "Collapsing", "Slow-rising", "Bisferiens", "Pulsus paradoxus", "Pulsus alternans"] },
+    { "id": "radiofemoral_delay", "label": "Radio-femoral delay", "type": "check" },
+    { "id": "bp_right_arm", "label": "BP right arm", "type": "text", "unit": "mmHg", "hint": "e.g. 138/86" },
+    { "id": "bp_left_arm", "label": "BP left arm", "type": "text", "unit": "mmHg", "hint": "e.g. 134/84" },
+    { "id": "apex_beat", "label": "Apex beat", "type": "select", "opts": ["Normal position", "Displaced", "Heaving", "Tapping", "Not palpable"] },
+    { "id": "heart_sounds", "label": "Heart sounds", "type": "select", "opts": ["S1 and S2 normal", "S3 present", "S4 present", "Muffled", "Loud P2", "Loud S1", "Soft S1"], "set": "cardiac_sound" },
+    { "id": "murmurs", "label": "Murmurs", "type": "text", "hint": "timing, grade (Levine 1 to 6), site, radiation" },
+    { "id": "carotid_bruit", "label": "Carotid bruit", "type": "check" },
+    { "id": "peripheral_pulses", "label": "Peripheral pulses", "type": "text", "hint": "e.g. all palpable, or absent left dorsalis pedis" }
+   ]
+  },
+  {
+   "id": "heart-score",
+   "title": "HEART score (chest pain)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "heart_history", "label": "History", "type": "select", "opts": ["Slightly suspicious (0)", "Moderately suspicious (1)", "Highly suspicious (2)"] },
+    { "id": "heart_ecg", "label": "ECG", "type": "select", "opts": ["Normal (0)", "Non-specific repolarisation disturbance (1)", "Significant ST deviation (2)"] },
+    { "id": "heart_age", "label": "Age", "type": "select", "opts": ["Under 45 (0)", "45 to 64 (1)", "65 or over (2)"] },
+    { "id": "heart_risk", "label": "Risk factors", "type": "select", "opts": ["None known (0)", "1 or 2 risk factors (1)", "3 or more, or known atherosclerotic disease (2)"], "hint": "Risk factors: diabetes, current or recent smoking, hypertension, high cholesterol, family history of coronary disease, obesity. Atherosclerotic disease: previous MI, revascularisation, stroke or peripheral arterial disease." },
+    { "id": "heart_troponin", "label": "Troponin", "type": "select", "opts": ["At or below the normal limit (0)", "1 to 3 times the normal limit (1)", "More than 3 times the normal limit (2)"] },
+    { "id": "heart_total", "label": "HEART total", "type": "number", "hint": "0 to 3 low, 4 to 6 moderate, 7 to 10 high risk" },
+    { "id": "ecg_findings", "label": "ECG findings", "type": "text", "hint": "rhythm, rate, axis, ST and T changes, QTc" },
+    { "id": "troponin_result", "label": "Troponin result and timing", "type": "text", "hint": "e.g. hs-troponin I 12 ng/L at 0 h, 14 ng/L at 3 h" }
+   ]
+  },
+  {
+   "id": "af-review",
+   "title": "Atrial fibrillation review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "af_pattern", "label": "AF pattern", "type": "select", "opts": ["First diagnosed", "Paroxysmal", "Persistent", "Long-standing persistent", "Permanent"] },
+    { "id": "af_rhythm", "label": "Rhythm today (ECG)", "type": "select", "opts": ["Atrial fibrillation", "Atrial flutter", "Sinus rhythm", "Other"] },
+    { "id": "af_rate", "label": "Resting ventricular rate", "type": "number", "unit": "/min", "hint": "lenient rate control target below 110/min" },
+    { "id": "ehra_class", "label": "EHRA symptom class", "type": "select", "opts": ["1: no symptoms", "2a: mild, daily activity not affected", "2b: moderate, daily activity not affected but troubled by symptoms", "3: severe, daily activity affected", "4: disabling, daily activity stopped"] },
+    { "id": "cha2ds2va", "label": "CHA2DS2-VA score", "type": "number", "hint": "use the calculator; CHA2DS2-VASc if that is the local standard" },
+    { "id": "anticoag_status", "label": "Anticoagulation status (documentation only)", "type": "select", "opts": ["Not on an anticoagulant", "On warfarin or another VKA", "On a DOAC", "Contraindicated", "Declined"], "hint": "record only; decisions follow the atrial fibrillation protocol" },
+    { "id": "anticoag_adherence", "label": "Anticoagulant adherence", "type": "select", "opts": ["Good", "Missed doses", "Stopped", "Not applicable"] },
+    { "id": "inr_latest", "label": "Latest INR and date, if on a VKA", "type": "text" },
+    { "id": "af_bleeding", "label": "Bleeding since last review", "type": "check" },
+    { "id": "af_stroke_tia", "label": "Stroke or TIA since last review", "type": "check" },
+    { "id": "af_symptoms", "label": "Symptoms and triggers", "type": "text", "hint": "palpitations, breathlessness, alcohol, sleep apnoea, thyroid" }
+   ]
+  },
+  {
+   "id": "secondary-prevention",
+   "title": "Secondary prevention checklist (documentation only)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "sp_statin", "label": "On a statin", "type": "check" },
+    { "id": "sp_antiplatelet", "label": "On antiplatelet therapy (or an anticoagulant if indicated)", "type": "check" },
+    { "id": "sp_acei", "label": "On an ACE inhibitor or ARB where indicated", "type": "check" },
+    { "id": "sp_beta_blocker", "label": "On a beta-blocker where indicated", "type": "check" },
+    { "id": "sp_bp_target", "label": "Blood pressure at target", "type": "check" },
+    { "id": "sp_ldl", "label": "Latest LDL cholesterol", "type": "number", "unit": "mg/dL" },
+    { "id": "sp_ldl_target", "label": "LDL cholesterol at target", "type": "check" },
+    { "id": "sp_smoking", "label": "Smoking", "type": "select", "opts": ["Never smoked", "Ex-smoker", "Current: cessation advice given", "Current: declined help"] },
+    { "id": "sp_diabetes", "label": "Diabetes control reviewed (HbA1c)", "type": "check" },
+    { "id": "sp_rehab", "label": "Cardiac rehabilitation referral made", "type": "check" },
+    { "id": "sp_lifestyle", "label": "Lifestyle advice given (diet, activity, alcohol, weight)", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "12-lead ECG", "query": "ECG" },
+  { "label": "High-sensitivity troponin", "query": "troponin" },
+  { "label": "NT-proBNP", "query": "NT-proBNP" },
+  { "label": "2D echocardiography", "query": "echocardiography" },
+  { "label": "Chest X-ray PA view", "query": "chest X-ray" },
+  { "label": "Lipid profile", "query": "lipid profile" },
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "Serum creatinine", "query": "creatinine" },
+  { "label": "Serum electrolytes", "query": "electrolytes" },
+  { "label": "CBC", "query": "CBC" },
+  { "label": "TSH", "query": "TSH" },
+  { "label": "PT INR", "query": "PT INR" },
+  { "label": "Treadmill test (TMT)", "query": "TMT" },
+  { "label": "24-hour Holter monitoring", "query": "Holter" }
+ ],
+ "orderSets": [
+  { "id": "chest-pain-panel", "label": "Chest pain panel", "tests": ["ECG", "troponin", "CBC", "RBS", "creatinine", "electrolytes", "lipid profile", "chest X-ray"] },
+  { "id": "heart-failure-panel", "label": "Heart failure panel", "tests": ["NT-proBNP", "ECG", "echocardiography", "chest X-ray", "CBC", "creatinine", "electrolytes", "LFT", "TSH", "HbA1c", "lipid profile", "urine routine", "ferritin", "transferrin saturation"] },
+  { "id": "af-work-up", "label": "AF work-up", "tests": ["ECG", "echocardiography", "TSH", "CBC", "creatinine", "electrolytes", "LFT", "PT INR", "HbA1c", "Holter"] }
+ ],
+ "protocols": ["nste-acs", "stemi", "chronic-coronary-syndrome", "acute-heart-failure", "chronic-heart-failure-hfref", "atrial-fibrillation", "syncope-evaluation", "hypertension-management", "hypertensive-emergency", "dyslipidaemia-management", "aortic-stenosis", "acute-pericarditis", "infective-endocarditis", "acute-aortic-syndrome", "pulmonary-embolism", "deep-vein-thrombosis", "peripheral-arterial-disease", "bradycardia-with-pulse", "tachycardia-with-pulse", "adult-cardiac-arrest", "post-cardiac-arrest-care", "anticoagulant-associated-bleeding", "perioperative-anticoagulation-management", "chronic-heart-failure-hfref-india", "dyslipidaemia-management-india", "hypertension-management-india"],
+ "calculators": ["heart", "edacs", "marburg", "timi_nstemi", "timistemi", "killip", "sgarbossa", "sgarbossa_smith", "qtc", "qtcf", "qtc_fram", "qtc_hodges", "qrs_axis", "cornell_lvh", "sokolow_lyon", "romhilt_estes", "ccs_angina", "nyha", "framingham_hf", "h2fpef", "epvs", "chadsvasc", "chads2", "hasbled", "orbit_bleed", "atria_bleed", "ehra_af", "levine_murmur", "diastolic_murmur", "pulse_grade", "sf_syncope", "canadian_syncope", "add_rs", "ascvd", "framingham", "ldl_friedewald", "non_hdl", "abi", "fontaine", "rutherford", "dasi", "duke_treadmill", "rcri", "dapt", "duke_endocarditis", "wells_pe", "geneva", "perc", "spesi", "pesi", "wells_dvt", "map", "pulse_pressure", "rate_pressure_product", "shock_index", "teichholz_ef", "e_over_e_prime", "lv_mass", "ava_continuity", "dvi_aortic", "mva_pht", "rvsp"],
+ "advice": [
+  {
+   "id": "chest-pain-emergency",
+   "title": "Chest pain: when to call an ambulance",
+   "target": "follow_up_advice",
+   "text": "Call an ambulance or come to the emergency department at once if you get chest pain, pressure or tightness that lasts more than 15 minutes, spreads to your arm, jaw, neck or back, or comes with sweating, feeling sick, breathlessness or fainting. Do not drive yourself."
+  },
+  {
+   "id": "heart-failure-self-care",
+   "title": "Looking after yourself with heart failure",
+   "target": "diet_lifestyle_advice",
+   "text": "Weigh yourself every morning after passing urine and before breakfast, and write it down. Contact us quickly if your weight goes up over a few days, your feet or legs swell more, you get more breathless, or you cannot lie flat. Avoid very salty foods such as pickles, papad and packaged snacks, and do not use salt substitutes unless your doctor agrees. Take your heart medicines every day and stay as active as you comfortably can."
+  },
+  {
+   "id": "after-heart-attack",
+   "title": "Protecting your heart after a heart attack",
+   "target": "diet_lifestyle_advice",
+   "text": "Join the cardiac rehabilitation programme if it is offered. Build up to 20 to 30 minutes of activity every day, enough to make you slightly breathless. Eat more fruit, vegetables, whole grains, pulses and fish, and cook with plant oils rather than ghee or butter. Stop smoking completely, keep alcohol low, and keep taking your heart medicines; do not stop them without talking to your doctor."
+  },
+  {
+   "id": "blood-thinner-safety",
+   "title": "If you take a blood thinner",
+   "target": "follow_up_advice",
+   "text": "Take your blood thinner at the same time every day and do not stop it unless your doctor tells you to. Tell every doctor, dentist and pharmacist that you take it. Come to hospital at once if you have black stools, vomit blood, pass blood in your urine, get a severe headache, or suddenly have weakness of the face, arm or leg or difficulty speaking."
+  }
+ ],
+ "sources": [
+  { "org": "NICE", "title": "CG95 Recent-onset chest pain of suspected cardiac origin: assessment and diagnosis", "year": 2010, "url": "https://www.nice.org.uk/guidance/cg95" },
+  { "org": "International Journal of Cardiology (Backus BE et al.)", "title": "A prospective validation of the HEART score for chest pain patients at the emergency department", "year": 2013, "url": "https://www.sciencedirect.com/science/article/pii/S016752731300315X" },
+  { "org": "NICE", "title": "NG106 Chronic heart failure in adults: diagnosis and management", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng106/chapter/recommendations" },
+  { "org": "ESC / EACTS", "title": "2024 ESC Guidelines for the management of atrial fibrillation", "year": 2024, "url": "https://academic.oup.com/eurheartj/article/45/36/3314/7738779" },
+  { "org": "NICE", "title": "NG185 Acute coronary syndromes (including secondary prevention and cardiac rehabilitation)", "year": 2020, "url": "https://www.nice.org.uk/guidance/ng185" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

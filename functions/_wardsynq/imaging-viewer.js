@@ -143,7 +143,7 @@ async function imagingStudies(request, env, ctx) {
       const values = { studyInstanceUid: s && s.studyUid, accessionNumber: (s && s.accessionNumber) || o.id };
       return {
         serviceRequestId: o.id, display: o.display || o.code || null,
-        study: s ? { id: s.id, studyUid: s.studyUid || null, accessionNumber: s.accessionNumber || null, modality: s.modality || null, started: s.started || null, seriesCount: s.seriesCount == null ? null : s.seriesCount, instanceCount: s.instanceCount == null ? null : s.instanceCount } : null,
+        study: s ? { id: s.id, studyUid: s.studyUid || null, inAppViewer: !!(ctx.inAppViewer && s.studyUid), accessionNumber: s.accessionNumber || null, modality: s.modality || null, started: s.started || null, seriesCount: s.seriesCount == null ? null : s.seriesCount, instanceCount: s.instanceCount == null ? null : s.instanceCount } : null,
         viewer: viewerLaunch(ctx.viewerConfig, values),
       };
     }),

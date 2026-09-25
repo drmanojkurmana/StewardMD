@@ -1,0 +1,98 @@
+{
+ "id": "bradycardia-with-pulse",
+ "title": "Bradycardia with a pulse (adult)",
+ "subject": "emergency",
+ "population": "Adults",
+ "basis": "international",
+ "setting": "Emergency department, ward, CCU, ICU",
+ "aliases": ["bradycardia", "symptomatic bradycardia", "heart block", "complete heart block", "CHB", "Mobitz II", "AV block", "atropine", "transcutaneous pacing", "TCP", "bradyarrhythmia"],
+ "summary": "Treat bradycardia (usually below 50/min) urgently only when it causes cardiopulmonary compromise: support ABC, look for causes, give atropine 1 mg IV (repeat to 3 mg), then transcutaneous pacing or an adrenaline or dopamine infusion, and arrange transvenous pacing early for high-risk blocks.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise",
+   "items": [
+    "Clinically significant bradyarrhythmia: heart rate typically below 50/min and inappropriate for the clinical condition.",
+    "Cardiopulmonary compromise: hypotension or signs of shock, acutely altered mental status or syncope, ischaemic chest discomfort, acute heart failure.",
+    "High risk of asystole: Mobitz type II block, complete heart block with broad QRS, recent asystole or ventricular pauses over 3 seconds. Plan pacing even if currently stable.",
+    "Causes: inferior MI or ischaemia, drugs (beta blockers, calcium channel blockers, digoxin, amiodarone, ivabradine), hyperkalaemia, hypoxia, hypothermia, hypothyroidism, raised intracranial pressure, vasovagal.",
+    "India: consider organophosphate or carbamate poisoning, yellow oleander (Thevetia) seed ingestion and hyperkalaemia in CKD."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "Immediate steps",
+   "items": [
+    "Airway, oxygen if hypoxaemic, assist ventilation if needed; hypoxia is a common reversible cause.",
+    "Cardiac monitor, BP and SpO2; apply pacing-capable defibrillator pads early in unstable patients; IV access; 12-lead ECG.",
+    "Stable without compromise: identify and treat the cause, monitor and observe; no chronotropic drug is needed."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Investigations",
+   "items": [
+    "12-lead ECG: type of block, QRS width, ischaemia or infarction, signs of hyperkalaemia or digoxin effect.",
+    "Potassium, calcium, magnesium, glucose, renal function, troponin, blood gas, TSH; digoxin level if on digoxin; cholinesterase activity if organophosphate poisoning is suspected.",
+    "Review all medicines, including eye drops (timolol) and recent dose changes."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Drugs and pacing (unstable)",
+   "items": [
+    "Atropine 1 mg IV bolus, repeat every 3 to 5 minutes to a maximum of 3 mg (AHA 2025). ERC/RCUK use 500 micrograms, repeated to a total of 3 mg.",
+    "Atropine is ineffective and may worsen block in high-degree AV block with broad QRS; do not give it to heart transplant recipients (risk of sinus arrest or high-grade block). Go straight to pacing or an infusion.",
+    "If atropine fails: transcutaneous pacing and/or adrenaline infusion 2 to 10 micrograms/min or dopamine infusion 5 to 20 micrograms/kg/min, titrated to response. ERC also lists isoprenaline starting at 5 micrograms/min.",
+    "Transcutaneous pacing: demand mode, set a rate of about 60/min, increase current until electrical capture, confirm mechanical capture by a femoral pulse or arterial trace, and give analgesia and sedation.",
+    "Arrange transvenous pacing early (cardiology) for persistent unstable bradycardia, Mobitz II or complete heart block; transcutaneous pacing is only a bridge.",
+    "Heart transplant or spinal cord injury: aminophylline 100 to 200 mg by slow IV injection (ERC)."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Cause-specific treatment",
+   "items": [
+    "Hyperkalaemia with ECG changes: 10 mL of 10% calcium chloride IV over 5 minutes (or 30 mL of 10% calcium gluconate over 10 minutes), then insulin-glucose and definitive potassium removal.",
+    "Beta blocker or calcium channel blocker toxicity: consider glucagon, IV calcium and high-dose insulin euglycaemia therapy with toxicology advice.",
+    "Organophosphate poisoning: atropine 1.8 to 3 mg IV, doubling the dose every 5 minutes until the chest is clear, heart rate above 80/min and systolic BP above 80 mmHg; follow the OP poisoning protocol.",
+    "Digoxin toxicity with life-threatening bradyarrhythmia: digoxin-specific antibody fragments where available; correct potassium and magnesium.",
+    "Inferior MI: AV block is often vagal and responds to atropine; treat the infarct with reperfusion. AV block with anterior MI implies extensive infarction and usually needs pacing."
+   ]
+  },
+  {
+   "kind": "disposition",
+   "title": "Disposition",
+   "items": [
+    "Admit to a monitored bed (CCU) any symptomatic bradycardia, Mobitz II, complete heart block, or bradycardia needing drugs or pacing.",
+    "Refer to cardiology for permanent pacing assessment once reversible causes (drugs, ischaemia, electrolytes, hypothyroidism) are excluded or treated.",
+    "Stop or reduce rate-slowing drugs; watch for recurrence as drug effects wear off."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Repeating atropine in broad-complex complete heart block instead of pacing.",
+    "Accepting electrical artefact as capture during transcutaneous pacing without checking for a pulse.",
+    "Missing hyperkalaemia (renal failure, ACE inhibitors, spironolactone) or drug toxicity as the cause.",
+    "Treating asymptomatic physiological bradycardia (athletes, sleep)."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Atropine", "dose": "1 mg IV bolus every 3 to 5 minutes, maximum total 3 mg (AHA 2025); ERC 500 micrograms IV repeated to 3 mg", "notes": "Not for heart transplant recipients; ineffective in broad-complex high-degree AV block." },
+  { "name": "Adrenaline (epinephrine) infusion", "dose": "2 to 10 micrograms/min IV, titrated to response", "notes": "Example: 1 mg in 50 mL (20 micrograms/mL) runs at 6 to 30 mL/h for 2 to 10 micrograms/min." },
+  { "name": "Dopamine infusion", "dose": "5 to 20 micrograms/kg/min IV, titrated to response; taper slowly", "notes": "Alternative to adrenaline when atropine fails." },
+  { "name": "Isoprenaline infusion", "dose": "Start 5 micrograms/min IV, titrate to response", "notes": "ERC second-line chronotrope." },
+  { "name": "Aminophylline", "dose": "100 to 200 mg slow IV injection", "notes": "Bradycardia after heart transplant or spinal cord injury (ERC)." },
+  { "name": "Calcium chloride 10%", "dose": "10 mL IV over 5 minutes (or calcium gluconate 10%, 30 mL over 10 minutes)", "notes": "Hyperkalaemia with ECG changes; calcium channel blocker toxicity." }
+ ],
+ "sources": [
+  { "org": "American Heart Association", "title": "Part 9: Adult Advanced Life Support. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care", "year": 2025, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" },
+  { "org": "American Heart Association", "title": "Adult Bradycardia With a Pulse Algorithm (2025)", "year": 2025, "url": "https://cpr.heart.org/-/media/CPR-Files/CPR-Guidelines-Files/2025-Algorithms/Algorithm-ACLS-Bradycardia-250514.pdf?sc_lang=en" },
+  { "org": "Resuscitation Council UK", "title": "2025 Adult advanced life support guidelines (peri-arrest arrhythmias)", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines" },
+  { "org": "Resuscitation Council UK", "title": "2025 Special circumstances guidelines (hyperkalaemia)", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}
