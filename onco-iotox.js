@@ -74,7 +74,12 @@
     pneumonitis: { icon: "air", category: "pulmonary", highAcuity: true, acuityNote: "High Acuity: Leading cause of irAE mortality. Early chest CT, serial SpO2 monitoring, and prompt pulmonology consultation required." },
     cardiac: { icon: "ecg_heart", category: "cardiac_neuro", highAcuity: true, acuityNote: "EMERGENCY: Immune-related myocarditis carries high mortality (~25-50%). Immediate telemetry admission, troponin, ECG, and early pulse methylprednisolone." },
     colitis: { icon: "gastroenterology", category: "gi", highAcuity: false },
-    hepatitis: { icon: "liver", category: "gi", highAcuity: false },
+    // "liver" is not a Material Symbols ligature, so it rendered as the literal word "liver"
+    // (95px of text) instead of an icon. Verified against the bundled woff2: "liver" and
+    // "hepatitis" are both absent. "labs" is present and is how irAE hepatitis actually presents
+    // and is followed (a transaminitis on LFTs); colitis above already owns "gastroenterology",
+    // so reusing it here would make the two GI rows identical.
+    hepatitis: { icon: "labs", category: "gi", highAcuity: false },
     endocrine: { icon: "metabolism", category: "endocrine", highAcuity: false },
     adrenal_insufficiency: { icon: "medical_services", category: "endocrine", highAcuity: true, acuityNote: "Crisis Risk: Acute adrenal insufficiency can present with refractory hypotension. Administer stress-dose hydrocortisone immediately." },
     hypophysitis: { icon: "psychology_alt", category: "endocrine", highAcuity: false },

@@ -112,6 +112,37 @@ body.dark {
   font-display: block;   /* wait for the icon font rather than flash ligature text */
   src: url(/assets/fonts/material-symbols-rounded.woff2) format('woff2');
 }
+
+/* ---- BIND the utility classes to that face, globally --------------------------------
+   The @font-face above only DECLARES the family. Nothing bound `.material-symbols-rounded` /
+   `.material-symbols-outlined` to it outside a few module scopes (queue.css `#smdQueue ...`,
+   oncotree.css `.ot-overlay ...`), so every other surface inherited the UI sans and rendered the
+   ligature NAME as a word: the NMC eLOGBook setup screen read "school", "draw", "chevron_right"
+   and "close" instead of icons, with the font file loaded and document.fonts.check() true.
+
+   This is a base rule on purpose, at the lowest useful specificity, so the existing scoped
+   declarations still win wherever a module wants a different face or size. Adding a module used to
+   mean remembering to re-declare this; now it does not. */
+.material-symbols-rounded,
+.material-symbols-outlined,
+.material-symbols-sharp {
+  font-family: 'Material Symbols Rounded', 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-user-select: none;
+}
 /* ---- Sacramento (the "MaiKnowledge" credit wordmark, .v4-maik-name .mk-s) ----------
    SELF-HOSTED for the SAME reason as the icon font: the Google CDN <link> uses a
    media="print" load-trick that doesn't reliably apply in the WKWebView, so the app
