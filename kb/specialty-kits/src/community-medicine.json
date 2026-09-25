@@ -5,7 +5,7 @@
  "icon": "groups",
  "group": "community",
  "subject": "infectious-disease",
- "tools": [],
+ "tools": ["immunisation"],
  "sections": [
   {
    "id": "cbac-risk",
@@ -26,7 +26,7 @@
   },
   {
    "id": "ncd-screening",
-   "title": "NCD screening results",
+   "title": "Population-based NCD screening (age 30 and over)",
    "target": "sys_examination",
    "fields": [
     { "id": "scr_bp_sys", "label": "BP systolic", "type": "number", "unit": "mmHg", "set": "BP_SYS" },
@@ -35,8 +35,8 @@
     { "id": "scr_rbs", "label": "Random blood glucose", "type": "number", "unit": "mg/dL", "set": "grbs" },
     { "id": "scr_sugar_result", "label": "Blood sugar screen", "type": "select", "opts": ["Normal", "Raised, to confirm with a venous test", "Known diabetes on treatment"] },
     { "id": "scr_oral", "label": "Oral visual examination", "type": "select", "opts": ["Normal", "Potentially malignant lesion", "Suspected oral cancer", "Not done"] },
-    { "id": "scr_breast", "label": "Clinical breast examination", "type": "select", "opts": ["Normal", "Lump or other abnormal finding", "Not done", "Not applicable"] },
-    { "id": "scr_via", "label": "Cervical screening (VIA)", "type": "select", "opts": ["VIA negative", "VIA positive", "Suspicious of invasive cancer", "Not done", "Not applicable"] },
+    { "id": "scr_breast", "label": "Clinical breast examination", "type": "select", "opts": ["Normal", "Lump or other abnormal finding", "Not done", "Not applicable"], "hint": "women 30 to 65 years, once every 5 years (NP-NCD)" },
+    { "id": "scr_via", "label": "Cervical screening (VIA)", "type": "select", "opts": ["VIA negative", "VIA positive", "Suspicious of invasive cancer", "Not done", "Not applicable"], "hint": "women 30 to 65 years, once every 5 years (NP-NCD); WHO prefers HPV DNA testing where available" },
     { "id": "scr_bmi", "label": "BMI", "type": "number", "unit": "kg/m2", "set": "BMI" },
     { "id": "scr_referred", "label": "Referred to", "type": "text", "hint": "e.g. MO at PHC for BP confirmation, gynaecologist at CHC for VIA positive" },
     { "id": "scr_next", "label": "Next screening due", "type": "date", "hint": "BP and sugar every year; oral, breast and cervical every 5 years" }
@@ -81,8 +81,12 @@
    "title": "Immunisation",
    "target": "immunization_status",
    "fields": [
-    { "id": "imm_status", "label": "Status for age", "type": "select", "opts": ["Up to date", "Partially immunised", "Not immunised", "Not known (no card)"] },
+    { "id": "imm_group", "label": "Beneficiary", "type": "select", "opts": ["Infant or child under 5", "Child or adolescent 5 to 16 years", "Pregnant woman", "Other"] },
+    { "id": "imm_record", "label": "Record checked", "type": "select", "opts": ["MCP card", "U-WIN", "MCP card and U-WIN", "No record available"] },
+    { "id": "imm_status", "label": "Status for age", "type": "select", "opts": ["Up to date", "Partially immunised", "Not immunised", "Not known (no card)"], "hint": "against the National Immunisation Schedule; review doses on the Immunisation tab" },
     { "id": "imm_given_today", "label": "Given today", "type": "text", "hint": "Vaccine and dose number, as recorded on the MCP card" },
+    { "id": "imm_missed", "label": "Missed or delayed doses and catch-up plan", "type": "text", "hint": "catch up as the national schedule allows for the child's age" },
+    { "id": "imm_aefi", "label": "Adverse event after the last dose (AEFI)", "type": "select", "opts": ["None", "Minor: fever, pain or swelling at the site", "Serious or severe: reported under AEFI surveillance"] },
     { "id": "imm_due", "label": "Due next", "type": "text", "hint": "Vaccines due at the next visit" },
     { "id": "imm_due_date", "label": "Next due date", "type": "date" }
    ]
@@ -188,7 +192,8 @@
   { "org": "MoHFW, Government of India (NHSRC)", "title": "Revised Community Based Assessment Checklist (CBAC), 9 October 2020", "year": 2020, "url": "https://nhsrcindia.org/sites/default/files/2021-03/Revised%20Community%20Based%20Assessment%20Checklist%20%28CBAC%29-9th%20Oct%202020.pdf" },
   { "org": "MoHFW, Government of India", "title": "National Programme for Prevention and Control of Non-Communicable Diseases (NP-NCD): Training module for programme managers", "year": 2025, "url": "https://nhm.gov.in/New-Update-2025-26/Whats-new/Training-Modules-NCDs.pdf" },
   { "org": "MoHFW and MoWCD, Government of India", "title": "Mother and Child Protection Card, 2018 version", "year": 2018, "url": "https://www.childhealthtaskforce.org/sites/default/files/2018-11/India%20MCP%20Card_English_5.28.2018.pdf" },
-  { "org": "MoHFW, Government of India", "title": "Operational framework: management of common cancers", "year": 2016, "url": "https://nhsrcindia.org/sites/default/files/2021-03/Operational%20Framework%20Management%20of%20Common%20Cancers.pdf" }
+  { "org": "MoHFW, Government of India", "title": "Operational framework: management of common cancers", "year": 2016, "url": "https://nhsrcindia.org/sites/default/files/2021-03/Operational%20Framework%20Management%20of%20Common%20Cancers.pdf" },
+  { "org": "WHO", "title": "WHO guideline for screening and treatment of cervical pre-cancer lesions for cervical cancer prevention, second edition", "year": 2021, "url": "https://www.who.int/publications/i/item/9789240030824" }
  ],
  "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
 }

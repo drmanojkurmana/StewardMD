@@ -62,13 +62,25 @@
    "title": "Cervical screening (VIA)",
    "target": "external_genitilia_perineum",
    "fields": [
-    { "id": "via_result", "label": "VIA result", "type": "select", "opts": ["VIA negative", "VIA positive", "Suspicious of invasive cancer"] },
+    { "id": "via_result", "label": "VIA result", "type": "select", "opts": ["VIA negative", "VIA positive", "Suspicious of invasive cancer"], "hint": "India NP-NCD: VIA once every 5 years for women 30 to 65" },
     { "id": "via_scj", "label": "Squamocolumnar junction", "type": "select", "opts": ["Fully visible", "Partly visible", "Not visible"] },
     { "id": "via_speculum", "label": "Cervix on speculum", "type": "select", "opts": ["Healthy", "Cervicitis or discharge", "Ectropion", "Polyp", "Growth", "Irregular surface", "Bleeds on touch"] },
     { "id": "via_extent", "label": "Acetowhite lesion extent", "type": "select", "opts": ["No lesion", "1 quadrant", "2 quadrants", "More than 2 quadrants", "Extends into the canal or vagina"] },
     { "id": "via_ablation", "label": "Eligibility for ablation (cryotherapy or thermal)", "type": "select", "opts": ["Not applicable", "Eligible", "Not eligible, needs colposcopy and biopsy"] },
     { "id": "via_pap", "label": "Pap smear or HPV sample taken", "type": "check" },
     { "id": "via_details", "label": "Details", "type": "text", "hint": "e.g. dense acetowhite area at 3 to 6 o'clock touching the SCJ" }
+   ]
+  },
+  {
+   "id": "cervical-screening-hpv",
+   "title": "Cervical screening (HPV DNA)",
+   "target": "external_genitilia_perineum",
+   "fields": [
+    { "id": "hpv_group", "label": "Screening group", "type": "select", "opts": ["General population: from age 30, every 5 to 10 years", "Woman living with HIV: from age 25, every 3 to 5 years"], "hint": "WHO 2021: HPV DNA is the preferred primary screening test. India's NP-NCD programme uses VIA once every 5 years for women 30 to 65." },
+    { "id": "hpv_sample", "label": "Sample", "type": "select", "opts": ["Clinician-collected", "Self-collected"] },
+    { "id": "hpv_result", "label": "HPV result", "type": "select", "opts": ["HPV negative", "HPV 16 or 18 positive", "Other high-risk HPV positive", "High-risk HPV positive, type not reported", "Invalid, repeat the test"] },
+    { "id": "hpv_triage", "label": "Next step if HPV positive", "type": "select", "opts": ["Not needed (HPV negative)", "Screen and treat: ablation offered", "Triage by VIA", "Triage by colposcopy", "Triage by cytology", "Referred for triage"], "hint": "women living with HIV: WHO advises triage (partial genotyping, colposcopy, VIA or cytology) before treatment" },
+    { "id": "hpv_next", "label": "Next screening due", "type": "date", "hint": "HPV negative: in 5 to 10 years (3 to 5 years if living with HIV)" }
    ]
   },
   {
@@ -157,7 +169,8 @@
  "sources": [
   { "org": "MoHFW, Government of India", "title": "Operational framework: management of common cancers", "year": 2016, "url": "https://nhsrcindia.org/sites/default/files/2021-03/Operational%20Framework%20Management%20of%20Common%20Cancers.pdf" },
   { "org": "MoHFW, Government of India", "title": "National Programme for Prevention and Control of Non-Communicable Diseases (NP-NCD): Training module for programme managers", "year": 2025, "url": "https://nhm.gov.in/New-Update-2025-26/Whats-new/Training-Modules-NCDs.pdf" },
-  { "org": "MoHFW, Government of India (NHSRC)", "title": "Revised Community Based Assessment Checklist (CBAC), 9 October 2020", "year": 2020, "url": "https://nhsrcindia.org/sites/default/files/2021-03/Revised%20Community%20Based%20Assessment%20Checklist%20%28CBAC%29-9th%20Oct%202020.pdf" }
+  { "org": "MoHFW, Government of India (NHSRC)", "title": "Revised Community Based Assessment Checklist (CBAC), 9 October 2020", "year": 2020, "url": "https://nhsrcindia.org/sites/default/files/2021-03/Revised%20Community%20Based%20Assessment%20Checklist%20%28CBAC%29-9th%20Oct%202020.pdf" },
+  { "org": "WHO", "title": "WHO guideline for screening and treatment of cervical pre-cancer lesions for cervical cancer prevention, second edition", "year": 2021, "url": "https://www.who.int/publications/i/item/9789240030824" }
  ],
  "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
 }

@@ -16,6 +16,9 @@
    "fields": [
     { "id": "ckd_cause", "label": "Cause of CKD", "type": "select", "opts": ["Diabetic kidney disease", "Hypertensive", "Glomerulonephritis", "Polycystic kidney disease", "Obstructive uropathy or reflux", "Chronic interstitial nephritis (analgesic, herbal)", "Unknown cause", "Other"] },
     { "id": "ckd_known_since", "label": "Known since and baseline creatinine", "type": "text", "hint": "e.g. 2021, creatinine 1.8 mg/dL" },
+    { "id": "ckd_egfr", "label": "Latest eGFR (CKD-EPI 2021, no race term)", "type": "number", "unit": "mL/min/1.73 m2", "hint": "use the CKD stage tool or the CKD-EPI calculator" },
+    { "id": "ckd_uacr", "label": "Urine albumin-creatinine ratio (uACR)", "type": "number", "unit": "mg/g" },
+    { "id": "ckd_albuminuria", "label": "Albuminuria category (KDIGO)", "type": "select", "opts": ["A1: below 30 mg/g (below 3 mg/mmol)", "A2: 30 to 300 mg/g (3 to 30 mg/mmol)", "A3: above 300 mg/g (above 30 mg/mmol)", "Not yet tested"], "hint": "confirm a uACR of 30 mg/g or more on a first-morning urine sample (KDIGO 2024)" },
     { "id": "ckd_bp_control", "label": "Blood pressure control", "type": "select", "opts": ["At target", "Above target", "Low or postural symptoms", "Home readings not available"] },
     { "id": "ckd_oedema", "label": "Oedema", "type": "select", "opts": ["None", "Ankle, pitting", "Up to knees", "Periorbital", "Generalised (anasarca)"] },
     { "id": "uraemic_anorexia", "label": "Anorexia, nausea or vomiting", "type": "check" },

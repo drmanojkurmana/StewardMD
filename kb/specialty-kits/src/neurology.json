@@ -16,6 +16,7 @@
     { "id": "last_known_well", "label": "Last known well (date and time)", "type": "text", "hint": "for a wake-up stroke, when last seen normal" },
     { "id": "stroke_deficit", "label": "Deficit and onset", "type": "text", "hint": "e.g. sudden right face and arm weakness with slurred speech" },
     { "id": "nihss", "label": "NIHSS", "type": "number", "hint": "0 to 42; use the NIHSS calculator" },
+    { "id": "lams_score", "label": "LAMS (large vessel occlusion screen)", "type": "number", "unit": "/5", "hint": "4 or more suggests a large vessel occlusion: consider a thrombectomy-capable centre; use the LAMS calculator" },
     { "id": "stroke_glucose", "label": "Capillary blood glucose", "type": "number", "unit": "mg/dL", "set": "grbs" },
     { "id": "stroke_bp", "label": "Blood pressure", "type": "text", "unit": "mmHg", "hint": "e.g. 176/98" },
     { "id": "prestroke_mrs", "label": "Function before the stroke (mRS)", "type": "select", "opts": ["0: no symptoms", "1: no significant disability", "2: slight disability", "3: moderate disability", "4: moderately severe disability", "5: severe disability"] },
