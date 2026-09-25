@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-fhir-group-export.test.mjs - G9: FHIR Group (the ward census), Group/{id}/$export, POST
  * kick-off with a Parameters body, and the Admin Center download buttons.
  *

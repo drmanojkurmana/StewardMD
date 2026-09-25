@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/usage-guest-identity.test.mjs — a guest is capped per DEVICE, not per shared IP.
  *
  * THE BUG THIS FIXES: guest identity was `ip:<hash>`, so everyone behind one public address shared a

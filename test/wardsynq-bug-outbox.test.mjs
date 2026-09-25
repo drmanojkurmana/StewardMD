@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-bug-outbox.test.mjs - the Report Bug widget's device outbox against the real server route.
  *
  * The real wardsynq/site/bug-reporter.js runs in a small DOM double; its fetch is bridged to the real router

@@ -1,0 +1,3833 @@
+{
+ "id": "ct-live-neck-coronal",
+ "provenance": {
+  "images": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+  "licence": "CC BY 4.0",
+  "definitions": "Gray's Anatomy (1918); trachea, thyroid gland, neck vessels and right upper lobe written for this atlas",
+  "geometry": "EXPERT MASKS SUPPLIED WITH THE DATASET - no segmentation model was run. Subject s0021 of the TotalSegmentator dataset v2.0.1 (Zenodo 10047292), CC BY 4.0: a LIVING patient, study type 'ct neck', pathology field 'no_pathology', age 46, male, Siemens Sensation 64, 120 kVp, intravenous contrast (vessels about 80 HU), resampled to 1.5 mm isotropic by the dataset authors. Masks were drawn and reviewed by the dataset's authors, not by us.",
+  "clearedOn": "2026-08-17",
+  "subject": "s0021",
+  "dataset": "TotalSegmentator dataset v2.0.1 (Zenodo record 10047292)",
+  "doi": "10.5281/zenodo.10047292"
+ },
+ "categories": {
+  "viscus": {
+   "label": "Viscus",
+   "color": "#ffd479"
+  },
+  "gi-tract": {
+   "label": "GI tract",
+   "color": "#c9a06a"
+  },
+  "vessel-artery": {
+   "label": "Artery",
+   "color": "#ff8080"
+  },
+  "vessel-vein": {
+   "label": "Vein",
+   "color": "#8fb8ff"
+  },
+  "airway": {
+   "label": "Airway",
+   "color": "#7ee081"
+  },
+  "muscle": {
+   "label": "Muscle",
+   "color": "#e0a0c0"
+  },
+  "csf": {
+   "label": "Cord",
+   "color": "#b0c4de"
+  },
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  }
+ },
+ "structures": {
+  "aorta": {
+   "name": "Aorta",
+   "category": "vessel-artery",
+   "parent": "neck",
+   "definition": "The aorta is the main arterial trunk, conveying blood from the left ventricle to the body."
+  },
+  "autochthonous-back-muscle": {
+   "name": "Deep back muscles",
+   "category": "muscle",
+   "parent": "neck",
+   "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+  },
+  "brachiocephalic-trunk": {
+   "name": "Brachiocephalic trunk",
+   "category": "vessel-artery",
+   "parent": "neck",
+   "definition": "The brachiocephalic trunk is the first and largest branch of the aortic arch, ascending to the right of the trachea to divide into the right common carotid and right subclavian arteries."
+  },
+  "brachiocephalic-vein": {
+   "name": "Brachiocephalic vein",
+   "category": "vessel-vein",
+   "parent": "neck",
+   "definition": "The brachiocephalic veins form behind the sternal ends of the clavicles from the internal jugular and subclavian veins and unite to form the superior vena cava."
+  },
+  "cervical-vertebra": {
+   "name": "Cervical vertebra",
+   "category": "bone",
+   "parent": "neck",
+   "definition": "The cervical vertebrae are the smallest of the movable vertebrae and bear foramina in their transverse processes."
+  },
+  "clavicle": {
+   "name": "Clavicle",
+   "category": "bone",
+   "parent": "neck",
+   "definition": "The clavicle forms the anterior portion of the shoulder girdle."
+  },
+  "common-carotid-artery": {
+   "name": "Common carotid artery",
+   "category": "vessel-artery",
+   "parent": "neck",
+   "definition": "The common carotid arteries ascend in the neck within the carotid sheath beside the trachea and larynx, the right arising from the brachiocephalic trunk and the left from the aortic arch."
+  },
+  "esophagus": {
+   "name": "Oesophagus",
+   "category": "gi-tract",
+   "parent": "neck",
+   "definition": "The oesophagus is a muscular canal passing from the pharynx through the posterior mediastinum to the stomach."
+  },
+  "heart": {
+   "name": "Heart",
+   "category": "viscus",
+   "parent": "neck",
+   "definition": "The heart is a hollow muscular organ enclosed in the pericardium, occupying the middle mediastinum."
+  },
+  "lower-lobe-left": {
+   "name": "Lower lobe of left lung",
+   "category": "airway",
+   "parent": "neck",
+   "definition": "The lower lobe of the left lung lies posteroinferior to the oblique fissure."
+  },
+  "lower-lobe-right": {
+   "name": "Lower lobe of right lung",
+   "category": "airway",
+   "parent": "neck",
+   "definition": "The lower lobe of the right lung lies below and behind the oblique fissure."
+  },
+  "middle-lobe-right": {
+   "name": "Middle lobe of right lung",
+   "category": "airway",
+   "parent": "neck",
+   "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures."
+  },
+  "neck": {
+   "name": "Neck",
+   "category": "viscus"
+  },
+  "spinal-cord": {
+   "name": "Spinal cord",
+   "category": "csf",
+   "parent": "neck",
+   "definition": "The spinal cord is the elongated part of the central nervous system occupying the upper two-thirds of the vertebral canal."
+  },
+  "sternum": {
+   "name": "Sternum",
+   "category": "bone",
+   "parent": "neck",
+   "definition": "The sternum is a flat narrow bone forming the middle of the anterior thoracic wall."
+  },
+  "subclavian-artery": {
+   "name": "Subclavian artery",
+   "category": "vessel-artery",
+   "parent": "neck",
+   "definition": "The subclavian arteries arch over the apex of each lung to supply the upper limb, the right arising from the brachiocephalic trunk and the left from the aortic arch."
+  },
+  "superior-vena-cava": {
+   "name": "Superior vena cava",
+   "category": "vessel-vein",
+   "parent": "neck",
+   "definition": "The superior vena cava returns blood from the head, neck and upper limbs to the right atrium, formed by the union of the two brachiocephalic veins."
+  },
+  "thoracic-vertebra": {
+   "name": "Thoracic vertebra",
+   "category": "bone",
+   "parent": "neck",
+   "definition": "The thoracic vertebrae are distinguished by costal facets on the sides of their bodies."
+  },
+  "thyroid-gland": {
+   "name": "Thyroid gland",
+   "category": "viscus",
+   "parent": "neck",
+   "definition": "The thyroid gland is a vascular endocrine gland of two lateral lobes joined by an isthmus, clasping the front and sides of the upper trachea."
+  },
+  "trachea": {
+   "name": "Trachea",
+   "category": "airway",
+   "parent": "neck",
+   "definition": "The trachea is a tube of incomplete cartilaginous rings and membrane that descends from the lower border of the larynx to divide into the two main bronchi in the thorax."
+  },
+  "upper-lobe-left": {
+   "name": "Upper lobe of left lung",
+   "category": "airway",
+   "parent": "neck",
+   "definition": "The left lung is divided by the oblique fissure into an upper and a lower lobe; the upper lobe includes the lingula."
+  },
+  "upper-lobe-right": {
+   "name": "Upper lobe of right lung",
+   "category": "airway",
+   "parent": "neck",
+   "definition": "The upper lobe of the right lung lies above the horizontal fissure and in front of the upper part of the oblique fissure."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-live-neck-coronal/001.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.084,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-live-neck-coronal/002.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0795,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "sternum",
+     "x": 52.3,
+     "y": 95.3
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-live-neck-coronal/003.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.075,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-right",
+     "x": 63.1,
+     "y": 99.6
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 67.5,
+     "y": 99.6
+    },
+    {
+     "s": "sternum",
+     "x": 52.2,
+     "y": 94.7
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-live-neck-coronal/004.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.072,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 32.8,
+     "y": 99.1
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 63.3,
+     "y": 98.2
+    },
+    {
+     "s": "sternum",
+     "x": 52.3,
+     "y": 94.2
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-live-neck-coronal/005.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0675,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 31.6,
+     "y": 98.4
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 62.8,
+     "y": 97.1
+    },
+    {
+     "s": "heart",
+     "x": 41.3,
+     "y": 98.1
+    },
+    {
+     "s": "sternum",
+     "x": 52.6,
+     "y": 90.5
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-live-neck-coronal/006.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.063,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 29.8,
+     "y": 98.0
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 63.0,
+     "y": 95.7
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 55.9,
+     "y": 99.8
+    },
+    {
+     "s": "heart",
+     "x": 42.7,
+     "y": 97.2
+    },
+    {
+     "s": "clavicle",
+     "x": 72.2,
+     "y": 66.7
+    },
+    {
+     "s": "sternum",
+     "x": 52.4,
+     "y": 88.1
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-live-neck-coronal/007.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0585,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 32.8,
+     "y": 90.8
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 63.9,
+     "y": 94.3
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 57.8,
+     "y": 99.6
+    },
+    {
+     "s": "trachea",
+     "x": 52.3,
+     "y": 53.7
+    },
+    {
+     "s": "heart",
+     "x": 43.0,
+     "y": 96.6
+    },
+    {
+     "s": "clavicle",
+     "x": 41.6,
+     "y": 68.5
+    },
+    {
+     "s": "clavicle",
+     "x": 71.3,
+     "y": 66.1
+    },
+    {
+     "s": "sternum",
+     "x": 53.6,
+     "y": 84.1
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-live-neck-coronal/008.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.054,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 31.9,
+     "y": 89.7
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 72.8,
+     "y": 93.2
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 58.9,
+     "y": 99.6
+    },
+    {
+     "s": "trachea",
+     "x": 52.9,
+     "y": 54.7
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 57.9,
+     "y": 54.9
+    },
+    {
+     "s": "heart",
+     "x": 43.0,
+     "y": 96.0
+    },
+    {
+     "s": "clavicle",
+     "x": 41.5,
+     "y": 67.2
+    },
+    {
+     "s": "clavicle",
+     "x": 66.2,
+     "y": 68.5
+    },
+    {
+     "s": "sternum",
+     "x": 53.6,
+     "y": 79.5
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-live-neck-coronal/009.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.051,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 30.0,
+     "y": 90.1
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 73.7,
+     "y": 92.7
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 60.3,
+     "y": 99.3
+    },
+    {
+     "s": "trachea",
+     "x": 52.9,
+     "y": 55.3
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 47.1,
+     "y": 54.7
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 58.7,
+     "y": 54.9
+    },
+    {
+     "s": "heart",
+     "x": 42.7,
+     "y": 95.8
+    },
+    {
+     "s": "clavicle",
+     "x": 41.6,
+     "y": 66.9
+    },
+    {
+     "s": "clavicle",
+     "x": 66.1,
+     "y": 68.2
+    },
+    {
+     "s": "sternum",
+     "x": 48.6,
+     "y": 77.6
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-live-neck-coronal/010.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0465,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 29.8,
+     "y": 88.3
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 74.5,
+     "y": 91.8
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 61.9,
+     "y": 99.3
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 82.1,
+     "y": 99.6
+    },
+    {
+     "s": "trachea",
+     "x": 52.9,
+     "y": 55.6
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 46.7,
+     "y": 55.2
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 59.9,
+     "y": 54.7
+    },
+    {
+     "s": "heart",
+     "x": 40.1,
+     "y": 96.7
+    },
+    {
+     "s": "heart",
+     "x": 56.2,
+     "y": 97.8
+    },
+    {
+     "s": "aorta",
+     "x": 54.3,
+     "y": 85.9
+    },
+    {
+     "s": "clavicle",
+     "x": 41.2,
+     "y": 66.7
+    },
+    {
+     "s": "clavicle",
+     "x": 66.1,
+     "y": 68.4
+    },
+    {
+     "s": "sternum",
+     "x": 49.1,
+     "y": 76.1
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-live-neck-coronal/011.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.042,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 28.2,
+     "y": 88.7
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 75.1,
+     "y": 90.5
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 62.4,
+     "y": 99.0
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 81.4,
+     "y": 99.3
+    },
+    {
+     "s": "trachea",
+     "x": 52.9,
+     "y": 56.7
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 46.3,
+     "y": 54.6
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 59.9,
+     "y": 54.6
+    },
+    {
+     "s": "heart",
+     "x": 37.6,
+     "y": 96.0
+    },
+    {
+     "s": "heart",
+     "x": 57.1,
+     "y": 98.2
+    },
+    {
+     "s": "aorta",
+     "x": 54.8,
+     "y": 88.4
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 64.9,
+     "y": 41.8
+    },
+    {
+     "s": "clavicle",
+     "x": 41.7,
+     "y": 67.7
+    },
+    {
+     "s": "clavicle",
+     "x": 65.9,
+     "y": 69.5
+    },
+    {
+     "s": "sternum",
+     "x": 49.2,
+     "y": 75.2
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-live-neck-coronal/012.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0375,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 27.7,
+     "y": 87.9
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 75.4,
+     "y": 89.3
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 63.3,
+     "y": 99.1
+    },
+    {
+     "s": "esophagus",
+     "x": 53.3,
+     "y": 53.6
+    },
+    {
+     "s": "trachea",
+     "x": 52.7,
+     "y": 59.2
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 46.4,
+     "y": 54.7
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 59.3,
+     "y": 54.9
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 52.2,
+     "y": 33.3
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 54.5,
+     "y": 40.9
+    },
+    {
+     "s": "heart",
+     "x": 41.7,
+     "y": 90.3
+    },
+    {
+     "s": "heart",
+     "x": 57.9,
+     "y": 98.1
+    },
+    {
+     "s": "aorta",
+     "x": 54.7,
+     "y": 87.8
+    },
+    {
+     "s": "brachiocephalic-trunk",
+     "x": 58.2,
+     "y": 66.9
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 59.7,
+     "y": 64.4
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 63.6,
+     "y": 47.7
+    },
+    {
+     "s": "clavicle",
+     "x": 41.6,
+     "y": 68.7
+    },
+    {
+     "s": "clavicle",
+     "x": 84.4,
+     "y": 58.2
+    },
+    {
+     "s": "sternum",
+     "x": 41.3,
+     "y": 77.3
+    },
+    {
+     "s": "sternum",
+     "x": 50.4,
+     "y": 74.5
+    },
+    {
+     "s": "sternum",
+     "x": 58.5,
+     "y": 75.9
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-live-neck-coronal/013.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0345,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 27.8,
+     "y": 87.0
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 74.9,
+     "y": 88.4
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 79.5,
+     "y": 98.9
+    },
+    {
+     "s": "esophagus",
+     "x": 52.9,
+     "y": 54.2
+    },
+    {
+     "s": "trachea",
+     "x": 52.9,
+     "y": 60.6
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 46.7,
+     "y": 55.5
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 58.9,
+     "y": 55.3
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 51.0,
+     "y": 32.7
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 53.1,
+     "y": 39.2
+    },
+    {
+     "s": "heart",
+     "x": 41.6,
+     "y": 89.9
+    },
+    {
+     "s": "heart",
+     "x": 58.3,
+     "y": 98.1
+    },
+    {
+     "s": "aorta",
+     "x": 54.6,
+     "y": 86.5
+    },
+    {
+     "s": "brachiocephalic-trunk",
+     "x": 55.7,
+     "y": 68.2
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 43.4,
+     "y": 48.3
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 59.9,
+     "y": 64.5
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 58.2,
+     "y": 78.3
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 66.5,
+     "y": 67.0
+    },
+    {
+     "s": "clavicle",
+     "x": 28.8,
+     "y": 56.3
+    },
+    {
+     "s": "clavicle",
+     "x": 40.6,
+     "y": 68.4
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-live-neck-coronal/014.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.03,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 26.8,
+     "y": 87.0
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 74.5,
+     "y": 87.3
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 78.1,
+     "y": 98.7
+    },
+    {
+     "s": "esophagus",
+     "x": 52.9,
+     "y": 54.8
+    },
+    {
+     "s": "trachea",
+     "x": 52.9,
+     "y": 61.5
+    },
+    {
+     "s": "thyroid-gland",
+     "x": 47.3,
+     "y": 54.5
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 45.7,
+     "y": 14.6
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 49.5,
+     "y": 38.7
+    },
+    {
+     "s": "heart",
+     "x": 32.7,
+     "y": 98.1
+    },
+    {
+     "s": "heart",
+     "x": 41.6,
+     "y": 89.1
+    },
+    {
+     "s": "heart",
+     "x": 58.9,
+     "y": 98.3
+    },
+    {
+     "s": "aorta",
+     "x": 54.6,
+     "y": 87.0
+    },
+    {
+     "s": "brachiocephalic-trunk",
+     "x": 52.9,
+     "y": 69.9
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 61.1,
+     "y": 64.6
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 44.0,
+     "y": 51.4
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 61.9,
+     "y": 54.7
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 42.5,
+     "y": 78.1
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 65.7,
+     "y": 68.0
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 62.4,
+     "y": 78.5
+    },
+    {
+     "s": "clavicle",
+     "x": 27.8,
+     "y": 55.5
+    },
+    {
+     "s": "clavicle",
+     "x": 86.7,
+     "y": 57.0
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-live-neck-coronal/015.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0255,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 27.3,
+     "y": 85.3
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 75.1,
+     "y": 86.4
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 78.3,
+     "y": 98.3
+    },
+    {
+     "s": "esophagus",
+     "x": 52.9,
+     "y": 55.7
+    },
+    {
+     "s": "trachea",
+     "x": 52.8,
+     "y": 62.1
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 51.9,
+     "y": 19.6
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 56.8,
+     "y": 43.9
+    },
+    {
+     "s": "heart",
+     "x": 32.8,
+     "y": 97.9
+    },
+    {
+     "s": "heart",
+     "x": 41.6,
+     "y": 88.4
+    },
+    {
+     "s": "heart",
+     "x": 58.9,
+     "y": 98.9
+    },
+    {
+     "s": "aorta",
+     "x": 54.0,
+     "y": 84.4
+    },
+    {
+     "s": "brachiocephalic-trunk",
+     "x": 52.0,
+     "y": 71.0
+    },
+    {
+     "s": "brachiocephalic-trunk",
+     "x": 59.3,
+     "y": 66.7
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 62.5,
+     "y": 62.8
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 45.3,
+     "y": 64.2
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 41.2,
+     "y": 76.9
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 64.7,
+     "y": 69.2
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 61.6,
+     "y": 93.2
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 62.4,
+     "y": 78.6
+    },
+    {
+     "s": "clavicle",
+     "x": 26.7,
+     "y": 54.2
+    },
+    {
+     "s": "clavicle",
+     "x": 88.0,
+     "y": 56.2
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-live-neck-coronal/016.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.021,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 26.5,
+     "y": 85.5
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 77.3,
+     "y": 85.9
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 80.9,
+     "y": 98.1
+    },
+    {
+     "s": "esophagus",
+     "x": 52.6,
+     "y": 57.1
+    },
+    {
+     "s": "trachea",
+     "x": 52.9,
+     "y": 63.5
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 50.8,
+     "y": 37.5
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 51.7,
+     "y": 19.5
+    },
+    {
+     "s": "heart",
+     "x": 34.4,
+     "y": 97.9
+    },
+    {
+     "s": "heart",
+     "x": 41.8,
+     "y": 87.8
+    },
+    {
+     "s": "heart",
+     "x": 58.0,
+     "y": 99.3
+    },
+    {
+     "s": "aorta",
+     "x": 53.4,
+     "y": 83.1
+    },
+    {
+     "s": "brachiocephalic-trunk",
+     "x": 51.9,
+     "y": 71.6
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 64.9,
+     "y": 60.4
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 81.6,
+     "y": 63.4
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 45.5,
+     "y": 72.0
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 39.9,
+     "y": 67.3
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 63.8,
+     "y": 70.9
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 62.9,
+     "y": 79.1
+    },
+    {
+     "s": "clavicle",
+     "x": 25.4,
+     "y": 52.6
+    },
+    {
+     "s": "clavicle",
+     "x": 89.5,
+     "y": 55.5
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-live-neck-coronal/017.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0165,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 26.0,
+     "y": 85.3
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 78.6,
+     "y": 86.1
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 74.4,
+     "y": 98.1
+    },
+    {
+     "s": "esophagus",
+     "x": 51.5,
+     "y": 58.7
+    },
+    {
+     "s": "trachea",
+     "x": 53.2,
+     "y": 65.4
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.6,
+     "y": 54.9
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 51.0,
+     "y": 42.7
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 51.7,
+     "y": 19.8
+    },
+    {
+     "s": "heart",
+     "x": 33.4,
+     "y": 97.7
+    },
+    {
+     "s": "heart",
+     "x": 42.1,
+     "y": 87.2
+    },
+    {
+     "s": "aorta",
+     "x": 50.6,
+     "y": 78.6
+    },
+    {
+     "s": "brachiocephalic-trunk",
+     "x": 50.3,
+     "y": 72.2
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 43.8,
+     "y": 61.0
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 76.9,
+     "y": 61.4
+    },
+    {
+     "s": "common-carotid-artery",
+     "x": 45.7,
+     "y": 72.0
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 40.2,
+     "y": 71.6
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 62.8,
+     "y": 73.4
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 63.3,
+     "y": 80.2
+    },
+    {
+     "s": "clavicle",
+     "x": 24.6,
+     "y": 51.7
+    },
+    {
+     "s": "clavicle",
+     "x": 90.4,
+     "y": 55.1
+    },
+    {
+     "s": "spinal-cord",
+     "x": 52.4,
+     "y": 32.9
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-live-neck-coronal/018.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0135,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 25.9,
+     "y": 85.1
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 79.1,
+     "y": 85.7
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 75.5,
+     "y": 97.9
+    },
+    {
+     "s": "esophagus",
+     "x": 51.3,
+     "y": 60.4
+    },
+    {
+     "s": "trachea",
+     "x": 53.3,
+     "y": 66.5
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 53.8,
+     "y": 55.6
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 44.6,
+     "y": 40.8
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 56.9,
+     "y": 48.8
+    },
+    {
+     "s": "heart",
+     "x": 32.7,
+     "y": 97.7
+    },
+    {
+     "s": "heart",
+     "x": 42.2,
+     "y": 87.0
+    },
+    {
+     "s": "aorta",
+     "x": 50.6,
+     "y": 78.5
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 23.2,
+     "y": 64.2
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 43.8,
+     "y": 61.1
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 40.1,
+     "y": 71.9
+    },
+    {
+     "s": "brachiocephalic-vein",
+     "x": 62.6,
+     "y": 74.4
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 62.9,
+     "y": 88.7
+    },
+    {
+     "s": "clavicle",
+     "x": 24.1,
+     "y": 50.9
+    },
+    {
+     "s": "clavicle",
+     "x": 91.5,
+     "y": 54.7
+    },
+    {
+     "s": "spinal-cord",
+     "x": 49.7,
+     "y": 16.5
+    },
+    {
+     "s": "spinal-cord",
+     "x": 52.4,
+     "y": 34.0
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-live-neck-coronal/019.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.009,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 25.1,
+     "y": 85.4
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 79.0,
+     "y": 82.8
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 74.1,
+     "y": 97.7
+    },
+    {
+     "s": "esophagus",
+     "x": 49.6,
+     "y": 62.8
+    },
+    {
+     "s": "trachea",
+     "x": 54.0,
+     "y": 68.5
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 53.2,
+     "y": 56.6
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 44.6,
+     "y": 28.0
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 50.8,
+     "y": 48.6
+    },
+    {
+     "s": "heart",
+     "x": 32.7,
+     "y": 97.9
+    },
+    {
+     "s": "heart",
+     "x": 38.6,
+     "y": 99.1
+    },
+    {
+     "s": "heart",
+     "x": 42.6,
+     "y": 87.0
+    },
+    {
+     "s": "heart",
+     "x": 50.3,
+     "y": 97.8
+    },
+    {
+     "s": "aorta",
+     "x": 50.8,
+     "y": 78.9
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 20.9,
+     "y": 65.3
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 41.7,
+     "y": 68.5
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 62.9,
+     "y": 87.2
+    },
+    {
+     "s": "clavicle",
+     "x": 23.3,
+     "y": 49.9
+    },
+    {
+     "s": "clavicle",
+     "x": 92.5,
+     "y": 54.5
+    },
+    {
+     "s": "spinal-cord",
+     "x": 51.0,
+     "y": 17.1
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-live-neck-coronal/020.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0045,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 24.4,
+     "y": 86.0
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 77.9,
+     "y": 79.2
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 74.4,
+     "y": 97.4
+    },
+    {
+     "s": "esophagus",
+     "x": 49.9,
+     "y": 64.8
+    },
+    {
+     "s": "trachea",
+     "x": 55.6,
+     "y": 71.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.6,
+     "y": 62.0
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.0,
+     "y": 55.7
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 44.4,
+     "y": 45.8
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 47.3,
+     "y": 41.7
+    },
+    {
+     "s": "heart",
+     "x": 32.1,
+     "y": 98.1
+    },
+    {
+     "s": "heart",
+     "x": 42.2,
+     "y": 86.7
+    },
+    {
+     "s": "heart",
+     "x": 46.0,
+     "y": 97.2
+    },
+    {
+     "s": "aorta",
+     "x": 45.4,
+     "y": 76.4
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 33.8,
+     "y": 58.3
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 41.7,
+     "y": 70.0
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 63.0,
+     "y": 85.7
+    },
+    {
+     "s": "clavicle",
+     "x": 22.4,
+     "y": 48.9
+    },
+    {
+     "s": "spinal-cord",
+     "x": 51.4,
+     "y": 17.5
+    },
+    {
+     "s": "spinal-cord",
+     "x": 53.4,
+     "y": 43.7
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-live-neck-coronal/021.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    0.0,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 22.3,
+     "y": 88.8
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 75.1,
+     "y": 75.2
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 75.0,
+     "y": 97.2
+    },
+    {
+     "s": "esophagus",
+     "x": 49.7,
+     "y": 66.9
+    },
+    {
+     "s": "trachea",
+     "x": 56.1,
+     "y": 73.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 55.0,
+     "y": 62.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.4,
+     "y": 54.8
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 44.3,
+     "y": 46.2
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 52.4,
+     "y": 40.2
+    },
+    {
+     "s": "heart",
+     "x": 32.4,
+     "y": 98.4
+    },
+    {
+     "s": "heart",
+     "x": 41.8,
+     "y": 85.7
+    },
+    {
+     "s": "aorta",
+     "x": 44.1,
+     "y": 76.1
+    },
+    {
+     "s": "subclavian-artery",
+     "x": 42.3,
+     "y": 70.9
+    },
+    {
+     "s": "superior-vena-cava",
+     "x": 62.9,
+     "y": 85.4
+    },
+    {
+     "s": "clavicle",
+     "x": 22.1,
+     "y": 48.2
+    },
+    {
+     "s": "clavicle",
+     "x": 95.8,
+     "y": 53.6
+    },
+    {
+     "s": "spinal-cord",
+     "x": 51.5,
+     "y": 17.2
+    },
+    {
+     "s": "spinal-cord",
+     "x": 53.7,
+     "y": 45.5
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-live-neck-coronal/022.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0045,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 20.9,
+     "y": 89.9
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 74.9,
+     "y": 74.1
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 75.1,
+     "y": 97.0
+    },
+    {
+     "s": "esophagus",
+     "x": 49.2,
+     "y": 69.5
+    },
+    {
+     "s": "trachea",
+     "x": 55.4,
+     "y": 81.8
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 50.9,
+     "y": 55.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.1,
+     "y": 62.8
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 48.3,
+     "y": 47.2
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 49.0,
+     "y": 23.1
+    },
+    {
+     "s": "heart",
+     "x": 31.9,
+     "y": 99.1
+    },
+    {
+     "s": "heart",
+     "x": 61.6,
+     "y": 91.7
+    },
+    {
+     "s": "aorta",
+     "x": 43.5,
+     "y": 76.1
+    },
+    {
+     "s": "clavicle",
+     "x": 21.8,
+     "y": 47.6
+    },
+    {
+     "s": "clavicle",
+     "x": 96.8,
+     "y": 53.6
+    },
+    {
+     "s": "spinal-cord",
+     "x": 51.4,
+     "y": 16.7
+    },
+    {
+     "s": "spinal-cord",
+     "x": 54.3,
+     "y": 49.3
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-live-neck-coronal/023.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0075,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 20.4,
+     "y": 90.0
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 75.4,
+     "y": 74.0
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 75.5,
+     "y": 97.0
+    },
+    {
+     "s": "esophagus",
+     "x": 49.4,
+     "y": 70.7
+    },
+    {
+     "s": "trachea",
+     "x": 55.1,
+     "y": 81.9
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 50.5,
+     "y": 55.5
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.6,
+     "y": 62.2
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 48.7,
+     "y": 47.6
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 51.0,
+     "y": 22.9
+    },
+    {
+     "s": "heart",
+     "x": 40.2,
+     "y": 85.4
+    },
+    {
+     "s": "heart",
+     "x": 45.7,
+     "y": 96.8
+    },
+    {
+     "s": "heart",
+     "x": 62.6,
+     "y": 91.9
+    },
+    {
+     "s": "aorta",
+     "x": 42.7,
+     "y": 76.1
+    },
+    {
+     "s": "clavicle",
+     "x": 21.3,
+     "y": 47.1
+    },
+    {
+     "s": "clavicle",
+     "x": 97.4,
+     "y": 53.2
+    },
+    {
+     "s": "spinal-cord",
+     "x": 50.9,
+     "y": 16.0
+    },
+    {
+     "s": "spinal-cord",
+     "x": 54.3,
+     "y": 51.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 62.4,
+     "y": 44.2
+    }
+   ]
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-live-neck-coronal/024.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.012,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 19.6,
+     "y": 90.2
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 75.4,
+     "y": 73.2
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 78.4,
+     "y": 97.2
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 64.7,
+     "y": 99.0
+    },
+    {
+     "s": "esophagus",
+     "x": 49.7,
+     "y": 76.2
+    },
+    {
+     "s": "trachea",
+     "x": 54.3,
+     "y": 82.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 42.5,
+     "y": 49.7
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.6,
+     "y": 61.3
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 50.1,
+     "y": 22.8
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 54.1,
+     "y": 46.2
+    },
+    {
+     "s": "heart",
+     "x": 39.9,
+     "y": 85.4
+    },
+    {
+     "s": "heart",
+     "x": 45.7,
+     "y": 96.9
+    },
+    {
+     "s": "heart",
+     "x": 65.4,
+     "y": 92.7
+    },
+    {
+     "s": "aorta",
+     "x": 41.8,
+     "y": 76.4
+    },
+    {
+     "s": "clavicle",
+     "x": 98.3,
+     "y": 53.1
+    },
+    {
+     "s": "spinal-cord",
+     "x": 54.1,
+     "y": 53.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.2,
+     "y": 43.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 62.6,
+     "y": 44.9
+    }
+   ]
+  },
+  {
+   "i": 25,
+   "img": "/atlas/ct-live-neck-coronal/025.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0165,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 26.7,
+     "y": 75.1
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 75.4,
+     "y": 73.0
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 85.7,
+     "y": 97.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 65.1,
+     "y": 99.0
+    },
+    {
+     "s": "esophagus",
+     "x": 48.9,
+     "y": 79.1
+    },
+    {
+     "s": "esophagus",
+     "x": 52.4,
+     "y": 83.9
+    },
+    {
+     "s": "trachea",
+     "x": 46.9,
+     "y": 87.2
+    },
+    {
+     "s": "trachea",
+     "x": 61.9,
+     "y": 87.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 47.6,
+     "y": 52.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 51.7,
+     "y": 61.6
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 51.0,
+     "y": 23.0
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 54.2,
+     "y": 46.7
+    },
+    {
+     "s": "heart",
+     "x": 38.5,
+     "y": 85.7
+    },
+    {
+     "s": "heart",
+     "x": 45.7,
+     "y": 97.1
+    },
+    {
+     "s": "heart",
+     "x": 69.4,
+     "y": 93.7
+    },
+    {
+     "s": "aorta",
+     "x": 42.0,
+     "y": 76.6
+    },
+    {
+     "s": "clavicle",
+     "x": 12.5,
+     "y": 42.5
+    },
+    {
+     "s": "clavicle",
+     "x": 99.2,
+     "y": 52.2
+    },
+    {
+     "s": "spinal-cord",
+     "x": 54.6,
+     "y": 55.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.2,
+     "y": 44.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.1,
+     "y": 46.4
+    }
+   ]
+  },
+  {
+   "i": 26,
+   "img": "/atlas/ct-live-neck-coronal/026.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.021,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 18.1,
+     "y": 91.2
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 75.9,
+     "y": 74.0
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 83.5,
+     "y": 97.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 59.9,
+     "y": 95.4
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 66.2,
+     "y": 98.9
+    },
+    {
+     "s": "esophagus",
+     "x": 50.5,
+     "y": 88.0
+    },
+    {
+     "s": "trachea",
+     "x": 42.7,
+     "y": 89.0
+    },
+    {
+     "s": "trachea",
+     "x": 62.8,
+     "y": 88.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 51.0,
+     "y": 62.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.7,
+     "y": 68.7
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 49.6,
+     "y": 23.7
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 54.5,
+     "y": 46.8
+    },
+    {
+     "s": "heart",
+     "x": 37.2,
+     "y": 85.9
+    },
+    {
+     "s": "heart",
+     "x": 45.7,
+     "y": 97.9
+    },
+    {
+     "s": "heart",
+     "x": 70.5,
+     "y": 94.4
+    },
+    {
+     "s": "aorta",
+     "x": 42.0,
+     "y": 77.2
+    },
+    {
+     "s": "clavicle",
+     "x": 13.6,
+     "y": 42.3
+    },
+    {
+     "s": "spinal-cord",
+     "x": 55.0,
+     "y": 58.2
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.2,
+     "y": 45.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.3,
+     "y": 47.6
+    }
+   ]
+  },
+  {
+   "i": 27,
+   "img": "/atlas/ct-live-neck-coronal/027.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.024,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 18.1,
+     "y": 91.2
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 78.4,
+     "y": 79.1
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 84.6,
+     "y": 97.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 60.3,
+     "y": 95.3
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 61.2,
+     "y": 86.1
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 67.9,
+     "y": 90.1
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 68.0,
+     "y": 99.1
+    },
+    {
+     "s": "esophagus",
+     "x": 49.9,
+     "y": 90.3
+    },
+    {
+     "s": "trachea",
+     "x": 40.8,
+     "y": 89.4
+    },
+    {
+     "s": "trachea",
+     "x": 62.8,
+     "y": 88.7
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 55.4,
+     "y": 76.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 55.7,
+     "y": 67.9
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 52.7,
+     "y": 39.4
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 54.6,
+     "y": 46.4
+    },
+    {
+     "s": "heart",
+     "x": 36.2,
+     "y": 86.1
+    },
+    {
+     "s": "heart",
+     "x": 71.2,
+     "y": 94.8
+    },
+    {
+     "s": "aorta",
+     "x": 42.0,
+     "y": 77.5
+    },
+    {
+     "s": "clavicle",
+     "x": 14.3,
+     "y": 41.9
+    },
+    {
+     "s": "spinal-cord",
+     "x": 55.1,
+     "y": 59.6
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.3,
+     "y": 45.9
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.1,
+     "y": 48.3
+    }
+   ]
+  },
+  {
+   "i": 28,
+   "img": "/atlas/ct-live-neck-coronal/028.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0285,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 18.8,
+     "y": 90.8
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 77.7,
+     "y": 77.5
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 89.9,
+     "y": 96.8
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 61.9,
+     "y": 96.6
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 67.7,
+     "y": 99.2
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 68.1,
+     "y": 89.9
+    },
+    {
+     "s": "esophagus",
+     "x": 49.5,
+     "y": 94.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 52.8,
+     "y": 68.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.5,
+     "y": 75.5
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 55.2,
+     "y": 45.7
+    },
+    {
+     "s": "heart",
+     "x": 35.2,
+     "y": 86.5
+    },
+    {
+     "s": "heart",
+     "x": 71.6,
+     "y": 95.6
+    },
+    {
+     "s": "aorta",
+     "x": 42.9,
+     "y": 80.1
+    },
+    {
+     "s": "clavicle",
+     "x": 14.8,
+     "y": 41.9
+    },
+    {
+     "s": "spinal-cord",
+     "x": 55.1,
+     "y": 61.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.3,
+     "y": 47.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.3,
+     "y": 49.5
+    }
+   ]
+  },
+  {
+   "i": 29,
+   "img": "/atlas/ct-live-neck-coronal/029.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.033,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 18.9,
+     "y": 90.5
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 36.6,
+     "y": 94.8
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 78.3,
+     "y": 77.4
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 87.1,
+     "y": 95.6
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 66.1,
+     "y": 89.8
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 69.6,
+     "y": 99.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 43.5,
+     "y": 55.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 51.9,
+     "y": 68.5
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 55.7,
+     "y": 44.9
+    },
+    {
+     "s": "heart",
+     "x": 34.7,
+     "y": 86.9
+    },
+    {
+     "s": "aorta",
+     "x": 42.9,
+     "y": 80.6
+    },
+    {
+     "s": "clavicle",
+     "x": 13.8,
+     "y": 42.2
+    },
+    {
+     "s": "spinal-cord",
+     "x": 55.5,
+     "y": 64.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.6,
+     "y": 48.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.5,
+     "y": 51.3
+    }
+   ]
+  },
+  {
+   "i": 30,
+   "img": "/atlas/ct-live-neck-coronal/030.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0375,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 27.4,
+     "y": 75.4
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 36.0,
+     "y": 95.1
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 38.6,
+     "y": 94.7
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 79.5,
+     "y": 77.9
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 68.6,
+     "y": 91.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.8,
+     "y": 82.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 57.8,
+     "y": 74.4
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 56.2,
+     "y": 45.1
+    },
+    {
+     "s": "heart",
+     "x": 34.6,
+     "y": 88.0
+    },
+    {
+     "s": "aorta",
+     "x": 43.8,
+     "y": 83.5
+    },
+    {
+     "s": "spinal-cord",
+     "x": 55.7,
+     "y": 67.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.7,
+     "y": 49.4
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.3,
+     "y": 52.1
+    }
+   ]
+  },
+  {
+   "i": 31,
+   "img": "/atlas/ct-live-neck-coronal/031.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.042,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 28.3,
+     "y": 75.3
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 32.1,
+     "y": 99.6
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 34.3,
+     "y": 96.6
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 37.2,
+     "y": 85.2
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 37.5,
+     "y": 95.6
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 38.4,
+     "y": 92.0
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 79.1,
+     "y": 77.8
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 70.7,
+     "y": 93.5
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 53.1,
+     "y": 75.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 57.7,
+     "y": 81.8
+    },
+    {
+     "s": "heart",
+     "x": 33.7,
+     "y": 89.2
+    },
+    {
+     "s": "aorta",
+     "x": 43.5,
+     "y": 83.9
+    },
+    {
+     "s": "spinal-cord",
+     "x": 56.2,
+     "y": 69.0
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.8,
+     "y": 50.9
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.5,
+     "y": 55.6
+    }
+   ]
+  },
+  {
+   "i": 32,
+   "img": "/atlas/ct-live-neck-coronal/032.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.045,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 28.4,
+     "y": 76.4
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 31.0,
+     "y": 99.8
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 37.5,
+     "y": 95.1
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 79.1,
+     "y": 78.2
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 71.4,
+     "y": 93.4
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 46.7,
+     "y": 63.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.8,
+     "y": 81.3
+    },
+    {
+     "s": "heart",
+     "x": 33.4,
+     "y": 89.9
+    },
+    {
+     "s": "aorta",
+     "x": 44.1,
+     "y": 89.9
+    },
+    {
+     "s": "spinal-cord",
+     "x": 56.5,
+     "y": 71.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.3,
+     "y": 54.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.6,
+     "y": 55.8
+    }
+   ]
+  },
+  {
+   "i": 33,
+   "img": "/atlas/ct-live-neck-coronal/033.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0495,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 30.5,
+     "y": 75.0
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 27.6,
+     "y": 98.7
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 37.5,
+     "y": 86.5
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 44.1,
+     "y": 79.9
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 79.2,
+     "y": 78.9
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 73.0,
+     "y": 93.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.6,
+     "y": 89.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.4,
+     "y": 65.6
+    },
+    {
+     "s": "heart",
+     "x": 33.2,
+     "y": 90.7
+    },
+    {
+     "s": "aorta",
+     "x": 44.0,
+     "y": 89.9
+    },
+    {
+     "s": "spinal-cord",
+     "x": 56.8,
+     "y": 75.0
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.5,
+     "y": 55.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.9,
+     "y": 57.3
+    }
+   ]
+  },
+  {
+   "i": 34,
+   "img": "/atlas/ct-live-neck-coronal/034.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.054,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 29.8,
+     "y": 75.8
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 37.0,
+     "y": 90.9
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 79.8,
+     "y": 79.5
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 74.0,
+     "y": 93.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.8,
+     "y": 89.0
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 65.6,
+     "y": 70.6
+    },
+    {
+     "s": "spinal-cord",
+     "x": 56.8,
+     "y": 77.4
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.5,
+     "y": 56.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 64.4,
+     "y": 62.0
+    }
+   ]
+  },
+  {
+   "i": 35,
+   "img": "/atlas/ct-live-neck-coronal/035.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0585,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 30.2,
+     "y": 76.4
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 36.4,
+     "y": 92.9
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 81.9,
+     "y": 81.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 75.0,
+     "y": 92.7
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 47.6,
+     "y": 71.5
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.3,
+     "y": 96.4
+    },
+    {
+     "s": "spinal-cord",
+     "x": 56.8,
+     "y": 81.6
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.5,
+     "y": 58.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 64.5,
+     "y": 62.8
+    }
+   ]
+  },
+  {
+   "i": 36,
+   "img": "/atlas/ct-live-neck-coronal/036.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.063,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 30.0,
+     "y": 77.1
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 35.5,
+     "y": 92.7
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 81.8,
+     "y": 82.1
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 77.0,
+     "y": 92.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.8,
+     "y": 73.4
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 62.1,
+     "y": 80.4
+    },
+    {
+     "s": "spinal-cord",
+     "x": 56.5,
+     "y": 89.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 49.0,
+     "y": 61.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 64.4,
+     "y": 64.5
+    }
+   ]
+  },
+  {
+   "i": 37,
+   "img": "/atlas/ct-live-neck-coronal/037.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.066,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 29.6,
+     "y": 77.9
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 34.6,
+     "y": 92.4
+    },
+    {
+     "s": "upper-lobe-right",
+     "x": 81.0,
+     "y": 82.8
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 79.0,
+     "y": 92.0
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.8,
+     "y": 74.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 61.7,
+     "y": 81.1
+    },
+    {
+     "s": "spinal-cord",
+     "x": 56.2,
+     "y": 90.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.9,
+     "y": 63.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 65.1,
+     "y": 66.9
+    }
+   ]
+  },
+  {
+   "i": 38,
+   "img": "/atlas/ct-live-neck-coronal/038.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0705,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 28.4,
+     "y": 78.9
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 32.5,
+     "y": 92.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 80.5,
+     "y": 92.7
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.2,
+     "y": 80.9
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 61.2,
+     "y": 88.0
+    },
+    {
+     "s": "spinal-cord",
+     "x": 55.7,
+     "y": 97.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.9,
+     "y": 66.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 64.9,
+     "y": 71.0
+    }
+   ]
+  },
+  {
+   "i": 39,
+   "img": "/atlas/ct-live-neck-coronal/039.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.075,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 29.3,
+     "y": 79.5
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 29.8,
+     "y": 91.7
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 80.6,
+     "y": 94.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 52.4,
+     "y": 88.5
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 60.8,
+     "y": 96.8
+    },
+    {
+     "s": "spinal-cord",
+     "x": 55.9,
+     "y": 98.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.9,
+     "y": 70.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 64.9,
+     "y": 72.9
+    }
+   ]
+  },
+  {
+   "i": 40,
+   "img": "/atlas/ct-live-neck-coronal/040.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0795,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "upper-lobe-left",
+     "x": 31.8,
+     "y": 81.6
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 28.3,
+     "y": 91.5
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 81.1,
+     "y": 96.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 52.0,
+     "y": 97.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.5,
+     "y": 89.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.7,
+     "y": 73.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 65.1,
+     "y": 75.3
+    }
+   ]
+  },
+  {
+   "i": 41,
+   "img": "/atlas/ct-live-neck-coronal/041.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0825,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "lower-lobe-left",
+     "x": 28.1,
+     "y": 92.3
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 82.1,
+     "y": 97.9
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 55.4,
+     "y": 97.4
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.5,
+     "y": 91.0
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.7,
+     "y": 78.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 65.1,
+     "y": 80.3
+    }
+   ]
+  },
+  {
+   "i": 42,
+   "img": "/atlas/ct-live-neck-coronal/042.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.087,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "lower-lobe-left",
+     "x": 27.6,
+     "y": 94.0
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.4,
+     "y": 98.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.5,
+     "y": 92.2
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.6,
+     "y": 80.9
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 65.3,
+     "y": 87.9
+    }
+   ]
+  },
+  {
+   "i": 43,
+   "img": "/atlas/ct-live-neck-coronal/043.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.0915,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "lower-lobe-left",
+     "x": 27.7,
+     "y": 96.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.8,
+     "y": 91.9
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.9,
+     "y": 76.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 48.1,
+     "y": 86.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 66.2,
+     "y": 90.2
+    }
+   ]
+  },
+  {
+   "i": 44,
+   "img": "/atlas/ct-live-neck-coronal/044.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.096,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "thoracic-vertebra",
+     "x": 57.0,
+     "y": 92.8
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 57.5,
+     "y": 86.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 47.3,
+     "y": 89.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 65.9,
+     "y": 92.8
+    }
+   ]
+  },
+  {
+   "i": 45,
+   "img": "/atlas/ct-live-neck-coronal/045.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.1005,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "thoracic-vertebra",
+     "x": 57.0,
+     "y": 94.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 57.3,
+     "y": 86.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 46.9,
+     "y": 92.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 65.8,
+     "y": 93.8
+    }
+   ]
+  },
+  {
+   "i": 46,
+   "img": "/atlas/ct-live-neck-coronal/046.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.1035,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.8,
+     "y": 94.8
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 57.3,
+     "y": 87.2
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 46.8,
+     "y": 93.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 65.1,
+     "y": 94.8
+    }
+   ]
+  },
+  {
+   "i": 47,
+   "img": "/atlas/ct-live-neck-coronal/047.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.108,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": [
+    {
+     "s": "thoracic-vertebra",
+     "x": 56.6,
+     "y": 96.2
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 46.3,
+     "y": 94.2
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 63.6,
+     "y": 96.9
+    }
+   ]
+  },
+  {
+   "i": 48,
+   "img": "/atlas/ct-live-neck-coronal/048.webp",
+   "aspect": 0.8722,
+   "q": [
+    0.13875,
+    0.31725,
+    -0.1125,
+    -0.2775,
+    0.0,
+    0.0,
+    0.0,
+    -0.318,
+    0.0
+   ],
+   "pins": []
+  }
+ ]
+}

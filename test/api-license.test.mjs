@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/api-license.test.mjs — the native-only license endpoint (Phase 2a): Pro-gated key + 2h grace, owner=Pro.
 import { test } from "node:test";
 import assert from "node:assert/strict";

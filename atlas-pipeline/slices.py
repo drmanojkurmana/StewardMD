@@ -27,6 +27,24 @@ WINDOWS = {
 }
 
 
+def write_once(path, pil, quality):
+    """Encode, then refuse to put DIFFERENT bytes under an existing path. Slice images are
+    served `immutable` for a year and installed apps pair their bundled atlas.json with images
+    fetched live, so a changed picture under an old name pairs old pins with new anatomy.
+    Identical bytes (a re-run) pass; a rebuilt stack must go to a new directory."""
+    import io
+    buf = io.BytesIO()
+    pil.save(buf, "WEBP", quality=quality)
+    data = buf.getvalue()
+    if os.path.exists(path):
+        if open(path, "rb").read() != data:
+            raise SystemExit("refusing to change %s: image paths are immutable; write the new "
+                             "stack to a new directory (e.g. atlas/<id>/v2/)" % path)
+        return
+    with open(path, "wb") as fh:
+        fh.write(data)
+
+
 def apply_window(arr, center, width):
     """HU (or raw MR intensity) -> 0..1 float for display."""
     a = np.asarray(arr, dtype=np.float32)
@@ -75,10 +93,14 @@ def visible_slices(vol, window, frac=0.0005):
     return nz
 
 
-def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id, seg_path=None):
+def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id, seg_path=None,
+                   picks=None, thumbs=True):
     """Write NNN.webp and t/NNN.webp; return slice stubs for build.py.
 
     The returned _z and _shape let the mask path reproduce this geometry exactly.
+    `picks` (a list of z indices) skips the slice choice entirely: living.py passes the
+    soft-tissue run's picks so a lung or bone window renders the SAME slices, and only the
+    window differs.
     """
     require_clear(source_id)
     import nibabel as nib
@@ -87,7 +109,9 @@ def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id, 
     vol = np.asanyarray(img.dataobj)
     zooms = img.header.get_zooms()[:3]
 
-    os.makedirs(os.path.join(out_dir, "t"), exist_ok=True)
+    os.makedirs(os.path.join(out_dir, "t") if thumbs else out_dir, exist_ok=True)
+    if picks is not None:
+        return _render(vol, zooms, [int(z) for z in picks], out_dir, module_id, window, thumbs)
     # Sample only where there is anatomy. Without this the stack spends slices on empty
     # margins and ships pure-black frames (ct-hand-coronal shipped six in a row).
     vis = visible_slices(vol, window)
@@ -109,6 +133,10 @@ def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id, 
         except Exception:
             pass
     picks = [int(vis[i]) for i in pick_slice_indices(len(vis), n_wanted)]
+    return _render(vol, zooms, picks, out_dir, module_id, window, thumbs)
+
+
+def _render(vol, zooms, picks, out_dir, module_id, window, thumbs=True):
     # Display spacing after to_display (which transposes): rows = Y, cols = X.
     spacing_disp = (zooms[1], zooms[0])
 
@@ -126,9 +154,10 @@ def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id, 
 
         pil = Image.fromarray((g * 255.0).astype(np.uint8), mode="L")
         name = "%03d.webp" % n
-        pil.save(os.path.join(out_dir, name), "WEBP", quality=WEBP_Q)
-        tw = max(1, int(round(THUMB_H * pil.width / pil.height)))
-        pil.resize((tw, THUMB_H)).save(os.path.join(out_dir, "t", name), "WEBP", quality=80)
+        write_once(os.path.join(out_dir, name), pil, WEBP_Q)
+        if thumbs:
+            tw = max(1, int(round(THUMB_H * pil.width / pil.height)))
+            write_once(os.path.join(out_dir, "t", name), pil.resize((tw, THUMB_H)), 80)
 
         out.append({
             "i": n,

@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-dpdp.test.mjs - DPDP Act 2023: privacy notice, acknowledgement, data principal requests (erasure done
  * for real), breach register, and the patient's own portal routes, through the real /api/queue and /api/portal handlers.
  *

@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // test/connect/agent/phone-router.test.mjs -- Connect Hospital agent-broker phone-runner routes.
 // Full onboarding flow: sessions(reuse) -> handoff(visitedOrigins) -> origins(confirm) -> plan
 // (deterministic, prompt-injection-proof) -> progress -> discovery(compile+offline-validate) ->

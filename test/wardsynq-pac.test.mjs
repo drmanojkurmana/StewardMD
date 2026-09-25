@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-pac.test.mjs - the pre-anaesthetic checkup (PAC) on a theatre case, through the REAL routes.
  *
  * Validation, record and revise (append-only), the WHO Sign In reading the PAC (missing or unfit refused unless a

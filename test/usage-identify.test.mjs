@@ -20,9 +20,10 @@ const req = (h) => ({ headers: { get: (k) => h[k] ?? h[String(k).toLowerCase()] 
 const guest = await identify(req({ "CF-Connecting-IP": "1.2.3.4" }), {});
 ok(guest.guest === true && guest.id.startsWith("ip:"), "no token -> guest, id 'ip:<hash>'");
 
-// Cloudflare-Access email -> identified, not guest
+// A bare Cloudflare-Access email header is forgeable -> still a guest (verified Access JWTs:
+// test/cf-access-verify.test.mjs)
 const cfa = await identify(req({ "Cf-Access-Authenticated-User-Email": "Doc@Hosp.org" }), {});
-ok(cfa.guest === false && cfa.id.startsWith("cfa:") && cfa.email === "doc@hosp.org", "CF-Access email -> non-guest cfa id");
+ok(cfa.guest === true && !cfa.email, "bare CF-Access email header -> guest, not that account");
 
 // source guard: verifyFirebaseToken returns an OBJECT { uid, email }; identify() reads .uid and keys
 // per-account. Never "fb:" + the raw object (→ "fb:[object Object]", shared bucket for all users).

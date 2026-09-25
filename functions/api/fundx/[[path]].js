@@ -12,6 +12,7 @@
  */
 import { runVision, runClinical, health, logJSON, httpErr } from "../../_fundx_ai.js";
 import { identify, usageKv } from "../../_usage.js";
+import { cfAccessEmail } from "../../_fbauth.js";
 import { checkActive } from "../../_experimental.js";
 import { ownerOK } from "../../_adminauth.js";
 
@@ -25,9 +26,9 @@ function corsHeaders(request) {
 }
 function json(obj, status, request) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) }); }
 
-// Same gate as functions/api/ai — Cf-Access email, matching app token, or an allowed Origin.
-function authorise(request, env) {
-  if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+// Same gate as functions/api/ai — verified Cf-Access JWT, matching app token, or an allowed Origin.
+async function authorise(request, env) {
+  if (await cfAccessEmail(request, env)) return true;   // a VERIFIED Access JWT; the bare email header is forgeable
   const tok = request.headers.get("X-App-Token");
   if (tok && (tok === env.FUNDX_APP_TOKEN || tok === env.AI_APP_TOKEN || tok === env.GHIS_APP_TOKEN)) return true;
   if (env.APP_GATE_KEY && request.headers.get("X-SMD-App") === env.APP_GATE_KEY) return true;
@@ -112,14 +113,14 @@ export async function onRequest(context) {
 
   // Health is unauthenticated-safe (reports only booleans, never secrets) but still gated by Origin.
   if (request.method === "GET" && path.endsWith("/health")) {
-    if (!authorise(request, env)) return json({ error: "unauthorized", code: "unauthorized" }, 401, request);
+    if (!(await authorise(request, env))) return json({ error: "unauthorized", code: "unauthorized" }, 401, request);
     const h = health(env);
     const metrics = await readMetrics(env); if (metrics) h.metrics = metrics;
     return json(h, 200, request);
   }
 
   if (request.method !== "POST") return json({ error: "method_not_allowed", code: "method_not_allowed" }, 405, request);
-  if (!authorise(request, env)) return json({ error: "unauthorized", code: "unauthorized" }, 401, request);
+  if (!(await authorise(request, env))) return json({ error: "unauthorized", code: "unauthorized" }, 401, request);
 
   // Guard obviously oversized bodies before buffering.
   const clen = Number(request.headers.get("Content-Length") || 0);
