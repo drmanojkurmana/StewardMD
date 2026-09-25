@@ -1037,3 +1037,147 @@ html.cx-lock .mc-overlay { z-index: 1300; }
 }
 #clinixRoot .cx-vitals-monitor { margin: 12px 0; }
 #clinixRoot .cx-card-diag { margin: 12px 0; }
+
+/* ── clinical diagrams: JVP, auscultation, gaze, facial, ascites, sensory ── */
+#clinixRoot .cx-dia-wave { fill: none; stroke: var(--cx-primary); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#clinixRoot .cx-dia-wave--bad { stroke: var(--cx-teach); stroke-width: 3; }
+#clinixRoot .cx-dia-wave--alert { stroke: var(--cx-bad); stroke-width: 3.2; }
+#clinixRoot .cx-dia-ecg { fill: none; stroke: var(--cx-muted); stroke-width: 1.5; stroke-linejoin: round; }
+#clinixRoot .cx-dia-soundmark { stroke: var(--cx-line); stroke-width: 1.2; stroke-dasharray: 3 3; }
+#clinixRoot .cx-dia-pupil { fill: var(--cx-ink); }
+#clinixRoot .cx-dia-pupil--dilated { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-gaze-box { cursor: pointer; }
+#clinixRoot .cx-dia-gaze-box rect { fill: var(--cx-surface); stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-gaze-box:hover rect { stroke: var(--cx-primary); }
+#clinixRoot .cx-dia-gaze-box--on rect { fill: var(--cx-teach-soft); stroke: var(--cx-teach); stroke-width: 2; }
+#clinixRoot .cx-dia-cardiac { fill: var(--cx-surface); stroke: var(--cx-line); stroke-width: 1.5; stroke-dasharray: 4 3; }
+#clinixRoot .cx-dia-rad-arrow { fill: none; stroke: var(--cx-teach); stroke-width: 2.5; stroke-dasharray: 4 3; }
+#clinixRoot .cx-dia-rad-arrowhead { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-zone--cardiac circle { stroke-width: 2; }
+#clinixRoot .cx-dia-zone--cardiac:hover circle { fill: var(--cx-teach-soft); }
+#clinixRoot .cx-dia-zone--derm { cursor: pointer; }
+#clinixRoot .cx-dia-zone--derm circle { fill: var(--cx-surface); stroke: var(--cx-primary); stroke-width: 1.5; }
+#clinixRoot .cx-dia-zone--derm text { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-zone--derm:hover circle { fill: var(--cx-teach-soft); }
+#clinixRoot .cx-dia-zone--derm.cx-dia-zone--on circle { fill: var(--cx-primary); stroke: var(--cx-primary); }
+#clinixRoot .cx-dia-zone--derm.cx-dia-zone--on text { fill: #fff; }
+#clinixRoot .cx-dia-bowel { fill: var(--cx-surface); stroke: var(--cx-primary); stroke-width: 1.8; }
+#clinixRoot .cx-dia-fluid--ascites { fill: var(--cx-teach); fill-opacity: .35; stroke: var(--cx-teach); stroke-width: 2; }
+#clinixRoot .cx-dia-damphand { fill: var(--cx-muted); opacity: .7; }
+
+/* ── CliniX 2.0: Mode Switcher (MBBS vs PG) ────────────────────────────────── */
+#clinixRoot .cx-mode-bar {
+  display: flex; gap: 6px; padding: 10px 16px 4px;
+  background: var(--cx-surface); border-bottom: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-mode-btn {
+  flex: 1 1 50%; padding: 8px 10px; font-size: 13px; font-weight: 700;
+  border-radius: var(--cx-r-ctl); border: 1px solid var(--cx-line);
+  background: var(--cx-surface-2); color: var(--cx-muted); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit; transition: all .15s ease;
+}
+#clinixRoot .cx-mode-btn--active {
+  background: var(--cx-primary); color: #fff; border-color: var(--cx-primary);
+  box-shadow: 0 2px 6px rgba(15,118,110,.25);
+}
+
+/* ── CliniX 2.0: Presentations (Symptom-first approach) ─────────────────────── */
+#clinixRoot .cx-pres-card {
+  padding: 16px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r); margin-bottom: 12px;
+}
+#clinixRoot .cx-pres-redflag {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+  background: var(--cx-bad-bg); border-left: 3px solid var(--cx-bad);
+  border-radius: 0 var(--cx-r-ctl) var(--cx-r-ctl) 0; font-size: 13.5px;
+  color: var(--cx-bad); margin-bottom: 8px; line-height: 1.45;
+}
+#clinixRoot .cx-pres-redflag .material-symbols-rounded { flex: 0 0 auto; font-size: 20px; }
+#clinixRoot .cx-pres-badge {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 4px;
+  background: var(--cx-surface-2); color: var(--cx-muted);
+}
+#clinixRoot .cx-pres-step {
+  padding: 12px 14px; background: var(--cx-surface-2); border-radius: var(--cx-r-ctl);
+  margin-bottom: 8px; font-size: 13.5px;
+}
+#clinixRoot .cx-pres-step-title {
+  font-weight: 700; font-size: 12.5px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--cx-primary); margin-bottom: 4px;
+}
+
+/* ── CliniX 2.0: Spoken Case Presentation Script ───────────────────────────── */
+#clinixRoot .cx-script-box {
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r); padding: 18px; margin: 12px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+#clinixRoot .cx-script-sec { margin-bottom: 16px; }
+#clinixRoot .cx-script-h {
+  font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--cx-teach); border-bottom: 1px dashed var(--cx-line); padding-bottom: 4px; margin-bottom: 6px;
+}
+#clinixRoot .cx-script-body {
+  font-size: 14.5px; line-height: 1.6; color: var(--cx-ink); font-style: italic;
+}
+#clinixRoot .cx-script-bar {
+  display: flex; gap: 8px; margin: 12px 16px;
+}
+
+/* ── CliniX 2.0: Interactive Interpretation Lab (ABG Simulator) ─────────────── */
+#clinixRoot .cx-abg-box {
+  padding: 16px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r); margin: 12px 16px;
+}
+#clinixRoot .cx-abg-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;
+}
+#clinixRoot .cx-abg-input-wrap {
+  display: flex; flex-direction: column; gap: 4px;
+}
+#clinixRoot .cx-abg-label { font-size: 12px; font-weight: 700; color: var(--cx-muted); }
+#clinixRoot .cx-abg-input {
+  width: 100%; padding: 8px 10px; font-size: 15px; font-weight: 600;
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl);
+  background: var(--cx-surface); color: var(--cx-ink); font-family: var(--cx-mono);
+}
+#clinixRoot .cx-abg-verdict {
+  padding: 14px; border-radius: var(--cx-r-ctl); background: var(--cx-teach-soft);
+  border: 1px solid rgba(29,78,216,.2); margin-top: 14px;
+}
+#clinixRoot .cx-abg-verdict-title { font-size: 16px; font-weight: 800; color: var(--cx-teach); }
+#clinixRoot .cx-abg-verdict-step { font-size: 13px; color: var(--cx-ink); margin-top: 4px; line-height: 1.45; }
+
+/* ── CliniX 2.0: Clinical Spotter Arena (60-second Timer) ─────────────────── */
+#clinixRoot .cx-spotter-arena {
+  padding: 16px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r); margin: 12px 16px;
+}
+#clinixRoot .cx-spotter-timer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 14px; background: var(--cx-surface-2); border-radius: var(--cx-r-ctl);
+  font-weight: 800; font-size: 15px; font-family: var(--cx-mono); margin-bottom: 14px;
+}
+#clinixRoot .cx-spotter-timer--urgent { background: var(--cx-bad-bg); color: var(--cx-bad); }
+#clinixRoot .cx-spotter-opt {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 14px;
+  background: var(--cx-surface-2); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl);
+  font-size: 14.5px; font-weight: 600; text-align: left; cursor: pointer;
+  margin-bottom: 8px; font-family: inherit; color: var(--cx-ink); transition: background .12s ease;
+}
+#clinixRoot .cx-spotter-opt--correct { background: var(--cx-ok-bg); border-color: var(--cx-ok); color: var(--cx-ok); }
+#clinixRoot .cx-spotter-opt--wrong { background: var(--cx-bad-bg); border-color: var(--cx-bad); color: var(--cx-bad); }
+
+/* ── CliniX 2.0: The Chief's Ward Round (Tough Professor Viva) ─────────────── */
+#clinixRoot .cx-chief-banner {
+  padding: 16px; background: linear-gradient(135deg, #111827, #1F2937);
+  color: #fff; border-radius: var(--cx-r); margin: 12px 16px;
+}
+#clinixRoot .cx-chief-title { font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+#clinixRoot .cx-chief-sub { font-size: 13px; opacity: .85; margin-top: 4px; }
+#clinixRoot .cx-chief-q {
+  padding: 16px; background: var(--cx-surface); border: 2px solid var(--cx-ink);
+  border-radius: var(--cx-r); margin: 12px 16px; font-size: 15.5px; line-height: 1.5; font-weight: 600;
+}
