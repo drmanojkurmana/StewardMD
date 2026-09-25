@@ -1,0 +1,217 @@
+<!doctype html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="robots" content="noindex"/>
+<meta name="referrer" content="no-referrer"/>
+<title>Your video visit · StewardMD</title>
+<!-- Self-contained patient VIDEO waiting page (telehealth). No login, no app, NO PHI: only the visit's state, place in
+     the queue and the clinic's name/logo from /api/queue/tele/wait via the opaque signed token (?t=). The room address
+     is asked for (POST /api/queue/tele/room) only when the doctor has started and the patient taps Join.
+     Same design tokens and head conventions as queue.html; fonts self-hosted (assets/fonts/), no CDN. -->
+<style>
+  @font-face{ font-family:'Inter Variable'; font-style:normal; font-weight:100 900; font-display:swap; src:url(/assets/fonts/inter-variable.woff2) format('woff2'); }
+  @font-face{ font-family:'Material Symbols Rounded'; font-style:normal; font-weight:300 700; font-display:block; src:url(/assets/fonts/material-symbols-rounded.woff2) format('woff2'); }
+
+  :root{ --primary:#0e6e63; --on-primary:#fff; --primary-container:#0b7d70; --on-primary-container:#f4fffc;
+    --primary-fixed:#89f5e7; --on-primary-fixed-variant:#005049; --secondary:#566a74;
+    --error:#ba1a1a; --ok:#1c7a4a;
+    --bg:#f6f7f5; --surface:#ffffff; --on-surface:#14202b; --on-surface-variant:#3d4947;
+    --sc-lowest:#fff; --sc-low:#f2f4f6; --sc-highest:#e6eae9; --surface-variant:#dbe3e1; --outline-variant:#c1ccc9;
+    --ease:cubic-bezier(.2,.7,.2,1); --dur:.55s; }
+  @media (prefers-color-scheme: dark){ :root{ --primary:#3fc7b3; --on-primary:#04322c; --primary-container:#0d5b52; --on-primary-container:#c9fff5;
+    --bg:#111a1e; --surface:#18242a; --on-surface:#eaf0f2; --on-surface-variant:#bcc9c6;
+    --sc-lowest:#141f24; --sc-low:#18242a; --sc-highest:#2a383e; --surface-variant:#31424a; --outline-variant:#31424a; --secondary:#a9bcc3; --error:#ffb4ab; } }
+
+  *{box-sizing:border-box} html,body{margin:0}
+  body{ background:var(--bg); color:var(--on-surface); font-family:'Inter Variable',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; min-height:100dvh; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  .material-symbols-outlined{ font-family:'Material Symbols Rounded'; font-weight:400; vertical-align:middle; user-select:none; line-height:1; -webkit-font-feature-settings:'liga'; }
+
+  header{ position:sticky; top:0; z-index:50; background:color-mix(in srgb,var(--surface) 88%,transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 1px 2px rgba(20,32,43,.06); }
+  .hd{ display:flex; align-items:center; gap:8px; max-width:480px; margin:0 auto; padding:calc(14px + env(safe-area-inset-top)) 20px 14px; }
+  .hd .mark{ width:26px; height:26px; background:var(--primary); -webkit-mask:url(/logo.png) center/contain no-repeat; mask:url(/logo.png) center/contain no-repeat; }
+  .hd h1{ font:800 20px 'Inter Variable',Inter; color:var(--on-surface); margin:0; letter-spacing:-.01em; }
+  .hd h1 span{ color:var(--primary); }
+  .hd .clogo{ height:28px; width:auto; max-width:150px; object-fit:contain; }
+  .hd .cname{ font:800 18px 'Inter Variable',Inter; color:var(--on-surface); letter-spacing:-.01em; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .hd .pw{ margin-left:auto; display:inline-flex; align-items:center; gap:5px; font:600 10px 'Inter Variable',Inter; letter-spacing:.03em; text-transform:uppercase; color:var(--secondary); white-space:nowrap; }
+  .hd .pw .m{ width:14px; height:14px; background:var(--secondary); -webkit-mask:url(/logo.png) center/contain no-repeat; mask:url(/logo.png) center/contain no-repeat; }
+
+  main{ max-width:480px; margin:0 auto; padding:20px 20px 40px; display:flex; flex-direction:column; gap:18px; }
+  .card{ background:var(--sc-lowest); border:1px solid var(--surface-variant); border-radius:18px; box-shadow:0 1px 3px rgba(20,32,43,.05); }
+  .state{ padding:28px 22px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .state .ic{ width:64px; height:64px; border-radius:50%; display:grid; place-items:center; background:color-mix(in srgb,var(--primary) 12%,transparent); color:var(--primary); margin-bottom:8px; }
+  .state .ic .material-symbols-outlined{ font-size:34px; }
+  .state.wait .ic{ animation:pulse 2.4s var(--ease) infinite; }
+  .state.bad .ic{ background:color-mix(in srgb,var(--error) 12%,transparent); color:var(--error); }
+  .state.done .ic{ background:color-mix(in srgb,var(--ok) 14%,transparent); color:var(--ok); }
+  .state h2{ font:700 22px 'Inter Variable',Inter; margin:0; letter-spacing:-.01em; overflow-wrap:anywhere; }
+  .state p{ font:500 15px/1.5 'Inter Variable',Inter; color:var(--secondary); margin:0; overflow-wrap:anywhere; }
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:12px; width:100%; margin-top:16px; padding-top:16px; border-top:1px solid var(--surface-variant); }
+  .split .k{ font:700 12px 'Inter Variable',Inter; color:var(--secondary); margin-bottom:4px; }
+  .split .v{ font:800 28px 'Inter Variable',Inter; color:var(--primary); font-variant-numeric:tabular-nums; }
+  .split .col+.col{ border-left:1px solid var(--surface-variant); }
+
+  .join{ width:100%; min-height:52px; margin-top:18px; border:none; border-radius:14px; background:var(--primary); color:var(--on-primary); font:700 17px 'Inter Variable',Inter; display:inline-flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; transition:transform .12s var(--ease); }
+  .join:active{ transform:scale(.97); }
+  .join:disabled{ opacity:.6; cursor:progress; }
+  .join:focus-visible,.retry:focus-visible{ outline:3px solid var(--primary-fixed); outline-offset:2px; }
+  .retry{ margin-top:16px; min-height:44px; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--outline-variant); background:var(--sc-lowest); color:var(--primary); font:700 14px 'Inter Variable',Inter; padding:10px 18px; border-radius:12px; cursor:pointer; }
+  .err{ font:600 14px 'Inter Variable',Inter; color:var(--error); margin-top:10px; min-height:1px; }
+
+  .note{ background:var(--sc-low); border:1px solid var(--surface-variant); border-radius:12px; padding:14px; display:flex; gap:10px; align-items:flex-start; }
+  .note .material-symbols-outlined{ color:var(--secondary); font-size:20px; }
+  .note .t{ font:600 14px 'Inter Variable',Inter; } .note .m{ font:400 13px/1.5 'Inter Variable',Inter; color:var(--secondary); margin-top:2px; }
+  .note[hidden]{ display:none; }
+
+  .sk{ background:linear-gradient(90deg,var(--sc-low) 25%,var(--sc-highest) 37%,var(--sc-low) 63%); background-size:400% 100%; animation:sh 1.4s ease infinite; border-radius:12px; }
+  .rv{ animation:rise var(--dur) var(--ease) both; }
+  @keyframes rise{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none} }
+  @keyframes sh{ 0%{background-position:100% 0} 100%{background-position:-100% 0} }
+  @keyframes pulse{ 0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--primary) 30%,transparent)} 60%{box-shadow:0 0 0 12px transparent} }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+<header><div class="hd"><span class="mark" aria-hidden="true"></span><h1>Steward<span>MD</span></h1></div></header>
+<main>
+  <section class="card" id="card">
+    <div id="status" class="state" role="status" aria-live="polite">
+      <div class="sk" style="height:64px;width:64px;border-radius:50%" aria-hidden="true"></div>
+      <h2>Loading your video visit</h2>
+    </div>
+    <div id="act" style="padding:0 22px 22px"></div>
+  </section>
+  <section class="note" id="tips">
+    <span class="material-symbols-outlined" aria-hidden="true">videocam</span>
+    <div><div class="t">Keep this page open</div><div class="m">When the doctor is ready, a Join button appears here. Allow the camera and microphone when your phone asks. Do not share this link.</div></div>
+  </section>
+</main>
+<script>
+(function(){
+  "use strict";
+  var P = new URLSearchParams(location.search);
+  var token = P.get("t") || "";
+  var statusEl = document.getElementById("status");
+  var actEl = document.getElementById("act");
+  var tipsEl = document.getElementById("tips");
+  var headerEl = document.querySelector("header");
+  var POLL_MS = 5000;
+  var timer = null, stopped = false, joining = false, lastKey = "", brandKey = "";
+
+  function ms(n){ return '<span class="material-symbols-outlined" aria-hidden="true">'+n+'</span>'; }
+  function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+  // White-label branding, as queue.html: the clinic's logo and name, with a discreet "powered by StewardMD".
+  function setBrand(d){
+    var logo = (d && d.clinicLogo) || "", name = (d && d.clinicName) || "";
+    var key = logo + "|" + name; if(key === brandKey) return; brandKey = key;
+    if(logo){
+      headerEl.innerHTML = '<div class="hd"><img class="clogo" src="'+esc(logo)+'" alt="'+esc(name||"Clinic")+'"/>'+
+        (name? '<span class="cname">'+esc(name)+'</span>':'')+
+        '<span class="pw">powered by <span class="m" aria-hidden="true"></span>StewardMD</span></div>';
+    } else if(name){
+      headerEl.innerHTML = '<div class="hd"><span class="mark" aria-hidden="true"></span><span class="cname">'+esc(name)+'</span>'+
+        '<span class="pw">powered by <span class="m" aria-hidden="true"></span>StewardMD</span></div>';
+    }
+  }
+
+  // One status region. It is rewritten only when the state changes, so a screen reader hears each change once.
+  function show(key, cls, icon, title, sub, extra, action){
+    if(key !== lastKey){
+      lastKey = key;
+      statusEl.className = "state rv " + cls;
+      statusEl.innerHTML = '<div class="ic">'+ms(icon)+'</div><h2>'+esc(title)+'</h2>'+(sub? '<p>'+esc(sub)+'</p>':'')+(extra||"");
+      actEl.innerHTML = action || "";
+      actEl.style.padding = action ? "0 22px 22px" : "0";
+    }
+  }
+  function stop(){ stopped = true; if(timer){ clearTimeout(timer); timer = null; } tipsEl.hidden = true; }
+
+  function waiting(d){
+    var extra = "";
+    var pos = d.position|0, ahead = d.ahead|0;
+    if(pos > 0){
+      extra = '<div class="split"><div class="col"><div class="k">Your place</div><div class="v">'+pos+'</div></div>'+
+        '<div class="col"><div class="k">People ahead</div><div class="v">'+ahead+'</div></div></div>';
+    }
+    var sub = d.doctorStatus === "break" ? "The doctor is on a short break. Please keep this page open."
+      : d.doctorStatus === "emergency" ? "The doctor is handling an emergency. Please keep this page open."
+      : "The doctor will start your video call soon. Please keep this page open.";
+    var line = pos > 0 ? (ahead === 0 ? "You are next." : (ahead === 1 ? "1 person is ahead of you." : ahead + " people are ahead of you.")) : "";
+    show("wait:"+pos+":"+ahead+":"+(d.doctorStatus||""), "wait", "hourglass_top", "Please wait", sub + (line ? " " + line : ""), extra, "");
+  }
+  function ready(){
+    show("ready", "ready", "videocam", "The doctor is ready", "Tap Join to start your video call.", "",
+      '<button type="button" class="join" id="join" aria-label="Join video call">'+ms("video_call")+'Join video call</button><div class="err" id="jerr" aria-live="assertive"></div>');
+  }
+  function ended(){ stop(); show("ended", "done", "task_alt", "Your video visit has ended", "Thank you. You may close this page.", "", ""); }
+  function invalid(expired){
+    stop();
+    if(expired) show("expired", "bad", "event_busy", "This link has expired", "Ask the clinic for a new video link if you still need one.", "", "");
+    else show("invalid", "bad", "link_off", "This link is not valid", "Ask the clinic for a new video link.", "", "");
+  }
+
+  function render(d){
+    if(!d || !d.ok){
+      var e = d && d.error;
+      if(e === "invalid_link" || e === "link_expired") return invalid(e === "link_expired");
+      if(e === "video_off") return show("off", "bad", "videocam_off", "Video visits are not available", "Please contact the clinic.", "", "");
+      if(e === "not_configured") return show("setup", "wait", "hourglass_top", "The video service is being set up", "Please check back shortly. This page will try again.", "", "");
+      return invalid(false);
+    }
+    setBrand(d);
+    if(d.closed) return ended();
+    if(d.ready) return ready();
+    waiting(d);
+  }
+
+  function schedule(){ if(!stopped){ if(timer) clearTimeout(timer); timer = setTimeout(load, POLL_MS); } }
+  function load(){
+    timer = null;
+    if(stopped) return;
+    fetch("/api/queue/tele/wait?t="+encodeURIComponent(token), {headers:{"Accept":"application/json"}, cache:"no-store"})
+      .then(function(r){ return r.json(); })
+      .then(function(d){ if(!joining) render(d); schedule(); })
+      .catch(function(){
+        if(lastKey === "" || lastKey === "offline") show("offline", "bad", "wifi_off", "Cannot reach the clinic", "Check your connection. This page will try again.", "", "");
+        schedule();
+      });
+  }
+
+  function join(btn){
+    if(joining) return;
+    joining = true;
+    var err = document.getElementById("jerr"); if(err) err.textContent = "";
+    btn.disabled = true; btn.innerHTML = ms("video_call") + "Joining";
+    fetch("/api/queue/tele/room?t="+encodeURIComponent(token), {method:"POST", headers:{"Accept":"application/json"}, cache:"no-store"})
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.ok && /^https:\/\//i.test(String(d.roomUrl||""))){ stop(); location.href = d.roomUrl; return; }
+        joining = false;
+        var e = d && d.error;
+        if(e === "visit_closed") return ended();
+        if(e === "invalid_link" || e === "link_expired") return invalid(e === "link_expired");
+        if(e === "not_started"){ lastKey = ""; return load(); }
+        btn.disabled = false; btn.innerHTML = ms("video_call") + "Join video call";
+        if(err) err.textContent = "The call could not be opened. Please try again.";
+      })
+      .catch(function(){
+        joining = false;
+        btn.disabled = false; btn.innerHTML = ms("video_call") + "Join video call";
+        if(err) err.textContent = "Cannot reach the clinic. Check your connection and try again.";
+      });
+  }
+  actEl.addEventListener("click", function(e){ var b = e.target.closest("#join"); if(b) join(b); });
+
+  // Coming back to the page (after switching apps) checks at once instead of waiting for the next poll.
+  document.addEventListener("visibilitychange", function(){ if(!document.hidden && !stopped && !joining){ if(timer) clearTimeout(timer); load(); } });
+
+  if(!token){ show("nolink", "bad", "link_off", "No video link", "Open the link from your SMS or WhatsApp message.", "", ""); stop(); }
+  else load();
+})();
+</script>
+<footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
+</body>
+</html>

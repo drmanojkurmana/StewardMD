@@ -73,7 +73,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/ward.css?v=ward36-rcm-fr1">
 <link rel="stylesheet" href="/discharge.css?v=dis4-clinforms-fr1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1">
-<link rel="stylesheet" href="/atlas.css?v=atlas5">
+<link rel="stylesheet" href="/atlas.css?v=atlas6">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d5-fr1">
 <link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1">
 <link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1">
@@ -2215,7 +2215,7 @@ window.openExternal = function (u) {
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978-sheet1-universal3-cefiderocol1-fr1" defer></script>
-<script defer src="/interaction-rules.js?v=ddi20260925b"></script>
+<script defer src="/interaction-rules.js?v=ddiaudit20260925"></script>
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
 <!-- Drug names highlighted + linked to their monograph (drug-link.js; lexicon generated from
      data/interaction-rules.json). Flag smd_druglink, default ON. -->
@@ -2232,11 +2232,11 @@ window.openExternal = function (u) {
      JPEG quality is only a bytes lever. pdfParts() reads a PDF's text layer instead of OCR-ing a rasterised
      page, which is both far cheaper and more accurate on numbers. Loads BEFORE the modules that use it. -->
 <script defer src="/img-compress.js?v=imgc1"></script>
-<script defer src="/ddi-catalog.js?v=ddi20260925b"></script>
-<script defer src="/medlist.js?v=ddi20260925b-fr2-mlwrap1"></script>
+<script defer src="/ddi-catalog.js?v=ddiaudit20260925"></script>
+<script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
-<script defer src="/interactions.js?v=ddi20260925b"></script>
-<script src="/api.js?v=ddi20260925b-monofit1-fr1" defer></script>
+<script defer src="/interactions.js?v=ddiaudit20260925"></script>
+<script src="/api.js?v=ddiaudit20260925-monofit1-fr1" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
@@ -2305,7 +2305,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-grounding.js?v=ground1-nerdrugs1-codedb1-audOff" defer></script>
 <!-- OpenMed on-device drug/disease tagger (openmed-ner.js). Flags smd_openmed_pharma / smd_openmed_disease,
      DEFAULT OFF, and fails closed until each checkpoint licence + sha256 is pinned. -->
-<script src="/openmed-ner.js?v=ddi20260925b" defer></script>
+<script src="/openmed-ner.js?v=ddiaudit20260925" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1-audOff" defer></script>
 <script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034-ugib1-audOff" defer></script>
@@ -2679,13 +2679,13 @@ window.openExternal = function (u) {
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
 <!-- The patient portal's words and discharge renderer (window.WSQPortal): ward.js previews the portal with them. -->
-<script src="/wardsynq/site/i18n.js?v=63" defer></script>
+<script src="/wardsynq/site/i18n.js?v=64" defer></script>
 <script src="/wardsynq/site/print-lang.js?v=30" defer></script>
 <script src="/wardsynq/site/portal.js?v=44" defer></script>
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
-<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1-sid1" defer></script>
+<script src="/ward.js?v=ward76-tele1" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
@@ -3080,7 +3080,7 @@ window.openExternal = function (u) {
   else boot();
 })();
 </script>
-<script src="/atlas.js?v=atlas2-p1" defer></script>
+<script src="/atlas.js?v=atlas3" defer></script>
 <script src="/atlas3d.js?v=a3d17" defer></script>
 </body>
 </html>

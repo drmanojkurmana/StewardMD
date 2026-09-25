@@ -6,7 +6,7 @@
   /* The atlas is always dark (radiology reading-room convention), so these tokens are the
      only colour source for the chrome; category colours come from the data. */
   --at-bg: #000; --at-s1: #121214; --at-s2: #1c1c1f; --at-s3: #2c2c30; --at-line: #34343a;
-  --at-text: #f2f2f4; --at-mut: #a8a8b0; --at-acc: #3b9dff; --at-ok: #34c759; --at-bad: #ff6961;
+  --at-text: #f2f2f4; --at-mut: #a8a8b0; --at-acc: #3b9dff; --at-ok: #34c759; --at-bad: #ff6961; --at-warn: #ffc05a;
   --at-glass: rgba(22, 22, 26, .9);
   position: fixed; inset: 0; z-index: 880;
   background: var(--at-bg); color: var(--at-text);
@@ -46,6 +46,14 @@ body.atlas-lock { overflow: hidden; }
 .atlas-foot {
   flex: 0 0 auto; padding: 4px 12px calc(8px + env(safe-area-inset-bottom, 0px)); text-align: center;
   font-size: 11px; color: var(--at-mut); opacity: .8;
+}
+/* Beta = not yet verified by a radiologist on /validation. Said in words, never colour alone. */
+.atlas-foot.is-beta { color: var(--at-warn); opacity: 1; }
+.atlas-beta {
+  display: inline-block; vertical-align: 1px; white-space: nowrap;
+  padding: 1px 6px; border-radius: 6px; border: 1px solid rgba(255, 192, 90, .45);
+  background: rgba(255, 192, 90, .14); color: var(--at-warn);
+  font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; line-height: 14px;
 }
 
 /* ---------- catalog ---------- */

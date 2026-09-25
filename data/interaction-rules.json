@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "generated": "2026-09-25",
   "sources": [
     {
@@ -26891,12 +26891,89 @@
       ],
       "severity": "moderate",
       "mechanism": "Tirzepatide and GLP-1 receptor agonists have overlapping GLP-1 receptor activity.",
-      "effect": "Coadministration is not recommended in the Zepbound prescribing information. This includes tirzepatide with semaglutide.",
+      "effect": "The Zepbound prescribing information advises against using tirzepatide together with a GLP-1 receptor agonist.",
       "action": "Do not use this screen as approval to combine these medicines. Review with the prescriber or pharmacist before coadministration. If switching treatment, obtain a specific transition plan.",
       "monitoring": "Review the indication, intended regimen and whether this is a planned switch.",
       "sourceId": "openfda-labeling",
       "sourceUrl": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=487cd7e7-434c-4925-99fa-aa80b1cc776b",
       "evidence": "Product labeling: Zepbound, Indications and Usage, Limitations of Use. Label updated 2026-08-28.",
+      "reviewDate": "2026-09-25",
+      "doseTimingSeparation": false,
+      "specialistReview": false,
+      "clinicalGroup": "glp1-coadministration"
+    },
+    {
+      "id": "mech-semaglutide-glp1",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "semaglutide"
+        },
+        {
+          "kind": "class",
+          "value": "glp1_agonist"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "Overlapping GLP-1 receptor activity from two medicines.",
+      "effect": "The Wegovy prescribing information advises against using semaglutide together with another GLP-1 receptor agonist.",
+      "action": "Do not use this screen as approval to combine these medicines. Review with the prescriber or pharmacist before coadministration. If switching treatment, obtain a specific transition plan.",
+      "monitoring": "Review the indication, intended regimen and whether this is a planned switch.",
+      "sourceId": "openfda-labeling",
+      "sourceUrl": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ee06186f-2aa3-4990-a760-757579d8f77b",
+      "evidence": "Wegovy prescribing information: Indications and Usage, Limitations of Use.",
+      "reviewDate": "2026-09-25",
+      "doseTimingSeparation": false,
+      "specialistReview": false,
+      "clinicalGroup": "glp1-coadministration"
+    },
+    {
+      "id": "mech-semaglutide-insulin-secretagogue",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "semaglutide"
+        },
+        {
+          "kind": "class",
+          "value": "hypoglycemic"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "Additional glucose lowering when combined with insulin or an insulin secretagogue.",
+      "effect": "Increased risk of hypoglycaemia, including severe episodes.",
+      "action": "This combination may be prescribed, but requires an individualized plan. Review glucose monitoring and whether the insulin or secretagogue dose needs adjustment with the prescriber; do not automatically stop treatment.",
+      "monitoring": "Blood glucose and symptoms of hypoglycaemia, particularly when starting or increasing treatment.",
+      "sourceId": "openfda-labeling",
+      "sourceUrl": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ee06186f-2aa3-4990-a760-757579d8f77b",
+      "evidence": "Wegovy prescribing information: Hypoglycemia warning and concomitant insulin/insulin-secretagogue interaction.",
+      "reviewDate": "2026-09-25",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-tirzepatide-insulin-secretagogue",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "tirzepatide"
+        },
+        {
+          "kind": "class",
+          "value": "hypoglycemic"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "Additional glucose lowering when combined with insulin or an insulin secretagogue.",
+      "effect": "Increased risk of hypoglycaemia, including severe episodes.",
+      "action": "This combination may be prescribed, but requires an individualized plan. Review glucose monitoring and whether the insulin or secretagogue dose needs adjustment with the prescriber; do not automatically stop treatment.",
+      "monitoring": "Blood glucose and symptoms of hypoglycaemia, particularly when starting or increasing treatment.",
+      "sourceId": "openfda-labeling",
+      "sourceUrl": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=487cd7e7-434c-4925-99fa-aa80b1cc776b",
+      "evidence": "Zepbound prescribing information: Hypoglycemia warning and concomitant insulin/insulin-secretagogue interaction.",
       "reviewDate": "2026-09-25",
       "doseTimingSeparation": false,
       "specialistReview": false

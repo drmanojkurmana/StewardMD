@@ -9245,6 +9245,17 @@ is how two screens drift into different payloads or permissions. Month and yeste
 that already exist (read-only), so viewing history never creates a queue session for a past day. Default on
 behind `smd_opd_dash`, classic layout one click away, until the owner approves it permanently.
 
+## 2026-09-25: Video visits are off by default, the room name is the lock, the patient gets it only in consultation
+Jitsi rooms are open to anyone with the name, so the name is 128 random bits (`wsq-` + hex), minted per visit,
+never built from patient data, and never sent to staff lists or in the SMS. The patient's link is the ticket's
+own signed token on stewardmd.in (`/tele?t=`), which hands out the room only while the visit is in consultation
+and dies when the visit completes or is cancelled. A public server (meet.jit.si) is allowed but the settings
+screen says the video then passes through a server the hospital does not run. Consent (who agreed, who recorded
+it) is required and audited in the same commit. Which server to run, and whether native clinics get a settings
+screen, are owner decisions still open.
+**Owner, 2026-09-25: ships as COMING SOON.** Off for every hospital until the deployment sets
+`TELEHEALTH_READY=1`; Admin shows "Coming soon" instead of the settings form.
+
 ## 2026-09-25 — Stores/pharmacy stock gets OPT-IN pack-size conversion; the "no unit conversion" rule narrows, it does not fall
 stock.js, purchasing.js and stores.js said "UNITS ARE NOT CONVERTED" since they were written: guessing
 that a box is twenty-eight tablets produces a confident number that is wrong by a factor of twenty-
@@ -9574,3 +9585,17 @@ the server route and the client flag now default ON in code; `KITS_SHARE_ON=0` a
 are the kill switches. Before switching on, a colleague became addressable by sign-in email as well as
 StewardMD ID (most doctors have no ID yet), the sheet shows your own ID, and sends and invites spend
 the rate limit before the directory lookup so the directory cannot be probed for free.
+
+## 2026-09-26 - RadioAnatome: unverified modules say Beta, they are not hidden
+
+**Context.** The radiologist's sign-off on /validation (2026-08-19, head CT notes updated 2026-08-25)
+rejected 13 modules and marked 16 "needs fix"; nothing in the app read those verdicts, so every
+module looked equally finished to a student.
+
+**Decision (owner).** Do not hide rejected modules. Every module shows a "Beta" pill on its catalog
+row and in the viewer header, and the viewer footer reads "Beta · Unverified, may contain mistakes.
+Not for diagnosis." A module drops the label only when `modules.json` carries `verified: true`, which
+is set by hand after a "verified" verdict on /validation. New modules are Beta by default.
+
+**Consequence.** Only the three living-torso modules are verified. The label is static data, not a
+live read of /api/validation, so a new sign-off needs a `modules.json` edit and an app update.

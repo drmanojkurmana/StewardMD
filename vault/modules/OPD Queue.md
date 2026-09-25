@@ -106,6 +106,25 @@ vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both
   patient or record needs someone; everything else neutral. Cards flat (no shadow). Radius: cards 20, controls 10, tags 6.
   Card names are our own: the brief forbids copying the reference's text, and a browser test checks the titles.
 
+## Telehealth: video visits (2026-09-25, draft PR, branch worktree-agent-ab0e68a15cab7320e)
+**COMING SOON (owner, 2026-09-25).** Ships switched off for every hospital: `telehealthSettings(org, env)` reads off
+with `comingSoon: true` unless the deployment sets `TELEHEALTH_READY=1`, so no screen offers video, every tele route
+refuses (`video_off`), `POST /org/telehealth-settings` refuses (`coming_soon`), and Admin > Hospital shows a
+"Coming soon" card with no form. To release: pick the video server, set `TELEHEALTH_READY=1` on Pages, then save
+the server in Admin.
+Off by default. A WardSynQ hospital turns it on by saving `org.wardsynq.telehealth.baseUrl` (https,
+Jitsi-compatible) through `GET/POST /api/queue/org/telehealth-settings` (staff.admin, reason, audited,
+read back; `/org/update` refuses `wardsynq.telehealth`). `functions/_telehealth.js` holds the pure rules:
+`telehealthSettings(org) -> {on, baseUrl, publicServer}` (publicServer for meet.jit.si / 8x8.vc so the
+screen warns), room `wsq-` + 32 hex minted on the ticket (`teleRoom`, never in the staff view), consent
+`{givenBy, agreed:true}` required. Routes: `/tele/enable` (consent + `tele_consent` audit, one commit),
+`/tele/start` (to in_consultation, `tele_start` audit, returns room URL), `/tele/send-link` (the ticket's
+own signed token at `/tele?t=`, no PHI), patient `GET /tele/wait` + `POST /tele/room` (room only while
+in_consultation; the link dies with the visit via tokenVer). Appointments carry `teleconsult` +
+`teleConsent`; arrival passes the consent to the queue ticket; the record gets a `teleconsult` consent
+(care purpose) and `Encounter.virtual`. Day close counts video visits. Tests: `test/telehealth*.test.mjs`,
+`test/run-tele-wait-ui.mjs`. Open owner decisions: which video server; native clinics have no settings screen.
+
 ## Protocol tab = clinical protocols + oncology regimens (2026-09-25)
 The EMR Protocol tab is no longer oncology-only: see [[Clinical Protocols]]. Branch chips, a cancer-type
 picker, one search, and an in-tab read-only reader for clinical protocols. Assign exists only on

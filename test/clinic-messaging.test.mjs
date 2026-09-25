@@ -363,7 +363,12 @@ test("the outbound web-price nudge exists for the queue pack and stays server-si
 // ---------------- the one real spend point ----------------
 test("the queue charges at the send sites and nowhere else", () => {
   const notify = src("functions/_queue_notify.js");
-  assert.equal((notify.match(/await chargeVisit\(/g) || []).length, 2, "exactly the two outbound send sites charge");
+  // The outbound send sites: queue events, the visit timeline link, and the video visit link (notifyTeleLink).
+  assert.equal((notify.match(/await chargeVisit\(/g) || []).length, 3, "exactly the three outbound send sites charge");
+  for (const fn of ["notifyTicket", "notifyTimeline", "notifyTeleLink"]) {
+    const body = notify.slice(notify.indexOf("export async function " + fn), notify.indexOf("\n}\n", notify.indexOf("export async function " + fn)));
+    assert.ok(/await chargeVisit\(env, session, ticket\)/.test(body), fn + " charges the visit before sending");
+  }
   assert.equal((notify.match(/consumeVisit\(/g) || []).length, 1);
   // The charge is per VISIT (the ticket id), never per message.
   assert.ok(/consumeVisit\(env, kv, uid, ticket\.id/.test(notify));

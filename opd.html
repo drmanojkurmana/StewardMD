@@ -135,6 +135,13 @@
   .acts button.warn{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
   .acts button.rm{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
   .acts button.rm:hover{background:var(--red);color:#fff}
+  /* Video visits: the three tele actions keep a 44px target on every pointer, not only touch. */
+  .acts button.tele,.opd-modern .acts button.tele{min-height:44px}
+  .tele-sheet label{display:block;font-weight:600;font-size:13px;margin:12px 0 6px}
+  .tele-sheet .agree{display:flex;align-items:center;gap:10px;min-height:44px;margin-top:12px;font-weight:600;font-size:14px;cursor:pointer}
+  .tele-sheet .agree input{width:22px;height:22px;flex:none;margin:0}
+  .tele-sheet .btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+  .tele-sheet a.btn{display:flex;align-items:center;justify-content:center;min-height:44px;text-decoration:none;box-sizing:border-box}
   .btn.danger{background:var(--red);color:#fff}
   .btn.danger:hover{box-shadow:0 4px 14px rgba(225,29,72,.35)}
   /* modal (animated bottom sheet) */
@@ -593,6 +600,7 @@
     api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
       if(r&&r.ok){
         st.opd=r;
+        st.telehealth=!!r.telehealth;   // video visits: true only when the hospital saved a video server
         if(r.orgName) st.orgName=r.orgName;
         if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
         renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare(); return;
@@ -946,6 +954,7 @@
       k("Did not wait",p.abandonedPct==null?"-":esc(p.abandonedPct)+"%",esc(p.noShow||0)+" no-shows",(p.abandonedPct||0)>=10)+
       k("Door to doctor",dcMin(p.doorToDoctor&&p.doorToDoctor.medianMin),"9 in 10 within "+dcMin(p.doorToDoctor&&p.doorToDoctor.p90Min))+
     '</div>';
+    if(c.teleconsult) h+='<div class="dc-chips"><span>Video visits: <b>'+esc(c.teleconsult)+'</b></span></div>';
     h+='<h4>By room</h4>'+(rooms.length?'<table class="dc-t"><thead><tr><th>Room</th><th>Registered</th><th>Seen</th><th>No-show</th><th>Consult</th><th>Wait</th></tr></thead><tbody>'+
       rooms.map(function(x){ return '<tr><td>'+esc(x.room)+(x.doctor?' <span style="color:var(--mut)">'+esc(x.doctor)+'</span>':'')+'</td><td>'+esc(x.registered)+'</td><td>'+esc(x.seen)+'</td><td>'+esc(x.noShow)+'</td><td>'+dcMin(x.consultMedianMin)+'</td><td>'+dcMin(x.doorToDoctorMedianMin)+'</td></tr>'; }).join("")+
       '</tbody></table>':'<div class="empty">No patients today.</div>');
@@ -1137,6 +1146,7 @@
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // reroute from the room back to the waiting hall (in_consultation -> waiting)
     if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // out to diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
+    b=b.concat(teleButtons(s,t));
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');
     b.push('<button data-a="label" data-s="'+s.id+'" data-t="'+t.id+'">Label</button>');
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
@@ -1149,7 +1159,7 @@
     var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
     b.push('<button data-a="bill" data-t="' + t.id + '" data-smd="' + esc(mrnVal) + '" data-mrn="' + esc(mrnVal) + '" data-unbilled="' + (t.unbilledAmount||0) + '" data-name="' + esc(t.name||"Patient") + '"' + (t.unbilledAmount>0?' class="pri"':'') + '>' + billLabel + '</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+labBadges(t)+'</div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+teleChip(t)+billChip+labBadges(t)+'</div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
       '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
       '<div class="acts">'+b.join("")+'</div></div>';
@@ -1175,6 +1185,9 @@
         else if(a==="notes") openNotes(sid,tid,btn.getAttribute("data-n"));
         else if(a==="vitals") openVitals(sid,tid,btn.getAttribute("data-n"));
         else if(a==="label") openFileLabel(tid,sid);
+        else if(a==="televisit") openTeleConsent(sid,tid,btn.getAttribute("data-n"));
+        else if(a==="telestart") teleStart(sid,tid,btn);
+        else if(a==="telelink") teleSendLink(sid,tid,btn);
         else if (a === "bill") {
           var mrn = btn.getAttribute("data-mrn") || btn.getAttribute("data-smd") || tid;
           var unbilledAmt = Number(btn.getAttribute("data-unbilled")) || 0;
@@ -1190,6 +1203,74 @@
         }
       };
     });
+  }
+  // ---- VIDEO VISITS (server: functions/_telehealth.js, /api/queue/tele/*). Offered only when the hospital saved a
+  // video server (opd-board / whoami say telehealth:true). A visit becomes a video visit only after the desk records
+  // who agreed. The room address is never on the board: /tele/start hands it to the doctor who starts the call.
+  var TELE_LIVE=["registered","waiting","called","in_consultation"];
+  var TELE_GIVERS=[["patient","The patient"],["parent","A parent"],["legal-guardian","A legal guardian"],["next-of-kin","Next of kin"],["power-of-attorney","Power of attorney holder"]];
+  // Nurse station: the flag stored from the last opd-board load (an assign-room reply's board may not carry it).
+  // Legacy doctor board: whoami carries the same flag.
+  function teleOn(){ return st.opd ? !!(st.telehealth||st.opd.telehealth) : !!(st.who&&st.who.telehealth); }
+  function teleChip(t){ return t&&t.teleconsult?' <span class="chip tele-chip" title="Video visit">Video</span>':""; }
+  function teleButtons(s,t){
+    if(!teleOn()||!s||!s.id||!t||TELE_LIVE.indexOf(t.status)<0) return [];
+    var nm=esc(t.name||"Patient"), at=' data-s="'+esc(s.id)+'" data-t="'+esc(t.id)+'" data-n="'+nm+'"', out=[];
+    if(!t.teleconsult){
+      if(can("queue.add")) out.push('<button type="button" class="tele" data-a="televisit"'+at+' aria-label="Video visit for '+nm+': record consent"><span class="ms sm" aria-hidden="true">videocam</span>Video visit</button>');
+    } else if(can("queue.status")){
+      out.push('<button type="button" class="tele pri" data-a="telestart"'+at+' aria-label="Start video call with '+nm+'"><span class="ms sm" aria-hidden="true">video_call</span>Start video</button>');
+      out.push('<button type="button" class="tele" data-a="telelink"'+at+' aria-label="Send video link to '+nm+'"><span class="ms sm" aria-hidden="true">send_to_mobile</span>Send video link</button>');
+    }
+    return out;
+  }
+  function teleErr(r){
+    var e=r&&r.error;
+    var m={video_off:"Video visits are off for this hospital.",visit_closed:"This visit has ended, so the video call cannot be used.",not_teleconsult:"This is not a video visit yet. Record the consent first.",consent_required:"Tick that they agreed to a video consultation.",giver_required:"Pick who agreed.",unknown_giver:"Pick who agreed from the list."}[e];
+    return m||(r&&r.message)||(e?friendly(e):"Action failed");
+  }
+  function openTeleConsent(sid,tid,name){
+    var opts=TELE_GIVERS.map(function(g){return '<option value="'+g[0]+'">'+g[1]+'</option>';}).join("");
+    open('<div class="tele-sheet"><h3>Video visit'+(name?' for '+esc(name):'')+'</h3>'+
+      '<p style="color:var(--mut);margin:0 0 4px">Record the consent before this visit becomes a video consultation. It is kept in the audit trail.</p>'+
+      '<label for="tgiv">Who agreed</label><select id="tgiv">'+opts+'</select>'+
+      '<label class="agree" for="tagr"><input type="checkbox" id="tagr">They agreed to a video consultation</label>'+
+      '<div class="row2"><button type="button" class="cancel" id="cx">Cancel</button><button type="button" class="btn" id="ok" style="margin:0" disabled>Save</button></div></div>');
+    var agr=sheet.querySelector("#tagr"), ok=sheet.querySelector("#ok");
+    agr.onchange=function(){ ok.disabled=!agr.checked; };
+    sheet.querySelector("#cx").onclick=close;
+    ok.onclick=function(){
+      if(!agr.checked){ toast("Tick that they agreed to a video consultation"); return; }
+      ok.disabled=true; ok.textContent="Saving…";
+      api("tele/enable",{method:"POST",body:{sessionId:sid,ticketId:tid,teleConsent:{givenBy:sheet.querySelector("#tgiv").value,agreed:true}}}).then(function(r){
+        if(!r||!r.ok){ ok.disabled=!agr.checked; ok.textContent="Save"; toast(teleErr(r)); return; }
+        close(); toast("Video visit set up"); refresh();
+      },function(){ ok.disabled=!agr.checked; ok.textContent="Save"; toast("Not saved: the server could not be reached."); });
+    };
+  }
+  function teleStart(sid,tid,btn){
+    if(btn) btn.disabled=true;
+    api("tele/start",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
+      if(btn) btn.disabled=false;
+      if(!r||!r.ok||!/^https:\/\//i.test(String(r.roomUrl||""))){ toast(r&&!r.ok?teleErr(r):"The video call could not be started"); refresh(); return; }
+      try{ window.open(r.roomUrl,"_blank","noopener"); }catch(e){}
+      // A browser may block a tab opened after the network call; this link always works because it is a tap.
+      open('<div class="tele-sheet"><h3>Video call started</h3><p style="color:var(--mut);margin:0">The call opens in a new tab. If it did not open, use the button below.</p>'+
+        '<div class="row2"><button type="button" class="cancel" id="cx">Close</button><a class="btn" id="tjoin" style="margin:0" target="_blank" rel="noopener noreferrer" href="'+esc(r.roomUrl)+'">Open video call</a></div></div>');
+      sheet.querySelector("#cx").onclick=close;
+      sheet.querySelector("#tjoin").onclick=function(){ setTimeout(close,0); };
+      refresh();
+    },function(){ if(btn) btn.disabled=false; toast("The server could not be reached."); });
+  }
+  function teleSendLink(sid,tid,btn){
+    if(btn) btn.disabled=true;
+    api("tele/send-link",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
+      if(btn) btn.disabled=false;
+      if(!r||!r.ok){ toast("Link not sent: "+teleErr(r)); refresh(); return; }
+      if(r.sent) toast("Video link sent to the patient");
+      else toast("Link not sent: "+({no_phone:"no mobile number on file","quota-exhausted":"the messaging allowance is used up"}[r.reason]||"the message could not be delivered"));
+      refresh();
+    },function(){ if(btn) btn.disabled=false; toast("Link not sent: the server could not be reached."); });
   }
   function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
   function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required.",ticket_changed:"This patient changed meanwhile. Reload and try again.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why.",weak_pin:"PIN must be 4-8 digits; avoid simple repeated digits like 1111.",weak_password:"Password is too weak or common. Use at least 10 characters.",member_not_found:"Staff member not found."}[e]||e; }
@@ -2451,6 +2532,7 @@
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // room -> waiting hall (in_consultation -> waiting)
     if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // room -> diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
+    b=b.concat(teleButtons(s,t));
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
     b.push('<button data-a="label" data-s="'+s.id+'" data-t="'+t.id+'">Label</button>');
@@ -2463,7 +2545,7 @@
     var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
     b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'" data-unbilled="'+(t.unbilledAmount||0)+'" data-name="'+esc(t.name||"Patient")+'"'+(t.unbilledAmount>0?' class="pri"':'')+'>'+billLabel+'</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+labBadges(t)+'</div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+teleChip(t)+billChip+labBadges(t)+'</div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   // Nurse records vitals -> a compact timeline entry (kind:"vitals", EMR_VITALS cap). This is the nurse's
