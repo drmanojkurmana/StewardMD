@@ -6,7 +6,7 @@
  "basis": "international",
  "setting": "Operating theatre, labour ward, emergency department, day-care and procedure rooms",
  "aliases": ["LAST", "local anesthetic toxicity", "LA toxicity", "lignocaine toxicity", "lidocaine toxicity", "bupivacaine toxicity", "lipid emulsion", "Intralipid", "lipid rescue", "maximum dose local anaesthetic"],
- "summary": "Stop the injection, call for help, secure the airway with 100% oxygen, treat seizures with a benzodiazepine, give 20% lipid emulsion early (1.5 mL/kg bolus then 0.25 mL/kg/min under 70 kg), and run modified resuscitation with small adrenaline doses and no vasopressin or lidocaine.",
+ "summary": "Stop the injection, call for help, secure the airway with 100% oxygen, treat seizures with a benzodiazepine, give 20% lipid emulsion early (1.5 mL/kg bolus over 1 minute, then 15 mL/kg/h, which is 0.25 mL/kg/min; maximum 12 mL/kg), and run modified resuscitation with small adrenaline doses and no vasopressin or lidocaine.",
  "sections": [
   {
    "kind": "recognise",
@@ -33,9 +33,9 @@
    "kind": "treatment",
    "title": "Lipid emulsion and modified resuscitation",
    "items": [
-    "Over 70 kg: 20% lipid bolus about 100 mL over 2 to 3 minutes, then infuse about 200 to 250 mL over 15 to 20 minutes.",
-    "Under 70 kg: bolus 1.5 mL/kg (lean body weight) over 2 to 3 minutes, then 0.25 mL/kg/min; consider a pump if under 40 kg.",
-    "If still unstable: repeat the bolus (once or twice) and double the infusion rate. Continue the infusion for at least 15 minutes after stability returns. Maximum total about 12 mL/kg.",
+    "20% lipid emulsion: bolus 1.5 mL/kg (lean body weight) IV over 1 minute (AAGBI; ASRA gives it over 2 to 3 minutes), then infuse 15 mL/kg/h (0.25 mL/kg/min); consider a pump if under 40 kg.",
+    "Over 70 kg, ASRA 2020 simplification: bolus about 100 mL over 2 to 3 minutes, then infuse about 200 to 250 mL over 15 to 20 minutes.",
+    "If still unstable after 5 minutes: give up to 2 repeat boluses of the same dose, 5 minutes apart, and double the infusion to 30 mL/kg/h (0.5 mL/kg/min). Continue the infusion for at least 15 minutes after stability returns. Maximum cumulative dose 12 mL/kg.",
     "Adrenaline: use smaller than standard doses, starting at 1 mcg/kg or less per bolus, rather than 1 mg.",
     "Avoid vasopressin, calcium channel blockers, beta-blockers and local anaesthetics (no lidocaine as an antiarrhythmic). Amiodarone is the preferred antiarrhythmic.",
     "Propofol is not a substitute for lipid emulsion (too little lipid, and it depresses the myocardium)."
@@ -68,7 +68,7 @@
    "items": [
     "Reduce doses at the extremes of age (neonates, infants, elderly), and in cardiac failure, conduction disease, hepatic impairment and low muscle mass.",
     "Pregnancy: greater sensitivity and faster absorption; treat LAST the same way with lipid, and follow maternal cardiac arrest steps (left uterine displacement, early delivery decision).",
-    "Children: use mg/kg limits strictly; the lipid dose is the same weight-based regimen (1.5 mL/kg bolus, 0.25 mL/kg/min)."
+    "Children: use mg/kg limits strictly; the lipid dose is the same weight-based regimen (1.5 mL/kg bolus, then 15 mL/kg/h; maximum 12 mL/kg)."
    ]
   },
   {
@@ -83,7 +83,7 @@
   }
  ],
  "drugs": [
-  { "name": "Lipid emulsion 20% (for example Intralipid)", "dose": "Over 70 kg: 100 mL IV over 2 to 3 min, then 200 to 250 mL over 15 to 20 min. Under 70 kg: 1.5 mL/kg over 2 to 3 min, then 0.25 mL/kg/min", "notes": "If unstable repeat bolus and double infusion; continue at least 15 minutes after stability; maximum about 12 mL/kg. UK (AAGBI) regimen is similar: 1.5 mL/kg over 1 minute then 15 mL/kg/h." },
+  { "name": "Lipid emulsion 20% (for example Intralipid)", "dose": "1.5 mL/kg IV bolus over 1 minute, then 15 mL/kg/h (0.25 mL/kg/min). Over 70 kg (ASRA 2020): about 100 mL over 2 to 3 min, then 200 to 250 mL over 15 to 20 min", "notes": "If unstable at 5 minutes: up to 2 repeat boluses 5 minutes apart and double the infusion to 30 mL/kg/h. Continue at least 15 minutes after stability. Maximum cumulative dose 12 mL/kg." },
   { "name": "Adrenaline (epinephrine)", "dose": "1 mcg/kg IV or less per bolus in LAST arrest or hypotension", "notes": "Avoid standard 1 mg doses; avoid vasopressin." },
   { "name": "Lorazepam", "dose": "0.1 mg/kg IV (max 4 mg), may repeat once after 5 to 10 minutes", "notes": "Midazolam in small IV increments is an alternative; benzodiazepines are preferred for LAST seizures." },
   { "name": "Amiodarone", "dose": "300 mg IV bolus for shock-refractory VF or pulseless VT (adult ALS dosing)", "notes": "Preferred antiarrhythmic; do not use lidocaine." },
