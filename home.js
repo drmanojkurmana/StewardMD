@@ -1308,6 +1308,21 @@
       var map = { criticallabs: "icu", patients: "icu", tasks: "icu", ward: "ward",
                   askai: "askai", drugs: "drugs", drugmenu: "drugmenu", calculators: "calculators",
                   antibiogram: "antibiogram", home: "home" };
+      // The "Before you delete us" Home Screen quick action lands here. It is not an ACT overlay,
+      // so it is handled before the ACT lookup. SMD_openFeedback is referenced across the app but
+      // defined nowhere, so this mirrors the sidebar's three-step chain (sidebar-redesign.js
+      // feedback:) rather than calling it and silently doing nothing: the global if some build
+      // provides it, then an in-page feedback button, then mailto as the floor. A doctor who taps
+      // this on the way to deleting the app must always land somewhere they can type.
+      if (r === "feedback") {
+        try {
+          if (window.SMD_openFeedback) return SMD_openFeedback();
+          var fb = document.querySelector('[data-act="feedback"],#v3FeedbackBtn');
+          if (fb) return fb.click();
+          location.href = "mailto:Support@StewardMD.in?subject=StewardMD%20feedback";
+        } catch (e) {}
+        return;
+      }
       var key = map[r] || (ACT[r] ? r : null);
       if (key === "home") { try { closeAllModules && closeAllModules(); } catch (e) {} return; }
       if (key && ACT[key]) { try { ACT[key](); } catch (e) {} }
