@@ -201,9 +201,7 @@
       return true;
     }
 
-    // body.maik-lb-on: MaiK's full-screen figure viewer is over the sheet (home.js maikFigLightbox).
-    // themeObserver already watches body's class, so opening/closing it pauses/resumes via sync().
-    function active() { return !dead && sheet.isConnected && sheet.classList.contains('on') && !document.hidden && !reduced.matches && !document.body.classList.contains('maik-lb-on'); }
+    function active() { return !dead && sheet.isConnected && sheet.classList.contains('on') && !document.hidden && !reduced.matches; }
     function frame(t) {
       raf = 0; if (!sheet.isConnected) { destroy(); return; } if (!active()) return;
       if (t - last >= 24) {

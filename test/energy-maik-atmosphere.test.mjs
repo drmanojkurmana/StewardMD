@@ -1,11 +1,12 @@
 /* test/energy-maik-atmosphere.test.mjs: static pins for the MaiK atmosphere energy pass.
- * Pixel identity, the draw count and the figure-viewer pause are proven in a real browser by
- * test/run-maik-atmosphere-pixels.mjs; these pins keep the invariants that proof relies on. */
+ * Pixel identity (bit-exact on software raster, <= 1/255 on screen on GPU raster) and the draw count
+ * are proven in a real browser by test/run-maik-atmosphere-pixels.mjs; these pins keep the invariants
+ * that proof relies on. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const A = readFileSync(new URL("../maik-atmosphere.js", import.meta.url), "utf8");
-const H = readFileSync(new URL("../home.js", import.meta.url), "utf8");
+const C = readFileSync(new URL("../maik-atmosphere.css", import.meta.url), "utf8");
 const I = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 
 test("glyph cells: one font, 11 x 20 px grid, no shadow or filter that could bleed into a neighbour", () => {
@@ -36,16 +37,15 @@ test("full redraw: first frame, any sync (theme, busy, visibility, sheet class),
   assert.match(A, /actualBoundingBoxAscent > CELL_T - m \|\| t\.actualBoundingBoxDescent > 20 - CELL_T - m\) return false;/);
 });
 
-test("the loop pauses under MaiK's figure viewer, via the body-class observer that already exists", () => {
-  assert.match(A, /!reduced\.matches && !document\.body\.classList\.contains\('maik-lb-on'\); \}/);
-  assert.match(A, /themeObserver\.observe\(document\.body, \{ attributes: true, attributeFilter: \['class'\] \}\)/);
-  // home.js contract: the viewer sets and clears that class.
-  assert.match(H, /document\.body\.appendChild\(ov\); document\.body\.classList\.add\("maik-lb-on"\);/);
-  assert.match(H, /ov\.remove\(\); document\.body\.classList\.remove\("maik-lb-on"\);/);
-  // Every other overlay reached from a MaiK chip closes the sheet first (so `.on` already stops the loop).
-  assert.match(H, /try \{ close\(\); \} catch \(e\) \{\}\n\s*setTimeout\(function \(\) \{\n\s*try \{ SMD_REASON\.openRef/);
-  assert.match(H, /if \(calcId\) \{ close\(\);/);
-  assert.match(H, /if \(tool && ACT\[tool\]\) \{ close\(\);/);
+test("the loop's run condition is unchanged (no figure-viewer pause)", () => {
+  assert.match(A, /function active\(\) \{ return !dead && sheet\.isConnected && sheet\.classList\.contains\('on'\) && !document\.hidden && !reduced\.matches; \}/);
+  assert.doesNotMatch(A, /maik-lb-on/);
+});
+
+test("the harness's on-screen bound uses the stylesheet's layer opacities and fade", () => {
+  assert.match(C, /#maikSheet \.mk-atmo-thinking \.mk-atmo-code \{ opacity:\.28; \}/);
+  assert.match(C, /#maikSheet \.mk-atmo-dark\.mk-atmo-thinking \.mk-atmo-code \{ opacity:\.46; \}/);
+  assert.match(C, /transition:opacity \.5s ease;/);
 });
 
 test("index.html busts the cache for the new maik-atmosphere.js", () => {
