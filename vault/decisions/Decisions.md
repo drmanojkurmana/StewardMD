@@ -9209,3 +9209,25 @@ takes the password once per app session and, while unlocked, backs up on change 
 floor; closing the app re-locks it. The backup holds only what exists nowhere else (drafts, queue,
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
+
+## 2026-09-25 — Stores/pharmacy stock gets OPT-IN pack-size conversion; the "no unit conversion" rule narrows, it does not fall
+stock.js, purchasing.js and stores.js said "UNITS ARE NOT CONVERTED" since they were written: guessing
+that a box is twenty-eight tablets produces a confident number that is wrong by a factor of twenty-
+eight, and that mapping was a product catalogue the build did not have. It still does not GUESS. What
+changed is that an item can now SAY the mapping itself: `StoreItem.packs` (general stores only, not a
+pharmacy drug's own record - no drug item master exists yet) declares
+`[{ unit: "strip", of: 10 }, { unit: "box", of: 10, packUnit: "strip" }]`, positive integer factors
+only, packs may chain, a cycle or an unresolved reference is refused at the item level
+(`stock.js: validatePacks`) before anything is ever received against it, and an item with no `packs`
+behaves exactly as it always did - this is additive, not a relaxation of the old rule. Receiving in a
+declared pack unit converts to the base unit before the movement reaches the one ledger (stock.js's
+own invariant: stock, reorder levels and valuation stay in the base unit, never a pack); what was
+actually counted at the hatch is kept alongside as `receivedAs`, and `dualDisplay()` reads it back as
+"25 strip (250 tablet)". Valuation divides the ordered line's own price by the pack factor into
+integer paise (rounded, comment states the rounding) rather than carrying a second price field that
+could drift from the first. `pharmacy-dispense.js` deliberately gained NO conversion: a dispense is an
+issue, and issues were never re-entered in a different unit even before this - if a drug item master
+grows `packs` one day, that conversion still belongs at the point of receipt, not dispense.
+ward.js's purchasing screen (`poReceive`) reads the general stores item master once so the unit prompt
+can offer an item's own declared packs instead of a blind box/strip/vial guess, and shows the server's
+`packDisplay` back after a receipt books in.
