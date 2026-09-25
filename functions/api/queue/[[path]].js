@@ -760,13 +760,15 @@ async function boardForOrg(env, org, date) {
     if (m.identity) memberMap.set(normDocId(m.identity), m.displayName || m.name || "");
   }
   const out = [];
-  let unbilledByPatient = new Map();
+  /* Unpaid orders by the keys a ticket is found by (its id, its patient). An order carries BOTH (the console's
+   * consultation fee is raised with the MRN and the ticket), so a ticket sums each order ONCE: adding the two
+   * lookups showed a 500 fee as 1000 unbilled, and Quick Pay asked the patient for that. */
+  const unbilledByKey = new Map();
   let paidPatients = new Set();
   try {
     const bQ = await BILL.billingQueue(env, org.id);
     (bQ.orders || []).forEach((o) => {
-      if (o.patientId) unbilledByPatient.set(o.patientId, (unbilledByPatient.get(o.patientId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
-      if (o.ticketId) unbilledByPatient.set(o.ticketId, (unbilledByPatient.get(o.ticketId) || 0) + ((o.unitPrice || 0) * (o.qty || 1)));
+      for (const k of [o.patientId, o.ticketId]) if (k) { if (!unbilledByKey.has(k)) unbilledByKey.set(k, new Set()); unbilledByKey.get(k).add(o); }
     });
     const { rows: paidOrders } = await readAll(env, "q_orders", [{ field: "orgId", value: org.id }, { field: "status", value: "paid" }], 500).catch(() => ({ rows: [] }));
     (paidOrders || []).forEach((r) => {
@@ -778,7 +780,8 @@ async function boardForOrg(env, org, date) {
   const annotateTickets = (tickets) => {
     return (tickets || []).map((t) => {
       const pid = t.mrn || t.ghisPatientId || t.id;
-      const unbilled = (unbilledByPatient.get(t.id) || 0) + (pid ? (unbilledByPatient.get(pid) || 0) : 0);
+      const mine = new Set([...(unbilledByKey.get(t.id) || []), ...((pid && unbilledByKey.get(pid)) || [])]);
+      let unbilled = 0; for (const o of mine) unbilled += (o.unitPrice || 0) * (o.qty || 1);
       const isPaid = !unbilled && (paidPatients.has(t.id) || (pid && paidPatients.has(pid)));
       return Object.assign({}, t, {
         billingStatus: unbilled > 0 ? "unbilled" : (isPaid ? "paid" : ""),
