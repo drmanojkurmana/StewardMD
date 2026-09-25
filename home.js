@@ -1319,7 +1319,7 @@
           if (window.SMD_openFeedback) return SMD_openFeedback();
           var fb = document.querySelector('[data-act="feedback"],#v3FeedbackBtn');
           if (fb) return fb.click();
-          location.href = "mailto:Support@StewardMD.in?subject=StewardMD%20feedback";
+          location.href = "mailto:hello@maiknowledge.com?subject=StewardMD%20feedback";
         } catch (e) {}
         return;
       }
