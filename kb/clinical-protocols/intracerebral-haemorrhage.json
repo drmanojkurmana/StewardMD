@@ -4,7 +4,18 @@
  "subject": "neurology",
  "population": "Adults",
  "setting": "Emergency department, stroke unit, neuro ICU",
- "aliases": ["ICH", "haemorrhagic stroke", "hemorrhagic stroke", "intracerebral hemorrhage", "brain haemorrhage", "hypertensive bleed", "anticoagulant reversal", "PCC", "warfarin bleed", "DOAC bleed"],
+ "aliases": [
+  "ICH",
+  "haemorrhagic stroke",
+  "hemorrhagic stroke",
+  "intracerebral hemorrhage",
+  "brain haemorrhage",
+  "hypertensive bleed",
+  "anticoagulant reversal",
+  "PCC",
+  "warfarin bleed",
+  "DOAC bleed"
+ ],
  "summary": "Rapid CT diagnosis, early smooth systolic BP lowering to 140 mmHg (keep 130 to 150, avoid below 130), immediate anticoagulant reversal with PCC plus vitamin K or specific agents, and early neurosurgical referral for cerebellar haematoma, hydrocephalus or deterioration.",
  "sections": [
   {
@@ -77,7 +88,8 @@
    "title": "Escalate and prognosis",
    "items": [
     "Transfer early to a centre with neurosurgery and neurocritical care if surgery, EVD or airway support may be needed.",
-    "Give full active treatment initially and avoid early withdrawal of care based on the ICH score alone; prognosticate after the first days with the family."
+    "Give full active treatment initially and avoid early withdrawal of care based on the ICH score alone; prognosticate after the first days with the family.",
+    "Involve palliative care early for symptom control and family support when the haemorrhage is devastating, alongside active treatment until the prognosis is clear."
    ]
   },
   {
@@ -93,20 +105,75 @@
   }
  ],
  "drugs": [
-  { "name": "Labetalol", "dose": "10 to 20 mg IV over 1 to 2 minutes, may repeat; then infusion 2 to 8 mg/min", "notes": "Target systolic 140 mmHg (130 to 150). Avoid in asthma, heart block, bradycardia." },
-  { "name": "Nicardipine", "dose": "5 mg/h IV infusion, increase by 2.5 mg/h every 5 to 15 minutes, max 15 mg/h", "notes": "Titratable alternative where available." },
-  { "name": "4-factor prothrombin complex concentrate (PCC)", "dose": "Warfarin: INR 2 to below 4: 25 units/kg (max 2500 units); INR 4 to 6: 35 units/kg (max 3500 units); INR above 6: 50 units/kg (max 5000 units). Factor Xa inhibitor: 50 units/kg IV", "notes": "Give with vitamin K for warfarin. Recheck INR 15 to 60 minutes after." },
-  { "name": "Vitamin K (phytomenadione)", "dose": "10 mg slow IV once; repeat if INR remains 1.4 or more at 24 to 48 hours", "notes": "Always with PCC or FFP in warfarin-associated ICH." },
-  { "name": "Idarucizumab", "dose": "5 g IV (two 2.5 g doses)", "notes": "Dabigatran reversal." },
-  { "name": "Protamine sulfate", "dose": "1 mg per 100 units UFH given in the previous 2 to 3 hours (max 50 mg); 1 mg per 1 mg enoxaparin within 8 hours (max 50 mg)", "notes": "0.5 mg per 1 mg enoxaparin at 8 to 12 hours. Risk of hypotension and anaphylaxis." },
-  { "name": "Fresh frozen plasma", "dose": "10 to 15 mL/kg IV", "notes": "Only if PCC is unavailable." },
-  { "name": "Mannitol 20%", "dose": "0.25 to 1 g/kg IV bolus", "notes": "Bridge for raised ICP; monitor sodium, osmolality and fluid balance." }
+  {
+   "name": "Labetalol",
+   "dose": "10 to 20 mg IV over 1 to 2 minutes, may repeat; then infusion 2 to 8 mg/min",
+   "notes": "Target systolic 140 mmHg (130 to 150). Avoid in asthma, heart block, bradycardia."
+  },
+  {
+   "name": "Nicardipine",
+   "dose": "5 mg/h IV infusion, increase by 2.5 mg/h every 5 to 15 minutes, max 15 mg/h",
+   "notes": "Titratable alternative where available."
+  },
+  {
+   "name": "4-factor prothrombin complex concentrate (PCC)",
+   "dose": "Warfarin: INR 2 to below 4: 25 units/kg (max 2500 units); INR 4 to 6: 35 units/kg (max 3500 units); INR above 6: 50 units/kg (max 5000 units). Factor Xa inhibitor: 50 units/kg IV",
+   "notes": "Give with vitamin K for warfarin. Recheck INR 15 to 60 minutes after."
+  },
+  {
+   "name": "Vitamin K (phytomenadione)",
+   "dose": "10 mg slow IV once; repeat if INR remains 1.4 or more at 24 to 48 hours",
+   "notes": "Always with PCC or FFP in warfarin-associated ICH."
+  },
+  {
+   "name": "Idarucizumab",
+   "dose": "5 g IV (two 2.5 g doses)",
+   "notes": "Dabigatran reversal."
+  },
+  {
+   "name": "Protamine sulfate",
+   "dose": "1 mg per 100 units UFH given in the previous 2 to 3 hours (max 50 mg); 1 mg per 1 mg enoxaparin within 8 hours (max 50 mg)",
+   "notes": "0.5 mg per 1 mg enoxaparin at 8 to 12 hours. Risk of hypotension and anaphylaxis."
+  },
+  {
+   "name": "Fresh frozen plasma",
+   "dose": "10 to 15 mL/kg IV",
+   "notes": "Only if PCC is unavailable."
+  },
+  {
+   "name": "Mannitol 20%",
+   "dose": "0.25 to 1 g/kg IV bolus",
+   "notes": "Bridge for raised ICP; monitor sodium, osmolality and fluid balance."
+  }
  ],
  "sources": [
-  { "org": "AHA/ASA", "title": "2022 Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage", "year": 2022, "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407" },
-  { "org": "NICE", "title": "Stroke and transient ischaemic attack in over 16s: diagnosis and initial management (NG128, ICH blood pressure update 2022)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng128/chapter/recommendations" },
-  { "org": "NCS / SCCM", "title": "Reversal of antithrombotics in intracranial hemorrhage: guideline summary", "year": 2016, "url": "https://www.guidelinecentral.com/guideline/41531/" },
-  { "org": "Healio", "title": "Andexanet alfa pulled from US market due to thromboembolic risk", "year": 2025, "url": "https://www.healio.com/news/cardiology/20251223/andexanet-alfa-pulled-from-us-market-due-to-thromboembolic-risk" }
+  {
+   "org": "AHA/ASA",
+   "title": "2022 Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage",
+   "year": 2022,
+   "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407"
+  },
+  {
+   "org": "NICE",
+   "title": "Stroke and transient ischaemic attack in over 16s: diagnosis and initial management (NG128, ICH blood pressure update 2022)",
+   "year": 2019,
+   "url": "https://www.nice.org.uk/guidance/ng128/chapter/recommendations"
+  },
+  {
+   "org": "NCS / SCCM",
+   "title": "Reversal of antithrombotics in intracranial hemorrhage: guideline summary",
+   "year": 2016,
+   "url": "https://www.guidelinecentral.com/guideline/41531/"
+  },
+  {
+   "org": "Healio",
+   "title": "Andexanet alfa pulled from US market due to thromboembolic risk",
+   "year": 2025,
+   "url": "https://www.healio.com/news/cardiology/20251223/andexanet-alfa-pulled-from-us-market-due-to-thromboembolic-risk"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ }
 }

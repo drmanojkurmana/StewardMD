@@ -4,7 +4,20 @@
  "subject": "neurology",
  "population": "Adults",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["GBS", "Guillain-Barre", "Guillain Barre", "AIDP", "AMAN", "AMSAN", "acute flaccid paralysis", "ascending paralysis", "Miller Fisher syndrome", "acute inflammatory demyelinating polyneuropathy", "IVIg", "plasma exchange"],
+ "aliases": [
+  "GBS",
+  "Guillain-Barre",
+  "Guillain Barre",
+  "AIDP",
+  "AMAN",
+  "AMSAN",
+  "acute flaccid paralysis",
+  "ascending paralysis",
+  "Miller Fisher syndrome",
+  "acute inflammatory demyelinating polyneuropathy",
+  "IVIg",
+  "plasma exchange"
+ ],
  "summary": "Rapidly progressive, fairly symmetrical weakness with areflexia: monitor FVC and bulbar function closely (20/30/40 rule), treat patients unable to walk unaided with IVIg 0.4 g/kg/day for 5 days (within 2 weeks) or plasma exchange (within 4 weeks), and watch for dysautonomia.",
  "sections": [
   {
@@ -15,7 +28,7 @@
     "Pain (back, radicular, limb) is common and may precede weakness. Facial and bulbar weakness and autonomic dysfunction are frequent.",
     "Variants: Miller Fisher syndrome (ophthalmoplegia, ataxia, areflexia; anti-GQ1b in up to 90%), pure motor axonal GBS (AMAN, common in India and Asia), pharyngeal-cervical-brachial weakness.",
     "Red flags for another diagnosis: fever at onset, nadir within 24 hours, marked persistent asymmetry, sensory level, early severe bladder or bowel dysfunction, severe respiratory weakness with little limb weakness, altered consciousness, progression beyond 4 weeks.",
-    "Differentials in Indian practice: hypokalaemic paralysis, compressive myelopathy or transverse myelitis, neurotoxic snake bite, organophosphate intermediate syndrome, diphtheritic neuropathy, myasthenia, botulism, porphyria. Report acute flaccid paralysis in a child under 15 years to polio surveillance."
+    "Differentials in Indian practice: hypokalaemic paralysis, compressive myelopathy or transverse myelitis, neurotoxic snake bite, organophosphate intermediate syndrome, diphtheritic neuropathy, myasthenia, botulism, porphyria."
    ]
   },
   {
@@ -85,15 +98,48 @@
   }
  ],
  "drugs": [
-  { "name": "Intravenous immunoglobulin (IVIg)", "dose": "0.4 g/kg IV once daily for 5 days (total 2 g/kg)", "notes": "Start within 2 weeks of onset (reasonable up to 4 weeks). Hydrate; check renal function." },
-  { "name": "Plasma exchange", "dose": "4 to 5 exchanges over 1 to 2 weeks, total 12 to 15 L (about 200 to 250 mL/kg)", "notes": "Within 4 weeks of onset. Caution with autonomic instability." },
-  { "name": "Enoxaparin", "dose": "40 mg SC once daily", "notes": "VTE prophylaxis until walking independently; adjust in severe renal impairment." },
-  { "name": "Gabapentin", "dose": "300 mg orally at night, titrate up to 300 mg three times daily or more (max 3600 mg/day)", "notes": "Neuropathic pain. Reduce dose in renal impairment." },
-  { "name": "Atropine", "dose": "1 mg IV, repeat every 3 to 5 minutes, max 3 mg", "notes": "Symptomatic bradycardia from dysautonomia; pacing if refractory." }
+  {
+   "name": "Intravenous immunoglobulin (IVIg)",
+   "dose": "0.4 g/kg IV once daily for 5 days (total 2 g/kg)",
+   "notes": "Start within 2 weeks of onset (reasonable up to 4 weeks). Hydrate; check renal function."
+  },
+  {
+   "name": "Plasma exchange",
+   "dose": "4 to 5 exchanges over 1 to 2 weeks, total 12 to 15 L (about 200 to 250 mL/kg)",
+   "notes": "Within 4 weeks of onset. Caution with autonomic instability."
+  },
+  {
+   "name": "Enoxaparin",
+   "dose": "40 mg SC once daily",
+   "notes": "VTE prophylaxis until walking independently; adjust in severe renal impairment."
+  },
+  {
+   "name": "Gabapentin",
+   "dose": "300 mg orally at night, titrate up to 300 mg three times daily or more (max 3600 mg/day)",
+   "notes": "Neuropathic pain. Reduce dose in renal impairment."
+  },
+  {
+   "name": "Atropine",
+   "dose": "1 mg IV, repeat every 3 to 5 minutes, max 3 mg",
+   "notes": "Symptomatic bradycardia from dysautonomia; pacing if refractory."
+  }
  ],
  "sources": [
-  { "org": "EAN / PNS", "title": "European Academy of Neurology/Peripheral Nerve Society Guideline on diagnosis and treatment of Guillain-Barré syndrome", "year": 2023, "url": "https://pure.eur.nl/en/publications/462a1486-f219-4513-a0e1-6ed36b7cb85d" },
-  { "org": "Nature Reviews Neurology (international consensus)", "title": "Diagnosis and management of Guillain-Barré syndrome in ten steps", "year": 2019, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6821638/" }
+  {
+   "org": "EAN / PNS",
+   "title": "European Academy of Neurology/Peripheral Nerve Society Guideline on diagnosis and treatment of Guillain-Barré syndrome",
+   "year": 2023,
+   "url": "https://pure.eur.nl/en/publications/462a1486-f219-4513-a0e1-6ed36b7cb85d"
+  },
+  {
+   "org": "Nature Reviews Neurology (international consensus)",
+   "title": "Diagnosis and management of Guillain-Barré syndrome in ten steps",
+   "year": 2019,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6821638/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ }
 }

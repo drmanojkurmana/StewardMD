@@ -1,12 +1,12 @@
 {
  "schema": 1,
- "version": "ca0891fad693",
- "count": 99,
+ "version": "0042db7f9c4f",
+ "count": 102,
  "subjects": [
   {
    "key": "emergency",
    "label": "Emergency and Resuscitation",
-   "count": 4
+   "count": 5
   },
   {
    "key": "critical-care",
@@ -56,12 +56,12 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 5
+   "count": 6
   },
   {
    "key": "surgery-trauma",
    "label": "Surgery, Trauma and Orthopaedics",
-   "count": 8
+   "count": 9
   },
   {
    "key": "anaesthesia",
@@ -221,6 +221,28 @@
    "summary": "Diagnose and grade severity with the Tokyo Guidelines 2018, resuscitate and start antibiotics, perform early laparoscopic cholecystectomy (within 7 days of admission and 10 days of symptoms) for cholecystitis, and arrange biliary drainage, usually ERCP, timed to cholangitis severity.",
    "sources": [
     "WSES 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-compartment-syndrome",
+   "title": "Acute compartment syndrome of the limb",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "compartment syndrome",
+    "ACS limb",
+    "fasciotomy",
+    "delta pressure",
+    "compartment pressure",
+    "crush injury",
+    "tight cast",
+    "BOAST compartment syndrome"
+   ],
+   "summary": "Suspect it with pain out of proportion to the injury and pain on passive stretch; release every circumferential dressing and cast down to skin, measure compartment pressure when examination is unreliable (delta pressure below 30 mmHg is a warning), and perform immediate fasciotomy of all involved compartments once diagnosed (BOAST 2025).",
+   "sources": [
+    "British Orthopaedic Association 2025",
+    "NICE 2016"
    ],
    "status": "ai_drafted"
   },
@@ -586,6 +608,34 @@
     "European Resuscitation Council 2025",
     "Resuscitation Council UK 2025",
     "Resuscitation Council UK 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "anaemia-in-pregnancy",
+   "title": "Anaemia in pregnancy: Anaemia Mukt Bharat protocol",
+   "subject": "obstetrics-gynaecology",
+   "population": "Pregnancy",
+   "aliases": [
+    "anemia in pregnancy",
+    "AMB",
+    "Anemia Mukt Bharat",
+    "Anaemia Mukt Bharat",
+    "IFA",
+    "iron folic acid",
+    "iron deficiency anaemia pregnancy",
+    "IV iron",
+    "iron sucrose",
+    "FCM",
+    "ferric carboxymaltose",
+    "severe anaemia pregnancy",
+    "postpartum anaemia"
+   ],
+   "summary": "Anaemia in pregnancy is Hb below 11 g/dL (below 10.5 in the second trimester, WHO 2024). Give daily IFA from the second trimester; treat mild or moderate anaemia with 2 IFA tablets daily; IV iron after the first trimester if oral iron fails or Hb is 5 to 6.9 g/dL up to 34 weeks; transfuse if Hb is below 5 or severe after 34 weeks.",
+   "sources": [
+    "MoHFW, Government of India 2019",
+    "WHO 2024",
+    "WHO / FIGO / ICM 2025"
    ],
    "status": "ai_drafted"
   },
@@ -1276,6 +1326,33 @@
    "sources": [
     "EAN / PNS 2023",
     "Nature Reviews Neurology (international consensus) 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "heat-stroke",
+   "title": "Heat stroke (adults and children)",
+   "subject": "emergency",
+   "population": "Adults and children",
+   "aliases": [
+    "heatstroke",
+    "exertional heat stroke",
+    "EHS",
+    "classic heat stroke",
+    "non-exertional heat stroke",
+    "hyperthermia",
+    "heat-related illness",
+    "HRI",
+    "sunstroke",
+    "heat exhaustion",
+    "heatwave"
+   ],
+   "summary": "Core temperature above 40 degrees C with CNS dysfunction after heat exposure or exertion is heat stroke: cool first, transport second. Start whole-body cooling within 30 minutes (cold-water immersion for exertional cases, evaporative plus ice for frail classic cases) to 38 to 39 degrees C, then support failing organs. Antipyretics do not work.",
+   "sources": [
+    "NCDC, MoHFW (NPCCHH) 2024",
+    "NCDC, MoHFW (NPCCHH) 2021",
+    "NCDC, MoHFW (NPCCHH) 2025",
+    "Resuscitation Council UK / ERC 2025"
    ],
    "status": "ai_drafted"
   },
