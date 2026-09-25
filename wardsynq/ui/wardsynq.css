@@ -297,7 +297,7 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 
 .frame { display: grid; grid-template-columns: 178px minmax(0, 1fr) 268px; align-items: start; }
 @media (max-width: 1240px) { .frame { grid-template-columns: 160px minmax(0, 1fr); } .context { grid-column: 1 / -1; border-left: none; border-top: 1px solid var(--hair); } }
-@media (max-width: 860px) { .frame { grid-template-columns: 1fr; } .rail { display: none; } }
+@media (max-width: 860px) { .frame { grid-template-columns: minmax(0,1fr); } .rail { display: none; } }
 
 /* nav: text, not boxes */
 .rail { padding: var(--sp-5) 0 var(--sp-5) var(--sp-6); }
@@ -316,7 +316,7 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 .rail .roster { margin-top: var(--sp-5); display: flex; flex-direction: column; }
 .rail .roster .heading { color: var(--ink-3); font-size: var(--t-micro); margin-bottom: var(--sp-2); }
 .rail .pt {
-  display: grid; grid-template-columns: 3px 1fr; gap: 0 10px; align-items: center;
+  display: grid; grid-template-columns: 3px minmax(0,1fr); gap: 0 10px; align-items: center;
   padding: 7px 0; border: 0; background: none; text-align: left; cursor: pointer;
 }
 .rail .pt .mark { align-self: stretch; background: transparent; border-radius: 2px; }
@@ -475,7 +475,7 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 .context .grp + .grp { margin-top: var(--sp-6); }
 
 .results { display: flex; flex-direction: column; gap: var(--sp-3); }
-.result { display: grid; grid-template-columns: 3px 1fr auto; gap: 0 11px; align-items: baseline; }
+.result { display: grid; grid-template-columns: 3px minmax(0,1fr) auto; gap: 0 11px; align-items: baseline; }
 /* Deviation and direction are kept as two separate signals rather than folded into one colour,
  * following Open MCT's split of severity from limit direction: the mark says a result is outside
  * its range, the arrow says which way. Either one alone still reads. */
@@ -492,7 +492,7 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 .result .r { font-size: var(--t-micro); color: var(--ink-3); }
 .result .d { font-size: var(--t-micro); color: var(--sig-stop); font-weight: 600; }
 
-.facts { display: grid; grid-template-columns: auto 1fr; gap: 5px var(--sp-4); font-size: var(--t-small); }
+.facts { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 5px var(--sp-4); font-size: var(--t-small); }
 .facts dt { color: var(--ink-3); }
 .facts dd { margin: 0; color: var(--ink); }
 .facts dd.missing { color: var(--sig-stop); font-weight: 600; }
@@ -505,7 +505,7 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 /* ================================================================ ledger */
 
 .ledger { display: flex; flex-direction: column; }
-.ledger .e { display: grid; grid-template-columns: 46px 1fr; gap: var(--sp-3); padding: 6px 0; font-size: var(--t-small); }
+.ledger .e { display: grid; grid-template-columns: 46px minmax(0,1fr); gap: var(--sp-3); padding: 6px 0; font-size: var(--t-small); }
 .ledger .e + .e { border-top: 1px solid var(--hair); }
 .ledger .t { color: var(--ink-3); font-size: var(--t-micro); }
 .ledger .x { color: var(--ink-2); }

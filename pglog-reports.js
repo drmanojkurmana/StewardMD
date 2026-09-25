@@ -887,7 +887,7 @@
     "body{font:13px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#111;margin:24px;}" +
     "h1{font-size:20px;margin:0 0 2px;}h2{font-size:14px;margin:20px 0 6px;border-bottom:1px solid #ddd;padding-bottom:3px;}" +
     ".pgl-rep-sub{color:#555;margin:0 0 12px;}" +
-    ".pgl-rep-meta{display:grid;grid-template-columns:max-content 1fr;gap:2px 14px;margin:0 0 14px;font-size:12px;}" +
+    ".pgl-rep-meta{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:2px 14px;margin:0 0 14px;font-size:12px;}" +
     ".pgl-rep-meta dt{color:#666;}.pgl-rep-meta dd{margin:0;font-weight:600;}" +
     "table{border-collapse:collapse;width:100%;font-size:11.5px;}" +
     "th,td{border:1px solid #ccc;padding:4px 6px;text-align:left;vertical-align:top;}" +

@@ -9485,3 +9485,27 @@ reverted, and is clean with it restored.
 "Interactions" to "Interaction" + "s" on screen. A single word should not break; the label fits at
 its existing size once side padding drops from 6px to 4px. A metric improving is not the same as the
 screen improving, and the screenshot is what settles it.
+
+## 2026-09-25 — Every grid column track is minmax(0,1fr), repo-wide
+
+**Context.** The measured sweep fixed only the two grids that were actually overflowing and left ~150
+bare `1fr` tracks alone, on the reasoning that `1fr` is only a bug when content cannot shrink. Owner
+asked for all of them.
+
+**Decision.** 168 declarations across 46 files rewritten by a parser, not a find-and-replace: an `fr`
+already inside `minmax()` is skipped (so `repeat(auto-fill, minmax(120px, 1fr))` survives), only
+`grid-template-columns` / `grid-auto-columns` are touched (row tracks are a vertical concern, not this
+bug), and a value that is entirely a `var()` is left alone. The parser was self-tested on ten shapes
+first. `minmax(0,1fr)` can only remove a minimum, never add width, so it cannot introduce overflow;
+the one behaviour it changes is that content which previously forced a track wider now wraps.
+
+**Two things a CSS regex would have missed.** `medlist.js` sets `gridTemplateColumns` as an inline
+style string. `home.js` READS it back to count columns for arrow-key tile reordering: a visible grid
+resolves to pixels so the old `split(" ")` was right, but a hidden one returns the specified value,
+which the browser normalises to `minmax(0px, 1fr)` WITH a space after the comma, counting 6 tracks
+for 3. The rnav grid is visible so it worked; the split now ignores spaces inside parentheses.
+
+**Verified.** 35 surfaces, 0 overflow. `insulin` and `icu` initially skipped on a wrong global name
+(`INSULIN`/`ICU`, not `SMD_*`) and were re-run rather than left unverified, which mattered: they hold
+14 of the 168 rewrites. One grid, `.ml-dose-grid`, needs a dose-editor state the harness does not
+reach and was not exercised.

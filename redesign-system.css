@@ -400,7 +400,7 @@ body.dark {
 #homeV2.rnav .rnav-stack { display: flex; flex-direction: column; gap: 14px; padding: var(--rds-gutter); padding-bottom: var(--rds-gutter); max-width: 560px; margin: 0 auto; width: 100%; min-height: 100%; box-sizing: border-box; }
 #homeV2.rnav .rnav-greet .rnav-eyebrow { font: 700 11px var(--rds-font); text-transform: uppercase; letter-spacing: .08em; color: var(--rds-primary); }
 #homeV2.rnav .rnav-greet .rnav-hi { font: 800 24px/1.2 var(--rds-font); letter-spacing: -.02em; color: var(--rds-ink); margin-top: 2px; }
-#homeV2.rnav .rnav-qa { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+#homeV2.rnav .rnav-qa { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }
 #homeV2.rnav .rnav-qa-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11.5px var(--rds-font); cursor: pointer; min-height: 44px; }
 #homeV2.rnav .rnav-qa-btn .rds-icon { color: var(--rds-primary); font-size: 24px; }
 #homeV2.rnav .rnav-hero { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: var(--rds-r); background: linear-gradient(135deg,var(--rds-primary),var(--rds-primary-2)); color: #fff; box-shadow: var(--rds-el-cta); }
@@ -418,10 +418,10 @@ html body.v3-dark #homeV2.rnav .rnav-hero {
   border: 1px solid color-mix(in srgb, var(--sphere-hi, #2f9184) 30%, transparent);
   box-shadow: 0 8px 24px -6px var(--sphere-glow, rgba(8,40,35,.6));
 }
-#homeV2.rnav .rnav-qrow { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+#homeV2.rnav .rnav-qrow { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }
 #homeV2.rnav .rnav-qc { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11px var(--rds-font); cursor: pointer; min-height: 44px; }
 #homeV2.rnav .rnav-qc .rds-icon { color: var(--rds-primary); }
-#homeV2.rnav .rnav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#homeV2.rnav .rnav-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
 #homeV2.rnav .rnav-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px; border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); text-align: left; cursor: pointer; box-sizing: border-box; min-height: 120px; justify-content: flex-start; }
 /* graphic tiles (kx / fx / tx) put the label at the BOTTOM so all cells read consistently */
 #homeV2.rnav .kx-tile, #homeV2.rnav .fx-tile, #homeV2.rnav .tx-tile { justify-content: space-between; }
@@ -777,7 +777,7 @@ html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
 /* ── Clinical Tools: circular-badge tiles + Add Tool customize (2026-08) ───────────────────
    Overrides the earlier .rnav-grid / .rnav-tile rules (later source order wins). Icons sit in
    a round badge; the featured tile gets the dark "signature" badge + dot. */
-#homeV2.rnav .rnav-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 6px; }
+#homeV2.rnav .rnav-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px 6px; }
 #homeV2.rnav .rnav-tile { flex-direction: column; align-items: center; gap: 0; padding: 4px 2px; border: none; background: none; text-align: center; min-height: 0; }
 /* EVERY tile badge is the glossy sphere. It used to be a flat mint disc with a dark outline glyph,
  * and only `.feat` (the branded AI modules) got the sphere - so a home screen of eighteen tools read

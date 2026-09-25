@@ -275,8 +275,8 @@ body.opd {
 /* ------------------------------------------------------------------ larger screens */
 
 @media (min-width: 700px) {
-  .opd-actions { grid-template-columns: 1fr 1fr; }
-  .opd-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--tap-gap); }
+  .opd-actions { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  .opd-list { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 0 var(--tap-gap); }
   /* A tablet gets more information in the same layout. It does not get different controls in
      different places, because the person holding it also uses the phone. */
 }
