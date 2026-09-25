@@ -9485,3 +9485,17 @@ reverted, and is clean with it restored.
 "Interactions" to "Interaction" + "s" on screen. A single word should not break; the label fits at
 its existing size once side padding drops from 6px to 4px. A metric improving is not the same as the
 screen improving, and the screenshot is what settles it.
+
+## 2026-09-26 - RadioAnatome: unverified modules say Beta, they are not hidden
+
+**Context.** The radiologist's sign-off on /validation (2026-08-19, head CT notes updated 2026-08-25)
+rejected 13 modules and marked 16 "needs fix"; nothing in the app read those verdicts, so every
+module looked equally finished to a student.
+
+**Decision (owner).** Do not hide rejected modules. Every module shows a "Beta" pill on its catalog
+row and in the viewer header, and the viewer footer reads "Beta · Unverified, may contain mistakes.
+Not for diagnosis." A module drops the label only when `modules.json` carries `verified: true`, which
+is set by hand after a "verified" verdict on /validation. New modules are Beta by default.
+
+**Consequence.** Only the three living-torso modules are verified. The label is static data, not a
+live read of /api/validation, so a new sign-off needs a `modules.json` edit and an app update.

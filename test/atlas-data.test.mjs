@@ -528,7 +528,14 @@ ok("back control matches swipe-back BACK_SEL",
    vh.includes('class="atlas-back"') && /aria-label="(Back|Close)"/.test(vh));
 ok("step buttons are labelled", vh.includes('aria-label="Previous slice"') && vh.includes('aria-label="Next slice"'));
 ok("the grid button is labelled", vh.includes('aria-label="All slices"'));
-ok("footer disclaimer is present verbatim", vh.includes("Educational reference only, not for diagnosis."));
+// A module with no catalog entry (this fixture) is unverified, so it renders as Beta by default.
+ok("an unverified module's footer says Beta and not for diagnosis", vh.includes("Beta · Unverified, may contain mistakes. Not for diagnosis."));
+{
+  const keep = A._state.catalog, id = A._state.moduleId;
+  A._state.catalog = { modules: [{ id, verified: true }] };
+  ok("a verified module's footer disclaimer is present verbatim", A._viewerHtml().includes("Educational reference only, not for diagnosis."));
+  A._state.catalog = keep;
+}
 ok("viewer renders no attribution", !/licen[cs]e|public domain|courtesy|Visible Human|Gray/i.test(vh));
 ok("viewer uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(vh));
 ok("catalog uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(A._catalogHtml()));
@@ -546,6 +553,14 @@ ok("dots that are not tab stops are hidden from assistive tech",
 ok("names are present as text, not colour alone", ovs.includes("Fornix") && ovs.includes("Subarachnoid"));
 A.close();
 ok("close() restores focus tracking", A._state._prevFocus === null);
+
+// `verified` is set by hand only after a radiologist signs a module off on /validation;
+// everything else renders as Beta. It must be a real boolean, never a string like "false".
+{
+  const mods = JSON.parse(readFileSync(join(ROOT, "atlas/modules.json"), "utf8")).modules;
+  ok("verified is true or absent on every module", mods.every((m) => m.verified === undefined || m.verified === true));
+  ok("at least one module is still Beta", mods.some((m) => !m.verified && !m.hidden));
+}
 
 // /validation loads the same viewer from stewardmd.in, and .js/.css are served immutable for a
 // year, so a stale ?v= there pins returning reviewers to the old viewer.
