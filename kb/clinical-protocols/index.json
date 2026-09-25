@@ -1,12 +1,12 @@
 {
  "schema": 1,
- "version": "5fc3c4320f73",
- "count": 76,
+ "version": "b3b2fffed9e5",
+ "count": 82,
  "subjects": [
   {
    "key": "emergency",
    "label": "Emergency and Resuscitation",
-   "count": 1
+   "count": 2
   },
   {
    "key": "critical-care",
@@ -26,12 +26,12 @@
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 7
+   "count": 8
   },
   {
    "key": "gastroenterology",
    "label": "Gastroenterology and Hepatology",
-   "count": 8
+   "count": 9
   },
   {
    "key": "nephrology",
@@ -46,7 +46,7 @@
   {
    "key": "neurology",
    "label": "Neurology",
-   "count": 5
+   "count": 6
   },
   {
    "key": "haematology-oncology",
@@ -61,7 +61,7 @@
   {
    "key": "surgery-trauma",
    "label": "Surgery, Trauma and Orthopaedics",
-   "count": 4
+   "count": 6
   },
   {
    "key": "anaesthesia",
@@ -124,6 +124,31 @@
    "status": "ai_drafted"
   },
   {
+   "id": "acute-appendicitis",
+   "title": "Acute appendicitis (adult)",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "appendicitis",
+    "appendicectomy",
+    "appendectomy",
+    "RIF pain",
+    "right iliac fossa pain",
+    "Alvarado score",
+    "AIR score",
+    "appendicular mass",
+    "appendicular abscess",
+    "perforated appendix",
+    "WSES Jerusalem"
+   ],
+   "summary": "Stratify risk with the AIR or Alvarado score, image intermediate-risk patients (ultrasound first, low-dose CT if negative), and perform laparoscopic appendicectomy within 24 hours with a single preoperative antibiotic dose; antibiotic-first treatment is an option for selected uncomplicated cases without an appendicolith (WSES 2020).",
+   "sources": [
+    "WSES 2020",
+    "ASHP / IDSA / SIS / SHEA 2013"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "acute-asthma-adult",
    "title": "Acute asthma exacerbation (adult)",
    "subject": "respiratory",
@@ -169,6 +194,33 @@
     "NICE 2024",
     "ICMR 2022",
     "IDSA 2004"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-cholecystitis-cholangitis",
+   "title": "Acute cholecystitis and acute cholangitis",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "cholecystitis",
+    "cholangitis",
+    "ascending cholangitis",
+    "Tokyo Guidelines",
+    "TG18",
+    "Charcot triad",
+    "Reynolds pentad",
+    "biliary sepsis",
+    "ERCP",
+    "gallstones",
+    "lap chole",
+    "cholecystostomy",
+    "PTGBD",
+    "CBD stones"
+   ],
+   "summary": "Diagnose and grade severity with the Tokyo Guidelines 2018, resuscitate and start antibiotics, perform early laparoscopic cholecystectomy (within 7 days of admission and 10 days of symptoms) for cholecystitis, and arrange biliary drainage, usually ERCP, timed to cholangitis severity.",
+   "sources": [
+    "WSES 2020"
    ],
    "status": "ai_drafted"
   },
@@ -379,6 +431,32 @@
    "sources": [
     "ESC / ERS 2019",
     "ASH 2020"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-severe-ulcerative-colitis",
+   "title": "Acute severe ulcerative colitis",
+   "subject": "gastroenterology",
+   "population": "Adults",
+   "aliases": [
+    "ASUC",
+    "acute severe colitis",
+    "severe UC flare",
+    "fulminant colitis",
+    "Truelove and Witts",
+    "Travis criteria",
+    "Oxford criteria",
+    "toxic megacolon",
+    "infliximab rescue",
+    "ciclosporin rescue",
+    "cyclosporine",
+    "IBD flare"
+   ],
+   "summary": "Truelove and Witts severe colitis: admit, exclude infection (C. difficile, CMV), start IV methylprednisolone 60 mg/day or hydrocortisone 100 mg 3 to 4 times daily with LMWH prophylaxis, assess on day 3 and give infliximab or ciclosporin rescue to non-responders, with early surgical review.",
+   "sources": [
+    "American College of Gastroenterology 2025",
+    "British Society of Gastroenterology 2025"
    ],
    "status": "ai_drafted"
   },
@@ -624,6 +702,33 @@
     "AABB / ICTMG 2025",
     "NICE 2015",
     "British Society for Haematology 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "bradycardia-with-pulse",
+   "title": "Bradycardia with a pulse (adult)",
+   "subject": "emergency",
+   "population": "Adults",
+   "aliases": [
+    "bradycardia",
+    "symptomatic bradycardia",
+    "heart block",
+    "complete heart block",
+    "CHB",
+    "Mobitz II",
+    "AV block",
+    "atropine",
+    "transcutaneous pacing",
+    "TCP",
+    "bradyarrhythmia"
+   ],
+   "summary": "Treat bradycardia (usually below 50/min) urgently only when it causes cardiopulmonary compromise: support ABC, look for causes, give atropine 1 mg IV (repeat to 3 mg), then transcutaneous pacing or an adrenaline or dopamine infusion, and arrange transvenous pacing early for high-risk blocks.",
+   "sources": [
+    "American Heart Association 2025",
+    "American Heart Association 2025",
+    "Resuscitation Council UK 2025",
+    "Resuscitation Council UK 2025"
    ],
    "status": "ai_drafted"
   },
@@ -907,6 +1012,32 @@
    "status": "ai_drafted"
   },
   {
+   "id": "guillain-barre-syndrome",
+   "title": "Guillain-Barré syndrome (GBS)",
+   "subject": "neurology",
+   "population": "Adults",
+   "aliases": [
+    "GBS",
+    "Guillain-Barre",
+    "Guillain Barre",
+    "AIDP",
+    "AMAN",
+    "AMSAN",
+    "acute flaccid paralysis",
+    "ascending paralysis",
+    "Miller Fisher syndrome",
+    "acute inflammatory demyelinating polyneuropathy",
+    "IVIg",
+    "plasma exchange"
+   ],
+   "summary": "Rapidly progressive, fairly symmetrical weakness with areflexia: monitor FVC and bulbar function closely (20/30/40 rule), treat patients unable to walk unaided with IVIg 0.4 g/kg/day for 5 days (within 2 weeks) or plasma exchange (within 4 weeks), and watch for dysautonomia.",
+   "sources": [
+    "EAN / PNS 2023",
+    "Nature Reviews Neurology (international consensus) 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "heparin-induced-thrombocytopenia",
    "title": "Heparin-induced thrombocytopenia (HIT)",
    "subject": "haematology-oncology",
@@ -951,6 +1082,32 @@
    "sources": [
     "American College of Gastroenterology 2026",
     "Journal of Hospital Medicine 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "herpes-zoster",
+   "title": "Herpes zoster (shingles), adult",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "shingles",
+    "HZ",
+    "herpes zoster ophthalmicus",
+    "HZO",
+    "Ramsay Hunt syndrome",
+    "disseminated zoster",
+    "postherpetic neuralgia",
+    "PHN",
+    "Shingrix",
+    "recombinant zoster vaccine",
+    "RZV"
+   ],
+   "summary": "Start oral valaciclovir, aciclovir or famciclovir within 72 hours of rash onset (later if new lesions, eye or ear involvement, or immunocompromise), refer ophthalmic zoster urgently, give IV aciclovir for disseminated, CNS or severe immunocompromised disease, and offer recombinant zoster vaccine.",
+   "sources": [
+    "CDC 2024",
+    "CDC 2024",
+    "IDSA (Dworkin et al.) 2007"
    ],
    "status": "ai_drafted"
   },
