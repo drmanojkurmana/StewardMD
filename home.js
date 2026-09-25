@@ -5212,6 +5212,7 @@ body.dark .maik-fu{background:var(--mk-field)}
 /* Phase 3 — grounding advisory (flag-gated; appears only on flagged claims) */
 .maik-conf{margin-top:9px;font:700 10.5px/1.3 'Inter';letter-spacing:.02em;display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px}
 .maik-conf::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.9}
+.maik-kbpreview-h{margin-bottom:6px;font:700 10.5px/1.3 'Inter';letter-spacing:.02em;color:var(--mk-teal,#0e6e63)}
 .maik-conf-high{color:#15803d;background:rgba(21,128,61,.10)}
 .maik-conf-moderate{color:#b45309;background:rgba(180,83,9,.10)}
 .maik-conf-lower{color:#b91c1c;background:rgba(185,28,28,.10)}
@@ -6076,6 +6077,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Phase 2 — streaming is ON by default (self-falls-back on any failure); set localStorage
     // smd_maik_stream="0" to force the classic non-stream path.
     function maikStreamOn() { try { return localStorage.getItem("smd_maik_stream") !== "0"; } catch (e) { return true; } }
+    function maikKbPreviewOn() { try { return localStorage.getItem("smd_maik_kb_preview") !== "0"; } catch (e) { return true; } }
     // Diagnostics: when smd_maik_perf="1" (Settings › Interface › "AI response timing"), MaiK prints
     // first-token + full-answer time under each answer so real-device / native TTFT is readable.
     function maikPerfOn() { try { return localStorage.getItem("smd_maik_perf") === "1"; } catch (e) { return false; } }
@@ -6423,13 +6425,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { ov.querySelector(".maik-lb-x").focus(); } catch (e) {}
     }
     function maikFiguresOn() { try { return localStorage.getItem("smd_maik_figures") !== "0"; } catch (e) { return true; } }
+    // Each /figures call is a web search plus up to 9 page reads, and every follow-up on the same topic
+    // used to repeat it and stack an identical strip (audit section 7). One search per topic per session
+    // (the result list only, in memory), and one strip per topic per thread.
+    var _maikFigMemo = {};
     function maikFiguresStrip(bubble, topic) {
       if (!maikFiguresOn() || !topic || !(window.SMD_AI && SMD_AI.figures)) return;
       if (typeof navigator !== "undefined" && navigator.onLine === false) return;
       var E = window.SMD_MAIK_ENGINE; if (E && E.effective && E.effective() !== "cloud") return;   // never on device / KB-only
-      SMD_AI.figures(String(topic).slice(0, 200)).then(function (res) {
+      var fkey = maikNorm(String(topic)).slice(0, 200);
+      var shown = function () { var lb = document.getElementById("maikBody"), all = lb ? lb.querySelectorAll(".maik-figs") : []; for (var i = 0; i < all.length; i++) if (all[i].getAttribute("data-topic") === fkey) return true; return false; };
+      if (shown()) return;
+      var fp = _maikFigMemo[fkey] || (_maikFigMemo[fkey] = SMD_AI.figures(String(topic).slice(0, 200)).then(function (res) { if (!res || res.error) delete _maikFigMemo[fkey]; return res; }, function (e) { delete _maikFigMemo[fkey]; throw e; }));
+      fp.then(function (res) {
         var figs = (res && res.figures) || [];
-        if (!figs.length || !bubble || !bubble.isConnected) return;
+        if (!figs.length || !bubble || !bubble.isConnected || shown()) return;
         var cards = figs.filter(function (f) { return f && /^https:\/\//.test(f.img || "") && /^https:\/\//.test(f.page || ""); }).slice(0, 3).map(function (f) {
           // Tap opens the figure FULL SIZE in a lightbox; tapping it there goes to the source page
           // (owner, 2026-09-19). A flowchart must not be cropped, so the card letterboxes it.
@@ -6438,7 +6448,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             '<span class="maik-fig-cap"><b>' + maikEscH(f.site || "") + '</b> ' + maikEscH((f.title || "").slice(0, 80)) + '</span></button>';
         }).join("");
         if (!cards) return;
-        var strip = document.createElement("div"); strip.className = "maik-figs" + (figs.length === 1 ? " one" : "");
+        var strip = document.createElement("div"); strip.className = "maik-figs" + (figs.length === 1 ? " one" : ""); strip.setAttribute("data-topic", fkey);
         strip.innerHTML = '<div class="maik-figs-h">Related figures from trusted sources</div><div class="maik-figs-row">' + cards + '</div>';
         // Figure taps are handled by the delegated body listener, so they work in a reopened thread.
         // A hotlink the source blocks removes its own card; an empty strip removes itself.
@@ -6744,9 +6754,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _fsResume();
         try {
           var h = _live(), s = h.querySelector(".maik-streaming");
+          var pv = h.querySelector(".maik-kbpreview");
           if (s && s.textContent.trim()) {
             var c = s.querySelector(".maik-caret"); if (c) c.parentNode.removeChild(c);
             s.className = "maik-stopped-answer";
+            h.insertAdjacentHTML("beforeend", '<div class="maik-stopped">Stopped</div>');
+          } else if (pv) {
+            var pvh = pv.querySelector(".maik-kbpreview-h"); if (pvh) pvh.textContent = "From the StewardMD Knowledge Base";
             h.insertAdjacentHTML("beforeend", '<div class="maik-stopped">Stopped</div>');
           } else {
             h.innerHTML = '<div class="maik-welcome">Stopped.</div>';
@@ -7178,6 +7192,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               w.appendChild(up); w.appendChild(dn); host.appendChild(w);
             } catch (e) {}
           }
+          var _pvKB = null;   // the Knowledge Base preview on screen while the model writes (see _strictKB)
           function _gemini() {
             try { _brainEnrichPkg(pkg); } catch (e) {}
             var _tier = (maikLazyOn() && depth !== "detailed") ? 1 : undefined;   // lazy: bottom line first, except when the doctor asked for detail (audit T17)
@@ -7194,6 +7209,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               // Network gone (audit T18): the provider call resolves {error} rather than rejecting, so the
               // Knowledge Base fallback in .catch below never ran and the doctor got "MaiK is unavailable".
               // Answer from the on-device Knowledge Base instead, labelled as the offline answer.
+              if (r && r.error && _pvKB) { finishKB(_pvKB, pkg, "preview"); return; }   // the KB preview already on screen stays as the answer
               if (r && r.error && !active && window.MaiKKB && /timeout|fetch|network|load failed|offline|internet|connection/i.test(String(r.error))) {
                 try { var _kbN = window.MaiKKB.compose(question, pkg, {}); if (_kbN && _kbN.text) { finishKB(_kbN, pkg, "offline"); return; } } catch (e) {}
               }
@@ -7290,8 +7306,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // + a distinctive token of the resolved disease NAME present in the RAW (non-abbrev-expanded)
           // query — so ambiguous acronyms (MS/DM/PE/RA) can NEVER bypass — + retrieval-grounding agreement
           // + the mandatory reviewer. Anything that fails FALLS THROUGH to the router below (unchanged). ──
-          if (_kbOn) {
-            var _lf = (function () {
+          function _strictKB() {
               try {
                 if (window.MaiKKB.isComplex(question)) return null;                       // reasoning/comparison/latest/vignette → router
                 var kb = window.MaiKKB.compose(question, pkg, {});
@@ -7304,8 +7319,27 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 if (!reviewKB(kb, question, { primaryConcept: kb.disease })) return null;
                 return kb;
               } catch (e) { return null; }
-            })();
+          }
+          if (_kbOn) {
+            var _lf = _strictKB();
             if (_lf) { finishKB(_lf, pkg, "instant"); return; }                            // deterministic, unambiguous → instant, no Vertex
+          }
+          // Knowledge Base preview (audit section 8: show the zero-token answer first). In LLM-first mode the
+          // model writes every answer, so an exact, unambiguous KB match (the same gate as the instant path
+          // above) is shown at once, labelled as a preview; the model's first words replace it, and if the
+          // model call fails the preview becomes the answer. Flag smd_maik_kb_preview, default ON; "0" = off.
+          if (!_kbOn && !active && window.MaiKKB && maikKB() && maikKbPreviewOn()) {
+            _pvKB = _strictKB();
+            if (_pvKB) {
+              try {
+                _streamStarted = true; _clearStages();
+                var _pvT = maikParseRefine(String(_pvKB.text).trim()).text, _pvS = maikSplitMore(_pvT);   // same clean-up as the final render
+                _pvT = _pvS.detail ? (_pvS.lead + "\n\n" + _pvS.detail) : _pvS.lead;
+                var _pvMd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_pvT) : maikEscH(_pvT);
+                _live().innerHTML = '<div class="maik-kbpreview"><div class="maik-kbpreview-h">From the StewardMD Knowledge Base. MaiK is writing the full answer.</div>' + _pvMd + '</div>';
+                scroll();
+              } catch (e) {}
+            }
           }
           // ── V4 — the UNIVERSAL SEMANTIC ROUTER runs on EVERY query (cached): parse the medical meaning
           // → canonical concept + intent → deterministic KB retrieval keyed on that concept; genuine
@@ -7470,7 +7504,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); } else { emptyState(); }
     /* A REOPENED CONVERSATION (owner, 2026-09-24): a saved thread comes back as HTML, which carries

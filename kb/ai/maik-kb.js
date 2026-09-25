@@ -304,22 +304,22 @@
     var pearls = arr(E.clinicalPearls);
     if (pearls.length) { body.push("\n**Key points**\n" + bullets(pearls, 4)); }
     if (E.pathophysiology && dxLine) body.push("\n**Pathophysiology.** " + clip(E.pathophysiology, 340));
-    body.push("\n_" + citeSrc(t) + " · decision-support — verify with local protocol._");
+    body.push("\n*" + citeSrc(t) + " · decision-support, verify with local protocol.*");
     return { ok: true, text: body.join("\n") };
   }
   function composeFeatures(t) {
     var E = t.E, pearls = arr(E.clinicalPearls);
     if (!pearls.length) return { ok: false };
-    return { ok: true, text: "**Clinical features of " + t.name + "**\n" + bullets(pearls, 7) + "\n\n_" + citeSrc(t) + " · verify clinically._" };
+    return { ok: true, text: "**Clinical features of " + t.name + "**\n" + bullets(pearls, 7) + "\n\n*" + citeSrc(t) + " · verify clinically.*" };
   }
   function composePatho(t) {
     if (!t.E.pathophysiology) return { ok: false };
-    return { ok: true, text: "**Pathophysiology of " + t.name + "**\n\n" + clip(t.E.pathophysiology, 700) + "\n\n_" + citeSrc(t) + "._" };
+    return { ok: true, text: "**Pathophysiology of " + t.name + "**\n\n" + clip(t.E.pathophysiology, 700) + "\n\n*" + citeSrc(t) + ".*" };
   }
   function composeDifferential(t) {
     var E = t.E, ddx = arr(E.additionalDifferentials).concat(arr(E.infectionMimics)).concat(arr(E.nonInfectiousMimics));
     if (!ddx.length) return { ok: false };
-    return { ok: true, text: "**Differential diagnosis / mimics of " + t.name + "**\n" + bullets(ddx, 9) + "\n\n_" + citeSrc(t) + " · consider the clinical context._" };
+    return { ok: true, text: "**Differential diagnosis / mimics of " + t.name + "**\n" + bullets(ddx, 9) + "\n\n*" + citeSrc(t) + " · consider the clinical context.*" };
   }
   function composeInvestigation(t) {
     var ix = (t.DX && arr(t.DX.ix)) || [];
@@ -327,23 +327,23 @@
     // dedup
     var seen = {}, out = []; ix.forEach(function (x) { var k = norm(x); if (k && !seen[k]) { seen[k] = 1; out.push(x); } });
     if (!out.length) return { ok: false };
-    return { ok: true, text: "**Investigations / workup for " + t.name + "**\n" + bullets(out, 9) + "\n\n_" + citeSrc(t) + "._" };
+    return { ok: true, text: "**Investigations / workup for " + t.name + "**\n" + bullets(out, 9) + "\n\n*" + citeSrc(t) + ".*" };
   }
   function composeRedFlags(t) {
     if (!nonEmpty(t.E.redFlags)) return { ok: false };
-    return { ok: true, text: "**Red flags in " + t.name + "** — escalate if present:\n" + bullets(t.E.redFlags, 6) + "\n\n_" + citeSrc(t) + "._" };
+    return { ok: true, text: "**Red flags in " + t.name + "** — escalate if present:\n" + bullets(t.E.redFlags, 6) + "\n\n*" + citeSrc(t) + ".*" };
   }
   function composePitfalls(t) {
     if (!nonEmpty(t.E.pitfalls)) return { ok: false };
-    return { ok: true, text: "**Common pitfalls in " + t.name + "**\n" + bullets(t.E.pitfalls, 6) + "\n\n_" + citeSrc(t) + "._" };
+    return { ok: true, text: "**Common pitfalls in " + t.name + "**\n" + bullets(t.E.pitfalls, 6) + "\n\n*" + citeSrc(t) + ".*" };
   }
   function composePrognosis(t) {
     if (!t.E.prognosis) return { ok: false };
-    return { ok: true, text: "**Prognosis of " + t.name + "**\n\n" + clip(t.E.prognosis, 500) + "\n\n_" + citeSrc(t) + "._" };
+    return { ok: true, text: "**Prognosis of " + t.name + "**\n\n" + clip(t.E.prognosis, 500) + "\n\n*" + citeSrc(t) + ".*" };
   }
   function composeSeverity(t) {
     if (!t.E.severityClassification) return { ok: false };
-    return { ok: true, text: "**Severity / classification of " + t.name + "**\n\n" + clip(t.E.severityClassification, 600) + "\n\n_" + citeSrc(t) + "._" };
+    return { ok: true, text: "**Severity / classification of " + t.name + "**\n\n" + clip(t.E.severityClassification, 600) + "\n\n*" + citeSrc(t) + ".*" };
   }
   // Treatment: prefer the package's resolved treatment (precedence-applied), else
   // KB_RAG regimen, else the DX_MGMT tx brief. Emits the actual dosing.
