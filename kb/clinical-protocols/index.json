@@ -1,12 +1,12 @@
 {
  "schema": 1,
- "version": "3b0e5e162a47",
- "count": 108,
+ "version": "0d8dbe7ac78e",
+ "count": 114,
  "subjects": [
   {
    "key": "emergency",
    "label": "Emergency and Resuscitation",
-   "count": 6
+   "count": 7
   },
   {
    "key": "critical-care",
@@ -21,12 +21,12 @@
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 3
+   "count": 4
   },
   {
    "key": "infectious-disease",
    "label": "Infectious Diseases",
-   "count": 13
+   "count": 14
   },
   {
    "key": "gastroenterology",
@@ -51,7 +51,7 @@
   {
    "key": "toxicology",
    "label": "Toxicology and Envenomation",
-   "count": 1
+   "count": 2
   },
   {
    "key": "haematology-oncology",
@@ -71,7 +71,7 @@
   {
    "key": "surgery-trauma",
    "label": "Surgery, Trauma and Orthopaedics",
-   "count": 10
+   "count": 11
   },
   {
    "key": "anaesthesia",
@@ -81,7 +81,7 @@
   {
    "key": "ophthalmology-ent",
    "label": "Ophthalmology and ENT",
-   "count": 1
+   "count": 2
   }
  ],
  "protocols": [
@@ -131,6 +131,30 @@
     "ESC 2026",
     "ESC 2021",
     "ESC 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "acute-angle-closure-glaucoma",
+   "title": "Acute angle-closure crisis (acute angle-closure glaucoma)",
+   "subject": "ophthalmology-ent",
+   "population": "Adults",
+   "aliases": [
+    "AACG",
+    "AACC",
+    "acute angle closure",
+    "acute primary angle closure",
+    "APAC",
+    "acute glaucoma",
+    "angle-closure attack",
+    "red painful eye with haloes",
+    "laser peripheral iridotomy",
+    "LPI"
+   ],
+   "summary": "A painful red eye with blurred vision, haloes, a mid-dilated pupil and a stony-hard eye is acute angle closure until proven otherwise. Lower IOP immediately with acetazolamide 500 mg (IV if vomiting), topical aqueous suppressants and steroid, pilocarpine once IOP starts to fall, mannitol if needed, and arrange laser iridotomy in both eyes.",
+   "sources": [
+    "American Academy of Ophthalmology 2025",
+    "European Glaucoma Society 2025"
    ],
    "status": "ai_drafted"
   },
@@ -1142,6 +1166,31 @@
    "status": "ai_drafted"
   },
   {
+   "id": "copd-stable-management",
+   "title": "COPD stable management (GOLD ABE)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "GOLD 2026",
+    "GOLD ABE",
+    "LAMA LABA",
+    "triple therapy",
+    "COPD inhalers",
+    "emphysema",
+    "chronic bronchitis",
+    "pulmonary rehabilitation",
+    "LTOT"
+   ],
+   "summary": "Confirm COPD with post-bronchodilator FEV1/FVC below 0.7, classify into GOLD group A, B or E, start a bronchodilator (A) or LABA+LAMA (B and E), add ICS only for exacerbations with blood eosinophils of 100 cells/microL or more (initially if 300 or more), and give smoking cessation, vaccination and pulmonary rehabilitation to all.",
+   "sources": [
+    "GOLD 2026",
+    "GOLD 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "covid-19",
    "title": "COVID-19 (adult): severity-based treatment",
    "subject": "infectious-disease",
@@ -1237,6 +1286,28 @@
     "ADA / EASD / JBDS / AACE / DTS 2024",
     "JBDS-IP 2023",
     "ADA 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "drowning",
+   "title": "Drowning (adults and children)",
+   "subject": "emergency",
+   "population": "Adults and children",
+   "aliases": [
+    "near drowning",
+    "submersion injury",
+    "immersion injury",
+    "non-fatal drowning",
+    "water rescue",
+    "drowning resuscitation",
+    "rescue breaths"
+   ],
+   "summary": "Drowning kills by hypoxia, so ventilation comes first: open the airway, give 5 initial rescue breaths (with oxygen if available), then standard CPR. After rescue, treat hypoxaemia with oxygen, CPAP/NIV or intubation with PEEP, manage hypothermia, and observe for delayed respiratory deterioration. Antibiotics and steroids are not routine.",
+   "sources": [
+    "European Resuscitation Council 2025",
+    "Resuscitation Council UK 2025",
+    "Pellegrino F, et al. Ital J Pediatr 2023"
    ],
    "status": "ai_drafted"
   },
@@ -1931,6 +2002,31 @@
    "status": "ai_drafted"
   },
   {
+   "id": "leptospirosis",
+   "title": "Leptospirosis (adult)",
+   "subject": "infectious-disease",
+   "population": "Adults",
+   "aliases": [
+    "lepto",
+    "Weil disease",
+    "Weil's disease",
+    "rat fever",
+    "leptospiral pulmonary haemorrhage",
+    "LPHS",
+    "MAT",
+    "flood fever",
+    "doxycycline prophylaxis",
+    "NCDC leptospirosis"
+   ],
+   "summary": "Suspect in fever with myalgia, calf tenderness or conjunctival suffusion after flood-water, field or animal exposure. Treat empirically: doxycycline for mild disease; IV penicillin or ceftriaxone for severe disease. Refer early for AKI, jaundice, bleeding or breathlessness, as pulmonary haemorrhage kills within hours.",
+   "sources": [
+    "NCDC, MoHFW 2015",
+    "CDC 2026",
+    "ICMR 2019"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "local-anaesthetic-systemic-toxicity",
    "title": "Local anaesthetic systemic toxicity (LAST)",
    "subject": "anaesthesia",
@@ -2179,6 +2275,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "organophosphate-poisoning",
+   "title": "Organophosphate and carbamate poisoning",
+   "subject": "toxicology",
+   "population": "Adults",
+   "aliases": [
+    "OP poisoning",
+    "OPC poisoning",
+    "organophosphorus poisoning",
+    "carbamate poisoning",
+    "insecticide poisoning",
+    "pesticide poisoning",
+    "cholinergic crisis",
+    "atropine",
+    "atropinisation",
+    "pralidoxime",
+    "PAM",
+    "intermediate syndrome"
+   ],
+   "summary": "Resuscitate, then give atropine in doubling doses every 5 minutes until the chest is clear, heart rate is above 80 and systolic BP above 80 mmHg; maintain with an infusion of 10 to 20% of the loading dose per hour, consider pralidoxime, avoid routine lavage, and watch for intermediate syndrome.",
+   "sources": [
+    "The Lancet (Eddleston et al.) 2008",
+    "PLoS Medicine (Eddleston et al.) 2009",
+    "ISCCM 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "perioperative-anticoagulation-management",
    "title": "Perioperative management of anticoagulants and antiplatelets (elective surgery)",
    "subject": "anaesthesia",
@@ -2386,6 +2509,28 @@
    "sources": [
     "SCCM / ESICM 2021",
     "SCCM 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "septic-arthritis",
+   "title": "Septic arthritis of a native joint (adult)",
+   "subject": "surgery-trauma",
+   "population": "Adults",
+   "aliases": [
+    "septic joint",
+    "infective arthritis",
+    "pyogenic arthritis",
+    "hot swollen joint",
+    "acute monoarthritis",
+    "joint washout",
+    "gonococcal arthritis",
+    "BSR hot joint guideline"
+   ],
+   "summary": "Treat an acute hot swollen joint as septic until proven otherwise: aspirate for Gram stain, culture and crystals and take blood cultures before antibiotics, start empirical IV antibiotics chosen by risk group, and drain the joint by repeated aspiration or arthroscopic or open washout.",
+   "sources": [
+    "BSR / BHPR / BOA / RCGP / BSAC 2006",
+    "British Orthopaedic Association 2025"
    ],
    "status": "ai_drafted"
   },
