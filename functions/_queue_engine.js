@@ -11,7 +11,7 @@ import { readAllOrThrow } from "./_fs_read_all.js";
 import { brandingFor } from "./_clinic_branding.js";
 import { writeOrgAudit, appendOrgAudit } from "./_q_audit_chain.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
-import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, recallRefusal, NO_SHOW_RECALL_MS, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
+import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, recallRefusal, NO_SHOW_RECALL_MS, DEFAULT_CONSULT_MIN, priorityRule } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 import { isRole } from "./_queue_roles.js";
 import { resolveRoomDoctor, tokenScope, tokenConfig, formatToken, resolveTokenDepartment, department as M_department } from "./_opd_org.js";
@@ -51,11 +51,17 @@ export async function listTickets(env, sid) {
 }
 // Doctor-facing view: decrypt name/mobile (the authed owner may see them). Never sent to a patient page.
 export async function decorateForDoctor(env, tickets) {
-  return Promise.all(tickets.map(async (t) => Object.assign({}, t, {
-    name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
-    ghisPatientId: t.ghisPatientId || "",   // full MR# for the View-EMR-profile action (smd_opd_emr)
-    roomId: t.roomId || "", department: t.department || "", departmentId: t.departmentId || ""   // OPD platform: room + department (Phase 4); departmentId since D7
-  })));
+  return Promise.all(tickets.map(async (t) => {
+    const mrn = t.mrn || t.ghisPatientId || "";
+    return Object.assign({}, t, {
+      name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
+      mrn: mrn,
+      patientId: t.patientId || mrn || t.id,
+      ghisPatientId: mrn,   // full MR# for the View-EMR-profile action (smd_opd_emr)
+      vitals: t.vitals || null,   // MaikOS vitals sync: triage-recorded vitals ride to the doctor's EMR (Initial Assessment prefill)
+      roomId: t.roomId || "", department: t.department || "", departmentId: t.departmentId || ""   // OPD platform: room + department (Phase 4); departmentId since D7
+    });
+  }));
 }
 
 async function getStats(env, doctorUid) {
@@ -154,15 +160,50 @@ async function allocateToken(env, session, f, id, cfg, dept, unmatched) {
   throw Object.assign(new Error("token_contention"), { status: 409, detail: "Another desk registered at the same moment. Try again." });
 }
 
+/* ---- plan item 13: degraded desk mode ------------------------------------------------------------
+ * While online, a desk reserves a series letter for the day (create-only, so two desks never share one);
+ * offline it prints OA-1, OA-2 ... from it. On sync the ticket keeps that token and the time it was taken
+ * (arrival order), and the token itself is reserved create-only in the same commit as the ticket, so a
+ * retried sync can never queue the same slip twice. The day's numbered sequence is not touched. */
+const OFFLINE_LETTERS = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+export const OFFLINE_TOKEN_RE = /^O([A-HJ-NP-Z])-(\d{1,3})$/;
+const offlinePath = (coll, hosp, date, key) => coll + "/" + [hosp, date, key].map(sanitize).join("__");
+export async function reserveOfflineSeries(env, hospitalId, date, actor) {
+  for (const L of OFFLINE_LETTERS) {
+    try {
+      await fsCommit(env, [wCreate(env, offlinePath("q_offline_series", hospitalId, date, L), { hospitalId: String(hospitalId), date: String(date), letter: L, actor: String(actor || ""), createdAt: now(), expiresAt: endOfDayMs(date) + 2 * 86400e3 })]);
+      return { series: "O" + L };
+    } catch (e) { if (!(e && e.code === "precondition")) throw e; }
+  }
+  throw Object.assign(new Error("no_offline_series"), { status: 409, detail: "Every offline series for today is taken." });
+}
+async function commitOfflineTicket(env, session, f, id, body) {
+  const tok = String(body.offlineToken || "").trim().toUpperCase();
+  const m = OFFLINE_TOKEN_RE.exec(tok);
+  const hosp = session.hospitalId || ("doc-" + session.doctorUid);
+  if (!m || !(await fsGet(env, offlinePath("q_offline_series", hosp, session.date, m[1])))) throw Object.assign(new Error("bad_offline_token"), { status: 422 });
+  const t = now(), at = Number(body.offlineAt) || 0;
+  f.registeredAt = at > t - 12 * 3600e3 && at <= t ? at : t;   // the patient's place is when the slip was printed
+  f.token = tok; f.tokenNo = Number(m[2]); f.tokenScope = "offline"; f.offline = true;
+  try { await fsCommit(env, [wCreate(env, offlinePath("q_offline_tokens", hosp, session.date, tok), { ticketId: id, createdAt: t, expiresAt: endOfDayMs(session.date) + 2 * 86400e3 }), wCreate(env, "q_tickets/" + id, f)]); }
+  catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("offline_token_used"), { status: 409 }); throw e; }
+}
+
 // ---- add a ticket (manual or import) ------------------------------------------------------
 export async function addTicket(env, session, body, actor, org) {
+  // Plan item 12: a patient registered ahead of the queue says why, and the reason sets the level.
+  const prio = clampPriority(body.priority) > 0 || body.priorityReason ? priorityRule(body.priorityReason, body.priorityNote) : null;
+  if ((clampPriority(body.priority) > 0 || body.priorityReason) && !(prio && prio.priority > 0)) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Say why this patient goes ahead of the queue." });
   const id = newId();
+  const mrn = String(body.mrn || "");
   const f = {
     sessionId: session.id, hospitalId: session.hospitalId, status: "registered", position: 0,
-    visitType: body.visitType === "followup" ? "followup" : "new", priority: clampPriority(body.priority),
+    visitType: body.visitType === "followup" ? "followup" : "new", priority: 0,
     tokenVer: 1, encName: await encPHI(env, body.name), encMobile: await encPHI(env, body.mobile),
-    mrnLast4: String(body.mrn || "").replace(/\D/g, "").slice(-4),
-    ghisPatientId: String(body.mrn || ""),   // full MR# (for GHIS OPD profile lookups; smd_opd_emr)
+    mrn: mrn,
+    patientId: String(body.patientId || mrn || id),
+    mrnLast4: mrn.replace(/\D/g, "").slice(-4),
+    ghisPatientId: mrn,   // full MR# (for GHIS OPD profile lookups; smd_opd_emr)
     department: String(body.department || ""), roomId: String(body.roomId || ""),   // OPD platform (Phase 4)
     visitId: String(body.visitId || ""), ghisEpisodeId: String(body.ghisEpisodeId || ""),
     lang: String(body.lang || "en"),
@@ -179,8 +220,10 @@ export async function addTicket(env, session, body, actor, org) {
   const td = await tokenDepartment(env, session, body, org);
   // The ticket carries the resolved department's id and its CURRENT name; the name is display only.
   if (td.department) { f.departmentId = td.department.id; f.department = td.department.name; }
-  await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
-  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token });
+  if (prio) { f.priority = prio.priority; f.priorityReason = prio.reason; }
+  if (body.offlineToken) await commitOfflineTicket(env, session, f, id, body);
+  else await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token + (prio ? " priority:" + prio.reason + (prio.note ? " (" + prio.note.slice(0, 60) + ")" : "") : "") });
   await recompute(env, session);
   const ticket = withId(id, f);
   try { await notifyTicket(env, session, ticket, "registered", {}); } catch (e) {}   // best-effort SMS/WhatsApp
@@ -200,9 +243,11 @@ export async function setStatus(env, session, ticketId, to, actor) {
   if (to === "no_show") patch.noShowAt = now();   // starts the recall window
   if (to === "called" && !t.calledAt) patch.calledAt = now();
   if (to === "in_consultation") { patch.consultStartAt = now(); if (!t.calledAt) patch.calledAt = now(); sessPatch.currentTicketId = ticketId; }
-  // Send back to the waiting hall (doctor/nurse reroute from the consulting room): free the room, drop the
-  // partial-consult timer so it is not counted, and re-queue the patient (recompute reassigns position/ETA).
-  if (from === "in_consultation" && to === "waiting") { patch.consultStartAt = 0; patch.calledAt = 0; if (session.currentTicketId === ticketId) sessPatch.currentTicketId = ""; }
+  // Send back to the waiting hall, or out to diagnostics ("Send for Tests" mid-consult): free the room,
+  // drop the partial-consult timer so it is not counted, and (for waiting) re-queue the patient
+  // (recompute reassigns position/ETA). A patient at diagnostics is out of the room queue entirely, so the
+  // doctor can call the next patient; "Tests Done" returns them with priority.
+  if (from === "in_consultation" && (to === "waiting" || to === "at_diagnostics")) { patch.consultStartAt = 0; patch.calledAt = 0; if (session.currentTicketId === ticketId) sessPatch.currentTicketId = ""; }
   let learn = null;
   if (from === "in_consultation" && (to === "completed" || to === "investigation" || to === "followup" || to === "cancelled")) {
     patch.consultEndAt = now();
@@ -247,6 +292,7 @@ export async function recallNoShow(env, session, ticketId, opts, actor) {
   // G3: the recall and its hash-chained audit row in one commit; the ticket guard's refusal comes back as precondition.
   try { await appendOrgAudit(env, ev, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime })]); }
   catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were recalling them. Reload and try again." }); throw e; }
+  await liveBump(env, session.hospitalId);
   return recompute(env, session);
 }
 // The no-shows still inside their recall window, for the desk's and the doctor's "Recall no-shows" list.
@@ -265,11 +311,21 @@ export async function revokeTicket(env, session, ticketId, actor) {
   await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "revoke", meta: "erase" });
   return { ok: true };
 }
-export async function setPriority(env, session, ticketId, priority, actor) {
-  const t = await getTicket(env, ticketId);
+/* Plan item 12: every priority change carries a reason from the rule list, the reason sets the level, and
+ * the change and its hash-chained audit row (who, when, from, to, why) are ONE commit guarded on the
+ * ticket being unchanged since it was read. `opts` = { reason, note }. */
+export async function setPriority(env, session, ticketId, opts, actor) {
+  const rule = priorityRule(opts && opts.reason, opts && opts.note);
+  if (!rule) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Pick why this patient's priority changes." });
+  const d = await fsGet(env, "q_tickets/" + ticketId);
+  const t = d ? withId(ticketId, d.fields) : null;
   if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
-  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { priority: clampPriority(priority), updatedAt: now() })]);
-  await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "priority", meta: String(clampPriority(priority)) });
+  const meta = JSON.stringify({ from: t.priority || 0, to: rule.priority, reason: rule.reason, note: rule.note });
+  const ev = { ts: now(), hospitalId: session.hospitalId || "", ticketId, actor: String(actor || ""), action: "priority", meta };
+  const patch = { priority: rule.priority, priorityReason: rule.priority ? rule.reason : "", updatedAt: now() };
+  try { await appendOrgAudit(env, ev, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime })]); }
+  catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were setting priority. Reload and try again." }); throw e; }
+  await liveBump(env, session.hospitalId);
   return recompute(env, session);
 }
 
@@ -419,6 +475,7 @@ export async function getOrCreateRoomSession(env, org, room, date, doctorName) {
 // resets to registered at arrival order (or front if priority), audits from->to, reflows both queues.
 export async function assignToRoom(env, org, ticketId, room, opts, actor) {
   opts = opts || {};
+  if (opts.priorityReason && !priorityRule(opts.priorityReason, opts.reason)) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Say why this patient goes ahead of the queue." });
   const t = await getTicket(env, ticketId);
   if (!t) throw Object.assign(new Error("not_found"), { status: 404 });
   if (t.hospitalId && String(t.hospitalId) !== String(org.id)) throw Object.assign(new Error("cross_org"), { status: 403 });
@@ -432,7 +489,7 @@ export async function assignToRoom(env, org, ticketId, room, opts, actor) {
     sessionId: target.id, roomId: room.id, department: room.department || t.department || "", departmentId: room.departmentId || t.departmentId || "",
     status: "registered", position: 0, seq: (t.registeredAt || now()), updatedAt: now(), expiresAt: target.expiresAt
   })]);
-  if (opts.priority) { try { await setPriority(env, target, ticketId, opts.priority, actor); } catch (e) {} }   // priority -> front
+  if (opts.priorityReason) await setPriority(env, target, ticketId, { reason: opts.priorityReason, note: opts.reason }, actor);   // priority -> front, with its reason on the audit row
   await qAudit(env, { hospitalId: org.id, ticketId: ticketId, actor: actor, action: "assign_room", meta: JSON.stringify({ room: room.id, doctor: doctorUid, reason: String(opts.reason || "").slice(0, 120) }) });
   if (fromSessionId && fromSessionId !== target.id) { const src = await getSession(env, fromSessionId); if (src) await recompute(env, src); }
   return recompute(env, target);
@@ -495,6 +552,20 @@ export async function portalContext(env, token) {
 // G3: each row is hash-chained per hospital (_q_audit_chain.js). Still best-effort; never blocks the action.
 export async function qAudit(env, ev) {
   await writeOrgAudit(env, { ...ev, ts: now() });
+  await liveBump(env, ev && ev.hospitalId);
+}
+/* Plan item 16: the live boards. Every queue change is audited, so the audit is where the hospital's revision stamp
+ * moves: q_live/<hospital> { rev }. The /live stream watches that one small document and tells the boards to
+ * refresh, instead of each board re-reading every room every few seconds. It holds a time, never a patient.
+ * Best-effort: a stamp that failed to move costs a board one slow-poll interval, never a change. */
+export function liveWrite(env, hospitalId) { return wUpdate(env, "q_live/" + sanitize(hospitalId), { rev: now(), hospitalId: String(hospitalId) }); }
+export async function liveBump(env, hospitalId) {
+  if (!hospitalId) return;
+  try { await fsCommit(env, [liveWrite(env, hospitalId)]); } catch (e) {}
+}
+export async function liveRev(env, hospitalId) {
+  const d = await fsGet(env, "q_live/" + sanitize(hospitalId));
+  return (d && d.fields && Number(d.fields.rev)) || 0;
 }
 
 // ---- ABDM Scan and Share: the tokens issued to shared profiles, and their registration ---------------

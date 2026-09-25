@@ -148,7 +148,10 @@ export function org(o = {}) {
    * was created without this field and is an Indian one, so not a single record changes meaning.
    * What it actually implies lives in functions/_region.js and nowhere else. */
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
-  return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
+  return { id: s(o.id), code: s(o.code), name: s(o.name), doctorName: s(o.doctorName),
+           opdBillingMode: o.opdBillingMode === "doctor_first" ? "doctor_first" : "pay_first",
+           defaultConsultationFee: Math.max(0, Math.round(Number(o.defaultConsultationFee) || 0)),
+           kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), tokens: tokenConfig(o.tokens),
            wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security),
            /* Country-specific identifiers (India: GSTIN, HFR facility id). Shaped by the region adapter,
@@ -296,7 +299,7 @@ function wardsynqConfig(w) {
    * by POST /org/clinical-settings/<setting>. */
   /* intake joined 2026-09-17 (R4-5, form-response.js intakeSettings): forAppointments, whether patient forms marked for
    * appointments are offered before a booked appointment. Read defensively; absent or anything but true means off. */
-  for (const k of ["rcm", "theatre", "legal", "gst", "registers", "alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages", "labelSizes", "controlledDrugs", "dpdp", "retention", "supportServices", "hr", "patientComms", "onlineBooking", "feedback", "lactationWindowDays", "bloodDonorCriteria", "bloodCentre", "staffing", "emergencyMedicines", "prophylaxisWindowMinutes", "antibiogramMinIsolates", "reorderPolicy", "dialysis", "clinicalContentSignOff", "intake"]) {
+  for (const k of ["rcm", "theatre", "legal", "gst", "registers", "alerts", "abdm", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears", "printLanguages", "labelSizes", "controlledDrugs", "dpdp", "retention", "supportServices", "hr", "patientComms", "onlineBooking", "feedback", "lactationWindowDays", "bloodDonorCriteria", "bloodCentre", "staffing", "emergencyMedicines", "prophylaxisWindowMinutes", "antibiogramMinIsolates", "reorderPolicy", "dialysis", "clinicalContentSignOff", "intake", "freeReviewDays", "dayClose"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -323,6 +326,7 @@ export function room(o = {}) {
   requireId(o);
   const a = o.assignment || {};
   const mode = ROOM_ASSIGN_MODES.indexOf(a.mode) > -1 ? a.mode : "unassigned";
+  const doctorName = s(o.doctorName || a.doctorName);
   return {
     id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), opdId: orNull(o.opdId),
     /* The department NAME, for display only. It is not stored on the room: the store fills it from
@@ -332,7 +336,8 @@ export function room(o = {}) {
      * routed to a room never took the room's department. */
     department: s(o.department),
     name: s(o.name), number: s(o.number), active: o.active !== false,
-    assignment: { mode, doctors: arr(a.doctors), primary: orNull(a.primary) }
+    doctorName: doctorName,
+    assignment: { mode, doctors: arr(a.doctors), primary: orNull(a.primary), doctorName: doctorName }
   };
 }
 

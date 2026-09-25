@@ -39,7 +39,7 @@ test("'tell me the exact definition' after FUO carries the FUO turn", () => {
 
 test("'tell me doses' after hypertension carries the DRUG NAMES (bullets survive the cap) and retrieves on hypertension", () => {
   const p = L.buildPrompt({ question: "tell me doses", history: HTN });
-  assert.match(p, /Amlodipine \| Losartan \| Hydrochlorothiazide/);
+  assert.match(p, /Amlodipine; Losartan; Hydrochlorothiazide/);
   assert.doesNotMatch(p, /Source: StewardMD|Verify against local protocol/, "footer lines are not carried");
   assert.match(L.ragQuestion({ question: "tell me doses", history: HTN }), /^Treatment of hypertension\? tell me doses$/);
 });
@@ -71,7 +71,7 @@ test("PRODUCTION SHAPE: home.js sends {q, a} turns (_maikTurns); they are read, 
 
 test("carry(): opening line plus bullets/figures, capped, footer stripped", () => {
   const c = L.carry("Opening sentence. [1]\n- Amlodipine 5 mg [1]\nSome prose without numbers.\n- Losartan 50 mg\nVerify against local protocol.\nSource: StewardMD Knowledge Base - based on standard medical resources.");
-  assert.equal(c, "Opening sentence. | Amlodipine 5 mg | Losartan 50 mg");
+  assert.equal(c, "Opening sentence; Amlodipine 5 mg; Losartan 50 mg");
   assert.ok(L.carry("x\n" + Array.from({ length: 80 }, (_, i) => "- drug" + i + " 10 mg").join("\n")).length <= 701);
 });
 

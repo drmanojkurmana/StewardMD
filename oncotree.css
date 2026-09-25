@@ -841,7 +841,7 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
 .ot-detail-head h2 { flex: 1; font-size: 20px; font-weight: 700; margin: 0; }
 .ot-detail-warn { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--sev-warning-fg); background: var(--sev-warning-bg); border-radius: 10px; padding: 10px 12px; margin: 12px 0; }
 .ot-detail-warn .material-symbols-outlined { font-size: 17px; }
-.ot-detail-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+.ot-detail-meta { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; margin: 12px 0; }
 .ot-detail-meta > div { background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
 .ot-detail-meta b { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ot-sub); font-weight: 700; margin-bottom: 2px; }
 .ot-detail-sec { font-size: 12px; font-weight: 700; color: var(--ot-sub); text-transform: uppercase; letter-spacing: .05em; margin: 16px 0 8px; }
@@ -1610,6 +1610,8 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
   position: sticky;
   top: 0;
   z-index: 10;
+  flex: 0 0 auto;   /* QA BUG-014: a flex child with overflow-x:auto shrank to a 10px sliver under the toolbar */
+  min-height: 0;
   background: #ffffff;
   border-bottom: 1px solid #DCE3E8;
   padding: 10px 16px;
@@ -2179,15 +2181,41 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
     backdrop-filter: blur(2px);
     z-index: 45;
   }
+  /* QA BUG-014: phone toolbar = two clean rows. Row 1: menu + cancer name. Row 2: the controls,
+     scrolling sideways instead of wrapping into a clipped third row. */
   .ot-nav-toolbar {
-    padding: 8px 12px;
-    gap: 8px;
+    padding: 8px 12px 6px;
+    gap: 6px 8px;
+    flex-direction: column;
+    align-items: stretch;
   }
+  .ot-nav-tb-left {
+    flex-wrap: nowrap;
+    min-height: 34px;
+  }
+  .ot-nav-brand-t {
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ot-nav-tb-right {
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .ot-nav-tb-right::-webkit-scrollbar { display: none; }
+  .ot-nav-tb-right > * { flex: 0 0 auto; }
   .ot-nav-brand-v, .ot-nav-crumb-sep, .ot-nav-cur-node {
     display: none;
   }
   .ot-nav-toggle-wrap {
     display: none;
+  }
+  .ot-flow-stepper-wrap {
+    padding: 8px 12px;
   }
   .ot-flow-content {
     padding: 16px 12px 60px;
@@ -2202,7 +2230,7 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
     padding: 12px 14px;
   }
   .ot-flow-protos-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0,1fr);
   }
 }
 
@@ -2382,7 +2410,7 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
   color: var(--ot-sub); cursor: pointer; transition: all 0.12s;
 }
 .ot-auc-tag.on, .ot-auc-tag:active { background: var(--ot-accent); color: #fff; border-color: transparent; }
-.ot-calc-cards { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.ot-calc-cards { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; }
 .ot-res-card {
   padding: 14px 16px; border-radius: 16px; background: var(--ot-card);
   border: 1px solid var(--ot-line); box-shadow: var(--ot-shadow-card, 0 1px 3px rgba(0,0,0,0.04));

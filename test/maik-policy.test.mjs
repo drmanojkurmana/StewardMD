@@ -171,13 +171,15 @@ test("device gating: a 6 GB phone gets no 8 GB-floor recommendation, a 12 GB pho
   assert.ok(r6.unsuitableModels.some((x) => x.id === "maik-mxcore" && /Needs a 8 GB phone/.test(x.reasons[0])));
   assert.match(r6.message, /not suitable for this phone/); assert.match(r6.message, /MaiK Cloud/);
   const twelve = load({ device: { ramGB: 12 } });
-  const html = twelve.E.capsHTML();
-  assert.ok(html.indexOf("LOCAL AI") >= 0 && html.indexOf("MAiK Lite") >= 0);
-  assert.ok(/Bonsai Max[\s\S]*Runs well/.test(html), "Max is offered on 12 GB");
+  const hero = twelve.E.capsHTML();
+  assert.ok(hero.indexOf("Answering now") >= 0 && hero.indexOf("MAiK Lite") >= 0, "the On-this-phone card names the answering model");
+  const html = twelve.E.modelRowHTML();
+  assert.ok(/MAiK Max[\s\S]*Runs well/.test(html), "Max is offered on 12 GB");
   const eight = load({ device: { ramGB: 8 } });
-  assert.ok(/Bonsai Max[\s\S]*Not for this phone/.test(eight.E.capsHTML()), "and refused on 8 GB, with no download button");
-  assert.ok(!/data-me-upgrade="bonsai-27b"/.test(eight.E.capsHTML()));
-  assert.ok(/data-me-upgrade="maik-mxcore"/.test(eight.E.capsHTML()), "MxCore can be downloaded, only on a tap");
+  const lib8 = eight.E.modelRowHTML();
+  assert.ok(/MAiK Max[\s\S]*Not for this phone/.test(lib8), "and refused on 8 GB, with no download button");
+  assert.ok(!/data-me-upgrade="bonsai-27b"/.test(lib8));
+  assert.ok(/data-me-upgrade="maik-mxcore"/.test(lib8), "MxCore can be downloaded, only on a tap");
 });
 
 test("KB-only: answer kinds get the notice, structured kinds get { error: kb-only }, nothing reaches the cloud or a model", async () => {

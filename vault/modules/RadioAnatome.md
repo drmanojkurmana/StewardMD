@@ -5,16 +5,43 @@ structure, read its definition. Interaction modelled on e-Anatomy (IMAIOS); cont
 built only from licence-cleared sources.
 
 - **Entry points:** Home tile `atlas` · sidebar row `RadioAnatome` · `stewardmd://atlas` · `ATLAS.open(moduleId?)`
-- **Files:** `atlas.js`, `atlas.css`, `atlas/modules.json`, `atlas/<id>/atlas.json`, `atlas/<id>/NNN.webp`
-- **Pipeline:** `atlas-pipeline/` (dev-only, never shipped)
-- **Spec:** `docs/superpowers/specs/2026-08-17-anatomy-atlas-spec.md`
+- **Files:** `atlas.js`, `atlas.css`, `atlas/modules.json`, `atlas/<id>/atlas.json`, `atlas/<id>/NNN.webp`, `atlas/<id>/w/<window>/NNN.webp` (CT windows), `atlas/index.json` (search), `atlas/notes.json` (review-gated clinical notes)
+- **Pipeline:** `atlas-pipeline/` (dev-only, never shipped); `living.py` is the exact reproduction of the torso/brain chain; `atlas-index.mjs` writes the search index
+- **Spec:** `docs/superpowers/specs/2026-08-17-anatomy-atlas-spec.md` · premium pass contract `docs/radioanatome/PREMIUM_PLAN_2026-09-25.md` · orientation evidence `docs/radioanatome/ORIENTATION.md`
 - **Plans:** `docs/superpowers/plans/2026-08-17-anatomy-atlas-viewer.md` · `…-pipeline.md`
-- **Tests:** `test/atlas-layout.test.mjs` (74) · `test/atlas-data.test.mjs` (143) · `atlas-pipeline/test_pipeline.py` (203)
-- **Modules:** 10 — head/thorax/abdomen CT in axial + coronal + sagittal (1249 verified pins), plus brain T1 MRI images awaiting authoring
+- **Tests:** `test/atlas-layout.test.mjs` (178) · `test/atlas-data.test.mjs` (605) · `test/atlas-notes.test.mjs` (11) · `test/run-atlas-ui.mjs` (149, real headless CDP touch; localhost:8996, Chrome port 9388) · `atlas-pipeline/test_pipeline.py` (311)
+- **Modules:** 36 in `modules.json`, 35 visible (`brain-mri-axial-t1` is `hidden`: cadaver T1 with 0 pins). Living torso CT and 7T brain MRI have 48-slice stacks under `atlas/<id>/v2/` (proved by `living.py --prove-rebuild`); cadaver head, thorax and knee axial/coronal are 48-slice v2 stacks too (2026-09-25 GCP VM job `atlas-pipeline/vm/`: the classical scripts reproduced the shipped images byte-exact and 880 of 912 pins, then every v2 slice was audited). Abdomen, pelvis, whole body and knee-sagittal stay at 20-24: TotalSegmentator 2.18.0 on the VM could not reproduce their shipped pins and was not better (evidence in `docs/radioanatome/RESEG_TS_COMPARISON.md`); knee-sagittal's v2 crossed both legs of a "single leg" module. Pin corrections are audited row by row in `atlas-pipeline/pin_fixes.tsv`. Living neck (`ct-live-neck-*`, s0021, contrast) and thorax-neck (`ct-live-thorax-neck-*`, s0897, unenhanced) groups added 2026-09-25 by `atlas-pipeline/tsd_living.py` (axes measured from the masks, then the torso chain); 48 slices each, fresh paths, lung/bone windows, R/L from the aortic arch, SVC and heart (ORIENTATION.md finding 5). No 3D mesh for their new structures yet (`bp3d-map.json` `_pending_3d`). TotalSegmentator v2.0.1 has no larynx, internal jugular vein or pharynx mask, so those stay unlabelled.
+- **Flags / storage:** `smd_atlas_notes` (default OFF; `?atlasnotes=1`) · `smd_atlas_labels` · `smd_atlas_recent` · `smd_atlas_bookmarks` · `smd_atlas_offline` · offline caches `atlas2d-<id>`
 - **3D layer:** [[RadioAnatome 3D]] — BodyParts3D reference body on the same ontology; "3D Anatomy" card in the catalog, "3D" pill on a slice sheet, `ATLAS.openAt(module, sid, slice)` deep link used by its CT/MRI rows, `ATLAS.back()` unwinds the 3D layer first
+
+## Premium pass (2026-09-25, branch `worktree-radioanatome-premium`)
+
+Audit measured the slice at 219x190 px on a 390x844 phone (gutter labels ate the width) with one
+label per PIN. Now: Pins / Labels / Off modes (Pins default on narrow portrait, slice fills the
+width), one label per structure, pinch-zoom/pan/double-tap, momentum scrub, cine, Name it / Find it
+quiz, mm ruler, CT lung/bone windows (torso), radiological flip + verified edge letters, search
+across modules, recents, bookmarks, per-module offline download, Axial/Coronal/Sagittal switch at
+the same point with a scout line, tablet side panel, review-gated Clinical tab.
 
 ## Gotchas
 
+- **Image paths are immutable. Never rewrite the bytes of an existing `.webp`.** `_headers` serves
+  `/*.webp` immutable for a year and installed apps bundle their own `atlas.json` while fetching
+  images from stewardmd.in, so a changed picture pairs old pins with a new image. `slices.py`
+  refuses to do it; new stacks go under `atlas/<id>/v2/`; a test pins every pre-upgrade blob.
+- **Orientation is display-time only** (`flipX`/`flipY` in `modules.json`, from
+  `docs/radioanatome/ORIENTATION.md`). The 3D cut planes texture the same unflipped files. Letters
+  only where anatomy proved them; no cadaver module asserts R/L. Knee/foot/hand sources are stored
+  rotated 180 degrees relative to every other module.
+- **The app's Display setting zooms the whole document** (`home.js` `applyD` sets
+  `documentElement.style.zoom`). All pointer maths goes through `stageScale`/`stagePt`, or taps land
+  off by that factor.
+- **A pointer whose `pointerup` never arrives** used to turn later one-finger drags into a phantom
+  pinch; a new primary pointer starts a fresh gesture.
+- **`SHEET_PEEK` in atlas.js must equal the peek height in atlas.css (170 px).** Labels are laid out
+  in the stage the sheet leaves visible.
+- **`dialog-motion.js` animates every `.sheet` in from opacity 0.7**, which made the footer bleed
+  through; atlas.css pins `opacity: 1 !important` on the sheet.
 - **Display name is RadioAnatome; internal identifiers are `atlas`.** `window.ATLAS`,
   `atlas.js`, `/atlas/` paths, `data-atlas-act`, `.atlas-*` CSS and `#smdAtlas` all keep
   the short name deliberately — renaming them is churn with no user benefit.

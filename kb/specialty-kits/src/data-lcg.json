@@ -1,0 +1,97 @@
+{
+  "source": {
+    "org": "WHO",
+    "title": "WHO Labour Care Guide: user's manual",
+    "year": 2020,
+    "url": "https://www.who.int/publications/i/item/9789240017566"
+  },
+  "verified": "Checked against the user's manual (ISBN 978-92-4-001756-6, printed page numbers; PDF page is printed page plus 8) and the standalone LCG form (WHO 2021, cdn.who.int who-labour-care-guide.pdf). Baseline: Section 1, Table 2 (p8) and Table 1 (p6, U = Unknown for ruptured membranes); the form's Name field is left out on purpose. Supportive care: Table 3 (p10) and Table 1 (p6). Care of the baby: Table 4 (p12 to 13) and Table 1 (p7). Care of the woman: Table 5 (p15) and Table 1 (p7); the form's single Urine row (P++, A++) is split into protein and acetone. Labour progress: Table 6 (p17 to 18). Medication: Table 7 (p20 to 21) and Table 1 (p7). cervixAlertHours and secondStage: Table 6 (p18); cervix limits also match the form's cervix row. Frequency: pp5, 9, 12 to 13, 15, 17 to 18, 20. Notes: pp2 to 3, 5 to 6, 17 to 18, 21 and the form instructions. Every alert threshold matches the Alert column of the form and of Annex 1 (p24).",
+  "baseline": [
+    { "id": "parity", "label": "Parity", "type": "number" },
+    { "id": "onset", "label": "Labour onset", "type": "select", "options": ["Spontaneous", "Induced"], "optionLabels": ["Spontaneous", "Induced"] },
+    { "id": "activeLabour", "label": "Active labour diagnosis", "type": "datetime" },
+    { "id": "ruptured", "label": "Ruptured membranes", "type": "datetime", "options": ["U"], "optionLabels": ["Unknown"] },
+    { "id": "riskFactors", "label": "Risk factors", "type": "text" }
+  ],
+  "sections": [
+    {
+      "id": "supportive",
+      "label": "Supportive care",
+      "rows": [
+        { "id": "companion", "label": "Companion", "type": "select", "options": ["Y", "N", "D"], "optionLabels": ["Yes", "No", "Declined"], "alert": { "is": ["N"] } },
+        { "id": "painRelief", "label": "Pain relief", "type": "select", "options": ["Y", "N", "D"], "optionLabels": ["Yes", "No", "Declined"], "alert": { "is": ["N"] } },
+        { "id": "oralFluid", "label": "Oral fluid", "type": "select", "options": ["Y", "N", "D"], "optionLabels": ["Yes", "No", "Declined"], "alert": { "is": ["N"] } },
+        { "id": "posture", "label": "Posture", "type": "select", "options": ["SP", "MO"], "optionLabels": ["Supine", "Mobile"], "alert": { "is": ["SP"] } }
+      ]
+    },
+    {
+      "id": "baby",
+      "label": "Care of the baby",
+      "rows": [
+        { "id": "fhr", "label": "Baseline FHR", "type": "number", "unit": "bpm", "alert": { "below": 110, "atOrAbove": 160 } },
+        { "id": "fhrDecel", "label": "FHR deceleration", "type": "select", "options": ["N", "E", "L", "V"], "optionLabels": ["No", "Early", "Late", "Variable"], "alert": { "is": ["L"] } },
+        { "id": "amnioticFluid", "label": "Amniotic fluid", "type": "select", "options": ["I", "C", "M+", "M++", "M+++", "B"], "optionLabels": ["Intact membranes", "Ruptured, clear fluid", "Meconium +, non-significant", "Meconium ++, medium", "Meconium +++, thick", "Blood-stained fluid"], "alert": { "is": ["M+++", "B"] } },
+        { "id": "fetalPosition", "label": "Fetal position", "type": "select", "options": ["A", "P", "T"], "optionLabels": ["Any occiput anterior", "Any occiput posterior", "Any occiput transverse"], "alert": { "is": ["P", "T"] } },
+        { "id": "caput", "label": "Caput", "type": "select", "options": ["0", "+", "++", "+++"], "optionLabels": ["None", "+", "++", "+++ marked"], "alert": { "is": ["+++"] } },
+        { "id": "moulding", "label": "Moulding", "type": "select", "options": ["0", "+", "++", "+++"], "optionLabels": ["None", "+ sutures apposed", "++ sutures overlapped but reducible", "+++ sutures overlapped and not reducible"], "alert": { "is": ["+++"] } }
+      ]
+    },
+    {
+      "id": "woman",
+      "label": "Care of the woman",
+      "rows": [
+        { "id": "pulse", "label": "Pulse", "type": "number", "unit": "bpm", "alert": { "below": 60, "atOrAbove": 120 } },
+        { "id": "sbp", "label": "Systolic BP", "type": "number", "unit": "mmHg", "alert": { "below": 80, "atOrAbove": 140 } },
+        { "id": "dbp", "label": "Diastolic BP", "type": "number", "unit": "mmHg", "alert": { "atOrAbove": 90 } },
+        { "id": "temp", "label": "Temperature", "type": "number", "unit": "°C", "alert": { "below": 35.0, "atOrAbove": 37.5 } },
+        { "id": "urineProtein", "label": "Urine protein", "type": "select", "options": ["Neg", "Trace", "+", "++", "+++", "++++"], "optionLabels": ["Negative", "Trace", "+", "++", "+++", "++++"], "alert": { "is": ["++", "+++", "++++"] } },
+        { "id": "urineAcetone", "label": "Urine acetone (ketones)", "type": "select", "options": ["Neg", "Trace", "+", "++", "+++", "++++"], "optionLabels": ["Negative", "Trace", "+", "++", "+++", "++++"], "alert": { "is": ["++", "+++", "++++"] } }
+      ]
+    },
+    {
+      "id": "progress",
+      "label": "Labour progress",
+      "rows": [
+        { "id": "contractions", "label": "Contractions per 10 min", "type": "number", "unit": "per 10 min", "alert": { "atOrBelow": 2, "above": 5 } },
+        { "id": "contractionDuration", "label": "Duration of contractions", "type": "number", "unit": "s", "alert": { "below": 20, "above": 60 } },
+        { "id": "cervix", "label": "Cervix", "type": "number", "unit": "cm" },
+        { "id": "descent", "label": "Descent", "type": "select", "options": ["5", "4", "3", "2", "1", "0"], "optionLabels": ["5/5", "4/5", "3/5", "2/5", "1/5", "0/5"] }
+      ]
+    },
+    {
+      "id": "medication",
+      "label": "Medication",
+      "rows": [
+        { "id": "oxytocin", "label": "Oxytocin", "type": "text", "unit": "U/L, drops/min" },
+        { "id": "medicine", "label": "Medicine", "type": "text" },
+        { "id": "ivFluids", "label": "IV fluids", "type": "select", "options": ["Y", "N"], "optionLabels": ["Yes", "No"] }
+      ]
+    }
+  ],
+  "cervixAlertHours": [
+    { "cm": 5, "hours": 6 },
+    { "cm": 6, "hours": 5 },
+    { "cm": 7, "hours": 3 },
+    { "cm": 8, "hours": 2.5 },
+    { "cm": 9, "hours": 2 }
+  ],
+  "secondStage": { "alertHoursNulliparous": 3, "alertHoursMultiparous": 2 },
+  "frequency": [
+    "Each time column is one clock hour; record the actual time of every observation.",
+    "Supportive care (companion, pain relief, oral fluid, posture): record every hour.",
+    "Baseline FHR and decelerations: every 30 minutes in the first stage and every 5 minutes in the second stage; in the second stage record the most clinically significant value within each 15 minute timeframe.",
+    "Amniotic fluid, fetal position, caput and moulding: at each vaginal examination, every 4 hours unless otherwise indicated.",
+    "Pulse, blood pressure and temperature: every 4 hours; urine protein and acetone every 4 hours or each time the woman voids.",
+    "Contractions (frequency and duration): every 30 minutes in the first stage and at least every 15 minutes in the second stage.",
+    "Cervix: every 4 hours in the first stage unless otherwise indicated. Descent: every 4 hours before the vaginal examination, and plot at every vaginal examination.",
+    "Oxytocin: when used, record the amount being given every 60 minutes."
+  ],
+  "notes": [
+    "Start the LCG when the woman enters the active first stage (cervix 5 cm or more), whatever her parity or membrane status; do not start it in the latent phase.",
+    "At every assessment follow Assess, Record, Check against the Alert column, Plan. Circle any alert value, alert the senior midwife or doctor, and record the assessment and the plan agreed with the woman in the shared decision-making section.",
+    "Cervix alert: dilatation stays at the same value for the listed hours or more with no progress. Second stage alert: birth not completed 3 hours (nulliparous) or 2 hours (multiparous) from the start of the active second stage. In the second stage, mark P when pushing begins.",
+    "If contractions are 2 or fewer or more than 5 per 10 minutes, or last under 20 or over 60 seconds, recount over another 10 minutes before alerting.",
+    "Alert thresholds are early-warning signals, not diagnoses. Decide on the overall assessment of the woman and baby rather than one observation; they do not replace clinical judgement or local guidelines.",
+    "If labour lasts beyond 12 hours, continue on a new LCG."
+  ]
+}

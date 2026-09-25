@@ -537,11 +537,18 @@
   function watchDx() {
     // Observe #dxOverlay class toggles to (re)inject the pill + watermark when it opens.
     var attach = function () {
-      var ov = document.getElementById("dxOverlay"); if (!ov) return setTimeout(attach, 400);
+      var ov = document.getElementById("dxOverlay"); if (!ov) return false;
       try { new MutationObserver(function () { decorateDxOverlay(); }).observe(ov, { attributes: true, attributeFilter: ["class"] }); } catch (e) {}
       decorateDxOverlay();
+      return true;
     };
-    attach();
+    if (attach()) return;
+    // #dxOverlay is only created once Clinical Reasoning first opens (reasoning.js appends it
+    // as a direct child of body) — watch for that instead of polling every session forever.
+    try {
+      var bodyObs = new MutationObserver(function () { if (attach()) bodyObs.disconnect(); });
+      bodyObs.observe(document.body, { childList: true });
+    } catch (e) {}
   }
 
   /* ───────────────────────────── boot ───────────────────────────── */

@@ -115,7 +115,8 @@ let svg = overlaySvg(SLICE, ATL, B, 400, 800, { sel: null, hidden: {} });
 ok("overlay is an svg", svg.indexOf("<svg") === 0);
 ok("overlay draws one dot per pin", (svg.match(/class="atlas-dot/g) || []).length === 3);
 ok("overlay draws one leader line per pin", (svg.match(/class="atlas-lead/g) || []).length === 3);
-ok("overlay draws one tick per pin", (svg.match(/class="atlas-tick/g) || []).length === 3);
+ok("overlay draws one tick per STRUCTURE (labels are deduped)", (svg.match(/class="atlas-tick/g) || []).length === 2);
+ok("overlay draws one label per structure", (svg.match(/class="atlas-lab/g) || []).length === 2);
 ok("overlay uses both gutters", svg.includes('atlas-lab l') && svg.includes('atlas-lab r'));
 ok("overlay uses the category colour", svg.includes("#7fd9e8"));
 ok("overlay tags elements with their structure id", (svg.match(/data-atlas-s="fornix"/g) || []).length >= 2);
@@ -152,7 +153,8 @@ ok("letterboxing does not desync label from dot", Math.abs(+tLead[2] - +tLead[4]
 
 // Selection: the chosen structure is marked on BOTH of its pins, others dim.
 svg = overlaySvg(SLICE, ATL, B, 400, 800, { sel: "fornix", hidden: {} });
-ok("selection marks every instance", (svg.match(/atlas-lab [lr] on"/g) || []).length === 2);
+ok("selection marks the one label of the structure", (svg.match(/atlas-lab [lr] on"/g) || []).length === 1);
+ok("selection marks every dot of the structure", (svg.match(/class="atlas-dot on"/g) || []).length === 2);
 ok("selection dims the others", /atlas-lab [lr] dim"/.test(svg));
 ok("selection thickens both leader lines", (svg.match(/atlas-lead on"/g) || []).length === 2);
 ok("unselected dots dim too", /atlas-dot dim"/.test(svg));
@@ -191,6 +193,238 @@ ok("fewer slices than samples degrades gracefully", trackThumbs(mkA(3), 5).lengt
 ok("single slice is safe", trackThumbs(mkA(1), 5).length === 1);
 ok("empty atlas is safe", trackThumbs({ slices: [] }, 5).length === 0);
 ok("null atlas is safe", trackThumbs(null, 5).length === 0);
+
+// ===================== premium viewer helpers (2026-09-25) =====================
+const P = mod.exports;
+const near = (a, b, e = 1e-6) => Math.abs(a - b) < e;
+
+// --- exactly one tab stop per structure ---
+const tabStops = (s) => [...s.matchAll(/<(?:circle|text)[^>]*tabindex="0"[^>]*>/g)].map((m) => (m[0].match(/data-atlas-s="([^"]+)"/) || [])[1]);
+svg = overlaySvg(SLICE, ATL, B, 400, 800, { mode: "labels" });
+ok("labels mode: one tab stop per structure", tabStops(svg).sort().join() === "fornix,sas");
+ok("labels mode: the tab stop is the label, dots are hidden from AT",
+   !/<circle class="atlas-dot[^>]*tabindex/.test(svg) && /<circle class="atlas-dot[^>]*aria-hidden="true"/.test(svg));
+svg = overlaySvg(SLICE, ATL, imageBox(400, 800, 0.9, 0), 400, 800, { mode: "pins" });
+ok("pins mode: one tab stop per structure", tabStops(svg).sort().join() === "fornix,sas");
+ok("pins mode: every pin is still drawn", (svg.match(/class="atlas-dot/g) || []).length === 3);
+ok("pins mode: no gutter labels", !svg.includes("atlas-lab"));
+svg = overlaySvg(SLICE, ATL, imageBox(400, 800, 0.9, 0), 400, 800, { mode: "off" });
+ok("off mode: a clean image", !svg.includes("atlas-dot") && !svg.includes("atlas-lab"));
+svg = overlaySvg(SLICE, ATL, imageBox(400, 800, 0.9, 0), 400, 800, { mode: "off", sel: "fornix" });
+ok("off mode still shows the selected structure, without tab stops",
+   (svg.match(/class="atlas-dot/g) || []).length === 2 && !svg.includes("tabindex"));
+
+// --- dedupe grouping ---
+const G2 = P.groupPins([{ s: "a", x: 10, y: 10 }, { s: "b", x: 50, y: 50 }, { s: "a", x: 30, y: 20 }, { s: "a", x: 20, y: 30 }]);
+ok("groupPins: one group per structure, first-appearance order", G2.length === 2 && G2[0].s === "a" && G2[1].s === "b");
+ok("groupPins: keeps every point", G2[0].pts.length === 3);
+ok("groupPins: mean position", near(G2[0].x, 20) && near(G2[0].y, 20));
+ok("groupPins: empty in, empty out", P.groupPins([]).length === 0 && P.groupPins(null).length === 0);
+const PANC = { categories: ATL.categories, structures: { p: { name: "Pancreas", category: "wm" } } };
+const P4 = { i: 1, aspect: 1, pins: [{ s: "p", x: 40, y: 50 }, { s: "p", x: 45, y: 52 }, { s: "p", x: 55, y: 51 }, { s: "p", x: 60, y: 49 }] };
+svg = overlaySvg(P4, PANC, imageBox(400, 800, 1, 90), 400, 800, { mode: "labels" });
+ok("a 4-pin structure has one label", (svg.match(/class="atlas-lab/g) || []).length === 1);
+ok("... with a leader to each of its pins", (svg.match(/class="atlas-lead/g) || []).length === 4);
+// Real data: ct-live-torso-axial slice 6 carries 25 pins over 15 structures.
+const TORSO = JSON.parse(readFileSync(join(ROOT, "atlas/ct-live-torso-axial/atlas.json"), "utf8"));
+const t6 = TORSO.slices[5], uniq = new Set(t6.pins.map((p) => p.s)).size;
+svg = overlaySvg(t6, TORSO, imageBox(390, 560, t6.aspect, 90), 390, 560, { mode: "labels" });
+ok("torso slice 6: one label per structure (" + uniq + ")", (svg.match(/class="atlas-lab/g) || []).length === uniq);
+ok("torso slice 6: one leader per pin (" + t6.pins.length + ")", (svg.match(/class="atlas-lead/g) || []).length === t6.pins.length);
+ok("torso slice 6: both gutters are used", svg.includes("atlas-lab l") && svg.includes("atlas-lab r"));
+
+// --- labels never go under a peeking sheet or above the stage ---
+const labYs = (s, side) => [...s.matchAll(/class="atlas-lab ([lr])[^"]*" x="[\d.]+" y="([\d.]+)"/g)]
+  .filter((m) => !side || m[1] === side).map((m) => +m[2]);
+svg = overlaySvg(t6, TORSO, imageBox(390, 400, t6.aspect, 90), 390, 560, { mode: "labels", visH: 400 });
+ok("labels stay inside the visible height (2-line label bottom included)", labYs(svg).every((y) => y + 13 + 4 <= 400));
+ok("labels clear the top edge of the stage", labYs(svg).every((y) => y - 10 >= 0));
+svg = overlaySvg(t6, TORSO, imageBox(390, 560, t6.aspect, 90), 390, 560, { mode: "labels" });
+const gapsOf = (ys) => ys.sort((a, b) => a - b).slice(1).map((y, i) => y - ys[i]);
+ok("labels in a column never overlap", ["l", "r"].every((sd) => gapsOf(labYs(svg, sd)).every((g) => g >= 17)));
+
+// --- zoom box, clamp, zoom about a point ---
+const base = { x: 0, y: 100, w: 400, h: 300 };
+ok("zoomBox at s=1 is the base box", JSON.stringify(P.zoomBox(base, { s: 1, px: 0, py: 0 })) === JSON.stringify(base));
+let zb = P.zoomBox(base, { s: 2, px: 0, py: 0 });
+ok("zoomBox scales about the base centre", near(zb.w, 800) && near(zb.h, 600) && near(zb.x, -200) && near(zb.y, -50));
+ok("clampZoom caps the scale", P.clampZoom(base, { s: 9, px: 0, py: 0 }, 400, 500, 6).s === 6);
+ok("clampZoom floors the scale at 1", P.clampZoom(base, { s: 0.3, px: 50, py: 50 }, 400, 500).s === 1);
+ok("an unzoomed image cannot be panned", (() => { const c = P.clampZoom(base, { s: 1, px: 80, py: -40 }, 400, 500); return c.px === 0 && c.py === 0; })());
+zb = P.zoomBox(base, P.clampZoom(base, { s: 2, px: 5000, py: -5000 }, 400, 500));
+ok("clamped pan: the image still covers the view horizontally", zb.x <= 1e-9 && zb.x + zb.w >= 400 - 1e-9);
+ok("clamped pan: the image still covers the view vertically", zb.y <= 1e-9 && zb.y + zb.h >= 500 - 1e-9);
+const z1 = P.zoomAt(base, { s: 1, px: 0, py: 0 }, 3, 100, 200), d1 = P.zoomBox(base, z1);
+ok("zoomAt keeps the image point under the finger", near((100 - d1.x) / d1.w, 0.25) && near((200 - d1.y) / d1.h, 1 / 3));
+const d2 = P.zoomBox(base, P.zoomAt(base, z1, 3, 100, 200, 150, 260));
+ok("zoomAt with a moving midpoint pans with it", near((150 - d2.x) / d2.w, 0.25) && near((260 - d2.y) / d2.h, 1 / 3));
+const pz = P.toScreen(d1, false, 25, 100 / 3);
+ok("a pin under the focal point stays under it after zooming", near(pz.x, 100) && near(pz.y, 200));
+
+// --- flipX (display-time mirror) ---
+const fb = { x: 10, y: 20, w: 200, h: 100 };
+const a0 = P.toScreen(fb, false, 30, 40), a1 = P.toScreen(fb, true, 30, 40);
+ok("flip mirrors x about the image centre", near(a0.x + a1.x, 2 * (fb.x + fb.w / 2)));
+ok("flip leaves y alone", near(a0.y, a1.y));
+ok("toImage inverts toScreen (unflipped)", (() => { const q = P.toImage(fb, false, a0.x, a0.y); return near(q.x, 30) && near(q.y, 40); })());
+ok("toImage inverts toScreen (flipped)", (() => { const q = P.toImage(fb, true, a1.x, a1.y); return near(q.x, 30) && near(q.y, 40); })());
+const fdot = overlaySvg(ONE, ATL, B, 400, 800, { mode: "pins", flip: true }).match(/class="atlas-dot[^"]*" cx="([\d.]+)"/);
+ok("overlaySvg mirrors pins when flipX", Math.abs(+fdot[1] - (B.x + (1 - 0.30) * B.w)) < 0.2);
+const nf = overlaySvg(ONE, ATL, B, 400, 800, { mode: "labels", flip: true });
+ok("a mirrored left-side pin gets a right-hand label", nf.includes("atlas-lab r") && !nf.includes("atlas-lab l"));
+
+// --- orientation letters ---
+svg = overlaySvg(ONE, ATL, B, 400, 800, { mode: "pins", orient: { left: "R", right: "L", top: "A", bottom: "P" } });
+ok("orient letters are drawn", ["R", "L", "A", "P"].every((c) => svg.includes('aria-hidden="true">' + c + "</text>")));
+ok("orient accepts only R L A P S I", !overlaySvg(ONE, ATL, B, 400, 800, { mode: "pins", orient: { left: "<b>" } }).includes("atlas-orient"));
+ok("no orient data, no letters", !overlaySvg(ONE, ATL, B, 400, 800, { mode: "pins" }).includes("atlas-orient"));
+
+// --- ruler ---
+ok("rulerMm: the full width of a 300 mm image", near(P.rulerMm({ x: 0, y: 50 }, { x: 100, y: 50 }, [300, 200]), 300));
+ok("rulerMm: anisotropic diagonal", near(P.rulerMm({ x: 0, y: 0 }, { x: 100, y: 100 }, [300, 400]), 500));
+ok("rulerMm: no mm, no measurement", P.rulerMm({ x: 0, y: 0 }, { x: 1, y: 1 }, null) === null);
+// Points are stored in image %, so a measurement taken zoomed and flipped equals the same
+// two points measured unzoomed.
+const zD = P.zoomBox(base, { s: 4, px: 30, py: -20 });
+const m1 = P.toImage(zD, true, 120, 180), m2 = P.toImage(zD, true, 220, 260);
+const s1 = P.toScreen(zD, true, m1.x, m1.y), s2 = P.toScreen(zD, true, m2.x, m2.y);
+const pxDist = Math.hypot(s2.x - s1.x, s2.y - s1.y) / 4;          // unzoomed screen px
+ok("ruler: zoomed+flipped taps map back to the same screen points", near(s1.x, 120) && near(s2.y, 260));
+ok("ruler: mm is zoom-invariant", near(P.rulerMm(m1, m2, [base.w, base.h]), pxDist, 1e-6));
+svg = overlaySvg(ONE, ATL, B, 400, 800, { mode: "off", ruler: { pts: [{ x: 0, y: 50 }, { x: 50, y: 50 }], mm: [300, 200] } });
+ok("the ruler is drawn with its mm label", svg.includes("atlas-ruler") && svg.includes(">150 mm<"));
+
+// --- Find it ---
+const JP = [{ s: "aorta", x: 100, y: 100 }, { s: "ivc", x: 140, y: 100 }, { s: "aorta", x: 300, y: 300 }];
+ok("judgeFind: a tap nearest the target is right", P.judgeFind(JP, 110, 102, "aorta", 50).ok === true);
+ok("judgeFind: a tap nearest another structure is wrong and says which",
+   P.judgeFind(JP, 132, 100, "aorta", 50).ok === false && P.judgeFind(JP, 132, 100, "aorta", 50).s === "ivc");
+ok("judgeFind: any pin of a multi-pin structure counts", P.judgeFind(JP, 290, 310, "aorta", 50).ok === true);
+ok("judgeFind: a tap far from every pin is wrong", P.judgeFind(JP, 600, 600, "aorta", 50).ok === false && P.judgeFind(JP, 600, 600, "aorta", 50).s === null);
+ok("judgeFind: no pins is safe", P.judgeFind([], 1, 1, "x", 50).ok === false);
+
+// --- quiz rendering ---
+const PB = imageBox(400, 800, 0.9, 0);
+svg = overlaySvg(SLICE, ATL, PB, 400, 800, { mode: "pins", quiz: { kind: "name", marks: {} } });
+ok("Name it hides every name, even from AT", !svg.includes("Fornix") && !svg.includes("Subarachnoid"));
+ok("Name it keeps one tab stop per structure", tabStops(svg).length === 2);
+svg = overlaySvg(SLICE, ATL, PB, 400, 800, { mode: "pins", quiz: { kind: "name", marks: { fornix: true, sas: false } } });
+ok("Name it colours self-marked pins", (svg.match(/atlas-dot big qok/g) || []).length === 2 && (svg.match(/atlas-dot big qbad/g) || []).length === 1);
+ok("Find it shows no pins before the answer", !overlaySvg(SLICE, ATL, PB, 400, 800, { mode: "pins", quiz: { kind: "find" } }).includes("atlas-dot"));
+svg = overlaySvg(SLICE, ATL, PB, 400, 800, { mode: "pins", quiz: { kind: "find", show: "fornix", ok: false, tap: { x: 80, y: 40 } } });
+ok("Find it reveals the target's pins and marks the tap after answering",
+   (svg.match(/class="atlas-dot/g) || []).length === 2 && svg.includes("atlas-tapmark qbad"));
+
+// --- windows and default label mode ---
+ok("windowUrl: the first window is the image itself", P.windowUrl("/atlas/m/007.webp", null) === "/atlas/m/007.webp");
+ok("windowUrl: others live under w/<id>/ with the same NNN", P.windowUrl("/atlas/m/007.webp", "lung") === "/atlas/m/w/lung/007.webp");
+ok("default mode: pins on a portrait phone", P.defaultLabelMode(390, 844) === "pins");
+ok("default mode: labels on a tablet or desktop", P.defaultLabelMode(1024, 768) === "labels");
+ok("default mode: pins on a short landscape phone", P.defaultLabelMode(844, 390) === "pins");
+
+// ===================== phase B helpers =====================
+// --- search ---
+ok("normText folds case and accents", P.normText("  Hépatique   Vein ") === "hepatique vein");
+ok("normText drops punctuation", P.normText("Knee (CT) - axial") === "knee ct axial");
+const INDEX = JSON.parse(readFileSync(join(ROOT, "atlas/index.json"), "utf8"));
+const CAT = JSON.parse(readFileSync(join(ROOT, "atlas/modules.json"), "utf8"));
+let sr = P.searchAtlas("LIVER", INDEX, CAT.modules);
+ok("search is case-insensitive and finds the liver", sr.structures.length >= 1 && sr.structures[0].s === "liver");
+ok("a structure result lists the modules that contain it", sr.structures[0].m.length >= 1 && sr.structures[0].m.every((r) => typeof r[0] === "string" && r[1] >= 1));
+sr = P.searchAtlas("aórta", INDEX, CAT.modules);
+ok("search ignores accents", sr.structures.some((r) => r.s === "aorta"));
+sr = P.searchAtlas("vein", INDEX, CAT.modules);
+ok("a word inside the name matches (portal vein)", sr.structures.some((r) => r.s === "portal-vein"));
+ok("prefix matches rank before inner-word matches", (() => { const i = sr.structures.findIndex((r) => /^vein/i.test(r.n)); const j = sr.structures.findIndex((r) => r.s === "portal-vein"); return i === -1 || i < j; })());
+sr = P.searchAtlas("brain", INDEX, CAT.modules);
+ok("module titles match too", sr.modules.some((m) => m.id === "mri-brain-axial"));
+ok("hidden modules never appear", !sr.modules.some((m) => m.id === "brain-mri-axial-t1"));
+ok("nothing matches nonsense", (() => { const r = P.searchAtlas("zzqqx", INDEX, CAT.modules); return !r.structures.length && !r.modules.length; })());
+ok("an empty query returns nothing", (() => { const r = P.searchAtlas("   ", INDEX, CAT.modules); return !r.structures.length && !r.modules.length; })());
+ok("a structure only in hidden modules is dropped",
+   P.searchAtlas("x", { structures: [{ s: "x", n: "X", c: "a", m: [["h", 1, 1]] }] }, [{ id: "h", hidden: true }]).structures.length === 0);
+
+// --- recents ---
+let rec = [];
+for (let i = 1; i <= 10; i++) rec = P.pushRecent(rec, { m: "m" + i, i: 1 }, 8);
+ok("recents cap at 8", rec.length === 8 && rec[0].m === "m10" && rec[7].m === "m3");
+rec = P.pushRecent(rec, { m: "m5", i: 9 }, 8);
+ok("revisiting a module moves it to the front with its new slice", rec[0].m === "m5" && rec[0].i === 9 && rec.filter((r) => r.m === "m5").length === 1);
+
+// --- plane localizer on the real torso geometry ---
+const AX = JSON.parse(readFileSync(join(ROOT, "atlas/ct-live-torso-axial/atlas.json"), "utf8"));
+const CO = JSON.parse(readFileSync(join(ROOT, "atlas/ct-live-torso-coronal/atlas.json"), "utf8"));
+const SA = JSON.parse(readFileSync(join(ROOT, "atlas/ct-live-torso-sagittal/atlas.json"), "utf8"));
+const haveQ = [AX, CO, SA].every((a) => a.slices.every((s) => Array.isArray(s.q) && s.q.length === 9));
+ok("every torso slice carries q", haveQ);
+const coMid = CO.slices[Math.ceil(CO.slices.length / 2) - 1].q;
+const axLines = AX.slices.map((s) => P.planeLine(s.q, coMid));
+ok("every axial slice crosses the coronal scout", axLines.every(Boolean));
+ok("an axial slice is a HORIZONTAL line on the coronal scout", axLines.every((l) => Math.abs(l[0][1] - l[1][1]) < 1e-6));
+ok("the line spans the scout's full width", axLines.every((l) => Math.abs(Math.abs(l[0][0] - l[1][0]) - 1) < 1e-6));
+ok("the line moves monotonically down the scout with slice index", axLines.every((l, k) => k === 0 || l[0][1] > axLines[k - 1][0][1]));
+const saMid = SA.slices[Math.ceil(SA.slices.length / 2) - 1].q;
+const saOnCo = SA.slices.map((s) => P.planeLine(s.q, coMid));
+ok("a sagittal slice is a VERTICAL line on the coronal scout", saOnCo.every((l) => l && Math.abs(l[0][0] - l[1][0]) < 1e-6));
+ok("a coronal slice is a vertical line on the sagittal scout", CO.slices.every((s) => { const l = P.planeLine(s.q, saMid); return l && Math.abs(l[0][0] - l[1][0]) < 1e-6; }));
+ok("parallel planes have no line", P.planeLine(AX.slices[0].q, AX.slices[5].q) === null);
+// Round trip: the centre of axial slice i -> nearest coronal slice -> back to axial lands on i.
+ok("qPoint at (0,0) is t", (() => { const q = AX.slices[3].q, p = P.qPoint(q, 0, 0); return near(p[0], q[0]) && near(p[1], q[1]) && near(p[2], q[2]); })());
+ok("a point on a slice is on its plane", Math.abs(P.planeDist(AX.slices[7].q, P.qPoint(AX.slices[7].q, 0.3, 0.8))) < 1e-9);
+ok("nearestSlice finds the slice a point lies on", [1, 6, 12, AX.slices.length].every((i) => P.nearestSlice(AX.slices, P.qPoint(AX.slices[i - 1].q, 0.4, 0.6)) === i));
+ok("axial -> coronal -> axial round trip returns to the same slice", [3, 8, 15, 21].every((i) => {
+  const p = P.qPoint(AX.slices[i - 1].q, 0.5, 0.5), c = P.nearestSlice(CO.slices, p);
+  const back = P.qPoint(CO.slices[c - 1].q, 0.5, (p[1] - CO.slices[c - 1].q[1]) / CO.slices[c - 1].q[7]);
+  return P.nearestSlice(AX.slices, back) === i;
+}));
+ok("nearestSlice skips slices without q", P.nearestSlice([{ i: 1 }, { i: 2, q: AX.slices[0].q }], P.qPoint(AX.slices[0].q, 0.5, 0.5)) === 2);
+
+// --- offline file list ---
+const TM = CAT.modules.find((m) => m.id === "ct-live-torso-axial");
+const files = P.offlineFiles(AX, TM);
+ok("offline list starts with the module JSON", files[0] === "/atlas/ct-live-torso-axial/atlas.json");
+ok("offline list has every slice and every thumbnail", AX.slices.every((s) => files.includes(s.img) && files.includes(s.img.replace(/\/([^/]+)$/, "/t/$1"))));
+const nw = ((TM.windows || []).length || 1) - 1;
+ok("offline list has every extra window (" + nw + " per slice), not the first", files.filter((f) => f.includes("/w/")).length === nw * AX.slices.length && !files.some((f) => /\/w\/soft\//.test(f)));
+ok("offline list has no duplicates", new Set(files).size === files.length);
+
+// --- flipY and flipX+flipY (knee, foot and hand are stored rotated 180 degrees) ---
+const FB = { x: 0, y: 0, w: 100, h: 100 };
+const both = { x: true, y: true }, onlyY = { x: false, y: true };
+const r180 = P.toScreen(FB, both, 10, 20);
+ok("flipX+flipY: a pin at (10,20) lands at (90,80)", near(r180.x, 90) && near(r180.y, 80));
+const ry = P.toScreen(FB, onlyY, 10, 20);
+ok("flipY alone: (10,20) lands at (10,80)", near(ry.x, 10) && near(ry.y, 80));
+ok("a boolean flip still means x only", (() => { const q = P.toScreen(FB, true, 10, 20); return near(q.x, 90) && near(q.y, 20); })());
+const fbox = { x: 13, y: -40, w: 380, h: 330 };
+ok("flipY round trip", [[5, 95], [50, 50], [72, 3]].every(([x, y]) => { const s = P.toScreen(fbox, onlyY, x, y), b = P.toImage(fbox, onlyY, s.x, s.y); return near(b.x, x) && near(b.y, y); }));
+ok("flipX+flipY round trip", [[5, 95], [50, 50], [72, 3]].every(([x, y]) => { const s = P.toScreen(fbox, both, x, y), b = P.toImage(fbox, both, s.x, s.y); return near(b.x, x) && near(b.y, y); }));
+// The image transform must put data point (a,b) exactly where toScreen puts the pin, under any
+// flip and zoom: apply translate(tx,ty) scale(sx,sy) (origin top-left) to the laid-out point.
+const tform = (base, D, flip, a, b) => {
+  const t = P.imgTransform(base, D, flip), m = t.match(/translate\(([-\d.]+)px,([-\d.]+)px\) scale\(([-\d.]+),([-\d.]+)\)/);
+  const lx = a * base.w, ly = b * base.h;                          // point inside the unscaled image
+  return m ? { x: base.x + +m[1] + +m[3] * lx, y: base.y + +m[2] + +m[4] * ly } : { x: base.x + lx, y: base.y + ly };
+};
+const tb = { x: 20, y: 100, w: 300, h: 260 };
+ok("image transform and pins agree under every flip and zoom", [false, true, onlyY, both].every((fl) =>
+  [1, 2.5].every((s) => { const D = P.zoomBox(tb, { s, px: s > 1 ? -30 : 0, py: s > 1 ? 12 : 0 }); const F = P.flipOf(fl);
+    return [[0.1, 0.2], [0.9, 0.7]].every(([a, b]) => { const img = tform(tb, D, fl, a, b), pin = P.toScreen(D, fl, a * 100, b * 100); return near(img.x, pin.x, 1e-6) && near(img.y, pin.y, 1e-6); }); })));
+ok("no transform at all for an unflipped unzoomed image", P.imgTransform(tb, tb, false) === "");
+// Zoom about a point is flip-agnostic: the pin under the finger stays under it after flipping.
+const zf = P.zoomAt(tb, { s: 1, px: 0, py: 0 }, 3, 120, 180), zfD = P.zoomBox(tb, zf);
+const under = P.toImage(P.zoomBox(tb, { s: 1, px: 0, py: 0 }), both, 120, 180);
+const after = P.toScreen(zfD, both, under.x, under.y);
+ok("zoom about a point keeps a 180-degree-rotated pin under the finger", near(after.x, 120) && near(after.y, 180));
+// Quiz hit-testing works in screen space, so placing pins with both flips is all it needs.
+const QS = { i: 1, aspect: 1, pins: [{ s: "fornix", x: 10, y: 20 }] };
+const qp = P.placePins(QS, ATL.structures, FB, both, {}, 100, 100)[0];
+ok("placePins honours flipX+flipY", near(qp.x, 90) && near(qp.y, 80));
+ok("Find it marks a tap on the rotated pin as correct", P.judgeFind([qp], 89, 81, "fornix", 10).ok === true);
+// The scout segment honours the scout module's flips.
+const sg0 = P.scoutSegment(AX.slices[4].q, coMid, false, 60, 64), sg1 = P.scoutSegment(AX.slices[4].q, coMid, both, 60, 64);
+ok("scout line under a 180-degree turn is mirrored top-bottom", near(sg0[0].y, 64 - sg1[0].y) && near(sg0[1].y, 64 - sg1[1].y));
+ok("scout line under flipX swaps its ends", (() => { const sx = P.scoutSegment(AX.slices[4].q, coMid, true, 60, 64); return near(sx[0].x, 60 - sg0[0].x); })());
 
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);

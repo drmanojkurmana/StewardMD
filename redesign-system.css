@@ -42,6 +42,14 @@ body {
   --rds-muted:          var(--slate, #5B7083);
   --rds-faint:          var(--slate-soft, #8CA2B1);
 
+  /* ---- Clinical Tools sphere: theme-driven via --sphere-* (graphite-dark.css
+     for default dark, index.html per-theme rules for accents). Deep greens here
+     are defaults only — never neon. ---- */
+  --sphere-hi:   #2f9184;
+  --sphere-mid:  #12564a;
+  --sphere-base: #06231e;
+  --sphere-glow: rgba(8,40,35,.6);
+
   /* ---- typography ---- */
   --rds-font:  var(--sans, 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif);
   --rds-mono:  var(--mono, 'IBM Plex Mono', 'SF Mono', Consolas, monospace);
@@ -79,6 +87,7 @@ body {
 /* Dark: surface-2 + severity get explicit values (base surfaces already flip via body.dark).
    Scoped to the app's primary dark switch (body.dark). */
 body.dark {
+  --rds-primary-2: #12564a;
   --rds-surface-2: #0D1922;
   --rds-line-soft: #16283340;
   --rds-el-card:  0 1px 2px rgba(0,0,0,.30);
@@ -102,6 +111,37 @@ body.dark {
   font-weight: 300 700;
   font-display: block;   /* wait for the icon font rather than flash ligature text */
   src: url(/assets/fonts/material-symbols-rounded.woff2) format('woff2');
+}
+
+/* ---- BIND the utility classes to that face, globally --------------------------------
+   The @font-face above only DECLARES the family. Nothing bound `.material-symbols-rounded` /
+   `.material-symbols-outlined` to it outside a few module scopes (queue.css `#smdQueue ...`,
+   oncotree.css `.ot-overlay ...`), so every other surface inherited the UI sans and rendered the
+   ligature NAME as a word: the NMC eLOGBook setup screen read "school", "draw", "chevron_right"
+   and "close" instead of icons, with the font file loaded and document.fonts.check() true.
+
+   This is a base rule on purpose, at the lowest useful specificity, so the existing scoped
+   declarations still win wherever a module wants a different face or size. Adding a module used to
+   mean remembering to re-declare this; now it does not. */
+.material-symbols-rounded,
+.material-symbols-outlined,
+.material-symbols-sharp {
+  font-family: 'Material Symbols Rounded', 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-user-select: none;
 }
 /* ---- Sacramento (the "MaiKnowledge" credit wordmark, .v4-maik-name .mk-s) ----------
    SELF-HOSTED for the SAME reason as the icon font: the Google CDN <link> uses a
@@ -360,7 +400,7 @@ body.dark {
 #homeV2.rnav .rnav-stack { display: flex; flex-direction: column; gap: 14px; padding: var(--rds-gutter); padding-bottom: var(--rds-gutter); max-width: 560px; margin: 0 auto; width: 100%; min-height: 100%; box-sizing: border-box; }
 #homeV2.rnav .rnav-greet .rnav-eyebrow { font: 700 11px var(--rds-font); text-transform: uppercase; letter-spacing: .08em; color: var(--rds-primary); }
 #homeV2.rnav .rnav-greet .rnav-hi { font: 800 24px/1.2 var(--rds-font); letter-spacing: -.02em; color: var(--rds-ink); margin-top: 2px; }
-#homeV2.rnav .rnav-qa { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+#homeV2.rnav .rnav-qa { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }
 #homeV2.rnav .rnav-qa-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11.5px var(--rds-font); cursor: pointer; min-height: 44px; }
 #homeV2.rnav .rnav-qa-btn .rds-icon { color: var(--rds-primary); font-size: 24px; }
 #homeV2.rnav .rnav-hero { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: var(--rds-r); background: linear-gradient(135deg,var(--rds-primary),var(--rds-primary-2)); color: #fff; box-shadow: var(--rds-el-cta); }
@@ -370,10 +410,18 @@ body.dark {
 #homeV2.rnav .rnav-hero-tag { font: 700 11px var(--rds-font); text-transform: uppercase; letter-spacing: .06em; opacity: .9; display: inline-block; margin-top: 3px; }
 #homeV2.rnav .rnav-hero-p { font: 500 13px/1.5 var(--rds-font); opacity: .92; margin: 6px 0 0; }
 #homeV2.rnav .rnav-hero-logo { width: 56px; height: 56px; object-fit: contain; filter: brightness(0) invert(1); opacity: .9; }
-#homeV2.rnav .rnav-qrow { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+/* Dark: the hero is a deep sphere gradient, never a neon billboard. Theme-driven. */
+html body.dark #homeV2.rnav .rnav-hero,
+html body.v3-dark #homeV2.rnav .rnav-hero {
+  background: linear-gradient(135deg, var(--sphere-mid, #12564a), var(--sphere-base, #06231e));
+  border: 1px solid rgba(47,145,132,.35);
+  border: 1px solid color-mix(in srgb, var(--sphere-hi, #2f9184) 30%, transparent);
+  box-shadow: 0 8px 24px -6px var(--sphere-glow, rgba(8,40,35,.6));
+}
+#homeV2.rnav .rnav-qrow { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }
 #homeV2.rnav .rnav-qc { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11px var(--rds-font); cursor: pointer; min-height: 44px; }
 #homeV2.rnav .rnav-qc .rds-icon { color: var(--rds-primary); }
-#homeV2.rnav .rnav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#homeV2.rnav .rnav-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
 #homeV2.rnav .rnav-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px; border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); text-align: left; cursor: pointer; box-sizing: border-box; min-height: 120px; justify-content: flex-start; }
 /* graphic tiles (kx / fx / tx) put the label at the BOTTOM so all cells read consistently */
 #homeV2.rnav .kx-tile, #homeV2.rnav .fx-tile, #homeV2.rnav .tx-tile { justify-content: space-between; }
@@ -701,6 +749,12 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   box-shadow: var(--rds-el-cta); box-sizing: border-box;
 }
 #homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
+/* Dark: the Ask Maik FAB is a 3D sphere matching the Clinical Tools badges. */
+html body.dark #homeV2.rnav .rnav-tab-maik .rds-icon,
+html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
+  background: radial-gradient(circle at 34% 26%, var(--sphere-hi, #2f9184) 0%, var(--sphere-mid, #12564a) 52%, var(--sphere-base, #06231e) 100%);
+  box-shadow: inset 0 2px 5px rgba(255,255,255,.28), inset 0 -5px 10px rgba(0,0,0,.42), 0 6px 16px -4px var(--sphere-glow, rgba(8,40,35,.6));
+}
 
 /* Home tiles v4: top-align icons + reserve a 2-line label area so tiles with 1-line
    and 2-line labels (Scan Meds / Ward Sync) are identical and icons line up. */
@@ -723,7 +777,7 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 /* ── Clinical Tools: circular-badge tiles + Add Tool customize (2026-08) ───────────────────
    Overrides the earlier .rnav-grid / .rnav-tile rules (later source order wins). Icons sit in
    a round badge; the featured tile gets the dark "signature" badge + dot. */
-#homeV2.rnav .rnav-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 6px; }
+#homeV2.rnav .rnav-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px 6px; }
 #homeV2.rnav .rnav-tile { flex-direction: column; align-items: center; gap: 0; padding: 4px 2px; border: none; background: none; text-align: center; min-height: 0; }
 /* EVERY tile badge is the glossy sphere. It used to be a flat mint disc with a dark outline glyph,
  * and only `.feat` (the branded AI modules) got the sphere - so a home screen of eighteen tools read
@@ -733,9 +787,9 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 #homeV2.rnav .rnav-badge {
   width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center;
   justify-content: center; position: relative;
-  background: radial-gradient(circle at 34% 26%, #2f9184 0%, #12564a 52%, #06231e 100%);
+  background: radial-gradient(circle at 34% 26%, var(--sphere-hi, #2f9184) 0%, var(--sphere-mid, #12564a) 52%, var(--sphere-base, #06231e) 100%);
   color: #fff;
-  box-shadow: inset 0 3px 8px rgba(255,255,255,.28), inset 0 -9px 16px rgba(0,0,0,.42), 0 10px 20px -7px rgba(8,40,35,.6);
+  box-shadow: inset 0 3px 8px rgba(255,255,255,.28), inset 0 -9px 16px rgba(0,0,0,.42), 0 10px 20px -7px var(--sphere-glow, rgba(8,40,35,.6));
 }
 /* The specular highlight, the thing that actually reads as "sphere" rather than "dark circle". */
 #homeV2.rnav .rnav-badge::before {
@@ -827,6 +881,12 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 }
 
 
+/* Energy (2026-09-25): the looping tile icons pause while the home is not what is on screen
+ * (home.js refreshTileAnim sets .hv-still) and per icon when scrolled out of view (.ai-offscreen).
+ * A paused CSS animation costs nothing per frame; wherever an icon can be seen it animates as before. */
+#homeV2.hv-still .ai-anim, #homeV2.hv-still .ai-anim *, #homeV2.hv-still .ai-clinix-img, #homeV2.hv-still .tx-tile-lungs,
+#homeV2 .ai-offscreen, #homeV2 .ai-offscreen * { animation-play-state: paused !important; }
+
 /* iPad / Tablet layout expansions */
 @media (min-width: 768px) {
   #homeV2.rnav .rnav-stack { max-width: 820px; }
@@ -862,3 +922,39 @@ html body.rds-on .icd-card-code, html body.rds-on .icd-dcode, html body.rds-on .
 html body.rds-on .icd-card-sys, html body.rds-on .gs-pill { border-radius: var(--rds-r-pill); background: var(--rds-primary-soft); color: var(--rds-primary-2); font-family: var(--rds-font); }
 html body.rds-on .icd-card-ch, html body.rds-on .gs-amt.unset { color: var(--rds-muted); font-family: var(--rds-font); }
 html body.rds-on #csOverlay, html body.rds-on #eceOverlay, html body.rds-on #abgOverlay, html body.rds-on #feaOverlay { background: var(--rds-bg); }
+
+/* BETA chip on the experimental imaging-AI tiles (ThoreX / KardiQ X / SknX / FundX). These models
+   are clinically unvalidated, so the chip is unconditional: it renders on every path that shows the
+   tile (access code, tester flag, Physician Pro early access) and cannot be dismissed. */
+#homeV2.rnav .rnav-tile { position: relative; }
+#homeV2.rnav .rnav-tile-beta {
+  position: absolute; top: 6px; right: 6px; z-index: 2;
+  font: 800 9px/1 var(--rds-font); letter-spacing: .06em; text-transform: uppercase;
+  padding: 3px 5px; border-radius: 999px; color: #7a4a00; background: #ffd27a; border: 1px solid rgba(0,0,0,.08);
+}
+
+/* ── APP SHELL FEEL (owner, 2026-09-24: "gives me html vibes, not an app feel") ──────────────────
+   The tells of a web page inside a native shell, removed globally:
+   - grey tap flash and long-press callout on controls and images
+   - text selection on chrome (buttons, chips, tiles, nav) - a native app never selects its labels
+   - rubber-band overscroll of the whole document behind sheets
+   - hover styles that STICK after a touch (a touch screen has no hover) - scoped to hover-capable devices
+   - a 300 ms tap delay where touch-action is unset
+   - no press feedback: controls now compress 2% on press, spring back on release
+   Text the doctor reads (answers, notes) stays selectable. */
+html { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; overscroll-behavior: none; }
+button, [role="button"], .maik-chip, .smd-nav-btn, .ot-btn, .tile, .maik-fu, .maik-tools, summary, label, nav, header {
+  -webkit-user-select: none; user-select: none; touch-action: manipulation; -webkit-touch-callout: none;
+}
+.maik-answer, .maik-streaming, .maik-stopped-answer, p, li, td, textarea, input, [contenteditable="true"] { -webkit-user-select: text; user-select: text; }
+img, svg { -webkit-user-drag: none; user-select: none; }
+button, [role="button"], .maik-chip, .smd-nav-btn, .ot-btn { transition: transform 90ms ease-out, opacity 90ms ease-out; }
+button:active, [role="button"]:active, .maik-chip:active, .smd-nav-btn:active, .ot-btn:active { transform: scale(0.98); opacity: 0.85; }
+@media (hover: none) {
+  button:hover, [role="button"]:hover, .maik-chip:hover, .smd-nav-btn:hover, .ot-btn:hover { filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  button, [role="button"], .maik-chip, .smd-nav-btn, .ot-btn { transition: none; }
+  button:active, [role="button"]:active, .maik-chip:active, .smd-nav-btn:active, .ot-btn:active { transform: none; }
+}
+.maik-stopped { margin-top: 6px; font: 600 11px/1.4 var(--sans, system-ui); color: var(--slate-soft, #5a7184); letter-spacing: .02em; }

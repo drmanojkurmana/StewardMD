@@ -33,7 +33,7 @@ test("enrol refuses to change the caller's own role", () => {
  * access: M.membership() fills an omitted scope with empty arrays, empty scope means whole-org, and
  * wUpdate's mask writes every key present. */
 test("setMembership preserves an existing scope when the caller omits one", () => {
-  assert.match(ORGSTORE, /const prev = \(await getMembership\(env, orgId, identity\)\) \|\| null;/,
+  assert.match(ORGSTORE, /const prev = \(await getMembership\(env, orgId, normIdentity\)\)/,
     "it must read the existing membership first");
   assert.match(ORGSTORE, /scope: b\.scope !== undefined \? b\.scope : \(prev && prev\.scope\)/,
     "an omitted scope must fall back to the stored one, not to the model default");

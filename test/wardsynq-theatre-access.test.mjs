@@ -159,7 +159,10 @@ async function setup() {
   assert.equal(cfg.__status, 200, JSON.stringify(cfg));
   await H.RECORD.append(TENANT, [{ resourceType: "Patient", id: P1, version: 1, mrn: "MRN-100", name: "Asha Rao", dob: "1970-01-01", sex: "female", ...META() }]);
 }
-const iso = (offsetMs) => new Date(Math.floor((Date.now() + offsetMs) / M1) * M1).toISOString();
+/* F1: ONE minute-aligned base for every time this file builds. Flooring each call separately put a booking a
+ * minute off its session whenever a minute boundary fell between two calls (240/119/49.6 on a slow CI run). */
+const BASE_MS = Math.floor(Date.now() / M1) * M1;
+const iso = (offsetMs) => new Date(BASE_MS + offsetMs).toISOString();
 
 test("POST /api/queue/ward/theatre-session, POST /ward/theatre-session-release and POST /ward/book-resource: 401, 403 for the cashier and another hospital with nothing written; a held session refuses another unit until released", async () => {
   await setup();

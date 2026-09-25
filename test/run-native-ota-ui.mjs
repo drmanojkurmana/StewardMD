@@ -278,6 +278,28 @@ try {
   ok(!deleted.includes("builtin"), `...and never the built-in bundle, whatever status it reports`);
   ok(purge.r && purge.r.removed === 2, `...and reports how many it reclaimed (got ${JSON.stringify(purge.r)})`);
 
+  /* ── the Pixel 9, 2026-09-25: running 132, saved 131, "4.9" on screen, offered 5.0 for ever ──
+   * set() reloads the WebView before install()'s .then() can save the new number, so the saved
+   * version lagged the running bundle. The running bundle is read from the plugin instead. */
+  const truth = await J(`try{localStorage.setItem('smd_ota_version','131')}catch(e){}
+    window.__current = { bundle: { id: 'gO9O6gj9it', version: '132', status: 'success' } };
+    return SMD_OTA.reconcile().then(function(){ return JSON.stringify({ v: SMD_OTA.currentVersion(), label: SMD_OTA.versionLabel() }); });`);
+  ok(truth.v === 132 && truth.label === '5.0',
+     `the saved version is corrected from the running bundle: 132 shows as 5.0, not 4.9 (got ${JSON.stringify(truth)})`);
+  const builtin = await J(`window.__current = { bundle: { id: 'builtin', version: '1.0' } };
+    return SMD_OTA.reconcile().then(function(){ return JSON.stringify({ v: SMD_OTA.currentVersion() }); });`);
+  ok(builtin.v === null, `on the built-in bundle there is no OTA version to claim (got ${JSON.stringify(builtin)})`);
+
+  // an OLDER bundle left pending (127 while 132 runs) is removed; a NEWER pending one is kept
+  const stale = await J(`window.__calls = [];
+    window.__current = { bundle: { id: 'cur', version: '132', status: 'success' } };
+    window.__bundles = [{id:'old', version:'127', status:'pending'}, {id:'cur', version:'132', status:'success'}, {id:'newer', version:'133', status:'pending'}];
+    return SMD_OTA.reconcile().then(function(){ return SMD_OTA.purgeOld(); }).then(function(){
+      return JSON.stringify(window.__calls.filter(function(c){ return c[0]==='delete'; }).map(function(c){ return c[1].id; }));
+    });`);
+  ok(JSON.stringify(stale) === JSON.stringify(['old']),
+     `a stale older pending bundle is purged, the running and a newer queued one are kept (deleted ${JSON.stringify(stale)})`);
+
   console.log(fails === 0 ? "\nALL GREEN — the OTA client honours its contract, and never applies anything the user or their own auto-update choice didn't ask for" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

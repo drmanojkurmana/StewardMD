@@ -6,7 +6,17 @@
 import { test, mock } from "node:test";
 import assert from "node:assert/strict";
 
-mock.module("../functions/_fbadmin.js", { namedExports: { serviceAccountToken: async () => "tok" } });
+/* #1142 gave _queue_notify.js an entitlement read, so _queue_engine.js now pulls _entitlements.js
+ * (and _usage.js -> _entitlement.js) into this graph. Those need more than serviceAccountToken
+ * from _fbadmin, and a namedExports mock that omits one fails at INSTANTIATION, before a single
+ * assertion runs. The stubs are inert: nothing here reads a claim. */
+mock.module("../functions/_fbadmin.js", { namedExports: {
+  serviceAccountToken: async () => "tok",
+  getUserClaims: async () => ({}),
+  mergeUserClaims: async () => ({}),
+  lookupUidByEmail: async () => null,
+  lookupUserByUid: async () => null,
+} });
 const ORG = await import("../functions/_opd_org_store.js");
 const Q = await import("../functions/_queue_engine.js");
 const ACCOUNTS = await import("../functions/_accounts_store.js");

@@ -176,11 +176,26 @@ On the NATIVE app there is no address bar, so the query param is unreachable —
 | `smd_fundx_spatial_ar` | OFF | **INCOMPLETE.** True 3D AR corridor, iOS + ARKit only. |
 | `smd_fundx_telemetry` | OFF | **PRIVACY DEFAULT.** Acquisition telemetry. No PHI, but off unless wanted. |
 
-### Government Health Schemes  <sub>0 ON · 1 OFF</sub>
+### Government Health Schemes  <sub>1 ON · 0 OFF</sub>
 
 | Flag | Def | Why |
 |---|---|---|
-| `smd_govt_schemes` | OFF | **OWNER DECISION.** Government Health Schemes module master flag. DEFAULT OFF on purpose: scheme rates/codes are unverified government reference data until an admin review pass exists (vault/decisions 2026-09-02). Turn on per device with `?gs=1`. |
+| `smd_govt_schemes` | **ON** | Government Health Schemes (Scheme Search) master flag. DEFAULT ON since 2026-09-04 (owner approved going live, per `govschemes-flags.js`; this row said OFF until 2026-09-25). Force off per device with `?gs=0`. |
+
+### Knowledge Library Protocols  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-25)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_kb_protocols` | **ON** | The Protocols tab in the Knowledge Library + the Protocols category in Universal Search. Additive: off removes the tab, nothing else changes. Content is `ai_drafted` pending clinical review and every screen says so. Force off per device with `?kbproto=0`. See [[Clinical Protocols]]. |
+
+### Specialty Kits  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-25)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_specialty_kits` | **ON** | The OPD EMR Specialty tab, the Home "Specialty Kits" tile and its sheet. Additive and write-safe: a kit only appends text to the assessment the doctor then saves, and is disabled until the assessment has loaded. Content `ai_drafted` pending clinical review, shown on every kit. Force off per device with `?kits=0`. See [[Specialty Kits]]. |
+| `smd_clinical_docs` | **ON** | The Home "Documents" tile and the kit Documents button ([[Clinical Documents]]). Additive; nothing is stored. Force off with `?docs=0`. |
+| `smd_review_desk` | **ON** | The Review Desk ([[Review Desk]]). Its Home tile is defOn false (reviewers add it). Local only. Force off with `?review=0`. |
+| `smd_kits_share` | **ON** | [[Colleagues]]: referrals, handovers, case rooms, hospital kit versions, kit history, review sync, and the Home "Colleagues" tile. Server route also defaults on (env `KITS_SHARE_ON=0` is its kill switch). Off per device with `smd_kits_share = "0"` or `?share=0`. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 

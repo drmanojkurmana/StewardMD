@@ -37,6 +37,75 @@ export function clinicLimit(env, role) {
   return 0;
 }
 
+// ---- Purchase tier (separate from role) ----
+// role  = WHO they are, from verification (student/intern/resident/physician…). Never bought.
+// tier  = WHAT they paid for, from the plan key the payment carried. Never self-declared.
+// Keeping them apart is the whole point: one Trainee price, three trainee roles, and a PG-logbook
+// gate that needs the role while Scribe needs the tier. `tierExp` null = forever (owner comp).
+export const TIERS = ["free", "trainee", "coresident", "pro", "physician", "physicianpro"];
+const TIER_RANK = { free: 0, trainee: 1, coresident: 2, pro: 3, physician: 4, physicianpro: 5 };
+const DAY_MS = 86400000;
+
+export function normalizeTier(t) {
+  const v = String(t == null ? "" : t).trim().toLowerCase().replace(/[^a-z]/g, "");
+  return TIERS.indexOf(v) >= 0 ? v : null;
+}
+// Paywall plan key -> tier. "student:*" is the Trainee product (the role comes from verification).
+// Add-ons and token packs buy no tier at all, which is why they return null rather than "free".
+export function tierFromPlanKey(planKey) {
+  const s = String(planKey || "").trim().toLowerCase();
+  const head = s.indexOf(":") < 0 ? s : s.slice(0, s.indexOf(":"));
+  if (!head || head === "tokens" || head === "addon") return null;
+  if (head === "student" || head === "trainee") return "trainee";
+  return normalizeTier(head);
+}
+export function effectiveTierFor(record, now) {
+  now = now || Date.now();
+  const t = normalizeTier(record && record.tier);
+  if (!t || t === "free") return "free";
+  const exp = record && record.tierExp;
+  if (exp != null && +exp <= now) return "free";
+  return t;
+}
+export function oncoAddonActive(record, now) {
+  const e = record && record.oncoAddonExp;
+  return e != null && +e > (now || Date.now());
+}
+
+// Pure: what a fulfilled purchase changes in the entitlement record. Returns null when the purchase
+// carries no tier/add-on (token packs).
+// Money rule: a purchase may UPGRADE and may EXTEND, but must never downgrade an active higher tier
+// nor shorten an existing expiry — someone on Physician Pro who buys a ₹199 Trainee month (or whose
+// webhook replays out of order) must not lose what they already hold.
+export function purchasePatch(record, planKey, opts, now) {
+  now = now || Date.now();
+  opts = opts || {};
+  const days = opts.days != null ? +opts.days : (+opts.months || 1) * 30;
+  const ms = Math.max(1, Math.round(days)) * DAY_MS;
+  if (String(planKey || "").trim().toLowerCase() === "addon:onco") {
+    return { oncoAddonExp: Math.max(+(record && record.oncoAddonExp) || 0, now) + ms };
+  }
+  const bought = tierFromPlanKey(planKey);
+  if (!bought) return null;
+  const current = effectiveTierFor(record, now);
+  const tier = TIER_RANK[bought] >= TIER_RANK[current] ? bought : current;
+  if (current !== "free" && record && record.tierExp == null) return { tier, tierExp: null };   // forever stays forever
+  return { tier, tierExp: Math.max(+(record && record.tierExp) || 0, now) + ms };
+}
+
+// IO wrapper over purchasePatch. Called from every fulfilment path (Razorpay/PhonePe webhook, IAP
+// verify); deps-injectable so the money path is testable without Firestore.
+export async function recordTierPurchase(env, uid, planKey, opts, deps) {
+  deps = deps || {};
+  const get = deps.getEntitlement || getEntitlement;
+  const write = deps.writeEntitlement || writeEntitlement;
+  const rec = (await get(env, uid, deps)) || null;
+  const patch = purchasePatch(rec, planKey, opts, (opts && opts.now) || Date.now());
+  if (!patch) return null;
+  await write(env, uid, patch, deps);
+  return patch;
+}
+
 export function normalizeRole(r) {
   const v = String(r || "").trim().toLowerCase();
   return ROLES.indexOf(v) >= 0 ? v : null;

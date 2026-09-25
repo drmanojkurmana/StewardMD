@@ -11,31 +11,58 @@
  * onDelta(full.slice(0, i)). Getting this backwards would render "aababc..." on screen.
  *
  * CONTEXT BUDGET is the whole design constraint. The server prompt-builder can spend a huge context
- * on grounding; we have n_ctx 4096 total, shared between prompt and answer, because the KV cache is
- * what gets an 8 GB iPhone killed. So the package is clipped HARD (see PROMPT_CHAR_BUDGET) and the
- * most decision-relevant evidence goes first — grounding chunks are already page-cited and ranked,
- * retrieved chunks are already cross-encoder re-ranked by the caller.
+ * on grounding; we have n_ctx 4096 (8192 when the phone has room, see wantCtx) shared between
+ * prompt and answer, because the KV cache is
+ * what gets an 8 GB iPhone killed. So the package is clipped HARD and the most decision-relevant
+ * evidence goes first — grounding chunks are already page-cited and ranked, retrieved chunks are
+ * already cross-encoder re-ranked by the caller.
+ *
+ * Where the clipping actually happens, because there is no single PROMPT_CHAR_BUDGET constant (an
+ * earlier version of this header named one that never existed):
+ *   answer()        — retrieveGrounding() caps evidence at TOPK(3) passages x 700 chars, history at
+ *                     HISTORY_TURNS(2), doctor turns at HISTORY_CLIP(180), MaiK turns via carry() at
+ *                     CARRY_CAP(700) (every turn rendered the same way, T24). nPredict is openBudget():
+ *                     whatever the window leaves after the prompt (no per-pack cap since 2026-09-21).
+ *                     NOTE: this path does NOT call windowBudget() — the caps above are the budget.
+ *   every long-text path (summary/assess/scribe/reason/imaging/correlate) — windowBudget() +
+ *                     splitWindows(), which DO clamp against n_ctx because their input is unbounded.
+ * test/maik-prompt-budget.test.mjs pins the answer() side so it cannot silently regrow.
  * ======================================================================== */
 (function () {
   "use strict";
 
-  /* UNGROUNDED BY DESIGN.
+  /* GROUNDED ON-DEVICE, AND THE LATENCY THAT BUYS (owner, 2026-09-18).
    *
-   * The on-device engine answers from MedGemma's OWN weights and touches no StewardMD data. That is
-   * the product decision, and it is what makes it fast: grounding was 94% of time-to-first-word on a
-   * Pixel 9 (1799 prompt tokens -> 130 s of prefill at a flat ~14 tok/s). A question-only prompt is
-   * ~100 tokens, so first token lands in seconds rather than a minute.
+   * SUPERSEDED: this block used to read "UNGROUNDED BY DESIGN - the on-device engine answers from
+   * MedGemma's OWN weights and touches no StewardMD data". That is no longer true and has not been
+   * since the owner asked for the book to ship on-device ("SHIP OUR RAG PLUS EXISTING BOTH RAGS
+   * BM25"). The note is kept because the NUMBER in it still governs every prompt decision here.
    *
-   * It also removes a failure mode rather than adding one. When retrieval missed - "pyogenic liver
-   * abscess" resolves to LIVER_ABSCESS by FALLBACK while AMOEBIC_LIVER_ABSCESS is an exact match -
-   * the model was handed amoebic chunks labelled "primary source" and dutifully answered
-   * metronidazole for a pyogenic abscess. Grounding is only a safety net when retrieval is right;
-   * when it is wrong it is an amplifier pointed the wrong way.
+   * What that number was: grounding measured 94% of time-to-first-word on a Pixel 9 - 1799 prompt
+   * tokens at a flat ~14 tok/s prefill, so ~130 s before the first word. An ungrounded prompt is
+   * ~100 tokens and lands in seconds. Prefill cost IS the on-device latency story; decode is not.
    *
-   * The division of labour is now explicit:
+   * Why we took the cost anyway: ungrounded, the model answers from weights alone and can be
+   * confidently wrong with no way for the reader to check it. Two RAGs now chain instead - the cloud
+   * router picks the disease, the on-device BM25 book supplies the passages, and retrieveGrounding()
+   * requires the router's disease as an ANCHOR before a passage may be kept. That anchor rule is the
+   * answer to the failure that motivated going ungrounded in the first place: "pyogenic liver
+   * abscess" resolved to LIVER_ABSCESS by FALLBACK while AMOEBIC_LIVER_ABSCESS was an exact match,
+   * and the model dutifully answered metronidazole for a pyogenic abscess. Grounding is only a
+   * safety net when retrieval is right; when it is wrong it is an amplifier pointed the wrong way.
+   * Zero anchored passages therefore means "not grounded", never "grounded in the wrong chapter".
+   *
+   * The current division of labour:
    *   KB only    - StewardMD knowledge base, grounded, cited
    *   MaiK Cloud - Gemini, grounded with the same KB package
-   *   On-device  - the model's own knowledge, fast, offline, CAN BE WRONG (accepted tradeoff)
+   *   On-device  - the model's weights PLUS the on-device book, anchor-gated and claim-checked
+   *
+   * BUDGET, so the 94% never comes back: evidence is TOPK(3) passages clipped to 700 chars each,
+   * ~525 tokens, on top of a ~250-token pack system prompt. Anything that grows the prompt is a
+   * latency change first and a quality change second - measure prefill before and after, do not
+   * reason about it. The ~14 tok/s figure above PREDATES the batched-prefill wiring in
+   * LlamaPlugin.java (nBatch/nUbatch 512, nThreadsBatch = all cores), so it is a ceiling on how bad
+   * this can be, not a current reading. Re-measure on device before trading quality away for speed.
    *
    * Conversation history IS kept: it is the clinician's own turns, not a StewardMD resource, and
    * without it a bare follow-up ("and the dose?") is meaningless. Two turns, tightly clipped.
@@ -63,20 +90,40 @@
    * instruction a 4B applies out of context is worse than no instruction: it manufactures a
    * confident number to satisfy the format. So the rule now names the condition first.
    */
-  var SYSTEM =
+  var SYSTEM_CORE =
     "You are MaiK, clinical decision support for doctors. Answer in markdown.\n" +
     "Answer medical questions only. For anything else reply: \"I can only help with medical and " +
     "clinical questions.\"\n" +
     "Give the final answer only, never your reasoning.\n" +
-    "Open with ONE plain sentence answering the question, then short bullets. Use no section labels " +
-    "such as \"Bottom Line\", \"Answer\" or \"Summary\".\n" +
+    "Open with ONE plain sentence answering the question, then as much well-organised detail as the " +
+    "question deserves: a single fact (one dose, one code, a yes or no) gets a short answer; any other question " +
+    "gets a balanced answer covering the key points a clinician needs; a request for detail, an essay or a " +
+    "complete overview gets full sections (pathophysiology, clinical features, diagnosis, treatment and " +
+    "whatever else was asked), each written to the end. Never stop part-way through a section. Use no " +
+    "section labels such as \"Bottom Line\", \"Answer\" or \"Summary\".\n" +
     "Answer exactly what was asked: for side effects, mechanism, monitoring or contraindications, " +
     "write about that alone.\n" +
     "When asked for a dose, give the standard flat adult dose with route and frequency, like " +
     "\"2 g IV over 20 min\". Use mg/kg only when adults are genuinely dosed by weight.\n" +
-    "Name the first-line regimen most guidelines agree on. Where unsure of a figure, give the range " +
-    "and say it varies.\n" +
-    "End with one line: \"Verify against local protocol.\"";
+    "";
+  /* The regimen rule is for TREATMENT questions only. Applied to every question it turned "IRIS in
+   * HIV" into the first-line ART regimen for HIV with IRIS never mentioned (owner transcript,
+   * 2026-09-20): a small model satisfies the instruction it can see. A definition, workup or
+   * mechanism question now gets the opposite instruction. TREAT_Q is the same predicate the
+   * retrieval rerank uses, so "what the question is about" is decided once. */
+  var SYSTEM_TREAT = "Name the first-line regimen most guidelines agree on. Where unsure of a figure, give the range and say it varies.\n";
+  var SYSTEM_ASK = "Answer the question that was asked. Do not switch to treatment or drug regimens unless the question asks for them.\n";
+  var SYSTEM_END = "End with one line: \"Verify against local protocol.\"";
+  /* BYTE-STABLE PREFIX (audit T24, 2026-09-25). The native engine reuses the KV cache for the
+   * longest token prefix a new prompt shares with the last one, and the system prompt comes first.
+   * The TREAT/ASK line used to sit in the MIDDLE of it and flips with every question, so reuse ended
+   * inside the system prompt and the whole history was prefilled again on every turn. The stable
+   * part (SYSTEM_STABLE) now comes first; the per-clinician (ABOUT), per-request (LENGTH) and
+   * per-question (TREAT/ASK) lines are appended after it, in that order, by answer(). */
+  var SYSTEM_STABLE = SYSTEM_CORE + SYSTEM_END;
+  var SYSTEM = SYSTEM_STABLE + "\n" + SYSTEM_TREAT.replace(/\n$/, "");
+  function treatAskLine(question) { return "\n" + (TREAT_Q.test(String(question || "")) ? SYSTEM_TREAT : SYSTEM_ASK).replace(/\n$/, ""); }
+  function systemFor(question) { return SYSTEM_STABLE + treatAskLine(question); }
 
   /* A PURE greeting: the whole message is hello-ish with no clinical substance. Deliberately TIGHT -
    * "hi rx of uti" must NOT match. test/maik-greeting-route.test.mjs guards exactly that: a greeting
@@ -281,6 +328,46 @@
     try { return !!M.installedCached(M.visionIdOf(packId)); } catch (e) { return false; }
   }
 
+  /** Speculative-decoding draft (perf plan #6): is one registered for this pack and on disk? The
+   * clinician can switch it off with localStorage smd_maik_draft="0". */
+  function draftReady(packId) {
+    try { if (localStorage.getItem("smd_maik_draft") === "0") return false; } catch (e) {}
+    var M = models();
+    if (!M || !M.hasDraft || !M.hasDraft(packId)) return false;
+    try { return !!M.installedCached(M.draftIdOf(packId)); } catch (e) { return false; }
+  }
+  function draftPathFor(packId) {
+    var M = models();
+    if (!M || !draftReady(packId)) return Promise.resolve("");
+    return M.pathFor(M.draftIdOf(packId)).then(function (p) { return p || ""; }, function () { return ""; });
+  }
+  /** Bytes the draft adds to the load when it is on disk (memory check), else 0. */
+  function draftBytes(M, packId) {
+    try { return draftReady(packId) ? (M.totalBytes(M.draftIdOf(packId)) || 0) : 0; } catch (e) { return 0; }
+  }
+  /** Queue the draft download once per pack. It rides the ordinary pack queue, so its progress
+   * shows in the models sheet and it can be removed there. ~290 MB (Gemma).
+   * OPT-IN (audit T26, 2026-09-25): this used to start a 290 to 640 MB download silently after the
+   * first load, on any connection. It now runs only when the clinician has turned the speed draft
+   * on (localStorage smd_maik_draft = "1", default off) and never on a connection the platform
+   * reports as metered (Save-Data, or a cellular link). An already-downloaded draft is still used. */
+  function meteredConnection() {
+    try {
+      var c = (typeof navigator !== "undefined") && (navigator.connection || navigator.mozConnection || navigator.webkitConnection);
+      return !!(c && (c.saveData || c.type === "cellular" || /(^|-)2g$|^3g$/.test(String(c.effectiveType || ""))));
+    } catch (e) { return false; }
+  }
+  function fetchDraftOnce(packId) {
+    try {
+      var M = models(); if (!M || !M.hasDraft || !M.hasDraft(packId) || !M.ensure) return;
+      if (localStorage.getItem("smd_maik_draft") !== "1" || meteredConnection()) return;
+      var did = M.draftIdOf(packId); if (M.installedCached(did)) return;
+      var key = "smd_maik_draft_asked:" + did;
+      if (localStorage.getItem(key) === "1") return;
+      localStorage.setItem(key, "1");
+      Promise.resolve(M.ensure(did)).catch(function () {});
+    } catch (e) {}
+  }
   /** Absolute path of the projector for this pack, or "" when it is not downloaded. */
   function visionPathFor(packId) {
     var M = models();
@@ -314,7 +401,7 @@
    * losing continuity yields a generic answer, while bleeding topics yields a confidently wrong one.
    */
   var FILLER = /^(what|whats|what's|how|why|and|but|so|about|of|for|the|a|an|in|on|to|is|are|it|its|it's|this|that|them|those|these|same|any|other|more|also|then|ok|okay|please|tell|me|us|give|show)$/;
-  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease)$/;
+  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease|drug|drugs|medication|medications|medicine|medicines|antibiotic|antibiotics|therapy|treatment|management|investigation|investigations|workup|test|tests|cause|causes|symptom|symptoms|sign|signs|diagnosis|differential|prevention|prophylaxis|definition|criteria|staging|grading)$/;   // bare nouns a doctor asks alone ("Drugs?", "Causes?") - owner transcript 2026-09-21
 
   /** An aspect-only question: every token is filler or an aspect word, so it has no subject of its
    *  own and is only answerable against the previous turn. "Side effects?" yes; "Polycystic Kidney
@@ -379,23 +466,39 @@
     if (!lines.length) return "";
     var keep = [lines[0]];
     for (var i = 1; i < lines.length; i++) if (/^([-*•]|\d+[.)])\s/.test(lines[i]) || /\d/.test(lines[i])) keep.push(lines[i].replace(/^([-*•]|\d+[.)])\s+/, ""));
-    return clip(keep.join(" | "), cap || CARRY_CAP);
+    // Joined with "; ", not " | ": the model imitates the history it is shown, and the second Scrub
+    // Typhus answer in the owner's transcript (2026-09-20) came back as one pipe-separated line.
+    return clip(keep.map(function (x) { return x.replace(/[.;]\s*$/, ""); }).join("; "), cap || CARRY_CAP);
   }
 
-  function buildPrompt(pkg, packId) {
-    if (!pkg) return "";
+  /** The two parts of the user turn: the (optional) "Recent conversation" block and the question.
+   * Kept apart so answer() can slot the evidence BETWEEN them: the chat template, the system prompt
+   * and the history are then an identical token prefix across the turns of one thread, which the
+   * native engine reuses instead of re-prefilling (perf plan #2). */
+  function buildPromptParts(pkg, packId) {
+    if (!pkg) return null;
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
     var L = [];
     var hist = histTurns(pkg.history);
+    /* ONE RENDERING PER TURN (audit T24, 2026-09-25). The last answer used to be carried at 700
+     * chars (1400 at 8K) and re-clipped to 180 (400) the next turn, and an 8K window slid 4 turns:
+     * every turn changed the bytes of the turns before it, so the reused KV prefix ended at the
+     * system prompt. Every assistant turn is now carried the same way (carry, CARRY_CAP) and every
+     * doctor turn clipped the same way (HISTORY_CLIP), whether it is the latest or not, and 8K keeps
+     * the 4K budget of HISTORY_TURNS until measured (the 8K window itself stays). */
     if (continues(question, hist)) {
       L.push("Recent conversation:");
-      var turns = hist.slice(-HISTORY_TURNS * 2);
-      turns.forEach(function (h, i) {
-        var isA = h.role === "assistant", lastA = isA && i === turns.length - 1 - (turns[turns.length - 1].role === "assistant" ? 0 : 1);
-        L.push((isA ? "MaiK: " : "Doctor: ") + (lastA ? carry(h.text || h.content) : clip(h.text || h.content, HISTORY_CLIP)));
+      // An aspect-only follow-up ("Drugs?", "side effects?") is about the answer just given. Showing
+      // the exchange before it too made "Drugs?" after a CFS answer come back about carvedilol from the
+      // varices turn (owner transcript, 2026-09-21). Corrections and named subjects keep both turns.
+      var turns = hist.slice(subjectTokens(question).length ? -HISTORY_TURNS * 2 : -2);
+      turns.forEach(function (h) {
+        var isA = h.role === "assistant";
+        L.push((isA ? "MaiK: " : "Doctor: ") + (isA ? carry(h.text || h.content, CARRY_CAP) : clip(h.text || h.content, HISTORY_CLIP)));
       });
       L.push("");
     }
+    var H = L; L = [];
     L.push(question || "Give a brief clinical overview.");
     /* Suppress the base model's thinking mode when the pack asks for it.
      *
@@ -419,18 +522,39 @@
      * "<|im_start|>assistant\n" actually is after applying the template.
      */
     if (packId && noThinkPack(packId)) L.push("/no_think");
-    return L.join("\n");
+    return { history: H.length ? H.join("\n") + "\n" : "", question: L.join("\n") };
   }
+  function buildPrompt(pkg, packId) { var p = buildPromptParts(pkg, packId); return p ? p.history + p.question : ""; }
 
   /** Does this pack's base model need its thinking mode switched off? Registry-driven, not hardcoded. */
+  /* OpenMed drug tagger (openmed-ner.js, flag smd_openmed_pharma, DEFAULT OFF, fails closed until the
+   * checkpoint licence and sha256s are pinned). Tags drug names in the answer and the retrieved passages
+   * so claim grounding also checks drugs its suffix rule cannot see (paracetamol, aspirin, warfarin...).
+   * Stricter checking only; any failure, timeout or an off flag leaves `r` exactly as it was. */
+  var NER_TIMEOUT_MS = 8000;
+  function withNerDrugs(r, grounding) {
+    var N = (typeof window !== "undefined") && window.SMD_OPENMED_NER;
+    if (!r || r.error || !grounding || !N || !N.status || !N.status("pharma").ok) return r;
+    var src = String(r.text || "") + "\n" + (grounding.passages || []).map(function (p) { return p && p.text || ""; }).join("\n");
+    var done = false;
+    return new Promise(function (resolve) {
+      var t = setTimeout(function () { if (!done) { done = true; resolve(r); } }, NER_TIMEOUT_MS);
+      N.drugNames(src).then(function (names) {
+        if (done) return; done = true; clearTimeout(t);
+        if (names && names.length) { r._nerDrugs = names; try { if (window.SMD_DRUGLINK) window.SMD_DRUGLINK.learn(names); } catch (e) {} }
+        resolve(r);
+      }, function () { if (!done) { done = true; clearTimeout(t); resolve(r); } });
+    });
+  }
   function noThinkPack(id) {
     try { var m = models(); return !!(m && m.PACKS[id] && m.PACKS[id].noThink); } catch (e) { return false; }
   }
 
   // ── model lifecycle ─────────────────────────────────────────────────────
   var _loadedPack = null;
-  function ensureLoaded(packId) {
+  function ensureLoaded(packId, loadOpts) {
     var L = llama(), M = models();
+    watchRelease(L);
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     if (!M) return Promise.reject(new Error("model manager unavailable"));
     if (_loadedPack === packId) {
@@ -438,7 +562,7 @@
       return L.available().then(function (a) {
         if (a && a.loaded) return null;
         _loadedPack = null;
-        return ensureLoaded(packId);
+        return ensureLoaded(packId, loadOpts);
       });
     }
     var pk = M.PACKS[packId];
@@ -463,20 +587,28 @@
      * free. So the plugin declares which kind of number it is and the soft case only refuses the
      * region where thrashing is certain rather than possible.
      */
+    var _mem = null;
     return Promise.resolve()
       .then(function () { return L.available(); })
       // A plugin that cannot answer the question has no opinion on memory. Failing to MEASURE must
       // never become a reason not to ANSWER.
       .then(function (a) { return a; }, function () { return null; })
       .then(function (a) {
+        _mem = a;
         var avail = 0, need = 0;
         try {
           avail = (a && Number(a.availableMemory)) || 0;
-          need = M.totalBytes(packId) || 0;
+          need = (M.totalBytes(packId) || 0) + draftBytes(M, packId);
+          // An image answer also maps the vision projector (0.6 to 1 GB, not mmap'd, freed after the
+          // answer): count it when this load is for one (audit T61, 2026-09-25).
+          if (loadOpts && loadOpts.vision) { var cv = M.caps ? M.caps(packId) : null; need += (cv && cv.visionBytes) || 0; }
         } catch (e) { return null; }
         // ponytail: 0.35 is calibrated against two real measurements, not theory - 176 MB free
         // against a 2.83 GB model (0.06) hung forever, 2.1 GB against 2.49 GB (0.85) runs. Retune
         // with device data, do not compute it.
+        // ponytail: 1.15 on the hard (iOS jetsam) limit is UNCALIBRATED (audit T61): weights plus a
+        // guessed 15% for KV and runtime, never measured against a real peak footprint. Retune from
+        // Xcode's memory graph on the floor device before trusting it near the edge.
         var ratio = (a && a.memoryIsHardLimit) ? 1.15 : 0.35;
         if (avail > 0 && need > 0 && avail < need * ratio) {
           var err = new Error("not-enough-memory:" + Math.round(avail / 1e6) + "MB free, " +
@@ -486,9 +618,21 @@
         }
         return null;
       })
-      .then(function () { return M.pathFor(packId); }).then(function (path) {
-      return L.load({ path: path, nCtx: pk.nCtx || 4096 });
-    }).then(function () { _loadedPack = packId; return null; }, function (err) {
+      .then(function () { return Promise.all([M.pathFor(packId), draftPathFor(packId)]); }).then(function (pp) {
+      function loadAt(n) {
+        return L.load({ path: pp[0], nCtx: n,
+          // perf plan #4: a q8_0 KV cache halves the cache and the memory traffic per decoded token;
+          // flash attention is what makes a quantised V cache legal. A pack may opt out (kvQ8: false).
+          kvQ8: pk.kvQ8 !== false, flashAttn: pk.flashAttn !== false,
+          // perf plan #5: prefill knobs per pack; 0 = the plugin's measured default.
+          nBatch: pk.nBatch || 0, nUbatch: pk.nUbatch || 0,
+          // perf plan #6: same-tokeniser draft for speculative decoding, when it is on disk.
+          draftPath: pp[1] || "" }).then(function (r) { pk._ctx = n; return r; });
+      }
+      // A bigger window the device then refuses falls back to the proven size rather than failing.
+      var base = pk.nCtx || 4096, want = wantCtx(packId, pk, _mem);
+      return want > base ? loadAt(want).catch(function () { return loadAt(base); }) : loadAt(base);
+    }).then(function () { _loadedPack = packId; fetchDraftOnce(packId); return null; }, function (err) {
       /* A CORRUPT MODEL IS A DEAD END UNLESS WE CLEAR IT.
        *
        * llama.cpp rejects a structurally bad file and the plugin reports "model-corrupted". Nothing
@@ -537,24 +681,37 @@
    * wrong regimen with total confidence. Doctors expect textbook/guideline-accurate specifics,
    * which only comes from retrieval + a check against it, same architecture as the server.
    *
-   * Scoped to maik-lite only tonight, not every noThink pack - that is what was asked for
-   * ("the model we trained"), and widening it needs its own verification pass.
+   * First scoped to maik-lite only (2026-09-03); widened to every pack the registry marks `kb` on
+   * 2026-09-18, see below. (The old "MaiK Lite ONLY, Bonsai answers from its own weights" note was
+   * stale and is gone, audit T63.)
    */
-  // Owner decision 2026-09-03: MaiK Lite ONLY. The Bonsai packs answer from their own weights.
   /* Capability-based, not model-id-based (owner, 2026-09-18): any pack the registry marks `kb` reads
    * the Knowledge Base and is checked claim by claim (kb/ai/maik-grounding.js). The old
    * `packId === "maik-lite"` allow-list existed because the whole-answer gate rejected half of a
    * larger model's answers for paraphrase; the claim-level verifier removes that reason. A harness
    * with no registry keeps the old behaviour. */
   function ragEligible(packId) {
+    // The clinician's own switch comes first: unlinked means the book is disconnected, so no pack
+    // retrieves however capable it is (maik-engine.js KEY_RAG_LINK). Absent engine = linked, so a
+    // test harness with no engine module keeps the grounded behaviour.
+    if (!ragLinkedPref()) return false;
     try { var M = models(); if (M && M.caps) { var c = M.caps(packId); return !!(c && c.kb); } } catch (e) {}
     return packId === "maik-lite";
+  }
+  /** Reads the engine's RAG link switch; defaults to CONNECTED when the engine is not present. */
+  function ragLinkedPref() {
+    try {
+      var E = (typeof window !== "undefined") && window.SMD_MAIK_ENGINE;
+      if (E && typeof E.ragLinked === "function") return E.ragLinked();
+      return localStorage.getItem("smd_maik_rag_linked") !== "0";
+    } catch (e) { return true; }
   }
   // General model knowledge next to a grounded answer is a PRODUCT switch, off by default: unsupported
   // claims are left out unless the owner turns this on, and then they appear under their own heading,
   // never mixed into the Knowledge-Base-backed text.
   function generalKnowledgeAllowed() { try { return localStorage.getItem("smd_maik_general_knowledge") === "1"; } catch (e) { return false; } }
   var GENERAL_HEAD = "Not in the StewardMD Knowledge Base (general model knowledge, unverified):";
+  var NOT_CHECKED = "Not checked against the StewardMD Knowledge Base.";
   var REGEN_NUDGE = "\nState only the drugs, doses and figures that appear in the reference material above. Where the material does not cover part of the question, say so in one line.";
 
   /* A follow-up retrieves on the previous subject too: "tell me doses" alone has no anchor and grounds
@@ -585,6 +742,19 @@
   var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
   var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
   var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
+  /** A generation that stopped on its token budget ends mid-sentence. Prose that trails off is cut
+   *  back to the last sentence end (kept only if that keeps most of the answer, else an ellipsis);
+   *  a list item or heading as the last line is left alone, they legitimately end without a stop. */
+  function finishCut(text) {
+    var t = String(text == null ? "" : text).replace(/\s+$/, "");
+    if (!t) return { text: t, truncated: false };
+    var lines = t.split("\n"), last = lines[lines.length - 1].trim();
+    if (/^([-*\u2022]|\d+[.)])\s/.test(last) || /^#{1,4}\s/.test(last) || /^\|/.test(last)) return { text: t, truncated: false };
+    if (/[.!?:;)\]"\u201d\u2019']$/.test(last) || last.split(/\s+/).length < 6) return { text: t, truncated: false };
+    var idx = Math.max(t.lastIndexOf(". "), t.lastIndexOf(".\n"), t.lastIndexOf("!\n"), t.lastIndexOf("?\n"));
+    if (idx > t.length * 0.6) return { text: t.slice(0, idx + 1), truncated: true };
+    return { text: t + "\u2026", truncated: true };
+  }
   function cleanPassage(s) { return String(s || "").replace(/[■□▪▫●○◆◇◼◻•·]+/g, " ").replace(/\s+/g, " ").trim(); }
   function anchorsFor(bk, RAG, question) {
     // No tokenizer available (an older RAG build or a test stub) means no anchoring, never a
@@ -639,59 +809,227 @@
     return String(topic || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/)
       .filter(function (t) { return t.length >= 4 && !ROUTER_STOP.test(t); }).slice(0, 4);
   }
-  function retrieveGrounding(packId, question, topic) {
+  /* QUERY EXPANSION FROM RAG #1 (owner, 2026-09-20).
+   *
+   * The router does not only know WHICH disease - buildPackage() also carries that disease's own
+   * cited material (pkg.grounding) and the lexical top-K for the query (pkg.retrieved), both of
+   * which were themselves produced with a server-side VECTOR arm (/api/retrieve). That text is the
+   * disease's working vocabulary: its synonyms, its complications, its drugs, its investigations.
+   *
+   * Mining it is what lets requirement 3 be safe. A passage about a complication of a disease often
+   * never states the disease name - a variceal-bleeding passage may say "portal hypertension" and
+   * "band ligation" without "cirrhosis" - so demanding the name as a hard filter throws away exactly
+   * the passages a clinician asked for. Expansion terms give such a passage a way to prove it is on
+   * topic without repeating the title.
+   *
+   * This is also where the "hybrid" in hybrid retrieval actually lives. There is no dense index on
+   * the phone and no embedding model in the app, so a true on-device vector arm is not available;
+   * what IS available is RAG #1's server-side vector verdict, already computed, fused into the BM25
+   * query and into the rerank as a coverage feature. Honest description: BM25 lexical retrieval,
+   * seeded and reranked by a semantic arm that ran upstream.
+   *
+   * Terms are kept only if the BOOK knows them (idfOf defined) and they are specific enough to
+   * discriminate - an expansion term with a low IDF would re-open the "matches every chapter" hole
+   * that anchoring was built to close.
+   */
+  var EXP_MAX = 8;             // precision over volume: a long OR-query drifts off topic
+  var EXP_MIN_IDF = 4.0;       // below this a term is too common to prove relevance
+  function packageText(pkg) {
+    var src = [];
+    function take(v) {
+      if (!v) return;
+      if (typeof v === "string") { src.push(v); return; }
+      if (typeof v === "object") { ["text", "snippet", "body", "chunk", "heading", "name", "title"].forEach(function (k) { if (typeof v[k] === "string") src.push(v[k]); }); }
+    }
+    try { (pkg && pkg.grounding || []).forEach(take); } catch (e) {}
+    try { (pkg && pkg.retrieved || []).forEach(take); } catch (e) {}
+    try {
+      var tm = pkg && pkg.topicMatch;
+      if (tm) { take(tm.grounded); take(tm.topic); take(tm.nearest); take(tm.assume); }
+    } catch (e) {}
+    return src.join(" ");
+  }
+  function expansionTerms(pkg, bk, RAG, seen) {
+    var raw = packageText(pkg);
+    if (!raw) return [];
+    var toks = [];
+    try { toks = RAG.toks(raw) || []; } catch (e) { return []; }
+    var scored = [], dedupe = {};
+    for (var i = 0; i < toks.length; i++) {
+      var w = toks[i];
+      try { if (bk.us) w = bk.us(w); } catch (e) {}
+      if (!w || w.length < 4 || dedupe[w] || seen[w]) continue;
+      if (GENERIC_Q.test(w) || ROUTER_STOP.test(w)) continue;
+      var idf = bk.idfOf ? bk.idfOf(w) : undefined;
+      if (idf === undefined || idf < EXP_MIN_IDF) continue;   // unknown to the book, or too common
+      dedupe[w] = 1;
+      scored.push([idf, w]);
+    }
+    scored.sort(function (a, b) { return b[0] - a[0]; });
+    return scored.slice(0, EXP_MAX).map(function (e) { return e[1]; });
+  }
+
+  /* RERANK (owner, 2026-09-20, requirement 5).
+   *
+   * BM25 alone ranks by word overlap, which is how "melena workup" once grounded on a dermatitis
+   * chapter that merely contained "workup". The rerank re-scores the retrieved pool on what makes a
+   * passage clinically relevant rather than lexically similar:
+   *
+   *   bm25      normalised against the best hit, so the lexical signal still counts
+   *   anchor    fraction of the router/question disease anchors the passage covers
+   *   expansion fraction of the RAG #1 vocabulary it covers (the semantic arm's contribution)
+   *   modifier  "...in pregnancy" - a passage carrying the modifier outranks one that does not
+   *   intro     a DEFINITIONS chapter is not the answer to a treatment question
+   *
+   * SAFETY FLOOR, unchanged in spirit from the hard filter it replaces: a passage supported by
+   * NEITHER an anchor nor an expansion term cannot be kept at any BM25 score, and if nothing in the
+   * pool has either, the question is reported ungrounded rather than grounded on whatever ranked
+   * first. Requirement 3 removes the exact-NAME string match; it does not remove the requirement
+   * that a passage prove it is about the right thing.
+   */
+  function rerankPassages(cited, F) {
+    var best = cited[0] ? cited[0].score : 1;
+    if (!(best > 0)) best = 1;
+    var nAnchor = F.anchors.length, nExp = F.expansion.length;
+    // A DRUG NAME is not the topic; the disease is. When some anchor is a chapter heading in the
+    // pool ("Pneumonia"), a passage must carry one of THOSE (or an expansion term) to count as
+    // supported. Matching only on shared drug names is how a typhoid-resistance passage was cited
+    // for a pneumonia question (live battery, 2026-09-04) and cost ~175 prefill tokens of noise.
+    var headAnchors = F.anchors.filter(function (a) {
+      if (F.mods.indexOf(a) !== -1) return false;
+      return cited.some(function (c) { return String(c.p.heading || "").toLowerCase().indexOf(a) !== -1; });
+    });
+    cited.forEach(function (c) {
+      c.anchorN = nAnchor ? F.anchors.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length : 0;
+      c.expN = nExp ? F.expansion.filter(function (x) { return c.hay.indexOf(x) !== -1; }).length : 0;
+      var topicN = headAnchors.length ? headAnchors.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length : c.anchorN;
+      c.supported = (topicN > 0) || (c.expN > 0);
+      var bm = Math.min(1, c.score / best);
+      var aCov = nAnchor ? c.anchorN / nAnchor : 0;
+      var eCov = nExp ? c.expN / nExp : 0;
+      var s = 0.50 * bm + 0.34 * aCov + 0.16 * eCov;
+      // A passage that names the disease outright is still the strongest evidence there is; the
+      // change is that not naming it is survivable, not that naming it stopped mattering.
+      if (c.anchorN > 1) s *= 1.12;
+      if (F.mods.length) {
+        var hasMod = F.mods.some(function (m) { return c.hay.indexOf(m) !== -1; });
+        s *= hasMod ? 1.25 : 0.80;
+      }
+      if (F.treat && INTRO_HEAD.test(c.p.heading || "")) s *= 0.55;
+      c.rank = s;
+    });
+    var kept = cited.filter(function (c) { return c.supported; });
+    // A DEFINITIONS chapter is not the answer to a treatment question: once a real answer passage
+    // survives, the intro is dropped rather than merely demoted (it is ~175 prefill tokens spent
+    // saying what the disease is called).
+    if (F.treat) { var real = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); }); if (real.length) kept = real; }
+    kept.sort(function (a, b) { return b.rank - a.rank; });
+    // Diversity: three slices of one chapter teach less than two chapters do, and a single heading
+    // filling the whole window is how a broad question comes back narrow.
+    var perHead = {}, out = [];
+    for (var i = 0; i < kept.length && out.length < F.topk; i++) {
+      var h = String(kept[i].p.heading || "").toLowerCase().split(">")[0].trim() || ("_" + i);
+      if ((perHead[h] || 0) >= 2) continue;
+      perHead[h] = (perHead[h] || 0) + 1;
+      out.push(kept[i]);
+    }
+    // Precision over volume: a third passage that is far weaker than the first adds noise, not
+    // evidence, and costs ~175 prompt tokens of prefill to say so.
+    if (out.length > 2 && out[2].rank < 0.55 * out[0].rank) out = out.slice(0, 2);
+    return out;
+  }
+
+  function retrieveGrounding(packId, question, topic, pkg) {
     if (!ragEligible(packId) || !question) return Promise.resolve(null);
     var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
     var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
     if (!RAG || !KB) return Promise.resolve(null);
     var rt = routerToks(topic);
     return KB.loadBook(RAG).then(function (bk) {
-      // Search wider than we keep: the anchored passages are often ranks 2-6 behind a glossary
-      // chapter that matches every word. Same BM25 pass, only the sort tail is longer. The router's
-      // disease name rides along in the query so its chunks rank.
-      var hits = bk.search(rt.length ? question + " " + rt.join(" ") : question, RAG.TOPK * 3);
-      if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
       var A = anchorsFor(bk, RAG, question);
       if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
-      // Router anchors first: a kept passage must mention the disease the question is about.
+      // Router anchors first: the disease the router named is the strongest evidence of topic.
       if (rt.length) A.topic = rt.concat(A.topic.filter(function (t) { return rt.indexOf(t) < 0; }));
-      var need = A.topic.length ? A.topic : A.drugs;
-      // Owner report (2026-09-11): "Teach me Pneumonia atoz" and "Can I learn a new medical topic
-      // today" both had NO real topic or drug anchor (every content word was generic filler, or "atoz"
-      // and "topic" simply are not in the book's vocabulary at all) - a topic-less question has no
-      // way to tell a relevant passage from an irrelevant one, so falling through to the raw top BM25
-      // hits grounded a fabricated "Pneumonia atoz" monograph on an unrelated chapter and "teach me a
-      // topic" on a machine-learning chapter. Zero anchors now means "not covered", never "grounded in
-      // whatever scored highest" - a passage's relevance can never be established without one.
-      if (!need.length) return null;
       var anchors = A.topic.concat(A.drugs);
-      var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
-      // Count anchors per passage. With two or more topic anchors, a passage matching two beats one
-      // matching one ("community" alone let a typhoid epidemiology passage stand in for CAP); when
-      // nothing matches two, one is enough.
-      cited.forEach(function (c) { c.n = need.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length; });
-      var kept = cited.filter(function (c) { return c.n > 0; });
+      var seen = {};
+      anchors.forEach(function (a) { seen[a] = 1; });
+      var expansion = expansionTerms(pkg, bk, RAG, seen);
+      // Nothing to prove relevance WITH - no disease anchor, no drug, and RAG #1 offered no
+      // vocabulary either. "Teach me Pneumonia atoz" / "can I learn a new topic today" land here:
+      // every content word is generic filler or absent from the book, so no passage can be shown to
+      // be about the right thing. Ungrounded is the honest answer (owner report 2026-09-11).
+      if (!anchors.length && !expansion.length) return null;
+      /* Expanded query. The router's disease AND RAG #1's vocabulary ride into BM25, so passages
+       * about complications and management rank even when the question's own words are sparse.
+       * Only the top few expansion terms go in: the pool is reranked afterwards anyway, and a long
+       * query dilutes the IDF weighting that makes BM25 discriminate at all. */
+      var q = question;
+      if (rt.length) q += " " + rt.join(" ");
+      if (expansion.length) q += " " + expansion.slice(0, 4).join(" ");
+      // Search wider than we keep: the relevant passages are often ranks 2-8 behind a glossary
+      // chapter that matches every word. The rerank below is what picks from this pool.
+      var hits = bk.search(q, RAG.TOPK * 4);
+      if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
+      var cited = hits.map(function (h) {
+        var p = bk.cite(h[1]);
+        return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() };
+      });
+      var kept = rerankPassages(cited, {
+        anchors: anchors, expansion: expansion, mods: A.mods,
+        treat: TREAT_Q.test(question), topk: RAG.TOPK
+      });
+      // Every candidate failed the floor: supported by neither an anchor nor RAG #1's vocabulary.
       if (!kept.length) return null;
-      if (need.length > 1 && kept.some(function (c) { return c.n > 1; })) kept = kept.filter(function (c) { return c.n > 1; });
-      // "…in pregnancy": among the on-topic passages, the ones that mention the modifier win when any
-      // do; when none do, the topic passages stay and the model says so, instead of a passage about
-      // a different disease in pregnancy.
-      if (A.mods.length) {
-        var wm = kept.filter(function (c) { return A.mods.some(function (m) { return c.hay.indexOf(m) !== -1; }); });
-        if (wm.length) kept = wm;
-      }
-      // A definitions / introduction chapter is not the answer to a treatment question when anything
-      // else survived (the live "■■ DEFINITIONS" fallback for a UTI treatment ask).
-      if (TREAT_Q.test(question) && kept.length > 1) {
-        var nd = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); });
-        if (nd.length) kept = nd;
-      }
-      kept = kept.filter(function (c) { return c.score >= 0.4 * kept[0].score; }).slice(0, RAG.TOPK);
-      if (kept.length > 2 && kept[2].score < 0.6 * kept[0].score) kept = kept.slice(0, 2);
       var passages = kept.map(function (c) { c.p.text = cleanPassage(c.p.text); return c.p; });
-      var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 700); }).join("\n\n");
-      return { evidenceText: evidenceText, passages: passages, RAG: RAG, anchors: anchors };
+      /* SOURCE METADATA IN THE EVIDENCE (requirement 6). The heading travels with each passage so
+       * the model can say which chapter a statement came from, and so maik-grounding.js can attach
+       * a real citation to a surviving claim. Page numbers stay in the passage objects and out of
+       * the prompt: the standing owner rule is that the visible attribution never prints a page
+       * number (see the Source line below), and a number in the prompt is a number the model will
+       * eventually print. */
+      var evidenceText = passages.map(function (p, n) {
+        var head = String(p.heading || "").trim(), headPart = head ? " (" + head.slice(0, 90) + ")" : "";
+        // 700 chars INCLUDING the heading: the cap is a prefill budget, not a text length.
+        return "[" + (n + 1) + "]" + headPart + " " + p.text.slice(0, Math.max(400, 700 - headPart.length - 1));
+      }).join("\n\n");
+      return { evidenceText: evidenceText, passages: passages, RAG: RAG, anchors: anchors, expansion: expansion };
     }).catch(function () { return null; });
+  }
+
+  /* CURATED DISEASE GROUNDING IN THE EVIDENCE (audit T23, 2026-09-25). The package already carries
+   * the router's curated StewardMD material for the matched disease (pkg.grounding knowledge, the
+   * text the cloud engine is grounded on), and answer() used to throw it away and ground only on up
+   * to three BM25 book passages. When the router named a disease, its curated text now joins the
+   * evidence as one passage (700 chars, the same per-passage cap), inside the SAME budget of
+   * RAG.TOPK passages: it takes the third book slot, or stands alone (up to two passages) when the
+   * book had nothing. No router verdict = no curated passage (relevance cannot be shown). */
+  var PASSAGE_CHARS = 700;
+  function curatedPassages(pkg) {
+    var topic = routerTopic(pkg), gs = (pkg && pkg.grounding) || [];
+    if (!topic || !gs.length) return [];
+    var t = topic.toLowerCase(), g = null;
+    for (var i = 0; i < gs.length && !g; i++) { var nm = String((gs[i] && gs[i].name) || "").toLowerCase(); if (nm && (nm === t || nm.indexOf(t) !== -1 || t.indexOf(nm) !== -1)) g = gs[i]; }
+    g = g || gs[0];
+    var body = cleanPassage(((g && g.knowledge) || []).map(function (k) { return (k && (k.text || k)) || ""; }).join(" "));
+    if (body.length < 80) return [];
+    var head = "StewardMD Knowledge Base > " + String(g.name || topic).slice(0, 60), out = [];
+    for (var at = 0; at < body.length && out.length < 2; at += PASSAGE_CHARS) out.push({ heading: head, text: body.slice(at, at + PASSAGE_CHARS), curated: true });
+    return out;
+  }
+  function evidenceOf(passages) {
+    return passages.map(function (p, n) {
+      var head = String(p.heading || "").trim(), headPart = head ? " (" + head.slice(0, 90) + ")" : "";
+      return "[" + (n + 1) + "]" + headPart + " " + p.text.slice(0, Math.max(400, PASSAGE_CHARS - headPart.length - 1));
+    }).join("\n\n");
+  }
+  function withCurated(g, pkg, packId) {
+    var cur = ragEligible(packId) ? curatedPassages(pkg) : [];
+    if (!cur.length) return g;
+    var RAG = (g && g.RAG) || ((typeof window !== "undefined") && window.SMD_MAIK_RAG);
+    if (!RAG) return g;
+    var cap = RAG.TOPK || 3, book = (g && g.passages) || [];
+    var merged = book.length ? book.slice(0, 1).concat(cur.slice(0, 1), book.slice(1)).slice(0, cap) : cur.slice(0, Math.min(2, cap));
+    return { evidenceText: evidenceOf(merged), passages: merged, RAG: RAG, anchors: (g && g.anchors) || [], expansion: (g && g.expansion) || [], curated: true };
   }
 
   function answer(pkg, opts, onDelta) {
@@ -709,19 +1047,41 @@
 
     // A greeting is not a question: no retrieval, so no "Source:" line on a hello (owner
     // screenshot, 2026-09-04).
-    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
-      : retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg));
+    // RETRIES REUSE THE FIRST ATTEMPT'S EVIDENCE (audit T57, 2026-09-25). A retry used to retrieve
+    // again from a package whose grounding had already been stripped (below), so RAG #1's expansion
+    // terms were lost, and a null result showed the regenerated answer unchecked; the blank-answer
+    // retry skipped retrieval altogether. opts._grounding carries the first attempt's passages
+    // (null = deliberately ungrounded, the no-coverage retry).
+    var groundingP = (opts && opts._grounding !== undefined) ? Promise.resolve(opts._grounding)
+      : (images.length || (opts && opts._ungrounded) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
+      // pkg goes in so expansionTerms() can mine RAG #1's own vocabulary. It is read HERE, before
+      // the citation-bearing fields are stripped off the package further down.
+      : retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg).then(function (g) { return withCurated(g, pkg, packId); });
 
     return groundingP.then(function (grounding) {
+    /** The claim-check options, shared by the live stream view and the final check. */
+    function groundOpts(nerDrugs) {
+      return {
+        allowGeneral: generalKnowledgeAllowed(), inlineRefs: true,
+        drugs: nerDrugs,
+        // The app's drug lexicon (drug-lexicon.js), so drugs the suffix rule cannot see (warfarin,
+        // aspirin, hydralazine...) are checked too, and a bare "- Warfarin" bullet is a claim (T02).
+        lexicon: (typeof window !== "undefined" && window.SMD_DRUG_LEXICON) || null,
+        expand: (grounding && grounding.RAG && grounding.RAG.expand) ? function (q) { return grounding.RAG.expand(q)[0]; } : null
+      };
+    }
     // Queued like every other local generation, and NOT background: the clinician is watching this
     // one, so it goes ahead of any queued Scribe drafting (it cannot interrupt one already running).
     return serial(function () {
-    return ensureLoaded(packId).then(function () {
+    return ensureLoaded(packId, { vision: images.length > 0 }).then(function () {
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
       if (grounding) {
-        prompt = "Reference material from the StewardMD Knowledge Base:\n" + grounding.evidenceText +
-          "\n\nUsing the reference material above where it applies, answer:\n" + prompt;
+        // History FIRST, evidence second, question last: the prefix up to the evidence is the same
+        // tokens on every turn of a thread, so the engine can keep its KV and prefill only the rest.
+        var parts = buildPromptParts(pkg, packId) || { history: "", question: prompt };
+        prompt = parts.history + "Reference material from the StewardMD Knowledge Base:\n" + grounding.evidenceText +
+          "\n\nUsing the reference material above where it applies, answer:\n" + parts.question;
       }
       // Retry-after-blank: nudge the model out of the deliberation attractor it fell into.
       if (opts && opts.nudge) prompt += "\nGive the final answer directly, no deliberation.";
@@ -729,14 +1089,69 @@
       if (opts && opts._regen && grounding) prompt += REGEN_NUDGE;
 
       // Stream tokens into the caller's typewriter. Accumulate: onDelta wants the full text so far.
+      //
+      // COALESCED PAINTING (perf plan #1, 2026-09-21). Every token used to cross the bridge and
+      // re-render the whole accumulated markdown: on a 2,000-token answer that is quadratic
+      // main-thread work and a battery cost that has nothing to do with the model. The first token
+      // paints at once (time-to-first-token is what the doctor feels); after that the screen repaints
+      // at most every PAINT_MS, and a final paint runs when generation ends.
+      //
+      // COMPLETE LINES ONLY ARE SETTLED (audit T56, 2026-09-25). Every token used to be painted raw,
+      // so a line the claim check later removed (an unsupported drug, a spliced dose) sat on screen
+      // as if it were part of the answer until generation ended. Now, when the answer is grounded,
+      // each COMPLETE line is claim-checked as it arrives and shown in its checked form (with its
+      // [n]) or not at all; only the line still being written is shown raw, at the end, where the
+      // live bubble's caret marks it as in progress. Ungrounded answers paint exactly as before.
+      var _paintT = null, _paintLast = 0, _paintDirty = false, _detached = false, _doneSrc = null, _doneShown = "";
+      // Persona modes (T58) keep their own lines, so their stream is not rewritten either.
+      var _Gs = grounding && !images.length && !(opts && opts.mode && MODE_SYS[opts.mode]) && (typeof window !== "undefined") && window.SMD_MAIK_GROUND;
+      function streamView(s) {
+        if (!_Gs || !_Gs.groundAnswer) return s;
+        var cut = s.lastIndexOf("\n"), done = cut >= 0 ? s.slice(0, cut) : "", part = cut >= 0 ? s.slice(cut + 1) : s;
+        if (done !== _doneSrc) {
+          _doneSrc = done;
+          try {
+            var gs = _Gs.groundAnswer(done, grounding.passages, pkg && pkg.question, groundOpts(null));
+            _doneShown = gs.text + (gs.general ? "\n\n" + GENERAL_HEAD + "\n" + gs.general : "");
+          } catch (e) { _doneShown = ""; }
+        }
+        return _doneShown + (part ? (_doneShown ? "\n" : "") + part : "");
+      }
+      function paintNow() { _paintT = null; _paintDirty = false; _paintLast = Date.now(); if (_detached) return; try { onDelta(streamView(stripReasoning(acc))); } catch (e) {} }
+      function paint() {
+        _paintDirty = true;
+        if (_paintT) return;
+        var wait = PAINT_MS - (Date.now() - _paintLast);
+        if (wait <= 0) { paintNow(); return; }
+        _paintT = setTimeout(paintNow, wait);
+        try { if (_paintT && typeof _paintT.unref === "function") _paintT.unref(); } catch (e) {}
+      }
+      function paintFlush() { if (_paintT) { clearTimeout(_paintT); _paintT = null; } if (_paintDirty) paintNow(); }
+      /* Before a retry recurses into answer(), this attempt stops listening and painting (T57): its
+       * listener used to stay attached for the whole retry, so the screen alternated between the
+       * two attempts' text. The retry attaches its own listener. */
+      function detach() {
+        _detached = true;
+        if (_paintT) { clearTimeout(_paintT); _paintT = null; }
+        if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }
+        sub = null;
+      }
+      function retry(extra) {
+        detach();
+        var o2 = extra;
+        if (opts) { for (var k in opts) { if (!(k in o2)) o2[k] = opts[k]; } }
+        return answer(pkg, o2, onDelta);
+      }
       var attach = (typeof onDelta === "function" && L.addListener)
         ? Promise.resolve(L.addListener("llamaToken", function (ev) {
+            if (_detached) return;
             acc += (ev && ev.text) || "";
+            if (_touchJob) _touchJob();   // a live stream is not a wedged call
             // Strip on the way out too, not just at the end: onDelta feeds the live typewriter, so a
             // leaked reasoning preamble would be read on screen even though the final text is clean.
             // While the model is inside an unterminated reasoning block this yields "", which is the
             // honest thing to show - nothing has been answered yet.
-            try { onDelta(stripReasoning(acc)); } catch (e) {}
+            paint();
           }))
         : Promise.resolve(null);
 
@@ -777,10 +1192,10 @@
                 // A pack can carry its own system prompt (registry-driven, like noThink).
                 // MaiK Lite was TRAINED with its prompt, so the shared one would be a
                 // distribution shift - and its dose example was parroted as a real dose.
-                : !images.length ? (pk.system || SYSTEM)
+                // TREAT/ASK is appended at the END below (T24), after ABOUT and LENGTH.
+                : !images.length ? (pk.system || SYSTEM_STABLE)
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
-          nPredict: pk.nPredict || 512,
           // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
           // byte for byte, so a regenerate request gets a little sampling jitter.
           temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : ((opts && opts.regen) ? 0.4 : 0),
@@ -790,6 +1205,32 @@
           // only needs wiring on the text path.
           prefillEmptyThink: !images.length && noThinkPack(packId)
         };
+        // Owner, 2026-09-21: "remove token limits for all offline models, let them speak as much as
+        // they are designed to". No per-pack cap: the answer may use every token the prompt leaves
+        // free in the context window. (A 512 cap cut "tell me in detail" mid-sentence.)
+        common.nPredict = openBudget(pk, common.system, common.prompt);
+        // Answer length (owner, 2026-09-24): Balanced by default, Short or Detailed on request. The
+        // token budget follows the words so a short answer cannot ramble and a detailed one is never
+        // cut; images, persona modes (their own "two to five sentences"), greetings and overrides keep
+        // their own prompts untouched.
+        if (!images.length && !(opts && (opts.systemOverride || (opts.mode && MODE_SYS[opts.mode]))) && !isGreeting(pkg && pkg.question)) {
+          var depth = opts && opts.depth;
+          // About me: the doctor's saved preferences (home.js maikMeLine). Stable across a thread, so it
+          // comes FIRST after the stable system prompt, inside the reused KV prefix (T24).
+          if (pkg && pkg.doctor) { var _me = "\nABOUT THE CLINICIAN (their saved preferences; tailor to them, never mention this): " + String(pkg.doctor).slice(0, 400); common.system += _me; common.nPredict = Math.max(256, common.nPredict - estTokens(_me)); }
+          if (depth === "brief") { common.nPredict = Math.min(common.nPredict, 400); common.system += "\nLENGTH: SHORT. Answer directly in 3 to 6 sentences or a few bullets; no sections or background; keep safety-critical caveats."; }
+          else if (depth === "detailed") { common.system += "\nLENGTH: DETAILED. Cover every relevant aspect in full sections; do not stop early."; }
+          // Balanced (owner, 2026-09-25: "answer balanced rather than short"): "essential points only"
+          // read to a small model as "a few bullets". Say what balanced covers, and how much.
+          // GROUNDED BALANCED FOLLOWS THE EVIDENCE (audit T23, 2026-09-25): a 200 to 350 word target
+          // across diagnosis, management, doses and cautions, against at most three short passages,
+          // made the model write past its evidence and the claim check then stripped or regenerated
+          // it. With reference material the answer covers what the material supports, no word target.
+          else if (grounding) { common.nPredict = Math.min(common.nPredict, 1100); common.system += "\nLENGTH: BALANCED. Open with one plain sentence that answers the question, then cover it as fully as the reference material supports, in short bullets or sections. Do not add sections, figures or drugs the material does not contain."; }
+          else { common.nPredict = Math.min(common.nPredict, 1100); common.system += "\nLENGTH: BALANCED. Open with one plain sentence that answers the question, then cover the key points a clinician needs in 2 to 4 short sections or 6 to 12 bullets, as the question calls for (key facts, diagnosis, management, doses, cautions); about 200 to 350 words. Do not stop after two or three bullets."; }
+          // The per-question line goes LAST, so a thread's prompts share everything before it (T24).
+          if (!pk.system) common.system += treatAskLine(pkg && pkg.question);
+        }
         if (!images.length) return L.generate(common);
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone
         // photo is several MB and marshalling that as a string is what made the old downloader
@@ -802,8 +1243,14 @@
           return L.generateWithImage(common);
         });
       }).then(function (r) {
+        return withNerDrugs(r, grounding);
+      }).then(function (r) {
+        paintFlush();
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
+        // nPredict ran out mid-word ("Intralesional vinblas" with the verify line glued on, owner
+        // transcript 2026-09-20). Finish at the last complete sentence and flag it in the result.
+        var cut = finishCut(text); text = cut.text;
         // A leaked fine-tuning template is not an answer. MAiK Cortex (MedMO-4B) answered "Hi" with
         // "##Instruction: If you are a doctor... Question: ... ##Options:" (owner transcript,
         // 2026-09-19): the model continued its SFT format instead of replying. Treat it as empty so the
@@ -814,9 +1261,8 @@
         // directness nudge recovers most of these, so retry ONCE before surfacing an error.
         // Text path only: an image answer costs a full vision prefill and is not think-prone.
         if (!text && !images.length && !(opts && opts._retried)) {
-          var ro = { _retried: true, temperature: 0.35, nudge: true, pack: packId };
-          if (opts) { for (var k in opts) { if (!(k in ro)) ro[k] = opts[k]; } }
-          return answer(pkg, ro, onDelta);
+          // Same evidence as this attempt, so the retry is checked like any answer (T57).
+          return retry({ _retried: true, temperature: 0.35, nudge: true, pack: packId, _grounding: grounding });
         }
         if (!text) return { error: EMPTY_ANSWER };
         // NO-COVERAGE FALLBACK (owner, 2026-09-04, from a live screenshot). Retrieval can miss: a
@@ -827,9 +1273,7 @@
         // from its own weights, marked ungrounded, no gate, no source line (the banner already says
         // "AI-generated, no sources").
         if (grounding && !images.length && !(opts && opts._ungrounded) && NO_COVERAGE.test(text)) {
-          var uo = { _ungrounded: true, pack: packId };
-          if (opts) { for (var k2 in opts) { if (!(k2 in uo)) uo[k2] = opts[k2]; } }
-          return answer(pkg, uo, onDelta);
+          return retry({ _ungrounded: true, pack: packId, _grounding: null });
         }
         // RAG safety net: every number/drug the answer states must be backed by the retrieved
         // book text or the question itself. A doctor-supplied figure ("glucose 32 mg/dL") is not
@@ -848,16 +1292,25 @@
            * the product allows general knowledge. Paraphrase is free; the bar on figures and drugs is
            * unchanged. If NOTHING can be supported, the model gets ONE more attempt constrained to the
            * reference material, and only then does the reference passage stand in for the answer. */
-          var g = G.groundAnswer(text, grounding.passages, pkg && pkg.question, {
-            allowGeneral: generalKnowledgeAllowed(), inlineRefs: true,
-            expand: (grounding.RAG && grounding.RAG.expand) ? function (q) { return grounding.RAG.expand(q)[0]; } : null
-          });
+          var g = G.groundAnswer(text, grounding.passages, pkg && pkg.question, groundOpts(r && r._nerDrugs));
           try { window.__smdLastGate = { q: pkg && pkg.question, verdict: g.verdict, stats: g.stats, removed: g.removed, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}
-          if (g.verdict === "ungrounded") {
+          /* PERSONA MODES KEEP THEIR VOICE (audit T58, 2026-09-25). A CliniX tutor or SURGX mentor
+           * turn is Socratic teaching, not a reference answer: the claim check used to gut it, or
+           * replace it with a textbook passage plus a Source line. Those two fallbacks are skipped;
+           * what still goes is any line carrying a figure the evidence does not support, or a dose
+           * it contradicts (these modes are told never to give doses anyway). */
+          var persona = !!(opts && opts.mode && MODE_SYS[opts.mode]);
+          if (persona) {
+            var bad = g.claims.filter(function (c) { return c.status === "contradicted" || (c.status === "unsupported" && /\d/.test(c.text)); });
+            text = text.split("\n").filter(function (ln) {
+              var l1 = ln.replace(/\s+/g, " ");
+              return !bad.some(function (c) { return l1.indexOf(c.text) !== -1; });
+            }).join("\n").replace(/\n{3,}/g, "\n\n").trim();
+            if (!text) return { error: EMPTY_ANSWER };
+          } else if (g.verdict === "ungrounded") {
             if (!(opts && opts._regen)) {
-              var go = { _regen: true, temperature: 0.2, pack: packId };
-              if (opts) { for (var k3 in opts) { if (!(k3 in go)) go[k3] = opts[k3]; } }
-              return answer(pkg, go, onDelta);
+              // Constrained to the SAME passages, so the regenerated answer is claim-checked too (T57).
+              return retry({ _regen: true, temperature: 0.2, pack: packId, _grounding: grounding });
             }
             var pass0 = grounding.passages[0]; quotedPassage = true;
             var shown0 = cleanPassage(pass0.text);
@@ -892,9 +1345,14 @@
             text = text + "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
           }
         }
+        // A regenerate that ended up with no passages is never presented as checked (T57). With the
+        // evidence carried through opts._grounding this cannot happen today; it stays as the net.
+        if (!grounding && opts && opts._regen) text += "\n\n" + NOT_CHECKED;
         if (!quotedPassage) text = emphasize(text);
         return {
           text: text,
+          checked: !!groundingOut,   // the claim check ran on this text
+          truncated: !!(cut && cut.truncated),   // hit the output budget; finished at the last full sentence
           // sources stays [] regardless: the citation UI's own contract (SMD_MaiK.sourceList)
           // recomputes from pkg.grounding/retrieved/treatment, which this engine does not
           // populate. A plain "Source: ..." line is appended to the text itself above instead,
@@ -905,7 +1363,9 @@
           engine: "local",
           images: images.length,
           model: (models() && models().PACKS[packId] && models().PACKS[packId].label) || packId,
-          ms: (r && r.ms) || (Date.now() - t0)
+          ms: (r && r.ms) || (Date.now() - t0),
+          // perf plan #8: what the native engine measured (prefill, reuse, tok/s, thermal, draft).
+          perf: (r && r.perf) || null
         };
       });
     }).catch(function (e) {
@@ -983,18 +1443,33 @@
    * Fire-and-forget: never rejects, and never blocks a real answer.
    */
   var _warmed = null;
+  /* WARM STATE FOLLOWS THE NATIVE SIDE (audit T60, 2026-09-25). The plugin releases the model on its
+   * own (idle backstop, app backgrounded) and _warmed used to survive that, so warm() returned early
+   * and the next question loaded cold. The plugin now emits llamaReleased; the flags drop with it,
+   * and a stale flag is re-checked against available().loaded before it is trusted. warm() also
+   * queues through serial() (background priority) instead of racing a question for the engine. */
+  var _relSub = false;
+  function watchRelease(L) {
+    if (_relSub || !L || !L.addListener) return;
+    _relSub = true;
+    try { L.addListener("llamaReleased", function () { _warmed = null; _loadedPack = null; }); } catch (e) {}
+  }
   function warm(packId) {
     var L = llama();
     if (!L) return Promise.resolve(false);
+    watchRelease(L);
     packId = packId || currentPack();
-    if (_warmed === packId) return Promise.resolve(true);
-    return ensureLoaded(packId)
-      .then(function () {
-        // One token is enough to walk the whole graph and fault the weights in.
-        return L.generate({ prompt: "ok", system: "", nPredict: 1, temperature: 0, stream: false });
-      })
-      .then(function () { _warmed = packId; return true; })
-      .catch(function () { return false; });
+    var fresh = function () {
+      return serial(function () {
+        return ensureLoaded(packId).then(function () {
+          // One token is enough to walk the whole graph and fault the weights in.
+          return L.generate({ prompt: "ok", system: "", nPredict: 1, temperature: 0, stream: false });
+        });
+      }, { background: true }).then(function () { _warmed = packId; return true; }, function () { return false; });
+    };
+    if (_warmed !== packId) return fresh();
+    return Promise.resolve().then(function () { return L.available(); })
+      .then(function (a) { if (a && a.loaded) return true; _warmed = null; _loadedPack = null; return fresh(); }, function () { return true; });
   }
 
   function cancel() { var L = llama(); if (L && L.cancel) { try { return L.cancel(); } catch (e) {} } }
@@ -1002,7 +1477,6 @@
   function release() {
     var L = llama();
     _loadedPack = null;
-    _warmed = null;
     _warmed = null;
     if (L && L.release) { try { return L.release(); } catch (e) {} }
   }
@@ -1047,8 +1521,9 @@
    *
    * ponytail: a plain FIFO with one priority tier. A real scheduler would need the engine to
    * support pre-emption, which it does not. */
-  var _running = false, _waiting = [];
-  var JOB_TIMEOUT_MS = 180000;   // a wedged native call must not stall every later one forever
+  var _running = false, _waiting = [], _touchJob = null;
+  var JOB_TIMEOUT_MS = 180000;   // IDLE time: a wedged native call must not stall every later one forever
+  var PAINT_MS = 66;             // live-answer repaint interval (~15/s); see answer()
   function serial(fn, opts) {
     opts = opts || {};
     /* RE-ENTRANCY. answer() calls ITSELF for the blank-answer retry (_retried) and the no-coverage
@@ -1077,6 +1552,7 @@
     function finish(ok, v) {
       if (done) return; done = true;
       if (timer) { clearTimeout(timer); timer = null; }
+      _touchJob = null;
       _running = false;
       if (ok) job.resolve(v); else job.reject(v);
       // Fire-and-forget callers (warm, a background refine whose screen has gone) attach no
@@ -1084,16 +1560,22 @@
       try { job.promise.catch(function () {}); } catch (e) {}
       pump();
     }
-    try {
-      timer = setTimeout(function () {
-        // Free the engine so the rest of the queue can run, and say which call gave up.
-        try { var L = llama(); if (L && L.cancel) L.cancel(); } catch (e) {}
-        finish(false, new Error("on-device generation timed out"));
-      }, JOB_TIMEOUT_MS);
-      // A pending timeout must never be a reason for the host to stay alive (it kept `node --test`
-      // running for the full three minutes, then fired into a finished test). No-op in a WebView.
-      if (timer && typeof timer.unref === "function") timer.unref();
-    } catch (e) {}
+    // The timeout is IDLE time, not total time: with no token cap an answer can stream for many
+    // minutes, and every streamed token re-arms it. A wedged call produces nothing and still trips.
+    function arm() {
+      try {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function () {
+          // Free the engine so the rest of the queue can run, and say which call gave up.
+          try { var L = llama(); if (L && L.cancel) L.cancel(); } catch (e) {}
+          finish(false, new Error("on-device generation timed out"));
+        }, JOB_TIMEOUT_MS);
+        // A pending timeout must never be a reason for the host to stay alive (it kept `node --test`
+        // running for the full three minutes, then fired into a finished test). No-op in a WebView.
+        if (timer && typeof timer.unref === "function") timer.unref();
+      } catch (e) {}
+    }
+    arm(); _touchJob = arm;
     Promise.resolve().then(job.fn).then(function (r) { finish(true, r); }, function (e) { finish(false, e); });
   }
   /** Queue depth, for tests and diagnostics. */
@@ -1184,17 +1666,46 @@
     "\"I can only help with medical and clinical questions.\"";
   var WEB_SYS =
     "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. Answer the clinician's question directly, thoroughly and naturally - the way a sharp, warm senior colleague would explain it, and the way a modern medical AI answers. " +
-    "Draw on solid, widely-accepted medical knowledge for the substance of the answer; the numbered WEB RESULTS below are recent supporting sources - use them to ground specifics (agents, doses, current guidance) and cite the relevant ones inline as [n] matching the list, but do NOT merely summarise the snippets or limit yourself to what they happen to mention. " +
-    "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
+    // Audit T62 (2026-09-25): this used to say "do NOT limit yourself to what the snippets mention"
+    // while webAnswer()'s gate rejects any figure or drug the snippets do not contain, which forced a
+    // second generation or the snippet digest on almost every answer. The prompt now asks for what
+    // the gate checks: explanation from general knowledge, specifics from the results.
+    "Use solid, widely-accepted medical knowledge to explain (mechanisms, reasoning, context), but take every specific - every figure, dose, duration and drug name - from the numbered WEB RESULTS below, citing them inline as [n] matching the list. If the results give no figure for something, say so rather than supplying one. " +
+    "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give doses, routes and durations only as the results state them. " +
     "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer." + MEDICAL_ONLY_LOCAL;
-  var WEB_MAX = 900;
+  var WEB_MAX = 0;   // 0 = whatever the context window has left (owner, 2026-09-21: no token limits offline)
+  /** Tokens the answer may use: the context window minus the prompt, with a margin for the chat
+   * template and the estimator's error. Never below the pack's old default. */
+  /* A BIGGER WINDOW WHEN THE PHONE HAS ROOM (owner, 2026-09-24: "context as big as it permits and
+   * keeps functioning"). The q8_0 KV cache (perf plan #4) halves the cache, so 8192 costs about what
+   * 4096 did in f16. Headroom is still checked against the f16 figure (kvGBat4k): a device that
+   * refuses q8 falls back to f16, and an iOS jetsam kill cannot be caught and retried. No memory
+   * reading means stay at the proven 4096. */
+  var BIG_CTX = 8192;
+  function wantCtx(packId, pk, a) {
+    var base = (pk && pk.nCtx) || 4096, big = (pk && pk.nCtxMax) || BIG_CTX;
+    if (big <= base || pk.kvQ8 === false || pk.flashAttn === false) return base;
+    var avail = (a && Number(a.availableMemory)) || 0; if (!avail) return base;
+    var M = models(), c = (M && M.caps && M.caps(packId)) || {};
+    var extra = (c.kvGBat4k || 0.6) * 1e9 * (big - base) / 4096, need = 0;
+    try { need = (M.totalBytes(packId) || 0) + draftBytes(M, packId); } catch (e) {}
+    // ponytail: margins are estimates (KV is dirty memory, never evicted); retune from device logs.
+    if (a.memoryIsHardLimit) return avail >= need * 1.15 + extra * 1.25 ? big : base;
+    return avail >= need * 0.35 + extra * 2 ? big : base;
+  }
+  function ctxOf(pk) { return (pk && (pk._ctx || pk.nCtx)) || 4096; }
+  function openBudget(pk, system, prompt) {
+    var ctx = ctxOf(pk);
+    return Math.max((pk && pk.nPredict) || 512, ctx - estTokens(String(system || "")) - estTokens(String(prompt || "")) - 256);
+  }
   function generateText(prompt, system, nPredict, opts) {
     var L = llama();
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     var packId = (opts && opts.pack) || currentPack();
     return serial(function () {
       return ensureLoaded(packId).then(function () {
-        return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
+        var pk = (models() && models().PACKS[packId]) || {};
+        return L.generate({ prompt: prompt, system: system, nPredict: nPredict > 0 ? nPredict : openBudget(pk, system, prompt),
                             temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
                             stream: false, prefillEmptyThink: noThinkPack(packId) });
       }).then(function (r) {
@@ -1217,25 +1728,35 @@
     }).join("\n\n");
     var evidenceText = list.map(function (s, i) { return "[" + (i + 1) + "] " + String(s.title || "") + ". " + String(s.snippet || ""); }).join("\n");
     var prompt = "Question: " + q + "\n\nWeb results:\n" + ctx;
-    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
-      if (!text) return { error: "no-answer" };
-      var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+    var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+    function gateOf(text) {
       try {
         var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
-        if (RAG && RAG.evidenceGate) {
-          var gate = RAG.evidenceGate(text, evidenceText, q);
-          if (!gate.ok) {
-            var top = list[0];
-            var shown = String(top.title || "") + (top.snippet ? "\n" + top.snippet : "") + (top.url ? "\n" + top.url : "");
-            return {
-              text: "The on-device model's answer could not be verified against the web results it found " +
-                "(it stated a figure or drug not in them). Showing the top result instead:\n\n" + shown,
-              sources: srcOut, engine: "local", mode: "web-local"
-            };
-          }
-        }
+        if (RAG && RAG.evidenceGate) return RAG.evidenceGate(text, evidenceText, q).ok;
       } catch (e) {}
-      return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+      return true;
+    }
+    /* Owner, 2026-09-21 ("even we search dont show whole topic in detail"): a failed gate used to
+     * throw the whole answer away and print ONE snippet. Now: retry once with a sources-only
+     * prompt at temperature 0; if that fails too, show EVERY result in full, so the clinician still
+     * gets the topic, just quoted rather than written. */
+    function digest() {
+      return "The on-device model's answer could not be verified against the web results, so here are the " +
+        "results themselves:\n\n" + list.map(function (s, i) {
+          return "**" + (i + 1) + ". " + String(s.title || s.site || "Source").trim() + "**" +
+            (s.snippet ? "\n" + String(s.snippet).trim() : "") + (s.url ? "\n" + String(s.url) : "");
+        }).join("\n\n");
+    }
+    var STRICT = WEB_SYS + "\nSTRICT MODE: use ONLY facts, figures and drug names that appear in the numbered WEB RESULTS. " +
+      "Cite [n] after each. If the results do not cover a point, say so instead of supplying it.";
+    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
+      if (!text) return { error: "no-answer" };
+      if (gateOf(text)) return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+      var o2 = {}; for (var k in (opts || {})) o2[k] = opts[k]; o2.temperature = 0;
+      return generateText(prompt, STRICT, WEB_MAX, o2).then(function (t2) {
+        if (t2 && gateOf(t2)) return { text: emphasize(t2), sources: srcOut, engine: "local", mode: "web-local" };
+        return { text: digest(), sources: srcOut, engine: "local", mode: "web-local" };
+      }, function () { return { text: digest(), sources: srcOut, engine: "local", mode: "web-local" }; });
     });
   }
   function generateJSON(prompt, system, nPredict, opts) {
@@ -1308,11 +1829,55 @@
   function opdSuggest(assessment, opts) {
     var a = String(assessment == null ? "" : assessment).slice(0, 8000).trim();
     if (!a) return Promise.resolve({ error: "no-text" });
+    var packId = (opts && opts.pack) || currentPack();
     return generateJSON("=== ASSESSMENT ===\n" + a, OPD_SYS, 900, opts).then(function (p) {
       var out = sanitizeOpd(p);
       out.kind = "opd-suggest"; out.mode = "opd-suggest"; out.engine = "local";
-      return out;
+      return opdDoseCheck(out, a, packId);
     }, parseFailure);
+  }
+
+  /* OPD DOSES ARE CHECKED LIKE ANSWER DOSES (audit T34, 2026-09-25). The differential's treatment[]
+   * came back with drug, dose, route and frequency straight from the model's weights, with no
+   * evidence and no number check, into a prescribing screen. Each treatment line that states a
+   * figure is now checked claim by claim (kb/ai/maik-grounding.js) against the Knowledge Base
+   * passages for the provisional diagnosis, the clinician's own assessment counting as support for
+   * figures they entered. A line whose dose is not supported keeps its drug and loses the dose, with
+   * a note to take it from the Drug Index. No evidence retrieved = no dose is supported. */
+  var OPD_DOSE_NOTE = " (dose: verify in Drug Index)";
+  function stripDose(t) {
+    var head = String(t).split(/\d/)[0].replace(/[\s,;:(\-–]+$/, "").trim();
+    if (head.length >= 3) return head;
+    return String(t).replace(/\S*\d\S*/g, " ")
+      .replace(/\b(?:mg|mcg|g|ml|l|iu|units?|kg|po|iv|im|sc|od|bd|bid|tds|tid|qid|daily|hourly|hours?|days?|weeks?)\b/gi, " ")
+      .replace(/\s+/g, " ").trim();
+  }
+  function opdDoseCheck(out, assessment, packId) {
+    var dosed = (out.treatment || []).some(function (t) { return /\d/.test(t); });
+    if (!dosed) return Promise.resolve(out);
+    var dx = out.provisionalDx || (out.ddx[0] && out.ddx[0].dx) || "";
+    var G = (typeof window !== "undefined") && window.SMD_MAIK_GROUND;
+    var lex = (typeof window !== "undefined" && window.SMD_DRUG_LEXICON) || null;
+    return Promise.resolve(dx ? retrieveGrounding(packId, "treatment of " + dx, dx, null) : null)
+      .then(null, function () { return null; })
+      .then(function (gr) {
+        var passages = (gr && gr.passages) || [], stripped = 0;
+        out.treatment = out.treatment.map(function (t) {
+          if (!/\d/.test(t)) return t;
+          var ok = false;
+          if (passages.length && G && G.groundAnswer) {
+            try {
+              var g = G.groundAnswer(t, passages, assessment, { lexicon: lex, inlineRefs: false });
+              ok = g.claims.length > 0 && g.claims.every(function (c) { return c.status === "supported" || c.status === "clinician" || c.status === "meta"; });
+            } catch (e) { ok = false; }
+          }
+          if (ok) return t;
+          stripped++;
+          return (stripDose(t) || "Treatment") + OPD_DOSE_NOTE;
+        });
+        out.doseCheck = { evidence: passages.length, stripped: stripped };
+        return out;
+      });
   }
 
   /* READABLE EMPHASIS for on-device answers (owner, 2026-09-04: "Answer can show Bold Italic etc
@@ -1428,8 +1993,8 @@
   }
 
   /* ── LONG INPUT (Phase 6) ──
-   * Every pack loads at 4096 tokens (llama_jni.cpp keeps n_ctx deliberately small), whatever the
-   * model card says. A whole patient timeline or a 30-minute dictation does not fit, and silently
+   * Every pack loads at 4096 tokens, or 8192 when the phone has room (wantCtx), whatever the model
+   * card says; windowBudget() reads the size actually loaded. A whole patient timeline or a 30-minute dictation does not fit, and silently
    * truncating it would drop the clinically important tail. So: split on entry, then sentence,
    * boundaries into windows that fit beside the system prompt and the output budget; process each;
    * carry the intermediate result forward. chars/3.6 is a deliberately pessimistic token estimate
@@ -1441,7 +2006,7 @@
     return Math.ceil((s.length - non) / 3.6 + non * 1.2);
   }
   function windowBudget(packId, systemText, nPredict) {
-    var pk = (models() && models().PACKS[packId]) || {}; var ctx = pk.nCtx || 4096;
+    var pk = (models() && models().PACKS[packId]) || {}; var ctx = ctxOf(pk);
     return Math.max(400, ctx - estTokens(systemText) - (nPredict || 512) - 160);   // 160: chat template + margin
   }
   function splitWindows(text, tokenBudget) {
@@ -1612,6 +2177,14 @@
     "(dm/htn/cardiac/asthma/tb/thyroid/epilepsy/ckd/cld/cancer/cva/dyslipidemia/familyHistory/familyDiabetes/familyHtn/familyHeart/familyCancer/familyTb/familyAsthma/tenderness/abdoMass as 'Yes'/'No' if stated).\n" +
     "Habits: alcohol, smoking, recDrug, tobacco as 'Yes'/'No', habitsDetails for details; set habits='Yes' if any is; add top-level \"alcoholDetail\" with the exact amount and type stated.\n" +
     "If ALREADY CAPTURED fields are given, output ONLY additions or corrections from the NEW text; do not repeat captured content.\n" +
+    // Item 13d: ported from the server's _opd-scribe.js negation/time rules (2026-09-19) so an
+    // on-device draft is held to the same standard as the cloud one. The server's per-field
+    // "sources" (verbatim quote + verifySources/flagContradictions) is NOT ported: it doubles the
+    // JSON the small on-device model must hold together across a rolling window of many refines,
+    // and this file has no equivalent of scribeMerge accumulating a sources map across windows.
+    "NEGATION AND TIME - CRITICAL: a symptom or condition explicitly DENIED ('no fever', 'denies vomiting', 'not diabetic') must NEVER be written as present anywhere in emrFields; " +
+    "record it as a pertinent negative in presentHx/pastHx instead (e.g. 'denies fever'). Preserve every stated duration and onset ('fever for 3 days', 'since Monday', 'stopped metformin last month') - never drop it. " +
+    "A medicine the patient has STOPPED is NOT a current medicine - record it as discontinued (pastHx/treatmentReceived), never as an ongoing home medication.\n" +
     "RULES: use ONLY what is explicitly said; NEVER invent a diagnosis, symptom, finding, drug, dose or investigation. provisionalDx ONLY if the clinician stated it. " +
     "ddx = a short reasonable differential FOR THE DOCTOR TO CONSIDER. investigations = tests a clinician would reasonably consider. No prose outside JSON.";
   function sanitizeScribe(parsed) {
@@ -2051,7 +2624,7 @@
   }
 
   var API = {
-    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
+    SYSTEM: SYSTEM, systemFor: systemFor, finishCut: finishCut, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
     // local task layer (2026-09-11)
     TUTOR_SYS: TUTOR_SYS, SURG_SYS: SURG_SYS, MODE_SYS: MODE_SYS,
     estTokens: estTokens, splitWindows: splitWindows, windowBudget: windowBudget, numbersIn: numbersIn, canonNum: canonNum, dropUnsupportedNumbers: dropUnsupportedNumbers, stripIndic: stripIndic, mergeText: mergeText,
@@ -2063,13 +2636,17 @@
     sanitizeAssessment: sanitizeAssessment, sanitizeScribe: sanitizeScribe, scribeMerge: scribeMerge, sanitizeSurgxNote: sanitizeSurgxNote, NEVER_AI_FILLABLE: NEVER_AI_FILLABLE,
     sanitizeIcd: sanitizeIcd, sanitizeReasoning: sanitizeReasoning, sanitizeMaikNext: sanitizeMaikNext, sanitizeMaikExtract: sanitizeMaikExtract, sanitizeAdvisory: sanitizeAdvisory,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, continues: continues, carry: carry, ragQuestion: ragQuestion, routerTopic: routerTopic, routerToks: routerToks, answer: tracked(answer), available: available, currentPack: currentPack,
+    // Retrieval internals, exported for the RAG battery: answer() returns rendered text, so the
+    // only way to assert WHICH passages were chosen (and that their citation metadata survived) is
+    // to call the retriever itself. test/maik-rag-hybrid.test.mjs is the consumer.
+    retrieveGrounding: retrieveGrounding, expansionTerms: expansionTerms, rerankPassages: rerankPassages,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,
     sheetOpened: sheetOpened, sheetClosed: sheetClosed, setIdleMs: setIdleMs,
     vivaJudge: tracked(vivaJudge), opdSuggest: tracked(opdSuggest), parseJsonLoose: parseJsonLoose,
-    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS
+    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS, SCRIBE_SYS: SCRIBE_SYS
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

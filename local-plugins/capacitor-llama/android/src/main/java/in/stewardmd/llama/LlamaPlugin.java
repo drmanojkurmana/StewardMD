@@ -12,6 +12,7 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,7 +24,8 @@ import java.util.concurrent.TimeUnit;
  * reads it from a local path.
  *
  * Methods (Promise): available, load, generate, cancel, release.
- * Events: llamaToken {text}, llamaError {code, message}.
+ * Events: llamaToken {text, count}, llamaError {code, message}. A llamaToken event may carry several
+ * pieces concatenated; {@code count} says how many (see TokenBatcher).
  *
  * No permissions are declared: no mic, no camera, no storage. INTERNET belongs to the host app.
  */
@@ -34,6 +36,45 @@ public class LlamaPlugin extends Plugin {
     private ModelDownloader downloader;
     /** Single thread: llama.cpp contexts are not thread-safe and the engine serialises anyway. */
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
+    /** Delayed cancel+release for a pause that catches a generation mid-answer (audit T59, 2026-09-25). */
+    private final ScheduledExecutorService pauseScheduler = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledFuture<?> pendingPauseRelease;
+    /** Flush timer for {@link TokenBatcher}. */
+    private final ScheduledExecutorService tokenFlush = Executors.newSingleThreadScheduledExecutor();
+    static final int TOKEN_FLUSH_MS = 40;
+
+    /**
+     * TOKEN BATCHING (energy, 2026-09-25), mirrors the iOS TokenBatcher. One WebView JS evaluation per
+     * token was wasted work: JS repaints at most every 66 ms (PAINT_MS in maik-local.js) and only ever
+     * appends {@code text}. The first piece goes out at once, so time-to-first-token is unchanged; later
+     * pieces are coalesced and sent every TOKEN_FLUSH_MS. The caller must flush() before it resolves or
+     * rejects, so the last text always lands before the promise does. Events are sent under the lock,
+     * so they can never reorder.
+     */
+    private final class TokenBatcher implements LlamaNative.TokenSink {
+        private final StringBuilder buf = new StringBuilder();
+        private int count = 0;
+        private boolean sentFirst = false, scheduled = false;
+
+        @Override public synchronized void onToken(String piece) {
+            buf.append(piece); count++;
+            if (!sentFirst) { sentFirst = true; flush(); return; }
+            if (scheduled) return;
+            scheduled = true;
+            try { tokenFlush.schedule(this::tick, TOKEN_FLUSH_MS, TimeUnit.MILLISECONDS); }
+            catch (Throwable t) { scheduled = false; flush(); }
+        }
+
+        private synchronized void tick() { scheduled = false; flush(); }
+
+        synchronized void flush() {
+            if (count == 0) return;
+            String text = buf.toString(); int n = count;
+            buf.setLength(0); count = 0;
+            notifyListeners("llamaToken", new JSObject().put("text", text).put("count", n));
+        }
+    }
+    private static final long PAUSE_GRACE_SECONDS = 20;
 
     @Override
     public void load() {
@@ -140,6 +181,9 @@ public class LlamaPlugin extends Plugin {
          * rather than as no memory.
          */
         long availMem = 0;
+        // totalMem (audit T61, 2026-09-25): lets JS size which model shard to offer, not just
+        // whether one currently fits.
+        long totalMem = 0;
         try {
             android.app.ActivityManager am = (android.app.ActivityManager)
                 getContext().getSystemService(android.content.Context.ACTIVITY_SERVICE);
@@ -147,6 +191,7 @@ public class LlamaPlugin extends Plugin {
                 android.app.ActivityManager.MemoryInfo mi = new android.app.ActivityManager.MemoryInfo();
                 am.getMemoryInfo(mi);
                 availMem = mi.availMem;
+                totalMem = mi.totalMem;
             }
         } catch (Throwable ignore) {}
         call.resolve(new JSObject()
@@ -154,6 +199,7 @@ public class LlamaPlugin extends Plugin {
             .put("debugBuild", isDebug)
             .put("loaded", engine.isLoaded())
             .put("availableMemory", availMem)
+            .put("totalMemory", totalMem)
             // SOFT: availMem is free + reclaimable, and llama.cpp mmaps the weights, so a model
             // larger than this still runs (page faults, not an OOM kill). JS must not hard-block.
             .put("memoryIsHardLimit", false)
@@ -175,13 +221,19 @@ public class LlamaPlugin extends Plugin {
         final int nBatch = call.getInt("nBatch", 512);
         final int nUbatch = call.getInt("nUbatch", 512);
         final int nThreadsBatch = call.getInt("nThreadsBatch", Runtime.getRuntime().availableProcessors());
+        // Perf plan (2026-09-21): q8_0 KV + flash attention (default on), and the optional
+        // speculative-decoding draft. See LlamaEngine.load.
+        final boolean kvQ8 = Boolean.TRUE.equals(call.getBoolean("kvQ8", true));
+        final boolean flashAttn = Boolean.TRUE.equals(call.getBoolean("flashAttn", true));
+        final String draftPath = call.getString("draftPath", "");
         android.util.Log.i("LlamaPlugin", "load: queued " + path);
         worker.execute(() -> {
             try {
-                engine.load(path, nCtx, nThreads, nBatch, nUbatch, nThreadsBatch);
+                engine.load(path, nCtx, nThreads, nBatch, nUbatch, nThreadsBatch, kvQ8, flashAttn, draftPath);
                 android.util.Log.i("LlamaPlugin", "load: resolving");
                 call.resolve(new JSObject().put("loaded", true).put("nCtx", nCtx).put("nThreads", nThreads)
-                    .put("nBatch", nBatch).put("nUbatch", nUbatch).put("nThreadsBatch", nThreadsBatch));
+                    .put("nBatch", nBatch).put("nUbatch", nUbatch).put("nThreadsBatch", nThreadsBatch)
+                    .put("kvQ8", kvQ8).put("flashAttn", flashAttn).put("draft", draftPath != null && !draftPath.isEmpty()));
             } catch (LlamaException e) {
                 emitError(e);
                 call.reject(e.detail, e.err.code);
@@ -264,10 +316,10 @@ public class LlamaPlugin extends Plugin {
             long t0 = System.currentTimeMillis();
             startThermalWatch();
             try {
-                LlamaNative.TokenSink sink = stream
-                    ? (piece) -> notifyListeners("llamaToken", new JSObject().put("text", piece))
-                    : null;
-                String text = engine.generateWithImage(system, user, mmproj, arrPaths, nPredict, temp, seed, sink);
+                TokenBatcher sink = stream ? new TokenBatcher() : null;
+                String text;
+                try { text = engine.generateWithImage(system, user, mmproj, arrPaths, nPredict, temp, seed, sink); }
+                finally { if (sink != null) sink.flush(); }   // the last pieces land before the promise settles
                 call.resolve(new JSObject().put("text", text)
                     .put("ms", System.currentTimeMillis() - t0)
                     .put("images", arrPaths.length)
@@ -298,13 +350,15 @@ public class LlamaPlugin extends Plugin {
             long t0 = System.currentTimeMillis();
             startThermalWatch();
             try {
-                LlamaNative.TokenSink sink = stream
-                    ? (piece) -> notifyListeners("llamaToken", new JSObject().put("text", piece))
-                    : null;
-                String text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, sink);
+                TokenBatcher sink = stream ? new TokenBatcher() : null;
+                String text;
+                try { text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, sink); }
+                finally { if (sink != null) sink.flush(); }   // the last pieces land before the promise settles
                 long ms = System.currentTimeMillis() - t0;
-                call.resolve(new JSObject().put("text", text).put("ms", ms)
-                    .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens()));
+                JSObject out = new JSObject().put("text", text).put("ms", ms)
+                    .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens());
+                try { String s = engine.lastStats(); if (s != null) out.put("perf", new JSObject(s)); } catch (Throwable ignore) {}
+                call.resolve(out);
             } catch (LlamaException e) {
                 emitError(e);
                 call.reject(e.detail, e.err.code);
@@ -339,9 +393,43 @@ public class LlamaPlugin extends Plugin {
         // iOS kills large-footprint backgrounded apps first and Android will trim us too. Dropping
         // the model here is the difference between a resume and a cold restart; mmap makes the
         // reload cheap enough that this is a clear win.
-        engine.cancel();
-        worker.execute(() -> engine.release());
+        //
+        // But cancelling mid-answer throws away a response that might be one token from done (audit
+        // T59, 2026-09-25). If a generation is running, give it PAUSE_GRACE_SECONDS to finish instead
+        // of cutting it immediately - handleOnResume cancels this grace on a short pause (photo
+        // picker, permission dialog, app switcher).
+        cancelPendingPauseRelease();
+        if (engine.isGenerating()) {
+            pendingPauseRelease = pauseScheduler.schedule(this::cancelAndRelease, PAUSE_GRACE_SECONDS, TimeUnit.SECONDS);
+        } else {
+            cancelAndRelease();
+        }
         super.handleOnPause();
+    }
+
+    @Override
+    protected void handleOnResume() {
+        // A short pause must not cut off an almost-finished answer (audit T59, 2026-09-25). The
+        // release was never queued at pause time (only the delayed task above queues it), so
+        // cancelling the future here is enough to let the generation keep running.
+        cancelPendingPauseRelease();
+        super.handleOnResume();
+    }
+
+    private void cancelPendingPauseRelease() {
+        if (pendingPauseRelease != null) {
+            pendingPauseRelease.cancel(false);
+            pendingPauseRelease = null;
+        }
+    }
+
+    /** cancel() + release() queued behind it on the worker, then the released-on-our-own event (T60). */
+    private void cancelAndRelease() {
+        engine.cancel();
+        worker.execute(() -> {
+            engine.release();
+            notifyListeners("llamaReleased", new JSObject().put("reason", "background"));
+        });
     }
 
     private void emitError(LlamaException e) {

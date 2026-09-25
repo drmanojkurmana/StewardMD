@@ -1,3 +1,4 @@
+import "./trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/helpers/opd-router-harness.mjs - the real /api/queue router over an in-memory Firestore, for the OPD
  * route tests (opd-dept-token-routes, queue-no-show-recall, org-clinical-settings, seed-signoff, group
  * snapshots). Same commit semantics as test/neg-auth-org-members.test.mjs: a failed precondition fails the

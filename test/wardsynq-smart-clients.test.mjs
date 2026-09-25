@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-smart-clients.test.mjs - Connected apps (SMART client registration).
  *
  * Routes: GET /api/queue/ward/smart-clients, POST /api/queue/ward/smart-client-save,

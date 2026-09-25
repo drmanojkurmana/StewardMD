@@ -111,7 +111,7 @@
 #thorexRoot .tx-drop-sub { font-size: 12px; font-weight: 500; color: var(--tx-text-2); max-width: 26ch; }
 
 /* 2x2 source cards: camera / library / files / PDF */
-#thorexRoot .tx-src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#thorexRoot .tx-src-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-top: 12px; }
 #thorexRoot .tx-src-card {
   display: flex; flex-direction: column; align-items: flex-start; gap: 0;
   min-height: 44px; padding: 16px 14px; text-align: left; cursor: pointer;
@@ -521,7 +521,7 @@
    ranked differential + AI narrative, inside the same .tx-report-wrap toggle shell as the radiology
    report above. */
 #thorexRoot .tx-corr-form { margin-top: 10px; padding: 16px; border: 1px solid var(--tx-hairline); border-radius: var(--tx-r); background: var(--tx-card); animation: txRise .28s var(--tx-ease) both; }
-#thorexRoot .tx-corr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+#thorexRoot .tx-corr-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
 #thorexRoot .tx-corr-field { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; font-weight: 600; color: var(--tx-text-2); }
 #thorexRoot .tx-corr-field input, #thorexRoot .tx-corr-field textarea {
   font: 600 14px var(--tx-mono); color: var(--tx-text); background: var(--tx-surf-2);
@@ -690,6 +690,24 @@
 #thorexRoot .tx-aidx-field{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin-bottom:10px}
 #thorexRoot .tx-aidx-field .tx-clin-mic{align-self:flex-end}
 #thorexRoot .tx-aidx-go{width:100%;justify-content:center}
+/* QA BUG-001: Ask MAiK glow CTA (mirrors OPD .oe-maik-cta so the AI action reads the same everywhere) */
+#thorexRoot .tx-maik-cta{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:12px 14px;margin:2px 0 0;border:1px solid rgba(124,58,237,.45);border-radius:16px;background:var(--tx-card,#fff);color:var(--tx-text);text-align:left;cursor:pointer;font-family:var(--tx-sans);transition:transform .08s;animation:txMaikBloom 5.5s ease-in-out infinite}
+#thorexRoot .tx-maik-cta:active{transform:scale(.99)}
+#thorexRoot .tx-maik-cta[disabled]{cursor:default;opacity:.7}
+#thorexRoot .tx-maik-glow{display:block;position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;background:linear-gradient(90deg,rgba(99,102,241,.26),rgba(168,85,247,.18),rgba(236,72,153,.26),rgba(168,85,247,.18),rgba(99,102,241,.26));background-size:220% 100%;animation:txMaikAurora 7s ease-in-out infinite}
+body.dark #thorexRoot .tx-maik-glow{opacity:.16}
+#thorexRoot .tx-maik-ico,#thorexRoot .tx-maik-txt{position:relative;z-index:1}
+#thorexRoot .tx-maik-ico{flex:0 0 auto;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);box-shadow:0 5px 14px -5px rgba(124,58,237,.55)}
+#thorexRoot .tx-maik-ico .material-symbols-rounded{font-size:22px;color:#fff}
+#thorexRoot .tx-maik-txt{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+#thorexRoot .tx-maik-txt b{font:800 15.5px var(--tx-sans);color:var(--tx-text);line-height:1.2}
+#thorexRoot .tx-maik-txt span{font:500 12px/1.4 var(--tx-sans);color:var(--tx-text-2);white-space:normal}
+#thorexRoot .tx-maik-cta::after{content:"\203A";position:relative;z-index:1;flex:0 0 auto;font:700 22px var(--tx-sans);color:var(--tx-text-2);line-height:1}
+#thorexRoot .tx-maik-cta[disabled] .tx-maik-ico{animation:txMaikPulse 1.2s ease-in-out infinite}
+@keyframes txMaikAurora{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes txMaikBloom{0%,100%{box-shadow:0 3px 26px -3px rgba(99,102,241,.62),0 0 0 1px rgba(124,58,237,.1)}50%{box-shadow:0 3px 30px -2px rgba(236,72,153,.62),0 0 0 1px rgba(236,72,153,.12)}}
+@keyframes txMaikPulse{0%,100%{opacity:1}50%{opacity:.55}}
+@media (prefers-reduced-motion:reduce){#thorexRoot .tx-maik-cta,#thorexRoot .tx-maik-glow,#thorexRoot .tx-maik-cta[disabled] .tx-maik-ico{animation:none}#thorexRoot .tx-maik-cta{box-shadow:0 4px 18px -8px rgba(124,58,237,.45)}}
 #thorexRoot .tx-aidx-out[hidden]{display:none}
 #thorexRoot .tx-aidx-out{margin-top:10px}
 #thorexRoot .tx-aidx-loading{display:flex;align-items:center;gap:8px;font:600 12.5px var(--tx-sans);color:var(--tx-text-2)}
@@ -704,3 +722,20 @@
 #thorexRoot .tx-firstrun .material-symbols-rounded{font-size:16px;color:#5eead4;flex:0 0 auto}
 @keyframes txBlink{0%,100%{opacity:1}50%{opacity:.42}}
 @media (prefers-reduced-motion: reduce){#thorexRoot .tx-firstrun{animation:none}}
+
+/* Ask MaiK call-to-action — the same aurora glow as the OPD Ask MaiK button. The oeMaikAurora /
+   oeMaikBloom keyframes live in opd-emr.css, which loads earlier on the same page, so they are
+   reused here rather than duplicated. */
+#thorexRoot .tx-maik-cta{position:relative;overflow:hidden;isolation:isolate;display:flex;flex:0 0 auto;align-items:center;gap:13px;width:100%;min-height:64px;padding:14px 16px;margin:10px 0 4px;border:1px solid rgba(124,58,237,.45);border-radius:16px;background:var(--sc-lowest,#fff);color:var(--on-surface,#0f172a);text-align:left;cursor:pointer;transition:transform .08s;animation:oeMaikBloom 5.5s ease-in-out infinite}
+#thorexRoot .tx-maik-cta:active{transform:scale(.99)}
+#thorexRoot .tx-maik-cta[disabled]{cursor:default;opacity:.7}
+#thorexRoot .tx-maik-glow{display:block;position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;background:linear-gradient(90deg,rgba(99,102,241,.26),rgba(168,85,247,.18),rgba(236,72,153,.26),rgba(168,85,247,.18),rgba(99,102,241,.26));background-size:220% 100%;animation:oeMaikAurora 7s ease-in-out infinite}
+body.dark #thorexRoot .tx-maik-glow{opacity:.16}
+#thorexRoot .tx-maik-ico,#thorexRoot .tx-maik-txt{position:relative;z-index:1}
+#thorexRoot .tx-maik-ico{flex:0 0 auto;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);box-shadow:0 5px 14px -5px rgba(124,58,237,.55)}
+#thorexRoot .tx-maik-ico .material-symbols-rounded,#thorexRoot .tx-maik-ico .material-symbols-outlined{font-size:21px;color:#fff;-webkit-text-fill-color:#fff}
+#thorexRoot .tx-maik-txt{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+#thorexRoot .tx-maik-txt b{font:800 15.5px var(--q-sans,system-ui);line-height:1.2}
+#thorexRoot .tx-maik-txt span{font:500 12.5px/1.4 var(--q-sans,system-ui);color:var(--on-surface-variant,#64748b)}
+#thorexRoot .tx-maik-cta::after{content:"\203A";position:relative;z-index:1;flex:0 0 auto;font:700 21px var(--q-sans,system-ui);color:var(--on-surface-variant,#64748b);line-height:1}
+@media (prefers-reduced-motion: reduce){#thorexRoot .tx-maik-cta,#thorexRoot .tx-maik-glow{animation:none}#thorexRoot .tx-maik-cta{box-shadow:0 4px 18px -8px rgba(124,58,237,.45)}}

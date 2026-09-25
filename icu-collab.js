@@ -1071,6 +1071,7 @@
   var _presence = { gid: null, pid: null, timer: null };
   function writePresence() {
     if (!_presence.gid || !_presence.pid) return;
+    if (document.hidden) return;   // ages out via the 60s window in subscribePresence instead
     fs(function (db) {
       var uid = currentUid();
       if (!db || !uid || !_presence.gid || !_presence.pid) return;

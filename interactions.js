@@ -134,27 +134,24 @@
     return out;
   }
 
-  // Greedily assign each subject to a DISTINCT med. Returns the array of med
-  // indices used (in subject order) or null if no distinct assignment exists.
-  // Only used for small subject counts (pair=2, combination<=3), so the greedy
-  // pass over sorted-by-fewest-options subjects is sufficient and stable.
-  function assignDistinct(meds, subjects) {
-    var order = subjects.map(function (s, idx) {
-      return { idx: idx, opts: matchingIndices(meds, s) };
-    }).sort(function (a, b) { return a.opts.length - b.opts.length; });
-    var used = {};
-    var assignment = new Array(subjects.length);
-    for (var k = 0; k < order.length; k++) {
-      var picked = -1;
-      var opts = order[k].opts;
-      for (var j = 0; j < opts.length; j++) {
-        if (!used[opts[j]]) { picked = opts[j]; break; }
+  // Enumerate every distinct product assignment, deduplicating symmetric rules.
+  // A single greedy assignment silently omitted other affected pairs in polypharmacy.
+  function allDistinct(meds, subjects) {
+    var options = subjects.map(function (subject) { return matchingIndices(meds, subject); });
+    var out = [], seen = {}, picked = [], used = {};
+    function visit(depth) {
+      if (depth === subjects.length) {
+        var key = picked.slice().sort(function (a, b) { return a - b; }).join("|");
+        if (!seen[key]) { seen[key] = true; out.push(picked.slice()); }
+        return;
       }
-      if (picked === -1) return null;
-      used[picked] = true;
-      assignment[order[k].idx] = picked;
+      options[depth].forEach(function (index) {
+        if (used[index]) return;
+        used[index] = true; picked.push(index); visit(depth + 1); picked.pop(); delete used[index];
+      });
     }
-    return assignment;
+    if (subjects.length) visit(0);
+    return out;
   }
 
   // Human-readable drug names for a set of med indices (deduped, generic label).
@@ -178,6 +175,11 @@
       monitoring: rule.monitoring || "",
       source: (rule.sourceId && sourceTitles[rule.sourceId]) || "",
       specialistReview: rule.specialistReview === true,
+      sourceUrl: rule.sourceUrl || "",
+      evidence: rule.evidence || "",
+      ruleId: rule.id || "",
+      ruleIds: [rule.id || ""], sourceUrls: rule.sourceUrl ? [rule.sourceUrl] : [],
+      clinicalGroup: rule.clinicalGroup || "",
       ruleType: rule.type
     };
   }
@@ -204,9 +206,23 @@
       coverage: {
         datasetVersion: (IR.version || "") + (IR.generated ? " (" + IR.generated + ")" : ""),
         submittedCount: 0, reviewedCount: 0, classifiedCount: 0,
-        unclassified: [], unchecked: []
+        unclassified: [], unchecked: [], noRuleCoverage: [],
+        datasetAvailable: rules.length > 0, scope: "limited_curated_screen"
       }
     };
+
+    // A taxonomy tag proves identity/classification, not interaction coverage.
+    // Report ingredients that have no subjects in an eligible medication rule.
+    var coveredGenerics = {}, coveredClasses = {};
+    rules.forEach(function (rule) {
+      if (rule.type === "context") return;
+      var subjects = rule.subjects || [];
+      if (subjects.some(function (s) { return s.kind === "class" && s.value.indexOf("epc:") === 0; })) return;
+      subjects.forEach(function (s) {
+        if (s.kind === "generic") coveredGenerics[s.value] = true;
+        if (s.kind === "class") coveredClasses[s.value] = true;
+      });
+    });
 
     // 1. Normalize; entries without a resolved generic are recorded as
     //    "unchecked" (previously silently dropped) so the UI can surface them.
@@ -217,6 +233,10 @@
       var n = normalizeMed(list[i], drugClasses, meddrugsList);
       if (n) {
         norm.push(n);
+        n.ingredients.forEach(function (ingredient) {
+          var tags = drugClasses[ingredient] || [];
+          if (!coveredGenerics[ingredient] && !tags.some(function (tag) { return !!coveredClasses[tag]; }) && result.coverage.noRuleCoverage.indexOf(ingredient) === -1) result.coverage.noRuleCoverage.push(ingredient);
+        });
         if (!n.classes || n.classes.length === 0) {
           if (result.coverage.unclassified.indexOf(n.generic) === -1) result.coverage.unclassified.push(n.generic);
         }
@@ -255,32 +275,20 @@
     result.coverage.classifiedCount = dedupedNorm.length - result.coverage.unclassified.length;
     if (dedupedNorm.length === 0) return result;
 
-    function hasIngredientOverlap(meds, indices) {
-      var seen = {};
-      for (var i = 0; i < indices.length; i++) {
-        var m = meds[indices[i]];
-        if (!m || !m.ingredients) continue;
-        for (var j = 0; j < m.ingredients.length; j++) {
-          var ing = m.ingredients[j];
-          if (seen[ing]) return true;
-          seen[ing] = true;
-        }
-      }
-      return false;
-    }
-
     function push(rule, indices) {
-      // The ingredient-overlap guard stops a SINGLE combination product from
-      // firing a rule against its own ingredients. It must NOT apply to
-      // duplicate rules: two different products that share an active ingredient
-      // IS the therapeutic duplication we want to surface (e.g. a standalone PPI
-      // plus a combination that also contains a PPI).
-      var isDup = rule.type === "duplicate_generic" || rule.type === "duplicate_class";
-      if (!isDup && hasIngredientOverlap(dedupedNorm, indices)) {
-        return; // Exclude invalid self-overlap comparisons/alerts
-      }
+      // allDistinct already prevents a product matching itself. Shared ingredients
+      // between distinct products must not hide their other interacting ingredients.
       var finding = makeFinding(rule, dedupedNorm, indices, sourceTitles);
       var bucket = SEVERITY_BUCKET[rule.severity] || "monitor";
+      if (finding.clinicalGroup) {
+        var pairKey = finding.drugs.slice().sort().join("|");
+        var existing = result[bucket].filter(function (f) { return f.clinicalGroup === finding.clinicalGroup && f.drugs.slice().sort().join("|") === pairKey; })[0];
+        if (existing) {
+          existing.ruleIds.push(finding.ruleId);
+          finding.sourceUrls.forEach(function (url) { if (existing.sourceUrls.indexOf(url) === -1) existing.sourceUrls.push(url); });
+          return;
+        }
+      }
       result[bucket].push(finding);
       if (rule.type === "duplicate_generic" || rule.type === "duplicate_class") result.duplicates.push(finding);
       if (rule.type === "combination") result.combinations.push(finding);
@@ -294,8 +302,7 @@
       if (rule.type === "pair") {
         // Both subjects present, satisfied by DIFFERENT meds.
         if (subjects.length < 2) continue;
-        var pairAssign = assignDistinct(dedupedNorm, [subjects[0], subjects[1]]);
-        if (pairAssign) push(rule, pairAssign);
+        allDistinct(dedupedNorm, [subjects[0], subjects[1]]).forEach(function (indices) { push(rule, indices); });
 
       } else if (rule.type === "duplicate_generic") {
         // Explicit duplicate_generic rules (if any exist in ruleset)
@@ -320,8 +327,7 @@
 
       } else if (rule.type === "combination") {
         // EVERY subject satisfied by distinct meds.
-        var comboAssign = assignDistinct(dedupedNorm, subjects);
-        if (comboAssign) push(rule, comboAssign);
+        allDistinct(dedupedNorm, subjects).forEach(function (indices) { push(rule, indices); });
 
       } else if (rule.type === "context") {
         // Drug/class subject present AND the named context flag is true.

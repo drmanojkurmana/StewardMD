@@ -51,3 +51,51 @@ token-first routing), `smd_opd_storage_mode` (device | shared).
 `xcrun devicectl device process launch --device <id> --console <bundleId>` - but note Capacitor's JS
 `console.*` bridge did NOT reach that channel in testing (only the launch lines did). For UI-path
 questions prefer an on-screen signal (toast) or a real headless-Chrome CDP test over device logs.
+
+
+## GOTCHA - the profile sheet must fit the phone (fixed 2026-09-21)
+`renderProfile()` (the avatar sheet: status, Clinic ID, staff admin, switch, sign out) is a
+centred `.q-sheet` overlay. With nine staff rows the `.q-profile` card grew past the screen; its
+only Close was the bottom button, the tappable backdrop was covered, and the card had no
+`overflow`, so the owner could neither scroll nor close it (screenshot 2026-09-21). Now
+`.q-profile` is capped to `100dvh` minus the safe areas and scrolls inside itself
+(`overscroll-behavior:contain`), and a sticky `.q-profile-head` carries an X
+(`data-q-act="profile-close"`, `aria-label="Close"` so `swipe-back.js` BACK_SEL also closes it on
+Android back). Rule for any new `.q-sheet` card: cap it and give it a header close; a bottom-only
+Close is unreachable the moment the content grows. Tests: `test/opd-profile-sheet.test.mjs`,
+`test/run-opd-profile-ui.mjs` (real queue.css at 390x844).
+
+## Web OPD Flow Board (2026-09-23)
+`opd.html` now enhances the signed-in console with warm neutral surfaces, workspace navigation,
+patient search (name/token/MRN), urgent/over-one-hour filters, and a Flow Board / Rooms switch.
+The stages mirror existing states: To route, Room queue, Consulting, At diagnostics. Checkout
+stays the existing action on a consulting ticket; no invented discharge state is persisted.
+
+The presentation moves the existing permission-gated DOM nodes with their existing handlers and
+payloads, then restores them to their original room positions for Rooms view. Registration,
+routing, vitals/notes, call/start, reorder, priority, diagnostics return, checkout, file labels,
+NFC/scanner, no-shows, billing/pharmacy, clinic management and audit handlers are unchanged.
+The same enhancement supports legacy doctor queues. Search is memory-only (no PHI storage or URL)
+and resets when changing clinics. The recovery switch `localStorage.smd_opd_flow_ui = "0"` plus
+reload restores the original board. All UI CSS is inline; the service-worker cache is bumped.
+
+Regression gates: all `test/opd-*.test.mjs`; `test/run-opd-console-flow-ui.mjs` verifies real DOM
+node/action parity for admin, doctor, nurse, cashier and pharmacy, view switching, diagnostics,
+filter/focus retention, 320-1440px, dark/reduced-motion and fallback. The existing
+`test/run-opd-clinic-billing-ui.mjs` exercises the real mocked router through clinic registration,
+vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both browser suites.
+
+## Protocol tab = clinical protocols + oncology regimens (2026-09-25)
+The EMR Protocol tab is no longer oncology-only: see [[Clinical Protocols]]. Branch chips, a cancer-type
+picker, one search, and an in-tab read-only reader for clinical protocols. Assign exists only on
+oncology rows. The tab needs `smd_kb_protocols` OR `smd_onco_protocols`; with both off it says so.
+Regimens now also load in read-only mode (rows say "view only"); `maybeLoadOncoProtocols(anyMode)`.
+
+## Specialty tab (2026-09-25)
+A "Specialty" tab after Assessment hosts the [[Specialty Kits]] (O&G, Paediatrics, Ortho, Eye, ENT,
+Derm, Psych, Dental). The kit appends composed text to Initial Assessment fields through
+`OPDEMR.kitHost.insert` (the only write) and is disabled until `loadAssessment()` has finished. Flag
+`smd_specialty_kits`. `paint()` now also keeps the tab strip's horizontal scroll across a repaint and
+brings the active tab into view (nine tabs overflow a phone). Gotcha found on the way: `fieldLabel` is
+declared twice in `opd-emr.js` and the later, DOM-reading one wins everywhere; see the kit note.
+

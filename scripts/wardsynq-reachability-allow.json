@@ -35,8 +35,6 @@
     "analyser-results": "The on-premises analyser connector files a received result or a QC run here; it lands on the Laboratory board for a technologist, never on a chart.",
     "analyser-orders": "The on-premises analyser connector asks which tests were ordered on a specimen when an analyser sends an ASTM host query."
   },
-  "knownGaps": {
-    "registries": "A clinician-facing recall register, not machine-to-machine: registry.js names the patients in a cohort who are overdue a review, gated on chart-read authority. It needs a screen and has none. Verified 2026-09-18: nothing under wardsynq/ calls ward/registries. Was wrongly filed under byDesign as \"statutory reporting to an outside registry\"."
-  },
+  "knownGaps": {},
   "untestedRoutes": []
 }

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>quota top-up fixture</title>
+<!-- Host page for test/run-quota-topup-ui.mjs. Real pro-paywall.js; only account.js and the network
+     are stubbed. window.__402 is the server refusal body a /api/followcare/ call answers with, so the
+     402 interceptor inside pro-paywall.js is exercised for real rather than by calling openTopUp. -->
+<script>
+  window.__pro = true;
+  window.SMD_PRO = { isProSync: function () { return true; }, proState: function () { return { pro: true }; }, sync: function () { return Promise.resolve({ pro: true }); } };
+  window.SMD_AUTH = { currentUser: { getIdToken: function () { return Promise.resolve("tok"); } } };
+  window.toast = function (m) { window.__toast = m; };
+  window.__402 = null;
+  // Clinic Messaging never 402s: the OPD queue must keep running when the messaging allowance is
+  // gone, so the queue answers 200 and carries the refusal as `msgQuota`. __queue is that body.
+  window.__queue = null;
+  window.fetch = function (url) {
+    var u = String(url);
+    if (window.__402 && u.indexOf("/api/followcare/") > -1) {
+      return Promise.resolve({ ok: false, status: 402, clone: function () { return this; }, json: function () { return Promise.resolve(window.__402); } });
+    }
+    if (u.indexOf("/api/queue/") > -1) {
+      var b = { ok: true, resolved: true, tickets: [] };
+      if (window.__queue) b.msgQuota = window.__queue;
+      return Promise.resolve({ ok: true, status: 200, clone: function () { return this; }, json: function () { return Promise.resolve(b); } });
+    }
+    return Promise.resolve({ ok: true, status: 200, clone: function () { return this; }, json: function () { return Promise.resolve({}); } });
+  };
+</script>
+</head>
+<body>
+<main style="height:300px">app</main>
+<script src="/pro-paywall.js"></script>
+</body>
+</html>

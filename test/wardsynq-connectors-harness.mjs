@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-connectors-harness.mjs - the shared in-memory hospital for the connector tests (S2, S4, S5).
  * Not a test file itself. Import it FIRST: it installs the module mocks the router needs.
  * Two hospitals: org-wsq (admin, nurse, hr, cashier, doctor) and org-other (its own admin). */

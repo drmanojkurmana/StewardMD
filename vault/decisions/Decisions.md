@@ -5,6 +5,34 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-25 · Radiology images: PROXIED for an in-app viewer, still never STORED
+
+**Decision.** WardSynQ now shows DICOM images inside the app. The server reads them from the hospital's own
+DICOMweb archive (the Imaging connector, `functions/_wardsynq/dicomweb.js`) and passes them to the signed-in clinician:
+`GET /ward/imaging-series` (QIDO-RS series + instances) and `GET /ward/imaging-instance` (WADO-RS, one instance,
+`application/dicom`, `Cache-Control: private, no-store`), both `emr.view`, in `functions/_wardsynq/dicom-viewer.js`.
+The browser names OUR ImagingStudy record id, never a study UID; the UID always comes from this hospital's governed
+row, so another hospital's study is unreachable. PACS address and credential stay server-side. Opening a study is
+audited (`imaging.study.open`); per-image reads are not (a CT is hundreds). The archive's patient header is returned
+only when the caller may read that Patient record.
+
+**Supersedes** "No pixels in WardSynQ" (2026-09-13 P1.10 and S5 "nothing retrieves pixel data") for the VIEWING
+part only. What stays: nothing is written to the record, KV, R2 or any cache; the client (`ward-dicom-viewer.js`)
+holds decoded images in memory and drops them on close (FIFO cap of 48 decoded slices). The launch link into the
+hospital's own viewer is still offered beside it.
+
+**Why.** Radiologists and ward doctors asked to look at the images where they write the report, and many small
+hospitals have no web viewer to link to. Proxying keeps the credential off the device and the study scoped by our
+own governance; storing would make us a PACS (retention, QA, medico-legal custody) and that is not this product.
+
+**Trade-offs / limits.** 48 MB per instance (whole instance in Worker memory), 60 series and 1500 instances per
+study, QIDO 8 s and WADO 20 s timeouts. Client decodes uncompressed little/big endian and JPEG baseline only;
+JPEG 2000, JPEG-LS, RLE and lossless JPEG are refused naming the transfer syntax (open the hospital viewer).
+dicom-parser 1.8.21 (MIT) from jsdelivr with SRI, loaded on first open (dwv is GPL-3.0; cornerstone3D's worker/WASM
+codecs do not suit a Capacitor WebView loading from a CDN). Not a diagnostic-grade viewer (no MPR, no calibration
+checks, no hanging protocols). NOT tried against a real PACS; mocked transport and a synthetic 16-bit CT in
+headless Chrome (`test/run-ward-dicom-viewer-ui.mjs`). **Status:** draft PR, awaiting owner approval.
+
 ## 2026-09-18 · Deferring a payload without deferring the contract (PDF engines off cold start)
 
 **Measured first, because the received wisdom was wrong.** `stewardmd.in` is a MARKETING PAGE (3
@@ -199,6 +227,146 @@ as before. Shipped. Tests: `test/drug-dose.test.mjs` (8), the dose block in `tes
 (4, including "the on-device model is never asked for the number"), and the real-browser
 `test/run-maik-dose.mjs` (9 checks against the shipped bundle).
 
+## 2026-09-24 · Bundle carries subject-appropriate standard textbooks, never specific citations
+
+**Decision.** Owner revised the reference style: not one generic line but the standard textbooks of the
+subject (general medicine Harrison/Oxford Handbook of Clinical Medicine/Davidson; cardiology Braunwald/
+Hurst/Oxford Cardiology; genetics Thompson & Thompson/Emery/Harper; neurology Adams and Victor/Bradley and
+Daroff/Oxford Neurology; ... 23 subjects in `emoji-icons.js` SUBJECTS). Never an edition, chapter or page.
+Labelled "Standard textbooks", not "Source": they are the field's standard texts, not a claim that an
+entry was taken from them.
+
+**How.** `scripts/sanitize-sources.mjs` runs in `build-www.sh` on the assembled www/ (and KB encryption now
+reads the sanitized copies): specific citations in KB data become the entry's subject line (by `system`;
+genetics first), page/pages/chapter fields are emptied, source/reference fields that name any book become
+the subject line, inline citations inside prose are dropped, comments are cleaned too. kb/dist bundles are
+evaluated, rewritten as data and re-emitted with the same wrapper and entry counts; JSON must re-parse; JS
+is rewritten only inside string literals/comments (lexer skips regex/template literals) and must parse, or
+the file is kept and reported. Result on the bundle: 377 files, 0 failures; ~13,700 textbook mentions and
+~15,000 page locators down to 13 intentional leftovers (regex patterns in code, the physician Tinsley R.
+Harrison, the Davidson 1800/1500 insulin rule). The repo keeps its authoring provenance.
+
+**Not covered.** The on-device RAG book (`maik-lite-kb.jsonl`, 38 MB, downloaded from models.stewardmd.in,
+sha256-pinned in `kb/ai/maik-lite-kb-store.js`) is not in this repo; it must be regenerated and re-uploaded
+with its page groups remapped (maik-lite-rag.js uses `rows[].pages` only to cap chunks per page, so opaque
+group ids keep behaviour) and the new sha256/size pinned.
+
+## 2026-09-24 · No textbooks named as sources, no page numbers (copyright)
+
+**Decision.** Owner: "I shouldn't find Harrison or any text book as source but reference, as copyright
+problem, and no page numbers anywhere." Our own copy was rewritten at source (About changelog in home.js,
+About text and demo notes in index.html). Data-driven text (knowledge-base reader footers, "Source:"
+lines, MaiK answers) is scrubbed on the rendered DOM by `emoji-icons.js` (flag `smd_nobooks`, default ON):
+full textbook titles (Harrison, Nelson, Mandell, Campbell-Walsh, Sleisenger, Adams and Victor, Williams,
+Bailey and Love, Murray and Nadel, Sabiston, Oxford Handbooks, Tintinalli, Davidson, Robbins, Guyton,
+Goodman and Gilman, Washington Manual, Kumar and Clark, Katzung, Braunwald's Heart Disease, Fitzpatrick's
+Dermatology, Sherlock, Brenner and Rector, Rockwood and Green, Novak, Sanford Guide...) become "Standard
+medical references"; the bare name in prose becomes "the reference"; p./pp./page/Chapter/Ch. locators are
+removed. Clinical eponyms are protected (Harrison's groove, Fitzpatrick skin type, Braunwald
+classification, Kaplan-Meier, Brenner tumour, Nelson syndrome, Rockwood classification, "Page 2 of 5").
+
+**Trade-off / status.** The shipped knowledge-base DATA still carries the source metadata (about 30,700
+textbook mentions and 41,000 page locators in kb/ files, mostly `kb/dist/*`); nothing displays it, but
+anyone unpacking the app bundle can read it. Removing it from the data is a separate, larger change
+(the RAG and reader code read those fields), not done yet. The underlying question of whether the KB
+prose itself is paraphrased closely enough is a legal review, not a display fix.
+
+## 2026-09-24 · No AI-style dashes in the app
+
+**Decision.** Owner: "remove AI slop like -- AI dashes all over the app without causing malfunction".
+Same rendered-DOM layer as the emoji swap (`emoji-icons.js`, flag `smd_nodash`, default ON). Each dash is
+judged by its neighbours: an aside (X — Y, X—Y, X -- Y) becomes a comma; a range (5—10, 5 – 10) becomes
+5-10 and a tight 7–10 en dash is untouched; an empty value (a lone —, HR: —, —/—) becomes – so empty
+still reads as empty; a dash at the start/end of a text node becomes a comma only when the text continues
+in the neighbouring element. Hyphens, CSS `--vars` and `a--b` are untouched; inputs/code are skipped.
+Also applied to attributes, document.title, dialogs and outbound text (PDF, share, clipboard, notifications).
+
+**Malfunction guard.** Code that compares screen text with the string it rendered would stop matching once
+the text is rewritten (this affects the emoji swap too). The five such sites (search.js scroll-to-result,
+home.js menu match, medlist.js route/frequency chips, opd-emr.js dictation bar) now compare via
+`SMD_EMOJI_ICONS.same()/norm()`, which normalises both sides; without the module they fall back to the
+original comparison. Comparisons on data values (not screen text) are unaffected.
+
+## 2026-09-24 · No emoji in the app: rendered emoji become line icons
+
+**Decision.** Owner: "remove emoji all over the app and replace with icons". ~1,500 emoji sit in 71
+source files, many in non-HTML strings (toasts, textContent, titles, <option>, PDF text), so a source
+rewrite would break them. `emoji-icons.js` works on the rendered DOM instead: an emoji in visible text
+becomes the matching `window.ICONS` line icon (bell, steth, pills, lungs...), status emoji keep their
+colour (green check, amber warn, red cross; coloured circles become solid dots), anything unmapped is
+removed. Attributes (title, placeholder, aria-label, alt), <option> text, document.title and
+alert/confirm/prompt are stripped. Typography (arrows, triangles, check/cross marks, stars, (c)(tm)) is
+kept. User input is never touched. Flag `smd_noemoji`, default ON, "0" restores the emoji.
+
+**Trade-off / status.** The source still contains the emoji; a later clean-up can replace them file by
+file. Not covered: PDF/print text built from strings (jsPDF) and the separate web pages
+(admin/, followcare.html, opd.html), which do not load it. Recovery point: main at c149bb42 (the tag
+push was refused by the session proxy). Tests: `test/emoji-icons.test.mjs`, `test/run-noemoji-ui.mjs`.
+
+## 2026-09-23 · Drug names are links: highlight + monograph-first in MaiK
+
+**Decision.** Owner: every drug name in a question, answer or page is BOLD and opens that drug's
+monograph. Revised 2026-09-24 (owner: "bold and glow for 5 sec ... rather than keep it highlighted
+forever", then "letters to glow in a flow"): no permanent yellow and no box; for 5 s after it
+scrolls into view a gold band flows through the LETTERS left to right (background-clip:text sweep,
+three passes, soft halo) (IntersectionObserver,
+re-armed only after it fully leaves the view) and on hover, then rests as plain bold. Reduced motion:
+a steady glow, no animation. Earlier wording, kept for history: the name was bold yellow and opened that drug's
+monograph (`MEDDB.openComposition`). A MaiK question naming a drug first shows a card: open the
+monograph, Just answer, or answer and don't ask again. `drug-link.js` + generated `drug-lexicon.js`
+(2,213 generics + 180 brands from `data/interaction-rules.json`, public domain), plus the Drug Index
+formulary, `SMD_BRANDS`, and fuzzy spelling for the doctor's own question ("paracetomol"). Surfaces:
+`#maikBody` (MaiK), the ICU MaiK/evidence/AI-discharge sheets, `#sbrefBody` (Knowledge Library with
+its Syndromes, Antibiogram, AWaRe and Guidelines tabs), `#dxOverlay` (disease reader), `#refOverlay`,
+`#abgBody`, `#smdProtoSheet` (chemotherapy protocols), `#smdOncoHome`, `#clinixScroll`, `#surgxScroll`.
+Editors and the Drugs Database itself are excluded. The highlight is a `<span>` (a bare `<mark>` would
+print yellow in exported HTML) with a print rule that removes it; the database is lifted above any
+surface it opens from and restored on close. British/Indian spellings come from api.js `CLIN_SYN`.
+Flags `smd_druglink` and `smd_druglink_ask`, both default ON, "0" to turn off.
+
+**Trade-off / status.** Detection is a lexicon, not the OpenMed tagger: it works offline today, and the
+tagger (still fail-closed, licence unverified) only adds names via `SMD_DRUGLINK.learn()` once enabled.
+Lab analytes (sodium, potassium, glucose) are deliberately not highlighted. Tests:
+`test/drug-link.test.mjs`, `test/run-druglink-ui.mjs` (real app, MaiK send path, Chromium 390 px).
+
+## 2026-09-23 · OpenMed drug + disease taggers wired in, off and fail-closed
+
+**Decision.** Owner: integrate PharmaDetect-TinyMed-65M and DiseaseDetect-TinyMed-65M. `openmed-ner.js`
+runs them on the vendored onnxruntime-web. Pharma feeds extra drug names to claim grounding (stricter
+only: fixes the aspirin-for-paracetamol swap that grounding graded supported). Disease splits a combined
+diagnosis for ICD suggestions (offered, never assigned). Flags `smd_openmed_pharma` / `smd_openmed_disease`
+default OFF.
+
+**Trade-off / status.** The owner's rule (no model unless its exact checkpoint licence is verified
+Apache-2.0) is enforced in code: `licence.verified:false` and null sha256s make every call return []
+without a download. Hugging Face was unreachable from this session. The pipeline is proven on the real
+runtime with a fixture model, not on the real weights. The aspirin gap could also be closed without a
+model by passing drug-DB names (`MEDDRUGS._list`) as `opts.drugs`; not done, owner asked for the models.
+
+## 2026-09-23 · OpenMed: rules now, models only after licence check and benchmark
+
+**Decision.** From the OpenMed catalog (2,255 of 2,266 checkpoints declared Apache-2.0), nothing
+replaces MaiK, MedGemma, Bonsai or the deterministic engines: every OpenMed model is a token tagger.
+Shipped now: `phi-india.js`, OpenMed's India health-ID coverage re-implemented as rules inside
+`redactPHI()` (flag `smd_phi_india`, default ON, "0" restores the old output exactly). It closes real
+leaks: `name@abdm` ABHA Addresses, UPI IDs, PAN, and Aadhaar/phone numbers in Indic digits all used to
+reach the cloud from AI Vision. PII models (ClinicalE5-Small-33M en/hi/te) are BENCHMARK FIRST.
+
+**Trade-off / status.** No OpenMed weights are bundled or downloaded: the per-checkpoint Hugging Face
+licence and the Nemotron-PII dataset licence could not be verified from this session. Full table and
+next steps: [[OpenMed-Evaluation]]. Tests: `test/phi-india.test.mjs`.
+
+## 2026-09-23 · MAiK Cortex (`medmo-4b`) removed from the offline model list
+
+**Decision.** Owner: remove MAiK Cortex from the offline models. The `medmo-4b` entry is gone from
+`PACKS` and `CAPS` in `maik-models.js`, so it no longer appears in the picker or grades. Supersedes
+the 2026-09-18 entry below.
+
+**Trade-off / status.** A phone that had Cortex selected falls back to MxCore (`activePack()` returns
+`maik-mxcore` for an unknown id). A previously downloaded `medmo-4b-q4_k_m.gguf` (2.7 GB) is not
+deleted automatically; it is orphaned on disk until the app data is cleared. Pinned in
+`test/maik-models.test.mjs`.
+
 ## 2026-09-18 · MedMO-4B ships as MAiK Cortex, RAG-connected like every other text pack
 
 **Decision.** The `medmo-4b` pack is labelled **MAiK Cortex** in the offline model list; `actual`
@@ -282,6 +450,75 @@ llama.cpp is also unverified on device.
 **Trade-off accepted:** concept-overlap support (COV_MIN 0.5 of a claim's stemmed content tokens in one
 passage) is a heuristic; it errs toward leaving a correct prose sentence out, never toward keeping an
 unsupported dose in. Tune COV_MIN from the live battery, not from intuition.
+## 2026-09-18 · SUPERSEDES the entry below: ONCQIS is add-on only, SURGX is Pro and residents
+
+**Decision (owner):** ONCQIS and OncoTree are NOT free. Every account gets a **3 day trial**, after
+which they need the **Onco add-on (₹89/mo)**, which any tier may buy. SURGX is NOT free either: it is
+included with **Pro and above**, and with **resident** plans (trainee tier whose verified role is
+resident, plus Co-Resident). CliniX is unchanged: Respiratory free, the other systems Pro.
+
+**Still to build:** `onco` and `surgx` entries in the role x tier matrix (`functions/_features.js` on
+branch worktree-agent-aca63a9e6e54f1648), the 3-day onco trial clock, and the client gates. The copy
+in this branch (website + paywall) already states the new rule, so code and copy must land together
+or the site promises what the app refuses.
+
+## 2026-09-17 · ONCQIS and SURGX free; CliniX one system free, the rest Pro (SUPERSEDED 2026-09-18)
+
+**Decision (owner):** ONCQIS (oncology) and SURGX are included free on every account. CliniX gives
+Respiratory free and locks the other four systems (Cardiovascular, GIT and abdomen, Neurology, Short
+cases) behind Pro.
+
+**How:** ONCQIS and SURGX already had no Pro check in code; only copy changed (website pricing, in-app
+paywall blurbs, and the +₹89 OncoTree + ONCQIS add-on row removed). CliniX: `free: true` on the
+system in `clinix/manifest.json` (data, not code); pure `systemLocked()` / `openPackIds()` in
+`clinix-model.js`; enforced at every door in `clinix-screens.js` (system card, disease/module open,
+resume) and in `loadAllSkills(pro)` so a locked system's skills are not reachable through the skills
+library. Refusals route through `SMD_PRO_NOTICE` ("clinix"). `pro-notice.js` gained a `signin` reason
+so a signed-out reader is asked to sign in instead of being told their connection failed.
+
+**Trade-off:** client-side only. CliniX content ships inside the native bundle, so a determined user
+can read the JSON; same ceiling as every other client gate. Pro here is `SMD_PRO.isProSync()`, which
+with `VERIFY_REQUIRED_FOR_PRO` on (default) means verified (7-day free Pro) or paid; unverified
+signed-up users see the lock immediately, the launch promo does not open it.
+
+**Open for owner:** the App Store product `in.stewardmd.onco.monthly` (Onco add-on, READY_TO_SUBMIT)
+is now unsold; leave it out of the review submission or delete it. Website plan ladder
+(Student/Intern/Resident/Physician Pro/Onco+ at ₹129-799) still differs from the in-app/App Store
+ladder (Trainee/Co-Resident/Pro/Physician/Physician Pro at ₹199-2,499).
+## 2026-09-18 · The paywall sells three plans, and every number on it comes from the server
+
+**Decision:** `pro-paywall.js` opens on THREE cards (Pro / Physician / Physician Pro) with **Physician
+preselected** and the **Annual** cycle preselected. Trainee and Co-Resident sit behind a quiet
+"I’m a student or resident" link: self-selection keeps the default view premium without making a
+cheaper tier unbuyable (the link reveals them, a revealed tier never re-hides, and the CTA follows
+whatever is selected). Each card leads with a per-day figure ("₹21 a day. Less than a samosa, and it
+runs your clinic.") over one benefit line; a sticky bottom bar always names the tier, the amount and
+the period. The Onco add-on is back and is offered on EVERY tier, priced from `plans.addons.onco`.
+
+**Why the honesty rules shaped it more than the conversion playbook.** Three tactics were asked for
+and three were changed:
+1. **Strike-throughs and SAVE% come only from the server’s `regular`** (x12 on an annual card). No
+   `regular`, or one that is not higher, renders nothing. Inventing a "was" price is misleading-MRP
+   territory under Indian consumer law and fails App Store review.
+2. **The CTA does NOT say "Start 7 days free, then ₹7,499/year".** No purchase path here begins with
+   a free period: Razorpay charges on the spot and no StoreKit introductory offer is configured. The
+   bar reads "Subscribe to Physician · ₹7,490/year" with "Cancel anytime" under it. The free access
+   some accounts already hold is still stated by the banner, from `/api/billing/status`.
+3. **The add-on’s "3-day trial everyone gets" renders only if the server sends `addons.onco.trialDays`.**
+   Nothing server-side grants an onco trial today, so the sentence stays off until it does.
+No countdown, no scarcity, no clinical outcome claim, no statistic, and only assistive framing for
+MaiK Voice Scribe ("offers the differentials worth considering"), because a doctor who trusts the AI not to miss
+checks less carefully.
+
+**Trade-off:** the default view hides two real tiers behind a tap, and the strike-through disappears
+entirely if a KV price edit drops `regular`. Both are deliberate: reachable beats prominent, and a
+missing anchor beats a fabricated one.
+
+**Status:** `test/paywall-render.test.mjs` 17/17 (three-card default, preselection, reveal link,
+SAVE% from `regular`, no-`regular` → no strike, CTA text per selection, per-day maths both cycles,
+benefit lines, and every rupee on a card traced back to the payload), `paywall-interceptor` 4/4,
+`paywall-resync` 6/6, `pro-notice` 11/11, `no-ui-emoji` pass, and `test/run-paywall-ui.mjs` 28/28 in
+headless Chrome against `test/fixtures/paywall-sheet.html`.
 
 ## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
 
@@ -5745,7 +5982,7 @@ bug - not re-verified live on device this session.
 
 ## 2026-09-13 WardSynQ P1.10 imaging viewer launch and P1.5 payer adapters (branch p1-rad-tpa)
 - Images open in the hospital's own viewer via `wardsynq.imagingViewer.urlTemplate` (https only; placeholders
-  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged.
+  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged. (Viewing superseded 2026-09-25: proxied, still not stored.)
 - Study-to-order linkage is done at read time (`_wardsynq/imaging-viewer.js` studyForOrder): serviceRequestId, else
   accession equal to the order id the worklist issued, else the order's external identifiers. Exact only.
 - Structured report templates are hospital content (`wardsynq.radiologyTemplates`); report stores template id/version
@@ -6240,7 +6477,7 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   hospital whose org template used it now gets "template_unsupported_placeholder" and no link, stated.
 - Test connection = one `GET <qido>/studies?limit=1`, Accept `application/dicom+json` (PS3.18 10.6), 5 s, no
   redirect. Reports passed/failed, HTTP status, study count; the body is never returned (it names a patient).
-- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged).
+- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged). **Superseded 2026-09-25:** WADO-RS is now read by the in-app viewer, proxied and never stored.
 - NOT verified against a real PACS; mocked transport only.
 
 ### S4 Payers and TPAs (functions/_wardsynq/payer-connectors.js, wardsynq/wardsynq-nhcx-adapter.js)
@@ -8651,6 +8888,170 @@ different facts and are never rendered the same way.
   `section(..., "failed", ...)` state.
 - Not done here: `patient-access.js:441` (the portal's own PatientMessage read) and the sites owned by
   R6-1/R6-3/R6-4/R6-5.
+## 2026-09-18 Purchase tier is separate from verification role (ROLE_GATES_ON)
+
+- Entitlement records now carry `tier` + `tierExp` (what was PAID for: free|trainee|coresident|pro|physician|
+  physicianpro) alongside `role` (WHO they are, from verification). One Trainee price, three trainee roles: PG
+  Logbook needs the role, Scribe needs the tier, Ward Sync needs both. `fulfilPurchase()` used to discard the plan
+  key and grant a flat Pro, so ₹199 and ₹2,499 bought the same thing.
+- Money rule in `purchasePatch()`: a purchase may upgrade and may extend, never downgrade an active higher tier and
+  never shorten an expiry (Trainee bought on top of Physician Pro, or a replayed webhook, must not shrink anything).
+  `tierExp: null` = forever (owner comp) and stays null.
+- Onco add-on (`oncoAddonExp`) is buyable by any tier; the oncology AI extras get a 3-day trial per account started on
+  FIRST USE (`oncoTrialStart`), not signup. ONCQIS/OncoTree reference stays free forever and is not in the matrix.
+- The role x tier matrix in `_features.js` is INERT unless `ROLE_GATES_ON=1` (on top of the existing `FEATURES_ON`);
+  with it off `featureAllowed()` behaves exactly as before. Per-user `featureFlags` and `FEATURE_<KEY>_DEFAULT_ON`
+  still override the matrix. Route-by-route rollout is a later step.
+## 2026-09-18 — Per-patient quota meters (FollowCare/MAiTRI + MaiK Scribe), flag `QUOTA_METERS_ON`
+- FollowCare (7 SMS over 7 days) and a MAiTRI recovery call each cost us ₹10, so they share ONE wallet:
+  1 patient credit = one MAiTRI call OR one 7-day FollowCare course. A Scribe consult costs ₹3-5.
+- `functions/_quota.js` is the meter. KV, keyed `quota:<feature>:<uid>:<YYYY-MM>` for the monthly included
+  allowance (Physician / Physician Pro only: 5 care + 50 scribe, calendar-month reset, NO roll-over) and
+  `quota:<feature>:<uid>:bal` for purchased packs, written with no TTL so purchased credits never expire.
+  Spend order is included first. Concurrency is best-effort read-modify-write, same as `_usage.js`; the
+  documented ceiling is at most one over-granted unit per concurrent burst (₹10), not worth a Durable Object.
+- Enforced only at real spend points: `followcare/enroll`, the doctor-initiated `followcare/voice/call`, and
+  the Scribe `extract` path. Refusal is a 402 `{error:"quota-exhausted", feature, remaining:0, packs, copy}`
+  that the client renders as a top-up sheet. Never a hard lock: one Scribe "consult" is a dictation SESSION
+  (rolling 45-min marker), so the ~120s refine loop is charged once and an open session is never refused.
+- Packs `in.stewardmd.care.25|100` and `in.stewardmd.scribe.50|250` live in `plans().packs` (cfgPrice
+  overridable) and are fulfilled by `fulfilPurchase()` on both the Razorpay and StoreKit paths.
+- Copy is owner-approved value framing and is asserted in tests: no clinical outcome claims, no promise that
+  Scribe cannot miss anything (false, contradicts the App Store "not a diagnostic device" listing, invites
+  CDSCO/FDA medical-device scope, and a doctor who believes it checks less carefully), no invented statistics,
+  no em-dash. The "N patients have not heard from you" line renders only with a real server number.
+- Not wired: the ROLE_GATES_ON access matrix (separate branch), an `unheardCount` source for that line, and
+  the scheduler's own MAiTRI calls (they continue an already-paid episode).
+
+## 2026-09-18 — The "N patients have not heard from you" nudge stays unwired: there is no honest source
+
+Investigated whether the `unheardCount` line in `quotaCopy()` (`functions/_quota.js`) can be made real.
+It cannot, today. Not wiring it is the decision, not an omission. The sentence tells a clinician they
+neglected patients; a wrong number there is worse than no sentence, so it renders only from a real count.
+
+The sentence needs three facts joined: (1) a patient this doctor discharged, (2) in this calendar month,
+(3) with no FollowCare episode. Four stores were checked and none carries all three.
+
+- **`q_tickets` / `q_sessions` (Firestore, OPD queue).** Has the doctor (`q_sessions.doctorUid`,
+  `_queue_engine.js:23,33`), a completion time (`consultEndAt`, `:209`) and a joinable patient key
+  (`decPHI(encMobile)` reproduces FollowCare's `patientKeyHash`). **Killed by retention:** every ticket
+  and session carries `expiresAt` = end of visit day (`_queue_engine.js:36,171`) under a Firestore TTL
+  policy (`docs/queue/smart-opd-queue-design.md:120`, `QUEUE_RETENTION_DAYS` default 2). A month of
+  tickets does not exist to be counted. Also: an OPD visit is not a discharge.
+- **WardSynQ `Encounter` (D1 `wardsynq_record`).** The only durable discharge record: `attendingId` =
+  the syncing session's `doctorUid` (`_wardsynq/migrate-encounter.js:153,191`), `periodEnd` = the real
+  discharge time (`migrate-discharge.js:576-584`), not TTL'd. **Fails on both remaining counts.**
+  (a) Neither `attendingId` nor `periodEnd` is indexed - they live inside the JSON body, and the only
+  read paths are by patient, by id prefix, or a whole-type tenant scan (`db/wardsynq_schema.sql:32-33`,
+  `repository-d1.js:163-168`). One doctor's month = a tenant-wide Encounter scan. (b) **There is no join
+  key to FollowCare.** The Encounter's `patientId` is a pseudonym derived from the MRN
+  (`_wardsynq/opd-identity.js:18-20`); the identity index knows mrn / abha / ticket / ghis-episode and
+  no phone at all (`_wardsynq/identity-key.js:39-51`), and the `Patient` model has no phone field.
+  FollowCare keys patients by `patientKeyHash(hospitalId, last-10-of-phone)` (`_followcare.js:118-126`).
+  Nothing can decide whether a discharged patient already has an episode. Also gated: nothing is written
+  unless the tenant has WardSynQ migration on (`migrate-encounter.js:180`).
+- **`q_patients` / `q_patient_index`.** A registry, not a visit log: org-scoped, no doctor uid, no visit
+  or discharge timestamp.
+- **`fc_episodes`.** Has all four properties (`doctorUid`, `dischargeMs`, an equality-indexed per-doctor
+  query at `_followcare.js:470`, `patientKeyHash`) and is therefore circular: it only knows the patients
+  who already have an episode, which is the set the sentence subtracts.
+
+Second tenant problem even if a join existed: FollowCare's `hospitalId` comes from the doctor's
+self-declared `fc_doctors` binding (`_followcare.js:482`), the OPD org id comes from the org store. The
+two namespaces are not the same string, so the hash would not match even with the phone in hand.
+
+**What would have to be recorded first** (any one of these unblocks it):
+1. The discharge/visit-completion event carries the patient's phone-derived `patientKeyHash` under the
+   same tenant id FollowCare uses - i.e. `patientKeyHash` written onto the WardSynQ `Encounter` (or its
+   identity index gains a phone system) at admission/registration. It is a non-reversible hash, so this
+   adds no new PHI at rest.
+2. **Or** a small per-doctor monthly counter maintained at the discharge write itself: increment
+   `nudge:<uid>:<YYYY-MM>` on discharge, decrement on FollowCare enrol when the episode's
+   `patientKeyHash` matches. O(1) per event, no scan, no month-long retention needed, and the paywall
+   reads one KV key. This is the cheaper option and the one to build.
+
+Either way the count is then folded into the `quota` block of `/api/billing/status` and passed to
+`quotaCopy()`. Until then `unheardCount` is never supplied and the line never renders.
+
+Hardened meanwhile (`functions/_quota.js`): the guard is now `Number.isInteger(n) && n > 0` with **no**
+coercion, so `true`, `"5"`, `Infinity`, `NaN`, `2.7` and `-3` all produce no sentence rather than
+"1 patients discharged this month have not heard from you." Pinned by `test/quota-meters.test.mjs`
+(21 tests, +2) and `test/run-quota-topup-ui.mjs` (27 browser checks, +7: the nudge renders verbatim from
+a real count, exactly once, leading the deck, with no identifier, and vanishes at 0).
+
+## 2026-09-18 — Credit model: one credit = one bounded EPISODE; new prices; web pricing kept out of iOS
+
+Owner decisions, implemented on `nudge-unheard-count`. Still fully inert behind `QUOTA_METERS_ON`.
+
+**1. One credit = one bounded episode, charged once at enrol.** An episode is day 0 the 7-day
+FollowCare SMS/WhatsApp check-in course, day 3 a MAiTRI call *only* if the patient has not responded,
+day 7 a MAiTRI call *only* if there is still no response, plus feedback capture, the ambulance alert by
+WhatsApp/SMS, the doctor-app alert and in-app patient messaging. At most two calls, both conditional on
+non-response. Nothing else in the episode deducts.
+
+This made `followcare/voice/call` a **bug, not a gap**: it was deducting a second credit for the
+doctor-initiated MAiTRI call. That route 404s without an existing `episodeId`, so every call it can
+place belongs to an episode already paid for at enrol - the deduction was double-charging the doctor
+for what they had bought. Removed (`functions/api/followcare/[[path]].js:415`). `enroll` is now the
+only care deduction in the codebase, and `test/quota-meters.test.mjs` asserts exactly that by counting
+the `careCredit(` call sites in the router and asserting the scheduler dispatch path never imports the
+meter. The scheduler-initiated calls that were already unmetered were correct all along.
+
+**2. New prices** (verified live in App Store Connect): `in.stewardmd.care.25` ₹2,499 (was ₹1,099),
+`in.stewardmd.care.100` ₹8,999 (was ₹3,499). Scribe unchanged at ₹999 / ₹3,999. Per-patient copy is
+₹100 and ₹90, and `perUnit` is **derived** from `amount / units` rather than typed, so the two cannot
+drift apart. Rationale in the code: an episode costs us ~₹32 worst case (SMS ₹10 + up to two calls at
+₹10 + ~₹2 of alerts) and ~₹19 typical, so ₹100 holds 55% margin even for a patient who needs both calls.
+
+**3. Web pricing, and why it never appears on iOS.** `quotaPacks()` now carries `amount` (store) and
+`webAmount` (web): care.25 ₹2,199, care.100 ₹7,999. The discount is funded by the payment fee we save
+(Razorpay ~2% against Apple's 15%), not out of margin. Scribe deliberately has **no** `webAmount`, so
+nothing can advertise a discount that does not exist.
+
+The India storefront's anti-steering rules make a "cheaper on the web" hint anywhere in the iOS app a
+straight rejection, and this app is mid-submission. Apple's 2021 anti-steering settlement permits
+telling users about other payment methods *outside* the app, with consent. So the two halves are
+separated **structurally**, not by discipline:
+- The outbound SMS/WhatsApp/email copy is `webUpsellSms()` in `functions/_quota.js`. `functions/` is
+  excluded from the app bundle by `scripts/build-www.sh`, so that string physically cannot reach an
+  iOS screen.
+- The sheet renderer gates every web price on `var webOk = plat() !== "ios";`
+  (`pro-paywall.js` `openTopUp`). On iOS the card shows the App Store price and the store-derived
+  per-patient figure; on the web it shows the web price and the web-derived figure. There is no
+  comparison shown anywhere, on either platform, so there is nothing to steer with.
+
+Asserted three ways: a node test that the in-app refusal copy contains no web price, no `stewardmd.in`,
+and no steering wording, that `pro-paywall.js` reads `webAmount` only behind the platform gate and
+ships no purchase URL; and a headless-Chrome test that re-renders the *same* sheet with
+`Capacitor.getPlatform() === "ios"` and asserts ₹2,499 / ₹8,999 are shown while `2,199`, `7,999`,
+`219900`, `799900` and `stewardmd.in` appear nowhere in the sheet's **markup**, not merely its text.
+
+Tests: `test/quota-meters.test.mjs` 24/24 (+3), `test/run-quota-topup-ui.mjs` 36/36 browser checks (+9).
+
+## 2026-09-18 — Product name is "MaiK Voice Scribe" in every user-facing string
+
+Owner correction. Renamed in the three places a doctor can read it:
+- `functions/_quota.js` pack labels: `"50 Scribe consults"` -> `"50 MaiK Voice Scribe consults"`,
+  `"250 Scribe consults"` -> `"250 MaiK Voice Scribe consults"`. These are what `plans().packs` serves
+  (`plans()` just returns `quotaPacks(env)`), so the paywall, the /billing/plans response and the 402
+  refusal body all pick the new name up from one place.
+- `pro-paywall.js` top-up sheet title: `"MaiK Scribe consults"` -> `"MaiK Voice Scribe consults"`.
+- `pro-paywall.js` Physician tier blurb: `"... FollowCare · Scribe · unlimited billing"` ->
+  `"... FollowCare · MaiK Voice Scribe · unlimited billing"`.
+
+`quotaCopy("scribe")` needed NO change: its approved copy never names the product. The headline
+("Not just a note. A second pair of eyes."), the five lines, the price line and "Consults never expire."
+are unchanged, as instructed.
+
+NOT renamed, deliberately: the internal feature key `"scribe"`, the KV key prefix `quota:scribe:*`, and
+the product ids `in.stewardmd.scribe.50|250`. Renaming any of those orphans every existing purchase and
+every live counter. The App Store display names are the owner's to change in App Store Connect;
+`iap.js` product ids untouched (its only "Scribe" mention is a code comment).
+
+Guarded by a test that walks every user-facing string in the 402 body and asserts that wherever the
+word "Scribe" appears it is preceded by "MaiK Voice", which catches a bare "Scribe", the old
+"MaiK Scribe", and any future half-rename; plus a bundle check that neither old spelling survives in
+`pro-paywall.js`, and a browser check on the rendered sheet.
 
 ## 2026-09-19 — Feature guides run ON the screen (SMD_TOUR engine), and the OTP sheet is a designed screen
 
@@ -8679,6 +9080,493 @@ input is a hidden `#phvCode` over the slots (so the harness and the keyboard bot
 waits for the first-launch guided tour, not just the registration gate, before asking.
 
 
+**CliniX case simulation, 2026-09-19** (owner: *"each student talk english differently how will he
+ask exact question as we programmed? Fix that and in ddx,dx give him 100s of diagnosis and he will
+pickup one and give hints too, and plan also give mcq options so he will select"*). Four decisions:
+
+1. **The patient understands lay English, and still never improvises.** `clinix-lexicon.js` sits in
+   front of the cue matcher: contraction expansion, ~320 lay and Indian-English phrases, a synonym
+   map, stemming and a bounded fuzzy snap that requires the first TWO letters to match (one letter
+   turned "spell" into "swell"). Scoring uses cue specificity, a key-cue boost and a
+   document-frequency rarity TIEBREAK (rarity as a multiplier dragged every score under the
+   threshold). Above `ANSWER_AT` the patient answers; between `SUGGEST_AT` and `ANSWER_AT` it offers
+   a did-you-mean rather than guessing; below that it matches NOTHING and suggests nothing, because
+   a simulated patient answering small talk from a case script is inventing clinical content.
+   `clinix-model.js` keeps `legacyMatchAsk` and uses it when the lexicon is absent.
+2. **Marking counts CONCEPTS, not accept terms.** An accept list carrying "heart failure", "CCF" and
+   "cardiac failure" describes one concept; counting them separately told a student they had missed
+   two things when they had missed none. Missed terms are grouped by `conceptKey` (vocabulary entry,
+   else anglicised string) and a differential is scored on PICKS.
+3. **Breadth is not a differential.** 8+ picks, or unsupported guesses outnumbering supported ones,
+   is marked `shotgun` and fails even when the right answer is in the list. Missing the true
+   diagnosis fails regardless of how many other reasonable ones were named.
+4. **A harmful management choice is disqualifying, not a deduction**, and the result names the
+   option. A case whose model answer is keyword fragments rather than actions ("b12", "treatable",
+   "88" as a saturation target) keeps the written plan: an unanswerable two-option stub is worse
+   than a text box. `ataxia` is currently the only case on that path.
+
+**Physiology sandbox rebuilt** (owner: *"physiology sandbox doesnt work its 1/10 make it 10/10"*).
+Two independent defects, both real. (a) The engine was uncalibrated: nominal sliders gave 70/46 with
+a cardiac output of 3.0, and the Hill denominator was `26.6 * 1000` rather than
+`Math.pow(26.6, 2.7)`, so a PaO2 of 88 read as 87%. **The old test file pinned both as "observed"**,
+which is how they survived, and is the reason a test that pins behaviour must say whether that
+behaviour is CORRECT. (b) `onInput` called `repaint()`, replacing the `<input type=range>` mid-drag,
+so no slider moved. The readout and the controls are now separate regions and only the readout is
+rewritten while dragging; the same fix was applied to the plan MCQ, where a repaint per tick meant a
+student ticking four boxes kept only the first.
+
+The engine is physiology rather than fudge: ventricular-arterial coupling
+(`SV = (EDV - V0) * Ees / (Ees + Ea)`) on the cardiovascular side, and gas exchange solved by OXYGEN
+CONTENT on the respiratory side. Content-based solving is not a refinement, it is the only way a
+shunt behaves like a shunt (at 45% shunt, FiO2 1.0 barely moves the saturation) and that behaviour is
+the entire teaching point of the tab. Ventilation is a fixed point of the chemoreflex line against
+the CO2 hyperbola, subject to a mechanical ceiling, so "a normal CO2 in acute severe asthma" and
+"oxygen retains CO2 in COPD" both emerge instead of being hand-written. Waveforms are seeded SVG
+paths, so a repaint never reshuffles a trace.
+
+## 2026-09-20 — On-device AI models are free for every user; the Pro gate on them is removed
+
+Owner, 2026-09-20 (voice): "Every free user, irrespective of any user or guest user, should have Pro AI models on and available. No Pro needed." This reverses the 2026-08-27 "Pro requires a verified registration" decision for ON-DEVICE answering only. `gateActive()` in maik-engine.js returns true for everyone (no SMD_PRO, no debug-build exception, no bypass key); the settings row and picker never sell Pro for it; the server feature matrix lists `local_ai` under every tier. MaiK Cloud keeps its own gate because tokens cost money.
+
+Why now: the Pro verdict had locked the owner's own phone out of the models (offline-gate PR #1163 fixed the verdict; this removes the dependency). The decision is about access, not cost: an on-device model spends nothing server-side.
+
+## 2026-09-21 · Universal Search replaces the header search panel
+
+**Ask:** "make it search anything inside app, any feature, topic, anything ... and category filters."
+**Decision:** New `search.js` panel over a provider registry; the three legacy listeners on
+`#smdSearchInput` are left in place but never shown (app.js is minified, never edited). Default ON
+with a kill switch (`?usearch=0`), per the 2026-09-04 no-more-flagging instruction; git tag
+`pre-universal-search` is the recovery point. Cases/patients not indexed (PHI). Cmd/Ctrl-K desktop shortcut,
+safe-area 100dvh viewport, race-condition close guard, and individual recent-item deletion are included.
+Schemes, and CliniX/SURGX lazy content are deferred to Roadmap.
+
+
+**MaiK settings: one page, our names, a grade ladder (2026-09-21).** Owner: *"This whole page is
+shit. Make into one single well organised setting and dont name Real Model names only our model
+names."* Four panels (engine, capabilities, pack list, KB toggle) each re-explained the same thing;
+they are now one page that reads as a question and its consequences (who answers, on this phone,
+model library, advanced). Vendor and technique words are gone from every string a clinician can see;
+`actual` in the registry keeps provenance for logs. The four packs that carried a vendor's product
+name are renamed (Prime, Swift, Max, Max 2) with their IDs unchanged so installs survive.
+Grades replace gigabytes and provenance as the way a model is described, on the clinician's own
+ladder: **MBBS** (our own doctor), **MD** (the medical specialists we trained to work as one),
+**DM** (MaiK Cloud, the super specialist), **PhD** (the general models: well read, not a
+physician). Intern/Resident were rejected for the general models because both imply medical training
+those models never had. The grade is derived from the registry (`own`, `caps.medical`), never
+hand-kept, so a new pack cannot land ungraded. The Knowledge Base switch became a positive label
+("Check answers against the Knowledge Base"): a switch whose label reads the state it is NOT in is
+what "Disconnected" with a tick beside it looked like on the phone.
+
+
+**Tours fit every phone, and the first guide is a hands-on demo (2026-09-21).** Owner: *"the tour
+you created doesnt fit the screen it should work and auto adjust on all phone screens and guide the
+user thru a demo like make him use a start a case and see diagnosis of meningitis ... stewardship
+console clinical reasoning everything in a demo to be made step by step by the user so he learns
+after one learn."* Engine (`onboarding.js`): the coach-mark is capped to the VISIBLE viewport
+(`window.visualViewport`, which shrinks for the keyboard; `env(safe-area-inset-bottom)` via a probe
+element) and scrolls inside itself; when neither side of a target has room, `fitTargetAndCard()`
+scrolls the target's own scroll parent so the spotlight sits at the top and the card takes the room
+below, once per step so it never fights the student. A step may ask `place:"above"|"below"|"bottom"`;
+"bottom" pins the card to the foot of the viewport so a search box and its dropdown stay tappable.
+Guides gained hands-on steps: `kind:"tap"` with `done()` (the step advances on its OUTCOME, however
+the student got there, never on a click the engine happened to see), `find()` resolvers for targets a
+selector cannot name (the top infectious card, stewardship card 05), and `gotoScreen()` no longer
+closes and re-opens a screen the student opened themselves (`SCREEN_OPEN`). The demo
+(`DEMO_GUIDE`, first in the chooser) walks the real app: Dx Patient, Add New Patient, type four
+findings (fever, headache, neck stiffness, photophobia, the set that makes `SYNDROMES.MENINGITIS`
+lead), Review differential, the antibiotic gate, open the top card, commit, then six cards of the
+real stewardship console (04 pathogens, 05 empiric antibiotics, 07 stewardship comment, 08
+investigations, 09 de-escalation, 10 evidence). The student's own open findings are parked at the
+start and restored at the end; the demo case, the stewardship page and the workspace are cleared.
+The tour copy never states a dose; the console does, with its source. Pointing hand is an inline
+SVG, not an emoji. Verified in `test/run-feature-guide-ui.mjs` at 320x568, 360x640, 390x844 and
+430x932.
+
+## 2026-09-21 - QA bug sheet: AgentConnect needs written hospital permission before it can be started
+The internal QA sheet (BUG-012, Critical) called the EMR Website Login copy unacceptable: it claimed
+"no IT approvals required" and "zero changes to your hospital's EMR", which reads as a promise that
+the doctor may connect a hospital EMR on their own authority. The feature itself is correct and was
+NOT changed (owner's instruction: "Agent Connect is working correctly dont change any function of
+it just change the wording"). What changed is the wording plus a gate:
+- The card now says the link uses only the access the doctor's own login already has, and that it is
+  for hospitals with a web/online/cloud EMR, used only after hospital administration has permitted it.
+- A full small-font disclaimer sits above the button: permission must come from the hospital
+  administration or the authority that controls the EMR; StewardMD neither obtains nor can confirm
+  that permission; the doctor is responsible for their credentials, for every screen read while
+  signed in, and for hospital IT/privacy policy and the DPDP Act 2023; MAIKNOWLEDGE LLP accepts no
+  responsibility for use without permission.
+- A tick ("I have permission ... and I take responsibility") enables the Start button. The button is
+  disabled and dimmed until then, and the click handler returns early if it is not ticked.
+The existing in-flow consent screen (connect-agent-onboarding.js) is unchanged and still applies.
+
+## 2026-09-21 - The Knowledge Library and the disease reader get CALM glass, not the app-hub aurora
+BUG-011 ("Liquid Glass ... absurd", owner: "fix it properly"). appearance.css painted every
+full-screen root with the same four-blob radial aurora. Behind paragraphs of reference text that is
+noise, and the library's own `.kblib-feature` added a second blurred blob on top of it. The library
+home, the library tool pages and the disease reader now get: one quiet top wash, hairline
+translucent cards on a single radius, blur on the sticky chrome ONLY (no per-row blur - WKWebView
+perf), a segmented tab pill, and no decorative blobs anywhere. The app hubs keep the aurora.
+Also BUG-013: the library home's `<h1>` said "Knowledge Library" directly under the sheet chrome
+that already says "Knowledge Library"; the page heading is now "Find any disease".
+
+## 2026-09-24 — The logbook's numbers are counted, and they say what they counted
+The PG logbook now has an analytics page (`pglog-analytics.js`). Three rules are in the code, not
+just the copy, because a training record that overstates itself is worse than one with no numbers:
+1. Headline figures count VERIFIED entries only, the same rule the progress engine uses, and the
+   unverified remainder is printed on the page rather than quietly dropped.
+2. A rate with no denominator returns null, and below 20 procedures the UI shows "2 of 6" instead of
+   a percentage. `MIN_RATE_N` is the single place that threshold lives.
+3. Complication figures are self-reported training records for reflection and for a conversation
+   with a guide. `DISCLAIMER` travels with every result object and every surface must show it. They
+   are not an audited outcome statistic and must never be presented as one.
+
+## 2026-09-24 — Clinical photographs stay on the device; consent is a gate, not a checkbox
+`pglog-photos.js` encrypts photographs device-local (the SURGX scheme) and adds NO upload endpoint.
+Putting patient photographs on a server is a decision for the institution and the owner, not a side
+effect of a logbook feature. `attach()` refuses without consent AND a de-identification assertion,
+per photograph, with no "remember my answer"; the consent text and timestamp are stored with the
+reference so it can be shown to an examiner. The app strips what it can (a canvas re-encode drops
+all EXIF including GPS) and states plainly what it cannot check: no software here can see whether a
+face is in the frame. The reference carries no filename, because a camera filename can carry a
+patient's name. The cost is that a reinstall destroys them, which is why the Drive backup exists.
+
+## 2026-09-24 — "Automatic" Drive backup means unlocked-this-session, and the UI says so
+The owner asked for auto-sync to Google Drive. A background upload that needs no password would
+mean the key was stored somewhere, which defeats the point of encrypting it. So `pglog-backup.js`
+takes the password once per app session and, while unlocked, backs up on change with a 10-minute
+floor; closing the app re-locks it. The backup holds only what exists nowhere else (drafts, queue,
+photographs) — verified entries stay on the server, because copying them into a file the resident
+can edit is how a logbook stops being evidence.
+
+## 2026-09-25 — Stores/pharmacy stock gets OPT-IN pack-size conversion; the "no unit conversion" rule narrows, it does not fall
+stock.js, purchasing.js and stores.js said "UNITS ARE NOT CONVERTED" since they were written: guessing
+that a box is twenty-eight tablets produces a confident number that is wrong by a factor of twenty-
+eight, and that mapping was a product catalogue the build did not have. It still does not GUESS. What
+changed is that an item can now SAY the mapping itself: `StoreItem.packs` (general stores only, not a
+pharmacy drug's own record - no drug item master exists yet) declares
+`[{ unit: "strip", of: 10 }, { unit: "box", of: 10, packUnit: "strip" }]`, positive integer factors
+only, packs may chain, a cycle or an unresolved reference is refused at the item level
+(`stock.js: validatePacks`) before anything is ever received against it, and an item with no `packs`
+behaves exactly as it always did - this is additive, not a relaxation of the old rule. Receiving in a
+declared pack unit converts to the base unit before the movement reaches the one ledger (stock.js's
+own invariant: stock, reorder levels and valuation stay in the base unit, never a pack); what was
+actually counted at the hatch is kept alongside as `receivedAs`, and `dualDisplay()` reads it back as
+"25 strip (250 tablet)". Valuation divides the ordered line's own price by the pack factor into
+integer paise (rounded, comment states the rounding) rather than carrying a second price field that
+could drift from the first. `pharmacy-dispense.js` deliberately gained NO conversion: a dispense is an
+issue, and issues were never re-entered in a different unit even before this - if a drug item master
+grows `packs` one day, that conversion still belongs at the point of receipt, not dispense.
+ward.js's purchasing screen (`poReceive`) reads the general stores item master once so the unit prompt
+can offer an item's own declared packs instead of a blind box/strip/vial guess, and shows the server's
+`packDisplay` back after a receipt books in.
+
+## 2026-09-25 — A Cloudflare Access identity counts only when its JWT verifies
+Roughly 25 routes (queue, wardsynq, connect incl. super-admin, license, billing, push, cases, and the
+coarse gates of experimental/fundx/followcare/icd/schemes/retrieve) took `Cf-Access-Authenticated-User-Email`
+at face value, and /api/ai (T28) accepted any value in `Cf-Access-Jwt-Assertion`. Both are plain request
+headers on a route Access does not front. `_fbauth.js cfAccessEmail(request, env)` now verifies the
+assertion (RS256 against `https://<team>/cdn-cgi/access/certs`, iss, aud, exp) and takes the email from
+its claims; both `identify()` helpers and every gate go through it. Access identity is OFF unless
+`CF_ACCESS_TEAM_DOMAIN` and `CF_ACCESS_AUD` are set. In-process test suites opt back into header trust
+with `test/helpers/trust-cf-access-header.mjs` (a global nothing in `functions/` sets).
+
+## 2026-09-25 — One profile form, one institution directory
+Reported from a device: "all cities in India not covered and all medical colleges and hospitals not
+covered, and bug can't see and can't search college, and why two times institution is asked, I need
+one unified institution/hospital directory." Four separate faults, three of them real bugs.
+
+1. **Two forms.** `email-auth.js` asked a new doctor at sign-up for name/state/city/hospital against
+   `SMD_GEO` (107 hospitals, 184 cities); `profile-setup.js` then asked the SAME doctor on the next
+   app start for "college / hospital" against `SMD_HOSPITALS` (2,405 entries). Two questions, two
+   answers, two lists that disagreed. `profile-setup.js` is now the only form and asks the whole
+   profile once (name, phone, state, city, institution, degree, speciality). `email-auth.js`
+   delegates to it; its own form, typeahead and save were deleted rather than left as a second copy.
+   Both wrote the same Firestore doc already, so no profile is orphaned.
+
+2. **The college picker never opened.** `profile-setup.js` called the bare global `smdLazy(...)`,
+   but `lazy-load.js` is NOT among the scripts `index.html` loads, so the call threw ReferenceError
+   inside the click handler and nothing happened. The field looked focused and did nothing — that is
+   the "can't see and can't search college" report. It now loads the script itself when the helper
+   is absent. **Never reach for a global the page does not definitely define.**
+
+3. **The picker rows were invisible in dark mode.** `.pfs-opt b` and `.pfs-opt span` took their
+   colour from `--hink` / `--hmut`, the LIGHT theme's near-black, on a card the dark block had
+   already repainted `#111b2e`. Labels were black on black while the `--hbd` borders stayed light,
+   which is exactly what the screenshots showed: bright separator lines and no text. Every colour
+   inside the sheet is now restated under `body.dark`; the harness asserts a contrast ratio >= 4.5
+   (it measures 14.6) so this cannot regress silently.
+
+4. **Coverage.** `institutions-in.js` is the single directory. It does not copy the curated lists —
+   it reads whichever are loaded and merges them de-duplicated on normalised name+city, so the
+   curated data keeps living in one file each (2,462 institutions after the merge). What it adds is
+   the geography those lists lacked: every district headquarters of every state and UT, 1,241
+   entries against the previous 184, with no state left empty.
+
+**What "covered" is allowed to mean.** India has ~780 NMC medical colleges and on the order of
+70,000 hospitals. No bundled list is ever complete, and a picker that silently lacks your hospital
+is worse than one that admits it. So: cities are bounded public geography and are complete;
+institutions are curated and are NOT claimed to be exhaustive; free text is a first-class answer
+that is always offered; and what a doctor types is remembered on that device so the next colleague
+at the same hospital finds it. That last part also shows the owner what the curated list is missing.
+
+## 2026-09-25 — The India directory was in the build all along; three faults kept it from the app
+Owner: *"we already have whole india college and hospital list, why isn't it universally available
+in app."* They were right. `hospitals-in.js` has carried 2,405 curated institutions for a long time.
+Three separate faults meant only two screens could ever reach it, and one of those was broken too.
+
+**1. A GLOBAL NAME COLLISION, and it broke BOTH modules.** `hospital-registry.js` (the registry of
+hospitals this doctor has CONNECTED: `list/get/register/setActive`) and `hospitals-in.js` (the
+DIRECTORY of institutions in India: `all/search/byState/states`) both assigned
+`window.SMD_HOSPITALS`. The registry loads on every page; the directory is lazy. Proven in the
+running app:
+  - before the directory loads, `SMD_HOSPITALS.search` is `undefined`, so every picker found nothing;
+  - the moment it loads, `SMD_HOSPITALS.setActive` **disappears**, so `ghis-ward.js:334` silently
+    stopped remembering the doctor's active hospital.
+Each module broke the other, depending only on timing. The directory now owns
+`SMD_HOSPITAL_DIRECTORY` and claims the legacy name only when nothing else holds it.
+
+**2. `smdLazy` IS NOT DEFINED ON THE PAGE.** `lazy-load.js` is not among the scripts `index.html`
+loads, yet `home.js`'s hospital picker and `profile-setup.js` both called the bare global. Both
+threw ReferenceError inside their click handlers, so the picker never opened. This is the same
+root cause as the "can't see and can't search college" report. **Never reach for a global the page
+does not definitely define** — both call sites now load the script themselves.
+
+**3. NO UNIVERSAL ENTRY POINT.** Reaching the list meant knowing three private details: which file
+to lazy-load, which global it lands on, and that a different module owns that name. So only the two
+screens whose authors happened to know all three could use it. `SMD_INSTITUTIONS.ensure()` is now
+the one line any surface calls; `institutions-in.js` is tiny and loads with the app, and it pulls
+the heavy data in itself.
+
+**The lesson worth keeping:** "we already have the data" and "the app can use the data" are
+different claims. A dataset reachable only through undocumented private knowledge is, from every
+other screen's point of view, not there at all. The test that matters is not "does the file exist"
+but "can a screen that knows nothing get it in one call".
+
+## 2026-09-25 - Geometry and slice images are never overwritten in place
+The Living CT 3D body failed on every native install without cached geometry from 2026-09-06 to
+2026-09-25: re-meshed chunks were uploaded to R2 under the old filenames while the manifest that
+matched them sat on an unmerged branch, and native builds check chunk sizes against their BUNDLED
+manifest. Rule: 3D chunk filenames carry their content hash (`pack3d.mjs`, `bp3d_import.py`), and
+2D slice images (served `immutable` for a year) are never rewritten; new stacks go under
+`atlas/<id>/v2/`. Upload new R2 objects before shipping the build that names them; never delete
+the old keys. Tests enforce both.
+
+## 2026-09-25 - RadioAnatome shows radiological convention by flipping at display time
+Files stay as the pipeline wrote them (the 3D cut planes texture the same images); `flipX`/`flipY`
+in `modules.json` mirror at display time. Edge letters only where anatomy proves the side
+(`docs/radioanatome/ORIENTATION.md`); no cadaver module asserts left/right. Clinical notes
+(`atlas/notes.json`) ship ai_drafted behind `smd_atlas_notes` (default OFF), like CliniX/SURGX.
+Shared 3D snapshots carry the CC BY credit inside the PNG, since CC BY 4.0 requires attribution on
+redistribution; the on-screen rule (attribution only on the About screen) is unchanged.
+
+## 2026-09-25 - Living neck CT: one command per TotalSegmentator subject, axes from anatomy
+`ct-live-neck-*` (s0021, `ct neck`, contrast) and `ct-live-thorax-neck-*` (s0897, `ct thorax-neck`,
+unenhanced) are built by `atlas-pipeline/tsd_living.py`, which measures each axis from the masks
+(C2 vs T4; trachea vs cord; descending aorta, SVC, brachiocephalic trunk course and heart, compared
+level by level) and re-indexes the CT into the torso convention before cutting, so every downstream
+tool (orient, reformat, living.py proofs, flipX) is reused unchanged. Masks mapped to null are
+dropped before the crop and slice pick: the first build spent 8 of 48 axial slices on the brain.
+New canonical ids (trachea, thyroid, neck vessels, right upper lobe) are 2D only for now: listed in
+`bp3d-map.json` `_pending_3d`, not mapped by name similarity. The 3D layer was out of scope.
+
+## 2026-09-25 — The offline clinical bundle is the drug database's search fallback, not just its detail source
+
+**Context.** QA reported "No drugs match Cefiderocol" (BUG-002). Investigation found the monograph was
+already shipped and already renderable; what did not exist was any way to *search* the 1,541 molecules
+in `data/offline-clinical.json.gz`. The server's `/search` is a brand-catalogue search and structurally
+cannot find a molecule with no Indian brand, and `/monograph` returns `found:false` for every molecule
+in production because the `monographs` table was never loaded.
+
+**Decision.** Ship a small separate index (`data/clinical-index.js`, name + class + tags, 331 KB) and
+have `api.js` fall back to it whenever the server returns nothing. The index is generated FROM the
+shipped bundle, not from `worker/data/gold/`, so it can never advertise a molecule the app cannot open.
+
+**Rejected:** bundling the 13 MB gold corpus as a client search index (too large, and a second copy of
+the same content that would drift); regenerating `offline-clinical.json.gz` from SQL to pick up the 104
+missing records (rewrites rows that currently match prod, needs the sqlite3 toolchain, and is not
+reversible in review). Instead the 104 ship as an additive supplement that merges under the bundle.
+
+**Consequence.** Search results can now include a molecule with zero brands. It is labelled
+"monograph" rather than "0 brands", which would read as "not available".
+
+**Still open.** `api.js` `goldFor()` / `window.SMD_GOLD_MONOGRAPHS` remains dead code pointing at
+`data/gold-monographs.js`, a file that has never existed in this repo. Either delete it or build it.
+
+## 2026-09-25 — Save Case and Patient Safety are one panel, and the patient is described once (BUG-019)
+
+**Context.** The two cards were reported as looking generic / AI-generated. Rendered side by side they
+were the same template twice (white card, coloured top rule, eyebrow, icon, title, subtitle) and BOTH
+asked for Age and Sex, to the point where the safety card's subtitle apologised for it: "Age and sex
+stay in sync with Save Case." A UI explaining its own duplication is the defect.
+
+**Decision.** When the safety card is present, draw the two as one panel (`:has(~ #smdSafetyCard)`)
+and hide the Save Case copy of Age/Sex. The inputs stay in the DOM: `app.js` clears `#scpAge`/`#scpSex`
+on every new case and `reasoning.js smdSyncAgeSex()` keeps them in step, so deleting them would break
+saving. `app.js` is a built artifact here and is not safely editable.
+
+**Consequence.** Age and Sex are asked once, in the card that is actually about the patient. Where
+`:has()` is unsupported the rules do not apply and the old two-card layout stands.
+## 2026-09-25 - General clinical protocols live in the Knowledge Library, not the OPD Protocol tab
+Owner asked for protocols for every subject (sepsis and the rest), noting the OPD Protocol tab only
+has oncology. The OPD tab stays oncology-only: it ASSIGNS a dosed chemotherapy plan to a patient
+record (`smd_onco_protocols`), and mixing reference protocols into it would blur "reference" with
+"order". General protocols are reference content in a fifth Knowledge Library tab ([[Clinical
+Protocols]]), reachable from Universal Search and deep-linkable (`SMD_KBPROTO.open({id})`) if the OPD
+later wants a read-only link.
+Content is data (one JSON per protocol) with a validator that makes the unsafe states unrepresentable:
+no protocol without a cited https source, no "reviewed"/"approved" without a named reviewer, no em or
+en dash, no unknown keys. Everything shipped is `ai_drafted` (AI-assisted, web-researched against the
+cited guideline) and every screen says it is pending clinical review; that label changes only when a
+clinician reviews a protocol and the file names them. Flag default ON because the tab is additive and
+honest about its status; `?kbproto=0` removes it.
+
+## 2026-09-25 - Amended the same day: the OPD Protocol tab lists clinical protocols too
+The owner sent a screenshot of the OPD Protocol tab ("Search &amp; assign", oncology only) and asked for
+the protocols there, with a branch filter and working search. So the tab is now one list of clinical
+protocols + oncology regimens. The earlier concern (reference vs order) is kept by the UI, not by
+separation: clinical rows open a read-only reader in the tab and have no Assign; only oncology rows can
+Assign, and that still creates a DRAFT plan the ONCQIS tab must confirm. Also fixed: the double-escaped
+"&amp;" header, em dashes and the placeholder dash under every regimen, a search that missed cancer
+types written with spaces ("breast cancer" vs `breast_cancer`) and drug names, and a read-only profile
+that sat on "Loading the protocol library..." forever (the loader required write mode).
+
+## 2026-09-25 - International and India protocols are separate files, not one file with two columns
+Owner asked for international-guideline protocols as well. 138 of the first 156 were already built on
+international guidance; 18 were built on Indian national programmes (NCVBDC, NTEP, NCDC, MoHFW...).
+Where both exist and differ (malaria primaquine dose, TB regimens, rabies schedules, GDM criteria), a
+single protocol with "India says X, WHO says Y" on every line is hard to follow at the bedside. So each
+guideline family gets its own file (`basis`), paired by `counterpart`, with a filter and a one-tap link
+between them. A protocol is never silently a blend: its primary source decides its basis.
+
+## 2026-09-25 - Specialty kits write into the existing assessment, not a new schema
+The owner asked what would make the app useful beyond surgery, medicine and critical care, then asked
+for the O&G and Paediatrics kits first and all eight completed ([[Specialty Kits]]). A kit could have
+had its own saved record per specialty, but GHIS/EMR saves one Initial Assessment form, and a second
+record would need a server schema, sync and a second Save that doctors would miss. So a kit is a
+structured front end to fields that already exist: sections compose only what was filled and APPEND it
+to a named assessment field, and a few values fill single form fields (LMP, weight, hydration). Nothing
+is saved until the doctor saves the assessment; the kit is disabled until that form has loaded, because
+loading it replaces every value. Tools whose answer is a number (WHO z-scores, ACOG redating, WHO vision
+and hearing grades, PASI, DMFT) are computed in code and tested against the publishers' own examples
+(WHO's anthro README cases and all 2101 z-scores of the WHO 2007 survey), not written by a model at run
+time. The WHO growth numbers are taken from WHO's official R packages' data tables, which are identical
+to the who.int expanded tables; no package code is used. Picking a kit also picks the matching MaiK
+Scribe template. Everything is `ai_drafted` and says so; flag default ON because it is additive.
+
+
+## 2026-09-25 - "Every branch" list: phone-only work first, server work second
+The owner ticked 42 of 44 proposals and wrote "do all which need server first then all server needed
+works as second wave". Read as: first everything that needs no server, then the server items as a
+second wave (the sentence only parses that way with "all server needed works as second wave"). Told
+the owner that reading. Wave 1 is built; wave 2 is in [[Roadmap]].
+
+## 2026-09-25 - Documents and handover are never stored; review decisions leave by file
+Certificates, consent forms, MLC letters and the I-PASS handover hold patient identifiers. They are
+filled in memory, printed or shared by the doctor, and dropped on close ([[Clinical Documents]]), so
+there is no PHI at rest to secure, sync or delete. The Reg. No. prints only when the app verified it;
+a typed one could be anyone's. The [[Review Desk]] keeps content ids and comments only, and a reviewer's
+decisions reach the repo as an exported file the owner applies with `scripts/apply-reviews.mjs`, which
+never downgrades an approved item and needs `--accept-unverified` for an unverified reviewer. Server
+sync of either is wave 2.
+
+## 2026-09-25 - Reference numbers from a source file, not from the model
+Every number a wave 1 tool uses (LA mg/kg and ceilings, Lund and Browder columns, WHO Labour Care Guide
+alert values, notifiable list, MCCD modes of dying) sits in `kb/specialty-kits/src/data-*.json` with its
+source and a `verified` note saying how it was read, and the maths is tested against hand-worked
+published values. Where a source was silent the tool is conservative: the LA dose counts nobody above
+70 kg (Williams and Walker 2014) because the with-adrenaline rows have no mg ceiling; MCCD Part I has
+three lines because India's Form 4 has three, not WHO's four.
+
+## 2026-09-25 - Wave 2 sharing: server-side, verified doctors only, sealed, off by default
+[[Colleagues]] could have extended the client-side Firestore patterns (`referrals.js`, `sharedCases`),
+but those store patient data readable by rules, and `referrals.js` puts the full ICU entry in Firestore
+unencrypted. So wave 2 is one server route family (`/api/kits`) with deny-all collections: every write is
+validated on the server, patient data only moves between registration-verified doctors (both ends
+checked from Firebase claims), everything clinical is AES-GCM sealed with the existing PHI key, pushes are
+fixed text, and the patient's record number never leaves a POST body (history is keyed by an HMAC under
+an HKDF-derived key). Identity is the verified ID token only; the older `identify()` that also trusts a
+bare Cf-Access email header is deliberately not used. A hospital's kit version is published by the
+org owner or an `admin`/`pg_hod` member who is also a verified doctor, without adding a new capability
+to `_queue_roles.js` (a central security file). Kit history is per doctor, not per hospital, until a
+hospital asks. The whole thing is off twice (server env and client flag) until the owner approves.
+
+## 2026-09-25 — The icon font is bound once, globally, not per module
+
+**Context.** A sweep for layout overflow turned up the NMC eLOGBook setup screen rendering the words
+"school", "draw", "chevron_right" and "close" instead of icons. `redesign-system.css` only
+*declared* `@font-face { font-family: 'Material Symbols Rounded' }`; nothing bound the utility
+classes to it outside two module scopes (`queue.css #smdQueue ...`, `oncotree.css .ot-overlay ...`).
+Seven modules never bound it: pglog, thorex, sknx, onco-iotox, onco-recist, onco-nurse,
+onco-protocols. Their icon spans computed `font-family: Inter` and printed the ligature name.
+
+**This would not have been caught by checking that the font loaded.** `material-symbols-rounded.woff2`
+returned 200 and `document.fonts.check()` returned true while the screen showed words. The check that
+works is the computed `font-family` on the span, and its rendered width: a glyph is about one em, the
+word "chevron_right" is about six.
+
+**Decision.** One base rule in `redesign-system.css` binds `.material-symbols-rounded`,
+`.material-symbols-outlined` and `.material-symbols-sharp` to the self-hosted face, at the lowest
+useful specificity so every existing scoped declaration still wins. Adding a module no longer means
+remembering to re-declare it. `test/run-icon-font-ui.mjs` asserts it across the modules that have no
+binding of their own.
+
+**Also found.** `onco-iotox.js` used `icon: "liver"` for hepatitis. Verified against the bundled
+woff2 that neither "liver" nor "hepatitis" is a ligature in it, so it rendered as the word. Changed
+to "labs", which is present, is how irAE hepatitis is actually followed, and is not the
+"gastroenterology" glyph colitis already uses.
+
+## 2026-09-25 — Measure the overflow, do not mass-replace `1fr`
+
+**Context.** After the Quick Facts overflow (BUG report on the Electrolytes card), the obvious move
+was to replace every bare `1fr` grid track in the repo with `minmax(0,1fr)`. There are ~150 of them.
+
+**Decision.** `1fr` is only a bug when the content cannot shrink, so the sweep measures instead: a
+grid or flex row whose `scrollWidth` exceeds its own `clientWidth`. Across 31 surfaces that found
+exactly two, both fixed above; the rest of the `1fr` tracks were left alone.
+
+**The detector had to be validated before it could be trusted.** Two earlier versions reported the app
+clean: one flagged closed off-canvas drawers and missed the real bug because a vertical
+`overflow:auto` ancestor masked it; another rescanned stale DOM because Escape does not close these
+overlays, so every surface returned the previous one's result. Both would have supported "no other
+page has this bug". The working version is checked against the known Electrolytes case with the fix
+reverted, and is clean with it restored.
+
+**Consequence.** `.oh-quick`'s first fix (`overflow-wrap:anywhere`) measured as fixed while wrapping
+"Interactions" to "Interaction" + "s" on screen. A single word should not break; the label fits at
+its existing size once side padding drops from 6px to 4px. A metric improving is not the same as the
+screen improving, and the screenshot is what settles it.
+
+## 2026-09-25 — Every grid column track is minmax(0,1fr), repo-wide
+
+**Context.** The measured sweep fixed only the two grids that were actually overflowing and left ~150
+bare `1fr` tracks alone, on the reasoning that `1fr` is only a bug when content cannot shrink. Owner
+asked for all of them.
+
+**Decision.** 168 declarations across 46 files rewritten by a parser, not a find-and-replace: an `fr`
+already inside `minmax()` is skipped (so `repeat(auto-fill, minmax(120px, 1fr))` survives), only
+`grid-template-columns` / `grid-auto-columns` are touched (row tracks are a vertical concern, not this
+bug), and a value that is entirely a `var()` is left alone. The parser was self-tested on ten shapes
+first. `minmax(0,1fr)` can only remove a minimum, never add width, so it cannot introduce overflow;
+the one behaviour it changes is that content which previously forced a track wider now wraps.
+
+**Two things a CSS regex would have missed.** `medlist.js` sets `gridTemplateColumns` as an inline
+style string. `home.js` READS it back to count columns for arrow-key tile reordering: a visible grid
+resolves to pixels so the old `split(" ")` was right, but a hidden one returns the specified value,
+which the browser normalises to `minmax(0px, 1fr)` WITH a space after the comma, counting 6 tracks
+for 3. The rnav grid is visible so it worked; the split now ignores spaces inside parentheses.
+
+**Verified.** 35 surfaces, 0 overflow. `insulin` and `icu` initially skipped on a wrong global name
+(`INSULIN`/`ICU`, not `SMD_*`) and were re-run rather than left unverified, which mattered: they hold
+14 of the 168 rewrites. One grid, `.ml-dose-grid`, needs a dose-editor state the harness does not
+reach and was not exercised.
+
+## 2026-09-25 - Wave 2 turned on by code default, not a Cloudflare variable
+The owner asked to turn wave 2 on. The planned switch was a Pages variable `KITS_SHARE_ON=1`, but
+production already uses all 128 text bindings (vars + secrets) and one more fails every deployment. So
+the server route and the client flag now default ON in code; `KITS_SHARE_ON=0` and `smd_kits_share="0"`
+are the kill switches. Before switching on, a colleague became addressable by sign-in email as well as
+StewardMD ID (most doctors have no ID yet), the sheet shows your own ID, and sends and invites spend
+the rate limit before the directory lookup so the directory cannot be probed for free.
 ## 2026-09-19 — Medical Core Phase 1: deterministic first, on the device, no model
 
 **Decision.** The Medical Core ML layer is built in the order deterministic → baseline → model, and

@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-audit-context-4-14.test.mjs — TASK 4.14: correlationId/deviceId/sessionId actually
  * reach the real audit trail through a real route, and the raw staff token never does.
  *

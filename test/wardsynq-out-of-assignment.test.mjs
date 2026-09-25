@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-out-of-assignment.test.mjs - P2.17: chart reads outside a staff member's assignment.
  * The pure rule first, then GET /api/queue/ward/security-report with real nurse assignments, admissions
  * and a rota, then the Admin screen's not-evaluated state.

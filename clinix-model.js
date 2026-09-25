@@ -629,7 +629,49 @@
    * costs nothing, and cannot invent a symptom the author did not write - which matters more in a
    * simulated patient than anywhere else in CliniX, because an invented finding teaches a wrong
    * pattern. The tutor is a layer for unmatched questions, never the source of clinical fact. */
+  /* The lexicon (clinix-lexicon.js) understands how students actually type a question. It is
+   * resolved lazily and optionally: if it is not loaded, matchAsk falls back to the original
+   * whole-word cue test below, so a page that ships without it behaves exactly as before. */
+  var _lex = null, _lexTried = false;
+  function lexicon() {
+    if (_lexTried) return _lex;
+    _lexTried = true;
+    try { if (typeof window !== "undefined" && window.SMD_CLINIX_LEXICON) { _lex = window.SMD_CLINIX_LEXICON; return _lex; } } catch (e) {}
+    try { if (typeof require === "function") { _lex = require("./clinix-lexicon.js"); } } catch (e) {}
+    return _lex;
+  }
+  function setLexicon(l) { _lex = l; _lexTried = true; }
+
+  /* askTopics() is what the UI wants: the confident topic when there is one, and the near misses
+   * when there is not, so an unrecognised question can offer "did you mean" chips instead of a dead
+   * end. matchAsk() keeps its original { key, topic } shape for every existing caller. */
+  function askTopics(caseDef, text) {
+    if (!caseDef || !caseDef.history) return { key: null, topic: null, score: 0, suggestions: [] };
+    var L = lexicon();
+    if (L && L.match) {
+      var r = L.match(caseDef.history, text);
+      var sug = [];
+      for (var i = 0; i < r.suggestions.length; i++) {
+        sug.push({ key: r.suggestions[i].key, topic: r.suggestions[i].topic, score: r.suggestions[i].score });
+      }
+      return { key: r.key, topic: r.topic, score: r.score, confident: r.confident, suggestions: sug };
+    }
+    var legacy = legacyMatchAsk(caseDef, text);
+    return legacy
+      ? { key: legacy.key, topic: legacy.topic, score: 1, confident: true, suggestions: [] }
+      : { key: null, topic: null, score: 0, confident: false, suggestions: [] };
+  }
+
   function matchAsk(caseDef, text) {
+    var L = lexicon();
+    if (L && L.match) {
+      var r = L.match(caseDef && caseDef.history, text);
+      return r.key ? { key: r.key, topic: r.topic, score: r.score } : null;
+    }
+    return legacyMatchAsk(caseDef, text);
+  }
+
+  function legacyMatchAsk(caseDef, text) {
     var q = normalizeAnswer(text);
     if (!q || !caseDef || !caseDef.history) return null;
     // Pad so a cue matches whole words only: " colour " will not match inside "colourful", and a
@@ -811,6 +853,30 @@
     return ids;
   }
 
+  /* ── Pro lock ─────────────────────────────────────────────────────────────── */
+
+  /* One system is free (manifest `free: true`); the rest need Pro. An unresolved system fails
+   * closed for a non-Pro reader. Client-side only: the content ships inside the native bundle. */
+  function systemLocked(system, pro) {
+    if (pro) return false;
+    return !(system && system.free === true);
+  }
+
+  /* Skill packs a reader may load into the standalone skills library: shared packs plus the packs
+   * of every system they can open, in catalog order. */
+  function openPackIds(cat, pro) {
+    var packs = (cat && cat.skillPacks) || [], systems = (cat && cat.systems) || [], allowed = {}, i, j;
+    for (i = 0; i < packs.length; i++) if (pro || packs[i].shared) allowed[packs[i].id] = true;
+    for (i = 0; i < systems.length; i++) {
+      if (systemLocked(systems[i], pro)) continue;
+      var sp = systems[i].skillPacks || [];
+      for (j = 0; j < sp.length; j++) allowed[sp[j]] = true;
+    }
+    var out = [];
+    for (i = 0; i < packs.length; i++) if (allowed[packs[i].id]) out.push(packs[i].id);
+    return out;
+  }
+
   /* ── Exports ──────────────────────────────────────────────────────────────── */
 
   var API = {
@@ -847,6 +913,8 @@
 
     CASE_PHASES: CASE_PHASES,
     matchAsk: matchAsk,
+    askTopics: askTopics,
+    setLexicon: setLexicon,
     unmatchedReply: unmatchedReply,
     caseFinding: caseFinding,
     caseInvestigation: caseInvestigation,
@@ -856,7 +924,10 @@
     normalizeAnswer: normalizeAnswer,
 
     buildPathway: buildPathway,
-    pathwaySkillIds: pathwaySkillIds
+    pathwaySkillIds: pathwaySkillIds,
+
+    systemLocked: systemLocked,
+    openPackIds: openPackIds
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = API;

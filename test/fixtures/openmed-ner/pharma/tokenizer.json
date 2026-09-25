@@ -1,0 +1,53 @@
+{
+"model": {
+"continuing_subword_prefix": "##",
+"max_input_chars_per_word": 100,
+"type": "WordPiece",
+"unk_token": "[UNK]",
+"vocab": {
+"##ceta": 25,
+"##id": 29,
+"##mol": 26,
+"##zol": 28,
+",": 20,
+".": 19,
+"5": 14,
+"500": 12,
+"600": 13,
+"[CLS]": 2,
+"[PAD]": 0,
+"[SEP]": 3,
+"[UNK]": 1,
+"and": 9,
+"aspirin": 22,
+"bd": 15,
+"digoxin": 23,
+"fever": 18,
+"for": 17,
+"give": 5,
+"glargine": 31,
+"insulin": 30,
+"line": 27,
+"mg": 11,
+"od": 16,
+"on": 8,
+"para": 24,
+"patient": 7,
+"start": 4,
+"the": 6,
+"warfarin": 21,
+"with": 10
+}
+},
+"normalizer": {
+"clean_text": true,
+"handle_chinese_chars": true,
+"lowercase": true,
+"strip_accents": null,
+"type": "BertNormalizer"
+},
+"pre_tokenizer": {
+"type": "BertPreTokenizer"
+},
+"version": "1.0"
+}

@@ -51,7 +51,7 @@
     return u;
   }
 
-  var cache = { catalog: null, packs: {}, diseases: {}, media: null };
+  var cache = { catalog: null, packs: {}, diseases: {}, media: null, dxVocab: null };
 
   function ver() { return (cache.catalog && cache.catalog.contentVersion) || ""; }
 
@@ -82,6 +82,20 @@
       return getJSON("media/manifest.json").then(function (j) {
         cache.media = (j && j.media) || {};
         return cache.media;
+      });
+    });
+  }
+
+  /* The diagnosis vocabulary for the case differential and diagnosis pickers (365 entries, ~34 KB).
+   * Fetched the first time a student reaches the differential stage and cached for the session:
+   * it is content, and content in CliniX is never parsed at launch. */
+  function loadDxVocab() {
+    if (cache.dxVocab) return Promise.resolve(cache.dxVocab);
+    return loadCatalog().then(function () {
+      return getJSON("dx-vocabulary.json").then(function (j) {
+        if (!j || !j.dx || !j.dx.length) return null;
+        cache.dxVocab = j;
+        return j;
       });
     });
   }
@@ -163,17 +177,21 @@
   /* Every skill in every pack, with NO disease attached. This is what makes "learn how to percuss"
    * reachable on its own: a skill is the atom, so it was always teachable standalone - there simply
    * was no door to it. Shaped like a loadDisease() result so every renderer works unchanged. */
+  /* `pro` scopes it: without Pro only shared packs and the free system's packs load, so a locked
+   * system's skills are not reachable through the library either. Cached per pack set. */
   var _allCache = null;
-  function loadAllSkills() {
-    if (_allCache) return Promise.resolve(_allCache);
+  function loadAllSkills(pro) {
     return loadCatalog().then(function (cat) {
-      var packs = (cat.skillPacks || []).map(function (p) { return p.id; });
+      var M = model();
+      var packs = M ? M.openPackIds(cat, !!pro) : (cat.skillPacks || []).map(function (p) { return p.id; });
+      var key = packs.join(",");
+      if (_allCache && _allCache.key === key) return _allCache;
       var jobs = [loadMedia()];
       for (var i = 0; i < packs.length; i++) jobs.push(loadPack(packs[i]));
       return Promise.all(jobs).then(function (res) {
         var media = res[0] || {}, skills = {};
         for (var k = 1; k < res.length; k++) if (res[k]) copyInto(skills, res[k]);
-        _allCache = { disease: null, system: null, skills: skills, media: media };
+        _allCache = { key: key, disease: null, system: null, skills: skills, media: media };
         return _allCache;
       });
     }).catch(function () { return null; });
@@ -327,12 +345,13 @@
     return { total: total, visible: visible, pending: total - visible };
   }
 
-  function reset() { cache = { catalog: null, packs: {}, diseases: {}, media: null }; _allCache = null; }
+  function reset() { cache = { catalog: null, packs: {}, diseases: {}, media: null, dxVocab: null }; _allCache = null; }
 
   var API = {
     loadCatalog: loadCatalog,
     loadDisease: loadDisease,
     loadMedia: loadMedia,
+    loadDxVocab: loadDxVocab,
     pathwayFor: pathwayFor,
     lessonFor: lessonFor,
     loadAllSkills: loadAllSkills,

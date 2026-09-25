@@ -3,20 +3,52 @@
  *   node test/serve.mjs [repoRoot] [port]
  */
 import http from "node:http";
-import { readFile } from "node:fs";
+import { readFile, existsSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 
 const root = process.argv[2] || join(dirname(fileURLToPath(import.meta.url)), "..");
 const port = Number(process.argv[3] || 8799);
-const TYPES = { ".html": "text/html", ".js": "application/javascript", ".mjs": "application/javascript", ".css": "text/css", ".png": "image/png", ".webp": "image/webp", ".json": "application/json", ".ico": "image/x-icon", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
+const TYPES = { ".gz": "application/gzip", ".html": "text/html", ".js": "application/javascript", ".mjs": "application/javascript", ".css": "text/css", ".png": "image/png", ".webp": "image/webp", ".json": "application/json", ".ico": "image/x-icon", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
+
+import https from "node:https";
 
 http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
+  if (p.startsWith("/api/")) {
+    const proxyReq = https.request(`https://wardsynq.com${req.url}`, {
+      method: req.method,
+      headers: { ...req.headers, host: "wardsynq.com" }
+    }, (proxyRes) => {
+      res.writeHead(proxyRes.statusCode, proxyRes.headers);
+      proxyRes.pipe(res);
+    });
+    proxyReq.on("error", (e) => {
+      res.writeHead(502, { "content-type": "application/json" });
+      res.end(JSON.stringify({ ok: false, error: "proxy_error", message: e.message }));
+    });
+    req.pipe(proxyReq);
+    return;
+  }
   if (p === "/") p = "/index.html";
-  const fp = join(root, normalize(p).replace(/^(\.\.[/\\])+/, ""));
+  let fp = join(root, normalize(p).replace(/^(\.\.[/\\])+/, ""));
+  // scripts/build-www.sh copies data/ payloads to the bundle ROOT, so the app asks for
+  // "/offline-clinical.json.gz" and "/clinical-index.js". Serving the repo verbatim 404s them,
+  // which silently turned off the offline clinical library in every UI test. Fall back to data/.
+  if (!existsSync(fp) && extname(p) && existsSync(join(root, "data", p.replace(/^\//, "")))) {
+    fp = join(root, "data", p.replace(/^\//, ""));
+  }
   readFile(fp, (err, data) => {
+    if (err && !extname(p)) {
+      const htmlFp = fp + ".html";
+      readFile(htmlFp, (err2, data2) => {
+        if (err2) { res.writeHead(404); res.end("404"); return; }
+        res.writeHead(200, { "content-type": "text/html", "cache-control": "no-store, must-revalidate" });
+        res.end(data2);
+      });
+      return;
+    }
     if (err) { res.writeHead(404); res.end("404"); return; }
     // no-store so the test harness always sees the current working tree (defeats Chrome's cache)
     res.writeHead(200, { "content-type": TYPES[extname(fp)] || "application/octet-stream", "cache-control": "no-store, must-revalidate" });

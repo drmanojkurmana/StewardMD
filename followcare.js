@@ -188,7 +188,7 @@
       ".fc-tl{border-left:2px solid var(--line,#dbe4e2);padding-left:14px;margin:8px 0 0}",
       ".fc-tl .fc-ev{margin-bottom:12px}.fc-tl .fc-ev .fc-d{font-weight:700;font-size:13.5px}.fc-tl .fc-ev .fc-r{color:var(--slate,#5a7184);font-size:12.5px}",
       // Doctor Action Center
-      ".fc-actgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}",
+      ".fc-actgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}",
       ".fc-act{display:flex;flex-direction:column;gap:6px;align-items:flex-start;text-align:left;border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:14px;background:var(--panel,#fff);color:var(--ink,#14202b);cursor:pointer;min-height:84px}",
       ".fc-act .fc-ai{font-size:22px;display:inline-flex;color:#0e6e63}.fc-act .fc-ai svg{width:26px;height:26px}.fc-act.high .fc-ai{color:#c9302c}",
       "body.dark .fc-act .fc-ai,body.v3-dark .fc-act .fc-ai{color:#3fc7b3}",
@@ -289,7 +289,7 @@
       ".fc-sheet.fcui2 .fc-cc{min-width:0!important;padding:13px 10px!important;border:1px solid var(--rds-line)!important;border-radius:15px!important;background:var(--rds-surface)!important;box-shadow:none!important;text-align:left!important}",
       ".fc-sheet.fcui2 .fc-cc-n{font-size:23px;font-weight:760;line-height:1;letter-spacing:-.04em;color:var(--rds-ink)}",
       ".fc-sheet.fcui2 .fc-cc-l{font-size:10.5px;color:var(--rds-muted);margin-top:6px;line-height:1.2}",
-      ".fc-q-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0 4px}",
+      ".fc-q-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;margin:14px 0 4px}",
       ".fc-sheet.fcui2 .fc-q-actions .fc-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0!important;padding:11px 12px!important;line-height:1.2!important}",
       ".fc-q-actions .fc-maitri-btn img{width:23px;height:23px;object-fit:contain}",
       ".fc-sheet.fcui2 .fc-q-settings{width:100%;margin:9px 0 0!important;background:var(--rds-surface)!important;color:var(--rds-ink)!important;border:1px solid var(--rds-line)!important;box-shadow:none!important}",
@@ -320,7 +320,7 @@
       ".fc-maitri-status>div{flex:1;color:var(--rds-muted);font-size:12.5px;line-height:1.45}",
       ".fc-maitri-section{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:19px 1px 9px;color:var(--rds-ink);font-size:14px;font-weight:750}",
       ".fc-maitri-section span{padding:4px 8px;border-radius:999px;background:var(--rds-surface-2);color:var(--rds-muted);font-size:11px}",
-      ".fc-maitri-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}",
+      ".fc-maitri-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;margin-top:15px}",
       ".fc-maitri-actions .fc-btn{margin:0!important;padding:11px 9px!important;font-size:13.5px!important;line-height:1.25!important}",
       "body.dark .fc-sheet.fcai,body.v3-dark .fc-sheet.fcai{background:var(--rds-bg)!important;box-shadow:0 0 70px rgba(0,0,0,.55)}",
       "body.dark .fc-sheet.fcai::before,body.v3-dark .fc-sheet.fcai::before{display:none}",
@@ -328,7 +328,7 @@
       "body.dark .fc-sheet.fcai .fc-row,body.v3-dark .fc-sheet.fcai .fc-row{background:transparent!important;border:0!important;border-bottom:1px solid var(--rds-line)!important;border-radius:0!important;box-shadow:none}",
       "body.dark .fc-sheet.fcai .fc-btn,body.v3-dark .fc-sheet.fcai .fc-btn{background:var(--rds-primary);border:0;box-shadow:none;color:#fff;font-weight:750;letter-spacing:0}",
       "body.dark .fc-sheet.fcai .fc-btn.sec,body.v3-dark .fc-sheet.fcai .fc-btn.sec{background:var(--rds-surface);color:var(--rds-ink);border:1px solid var(--rds-line)}",
-      "@media(max-width:460px){.fc-q-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fc-q-actions,.fc-maitri-actions{grid-template-columns:1fr}.fc-q-intro h2{font-size:27px}.fc-sheet.fcui2 .fc-row .fc-meta .fc-t{align-items:flex-start;flex-direction:column;gap:4px}.fc-sheet.fcui2 .fc-status{margin-left:0}.fc-sheet.fcui2 .fc-row .fc-flag{align-self:center}}",
+      "@media(max-width:460px){.fc-q-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fc-q-actions,.fc-maitri-actions{grid-template-columns:minmax(0,1fr)}.fc-q-intro h2{font-size:27px}.fc-sheet.fcui2 .fc-row .fc-meta .fc-t{align-items:flex-start;flex-direction:column;gap:4px}.fc-sheet.fcui2 .fc-status{margin-left:0}.fc-sheet.fcui2 .fc-row .fc-flag{align-self:center}}",
 
       /* == Keyboard focus =====================================================================
        * There was exactly ONE :focus rule in this whole module, so a doctor driving it from an
@@ -684,6 +684,10 @@
       body.appendChild(field("Max simultaneous calls", conc));
       var attempts = numIn(v.maxAttempts == null ? 2 : v.maxAttempts, 1, 5);
       body.appendChild(field("Retry attempts if unanswered (within the call windows)", attempts));
+      // QA BUG-009: a fixed, explicitly configured test destination so "Place test call" never dials
+      // whatever number happens to be in a box.
+      var tDest = h("input", { type: "tel", inputmode: "numeric", value: v.testPhone || "", placeholder: "10-digit test handset number" });
+      body.appendChild(field("Test-call destination (a handset you control; used by Place test call)", tDest));
       body.appendChild(h("div", { style: "margin:2px 0 14px;color:var(--slate,#5a7184);font-size:12px", text: "Maximum 1 call per patient per day (fixed for safety)." }));
 
       body.appendChild(h("div", { style: "margin:12px 0 6px;font-weight:800;font-size:15px;color:#0e6e63", text: "Emergency / Ambulance" }));
@@ -715,7 +719,7 @@
         err.innerHTML = ""; save.disabled = true; save.textContent = "Saving…";
         var payload = {
           name: hName.value,
-          voice: { enabled: vEnable.checked, noResponseDays: +ndays.value, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value, maxAttempts: +attempts.value },
+          voice: { enabled: vEnable.checked, noResponseDays: +ndays.value, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value, maxAttempts: +attempts.value, testPhone: String(tDest.value || "").replace(/[^\d]/g, "") },
           ambulance: { enabled: aEnable.checked, contactName: aName.value, phone: aPhone.value, method: aMethod.value },
           escalation: { enabled: eEnable.checked, contactName: eName.value, phone: ePhone.value, method: eMethod.value }
         };
@@ -736,21 +740,34 @@
        * the access control. */
       body.appendChild(h("div", { style: "margin:18px 0 6px;font-weight:800;font-size:15px;color:#0e6e63", text: "Test call" }));
       body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px",
-        text: "Places a real AI follow-up call to the number below, using a test episode discharged 3 days ago. Use your own number." }));
-      var tPhone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Your mobile number" });
+        text: "Places a real AI follow-up call using a test episode discharged 3 days ago. It dials the saved test-call destination above. Calling any other number (including your own) needs the explicit choice below." }));
+      /* QA BUG-009: the destination is the SAVED test number by default. Typing a different number
+       * (own handset included) is a deliberate, visible choice, never the default. */
+      var savedDest = String(v.testPhone || "");
+      var tDestLine = h("div", { style: "margin:0 0 8px;font-size:13px;font-weight:700;color:var(--ink,#14202b)",
+        text: savedDest ? ("Will call: " + savedDest.replace(/(\d{2})(\d{3})(\d{5})$/, "$1 $2 $3") + " (saved test destination)") : "No test destination saved yet. Save one above, or choose a number for this call below." });
+      body.appendChild(tDestLine);
+      var tOther = h("input", { type: "checkbox" });
+      body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:8px" }, [tOther, document.createTextNode("Call a different number for this test (for example my own handset)")]));
+      var tPhone = h("input", { type: "tel", inputmode: "numeric", placeholder: "10-digit mobile number for this test only" });
+      var tPhoneField = field("Number for this test call", tPhone);
+      tPhoneField.style.display = "none";
+      tOther.addEventListener("change", function () { tPhoneField.style.display = tOther.checked ? "" : "none"; if (tOther.checked) { try { tPhone.focus(); } catch (e) {} } });
       var tPath = h("select", {}, [
         h("option", { value: "heart_failure", text: "Heart failure" }),
         h("option", { value: "copd", text: "COPD" }),
         h("option", { value: "post_op", text: "Post-op" })
       ]);
-      body.appendChild(field("Call this number", tPhone));
+      body.appendChild(tPhoneField);
       body.appendChild(field("Pathway", tPath));
       var tErr = h("div", { role: "alert", tabindex: "-1" });
       var tBtn = h("button", { "class": "fc-btn sec", style: "margin-top:6px", text: "Place test call" });
       tBtn.addEventListener("click", function () {
         tErr.innerHTML = "";
-        var ph = String(tPhone.value || "").replace(/[^\d]/g, "");
+        var ph = tOther.checked ? String(tPhone.value || "").replace(/[^\d]/g, "") : savedDest;
+        if (!ph) { tErr.appendChild(h("div", { "class": "fc-err", text: "Save a test-call destination first, or tick the box to choose a number for this call." })); return; }
         if (ph.length < 10) { tErr.appendChild(h("div", { "class": "fc-err", text: "Enter a 10-digit mobile number." })); return; }
+        if (!confirm("Place a real AI test call to " + ph + " now?")) return;
         tBtn.disabled = true; tBtn.textContent = "Calling…";
         API.voiceTest(ph, tPath.value, "Test Patient").then(function (r) {
           tBtn.disabled = false; tBtn.textContent = "Place test call";

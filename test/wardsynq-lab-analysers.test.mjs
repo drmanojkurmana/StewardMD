@@ -145,7 +145,9 @@ test("results: land in the bench inbox, never on the chart; a duplicate, an unma
   assert.equal(un.outcome, "unmatched");
   const audit = H.RECORD.audit.filter((a) => a.action === "lab.analyser.result.receive");
   assert.equal(audit.length, 2);
-  assert.ok(!JSON.stringify(audit).includes("4.1"), "no value in the audit");
+  /* The value as a value, not as digits inside a timestamp: ":24.1xxZ" contains "4.1" about one run in a hundred
+   * (CI run 36064850173). In a timestamp it is always preceded by a digit; as a JSON value, by ':' or '"'. */
+  assert.ok(!/(^|[^0-9])4\.1(?![0-9])/.test(JSON.stringify(audit)), "no value in the audit");
 });
 
 test("bench inbox: nurse and another hospital refused; lab releases as themselves, autoverification rules apply, critical check runs", async () => {

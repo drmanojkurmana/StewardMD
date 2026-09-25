@@ -111,7 +111,7 @@ async function encounterMigration(env, session, deps) {
 function encounterStatusFor(ticketStatus) {
   if (ticketStatus === "completed") return "finished";
   if (ticketStatus === "cancelled" || ticketStatus === "no_show") return "cancelled";
-  if (ticketStatus === "in_consultation" || ticketStatus === "investigation" || ticketStatus === "followup") return "in-progress";
+  if (ticketStatus === "in_consultation" || ticketStatus === "at_diagnostics" || ticketStatus === "investigation" || ticketStatus === "followup") return "in-progress";
   return "planned"; // registered | waiting | called | anything unrecognised: not yet being seen
 }
 

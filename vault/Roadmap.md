@@ -132,3 +132,24 @@ Engineering that is deliberately NOT started:
 - [ ] MedGemma 4B returned prose instead of JSON for a Telugu Scribe dictation in at least one run; measure the JSON-adherence rate per pack and record it as a caps.json score rather than the current 0/1/2 guess
 
 - **Bonsai 2 27B (PrismML, 2026-09-17):** needs PrismML's llama.cpp fork (PTQ1_0/PQ2_0 + Hadamard runtime); mainline b10502 in `capacitor-llama` rejects the files. Adopt by moving the plugin to the fork (iOS xcframework + Android submodule) or when mainline carries the types. See Decisions 2026-09-19.
+
+## MaiK Scribe quota accounting (2026-09-19, server side landed)
+- [x] **opd-emr.js sends `sec`** on the opd-scribe refine — `scribeSendPrep` -> `scribeSec()`, the delta
+      since the last refine actually SENT (test/opd-emr-scribe-sec.test.mjs). The server's 45s-per-call
+      floor now only applies to a caller that omits it.
+- [ ] `assessment` (assessLLM) currently charges 0 because it re-reads the same ambient audio the
+      opd-scribe refine already charged. If it ever runs standalone, it must send its own `sec`.
+- [ ] No client reads the new `contradictions` array in the opd-scribe response yet.
+
+## Universal Search phase 2 (added 2026-09-21)
+- [ ] Scheme Search provider (`/api/schemes/search`), CliniX/SURGX content providers (manifest is lazy; needs a cached title index), OPD/ICU patient jump (PHI review first).
+
+## Every branch, wave 2: needs the server (owner's ticked list, 2026-09-25)
+Wave 1 is built and ON: [[Specialty Kits]] (26), [[Clinical Documents]], [[Review Desk]], source watch.
+Wave 2 is **built and ON** since 2026-09-25 ([[Colleagues]]): B1 referral, B2 case room, B3 handover sync,
+B7 hospital kit versions, E3/E4 kit history, F1 review sync. Native users get it with the next build.
+Follow-ups: an in-app badge for new items; a per-uid push token directory instead of
+the token scan; unit-level (not per-doctor) history if hospitals ask for it.
+Not ticked (owner left them out): B4 audit dashboard, B5 case library.
+Also pending on people, not code: clinical review of all ai_drafted content (use the Review Desk),
+native-speaker check of the Telugu and Hindi consent forms and handouts.

@@ -56,12 +56,15 @@
   .brand{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}.brand span{color:var(--tl)}
   .brand .mk{width:22px;height:22px;background:var(--tl);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;flex:none}
   .brand .clogo{height:24px;width:auto;max-width:130px;object-fit:contain}
-  .role{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center}
+  .role{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center;flex-shrink:0}
+  .who-name{max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .pw{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
   .pw .m{width:13px;height:13px;background:var(--mut);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
-  .chip{background:var(--tl-soft);color:var(--tl);border:1px solid var(--tl-border);padding:3px 10px;border-radius:999px;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+  .chip{background:var(--tl-soft);color:var(--tl);border:1px solid var(--tl-border);padding:3px 10px;border-radius:999px;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
   .ghost{background:var(--btn);color:var(--ink);padding:8px 14px;border:1px solid var(--line);font-weight:600;font-size:13.5px}
   .ghost:hover{background:var(--line);border-color:var(--mut)}
+  #lo{display:inline-flex;align-items:center;gap:5px;cursor:pointer;font-weight:700;border-radius:9px;white-space:nowrap;flex-shrink:0;padding:7px 14px;border:1.5px solid var(--line);transition:all .15s ease}
+  #lo:hover{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
   /* login */
   .login{max-width:400px;margin:8vh auto;background:var(--card);border-radius:var(--r);box-shadow:var(--sh-lg);border:1px solid var(--line);padding:28px;animation:rise .38s var(--ease) both}
   .login h1{margin:0 0 4px;font-size:22px;letter-spacing:-.02em}.login p{margin:0 0 18px;color:var(--mut);font-size:14px}
@@ -84,6 +87,21 @@
   .cact .del{padding:9px 12px;color:var(--red);background:var(--red-soft);border:1px solid var(--red-line)}
   /* board toolbar */
   .toolbar{display:flex;gap:10px;align-items:center;margin:16px 0 18px;flex-wrap:wrap}
+  /* The OPD pulse: dense, quiet, and only the tiles worth acting on take the warning colour.
+     Scrolls sideways on a phone rather than wrapping into an unreadable grid. */
+  .pulse{margin:0 0 18px}
+  .pulse:empty{display:none}
+  .p-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px}
+  .p-t{flex:1 0 132px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card)}
+  .p-t.warn{border-color:#dc2626;background:rgba(220,38,38,.06)}
+  .p-l{font:600 11px system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+  .p-v{font:700 24px system-ui,sans-serif;margin-top:4px}
+  .p-v u{text-decoration:none;font:700 13px system-ui,sans-serif;opacity:.65;margin-left:2px}
+  .p-t.warn .p-v{color:#dc2626}
+  .p-v .p-none{font:600 14px system-ui,sans-serif;font-style:normal;opacity:.45}
+  .p-s{font:500 12px system-ui,sans-serif;opacity:.65;margin-top:2px}
+  .p-note{font:500 12px system-ui,sans-serif;opacity:.75;margin-top:8px}
+  .p-warn{font:600 13px system-ui,sans-serif;color:#dc2626;margin-top:8px}
   .toolbar .grow{flex:1;font-size:14px;color:var(--mut)}
   .toolbar .grow b{color:var(--ink);font-size:16px}
   #walk{background:var(--tl);color:#fff;font-weight:700;border-color:var(--tl);box-shadow:0 2px 8px var(--tl-glow)}
@@ -127,13 +145,37 @@
   @media(min-width:600px){.scrim{align-items:center}.sheet{border-radius:20px;transform:translateY(14px) scale(.98)}}
   .sheet h3{margin:0 0 12px;font-size:18px;letter-spacing:-.01em}
   .cats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-  .cats button{background:var(--btn);color:var(--ink);padding:9px 14px;font-weight:600;font-size:13px;border:1.5px solid var(--line);border-radius:10px}
+  .cats button{background:var(--btn);color:var(--ink);padding:9px 14px;min-height:44px;font-weight:600;font-size:13px;border:1.5px solid var(--line);border-radius:10px}
   .cats button.on{border-color:var(--tl);background:var(--tl-soft);color:var(--tl);font-weight:700}
   .sheet .row2{display:flex;gap:12px;margin-top:18px}.sheet .row2 button{flex:1;padding:13px;font-weight:700}
   .cancel{background:var(--btn);color:var(--ink);border:1.5px solid var(--line)}
   .cancel:hover{background:var(--line)}
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(8px);background:var(--ink);color:var(--card);padding:12px 18px;border-radius:12px;font-weight:600;font-size:13.5px;z-index:40;opacity:0;transition:.24s var(--ease);max-width:90%;box-shadow:var(--sh-lg)}
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  .offbar{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:39;max-width:min(560px,calc(100% - 32px));background:#fff7e6;color:#7a4b00;border:1px solid #f3d19c;border-radius:14px;padding:10px 14px;box-shadow:var(--sh-lg);font-size:13.5px;font-weight:600}
+  .offbar[hidden]{display:none}
+  .dc h3{margin:0 0 2px}.dc .dc-sub{color:var(--mut);font-size:13px;margin:0 0 14px}
+  .dc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:0 0 16px}
+  .dc-k{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card)}
+  .dc-k .l{font-size:12px;color:var(--mut);font-weight:600}.dc-k .v{font-size:24px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
+  .dc-k .s{font-size:12px;color:var(--mut)}.dc-k.warn{border-color:var(--amber-line);background:var(--amber-soft)}.dc-k.warn .v{color:var(--amber)}
+  .dc h4{margin:18px 0 8px;font-size:14px}
+  .dc-t{width:100%;border-collapse:collapse;font-size:13px}.dc-t th,.dc-t td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+  .dc-t th:first-child,.dc-t td:first-child{text-align:left}.dc-t th{color:var(--mut);font-weight:600;font-size:12px}
+  .dc-chips{display:flex;flex-wrap:wrap;gap:8px}.dc-chips span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}
+  .dc-wa{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:16px 0 4px;background:var(--card)}
+  .dc-wa h4{margin:0 0 4px}.dc-wa .t{color:var(--mut);font-size:13px;margin:0 0 10px}
+  .dc-wa .f{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .dc-wa label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--mut)}
+  .dc-wa select,.dc-wa input[type=tel]{min-height:44px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-size:15px;background:var(--card);color:var(--ink)}
+  .dc-wa .on{flex-direction:row;align-items:center;gap:8px;min-height:44px;font-size:14px;color:var(--ink)}
+  .dc-wa .on input{width:20px;height:20px}
+  .dc-wa .row2{margin-top:12px}.dc-wa .row2 button{min-height:44px}
+  .dc-wa-st{margin-top:8px;font-size:13px;color:var(--mut)}.dc-wa-st.bad{color:var(--amber);font-weight:600}
+  .dc-warn{background:var(--amber-soft);border:1px solid var(--amber-line);color:var(--amber);border-radius:10px;padding:10px 12px;font-size:13px;margin:8px 0}
+  .offbar .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .offbar button{min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #e0b36a;background:#fff;color:#7a4b00;font-weight:700}
+  .offbar .rv{margin-top:6px;font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .drawer{padding:6px 0}
   .ev{border-left:3px solid var(--tl);padding:8px 0 8px 12px;margin-left:4px}
   .ev b{color:var(--ink)}.ev .t{color:var(--mut);font-size:12px}
@@ -209,10 +251,113 @@
   .dot2{width:8px;height:8px;border-radius:50%;background:var(--slate);flex:none} .dot2.on{background:var(--ok)}
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
+  .sheet.wide{max-width:680px}
+  .ttabs{display:flex;gap:4px;background:var(--btn);padding:4px;border-radius:12px;margin:12px 0 16px;border:1px solid var(--line);overflow-x:auto}
+  .ttab{flex:1;min-width:110px;padding:8px 10px;text-align:center;font-size:12.5px;font-weight:600;border-radius:8px;cursor:pointer;color:var(--mut);transition:all .15s ease;border:none;background:none;display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap}
+  .ttab.active{background:var(--card);color:var(--ink);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .flowcard{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;cursor:pointer;transition:all .15s ease;background:var(--card)}
+  .flowcard:hover{border-color:var(--tl);box-shadow:var(--sh-md)}
+  .flowcard.selected{border-color:var(--tl);background:var(--tl-soft)}
+  .flowsteps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0 4px;font-size:11.5px;font-weight:700;color:var(--mut)}
+  .flowsteps span{background:var(--card);border:1px solid var(--line);padding:3px 8px;border-radius:6px;color:var(--ink)}
+  .flowsteps .arr{color:var(--tl);font-size:13px;border:none;background:none;padding:0}
+  .quickpill{display:inline-block;padding:4px 9px;font-size:11.5px;font-weight:600;background:var(--btn);border:1px solid var(--line);border-radius:6px;cursor:pointer;margin:2px 3px;color:var(--ink);transition:all .12s ease}
+  .quickpill:hover{background:var(--tl-soft);border-color:var(--tl);color:var(--tl);transform:translateY(-1px)}
+  .stock-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--card)}
+  .stock-item:hover{background:var(--btn)}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* Flow Board: scoped to the signed-in console; existing dialogs and clinical actions stay intact. */
+  .opd-modern{--bg:#f5f5f0;--card:#fff;--btn:#eeefe9;--ink:#242a27;--ink-sec:#454e46;--mut:#667166;--line:#e0e4da;--tl:#36562d;--tl-d:#294423;--tl-soft:#e5efd9;--tl-border:#bfcfb3;--tl-glow:rgba(54,86,45,.12);--sh:0 0 0 1px rgba(0,0,0,.04),0 2px 3px rgba(0,0,0,.025),0 6px 14px rgba(0,0,0,.035);background:var(--bg);min-height:100vh}
+  .opd-modern [hidden]{display:none!important}
+  .opd-modern header{background:var(--card);backdrop-filter:none}
+  .opd-modern header .wrap{max-width:none;padding:16px 28px}
+  .opd-modern .brand{font-weight:650;letter-spacing:-.6px;font-size:18px}
+  .opd-modern .brand span{color:var(--tl)}
+  .opd-layout{display:grid;grid-template-columns:188px minmax(0,1fr);min-height:calc(100vh - 75px)}
+  .opd-sidebar{padding:26px 14px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:5px;align-items:stretch}
+  .opd-nav-brand{font-size:13px;font-weight:600;padding:0 10px 22px;display:flex;gap:8px;align-items:center}
+  .opd-nav-brand .mk{width:23px;height:23px;background:var(--tl);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;flex-shrink:0}
+  .opd-nav-label{font-size:11px;color:var(--mut);letter-spacing:.7px;padding:16px 10px 7px;text-transform:uppercase}
+  .opd-sidebar button{display:flex;align-items:center;gap:9px;text-align:left;padding:11px 10px;font-size:13px;font-weight:500;border:0;background:transparent;color:var(--ink-sec);border-radius:9px;box-shadow:none}
+  .opd-sidebar button.opd-nav-current{background:#d8edbd;color:#283f24;font-weight:600}
+  .opd-modern .opd-main{width:100%;max-width:1800px;padding:28px;min-width:0}
+  .opd-modern .toolbar{margin:0 0 25px;gap:10px}
+  .opd-modern .toolbar .grow{font-size:12px;line-height:1.6;min-width:200px}
+  .opd-modern .toolbar .grow b{font-size:12px;font-weight:500}
+  .opd-modern h1{font-size:30px;font-weight:600;letter-spacing:-1.2px;margin:0 0 5px;line-height:1.25;color:var(--ink)}
+  .opd-modern #walk{padding:11px 17px;box-shadow:none;font-size:13px;font-weight:600}
+  .opd-modern #ref{font-size:12px;border:0;background:var(--card);box-shadow:var(--sh);padding:11px 14px}
+  .opd-modern .p-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:0;background:var(--card);border-radius:16px;box-shadow:var(--sh);padding:18px 0;overflow:visible}
+  .opd-modern .p-t{border:0;border-right:1px solid var(--line);border-radius:0;padding:0 17px;background:none}
+  .opd-modern .p-t:last-child{border:0}.opd-modern .p-t.warn{background:none}
+  .opd-modern .p-l{font-family:inherit;text-transform:none;letter-spacing:0;opacity:1;font-weight:500;color:var(--mut);font-size:12px}
+  .opd-modern .p-v{font-family:inherit;font-size:29px;font-weight:550;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+  .opd-modern .p-v u{font-weight:500;letter-spacing:0}
+  .opd-modern .p-s{font-family:inherit;font-size:11px;opacity:1;color:var(--mut)}
+  .opd-modern .tot{gap:20px;margin:0 0 20px;padding-bottom:15px;border-bottom:1px solid var(--line)}
+  .opd-modern .tot .kpi{padding:0;flex:0 1 auto;min-width:0;border:0;box-shadow:none;background:none;font-weight:500;letter-spacing:0;text-transform:none;font-size:12px;display:flex;gap:7px;align-items:baseline}
+  .opd-modern .tot .kpi b{font-size:17px;font-weight:600;margin:0}
+  .opd-flow-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0}
+  .opd-view-switch{display:flex;padding:4px;background:var(--btn);border-radius:10px;gap:3px}
+  .opd-view-switch button{padding:8px 12px;color:var(--mut);background:none;font-size:12px;font-weight:500;border-radius:7px}
+  .opd-view-switch button[aria-pressed=true]{color:var(--ink);background:var(--card);box-shadow:var(--sh)}
+  .opd-search{display:flex;align-items:center;gap:6px;flex:1;max-width:290px;min-width:170px;background:var(--card);border-radius:10px;padding:0 11px;box-shadow:var(--sh)}
+  .opd-search input{border:0;background:none;padding:10px 0;font-size:13px;box-shadow:none;min-width:0}
+  .opd-search:focus-within{outline:2px solid var(--tl);outline-offset:2px}.opd-search input:focus{box-shadow:none}
+  .opd-filter-label{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--mut)}
+  .opd-filter-label select{width:auto;font-size:12px;padding:9px 10px;border-width:1px;max-width:190px}
+  #opdFilterCount{font-size:11px;color:var(--mut);margin-left:auto}
+  .opd-flow-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+  .opd-lane{background:var(--btn);padding:10px;border-radius:17px;min-width:0;min-height:240px}
+  .opd-lane>h2{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;margin:5px 3px 3px}
+  .opd-lane-count{font-size:12px;font-weight:500;color:var(--mut);font-variant-numeric:tabular-nums}
+  .opd-lane>p{margin:0 3px 17px;font-size:11px;color:var(--mut)}
+  .opd-lane-cards{display:flex;flex-direction:column;gap:12px}
+  .opd-modern .pcard,.opd-modern .row{border:0;background:var(--card);box-shadow:var(--sh);border-radius:10px;padding:13px;min-width:0;transform:none}
+  .opd-modern .pcard.urg,.opd-modern .row.p2{border-left:3px solid var(--red)}
+  .opd-modern .row.p1{border-left:3px solid var(--amber)}
+  .opd-modern .pcard:hover,.opd-modern .row:hover,.opd-modern .rcard:hover,.opd-modern .doc:hover{transform:none;box-shadow:var(--sh)}
+  .opd-card-context{font-size:11px;color:var(--mut);margin-bottom:9px;overflow-wrap:anywhere}
+  .opd-long-wait{font-size:11px;font-weight:600;color:var(--amber);margin:0 0 9px}
+  .opd-modern .nm{font-size:14px;font-weight:600;overflow-wrap:anywhere}
+  .opd-modern .mrn{font-size:11px;font-weight:400;display:inline-block}
+  .opd-modern .tok{background:var(--btn);color:var(--ink);font-weight:600;font-size:12px}
+  .opd-modern .row .top{align-items:flex-start;gap:8px}.opd-modern .row .top>div{min-width:0}
+  .opd-modern .pos{width:24px;height:24px;font-size:11px;flex-shrink:0}
+  .opd-modern .acts{gap:6px;margin-top:12px}
+  .opd-modern .acts button{font-size:12px;font-weight:500;border:0;padding:8px 10px;min-height:34px;border-radius:7px;white-space:normal;text-align:left}
+  .opd-modern .acts button.pri{font-weight:600}
+  .opd-modern .assignbtn{font-size:12px;border-radius:7px;white-space:normal}
+  .opd-modern .dept,.opd-modern .chip{font-size:11px;font-weight:500;letter-spacing:0;text-transform:none}
+  .opd-modern .nm .chip{display:inline-block;margin:5px 3px 0 0;white-space:normal}
+  .opd-lane-empty{font-size:12px;color:var(--mut);padding:24px 8px;text-align:center}
+  .opd-modern .ctl{grid-template-columns:minmax(260px,.75fr) minmax(0,2fr)}
+  .opd-modern .pool{position:static;border:0;box-shadow:var(--sh)}.opd-modern .pool .rows{max-height:none;overflow:visible}
+  .opd-modern .wall,.opd-modern .docs{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+  .opd-modern .rcard,.opd-modern .doc{border-radius:16px;box-shadow:var(--sh)}
+  .opd-modern button{transition:transform 150ms ease-out}.opd-modern button:active{transform:scale(.96)}
+  .opd-modern button:focus-visible{outline:2px solid var(--tl);outline-offset:3px}
+  @media(hover:hover) and (pointer:fine){.opd-sidebar button:hover{background:var(--tl-soft)}.opd-modern .acts button:hover{filter:brightness(.95)}}
+  @media(prefers-color-scheme:dark){.opd-modern{--bg:#171c19;--card:#222a25;--btn:#303b32;--ink:#eef2eb;--ink-sec:#d3dccf;--mut:#a9b5a9;--line:#3c483e;--tl:#b4d59b;--tl-d:#a3c58b;--tl-soft:#34462e;--tl-border:#52694a;--sh:0 0 0 1px rgba(255,255,255,.07),0 2px 4px rgba(0,0,0,.1)}.opd-sidebar button.opd-nav-current{background:#354f2a;color:#dbefcf}.opd-modern #walk,.opd-modern .acts button.pri,.opd-modern .assignbtn{color:#172313}}
+  @media(max-width:1250px){.opd-flow-board{grid-template-columns:repeat(2,minmax(0,1fr))}.opd-modern .opd-main{padding:22px}.opd-layout{grid-template-columns:170px minmax(0,1fr)}.opd-modern .ctl{grid-template-columns:1fr}.opd-modern .p-row{row-gap:20px}}
+  @media(max-width:760px){.opd-layout{grid-template-columns:1fr}.opd-sidebar{flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--line);gap:5px;padding:12px 16px}.opd-nav-label,.opd-nav-brand{display:none}.opd-sidebar button{font-size:12px;padding:8px 10px;background:var(--card);min-height:40px}.opd-sidebar .ms{font-size:16px}.opd-modern header .wrap{padding:12px 16px;flex-wrap:wrap}.opd-modern .role{margin-left:0;flex-wrap:wrap}.opd-modern .opd-main{padding:20px 16px}.opd-modern .brand .cname{display:none}.opd-modern .p-row{grid-template-columns:repeat(2,minmax(0,1fr))}.opd-modern .p-t:nth-child(even){border-right:0}.opd-modern .tot{gap:12px}.opd-search{max-width:none}.opd-modern h1{font-size:27px}}
+  @media(max-width:480px){.opd-flow-board{grid-template-columns:1fr}.opd-modern .wall,.opd-modern .docs{grid-template-columns:1fr}.opd-modern .toolbar .grow{flex-basis:100%}.opd-flow-tools{gap:10px}.opd-view-switch{width:100%}.opd-view-switch button{flex:1}.opd-search{flex-basis:100%}.opd-modern .role .chip{max-width:120px;overflow-wrap:anywhere}.opd-modern .tot{flex-direction:column;gap:7px}}
+  @media(pointer:coarse){.opd-modern button,.opd-modern .acts button{min-height:44px}.opd-modern input,.opd-modern select{font-size:16px}}
+  @media(prefers-reduced-motion:reduce){.opd-modern *{transition:none!important;animation:none!important}.opd-modern button:active{transform:none}}
+
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
-<script src="/patient-register.js?v=preg5-abdm" defer></script>
+<link rel="stylesheet" href="/ward.css">
+<script src="/opd-pulse-model.js?v=2" defer></script>
+<script src="/opd-offline-desk.js?v=3" defer></script>
+<script src="/opd-live.js?v=1" defer></script>
+<script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
+<script src="/patient-register.js?v=preg7-sid1-sid1-off2" defer></script>
+<script src="/pglog-qr.js?v=pgqr1"></script>
+<script src="/barcode128.js?v=bc128-1"></script>
+<script src="/smd-nfc.js?v=nfc-2"></script>
+<script src="/steward-identity-resolver.js?v=sir-1-sid1-phi1"></script>
+<script src="/smd-identity-scanner.js?v=sis-1"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -242,9 +387,13 @@
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
   function fbAuth(){ try{ return (window.firebase&&firebase.auth)?firebase.auth():null; }catch(e){ return null; } }
   function fbToken(){ var a=fbAuth(); var u=a&&a.currentUser; return (u&&u.getIdToken)?u.getIdToken().catch(function(){return "";}):Promise.resolve(""); }
+  function queueApiUrl(path){
+    var base = (location.hostname.indexOf("wardsynq") > -1) ? "https://stewardmd.in/api/queue/" : "/api/queue/";
+    return base + String(path || "").replace(/^\/+/, "");
+  }
   function api(path,opts){
     opts=opts||{}; var h=opts.headers||{}; h["Content-Type"]="application/json";
-    var send=function(){ return fetch("/api/queue/"+path,{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined}).then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});}); };
+    var send=function(){ return fetch(queueApiUrl(path),{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined}).then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});}); };
     if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });
     if(st.tok) h["X-Staff-Token"]=st.tok;   // GHIS token OR StewardMD staff session (server tries both)
     return send();
@@ -259,7 +408,10 @@
       .map(function(m){return '<button class="lt'+(m[0]===method?" on":"")+'" data-m="'+m[0]+'">'+m[1]+'</button>';}).join("");
     var form="";
     if(method==="account") form='<p>Clinic owner or doctor - your StewardMD account.</p><button class="btn" id="fbG" style="margin-top:0">Sign in with Google</button><div style="text-align:center;color:var(--mut);margin:12px 0;font-size:12px">or email + password</div><input id="fe" placeholder="Email" autocomplete="username" style="margin-bottom:8px"><input id="fp" type="password" placeholder="Password" autocomplete="current-password"><button class="btn" id="fbE">Sign in</button>';
-    else if(method==="staff") form='<p>Front-desk / clinic staff sign-in.</p><label>Clinic code</label><input id="sorg" value="'+esc(st.orgCode||"")+'" placeholder="SMD-XXXXXX"><label>Staff ID or email</label><input id="sid" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"><label>PIN or password</label><input id="spw" type="password" autocomplete="current-password"><button class="btn" id="goStaff">Unlock</button><div style="margin-top:10px;color:var(--mut);font-size:12px">Use your <b>clinic code + staff ID + PIN</b>, or just your <b>email + password</b> (works from any device).</div>';
+    else if(method==="staff") {
+      var savedCode=st.orgCode||""; try{if(!savedCode)savedCode=localStorage.getItem("smd_opd_clinic_code")||"";}catch(e){}
+      form='<p>Front-desk / clinic staff sign-in.</p><label>Clinic code</label><input id="sorg" value="'+esc(savedCode)+'" placeholder="SMD-XXXXXX"><label>Staff ID or email</label><input id="sid" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"><label>PIN or password</label><input id="spw" type="password" autocomplete="current-password"><button class="btn" id="goStaff">Unlock</button><div style="margin-top:10px;color:var(--mut);font-size:12px">Use your <b>clinic code + staff ID + PIN</b>, or just your <b>email + password</b> (works from any device).</div>';
+    }
     else form='<p>GITAM (GIMSR) staff - sign in with your GHIS employee ID. This is the GITAM hospital queue.</p><label>Employee ID</label><input id="uid" inputmode="numeric" autocomplete="username"><label>Password</label><input id="pwd" type="password" autocomplete="current-password"><button class="btn" id="go">Sign in</button>';
     app.innerHTML='<div class="login"><h1>StewardMD <span style="color:var(--tl)">OPD</span></h1><div class="ltabs">'+tabs+'</div>'+form+'<div class="err" id="err">'+esc(msg||"")+'</div></div>';
     Array.prototype.forEach.call(app.querySelectorAll(".lt"),function(b){b.onclick=function(){renderLogin(null,b.getAttribute("data-m"));};});
@@ -273,7 +425,7 @@
   // One staff sign-in for both PIN and email: an "@" in the ID -> email+password (any device, no clinic
   // code); otherwise clinic-code + staff-ID + PIN. Same two server endpoints, one merged form.
   function doStaffLogin(){
-    var id=document.getElementById("sid").value.trim(), pw=document.getElementById("spw").value;
+    var id=document.getElementById("sid").value.trim(), pw=document.getElementById("spw").value.trim();
     if(!id||!pw){err("Enter your staff ID (or email) and PIN (or password).");return;}
     /* THE CLINIC CODE DECIDES, NOT THE SHAPE OF THE ID. This read only for an "@" and sent anything
      * containing one down the email+password door, ignoring the clinic code just typed and offering
@@ -286,18 +438,20 @@
     id=id.toLowerCase();   // staff IDs + emails are case-insensitive; the doctor app stores them lowercase, and mobile keyboards auto-capitalize - so normalize to match
     if(!hasAt && !codeTyped){err("Enter your clinic code (or sign in with your email).");return;}
     err("Signing in…");
-    var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
+    var url=isEmail?queueApiUrl("auth/email"):queueApiUrl("auth/pin");
     var body=isEmail?{email:id,password:pw}:{clinicCode:codeTyped,identity:id,pin:pw};
     fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
       // Two-step sign-in: the PIN/password was right; ask for the phone's code and pass the answer through.
       if(!r||r.error!=="mfa_required") return r;
       var code=""; try{ code=prompt((r.message||"Enter the 6-digit code from your authenticator app.")+"\n\nLost your phone? Enter a backup code instead.")||""; }catch(e){}
       if(!code.trim()) return {cancelled:true};
-      return fetch("/api/queue/auth/mfa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
+      return fetch(queueApiUrl("auth/mfa"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
     }).then(function(r){
       if(r&&r.cancelled){ err("Sign-in cancelled."); return; }
       if(r&&(r.error==="wrong_code"||r.error==="challenge_expired")){ err(r.error==="wrong_code"?"That code did not match. Sign in again and use the newest code.":"That took too long. Sign in again."); return; }
       if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(isEmail?"Wrong email or password.":"Wrong clinic code, staff ID or PIN."))); return; }
+      if(r&&r.orgCode) try{ localStorage.setItem("smd_opd_clinic_code", r.orgCode); }catch(e){}
+      else if(codeTyped) try{ localStorage.setItem("smd_opd_clinic_code", codeTyped); }catch(e){}
       onLogin("staff",r.token,r.orgId);
     }).catch(function(){err("Could not reach the server.");});
   }
@@ -313,10 +467,31 @@
     var a=fbAuth(); if(!a){err("Account sign-in unavailable here. Use PIN or email.");return;} err("Signing in…");
     var p;
     if(mode==="google") p=a.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    else { var em=document.getElementById("fe").value.trim(), pw=document.getElementById("fp").value; if(!em||!pw){err("Enter email and password.");return;} p=a.signInWithEmailAndPassword(em,pw); }
+    else {
+      var em=document.getElementById("fe").value.trim(), pw=document.getElementById("fp").value;
+      if(!em||!pw){err("Enter your email and password.");return;}
+      p=a.signInWithEmailAndPassword(em,pw);
+    }
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
-  function logout(msg){ if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} } st.tok=""; st.tokType=""; st.who=null; localStorage.removeItem(LS_TOK); localStorage.removeItem(LS_TT); renderLogin(msg); }
+  function logout(msg){
+    liveStop();
+    // Plan item 13: an offline check-in not yet sent is the patient's place in the queue; say so before it is dropped.
+    // A forced sign-out (msg: the session ended) keeps them for the next sign-in at this desk instead.
+    try{ var od=offDesk(); if(od&&od.pending()){ if(!msg){ if(!window.confirm(od.pending()+" offline check-in(s) have not reached the queue yet and will be lost. Sign out anyway?")) return; od.clear(); } } else if(od) od.clear(); OFF=null; }catch(e){}
+    // The next person at this desk must not inherit the last one's patient lookups (steward-identity-resolver.js).
+    try{ if(window.StewardIdentityResolver&&window.StewardIdentityResolver.clearCache) window.StewardIdentityResolver.clearCache(); }catch(e){}
+    if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} }
+    st.tok=""; st.tokType=""; st.who=null;
+    try{
+      localStorage.removeItem(LS_TOK);
+      localStorage.removeItem(LS_TT);
+      localStorage.removeItem("smd_opd_staff_tok");
+      localStorage.removeItem("smd_opd_toktype");
+      sessionStorage.removeItem("smd_staff_token");
+    }catch(e){}
+    renderLogin(msg);
+  }
 
   // ---- boot: whoami then board ----
   function boot(){
@@ -326,6 +501,10 @@
       // The hospital requires two-step sign-in for this role and it is not set up: every other request would be refused.
       if(r.twoStepRequired){ app.innerHTML='<div class="login"><h3>Two-step sign-in required</h3><p>Your hospital requires two-step sign-in for your role. Set it up at <a href="https://wardsynq.com/#/security">wardsynq.com, Sign-in security</a>, then sign in here again.</p><button class="btn" id="tsOut">Sign out</button></div>'; document.getElementById("tsOut").onclick=function(){logout("");}; return; }
       st.who=r; st.smdId=r.smdId||""; st.billingOn=!!r.billing; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
+      if(r.orgName) st.orgName=r.orgName;
+      if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
+      if(r.doctorName) st.doctorName=r.doctorName;
+      if(r.orgCode) try{ localStorage.setItem("smd_opd_clinic_code", r.orgCode); }catch(e){}
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
       if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; st.ownsOrg=true;
@@ -336,22 +515,42 @@
         if(list.length===1){ openClinic(list[0]); return; }
         renderClinics(list);
       }); return; }
-      // Station-bound roles open on their own station rather than the read-only queue board. Guarded on
-      // the SERVER's billing switch: the station is inert unless CLINIC_BILLING_ENABLED=1, and redirecting
-      // into a switched-off page left the cashier with nowhere to go at all - they could not fall back,
-      // because the redirect fired first. When it is off, they stay here and are told why.
-      var stationRole=st.who&&(st.who.role==="cashier"||st.who.role==="pharmacy");
-      if(stationRole&&st.billingOn){ location.replace(st.who.role==="pharmacy"?"/clinic-billing?station=pharmacy":"/clinic-billing"); return; }
-      if(stationRole&&!st.billingOn){ renderShell('<div class="empty">The billing and pharmacy station is not switched on for this clinic yet.<br>Ask the owner to enable it, then sign in again.</div>'); return; }
+      // All roles (doctor, nurse, cashier, pharmacy, admin, owner) share the common OPD dashboard.
+      // Cashier and pharmacy stations are accessible via the Billing & Pharmacy buttons in the toolbar
+      // or patient ticket Bill actions, without forcibly ejecting staff away from the queue board.
       loadDash();
     }).catch(function(){ renderLogin("Could not reach the server. Check your connection and try again."); });
   }
   // ---- multi-clinic manager: one StewardMD account can own several clinics (open / add / delete) ----
   function wardsynqOrg(){ var w=""; try{ w=localStorage.getItem("smd_opd_workplace")||""; }catch(e){} return w.indexOf("wardsynq:")===0?w.slice(9):""; }
+  /* WardSynQ hospital OPDs bill through the hospital's unified OPD + IPD cashier (ward.js), not the
+   * standalone clinic cashier. Personal clinics keep /clinic-billing. A clinic is ONLY a WardSynQ
+   * Inpatient Hospital when the SERVER says so on whoami (mode "wardsynq" with a real hospital id):
+   * never from the hostname, nor from a stored workplace, both of which misrouted personal clinics
+   * (mode "native", e.g. SMD-6TEQZM) into the inpatient cashier that looks for admitted bed stays. */
+  function isWardSynQHospital(){
+    return !!(st.who&&st.who.mode==="wardsynq"&&st.who.hospitalId&&st.who.hospitalId!=="manual");
+  }
+  function openWardSynqCashier(mrn){
+    if(window.WARD&&window.WARD.open){ window.WARD.open({orgId:st.orgId,act:"cashier",mrn:mrn||"",returnToOpd:true}); return; }
+    toast("Hospital Cashier loading…");
+    var poll=setInterval(function(){
+      if(window.WARD&&window.WARD.open){ clearInterval(poll); window.WARD.open({orgId:st.orgId,act:"cashier",mrn:mrn||"",returnToOpd:true}); }
+    },100);
+    setTimeout(function(){ clearInterval(poll); },4000);
+  }
   /* The role is hospital-scoped: an account's whoami without a hospital is its global role, which hid
    * the admin controls from a hospital admin. Ask again for the opened hospital, as shell.js does. */
-  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id);
-    api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){ if(r&&r.ok) st.who=r; },function(){}).then(function(){ loadDash(); }); }
+  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.orgName=c.name||""; st.hasLogo=!!c.hasLogo; st.doctorName=c.doctorName||""; st.hospital=c.id; st.ownsOrg=true; st.currentOrg=c; if(c.id) localStorage.setItem(LS_HOSP,c.id);
+    if(c.code) try{ localStorage.setItem("smd_opd_clinic_code", c.code); }catch(e){}
+    api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){
+      if(r&&r.ok) {
+        st.who=r;
+        if(r.orgName) st.orgName=r.orgName;
+        if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
+        if(r.doctorName) st.doctorName=r.doctorName;
+      }
+    },function(){}).then(function(){ loadDash(); }); }
   function openClinics(){
     app.innerHTML='<div class="login"><p>Loading your clinics…</p></div>';
     api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){ openWizard(); return; } renderClinics(list); })
@@ -390,7 +589,12 @@
   function loadDash(tries){
     tries=tries||0;
     api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
-      if(r&&r.ok){ st.opd=r; renderNurseStation(r); return; }   // org-scoped board only; NO shared legacy board
+      if(r&&r.ok){
+        st.opd=r;
+        if(r.orgName) st.orgName=r.orgName;
+        if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
+        renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare(); return;
+      }
       if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
       else renderShell('<div class="empty">'+((r&&r.error==="forbidden"||r&&r.error==="not_a_member")?"You are not assigned to this clinic. Ask the owner to add you.":"No queue available yet.")+'</div>');
@@ -402,40 +606,342 @@
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
       if(!r||!r.ok){ renderShell('<div class="empty">'+(r&&r.error==="forbidden"?"You do not have access to this hospital.":"Could not load the board.")+'</div>'); return; }
-      st.board=r.board||[]; renderBoard();
+      st.board=r.board||[]; renderBoard(); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare();
     });
   }
 
+  // Presentation-only enhancement: move the existing, permission-gated nodes. Never copy an
+  // action or reconstruct its payload. Recovery: localStorage.smd_opd_flow_ui = "0" + reload.
+  var flowUI={view:"flow",filter:"all",query:"",org:null,cards:[],restore:[],focusSearch:false};
+  function flowEnabled(){ try{return localStorage.getItem("smd_opd_flow_ui")!=="0";}catch(e){return true;} }
+  function enhanceOpdShell(){
+    if(!flowEnabled()) return;
+    if(flowUI.org!==st.orgId){flowUI.view="flow";flowUI.filter="all";flowUI.query="";flowUI.org=st.orgId;}
+    var main=app.querySelector(".wrap>.toolbar"); if(!main) return;
+    main=main.parentNode;
+    app.classList.add("opd-modern");
+    var layout=document.createElement("div"); layout.className="opd-layout";
+    main.parentNode.insertBefore(layout,main);
+    var nav=document.createElement("nav");nav.className="opd-sidebar";nav.setAttribute("aria-label","Clinic workspace");
+    nav.innerHTML='<div class="opd-nav-brand"><span class="mk"></span>Clinic workspace</div><span class="opd-nav-label">Daily work</span><button type="button" class="opd-nav-current" id="opdHome"><span class="ms" aria-hidden="true">view_kanban</span>Patient flow</button>';
+    layout.appendChild(nav);layout.appendChild(main);main.classList.add("opd-main");
+    var icons={billing:"receipt_long",pharmacy:"medication",noshows:"person_off",staff:"group",rooms:"meeting_room",tariffBtn:"inventory_2",disp:"desktop_windows",brand:"palette",clinics:"domain"};
+    ["billing","pharmacy","noshows","rooms","staff","tariffBtn","disp","brand","clinics"].forEach(function(id,i){
+      var b=document.getElementById(id);if(!b)return;
+      if(i===3){var label=document.createElement("span");label.className="opd-nav-label";label.textContent="Manage clinic";nav.appendChild(label);}
+      var icon=document.createElement("span");icon.className="ms";icon.setAttribute("aria-hidden","true");icon.textContent=icons[id];b.insertBefore(icon,b.firstChild);nav.appendChild(b);
+    });
+    var toolbar=main.querySelector(".toolbar"), grow=toolbar.querySelector(".grow");
+    if(grow){var title=document.createElement("h1");title.textContent="Patient flow";grow.insertBefore(title,grow.firstChild);}
+    document.getElementById("opdHome").onclick=function(){flowUI.query="";flowUI.filter="all";flowUI.view="flow";mountOpdFlow();};
+  }
+  function mountOpdFlow(){
+    if(!flowEnabled()||!app.classList.contains("opd-modern")) return;
+    // Restore before rebuilding the view (e.g. Home), leaving every original listener attached.
+    flowUI.restore.forEach(function(x){if(x.anchor.parentNode)x.anchor.parentNode.replaceChild(x.node,x.anchor);});
+    flowUI.restore=[];flowUI.cards=[];
+    var previous=app.querySelector(".opd-flow-board");if(previous)previous.remove();
+    var oldTools=app.querySelector(".opd-flow-tools");if(oldTools)oldTools.remove();
+    var main=app.querySelector(".opd-main"), original=main.querySelector(".ctl,.docs");if(!original)return;
+    original.hidden=false;
+    var tools=document.createElement("div");tools.className="opd-flow-tools";
+    tools.innerHTML='<div class="opd-view-switch" role="group" aria-label="Board view"><button type="button" data-opd-view="flow">Flow board</button><button type="button" data-opd-view="rooms">'+(st.opd?'Rooms':'Doctor queues')+'</button></div>'+
+      '<label class="opd-search"><span class="ms" aria-hidden="true">search</span><input id="opdPatientSearch" type="search" autocomplete="off" aria-label="Find patient by name, token or MRN" placeholder="Find patient, token or MRN"></label>'+
+      '<label class="opd-filter-label">Show<select id="opdPatientFilter"><option value="all">Everyone</option><option value="urgent">Urgent</option><option value="long">Waiting over 1 hour</option></select></label>'+
+      '<span id="opdFilterCount" role="status" aria-live="polite"></span>';
+    original.parentNode.insertBefore(tools,original);
+    var board=document.createElement("div");board.className="opd-flow-board";
+    var stages=[['route','To route','Assign a consultation room'],['waiting','Room queue','Waiting or called'],['consult','Consulting','In the room with a doctor'],['tests','At diagnostics','Tests and return to queue']];
+    board.innerHTML=stages.map(function(s){return '<section class="opd-lane" data-opd-lane="'+s[0]+'" aria-label="'+s[1]+'"><h2>'+s[1]+'<span class="opd-lane-count"></span></h2><p>'+s[2]+'</p><div class="opd-lane-cards"></div><div class="opd-lane-empty">No patients in this stage.</div></section>';}).join("");
+    original.parentNode.insertBefore(board,original);
+    var records={};
+    function record(t,sid,room,doctor){records[(sid||"pool")+":"+t.id]={ticket:t,room:room,doctor:doctor};}
+    if(st.opd){
+      (st.opd.pool||[]).forEach(function(t){record(t,null,"Not assigned","");});
+      (st.opd.rooms||[]).forEach(function(r){(r.tickets||[]).forEach(function(t){record(t,r.sessionId,(r.room.name||"Room")+(r.room.number?" · "+r.room.number:""),docLabel(r.doctorUid,r.doctorName)||"");});});
+    }else{(st.board||[]).forEach(function(b){(b.tickets||[]).forEach(function(t){record(t,b.session.id,"",docLabel(b.session.doctorUid,b.session.doctorName)||"Doctor");});});}
+    Array.prototype.forEach.call(original.querySelectorAll(".pcard,.row"),function(node){
+      var a=node.querySelector("[data-assign]"), action=node.querySelector("[data-t][data-s]")||node.querySelector("[data-t]");
+      var key=a?"pool:"+a.getAttribute("data-assign"):(action?(action.getAttribute("data-s")||"pool")+":"+action.getAttribute("data-t"):"");
+      var r=records[key];if(!r)return;
+      var t=r.ticket, stage=key.indexOf("pool:")===0?"route":t.status==="in_consultation"?"consult":t.status==="at_diagnostics"?"tests":"waiting";
+      var wait=waitMin(t), longWait=(stage==="route"||stage==="waiting")&&wait>=60;
+      var context=node.querySelector(".opd-card-context");if(!context){context=document.createElement("div");context.className="opd-card-context";node.insertBefore(context,node.firstChild);}
+      context.textContent=[r.room,r.doctor].filter(Boolean).join(" · ");
+      var oldWait=node.querySelector(".opd-long-wait");if(oldWait)oldWait.remove();
+      if(longWait){var warn=document.createElement("div");warn.className="opd-long-wait";warn.textContent="Waiting over 1 hour";node.insertBefore(warn,context.nextSibling);}
+      // Waiting duration is from the existing registration timestamp, never labelled as time in a stage.
+      var search=[t.name,t.token,t.tokenLabel,t.tokenNumber,t.mrn,t.mrnLast4,t.ghisPatientId,t.smdId].join(" ").toLowerCase();
+      flowUI.cards.push({node:node,stage:stage,search:search,urgent:t.priority>=2,longWait:longWait,key:key});
+    });
+    function setView(){
+      flowUI.restore.forEach(function(x){if(x.anchor.parentNode)x.anchor.parentNode.replaceChild(x.node,x.anchor);});flowUI.restore=[];
+      if(flowUI.view==="flow")flowUI.cards.forEach(function(c){var anchor=document.createComment("opd-room-position");c.node.parentNode.insertBefore(anchor,c.node);flowUI.restore.push({node:c.node,anchor:anchor});board.querySelector('[data-opd-lane="'+c.stage+'"] .opd-lane-cards').appendChild(c.node);});
+      original.hidden=flowUI.view==="flow";board.hidden=flowUI.view!=="flow";
+      Array.prototype.forEach.call(tools.querySelectorAll("[data-opd-view]"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-opd-view")===flowUI.view));});
+      applyFilters();
+    }
+    function applyFilters(){
+      var shown=0, counts={route:0,waiting:0,consult:0,tests:0};
+      flowUI.cards.forEach(function(c){var visible=(!flowUI.query||c.search.indexOf(flowUI.query.toLowerCase())!==-1)&&(flowUI.filter==="all"||(flowUI.filter==="urgent"&&c.urgent)||(flowUI.filter==="long"&&c.longWait));c.node.hidden=!visible;if(visible){shown++;counts[c.stage]++;}});
+      stages.forEach(function(s){var lane=board.querySelector('[data-opd-lane="'+s[0]+'"]');lane.querySelector(".opd-lane-count").textContent=counts[s[0]];lane.querySelector(".opd-lane-empty").hidden=counts[s[0]]>0;lane.querySelector(".opd-lane-empty").textContent=flowUI.query||flowUI.filter!=="all"?"No patients match this filter.":"No patients in this stage.";});
+      document.getElementById("opdFilterCount").textContent=shown+" of "+flowUI.cards.length+" patients";
+    }
+    var input=document.getElementById("opdPatientSearch"), select=document.getElementById("opdPatientFilter");input.value=flowUI.query;select.value=flowUI.filter;
+    input.oninput=function(){flowUI.query=input.value;applyFilters();};select.onchange=function(){flowUI.filter=select.value;applyFilters();};
+    Array.prototype.forEach.call(tools.querySelectorAll("[data-opd-view]"),function(b){b.onclick=function(){flowUI.view=b.getAttribute("data-opd-view");setView();};});
+    setView();
+    if(flowUI.focusSearch){input.focus();flowUI.focusSearch=false;}
+  }
+
   function renderShell(inner){
+    flowUI.focusSearch=!!(document.activeElement&&document.activeElement.id==="opdPatientSearch");
+    app.classList.remove("opd-modern");
     var name=st.who?(st.who.name||"Staff"):"", role=st.who?st.who.role:"";
-    app.innerHTML='<header><div class="wrap"><div class="brand">Steward<span>MD</span> OPD</div>'+
-      '<div class="role"><span>'+esc(name)+'</span><span class="chip">'+esc(role)+'</span>'+
-      '<button class="ghost" id="lo">Sign out</button></div></div></header>'+
+    var cName=st.orgName || (st.who && st.who.orgName) || "";
+    var logoHtml=(st.hasLogo || (st.who && st.who.hasLogo)) ? '<img class="clogo" src="/api/queue/branding/logo?orgId='+encodeURIComponent(st.orgId)+'" alt="" style="height:26px;max-width:100px;object-fit:contain;border-radius:4px;margin-right:8px;vertical-align:middle" onerror="this.style.display=\'none\'">' : '';
+    app.innerHTML='<header><div class="wrap"><div class="brand" style="display:flex;align-items:center">'+logoHtml+'<div>Steward<span>MD</span> OPD'+(cName?' <span class="cname" style="font-weight:500;color:var(--mut);font-size:14px"> · '+esc(cName)+'</span>':'')+'</div></div>'+
+      '<div class="role"><span class="who-name">'+esc(name)+'</span><span class="chip">'+esc(role)+'</span>'+
+      '<button class="ghost" id="lo" title="Sign out of this session"><span class="ms sm">logout</span> Sign out</button></div></div></header>'+
       '<div class="wrap"><div class="toolbar">'+
-        '<div class="grow"><b>OPD Board</b> · <span title="Clinic code - staff use this to sign in">'+esc(st.orgCode||st.hospital)+'</span> · '+esc(st.date)+'</div>'+
+        '<div class="grow"><b>'+esc(cName || "OPD Board")+'</b> · <span title="Clinic code - staff use this to sign in">'+esc(st.orgCode||st.hospital)+'</span> · '+esc(st.date)+'</div>'+
         (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="clinics">Clinics</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="rooms">Rooms</button>':'')+
+        (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="tariffBtn">Tariff & Stock</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
+        '<button class="ghost" id="opdScanBtn" title="Scan QR code, barcode, or tap Ni-Key">&#128247; Scan</button>'+
         (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
+        (st.orgId&&st.orgId!=="demo"&&can("analytics.view")?'<button class="ghost" id="dayclose">Close the day</button>':'')+
+        '<button class="ghost" id="billing">Billing</button>'+
+        '<button class="ghost" id="pharmacy">Pharmacy</button>'+
         '<button class="ghost" id="ref">Refresh</button>'+
-      '</div>'+inner+'</div>';
+      '</div>'+
+      // The OPD's own figures, above the board they summarise. Filled by paintPulse when it arrives.
+      '<section class="pulse" id="opdPulse">'+pulseInner()+'</section>'+
+      inner+'</div>';
     var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
+    var dcb=document.getElementById("dayclose"); if(dcb) dcb.onclick=openDayClose;
     document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
+    var scb=document.getElementById("opdScanBtn"); if(scb) scb.onclick=function(){ openOpdScanner(); };
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
     var nc=document.getElementById("clinics"); if(nc) nc.onclick=openClinics;
     var rms=document.getElementById("rooms"); if(rms) rms.onclick=openRoomsAdmin;
+    var trfBtn=document.getElementById("tariffBtn"); if(trfBtn) trfBtn.onclick=function(){ openTariffAdmin(); };
     var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
     var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
+    var bll = document.getElementById("billing");
+    if (bll) {
+      bll.onclick = function () {
+        if (isWardSynQHospital()) openWardSynqCashier();
+        else location.href = "/clinic-billing";
+      };
+    }
+    var phm = document.getElementById("pharmacy");
+    if (phm) {
+      phm.onclick = function () {
+        if (isWardSynQHospital()) {
+          if (window.WARD && window.WARD.open) window.WARD.open({ orgId: st.orgId, act: "inventoryboard", returnToOpd: true });
+          else toast("Hospital Pharmacy loading…");
+        } else {
+          location.href = "/clinic-billing?station=pharmacy";
+        }
+      };
+    }
+    enhanceOpdShell();
   }
-  function refresh(){ st.opd?loadDash():loadBoard(); }
-  /* D13: RECALL NO-SHOWS. Every queue in this hospital today; a patient marked no-show in the last 4 hours
-   * (and before the session ended) goes back to waiting with the SAME token, at the head of their priority
-   * band. A reason is required and recorded with who and when. A failed load is said, never "nobody". */
+  function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); offTick(); }
+
+  /* ---- plan item 13: degraded desk mode (opd-offline-desk.js). While online the desk holds today's offline
+   * series; when the server cannot be reached a check-in still completes with a number from it and a printed
+   * slip, and every refresh (and the browser's "online" event) sends what is waiting. ---- */
+  var OFF=null;
+  function offDesk(){
+    if(!window.SMD_OPD_OFFLINE||!st.orgId||!(st.who&&can("queue.add"))) return null;
+    if(!OFF||OFF._org!==st.orgId||OFF._date!==st.date){
+      var ss=null, idb=null; try{ ss=window.sessionStorage; }catch(e){} try{ idb=window.indexedDB||null; }catch(e){}
+      if(!ss&&!idb) return null;
+      // IndexedDB first, so a check-in taken offline survives the tab being closed; the tab's storage when it cannot open.
+      OFF=SMD_OPD_OFFLINE.desk({indexedDB:idb,storage:ss,orgId:st.orgId,date:st.date,call:function(path,body){ return api(path,{method:"POST",body:body}); }});
+      OFF._org=st.orgId; OFF._date=st.date;
+      OFF.loaded.then(function(){ paintOffline(); if(OFF&&OFF.pending()&&navigator.onLine!==false) offTick(); });
+    }
+    return OFF;
+  }
+  // The series is reserved as soon as the desk has loaded, not at the first refresh: a desk that lost the connection
+  // before anyone pressed anything had no series, so its first offline check-in could not be given a number.
+  function offPrepare(){ var d=offDesk(); if(d&&navigator.onLine!==false) d.prepare().then(function(){ paintOffline(); }); }
+  function offTick(){
+    var d=offDesk(); if(!d){ paintOffline(); return; }
+    d.prepare().then(function(){ paintOffline(); });
+    if(d.pending()) d.sync().then(function(r){
+      if(r.synced) toast(r.synced+(r.synced===1?" offline check-in":" offline check-ins")+" sent to the queue"+(r.review?" - "+r.review+" to check":""));
+      paintOffline(); if(r.synced){ st.opd?loadDash():loadBoard(); }
+    });
+    paintOffline();
+  }
+  try{ window.addEventListener("online",function(){ offTick(); }); window.addEventListener("offline",function(){ paintOffline(); }); }catch(e){}
+  function paintOffline(){
+    var bar=document.getElementById("offBar");
+    if(!bar){ bar=document.createElement("div"); bar.id="offBar"; bar.className="offbar"; bar.setAttribute("role","status"); bar.setAttribute("aria-live","polite"); bar.hidden=true; document.body.appendChild(bar);
+      bar.onclick=function(e){ var b=e.target.closest&&e.target.closest("[data-off]"); if(!b) return; var a=b.getAttribute("data-off"), d=offDesk(); if(!d) return;
+        if(a==="send") offTick(); else if(a==="dismiss"){ d.dismiss(b.getAttribute("data-tok")); paintOffline(); } }; }
+    var d=offDesk(), n=d?d.pending():0, rv=d?d.review():[], down=(typeof navigator!=="undefined"&&navigator.onLine===false);
+    if(!d||(!n&&!rv.length&&!down)){ bar.hidden=true; bar.innerHTML=""; return; }
+    var h='<div class="row"><span>'+(down?(d.ready()?"Offline. Check-in continues on this desk.":"Offline. This desk has no offline series yet: check-in needs the connection."):"Back online.")+'</span>'+
+      (n?'<span>'+n+(n===1?" check-in":" check-ins")+' waiting to be sent</span>'+(down?"":'<button data-off="send">Send now</button>'):"")+'</div>';
+    h+=rv.map(function(x){ return '<div class="rv"><b>'+esc(x.token)+'</b> '+esc(x.name||"")+': '+esc(x.why)+' <button data-off="dismiss" data-tok="'+esc(x.token)+'">Done</button></div>'; }).join("");
+    bar.innerHTML=h; bar.hidden=false;
+  }
+  function printTokenSlip(o){
+    var ok=false;
+    try{ ok=!!(window.WARD_LABELS&&WARD_LABELS.print("token",{hospital:st.orgName||st.orgCode||"",token:o.token,name:o.name||"",issuedAt:new Date(o.at||Date.now()).toLocaleString()})); }catch(e){}
+    if(!ok) toast("Printing is not available here. Write "+o.token+" on the patient's slip.");
+  }
+
+  /* ---- THE OPD PULSE (server: /opd-pulse, figures: functions/_queue_eta.js opdPulse) -------------
+   * The same card the app shows, on the desk that can act on it first. Counts and durations only - it
+   * names nobody, so it is safe on a screen the whole waiting hall can see. A read that fails SAYS so:
+   * an empty strip here would read as a quiet OPD, which is the one thing it must never say by
+   * accident. The preview clinic has no hospital behind it, so it simply does not ask. */
+  /* ---- plan item 16: the console is told when the hospital's queue changes (opd-live.js over GET /live). Before
+   * this it had no timer at all and showed what it last loaded until someone pressed something. A change refreshes
+   * the board unless someone is typing on it (then the next change or the minute's safety pass does); when the
+   * stream is down a slow pass keeps it from going stale. ---- */
+  var LIVE=null, liveOrg="", liveT=null;
+  function liveHdrs(){ var h={}; if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return h; }); if(st.tok) h["X-Staff-Token"]=st.tok; return Promise.resolve(h); }
+  // A change heard while the tab is hidden or someone is typing is remembered (liveMissed), not dropped: the board catches
+  // up when the tab is shown again, the field is left, or at the minute's pass. Dropped, it stayed stale until the next change.
+  var liveMissed=false;
+  function liveRefresh(){ clearTimeout(liveT); liveT=setTimeout(function(){ var ae=document.activeElement, typing=!!(ae&&ae.closest&&ae.closest("input, textarea, select")); if(!document.hidden&&!typing&&st.orgId){ liveMissed=false; refresh(); } else if(st.orgId) liveMissed=true; },300); }
+  try{ document.addEventListener("visibilitychange",function(){ if(!document.hidden&&liveMissed) liveRefresh(); }); document.addEventListener("focusout",function(){ if(liveMissed) liveRefresh(); }); }catch(e){}
+  function liveStart(){
+    if(!window.SMD_OPD_LIVE||!st.orgId||st.orgId==="demo") return;
+    if(LIVE&&liveOrg===st.orgId) return;
+    if(LIVE) LIVE.stop();
+    liveOrg=st.orgId;
+    LIVE=SMD_OPD_LIVE.connect({url:queueApiUrl("live?orgId="+encodeURIComponent(st.orgId)),headers:liveHdrs,onChange:liveRefresh});
+  }
+  function liveStop(){ if(LIVE) LIVE.stop(); LIVE=null; liveOrg=""; }
+  try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&(liveMissed||!(LIVE&&LIVE.isLive()))) liveRefresh(); },60000); }catch(e){}
+  function loadPulse(){
+    if(!st.orgId||st.orgId==="demo") return;
+    liveStart();
+    api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
+      // Plan item 11: follow-ups promised and never booked (silent when the hospital has no record).
+      var now=new Date().toISOString();
+      if(st.pulse.ok) api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok&&st.pulse&&st.pulse.ok){ st.pulse.followups={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; paintPulse(); } }).catch(function(){});
+    }).catch(function(){ st.pulse={failed:true}; paintPulse(); });
+  }
+  function paintPulse(){
+    var host=document.getElementById("opdPulse"); if(host) host.innerHTML=pulseInner();
+    var rb=document.getElementById("opdRecon");
+    if(rb) rb.onclick=function(){ api("opd-reconcile",{method:"POST",body:{orgId:st.orgId}}).then(function(r){ toast(r&&r.ok?(r.landed+" of "+r.retried+" visits now in the record"+(r.stillFailed?"; "+r.stillFailed+" still failing":"")):"Could not retry now"); loadPulse(); }); };
+  }
+  function pnum(v,unit){ return v==null?'<i class="p-none">not yet</i>':esc(v)+(unit?'<u>'+unit+'</u>':''); }
+  function pulseInner(){
+    var M=window.SMD_OPD_PULSE, m=st.pulse&&M?M.model(st.pulse):null; if(!m) return '';
+    if(m.failed) return '<div class="p-warn">'+esc(m.message)+'</div>';
+    var tiles=m.tiles.map(function(t){
+      var v=t.value==null?'<i class="p-none">not yet</i>':esc(t.value)+(t.unit?'<u>'+esc(t.unit)+'</u>':'');
+      var sub=t.action==="reconcile"?'<button class="ghost" id="opdRecon" style="padding:2px 8px">Send again</button>':esc(t.sub||'');
+      return '<div class="p-t'+(t.warn?' warn':'')+'"><div class="p-l">'+esc(t.label)+'</div><div class="p-v">'+v+'</div><div class="p-s">'+sub+'</div></div>';
+    }).join('');
+    return '<div class="p-row">'+tiles+'</div>'+
+      (m.note?'<div class="p-note">Desk '+pnum(m.note.deskMin,'m')+', doctor '+pnum(m.note.doctorMin,'m')+' · '+esc(m.note.text)+'</div>':'')+
+      (m.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(m.unread.join(", "))+'), so these figures are short.</div>':'');
+  }
+  /* ---- plan item 15: the owner's day close (server: /day-close; figures: _queue_eta.js dayClose + the cashier's
+   * shift report). Headline first, then each room, the money, what is still open and the exceptions. A read that
+   * failed says so: an empty money box would read as a day with no takings. ---- */
+  function rupees(p){ return "\u20b9"+Math.round((p||0)/100).toLocaleString("en-IN"); }
+  function dcMin(v){ return v==null?"-":esc(v)+"m"; }
+  function dayCloseHtml(r,fu){
+    var c=r.close||{}, p=c.pulse||{}, m=r.money, rooms=c.rooms||[];
+    var k=function(l,v,s,warn){ return '<div class="dc-k'+(warn?' warn':'')+'"><div class="l">'+esc(l)+'</div><div class="v">'+v+'</div>'+(s?'<div class="s">'+s+'</div>':'')+'</div>'; };
+    var h='<div class="dc"><h3>Day close</h3><p class="dc-sub">'+esc(st.orgName||st.orgCode||"")+' &middot; '+esc(r.date||"")+' &middot; as of '+esc(new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}))+'</p>';
+    if(r.unread&&r.unread.length) h+='<div class="dc-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>';
+    h+='<div class="dc-grid">'+
+      k("Patients seen",esc(p.seen||0),esc(p.registered||0)+" registered")+
+      (m?k("Collected (net)",rupees(m.net),esc(m.count||0)+" bills"):r.moneyUnread?k("Collected","-","could not be read",true):"")+
+      k("Did not wait",p.abandonedPct==null?"-":esc(p.abandonedPct)+"%",esc(p.noShow||0)+" no-shows",(p.abandonedPct||0)>=10)+
+      k("Door to doctor",dcMin(p.doorToDoctor&&p.doorToDoctor.medianMin),"9 in 10 within "+dcMin(p.doorToDoctor&&p.doorToDoctor.p90Min))+
+    '</div>';
+    h+='<h4>By room</h4>'+(rooms.length?'<table class="dc-t"><thead><tr><th>Room</th><th>Registered</th><th>Seen</th><th>No-show</th><th>Consult</th><th>Wait</th></tr></thead><tbody>'+
+      rooms.map(function(x){ return '<tr><td>'+esc(x.room)+(x.doctor?' <span style="color:var(--mut)">'+esc(x.doctor)+'</span>':'')+'</td><td>'+esc(x.registered)+'</td><td>'+esc(x.seen)+'</td><td>'+esc(x.noShow)+'</td><td>'+dcMin(x.consultMedianMin)+'</td><td>'+dcMin(x.doorToDoctorMedianMin)+'</td></tr>'; }).join("")+
+      '</tbody></table>':'<div class="empty">No patients today.</div>');
+    h+='<h4>Money</h4>';
+    if(r.moneyUnread) h+='<div class="dc-warn">The day\'s money could not be read. Do not read this as no takings; open Billing, Shift report.</div>';
+    else if(!m) h+='<div class="empty">Billing is not switched on for this hospital.</div>';
+    else h+='<div class="dc-grid">'+k("Takings",rupees(m.total),esc(m.count||0)+" bills")+k("Refunds",rupees(m.refunds&&m.refunds.total),esc((m.refunds&&m.refunds.count)||0)+" refunds",(m.refunds&&m.refunds.count)>0)+k("Net",rupees(m.net),"")+(r.unbilled!=null?k("Not yet paid",esc(r.unbilled),"orders waiting at billing",r.unbilled>0):"")+'</div>'+
+      '<div class="dc-chips">'+["cash","upi","card","split","other"].filter(function(x){ return m.byCount&&m.byCount[x]; }).map(function(x){ return '<span>'+esc(x.toUpperCase())+' '+rupees(m.byMethod[x])+' &middot; '+esc(m.byCount[x])+'</span>'; }).join("")+'</div>';
+    var open=[["Still waiting",p.waiting],["In consultation",p.inConsultation],["At the lab or booked back",p.held],["Back with results",p.resultsBack],["Visits not in the record",p.syncFailed]];
+    if(fu) open.push(["Follow-ups to book",fu.unbooked+(fu.overdue?" ("+fu.overdue+" overdue)":"")]);
+    open=open.filter(function(x){ return x[1]&&x[1]!=="0"; });
+    h+='<h4>Still open</h4>'+(open.length?'<div class="dc-chips">'+open.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">Nothing left open.</div>');
+    var pr=Object.keys(c.priority||{}), ex=pr.map(function(x){ return ["Ahead of the queue: "+prioLabel({priority:x==="emergency"?2:1,priorityReason:x}),c.priority[x]]; });
+    if(p.recalls) ex.push(["No-shows recalled",p.recalls]);
+    if(c.offline) ex.push(["Checked in offline",c.offline]);
+    h+='<h4>Exceptions</h4>'+(ex.length?'<div class="dc-chips">'+ex.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">No one was put ahead of the queue.</div>');
+    return h+'</div>';
+  }
+  /* Owner ask G2: the day close on WhatsApp at a set hour (server: /org/day-close-settings, sent by the hourly job;
+   * Send now: /day-close/send). The saved number only ever comes back masked; leaving the field blank keeps it. */
+  function hourLabel(h){ var a=h%12===0?12:h%12; return a+(h<12?" am":" pm"); }
+  function dcWaHtml(s){
+    var opts=""; for(var h=0;h<24;h++) opts+='<option value="'+h+'"'+(h===s.hour?" selected":"")+'>'+hourLabel(h)+'</option>';
+    var why=function(r){ return {whatsapp_not_configured:"WhatsApp is not set up on the server",not_configured:"WhatsApp is not set up on the server",bad_number:"the number was not accepted"}[r]||r||"no reason given"; };
+    var last=s.last, st=!last?(s.enabled?"Not sent yet today.":""):last.status==="sent"?"Sent today.":last.status==="failed"?"Today's send failed: "+esc(why(last.reason))+(last.attempts<3?"; it is tried again next hour.":"."):"Sending...";
+    return '<div class="dc-wa" id="dcWa"><h4>Send it to WhatsApp every day</h4><p class="t">The same figures, as counts and totals only (no patient is named), at the hour you pick on the hospital\'s clock.</p>'+
+      '<div class="f"><label class="on"><input type="checkbox" id="dcWaOn"'+(s.enabled?" checked":"")+'> Send daily</label>'+
+      '<label>At<select id="dcWaHour" aria-label="Hour to send">'+opts+'</select></label>'+
+      '<label>WhatsApp number<input type="tel" id="dcWaMob" inputmode="tel" autocomplete="tel" placeholder="'+(s.hasMobile?esc(s.mobileMasked)+" (saved)":"98765 43210")+'"></label></div>'+
+      '<div class="row2">'+(s.hasMobile?'<button class="cancel" id="dcWaNow">Send now</button>':'')+'<button class="btn" id="dcWaSave" style="margin:0">Save</button></div>'+
+      '<div class="dc-wa-st'+(last&&last.status==="failed"?" bad":"")+'" id="dcWaSt" role="status" aria-live="polite">'+st+'</div></div>';
+  }
+  function wireDcWa(){
+    var host=sheet.querySelector("#dcWaHost"); if(!host) return;
+    var say=function(t,bad){ var e=sheet.querySelector("#dcWaSt"); if(e){ e.textContent=t; e.className="dc-wa-st"+(bad?" bad":""); } };
+    function render(s,msg,bad){
+      host.innerHTML=dcWaHtml(s); if(msg) say(msg,bad);
+      sheet.querySelector("#dcWaSave").onclick=function(){
+        var b=this; b.disabled=true;
+        api("org/day-close-settings",{method:"POST",body:{orgId:st.orgId,settings:{enabled:sheet.querySelector("#dcWaOn").checked,hour:+sheet.querySelector("#dcWaHour").value,mobile:sheet.querySelector("#dcWaMob").value.trim()}}}).then(function(x){
+          b.disabled=false;
+          if(!x||!x.ok){ say((x&&x.message)||"Not saved.",true); return; }
+          render(x.settings,x.settings.enabled?"Saved: sent daily at "+hourLabel(x.settings.hour)+" to "+x.settings.mobileMasked+".":"Saved: not sent daily.");
+        },function(){ b.disabled=false; say("Not saved: the server could not be reached.",true); });
+      };
+      var now=sheet.querySelector("#dcWaNow");
+      if(now) now.onclick=function(){ now.disabled=true; api("day-close/send",{method:"POST",body:{orgId:st.orgId}}).then(function(x){ now.disabled=false; say((x&&x.message)||"Not sent.",!(x&&x.ok)); },function(){ now.disabled=false; say("Not sent: the server could not be reached.",true); }); };
+    }
+    api("org/day-close-settings?orgId="+encodeURIComponent(st.orgId)).then(function(r){ if(r&&r.ok) render(r.settings); else host.innerHTML=""; },function(){ host.innerHTML=""; });
+  }
+  function openDayClose(){
+    open('<div class="dc"><h3>Day close</h3><div class="empty">Reading the day...</div></div>',true);
+    var now=new Date().toISOString(), fu=null;
+    var fuP=api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok) fu={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; },function(){});
+    api("day-close?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      return fuP.then(function(){
+        if(!r||!r.ok){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The day could not be read ('+esc((r&&(r.message||r.error))||"no response")+').</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; return; }
+        var body=dayCloseHtml(r,fu);
+        open(body+(can("staff.admin")||st.ownsOrg?'<div id="dcWaHost"></div>':'')+'<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dcPrint" style="margin:0">Print</button></div>',true);
+        wireDcWa();
+        sheet.querySelector("#cx").onclick=close;
+        sheet.querySelector("#dcPrint").onclick=function(){
+          var css=Array.prototype.map.call(document.querySelectorAll("style"),function(x){ return x.textContent; }).join("\n");
+          var doc='<!doctype html><html><head><meta charset="utf-8"><title>Day close</title><style>'+css+'@page{size:A4;margin:14mm}body{background:#fff;color:#111;padding:0}</style></head><body>'+body+'</body></html>';
+          var okp=false; try{ okp=!!(window.WARD_LABELS&&WARD_LABELS.printDocument(doc)); }catch(e){}
+          if(!okp) window.print();
+        };
+      });
+    },function(){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The server could not be reached.</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; });
+  }
   function openNoShows(){
     open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
     sheet.querySelector("#cx").onclick=close;
@@ -472,11 +978,12 @@
   // Pro white-label: upload the clinic's own logo (shown on the patient page, wall board + FollowCare).
   function openBranding(){
     var url="/api/queue/branding/logo?orgId="+encodeURIComponent(st.orgId)+"&_="+Date.now();
+    var currentName = st.orgName || (st.who && st.who.orgName) || "";
     open('<h3>Clinic branding</h3>'+
-      '<p class="t" style="margin:0 0 12px">Pro clinics can show their own logo on the patient wait page, the waiting-room display and FollowCare messages, with a small "powered by StewardMD". PNG, WebP or JPG, up to 256 KB.</p>'+
+      '<p class="t" style="margin:0 0 12px">Show your clinic name and logo on the OPD dashboard, patient wait page, and waiting-room display. PNG, WebP or JPG, up to 256 KB.</p>'+
       '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><img src="'+esc(url)+'" alt="" style="height:44px;max-width:160px;object-fit:contain;border:1px solid var(--line);border-radius:8px;padding:4px;background:var(--card)" onerror="this.style.display=\'none\'"></div>'+
-      '<label>Clinic name (shown next to the logo)</label><input id="bname" placeholder="e.g. Sunrise Clinic">'+
-      '<label style="margin-top:12px">Logo image</label>'+
+      '<label>Clinic name</label><input id="bname" value="'+esc(currentName)+'" placeholder="e.g. Sunrise Clinic">'+
+      '<label style="margin-top:12px">Logo image (optional)</label>'+
       '<input id="bfile" type="file" accept="image/*" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">'+
       '<button type="button" id="bpick" style="width:100%;margin-top:0;padding:13px;border:1px dashed var(--line);border-radius:10px;background:var(--card);color:var(--tl);font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer"><span class="ms">add_photo_alternate</span>Choose logo image</button>'+
       '<div id="bfilename" style="font-size:12px;color:var(--mut);margin-top:8px;min-height:14px"></div>'+
@@ -487,15 +994,26 @@
     sheet.querySelector("#bfile").onchange=function(){ var sf=this.files[0]; sheet.querySelector("#bfilename").textContent=sf?("Selected: "+sf.name):""; };
     sheet.querySelector("#ok").onclick=function(){
       var f=sheet.querySelector("#bfile").files[0], nm=sheet.querySelector("#bname").value.trim(), er=sheet.querySelector("#berr");
-      if(!f){ er.textContent="Choose a logo image first."; return; }
-      if(f.size>256*1024){ er.textContent="That image is over 256 KB. Please use a smaller file."; return; }
-      var btn=sheet.querySelector("#ok"); btn.disabled=true; btn.textContent="Uploading…";
-      uploadLogo(f,nm).then(function(r){
-        if(!r||!r.ok){ var e=(r&&r.error)||"Upload failed";
+      if(!f && !nm){ er.textContent="Enter a clinic name or choose a logo image."; return; }
+      if(f && f.size>256*1024){ er.textContent="That image is over 256 KB. Please use a smaller file."; return; }
+      var btn=sheet.querySelector("#ok"); btn.disabled=true; btn.textContent="Saving…";
+      var onDone = function(r){
+        if(!r||!r.ok){
+          var e=(r&&r.error)||"Save failed";
           er.textContent = e==="pro_required" ? "Custom branding is a StewardMD Pro feature." : e==="too_large" ? "That image is over 256 KB." : e==="unsupported_type" ? "Please use a PNG, WebP or JPG image." : friendly(e);
-          btn.disabled=false; btn.textContent="Save branding"; return; }
-        toast("Branding saved"); close();
-      });
+          btn.disabled=false; btn.textContent="Save branding"; return;
+        }
+        if(nm) { st.orgName = nm; if(st.who) st.who.orgName = nm; }
+        if(f) { st.hasLogo = true; if(st.who) st.who.hasLogo = true; }
+        toast("Branding saved"); close(); loadDash();
+      };
+      if(f){
+        uploadLogo(f,nm).then(onDone);
+      } else {
+        api("org/update", { method: "POST", body: { orgId: st.orgId, name: nm } }).then(onDone).catch(function(){
+          er.textContent="Could not reach the server."; btn.disabled=false; btn.textContent="Save branding";
+        });
+      }
     };
   }
   function uploadLogo(file,name){
@@ -509,9 +1027,9 @@
   function renderBoard(){
     if(!st.board.length){ renderShell('<div class="empty">No OPD queues yet for today.<br>Patients auto-import from GHIS once doctors sign in, or add a walk-in.</div>'); return; }
     var docs=st.board.map(function(b){
-      var s=b.session, tickets=(b.tickets||[]).filter(function(t){return ["registered","waiting","called","in_consultation"].indexOf(t.status)>-1;});
+      var s=b.session, tickets=(b.tickets||[]).filter(function(t){return ["registered","waiting","called","in_consultation","at_diagnostics"].indexOf(t.status)>-1;});
       var rows=tickets.length? tickets.map(function(t,i){return ticketRow(s,t,i,tickets.length);}).join("") : '<div class="empty">No patients waiting</div>';
-      return '<div class="doc"><h2>'+esc(s.doctorName||s.doctorUid||"Doctor")+'<small>'+tickets.length+' in queue</small></h2>'+
+      return '<div class="doc"><h2>'+esc(docLabel(s.doctorUid,s.doctorName)||"Doctor")+'<small>'+tickets.length+' in queue</small></h2>'+
         '<div class="rows">'+rows+'</div>'+
         '<div style="padding:8px 12px;border-top:1px solid var(--line);text-align:right">'+
           '<button class="ghost" data-audit="'+esc(s.id)+'" style="font-size:13px">View audit trail</button></div></div>';
@@ -519,26 +1037,45 @@
     renderShell('<div class="docs">'+docs+'</div>');
     Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
     wireRowActions();
+    mountOpdFlow();
+  }
+  // Lab-flow badges shared by both boards: a patient sent for tests reads "At Lab / Tests", and a
+  // patient returned with results reads "Results Ready".
+  function labBadges(t){
+    var h="";
+    if(t.status==="at_diagnostics") h+=' <span class="chip" style="background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700">At Lab / Tests</span>';
+    if(t.priority===1) h+=' <span class="chip" style="background:#fef9c3;color:#854d0e;font-size:11px;font-weight:700">'+(t.priorityReason&&t.priorityReason!=="results"?esc(prioLabel(t)):"★ Results Ready")+'</span>';
+    return h;
   }
   function ticketRow(s,t,i,n){
-    var cls=t.priority>=2?"p2":(t.priority>=1?"p1":""); var consult=t.status==="in_consultation";
+    var cls=t.priority>=2?"p2":(t.priority>=1?"p1":""); var consult=t.status==="in_consultation"; var atLab=t.status==="at_diagnostics";
     var eta=t.etaStart?Math.max(0,Math.round((t.etaStart-Date.now())/60000)):null;
     var b=[];
-    if(!consult&&can("queue.status")) b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>');
-    if(!consult&&can("queue.status")) b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>');
+    if(!consult&&!atLab&&can("queue.status")) b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>');
+    if(!consult&&!atLab&&can("queue.status")) b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>');
+    if(atLab&&can("queue.status")) b.push('<button class="pri" data-a="diagdone" data-s="'+s.id+'" data-t="'+t.id+'">Tests Done → Return</button>');
     if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">No-show</button>');
-    if(can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
-    if(can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
-    if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
-    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear urgent":"Urgent")+'</button>');
-    if(!consult&&can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');   // an in-consultation patient isn't queued -> assign always failed; hide it
+    if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
+    if(!atLab&&can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
+    if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
+    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority||0)+'">'+(t.priority?"Change priority":"Priority")+'</button>');
+    if(!consult&&!atLab&&can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');   // an in-consultation patient isn't queued -> assign always failed; hide it
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // reroute from the room back to the waiting hall (in_consultation -> waiting)
+    if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // out to diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
-    // Remove a mistaken / duplicate / wrongly-routed patient (soft cancel → off the board, audit kept).
-    if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');   // nurse records BP/temp/SpO2 etc. onto the encounter timeline
+    if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');
+    b.push('<button data-a="label" data-s="'+s.id+'" data-t="'+t.id+'">Label</button>');
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
+    var billLabel = (t.unbilledAmount > 0) ? ("Bill ₹" + Math.round(t.unbilledAmount / 100)) : "Bill";
+    var billChip = (t.unbilledAmount > 0)
+      ? ' <span class="chip" style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:700">₹' + Math.round(t.unbilledAmount/100) + ' unbilled</span>'
+      : (t.billingStatus === "paid"
+        ? ' <span class="chip" style="background:#ecfdf5;color:#059669;font-size:11px;font-weight:700">Paid</span>'
+        : ' <span class="chip" style="background:#f1f5f9;color:#64748b;font-size:11px">Unbilled</span>');
+    var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
+    b.push('<button data-a="bill" data-t="' + t.id + '" data-smd="' + esc(mrnVal) + '" data-mrn="' + esc(mrnVal) + '" data-unbilled="' + (t.unbilledAmount||0) + '" data-name="' + esc(t.name||"Patient") + '"' + (t.unbilledAmount>0?' class="pri"':'') + '>' + billLabel + '</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+labBadges(t)+'</div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
       '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
       '<div class="acts">'+b.join("")+'</div></div>';
@@ -550,8 +1087,11 @@
         if(a==="call") post("status",{sessionId:sid,ticketId:tid,status:"called"});
         else if(a==="start") post("status",{sessionId:sid,ticketId:tid,status:"in_consultation"});
         else if(a==="sendback") post("status",{sessionId:sid,ticketId:tid,status:"waiting"});
+        else if(a==="senddiag") post("status",{sessionId:sid,ticketId:tid,status:"at_diagnostics"});
+        // Tests done: back to the doctor's queue first, then flagged priority 1 so the row reads Results Ready.
+        else if(a==="diagdone") post("status",{sessionId:sid,ticketId:tid,status:"waiting"},function(){ post("priority",{sessionId:sid,ticketId:tid,reason:"results"}); });
         else if(a==="noshow") openNoShowMark(sid,tid,btn.getAttribute("data-n"));
-        else if(a==="prio") post("priority",{sessionId:sid,ticketId:tid,priority:+btn.getAttribute("data-p")});
+        else if(a==="prio") openPriority(sid,tid,+btn.getAttribute("data-p"));
         else if(a==="up") openMove(sid,tid,+btn.getAttribute("data-i")-1);
         else if(a==="down") openMove(sid,tid,+btn.getAttribute("data-i")+1);
         else if(a==="top") openMove(sid,tid,0);
@@ -560,12 +1100,45 @@
         else if(a==="remove") openRemove(sid,tid,btn.getAttribute("data-n"));
         else if(a==="notes") openNotes(sid,tid,btn.getAttribute("data-n"));
         else if(a==="vitals") openVitals(sid,tid,btn.getAttribute("data-n"));
+        else if(a==="label") openFileLabel(tid,sid);
+        else if (a === "bill") {
+          var mrn = btn.getAttribute("data-mrn") || btn.getAttribute("data-smd") || tid;
+          var unbilledAmt = Number(btn.getAttribute("data-unbilled")) || 0;
+          var ptName = btn.getAttribute("data-name") || "Patient";
+          if (isWardSynQHospital()) {
+            openWardSynqCashier(mrn);
+          } else if (unbilledAmt > 0) {
+            openQuickPay(mrn, tid, ptName, unbilledAmt);
+          } else {
+            var curOrg = st.orgId || st.hospital || "";
+            location.href = "/clinic-billing?patientId=" + encodeURIComponent(mrn) + "&orgId=" + encodeURIComponent(curOrg) + "&ticketId=" + encodeURIComponent(tid);
+          }
+        }
       };
     });
   }
   function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
-  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why."}[e]||e; }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required.",ticket_changed:"This patient changed meanwhile. Reload and try again.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why.",weak_pin:"PIN must be 4-8 digits; avoid simple repeated digits like 1111.",weak_password:"Password is too weak or common. Use at least 10 characters.",member_not_found:"Staff member not found."}[e]||e; }
 
+  // ---- plan item 12: priority with a reason. The reason sets the level on the server (_queue_eta.js
+  // priorityRule): an emergency goes first, the rest ahead of the ordinary queue; "clear" is a reason too.
+  var PRIO=[["emergency","Emergency"],["senior","Senior citizen"],["pregnant","Pregnant"],["disability","Disability"],["child","Child"],["results","Results ready"],["other","Other"]];
+  function prioLabel(t){ if(!t||!t.priority) return ""; if(t.priority>=2) return "Emergency"; var m=PRIO.filter(function(p){return p[0]===t.priorityReason;})[0]; return m?m[1]:"Priority"; }
+  function openPriority(sid,tid,cur){
+    var chosen="", list=PRIO.slice(); if(cur) list.push(["clear","Clear priority"]);
+    open('<h3>Priority <span style="color:var(--mut);font-weight:600;font-size:13px">(reason required)</span></h3><p style="color:var(--mut);margin:0 0 8px">The reason sets the place: an emergency goes first, the others ahead of the ordinary queue. Recorded in the audit trail.</p>'+
+      '<div class="cats" role="group" aria-label="Priority reason">'+list.map(function(p){return '<button type="button" aria-pressed="false" data-c="'+p[0]+'">'+p[1]+'</button>';}).join("")+'</div>'+
+      '<input id="pnote" aria-label="Priority note" placeholder="Note (required for Other)">'+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Set priority</button></div>');
+    Array.prototype.forEach.call(sheet.querySelectorAll(".cats [data-c]"),function(b){b.onclick=function(){chosen=b.getAttribute("data-c");Array.prototype.forEach.call(sheet.querySelectorAll(".cats button"),function(x){x.classList.remove("on");x.setAttribute("aria-pressed","false");});b.classList.add("on");b.setAttribute("aria-pressed","true");};});
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var note=sheet.querySelector("#pnote").value.trim();
+      if(!chosen){toast("Pick a reason");return;}
+      if(chosen==="other"&&note.length<3){toast("Say why in the note");return;}
+      close(); post("priority",{sessionId:sid,ticketId:tid,reason:chosen,note:note});
+    };
+  }
   // ---- reorder-with-reason modal (anti-misuse) ----
   var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
   function openMove(sid,tid,toIndex){
@@ -608,17 +1181,92 @@
   function openWalkin(){
     var opts=st.board.map(function(b){return '<option value="'+esc(b.session.id)+'">'+esc(b.session.doctorName||b.session.doctorUid)+'</option>';}).join("");
     open('<h3>Add walk-in patient</h3>'+
+      '<button type="button" class="ghost" id="wScanNfc" style="width:100%;margin-bottom:12px;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">\uD83D\uDCF1 Ni-Key: Read NFC Tag from File</button>'+
       '<input id="wn" placeholder="Patient name" style="margin-bottom:10px">'+
       '<input id="wm" placeholder="Mobile (optional)" inputmode="tel" style="margin-bottom:10px">'+
       (opts?'<select id="wsel">'+opts+'</select>':'<div class="empty">No doctor queue yet - a doctor must sign in first.</div>')+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Add</button></div>');
     sheet.querySelector("#cx").onclick=close;
+    var scanBtn=sheet.querySelector("#wScanNfc");
+    if(scanBtn){
+      scanBtn.onclick=function(){
+        scanBtn.disabled=true;
+        scanBtn.textContent="Hold physical Ni-Key tag to phone...";
+        var nfcMod = window.NiKey || window.SMD_NFC;
+        if(nfcMod && nfcMod.startScan){
+          nfcMod.startScan(function(tag){
+            var uhid = (nfcMod.parseTagUhid && nfcMod.parseTagUhid(tag)) || "";
+            if(!uhid){
+              scanBtn.disabled=false;
+              scanBtn.textContent="\uD83D\uDCF1 Ni-Key: Read NFC Tag from File";
+              toast("Ni-Key tag is empty / unassigned. Fill details and save to program this tag.");
+              return;
+            }
+            scanBtn.textContent="✓ Ni-Key Tag read: " + uhid;
+            scanBtn.disabled=false;
+            var inputN = sheet.querySelector("#wn");
+            var inputM = sheet.querySelector("#wm");
+            var found = null;
+            (st.board||[]).forEach(function(b){
+              (b.tickets||[]).forEach(function(t){
+                if(t.mrn === uhid || t.id === uhid) found = t;
+              });
+            });
+            if(found){
+              if(inputN) inputN.value = found.name || "";
+              if(inputM && found.mobile) inputM.value = found.mobile;
+              toast("Loaded patient: " + (found.name || uhid));
+            } else {
+              if(inputN && !inputN.value) inputN.value = uhid;
+              toast("Ni-Key Tag read: " + uhid);
+            }
+          }).catch(function(e){
+            scanBtn.disabled=false;
+            scanBtn.textContent="\uD83D\uDCF1 Ni-Key: Read NFC Tag from File";
+            var msg = (e && e.message) ? e.message : String(e || "");
+            if (/permission.*denied/i.test(msg) || (e && (e.name === "NotAllowedError" || e.code === "PERMISSION_DENIED"))) {
+              toast("NFC permission denied. Tap 🔒 in address bar → Site Settings → set NFC to Allow.");
+              return;
+            }
+            toast("Ni-Key NFC read error: " + msg);
+          });
+        } else {
+          scanBtn.disabled=false;
+          scanBtn.textContent="\uD83D\uDCF1 Ni-Key: Read NFC Tag from File";
+          toast("Ni-Key NFC reading is not available on this device or browser.");
+        }
+      };
+    }
     var ok=sheet.querySelector("#ok");
     ok.onclick=function(){
       var n=sheet.querySelector("#wn").value.trim(); if(!n){toast("Enter a name");return;}
       var sel=sheet.querySelector("#wsel"); if(!sel){toast("No doctor queue available");return;}
-      close(); post("ticket",{sessionId:sel.value,name:n,mobile:sheet.querySelector("#wm").value.trim(),visitType:"new"});
+      var sVal=sel.value;
+      close();
+      post("ticket",{sessionId:sVal,name:n,mobile:sheet.querySelector("#wm").value.trim(),visitType:"new"}, function(r){
+        var tkt = (r && r.tickets || []).filter(function(x){ return x.name === n; })[0];
+        var sObj = (st.board||[]).find(function(b){ return b.session && b.session.id === sVal; });
+        var docUid = sObj && sObj.session && sObj.session.doctorUid;
+        if(tkt) autoQueueConsultationFee(tkt.mrn || tkt.id, tkt.id, docUid);
+        refresh();
+        if(tkt) openWalkinDone(tkt);
+      });
     };
+  }
+  // A walk-in add ends HERE, not in a silent close: the desk sees the token + UHID and can tag the
+  // physical folder (NFC) and print its label in one touch each, before the patient walks away.
+  function openWalkinDone(tkt){
+    var uhid=tkt.mrn||tkt.id||"";
+    var tok=(tkt.token==null?"":String(tkt.token));
+    var tokLabel=tok?("#"+(/^\d+$/.test(tok)?("0000"+tok).slice(-4):tok)):"-";
+    open('<h3>Walk-in Patient Added</h3>'+
+      '<div class="t">Token <b>'+esc(tokLabel)+'</b> &middot; '+esc(tkt.name||"Patient")+' &middot; UHID <b>'+esc(uhid)+'</b></div>'+
+      '<button class="btn" id="wNfc" style="width:100%;margin-top:10px">\uD83D\uDCF1 Ni-Key: Write NFC Tag</button>'+
+      '<button class="ghost" id="wLabel" style="width:100%;margin-top:8px">\uD83C\uDFF7 Print File Label</button>'+
+      '<div class="row2"><button class="cancel" id="wDone" style="margin:8px 0 0">Done</button></div>');
+    sheet.querySelector("#wNfc").onclick=function(){ writeNfcTag(uhid); };
+    sheet.querySelector("#wLabel").onclick=function(){ openFileLabel(tkt.id); };
+    sheet.querySelector("#wDone").onclick=close;
   }
   // ---- checkout ----
   function doCheckout(sid,tid){
@@ -1004,20 +1652,61 @@
   // (private clinic) or "ghis:<employeeId>" (GITAM). No GHIS required.
   var ROLES=["nurse","reception","supervisor","intern","resident","doctor","cashier","pharmacy","hr","admin","viewer"];
   function openStaffAdmin(){
-    open('<h3>Staff & roles</h3><div class="t" style="margin-bottom:8px">Clinic code (staff sign in with this): <b>'+esc(st.orgCode||st.orgId)+'</b></div><div id="slist">Loading…</div>'+
+    var clinicName = st.orgName || (st.who && st.who.orgName) || "";
+    var currentDocName = st.doctorName || (st.who && st.who.doctorName) || meName() || "";
+    open('<h3>Staff & roles</h3><div class="t" style="margin-bottom:10px">Clinic code (staff sign in with this): <b>'+esc(st.orgCode||st.orgId)+'</b></div>'+
+      '<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:14px">'+
+        '<div style="font-weight:700;font-size:13px;margin-bottom:4px;display:flex;align-items:center;gap:6px"><span class="ms sm">medical_services</span> Doctor & Clinic Admin Profile</div>'+
+        '<div class="t" style="font-size:12px;margin-bottom:8px">When you are both clinic owner/admin and doctor, configure your display name and clinic name here.</div>'+
+        '<label style="font-size:12px;color:var(--mut)">Doctor display name</label>'+
+        '<input id="admDocName" value="'+esc(currentDocName)+'" placeholder="e.g. Dr. Manoj Kumar" style="margin-bottom:8px">'+
+        '<label style="font-size:12px;color:var(--mut)">Clinic name</label>'+
+        '<input id="admClinicName" value="'+esc(clinicName)+'" placeholder="e.g. Sunrise Clinic" style="margin-bottom:10px">'+
+        '<button class="btn" id="saveAdmProfile" style="margin:0;width:auto;padding:8px 14px;font-size:13px">Save Doctor & Clinic Profile</button>'+
+      '</div>'+
+      '<div style="font-weight:700;font-size:13px;margin-bottom:6px">Staff Members</div>'+
+      '<div id="slist">Loading…</div>'+
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
+      '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Invite Staff / Doctor</div>'+
+      '<input id="sdn" placeholder="Full name (e.g. Dr. Rajesh Sharma or Nurse Priya)" style="margin-bottom:8px">'+
       '<input id="se" placeholder="Staff ID (e.g. recep1, or ghis:502862)" style="margin-bottom:8px">'+
       '<select id="sr" style="margin-bottom:8px">'+ROLES.map(function(r){return '<option value="'+r+'"'+(r==="nurse"?" selected":"")+'>'+r+'</option>';}).join("")+'</select>'+
-      '<input id="spin" placeholder="Set a PIN (optional)" inputmode="numeric" style="margin-bottom:8px">'+
+      '<input id="spin" placeholder="Set a PIN (4-8 digits, e.g. 4826)" inputmode="numeric" style="margin-bottom:8px">'+
       '<input id="sem" placeholder="Email login (optional)" style="margin-bottom:6px">'+
       '<input id="spw" type="password" placeholder="Email password (if email set)">'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Invite / Save</button></div></div>');
     sheet.querySelector("#cx").onclick=close;
+    var saveProfileBtn = sheet.querySelector("#saveAdmProfile");
+    if(saveProfileBtn){
+      saveProfileBtn.onclick = function(){
+        var dn = sheet.querySelector("#admDocName").value.trim();
+        var cn = sheet.querySelector("#admClinicName").value.trim();
+        if(!dn && !cn){ toast("Enter doctor name or clinic name"); return; }
+        saveProfileBtn.disabled = true;
+        saveProfileBtn.textContent = "Saving…";
+        api("org/update", { method: "POST", body: { orgId: st.orgId, doctorName: dn, name: cn } }).then(function(r){
+          saveProfileBtn.disabled = false;
+          saveProfileBtn.textContent = "Save Doctor & Clinic Profile";
+          if(!r || !r.ok){ toast(r && r.error ? friendly(r.error) : "Failed to save profile"); return; }
+          if(dn) { st.doctorName = dn; if(st.who) st.who.doctorName = dn; }
+          if(cn) { st.orgName = cn; if(st.who) st.who.orgName = cn; }
+          toast("Doctor and clinic profile updated");
+          loadDash();
+        }).catch(function(){
+          saveProfileBtn.disabled = false;
+          saveProfileBtn.textContent = "Save Doctor & Clinic Profile";
+          toast("Could not reach the server");
+        });
+      };
+    }
     sheet.querySelector("#ok").onclick=function(){
       var id=sheet.querySelector("#se").value.trim().toLowerCase(); if(!id){toast("Enter a staff ID");return;}   // lowercase so it matches the case-insensitive staff login
+      var dn=sheet.querySelector("#sdn").value.trim();
       var role=sheet.querySelector("#sr").value, pin=sheet.querySelector("#spin").value.trim(), em=sheet.querySelector("#sem").value.trim(), pw=sheet.querySelector("#spw").value;
-      if(pin && !/^\d{4,6}$/.test(pin)){toast("PIN must be 4 to 6 digits");return;}
-      api("member",{method:"POST",body:{orgId:st.orgId,identity:id,role:role}}).then(function(r){
+      if(pin && !/^\d{4,8}$/.test(pin)){toast("PIN must be 4 to 8 digits");return;}
+      var mBody = { orgId: st.orgId, identity: id, role: role };
+      if(dn) mBody.displayName = dn;
+      api("member",{method:"POST",body:mBody}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;}
         // Each step's refusal stops the chain and is shown. This said "Saved" even when the PIN or
         // password had been refused, so staff were handed a sign-in that did not exist.
@@ -1025,7 +1714,7 @@
         var chain=Promise.resolve();
         if(pin) chain=chain.then(step("PIN","member/pin",{orgId:st.orgId,identity:id,pin:pin}));
         if(em&&pw) chain=chain.then(step("Password","member/password",{orgId:st.orgId,identity:id,email:em,password:pw}));
-        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); })
+        chain.then(function(){ toast("Saved"); loadStaffList(); ["sdn","se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); })
           .catch(function(e){ loadStaffList(); toast(e.message); });
       });
     };
@@ -1035,15 +1724,602 @@
     api("members?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       var el=sheet.querySelector("#slist"); if(!el) return;
       var rows=(r&&r.members)||[];
+      st.docMembers = rows;
       el.innerHTML=rows.length? rows.map(function(m){
         var login=(m.hasPin?"PIN":"")+(m.email?((m.hasPin?" + ":"")+"email"):""); if(!login) login="no login set";
-        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(m.identity)+'</b>'+(m.active?"":' <span class="t" style="color:var(--red)">(disabled)</span>')+'<div class="t">'+esc(m.role)+' · '+esc(login)+'</div></div>'+
+        /* Why they cannot sign in, where the owner can fix it: five wrong PINs lock the account for
+           fifteen minutes, and the sign-in page will not say so (it must not confirm which login names
+           exist), so the owner otherwise hears "wrong PIN" for a PIN that is right. */
+        var lockMin=m.lockedUntil&&m.lockedUntil>Date.now()?Math.ceil((m.lockedUntil-Date.now())/60000):0;
+        if(lockMin) login="locked "+lockMin+"m (too many tries)";
+        var nameDisp = m.displayName ? (esc(m.displayName) + ' <span class="t">(' + esc(m.identity) + ')</span>') : esc(m.identity);
+        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+nameDisp+'</b>'+(m.active?"":' <span class="t" style="color:var(--red)">(disabled)</span>')+'<div class="t">'+esc(m.role)+' · '+esc(login)+'</div></div>'+
           '<button class="cancel" data-tog="'+esc(m.identity)+'" data-act="'+(m.active?"disable":"restore")+'" style="padding:6px 10px">'+(m.active?"Disable":"Restore")+'</button></div>';
       }).join("") : '<div class="empty">No staff yet. Invite one below.</div>';
       Array.prototype.forEach.call(el.querySelectorAll("[data-tog]"),function(b){b.onclick=function(){
         api("member/"+b.getAttribute("data-act"),{method:"POST",body:{orgId:st.orgId,identity:b.getAttribute("data-tog")}}).then(function(){toast("Updated");loadStaffList();});
       };});
     });
+  }
+
+  // ---- AUTO-QUEUE CONSULTATION FEE (Pay First Flow) ----
+  function autoQueueConsultationFee(patientId, ticketId, doctorId){
+    var mode = (st.opd && st.opd.opdBillingMode) || "pay_first";
+    if (mode !== "pay_first") return; // doctor_first mode doesn't queue upfront fee
+    api("bill/tariff?orgId=" + encodeURIComponent(st.orgId)).then(function(r){
+      if (!r || !r.ok || !r.items || !r.items.length) return;
+      var items = r.items;
+      var trf = (doctorId && items.find(function(x){ return x.kind === "consultation" && (x.doctorId === doctorId || (x.code && x.code.indexOf(doctorId) > -1)); })) ||
+                items.find(function(x){ return x.kind === "consultation"; });
+      if (trf) {
+        api("bill/order", {
+          method: "POST",
+          body: { orgId: st.orgId, patientId: patientId, ticketId: ticketId, tariffId: trf.id, qty: 1 }
+        }).then(function(){ refresh(); }).catch(function(){});
+      }
+    }).catch(function(){});
+  }
+
+  // ---- QUICK PAY IN-LINE MODAL (Reception / Cashier instant settlement) ----
+  function openQuickPay(mrn, tid, ptName, unbilledAmt){
+    var amtStr = "₹" + Math.round(unbilledAmt / 100);
+    open('<h3>Settle Bill · ' + esc(ptName) + '</h3>' +
+      '<div style="background:var(--tl-soft);border:1px solid var(--tl-border);border-radius:12px;padding:16px;text-align:center;margin:12px 0">' +
+        '<div style="font-size:12px;color:var(--mut);text-transform:uppercase;font-weight:700;letter-spacing:0.04em">Amount to collect</div>' +
+        '<div style="font-size:30px;font-weight:800;color:var(--ink);margin:4px 0">' + amtStr + '</div>' +
+        '<div style="font-size:12px;color:var(--mut)">Patient: ' + esc(ptName) + ' (' + esc(mrn) + ')</div>' +
+      '</div>' +
+      '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Select payment method:</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">' +
+        '<button class="btn" data-paym="cash" style="margin:0;padding:14px 10px;font-size:14px;background:#10b981;color:#fff"><span class="ms sm" style="display:block;margin-bottom:4px;font-size:20px">payments</span>Cash</button>' +
+        '<button class="btn" data-paym="upi" style="margin:0;padding:14px 10px;font-size:14px;background:#0ea5e9;color:#fff"><span class="ms sm" style="display:block;margin-bottom:4px;font-size:20px">qr_code_2</span>UPI</button>' +
+        '<button class="btn" data-paym="card" style="margin:0;padding:14px 10px;font-size:14px;background:#6366f1;color:#fff"><span class="ms sm" style="display:block;margin-bottom:4px;font-size:20px">credit_card</span>Card</button>' +
+      '</div>' +
+      '<div style="text-align:center;margin-bottom:12px">' +
+        '<a href="/clinic-billing?patientId=' + encodeURIComponent(mrn) + '&orgId=' + encodeURIComponent(st.orgId) + '&ticketId=' + encodeURIComponent(tid) + '" style="font-size:13px;color:var(--tl);font-weight:600;text-decoration:underline">Open detailed billing station / add more items</a>' +
+      '</div>' +
+      '<div class="row2"><button class="cancel" id="cx" style="margin:0">Cancel</button></div>');
+    sheet.querySelector("#cx").onclick = close;
+    Array.prototype.forEach.call(sheet.querySelectorAll("[data-paym]"), function(b){
+      b.onclick = function(){
+        var method = b.getAttribute("data-paym");
+        Array.prototype.forEach.call(sheet.querySelectorAll("[data-paym]"), function(x){ x.disabled = true; });
+        b.textContent = "Processing…";
+        api("bill/invoice", { method: "POST", body: { orgId: st.orgId, patientId: mrn } }).then(function(invR){
+          if (!invR || !invR.ok) {
+            toast(invR && invR.error === "no_billable_orders" ? "Orders already billed." : "Could not generate invoice.");
+            close(); refresh(); return;
+          }
+          var invId = invR.invoice && invR.invoice.id;
+          api("bill/pay", { method: "POST", body: { orgId: st.orgId, invoiceId: invId, method: method } }).then(function(payR){
+            close();
+            if (payR && payR.ok) {
+              toast("Collected " + amtStr + " via " + method.toUpperCase() + " · Patient cleared!");
+              refresh();
+            } else {
+              toast("Payment recording failed. Settle in Billing station.");
+              refresh();
+            }
+          }).catch(function(){ close(); refresh(); });
+        }).catch(function(){ toast("Could not reach billing server"); close(); });
+      };
+    });
+  }
+
+  // ---- TARIFF, PHARMACY STOCK & OPD FLOW ADMIN ----
+  function openTariffAdmin(initialTab){
+    var activeTab = initialTab || 0;
+    open('<h3>Price List, Pharmacy Stock & OPD Flow</h3>' +
+      '<div class="t" style="margin-top:-6px;font-size:12.5px;color:var(--mut)">Configure doctor consultation fees, dispensary stock & procedures, and choose your billing workflow.</div>' +
+      '<div class="ttabs">' +
+        '<button class="ttab' + (activeTab===0?' active':'') + '" data-ttab="0"><span class="ms sm">medical_services</span> Doctor Fees</button>' +
+        '<button class="ttab' + (activeTab===1?' active':'') + '" data-ttab="1"><span class="ms sm">medication</span> Pharmacy Stock</button>' +
+        '<button class="ttab' + (activeTab===2?' active':'') + '" data-ttab="2"><span class="ms sm">biotech</span> Investigations</button>' +
+        '<button class="ttab' + (activeTab===3?' active':'') + '" data-ttab="3"><span class="ms sm">swap_horiz</span> Billing Flow</button>' +
+      '</div>' +
+      '<div id="tAdminContent"><div class="empty">Loading clinic catalog…</div></div>' +
+      '<div class="row2"><button class="cancel" id="cxTariff" style="margin:0">Close</button></div>', true);
+
+    sheet.querySelector("#cxTariff").onclick = close;
+
+    // ---- bulk CSV import (Pharmacy Stock + Investigations tabs) ----
+    // Columns: Name,Kind,DosageForm,PriceRupees,Stock,Unit. A header row is recognised by a "name"
+    // column; without one the columns are read in that fixed order. Each row is saved through the same
+    // bill/tariff endpoint as the manual form, so validation + audit are identical.
+    var CSV_KINDS = { medication: 1, investigation: 1, service: 1, consultation: 1 };
+    function parseCsv(text){
+      var rows = [], row = [], cur = "", q = false, i, c;
+      for (i = 0; i < text.length; i++){
+        c = text[i];
+        if (q){
+          if (c === '"'){ if (text[i + 1] === '"'){ cur += '"'; i++; } else q = false; }
+          else cur += c;
+        }
+        else if (c === '"') q = true;
+        else if (c === ","){ row.push(cur); cur = ""; }
+        else if (c === "\n" || c === "\r"){
+          if (c === "\r" && text[i + 1] === "\n") i++;
+          row.push(cur); cur = "";
+          if (row.length > 1 || String(row[0]).trim() !== "") rows.push(row);
+          row = [];
+        }
+        else cur += c;
+      }
+      row.push(cur);
+      if (row.length > 1 || String(row[0]).trim() !== "") rows.push(row);
+      return rows;
+    }
+    function csvTemplate(defaultKind){
+      var k = defaultKind === "investigation" ? "investigation" : "medication";
+      return "Name,Kind,DosageForm,PriceRupees,Stock,Unit\n" +
+        (k === "medication"
+          ? "Paracetamol 650mg,medication,Tab,30,100,Tab\nAmoxicillin 500mg,medication,Cap,80,50,Cap\n"
+          : "CBC Blood Test,investigation,,250,,\nECG 12-Lead,investigation,,250,,\n");
+    }
+    function downloadCsvSample(defaultKind){
+      var blob = new Blob([csvTemplate(defaultKind)], { type: "text/csv" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = defaultKind === "investigation" ? "investigations-template.csv" : "pharmacy-stock-template.csv";
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    }
+    function runCsvImport(file, defaultKind, statusEl){
+      var reader = new FileReader();
+      reader.onload = function(){
+        var rows;
+        try { rows = parseCsv(String(reader.result || "")); }
+        catch (e){ statusEl.textContent = "That file could not be read as CSV."; return; }
+        if (!rows.length){ statusEl.textContent = "The file has no rows."; return; }
+        var head = rows[0].map(function(h){ return String(h).trim().toLowerCase(); });
+        var hasHead = head.indexOf("name") > -1;
+        var data = hasHead ? rows.slice(1) : rows;
+        var col = function(r, name, pos){
+          if (hasHead){ var i = head.indexOf(name); return i > -1 ? String(r[i] || "").trim() : ""; }
+          return String(r[pos] != null ? r[pos] : "").trim();
+        };
+        var n = 0, ok = 0, skipped = 0;
+        var next = function(){
+          if (n >= data.length){
+            statusEl.textContent = "Saved " + ok + " of " + data.length + " rows" + (skipped ? " (" + skipped + " skipped: no name or bad price)" : "") + ".";
+            toast("CSV import: " + ok + " of " + data.length + " saved");
+            reloadTariff();
+            return;
+          }
+          var r = data[n]; n++;
+          statusEl.textContent = "Saving row " + n + " of " + data.length + "...";
+          var name = col(r, "name", 0);
+          var kind = col(r, "kind", 1).toLowerCase();
+          if (!CSV_KINDS[kind]) kind = defaultKind;
+          var paise = Math.round(Number(col(r, "pricerupees", 3)) * 100);
+          if (!name || !isFinite(paise) || paise < 0){ skipped++; next(); return; }
+          api("bill/tariff", { method: "POST", body: {
+            orgId: st.orgId, name: name, kind: kind,
+            dosageForm: col(r, "dosageform", 2), unit: col(r, "unit", 5),
+            price: paise, stock: Math.max(0, Math.round(Number(col(r, "stock", 4)) || 0))
+          } }).then(function(x){ if (x && x.ok) ok++; else skipped++; next(); },
+            function(){ skipped++; next(); });
+        };
+        next();
+      };
+      reader.readAsText(file);
+    }
+    function wireCsvImport(host, defaultKind){
+      var sample = host.querySelector("#csvSample"), imp = host.querySelector("#csvImport"), file = host.querySelector("#csvFile");
+      if (sample) sample.onclick = function(){ downloadCsvSample(defaultKind); };
+      if (imp && file){
+        imp.onclick = function(){ file.click(); };
+        file.onchange = function(){
+          var statusEl = host.querySelector("#csvStatus");
+          if (!file.files || !file.files.length) return;
+          if (statusEl) statusEl.textContent = "Reading " + file.files[0].name + "...";
+          runCsvImport(file.files[0], defaultKind, statusEl || { textContent: "" });
+          file.value = "";
+        };
+      }
+    }
+    function csvImportCard(){
+      return '<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">' +
+        '<div style="font-weight:700;font-size:13px;margin-bottom:4px">Bulk Import via CSV</div>' +
+        '<div style="font-size:12px;color:var(--mut);margin-bottom:10px">Columns: Name, Kind, DosageForm, PriceRupees, Stock, Unit. One item per row.</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+          '<button class="btn ghost" id="csvSample" style="margin:0;width:auto;padding:8px 14px;font-size:12.5px">Download Sample Template</button>' +
+          '<button class="btn" id="csvImport" style="margin:0;width:auto;padding:8px 14px;font-size:12.5px">Import CSV</button>' +
+          '<input type="file" id="csvFile" accept=".csv,text/csv" style="display:none">' +
+        '</div>' +
+        '<div id="csvStatus" style="font-size:12px;color:var(--mut);margin-top:8px"></div>' +
+      '</div>';
+    }
+
+    function renderTab(){
+      Array.prototype.forEach.call(sheet.querySelectorAll("[data-ttab]"), function(b){
+        b.classList.toggle("active", Number(b.getAttribute("data-ttab")) === activeTab);
+      });
+      var host = sheet.querySelector("#tAdminContent");
+      if (!host) return;
+
+      var items = st.tariffItems || [];
+      var curOrg = st.currentOrg || {};
+      var defaultFee = curOrg.defaultConsultationFee || 0;
+      var flowMode = curOrg.opdBillingMode || (st.opd && st.opd.opdBillingMode) || "pay_first";
+
+      if (activeTab === 0) {
+        // Tab 0: Doctor Fees
+        var docList = [{ id: meUid() || "owner", name: st.doctorName || (st.who && st.who.doctorName) || meName() || "Owner Doctor" }];
+        (st.docMembers || []).forEach(function(m){
+          if (m.role === "doctor" && m.identity !== docList[0].id) {
+            docList.push({ id: m.identity, name: m.displayName || m.identity });
+          }
+        });
+
+        var docRows = docList.map(function(doc){
+          var curItem = items.find(function(t){
+            return t.kind === "consultation" && (t.doctorId === doc.id || (doc.name && t.name && t.name.indexOf(doc.name) > -1));
+          });
+          var fee = curItem ? Math.round(curItem.price / 100) : (defaultFee ? Math.round(defaultFee / 100) : 500);
+          return '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--card)">' +
+            '<div><b>' + esc(withDr(doc.name) || "Doctor") + '</b><div style="font-size:11.5px;color:var(--mut)">' + esc(doc.id) + '</div></div>' +
+            '<div style="display:flex;align-items:center;gap:6px">' +
+              '<span style="font-weight:700">₹</span>' +
+              '<input type="number" min="0" step="50" style="width:90px;padding:6px 8px;margin:0" value="' + fee + '" data-docfee-id="' + esc(doc.id) + '" data-docfee-name="' + esc(doc.name) + '" data-docfee-tid="' + esc(curItem ? curItem.id : "") + '">' +
+              // OPD plan item 9: the follow-up fee (blank = same as a new visit). The free-review window is the hospital setting.
+              '<input type="number" min="0" step="50" placeholder="Follow-up" title="Follow-up fee (blank = same as new)" style="width:90px;padding:6px 8px;margin:0 0 0 6px" value="' + (curItem && curItem.followupPrice != null ? Math.round(curItem.followupPrice / 100) : "") + '" data-docfee-fu="' + esc(doc.id) + '">' +
+              '<button class="btn" style="margin:0;width:auto;padding:6px 12px;font-size:12px" data-save-docfee="' + esc(doc.id) + '">Save</button>' +
+            '</div>' +
+          '</div>';
+        }).join("");
+
+        host.innerHTML = '<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">' +
+          '<div style="font-weight:700;font-size:13px;margin-bottom:4px">Clinic Default Consultation Fee</div>' +
+          '<div style="font-size:12px;color:var(--mut);margin-bottom:8px">Applied when no doctor-specific fee is found.</div>' +
+          '<div style="display:flex;align-items:center;gap:8px">' +
+            '<span style="font-weight:700">₹</span>' +
+            '<input id="defFeeInput" type="number" min="0" step="50" style="width:110px;margin:0" value="' + (defaultFee ? Math.round(defaultFee / 100) : 500) + '">' +
+            '<button class="btn" id="saveDefFee" style="margin:0;width:auto;padding:8px 14px;font-size:12.5px">Save Default Fee</button>' +
+          '</div>' +
+        '</div>' +
+        '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Doctor-Specific Consultation Fees</div>' +
+        docRows;
+
+        var sDef = host.querySelector("#saveDefFee");
+        if (sDef) {
+          sDef.onclick = function(){
+            var val = Math.round(Number(host.querySelector("#defFeeInput").value) * 100) || 0;
+            sDef.disabled = true; sDef.textContent = "Saving…";
+            api("org/update", { method: "POST", body: { orgId: st.orgId, defaultConsultationFee: val } }).then(function(r){
+              sDef.disabled = false; sDef.textContent = "Save Default Fee";
+              if (r && r.ok) {
+                if (st.currentOrg) st.currentOrg.defaultConsultationFee = val;
+                if (st.opd) st.opd.defaultConsultationFee = val;
+                toast("Default consultation fee saved");
+              } else toast("Failed to save default fee");
+            });
+          };
+        }
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-save-docfee]"), function(btn){
+          btn.onclick = function(){
+            var docId = btn.getAttribute("data-save-docfee");
+            var inp = host.querySelector('[data-docfee-id="' + docId + '"]');
+            var docName = inp.getAttribute("data-docfee-name") || "Doctor";
+            var existingTid = inp.getAttribute("data-docfee-tid") || "";
+            var amt = Math.round(Number(inp.value) * 100) || 0;
+            btn.disabled = true; btn.textContent = "Saving…";
+            var itemBody = {
+              orgId: st.orgId,
+              name: "Consultation - " + docName,
+              kind: "consultation",
+              code: "CONS-" + docId.replace(/[^a-zA-Z0-9]/g, "").slice(0, 10),
+              price: amt,
+              followupPrice: (function(){ var fu = host.querySelector('[data-docfee-fu="' + docId + '"]'); return fu && fu.value !== "" ? Math.round(Number(fu.value) * 100) : ""; })(),
+              doctorId: docId,
+              doctorName: docName
+            };
+            if (existingTid) itemBody.id = existingTid;
+            api("bill/tariff", { method: "POST", body: itemBody }).then(function(r){
+              btn.disabled = false; btn.textContent = "Save";
+              if (r && r.ok) {
+                toast("Consultation fee for " + withDr(docName) + " updated to ₹" + Math.round(amt / 100));
+                reloadTariff();
+              } else toast("Failed to save doctor fee");
+            });
+          };
+        });
+
+      } else if (activeTab === 1) {
+        // Tab 1: Pharmacy Stock & Medicines
+        var meds = items.filter(function(t){ return t.kind === "medication"; });
+        var medRows = meds.length ? meds.map(function(m){
+          var stock = typeof m.stock === "number" ? m.stock : 0;
+          var stockChip = stock > 10
+            ? '<span class="chip" style="background:#ecfdf5;color:#059669;font-weight:700">In stock: ' + stock + '</span>'
+            : (stock > 0
+              ? '<span class="chip" style="background:#fef3c7;color:#b45309;font-weight:700">Low stock: ' + stock + '</span>'
+              : '<span class="chip" style="background:#fee2e2;color:#dc2626;font-weight:700">Out of stock</span>');
+          return '<div class="stock-item">' +
+            '<div>' +
+              '<div style="font-weight:700;font-size:13.5px">' + (m.dosageForm ? '<span class="asn-pill rx-on" style="margin-right:6px;font-size:10px">' + esc(m.dosageForm) + '</span>' : '') + esc(m.name) + '</div>' +
+              '<div style="font-size:12px;color:var(--mut);margin-top:3px">₹' + (m.price/100).toFixed(2) + (m.unit ? ' / ' + esc(m.unit) : '') + ' · ' + stockChip + '</div>' +
+            '</div>' +
+            '<div style="display:flex;align-items:center;gap:6px">' +
+              '<button class="ghost" style="margin:0;padding:5px 10px;font-size:12px" data-addstock="' + esc(m.id) + '" data-stock="' + stock + '">+ Stock</button>' +
+              '<button class="rm" style="margin:0;padding:5px 8px;font-size:12px;border:none;background:none;color:var(--red);cursor:pointer" data-deltrf="' + esc(m.id) + '" title="Remove item"><span class="ms sm">delete</span></button>' +
+            '</div>' +
+          '</div>';
+        }).join("") : '<div class="empty" style="padding:16px">No medicines added yet. Use the form below to stock your pharmacy.</div>';
+
+        host.innerHTML = '<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">' +
+          '<div style="font-weight:700;font-size:13px;margin-bottom:4px">Add Medicine to Pharmacy Stock</div>' +
+          '<div style="font-size:12px;color:var(--mut);margin-bottom:6px">Quick suggestions:</div>' +
+          '<div style="margin-bottom:10px">' +
+            ['Paracetamol 650mg:Tab:30:100', 'Amoxicillin 500mg:Cap:80:50', 'Pantoprazole 40mg:Tab:60:50', 'Cetirizine 10mg:Tab:20:100', 'Azithromycin 500mg:Tab:120:30', 'Metformin 500mg:Tab:40:100', 'Cough Syrup 100ml:Syr:85:25', 'ORS Sachet:Sachet:25:50'].map(function(sug){
+              var parts = sug.split(":");
+              return '<span class="quickpill" data-sugmed="' + esc(parts[0]) + '" data-sugform="' + esc(parts[1]) + '" data-sugprice="' + esc(parts[2]) + '" data-sugstock="' + esc(parts[3]) + '">+ ' + esc(parts[0]) + '</span>';
+            }).join("") +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px">' +
+            '<input id="mName" placeholder="Medicine name (e.g. Paracetamol 650mg)" style="margin:0">' +
+            '<select id="mForm" style="margin:0"><option value="Tab">Tablet (Tab)</option><option value="Cap">Capsule (Cap)</option><option value="Syr">Syrup (Syr)</option><option value="Inj">Injection (Inj)</option><option value="Drops">Drops</option><option value="Oint">Ointment</option><option value="Sachet">Sachet</option></select>' +
+            '<input id="mPrice" type="number" min="0" step="1" placeholder="Price ₹" style="margin:0">' +
+            '<input id="mStock" type="number" min="0" placeholder="Qty Stock" value="100" style="margin:0">' +
+          '</div>' +
+          '<button class="btn" id="btnAddMed" style="margin:0;width:auto;padding:8px 16px;font-size:13px">Add Medicine</button>' +
+        '</div>' +
+        csvImportCard() +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
+          '<div style="font-weight:700;font-size:13px">Pharmacy Inventory (' + meds.length + ')</div>' +
+          '<input id="medFilter" placeholder="Search medicines…" style="width:160px;margin:0;padding:5px 8px;font-size:12px">' +
+        '</div>' +
+        '<div id="medListContainer">' + medRows + '</div>';
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-sugmed]"), function(pill){
+          pill.onclick = function(){
+            host.querySelector("#mName").value = pill.getAttribute("data-sugmed");
+            host.querySelector("#mForm").value = pill.getAttribute("data-sugform");
+            host.querySelector("#mPrice").value = pill.getAttribute("data-sugprice");
+            host.querySelector("#mStock").value = pill.getAttribute("data-sugstock");
+          };
+        });
+
+        var addMedBtn = host.querySelector("#btnAddMed");
+        if (addMedBtn) {
+          addMedBtn.onclick = function(){
+            var nm = host.querySelector("#mName").value.trim();
+            if (!nm) { toast("Enter medicine name"); return; }
+            var form = host.querySelector("#mForm").value;
+            var pr = Math.round(Number(host.querySelector("#mPrice").value) * 100) || 0;
+            var stVal = Math.max(0, Math.round(Number(host.querySelector("#mStock").value) || 0));
+            addMedBtn.disabled = true; addMedBtn.textContent = "Adding…";
+            api("bill/tariff", {
+              method: "POST",
+              body: { orgId: st.orgId, name: nm, kind: "medication", dosageForm: form, unit: form, price: pr, stock: stVal }
+            }).then(function(r){
+              addMedBtn.disabled = false; addMedBtn.textContent = "Add Medicine";
+              if (r && r.ok) {
+                toast("Added " + nm + " (Stock: " + stVal + ")");
+                reloadTariff();
+              } else toast("Failed to add medicine");
+            });
+          };
+        }
+
+        var filter = host.querySelector("#medFilter");
+        if (filter) {
+          filter.oninput = function(){
+            var q = filter.value.trim().toLowerCase();
+            Array.prototype.forEach.call(host.querySelectorAll(".stock-item"), function(item){
+              var text = item.textContent.toLowerCase();
+              item.style.display = (!q || text.indexOf(q) > -1) ? "" : "none";
+            });
+          };
+        }
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-addstock]"), function(btn){
+          btn.onclick = function(){
+            var tid = btn.getAttribute("data-addstock");
+            var curSt = Number(btn.getAttribute("data-stock")) || 0;
+            var add = prompt("How many units to add to stock?", "50");
+            if (!add || isNaN(add) || Number(add) <= 0) return;
+            var newTotal = curSt + Math.round(Number(add));
+            btn.disabled = true;
+            api("bill/tariff", { method: "POST", body: { orgId: st.orgId, id: tid, stock: newTotal } }).then(function(r){
+              btn.disabled = false;
+              if (r && r.ok) { toast("Stock updated to " + newTotal); reloadTariff(); }
+              else toast("Failed to update stock");
+            });
+          };
+        });
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-deltrf]"), function(btn){
+          btn.onclick = function(){
+            var tid = btn.getAttribute("data-deltrf");
+            if (!confirm("Remove this item from the active catalog?")) return;
+            api("bill/tariff", { method: "POST", body: { orgId: st.orgId, id: tid, active: false } }).then(function(r){
+              if (r && r.ok) { toast("Item removed"); reloadTariff(); }
+              else toast("Failed to remove item");
+            });
+          };
+        });
+
+        wireCsvImport(host, "medication");
+
+      } else if (activeTab === 2) {
+        // Tab 2: Investigations & Services
+        var svcs = items.filter(function(t){ return t.kind === "service" || t.kind === "investigation"; });
+        var svcRows = svcs.length ? svcs.map(function(s){
+          return '<div class="stock-item">' +
+            '<div>' +
+              '<div style="font-weight:700;font-size:13.5px">' + esc(s.name) + '</div>' +
+              '<div style="font-size:12px;color:var(--mut);margin-top:2px">₹' + (s.price/100).toFixed(2) + ' · ' + esc(s.kind) + '</div>' +
+            '</div>' +
+            '<div style="display:flex;align-items:center;gap:6px">' +
+              '<button class="rm" style="margin:0;padding:5px 8px;font-size:12px;border:none;background:none;color:var(--red);cursor:pointer" data-deltrf="' + esc(s.id) + '" title="Remove item"><span class="ms sm">delete</span></button>' +
+            '</div>' +
+          '</div>';
+        }).join("") : '<div class="empty" style="padding:16px">No investigations or procedures added yet.</div>';
+
+        host.innerHTML = '<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">' +
+          '<div style="font-weight:700;font-size:13px;margin-bottom:4px">Add Investigation or Procedure</div>' +
+          '<div style="font-size:12px;color:var(--mut);margin-bottom:6px">Quick suggestions:</div>' +
+          '<div style="margin-bottom:10px">' +
+            ['ECG 12-Lead:250', 'Dressing (Small):100', 'GRBS Blood Sugar:50', 'Nebulization:150', 'Suture Removal:150', 'CBC Blood Test:250', 'Urine Routine:120', 'Injection Admin Fee:50'].map(function(sug){
+              var parts = sug.split(":");
+              return '<span class="quickpill" data-sugsvc="' + esc(parts[0]) + '" data-sugsvcprice="' + esc(parts[1]) + '">+ ' + esc(parts[0]) + '</span>';
+            }).join("") +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:8px">' +
+            '<input id="sName" placeholder="Service name (e.g. ECG 12-Lead)" style="margin:0">' +
+            '<select id="sKind" style="margin:0"><option value="service">Procedure / Service</option><option value="investigation">Lab / Diagnostic</option></select>' +
+            '<input id="sPrice" type="number" min="0" step="10" placeholder="Price ₹" style="margin:0">' +
+          '</div>' +
+          '<button class="btn" id="btnAddSvc" style="margin:0;width:auto;padding:8px 16px;font-size:13px">Add Service</button>' +
+        '</div>' +
+        csvImportCard() +
+        '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Investigations & Services (' + svcs.length + ')</div>' +
+        svcRows;
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-sugsvc]"), function(pill){
+          pill.onclick = function(){
+            host.querySelector("#sName").value = pill.getAttribute("data-sugsvc");
+            host.querySelector("#sPrice").value = pill.getAttribute("data-sugsvcprice");
+          };
+        });
+
+        var addSvcBtn = host.querySelector("#btnAddSvc");
+        if (addSvcBtn) {
+          addSvcBtn.onclick = function(){
+            var nm = host.querySelector("#sName").value.trim();
+            if (!nm) { toast("Enter service name"); return; }
+            var k = host.querySelector("#sKind").value;
+            var pr = Math.round(Number(host.querySelector("#sPrice").value) * 100) || 0;
+            addSvcBtn.disabled = true; addSvcBtn.textContent = "Adding…";
+            api("bill/tariff", {
+              method: "POST",
+              body: { orgId: st.orgId, name: nm, kind: k, price: pr }
+            }).then(function(r){
+              addSvcBtn.disabled = false; addSvcBtn.textContent = "Add Service";
+              if (r && r.ok) { toast("Added " + nm); reloadTariff(); }
+              else toast("Failed to add service");
+            });
+          };
+        }
+
+        Array.prototype.forEach.call(host.querySelectorAll("[data-deltrf]"), function(btn){
+          btn.onclick = function(){
+            var tid = btn.getAttribute("data-deltrf");
+            if (!confirm("Remove this item?")) return;
+            api("bill/tariff", { method: "POST", body: { orgId: st.orgId, id: tid, active: false } }).then(function(r){
+              if (r && r.ok) { toast("Item removed"); reloadTariff(); }
+              else toast("Failed to remove item");
+            });
+          };
+        });
+
+        wireCsvImport(host, "investigation");
+
+      } else if (activeTab === 3) {
+        // Tab 3: OPD Billing Flow
+        var isPayFirst = flowMode !== "doctor_first";
+        host.innerHTML = '<div style="margin-bottom:12px">' +
+          '<div style="font-weight:700;font-size:14px;margin-bottom:4px">Select OPD Patient Journey</div>' +
+          '<div style="font-size:12.5px;color:var(--mut);margin-bottom:14px">Choose how walk-in and appointment billing behaves for your clinic.</div>' +
+
+          '<div class="flowcard' + (isPayFirst ? ' selected' : '') + '" data-flow="pay_first">' +
+            '<div style="display:flex;align-items:center;gap:8px">' +
+              '<input type="radio" name="flowRadio" value="pay_first"' + (isPayFirst ? ' checked' : '') + ' style="margin:0">' +
+              '<b style="font-size:14px">Pay First (Pre-Paid Consultation)</b>' +
+              '<span class="chip" style="background:#ecfdf5;color:#059669;font-weight:700;font-size:11px;margin-left:auto">Recommended for Private Clinics</span>' +
+            '</div>' +
+            '<div class="flowsteps">' +
+              '<span>1. Arrival</span><span class="arr">→</span>' +
+              '<span>2. Register</span><span class="arr">→</span>' +
+              '<span style="border-color:var(--tl);color:var(--tl);background:var(--tl-soft);font-weight:800">3. Pay Consultation Fee</span><span class="arr">→</span>' +
+              '<span>4. Triage / Vitals</span><span class="arr">→</span>' +
+              '<span>5. Doctor Consult</span><span class="arr">→</span>' +
+              '<span>6. Pharmacy</span><span class="arr">→</span>' +
+              '<span>7. Discharge</span>' +
+            '</div>' +
+            '<div style="font-size:12px;color:var(--mut);margin-top:6px;line-height:1.4">' +
+              'Patient pays the doctor\'s consultation fee upfront at the desk. The OPD Queue card shows an amber <b>Unpaid: ₹[Fee]</b> chip with a 1-click Pay button, turning green <b>Paid</b> immediately.' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="flowcard' + (!isPayFirst ? ' selected' : '') + '" data-flow="doctor_first">' +
+            '<div style="display:flex;align-items:center;gap:8px">' +
+              '<input type="radio" name="flowRadio" value="doctor_first"' + (!isPayFirst ? ' checked' : '') + ' style="margin:0">' +
+              '<b style="font-size:14px">Doctor Visit First (Post-Paid Consultation)</b>' +
+            '</div>' +
+            '<div class="flowsteps">' +
+              '<span>1. Arrival</span><span class="arr">→</span>' +
+              '<span>2. Register</span><span class="arr">→</span>' +
+              '<span>3. Triage / Vitals</span><span class="arr">→</span>' +
+              '<span>4. Doctor Consult & Orders</span><span class="arr">→</span>' +
+              '<span style="border-color:var(--tl);color:var(--tl);background:var(--tl-soft);font-weight:800">5. Settle Invoice at Billing</span><span class="arr">→</span>' +
+              '<span>6. Pharmacy</span><span class="arr">→</span>' +
+              '<span>7. Discharge</span>' +
+            '</div>' +
+            '<div style="font-size:12px;color:var(--mut);margin-top:6px;line-height:1.4">' +
+              'Patient sees the doctor first. After the consultation, the cashier generates a single consolidated bill for the consultation fee plus any lab tests or medicines ordered.' +
+            '</div>' +
+          '</div>' +
+
+          '<button class="btn" id="saveFlowBtn" style="margin-top:10px;width:auto;padding:10px 20px;font-size:13.5px">Save Billing Workflow</button>' +
+        '</div>';
+
+        Array.prototype.forEach.call(host.querySelectorAll(".flowcard"), function(card){
+          card.onclick = function(){
+            var val = card.getAttribute("data-flow");
+            host.querySelector('input[value="' + val + '"]').checked = true;
+            Array.prototype.forEach.call(host.querySelectorAll(".flowcard"), function(c){
+              c.classList.toggle("selected", c.getAttribute("data-flow") === val);
+            });
+          };
+        });
+
+        var saveFlow = host.querySelector("#saveFlowBtn");
+        if (saveFlow) {
+          saveFlow.onclick = function(){
+            var rad = host.querySelector('input[name="flowRadio"]:checked');
+            var mode = rad ? rad.value : "pay_first";
+            saveFlow.disabled = true; saveFlow.textContent = "Saving…";
+            api("org/update", { method: "POST", body: { orgId: st.orgId, opdBillingMode: mode } }).then(function(r){
+              saveFlow.disabled = false; saveFlow.textContent = "Save Billing Workflow";
+              if (r && r.ok) {
+                if (st.currentOrg) st.currentOrg.opdBillingMode = mode;
+                if (st.opd) st.opd.opdBillingMode = mode;
+                toast("OPD Billing Workflow updated to " + (mode === "pay_first" ? "Pay First (Pre-Paid)" : "Doctor Visit First (Post-Paid)"));
+              } else toast("Failed to save workflow");
+            });
+          };
+        }
+      }
+    }
+
+    function reloadTariff(){
+      Promise.all([
+        api("bill/tariff?orgId=" + encodeURIComponent(st.orgId)),
+        api("members?orgId=" + encodeURIComponent(st.orgId)),
+        api("org?orgId=" + encodeURIComponent(st.orgId))
+      ]).then(function(res){
+        var trfRes = res[0], memRes = res[1], orgRes = res[2];
+        if (trfRes && trfRes.ok) st.tariffItems = trfRes.items || [];
+        if (memRes && memRes.ok) st.docMembers = memRes.members || [];
+        if (orgRes && orgRes.ok) st.currentOrg = orgRes.org || {};
+        renderTab();
+      }).catch(function(){
+        var host = sheet.querySelector("#tAdminContent");
+        if (host) host.innerHTML = '<div class="empty">Could not load tariff data.</div>';
+      });
+    }
+
+    Array.prototype.forEach.call(sheet.querySelectorAll("[data-ttab]"), function(btn){
+      btn.onclick = function(){
+        activeTab = Number(btn.getAttribute("data-ttab"));
+        renderTab();
+      };
+    });
+
+    reloadTariff();
   }
 
   // ---- NURSE STATION (unassigned pool -> assign to room -> room queue) ----
@@ -1057,16 +2333,27 @@
     rooms.forEach(function(rm){ inRooms+=rm.waiting||0; (rm.tickets||[]).forEach(function(t){ if(t.status==="in_consultation") consulting++; }); });
     // routing inbox
     var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
-      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
+      var billLabel = (t.unbilledAmount > 0) ? ("Bill ₹" + Math.round(t.unbilledAmount / 100)) : "Bill";
+      var billChip = (t.unbilledAmount > 0)
+        ? ' <span class="chip" style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:700">₹' + Math.round(t.unbilledAmount/100) + ' unbilled</span>'
+        : (t.billingStatus === "paid"
+          ? ' <span class="chip" style="background:#ecfdf5;color:#059669;font-size:11px;font-weight:700">Paid</span>'
+          : ' <span class="chip" style="background:#f1f5f9;color:#64748b;font-size:11px">Unbilled</span>');
+      var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
+      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+billChip+'</div>'+
         '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
-        (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="width:100%;margin-left:0;margin-top:4px">Route to a room <span class="ms sm">chevron_right</span></button>':"")+'</div>';
+        '<div class="acts" style="display:flex;gap:6px;margin-top:6px">'+
+          (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="flex:1;margin:0">Route to a room <span class="ms sm">chevron_right</span></button>':"")+
+          '<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'" data-unbilled="'+(t.unbilledAmount||0)+'" data-name="'+esc(t.name||"Patient")+'"'+(t.unbilledAmount>0?' class="pri"':'')+' style="flex:none">'+billLabel+'</button>'+
+        '</div></div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
     var poolPanel='<div class="pool"><h3>Central routing · '+pool.length+' waiting</h3><div class="rows">'+poolRows+'</div></div>';
     // room wall
     var wall=rooms.length? rooms.map(function(rm){ var s={id:rm.sessionId}, tickets=rm.tickets||[];
       var q=(rm.sessionId&&tickets.length)? tickets.map(function(t,i){return roomTicketRow(s,t,i,tickets.length);}).join("") : '<div class="empty" style="padding:18px 8px">'+(rm.doctorUid?"No patients":"No doctor - set one in Rooms")+'</div>';
       var pd=(rm.room.assignment&&rm.room.assignment.primary)||rm.doctorUid||"";
-      var doc=rm.doctorUid?(docLabel(pd,rm.doctorName)||"Doctor"):"No doctor";
+      var dName = rm.doctorName || (rm.room && rm.room.doctorName) || (rm.room && rm.room.assignment && rm.room.assignment.doctorName) || "";
+      var doc=rm.doctorUid?(docLabel(pd,dName)||"Doctor"):"No doctor";
       return '<div class="rcard '+esc(rm.status)+'"><h3>'+esc(rm.room.name||"Room")+(rm.room.number?" · "+esc(rm.room.number):"")+'<span class="rstat '+esc(rm.status)+'">'+esc(STATUS_LABEL[rm.status]||rm.status)+'</span></h3>'+
         '<div class="docline"><span class="dot2'+(rm.doctorUid?" on":"")+'"></span>'+esc(doc)+' · '+rm.waiting+' waiting'+(rm.room.department?" · "+esc(rm.room.department):"")+'</div>'+
         '<div class="rows">'+q+'</div>'+
@@ -1077,20 +2364,32 @@
     Array.prototype.forEach.call(document.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openAssignRoom(b.getAttribute("data-assign"));};});
     Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
     wireRowActions();
+    mountOpdFlow();
   }
   function roomTicketRow(s,t,i,n){
-    var consult=t.status==="in_consultation"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
+    var consult=t.status==="in_consultation"; var atLab=t.status==="at_diagnostics"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
     var b=[];
-    if(!consult&&can("queue.status")){ b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>'); b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>'); }
+    if(!consult&&!atLab&&can("queue.status")){ b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>'); b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>'); }
+    if(atLab&&can("queue.status")) b.push('<button class="pri" data-a="diagdone" data-s="'+s.id+'" data-t="'+t.id+'">Tests Done → Return</button>');
     if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">No-show</button>');   // D13: called and did not come; recallable with the same token
-    if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
-    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
+    if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
+    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority||0)+'">'+(t.priority?"Change priority":"Priority")+'</button>');
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // room -> waiting hall (in_consultation -> waiting)
+    if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // room -> diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
+    b.push('<button data-a="label" data-s="'+s.id+'" data-t="'+t.id+'">Label</button>');
+    var billLabel = (t.unbilledAmount > 0) ? ("Bill ₹" + Math.round(t.unbilledAmount / 100)) : "Bill";
+    var billChip = (t.unbilledAmount > 0)
+      ? ' <span class="chip" style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:700">₹' + Math.round(t.unbilledAmount/100) + ' unbilled</span>'
+      : (t.billingStatus === "paid"
+        ? ' <span class="chip" style="background:#ecfdf5;color:#059669;font-size:11px;font-weight:700">Paid</span>'
+        : ' <span class="chip" style="background:#f1f5f9;color:#64748b;font-size:11px">Unbilled</span>');
+    var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
+    b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'" data-unbilled="'+(t.unbilledAmount||0)+'" data-name="'+esc(t.name||"Patient")+'"'+(t.unbilledAmount>0?' class="pri"':'')+'>'+billLabel+'</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+labBadges(t)+'</div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   // Nurse records vitals -> a compact timeline entry (kind:"vitals", EMR_VITALS cap). This is the nurse's
@@ -1124,6 +2423,335 @@
       post("timeline",{sessionId:sid,ticketId:tid,kind:"vitals",text:p.join(" · "),vitals:vitals});
     };
   }
+  // ---- FILE LABEL / STICKER + 1-TOUCH TAP-SCAN ---------------------------------------
+  // Clinics paste a physical NFC tag onto the patient file and print the same UID as a Code128
+  // barcode + QR on the label. This dialog prints/writes; the background listeners below route
+  // a tap/scan to the right station with no typing. UID fields checked in order, MRN first.
+  function findTicketByUid(uid){
+    var key=String(uid==null?"":uid).trim(); if(!key) return null;
+    // Universal Patient Identity: a QR/wedge scan may carry the full /opd deep link or a
+    // prefixed id - reduce it to the canonical id before matching. Best-effort only.
+    try{ if(window.StewardIdentityResolver&&StewardIdentityResolver.normalizeCarrierValue){ var nk=StewardIdentityResolver.normalizeCarrierValue(key); if(nk) key=nk; } }catch(e){}
+    var up=key.toUpperCase();
+    var same=function(v){ return v!=null&&v!==""&&(String(v)===key||String(v).toUpperCase()===up); };
+    var hit=null, i, j;
+    var consider=function(t,sid){
+      if(hit||!t) return;
+      if(same(t.stewardId)||same(t.mrn)||same(t.ghisPatientId)||same(t.smdId)||same(t.id)||same(t.token)) hit={t:t,sid:sid||null,tid:t.id};
+    };
+    for(i=0;i<(st.board||[]).length&&!hit;i++){ var b=st.board[i], ts=(b&&b.tickets)||[];
+      for(j=0;j<ts.length&&!hit;j++) consider(ts[j],b.session&&b.session.id); }
+    if(st.opd){
+      var pool=st.opd.pool||[];
+      for(j=0;j<pool.length&&!hit;j++) consider(pool[j],null);
+      var rooms=st.opd.rooms||[];
+      for(i=0;i<rooms.length&&!hit;i++){ var rt=(rooms[i]&&rooms[i].tickets)||[];
+        for(j=0;j<rt.length&&!hit;j++) consider(rt[j],rooms[i]&&rooms[i].sessionId); }
+    }
+    return hit;
+  }
+  function openFileLabel(ticketId,sid){
+    var hit=findTicketByUid(ticketId);
+    if(!hit){ toast("That patient is no longer on today's board."); return; }
+    var t=hit.t;
+    var uid=t.stewardId||t.mrn||t.ghisPatientId||t.smdId||t.id||"";
+    var clinic=st.orgName||(st.who&&st.who.orgName)||st.orgCode||"Clinic";
+    var tokenNo=(t.token==null?"":String(t.token));
+    var tokenLabel=tokenNo?("#"+(/^\d+$/.test(tokenNo)?("0000"+tokenNo).slice(-4):tokenNo)):"";
+    var age=(t.ageYears!=null&&t.ageYears!=="")?t.ageYears:(t.age!=null?t.age:"");
+    var ageSex=(((age===""||age==null)?"":age+"y")+(t.sex?" "+t.sex:"")).trim()||"-";
+    var barHtml, qrHtml;
+    try{ barHtml=(window.SMD_BARCODE&&SMD_BARCODE.toSvg(uid,{height:56}))||'<div class="t">Barcode unavailable.</div>'; }
+    catch(e){ barHtml='<div class="t">Barcode unavailable for this ID.</div>'; }
+    var qrTarget=(location&&location.origin?location.origin:"https://stewardmd.in")+"/opd?uid="+encodeURIComponent(uid);
+    try{ qrHtml=(window.SMD_PGLOG_QR&&SMD_PGLOG_QR.toSvg(qrTarget,{scale:4,label:"Scan to open patient record"}))||'<div class="t">QR unavailable.</div>'; }
+    catch(e){ qrHtml='<div class="t">QR unavailable for this ID.</div>'; }
+    open('<style>@media print{body>*:not(#scrim){display:none!important;}'+
+      '#scrim{position:static!important;background:none!important;display:block!important;opacity:1!important;visibility:visible!important;}'+
+      '#scrim .sheet{transform:none!important;box-shadow:none!important;border:none!important;max-width:none!important;max-height:none!important;}'+
+      '#fileLabel .noprint{display:none!important;}}</style>'+
+      '<div id="fileLabel" style="text-align:center">'+
+      '<div style="font-weight:800;font-size:15px">'+esc(clinic)+'</div>'+
+      (tokenLabel?'<div style="font:800 26px ui-monospace,monospace;margin:2px 0">Token '+esc(tokenLabel)+'</div>':'')+
+      '<div style="font-weight:700;font-size:17px;margin-top:2px">'+esc(t.name||"Patient")+'</div>'+
+      '<div class="t" style="margin:2px 0 8px">'+esc(ageSex)+' · '+esc(st.date||"")+' · StewardID '+esc(uid)+'</div>'+
+      '<div style="display:flex;gap:12px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin:6px 0">'+
+      '<div><div style="font-size:11px;color:var(--mut);margin-bottom:2px">BARCODE</div>'+barHtml+
+      '<div style="font:700 13px ui-monospace,monospace;margin-top:2px">'+esc(uid)+'</div></div>'+
+      '<div><div style="font-size:11px;color:var(--mut);margin-bottom:2px">QR</div>'+qrHtml+'</div></div>'+
+      '<button class="ghost" id="flNfc" style="width:100%;margin-top:10px">Ni-Key: Write NFC Tag</button>'+
+      '<div class="row2 noprint"><button class="cancel" id="flClose">Close</button>'+
+      '<button class="btn" id="flPrint" style="margin:0">Print Label / Sticker</button></div></div>',true);
+    sheet.querySelector("#flClose").onclick=close;
+    sheet.querySelector("#flPrint").onclick=function(){ window.print(); };
+    sheet.querySelector("#flNfc").onclick=function(){ writeNfcTag(uid); };
+  }
+  // Writes the UID onto a blank NFC tag held to the device. Plain-text payload: every phone
+  // camera and wedge reader takes it with no app. Fails spoken, never silent.
+  function writeNfcTag(uid){
+    uid=String(uid==null?"":uid);
+    if(!uid){ toast("Nothing to write."); return Promise.resolve(false); }
+    var nfcMod = window.NiKey || window.SMD_NFC;
+    // The desk just issued this carrier: register it so later taps in this session resolve
+    // to this patient (and a later lost-tag report can revoke it). Best-effort only.
+    var regCarrier=function(){ try{ if(window.StewardIdentityResolver&&StewardIdentityResolver.registerCarrier) StewardIdentityResolver.registerCarrier({patientId:uid,stewardId:uid,type:"nfc",value:uid,issuedBy:"frontdesk"}); }catch(e){} };
+    if(nfcMod && nfcMod.isSupportedSync && nfcMod.isSupportedSync()){
+      toast("Ni-Key: Hold an NFC tag to the device...");
+      return nfcMod.writeTag(uid).then(function(){
+        regCarrier();
+        toast("Ni-Key tag written. Tap it to verify.");
+        return true;
+      }, function(e){
+        toast("Could not write the Ni-Key tag"+(e&&e.message?": "+e.message:"")+". Try another tag.");
+        return false;
+      });
+    }
+    if(!("NDEFReader" in window)){ toast("Ni-Key NFC writing is not available on this device or browser."); return Promise.resolve(false); }
+    try{
+      var w=new NDEFReader();
+      return w.write(uid).then(function(){ regCarrier(); toast("Ni-Key tag written. Tap it to verify."); return true; },
+        function(e){ toast("Could not write the Ni-Key tag"+(e&&e.message?": "+e.message:"")+". Try another tag."); return false; });
+    }catch(e){ toast("Could not write the Ni-Key tag."); return Promise.resolve(false); }
+  }
+  // Text out of an NDEF record. RTD-TEXT payloads open with a status byte + language code, so a
+  // raw decode would hand routing "enSMD-..." - skip that prefix, then take the UID-shaped run.
+  function nfcScanText(rec){
+    try{
+      var d=rec&&rec.data;
+      if(typeof d==="string") return d.trim();
+      var bytes=null;
+      if(d instanceof DataView) bytes=new Uint8Array(d.buffer,d.byteOffset,d.byteLength);
+      else if(d instanceof ArrayBuffer) bytes=new Uint8Array(d);
+      if(!bytes||!bytes.length) return "";
+      var off=0;
+      if(rec.recordType==="text"||rec.recordType==="urn:nfc:wkt:T") off=1+(bytes[0]&63);
+      var s="";
+      try{ s=new TextDecoder().decode(bytes.subarray(off)); }
+      catch(e){ s=String.fromCharCode.apply(null,Array.prototype.slice.call(bytes.subarray(off))); }
+      var m=/[A-Za-z0-9][A-Za-z0-9\-_]{2,63}/.exec(s||"");
+      return m?m[0]:"";
+    }catch(e){ return ""; }
+  }
+  // Background NFC read: a tapped file tag routes with no typing. scan() without a gesture may
+  // refuse on some browsers - that only means taps wait for a foreground write, never an error.
+  var nfcListening=false;
+  function startNfcListener(){
+    if(nfcListening) return;
+    if(window.SMD_NFC && window.SMD_NFC.isSupportedSync && window.SMD_NFC.isSupportedSync()){
+      window.SMD_NFC.startScan(function(tag){
+        var v=(tag&&(tag.text||tag.uid))||"";
+        if(v) handleScannedUid(v);
+      }).then(function(){ nfcListening=true; },function(){});
+      return;
+    }
+    if(!("NDEFReader" in window)) return;
+    try{
+      var r=new NDEFReader();
+      var p=r.scan();
+      if(p&&p.then) p.then(function(){ nfcListening=true; },function(){});
+      else nfcListening=true;
+      r.onreading=function(ev){
+        try{
+          var recs=(ev&&ev.message&&ev.message.records)||[];
+          for(var i=0;i<recs.length;i++){ var v=nfcScanText(recs[i]); if(v){ handleScannedUid(v); return; } }
+        }catch(e){}
+      };
+    }catch(e){}
+  }
+  // Background wedge-scanner read: USB/Bluetooth scanners type fast (<45ms between keys) and end
+  // with Enter. Keystrokes landing in a field belong to the field (the billing lookup's own Enter
+  // already looks the patient up), so only body-level bursts count as scans.
+  var scanBuf="", scanLast=0, scanTimer=null, scanListening=false;
+  function startScannerListener(){
+    if(scanListening) return; scanListening=true;
+    document.addEventListener("keydown",function(e){
+      try{
+        if(!e||e.ctrlKey||e.metaKey||e.altKey) return;
+        if(e.key==="Enter"){
+          if(scanBuf.length>=3){ var v=scanBuf; scanBuf=""; handleScannedUid(v); e.preventDefault(); }
+          else scanBuf="";
+          return;
+        }
+        if(e.key&&e.key.length===1){
+          var t=e.target, tag=t&&t.tagName;
+          if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT"||(t&&t.isContentEditable)){ scanBuf=""; return; }
+          var now=Date.now();
+          if(now-scanLast>45) scanBuf="";
+          scanLast=now; scanBuf+=e.key;
+          if(scanBuf.length>80) scanBuf=scanBuf.slice(-80);
+          if(scanTimer) clearTimeout(scanTimer);
+          scanTimer=setTimeout(function(){ scanBuf=""; },150);
+        }
+      }catch(err){}
+    });
+  }
+  // The board as an identity store: today's tickets are the patient records this station
+  // knows, so a tap/scan resolves to a VERIFIED identity (name, queue ticket, OPD visit) with
+  // no network. Resolutions also feed the resolver's offline cache, which the check-in sheet's
+  // Ni-Key read draws on to prefill a returning patient.
+  function boardPatientStore(id){
+    try{
+      var hit=findTicketByUid(id);
+      if(!hit) return null;
+      var t=hit.t||{};
+      return { name:t.name||"", mrn:t.mrn||t.ghisPatientId||"", stewardId:t.stewardId||"",
+        age:t.ageYears!=null?t.ageYears:(t.age!=null?t.age:""), sex:t.sex||t.gender||"",
+        mobile:t.mobile||"", gender:t.sex||t.gender||"", ageYears:t.ageYears!=null?t.ageYears:"",
+        currentQueueTicket:{ ticketId:hit.tid, sessionId:hit.sid, token:t.token, status:t.status },
+        activeEncounter:{ type:"opd", encounterId:t.encounterId||hit.tid, department:t.department||"", token:t.token||"", ticketId:hit.tid, sessionId:hit.sid } };
+    }catch(e){ return null; }
+  }
+  function openOpdScanner(){
+    if(window.WARD_LABELS&&WARD_LABELS.cameraSupported&&WARD_LABELS.cameraSupported()){
+      WARD_LABELS.scan().then(function(res){
+        if(res&&res.code) handleScannedUid(res.code);
+        else if(res&&res.error==="denied") toast("Camera permission denied. Allow camera in site settings.");
+        else if(res&&!res.cancelled) toast("Camera scan failed.");
+      });
+      return;
+    }
+    if(window.PatientIdentityScanner){
+      var sc=PatientIdentityScanner.create({
+        station: (st.who&&st.who.role)||"doctor",
+        onResolved: function(r){
+          close();
+          var id=r.stewardId||r.patientId||(r.carrier&&r.carrier.normalized);
+          if(id) handleScannedUid(id);
+        }
+      });
+      open('<h3>Scan Patient Identity</h3><div id="opdScanBox" style="min-height:160px"></div><div class="row2"><button class="cancel" id="scClose">Close</button></div>');
+      sheet.querySelector("#scClose").onclick=close;
+      sc.mount(sheet.querySelector("#opdScanBox"));
+      sc.startBarcodeScan();
+      return;
+    }
+    var manualVal=prompt("Enter or scan StewardID / MRN:");
+    if(manualVal&&manualVal.trim()) handleScannedUid(manualVal.trim());
+  }
+  // One tap/scan, routed by station: doctor gets the visit-aware action sheet (start the
+  // consultation, open the chart, or start a linked follow-up), nurse opens vitals pre-linked
+  // to the patient, pharmacy highlights the dispense row, cashier lands on the bill.
+  function handleScannedUid(uid){
+    uid=String(uid==null?"":uid).trim();
+    if(!uid) return;
+    var role=st.who&&st.who.role;
+    var org=st.orgId||st.hospital||"";
+    // Universal Patient Identity (Wave 3): resolve the carrier before routing. A revoked tag
+    // stops here with a spoken reason; anything unresolved falls back to the raw uid so
+    // routing never depends on the resolver being loaded.
+    var stewardId="", identity=null;
+    try{
+      if(window.StewardIdentityResolver&&StewardIdentityResolver.resolvePatientIdentity){
+        var _r=StewardIdentityResolver.resolvePatientIdentity(uid,{role:role,hospital:st.hospital,orgId:org,patientStore:boardPatientStore});
+        if(_r&&_r.then){ _r=null; }
+        else if(_r&&_r.ok===false&&_r.error==="CARRIER_REVOKED"){ toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."); return; }
+        else if(_r&&_r.ok){ identity=_r; if(_r.identityStatus==="verified") stewardId=_r.stewardId||""; }
+      }
+    }catch(_e){ if(_e&&_e.code==="CARRIER_REVOKED"){ toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."); return; } }
+    if(role==="cashier"){ location.href="/clinic-billing?patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
+    if(role==="pharmacy"){ location.href="/clinic-billing?station=pharmacy&patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
+    var hit=findTicketByUid(uid);
+    if(!hit){ openFollowupCard(uid); return; }
+    var nm=hit.t.name||"Patient";
+    if(!hit.sid){ toast(nm+" is waiting to be routed - assign a room first."); return; }
+    if(role==="nurse"||role==="intern"||role==="resident"||role==="reception"){ openVitals(hit.sid,hit.tid,nm); return; }
+    if(hit.t.status==="in_consultation"||hit.t.status==="at_diagnostics"){ openNotes(hit.sid,hit.tid,nm); return; }
+    if(role==="doctor"||isRoomDoctor(hit)){ openDoctorScanSheet(hit,nm,stewardId,identity); return; }
+    post("status",{sessionId:hit.sid,ticketId:hit.tid,status:"in_consultation"});
+  }
+  // "Room doctor": the signed-in account is the doctor assigned to the room holding this ticket.
+  function isRoomDoctor(hit){
+    try{
+      if(!hit||!hit.sid) return false;
+      var me=meUid(); if(!me) return false;
+      var rooms=(st.opd&&st.opd.rooms)||[], i, b;
+      for(i=0;i<rooms.length;i++){ if(rooms[i]&&rooms[i].sessionId===hit.sid&&rooms[i].doctorUid&&normDocId(rooms[i].doctorUid)===normDocId(me)) return true; }
+      for(i=0;i<(st.board||[]).length;i++){ b=st.board[i]; if(b&&b.session&&b.session.id===hit.sid&&b.session.doctorUid&&normDocId(b.session.doctorUid)===normDocId(me)) return true; }
+    }catch(e){}
+    return false;
+  }
+  // Doctor desk, Wave 3: a tap/scan on a waiting patient offers the visit-aware actions - the
+  // patient summary plus today's visit status, then Start Consultation (same tap as before),
+  // View Profile (the full chart), or Follow-up Consult (a NEW encounter linked to this one
+  // via parentEncounterId, never overwriting today's notes).
+  function openDoctorScanSheet(hit,nm,stewardId,identity){
+    var t=hit.t||{};
+    var age=(t.ageYears!=null&&t.ageYears!=="")?t.ageYears:(t.age!=null?t.age:"");
+    var demo=(((age===""||age==null)?"":age+"y")+(t.sex?" "+t.sex:"")).trim();
+    var tok=(t.token==null?"":String(t.token));
+    var status=String(t.status||"waiting").replace(/_/g," ");
+    var sid=stewardId||t.stewardId||"";
+    var pid=t.mrn||t.ghisPatientId||t.smdId||t.id||"";
+    open('<h3>'+esc(nm)+'</h3>'+
+      '<p class="t" style="margin:0 0 4px">'+(demo?esc(demo)+" · ":"")+(tok?"Token <b>"+esc(tok)+"</b> · ":"")+'Status: <b>'+esc(status)+"</b></p>"+
+      (sid?'<p class="t" style="margin:0 0 10px">StewardID <b class="mono">'+esc(sid)+"</b></p>":"")+
+      '<button class="btn" id="dsStart" style="width:100%">Start Consultation</button>'+
+      '<button class="ghost" id="dsProfile" style="width:100%;margin-top:8px">View Profile</button>'+
+      '<button class="ghost" id="dsFollow" style="width:100%;margin-top:8px">Follow-up Consult</button>'+
+      '<div class="row2"><button class="cancel" id="dsClose" style="margin:8px 0 0">Close</button></div>');
+    sheet.querySelector("#dsClose").onclick=close;
+    sheet.querySelector("#dsStart").onclick=function(){ close(); post("status",{sessionId:hit.sid,ticketId:hit.tid,status:"in_consultation"}); };
+    sheet.querySelector("#dsProfile").onclick=function(){
+      close();
+      if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:pid,stewardId:sid||pid,mrn:pid,name:nm}); }catch(e){} return; }
+      toast("The full chart opens in the StewardMD app.");
+    };
+    sheet.querySelector("#dsFollow").onclick=function(){
+      close();
+      if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:pid,stewardId:sid||pid,mrn:pid,name:nm,isFollowUp:true,parentEncounterId:t.encounterId||t.episodeId||hit.tid}); }catch(e){} return; }
+      toast("The full chart opens in the StewardMD app.");
+    };
+  }
+  // A follow-up patient who just walked in with their file: the tag is real but no ticket exists yet.
+  // One card queues them for consultation (same station routing as a tap once the ticket exists) or
+  // opens their full chart in the app. Never a dead-end toast at a busy desk.
+  function openFollowupCard(uid){
+    var opts=st.board.map(function(b){return '<option value="'+esc(b.session.id)+'">'+esc(b.session.doctorName||b.session.doctorUid)+'</option>';}).join("");
+    open('<h3>Follow-up Patient Scanned</h3>'+
+      '<p class="t" style="margin:0 0 10px">UHID <b>'+esc(uid)+'</b> is not in today\'s queue.</p>'+
+      '<input id="fn" placeholder="Patient name" style="margin-bottom:10px">'+
+      (opts?'<select id="fsel">'+opts+'</select>':'<div class="empty">No doctor queue yet - a doctor must sign in first.</div>')+
+      '<button class="btn" id="fQueue" style="width:100%;margin-top:10px">Queue for Consultation</button>'+
+      '<button class="ghost" id="fChart" style="width:100%;margin-top:8px">Open Full Patient Chart</button>'+
+      '<div class="row2"><button class="cancel" id="fClose" style="margin:8px 0 0">Close</button></div>');
+    sheet.querySelector("#fClose").onclick=close;
+    // A tag the resolver knows prefills the name, so 1-click queueing stays 1 click.
+    try{
+      if(window.StewardIdentityResolver&&StewardIdentityResolver.resolvePatientIdentity){
+        var _fr=StewardIdentityResolver.resolvePatientIdentity(uid,{role:(st.who&&st.who.role)||"",hospital:st.hospital,orgId:st.orgId,patientStore:boardPatientStore});
+        if(_fr&&!_fr.then&&_fr.ok&&_fr.patient&&_fr.patient.name){ var _fn=sheet.querySelector("#fn"); if(_fn&&!_fn.value) _fn.value=_fr.patient.name; }
+      }
+    }catch(e){}
+    sheet.querySelector("#fChart").onclick=function(){
+      if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:uid,mrn:uid}); }catch(e){} return; }
+      toast("The full chart opens in the StewardMD app.");
+    };
+    sheet.querySelector("#fQueue").onclick=function(){
+      var nm=sheet.querySelector("#fn").value.trim();
+      var sel=sheet.querySelector("#fsel");
+      if(!nm){ toast("Enter the patient's name"); return; }
+      if(!sel){ toast("No doctor queue available"); return; }
+      var sVal=sel.value;
+      close();
+      post("ticket",{sessionId:sVal,name:nm,mrn:uid,visitType:"followup"},function(r){
+        refresh();
+        var tkt=((r&&r.tickets)||[]).filter(function(x){ return x.mrn===uid||x.id===uid; })[0];
+        if(!tkt){ toast("Queued for consultation."); return; }
+        var role=st.who&&st.who.role;
+        if(role==="nurse"||role==="intern"||role==="resident"||role==="reception"){ openVitals(sVal,tkt.id,tkt.name||"Patient"); return; }
+        post("status",{sessionId:sVal,ticketId:tkt.id,status:"in_consultation"});
+      });
+    };
+  }
+  // ?scan=UID deep link (NFC tools / QR side-channel): consumed once the board has rendered, so
+  // tickets resolve; the cashier/pharmacy paths need no board and route immediately.
+  var pendingScan=null;
+  try{ var _pq=new URLSearchParams(location.search||""); pendingScan=_pq.get("scan")||_pq.get("uid")||_pq.get("patientId")||null; }catch(e){ pendingScan=null; }
+  function consumePendingScan(){
+    if(!pendingScan) return;
+    var v=pendingScan; pendingScan=null;
+    try{ handleScannedUid(v); }catch(e){}
+  }
   function openAssignRoom(tid){
     var pt=((st.opd&&st.opd.pool)||[]).filter(function(x){return x.id===tid;})[0]||{};
     var dept=(pt.department||"").toLowerCase();
@@ -1134,14 +2762,14 @@
     rooms.sort(function(a,b){ return (match(b)?1:0)-(match(a)?1:0) || (a.waiting||0)-(b.waiting||0); });
     var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+(match(r)?"✓ ":"")+esc(r.room.name||"Room")+(r.room.department?" ("+esc(r.room.department)+")":"")+' - '+esc(STATUS_LABEL[r.status]||r.status)+' · '+r.waiting+' waiting</option>';}).join("");
     open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first."+(pt.token?" A room in another department keeps token "+esc(pt.token)+".":""):"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
-      (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px"><input type="checkbox" id="urg"> Urgent (front of the room queue)</label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
+      (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px">Priority<select id="prsel" style="margin-top:6px"><option value="">None (arrival order)</option>'+PRIO.map(function(p){return '<option value="'+p[0]+'">'+p[1]+'</option>';}).join("")+'</select></label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
       '<input id="arz" placeholder="Optional note" style="margin-top:6px">'+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
       var sel=sheet.querySelector("#rsel"); if(!sel){toast("No room available");return;}
       var body={orgId:st.orgId,ticketId:tid,roomId:sel.value,date:st.date,reason:sheet.querySelector("#arz").value.trim()};
-      var urg=sheet.querySelector("#urg"); if(urg&&urg.checked) body.priority=2;
+      var prs=sheet.querySelector("#prsel"); if(prs&&prs.value){ if(prs.value==="other"&&body.reason.length<3){toast("Say why in the note");return;} body.priorityReason=prs.value; }
       close();
       api("assign-room",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Assign failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
     };
@@ -1161,7 +2789,10 @@
         clinicName: st.orgCode||"Check-in",
         departments: o?(o.departments||[]):null,
         departmentRequired: perDept,
+        resolve: function(id){ return api("patient/resolve?orgId="+encodeURIComponent(st.orgId)+"&id="+encodeURIComponent(id)); },
         submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue="pool"; return api("patient/register",{method:"POST",body:b}); },
+        offline: function(sent){ var d=offDesk(); if(!d) return null; return d.issue(sent).then(function(r){ paintOffline(); return r; }); },
+        printToken: function(o){ printTokenSlip(o); },
         onAdded: function(r,sent){
           // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
           api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
@@ -1169,7 +2800,9 @@
             .then(function(q){
               // A refused queue add is never shown as added: the patient is registered but has no token.
               if(!q||!q.ok){ toast("Registered "+r.mrn+" but NOT queued: "+((q&&q.message)||(q&&q.error)||"no response")); refresh(); return; }
-              toast("Added - "+r.mrn+(q.ticket&&q.ticket.token?" - token "+q.ticket.token:"")); refresh();
+              toast("Added - "+r.mrn+(q.ticket&&q.ticket.token?" - token "+q.ticket.token:""));
+              if(q.ticket) autoQueueConsultationFee(r.mrn, q.ticket.id, sent && sent.doctorId);
+              refresh();
             },function(){ toast("Registered "+r.mrn+" but NOT queued: the server could not be reached."); });
         }
       });
@@ -1183,28 +2816,62 @@
   function meName(){ try{ var u=fbAuth().currentUser; return (u&&u.displayName)||""; }catch(e){ return ""; } }
   function withDr(n){ n=String(n||"").trim(); return n?(/^dr\.?\s/i.test(n)?n:"Dr "+n):""; }
   function prettyLocal(e){ return String(e||"").split("@")[0].replace(/[._]+/g," ").replace(/\d+/g,"").trim().replace(/\b\w/g,function(c){return c.toUpperCase();}); }
+  function normDocId(id){ return String(id||"").replace(/^(fb|cfa|ghis|uid):/i,"").trim(); }
+  function isOpaqueId(v){
+    var x = String(v||"").trim();
+    return !x || /^(fb|cfa|ghis|uid):/i.test(x) || /^[a-z0-9_-]{16,}$/i.test(x);
+  }
   // Friendly doctor label from a stored doctor id (Firebase uid for the account, or a member email for
   // invited doctors). Never surface the raw hex uid. Prefers the account display name for this device.
   function docLabel(pd,doctorName){
     if(!pd) return "";
-    if(pd===meUid()) return withDr(meName()) || withDr(prettyLocal((st.who&&st.who.name)||"")) || "You";
-    if(doctorName && doctorName.indexOf("@")===-1 && !/^[a-z0-9]{16,}$/i.test(doctorName)) return withDr(doctorName);
+    var currentUid = meUid();
+    var isMe = currentUid && normDocId(pd) === normDocId(currentUid);
+    if(doctorName && !isOpaqueId(doctorName) && doctorName.indexOf("@")===-1) {
+      return withDr(doctorName);
+    }
+    if(isMe){
+      var myDocName = st.doctorName || (st.who && st.who.doctorName) || meName() || (st.who && st.who.name && st.who.name !== "Doctor" ? st.who.name : "");
+      if(myDocName && !isOpaqueId(myDocName)) return withDr(myDocName);
+      return "Doctor (You)";
+    }
+    var npd = normDocId(pd);
+    if(st.docMembers && st.docMembers.length){
+      var m = st.docMembers.find(function(x){ return normDocId(x.identity) === npd; });
+      if(m && m.displayName && !isOpaqueId(m.displayName)) return withDr(m.displayName);
+    }
     if(pd.indexOf("@")>-1) return withDr(prettyLocal(pd));
-    return "Dr "+String(pd).slice(0,8);
+    if(st.doctorName && !isOpaqueId(st.doctorName)) return withDr(st.doctorName);
+    return "Doctor";
   }
   function doctorOptions(){ // "Me" (this account) + org members with role doctor
-    var opts=[{id:meUid(),label:"Me (this account)"}];
-    (st.docMembers||[]).forEach(function(m){ if(m.role==="doctor") opts.push({id:m.identity,label:m.identity}); });
+    var myName = st.doctorName || (st.who && st.who.doctorName) || meName() || "Me (this account)";
+    var opts=[{id:meUid(),label:withDr(myName)||"Me (this account)"}];
+    (st.docMembers||[]).forEach(function(m){
+      if(m.role==="doctor") {
+        var lbl = m.displayName ? (withDr(m.displayName) + " (" + m.identity + ")") : m.identity;
+        opts.push({id:m.identity,label:lbl,name:m.displayName||""});
+      }
+    });
     return opts.filter(function(o){return o.id;});
   }
-  function roomDoctorLabel(rm){ var a=rm.assignment||{}; if(a.mode==="unassigned"||(!a.primary&&!(a.doctors||[]).length)) return "No doctor"; if(a.mode==="rotating") return "Rotating ("+(a.doctors||[]).length+")"; var d=a.primary||(a.doctors||[])[0]||""; return d?(docLabel(d)||"Doctor"):"No doctor"; }
+  function roomDoctorLabel(rm){
+    var a=rm.assignment||{};
+    var dn = rm.doctorName || a.doctorName || "";
+    if(a.mode==="unassigned"||(!a.primary&&!(a.doctors||[]).length)) return "No doctor";
+    if(a.mode==="rotating") return "Rotating ("+(a.doctors||[]).length+")";
+    var d=a.primary||(a.doctors||[])[0]||"";
+    return d?(docLabel(d, dn)||"Doctor"):"No doctor";
+  }
   function openRoomsAdmin(){
-    open('<h3>Rooms</h3><div class="t" style="margin-bottom:8px">Clinic '+esc(st.orgCode||st.orgId)+'</div><div id="rlist">Loading…</div>'+
+    var clinicDisp = st.orgName ? (st.orgName + " (" + (st.orgCode||st.orgId) + ")") : (st.orgCode||st.orgId);
+    open('<h3>Rooms</h3><div class="t" style="margin-bottom:8px">Clinic '+esc(clinicDisp)+'</div><div id="rlist">Loading…</div>'+
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
       '<input id="nrn" placeholder="New room name (e.g. Room 1 / Cardiology)" style="margin-bottom:8px">'+
-      '<input id="nrnum" placeholder="Room number (optional)">'+
+      '<input id="nrnum" placeholder="Room number (optional)" style="margin-bottom:8px">'+
+      '<input id="nrdoc" placeholder="Doctor display name (e.g. Dr. Manoj Kumar)" style="margin-bottom:8px">'+
       // D7: the room's department. Patients registered into this room are numbered in it.
-      '<select id="nrdept" style="margin-top:8px"><option value="">Department: loading...</option></select>'+
+      '<select id="nrdept" style="margin-top:0"><option value="">Department: loading...</option></select>'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Add room</button></div></div>');
     api("org?orgId="+encodeURIComponent(st.orgId)).then(function(o){
       var sel=sheet.querySelector("#nrdept"); if(!sel) return;
@@ -1215,8 +2882,9 @@
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
       var n=sheet.querySelector("#nrn").value.trim(); if(!n){toast("Enter a room name");return;}
-      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),departmentId:sheet.querySelector("#nrdept").value||null,assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
-        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} toast("Room added (assigned to you)"); sheet.querySelector("#nrn").value="";sheet.querySelector("#nrnum").value=""; loadRoomsList();
+      var docName=sheet.querySelector("#nrdoc").value.trim();
+      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),doctorName:docName,departmentId:sheet.querySelector("#nrdept").value||null,assignment:{mode:"primary",primary:meUid(),doctors:[meUid()],doctorName:docName}}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} toast("Room added"); sheet.querySelector("#nrn").value="";sheet.querySelector("#nrnum").value="";sheet.querySelector("#nrdoc").value=""; loadRoomsList();
       });
     };
     // load the org's doctor members (for the picker) then the rooms
@@ -1227,26 +2895,34 @@
       var el=sheet.querySelector("#rlist"); if(!el) return;
       var rooms=(r&&r.rooms)||[];
       el.innerHTML=rooms.length? rooms.map(function(rm){
+        var a=rm.assignment||{};
+        var dName = rm.doctorName || a.doctorName || "";
         return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+(rm.department?" · "+esc(rm.department):"")+'</div></div>'+
-          '<button class="cancel" data-assign="'+esc(rm.id)+'" style="padding:6px 10px">Assign</button></div>';
+          '<button class="cancel" data-assign="'+esc(rm.id)+'" data-docname="'+esc(dName)+'" style="padding:6px 10px">Assign</button></div>';
       }).join("") : '<div class="empty">No rooms yet. Add one below.</div>';
-      Array.prototype.forEach.call(el.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openRoomAssign(b.getAttribute("data-assign"));};});
+      Array.prototype.forEach.call(el.querySelectorAll("[data-assign]"),function(b){
+        b.onclick=function(){ openRoomAssign(b.getAttribute("data-assign"), b.getAttribute("data-docname")); };
+      });
     });
   }
-  function openRoomAssign(roomId){
+  function openRoomAssign(roomId, currentDocName){
     var docs=doctorOptions();
     var modeSel='<select id="ram">'+ASSIGN_MODES.map(function(m){return '<option value="'+m[0]+'">'+m[1]+'</option>';}).join("")+'</select>';
     var docList=docs.length? docs.map(function(d){return '<label style="display:block;margin:6px 0"><input type="checkbox" class="rdoc" value="'+esc(d.id)+'"'+(d.label==="Me (this account)"?" checked":"")+'> '+esc(d.label)+'</label>';}).join("") : '<div class="t">No doctors yet - invite doctors in Staff, or assign yourself.</div>';
-    open('<h3>Assign doctor to room</h3><label>Mode</label>'+modeSel+'<label style="display:block;margin-top:10px">Doctor(s)</label>'+docList+
+    open('<h3>Assign doctor to room</h3><label>Mode</label>'+modeSel+
+      '<label style="display:block;margin-top:10px">Doctor display name (override / custom)</label>'+
+      '<input id="radoc" value="'+esc(currentDocName||"")+'" placeholder="e.g. Dr. Manoj Kumar" style="margin-bottom:8px">'+
+      '<label style="display:block;margin-top:10px">Assigned Doctor Account</label>'+docList+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Save</button></div>');
     sheet.querySelector("#cx").onclick=function(){openRoomsAdmin();};
     sheet.querySelector("#ok").onclick=function(){
       var mode=sheet.querySelector("#ram").value;
       var picked=Array.prototype.map.call(sheet.querySelectorAll(".rdoc:checked"),function(c){return c.value;});
-      var assignment=(mode==="unassigned")?{mode:"unassigned",doctors:[],primary:null}:{mode:mode,doctors:picked,primary:picked[0]||null};
+      var docName=sheet.querySelector("#radoc").value.trim();
+      var assignment=(mode==="unassigned")?{mode:"unassigned",doctors:[],primary:null,doctorName:""}:{mode:mode,doctors:picked,primary:picked[0]||null,doctorName:docName};
       if(mode!=="unassigned"&&!picked.length){toast("Pick at least one doctor");return;}
-      api("room/update",{method:"POST",body:{orgId:st.orgId,roomId:roomId,assignment:assignment}}).then(function(r){
-        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;} toast("Room updated"); openRoomsAdmin();
+      api("room/update",{method:"POST",body:{orgId:st.orgId,roomId:roomId,doctorName:docName,assignment:assignment}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;} toast("Room updated"); openRoomsAdmin(); loadDash();
       });
     };
   }
@@ -1273,11 +2949,13 @@
   }
   function wizReception(orgId){   // private clinic: your room is ready (you = the doctor); add reception, or skip.
     open('<h3>Clinic ready</h3><p class="t" style="margin-top:0">Your clinic code is <b>'+esc(st.orgCode||orgId)+'</b> - staff sign in with this. Add a front-desk login now, or skip.</p>'+
-      '<input id="wri" placeholder="Reception staff ID (e.g. front1)" style="margin-bottom:8px"><input id="wrp" placeholder="Set a PIN" inputmode="numeric" type="password">'+
+      '<input id="wri" placeholder="Reception staff ID (e.g. front1)" autocapitalize="none" autocorrect="off" spellcheck="false" style="margin-bottom:8px">'+
+      '<input id="wrp" placeholder="Set a PIN (4-8 digits, e.g. 4826)" inputmode="numeric" type="password">'+
+      '<div style="font-size:11px;color:var(--mut);margin:4px 0 10px 0">Avoid repeated digits (1111).</div>'+
       '<div class="row2"><button class="cancel" id="skip">Skip · Start</button><button class="btn" id="ok" style="margin:0">Add & start</button></div>');
     sheet.querySelector("#skip").onclick=function(){close();toast("Clinic ready");loadDash();};
     sheet.querySelector("#ok").onclick=function(){
-      var id=sheet.querySelector("#wri").value.trim(), pin=sheet.querySelector("#wrp").value.trim();
+      var id=sheet.querySelector("#wri").value.trim().toLowerCase(), pin=sheet.querySelector("#wrp").value.trim();
       if(!id){close();loadDash();return;}
       // A refused member or PIN keeps the sheet open with the reason, instead of "Clinic ready".
       api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(r){
@@ -1303,10 +2981,19 @@
     sheet.querySelector("#ok").onclick=function(){close();toast("Hospital ready");loadDash();};
   }
 
-  function open(html){ sheet.innerHTML=html; scrim.classList.add("on"); }
-  function close(){ scrim.classList.remove("on"); sheet.innerHTML=""; }
+  function open(html, wide){ if(wide) sheet.classList.add("wide"); else sheet.classList.remove("wide"); sheet.innerHTML=html; scrim.classList.add("on"); }
+  function close(){ sheet.classList.remove("wide"); scrim.classList.remove("on"); sheet.innerHTML=""; }
   scrim.onclick=function(e){ if(e.target===scrim) close(); };
 
+  // The shared check-in sheet (patient-register.js) offers a File Label button on its done card
+  // only when this is present - the phone app has no label dialog, so it stays hidden there.
+  try{ window.openFileLabel=openFileLabel; }catch(e){}
+  try{ window.openOpdScanner=openOpdScanner; }catch(e){}
+  try{ window.handleScannedUid=handleScannedUid; }catch(e){}
+  // 1-touch tap/scan runs on every station, preview included: background NFC read plus the
+  // USB/Bluetooth wedge-scanner burst listener. Both no-op where unsupported.
+  try{ startNfcListener(); }catch(e){}
+  try{ startScannerListener(); }catch(e){}
   // Preview mode (?mock=1): render the central-routing control with sample data - no auth/network.
   // The admin capabilities below are COSMETIC: every request is authorised independently on the
   // server, so nothing here can read or write real data. A banner says so, because the Staff /
@@ -1331,6 +3018,7 @@
         {id:"p1",name:"John Peter",mrnLast4:"3341",department:"Cardiology",priority:0,registeredAt:nm-4*60000},
         {id:"p2",name:"Fatima Begum",mrnLast4:"9021",department:"General",priority:2,registeredAt:nm-18*60000},
         {id:"p3",name:"Vikram Rao",mrnLast4:"6655",department:"Dermatology",priority:0,registeredAt:nm-2*60000}]});
+    consumePendingScan();
     return;
   }
   // Entry: a StewardMD account (Firebase) persists in the SDK; wait for it. Staff sessions use the stored token.
@@ -1340,5 +3028,6 @@
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
 <script src="/wardsynq/site/bug-reporter.js?v=4"></script>
+<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1-sid1" defer></script>
 </body>
 </html>

@@ -72,10 +72,14 @@
     var s = String(q || "").trim();
     s = s.split(/\s+[—–-]\s+/)[0].trim();            // drop a " - dose, route, ..." frame
     if (!s || s.length > 160) return null;
+    // A regimen question names no single molecule: it is answered from the regimen, not a label.
+    if (/\bregimen\b/i.test(s)) return null;
     var rw = REWRITE.exec(s);
     if (rw) {
       var rname = base(rw[2].replace(/[?.!,;:]+/g, " ").trim()).split(/\s+/).slice(0, 3).join(" ");
-      if (rname) return { name: ABBR[rname.toLowerCase()] || rname, section: POP[rw[1].toLowerCase()] || "adult" };
+      // "dose for <condition>" captured "for community acquired" as a drug (audit T45).
+      if (rname && !/^for\b/i.test(rname) && !NOT_A_DRUG.test(rname.split(/\s+/)[0])) return { name: ABBR[rname.toLowerCase()] || rname, section: POP[rw[1].toLowerCase()] || "adult" };
+      return null;
     }
     if (!/\bdos(?:e|es|ing|age)\b|\bhow\s+much\b/i.test(s)) return null;
     for (var i = 0; i < ASKS.length; i++) {

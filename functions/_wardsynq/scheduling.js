@@ -331,9 +331,16 @@ async function setAppointmentState(request, env, ctx) {
   });
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    /* OPD plan item 8: an ARRIVED patient joins the OPD queue (the router adds the token). The queue shows
+     * a name and MR number, so they are read here, where the record is already open. A patient that cannot
+     * be read still arrives - the desk types the name - it is just not pre-filled. */
+    let patient = null;
+    if (state === "arrived") {
+      try { const p = await svc.get("Patient", next.patientId); if (p) patient = { name: p.name || p.display || "", mrn: p.mrn || "", mobile: p.mobile || p.phone || "" }; } catch (e) { patient = null; }
+    }
     /* The slot frees immediately on cancellation, and the record still shows it was booked and by
      * whom: "they cancelled" and "they never had one" are different facts. */
-    return { ...base, ok: true, written: 1, ...apptSummary({ ...next, version: out.record.version }), slotFreed: !HOLDS_SLOT.includes(state), actor: resolved.actor.id };
+    return { ...base, ok: true, written: 1, ...apptSummary({ ...next, version: out.record.version }), slotFreed: !HOLDS_SLOT.includes(state), actor: resolved.actor.id, ...(patient ? { patient } : {}) };
   } catch (e) {
     return { ...base, ...writeFailure(e, { appointmentId, written: 0, actor: resolved.actor.id }) };
   }

@@ -2739,6 +2739,28 @@
   // Self-contained reference panel for ANY disease (whether or not it is in the
   // current differential) — reuses the #dxMgmt panel. Shows the Harrison reference
   // and an action to open the full stewardship/management page.
+  /* Does a real KB reference page exist for this id?
+   *
+   * openDiseaseRef() falls back to `name = id` when nothing resolves, which renders a page titled
+   * with a raw slug and almost no content. That is fine as a last resort for a link the clinician
+   * chose, but NOT as the basis for offering one: home.js's "Read more in StewardMD KB" chip must
+   * never promise a page that turns out to be a stub. Measured on the shipped bundles, 251 of the
+   * 5,055 disease docs (5%) have no enrichment record - TUMOR_LYSIS_SYNDROME and acute_limb_ischemia
+   * among them - so this is a real gap, not a theoretical one.
+   *
+   * Deliberately the SAME three lookups openDiseaseRef() itself uses, so the offer and the page can
+   * never disagree about what exists.
+   */
+  function hasDiseaseRef(id) {
+    if (!id) return false;
+    try {
+      if ((window.SYNDROMES || {})[id]) return true;
+      if ((DDX_NI || []).some(function (d) { return d.id === id; })) return true;
+      var H = window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[id];
+      return !!H;
+    } catch (e) { return false; }
+  }
+
   function openDiseaseRef(id, opts) {
     kbSaveList("recent", [id].concat(kbReadList("recent").filter(function (x) { return x !== id; })).slice(0, 12));
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
@@ -2771,7 +2793,8 @@
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<section class="dx-reader-hero"><div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<section class="dx-reader-hero"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div>' +
+        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
         '<div class="dx-reader-glance"><h3>At a glance</h3>' +
@@ -2782,7 +2805,7 @@
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
-        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
+        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
         '</div>' +
       '</div>';
@@ -3005,8 +3028,8 @@
       ".g-green2{background:var(--green-bg);border-color:var(--green-line)}.g-green2 .dx-gate-t{color:var(--green)}",
       ".g-slate{background:var(--panel)}.g-slate .dx-gate-t{color:var(--slate)}",
       ".dx-changed{font:600 12px var(--sans);color:var(--slate);background:var(--panel);border:1px dashed var(--line);border-radius:9px;padding:8px 11px;margin:0 0 12px}",
-      ".dx-cols{display:grid;grid-template-columns:1fr;gap:14px}",
-      "@media(min-width:760px){.dx-cols{grid-template-columns:1fr 1fr}}",
+      ".dx-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}",
+      "@media(min-width:760px){.dx-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}",
       ".dx-col-h{font:800 14px var(--sans);color:var(--ink);margin:2px 0 10px}",
       ".dx-col-n{font-size:11px;background:var(--line);color:var(--slate);border-radius:8px;padding:1px 7px;vertical-align:middle}",
       ".dx-col{display:flex;flex-direction:column;gap:9px}",
@@ -3275,6 +3298,8 @@
       }
     }
   }
+  // Universal search: the KB index and opener are closure-private; expose read-only handles.
+  try { window.SMD_KB = { search: kbSearch, open: kbOpen }; } catch (e) {}
   function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
   function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
   function kbPersonalHTML(entries) {
@@ -3413,7 +3438,7 @@
       else button.removeAttribute("aria-current");
     });
     var intro = document.createElement("div"); intro.className = "kblib-tool-intro";
-    intro.innerHTML = '<span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
+    intro.innerHTML = '<img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
       '<label for="kblibToolSearch">Search this collection</label><input id="kblibToolSearch" class="kblib-tool-search" type="search" autocomplete="off" placeholder="' + spec.search + '"><div id="kblibToolCount" class="kblib-tool-count" role="status"></div>';
     tabs.insertAdjacentElement("afterend", intro);
     function paint() {
@@ -3448,7 +3473,10 @@
     body.className = "sbref-body";
     var sec = body.querySelector(".sbref-sec"); if (!sec) return;
     sec.classList.add("kblib-discover");
-    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
+    /* Discover renders its own <h1>Knowledge Library</h1> hero directly below the bar, so setting the
+     * bar title here printed the same words twice on one screen. The tool tabs (Syndromes /
+     * Antibiogram / AWaRe / Guidelines) have no hero, so they keep their bar title. */
+    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = ""; } catch (e) {}
     var branches = [], seen = {}, entries = kbBuildIndex();
     entries.forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 0; branches.push(d.branch); } seen[d.branch]++; });
     branches.sort();
@@ -3456,10 +3484,10 @@
     var featured = ["Cardiology", "Neurology", "Respiratory", "GI / Hepatology"].filter(function (b) { return !!seen[b]; });
     var tile = function (b) { return f(_libState.branch === b, "br", b, '<span class="kblib-tile-icon" aria-hidden="true">' + rIco("book") + '</span><span>' + esc(b) + '</span><small>' + seen[b].toLocaleString() + ' entries</small>'); };
     sec.innerHTML =
-      '<header class="kblib-intro"><span class="kblib-kicker">STEWARDMD · DISCOVER</span><h1>Knowledge Library</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
+      '<header class="kblib-intro"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-kicker">DISCOVER</span><h1>Find any disease</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
       '<label class="kblib-search-label" for="kblibQ">Search the full library</label><input id="kblibQ" class="kblib-search" type="search" placeholder="Disease, syndrome or clinical detail" autocomplete="off" value="' + esc(_libState.q) + '">' +
       kbPersonalHTML(entries) +
-      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
+      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
       '<div class="kblib-section-heading"><h2>Explore a branch</h2><span>' + branches.length + ' branches</span></div><div class="kblib-tiles">' + featured.map(tile).join("") + '</div>' +
       '<details class="kblib-all-branches"><summary>See all medical branches</summary><div class="kblib-tiles">' + branches.filter(function (b) { return featured.indexOf(b) < 0; }).map(tile).join("") + '</div></details></div>' +
       '<div class="kblib-section-heading"><h2 id="kblibResultsTitle">Disease index</h2><button type="button" id="kblibClear" class="kblib-clear">Clear filters</button></div>' +
@@ -3783,6 +3811,15 @@
       try { return window.SMD_REASON.assess(findings).infectious.some(function (x) { return x.matched; }); } catch (e) { return false; }
     },
     mimicsFor: mimicsFor,
+    // NOT openDiseaseRef: that writes into `root` assuming the reasoning workspace is already on
+    // screen, so it throws when called cold. Callers outside the workspace use openRef() below,
+    // which does ensureRoot() and makes the panel visible. Exposing the raw one invited that bug.
+    // Guard for the offer: only show the chip when a real page exists behind it.
+    hasDiseaseRef: hasDiseaseRef,
+    // Owner, 2026-09-21 ("KB chips doesnt redirect to my KB"): home.js's chip calls
+    // SMD_REASON.openRef, but openRef lived only on window.DX, so the guard failed and the tap
+    // only toasted. Same function, exposed where its caller looks.
+    openRef: function (id, opts) { return window.DX.openRef(id, opts); },
     flag: reasonV2,
     setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} },
     // specificity-aware ranking flag (smd_rank_v2, default ON) — instantly reversible.
@@ -3888,6 +3925,9 @@
     t = t.replace(/\b(DOB|D\.?O\.?B|Date of Birth|Age\/Sex)\b\s*[:]?\s*\S+/gi, "$1: [redacted]");
     t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, "[redacted]");                                          // phone / 10+ digit id runs
     t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");                            // dd/mm/yyyy
+    // Indian identifiers (ABHA Address, UPI, PAN, Indic-script digits, labelled IDs): phi-india.js,
+    // additive only. Flag smd_phi_india, default ON; "0" restores the output above exactly.
+    try { var PI = window.SMD_PHI_INDIA; if (PI && PI.enabled()) t = PI.apply(t); } catch (e) {}
     return t;
   }
   window.SMD_redactPHI = redactPHI;
@@ -4186,7 +4226,7 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined });
+      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
       function attempt(retried) {
@@ -4260,6 +4300,11 @@
       // This lets native stream like the web (first token in seconds) instead of waiting for the whole
       // answer; if the pristine stream misbehaves we fall straight back to the proven whole-fetch path.
       var isNative = !!window.SMD_IS_NATIVE;
+      // The stream bypasses the CapacitorHttp bridge (pristine fetch / WebView XHR), and the bridge is what
+      // rewrites a relative "/api/..." to https://stewardmd.in. Relative, the stream went to the app's own
+      // bundle, failed, and every native answer fell back to fetch-then-replay: no words until the whole
+      // answer was done (audit T14, 2026-09-25). native-bridge.js publishes the origin as SMD_API_BASE.
+      var sb = (isNative && window.SMD_API_BASE && String(b || "").charAt(0) === "/") ? window.SMD_API_BASE + b : b;
       /* REAL NATIVE STREAMING (2026-08-24).
        *
        * This whole path - the watchdog, the native first-token budget, the nsBad cooldown, the
@@ -4372,7 +4417,7 @@
               }
             }
             function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
-            try { xhr.open("POST", b + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
+            try { xhr.open("POST", sb + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
             try { xhr.setRequestHeader("Accept", "text/event-stream"); } catch (e) {}
             for (var k in h) { if (Object.prototype.hasOwnProperty.call(h, k)) { try { xhr.setRequestHeader(k, h[k]); } catch (e) {} } }
             xhr.onprogress = function () { drain(); };
@@ -4390,7 +4435,7 @@
             try { xhr.timeout = NX_TOTAL; } catch (e) {}
             armx(NX_FIRST);
             try {
-              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }));
+              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined }));
             } catch (e) { nsBad(true); settle(fallback()); }
           });
         });
@@ -4425,7 +4470,7 @@
       });
       var attempt = aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }), signal: ctrl.signal });
+        return sfetch(sb + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined }), signal: ctrl.signal });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }
@@ -4556,10 +4601,19 @@
     // options instead ({ allowedFields, noteType } for "surgx-note"), merged into the body as-is.
     extract: function (transcript, kind, catalog) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
-      var t = String(transcript == null ? "" : transcript).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
+      // The transcript is CLIPPED here, silently. At the old fixed 8000 it meant a consult longer
+      // than roughly eleven minutes had its tail dropped before it was ever sent - and the tail of a
+      // consultation is where the diagnosis, the plan and the prescription are spoken. The server
+      // accepts MAX_IN_CHARS (functions/api/ai/[[path]].js, 16000 by default), so a caller that
+      // knows its content is long may ask for more, up to that ceiling. Default unchanged.
+      var maxChars = 8000;
+      if (catalog && typeof catalog === "object" && !Array.isArray(catalog) && catalog.maxChars) {
+        maxChars = Math.max(1000, Math.min(16000, Number(catalog.maxChars) || 0)) || 8000;
+      }
+      var t = String(transcript == null ? "" : transcript).slice(0, maxChars); if (!t) return Promise.resolve({ error: "no-text" });
       var body = { transcript: t, kind: kind };
       if (Array.isArray(catalog)) body.catalog = catalog;
-      else if (catalog && typeof catalog === "object") { for (var ok in catalog) if (Object.prototype.hasOwnProperty.call(catalog, ok) && !(ok in body)) body[ok] = catalog[ok]; }
+      else if (catalog && typeof catalog === "object") { for (var ok in catalog) if (Object.prototype.hasOwnProperty.call(catalog, ok) && !(ok in body) && ok !== "maxChars") body[ok] = catalog[ok]; }
       return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
         .then(function (r) { if (r.status === 402 || r.status === 429) return r.json().then(function (j) { return { error: "quota", needsPro: r.status === 402, message: (j && j.message) || "" }; }, function () { return { error: "quota", needsPro: r.status === 402 }; }); if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
@@ -5133,7 +5187,7 @@
       '.sl-h{font:800 14px var(--sans,sans-serif);color:var(--ink,#14202b);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.sl-hint{font:500 11px var(--sans);color:var(--slate-soft,#5a7184)}' +
       '.sl-th{font:600 13px/1.5 var(--sans);color:var(--slate,#2d4356);padding:6px 2px}.sl-th span{display:block;font-size:11.5px;color:var(--slate-soft,#5a7184);margin-top:3px}' +
       '.sl-gate{display:inline-block;font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 10px;margin:8px 0 2px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)}.sl-gate.ab{background:var(--red-bg,#fbe7e9);color:var(--red,#ab1c2c)}' +
-      '.sl-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}@media (max-width:560px){.sl-cols{grid-template-columns:1fr}}' +
+      '.sl-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:8px}@media (max-width:560px){.sl-cols{grid-template-columns:minmax(0,1fr)}}' +
       '.sl-col-h{font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356);margin:0 0 6px}.sl-col-h span{color:var(--slate-soft,#5a7184)}' +
       '.sl-card{border:1px solid var(--line,#d7dee3);border-radius:10px;margin-bottom:7px;overflow:hidden;background:var(--paper,#f6f7f5)}.sl-card.inf{border-left:3px solid var(--red,#ab1c2c)}.sl-card.ni{border-left:3px solid var(--green,#1c7a4a)}' +
       '.sl-head{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;padding:9px 10px;text-align:left;color:var(--ink,#14202b)}' +
@@ -5795,20 +5849,36 @@
   function smdInjectSafetyCSS() {
     if (document.getElementById("smd-safety-css")) return;
     var st = document.createElement("style"); st.id = "smd-safety-css";
+    // BUG-019: one card language with #saveCasePrompt — 14px radius, subtle premium border,
+    // cohesive shadow; structured parameter grid; switch-style Liver/Cardiac toggles.
     st.textContent =
-      ".smd-safety-card{margin:0 0 14px;padding:13px 15px;border:1px solid var(--line,#e2e8f0);border-left:4px solid #d97706;border-radius:11px;background:var(--panel,#fff)}" +
-      ".smd-safety-h{font:800 13px var(--sans,system-ui);color:#b45309;letter-spacing:.02em;margin:0 0 8px}" +
-      ".smd-safety-row{display:flex;gap:9px;align-items:flex-start;padding:5px 0;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--ink,#14202b)}" +
+      ".smd-safety-card{margin:0 0 14px;padding:16px 18px;border:1px solid var(--line,#e2e8f0);border-top:3px solid #d97706;border-radius:14px;background:var(--panel,#fff);box-shadow:0 1px 2px rgba(15,23,42,.05),0 8px 24px rgba(15,23,42,.07)}" +
+      ".smd-safety-eyebrow{font:800 10px var(--sans,system-ui);letter-spacing:.09em;text-transform:uppercase;color:#b45309;margin:0 0 3px}" +
+      ".smd-safety-h{display:flex;align-items:center;gap:8px;font:800 15px var(--sans,system-ui);letter-spacing:-.01em;color:var(--ink,#14202b);margin:0 0 2px}" +
+      ".smd-safety-h .smd-safety-ic{width:30px;height:30px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;background:#fef3c7;border:1px solid #f0d49b;border-radius:9px;color:#b45309}" +
+      ".smd-safety-tag{font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#64748b);margin:0 0 12px}" +
+      ".smd-safety-row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font:500 13px/1.55 var(--sans,system-ui);color:var(--ink,#14202b);border-top:1px solid var(--line,#eef2f5)}" +
+      ".smd-safety-row:first-child{border-top:none}" +
       ".smd-safety-row b{color:var(--ink,#14202b)}.smd-safety-ic{flex:0 0 auto}" +
-      ".smd-safety-ul{margin:5px 0 0;padding-left:18px}.smd-safety-ul li{margin:2px 0}" +
+      ".smd-safety-ul{margin:6px 0 0;padding-left:18px}.smd-safety-ul li{margin:3px 0}" +
       ".smd-safety-sub{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#64748b);letter-spacing:0}" +
-      ".smd-safety-inputs{display:flex;flex-wrap:wrap;gap:9px 12px;margin:2px 0 10px;padding:0 0 11px;border-bottom:1px dashed var(--line,#e2e8f0)}" +
-      ".smd-safety-inputs label{display:flex;flex-direction:column;gap:3px;font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748b);text-transform:uppercase;letter-spacing:.02em}" +
-      ".smd-safety-inputs input[type=number],.smd-safety-inputs select{width:78px;padding:5px 7px;border:1px solid var(--line,#d7dee3);border-radius:7px;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 13px var(--sans,system-ui)}" +
-      ".smd-safety-inputs label.chk{flex-direction:row;align-items:center;gap:6px;text-transform:none;font:600 12px var(--sans,system-ui);color:var(--ink,#14202b);align-self:flex-end;padding-bottom:5px}" +
-      ".smd-safety-inputs label.chk input{width:16px;height:16px}" +
+      ".smd-safety-grid-h{font:800 10px var(--sans,system-ui);letter-spacing:.09em;text-transform:uppercase;color:var(--slate-soft,#64748b);margin:0 0 8px}" +
+      ".smd-safety-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:10px;margin:0 0 12px;padding:12px;border:1px solid var(--line,#e2e8f0);border-radius:12px;background:var(--paper,#f6f7f5)}" +
+      ".smd-safety-inputs label{display:flex;flex-direction:column;gap:4px;font:700 10px var(--sans,system-ui);color:var(--slate-soft,#64748b);text-transform:uppercase;letter-spacing:.05em}" +
+      ".smd-safety-inputs input[type=number],.smd-safety-inputs select{width:100%;box-sizing:border-box;padding:8px 9px;border:1px solid var(--line,#d7dee3);border-radius:9px;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 13.5px var(--sans,system-ui);transition:border-color .15s,box-shadow .15s}" +
+      ".smd-safety-inputs input[type=number]:focus,.smd-safety-inputs select:focus{outline:none;border-color:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,.16)}" +
+      ".smd-safety-inputs label.chk{grid-column:1/-1;position:relative;flex-direction:row;align-items:center;gap:10px;text-transform:none;letter-spacing:0;background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:7px 14px 7px 7px;cursor:pointer;transition:border-color .15s,background .15s}" +
+      ".smd-safety-inputs label.chk:has(input:checked){border-color:#d97706;background:#fffbeb}" +
+      ".smd-safety-inputs label.chk input{position:absolute;opacity:0;width:1px;height:1px;margin:0}" +
+      ".smd-safety-inputs label.chk input:focus-visible+.smd-tgl-track{outline:2px solid #d97706;outline-offset:2px}" +
+      ".smd-tgl-track{width:34px;height:20px;flex:0 0 auto;border-radius:999px;background:var(--line,#d7dee3);position:relative;transition:background .15s}" +
+      ".smd-tgl-track::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .15s}" +
+      ".smd-safety-inputs label.chk input:checked+.smd-tgl-track{background:#d97706}" +
+      ".smd-safety-inputs label.chk input:checked+.smd-tgl-track::after{left:16px}" +
+      ".smd-tgl-txt{font:600 12.5px var(--sans,system-ui);color:var(--ink,#14202b)}" +
       ".smd-safety-empty{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}" +
-      ".smd-safety-draft{display:inline-block;font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;background:#fef3c7;border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}";
+      ".smd-safety-draft{display:inline-block;font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;background:#fef3c7;border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}" +
+      "@media(max-width:420px){.smd-safety-card{padding:14px 15px}.smd-safety-inputs{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px}}";
     document.head.appendChild(st);
   }
   // render-time findings + syndrome id; the read-only base the card's own inputs are overlaid onto.
@@ -5959,15 +6029,72 @@
     function val(k) { var v = e && e[k]; return v == null ? "" : String(v); }
     var sexF = String((e && e.sex) || "").toLowerCase().charAt(0) === "f";
     var cardiacOn = !!(e && (e.knownCAD || e.knownHeartFailure || e.atrialFibHx));
-    return '<div class="smd-safety-inputs" id="smdSafetyInputs">' +
-      '<label>Age<input type="number" inputmode="numeric" data-sfx="age" value="' + esc(val("age")) + '"></label>' +
+    // BUG-019: checkbox inputs keep their data-sfx hooks (tests + recalc drive them); the
+    // switch chrome is pure CSS around a visually-hidden input.
+    return '<div class="smd-safety-grid-h">Patient parameters</div><div class="smd-safety-inputs" id="smdSafetyInputs">' +
+      '<label>Age<input type="number" inputmode="numeric" data-sfx="age" value="' + esc(val("age")) + '" placeholder="yrs"></label>' +
       '<label>Sex<select data-sfx="sex"><option value="m"' + (sexF ? "" : " selected") + '>M</option><option value="f"' + (sexF ? " selected" : "") + '>F</option></select></label>' +
-      '<label>Weight kg<input type="number" inputmode="decimal" data-sfx="weight" value="' + esc(val("weight")) + '"></label>' +
-      '<label>Creatinine<input type="number" inputmode="decimal" step="0.1" data-sfx="creatinine" value="' + esc(val("creatinine")) + '"></label>' +
-      '<label>Bilirubin<input type="number" inputmode="decimal" step="0.1" data-sfx="bilirubin" value="' + esc(val("bilirubin")) + '"></label>' +
-      '<label class="chk"><input type="checkbox" data-sfx="liverDisease"' + (e && e.liverDisease ? " checked" : "") + '>Liver disease</label>' +
-      '<label class="chk"><input type="checkbox" data-sfx="cardiac"' + (cardiacOn ? " checked" : "") + '>Cardiac (CAD/HF/AF)</label>' +
+      '<label>Weight kg<input type="number" inputmode="decimal" data-sfx="weight" value="' + esc(val("weight")) + '" placeholder="kg"></label>' +
+      '<label>Creatinine<input type="number" inputmode="decimal" step="0.1" data-sfx="creatinine" value="' + esc(val("creatinine")) + '" placeholder="mg/dL"></label>' +
+      '<label>Bilirubin<input type="number" inputmode="decimal" step="0.1" data-sfx="bilirubin" value="' + esc(val("bilirubin")) + '" placeholder="mg/dL"></label>' +
+      '<label class="chk"><input type="checkbox" data-sfx="liverDisease"' + (e && e.liverDisease ? " checked" : "") + '><span class="smd-tgl-track" aria-hidden="true"></span><span class="smd-tgl-txt">Liver disease</span></label>' +
+      '<label class="chk"><input type="checkbox" data-sfx="cardiac"' + (cardiacOn ? " checked" : "") + '><span class="smd-tgl-track" aria-hidden="true"></span><span class="smd-tgl-txt">Cardiac (CAD / HF / AF)</span></label>' +
       '</div>';
+  }
+  // BUG-019: Age/Sex stay in sync between the Save Case prompt (#scpAge/#scpSex) and the
+  // safety card, so the clinician never types them twice. Programmatic .value sets do not
+  // fire events, so the two directions cannot loop; the guard is belt-and-braces.
+  var _smdSyncing = false;
+  function smdSyncAgeSex() {
+    if (_smdSyncing) return;
+    var scpAge = document.getElementById("scpAge"), scpSex = document.getElementById("scpSex");
+    var box = document.getElementById("smdSafetyInputs");
+    if (!box) return;
+    function sfx(k) { return box.querySelector('[data-sfx="' + k + '"]'); }
+    // One-time wiring in each direction (the safety box is rebuilt per render; scp is static).
+    if (!box._smdSyncWired) {
+      box._smdSyncWired = true;
+      ["age", "sex"].forEach(function (k) {
+        var el = sfx(k);
+        if (el) { el.addEventListener("input", smdSyncAgeSex); el.addEventListener("change", smdSyncAgeSex); }
+      });
+    }
+    [["scpAge", scpAge], ["scpSex", scpSex]].forEach(function (pair) {
+      var el = pair[1];
+      if (el && !el._smdSyncWired) {
+        el._smdSyncWired = true;
+        el.addEventListener("input", smdSyncAgeSex); el.addEventListener("change", smdSyncAgeSex);
+      }
+    });
+    _smdSyncing = true;
+    try {
+      var src = null;
+      try { src = document.activeElement; } catch (e) {}
+      var sAge = sfx("age"), sSex = sfx("sex");
+      var scpSide = src === scpAge || src === scpSex;
+      if (scpSide) {
+        // Save Case → safety. scpSex "O"/empty has no safety equivalent; leave safety sex alone.
+        if (sAge && scpAge) sAge.value = scpAge.value || "";
+        if (sSex && scpSex) {
+          var v = String(scpSex.value || "").toUpperCase();
+          if (v === "M" || v === "F") sSex.value = v.toLowerCase();
+        }
+      } else if (src === sAge || src === sSex) {
+        // Safety → Save Case, mirroring exactly what the clinician just entered.
+        if (scpAge && sAge) scpAge.value = sAge.value || "";
+        if (scpSex && sSex) scpSex.value = String(sSex.value || "").toLowerCase() === "f" ? "F" : "M";
+      } else {
+        // Initial fill (neither side focused): fill empties only, never invent. Sex copies
+        // only when the engine actually knew it — the safety select defaults to "m".
+        if (scpAge && sAge && !scpAge.value && sAge.value) scpAge.value = sAge.value;
+        var eSex = (_safetyE && _safetyE.sex) ? String(_safetyE.sex).toLowerCase().charAt(0) : "";
+        if (scpSex && !scpSex.value && (eSex === "m" || eSex === "f")) scpSex.value = eSex.toUpperCase();
+        // Explicit scp entries win over engine defaults on the safety side.
+        if (sAge && scpAge && scpAge.value) sAge.value = scpAge.value;
+        if (sSex && scpSex && (scpSex.value === "M" || scpSex.value === "F")) sSex.value = scpSex.value.toLowerCase();
+      }
+      smdSafetyRecalc();
+    } finally { _smdSyncing = false; }
   }
   function smdSafetyOverlay(e, synId) {
     var oa = document.getElementById("outputArea"); if (!oa) return false;
@@ -5980,8 +6107,11 @@
     var fires = !!renalCheck(e) || !!hepaticCheck(e, drugs) || !!cardioCheck(e, drugs);
     if (!drugs.length && !fires) return false;
     smdInjectSafetyCSS();
+    var wIco = rIco("warn");
     var html = '<div id="smdSafetyCard" class="smd-safety-card">' +
-      '<div class="smd-safety-h">' + rIco("warn") + ' Patient-specific safety <span class="smd-safety-sub">— enter values to check; does not change the recommendation</span></div>' +
+      '<div class="smd-safety-eyebrow">Patient safety</div>' +
+      '<div class="smd-safety-h">' + (wIco ? '<span class="smd-safety-ic">' + wIco + '</span>' : '') + 'Patient-specific safety</div>' +
+      '<div class="smd-safety-tag">These values are checked against the regimen. They do not change the recommendation.</div>' +
       smdSafetyInputsHTML(e) +
       '<div class="smd-safety-lines" id="smdSafetyLines"></div></div>';
     // Sit the card with the recommendation: directly under the (relocated) Save-case box when
@@ -5993,7 +6123,7 @@
     if (box) Array.prototype.forEach.call(box.querySelectorAll("[data-sfx]"), function (el) {
       el.addEventListener("input", smdSafetyRecalc); el.addEventListener("change", smdSafetyRecalc);
     });
-    smdSafetyRecalc();
+    try { smdSyncAgeSex(); } catch (e2) { smdSafetyRecalc(); }
     return true;
   }
 

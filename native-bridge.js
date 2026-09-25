@@ -54,7 +54,15 @@
     // PRO + ULTIMATE Telugu route: vasista22 Telugu-small → ggml → INT8 (q8_0). Benchmark-best Telugu
     // (te WER 14.7%). NOT an off-the-shelf HF file — built by scripts/convert-telugu-whisper-ggml.sh;
     // sha256/bytes stay PENDING (feature flag-gated OFF) until that conversion + upload is done.
-    "telugu-small-q8_0": { file: "ggml-telugu-small-q8_0.bin", sha256: "355cef20a0d433ca6ffae35d414c817e0aeecfce21b934d68203efee1e72dcba", bytes: 264464607 }
+    "telugu-small-q8_0": { file: "ggml-telugu-small-q8_0.bin", sha256: "355cef20a0d433ca6ffae35d414c817e0aeecfce21b934d68203efee1e72dcba", bytes: 264464607 },
+    // Hindi specialist route (voice.js flag smd_voice_hi_model, DEFAULT OFF). Mirrors the Telugu
+    // route: a Hindi fine-tuned Whisper small, converted to ggml + INT8 (q8_0).
+    // TODO(unpublished): the file is NOT hosted yet and its sha256/bytes are UNKNOWN. They are left
+    // empty ON PURPOSE - an empty sha256 is rejected by BOTH native plugins (iOS `!sha.isEmpty`,
+    // Android `sha.isEmpty()`) and by downloadWhisperModel() below, so this entry FAILS CLOSED:
+    // nothing can download or install it. Publish the file, then fill in the real sha256 + bytes
+    // (see scripts/host-whisper-models.sh) before the flag is flipped on.
+    "hindi-small-q8_0": { file: "ggml-hindi-small-q8_0.bin", sha256: "", bytes: 0, unpublished: true }
   };
 
   // ---- Native helpers (native-only; stay UNDEFINED on web because this file
@@ -556,6 +564,9 @@
       on("whisperState", function (d) { if (opts.onStateChange) opts.onStateChange(d.state); });
       on("whisperPartial", function (d) { if (opts.onPartial && d.text != null) opts.onPartial(String(d.text)); });
       on("whisperFinal", function (d) { finalText(d.text); });
+      // CONTINUOUS CAPTURE (opt-in): a segment transcribed mid-recording by flushWhisper(). The mic
+      // is still open and more segments follow, so this must NOT set `done` the way finalText does.
+      on("whisperFlush", function (d) { if (opts.onFlush && d.text != null) opts.onFlush(String(d.text)); });
       on("whisperError", function (d) { fail(d.code || "transcription-failure"); });
       on("whisperDownloadProgress", function (d) { if (opts.onDownloadProgress) opts.onDownloadProgress(Number(d.progress) || 0); });
 
@@ -571,6 +582,9 @@
       try { console.info("[SV-native] transcribeWhisper model=" + modelKey + " lang=" + lang); } catch (e) {}
       function startDownload() {
         if (!current()) return;
+        // No pinned sha256 = the file is not hosted yet (see WHISPER_MODELS). Fail closed rather than
+        // fetch bytes nothing can verify.
+        if (!m.sha256) { fail("model-unpublished"); return; }
         if (opts.onStateChange) opts.onStateChange("downloading");
         try { console.info("[SV-native] downloading " + modelKey + " <- " + WHISPER_MODEL_HOST + "/" + m.file); } catch (e) {}
         W.downloadModel({ model: modelKey, url: WHISPER_MODEL_HOST + "/" + m.file, sha256: m.sha256 })
@@ -603,6 +617,14 @@
     },
     // Stop recording and transcribe (final arrives via the whisperFinal event → onFinal).
     stopWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.stopTranscribe) W.stopTranscribe(); } catch (e) {} },
+    // CONTINUOUS CAPTURE: transcribe what has been captured so far WITHOUT stopping the mic, so no
+    // audio is lost at a chunk seam (the JS stop/re-arm loop drops a few hundred ms per boundary).
+    // The segment arrives via the whisperFlush event → onFlush; whisperFinal still fires once, on
+    // stopWhisper(). Present only in plugin builds that ship flushTranscribe — see whisperCanFlush().
+    flushWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.flushTranscribe) W.flushTranscribe(); } catch (e) {} },
+    // Does THIS build's native plugin support flush-without-stopping? False on every older binary,
+    // which is why the continuous-capture path stays inert until the app is rebuilt.
+    whisperCanFlush: function () { var P = plugins(); var W = P && P.Whisper; return !!(W && typeof W.flushTranscribe === "function"); },
     // Abort with no transcription (release native resources).
     cancelWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.cancel) W.cancel(); } catch (e) {} this._removeWhisperSubs(); },
     // Is a Clinical model on the device? Checks the given model, or ALL known models (no arg) so the
@@ -629,6 +651,9 @@
       var P = plugins(); var W = P && P.Whisper;
       if (!(W && W.downloadModel)) return Promise.reject(new Error("whisper-unavailable"));
       var m = WHISPER_MODELS[model]; if (!m) return Promise.reject(new Error("whisper-unknown-model"));
+      // Fails closed: a model whose file is not hosted yet has no pinned sha256, and an unverifiable
+      // download must never be attempted (the native side would reject it anyway).
+      if (!m.sha256) return Promise.reject(new Error("whisper-model-unpublished"));
       var sub = null;
       if (opts.onProgress) { try { sub = W.addListener("whisperDownloadProgress", function (d) { opts.onProgress(Number(d && d.progress) || 0); }); } catch (e) {} }
       function cleanup() { try { if (sub) { if (sub.remove) sub.remove(); else if (sub.then) sub.then(function (h) { try { h && h.remove && h.remove(); } catch (e) {} }); } } catch (e) {} }
@@ -980,8 +1005,25 @@
         if (tries++ < 40) setTimeout(go, 250);
       })();
     }
-    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) { feed(r.url); routeDeepLink(r.url); } }).catch(function () {}); } catch (e) {}
-    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) { feed(d.url); routeDeepLink(d.url); } }); } catch (e) {}
+    // Patient scan deep links: https://stewardmd.in/opd?uid=... or ?scan=... or ?stewardid=...
+    function routePatientScan(u) {
+      if (!u) return;
+      var str = String(u);
+      var m = /[?&](uid|scan|stewardid|mrn|patientid)=([^&#]*)/i.exec(str);
+      if (!m) return;
+      var id = "";
+      try { id = decodeURIComponent(m[2]).trim(); } catch (e) { id = String(m[2] || "").trim(); }
+      if (!id) return;
+      var tries = 0;
+      (function go() {
+        if (window.SMD_handleScanUid) { try { window.SMD_handleScanUid(id); } catch (e) {} return; }
+        if (window.onNfcUhid) { try { window.onNfcUhid(id); } catch (e) {} return; }
+        if (window.handleScannedUid) { try { window.handleScannedUid(id); } catch (e) {} return; }
+        if (tries++ < 40) setTimeout(go, 250);
+      })();
+    }
+    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) { feed(r.url); routeDeepLink(r.url); routePatientScan(r.url); } }).catch(function () {}); } catch (e) {}
+    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) { feed(d.url); routeDeepLink(d.url); routePatientScan(d.url); } }); } catch (e) {}
     /* RE-WARM THE NATIVE RESOLVER ON RESUME.
      *
      * The sleep/wake DNS failure above is recoverable, but only after something has already failed -

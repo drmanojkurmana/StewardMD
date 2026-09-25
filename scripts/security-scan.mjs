@@ -296,6 +296,7 @@ export const PUBLIC_ALLOWLIST = {
   "functions/api/maik-feedback.js": "public by design: header documents an unauthenticated helpfulness signal (same reasoning as clientlog); reading entries is the owner route",
   "functions/api/validation.js": "passphrase gate acknowledged weak by design in its own header; append-only storage is the real protection, no patient data",
   "functions/api/ws-feedback.js": "anonymous by design: header documents an aggregate feedback signal pipe storing no identity; GET returns counts only",
+  "functions/api/unsubscribe.js": "session-free by design: header documents a SIGNED unsubscribe token (functions/_unsub.js) as the credential, RFC 8058 one-click; a forged link does nothing and it flips only the marketing flag",
 };
 
 /* ---- dependency audit ----------------------------------------------------------- */

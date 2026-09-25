@@ -36,6 +36,7 @@ export const AI_MODULES = {
 };
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
+import { bump, readDay, mergeCounters, AIU_GROUPS } from "./_counters.js";   // atomic D1 rollups (T53)
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
 // Are the per-module daily caps actually being ENFORCED right now? (See checkModuleQuota: at launch
 // they are not.) Exported so the doctor's dashboard can stop drawing "27 / 50" bars for a limit that
@@ -181,6 +182,40 @@ export function scribeCaps(env) {
   const d = Number(env && env.SCRIBE_SEC_DAY), w = Number(env && env.SCRIBE_SEC_WEEK);
   return { day: Number.isFinite(d) && d >= 0 ? d : 1800, week: Number.isFinite(w) && w >= 0 ? w : 3600 };
 }
+// ---- what ONE scribe call charges against that budget ------------------------------------------
+// The honest unit is the NEW audio a call covers. Neither of the two things the server can see
+// measures that: an opd-scribe refine resends the WHOLE growing transcript (so transcript length
+// charges the same minute again on every refine), and a per-call cadence constant only holds while
+// the client's cadence never moves. It moved: the refine loop went from one call per 120s to roughly
+// one per 45s, and the flat 120s/call left over from the old cadence charged a 10-minute consult
+// ~1680s of the 1800s daily budget -- the cap then tripped and the client stopped the recording
+// mid-consultation.
+//
+// So the client tells us, and `sec` means: seconds of NEW dictation since this caller's PREVIOUS
+// charged call -- a DELTA, never the total elapsed. Clamped to [0, SCRIBE_SEC_MAX_CALL] so one
+// request can never spend a whole day's budget.
+//
+// Absent (any client that predates the field): fall back to the per-kind figure below. Each is the
+// client's MINIMUM gap between two charged calls of that kind, so the fallback can only ever
+// UNDER-charge. That direction is deliberate: under-charging loosens a cost bound, over-charging
+// ends a doctor's consultation.
+//   opd-scribe 45 -- gatedRefine's floor between two background refines (opd-emr.js
+//                    scribeLiveMinGapMs, default 45000).
+//   assessment  0 -- its only call site (opd-emr.js assessLLM) runs inside the SAME ambient session
+//                    as the opd-scribe refine and re-reads the SAME audio, so charging it again is
+//                    double-counting the same minutes. A client that ever runs it standalone should
+//                    send `sec` for it.
+//   translate  15 -- a one-shot field mic, no cadence involved.
+export const SCRIBE_CALL_SEC = { assessment: 0, "opd-scribe": 45, translate: 15 };
+export const SCRIBE_SEC_MAX_CALL = 300;
+export function isScribeKind(kind) { return Object.prototype.hasOwnProperty.call(SCRIBE_CALL_SEC, kind); }
+export function scribeChargeSec(kind, sec) {
+  if (!isScribeKind(kind)) return 0;
+  const n = Number(sec);
+  if (Number.isFinite(n) && n > 0) return Math.min(n, SCRIBE_SEC_MAX_CALL);
+  return SCRIBE_CALL_SEC[kind];
+}
+
 // Pre-call: has this doctor blown the day or ISO-week dictation-seconds budget? Fail-OPEN on any
 // store error (never block a paying clinician mid-consult because KV hiccuped).
 export async function checkScribeTime(store, uid, now, caps) {
@@ -250,6 +285,13 @@ export async function recordAiUsage(env, store, rec, now) {
     // Owner-console-only reverse map so the admin sees WHO (email) not an opaque device/uid hash.
     // Read only by the owner-gated globalUsageReport; never returned to a doctor's own summary.
     if (rec.email) { try { await store.put("aiu:email:" + rec.doctorId, rec.email, { expirationTtl: 90 * 24 * 3600 }); } catch (e) {} }
+    // Global rollup: atomic D1 counters when available (T53); the KV read-modify-write below lost
+    // increments under concurrency and is now only the fallback.
+    const inc = { "aiu.req": 1, "aiu.cost": rec.estCostInr || 0, "aiu.fail": rec.status !== "success" ? 1 : 0 };
+    inc["aiu.mod." + rec.module] = 1;
+    if (rec.model) inc["aiu.model." + rec.model] = 1;
+    inc["aiu.doc." + rec.doctorId] = 1;
+    if (await bump(env, day, inc)) return;
     const gKey = "aiu:global:" + day;
     const g = (await store.get(gKey, "json")) || { req: 0, cost: 0, fail: 0, byModule: {}, byModel: {}, docs: {} };
     g.req += 1; g.cost += rec.estCostInr;
@@ -399,7 +441,8 @@ export async function poolKeyFor(store, doctorId) {
 // Returns { ok:true, used, limit, remaining } when allowed (and increments the counters), or
 // { ok:false, reason:"module-daily", module, used, limit } when the doctor is at the cap. FAIL-OPEN:
 // no store / unknown module / unlimited (daily=0) → allowed, uncounted. The count is per ATTEMPT
-// (recorded before the AI call) so the cap can never be exceeded by a slow/failed call; token/cost
+// (recorded before the AI call) so the cap can never be exceeded by a slow/failed call, EXCEPT with
+// deferRecord (MaiK /explain), where it is committed only for a generated answer; token/cost
 // detail is layered on separately by the endpoint's own precise metering.
 /* waitUntil (optional): defer the ANALYTICS rollup past the response. Measured on production, this
  * whole function cost ~1.1s in front of every answer — the single largest non-model stage.
@@ -420,7 +463,10 @@ export async function poolKeyFor(store, doctorId) {
  * cap and the per-USER cost cap. It does NOT skip metering — recordAiUsage still runs, so owner spend
  * is still counted in the dashboards and still feeds the PROJECT-WIDE daily-cost circuit breaker,
  * which nothing exempts anybody from. An owner can be uncapped without being invisible. */
-export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt) {
+/* deferRecord (optional, T36): check the cap now but DON'T count yet. The result carries commit(), which
+ * the caller runs only once an answer was actually generated, so a cache hit or a failed generation
+ * never uses up one of the doctor's daily questions. The cap check itself is unchanged. */
+export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt, deferRecord) {
   const _t = { t0: Date.now() };
   const [, pooled] = await Promise.all([
     warmBillingCfg(store).catch(function () {}),           // live enforce/cost-cap flags (cached 30s)
@@ -442,7 +488,8 @@ export async function gateAndCount(env, store, moduleId, doctorId, subscription,
   const rec = function () {
     return recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now);
   };
-  if (typeof waitUntil === "function") { try { waitUntil(rec().catch(function () {})); } catch (e) {} }
+  if (deferRecord) { try { q.commit = rec; } catch (e) {} }
+  else if (typeof waitUntil === "function") { try { waitUntil(rec().catch(function () {})); } catch (e) {} }
   else { try { await rec(); } catch (e) {} }
   _t.rec = Date.now() - _t.t0;
   try { q._ms = _t; } catch (e) {}                         // stage attribution; callers ignore extras
@@ -457,7 +504,10 @@ export async function globalUsageReport(env, store, now) {
   Object.keys(AI_MODULES).forEach((m) => { out.limits[m] = resolveLimit(env, m, ov); });
   if (!store) return out;
   try {
-    const g = await store.get("aiu:global:" + day, "json");
+    // KV (fallback / pre-migration) + D1 atomic counters (T53), summed.
+    const g0 = await store.get("aiu:global:" + day, "json");
+    const d1 = await readDay(env, day, "aiu.");
+    const g = (d1 && Object.keys(d1).length) ? mergeCounters(g0 || { req: 0, cost: 0, fail: 0, byModule: {}, byModel: {}, docs: {} }, d1, "aiu", AIU_GROUPS) : g0;
     if (g) {
       out.req = g.req || 0; out.estCostInr = Math.round((g.cost || 0) * 100) / 100; out.fail = g.fail || 0;
       out.byModule = g.byModule || {}; out.byModel = g.byModel || {};
@@ -472,6 +522,7 @@ export async function globalUsageReport(env, store, now) {
     // request counts, not token cost). Same day-key format, so a direct read is safe (fail → 0).
     let realCost = 0;
     try { const mg = await store.get("maik:global:" + day, "json"); if (mg && typeof mg.cost === "number") realCost = mg.cost; } catch (e) {}
+    try { const md = await readDay(env, day, "maik.cost"); if (md && md["maik.cost"]) realCost += md["maik.cost"]; } catch (e) {}
     out.realCostInr = Math.round(realCost * 100) / 100;
     out.forecastMonthlyInr = Math.round(realCost * 30);            // rough: today's spend projected over 30 days
     out.budget = await getBudget(store);

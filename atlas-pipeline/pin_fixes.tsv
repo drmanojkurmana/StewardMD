@@ -1,0 +1,954 @@
+# Reviewed pin decisions (2026-09-25). Each pin was LOOKED AT in a rendered crop before deciding.
+# Remove when the right label is not certain; relabel only when certain. See pin_fixes.py.
+# module	slice	structure	x	y	action	reason
+ct-wholebody-coronal	12	skull	30.1	43.2	remove	at hip level on the pelvis/femur, not skull
+ct-pelvis-axial	1	hip-bone	66.7	48.7	remove	on the sacroiliac joint line, sacrum or ilium not certain
+ct-pelvis-axial	5	hip-bone	59.6	68.1	relabel:sacrum	posterior midline bone below the sacroiliac joints is the sacrum; the hip bones are the lateral iliac wings on this slice
+ct-pelvis-axial	6	hip-bone	58.9	69.4	relabel:sacrum	posterior midline bone below the sacroiliac joints is the sacrum
+ct-pelvis-coronal	15	sacrum	61.7	11.8	remove	on the sacroiliac joint line, sacrum or ilium not certain
+ct-pelvis-sagittal	7	femur	47.0	85.7	remove	small isolated bone fragment below the femoral head, identity not certain
+ct-pelvis-sagittal	10	sacrum	52.8	0.0	remove	bone cut at the top edge, identity not certain
+ct-pelvis-sagittal	16	femur	62.4	87.5	remove	on the ischium (continuous with the hip bone), not femur
+ct-pelvis-sagittal	16	hip-bone	62.7	48.9	remove	faint blob in soft tissue, not clearly bone
+ct-pelvis-sagittal	18	femur	37.3	30.3	remove	at the hip joint line, femur or acetabulum not certain
+ct-pelvis-sagittal	19	femur	35.6	30.3	remove	at the hip joint line, femur or acetabulum not certain
+ct-pelvis-sagittal	19	femur	34.3	30.3	remove	at the hip joint line, femur or acetabulum not certain
+ct-pelvis-sagittal	22	hip-bone	49.9	72.2	remove	isolated bone lateral to the joint (likely greater trochanter), not certain
+ct-foot-sagittal	6	phalanx-foot	45.2	54.7	remove	in the midfoot among tarsal bones, not a phalanx
+ct-foot-sagittal	7	phalanx-foot	44.4	60.4	remove	in the midfoot at the tarsometatarsal joints, not a phalanx
+ct-foot-sagittal	7	phalanx-foot	46.3	56.7	remove	in the midfoot, not a phalanx
+ct-foot-sagittal	8	phalanx-foot	39.4	59.8	remove	in the midfoot, not a phalanx
+ct-foot-sagittal	8	phalanx-foot	43.6	61.6	remove	in the midfoot, not a phalanx
+ct-foot-sagittal	8	phalanx-foot	46.1	56.5	remove	in the midfoot, not a phalanx
+ct-foot-sagittal	9	phalanx-foot	45.3	57.3	remove	on the cuboid, not a phalanx
+ct-foot-sagittal	10	phalanx-foot	40.9	53.3	remove	on the cuboid, not a phalanx
+# v2 stacks (48 slices, 2026-09-25): slice numbers refer to atlas/<id>/v2
+ct-live-torso-coronal	19	gluteal-muscle	23.2	63.7	remove	on the iliac bone cortex, not on muscle
+ct-live-torso-sagittal	27	autochthonous-back-muscle	78.6	45.7	remove	on dark fat between the paraspinal muscles, not certainly muscle
+mri-brain-axial	11	cerebral-cortex	52.3	41.3	remove	in a dark sulcus (CSF), not on cortex
+mri-brain-axial	26	cerebellar-cortex	48.2	65.7	remove	in the dark fourth ventricle / cistern, not certainly cerebellar cortex
+mri-brain-sagittal	2	cerebral-cortex	35.1	42.2	remove	in dark sulcal CSF near the lateral sulcus, not certainly cortex
+mri-brain-sagittal	6	cerebral-cortex	38.3	72.2	remove	in a region too dark (7 T signal dropout) to confirm cortex
+mri-brain-sagittal	26	caudate-nucleus	36.7	49.1	remove	inside the lateral ventricle (CSF), not caudate
+# Living neck (s0021) and thorax-neck (s0897), 2026-09-25: 46 pin_scan flags plus edge-slice spot checks, each crop LOOKED at.
+# Kept after looking: clavicle and sternum pins in the marrow cavity (neck axial 20, 30, 31x2, 40, 46; neck coronal 8x2, 9x2, 10) and the retrocardiac oesophagus (thorax-neck sagittal 24).
+ct-live-neck-axial	21	thoracic-vertebra	67.3	47.7	remove	small separate bone lateral to T1: transverse process or first rib head, not certain
+ct-live-neck-axial	30	subclavian-artery	84.8	39.4	remove	grey soft tissue above the right apex, no vessel visible under the pin
+ct-live-neck-axial	46	upper-lobe-right	97.5	60.0	remove	sliver of lung at the lateral image edge; lobe not certain at the heart level
+ct-live-neck-axial	47	lower-lobe-right	65.2	51.7	remove	on a hilar vessel, not aerated lung
+ct-live-neck-axial	48	upper-lobe-right	97.0	41.8	remove	sliver of lung at the lateral image edge; lobe not certain at the heart level
+ct-live-neck-axial	48	upper-lobe-right	97.8	43.7	remove	sliver of lung at the lateral image edge; lobe not certain at the heart level
+ct-live-neck-coronal	11	common-carotid-artery	41.8	40.8	remove	grey soft tissue, no vessel visible under the pin
+ct-live-neck-coronal	18	aorta	43.5	98.0	remove	at the bottom edge of the image beside the heart; not certainly aorta
+ct-live-neck-coronal	20	clavicle	94.9	53.7	remove	lateral bone at the image edge: clavicle or acromion not certain
+ct-live-neck-coronal	24	clavicle	17.7	45.3	remove	bone at the acromioclavicular region: clavicle or scapula not certain
+ct-live-neck-sagittal	16	upper-lobe-left	54.2	95.3	remove	tiny air pocket at the hilum; lobe not certain
+ct-live-neck-sagittal	18	upper-lobe-left	33.2	81.4	remove	tiny retrosternal air sliver; lobe not certain
+ct-live-thorax-neck-axial	13	thoracic-vertebra	57.4	59.7	remove	small separate bone lateral to the spine: transverse process or rib not certain
+ct-live-thorax-neck-axial	13	clavicle	14.9	68.4	remove	triangular bone at the shoulder: clavicle or scapula not certain
+ct-live-thorax-neck-axial	14	thoracic-vertebra	38.2	60.7	remove	dark spot beside the vertebra: foramen or rib junction, not certain
+ct-live-thorax-neck-axial	28	upper-lobe-right	84.8	47.9	remove	on chest wall soft tissue beside a rib, not lung
+ct-live-thorax-neck-axial	36	heart	57.8	36.8	remove	at the heart and inferior vena cava junction; not certainly heart
+ct-live-thorax-neck-axial	41	lower-lobe-left	21.1	20.5	remove	anterior air sliver above the liver; lobe not certain
+ct-live-thorax-neck-coronal	15	liver	50.0	99.2	remove	at the bottom edge of the image
+ct-live-thorax-neck-coronal	19	liver	38.5	79.9	remove	under the heart beside the stomach; liver left lobe or stomach not certain on this unenhanced scan
+ct-live-thorax-neck-coronal	35	clavicle	13.3	24.7	remove	posterior coronal cut at the shoulder: clavicle or scapular spine not certain
+ct-live-thorax-neck-coronal	36	clavicle	15.3	25.8	remove	posterior coronal cut at the shoulder: clavicle or scapular spine not certain
+ct-live-thorax-neck-coronal	40	thoracic-vertebra	55.9	40.4	remove	lateral to the spine: transverse process or rib not certain
+ct-live-thorax-neck-sagittal	4	clavicle	68.9	25.8	remove	lateral sagittal at the shoulder: clavicle or acromion not certain
+ct-live-thorax-neck-sagittal	17	autochthonous-back-muscle	63.5	22.6	remove	posterior neck muscle: deep back muscle or trapezius not certain unenhanced
+ct-live-thorax-neck-sagittal	20	thoracic-vertebra	66.0	32.3	remove	paramedian posterior element: vertebra or rib not certain
+ct-live-thorax-neck-sagittal	21	sternum	16.8	61.4	remove	parasagittal bony segment: sternum or calcified costal cartilage not certain
+ct-live-thorax-neck-sagittal	22	esophagus	51.8	34.1	remove	at the edge of the vertebral body behind the trachea; not certainly oesophagus
+ct-live-thorax-neck-sagittal	25	spinal-cord	71.9	43.3	remove	parasagittal cut: dark oval between posterior elements is a foramen, not certainly cord
+ct-live-thorax-neck-sagittal	25	spinal-cord	74.0	48.7	remove	parasagittal cut: dark oval between posterior elements is a foramen, not certainly cord
+ct-live-thorax-neck-sagittal	25	spinal-cord	75.3	53.8	remove	parasagittal cut: dark oval between posterior elements is a foramen, not certainly cord
+ct-live-thorax-neck-sagittal	25	autochthonous-back-muscle	73.7	98.8	remove	at the bottom edge of the image
+ct-live-thorax-neck-sagittal	35	autochthonous-back-muscle	81.7	74.3	remove	lateral posterior chest wall: deep back muscle not certain this far lateral
+ct-live-thorax-neck-sagittal	40	lower-lobe-right	19.4	79.0	remove	on soft tissue at the anterior diaphragm, not lung
+ct-live-thorax-neck-coronal	1	liver	37.5	88.4	remove	anterior-most coronal cut through the abdominal wall muscle and fat, not certainly liver
+ct-live-thorax-neck-coronal	1	liver	52.4	90.1	remove	anterior-most coronal cut through the abdominal wall muscle and fat, not certainly liver
+ct-live-thorax-neck-coronal	1	liver	61.3	89.4	remove	anterior-most coronal cut through the abdominal wall muscle and fat, not certainly liver
+ct-live-thorax-neck-coronal	1	liver	63.7	85.0	remove	anterior-most coronal cut through the abdominal wall muscle and fat, not certainly liver
+ct-live-thorax-neck-coronal	2	sternum	47.3	67.7	remove	xiphoid or calcified costal cartilage not certain
+ct-live-thorax-neck-coronal	2	sternum	51.8	66.7	remove	xiphoid or calcified costal cartilage not certain
+ct-live-thorax-neck-coronal	3	sternum	49.2	73.2	remove	soft tissue below the sternal body, no bone under the pin
+ct-live-thorax-neck-coronal	3	stomach	32.8	99.0	remove	at the bottom edge of the image
+ct-live-neck-axial	1	cervical-vertebra	57.0	35.4	remove	skull base level, pin on soft tissue beside the lateral mass
+ct-live-neck-coronal	1	sternum	52.4	99.2	remove	at the bottom edge of the image
+ct-live-neck-coronal	48	autochthonous-back-muscle	44.6	97.4	remove	posterior-most cut at the bottom edge of the image
+ct-live-thorax-neck-axial	12	clavicle	12.2	67.3	remove	small bone beside the acromion at the shoulder: clavicle or scapula not certain (flagged once its slice-13 neighbour was removed)
+
+# superseded 2026-09-25 by the v2 re-audit: the rows below were keyed to the OLD 24-slice numbering of
+# ct-head-* and ct-thorax-*, which now ship 48-slice stacks under atlas/<id>/v2. Kept for their reasons only.
+# ct-thorax-axial	1	sternum	49.1	52.7	remove	on the T1 vertebral body, not sternum
+# ct-thorax-axial	1	rib	18.5	52.1	remove	on the scapula at the shoulder, not a rib
+# ct-thorax-axial	1	rib	24.4	70.3	remove	on the scapula body, not a rib
+# ct-thorax-axial	1	rib	29.6	44.3	remove	anterior oval bone above the lung apex: clavicle, not a rib
+# ct-thorax-axial	1	rib	65.7	41.2	remove	anterior oval bone above the lung apex: clavicle, not a rib
+# ct-thorax-axial	2	sternum	47.0	56.7	remove	just in front of the vertebral body (no sternum at this level), not sternum
+# ct-thorax-axial	2	rib	35.1	40.8	remove	anterior oval bone: clavicle, not a rib
+# ct-thorax-axial	2	rib	64.6	40.0	remove	anterior oval bone: clavicle, not a rib
+# ct-thorax-axial	19	rib	84.5	61.6	remove	soft tissue, no bone under the pin
+# ct-thorax-axial	20	rib	35.2	63.0	remove	soft tissue at the liver edge, no bone under the pin
+# ct-thorax-axial	22	rib	76.2	62.4	remove	soft tissue, no bone under the pin
+# ct-thorax-axial	23	rib	61.0	62.6	remove	soft tissue beside the spine (crus), no bone
+# ct-thorax-axial	23	rib	59.6	60.8	remove	soft tissue beside the spine (crus), no bone
+# ct-thorax-axial	24	rib	47.1	65.3	remove	on the vertebral body, not a rib
+# ct-thorax-axial	23	lung	57.2	26.1	remove	bowel gas below the diaphragm, not lung
+# ct-thorax-axial	24	lung	39.8	32.5	remove	bowel gas below the diaphragm, not lung
+# ct-thorax-axial	24	lung	57.9	25.6	remove	bowel gas below the diaphragm, not lung
+# ct-thorax-coronal	3	lung	57.4	100.0	remove	bowel gas at the bottom edge, below the diaphragm
+# ct-thorax-coronal	4	lung	56.2	100.0	remove	bowel gas at the bottom edge, below the diaphragm
+# ct-thorax-coronal	4	lung	69.4	64.2	remove	sliver of air along the chest wall on an anterior slice, not certainly lung
+# ct-thorax-coronal	7	rib	36.2	5.6	remove	clavicle, not a rib
+# ct-thorax-coronal	7	rib	64.7	3.4	remove	clavicle, not a rib
+# ct-thorax-coronal	7	sternum	47.8	17.0	remove	medial ends of the clavicles and first costal cartilages around the manubrium; which pin is sternum is not certain
+# ct-thorax-coronal	7	sternum	53.0	16.6	remove	as above, not certain
+# ct-thorax-coronal	7	sternum	55.6	12.0	remove	as above, not certain
+# ct-thorax-coronal	7	sternum	57.7	19.4	remove	as above, not certain
+# ct-thorax-coronal	7	sternum	58.3	8.2	remove	on the clavicle, not sternum
+# ct-thorax-coronal	8	rib	30.0	0.0	remove	clavicle at the top edge
+# ct-thorax-coronal	10	rib	18.6	0.0	remove	humeral head at the top edge, not a rib
+# ct-thorax-coronal	10	sternum	45.8	0.0	remove	top edge in a posterior coronal plane: vertebra, not sternum
+# ct-thorax-coronal	10	sternum	46.8	1.4	remove	as above
+# ct-thorax-coronal	10	sternum	47.6	3.9	remove	as above
+# ct-thorax-coronal	11	sternum	50.3	4.9	remove	posterior coronal plane through the spine: vertebra, not sternum
+# ct-thorax-coronal	11	thoracic-vertebra	49.6	97.6	remove	bottom edge below the diaphragm, not certain which vertebra region
+# ct-thorax-coronal	11	rib	66.7	1.7	remove	scapula / clavicle at the shoulder, not a rib
+# ct-thorax-coronal	13	rib	71.0	18.2	remove	scapula (glenoid region), not a rib
+# ct-thorax-coronal	14	rib	29.8	29.6	remove	scapula, not a rib
+# ct-thorax-coronal	14	rib	79.6	31.5	remove	scapula, not a rib
+# ct-thorax-sagittal	3	rib	67.3	83.8	remove	soft tissue of the arm, no bone under the pin (lateral slice through the shoulder)
+# ct-thorax-sagittal	4	rib	56.6	1.9	remove	humeral head / scapula at the shoulder, not a rib
+# ct-thorax-sagittal	4	rib	65.0	0.0	remove	humeral head / scapula at the shoulder, not a rib
+# ct-thorax-sagittal	4	rib	68.4	83.9	remove	soft tissue of the arm, no bone under the pin
+# ct-thorax-sagittal	4	rib	68.7	86.0	remove	soft tissue of the arm, no bone under the pin
+# ct-thorax-sagittal	5	rib	51.0	0.0	remove	scapula (acromion) at the shoulder, not a rib
+# ct-thorax-sagittal	5	rib	69.1	1.4	remove	scapula at the shoulder, not a rib
+# ct-thorax-sagittal	5	rib	74.5	27.0	remove	scapula (spine/body), not a rib
+# ct-thorax-sagittal	5	rib	80.3	35.8	remove	scapula (spine/body), not a rib
+# ct-thorax-sagittal	9	rib	36.8	5.2	remove	round bone at the top of the chest: clavicle cross-section, not certainly a rib
+# ct-thorax-sagittal	9	rib	52.2	4.1	remove	oblique bone at the top: clavicle or first rib, not certain
+# ct-thorax-sagittal	10	lung	21.6	100.0	remove	bowel gas below the diaphragm at the image edge
+# ct-thorax-sagittal	10	rib	37.3	9.3	remove	round bone at the top of the chest: clavicle cross-section
+# ct-thorax-sagittal	11	vertebral-canal	69.0	6.2	remove	parasagittal slice lateral to the vertebral bodies; the canal is not in this plane
+# ct-thorax-sagittal	11	vertebral-canal	81.1	36.6	remove	parasagittal slice lateral to the vertebral bodies; the canal is not in this plane
+# ct-thorax-sagittal	12	lung	54.6	15.0	remove	trachea (midline air column in front of the spine), not lung
+# ct-thorax-sagittal	12	sternum	50.8	0.0	remove	top of the upper thoracic spine, not sternum
+# ct-thorax-sagittal	12	sternum	52.0	1.4	remove	top of the upper thoracic spine, not sternum
+# ct-thorax-sagittal	12	sternum	53.3	0.0	remove	top of the upper thoracic spine, not sternum
+# ct-thorax-sagittal	12	sternum	59.2	4.9	remove	top of the upper thoracic spine, not sternum
+# ct-thorax-sagittal	12	rib	60.8	100.0	remove	vertebral body at the image edge, not a rib
+# ct-thorax-sagittal	12	rib	66.4	100.0	remove	vertebral body at the image edge, not a rib
+# ct-thorax-sagittal	13	lung	16.6	100.0	remove	bowel gas below the diaphragm at the image edge
+# ct-thorax-sagittal	13	lung	57.9	12.3	remove	air column in front of the spine: trachea, not certainly lung
+# ct-thorax-sagittal	13	sternum	54.2	1.2	remove	top of the upper thoracic spine, not sternum
+# ct-thorax-sagittal	13	sternum	55.0	0.0	remove	top of the upper thoracic spine, not sternum
+# ct-thorax-sagittal	13	sternum	58.4	4.9	remove	top of the upper thoracic spine, not sternum
+# ct-thorax-sagittal	14	sternum	9.5	67.1	remove	anterior ends of ribs / costal cartilage lateral to the sternum
+# ct-thorax-sagittal	14	sternum	10.9	64.4	remove	anterior ends of ribs / costal cartilage lateral to the sternum
+# ct-thorax-sagittal	14	sternum	11.5	57.1	remove	anterior ends of ribs / costal cartilage lateral to the sternum
+# ct-thorax-sagittal	14	sternum	15.0	46.2	remove	anterior ends of ribs / costal cartilage lateral to the sternum
+# ct-thorax-sagittal	14	sternum	30.7	16.2	remove	sternoclavicular region: clavicle head or manubrium, not certain
+# ct-thorax-sagittal	14	sternum	31.5	11.8	remove	sternoclavicular region: clavicle head or manubrium, not certain
+# ct-thorax-sagittal	14	sternum	32.9	7.3	remove	medial end of the clavicle, not sternum
+# ct-thorax-sagittal	14	vertebral-canal	79.6	63.7	remove	parasagittal slice lateral to the vertebral bodies; the canal is not in this plane
+# ct-thorax-sagittal	14	vertebral-canal	81.1	67.2	remove	parasagittal slice lateral to the vertebral bodies; the canal is not in this plane
+# ct-thorax-sagittal	15	lung	15.5	98.2	remove	bowel gas below the diaphragm
+# ct-thorax-sagittal	15	rib	35.2	8.5	remove	round bone at the top of the chest: clavicle cross-section
+# ct-thorax-sagittal	16	lung	18.1	97.8	remove	bowel gas below the diaphragm
+# ct-thorax-sagittal	16	rib	35.9	4.0	remove	round bone at the top of the chest: clavicle cross-section
+# ct-thorax-sagittal	16	rib	51.8	2.3	remove	oblique bone at the top: clavicle or first rib, not certain
+# ct-thorax-sagittal	18	rib	88.4	39.9	remove	medial border of the scapula, not a rib
+# ct-thorax-sagittal	19	rib	81.4	32.7	remove	scapula, not a rib
+# ct-thorax-sagittal	20	rib	74.4	21.9	remove	scapula, not a rib
+# ct-thorax-sagittal	21	rib	43.4	2.2	remove	humeral head / scapula at the shoulder, not a rib
+# ct-thorax-sagittal	21	rib	51.6	2.2	remove	humeral head / scapula at the shoulder, not a rib
+# ct-thorax-sagittal	21	rib	64.4	78.0	remove	soft tissue of the arm, no bone under the pin
+# ct-thorax-sagittal	21	rib	68.7	88.8	remove	soft tissue of the arm, no bone under the pin
+# ct-thorax-sagittal	22	rib	40.5	2.0	remove	humerus / scapula at the shoulder, not a rib
+# ct-thorax-sagittal	22	rib	51.1	2.4	remove	humerus / scapula at the shoulder, not a rib
+# ct-thorax-sagittal	22	rib	54.5	2.2	remove	humerus / scapula at the shoulder, not a rib
+# ct-thorax-sagittal	22	rib	58.6	2.2	remove	humerus / scapula at the shoulder, not a rib
+# ct-head-coronal	4	paranasal-sinus	62.7	83.3	remove	on the horizontal dark streak artefact low in the face, not a sinus
+# ct-head-coronal	5	paranasal-sinus	59.1	83.3	remove	on the horizontal dark streak artefact, not a sinus
+# ct-head-coronal	9	paranasal-sinus	31.8	80.9	remove	on the horizontal dark streak artefact, not a sinus
+# ct-head-coronal	10	paranasal-sinus	63.2	83.6	remove	on the horizontal dark streak artefact, not a sinus
+# ct-head-coronal	10	paranasal-sinus	38.5	0.7	remove	air at the top edge above the vertex, not a sinus
+# ct-head-coronal	11	paranasal-sinus	35.9	0.0	remove	air at the top edge above the vertex, not a sinus
+# ct-head-coronal	12	paranasal-sinus	33.5	0.0	remove	air at the top edge above the vertex, not a sinus
+# ct-head-coronal	12	paranasal-sinus	46.8	92.3	remove	pharyngeal air below the skull base, not a sinus
+# ct-head-coronal	13	paranasal-sinus	32.7	0.0	remove	air at the top edge above the vertex, not a sinus
+# ct-head-coronal	13	paranasal-sinus	31.0	57.7	remove	petrous/mastoid air lateral in the skull base, not a paranasal sinus
+# ct-head-coronal	13	paranasal-sinus	61.7	57.4	remove	petrous/mastoid air lateral in the skull base, not a paranasal sinus
+# ct-head-coronal	13	skull	48.8	73.9	remove	midline bone below the skull base: C1/dens, a cervical vertebra, not skull
+# ct-head-coronal	13	skull	48.8	87.1	remove	C2, a cervical vertebra, not skull
+# ct-head-coronal	14	paranasal-sinus	20.0	59.4	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	14	paranasal-sinus	27.7	58.7	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	14	paranasal-sinus	71.8	62.2	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	14	paranasal-sinus	77.5	66.0	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	14	skull	48.5	81.6	remove	C1/C2 below the skull base, not skull
+# ct-head-coronal	14	skull	50.8	93.8	remove	C2, not skull
+# ct-head-coronal	15	paranasal-sinus	21.9	56.0	remove	mastoid air cells (honeycomb), not a paranasal sinus
+# ct-head-coronal	15	paranasal-sinus	22.9	64.2	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	15	paranasal-sinus	71.4	68.4	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	15	paranasal-sinus	77.8	69.3	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	15	skull	38.0	93.0	remove	lateral mass of C1/C2, not skull
+# ct-head-coronal	15	skull	59.2	88.1	remove	lateral mass of C1/C2, not skull
+# ct-head-coronal	16	paranasal-sinus	15.5	61.4	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	16	paranasal-sinus	79.4	58.2	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	16	paranasal-sinus	79.8	65.9	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	16	paranasal-sinus	81.3	61.7	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	16	skull	42.3	86.5	remove	C1/C2 below the skull base, not skull
+# ct-head-coronal	16	skull	54.6	86.5	remove	C1/C2 below the skull base, not skull
+# ct-head-coronal	17	paranasal-sinus	39.0	0.0	remove	air at the top edge above the vertex, not a sinus
+# ct-head-coronal	17	paranasal-sinus	80.8	64.2	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	17	paranasal-sinus	81.4	58.1	remove	mastoid air cells, not a paranasal sinus
+# ct-head-coronal	17	skull	48.5	86.7	remove	C2 spinous process, not skull
+# ct-head-coronal	17	skull	51.3	75.4	remove	posterior arch of C1, not skull
+# ct-head-axial	1	skull	31.6	53.7	remove	thin line outside the scalp at the vertex (external object), not skull
+# ct-head-axial	1	skull	44.3	34.6	remove	thin line outside the scalp at the vertex (external object), not skull
+# ct-head-axial	1	paranasal-sinus	36.4	43.7	remove	gap outside the scalp at the vertex, not a sinus
+# ct-head-axial	1	paranasal-sinus	39.5	69.4	remove	gap outside the scalp at the vertex, not a sinus
+# ct-head-axial	14	paranasal-sinus	23.8	59.6	remove	mastoid air cells, not a paranasal sinus
+# ct-head-axial	15	paranasal-sinus	70.1	54.9	remove	mastoid air cells, not a paranasal sinus
+# ct-head-axial	15	paranasal-sinus	81.9	63.7	remove	mastoid air cells, not a paranasal sinus
+# ct-head-axial	16	paranasal-sinus	48.0	10.3	remove	air in the nasal vestibule, not a paranasal sinus
+# ct-head-axial	16	paranasal-sinus	79.6	65.0	remove	mastoid air cells, not a paranasal sinus
+# ct-head-axial	17	paranasal-sinus	71.9	61.8	remove	mastoid air cells, not a paranasal sinus
+# ct-head-axial	17	paranasal-sinus	78.2	61.6	remove	mastoid air cells, not a paranasal sinus
+# ct-head-axial	18	skull	45.8	68.2	remove	posterior arch of C1, not skull
+# ct-head-axial	18	skull	48.7	53.9	remove	C1 anterior arch / dens, not skull
+# ct-head-axial	19	skull	48.6	55.7	remove	C2 body, not skull
+# ct-head-axial	20	skull	57.7	57.1	remove	cervical vertebra, not skull
+# ct-head-axial	20	paranasal-sinus	26.3	31.8	remove	on the dental-filling streak artefact, not a sinus
+# ct-head-axial	20	paranasal-sinus	39.4	32.0	remove	on the dental-filling streak artefact, not a sinus
+# ct-head-axial	20	paranasal-sinus	61.7	27.6	remove	on the dental-filling streak artefact, not a sinus
+# ct-head-axial	20	paranasal-sinus	67.3	31.8	remove	on the dental-filling streak artefact, not a sinus
+# ct-head-axial	21	skull	58.7	61.4	remove	cervical vertebra lamina, not skull
+# ct-head-axial	22	skull	37.9	61.5	remove	cervical vertebra, not skull
+# ct-head-axial	22	skull	48.7	57.3	remove	cervical vertebral body, not skull
+# ct-head-axial	22	paranasal-sinus	47.5	49.2	remove	oropharyngeal airway, not a sinus
+# ct-head-axial	23	skull	34.6	57.0	remove	cervical vertebra, not skull
+# ct-head-axial	23	skull	49.0	56.8	remove	cervical vertebral body, not skull
+# ct-head-axial	24	skull	37.9	61.7	remove	cervical vertebra, not skull
+# ct-head-axial	24	skull	53.6	58.2	remove	cervical vertebral body, not skull
+# ct-head-sagittal	3	paranasal-sinus	55.0	59.4	remove	external ear canal / mastoid air on a far-lateral slice, not a paranasal sinus
+# ct-head-sagittal	3	paranasal-sinus	57.7	55.7	remove	external ear canal / mastoid air, not a paranasal sinus
+# ct-head-sagittal	4	paranasal-sinus	54.9	60.0	remove	ear canal / mastoid air, not a paranasal sinus
+# ct-head-sagittal	5	paranasal-sinus	54.9	62.0	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	5	paranasal-sinus	55.1	59.4	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	5	paranasal-sinus	65.2	57.4	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	5	paranasal-sinus	65.6	60.4	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	6	paranasal-sinus	55.1	59.1	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	6	paranasal-sinus	60.3	64.2	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	6	paranasal-sinus	60.7	56.1	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	6	paranasal-sinus	61.9	63.6	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	7	paranasal-sinus	31.1	82.6	remove	on the horizontal dark streak artefact, not a sinus
+# ct-head-sagittal	7	paranasal-sinus	55.2	59.0	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	7	paranasal-sinus	55.9	54.7	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	7	paranasal-sinus	59.2	63.4	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	8	paranasal-sinus	35.2	80.3	remove	on the horizontal dark streak artefact, not a sinus
+# ct-head-sagittal	8	paranasal-sinus	52.5	57.3	remove	petrous/mastoid air, not a paranasal sinus
+# ct-head-sagittal	9	paranasal-sinus	44.5	0.0	remove	air at the top edge above the vertex, not a sinus
+# ct-head-sagittal	9	paranasal-sinus	54.1	60.7	remove	petrous/mastoid air, not a paranasal sinus
+# ct-head-sagittal	10	paranasal-sinus	31.7	82.3	remove	on the horizontal dark streak artefact, not a sinus
+# ct-head-sagittal	10	skull	57.7	72.5	remove	at the craniocervical junction: C1 or occipital condyle, not certain
+# ct-head-sagittal	10	skull	62.0	99.7	remove	cervical spine at the bottom edge, not skull
+# ct-head-sagittal	11	skull	56.5	83.1	remove	C2, not skull
+# ct-head-sagittal	12	paranasal-sinus	8.8	64.2	remove	air in the nasal vestibule at the tip of the nose, not a paranasal sinus
+# ct-head-sagittal	12	skull	55.5	76.1	remove	dens of C2, not skull
+# ct-head-sagittal	13	skull	58.5	93.2	remove	C2/C3, not skull
+# ct-head-sagittal	14	skull	56.0	76.0	remove	C1 anterior arch / dens, not skull
+# ct-head-sagittal	14	skull	63.5	86.4	remove	C2, not skull
+# ct-head-sagittal	15	skull	58.0	71.4	remove	at the craniocervical junction: C1 or clivus tip, not certain
+# ct-head-sagittal	16	paranasal-sinus	32.0	83.6	remove	on the horizontal dark streak artefact, not a sinus
+# ct-head-sagittal	17	paranasal-sinus	55.0	61.2	remove	petrous/mastoid air, not a paranasal sinus
+# ct-head-sagittal	18	paranasal-sinus	56.2	62.8	remove	petrous/mastoid air, not a paranasal sinus
+# ct-head-sagittal	19	paranasal-sinus	55.7	62.7	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	19	paranasal-sinus	61.3	69.7	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	19	paranasal-sinus	62.0	64.2	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	19	paranasal-sinus	65.0	65.2	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	20	paranasal-sinus	65.3	66.3	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	20	paranasal-sinus	65.4	62.2	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	20	paranasal-sinus	66.5	58.3	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	20	paranasal-sinus	68.2	64.1	remove	mastoid air cells, not a paranasal sinus
+# ct-head-sagittal	21	paranasal-sinus	55.9	63.7	remove	ear canal / mastoid air, not a paranasal sinus
+# ct-head-sagittal	22	paranasal-sinus	58.6	60.0	remove	ear canal / mastoid air, not a paranasal sinus
+
+# Cadaver v2 re-audit (2026-09-25): ct-head-*, ct-thorax-*, ct-knee-axial, ct-knee-coronal 48-slice stacks.
+# Every slice was LOOKED at in a numbered-pin sheet (not only pin_scan flags); doubtful pins zoomed.
+# Slice numbers refer to atlas/<id>/v2. Keep lines record pin_scan flags reviewed and kept.
+ct-head-axial	1	skull	31.6	53.7	remove	thin line outside the scalp at the vertex (external object), not skull
+ct-head-axial	1	skull	44.3	34.6	remove	thin line outside the scalp at the vertex (external object), not skull
+ct-head-axial	1	paranasal-sinus	36.4	43.7	remove	gap outside the scalp at the vertex, not a sinus
+ct-head-axial	1	paranasal-sinus	39.5	69.4	remove	gap outside the scalp at the vertex, not a sinus
+ct-head-axial	27	paranasal-sinus	62.9	21.9	remove	air under the nasal bone in the anterior nasal cavity, not certainly a sinus
+ct-head-axial	28	paranasal-sinus	80.8	68.3	remove	mastoid air cells, not a paranasal sinus
+ct-head-axial	29	paranasal-sinus	20.1	55.5	remove	external ear canal, not a paranasal sinus
+ct-head-axial	29	paranasal-sinus	80.8	66.9	remove	mastoid air cells, not a paranasal sinus
+ct-head-axial	30	paranasal-sinus	75.3	55.7	remove	external ear canal, not a paranasal sinus
+ct-head-axial	30	paranasal-sinus	81.4	65.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-axial	31	paranasal-sinus	48.7	8.2	remove	air in the nasal vestibule, not a paranasal sinus
+ct-head-axial	31	paranasal-sinus	79.8	56.5	remove	external ear canal, not a paranasal sinus
+ct-head-axial	32	paranasal-sinus	47.3	12.1	remove	air in the nasal vestibule, not a paranasal sinus
+ct-head-axial	32	paranasal-sinus	79.8	65.3	remove	mastoid air cells, not a paranasal sinus
+ct-head-axial	33	paranasal-sinus	71.9	61.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-axial	33	paranasal-sinus	77.4	61.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-axial	34	skull	55.7	71.0	remove	at the craniocervical junction: occipital condyle or lateral mass of C1, not certain
+ct-head-axial	34	paranasal-sinus	71.9	62.0	remove	mastoid air cells, not a paranasal sinus
+ct-head-axial	34	paranasal-sinus	78.6	61.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-axial	35	skull	59.1	57.5	remove	C1 ring around the dens, a cervical vertebra, not skull
+ct-head-axial	36	skull	48.4	53.8	remove	C1/C2 around the dens, a cervical vertebra, not skull
+ct-head-axial	37	skull	40.7	57.8	remove	lateral mass of C1, a cervical vertebra, not skull
+ct-head-axial	37	paranasal-sinus	50.2	24.6	remove	air in the oral cavity inside the dental arch, not a sinus
+ct-head-axial	38	skull	35.7	33.4	remove	on a tooth crown, not bone of the skull
+ct-head-axial	38	skull	48.6	55.7	remove	C2 body, a cervical vertebra, not skull
+ct-head-axial	39	skull	32.1	29.4	remove	on a dental filling with streak artefact, not bone of the skull
+ct-head-axial	39	skull	40.3	56.0	remove	cervical vertebral body, not skull
+ct-head-axial	39	paranasal-sinus	32.7	35.2	remove	on the dental-filling streak artefact, not a sinus
+ct-head-axial	40	skull	57.7	57.8	remove	cervical vertebral body, not skull
+ct-head-axial	40	skull	59.7	22.8	remove	on a tooth, not bone of the skull
+ct-head-axial	40	skull	62.4	33.0	remove	on a tooth with a metal filling, not bone of the skull
+ct-head-axial	40	paranasal-sinus	28.2	31.3	remove	on the dental-filling streak artefact, not a sinus
+ct-head-axial	40	paranasal-sinus	41.5	31.7	remove	on the dental-filling streak artefact, not a sinus
+ct-head-axial	41	skull	48.7	56.3	remove	cervical vertebral body, not skull
+ct-head-axial	41	skull	63.3	33.8	remove	on a tooth with a metal filling, not bone of the skull
+ct-head-axial	41	paranasal-sinus	54.1	15.4	remove	air in front of the teeth (oral vestibule), not a sinus
+ct-head-axial	41	paranasal-sinus	59.3	35.0	remove	on the dental-filling streak artefact, not a sinus
+ct-head-axial	41	paranasal-sinus	64.5	30.7	remove	on the dental-filling streak artefact, not a sinus
+ct-head-axial	41	paranasal-sinus	69.5	31.4	remove	on the dental-filling streak artefact, not a sinus
+ct-head-axial	42	skull	58.7	61.4	remove	cervical vertebra lamina, not skull
+ct-head-axial	43	skull	50.1	68.6	remove	cervical vertebra lamina, not skull
+ct-head-axial	44	skull	37.9	61.5	remove	cervical vertebra, not skull
+ct-head-axial	44	skull	48.7	57.3	remove	cervical vertebral body, not skull
+ct-head-axial	44	paranasal-sinus	47.5	49.2	remove	oropharyngeal airway, not a sinus
+ct-head-axial	45	skull	49.0	56.8	remove	cervical vertebral body, not skull
+ct-head-axial	46	skull	34.6	57.0	remove	cervical vertebra, not skull
+ct-head-axial	46	skull	49.0	56.8	remove	cervical vertebral body, not skull
+ct-head-axial	47	skull	37.6	61.6	remove	cervical vertebra, not skull
+ct-head-axial	47	skull	48.9	54.6	remove	cervical vertebral body, not skull
+ct-head-axial	48	skull	37.9	61.7	remove	cervical vertebra, not skull
+ct-head-axial	48	skull	53.6	58.2	remove	cervical vertebral body, not skull
+ct-head-coronal	1	paranasal-sinus	49.6	65.2	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-coronal	1	paranasal-sinus	52.9	64.4	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-coronal	2	paranasal-sinus	48.7	65.3	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-coronal	2	paranasal-sinus	53.3	67.4	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-coronal	2	paranasal-sinus	54.7	64.4	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-coronal	3	paranasal-sinus	48.7	63.8	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-coronal	3	paranasal-sinus	54.8	64.0	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-coronal	4	paranasal-sinus	48.6	64.6	remove	anterior nasal cavity below the nasal bones, not a paranasal sinus
+ct-head-coronal	4	paranasal-sinus	55.2	63.2	remove	anterior nasal cavity below the nasal bones, not a paranasal sinus
+ct-head-coronal	5	paranasal-sinus	47.7	65.3	remove	anterior nasal cavity below the nasal bones, not a paranasal sinus
+ct-head-coronal	5	paranasal-sinus	56.7	65.7	remove	anterior nasal cavity below the nasal bones, not a paranasal sinus
+ct-head-coronal	5	paranasal-sinus	62.7	83.3	remove	on the horizontal dark streak artefact at the lips, not a sinus
+ct-head-coronal	6	paranasal-sinus	47.7	64.4	remove	anterior nasal cavity below the nasal bones, not a paranasal sinus
+ct-head-coronal	7	skull	50.3	82.3	remove	on an upper incisor, a tooth, not bone of the skull
+ct-head-coronal	7	skull	51.8	88.3	remove	on a lower incisor, a tooth, not bone of the skull
+ct-head-coronal	7	paranasal-sinus	55.0	65.9	remove	anterior nasal cavity, not a paranasal sinus
+ct-head-coronal	7	paranasal-sinus	56.8	84.9	remove	on the horizontal dark streak artefact between the teeth, not a sinus
+ct-head-coronal	8	skull	43.6	88.5	remove	on the lower teeth, not bone of the skull
+ct-head-coronal	8	paranasal-sinus	54.8	58.0	remove	nasal cavity with the turbinates, not a paranasal sinus
+ct-head-coronal	8	paranasal-sinus	55.5	48.3	remove	top of the nasal cavity under the nasal bone, not certainly a sinus
+ct-head-coronal	9	skull	43.3	90.8	remove	on the lower teeth, not bone of the skull
+ct-head-coronal	13	skull	36.8	88.7	remove	at a metal-crowned tooth, not certainly bone of the skull
+ct-head-coronal	13	skull	58.2	83.6	remove	on the horizontal streak artefact, no bone under the pin
+ct-head-coronal	15	skull	63.5	78.1	remove	on an upper molar crown, a tooth, not bone of the skull
+ct-head-coronal	15	paranasal-sinus	37.9	82.3	remove	on the horizontal dark streak artefact at the teeth, not a sinus
+ct-head-coronal	16	skull	36.7	75.9	remove	on an upper molar with a filling, a tooth, not bone of the skull
+ct-head-coronal	16	skull	63.6	85.1	remove	on a metal-filled molar, a tooth, not bone of the skull
+ct-head-coronal	17	skull	62.9	76.4	remove	on an upper molar crown, a tooth, not bone of the skull
+ct-head-coronal	17	skull	65.2	86.9	remove	on a metal-filled lower tooth in the streak artefact, not certainly bone
+ct-head-coronal	17	paranasal-sinus	31.9	80.9	remove	on the horizontal dark streak artefact, not a sinus
+ct-head-coronal	18	paranasal-sinus	40.0	81.9	remove	on the horizontal dark streak artefact, not a sinus
+ct-head-coronal	19	paranasal-sinus	38.5	0.7	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	19	paranasal-sinus	63.2	83.6	remove	on the horizontal dark streak artefact, not a sinus
+ct-head-coronal	20	paranasal-sinus	36.8	0.7	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	21	paranasal-sinus	35.7	0.4	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	22	paranasal-sinus	34.6	0.1	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	23	skull	32.3	0.7	remove	small blob at the top edge outside the scalp, not skull
+ct-head-coronal	23	paranasal-sinus	33.4	0.1	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	24	paranasal-sinus	33.1	0.1	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	24	paranasal-sinus	45.9	91.8	remove	pharyngeal air below the skull base, not a sinus
+ct-head-coronal	25	paranasal-sinus	32.8	0.1	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	25	paranasal-sinus	61.8	57.6	remove	air in the temporal bone lateral to the sphenoid (petrous or middle ear), not certainly a paranasal sinus
+ct-head-coronal	26	skull	48.7	86.8	remove	dens of C2, a cervical vertebra, not skull
+ct-head-coronal	26	skull	48.9	73.7	remove	anterior arch of C1, a cervical vertebra, not skull
+ct-head-coronal	26	paranasal-sinus	30.0	57.3	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-coronal	26	paranasal-sinus	32.6	0.1	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	26	paranasal-sinus	61.9	57.3	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-coronal	26	paranasal-sinus	66.7	60.7	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-coronal	27	skull	31.3	0.4	remove	at the top edge above the vertex, not skull
+ct-head-coronal	27	skull	48.6	78.9	remove	C1/C2 below the skull base, not skull
+ct-head-coronal	27	skull	50.4	94.5	remove	C2 body, not skull
+ct-head-coronal	27	paranasal-sinus	14.0	62.0	remove	external ear canal, not a paranasal sinus
+ct-head-coronal	27	paranasal-sinus	21.9	59.0	remove	mastoid/middle ear air, not a paranasal sinus
+ct-head-coronal	27	paranasal-sinus	32.5	60.7	remove	petrous/mastoid air, not a paranasal sinus
+ct-head-coronal	27	paranasal-sinus	70.7	61.1	remove	mastoid/middle ear air, not a paranasal sinus
+ct-head-coronal	28	skull	48.5	82.0	remove	C2 body below the dens, not skull
+ct-head-coronal	28	skull	50.8	93.8	remove	C3, a cervical vertebra, not skull
+ct-head-coronal	28	paranasal-sinus	19.1	59.6	remove	external ear canal, not a paranasal sinus
+ct-head-coronal	28	paranasal-sinus	27.8	58.7	remove	mastoid/middle ear air, not a paranasal sinus
+ct-head-coronal	28	paranasal-sinus	72.1	62.2	remove	external ear canal / mastoid air, not a paranasal sinus
+ct-head-coronal	28	paranasal-sinus	72.6	58.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	29	skull	27.6	75.2	remove	thin bone below the skull base beside C1 (transverse process of C1 or styloid), not certain
+ct-head-coronal	29	skull	49.9	83.9	remove	C2 body, not skull
+ct-head-coronal	29	paranasal-sinus	10.2	55.5	remove	air outside the head beside the ear, not a sinus
+ct-head-coronal	29	paranasal-sinus	24.7	55.1	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	29	paranasal-sinus	68.3	67.4	remove	mastoid/petrous air, not a paranasal sinus
+ct-head-coronal	29	paranasal-sinus	90.2	60.0	remove	air outside the head beside the ear, not a sinus
+ct-head-coronal	30	skull	37.8	92.9	remove	cervical vertebra below the skull base (C1/C2), not skull
+ct-head-coronal	30	skull	59.1	87.5	remove	cervical vertebra below the skull base (C1/C2), not skull
+ct-head-coronal	30	paranasal-sinus	21.9	56.0	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	30	paranasal-sinus	23.5	64.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	30	paranasal-sinus	71.4	68.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	30	paranasal-sinus	78.1	70.0	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	31	skull	38.5	95.6	remove	cervical vertebra below the skull base (C1/C2), not skull
+ct-head-coronal	31	skull	59.9	95.2	remove	cervical vertebra below the skull base (C1/C2), not skull
+ct-head-coronal	31	paranasal-sinus	21.7	63.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	31	paranasal-sinus	71.5	68.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	31	paranasal-sinus	76.7	68.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	31	paranasal-sinus	81.2	60.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	32	skull	39.9	95.1	remove	cervical vertebra below the skull base (C1/C2), not skull
+ct-head-coronal	32	skull	42.1	87.9	remove	cervical vertebra below the skull base (C1/C2), not skull
+ct-head-coronal	32	paranasal-sinus	15.6	61.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	32	paranasal-sinus	78.3	58.0	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	32	paranasal-sinus	80.6	65.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	32	paranasal-sinus	81.5	61.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	33	skull	46.4	95.1	remove	posterior arch of C1 or C2 spinous process below the occiput, not skull
+ct-head-coronal	33	skull	48.0	86.3	remove	posterior arch of C1 or C2 spinous process below the occiput, not skull
+ct-head-coronal	33	paranasal-sinus	15.5	62.0	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	33	paranasal-sinus	79.8	66.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	33	paranasal-sinus	80.9	58.7	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	33	paranasal-sinus	82.1	62.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	34	skull	50.3	87.5	remove	posterior arch of C1 or C2 spinous process below the occiput, not skull
+ct-head-coronal	34	skull	55.1	75.4	remove	posterior arch of C1 or C2 spinous process below the occiput, not skull
+ct-head-coronal	34	paranasal-sinus	37.6	0.7	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	34	paranasal-sinus	80.8	64.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	34	paranasal-sinus	81.1	58.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	35	skull	48.5	87.3	remove	posterior arch of C1 or C2 spinous process below the occiput, not skull
+ct-head-coronal	35	skull	49.0	75.6	remove	posterior arch of C1 or C2 spinous process below the occiput, not skull
+ct-head-coronal	35	paranasal-sinus	39.5	0.4	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	35	paranasal-sinus	80.7	63.7	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	35	paranasal-sinus	81.3	57.8	remove	mastoid air cells, not a paranasal sinus
+ct-head-coronal	36	skull	48.7	86.3	remove	posterior arch of C1 or C2 spinous process below the occiput, not skull
+ct-head-coronal	36	paranasal-sinus	39.7	0.7	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	36	paranasal-sinus	42.5	0.4	remove	air at the top edge above the vertex, not a sinus
+ct-head-coronal	48	skull	53.2	45.1	remove	faint partial-volume smudge at the back of the head, not certainly bone
+ct-head-sagittal	1	paranasal-sinus	57.5	55.4	remove	auricle / external ear canal air on a far-lateral slice, not a paranasal sinus
+ct-head-sagittal	2	paranasal-sinus	57.7	55.7	remove	auricle / external ear canal air on a far-lateral slice, not a paranasal sinus
+ct-head-sagittal	3	paranasal-sinus	54.9	60.0	remove	auricle / external ear canal air on a far-lateral slice, not a paranasal sinus
+ct-head-sagittal	3	paranasal-sinus	57.3	55.5	remove	auricle / external ear canal air on a far-lateral slice, not a paranasal sinus
+ct-head-sagittal	4	skull	33.9	81.9	remove	on the horizontal streak artefact at the skin edge, no bone under the pin
+ct-head-sagittal	4	paranasal-sinus	54.9	60.0	remove	auricle / external ear canal air on a far-lateral slice, not a paranasal sinus
+ct-head-sagittal	5	skull	33.7	81.9	remove	on the horizontal streak artefact at the skin edge, no bone under the pin
+ct-head-sagittal	5	paranasal-sinus	54.2	62.0	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	5	paranasal-sinus	54.7	60.0	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	6	skull	47.8	60.8	remove	faint low-density blob below the zygomatic arch, not certainly bone
+ct-head-sagittal	6	paranasal-sinus	54.4	62.0	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	6	paranasal-sinus	54.9	59.7	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	6	paranasal-sinus	64.3	61.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	7	skull	33.7	81.9	remove	on the horizontal streak artefact at the skin edge, no bone under the pin
+ct-head-sagittal	7	paranasal-sinus	54.9	62.0	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	7	paranasal-sinus	55.1	59.4	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	7	paranasal-sinus	65.0	57.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	7	paranasal-sinus	65.0	61.0	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	8	paranasal-sinus	54.9	62.0	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	8	paranasal-sinus	55.1	59.2	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	8	paranasal-sinus	64.5	60.7	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	8	paranasal-sinus	65.0	54.5	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	9	skull	33.5	81.9	remove	on the horizontal streak artefact, no bone under the pin
+ct-head-sagittal	9	paranasal-sinus	55.1	59.1	remove	external ear canal / middle ear in the temporal bone, not a paranasal sinus
+ct-head-sagittal	9	paranasal-sinus	55.1	62.0	remove	external ear canal / middle ear in the temporal bone, not a paranasal sinus
+ct-head-sagittal	9	paranasal-sinus	62.2	63.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	9	paranasal-sinus	65.3	54.5	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	10	paranasal-sinus	31.0	82.3	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	10	paranasal-sinus	55.3	59.0	remove	external ear canal / middle ear in the temporal bone, not a paranasal sinus
+ct-head-sagittal	10	paranasal-sinus	60.0	56.0	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	10	paranasal-sinus	61.6	63.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	11	skull	33.4	81.6	remove	on the horizontal streak artefact, no bone under the pin
+ct-head-sagittal	11	paranasal-sinus	31.1	82.6	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	11	paranasal-sinus	55.2	58.8	remove	external ear canal / middle ear in the temporal bone, not a paranasal sinus
+ct-head-sagittal	11	paranasal-sinus	56.7	54.9	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	11	paranasal-sinus	60.2	64.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	12	paranasal-sinus	31.1	82.6	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	12	paranasal-sinus	55.9	58.7	remove	external ear canal / middle ear in the temporal bone, not a paranasal sinus
+ct-head-sagittal	13	paranasal-sinus	31.1	82.6	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	13	paranasal-sinus	54.6	58.2	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	14	paranasal-sinus	35.2	80.3	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	14	paranasal-sinus	52.5	57.3	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	15	paranasal-sinus	33.7	80.9	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	15	paranasal-sinus	54.8	60.7	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	16	skull	32.9	84.9	remove	at the molars with metal fillings, not certainly bone of the skull
+ct-head-sagittal	16	paranasal-sinus	33.8	80.6	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	16	paranasal-sinus	54.1	60.7	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	17	skull	27.2	87.8	remove	at the teeth with metal fillings, not certainly bone of the skull
+ct-head-sagittal	17	skull	58.7	76.2	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	17	skull	62.2	96.9	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	17	paranasal-sinus	31.0	80.3	remove	air between the teeth on the streak artefact, not a sinus
+ct-head-sagittal	17	paranasal-sinus	43.1	0.4	remove	air at the top edge above the vertex, not a sinus
+ct-head-sagittal	18	skull	27.7	90.7	remove	at the teeth with metal fillings, not certainly bone of the skull
+ct-head-sagittal	18	skull	59.7	70.2	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	18	skull	61.2	87.1	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	18	paranasal-sinus	31.7	82.3	remove	air between the teeth on the streak artefact, not a sinus
+ct-head-sagittal	18	paranasal-sinus	33.9	81.9	remove	air between the teeth on the streak artefact, not a sinus
+ct-head-sagittal	19	skull	23.0	89.0	remove	at the teeth with metal fillings, not certainly bone of the skull
+ct-head-sagittal	19	skull	61.9	93.8	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	19	paranasal-sinus	69.8	0.4	remove	air at the top edge above the vertex, not a sinus
+ct-head-sagittal	20	skull	56.8	83.1	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	20	paranasal-sinus	21.3	58.4	remove	small air pocket at the front of the maxilla (anterior maxillary recess or nasal cavity), not certain
+ct-head-sagittal	20	paranasal-sinus	34.3	58.3	remove	air space with a turbinate (nasal cavity or medial maxillary sinus), not certain
+ct-head-sagittal	21	skull	56.5	83.1	remove	C1 anterior arch / C2 below the skull base, not skull
+ct-head-sagittal	21	paranasal-sinus	21.1	58.6	remove	small air pocket at the front of the maxilla (anterior maxillary recess or nasal cavity), not certain
+ct-head-sagittal	22	skull	56.2	83.0	remove	C1 anterior arch / C2 below the skull base, not skull
+ct-head-sagittal	23	skull	55.5	76.2	remove	C1 anterior arch / C2 below the skull base, not skull
+ct-head-sagittal	23	paranasal-sinus	8.7	65.1	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-sagittal	24	skull	55.5	75.8	remove	C1 anterior arch / C2 below the skull base, not skull
+ct-head-sagittal	24	paranasal-sinus	7.6	64.4	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-sagittal	25	skull	57.1	83.4	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	25	paranasal-sinus	24.7	76.2	remove	air in the oral cavity under the palate, not a sinus
+ct-head-sagittal	26	skull	58.3	93.1	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	27	skull	57.2	82.9	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	27	paranasal-sinus	7.0	64.4	remove	air in the nostril (nasal vestibule), not a paranasal sinus
+ct-head-sagittal	28	skull	56.0	76.0	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	28	skull	63.5	86.4	remove	C1/C2 cervical spine below the skull base, not skull
+ct-head-sagittal	29	skull	21.0	90.8	remove	on a lower tooth, not bone of the skull
+ct-head-sagittal	29	skull	56.9	74.2	remove	C1 lateral mass / C2 below the skull base, not skull
+ct-head-sagittal	29	skull	60.9	86.1	remove	C1 lateral mass / C2 below the skull base, not skull
+ct-head-sagittal	30	skull	23.6	90.3	remove	on a lower tooth, not bone of the skull
+ct-head-sagittal	30	skull	59.0	71.6	remove	C1 lateral mass / C2 below the skull base, not skull
+ct-head-sagittal	30	skull	61.0	86.7	remove	C1 lateral mass / C2 below the skull base, not skull
+ct-head-sagittal	31	skull	33.2	77.6	remove	at the teeth with metal fillings, not certainly bone of the skull
+ct-head-sagittal	31	skull	59.0	73.5	remove	C1 lateral mass / C2 below the skull base, not skull
+ct-head-sagittal	31	paranasal-sinus	51.4	57.4	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	32	skull	34.5	86.5	remove	at the teeth with metal fillings, not certainly bone of the skull
+ct-head-sagittal	32	paranasal-sinus	36.5	83.6	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	32	paranasal-sinus	51.8	57.5	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	33	skull	34.9	86.3	remove	on a metal-filled tooth, not bone of the skull
+ct-head-sagittal	33	skull	55.9	75.9	remove	small bone below the skull base (styloid or C1 transverse process), not certain
+ct-head-sagittal	33	paranasal-sinus	28.1	84.9	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	33	paranasal-sinus	30.0	83.6	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	34	skull	36.2	85.1	remove	at the teeth in the streak artefact, not certainly bone of the skull
+ct-head-sagittal	34	paranasal-sinus	32.9	83.9	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	34	paranasal-sinus	34.5	81.6	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	35	paranasal-sinus	55.0	61.2	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	36	paranasal-sinus	55.0	61.0	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	36	paranasal-sinus	61.4	68.6	remove	petrous/middle ear air in the temporal bone, not a paranasal sinus
+ct-head-sagittal	37	paranasal-sinus	61.7	68.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	38	paranasal-sinus	56.0	62.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	38	paranasal-sinus	57.1	58.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	39	paranasal-sinus	31.8	82.1	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	39	paranasal-sinus	55.7	62.6	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	39	paranasal-sinus	61.5	68.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	39	paranasal-sinus	62.8	57.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	40	skull	34.9	81.6	remove	on the horizontal streak artefact, no bone under the pin
+ct-head-sagittal	40	paranasal-sinus	55.7	62.7	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	40	paranasal-sinus	61.3	69.7	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	40	paranasal-sinus	64.4	58.0	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	40	paranasal-sinus	65.2	65.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	41	skull	50.4	12.6	remove	scalp soft tissue above the vault, no bone under the pin
+ct-head-sagittal	41	paranasal-sinus	64.4	61.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	41	paranasal-sinus	65.1	66.1	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	41	paranasal-sinus	67.9	59.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	41	paranasal-sinus	68.2	64.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	42	paranasal-sinus	55.5	63.4	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	42	paranasal-sinus	65.3	66.3	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	42	paranasal-sinus	68.2	59.4	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	42	paranasal-sinus	68.3	64.3	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	43	skull	35.8	81.6	remove	on the horizontal streak artefact, no bone under the pin
+ct-head-sagittal	43	paranasal-sinus	31.6	82.3	remove	on the horizontal streak artefact, not a sinus
+ct-head-sagittal	43	paranasal-sinus	55.7	63.7	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	43	paranasal-sinus	63.2	61.2	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	43	paranasal-sinus	66.1	62.5	remove	mastoid air cells, not a paranasal sinus
+ct-head-sagittal	44	skull	36.1	81.4	remove	on the horizontal streak artefact, no bone under the pin
+ct-head-sagittal	44	skull	40.3	60.0	remove	faint band in the cheek soft tissue, not certainly bone
+ct-head-sagittal	44	paranasal-sinus	55.7	63.7	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	45	skull	35.5	81.9	remove	on the horizontal streak artefact, no bone under the pin
+ct-head-sagittal	45	paranasal-sinus	55.5	64.0	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	46	skull	59.3	38.0	remove	faint partial-volume smudge at the lateral edge of the skull, not certainly bone
+ct-head-sagittal	46	skull	62.0	39.4	remove	faint partial-volume smudge at the lateral edge of the skull, not certainly bone
+ct-head-sagittal	46	skull	62.8	37.0	remove	faint partial-volume smudge at the lateral edge of the skull, not certainly bone
+ct-head-sagittal	46	paranasal-sinus	56.0	64.0	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	46	paranasal-sinus	59.1	60.0	remove	external ear canal, not a paranasal sinus
+ct-head-sagittal	47	paranasal-sinus	58.6	60.0	remove	auricle / external ear canal air on a far-lateral slice, not a paranasal sinus
+ct-head-sagittal	48	paranasal-sinus	58.3	60.4	remove	auricle / external ear canal air on a far-lateral slice, not a paranasal sinus
+ct-thorax-axial	1	sternum	49.1	52.7	remove	on the T1 vertebral body, not sternum
+ct-thorax-axial	1	rib	18.5	52.1	remove	on the scapula at the shoulder, not a rib
+ct-thorax-axial	1	rib	24.4	70.3	remove	on the scapula body, not a rib
+ct-thorax-axial	1	rib	29.6	44.3	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	1	rib	65.7	41.2	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	2	rib	25.9	71.3	remove	on the scapula body, not a rib
+ct-thorax-axial	2	rib	33.5	41.7	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	2	rib	66.4	41.0	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	2	rib	87.2	54.4	remove	on the humeral head / glenoid at the shoulder, not a rib
+ct-thorax-axial	3	sternum	47.0	56.7	remove	on the vertebral body, not sternum
+ct-thorax-axial	3	rib	35.1	40.8	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	3	rib	64.6	40.0	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	4	sternum	57.8	38.6	remove	on the medial end of the clavicle, not sternum
+ct-thorax-axial	4	rib	35.8	40.5	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	4	rib	63.3	39.3	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	5	sternum	54.9	38.9	remove	on the medial end of the clavicle, not sternum
+ct-thorax-axial	5	rib	37.0	40.3	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	5	rib	61.8	39.0	remove	anterior oval bone above the lung apex: clavicle, not a rib
+ct-thorax-axial	5	vertebral-canal	48.2	57.3	remove	second canal component on the back of the vertebral body; the canal is pin 10, this one is not certain
+ct-thorax-axial	6	sternum	55.6	38.5	remove	on the medial end of the clavicle (two paramedian ovals, no midline bone), not sternum
+ct-thorax-axial	7	sternum	57.1	36.8	remove	paramedian bone at the sternoclavicular level: clavicle head or manubrium, not certain
+ct-thorax-axial	7	rib	37.4	42.2	remove	paramedian bone at the sternoclavicular level: clavicle or first rib, not certain
+ct-thorax-axial	9	rib	83.3	64.4	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	10	rib	28.0	76.1	remove	thin scapular blade behind the rib cage, not a rib
+ct-thorax-axial	10	rib	70.9	75.3	remove	thin scapular blade behind the rib cage, not a rib
+ct-thorax-axial	10	vertebral-canal	47.2	59.1	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-axial	11	thoracic-vertebra	57.8	69.3	remove	on the rib neck / transverse process lateral to the vertebra; which bone is not certain
+ct-thorax-axial	11	rib	82.2	66.4	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	12	rib	80.9	67.6	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	12	vertebral-canal	48.6	59.4	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-axial	13	rib	16.7	66.3	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	13	rib	80.4	68.6	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	14	rib	17.2	67.7	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	14	rib	80.3	69.1	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	14	vertebral-canal	47.3	61.2	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-axial	15	rib	17.5	68.6	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	15	rib	80.0	69.9	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	16	rib	79.7	70.7	remove	thick lateral border of the scapula outside the rib cage, not a rib
+ct-thorax-axial	16	vertebral-canal	49.2	60.7	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-axial	17	rib	18.1	70.4	remove	lateral border / blade of the scapula outside the rib cage, not a rib
+ct-thorax-axial	17	rib	79.2	71.2	remove	lateral border / blade of the scapula outside the rib cage, not a rib
+ct-thorax-axial	18	rib	18.3	70.9	remove	lateral border / blade of the scapula outside the rib cage, not a rib
+ct-thorax-axial	18	rib	78.8	71.7	remove	lateral border / blade of the scapula outside the rib cage, not a rib
+ct-thorax-axial	19	rib	19.5	73.0	remove	lateral border / blade of the scapula outside the rib cage, not a rib
+ct-thorax-axial	19	rib	75.7	75.0	remove	lateral border / blade of the scapula outside the rib cage, not a rib
+ct-thorax-axial	20	rib	20.5	74.3	remove	lateral border / blade of the scapula outside the rib cage, not a rib
+ct-thorax-axial	20	rib	76.7	74.0	remove	lateral border / blade of the scapula outside the rib cage, not a rib
+ct-thorax-axial	21	rib	19.7	72.5	remove	inferior part of the scapula outside the rib cage, not a rib
+ct-thorax-axial	21	rib	76.4	74.2	remove	inferior part of the scapula outside the rib cage, not a rib
+ct-thorax-axial	22	thoracic-vertebra	55.0	71.9	remove	on the rib neck / transverse process lateral to the vertebra; which bone is not certain
+ct-thorax-axial	22	rib	23.0	76.5	remove	inferior part of the scapula outside the rib cage, not a rib
+ct-thorax-axial	23	rib	21.4	74.4	remove	inferior part of the scapula outside the rib cage, not a rib
+ct-thorax-axial	23	vertebral-canal	51.0	63.5	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-axial	24	rib	24.2	76.9	remove	inferior part of the scapula outside the rib cage, not a rib
+ct-thorax-axial	27	thoracic-vertebra	54.1	71.0	remove	on the rib neck / transverse process lateral to the vertebra; which bone is not certain
+ct-thorax-axial	31	vertebral-canal	50.4	62.5	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-axial	31	vertebral-canal	55.7	70.1	remove	on the rib neck / transverse process lateral to the vertebra, not the vertebral canal
+ct-thorax-axial	32	thoracic-vertebra	54.7	70.4	remove	on the rib neck / transverse process lateral to the vertebra; which bone is not certain
+ct-thorax-axial	38	rib	38.6	62.0	remove	on soft tissue with no bone, not a rib
+ct-thorax-axial	39	rib	68.5	63.7	remove	on soft tissue with no bone, not a rib
+ct-thorax-axial	45	lung	58.0	26.4	remove	on bowel gas below the diaphragm, not lung
+ct-thorax-axial	45	rib	67.5	63.6	remove	on soft tissue with no bone, not a rib
+ct-thorax-axial	46	lung	57.2	26.1	remove	on bowel gas below the diaphragm, not lung
+ct-thorax-axial	46	rib	59.6	60.8	remove	on soft tissue with no bone, not a rib
+ct-thorax-axial	46	rib	61.0	62.6	remove	on soft tissue with no bone, not a rib
+ct-thorax-axial	47	lung	39.9	34.4	remove	on bowel gas below the diaphragm, not lung
+ct-thorax-axial	47	lung	57.0	25.9	remove	on bowel gas below the diaphragm, not lung
+ct-thorax-axial	47	rib	34.7	61.5	remove	on soft tissue with no bone, not a rib
+ct-thorax-axial	48	lung	39.8	32.5	remove	on bowel gas below the diaphragm, not lung
+ct-thorax-axial	48	lung	57.9	25.6	remove	on bowel gas below the diaphragm, not lung
+ct-thorax-axial	48	rib	47.1	65.3	remove	on the side of the vertebra at the pedicle / rib head junction; which bone is not certain
+ct-thorax-coronal	1	sternum	47.1	72.3	remove	small bright nub at the medial end of a paramedian costal cartilage, no midline sternum here, not certain sternum
+ct-thorax-coronal	2	lung	58.4	97.8	remove	air in the epigastrium between the costal margins below the sternum, bowel gas not lung
+ct-thorax-coronal	2	sternum	45.6	68.9	remove	on a calcified costal cartilage strip lateral to the sternum, not certain sternum
+ct-thorax-coronal	2	sternum	47.0	68.0	remove	small fragment at the sternocostal junction separate from the sternum, not certain sternum
+ct-thorax-coronal	2	sternum	56.0	65.3	remove	small fragment at the sternocostal junction where the costal cartilage meets, not certain sternum
+ct-thorax-coronal	3	lung	56.8	96.0	remove	air in the epigastrium between the costal margins below the sternum, bowel gas not lung
+ct-thorax-coronal	4	lung	55.8	96.0	remove	air in the epigastrium between the costal margins below the sternum, bowel gas not lung
+ct-thorax-coronal	5	lung	55.3	96.0	remove	air in the epigastrium below the diaphragm dome, bowel gas not lung
+ct-thorax-coronal	5	sternum	56.2	46.9	remove	separate bright ossicle at the medial end of a costal cartilage beside the sternum, not certain sternum
+ct-thorax-coronal	6	lung	55.1	96.0	remove	air in the epigastrium below the diaphragm dome, bowel gas not lung
+ct-thorax-coronal	12	sternum	57.0	10.7	remove	small bright dot in soft tissue above and lateral to the sternum, separate from it, not sternum
+ct-thorax-coronal	13	sternum	42.1	17.9	remove	lateral lobule at the manubrium edge at the first costal cartilage junction, sternum vs first rib not certain
+ct-thorax-coronal	13	sternum	57.0	12.3	remove	on the medial clavicle head above the manubrium, not sternum
+ct-thorax-coronal	13	sternum	58.3	8.1	remove	on the medial clavicle head above the manubrium, not sternum
+ct-thorax-coronal	13	rib	59.8	16.1	remove	lateral lobule at the manubrium edge at the first costal cartilage junction, sternum vs first rib not certain
+ct-thorax-coronal	14	sternum	39.9	16.8	remove	lateral lobule at the manubrium edge at the first costal cartilage junction, sternum vs first rib not certain
+ct-thorax-coronal	14	sternum	56.6	11.9	remove	on the medial clavicle head above the manubrium, not sternum
+ct-thorax-coronal	14	rib	61.0	6.8	remove	on the medial clavicle running up from the sternoclavicular joint, not a rib
+ct-thorax-coronal	14	rib	61.9	17.2	remove	lateral lobule at the manubrium edge at the first costal cartilage junction, sternum vs first rib not certain
+ct-thorax-coronal	15	sternum	55.9	11.8	remove	on the medial end of the clavicle above the manubrium, not sternum
+ct-thorax-coronal	15	rib	38.0	6.5	remove	on the medial clavicle running up from the sternoclavicular joint, not a rib
+ct-thorax-coronal	15	rib	63.1	4.2	remove	on the medial clavicle running up from the sternoclavicular joint, not a rib
+ct-thorax-coronal	16	sternum	42.5	20.7	remove	small bone fragment behind the manubrium at the lung apex, sternum vs first costal cartilage not certain
+ct-thorax-coronal	16	sternum	47.8	17.0	remove	small bone fragment behind the manubrium, no coherent sternum outline, not certain sternum
+ct-thorax-coronal	16	sternum	53.5	17.4	remove	faint speck in soft tissue behind the manubrium, not certain bone
+ct-thorax-coronal	16	sternum	55.6	12.0	remove	on the medial clavicle head, not sternum
+ct-thorax-coronal	16	sternum	58.0	19.1	remove	faint speck in soft tissue below the clavicle head, not certain bone
+ct-thorax-coronal	16	sternum	58.7	18.2	remove	faint speck in soft tissue below the clavicle head, not certain bone
+ct-thorax-coronal	16	rib	36.1	5.5	remove	on the clavicle running up from the sternoclavicular joint, not a rib
+ct-thorax-coronal	16	rib	65.2	2.9	remove	on the clavicle running up from the sternoclavicular joint, not a rib
+ct-thorax-coronal	17	sternum	57.8	10.5	remove	oval bone above the right lung apex behind the manubrium level, first rib or clavicle, not sternum
+ct-thorax-coronal	17	rib	35.5	5.6	remove	on the clavicle shaft at the top of the image, not a rib
+ct-thorax-coronal	17	rib	63.4	3.8	remove	on the clavicle shaft at the top of the image, not a rib
+ct-thorax-coronal	18	sternum	56.2	12.8	remove	small oval bone above the right lung apex, sternum not present at this depth, not certain
+ct-thorax-coronal	18	rib	31.9	1.2	remove	on the clavicle shaft at the top edge, not a rib
+ct-thorax-coronal	18	rib	34.4	5.1	remove	on the clavicle shaft at the top edge, not a rib
+ct-thorax-coronal	18	rib	66.4	1.7	remove	on the clavicle at the top edge, not a rib
+ct-thorax-coronal	19	rib	29.6	1.2	remove	bone cut by the top edge above the first rib, continuation of the clavicle from slice 18, not certain rib
+ct-thorax-coronal	20	rib	30.0	1.1	remove	bone cut by the top edge above the first rib, continuation of the clavicle, not certain rib
+ct-thorax-coronal	25	sternum	47.9	0.1	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	25	sternum	48.8	1.2	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	25	rib	17.2	1.1	remove	outside the rib cage beside the humeral head and scapula at the shoulder, not a rib
+ct-thorax-coronal	26	sternum	46.2	0.1	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	26	sternum	47.0	1.4	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	26	sternum	48.3	0.1	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	26	sternum	49.2	4.1	remove	on an upper vertebral body, not the sternum
+ct-thorax-coronal	26	rib	17.7	1.1	remove	outside the rib cage beside the humeral head and scapula at the shoulder, not a rib
+ct-thorax-coronal	27	sternum	45.7	0.1	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	27	sternum	46.1	1.1	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	27	sternum	47.2	4.6	remove	on an upper vertebral body, not the sternum
+ct-thorax-coronal	27	sternum	50.5	5.7	remove	on an upper vertebral body, not the sternum
+ct-thorax-coronal	27	sternum	51.6	1.2	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	27	rib	18.4	1.1	remove	outside the rib cage beside the humeral head and scapula at the shoulder, not a rib
+ct-thorax-coronal	27	vertebral-canal	48.7	7.0	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-coronal	28	sternum	45.7	0.1	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	28	sternum	49.0	4.3	remove	on an upper vertebral body, not the sternum
+ct-thorax-coronal	28	sternum	51.1	0.1	remove	top edge of a posterior plane, on an upper vertebral body, not the sternum
+ct-thorax-coronal	28	thoracic-vertebra	45.3	2.4	remove	small bone fragment at the upper lateral corner of the vertebral body, likely a rib head, not certain
+ct-thorax-coronal	28	rib	14.9	1.1	remove	outside the rib cage on the humeral head and scapula at the shoulder, not a rib
+ct-thorax-coronal	28	vertebral-canal	49.1	7.5	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-coronal	29	sternum	49.1	4.9	remove	on an upper vertebral body at the top of a posterior plane, not the sternum
+ct-thorax-coronal	29	vertebral-canal	48.7	15.5	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-coronal	30	sternum	50.3	4.9	remove	on an upper vertebral body at the top of a posterior plane, not the sternum
+ct-thorax-coronal	30	vertebral-canal	46.9	8.3	remove	on vertebral body bone next to a disc, not the vertebral canal
+ct-thorax-coronal	30	vertebral-canal	48.1	0.9	remove	on vertebral body bone at the top edge, not the vertebral canal
+ct-thorax-coronal	31	sternum	46.7	4.9	remove	on an upper vertebral body at the top of a posterior plane, not the sternum
+ct-thorax-coronal	31	vertebral-canal	47.2	0.9	remove	on vertebral body bone at the top edge, not the vertebral canal
+ct-thorax-coronal	31	vertebral-canal	47.7	8.0	remove	on an intervertebral disc between vertebral bodies, not the vertebral canal
+ct-thorax-coronal	32	vertebral-canal	48.4	7.6	remove	on a vertebral endplate and disc, not the vertebral canal
+ct-thorax-coronal	32	vertebral-canal	49.1	23.5	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-coronal	33	vertebral-canal	48.4	32.4	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-coronal	34	vertebral-canal	49.1	41.5	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-coronal	36	vertebral-canal	47.1	40.9	remove	inside the vertebral body (bone), not the vertebral canal
+ct-thorax-coronal	38	rib	80.7	23.5	remove	on the scapula lateral border outside the rib cage, not a rib
+ct-thorax-coronal	38	vertebral-canal	49.3	97.7	remove	at the bottom edge on soft tissue beside a bone fragment, canal not identifiable
+ct-thorax-coronal	39	thoracic-vertebra	54.9	63.8	remove	at the costotransverse junction lateral to the spine, vertebra versus rib neck not certain
+ct-thorax-coronal	39	rib	16.5	27.0	remove	on the scapula lateral border (thick blob with thin blade) outside the rib cage, not a rib
+ct-thorax-coronal	39	rib	80.7	23.8	remove	on the scapula lateral border (thick blob with thin blade) outside the rib cage, not a rib
+ct-thorax-coronal	40	thoracic-vertebra	44.7	32.4	remove	lateral to the spine on a transverse process or rib neck, not certain
+ct-thorax-coronal	40	thoracic-vertebra	56.1	23.4	remove	oblique band lateral to the spine, likely a rib neck, not certain vertebra
+ct-thorax-coronal	40	rib	79.8	25.0	remove	on the scapula lateral border (thick blob with thin blade) outside the rib cage, not a rib
+ct-thorax-coronal	40	vertebral-canal	46.8	41.7	remove	on the edge of a lamina off the midline, not clearly within the vertebral canal
+ct-thorax-coronal	41	thoracic-vertebra	42.7	32.5	remove	lateral to the spine at the costotransverse region, vertebra versus rib neck not certain
+ct-thorax-coronal	41	rib	79.8	30.1	remove	on the scapula outside the rib cage, not a rib
+ct-thorax-coronal	41	vertebral-canal	48.8	47.1	remove	beside a posterior element in a posterior plane, not clearly within the vertebral canal
+ct-thorax-coronal	42	rib	18.2	35.8	remove	on the scapula outside the rib cage, not a rib
+ct-thorax-coronal	42	rib	78.9	32.0	remove	on the scapula outside the rib cage, not a rib
+ct-thorax-coronal	42	vertebral-canal	48.4	41.4	remove	in a gap between posterior elements, not clearly within the vertebral canal
+ct-thorax-coronal	43	rib	19.3	37.3	remove	on the scapula outside the rib cage, not a rib
+ct-thorax-coronal	43	vertebral-canal	51.2	52.3	remove	inside bone of the posterior elements, not the vertebral canal
+ct-thorax-coronal	43	vertebral-canal	54.5	67.2	remove	inside bone lateral to the midline, not the vertebral canal
+ct-thorax-coronal	44	thoracic-vertebra	42.6	66.5	remove	elongated bone lateral to the spine, likely a posterior rib, not certain vertebra
+ct-thorax-coronal	45	thoracic-vertebra	40.3	66.5	remove	on the medial end of a posterior rib next to the transverse process, not the vertebra
+ct-thorax-coronal	46	rib	23.4	42.6	remove	on the scapula (inferior blade) outside the rib cage, not a rib
+ct-thorax-coronal	46	rib	26.7	29.1	remove	on the scapula (thin blade) outside the rib cage, not a rib
+ct-thorax-coronal	46	rib	71.0	27.5	remove	on the scapula (thin blade) outside the rib cage, not a rib
+ct-thorax-coronal	46	rib	73.3	39.2	remove	on the scapula (inferior blade) outside the rib cage, not a rib
+ct-thorax-coronal	47	rib	25.0	47.2	remove	on the scapula inferior angle outside the rib cage, not a rib
+ct-thorax-coronal	47	rib	26.1	35.2	remove	on the scapula inferior angle outside the rib cage, not a rib
+ct-thorax-coronal	47	rib	71.3	36.7	remove	on the scapula inferior angle outside the rib cage, not a rib
+ct-thorax-coronal	47	rib	72.4	44.4	remove	on the scapula inferior angle outside the rib cage, not a rib
+ct-thorax-coronal	48	rib	26.0	47.9	remove	tiny bone speck at the scapula tip position in the back muscles, not a rib
+ct-thorax-sagittal	2	rib	63.5	83.8	remove	on soft tissue of the arm, no bone
+ct-thorax-sagittal	3	rib	67.3	83.8	remove	on soft tissue of the arm, no bone
+ct-thorax-sagittal	4	rib	68.2	84.1	remove	on soft tissue of the arm, no bone
+ct-thorax-sagittal	5	rib	63.8	75.0	remove	on soft tissue of the shoulder, no bone
+ct-thorax-sagittal	5	rib	64.1	0.2	remove	at the top edge on the scapula, not a rib
+ct-thorax-sagittal	5	rib	68.1	75.6	remove	on soft tissue of the shoulder, no bone
+ct-thorax-sagittal	5	rib	68.7	86.0	remove	on soft tissue of the shoulder, no bone
+ct-thorax-sagittal	6	rib	56.7	1.2	remove	on the scapula (Y view), not a rib
+ct-thorax-sagittal	6	rib	64.4	1.2	remove	on the scapula (Y view), not a rib
+ct-thorax-sagittal	6	rib	67.2	90.9	remove	on soft tissue of the shoulder, no bone
+ct-thorax-sagittal	6	rib	68.6	84.0	remove	on soft tissue of the shoulder, no bone
+ct-thorax-sagittal	7	rib	52.3	0.9	remove	on the scapula (Y view), not a rib
+ct-thorax-sagittal	7	rib	67.3	1.2	remove	on the scapula (Y view), not a rib
+ct-thorax-sagittal	7	rib	70.7	24.1	remove	on the scapula blade, not a rib
+ct-thorax-sagittal	7	rib	75.7	27.6	remove	on the scapula blade, not a rib
+ct-thorax-sagittal	8	rib	48.9	1.1	remove	on the scapula (Y view), not a rib
+ct-thorax-sagittal	8	rib	69.8	1.6	remove	on the scapula (Y view), not a rib
+ct-thorax-sagittal	8	rib	75.3	27.3	remove	on the scapula blade, not a rib
+ct-thorax-sagittal	8	rib	80.9	36.5	remove	on the scapula blade, not a rib
+ct-thorax-sagittal	9	rib	83.4	38.3	remove	on the thickened lateral border of the scapula blade, not a rib
+ct-thorax-sagittal	17	lung	29.3	98.4	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	17	rib	36.4	5.3	remove	on the clavicle (anterior oval bone above the lung apex), not a rib
+ct-thorax-sagittal	18	lung	21.2	98.3	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	18	rib	35.6	8.3	remove	on the clavicle (anterior oval bone above the first rib), not a rib
+ct-thorax-sagittal	19	lung	20.9	98.3	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	19	rib	32.8	10.1	remove	on the clavicle (anterior ring-shaped bone above the first rib), not a rib
+ct-thorax-sagittal	20	lung	21.6	98.3	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	20	sternum	29.6	17.8	remove	small bone below the clavicle head, likely first costal cartilage; sternum not certain
+ct-thorax-sagittal	20	thoracic-vertebra	80.2	23.8	remove	lateral to the vertebral bodies, on the rib neck / transverse process region, vertebra not certain
+ct-thorax-sagittal	20	thoracic-vertebra	80.2	35.2	remove	lateral to the vertebral bodies, on the rib neck / transverse process region, vertebra not certain
+ct-thorax-sagittal	20	thoracic-vertebra	81.0	32.4	remove	lateral to the vertebral bodies, on the rib neck / transverse process region, vertebra not certain
+ct-thorax-sagittal	21	thoracic-vertebra	67.1	7.2	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	21	thoracic-vertebra	72.5	16.0	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	21	thoracic-vertebra	80.1	35.5	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	21	vertebral-canal	70.1	6.2	remove	on bone in a parasagittal plane lateral to the vertebral bodies, no canal here
+ct-thorax-sagittal	21	vertebral-canal	81.1	36.6	remove	on bone in a parasagittal plane lateral to the vertebral bodies, no canal here
+ct-thorax-sagittal	22	sternum	10.9	67.4	remove	on a costal cartilage lateral to the sternal body, sternum not certain
+ct-thorax-sagittal	22	sternum	12.7	59.1	remove	on a costal cartilage lateral to the sternal body, sternum not certain
+ct-thorax-sagittal	22	sternum	15.6	47.7	remove	on a costal cartilage lateral to the sternal body, sternum not certain
+ct-thorax-sagittal	22	thoracic-vertebra	63.3	8.9	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	22	thoracic-vertebra	67.3	16.8	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	22	thoracic-vertebra	75.8	35.8	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	22	rib	74.3	99.7	remove	on a sliver of bone at the bottom edge, rib not certain
+ct-thorax-sagittal	22	vertebral-canal	73.5	16.5	remove	in a parasagittal plane lateral to the vertebral bodies, no canal here
+ct-thorax-sagittal	22	vertebral-canal	80.9	36.7	remove	in a parasagittal plane lateral to the vertebral bodies, no canal here
+ct-thorax-sagittal	23	sternum	21.9	37.9	remove	at the second costal cartilage junction on the lateral sternal edge, sternum not certain
+ct-thorax-sagittal	23	sternum	51.8	0.1	remove	at the top edge on an upper vertebral body, not sternum
+ct-thorax-sagittal	23	sternum	52.8	1.4	remove	at the top edge on an upper vertebral body, not sternum
+ct-thorax-sagittal	23	sternum	61.3	5.0	remove	inside an upper vertebral body, not sternum
+ct-thorax-sagittal	23	rib	63.7	99.7	remove	on the vertebral column at the bottom edge, not a rib
+ct-thorax-sagittal	23	rib	75.1	99.4	remove	on the vertebral column at the bottom edge, not a rib
+ct-thorax-sagittal	23	rib	81.9	99.6	remove	on the vertebral column at the bottom edge, not a rib
+ct-thorax-sagittal	23	vertebral-canal	60.9	8.1	remove	on the disc space between two vertebral bodies, not the vertebral canal
+ct-thorax-sagittal	23	vertebral-canal	77.5	41.7	remove	in an intervertebral foramen on a parasagittal plane through the pedicles, not the canal
+ct-thorax-sagittal	24	sternum	50.3	0.1	remove	at the top edge on an upper vertebral body, not sternum
+ct-thorax-sagittal	24	sternum	51.9	1.7	remove	at the top edge on an upper vertebral body, not sternum
+ct-thorax-sagittal	24	sternum	53.7	6.1	remove	on the anterior edge of an upper vertebral body, not sternum
+ct-thorax-sagittal	24	sternum	58.1	5.2	remove	inside an upper vertebral body, not sternum
+ct-thorax-sagittal	25	lung	16.6	98.7	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	25	sternum	51.8	0.1	remove	at the top edge on an upper vertebral body, not sternum
+ct-thorax-sagittal	25	sternum	53.2	1.4	remove	at the top edge on an upper vertebral body, not sternum
+ct-thorax-sagittal	25	sternum	59.4	4.9	remove	inside an upper vertebral body, not sternum
+ct-thorax-sagittal	26	lung	17.4	96.8	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	26	sternum	58.6	4.0	remove	at the top edge on a posterior bone (rib head / vertebra), not sternum
+ct-thorax-sagittal	26	thoracic-vertebra	74.4	35.9	remove	on a rib head beside the upper vertebrae, vertebra not certain
+ct-thorax-sagittal	26	vertebral-canal	74.6	97.7	remove	on a thin gap between bones at the bottom edge, canal not certain on this plane
+ct-thorax-sagittal	26	vertebral-canal	77.6	52.3	remove	on the endplate / disc junction at the top of a vertebral body, not the canal
+ct-thorax-sagittal	27	sternum	21.7	38.2	remove	small separate bone at the sternal angle, likely the second costal cartilage; sternum not certain
+ct-thorax-sagittal	27	sternum	34.2	9.9	remove	on the clavicle head above the manubrium, not sternum
+ct-thorax-sagittal	27	thoracic-vertebra	76.4	62.8	remove	on a rib head lateral to the vertebral bodies, vertebra not certain
+ct-thorax-sagittal	27	thoracic-vertebra	79.9	72.6	remove	on the costovertebral region at the top of the visible bodies, vertebra not certain
+ct-thorax-sagittal	27	vertebral-canal	75.5	71.9	remove	on the costovertebral joint gap, not the vertebral canal
+ct-thorax-sagittal	27	vertebral-canal	80.7	43.8	remove	on bone in a parasagittal plane lateral to the vertebral bodies, no canal here
+ct-thorax-sagittal	28	sternum	9.2	67.1	remove	on a costal cartilage lateral to the sternal body, sternum not certain
+ct-thorax-sagittal	28	sternum	11.5	57.1	remove	on a costal cartilage lateral to the sternal body, sternum not certain
+ct-thorax-sagittal	28	sternum	15.0	46.2	remove	on a costal cartilage lateral to the sternal body, sternum not certain
+ct-thorax-sagittal	28	sternum	29.9	12.0	remove	on the clavicle head above the manubrium, not sternum
+ct-thorax-sagittal	28	sternum	33.8	7.1	remove	on the clavicle head above the manubrium, not sternum
+ct-thorax-sagittal	28	thoracic-vertebra	81.5	32.7	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	28	thoracic-vertebra	81.9	52.5	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	28	thoracic-vertebra	86.0	66.5	remove	lateral to the vertebral bodies, on the rib head / transverse process, vertebra not certain
+ct-thorax-sagittal	28	vertebral-canal	79.6	63.7	remove	on bone in a parasagittal plane lateral to the vertebral bodies, no canal here
+ct-thorax-sagittal	28	vertebral-canal	82.2	67.2	remove	on bone in a parasagittal plane lateral to the vertebral bodies, no canal here
+ct-thorax-sagittal	29	sternum	8.8	67.0	remove	on a costal cartilage, no sternum on this lateral plane
+ct-thorax-sagittal	29	sternum	29.4	15.9	remove	small bone below the clavicle, likely first costal cartilage; sternum not certain
+ct-thorax-sagittal	29	sternum	31.1	6.9	remove	on the clavicle, not sternum
+ct-thorax-sagittal	29	sternum	34.1	19.4	remove	small bone below the clavicle, likely first costal cartilage; sternum not certain
+ct-thorax-sagittal	29	sternum	34.6	18.2	remove	small bone below the clavicle, likely first costal cartilage; sternum not certain
+ct-thorax-sagittal	29	sternum	35.3	12.3	remove	on the clavicle, not sternum
+ct-thorax-sagittal	29	thoracic-vertebra	82.7	62.6	remove	lateral to the vertebral bodies, on the rib neck / transverse process region, vertebra not certain
+ct-thorax-sagittal	29	thoracic-vertebra	82.9	74.1	remove	lateral to the vertebral bodies, on the rib neck / transverse process region, vertebra not certain
+ct-thorax-sagittal	29	thoracic-vertebra	83.7	52.6	remove	lateral to the vertebral bodies, on the rib neck / transverse process region, vertebra not certain
+ct-thorax-sagittal	30	lung	14.3	96.0	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	30	rib	34.2	10.2	remove	on the clavicle (anterior ring-shaped bone above the first rib), not a rib
+ct-thorax-sagittal	31	lung	15.0	96.0	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	31	rib	33.9	7.7	remove	on the clavicle (anterior oval bone above the first rib), not a rib
+ct-thorax-sagittal	32	lung	17.5	96.0	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	32	rib	35.2	5.0	remove	on the clavicle (anterior oval bone above the first rib), not a rib
+ct-thorax-sagittal	33	lung	19.3	94.3	remove	in bowel gas below the diaphragm, not lung
+ct-thorax-sagittal	35	rib	86.7	17.0	remove	on the scapula blade behind the rib cage, not a rib
+ct-thorax-sagittal	36	rib	90.2	44.9	remove	on the thickened lateral border of the scapula, not a rib
+ct-thorax-sagittal	37	rib	88.0	39.6	remove	on the thickened lateral border of the scapula, not a rib
+ct-thorax-sagittal	38	rib	85.7	37.6	remove	on the thickened lateral border of the scapula, not a rib
+ct-thorax-sagittal	39	rib	82.4	33.7	remove	on the thickened lateral border of the scapula, not a rib
+ct-thorax-sagittal	40	rib	80.4	33.3	remove	on the thickened lateral border of the scapula, not a rib
+ct-thorax-sagittal	41	rib	75.8	23.8	remove	on the scapula (lateral border / neck) at the shoulder, not a rib
+ct-thorax-sagittal	42	rib	54.8	2.2	remove	at the top edge on the shoulder bones (humerus / scapula), not a rib
+ct-thorax-sagittal	42	rib	68.7	85.8	remove	on soft tissue of the axilla, no bone
+ct-thorax-sagittal	42	rib	69.6	16.8	remove	on the scapula (lateral border / neck) at the shoulder, not a rib
+ct-thorax-sagittal	42	rib	73.5	89.7	remove	on soft tissue of the axilla, no bone
+ct-thorax-sagittal	43	rib	45.6	2.2	remove	on the humeral head at the top edge, not a rib
+ct-thorax-sagittal	43	rib	54.8	2.2	remove	on the glenoid / humeral head at the top edge, not a rib
+ct-thorax-sagittal	43	rib	69.9	81.8	remove	on soft tissue of the arm, no bone
+ct-thorax-sagittal	43	rib	71.4	90.4	remove	on soft tissue of the arm, no bone
+ct-thorax-sagittal	44	rib	43.4	2.2	remove	on the humeral head at the top edge, not a rib
+ct-thorax-sagittal	44	rib	51.6	2.2	remove	on the humeral head at the top edge, not a rib
+ct-thorax-sagittal	44	rib	63.8	86.8	remove	on soft tissue of the arm, no bone
+ct-thorax-sagittal	44	rib	76.1	67.2	remove	on soft tissue of the arm, no bone
+ct-thorax-sagittal	45	rib	41.4	2.2	remove	on the humerus at the top edge, not a rib
+ct-thorax-sagittal	45	rib	53.7	2.2	remove	on the humerus at the top edge, not a rib
+ct-thorax-sagittal	45	rib	77.9	64.2	remove	on soft tissue of the arm, no bone
+ct-thorax-sagittal	46	rib	40.5	2.0	remove	on the humerus at the top edge, not a rib
+ct-thorax-sagittal	46	rib	52.0	2.2	remove	on the humerus at the top edge, not a rib
+ct-thorax-sagittal	46	rib	58.6	2.2	remove	on the humerus at the top edge, not a rib
+ct-thorax-sagittal	47	rib	42.5	2.2	remove	on the humerus at the top edge, not a rib
+ct-thorax-sagittal	48	rib	48.6	2.0	remove	on arm bone at the top edge (humerus), not a rib
+# keep	ct-head-axial	6	skull	66.4	34.9	on the frontal bone of the vault
+# keep	ct-head-axial	14	skull	52.0	22.5	frontal sinus septum, part of the frontal bone
+# keep	ct-head-axial	17	skull	54.1	22.5	frontal sinus septum, part of the frontal bone
+# keep	ct-head-axial	22	skull	46.7	92.8	occipital bone
+# keep	ct-head-axial	23	skull	19.6	76.9	lateral skull vault
+# keep	ct-head-axial	26	skull	22.4	28.0	zygomatic process of the frontal bone at the lateral orbit
+# keep	ct-head-axial	27	skull	22.0	51.2	petrous temporal bone
+# keep	ct-head-coronal	6	skull	40.3	34.3	frontal bone beside the frontal sinus
+# keep	ct-head-coronal	9	skull	52.8	21.1	frontal bone of the vault
+# keep	ct-head-coronal	10	skull	26.5	36.2	frontal bone at the lateral orbital rim
+# keep	ct-head-coronal	14	skull	36.8	89.9	mandible below the teeth: skull (mandible)
+# keep	ct-head-coronal	22	skull	73.4	93.3	marrow of the tip of the mandibular ramus inside its cortex: skull (mandible)
+# keep	ct-head-coronal	22	skull	75.3	58.5	temporal bone at the skull base
+# keep	ct-head-coronal	25	skull	77.6	66.2	head of the mandible below the skull base: skull (mandible)
+# keep	ct-head-coronal	44	skull	70.5	34.0	parietal bone of the vault
+# keep	ct-head-sagittal	8	skull	77.7	38.9	posterior skull vault
+# keep	ct-head-sagittal	9	skull	38.8	27.5	frontal bone of the vault
+# keep	ct-head-sagittal	10	skull	81.1	50.3	occipital bone
+# keep	ct-head-sagittal	11	skull	27.4	32.9	frontal bone above the orbit
+# keep	ct-head-sagittal	22	skull	45.2	52.1	sphenoid bone behind the sphenoid sinus
+# keep	ct-head-sagittal	29	paranasal-sinus	23.8	70.7	maxillary sinus
+# keep	ct-head-sagittal	31	skull	31.0	41.5	thin orbital roof of the frontal bone
+# keep	ct-head-sagittal	32	skull	55.4	60.4	skull base (petrous temporal / sphenoid)
+# keep	ct-head-sagittal	34	skull	25.8	26.1	posterior wall of the frontal sinus, frontal bone
+# keep	ct-head-sagittal	40	skull	29.4	32.4	frontal bone above the orbit
+# keep	ct-head-sagittal	41	skull	80.7	46.6	occipital bone
+# keep	ct-head-sagittal	42	skull	64.0	63.7	bony septum of the mastoid, temporal bone
+# keep	ct-head-sagittal	45	skull	65.4	37.6	skull vault cut tangentially on a lateral slice
+# keep	ct-thorax-axial	6	rib	36.4	45.5	first rib along the front of the lung apex
+# keep	ct-thorax-axial	25	rib	24.8	37.3	anterolateral rib in the right chest wall, cortex and marrow visible; jump is only because neighbouring rib pins sit on other ribs
+# keep	ct-thorax-axial	34	rib	79.5	34.4	rib cross-section in the anterolateral chest wall below the clavicle level; jump is only because neighbouring rib pins sit on other ribs
+# keep	ct-thorax-coronal	9	rib	70.1	40.3	on a clear rib cross-section (cortex ring with marrow) in the right anterior chest wall; jump only because neighbouring slices pin a different rib
+# keep	ct-thorax-coronal	19	rib	62.0	10.9	rib over the lung apex
+# keep	ct-thorax-coronal	25	rib	63.4	1.9	elongated oval over the left lung apex, first rib, mirrors right first rib pin 7
+# keep	ct-thorax-coronal	27	lung	57.3	9.9	inside the aerated left lung apex
+# keep	ct-thorax-coronal	28	lung	73.1	44.9	inside the aerated left lower lung
+# keep	ct-thorax-coronal	29	lung	60.1	61.1	inside the aerated left lower lung
+# keep	ct-thorax-coronal	30	rib	69.1	3.4	oblique rib over the left lung apex at the lung border, mirrors the right apex rib in slices 31 and 32
+# keep	ct-thorax-coronal	33	rib	21.4	88.3	low lateral rib below the lung base, cortical oval in line with the right lateral rib column
+# keep	ct-thorax-coronal	35	rib	21.9	88.0	low lateral rib below the lung base, cortical oval in line with the right lateral rib column
+# keep	ct-thorax-coronal	38	thoracic-vertebra	47.5	72.6	midline vertebral body
+# keep	ct-thorax-coronal	40	rib	73.6	60.4	cortical oval in the left lateral rib column at the lung border
+# keep	ct-thorax-coronal	42	thoracic-vertebra	49.1	83.5	midline bone mass of a lower thoracic vertebra, ribs at the same level laterally
+# keep	ct-thorax-coronal	45	rib	35.9	84.1	on an elongated posterior rib, same shape as the ribs above it
+# keep	ct-thorax-sagittal	9	rib	44.3	76.1	on an oblique rib shaft of the lateral chest wall
+# keep	ct-thorax-sagittal	9	rib	51.2	83.2	on an oblique rib shaft of the lateral chest wall
+# keep	ct-thorax-sagittal	11	rib	33.0	61.5	on an anterior rib shaft (oblique section)
+# keep	ct-thorax-sagittal	11	rib	37.5	47.1	on an anterior rib shaft (oblique section)
+# keep	ct-thorax-sagittal	13	rib	49.7	16.8	on an upper rib at the lung apex; the clavicle is a separate bone above it at the top edge
+# keep	ct-thorax-sagittal	19	rib	83.3	34.1	on a posterior rib cross-section bordering the lung
+# keep	ct-thorax-sagittal	23	sternum	10.8	70.5	sternebra of the sternal body on the midline slice
+# keep	ct-thorax-sagittal	23	sternum	14.8	56.2	sternebra of the sternal body on the midline slice
+# keep	ct-thorax-sagittal	24	lung	53.2	59.2	in the medial lower-lobe lung (azygo-oesophageal recess) behind the heart, continuous with the lung on slice 23
+# keep	ct-thorax-sagittal	24	vertebral-canal	66.0	9.0	dark canal band behind the vertebral bodies
+# keep	ct-thorax-sagittal	25	thoracic-vertebra	67.1	8.5	on bone of an upper thoracic vertebra on the midline plane
+# keep	ct-thorax-sagittal	25	thoracic-vertebra	69.5	17.5	vertebral body
+# keep	ct-thorax-sagittal	25	vertebral-canal	74.6	97.7	front of the dark canal band at the bottom edge
+# keep	ct-thorax-sagittal	26	thoracic-vertebra	82.1	62.2	posterior element of a vertebra (pedicle / articular column)
+# keep	ct-thorax-sagittal	27	sternum	18.8	44.8	sternal body below the manubrium
+# keep	ct-thorax-sagittal	27	lung	33.7	28.1	in the anterior upper-lobe lung behind the manubrium, continuous with the anterior lung below
+# keep	ct-thorax-sagittal	27	thoracic-vertebra	77.0	97.0	on vertebral bone of a lower thoracic vertebra where the bodies are in plane
+# keep	ct-thorax-sagittal	31	rib	82.6	31.9	on a posterior rib cross-section bordering the lung
+# keep	ct-thorax-sagittal	34	lung	64.7	37.5	in posterior lung parenchyma
+# keep	ct-thorax-sagittal	35	rib	34.5	20.6	on an upper rib running obliquely over the lung apex (lung directly beneath)
+# keep	ct-thorax-sagittal	36	rib	53.9	7.7	on an upper rib running obliquely over the lung apex (lung directly beneath)
+# keep	ct-thorax-sagittal	36	lung	65.2	44.6	in posterior lung parenchyma
+# keep	ct-thorax-sagittal	41	rib	62.3	89.4	lower rib cross-section in the lateral chest wall
+# keep	ct-knee-coronal	14	femur	84.2	5.8	posterior femoral condyle at the top edge, cross-checked in axial slice 4 (inside the condyle); jump is only because the neighbouring femur pins sit on the other leg or other condyle
+# keep	ct-knee-coronal	22	tibia	16.2	90.0	tibial shaft cortex low in the frame, cross-checked in axial slice 43 (tibial cortex); jump is only pin placement moving along the same shaft
+# keep	ct-knee-coronal	23	tibia	17.9	67.5	tibial shaft cortex, cross-checked in axial slice 33 (tibial cortex); jump is only pin placement moving along the same shaft
+# keep	ct-knee-coronal	31	tibia	75.0	28.8	tibial plateau just below the joint line with the femur above, cross-checked in axial slice 15 (inside the tibia); jump is from the neighbours pinning the shaft instead
+# keep	ct-knee-coronal	42	tibia	78.8	30.7	anterior proximal tibia beside the tuberosity, cross-checked in axial slice 15 (anterior tibial cortex); jump is from the neighbours pinning lower on the tuberosity
+# 2026-09-25 shipped-module side findings from the TotalSegmentator re-run comparison (docs/radioanatome/RESEG_TS_COMPARISON.md), each crop looked at again
+ct-wholebody-axial	3	lumbar-vertebra	36.7	51.2	remove	on the atlas (C1) at the skull base, not lumbar
+ct-wholebody-axial	3	thoracic-vertebra	61.7	50.9	remove	on the atlas (C1) at the skull base, not thoracic
+ct-wholebody-axial	11	skull	29.9	46.6	remove	on the iliac wing, not skull
+ct-wholebody-axial	11	skull	32.1	48.2	remove	on the iliac wing, not skull
+ct-pelvis-coronal	12	hip-bone	84.4	61.8	remove	on the femur (greater trochanter), not hip bone
+ct-pelvis-coronal	13	hip-bone	88.7	61.4	remove	on the femur cortex, not hip bone
+ct-pelvis-axial	17	hip-bone	89.2	51.1	remove	on the femur cross-section, not hip bone

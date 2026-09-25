@@ -217,6 +217,9 @@ export async function onRequest(context) {
       // check-in on the console answered "Patient check-in is unavailable." - a page let in without
       // the one script it cannot work without. Exactly this file, never a directory.
       url.pathname === "/patient-register.js" ||
+      url.pathname === "/ward.js" || url.pathname.startsWith("/ward.js") ||
+      url.pathname === "/ward.css" || url.pathname.startsWith("/ward.css") ||
+      url.pathname.startsWith("/wardsynq/") ||
       // SAME TRAP, missed the first time: the sheet's OWN STYLESHEET was never added alongside its
       // script. A CSS 404 degrades silently (no console error, nothing "unavailable") - it just
       // renders as unstyled HTML flowing off the bottom of the page, so it went unnoticed here.
@@ -228,6 +231,25 @@ export async function onRequest(context) {
       url.pathname === "/govschemes.js" ||
       url.pathname === "/govschemes.css" ||
       url.pathname === "/govschemes-flags.js" ||
+      // SAME TRAP a third time: the OPD file-label dialog (opd.html) and the cashier station
+      // (clinic-billing.html) render the UID as a Code128 barcode (barcode128.js) and a QR code
+      // (pglog-qr.js). Without these two lines the label prints with two empty boxes and no
+      // console error once the blanket asset 404 below swallows them. Exactly these files.
+      url.pathname === "/barcode128.js" ||
+      url.pathname === "/pglog-qr.js" ||
+      url.pathname === "/smd-nfc.js" ||
+      url.pathname === "/steward-identity-resolver.js" ||
+      url.pathname === "/smd-identity-scanner.js" ||
+      // SAME TRAP a fourth time (found 2026-09-25): the OPD console's pulse model, offline desk and live stream,
+      // the wall display's live stream, and the token-slip printer. Blocked, the console showed no pulse, the desk
+      // could not check in offline and the boards never went live, all without an error.
+      // test/public-page-scripts-served.test.mjs now asks this gate for every asset each public page loads.
+      url.pathname === "/opd-pulse-model.js" ||
+      url.pathname === "/opd-offline-desk.js" ||
+      url.pathname === "/opd-live.js" ||
+      url.pathname === "/ward-labels.js" ||
+      // The in-app DICOM viewer engine ward.js loads on first "View images" (no words, no PHI: parse, decode, draw).
+      url.pathname === "/ward-dicom-viewer.js" ||
       // Self-hosted fonts (Inter Variable body text + Material Symbols Rounded icon font, both
       // @font-face'd by every PUBLIC_PAGE: opd/opd-display/queue/subscribe). Public, non-sensitive
       // font files - not app code - same reasoning as the brand-image allowlist below. Missing this
@@ -257,6 +279,7 @@ export async function onRequest(context) {
   // "opd-display" is the login-free OPD waiting-room WALL screen: opened on a TV/monitor from a signed
   // …/opd-display?t=<org token> link, no app/account/cookie. Safe to expose — /api/queue/display self-
   // authorises via the signed token and returns a PHI-minimal board (first name + last initial, no MRN).
+  // "clinic-billing" is the standalone cashier and pharmacy station for personal clinics.
   // "validation" is the login-free RadioAnatome clinical sign-off sheet: an external radiologist opens
   // stewardmd.in/validation from a private link — no StewardMD account, no app, no /realapp cookie — and
   // marks each atlas module verified / needs-fix / rejected before the atlas is exposed to students, so it
@@ -265,7 +288,7 @@ export async function onRequest(context) {
   // "subscribe" is the login-free (Google sign-in happens ON the page) web checkout for StewardMD Pro —
   // stewardmd.in/subscribe — Razorpay Standard Checkout. Must resolve for anonymous visitors since the
   // clinical app itself stays native-only; this is the ONLY way to buy Pro from a browser.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display", "validation", "subscribe"];
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display", "clinic-billing", "validation", "subscribe"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }

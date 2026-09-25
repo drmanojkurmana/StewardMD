@@ -73,6 +73,37 @@
   // Suffix families plus the prefix families (cef-, sulfa-) a suffix rule cannot see.
   var DRUG_SUFFIX = /\b(?:cef[a-z]{3,}|sulfa[a-z]{3,}|[a-z]{4,}(?:cillin|mycin|micin|cycline|azole|oxacin|floxacin|pril|sartan|statin|olol|dipine|parin|prazole|triptan|mab|nib|tinib|ciclovir|vir|navir|cept|gliptin|glitazone|barbital|azepam|zolam|caine|tidine|semide|thiazide|conazole|penem|oxetine|azosin|terol|profen|coxib|zosin|lukast|setron|dronate|afil|formin|glinide))\b/gi;
   var NOT_DRUG = { intercept: 1, concept: 1, precept: 1, percept: 1, receptor: 1, except: 1, accept: 1 };
+  // Numbers that are doses: a figure in one of these families must sit with ONE drug in ONE passage.
+  var DOSE_FAM = { mass: 1, "mg/kg": 1, "mcg/kg": 1, iu: 1, units: 1, unit: 1, u: 1 };
+
+  /* DRUG LEXICON (audit T02, 2026-09-25). The suffix rule above cannot see warfarin, aspirin,
+   * amiodarone, labetalol, prednisolone, isoniazid, rifampicin, hydralazine, clavulanate: a line
+   * naming one of those was checked on its numbers only, and a bare "- Warfarin" bullet was waved
+   * through as a heading. The caller passes the app's drug lexicon (drug-lexicon.js,
+   * window.SMD_DRUG_LEXICON: { generics[], brands{brand: generic} }) as opts.lexicon; names are
+   * matched as whole words (up to LEX_MAX_WORDS) in claim, passage and question alike, and a brand
+   * is read as its generic. No lexicon = the suffix rule alone, exactly as before.
+   * LEX_SKIP: lexicon entries that are also lab analytes or everyday words in clinical prose
+   * ("alanine aminotransferase", "barium swallow", "hydrogen breath test"), plus brand keys that are
+   * really drug classes. Matching those would reject claims that name no drug at all. */
+  var LEX_MAX_WORDS = 4;
+  var LEX_SKIP = { cation: 1, dimethyl: 1, hydrogen: 1, alanine: 1, glycine: 1, glutamine: 1, phenylalanine: 1,
+    thrombin: 1, secretin: 1, lactase: 1, barium: 1, vaccine: 1, "amino acids": 1, steroid: 1, laxative: 1, antiemetic: 1 };
+  var _lexSrc = null, _lex = null;   // built once per lexicon object: name -> canonical generic
+  function lexMap(src) {
+    if (!src) return null;
+    if (src === _lexSrc) return _lex;
+    var map = {}, gens = Array.isArray(src) ? src : (src.generics || []), i;
+    function clean(x) { return String(x || "").toLowerCase().replace(/sulph/g, "sulf").replace(/-/g, " ").replace(/\s+/g, " ").trim(); }
+    for (i = 0; i < gens.length; i++) { var g = clean(gens[i]); if (g.length >= 4 && !LEX_SKIP[g] && !NOT_DRUG[g] && g.split(" ").length <= LEX_MAX_WORDS) map[g] = g; }
+    // A salt form ("amlodipine besylate") whose first word is itself a generic reads as that generic,
+    // so the answer's "amlodipine" and the book's "amlodipine besylate" are one drug.
+    for (var k in map) { var w0 = k.split(" ")[0]; if (w0 !== k && map[w0]) map[k] = w0; }
+    if (src.brands) for (var b in src.brands) { var bb = clean(b), gg = clean(src.brands[b]); if (bb.length >= 4 && !LEX_SKIP[bb] && gg) map[bb] = map[gg] || gg; }
+    _lexSrc = src; _lex = map;
+    return map;
+  }
+  var _lexNow = null;   // the lexicon map for the current groundAnswer call (null = suffix rule only)
 
   // A line that states nothing checkable: the verify footer, the source line, greetings, headings.
   var META = /^(?:verify against local protocol|source:|not (?:addressed|covered) in the (?:provided )?reference|i can only help with medical|hi\b|hello\b|here (?:is|are)\b|in summary\b|summary\b|note:?\s*$)/i;
@@ -103,17 +134,26 @@
   }
 
   function norm(s) {
-    var t = String(s || "").toLowerCase().replace(/[’']/g, "'");
+    // "sulphate" and "sulfate" are one salt; the lexicon is written the US way.
+    var t = String(s || "").toLowerCase().replace(/[’']/g, "'").replace(/sulph/g, "sulf");
     for (var i = 0; i < FREQ.length; i++) t = t.replace(FREQ[i][0], FREQ[i][1]);
     return t;
   }
 
   /** Every checkable fact in a piece of text, positions kept so a drug and its dose can be paired. */
   var _expand = null;   // optional richer expander from the retrieval module, set per groundAnswer call
+  // Optional extra drug names (lowercase) found by an on-device drug tagger (openmed-ner.js pharma pack),
+  // set per groundAnswer call. They are matched as whole words in claim, passage and question ALIKE, so
+  // the result stays deterministic for a given list; an empty or absent list is the suffix rule alone.
+  var _extraDrugs = null;
+  function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
   function facts(text) {
     var t = norm(text);
     if (_expand) { try { t = String(_expand(t) || t); } catch (e) {} }
     t = expandAbbr(t);
+    // An ICD code is not a figure: "T42.4" read as 42.4 was stripped as an unverified number
+    // (owner report 2026-09-24, the BZD poisoning code). Masked before the number pass.
+    t = t.replace(/\b[a-z]\d{2}(?:\.\d{1,2})?\b/gi, " icdcode ");
     var out = { nums: [], drugs: [], freq: [], terms: {}, t: t };
     var m;
     NUM.lastIndex = 0;
@@ -129,7 +169,18 @@
       }
     }
     DRUG_SUFFIX.lastIndex = 0;
-    while ((m = DRUG_SUFFIX.exec(t)) !== null) if (!NOT_DRUG[m[0]]) out.drugs.push({ name: m[0], pos: m.index });
+    while ((m = DRUG_SUFFIX.exec(t)) !== null) if (!NOT_DRUG[m[0]]) out.drugs.push({ name: m[0], pos: m.index, end: m.index + m[0].length });
+    if (_lexNow) lexDrugs(t, out.drugs);
+    if (_extraDrugs) {
+      for (var d = 0; d < _extraDrugs.length; d++) {
+        var re = new RegExp("(^|[^a-z0-9])(" + escRe(_extraDrugs[d]) + ")(?![a-z0-9])", "g");
+        while ((m = re.exec(t)) !== null) {
+          var at = m.index + m[1].length, dup = false;
+          for (var q = 0; q < out.drugs.length; q++) if (out.drugs[q].pos === at) { dup = true; break; }
+          if (!dup) out.drugs.push({ name: m[2], pos: at, end: at + m[2].length });
+        }
+      }
+    }
     var fq = t.match(/\b(?:oncedaily|twicedaily|thricedaily|fourtimesdaily|sixtimesdaily|onceweekly|singledose|iv|im|po|sc)\b/g) || [];
     for (var j = 0; j < fq.length; j++) out.freq.push(fq[j]);
     var words = t.replace(/-/g, " ").match(/[a-z][a-z0-9]+/g) || [];   // "low-molecular-weight" == "low molecular weight"
@@ -143,26 +194,76 @@
     return out;
   }
 
+  /** Lexicon names in `t`, longest first, joined only across spaces and hyphens. Adds to `drugs`
+   *  (skipping a position the suffix rule already holds) with the canonical generic as the name. */
+  function lexDrugs(t, drugs) {
+    var tk = [], m, re = /[a-z][a-z0-9]*/g;
+    while ((m = re.exec(t)) !== null) tk.push({ w: m[0], pos: m.index, end: m.index + m[0].length });
+    var taken = {};
+    for (var q = 0; q < drugs.length; q++) taken[drugs[q].pos] = 1;
+    for (var i = 0; i < tk.length; i++) {
+      if (tk[i].w.length < 4) continue;
+      for (var k = Math.min(LEX_MAX_WORDS, tk.length - i); k >= 1; k--) {
+        var key = tk[i].w, ok = true;
+        for (var j = 1; j < k; j++) {
+          if (!/^[\s-]+$/.test(t.slice(tk[i + j - 1].end, tk[i + j].pos))) { ok = false; break; }
+          key += " " + tk[i + j].w;
+        }
+        if (!ok || !Object.prototype.hasOwnProperty.call(_lexNow, key)) continue;
+        if (!taken[tk[i].pos]) { drugs.push({ name: _lexNow[key], pos: tk[i].pos, end: tk[i + k - 1].end }); taken[tk[i].pos] = 1; }
+        i += k - 1;
+        break;
+      }
+    }
+  }
+  /** Does this text name a drug (suffix rule, tagger names or lexicon)? */
+  function namesDrug(text) { return facts(text).drugs.length > 0; }
+
   function hasNum(F, key) { for (var i = 0; i < F.nums.length; i++) if (F.nums[i].key === key) return true; return false; }
   function hasDrug(F, name) { for (var i = 0; i < F.drugs.length; i++) if (F.drugs[i].name === name) return true; return false; }
 
-  /** Drug + dose pairs in a claim: a number within PAIR_WINDOW chars of a drug mention. */
+  /** Drug + dose pairs in a claim: every dose figure belongs to the NEAREST drug the claim names
+   *  (gap measured between the name and the figure, so "amoxicillin 500 mg or doxycycline 100 mg"
+   *  pairs each dose with its own drug). A dose far from its drug in a long sentence is still that
+   *  drug's dose: a claim's dose is never checkable on its own, only together with a drug (T02). */
+  /** The drug a figure belongs to: the one named nearest to it, gap measured from the end of the
+   *  name to the figure (or from the figure to a name after it). */
+  function nearestDrug(F, n) {
+    var best = null, bd = Infinity;
+    for (var i = 0; i < F.drugs.length; i++) {
+      var d = F.drugs[i], dEnd = d.end != null ? d.end : d.pos + d.name.length;
+      var gap = d.pos <= n.pos ? n.pos - dEnd : d.pos - (n.pos + n.raw.length);
+      if (gap < 0) gap = 0;
+      if (gap < bd) { bd = gap; best = d; }
+    }
+    return best;
+  }
   function pairs(F) {
     var out = [];
-    for (var i = 0; i < F.drugs.length; i++) for (var j = 0; j < F.nums.length; j++) {
-      if (F.nums[j].fam !== "mass" && F.nums[j].fam !== "mg/kg" && F.nums[j].fam !== "mcg/kg" && F.nums[j].fam !== "iu" && F.nums[j].fam !== "units" && F.nums[j].fam !== "unit" && F.nums[j].fam !== "u") continue;
-      if (Math.abs(F.nums[j].pos - F.drugs[i].pos) <= PAIR_WINDOW) out.push({ drug: F.drugs[i].name, key: F.nums[j].key, fam: F.nums[j].fam });
+    if (!F.drugs.length) return out;
+    for (var j = 0; j < F.nums.length; j++) {
+      var n = F.nums[j];
+      if (!DOSE_FAM[n.fam]) continue;
+      out.push({ drug: nearestDrug(F, n).name, key: n.key, fam: n.fam });
     }
     return out;
   }
 
+  /** In passage P, is figure n stated for drug d? Within PAIR_WINDOW, and d is the drug named nearest
+   *  to it: in "isoniazid 300 mg daily and rifampicin 600 mg" the 300 mg is isoniazid's, and in
+   *  "hydralazine 5 mg IV; labetalol 20 mg then 40 mg" the 40 mg is labetalol's (T02). */
+  function owns(P, d, n) {
+    if (Math.abs(n.pos - d.pos) > PAIR_WINDOW) return false;
+    var near = nearestDrug(P, n);
+    return !!near && near.name === d.name;
+  }
   /** Does passage P state drug `d` with a dose of the same family but a different value? */
   function conflictingDose(P, d, key, fam) {
     for (var i = 0; i < P.drugs.length; i++) {
       if (P.drugs[i].name !== d) continue;
       for (var j = 0; j < P.nums.length; j++) {
         var n = P.nums[j];
-        if (n.fam === fam && Math.abs(n.pos - P.drugs[i].pos) <= PAIR_WINDOW && n.key !== key) return n.raw;
+        if (n.fam === fam && n.key !== key && owns(P, P.drugs[i], n)) return n.raw;
       }
     }
     return null;
@@ -170,7 +271,7 @@
   function pairSupported(P, d, key) {
     for (var i = 0; i < P.drugs.length; i++) {
       if (P.drugs[i].name !== d) continue;
-      for (var j = 0; j < P.nums.length; j++) if (P.nums[j].key === key && Math.abs(P.nums[j].pos - P.drugs[i].pos) <= PAIR_WINDOW) return true;
+      for (var j = 0; j < P.nums.length; j++) if (P.nums[j].key === key && owns(P, P.drugs[i], P.nums[j])) return true;
     }
     return false;
   }
@@ -206,7 +307,10 @@
         var clean = s.replace(CITE, " ").replace(/\s+/g, " ").replace(/\s+([.,;:])/g, "$1").trim();
         var plain = clean.replace(/\*\*|__|`/g, "");
         var kind = "claim";
-        if (META.test(plain) || /\?\s*$/.test(plain)) kind = "meta";
+        // A line that names a drug is never "meta", however short or however it is phrased: a bare
+        // "- Warfarin" bullet or "Here are the options: warfarin" is a recommendation (audit T02).
+        if (namesDrug(plain)) kind = "claim";
+        else if (META.test(plain) || /\?\s*$/.test(plain)) kind = "meta";
         else if ((expandAbbr(plain.toLowerCase()).match(/[a-z]{3,}/g) || []).length < 3 && !/\d/.test(plain)) kind = "meta";
         out.push({ line: li, prefix: p === 0 ? prefix : "", text: clean, plain: plain, refs: refs, kind: kind, last: p === parts.length - 1 });
       }
@@ -279,10 +383,25 @@
    *   citations   { n: passage } for the [n] markers in text
    * }
    * passages: [{ text, heading?, chunk? }] in the order they were numbered in the prompt.
+   * opts: allowGeneral, inlineRefs, expand(q), drugs[] (tagger names), lexicon (drug-lexicon.js shape
+   *       { generics[], brands{} } or a plain array of names; absent = suffix rule only).
    */
   function groundAnswer(answer, passages, question, opts) {
-    opts = opts || {};
+    try { return groundOnce(answer, passages, question, opts || {}); }
+    // The per-call lexicon and tagger names never leak into a later standalone facts() call.
+    finally { _lexNow = null; _extraDrugs = null; _expand = null; }
+  }
+  function groundOnce(answer, passages, question, opts) {
     _expand = typeof opts.expand === "function" ? opts.expand : null;
+    _lexNow = lexMap(opts.lexicon);
+    _extraDrugs = null;
+    if (opts.drugs && opts.drugs.length) {
+      _extraDrugs = [];
+      for (var xd = 0; xd < opts.drugs.length; xd++) {
+        var nm = String(opts.drugs[xd] || "").toLowerCase().replace(/\s+/g, " ").trim();
+        if (nm.length >= 3 && !NOT_DRUG[nm] && _extraDrugs.indexOf(nm) < 0) _extraDrugs.push(nm);
+      }
+    }
     var pf = (passages || []).map(function (p) { return facts(p && p.text || ""); });
     var qf = facts(question || "");
     var claims = splitClaims(answer), stats = { supported: 0, clinician: 0, unsupported: 0, contradicted: 0, meta: 0 };

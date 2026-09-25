@@ -69,10 +69,23 @@ function eddStatus(record, today) {
   return { date, overdue: date < today, dueToday: date === today, version: record.version || null, setBy: record.setBy || null, setAt: record.setAt || null, reason: record.reason || null };
 }
 
-/** Every stay's current expected date, keyed by encounter. Throws when it cannot be read. */
-async function expectedDischargeMap(svc) {
+/**
+ * The current expected date of these stays, keyed by encounter. Throws when it cannot be read.
+ *
+ * R7-2: `encounterIds` reads only the stays asked about, by id. A stated date's id is derived from
+ * its encounter (eddIdFor), so the ward list's hundred stays are one query rather than a walk of
+ * every date the hospital has ever stated - which on a year-old hospital is pages of records read to
+ * use a handful. With no ids it still reads them all, so a caller that genuinely wants the lot (and
+ * the ceiling refusal that comes with it) keeps that behaviour.
+ */
+async function expectedDischargeMap(svc, encounterIds) {
+  if (Array.isArray(encounterIds)) {
+    const want = [...new Set(encounterIds.filter(Boolean).map(String))];
+    if (!want.length) return new Map();
+    const byId = await svc.getMany(EDD_TYPE, want.map(eddIdFor));
+    return new Map([...byId.values()].filter((r) => r && r.encounterId).map((r) => [r.encounterId, r]));
+  }
   // Every stated date (service.listAll); past the ceiling it throws (a short map would drop the newest stays' dates).
-  // ponytail: a by-encounter index is the upgrade when a hospital nears 50,000 stated dates.
   const { rows } = await svc.listAll(EDD_TYPE, { max: 50000, throwOnTruncate: true });
   return new Map(rows.filter((r) => r && r.encounterId).map((r) => [r.encounterId, r]));
 }

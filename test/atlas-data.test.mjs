@@ -2,9 +2,11 @@
 // Also validates the REAL shipped JSON, so a bad hand-edit or a bad pipeline run
 // fails `npm test` rather than rendering an invisible pin.
 // Run: node test/atlas-data.test.mjs
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = readFileSync(join(ROOT, "atlas.js"), "utf8");
@@ -102,6 +104,176 @@ for (const m of cat.modules) {
 }
 ok("golden geometry table covers exactly the shipped modules",
   Object.keys(GEOM).length === cat.modules.length);
+
+// --- premium data contract (docs/radioanatome/PREMIUM_PLAN_2026-09-25.md) ---
+const visible = cat.modules.filter((m) => !m.hidden);
+ok("the 0-pin cadaver brain module is hidden", cat.modules.find((m) => m.id === "brain-mri-axial-t1").hidden === true);
+ok("hidden is only ever the literal true", cat.modules.every((m) => m.hidden === undefined || m.hidden === true));
+ok("35 modules are visible in the catalog", visible.length === 35);
+const atlasOf = (id) => JSON.parse(readFileSync(join(ROOT, "atlas", id, "atlas.json"), "utf8"));
+ok("every visible module carries pins", visible.every((m) => atlasOf(m.id).slices.some((s) => s.pins.length)));
+
+// Search index: shape, and freshness against the generator it came from.
+const { buildIndex, serialize } = await import(join(ROOT, "atlas-pipeline", "atlas-index.mjs"));
+const IDX_TEXT = readFileSync(join(ROOT, "atlas", "index.json"), "utf8");
+const IDX = JSON.parse(IDX_TEXT);
+ok("atlas/index.json is fresh (node atlas-pipeline/atlas-index.mjs)", IDX_TEXT === serialize(buildIndex(ROOT)));
+ok("index.json has v 1 and a structures array", IDX.v === 1 && Array.isArray(IDX.structures) && IDX.structures.length > 40);
+ok("index structures are unique and sorted by id",
+  IDX.structures.every((e, k, a) => !k || a[k - 1].s < e.s));
+const visById = new Map(visible.map((m) => [m.id, m]));
+let idxOk = true;
+for (const e of IDX.structures) {
+  if (!/^[a-z0-9-]+$/.test(e.s) || typeof e.n !== "string" || !e.n || typeof e.c !== "string" || !e.m.length) idxOk = false;
+  for (const [mid, best, count] of e.m) {
+    const m = visById.get(mid);
+    if (!m || !Number.isInteger(best) || !Number.isInteger(count) || count < 1 || count > m.slices) { idxOk = false; continue; }
+    const sl = atlasOf(mid).slices.find((s) => s.i === best);
+    if (!sl || !sl.pins.some((p) => p.s === e.s)) idxOk = false;
+  }
+}
+ok("every index row points at a visible module slice that pins the structure", idxOk);
+ok("no hidden module appears in the index", !IDX_TEXT.includes("brain-mri-axial-t1"));
+ok("index cats: one {label, color} per category, and every structure's c has one",
+  IDX.cats && Object.values(IDX.cats).every((c) => c.label && /^#[0-9a-f]{6}$/i.test(c.color)) &&
+  IDX.structures.every((e) => IDX.cats[e.c]));
+
+// Slice frames q (inGroup modules): finite, orthogonal, true to the image aspect and to mm.
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const len = (a) => Math.sqrt(dot(a, a));
+const inGroup = cat.modules.filter((m) => m.group);
+const GROUPS = ["live-torso", "live-brain", "live-neck", "live-thorax-neck"];
+ok("twelve inGroup modules: four living groups, one module per plane",
+  inGroup.length === 12 && GROUPS.every((g) =>
+    ["axial", "coronal", "sagittal"].every((p) => inGroup.filter((m) => m.group === g && m.plane === p).length === 1)));
+for (const m of inGroup) {
+  const sl = atlasOf(m.id).slices;
+  const qs = sl.map((s) => s.q);
+  ok(m.id + ": every slice has a 9-number finite q", qs.every((q) => Array.isArray(q) && q.length === 9 && q.every(Number.isFinite)));
+  const U = qs.map((q) => q.slice(3, 6)), V = qs.map((q) => q.slice(6, 9));
+  ok(m.id + ": u and v are orthogonal", U.every((u, k) => Math.abs(dot(u, V[k])) < 1e-6 * len(u) * len(V[k])));
+  ok(m.id + ": |u|/|v| matches the image aspect within 0.5%", sl.every((s, k) => Math.abs(len(U[k]) / len(V[k]) / s.aspect - 1) < 0.005));
+  ok(m.id + ": mm equals |u|, |v| in millimetres", sl.every((s, k) => Math.abs(len(U[k]) * 1000 - m.mm[0]) < 0.06 && Math.abs(len(V[k]) * 1000 - m.mm[1]) < 0.06));
+  const n = [U[0][1] * V[0][2] - U[0][2] * V[0][1], U[0][2] * V[0][0] - U[0][0] * V[0][2], U[0][0] * V[0][1] - U[0][1] * V[0][0]];
+  const pos = qs.map((q) => dot(q.slice(0, 3), n));
+  ok(m.id + ": slices are parallel and strictly ordered along their normal",
+    U.every((u, k) => Math.abs(dot(u, n)) < 1e-9 && Math.abs(dot(V[k], n)) < 1e-9) &&
+    (pos.every((p, k) => !k || p > pos[k - 1]) || pos.every((p, k) => !k || p < pos[k - 1])));
+}
+for (const g of GROUPS) {
+  const nrm = (p) => { const q = atlasOf(inGroup.find((m) => m.group === g && m.plane === p).id).slices[0].q; const u = q.slice(3, 6), v = q.slice(6, 9); const c = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]]; const l = len(c); return c.map((x) => x / l); };
+  ok(g + ": the three planes are mutually perpendicular",
+    Math.abs(dot(nrm("axial"), nrm("coronal"))) < 1e-9 && Math.abs(dot(nrm("axial"), nrm("sagittal"))) < 1e-9 && Math.abs(dot(nrm("coronal"), nrm("sagittal"))) < 1e-9);
+}
+ok("mm, where present, is two positive numbers", cat.modules.every((m) => m.mm === undefined || (m.mm.length === 2 && m.mm.every((x) => x > 0))));
+ok("mm width/height matches every slice's image aspect within 0.5%",
+  cat.modules.filter((m) => m.mm).every((m) => atlasOf(m.id).slices.every((s) => Math.abs(m.mm[0] / m.mm[1] / s.aspect - 1) < 0.005)));
+
+// CT windows: same slices, same pixel dimensions, new paths only.
+function webpSize(file) {
+  const b = readFileSync(file);
+  if (b.toString("latin1", 0, 4) !== "RIFF" || b.toString("latin1", 8, 12) !== "WEBP") return null;
+  const kind = b.toString("latin1", 12, 16);
+  if (kind === "VP8 ") return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+  if (kind === "VP8L") { const v = b.readUInt32LE(21); return [(v & 0x3fff) + 1, ((v >> 14) & 0x3fff) + 1]; }
+  if (kind === "VP8X") return [b.readUIntLE(24, 3) + 1, b.readUIntLE(27, 3) + 1];
+  return null;
+}
+const windowed = cat.modules.filter((m) => m.windows);
+ok("exactly the nine living CT modules carry windows (torso, neck, thorax-neck)",
+  windowed.map((m) => m.id).sort().join() === inGroup.filter((m) => m.modality === "CT").map((m) => m.id).sort().join() && windowed.length === 9);
+for (const m of windowed) {
+  ok(m.id + ": first window is the existing soft-tissue set", m.windows[0].id === "soft" && m.windows.every((w) => /^[a-z]+$/.test(w.id) && w.label));
+  let same = true, have = true;
+  for (const s of atlasOf(m.id).slices) {
+    const base = webpSize(join(ROOT, s.img.slice(1)));
+    for (const w of m.windows.slice(1)) {
+      // contract: the slice's own path with its file name moved under w/<id>/ (v2 stacks too)
+      const f = join(ROOT, s.img.slice(1).replace(/\/([^/]+)$/, "/w/" + w.id + "/$1"));
+      if (!existsSync(f)) { have = false; continue; }
+      const d = webpSize(f);
+      if (!base || !d || d[0] !== base[0] || d[1] !== base[1]) same = false;
+    }
+  }
+  ok(m.id + ": every window image exists", have);
+  ok(m.id + ": every window image has its slice's exact pixel dimensions", same);
+}
+
+// Orientation: letters valid, and every flipX/letter backed by a row in ORIENTATION.md whose
+// pin checks hold on the module's own pins.
+const AXIS = { R: "x", L: "x", A: "y", P: "y", S: "z", I: "z" };
+const pairOk = (a, b) => (a === undefined && b === undefined) || (a !== undefined && b !== undefined && a !== b && AXIS[a] === AXIS[b]);
+ok("orient letters are from R L A P S I on known edges, opposite edges on one axis",
+  cat.modules.every((m) => !m.orient || (Object.keys(m.orient).every((k) => ["left", "right", "top", "bottom"].includes(k)) &&
+    Object.values(m.orient).every((v) => AXIS[v]) && pairOk(m.orient.left, m.orient.right) && pairOk(m.orient.top, m.orient.bottom) &&
+    (!m.orient.left || !m.orient.top || AXIS[m.orient.left] !== AXIS[m.orient.top]))));
+ok("flipX and flipY are only ever the literal true", cat.modules.every((m) => [m.flipX, m.flipY].every((f) => f === undefined || f === true)));
+const ORIENT_MD = readFileSync(join(ROOT, "docs", "radioanatome", "ORIENTATION.md"), "utf8");
+const rows = new Map();
+for (const line of ORIENT_MD.split("\n")) {
+  const c = line.split("|").map((x) => x.trim());
+  const id = /^`([a-z0-9-]+)`$/.exec(c[1] || "");
+  if (id && c.length >= 11) rows.set(id[1], { flipX: c[2], flipY: c[3], left: c[4], right: c[5], top: c[6], bottom: c[7], check: c[8], evidence: c[9] });
+}
+ok("ORIENTATION.md has a row for every module", cat.modules.every((m) => rows.has(m.id)));
+const cent = (a, sid, ax) => { const v = a.slices.flatMap((s) => s.pins.filter((p) => p.s === sid).map((p) => p[ax])); return v.length ? v.reduce((t, x) => t + x, 0) / v.length : NaN; };
+const HEADER_OK = "header, consistent with anatomy on A/P and S/I";
+for (const m of cat.modules) {
+  const r = rows.get(m.id);
+  if (!r) continue;
+  const o = m.orient || {};
+  const lr = ["R", "L"].some((x) => Object.values(o).includes(x));
+  ok(m.id + ": modules.json flips and letters match ORIENTATION.md",
+    (r.flipX === "yes") === (m.flipX === true) && (r.flipY === "yes") === (m.flipY === true) &&
+    ["left", "right", "top", "bottom"].every((k) => (o[k] || "") === r[k]));
+  if (m.flipX || m.flipY || Object.keys(o).length) ok(m.id + ": asserted orientation has written evidence", r.evidence.length > 20);
+  // R/L letters are a laterality claim: they need a left-right pin check on this module's own
+  // pins (living torso) or the recorded header provenance (brain, finding 3 in ORIENTATION.md).
+  if (lr) ok(m.id + ": left/right rests on a left-right pin check or the checked header",
+    /\.x [<>] /.test(r.check) || r.evidence.includes(HEADER_OK));
+  // A flipX WITHOUT R/L letters makes no laterality claim: it is half of a 180-degree turn (with
+  // flipY) or a sagittal mirror to anterior-left. Either way the view must end on a known axis.
+  if (m.flipX && !lr) ok(m.id + ": a flipX with no R/L claim is a 180-degree turn or a sagittal mirror",
+    (m.flipY === true && o.top && AXIS[o.top] !== "x") || (o.left && AXIS[o.left] === "y"));
+  if (m.flipY) ok(m.id + ": flipY comes with flipX (a turn, never a lone vertical mirror)", m.flipX === true);
+  if (r.check && r.check !== "-") {
+    const a = atlasOf(m.id);
+    const good = r.check.split(";").map((t) => t.trim()).every((t) => {
+      const k = /^([a-z0-9-]+)\.(x|y) ([<>]) ([a-z0-9-]+)\.(x|y)$/.exec(t);
+      if (!k || k[2] !== k[5]) return false;
+      const l = cent(a, k[1], k[2]), rr = cent(a, k[4], k[5]);
+      return Number.isFinite(l) && Number.isFinite(rr) && (k[3] === "<" ? l < rr : l > rr);
+    });
+    ok(m.id + ": ORIENTATION.md pin checks hold on the shipped pins (" + r.check + ")", good);
+  }
+}
+ok("no cadaver module asserts left or right",
+  cat.modules.every((m) => !m.orient || /^(ct-live-torso|ct-live-neck|ct-live-thorax-neck|mri-brain)-/.test(m.id) || !["R", "L"].some((x) => Object.values(m.orient).includes(x))));
+
+// Image immutability. Images are served `immutable` for a year and installed apps pair their
+// bundled atlas.json with images fetched live, so a changed picture under an old path would
+// pair old pins with new anatomy. Every .webp that existed at the pre-upgrade commit must
+// still exist with the same bytes (git blob hash, so no re-hashing of the old side).
+const BASE = "5d651f5a5";
+let tree = null;
+try {
+  tree = execFileSync("git", ["ls-tree", "-r", BASE, "--", "atlas"], { cwd: ROOT, encoding: "utf8", maxBuffer: 1 << 26, stdio: ["ignore", "pipe", "ignore"] });
+} catch (e) { tree = null; }
+if (tree === null) {
+  console.log("   notice: git or commit " + BASE + " unavailable; image immutability check skipped");
+} else {
+  const blobs = tree.split("\n").filter((l) => l.endsWith(".webp")).map((l) => { const [meta, path] = l.split("\t"); return [meta.split(" ")[2], path]; });
+  let changed = [];
+  for (const [sha, path] of blobs) {
+    const f = join(ROOT, path);
+    if (!existsSync(f)) { changed.push(path + " (missing)"); continue; }
+    const buf = readFileSync(f);
+    const h = createHash("sha1").update("blob " + buf.length + "\0").update(buf).digest("hex");
+    if (h !== sha) changed.push(path);
+  }
+  if (changed.length) console.log("   changed:", changed.slice(0, 5).join(", "));
+  ok("all " + blobs.length + " images from " + BASE + " still exist byte-identical", blobs.length > 1400 && changed.length === 0);
+}
 
 // --- overlay lifecycle (DOM-stubbed, mirroring test/dialog-motion.test.mjs) ---
 function fakeDom() {
@@ -356,7 +528,7 @@ ok("back control matches swipe-back BACK_SEL",
    vh.includes('class="atlas-back"') && /aria-label="(Back|Close)"/.test(vh));
 ok("step buttons are labelled", vh.includes('aria-label="Previous slice"') && vh.includes('aria-label="Next slice"'));
 ok("the grid button is labelled", vh.includes('aria-label="All slices"'));
-ok("footer disclaimer is present verbatim", vh.includes("Educational reference only — not for diagnosis."));
+ok("footer disclaimer is present verbatim", vh.includes("Educational reference only, not for diagnosis."));
 ok("viewer renders no attribution", !/licen[cs]e|public domain|courtesy|Visible Human|Gray/i.test(vh));
 ok("viewer uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(vh));
 ok("catalog uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(A._catalogHtml()));
@@ -364,11 +536,25 @@ ok("info screen uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-
 // Every pin is reachable and named — colour alone must never carry the meaning.
 const ovs = A._pure.overlaySvg(A._state.atlas.slices[0], A._state.atlas,
   A._pure.imageBox(400, 800, 0.9, 90), 400, 800, { sel: null, hidden: {} });
-ok("every dot is focusable", (ovs.match(/class="atlas-dot[^"]*"[^>]*tabindex="0"/g) || []).length === 3);
-ok("every dot carries its name", (ovs.match(/class="atlas-dot[^"]*"[^>]*aria-label="/g) || []).length === 3);
+// atlas.js (premium pass) makes exactly ONE focusable control per structure (the label, or the
+// first dot in pins mode) and hides the other dots from assistive tech, so a bilateral pair is
+// one tab stop, not two.
+ok("every structure has exactly one focusable control", (ovs.match(/tabindex="0"/g) || []).length === 2);
+ok("every focusable control carries its name", (ovs.match(/role="button" tabindex="0" aria-label="[^"]+"/g) || []).length === 2);
+ok("dots that are not tab stops are hidden from assistive tech",
+  (ovs.match(/class="atlas-dot[^"]*"[^>]*aria-hidden="true"/g) || []).length === 3);
 ok("names are present as text, not colour alone", ovs.includes("Fornix") && ovs.includes("Subarachnoid"));
 A.close();
 ok("close() restores focus tracking", A._state._prevFocus === null);
+
+// /validation loads the same viewer from stewardmd.in, and .js/.css are served immutable for a
+// year, so a stale ?v= there pins returning reviewers to the old viewer.
+{
+  const tok = (f, a) => (readFileSync(join(ROOT, f), "utf8").match(new RegExp("/?" + a.replace(".", "\\.") + "\\?v=([\\w.-]+)")) || [])[1];
+  for (const a of ["atlas.js", "atlas.css"]) {
+    ok("validation page " + a + " token matches index.html", tok("index.html", a) && tok("validation/index.html", a) === tok("index.html", a));
+  }
+}
 
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);

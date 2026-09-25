@@ -92,6 +92,12 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # ── 4b. Offline clinical bundle (native drug monographs, lazy-loaded by
 # offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
 [ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
+# The 104 authored monographs the SQL-derived bundle never contained (scripts/build-clinical-supplement.mjs)
+# and the name/class search index over both (scripts/build-clinical-index.mjs). Without the index the
+# Drugs Database can only search the 109-molecule formulary in drugs.js and answers "No drugs match"
+# for molecules whose full monograph is sitting in the bundle beside it.
+[ -f data/clinical-supplement.json.gz ] && cp data/clinical-supplement.json.gz "$WWW/"
+[ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 
 # ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
 # The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:
@@ -132,6 +138,16 @@ done
 # Oncology protocol templates (static, plain JSON - same trust tier as kb/treatments, NOT the
 # encrypted Pro KB). Fetched directly by the client, no kb-loader.js change (Phase 3).
 [ -d kb/protocols ] && cp -R kb/protocols/. "$WWW/kb/protocols/"
+# Knowledge Library clinical protocols (kb-protocols.js): the catalogue + one JSON per protocol, plain
+# static content in the same trust tier. Built/validated by scripts/build-clinical-protocols.mjs.
+[ -d kb/clinical-protocols ] && mkdir -p "$WWW/kb/clinical-protocols" && cp kb/clinical-protocols/*.json "$WWW/kb/clinical-protocols/"
+# Specialty kits (specialty-kits.js): the built kit bundle, plus the WHO growth-standard LMS tables the
+# paediatric growth tool fetches on first use. Plain static content, same trust tier. Built/validated by
+# scripts/build-specialty-kits.mjs (kits) and scripts/build-who-growth.mjs (growth tables).
+[ -f kb/specialty-kits/kits.json ] && mkdir -p "$WWW/kb/specialty-kits" && cp kb/specialty-kits/kits.json "$WWW/kb/specialty-kits/"
+[ -f kb/growth/who-growth.json ] && mkdir -p "$WWW/kb/growth" && cp kb/growth/who-growth.json "$WWW/kb/growth/"
+# Clinical documents (clinical-docs.js): consent templates + handout translations. scripts/build-documents.mjs.
+[ -f kb/documents/documents.json ] && mkdir -p "$WWW/kb/documents" && cp kb/documents/documents.json "$WWW/kb/documents/"
 # ONCOTREE navigator graphs (static JSON; same trust tier as kb/protocols).
 [ -d kb/oncotree ] && mkdir -p "$WWW/kb/oncotree" && cp -R kb/oncotree/. "$WWW/kb/oncotree/"
 # Oncology reference catalogs: AJCC/TNM staging index, CTCAE catalog, irAE (IO toxicity) catalog -
@@ -144,6 +160,9 @@ done
 if [ -d atlas ]; then
   mkdir -p "$WWW/atlas"
   cp atlas/modules.json "$WWW/atlas/" 2>/dev/null || true
+  # Structure search index + review-gated clinical notes (explicit allowlist: a new file here
+  # silently does not ship unless it is named).
+  for f in index.json notes.json; do [ -f "atlas/$f" ] && cp "atlas/$f" "$WWW/atlas/"; done
   for d in atlas/*/; do [ -f "$d/atlas.json" ] && mkdir -p "$WWW/$d" && cp "$d/atlas.json" "$WWW/$d"; done
   # 3D layer (atlas3d.js): ship the manifest + canonical index, NOT the 31 MB of .bin.gz
   # geometry -- atlas3d.js dataUrl() fetches those from the live origin natively.
@@ -185,13 +204,22 @@ fi
 # the evidence the provenance test checks the packs against, not a runtime asset, and it lives outside
 # pglog/ precisely so this line cannot pick it up.
 
+# ── 5a. No textbook citations or page numbers in the shipped bundle (copyright, owner 2026-09-24) ─────
+# Specific citations become the subject's standard-textbook line, page/chapter locators are removed;
+# the repo keeps its authoring provenance. Runs BEFORE encryption so the .enc blobs are clean too.
+# SMD_KEEP_SOURCES=1 skips it (internal/debug builds only).
+if [ "${SMD_KEEP_SOURCES:-}" != "1" ]; then
+  node "$ROOT/scripts/sanitize-sources.mjs" "$WWW" || { echo "  source sanitize FAILED"; exit 1; }
+fi
+
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
 # base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),
 # and flip window.SMD_KB_ENC=1 so kb-loader.js takes the licensed path. Default (unset) = plaintext, unchanged.
 if [ "${KB_ENCRYPT:-}" = "1" ]; then
   [ -n "${KB_KEY:-}" ] || { echo "  KB_ENCRYPT=1 requires env KB_KEY (base64 32-byte key = the APP_KB_KEY Pages secret)"; exit 1; }
   KBENC="kb/dist/kb.core.js kb/dist/kb.clinical.js kb/dist/kb.enrichment.js kb/dist/kb.enrichment.2.js kb/dist/kb.expanded.js"
-  node "$ROOT/scripts/encrypt-kb.mjs" --out "$WWW" $KBENC >/dev/null || { echo "  KB encrypt FAILED"; exit 1; }
+  # read the SANITIZED copies in www/ (not the repo sources), so the encrypted KB carries no citations
+  ( cd "$WWW" && node "$ROOT/scripts/encrypt-kb.mjs" --out "$WWW" $KBENC >/dev/null ) || { echo "  KB encrypt FAILED"; exit 1; }
   for f in $KBENC; do rm -f "$WWW/$f"; done   # ship ONLY the .enc; the plaintext KB never reaches the bundle
   [ -f "$WWW/index.html" ] && sed -i.bak 's/window\.SMD_KB_ENC=0;/window.SMD_KB_ENC=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
   echo "  KB ENCRYPTED (SMD_KB_ENC=1, .enc only; plaintext KB dropped from www/)"

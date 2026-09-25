@@ -24,8 +24,10 @@
  */
 import * as FC from "../../_followcare.js";
 import Pathways from "../../../followcare-pathways.js";
-import { verifyFirebaseToken } from "../../_fbauth.js";
+import { verifyFirebaseToken, cfAccessEmail } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
+import { quotaOn, quotaKv, consume as quotaConsume, quotaRefusal } from "../../_quota.js";
+import { getEntitlement } from "../../_entitlements.js";
 import { fcKv } from "../../_followcare.js";
 import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { fsQuery } from "../../_fbfirestore.js";
@@ -58,9 +60,9 @@ function json(obj, status, request) { return new Response(JSON.stringify(obj), {
 async function readBody(request) { try { return await request.json(); } catch (e) { return {}; } }
 function enabled(env) { return String((env && env.FOLLOWCARE_ENABLED) == null ? "1" : env.FOLLOWCARE_ENABLED) !== "0"; }
 
-// App gate (same posture as /api/experimental + /api/fundx): Cf-Access email, a matching app token, or an allowed Origin.
-function authorise(request, env) {
-  if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+// App gate (same posture as /api/experimental + /api/fundx): verified Cf-Access JWT, a matching app token, or an allowed Origin.
+async function authorise(request, env) {
+  if (await cfAccessEmail(request, env)) return true;   // a VERIFIED Access JWT; the bare email header is forgeable
   const tok = request.headers.get("X-App-Token");
   if (tok && (tok === env.FOLLOWCARE_APP_TOKEN || tok === env.AI_APP_TOKEN || tok === env.FUNDX_APP_TOKEN)) return true;
   const o = request.headers.get("Origin") || "";
@@ -114,6 +116,19 @@ async function notifyClinician(env, ep, escalation) {
     const body = "A recovery check-in needs your review. Tap to open.";
     await sendNativeToAll(env, { title, body, data: { type: "followcare", episodeId: ep.episodeId } }, { uid: "fb:" + ep.doctorUid });
   } catch (e) { /* push is best-effort — an escalation is still visible on the dashboard */ }
+}
+
+/* Patient-credit meter (flag QUOTA_METERS_ON). 1 credit = one MAiTRI call OR one 7-day FollowCare SMS
+ * course — they cost us the same ₹10, so they share one wallet. Returns null when allowed (flag off,
+ * no KV, or credit spent), else the 402 Response the caller should return. Never blocks work already
+ * started: it runs BEFORE the episode is enrolled / the call is queued, never mid-course. */
+async function careCredit(env, request, uid) {
+  if (!quotaOn(env) || !uid) return null;
+  let role = null;
+  try { const ent = await getEntitlement(env, uid); role = ent && ent.role; } catch (e) { return null; }   // fail-open
+  const r = await quotaConsume(env, quotaKv(env), uid, "care", { role });
+  if (r.ok) return null;
+  return json(quotaRefusal(env, "care"), 402, request);
 }
 
 export async function onRequest(context) {
@@ -351,7 +366,7 @@ export async function onRequest(context) {
     }
 
     // ---------------- CLINICIAN (app-gated + Firebase uid) ----------------
-    if (!authorise(request, env)) return json({ error: "unauthorized" }, 401, request);
+    if (!(await authorise(request, env))) return json({ error: "unauthorized" }, 401, request);
     if (request.method === "GET" && seg === "ready") {
       // `media` = is the R2 photo bucket bound? (lets the app tell if Request-Photo is fully provisioned)
       return json({ ready: FC.isConfigured(env), enabled: enabled(env), media: !!(env && env.FOLLOWCARE_R2), photoViewOnce: String((env && env.FOLLOWCARE_PHOTO_VIEW_ONCE) || "") === "1" }, 200, request);
@@ -397,6 +412,11 @@ export async function onRequest(context) {
       if (!ep) return json({ error: "not_found" }, 404, request);
       if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
       const settings = await FCV.getHospitalSettings(env, ep.hospitalId);
+      /* NO CREDIT DEDUCTION HERE (owner-decided 2026-09-18). One credit = one bounded EPISODE, paid at
+       * enrol, and it already includes the day-3 and day-7 non-response calls. This route loads an
+       * existing episode (404s without one), so every call it can place belongs to an episode already
+       * paid for; charging again was double-charging the doctor for the thing they bought. `enroll`
+       * below is now the only care deduction in the codebase and test/quota-meters pins that. */
       const r = await FCV.queueVoiceCall(env, ep, settings, Date.now(), { manual: true, actor: "doctor:" + uid });
       return json(r, r.ok ? 200 : 400, request);
     }
@@ -411,6 +431,7 @@ export async function onRequest(context) {
       if (isOwner && b.hospitalId) hospitalId = b.hospitalId;
       if (!hospitalId) return json({ error: "hospital_not_set" }, 400, request);
       if (b.hospitalId && !isOwner && b.hospitalId !== hospitalId) return json({ error: "hospital_mismatch" }, 403, request);
+      const _q = await careCredit(env, request, uid); if (_q) return _q;
       const r = await FC.enrollEpisode(env, {
         hospitalId: hospitalId, doctorUid: uid, pathwayId: b.pathwayId, phone: b.phone, name: b.name,
         dischargeMs: b.dischargeMs, lang: b.lang, sendHour: b.sendHour, tz: b.tz,

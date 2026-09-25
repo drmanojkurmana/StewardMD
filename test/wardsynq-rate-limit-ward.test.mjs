@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-rate-limit-ward.test.mjs — TASK 9.15/9.1: the clinical door had no throttle.
  *
  * rate-limit.js was a good fixed-window limiter wired to exactly two SMART endpoints. Everything

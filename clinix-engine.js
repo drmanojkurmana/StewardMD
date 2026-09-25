@@ -254,17 +254,31 @@
 
     var bestHit = null;
     var bestLen = 0;
+    var suggestions = [];
 
-    for (var key in rawHistory) {
-      var item = rawHistory[key];
-      var cues = item.cues || [];
-      for (var i = 0; i < cues.length; i++) {
-        var cue = cues[i].toLowerCase();
-        var re = new RegExp("(^|[^a-z0-9])" + cue + "([^a-z0-9]|$)", "i");
-        if (re.test(q)) {
-          if (cue.length > bestLen) {
-            bestLen = cue.length;
-            bestHit = { key: key, item: item };
+    /* The lexicon understands the phrasings students actually use ("how many pillows", "sob on
+     * exertion", "since how many days"). It is optional: without it this falls back to the original
+     * whole-word cue regex, which is what shipped before 2026-09-19. */
+    var LEX = null;
+    try { if (typeof window !== "undefined" && window.SMD_CLINIX_LEXICON) LEX = window.SMD_CLINIX_LEXICON; } catch (e) {}
+    if (!LEX) { try { if (typeof require === "function") LEX = require("./clinix-lexicon.js"); } catch (e) {} }
+
+    if (LEX && LEX.match) {
+      var lr = LEX.match(rawHistory, questionText);
+      if (lr.key) bestHit = { key: lr.key, item: rawHistory[lr.key] };
+      for (var si = 0; si < lr.suggestions.length; si++) suggestions.push(lr.suggestions[si].key);
+    } else {
+      for (var key in rawHistory) {
+        var item = rawHistory[key];
+        var cues = item.cues || [];
+        for (var i = 0; i < cues.length; i++) {
+          var cue = cues[i].toLowerCase();
+          var re = new RegExp("(^|[^a-z0-9])" + cue + "([^a-z0-9]|$)", "i");
+          if (re.test(q)) {
+            if (cue.length > bestLen) {
+              bestLen = cue.length;
+              bestHit = { key: key, item: item };
+            }
           }
         }
       }
@@ -279,7 +293,7 @@
         reply: bestHit.item.reply,
         time: Date.now()
       });
-      return { key: bestHit.key, reply: bestHit.item.reply, recognized: true };
+      return { key: bestHit.key, reply: bestHit.item.reply, recognized: true, suggestions: suggestions };
     }
 
     var fallback = (state.rawCase.unmatchedReply) ||
@@ -290,7 +304,7 @@
       reply: fallback,
       time: Date.now()
     });
-    return { key: null, reply: fallback, recognized: false };
+    return { key: null, reply: fallback, recognized: false, suggestions: suggestions };
   }
 
   /* ── 4. Investigations ──────────────────────────────────────────────────── */

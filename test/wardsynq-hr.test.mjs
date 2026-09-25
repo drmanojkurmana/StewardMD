@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-hr.test.mjs - HR beyond the rota: attendance, credentials with expiry alerts and the signing rule, training.
  *
  * Pure rules, and the real routes: GET /api/queue/ward/hr-my-records, POST /api/queue/ward/hr-clock,

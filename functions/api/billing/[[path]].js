@@ -25,14 +25,26 @@ import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
 import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor } from "../../_credits.js";
-import { getEntitlement, clinicLimit, deviceLimit } from "../../_entitlements.js";
+import { getEntitlement, writeEntitlement, clinicLimit, deviceLimit, recordTierPurchase, effectiveTierFor, oncoAddonActive } from "../../_entitlements.js";
+import { oncoTrialState } from "../../_features.js";
 import { deviceLockOn } from "../../_devices.js";
 import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
+import { quotaOn, quotaKv, quotaPacks, quotaPackFor, packKeyForProduct, credit as quotaCredit, state as quotaState,
+  msgTiers, msgTierFromPlanKey, msgTierKeyForProduct, msgPurchasePatch } from "../../_quota.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
 });
 const rawUid = (id) => (typeof id === "string" && id.indexOf("fb:") === 0 ? id.slice(3) : id);
+
+// One JSON secret {keyId,keySecret,webhookSecret} keeps Cloudflare Pages under its 128-text-binding cap;
+// the three separate RAZORPAY_* vars still work as fallback.
+function razorpayCfg(env) {
+  try {
+    if (env.RAZORPAY_JSON) { const j = JSON.parse(env.RAZORPAY_JSON); return { keyId: j.keyId, keySecret: j.keySecret, webhookSecret: j.webhookSecret }; }
+  } catch (e) {}
+  return { keyId: env.RAZORPAY_KEY_ID, keySecret: env.RAZORPAY_KEY_SECRET, webhookSecret: env.RAZORPAY_WEBHOOK_SECRET };
+}
 
 // Plans — amounts in PAISE (₹1 = 100), env-overridable. See docs/PRICING_PACKAGING.md. `monthly`/`annual`
 // stay as the Pro back-compat keys the current paywall renders; `tiers`/`addons`/`founding` carry the full set.
@@ -44,19 +56,31 @@ function plans(env) {
     tiers: {
       student: { months: 1, amount: P("STUDENT_PRICE_MONTHLY", 19900), annual: P("STUDENT_PRICE_ANNUAL", 199900), regular: P("STUDENT_REGULAR", 39900), label: "Trainee", requiresVerify: true },
       coresident: { months: 1, amount: P("CORESIDENT_PRICE_MONTHLY", 29900), annual: P("CORESIDENT_PRICE_ANNUAL", 299900), regular: P("CORESIDENT_REGULAR", 99900), seats: 2, label: "Co-Resident" },
-      pro: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), annual: P("PRO_PRICE_ANNUAL", 499900), regular: P("PRO_REGULAR", 99900), label: "Pro", popular: true },
-      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 149900), annual: P("PHYSICIAN_PRICE_ANNUAL", 1499900), regular: P("PHYSICIAN_REGULAR", 249900), label: "Physician" },
-      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 249900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 2499900), regular: P("PHYSICIANPRO_REGULAR", 399900), label: "Physician Pro", premium: true },
+      pro: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), annual: P("PRO_PRICE_ANNUAL", 599900), regular: P("PRO_REGULAR", 99900), label: "Pro", popular: true },
+      /* 2026-09-18 owner: the top two tiers come down to ₹749 / ₹899 (were ₹1,499 / ₹2,499). Two rules
+       * this ladder depends on, so don't "tidy" them:
+       *  - Every annual is 10x the monthly (two months free). 8x was tested and drops Physician below
+       *    the 50% margin floor once the included FollowCare/Scribe quotas are paid for.
+       *  - `regular` is the price actually charged until 2026-09-17, which is what makes the
+       *    strike-through on the paywall a true comparison rather than invented urgency. */
+      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 74900), annual: P("PHYSICIAN_PRICE_ANNUAL", 749900), regular: P("PHYSICIAN_REGULAR", 149900), label: "Physician" },
+      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 89900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 899900), regular: P("PHYSICIANPRO_REGULAR", 249900), label: "Physician Pro", premium: true },
     },
     addons: {
       onco: { amount: P("ONCO_ADDON_MONTHLY", 8900), label: "Physician Onco" },
       clinic: { amount: P("CLINIC_ADDON_MONTHLY", 13900), label: "Extra clinic" },
     },
+    // Clinic Messaging — an add-on-shaped section, but real auto-renewable subscriptions in their own
+    // App Store group so they stack on whatever base plan the doctor already holds. Units + product
+    // ids live in functions/_quota.js, which is also what meters them.
+    msgTiers: msgTiers(env),
     tokens: {
       boost: { mt: 50000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
       plus: { mt: 250000, amount: P("TOKENS_PLUS", 19900), regular: P("TOKENS_PLUS_REGULAR", 24500), label: "Plus", popular: true },
       power: { mt: 750000, amount: P("TOKENS_POWER", 49900), regular: P("TOKENS_POWER_REGULAR", 73500), label: "Power" },
     },
+    // Per-patient / per-consult top-up packs (functions/_quota.js owns the units + product ids).
+    packs: quotaPacks(env),
     founding: { amount: P("FOUNDING_PRICE_YEAR", 39900), months: 12, seats: P("FOUNDING_SEATS", 500), label: "Founding Doctor (year)" },
   };
 }
@@ -70,6 +94,8 @@ export function selectAmount(env, body) {
     const t = P.tiers[b.tier], annual = b.cycle === "annual" && t.annual;
     return { amount: annual ? t.annual : t.amount, months: annual ? 12 : 1, key: b.tier + ":" + (annual ? "annual" : "monthly"), label: t.label };
   }
+  if (b.msgTier && P.msgTiers[b.msgTier]) { const m = P.msgTiers[b.msgTier]; return { amount: m.amount, months: 1, key: "msgtier:" + b.msgTier, label: m.label }; }
+  if (b.quotaPack && P.packs[b.quotaPack]) { const q = P.packs[b.quotaPack]; return { amount: q.amount, months: 0, units: q.units, key: "pack:" + b.quotaPack, label: q.label }; }
   if (b.pack && P.tokens[b.pack]) { const k = P.tokens[b.pack]; return { amount: k.amount, months: 0, mt: k.mt, key: "tokens:" + b.pack, label: k.label + " tokens" }; }
   if (b.addon && P.addons[b.addon]) { const a = P.addons[b.addon]; return { amount: a.amount, months: 1, key: "addon:" + b.addon, label: a.label }; }
   const plan = P[b.plan] ? b.plan : "monthly";
@@ -91,6 +117,30 @@ export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
   const lookupUser = (deps && deps.lookupUser) || lookupUserByUid;
   const kv = (deps && deps.kv) || usageKv(env);
   const grant = (deps && deps.grantPro) || grantPro;
+  // Quota packs (patient credits / Scribe consults) — units re-read from the server price table, never
+  // from the payment note. Keyed by uid, which is what functions/_quota.js meters.
+  /* Clinic Messaging subscription. It buys a MONTHLY ALLOWANCE, not Pro and not a plan tier, so it
+   * must not fall through to grantPro() below — that was the exact bug the token packs had. Recorded
+   * on the entitlement as msgTier / msgTierExp; the patch is pure and upgrade-only (see _quota.js). */
+  if (msgTierFromPlanKey(planKey)) {
+    const getEnt = (deps && deps.getEntitlement) || getEntitlement;
+    const putEnt = (deps && deps.writeEntitlement) || writeEntitlement;
+    let rec = null;
+    try { rec = await getEnt(env, uid); } catch (e) { rec = null; }
+    const patch = msgPurchasePatch(rec, planKey, months, Date.now());
+    if (!patch) return { ok: false, reason: "unknown-msg-tier" };
+    await putEnt(env, uid, patch);
+    return { ok: true, msgTier: patch.msgTier, msgTierExp: patch.msgTierExp };
+  }
+  const qpack = quotaPackFor(planKey);
+  if (qpack) {
+    const q = quotaPacks(env)[qpack];
+    if (!q) return { ok: false, reason: "unknown-pack" };
+    const qkv = (deps && deps.kv) || quotaKv(env);
+    const r = await ((deps && deps.creditQuota) || quotaCredit)(env, qkv, uid, q.feature, q.units);
+    if (!r || !r.ok) return { ok: false, reason: (r && r.reason) || "credit-failed" };
+    return { ok: true, feature: q.feature, units: q.units, purchasedBalance: r.purchasedBalance };
+  }
   const pack = tokenPackFor(planKey);
   if (pack) {
     const p = plans(env).tokens[pack];
@@ -100,8 +150,24 @@ export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
     const r = await addTokens(kv, "em:" + u.email, p.mt);
     return { ok: true, tokens: p.mt, balanceInr: r.balance, email: u.email };
   }
-  const g = await grant(env, uid, { months: Math.max(1, +months || 1), source });
-  return Object.assign({ ok: true }, g);
+  const m = Math.max(1, +months || 1);
+  const g = await grant(env, uid, { months: m, source });
+  // Record WHICH plan was bought (tier / onco add-on). Best-effort: the Pro grant above is the money
+  // path and must not fail because the entitlement store blinked — the tier can be reconciled later.
+  let tier = null;
+  try { tier = await (deps && deps.recordTierPurchase || recordTierPurchase)(env, uid, planKey, { months: m }, deps); } catch (e) {}
+  return Object.assign({ ok: true }, g, tier ? { tier: tier.tier || null, tierExp: tier.tierExp } : {});
+}
+
+// App Store / Play product id -> the same plan key the web checkout issues.
+// in.stewardmd.<tier>.<monthly|annual> and in.stewardmd.addon.<name>; token packs keep their own
+// (consumable) id shape handled at the IAP route.
+export function planKeyFromProductId(productId) {
+  const m = /^in\.stewardmd\.([a-z]+)\.([a-z]+)$/.exec(String(productId || "").toLowerCase());
+  if (!m) return null;
+  if (m[1] === "addon") return "addon:" + m[2];
+  if (m[2] !== "monthly" && m[2] !== "annual") return null;
+  return m[1] + ":" + m[2];
 }
 
 async function hmacSha256Hex(secret, message) {
@@ -170,7 +236,11 @@ export async function onRequest(context) {
        * the verification screen showed a green tick. Reconciling here means Pro returns on the next
        * app open rather than only if they happen to open that screen. */
       try { await reconcileVerifiedClaim(env, uid); } catch (e) {}
-      const state = await entitlementFor(env, uid);
+      // The token's email rides along so an OWNER is recognised here as on the hot AI gate; custom
+      // claims carry no email, so without this the owner's status read "not Pro" (2026-09-20).
+      let _em = "";
+      try { const w0 = await usageIdentify(request, env); _em = (w0 && !w0.guest && w0.email) || ""; } catch (e) {}
+      const state = await entitlementFor(env, uid, _em);
       /* Give every UNVERIFIED account a lifecycle record, so the day-7 sweep can actually see it.
        *
        * markFirstSeen() was only ever called from /api/welcome, which fires exclusively for
@@ -193,12 +263,34 @@ export async function onRequest(context) {
         const who = await usageIdentify(request, env);
         if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); }
       } catch (e) {}
-      try { const ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
+      let ent = null;
+      try { ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
       try { const who = await usageIdentify(request, env); if (who && who.email) costCap = await dailyCostCap(env, usageKv(env), who.email, role); } catch (e) {}
+      // Per-patient quota meters (flagged). Additive: absent entirely when QUOTA_METERS_ON !== "1".
+      let quota = null;
+      if (quotaOn(env) && uid) {
+        try {
+          const qkv = quotaKv(env);
+          // The msg meter also needs the Clinic Messaging subscription off the entitlement, because
+          // its allowance is included + tier. Re-read here rather than threaded through: one doc.
+          let ment = null;
+          try { ment = await getEntitlement(env, uid); } catch (e) { ment = null; }
+          quota = {
+            care: await quotaState(env, qkv, uid, "care", { role }),
+            scribe: await quotaState(env, qkv, uid, "scribe", { role }),
+            msg: await quotaState(env, qkv, uid, "msg", { role, msgTier: ment && ment.msgTier, msgTierExp: ment && ment.msgTierExp }),
+          };
+        } catch (e) { quota = null; }
+      }
       return json(Object.assign({
         signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env),
+        quota: quota, quotaOn: quotaOn(env),
         tokens: inrToMt(credits), costCapMt: inrToMt(costCap), mtPerInr: MT_PER_INR,   // MaiK Tokens = what the UI shows
         role: role || null, clinicLimit: clinicLimit(env, role), deviceLimit: deviceLimit(env, role), deviceLockOn: deviceLockOn(env),
+        // Purchase-derived ladder, so the client can render what was actually bought. The onco trial
+        // end is advisory only — the trial clock starts server-side on first oncology-AI use.
+        tier: effectiveTierFor(ent), tierExp: (ent && ent.tierExp) || null,
+        oncoAddon: oncoAddonActive(ent), oncoTrialEndsAt: (ent && ent.oncoTrialStart) ? oncoTrialState(ent).endsAt : null,
       }, state));
     }
     // ---- owner billing overview: provider config (booleans, never secrets) + flags + founding + plans ----
@@ -211,7 +303,7 @@ export async function onRequest(context) {
       return json({
         providers: {
           phonepe: !!(env.PHONEPE_CLIENT_ID && env.PHONEPE_CLIENT_SECRET),
-          razorpay: !!(env.RAZORPAY_KEY_ID && env.RAZORPAY_KEY_SECRET),
+          razorpay: !!(razorpayCfg(env).keyId && razorpayCfg(env).keySecret),
           apple: iapConfigured(env, "apple"),
           google: iapConfigured(env, "google"),
         },
@@ -244,13 +336,30 @@ export async function onRequest(context) {
       if (!v.valid) return json({ ok: false, valid: false, reason: v.reason || "invalid" }, 402);
       // Consumable MaiK Token packs (in.stewardmd.tokens.<pack>) are NOT subscriptions: they have no
       // expiry, so the days-from-expiry grant below would have handed out Pro instead of tokens.
+      // Consumable quota packs (in.stewardmd.care.N / in.stewardmd.scribe.N) — same non-subscription path.
+      // Clinic Messaging subscriptions (in.stewardmd.msg.small|big.monthly) grant an allowance, not Pro.
+      const iapMsg = msgTierKeyForProduct(body.productId);
+      if (iapMsg) {
+        const f = await fulfilPurchase(env, uid, iapMsg, 1, "iap-" + platform);
+        if (!f || !f.ok) return json({ ok: false, error: (f && f.reason) || "fulfil-failed" }, 500);
+        return json({ ok: true, valid: true, platform: platform, msgTier: f.msgTier, msgTierExp: f.msgTierExp });
+      }
+      const iapQuota = packKeyForProduct(body.productId);
+      if (iapQuota) {
+        const f = await fulfilPurchase(env, uid, iapQuota, 0, "iap-" + platform);
+        if (!f.ok) return json({ ok: false, valid: true, reason: f.reason }, 502);
+        return json({ ok: true, valid: true, platform: platform, feature: f.feature, units: f.units, purchasedBalance: f.purchasedBalance });
+      }
       const iapPack = /^in\.stewardmd\.tokens\.([a-z]+)$/.exec(String(body.productId || ""));
       if (iapPack) {
         const f = await fulfilPurchase(env, uid, "tokens:" + iapPack[1], 0, "iap-" + platform);
         if (!f.ok) return json({ ok: false, valid: true, reason: f.reason }, 502);
         return json({ ok: true, valid: true, platform: platform, tokens: f.tokens, balanceMt: inrToMt(f.balanceInr) });
       }
-      const g = await grantPro(env, uid, { days: daysFromExpiry(v.expiresAt), source: "iap-" + platform });
+      const days = daysFromExpiry(v.expiresAt);
+      const g = await grantPro(env, uid, { days: days, source: "iap-" + platform });
+      // Same as the webhook path: the store productId, never the client, says which plan this was.
+      try { await recordTierPurchase(env, uid, planKeyFromProductId(body.productId), { days: days }); } catch (e) {}
       return json(Object.assign({ ok: true, valid: true, platform: platform, expiresAt: v.expiresAt || null }, g));
     }
 
@@ -288,24 +397,25 @@ export async function onRequest(context) {
 
     // ---- Razorpay (web / off-Play Android) ----
     if (method === "POST" && seg === "razorpay" && sub === "order") {
-      if (!env.RAZORPAY_KEY_ID || !env.RAZORPAY_KEY_SECRET) return json({ error: "razorpay-not-configured" }, 501);
+      const rz = razorpayCfg(env);
+      if (!rz.keyId || !rz.keySecret) return json({ error: "razorpay-not-configured" }, 501);
       const uid = rawUid(await identify(request, env));
       if (!uid) return json({ error: "signin-required" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
       const sel = selectAmount(env, body);
       const r = await fetch("https://api.razorpay.com/v1/orders", {
         method: "POST",
-        headers: { "Authorization": "Basic " + btoa(env.RAZORPAY_KEY_ID + ":" + env.RAZORPAY_KEY_SECRET), "Content-Type": "application/json" },
+        headers: { "Authorization": "Basic " + btoa(rz.keyId + ":" + rz.keySecret), "Content-Type": "application/json" },
         body: JSON.stringify({ amount: sel.amount, currency: "INR", notes: { uid, plan: sel.key, months: sel.months }, receipt: "smd-" + uid.slice(0, 18) + "-" + Date.now().toString(36) }),
       });
       const o = await r.json();
       if (!r.ok || !o.id) return json({ error: "order-failed", detail: (o && o.error) || null }, 502);
-      return json({ orderId: o.id, amount: o.amount, currency: o.currency, keyId: env.RAZORPAY_KEY_ID, plan: sel.key, label: sel.label });
+      return json({ orderId: o.id, amount: o.amount, currency: o.currency, keyId: rz.keyId, plan: sel.key, label: sel.label });
     }
     if (method === "POST" && seg === "razorpay" && sub === "webhook") {
       const raw = await request.text();
       const sig = request.headers.get("X-Razorpay-Signature") || "";
-      const secret = env.RAZORPAY_WEBHOOK_SECRET;
+      const secret = razorpayCfg(env).webhookSecret;
       if (!secret) return json({ error: "webhook-not-configured" }, 501);
       const expected = await hmacSha256Hex(secret, raw);
       if (!timingEqual(expected, sig)) return json({ error: "bad-signature" }, 401);

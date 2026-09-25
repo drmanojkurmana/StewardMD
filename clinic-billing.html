@@ -13,6 +13,11 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>try{ firebase.initializeApp({ apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain:"stewardmd-498ec.firebaseapp.com", projectId:"stewardmd-498ec", appId:"1:911280405587:web:d09038e15e98d69dc79aa6" }); }catch(e){}</script>
+<script src="/pglog-qr.js?v=pgqr1"></script>
+<script src="/barcode128.js?v=bc128-1"></script>
+<script src="/smd-nfc.js?v=nfc-2"></script>
+<script src="/steward-identity-resolver.js?v=sir-1"></script>
+<script src="/smd-identity-scanner.js?v=sis-1"></script>
 <style>
   @font-face{ font-family:'Inter Variable'; font-style:normal; font-weight:100 900; font-display:swap; src:url(/assets/fonts/inter-variable.woff2) format('woff2'); }
   @font-face{ font-family:'Material Symbols Rounded'; font-style:normal; font-weight:300 700; font-display:block; src:url(/assets/fonts/material-symbols-rounded.woff2) format('woff2'); }
@@ -57,10 +62,25 @@
   @keyframes rise{ from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
   @keyframes pop{ 0%{transform:scale(.4);opacity:0} 60%{transform:scale(1.12)} 100%{transform:scale(1);opacity:1} }
   @media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important } }
+  #loBtn{ transition:all .15s ease; border:1px solid var(--line); }
+  #loBtn:hover{ background:var(--red); color:#fff; border-color:var(--red); }
+  #shiftOv{ position:fixed; inset:0; z-index:50; background:rgba(8,18,22,.55); display:flex; align-items:center; justify-content:center; padding:20px; }
+  .sh-card{ background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:16px; box-shadow:var(--sh-lg); max-width:520px; width:100%; max-height:88dvh; overflow:auto; padding:20px; }
+  .sh-table{ width:100%; border-collapse:collapse; font:600 14px 'Inter Variable',Inter; margin:12px 0; }
+  .sh-table th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--mut); padding:6px 8px; border-bottom:1px solid var(--line); }
+  .sh-table td{ padding:8px; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums; }
+  .sh-table tr.tot td{ font-weight:800; border-bottom:none; border-top:2px solid var(--line); font-size:16px; }
+  .splitbox{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+  @media print{
+    body > *:not(#shiftOv){ display:none !important; }
+    #shiftOv{ position:static; background:none; padding:0; display:block; }
+    .sh-card{ max-width:none; max-height:none; overflow:visible; box-shadow:none; border:none; }
+    .noprint{ display:none !important; }
+  }
 </style>
 </head>
 <body>
-<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><span class="tag" id="stnTag">Cashier</span></div></header>
+<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> <span id="stnName">Billing</span></h1><a class="btn ghost" href="/opd" style="text-decoration:none;margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:auto;margin-right:8px;display:inline-flex;align-items:center;gap:4px"><span class="ms" style="font-size:16px">arrow_back</span> OPD Board</a><span class="tag" id="stnTag" style="margin-left:0">Cashier</span><button class="btn ghost" id="shiftReportBtn" title="Day-end shift report: today's takings by Cash, UPI and Card" style="margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:8px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;flex-shrink:0"><span class="ms" style="font-size:16px">summarize</span> Shift</button><button class="btn ghost" id="loBtn" title="Sign out of this session" style="margin-top:0;width:auto;padding:6px 12px;font-size:13px;margin-left:8px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;flex-shrink:0"><span class="ms" style="font-size:16px">logout</span> Sign out</button></div></header>
 <main id="app"></main>
 <script>
 (function(){
@@ -74,8 +94,26 @@
   var tok = "", tt = "";
   try { tok = localStorage.getItem("smd_opd_staff_tok") || ""; tt = localStorage.getItem("smd_opd_toktype") || ""; } catch (e) {}
   if (tt === "account") tt = "firebase";   // wardsynq.com spells the account sign-in "account" (LT-01)
-  var orgId = ""; try { orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
+  var orgId = P.get("orgId") || "";
+  try { if (!orgId) orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
   var cur = null;   // { patient, orders } | { invoice }
+
+  var loBtn = document.getElementById("loBtn");
+  if (loBtn) {
+    loBtn.onclick = function() {
+      try {
+        localStorage.removeItem("smd_opd_staff_tok");
+        localStorage.removeItem("smd_opd_toktype");
+        localStorage.removeItem("smd_opd_hospital");
+        sessionStorage.removeItem("smd_staff_token");
+        if (window.firebase && firebase.auth) firebase.auth().signOut().catch(function(){});
+      } catch (e) {}
+      location.href = "/opd";
+    };
+  }
+
+  var shiftBtn = document.getElementById("shiftReportBtn");
+  if (shiftBtn) shiftBtn.onclick = function(){ openShift(); };
 
   function ms(n){ return '<span class="ms">'+n+'</span>'; }
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }
@@ -83,10 +121,14 @@
   function initials(n){ return String(n||"?").trim().split(/\s+/).slice(0,2).map(function(w){return w[0]||"";}).join("").toUpperCase() || "?"; }
 
   function fbToken(){ try { var a=firebase&&firebase.auth&&firebase.auth(); var u=a&&a.currentUser; return (u&&u.getIdToken)?u.getIdToken().catch(function(){return "";}):Promise.resolve(""); } catch(e){ return Promise.resolve(""); } }
+  function queueApiUrl(path){
+    var base = (location.hostname.indexOf("wardsynq") > -1) ? "https://stewardmd.in/api/queue/" : "/api/queue/";
+    return base + String(path || "").replace(/^\/+/, "");
+  }
   function api(path, opts){
     opts = opts || {};
     var h = { "Content-Type": "application/json" };
-    var send = function(){ return fetch("/api/queue/bill/" + path, { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
+    var send = function(){ return fetch(queueApiUrl("bill/" + path), { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
       .then(function(r){ return r.json().catch(function(){ return { ok:false, error:"bad_response" }; }); })
       .catch(function(){ return { ok:false, error:"network" }; }); };
     if (tt === "firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });   // clinic owner: mint an id-token like /opd does
@@ -106,12 +148,14 @@
           (r && r.error === "billing_disabled" ? "The pharmacy station is not switched on for this clinic yet." : "Could not load the dispense list.")+'</div></section>';
         return;
       }
-      renderPharmacy((r.orders)||[], r.truncated ? r.cap : 0);
+      // A tap/scan arrival carries its patient (?patientId=) so the owed row reads highlighted.
+      var hl = P.get("patientId") || P.get("patient") || P.get("scan") || "";
+      renderPharmacy((r.orders)||[], r.truncated ? r.cap : 0, hl);
     });
   }
   // More waiting than one screen reads: said plainly, so the list is never taken for everything owed.
   function capNote(cap){ return cap ? '<div class="msg">'+ms("warning")+'Showing the first '+cap+' only. More are waiting than this list can show; dispense these and refresh.</div>' : ""; }
-  function renderPharmacy(orders, cap){
+  function renderPharmacy(orders, cap, hl){
     if (!orders.length) {
       app.innerHTML = '<section class="card"><h2>'+ms("done_all")+'Nothing to dispense</h2>'+
         '<div class="msg">Every paid medicine has been handed over.</div>'+
@@ -119,11 +163,15 @@
       document.getElementById("rf").onclick = pharmacyView;
       return;
     }
+    // The highlight id may be a raw scan (deep link, prefix, lower case): match it canonically too.
+    var hlNorm = "";
+    try { if (window.StewardIdentityResolver && hl) hlNorm = StewardIdentityResolver.normalizeCarrierValue(hl) || ""; } catch (e) {}
     var rows = orders.map(function(o){
-      return '<div class="line"><span class="k med">Rx</span>'+
+      var sel = hl && (o.patientId === hl || (hlNorm && o.patientId === hlNorm));
+      return '<div class="line"'+(sel ? ' style="outline:2px solid var(--teal);border-radius:12px;background:var(--teal-soft)"' : '')+'><span class="k med">Rx</span>'+
         '<span class="nm">'+esc(o.name)+(o.qty>1?' <small>x'+o.qty+'</small>':'')+
         '<br><small>'+esc(o.patientId||"")+'</small></span>'+
-        '<button class="btn" style="margin:0;width:auto;padding:8px 14px" data-disp="'+esc(o.id)+'">'+ms("check")+'Dispense</button></div>';
+        '<button class="btn" style="margin:0;width:auto;padding:8px 14px" data-disp="'+esc(o.id)+'" data-pat="'+esc(o.patientId||"")+'" data-enc="'+esc(o.encounterId||o.ticketId||"")+'">'+ms("check")+'Dispense</button></div>';
     }).join("");
     app.innerHTML = '<section class="card"><h2>'+ms("medication")+'To dispense <small>('+orders.length+(cap?'+':'')+')</small></h2>'+capNote(cap)+
       rows+'<div class="err" id="err"></div>'+
@@ -132,11 +180,16 @@
     Array.prototype.forEach.call(app.querySelectorAll("[data-disp]"), function(b){
       b.onclick = function(){
         b.disabled = true; b.textContent = "Dispensing…";
-        api("dispense", { method:"POST", body:{ orgId:orgId, orderId:b.getAttribute("data-disp") } }).then(function(r){
+        // The dispense carries who it is for (patientId + encounterId): the server refuses a
+        // row that names a different patient, and records dispensedBy/dispensedAt on the order
+        // itself - the pharmacy handover, distinct from the bedside administeredBy/At the eMAR
+        // records when the dose is actually given.
+        api("dispense", { method:"POST", body:{ orgId:orgId, orderId:b.getAttribute("data-disp"), patientId:b.getAttribute("data-pat")||"", encounterId:b.getAttribute("data-enc")||"" } }).then(function(r){
           if (r && r.ok) { pharmacyView(); return; }
           b.disabled = false; b.innerHTML = ms("check")+"Dispense";
           document.getElementById("err").textContent =
-            (r && r.error === "not_dispensable") ? "That order is not paid yet - send the patient to billing first." : "Could not record the dispense. Try again.";
+            (r && r.error === "not_dispensable") ? "That order is not paid yet - send the patient to billing first." :
+            (r && r.error === "patient_mismatch") ? "That order belongs to a different patient. Nothing was dispensed." : "Could not record the dispense. Try again.";
         });
       };
     });
@@ -145,7 +198,7 @@
   function lookupView(prefill){
     cur = null;
     app.innerHTML = '<section class="card"><h2>'+ms("badge")+'Find patient</h2>'+
-      '<label>Patient ID</label><input id="mrn" placeholder="SMD-XXXXXX-0000" autocomplete="off" value="'+esc(prefill||"")+'">'+
+      '<label>Patient ID or Token</label><input id="mrn" placeholder="SMD-XXXXXX-0000 or token" autocomplete="off" value="'+esc(prefill||"")+'">'+
       '<div class="err" id="err"></div>'+
       '<button class="btn" id="go">'+ms("search")+'Look up orders</button></section>';
     var go = document.getElementById("go"), inp = document.getElementById("mrn");
@@ -155,16 +208,48 @@
     // Everyone with something waiting to be billed, so the cashier does not depend on being told an ID.
     var q = document.createElement("section"); q.className = "card"; q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Loading…</div>';
     app.appendChild(q);
-    if (MOCK) { q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Demo: the live list shows every patient with unbilled orders.</div>'; return; }
+
+    var qOpd = document.createElement("section"); qOpd.className = "card"; qOpd.style.display = "none";
+    app.appendChild(qOpd);
+
+    if (MOCK) {
+      q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Demo: the live list shows every patient with unbilled orders.</div>';
+      return;
+    }
     api("queue?orgId="+encodeURIComponent(orgId)).then(function(r){
       if (!r || !r.ok) { q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">'+ms("error")+'The list could not be loaded. Do not read this as nothing waiting. Look a patient up by ID instead.</div>'; return; }
       var by = {}; (r.orders||[]).forEach(function(o){ (by[o.patientId] = by[o.patientId] || []).push(o); });
       var ids = Object.keys(by);
-      q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2>' + (r.truncated ? capNote(r.cap) : "") + (ids.length
+      q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed <small style="font-size:12px;font-weight:600;color:var(--mut)">('+ids.length+')</small></h2>' + (r.truncated ? capNote(r.cap) : "") + (ids.length
         ? ids.map(function(id){ var n = by[id].length, tot = by[id].reduce(function(s,o){ return s + (o.unitPrice||0)*(o.qty||1); }, 0);
             return '<div class="line"><span class="nm">'+esc(id)+' <small>'+n+' item'+(n===1?'':'s')+'</small></span><span class="amt">'+rupees(tot)+'</span><button class="btn ghost" style="width:auto;margin:0 0 0 8px;padding:8px 12px" data-bill="'+esc(id)+'">Open</button></div>'; }).join("")
         : '<div class="msg">Nothing is waiting to be billed.</div>');
       Array.prototype.forEach.call(q.querySelectorAll("[data-bill]"), function(b){ b.onclick = function(){ loadPatient(b.getAttribute("data-bill")); }; });
+
+      if (r.opdPatients && r.opdPatients.length) {
+        qOpd.style.display = "block";
+        qOpd.innerHTML = '<h2>'+ms("group")+'Today\'s OPD Queue <small style="font-size:12px;font-weight:600;color:var(--mut)">('+r.opdPatients.length+' registered)</small></h2>' +
+          r.opdPatients.map(function(p){
+            var chip = p.unbilledTotal > 0
+              ? '<span style="background:var(--teal-soft);color:var(--teal-d);font-weight:700;padding:2px 8px;border-radius:6px;font-size:11px;letter-spacing:0.02em">'+rupees(p.unbilledTotal)+' unbilled</span>'
+              : '<span style="background:var(--btn);color:var(--mut);font-weight:600;padding:2px 8px;border-radius:6px;font-size:11px">Registered</span>';
+            var tokenStr = p.token ? '<span style="display:inline-block;padding:2px 6px;border-radius:6px;background:var(--btn);font-weight:700;font-size:12px;margin-right:6px">#'+esc(p.token)+'</span>' : '';
+            var pid = p.mrn || p.id;
+            return '<div class="line" style="display:flex;align-items:center;justify-content:space-between;gap:8px">'+
+              '<div style="flex:1;min-width:0">'+
+                '<div style="font-weight:700;font-size:14px;display:flex;align-items:center;gap:4px;flex-wrap:wrap">'+tokenStr+'<span>'+esc(p.name||"Patient")+'</span></div>'+
+                '<div style="font-size:12px;color:var(--mut);margin-top:2px">'+esc(pid)+(p.department?' · '+esc(p.department):'')+'</div>'+
+              '</div>'+
+              '<div style="display:flex;align-items:center;gap:8px">'+
+                chip +
+                '<button class="btn ghost" style="width:auto;margin:0;padding:6px 14px;font-size:13px" data-opd-bill="'+esc(pid)+'">'+ms("receipt_long")+' Bill</button>'+
+              '</div>'+
+            '</div>';
+          }).join("");
+        Array.prototype.forEach.call(qOpd.querySelectorAll("[data-opd-bill]"), function(b){
+          b.onclick = function(){ loadPatient(b.getAttribute("data-opd-bill")); };
+        });
+      }
     });
   }
 
@@ -177,7 +262,30 @@
         if (!p || !p.ok) { document.getElementById("err").textContent = p && p.error === "billing_disabled" ? "Billing is not enabled for this clinic yet." : p && p.error === "not_found" ? "No patient found with that ID." : "The patient could not be looked up. Try again."; return; }
         if (!o || !o.ok) { document.getElementById("err").textContent = "This patient's orders could not be loaded. Do not read this as nothing to bill."; return; }
         review({ patient: p, orders: o.orders || [] });
+        loadRefunds(id);
       });
+  }
+  /* OPD plan item 9: what this patient PAID for, each with a Refund button. The cashier states why; the
+   * amount is the order's own, never typed. A dispensed medicine is refused by the server as a return. */
+  function loadRefunds(id){
+    api("orders?orgId="+encodeURIComponent(orgId)+"&patientId="+encodeURIComponent(id)+"&status=paid").then(function(r){
+      var old = document.getElementById("refunds"); if (old && old.parentNode) old.parentNode.removeChild(old);
+      if (!r || !r.ok || !(r.orders || []).length) return;
+      var html = '<div id="refunds" class="card" style="margin-top:12px"><b>Paid - refund only if not delivered</b>' + r.orders.map(function(o){
+        return orderLine(o).replace(/<\/div>$/, ' <button class="ghost" data-refund="'+esc(o.id)+'" style="margin-left:8px">Refund</button></div>');
+      }).join("") + '</div>';
+      document.getElementById("err").insertAdjacentHTML("afterend", html);
+      Array.prototype.forEach.call(document.querySelectorAll("[data-refund]"), function(b){
+        b.onclick = function(){
+          var why = prompt("Why is this refunded? (for example: doctor unavailable, test not done)");
+          if (!why || !why.trim()) return;
+          api("refund", { method:"POST", body:{ orgId:orgId, orderId:b.getAttribute("data-refund"), reason:why.trim() } }).then(function(x){
+            document.getElementById("err").textContent = x && x.ok ? "Refunded " + rupees(x.refundAmount || 0) + "." : ((x && x.message) || "Not refunded.");
+            loadRefunds(id);
+          });
+        };
+      });
+    });
   }
 
   function orderLine(o){
@@ -192,7 +300,7 @@
     var body = orders.length
       ? orders.map(orderLine).join("") + '<div class="tot"><span>Total</span><span>'+rupees(total)+'</span></div>' +
         '<button class="btn" id="inv">'+ms("receipt_long")+'Generate invoice</button>'
-      : '<div class="msg">'+ms("inventory_2")+'No unbilled orders for this patient.</div><button class="btn ghost" id="back">'+ms("arrow_back")+'Look up another</button>';
+      : '<div class="msg" style="padding:16px 12px;background:var(--bg);border-radius:12px;border:1px dashed var(--line);margin-bottom:14px;color:var(--mut)">'+ms("inventory_2")+' No unbilled orders yet for this patient. Add items from the price list below to bill.</div><button class="btn ghost" id="back" style="margin-bottom:16px">'+ms("arrow_back")+'Look up another patient</button>';
     app.innerHTML = '<section class="card"><div class="pt"><div class="av">'+esc(initials(p.name))+'</div><div><b>'+esc(p.name||"Patient")+'</b><span>'+esc(p.id||"")+(p.ageYears?" · "+p.ageYears+"y":"")+(p.sex?" · "+esc(p.sex):"")+'</span></div></div>'+
       '<h2>'+ms("assignment")+'Unbilled orders</h2>'+body+'<div class="err" id="err"></div>'+
       '<h2>'+ms("add_shopping_cart")+'Add an item</h2><div id="addItem"><div class="msg">Loading the price list…</div></div></section>';
@@ -208,13 +316,33 @@
       if (!box) return;
       if (!r || !r.ok) { box.innerHTML = '<div class="msg">'+ms("error")+'The price list could not be loaded.</div>'; return; }
       var items = r.items || [];
-      if (!items.length) { box.innerHTML = '<div class="msg">'+ms("info")+'The price list is empty. The clinic owner adds items under Admin, Price list.</div>'; return; }
-      box.innerHTML = '<label>Item</label><select id="tItem">'+items.map(function(t){ return '<option value="'+esc(t.id)+'">'+esc(t.name)+' - '+rupees(t.price)+'</option>'; }).join("")+'</select>'+
+      if (!items.length) {
+        box.innerHTML = '<div class="msg" style="line-height:1.5">'+ms("info")+'The price list is empty.<br><br>The clinic owner can configure doctor consultation fees, dispensary medicines, and tests under <b>Tariff & Stock</b> in OPD.<br><br><a href="/opd" class="btn ghost" style="display:inline-block;width:auto;padding:8px 16px;text-decoration:none">'+ms("settings")+' Go to OPD Admin</a></div>';
+        return;
+      }
+      var consItem = items.find(function(t){ return t.kind === "consultation"; });
+      var consBtnHtml = consItem
+        ? '<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--line)">' +
+            '<button class="btn" id="tQuickCons" style="margin:0;width:auto;padding:8px 14px;font-size:13px;background:var(--teal);color:#fff">' + ms("medical_services") + ' Add ' + esc(consItem.name) + ' (' + rupees(consItem.price) + ')</button>' +
+          '</div>'
+        : '';
+      box.innerHTML = consBtnHtml + '<label>Item</label><select id="tItem">'+items.map(function(t){ return '<option value="'+esc(t.id)+'">'+esc(t.name)+' - '+rupees(t.price)+'</option>'; }).join("")+'</select>'+
         '<label>Quantity</label><input id="tQty" type="number" min="1" value="1">'+
         '<button class="btn ghost" id="tAdd">'+ms("add")+'Add to this bill</button>';
+      var qCons = document.getElementById("tQuickCons");
+      if (qCons && consItem) {
+        qCons.onclick = function(){
+          qCons.disabled = true;
+          api("order", { method: "POST", body: { orgId: orgId, patientId: p.id, ticketId: p.ticketId || "", tariffId: consItem.id, qty: 1 } }).then(function(x){
+            if (x && x.ok) { loadPatient(p.id); return; }
+            qCons.disabled = false;
+            document.getElementById("err").textContent = "Could not add consultation fee.";
+          });
+        };
+      }
       document.getElementById("tAdd").onclick = function(){
         var b = this; b.disabled = true;
-        api("order", { method:"POST", body:{ orgId:orgId, patientId:p.id, tariffId:document.getElementById("tItem").value, qty:Number(document.getElementById("tQty").value)||1 } }).then(function(x){
+        api("order", { method:"POST", body:{ orgId:orgId, patientId:p.id, ticketId:p.ticketId||"", tariffId:document.getElementById("tItem").value, qty:Number(document.getElementById("tQty").value)||1 } }).then(function(x){
           b.disabled = false;
           if (x && x.ok) { loadPatient(p.id); return; }
           document.getElementById("err").textContent = x && x.error === "forbidden" ? "Your role cannot add items to a bill. A doctor or the clinic owner can." :
@@ -236,16 +364,89 @@
     app.innerHTML = '<section class="card"><div class="pt"><div class="av">'+esc(initials(p&&p.name))+'</div><div><b>'+esc((p&&p.name)||"Patient")+'</b><span>Invoice '+esc((invoice.id||"").slice(-6).toUpperCase())+'</span></div></div>'+
       '<h2>'+ms("receipt_long")+'Invoice</h2>'+lines+'<div class="tot"><span>Amount due</span><span>'+rupees(invoice.total)+'</span></div>'+
       '<div class="pays"><button data-m="cash">'+ms("payments")+'Cash</button><button data-m="upi">'+ms("qr_code_2")+'UPI</button><button data-m="card">'+ms("credit_card")+'Card</button></div>'+
+      '<button class="btn ghost" id="splitTgl">'+ms("call_split")+'Split payment (Cash + UPI)</button>'+
+      '<div id="splitBox" style="display:none"><div class="splitbox"><div><label>Cash (Rs.)</label><input id="spCash" type="number" min="0" step="0.01" placeholder="0.00"></div>'+
+      '<div><label>UPI (Rs.)</label><input id="spUpi" type="number" min="0" step="0.01" placeholder="0.00"></div></div>'+
+      '<div style="font-size:12px;color:var(--mut);margin-top:8px">Cash + UPI must add up to '+rupees(invoice.total)+' exactly.</div>'+
+      '<button class="btn" id="splitPay">'+ms("check")+'Record split payment</button></div>'+
       '<div class="err" id="err"></div></section>';
     Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.onclick = function(){ pay(invoice.id, b.getAttribute("data-m")); }; });
+    document.getElementById("splitTgl").onclick = function(){
+      var box = document.getElementById("splitBox");
+      box.style.display = box.style.display === "none" ? "" : "none";
+      if (box.style.display !== "none") document.getElementById("spCash").focus();
+    };
+    document.getElementById("splitPay").onclick = function(){ paySplit(invoice.id, invoice.total); };
+  }
+  function payDone(label){
+    app.innerHTML = '<section class="card"><div class="paid">'+ms("check_circle")+'<b>Payment recorded</b><div style="color:var(--mut);margin-top:6px">'+esc(label)+' · patient is cleared to proceed.</div></div>'+
+      '<button class="btn" id="next">'+ms("person_add")+'Next patient</button></section>';
+    document.getElementById("next").onclick = function(){ lookupView(); };
   }
   function pay(invoiceId, method){
     Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = true; });
     api("pay", { method:"POST", body:{ orgId:orgId, invoiceId:invoiceId, method:method } }).then(function(r){
       if(!r || !r.ok){ document.getElementById("err").textContent = "Payment could not be recorded."; Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = false; }); return; }
-      app.innerHTML = '<section class="card"><div class="paid">'+ms("check_circle")+'<b>Payment recorded</b><div style="color:var(--mut);margin-top:6px">'+method.toUpperCase()+' · patient is cleared to proceed.</div></div>'+
-        '<button class="btn" id="next">'+ms("person_add")+'Next patient</button></section>';
-      document.getElementById("next").onclick = function(){ lookupView(); };
+      payDone(method.toUpperCase());
+    });
+  }
+  // Split tender: part cash, part UPI. The server refuses anything that does not sum to the total.
+  function paySplit(invoiceId, total){
+    var cash = Math.round(Number(document.getElementById("spCash").value) * 100) || 0;
+    var upi = Math.round(Number(document.getElementById("spUpi").value) * 100) || 0;
+    var err = document.getElementById("err");
+    if (cash < 0 || upi < 0 || cash + upi !== total){ err.textContent = "Cash + UPI must add up to " + rupees(total) + " exactly."; return; }
+    err.textContent = "";
+    document.getElementById("splitPay").disabled = true;
+    Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = true; });
+    api("pay", { method:"POST", body:{ orgId:orgId, invoiceId:invoiceId, method:"split", split:{ cash:cash, upi:upi } } }).then(function(r){
+      if(!r || !r.ok){
+        document.getElementById("err").textContent = r && r.error === "split_mismatch" ? "Cash + UPI must add up to " + rupees(total) + " exactly." : "Payment could not be recorded.";
+        document.getElementById("splitPay").disabled = false;
+        Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = false; });
+        return;
+      }
+      payDone("SPLIT (Cash " + rupees(cash) + " + UPI " + rupees(upi) + ")");
+    });
+  }
+
+  // ---- day-end shift report: today's paid invoices grouped by tender ----
+  function shiftClose(){ var ov = document.getElementById("shiftOv"); if (ov) ov.remove(); }
+  function openShift(){
+    shiftClose();
+    var ov = document.createElement("div");
+    ov.id = "shiftOv";
+    ov.innerHTML = '<div class="sh-card" id="shiftModal"><h2>'+ms("summarize")+'Shift Report</h2><div class="msg">Loading today\u2019s takings\u2026</div></div>';
+    document.body.appendChild(ov);
+    ov.addEventListener("click", function(e){ if (e.target === ov) shiftClose(); });
+    api("shift?orgId="+encodeURIComponent(orgId)).then(function(r){
+      var m = document.getElementById("shiftModal"); if (!m) return;
+      var closeBtn = '<div class="noprint" style="display:flex;gap:10px;margin-top:14px"><button class="btn ghost" id="shClose" style="margin:0">Close</button><button class="btn" id="shPrint" style="margin:0">'+ms("print")+'Print</button></div>';
+      if (!r || !r.ok){
+        m.innerHTML = '<h2>'+ms("summarize")+'Shift Report</h2><div class="msg">'+ms("error")+
+          (r && r.error === "forbidden" ? "Your role cannot view the shift report." : "Today\u2019s takings could not be read. Do not read this as zero collected.")+'</div>'+closeBtn;
+        document.getElementById("shClose").onclick = shiftClose;
+        return;
+      }
+      var rows = [["Cash", "cash"], ["UPI", "upi"], ["Card", "card"], ["Split (Cash + UPI)", "split"]]
+        .concat((r.byMethod.other || 0) > 0 ? [["Other", "other"]] : [])
+        .map(function(x){
+          return '<tr><td>'+x[0]+'</td><td>'+(r.byCount[x[1]] || 0)+'</td><td style="text-align:right">'+rupees(r.byMethod[x[1]] || 0)+'</td></tr>';
+        }).join("");
+      var inv = (r.invoices || []).map(function(v){
+        var when = v.paidAt ? new Date(v.paidAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+        var how = String(v.paidMethod || "other").toUpperCase() +
+          (v.split ? ' <small style="color:var(--mut)">(Cash ' + rupees(v.split.cash) + ' + UPI ' + rupees(v.split.upi) + ')</small>' : '');
+        return '<tr><td>'+esc(when)+'</td><td>'+esc(v.shortId || "")+'</td><td>'+how+'</td><td style="text-align:right">'+rupees(v.total)+'</td></tr>';
+      }).join("");
+      m.innerHTML = '<h2>'+ms("summarize")+'Shift Report <small style="font-size:12px;font-weight:600;color:var(--mut)">'+esc(r.date || "")+'</small></h2>'+
+        '<table class="sh-table"><tr><th>Tender</th><th>Bills</th><th style="text-align:right">Amount</th></tr>'+rows+
+        '<tr class="tot"><td>Total</td><td>'+r.count+'</td><td style="text-align:right">'+rupees(r.total)+'</td></tr></table>'+
+        (inv ? '<h2 style="margin-top:16px">'+ms("receipt_long")+'Bills paid today ('+r.count+')</h2>'+
+          '<table class="sh-table"><tr><th>Time</th><th>Bill</th><th>Mode</th><th style="text-align:right">Amount</th></tr>'+inv+'</table>'
+        : '<div class="msg">No bills paid yet today.</div>')+closeBtn;
+      document.getElementById("shClose").onclick = shiftClose;
+      document.getElementById("shPrint").onclick = function(){ window.print(); };
     });
   }
 
@@ -253,9 +454,114 @@
   function start(){
     if (STATION === "pharmacy") {
       try { document.getElementById("stnName").textContent = "Pharmacy"; document.getElementById("stnTag").textContent = "Dispense"; } catch(e){}
+      try { document.getElementById("shiftReportBtn").style.display = "none"; } catch(e){}   // dispensing never sees takings
       pharmacyView(); return;
     }
+    var initPt = P.get("scan") || P.get("patient") || P.get("patientId") || P.get("ticketId");
+    if (initPt) {
+      reviewPatient(initPt);
+      return;
+    }
     lookupView();
+  }
+
+  // ---- 1-touch tap/scan: an NFC tap or wedge-scanner burst selects the patient instantly,
+  // opening their unbilled orders and the payment review sheet. Same path as a deep link.
+  function reviewPatient(uid){
+    uid = String(uid == null ? "" : uid).trim();
+    if (!uid) return;
+    // Universal Patient Identity: resolve the carrier before reviewing. A revoked tag stops
+    // here with a spoken reason; a verified identity reviews under its canonical id, so the
+    // same patient is always billed under one identity and never gains a duplicate account
+    // from two spellings of one carrier. Anything unresolved falls back to the raw value.
+    try {
+      if (window.StewardIdentityResolver && StewardIdentityResolver.resolvePatientIdentity) {
+        var res = StewardIdentityResolver.resolvePatientIdentity(uid, { station: STATION, orgId: orgId });
+        if (res && res.then) { /* async store: fall through with the raw value */ }
+        else if (res && res.ok === false && res.error === "CARRIER_REVOKED") {
+          lookupView(uid);
+          document.getElementById("err").textContent = "This tag was marked lost or deactivated. Please issue a replacement card.";
+          return;
+        }
+        else if (res && res.ok && res.identityStatus === "verified" && (res.patientId || res.stewardId)) { uid = res.patientId || uid; }
+      }
+    } catch (e) {
+      if (e && e.code === "CARRIER_REVOKED") {
+        lookupView(uid);
+        document.getElementById("err").textContent = "This tag was marked lost or deactivated. Please issue a replacement card.";
+        return;
+      }
+    }
+    lookupView(uid);
+    loadPatient(uid);
+  }
+  function nfcScanText(rec){
+    try {
+      var d = rec && rec.data;
+      if (typeof d === "string") return d.trim();
+      var bytes = null;
+      if (d instanceof DataView) bytes = new Uint8Array(d.buffer, d.byteOffset, d.byteLength);
+      else if (d instanceof ArrayBuffer) bytes = new Uint8Array(d);
+      if (!bytes || !bytes.length) return "";
+      var off = 0;
+      if (rec.recordType === "text" || rec.recordType === "urn:nfc:wkt:T") off = 1 + (bytes[0] & 63);
+      var s = "";
+      try { s = new TextDecoder().decode(bytes.subarray(off)); }
+      catch (e) { s = String.fromCharCode.apply(null, Array.prototype.slice.call(bytes.subarray(off))); }
+      var m = /[A-Za-z0-9][A-Za-z0-9\-_]{2,63}/.exec(s || "");
+      return m ? m[0] : "";
+    } catch (e) { return ""; }
+  }
+  var billNfcOn = false;
+  function startNfcListener(){
+    if (billNfcOn) return;
+    if (window.SMD_NFC && window.SMD_NFC.isSupportedSync && window.SMD_NFC.isSupportedSync()) {
+      window.SMD_NFC.startScan(function(tag){
+        var v = (tag && (tag.text || tag.uid)) || "";
+        if (v) reviewPatient(v);
+      }).then(function(){ billNfcOn = true; }, function(){});
+      return;
+    }
+    if (!("NDEFReader" in window)) return;
+    try {
+      var r = new NDEFReader();
+      var p = r.scan();
+      if (p && p.then) p.then(function(){ billNfcOn = true; }, function(){});
+      else billNfcOn = true;
+      r.onreading = function(ev){
+        try {
+          var recs = (ev && ev.message && ev.message.records) || [];
+          for (var i = 0; i < recs.length; i++) { var v = nfcScanText(recs[i]); if (v) { reviewPatient(v); return; } }
+        } catch (e) {}
+      };
+    } catch (e) {}
+  }
+  // USB/Bluetooth wedge scanners type fast (<45ms between keys) and end with Enter. Keystrokes
+  // landing in the lookup field belong to the field (its own Enter already loads the patient),
+  // so only body-level bursts count as scans.
+  var billScanBuf = "", billScanLast = 0, billScanTimer = null, billScanOn = false;
+  function startScannerListener(){
+    if (billScanOn) return; billScanOn = true;
+    document.addEventListener("keydown", function(e){
+      try {
+        if (!e || e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.key === "Enter") {
+          if (billScanBuf.length >= 3) { var v = billScanBuf; billScanBuf = ""; reviewPatient(v); e.preventDefault(); }
+          else billScanBuf = "";
+          return;
+        }
+        if (e.key && e.key.length === 1) {
+          var t = e.target, tag = t && t.tagName;
+          if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) { billScanBuf = ""; return; }
+          var now = Date.now();
+          if (now - billScanLast > 45) billScanBuf = "";
+          billScanLast = now; billScanBuf += e.key;
+          if (billScanBuf.length > 80) billScanBuf = billScanBuf.slice(-80);
+          if (billScanTimer) clearTimeout(billScanTimer);
+          billScanTimer = setTimeout(function(){ billScanBuf = ""; }, 150);
+        }
+      } catch (err) {}
+    });
   }
 
   // ---- boot ----
@@ -270,10 +576,55 @@
     var signInPrompt = function(){ app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>'; };
     try { firebase.auth().onAuthStateChanged(function(u){ if(u) start(); else signInPrompt(); }); } catch(e){ start(); }
   } else if (!tok) {
-    app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>';
+    var savedCode = ""; try { savedCode = localStorage.getItem("smd_opd_clinic_code") || ""; } catch(e){}
+    var preCode = P.get("clinicCode") || P.get("clinic") || savedCode;
+    var preId = P.get("staffId") || P.get("id") || "";
+    app.innerHTML = '<section class="card"><h2>' + ms("lock") + 'Cashier Station Sign-in</h2>' +
+      '<p style="color:var(--mut);font-size:13px;margin:0 0 14px">Sign in with your clinic code, staff ID and PIN to access billing.</p>' +
+      '<label>Clinic code</label><input id="bCode" placeholder="SMD-XXXXXX" value="' + esc(preCode) + '" autocomplete="off">' +
+      '<label>Staff ID</label><input id="bId" placeholder="biller" value="' + esc(preId) + '" autocomplete="username" autocapitalize="none">' +
+      '<label>PIN or Password</label><input id="bPin" type="password" placeholder="••••" autocomplete="current-password">' +
+      '<div class="err" id="bErr"></div>' +
+      '<button class="btn" id="bGo">' + ms("lock_open") + 'Unlock Station</button>' +
+      '<div style="text-align:center;margin-top:14px"><a class="btn ghost" href="/opd" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px">' + ms("arrow_back") + 'Back to OPD Board</a></div></section>';
+    var go = document.getElementById("bGo");
+    var doAuth = function() {
+      var c = (document.getElementById("bCode").value || "").trim();
+      var u = (document.getElementById("bId").value || "").trim();
+      var p = (document.getElementById("bPin").value || "").trim();
+      var errEl = document.getElementById("bErr");
+      if (!c || !u || !p) { errEl.textContent = "Enter your clinic code, staff ID and PIN."; return; }
+      errEl.textContent = "Signing in…"; go.disabled = true;
+      fetch(queueApiUrl("auth/pin"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ clinicCode: c, identity: u, pin: p })
+      }).then(function(r){ return r.json(); }).then(function(r){
+        if (!r || !r.ok) {
+          go.disabled = false;
+          errEl.textContent = (r && r.error === "invalid_login") ? "Wrong clinic code, staff ID or PIN." : (r && r.error) || "Sign-in failed.";
+          return;
+        }
+        tok = r.token; orgId = r.orgId; tt = "staff";
+        try {
+          localStorage.setItem("smd_opd_staff_tok", r.token);
+          localStorage.setItem("smd_opd_toktype", "staff");
+          localStorage.setItem("smd_opd_hospital", r.orgId);
+          if (r.orgCode) localStorage.setItem("smd_opd_clinic_code", r.orgCode);
+        } catch(e) {}
+        start();
+      }).catch(function(){ go.disabled = false; errEl.textContent = "Could not reach the server."; });
+    };
+    go.onclick = doAuth;
+    document.getElementById("bPin").addEventListener("keydown", function(e){ if (e.key === "Enter") doAuth(); });
   } else {
     start();
   }
+
+  // 1-touch tap/scan runs on every station state, signed in or not (an unauthenticated scan
+  // simply fails closed at the API with the usual message). Both no-op where unsupported.
+  try { startNfcListener(); } catch (e) {}
+  try { startScannerListener(); } catch (e) {}
 })();
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>

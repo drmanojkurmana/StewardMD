@@ -7,7 +7,7 @@ export { AuthError };
 export async function resolveActor(identifyFn, request, env) {
   const who = await identifyFn(request, env);
   if (!who || who.guest || !who.id) throw new AuthError("authenticated non-guest actor required");
-  // email is carried through UNCHANGED from identify() — the VERIFIED Cf-Access header email or a
+  // email is carried through UNCHANGED from identify() — the email from a VERIFIED Cloudflare Access JWT or a
   // verified Firebase-token email (functions/_usage.js identify()); NEVER a request body/query value.
   // This is what isSuperAdmin() below gates on. Lowercased for a stable, case-insensitive comparison
   // against the (already-lowercased) OWNER_EMAILS allow-list.

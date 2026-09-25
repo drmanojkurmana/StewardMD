@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-billing-reports-livefix.test.mjs - the live retest of 2026-09-16 (docs/wardsynq/LIVE_RETEST_2026-09-16.md).
  *
  * Billing: a price nobody can see on the Price list (the demo seed's wardsynq.tariff) prices nothing; an invoice raised

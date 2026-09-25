@@ -56,8 +56,12 @@
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
   function nowMs() { return (typeof Date !== "undefined") ? Date.now() : 0; }
 
-  var DISC_LOCAL = 'Vision detection preview — not a diagnosis. Images stay on this device.';
-  var DISC_CLOUD = 'Vision preview via StewardMD AI (Google Vertex AI) — images are sent securely for this analysis, not used to train models. Not a diagnosis.';
+  // Both strings LEAD with the beta status. FundX is clinically unvalidated (the validation program
+  // in docs/fundx/VALIDATION-PROGRAM.md is still open) and is now reachable by paying Physician Pro
+  // accounts, so the label has to ride the result, not just the entry screen.
+  var BETA_PREFIX = 'Beta, in active development. It may not perform to the mark, so check every result yourself. ';
+  var DISC_LOCAL = BETA_PREFIX + 'Vision detection preview, not a diagnosis. Images stay on this device.';
+  var DISC_CLOUD = BETA_PREFIX + 'Vision preview via StewardMD AI (Google Vertex AI). Images are sent securely for this analysis, not used to train models. Not a diagnosis.';
 
   // ---- cloud provider selection: health-gated auto-activation + one-time consent ----
   // Once the FundX backend reports a real provider available (GET /api/fundx/health), the app

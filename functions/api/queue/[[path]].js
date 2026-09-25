@@ -7,13 +7,14 @@
  *   GET  /api/queue/ready                                  -> { enabled, configured }
  *   GET  /api/queue/session?date=&department=&hospitalId=  -> { session, tickets }   (get/create today's)
  *   GET  /api/queue/list?sessionId=                        -> { session, tickets }
- *   POST /api/queue/ticket   { sessionId, name, mobile, mrn, visitType, priority } -> { ticket }
+ *   POST /api/queue/ticket   { sessionId, name, mobile, mrn, visitType, priorityReason?, priorityNote? } -> { ticket }
  *   POST /api/queue/advance  { sessionId }                 -> { tickets }            (Next Patient)
  *   POST /api/queue/status   { sessionId, ticketId, status } -> { tickets }
- *   POST /api/queue/priority { sessionId, ticketId, priority } -> { tickets }
+ *   POST /api/queue/priority { sessionId, ticketId, reason, note? } -> { tickets }   (reason sets the level; plan item 12)
  *   POST /api/queue/session/status { sessionId, status?, doctorStatus? } -> { session }
  *   GET  /api/queue/link?sessionId=&ticketId=              -> { token, url }         (patient tracking link)
  *   GET  /api/queue/portal?t=<token>                       -> PHI-free live snapshot  (PATIENT, no auth)
+ *   GET  /api/queue/live?orgId= | ?t=<display token>        -> text/event-stream of { rev } (plan item 16)
  */
 import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
 import { identify, sha256hex } from "../../_usage.js";
@@ -32,17 +33,21 @@ import * as PATHWAYS from "../../_pathways_store.js";
 import { submitFormResponse, patientFormResponses, intakeResponses, reviewIntake, intakeSettings } from "../../_wardsynq/form-response.js";
 import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
 import { notifyTimeline } from "../../_queue_notify.js";
+import { msgRefusalIfOut } from "../../_quota.js";
+import { getEntitlement as msgEntitlement } from "../../_entitlements.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, notAName, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
+import { resolveRoomDoctor, normDocId, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, notAName, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
-import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
+import { fsCommit, wUpdate } from "../../_fbfirestore.js";
+import * as DC from "../../_day_close.js";
+import { orderQueue, orderRoomView, displayBoard, opdPulse, dayClose } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge, deviceLabel } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
@@ -240,6 +245,7 @@ import { registerSettings, validateRegisterSettings, rmiStatus, NOTES as REGISTE
 import { legalView, validateStateConfig, stateConfigFor } from "../../_wardsynq/legal-requirements.js";
 import { controlledSet, isControlledDrug, regimeOf, quarantineRefusal, estimateRefusal } from "../../_wardsynq/controlled-drugs.js";
 import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
+import { imagingSeries, imagingInstance } from "../../_wardsynq/dicom-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
 /* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
@@ -299,13 +305,93 @@ import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.j
 // this is one function, not several. Best-effort and silent on failure at every call site: a missed
 // WardSynQ sync must never block or alter the underlying queue action that triggered it, the same
 // contract every other shadow-mode write already keeps.
-async function syncEncounter(request, env, s, ticket) {
+/* THE VISIT RECORD IS BEST-EFFORT, BUT NO LONGER SILENT (OPD plan item 6, 2026-09-24).
+ *
+ * This swallowed every failure and returned null, so a patient could be registered, queued and seen
+ * while their visit never reached the clinical record - and nothing anywhere said so. Registration still
+ * never fails on it (the desk must keep moving), but when a hospital's record is switched on, the outcome
+ * is now written onto the ticket: encounterSync "ok" or "failed" with the reason. The OPD pulse counts the
+ * failures and POST /opd-reconcile retries them. A hospital with the record off is untouched. */
+/* OPD plan item 10, THE INVESTIGATION LOOP. A patient sent for a test sits in "investigation" and used to
+ * stay there until somebody remembered them. When the result is released, every one of today's OPD tickets
+ * for that patient that is in "investigation" or "at_diagnostics" (the console's Send for Tests) goes back to "waiting" (the state machine's own edge) with
+ * resultReadyAt stamped, so the doctor sees them again and the pulse counts "results back". Matched on the
+ * ticket's patientId; best-effort, never fails the release. */
+/* The day's tickets across every staffed room and the walk-in pool, for the pulse and the day close. A room whose
+ * session could not be read is NAMED, never silently dropped: figures that are quietly short read as a quiet OPD,
+ * which is the one thing these screens must never say by accident. */
+async function opdDay(env, org, date) {
+  const rows = [], unread = [], roomOf = {};
+  for (const rm of await ORG.listRooms(env, org.id)) {
+    if (!resolveRoomDoctor(rm)) continue;                       // no doctor, no session, no queue
+    try {
+      const sess = await Q.getOrCreateRoomSession(env, org, rm, date);
+      if (sess) { rows.push(...(await Q.listTickets(env, sess.id))); roomOf[sess.id] = { room: rm.name || "Room", doctor: sess.doctorName || "" }; }
+    } catch (e) { unread.push(rm.name || rm.id || "room"); }
+  }
   try {
-    const mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
+    const pool = await Q.getOrCreatePoolSession(env, org, date);
+    if (pool) { rows.push(...(await Q.listTickets(env, pool.id))); roomOf[pool.id] = { room: "Walk-in pool", doctor: "" }; }
+  } catch (e) { unread.push("walk-in pool"); }
+  return { rows, unread, roomOf };
+}
+/* The hospital's clock, as minutes east of UTC: its time zone, else its saved offset, else IST. */
+function orgOffsetMinutes(org) {
+  const rc = (org && org.wardsynq) || {}, tz = rc.timeZone ? zoneOffsetAt(rc.timeZone, Date.now()) : null;
+  return Number.isFinite(tz) ? tz : Number.isFinite(rc.utcOffsetMinutes) ? rc.utcOffsetMinutes : 330;
+}
+/* Plan item 15: the owner's day close, read once for the screen, Send now and the scheduled WhatsApp. The money is
+ * TODAY's on the hospital's clock (the cashier's shift report); a read that fails is said (moneyUnread), never zero. */
+async function dayCloseReport(env, org) {
+  const { rows, unread, roomOf } = await opdDay(env, org, "");
+  const out = { ok: true, date: Q.opdDate(""), close: dayClose(rows, Date.now(), roomOf), money: null, unbilled: null };
+  if (unread.length) out.unread = unread;
+  if (BILL.billingEnabled(env)) {
+    try {
+      out.money = await BILL.shiftReport(env, org.id, orgOffsetMinutes(org));
+      if (out.money) delete out.money.invoices;   // the close is totals; the cashier's screen lists the bills
+      out.unbilled = (await BILL.billingQueue(env, org.id)).orders.length;
+    } catch (e) { out.moneyUnread = true; }
+  }
+  return out;
+}
+async function opdResultBack(env, org, patientId) {
+  if (!org || !org.id || !patientId) return 0;
+  const sessions = [];
+  try {
+    for (const rm of await ORG.listRooms(env, org.id)) {
+      if (!resolveRoomDoctor(rm)) continue;
+      try { const s1 = await Q.getOrCreateRoomSession(env, org, rm, ""); if (s1) sessions.push(s1); } catch (e) {}
+    }
+    const p1 = await Q.getOrCreatePoolSession(env, org, "").catch(() => null);
+    if (p1) sessions.push(p1);
+  } catch (e) { return 0; }
+  let n = 0;
+  for (const s1 of sessions) {
+    for (const t of await Q.listTickets(env, s1.id).catch(() => [])) {
+      // The console's "Send for Tests" parks the patient in at_diagnostics; "investigation" is the older state. Both wait on a result.
+      if (!t || (t.status !== "investigation" && t.status !== "at_diagnostics")) continue;
+      // F3: the result names the RECORD's patient (opd-pat-<mrn>); a desk ticket carries the MRN. Either identifies them.
+      if (String(t.patientId) !== String(patientId) && patientIdForMrn(t.ghisPatientId || t.mrn) !== String(patientId)) continue;
+      try { await Q.setStatus(env, s1, t.id, "waiting", "system:result-released"); await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { resultReadyAt: Date.now() })]); n++; } catch (e) {}
+    }
+  }
+  return n;
+}
+
+async function syncEncounter(request, env, s, ticket) {
+  let mig = null;
+  const mark = async (fields) => { try { if (ticket && ticket.id) await fsCommit(env, [wUpdate(env, "q_tickets/" + ticket.id, Object.assign({ encounterSyncAt: Date.now() }, fields))]); } catch (e) { /* the mark is advisory */ } };
+  try {
+    mig = (await wsqForcedMigration(env, await ORG.getOrg(env, s.orgId || s.hospitalId))) || await encounterMigration(env, s, { getOrg: ORG.getOrg, tenantRow: wsqTenantRow });
     if (!mig || mig.mode === "off") return null;
-    if (mig.error) return null;   // wardsynq org with no tenant linked yet — best-effort, silent, like every other syncEncounter failure
-    return await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+    if (mig.error) { await mark({ encounterSync: "failed", encounterSyncError: String(mig.error).slice(0, 120) }); return null; }
+    const r = await recordEncounterSync(request, env, { migration: mig, ticket, session: s, actorDeps: wsqActorDeps(env, { orgForTenant: () => org }), recordDeps: wsqRecordDeps(env, mig.tenantId) });
+    if (r && r.ok === false) await mark({ encounterSync: "failed", encounterSyncError: String(r.error || r.detail || "refused").slice(0, 120) });
+    else if (r) await mark({ encounterSync: "ok", encounterSyncError: "" });
+    return r;
   } catch (e) {
+    if (mig && mig.mode !== "off") await mark({ encounterSync: "failed", encounterSyncError: String((e && e.message) || e).slice(0, 120) });
     return null;
   }
 }
@@ -455,6 +541,29 @@ function corsHeaders(request) {
  * Retry-After is a refusal a client has to guess at, and guessing means retrying immediately. Shaped
  * like fhirJson's own `extra` argument below so there is one convention, and every existing
  * three-argument caller is unaffected. */
+/* Plan item 16: a Server-Sent Events stream of the hospital's queue revision. The first event is the current
+ * revision; another follows each time it moves. The stream ends after LIVE_TICKS polls of one small document (a
+ * Worker's subrequests are counted) and the client reconnects; a comment line keeps idle proxies from closing it.
+ * No patient data: { rev } only. */
+function liveStream(env, hospitalId, request) {
+  const ms = Number(env && env.QUEUE_LIVE_MS) || 2000, ticks = Number(env && env.QUEUE_LIVE_TICKS) || 150;
+  const enc = new TextEncoder(), { readable, writable } = new TransformStream(), w = writable.getWriter();
+  (async () => {
+    let last = null;
+    try {
+      await w.write(enc.encode("retry: 1000\n\n"));
+      for (let i = 0; i < ticks; i++) {
+        let rev = last;
+        try { rev = await Q.liveRev(env, hospitalId); } catch (e) {}
+        if (rev !== last) { await w.write(enc.encode("data: " + JSON.stringify({ rev }) + "\n\n")); last = rev; }
+        else if (i % 10 === 9) await w.write(enc.encode(": keep-alive\n\n"));
+        await new Promise((r) => setTimeout(r, ms));
+      }
+    } catch (e) { /* the board went away */ }
+    try { await w.close(); } catch (e) {}
+  })();
+  return new Response(readable, { status: 200, headers: Object.assign({ "Content-Type": "text/event-stream", "Cache-Control": "no-store", "X-Accel-Buffering": "no" }, corsHeaders(request)) });
+}
 function json(obj, status, request, extra) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request), extra || {}) }); }
 /* FHIR's own media type, on every FHIR response including errors. The CapabilityStatement declared
  * application/fhir+json while the route served application/json, and a strict client rejects that
@@ -530,6 +639,8 @@ const TOKEN_SAY = {
   token_department_required: "Choose a department to give a token. Each department in this hospital numbers its own tokens.",
   token_prefix_missing: "This department has no token prefix, so its numbers would collide with another department's. An administrator sets one under Admin Center, Hospital, OPD token numbers.",
   token_contention: "Another desk registered at the same moment. Try again.",
+  bad_offline_token: "That offline token was not reserved by a desk of this hospital today.",
+  offline_token_used: "This offline token is already in the queue.",
 };
 function tokenRefusalFor(request) {
   return (e) => json({ ok: false, error: e.message, message: TOKEN_SAY[e.message] || e.detail || "The patient could not be added to the queue.", ...(e.departmentName ? { department: e.departmentName } : {}) }, e.status, request);
@@ -634,25 +745,76 @@ async function requireOrgOrGlobal(env, actor, orgId, cap, resourceOwnerUid) {
   if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
 }
 async function ticketView(env, tickets) { return Q.decorateForDoctor(env, tickets); }
-const ACTIVE = ["registered", "waiting", "called", "in_consultation"];
+const ACTIVE = ["registered", "waiting", "called", "in_consultation", "at_diagnostics"];
 const WAITING = ["registered", "waiting", "called"];
 // The nurse-station board for an org: each room (its resolved-doctor session) with count + status, plus
 // the central unassigned pool. Status uses the org's CONFIGURABLE thresholds (Phase 3), not hard-codes.
 async function boardForOrg(env, org, date) {
   const rooms = await ORG.listRooms(env, org.id);
+  let brand = null;
+  try { brand = await brandingFor(env, org.id); } catch (e) {}
+  const effectiveOrgName = (brand && brand.clinicName) || org.name || "";
+  const hasLogo = !!(brand && brand.ext);
+  const members = await ORG.listMembers(env, org.id).catch(() => []);
+  const memberMap = new Map();
+  for (const m of (members || [])) {
+    if (m.identity) memberMap.set(normDocId(m.identity), m.displayName || m.name || "");
+  }
   const out = [];
+  /* Unpaid orders by the keys a ticket is found by (its id, its patient). An order carries BOTH (the console's
+   * consultation fee is raised with the MRN and the ticket), so a ticket sums each order ONCE: adding the two
+   * lookups showed a 500 fee as 1000 unbilled, and Quick Pay asked the patient for that. */
+  const unbilledByKey = new Map();
+  let paidPatients = new Set();
+  try {
+    const bQ = await BILL.billingQueue(env, org.id);
+    (bQ.orders || []).forEach((o) => {
+      for (const k of [o.patientId, o.ticketId]) if (k) { if (!unbilledByKey.has(k)) unbilledByKey.set(k, new Set()); unbilledByKey.get(k).add(o); }
+    });
+    const { rows: paidOrders } = await readAll(env, "q_orders", [{ field: "orgId", value: org.id }, { field: "status", value: "paid" }], 500).catch(() => ({ rows: [] }));
+    (paidOrders || []).forEach((r) => {
+      const f = r.fields || {};
+      if (f.patientId) paidPatients.add(f.patientId);
+      if (f.ticketId) paidPatients.add(f.ticketId);
+    });
+  } catch (e) {}
+  const annotateTickets = (tickets) => {
+    return (tickets || []).map((t) => {
+      const pid = t.mrn || t.ghisPatientId || t.id;
+      const mine = new Set([...(unbilledByKey.get(t.id) || []), ...((pid && unbilledByKey.get(pid)) || [])]);
+      let unbilled = 0; for (const o of mine) unbilled += (o.unitPrice || 0) * (o.qty || 1);
+      const isPaid = !unbilled && (paidPatients.has(t.id) || (pid && paidPatients.has(pid)));
+      return Object.assign({}, t, {
+        billingStatus: unbilled > 0 ? "unbilled" : (isPaid ? "paid" : ""),
+        unbilledAmount: unbilled
+      });
+    });
+  };
   for (const rm of rooms) {
     const doctorUid = resolveRoomDoctor(rm);
+    const a = rm.assignment || {};
+    const docName = rm.doctorName || a.doctorName || (doctorUid ? memberMap.get(normDocId(doctorUid)) : "") || (doctorUid && normDocId(doctorUid) === normDocId(org.ownerUid) ? (org.doctorName || "") : "") || null;
     let tickets = [], sess = null;
-    if (doctorUid) { sess = await Q.getOrCreateRoomSession(env, org, rm, date); if (sess) tickets = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1); }
+    if (doctorUid) { sess = await Q.getOrCreateRoomSession(env, org, rm, date, docName || ""); if (sess) tickets = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1); }
     const waiting = tickets.filter((t) => WAITING.indexOf(t.status) > -1).length;
     const inConsult = tickets.some((t) => t.status === "in_consultation");
-    out.push({ room: rm, doctorUid: doctorUid || null, sessionId: sess ? sess.id : null, waiting: waiting,
-      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: await ticketView(env, orderRoomView(tickets)) });
+    out.push({ room: rm, doctorUid: doctorUid || null, doctorName: docName, sessionId: sess ? sess.id : null, waiting: waiting,
+      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: annotateTickets(await ticketView(env, orderRoomView(tickets))) });
   }
   const pool = await Q.getOrCreatePoolSession(env, org, date);
   const poolTickets = (await Q.listTickets(env, pool.id)).filter((t) => WAITING.indexOf(t.status) > -1);
-  return { mode: org.mode, thresholds: org.thresholds, rooms: out, pool: await ticketView(env, orderQueue(poolTickets)), poolSessionId: pool.id };
+  return {
+    mode: org.mode,
+    orgName: effectiveOrgName,
+    orgCode: org.code,
+    hasLogo: hasLogo,
+    thresholds: org.thresholds,
+    opdBillingMode: org.opdBillingMode || "pay_first",
+    defaultConsultationFee: org.defaultConsultationFee || 0,
+    rooms: out,
+    pool: annotateTickets(await ticketView(env, orderQueue(poolTickets))),
+    poolSessionId: pool.id
+  };
 }
 // Org config → OPD connector. Read from env OPD_CONNECTORS (JSON: { "<hospitalId>": "ghis", "*": "..." });
 // native by default. NO hard-coded GHIS org/user id — a hospital is wired to a connector purely by config.
@@ -837,6 +999,32 @@ export async function onRequest(context) {
   const seg = parts[0] || "", sub = parts[1] || "";
 
   if (method === "GET" && seg === "ready") return json({ ok: true, enabled: queueEnabled(env), configured: isQueueConfigured(env), documentStorage: await documentStorageProbe(env) }, 200, request);
+
+  // When deployed under an auxiliary domain/project (e.g. wardsynq.com) without direct Firebase service account credentials,
+  // proxy the queue request upstream to stewardmd.in where the service account and databases are configured.
+  // Only the real deployment hosts (wardsynq.com, www.wardsynq.com, *.wardsynq.pages.dev; vault/Infra.md): a substring
+  // match sent every in-memory test on a "wardsynq.test" origin out to the live server.
+  if (!env.FIREBASE_SERVICE_ACCOUNT && /^(www\.)?wardsynq\.com$|(^|\.)wardsynq\.pages\.dev$/.test(url.hostname)) {
+    const target = new URL(`https://stewardmd.in${url.pathname}${url.search}`);
+    const h = new Headers(request.headers);
+    h.set("host", "stewardmd.in");
+    const init = {
+      method: request.method,
+      headers: h,
+      body: request.method !== "GET" && request.method !== "HEAD" ? await request.clone().arrayBuffer() : undefined,
+      redirect: "follow"
+    };
+    try {
+      const res = await fetch(target.toString(), init);
+      const rh = new Headers(res.headers);
+      const cors = corsHeaders(request);
+      Object.keys(cors).forEach((k) => rh.set(k, cors[k]));
+      return new Response(res.body, { status: res.status, headers: rh });
+    } catch (err) {
+      return json({ ok: false, error: "upstream_proxy_error", message: err.message }, 502, request);
+    }
+  }
+
   if (!queueEnabled(env)) return json({ ok: false, error: "disabled" }, 404, request);
 
   try {
@@ -848,7 +1036,19 @@ export async function onRequest(context) {
       const b = await readBody(request);
       if (sub === "pin") {
         const orgId = await ORG.resolveOrgId(env, b.clinicCode || b.orgId || "");   // accept the SMD-XXXXXX clinic code
-        const auth = await ORG.getMemberAuth(env, orgId, b.identity || "");
+        if (!orgId) return json({ ok: false, error: "invalid_login" }, 401, request);
+        /* THE LOGIN NAME IS MATCHED EXACTLY FIRST, THEN IN LOWER CASE.
+         *
+         * The staff console lowercases a login name when it creates the member (mobile keyboards
+         * auto-capitalise), and this path matched the stored key verbatim - so a nurse added as
+         * "nurse1" who typed "Nurse1" was told her Clinic ID, login or PIN was wrong, with the
+         * correct PIN, and no way to tell which of the three was supposedly at fault.
+         *
+         * Exact match still wins, so an org that already holds both "Nurse1" and "nurse1" keeps
+         * answering as it did; the fallback only runs when the name as typed matches nobody. */
+        const typed = String(b.identity || "").trim();
+        const auth = (await ORG.getMemberAuth(env, orgId, typed))
+          || (typed !== typed.toLowerCase() ? await ORG.getMemberAuth(env, orgId, typed.toLowerCase()) : null);
         /* EVERY OUTCOME IS AUDITED under the hospital, so "who tried to get in as this nurse at 3am"
          * has an answer. Unknown IDs are recorded too when the hospital resolved. Never the PIN. */
         if (!auth || !auth.active || !auth.pinHash) {
@@ -857,13 +1057,16 @@ export async function onRequest(context) {
         }
         const gate = pinLocked(auth, Date.now());
         if (gate.locked) { await loginAudit(auth.orgId, auth.identity, "login:pin_locked", ""); return json({ ok: false, error: "locked", retryInMs: gate.remainingMs }, 429, request); }
-        const ok = await verifySecret(String(b.pin || ""), auth.pinSalt, auth.pinHash);
+        const cleanPin = String(b.pin || "").trim();
+        const ok = await verifySecret(cleanPin, auth.pinSalt, auth.pinHash);
         const nx = nextPinState(auth, Date.now(), ok);
         await ORG.recordMemberPinAttempt(env, auth.orgId, auth.identity, nx);
         await loginAudit(auth.orgId, auth.identity, ok ? "login:pin_ok" : nx.pinLockedUntil ? "login:pin_lockout" : "login:pin_failed", ok ? "" : "attempt " + nx.pinAttempts);
         if (!ok) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - nx.pinAttempts) }, 401, request);
         if (auth.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, auth.orgId, auth.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
-        return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, identity: auth.identity }, 200, request);
+        let orgCode = "";
+        try { const o = await ORG.getOrg(env, auth.orgId); if (o) orgCode = o.code || ""; } catch (e) {}
+        return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, orgCode: orgCode, identity: auth.identity }, 200, request);
       }
       const m = await ORG.findMemberByEmail(env, b.email || "");
       if (!m || !m.active || !m.passHash) {
@@ -958,6 +1161,33 @@ export async function onRequest(context) {
       }
       return json({ ok: results.every((x) => !x.failed && !x.criticalsFailed), tenants: orgs.length, results }, 200, request);
     }
+    /* Owner ask G2: THE DAY CLOSE ON WHATSAPP. The stewardmd-api worker's hourly cron POSTs here with the admin token;
+     * each hospital whose chosen hour has come on its own clock gets one message a day (claimed create-only, a failed
+     * send retried on later hours at most three times). Any hospital with the setting on, WardSynQ or clinic. */
+    if (method === "POST" && seg === "ops" && sub === "day-close-all") {
+      if (!(await ownerOK(request, env))) {
+        const who = await resolveActor(request, env);
+        return json({ ok: false, error: who ? "forbidden" : "auth_required" }, who ? 403 : 401, request);
+      }
+      /* ponytail: sequential over at most 300 hospitals in one request, like tick-all; the ones due in one hour are few. */
+      const orgs = (await ORG.listAllOrgs(env, 300)).filter((o) => o && o.wardsynq && o.wardsynq.dayClose && o.wardsynq.dayClose.enabled === true);
+      const results = [], now = Date.now();
+      for (const o of orgs) {
+        try {
+          const st = DC.dayCloseSettings(o.wardsynq.dayClose), due = DC.dayCloseDue(st, now, orgOffsetMinutes(o));
+          if (!due.due) { results.push({ orgId: o.id, due: false }); continue; }
+          if (!(await DC.claimSend(env, o.id, due.date, now))) { results.push({ orgId: o.id, due: true, skipped: "already" }); continue; }
+          const report = await dayCloseReport(env, o);
+          report.date = due.date;
+          const r = await DC.sendDayClose(env, o, report, st, "scheduled", now);
+          results.push({ orgId: o.id, due: true, sent: r.ok, reason: r.reason || null });
+        } catch (e) {
+          console.error("day-close-all failed", o.id, String((e && e.message) || e).slice(0, 200));
+          results.push({ orgId: o.id, failed: true });
+        }
+      }
+      return json({ ok: results.every((x) => !x.failed), hospitals: orgs.length, results }, 200, request);
+    }
     /* THE SCHEDULED BACKUP (backup-schedule.js). The stewardmd-api worker's hourly cron POSTs here with the admin
      * token; each WardSynQ hospital with a backup destination gets a daily backup, retention pruning and a weekly
      * restore dry run. Hourly so a failed or unfinished backup is retried the same day; the plan inside decides
@@ -1020,6 +1250,11 @@ export async function onRequest(context) {
     }
     // WALL DISPLAY: org-scoped signed token, no auth/login (a waiting-room screen). PHI-minimal
     // (first name + last initial only — never MRN/phone). Read-only projection of the nurse board.
+    if (method === "GET" && seg === "live" && url.searchParams.get("t")) {   // plan item 16: the wall display's live stream
+      const orgId = await verifyDisplayToken(env, url.searchParams.get("t") || "");
+      if (!orgId) return json({ ok: false, error: "invalid" }, 401, request);
+      return liveStream(env, orgId, request);
+    }
     if (method === "GET" && seg === "display" && url.searchParams.get("t")) {
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
       const orgId = await verifyDisplayToken(env, url.searchParams.get("t") || "");
@@ -1064,18 +1299,30 @@ export async function onRequest(context) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
       if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+      const name = url.searchParams.get("name") || "";
+      const ct = request.headers.get("Content-Type") || "";
+      if (ct.indexOf("application/json") > -1) {
+        const b = await readBody(request).catch(() => ({}));
+        const clinicName = (b && b.name) || name;
+        if (clinicName) await ORG.updateOrg(env, orgId, { name: clinicName }, actor.id);
+        return json({ ok: true, clinicName: clinicName }, 200, request);
+      }
       let _pg = { ok: false, reason: "none" };
       try { _pg = await requirePro(env, request); } catch (e) {}
       // Keep the legacy `error: "pro_required"` key for any older client, and add the reason.
       if (!_pg.ok) return json(needsProBody(_pg, { ok: false, error: "pro_required", feature: "queue-branding" }), 402, request);
       const bkt = brandBucket(env);
       if (!bkt) return json({ ok: false, error: "storage_unavailable" }, 503, request);
-      const ct = request.headers.get("Content-Type") || "";
       const bytes = await request.arrayBuffer();
+      if (!bytes.byteLength && name) {
+        await ORG.updateOrg(env, orgId, { name: name }, actor.id);
+        return json({ ok: true, clinicName: name }, 200, request);
+      }
       const v = validateLogo(ct, bytes.byteLength);
       if (!v.ok) return json({ ok: false, error: v.error }, 400, request);
       await bkt.put(logoKey(orgId, v.ext), bytes, { httpMetadata: { contentType: ct } });
-      const res = await putBranding(env, orgId, { clinicName: url.searchParams.get("name") || "", ext: v.ext, updatedBy: actor.id || "" });
+      const res = await putBranding(env, orgId, { clinicName: name, ext: v.ext, updatedBy: actor.id || "" });
+      if (name) await ORG.updateOrg(env, orgId, { name: name }, actor.id);
       return json(Object.assign({ ok: true }, res), 200, request);
     }
 
@@ -1800,6 +2047,9 @@ export async function onRequest(context) {
         /* P1.10: which study answers each imaging order, and a launch link into the hospital's own
          * viewer. Reading an order and its study is reading the chart: emr.view, the worklist's bar. */
         "imaging-studies": CAPS.EMR_VIEW,
+        /* The in-app viewer (dicom-viewer.js): the study's series and each image, proxied from the hospital's
+         * archive. Looking at a study is reading the chart, so it is the same bar as the link above. */
+        "imaging-series": CAPS.EMR_VIEW, "imaging-instance": CAPS.EMR_VIEW,
         /* TASK 8. ASKING reads the chart and writes no clinical content, so it is emr.view - the same
          * capability that reads the record it summarises, and no wider. REVIEWING is emr.treat:
          * accepting a drafted note puts an unsigned note on the chart, which is a clinical act, and
@@ -2345,9 +2595,9 @@ export async function onRequest(context) {
         const deptsFailed = () => json({ ok: false, error: "departments_unreadable", detail: "The hospital's departments could not be read. Nothing was recorded." }, 502, request);
         const key = body.idempotencyKey || null;
         if (sub === "stores" && method === "GET") return R(await storesOverview(request, env, { ...deps, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null }));
-        if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, active: body.active, idempotencyKey: key }));
+        if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, packs: body.packs, active: body.active, idempotencyKey: key }));
         if (sub === "store-location" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveStoreLocation(request, env, { ...deps, departments: d, code: body.code, name: body.name, kind: body.kind, departmentId: body.departmentId, active: body.active, idempotencyKey: key })); }
-        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
+        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
         if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines }));
@@ -2515,7 +2765,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "list" && method === "GET") {
-        const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
+        /* R7-2: the ward list's reads are audited in ONE chain extension, not one per read. Every
+         * audited read takes the hospital's chain lock, reads the head and inserts, so a screen that
+         * reads the census, the names and the stated dates was paying three serialised round trips
+         * per read before it could answer - the same fix, and the same reason, as nurse-worklist
+         * below. The rows themselves are unchanged: one per chart read, written together. */
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const wdeps = { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository } };
+        const r = await listWard(request, env, { ...wdeps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
+        await audits.flush().catch(() => {});
         // P2.4: how long a device may show an offline copy of a chart. Hospital config, 1-72 hours, default 12.
         if (r.ok) { const h = Number(wsqCfg && wsqCfg.offlineCacheHours); r.offlineCacheHours = Number.isFinite(h) && h >= 1 && h <= 72 ? h : 12; }
         // The hospital's label sizes (Admin > Hospital), for the labels printed from any ward screen.
@@ -4171,8 +4429,18 @@ export async function onRequest(context) {
         try { dicomConn = (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "dicom"))[0] || null; }
         catch { return json({ ok: false, error: "record_read_failed", message: "The imaging connector could not be read." }, 502, request); }
         const r = await imagingStudies(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", serviceRequestId: url.searchParams.get("serviceRequestId") || "",
-          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null,
+          inAppViewer: !!dicomConn });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-series" && method === "GET") {
+        const r = await imagingSeries(request, env, { ...deps, studyId: url.searchParams.get("studyId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "imaging-instance" && method === "GET") {
+        const r = await imagingInstance(request, env, { ...deps, studyId: url.searchParams.get("studyId") || "", seriesUid: url.searchParams.get("seriesUid") || "", sopUid: url.searchParams.get("sopUid") || "" });
+        if (!r.ok) return json(r, r.status || 502, request);
+        return new Response(r.bytes, { status: 200, headers: Object.assign({ "Content-Type": r.contentType, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" }, corsHeaders(request)) });
       }
       if (sub === "report-imaging" && method === "POST") {
         const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null,
@@ -4313,6 +4581,18 @@ export async function onRequest(context) {
       }
       if (sub === "appointment" && method === "POST") {
         const r = await setAppointmentState(request, env, { ...deps, appointmentId: body.appointmentId, state: body.state, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        /* OPD plan item 8: A BOOKED PATIENT WHO ARRIVES JOINS THE QUEUE. Marking an appointment arrived used
+         * to update the record only, so the patient then had to be registered again at the desk as a walk-in.
+         * Now the arrival adds them to the OPD pool (which routes straight to a single staffed room) and the
+         * answer carries the token. Only a REAL change adds one - a retried arrival ("unchanged") does not -
+         * and a failed token never undoes the arrival; it is said instead. */
+        if (r.ok && r.state === "arrived" && r.written === 1 && wOrg) {
+          try {
+            const pt = r.patient || {};
+            const t = await Q.addToPool(env, wOrg, { name: pt.name || "", mrn: pt.mrn || "", mobile: pt.mobile || "", patientId: r.patientId || "" }, actor.id || "");
+            r.queueTicket = { id: t && t.id, token: t && (t.token || t.tokenNo) };
+          } catch (e) { r.queueError = "could_not_add_to_queue"; }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "follow-up" && method === "POST") {
@@ -4389,6 +4669,7 @@ export async function onRequest(context) {
         });
         // Checked against the critical limits straight after the write (wsqReleaseCriticalCheck).
         if (r && r.ok && r.reportId) r.criticalCheck = await wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, r.reportId, body.idempotencyKey || null);
+        if (r && r.ok) { try { r.opdRecalled = await opdResultBack(env, wOrg, body.patientId); } catch (e) {} }   // plan item 10
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* An analyser's result, released by the technologist who presses the button (lab-analysers.js). The release
@@ -5346,6 +5627,24 @@ export async function onRequest(context) {
     if (seg === "patient") {
       const body = method === "POST" ? await readBody(request) : {};
       const pOrg = url.searchParams.get("orgId") || body.orgId || "";
+      /* THE ONE PATIENT LOOKUP behind every carrier - card QR, Ni-Key tag, wristband barcode, typed
+       * StewardID. Same authority as reading the queue: anybody who can see who is waiting can find
+       * the patient in front of them. A bad or revoked number is SAID, never resolved to someone else
+       * (functions/_opd_patient_store.js resolveStewardId). */
+      if (sub === "resolve" && method === "GET") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_VIEW);
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        const r = await PAT.resolveStewardId(env, pOrg, url.searchParams.get("id") || "");
+        return json(r, r.ok ? 200 : r.error === "not_a_steward_id" ? 422 : r.error === "revoked" ? 410 : 404, request);
+      }
+      /* A lost or replaced card is revoked HERE, once, for every device. The desk issues cards, so the
+       * desk's authority revokes them, and always with a reason. */
+      if (sub === "revoke" && method === "POST") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        const r = await PAT.revokeStewardId(env, pOrg, body.stewardId, body.reason, actor.id || "");
+        return json(r, r.ok ? 200 : r.error === "not_found" ? 404 : 422, request);
+      }
       if (sub === "register" && method === "POST") {
         const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
         /* Say WHICH refusal this is. authorizeOrgAccess already distinguishes org_not_found,
@@ -5470,7 +5769,9 @@ export async function onRequest(context) {
         patient: method === "POST" ? CAPS.QUEUE_ADD : CAPS.ORDER_READ,
         order: CAPS.ORDER_CREATE, orders: CAPS.ORDER_READ, queue: CAPS.BILLING_VIEW,
         tariff: method === "POST" ? CAPS.STAFF_ADMIN : CAPS.BILLING_VIEW,
-        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE,
+        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE, refund: CAPS.BILLING_CHARGE,   // OPD plan item 9: the cashier who takes money gives it back, with a reason
+        // Day-end shift report: read-only takings by tender for the cashier closing the drawer.
+        shift: CAPS.BILLING_VIEW,
         // Pharmacy station: read what is owed, and hand it over. Separate caps from billing on purpose -
         // the person releasing medicines is never the person taking the money.
         pharmacy: CAPS.ORDER_READ, dispense: CAPS.ORDER_DISPENSE
@@ -5481,10 +5782,50 @@ export async function onRequest(context) {
       const aid = actor.id || "";
       if (sub === "patient" && method === "POST") { const org = await ORG.getOrg(env, bOrg); return json(await BILL.registerPatient(env, bOrg, (org && org.code) || bOrg, { name: body.name, mobile: body.mobile, sex: body.sex, ageYears: body.ageYears, actor: aid }), 200, request); }
       if (sub === "patient" && method === "GET") { const p = await BILL.getPatient(env, bOrg, url.searchParams.get("id") || ""); return json(p ? Object.assign({ ok: true }, p) : { ok: false, error: "not_found" }, 200, request); }
-      if (sub === "order" && method === "POST") return json(await BILL.createOrder(env, bOrg, body, aid), 200, request);
-      if (sub === "orders" && method === "GET") return json({ ok: true, orders: await BILL.ordersForPatient(env, bOrg, url.searchParams.get("patientId") || "", url.searchParams.get("status") || "") }, 200, request);
-      if (sub === "queue" && method === "GET") return json({ ok: true, ...(await BILL.billingQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
-      if (sub === "tariff" && method === "GET") return json({ ok: true, items: await BILL.listTariff(env, bOrg) }, 200, request);
+      if (sub === "order" && method === "POST") { const bo = await ORG.getOrg(env, bOrg); return json(await BILL.createOrder(env, bOrg, body, aid, { freeReviewDays: (bo && bo.wardsynq && bo.wardsynq.freeReviewDays) || 0 }), 200, request); }
+      if (sub === "orders" && method === "GET") {
+        const patientId = url.searchParams.get("patientId") || "";
+        const status = url.searchParams.get("status") || "";
+        const orders = await BILL.ordersForPatient(env, bOrg, patientId, status).catch(() => []);
+        return json({ ok: true, orders }, 200, request);
+      }
+      if (sub === "tariff" && method === "GET") {
+        const items = await BILL.listTariff(env, bOrg).catch(() => []);
+        return json({ ok: true, items }, 200, request);
+      }
+      if (sub === "queue" && method === "GET") {
+        const bQ = await BILL.billingQueue(env, bOrg);
+        const org = await ORG.getOrg(env, bOrg).catch(() => null);
+        let opdPatients = [];
+        if (org) {
+          try {
+            const bd = await boardForOrg(env, org, url.searchParams.get("date") || "");
+            const seen = new Set();
+            const addTkt = (t) => {
+              if (!t || seen.has(t.id)) return;
+              seen.add(t.id);
+              const tMrn = t.mrn || t.ghisPatientId || "";
+              const patientOrders = (bQ.orders || []).filter((o) => o.patientId === t.id || (tMrn && o.patientId === tMrn));
+              const unbilledTot = patientOrders.reduce((s, o) => s + (o.unitPrice || 0) * (o.qty || 1), 0);
+              opdPatients.push({
+                id: t.id,
+                mrn: tMrn,
+                name: t.name || "Patient",
+                mobile: t.mobile || "",
+                token: t.token || "",
+                status: t.status || "registered",
+                department: t.department || "",
+                roomId: t.roomId || "",
+                unbilledCount: patientOrders.length,
+                unbilledTotal: unbilledTot
+              });
+            };
+            (bd.pool || []).forEach(addTkt);
+            (bd.rooms || []).forEach((rm) => (rm.tickets || []).forEach(addTkt));
+          } catch (e) {}
+        }
+        return json({ ok: true, ...bQ, opdPatients, cap: BILL.QUEUE_CAP }, 200, request);
+      }
       if (sub === "tariff" && method === "POST") return json(await BILL.upsertTariff(env, bOrg, body, aid), 200, request);
       if (sub === "invoice" && method === "POST") {
         /* BNSS 2023 s.397 (legal review D.4.2): the OPD clinic invoice is locked like the ward invoice while a rape, acid
@@ -5506,9 +5847,14 @@ export async function onRequest(context) {
         return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
       }
       if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
-      if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
+      if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid, body.split), 200, request);
+      if (sub === "refund" && method === "POST") { const rf = await BILL.refundOrder(env, bOrg, body.orderId || "", body.reason, aid); return json(rf, rf.ok ? 200 : rf.error === "not_found" ? 404 : 422, request); }
+      if (sub === "shift" && method === "GET") {
+        const rep = await BILL.shiftReport(env, bOrg).catch((e) => { if (e && e.status === 507) throw e; return null; });
+        return json(rep ? Object.assign({ ok: true }, rep) : { ok: false, error: "shift_unreadable", message: "Today's takings could not be read. Do not read this as zero collected." }, 200, request);
+      }
       if (sub === "pharmacy" && method === "GET") return json({ ok: true, ...(await BILL.pharmacyQueue(env, bOrg)), cap: BILL.QUEUE_CAP }, 200, request);
-      if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid), 200, request);
+      if (sub === "dispense" && method === "POST") return json(await BILL.dispenseOrder(env, bOrg, body.orderId || "", aid, { patientId: body.patientId || "", encounterId: body.encounterId || "" }), 200, request);
       return json({ ok: false, error: "not_found" }, 404, request);
     }
 
@@ -5543,8 +5889,14 @@ export async function onRequest(context) {
       // re-checks every mutation; this only tells the UI what to offer.
       if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; orgOwner = !!(az.ok && az.owner); }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
-      let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
+      let orgCode = "", orgName = ""; const o = orgId ? await ORG.getOrg(env, orgId) : null;
+      if (o) { orgCode = o.code || ""; orgName = o.name || ""; }
+      let brand = null;
+      try { if (orgId) brand = await brandingFor(env, orgId); } catch (e) {}
+      const effectiveOrgName = (brand && brand.clinicName) || orgName || "";
+      const hasLogo = !!(brand && brand.ext);
+      const doctorName = (o && o.doctorName) || (actor.name && actor.name !== "Doctor" ? actor.name : "");
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, orgName: effectiveOrgName, hasLogo: hasLogo, mode: (o && o.mode) || "native", smdId: smdId, name: actor.name, doctorName: doctorName, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
         // UI hints for Remove hospital only; POST /org/delete re-checks both.
         ...(orgOwner ? { orgOwner: true } : {}), ...(actor.isOwner === true ? { platformOwner: true } : {}), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
     }
@@ -6091,6 +6443,36 @@ export async function onRequest(context) {
       }
       return json({ ...view(back && back.wardsynq), changed }, 200, request);
     }
+    /* Owner ask G2: the day close on WhatsApp. The setting is the owner's and the administrator's (staff.admin); the
+     * number is shown back masked. Send now (analytics.view) sends today's close to the saved number at once, so the
+     * owner can see it arrive before trusting the daily one; it is audited and never counts as the day's send. */
+    if (seg === "org" && sub === "day-close-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o) return json({ ok: false, error: "org_not_found" }, 404, request);
+      const view = async (org) => {
+        const st = DC.dayCloseSettings(org.wardsynq && org.wardsynq.dayClose), today = DC.dayCloseDue(st, Date.now(), orgOffsetMinutes(org)).date;
+        let last = null;
+        try { last = await DC.sendRecord(env, orgId, today); if (last) last = { date: today, status: last.status, reason: last.reason || "", attempts: last.attempts || 0 }; } catch (e) {}
+        return { enabled: st.enabled, hour: st.hour, mobileMasked: DC.maskMobile(st.mobile), hasMobile: !!st.mobile, last };
+      };
+      if (method === "GET") return json({ ok: true, settings: await view(o) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const before = DC.dayCloseSettings(o.wardsynq && o.wardsynq.dayClose);
+      // A number left blank keeps the saved one: the screen only ever sees it masked.
+      const asked = Object.assign({}, cb.settings || {}, { mobile: (cb.settings && String(cb.settings.mobile || "").trim()) || before.mobile });
+      const why = DC.settingsRefusal(asked);
+      if (why) return json({ ok: false, error: "invalid_day_close_settings", message: why + " Nothing was saved." }, 422, request);
+      const value = DC.dayCloseSettings(Object.assign({}, asked, { enabled: asked.enabled === true }));
+      await ORG.updateOrg(env, orgId, { wardsynq: { dayClose: value } }, actor.id, { action: "org:day_close_settings", meta: JSON.stringify({ enabled: value.enabled, hour: value.hour, to: DC.maskMobile(value.mobile) }) });
+      const saved = await ORG.getOrg(env, orgId);
+      const back = DC.dayCloseSettings(saved && saved.wardsynq && saved.wardsynq.dayClose);
+      if (back.enabled !== value.enabled || back.hour !== value.hour || back.mobile !== value.mobile) return json({ ok: false, error: "not_saved", message: "The setting did not read back as sent, so do not rely on it. Try again." }, 502, request);
+      return json({ ok: true, settings: await view(saved) }, 200, request);
+    }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, seg === "members" ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
@@ -6111,14 +6493,25 @@ export async function onRequest(context) {
     // added the same way any tariff item is (bill/tariff POST). ?kind=medication added 2026-09-06
     // for native prescribing; investigation stays the default (unchanged for every existing caller).
     if (method === "GET" && seg === "inv-catalog") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
-      await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
-      const orgId = s.orgId || s.hospitalId;
+      // MaikOS unified catalog: phone app and web share the org's ONE tariff catalog (q_tariff).
+      // The org resolves from the queue session when opened from a ticket, or directly from
+      // ?orgId= for an on-device EMR with no queue session in scope. Rich rows carry what the
+      // doctor's picker shows: formulation, unit price and stock — never gated behind the billing flag.
+      const sessionId = url.searchParams.get("sessionId");
+      let orgId = url.searchParams.get("orgId") || "";
+      if (sessionId) {
+        const { s, err } = await loadSessionFor(env, sessionId, actor, request); if (err) return err;
+        await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+        orgId = orgId || s.orgId || s.hospitalId;
+      } else {
+        if (!orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        await requireOrgOrGlobal(env, actor, orgId, CAPS.EMR_TREAT);
+      }
       const q = String(url.searchParams.get("q") || "").trim().toLowerCase();
       const wantKind = url.searchParams.get("kind") === "medication" ? "medication" : "investigation";
       let rows = (await BILL.listTariff(env, orgId)).filter((t) => t.kind === wantKind);
       if (q) rows = rows.filter((t) => (t.name || "").toLowerCase().indexOf(q) > -1 || (t.code || "").toLowerCase().indexOf(q) > -1);
-      return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "" })) }, 200, request);
+      return json({ ok: true, rows: rows.slice(0, 50).map((t) => ({ id: t.id, name: t.name, code: t.code || "", kind: t.kind, pricePaise: (t.pricePaise != null ? t.pricePaise : (t.price || 0)), dosageForm: t.dosageForm || "", stock: t.stock != null ? t.stock : null, unit: t.unit || "" })) }, 200, request);
     }
     // Native prescribing's advisory-only CDSS pre-check (WardSynQ-native hospitals). NEVER gates -
     // see functions/_wardsynq/rx-safety.js's header (unapproved clinical content, per
@@ -6140,12 +6533,86 @@ export async function onRequest(context) {
       return json({ ok: true, safety }, 200, request);
     }
     // Nurse-station board: rooms (status/counts) + unassigned pool for an org+day.
+    /* THE OPD PULSE: one hospital's whole outpatient day, in the figures somebody can act on.
+     *
+     * Deliberately hospital-wide and not per session: the doctor's own analytics answers "how did my
+     * clinic go", and the question at the desk is "is the OPD running, and where is it stuck". Same
+     * capability as the board it sits beside (queue.view) because it is the board's summary, and it
+     * names NOBODY - counts and durations only, so it can live on a screen the whole desk can see.
+     *
+     * Every room's session plus the pool, exactly as boardForOrg walks them, but the tickets are NOT
+     * filtered to the active ones: a day with 40 completed and 9 no-shows is the day being measured. */
+    /* RECONCILE: re-send today's visits whose clinical record did not land (syncEncounter marked them
+     * "failed"). The desk's authority, because it is the desk's patients; bounded to 50 per call so one
+     * tap cannot become a long request. Says how many landed and how many still did not. */
+    if (method === "POST" && seg === "opd-reconcile") {
+      const rb = await readBody(request);
+      const orgId = String(rb.orgId || "");
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_ADD);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      const sessions = [];
+      for (const rm of await ORG.listRooms(env, orgId)) {
+        if (!resolveRoomDoctor(rm)) continue;
+        try { const s1 = await Q.getOrCreateRoomSession(env, org, rm, rb.date || ""); if (s1) sessions.push(s1); } catch (e) {}
+      }
+      try { const p1 = await Q.getOrCreatePoolSession(env, org, rb.date || ""); if (p1) sessions.push(p1); } catch (e) {}
+      let retried = 0, landed = 0;
+      for (const s1 of sessions) {
+        for (const t of await Q.listTickets(env, s1.id)) {
+          if (retried >= 50) break;
+          if (!t || t.encounterSync !== "failed") continue;
+          retried++;
+          const r = await syncEncounter(request, env, s1, t);
+          if (r && r.ok !== false) landed++;
+        }
+      }
+      return json({ ok: true, retried, landed, stillFailed: retried - landed }, 200, request);
+    }
+    if (method === "GET" && seg === "live") {   // plan item 16: the consoles' live stream (queue.view on the hospital)
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      return liveStream(env, orgId, request);
+    }
+    if (method === "GET" && seg === "opd-pulse") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      const { rows, unread } = await opdDay(env, org, url.searchParams.get("date") || "");
+      return json({ ok: true, pulse: opdPulse(rows, Date.now()), ...(unread.length ? { unread } : {}) }, 200, request);
+    }
     if (method === "GET" && seg === "opd-board") {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
       if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
       const org = await ORG.getOrg(env, orgId);
       return json(Object.assign({ ok: true }, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
+    }
+    /* Plan item 15: the owner's day close. The OPD by room, the day's money (takings, refunds, net, by method) and
+     * what is still open, in one read. analytics.view, the owner's and the administrator's right. The money is
+     * TODAY's on the hospital's clock (the cashier's shift report); a read that fails is said, never shown as zero. */
+    if (method === "GET" && seg === "day-close") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.ANALYTICS_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      return json(await dayCloseReport(env, org), 200, request);
+    }
+    if (method === "POST" && seg === "day-close" && sub === "send") {
+      const orgId = (await readBody(request)).orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.ANALYTICS_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+      const st = DC.dayCloseSettings(org.wardsynq && org.wardsynq.dayClose);
+      if (!st.mobile) return json({ ok: false, error: "no_number", message: "Save the WhatsApp number first." }, 422, request);
+      const r = await DC.sendDayClose(env, org, await dayCloseReport(env, org), st, "test", Date.now());
+      return json({ ok: r.ok, error: r.ok ? undefined : r.reason, message: r.ok ? "Sent to " + DC.maskMobile(st.mobile) + "." : r.reason === "whatsapp_not_configured" ? "WhatsApp is not set up on the server, so nothing was sent." : "WhatsApp did not accept it (" + r.reason + ")." }, r.ok ? 200 : 502, request);
     }
     // The doctor's OWN room session in an org — the exact queue the sister routes into on the console.
     // Resolves WHICH room by normalized identity (fb uid / email / ghis id); ?roomId= loads a specific
@@ -6165,7 +6632,16 @@ export async function onRequest(context) {
       const sess = await Q.getOrCreateRoomSession(env, org, rm, url.searchParams.get("date") || "");
       await Q.recompute(env, sess);   // refresh ETAs/positions, then return only the LIVE queue (no terminal/checked-out)
       const active = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1);
-      return json({ ok: true, resolved: true, room: { id: rm.id, name: rm.name, number: rm.number, department: rm.department }, session: sess, tickets: await ticketView(env, orderRoomView(active)) }, 200, request);
+      /* Clinic Messaging: null unless the meter is on AND this doctor's allowance is spent, in which
+       * case the client pops the top-up sheet. The queue itself is unaffected either way.
+       * The entitlement must be read here: the allowance is included + whatever Clinic Messaging
+       * subscription the doctor holds, and without it a subscriber would be told they are out. */
+      let msgQuota = null;
+      try {
+        const ment = sess.doctorUid ? await msgEntitlement(env, sess.doctorUid) : null;
+        msgQuota = await msgRefusalIfOut(env, sess.doctorUid, { role: ment && ment.role, msgTier: ment && ment.msgTier, msgTierExp: ment && ment.msgTierExp });
+      } catch (e) { msgQuota = null; }
+      return json(Object.assign({ ok: true, resolved: true, room: { id: rm.id, name: rm.name, number: rm.number, department: rm.department }, session: sess, tickets: await ticketView(env, orderRoomView(active)) }, msgQuota ? { msgQuota } : {}), 200, request);
     }
     // Owner/admin mints the login-free wall-display link for a waiting-room screen (90-day, regenerable).
     if (method === "POST" && seg === "display-link") {
@@ -6572,8 +7048,15 @@ export async function onRequest(context) {
         return json({ ok: true, org: await ORG.backfillOrg(env, body.hospitalId, actor.id, body.mode, body.connectorId) }, 200, request);
       }
       // ---- nurse-station runtime: register into the pool + assign a patient to a room ----
+      if (seg === "offline-series") {   // plan item 13: a desk reserves today's offline token series while it is still online
+        const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
+        try { return json({ ok: true, ...(await Q.reserveOfflineSeries(env, body.orgId, Q.opdDate(body.date), actor.id)) }, 200, request); }
+        catch (e) { if (e && e.status) return json({ ok: false, error: e.message, message: e.detail || "" }, e.status, request); throw e; }
+      }
       if (seg === "pool") {   // register a department-level walk-in into the central unassigned pool
         const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
+        // Plan item 12: registering ahead of the queue is the priority right, not the desk's; dropped (the patient is still registered) without it.
+        if ((body.priority || body.priorityReason) && !(await azOrg(CAPS.QUEUE_PRIORITY)).ok) { body.priority = 0; body.priorityReason = ""; }
         const org = await ORG.getOrg(env, body.orgId);
         let t;
         try { t = await Q.addToPool(env, org, body, actor.id); }
@@ -6599,9 +7082,9 @@ export async function onRequest(context) {
         const az = await azOrg(CAPS.QUEUE_ASSIGN, { roomId: room.id, departmentId: room.departmentId }); if (!az.ok) return deny(az);
         // Setting urgent priority needs QUEUE_PRIORITY separately - reception may route but not mark urgent. Drop the
         // priority (never deny the whole routing) unless the actor also holds it, so a crafted request can't bypass the role.
-        const azP = body.priority ? await azOrg(CAPS.QUEUE_PRIORITY, { roomId: room.id, departmentId: room.departmentId }) : { ok: false };
+        const azP = body.priorityReason ? await azOrg(CAPS.QUEUE_PRIORITY, { roomId: room.id, departmentId: room.departmentId }) : { ok: false };
         const org = await ORG.getOrg(env, body.orgId);
-        try { await Q.assignToRoom(env, org, body.ticketId, room, { priority: (azP.ok ? body.priority : 0), reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
+        try { await Q.assignToRoom(env, org, body.ticketId, room, { priorityReason: (azP.ok ? body.priorityReason : ""), reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
         catch (e) { return json({ ok: false, error: (e && e.message) || "assign_failed" }, (e && e.status) || 500, request); }
         return json({ ok: true, board: await boardForOrg(env, org, body.date || "") }, 200, request);
       }
@@ -6704,6 +7187,7 @@ export async function onRequest(context) {
       const { s, err } = await loadSessionFor(env, body.sessionId, actor, request); if (err) return err;
       if (seg === "ticket") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
+        if (body.priority || body.priorityReason) { try { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); } catch (e) { body.priority = 0; body.priorityReason = ""; } }   // plan item 12, as /pool
         let t;
         try { t = await Q.addTicket(env, s, body, actor.id); }
         catch (e) { if (e && e.status >= 400 && e.status < 500) return tokenRefusal(e); throw e; }
@@ -6758,11 +7242,16 @@ export async function onRequest(context) {
           throw e;
         }
       }
-      if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }
+      if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, { reason: body.reason, note: body.note }, actor.id)) }, 200, request); }
       if (seg === "move") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }
       if (seg === "assign") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ASSIGN); return json({ ok: true, tickets: await ticketView(env, await Q.assignTicket(env, s, body.ticketId, body.toDoctorUid, body, actor.id)) }, 200, request); }
       if (seg === "revoke") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REMOVE); await Q.revokeTicket(env, s, body.ticketId, actor.id); return json({ ok: true, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
-      if (seg === "session" && sub === "status") { await requireSessionCap(env, actor, s, CAPS.SESSION_MANAGE); return json({ ok: true, session: await Q.setSessionStatus(env, s, body, actor.id) }, 200, request); }
+      if (seg === "session" && sub === "status") {
+        await requireSessionCap(env, actor, s, CAPS.SESSION_MANAGE);
+        const sess = await Q.setSessionStatus(env, s, body, actor.id);
+        try { await Q.recompute(env, sess); } catch (e) {}   // plan item 14: estimates move now, and the waiting hall hears the doctor is running late
+        return json({ ok: true, session: sess }, 200, request);
+      }
 
       // Add a clinical entry to the encounter timeline. Vitals => nurse (EMR_VITALS); notes/meds/
       // assessment => doctor (EMR_TREAT). "Add to timeline" for meds writes ONLY here (no pharmacy/EMR).
@@ -6796,6 +7285,13 @@ export async function onRequest(context) {
         await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : isImmunization ? CAPS.EMR_IMMUNISE : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        // MaikOS vitals sync: the nurse's structured vitals ride on the ticket itself, so the
+        // doctor's EMR (queue.js -> opd-emr.js "Initial Assessment") prefills BP/Pulse/Temp/SpO2/
+        // RR/Weight/GRBS without re-parsing timeline text. The ticket mirror is best-effort and
+        // never fails the save; the same payload also travels as the timeline entry's structured
+        // data (appendTimeline's `data`), so a reader can prefer either source.
+        const vitalsData = (isVitals && body.vitals && typeof body.vitals === "object") ? { vitals: body.vitals } : null;
+        if (vitalsData) { try { await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { vitals: body.vitals, updatedAt: Date.now() })]); } catch (e) {} }
         if (isImmunization) {
           // The CODE is validated against the IG's value set server-side. A client-supplied code is a
           // claim, and an unrecognised one would put an invented SNOMED concept into a patient's PHR - so
@@ -6869,14 +7365,17 @@ export async function onRequest(context) {
             if (isAssessment && !isSignOff && wsqMig) {
               try { await recordAllergiesFromAssessment(request, env, { migration: mig, ticket: t, vals: body.vals, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), rulePack: getRulePack() }); } catch (e) {}
             }
-            const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+            const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData || undefined);
             return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
           }
           // shadow: the timeline is still what the ward reads; the record write reports, never throws.
-          const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id);
+          const legacy = await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData || undefined);
           const rec = await migrator(request, env, ctx);
           return json(Object.assign({ ok: true }, legacy, { wardsynq: rec }), 200, request);
         }
+        // Off (no migration): the original single line, unchanged for every pre-existing payload.
+        // Only a vitals write carrying structured values takes the data-carrying variant above it.
+        if (vitalsData) return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id, vitalsData)), 200, request);
         return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
       }
       // A mirror of a READ, not of a write (migrate-results.js's header explains why this is its own

@@ -45,7 +45,10 @@
   }
 
   // Mandatory safety disclaimer (Global Constraints) — verbatim, appended once per result screen.
-  var MANDATORY_DISCLAIMER = "AI-generated findings are intended to assist qualified healthcare professionals and must always be interpreted in conjunction with clinical assessment, radiologist review where appropriate, laboratory findings and other investigations.";
+  // "Beta, in active development" leads, and is NOT optional: this model is clinically unvalidated
+  // (docs/fundx/VALIDATION-PROGRAM.md) and is now reachable by paying Physician Pro accounts, who
+  // read a finding more trustingly than a tester holding an access code does.
+  var MANDATORY_DISCLAIMER = "Beta, in active development. It may not perform to the mark, so check every result yourself. AI-generated findings are intended to assist qualified healthcare professionals and must always be interpreted in conjunction with clinical assessment, radiologist review where appropriate, laboratory findings and other investigations.";
 
   // One finding -> its render-ready shape (severity pill + band-derived bar, never a raw probability).
   function buildFindingModel(f) {
@@ -761,7 +764,12 @@
           '<button type="button" class="tx-clin-mic" data-act="tx-aidx-scribe" aria-label="Dictate history with MaiK Scribe">' + ic("mic") + "<span>MaiK Scribe</span></button>" +
           '<textarea class="tx-clin-ta" data-hook="aidxHx" rows="2" placeholder="Symptoms &amp; history — e.g. fever, foul sputum, IV drug use">' + esc((a && a.__context) || "") + "</textarea>" +
         "</div>" +
-        '<button type="button" class="tx-btn tx-btn-primary tx-aidx-go" data-act="tx-aidx-go">' + ic("auto_awesome") + "<span>Get best-fit diagnoses</span></button>" +
+        // QA BUG-001: the same glowing Ask MaiK banner the OPD assessment uses (aurora sheen + bloom).
+        '<button type="button" class="tx-aidx-go tx-maik-cta" data-act="tx-aidx-go" aria-label="Ask MaiK for the best-fit diagnoses">' +
+          '<span class="tx-maik-glow" aria-hidden="true"></span>' +
+          '<span class="tx-maik-ico">' + ic("auto_awesome") + '</span>' +
+          '<span class="tx-maik-txt"><b>Ask MaiK</b><span>Best-fit diagnoses from the findings and history</span></span>' +
+        "</button>" +
         '<div class="tx-aidx-out" data-hook="aidxOut" hidden></div>' +
       "</div>";
 

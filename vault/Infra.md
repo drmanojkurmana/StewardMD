@@ -209,3 +209,51 @@ the cheap retry is any commit merged to main. Confirm the agent flags with
 `GET /api/connect/agent/connections` (401 = bound, 404 = not).
 
 Re-uploaded CONNECT_AGENT_FLAG and CONNECT_BROWSER_SESSION_FLAG with value `1` via stdin on 2026-09-12; a value typed interactively had not gated the route open.
+
+## MaiK AI provider credentials (2026-09-24)
+
+Vertex is the main provider and the Gemini (AI Studio) key the fallback: `AI_PROVIDER = "vertex"` in
+wrangler.toml (both envs), failover to `developer` on any Vertex error. Vertex authenticates with ONE of:
+
+- `VERTEX_API_KEY` (Pages secret): Vertex AI express mode, publisher path on aiplatform.googleapis.com,
+  key sent in the `x-goog-api-key` header. This is the current credential. Read by functions/api/ai,
+  functions/_fundx_ai.js and functions/_wardsynq/maik-gateway.js.
+- the project path (`GCP_PROJECT`, `GCP_SA_EMAIL`, WIF or SA key): used only when no VERTEX_API_KEY is set.
+  These belonged to the retired owner-account project and are to be deleted once the key is verified.
+
+Rotate the key without it touching a terminal history or a chat:
+
+```
+npx wrangler pages secret put VERTEX_API_KEY --project-name stewardmd      # prompts; paste the key
+```
+
+then any commit to main redeploys Pages; verify with `GET /api/ai/health` (`vertex_mode: "api-key (express mode)"`).
+The gcloud CLI on the owner's Mac was logged out of the old account the same day; nothing in the app or
+this repo uses gcloud.
+
+Patient data (WardSynQ MaiK gateway): the S7 rule stands. PHI goes to Vertex ONLY through the project's
+regional endpoint under a service account; express mode never carries PHI. With only an API key
+configured, PHI-carrying MaiK requests in WardSynQ refuse Vertex rather than use the key.
+
+Pages env `AI_PROVIDER` was set to `vertex` on 2026-09-24 (it had been `developer` in the project settings,
+which overrides wrangler.toml); a Pages variable change applies only to the NEXT deployment, hence this commit.
+
+Retry after removing the AI_PROVIDER Pages secret that collided with the wrangler.toml var (2026-09-24).
+
+Pages caps variables plus secrets at 128 bindings; adding VERTEX_API_KEY made 129 and every deployment failed with
+"Too many text bindings". GCP_WIF_ISSUER and GCP_WIF_SUBJECT (code defaults exist) were deleted on 2026-09-24 to get back
+under it; delete the rest of the GCP_* set once the key is verified, and count before adding any new secret.
+
+## Cloudflare Access identity (2026-09-25)
+The API trusts a Cloudflare Access user ONLY via a verified `Cf-Access-Jwt-Assertion`
+(`functions/_fbauth.js cfAccessEmail`). To put any hostname/path behind Access and have the API
+recognise those users, set both Pages env vars: `CF_ACCESS_TEAM_DOMAIN` (`<team>.cloudflareaccess.com`)
+and `CF_ACCESS_AUD` (the Access application's AUD tag; comma-separate several). Unset = Access
+identity off; callers fall through to Firebase / staff sessions. The bare email header is never read.
+
+## KITS_SHARE_ON (wave 2 kits sharing, 2026-09-25)
+Kill switch for `/api/kits/*` ([[Colleagues]]). **Unset = ON** (owner turned it on 2026-09-25); `"0"` = every
+route answers 404 `{error:"disabled"}`. Deliberately NOT a wrangler.toml var: production is at the 128
+text-binding cap, so the default lives in code and setting the switch needs a free binding. Uses the
+existing `FOLLOWCARE_PHI_KEY` (sealing) and `FIREBASE_SERVICE_ACCOUNT` (Firestore REST, recipient claims);
+rate limits use `CASES_KV` / `GHIS_KV` / `MAIK_KV` (first present). Collections `kx_*` are server-only.

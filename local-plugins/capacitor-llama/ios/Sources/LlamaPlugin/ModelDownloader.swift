@@ -159,8 +159,10 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         }
         lock.unlock()
 
-        // Nothing to do if the finished file is already the right size.
-        if total > 0 && Self.sizeOf(name) == total {
+        // Nothing to do if the finished file is already the right size AND no parts are outstanding.
+        // The file is preallocated to `total` before the first part lands, so size alone said "done"
+        // for every interrupted download on relaunch; the sidecar is what says whether it is finished.
+        if total > 0 && Self.sizeOf(name) == total && !Self.isPartial(name) {
             lock.lock(); jobs[name] = Job(url: u, total: total, chunks: 1, committed: [true], inflight: [:], state: "done", error: nil); lock.unlock()
             return name
         }

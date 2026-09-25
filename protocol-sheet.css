@@ -68,14 +68,14 @@ body.dark .ps-overlay, body.v3-dark .ps-overlay, html.dark .ps-overlay { --ps-in
 
 /* Structured form cards: iOS glass/border treatment, labels sit ABOVE every input/value so
    nothing truncates horizontally on narrow phones. */
-.ps-cards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
+.ps-cards { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; margin-bottom: 14px; }
 .ps-cards-col2 { display: flex; flex-direction: column; gap: 10px; }
 @media (min-width: 640px) {
-  .ps-cards { grid-template-columns: 1.15fr 1fr; }
+  .ps-cards { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); }
 }
 .ps-card { background: color-mix(in srgb, var(--ps-primary) 3%, var(--ps-card)); border: 1px solid var(--ps-line); border-radius: 12px; padding: 12px 14px; }
 .ps-card-h { font: 800 10.5px system-ui; text-transform: uppercase; letter-spacing: .06em; color: var(--ps-primary); margin-bottom: 10px; }
-.ps-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+.ps-card-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px 14px; }
 .ps-span-2 { grid-column: 1 / -1; }
 .ps-card-grid .ps-f { flex-direction: column; align-items: stretch; gap: 3px; }
 .ps-f { display: flex; align-items: baseline; gap: 6px; font-size: 12.5px; min-width: 0; }
@@ -144,8 +144,8 @@ body.dark .ps-warns { color: #fbbf24; background: #3a2e05; border-color: #78350f
 .ps-block li, .ps-block p { font-size: 12px; line-height: 1.5; margin: 2px 0; color: var(--ps-ink); }
 
 /* signatures */
-.ps-signatures { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 640px) { .ps-signatures { grid-template-columns: 1fr; } }
+.ps-signatures { margin-top: 18px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
+@media (max-width: 640px) { .ps-signatures { grid-template-columns: minmax(0,1fr); } }
 .ps-sig-block { background: color-mix(in srgb, var(--ps-primary) 3%, var(--ps-card)); border: 1px solid var(--ps-line); border-radius: 10px; padding: 12px; }
 .ps-sig-block-h { font: 800 10px system-ui; text-transform: uppercase; color: var(--ps-muted); margin-bottom: 8px; letter-spacing: .04em; }
 .ps-sig-row { display: flex; flex-direction: column; gap: 8px; }
@@ -157,7 +157,7 @@ body.dark .ps-warns { color: #fbbf24; background: #3a2e05; border-color: #78350f
 .ps-sig-meta { display: flex; flex-direction: column; gap: 6px; }
 
 /* checker */
-.ps-checker-items { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: 10.5px; color: var(--ps-muted); margin-bottom: 14px; }
+.ps-checker-items { display: grid; grid-template-columns: minmax(0,1fr); gap: 4px; font-size: 10.5px; color: var(--ps-muted); margin-bottom: 14px; }
 .ps-checker-sig { margin-top: 10px; }
 .ps-sig-line { border-bottom: 1.5px solid var(--ps-line); height: 1px; margin-bottom: 4px; }
 .ps-sig-line-lbl { font: 600 9.5px system-ui; color: var(--ps-muted); }
@@ -242,9 +242,9 @@ body.dark .ps-oral-header { color: #93c5fd !important; border-bottom-color: #1e3
 .ps-lang-lbl { font: 600 10.5px system-ui; color: var(--ps-muted); margin-right: 2px; }
 .ps-lang-btn { background: var(--ps-card); border: 1px solid var(--ps-line); border-radius: 6px; font: 700 10.5px system-ui; padding: 3px 7px; color: var(--ps-ink); cursor: pointer; transition: .12s; }
 .ps-lang-btn.active { background: #2563eb; color: #fff; border-color: #2563eb; }
-.ps-oral-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px; }
-.ps-oral-bilingual { grid-template-columns: 1fr 1fr; }
-@media (max-width: 640px) { .ps-oral-bilingual { grid-template-columns: 1fr; } }
+.ps-oral-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; margin-top: 8px; }
+.ps-oral-bilingual { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+@media (max-width: 640px) { .ps-oral-bilingual { grid-template-columns: minmax(0,1fr); } }
 .ps-oral-col { background: var(--ps-card); border: 1px solid var(--ps-line); border-radius: 9px; padding: 10px 12px; }
 .ps-oral-lang-title { font: 800 11.5px system-ui; color: #2563eb; display: flex; align-items: center; gap: 5px; margin-bottom: 8px; }
 .ps-oral-lang-title .material-symbols-rounded { font-size: 16px; }
@@ -293,7 +293,7 @@ body.dark .ps-oral-lang-title { color: #60a5fa; }
 .ps-modal-label input, .ps-modal-label select, .ps-modal-label textarea { width: 100%; min-height: 40px; border: 1px solid var(--ps-line); border-radius: 9px; padding: 8px 12px; font: 600 13px system-ui; background: var(--ps-card); color: var(--ps-ink); outline: none; }
 .ps-modal-label textarea { min-height: 64px; resize: vertical; }
 .ps-modal-label input:focus, .ps-modal-label select:focus, .ps-modal-label textarea:focus { border-color: var(--ps-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ps-primary) 18%, transparent); }
-.ps-modal-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ps-modal-grid-2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
 .ps-modal-info { background: color-mix(in srgb, var(--ps-primary) 8%, var(--ps-card)); border: 1px solid color-mix(in srgb, var(--ps-primary) 22%, transparent); border-radius: 9px; padding: 8px 12px; font-size: 12px; color: var(--ps-ink); }
 .ps-modal-subinfo { font-size: 10.5px; color: var(--ps-primary); margin-top: 2px; }
 .ps-quick-pct-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: -4px; }
@@ -330,7 +330,7 @@ body.dark .ps-oral-lang-title { color: #60a5fa; }
   .ps-page-break-auto, .ps-page { page-break-inside: avoid; break-inside: avoid; }
   .ps-page-break-deliberate { display: block !important; page-break-before: always !important; break-before: page !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
   .ps-page2-header { display: flex !important; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #0f766e; padding-bottom: 5px; margin-bottom: 12px; font-size: 8.5pt; color: #64748b; font-weight: 600; }
-  .ps-cards { grid-template-columns: 1.15fr 1fr !important; }
+  .ps-cards { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr) !important; }
   .ps-cards-col2 { display: flex !important; flex-direction: column !important; gap: 8px !important; }
   .ps-table td, .ps-table th, .ps-table tr { page-break-inside: avoid !important; break-inside: avoid !important; }
   @page { size: A4; margin: 8mm; }
