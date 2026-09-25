@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "3675d8a55108",
- "count": 192,
+ "version": "66a83f3d9741",
+ "count": 197,
  "subjects": [
   {
    "key": "emergency",
@@ -41,7 +41,7 @@
   {
    "key": "endocrinology",
    "label": "Endocrinology and Diabetes",
-   "count": 12
+   "count": 14
   },
   {
    "key": "neurology",
@@ -61,7 +61,7 @@
   {
    "key": "rheumatology-dermatology",
    "label": "Rheumatology and Dermatology",
-   "count": 8
+   "count": 9
   },
   {
    "key": "psychiatry",
@@ -71,12 +71,12 @@
   {
    "key": "obstetrics-gynaecology",
    "label": "Obstetrics and Gynaecology",
-   "count": 10
+   "count": 11
   },
   {
    "key": "paediatrics",
    "label": "Paediatrics and Neonatology",
-   "count": 12
+   "count": 13
   },
   {
    "key": "surgery-trauma",
@@ -103,7 +103,7 @@
   {
    "key": "international",
    "label": "International",
-   "count": 174
+   "count": 179
   },
   {
    "key": "india",
@@ -1257,6 +1257,39 @@
    "status": "ai_drafted"
   },
   {
+   "id": "atopic-dermatitis",
+   "title": "Atopic dermatitis (atopic eczema)",
+   "subject": "rheumatology-dermatology",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "atopic eczema",
+    "eczema",
+    "AD",
+    "atopic dermatitis",
+    "topical steroid",
+    "fingertip unit",
+    "FTU",
+    "tacrolimus",
+    "pimecrolimus",
+    "dupilumab",
+    "JAK inhibitor",
+    "upadacitinib",
+    "eczema herpeticum",
+    "infected eczema",
+    "wet wraps"
+   ],
+   "summary": "Daily emollients for all, a topical corticosteroid matched to severity and site (mild potency on the face, short courses of potent), steroid-sparing topicals and twice-weekly proactive treatment for frequent flares, and biologics or oral JAK inhibitors for moderate to severe disease. Eczema herpeticum needs same-day aciclovir.",
+   "sources": [
+    "American Academy of Dermatology 2023",
+    "American Academy of Dermatology 2024",
+    "American Academy of Dermatology 2025",
+    "NICE 2007"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "atrial-fibrillation",
    "title": "Atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation",
    "subject": "cardiology",
@@ -1603,7 +1636,7 @@
    "sources": [
     "WHO 2025",
     "PAHO 2022",
-    "CDC 2025",
+    "CDC 2026",
     "eClinicalMedicine 2022"
    ],
    "status": "ai_drafted"
@@ -2348,6 +2381,33 @@
     "AAP 2011",
     "AAP 2008",
     "Royal Children's Hospital Melbourne 2026"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "fever-in-under-5s",
+   "title": "Fever in children under 5: assessment and initial management",
+   "subject": "paediatrics",
+   "population": "Children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "fever without source",
+    "FWS",
+    "febrile child",
+    "febrile infant",
+    "traffic light system",
+    "NICE NG143",
+    "fever under 3 months",
+    "serious bacterial infection",
+    "SBI",
+    "pyrexia child"
+   ],
+   "summary": "Check every febrile child under 5 for life-threatening features and the NICE traffic light signs; infants under 3 months with 38 °C or more are high risk. Investigate and treat by risk, give parenteral ceftriaxone if shocked, unrousable or meningococcal, and use antipyretics only for distress.",
+   "sources": [
+    "NICE 2019",
+    "NICE 2025",
+    "AAP 2011"
    ],
    "status": "ai_drafted"
   },
@@ -4124,6 +4184,34 @@
    "status": "ai_drafted"
   },
   {
+   "id": "polycystic-ovary-syndrome",
+   "title": "Polycystic ovary syndrome (PCOS)",
+   "subject": "obstetrics-gynaecology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "PCOS",
+    "PCOD",
+    "polycystic ovarian disease",
+    "polycystic ovaries",
+    "Rotterdam criteria",
+    "hirsutism",
+    "anovulation",
+    "oligomenorrhoea",
+    "hyperandrogenism",
+    "AMH",
+    "letrozole ovulation induction",
+    "metformin PCOS",
+    "anovulatory infertility"
+   ],
+   "summary": "Diagnose in adults with 2 of ovulatory dysfunction, hyperandrogenism and polycystic ovaries on ultrasound or raised AMH, after excluding mimics; screen all for dysglycaemia (OGTT), lipids, blood pressure and depression; use lifestyle, the COCP and metformin for symptoms and metabolic risk; and use letrozole first line for anovulatory infertility.",
+   "sources": [
+    "International PCOS Network (Monash University, ESHRE, ASRM, Endocrine Society, ESE) 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "polymyalgia-rheumatica",
    "title": "Polymyalgia rheumatica (PMR)",
    "subject": "rheumatology-dermatology",
@@ -5317,6 +5405,39 @@
    "status": "ai_drafted"
   },
   {
+   "id": "type-1-diabetes-management",
+   "title": "Type 1 diabetes: outpatient management (adult)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "T1DM",
+    "T1D",
+    "type 1 diabetes mellitus",
+    "insulin-dependent diabetes",
+    "IDDM",
+    "LADA",
+    "basal-bolus",
+    "MDI",
+    "insulin pump",
+    "CSII",
+    "AID",
+    "closed loop",
+    "CGM",
+    "carbohydrate counting",
+    "sick day rules"
+   ],
+   "summary": "Confirm with islet autoantibodies, start basal-bolus analogue insulin at about 0.5 units/kg/day (half basal), offer CGM and automated insulin delivery from diagnosis, aim for HbA1c below 7% with time in range above 70%, prescribe glucagon, and teach never to stop basal insulin on sick days.",
+   "sources": [
+    "American Diabetes Association 2026",
+    "American Diabetes Association 2026",
+    "ADA / EASD 2026",
+    "ADA / EASD 2021"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "type-2-diabetes-management",
    "title": "Type 2 diabetes: outpatient management",
    "subject": "endocrinology",
@@ -5401,6 +5522,33 @@
     "ICMR 2022",
     "IDSA 2019",
     "IDSA / ESCMID 2011"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "vitamin-d-deficiency",
+   "title": "Vitamin D deficiency (adult)",
+   "subject": "endocrinology",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "low vitamin D",
+    "hypovitaminosis D",
+    "25-hydroxyvitamin D",
+    "25(OH)D",
+    "colecalciferol",
+    "cholecalciferol",
+    "vitamin D3",
+    "osteomalacia",
+    "vitamin D loading dose",
+    "vitamin D testing"
+   ],
+   "summary": "Do not screen healthy adults; test when bone disease, osteomalacia symptoms or malabsorption make the result change management, treat deficiency (25(OH)D below 30 nmol/L, 12 ng/mL) with about 300,000 IU colecalciferol loading when rapid correction is needed, then 800 to 2000 IU daily, and check calcium 1 month after loading.",
+   "sources": [
+    "Endocrine Society 2024",
+    "National Osteoporosis Society (UK) 2014",
+    "National Osteoporosis Guideline Group (UK) 2025"
    ],
    "status": "ai_drafted"
   },
