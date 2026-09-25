@@ -768,7 +768,7 @@
         '<button class="atlas-info" data-atlas-act="info" aria-label="About this atlas">' + (ico("info") || "i") + "</button></div>" +
       '<div class="atlas-scroll">' + (mods.length ? searchBoxHtml() : "") +
         '<div id="atlasBrowse">' + recentsHtml() + bookmarksHtml() + threeDCard() + chipRow() + body + "</div></div>" +
-      '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>';
+      '<div class="atlas-foot">Educational reference only, not for diagnosis.</div>';
   }
 
   // The ONE place a source credit may appear (product decision, spec section 9).
@@ -996,7 +996,7 @@
         '<div class="atlas-ov" id="atlasOv"></div><div class="atlas-hud" id="atlasHud"></div>' +
       "</div>" +
       scrubHtml() +
-      '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>' +
+      '<div class="atlas-foot">Educational reference only, not for diagnosis.</div>' +
       '<div class="atlas-sr" id="atlasLive" aria-live="polite" aria-atomic="true"></div>';
   }
 

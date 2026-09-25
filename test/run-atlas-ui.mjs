@@ -20,6 +20,15 @@ const PORT = 9388, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/atlas-ui
 const SHOTS = process.env.SHOTS || "/tmp/atlas-ui-shots";
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const MOD = "ct-live-torso-axial";
+// The reference level: the torso axial slice with the most pinned structures that shows both the
+// liver and the kidneys (slice 6 of the original 24-slice stack). Derived from the data so a
+// densified stack keeps testing the same anatomy.
+const REF = (() => {
+  const a = JSON.parse(readFileSync(join(HERE, "../atlas/" + MOD + "/atlas.json"), "utf8"));
+  let best = 1, n = -1;
+  a.slices.forEach((s) => { const u = new Set(s.pins.map((p) => p.s)); if (u.has("liver") && u.has("kidney") && u.size > n) { n = u.size; best = s.i; } });
+  return best;
+})();
 mkdirSync(SHOTS, { recursive: true });
 let serveProc = null;
 async function ensureServer() { try { await fetch(BASE); return; } catch {} const port = (BASE.match(/:(\d+)/) || [, "8996"])[1]; serveProc = spawn("node", [join(HERE, "serve.mjs"), join(HERE, ".."), port], { stdio: "ignore" }); for (let i = 0; i < 30; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } } }
@@ -105,14 +114,14 @@ try {
   await ev(`window.__meta=function(){return ATLAS._state.catalog.modules.filter(function(m){return m.id===${JSON.stringify(MOD)}})[0]}; window.__snap=JSON.stringify(__meta()); window.__restore=function(){var m=__meta(), o=JSON.parse(__snap); Object.keys(m).forEach(function(k){delete m[k]}); Object.assign(m,o);}; return 1;`);
   const shipped = await ev(`return JSON.stringify({flipX:__meta().flipX, orient:__meta().orient, mm:__meta().mm, w:(__meta().windows||[]).length})`);
   console.log("  shipped torso-axial fields: " + shipped);
-  await ev(`ATLAS._setSlice(6); return 1;`); ok(await ready(), "slice 6 renders");
+  await ev(`ATLAS._setSlice(${REF}); return 1;`); ok(await ready(), "reference slice " + REF + " renders");
 
   // ---------------- 390x844: Pins mode ----------------
   ok(await ev(`return document.querySelector('#atlasTools [data-atlas-act=mode][aria-pressed=true]').getAttribute('data-v');`) === "pins", "narrow portrait defaults to Pins mode");
   const iw = await ev(`return document.getElementById('atlasImg').getBoundingClientRect().width / innerWidth;`);
   ok(iw >= 0.85, "Pins mode: the slice fills " + (iw * 100).toFixed(1) + "% of the phone width (>= 85%; was 219/390 = 56%)");
-  ok(await ev(`return document.querySelectorAll('#atlasOv circle.atlas-dot').length === ATLAS._state.atlas.slices[5].pins.length;`), "every pin is drawn");
-  const stops = await ev(`var t=[].slice.call(document.querySelectorAll('#atlasOv [tabindex="0"]')).map(function(e){return e.getAttribute('data-atlas-s')}); var u={}; t.forEach(function(s){u[s]=(u[s]||0)+1}); return {n:t.length, dup:Object.keys(u).filter(function(k){return u[k]>1}).length, uniq:new Set(ATLAS._state.atlas.slices[5].pins.map(function(p){return p.s})).size};`);
+  ok(await ev(`return document.querySelectorAll('#atlasOv circle.atlas-dot').length === ATLAS._state.atlas.slices[${REF - 1}].pins.length;`), "every pin is drawn");
+  const stops = await ev(`var t=[].slice.call(document.querySelectorAll('#atlasOv [tabindex="0"]')).map(function(e){return e.getAttribute('data-atlas-s')}); var u={}; t.forEach(function(s){u[s]=(u[s]||0)+1}); return {n:t.length, dup:Object.keys(u).filter(function(k){return u[k]>1}).length, uniq:new Set(ATLAS._state.atlas.slices[${REF - 1}].pins.map(function(p){return p.s})).size};`);
   ok(stops.n === stops.uniq && stops.dup === 0, "exactly one tab stop per structure (" + stops.n + " stops, " + stops.uniq + " structures)");
   ok(await ev(`return !document.querySelector('#atlasOv text.atlas-lab');`), "Pins mode draws no gutter labels or leader lines");
   await shot("390-pins.png");
@@ -166,7 +175,7 @@ try {
 
   // ---------------- structures list ----------------
   await ev(`document.querySelector('#smdAtlas [data-atlas-act=list]').click(); return 1;`);
-  ok(await until(`var sh=document.getElementById('atlasSheet'); return sh.classList.contains('on') && sh.classList.contains('full') && sh.querySelectorAll('.atlas-li').length===new Set(ATLAS._state.atlas.slices[5].pins.map(function(p){return p.s})).size`), "'On this slice' lists every structure once");
+  ok(await until(`var sh=document.getElementById('atlasSheet'); return sh.classList.contains('on') && sh.classList.contains('full') && sh.querySelectorAll('.atlas-li').length===new Set(ATLAS._state.atlas.slices[${REF - 1}].pins.map(function(p){return p.s})).size`), "'On this slice' lists every structure once");
   ok(await ev(`return document.getElementById('atlasSheet').contains(document.activeElement)`), "the list sheet takes focus");
   await ev(`document.querySelector('#atlasSheet .atlas-li[data-atlas-s=spleen], #atlasSheet .atlas-li').click(); return 1;`);
   ok(await until(`return !!ATLAS._state.sel && document.getElementById('atlasSheet').classList.contains('on') && !document.getElementById('atlasSheet').classList.contains('full')`), "picking from the list selects the structure");
@@ -184,7 +193,7 @@ try {
   ok(await ev(`return !!document.querySelector('#atlasHud .atlas-zoom')`), "a Reset zoom control appears");
   const pxBefore = await ev(`return ATLAS._state.z.px`);
   await drag(cx, cy, cx - 90, cy + 40, 10);
-  ok(Math.abs((await ev(`return ATLAS._state.z.px`)) - pxBefore) > 20 && (await ev(`return ATLAS._state.slice`)) === 6, "zoomed one-finger drag pans (and does not scrub)");
+  ok(Math.abs((await ev(`return ATLAS._state.z.px`)) - pxBefore) > 20 && (await ev(`return ATLAS._state.slice`)) === REF, "zoomed one-finger drag pans (and does not scrub)");
   dr = await pinDrift();
   ok(dr.n > 0 && dr.max < 1.5, "panned: pins still on their structures (max drift " + dr.max.toFixed(2) + " px)");
   await drag(cx, cy, cx + 3000, cy + 3000, 6);
@@ -198,10 +207,10 @@ try {
   ok(await until(`return ATLAS._state.z.s === 1`), "double-tap again resets");
 
   // ---------------- scrub + momentum + cine ----------------
-  await ev(`ATLAS._setSlice(6); return 1;`); await ready(); await sleep(400);
+  await ev(`ATLAS._setSlice(${REF}); return 1;`); await ready(); await sleep(400);
   await drag(cx, cy + 60, cx, cy - 80, 14, 20, 150);        // drag up 140 px (~10 slices), then rest
   const afterSlow = await ev(`return ATLAS._state.slice`);
-  ok(afterSlow >= 14 && afterSlow <= 17, "unzoomed vertical drag scrubs slices (6 -> " + afterSlow + ")");
+  ok(afterSlow - REF >= 8 && afterSlow - REF <= 11, "unzoomed vertical drag scrubs slices (" + REF + " -> " + afterSlow + ")");
   await ev(`ATLAS._setSlice(3); return 1;`); await sleep(400);
   await touch("touchStart", [[cx, cy + 60]]);
   for (let i = 1; i <= 5; i++) { await sleep(12); await touch("touchMove", [[cx, cy + 60 - i * 14]]); }
@@ -221,7 +230,7 @@ try {
   ok((await ev(`return ATLAS._state.slice`)) === stopped && (await ev(`return document.getElementById('atlasCine').getAttribute('aria-pressed')`)) === "false", "any touch stops cine");
 
   // ---------------- flipX + orientation ----------------
-  await ev(`ATLAS._setSlice(6); return 1;`); await ready();
+  await ev(`ATLAS._setSlice(${REF}); return 1;`); await ready();
   await ev(`var m=__meta(); delete m.flipX; delete m.orient; ATLAS._draw(); return 1;`);
   const unflipped = await ev(`return ATLAS._placed().map(function(p){return p.x})`);
   await ev(`var m=__meta(); m.flipX=true; m.orient={left:'R',right:'L',top:'A',bottom:'P'}; ATLAS._draw(); return 1;`);
@@ -294,7 +303,7 @@ try {
   // mm is overridden with round numbers so the expected reading is exact; windows are the shipped ones.
   await ev(`__meta().mm=[400,346.5]; ATLAS._openModule(${JSON.stringify(MOD)}); return 1;`);
   ok(await ready(), "module reopens with mm + windows");
-  await ev(`ATLAS._setSlice(6); return 1;`); await ready();
+  await ev(`ATLAS._setSlice(${REF}); return 1;`); await ready();
   await ev(`document.querySelector('#atlasTools [data-atlas-act=ruler]').click(); return 1;`);
   const ir = await rect("#atlasImg");
   await tap(ir.l + ir.w * 0.25, ir.t + ir.h * 0.5); await sleep(400);
@@ -307,12 +316,14 @@ try {
   await ev(`document.querySelector('#atlasTools [data-atlas-act=panel]').click(); return 1;`);
   ok(await ev(`return document.querySelector('#atlasTools [data-atlas-act=panel]').getAttribute('aria-label')==='Window' && document.querySelectorAll('#atlasPanel [data-atlas-act=win]').length===3`), "module.windows shows window chips");
   await ev(`document.querySelector('#atlasPanel [data-atlas-act=win][data-v=lung]').click(); return 1;`);
-  ok(/\/atlas\/ct-live-torso-axial\/w\/lung\/006\.webp$/.test(await ev(`return document.getElementById('atlasImg').getAttribute('src')`)), "a window swaps to /atlas/<module>/w/<id>/NNN.webp with the same NNN");
+  const refImg = await ev(`return ATLAS._state.atlas.slices[ATLAS._state.slice - 1].img`);
+  const lungImg = refImg.replace(/\/([^/]+)$/, "/w/lung/$1");
+  ok((await ev(`return document.getElementById('atlasImg').getAttribute('src')`)).endsWith(lungImg), "a window swaps to <slice dir>/w/<id>/NNN.webp with the same NNN (" + lungImg + ")");
   ok(await until(`var s=document.getElementById('atlasStage'), i=document.getElementById('atlasImg'); return i.complete && i.naturalWidth>0 && !s.classList.contains('is-error') && !s.classList.contains('is-loading')`), "the shipped lung-window image loads and the pins come back");
   await ev(`document.querySelector('#atlasPanel [data-atlas-act=win][data-v=lung]').setAttribute('data-x','1'); return 1;`);
   await shot("390-window-lung.png");
   await ev(`document.querySelector('#atlasPanel [data-atlas-act=win][data-v=soft]').click(); return 1;`);
-  ok(/\/atlas\/ct-live-torso-axial\/006\.webp$/.test(await ev(`return document.getElementById('atlasImg').getAttribute('src')`)), "the first window is the original image");
+  ok((await ev(`return document.getElementById('atlasImg').getAttribute('src')`)).endsWith(refImg), "the first window is the original image (" + refImg + ")");
   ok(await until(`var s=document.getElementById('atlasStage'); return /w\\/lung/.test(document.getElementById('atlasImg').src)===false && !s.classList.contains('is-error')`), "the shipped soft-tissue image loads after switching back");
   await ev(`__restore(); return 1;`);
 
@@ -361,7 +372,7 @@ try {
 
   // ---- B0: the sheet is fully opaque while it animates in; labels are 12 px and stay on screen ----
   await ev(`ATLAS.open(${JSON.stringify(MOD)}); return 1;`); await ready();
-  await ev(`ATLAS._setSlice(6); return 1;`); await ready();
+  await ev(`ATLAS._setSlice(${REF}); return 1;`); await ready();
   await ev(`ATLAS._select('liver'); return 1;`);
   const opac = await ev(`var sh=document.getElementById('atlasSheet'); return [getComputedStyle(sh).opacity, sh.getAnimations ? sh.getAnimations().length : -1]`);
   ok(opac[0] === "1", "the sheet is fully opaque even mid-animation (opacity " + opac[0] + ", " + opac[1] + " running animations): no footer bleed");
@@ -437,12 +448,12 @@ try {
   await ev(`ATLAS.close(); return 1;`);
 
   // ---- B4: plane localizer ----
-  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', 6); return 1;`); await ready();
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', ${REF}); return 1;`); await ready();
   ok(await until(`return document.querySelectorAll('#atlasLoc [data-atlas-act=plane]').length===3 && !!document.querySelector('#atlasScout .atlas-scout svg line')`), "grouped modules show Axial / Coronal / Sagittal chips and a scout with a line");
   const line = (i) => ev(`ATLAS._setSlice(${i}); var l=document.querySelector('#atlasScout line'); return l ? [+l.getAttribute('y1'), +l.getAttribute('y2'), +l.getAttribute('x1'), +l.getAttribute('x2')] : null;`);
   const l5 = await line(5), l15 = await line(15);
   ok(l5 && l15 && Math.abs(l5[0] - l5[1]) < 0.05 && l15[0] > l5[0], "the axial slice is a horizontal line on the coronal scout, lower for a lower slice (" + l5[0] + " -> " + l15[0] + ")");
-  await ev(`ATLAS._setSlice(6); return 1;`); await ready(); await ev(`ATLAS._select('liver'); ATLAS._select(null); return 1;`);
+  await ev(`ATLAS._setSlice(${REF}); return 1;`); await ready(); await ev(`ATLAS._select('liver'); ATLAS._select(null); return 1;`);
   await sleep(600); await shot("390-scout-on-coronal.png");
   // Tap the scout 70% of the way down: the slice under that level.
   const sc = await rect("#atlasScout .atlas-scout");
@@ -453,9 +464,9 @@ try {
   await tap(sc.l + sc.w * 0.5, sc.t + sc.h * 0.7);
   ok(await until(`return ATLAS._state.slice===${nearestAx}`), "tapping the scout jumps to that level (slice " + nearestAx + ")");
   // Switch plane with the liver selected: same anatomical point, liver still locked.
-  await ev(`ATLAS._setSlice(6); return 1;`); await ready();
+  await ev(`ATLAS._setSlice(${REF}); return 1;`); await ready();
   await ev(`ATLAS._state.locked='liver'; ATLAS._select('liver'); return 1;`);
-  const expCo = await ev(`var s=ATLAS._state.atlas.slices[5], pin=s.pins.filter(function(p){return p.s==='liver'})[0]; var q=s.q, p=ATLAS._pure.qPoint(q, pin.x/100, pin.y/100); return ATLAS._pure.nearestSlice(${JSON.stringify(COJ.slices)}, p);`);
+  const expCo = await ev(`var s=ATLAS._state.atlas.slices[${REF - 1}], pin=s.pins.filter(function(p){return p.s==='liver'})[0]; var q=s.q, p=ATLAS._pure.qPoint(q, pin.x/100, pin.y/100); return ATLAS._pure.nearestSlice(${JSON.stringify(COJ.slices)}, p);`);
   await ev(`document.querySelector('#atlasLoc [data-atlas-act=plane][data-v="ct-live-torso-coronal"]').click(); return 1;`);
   ok(await until(`var s=ATLAS._state; return s.moduleId==='ct-live-torso-coronal' && s.slice===${expCo} && s.locked==='liver'`), "Coronal switches to the sibling slice through the liver's pin (slice " + expCo + "), liver still locked");
   await ready();
@@ -473,7 +484,7 @@ try {
 
   // ---- B3: offline download ----
   const offId = MOD;
-  await ev(`ATLAS.openAt(${JSON.stringify(offId)}, null, 6); return 1;`); await ready();
+  await ev(`ATLAS.openAt(${JSON.stringify(offId)}, null, ${REF}); return 1;`); await ready();
   await ev(`document.getElementById('atlasMore').click(); return 1;`);
   ok(await until(`return !document.getElementById('atlasPop').hidden && !!document.querySelector('#atlasPop [data-atlas-act=offline]')`), "More offers Download for offline");
   const nFiles = await ev(`return ATLAS._pure.offlineFiles(ATLAS._state.atlas, ATLAS._state.catalog.modules.filter(function(m){return m.id===${JSON.stringify(offId)}})[0]).length + 1`);
@@ -529,7 +540,7 @@ try {
   await viewport(1024, 768, false);
   // A fresh visitor: nothing chosen this session, nothing stored.
   await ev(`try{localStorage.removeItem('smd_atlas_labels')}catch(e){} ATLAS._state.mode=null; ATLAS.open(${JSON.stringify(MOD)}); return 1;`);
-  await ready(); await ev(`ATLAS._setSlice(6); return 1;`); await ready(); await sleep(300);
+  await ready(); await ev(`ATLAS._setSlice(${REF}); return 1;`); await ready(); await sleep(300);
   await shot("1024-default.png");
   ok(await ev(`return document.querySelector('#atlasTools [data-atlas-act=mode][aria-pressed=true]').getAttribute('data-v')==='labels'`), "1024x768 defaults to Labels mode");
   const lab2 = await ev(`var L=[].slice.call(document.querySelectorAll('#atlasOv text.atlas-lab')).map(function(e){return e.getAttribute('data-atlas-s')}); return {n:L.length,u:new Set(L).size}`);
@@ -561,14 +572,14 @@ try {
   const noteSpy = `window.__nf=0; var of=window.fetch; window.fetch=function(u){ if(/\\/atlas\\/notes\\.json/.test(String(u))) window.__nf++; return of.apply(this, arguments); }; return 1;`;
   await viewport(390, 844, true);
   await ev(`try{localStorage.removeItem('smd_atlas_notes')}catch(e){} ` + noteSpy);
-  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', 6); return 1;`); await ready();
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', ${REF}); return 1;`); await ready();
   await until(`return !!document.querySelector('#atlasSheet [data-tab=definition]')`);
   ok(await ev(`return !document.querySelector('#atlasSheet [data-tab=clinical]') && window.__nf===0 && performance.getEntriesByType('resource').every(function(r){return !/\\/atlas\\/notes\\.json/.test(r.name)})`), "notes flag OFF by default: no Clinical tab and notes.json is never fetched");
   await ev(`ATLAS.close(); return 1;`);
   ok(await attach(BASE + "?atlasnotes=1"), "app reloads with ?atlasnotes=1");
   await clearIntro(); await settleZoom();
   await ev(noteSpy);
-  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', 6); return 1;`); await ready();
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', ${REF}); return 1;`); await ready();
   ok(await until(`return !!document.querySelector('#atlasSheet [data-tab=clinical]')`), "flag ON (?atlasnotes=1): the structure sheet has a Clinical tab");
   await ev(`document.querySelector('#atlasSheet [data-tab=clinical]').click(); return 1;`);
   const NOTES = JSON.parse(readFileSync(join(HERE, "../atlas/notes.json"), "utf8")).notes.liver;

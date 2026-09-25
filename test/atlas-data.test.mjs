@@ -186,7 +186,8 @@ for (const m of windowed) {
   for (const s of atlasOf(m.id).slices) {
     const base = webpSize(join(ROOT, s.img.slice(1)));
     for (const w of m.windows.slice(1)) {
-      const f = join(ROOT, "atlas", m.id, "w", w.id, s.img.split("/").pop());
+      // contract: the slice's own path with its file name moved under w/<id>/ (v2 stacks too)
+      const f = join(ROOT, s.img.slice(1).replace(/\/([^/]+)$/, "/w/" + w.id + "/$1"));
       if (!existsSync(f)) { have = false; continue; }
       const d = webpSize(f);
       if (!base || !d || d[0] !== base[0] || d[1] !== base[1]) same = false;
@@ -525,7 +526,7 @@ ok("back control matches swipe-back BACK_SEL",
    vh.includes('class="atlas-back"') && /aria-label="(Back|Close)"/.test(vh));
 ok("step buttons are labelled", vh.includes('aria-label="Previous slice"') && vh.includes('aria-label="Next slice"'));
 ok("the grid button is labelled", vh.includes('aria-label="All slices"'));
-ok("footer disclaimer is present verbatim", vh.includes("Educational reference only — not for diagnosis."));
+ok("footer disclaimer is present verbatim", vh.includes("Educational reference only, not for diagnosis."));
 ok("viewer renders no attribution", !/licen[cs]e|public domain|courtesy|Visible Human|Gray/i.test(vh));
 ok("viewer uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(vh));
 ok("catalog uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(A._catalogHtml()));

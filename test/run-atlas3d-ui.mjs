@@ -212,15 +212,18 @@ try {
   ok(await ev(`return ATLAS3D._state.src;`) === "live", "opened from a living-torso slice: source is Living CT");
   ok(await ev(`return !document.getElementById('a3dHint');`) === true, "the gesture hint is not shown again");
   ok(await ev(`var s=ATLAS3D._state; return s.sel.every(function(i){return s.data.parts[i].src===1}) && s.data.parts[s.sel[0]].name.indexOf('kidney')>=0;`) === true, "the selected meshes are the living-CT kidneys");
-  ok(await ev(`var p=ATLAS3D._state.plane; return !!p && p.m==='ct-live-torso-axial' && p.i===` + slice + ` && p.n===24;`) === true, "the cut plane is that very slice (" + slice + "/24)");
+  // slice counts come from the manifest (24, or 48 since the denser stacks), never hardcoded
+  const nPlanes = await ev(`return Object.keys(ATLAS3D._state.data.planes['ct-live-torso-axial']).length;`);
+  const target = slice === Math.round(nPlanes / 2) ? Math.round(nPlanes / 2) + 1 : Math.round(nPlanes / 2);
+  ok(nPlanes >= 24 && await ev(`var p=ATLAS3D._state.plane; return !!p && p.m==='ct-live-torso-axial' && p.i===` + slice + ` && p.n===` + nPlanes + `;`) === true, "the cut plane is that very slice (" + slice + "/" + nPlanes + ")");
   ok(await until(`var s=ATLAS3D._state; return !s.err && Object.keys(s.loading).length===0 && Object.keys(s.chunks).filter(function(k){return s.chunks[k].src===1}).length>=1;`, 120000), "living-CT geometry streamed");
   ok(await until(`return !!ATLAS3D._state.plane && ATLAS3D._state.plane.ready === true`, 30000), "the CT slice texture loaded onto the plane");
   // SwiftShader renders a frame in ~0.6 s, so the camera glide alone takes ~25 s here (under 1 s on a phone).
   var drawn = await until(`var s=ATLAS3D._state; return s.dirty===false && !s.camTo`, 180000);   // 180 s: other agents share the CPU with SwiftShader
   ok(drawn, "the frame after the last chunk is actually drawn (dirty cleared with no animation running)" + (drawn ? "" : " state=" + await ev(`var s=ATLAS3D._state; return JSON.stringify({dirty:s.dirty, raf:s.raf, camTo:s.camTo, explode:[s.explode, s.explodeTarget], loading:Object.keys(s.loading).length});`)));
   ok(await ev(`return !!document.querySelector('#a3dBar [data-a3d-act=slice]') && !!document.querySelector('#a3dSrc .a3d-srcbtn.on[data-id=live]');`) === true, "slice slider is shown and the Living CT tab is active");
-  await ev(`var r=document.querySelector('#a3dBar [data-a3d-act=slice]'); r.value=12; r.dispatchEvent(new Event('change',{bubbles:true})); return 1;`);
-  ok(await until(`return ATLAS3D._state.plane && ATLAS3D._state.plane.i===12`), "slider moves the cut to slice 12");
+  await ev(`var r=document.querySelector('#a3dBar [data-a3d-act=slice]'); r.value=` + target + `; r.dispatchEvent(new Event('change',{bubbles:true})); return 1;`);
+  ok(await until(`return ATLAS3D._state.plane && ATLAS3D._state.plane.i===` + target), "slider moves the cut to slice " + target);
   ok(await ev(`var l=document.getElementById('a3dLabel'); return !!l && !l.hidden && /Kidney/.test(l.textContent);`) === true, "callout label names the selection on the canvas");
   // the registered CT cut wins over the free cut; the free cut works on the living body once the slice is gone
   await settled();
@@ -234,8 +237,8 @@ try {
   await ev(`document.querySelector('#a3dBar [data-a3d-act=clipoff]').click(); return 1;`);
   const l3 = await sig();
   ok(l2.h !== l3.h && l2.lit < l3.lit, "with the slice gone the free cut cuts the living body (" + l3.lit + " -> " + l2.lit + ")");
-  await ev(`ATLAS3D.setPlane('ct-live-torso-axial', 12, {noFocus:true}); return 1;`);
-  ok(await until(`return !!ATLAS3D._state.plane && ATLAS3D._state.plane.i===12 && ATLAS3D._state.plane.ready===true`, 30000), "slice 12 back on the living body");
+  await ev(`ATLAS3D.setPlane('ct-live-torso-axial', ` + target + `, {noFocus:true}); return 1;`);
+  ok(await until(`return !!ATLAS3D._state.plane && ATLAS3D._state.plane.i===` + target + ` && ATLAS3D._state.plane.ready===true`, 30000), "slice " + target + " back on the living body");
   // living-CT snapshot: credit from live.json's source fields (dataset, licence, doi)
   const { readFileSync } = await import("node:fs");
   const liveSrc = JSON.parse(readFileSync(join(HERE, "..", "atlas/3d/live.json"), "utf8")).source;

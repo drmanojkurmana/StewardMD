@@ -68,6 +68,8 @@ module's own shipped pins, so the doc cannot drift from the data.
    axial and 2 sagittal slices. Planes now come from the exact chain in `living.py`.
    Worst corner error before the fix: axial 39.2 mm, coronal 1.1 mm (half-voxel convention),
    sagittal 1.8 mm. After: 0, with manifest planes equal to atlas.json `q` to 1e-6 m (tested).
+   Since the 48-slice stacks (`atlas/<id>/v2/`, 2026-09-25) there is one plane per slice, and
+   each plane carries the slice's own `img`, so the 3D layer never guesses an image path.
 
 ## Per-module table
 

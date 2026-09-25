@@ -409,7 +409,7 @@ def build(work, groups=tuple(ORIG)):
                          "dims": [Image.open(os.path.join(_REPO, st["img"].lstrip("/"))).size for st in stubs]}
 
         def pixels(mid, i):
-            return np.asarray(Image.open(os.path.join(_REPO, "atlas", mid, "%03d.webp" % i)).convert("L"))
+            return np.asarray(Image.open(os.path.join(_REPO, info[mid]["slices"][i - 1]["img"].lstrip("/"))).convert("L"))
         tot, bad, mad, off = cross_check(g, info, F, orig[1], pixels)
         if bad or off > 1e-6:
             raise SystemExit("%s: %d of %d crossing points disagree (plane offset %.2g m)" % (g, bad, tot, off))
