@@ -10,7 +10,7 @@
  * localhost, not 127.0.0.1: the page CSP's upgrade-insecure-requests broke stylesheets there.
  */
 import { spawn } from "node:child_process";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,7 +27,7 @@ await ensureServer();
 const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--mute-audio", "--hide-scrollbars", "--window-size=1024,900"], { stdio: "ignore" });
 let msgId = 1; const pending = new Map(); let ws, sessionId;
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
-const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return JSON.stringify({__err:String(x&&x.message||x)})}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
+const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return JSON.stringify({__err:String(x&&x.message||x)})}})()`, returnByValue: true, awaitPromise: true }); return r.result && r.result.result ? r.result.result.value : null; };
 let fails = 0, passes = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (c) passes++; else fails++; };
 const until = async (expr, ms = 15000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(expr) === true) return true; await sleep(120); } return false; };
 const shot = async (name) => { const r = await call("Page.captureScreenshot", { format: "png" }); writeFileSync(join(SHOTS, name), Buffer.from(r.result.data, "base64")); console.log("  shot " + join(SHOTS, name)); };
@@ -47,7 +47,7 @@ async function pinch(cx, cy, r0, r1, steps = 10) {
   for (let i = 1; i <= steps; i++) { const r = r0 + (r1 - r0) * i / steps; await sleep(16); await touch("touchMove", [[cx - r, cy], [cx + r, cy]]); }
   await touch("touchEnd", []); await sleep(120);
 }
-const key = async (k, code) => { await call("Input.dispatchKeyEvent", { type: "keyDown", key: k, code: code || k, windowsVirtualKeyCode: k === "Enter" ? 13 : k === "Escape" ? 27 : 0 }); await call("Input.dispatchKeyEvent", { type: "keyUp", key: k, code: code || k }); await sleep(80); };
+const key = async (k, code) => { await call("Input.dispatchKeyEvent", { type: "keyDown", key: k, code: code || k, text: k === "Enter" ? "\r" : undefined, windowsVirtualKeyCode: ({ Enter: 13, Escape: 27, ArrowDown: 40, ArrowUp: 38, Tab: 9 })[k] || 0 }); await call("Input.dispatchKeyEvent", { type: "keyUp", key: k, code: code || k }); await sleep(80); };
 
 async function viewport(w, h, mobile) {
   await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile });
@@ -85,7 +85,7 @@ const pinDrift = () => ev(`
   var dots=[].slice.call(document.querySelectorAll('#atlasOv circle.atlas-dot'));
   var pl=ATLAS._placed().filter(function(p){return p.vis});
   dots.forEach(function(d,i){ var p=pl[i]; if(!p) return; var b=d.getBoundingClientRect(), cx=b.left+b.width/2, cy=b.top+b.height/2;
-    var a=p.px/100; if(v.flip) a=1-a; var ex=img.left+a*img.width, ey=img.top+(p.py/100)*img.height;
+    var a=p.px/100, b=p.py/100; if(v.flip.x) a=1-a; if(v.flip.y) b=1-b; var ex=img.left+a*img.width, ey=img.top+b*img.height;
     max=Math.max(max, Math.abs(cx-ex), Math.abs(cy-ey)); n++; });
   return {max:max, n:n, dots:dots.length};`);
 
@@ -105,7 +105,7 @@ try {
   await ev(`window.__meta=function(){return ATLAS._state.catalog.modules.filter(function(m){return m.id===${JSON.stringify(MOD)}})[0]}; window.__snap=JSON.stringify(__meta()); window.__restore=function(){var m=__meta(), o=JSON.parse(__snap); Object.keys(m).forEach(function(k){delete m[k]}); Object.assign(m,o);}; return 1;`);
   const shipped = await ev(`return JSON.stringify({flipX:__meta().flipX, orient:__meta().orient, mm:__meta().mm, w:(__meta().windows||[]).length})`);
   console.log("  shipped torso-axial fields: " + shipped);
-  await ev(`ATLAS._setSlice(6); return 1;`); ok(await ready(), "slice 6 (25 pins, 15 structures) renders");
+  await ev(`ATLAS._setSlice(6); return 1;`); ok(await ready(), "slice 6 renders");
 
   // ---------------- 390x844: Pins mode ----------------
   ok(await ev(`return document.querySelector('#atlasTools [data-atlas-act=mode][aria-pressed=true]').getAttribute('data-v');`) === "pins", "narrow portrait defaults to Pins mode");
@@ -233,7 +233,22 @@ try {
   ok(dr.max < 1.5, "flipped: pins stay on their mirrored structures (max drift " + dr.max.toFixed(2) + " px)");
   ok(await ev(`return [].slice.call(document.querySelectorAll('#atlasOv .atlas-orient')).map(function(e){return e.textContent}).join('')==='RLAP'`), "orientation letters are drawn from module.orient");
   await shot("390-flip-orient.png");
-  await ev(`__restore(); ATLAS._draw(); return 1;`);
+  // flipX + flipY together: the 180-degree turn the knee, foot and hand modules carry.
+  await ev(`var m=__meta(); m.flipX=true; m.flipY=true; ATLAS._draw(); return 1;`);
+  const rot = await ev(`var v=ATLAS._view(); return ATLAS._placed().every(function(p){ return Math.abs(p.x-(v.D.x+(1-p.px/100)*v.D.w))<0.01 && Math.abs(p.y-(v.D.y+(1-p.py/100)*v.D.h))<0.01; }) && /scale\\(-[\\d.]+, *-[\\d.]+\\)/.test(document.getElementById('atlasImg').style.transform)`);
+  ok(rot, "flipX+flipY turns the slice 180 degrees and every pin with it");
+  dr = await pinDrift();
+  ok(dr.n > 0 && dr.max < 1.5, "rotated: pins stay on their structures (max drift " + dr.max.toFixed(2) + " px)");
+  await pinch(cx, cy, 40, 100);
+  dr = await pinDrift();
+  ok(dr.n > 0 && dr.max < 1.5, "rotated AND zoomed: pins stay on their structures (max drift " + dr.max.toFixed(2) + " px)");
+  await ev(`ATLAS._state.z={s:1,px:0,py:0}; ATLAS._draw(); document.querySelector('#atlasTools [data-atlas-act=quiz]').click(); document.querySelector('#atlasTools [data-atlas-act=qkind][data-v=find]').click(); return 1;`);
+  const rt = await ev(`return ATLAS._state.quiz.target`);
+  const rp = (await pinsVp()).find((p) => p.s === rt);
+  await tap(rp.x, rp.y);
+  ok(await until(`var q=ATLAS._state.quiz; return !!q.answered && q.answered.ok===true`), "Find it hit-testing works on a rotated slice");
+  await shot("390-rotated-180.png");
+  await ev(`document.querySelector('#atlasTools [data-atlas-act=qexit]').click(); __restore(); ATLAS._draw(); return 1;`);
 
   // ---------------- Adjust (no windows) ----------------
   await ev(`delete __meta().windows; return 1;`);
@@ -337,6 +352,173 @@ try {
   await call("Emulation.setEmulatedMedia", { features: [] });
   await ev(`ATLAS.close(); return 1;`);
 
+  // =============================== PHASE B (390x844) ===============================
+  await viewport(390, 844, true);
+  await call("Network.enable", {});
+  const IDX = JSON.parse(readFileSync(join(HERE, "../atlas/index.json"), "utf8"));
+  const ATL = (id) => JSON.parse(readFileSync(join(HERE, "../atlas/" + id + "/atlas.json"), "utf8"));
+  const bestRow = (sid) => IDX.structures.find((r) => r.s === sid).m.slice().sort((a, b) => b[2] - a[2])[0];
+
+  // ---- B0: the sheet is fully opaque while it animates in; labels are 12 px and stay on screen ----
+  await ev(`ATLAS.open(${JSON.stringify(MOD)}); return 1;`); await ready();
+  await ev(`ATLAS._setSlice(6); return 1;`); await ready();
+  await ev(`ATLAS._select('liver'); return 1;`);
+  const opac = await ev(`var sh=document.getElementById('atlasSheet'); return [getComputedStyle(sh).opacity, sh.getAnimations ? sh.getAnimations().length : -1]`);
+  ok(opac[0] === "1", "the sheet is fully opaque even mid-animation (opacity " + opac[0] + ", " + opac[1] + " running animations): no footer bleed");
+  await sleep(700); await shot("390-sheet-opaque.png");
+  await ev(`ATLAS._select(null); document.querySelector('#atlasTools [data-atlas-act=mode][data-v=labels]').click(); return 1;`);
+  ok(await ev(`var l=document.querySelector('#atlasOv text.atlas-lab'); return !!l && getComputedStyle(l).fontSize==='12px'`), "labels are 12 px");
+  ok(await ev(`var s=document.getElementById('atlasStage').getBoundingClientRect(); return [].slice.call(document.querySelectorAll('#atlasOv text.atlas-lab')).every(function(t){var b=t.getBoundingClientRect(); return b.left>=s.left-0.5 && b.right<=s.right+0.5;})`), "every 12 px label fits inside the stage horizontally");
+  await ev(`document.querySelector('#atlasTools [data-atlas-act=mode][data-v=pins]').click(); ATLAS.close(); return 1;`);
+
+  // ---- B1: search ----
+  await ev(`ATLAS._state.mode=null; ATLAS.open(); return 1;`);
+  ok(await until(`return !!document.getElementById('atlasQ') && document.querySelectorAll('#smdAtlas .atlas-row').length>5`), "the catalog has a search field");
+  await ev(`document.getElementById('atlasQ').focus(); return 1;`);
+  await call("Input.insertText", { text: "LIVER" });
+  ok(await until(`var r=document.getElementById('atlasResults'); return !r.hidden && !!r.querySelector('.atlas-res-main')`), "typing shows results (debounced)");
+  const liv = await ev(`var b=document.querySelector('#atlasResults .atlas-res-main'); return {n:b.querySelector('.atlas-res-n').textContent, col:getComputedStyle(b.querySelector('i')).backgroundColor, chips:document.querySelectorAll('#atlasResults .atlas-res')[0].querySelectorAll('.atlas-res-mods .atlas-chip').length, m:b.getAttribute('data-m'), i:+b.getAttribute('data-i'), browse:document.getElementById('atlasBrowse').hidden}`);
+  const lb = bestRow("liver");
+  ok(liv.n === "Liver" && /rgb\(255, 212, 121\)/.test(liv.col) && liv.chips === IDX.structures.find((r) => r.s === "liver").m.length, "a result shows the name, the category colour and every module that contains it (" + liv.chips + ")");
+  ok(liv.m === lb[0] && liv.i === lb[1] && liv.browse === true, "the result targets the best module and slice, and the browse list hides");
+  await shot("390-search-results.png");
+  await ev(`var q=document.getElementById('atlasQ'); q.value=''; q.dispatchEvent(new Event('input',{bubbles:true})); q.focus(); return 1;`);
+  await call("Input.insertText", { text: "aórta" });
+  ok(await until(`return /Aorta/.test((document.querySelector('#atlasResults .atlas-res-n')||{}).textContent||'')`), "search ignores case and accents (aórta finds Aorta)");
+  await ev(`var q=document.getElementById('atlasQ'); q.value=''; q.focus(); return 1;`);
+  await call("Input.insertText", { text: "zzqxv" });
+  ok(await until(`var r=document.getElementById('atlasResults'); return !r.hidden && /Nothing matches "zzqxv"/.test(r.textContent) && /No results/.test(document.getElementById('atlasQStatus').textContent)`), "no match says so plainly, and the status is announced");
+  await shot("390-search-nothing.png");
+  await ev(`var q=document.getElementById('atlasQ'); q.value=''; q.focus(); return 1;`);
+  await call("Input.insertText", { text: "kidney" });
+  await until(`return !!document.querySelector('#atlasResults .atlas-res-main')`);
+  await key("ArrowDown");
+  ok(await ev(`return document.activeElement===document.querySelector('#atlasResults button')`), "ArrowDown moves from the field into the results");
+  await key("Enter");
+  const kb = bestRow("kidney");
+  ok(await until(`var s=ATLAS._state; return s.moduleId===${JSON.stringify(kb[0])} && s.slice===${kb[1]} && s.locked==='kidney' && s.sel==='kidney'`), "Enter on a result opens openAt(" + kb[0] + ", kidney, " + kb[1] + ") with the structure locked");
+  await ready();
+  await ev(`document.querySelector('#smdAtlas [data-atlas-act=search]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('atlasSearch') && document.activeElement===document.getElementById('atlasQ')`), "the viewer's Search action opens search with the field focused");
+  await call("Input.insertText", { text: "spleen" });
+  await until(`return !!document.querySelector('#atlasResults .atlas-res-mods .atlas-chip')`);
+  const chip = await ev(`var c=document.querySelector('#atlasResults .atlas-res-mods .atlas-chip'); c.click(); return {m:c.getAttribute('data-m'), i:+c.getAttribute('data-i')}`);
+  ok(await until(`var s=ATLAS._state; return !document.getElementById('atlasSearch') && s.moduleId===${JSON.stringify(chip.m)} && s.slice===${chip.i} && s.locked==='spleen'`), "a module chip in a result opens that module at the spleen's best slice");
+  await ready();
+
+  // ---- B2: recents and bookmarks ----
+  await ev(`ATLAS._setSlice(7); return 1;`); await ready();
+  await ev(`ATLAS._select('spleen'); return 1;`);
+  await ev(`document.getElementById('atlasStar').click(); return 1;`);
+  ok(await until(`return !document.getElementById('atlasPop').hidden && document.activeElement===document.getElementById('atlasBmName')`), "the star opens a bookmark form with the optional name focused");
+  await call("Input.insertText", { text: "My spleen" });
+  await key("Enter");
+  ok(await until(`var b=document.getElementById('atlasStar'); return b.getAttribute('aria-pressed')==='true' && document.getElementById('atlasPop').hidden`), "Enter saves; the star shows the view is bookmarked");
+  const bm = await ev(`return JSON.parse(localStorage.getItem('smd_atlas_bookmarks'))[0]`);
+  ok(bm && bm.n === "My spleen" && bm.m === chip.m && bm.i === 7 && bm.s === "spleen", "the bookmark stores module + slice + structure + name");
+  await ev(`ATLAS._setSlice(8); return 1;`);
+  ok(await ev(`return document.getElementById('atlasStar').getAttribute('aria-pressed')==='false'`), "another slice is not bookmarked");
+  ok(await ev(`for (var k=0; k<5 && ATLAS._state.view==="viewer"; k++) ATLAS.back(); return ATLAS.isOpen() && ATLAS._state.view`) === "catalog", "back unwinds to the catalog, which stays open");
+  await until(`return ATLAS._state.view==='catalog' && !!document.querySelector('#atlasBrowse')`);
+  const rc = await ev(`return JSON.parse(localStorage.getItem('smd_atlas_recent'))`);
+  ok(rc.length >= 2 && rc.length <= 8 && rc[0].m === chip.m && rc[0].i === 8, "recents: newest first, the module's last slice (" + rc[0].m + " slice " + rc[0].i + ")");
+  ok(await ev(`var c=document.querySelectorAll('#atlasBrowse .atlas-rcard'); return c.length===${rc.length} && c[0].getAttribute('data-m')===${JSON.stringify(chip.m)} && +c[0].getAttribute('data-i')===8`), "the catalog shows a Recent row at the top, newest first");
+  ok(await ev(`var b=document.querySelector('#atlasBrowse .atlas-bms .atlas-bm-open'); return !!b && /My spleen/.test(b.textContent)`), "the catalog lists the bookmark");
+  await shot("390-catalog-recents-bookmarks.png");
+  await ev(`document.querySelector('#atlasBrowse .atlas-bm-open').click(); return 1;`);
+  ok(await until(`var s=ATLAS._state; return s.moduleId===${JSON.stringify(chip.m)} && s.slice===7 && s.locked==='spleen'`), "tapping a bookmark returns to its module, slice and structure");
+  await ready(); await ev(`for (var k=0; k<5 && ATLAS._state.view==="viewer"; k++) ATLAS.back(); return 1;`);
+  await until(`return ATLAS._state.view==='catalog' && !!document.querySelector('.atlas-bm-del')`);
+  await ev(`document.querySelector('.atlas-bm-del').click(); return 1;`);
+  ok(await until(`return !document.querySelector('.atlas-bms') && JSON.parse(localStorage.getItem('smd_atlas_bookmarks')).length===0`), "delete removes the bookmark");
+  // The bookmark visit (slice 7) is now the newest recent.
+  const rc0 = await ev(`var c=document.querySelector('#atlasBrowse .atlas-rcard'); var r={m:c.getAttribute('data-m'), i:+c.getAttribute('data-i')}; c.click(); return r;`);
+  ok(rc0.m === chip.m && rc0.i === 7 && await until(`return ATLAS._state.moduleId===${JSON.stringify(chip.m)} && ATLAS._state.slice===7`), "tapping a recent opens that module at that slice (the bookmark visit, slice 7, is now newest)");
+  await ev(`ATLAS.close(); return 1;`);
+
+  // ---- B4: plane localizer ----
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', 6); return 1;`); await ready();
+  ok(await until(`return document.querySelectorAll('#atlasLoc [data-atlas-act=plane]').length===3 && !!document.querySelector('#atlasScout .atlas-scout svg line')`), "grouped modules show Axial / Coronal / Sagittal chips and a scout with a line");
+  const line = (i) => ev(`ATLAS._setSlice(${i}); var l=document.querySelector('#atlasScout line'); return l ? [+l.getAttribute('y1'), +l.getAttribute('y2'), +l.getAttribute('x1'), +l.getAttribute('x2')] : null;`);
+  const l5 = await line(5), l15 = await line(15);
+  ok(l5 && l15 && Math.abs(l5[0] - l5[1]) < 0.05 && l15[0] > l5[0], "the axial slice is a horizontal line on the coronal scout, lower for a lower slice (" + l5[0] + " -> " + l15[0] + ")");
+  await ev(`ATLAS._setSlice(6); return 1;`); await ready(); await ev(`ATLAS._select('liver'); ATLAS._select(null); return 1;`);
+  await sleep(600); await shot("390-scout-on-coronal.png");
+  // Tap the scout 70% of the way down: the slice under that level.
+  const sc = await rect("#atlasScout .atlas-scout");
+  const AXJ = ATL(MOD), COJ = ATL("ct-live-torso-coronal"), SAJ = ATL("ct-live-torso-sagittal");
+  const coMidQ = COJ.slices[Math.ceil(COJ.slices.length / 2) - 1].q;
+  const pt = [coMidQ[0] + 0.5 * coMidQ[3] + 0.7 * coMidQ[6], coMidQ[1] + 0.5 * coMidQ[4] + 0.7 * coMidQ[7], coMidQ[2] + 0.5 * coMidQ[5] + 0.7 * coMidQ[8]];
+  const nearestAx = await ev(`return ATLAS._pure.nearestSlice(ATLAS._state.atlas.slices, ${JSON.stringify(pt)})`);
+  await tap(sc.l + sc.w * 0.5, sc.t + sc.h * 0.7);
+  ok(await until(`return ATLAS._state.slice===${nearestAx}`), "tapping the scout jumps to that level (slice " + nearestAx + ")");
+  // Switch plane with the liver selected: same anatomical point, liver still locked.
+  await ev(`ATLAS._setSlice(6); return 1;`); await ready();
+  await ev(`ATLAS._state.locked='liver'; ATLAS._select('liver'); return 1;`);
+  const expCo = await ev(`var s=ATLAS._state.atlas.slices[5], pin=s.pins.filter(function(p){return p.s==='liver'})[0]; var q=s.q, p=ATLAS._pure.qPoint(q, pin.x/100, pin.y/100); return ATLAS._pure.nearestSlice(${JSON.stringify(COJ.slices)}, p);`);
+  await ev(`document.querySelector('#atlasLoc [data-atlas-act=plane][data-v="ct-live-torso-coronal"]').click(); return 1;`);
+  ok(await until(`var s=ATLAS._state; return s.moduleId==='ct-live-torso-coronal' && s.slice===${expCo} && s.locked==='liver'`), "Coronal switches to the sibling slice through the liver's pin (slice " + expCo + "), liver still locked");
+  await ready();
+  ok(await ev(`return document.querySelector('#atlasLoc [data-atlas-act=plane][aria-pressed=true]').getAttribute('data-v')==='ct-live-torso-coronal' && !!document.querySelector('#atlasScout line')`), "the coronal view has its own scout (on the axial)");
+  await sleep(600); await shot("390-coronal-scout-on-axial.png");
+  await ev(`ATLAS.openAt('ct-head-axial', null, 3); return 1;`); await ready();
+  ok(await ev(`return !document.getElementById('atlasLoc')`), "modules without group/plane get no localizer");
+  await ev(`ATLAS.close(); return 1;`);
+
+  // ---- B3: offline download ----
+  const offId = MOD;
+  await ev(`ATLAS.openAt(${JSON.stringify(offId)}, null, 6); return 1;`); await ready();
+  await ev(`document.getElementById('atlasMore').click(); return 1;`);
+  ok(await until(`return !document.getElementById('atlasPop').hidden && !!document.querySelector('#atlasPop [data-atlas-act=offline]')`), "More offers Download for offline");
+  const nFiles = await ev(`return ATLAS._pure.offlineFiles(ATLAS._state.atlas, ATLAS._state.catalog.modules.filter(function(m){return m.id===${JSON.stringify(offId)}})[0]).length + 1`);
+  // Throttle so the progress is visible, then let it finish at full speed.
+  await call("Network.emulateNetworkConditions", { offline: false, latency: 20, downloadThroughput: 250000, uploadThroughput: -1 });
+  await ev(`document.querySelector('#atlasPop [data-atlas-act=offline]').click(); return 1;`);
+  ok(await until(`var p=document.querySelector('#atlasPop .atlas-prog'); return !!p && +p.getAttribute('aria-valuenow')>=5`, 30000), "a progress bar with percent, file count and bytes appears");
+  await shot("390-download-progress.png");
+  ok(await ev(`return /\\d+% · \\d+ of ${nFiles} files · [\\d.]+ (KB|MB)/.test(document.querySelector('#atlasPop').textContent)`), "progress text reads percent, files of " + nFiles + " and bytes");
+  await call("Network.emulateNetworkConditions", { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+  ok(await until(`return /Available offline/.test(document.getElementById('atlasPop').textContent)`, 60000), "the download completes and says Available offline");
+  ok(await ev(`return caches.has('atlas2d-${offId}')`) === true, "the files are in the module's own Cache API cache");
+  ok(await until(`return /^blob:/.test(document.getElementById('atlasImg').src)`), "the viewer switches to cached blobs right away");
+  await ev(`ATLAS.back(); return 1;`);
+  ok(await until(`return ATLAS._state.view==='viewer'`) && await ev(`ATLAS.back(); return ATLAS._state.view`) === "catalog", "back to the catalog");
+  ok(await until(`var b=document.querySelector('.atlas-row-off[data-off="${offId}"]'); return !!b && /Available offline/.test(b.textContent)`), "the catalog card carries an Available offline badge");
+  // Airplane mode.
+  await call("Network.emulateNetworkConditions", { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+  const offCheck = await ev(`return fetch('/atlas/ct-knee-axial/001.webp?nocache=' + Date.now()).then(function(){return 'reached'}, function(){return 'blocked'})`);
+  await ev(`window.__offStart = performance.now(); document.querySelector('#smdAtlas .atlas-row[data-atlas-mod="${offId}"]').click(); return 1;`);
+  ok(await until(`var s=document.getElementById('atlasStage'), i=document.getElementById('atlasImg'); return !!i && /^blob:/.test(i.src) && i.complete && i.naturalWidth>0 && !s.classList.contains('is-error') && !s.classList.contains('is-loading')`, 20000), "OFFLINE (" + offCheck + "): the downloaded module opens and its slice renders from the cache");
+  ok(await ev(`return document.querySelectorAll('#atlasOv circle.atlas-dot').length > 0`), "offline: pins render too");
+  await ev(`ATLAS._setSlice(12); return 1;`);
+  ok(await until(`var i=document.getElementById('atlasImg'); return /^blob:/.test(i.src) && i.complete && i.naturalWidth>0`), "offline: scrubbing to another slice works");
+  await ev(`document.querySelector('#atlasTools [data-atlas-act=panel]').click(); document.querySelector('#atlasPanel [data-atlas-act=win][data-v=lung]').click(); return 1;`);
+  ok(await until(`var s=document.getElementById('atlasStage'), i=document.getElementById('atlasImg'); return /^blob:/.test(i.src) && i.complete && i.naturalWidth>0 && !s.classList.contains('is-error')`), "offline: the lung window renders from the cache");
+  await ev(`document.querySelector('#atlasPanel [data-atlas-act=win][data-v=soft]').click(); document.querySelector('#atlasTools [data-atlas-act=panel]').click(); document.querySelector('#smdAtlas [data-atlas-act=grid]').click(); return 1;`);
+  ok(await until(`var g=document.querySelectorAll('#atlasGrid .atlas-gth'); return g.length===ATLAS._state.atlas.slices.length && /blob:/.test(g[0].querySelector('i').style.backgroundImage) && g[0].querySelector('i').classList.contains('flip')`), "offline: the all-slices grid uses cached thumbnails, mirrored like the flipX slice");
+  await shot("390-offline-grid.png");
+  await ev(`ATLAS.back(); return 1;`);
+  await ev(`window.__nSl=ATLAS._state.atlas.slices.length; window.__revoked=[]; var o=URL.revokeObjectURL; URL.revokeObjectURL=function(u){window.__revoked.push(u); return o.call(URL,u)}; ATLAS.back(); return 1;`);
+  ok(await until(`return ATLAS._state.view==='catalog' && window.__revoked.length >= 2 * window.__nSl`), "leaving the module revokes its object URLs (" + (await ev(`return window.__revoked.length`)) + ")");
+  await ev(`document.querySelector('#smdAtlas .atlas-row[data-atlas-mod="ct-knee-axial"]').click(); return 1;`);
+  ok(await until(`var s=document.getElementById('atlasStage'); return !!s && (s.classList.contains('is-error') || ATLAS._state.loadErr===true || (document.getElementById('atlasImg') && !document.getElementById('atlasImg').complete))`, 8000), "offline: a module that was NOT downloaded fails honestly");
+  await call("Network.emulateNetworkConditions", { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+  await ev(`ATLAS.back(); return 1;`);
+  // Stop a download midway: nothing recorded, nothing cached.
+  await ev(`ATLAS.openAt('ct-live-torso-coronal', null, 3); return 1;`); await ready();
+  await call("Network.emulateNetworkConditions", { offline: false, latency: 50, downloadThroughput: 100000, uploadThroughput: -1 });
+  await ev(`document.getElementById('atlasMore').click(); document.querySelector('#atlasPop [data-atlas-act=offline]').click(); return 1;`);
+  await until(`var p=document.querySelector('#atlasPop .atlas-prog'); return !!p && +p.getAttribute('aria-valuenow')>=1`, 20000);
+  await ev(`document.querySelector('#atlasPop [data-atlas-act=offstop]').click(); return 1;`);
+  await call("Network.emulateNetworkConditions", { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+  ok(await until(`return !!document.querySelector('#atlasPop [data-atlas-act=offline]') && !JSON.parse(localStorage.getItem('smd_atlas_offline')||'{}')['ct-live-torso-coronal']`, 20000) && await until(`return caches.has('atlas2d-ct-live-torso-coronal').then(function(h){return !h})`), "Stop download: no offline record and the partial cache is deleted");
+  await ev(`document.getElementById('atlasPop').hidden || document.querySelector('#atlasPop [data-atlas-act=popx], #atlasMore').click(); ATLAS.close(); return 1;`);
+  // Remove the offline copy.
+  await ev(`ATLAS.openAt(${JSON.stringify(offId)}, null, 2); return 1;`); await ready();
+  await ev(`document.getElementById('atlasMore').click(); document.querySelector('#atlasPop [data-atlas-act=offremove]').click(); return 1;`);
+  ok(await until(`return !!document.querySelector('#atlasPop [data-atlas-act=offline]') && !JSON.parse(localStorage.getItem('smd_atlas_offline')||'{}')[${JSON.stringify(offId)}]`) && await until(`return caches.has('atlas2d-${offId}').then(function(h){return !h})`), "Remove offline copy deletes the record and the cache");
+  await ev(`ATLAS.close(); return 1;`);
+
   // ---------------- 1024x768 ----------------
   await viewport(1024, 768, false);
   // A fresh visitor: nothing chosen this session, nothing stored.
@@ -349,9 +531,56 @@ try {
   await boxesClear("1024 Labels");
   await shot("1024-labels.png");
   await ev(`ATLAS._select('liver'); return 1;`); await sleep(350);
-  await boxesClear("1024 Labels + sheet");
-  await shot("1024-labels-sheet.png");
+  await boxesClear("1024 Labels + side panel");
+  // B6: at 900 px and up the structure sheet is a right-side panel spanning the stage.
+  const side = await ev(`var sh=document.getElementById('atlasSheet').getBoundingClientRect(), s=document.getElementById('atlasStage').getBoundingClientRect(), bar=document.querySelector('.atlas-bar').getBoundingClientRect(), tools=document.getElementById('atlasTools').getBoundingClientRect();
+    return {side:document.getElementById('atlasSheet').classList.contains('side'), right:Math.abs(sh.right-innerWidth), top:Math.abs(sh.top-s.top), bottom:Math.abs(sh.bottom-s.bottom), w:sh.width, barFree:sh.top>=bar.bottom-0.5||sh.bottom<=bar.top+0.5, toolsFree:sh.top>=tools.bottom-0.5, op:getComputedStyle(document.getElementById('atlasSheet')).opacity}`);
+  ok(side.side && side.right < 1 && side.top < 1 && side.bottom < 1 && side.w > 300, "1024: the sheet is a right-side panel spanning exactly the stage (" + Math.round(side.w) + " px wide)");
+  ok(side.barFree && side.toolsFree && side.op === "1", "1024: the slice bar and tool row stay uncovered, and the panel is opaque");
+  const clear = await ev(`var p=document.getElementById('atlasSheet').getBoundingClientRect(), bad=[];
+    [].slice.call(document.querySelectorAll('#atlasOv text.atlas-lab, #atlasOv circle.atlas-dot, #atlasOv .atlas-call, #atlasOv .atlas-orient')).forEach(function(e){var b=e.getBoundingClientRect(); if(b.width && b.right>p.left+0.5 && b.left<p.right) bad.push(e.textContent||e.getAttribute('class'));});
+    var i=document.getElementById('atlasImg').getBoundingClientRect();
+    return {bad:bad, img:i.right<=p.left+0.5, n:document.querySelectorAll('#atlasOv text.atlas-lab').length}`);
+  ok(clear.bad.length === 0 && clear.img && clear.n > 0, "1024: labels, pins and the slice all sit left of the side panel" + (clear.bad.length ? " (" + clear.bad.slice(0, 4).join(", ") + ")" : ""));
+  await shot("1024-side-panel.png");
+  await ev(`ATLAS._select(null); document.querySelector('#atlasTools [data-atlas-act=mode][data-v=pins]').click(); ATLAS._select('liver'); return 1;`); await sleep(300);
+  ok(await ev(`var p=document.getElementById('atlasSheet').getBoundingClientRect(); return [].slice.call(document.querySelectorAll('#atlasOv circle.atlas-dot, #atlasOv .atlas-call')).every(function(e){var b=e.getBoundingClientRect(); return b.right<=p.left+0.5;})`), "1024 Pins: pins and the callout avoid the side panel too");
+  await ev(`document.querySelector('#atlasTools [data-atlas-act=mode][data-v=labels]').click(); ATLAS.close(); return 1;`);
+  await viewport(820, 1180, true);
+  await ev(`ATLAS.open(${JSON.stringify(MOD)}); return 1;`); await ready(); await ev(`ATLAS._select('liver'); return 1;`); await sleep(300);
+  ok(await ev(`var sh=document.getElementById('atlasSheet'); return !sh.classList.contains('side') && sh.getBoundingClientRect().bottom>=innerHeight-1`), "below 900 px (820 wide) it stays a bottom sheet");
   await ev(`ATLAS.close(); return 1;`);
+
+  // ---------------- B5: clinical notes, flag both ways ----------------
+  const noteSpy = `window.__nf=0; var of=window.fetch; window.fetch=function(u){ if(/\\/atlas\\/notes\\.json/.test(String(u))) window.__nf++; return of.apply(this, arguments); }; return 1;`;
+  await viewport(390, 844, true);
+  await ev(`try{localStorage.removeItem('smd_atlas_notes')}catch(e){} ` + noteSpy);
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', 6); return 1;`); await ready();
+  await until(`return !!document.querySelector('#atlasSheet [data-tab=definition]')`);
+  ok(await ev(`return !document.querySelector('#atlasSheet [data-tab=clinical]') && window.__nf===0 && performance.getEntriesByType('resource').every(function(r){return !/\\/atlas\\/notes\\.json/.test(r.name)})`), "notes flag OFF by default: no Clinical tab and notes.json is never fetched");
+  await ev(`ATLAS.close(); return 1;`);
+  ok(await attach(BASE + "?atlasnotes=1"), "app reloads with ?atlasnotes=1");
+  await clearIntro(); await settleZoom();
+  await ev(noteSpy);
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', 6); return 1;`); await ready();
+  ok(await until(`return !!document.querySelector('#atlasSheet [data-tab=clinical]')`), "flag ON (?atlasnotes=1): the structure sheet has a Clinical tab");
+  await ev(`document.querySelector('#atlasSheet [data-tab=clinical]').click(); return 1;`);
+  const NOTES = JSON.parse(readFileSync(join(HERE, "../atlas/notes.json"), "utf8")).notes.liver;
+  ok(await until(`var b=document.querySelector('#atlasSheet .atlas-sheet-body'); return !!b && /Draft, pending clinical review/.test(b.textContent) && b.textContent.indexOf(${JSON.stringify(NOTES.clinical.slice(0, 40))})>=0 && b.textContent.indexOf(${JSON.stringify(NOTES.imaging.slice(0, 40))})>=0`), "the Clinical tab shows the clinical and imaging notes under a Draft, pending clinical review badge");
+  ok(await ev(`return window.__nf===1`), "notes.json is fetched once, only when the flag is on");
+  await ev(`var sh=document.getElementById('atlasSheet'); sh.classList.add('full'); ATLAS._draw(); return 1;`); await sleep(350);
+  await shot("390-notes-tab.png");
+  await ev(`ATLAS.close(); try{localStorage.setItem('smd_atlas_notes','1')}catch(e){} return 1;`);
+  ok(await attach(BASE), "reload with localStorage smd_atlas_notes=1 and no query");
+  await clearIntro(); await settleZoom();
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'kidney', 5); return 1;`); await ready();
+  ok(await until(`return !!document.querySelector('#atlasSheet [data-tab=clinical]')`), "flag ON via localStorage");
+  ok(await attach(BASE + "?atlasnotes=0"), "reload with ?atlasnotes=0 over localStorage=1");
+  await clearIntro(); await settleZoom();
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'kidney', 5); return 1;`); await ready();
+  await until(`return !!document.querySelector('#atlasSheet [data-tab=definition]')`);
+  ok(await ev(`return !document.querySelector('#atlasSheet [data-tab=clinical]')`), "?atlasnotes=0 wins over localStorage: no tab");
+  await ev(`try{localStorage.removeItem('smd_atlas_notes')}catch(e){} ATLAS.close(); return 1;`);
 
   // ---------------- 3D flag off: the catalog and openAt do not depend on the 3D layer ----------------
   ok(await attach(BASE + "?atlas3d=0"), "app reloads with ?atlas3d=0");

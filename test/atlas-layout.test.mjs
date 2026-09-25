@@ -322,5 +322,109 @@ ok("default mode: pins on a portrait phone", P.defaultLabelMode(390, 844) === "p
 ok("default mode: labels on a tablet or desktop", P.defaultLabelMode(1024, 768) === "labels");
 ok("default mode: pins on a short landscape phone", P.defaultLabelMode(844, 390) === "pins");
 
+// ===================== phase B helpers =====================
+// --- search ---
+ok("normText folds case and accents", P.normText("  Hépatique   Vein ") === "hepatique vein");
+ok("normText drops punctuation", P.normText("Knee (CT) - axial") === "knee ct axial");
+const INDEX = JSON.parse(readFileSync(join(ROOT, "atlas/index.json"), "utf8"));
+const CAT = JSON.parse(readFileSync(join(ROOT, "atlas/modules.json"), "utf8"));
+let sr = P.searchAtlas("LIVER", INDEX, CAT.modules);
+ok("search is case-insensitive and finds the liver", sr.structures.length >= 1 && sr.structures[0].s === "liver");
+ok("a structure result lists the modules that contain it", sr.structures[0].m.length >= 1 && sr.structures[0].m.every((r) => typeof r[0] === "string" && r[1] >= 1));
+sr = P.searchAtlas("aórta", INDEX, CAT.modules);
+ok("search ignores accents", sr.structures.some((r) => r.s === "aorta"));
+sr = P.searchAtlas("vein", INDEX, CAT.modules);
+ok("a word inside the name matches (portal vein)", sr.structures.some((r) => r.s === "portal-vein"));
+ok("prefix matches rank before inner-word matches", (() => { const i = sr.structures.findIndex((r) => /^vein/i.test(r.n)); const j = sr.structures.findIndex((r) => r.s === "portal-vein"); return i === -1 || i < j; })());
+sr = P.searchAtlas("brain", INDEX, CAT.modules);
+ok("module titles match too", sr.modules.some((m) => m.id === "mri-brain-axial"));
+ok("hidden modules never appear", !sr.modules.some((m) => m.id === "brain-mri-axial-t1"));
+ok("nothing matches nonsense", (() => { const r = P.searchAtlas("zzqqx", INDEX, CAT.modules); return !r.structures.length && !r.modules.length; })());
+ok("an empty query returns nothing", (() => { const r = P.searchAtlas("   ", INDEX, CAT.modules); return !r.structures.length && !r.modules.length; })());
+ok("a structure only in hidden modules is dropped",
+   P.searchAtlas("x", { structures: [{ s: "x", n: "X", c: "a", m: [["h", 1, 1]] }] }, [{ id: "h", hidden: true }]).structures.length === 0);
+
+// --- recents ---
+let rec = [];
+for (let i = 1; i <= 10; i++) rec = P.pushRecent(rec, { m: "m" + i, i: 1 }, 8);
+ok("recents cap at 8", rec.length === 8 && rec[0].m === "m10" && rec[7].m === "m3");
+rec = P.pushRecent(rec, { m: "m5", i: 9 }, 8);
+ok("revisiting a module moves it to the front with its new slice", rec[0].m === "m5" && rec[0].i === 9 && rec.filter((r) => r.m === "m5").length === 1);
+
+// --- plane localizer on the real torso geometry ---
+const AX = JSON.parse(readFileSync(join(ROOT, "atlas/ct-live-torso-axial/atlas.json"), "utf8"));
+const CO = JSON.parse(readFileSync(join(ROOT, "atlas/ct-live-torso-coronal/atlas.json"), "utf8"));
+const SA = JSON.parse(readFileSync(join(ROOT, "atlas/ct-live-torso-sagittal/atlas.json"), "utf8"));
+const haveQ = [AX, CO, SA].every((a) => a.slices.every((s) => Array.isArray(s.q) && s.q.length === 9));
+ok("every torso slice carries q", haveQ);
+const coMid = CO.slices[Math.ceil(CO.slices.length / 2) - 1].q;
+const axLines = AX.slices.map((s) => P.planeLine(s.q, coMid));
+ok("every axial slice crosses the coronal scout", axLines.every(Boolean));
+ok("an axial slice is a HORIZONTAL line on the coronal scout", axLines.every((l) => Math.abs(l[0][1] - l[1][1]) < 1e-6));
+ok("the line spans the scout's full width", axLines.every((l) => Math.abs(Math.abs(l[0][0] - l[1][0]) - 1) < 1e-6));
+ok("the line moves monotonically down the scout with slice index", axLines.every((l, k) => k === 0 || l[0][1] > axLines[k - 1][0][1]));
+const saMid = SA.slices[Math.ceil(SA.slices.length / 2) - 1].q;
+const saOnCo = SA.slices.map((s) => P.planeLine(s.q, coMid));
+ok("a sagittal slice is a VERTICAL line on the coronal scout", saOnCo.every((l) => l && Math.abs(l[0][0] - l[1][0]) < 1e-6));
+ok("a coronal slice is a vertical line on the sagittal scout", CO.slices.every((s) => { const l = P.planeLine(s.q, saMid); return l && Math.abs(l[0][0] - l[1][0]) < 1e-6; }));
+ok("parallel planes have no line", P.planeLine(AX.slices[0].q, AX.slices[5].q) === null);
+// Round trip: the centre of axial slice i -> nearest coronal slice -> back to axial lands on i.
+ok("qPoint at (0,0) is t", (() => { const q = AX.slices[3].q, p = P.qPoint(q, 0, 0); return near(p[0], q[0]) && near(p[1], q[1]) && near(p[2], q[2]); })());
+ok("a point on a slice is on its plane", Math.abs(P.planeDist(AX.slices[7].q, P.qPoint(AX.slices[7].q, 0.3, 0.8))) < 1e-9);
+ok("nearestSlice finds the slice a point lies on", [1, 6, 12, AX.slices.length].every((i) => P.nearestSlice(AX.slices, P.qPoint(AX.slices[i - 1].q, 0.4, 0.6)) === i));
+ok("axial -> coronal -> axial round trip returns to the same slice", [3, 8, 15, 21].every((i) => {
+  const p = P.qPoint(AX.slices[i - 1].q, 0.5, 0.5), c = P.nearestSlice(CO.slices, p);
+  const back = P.qPoint(CO.slices[c - 1].q, 0.5, (p[1] - CO.slices[c - 1].q[1]) / CO.slices[c - 1].q[7]);
+  return P.nearestSlice(AX.slices, back) === i;
+}));
+ok("nearestSlice skips slices without q", P.nearestSlice([{ i: 1 }, { i: 2, q: AX.slices[0].q }], P.qPoint(AX.slices[0].q, 0.5, 0.5)) === 2);
+
+// --- offline file list ---
+const TM = CAT.modules.find((m) => m.id === "ct-live-torso-axial");
+const files = P.offlineFiles(AX, TM);
+ok("offline list starts with the module JSON", files[0] === "/atlas/ct-live-torso-axial/atlas.json");
+ok("offline list has every slice and every thumbnail", AX.slices.every((s) => files.includes(s.img) && files.includes(s.img.replace(/\/([^/]+)$/, "/t/$1"))));
+const nw = ((TM.windows || []).length || 1) - 1;
+ok("offline list has every extra window (" + nw + " per slice), not the first", files.filter((f) => f.includes("/w/")).length === nw * AX.slices.length && !files.some((f) => /\/w\/soft\//.test(f)));
+ok("offline list has no duplicates", new Set(files).size === files.length);
+
+// --- flipY and flipX+flipY (knee, foot and hand are stored rotated 180 degrees) ---
+const FB = { x: 0, y: 0, w: 100, h: 100 };
+const both = { x: true, y: true }, onlyY = { x: false, y: true };
+const r180 = P.toScreen(FB, both, 10, 20);
+ok("flipX+flipY: a pin at (10,20) lands at (90,80)", near(r180.x, 90) && near(r180.y, 80));
+const ry = P.toScreen(FB, onlyY, 10, 20);
+ok("flipY alone: (10,20) lands at (10,80)", near(ry.x, 10) && near(ry.y, 80));
+ok("a boolean flip still means x only", (() => { const q = P.toScreen(FB, true, 10, 20); return near(q.x, 90) && near(q.y, 20); })());
+const fbox = { x: 13, y: -40, w: 380, h: 330 };
+ok("flipY round trip", [[5, 95], [50, 50], [72, 3]].every(([x, y]) => { const s = P.toScreen(fbox, onlyY, x, y), b = P.toImage(fbox, onlyY, s.x, s.y); return near(b.x, x) && near(b.y, y); }));
+ok("flipX+flipY round trip", [[5, 95], [50, 50], [72, 3]].every(([x, y]) => { const s = P.toScreen(fbox, both, x, y), b = P.toImage(fbox, both, s.x, s.y); return near(b.x, x) && near(b.y, y); }));
+// The image transform must put data point (a,b) exactly where toScreen puts the pin, under any
+// flip and zoom: apply translate(tx,ty) scale(sx,sy) (origin top-left) to the laid-out point.
+const tform = (base, D, flip, a, b) => {
+  const t = P.imgTransform(base, D, flip), m = t.match(/translate\(([-\d.]+)px,([-\d.]+)px\) scale\(([-\d.]+),([-\d.]+)\)/);
+  const lx = a * base.w, ly = b * base.h;                          // point inside the unscaled image
+  return m ? { x: base.x + +m[1] + +m[3] * lx, y: base.y + +m[2] + +m[4] * ly } : { x: base.x + lx, y: base.y + ly };
+};
+const tb = { x: 20, y: 100, w: 300, h: 260 };
+ok("image transform and pins agree under every flip and zoom", [false, true, onlyY, both].every((fl) =>
+  [1, 2.5].every((s) => { const D = P.zoomBox(tb, { s, px: s > 1 ? -30 : 0, py: s > 1 ? 12 : 0 }); const F = P.flipOf(fl);
+    return [[0.1, 0.2], [0.9, 0.7]].every(([a, b]) => { const img = tform(tb, D, fl, a, b), pin = P.toScreen(D, fl, a * 100, b * 100); return near(img.x, pin.x, 1e-6) && near(img.y, pin.y, 1e-6); }); })));
+ok("no transform at all for an unflipped unzoomed image", P.imgTransform(tb, tb, false) === "");
+// Zoom about a point is flip-agnostic: the pin under the finger stays under it after flipping.
+const zf = P.zoomAt(tb, { s: 1, px: 0, py: 0 }, 3, 120, 180), zfD = P.zoomBox(tb, zf);
+const under = P.toImage(P.zoomBox(tb, { s: 1, px: 0, py: 0 }), both, 120, 180);
+const after = P.toScreen(zfD, both, under.x, under.y);
+ok("zoom about a point keeps a 180-degree-rotated pin under the finger", near(after.x, 120) && near(after.y, 180));
+// Quiz hit-testing works in screen space, so placing pins with both flips is all it needs.
+const QS = { i: 1, aspect: 1, pins: [{ s: "fornix", x: 10, y: 20 }] };
+const qp = P.placePins(QS, ATL.structures, FB, both, {}, 100, 100)[0];
+ok("placePins honours flipX+flipY", near(qp.x, 90) && near(qp.y, 80));
+ok("Find it marks a tap on the rotated pin as correct", P.judgeFind([qp], 89, 81, "fornix", 10).ok === true);
+// The scout segment honours the scout module's flips.
+const sg0 = P.scoutSegment(AX.slices[4].q, coMid, false, 60, 64), sg1 = P.scoutSegment(AX.slices[4].q, coMid, both, 60, 64);
+ok("scout line under a 180-degree turn is mirrored top-bottom", near(sg0[0].y, 64 - sg1[0].y) && near(sg0[1].y, 64 - sg1[1].y));
+ok("scout line under flipX swaps its ends", (() => { const sx = P.scoutSegment(AX.slices[4].q, coMid, true, 60, 64); return near(sx[0].x, 60 - sg0[0].x); })());
+
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);

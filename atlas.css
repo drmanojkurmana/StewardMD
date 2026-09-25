@@ -160,7 +160,7 @@ body.atlas-lock { overflow: hidden; }
 /* A dark halo under every label keeps it legible where it crosses bright bone or a
    zoomed image; the selected label's white pill (below) overrides it. */
 .atlas-lab {
-  font: 500 11px/1.15 system-ui, -apple-system, "Segoe UI", sans-serif;
+  font: 500 12px/1.15 system-ui, -apple-system, "Segoe UI", sans-serif;
   pointer-events: auto; cursor: pointer;
   stroke: rgba(0, 0, 0, .85); stroke-width: 3px; paint-order: stroke; stroke-linejoin: round;
 }
@@ -283,7 +283,13 @@ body.atlas-lock { overflow: hidden; }
   background: #0b0b0b center/cover no-repeat; cursor: pointer;
 }
 .atlas-gth.on { border-color: var(--at-acc); }
-.atlas-gth span { position: absolute; bottom: 2px; right: 4px; font-size: 10px; color: #ddd; }
+.atlas-gth i { position: absolute; inset: 0; border-radius: 6px; background: center/cover no-repeat; }
+.atlas-gth span { position: absolute; bottom: 2px; right: 4px; font-size: 11px; color: #ddd; text-shadow: 0 0 3px #000; }
+/* A flipX / flipY module is mirrored at display time: its thumbnails too, so they match the
+   slice. Both together are a 180-degree turn. */
+.atlas-overlay .flip { transform: scaleX(-1); }
+.atlas-overlay .flipy { transform: scaleY(-1); }
+.atlas-overlay .flip.flipy { transform: scale(-1, -1); }
 
 /* ---------- info screen ---------- */
 
@@ -304,7 +310,10 @@ body.atlas-lock { overflow: hidden; }
 
 .atlas-sheet {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 6;
-  margin: 0 auto; max-width: 720px;
+  /* Always fully opaque: dialog-motion.js springs a ".sheet" in from opacity .7, which let the
+     slice bar and footer show THROUGH the sheet header while it rose. An !important author rule
+     outranks a running animation in the cascade; the slide itself is untouched. */
+  opacity: 1 !important;
   display: flex; flex-direction: column; overflow: hidden;
   height: 170px; max-height: 92%;
   background: #262629; color: var(--at-text);
@@ -385,7 +394,142 @@ body.atlas-lock { overflow: hidden; }
 /* iPad / Tablet layout expansions */
 @media (min-width: 768px) {
   .atlas-app { max-width: 820px; margin: 0 auto; }
-  .atlas-lab { font-size: 12px; }
+}
+
+/* ---------- search ---------- */
+
+.atlas-search {
+  display: flex; align-items: center; gap: 10px; margin: 4px 0 8px; padding: 0 14px;
+  min-height: 48px; border-radius: 14px; background: var(--at-s2); border: 1px solid var(--at-line); color: var(--at-mut);
+}
+.atlas-search:focus-within { border-color: var(--at-acc); box-shadow: 0 0 0 1px var(--at-acc); }
+.atlas-search svg { width: 20px; height: 20px; flex: 0 0 auto; }
+.atlas-search input {
+  flex: 1 1 auto; min-width: 0; height: 46px; border: 0; outline: none; background: transparent;
+  color: var(--at-text); font-size: 16px; font-family: inherit; -webkit-appearance: none; appearance: none;
+}
+.atlas-search input::placeholder { color: var(--at-mut); }
+.atlas-grp-h.sm { font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--at-mut); margin: 18px 0 8px; }
+.atlas-res-list { list-style: none; margin: 0; padding: 0; }
+.atlas-res { padding: 4px 0 10px; border-bottom: 1px solid #26262a; }
+.atlas-res-main {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px; padding: 0 4px;
+  border: 0; background: none; color: var(--at-text); text-align: left; cursor: pointer;
+}
+.atlas-res-main i { width: 12px; height: 12px; flex: 0 0 auto; border-radius: 50%; box-shadow: 0 0 0 1px rgba(0,0,0,.6); }
+.atlas-res-n { flex: 1 1 auto; min-width: 0; font-size: 17px; font-weight: 600; }
+.atlas-res-c { flex: 0 0 auto; font-size: 12px; color: var(--at-mut); }
+.atlas-res-mods { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 4px 0 28px; }
+.atlas-res-mods .atlas-chip { min-height: 36px; font-size: 12px; }
+
+/* ---------- recents and bookmarks ---------- */
+
+.atlas-recents { display: flex; gap: 10px; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: none; }
+.atlas-recents::-webkit-scrollbar { display: none; }
+.atlas-rcard {
+  flex: 0 0 150px; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 0 0 10px;
+  border: 0; border-radius: 14px; overflow: hidden; background: #161618; color: var(--at-text); text-align: left; cursor: pointer;
+}
+.atlas-rcard-th { order: -1; width: 100%; height: 92px; margin-bottom: 6px; background: #0b0b0b center/cover no-repeat; }
+.atlas-rcard-t, .atlas-rcard-s { padding: 0 10px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.atlas-rcard-t { font-size: 14px; font-weight: 600; }
+.atlas-rcard-s { font-size: 12px; color: var(--at-mut); }
+.atlas-bms { list-style: none; margin: 0; padding: 0; }
+.atlas-bms li { display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #26262a; }
+.atlas-bm-open {
+  flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 6px 4px;
+  border: 0; background: none; color: var(--at-text); text-align: left; cursor: pointer;
+}
+.atlas-bm-open svg { width: 18px; height: 18px; flex: 0 0 auto; color: #ffd60a; }
+.atlas-bm-open svg polygon { fill: currentColor; }
+.atlas-bm-open span { display: flex; flex-direction: column; min-width: 0; }
+.atlas-bm-open b { font-size: 15px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.atlas-bm-open em { font-style: normal; font-size: 12px; color: var(--at-mut); }
+.atlas-bm-del {
+  width: 44px; height: 44px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 12px; background: transparent; color: var(--at-mut); cursor: pointer;
+}
+.atlas-bm-del svg { width: 20px; height: 20px; }
+.atlas-bm-del:active { background: var(--at-s3); }
+.atlas-row-off { font-size: 11px; font-weight: 600; color: var(--at-ok); }
+.atlas-row-off:empty { display: none; }
+#atlasStar[data-on] { color: #ffd60a; border-color: rgba(255, 214, 10, .5); }
+#atlasStar[data-on] svg polygon { fill: currentColor; }
+
+/* ---------- header popovers (bookmark, more) ---------- */
+
+.atlas-pop {
+  position: absolute; z-index: 9; right: 12px; top: calc(58px + env(safe-area-inset-top, 0px));
+  width: 300px; max-width: calc(100% - 24px); padding: 14px;
+  border-radius: 16px; background: #1f1f23; border: 1px solid var(--at-line);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .6);
+}
+.atlas-pop[hidden] { display: none; }
+.atlas-pop-h { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--at-mut); margin-bottom: 8px; }
+.atlas-pop-note { margin: 4px 0 10px; font-size: 14px; line-height: 1.4; color: var(--at-text); display: flex; align-items: center; gap: 8px; }
+.atlas-pop-note.ok { color: var(--at-ok); font-weight: 600; }
+.atlas-pop-note.bad { color: var(--at-bad); }
+.atlas-pop-note svg { width: 18px; height: 18px; }
+.atlas-pop-row { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+.atlas-pop-row .atlas-chip { min-height: 44px; padding: 6px 18px; font-weight: 600; }
+.atlas-field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--at-mut); }
+.atlas-field input {
+  height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--at-line); background: var(--at-s1);
+  color: var(--at-text); font-size: 16px; font-family: inherit;
+}
+.atlas-field input:focus { outline: 2px solid var(--at-acc); outline-offset: 0; }
+.atlas-menu-item {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px; padding: 0 6px;
+  border: 0; border-radius: 10px; background: none; color: var(--at-text); font-size: 15px; text-align: left; cursor: pointer;
+}
+.atlas-menu-item:active { background: var(--at-s3); }
+.atlas-menu-item svg { width: 20px; height: 20px; flex: 0 0 auto; }
+.atlas-menu-item span { flex: 1 1 auto; }
+.atlas-menu-item em { font-style: normal; font-size: 12px; color: var(--at-mut); }
+.atlas-prog { height: 8px; border-radius: 4px; background: var(--at-s3); overflow: hidden; margin: 6px 0; }
+.atlas-prog i { display: block; height: 100%; background: var(--at-acc); border-radius: 4px; transition: width .2s ease; }
+
+/* ---------- plane localizer ---------- */
+
+.atlas-loc { display: flex; align-items: center; gap: 8px; padding-top: 8px; }
+.atlas-scout-host { flex: 0 0 auto; display: inline-flex; }
+.atlas-scout {
+  position: relative; display: block; overflow: hidden; border-radius: 8px; cursor: pointer;
+  background: #0b0b0b; box-shadow: 0 0 0 1px var(--at-line);
+}
+.atlas-scout.ph { cursor: default; }
+.atlas-scout img { display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+.atlas-scout svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.atlas-scout line { stroke: #ffd60a; stroke-width: 1.6; filter: drop-shadow(0 0 1px rgba(0, 0, 0, .9)); }
+@media (min-width: 700px) {
+  .atlas-tools { display: flex; align-items: center; gap: 12px; }
+  .atlas-tools-in { flex: 1 1 auto; min-width: 0; }
+  .atlas-loc { padding-top: 0; }
+}
+
+/* ---------- clinical notes (flag smd_atlas_notes) ---------- */
+
+.atlas-badge {
+  display: inline-block; margin: 0 0 12px; padding: 4px 10px; border-radius: 999px;
+  background: rgba(255, 159, 10, .16); color: #ffb340; border: 1px solid rgba(255, 159, 10, .45);
+  font-size: 12px; font-weight: 700;
+}
+.atlas-note-h { margin: 14px 0 4px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--at-mut); }
+.atlas-note-h:first-of-type { margin-top: 0; }
+
+/* ---------- side panel (900 px and up) ---------- */
+/* top/bottom come from atlas.js placeSide(): the panel spans exactly the stage, so the tool row
+   and slice bar stay usable, and the viewer lays pins and labels out in the width it leaves. */
+@media (min-width: 900px) {
+  .atlas-sheet.side {
+    left: auto; right: 0; width: 360px; height: auto; max-height: none;
+    border-radius: 18px 0 0 18px;
+    transform: translateX(105%);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, .5), inset 1px 0 0 rgba(255, 255, 255, .06);
+  }
+  .atlas-sheet.side.on { transform: none; }
+  .atlas-sheet.side .atlas-grab { display: none; }
+  .atlas-sheet.side .atlas-sheet-hd { padding-top: 10px; }
 }
 @media (min-width: 1024px) {
   .atlas-app { max-width: 960px; }
