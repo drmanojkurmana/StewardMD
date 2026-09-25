@@ -21,10 +21,20 @@
 
   var VER = "gold241";                            // bump with the bundle so a cached gz is busted
   var URL_GZ = "/offline-clinical.json.gz?v=" + VER;
+  // The 104 authored monographs the SQL-derived bundle never contained (Atropine sulfate,
+  // Enoxaparin sodium, Clopidogrel bisulfate, Caspofungin acetate …). Built by
+  // scripts/build-clinical-supplement.mjs; merged UNDER the bundle so a bundled record always wins.
+  var SUP_VER = "sup2";
+  var URL_SUP = "/clinical-supplement.json.gz?v=" + SUP_VER;
+  // Name/class/tags only, so search costs 329 KB instead of the 6 MB bundle. Loaded on the first
+  // search, not at boot. Built by scripts/build-clinical-index.mjs.
+  var IDX_VER = "idx2";
+  var URL_IDX = "/clinical-index.js?v=" + IDX_VER;
   var FLAG = "stewardmd_offline_clinical";        // "0" disables
   var _data = null;      // { v, struct:{comp:{gold|fields}}, mono:{comp:{…}} }
   var _lc = null;        // lowercased alias index → exact key ("s:"/"m:" prefixed)
   var _loading = null;   // in-flight load promise
+  var _idx = null;       // in-flight/settled index load promise
 
   function enabled() { try { return localStorage.getItem(FLAG) !== "0"; } catch (e) { return true; } }
   function online() { return typeof navigator === "undefined" || navigator.onLine !== false; }
@@ -44,14 +54,27 @@
     }
     return fflateText(gz);
   }
+  function fetchGz(url) {
+    return fetch(url)
+      .then(function (res) { if (!res.ok) throw new Error("clinical fetch " + res.status); return res.arrayBuffer(); })
+      .then(function (ab) { return gunzipToText(new Uint8Array(ab)); })
+      .then(function (txt) { return JSON.parse(txt); });
+  }
   function ensureData() {
     if (_data) return Promise.resolve(_data);
     if (_loading) return _loading;
-    _loading = fetch(URL_GZ)
-      .then(function (res) { if (!res.ok) throw new Error("clinical fetch " + res.status); return res.arrayBuffer(); })
-      .then(function (ab) { return gunzipToText(new Uint8Array(ab)); })
-      .then(function (txt) {
-        var d = JSON.parse(txt);
+    // The supplement is optional: a missing or corrupt one must degrade to the bundle we always
+    // had, never fail the lookup. Only the bundle's own failure is fatal.
+    _loading = Promise.all([
+      fetchGz(URL_GZ),
+      fetchGz(URL_SUP).catch(function () { return null; })
+    ])
+      .then(function (parts) {
+        var d = parts[0], sup = parts[1];
+        if (sup && sup.struct) {
+          var st = d.struct || (d.struct = {});
+          Object.keys(sup.struct).forEach(function (k) { if (!st[k]) st[k] = sup.struct[k]; });
+        }
         _lc = {};
         Object.keys(d.struct || {}).forEach(function (k) { _lc["s:" + k.toLowerCase()] = k; });
         Object.keys(d.mono || {}).forEach(function (k) { _lc["m:" + k.toLowerCase()] = k; });
@@ -60,6 +83,28 @@
       })
       .catch(function (e) { _loading = null; throw e; });   // allow a later retry
     return _loading;
+  }
+
+  /* -------- the search index: small, separate, loaded on the first search -------- */
+  function ensureIndex() {
+    if (window.SMD_CLINICAL_INDEX) return Promise.resolve(window.SMD_CLINICAL_INDEX);
+    if (_idx) return _idx;
+    _idx = new Promise(function (resolve, reject) {
+      var s = document.createElement("script");
+      s.src = URL_IDX;
+      s.onload = function () { window.SMD_CLINICAL_INDEX ? resolve(window.SMD_CLINICAL_INDEX) : reject(new Error("index did not define SMD_CLINICAL_INDEX")); };
+      s.onerror = function () { reject(new Error("index load failed")); };
+      (document.head || document.documentElement).appendChild(s);
+    }).catch(function (e) { _idx = null; throw e; });
+    return _idx;
+  }
+  /* Resolves to [{ n, c, t, m }] — the molecules we hold a monograph for whose name, class or tag
+   * matches. Never rejects: search must degrade to "nothing extra found", not to a broken screen. */
+  function searchLocal(q, limit) {
+    if (!enabled() || !String(q || "").trim()) return Promise.resolve([]);
+    return ensureIndex()
+      .then(function (I) { return I.search(q, limit || 25) || []; })
+      .catch(function () { return []; });
   }
 
   /* -------- lookups (exact, then canonical/case-insensitive) -------- */
@@ -93,30 +138,37 @@
     s = s.replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi, " ");
     return s.replace(/\s*\/\s*/g, " + ").replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();
   }
+  /* A counter-ion is not a different drug, and the bundle lists the molecule under its plain name
+   * (scripts/build-clinical-supplement.mjs no longer ships "Atropine sulfate" beside "Atropine").
+   * A composition string from the brand catalogue still carries the salt, so strip it as a LAST
+   * resort, after the exact and cleanComp lookups have failed. Stripping only the lookup key means
+   * a genuinely distinct salt that has its own record is still matched exactly, first. */
+  var SALT_RE = /\s+(sodium|potassium|calcium|disodium|hydrochloride|hcl|sulfate|sulphate|acetate|citrate|tartrate|maleate|besilate|besylate|mesylate|mesilate|phosphate|succinate|fumarate|bisulfate|bitartrate|dipropionate|propionate|valerate|furoate|tromethamine|pivoxil|axetil|etexilate|decanoate|palmitate|monohydrate|dihydrate|xinafoate|bromide|chloride|nitrate|oxide|gluconate|lactate|malate|oxalate|pamoate|stearate|trometamol)$/i;
+  function deSalt(name) { var t = String(name || "").trim().replace(SALT_RE, "").trim(); return t && t !== String(name || "").trim() ? t : ""; }
+  function pick(map, prefix, key) {
+    if (!key) return null;
+    if (map[key]) return map[key];
+    var k = _lc[prefix + String(key).toLowerCase()];
+    return (k && map[k]) ? map[k] : null;
+  }
   function lookStruct(name) {
     var s = _data.struct || {};
-    if (s[name]) return s[name];
-    var k = _lc["s:" + String(name).toLowerCase()];
-    if (k && s[k]) return s[k];
+    var hit = pick(s, "s:", name);
+    if (hit) return hit;
     var cl = cleanComp(name);
-    if (cl && cl !== name) {
-      if (s[cl]) return s[cl];
-      var kcl = _lc["s:" + cl.toLowerCase()];
-      if (kcl && s[kcl]) return s[kcl];
-    }
+    if (cl && cl !== name) { hit = pick(s, "s:", cl); if (hit) return hit; }
+    var ds = deSalt(cl || name);
+    if (ds) { hit = pick(s, "s:", ds); if (hit) return hit; }
     return null;
   }
   function lookMono(name) {
     var m = _data.mono || {};
-    if (m[name]) return m[name];
-    var k = _lc["m:" + String(name).toLowerCase()];
-    if (k && m[k]) return m[k];
+    var hit = pick(m, "m:", name);
+    if (hit) return hit;
     var cl = cleanComp(name);
-    if (cl && cl !== name) {
-      if (m[cl]) return m[cl];
-      var kcl = _lc["m:" + cl.toLowerCase()];
-      if (kcl && m[kcl]) return m[kcl];
-    }
+    if (cl && cl !== name) { hit = pick(m, "m:", cl); if (hit) return hit; }
+    var ds = deSalt(cl || name);
+    if (ds) { hit = pick(m, "m:", ds); if (hit) return hit; }
     return null;
   }
   function isCombo(name) { return /\s\+\s|\s*\/\s*/.test(String(name)); }
@@ -151,19 +203,33 @@
   }
 
   /* -------- route MEDAPI.structured / .monograph to local when API is unreachable -------- */
+  /* Some endpoints answer but never find anything. /monograph reads a `monographs` table that was
+   * never loaded in production: it returns found:false for EVERY molecule, Amoxicillin included
+   * (verified against api.stewardmd.in). Every drug the doctor opens therefore pays for a doomed
+   * round trip, up to the 20s api.js timeout on a bad connection, before the bundled record renders.
+   *
+   * So each wrapped endpoint gets a per-session circuit breaker: after MISS_LIMIT consecutive
+   * answers with nothing found, stop asking it and serve the bundle directly. Any hit re-arms it.
+   * This is a latency fix, not a data one -- the answer was already coming from the bundle. It is
+   * deliberately session-scoped and never persisted, so loading the table server-side needs no
+   * client change: the next launch asks again. */
+  var MISS_LIMIT = 3;
+  var _misses = {};
   function installRouting() {
     var M = window.MEDAPI; if (!M || M._smdClinicalWrapped) return;
     function wrap(name, localFn) {
       var orig = M[name];
+      _misses[name] = 0;
       M[name] = function (arg) {
-        if (enabled() && !online()) return localFn(arg).catch(function () { return { composition: arg, found: false }; });  // offline → local
+        var localOnly = !online() || _misses[name] >= MISS_LIMIT;
+        if (enabled() && localOnly) return localFn(arg).catch(function () { return { composition: arg, found: false }; });
         return orig.apply(M, arguments).then(function (res) {
-          if (enabled() && (!res || !res.found)) {
-            return localFn(arg).then(function (loc) {
-              return (loc && loc.found) ? loc : res;
-            }).catch(function () { return res; });
-          }
-          return res;
+          if (res && res.found) { _misses[name] = 0; return res; }
+          _misses[name]++;
+          if (!enabled()) return res;
+          return localFn(arg).then(function (loc) {
+            return (loc && loc.found) ? loc : res;
+          }).catch(function () { return res; });
         }).catch(function () { return enabled() ? localFn(arg).catch(function () { return null; }) : null; });
       };
     }
@@ -185,6 +251,9 @@
     preload: ensureData,                    // optional warm-up (e.g. when the Drugs DB opens)
     structured: structResp,
     monograph: monoResp,
-    stats: function () { return _data ? { struct: Object.keys(_data.struct || {}).length, mono: Object.keys(_data.mono || {}).length } : null; }
+    search: searchLocal,                    // api.js falls back to this when the server finds nothing
+    _misses: function () { return JSON.parse(JSON.stringify(_misses)); },   // test seam
+    indexReady: function () { return !!window.SMD_CLINICAL_INDEX; },
+    stats: function () { return _data ? { struct: Object.keys(_data.struct || {}).length, mono: Object.keys(_data.mono || {}).length, index: window.SMD_CLINICAL_INDEX ? SMD_CLINICAL_INDEX.count() : null } : null; }
   };
 })();

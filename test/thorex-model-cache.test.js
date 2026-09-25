@@ -256,6 +256,16 @@ async function testClearModelsPurgesCache() {
   const fetch2 = makeFakeFetch({ [modelUrl]: Buffer.from([1, 2, 3, 4]) });
   await MC.loadModelBytes(modelUrl, { fetch: fetch2, caches: cacheApi, indexedDB: undefined });
   ok("(f) load after clear re-fetches from the network", fetch2.callCount() === 1);
+  // A clear scoped to another module's cache leaves ThoreX's models alone (RadioAnatome 3D
+  // calls clearModels({cacheName:"atlas3d-v1"}) after a bad chunk).
+  let idbDeletes = 0;
+  const idbSpy = { deleteDatabase() { idbDeletes++; const r = {}; setTimeout(() => r.onsuccess && r.onsuccess(), 0); return r; } };
+  await MC.loadModelBytes(modelUrl, { fetch: makeFakeFetch({ [modelUrl]: Buffer.from([1, 2, 3, 4]) }), caches: cacheApi, indexedDB: undefined });
+  await MC.clearModels({ cacheName: "atlas3d-v1", caches: cacheApi, indexedDB: idbSpy });
+  ok("(f) a scoped clear does not delete the shared IndexedDB", idbDeletes === 0);
+  ok("(f) a scoped clear leaves the ThoreX model cache in place", cacheApi._raw.get(MC.DEFAULT_CACHE_NAME).has(modelUrl));
+  await MC.clearModels({ caches: cacheApi, indexedDB: idbSpy });
+  ok("(f) an unscoped clear still deletes the IndexedDB", idbDeletes === 1);
 }
 
 (async () => {

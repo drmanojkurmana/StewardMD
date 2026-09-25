@@ -157,7 +157,7 @@ test("the token is stable across move, priority change, recall and reassignment 
   const t1 = await add(s, "a"), t2 = await add(s, "b"), t3 = await add(s, "c");
   const tokenOf = (id) => docs.get("q_tickets/" + id).fields.token;
   await Q.moveTicket(ENV, s, t3.id, { toIndex: 0, category: "elderly" }, "nurse");
-  await Q.setPriority(ENV, s, t2.id, 2, "nurse");
+  await Q.setPriority(ENV, s, t2.id, { reason: "emergency" }, "nurse");
   await Q.setStatus(ENV, s, t1.id, "called", "nurse");
   await Q.setStatus(ENV, s, t1.id, "waiting", "nurse");   // did not come in: sent back to the hall
   await Q.setStatus(ENV, s, t1.id, "called", "nurse");    // recalled

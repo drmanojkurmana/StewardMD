@@ -59,7 +59,7 @@ body.dark #dxOverlay { --dx-accent:#b6b0ff; }
 #dxOverlay .dx-step-h { font-size:14px; margin-bottom:12px; gap:9px; }
 #dxOverlay .dx-step-n { width:24px; height:24px; font-size:11px; border-radius:8px; }
 #dxOverlay .dx-chip, #dxOverlay .dx-sys, #dxOverlay .dx-more-btn { min-height:44px; font-size:13px; padding:10px 12px; border-radius:11px; line-height:1.4; text-align:left; }
-#dxOverlay .dx-sysrow { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+#dxOverlay .dx-sysrow { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; }
 #dxOverlay .dx-sys { min-width:0; }
 #dxOverlay .dx-sys-ic svg { width:19px; height:19px; }
 #dxOverlay .dx-suggest { background:var(--teal-soft,#e3f1ee); border-radius:16px; padding:16px; margin-bottom:18px; }
@@ -73,7 +73,7 @@ body.dark #dxOverlay { --dx-accent:#b6b0ff; }
 #dxOverlay .dx-prompt, #dxOverlay .dx-threshold { background:var(--dx-surface); padding:24px; border-radius:18px; text-align:left; line-height:1.7; font-size:14px; }
 #dxOverlay .dx-gate-card { border-radius:16px; padding:18px; }
 #dxOverlay .dx-gate-m { font-size:13px; line-height:1.65; }
-#dxOverlay .dx-cols { grid-template-columns:1fr; gap:24px; }
+#dxOverlay .dx-cols { grid-template-columns:minmax(0,1fr); gap:24px; }
 #dxOverlay .dx-card { border-radius:16px; border-color:var(--dx-border); overflow:hidden; }
 #dxOverlay .dx-row-head { display:grid; grid-template-columns:26px minmax(0,1fr) 44px; gap:8px 10px; padding:16px; }
 #dxOverlay .dx-rank { grid-row:span 2; width:26px; height:26px; border-radius:8px; font-size:12px; }

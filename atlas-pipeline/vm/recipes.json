@@ -1,0 +1,466 @@
+{
+ "_note": "Recovered from the shipped pixels by recipe.py discover and PROVEN on 2026-09-25: rebuilding with each recipe reproduces every 5d651f5a5 image of that module byte for byte (Pillow 12.3.0, libwebp 1.6.0). crop0 is relative to the segment script's output volume (source=script). Abdomen, pelvis and whole body are discovered on the VM (source=stack): their crops came from a TotalSegmentator run that no longer exists.",
+ "ct-head-axial": {
+  "raw": "head",
+  "stack": "vhp",
+  "segmenter": "segment_head_ct.py",
+  "source": "script",
+  "plane": "axial",
+  "crop0": [
+   0,
+   339,
+   0,
+   453
+  ],
+  "crop1": null,
+  "window": "bone",
+  "spacing": [
+   0.9375,
+   0.9375,
+   1.0
+  ],
+  "shape": [
+   339,
+   453,
+   201
+  ],
+  "picks": [
+   0,
+   9,
+   17,
+   26,
+   35,
+   43,
+   52,
+   61,
+   70,
+   78,
+   87,
+   96,
+   104,
+   113,
+   122,
+   130,
+   139,
+   148,
+   157,
+   165,
+   174,
+   183,
+   191,
+   200
+  ]
+ },
+ "ct-head-coronal": {
+  "raw": "head",
+  "stack": "vhp",
+  "segmenter": "segment_head_ct.py",
+  "source": "script",
+  "plane": "coronal",
+  "crop0": [
+   0,
+   339,
+   0,
+   453
+  ],
+  "crop1": null,
+  "window": "bone",
+  "spacing": [
+   0.9375,
+   1.0,
+   0.9375
+  ],
+  "shape": [
+   339,
+   201,
+   453
+  ],
+  "picks": [
+   0,
+   20,
+   39,
+   59,
+   79,
+   98,
+   118,
+   138,
+   157,
+   177,
+   197,
+   216,
+   236,
+   255,
+   275,
+   295,
+   314,
+   334,
+   354,
+   373,
+   393,
+   413,
+   432,
+   452
+  ]
+ },
+ "ct-head-sagittal": {
+  "raw": "head",
+  "stack": "vhp",
+  "segmenter": "segment_head_ct.py",
+  "source": "script",
+  "plane": "sagittal",
+  "crop0": [
+   0,
+   339,
+   0,
+   453
+  ],
+  "crop1": null,
+  "window": "bone",
+  "spacing": [
+   0.9375,
+   1.0,
+   0.9375
+  ],
+  "shape": [
+   453,
+   201,
+   339
+  ],
+  "picks": [
+   0,
+   15,
+   29,
+   44,
+   59,
+   73,
+   88,
+   103,
+   118,
+   132,
+   147,
+   162,
+   176,
+   191,
+   206,
+   220,
+   235,
+   250,
+   265,
+   279,
+   294,
+   309,
+   323,
+   338
+  ]
+ },
+ "ct-thorax-axial": {
+  "raw": "chest",
+  "stack": "vhp",
+  "segmenter": "segment_thorax_ct.py",
+  "source": "script",
+  "plane": "axial",
+  "crop0": [
+   0,
+   471,
+   0,
+   409
+  ],
+  "crop1": null,
+  "window": "mediastinum",
+  "spacing": [
+   0.9375,
+   0.9375,
+   1.0
+  ],
+  "shape": [
+   471,
+   409,
+   261
+  ],
+  "picks": [
+   0,
+   11,
+   23,
+   34,
+   45,
+   57,
+   68,
+   79,
+   90,
+   102,
+   113,
+   124,
+   136,
+   147,
+   158,
+   170,
+   181,
+   192,
+   203,
+   215,
+   226,
+   237,
+   249,
+   260
+  ]
+ },
+ "ct-thorax-coronal": {
+  "raw": "chest",
+  "stack": "vhp",
+  "segmenter": "segment_thorax_ct.py",
+  "source": "script",
+  "plane": "coronal",
+  "crop0": [
+   0,
+   471,
+   0,
+   409
+  ],
+  "crop1": null,
+  "window": "mediastinum",
+  "spacing": [
+   0.9375,
+   1.0,
+   0.9375
+  ],
+  "shape": [
+   471,
+   261,
+   409
+  ],
+  "picks": [
+   53,
+   71,
+   89,
+   106,
+   124,
+   142,
+   160,
+   177,
+   195,
+   213,
+   231,
+   248,
+   266,
+   284,
+   302,
+   319,
+   337,
+   355,
+   373,
+   390
+  ]
+ },
+ "ct-thorax-sagittal": {
+  "raw": "chest",
+  "stack": "vhp",
+  "segmenter": "segment_thorax_ct.py",
+  "source": "script",
+  "plane": "sagittal",
+  "crop0": [
+   0,
+   471,
+   0,
+   409
+  ],
+  "crop1": [
+   63,
+   346,
+   0,
+   261
+  ],
+  "window": "mediastinum",
+  "spacing": [
+   0.9375,
+   1.0,
+   0.9375
+  ],
+  "shape": [
+   283,
+   261,
+   471
+  ],
+  "picks": [
+   0,
+   20,
+   41,
+   61,
+   82,
+   102,
+   123,
+   143,
+   163,
+   184,
+   204,
+   225,
+   245,
+   266,
+   286,
+   307,
+   327,
+   347,
+   368,
+   388,
+   409,
+   429,
+   450,
+   470
+  ]
+ },
+ "ct-knee-axial": {
+  "raw": "knee2",
+  "stack": "limb",
+  "segmenter": "segment_knee_ct.py",
+  "source": "script",
+  "plane": "axial",
+  "crop0": [
+   41,
+   462,
+   91,
+   457
+  ],
+  "crop1": null,
+  "window": "bone",
+  "spacing": [
+   0.9375,
+   0.9375,
+   1.0
+  ],
+  "shape": [
+   421,
+   366,
+   171
+  ],
+  "picks": [
+   0,
+   7,
+   15,
+   22,
+   30,
+   37,
+   44,
+   52,
+   59,
+   67,
+   74,
+   81,
+   89,
+   96,
+   103,
+   111,
+   118,
+   126,
+   133,
+   140,
+   148,
+   155,
+   163,
+   170
+  ]
+ },
+ "ct-knee-coronal": {
+  "raw": "knee2",
+  "stack": "limb",
+  "segmenter": "segment_knee_ct.py",
+  "source": "script",
+  "plane": "coronal",
+  "crop0": [
+   41,
+   462,
+   91,
+   457
+  ],
+  "crop1": null,
+  "window": "bone",
+  "spacing": [
+   0.9375,
+   1.0,
+   0.9375
+  ],
+  "shape": [
+   421,
+   171,
+   366
+  ],
+  "picks": [
+   0,
+   32,
+   48,
+   79,
+   95,
+   111,
+   127,
+   143,
+   159,
+   175,
+   190,
+   206,
+   222,
+   238,
+   254,
+   270,
+   286,
+   302,
+   317,
+   333,
+   349,
+   365
+  ]
+ },
+ "ct-knee-sagittal": {
+  "raw": "knee2",
+  "stack": "limb",
+  "segmenter": "segment_knee_ct.py",
+  "source": "script",
+  "plane": "sagittal",
+  "crop0": [
+   41,
+   462,
+   91,
+   457
+  ],
+  "crop1": [
+   120,
+   255,
+   0,
+   171
+  ],
+  "window": "bone",
+  "spacing": [
+   0.9375,
+   1.0,
+   0.9375
+  ],
+  "shape": [
+   135,
+   171,
+   421
+  ],
+  "picks": [
+   277,
+   283,
+   288,
+   294,
+   299,
+   305,
+   310,
+   316,
+   321,
+   327,
+   332,
+   338,
+   343,
+   349,
+   354,
+   360,
+   365,
+   371,
+   376,
+   382,
+   387,
+   393,
+   398,
+   404
+  ]
+ }
+}

@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-repository-paging.test.mjs - R4-1 census-by-status.
  *
  * Every roster read was capped at 1,000 records, OLDEST first, silently: past that the newest admission was

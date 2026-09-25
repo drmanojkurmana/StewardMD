@@ -1004,8 +1004,8 @@
       '.icu-ov-tx-nm{font:600 13.5px var(--font);color:var(--ink)}' +
       '.icu-ov-tx-dose{font:600 13px "IBM Plex Mono",ui-monospace,monospace;color:var(--ink);white-space:nowrap}' +
       // live status grid
-      '.icu-vitals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}' +
-      '@media (max-width:480px){.icu-vitals{grid-template-columns:repeat(3,1fr)}}' +
+      '.icu-vitals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}' +
+      '@media (max-width:480px){.icu-vitals{grid-template-columns:repeat(3,minmax(0,1fr))}}' +
       '.icu-ward{font:700 12px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px}.icu-ward.on{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}' +
       '.icu-ward-row{display:flex;align-items:center;gap:8px;margin:0 0 8px}.icu-ward-row .icu-ward{flex:1 1 auto;min-width:0;margin:0}' +
       '.icu-ward-af{flex:0 0 auto;font:700 11px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px;cursor:pointer;white-space:nowrap}.icu-ward-af.on{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,var(--line));background:color-mix(in srgb,var(--ok) 10%,transparent)}' +
@@ -1055,7 +1055,7 @@
       '.icu-score-chip{font:700 12px var(--font);padding:5px 10px;margin:2px;border:1px solid var(--border);border-radius:14px;background:var(--panel);color:var(--primary);cursor:pointer}' +
       '.icu-card h3{font:700 15.5px var(--font);margin:0 0 10px;color:var(--ink)}.icu-card p{font:400 13.5px/1.6 var(--font);color:var(--muted);margin:0}' +
       // AI import grid
-      '.icu-ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}' +
+      '.icu-ai-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}' +
       '.icu-ai{background:var(--panel);border:1px dashed var(--border);border-radius:var(--r-sm);padding:13px;text-align:left;cursor:pointer;color:var(--ink);position:relative;transition:transform var(--ease),box-shadow var(--ease)}' +
       '.icu-ai:active{transform:scale(.98)}.icu-ai:hover{box-shadow:var(--sh)}' +
       '.icu-ai .ic{font-size:22px}.icu-ai .t{font:700 13.5px var(--font);margin-top:6px}.icu-ai .s{font:500 11px/1.4 var(--font);color:var(--muted);margin-top:2px}' +
@@ -1141,6 +1141,16 @@
       '.icu-sevkey{display:flex;gap:14px;justify-content:center;font:600 10.5px var(--font);color:var(--muted);margin-bottom:10px}' +
       '.icu-sevkey span{display:inline-flex;align-items:center;gap:5px}.icu-sevkey i{width:9px;height:9px;border-radius:50%;display:inline-block}' +
       '.icu-sevkey i.ok{background:var(--ok)}.icu-sevkey i.warn{background:var(--warn)}.icu-sevkey i.bad{background:var(--danger)}' +
+      // Medical Core (flag smd_medcore, default OFF). Deliberately the quietest card on the screen:
+      // no status colour, because nothing here is a status - "what changed" is an observation and
+      // "missing information" is a to-do list. Status colour stays reserved for status.
+      '.icu-mc-row{display:flex;align-items:baseline;gap:8px;font:500 12.5px/1.5 var(--font);color:var(--ink2);padding:5px 0;border-bottom:1px solid var(--border-soft)}' +
+      '.icu-mc-row:last-child{border-bottom:0}' +
+      '.icu-mc-row b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}' +
+      '.icu-mc-row .w{margin-left:auto;font:600 11px var(--font);color:var(--muted);white-space:nowrap}' +
+      '.icu-mc-sub{font:700 10px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}' +
+      '.icu-mc-sub:first-child{margin-top:0}' +
+      '.icu-mc-foot{font:400 10.5px/1.5 var(--font);color:var(--muted);margin:9px 0 0}' +
       '.icu-phase{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px;margin-left:7px}' +
       // plain-language jargon tooltips (A5) — tap ⓘ to open an explanation
       '.icu-tip{border:none;background:none;color:var(--primary);cursor:pointer;font:600 11px var(--font);padding:0 2px;vertical-align:baseline;-webkit-appearance:none}' +
@@ -1201,7 +1211,7 @@
       '.icu-modal.on{display:flex}' +
       '.icu-sheet{background:var(--panel);color:var(--ink);width:100%;max-width:560px;max-height:88vh;overflow-y:auto;border-radius:16px 16px 0 0;border-top:1px solid var(--border);padding:18px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -8px 28px rgba(8,18,26,.18)}' +
       '.icu-sheet h3{font:700 16.5px var(--font);margin:0 0 14px}' +
-      '.icu-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}' +
+      '.icu-grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}' +
       '.icu-fld{display:flex;flex-direction:column;gap:4px}.icu-fld label{font:700 11px var(--font);color:var(--muted)}' +
       '.icu-fld input,.icu-fld select{font:500 15px var(--font);padding:11px 12px;border:1px solid var(--border);border-radius:var(--r-xs);background:var(--panel);color:var(--ink);width:100%;transition:border-color var(--ease)}' +
       '.icu-fld input:focus,.icu-fld select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}' +
@@ -1503,7 +1513,7 @@
       '#icuRoot.icu-v2 .icu-v2-rtx{min-width:0;font:600 14px var(--font);color:var(--ink)}' +
       '#icuRoot.icu-v2 .icu-v2-rx{flex:0 0 auto;color:var(--muted);font:700 12px var(--font);margin-left:2px}' +
       /* priority picker (2x2) */
-      '#icuRoot.icu-v2 .icu-v2-priopick{display:grid;grid-template-columns:1fr 1fr;gap:8px}' +
+      '#icuRoot.icu-v2 .icu-v2-priopick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}' +
       '#icuRoot.icu-v2 .icu-v2-priochip{display:flex;flex-direction:column;align-items:flex-start;gap:3px;border:1px solid var(--border);background:var(--panel);border-radius:var(--r-sm);padding:10px 12px;cursor:pointer;color:var(--ink);text-align:left}' +
       '#icuRoot.icu-v2 .icu-v2-priochip.on{color:#fff}' +
       '#icuRoot.icu-v2 .icu-v2-prio-top{display:flex;align-items:center;gap:7px;font:700 13.5px var(--font)}' +
@@ -1715,6 +1725,76 @@
   function renderVentAbgTiles() {
     return '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("lungs", "🫁") + ' Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>' +
       '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("abg", "🩸") + ' ABG</div><div class="icu-vitals">' + abgTiles() + '</div>';
+  }
+
+  /* ------------------------------------------- Medical Core (flag smd_medcore, default OFF)
+   * Two deterministic lists: what moved, and what a clinician would have to go and get. There is
+   * no model behind this and no probability in it; medcore-boot.js computes both from the same
+   * ICU state this file already holds, on the device, and returns null on any failure.
+   *
+   * THE FLAG IS CHECKED FIRST AND THE GUARD IS TOTAL. Flag off, or the boot module absent (it is
+   * not loaded when the flag is off), and this returns "" before touching anything. Deleting the
+   * two script tags in index.html removes the feature with no edit to this file to revert.
+   *
+   * IT IS NOT AN ALERT. It never thresholds on a current value, never escalates, never notifies,
+   * and carries no status colour - the deterministic alert engine above owns all of that and stays
+   * authoritative. "Missing information" is a to-do list, and "what changed" is an observation. */
+  function medCoreOn() {
+    try {
+      var F = window.SMD_MEDCORE_FLAGS;
+      return !!(F && F.bool && F.bool("smd_medcore") && window.SMD_MEDCORE);
+    } catch (e) { return false; }
+  }
+  function medCoreSummary() {
+    if (!medCoreOn()) return null;
+    try {
+      // asOf is OURS to state, never the module's to assume: it is the leakage control.
+      var scores = [];
+      try { scores = (window.ICU_AUTOSCORES && ICU_AUTOSCORES.compute(_raw)) || []; } catch (e) { scores = []; }
+      return window.SMD_MEDCORE.summary(_raw, { asOf: Date.now(), scores: scores });
+    } catch (e) { return null; }
+  }
+  function medCorePanel() {
+    var sum = medCoreSummary();
+    if (!sum) return "";
+    var changed = (sum.changed || []).slice(0, 4);
+    var missing = (sum.missingInformation || []).slice(0, 4);
+    if (!changed.length && !missing.length) return "";
+    var label = window.SMD_MEDCORE && SMD_MEDCORE.labelFor ? SMD_MEDCORE.labelFor : function (x) { return x; };
+    var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("refresh", "\u21bb") + ' Medical Core <span class="icu-phase">BETA</span> <span style="font-weight:600;text-transform:none;letter-spacing:0">\u00b7 deterministic, no model</span></div>';
+    if (changed.length) {
+      out += '<div class="icu-mc-sub">What changed</div>';
+      out += changed.map(function (c) {
+        var arrow = c.direction === "up" ? "\u2191" : "\u2193";
+        return '<div class="icu-mc-row">' + arrow + ' ' + esc(label(c.param)) +
+          ' <b>' + esc(c.from) + ' \u2192 ' + esc(c.to) + '</b> ' + esc(c.unit || "") +
+          '<span class="w">over ' + esc(fmtMins(c.overMin)) + '</span></div>';
+      }).join("");
+    }
+    if (missing.length) {
+      out += '<div class="icu-mc-sub">Missing information</div>';
+      out += missing.map(function (m) {
+        var why = m.reason === "STALE" ? ("last " + (m.staleValue != null ? m.staleValue + " " : "") + fmtMins(m.ageMin) + " ago")
+          : m.reason === "REFUSED" ? "charted, could not be read"
+          : m.reason === "NO_WINDOW" ? "no freshness rule set"
+          : "not recorded";
+        return '<div class="icu-mc-row">' + esc(label(m.param || m.label)) +
+          '<span class="w">' + esc(why) + '</span></div>';
+      }).join("");
+    }
+    /* THE MOST IMPORTANT SENTENCE ON THIS PANEL. Both lists are filtered: "what changed" shows only
+     * moves past a magnitude band, and "missing information" shows only what the enabled scores and
+     * outcomes ask for. A clinician who reads a short list as a clear patient has been misled by
+     * omission, and the bands doing the filtering are unapproved seed content. So the panel says so
+     * itself rather than relying on anybody having read the vault. */
+    out += '<p class="icu-mc-foot"><b>Not a complete list.</b> Only changes past a set size and gaps the active scores ask for are shown, so nothing here rules anything out. Observations and gaps only: no prediction, no alert, and nothing here changes a score, a threshold or a prescription.</p>';
+    return out + '</div>';
+  }
+  function fmtMins(m) {
+    if (m == null) return "";
+    if (m < 90) return Math.round(m) + " min";
+    var h = m / 60;
+    return (h < 10 ? h.toFixed(1).replace(/\.0$/, "") : Math.round(h)) + " h";
   }
 
   /* --------------------------------------------------------- AI import panel */
@@ -3924,6 +4004,8 @@
     var status = !mon ? "" : (isOv ? renderLiveStatus()
       : '<details class="icu-vitals-c"><summary>' + liveSummaryLine() + '</summary>' + renderLiveStatus() + '</details>');
     var elyteAlerts = (isOv || _active === "lytes") ? renderElyteAlerts() : "";
+    // Flag-gated, overview only, and "" whenever the flag is off or the module failed to load.
+    var medCore = isOv ? medCorePanel() : "";
     var hd = hasData();
     var addBtn = !mon ? "" : '<button class="icu-adddata" data-icu-act="adddata">' + (hd ? "＋ Add / update data" : "＋ Add my patient") + '</button>';
     // Empty overview → one inviting empty state (its own CTA); otherwise grid/summary + add button.
@@ -3936,6 +4018,7 @@
       (mon ? renderWardBanner() : "") +
       renderConflicts() +
       elyteAlerts +
+      medCore +
       mid +
       tab +   // each tab renders its own descriptive header — no redundant generic label
       '</div></div>';
@@ -7025,7 +7108,7 @@
       '.lh .doc-title{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0f766e;margin-top:3px}' +
       '.lh .unit{font-size:11px;color:#64748b;margin-top:2px}' +
       '.draft{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.05em;color:#92620a;background:#fef3c7;border:1px solid #fcd34d;border-radius:999px;padding:2px 7px;margin-left:8px;vertical-align:middle}' +
-      '.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;margin-bottom:14px}' +
+      '.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 26px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;margin-bottom:14px}' +
       '.row{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dotted #e5edf0;font-size:12.5px}' +
       '.row .k{color:#64748b;font-weight:600}.row .v{color:#0f172a;font-weight:700;text-align:right}' +
       '.dx{margin:0 0 14px;padding:9px 14px;background:#ecfdf5;border-left:4px solid #0f766e;border-radius:0 8px 8px 0}' +

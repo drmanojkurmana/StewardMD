@@ -1,0 +1,204 @@
+{
+ "id": "general-surgery",
+ "label": "General Surgery",
+ "short": "Surgery",
+ "icon": "content_cut",
+ "group": "surgical",
+ "scribe": "general-surgery",
+ "subject": "surgery-trauma",
+ "workspace": "surgery",
+ "tools": [],
+ "sections": [
+  {
+   "id": "presenting-complaint",
+   "title": "Presenting complaint",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "complaint", "label": "Main complaint", "type": "select", "opts": ["Lump or swelling", "Ulcer or non-healing wound", "Groin or abdominal wall swelling", "Breast lump or pain", "Nipple discharge", "Bleeding per rectum", "Pain or swelling at the anus", "Abdominal pain", "Difficulty swallowing", "Jaundice", "Problem with a surgical wound"] },
+    { "id": "site", "label": "Site and side", "type": "text" },
+    { "id": "duration", "label": "Duration", "type": "text", "hint": "e.g. 3 weeks, 2 years" },
+    { "id": "progression", "label": "Progression", "type": "select", "opts": ["Static", "Slowly increasing", "Rapidly increasing", "Varies in size", "Decreasing"] },
+    { "id": "pain", "label": "Pain", "type": "select", "opts": ["Painless", "Painful", "Pain only on standing or straining", "Pain started recently in a long-standing swelling"] },
+    { "id": "associated", "label": "Associated symptoms", "type": "text", "hint": "e.g. fever, discharge, vomiting, change in bowel habit" },
+    { "id": "constitutional", "label": "Constitutional symptoms", "type": "select", "opts": ["None", "Fever", "Weight loss", "Loss of appetite", "Weight loss and loss of appetite"] },
+    { "id": "predisposing", "label": "Predisposing factors", "type": "text", "hint": "e.g. chronic cough, constipation, straining to pass urine, heavy lifting, smoking, diabetes" },
+    { "id": "previous_surgery", "label": "Previous operations", "type": "text", "set": "surgical_history" }
+   ]
+  },
+  {
+   "id": "lump",
+   "title": "Lump or swelling",
+   "target": "local_examination",
+   "fields": [
+    { "id": "lump_site", "label": "Site", "type": "text", "hint": "anatomical site and side" },
+    { "id": "lump_size", "label": "Size", "type": "text", "unit": "cm", "hint": "e.g. 4 x 3" },
+    { "id": "lump_shape", "label": "Shape", "type": "select", "opts": ["Round", "Oval", "Irregular", "Lobulated", "Pedunculated"] },
+    { "id": "lump_surface", "label": "Surface", "type": "select", "opts": ["Smooth", "Irregular", "Nodular", "Lobulated"] },
+    { "id": "lump_margins", "label": "Margins", "type": "select", "opts": ["Well defined", "Ill defined", "Slipping edge"] },
+    { "id": "lump_consistency", "label": "Consistency", "type": "select", "opts": ["Soft", "Cystic", "Firm", "Rubbery", "Hard", "Bony hard", "Variable"] },
+    { "id": "lump_tenderness", "label": "Tenderness and warmth", "type": "select", "opts": ["Not tender, normal temperature", "Tender", "Warm and tender"] },
+    { "id": "fluctuation", "label": "Fluctuation", "type": "select", "opts": ["Absent", "Present"] },
+    { "id": "transillumination", "label": "Transillumination", "type": "select", "opts": ["Negative", "Positive", "Not tested"] },
+    { "id": "fixity", "label": "Mobility and fixity", "type": "select", "opts": ["Mobile in all directions", "Fixed to skin", "Fixed to deeper structures", "Less mobile when the muscle contracts", "Moves with swallowing", "Moves with tongue protrusion"] },
+    { "id": "lump_skin", "label": "Overlying skin", "type": "select", "opts": ["Normal", "Stretched and shiny", "Punctum present", "Red and warm", "Ulcerated", "Peau d'orange", "Dilated veins"] },
+    { "id": "lump_nodes", "label": "Regional lymph nodes", "type": "select", "opts": ["Not palpable", "Palpable, soft and mobile", "Palpable, hard or fixed", "Palpable, matted"] }
+   ]
+  },
+  {
+   "id": "ulcer",
+   "title": "Ulcer",
+   "target": "local_examination",
+   "fields": [
+    { "id": "ulcer_site", "label": "Site", "type": "text" },
+    { "id": "ulcer_size", "label": "Size and depth", "type": "text", "unit": "cm", "hint": "length x width x depth" },
+    { "id": "ulcer_edge", "label": "Edge", "type": "select", "opts": ["Sloping", "Punched out", "Undermined", "Rolled", "Everted"] },
+    { "id": "ulcer_floor", "label": "Floor", "type": "select", "opts": ["Healthy red granulation", "Pale granulation", "Slough", "Black necrotic tissue", "Exposed tendon or bone"] },
+    { "id": "ulcer_base", "label": "Base (on palpation)", "type": "select", "opts": ["Soft", "Indurated", "Fixed to deeper structures"] },
+    { "id": "ulcer_discharge", "label": "Discharge", "type": "select", "opts": ["None", "Serous", "Purulent", "Blood-stained", "Foul-smelling"] },
+    { "id": "ulcer_surrounding", "label": "Surrounding skin", "type": "select", "opts": ["Normal", "Red and inflamed", "Pigmented or eczematous", "Callus", "Scarred"] },
+    { "id": "ulcer_pulses", "label": "Distal pulses", "type": "select", "opts": ["Palpable", "Weak", "Absent"] },
+    { "id": "ulcer_sensation", "label": "Sensation around the ulcer", "type": "select", "opts": ["Normal", "Reduced", "Absent"] },
+    { "id": "ulcer_nodes", "label": "Regional lymph nodes", "type": "select", "opts": ["Not palpable", "Palpable, tender", "Palpable, hard or fixed"] }
+   ]
+  },
+  {
+   "id": "hernia",
+   "title": "Hernia",
+   "target": "hernial_orifices_details",
+   "fields": [
+    { "id": "hernia_site", "label": "Site", "type": "select", "opts": ["Inguinal", "Inguinoscrotal", "Femoral", "Umbilical", "Paraumbilical", "Epigastric", "Incisional", "Other"] },
+    { "id": "hernia_side", "label": "Side", "type": "select", "opts": ["Right", "Left", "Both sides", "Midline"] },
+    { "id": "hernia_size", "label": "Size of swelling or defect", "type": "text", "unit": "cm" },
+    { "id": "reducibility", "label": "Reducibility", "type": "select", "opts": ["Reduces on lying down", "Reducible manually", "Partly reducible", "Irreducible"] },
+    { "id": "cough_impulse", "label": "Cough impulse", "type": "select", "opts": ["Present, expansile", "Absent"] },
+    { "id": "deep_ring", "label": "Deep ring occlusion test", "type": "select", "opts": ["Controlled (suggests indirect)", "Not controlled (suggests direct)", "Not tested"] },
+    { "id": "pubic_tubercle", "label": "Relation to pubic tubercle", "type": "select", "opts": ["Above and medial (inguinal)", "Below and lateral (femoral)", "Not applicable"] },
+    { "id": "hernia_tenderness", "label": "Tenderness", "type": "select", "opts": ["Not tender", "Tender"] },
+    { "id": "other_orifices", "label": "Other hernial orifices and scrotum", "type": "text", "hint": "e.g. left side normal, both testes normal" }
+   ]
+  },
+  {
+   "id": "breast",
+   "title": "Breast lump and triple assessment",
+   "target": "breast_exam",
+   "fields": [
+    { "id": "breast_side", "label": "Side", "type": "select", "opts": ["Right", "Left", "Both"] },
+    { "id": "breast_position", "label": "Position", "type": "select", "opts": ["Upper outer quadrant", "Upper inner quadrant", "Lower outer quadrant", "Lower inner quadrant", "Central (behind the areola)", "Axillary tail"] },
+    { "id": "breast_size", "label": "Size, clock position and distance from nipple", "type": "text", "hint": "e.g. 3 x 2 cm at 10 o'clock, 4 cm from nipple" },
+    { "id": "breast_consistency", "label": "Consistency", "type": "select", "opts": ["Soft", "Firm", "Hard", "Cystic"] },
+    { "id": "breast_mobility", "label": "Mobility", "type": "select", "opts": ["Mobile", "Fixed to skin", "Fixed to muscle or chest wall"] },
+    { "id": "breast_skin", "label": "Skin", "type": "select", "opts": ["Normal", "Dimpling or tethering", "Peau d'orange", "Redness", "Ulceration", "Skin nodules"] },
+    { "id": "nipple", "label": "Nipple", "type": "select", "opts": ["Normal", "Recent retraction", "Clear or milky discharge", "Blood-stained discharge", "Eczema or erosion", "Deviation"] },
+    { "id": "axilla", "label": "Axillary and supraclavicular nodes", "type": "select", "opts": ["Not palpable", "Mobile axillary nodes", "Fixed or matted axillary nodes", "Supraclavicular node palpable"] },
+    { "id": "score_clinical", "label": "Clinical score (P)", "type": "select", "opts": ["P1 normal", "P2 benign", "P3 uncertain", "P4 suspicious", "P5 malignant"] },
+    { "id": "score_imaging", "label": "Imaging score (U or M)", "type": "select", "opts": ["1 normal", "2 benign", "3 indeterminate or probably benign", "4 suspicious of malignancy", "5 highly suspicious of malignancy"] },
+    { "id": "score_biopsy", "label": "Needle biopsy result (B or C)", "type": "select", "opts": ["B1 or C1: normal tissue or inadequate sample", "B2 or C2: benign", "B3 or C3: uncertain or atypical", "B4 or C4: suspicious of malignancy", "B5 or C5: malignant"] },
+    { "id": "mdt", "label": "Triple assessment concordant and discussed at the MDT", "type": "check" }
+   ]
+  },
+  {
+   "id": "perianal",
+   "title": "Perianal examination and proctoscopy",
+   "target": "examination",
+   "fields": [
+    { "id": "perianal_inspection", "label": "Inspection", "type": "select", "opts": ["Normal", "External haemorrhoids or skin tags", "Fissure", "Fistula opening", "Perianal abscess", "Prolapse", "Warts", "Mass or ulcer"] },
+    { "id": "perianal_position", "label": "Position and details", "type": "text", "hint": "clock position in lithotomy, e.g. fissure at 6 o'clock with sentinel tag; fistula opening 3 cm from anal verge at 7 o'clock" },
+    { "id": "anal_tone", "label": "Anal tone", "type": "select", "opts": ["Normal", "Reduced", "Increased (spasm)", "Not assessed (too painful)"] },
+    { "id": "dre", "label": "Digital rectal examination", "type": "select", "opts": ["Normal", "Tender", "Mass felt", "Induration or fluctuation", "Not done (too painful)"] },
+    { "id": "rectal_mass", "label": "Mass details", "type": "text", "hint": "distance from anal verge, part of circumference, mobile or fixed" },
+    { "id": "prostate", "label": "Prostate (men)", "type": "select", "opts": ["Not examined", "Normal", "Enlarged, smooth", "Hard or nodular"] },
+    { "id": "glove", "label": "Examining finger", "type": "select", "opts": ["Normal stool", "Fresh blood", "Dark blood or melaena", "Mucus", "Empty rectum"] },
+    { "id": "proctoscopy", "label": "Proctoscopy", "type": "select", "opts": ["Normal", "Internal haemorrhoids", "Proctitis", "Mass or ulcer", "Not done"] },
+    { "id": "haemorrhoid_grade", "label": "Haemorrhoid grade", "type": "select", "opts": ["Grade I: bleed, do not prolapse", "Grade II: prolapse, reduce on their own", "Grade III: prolapse, need pushing back", "Grade IV: prolapsed, cannot be pushed back"] }
+   ]
+  },
+  {
+   "id": "wound",
+   "title": "Wound",
+   "target": "local_examination",
+   "fields": [
+    { "id": "wound_type", "label": "Type", "type": "select", "opts": ["Surgical incision", "Laceration", "Abrasion", "Abscess cavity after drainage", "Burn", "Diabetic foot wound", "Pressure injury", "Bite"] },
+    { "id": "wound_site", "label": "Site", "type": "text" },
+    { "id": "wound_size", "label": "Size", "type": "text", "unit": "cm", "hint": "length x width x depth" },
+    { "id": "wound_bed", "label": "Wound bed", "type": "select", "opts": ["Granulating", "Epithelialising", "Slough", "Necrotic", "Exposed tendon or bone"] },
+    { "id": "wound_exudate", "label": "Exudate", "type": "select", "opts": ["None", "Serous", "Blood-stained", "Purulent"] },
+    { "id": "wound_edges", "label": "Edges", "type": "select", "opts": ["Apposed", "Gaping", "Dehisced", "Undermined"] },
+    { "id": "wound_surrounding", "label": "Surrounding skin", "type": "select", "opts": ["Normal", "Redness around the wound", "Spreading redness", "Induration", "Maceration"] },
+    { "id": "wound_infection", "label": "Infection", "type": "select", "opts": ["No signs of infection", "Superficial infection", "Deep infection or collection"] },
+    { "id": "sutures", "label": "Sutures or staples", "type": "select", "opts": ["Intact", "Removed", "Partly removed", "Not applicable"] },
+    { "id": "dressing", "label": "Dressing applied and next dressing", "type": "text" }
+   ]
+  },
+  {
+   "id": "red-flags",
+   "title": "Red flags",
+   "target": "sys_examination",
+   "alert": "Emergency sign (strangulated or obstructed hernia, peritonitis, spreading necrotising infection or shock): keep nil by mouth and arrange same-day emergency surgical admission. Suspected cancer sign: refer on the suspected cancer pathway for urgent assessment (NICE NG12).",
+   "fields": [
+    { "id": "rf_hernia_irreducible", "label": "Hernia tense, tender or newly irreducible", "type": "check" },
+    { "id": "rf_obstruction", "label": "Vomiting, abdominal distension, or not passing wind or stools", "type": "check" },
+    { "id": "rf_skin_discoloured", "label": "Skin over a hernia or swelling red, dusky or discoloured", "type": "check" },
+    { "id": "rf_peritonitis", "label": "Guarding, rigidity or rebound tenderness", "type": "check" },
+    { "id": "rf_necrotising", "label": "Pain out of proportion, crepitus or skin necrosis with spreading redness", "type": "check" },
+    { "id": "rf_shock", "label": "Signs of shock or sepsis", "type": "check" },
+    { "id": "rf_breast_lump", "label": "Unexplained breast lump, age 30 and over", "type": "check" },
+    { "id": "rf_nipple", "label": "Discharge, retraction or other change in one nipple only, age 50 and over", "type": "check" },
+    { "id": "rf_breast_skin", "label": "Skin changes suggesting breast cancer", "type": "check" },
+    { "id": "rf_axilla", "label": "Unexplained lump in the axilla, age 30 and over", "type": "check" },
+    { "id": "rf_anorectal", "label": "Rectal or abdominal mass, or unexplained anal mass or ulcer", "type": "check" },
+    { "id": "rf_hard_lump", "label": "Hard, fixed lump or non-healing ulcer with rolled or everted edge", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Ultrasound abdomen", "query": "USG abdomen" },
+  { "label": "Ultrasound of the swelling (local part)", "query": "USG local part" },
+  { "label": "Ultrasound breast", "query": "USG breast" },
+  { "label": "Mammography", "query": "mammography" },
+  { "label": "FNAC", "query": "FNAC" },
+  { "label": "Core needle biopsy", "query": "core biopsy" },
+  { "label": "CECT abdomen", "query": "CT abdomen" },
+  { "label": "Colonoscopy", "query": "colonoscopy" },
+  { "label": "Pus culture and sensitivity", "query": "pus culture" },
+  { "label": "Complete blood count", "query": "CBC" },
+  { "label": "Random blood sugar", "query": "RBS" },
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "Liver function tests", "query": "LFT" },
+  { "label": "Chest X-ray", "query": "X-ray chest" }
+ ],
+ "orderSets": [
+  { "id": "pre-op-panel", "label": "Pre-operative panel", "tests": ["CBC", "RBS", "creatinine", "electrolytes", "PT INR", "blood group", "HIV", "HBsAg", "HCV", "ECG"] },
+  { "id": "breast-triple-assessment", "label": "Breast triple assessment tests", "tests": ["USG breast", "mammography", "core biopsy", "FNAC"] },
+  { "id": "wound-infection", "label": "Wound infection or abscess", "tests": ["pus culture", "CBC", "CRP", "RBS", "HbA1c", "blood culture"] }
+ ],
+ "protocols": ["acute-appendicitis", "acute-cholecystitis-cholangitis", "acute-pancreatitis", "acute-diverticulitis", "upper-gi-bleeding-nonvariceal", "lower-gi-bleeding", "necrotising-soft-tissue-infection", "cellulitis-skin-soft-tissue", "burns-initial-management", "trauma-primary-survey", "major-haemorrhage-trauma", "sepsis-septic-shock", "tetanus", "rabies-post-exposure-prophylaxis", "surgical-antibiotic-prophylaxis", "perioperative-vte-prophylaxis", "perioperative-anticoagulation-management", "peripheral-arterial-disease", "deep-vein-thrombosis", "chronic-constipation", "blood-transfusion"],
+ "calculators": ["alvarado", "air_score", "pas", "bisap", "ranson", "glasgow_imrie", "gbs", "rockall", "aims65", "caprini", "rcri", "apfel", "bmi", "must", "nrs2002", "braden", "norton", "abi", "fontaine", "rutherford", "npi_breast", "burn_tbsa", "parkland", "charlson", "cfs", "wexner", "bristol", "possum", "p_possum", "clavien_dindo", "lrinec", "lund_browder"],
+ "advice": [
+  {
+   "id": "hernia-warning-signs",
+   "title": "Hernia: when to come to hospital at once",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if you get pain in or around the hernia, your tummy swells, you feel sick or vomit, you cannot open your bowels, you feel hot, cold or shivery, or you become confused. Until the hernia is repaired, keep to a healthy weight, stay active, stop smoking, and see a doctor for a cough that does not settle."
+  },
+  {
+   "id": "wound-care",
+   "title": "Caring for your wound",
+   "target": "follow_up_advice",
+   "text": "Keep the wound clean and dry and follow the dressing advice you were given. Come back if the wound becomes more painful, red, hot or swollen, leaks pus or fluid, opens up or smells bad, or if you get a fever or feel unwell."
+  },
+  {
+   "id": "breast-after-tests",
+   "title": "After your breast tests",
+   "target": "follow_up_advice",
+   "text": "If your breast tests are normal but you are still worried, or you notice a new change in the breast, nipple or armpit, see your doctor again."
+  }
+ ],
+ "sources": [
+  { "org": "NICE", "title": "NG12 Suspected cancer: recognition and referral", "year": 2015, "url": "https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer" },
+  { "org": "Association of Breast Surgery and partners", "title": "Best practice diagnostic guidelines for patients presenting with breast symptoms", "year": 2010, "url": "https://associationofbreastsurgery.org.uk/media/cvtju1zs/best-practice-diagnostic-guidelines-for-patients-presenting-with-breast-symptoms.pdf" },
+  { "org": "HerniaSurge Group", "title": "Update of the international HerniaSurge guidelines for groin hernia management (BJS Open)", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10588975/" },
+  { "org": "NICE", "title": "NG125 Surgical site infections: prevention and treatment", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng125" },
+  { "org": "NHS", "title": "Hernia", "year": 2026, "url": "https://www.nhs.uk/conditions/hernia/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

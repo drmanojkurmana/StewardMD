@@ -201,7 +201,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 
 /* Fluid balance. In and out are always both shown, at the same weight: the net alone hides whether
    "+400" is a patient who drank 400 and passed nothing or one who took three litres and passed 2.6. */
-#smdWard .w-bal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+#smdWard .w-bal { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 12px; }
 #smdWard .w-bal-c { border: 1px solid var(--outline-variant); border-radius: 12px; padding: 10px 12px; background: var(--sc-low); }
 #smdWard .w-bal-c span { display: block; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
 #smdWard .w-bal-c b { display: block; margin-top: 3px; font: 700 18px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
@@ -597,9 +597,9 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-tbl tr.w-diff td { background: var(--warn-container, #fff4e0); color: var(--on-warn-container); }
 
 /* Split-pane inpatient layout and voice dictation button (BUG-MU08G0GA-VB5E, BUG-MU073XKT-7KZW, BUG-MU08NPGV-0MZX) */
-#smdWard .w-split-layout { display: grid; grid-template-columns: 1fr; gap: 16px; }
+#smdWard .w-split-layout { display: grid; grid-template-columns: minmax(0,1fr); gap: 16px; }
 @media (min-width: 960px) {
-  #smdWard .w-split-layout { grid-template-columns: 340px 1fr; align-items: start; }
+  #smdWard .w-split-layout { grid-template-columns: 340px minmax(0,1fr); align-items: start; }
 }
 /* BUG-MU073XKT-7KZW: in one column the patient list comes first, above the tools. */
 @media (max-width: 959.98px) {
@@ -666,7 +666,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 @media (min-width: 768px) and (max-width: 1180px) and (orientation: landscape) {
   #smdWard .w-mar-body { display: grid; grid-template-columns: minmax(240px, 320px) minmax(0, 1fr); gap: 16px; align-items: start; }
   #smdWard .w-mar-ctl { position: sticky; top: 84px; }
-  #smdWard .w-mar-ctl .w-scan { grid-template-columns: 1fr; }
+  #smdWard .w-mar-ctl .w-scan { grid-template-columns: minmax(0,1fr); }
   #smdWard .w-mar-ctl .w-filter { flex-wrap: wrap; }
   #smdWard .w-mar-ctl .w-filter input { flex: 1 1 100%; }
   #smdWard .w-nw .w-mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }

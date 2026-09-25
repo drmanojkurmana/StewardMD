@@ -35,3 +35,11 @@ The browser harness verifies the reader at 320, 375, 390, 393 and 430 CSS-pixel 
 ## Disease reader branding (2026-09-22)
 
 The disease-name hero now carries a compact StewardMD Knowledge Base banner and a low-contrast StewardMD logo watermark. Both stay behind the existing disease hierarchy, adapt to dark appearance, and remain non-interactive and decorative for assistive technology. The reader's clinical content and source claims are unchanged.
+
+
+## Protocols tab (2026-09-25)
+
+A fifth tab, Protocols, joins Syndromes / Antibiogram / AWaRe / Guidelines: bedside clinical protocols
+across every specialty, on the same tool-page hierarchy. It lives in its own module, see
+[[Clinical Protocols]] (`kb-protocols.js`, flag `smd_kb_protocols`). The four original tabs are
+unchanged; app.js still renders them and `kb-protocols.js` appends the fifth button.

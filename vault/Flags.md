@@ -86,6 +86,32 @@ leaving it present:
 - `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
   a patient record" surface rather than a plausible-looking drug round.
 
+## Medical Core — two flags, both OFF, added 2026-09-19
+
+Registry: `medcore-flags.js` (repo root), read as query param → localStorage → default. Not in the
+2026-08-26 generated count above, which predates them. Plan: [[Medical Core]].
+
+**Nothing reads either flag yet.** They were created as step 1 of the Medical Core plan (the
+pre-integration step, tag `medcore-pre-integration`), deliberately BEFORE the code they gate, so that
+no later commit adds a switch and a clinical path in the same change. There is no `medcore/`
+runtime, no boot file, no event subscription and no panel, and `medcore-flags.js` is not loaded by
+`index.html`. Turning either flag on today does nothing at all. Pinned by
+`test/medcore-flags.test.mjs`, which fails the moment anything in the app reads them; the commit that
+wires the first consumer is the one that updates that test, naming it.
+
+| Flag | State | Why OFF today | What turning it on will eventually permit |
+|---|---|---|---|
+| `smd_medcore` | OFF | Master flag. There is no Medical Core code to reach: no state builder, no features, no model artifact, no validated outcome. Off must be a COMPLETE no-op — not loading the medcore files removes the feature entirely, with no edit to revert. | The deterministic feature layer first (Phase 1: patient state snapshot, "what changed", "missing information", unit and freshness checks), then, only after the Definition of Done in [[Medical Core]] is met, the single calibrated risk line as evidence for an EXISTING recognition prompt. Never its own alert. |
+| `smd_medcore_shadow` | OFF | The observer is BUILT (`medcore/medcore-shadow.js`, 2026-09-19) but has nothing to run: every artifact in the repo is synthetic and `medcore-models.js` refuses them all, so a shadow run records ABSTAIN / MODEL_UNAVAILABLE on every decision. It also requires `smd_medcore`, which is off; consumers ask `SMD_MEDCORE_FLAGS.shadowActive()` rather than reading this flag alone. | Running Medical Core decisions alongside the deterministic path for comparison only. Shadow means the output reaches NOBODY: no panel, no prompt, no notification, no clinician-visible log, no event back onto the bus, as `wardsynq-mlops.js` requires of a model in shadow. The observer attaches to a bus it is handed and modifies no host file, so not loading it removes the change completely. Its ring buffer keeps statuses, reasons and a probability DECILE - never a clinical value and never an identifier. |
+
+Neither flag may move to ON in a release build until `scripts/wardsynq-assurance.mjs` reports
+HAZ-ML-01 to HAZ-ML-04 verified and a named clinician has approved `outcomes.json`. That is a
+clinical sign-off, not an engineering one, and no flag in this file can substitute for it.
+
+On the NATIVE app there is no address bar, so the query param is unreachable — set the flag with
+`SMD_MEDCORE_FLAGS.set('smd_medcore', true)` in the WebView console, then reload. A reinstall clears
+`localStorage`, so a flag does NOT survive one.
+
 ## Everything, by module
 
 ### CliniX  <sub>5 ON · 2 OFF</sub>
@@ -150,11 +176,26 @@ leaving it present:
 | `smd_fundx_spatial_ar` | OFF | **INCOMPLETE.** True 3D AR corridor, iOS + ARKit only. |
 | `smd_fundx_telemetry` | OFF | **PRIVACY DEFAULT.** Acquisition telemetry. No PHI, but off unless wanted. |
 
-### Government Health Schemes  <sub>0 ON · 1 OFF</sub>
+### Government Health Schemes  <sub>1 ON · 0 OFF</sub>
 
 | Flag | Def | Why |
 |---|---|---|
-| `smd_govt_schemes` | OFF | **OWNER DECISION.** Government Health Schemes module master flag. DEFAULT OFF on purpose: scheme rates/codes are unverified government reference data until an admin review pass exists (vault/decisions 2026-09-02). Turn on per device with `?gs=1`. |
+| `smd_govt_schemes` | **ON** | Government Health Schemes (Scheme Search) master flag. DEFAULT ON since 2026-09-04 (owner approved going live, per `govschemes-flags.js`; this row said OFF until 2026-09-25). Force off per device with `?gs=0`. |
+
+### Knowledge Library Protocols  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-25)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_kb_protocols` | **ON** | The Protocols tab in the Knowledge Library + the Protocols category in Universal Search. Additive: off removes the tab, nothing else changes. Content is `ai_drafted` pending clinical review and every screen says so. Force off per device with `?kbproto=0`. See [[Clinical Protocols]]. |
+
+### Specialty Kits  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-25)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_specialty_kits` | **ON** | The OPD EMR Specialty tab, the Home "Specialty Kits" tile and its sheet. Additive and write-safe: a kit only appends text to the assessment the doctor then saves, and is disabled until the assessment has loaded. Content `ai_drafted` pending clinical review, shown on every kit. Force off per device with `?kits=0`. See [[Specialty Kits]]. |
+| `smd_clinical_docs` | **ON** | The Home "Documents" tile and the kit Documents button ([[Clinical Documents]]). Additive; nothing is stored. Force off with `?docs=0`. |
+| `smd_review_desk` | **ON** | The Review Desk ([[Review Desk]]). Its Home tile is defOn false (reviewers add it). Local only. Force off with `?review=0`. |
+| `smd_kits_share` | **ON** | [[Colleagues]]: referrals, handovers, case rooms, hospital kit versions, kit history, review sync, and the Home "Colleagues" tile. Server route also defaults on (env `KITS_SHARE_ON=0` is its kill switch). Off per device with `smd_kits_share = "0"` or `?share=0`. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 

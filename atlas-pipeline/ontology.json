@@ -148,6 +148,12 @@
         "ct-abdomen-axial",
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal",
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -194,6 +200,12 @@
         "ct-abdomen-axial",
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal",
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -213,6 +225,73 @@
         "right": null,
         "note": "TotalSegmentator 'autochthon' = erector spinae (iliocostalis, longissimus, spinalis) + semispinalis. BP3D has no single 'erector spinae' concept."
       }
+    },
+    "BRACHIOCEPHALIC_TRUNK": {
+      "canonical_id": "BRACHIOCEPHALIC_TRUNK",
+      "display_name": "Brachiocephalic trunk",
+      "aliases": [
+        "brachiocephalic-trunk",
+        "brachiocephalic_trunk"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "CHEST",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal"
+      ],
+      "definition": "The brachiocephalic trunk is the first and largest branch of the aortic arch, ascending to the right of the trachea to divide into the right common carotid and right subclavian arteries."
+    },
+    "BRACHIOCEPHALIC_VEIN": {
+      "canonical_id": "BRACHIOCEPHALIC_VEIN",
+      "display_name": "Brachiocephalic vein",
+      "aliases": [
+        "brachiocephalic-vein",
+        "brachiocephalic_vein_left",
+        "brachiocephalic_vein_right"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "CHEST",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal"
+      ],
+      "definition": "The brachiocephalic veins form behind the sternal ends of the clavicles from the internal jugular and subclavian veins and unite to form the superior vena cava."
     },
     "BRAIN": {
       "canonical_id": "BRAIN",
@@ -563,9 +642,11 @@
       "laterality": "NONE_ASSERTED",
       "region": "NECK",
       "source_model": [
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -574,6 +655,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
@@ -603,9 +690,11 @@
       "laterality": "NONE_ASSERTED",
       "region": "UPPER_LIMB",
       "source_model": [
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -614,6 +703,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-wholebody-axial"
       ],
       "definition": "The clavicle forms the anterior portion of the shoulder girdle.",
@@ -676,6 +771,40 @@
         "right": null,
         "note": "Cecum, ascending, transverse, descending colon and rectum. BP3D 4.0 isa set has no sigmoid colon mesh."
       }
+    },
+    "COMMON_CAROTID_ARTERY": {
+      "canonical_id": "COMMON_CAROTID_ARTERY",
+      "display_name": "Common carotid artery",
+      "aliases": [
+        "common-carotid-artery",
+        "common_carotid_artery_left",
+        "common_carotid_artery_right"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "NECK",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal"
+      ],
+      "definition": "The common carotid arteries ascend in the neck within the carotid sheath beside the trachea and larynx, the right arising from the brachiocephalic trunk and the left from the aortic arch."
     },
     "CORONA_RADIATA": {
       "canonical_id": "CORONA_RADIATA",
@@ -808,6 +937,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1327,6 +1462,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1591,6 +1732,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1780,6 +1924,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1860,6 +2007,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1901,6 +2054,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2070,6 +2229,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2086,6 +2251,31 @@
         "right": null,
         "note": "No lobe surface in BP3D 4.0 isa set; the lobe's segmental bronchial tree is shown as related."
       }
+    },
+    "NECK": {
+      "canonical_id": "NECK",
+      "display_name": "Neck",
+      "aliases": [
+        "neck"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "NECK",
+      "source_model": [],
+      "source_dataset": [],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "NOT_AVAILABLE",
+      "validation": "NO_GEOMETRY",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal"
+      ],
+      "definition": null
     },
     "NUCLEUS_ACCUMBENS": {
       "canonical_id": "NUCLEUS_ACCUMBENS",
@@ -2349,7 +2539,7 @@
     },
     "PORTAL_VEIN": {
       "canonical_id": "PORTAL_VEIN",
-      "display_name": "Portal vein",
+      "display_name": "Portal and splenic veins",
       "aliases": [
         "portal-vein",
         "portal_vein_and_splenic_vein"
@@ -2723,6 +2913,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2762,6 +2958,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2791,9 +2990,11 @@
       "region": "CHEST",
       "source_model": [
         "classical",
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -2802,13 +3003,19 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-thorax-axial",
         "ct-thorax-coronal",
         "ct-thorax-sagittal",
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The sternum is a flat narrow bone forming the middle of the anterior wall of the thorax, consisting of the manubrium, the body and the xiphoid process.",
+      "definition": "The sternum is a flat narrow bone forming the middle of the anterior thoracic wall.",
       "bp3d": {
         "kind": "concept",
         "fma": "FMA7485",
@@ -2843,6 +3050,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2889,6 +3099,73 @@
         "right": null,
         "note": "BP3D models parenchyma and vessels, not CSF spaces."
       }
+    },
+    "SUBCLAVIAN_ARTERY": {
+      "canonical_id": "SUBCLAVIAN_ARTERY",
+      "display_name": "Subclavian artery",
+      "aliases": [
+        "subclavian-artery",
+        "subclavian_artery_left",
+        "subclavian_artery_right"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "CHEST",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal"
+      ],
+      "definition": "The subclavian arteries arch over the apex of each lung to supply the upper limb, the right arising from the brachiocephalic trunk and the left from the aortic arch."
+    },
+    "SUPERIOR_VENA_CAVA": {
+      "canonical_id": "SUPERIOR_VENA_CAVA",
+      "display_name": "Superior vena cava",
+      "aliases": [
+        "superior-vena-cava",
+        "superior_vena_cava"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "CHEST",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal"
+      ],
+      "definition": "The superior vena cava returns blood from the head, neck and upper limbs to the right atrium, formed by the union of the two brachiocephalic veins."
     },
     "TARSAL": {
       "canonical_id": "TARSAL",
@@ -3143,9 +3420,11 @@
       "region": "SPINE",
       "source_model": [
         "classical",
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -3154,13 +3433,19 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-thorax-axial",
         "ct-thorax-coronal",
         "ct-thorax-sagittal",
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
-      "definition": "The thoracic vertebrae are twelve in number and are distinguished by the costal facets on the sides of their bodies for articulation with the heads of the ribs.",
+      "definition": "The thoracic vertebrae are distinguished by costal facets on the sides of their bodies.",
       "bp3d": {
         "kind": "concept",
         "fma": "FMA9139",
@@ -3204,6 +3489,39 @@
         "right": null,
         "note": null
       }
+    },
+    "THYROID_GLAND": {
+      "canonical_id": "THYROID_GLAND",
+      "display_name": "Thyroid gland",
+      "aliases": [
+        "thyroid-gland",
+        "thyroid_gland"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "NECK",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal"
+      ],
+      "definition": "The thyroid gland is a vascular endocrine gland of two lateral lobes joined by an isthmus, clasping the front and sides of the upper trachea."
     },
     "TIBIA": {
       "canonical_id": "TIBIA",
@@ -3281,6 +3599,38 @@
         "note": "Container structure of the living-patient torso modules."
       }
     },
+    "TRACHEA": {
+      "canonical_id": "TRACHEA",
+      "display_name": "Trachea",
+      "aliases": [
+        "trachea"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "NECK",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal"
+      ],
+      "definition": "The trachea is a tube of incomplete cartilaginous rings and membrane that descends from the lower border of the larynx to divide into the two main bronchi in the thorax."
+    },
     "UPPER_LOBE_LEFT": {
       "canonical_id": "UPPER_LOBE_LEFT",
       "display_name": "Upper lobe of left lung",
@@ -3305,6 +3655,12 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -3321,6 +3677,39 @@
         "right": null,
         "note": "No lobe surface in BP3D 4.0 isa set; the lobe's segmental bronchial tree is shown as related."
       }
+    },
+    "UPPER_LOBE_RIGHT": {
+      "canonical_id": "UPPER_LOBE_RIGHT",
+      "display_name": "Upper lobe of right lung",
+      "aliases": [
+        "lung_upper_lobe_right",
+        "upper-lobe-right"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "CHEST",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-neck-axial",
+        "ct-live-neck-coronal",
+        "ct-live-neck-sagittal",
+        "ct-live-thorax-neck-axial",
+        "ct-live-thorax-neck-coronal",
+        "ct-live-thorax-neck-sagittal"
+      ],
+      "definition": "The upper lobe of the right lung lies above the horizontal fissure and in front of the upper part of the oblique fissure."
     },
     "URINARY_BLADDER": {
       "canonical_id": "URINARY_BLADDER",

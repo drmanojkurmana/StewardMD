@@ -1,0 +1,218 @@
+{
+  "schema": "medcore-change-bands/1",
+  "version": "1.0.0",
+  "approvalStatus": "unapproved",
+  "note": "What size of change in a parameter is worth a clinician's attention, in the parameter's own canonical unit. Bands are ABSOLUTE, never percentage: a 20 percent fall in sodium and a 20 percent fall in heart rate are not the same event, and a percentage rule makes the two indistinguishable. 'concern' names the direction worth telling somebody about, and is used only for ranking; a change in the other direction is still reported. 'rank' breaks ties between changes of the same band so the order is stable and reviewable rather than incidental. UNAPPROVED seed content: these are engineering defaults for a display, they gate nothing, and the clinical lead owns the values.",
+  "minSeparationMin": 5,
+  "maxReported": 5,
+  "params": {
+    "map": {
+      "small": 5,
+      "moderate": 10,
+      "large": 15,
+      "concern": "down",
+      "windowMin": 240,
+      "rank": 1
+    },
+    "sbp": {
+      "small": 10,
+      "moderate": 20,
+      "large": 30,
+      "concern": "down",
+      "windowMin": 240,
+      "rank": 2
+    },
+    "spo2": {
+      "small": 2,
+      "moderate": 4,
+      "large": 6,
+      "concern": "down",
+      "windowMin": 240,
+      "rank": 3
+    },
+    "rr": {
+      "small": 4,
+      "moderate": 8,
+      "large": 12,
+      "concern": "both",
+      "windowMin": 240,
+      "rank": 4
+    },
+    "hr": {
+      "small": 10,
+      "moderate": 20,
+      "large": 30,
+      "concern": "both",
+      "windowMin": 240,
+      "rank": 5
+    },
+    "gcs": {
+      "small": 1,
+      "moderate": 2,
+      "large": 3,
+      "concern": "down",
+      "windowMin": 240,
+      "rank": 6
+    },
+    "lactate": {
+      "small": 0.5,
+      "moderate": 1,
+      "large": 2,
+      "concern": "up",
+      "windowMin": 360,
+      "rank": 7
+    },
+    "uop": {
+      "small": 20,
+      "moderate": 40,
+      "large": 60,
+      "concern": "down",
+      "windowMin": 240,
+      "rank": 8
+    },
+    "temp": {
+      "small": 0.5,
+      "moderate": 1,
+      "large": 1.5,
+      "concern": "both",
+      "windowMin": 240,
+      "rank": 9
+    },
+    "fio2": {
+      "small": 0.1,
+      "moderate": 0.2,
+      "large": 0.3,
+      "concern": "up",
+      "windowMin": 240,
+      "rank": 10
+    },
+    "creat": {
+      "small": 0.3,
+      "moderate": 0.5,
+      "large": 1.0,
+      "concern": "up",
+      "windowMin": 1440,
+      "rank": 11
+    },
+    "k": {
+      "small": 0.3,
+      "moderate": 0.5,
+      "large": 1.0,
+      "concern": "both",
+      "windowMin": 1440,
+      "rank": 12
+    },
+    "ph": {
+      "small": 0.03,
+      "moderate": 0.07,
+      "large": 0.15,
+      "concern": "both",
+      "windowMin": 360,
+      "rank": 13
+    },
+    "paco2": {
+      "small": 5,
+      "moderate": 10,
+      "large": 20,
+      "concern": "both",
+      "windowMin": 360,
+      "rank": 14
+    },
+    "pao2": {
+      "small": 10,
+      "moderate": 20,
+      "large": 40,
+      "concern": "down",
+      "windowMin": 360,
+      "rank": 15
+    },
+    "hco3": {
+      "small": 2,
+      "moderate": 4,
+      "large": 6,
+      "concern": "down",
+      "windowMin": 360,
+      "rank": 16
+    },
+    "plt": {
+      "small": 30,
+      "moderate": 50,
+      "large": 100,
+      "concern": "down",
+      "windowMin": 1440,
+      "rank": 17
+    },
+    "hb": {
+      "small": 0.5,
+      "moderate": 1,
+      "large": 2,
+      "concern": "down",
+      "windowMin": 1440,
+      "rank": 18
+    },
+    "wbc": {
+      "small": 3,
+      "moderate": 5,
+      "large": 10,
+      "concern": "both",
+      "windowMin": 1440,
+      "rank": 19
+    },
+    "na": {
+      "small": 3,
+      "moderate": 5,
+      "large": 10,
+      "concern": "both",
+      "windowMin": 1440,
+      "rank": 20
+    },
+    "urea": {
+      "small": 10,
+      "moderate": 20,
+      "large": 40,
+      "concern": "up",
+      "windowMin": 1440,
+      "rank": 21
+    },
+    "glucose": {
+      "small": 40,
+      "moderate": 80,
+      "large": 150,
+      "concern": "both",
+      "windowMin": 480,
+      "rank": 22
+    },
+    "bili": {
+      "small": 0.5,
+      "moderate": 1,
+      "large": 3,
+      "concern": "up",
+      "windowMin": 1440,
+      "rank": 23
+    },
+    "inr": {
+      "small": 0.2,
+      "moderate": 0.5,
+      "large": 1.0,
+      "concern": "up",
+      "windowMin": 1440,
+      "rank": 24
+    },
+    "albumin": {
+      "small": 0.3,
+      "moderate": 0.5,
+      "large": 1.0,
+      "concern": "down",
+      "windowMin": 1440,
+      "rank": 25
+    },
+    "crp": {
+      "small": 20,
+      "moderate": 50,
+      "large": 100,
+      "concern": "up",
+      "windowMin": 2880,
+      "rank": 26
+    }
+  }
+}

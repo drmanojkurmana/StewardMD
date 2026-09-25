@@ -64,3 +64,78 @@ only Close was the bottom button, the tappable backdrop was covered, and the car
 Android back). Rule for any new `.q-sheet` card: cap it and give it a header close; a bottom-only
 Close is unreachable the moment the content grows. Tests: `test/opd-profile-sheet.test.mjs`,
 `test/run-opd-profile-ui.mjs` (real queue.css at 390x844).
+
+## Web OPD Flow Board (2026-09-23)
+`opd.html` now enhances the signed-in console with warm neutral surfaces, workspace navigation,
+patient search (name/token/MRN), urgent/over-one-hour filters, and a Flow Board / Rooms switch.
+The stages mirror existing states: To route, Room queue, Consulting, At diagnostics. Checkout
+stays the existing action on a consulting ticket; no invented discharge state is persisted.
+
+The presentation moves the existing permission-gated DOM nodes with their existing handlers and
+payloads, then restores them to their original room positions for Rooms view. Registration,
+routing, vitals/notes, call/start, reorder, priority, diagnostics return, checkout, file labels,
+NFC/scanner, no-shows, billing/pharmacy, clinic management and audit handlers are unchanged.
+The same enhancement supports legacy doctor queues. Search is memory-only (no PHI storage or URL)
+and resets when changing clinics. The recovery switch `localStorage.smd_opd_flow_ui = "0"` plus
+reload restores the original board. All UI CSS is inline; the service-worker cache is bumped.
+
+Regression gates: all `test/opd-*.test.mjs`; `test/run-opd-console-flow-ui.mjs` verifies real DOM
+node/action parity for admin, doctor, nurse, cashier and pharmacy, view switching, diagnostics,
+filter/focus retention, 320-1440px, dark/reduced-motion and fallback. The existing
+`test/run-opd-clinic-billing-ui.mjs` exercises the real mocked router through clinic registration,
+vitals, billing and dispensing. `.github/workflows/opd-console-ui.yml` runs both browser suites.
+
+## Operations dashboard (2026-09-25, branch opd-premium-dashboard, draft PR)
+`opd-dashboard.js` (window.SMD_OPD_DASH) + `opd-dashboard.css`, over the Flow Board layout above. Flag
+`localStorage.smd_opd_dash` (default on; "0", or the sidebar's "Classic layout", returns the Flow Board;
+"New dashboard" in that sidebar comes back). `smd_opd_flow_ui = "0"` still restores the original board under both.
+- Cards (renamed after the anti-slop pass, see docs/opd/ANTISLOP_AUDIT_2026-09-25.md): Today band (pulse + day-close money + /opd-insights deltas vs the same time yesterday), In the OPD now
+  (st.opd rooms + pool or the legacy board; each row's action is the console's OWN button clicked via
+  `dashHost.actionsFor`, so handlers, payloads and permissions are the console's), Peak hours, Month volume,
+  Visit types, Needs action (reconcile, offline desk, results back, recallable no-shows, follow-ups via
+  WARD.open act "scheduling", unpaid orders, refunds). Sidebar groups move the console's buttons in by id.
+  Ctrl/Cmd-K palette runs the same buttons and finds a patient on the board.
+- Server: GET /opd-insights (queue.view) in the queue router, pure figures in `functions/_opd_insights.js`.
+  Past days read through `Q.listSessions` (read-only; never getOrCreate for a past day) and are cached per isolate
+  for 10 min as slimmed rows (no PHI). Counts only.
+- The script loads WITHOUT defer: the ?mock=1 preview renders during parse.
+- GOTCHA: ward.css styles every `<header>`; the cards' own `<header class="dz-ch">` is reset in opd-dashboard.css.
+- Tests: test/opd-insights.test.mjs (router harness), test/opd-dashboard-model.test.mjs, browser
+  test/run-opd-dashboard-ui.mjs (28 checks, screenshots). test/run-opd-console-flow-ui.mjs pins smd_opd_dash=0.
+- Colour rule: green = with the doctor, called, this hour, the active view; blue = back with results; red and amber = a
+  patient or record needs someone; everything else neutral. Cards flat (no shadow). Radius: cards 20, controls 10, tags 6.
+  Card names are our own: the brief forbids copying the reference's text, and a browser test checks the titles.
+
+## Telehealth: video visits (2026-09-25, draft PR, branch worktree-agent-ab0e68a15cab7320e)
+**COMING SOON (owner, 2026-09-25).** Ships switched off for every hospital: `telehealthSettings(org, env)` reads off
+with `comingSoon: true` unless the deployment sets `TELEHEALTH_READY=1`, so no screen offers video, every tele route
+refuses (`video_off`), `POST /org/telehealth-settings` refuses (`coming_soon`), and Admin > Hospital shows a
+"Coming soon" card with no form. To release: pick the video server, set `TELEHEALTH_READY=1` on Pages, then save
+the server in Admin.
+Off by default. A WardSynQ hospital turns it on by saving `org.wardsynq.telehealth.baseUrl` (https,
+Jitsi-compatible) through `GET/POST /api/queue/org/telehealth-settings` (staff.admin, reason, audited,
+read back; `/org/update` refuses `wardsynq.telehealth`). `functions/_telehealth.js` holds the pure rules:
+`telehealthSettings(org) -> {on, baseUrl, publicServer}` (publicServer for meet.jit.si / 8x8.vc so the
+screen warns), room `wsq-` + 32 hex minted on the ticket (`teleRoom`, never in the staff view), consent
+`{givenBy, agreed:true}` required. Routes: `/tele/enable` (consent + `tele_consent` audit, one commit),
+`/tele/start` (to in_consultation, `tele_start` audit, returns room URL), `/tele/send-link` (the ticket's
+own signed token at `/tele?t=`, no PHI), patient `GET /tele/wait` + `POST /tele/room` (room only while
+in_consultation; the link dies with the visit via tokenVer). Appointments carry `teleconsult` +
+`teleConsent`; arrival passes the consent to the queue ticket; the record gets a `teleconsult` consent
+(care purpose) and `Encounter.virtual`. Day close counts video visits. Tests: `test/telehealth*.test.mjs`,
+`test/run-tele-wait-ui.mjs`. Open owner decisions: which video server; native clinics have no settings screen.
+
+## Protocol tab = clinical protocols + oncology regimens (2026-09-25)
+The EMR Protocol tab is no longer oncology-only: see [[Clinical Protocols]]. Branch chips, a cancer-type
+picker, one search, and an in-tab read-only reader for clinical protocols. Assign exists only on
+oncology rows. The tab needs `smd_kb_protocols` OR `smd_onco_protocols`; with both off it says so.
+Regimens now also load in read-only mode (rows say "view only"); `maybeLoadOncoProtocols(anyMode)`.
+
+## Specialty tab (2026-09-25)
+A "Specialty" tab after Assessment hosts the [[Specialty Kits]] (O&G, Paediatrics, Ortho, Eye, ENT,
+Derm, Psych, Dental). The kit appends composed text to Initial Assessment fields through
+`OPDEMR.kitHost.insert` (the only write) and is disabled until `loadAssessment()` has finished. Flag
+`smd_specialty_kits`. `paint()` now also keeps the tab strip's horizontal scroll across a repaint and
+brings the active tab into view (nine tabs overflow a phone). Gotcha found on the way: `fieldLabel` is
+declared twice in `opd-emr.js` and the later, DOM-reading one wins everywhere; see the kit note.
+

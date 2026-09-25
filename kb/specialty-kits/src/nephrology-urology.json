@@ -1,0 +1,193 @@
+{
+ "id": "nephrology-urology",
+ "label": "Nephrology and Urology",
+ "short": "Renal/Uro",
+ "icon": "nephrology",
+ "group": "medical",
+ "scribe": "nephrology-urology",
+ "subject": "nephrology",
+ "workspace": "urology",
+ "tools": ["ckd-grid"],
+ "sections": [
+  {
+   "id": "ckd-review",
+   "title": "CKD review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "ckd_cause", "label": "Cause of CKD", "type": "select", "opts": ["Diabetic kidney disease", "Hypertensive", "Glomerulonephritis", "Polycystic kidney disease", "Obstructive uropathy or reflux", "Chronic interstitial nephritis (analgesic, herbal)", "Unknown cause", "Other"] },
+    { "id": "ckd_known_since", "label": "Known since and baseline creatinine", "type": "text", "hint": "e.g. 2021, creatinine 1.8 mg/dL" },
+    { "id": "ckd_bp_control", "label": "Blood pressure control", "type": "select", "opts": ["At target", "Above target", "Low or postural symptoms", "Home readings not available"] },
+    { "id": "ckd_oedema", "label": "Oedema", "type": "select", "opts": ["None", "Ankle, pitting", "Up to knees", "Periorbital", "Generalised (anasarca)"] },
+    { "id": "uraemic_anorexia", "label": "Anorexia, nausea or vomiting", "type": "check" },
+    { "id": "uraemic_pruritus", "label": "Itching", "type": "check" },
+    { "id": "uraemic_fatigue", "label": "Fatigue or reduced exercise tolerance", "type": "check" },
+    { "id": "uraemic_breathless", "label": "Breathlessness or orthopnoea", "type": "check" },
+    { "id": "uraemic_cramps", "label": "Muscle cramps or restless legs", "type": "check" },
+    { "id": "ckd_low_urine", "label": "Reduced urine output", "type": "check" },
+    { "id": "ckd_meds_reviewed", "label": "Medicines reviewed for nephrotoxicity and eGFR dosing (NSAIDs, over-the-counter and herbal remedies)", "type": "check" },
+    { "id": "ckd_access", "label": "Dialysis access, if any", "type": "select", "opts": ["None", "AV fistula maturing", "AV fistula in use", "AV graft", "Tunnelled catheter", "Non-tunnelled catheter", "PD catheter"] }
+   ]
+  },
+  {
+   "id": "dialysis-review",
+   "title": "Dialysis review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "dialysis_modality", "label": "Modality", "type": "select", "opts": ["Haemodialysis", "Haemodiafiltration", "CAPD", "Automated PD (APD)"] },
+    { "id": "hd_sessions", "label": "Haemodialysis sessions per week", "type": "select", "opts": ["1", "2", "3", "More than 3"] },
+    { "id": "hd_hours", "label": "Session length", "type": "number", "unit": "hours" },
+    { "id": "access_site", "label": "Access site", "type": "select", "opts": ["Left radiocephalic AV fistula", "Right radiocephalic AV fistula", "Left brachiocephalic AV fistula", "Right brachiocephalic AV fistula", "Brachiobasilic AV fistula", "AV graft", "Tunnelled jugular catheter", "Non-tunnelled catheter", "PD catheter"] },
+    { "id": "access_thrill", "label": "Thrill and bruit", "type": "select", "opts": ["Continuous thrill and bruit", "Weak thrill", "Pulsatile, no continuous thrill", "Absent thrill", "Not applicable (catheter)"] },
+    { "id": "access_problem", "label": "Access problems", "type": "select", "opts": ["None", "Exit site or tunnel infection", "Aneurysm or swelling", "Prolonged bleeding after needling", "Poor flow on dialysis", "Arm or face swelling", "Hand pain or coldness"] },
+    { "id": "dry_weight", "label": "Dry (target) weight", "type": "number", "unit": "kg" },
+    { "id": "idwg", "label": "Interdialytic weight gain", "type": "number", "unit": "kg" },
+    { "id": "dialysis_adequacy", "label": "Latest Kt/V or URR", "type": "text" },
+    { "id": "intradialytic_problems", "label": "Problems on dialysis", "type": "select", "opts": ["None", "Hypotension", "Cramps", "Missed or shortened sessions", "Chest pain or palpitations"] },
+    { "id": "pd_effluent", "label": "PD fluid", "type": "select", "opts": ["Clear", "Cloudy", "Not applicable"] }
+   ]
+  },
+  {
+   "id": "luts",
+   "title": "Lower urinary tract symptoms (IPSS, past month)",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "ipss_emptying", "label": "Incomplete emptying", "type": "select", "opts": ["0 Not at all", "1 Less than 1 time in 5", "2 Less than half the time", "3 About half the time", "4 More than half the time", "5 Almost always"], "hint": "Sensation of not emptying the bladder completely after passing urine" },
+    { "id": "ipss_frequency", "label": "Frequency", "type": "select", "opts": ["0 Not at all", "1 Less than 1 time in 5", "2 Less than half the time", "3 About half the time", "4 More than half the time", "5 Almost always"], "hint": "Had to pass urine again less than 2 hours after finishing" },
+    { "id": "ipss_intermittency", "label": "Intermittency", "type": "select", "opts": ["0 Not at all", "1 Less than 1 time in 5", "2 Less than half the time", "3 About half the time", "4 More than half the time", "5 Almost always"], "hint": "Stopped and started again several times while passing urine" },
+    { "id": "ipss_urgency", "label": "Urgency", "type": "select", "opts": ["0 Not at all", "1 Less than 1 time in 5", "2 Less than half the time", "3 About half the time", "4 More than half the time", "5 Almost always"], "hint": "Found it difficult to postpone passing urine" },
+    { "id": "ipss_weak_stream", "label": "Weak stream", "type": "select", "opts": ["0 Not at all", "1 Less than 1 time in 5", "2 Less than half the time", "3 About half the time", "4 More than half the time", "5 Almost always"] },
+    { "id": "ipss_straining", "label": "Straining", "type": "select", "opts": ["0 Not at all", "1 Less than 1 time in 5", "2 Less than half the time", "3 About half the time", "4 More than half the time", "5 Almost always"], "hint": "Had to push or strain to begin passing urine" },
+    { "id": "ipss_nocturia", "label": "Nocturia", "type": "select", "opts": ["0 None", "1 One time", "2 Two times", "3 Three times", "4 Four times", "5 Five or more times"], "hint": "Times usually up to pass urine from going to bed until getting up" },
+    { "id": "ipss_qol", "label": "Quality of life due to urinary symptoms", "type": "select", "opts": ["0 Delighted", "1 Pleased", "2 Mostly satisfied", "3 Mixed", "4 Mostly dissatisfied", "5 Unhappy", "6 Terrible"], "hint": "If you had to live with your urinary condition as it is now, how would you feel?" },
+    { "id": "prostate_dre", "label": "Prostate on rectal examination", "type": "select", "opts": ["Not examined", "Normal size, smooth", "Enlarged, smooth, benign-feeling", "Hard or nodular", "Tender or boggy"] },
+    { "id": "pvr", "label": "Post-void residual (ultrasound)", "type": "number", "unit": "mL" }
+   ]
+  },
+  {
+   "id": "stone-history",
+   "title": "Stone history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "stone_side", "label": "Side", "type": "select", "opts": ["Right", "Left", "Both sides", "Bladder"] },
+    { "id": "stone_site", "label": "Site", "type": "select", "opts": ["Kidney", "Upper ureter", "Mid ureter", "Lower ureter or VUJ", "Bladder", "Not yet imaged"] },
+    { "id": "stone_size", "label": "Largest stone size", "type": "number", "unit": "mm" },
+    { "id": "stone_hydronephrosis", "label": "Hydronephrosis", "type": "select", "opts": ["None", "Mild", "Moderate", "Severe", "Not imaged"] },
+    { "id": "stone_episodes", "label": "Previous stone episodes", "type": "number" },
+    { "id": "stone_passage", "label": "Current or previous stone cleared by", "type": "select", "opts": ["Passed spontaneously", "Not passed yet", "ESWL", "Ureteroscopy", "PCNL", "Open surgery", "Unknown"] },
+    { "id": "stone_analysis", "label": "Stone analysis result, if known", "type": "text", "hint": "e.g. calcium oxalate, uric acid, struvite" },
+    { "id": "stone_fluid", "label": "Usual daily fluid intake", "type": "number", "unit": "litres" },
+    { "id": "stone_family", "label": "Family history of stones", "type": "check" }
+   ]
+  },
+  {
+   "id": "catheter-review",
+   "title": "Catheter review",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "cath_type", "label": "Catheter type", "type": "select", "opts": ["Urethral Foley", "Suprapubic", "Three-way (irrigation)", "Intermittent self-catheterisation"] },
+    { "id": "cath_size", "label": "Size", "type": "number", "unit": "Fr" },
+    { "id": "cath_date", "label": "Date inserted or last changed", "type": "date" },
+    { "id": "cath_reason", "label": "Reason", "type": "select", "opts": ["Acute urinary retention", "Chronic retention", "After surgery", "Urine output monitoring", "Clot retention", "Neurogenic bladder", "Incontinence with skin breakdown", "Other"] },
+    { "id": "cath_residual", "label": "Volume drained at insertion", "type": "number", "unit": "mL" },
+    { "id": "cath_problem", "label": "Current problems", "type": "select", "opts": ["None", "Bypassing", "Blockage or encrustation", "Blood in bag", "Pain or urethral trauma", "Fever or cloudy, smelly urine"], "hint": "Do not treat bacteria in the urine of a catheterised patient without symptoms (EAU)" },
+    { "id": "twoc_plan", "label": "Trial without catheter (TWOC) plan", "type": "select", "opts": ["TWOC today", "TWOC after medical treatment", "Long-term catheter, change due", "Teach self-catheterisation", "Refer for prostate or bladder surgery"] },
+    { "id": "twoc_date", "label": "TWOC or next change date", "type": "date" },
+    { "id": "twoc_outcome", "label": "TWOC outcome", "type": "select", "opts": ["Not yet done", "Voided well, low residual", "Voided, high residual", "Failed, recatheterised"] }
+   ]
+  },
+  {
+   "id": "haematuria",
+   "title": "Haematuria",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "haem_type", "label": "Type", "type": "select", "opts": ["Visible (macroscopic)", "Non-visible, confirmed on microscopy", "Dipstick positive only"], "hint": "Confirm dipstick-positive haematuria on urine microscopy (AUA)" },
+    { "id": "haem_rbc", "label": "RBC on microscopy", "type": "number", "unit": "per HPF" },
+    { "id": "haem_timing", "label": "Timing in the stream", "type": "select", "opts": ["Initial", "Terminal", "Throughout", "Not known"] },
+    { "id": "haem_clots", "label": "Clots", "type": "select", "opts": ["No clots", "Clots passed", "Clot retention"] },
+    { "id": "haem_pain", "label": "Associated", "type": "select", "opts": ["Painless", "Loin pain", "Dysuria or frequency", "Recent upper respiratory infection"] },
+    { "id": "haem_smoker", "label": "Current or past smoker", "type": "check" },
+    { "id": "haem_occupational", "label": "Occupational exposure (dyes, rubber, leather, chemicals)", "type": "check" },
+    { "id": "haem_anticoagulant", "label": "On anticoagulant or antiplatelet", "type": "check" },
+    { "id": "haem_benign_cause", "label": "Recent UTI, catheter, trauma, menstruation or vigorous exercise", "type": "check", "hint": "repeat the urine test after the cause settles" },
+    { "id": "haem_glomerular", "label": "Proteinuria, raised creatinine, new hypertension or dysmorphic RBCs (possible glomerular cause)", "type": "check" }
+   ]
+  },
+  {
+   "id": "renal-urology-red-flags",
+   "title": "Renal and urological red flags",
+   "target": "sys_examination",
+   "alert": "Renal or urological emergency: send to emergency care now for potassium, creatinine and ECG. An infected obstructed kidney needs urgent decompression (stent or nephrostomy); catheterise acute or clot retention; anuria, hyperkalaemia, fluid overload or PD peritonitis need same-day nephrology review.",
+   "fields": [
+    { "id": "rf_anuria", "label": "Anuria or very little urine", "type": "check" },
+    { "id": "rf_retention", "label": "Acute urinary retention: unable to pass urine, painful palpable bladder", "type": "check" },
+    { "id": "rf_obstructed_infected", "label": "Fever or rigors with loin pain and a known or suspected obstructing stone", "type": "check" },
+    { "id": "rf_sepsis", "label": "Low blood pressure, confusion or fast breathing (possible sepsis)", "type": "check" },
+    { "id": "rf_hyperkalaemia", "label": "Hyperkalaemia symptoms: muscle weakness, palpitations or irregular pulse, or a high potassium result", "type": "check" },
+    { "id": "rf_fluid_overload", "label": "Breathless at rest, crackles or pulmonary oedema (fluid overload)", "type": "check" },
+    { "id": "rf_uraemic", "label": "Drowsiness, confusion, fits or pericardial rub (severe uraemia)", "type": "check" },
+    { "id": "rf_clot_retention", "label": "Heavy visible haematuria or clot retention", "type": "check" },
+    { "id": "rf_single_kidney", "label": "Obstruction of a single kidney or both kidneys", "type": "check" },
+    { "id": "rf_pd_peritonitis", "label": "Cloudy PD fluid or abdominal pain on PD (possible peritonitis)", "type": "check" },
+    { "id": "rf_access", "label": "Bleeding from dialysis access, or fistula thrill lost", "type": "check" },
+    { "id": "rf_torsion", "label": "Sudden severe testicular pain (possible torsion)", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Serum creatinine and eGFR", "query": "creatinine" },
+  { "label": "Blood urea", "query": "urea" },
+  { "label": "Serum electrolytes", "query": "electrolytes" },
+  { "label": "Urine albumin-creatinine ratio", "query": "urine ACR" },
+  { "label": "Urine routine and microscopy", "query": "urine routine" },
+  { "label": "Urine culture", "query": "urine culture" },
+  { "label": "CBC", "query": "CBC" },
+  { "label": "Serum calcium", "query": "calcium" },
+  { "label": "Parathyroid hormone", "query": "PTH" },
+  { "label": "Ultrasound KUB", "query": "USG KUB" },
+  { "label": "Non-contrast CT KUB", "query": "CT KUB" },
+  { "label": "CT urography", "query": "CT urography" },
+  { "label": "PSA", "query": "PSA" },
+  { "label": "Uroflowmetry", "query": "uroflowmetry" }
+ ],
+ "orderSets": [
+  { "id": "ckd-review-panel", "label": "CKD review panel", "tests": ["creatinine", "urea", "electrolytes", "bicarbonate", "urine ACR", "urine routine", "CBC", "iron studies", "calcium", "phosphorus", "PTH", "uric acid", "HbA1c", "lipid profile"] },
+  { "id": "stone-work-up", "label": "Stone work-up", "tests": ["CT KUB", "USG KUB", "urine routine", "urine culture", "creatinine", "electrolytes", "calcium", "uric acid", "CRP", "stone analysis"] },
+  { "id": "haematuria-work-up", "label": "Haematuria work-up", "tests": ["urine routine", "urine culture", "urine protein creatinine ratio", "creatinine", "CBC", "PT INR", "USG KUB", "CT urography", "urine cytology", "cystoscopy"] }
+ ],
+ "protocols": ["chronic-kidney-disease", "acute-kidney-injury", "hyperkalaemia", "hypokalaemia", "hyponatraemia", "hypernatraemia", "hypercalcaemia", "hypocalcaemia", "hypomagnesaemia", "rhabdomyolysis", "hypertension-management", "catheter-related-bloodstream-infection", "benign-prostatic-hyperplasia", "renal-colic-and-kidney-stones", "urinary-tract-infection", "urinary-incontinence-women", "erectile-dysfunction", "sexually-transmitted-infections", "sepsis-septic-shock", "urinary-tract-infection-children-india"],
+ "calculators": ["ckdepi", "egfr_cysc", "mdrd", "crcl", "measured_crcl", "schwartz", "uacr", "upcr", "kdigo_aki", "fena", "feurea", "urr", "ktv", "corr_ca", "ca_phos_product", "ttkg", "uag", "bicarb_deficit", "mehran", "stone_score", "psadt", "ipss"],
+ "advice": [
+  {
+   "id": "kidney-protection",
+   "title": "Looking after your kidneys",
+   "target": "diet_lifestyle_advice",
+   "text": "Keep active, aiming for at least 150 minutes of moderate activity a week if you are able. Do not smoke or chew tobacco. Keep salt below 5 g a day (about one level teaspoon in total), and cut down pickles, papads and packaged foods. Eat more vegetables and pulses. Do not take painkillers bought from a shop, or herbal or traditional remedies, without asking your doctor, as some can harm the kidneys."
+  },
+  {
+   "id": "stone-prevention",
+   "title": "Preventing kidney stones",
+   "target": "diet_lifestyle_advice",
+   "text": "Drink enough fluid, mostly water, spread through the day to pass about 2 to 2.5 litres of urine a day; drink more in hot weather or when you sweat a lot. Keep salt to 4 to 5 g a day and do not eat large amounts of meat, fish or eggs. Do not cut out milk and curd: a normal amount of calcium in the diet is advised. Keep a healthy weight and cut down sugary drinks and alcohol."
+  },
+  {
+   "id": "urinary-symptoms-self-help",
+   "title": "Helping urinary symptoms",
+   "target": "diet_lifestyle_advice",
+   "text": "Drink less in the evening and before going out, but do not cut your total fluids too much. Cut down tea, coffee and alcohol. Take your time and try passing urine a second time before leaving the toilet. When you get a sudden urge, try to hold on a little longer to train your bladder. Keep your bowels regular and tell your doctor about all the medicines you take."
+  },
+  {
+   "id": "urology-warning-signs",
+   "title": "Kidney and urine warning signs",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if you cannot pass urine or pass very little, pass blood clots, have fever with shivering and pain in the side or back, have severe pain with vomiting, feel very weak or have palpitations, or become breathless. If you are on dialysis, also come at once if the fistula stops buzzing or the PD fluid turns cloudy."
+  }
+ ],
+ "sources": [
+  { "org": "KDIGO", "title": "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease", "year": 2024, "url": "https://kdigo.org/guidelines/ckd-evaluation-and-management/" },
+  { "org": "European Association of Urology", "title": "EAU Guidelines on the Management of Non-neurogenic Male Lower Urinary Tract Symptoms", "year": 2026, "url": "https://uroweb.org/guidelines/management-of-non-neurogenic-male-luts" },
+  { "org": "European Association of Urology", "title": "EAU Guidelines on Urolithiasis", "year": 2026, "url": "https://uroweb.org/guidelines/urolithiasis" },
+  { "org": "American Urological Association / SUFU", "title": "Microhematuria: AUA/SUFU Guideline (2025 amendment)", "year": 2025, "url": "https://www.auanet.org/guidelines-and-quality/guidelines/microhematuria" },
+  { "org": "European Association of Urology", "title": "EAU Guidelines on Urological Infections", "year": 2026, "url": "https://uroweb.org/guidelines/urological-infections" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

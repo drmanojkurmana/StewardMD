@@ -509,6 +509,79 @@ try {
 
   await ev(`MEDLIST.clearAll(); return 1;`);
 
+  /* ── the dose sheet's two-column grid fits a phone ──────────────────────────────────────────
+   * .ml-dose-grid was the one grid the repo-wide minmax(0,1fr) rewrite could not be verified
+   * against, because it only mounts once a search result is tapped. A bare `1fr` track carries an
+   * implicit min-width:auto, so a long value widens its own column and pushes the grid past its
+   * container; that is what put the drug monograph's Quick Facts off the screen edge. Assert the
+   * tracks resolve equal and nothing inside escapes the sheet, at the narrowest width we support. */
+  // The harness window is desktop-wide, where a two-column grid has room to spare and the check
+  // would pass on layouts that break on a phone. Emulate the narrowest device we support.
+  await call("Emulation.setDeviceMetricsOverride", { width: 320, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(300);
+  await ev(`
+    window.__origBrandSearch3 = MEDLIST.brandSearch;
+    MEDLIST.brandSearch = function(){ return Promise.resolve([{ brand: 'Pantop 40', generic: 'pantoprazole', form: 'tablet' }]); };
+    MEDLIST.clearAll();
+    MEDLIST.mount(document.getElementById('ml-test'));
+    document.querySelector("#ml-test [data-ml-open='index']").click();
+    var inp = document.querySelector("#ml-test [data-ml-index-input]"); inp.value = 'pantoprazole'; inp.dispatchEvent(new Event('input'));
+    return 1;
+  `);
+  await sleep(400);
+  // tapping the result's INFO area (not its Add button) is what opens the dose sheet
+  await ev(`var i = document.querySelector(".ml-index-info"); if (i) i.click(); return 1;`);
+  await sleep(400);
+
+  const dose = JSON.parse(await ev(`
+    var g = document.querySelector(".ml-dose-grid");
+    if (!g) return JSON.stringify({ present: false });
+    var over = [];
+    var check = function (el, name) { if (el.scrollWidth > el.clientWidth + 1) over.push(name); };
+    check(g, "ml-dose-grid");
+    g.querySelectorAll("*").forEach(function (el) {
+      var c = getComputedStyle(el);
+      if (!/grid|flex/.test(c.display) || c.overflowX === "auto" || c.overflowX === "scroll") return;
+      var b = el.getBoundingClientRect(); if (b.width < 8 || b.height < 8) return;
+      check(el, (el.className || el.tagName).toString().slice(0, 20));
+    });
+    var escaped = [].slice.call(g.querySelectorAll("*")).filter(function (el) { return el.getBoundingClientRect().right > window.innerWidth + 1; }).length;
+    var cols = getComputedStyle(g).gridTemplateColumns.split(/\\s+(?![^(]*\\))/);
+    return JSON.stringify({ present: true, cols: cols, fields: g.querySelectorAll(".ml-field").length,
+                            chips: g.querySelectorAll(".ml-chip").length, over: over, escaped: escaped });
+  `));
+
+  ok(dose.present, "the dose sheet opens when a search result is tapped");
+  if (dose.present) {
+    ok(dose.cols.length === 2, "it is a two-column grid: " + dose.cols.join(" | "));
+    ok(dose.fields >= 5 && dose.chips >= 15, "every field and route/frequency chip rendered (" + dose.fields + " fields, " + dose.chips + " chips)");
+    ok(dose.over.length === 0, "nothing inside the dose grid is wider than its own box" + (dose.over.length ? ": " + dose.over.join(", ") : ""));
+    ok(dose.escaped === 0, "nothing inside the dose grid is painted past the right edge of the screen (" + dose.escaped + ")");
+  }
+  /* The assertions above pass with a bare `1fr 1fr` too: this grid's fields are short enough that
+   * the implicit min-width:auto floor never binds, so today it was never at risk. That makes them a
+   * guard for the day someone puts a longer control in the sheet, not proof the rewrite mattered.
+   * To assert the rewrite itself, force the condition: a long unbreakable value in one field must
+   * make that column wrap, not widen the grid. With `1fr` this overflows; with minmax(0,1fr) it does not. */
+  const stressed = JSON.parse(await ev(`
+    var g = document.querySelector(".ml-dose-grid");
+    if (!g) return JSON.stringify({ present: false });
+    var lbl = g.querySelector(".ml-field-label");
+    var before = lbl ? lbl.textContent : "";
+    if (lbl) lbl.textContent = "Strength_in_milligrams_per_administered_dose_units";
+    var wide = g.scrollWidth > g.clientWidth + 1 || g.getBoundingClientRect().right > window.innerWidth + 1;
+    var box = g.clientWidth, content = g.scrollWidth;
+    if (lbl) lbl.textContent = before;
+    return JSON.stringify({ present: true, wide: wide, box: box, content: content });
+  `));
+  if (stressed.present) {
+    ok(!stressed.wide, "a long unbreakable field label wraps instead of widening the grid (box=" +
+      stressed.box + " content=" + stressed.content + ")");
+  }
+
+  await ev(`if (window.__origBrandSearch3) MEDLIST.brandSearch = window.__origBrandSearch3; MEDLIST.clearAll(); return 1;`);
+  await call("Emulation.clearDeviceMetricsOverride", {});
+
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

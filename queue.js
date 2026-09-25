@@ -54,7 +54,7 @@
     var waitMs = now() - (t.registeredAt || now());
     var late = isQueued(t.status) && waitMs > 30 * 60000;
     var isNext = idx === 0;
-    var pri = t.priority >= 2 ? '<span class="q-pri emerg">Emergency</span>' : t.priority === 1 ? '<span class="q-pri prio">Priority</span>' : "";
+    var pri = t.priority >= 2 ? '<span class="q-pri emerg">Emergency</span>' : t.priority === 1 ? '<span class="q-pri prio">' + esc(prioLabel(t)) + "</span>" : "";
     var etaMin = t.etaStart ? mins(t.etaStart - now()) : null;
     var line = late
       ? '<span class="q-tl-eta late">' + ms("error") + " Waiting: " + mins(waitMs) + "m</span>"
@@ -190,7 +190,7 @@
     var savedTab = '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved on this device / Drive)">' + ms("recent_actors") + "<span>Patients</span></button>";
     var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + savedTab + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
     var main = '<div class="q-main">' + header + '<div class="q-canvas">' + canvas + "</div>" + bottom + "</div>";
-    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + "</div>";
+    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + (state.prioSheet ? renderPrioSheet(state.prioSheet) : "") + "</div>";
   }
   function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
   // ---- Clinic & staff admin (owner, native clinic): Clinic ID + add nursing/reception/billing with a
@@ -237,7 +237,13 @@
     if (!force && st.pulseN && (st.pulseN % 4) !== 0) { st.pulseN++; return; }
     st.pulseN = (st.pulseN || 0) + 1; st.pulseBusy = true;
     apiGet("/opd-pulse?orgId=" + encodeURIComponent(st.orgId))
-      .then(function (r) { st.pulseBusy = false; st.pulse = r && r.ok ? r : { failed: true }; pulsePaint(); })
+      .then(function (r) {
+        st.pulseBusy = false; st.pulse = r && r.ok ? r : { failed: true }; pulsePaint();
+        // Plan item 11: follow-ups promised and never booked. Silent when the hospital has no record (nothing to show).
+        var now = new Date().toISOString();
+        if (st.pulse.ok) apiGet("/ward/schedule?orgId=" + encodeURIComponent(st.orgId) + "&from=" + encodeURIComponent(now) + "&to=" + encodeURIComponent(now))
+          .then(function (s) { if (s && s.ok && st.pulse && st.pulse.ok) { st.pulse.followups = { unbooked: s.unbookedRecalls || 0, overdue: s.overdueRecalls || 0 }; pulsePaint(); } }).catch(function () {});
+      })
       .catch(function () { st.pulseBusy = false; st.pulse = { failed: true }; pulsePaint(); });
   }
   /* The front desk is NOT painted by paint() - it is rendered straight into the root by
@@ -252,34 +258,22 @@
   function pulseNum(v, unit) { return v == null ? '<u style="opacity:.5">not yet</u>' : esc(v) + (unit ? "<u>" + unit + "</u>" : ""); }
   function pulseCard(state) {
     if (!state.orgId) return "";                      // a personal clinic with no hospital has no OPD-wide day
-    var r = state.pulse;
-    if (!r) return "";
-    /* A pulse that could not be read says so. An empty strip here would read as a quiet OPD, which is
-     * the one thing this card must never say by accident. */
-    if (r.failed) return '<section class="q-pulse"><div class="q-pulse-h"><b>OPD today</b><button class="q-ic" data-q-act="pulse" title="Retry">' + ms("refresh") + '</button></div><div class="q-pulse-warn">' + ms("error") + "Could not read the OPD figures. Do not read this as a quiet clinic.</div></section>";
-    var p = r.pulse || {}, hall = p.waitingNow || {}, d2d = p.doorToDoctor || {}, desk = p.deskWait || {}, doc = p.doctorWait || {};
-    // Which half of the building is slow: stated in words, because "45 and 15" means nothing at a glance.
-    var blame = desk.medianMin == null || doc.medianMin == null ? ""
-      : desk.medianMin > doc.medianMin * 2 ? "the wait is at the desk"
-      : doc.medianMin > desk.medianMin * 2 ? "the wait is for the doctor"
-      : "desk and doctor are even";
-    var tile = function (label, icon, value, sub, warn) {
-      return '<div class="q-pulse-t' + (warn ? " warn" : "") + '"><div class="q-pulse-l">' + ms(icon) + esc(label) + "</div><div class=\"q-pulse-v\">" + value + "</div>" + (sub ? '<div class="q-pulse-s">' + sub + "</div>" : "") + "</div>";
-    };
-    return '<section class="q-pulse"><div class="q-pulse-h"><b>OPD today</b>' +
-      (r.unread && r.unread.length ? '<span class="q-pulse-warn-i" title="Some rooms could not be read: ' + esc(r.unread.join(", ")) + '">' + ms("error") + "</span>" : "") +
+    var M = G.SMD_OPD_PULSE, m = state.pulse && M ? M.model(state.pulse) : null;
+    if (!m) return "";
+    var head = '<div class="q-pulse-h"><b>OPD today</b>';
+    if (m.failed) return '<section class="q-pulse">' + head + '<button class="q-ic" data-q-act="pulse" title="Retry">' + ms("refresh") + '</button></div><div class="q-pulse-warn">' + ms("error") + esc(m.message) + "</div></section>";
+    var tiles = m.tiles.map(function (t) {
+      var v = t.value == null ? '<u style="opacity:.5">not yet</u>' : esc(t.value) + (t.unit ? "<u>" + esc(t.unit) + "</u>" : "");
+      var sub = t.action === "reconcile" ? '<button class="q-ic" data-q-act="reconcile" title="Send these visits to the record again">' + ms("sync") + "</button> " + esc(t.sub) : esc(t.sub || "");
+      return '<div class="q-pulse-t' + (t.warn ? " warn" : "") + '"><div class="q-pulse-l">' + ms(t.icon) + esc(t.label) + '</div><div class="q-pulse-v">' + v + '</div><div class="q-pulse-s">' + sub + "</div></div>";
+    }).join("");
+    var note = m.note ? '<div class="q-pulse-note">' + ms("insights") + "Desk " + pulseNum(m.note.deskMin, "m") + ", doctor " + pulseNum(m.note.doctorMin, "m") + " &middot; " + esc(m.note.text) + "</div>" : "";
+    return '<section class="q-pulse">' + head +
+      (m.unread.length ? '<span class="q-pulse-warn-i" title="Some rooms could not be read: ' + esc(m.unread.join(", ")) + '">' + ms("error") + "</span>" : "") +
       '<button class="q-ic" data-q-act="pulse" title="Refresh the OPD figures">' + ms("refresh") + "</button></div>" +
-      '<div class="q-pulse-row">' +
-        tile("In the hall", "groups", esc(p.waiting || 0), hall.longestMin ? "longest " + esc(hall.longestMin) + "m" : "nobody waiting", hall.over60 > 0) +
-        tile("Waiting over 1h", "hourglass_bottom", esc(hall.over60 || 0), (hall.over30 || 0) + " over 30m", (hall.over60 || 0) > 0) +
-        tile("Door to doctor", "schedule", pulseNum(d2d.medianMin, "m"), d2d.p90Min == null ? "median" : "9 in 10 within " + esc(d2d.p90Min) + "m") +
-        tile("Seen", "check_circle", esc(p.completed || 0), (p.inConsultation || 0) + " in the room") +
-        tile("Did not wait", "person_off", p.abandonedPct == null ? '<u style="opacity:.5">not yet</u>' : esc(p.abandonedPct) + "<u>%</u>", esc(p.noShow || 0) + " no-show" + ((p.noShow || 0) === 1 ? "" : "s"), (p.abandonedPct || 0) >= 10) +
-        (p.held ? tile("Awaiting result", "science", esc(p.held), "sent for a test or booked back") : "") +
-      "</div>" +
-      (blame ? '<div class="q-pulse-note">' + ms("insights") + "Desk " + pulseNum(desk.medianMin, "m") + ", doctor " + pulseNum(doc.medianMin, "m") + " &middot; " + esc(blame) + "</div>" : "") +
-      "</section>";
+      '<div class="q-pulse-row">' + tiles + "</div>" + note + "</section>";
   }
+
   function addStaff() {
     var nameEl = document.getElementById("qStaffName"), roleEl = document.getElementById("qStaffRole"), pinEl = document.getElementById("qStaffPin");
     var identity = ((nameEl && nameEl.value) || "").trim().toLowerCase(), role = (roleEl && roleEl.value) || "nurse", pin = ((pinEl && pinEl.value) || "").trim();   // lowercase so it always matches the staff login (mobile keyboards auto-capitalize; server match is case-sensitive)
@@ -323,6 +317,25 @@
         '<button class="q-pbtn" data-q-act="addstaff">' + ms("person_add") + "Add staff</button>" +
       "</div></div>";
   }
+
+  /* Plan item 12: priority with a reason. The reason sets the level on the server (_queue_eta.js
+   * priorityRule): an emergency goes first, the rest ahead of the ordinary queue; "clear" is a reason too. */
+  var PRIO = [["emergency", "Emergency"], ["senior", "Senior citizen"], ["pregnant", "Pregnant"], ["disability", "Disability"], ["child", "Child"], ["results", "Results ready"], ["other", "Other"]];
+  function prioLabel(t) { if (!t || !t.priority) return ""; if (t.priority >= 2) return "Emergency"; var m = PRIO.filter(function (p) { return p[0] === t.priorityReason; })[0]; return m ? m[1] : "Priority"; }
+  function renderPrioSheet(p) {
+    var list = PRIO.slice(); if (p.cur) list.push(["clear", "Clear priority"]);
+    return '<div class="q-sheet" data-q-act="prio-close"><div class="q-profile" data-q-act="prio-stop" role="dialog" aria-label="Set priority">' +
+      '<div class="q-profile-head"><button class="q-ic q-profile-x" data-q-act="prio-close" aria-label="Close">' + ms("close") + "</button></div>" +
+      '<div class="q-prio-h"><b>Priority</b> <span>(reason required)</span></div>' +
+      '<p class="q-prio-p">The reason sets the place: an emergency goes first, the others ahead of the ordinary queue. Recorded in the audit trail.</p>' +
+      '<div class="q-prio-chips" role="group" aria-label="Priority reason">' + list.map(function (c) {
+        return '<button type="button" class="q-prio-chip' + (p.reason === c[0] ? " on" : "") + '" aria-pressed="' + (p.reason === c[0]) + '" data-q-act="prio-pick:' + c[0] + '">' + c[1] + "</button>";
+      }).join("") + "</div>" +
+      '<input id="qPrioNote" class="q-prio-note" aria-label="Priority note" placeholder="Note (required for Other)" value="' + esc(p.note || "") + '">' +
+      '<button class="q-pbtn q-prio-ok" data-q-act="prio-set">Set priority</button>' +
+      "</div></div>";
+  }
+  function prioNote() { var n = document.getElementById("qPrioNote"); return n ? String(n.value || "").trim() : ""; }
 
   // Doctor profile sheet - opened from the header avatar. Identity + status + switch clinic + sign out.
   function renderProfile(state, doctorName, dept) {
@@ -590,15 +603,35 @@
     try { initConsultSwipe(); } catch (e) {}
   }
 
+  /* Plan item 16: the board is told when the hospital's queue changes (opd-live.js over GET /live) instead of only
+   * finding out at the next 8-second poll. While the stream is live a poll fetches only when told, or once a minute
+   * as a safety net; when it is not live the polls run as before. Hospital modes only (a personal clinic has no org). */
+  var LIVEQ = null, liveOrg = "", lastFull = 0, liveFn = null;   // liveFn: the poll of the screen now showing
+  function liveStart(onChange) {
+    liveFn = onChange;
+    if (!G.SMD_OPD_LIVE || !st.orgId || st.demo) return;
+    if (LIVEQ && liveOrg === st.orgId) return;
+    if (LIVEQ) LIVEQ.stop();
+    liveOrg = st.orgId;
+    LIVEQ = G.SMD_OPD_LIVE.connect({ url: G.SMD_OPD_LIVE.apiUrl(API + "/live?orgId=" + encodeURIComponent(st.orgId)), headers: authHeaders,
+      onChange: function () { lastFull = 0; try { if (liveFn) liveFn(); } catch (e) {} } });
+  }
+  function liveStop() { if (LIVEQ) LIVEQ.stop(); LIVEQ = null; liveOrg = ""; }
+  function liveQuiet() {
+    if (LIVEQ && LIVEQ.isLive() && Date.now() - lastFull < 60000) return true;
+    lastFull = Date.now(); return false;
+  }
+
   function refresh() {
     /* demo has no server session; don't clobber unsaved settings mid-poll; and the profile sheet
      * (Clinic and staff) is a form the owner is filling in, for the same reason settings is. */
-    if (st.demo || !st.session || st.view === "settings" || st.profileOpen) return;
+    if (st.demo || !st.session || st.view === "settings" || st.profileOpen || st.prioSheet) return;
     st.pollN = (st.pollN || 0) + 1;
     // real-time-ish sync: silently re-pull today's GHIS Out-patients list every ~5 polls (~40s) so newly
     // registered patients appear without a manual import (dedupes server-side by visit id).
     if (st.ghisToken && st.pollN % 5 === 0 && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(true); } catch (e) {} }
     if (st.openOpts && st.openOpts.source === "connect" && st.pollN % 5 === 0) { try { importFromSource(true); } catch (e) {} }   // re-pull the connected EMR worklist periodically
+    if (liveQuiet()) return;   // plan item 16: live and nothing changed
     apiGet("/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok) { st.tickets = r.tickets || []; paint(); } }).catch(function () {});
     loadPulse();   // every fourth pass, hospital-wide (see loadPulse)
   }
@@ -641,7 +674,19 @@
     if (cmd === "staffremove") { var okrm = true; try { okrm = window.confirm("Remove this staff member's access?"); } catch (e) {} if (okrm) apiPost("/member", { orgId: st.orgId, identity: arg, remove: true }).then(function () { loadClinicAdmin(); }); return; }
     if (cmd === "profile-close") { st.profileOpen = false; paint(); return; }
     if (cmd === "profile-stop") return;   // click inside the profile card: do nothing (don't close)
-    if (cmd === "switch") { _setWp(""); clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; st.orgId = null; st.clinicAdmin = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace (forget remembered); drop clinic identity so the next workplace never shows a stale clinic's staff-admin
+    if (cmd === "prio-close") { st.prioSheet = null; paint(); return; }
+    if (cmd === "prio-stop") return;
+    if (cmd === "prio-pick") { if (st.prioSheet) { st.prioSheet.note = prioNote(); st.prioSheet.reason = arg; paint(); } return; }
+    if (cmd === "prio-set") {
+      var ps = st.prioSheet; if (!ps || !st.session) return;
+      var pnote = prioNote();
+      if (!ps.reason) { try { G.toast && G.toast("Pick a reason"); } catch (e) {} return; }
+      if (ps.reason === "other" && pnote.length < 3) { try { G.toast && G.toast("Say why in the note"); } catch (e) {} return; }
+      st.prioSheet = null; paint();
+      act(st.session.id, "/priority", { ticketId: ps.ticketId, reason: ps.reason, note: pnote }).then(function (r) { if (!(r && r.ok)) { try { G.toast && G.toast("Priority not changed: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} } });
+      return;
+    }
+    if (cmd === "switch") { liveStop(); _setWp(""); clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; st.orgId = null; st.clinicAdmin = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace (forget remembered); drop clinic identity so the next workplace never shows a stale clinic's staff-admin
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffGate(); prefillStaff(); return; }   // front-desk staff -> sign in HERE
@@ -654,9 +699,16 @@
     if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
     if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "stafflogin") { staffLogin(); return; }
-    if (cmd === "staffout") { wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
+    if (cmd === "staffout") { if (!signOutDesk()) return; wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); try { if (G.StewardIdentityResolver && G.StewardIdentityResolver.clearCache) G.StewardIdentityResolver.clearCache(); } catch (e) {} st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
     if (cmd === "fdrefresh") { loadFrontDesk(); return; }
-    if (cmd === "pulse") { loadPulse(true); return; }   // the OPD figures, now rather than on the next pass
+    if (cmd === "pulse") { loadPulse(true); return; }
+    if (cmd === "reconcile") {
+      apiPost("/opd-reconcile", { orgId: st.orgId }).then(function (r) {
+        try { G.toast && G.toast(r && r.ok ? (r.landed + " of " + r.retried + " visits now in the record" + (r.stillFailed ? "; " + r.stillFailed + " still failing" : "")) : "Could not retry now"); } catch (e) {}
+        loadPulse(true);
+      }).catch(function () { try { G.toast && G.toast("Could not retry now"); } catch (e) {} });
+      return;
+    }   // the OPD figures, now rather than on the next pass
     if (cmd === "fdadd") { frontDeskAdd(); return; }
     if (cmd === "fdroute") { frontDeskRoute(arg); return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
@@ -703,7 +755,7 @@
     else if (cmd === "noshowsclose") { st.noShows = undefined; paint(); }
     else if (cmd === "recall") recallNoShow(sid, arg);
     else if (cmd === "sendback") act(sid, "/status", { ticketId: arg, status: "waiting" });   // reroute from the consulting room back to the waiting hall (personal + hospital)
-    else if (cmd === "prio") { var pt = (st.tickets || []).filter(function (x) { return x.id === arg; })[0]; act(sid, "/priority", { ticketId: arg, priority: (pt && pt.priority) ? 0 : 1 }); }   // toggle Priority (1) on/off; matches the "Priority" label + is reversible (does NOT set Emergency/2)
+    else if (cmd === "prio") { var pt = (st.tickets || []).filter(function (x) { return x.id === arg; })[0]; st.prioSheet = { ticketId: arg, cur: (pt && pt.priority) || 0, reason: "", note: "" }; paint(); }   // plan item 12: pick a reason; the reason sets the level
     else if (cmd === "remove") { var okr = true; try { okr = window.confirm("Remove this patient from your queue?\n\nUse for a mistaken, duplicate, or wrongly-routed entry. Recorded in the audit trail."); } catch (e) {} if (okr) act(sid, "/status", { ticketId: arg, status: "cancelled" }); }
     else if (cmd === "pause") act(sid, "/session/status", { status: st.session.status === "paused" ? "active" : "paused" });
     else if (cmd === "emergency") act(sid, "/session/status", { doctorStatus: st.session.doctorStatus === "emergency" ? "consulting" : "emergency" });
@@ -847,6 +899,8 @@
       mode: mode,
       clinicName: (st.me && st.me.name) || (st.session && st.session.doctorName) || "Check-in",
       departments: dp.departments, departmentRequired: dp.required,
+      /* One patient lookup for every carrier (QR, Ni-Key, barcode, typed): the server's, so a patient registered on another device is found. */
+      resolve: function (id) { return apiGet("/patient/resolve?orgId=" + encodeURIComponent(st.orgId || st.hospital || "") + "&id=" + encodeURIComponent(id)); },
       submit: function (body) {
         body.orgId = st.orgId || st.hospital || "";
         body.workplaceMode = mode;
@@ -999,12 +1053,20 @@
         el.innerHTML = renderFrontDesk(b);
         clearInterval(st.pollId);
         loadPulse(true);
-        st.pollId = setInterval(function () {
+        var fdPoll = function () {
+          if (liveQuiet()) { offTick(); return; }   // plan item 16: live and nothing changed
           apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (n) {
-            if (n && n.ok) { st.board = n; var e2 = root(); if (e2 && e2.querySelector(".q-fd")) e2.innerHTML = renderFrontDesk(n); }
+            /* The board is kept fresh, but never rebuilt over a field somebody is typing in: the same rule that
+             * fixed the staff form (paint) and the pulse (pulsePaint). The next pass paints it. */
+            var ae = document.activeElement, typing = !!(ae && ae.closest && ae.closest("input, textarea, select"));
+            if (n && n.ok) { st.board = n; var e2 = root(); if (e2 && e2.querySelector(".q-fd") && !typing) e2.innerHTML = renderFrontDesk(n); }
           }).catch(function () {});
           loadPulse();
-        }, POLL_MS);
+          offTick();
+        };
+        st.pollId = setInterval(fdPoll, POLL_MS);
+        liveStart(fdPoll);
+        offTick();
       });
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-btn" data-q-act="fdrefresh">Retry</button>'); });
   }
@@ -1127,6 +1189,41 @@
     '</div>';
   }
 
+  /* Plan item 13: the front desk keeps checking patients in when the server cannot be reached, with the same
+   * offline desk as the web console (opd-offline-desk.js): a series reserved while online, a numbered slip
+   * offline, and each poll sends what is waiting. */
+  var OFFD = null;
+  function offDesk() {
+    if (!G.SMD_OPD_OFFLINE || !st.orgId) return null;
+    var day = new Date(Date.now() + 19800000).toISOString().slice(0, 10);   // the IST day the server numbers by
+    if (!OFFD || OFFD._org !== st.orgId || OFFD._date !== day) {
+      var ss = null, idb = null; try { ss = G.sessionStorage; } catch (e) {} try { idb = G.indexedDB || null; } catch (e) {}
+      if (!ss && !idb) return null;
+      // IndexedDB first, so a check-in taken offline survives the app being closed; the tab's storage when it cannot open.
+      OFFD = G.SMD_OPD_OFFLINE.desk({ indexedDB: idb, storage: ss, orgId: st.orgId, date: day, call: function (p, b) { return apiPost("/" + p, b); } });
+      OFFD._org = st.orgId; OFFD._date = day;
+    }
+    return OFFD;
+  }
+  function offTick() {
+    var d = offDesk(); if (!d) return;
+    d.prepare();
+    if (d.pending()) d.sync().then(function (r) { if (r.synced) { toast(r.synced + (r.synced === 1 ? " offline check-in" : " offline check-ins") + " sent to the queue" + (r.review ? ": " + r.review + " to check" : "")); } });
+  }
+  // Sign-out with offline check-ins not yet sent asks first: each one is a patient's place in the queue.
+  function offSignOut() {
+    var d = offDesk(); if (!d) return true;
+    if (d.pending()) { var sure = true; try { sure = window.confirm(d.pending() + " offline check-in(s) have not reached the queue yet and will be lost. Sign out anyway?"); } catch (e) {} if (!sure) return false; }
+    d.clear(); OFFD = null; return true;
+  }
+  // Signing out: the unsent check-ins are settled first (offSignOut), then the live stream ends with the session.
+  function signOutDesk() { if (!offSignOut()) return false; liveStop(); return true; }
+  function printTokenSlip(o) {
+    var okp = false;
+    try { okp = !!(G.WARD_LABELS && G.WARD_LABELS.print("token", { hospital: (st.staffWho && (st.staffWho.orgName || st.staffWho.orgCode)) || "", token: o.token, name: o.name || "", issuedAt: new Date(o.at || Date.now()).toLocaleString() })); } catch (e) {}
+    if (!okp) toast("Printing is not available here. Write " + o.token + " on the patient's slip.");
+  }
+
   // Add a patient from the front desk: the SAME ABDM-ready check-in sheet the doctor uses, then into
   // the central pool (a one-room clinic auto-routes server-side).
   function frontDeskAdd() {
@@ -1136,7 +1233,10 @@
         mode: "native",
         clinicName: (st.staffWho && st.staffWho.orgCode) || "Check-in",
         departments: dp.departments, departmentRequired: dp.required,
+        resolve: function (id) { return apiGet("/patient/resolve?orgId=" + encodeURIComponent(st.orgId) + "&id=" + encodeURIComponent(id)); },
         submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; body.forQueue = "pool"; return apiPost("/patient/register", body); },
+        offline: function (sent) { var d = offDesk(); return d ? d.issue(sent) : null; },
+        printToken: printTokenSlip,
         onAdded: function (r, sent) {
           apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
             mrn: r.mrn, visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", departmentId: (sent && sent.departmentId) || "" })
@@ -1177,6 +1277,7 @@
         st.me = { name: (r.room && r.room.name) || r.session.doctorName || "Room", dept: (r.room && r.room.department) || "" };
         st.view = "dashboard"; paint();
         clearInterval(st.pollId); st.pollId = setInterval(refresh, POLL_MS);   // refresh() polls /list by session id
+        liveStart(refresh);
         return;
       }
       if (r && r.ok && !r.resolved) { _pickRoom(orgId, r.rooms || []); return; }
@@ -1369,7 +1470,7 @@
   try {
     document.addEventListener("smd:consult-end", function () { try { if (st.session) act(st.session.id, "/advance"); } catch (e) {} });
     document.addEventListener("smd:consult-emergency", function (e) {
-      try { if (!st.session) return; var tid = e && e.detail && e.detail.ticketId; if (tid) act(st.session.id, "/priority", { ticketId: tid, priority: 2 }); act(st.session.id, "/advance"); } catch (x) {}
+      try { if (!st.session) return; var tid = e && e.detail && e.detail.ticketId; if (tid) act(st.session.id, "/priority", { ticketId: tid, reason: "emergency", note: "raised from the consult" }); act(st.session.id, "/advance"); } catch (x) {}
     });
   } catch (e) {}
 

@@ -14,7 +14,11 @@
    "modality": "CT",
    "slices": 23,
    "thumb": "/atlas/ct-abdomen-coronal/t/012.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-abdomen-sagittal",
@@ -24,7 +28,13 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-abdomen-sagittal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-abdomen-axial",
@@ -34,7 +44,11 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-abdomen-axial/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "A",
+    "bottom": "P"
+   }
   },
   {
    "id": "brain-mri-axial-t1",
@@ -45,7 +59,8 @@
    "slices": 24,
    "thumb": "/atlas/brain-mri-axial-t1/t/013.webp",
    "credit": "Courtesy of the U.S. National Library of Medicine",
-   "notice": "Images only - this cadaver series carries NO labels. It is kept as the source for hand-authored labelling; for a labelled brain use the living 7 T modules."
+   "notice": "Images only - this cadaver series carries NO labels. It is kept as the source for hand-authored labelling; for a labelled brain use the living 7 T modules.",
+   "hidden": true
   },
   {
    "id": "mri-brain-axial",
@@ -53,10 +68,23 @@
    "subtitle": "Axial - living 7T T1",
    "region": "Brain",
    "modality": "MRI",
-   "slices": 24,
-   "thumb": "/atlas/mri-brain-axial/t/013.webp",
+   "slices": 48,
+   "thumb": "/atlas/mri-brain-axial/v2/t/025.webp",
    "credit": "",
-   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted."
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled. Labels do not name a side; the R and L edge markers come from the scan's own orientation record, which was checked against the anatomy front to back and top to bottom.",
+   "group": "live-brain",
+   "plane": "axial",
+   "mm": [
+    153.6,
+    200.7
+   ],
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "A",
+    "bottom": "P"
+   },
+   "flipX": true
   },
   {
    "id": "mri-brain-coronal",
@@ -64,10 +92,23 @@
    "subtitle": "Coronal - living 7T T1",
    "region": "Brain",
    "modality": "MRI",
-   "slices": 24,
-   "thumb": "/atlas/mri-brain-coronal/t/013.webp",
+   "slices": 48,
+   "thumb": "/atlas/mri-brain-coronal/v2/t/025.webp",
    "credit": "",
-   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted."
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled. Labels do not name a side; the R and L edge markers come from the scan's own orientation record, which was checked against the anatomy front to back and top to bottom.",
+   "group": "live-brain",
+   "plane": "coronal",
+   "mm": [
+    153.6,
+    169.5
+   ],
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "S",
+    "bottom": "I"
+   },
+   "flipX": true
   },
   {
    "id": "mri-brain-sagittal",
@@ -75,10 +116,135 @@
    "subtitle": "Sagittal - living 7T T1",
    "region": "Brain",
    "modality": "MRI",
-   "slices": 24,
-   "thumb": "/atlas/mri-brain-sagittal/t/013.webp",
+   "slices": 48,
+   "thumb": "/atlas/mri-brain-sagittal/v2/t/025.webp",
    "credit": "",
-   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted."
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled. Labels do not name a side; the R and L edge markers come from the scan's own orientation record, which was checked against the anatomy front to back and top to bottom.",
+   "group": "live-brain",
+   "plane": "sagittal",
+   "mm": [
+    200.7,
+    174.3
+   ],
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
+  },
+  {
+   "id": "ct-live-neck-axial",
+   "title": "Neck soft tissue - CT",
+   "subtitle": "Axial - living patient",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-neck-axial/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. The upper back is rounded forward in this scan, so the chest sits tilted under the neck and the most posterior coronal slices cut through the back muscles. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-neck",
+   "plane": "axial",
+   "mm": [
+    277.5,
+    256.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "A",
+    "bottom": "P"
+   }
+  },
+  {
+   "id": "ct-live-neck-coronal",
+   "title": "Neck soft tissue - CT",
+   "subtitle": "Coronal - living patient",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-neck-coronal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. The upper back is rounded forward in this scan, so the chest sits tilted under the neck and the most posterior coronal slices cut through the back muscles. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-neck",
+   "plane": "coronal",
+   "mm": [
+    277.5,
+    318.0
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "S",
+    "bottom": "I"
+   }
+  },
+  {
+   "id": "ct-live-neck-sagittal",
+   "title": "Neck soft tissue - CT",
+   "subtitle": "Sagittal - living patient",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-neck-sagittal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. The upper back is rounded forward in this scan, so the chest sits tilted under the neck and the most posterior coronal slices cut through the back muscles. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-neck",
+   "plane": "sagittal",
+   "mm": [
+    256.5,
+    318.0
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-head-coronal",
@@ -86,9 +252,13 @@
    "subtitle": "Coronal",
    "region": "Head and neck",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-head-coronal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "slices": 48,
+   "thumb": "/atlas/ct-head-coronal/v2/t/025.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-head-sagittal",
@@ -96,9 +266,15 @@
    "subtitle": "Sagittal",
    "region": "Head and neck",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-head-sagittal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "slices": 48,
+   "thumb": "/atlas/ct-head-sagittal/v2/t/025.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-head-axial",
@@ -106,9 +282,17 @@
    "subtitle": "Axial",
    "region": "Head and neck",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-head-axial/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "slices": 48,
+   "thumb": "/atlas/ct-head-axial/v2/t/025.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "A",
+    "bottom": "P"
+   },
+   "mm": [
+    317.8,
+    424.7
+   ]
   },
   {
    "id": "ct-foot-axial",
@@ -118,7 +302,17 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-foot-axial/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "A",
+    "bottom": "P"
+   },
+   "mm": [
+    438.8,
+    380.6
+   ],
+   "flipX": true,
+   "flipY": true
   },
   {
    "id": "ct-foot-sagittal",
@@ -128,7 +322,14 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-foot-sagittal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   },
+   "flipX": true
   },
   {
    "id": "ct-foot-coronal",
@@ -138,7 +339,15 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-foot-coronal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "S",
+    "bottom": "I"
+   },
+   "mm": [
+    438.8,
+    193.0
+   ]
   },
   {
    "id": "ct-knee-axial",
@@ -146,9 +355,19 @@
    "subtitle": "Axial",
    "region": "Lower limb",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-knee-axial/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "slices": 48,
+   "thumb": "/atlas/ct-knee-axial/v2/t/025.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "A",
+    "bottom": "P"
+   },
+   "mm": [
+    394.7,
+    343.1
+   ],
+   "flipX": true,
+   "flipY": true
   },
   {
    "id": "ct-knee-coronal",
@@ -156,9 +375,13 @@
    "subtitle": "Coronal",
    "region": "Lower limb",
    "modality": "CT",
-   "slices": 22,
-   "thumb": "/atlas/ct-knee-coronal/t/012.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "slices": 48,
+   "thumb": "/atlas/ct-knee-coronal/v2/t/025.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-knee-sagittal",
@@ -168,7 +391,14 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-knee-sagittal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   },
+   "flipX": true
   },
   {
    "id": "ct-pelvis-axial",
@@ -178,7 +408,11 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-pelvis-axial/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "A",
+    "bottom": "P"
+   }
   },
   {
    "id": "ct-pelvis-coronal",
@@ -188,7 +422,11 @@
    "modality": "CT",
    "slices": 21,
    "thumb": "/atlas/ct-pelvis-coronal/t/011.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-pelvis-sagittal",
@@ -198,7 +436,13 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-pelvis-sagittal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-thorax-coronal",
@@ -206,9 +450,13 @@
    "subtitle": "Coronal",
    "region": "Thorax",
    "modality": "CT",
-   "slices": 20,
-   "thumb": "/atlas/ct-thorax-coronal/t/011.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "slices": 48,
+   "thumb": "/atlas/ct-thorax-coronal/v2/t/025.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-thorax-sagittal",
@@ -216,9 +464,15 @@
    "subtitle": "Sagittal",
    "region": "Thorax",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-thorax-sagittal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "slices": 48,
+   "thumb": "/atlas/ct-thorax-sagittal/v2/t/025.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-thorax-axial",
@@ -226,42 +480,242 @@
    "subtitle": "Axial",
    "region": "Thorax",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-thorax-axial/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "slices": 48,
+   "thumb": "/atlas/ct-thorax-axial/v2/t/025.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "A",
+    "bottom": "P"
+   }
+  },
+  {
+   "id": "ct-live-thorax-neck-axial",
+   "title": "Thorax and neck - CT",
+   "subtitle": "Axial - living patient",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-thorax-neck-axial/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. This scan was done without intravenous contrast, so vessels are the same grey as muscle: the vessel labels come from the dataset's masks, not from anything the image highlights. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-thorax-neck",
+   "plane": "axial",
+   "mm": [
+    313.5,
+    270.0
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "A",
+    "bottom": "P"
+   }
+  },
+  {
+   "id": "ct-live-thorax-neck-coronal",
+   "title": "Thorax and neck - CT",
+   "subtitle": "Coronal - living patient",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-thorax-neck-coronal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. This scan was done without intravenous contrast, so vessels are the same grey as muscle: the vessel labels come from the dataset's masks, not from anything the image highlights. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-thorax-neck",
+   "plane": "coronal",
+   "mm": [
+    313.5,
+    394.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "S",
+    "bottom": "I"
+   }
+  },
+  {
+   "id": "ct-live-thorax-neck-sagittal",
+   "title": "Thorax and neck - CT",
+   "subtitle": "Sagittal - living patient",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-thorax-neck-sagittal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. This scan was done without intravenous contrast, so vessels are the same grey as muscle: the vessel labels come from the dataset's masks, not from anything the image highlights. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (aortic arch on the left, brachiocephalic trunk on the right).",
+   "group": "live-thorax-neck",
+   "plane": "sagittal",
+   "mm": [
+    267.0,
+    394.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-live-torso-axial",
+   "verified": true,
    "title": "Torso soft tissue - CT",
    "subtitle": "Axial - living patient",
    "region": "Torso",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-live-torso-axial/t/013.webp",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-torso-axial/v2/t/025.webp",
    "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
-   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Left and right are not asserted."
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (liver on the patient's right, spleen on the left).",
+   "group": "live-torso",
+   "plane": "axial",
+   "mm": [
+    415.5,
+    360.0
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "A",
+    "bottom": "P"
+   }
   },
   {
    "id": "ct-live-torso-coronal",
+   "verified": true,
    "title": "Torso soft tissue - CT",
    "subtitle": "Coronal - living patient",
    "region": "Torso",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-live-torso-coronal/t/013.webp",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-torso-coronal/v2/t/025.webp",
    "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
-   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Left and right are not asserted."
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (liver on the patient's right, spleen on the left).",
+   "group": "live-torso",
+   "plane": "coronal",
+   "mm": [
+    415.5,
+    439.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-live-torso-sagittal",
+   "verified": true,
    "title": "Torso soft tissue - CT",
    "subtitle": "Sagittal - living patient",
    "region": "Torso",
    "modality": "CT",
-   "slices": 24,
-   "thumb": "/atlas/ct-live-torso-sagittal/t/013.webp",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-torso-sagittal/v2/t/025.webp",
    "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
-   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Left and right are not asserted."
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (liver on the patient's right, spleen on the left).",
+   "group": "live-torso",
+   "plane": "sagittal",
+   "mm": [
+    318.0,
+    439.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-hand-coronal",
@@ -271,7 +725,15 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-hand-coronal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "mm": [
+    332.8,
+    91.0
+   ],
+   "orient": {
+    "top": "S",
+    "bottom": "I"
+   }
   },
   {
    "id": "ct-hand-axial",
@@ -281,7 +743,17 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-hand-axial/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "A",
+    "bottom": "P"
+   },
+   "mm": [
+    332.8,
+    237.2
+   ],
+   "flipX": true,
+   "flipY": true
   },
   {
    "id": "ct-hand-sagittal",
@@ -291,7 +763,18 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-hand-sagittal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "mm": [
+    106.9,
+    91.0
+   ],
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   },
+   "flipX": true
   },
   {
    "id": "ct-wholebody-axial",
@@ -301,7 +784,11 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-wholebody-axial/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "A",
+    "bottom": "P"
+   }
   },
   {
    "id": "ct-wholebody-coronal",
@@ -311,7 +798,11 @@
    "modality": "CT",
    "slices": 24,
    "thumb": "/atlas/ct-wholebody-coronal/t/013.webp",
-   "credit": "Courtesy of the U.S. National Library of Medicine"
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "orient": {
+    "top": "S",
+    "bottom": "I"
+   }
   }
  ]
 }

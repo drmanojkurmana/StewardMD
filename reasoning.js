@@ -2805,7 +2805,7 @@
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
-        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
+        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
         '</div>' +
       '</div>';
@@ -3028,8 +3028,8 @@
       ".g-green2{background:var(--green-bg);border-color:var(--green-line)}.g-green2 .dx-gate-t{color:var(--green)}",
       ".g-slate{background:var(--panel)}.g-slate .dx-gate-t{color:var(--slate)}",
       ".dx-changed{font:600 12px var(--sans);color:var(--slate);background:var(--panel);border:1px dashed var(--line);border-radius:9px;padding:8px 11px;margin:0 0 12px}",
-      ".dx-cols{display:grid;grid-template-columns:1fr;gap:14px}",
-      "@media(min-width:760px){.dx-cols{grid-template-columns:1fr 1fr}}",
+      ".dx-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}",
+      "@media(min-width:760px){.dx-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}",
       ".dx-col-h{font:800 14px var(--sans);color:var(--ink);margin:2px 0 10px}",
       ".dx-col-n{font-size:11px;background:var(--line);color:var(--slate);border-radius:8px;padding:1px 7px;vertical-align:middle}",
       ".dx-col{display:flex;flex-direction:column;gap:9px}",
@@ -3925,6 +3925,9 @@
     t = t.replace(/\b(DOB|D\.?O\.?B|Date of Birth|Age\/Sex)\b\s*[:]?\s*\S+/gi, "$1: [redacted]");
     t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, "[redacted]");                                          // phone / 10+ digit id runs
     t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");                            // dd/mm/yyyy
+    // Indian identifiers (ABHA Address, UPI, PAN, Indic-script digits, labelled IDs): phi-india.js,
+    // additive only. Flag smd_phi_india, default ON; "0" restores the output above exactly.
+    try { var PI = window.SMD_PHI_INDIA; if (PI && PI.enabled()) t = PI.apply(t); } catch (e) {}
     return t;
   }
   window.SMD_redactPHI = redactPHI;
@@ -4223,7 +4226,7 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined });
+      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
       function attempt(retried) {
@@ -4297,6 +4300,11 @@
       // This lets native stream like the web (first token in seconds) instead of waiting for the whole
       // answer; if the pristine stream misbehaves we fall straight back to the proven whole-fetch path.
       var isNative = !!window.SMD_IS_NATIVE;
+      // The stream bypasses the CapacitorHttp bridge (pristine fetch / WebView XHR), and the bridge is what
+      // rewrites a relative "/api/..." to https://stewardmd.in. Relative, the stream went to the app's own
+      // bundle, failed, and every native answer fell back to fetch-then-replay: no words until the whole
+      // answer was done (audit T14, 2026-09-25). native-bridge.js publishes the origin as SMD_API_BASE.
+      var sb = (isNative && window.SMD_API_BASE && String(b || "").charAt(0) === "/") ? window.SMD_API_BASE + b : b;
       /* REAL NATIVE STREAMING (2026-08-24).
        *
        * This whole path - the watchdog, the native first-token budget, the nsBad cooldown, the
@@ -4409,7 +4417,7 @@
               }
             }
             function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
-            try { xhr.open("POST", b + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
+            try { xhr.open("POST", sb + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
             try { xhr.setRequestHeader("Accept", "text/event-stream"); } catch (e) {}
             for (var k in h) { if (Object.prototype.hasOwnProperty.call(h, k)) { try { xhr.setRequestHeader(k, h[k]); } catch (e) {} } }
             xhr.onprogress = function () { drain(); };
@@ -4427,7 +4435,7 @@
             try { xhr.timeout = NX_TOTAL; } catch (e) {}
             armx(NX_FIRST);
             try {
-              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }));
+              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined }));
             } catch (e) { nsBad(true); settle(fallback()); }
           });
         });
@@ -4462,7 +4470,7 @@
       });
       var attempt = aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }), signal: ctrl.signal });
+        return sfetch(sb + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined }), signal: ctrl.signal });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }
@@ -5179,7 +5187,7 @@
       '.sl-h{font:800 14px var(--sans,sans-serif);color:var(--ink,#14202b);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.sl-hint{font:500 11px var(--sans);color:var(--slate-soft,#5a7184)}' +
       '.sl-th{font:600 13px/1.5 var(--sans);color:var(--slate,#2d4356);padding:6px 2px}.sl-th span{display:block;font-size:11.5px;color:var(--slate-soft,#5a7184);margin-top:3px}' +
       '.sl-gate{display:inline-block;font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 10px;margin:8px 0 2px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)}.sl-gate.ab{background:var(--red-bg,#fbe7e9);color:var(--red,#ab1c2c)}' +
-      '.sl-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}@media (max-width:560px){.sl-cols{grid-template-columns:1fr}}' +
+      '.sl-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:8px}@media (max-width:560px){.sl-cols{grid-template-columns:minmax(0,1fr)}}' +
       '.sl-col-h{font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356);margin:0 0 6px}.sl-col-h span{color:var(--slate-soft,#5a7184)}' +
       '.sl-card{border:1px solid var(--line,#d7dee3);border-radius:10px;margin-bottom:7px;overflow:hidden;background:var(--paper,#f6f7f5)}.sl-card.inf{border-left:3px solid var(--red,#ab1c2c)}.sl-card.ni{border-left:3px solid var(--green,#1c7a4a)}' +
       '.sl-head{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;padding:9px 10px;text-align:left;color:var(--ink,#14202b)}' +
@@ -5870,7 +5878,7 @@
       ".smd-tgl-txt{font:600 12.5px var(--sans,system-ui);color:var(--ink,#14202b)}" +
       ".smd-safety-empty{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}" +
       ".smd-safety-draft{display:inline-block;font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;background:#fef3c7;border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}" +
-      "@media(max-width:420px){.smd-safety-card{padding:14px 15px}.smd-safety-inputs{grid-template-columns:repeat(2,1fr);padding:10px}}";
+      "@media(max-width:420px){.smd-safety-card{padding:14px 15px}.smd-safety-inputs{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px}}";
     document.head.appendChild(st);
   }
   // render-time findings + syndrome id; the read-only base the card's own inputs are overlaid onto.
@@ -6103,7 +6111,7 @@
     var html = '<div id="smdSafetyCard" class="smd-safety-card">' +
       '<div class="smd-safety-eyebrow">Patient safety</div>' +
       '<div class="smd-safety-h">' + (wIco ? '<span class="smd-safety-ic">' + wIco + '</span>' : '') + 'Patient-specific safety</div>' +
-      '<div class="smd-safety-tag">Enter values to check — this does not change the recommendation. Age and sex stay in sync with Save Case.</div>' +
+      '<div class="smd-safety-tag">These values are checked against the regimen. They do not change the recommendation.</div>' +
       smdSafetyInputsHTML(e) +
       '<div class="smd-safety-lines" id="smdSafetyLines"></div></div>';
     // Sit the card with the recommendation: directly under the (relocated) Save-case box when

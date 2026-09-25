@@ -47,6 +47,47 @@
     return null;
   }
 
+  function getIdentityResolver() {
+    try {
+      if (typeof globalThis !== "undefined" && globalThis.StewardIdentityResolver &&
+        globalThis.StewardIdentityResolver.resolvePatientIdentity) {
+        return globalThis.StewardIdentityResolver;
+      }
+    } catch (e) {}
+    try {
+      if (typeof window !== "undefined" && window.StewardIdentityResolver &&
+        window.StewardIdentityResolver.resolvePatientIdentity) {
+        return window.StewardIdentityResolver;
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  /* Read-back verification (WRITE -> READ BACK -> NORMALIZE -> COMPARE -> REPORT).
+   * readBack may be a string (the tag text read back) or { text, url }. Returns true
+   * when it matches what was written; a null/undefined read-back means "no read-back
+   * channel" and passes (the write itself succeeding is the signal on that path). */
+  function readBackMatches(writtenText, writtenUrl, readBack) {
+    if (readBack == null) return true;
+    var rbText = "";
+    var rbUrl = "";
+    if (typeof readBack === "string") {
+      rbText = readBack;
+    } else if (typeof readBack === "object") {
+      rbText = readBack.text != null ? readBack.text : (readBack.uid != null ? readBack.uid : "");
+      rbUrl = readBack.url != null ? readBack.url : "";
+    }
+    if (String(rbText).trim() !== String(writtenText).trim()) return false;
+    if (String(rbUrl).trim() && String(rbUrl).trim() !== String(writtenUrl).trim()) return false;
+    return true;
+  }
+
+  function verificationFailedError() {
+    var err = new Error("Read-back verification failed: written payload does not match tag content");
+    err.code = "WRITE_VERIFICATION_FAILED";
+    return err;
+  }
+
   function nfcScanText(rec) {
     if (!rec) return "";
     try {
@@ -447,10 +488,15 @@
 
     /**
      * Arms the device to write text (UID/MRN) and optional URL on the next tapped NFC tag.
+     * WRITE -> READ BACK -> NORMALIZE -> COMPARE -> REPORT: after a successful write the
+     * payload is verified against a read-back (native plugin echo / simulated read-back in
+     * options) unless options.verifyReadBack === false. A mismatch rejects with
+     * code "WRITE_VERIFICATION_FAILED".
      * @param {string|{ text: string, url?: string, uid?: string }} payload
+     * @param {Object} [options] { verifyReadBack?: boolean, simulatedReadBack?: string|{text,url} }
      * @returns {Promise<{ success: boolean, uid?: string, text?: string, url?: string }>}
      */
-    writeTag: async function (payload) {
+    writeTag: async function (payload, options) {
       var text = "";
       var url = "";
 
@@ -465,9 +511,21 @@
         return Promise.reject(new Error("Nothing to write: text or URL is required."));
       }
 
+      options = options || {};
+      var verify = options.verifyReadBack !== false;
+      var simulated = options.simulatedReadBack != null ? options.simulatedReadBack :
+        (options.readBack != null ? options.readBack : null);
+
       var cap = getCapacitorPlugin();
       if (cap && cap.writeTag) {
-        return cap.writeTag({ text: text, url: url });
+        var res = await cap.writeTag({ text: text, url: url });
+        if (verify) {
+          if (res && res.verified === false) throw verificationFailedError();
+          var nativeReadBack = simulated != null ? simulated :
+            (res && (res.readBack != null ? res.readBack : (res.readBackText != null ? res.readBackText : null)));
+          if (!readBackMatches(text, url, nativeReadBack)) throw verificationFailedError();
+        }
+        return res;
       }
 
       if (hasWebNfc()) {
@@ -482,8 +540,10 @@
         }
         try {
           await writer.write(records.length === 1 && text ? text : { records: records });
+          if (verify && !readBackMatches(text, url, simulated)) throw verificationFailedError();
           return { success: true, text: text, url: url };
         } catch (e) {
+          if (e && e.code === "WRITE_VERIFICATION_FAILED") throw e;
           var isDenied = (e && (e.name === "NotAllowedError" || e.name === "SecurityError" || /permission.*denied/i.test(e.message || "")));
           if (isDenied) {
             var err = new Error("NFC permission was denied. Tap 🔒 in your browser address bar → Site Settings → set NFC to Allow.");
@@ -496,6 +556,43 @@
       }
 
       return Promise.reject(new Error("NFC writing is not available on this device or browser."));
+    },
+
+    /**
+     * Revokes the NFC carrier for a tag (lost/stolen/replaced card) through the
+     * Universal Patient Identity resolver. The patient record itself is untouched.
+     * @param {string|Object} tagOrUid raw uid/text, deep link, or tag object
+     * @param {Object} [options] { reason, revokedBy, revokedAt }
+     * @returns the revoked carrier record, or null when no carrier matched.
+     */
+    revokeTag: function (tagOrUid, options) {
+      options = options || {};
+      var R = getIdentityResolver();
+      if (!R || typeof R.revokeCarrier !== "function") {
+        var err = new Error("StewardIdentityResolver is not loaded; cannot revoke NFC carrier.");
+        err.code = "RESOLVER_UNAVAILABLE";
+        throw err;
+      }
+      var value = "";
+      try {
+        value = parseTagUhid(tagOrUid);
+      } catch (e) {
+        value = "";
+      }
+      if (!value) {
+        if (tagOrUid != null && typeof tagOrUid === "object") {
+          value = tagOrUid.text || tagOrUid.uid || tagOrUid.url || tagOrUid.value || tagOrUid.code || "";
+        } else if (tagOrUid != null) {
+          value = String(tagOrUid);
+        }
+      }
+      return R.revokeCarrier({
+        type: "nfc",
+        value: value,
+        reason: options.reason,
+        revokedBy: options.revokedBy != null ? options.revokedBy : options.by,
+        revokedAt: options.revokedAt,
+      });
     },
 
     /**
@@ -536,6 +633,33 @@
       options = options || {};
       var onUhid = options.onUhid;
       var onEmpty = options.onEmpty;
+      var identityOptions = options.identityOptions || options.resolverOptions || {};
+      function deliverUhid(uhid, tag) {
+        if (typeof onUhid !== "function") return;
+        var R = getIdentityResolver();
+        if (!R) {
+          try { onUhid(uhid, tag); } catch (e) {}
+          return;
+        }
+        var res = null;
+        try {
+          res = R.resolvePatientIdentity({
+            type: "nfc",
+            value: uhid,
+            text: tag ? tag.text : "",
+            url: tag ? tag.url : "",
+            uid: tag ? tag.uid : "",
+          }, identityOptions);
+        } catch (e) {
+          res = null;
+        }
+        if (res && typeof res.then === "function") {
+          res.then(function (r) { try { onUhid(uhid, tag, r); } catch (e) {} },
+            function () { try { onUhid(uhid, tag); } catch (e) {} });
+          return;
+        }
+        try { onUhid(uhid, tag, res); } catch (e) {}
+      }
       return SMD_NFC.startScan(function (tag) {
         var uhid = "";
         try { uhid = parseTagUhid(tag); } catch (e) { uhid = ""; }
@@ -546,7 +670,7 @@
           try { showEmptyTagPrompt(tag, options); } catch (e) {}
           return;
         }
-        if (typeof onUhid === "function") { try { onUhid(uhid, tag); } catch (e) {} }
+        deliverUhid(uhid, tag);
       });
     }
   };

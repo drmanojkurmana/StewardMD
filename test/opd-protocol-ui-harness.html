@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPD Protocol tab harness (clinical protocols + oncology regimens)</title>
+<link rel="stylesheet" href="/redesign-system.css">
+<link rel="stylesheet" href="/opd-emr.css">
+<link rel="stylesheet" href="/kb-protocols.css">
+<style>*{box-sizing:border-box}html,body{margin:0;height:100%;background:#f7f9fb}</style><!-- mirrors index.html global rule -->
+</head><body>
+<script>
+// Every flag on unless the runner lists it in __flagOff (smd_opd_emr, _write, smd_onco_protocols, smd_onco_protolib).
+window.__flagOff = {};
+window.SMD_QUEUE_FLAGS = { bool: function (k) { return !window.__flagOff[k]; } };
+// Protocol content is the REAL static JSON (served by serve.mjs); the GHIS profile call is stubbed.
+var realFetch = window.fetch.bind(window);
+window.fetch = function (url, opts) {
+  url = String(url);
+  if (url.indexOf("/kb/") === 0) return realFetch(url, opts);
+  return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ labs: [], radiology: [], medications: [], phone: "" }); } });
+};
+window.__ready = false;
+</script>
+<script src="/kb-protocols-flags.js"></script>
+<script src="/kb-protocols.js"></script>
+<script src="/onco-dose.js"></script>
+<script src="/onco-protocols.js"></script>
+<script src="/opd-emr.js" onload="window.__ready = !!(window.OPDEMR && window.SMD_KBPROTO);"></script>
+</body></html>

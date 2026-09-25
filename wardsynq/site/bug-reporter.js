@@ -367,7 +367,7 @@
             '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;color:#333;">' + esc(T(G.WSQ, "site.bug.whatWentWrong", "What went wrong? (What happened vs what you expected)")) + "</label>" +
             '<textarea id="wsqBugDesc" rows="4" style="width:100%;box-sizing:border-box;border:1.5px solid #ccc;border-radius:6px;padding:10px;font-size:14px;font-family:inherit;" placeholder="' + esc(T(G.WSQ, "site.bug.describePlaceholder", "Describe the issue at this spot...")) + '"></textarea>' +
           '</div>' +
-          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">' +
+          '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-bottom:16px;">' +
             '<div>' +
               '<label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:#333;">' + esc(T(G.WSQ, "site.bug.severity", "Severity")) + "</label>" +
               '<select id="wsqBugSev" style="width:100%;border:1.5px solid #ccc;border-radius:6px;padding:6px;font-size:13px;">' +

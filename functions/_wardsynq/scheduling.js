@@ -33,6 +33,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { blackedOutBy } from "./blackout.js";
 import { readClashDiary, readRecentWrites } from "./read-window.js";
+import { consentFrom as teleConsentFrom } from "../_telehealth.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Appointment";
@@ -70,6 +71,10 @@ function Appointment(input) {
     requestId: i.requestId || null,
     arrivedAt: i.arrivedAt || null,
     completedAt: i.completedAt || null,
+    /* A video visit (functions/_telehealth.js). Booked as one only while the hospital has a video server saved, and only
+     * with the consent: who agreed, who recorded it, when. The room is minted when the patient's visit joins the queue. */
+    teleconsult: !!i.teleconsult,
+    teleConsent: i.teleconsult && i.teleConsent ? { givenBy: i.teleConsent.givenBy || null, recordedBy: i.teleConsent.recordedBy || null, at: i.teleConsent.at || null } : null,
     source: { system: "wardsynq-native", sourceId: `appointment:${i.id}` },
   };
 }
@@ -155,13 +160,16 @@ function apptSummary(a) {
     bookedBy: a.bookedBy, bookedAt: a.bookedAt,
     changedBy: a.changedBy || null, changedAt: a.changedAt || null, changeReason: a.changeReason || null,
     requestId: a.requestId || null, arrivedAt: a.arrivedAt || null, completedAt: a.completedAt || null, version: a.version,
+    teleconsult: !!a.teleconsult, teleConsentBy: (a.teleconsult && a.teleConsent && a.teleConsent.givenBy) || null,
   };
 }
 
 /**
  * Books an appointment.
  * ctx: { migration, patientId, clinicianId, startAt, minutes, reason?, requestId?, overbook?,
- *        overbookReason?, actorDeps, recordDeps }
+ *        overbookReason?, teleconsult?, teleConsent?, telehealthOn?, actorDeps, recordDeps }
+ * teleconsult books a video visit: refused (409) unless the router says the hospital has video on (telehealthOn), and
+ * (422) without teleConsent = { givenBy, agreed: true }.
  */
 async function bookAppointment(request, env, ctx) {
   const mig = ctx.migration;
@@ -176,6 +184,13 @@ async function bookAppointment(request, env, ctx) {
   // invariant this file exists to hold.
   if (!Number.isFinite(minutes) || minutes <= 0 || minutes > 480) {
     return { ...base, ok: false, status: 422, error: "minutes_required", detail: "an appointment has a length, between 1 and 480 minutes", written: 0 };
+  }
+  let tele = null;
+  if (ctx.teleconsult) {
+    if (!ctx.telehealthOn) return { ...base, ok: false, status: 409, error: "video_off", detail: "video visits are off for this hospital", written: 0 };
+    const c = teleConsentFrom(ctx.teleConsent);
+    if (!c.ok) return { ...base, ok: false, status: 422, error: c.error, detail: "record who agreed to a video visit before booking one", written: 0 };
+    tele = { givenBy: c.givenBy };
   }
 
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
@@ -261,6 +276,7 @@ async function bookAppointment(request, env, ctx) {
     overbooked: !!held, overbookReason: held ? overbookReason : null,
     bookedBy: resolved.actor.id, bookedAt: new Date().toISOString(),
     requestId: str(ctx.requestId) || null,
+    teleconsult: !!tele, teleConsent: tele ? { givenBy: tele.givenBy, recordedBy: resolved.actor.id, at: new Date().toISOString() } : null,
   });
   try {
     const out = await svc.put(appt, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
@@ -331,9 +347,16 @@ async function setAppointmentState(request, env, ctx) {
   });
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    /* OPD plan item 8: an ARRIVED patient joins the OPD queue (the router adds the token). The queue shows
+     * a name and MR number, so they are read here, where the record is already open. A patient that cannot
+     * be read still arrives - the desk types the name - it is just not pre-filled. */
+    let patient = null;
+    if (state === "arrived") {
+      try { const p = await svc.get("Patient", next.patientId); if (p) patient = { name: p.name || p.display || "", mrn: p.mrn || "", mobile: p.mobile || p.phone || "" }; } catch (e) { patient = null; }
+    }
     /* The slot frees immediately on cancellation, and the record still shows it was booked and by
      * whom: "they cancelled" and "they never had one" are different facts. */
-    return { ...base, ok: true, written: 1, ...apptSummary({ ...next, version: out.record.version }), slotFreed: !HOLDS_SLOT.includes(state), actor: resolved.actor.id };
+    return { ...base, ok: true, written: 1, ...apptSummary({ ...next, version: out.record.version }), slotFreed: !HOLDS_SLOT.includes(state), actor: resolved.actor.id, ...(patient ? { patient } : {}) };
   } catch (e) {
     return { ...base, ...writeFailure(e, { appointmentId, written: 0, actor: resolved.actor.id }) };
   }

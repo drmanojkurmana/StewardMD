@@ -233,10 +233,22 @@ body.oh-lock { overflow: hidden; }
 /* ===== Icon chips + tool tiles — uniform, equal-size, symmetric 2-col grid ================ */
 .oh-quick { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 20px; }
 @media (max-width: 360px) { .oh-quick { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
 .oh-qa { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 78px; background: var(--rds-surface, var(--panel, #fff)); border: 1px solid var(--rds-line, var(--line)); border-radius: 16px; padding: 12px 6px; font: 700 11.5px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); cursor: pointer; text-align: center; box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); transition: transform .16s var(--rds-ease, cubic-bezier(.2,.7,.2,1)), border-color .18s, box-shadow .18s; }
 /* the bare icon glyph is styled INTO a tinted rounded square (no markup change needed) */
 .oh-qa .material-symbols-rounded, .oh-qa .material-symbols-outlined { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 11px; background: var(--teal-soft, #e4f2ef); font-size: 20px; color: var(--teal, #0e6e63); }
 .oh-qa:active { transform: scale(.96); border-color: var(--teal, #0e6e63); box-shadow: var(--rds-el-cta, 0 6px 18px rgba(15,118,110,.22)); }
+/* Four tiles on a 390-430px phone leaves ~85px each, and the longest label ("Interactions")
+   measured 88px, so it sat flush against both tile edges and spilled a couple of pixels. The grid
+   is already minmax(0,1fr), so the tiles are the right width and only the label needed room.
+   Measured every combination: the existing 11.5px type fits on one line once the side padding
+   drops from 6px to 4px, so the type is left alone.
+   NOT overflow-wrap/hyphens: allowing a break made "Interactions" wrap to "Interaction" + "s",
+   which measures as fixed while looking worse than the bug. A single word should not break. */
+@media (min-width: 361px) and (max-width: 440px) {
+  .oh-qa { padding-left: 4px; padding-right: 4px; }
+}
+
 
 .oh-grp { margin-bottom: 22px; }
 .oh-grp-h { font: 800 11px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .09em; color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin: 0 0 11px; }
@@ -347,8 +359,8 @@ body.oh-lock { overflow: hidden; }
 .ctc-g5 { border-left-color: var(--sev-critical-bd); }.ctc-g5 .ctc-gnum { color: var(--sev-critical-fg); }
 
 /* ===== RECIST 1.1 — severity-tinted result ============================================== */
-.rec-form { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
-@media (min-width: 560px) { .rec-form { grid-template-columns: 1fr 1fr; } }
+.rec-form { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; margin-bottom: 16px; }
+@media (min-width: 560px) { .rec-form { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } }
 .rec-field { display: flex; flex-direction: column; gap: 6px; }
 .rec-field > span { font: 700 11.5px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); }
 .rec-field .oh-search { margin-bottom: 0; padding: 12px 14px; }
@@ -397,8 +409,8 @@ body.oh-lock { overflow: hidden; }
 .oev-ua { border: 1px solid var(--sev-warning-bd); border-radius: 15px; padding: 15px; background: var(--rds-surface, var(--panel, #fff)); }
 .oev-ua-h { display: inline-block; font: 800 10px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .06em; background: var(--sev-warning-bg); color: var(--sev-warning-fg); border-radius: 7px; padding: 3px 9px; }
 .oev-ua-lead { font: 500 12px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); margin: 9px 0 12px; line-height: 1.5; }
-.oev-ua-cols { display: grid; grid-template-columns: 1fr; gap: 10px; }
-@media (min-width: 560px) { .oev-ua-cols { grid-template-columns: 1fr 1fr; } }
+.oev-ua-cols { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; }
+@media (min-width: 560px) { .oev-ua-cols { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } }
 .oev-ua-col { border: 1px solid var(--rds-line, var(--line)); border-radius: 12px; padding: 11px 13px; }
 .oev-ua-col-new { border-color: var(--sev-info-bd); }
 .oev-ua-col-h { font: 800 11px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .04em; color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin-bottom: 7px; }

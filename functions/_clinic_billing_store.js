@@ -21,7 +21,7 @@ async function toBooks(env, orgId, ev, actor) {
   return r;
 }
 const today = () => new Date().toISOString().slice(0, 10);
-import { makeMrn, buildInvoice, canOrderTransition, validateOrder, validateTariff, isDispensable } from "./_clinic_billing.js";
+import { makeMrn, buildInvoice, canOrderTransition, validateOrder, validateTariff, isDispensable, consultFee } from "./_clinic_billing.js";
 
 // Server enable gate (wrangler.toml var, like QUEUE_ENABLED). Billing is inert unless set.
 export function billingEnabled(env) { return !!(env && env.CLINIC_BILLING_ENABLED === "1"); }
@@ -112,7 +112,7 @@ export async function getPatient(env, orgId, id) {
 }
 
 // ---- orders (first-class; the station work item) ----
-export async function createOrder(env, orgId, o, actor) {
+export async function createOrder(env, orgId, o, actor, opts) {
   /* The item and its price come from this clinic's own price list, never from the request: a price
    * in the body let anyone who could raise an order bill anything at zero. */
   const tariffId = String((o && o.tariffId) || "").trim();
@@ -121,7 +121,23 @@ export async function createOrder(env, orgId, o, actor) {
   if (!t || !t.fields || t.fields.orgId !== orgId || t.fields.active === false) return { ok: false, error: "tariff_item_not_found" };
   // A per-day stay charge is billed from the stay itself, never ordered (and never ordered at a test's price).
   if (["bed", "nursing", "visit"].indexOf(t.fields.kind) >= 0) return { ok: false, error: "not_orderable" };
-  const v = validateOrder({ patientId: o.patientId, qty: o.qty, name: t.fields.name, code: t.fields.code, kind: t.fields.kind, unitPrice: t.fields.price, ticketId: o.ticketId, sessionId: o.sessionId });
+  /* OPD plan item 9: a CONSULTATION is priced by visit type (the tariff's followupPrice, falling back to its
+   * price) and a follow-up inside the hospital's free-review window is waived - on the server, from the
+   * ticket's own visit type and this patient's own last paid consultation, never from the request. */
+  let unitPrice = t.fields.price, feeNote = "";
+  if (t.fields.kind === "consultation") {
+    const tk = o.ticketId ? await getTicket(env, String(o.ticketId)).catch(() => null) : null;
+    let lastPaid = 0;
+    if (tk && tk.visitType === "followup") {
+      try {
+        const paid = await ordersForPatient(env, orgId, String(o.patientId || ""), "paid");
+        for (const x of (paid && paid.orders) || paid || []) if (x && x.kind === "consultation") lastPaid = Math.max(lastPaid, Number(x.paidAt || x.updatedAt || 0));
+      } catch (e) { lastPaid = 0; }   // unreadable history charges the follow-up price; it never waives by accident
+    }
+    const fee = consultFee({ new: t.fields.price, followup: t.fields.followupPrice }, { visitType: tk && tk.visitType, freeReviewDays: (opts && opts.freeReviewDays) || 0, lastPaidConsultAt: lastPaid, nowMs: Date.now() });
+    unitPrice = fee.paise; feeNote = fee.waived ? fee.reason : "";
+  }
+  const v = validateOrder({ patientId: o.patientId, qty: o.qty, name: t.fields.name + (feeNote ? " (free review)" : ""), code: t.fields.code, kind: t.fields.kind, unitPrice, ticketId: o.ticketId, sessionId: o.sessionId });
   if (!v.ok) return v;
   const id = uid("ord_");
   const fields = { orgId, patientId: v.order.patientId, encounterId: o.encounterId || "", kind: v.order.kind, code: v.order.code, name: v.order.name, qty: v.order.qty, unitPrice: v.order.unitPrice, tariffId, ticketId: v.order.ticketId, sessionId: v.order.sessionId, status: "ordered", orderedBy: actor || "", orderedAt: Date.now(), invoiceId: "", updatedAt: Date.now() };
@@ -169,11 +185,21 @@ export async function pharmacyQueue(env, orgId) {
 }
 // Hand the medicines over. Guarded by the state machine rather than by the pharmacist remembering:
 // only paid + medication can reach "dispensed", so an unpaid order cannot be released.
-export async function dispenseOrder(env, orgId, orderId, actor) {
+// The station names who the row is for (patientId): a row that names a different patient than
+// the order is refused, so a stale screen can never dispense patient A's drugs to patient B.
+// The handover is recorded as dispensedBy/dispensedAt - the pharmacy act, distinct from the
+// bedside administeredBy/At the eMAR records when the dose is actually given (which this
+// station never writes).
+export async function dispenseOrder(env, orgId, orderId, actor, claim) {
   const d = await fsGet(env, "q_orders/" + orderId).catch(() => null);
   if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
   const o = d.fields;
+  const claimedPatient = claim && claim.patientId ? String(claim.patientId).trim() : "";
+  if (claimedPatient && o.patientId && claimedPatient !== String(o.patientId)) {
+    return { ok: false, error: "patient_mismatch", message: "That order belongs to a different patient. Nothing was dispensed." };
+  }
   if (o.status === "dispensed") return { ok: true, already: true };
+  if (!isDispensable(Object.assign({ id: orderId }, o))) return { ok: false, error: "not_dispensable", status: o.status, kind: o.kind };
   const updates = [wUpdate(env, "q_orders/" + orderId, { status: "dispensed", dispensedAt: Date.now(), dispensedBy: actor || "", updatedAt: Date.now() })];
   if (o.tariffId) {
     try {
@@ -188,6 +214,30 @@ export async function dispenseOrder(env, orgId, orderId, actor) {
   await fsCommit(env, updates);
   await qAudit(env, { hospitalId: orgId, ticketId: o.patientId || "", actor: actor || "pharmacy", action: "order_dispense", meta: o.name || "" });
   return { ok: true };
+}
+
+/* OPD plan item 9: a refund. Money taken for something not delivered goes back - PAID orders only (the state
+ * machine refuses anything else; a dispensed medicine is a return), always with a reason, written with the
+ * read's updateTime as a precondition so two cashiers cannot refund one order twice, and audited. The
+ * amount is the order's own, never typed. How GST applies to a refund is an accountant's sign-off
+ * (docs/opd/OPD_PLAN_2026-09-24.md), so no tax line is invented here. */
+export async function refundOrder(env, orgId, orderId, reason, actor) {
+  const why = String(reason || "").trim();
+  if (!why) return { ok: false, error: "reason_required", message: "Say why this is refunded." };
+  const d = await fsGet(env, "q_orders/" + orderId).catch(() => null);
+  if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
+  const o = d.fields;
+  if (o.status === "refunded") return { ok: true, already: true };
+  if (!canOrderTransition(o.status, "refunded")) return { ok: false, error: "not_refundable", status: o.status, message: o.status === "dispensed" ? "This medicine was handed over. Record it as a return, not a refund." : "Only a paid order can be refunded." };
+  const amount = Math.max(0, Math.round(Number(o.unitPrice) || 0)) * Math.max(1, Math.round(Number(o.qty) || 1));
+  try {
+    await fsCommit(env, [wUpdate(env, "q_orders/" + orderId, { status: "refunded", refundAmount: amount, refundReason: why.slice(0, 200), refundedBy: actor || "", refundedAt: Date.now(), refundedUtcDay: utcDay(Date.now()), updatedAt: Date.now() }, { updateTime: d.updateTime })]);
+  } catch (e) {
+    if (e && e.code === "precondition") return { ok: false, error: "changed", message: "This order changed while you were refunding it. Reload and try again." };
+    throw e;
+  }
+  await qAudit(env, { hospitalId: orgId, ticketId: o.patientId || "", actor: actor || "cashier", action: "order_refund", meta: (o.name || "") + " " + amount + " " + why.slice(0, 60) });
+  return { ok: true, orderId, refundAmount: amount };
 }
 
 // ---- tariff (price catalog, integer paise) ----
@@ -337,5 +387,17 @@ export async function shiftReport(env, orgId, offsetMinutes) {
     });
   }
   invoices.sort((a, b) => (b.paidAt || 0) - (a.paidAt || 0));
-  return { date, total: paise, count, byMethod, byCount, invoices };
+  /* OPD plan item 9: the day's REFUNDS, netted. A drawer that counts takings and not what was handed back
+   * never balances, and the gap reads as missing cash. Found by the refundedUtcDay refundOrder writes. */
+  let refundPaise = 0, refundCount = 0;
+  const seenR = new Set();
+  for (const day of days) {
+    const { rows } = await readAll(env, "q_orders", [{ field: "orgId", value: orgId }, { field: "refundedUtcDay", value: day }], REVENUE_CAP);
+    rows.forEach((r) => {
+      const f = r.fields || {};
+      if (f.orgId !== orgId || f.status !== "refunded" || (f.refundedAt || 0) < dayStart || f.refundedAt >= dayEnd || !r.id || seenR.has(r.id)) return;
+      seenR.add(r.id); refundPaise += Math.max(0, Number(f.refundAmount) || 0); refundCount++;
+    });
+  }
+  return { date, total: paise, count, byMethod, byCount, invoices, refunds: { total: refundPaise, count: refundCount }, net: paise - refundPaise };
 }

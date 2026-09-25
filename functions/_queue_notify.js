@@ -32,6 +32,28 @@ export function pendingEvent(ticket, cfg) {
   return "";
 }
 
+/* Plan item 14: "the doctor is running late", with the new estimate. The queue.msg.delayed template existed and
+ * nothing sent it. It goes when the doctor is away from consulting (break, emergency, procedure, meeting, or the
+ * session paused), or when a patient's estimate has slipped DELAY.slipMin past the one they were last given
+ * (n_etaTold, first taken at their first recompute). Never to the next patient (their own message says come in),
+ * at most one per DELAY.gapMs and DELAY.max per visit, so a long day is news, not noise. PURE. */
+export var DELAY = { slipMin: 20, gapMs: 30 * 60000, max: 3 };
+var AWAY = { "break": 1, emergency: 1, procedure: 1, meeting: 1 };
+export function doctorAway(session) { return !!(session && (AWAY[session.doctorStatus] || session.status === "paused")); }
+export function delayDue(ticket, nowMs, away) {
+  var s = ticket.status;
+  if (s !== "registered" && s !== "waiting" && s !== "called") return false;
+  if ((ticket.position || 0) <= 1) return false;
+  if ((ticket.n_delays || 0) >= DELAY.max || nowMs - (ticket.n_delayAt || 0) < DELAY.gapMs) return false;
+  if (away) return true;
+  var told = ticket.n_etaTold || 0;
+  return !!(told && ticket.etaStart && ticket.etaStart - told >= DELAY.slipMin * 60000);
+}
+// The estimate as a clock time the patient can plan by. ponytail: IST; a per-hospital time zone when one exists.
+export function clockTime(ms, tz) {
+  try { return new Date(ms).toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit", timeZone: tz || "Asia/Kolkata" }); } catch (e) { return ""; }
+}
+
 async function linkUrl(env, ticket) {
   var base = (env && env.QUEUE_LINK_BASE) || "https://stewardmd.in";
   var tok = await mintTicketToken(env, ticket.id, ticket.expiresAt || (Date.now() + 12 * 3600e3), ticket.tokenVer || 1);
@@ -107,6 +129,18 @@ export async function notifyTimeline(env, session, ticket, url) {
   await auditNotify(env, session, ticket, "timeline", res, mask(mobile));
   return res;
 }
+// The video visit's waiting-page link (functions/_telehealth.js inviteText: no name, no MR number). Same channels, meter
+// and masked audit as every queue message. Returns { ok } or { skipped, reason }; never throws.
+export async function notifyTeleLink(env, session, ticket, body, url) {
+  var mobile = "";
+  try { mobile = await decPHI(env, ticket.encMobile); } catch (e) {}
+  if (!mobile) return { skipped: true, reason: "no_phone" };
+  if (!(await chargeVisit(env, session, ticket))) return { skipped: true, reason: "quota-exhausted" };
+  var res;
+  try { res = await send(env, mobile, body, url); } catch (e) { res = { ok: false, reason: "exception" }; }
+  await auditNotify(env, session, ticket, "tele_link", res, mask(mobile));
+  return res;
+}
 
 // Send one event for one ticket (idempotent, best-effort — never throws to the caller).
 export async function notifyTicket(env, session, ticket, event, vars) {
@@ -136,6 +170,7 @@ export async function notifyTicket(env, session, ticket, event, vars) {
   var patch = { updatedAt: Date.now() };
   if (stageNum) patch.n_stage = stageNum;
   if (boolFlag) patch[boolFlag] = true;
+  if (event === "delayed") { patch.n_delays = (ticket.n_delays || 0) + 1; patch.n_delayAt = Date.now(); patch.n_etaTold = ticket.etaStart || 0; Object.assign(ticket, { n_delays: patch.n_delays, n_delayAt: patch.n_delayAt, n_etaTold: patch.n_etaTold }); }
   try { await fsCommit(env, [wUpdate(env, "q_tickets/" + ticket.id, patch)]); } catch (e) {}
   if (stageNum) ticket.n_stage = stageNum;
   if (boolFlag) ticket[boolFlag] = true;
@@ -151,5 +186,8 @@ export async function runQueueNotifications(env, session, tickets, cfg) {
     if (t.status !== "registered" && t.status !== "waiting" && t.status !== "called") continue;
     var ev = pendingEvent(t, cfg);
     if (ev) { try { await notifyTicket(env, session, t, ev, { ahead: Math.max(0, (t.position || 1) - 1) }); } catch (e) {} }
+    // Plan item 14: the estimate a patient was first shown is the baseline a later slip is measured from.
+    if (!t.n_etaTold && t.etaStart) { t.n_etaTold = t.etaStart; try { await fsCommit(env, [wUpdate(env, "q_tickets/" + t.id, { n_etaTold: t.etaStart })]); } catch (e) {} }
+    else if (delayDue(t, Date.now(), doctorAway(session))) { try { await notifyTicket(env, session, t, "delayed", { eta: clockTime(t.etaStart) }); } catch (e) {} }
   }
 }

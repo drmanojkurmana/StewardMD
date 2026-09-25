@@ -1,6 +1,7 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/neg-auth-remaining-routes-org.test.mjs — negative-authorization coverage for the remaining
  * routes that scripts/wardsynq-reachability.mjs listed as untested and that sit OUTSIDE the WardSynQ
- * clinical record store: GET+POST /bill/tariff, POST /bill/invoice, POST /bill/dispense,
+ * clinical record store: GET+POST /bill/tariff, POST /bill/invoice, POST /bill/dispense, GET /bill/shift,
  * POST /room/update, POST /session/status, POST /org/from-connect, GET /mfa/status.
  *
  * For each route: (1) no session -> 401, (2) a signed-in member without the capability -> 403 (and
@@ -234,6 +235,39 @@ test("POST /bill/dispense: no session refused, wrong-role refused (nothing writt
   assert.equal(rOk.ok, true);
   const dispensed = await api(`/bill/orders?orgId=org-b-a&patientId=${patientId}&status=dispensed`, "GET", null, asFirebase(CASHIER_A_EMAIL));
   assert.equal(dispensed.orders.length, 1);
+});
+
+/* ==================================================================================================
+ * GET /bill/shift - billing.view (the day-end drawer report: today's paid invoices by tender). Read-only,
+ * but it is money: the pharmacy role that hands medicines over must not see the takings.
+ * ================================================================================================== */
+
+test("GET /bill/shift: no session refused, pharmacy refused, cross-hospital refused, cashier reads today's takings by tender", async () => {
+  seedTwoHospitals();
+  const { patientId } = await realBillableOrder("medication");
+  const invoice = await api("/bill/invoice", "POST", { orgId: "org-b-a", patientId }, asFirebase(CASHIER_A_EMAIL));
+  assert.equal(invoice.__status, 200, JSON.stringify(invoice));
+  const paid = await api("/bill/pay", "POST", { orgId: "org-b-a", invoiceId: invoice.invoice.id, method: "cash" }, asFirebase(CASHIER_A_EMAIL));
+  assert.equal(paid.__status, 200, JSON.stringify(paid));
+
+  const r401 = await api("/bill/shift?orgId=org-b-a", "GET", null, {});
+  assert.equal(r401.__status, 401, JSON.stringify(r401));
+
+  const r403 = await api("/bill/shift?orgId=org-b-a", "GET", null, asFirebase(PHARMACY_A_EMAIL));
+  assert.equal(r403.__status, 403, JSON.stringify(r403));
+
+  const rCross = await api("/bill/shift?orgId=org-b-a", "GET", null, asFirebase(ADMIN_B_EMAIL));
+  assert.ok(rCross.__status === 403 || rCross.__status === 404, JSON.stringify(rCross));
+
+  const rOk = await api("/bill/shift?orgId=org-b-a", "GET", null, asFirebase(CASHIER_A_EMAIL));
+  assert.equal(rOk.__status, 200, JSON.stringify(rOk));
+  assert.equal(rOk.ok, true, JSON.stringify(rOk));
+  assert.equal(rOk.count, 1, "the one paid invoice is counted");
+  assert.ok(rOk.total > 0, "a paid invoice has a non-zero total");
+  assert.equal(rOk.byMethod.cash, rOk.total, "and it is all cash");
+  assert.equal(rOk.invoices.length, 1);
+  assert.equal(rOk.invoices[0].paidMethod, "cash");
+  assert.ok(!("patientId" in rOk.invoices[0]), "invoice rows carry no patient identity");
 });
 
 /* ==================================================================================================

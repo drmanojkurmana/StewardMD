@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-order-workstation.test.mjs — LT-09 (live test 2026-09-15), the server half.
  *
  * The Order safety workstation (wardsynq/ui/wardsynq-app.js) showed three fabricated patients and saved

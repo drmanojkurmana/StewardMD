@@ -1,6 +1,6 @@
 /* MaiK Live Doctor — real headless browser.
  *
- * The Live Doctor (flag smd_maik_live_doc, default ON) replaces the stationary resident:
+ * The Live Doctor (flag smd_maik_live_doc, default ON; "0" = stationary resident) replaces the stationary resident:
  * a 12x16 pixel physician who walks the composer's top edge right to left, freelances
  * stunts (hop/backflip/sprint/auscultate with a bpm bubble), reacts to a tap on himself
  * (startle/wave/hearts), and never intercepts taps anywhere else. Pinned because the
@@ -108,7 +108,7 @@ try {
     var d=__MAIK_TEST.docState(); return d&&d.state;`);
   ok(tap === "run", "a tap on the sheet floor sends him running — " + tap);
   const skidSeen = {};
-  for (let i = 0; i < 30; i++) { const s = await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`); if (s) skidSeen[s] = 1; await sleep(90); }
+  for (let i = 0; i < 45; i++) { const s = await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`); if (s) skidSeen[s] = 1; if (skidSeen.skid) break; await sleep(90); }   // up to ~4 s: from the far right he needs ~2.8 s at run speed
   ok(!!skidSeen.skid, "he skids in on arrival — states: " + Object.keys(skidSeen).sort().join(","));
 
   // ── busy: a question in flight puts him to WORK ──
@@ -135,7 +135,7 @@ try {
   await ev(`localStorage.setItem("smd_maik_live_doc","0"); SMD_askMaik(""); return 1;`); await sleep(1200);
   ok(await ev(`return !document.querySelector(".mkdoc") && !!document.querySelector(".maik-cmp .mkw");`) === true,
     "flag \"0\" restores the stationary Stetho Buddy");
-  await ev(`localStorage.removeItem("smd_maik_live_doc"); return 1;`);
+  await ev(`localStorage.setItem("smd_maik_live_doc","1"); return 1;`);
 
 } catch (e) { console.log("ERR", e); fails++; }
 finally { chrome.kill(); serve.kill(); }

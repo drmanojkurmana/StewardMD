@@ -17,6 +17,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import { createRequire } from "node:module";
 
 const HTML = readFileSync(fileURLToPath(new URL("../opd.html", import.meta.url)), "utf8");
 
@@ -25,7 +26,7 @@ function loadWebPulse(pulse) {
   const from = HTML.indexOf("function pnum(");
   const end = HTML.indexOf("\n  function ", HTML.indexOf("function pulseInner()"));
   assert.ok(from > -1 && end > from, "the pulse renderer is still in opd.html");
-  const sandbox = { st: { pulse }, esc: (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])) };
+  const sandbox = { window: { SMD_OPD_PULSE: createRequire(import.meta.url)("../opd-pulse-model.js") }, st: { pulse }, esc: (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])) };
   vm.createContext(sandbox);
   vm.runInContext(HTML.slice(from, end), sandbox);
   return sandbox.pulseInner();

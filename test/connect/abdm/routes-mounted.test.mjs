@@ -1,3 +1,4 @@
+import "../../helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 // The two mounted ABDM surfaces: the V3 callback receiver at /api/v3/* and the M1 clinician routes at
 // /api/abdm/*. Both must be inert until their flag is set, and neither may leak PHI or 5xx at ABDM.
 import { test } from "node:test";

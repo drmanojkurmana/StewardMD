@@ -1,0 +1,170 @@
+{
+ "id": "obgyn",
+ "label": "Obstetrics and Gynaecology",
+ "short": "O&G",
+ "icon": "pregnant_woman",
+ "group": "women-children",
+ "subject": "obstetrics-gynaecology",
+ "workspace": "obstetrics_gynaecology",
+ "scribe": "obgyn",
+ "tools": ["pregnancy-dating", "labour-care"],
+ "sections": [
+  {
+   "id": "obstetric-history",
+   "title": "Obstetric history",
+   "target": "Others",
+   "fields": [
+    { "id": "gravida", "label": "Gravida", "type": "number" },
+    { "id": "para", "label": "Para", "type": "number" },
+    { "id": "living", "label": "Living children", "type": "number", "set": "children_living" },
+    { "id": "abortions", "label": "Abortions / miscarriages", "type": "number", "set": "no_of_abortions" },
+    { "id": "children_died", "label": "Children died", "type": "number", "set": "children_died" },
+    { "id": "stillbirths", "label": "Stillbirths", "type": "number", "set": "still_birth" },
+    { "id": "previous_births", "label": "Previous births (mode, year, outcome)", "type": "textarea", "hint": "e.g. 2019 LSCS for fetal distress, live male 3.1 kg" },
+    { "id": "last_childbirth", "label": "Last childbirth (LCB)", "type": "text", "set": "LCB" }
+   ]
+  },
+  {
+   "id": "current-pregnancy",
+   "title": "Current pregnancy",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "booking_status", "label": "Booking", "type": "select", "opts": ["Booked", "Unbooked", "Referred"] },
+    { "id": "conception", "label": "Conception", "type": "select", "opts": ["Spontaneous", "Ovulation induction", "IVF / ART"] },
+    { "id": "fetal_movements", "label": "Fetal movements", "type": "select", "opts": ["Not yet felt", "Felt well", "Reduced", "Absent"] },
+    { "id": "dating_scan", "label": "Dating / NT scan findings", "type": "text" },
+    { "id": "anomaly_scan", "label": "Anomaly scan findings", "type": "text" },
+    { "id": "supplements", "label": "Iron-folic acid and calcium", "type": "select", "opts": ["Taking regularly", "Irregular", "Not started"] },
+    { "id": "td_vaccine", "label": "Td / TT doses received", "type": "select", "opts": ["None", "One dose", "Two doses", "Booster only"] },
+    { "id": "pregnancy_complaints", "label": "Current complaints", "type": "textarea" }
+   ]
+  },
+  {
+   "id": "antenatal-risk",
+   "title": "Antenatal risk factors",
+   "target": "pregnancy_comlications",
+   "alert": "High-risk pregnancy: plan care at a facility that can manage it and follow the relevant protocol.",
+   "fields": [
+    { "id": "risk_prev_cs", "label": "Previous caesarean or uterine surgery", "type": "check" },
+    { "id": "risk_prev_pph", "label": "Previous postpartum haemorrhage", "type": "check" },
+    { "id": "risk_prev_pe", "label": "Previous pre-eclampsia or eclampsia", "type": "check" },
+    { "id": "risk_prev_loss", "label": "Previous stillbirth or neonatal death", "type": "check" },
+    { "id": "risk_prev_preterm", "label": "Previous preterm birth", "type": "check" },
+    { "id": "risk_diabetes", "label": "Diabetes or GDM", "type": "check" },
+    { "id": "risk_htn", "label": "Chronic hypertension", "type": "check" },
+    { "id": "risk_anaemia", "label": "Anaemia (Hb below 11 g/dL)", "type": "check" },
+    { "id": "risk_rh_neg", "label": "RhD negative", "type": "check" },
+    { "id": "risk_multiple", "label": "Multiple pregnancy", "type": "check" },
+    { "id": "risk_age", "label": "Age under 18 or 35 and over", "type": "check" },
+    { "id": "risk_bmi", "label": "BMI 30 or more", "type": "check" },
+    { "id": "risk_heart", "label": "Heart disease", "type": "check" },
+    { "id": "risk_thyroid", "label": "Thyroid disorder", "type": "check" },
+    { "id": "risk_infection", "label": "HIV, hepatitis B or syphilis positive", "type": "check" },
+    { "id": "risk_interval", "label": "Pregnancy interval under 18 months", "type": "check" }
+   ]
+  },
+  {
+   "id": "obstetric-examination",
+   "title": "Obstetric examination",
+   "target": "per_abdomen_exam",
+   "fields": [
+    { "id": "sfh", "label": "Symphysis-fundal height", "type": "number", "unit": "cm" },
+    { "id": "fundus_weeks", "label": "Fundus corresponds to", "type": "text", "unit": "weeks" },
+    { "id": "lie", "label": "Lie", "type": "select", "opts": ["Longitudinal", "Transverse", "Oblique", "Unstable"] },
+    { "id": "presentation", "label": "Presentation", "type": "select", "opts": ["Cephalic", "Breech", "Shoulder", "Not determined"] },
+    { "id": "engagement", "label": "Head palpable (fifths)", "type": "select", "opts": ["5/5", "4/5", "3/5", "2/5", "1/5", "0/5"] },
+    { "id": "fhr", "label": "Fetal heart rate", "type": "number", "unit": "/min" },
+    { "id": "liquor", "label": "Liquor (clinical)", "type": "select", "opts": ["Adequate", "Reduced", "Increased"] },
+    { "id": "contractions", "label": "Uterine contractions", "type": "select", "opts": ["None", "Irregular", "Regular"] },
+    { "id": "uterine_tenderness", "label": "Uterine or scar tenderness", "type": "check" }
+   ]
+  },
+  {
+   "id": "pelvic-examination",
+   "title": "Speculum and vaginal examination",
+   "target": "external_genitilia_perineum",
+   "fields": [
+    { "id": "vulva", "label": "Vulva and perineum", "type": "text" },
+    { "id": "speculum", "label": "Speculum: cervix, discharge, bleeding", "type": "text" },
+    { "id": "discharge", "label": "Discharge", "type": "select", "opts": ["None", "Physiological", "White curdy", "Grey frothy", "Mucopurulent", "Blood-stained"] },
+    { "id": "cervix_dilatation", "label": "Cervical dilatation", "type": "number", "unit": "cm" },
+    { "id": "effacement", "label": "Effacement", "type": "select", "opts": ["0 to 30%", "40 to 50%", "60 to 70%", "80% or more"] },
+    { "id": "station", "label": "Station", "type": "select", "opts": ["-3", "-2", "-1", "0", "+1", "+2"] },
+    { "id": "membranes", "label": "Membranes", "type": "select", "opts": ["Intact", "Ruptured, clear liquor", "Ruptured, meconium stained", "Ruptured, blood stained"] },
+    { "id": "uterus_bimanual", "label": "Uterus (bimanual)", "type": "text", "hint": "size, position, mobility, tenderness" },
+    { "id": "adnexa", "label": "Adnexa and fornices", "type": "text" }
+   ]
+  },
+  {
+   "id": "gynaecological-history",
+   "title": "Menstrual and gynaecological history",
+   "target": "Others",
+   "fields": [
+    { "id": "menarche", "label": "Age at menarche", "type": "number", "unit": "years", "set": "age_menarche" },
+    { "id": "cycle", "label": "Cycles", "type": "select", "opts": ["Regular", "Irregular", "Amenorrhoea", "Postmenopausal"] },
+    { "id": "cycle_length", "label": "Cycle length", "type": "number", "unit": "days" },
+    { "id": "flow_days", "label": "Duration of flow", "type": "number", "unit": "days" },
+    { "id": "flow", "label": "Flow", "type": "select", "opts": ["Normal", "Heavy", "Scanty"] },
+    { "id": "dysmenorrhoea", "label": "Dysmenorrhoea", "type": "select", "opts": ["None", "Mild", "Moderate", "Severe"], "set": "dysmenorrhoea" },
+    { "id": "imb_pcb", "label": "Intermenstrual or postcoital bleeding", "type": "check" },
+    { "id": "pmb", "label": "Postmenopausal bleeding", "type": "check" },
+    { "id": "menopause_age", "label": "Age at menopause", "type": "number", "unit": "years", "set": "age_menopause" },
+    { "id": "cervical_screening", "label": "Last cervical screening (Pap, VIA or HPV) and result", "type": "text" },
+    { "id": "contraception", "label": "Contraception", "type": "text", "set": "contracception" }
+   ]
+  },
+  {
+   "id": "breast-examination",
+   "title": "Breast examination",
+   "target": "breast_exam",
+   "fields": [
+    { "id": "breast_findings", "label": "Findings", "type": "select", "opts": ["Normal", "Lump", "Tenderness or engorgement", "Nipple discharge", "Skin change"] },
+    { "id": "breast_details", "label": "Details (side, quadrant, size)", "type": "text" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Haemoglobin / CBC", "query": "CBC" },
+  { "label": "Blood group and Rh", "query": "blood group" },
+  { "label": "Urine routine", "query": "urine routine" },
+  { "label": "75 g OGTT", "query": "OGTT" },
+  { "label": "HIV", "query": "HIV" },
+  { "label": "HBsAg", "query": "HBsAg" },
+  { "label": "Syphilis (VDRL / RPR)", "query": "VDRL" },
+  { "label": "TSH", "query": "TSH" },
+  { "label": "Haemoglobin HPLC", "query": "HPLC" },
+  { "label": "Obstetric ultrasound", "query": "USG obstetric" },
+  { "label": "Serum beta hCG", "query": "beta HCG" },
+  { "label": "Pelvic ultrasound", "query": "USG pelvis" },
+  { "label": "Pap smear", "query": "Pap smear" }
+ ],
+ "protocols": ["routine-antenatal-care", "pre-eclampsia-eclampsia", "postpartum-haemorrhage", "gestational-diabetes", "gestational-diabetes-international", "anaemia-in-pregnancy", "anaemia-in-pregnancy-international", "preterm-labour", "ectopic-pregnancy", "contraception", "heavy-menstrual-bleeding", "polycystic-ovary-syndrome", "menopause", "postpartum-haemorrhage-india", "pre-eclampsia-eclampsia-india"],
+ "calculators": ["edd", "ga_crl", "bishop", "iom_weight_gain", "apgar", "epds", "meows", "ctg"],
+ "advice": [
+  {
+   "id": "antenatal-danger-signs",
+   "title": "Antenatal danger signs",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once if you have bleeding from the vagina, leaking of water, severe headache or blurred vision, fits, swelling of the face or hands, severe abdominal pain, fever, difficulty breathing, or if the baby moves less than usual."
+  },
+  {
+   "id": "antenatal-nutrition",
+   "title": "Diet and supplements in pregnancy",
+   "target": "diet_lifestyle_advice",
+   "text": "Eat an extra meal each day with pulses, green leafy vegetables, fruit and milk. Take the iron-folic acid and calcium tablets exactly as prescribed, not at the same time. Do not use tobacco or alcohol."
+  },
+  {
+   "id": "postnatal-danger-signs",
+   "title": "Danger signs after delivery",
+   "target": "follow_up_advice",
+   "text": "Come back at once for heavy bleeding, fever, foul-smelling discharge, severe headache, fits, breathlessness, pain or swelling in one leg, or a painful red breast."
+  }
+ ],
+ "sources": [
+  { "org": "WHO", "title": "WHO recommendations on antenatal care for a positive pregnancy experience", "year": 2016, "url": "https://www.who.int/publications/i/item/9789241549912" },
+  { "org": "ACOG", "title": "Committee Opinion 700: Methods for estimating the due date", "year": 2017, "url": "https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2017/05/methods-for-estimating-the-due-date" },
+  { "org": "NICE", "title": "NG201 Antenatal care", "year": 2021, "url": "https://www.nice.org.uk/guidance/ng201" },
+  { "org": "MoHFW, Government of India", "title": "Guidelines for antenatal care and skilled attendance at birth", "year": 2010, "url": "https://nhm.gov.in/images/pdf/programmes/maternal-health/guidelines/sba_guidelines_for_skilled_attendance_at_birth.pdf" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

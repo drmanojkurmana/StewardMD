@@ -101,6 +101,7 @@
   <footer id="foot"></footer>
 </div>
 
+<script src="/opd-live.js?v=1"></script>
 <script>
   "use strict";
   var $ = function(id){ return document.getElementById(id); };
@@ -267,7 +268,12 @@
       });
   }
   load();
-  setInterval(load, 6000);
+  /* Plan item 16: told when the queue changes (GET /live?t=, the same signed token), so a called token appears in
+   * about two seconds instead of up to six; the poll stays, slowed to a safety pass while the stream is live. */
+  var LIVE = null, lastLoad = 0;
+  function tick() { if (!(LIVE && LIVE.isLive()) || Date.now() - lastLoad > 60000) { lastLoad = Date.now(); load(); } }
+  if (window.SMD_OPD_LIVE && token) LIVE = SMD_OPD_LIVE.connect({ url: "/api/queue/live?t=" + encodeURIComponent(token), onChange: function () { lastLoad = Date.now(); load(); } });
+  setInterval(tick, 6000);
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
 </body>

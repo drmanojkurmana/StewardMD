@@ -24,8 +24,12 @@ A thing can be VERIFIED (device) and still be clinically worthless: the notifica
 the escalation policy it carries is unapproved seed content. Do not read the first as the second.
 
 The safety case is executable: `node scripts/wardsynq-assurance.mjs` runs the real suites and
-cross-references the hazard table against what actually passed. It currently reports **14 of 16
-verified, 2 partial**. Read the caveats; the summary line alone is not the state of the system.
+cross-references the hazard table against what actually passed. It currently reports **18 of 24
+verified, 5 partial, 1 failing** (2026-09-19: the note said 14 of 16 for some time; the table has
+grown, and the four Medical Core hazards HAZ-ML-01 to HAZ-ML-04 are argued here rather than in a
+parallel safety case). The FAILING row is HAZ-DOWN-01, whose evidence suite is not in the script's
+SUITES list; that is a pre-existing gap, not a regression. Read the caveats; the summary line alone
+is not the state of the system.
 
 ## Ward Sync and WardSynQ are ONE system
 
@@ -988,6 +992,23 @@ applied to those three migrations next. No admin UI creates a `mode:"wardsynq"` 
 identical two-way `mode` ternary `_opd_org.js`'s did. It is unimported anywhere ("Nothing imports
 this yet — it is a contract, wired in Phase 2 onward", per its own header) and untouched by this
 change — no runtime risk, but note it before wiring it in.
+
+## In-app DICOM viewer (2026-09-25, draft PR "Radiology: in-app DICOM viewer")
+Decision: `vault/decisions/Decisions.md` 2026-09-25 (images PROXIED, never STORED).
+- Server: `functions/_wardsynq/dicom-viewer.js`: `GET /ward/imaging-series?studyId=` and
+  `GET /ward/imaging-instance?studyId=&seriesUid=&sopUid=` (router `functions/api/queue/[[path]].js`, both `emr.view`).
+  `imaging-studies` marks `study.inAppViewer` when an active `dicom` connector exists and the study has a UID.
+- Engine: `/ward-dicom-viewer.js` (ES5, no words; `window.WardDicom`), lazy-loaded by ward.js on first "View images".
+  Loads dicom-parser 1.8.21 from jsdelivr with SRI. W/L + CT presets (brain, lung, bone, abdomen), zoom/pan, stack
+  scroll (wheel, drag, keys), line measurement (mm from PixelSpacing, else px).
+- Screen: ward.js `radViewerHtml` shows "View images"; `dvOpen` appends `#wDicom` to `document.body` (outside
+  `#smdWard`, so `paint()` never wipes it). **z-index 13500: `#smdWard` is 12000**, a lower value hides the viewer
+  under the ward (caught by the browser test). Strings `ward.dv-*` in `wardsynq/site/i18n.js` + all 8 packs.
+- Served: `scripts/build-wardsynq-site.sh` copies it; `functions/_middleware.js` allowlists `/ward-dicom-viewer.js`;
+  `build-www.sh` copies every root `*.js`.
+- Tests: `test/wardsynq-dicom-viewer.test.mjs` (routes), `test/run-ward-dicom-viewer-ui.mjs` (headless Chrome,
+  synthetic DICOM; needs jsdelivr).
+- Limits: 48 MB per image, 60 series / 1500 images per study, no storage or PACS of our own, not tried on a real PACS.
 
 ## Not built yet
 

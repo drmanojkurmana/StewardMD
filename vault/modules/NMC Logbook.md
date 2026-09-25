@@ -464,3 +464,87 @@ which `npm test` passes and a bare `node --test test/*.test.mjs` does not. They 
 3. `node scripts/build-pglog-curricula.mjs`
 4. `node --test test/pglog-curriculum.test.mjs` — it will refuse any number that is not in its quote.
 5. Add the source row to `NMC_PG_LOGBOOK_REQUIREMENTS.md` §10.
+
+## Quick log, analytics, photographs and Drive backup (2026-09-24)
+
+**Reported:** the owner asked whether the logbook had 15-to-20-second case entry, voice dictation,
+specialty templates, a diagnostic dashboard with complication rates and year-on-year independence,
+auto-sync to Google Drive, CSV/Excel export, and clinical photographs. It had none of them: it
+captured all the right FIELDS, through a form long enough that entries were made from memory at the
+end of the month, which is the failure mode PGMER-2023 5.2(vi)'s weekly cadence exists to prevent.
+
+Four new files, all with pure cores that are node-tested, plus screens in `pglog-screens.js`.
+
+### `pglog-quick.js` — the fast path
+- **Specialty templates** keyed to the `packId` in `pglog/specialties.json`, with `PACK_ALIAS` for
+  the ids the app actually carries (`ms-general-surgery`, `dm-critical-care-medicine`, ...) and a
+  generic fallback, so an unknown specialty is slower, never empty. 19 lists.
+- **The role ladder is never defaulted.** `quickDraft()` returns `role: ""`. "Assisted or done
+  independently" is the claim 9.2(c) penalises; it is always an explicit tap.
+- **The field names are the MODEL's**: `procedureText`/`procedureId` for a procedure, `title` for a
+  clinical entry, `topic` for an academic one. A quick entry is validated by the same
+  `validateEntry()` and travels the same route. It deliberately carries NO extra field (an earlier
+  draft added `source: "quick"`; that would change what the server stores and what an examiner's
+  document contains, for no clinical gain).
+- **Supervisor**: `requiresProcedureLog(degree)` is true for MS and MCh, so those programmes get a
+  supervising-consultant field ON the quick screen and Save stays disabled until it is named,
+  rather than bouncing the resident into the long form.
+- **`parseDictation()` is a vocabulary matcher, not a model.** Every field it fills traces to a
+  listed phrase, `heard` is shown in the UI before anything is saved, and the negative cues
+  ("no complications", "uneventful") are checked BEFORE the positive ones so a denial can never be
+  recorded as a complication.
+
+### `pglog-analytics.js` — counted, not estimated
+Three rules, enforced in code and asserted in tests:
+1. **A count says which records it counted.** Headline figures are VERIFIED ONLY (the same rule the
+   progress engine uses); the unverified remainder is shown on the page, not hidden.
+2. **A rate with no denominator is not shown.** `complicationRate()` returns `null` with no
+   procedures, and below `MIN_RATE_N` (20) returns `pct: null, lowN: true` so the UI prints
+   "2 of 6", never a percentage resting on six cases.
+3. **Complications are as-recorded, not as-audited.** `DISCLAIMER` is on every result and every
+   surface that shows one. This is a training record for discussion with a guide, not an outcome
+   statistic, and must never be presented as one.
+`independenceTrend()` is the point of the module: role distribution per training year (or calendar
+year, with `basis` saying which), plus the share performed and the share performed independently.
+
+### `pglog-photos.js` — clinical photographs
+- **No upload, ever.** `/api/pglog` has no attachment endpoint and this did not add one. Photos are
+  AES-GCM encrypted with the per-device, per-account secret (the SURGX scheme, via
+  `SMD_CLINIC_CRYPTO`) into IndexedDB. The ENTRY carries only id/mime/size/sha256 + the consent
+  record. **A reinstall destroys them**, exactly as it destroys SURGX notes; the UI says so and
+  points at the Drive backup.
+- **Consent is a gate**: `attach()` refuses without `{consent:true, deidentified:true}`, it is per
+  photograph with no "remember this", and the consent text is stored with the reference.
+- **De-identification is asserted by the resident**, because no software here can see a face in a
+  frame; what the app CAN do it does — a canvas re-encode strips all EXIF including GPS, and the
+  guidance names what to keep out of shot.
+- The reference carries **no filename**: a camera filename can carry a patient's name.
+
+### `pglog-backup.js` — encrypted backup to the resident's own Drive
+Mirrors `surgx-backup.js` (PBKDF2-SHA256 200k -> AES-256-GCM, per-backup salt) and reuses
+`SMD_SURGX_DEST`'s token/folder/multipart helpers so there is ONE Drive integration in the app.
+- It backs up **only what exists nowhere else**: device drafts, the queue and the photographs.
+  Verified entries are on the server; copying them into a file the resident can edit is how a
+  logbook stops being evidence. Their ids are recorded so a restore can say what was already safe.
+- **"Automatic" is honest**: the password is entered once per app session, and while unlocked
+  `maybeAuto()` backs up on change with a 10-minute floor. Closing the app re-locks it, because the
+  key is never stored. The UI says this rather than implying an always-on sync.
+- Outside the ciphertext: envelope version, KDF params, salt, timestamp. Nothing else, and the
+  filename carries no identifier. A plaintext file is refused on read. Restore is additive and
+  never rolls back newer local work.
+
+### Gotchas found while building this
+- `pglog-model.entry()` calls `requireId()`, so any draft needs a `localId()` before validation —
+  the long form has always done this in `screenAddForm`; the quick path must too.
+- The quick screen updates the Save button **in place** on every keystroke (`quickSyncSaveButton`).
+  A re-render takes the caret and the keyboard away mid-word, which is what makes a "fast" form
+  slow. Same lesson as the CliniX slider.
+- CSV cells beginning `= + - @` are prefixed with `'`: Excel executes them as formulas otherwise.
+  The UTF-8 BOM is added by the download helper, not by `toCsv()`, so the string stays clean for
+  tests.
+
+**Tests:** `test/pglog-quick.test.mjs` (36) covers templates, dictation, the three analytics rules,
+CSV escaping, the consent gate and the backup envelope. `test/run-pglog-quick-ui.mjs` drives the
+real app in headless Chrome: three taps to a saved entry, the supervisor gate for an MS programme,
+dictation filling the form, the consent sheet blocking the camera, and the analytics page refusing
+to print a percentage from three procedures.

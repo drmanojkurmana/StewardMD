@@ -119,9 +119,9 @@
       if (window.DrugFuzzy && window.DrugFuzzy.bestGenericMatch) {
         var fz = window.DrugFuzzy.bestGenericMatch(n, knownGenericVocab());
         if (fz && fz.generic) {
-          out.generic = String(fz.generic).toLowerCase();
+          out.generic = null;
           out.confidence = "medium"; out.fuzzy = true;
-          out.candidates = [{ generic: out.generic, fuzzy: true }];
+          out.candidates = [{ generic: String(fz.generic).toLowerCase(), fuzzy: true }];
           return out;
         }
       }
@@ -238,11 +238,13 @@
 
   // --- Drug Index search (worker API) ---
   function brandSearch(q) {
-    return fetch("https://api.stewardmd.in/brand-search?q=" + encodeURIComponent(q) + "&limit=10")
-      .then(function (r) { return r.json(); })
-      .then(function (j) { return (j.results || []).map(function (r) {
-        return { brand: r.brand, generic: (r.composition || "").toLowerCase(), form: r.form }; }); })
-      .catch(function () { return []; });
+    if (!window.MEDAPI || !window.MEDAPI.searchBrands) return Promise.reject(new Error("Catalogue unavailable"));
+    return window.MEDAPI.searchBrands(q, 25).then(function (j) {
+      if (!j || j.unavailable) throw new Error("Catalogue unavailable");
+      return (j.results || []).map(function (r) {
+        return { brand: r.brand, generic: cleanGeneric(r.composition), form: r.form };
+      });
+    });
   }
 
   /* ================= PRESCRIPTION / CASE-SHEET SCAN (photo / PDF) ============
@@ -485,6 +487,7 @@
   var _pasteState = { value: "", rows: [] }; // rows: [{entry, include}]
   var _scanState = { rows: [] };             // rows: [{entry, include, editText}] — candidate scan review
   var _view = "list";                        // "list" | "results" | "scan"
+  var _editingId = null, _checking = false, _checkSeq = 0;
   var _results = null;                        // last checkInteractions() result
   var _hideMinor = true;                      // results filter: hide minor findings by default
 
@@ -588,18 +591,7 @@
   function updateMed(id, newEntry) {
     var i = _list.findIndex(function (m) { return m.id === id; });
     if (i >= 0) {
-      _list[i] = Object.assign({}, _list[i], {
-        brand: newEntry.brand || _list[i].brand,
-        generic: newEntry.generic || _list[i].generic,
-        strength: newEntry.strength != null ? newEntry.strength : _list[i].strength,
-        unit: newEntry.unit || _list[i].unit,
-        form: newEntry.form || _list[i].form,
-        route: newEntry.route || _list[i].route,
-        freq: newEntry.freq || _list[i].freq,
-        freqText: newEntry.freqText || _list[i].freqText,
-        confidence: newEntry.confidence || _list[i].confidence,
-        candidates: newEntry.candidates || _list[i].candidates
-      });
+      _list[i] = Object.assign({}, _list[i], newEntry, { id: _list[i].id });
       _persist();
     }
   }
@@ -667,7 +659,7 @@
       clearUndoTimer(); _undoingId = null;
       _manualState.value = med.raw || med.generic || "";
       _manualState.parsed = parseEntry(_manualState.value);
-      remove(med.id); _openAdd = "manual"; render();
+      _editingId = med.id; _openAdd = "manual"; render();
     });
     var removeBtn = el("button", { cls: "ml-icon-btn ml-remove-btn", html: mlIco("trash"), attrs: { "data-ml-remove": med.id, "aria-label": "Remove", title: "Remove", type: "button" } });
     removeBtn.addEventListener("click", function () {
@@ -809,7 +801,7 @@
     wrap.appendChild(body);
     var foot = el("div", { cls: "ml-sheet-foot" });
     sheet.appendChild(wrap);
-    function close() { _openAdd = null; _indexState = { value: "", results: [], reqSeq: _indexState.reqSeq }; render(); }
+    function close() { _editingId = null; _openAdd = null; _indexState = { value: "", results: [], reqSeq: _indexState.reqSeq }; render(); }
     closeBtn.addEventListener("click", close);
     scrim.addEventListener("click", close);
     return { scrim: scrim, sheet: sheet, wrap: wrap, head: head, body: body, foot: foot, close: close };
@@ -828,6 +820,7 @@
     var info = el("button", { cls: "ml-index-info", attrs: { type: "button" } });
     var gen = el("div", { cls: "ml-index-generic" }); gen.innerHTML = highlight(cap(r.generic), q); info.appendChild(gen);
     var meta = [r.cls, r.form].filter(function (x) { return x && x !== "—"; }).join(" · ");
+    if (r.suggested) info.appendChild(el("div", { cls: "ml-index-meta", text: "Spelling suggestion · confirm before adding" }));
     if (meta) info.appendChild(el("div", { cls: "ml-index-meta", text: meta }));
     if (r.brands && r.brands.length) {
       var b = el("div", { cls: "ml-index-brands" });
@@ -836,7 +829,7 @@
     }
     info.addEventListener("click", function () { openDoseSheet(r); });
     row.appendChild(info);
-    var addBtn = el("button", { cls: "ml-index-add", html: mlIco("plus") + " Add", attrs: { type: "button", "data-ml-index-result": "1" } });
+    var addBtn = el("button", { cls: "ml-index-add", html: mlIco("plus") + (r.suggested ? " Confirm" : " Add"), attrs: { type: "button", "data-ml-index-result": "1" } });
     addBtn.addEventListener("click", function () { addFromResult(r); });
     row.appendChild(addBtn);
     return row;
@@ -864,7 +857,7 @@
   }
 
   function buildIndexSheet() {
-    var s = buildSheet({ title: "Search Drug Index", sub: "Clinical Drug Index — instant, works offline" });
+    var s = buildSheet({ title: "Search Drug Index", sub: "Search the drug database by generic or brand" });
     s.sheet.classList.add("ml-sheet-tall");                 // tall surface: scrollable typeahead
     // Fixed search bar (stays put); the suggestion list below it scrolls.
     var bar = el("div", { cls: "ml-searchbar" });
@@ -904,21 +897,28 @@
       out.appendChild(wrap);
       if (offline) { var note = el("div", { cls: "ml-state ml-state-offline" }); note.appendChild(el("span", { cls: "ml-state-sub", text: "Online brand search unavailable — showing on-device matches." })); out.appendChild(note); }
     }
+    var searchTimer = null;
     function run() {
+      clearTimeout(searchTimer);
+      var seq = ++_indexState.reqSeq;
       var q = input.value.trim();
       _indexState.value = input.value;
       if (!q) { drawRows([], ""); return; }
-      var local = (window.MEDDRUGS && window.MEDDRUGS.searchIndex) ? window.MEDDRUGS.searchIndex(q) : [];
-      drawRows(local, q, false);                       // instant local
-      var seq = ++_indexState.reqSeq;
-      var p; try { p = window.MEDLIST.brandSearch(q); } catch (e) { p = Promise.reject(e); }
-      Promise.resolve(p).then(function (res) {
-        if (seq !== _indexState.reqSeq) return;
-        drawRows(mergeWorker(local, res || []), q, false);
-      }).catch(function () {
-        if (seq !== _indexState.reqSeq) return;
-        drawRows(local, q, true);                       // honest offline fallback
-      });
+      var catalog = window.SMD_DDI_CATALOG;
+      var local = catalog ? catalog.local(q) : ((window.MEDDRUGS && window.MEDDRUGS.searchIndex) ? window.MEDDRUGS.searchIndex(q) : []);
+      drawRows(local, q, false);
+      if (q.length < 2) return;
+      var searching = el("div", { cls: "ml-state-sub", text: "Searching drug database…", attrs: { role: "status" } }); out.appendChild(searching);
+      searchTimer = setTimeout(function () {
+        var p = catalog ? catalog.search(q) : brandSearch(q).then(function (rows) { return { rows: mergeWorker(local, rows) }; });
+        p.then(function (res) {
+          if (seq !== _indexState.reqSeq || !input.isConnected) return;
+          drawRows(res.rows, q, res.unavailable);
+        }).catch(function () {
+          if (seq === _indexState.reqSeq && input.isConnected) drawRows(local, q, true);
+        });
+      }, 220);
+
     }
     input.addEventListener("input", run);
     run();
@@ -948,13 +948,13 @@
     grid.appendChild(field("Unit", unitInp));
     var routeRow = el("div", { cls: "ml-chip-row" });
     ROUTE_OPTS.forEach(function (rt) { var c = el("button", { cls: "ml-chip" + (draft.route === rt ? " on" : ""), text: rt, attrs: { type: "button" } });
-      c.addEventListener("click", function () { draft.route = draft.route === rt ? "" : rt; routeRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", x.textContent === draft.route); }); }); routeRow.appendChild(c); });
+      c.addEventListener("click", function () { draft.route = draft.route === rt ? "" : rt; routeRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", (window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.same) ? SMD_EMOJI_ICONS.same(x.textContent, draft.route) : x.textContent === draft.route); }); }); routeRow.appendChild(c); });
     grid.appendChild(field("Route", routeRow, true));
     var freqRow = el("div", { cls: "ml-chip-row" });
     FREQ_OPTS.forEach(function (fq) { var c = el("button", { cls: "ml-chip" + (draft.freq === fq ? " on" : ""), text: fq, attrs: { type: "button" } });
-      c.addEventListener("click", function () { draft.freq = draft.freq === fq ? "" : fq; freqRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", x.textContent === draft.freq); }); }); freqRow.appendChild(c); });
+      c.addEventListener("click", function () { draft.freq = draft.freq === fq ? "" : fq; freqRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", (window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.same) ? SMD_EMOJI_ICONS.same(x.textContent, draft.freq) : x.textContent === draft.freq); }); }); freqRow.appendChild(c); });
     grid.appendChild(field("Frequency", freqRow, true));
-    var indInp = el("input", { cls: "ml-input", type: "text", placeholder: "Optional — why it's prescribed" });
+    var indInp = el("input", { cls: "ml-input", type: "text", placeholder: "Optional, why it's prescribed" });
     indInp.addEventListener("input", function () { draft.indication = indInp.value; });
     grid.appendChild(field("Indication (optional)", indInp, true));
     s.body.appendChild(grid);
@@ -983,6 +983,10 @@
     input.value = _manualState.value || "";
     s.body.appendChild(input);
     var preview = el("div"); s.body.appendChild(preview);
+    function saveManual(parsed) {
+      if (_editingId) { updateMed(_editingId, parsed); _editingId = null; return true; }
+      return uiAdd(parsed, "manual");
+    }
     function drawPreview() {
       preview.textContent = "";
       var parsed = _manualState.parsed;
@@ -993,17 +997,29 @@
       preview.appendChild(pv);
       if (!parsed.generic && parsed.candidates && parsed.candidates.length) {
         renderCandidateChips(preview, parsed.candidates, function (c) {
-          var p = Object.assign({}, parsed, { generic: c.generic, confidence: "high" });
-          if (uiAdd(p, "manual")) s.close();
+          var p = Object.assign({}, parsed, { generic: cleanGeneric(c.generic), confidence: "high", fuzzy: false });
+          if (saveManual(p)) s.close();
         });
       }
     }
-    input.addEventListener("input", function () { _manualState.value = input.value; _manualState.parsed = input.value.trim() ? parseEntry(input.value) : null; drawPreview(); });
+    var manualSeq = 0, manualTimer;
+    input.addEventListener("input", function () {
+      clearTimeout(manualTimer); var seq = ++manualSeq;
+      _manualState.value = input.value; _manualState.parsed = input.value.trim() ? parseEntry(input.value) : null; drawPreview();
+      var parsed = _manualState.parsed;
+      if (!parsed || parsed.generic || !parsed.name || !window.SMD_DDI_CATALOG) return;
+      manualTimer = setTimeout(function () {
+        window.SMD_DDI_CATALOG.search(parsed.name).then(function (res) {
+          if (seq !== manualSeq || !input.isConnected) return;
+          parsed.candidates = res.rows.slice(0, 5).map(function (r) { return { generic: r.generic }; }); drawPreview();
+        });
+      }, 220);
+    });
     drawPreview();
     var addBtn = el("button", { cls: "ml-check-btn", text: "Add medicine", attrs: { "data-ml-manual-add": "1", type: "button" } });
     addBtn.addEventListener("click", function () {
       var v = _manualState.value.trim(); if (!v) return;
-      if (uiAdd(parseEntry(v), "manual")) { _manualState = { value: "", parsed: null }; s.close(); }
+      if (saveManual(parseEntry(v))) { _manualState = { value: "", parsed: null }; s.close(); }
     });
     s.foot.appendChild(el("button", { cls: "ml-sheet-cancel", text: "Cancel", attrs: { type: "button" } })).addEventListener("click", s.close);
     s.foot.appendChild(addBtn);
@@ -1019,6 +1035,27 @@
     ta.value = _pasteState.value || "";
     s.body.appendChild(ta);
     var reviewWrap = el("div"); s.body.appendChild(reviewWrap);
+    var reader = el("button", { cls: "ml-mini-btn", text: "Find drug names with OpenMed", attrs: { type: "button" } });
+    var readerNote = el("div", { cls: "ml-aside-note", text: "Reads pasted text on this device. First use downloads a 134 MB model. Review every suggested medicine." });
+    s.body.insertBefore(reader, reviewWrap); s.body.insertBefore(readerNote, reviewWrap);
+    reader.addEventListener("click", function () {
+      var original = ta.value;
+      if (!original.trim() || reader.disabled) return;
+      if (!window.SMD_DDI_CATALOG) { readerNote.textContent = "Drug reader unavailable. Enter one medicine per line."; return; }
+      reader.disabled = true; reader.textContent = "Reading on this device…";
+      readerNote.textContent = "Preparing OpenMed and reading drug names. The first download may take a minute. Your text stays on this device.";
+      window.SMD_DDI_CATALOG.extract(original).then(function (mentions) {
+        if (!ta.isConnected || ta.value !== original) return;
+        if (!mentions.length) { readerNote.textContent = "No drug names detected. Enter one medicine per line or use search."; return; }
+        _pasteState.rows = mentions.map(function (mention) {
+          var entry = parseEntry(mention.text); entry.raw = mention.text;
+          return { entry: entry, include: false };
+        });
+        readerNote.textContent = "Review and select the detected drug names below. Doses and timing are not extracted.";
+        drawReview();
+      }).catch(function (e) { if (ta.isConnected) readerNote.textContent = e.message === "timeout" ? "Reader timed out. You can retry or enter one medicine per line." : e.message; })
+        .then(function () { reader.disabled = false; reader.textContent = "Find drug names with OpenMed"; });
+    });
     function drawReview() {
       reviewWrap.textContent = "";
       if (!_pasteState.rows.length) return;
@@ -1035,6 +1072,11 @@
         if (!row.entry.generic) txt.appendChild(el("div", { cls: "ml-paste-item-sub", text: "needs review" }));
         item.appendChild(txt);
         list.appendChild(item);
+        if (!row.entry.generic && row.entry.candidates && row.entry.candidates.length) {
+          renderCandidateChips(list, row.entry.candidates, function (c) {
+            row.entry.generic = cleanGeneric(c.generic); row.entry.confidence = "high"; row.entry.fuzzy = false; drawReview();
+          });
+        }
       });
       reviewWrap.appendChild(list);
     }
@@ -1300,7 +1342,7 @@
     REVIEW_DIMENSIONS.forEach(function (d) { list.appendChild(el("div", { cls: "ml-review-chip", text: d })); });
     card.appendChild(list);
     card.appendChild(el("div", { cls: "ml-aside-note",
-      text: "Medication-based. Add renal function, QTc or electrolytes in the case for more tailored cautions." }));
+      text: "Screens medication combinations. Patient-specific kidney function, QTc and electrolyte checks are not included." }));
     container.appendChild(card);
   }
 
@@ -1364,6 +1406,7 @@
 
     renderReviewAside(aside);
     work.appendChild(main); work.appendChild(aside);
+    if (_checking) work.setAttribute("inert", "");
     _root.appendChild(work);
 
     // ---- sticky CTA (always visible, count-aware) ----
@@ -1373,7 +1416,8 @@
     var checkBtn = el("button", { cls: "ml-check-btn",
       text: present > 0 ? ("Check " + present + " medicine" + (present !== 1 ? "s" : "")) : "Check interactions",
       attrs: { id: "ml-check", type: "button" } });
-    if (!canCheck) checkBtn.disabled = true;
+    if (!canCheck || _checking) checkBtn.disabled = true;
+    if (_checking) { checkBtn.textContent = "Checking medicines…"; checkBtn.setAttribute("aria-busy", "true"); }
     checkBtn.addEventListener("click", function () { if (!checkBtn.disabled) runCheck(); });
     inner.appendChild(checkBtn);
     if (!canCheck) inner.appendChild(el("div", { cls: "ml-footer-hint", text: "Add at least 2 medicines to check interactions." }));
@@ -1396,54 +1440,50 @@
     return Promise.resolve(p).then(function (cands) {
       var comps = {};
       (cands || []).forEach(function (c) {
-        var g = (c.generic || "").toLowerCase().trim();
+        if (String(c.brand || "").toLowerCase().trim() !== String(name).toLowerCase().trim()) return;
+        var g = cleanGeneric(c.generic);
         if (g) comps[g] = (comps[g] || 0) + 1;
       });
       var keys = Object.keys(comps);
-      if (keys.length === 1 && keys[0].indexOf(" + ") === -1) return keys[0];
+      if (keys.length === 1 && keys[0].indexOf("+") === -1) return keys[0];
       return null;
     }).catch(function () { return null; });
   }
-  function resolveUnresolvedViaApi() {
+  function resolveUnresolvedViaApi(seq) {
     var pending = getList().filter(function (m) {
       return (!m.generic || !String(m.generic).trim()) && (m.name || m.raw);
     });
     if (!pending.length) return Promise.resolve(0);
     return Promise.all(pending.map(function (m) {
       return apiResolveBrand(m.name || m.raw).then(function (g) {
-        if (g) { m.generic = g; m.confidence = "high"; m.apiResolved = true; return 1; }
+        if (g && (seq == null || (seq === _checkSeq && _checking)) && _list.indexOf(m) !== -1) { m.generic = g; m.confidence = "high"; m.apiResolved = true; return 1; }
         return 0;
       });
-    })).then(function (rs) { return rs.reduce(function (a, b) { return a + b; }, 0); });
+    })).then(function (rs) { _persist(); return rs.reduce(function (a, b) { return a + b; }, 0); });
   }
 
   function runCheck() {
-    if (!window.INTERACTIONS || typeof window.INTERACTIONS.checkInteractions !== "function") return;
-    // Resolve any locally-unmapped brand via the catalogue API, THEN screen.
-    smdLazy('/interaction-rules.js?v=gold363').then(function() {
-      return resolveUnresolvedViaApi();
-    }).then(function () {
+    if (_checking) return;
+    if (!window.INTERACTIONS || !window.INTERACTION_RULES || !window.INTERACTION_RULES.rules || !window.INTERACTION_RULES.rules.length) {
+      toast("Interaction data unavailable. Reopen the app and retry."); return;
+    }
+    _checking = true; var seq = ++_checkSeq; render();
+    var timer;
+    var deadline = new Promise(function (_, reject) { timer = setTimeout(function () { reject(new Error("timeout")); }, 10000); });
+    Promise.race([resolveUnresolvedViaApi(seq), deadline]).then(function () {
+      if (seq !== _checkSeq) return;
       _results = window.INTERACTIONS.checkInteractions(getList());
-      _view = "results";
-      _hideMinor = true;
-      render();
-    });
+      _view = "results"; _hideMinor = true;
+    }).catch(function () {
+      if (seq === _checkSeq) toast("Could not finish the check. Check your connection and retry.");
+    }).then(function () { clearTimeout(timer); if (seq === _checkSeq) { _checking = false; _checkSeq++; render(); } });
   }
 
-  // After an in-results edit (e.g. "What now? → Remove X"), re-run the check if 2+
-  // medicines remain, else drop back to the list.
   function recheckAfterEdit() {
-    var resolved = getList().filter(function (m) { return m.generic && String(m.generic).trim(); });
-    if (resolved.length >= 2 && window.INTERACTIONS && window.INTERACTIONS.checkInteractions) {
-      smdLazy('/interaction-rules.js?v=gold363').then(function() {
-        _results = window.INTERACTIONS.checkInteractions(getList());
-        _view = "results"; render();
-      });
-    } else {
-      _view = "list"; render();
-      toast("Fewer than 2 medicines left — add more to re-check.");
-    }
+    if (getList().length >= 2) runCheck();
+    else { _view = "list"; render(); toast("Fewer than 2 medicines left. Add more to re-check."); }
   }
+
   function removeGenericAndRecheck(generic) {
     generic = (generic || "").toLowerCase();
     getList().forEach(function (m) { if ((m.generic || "").toLowerCase() === generic) remove(m.id); });
@@ -1460,17 +1500,13 @@
     monitor: "Monitor"
   };
   function findingCard(finding) {
-    // Severity is conveyed by the TEXT label (Critical / Major / … — color-independent),
-    // not by a standalone symbol glyph.
+    // Severity lives in section headings and the details, without per-card pills.
     var bucket = SEVERITY_BUCKET_CLASS[finding.severity] || "monitor";
-    var card = el("div", { cls: "mlr-card mlr-card-" + bucket });
+    var card = el("div", { cls: "mlr-card mlr-card-" + bucket, attrs: { role: "article", "aria-label": (SEVERITY_LABEL[bucket] || "Caution") + " interaction: " + (finding.drugs || []).join(" and ") } });
 
     var head = el("div", { cls: "mlr-card-head" });
     head.appendChild(el("div", { cls: "mlr-card-pair", text: (finding.drugs || []).join(" + ") || "Medicine" }));
     var sevLabel = SEVERITY_LABEL[bucket] || "Caution";
-    var badge = el("span", { cls: "mlr-sev mlr-sev-" + bucket });
-    badge.appendChild(el("span", { cls: "mlr-sev-text", text: sevLabel }));
-    head.appendChild(badge);
     card.appendChild(head);
 
     // one-line consequence, then the action line
@@ -1480,11 +1516,16 @@
 
     // "Why?" expand — mechanism / monitoring / source disclosure + optional MaiK explain.
     var why = el("div", { cls: "mlr-why" });
-    var whyBtn = el("button", { cls: "mlr-explain-btn", text: "Why? · details", attrs: { type: "button", "aria-expanded": "false" } });
+    var whyBtn = el("button", { cls: "mlr-explain-btn", text: "Clinical details", attrs: { type: "button", "aria-expanded": "false" } });
     var whyBody = el("div", { attrs: { hidden: "hidden" } });
+    whyBody.appendChild(detailRow("Severity", sevLabel));
     if (finding.mechanism && finding.mechanism !== consequence) whyBody.appendChild(detailRow("Mechanism", finding.mechanism));
     if (finding.monitoring) whyBody.appendChild(detailRow("Monitoring", finding.monitoring));
     if (finding.source) whyBody.appendChild(detailRow("Source", finding.source));
+    if (finding.evidence) whyBody.appendChild(detailRow("Evidence", finding.evidence));
+    (finding.sourceUrls || (finding.sourceUrl ? [finding.sourceUrl] : [])).forEach(function (url, index) {
+      if (/^https:\/\//.test(url)) whyBody.appendChild(el("a", { text: "Read prescribing information" + (index ? " (" + (index + 1) + ")" : ""), attrs: { href: url, target: "_blank", rel: "noopener noreferrer", style: "display:block;margin-top:8px" } }));
+    });
 
     // Optional MaiK "explain this interaction" — DISPLAY-ONLY; can never change the
     // severity/marker above, add/remove findings, or alter the summary counts.
@@ -1514,29 +1555,29 @@
     whyBtn.addEventListener("click", function () {
       var closed = whyBody.hasAttribute("hidden");
       if (closed) { whyBody.removeAttribute("hidden"); whyBtn.setAttribute("aria-expanded", "true"); whyBtn.textContent = "Hide details"; }
-      else { whyBody.setAttribute("hidden", "hidden"); whyBtn.setAttribute("aria-expanded", "false"); whyBtn.textContent = "Why? · details"; }
+      else { whyBody.setAttribute("hidden", "hidden"); whyBtn.setAttribute("aria-expanded", "false"); whyBtn.textContent = "Clinical details"; }
     });
     why.appendChild(whyBody);
 
     // "What now?" — the concrete next step: remove (or plan to replace) an implicated
     // drug, then re-check. Turns the finding into a decision, not just a warning.
-    var whatBtn = el("button", { cls: "mlr-whatnow-btn", text: "What now?", attrs: { type: "button", "aria-expanded": "false" } });
+    var whatBtn = el("button", { cls: "mlr-whatnow-btn", text: "Review options", attrs: { type: "button", "aria-expanded": "false" } });
     var whatBody = el("div", { cls: "mlr-whatnow", attrs: { hidden: "hidden" } });
     whatBody.appendChild(el("div", { cls: "mlr-whatnow-lead",
       text: finding.action || "Review whether all these medicines are needed; stop or replace the least essential, or apply the monitoring above." }));
     var inList = (finding.drugs || []).filter(function (g) { return hasGeneric(g); });
     if (inList.length) {
-      whatBody.appendChild(el("div", { cls: "mlr-whatnow-label", text: "Remove a medicine and re-check:" }));
+      whatBody.appendChild(el("div", { cls: "mlr-whatnow-label", text: "Try a change in this checklist:" }));
       var acts = el("div", { cls: "mlr-whatnow-actions" });
       inList.forEach(function (g) {
-        var b = el("button", { cls: "mlr-remove-drug", text: "× Remove " + cap(g), attrs: { type: "button" } });
+        var b = el("button", { cls: "mlr-remove-drug", text: "Exclude " + cap(g), attrs: { type: "button" } });
         b.addEventListener("click", function () { removeGenericAndRecheck(g); });
         acts.appendChild(b);
       });
       whatBody.appendChild(acts);
     }
     whatBody.appendChild(el("div", { cls: "mlr-whatnow-note",
-      text: "Or keep them with a clear indication and add the monitoring above. To swap a drug, remove it here then add the alternative. Always confirm against local protocol." }));
+      text: "Changes here affect only this checklist, not the prescription. Confirm any treatment change against the clinical record and local protocol." }));
     whatBtn.addEventListener("click", function () {
       var closed = whatBody.hasAttribute("hidden");
       if (closed) { whatBody.removeAttribute("hidden"); whatBtn.setAttribute("aria-expanded", "true"); }
@@ -1607,37 +1648,39 @@
     var cov = res.coverage || { submittedCount: res.reviewedCount, reviewedCount: res.reviewedCount, classifiedCount: res.reviewedCount, unclassified: [], unchecked: [], datasetVersion: "" };
 
     var work = el("div", { cls: "ml-work" });
-    work.style.gridTemplateColumns = "1fr";              // results are single-column
+    work.style.gridTemplateColumns = "minmax(0,1fr)";    // results are single-column; minmax so a long drug name wraps instead of widening the track
     var main = el("div", { cls: "ml-main" });
 
     // ---- strong summary panel: title + reviewed count + severity count chips ----
     var panel = el("div", { cls: "mlr-summary-panel" });
-    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Medication Safety Summary" }));
+    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Interaction review" }));
     var checkedN = cov.reviewedCount, submittedN = cov.submittedCount || res.reviewedCount;
     panel.appendChild(el("div", { cls: "mlr-summary-sub",
-      text: checkedN + " of " + submittedN + " medicine" + (submittedN !== 1 ? "s" : "") + " checked" }));
+      text: "Limited rule screen: " + submittedN + " medicine" + (submittedN !== 1 ? "s" : "") + " submitted" }));
     var monitorCount = res.monitor.filter(notDuplicate).length + res.moderate.filter(notDuplicate).length;
     var chips = el("div", { cls: "mlr-chips" });
     summaryChip(chips, "critical", "Critical", res.critical.length);
     summaryChip(chips, "major", "Major", res.major.length);
-    summaryChip(chips, "monitor", "Monitoring", monitorCount);
+    summaryChip(chips, "monitor", "Review", monitorCount);
     summaryChip(chips, "duplicate", "Duplicate", (res.duplicates || []).length);
     panel.appendChild(chips);
     panel.appendChild(el("div", { cls: "ml-aside-note",
-      text: "Interaction check is medication-based. Add renal function, electrolytes, QTc, or patient context for more tailored cautions." }));
+      text: "Interaction check is medication-based. Patient-specific kidney function, QTc and electrolytes have not been assessed." }));
     if (cov.datasetVersion) panel.appendChild(el("div", { cls: "mlr-dataset-note",
       text: "Interaction dataset " + cov.datasetVersion }));
     main.appendChild(panel);
 
     // ---- coverage warning: any medicine NOT screened must be shown, never hidden ----
-    var unchecked = (cov.unchecked || []), unclassified = (cov.unclassified || []);
-    if (unchecked.length || unclassified.length) {
+    var unchecked = (cov.unchecked || []), unclassified = (cov.unclassified || []), noRuleCoverage = (cov.noRuleCoverage || []);
+    if (unchecked.length || unclassified.length || noRuleCoverage.length) {
       var warn = el("div", { cls: "mlr-coverage-warn" });
       warn.appendChild(el("div", { cls: "mlr-coverage-warn-title", html: mlIco("warn") + " Not fully checked" }));
       if (unchecked.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
         text: "Not recognised — NOT checked for any interaction: " + unchecked.join(", ") + ". Verify the name/spelling or check these manually." }));
       if (unclassified.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
-        text: "Recognised but not classified — only duplicate checks applied: " + unclassified.map(cap).join(", ") + "." }));
+        text: "Limited class coverage for: " + unclassified.map(cap).join(", ") + "." }));
+      if (noRuleCoverage.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
+        text: "No active interaction-rule coverage for: " + noRuleCoverage.map(cap).join(", ") + ". Drug-name recognition does not establish safety." }));
       main.appendChild(warn);
     }
 
@@ -1646,7 +1689,7 @@
     var backBtn = el("button", { cls: "mlr-filter-btn mlr-back-btn", text: "‹ Back to medicines", attrs: { id: "mlr-back", type: "button" } });
     backBtn.addEventListener("click", function () { _view = "list"; render(); });
     var toggle = el("button", { cls: "mlr-filter-btn", attrs: { id: "mlr-toggle-minor", type: "button" },
-      text: _hideMinor ? "Show all" : "Hide minor" });
+      text: _hideMinor ? ("Show minor (" + res.minor.filter(notDuplicate).length + ")") : "Hide minor" });
     toggle.addEventListener("click", function () { _hideMinor = !_hideMinor; render(); });
     filters.appendChild(backBtn); filters.appendChild(toggle);
     main.appendChild(filters);
@@ -1656,19 +1699,20 @@
     var monitoring = res.monitor.filter(notDuplicate).concat(res.moderate.filter(notDuplicate), minorFindings);
     resultsSection(main, "Critical — act now", res.critical);
     resultsSection(main, "Major — review before prescribing", res.major);
-    resultsSection(main, "Monitoring required", monitoring);
+    resultsSection(main, "Review required", monitoring);
     resultsSection(main, "Duplicate therapy", (res.duplicates || []).slice());
 
     var anyShown = res.critical.length || res.major.length || monitoring.length || (res.duplicates || []).length;
-    if (!anyShown) {
+    if (!anyShown && res.minor.length) main.appendChild(el("div", { cls: "mlr-none", text: res.minor.length + " minor finding(s) hidden. Use Show minor to review them." }));
+    if (!anyShown && !res.minor.length) {
       // NEVER show a reassuring "all clear" — absence of a rule is not proof of safety,
       // and it must read differently when some medicines could not be screened.
-      var incomplete = unchecked.length || unclassified.length;
+      var incomplete = unchecked.length || unclassified.length || noRuleCoverage.length;
       var none = el("div", { cls: "mlr-none" + (incomplete ? " mlr-none-partial" : "") });
       none.appendChild(el("div", { cls: "mlr-none-head",
         text: incomplete
-          ? "No interaction found among the medicines that could be checked"
-          : "No interaction found in this dataset" }));
+          ? "Safety not established: some medicines could not be checked"
+          : "Safety not established: no matching rule" }));
       none.appendChild(el("div", { cls: "mlr-none-sub",
         text: "This is a screen against an open, non-exhaustive dataset — it does NOT confirm the combination is safe. Absence of a finding is not clearance. Verify important decisions against the drug label, a pharmacist, or local protocol." }));
       main.appendChild(none);
@@ -1704,15 +1748,15 @@
 ".ddi-advisory{padding:7px 16px;font:600 11.5px var(--sans);color:var(--slate,#2d4356);background:var(--paper,#f6f7f5);border-bottom:1px solid var(--line,#d7dee3)}",
 ".ddi-body{flex:1;min-height:0}",
 /* ---- workspace layout ---- */
-".ml-work{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box;padding:14px 16px 18px;display:grid;grid-template-columns:1fr;gap:14px;align-content:start}",
-"@media(min-width:900px){.ml-work{grid-template-columns:63fr 37fr;gap:20px;padding:18px 22px 0}}",
+".ml-work{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box;padding:14px 16px 18px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-content:start}",
+"@media(min-width:900px){.ml-work{grid-template-columns:minmax(0,63fr) minmax(0,37fr);gap:20px;padding:18px 22px 0}}",
 ".ml-main{min-width:0}.ml-aside{min-width:0}",
 "@media(max-width:899px){.ml-aside{order:2}}",
 /* ---- empty state ---- */
 ".ml-empty-head{margin:2px 0 12px}",
 ".ml-empty-title{font:800 18px var(--sans);color:var(--ink,#14202b)}",
 ".ml-empty-sub{font:500 13px var(--sans);color:var(--slate,#2d4356);margin-top:3px;line-height:1.45}",
-".ml-action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}",
+".ml-action-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}",
 ".ml-action-card{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .12s,box-shadow .12s;min-height:88px}",
 ".ml-action-card:hover{border-color:var(--teal,#0e6e63);box-shadow:0 2px 10px rgba(14,110,99,.08)}",
 ".ml-action-card:active{transform:scale(.99)}",
@@ -1829,10 +1873,10 @@
 ".ml-state-offline{color:var(--amber,#92620a)}",
 ".ml-spin{display:inline-block;width:14px;height:14px;box-sizing:border-box;border:2px solid var(--line,#d7dee3);border-top-color:var(--teal,#0e6e63);border-radius:50%;vertical-align:-2px;animation:mlspin 1s linear infinite}@keyframes mlspin{to{transform:rotate(360deg)}}",
 /* dose sheet */
-".ml-dose-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}",
-".ml-field{display:flex;flex-direction:column;gap:5px}",
+".ml-dose-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:6px}",
+".ml-field{display:flex;flex-direction:column;gap:5px;min-width:0}",
 ".ml-field-full{grid-column:1/-1}",
-".ml-field-label{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
+".ml-field-label{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184);overflow-wrap:anywhere}",
 ".ml-chip-row{display:flex;flex-wrap:wrap;gap:6px}",
 ".ml-chip{background:var(--paper,#f6f7f5);color:var(--slate,#2d4356);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:7px 12px;font:600 12.5px var(--sans);cursor:pointer;min-height:34px}",
 ".ml-chip.on{background:var(--teal,#0e6e63);color:#fff;border-color:var(--teal,#0e6e63)}",
@@ -1866,9 +1910,9 @@
 ".mlr-section-h{display:flex;align-items:center;gap:8px;margin-bottom:9px}",
 ".mlr-section-title{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356)}",
 ".mlr-section-count{font:800 11px var(--sans);background:var(--paper,#f6f7f5);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:1px 8px;color:var(--slate,#2d4356)}",
-".mlr-card{border:1px solid var(--line,#d7dee3);border-left-width:4px;border-radius:12px;padding:12px 14px;background:var(--panel,#fff);margin-bottom:9px}",
-".mlr-card-critical{border-left-color:var(--red,#ab1c2c)}.mlr-card-major{border-left-color:var(--orange,#b5460f)}",
-".mlr-card-moderate{border-left-color:var(--yellow,#92620a)}.mlr-card-monitor{border-left-color:var(--teal,#0e6e63)}.mlr-card-minor{border-left-color:var(--slate-soft,#5a7184)}",
+".mlr-card{border:1px solid var(--line,#d7dee3);border-radius:12px;padding:12px 14px;background:var(--panel,#fff);margin-bottom:9px}",
+".mlr-card-critical{box-shadow:0 3px 22px rgba(190,44,66,.16),inset 0 0 22px rgba(190,44,66,.035)}.mlr-card-major{box-shadow:0 3px 22px rgba(196,105,43,.14),inset 0 0 22px rgba(196,105,43,.035)}",
+".mlr-card-moderate{box-shadow:0 3px 20px rgba(179,137,47,.13)}.mlr-card-monitor{box-shadow:0 3px 20px rgba(14,110,99,.12)}.mlr-card-minor{box-shadow:0 3px 16px rgba(90,113,132,.09)}",
 ".mlr-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:7px}",
 ".mlr-card-pair{font:800 14.5px var(--sans);color:var(--ink,#14202b)}",
 ".mlr-sev{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:3px 9px;font:800 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}",
@@ -1904,7 +1948,7 @@
 ".mlr-explain-wrap{margin-top:9px}",
 ".mlr-explain-btn{background:transparent;border:1px solid var(--line,#d7dee3);border-radius:9px;padding:7px 12px;font:800 11.5px var(--sans);cursor:pointer;color:var(--teal,#0e6e63);min-height:38px}",
 ".mlr-explain-btn:disabled{opacity:.7;cursor:default}",
-".mlr-explain-out{margin-top:8px;border-left:3px solid #a6d9d8;background:var(--teal-soft,#e3f1ee);border-radius:8px;padding:9px 11px}",
+".mlr-explain-out{margin-top:8px;box-shadow:0 2px 16px rgba(14,110,99,.12);background:var(--teal-soft,#e3f1ee);border-radius:8px;padding:9px 11px}",
 ".mlr-explain-out.mlr-explain-err{border-left-color:var(--red-line,#efa9b1);background:var(--red-bg,#fbe7e9)}",
 ".mlr-explain-label{font:800 10px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
 ".mlr-explain-note{font:500 10.5px var(--sans);color:var(--slate,#2d4356);margin:1px 0 5px;font-style:italic}",
@@ -1916,7 +1960,7 @@
 ".ml-scan-err{color:var(--red,#ab1c2c);font:600 13.5px/1.5 var(--sans);margin-bottom:12px}",
 ".ml-scan-rows{display:flex;flex-direction:column;gap:10px}",
 ".ml-scan-row{border:1px solid var(--line,#d7dee3);border-radius:12px;padding:11px 12px;background:var(--panel,#fff)}",
-".ml-scan-row.ml-scan-flagged{border-left:4px solid var(--amber,#92620a);background:#fdf9f0}",
+".ml-scan-row.ml-scan-flagged{box-shadow:0 2px 18px rgba(179,137,47,.14);background:#fdf9f0}",
 ".ml-scan-top{display:flex;align-items:flex-start;gap:9px}",
 ".ml-scan-top input{width:18px;height:18px;margin-top:2px;flex:0 0 auto}",
 ".ml-scan-titlewrap{flex:1;min-width:0}",
@@ -1939,6 +1983,7 @@
     if (!containerEl) return;
     injectStyles();
     _root = containerEl;
+    _checkSeq++; _checking = false; _editingId = null;
     _view = "list"; _results = null; _hideMinor = true;
     _openAdd = null; _undoingId = null; clearUndoTimer();
     _manualState = { value: "", parsed: null };

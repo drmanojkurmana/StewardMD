@@ -65,14 +65,16 @@
               color2: cleanHex(lt.color2, DEFAULT_CONFIG.light.color2),
               color3: cleanHex(lt.color3, DEFAULT_CONFIG.light.color3),
               blend: Math.min(0.95, Math.max(0.1, Number(lt.blend) || DEFAULT_CONFIG.light.blend)),
-              speed: Math.min(3.5, Math.max(0.2, Number(lt.speed) || DEFAULT_CONFIG.light.speed))
+              speed: Math.min(3.5, Math.max(0.2, Number(lt.speed) || DEFAULT_CONFIG.light.speed)),
+              plain: lt.plain === true
             },
             dark: {
               color1: cleanHex(dk.color1, DEFAULT_CONFIG.dark.color1),
               color2: cleanHex(dk.color2, DEFAULT_CONFIG.dark.color2),
               color3: cleanHex(dk.color3, DEFAULT_CONFIG.dark.color3),
               blend: Math.min(0.95, Math.max(0.1, Number(dk.blend) || DEFAULT_CONFIG.dark.blend)),
-              speed: Math.min(3.5, Math.max(0.2, Number(dk.speed) || DEFAULT_CONFIG.dark.speed))
+              speed: Math.min(3.5, Math.max(0.2, Number(dk.speed) || DEFAULT_CONFIG.dark.speed)),
+              plain: dk.plain === true
             }
           };
         }
@@ -92,6 +94,7 @@
       if (patch.light.color3) currentConfig.light.color3 = cleanHex(patch.light.color3, currentConfig.light.color3);
       if (patch.light.blend != null) currentConfig.light.blend = Math.min(0.95, Math.max(0.1, Number(patch.light.blend)));
       if (patch.light.speed != null) currentConfig.light.speed = Math.min(3.5, Math.max(0.2, Number(patch.light.speed)));
+      currentConfig.light.plain = patch.light.plain === true;   // any palette edit brings the aurora back
     }
     if (patch.dark) {
       if (patch.dark.color1) currentConfig.dark.color1 = cleanHex(patch.dark.color1, currentConfig.dark.color1);
@@ -99,6 +102,7 @@
       if (patch.dark.color3) currentConfig.dark.color3 = cleanHex(patch.dark.color3, currentConfig.dark.color3);
       if (patch.dark.blend != null) currentConfig.dark.blend = Math.min(0.95, Math.max(0.1, Number(patch.dark.blend)));
       if (patch.dark.speed != null) currentConfig.dark.speed = Math.min(3.5, Math.max(0.2, Number(patch.dark.speed)));
+      currentConfig.dark.plain = patch.dark.plain === true;
     }
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(currentConfig)); } catch (e) {}
     activeInstances.forEach(function (inst) { try { inst.syncConfig(); } catch (e) {} });
@@ -112,6 +116,46 @@
     return currentConfig;
   }
 
+  /* Background choices for the MaiK sidebar (owner, 2026-09-26: "in dark mode keep existing as one
+   * background and give option to change background even in dark mode"). One list for both themes,
+   * applied to the theme on screen. "tiranga" is each theme's own default, so dark keeps exactly the
+   * background it always had; the other palettes are the Display presets; "plain" hides the aurora,
+   * the glow and the thinking glyphs, and no animation loop runs. */
+  var BG_BLURB = { tiranga: 'Saffron, green and navy aurora. The original.', borealis: 'Emerald, sky blue and amber aurora.', cosmic: 'Indigo, cyan and rose aurora.', sunset: 'Amber, red and indigo aurora.', glacier: 'Ocean blue, green and navy aurora.', plain: 'No aurora and no motion. A calm, solid backdrop.' };
+  var BG_SHORT = { tiranga: 'Default', borealis: 'Borealis', cosmic: 'Cosmic', sunset: 'Sunset', glacier: 'Glacier', plain: 'Plain', custom: 'Custom' };
+  function themeOf(theme) { return theme === 'dark' ? 'dark' : 'light'; }
+  function bgPalette(theme, id) {
+    if (id === 'tiranga') return DEFAULT_CONFIG[themeOf(theme)];
+    for (var i = 0; i < PRESETS.length; i++) if (PRESETS[i].id === id) return PRESETS[i];
+    return null;
+  }
+  function choice(theme) {
+    var c = currentConfig[themeOf(theme)];
+    if (c.plain) return 'plain';
+    for (var i = 0; i < PRESETS.length; i++) {
+      var p = bgPalette(theme, PRESETS[i].id);
+      if (c.color1.toLowerCase() === p.color1.toLowerCase() && c.color2.toLowerCase() === p.color2.toLowerCase() &&
+          c.color3.toLowerCase() === p.color3.toLowerCase() && Math.abs(c.blend - p.blend) < 0.02) return PRESETS[i].id;
+    }
+    return 'custom';
+  }
+  function backgrounds(theme) {
+    var list = PRESETS.map(function (p) {
+      var c = bgPalette(theme, p.id);
+      return { id: p.id, name: p.id === 'tiranga' ? p.name + ' (default)' : p.name, blurb: BG_BLURB[p.id] || '',
+        preview: 'linear-gradient(160deg,' + hexToRgba(c.color1, 0.85) + ' 0%,' + hexToRgba(c.color3, 0.75) + ' 55%,' + hexToRgba(c.color2, 0.8) + ' 100%),var(--mk-bg)' };
+    });
+    list.push({ id: 'plain', name: 'Plain', blurb: BG_BLURB.plain, preview: 'var(--mk-bg)' });
+    return list;
+  }
+  function choose(theme, id) {
+    var patch = {}, p = bgPalette(theme, id);
+    if (id === 'plain') patch[themeOf(theme)] = { plain: true };
+    else if (p) patch[themeOf(theme)] = { color1: p.color1, color2: p.color2, color3: p.color3, blend: p.blend, speed: p.speed };
+    else return currentConfig;
+    return setConfig(patch);
+  }
+
   function mount(sheet) {
     var layer = document.createElement('div'); layer.className = 'mk-atmo'; layer.setAttribute('aria-hidden', 'true');
     var aurora = document.createElement('canvas'), code = document.createElement('canvas'), veil = document.createElement('div');
@@ -119,6 +163,7 @@
     layer.appendChild(aurora); layer.appendChild(code); layer.appendChild(veil); sheet.insertBefore(layer, sheet.firstChild); sheet.classList.add('mk-atmosphere');
     var ctx = code.getContext('2d'), gl = null, program = null, buffer = null, shaders = [], uniforms = {};
     var dead = false, busy = false, dark = false, raf = 0, last = 0, elapsed = 0, width = 1, height = 1, cols = 1, letters = [];
+    var FONT = '14px ui-monospace, SFMono-Regular, monospace', CELL_L = 1.25, CELL_T = 2, cellsFit = false, fresh = true;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}[]<>/=+;:.*';
     function randomChar() { return chars.charAt(Math.floor(Math.random() * chars.length)); }
@@ -132,8 +177,15 @@
         layer.style.setProperty('--mk-c1-a', hexToRgba(cfg.color1, 0.28));
         layer.style.setProperty('--mk-c2-a', hexToRgba(cfg.color2, 0.24));
         layer.style.setProperty('--mk-c3-a', hexToRgba(cfg.color3, 0.22));
+      } else {
+        // The default dark palette gives exactly the stylesheet's own values (.34 / .22 / .45).
+        layer.style.setProperty('--mk-d1-a', hexToRgba(cfg.color1, 0.34));
+        layer.style.setProperty('--mk-d2-a', hexToRgba(cfg.color2, 0.22));
+        layer.style.setProperty('--mk-d3-a', hexToRgba(cfg.color3, 0.45));
       }
+      layer.classList.toggle('mk-atmo-plain', !!cfg.plain);
     }
+    function plainNow() { return !!(dark ? currentConfig.dark : currentConfig.light).plain; }
 
     function releaseGL() {
       if (!gl) return;
@@ -158,7 +210,7 @@
     if (!gl) aurora.style.display='none';
 
     function paint() {
-      if (dead) return;
+      if (dead || plainNow()) return;
       var cfg = dark ? currentConfig.dark : currentConfig.light;
       if (!busy && gl) {
         gl.uniform1f(uniforms.uTime, elapsed * cfg.speed);
@@ -167,21 +219,42 @@
         gl.uniform3fv(uniforms['uColorStops[0]'], new Float32Array(getPaletteArray(cfg)));
         gl.drawArrays(gl.TRIANGLES, 0, 3);
       } else if (busy && ctx) {
-        ctx.clearRect(0, 0, width, height); ctx.font = '14px ui-monospace, SFMono-Regular, monospace'; ctx.textBaseline = 'top';
+        ctx.font = FONT; ctx.textBaseline = 'top';
         var shades = dark ? ['#3b7560', '#70c4a1', '#6c9cb5'] : [cfg.color1, cfg.color2, cfg.color3];
+        /* Energy: repaint only the cells whose glyph, colour or 8-bit alpha changed since they were
+         * last painted. Cells never overlap (cellsFit), so clearing a cell's box and redrawing it gives
+         * the same pixels as the full clear + redraw (test/run-maik-atmosphere-pixels.mjs). */
+        var full = !cellsFit || fresh;
+        if (full) ctx.clearRect(0, 0, width, height);
         letters.forEach(function (l, i) {
           l.value += (l.target - l.value) * .14;
-          ctx.globalAlpha = .3 + l.value * .6;
-          ctx.fillStyle = shades[i % 3];
-          ctx.fillText(l.char, (i % cols) * 11, Math.floor(i / cols) * 20);
+          var a = .3 + l.value * .6, q = Math.round(a * 255), fill = shades[i % 3], x = (i % cols) * 11, y = Math.floor(i / cols) * 20;
+          if (!full) { if (l.pc === l.char && l.pq === q && l.pf === fill) return; ctx.clearRect(x - CELL_L, y - CELL_T, 11, 20); }
+          ctx.globalAlpha = a;
+          ctx.fillStyle = fill;
+          ctx.fillText(l.char, x, y);
+          l.pc = l.char; l.pq = q; l.pf = fill;
         });
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha = 1; fresh = false;
       }
+    }
+    // A cell's clear box is [x - CELL_L, x - CELL_L + 11) x [y - CELL_T, y - CELL_T + 20); the boxes
+    // tile the canvas. Every glyph's ink must sit at least one device pixel inside its box, so the
+    // box's (possibly fractional) edge never shares a pixel with ink. Otherwise: full redraws only.
+    function measureCells(dpr) {
+      var m = 1 / dpr + .05; ctx.font = FONT; ctx.textBaseline = 'top';
+      for (var k = 0; k < chars.length; k++) {
+        var t = ctx.measureText(chars.charAt(k));
+        if (t.actualBoundingBoxLeft == null) return false;
+        if (t.actualBoundingBoxLeft > CELL_L - m || t.actualBoundingBoxRight > 11 - CELL_L - m ||
+            t.actualBoundingBoxAscent > CELL_T - m || t.actualBoundingBoxDescent > 20 - CELL_T - m) return false;
+      }
+      return true;
     }
 
     function active() { return !dead && sheet.isConnected && sheet.classList.contains('on') && !document.hidden && !reduced.matches; }
     function frame(t) {
-      raf = 0; if (!sheet.isConnected) { destroy(); return; } if (!active()) return;
+      raf = 0; if (!sheet.isConnected) { destroy(); return; } if (!active() || plainNow()) return;
       if (t - last >= 24) {
         elapsed += Math.min((t - last) / 1000, .1); last = t;
         if (busy) for (var i = 0; i < letters.length * .04; i++) { var l = letters[Math.floor(Math.random() * letters.length)]; l.char = randomChar(); l.target = Math.random(); }
@@ -191,6 +264,7 @@
     }
     function sync() {
       if (dead) return;
+      fresh = true;
       dark = document.body.classList.contains('dark') || document.body.classList.contains('v3-dark');
       layer.classList.toggle('mk-atmo-dark', dark);
       var cfg = dark ? currentConfig.dark : currentConfig.light;
@@ -198,12 +272,12 @@
       paint();
       if (raf) { cancelAnimationFrame(raf); raf = 0; }
       last = performance.now();
-      if (active()) raf = requestAnimationFrame(frame);
+      if (active() && !plainNow()) raf = requestAnimationFrame(frame);
     }
     function resize() {
       if (dead) return;
       width = Math.max(1, sheet.clientWidth); height = Math.max(1, sheet.clientHeight); var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      code.width = Math.round(width * dpr); code.height = Math.round(height * dpr); if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      code.width = Math.round(width * dpr); code.height = Math.round(height * dpr); if (ctx) { ctx.setTransform(dpr, 0, 0, dpr, 0, 0); cellsFit = measureCells(dpr); }
       cols = Math.ceil(width / 11); letters = []; for (var n = 0; n < cols * Math.ceil(height / 20); n++) letters.push({ char: randomChar(), value: Math.random(), target: Math.random() });
       if (gl) { aurora.width = Math.round(width * dpr); aurora.height = Math.round(height * dpr); gl.viewport(0, 0, aurora.width, aurora.height); gl.uniform2f(uniforms.uResolution, aurora.width, aurora.height); }
       sync();
@@ -217,7 +291,8 @@
       syncConfig: function () {
         var cfg = dark ? currentConfig.dark : currentConfig.light;
         applyCssGlow(cfg);
-        paint();
+        if (!raf && active() && !cfg.plain) { last = performance.now(); raf = requestAnimationFrame(frame); }   // leaving Plain restarts the loop
+        fresh = true; paint();
       },
       setBusy: function (on) {
         busy = !!on;
@@ -245,6 +320,10 @@
     getConfig: function () { return JSON.parse(JSON.stringify(currentConfig)); },
     setConfig: setConfig,
     resetConfig: resetConfig,
+    backgrounds: backgrounds,
+    choice: choice,
+    choiceLabel: function (theme) { return BG_SHORT[choice(theme)]; },
+    choose: choose,
     PRESETS: PRESETS,
     DEFAULT_CONFIG: DEFAULT_CONFIG
   };

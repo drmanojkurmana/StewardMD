@@ -71,6 +71,32 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
       recoverable from the brand NAME for most combination rows, so a `strength_mg` column on `drugs`
       would let RxChoice match combinations on the composition instead of on naming convention.
 
+## [[Medical Core]] — blocked on data and people, not on code
+
+Phase 1 (deterministic: patient state, what changed, missing information, unit and freshness checks)
+is BUILT behind `smd_medcore`, default OFF, with the four ML hazards in the executable safety case.
+Steps 12 onward of `vault/modules/Medical Core.md` cannot start until these exist. They are NOT
+engineering tasks.
+
+- [ ] **A dataset.** Retrospective ICU/ward data from a named hospital, under a written agreement,
+      de-identified before it leaves the hospital boundary. Nothing from step 13 on can begin
+      without it, and no amount of engineering substitutes for it.
+- [ ] **Ethics / institutional approval** for the retrospective analysis, and a named data custodian.
+- [ ] **A clinician to own the label definitions.** `medcore/data/outcomes.json` has five outcomes
+      written so they can be argued with; each needs its risk-set entry rule, exclusions and
+      censoring confirmed by the Critical Care lead before any labelling.
+- [ ] **An adjudication process.** At least 200 positives and 200 near-misses per outcome reviewed,
+      with inter-rater agreement reported in the dataset card.
+- [ ] **A named approver** who can move anything from VERIFIED (software) to CLINICALLY APPROVED.
+      Nothing in Medical Core has that status and nothing in the repo can grant it.
+- [ ] Clinical sign-off on the three unapproved packs: `units.json` (conversion factors and
+      plausibility bounds), `freshness.json` (staleness windows), `change-bands.json` (what size of
+      change is worth a clinician's attention).
+
+- [x] The missing **CAM-ICU** calculator in `calculators.js` — added 2026-09-19 (Ely, JAMA 2001;
+      SCCM PADIS 2018). Distinct from the general CAM (Inouye 1990) already under Neurology, which
+      needs a patient who can be interviewed. Test: `test/camicu.test.mjs`.
+
 ## [[WardSynQ]] — blocked on people, not on code
 
 Recorded 2026-09-05 after the notification chain was completed and demonstrated on a device. These
@@ -117,3 +143,13 @@ Engineering that is deliberately NOT started:
 
 ## Universal Search phase 2 (added 2026-09-21)
 - [ ] Scheme Search provider (`/api/schemes/search`), CliniX/SURGX content providers (manifest is lazy; needs a cached title index), OPD/ICU patient jump (PHI review first).
+
+## Every branch, wave 2: needs the server (owner's ticked list, 2026-09-25)
+Wave 1 is built and ON: [[Specialty Kits]] (26), [[Clinical Documents]], [[Review Desk]], source watch.
+Wave 2 is **built and ON** since 2026-09-25 ([[Colleagues]]): B1 referral, B2 case room, B3 handover sync,
+B7 hospital kit versions, E3/E4 kit history, F1 review sync. Native users get it with the next build.
+Follow-ups: an in-app badge for new items; a per-uid push token directory instead of
+the token scan; unit-level (not per-doctor) history if hospitals ask for it.
+Not ticked (owner left them out): B4 audit dashboard, B5 case library.
+Also pending on people, not code: clinical review of all ai_drafted content (use the Review Desk),
+native-speaker check of the Telugu and Hindi consent forms and handouts.

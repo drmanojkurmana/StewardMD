@@ -85,6 +85,15 @@ const server = createServer(async (req, res) => {
     for (const [k, v] of Object.entries(req.headers)) if (typeof v === "string") headers.set(k, v);
     const r = await onRequest({ request: new Request("http://localhost" + req.url,
       { method: req.method, headers, body: req.method === "GET" ? undefined : Buffer.concat(chunks) }), env: H.ENV, waitUntil() {} });
+    /* GET /live is a Server-Sent Events stream (plan item 16) that runs for minutes. Buffered, each console page held a
+     * browser connection with no answer; past Chrome's six per host the next request (the check-in sheet's /org) hung. */
+    if (/event-stream/.test(r.headers.get("Content-Type") || "") && r.body) {
+      res.writeHead(r.status, { "Content-Type": "text/event-stream", "Cache-Control": "no-store" });
+      const reader = r.body.getReader();
+      res.on("close", () => { try { reader.cancel(); } catch {} });
+      for (;;) { const { done, value } = await reader.read().catch(() => ({ done: true })); if (done) break; res.write(Buffer.from(value)); }
+      res.end(); return;
+    }
     res.writeHead(r.status, { "Content-Type": "application/json" }); res.end(Buffer.from(await r.arrayBuffer())); return;
   }
   let p = join(ROOT, normalize(decodeURIComponent(url.pathname)).replace(/^(\.\.[/\\])+/, ""));
@@ -121,8 +130,8 @@ try {
     return c === "doctor" ? true : "chip: " + c;
   });
   await step("doctor: room wall + patient tickets render", async () =>
-    (await ev(`return document.querySelectorAll('.rcard').length + '/' + document.querySelectorAll('.rcard .row').length;`)) === "1/1"
-      ? true : await ev(`return document.querySelectorAll('.rcard').length + '/' + document.querySelectorAll('.rcard .row').length;`));
+    (await ev(`return document.querySelectorAll('.rcard').length + '/' + document.querySelectorAll('.rcard .row, .opd-lane .row').length;`)) === "1/1"
+      ? true : await ev(`return document.querySelectorAll('.rcard').length + '/' + document.querySelectorAll('.rcard .row, .opd-lane .row').length;`));
   await step("doctor: toolbar has Billing and Pharmacy", async () =>
     (await ev(`return !!document.getElementById('billing') && !!document.getElementById('pharmacy');`)) === true
       ? true : "toolbar buttons missing");
@@ -165,7 +174,7 @@ try {
   await step("nurse: board, + Walk-in and vitals action", async () => {
     const w = await ev(`return !!document.getElementById('walk');`);
     const v = await ev(`return document.querySelectorAll('.acts [data-a="vitals"]').length;`);
-    const rows = await ev(`return document.querySelectorAll('.rcard .row').length;`);
+    const rows = await ev(`return document.querySelectorAll('.rcard .row, .opd-lane .row').length;`);
     return w && v >= 1 && rows >= 1 ? true : `walk=${w} vitals=${v} rows=${rows}`;
   });
   await step("nurse: + Walk-in opens the check-in sheet and registers with a token", async () => {
@@ -207,9 +216,9 @@ try {
     return s === "y" ? true : "no in-consultation ticket";
   });
   await step("doctor: Checkout completes the visit and releases the patient", async () => {
-    const before = await ev(`return document.querySelectorAll('.rcard .row').length;`);
+    const before = await ev(`return document.querySelectorAll('.rcard .row, .opd-lane .row').length;`);
     await ev(`document.querySelector('.acts [data-a="checkout"]').click(); return 1;`);
-    const after = await until(`return (function(n){ var m=document.querySelectorAll('.rcard .row').length; return m<n ? String(m) : null; })(${before});`, 10000);
+    const after = await until(`return (function(n){ var m=document.querySelectorAll('.rcard .row, .opd-lane .row').length; return m<n ? String(m) : null; })(${before});`, 10000);
     return after !== null ? true : `queue did not advance (still ${before})`;
   });
 
@@ -267,6 +276,8 @@ try {
     return (await ev(`return !!document.querySelector('a[href="/opd"]');`)) === true ? true : "no back-to-OPD link";
   });
   await step("cashier: invoice + Cash marks the orders paid", async () => {
+    // "260.00" is also on the queue row, so the review step can pass before the review (and #inv) has rendered.
+    await until(`return document.getElementById('inv') ? 'y' : null;`, 8000);
     const invClicked = await click("#inv");
     if (invClicked !== 1) return "no invoice button: " + invClicked;
     const pays = await until(`return document.querySelectorAll('.pays button').length===3 ? 'y' : null;`, 15000);

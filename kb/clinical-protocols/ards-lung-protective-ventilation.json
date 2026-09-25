@@ -1,0 +1,94 @@
+{
+ "id": "ards-lung-protective-ventilation",
+ "title": "ARDS: lung-protective ventilation (adult)",
+ "subject": "critical-care",
+ "population": "Adults",
+ "basis": "international",
+ "setting": "ICU",
+ "aliases": ["ARDS", "acute respiratory distress syndrome", "lung protective ventilation", "low tidal volume", "ARDSNet", "prone ventilation", "proning", "PEEP", "VV-ECMO", "driving pressure", "neuromuscular blockade"],
+ "summary": "Ventilate ARDS with tidal volume 4 to 8 mL/kg predicted body weight (start at 6) and plateau pressure below 30 cmH2O, use higher PEEP in moderate to severe ARDS without prolonged recruitment manoeuvres, prone for 16 hours or more when PaO2/FiO2 stays below 150 mmHg, and consider corticosteroids, early neuromuscular blockade and VV-ECMO in selected patients.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise (2024 global definition)",
+   "items": [
+    "Acute onset or worsening within 1 week of a risk factor (pneumonia, sepsis, aspiration, trauma, pancreatitis, transfusion) or new respiratory symptoms, not primarily due to cardiac failure or fluid overload.",
+    "Bilateral opacities on chest X-ray or CT, or bilateral loss of aeration on lung ultrasound, not fully explained by effusions, atelectasis or nodules.",
+    "Hypoxaemia: PaO2/FiO2 300 mmHg or less, or SpO2/FiO2 315 or less (valid only when SpO2 is 97% or less). Non-intubated ARDS needs HFNO of 30 L/min or more, or NIV/CPAP with at least 5 cmH2O.",
+    "Severity when intubated (PEEP 5 or more): mild PaO2/FiO2 above 200 to 300 (SpO2/FiO2 above 235 to 315); moderate above 100 to 200 (above 148 to 235); severe 100 or less (148 or less).",
+    "Common causes in India: severe pneumonia (including influenza), sepsis, falciparum malaria, leptospirosis, scrub typhus, dengue, aspiration, and organophosphate or paraquat poisoning."
+   ]
+  },
+  {
+   "kind": "immediate",
+   "title": "Initial ventilator settings",
+   "items": [
+    "Calculate predicted body weight (PBW) from height: men 50 + 0.91 x (height in cm minus 152.4); women 45.5 + 0.91 x (height in cm minus 152.4). Never use actual weight.",
+    "Volume control, tidal volume 6 mL/kg PBW (range 4 to 8), plateau pressure below 30 cmH2O measured with a 0.5 second inspiratory hold; reduce tidal volume towards 4 mL/kg if plateau stays high.",
+    "PEEP and FiO2 by a PEEP/FiO2 table. Moderate to severe ARDS: ATS 2024 suggests a higher PEEP strategy (watch BP and plateau); ESICM 2023 made no recommendation for or against routine higher PEEP.",
+    "Oxygenation goal PaO2 55 to 80 mmHg or SpO2 88 to 95% (ARDSNet). Raise the rate (up to about 35/min) for CO2 clearance and accept permissive hypercapnia unless intracranial pressure is raised.",
+    "Keep driving pressure (plateau minus PEEP) as low as possible; values above about 15 cmH2O are associated with higher mortality."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Adjuncts for moderate to severe ARDS",
+   "items": [
+    "Prone positioning (strong): PaO2/FiO2 below 150 mmHg with PEEP 5 cmH2O or more after a short stabilisation period; start early and prone for 16 consecutive hours or more per session (ESICM). ATS: more than 12 hours/day in severe ARDS.",
+    "Neuromuscular blockade (ATS 2024, conditional): early (under 48 hours) severe ARDS with PaO2/FiO2 100 mmHg or less, usually for up to 48 hours with deep sedation. ESICM 2023 recommends against routine continuous infusion; reserve for refractory hypoxaemia or dyssynchrony.",
+    "Recruitment manoeuvres: do not use prolonged high-pressure manoeuvres (35 cmH2O or more for over 60 seconds); ESICM also suggests against routine brief manoeuvres.",
+    "Corticosteroids (ATS 2024, conditional): suggested for ARDS without a single preferred regimen. Use condition-specific regimens where defined (severe CAP, COVID-19, Pneumocystis pneumonia); otherwise a trial regimen such as dexamethasone (DEXA-ARDS).",
+    "Conservative fluid strategy once shock has resolved: avoid a positive balance and use diuretics as tolerated.",
+    "Sedation and analgesia per the ICU sedation protocol; deeper sedation is often needed early in severe ARDS, then lighten."
+   ]
+  },
+  {
+   "kind": "escalate",
+   "title": "Escalate: ECMO referral",
+   "items": [
+    "Refer early to an ECMO centre (ATS 2024, conditional; ESICM for EOLIA-type severe ARDS) if, despite optimal ventilation, proning and neuromuscular blockade, PaO2/FiO2 is below 80 mmHg or pH is below 7.25 with PaCO2 60 mmHg or more, early in the course (under 7 days).",
+    "Transfer before the patient is too unstable to move; discuss futility factors (major comorbidity, prolonged high-pressure ventilation).",
+    "Extracorporeal CO2 removal (ECCO2R) is not recommended outside trials."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Find and treat the cause",
+   "items": [
+    "Blood and respiratory cultures, respiratory viral PCR, procalcitonin; malaria, dengue, scrub typhus and leptospira tests as locally relevant; HIV test.",
+    "Echocardiography and BNP to exclude cardiogenic pulmonary oedema; CT chest when the cause is unclear or complications are suspected.",
+    "Review drug, toxin, aspiration and transfusion history, and look for an abdominal or soft tissue source of sepsis needing control."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Monitoring",
+   "items": [
+    "Plateau pressure, driving pressure, compliance and ABG after each ventilator change and at least daily.",
+    "Watch for barotrauma (pneumothorax), haemodynamic compromise with high PEEP, and pressure injuries, tube displacement or line loss during proning.",
+    "Daily sedation review and spontaneous breathing trial readiness once oxygenation improves."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Setting tidal volume by actual weight (over-distension in short, female or obese patients).",
+    "Chasing normal PaCO2 or SpO2 at the cost of high pressures.",
+    "Missing cardiogenic oedema or a treatable cause (Pneumocystis, scrub typhus, malaria).",
+    "Delaying proning or ECMO referral until the patient cannot be transferred."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Cisatracurium", "dose": "15 mg IV bolus, then 37.5 mg/h infusion for up to 48 hours", "notes": "Regimen used in the ACURASYS and ROSE trials. Only with deep sedation; monitor with train-of-four as per unit practice." },
+  { "name": "Dexamethasone", "dose": "20 mg IV once daily on days 1 to 5, then 10 mg IV once daily on days 6 to 10", "notes": "DEXA-ARDS regimen; one of several trial regimens (ATS 2024 endorses no single regimen). Monitor glucose." },
+  { "name": "Methylprednisolone", "dose": "1 mg/kg IV loading, then 1 mg/kg/day infusion for up to 14 days, then tapered", "notes": "Alternative trial regimen in early ARDS. Screen for strongyloides in endemic areas before prolonged steroids." }
+ ],
+ "sources": [
+  { "org": "American Thoracic Society", "title": "An Update on Management of Adult Patients with ARDS: An Official ATS Clinical Practice Guideline", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10870893/" },
+  { "org": "ESICM", "title": "ESICM guidelines on acute respiratory distress syndrome: definition, phenotyping and respiratory support strategies", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10354163/" },
+  { "org": "Matthay MA, et al. Am J Respir Crit Care Med", "title": "A New Global Definition of Acute Respiratory Distress Syndrome", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10870872/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

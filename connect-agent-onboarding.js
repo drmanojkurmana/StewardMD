@@ -171,7 +171,7 @@
       ".smd-connect-stages li.on .smd-connect-dot{background:var(--teal,#0e6e63)}",
       ".smd-connect-stages li.ok .smd-connect-dot{background:var(--green,#1c7a4a)}",
       ".smd-connect-note{font-size:0.6875rem;line-height:1.45;letter-spacing:0;color:var(--slate-soft,#5a7184);margin-top:0.375rem}",
-      ".smd-agent-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.5rem;padding-top:0.375rem;border-top:1px solid var(--line,#e2e8f0)}",
+      ".smd-agent-stats{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0.5rem;margin-top:0.5rem;padding-top:0.375rem;border-top:1px solid var(--line,#e2e8f0)}",
       ".smd-connect-counts{display:flex;flex-direction:column;gap:0.125rem;background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:0.5rem;padding:0.375rem 0.625rem}",
       ".smd-connect-counts span{font-size:0.6875rem;color:var(--slate-soft,#5a7184);font-weight:600;text-transform:uppercase;letter-spacing:0.03em}",
       ".smd-connect-counts strong{font-size:1rem;color:var(--ink,#14202b);font-weight:700}",
@@ -203,7 +203,7 @@
       ".smd-agent-chip svg{flex:none;width:0.75rem;height:0.75rem}",
       ".smd-agent-bar{position:sticky;bottom:0;z-index:3;background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3);padding:0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom,0px));margin-top:0.375rem;display:flex;flex-direction:column;gap:0.375rem}",
       "body.dark .smd-agent-bar{background:var(--panel,#131f2f)}",
-      ".smd-agent-acts{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}",
+      ".smd-agent-acts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0.5rem}",
       ".smd-agent-acts .smd-connect-btn{width:100%}",
       ".smd-agent-stop{grid-column:1/-1}",
       ".smd-agent-confirm{border:1px solid var(--red-line,#efa9b1);background:rgba(171,28,44,.06);border-radius:0.625rem;padding:0.625rem;display:flex;flex-direction:column;gap:0.5rem}",
@@ -680,11 +680,35 @@
         if (S.screen === "connections") renderConnections();
         return;
       }
-      var list = r.d.tenants || [];
+      /* One row per organisation: the owner's list carried KGH twice. */
+      var seenIds = {};
+      var list = (r.d.tenants || []).filter(function (t) { if (!t || !t.tenantId || seenIds[t.tenantId]) return false; seenIds[t.tenantId] = 1; return true; });
       if (list.length > 1) {
         S.tenants = list;
         var known = list.some(function (t) { return t.tenantId === S.tenant; });
-        if (!known) { S.tenant = ""; storeTenant(""); if (S.screen === "connections") renderConnections(); return; }
+        if (!known) {
+          S.tenant = ""; storeTenant("");
+          /* THE DOCTOR IS CONNECTING THEIR OWN HOSPITAL, NOT CHOOSING ONE OF OUR TENANTS. A tenant id is
+           * our bookkeeping (the server's own words: "no client screen ever shows it"), yet an account on
+           * several organisations - the owner's: a HAPI sandbox, an E2E test hospital, two KGH rows, a
+           * WardSynQ demo - was stopped with "Which hospital?" before it could even see its hospitals
+           * (Pixel 9, fresh storage, 2026-09-25). The organisation that already holds this doctor's
+           * connection IS the answer: the one with an approved adapter, else the only one with any.
+           * Only a genuinely ambiguous account is asked; the server still never guesses. */
+          Promise.all(list.map(function (t) {
+            return api("/connections?tenant=" + encodeURIComponent(t.tenantId), {}).then(function (c) {
+              var cs = (c && c.s === 200 && c.d) ? (Array.isArray(c.d) ? c.d : (c.d.connections || [])) : [];
+              return { id: t.tenantId, any: cs.length > 0, active: cs.some(function (x) { return x && x.activeVersionId; }) };
+            }, function () { return { id: t.tenantId, any: false, active: false }; });
+          })).then(function (seen) {
+            if (!overlay() || !S) return;
+            var act = seen.filter(function (x) { return x.active; }), any = seen.filter(function (x) { return x.any; });
+            var pick = act.length === 1 ? act[0].id : (act.length === 0 && any.length === 1 ? any[0].id : "");
+            if (pick) { S.tenant = pick; storeTenant(pick); loadConnections(); return; }
+            if (S.screen === "connections") renderConnections();
+          });
+          return;
+        }
       } else if (list.length === 1 && S.tenant && S.tenant !== list[0].tenantId) { S.tenant = ""; storeTenant(""); }
       loadConnections();
     });

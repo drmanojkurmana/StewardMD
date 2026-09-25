@@ -21,14 +21,24 @@ test("the chip is rendered inside the composer, after the tool buttons and befor
   assert.ok(cmp.indexOf('id="maikImgFile"') < chipAt && chipAt < cmp.indexOf('id="maikQ"'), "placed after the tool buttons, before the textarea");
 });
 
-test("the polished grid puts the chip in the flexible bottom-row cell, hugging Send, with a 44px target", () => {
-  assert.match(CSS, /#maikModelChip\{grid-column:4;grid-row:2;justify-self:end;[^}]*min-height:44px/);
-  assert.match(CSS, /#maikSend\{grid-column:5;grid-row:2/);
-  assert.match(CSS, /\.maik-cmp-in:has\(#maikExtract\.show\) #maikModelChip\{max-width:calc\(100% - 52px\)!important\}/, "yields to the extract button when it shows");
+test("the polished grid puts the chip in the bottom row's own track, hugging Send, with a 44px target", () => {
+  // 2026-09-26 symmetry pass: the chip has its own minmax(0,auto) track right of the flexible spacer,
+  // so it takes its full width first and truncates only when the row is truly full.
+  assert.match(CSS, /#maikModelChip\{grid-column:6;grid-row:2;[^}]*min-height:44px/);
+  assert.match(CSS, /#maikSend\{grid-column:7;grid-row:2/);
+  // Audit T05: the length pill has its own content-sized cell (it was auto-placed into a 44 px track and clipped).
+  assert.match(CSS, /grid-template-columns:auto auto auto auto minmax\(8px,1fr\) minmax\(0,auto\) 44px/);
+  assert.match(CSS, /#maikLen\{grid-column:4;grid-row:2;[^}]*min-height:44px/);
+  // Extract findings moved to the text row, so it no longer takes width from the chip when it shows.
+  assert.match(CSS, /#maikExtract\{grid-column:7;grid-row:1;/);
+  assert.doesNotMatch(CSS, /#maikExtract\.show\) #maikModelChip/);
   assert.doesNotMatch(CSS, /#maikModelChip\{grid-column:3;grid-row:1/, "the old header placement is gone");
 });
 
-test("the header grid no longer reserves a third column for it", () => {
-  assert.match(CSS, /\.maik-hd-row\{grid-template-columns:44px 1fr;gap:4px 8px\}/);
+test("the header grid has no column for the chip (its third column is Close)", () => {
+  // The second track is minmax(0,1fr) since #1236 made every grid column track minmax(0,1fr) repo-wide
+  // (a bare 1fr keeps its min-content width and can overflow the phone). The third, auto, is Close.
+  assert.match(CSS, /\.maik-hd-row\{grid-template-columns:44px minmax\(0,1fr\) auto;gap:4px 8px\}/);
+  assert.match(CSS, /#maikClose\{grid-column:3;grid-row:1;/);
   assert.doesNotMatch(CSS, /minmax\(110px,150px\)/);
 });

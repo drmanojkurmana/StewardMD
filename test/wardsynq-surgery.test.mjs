@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-surgery.test.mjs — the surgery/OT/PACU vertical, through the REAL routes.
  *
  * Booking -> consent (checked against the booking, via the REAL consent.js PatientConsent) -> site

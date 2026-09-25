@@ -7,14 +7,38 @@
 // "dispensed" (added 2026-08-24) is the pharmacy branch this file always anticipated. It hangs off
 // PAID deliberately: medicines are handed over after payment, never before, so the state machine
 // itself prevents dispensing an unpaid order rather than relying on the pharmacist to check.
-export const ORDER_STATES = ["ordered", "billed", "paid", "dispensed", "cancelled"];
-const ORDER_NEXT = { ordered: ["billed", "cancelled"], billed: ["paid", "cancelled"], paid: ["dispensed"], dispensed: [], cancelled: [] };
+/* "refunded" (OPD plan item 9, 2026-09-24) hangs off PAID only. Money taken for something not delivered
+ * goes back, with a reason (the store refuses one without). A DISPENSED medicine is not refunded here: the
+ * goods left the counter, so that is a return, a different process with stock in it. */
+export const ORDER_STATES = ["ordered", "billed", "paid", "dispensed", "cancelled", "refunded"];
+const ORDER_NEXT = { ordered: ["billed", "cancelled"], billed: ["paid", "cancelled"], paid: ["dispensed", "refunded"], dispensed: [], cancelled: [], refunded: [] };
+
+/**
+ * PURE. What a consultation costs for THIS visit (OPD plan item 9), in paise.
+ * prices: { new, followup } in paise (the hospital's tariff; followup falls back to new).
+ * ctx: { visitType: "new"|"followup", lastPaidConsultAt (ms, this patient, this doctor or clinic),
+ *        freeReviewDays (org setting; 0 or absent = no free review), nowMs }
+ * A follow-up inside the free-review window is WAIVED, and says so - a 0 with no reason is how a desk
+ * ends up quietly waiving fees nobody agreed to.
+ */
+export function consultFee(prices, ctx) {
+  const p = prices || {}, c = ctx || {};
+  const fresh = Math.max(0, Math.round(Number(p.new) || 0));
+  const follow = Number.isFinite(Number(p.followup)) && p.followup !== "" && p.followup != null ? Math.max(0, Math.round(Number(p.followup))) : fresh;
+  if (c.visitType !== "followup") return { paise: fresh, waived: false, basis: "new" };
+  const days = Math.max(0, Math.round(Number(c.freeReviewDays) || 0));
+  const last = Number(c.lastPaidConsultAt) || 0, now = Number(c.nowMs) || Date.now();
+  if (days > 0 && last > 0 && now - last >= 0 && now - last <= days * 86400000) {
+    return { paise: 0, waived: true, basis: "free_review", reason: "Free review within " + days + " days of a paid consultation." };
+  }
+  return { paise: follow, waived: false, basis: "followup" };
+}
 export function canOrderTransition(from, to) { return !!(ORDER_NEXT[from] && ORDER_NEXT[from].indexOf(to) >= 0); }
 // Terminal = nothing further can happen to this order. "paid" is no longer terminal for a MEDICATION
 // (the pharmacy still has to hand it over); it stays terminal for investigations and services, which
 // have no dispensing step.
 export function isOrderTerminal(s, kind) {
-  if (s === "cancelled" || s === "dispensed") return true;
+  if (s === "cancelled" || s === "dispensed" || s === "refunded") return true;
   if (s === "paid") return kind !== "medication";
   return false;
 }
@@ -58,6 +82,13 @@ export function validateTariff(item) {
    * every ward. They are never offered as OPD orders (inv-catalog lists tests and medicines only). */
   const kind = ["consultation", "medication", "service", "bed", "nursing", "visit"].indexOf(item.kind) >= 0 ? item.kind : "investigation";
   const out = { code: String(item.code || "").trim(), name: String(item.name).trim(), kind, price };
+  /* OPD plan item 9: a consultation may carry its own follow-up price (paise); absent, a follow-up costs
+   * the same as a new visit (consultFee). A negative or non-number one is refused, never silently kept. */
+  if (kind === "consultation" && item.followupPrice !== undefined && item.followupPrice !== null && item.followupPrice !== "") {
+    const fp = Math.round(Number(item.followupPrice));
+    if (!isFinite(fp) || fp < 0) return { ok: false, error: "bad_followup_price" };
+    out.followupPrice = fp;
+  }
   if (kind === "bed" || kind === "nursing" || kind === "visit") out.ward = String(item.ward || "").trim();
   if (item.doctorId !== undefined) out.doctorId = String(item.doctorId || "").trim();
   if (item.doctorName !== undefined) out.doctorName = String(item.doctorName || "").trim();

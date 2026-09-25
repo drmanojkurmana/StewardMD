@@ -135,6 +135,13 @@
   .acts button.warn{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
   .acts button.rm{background:var(--red-soft);color:var(--red);border-color:var(--red-line)}
   .acts button.rm:hover{background:var(--red);color:#fff}
+  /* Video visits: the three tele actions keep a 44px target on every pointer, not only touch. */
+  .acts button.tele,.opd-modern .acts button.tele{min-height:44px}
+  .tele-sheet label{display:block;font-weight:600;font-size:13px;margin:12px 0 6px}
+  .tele-sheet .agree{display:flex;align-items:center;gap:10px;min-height:44px;margin-top:12px;font-weight:600;font-size:14px;cursor:pointer}
+  .tele-sheet .agree input{width:22px;height:22px;flex:none;margin:0}
+  .tele-sheet .btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+  .tele-sheet a.btn{display:flex;align-items:center;justify-content:center;min-height:44px;text-decoration:none;box-sizing:border-box}
   .btn.danger{background:var(--red);color:#fff}
   .btn.danger:hover{box-shadow:0 4px 14px rgba(225,29,72,.35)}
   /* modal (animated bottom sheet) */
@@ -145,13 +152,37 @@
   @media(min-width:600px){.scrim{align-items:center}.sheet{border-radius:20px;transform:translateY(14px) scale(.98)}}
   .sheet h3{margin:0 0 12px;font-size:18px;letter-spacing:-.01em}
   .cats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-  .cats button{background:var(--btn);color:var(--ink);padding:9px 14px;font-weight:600;font-size:13px;border:1.5px solid var(--line);border-radius:10px}
+  .cats button{background:var(--btn);color:var(--ink);padding:9px 14px;min-height:44px;font-weight:600;font-size:13px;border:1.5px solid var(--line);border-radius:10px}
   .cats button.on{border-color:var(--tl);background:var(--tl-soft);color:var(--tl);font-weight:700}
   .sheet .row2{display:flex;gap:12px;margin-top:18px}.sheet .row2 button{flex:1;padding:13px;font-weight:700}
   .cancel{background:var(--btn);color:var(--ink);border:1.5px solid var(--line)}
   .cancel:hover{background:var(--line)}
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(8px);background:var(--ink);color:var(--card);padding:12px 18px;border-radius:12px;font-weight:600;font-size:13.5px;z-index:40;opacity:0;transition:.24s var(--ease);max-width:90%;box-shadow:var(--sh-lg)}
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  .offbar{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:39;max-width:min(560px,calc(100% - 32px));background:#fff7e6;color:#7a4b00;border:1px solid #f3d19c;border-radius:14px;padding:10px 14px;box-shadow:var(--sh-lg);font-size:13.5px;font-weight:600}
+  .offbar[hidden]{display:none}
+  .dc h3{margin:0 0 2px}.dc .dc-sub{color:var(--mut);font-size:13px;margin:0 0 14px}
+  .dc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:0 0 16px}
+  .dc-k{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card)}
+  .dc-k .l{font-size:12px;color:var(--mut);font-weight:600}.dc-k .v{font-size:24px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
+  .dc-k .s{font-size:12px;color:var(--mut)}.dc-k.warn{border-color:var(--amber-line);background:var(--amber-soft)}.dc-k.warn .v{color:var(--amber)}
+  .dc h4{margin:18px 0 8px;font-size:14px}
+  .dc-t{width:100%;border-collapse:collapse;font-size:13px}.dc-t th,.dc-t td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+  .dc-t th:first-child,.dc-t td:first-child{text-align:left}.dc-t th{color:var(--mut);font-weight:600;font-size:12px}
+  .dc-chips{display:flex;flex-wrap:wrap;gap:8px}.dc-chips span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}
+  .dc-wa{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:16px 0 4px;background:var(--card)}
+  .dc-wa h4{margin:0 0 4px}.dc-wa .t{color:var(--mut);font-size:13px;margin:0 0 10px}
+  .dc-wa .f{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .dc-wa label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--mut)}
+  .dc-wa select,.dc-wa input[type=tel]{min-height:44px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-size:15px;background:var(--card);color:var(--ink)}
+  .dc-wa .on{flex-direction:row;align-items:center;gap:8px;min-height:44px;font-size:14px;color:var(--ink)}
+  .dc-wa .on input{width:20px;height:20px}
+  .dc-wa .row2{margin-top:12px}.dc-wa .row2 button{min-height:44px}
+  .dc-wa-st{margin-top:8px;font-size:13px;color:var(--mut)}.dc-wa-st.bad{color:var(--amber);font-weight:600}
+  .dc-warn{background:var(--amber-soft);border:1px solid var(--amber-line);color:var(--amber);border-radius:10px;padding:10px 12px;font-size:13px;margin:8px 0}
+  .offbar .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .offbar button{min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #e0b36a;background:#fff;color:#7a4b00;font-weight:700}
+  .offbar .rv{margin-top:6px;font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .drawer{padding:6px 0}
   .ev{border-left:3px solid var(--tl);padding:8px 0 8px 12px;margin-left:4px}
   .ev b{color:var(--ink)}.ev .t{color:var(--mut);font-size:12px}
@@ -242,13 +273,100 @@
   .stock-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--card)}
   .stock-item:hover{background:var(--btn)}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* Flow Board: scoped to the signed-in console; existing dialogs and clinical actions stay intact. */
+  .opd-modern{--bg:#f5f5f0;--card:#fff;--btn:#eeefe9;--ink:#242a27;--ink-sec:#454e46;--mut:#667166;--line:#e0e4da;--tl:#36562d;--tl-d:#294423;--tl-soft:#e5efd9;--tl-border:#bfcfb3;--tl-glow:rgba(54,86,45,.12);--sh:0 0 0 1px rgba(0,0,0,.04),0 2px 3px rgba(0,0,0,.025),0 6px 14px rgba(0,0,0,.035);background:var(--bg);min-height:100vh}
+  .opd-modern [hidden]{display:none!important}
+  .opd-modern header{background:var(--card);backdrop-filter:none}
+  .opd-modern header .wrap{max-width:none;padding:16px 28px}
+  .opd-modern .brand{font-weight:650;letter-spacing:-.6px;font-size:18px}
+  .opd-modern .brand span{color:var(--tl)}
+  .opd-layout{display:grid;grid-template-columns:188px minmax(0,1fr);min-height:calc(100vh - 75px)}
+  .opd-sidebar{padding:26px 14px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:5px;align-items:stretch}
+  .opd-nav-brand{font-size:13px;font-weight:600;padding:0 10px 22px;display:flex;gap:8px;align-items:center}
+  .opd-nav-brand .mk{width:23px;height:23px;background:var(--tl);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;flex-shrink:0}
+  .opd-nav-label{font-size:11px;color:var(--mut);letter-spacing:.7px;padding:16px 10px 7px;text-transform:uppercase}
+  .opd-sidebar button{display:flex;align-items:center;gap:9px;text-align:left;padding:11px 10px;font-size:13px;font-weight:500;border:0;background:transparent;color:var(--ink-sec);border-radius:9px;box-shadow:none}
+  .opd-sidebar button.opd-nav-current{background:#d8edbd;color:#283f24;font-weight:600}
+  .opd-modern .opd-main{width:100%;max-width:1800px;padding:28px;min-width:0}
+  .opd-modern .toolbar{margin:0 0 25px;gap:10px}
+  .opd-modern .toolbar .grow{font-size:12px;line-height:1.6;min-width:200px}
+  .opd-modern .toolbar .grow b{font-size:12px;font-weight:500}
+  .opd-modern h1{font-size:30px;font-weight:600;letter-spacing:-1.2px;margin:0 0 5px;line-height:1.25;color:var(--ink)}
+  .opd-modern #walk{padding:11px 17px;box-shadow:none;font-size:13px;font-weight:600}
+  .opd-modern #ref{font-size:12px;border:0;background:var(--card);box-shadow:var(--sh);padding:11px 14px}
+  .opd-modern .p-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:0;background:var(--card);border-radius:16px;box-shadow:var(--sh);padding:18px 0;overflow:visible}
+  .opd-modern .p-t{border:0;border-right:1px solid var(--line);border-radius:0;padding:0 17px;background:none}
+  .opd-modern .p-t:last-child{border:0}.opd-modern .p-t.warn{background:none}
+  .opd-modern .p-l{font-family:inherit;text-transform:none;letter-spacing:0;opacity:1;font-weight:500;color:var(--mut);font-size:12px}
+  .opd-modern .p-v{font-family:inherit;font-size:29px;font-weight:550;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+  .opd-modern .p-v u{font-weight:500;letter-spacing:0}
+  .opd-modern .p-s{font-family:inherit;font-size:11px;opacity:1;color:var(--mut)}
+  .opd-modern .tot{gap:20px;margin:0 0 20px;padding-bottom:15px;border-bottom:1px solid var(--line)}
+  .opd-modern .tot .kpi{padding:0;flex:0 1 auto;min-width:0;border:0;box-shadow:none;background:none;font-weight:500;letter-spacing:0;text-transform:none;font-size:12px;display:flex;gap:7px;align-items:baseline}
+  .opd-modern .tot .kpi b{font-size:17px;font-weight:600;margin:0}
+  .opd-flow-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0}
+  .opd-view-switch{display:flex;padding:4px;background:var(--btn);border-radius:10px;gap:3px}
+  .opd-view-switch button{padding:8px 12px;color:var(--mut);background:none;font-size:12px;font-weight:500;border-radius:7px}
+  .opd-view-switch button[aria-pressed=true]{color:var(--ink);background:var(--card);box-shadow:var(--sh)}
+  .opd-search{display:flex;align-items:center;gap:6px;flex:1;max-width:290px;min-width:170px;background:var(--card);border-radius:10px;padding:0 11px;box-shadow:var(--sh)}
+  .opd-search input{border:0;background:none;padding:10px 0;font-size:13px;box-shadow:none;min-width:0}
+  .opd-search:focus-within{outline:2px solid var(--tl);outline-offset:2px}.opd-search input:focus{box-shadow:none}
+  .opd-filter-label{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--mut)}
+  .opd-filter-label select{width:auto;font-size:12px;padding:9px 10px;border-width:1px;max-width:190px}
+  #opdFilterCount{font-size:11px;color:var(--mut);margin-left:auto}
+  .opd-flow-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+  .opd-lane{background:var(--btn);padding:10px;border-radius:17px;min-width:0;min-height:240px}
+  .opd-lane>h2{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;margin:5px 3px 3px}
+  .opd-lane-count{font-size:12px;font-weight:500;color:var(--mut);font-variant-numeric:tabular-nums}
+  .opd-lane>p{margin:0 3px 17px;font-size:11px;color:var(--mut)}
+  .opd-lane-cards{display:flex;flex-direction:column;gap:12px}
+  .opd-modern .pcard,.opd-modern .row{border:0;background:var(--card);box-shadow:var(--sh);border-radius:10px;padding:13px;min-width:0;transform:none}
+  .opd-modern .pcard.urg,.opd-modern .row.p2{border-left:3px solid var(--red)}
+  .opd-modern .row.p1{border-left:3px solid var(--amber)}
+  .opd-modern .pcard:hover,.opd-modern .row:hover,.opd-modern .rcard:hover,.opd-modern .doc:hover{transform:none;box-shadow:var(--sh)}
+  .opd-card-context{font-size:11px;color:var(--mut);margin-bottom:9px;overflow-wrap:anywhere}
+  .opd-long-wait{font-size:11px;font-weight:600;color:var(--amber);margin:0 0 9px}
+  .opd-modern .nm{font-size:14px;font-weight:600;overflow-wrap:anywhere}
+  .opd-modern .mrn{font-size:11px;font-weight:400;display:inline-block}
+  .opd-modern .tok{background:var(--btn);color:var(--ink);font-weight:600;font-size:12px}
+  .opd-modern .row .top{align-items:flex-start;gap:8px}.opd-modern .row .top>div{min-width:0}
+  .opd-modern .pos{width:24px;height:24px;font-size:11px;flex-shrink:0}
+  .opd-modern .acts{gap:6px;margin-top:12px}
+  .opd-modern .acts button{font-size:12px;font-weight:500;border:0;padding:8px 10px;min-height:34px;border-radius:7px;white-space:normal;text-align:left}
+  .opd-modern .acts button.pri{font-weight:600}
+  .opd-modern .assignbtn{font-size:12px;border-radius:7px;white-space:normal}
+  .opd-modern .dept,.opd-modern .chip{font-size:11px;font-weight:500;letter-spacing:0;text-transform:none}
+  .opd-modern .nm .chip{display:inline-block;margin:5px 3px 0 0;white-space:normal}
+  .opd-lane-empty{font-size:12px;color:var(--mut);padding:24px 8px;text-align:center}
+  .opd-modern .ctl{grid-template-columns:minmax(260px,.75fr) minmax(0,2fr)}
+  .opd-modern .pool{position:static;border:0;box-shadow:var(--sh)}.opd-modern .pool .rows{max-height:none;overflow:visible}
+  .opd-modern .wall,.opd-modern .docs{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+  .opd-modern .rcard,.opd-modern .doc{border-radius:16px;box-shadow:var(--sh)}
+  .opd-modern button{transition:transform 150ms ease-out}.opd-modern button:active{transform:scale(.96)}
+  .opd-modern button:focus-visible{outline:2px solid var(--tl);outline-offset:3px}
+  @media(hover:hover) and (pointer:fine){.opd-sidebar button:hover{background:var(--tl-soft)}.opd-modern .acts button:hover{filter:brightness(.95)}}
+  @media(prefers-color-scheme:dark){.opd-modern{--bg:#171c19;--card:#222a25;--btn:#303b32;--ink:#eef2eb;--ink-sec:#d3dccf;--mut:#a9b5a9;--line:#3c483e;--tl:#b4d59b;--tl-d:#a3c58b;--tl-soft:#34462e;--tl-border:#52694a;--sh:0 0 0 1px rgba(255,255,255,.07),0 2px 4px rgba(0,0,0,.1)}.opd-sidebar button.opd-nav-current{background:#354f2a;color:#dbefcf}.opd-modern #walk,.opd-modern .acts button.pri,.opd-modern .assignbtn{color:#172313}}
+  @media(max-width:1250px){.opd-flow-board{grid-template-columns:repeat(2,minmax(0,1fr))}.opd-modern .opd-main{padding:22px}.opd-layout{grid-template-columns:170px minmax(0,1fr)}.opd-modern .ctl{grid-template-columns:1fr}.opd-modern .p-row{row-gap:20px}}
+  @media(max-width:760px){.opd-layout{grid-template-columns:1fr}.opd-sidebar{flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--line);gap:5px;padding:12px 16px}.opd-nav-label,.opd-nav-brand{display:none}.opd-sidebar button{font-size:12px;padding:8px 10px;background:var(--card);min-height:40px}.opd-sidebar .ms{font-size:16px}.opd-modern header .wrap{padding:12px 16px;flex-wrap:wrap}.opd-modern .role{margin-left:0;flex-wrap:wrap}.opd-modern .opd-main{padding:20px 16px}.opd-modern .brand .cname{display:none}.opd-modern .p-row{grid-template-columns:repeat(2,minmax(0,1fr))}.opd-modern .p-t:nth-child(even){border-right:0}.opd-modern .tot{gap:12px}.opd-search{max-width:none}.opd-modern h1{font-size:27px}}
+  @media(max-width:480px){.opd-flow-board{grid-template-columns:1fr}.opd-modern .wall,.opd-modern .docs{grid-template-columns:1fr}.opd-modern .toolbar .grow{flex-basis:100%}.opd-flow-tools{gap:10px}.opd-view-switch{width:100%}.opd-view-switch button{flex:1}.opd-search{flex-basis:100%}.opd-modern .role .chip{max-width:120px;overflow-wrap:anywhere}.opd-modern .tot{flex-direction:column;gap:7px}}
+  @media(pointer:coarse){.opd-modern button,.opd-modern .acts button{min-height:44px}.opd-modern input,.opd-modern select{font-size:16px}}
+  @media(prefers-reduced-motion:reduce){.opd-modern *{transition:none!important;animation:none!important}.opd-modern button:active{transform:none}}
+
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm">
 <link rel="stylesheet" href="/ward.css">
-<script src="/patient-register.js?v=preg6-nfc" defer></script>
+<link rel="stylesheet" href="/opd-dashboard.css?v=2">
+<script src="/opd-dashboard.js?v=2"></script>
+<script src="/opd-pulse-model.js?v=2" defer></script>
+<script src="/opd-offline-desk.js?v=3" defer></script>
+<script src="/opd-live.js?v=1" defer></script>
+<script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
+<script src="/patient-register.js?v=preg7-sid1-sid1-off2" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
 <script src="/smd-nfc.js?v=nfc-2"></script>
+<script src="/steward-identity-resolver.js?v=sir-1-sid1-phi1"></script>
+<script src="/smd-identity-scanner.js?v=sis-1"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -366,6 +484,12 @@
     p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
   }
   function logout(msg){
+    liveStop();
+    // Plan item 13: an offline check-in not yet sent is the patient's place in the queue; say so before it is dropped.
+    // A forced sign-out (msg: the session ended) keeps them for the next sign-in at this desk instead.
+    try{ var od=offDesk(); if(od&&od.pending()){ if(!msg){ if(!window.confirm(od.pending()+" offline check-in(s) have not reached the queue yet and will be lost. Sign out anyway?")) return; od.clear(); } } else if(od) od.clear(); OFF=null; }catch(e){}
+    // The next person at this desk must not inherit the last one's patient lookups (steward-identity-resolver.js).
+    try{ if(window.StewardIdentityResolver&&window.StewardIdentityResolver.clearCache) window.StewardIdentityResolver.clearCache(); }catch(e){}
     if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} }
     st.tok=""; st.tokType=""; st.who=null;
     try{
@@ -476,9 +600,10 @@
     api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
       if(r&&r.ok){
         st.opd=r;
+        st.telehealth=!!r.telehealth;   // video visits: true only when the hospital saved a video server
         if(r.orgName) st.orgName=r.orgName;
         if(r.hasLogo!==undefined) st.hasLogo=!!r.hasLogo;
-        renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); return;
+        renderNurseStation(r); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare(); return;
       }
       if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
@@ -491,11 +616,166 @@
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
       if(!r||!r.ok){ renderShell('<div class="empty">'+(r&&r.error==="forbidden"?"You do not have access to this hospital.":"Could not load the board.")+'</div>'); return; }
-      st.board=r.board||[]; renderBoard(); consumePendingScan(); if(!st.pulse) loadPulse();
+      st.board=r.board||[]; renderBoard(); consumePendingScan(); if(!st.pulse) loadPulse(); offPrepare();
     });
   }
 
+  // Presentation-only enhancement: move the existing, permission-gated nodes. Never copy an
+  // action or reconstruct its payload. Recovery: localStorage.smd_opd_flow_ui = "0" + reload.
+  var flowUI={view:"flow",filter:"all",query:"",org:null,cards:[],restore:[],focusSearch:false};
+  function flowEnabled(){ try{return localStorage.getItem("smd_opd_flow_ui")!=="0";}catch(e){return true;} }
+  function enhanceOpdShell(){
+    if(!flowEnabled()) return;
+    if(flowUI.org!==st.orgId){flowUI.view="flow";flowUI.filter="all";flowUI.query="";flowUI.org=st.orgId;}
+    var main=app.querySelector(".wrap>.toolbar"); if(!main) return;
+    main=main.parentNode;
+    app.classList.add("opd-modern");
+    var layout=document.createElement("div"); layout.className="opd-layout";
+    main.parentNode.insertBefore(layout,main);
+    var nav=document.createElement("nav");nav.className="opd-sidebar";nav.setAttribute("aria-label","Clinic workspace");
+    nav.innerHTML='<div class="opd-nav-brand"><span class="mk"></span>Clinic workspace</div><span class="opd-nav-label">Daily work</span><button type="button" class="opd-nav-current" id="opdHome"><span class="ms" aria-hidden="true">view_kanban</span>Patient flow</button>';
+    layout.appendChild(nav);layout.appendChild(main);main.classList.add("opd-main");
+    var icons={billing:"receipt_long",pharmacy:"medication",noshows:"person_off",staff:"group",rooms:"meeting_room",tariffBtn:"inventory_2",disp:"desktop_windows",brand:"palette",clinics:"domain"};
+    ["billing","pharmacy","noshows","rooms","staff","tariffBtn","disp","brand","clinics"].forEach(function(id,i){
+      var b=document.getElementById(id);if(!b)return;
+      if(i===3){var label=document.createElement("span");label.className="opd-nav-label";label.textContent="Manage clinic";nav.appendChild(label);}
+      var icon=document.createElement("span");icon.className="ms";icon.setAttribute("aria-hidden","true");icon.textContent=icons[id];b.insertBefore(icon,b.firstChild);nav.appendChild(b);
+    });
+    var toolbar=main.querySelector(".toolbar"), grow=toolbar.querySelector(".grow");
+    if(grow){var title=document.createElement("h1");title.textContent="Patient flow";grow.insertBefore(title,grow.firstChild);}
+    document.getElementById("opdHome").onclick=function(){flowUI.query="";flowUI.filter="all";flowUI.view="flow";mountOpdFlow();};
+    // The operations dashboard (opd-dashboard.js) over this layout; "0" keeps the Flow Board, one click from either.
+    if(dashOn()){ SMD_OPD_DASH.shell(dashHost); return; }
+    if(window.SMD_OPD_DASH){ var back=document.createElement("button"); back.type="button"; back.id="opdDashBack"; back.innerHTML='<span class="ms" aria-hidden="true">space_dashboard</span>New dashboard'; back.onclick=function(){ SMD_OPD_DASH.enable(); dashHost.rerender(); }; nav.appendChild(back); }
+  }
+  /* ---- the operations dashboard's view of this console. Everything it shows is read from st (the board, the pulse,
+   * /opd-insights, the day close); everything it does is one of the console's OWN buttons, clicked. ---- */
+  function dashOn(){ return flowEnabled()&&!!window.SMD_OPD_DASH&&SMD_OPD_DASH.enabled(); }
+  function dashPaint(){ if(dashOn()&&app.classList.contains("opd-dash-on")) SMD_OPD_DASH.paint(); }
+  var ACTIVE=["registered","waiting","called","in_consultation","at_diagnostics","investigation","followup"];
+  var dashHost={
+    app:app,
+    clinicName:function(){ return st.orgName||(st.who&&st.who.orgName)||st.orgCode||""; },
+    tickets:function(){
+      var out=[];
+      if(st.opd){
+        (st.opd.pool||[]).forEach(function(t){ out.push({t:t,pool:true,room:"",doctor:"",sid:null}); });
+        (st.opd.rooms||[]).forEach(function(r){ (r.tickets||[]).forEach(function(t){ if(ACTIVE.indexOf(t.status)>-1) out.push({t:t,pool:false,room:(r.room.name||"Room")+(r.room.number?" "+r.room.number:""),doctor:docLabel(r.doctorUid,r.doctorName)||"",sid:r.sessionId}); }); });
+      } else (st.board||[]).forEach(function(b){ (b.tickets||[]).forEach(function(t){ if(ACTIVE.indexOf(t.status)>-1) out.push({t:t,pool:false,room:"",doctor:docLabel(b.session.doctorUid,b.session.doctorName)||"Doctor",sid:b.session.id}); }); });
+      return out;
+    },
+    actionsFor:function(r){
+      var id=String(r.t.id).replace(/["\\]/g,""), node=null, hit;
+      if(r.pool){ hit=app.querySelector('[data-assign="'+id+'"]')||app.querySelector('.pcard [data-t="'+id+'"]'); node=hit&&hit.closest(".pcard"); }
+      else { hit=app.querySelector('.row [data-t="'+id+'"][data-s="'+String(r.sid).replace(/["\\]/g,"")+'"]'); node=hit&&hit.closest(".row"); }
+      return node?Array.prototype.slice.call(node.querySelectorAll("button[data-a],button[data-assign]")):[];
+    },
+    pulse:function(){ return st.pulse||null; },
+    insights:function(){ return st.insights||null; },
+    money:function(){ return st.dayMoney||null; },
+    taskSources:function(){
+      var d=offDesk(), off=st.dashMockOffline||(d?{pending:d.pending(),review:d.review().length}:null);
+      var unpaid=st.dayUnbilled!=null?st.dayUnbilled:dashHost.tickets().filter(function(x){ return x.t.unbilledAmount>0; }).length;
+      var m=st.dayMoney&&!st.dayMoney.unread?st.dayMoney:null;
+      return {pulse:st.pulse,followups:st.pulse&&st.pulse.followups,offline:off,unpaid:unpaid,recallable:st.insights?st.insights.recallableNoShows||0:0,refunds:m&&m.refunds?m.refunds.count||0:0,refundTotal:m&&m.refunds?m.refunds.total||0:0};
+    },
+    click:function(id){ var b=document.getElementById(id); if(b) b.click(); },
+    task:function(a){
+      if(a==="reconcile") reconcileNow();
+      else if(a==="offline") offTick();
+      else if(a==="noshows") dashHost.click("noshows");
+      else if(a==="billing") dashHost.click("billing");
+      else if(a==="dayclose") dashHost.click(document.getElementById("dayclose")?"dayclose":"billing");
+      else if(a==="schedule"){ if(window.WARD&&window.WARD.open) window.WARD.open({orgId:st.orgId,act:"scheduling",returnToOpd:true}); else toast("Book follow-ups in WardSynQ, Scheduling."); }
+    },
+    boardView:function(v){ var b=app.querySelector('[data-opd-view="'+v+'"]'); if(b) b.click(); },
+    search:function(q){ var i=document.getElementById("opdPatientSearch"); if(i){ i.value=q; i.dispatchEvent(new Event("input",{bubbles:true})); } },
+    rerender:function(){ if(st.opd) renderNurseStation(st.opd); else if(st.board&&st.board.length) renderBoard(); else loadDash(); },
+    toast:toast,
+    isLive:function(){ return !!(LIVE&&LIVE.isLive()); },
+    retry:function(){ st.insAt=0; st.moneyAt=0; refresh(); }
+  };
+  function loadInsights(force){
+    if(!dashOn()||!st.orgId||st.orgId==="demo") return;
+    if(!force&&st.insAt&&Date.now()-st.insAt<60000) return;
+    st.insAt=Date.now();
+    // A failed read is said on the cards, never left as "Reading...", and the next refresh tries again.
+    var failed=function(){ st.insights={failed:true}; st.insAt=0; dashPaint(); };
+    api("opd-insights?orgId="+encodeURIComponent(st.orgId)).then(function(r){ if(r&&r.ok){ st.insights=r; dashPaint(); } else failed(); },failed);
+  }
+  // Collected today: the day close's money (analytics.view). null hides the tile (billing off); a failed read says so.
+  function loadMoney(){
+    if(!dashOn()||!st.orgId||st.orgId==="demo"||!can("analytics.view")) return;
+    if(st.moneyAt&&Date.now()-st.moneyAt<180000) return;
+    st.moneyAt=Date.now();
+    var failed=function(){ st.moneyAt=0; if(st.billingOn){ st.dayMoney={unread:true}; dashPaint(); } };
+    api("day-close?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      if(!r||!r.ok){ failed(); return; }
+      st.dayMoney=r.money?r.money:(r.moneyUnread?{unread:true}:null); st.dayUnbilled=r.unbilled!=null?r.unbilled:null; dashPaint();
+    },failed);
+  }
+  function mountOpdFlow(){
+    if(!flowEnabled()||!app.classList.contains("opd-modern")) return;
+    // Restore before rebuilding the view (e.g. Home), leaving every original listener attached.
+    flowUI.restore.forEach(function(x){if(x.anchor.parentNode)x.anchor.parentNode.replaceChild(x.node,x.anchor);});
+    flowUI.restore=[];flowUI.cards=[];
+    var previous=app.querySelector(".opd-flow-board");if(previous)previous.remove();
+    var oldTools=app.querySelector(".opd-flow-tools");if(oldTools)oldTools.remove();
+    var main=app.querySelector(".opd-main"), original=main.querySelector(".ctl,.docs");if(!original)return;
+    original.hidden=false;
+    var tools=document.createElement("div");tools.className="opd-flow-tools";
+    tools.innerHTML='<div class="opd-view-switch" role="group" aria-label="Board view"><button type="button" data-opd-view="flow">Flow board</button><button type="button" data-opd-view="rooms">'+(st.opd?'Rooms':'Doctor queues')+'</button></div>'+
+      '<label class="opd-search"><span class="ms" aria-hidden="true">search</span><input id="opdPatientSearch" type="search" autocomplete="off" aria-label="Find patient by name, token or MRN" placeholder="Find patient, token or MRN"></label>'+
+      '<label class="opd-filter-label">Show<select id="opdPatientFilter"><option value="all">Everyone</option><option value="urgent">Urgent</option><option value="long">Waiting over 1 hour</option></select></label>'+
+      '<span id="opdFilterCount" role="status" aria-live="polite"></span>';
+    original.parentNode.insertBefore(tools,original);
+    var board=document.createElement("div");board.className="opd-flow-board";
+    var stages=[['route','To route','Assign a consultation room'],['waiting','Room queue','Waiting or called'],['consult','Consulting','In the room with a doctor'],['tests','At diagnostics','Tests and return to queue']];
+    board.innerHTML=stages.map(function(s){return '<section class="opd-lane" data-opd-lane="'+s[0]+'" aria-label="'+s[1]+'"><h2>'+s[1]+'<span class="opd-lane-count"></span></h2><p>'+s[2]+'</p><div class="opd-lane-cards"></div><div class="opd-lane-empty">No patients in this stage.</div></section>';}).join("");
+    original.parentNode.insertBefore(board,original);
+    var records={};
+    function record(t,sid,room,doctor){records[(sid||"pool")+":"+t.id]={ticket:t,room:room,doctor:doctor};}
+    if(st.opd){
+      (st.opd.pool||[]).forEach(function(t){record(t,null,"Not assigned","");});
+      (st.opd.rooms||[]).forEach(function(r){(r.tickets||[]).forEach(function(t){record(t,r.sessionId,(r.room.name||"Room")+(r.room.number?" · "+r.room.number:""),docLabel(r.doctorUid,r.doctorName)||"");});});
+    }else{(st.board||[]).forEach(function(b){(b.tickets||[]).forEach(function(t){record(t,b.session.id,"",docLabel(b.session.doctorUid,b.session.doctorName)||"Doctor");});});}
+    Array.prototype.forEach.call(original.querySelectorAll(".pcard,.row"),function(node){
+      var a=node.querySelector("[data-assign]"), action=node.querySelector("[data-t][data-s]")||node.querySelector("[data-t]");
+      var key=a?"pool:"+a.getAttribute("data-assign"):(action?(action.getAttribute("data-s")||"pool")+":"+action.getAttribute("data-t"):"");
+      var r=records[key];if(!r)return;
+      var t=r.ticket, stage=key.indexOf("pool:")===0?"route":t.status==="in_consultation"?"consult":t.status==="at_diagnostics"?"tests":"waiting";
+      var wait=waitMin(t), longWait=(stage==="route"||stage==="waiting")&&wait>=60;
+      var context=node.querySelector(".opd-card-context");if(!context){context=document.createElement("div");context.className="opd-card-context";node.insertBefore(context,node.firstChild);}
+      context.textContent=[r.room,r.doctor].filter(Boolean).join(" · ");
+      var oldWait=node.querySelector(".opd-long-wait");if(oldWait)oldWait.remove();
+      if(longWait){var warn=document.createElement("div");warn.className="opd-long-wait";warn.textContent="Waiting over 1 hour";node.insertBefore(warn,context.nextSibling);}
+      // Waiting duration is from the existing registration timestamp, never labelled as time in a stage.
+      var search=[t.name,t.token,t.tokenLabel,t.tokenNumber,t.mrn,t.mrnLast4,t.ghisPatientId,t.smdId].join(" ").toLowerCase();
+      flowUI.cards.push({node:node,stage:stage,search:search,urgent:t.priority>=2,longWait:longWait,key:key});
+    });
+    function setView(){
+      flowUI.restore.forEach(function(x){if(x.anchor.parentNode)x.anchor.parentNode.replaceChild(x.node,x.anchor);});flowUI.restore=[];
+      if(flowUI.view==="flow")flowUI.cards.forEach(function(c){var anchor=document.createComment("opd-room-position");c.node.parentNode.insertBefore(anchor,c.node);flowUI.restore.push({node:c.node,anchor:anchor});board.querySelector('[data-opd-lane="'+c.stage+'"] .opd-lane-cards').appendChild(c.node);});
+      original.hidden=flowUI.view==="flow";board.hidden=flowUI.view!=="flow";
+      Array.prototype.forEach.call(tools.querySelectorAll("[data-opd-view]"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-opd-view")===flowUI.view));});
+      applyFilters();
+    }
+    function applyFilters(){
+      var shown=0, counts={route:0,waiting:0,consult:0,tests:0};
+      flowUI.cards.forEach(function(c){var visible=(!flowUI.query||c.search.indexOf(flowUI.query.toLowerCase())!==-1)&&(flowUI.filter==="all"||(flowUI.filter==="urgent"&&c.urgent)||(flowUI.filter==="long"&&c.longWait));c.node.hidden=!visible;if(visible){shown++;counts[c.stage]++;}});
+      stages.forEach(function(s){var lane=board.querySelector('[data-opd-lane="'+s[0]+'"]');lane.querySelector(".opd-lane-count").textContent=counts[s[0]];lane.querySelector(".opd-lane-empty").hidden=counts[s[0]]>0;lane.querySelector(".opd-lane-empty").textContent=flowUI.query||flowUI.filter!=="all"?"No patients match this filter.":"No patients in this stage.";});
+      document.getElementById("opdFilterCount").textContent=shown+" of "+flowUI.cards.length+" patients";
+    }
+    var input=document.getElementById("opdPatientSearch"), select=document.getElementById("opdPatientFilter");input.value=flowUI.query;select.value=flowUI.filter;
+    input.oninput=function(){flowUI.query=input.value;applyFilters();};select.onchange=function(){flowUI.filter=select.value;applyFilters();};
+    Array.prototype.forEach.call(tools.querySelectorAll("[data-opd-view]"),function(b){b.onclick=function(){flowUI.view=b.getAttribute("data-opd-view");setView();};});
+    setView();
+    if(flowUI.focusSearch){input.focus();flowUI.focusSearch=false;}
+  }
+
   function renderShell(inner){
+    flowUI.focusSearch=!!(document.activeElement&&document.activeElement.id==="opdPatientSearch");
+    app.classList.remove("opd-modern","opd-dash-on","dz-v-overview","dz-v-flow","dz-drawer-open");
     var name=st.who?(st.who.name||"Staff"):"", role=st.who?st.who.role:"";
     var cName=st.orgName || (st.who && st.who.orgName) || "";
     var logoHtml=(st.hasLogo || (st.who && st.who.hasLogo)) ? '<img class="clogo" src="/api/queue/branding/logo?orgId='+encodeURIComponent(st.orgId)+'" alt="" style="height:26px;max-width:100px;object-fit:contain;border-radius:4px;margin-right:8px;vertical-align:middle" onerror="this.style.display=\'none\'">' : '';
@@ -511,7 +791,9 @@
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
+        '<button class="ghost" id="opdScanBtn" title="Scan QR code, barcode, or tap Ni-Key">&#128247; Scan</button>'+
         (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
+        (st.orgId&&st.orgId!=="demo"&&can("analytics.view")?'<button class="ghost" id="dayclose">Close the day</button>':'')+
         '<button class="ghost" id="billing">Billing</button>'+
         '<button class="ghost" id="pharmacy">Pharmacy</button>'+
         '<button class="ghost" id="ref">Refresh</button>'+
@@ -520,8 +802,10 @@
       '<section class="pulse" id="opdPulse">'+pulseInner()+'</section>'+
       inner+'</div>';
     var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
+    var dcb=document.getElementById("dayclose"); if(dcb) dcb.onclick=openDayClose;
     document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
+    var scb=document.getElementById("opdScanBtn"); if(scb) scb.onclick=function(){ openOpdScanner(); };
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
     var nc=document.getElementById("clinics"); if(nc) nc.onclick=openClinics;
@@ -547,47 +831,200 @@
         }
       };
     }
+    enhanceOpdShell();
   }
-  function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); }
+  function refresh(){ st.opd?loadDash():loadBoard(); loadPulse(); offTick(); }
+
+  /* ---- plan item 13: degraded desk mode (opd-offline-desk.js). While online the desk holds today's offline
+   * series; when the server cannot be reached a check-in still completes with a number from it and a printed
+   * slip, and every refresh (and the browser's "online" event) sends what is waiting. ---- */
+  var OFF=null;
+  function offDesk(){
+    if(!window.SMD_OPD_OFFLINE||!st.orgId||!(st.who&&can("queue.add"))) return null;
+    if(!OFF||OFF._org!==st.orgId||OFF._date!==st.date){
+      var ss=null, idb=null; try{ ss=window.sessionStorage; }catch(e){} try{ idb=window.indexedDB||null; }catch(e){}
+      if(!ss&&!idb) return null;
+      // IndexedDB first, so a check-in taken offline survives the tab being closed; the tab's storage when it cannot open.
+      OFF=SMD_OPD_OFFLINE.desk({indexedDB:idb,storage:ss,orgId:st.orgId,date:st.date,call:function(path,body){ return api(path,{method:"POST",body:body}); }});
+      OFF._org=st.orgId; OFF._date=st.date;
+      OFF.loaded.then(function(){ paintOffline(); if(OFF&&OFF.pending()&&navigator.onLine!==false) offTick(); });
+    }
+    return OFF;
+  }
+  // The series is reserved as soon as the desk has loaded, not at the first refresh: a desk that lost the connection
+  // before anyone pressed anything had no series, so its first offline check-in could not be given a number.
+  function offPrepare(){ var d=offDesk(); if(d&&navigator.onLine!==false) d.prepare().then(function(){ paintOffline(); }); }
+  function offTick(){
+    var d=offDesk(); if(!d){ paintOffline(); return; }
+    d.prepare().then(function(){ paintOffline(); });
+    if(d.pending()) d.sync().then(function(r){
+      if(r.synced) toast(r.synced+(r.synced===1?" offline check-in":" offline check-ins")+" sent to the queue"+(r.review?" - "+r.review+" to check":""));
+      paintOffline(); if(r.synced){ st.opd?loadDash():loadBoard(); }
+    });
+    paintOffline();
+  }
+  try{ window.addEventListener("online",function(){ offTick(); }); window.addEventListener("offline",function(){ paintOffline(); }); }catch(e){}
+  function paintOffline(){
+    var bar=document.getElementById("offBar");
+    if(!bar){ bar=document.createElement("div"); bar.id="offBar"; bar.className="offbar"; bar.setAttribute("role","status"); bar.setAttribute("aria-live","polite"); bar.hidden=true; document.body.appendChild(bar);
+      bar.onclick=function(e){ var b=e.target.closest&&e.target.closest("[data-off]"); if(!b) return; var a=b.getAttribute("data-off"), d=offDesk(); if(!d) return;
+        if(a==="send") offTick(); else if(a==="dismiss"){ d.dismiss(b.getAttribute("data-tok")); paintOffline(); } }; }
+    var d=offDesk(), n=d?d.pending():0, rv=d?d.review():[], down=(typeof navigator!=="undefined"&&navigator.onLine===false);
+    if(!d||(!n&&!rv.length&&!down)){ bar.hidden=true; bar.innerHTML=""; dashPaint(); return; }
+    var h='<div class="row"><span>'+(down?(d.ready()?"Offline. Check-in continues on this desk.":"Offline. This desk has no offline series yet: check-in needs the connection."):"Back online.")+'</span>'+
+      (n?'<span>'+n+(n===1?" check-in":" check-ins")+' waiting to be sent</span>'+(down?"":'<button data-off="send">Send now</button>'):"")+'</div>';
+    h+=rv.map(function(x){ return '<div class="rv"><b>'+esc(x.token)+'</b> '+esc(x.name||"")+': '+esc(x.why)+' <button data-off="dismiss" data-tok="'+esc(x.token)+'">Done</button></div>'; }).join("");
+    bar.innerHTML=h; bar.hidden=false;
+    dashPaint();
+  }
+  function printTokenSlip(o){
+    var ok=false;
+    try{ ok=!!(window.WARD_LABELS&&WARD_LABELS.print("token",{hospital:st.orgName||st.orgCode||"",token:o.token,name:o.name||"",issuedAt:new Date(o.at||Date.now()).toLocaleString()})); }catch(e){}
+    if(!ok) toast("Printing is not available here. Write "+o.token+" on the patient's slip.");
+  }
 
   /* ---- THE OPD PULSE (server: /opd-pulse, figures: functions/_queue_eta.js opdPulse) -------------
    * The same card the app shows, on the desk that can act on it first. Counts and durations only - it
    * names nobody, so it is safe on a screen the whole waiting hall can see. A read that fails SAYS so:
    * an empty strip here would read as a quiet OPD, which is the one thing it must never say by
    * accident. The preview clinic has no hospital behind it, so it simply does not ask. */
+  /* ---- plan item 16: the console is told when the hospital's queue changes (opd-live.js over GET /live). Before
+   * this it had no timer at all and showed what it last loaded until someone pressed something. A change refreshes
+   * the board unless someone is typing on it (then the next change or the minute's safety pass does); when the
+   * stream is down a slow pass keeps it from going stale. ---- */
+  var LIVE=null, liveOrg="", liveT=null;
+  function liveHdrs(){ var h={}; if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return h; }); if(st.tok) h["X-Staff-Token"]=st.tok; return Promise.resolve(h); }
+  // A change heard while the tab is hidden or someone is typing is remembered (liveMissed), not dropped: the board catches
+  // up when the tab is shown again, the field is left, or at the minute's pass. Dropped, it stayed stale until the next change.
+  var liveMissed=false;
+  function liveRefresh(){ clearTimeout(liveT); liveT=setTimeout(function(){ var ae=document.activeElement, typing=!!(ae&&ae.closest&&ae.closest("input, textarea, select")); if(!document.hidden&&!typing&&st.orgId){ liveMissed=false; refresh(); } else if(st.orgId) liveMissed=true; },300); }
+  try{ document.addEventListener("visibilitychange",function(){ if(!document.hidden&&liveMissed) liveRefresh(); }); document.addEventListener("focusout",function(){ if(liveMissed) liveRefresh(); }); }catch(e){}
+  function liveStart(){
+    if(!window.SMD_OPD_LIVE||!st.orgId||st.orgId==="demo") return;
+    if(LIVE&&liveOrg===st.orgId) return;
+    if(LIVE) LIVE.stop();
+    liveOrg=st.orgId;
+    LIVE=SMD_OPD_LIVE.connect({url:queueApiUrl("live?orgId="+encodeURIComponent(st.orgId)),headers:liveHdrs,onChange:liveRefresh});
+  }
+  function liveStop(){ if(LIVE) LIVE.stop(); LIVE=null; liveOrg=""; }
+  try{ setInterval(function(){ if(st.orgId&&st.orgId!=="demo"&&st.who&&(liveMissed||!(LIVE&&LIVE.isLive()))) liveRefresh(); },60000); }catch(e){}
   function loadPulse(){
     if(!st.orgId||st.orgId==="demo") return;
+    liveStart(); loadInsights(); loadMoney();
     api("opd-pulse?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       st.pulse=r&&r.ok?r:{failed:true}; paintPulse();
+      // Plan item 11: follow-ups promised and never booked (silent when the hospital has no record).
+      var now=new Date().toISOString();
+      if(st.pulse.ok) api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok&&st.pulse&&st.pulse.ok){ st.pulse.followups={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; paintPulse(); } }).catch(function(){});
     }).catch(function(){ st.pulse={failed:true}; paintPulse(); });
   }
+  function reconcileNow(){ api("opd-reconcile",{method:"POST",body:{orgId:st.orgId}}).then(function(r){ toast(r&&r.ok?(r.landed+" of "+r.retried+" visits now in the record"+(r.stillFailed?"; "+r.stillFailed+" still failing":"")):"Could not retry now"); loadPulse(); }); }
   function paintPulse(){
     var host=document.getElementById("opdPulse"); if(host) host.innerHTML=pulseInner();
+    var rb=document.getElementById("opdRecon");
+    if(rb) rb.onclick=reconcileNow;
+    dashPaint();
   }
   function pnum(v,unit){ return v==null?'<i class="p-none">not yet</i>':esc(v)+(unit?'<u>'+unit+'</u>':''); }
   function pulseInner(){
-    var r=st.pulse; if(!r) return '';
-    if(r.failed) return '<div class="p-warn">Could not read the OPD figures. Do not read this as a quiet clinic.</div>';
-    var p=r.pulse||{},hall=p.waitingNow||{},d2d=p.doorToDoctor||{},desk=p.deskWait||{},doc=p.doctorWait||{};
-    var blame=desk.medianMin==null||doc.medianMin==null?''
-      :desk.medianMin>doc.medianMin*2?'the wait is at the desk'
-      :doc.medianMin>desk.medianMin*2?'the wait is for the doctor':'desk and doctor are even';
-    var tile=function(label,value,sub,warn){
-      return '<div class="p-t'+(warn?' warn':'')+'"><div class="p-l">'+esc(label)+'</div><div class="p-v">'+value+'</div><div class="p-s">'+(sub||'')+'</div></div>';
-    };
-    return '<div class="p-row">'+
-      tile('In the hall',esc(p.waiting||0),hall.longestMin?'longest '+esc(hall.longestMin)+'m':'nobody waiting',hall.over60>0)+
-      tile('Waiting over 1h',esc(hall.over60||0),(hall.over30||0)+' over 30m',(hall.over60||0)>0)+
-      tile('Door to doctor',pnum(d2d.medianMin,'m'),d2d.p90Min==null?'median':'9 in 10 within '+esc(d2d.p90Min)+'m')+
-      tile('Seen',esc(p.completed||0),(p.inConsultation||0)+' in the room')+
-      tile('Did not wait',p.abandonedPct==null?'<i class="p-none">not yet</i>':esc(p.abandonedPct)+'<u>%</u>',esc(p.noShow||0)+' no-show'+((p.noShow||0)===1?'':'s'),(p.abandonedPct||0)>=10)+
-      (p.held?tile('Awaiting result',esc(p.held),'sent for a test or booked back'):'')+
-      '</div>'+(blame?'<div class="p-note">Desk '+pnum(desk.medianMin,'m')+', doctor '+pnum(doc.medianMin,'m')+' · '+esc(blame)+'</div>':'')+
-      (r.unread&&r.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>':'');
+    var M=window.SMD_OPD_PULSE, m=st.pulse&&M?M.model(st.pulse):null; if(!m) return '';
+    if(m.failed) return '<div class="p-warn">'+esc(m.message)+'</div>';
+    var tiles=m.tiles.map(function(t){
+      var v=t.value==null?'<i class="p-none">not yet</i>':esc(t.value)+(t.unit?'<u>'+esc(t.unit)+'</u>':'');
+      var sub=t.action==="reconcile"?'<button class="ghost" id="opdRecon" style="padding:2px 8px">Send again</button>':esc(t.sub||'');
+      return '<div class="p-t'+(t.warn?' warn':'')+'"><div class="p-l">'+esc(t.label)+'</div><div class="p-v">'+v+'</div><div class="p-s">'+sub+'</div></div>';
+    }).join('');
+    return '<div class="p-row">'+tiles+'</div>'+
+      (m.note?'<div class="p-note">Desk '+pnum(m.note.deskMin,'m')+', doctor '+pnum(m.note.doctorMin,'m')+' · '+esc(m.note.text)+'</div>':'')+
+      (m.unread.length?'<div class="p-warn">Some rooms could not be read ('+esc(m.unread.join(", "))+'), so these figures are short.</div>':'');
   }
-  /* D13: RECALL NO-SHOWS. Every queue in this hospital today; a patient marked no-show in the last 4 hours
-   * (and before the session ended) goes back to waiting with the SAME token, at the head of their priority
-   * band. A reason is required and recorded with who and when. A failed load is said, never "nobody". */
+  /* ---- plan item 15: the owner's day close (server: /day-close; figures: _queue_eta.js dayClose + the cashier's
+   * shift report). Headline first, then each room, the money, what is still open and the exceptions. A read that
+   * failed says so: an empty money box would read as a day with no takings. ---- */
+  function rupees(p){ return "\u20b9"+Math.round((p||0)/100).toLocaleString("en-IN"); }
+  function dcMin(v){ return v==null?"-":esc(v)+"m"; }
+  function dayCloseHtml(r,fu){
+    var c=r.close||{}, p=c.pulse||{}, m=r.money, rooms=c.rooms||[];
+    var k=function(l,v,s,warn){ return '<div class="dc-k'+(warn?' warn':'')+'"><div class="l">'+esc(l)+'</div><div class="v">'+v+'</div>'+(s?'<div class="s">'+s+'</div>':'')+'</div>'; };
+    var h='<div class="dc"><h3>Day close</h3><p class="dc-sub">'+esc(st.orgName||st.orgCode||"")+' &middot; '+esc(r.date||"")+' &middot; as of '+esc(new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}))+'</p>';
+    if(r.unread&&r.unread.length) h+='<div class="dc-warn">Some rooms could not be read ('+esc(r.unread.join(", "))+'), so these figures are short.</div>';
+    h+='<div class="dc-grid">'+
+      k("Patients seen",esc(p.seen||0),esc(p.registered||0)+" registered")+
+      (m?k("Collected (net)",rupees(m.net),esc(m.count||0)+" bills"):r.moneyUnread?k("Collected","-","could not be read",true):"")+
+      k("Did not wait",p.abandonedPct==null?"-":esc(p.abandonedPct)+"%",esc(p.noShow||0)+" no-shows",(p.abandonedPct||0)>=10)+
+      k("Door to doctor",dcMin(p.doorToDoctor&&p.doorToDoctor.medianMin),"9 in 10 within "+dcMin(p.doorToDoctor&&p.doorToDoctor.p90Min))+
+    '</div>';
+    if(c.teleconsult) h+='<div class="dc-chips"><span>Video visits: <b>'+esc(c.teleconsult)+'</b></span></div>';
+    h+='<h4>By room</h4>'+(rooms.length?'<table class="dc-t"><thead><tr><th>Room</th><th>Registered</th><th>Seen</th><th>No-show</th><th>Consult</th><th>Wait</th></tr></thead><tbody>'+
+      rooms.map(function(x){ return '<tr><td>'+esc(x.room)+(x.doctor?' <span style="color:var(--mut)">'+esc(x.doctor)+'</span>':'')+'</td><td>'+esc(x.registered)+'</td><td>'+esc(x.seen)+'</td><td>'+esc(x.noShow)+'</td><td>'+dcMin(x.consultMedianMin)+'</td><td>'+dcMin(x.doorToDoctorMedianMin)+'</td></tr>'; }).join("")+
+      '</tbody></table>':'<div class="empty">No patients today.</div>');
+    h+='<h4>Money</h4>';
+    if(r.moneyUnread) h+='<div class="dc-warn">The day\'s money could not be read. Do not read this as no takings; open Billing, Shift report.</div>';
+    else if(!m) h+='<div class="empty">Billing is not switched on for this hospital.</div>';
+    else h+='<div class="dc-grid">'+k("Takings",rupees(m.total),esc(m.count||0)+" bills")+k("Refunds",rupees(m.refunds&&m.refunds.total),esc((m.refunds&&m.refunds.count)||0)+" refunds",(m.refunds&&m.refunds.count)>0)+k("Net",rupees(m.net),"")+(r.unbilled!=null?k("Not yet paid",esc(r.unbilled),"orders waiting at billing",r.unbilled>0):"")+'</div>'+
+      '<div class="dc-chips">'+["cash","upi","card","split","other"].filter(function(x){ return m.byCount&&m.byCount[x]; }).map(function(x){ return '<span>'+esc(x.toUpperCase())+' '+rupees(m.byMethod[x])+' &middot; '+esc(m.byCount[x])+'</span>'; }).join("")+'</div>';
+    var open=[["Still waiting",p.waiting],["In consultation",p.inConsultation],["At the lab or booked back",p.held],["Back with results",p.resultsBack],["Visits not in the record",p.syncFailed]];
+    if(fu) open.push(["Follow-ups to book",fu.unbooked+(fu.overdue?" ("+fu.overdue+" overdue)":"")]);
+    open=open.filter(function(x){ return x[1]&&x[1]!=="0"; });
+    h+='<h4>Still open</h4>'+(open.length?'<div class="dc-chips">'+open.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">Nothing left open.</div>');
+    var pr=Object.keys(c.priority||{}), ex=pr.map(function(x){ return ["Ahead of the queue: "+prioLabel({priority:x==="emergency"?2:1,priorityReason:x}),c.priority[x]]; });
+    if(p.recalls) ex.push(["No-shows recalled",p.recalls]);
+    if(c.offline) ex.push(["Checked in offline",c.offline]);
+    h+='<h4>Exceptions</h4>'+(ex.length?'<div class="dc-chips">'+ex.map(function(x){ return '<span>'+esc(x[0])+': <b>'+esc(x[1])+'</b></span>'; }).join("")+'</div>':'<div class="empty">No one was put ahead of the queue.</div>');
+    return h+'</div>';
+  }
+  /* Owner ask G2: the day close on WhatsApp at a set hour (server: /org/day-close-settings, sent by the hourly job;
+   * Send now: /day-close/send). The saved number only ever comes back masked; leaving the field blank keeps it. */
+  function hourLabel(h){ var a=h%12===0?12:h%12; return a+(h<12?" am":" pm"); }
+  function dcWaHtml(s){
+    var opts=""; for(var h=0;h<24;h++) opts+='<option value="'+h+'"'+(h===s.hour?" selected":"")+'>'+hourLabel(h)+'</option>';
+    var why=function(r){ return {whatsapp_not_configured:"WhatsApp is not set up on the server",not_configured:"WhatsApp is not set up on the server",bad_number:"the number was not accepted"}[r]||r||"no reason given"; };
+    var last=s.last, st=!last?(s.enabled?"Not sent yet today.":""):last.status==="sent"?"Sent today.":last.status==="failed"?"Today's send failed: "+esc(why(last.reason))+(last.attempts<3?"; it is tried again next hour.":"."):"Sending...";
+    return '<div class="dc-wa" id="dcWa"><h4>Send it to WhatsApp every day</h4><p class="t">The same figures, as counts and totals only (no patient is named), at the hour you pick on the hospital\'s clock.</p>'+
+      '<div class="f"><label class="on"><input type="checkbox" id="dcWaOn"'+(s.enabled?" checked":"")+'> Send daily</label>'+
+      '<label>At<select id="dcWaHour" aria-label="Hour to send">'+opts+'</select></label>'+
+      '<label>WhatsApp number<input type="tel" id="dcWaMob" inputmode="tel" autocomplete="tel" placeholder="'+(s.hasMobile?esc(s.mobileMasked)+" (saved)":"98765 43210")+'"></label></div>'+
+      '<div class="row2">'+(s.hasMobile?'<button class="cancel" id="dcWaNow">Send now</button>':'')+'<button class="btn" id="dcWaSave" style="margin:0">Save</button></div>'+
+      '<div class="dc-wa-st'+(last&&last.status==="failed"?" bad":"")+'" id="dcWaSt" role="status" aria-live="polite">'+st+'</div></div>';
+  }
+  function wireDcWa(){
+    var host=sheet.querySelector("#dcWaHost"); if(!host) return;
+    var say=function(t,bad){ var e=sheet.querySelector("#dcWaSt"); if(e){ e.textContent=t; e.className="dc-wa-st"+(bad?" bad":""); } };
+    function render(s,msg,bad){
+      host.innerHTML=dcWaHtml(s); if(msg) say(msg,bad);
+      sheet.querySelector("#dcWaSave").onclick=function(){
+        var b=this; b.disabled=true;
+        api("org/day-close-settings",{method:"POST",body:{orgId:st.orgId,settings:{enabled:sheet.querySelector("#dcWaOn").checked,hour:+sheet.querySelector("#dcWaHour").value,mobile:sheet.querySelector("#dcWaMob").value.trim()}}}).then(function(x){
+          b.disabled=false;
+          if(!x||!x.ok){ say((x&&x.message)||"Not saved.",true); return; }
+          render(x.settings,x.settings.enabled?"Saved: sent daily at "+hourLabel(x.settings.hour)+" to "+x.settings.mobileMasked+".":"Saved: not sent daily.");
+        },function(){ b.disabled=false; say("Not saved: the server could not be reached.",true); });
+      };
+      var now=sheet.querySelector("#dcWaNow");
+      if(now) now.onclick=function(){ now.disabled=true; api("day-close/send",{method:"POST",body:{orgId:st.orgId}}).then(function(x){ now.disabled=false; say((x&&x.message)||"Not sent.",!(x&&x.ok)); },function(){ now.disabled=false; say("Not sent: the server could not be reached.",true); }); };
+    }
+    api("org/day-close-settings?orgId="+encodeURIComponent(st.orgId)).then(function(r){ if(r&&r.ok) render(r.settings); else host.innerHTML=""; },function(){ host.innerHTML=""; });
+  }
+  function openDayClose(){
+    open('<div class="dc"><h3>Day close</h3><div class="empty">Reading the day...</div></div>',true);
+    var now=new Date().toISOString(), fu=null;
+    var fuP=api("ward/schedule?orgId="+encodeURIComponent(st.orgId)+"&from="+encodeURIComponent(now)+"&to="+encodeURIComponent(now)).then(function(s){ if(s&&s.ok) fu={unbooked:s.unbookedRecalls||0,overdue:s.overdueRecalls||0}; },function(){});
+    api("day-close?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      return fuP.then(function(){
+        if(!r||!r.ok){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The day could not be read ('+esc((r&&(r.message||r.error))||"no response")+').</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; return; }
+        var body=dayCloseHtml(r,fu);
+        open(body+(can("staff.admin")||st.ownsOrg?'<div id="dcWaHost"></div>':'')+'<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dcPrint" style="margin:0">Print</button></div>',true);
+        wireDcWa();
+        sheet.querySelector("#cx").onclick=close;
+        sheet.querySelector("#dcPrint").onclick=function(){
+          var css=Array.prototype.map.call(document.querySelectorAll("style"),function(x){ return x.textContent; }).join("\n");
+          var doc='<!doctype html><html><head><meta charset="utf-8"><title>Day close</title><style>'+css+'@page{size:A4;margin:14mm}body{background:#fff;color:#111;padding:0}</style></head><body>'+body+'</body></html>';
+          var okp=false; try{ okp=!!(window.WARD_LABELS&&WARD_LABELS.printDocument(doc)); }catch(e){}
+          if(!okp) window.print();
+        };
+      });
+    },function(){ open('<div class="dc"><h3>Day close</h3><div class="dc-warn">The server could not be reached.</div><div class="row2"><button class="cancel" id="cx">Close</button></div></div>',true); sheet.querySelector("#cx").onclick=close; });
+  }
   function openNoShows(){
     open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
     sheet.querySelector("#cx").onclick=close;
@@ -683,13 +1120,14 @@
     renderShell('<div class="docs">'+docs+'</div>');
     Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
     wireRowActions();
+    mountOpdFlow();
   }
   // Lab-flow badges shared by both boards: a patient sent for tests reads "At Lab / Tests", and a
   // patient returned with results reads "Results Ready".
   function labBadges(t){
     var h="";
     if(t.status==="at_diagnostics") h+=' <span class="chip" style="background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700">At Lab / Tests</span>';
-    if(t.priority===1) h+=' <span class="chip" style="background:#fef9c3;color:#854d0e;font-size:11px;font-weight:700">★ Results Ready</span>';
+    if(t.priority===1) h+=' <span class="chip" style="background:#fef9c3;color:#854d0e;font-size:11px;font-weight:700">'+(t.priorityReason&&t.priorityReason!=="results"?esc(prioLabel(t)):"★ Results Ready")+'</span>';
     return h;
   }
   function ticketRow(s,t,i,n){
@@ -703,11 +1141,12 @@
     if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
     if(!atLab&&can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
     if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
-    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear urgent":"Urgent")+'</button>');
+    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority||0)+'">'+(t.priority?"Change priority":"Priority")+'</button>');
     if(!consult&&!atLab&&can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');   // an in-consultation patient isn't queued -> assign always failed; hide it
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // reroute from the room back to the waiting hall (in_consultation -> waiting)
     if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // out to diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
+    b=b.concat(teleButtons(s,t));
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');
     b.push('<button data-a="label" data-s="'+s.id+'" data-t="'+t.id+'">Label</button>');
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
@@ -720,7 +1159,7 @@
     var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
     b.push('<button data-a="bill" data-t="' + t.id + '" data-smd="' + esc(mrnVal) + '" data-mrn="' + esc(mrnVal) + '" data-unbilled="' + (t.unbilledAmount||0) + '" data-name="' + esc(t.name||"Patient") + '"' + (t.unbilledAmount>0?' class="pri"':'') + '>' + billLabel + '</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+labBadges(t)+'</div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+teleChip(t)+billChip+labBadges(t)+'</div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
       '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
       '<div class="acts">'+b.join("")+'</div></div>';
@@ -734,9 +1173,9 @@
         else if(a==="sendback") post("status",{sessionId:sid,ticketId:tid,status:"waiting"});
         else if(a==="senddiag") post("status",{sessionId:sid,ticketId:tid,status:"at_diagnostics"});
         // Tests done: back to the doctor's queue first, then flagged priority 1 so the row reads Results Ready.
-        else if(a==="diagdone") post("status",{sessionId:sid,ticketId:tid,status:"waiting"},function(){ post("priority",{sessionId:sid,ticketId:tid,priority:1}); });
+        else if(a==="diagdone") post("status",{sessionId:sid,ticketId:tid,status:"waiting"},function(){ post("priority",{sessionId:sid,ticketId:tid,reason:"results"}); });
         else if(a==="noshow") openNoShowMark(sid,tid,btn.getAttribute("data-n"));
-        else if(a==="prio") post("priority",{sessionId:sid,ticketId:tid,priority:+btn.getAttribute("data-p")});
+        else if(a==="prio") openPriority(sid,tid,+btn.getAttribute("data-p"));
         else if(a==="up") openMove(sid,tid,+btn.getAttribute("data-i")-1);
         else if(a==="down") openMove(sid,tid,+btn.getAttribute("data-i")+1);
         else if(a==="top") openMove(sid,tid,0);
@@ -746,6 +1185,9 @@
         else if(a==="notes") openNotes(sid,tid,btn.getAttribute("data-n"));
         else if(a==="vitals") openVitals(sid,tid,btn.getAttribute("data-n"));
         else if(a==="label") openFileLabel(tid,sid);
+        else if(a==="televisit") openTeleConsent(sid,tid,btn.getAttribute("data-n"));
+        else if(a==="telestart") teleStart(sid,tid,btn);
+        else if(a==="telelink") teleSendLink(sid,tid,btn);
         else if (a === "bill") {
           var mrn = btn.getAttribute("data-mrn") || btn.getAttribute("data-smd") || tid;
           var unbilledAmt = Number(btn.getAttribute("data-unbilled")) || 0;
@@ -762,9 +1204,96 @@
       };
     });
   }
+  // ---- VIDEO VISITS (server: functions/_telehealth.js, /api/queue/tele/*). Offered only when the hospital saved a
+  // video server (opd-board / whoami say telehealth:true). A visit becomes a video visit only after the desk records
+  // who agreed. The room address is never on the board: /tele/start hands it to the doctor who starts the call.
+  var TELE_LIVE=["registered","waiting","called","in_consultation"];
+  var TELE_GIVERS=[["patient","The patient"],["parent","A parent"],["legal-guardian","A legal guardian"],["next-of-kin","Next of kin"],["power-of-attorney","Power of attorney holder"]];
+  // Nurse station: the flag stored from the last opd-board load (an assign-room reply's board may not carry it).
+  // Legacy doctor board: whoami carries the same flag.
+  function teleOn(){ return st.opd ? !!(st.telehealth||st.opd.telehealth) : !!(st.who&&st.who.telehealth); }
+  function teleChip(t){ return t&&t.teleconsult?' <span class="chip tele-chip" title="Video visit">Video</span>':""; }
+  function teleButtons(s,t){
+    if(!teleOn()||!s||!s.id||!t||TELE_LIVE.indexOf(t.status)<0) return [];
+    var nm=esc(t.name||"Patient"), at=' data-s="'+esc(s.id)+'" data-t="'+esc(t.id)+'" data-n="'+nm+'"', out=[];
+    if(!t.teleconsult){
+      if(can("queue.add")) out.push('<button type="button" class="tele" data-a="televisit"'+at+' aria-label="Video visit for '+nm+': record consent"><span class="ms sm" aria-hidden="true">videocam</span>Video visit</button>');
+    } else if(can("queue.status")){
+      out.push('<button type="button" class="tele pri" data-a="telestart"'+at+' aria-label="Start video call with '+nm+'"><span class="ms sm" aria-hidden="true">video_call</span>Start video</button>');
+      out.push('<button type="button" class="tele" data-a="telelink"'+at+' aria-label="Send video link to '+nm+'"><span class="ms sm" aria-hidden="true">send_to_mobile</span>Send video link</button>');
+    }
+    return out;
+  }
+  function teleErr(r){
+    var e=r&&r.error;
+    var m={video_off:"Video visits are off for this hospital.",visit_closed:"This visit has ended, so the video call cannot be used.",not_teleconsult:"This is not a video visit yet. Record the consent first.",consent_required:"Tick that they agreed to a video consultation.",giver_required:"Pick who agreed.",unknown_giver:"Pick who agreed from the list."}[e];
+    return m||(r&&r.message)||(e?friendly(e):"Action failed");
+  }
+  function openTeleConsent(sid,tid,name){
+    var opts=TELE_GIVERS.map(function(g){return '<option value="'+g[0]+'">'+g[1]+'</option>';}).join("");
+    open('<div class="tele-sheet"><h3>Video visit'+(name?' for '+esc(name):'')+'</h3>'+
+      '<p style="color:var(--mut);margin:0 0 4px">Record the consent before this visit becomes a video consultation. It is kept in the audit trail.</p>'+
+      '<label for="tgiv">Who agreed</label><select id="tgiv">'+opts+'</select>'+
+      '<label class="agree" for="tagr"><input type="checkbox" id="tagr">They agreed to a video consultation</label>'+
+      '<div class="row2"><button type="button" class="cancel" id="cx">Cancel</button><button type="button" class="btn" id="ok" style="margin:0" disabled>Save</button></div></div>');
+    var agr=sheet.querySelector("#tagr"), ok=sheet.querySelector("#ok");
+    agr.onchange=function(){ ok.disabled=!agr.checked; };
+    sheet.querySelector("#cx").onclick=close;
+    ok.onclick=function(){
+      if(!agr.checked){ toast("Tick that they agreed to a video consultation"); return; }
+      ok.disabled=true; ok.textContent="Saving…";
+      api("tele/enable",{method:"POST",body:{sessionId:sid,ticketId:tid,teleConsent:{givenBy:sheet.querySelector("#tgiv").value,agreed:true}}}).then(function(r){
+        if(!r||!r.ok){ ok.disabled=!agr.checked; ok.textContent="Save"; toast(teleErr(r)); return; }
+        close(); toast("Video visit set up"); refresh();
+      },function(){ ok.disabled=!agr.checked; ok.textContent="Save"; toast("Not saved: the server could not be reached."); });
+    };
+  }
+  function teleStart(sid,tid,btn){
+    if(btn) btn.disabled=true;
+    api("tele/start",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
+      if(btn) btn.disabled=false;
+      if(!r||!r.ok||!/^https:\/\//i.test(String(r.roomUrl||""))){ toast(r&&!r.ok?teleErr(r):"The video call could not be started"); refresh(); return; }
+      try{ window.open(r.roomUrl,"_blank","noopener"); }catch(e){}
+      // A browser may block a tab opened after the network call; this link always works because it is a tap.
+      open('<div class="tele-sheet"><h3>Video call started</h3><p style="color:var(--mut);margin:0">The call opens in a new tab. If it did not open, use the button below.</p>'+
+        '<div class="row2"><button type="button" class="cancel" id="cx">Close</button><a class="btn" id="tjoin" style="margin:0" target="_blank" rel="noopener noreferrer" href="'+esc(r.roomUrl)+'">Open video call</a></div></div>');
+      sheet.querySelector("#cx").onclick=close;
+      sheet.querySelector("#tjoin").onclick=function(){ setTimeout(close,0); };
+      refresh();
+    },function(){ if(btn) btn.disabled=false; toast("The server could not be reached."); });
+  }
+  function teleSendLink(sid,tid,btn){
+    if(btn) btn.disabled=true;
+    api("tele/send-link",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
+      if(btn) btn.disabled=false;
+      if(!r||!r.ok){ toast("Link not sent: "+teleErr(r)); refresh(); return; }
+      if(r.sent) toast("Video link sent to the patient");
+      else toast("Link not sent: "+({no_phone:"no mobile number on file","quota-exhausted":"the messaging allowance is used up"}[r.reason]||"the message could not be delivered"));
+      refresh();
+    },function(){ if(btn) btn.disabled=false; toast("Link not sent: the server could not be reached."); });
+  }
   function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
-  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why.",weak_pin:"PIN must be 4-8 digits; avoid simple repeated digits like 1111.",weak_password:"Password is too weak or common. Use at least 10 characters.",member_not_found:"Staff member not found."}[e]||e; }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required.",ticket_changed:"This patient changed meanwhile. Reload and try again.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why.",weak_pin:"PIN must be 4-8 digits; avoid simple repeated digits like 1111.",weak_password:"Password is too weak or common. Use at least 10 characters.",member_not_found:"Staff member not found."}[e]||e; }
 
+  // ---- plan item 12: priority with a reason. The reason sets the level on the server (_queue_eta.js
+  // priorityRule): an emergency goes first, the rest ahead of the ordinary queue; "clear" is a reason too.
+  var PRIO=[["emergency","Emergency"],["senior","Senior citizen"],["pregnant","Pregnant"],["disability","Disability"],["child","Child"],["results","Results ready"],["other","Other"]];
+  function prioLabel(t){ if(!t||!t.priority) return ""; if(t.priority>=2) return "Emergency"; var m=PRIO.filter(function(p){return p[0]===t.priorityReason;})[0]; return m?m[1]:"Priority"; }
+  function openPriority(sid,tid,cur){
+    var chosen="", list=PRIO.slice(); if(cur) list.push(["clear","Clear priority"]);
+    open('<h3>Priority <span style="color:var(--mut);font-weight:600;font-size:13px">(reason required)</span></h3><p style="color:var(--mut);margin:0 0 8px">The reason sets the place: an emergency goes first, the others ahead of the ordinary queue. Recorded in the audit trail.</p>'+
+      '<div class="cats" role="group" aria-label="Priority reason">'+list.map(function(p){return '<button type="button" aria-pressed="false" data-c="'+p[0]+'">'+p[1]+'</button>';}).join("")+'</div>'+
+      '<input id="pnote" aria-label="Priority note" placeholder="Note (required for Other)">'+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Set priority</button></div>');
+    Array.prototype.forEach.call(sheet.querySelectorAll(".cats [data-c]"),function(b){b.onclick=function(){chosen=b.getAttribute("data-c");Array.prototype.forEach.call(sheet.querySelectorAll(".cats button"),function(x){x.classList.remove("on");x.setAttribute("aria-pressed","false");});b.classList.add("on");b.setAttribute("aria-pressed","true");};});
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var note=sheet.querySelector("#pnote").value.trim();
+      if(!chosen){toast("Pick a reason");return;}
+      if(chosen==="other"&&note.length<3){toast("Say why in the note");return;}
+      close(); post("priority",{sessionId:sid,ticketId:tid,reason:chosen,note:note});
+    };
+  }
   // ---- reorder-with-reason modal (anti-misuse) ----
   var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
   function openMove(sid,tid,toIndex){
@@ -1588,6 +2117,8 @@
             '<div style="display:flex;align-items:center;gap:6px">' +
               '<span style="font-weight:700">₹</span>' +
               '<input type="number" min="0" step="50" style="width:90px;padding:6px 8px;margin:0" value="' + fee + '" data-docfee-id="' + esc(doc.id) + '" data-docfee-name="' + esc(doc.name) + '" data-docfee-tid="' + esc(curItem ? curItem.id : "") + '">' +
+              // OPD plan item 9: the follow-up fee (blank = same as a new visit). The free-review window is the hospital setting.
+              '<input type="number" min="0" step="50" placeholder="Follow-up" title="Follow-up fee (blank = same as new)" style="width:90px;padding:6px 8px;margin:0 0 0 6px" value="' + (curItem && curItem.followupPrice != null ? Math.round(curItem.followupPrice / 100) : "") + '" data-docfee-fu="' + esc(doc.id) + '">' +
               '<button class="btn" style="margin:0;width:auto;padding:6px 12px;font-size:12px" data-save-docfee="' + esc(doc.id) + '">Save</button>' +
             '</div>' +
           '</div>';
@@ -1635,6 +2166,7 @@
               kind: "consultation",
               code: "CONS-" + docId.replace(/[^a-zA-Z0-9]/g, "").slice(0, 10),
               price: amt,
+              followupPrice: (function(){ var fu = host.querySelector('[data-docfee-fu="' + docId + '"]'); return fu && fu.value !== "" ? Math.round(Number(fu.value) * 100) : ""; })(),
               doctorId: docId,
               doctorName: docName
             };
@@ -1987,6 +2519,7 @@
     Array.prototype.forEach.call(document.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openAssignRoom(b.getAttribute("data-assign"));};});
     Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
     wireRowActions();
+    mountOpdFlow();
   }
   function roomTicketRow(s,t,i,n){
     var consult=t.status==="in_consultation"; var atLab=t.status==="at_diagnostics"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
@@ -1995,10 +2528,11 @@
     if(atLab&&can("queue.status")) b.push('<button class="pri" data-a="diagdone" data-s="'+s.id+'" data-t="'+t.id+'">Tests Done → Return</button>');
     if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">No-show</button>');   // D13: called and did not come; recallable with the same token
     if(!atLab&&can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
-    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
+    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority||0)+'">'+(t.priority?"Change priority":"Priority")+'</button>');
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // room -> waiting hall (in_consultation -> waiting)
     if(consult&&can("queue.status")) b.push('<button data-a="senddiag" data-s="'+s.id+'" data-t="'+t.id+'">Send for Tests</button>');   // room -> diagnostics (in_consultation -> at_diagnostics): frees the room for the next patient
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
+    b=b.concat(teleButtons(s,t));
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
     b.push('<button data-a="label" data-s="'+s.id+'" data-t="'+t.id+'">Label</button>');
@@ -2011,7 +2545,7 @@
     var mrnVal = t.mrn || t.ghisPatientId || t.smdId || t.id || "";
     b.push('<button data-a="bill" data-t="'+t.id+'" data-smd="'+esc(mrnVal)+'" data-mrn="'+esc(mrnVal)+'" data-unbilled="'+(t.unbilledAmount||0)+'" data-name="'+esc(t.name||"Patient")+'"'+(t.unbilledAmount>0?' class="pri"':'')+'>'+billLabel+'</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+billChip+labBadges(t)+'</div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+teleChip(t)+billChip+labBadges(t)+'</div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   // Nurse records vitals -> a compact timeline entry (kind:"vitals", EMR_VITALS cap). This is the nurse's
@@ -2051,12 +2585,15 @@
   // a tap/scan to the right station with no typing. UID fields checked in order, MRN first.
   function findTicketByUid(uid){
     var key=String(uid==null?"":uid).trim(); if(!key) return null;
+    // Universal Patient Identity: a QR/wedge scan may carry the full /opd deep link or a
+    // prefixed id - reduce it to the canonical id before matching. Best-effort only.
+    try{ if(window.StewardIdentityResolver&&StewardIdentityResolver.normalizeCarrierValue){ var nk=StewardIdentityResolver.normalizeCarrierValue(key); if(nk) key=nk; } }catch(e){}
     var up=key.toUpperCase();
     var same=function(v){ return v!=null&&v!==""&&(String(v)===key||String(v).toUpperCase()===up); };
     var hit=null, i, j;
     var consider=function(t,sid){
       if(hit||!t) return;
-      if(same(t.mrn)||same(t.ghisPatientId)||same(t.smdId)||same(t.id)||same(t.token)) hit={t:t,sid:sid||null,tid:t.id};
+      if(same(t.stewardId)||same(t.mrn)||same(t.ghisPatientId)||same(t.smdId)||same(t.id)||same(t.token)) hit={t:t,sid:sid||null,tid:t.id};
     };
     for(i=0;i<(st.board||[]).length&&!hit;i++){ var b=st.board[i], ts=(b&&b.tickets)||[];
       for(j=0;j<ts.length&&!hit;j++) consider(ts[j],b.session&&b.session.id); }
@@ -2073,7 +2610,7 @@
     var hit=findTicketByUid(ticketId);
     if(!hit){ toast("That patient is no longer on today's board."); return; }
     var t=hit.t;
-    var uid=t.mrn||t.ghisPatientId||t.smdId||t.id||"";
+    var uid=t.stewardId||t.mrn||t.ghisPatientId||t.smdId||t.id||"";
     var clinic=st.orgName||(st.who&&st.who.orgName)||st.orgCode||"Clinic";
     var tokenNo=(t.token==null?"":String(t.token));
     var tokenLabel=tokenNo?("#"+(/^\d+$/.test(tokenNo)?("0000"+tokenNo).slice(-4):tokenNo)):"";
@@ -2082,7 +2619,8 @@
     var barHtml, qrHtml;
     try{ barHtml=(window.SMD_BARCODE&&SMD_BARCODE.toSvg(uid,{height:56}))||'<div class="t">Barcode unavailable.</div>'; }
     catch(e){ barHtml='<div class="t">Barcode unavailable for this ID.</div>'; }
-    try{ qrHtml=(window.SMD_PGLOG_QR&&SMD_PGLOG_QR.toSvg(uid,{scale:4}))||'<div class="t">QR unavailable.</div>'; }
+    var qrTarget=(location&&location.origin?location.origin:"https://stewardmd.in")+"/opd?uid="+encodeURIComponent(uid);
+    try{ qrHtml=(window.SMD_PGLOG_QR&&SMD_PGLOG_QR.toSvg(qrTarget,{scale:4,label:"Scan to open patient record"}))||'<div class="t">QR unavailable.</div>'; }
     catch(e){ qrHtml='<div class="t">QR unavailable for this ID.</div>'; }
     open('<style>@media print{body>*:not(#scrim){display:none!important;}'+
       '#scrim{position:static!important;background:none!important;display:block!important;opacity:1!important;visibility:visible!important;}'+
@@ -2092,7 +2630,7 @@
       '<div style="font-weight:800;font-size:15px">'+esc(clinic)+'</div>'+
       (tokenLabel?'<div style="font:800 26px ui-monospace,monospace;margin:2px 0">Token '+esc(tokenLabel)+'</div>':'')+
       '<div style="font-weight:700;font-size:17px;margin-top:2px">'+esc(t.name||"Patient")+'</div>'+
-      '<div class="t" style="margin:2px 0 8px">'+esc(ageSex)+' · '+esc(st.date||"")+' · MRN '+esc(uid)+'</div>'+
+      '<div class="t" style="margin:2px 0 8px">'+esc(ageSex)+' · '+esc(st.date||"")+' · StewardID '+esc(uid)+'</div>'+
       '<div style="display:flex;gap:12px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin:6px 0">'+
       '<div><div style="font-size:11px;color:var(--mut);margin-bottom:2px">BARCODE</div>'+barHtml+
       '<div style="font:700 13px ui-monospace,monospace;margin-top:2px">'+esc(uid)+'</div></div>'+
@@ -2110,9 +2648,13 @@
     uid=String(uid==null?"":uid);
     if(!uid){ toast("Nothing to write."); return Promise.resolve(false); }
     var nfcMod = window.NiKey || window.SMD_NFC;
+    // The desk just issued this carrier: register it so later taps in this session resolve
+    // to this patient (and a later lost-tag report can revoke it). Best-effort only.
+    var regCarrier=function(){ try{ if(window.StewardIdentityResolver&&StewardIdentityResolver.registerCarrier) StewardIdentityResolver.registerCarrier({patientId:uid,stewardId:uid,type:"nfc",value:uid,issuedBy:"frontdesk"}); }catch(e){} };
     if(nfcMod && nfcMod.isSupportedSync && nfcMod.isSupportedSync()){
       toast("Ni-Key: Hold an NFC tag to the device...");
       return nfcMod.writeTag(uid).then(function(){
+        regCarrier();
         toast("Ni-Key tag written. Tap it to verify.");
         return true;
       }, function(e){
@@ -2123,7 +2665,7 @@
     if(!("NDEFReader" in window)){ toast("Ni-Key NFC writing is not available on this device or browser."); return Promise.resolve(false); }
     try{
       var w=new NDEFReader();
-      return w.write(uid).then(function(){ toast("Ni-Key tag written. Tap it to verify."); return true; },
+      return w.write(uid).then(function(){ regCarrier(); toast("Ni-Key tag written. Tap it to verify."); return true; },
         function(e){ toast("Could not write the Ni-Key tag"+(e&&e.message?": "+e.message:"")+". Try another tag."); return false; });
     }catch(e){ toast("Could not write the Ni-Key tag."); return Promise.resolve(false); }
   }
@@ -2199,13 +2741,69 @@
       }catch(err){}
     });
   }
-  // One tap/scan, routed by station: doctor starts (or opens the chart of) the consultation,
-  // nurse opens vitals, pharmacy highlights the dispense row, cashier lands on the bill.
+  // The board as an identity store: today's tickets are the patient records this station
+  // knows, so a tap/scan resolves to a VERIFIED identity (name, queue ticket, OPD visit) with
+  // no network. Resolutions also feed the resolver's offline cache, which the check-in sheet's
+  // Ni-Key read draws on to prefill a returning patient.
+  function boardPatientStore(id){
+    try{
+      var hit=findTicketByUid(id);
+      if(!hit) return null;
+      var t=hit.t||{};
+      return { name:t.name||"", mrn:t.mrn||t.ghisPatientId||"", stewardId:t.stewardId||"",
+        age:t.ageYears!=null?t.ageYears:(t.age!=null?t.age:""), sex:t.sex||t.gender||"",
+        mobile:t.mobile||"", gender:t.sex||t.gender||"", ageYears:t.ageYears!=null?t.ageYears:"",
+        currentQueueTicket:{ ticketId:hit.tid, sessionId:hit.sid, token:t.token, status:t.status },
+        activeEncounter:{ type:"opd", encounterId:t.encounterId||hit.tid, department:t.department||"", token:t.token||"", ticketId:hit.tid, sessionId:hit.sid } };
+    }catch(e){ return null; }
+  }
+  function openOpdScanner(){
+    if(window.WARD_LABELS&&WARD_LABELS.cameraSupported&&WARD_LABELS.cameraSupported()){
+      WARD_LABELS.scan().then(function(res){
+        if(res&&res.code) handleScannedUid(res.code);
+        else if(res&&res.error==="denied") toast("Camera permission denied. Allow camera in site settings.");
+        else if(res&&!res.cancelled) toast("Camera scan failed.");
+      });
+      return;
+    }
+    if(window.PatientIdentityScanner){
+      var sc=PatientIdentityScanner.create({
+        station: (st.who&&st.who.role)||"doctor",
+        onResolved: function(r){
+          close();
+          var id=r.stewardId||r.patientId||(r.carrier&&r.carrier.normalized);
+          if(id) handleScannedUid(id);
+        }
+      });
+      open('<h3>Scan Patient Identity</h3><div id="opdScanBox" style="min-height:160px"></div><div class="row2"><button class="cancel" id="scClose">Close</button></div>');
+      sheet.querySelector("#scClose").onclick=close;
+      sc.mount(sheet.querySelector("#opdScanBox"));
+      sc.startBarcodeScan();
+      return;
+    }
+    var manualVal=prompt("Enter or scan StewardID / MRN:");
+    if(manualVal&&manualVal.trim()) handleScannedUid(manualVal.trim());
+  }
+  // One tap/scan, routed by station: doctor gets the visit-aware action sheet (start the
+  // consultation, open the chart, or start a linked follow-up), nurse opens vitals pre-linked
+  // to the patient, pharmacy highlights the dispense row, cashier lands on the bill.
   function handleScannedUid(uid){
     uid=String(uid==null?"":uid).trim();
     if(!uid) return;
     var role=st.who&&st.who.role;
     var org=st.orgId||st.hospital||"";
+    // Universal Patient Identity (Wave 3): resolve the carrier before routing. A revoked tag
+    // stops here with a spoken reason; anything unresolved falls back to the raw uid so
+    // routing never depends on the resolver being loaded.
+    var stewardId="", identity=null;
+    try{
+      if(window.StewardIdentityResolver&&StewardIdentityResolver.resolvePatientIdentity){
+        var _r=StewardIdentityResolver.resolvePatientIdentity(uid,{role:role,hospital:st.hospital,orgId:org,patientStore:boardPatientStore});
+        if(_r&&_r.then){ _r=null; }
+        else if(_r&&_r.ok===false&&_r.error==="CARRIER_REVOKED"){ toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."); return; }
+        else if(_r&&_r.ok){ identity=_r; if(_r.identityStatus==="verified") stewardId=_r.stewardId||""; }
+      }
+    }catch(_e){ if(_e&&_e.code==="CARRIER_REVOKED"){ toast("CARRIER REVOKED: This tag was marked lost or deactivated. Please issue a replacement card."); return; } }
     if(role==="cashier"){ location.href="/clinic-billing?patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
     if(role==="pharmacy"){ location.href="/clinic-billing?station=pharmacy&patientId="+encodeURIComponent(uid)+"&orgId="+encodeURIComponent(org); return; }
     var hit=findTicketByUid(uid);
@@ -2214,7 +2812,51 @@
     if(!hit.sid){ toast(nm+" is waiting to be routed - assign a room first."); return; }
     if(role==="nurse"||role==="intern"||role==="resident"||role==="reception"){ openVitals(hit.sid,hit.tid,nm); return; }
     if(hit.t.status==="in_consultation"||hit.t.status==="at_diagnostics"){ openNotes(hit.sid,hit.tid,nm); return; }
+    if(role==="doctor"||isRoomDoctor(hit)){ openDoctorScanSheet(hit,nm,stewardId,identity); return; }
     post("status",{sessionId:hit.sid,ticketId:hit.tid,status:"in_consultation"});
+  }
+  // "Room doctor": the signed-in account is the doctor assigned to the room holding this ticket.
+  function isRoomDoctor(hit){
+    try{
+      if(!hit||!hit.sid) return false;
+      var me=meUid(); if(!me) return false;
+      var rooms=(st.opd&&st.opd.rooms)||[], i, b;
+      for(i=0;i<rooms.length;i++){ if(rooms[i]&&rooms[i].sessionId===hit.sid&&rooms[i].doctorUid&&normDocId(rooms[i].doctorUid)===normDocId(me)) return true; }
+      for(i=0;i<(st.board||[]).length;i++){ b=st.board[i]; if(b&&b.session&&b.session.id===hit.sid&&b.session.doctorUid&&normDocId(b.session.doctorUid)===normDocId(me)) return true; }
+    }catch(e){}
+    return false;
+  }
+  // Doctor desk, Wave 3: a tap/scan on a waiting patient offers the visit-aware actions - the
+  // patient summary plus today's visit status, then Start Consultation (same tap as before),
+  // View Profile (the full chart), or Follow-up Consult (a NEW encounter linked to this one
+  // via parentEncounterId, never overwriting today's notes).
+  function openDoctorScanSheet(hit,nm,stewardId,identity){
+    var t=hit.t||{};
+    var age=(t.ageYears!=null&&t.ageYears!=="")?t.ageYears:(t.age!=null?t.age:"");
+    var demo=(((age===""||age==null)?"":age+"y")+(t.sex?" "+t.sex:"")).trim();
+    var tok=(t.token==null?"":String(t.token));
+    var status=String(t.status||"waiting").replace(/_/g," ");
+    var sid=stewardId||t.stewardId||"";
+    var pid=t.mrn||t.ghisPatientId||t.smdId||t.id||"";
+    open('<h3>'+esc(nm)+'</h3>'+
+      '<p class="t" style="margin:0 0 4px">'+(demo?esc(demo)+" · ":"")+(tok?"Token <b>"+esc(tok)+"</b> · ":"")+'Status: <b>'+esc(status)+"</b></p>"+
+      (sid?'<p class="t" style="margin:0 0 10px">StewardID <b class="mono">'+esc(sid)+"</b></p>":"")+
+      '<button class="btn" id="dsStart" style="width:100%">Start Consultation</button>'+
+      '<button class="ghost" id="dsProfile" style="width:100%;margin-top:8px">View Profile</button>'+
+      '<button class="ghost" id="dsFollow" style="width:100%;margin-top:8px">Follow-up Consult</button>'+
+      '<div class="row2"><button class="cancel" id="dsClose" style="margin:8px 0 0">Close</button></div>');
+    sheet.querySelector("#dsClose").onclick=close;
+    sheet.querySelector("#dsStart").onclick=function(){ close(); post("status",{sessionId:hit.sid,ticketId:hit.tid,status:"in_consultation"}); };
+    sheet.querySelector("#dsProfile").onclick=function(){
+      close();
+      if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:pid,stewardId:sid||pid,mrn:pid,name:nm}); }catch(e){} return; }
+      toast("The full chart opens in the StewardMD app.");
+    };
+    sheet.querySelector("#dsFollow").onclick=function(){
+      close();
+      if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:pid,stewardId:sid||pid,mrn:pid,name:nm,isFollowUp:true,parentEncounterId:t.encounterId||t.episodeId||hit.tid}); }catch(e){} return; }
+      toast("The full chart opens in the StewardMD app.");
+    };
   }
   // A follow-up patient who just walked in with their file: the tag is real but no ticket exists yet.
   // One card queues them for consultation (same station routing as a tap once the ticket exists) or
@@ -2229,6 +2871,13 @@
       '<button class="ghost" id="fChart" style="width:100%;margin-top:8px">Open Full Patient Chart</button>'+
       '<div class="row2"><button class="cancel" id="fClose" style="margin:8px 0 0">Close</button></div>');
     sheet.querySelector("#fClose").onclick=close;
+    // A tag the resolver knows prefills the name, so 1-click queueing stays 1 click.
+    try{
+      if(window.StewardIdentityResolver&&StewardIdentityResolver.resolvePatientIdentity){
+        var _fr=StewardIdentityResolver.resolvePatientIdentity(uid,{role:(st.who&&st.who.role)||"",hospital:st.hospital,orgId:st.orgId,patientStore:boardPatientStore});
+        if(_fr&&!_fr.then&&_fr.ok&&_fr.patient&&_fr.patient.name){ var _fn=sheet.querySelector("#fn"); if(_fn&&!_fn.value) _fn.value=_fr.patient.name; }
+      }
+    }catch(e){}
     sheet.querySelector("#fChart").onclick=function(){
       if(window.OPDEMR&&OPDEMR.openProfile){ try{ OPDEMR.openProfile({patientId:uid,mrn:uid}); }catch(e){} return; }
       toast("The full chart opens in the StewardMD app.");
@@ -2269,14 +2918,14 @@
     rooms.sort(function(a,b){ return (match(b)?1:0)-(match(a)?1:0) || (a.waiting||0)-(b.waiting||0); });
     var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+(match(r)?"✓ ":"")+esc(r.room.name||"Room")+(r.room.department?" ("+esc(r.room.department)+")":"")+' - '+esc(STATUS_LABEL[r.status]||r.status)+' · '+r.waiting+' waiting</option>';}).join("");
     open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first."+(pt.token?" A room in another department keeps token "+esc(pt.token)+".":""):"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
-      (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px"><input type="checkbox" id="urg"> Urgent (front of the room queue)</label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
+      (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px">Priority<select id="prsel" style="margin-top:6px"><option value="">None (arrival order)</option>'+PRIO.map(function(p){return '<option value="'+p[0]+'">'+p[1]+'</option>';}).join("")+'</select></label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
       '<input id="arz" placeholder="Optional note" style="margin-top:6px">'+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
       var sel=sheet.querySelector("#rsel"); if(!sel){toast("No room available");return;}
       var body={orgId:st.orgId,ticketId:tid,roomId:sel.value,date:st.date,reason:sheet.querySelector("#arz").value.trim()};
-      var urg=sheet.querySelector("#urg"); if(urg&&urg.checked) body.priority=2;
+      var prs=sheet.querySelector("#prsel"); if(prs&&prs.value){ if(prs.value==="other"&&body.reason.length<3){toast("Say why in the note");return;} body.priorityReason=prs.value; }
       close();
       api("assign-room",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Assign failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
     };
@@ -2296,7 +2945,10 @@
         clinicName: st.orgCode||"Check-in",
         departments: o?(o.departments||[]):null,
         departmentRequired: perDept,
+        resolve: function(id){ return api("patient/resolve?orgId="+encodeURIComponent(st.orgId)+"&id="+encodeURIComponent(id)); },
         submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue="pool"; return api("patient/register",{method:"POST",body:b}); },
+        offline: function(sent){ var d=offDesk(); if(!d) return null; return d.issue(sent).then(function(r){ paintOffline(); return r; }); },
+        printToken: function(o){ printTokenSlip(o); },
         onAdded: function(r,sent){
           // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
           api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
@@ -2492,6 +3144,8 @@
   // The shared check-in sheet (patient-register.js) offers a File Label button on its done card
   // only when this is present - the phone app has no label dialog, so it stays hidden there.
   try{ window.openFileLabel=openFileLabel; }catch(e){}
+  try{ window.openOpdScanner=openOpdScanner; }catch(e){}
+  try{ window.handleScannedUid=handleScannedUid; }catch(e){}
   // 1-touch tap/scan runs on every station, preview included: background NFC read plus the
   // USB/Bluetooth wedge-scanner burst listener. Both no-op where unsupported.
   try{ startNfcListener(); }catch(e){}
@@ -2502,24 +3156,38 @@
   // Rooms / Branding controls render in full and a staff member landing on this URL would
   // otherwise believe they had been given admin rights and report the failures as bugs.
   if(new URLSearchParams(location.search||"").get("mock")==="1"){
-    st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals","emr.view"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo";
+    st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals","emr.view"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo"; st.orgName="Preview Clinic";
     try { var pv=document.createElement("div"); pv.setAttribute("role","status");
       pv.style.cssText="position:sticky;top:0;z-index:99;background:#8a5208;color:#fff;padding:8px 14px;font:700 12px/1.4 -apple-system,system-ui,sans-serif;text-align:center";
       pv.textContent="Preview with sample data - not your clinic. Nothing here is saved.";
       document.body.insertBefore(pv, document.body.firstChild); } catch(e){}
     var nm=Date.now();
+    // Sample figures so every dashboard card has something to show (preview only; nothing is read or saved).
+    (function(){
+      // The sample clock reads 11:00 at the earliest: before the OPD opens the sample day would be empty and the cards blank.
+      var istNow=new Date(nm+19800000), hr=Math.max(11,istNow.getUTCHours()), today=istNow.toISOString().slice(0,10), dnum=+today.slice(8,10);
+      var shape=[0,0,0,0,0,0,0,1,4,9,12,10,7,5,6,8,7,5,3,2,1,0,0,0], hourly=shape.map(function(v,i){ return i<hr?v:i===hr?Math.max(1,Math.round(v*0.6)):0; });
+      var reg=hourly.reduce(function(a,b){return a+b;},0), month=[];
+      for(var d=1;d<=dnum;d++){ var dt=today.slice(0,8)+("0"+d).slice(-2), dow=new Date(dt+"T12:00:00Z").getUTCDay(), r=d===dnum?reg:(dow===0?0:48+((d*37)%29)); month.push({date:dt,registered:r,seen:d===dnum?Math.round(reg*0.62):Math.max(0,r-((d*7)%4))}); }
+      st.insights={ok:true,date:today,currentHour:hr,hourly:hourly,month:month,mix:{"new":Math.round(reg*0.58),followup:Math.round(reg*0.34),appointment:reg-Math.round(reg*0.58)-Math.round(reg*0.34),priority:{senior:4,emergency:2,pregnant:1,child:2}},
+        today:{registered:reg,seen:Math.round(reg*0.62)},yesterday:{registered:reg-3,seen:Math.round(reg*0.62)-4},delta:{registered:3,seen:4,doorToDoctorMin:-3,abandonedPct:1},recallableNoShows:2};
+      st.pulse={ok:true,pulse:{registered:reg,seen:Math.round(reg*0.62),completed:Math.round(reg*0.62)-2,inConsultation:2,waiting:6,noShow:3,held:1,resultsBack:1,syncFailed:1,abandonedPct:6,
+        doorToDoctor:{medianMin:24,p90Min:52},deskWait:{medianMin:9},doctorWait:{medianMin:14},consult:{medianMin:8},waitingNow:{longestMin:48,medianMin:18,over30:2,over60:0}},followups:{unbooked:5,overdue:2}};
+      st.dayMoney={total:4868000,count:31,net:4718000,refunds:{count:1,total:150000},byMethod:{cash:1840000,upi:2728000,card:300000},byCount:{cash:12,upi:17,card:2}}; st.dayUnbilled=3;
+      st.dashMockOffline={pending:2,review:1};
+    })();
     renderNurseStation({mode:"native",rooms:[
-      {room:{id:"r1",name:"Medicine 1",number:"101",department:"General",assignment:{primary:"drA"}},doctorUid:"drA",sessionId:"s1",waiting:3,status:"moderate",tickets:[
-        {id:"t1",name:"Ramesh Kumar",mrnLast4:"4821",status:"in_consultation",priority:0,registeredAt:nm-22*60000},
-        {id:"t2",name:"Lakshmi Devi",mrnLast4:"7734",status:"called",priority:0,registeredAt:nm-14*60000},
-        {id:"t3",name:"Abdul Rahman",mrnLast4:"1902",status:"waiting",priority:2,registeredAt:nm-30*60000}]},
-      {room:{id:"r2",name:"Cardiology",number:"104",department:"Cardiology",assignment:{primary:"drB"}},doctorUid:"drB",sessionId:"s2",waiting:1,status:"normal",tickets:[
-        {id:"t4",name:"Sita Mahalakshmi",mrnLast4:"5560",status:"waiting",priority:0,registeredAt:nm-6*60000}]},
+      {room:{id:"r1",name:"Medicine 1",number:"101",department:"General",assignment:{primary:"drA"}},doctorUid:"drA",doctorName:"Anitha Rao",sessionId:"s1",waiting:3,status:"moderate",tickets:[
+        {id:"t1",name:"Ramesh Kumar",token:"A-14",ageYears:54,sex:"M",visitType:"followup",mrnLast4:"4821",status:"in_consultation",priority:0,registeredAt:nm-22*60000},
+        {id:"t2",name:"Lakshmi Devi",token:"A-15",ageYears:67,sex:"F",visitType:"new",mrnLast4:"7734",status:"called",priority:1,priorityReason:"senior",registeredAt:nm-14*60000},
+        {id:"t3",name:"Abdul Rahman",token:"A-16",ageYears:41,sex:"M",visitType:"new",mrnLast4:"1902",status:"waiting",priority:2,priorityReason:"emergency",registeredAt:nm-30*60000,unbilledAmount:50000}]},
+      {room:{id:"r2",name:"Cardiology",number:"104",department:"Cardiology",assignment:{primary:"drB"}},doctorUid:"drB",doctorName:"Suresh Menon",sessionId:"s2",waiting:1,status:"normal",tickets:[
+        {id:"t4",name:"Sita Mahalakshmi",token:"C-07",ageYears:36,sex:"F",visitType:"followup",mrnLast4:"5560",status:"waiting",priority:1,priorityReason:"results",resultReadyAt:nm-3*60000,registeredAt:nm-48*60000}]},
       {room:{id:"r3",name:"Dermatology",number:"106",department:"Dermatology",assignment:{}},doctorUid:null,sessionId:null,waiting:0,status:"unavailable",tickets:[]}],
       pool:[
-        {id:"p1",name:"John Peter",mrnLast4:"3341",department:"Cardiology",priority:0,registeredAt:nm-4*60000},
-        {id:"p2",name:"Fatima Begum",mrnLast4:"9021",department:"General",priority:2,registeredAt:nm-18*60000},
-        {id:"p3",name:"Vikram Rao",mrnLast4:"6655",department:"Dermatology",priority:0,registeredAt:nm-2*60000}]});
+        {id:"p1",name:"John Peter",token:"C-09",ageYears:61,sex:"M",visitType:"new",mrnLast4:"3341",department:"Cardiology",priority:0,registeredAt:nm-4*60000},
+        {id:"p2",name:"Fatima Begum",token:"G-21",ageYears:72,sex:"F",visitType:"followup",mrnLast4:"9021",department:"General",priority:2,priorityReason:"emergency",registeredAt:nm-18*60000},
+        {id:"p3",name:"Vikram Rao",token:"D-03",ageYears:8,sex:"M",visitType:"new",mrnLast4:"6655",department:"Dermatology",priority:1,priorityReason:"child",registeredAt:nm-2*60000,unbilledAmount:30000}]});
     consumePendingScan();
     return;
   }
@@ -2530,6 +3198,6 @@
 </script>
 <footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
 <script src="/wardsynq/site/bug-reporter.js?v=4"></script>
-<script src="/ward.js?v=ward75-recall-r7-scribe18" defer></script>
+<script src="/ward.js?v=ward75-recall-r7-scribe18-sid1-sid1" defer></script>
 </body>
 </html>

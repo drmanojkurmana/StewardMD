@@ -19,6 +19,18 @@ export function sseFrames(buf) {
   return { frames, rest };
 }
 
+function frameJson(frame) {
+  const data = String(frame).split(/\r?\n/).filter((l) => l.indexOf("data:") === 0).map((l) => l.slice(5).trim()).join("");
+  if (!data || data === "[DONE]") return null;
+  try { return JSON.parse(data); } catch (e) { return null; }
+}
+/* Gemini's usageMetadata from one SSE frame, or null. The streamed response carries it on the final
+ * chunk (earlier chunks may carry partial counts; the caller keeps the last one it sees). */
+export function sseFrameUsage(frame) {
+  const j = frameJson(frame);
+  return (j && j.usageMetadata) || null;
+}
+
 /* Extract the generated text from one Gemini SSE frame. Returns "" for keep-alives, comments,
  * [DONE], malformed JSON, and any frame carrying no text part — a bad frame must never break the
  * stream, only contribute nothing. */

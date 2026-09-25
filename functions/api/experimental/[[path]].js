@@ -23,7 +23,7 @@
  * Rate-limited per identity + IP on /activate to blunt guessing (codes are already high-entropy).
  */
 import * as X from "../../_experimental.js";
-import { verifyFirebaseToken } from "../../_fbauth.js";
+import { verifyFirebaseToken, cfAccessEmail } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { usageKv } from "../../_usage.js";
 
@@ -36,9 +36,9 @@ function corsHeaders(request) {
 }
 function json(obj, status, request) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) }); }
 
-// App gate — same posture as /api/fundx: Cf-Access email, a matching app token, or an allowed Origin.
-function authorise(request, env) {
-  if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+// App gate — same posture as /api/fundx: verified Cf-Access JWT, a matching app token, or an allowed Origin.
+async function authorise(request, env) {
+  if (await cfAccessEmail(request, env)) return true;   // a VERIFIED Access JWT; the bare email header is forgeable
   const tok = request.headers.get("X-App-Token");
   if (tok && (tok === env.EXPERIMENTAL_APP_TOKEN || tok === env.FUNDX_APP_TOKEN || tok === env.AI_APP_TOKEN || tok === env.GHIS_APP_TOKEN)) return true;
   const o = request.headers.get("Origin") || "";
@@ -121,7 +121,7 @@ export async function onRequest(context) {
     }
 
     // ---------- APP ----------
-    if (!authorise(request, env)) return json({ error: "unauthorized" }, 401, request);
+    if (!(await authorise(request, env))) return json({ error: "unauthorized" }, 401, request);
     if (request.method === "GET" && seg === "features") return json({ features: X.featureList() }, 200, request);
 
     if (request.method === "POST" && seg === "activate") {

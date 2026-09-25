@@ -1,0 +1,45 @@
+{
+"model": {
+"continuing_subword_prefix": "##",
+"max_input_chars_per_word": 100,
+"type": "WordPiece",
+"unk_token": "[UNK]",
+"vocab": {
+",": 6,
+".": 7,
+"2": 15,
+"3": 22,
+"[CLS]": 2,
+"[PAD]": 0,
+"[SEP]": 3,
+"[UNK]": 1,
+"acquired": 12,
+"and": 5,
+"case": 9,
+"chronic": 18,
+"community": 11,
+"diabetes": 16,
+"disease": 20,
+"hypertension": 23,
+"kidney": 19,
+"known": 8,
+"mellitus": 17,
+"of": 10,
+"pneumonia": 13,
+"stage": 21,
+"type": 14,
+"with": 4
+}
+},
+"normalizer": {
+"clean_text": true,
+"handle_chinese_chars": true,
+"lowercase": true,
+"strip_accents": null,
+"type": "BertNormalizer"
+},
+"pre_tokenizer": {
+"type": "BertPreTokenizer"
+},
+"version": "1.0"
+}

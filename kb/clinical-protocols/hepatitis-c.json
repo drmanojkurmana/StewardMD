@@ -1,0 +1,84 @@
+{
+ "id": "hepatitis-c",
+ "title": "Chronic hepatitis C (adult)",
+ "subject": "gastroenterology",
+ "population": "Adults",
+ "basis": "international",
+ "setting": "Outpatient, primary care, hepatology",
+ "aliases": ["HCV", "hepatitis C", "anti-HCV", "DAA", "direct-acting antivirals", "sofosbuvir velpatasvir", "glecaprevir pibrentasvir", "sofosbuvir daclatasvir", "SVR12", "pangenotypic"],
+ "summary": "Confirm viraemia (HCV RNA or core antigen) after a positive antibody test, assess for cirrhosis with FIB-4 or APRI, and treat all viraemic patients with a pangenotypic regimen: sofosbuvir/velpatasvir for 12 weeks or glecaprevir/pibrentasvir for 8 weeks. Cure is undetectable HCV RNA 12 weeks after treatment (SVR12).",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Diagnose",
+   "items": [
+    "Step 1: anti-HCV antibody (rapid test or laboratory immunoassay). Step 2: if positive, HCV RNA (or HCV core antigen) to confirm current viraemic infection.",
+    "Positive antibody with negative RNA means past, cleared infection: no treatment; antibodies stay positive lifelong, so use HCV RNA to test for reinfection.",
+    "AASLD-IDSA: test all adults at least once. Prioritise people who inject drugs, people in prisons, men who have sex with men, people with HIV or on haemodialysis, recipients of unsafe injections or transfusions, and pregnant women (AASLD-IDSA: every pregnancy)."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Before treatment",
+   "items": [
+    "Assess fibrosis: FIB-4 above 3.25 (or APRI, elastography or clinical signs) suggests cirrhosis. If cirrhotic, calculate the Child-Pugh score: 7 or more means decompensated disease.",
+    "Blood count, liver panel with INR, eGFR, HCV RNA, HIV test, HBsAg (and anti-HBc and anti-HBs), and pregnancy test in women of childbearing age.",
+    "Cirrhosis: liver ultrasound within 6 months to exclude HCC and ascites. Genotyping is not needed for simplified pangenotypic treatment, except genotype 3 with cirrhosis before sofosbuvir/velpatasvir (NS5A resistance testing where available).",
+    "Reconcile all medicines including supplements and check interactions (University of Liverpool HEP Drug Interactions checker)."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Pangenotypic treatment",
+   "items": [
+    "Treat everyone with viraemic HCV (WHO: adults, adolescents and children aged 3 years and over).",
+    "No cirrhosis, treatment-naive: sofosbuvir/velpatasvir 400/100 mg once daily for 12 weeks, OR glecaprevir/pibrentasvir 300/120 mg once daily with food for 8 weeks, OR (WHO) sofosbuvir 400 mg + daclatasvir 60 mg once daily for 12 weeks.",
+    "Compensated cirrhosis (Child-Pugh A), treatment-naive: glecaprevir/pibrentasvir for 8 weeks, or sofosbuvir/velpatasvir for 12 weeks (genotype 3 with the Y93H substitution needs specialist advice), or (WHO) sofosbuvir + daclatasvir for 24 weeks.",
+    "Specialist management: decompensated cirrhosis, any previous HCV treatment, HBsAg positivity, suspected HCC, liver transplant recipients, and (with cirrhosis) end-stage renal disease.",
+    "Glecaprevir/pibrentasvir and other protease inhibitors are contraindicated in decompensated (Child-Pugh B or C) cirrhosis."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "During and after treatment",
+   "items": [
+    "Without cirrhosis, routine on-treatment laboratory monitoring is not needed in simplified care; review adherence, and warn diabetic patients (risk of hypoglycaemia) and warfarin users (INR changes) as the liver improves.",
+    "SVR12: check HCV RNA (and liver panel) 12 weeks or more after the end of treatment. Undetectable RNA means cure.",
+    "No cirrhosis and SVR: no further liver follow-up needed. Test HCV RNA at least annually if the risk of reinfection continues.",
+    "Cirrhosis: continue ultrasound (with or without AFP) every 6 months for HCC after cure, and screen for varices."
+   ]
+  },
+  {
+   "kind": "special",
+   "title": "Special situations",
+   "items": [
+    "HBV coinfection or HBsAg positive: risk of HBV reactivation during DAA therapy; involve a specialist and consider HBV antiviral treatment or prophylaxis.",
+    "Pregnancy: screen in every pregnancy; DAA treatment is generally given after delivery, with specialist input if treatment in pregnancy is considered.",
+    "Recently acquired HCV with ongoing risk: offer DAA treatment without delay (WHO).",
+    "India: the National Viral Hepatitis Control Programme provides free DAAs; sofosbuvir plus daclatasvir is widely used there, with durations as above."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls and interactions",
+   "items": [
+    "Treating on a positive antibody alone without confirming viraemia.",
+    "Missing cirrhosis: it changes regimen choice, duration and lifelong HCC surveillance.",
+    "Sofosbuvir with amiodarone: risk of severe bradycardia; avoid the combination.",
+    "Strong enzyme inducers (rifampicin, carbamazepine, phenytoin, St John's wort) reduce DAA levels; avoid. Acid suppressants reduce velpatasvir absorption; avoid high-dose PPIs with sofosbuvir/velpatasvir.",
+    "Glecaprevir/pibrentasvir: avoid with ethinylestradiol-containing contraceptives (ALT rise), atorvastatin and simvastatin, and rifampicin."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Sofosbuvir/velpatasvir", "dose": "400/100 mg (one tablet) orally once daily for 12 weeks", "notes": "Pangenotypic; with or without food. If a PPI is essential, take with food 4 hours before omeprazole 20 mg." },
+  { "name": "Glecaprevir/pibrentasvir", "dose": "300/120 mg (three 100/40 mg tablets) orally once daily with food for 8 weeks", "notes": "No cirrhosis or compensated cirrhosis, treatment-naive. Contraindicated in Child-Pugh B or C." },
+  { "name": "Sofosbuvir + daclatasvir", "dose": "Sofosbuvir 400 mg + daclatasvir 60 mg orally once daily for 12 weeks (24 weeks with compensated cirrhosis)", "notes": "WHO pangenotypic option. Daclatasvir 30 mg with strong CYP3A inhibitors; 90 mg with moderate inducers." }
+ ],
+ "sources": [
+  { "org": "WHO", "title": "Updated recommendations on treatment of adolescents and children with chronic HCV infection, and HCV simplified service delivery and diagnostics", "year": 2022, "url": "https://www.who.int/publications/i/item/9789240052734" },
+  { "org": "AASLD / IDSA", "title": "HCV Guidance: Simplified HCV treatment for treatment-naive adults without cirrhosis", "year": 2023, "url": "https://www.hcvguidelines.org/guidance/simplified-hcv-treatment-for-treatment-naive-adults-without-cirrhosis/" },
+  { "org": "AASLD / IDSA", "title": "HCV Guidance: Simplified HCV treatment algorithm for treatment-naive adults with compensated cirrhosis", "year": 2023, "url": "https://www.hcvguidelines.org/guidance/simplified-hcv-treatment-algorithm-for-treatment-naive-adults-with-compensated-cirrhosis/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

@@ -1,0 +1,45 @@
+/* Clinical documents sheet (clinical-docs.js). Shares the kit sheet shell and palette (specialty-kits.css
+ * styles :is(#smdKit, #smdDocs)). Above the OPD EMR (12010), discharge (12020) and MaiK (12030) because it
+ * opens from the consult; far below the prescription pad (16000). */
+#smdDocs { z-index: 12040; }
+#smdDocs .dl-types { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+#smdDocs .dl-type { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-height: 96px; padding: 14px; border: 1px solid var(--outline-variant); border-radius: 14px; background: var(--sc-lowest); color: var(--on-surface); font: 650 14px/1.3 var(--q-sans); text-align: left; cursor: pointer; }
+#smdDocs .dl-type .kit-ic { color: var(--primary); font-size: 24px; }
+#smdDocs .dl-type:hover { border-color: var(--primary); }
+#smdDocs .dl-h, #smdReview .dl-h { margin: 0; font: 750 20px/1.2 var(--q-sans); }
+#smdDocs .kit-link, #smdReview .kit-link { display: inline-flex; align-items: center; gap: 4px; align-self: flex-start; }
+#smdDocs .dl-preview { border: 1px solid var(--outline-variant); border-radius: 12px; overflow: hidden; background: #fff; }
+#smdDocs .dl-frame { width: 100%; height: 70vh; border: 0; display: block; background: #fff; }
+
+/* Clinical review desk (review-desk.js). Same shell; sits just under #smdKit (880) so "Read it" on a kit
+   opens the kit on top, and html.kit-lock keeps the Knowledge Library (1300) above both. */
+#smdReview { z-index: 870; }
+#smdReview .rv-list { display: flex; flex-direction: column; gap: 8px; }
+#smdReview .rv-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 56px; padding: 12px 14px; border: 1px solid var(--outline-variant); border-radius: 14px; background: var(--sc-lowest); color: var(--on-surface); text-align: left; cursor: pointer; font-family: var(--q-sans); }
+#smdReview .rv-row:hover { border-color: var(--primary); }
+#smdReview .rv-t { font: 650 14.5px/1.3 var(--q-sans); }
+#smdReview .rv-s { font: 500 12.5px/1.3 var(--q-sans); color: var(--on-surface-variant); }
+#smdReview .rv-pill { display: inline-block; margin: 2px 6px 0 0; padding: 2px 8px; border-radius: 999px; background: var(--sc-high); color: var(--on-surface-variant); font: 650 11.5px/1.5 var(--q-sans); }
+#smdReview .rv-pill.ok { background: color-mix(in srgb, var(--primary) 16%, var(--sc-lowest)); color: var(--primary); }
+#smdReview .rv-pill.mine { background: color-mix(in srgb, var(--secondary) 18%, var(--sc-lowest)); color: var(--on-surface); }
+#smdReview .kit-add[disabled] { opacity: .5; cursor: default; }
+
+/* Colleagues sheet (kits-share.js, wave 2): above Documents (12040) because "Send to a colleague" opens
+   from there; far below the Rx pad (16000). Rows reuse the review-desk list styles. */
+#smdShare { z-index: 12045; }
+#smdShare .dl-h { margin: 0; font: 750 20px/1.2 var(--q-sans); }
+#smdShare .kit-link { display: inline-flex; align-items: center; gap: 4px; align-self: flex-start; }
+#smdShare .rv-list { display: flex; flex-direction: column; gap: 8px; }
+#smdShare .rv-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 56px; padding: 12px 14px; border: 1px solid var(--outline-variant); border-radius: 14px; background: var(--sc-lowest); color: var(--on-surface); text-align: left; cursor: pointer; font-family: var(--q-sans); }
+#smdShare .rv-t { font: 650 14.5px/1.3 var(--q-sans); }
+#smdShare .rv-s { font: 500 12.5px/1.3 var(--q-sans); color: var(--on-surface-variant); }
+#smdShare .rv-pill { display: inline-block; margin: 2px 6px 0 0; padding: 2px 8px; border-radius: 999px; background: var(--sc-high); color: var(--on-surface-variant); font: 650 11.5px/1.5 var(--q-sans); }
+#smdShare .rv-pill.ok { background: color-mix(in srgb, var(--primary) 16%, var(--sc-lowest)); color: var(--primary); }
+#smdShare .sh-row { padding: 8px 0; border-top: 1px solid var(--sc-high); }
+#smdShare .sh-row:first-of-type { border-top: 0; }
+#smdShare .sh-post { margin: 8px 0; padding: 10px 12px; border-radius: 12px; background: var(--sc-low); }
+#smdShare .sh-post.mine { background: color-mix(in srgb, var(--primary) 10%, var(--sc-lowest)); }
+#smdShare .sh-post p { margin: 4px 0 0; font-size: 14px; line-height: 1.45; }
+#smdShare .kit-add[disabled] { opacity: .5; cursor: default; }
+#smdShare .rv-pill { align-self: flex-start; }
+#smdShare .kit-card p { margin: 4px 0; line-height: 1.45; }

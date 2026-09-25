@@ -1,0 +1,195 @@
+{
+ "id": "neurology",
+ "label": "Neurology",
+ "short": "Neuro",
+ "icon": "neurology",
+ "group": "medical",
+ "scribe": "neurology",
+ "subject": "neurology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "acute-stroke",
+   "title": "Acute stroke assessment",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "last_known_well", "label": "Last known well (date and time)", "type": "text", "hint": "for a wake-up stroke, when last seen normal" },
+    { "id": "stroke_deficit", "label": "Deficit and onset", "type": "text", "hint": "e.g. sudden right face and arm weakness with slurred speech" },
+    { "id": "nihss", "label": "NIHSS", "type": "number", "hint": "0 to 42; use the NIHSS calculator" },
+    { "id": "stroke_glucose", "label": "Capillary blood glucose", "type": "number", "unit": "mg/dL", "set": "grbs" },
+    { "id": "stroke_bp", "label": "Blood pressure", "type": "text", "unit": "mmHg", "hint": "e.g. 176/98" },
+    { "id": "prestroke_mrs", "label": "Function before the stroke (mRS)", "type": "select", "opts": ["0: no symptoms", "1: no significant disability", "2: slight disability", "3: moderate disability", "4: moderately severe disability", "5: severe disability"] },
+    { "id": "lvo_signs", "label": "Signs of large vessel occlusion (gaze deviation, aphasia or neglect, dense hemiparesis)", "type": "check" },
+    { "id": "stroke_anticoagulant", "label": "Anticoagulant use", "type": "select", "opts": ["None", "Warfarin", "DOAC", "Heparin", "Not known"] },
+    { "id": "stroke_mimics", "label": "Mimics considered", "type": "text", "hint": "hypoglycaemia, seizure, migraine aura, sepsis" }
+   ]
+  },
+  {
+   "id": "thrombolysis-checklist",
+   "title": "Thrombolysis checklist",
+   "target": "management_plan",
+   "fields": [
+    { "id": "tl_window", "label": "Within 4.5 hours of last known well", "type": "check" },
+    { "id": "tl_disabling", "label": "Deficit is disabling", "type": "check" },
+    { "id": "tl_glucose", "label": "Glucose checked, hypoglycaemia excluded", "type": "check" },
+    { "id": "tl_imaging", "label": "CT or MRI brain: no haemorrhage", "type": "check" },
+    { "id": "tl_bp", "label": "BP below 185/110 mmHg before treatment", "type": "check" },
+    { "id": "tl_anticoagulant", "label": "Anticoagulant use and bleeding disorder checked", "type": "check" },
+    { "id": "tl_history", "label": "No exclusion on history (previous brain haemorrhage; stroke or serious head injury in 3 months; recent GI bleed; symptoms of subarachnoid haemorrhage)", "type": "check" },
+    { "id": "tl_cta", "label": "CT angiography done for a thrombectomy decision", "type": "check" },
+    { "id": "tl_discussed", "label": "Benefits and risks discussed with the patient or family", "type": "check" },
+    { "id": "tl_team", "label": "Stroke team or thrombolysis-capable centre contacted", "type": "check" },
+    { "id": "tl_decision", "label": "Decision", "type": "select", "opts": ["Thrombolysed", "Referred for thrombectomy", "Thrombolysed and referred for thrombectomy", "Not eligible", "Transferred to a stroke centre"] }
+   ]
+  },
+  {
+   "id": "headache-history",
+   "title": "Headache history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "ha_onset", "label": "Onset", "type": "select", "opts": ["Sudden (peak within a minute)", "Over hours", "Over days", "Gradual over weeks or longer", "Long-standing"] },
+    { "id": "ha_pattern", "label": "Pattern", "type": "select", "opts": ["Episodic", "Daily from onset", "Chronic (15 or more days a month)", "Changed from usual pattern"] },
+    { "id": "ha_site", "label": "Site", "type": "select", "opts": ["Unilateral", "Bilateral", "Frontal", "Occipital", "Around the eye", "Whole head"] },
+    { "id": "ha_character", "label": "Character", "type": "select", "opts": ["Throbbing", "Pressing or tightening", "Stabbing", "Burning", "Explosive"] },
+    { "id": "ha_severity", "label": "Severity", "type": "number", "unit": "/10" },
+    { "id": "ha_aura", "label": "Aura", "type": "select", "opts": ["None", "Visual", "Sensory", "Speech", "Motor"] },
+    { "id": "ha_associated", "label": "Associated features", "type": "text", "hint": "nausea, light or sound sensitivity, watering eye, blocked nose" },
+    { "id": "ha_days", "label": "Headache days per month", "type": "number", "unit": "days" },
+    { "id": "ha_analgesic_days", "label": "Days per month taking painkillers", "type": "number", "unit": "days" },
+    { "id": "ha_triggers", "label": "Triggers", "type": "text", "hint": "sleep, fasting, stress, menstruation, screens" }
+   ]
+  },
+  {
+   "id": "headache-red-flags",
+   "title": "Headache red flags (SNNOOP10)",
+   "target": "History_present_illness",
+   "alert": "Red flag for a secondary headache: look for a cause today. Sudden (thunderclap) onset, fever with neck stiffness, a new neurological deficit, reduced consciousness or papilloedema need same-day emergency assessment with brain imaging, and lumbar puncture if indicated. New headache after 50: check ESR and CRP for giant cell arteritis.",
+   "fields": [
+    { "id": "sn_systemic", "label": "Systemic symptoms, including fever or weight loss", "type": "check" },
+    { "id": "sn_neoplasm", "label": "History of cancer", "type": "check" },
+    { "id": "sn_deficit", "label": "Neurological deficit, confusion or reduced consciousness", "type": "check" },
+    { "id": "sn_sudden", "label": "Sudden or thunderclap onset", "type": "check" },
+    { "id": "sn_older", "label": "New headache after age 50", "type": "check" },
+    { "id": "sn_pattern", "label": "Pattern change, recent onset, or progressive or atypical headache", "type": "check" },
+    { "id": "sn_positional", "label": "Positional, or brought on by coughing, sneezing or exercise", "type": "check" },
+    { "id": "sn_papilloedema", "label": "Papilloedema", "type": "check" },
+    { "id": "sn_pregnancy", "label": "Pregnancy or puerperium", "type": "check" },
+    { "id": "sn_eye", "label": "Painful eye with autonomic features", "type": "check" },
+    { "id": "sn_trauma", "label": "Started after a head injury", "type": "check" },
+    { "id": "sn_immune", "label": "Immune compromise, such as HIV", "type": "check" }
+   ]
+  },
+  {
+   "id": "seizure-history",
+   "title": "Seizure history",
+   "target": "History_present_illness",
+   "fields": [
+    { "id": "seizure_status", "label": "Presentation", "type": "select", "opts": ["First seizure", "Known epilepsy", "Recurrent seizures, not yet diagnosed"] },
+    { "id": "seizure_type", "label": "Seizure type (ILAE 2025)", "type": "select", "opts": ["Focal preserved consciousness", "Focal impaired consciousness", "Focal to bilateral tonic-clonic", "Generalised tonic-clonic", "Absence", "Myoclonic", "Other generalised (tonic, atonic)", "Unknown whether focal or generalised", "Unclassified", "Possibly not epileptic (syncope, functional)"] },
+    { "id": "seizure_eyewitness", "label": "Eyewitness account", "type": "textarea", "hint": "before, during and after the event; video if available" },
+    { "id": "seizure_frequency", "label": "Frequency", "type": "text", "hint": "e.g. 2 per month" },
+    { "id": "last_seizure", "label": "Last seizure", "type": "date" },
+    { "id": "provoking_factors", "label": "Provoking factors", "type": "text", "hint": "sleep loss, missed doses, alcohol, fever, low sugar, flashing lights" },
+    { "id": "seizure_injury", "label": "Injury, tongue bite or incontinence", "type": "text" },
+    { "id": "prolonged_seizure", "label": "Seizure lasting 5 minutes or more, ever", "type": "check" },
+    { "id": "antiseizure_medicines", "label": "Current antiseizure medicines and adherence", "type": "text" },
+    { "id": "driving_advice", "label": "Driving advice given", "type": "check" },
+    { "id": "safety_advice", "label": "Safety advice given (bathing, heights, water, cooking)", "type": "check" }
+   ]
+  },
+  {
+   "id": "higher-functions-cranial-nerves",
+   "title": "Higher functions and cranial nerves",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "gcs", "label": "GCS", "type": "number", "hint": "3 to 15", "set": "glasgow_scale" },
+    { "id": "orientation", "label": "Orientation", "type": "select", "opts": ["Oriented to time, place and person", "Disoriented", "Not assessable"] },
+    { "id": "speech_finding", "label": "Speech", "type": "select", "opts": ["Normal", "Dysarthria", "Expressive aphasia", "Receptive aphasia", "Global aphasia", "Mute"], "set": "speech" },
+    { "id": "neck_stiffness", "label": "Neck stiffness", "type": "check" },
+    { "id": "pupils", "label": "Pupils", "type": "select", "opts": ["Equal and reactive", "Unequal", "Sluggish or fixed", "Relative afferent pupillary defect"] },
+    { "id": "fundi", "label": "Fundi", "type": "select", "opts": ["Normal", "Papilloedema", "Optic atrophy", "Not seen"] },
+    { "id": "visual_fields", "label": "Visual fields", "type": "select", "opts": ["Full", "Homonymous hemianopia", "Bitemporal hemianopia", "Other defect"] },
+    { "id": "eye_movements", "label": "Eye movements", "type": "select", "opts": ["Full", "Gaze palsy", "III, IV or VI nerve palsy", "Nystagmus"] },
+    { "id": "facial_weakness", "label": "Facial weakness", "type": "select", "opts": ["None", "Upper motor neurone (forehead spared)", "Lower motor neurone (forehead involved)"] },
+    { "id": "bulbar", "label": "Bulbar function", "type": "select", "opts": ["Normal", "Dysphagia", "Palatal weakness", "Tongue deviation or wasting"] },
+    { "id": "cranial_nerve_summary", "label": "Cranial nerves summary", "type": "text", "hint": "e.g. right UMN facial weakness, others normal", "set": "cranial_nerves" }
+   ]
+  },
+  {
+   "id": "motor-sensory-examination",
+   "title": "Motor, sensory, reflexes, coordination and gait",
+   "target": "sys_examination",
+   "fields": [
+    { "id": "tone", "label": "Tone", "type": "select", "opts": ["Normal", "Reduced", "Increased: spasticity", "Increased: rigidity"] },
+    { "id": "power_right_upper", "label": "Power, right upper limb (MRC)", "type": "select", "opts": ["5/5 normal", "4/5 against resistance", "3/5 against gravity", "2/5 gravity eliminated", "1/5 flicker", "0/5 no contraction"] },
+    { "id": "power_left_upper", "label": "Power, left upper limb (MRC)", "type": "select", "opts": ["5/5 normal", "4/5 against resistance", "3/5 against gravity", "2/5 gravity eliminated", "1/5 flicker", "0/5 no contraction"] },
+    { "id": "power_right_lower", "label": "Power, right lower limb (MRC)", "type": "select", "opts": ["5/5 normal", "4/5 against resistance", "3/5 against gravity", "2/5 gravity eliminated", "1/5 flicker", "0/5 no contraction"] },
+    { "id": "power_left_lower", "label": "Power, left lower limb (MRC)", "type": "select", "opts": ["5/5 normal", "4/5 against resistance", "3/5 against gravity", "2/5 gravity eliminated", "1/5 flicker", "0/5 no contraction"] },
+    { "id": "motor_summary", "label": "Motor system summary", "type": "text", "hint": "e.g. right hemiparesis, UMN pattern, no wasting", "set": "motor_sys" },
+    { "id": "reflexes_finding", "label": "Reflexes", "type": "select", "opts": ["Normal", "Brisk", "Reduced", "Absent", "Asymmetrical"], "set": "reflexes" },
+    { "id": "plantars", "label": "Plantars", "type": "select", "opts": ["Flexor both", "Extensor right", "Extensor left", "Extensor both", "Equivocal"], "set": "plantar" },
+    { "id": "sensation", "label": "Sensation", "type": "select", "opts": ["Intact", "Glove and stocking loss", "Hemisensory loss", "Sensory level", "Dermatomal loss", "Dissociated loss"], "set": "sensory_sys" },
+    { "id": "coordination", "label": "Coordination", "type": "select", "opts": ["Normal", "Finger-nose ataxia", "Heel-shin ataxia", "Dysdiadochokinesia", "Truncal ataxia", "Not testable (weakness)"], "set": "cerebellar_sign" },
+    { "id": "romberg", "label": "Romberg test", "type": "select", "opts": ["Negative", "Positive", "Not testable"] },
+    { "id": "gait_finding", "label": "Gait", "type": "select", "opts": ["Normal", "Hemiplegic", "Spastic", "Parkinsonian (shuffling)", "Ataxic (broad-based)", "High-stepping (foot drop)", "Waddling", "Unable to walk"], "set": "gait" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "CT brain (plain)", "query": "CT brain" },
+  { "label": "MRI brain", "query": "MRI brain" },
+  { "label": "CT angiography, head and neck", "query": "CT angiography" },
+  { "label": "Carotid Doppler", "query": "carotid Doppler" },
+  { "label": "EEG", "query": "EEG" },
+  { "label": "Nerve conduction study", "query": "nerve conduction study" },
+  { "label": "EMG", "query": "EMG" },
+  { "label": "CSF analysis", "query": "CSF" },
+  { "label": "Random blood sugar", "query": "RBS" },
+  { "label": "Serum electrolytes", "query": "electrolytes" },
+  { "label": "Vitamin B12", "query": "vitamin B12" },
+  { "label": "Lipid profile", "query": "lipid profile" },
+  { "label": "12-lead ECG", "query": "ECG" },
+  { "label": "2D echocardiography", "query": "echocardiography" }
+ ],
+ "orderSets": [
+  { "id": "stroke-panel", "label": "Stroke panel", "tests": ["CT brain", "CT angiography", "RBS", "CBC", "PT INR", "APTT", "creatinine", "electrolytes", "lipid profile", "HbA1c", "ECG", "troponin", "echocardiography", "carotid Doppler"] },
+  { "id": "first-seizure-work-up", "label": "First seizure work-up", "tests": ["RBS", "electrolytes", "calcium", "magnesium", "CBC", "creatinine", "LFT", "ECG", "EEG", "MRI brain"] },
+  { "id": "neuropathy-panel", "label": "Neuropathy panel", "tests": ["FBS", "HbA1c", "vitamin B12", "TSH", "creatinine", "LFT", "CBC", "ESR", "serum protein electrophoresis", "HIV", "VDRL", "nerve conduction study"] }
+ ],
+ "protocols": ["acute-ischaemic-stroke", "transient-ischaemic-attack", "intracerebral-haemorrhage", "subarachnoid-haemorrhage", "first-unprovoked-seizure", "epilepsy-long-term-management", "status-epilepticus", "acute-migraine", "migraine-prevention", "giant-cell-arteritis", "bells-palsy", "guillain-barre-syndrome", "myasthenic-crisis", "parkinsons-disease", "dementia", "delirium", "acute-bacterial-meningitis", "acute-encephalitis-syndrome", "acute-encephalitis-international", "cryptococcal-meningitis", "traumatic-brain-injury", "malignant-spinal-cord-compression", "vitamin-b12-and-folate-deficiency", "bppv-vertigo"],
+ "calculators": ["gcs", "gcs_p", "four_score", "nihss", "lams", "cpss", "rosier", "abcd2", "chadsvasc", "a2ds2", "hat", "dragon", "thrive", "mrs", "ich", "abc2_ich_volume", "hunt_hess", "wfns", "fisher", "modified_fisher", "ottawa_sah", "canadian_ct_head", "nexus_cspine", "canadian_cspine", "stess", "phenytoin", "mrc_power", "ninds_reflex", "ashworth", "hoehn_yahr", "epworth", "midas", "hit6", "dn4", "mmse", "moca", "amts", "ad8", "cdr", "4at", "cam", "barthel", "mjoa", "asia_impairment", "house_brackmann", "spetzler_martin", "rancho", "gos", "gose", "cpp"],
+ "advice": [
+  {
+   "id": "stroke-warning-signs",
+   "title": "Stroke warning signs",
+   "target": "follow_up_advice",
+   "text": "Call an ambulance or come to hospital at once if you or someone with you suddenly gets weakness or numbness of the face, arm or leg, difficulty speaking or understanding, loss of vision, or loss of balance. Note the time it started. Do not wait to see if it gets better: treatment works best in the first few hours."
+  },
+  {
+   "id": "seizure-safety",
+   "title": "Living safely with seizures",
+   "target": "diet_lifestyle_advice",
+   "text": "Do not drive until your doctor tells you it is safe and the law allows it. Take a shower rather than a bath, do not swim alone, avoid working at heights, and take care when cooking. Take your seizure medicines every day and do not stop them suddenly. Sleep well and avoid alcohol binges."
+  },
+  {
+   "id": "seizure-first-aid",
+   "title": "First aid for a seizure (for family)",
+   "target": "follow_up_advice",
+   "text": "Stay calm, move hard objects away and cushion the head. Do not put anything in the mouth or hold the person down. When the jerking stops, turn them on their side. Time the seizure, and call an ambulance if it lasts 5 minutes or more, another seizure follows, they are injured, or breathing is difficult."
+  },
+  {
+   "id": "headache-warning",
+   "title": "Headache: when to come at once",
+   "target": "follow_up_advice",
+   "text": "Come to hospital at once for a sudden, very severe headache, a headache with fever and a stiff neck, fits, confusion or weakness, or a headache after a head injury. Keep a headache diary, and avoid taking painkillers on many days each month, as this can make headaches worse."
+  }
+ ],
+ "sources": [
+  { "org": "AHA / ASA", "title": "2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke", "year": 2026, "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000513" },
+  { "org": "Neurology (Do TP et al.)", "title": "Red and orange flags for secondary headaches in clinical practice: SNNOOP10 list", "year": 2019, "url": "https://www.neurology.org/doi/10.1212/WNL.0000000000006697" },
+  { "org": "NICE", "title": "NG217 Epilepsies in children, young people and adults: diagnosis and assessment", "year": 2022, "url": "https://www.nice.org.uk/guidance/ng217/chapter/1-Diagnosis-and-assessment-of-epilepsy" },
+  { "org": "ILAE", "title": "Updated classification of epileptic seizures: position paper of the International League Against Epilepsy", "year": 2025, "url": "https://onlinelibrary.wiley.com/doi/10.1111/epi.18338" },
+  { "org": "Medical Research Council", "title": "Aids to the examination of the peripheral nervous system (Memorandum No. 45)", "year": 1976, "url": "https://www.ukri.org/publications/aids-to-the-examination-of-the-peripheral-nervous-system/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

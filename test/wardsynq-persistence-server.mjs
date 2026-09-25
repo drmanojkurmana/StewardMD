@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-persistence-server.mjs — a REAL local WardSynQ server, for proving persistence
  * across a reload and a second browser session: the SAME org/auth test scaffolding
  * wardsynq-inpatient-emar.test.mjs already uses (Firestore mocked the same way; that is

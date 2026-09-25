@@ -30,8 +30,11 @@ ok(/_armTO\(\)/.test(onDelta) && /_streamStarted = true/.test(onDelta) && /if \(
   "onDelta resets the watchdog + marks progress + won't paint after a timeout");
 
 // ceiling has real headroom for native's whole-answer fetch (was a too-tight 40000)
-const m = home.match(/MAIK_TO_MS = (\d+)/);
-ok(m && Number(m[1]) >= 60000, "MAIK_TO_MS gives native cold-start headroom (>=60000, was 40000): " + (m && m[1]));
+// Cloud turns keep >= 60 s; on-device turns get more (audit T13: a cold 4B load measured 130 s).
+const m = home.match(/MAIK_TO_MS = (?:_maikLocalTurn \? (\d+) : )?(\d+)/);
+ok(m && Number(m[2]) >= 60000, "MAIK_TO_MS gives native cold-start headroom (>=60000, was 40000): " + (m && m[2]));
+ok(m && Number(m[1]) >= 150000, "on-device turns get a longer no-progress budget: " + (m && m[1]));
+ok(/_maikTimedOut\(\) \{[\s\S]{0,400}SMD_MAIK_LOCAL\.cancel\(\)/.test(home), "the watchdog cancels the on-device job it gives up on");
 
 // staged reassurance while waiting, and it is cleared on progress/finish/error
 ok(/_stageT\.push\(setTimeout/.test(home) && /Composing your answer/.test(home), "staged reassurance messages exist");

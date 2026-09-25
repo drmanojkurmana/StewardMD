@@ -32,7 +32,7 @@
   var KEY_ENGINE = "stewardmd.maikEngine";
   var KEY_LLM_FIRST = "smd_maik_llm_first";      // home.js maikLLMFirst() reads this
   var ENGINES = { rag: 1, cloud: 1, local: 1 };
-  var PACK_ID = "maik-mxcore";
+  var PACK_ID = "maik-lite";   // default pin (audit T27, 2026-09-25); maik-models.js activePack() agrees
   // The pack the clinician ASKED for that is not installed yet. Kept separate from the ANSWERING
   // pack (SMD_MAIK_MODELS.activePack) on purpose: picking a model to download must never pull the
   // rug from under the model currently answering. That exact confusion presented as "no answer".
@@ -455,12 +455,92 @@
     return Promise.resolve(D.answer(q)).catch(function () { return null; });
   }
 
+  /* CODE LOOKUPS (owner, 2026-09-24: "ICD code of BZD poisoning" came back "not found" from MaiK Lite
+   * AND MaiK Cloud while icd/icd10.min.json on the phone holds T42.4). "ICD code of X", "Aarogyasri
+   * package for Y" are lookups in the app's own reference databases (ICD-10/11 in D1 with the bundled
+   * offline ICD-10 set; government-scheme packages in D1), not questions for a model. Same contract
+   * as doseAnswer: runs BEFORE the engine choice, so cloud, on-device and KB-only answer identically
+   * and no model can invent a code; anything it cannot answer returns null and the normal path runs. */
+  var CODE_ASK = /\b(icd(?:\s*-?\s*1[01])?|a+r+o+gya?sri|aarogyasri|pmjay|ayushman|vaidya\s*seva|(?:govt?\.?|government)\s*scheme|scheme\s*(?:code|codes|rate|rates|package|packages)|package\s*(?:code|codes|rate|rates|amount))\b/i;
+  var CODE_STRIP = /\b(what(?:'?s| is| are)?|whats|the|a|an|please|pls|tell|me|us|give|find|search|look\s*up|show|for|of|in|under|is|are|its|it|which|and|icd|10|11|cm|codes?|coding|number|no\.?|diagnosis|dx|a+r+o+gya?sri|aarogyasri|pmjay|ayushman|bharat|vaidya|seva|ntr|dr|govt?\.?|government|schemes?|packages?|rates?|amount)\b/gi;
+  // Bedside shorthand the ICD titles never use.
+  var CODE_ABBR = { bzd: "benzodiazepine", bdz: "benzodiazepine", benzo: "benzodiazepine", benzos: "benzodiazepine", op: "organophosphate", opc: "organophosphate", opp: "organophosphate",
+    tb: "tuberculosis", ptb: "pulmonary tuberculosis", mi: "myocardial infarction", ami: "acute myocardial infarction", stemi: "st elevation myocardial infarction", dm: "diabetes mellitus", t2dm: "type 2 diabetes mellitus",
+    htn: "hypertension", ckd: "chronic kidney disease", copd: "chronic obstructive pulmonary disease", uti: "urinary tract infection", cva: "stroke", dka: "diabetic ketoacidosis", af: "atrial fibrillation",
+    chf: "heart failure", pe: "pulmonary embolism", dvt: "deep vein thrombosis", aki: "acute kidney injury", ards: "acute respiratory distress syndrome", od: "poisoning", overdose: "poisoning" };
+  function codeIntent(q) {
+    var s = String(q || "").trim();
+    if (!s || s.length > 200 || !CODE_ASK.test(s)) return null;
+    var scheme = /(a+r+o+gya?sri|aarogyasri|pmjay|ayushman|vaidya\s*seva|scheme|package)/i.test(s);
+    var icd = /\bicd\b/i.test(s) || !scheme;
+    var typed = s.match(/\b([A-Z]\d{2}(?:\.\d{1,2})?)\b/);          // "what is T42.4": a code typed as the question
+    var subject = typed ? typed[1]
+      : s.replace(/[?.,!:;"'()]/g, " ").replace(CODE_STRIP, " ").replace(/\s+/g, " ").trim()
+         .split(" ").map(function (w) { return CODE_ABBR[w.toLowerCase()] || w; }).join(" ");
+    if (!subject || subject.length < 2) return null;
+    return { subject: subject, icd: icd, scheme: scheme };
+  }
+  function schemePackages(subject) {
+    var W = window, nav = (typeof navigator !== "undefined") ? navigator : null;
+    if (nav && nav.onLine === false) return Promise.resolve(null);              // null = needs the network
+    var base = (W && W.AI_PROXY) ? String(W.AI_PROXY).replace(/\/api\/ai$/, "") : "";
+    var f = (W && W.fetch) ? function (u) { return W.fetch(u); } : fetch;
+    function ask(q) {
+      return f(base + "/api/schemes/search?q=" + encodeURIComponent(String(q).slice(0, 80)) + "&limit=8")
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { var rows = (j && (j.results || j.packages)) || []; return Array.isArray(rows) ? rows : []; });
+    }
+    return ask(subject).then(function (rows) {
+      // The AP seed spells one common word "Poisioning"; a miss on "poisoning" retries that spelling.
+      if (!rows.length && /poison/i.test(subject)) return ask(subject.replace(/poisoning/i, "poisioning"));
+      return rows;
+    }).catch(function () { return null; });
+  }
+  function codeAnswer(kind, args) {
+    if (!/^explain/.test(kind)) return null;
+    var it = codeIntent(questionOf(kind, args));
+    if (!it) return null;
+    var jobs = [];
+    if (it.icd) jobs.push(icdCandidates(it.subject).then(function (c) { return { icd: (c && c.candidates) || [] }; }, function () { return { icd: [] }; }));
+    if (it.scheme) jobs.push(schemePackages(it.subject).then(function (rows) { return { scheme: rows }; }));
+    return Promise.all(jobs).then(function (parts) {
+      var icd = [], scheme, askedScheme = false;
+      parts.forEach(function (p) { if (p.icd) icd = p.icd; if ("scheme" in p) { askedScheme = true; scheme = p.scheme; } });
+      var out = [], codes = [];
+      if (icd.length) {
+        var top = icd.slice(0, 5);
+        out.push("**ICD code for " + it.subject + "**");
+        top.forEach(function (r) {
+          codes.push(r.code);
+          out.push("- **" + r.code + "** " + String(r.title || "").trim() + (r.system && !/icd-?10/i.test(String(r.system)) ? " (" + r.system + ")" : ""));
+        });
+        if (icd.length > top.length) out.push("_" + (icd.length - top.length) + " more in Home > ICD codes._");
+      }
+      if (askedScheme) {
+        if (scheme === null) out.push((out.length ? "\n" : "") + "Scheme package rates are looked up live in the scheme database and need the network.");
+        else if (scheme.length) {
+          out.push((out.length ? "\n" : "") + "**Scheme packages for " + it.subject + "**");
+          scheme.slice(0, 6).forEach(function (p) {
+            var label = (p.scheme_name || p.scheme || "") + (p.state ? " (" + p.state + ")" : "");
+            out.push("- **" + (p.treatment_code || p.code || "") + "** " + (p.treatment_name || p.name || "") +
+              (p.package_amount != null ? " · Rs " + p.package_amount : "") + (label ? " · " + label : ""));
+          });
+        }
+      }
+      // Nothing in either database: fall through so the model can still help (it knows common codes);
+      // the only exception is a scheme ask offline, where the honest notice beats a guessed rate.
+      if (!icd.length && !(askedScheme && (scheme === null || (scheme && scheme.length)))) return null;
+      return { text: out.join("\n"), engine: "codedb", codes: codes, grounded: true, mode: "codedb" };
+    });
+  }
+
   // ── ROUTER ──
   function route(kind, orig, self, args) {
-    var dose = doseAnswer(kind, args);
-    if (!dose) return route0(kind, orig, self, args);
-    return dose.then(function (r) {
+    var hit = doseAnswer(kind, args) || codeAnswer(kind, args);
+    if (!hit) return route0(kind, orig, self, args);
+    return hit.then(function (r) {
       if (!r) return route0(kind, orig, self, args);           // fails open: model answers instead
+      if (r.engine === "codedb") return r;
       return { text: r.text, engine: "drugdb", drug: r.drug, section: r.section, grounded: true };
     });
   }
@@ -515,7 +595,10 @@
   // If on-device is already the chosen engine at startup, warm it before the first question.
   function warmIfLocal() {
     try {
-      if (getPref() !== "local" || !localReady()) return;
+      // effective(), not the preference (audit T60, 2026-09-25): the offline stand-in (Cloud chosen,
+      // no network, a pack ready) answers on device too, and was never warmed, so its first answer
+      // always paid the cold load.
+      if (effective() !== "local") return;
       if (window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.warm) window.SMD_MAIK_LOCAL.warm(activePack());
     } catch (e) {}
   }
@@ -795,7 +878,7 @@
         '<span style="display:block;font:500 11.5px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + esc(G[code].blurb) + '</span></div>';
     }
     return '<div style="font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin:0 0 8px 2px">Every model here is a MaiK. The grade says how it was trained: MBBS, MD and DM are doctors, PhD is a scholar.</div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">' +
+      '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;margin-bottom:10px">' +
       rung("MBBS", "MAiK Lite") + rung("MD", "Medical specialists") + rung("DM", "MaiK Cloud") + rung("PhD", "General models") + '</div>';
   }
 
@@ -1336,6 +1419,17 @@
      * instead of two. Headings only: the rows are unchanged and nothing is collapsed here, because a
      * picker that hides the thing you came to tap is worse than a long one.
      */
+    /* LABS (audit T27, 2026-09-25, owner: keep the picker, no automatic tiering). Packs the registry
+     * marks `labs` (Neural, Horizon, Swift, Max, Max 2) sit in one collapsed "Labs" group at the end,
+     * still selectable and downloadable; it opens by itself when the current choice is one of them. */
+    function isLabs(o) { try { var M = window.SMD_MAIK_MODELS; return !!(o.pack && M && M.PACKS[o.pack] && M.PACKS[o.pack].labs); } catch (e) { return false; } }
+    function labsHTML(rows) {
+      if (!rows.length) return "";
+      var open = rows.some(function (o) { return o.id === cur; });
+      return '<details data-mk-labs' + (open ? " open" : "") + '><summary style="cursor:pointer;list-style:none;font:700 10.5px/1.2 var(--sans,system-ui);letter-spacing:.05em;' +
+        'text-transform:uppercase;color:var(--mk-mut,#5a7184);background:var(--mk-bg,#fff);padding:12px 16px 5px">Labs (' + rows.length + ')</summary>' +
+        rows.map(oneRowHTML).join("") + '</details>';
+    }
     function pickerGroupOf(o) {
       if (!o.pack) return "";
       // Same three shelves as Settings, from the same registry-derived grade.
@@ -1353,8 +1447,9 @@
     // registry's. "" is the hosted pair (Cloud, KB only), which stays first and unlabelled.
     var PICKER_ORDER = [""].concat(libGroups().map(function (g) { return g.title; }));
     function rowsHTML() {
-      var all = options(), bucket = {}, extra = [];
+      var all = options(), bucket = {}, extra = [], labs = [];
       all.forEach(function (o) {
+        if (isLabs(o)) { labs.push(o); return; }
         var g = pickerGroupOf(o);
         if (PICKER_ORDER.indexOf(g) === -1) { extra.push(g); }
         (bucket[g] = bucket[g] || []).push(o);
@@ -1365,7 +1460,7 @@
         var rows = bucket[g];
         if (!rows || !rows.length) return "";
         return (g ? groupHeadHTML(g) : "") + rows.map(oneRowHTML).join("");
-      }).join("");
+      }).join("") + labsHTML(labs);
     }
     /* Bars instead of prose (owner, 2026-09-21: "telling about model in simple bars or words").
      * Depth is the caps table's reasoning tier; Speed is its inverse. ponytail: speed is a proxy from
