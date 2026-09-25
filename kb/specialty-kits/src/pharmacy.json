@@ -1,0 +1,153 @@
+{
+ "id": "pharmacy",
+ "label": "Clinical Pharmacy",
+ "short": "Pharmacy",
+ "icon": "medication",
+ "group": "community",
+ "subject": "toxicology",
+ "tools": [],
+ "sections": [
+  {
+   "id": "medicine-reconciliation",
+   "title": "Medicine reconciliation",
+   "target": "home_medications",
+   "fields": [
+    { "id": "src_patient", "label": "Source: patient interview", "type": "check" },
+    { "id": "src_family", "label": "Source: family or carer", "type": "check" },
+    { "id": "src_packs", "label": "Source: medicine packs or strips brought in", "type": "check" },
+    { "id": "src_records", "label": "Source: prescriptions, discharge summary or previous records", "type": "check" },
+    { "id": "src_pharmacy", "label": "Source: community pharmacy or family doctor", "type": "check" },
+    { "id": "bpmh_done", "label": "Best possible medication history completed (including over-the-counter, herbal and AYUSH medicines)", "type": "check" },
+    { "id": "discrepancy", "label": "Discrepancies with admission orders", "type": "select", "opts": ["None", "Intentional, documented", "Intentional, not documented", "Unintentional (omission, addition or change)", "Both intentional and unintentional"] },
+    { "id": "discrepancy_details", "label": "Discrepancy details and action", "type": "textarea", "hint": "e.g. home levothyroxine omitted, prescriber informed and restarted" },
+    { "id": "allergy_verified", "label": "Allergy status verified with the patient", "type": "check" },
+    { "id": "allergy_details", "label": "Allergies and reaction", "type": "text", "set": "Known_allergies_details", "hint": "e.g. cotrimoxazole, rash; or no known drug allergy" },
+    { "id": "rec_timing", "label": "Reconciled", "type": "select", "opts": ["Within 24 hours of admission", "After 24 hours", "At transfer", "At discharge"] }
+   ]
+  },
+  {
+   "id": "renal-hepatic-check",
+   "title": "Renal and hepatic dose check",
+   "target": "management_plan",
+   "fields": [
+    { "id": "renal_check_done", "label": "Renal dose check done", "type": "check" },
+    { "id": "creatinine", "label": "Serum creatinine", "type": "number", "unit": "mg/dL" },
+    { "id": "egfr", "label": "eGFR", "type": "number", "unit": "mL/min/1.73 m2" },
+    { "id": "crcl", "label": "Creatinine clearance (Cockcroft-Gault)", "type": "number", "unit": "mL/min" },
+    { "id": "renal_status", "label": "Kidney function", "type": "select", "opts": ["Normal", "CKD, stable", "Acute kidney injury", "On dialysis"] },
+    { "id": "hepatic_check_done", "label": "Hepatic dose check done", "type": "check" },
+    { "id": "hepatic_status", "label": "Liver function", "type": "select", "opts": ["Normal", "Impaired, Child-Pugh A", "Impaired, Child-Pugh B", "Impaired, Child-Pugh C", "Acute liver injury"] },
+    { "id": "rx_weight", "label": "Weight used", "type": "number", "unit": "kg", "set": "Weight" },
+    { "id": "dose_recommendation", "label": "Recommendation to prescriber", "type": "textarea", "hint": "Medicine and the change advised, with the reference used" }
+   ]
+  },
+  {
+   "id": "high-alert-medicines",
+   "title": "High-alert medicines present",
+   "target": "management_plan",
+   "fields": [
+    { "id": "ha_anticoagulant", "label": "Anticoagulant or other antithrombotic", "type": "check" },
+    { "id": "ha_insulin", "label": "Insulin", "type": "check" },
+    { "id": "ha_opioid", "label": "Opioid", "type": "check" },
+    { "id": "ha_methotrexate", "label": "Methotrexate (oral, non-cancer use)", "type": "check" },
+    { "id": "ha_potassium", "label": "Potassium chloride concentrate or potassium phosphate injection", "type": "check" },
+    { "id": "ha_sulfonylurea", "label": "Oral sulfonylurea", "type": "check" },
+    { "id": "ha_chemo", "label": "Chemotherapy", "type": "check" },
+    { "id": "ha_other", "label": "Other high-alert medicine", "type": "text", "hint": "e.g. magnesium sulfate injection, IV oxytocin, hypertonic saline" },
+    { "id": "ha_safeguards", "label": "Safeguards and monitoring in place", "type": "text", "hint": "e.g. INR monitoring, capillary glucose checks, independent double check" }
+   ]
+  },
+  {
+   "id": "interaction-review",
+   "title": "Interaction and adverse reaction review",
+   "target": "management_plan",
+   "fields": [
+    { "id": "interaction_done", "label": "Interaction review done", "type": "check" },
+    { "id": "interaction_severity", "label": "Most significant interaction", "type": "select", "opts": ["None found", "Minor, no change", "Moderate, monitor", "Major, change advised", "Contraindicated combination"] },
+    { "id": "interaction_details", "label": "Interaction details", "type": "textarea", "hint": "Medicines involved, effect and action advised" },
+    { "id": "duplication", "label": "Therapeutic duplication found", "type": "check" },
+    { "id": "adr_suspected", "label": "Suspected adverse drug reaction", "type": "select", "opts": ["None", "Yes, reported to PvPI", "Yes, report pending"] },
+    { "id": "adr_details", "label": "Reaction details", "type": "text", "hint": "Suspected medicine, reaction, onset and outcome" }
+   ]
+  },
+  {
+   "id": "adherence-counselling",
+   "title": "Adherence and counselling",
+   "target": "management_plan",
+   "fields": [
+    { "id": "adherence", "label": "Adherence before admission", "type": "select", "opts": ["Taking as prescribed", "Misses doses sometimes", "Misses doses often", "Stopped on own"] },
+    { "id": "nonadherence_reason", "label": "Main reason for missed doses", "type": "select", "opts": ["Not applicable", "Cost", "Side effects", "Forgets", "Did not understand instructions", "Medicine not available", "Feels well, thinks not needed"] },
+    { "id": "counselled_who", "label": "Counselled", "type": "select", "opts": ["Patient", "Carer", "Patient and carer"] },
+    { "id": "counselling_given", "label": "Counselling given on purpose, timing and side effects", "type": "check" },
+    { "id": "device_technique", "label": "Inhaler, insulin pen or other device technique checked", "type": "check" },
+    { "id": "medicine_list_given", "label": "Written medicine list given", "type": "check" },
+    { "id": "teach_back", "label": "Understanding confirmed by teach-back", "type": "check" }
+   ]
+  },
+  {
+   "id": "pharmacy-red-flags",
+   "title": "Pharmacy red flags",
+   "target": "management_plan",
+   "alert": "Serious interaction or dosing error found: contact the prescriber before the next dose is given, and document the outcome.",
+   "fields": [
+    { "id": "rf_interaction", "label": "Serious or contraindicated interaction", "type": "check" },
+    { "id": "rf_dose_error", "label": "Dosing error (dose, frequency, route or formulation)", "type": "check" },
+    { "id": "rf_renal_hepatic", "label": "Dose not adjusted for kidney or liver function", "type": "check" },
+    { "id": "rf_allergy", "label": "Medicine prescribed despite a documented allergy", "type": "check" },
+    { "id": "rf_omission", "label": "Critical medicine omitted (e.g. insulin, anticoagulant, antiepileptic)", "type": "check" },
+    { "id": "rf_high_alert", "label": "High-alert medicine without the monitoring it needs", "type": "check" },
+    { "id": "rf_serious_adr", "label": "Serious adverse drug reaction suspected", "type": "check" }
+   ]
+  }
+ ],
+ "investigations": [
+  { "label": "Serum creatinine", "query": "creatinine" },
+  { "label": "Blood urea", "query": "urea" },
+  { "label": "Serum electrolytes", "query": "electrolytes" },
+  { "label": "Liver function tests", "query": "LFT" },
+  { "label": "PT and INR", "query": "PT INR" },
+  { "label": "APTT", "query": "APTT" },
+  { "label": "CBC", "query": "CBC" },
+  { "label": "HbA1c", "query": "HbA1c" },
+  { "label": "ECG (QTc)", "query": "ECG" },
+  { "label": "Serum digoxin level", "query": "digoxin" },
+  { "label": "Serum phenytoin level", "query": "phenytoin" },
+  { "label": "Serum valproate level", "query": "valproate" },
+  { "label": "Serum lithium level", "query": "lithium" },
+  { "label": "Vancomycin trough level", "query": "vancomycin" }
+ ],
+ "orderSets": [
+  { "id": "renal-hepatic-dosing", "label": "Renal and hepatic dosing panel", "tests": ["creatinine", "urea", "electrolytes", "LFT"] },
+  { "id": "anticoagulant-monitoring", "label": "Anticoagulant monitoring panel", "tests": ["PT INR", "APTT", "CBC", "creatinine"] }
+ ],
+ "protocols": ["anticoagulant-associated-bleeding", "heparin-induced-thrombocytopenia", "perioperative-anticoagulation-management", "vte-prophylaxis-medical-inpatients", "hypoglycaemia", "inpatient-hyperglycaemia", "hyperkalaemia", "hypokalaemia", "acute-kidney-injury", "chronic-kidney-disease", "anaphylaxis", "sjs-ten", "serotonin-syndrome", "neuroleptic-malignant-syndrome", "opioid-overdose", "paracetamol-overdose", "tricyclic-antidepressant-overdose", "poisoning-general-approach", "surgical-antibiotic-prophylaxis", "clostridioides-difficile-infection"],
+ "calculators": ["crcl", "ckdepi", "mdrd", "egfr_cysc", "schwartz", "kdigo_aki", "childpugh", "meld", "ibw", "adjbw", "lbm", "bmi", "bsa", "steroid_conv", "mme", "phenytoin", "qtc", "qtcf", "naranjo", "hasbled", "chadsvasc", "hunter_serotonin"],
+ "advice": [
+  {
+   "id": "medicine-list",
+   "title": "Keep a list of your medicines",
+   "target": "diet_lifestyle_advice",
+   "text": "Keep an up-to-date list of every medicine you take, including those bought without a prescription, herbal and home remedies, and show it to every doctor and pharmacist. Bring all your medicines with you each time you come to hospital."
+  },
+  {
+   "id": "high-alert-medicines",
+   "title": "Medicines that need extra care",
+   "target": "follow_up_advice",
+   "text": "Some medicines, such as blood thinners, insulin and strong pain killers, can cause serious harm if taken wrongly. Take them exactly as instructed, do not change or stop them on your own, and come to hospital at once if you feel unwell after taking them."
+  },
+  {
+   "id": "report-side-effects",
+   "title": "Side effects of medicines",
+   "target": "follow_up_advice",
+   "text": "If you think a medicine has caused a side effect, tell your doctor or pharmacist. Side effects can be reported to the Pharmacovigilance Programme of India to make medicines safer for everyone."
+  }
+ ],
+ "sources": [
+  { "org": "WHO", "title": "The High5s Project: Standard operating protocol for medication reconciliation, version 3", "year": 2014, "url": "https://cdn.who.int/media/docs/default-source/patient-safety/high5s/h5s-sop.pdf?sfvrsn=594d8e49_4" },
+  { "org": "Institute for Safe Medication Practices", "title": "ISMP list of high-alert medications in acute care settings", "year": 2024, "url": "https://www.ismp.org/system/files/resources/2024-01/ISMP_HighAlert_AcuteCare_List_010924_MS5760.pdf" },
+  { "org": "WHO", "title": "Medication safety in transitions of care", "year": 2019, "url": "https://www.who.int/publications/i/item/WHO-UHC-SDS-2019.9" },
+  { "org": "WHO", "title": "Medication safety in high-risk situations", "year": 2019, "url": "https://www.who.int/publications/i/item/WHO-UHC-SDS-2019.10" },
+  { "org": "CDSCO, Government of India", "title": "Pharmacovigilance Programme of India (PvPI): adverse drug reaction reporting", "year": 2022, "url": "https://cdsco.gov.in/opencms/opencms/en/PvPI/" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}

@@ -15,6 +15,8 @@ settings toggles. Category chips filter; an "Ask MaiK about ..." row is always l
 - Registry exposures: `window.SMD_HOME_TOOLS` (home.js), `window.SMD_SETTINGS_INDEX`
   (sidebar-redesign.js), `window.SMD_KB` (reasoning.js), `SMD_ICD.openCode` (icd.js)
 - UI test: `test/run-universal-search.mjs`
+- Protocols category (`proto`, 2026-09-25): `protoProvider` over `window.SMD_KBPROTO` ([[Clinical Protocols]]);
+  aliases ride in `kw`. Returns nothing when `smd_kb_protocols` is off.
 
 ## Gotchas
 - `app.js` is minified with no source. The legacy `#smdSearchPanel` and its three listeners
