@@ -4901,7 +4901,7 @@
     "#wDicom canvas{position:absolute;inset:0;width:100%;height:100%;display:block}" +
     "#wDicom .w-dv-ro{position:absolute;left:8px;bottom:8px;font-size:12px;color:#cfe3ec;text-shadow:0 1px 2px #000;pointer-events:none;line-height:1.5}" +
     "#wDicom .w-dv-msg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:80%;text-align:center;background:#1f2a31;padding:12px 16px;border-radius:10px}" +
-    "#wDicom .w-dv-note{padding:4px 8px;font-size:12px;color:#ffd54f;background:#11181d}" +
+    "#wDicom .w-dv-note{padding:4px 8px;font-size:12px;color:#cfe3ec;background:#1f2a31}" +
     "@media (max-width:640px){#wDicom .w-dv-main{flex-direction:column}#wDicom .w-dv-series{width:auto;max-height:96px;flex-direction:row}#wDicom .w-dv-series .w-dv-b{width:auto;flex:none}}";
   function dvOpen(studyId) {
     if (!studyId) return;
