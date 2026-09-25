@@ -5,8 +5,14 @@
  *
  *   node --experimental-test-module-mocks test/run-opd-fullstack-e2e.mjs [--shot <dir>]
  *
- * Chrome: /Applications/Google Chrome.app (or $CHROME). Firebase's gstatic scripts are blocked (staff PIN sign-in
- * does not use them; the page treats them as absent), so the run is hermetic.
+ * Chrome: $CHROME, else /Applications/Google Chrome.app on macOS, else /opt/pw-browsers/chromium on Linux (with
+ * --no-sandbox). Firebase's gstatic scripts are blocked (staff PIN sign-in does not use them; the page treats them as
+ * absent), so the run is hermetic.
+ *
+ * Scenarios: 1 boot, 2 walk-in, 3 priority with a reason, 4 live boards (console + wall display, and a hidden console
+ * catching up), 5 offline desk (series on load, OA slip, closed tab, sync), 6 running late (queue.msg.delayed),
+ * 7 day close (figures, WhatsApp settings, Send now, the hourly job once), 8 result back (item 10), 9 refund and free
+ * review (clinic-billing.html, the console's Bill page), 10 every script the two pages load returns 200.
  */
 import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
@@ -97,7 +103,8 @@ async function main() {
     if (m.method === "Runtime.exceptionThrown") t.errors.push("EXC " + ((m.params.exceptionDetails.exception && m.params.exceptionDetails.exception.description) || m.params.exceptionDetails.text));
     if (m.method === "Runtime.consoleAPICalled" && m.params.type === "error") t.errors.push("ERROR " + m.params.args.map((a) => a.value || a.description || "").join(" "));
     if (m.method === "Network.responseReceived") t.responses.push({ url: m.params.response.url, status: m.params.response.status, type: m.params.type, mime: m.params.response.mimeType });
-    if (m.method === "Network.loadingFailed" && !/gstatic/.test(m.params.errorText + "")) t.responses.push({ url: m.params.requestId, status: 0, failed: m.params.errorText, type: m.params.type });
+    if (m.method === "Network.requestWillBeSent") (t.urls || (t.urls = {}))[m.params.requestId] = m.params.request.url;
+    if (m.method === "Network.loadingFailed") { const u = (t.urls && t.urls[m.params.requestId]) || m.params.requestId; if (!/gstatic\.com/.test(u)) t.responses.push({ url: u, status: 0, failed: m.params.errorText || m.params.blockedReason || "", type: m.params.type }); }
   };
   const adminTok = await H.staffToken(ORG, H.idFor(ADMIN));
 
@@ -255,6 +262,175 @@ async function scenarios3to9(ctx) {
   await o2.shot("5b-synced");
   ok(o2.errors.filter((e) => !/Failed to fetch|ERR_INTERNET_DISCONNECTED|NetworkError/.test(e)).length === 0, "no console exceptions: " + o2.errors.slice(0, 3).join(" | "));
   await o2.close();
+
+  // ---------------------------------------------------------------- 6
+  section("6 running late");
+  const doctor2Tok = await H.staffToken(ORG, H.idFor(S.DOCTOR2));
+  const late = [];
+  for (const [name, mobile] of [["Late One", "9811100001"], ["Late Two", "9811100002"], ["Late Three", "9811100003"]]) {
+    const q = await api(adminTok, "pool", { orgId: ORG, name, mobile });
+    ok(q.__status === 200, "API: " + name + " checked in " + q.__status);
+    const a = await api(adminTok, "assign-room", { orgId: ORG, ticketId: q.ticket.id, roomId: room2.id });
+    ok(a.__status === 200, "API: routed to Room 2 " + a.__status + " " + (a.error || ""));
+    late.push({ name, mobile });
+  }
+  const lateT = async () => { const out = []; for (const x of late) out.push(Object.assign({ mobile: x.mobile }, await byName(x.name))); return out; };
+  let before6 = await lateT();
+  ok(before6.every((t) => t.roomId === room2.id && t.status !== "cancelled"), "server: all three wait in Room 2");
+  ok(before6.every((t) => t.n_etaTold > 0), "server: each carries the estimate they were told (n_etaTold) " + JSON.stringify(before6.map((t) => t.n_etaTold)));
+  const room2Sid = before6[0].sessionId;
+  const sentMark = sent.length;
+  const br = await api(doctor2Tok, "session/status", { sessionId: room2Sid, doctorStatus: "break" });
+  ok(br.__status === 200 && br.session && br.session.doctorStatus === "break", "API: Dr Second goes on a break " + br.__status + " " + (br.error || ""));
+  const lateMsgs = () => sent.slice(sentMark).filter((m) => /running a little behind/.test(m.body));
+  await waitFor(() => lateMsgs().length >= 2, 4000);
+  const after6 = await lateT();
+  const next6 = after6.find((t) => t.position === 1), rest6 = after6.filter((t) => t.position > 1);
+  ok(!!next6 && rest6.length === 2, "positions: one next, two behind " + JSON.stringify(after6.map((t) => t.position)));
+  const toNum = (m) => (/"to":"(\d+)"/.exec(m.body) || [])[1] || "";
+  const msgs6 = lateMsgs();
+  ok(msgs6.length === 2 && rest6.every((t) => msgs6.some((m) => toNum(m).endsWith(t.mobile))), "queue.msg.delayed went to the two behind " + JSON.stringify(msgs6.map(toNum)));
+  ok(!!next6 && !msgs6.some((m) => toNum(m).endsWith(next6.mobile)), "never to the next patient (" + (next6 && next6.mobile) + ")");
+  ok(msgs6.every((m) => m.url === S.WA_URL && /\d{1,2}:\d{2}/.test(m.body)), "over WhatsApp, with the new time as a clock time");
+  ok(after6.filter((t) => t.position > 1).every((t) => t.n_delays === 1), "server: each told once (n_delays 1)");
+  const again = await api(doctor2Tok, "session/status", { sessionId: room2Sid, doctorStatus: "break" });
+  ok(again.__status === 200 && lateMsgs().length === 2, "a second break inside 30 minutes sends nothing more");
+  await api(doctor2Tok, "session/status", { sessionId: room2Sid, doctorStatus: "available" });
+
+  // ---------------------------------------------------------------- 7
+  section("7 day close");
+  const srv = await api(adminTok, "day-close?orgId=" + ORG);
+  ok(srv.__status === 200 && srv.close && srv.close.pulse, "GET /day-close answers");
+  await c.call("Page.bringToFront");
+  await c.click("#dayclose");
+  ok(!!(await c.until(`return document.querySelector(".dc .dc-grid") ? 1 : 0`, 8000)), "Close the day opens with its figures");
+  const dcText = await c.ev(`return document.querySelector(".dc").innerText`);
+  const pulse = srv.close.pulse;
+  const kv = (label) => { const m = new RegExp(label + "\\s*\\n\\s*([^\\n]+)", "i").exec(dcText || ""); return m ? m[1].trim() : null; };
+  ok(kv("Patients seen") === String(pulse.seen || 0), "Patients seen matches the server: " + kv("Patients seen") + " = " + pulse.seen);
+  ok(new RegExp((pulse.registered || 0) + " registered").test(dcText), "registered matches the server: " + pulse.registered);
+  const m7 = srv.money;
+  ok(!!m7 && kv("Takings") === "₹" + Math.round((m7.total || 0) / 100).toLocaleString("en-IN"), "Takings matches the shift report: " + kv("Takings") + " vs " + (m7 && m7.total));
+  ok(srv.unbilled != null && new RegExp("Not yet paid\\s*\\n\\s*" + srv.unbilled).test(dcText), "Not yet paid matches: " + srv.unbilled);
+  (srv.close.rooms || []).forEach((r) => ok(new RegExp(r.room).test(dcText), "room row: " + r.room));
+  ok(!!(await c.until(`return document.getElementById("dcWaSave") ? 1 : 0`, 5000)), "the WhatsApp settings are on the sheet");
+  await c.ev(`document.getElementById("dcWaOn").checked=true; document.getElementById("dcWaHour").value="0"; document.getElementById("dcWaMob").value="98765 12345"; return 1;`);
+  await c.click("#dcWaSave");
+  const saved = await c.until(`var s=document.getElementById("dcWaSt"); return s && /^Saved/.test(s.textContent) ? s.textContent : 0`, 5000);
+  ok(!!saved && /[•*]{3,}/.test(saved) && !/9876512345|98765 12345/.test(saved), "saved; the number comes back masked: " + saved);
+  const ph = await c.ev(`return document.getElementById("dcWaMob").placeholder + "|" + document.getElementById("dcWaMob").value`);
+  ok(/\(saved\)\|$/.test(ph) && !/12345/.test(ph.split("|")[0].replace(/\*+/, "")) , "the field shows the masked number as a placeholder, empty value: " + ph);
+  const gs = await api(adminTok, "org/day-close-settings?orgId=" + ORG);
+  ok(gs.__status === 200 && gs.settings && gs.settings.enabled === true && gs.settings.hour === 0 && !JSON.stringify(gs).includes("9876512345"), "server: on, hour 0, the full number never returned " + JSON.stringify(gs.settings));
+  ok(JSON.stringify(docs.get("q_orgs/" + ORG).fields.wardsynq.dayClose || {}).includes("9876512345"), "server: the number is stored");
+  await c.shot("7a-day-close");
+  const mark7 = sent.length;
+  await c.click("#dcWaNow");
+  const nowSaid = await c.until(`var s=document.getElementById("dcWaSt"); return s && /^Sent to/.test(s.textContent) ? s.textContent : 0`, 5000);
+  ok(!!nowSaid, "Send now says sent: " + nowSaid);
+  const dcMsgs = sent.slice(mark7).filter((m) => m.url === S.WA_URL);
+  ok(dcMsgs.length === 1 && /919876512345/.test(dcMsgs[0].body), "one WhatsApp to the saved number");
+  const names = ["Asha Rao", "Offline Kumar", "Late One", "Late Two", "Late Three", "Asha", "Kumar"];
+  ok(dcMsgs.length === 1 && !names.some((n) => dcMsgs[0].body.includes(n)) && /\d/.test(dcMsgs[0].body), "counts and totals only, no patient named: " + (dcMsgs[0] && JSON.parse(dcMsgs[0].body).text.split("\n").slice(0, 3).join(" / ")));
+  const mark7b = sent.length;
+  const cron = async (h) => (await realFetch(BASE + "/api/queue/ops/day-close-all", { method: "POST", headers: Object.assign({ "Content-Type": "application/json" }, h), body: "{}" })).json();
+  const denied = await cron({});
+  ok(denied.ok === false, "day-close-all without the admin token is refused: " + denied.error);
+  const r1 = await cron({ "X-Admin-Token": ENV.UPDATES_ADMIN_TOKEN });
+  const r2 = await cron({ "X-Admin-Token": ENV.UPDATES_ADMIN_TOKEN });
+  const cronMsgs = sent.slice(mark7b).filter((m) => m.url === S.WA_URL);
+  ok(r1.ok && (r1.results || []).some((x) => x.orgId === ORG && x.sent === true), "the hourly job sends it: " + JSON.stringify(r1.results));
+  ok((r2.results || []).some((x) => x.orgId === ORG && x.skipped === "already"), "the second run skips it (already sent today)");
+  ok(cronMsgs.length === 1, "sent exactly once across two runs (" + cronMsgs.length + ")");
+  await c.click("#cx");
+
+  // ---------------------------------------------------------------- 8
+  section("8 result back");
+  let a8 = await byName("Asha Rao");
+  ok(a8.status === "at_diagnostics", "Asha was sent for tests (status " + a8.status + ")");
+  const { patientIdForMrn } = await import("../functions/_wardsynq/opd-identity.js");
+  const recId = patientIdForMrn(a8.mrn);
+  const encs = await H.H.RECORD.byPatient("tenant-wsq", "Encounter", recId).catch((e) => { console.log("   byPatient: " + e.message); return []; });
+  const enc = (encs || []).map((e) => e.resource || e).find((e) => e && (e.status === "in-progress" || e.status === "arrived" || e.status === "planned")) || (encs || []).map((e) => e.resource || e)[0];
+  ok(!!enc, "server: the OPD visit is in the clinical record (" + (a8.encounterSync || "") + ", " + (encs || []).length + " encounters) for " + recId);
+  if (enc) {
+    const encounterId = enc.id || enc.encounterId;
+    const order = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId, code: "Haemoglobin", category: "laboratory" });
+    ok(order.__status === 200, "the doctor orders a haemoglobin " + order.__status + " " + (order.error || order.detail || ""));
+    const col = await as(LAB, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: order.orderId, specimenType: "Whole blood" });
+    ok(col.__status === 200, "the lab collects " + col.__status);
+    const rel = await as(LAB, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: order.orderId, patientId: recId, encounterId, status: "final", tests: [{ test: "Haemoglobin", value: 12.1, unit: "g/dL" }] });
+    ok(rel.__status === 200 && rel.opdRecalled === 1, "the lab releases; the OPD patient is recalled (" + rel.opdRecalled + ")");
+    a8 = await byName("Asha Rao");
+    ok(a8.status === "waiting" && a8.resultReadyAt > 0, "server: Asha back to waiting with resultReadyAt");
+    ok(!!(await c.until(`var p=document.getElementById("opdPulse"); return p && /Results back/i.test(p.innerText) ? 1 : 0`, 6000)), "the pulse shows Results back");
+    ok(!!(await c.until(`var l=document.querySelector('[data-opd-lane="waiting"]'); return l && /Asha Rao/.test(l.innerText) ? 1 : 0`, 6000)), "the console shows Asha back in the room queue");
+    await c.shot("8-results-back");
+  }
+  ok(c.errors.length === 0, "no console exceptions: " + c.errors.slice(0, 3).join(" | "));
+
+  // ---------------------------------------------------------------- 9
+  section("9 refund + free review");
+  ok(!!(await c.until(`return /₹500 unbilled/.test(document.getElementById("app").innerText) ? 1 : 0`, 4000)), "the card reads the 500 fee as 500 unbilled (was 1000)");
+  const b = await newTab("cashier");
+  await b.nav(BASE + "/clinic-billing?orgId=" + ORG);
+  ok(!!(await b.until(`return document.getElementById("mrn") ? 1 : 0`, 8000)), "the cashier screen opens signed in (the console's Bill page)");
+  await b.ev(`document.getElementById("mrn").value=${JSON.stringify(a8.mrn)}; document.getElementById("go").click(); return 1;`);
+  ok(!!(await b.until(`return document.getElementById("inv") ? 1 : 0`, 6000)), "Asha's unbilled consultation is listed");
+  await b.click("#inv");
+  ok(!!(await b.until(`return document.querySelector('.pays [data-m="cash"]') ? 1 : 0`, 6000)), "an invoice is raised");
+  const due = await b.ev(`return document.querySelector(".tot").innerText`);
+  ok(/500\.00/.test(due), "amount due 500: " + due.replace(/\s+/g, " "));
+  await b.click('.pays [data-m="cash"]');
+  ok(!!(await b.until(`return /Payment recorded/.test(document.body.innerText) ? 1 : 0`, 6000)), "paid in cash");
+  const ord = () => [...docs].filter(([p, d]) => p.startsWith("q_orders/") && d.fields.patientId === a8.mrn).map(([p, d]) => ({ id: p.slice(9), ...d.fields }));
+  ok(ord().length === 1 && ord()[0].status === "paid", "server: the order is paid");
+  await b.ev(`window.prompt=function(){ return "doctor unavailable"; }; document.getElementById("next").click(); return 1;`);
+  await b.ev(`document.getElementById("mrn").value=${JSON.stringify(a8.mrn)}; document.getElementById("go").click(); return 1;`);
+  ok(!!(await b.until(`return document.querySelector("[data-refund]") ? 1 : 0`, 6000)), "the paid consultation has a Refund button");
+  await b.click("[data-refund]");
+  const rf = await b.until(`var e=document.getElementById("err"); return e && /Refunded/.test(e.textContent) ? e.textContent : 0`, 6000);
+  ok(!!rf && /500/.test(rf), "refunded with a reason: " + rf);
+  const o9 = ord()[0];
+  ok(o9.status === "refunded" && /doctor unavailable/.test(JSON.stringify(o9)), "server: order refunded, reason kept " + o9.status);
+  const shift = await realFetch(BASE + "/api/queue/bill/shift?orgId=" + ORG, { headers: { "X-Staff-Token": adminTok } }).then((r) => r.json());
+  ok(shift.ok && shift.refunds && shift.refunds.total === 50000 && shift.net === (shift.total || 0) - 50000, "the shift report nets the refund: " + JSON.stringify({ total: shift.total, refunds: shift.refunds, net: shift.net }));
+  await b.shot("9a-refund");
+  // Free review: the hospital's window (no setter on the console: set on the hospital record), a paid consult, then a follow-up.
+  docs.get("q_orgs/" + ORG).fields.wardsynq = Object.assign({}, docs.get("q_orgs/" + ORG).fields.wardsynq, { freeReviewDays: 7 });
+  const tariffId = [...docs.keys()].find((k) => k.startsWith("q_tariff/")).slice(9);
+  const rv = await api(adminTok, "patient/register", { orgId: ORG, name: "Review Patel", mobile: "9822200001", gender: "male", ageYears: 50 });
+  ok(rv.__status === 200 && rv.mrn, "a patient registered " + (rv.mrn || rv.error));
+  const v1 = await api(adminTok, "pool", { orgId: ORG, name: "Review Patel", mobile: "9822200001", mrn: rv.mrn, visitType: "new" });
+  const o1 = await api(adminTok, "bill/order", { orgId: ORG, patientId: rv.mrn, ticketId: v1.ticket.id, tariffId, qty: 1 });
+  const i1 = await api(adminTok, "bill/invoice", { orgId: ORG, patientId: rv.mrn });
+  const p1 = await api(adminTok, "bill/pay", { orgId: ORG, invoiceId: (i1.invoice && i1.invoice.id) || i1.id, method: "upi" });
+  ok(o1.ok && p1.ok, "first visit: 500 consultation paid " + JSON.stringify({ o: o1.ok, i: i1.ok, p: p1.ok, e: p1.error || i1.error }));
+  const v2 = await api(adminTok, "pool", { orgId: ORG, name: "Review Patel", mobile: "9822200001", mrn: rv.mrn, visitType: "followup" });
+  const fo2 = await api(adminTok, "bill/order", { orgId: ORG, patientId: rv.mrn, ticketId: v2.ticket.id, tariffId, qty: 1 });
+  const f2 = fo2.ok && docs.get("q_orders/" + fo2.id).fields;
+  ok(!!f2 && f2.unitPrice === 0 && /\(free review\)/.test(f2.name), "follow-up inside 7 days: free review at 0 " + JSON.stringify(f2 && { p: f2.unitPrice, n: f2.name }));
+  await b.nav(BASE + "/clinic-billing?orgId=" + ORG);
+  await b.until(`return document.getElementById("mrn") ? 1 : 0`, 8000);
+  await b.ev(`document.getElementById("mrn").value=${JSON.stringify(rv.mrn)}; document.getElementById("go").click(); return 1;`);
+  ok(!!(await b.until(`return /free review/.test(document.body.innerText) && /₹0\.00/.test(document.body.innerText) ? 1 : 0`, 6000)), "the cashier shows the follow-up as free review, 0.00");
+  await b.shot("9b-free-review");
+  ok(b.errors.length === 0, "no cashier exceptions: " + b.errors.slice(0, 3).join(" | "));
+  await b.close();
+
+  // ---------------------------------------------------------------- scripts
+  section("10 scripts");
+  const scriptsOf = async (t) => t.ev(`return JSON.stringify([].slice.call(document.scripts).filter(function(s){return s.src && s.src.indexOf(location.origin)===0;}).map(function(s){return s.src;}))`).then(JSON.parse);
+  for (const [t, page] of [[c, "opd.html"], [d, "opd-display.html"]]) {
+    const srcs = await scriptsOf(t);
+    const bad = [];
+    for (const u of srcs) { const r = await realFetch(u); if (r.status !== 200) bad.push(u + " " + r.status); }
+    ok(srcs.length > 0 && bad.length === 0, page + ": all " + srcs.length + " same-origin scripts return 200 " + bad.join(", "));
+    const netBad = t.responses.filter((r) => r.type === "Script" && r.status !== 200 && !/gstatic/.test(r.url));
+    ok(netBad.length === 0, page + ": no script failed in the browser " + JSON.stringify(netBad.slice(0, 3)));
+  }
+  const s404 = log.filter((x) => x.status === 404 && /\.js$/.test(x.path));
+  ok(s404.length === 0, "the server served no .js 404 " + JSON.stringify(s404.slice(0, 3)));
 
   return ctx;
 }
