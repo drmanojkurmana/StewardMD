@@ -136,6 +136,7 @@ import { getAnalytics } from "../../_analytics.js";
 import { sseFrames, sseFrameText, sseFrameUsage } from "../../_sse_parse.js";
 import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg, cacheEligibleCtx, kbFingerprint } from "../../_maik_cache.js";
+import { scrubMetaTalk, metaTalkStream } from "../../_maik_metatalk.js";   // no "the passage you sent" talk (2026-09-26)
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { findFigures } from "../../_figures.js";
@@ -438,11 +439,15 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
   const DEADLINE = _t0 + ((lim && lim.totalMs) || 60000);   // max life of the whole stream
   let _tHdr = Date.now(), _tFirst = 0;
   let buf = "", full = "", closed = false, usage = null;   // usage: Gemini's usageMetadata, carried by the LAST chunk
+  // lim.filter ({push, flush}, e.g. metaTalkStream): rewrites the text on its way out; `full` is what was sent.
+  const filt = lim && lim.filter;
+  function send(controller, t) { if (t) { full += t; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: t }) + "\n\n")); } }
   /* One exit for every ending — upstream done, idle stall, or total deadline. Always emits a done
    * event and closes, so the client settles deterministically and never waits on a dead socket. */
   function finish(controller, reason) {
     if (closed) return;
     closed = true;
+    if (filt) { try { send(controller, filt.flush()); } catch (e) {} }   // the held-back last line
     const _tm = { hdrMs: _tHdr - _t0, firstTokMs: _tFirst ? _tFirst - _t0 : null, totalMs: Date.now() - _t0 };
     if (lim && lim.model) _tm.model = lim.model;   // so a model A/B is verifiable, not assumed
     // Everything WE spend before Gemini is even called (gate, re-rank, prompt render). Without this
@@ -459,31 +464,38 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
   const rs = new ReadableStream({
     async pull(controller) {
       try {
-        // Race the read against the smaller of (idle budget, remaining total life). Without this a
-        // stalled upstream never resolves and the connection is held open until the phone gives up.
-        const budget = Math.max(1, Math.min(IDLE, DEADLINE - Date.now()));
-        let _tm2 = null;
-        const timeout = new Promise(function (res) { _tm2 = setTimeout(function () { res("__STALL__"); }, budget); });
-        const raced = await Promise.race([reader.read(), timeout]);
-        clearTimeout(_tm2);
-        if (raced === "__STALL__") {
-          try { reader.cancel(); } catch (e) {}     // settles the abandoned read and frees the socket
-          finish(controller, Date.now() >= DEADLINE ? "total" : "idle");
-          return;
-        }
-        const { value, done } = raced;
-        if (done) {
-          finish(controller, null);
-          return;
-        }
-        buf += dec.decode(value, { stream: true });
-        // Frames are CRLF-delimited by Google. Splitting on "\n\n" here matched NOTHING and was the
-        // real cause of the blank-answer streaming outage — see functions/_sse_parse.js.
-        const { frames, rest } = sseFrames(buf); buf = rest;
-        for (const frame of frames) {
-          const txt = sseFrameText(frame);
-          const fu = sseFrameUsage(frame); if (fu) usage = fu;
-          if (txt) { if (!_tFirst) _tFirst = Date.now(); full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
+        /* Read until this pull hands the client something, or the stream ends. A pull that enqueues
+         * nothing is never called again by the stream machinery, so the reader waits forever: that
+         * happened whenever a network read ended mid-frame, and it is the normal case when the filter
+         * holds back an unfinished line (2026-09-26). */
+        const sentBefore = full.length;
+        while (full.length === sentBefore) {
+          // Race the read against the smaller of (idle budget, remaining total life). Without this a
+          // stalled upstream never resolves and the connection is held open until the phone gives up.
+          const budget = Math.max(1, Math.min(IDLE, DEADLINE - Date.now()));
+          let _tm2 = null;
+          const timeout = new Promise(function (res) { _tm2 = setTimeout(function () { res("__STALL__"); }, budget); });
+          const raced = await Promise.race([reader.read(), timeout]);
+          clearTimeout(_tm2);
+          if (raced === "__STALL__") {
+            try { reader.cancel(); } catch (e) {}     // settles the abandoned read and frees the socket
+            finish(controller, Date.now() >= DEADLINE ? "total" : "idle");
+            return;
+          }
+          const { value, done } = raced;
+          if (done) {
+            finish(controller, null);
+            return;
+          }
+          buf += dec.decode(value, { stream: true });
+          // Frames are CRLF-delimited by Google. Splitting on "\n\n" here matched NOTHING and was the
+          // real cause of the blank-answer streaming outage — see functions/_sse_parse.js.
+          const { frames, rest } = sseFrames(buf); buf = rest;
+          for (const frame of frames) {
+            const txt = sseFrameText(frame);
+            const fu = sseFrameUsage(frame); if (fu) usage = fu;
+            if (txt) { if (!_tFirst) _tFirst = Date.now(); send(controller, filt ? filt.push(txt) : txt); }
+          }
         }
       } catch (e) {
         try { reader.cancel(); } catch (e2) {}
@@ -570,11 +582,11 @@ const EXPLAIN_SYS =
 const RAG_SYS =
   "You are MaiK (Medical AI Knowledge), StewardMD's clinician-assistive AI. A DETERMINISTIC RULE ENGINE has ALREADY computed the diagnosis and ranked differential (in ENGINE OUTPUT below) — that assessment is AUTHORITATIVE and is shown to the clinician separately. " +
   "You are providing INDEPENDENT CLINICAL COMMENTARY on that assessment — you are NOT answering from scratch and NOT making the diagnosis. Do NOT restate, re-rank, override, or replace the primary diagnosis. Do NOT reason primarily from your own training. " +
-  "Reason PRIMARILY from the RETRIEVED STEWARDMD KNOWLEDGE and TREATMENT RESOLUTION provided (Harrison-derived, page-cited; ICMR ▸ international-guideline ▸ Harrison precedence; hospital overlay shown separately). Your own medical knowledge is SECONDARY — use it only to connect or clarify the provided knowledge, and say so when you do. " +
+  "Reason PRIMARILY from your REFERENCE NOTES and TREATMENT RESOLUTION below (Harrison-derived; ICMR ▸ international-guideline ▸ Harrison precedence; hospital overlay shown separately). They are private: the clinician cannot see them, so never mention them or call them 'provided', and silently skip a note about a different condition. Your own medical knowledge is SECONDARY — use it only to connect or clarify. " +
   "Reply as commentary under EXACTLY these markdown headings, in this order, omitting a heading only if you have nothing evidence-based to add:\n" +
   "### Additional differentials\n### Missing investigations\n### Teaching points\n### Alternative interpretations\n" +
   "(Add '### Culture-directed antibiotic considerations' ONLY when culture/sensitivity data is provided.) " +
-  "Keep each section to 1–4 short bullets unless a LENGTH instruction below asks for more. Cite the provided sources inline (e.g. 'Harrison 22e' or the treatment tier). Prefer the treatment resolution's dosing when present; where it names a drug without a dose and a dose is clinically pivotal, you may state the standard adult reference dose labelled '(standard reference — verify locally)'. Do not fabricate figures you are unsure of. Never use patient identifiers. " +
+  "Keep each section to 1–4 short bullets unless a LENGTH instruction below asks for more. Cite sources inline (their [n], or the treatment tier). Prefer the treatment resolution's dosing when present; where it names a drug without a dose and a dose is clinically pivotal, you may state the standard adult reference dose labelled '(standard reference — verify locally)'. Do not fabricate figures you are unsure of. Never use patient identifiers. " +
   "End with exactly: 'Decision-support only — the StewardMD rule engine owns the diagnosis; verify clinically.'";
 
 // General-knowledge system prompt (gold122): used when NO deterministic diagnosis
@@ -608,10 +620,10 @@ const MEDICAL_ONLY =
  * it is appended to the other prompts, so no prompt ever holds two contradictory versions ("if the KB
  * does not cover this, SAY SO" vs "do NOT refuse or hedge because the retrieved text looks thin"). */
 const ABSTAIN_RULE =
-  "GROUND-CHECK before finalizing: answer from the RETRIEVED STEWARDMD KNOWLEDGE and solid, widely-accepted mainstream medicine. For every specific claim (a dose, threshold, cut-off, criterion or guideline statement), silently confirm it rests on one of the two. When NEITHER supports a specific figure, say it varies and to verify locally ('exact figure varies — verify locally') rather than inventing it, and never invent a guideline number or citation. A smaller, fully-defensible answer beats a fuller one with an unverifiable number in it.";
+  "GROUND-CHECK before finalizing: answer from your reference notes and solid, widely-accepted mainstream medicine. For every specific claim (a dose, threshold, cut-off, criterion or guideline statement), silently confirm it rests on one of the two. When NEITHER supports a specific figure, say, about the medicine and never about your notes, that it varies and to verify locally ('exact figure varies — verify locally') rather than inventing it, and never invent a guideline number or citation. A smaller, fully-defensible answer beats a fuller one with an unverifiable number in it.";
 const KNOWLEDGE_SYS =
   "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors, built into StewardMD. Talk like a sharp, warm senior colleague: natural, direct and genuinely useful. Answer the clinician's question (shown under 'CLINICIAN QUESTION'), using the RECENT CONVERSATION for continuity. " +
-  "Use the RETRIEVED STEWARDMD KNOWLEDGE below to ground specifics (regimens, protocols, doses), preferring it where it applies, and answer confidently from mainstream clinical knowledge where it is thin: do NOT refuse or hedge just because the retrieved text looks thin.\n" +
+  "The REFERENCE NOTES in the message are your own private notes from the StewardMD Knowledge Base: the clinician cannot see them and never sent them. Where they cover the question, ground specifics (regimens, protocols, doses) in them and prefer them; where they are thin or about something else, silently set them aside and answer confidently from mainstream clinical knowledge.\n" +
   "HOW TO ANSWER:\n" +
   "- Lead with the direct answer in the first sentence, then just enough detail.\n" +
   "- ADAPT the format. A simple or factual question -> 1-3 sentences or a few tight bullets, NO headings. A broad 'manage X' / 'in detail' question -> a few short markdown headings or bullets where they genuinely help; never pour a short answer into a template of empty headings.\n" +
@@ -621,17 +633,17 @@ const KNOWLEDGE_SYS =
   "- OPEN with ONE short **bold** lead that restates what they're asking and states your key clinical ASSUMPTION(s), e.g. \"**You're asking about empiric therapy for ICU-acquired pneumonia — I'm assuming an immunocompetent adult, no recent antibiotics, and no MRSA/Pseudomonas risk factors.**\" If an assumption is likely wrong, name the main alternative in a few words.\n" +
   "- DIFFERENTIAL / 'causes of' / compare-the-options: a GitHub-style MARKDOWN PIPE TABLE (Diagnosis/Option | Distinguishing features | [the finding columns that matter for THIS question, cells = ✓ / Sometimes / Rarely / —] | Tests to confirm or rule out). One summary line before it; terse cells; most-likely first.\n" +
   "- MANAGEMENT with real depth: follow the clinical flow, using each part ONLY where it adds value: brief interpretation/severity, how URGENT it is (time-critical action first), what to CHECK now, how to TREAT (agents with standard dose/route/duration) and, when useful, a one-line plain-language patient explanation. Never emit an empty or padded heading.\n" +
-  "- Add a short '**In India:**' note (2-4 bullets) ONLY when Indian practice MATERIALLY differs: epidemiology / pretest probability, national-programme guidance (ICMR / NVBDCP / NTEP), drug availability or common brands, resistance patterns, or cost. Ground it in the retrieved knowledge where possible; never as boilerplate.\n" +
+  "- Add a short '**In India:**' note (2-4 bullets) ONLY when Indian practice MATERIALLY differs: epidemiology / pretest probability, national-programme guidance (ICMR / NVBDCP / NTEP), drug availability or common brands, resistance patterns, or cost. Ground it in your notes where possible; never as boilerplate.\n" +
   "ENDING, in this order: when it helps, ONE natural follow-up offer as a single line (e.g. 'Want the pregnancy-safe options or the paediatric dose?'), only for something you have NOT already offered and can deliver; then, as the very LAST line with NOTHING after it, the refinement line in EXACTLY this format: @@REFINE: factor one | factor two | factor three | factor four@@ with 3-6 SHORT patient-context factors specific to THIS question that would MATERIALLY change the answer (e.g. 'mechanically ventilated / on ECMO', 'significant renal impairment', 'prolonged QTc', 'prior mold-active azole exposure', 'pregnant', 'haemodynamically unstable'). Omit it ONLY for a purely factual lookup. Never explain or introduce it; the app turns it into tappable chips.\n" +
   "SAFETY & HONESTY (non-negotiable):\n" +
-  "1. Answer ONLY what was asked. NEVER describe what is or is not in your knowledge base, the retrieval, chunks, the AI provider or model, or any internal detail (no 'the retrieved knowledge contains...', no 'no specific question was posed'), and do not tack on a long disclaimer (the UI already shows one).\n" +
+  "1. Answer ONLY what was asked, as a colleague who simply knows. NEVER mention your notes or where an answer came from (no 'the provided text/passage/context/sources', 'based on the information provided', 'this is not relevant', 'no specific question was posed'), nor any knowledge base, retrieval, AI provider, model or other internal detail. Do not tack on a long disclaimer (the UI already shows one).\n" +
   "2. Always finish: complete every thought and sentence; never trail off mid-answer.\n" +
-  "3. DOSING: give the standard adult dose/route/titration when asked. Prefer the retrieved Drug Index / protocol figure; otherwise give the widely-accepted textbook/guideline dose and append '(standard reference — verify locally)'. This is expected for well-established therapy (atropine in organophosphate poisoning, adrenaline in anaphylaxis, benzodiazepines in status): do NOT deflect a standard dose to 'consult local guidelines'. Withhold a specific number only when it is genuinely non-standard, disputed or uncertain, then give the principle and what IS established. For high-alert or narrow-therapeutic-index drugs (methotrexate, chemotherapy, insulin, digoxin, lithium, anticoagulants) and ANY weight-based, paediatric, neonatal or renally-adjusted dose, give the dosing PRINCIPLE and reference range and defer the exact figure to the Drug Index or local protocol unless the number comes from the retrieved StewardMD knowledge; never emit a single confident weight-based or high-alert dose from training alone.\n" +
+  "3. DOSING: give the standard adult dose/route/titration when asked. Prefer a Drug Index / protocol figure from your notes; otherwise give the widely-accepted textbook/guideline dose and append '(standard reference — verify locally)'. This is expected for well-established therapy (atropine in organophosphate poisoning, adrenaline in anaphylaxis, benzodiazepines in status): do NOT deflect a standard dose to 'consult local guidelines'. Withhold a specific number only when it is genuinely non-standard, disputed or uncertain, then give the principle and what IS established. For high-alert or narrow-therapeutic-index drugs (methotrexate, chemotherapy, insulin, digoxin, lithium, anticoagulants) and ANY weight-based, paediatric, neonatal or renally-adjusted dose, give the dosing PRINCIPLE and reference range and defer the exact figure to the Drug Index or local protocol unless the number is in your notes; never emit a single confident weight-based or high-alert dose from training alone.\n" +
   "4. This is general clinical education, not individualised patient advice. If it is clearly about one specific patient, answer the general question and add a short line suggesting StewardMD's Clinical Reasoning / Dx My Patient. Never use patient identifiers.\n" +
-  "5. STAY ON TOPIC: the retrieved knowledge is keyword-matched and can be OFF-TOPIC, especially for short follow-ups. Judge every chunk against the RECENT CONVERSATION; IGNORE one about a different condition and continue the conversation's topic from mainstream knowledge (a follow-up about 'first-line treatment' of the current topic must never become an answer about 'First Bite Syndrome').\n" +
+  "5. STAY ON TOPIC: your notes are keyword-matched and can be OFF-TOPIC, especially for short follow-ups. Judge each against the question and the RECENT CONVERSATION; silently skip one about a different condition (never tell the clinician it was irrelevant) and continue the conversation's topic from mainstream knowledge (a follow-up about 'first-line treatment' of the current topic must never become an answer about 'First Bite Syndrome').\n" +
   "6. DELIVER, DON'T RE-OFFER: when the clinician affirms an offer you just made ('yes', 'sure', 'go ahead', 'both') or follows up on it, deliver it now, in full (the actual doses, options or steps); never repeat the same offer or ask again. Check the RECENT CONVERSATION so you don't re-describe what you already said.\n" +
   "7. " + ABSTAIN_RULE + "\n" +
-  "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step; do not pad with unrelated content." + MEDICAL_ONLY;
+  "If the medicine itself is genuinely uncertain, say so in ONE plain sentence about the clinical question and give the best next step; never blame missing notes or sources, and do not pad with unrelated content." + MEDICAL_ONLY;
 
 /* CliniX student tutor. KNOWLEDGE_SYS is wrong for this audience in three specific ways: it opens
  * "a clinical AI assistant for qualified doctors", it enforces the two-tier @@MORE@@ / @@REFINE:@@
@@ -665,7 +677,7 @@ const TUTOR_SYS =
   "and tell them what IS established. A student cannot tell a confident wrong answer from a right one, which is exactly " +
   "why hedging honestly matters more here than with a doctor.\n" +
   "4. Do NOT emit @@MORE@@ or @@REFINE:@@ markers. The CliniX interface has no chips for them.\n" +
-  "5. Do not mention the AI provider, model, retrieval or any internal detail." + MEDICAL_ONLY;
+  "5. Do not mention the AI provider, model, retrieval, your reference notes (the student never sees them) or any internal detail; silently ignore a note that is off-topic." + MEDICAL_ONLY;
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
 // and the clinician explicitly taps "Research on the web". TinyFish does the search; Gemini writes
@@ -850,17 +862,20 @@ function renderGroundedPrompt(pkg, maxChars) {
       pkg.earlier.slice(-12).map(function (x) { return clip(String(x || ""), 100); }).filter(Boolean).join("; ") + "\n");
   }
   L = S.engine;
-  L.push("=== DETERMINISTIC ENGINE OUTPUT (AUTHORITATIVE — do not change the diagnosis) ===");
-  if (r.gate) L.push("Gate: " + clip(JSON.stringify(r.gate), 300));
+  /* A knowledge question has no differential and no patient: the two headers used to go out empty on
+   * every one of them (tokens for nothing, and an invitation to say "no patient details were given"). */
+  const hasDiff = !!(r.differential && r.differential.length);
+  if (hasDiff) L.push("=== DETERMINISTIC ENGINE OUTPUT (AUTHORITATIVE — do not change the diagnosis) ===");
+  if (hasDiff && r.gate) L.push("Gate: " + clip(JSON.stringify(r.gate), 300));
   (r.differential || []).forEach((d, i) => {
     L.push((i + 1) + ". " + d.name + " [" + d.class + ", confidence " + d.confidence + "/100]" +
       (d.supporting && d.supporting.length ? "\n   supporting: " + d.supporting.join(", ") : "") +
       (d.contradictory && d.contradictory.length ? "\n   against: " + d.contradictory.join(", ") : "") +
       (d.missing && d.missing.length ? "\n   not yet known: " + d.missing.join(", ") : ""));
   });
-  L.push("\n=== PATIENT (de-identified) ===");
   const bits = [];
   if (pc.age != null) bits.push("age " + pc.age); if (pc.sex) bits.push("sex " + pc.sex);
+  if (bits.length || pc.findings || pc.abnormalLabs || pc.labTrends || pc.cultures || pc.radiologyImpressions) L.push("\n=== PATIENT (de-identified) ===");
   if (bits.length) L.push(bits.join(", "));
   if (pc.findings) L.push("Findings: " + pc.findings.join(", "));
   if (pc.abnormalLabs) L.push("Abnormal labs: " + clip(JSON.stringify(pc.abnormalLabs), 600));
@@ -872,8 +887,11 @@ function renderGroundedPrompt(pkg, maxChars) {
   // no content loss: the first occurrence (grounding, page-cited) is kept; later duplicates dropped.
   var _seenChunk = {};
   function _fresh(t) { var k = String(t == null ? "" : t).slice(0, 90).toLowerCase().replace(/\s+/g, " ").trim(); if (!k || _seenChunk[k]) return false; _seenChunk[k] = 1; return true; }
+  /* The retrieved Knowledge Base text is framed as the model's OWN private notes (owner, 2026-09-26:
+   * "wont the user think we are using rag or sending rag?"). Framed as material "provided" to it,
+   * the model answered the doctor about it ("the passage you sent is irrelevant"). No notes, no header. */
   L = S.kb;
-  L.push("\n=== RETRIEVED STEWARDMD KNOWLEDGE (PRIMARY SOURCE — reason from THIS) ===");
+  L.push("\n=== YOUR REFERENCE NOTES (private StewardMD Knowledge Base notes; the clinician cannot see them. Prefer them where they fit the question; silently skip any that do not) ===");
   (pkg.grounding || []).forEach((g) => {
     var emitted = [];
     (g.knowledge || []).forEach((c) => { if (_fresh(c.text)) emitted.push("   [" + c.section + "] " + clip(c.text, 300) + (c.source && c.source.ref ? " (" + c.source.ref + (c.source.page ? ", " + clip(c.source.page, 60) : "") + ")" : "")); });
@@ -883,8 +901,9 @@ function renderGroundedPrompt(pkg, maxChars) {
     // Chunks arrive already re-ranked by rerankRetrieved() (cross-encoder, lexical fallback) in the
     // explain handler, so emit in the given order — most decision-relevant evidence first.
     var _rlines = (pkg.retrieved || []).filter((c) => _fresh(c.text)).map((c) => "   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : ""));
-    if (_rlines.length) { L.push("\nAdditional retrieved chunks (relevance-ranked):"); _rlines.forEach((e) => L.push(e)); }
+    if (_rlines.length) { L.push("\nMore notes (most relevant first):"); _rlines.forEach((e) => L.push(e)); }
   }
+  if (L.length === 1) L.length = 0;
   L = S.treat;
   if (pkg.treatment) {
     const t = pkg.treatment;
@@ -1673,8 +1692,9 @@ export async function onRequest(context) {
           if (_hit && _hit.text) {
             _later(recordUsage(gate, { inTok: 0, outTok: 0, status: "cache" }));   // metered, never counted as a question (T36)
             const _cc = []; (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && _cc.indexOf(p) < 0) _cc.push(p); }));
-            if (wantStream) return withCors(request, streamTextAsSSE(_hit.text));
-            return json({ text: _hit.text, mode: "grounded", citations: _cc, cached: true });
+            const _ht = scrubMetaTalk(_hit.text);   // answers cached before 2026-09-26 may still talk about "the provided text"
+            if (wantStream) return withCors(request, streamTextAsSSE(_ht));
+            return json({ text: _ht, mode: "grounded", citations: _cc, cached: true });
           }
           if (_wantRerank) _rerankP = rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null);   // miss: now the re-rank
           _at("cache");
@@ -1732,7 +1752,7 @@ export async function onRequest(context) {
           else if (body && body.depth === "detailed") sysA = sysA + "\n\nLENGTH: DETAILED. Cover everything relevant to THIS question in clear sections, using only the parts that bear on it (for example mechanism, diagnosis, management, pitfalls); do not stop until every relevant aspect of the question is covered.";
           if (pkg.evidenceBundle && Array.isArray(pkg.evidenceBundle.claims) && pkg.evidenceBundle.claims.length) {
             const ebLines = pkg.evidenceBundle.claims.slice(0, 20).map((c, i) => (i + 1) + ". [" + (c.tier ? "tier " + c.tier : "kb") + "] " + String(c.text || "").slice(0, 320)).join("\n");
-            grounded = ("RANKED EVIDENCE (StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from this ranked evidence — do not copy any single item verbatim; merge overlapping points; cite sources; if items conflict, state the disagreement and the higher-authority position:\n" + ebLines + "\n\n");
+            grounded = ("RANKED REFERENCE NOTES (private, like the notes below; StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from the items that fit the question and silently skip the rest; do not copy any item verbatim; merge overlapping points; if items conflict, state the clinical disagreement and the higher-authority position:\n" + ebLines + "\n\n");
             grounded = grounded + renderGroundedPrompt(pkg, Math.max(2000, MAX_IN_CHARS - grounded.length));   // the package keeps its own budget (T35)
           }
           // Lazy two-call generation (client flag smd_maik_lazy). tier 1 = bottom line ONLY (cheap,
@@ -1746,7 +1766,7 @@ export async function onRequest(context) {
           // The abstain rule itself is stated ONCE (ABSTAIN_RULE): KNOWLEDGE_SYS already carries it as
           // rule 7, so it only gets the citation half; the other prompts get the rule too.
           if (_mcfg.abstain) {
-            sysA += "\n\nCITE-OR-ABSTAIN: cite the supplied StewardMD knowledge inline for every claim that rests on it." + (sys === KNOWLEDGE_SYS ? "" : " " + ABSTAIN_RULE);
+            sysA += "\n\nCITE-OR-ABSTAIN: mark each claim that rests on your notes with its [n] from SOURCES; never cite a note you set aside." + (sys === KNOWLEDGE_SYS ? "" : " " + ABSTAIN_RULE);
           }
         } catch (e) {}
         // Phase 2 — opt-in streaming (client sends ?stream=1 + Accept: text/event-stream). If the
@@ -1779,7 +1799,7 @@ export async function onRequest(context) {
             // Populate the answer cache from the STREAM path too. waitUntil, because the response has
             // already been handed to the client by the time the last token lands (same pattern as the
             // router cache write below, which is why that one has always worked and this one did not).
-            if (_ckey && full) { try { context.waitUntil(putCachedAnswer(usageKv(env), _ckey, { text: full }, env)); } catch (e) {} } }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
+            if (_ckey && full) { try { context.waitUntil(putCachedAnswer(usageKv(env), _ckey, { text: full }, env)); } catch (e) {} } }, _tUp, { filter: metaTalkStream(), idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
         }
         let text;
         // Non-stream path (native, or a stream that failed to open): use the SAME full system prompt +
@@ -1805,6 +1825,7 @@ export async function onRequest(context) {
         // STOP well under the 2560-token cap). isTutor takes precedence over complex-based tiering.
         try { text = await gen([{ text: grounded }], nsCap, { system: nsSys, temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); }
         catch (e) { _later(recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" })); throw e; }
+        text = scrubMetaTalk(text);   // never "the passage you sent is irrelevant" (2026-09-26); before the cache write
         _later(recordUsage(gate, { ...tokens(nsSys.length + grounded.length, text), status: text ? "success" : "failed", noCount: _tier === 2 }));
         if (text) _countQuestion();
         if (_ckey && text) _later(putCachedAnswer(usageKv(env), _ckey, { text: text }, env));   // store for the next identical question

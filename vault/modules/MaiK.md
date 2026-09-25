@@ -241,3 +241,16 @@ had no background choice.
   Display sheet's MaiK section now also edits the theme on screen (it used to edit only light, so in
   dark mode it silently did nothing).
 Pins: `test/maik-close-bg.test.mjs`; browser: `test/run-maik-close-bg-ui.mjs`.
+
+## The Knowledge Base is MaiK's private notes (2026-09-26, branch maik-no-passage-talk)
+Owner: "why is agent tell the passage yu sent is irrelavant?" The cloud user turn heads the KB block
+`=== YOUR REFERENCE NOTES (private ...; the clinician cannot see them ...)` (was `RETRIEVED STEWARDMD
+KNOWLEDGE (PRIMARY SOURCE)`); the prompts say prefer, silently skip off-topic notes, never mention them.
+- **Post-filter** `functions/_maik_metatalk.js`: `scrubMetaTalk(text)` on the whole answer and cache
+  hits, `metaTalkStream()` (line-buffered) on the live stream. Lead-ins are cut and content kept
+  ("Based on the text provided, X" -> "X"); sentences ABOUT the material are dropped with a following
+  "This is not relevant...". Precision-first; pinned by `test/maik-metatalk.test.mjs`.
+- **Gotcha, live stream**: a `pull()` that enqueues nothing is never called again (Streams spec), so
+  `streamGeminiToSSE` now loops inside one pull until it sends something. Before, a network read ending
+  mid-frame could hang the SSE. Pinned by `test/maik-no-passage-talk.test.mjs`.
+- Knowledge questions no longer send empty `DETERMINISTIC ENGINE OUTPUT` / `PATIENT` / notes headers.
