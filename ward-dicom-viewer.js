@@ -163,7 +163,7 @@
       if (cache[i]) return cache[i];
       var p = cache[i] = Promise.resolve(opts.load(i)).then(function (buf) { return decode(buf, opts.frameOf ? opts.frameOf(i) : 0); });
       p.catch(function () { delete cache[i]; });
-      order.push(i); if (order.length > 400) delete cache[order.shift()];   // ponytail: FIFO memory cap, LRU if big studies thrash
+      order.push(i); if (order.length > 48) delete cache[order.shift()];   // FIFO memory cap: a 512x512 slice decodes to about 2 MB (float + RGBA), and phones are the target
       return p;
     }
     self.go = function (i) {
