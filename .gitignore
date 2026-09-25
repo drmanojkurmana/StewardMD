@@ -135,3 +135,19 @@ debug-bugs*.jsonl
 # graphify knowledge graph artifacts (regenerable, ~200MB)
 graphify-out/
 .planning/graphs/
+# Medical Core training output: regenerate with `node backend/medcore/run.mjs`.
+# The dataset CARD (backend/medcore/cards/) is committed; the matrices and cohorts are not -
+# they are tens of MB, fully reproducible from a seed, and a synthetic cohort in git history is a
+# cohort somebody will eventually mistake for data.
+backend/medcore/out/
+bench/medcore/out/
+
+# MIMIC-IV demo extract: licensed data (ODbL), fetched with
+# backend/medcore/adapters/download.sh. Never committed.
+backend/medcore/data-mimic/
+
+# eICU demo extract: licensed data, fetched with the adapter download script. Never committed.
+backend/medcore/data-eicu/
+
+# MIMIC-III demo extract: licensed data. Never committed.
+backend/medcore/data-mimic3/

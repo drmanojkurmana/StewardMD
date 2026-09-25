@@ -29,12 +29,13 @@ test("flags: Senior Surgeon Mode is OFF by default, so a case runs on its author
   assert.equal(F.DEFS.smd_surgx_mentor.def, false);
 });
 
-test("flags: the master and draft flags are the ones the release gate must flip", () => {
-  // They default ON for testers by owner decision (the same call recorded in clinix-flags.js).
-  // The release gate is the comment; this test makes sure the comment is actually there so the
-  // obligation is discoverable rather than remembered.
+test("flags: SURGX is released to all users, and the draft line obligation stays written down", () => {
+  // Owner decision 2026-09-25: SURGX is on for every user and no longer Beta. The content is still
+  // ai_drafted, so smd_surgx_draft stays ON and every screen keeps its draft line until R1 sign-off.
+  // This test keeps that obligation discoverable in the flag file rather than remembered.
   const src = readFileSync(join(ROOT, "surgx-flags.js"), "utf8");
-  assert.ok(/FLIP smd_surgx AND smd_surgx_draft TO false BEFORE ANY NON-TESTER RELEASE/i.test(src));
+  assert.ok(/RELEASED \(2026-09-25, owner decision\)/.test(src));
+  assert.ok(/draft line and sources until R1 clinical sign-off\. Do not remove that line/i.test(src));
   assert.equal(F.DEFS.smd_surgx.def, true);
   assert.equal(F.DEFS.smd_surgx_draft.def, true);
 });

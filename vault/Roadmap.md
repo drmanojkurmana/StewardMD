@@ -71,6 +71,32 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
       recoverable from the brand NAME for most combination rows, so a `strength_mg` column on `drugs`
       would let RxChoice match combinations on the composition instead of on naming convention.
 
+## [[Medical Core]] — blocked on data and people, not on code
+
+Phase 1 (deterministic: patient state, what changed, missing information, unit and freshness checks)
+is BUILT behind `smd_medcore`, default OFF, with the four ML hazards in the executable safety case.
+Steps 12 onward of `vault/modules/Medical Core.md` cannot start until these exist. They are NOT
+engineering tasks.
+
+- [ ] **A dataset.** Retrospective ICU/ward data from a named hospital, under a written agreement,
+      de-identified before it leaves the hospital boundary. Nothing from step 13 on can begin
+      without it, and no amount of engineering substitutes for it.
+- [ ] **Ethics / institutional approval** for the retrospective analysis, and a named data custodian.
+- [ ] **A clinician to own the label definitions.** `medcore/data/outcomes.json` has five outcomes
+      written so they can be argued with; each needs its risk-set entry rule, exclusions and
+      censoring confirmed by the Critical Care lead before any labelling.
+- [ ] **An adjudication process.** At least 200 positives and 200 near-misses per outcome reviewed,
+      with inter-rater agreement reported in the dataset card.
+- [ ] **A named approver** who can move anything from VERIFIED (software) to CLINICALLY APPROVED.
+      Nothing in Medical Core has that status and nothing in the repo can grant it.
+- [ ] Clinical sign-off on the three unapproved packs: `units.json` (conversion factors and
+      plausibility bounds), `freshness.json` (staleness windows), `change-bands.json` (what size of
+      change is worth a clinician's attention).
+
+- [x] The missing **CAM-ICU** calculator in `calculators.js` — added 2026-09-19 (Ely, JAMA 2001;
+      SCCM PADIS 2018). Distinct from the general CAM (Inouye 1990) already under Neurology, which
+      needs a patient who can be interviewed. Test: `test/camicu.test.mjs`.
+
 ## [[WardSynQ]] — blocked on people, not on code
 
 Recorded 2026-09-05 after the notification chain was completed and demonstrated on a device. These

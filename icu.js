@@ -1141,6 +1141,16 @@
       '.icu-sevkey{display:flex;gap:14px;justify-content:center;font:600 10.5px var(--font);color:var(--muted);margin-bottom:10px}' +
       '.icu-sevkey span{display:inline-flex;align-items:center;gap:5px}.icu-sevkey i{width:9px;height:9px;border-radius:50%;display:inline-block}' +
       '.icu-sevkey i.ok{background:var(--ok)}.icu-sevkey i.warn{background:var(--warn)}.icu-sevkey i.bad{background:var(--danger)}' +
+      // Medical Core (flag smd_medcore, default OFF). Deliberately the quietest card on the screen:
+      // no status colour, because nothing here is a status - "what changed" is an observation and
+      // "missing information" is a to-do list. Status colour stays reserved for status.
+      '.icu-mc-row{display:flex;align-items:baseline;gap:8px;font:500 12.5px/1.5 var(--font);color:var(--ink2);padding:5px 0;border-bottom:1px solid var(--border-soft)}' +
+      '.icu-mc-row:last-child{border-bottom:0}' +
+      '.icu-mc-row b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}' +
+      '.icu-mc-row .w{margin-left:auto;font:600 11px var(--font);color:var(--muted);white-space:nowrap}' +
+      '.icu-mc-sub{font:700 10px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}' +
+      '.icu-mc-sub:first-child{margin-top:0}' +
+      '.icu-mc-foot{font:400 10.5px/1.5 var(--font);color:var(--muted);margin:9px 0 0}' +
       '.icu-phase{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px;margin-left:7px}' +
       // plain-language jargon tooltips (A5) — tap ⓘ to open an explanation
       '.icu-tip{border:none;background:none;color:var(--primary);cursor:pointer;font:600 11px var(--font);padding:0 2px;vertical-align:baseline;-webkit-appearance:none}' +
@@ -1715,6 +1725,76 @@
   function renderVentAbgTiles() {
     return '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("lungs", "🫁") + ' Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>' +
       '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("abg", "🩸") + ' ABG</div><div class="icu-vitals">' + abgTiles() + '</div>';
+  }
+
+  /* ------------------------------------------- Medical Core (flag smd_medcore, default OFF)
+   * Two deterministic lists: what moved, and what a clinician would have to go and get. There is
+   * no model behind this and no probability in it; medcore-boot.js computes both from the same
+   * ICU state this file already holds, on the device, and returns null on any failure.
+   *
+   * THE FLAG IS CHECKED FIRST AND THE GUARD IS TOTAL. Flag off, or the boot module absent (it is
+   * not loaded when the flag is off), and this returns "" before touching anything. Deleting the
+   * two script tags in index.html removes the feature with no edit to this file to revert.
+   *
+   * IT IS NOT AN ALERT. It never thresholds on a current value, never escalates, never notifies,
+   * and carries no status colour - the deterministic alert engine above owns all of that and stays
+   * authoritative. "Missing information" is a to-do list, and "what changed" is an observation. */
+  function medCoreOn() {
+    try {
+      var F = window.SMD_MEDCORE_FLAGS;
+      return !!(F && F.bool && F.bool("smd_medcore") && window.SMD_MEDCORE);
+    } catch (e) { return false; }
+  }
+  function medCoreSummary() {
+    if (!medCoreOn()) return null;
+    try {
+      // asOf is OURS to state, never the module's to assume: it is the leakage control.
+      var scores = [];
+      try { scores = (window.ICU_AUTOSCORES && ICU_AUTOSCORES.compute(_raw)) || []; } catch (e) { scores = []; }
+      return window.SMD_MEDCORE.summary(_raw, { asOf: Date.now(), scores: scores });
+    } catch (e) { return null; }
+  }
+  function medCorePanel() {
+    var sum = medCoreSummary();
+    if (!sum) return "";
+    var changed = (sum.changed || []).slice(0, 4);
+    var missing = (sum.missingInformation || []).slice(0, 4);
+    if (!changed.length && !missing.length) return "";
+    var label = window.SMD_MEDCORE && SMD_MEDCORE.labelFor ? SMD_MEDCORE.labelFor : function (x) { return x; };
+    var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("refresh", "\u21bb") + ' Medical Core <span class="icu-phase">BETA</span> <span style="font-weight:600;text-transform:none;letter-spacing:0">\u00b7 deterministic, no model</span></div>';
+    if (changed.length) {
+      out += '<div class="icu-mc-sub">What changed</div>';
+      out += changed.map(function (c) {
+        var arrow = c.direction === "up" ? "\u2191" : "\u2193";
+        return '<div class="icu-mc-row">' + arrow + ' ' + esc(label(c.param)) +
+          ' <b>' + esc(c.from) + ' \u2192 ' + esc(c.to) + '</b> ' + esc(c.unit || "") +
+          '<span class="w">over ' + esc(fmtMins(c.overMin)) + '</span></div>';
+      }).join("");
+    }
+    if (missing.length) {
+      out += '<div class="icu-mc-sub">Missing information</div>';
+      out += missing.map(function (m) {
+        var why = m.reason === "STALE" ? ("last " + (m.staleValue != null ? m.staleValue + " " : "") + fmtMins(m.ageMin) + " ago")
+          : m.reason === "REFUSED" ? "charted, could not be read"
+          : m.reason === "NO_WINDOW" ? "no freshness rule set"
+          : "not recorded";
+        return '<div class="icu-mc-row">' + esc(label(m.param || m.label)) +
+          '<span class="w">' + esc(why) + '</span></div>';
+      }).join("");
+    }
+    /* THE MOST IMPORTANT SENTENCE ON THIS PANEL. Both lists are filtered: "what changed" shows only
+     * moves past a magnitude band, and "missing information" shows only what the enabled scores and
+     * outcomes ask for. A clinician who reads a short list as a clear patient has been misled by
+     * omission, and the bands doing the filtering are unapproved seed content. So the panel says so
+     * itself rather than relying on anybody having read the vault. */
+    out += '<p class="icu-mc-foot"><b>Not a complete list.</b> Only changes past a set size and gaps the active scores ask for are shown, so nothing here rules anything out. Observations and gaps only: no prediction, no alert, and nothing here changes a score, a threshold or a prescription.</p>';
+    return out + '</div>';
+  }
+  function fmtMins(m) {
+    if (m == null) return "";
+    if (m < 90) return Math.round(m) + " min";
+    var h = m / 60;
+    return (h < 10 ? h.toFixed(1).replace(/\.0$/, "") : Math.round(h)) + " h";
   }
 
   /* --------------------------------------------------------- AI import panel */
@@ -3924,6 +4004,8 @@
     var status = !mon ? "" : (isOv ? renderLiveStatus()
       : '<details class="icu-vitals-c"><summary>' + liveSummaryLine() + '</summary>' + renderLiveStatus() + '</details>');
     var elyteAlerts = (isOv || _active === "lytes") ? renderElyteAlerts() : "";
+    // Flag-gated, overview only, and "" whenever the flag is off or the module failed to load.
+    var medCore = isOv ? medCorePanel() : "";
     var hd = hasData();
     var addBtn = !mon ? "" : '<button class="icu-adddata" data-icu-act="adddata">' + (hd ? "＋ Add / update data" : "＋ Add my patient") + '</button>';
     // Empty overview → one inviting empty state (its own CTA); otherwise grid/summary + add button.
@@ -3936,6 +4018,7 @@
       (mon ? renderWardBanner() : "") +
       renderConflicts() +
       elyteAlerts +
+      medCore +
       mid +
       tab +   // each tab renders its own descriptive header — no redundant generic label
       '</div></div>';
@@ -8930,7 +9013,10 @@
         else if (arg === "inf") launch(function () { if (!window.INF) return; INF.open(); infWeightBridge(); installInfBridge(); }, "infOverlay");
         else if (arg === "protocols") launch(function () { if (!window.INF) return; (INF.openProtocols ? INF.openProtocols() : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay");
         else if (arg === "interactions") launch(function () { window.MEDDRUGS && window.MEDDRUGS.openInteractions && window.MEDDRUGS.openInteractions(); }, "miOverlay");
-        else if (arg === "fundx") launch(function () {
+        else if (arg === "fundx") {
+          // Code-gated beta (owner decision 2026-09-25): the same SMD_XACCESS gate as the home tile,
+          // so the ICU entry point cannot open FundX on a device that has not been unlocked.
+          var openIcuFundx = function () { launch(function () {
           if (!window.FUNDX || !FUNDX.open) return;
           var p = (_raw && _raw.patient) || {};
           var meta = [];
@@ -8940,7 +9026,9 @@
           FUNDX.open({ ref: p.mrn || p.name || null, name: p.name || (p.bed ? "Bed " + p.bed : null), meta: meta.join(" · "), age: p.age, sex: p.sex });
           // FundX opens at z-index 10000 like ICU; raise it above the ICU dashboard.
           try { var el = document.getElementById("fundxRoot"); if (el) el.style.zIndex = "10030"; } catch (e) {}
-        }, "fundxRoot");
+          }, "fundxRoot"); };
+          if (window.SMD_XACCESS && SMD_XACCESS.gate) SMD_XACCESS.gate("fundx", openIcuFundx); else openIcuFundx();
+        }
         break;
     }
   }

@@ -24,8 +24,12 @@ A thing can be VERIFIED (device) and still be clinically worthless: the notifica
 the escalation policy it carries is unapproved seed content. Do not read the first as the second.
 
 The safety case is executable: `node scripts/wardsynq-assurance.mjs` runs the real suites and
-cross-references the hazard table against what actually passed. It currently reports **14 of 16
-verified, 2 partial**. Read the caveats; the summary line alone is not the state of the system.
+cross-references the hazard table against what actually passed. It currently reports **18 of 24
+verified, 5 partial, 1 failing** (2026-09-19: the note said 14 of 16 for some time; the table has
+grown, and the four Medical Core hazards HAZ-ML-01 to HAZ-ML-04 are argued here rather than in a
+parallel safety case). The FAILING row is HAZ-DOWN-01, whose evidence suite is not in the script's
+SUITES list; that is a pre-existing gap, not a regression. Read the caveats; the summary line alone
+is not the state of the system.
 
 ## Ward Sync and WardSynQ are ONE system
 
