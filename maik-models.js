@@ -447,6 +447,37 @@
         bytes: 629246880,    // exact: HF API size
         sha256: "eb561d41a7bbeb0fcf04883c8af11078ef6cae0a66862a0b68443cfca495269d"   // lfs.oid from the HF API
       }
+    },
+    /* MAiK CORTEX (owner, 2026-09-25): Xiaomi MiMo V2.6 distilled onto Qwen3.5 9B (MIT), bartowski's
+     * GGUF. Q4_1 on the owner's pick ("made for Apple silicon"): a plain legacy quant with fast Metal
+     * kernels. The GGUF declares architecture "qwen35" (read from the file's header, 2026-09-25),
+     * which prism-b10685 lists in src/llama-arch.cpp. Hybrid backbone: 32 layers, full attention on
+     * every 4th (8 layers, 4 KV heads x 256), gated-delta recurrent state on the rest.
+     * The name was last used by MedMO-4B (medmo-4b), removed earlier; this is a different model.
+     * No draft: its tokenizer (248,320 tokens) is not Qwen3's. Text only: the repo has a 0.92 GB
+     * mmproj, left off until a phone has exercised it. LABS until measured on a 12 GB phone
+     * (audit, "Do not build": no new pack is promoted before it is measured). */
+    "mimo-cortex-9b": {
+      labs: true,
+      label: "MAiK Cortex",
+      actual: "MiMo V2.6 Distill Qwen 9B (Xiaomi, Qwen3.5 9B base, GGUF Q4_1, bartowski)",
+      tier: 6,
+      noThink: true,
+      note: "A 9B reasoning model in 5.94 GB. Needs a 12 GB phone. Not medically fine-tuned; checked against the Knowledge Base.",
+      guide: {
+        speed: 1, medical: 2, general: 3,
+        bestFor: "Flagship phones with 12 GB memory, for strong general reasoning offline.",
+        why: "A 9-billion-parameter model distilled from a larger reasoning model, at a 4-bit quant that runs well on Apple silicon.",
+        pick: "Only on a 12 GB phone, and not yet measured on one: expect a long load and slow answers. No medical fine-tuning; checked against the Knowledge Base."
+      },
+      nCtx: 4096,
+      nPredict: 768,
+      files: [{
+        name: "mimo-v2.6-distill-qwen-9b-q4_1.gguf",
+        url: HF + "/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF/resolve/main/MiMo-V2.6-Distill-Qwen-9B-Q4_1.gguf?download=true",
+        bytes: 5944858144,   // exact: HF API size and a live content-length agree
+        sha256: "b50ab7a1ba4b195e8d7c1ec84f4babf00207bb14c506066d3e151dd435b02b4a"   // lfs.oid from the HF API
+      }]
     }
   };
 
@@ -501,7 +532,9 @@
     "bonsai-ternary-8b": { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [] },
     "bonsai-8b":         { medical: false, kb: true,  json: 1, reasoning: 2, ramGB: 6,  kvGBat4k: 0.60, lang: [] },
     "bonsai-27b":        { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] },
-    "bonsai2-27b":       { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] }
+    "bonsai2-27b":       { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] },
+    // Cortex: only 8 of 32 layers keep a KV cache (2x8x4x256x2 B x 4096 = 0.13 GB); +0.02 recurrent state
+    "mimo-cortex-9b":    { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 0.15, lang: [] }
   };
   // ponytail: one constant for llama.cpp scratch + the app beside the weights. Tune from device data.
   var RUNTIME_GB = 0.4;
