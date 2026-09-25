@@ -49,5 +49,6 @@ test("the harness's on-screen bound uses the stylesheet's layer opacities and fa
 });
 
 test("index.html busts the cache for the new maik-atmosphere.js", () => {
-  assert.match(I, /<script src="\/maik-atmosphere\.js\?v=2-energy1" defer><\/script>/);
+  // Later bumps append to the token (2026-09-26: -mkbg1, the background chooser).
+  assert.match(I, /<script src="\/maik-atmosphere\.js\?v=2-energy1[^"]*" defer><\/script>/);
 });

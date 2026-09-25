@@ -9816,3 +9816,18 @@ and `readFileSync` cannot hold a 560 MB extract, so the featurizer now streams.
 **Nothing about this model is clinically usable.** It failed its gates and `medcore-models.js`
 would refuse it. eICU is US ICU data with synthetic dates; StewardMD serves US and Indian wards, and
 site is a gated subgroup precisely so that difference is measured rather than assumed.
+
+## 2026-09-26 - MaiK: Close is labelled and filled, the background choice is per theme
+
+**Decision.** MaiK's Close is a filled pill that says "Close" (ink on the page colour, top right,
+opposite the menu), not a thin X among three look-alike icons; Escape and Android back close the top
+MaiK layer first (sidebar panel, sidebar, then MaiK). The background chooser lives in the MaiK sidebar
+and edits the theme on screen: dark and light each keep their own choice, and each theme's default is
+the background it already had (dark stays byte-identical). The Display sheet's MaiK section follows
+the same rule. Extract findings moved from the tool row to the text row.
+**Why.** Owner, 2026-09-26: many could not find how to close MaiK; dark mode had no background option
+(the Display sheet only ever edited the light palette, so in dark mode it silently did nothing); the
+composer's tool row was unbalanced and shifted when typing.
+**Trade-off.** The Close pill is deliberately the loudest control in the header. At 320px the model
+chip truncates ("MaiK C...") and drops its caret, as it truncated before. Status: PR maik-ui-close-bg,
+browser-verified in headless Chrome, not yet on a device.
