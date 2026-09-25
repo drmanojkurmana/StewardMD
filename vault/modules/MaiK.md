@@ -17,7 +17,8 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   `docs/MAIK_OFFLINE_RUNBOOK.md`. Nine packs (2026-09-23): `maik-lite` (our fine-tune, default),
   `bonsai-ternary-8b` (flagship), `bonsai-8b`, the three MedGemma/Gemma tiers,
   `maik-apex`, `bonsai-27b`, `bonsai2-27b`
-  (`medmo-4b` / MAiK Cortex removed 2026-09-23). EVERY text pack reads the on-device book
+  (`medmo-4b` / MAiK Cortex removed 2026-09-23). Tenth pack 2026-09-25: `mimo-cortex-9b`, a new
+  "MAiK Cortex" (MiMo V2.6 Distill Qwen 9B, Q4_1, 5.94 GB, qwen35, Labs, 12 GB phones, unmeasured). EVERY text pack reads the on-device book
   (`kb/ai/maik-lite-rag.js` BM25 retrieval, `kb/ai/maik-lite-kb-store.js` 38 MB asset): `ragEligible`
   in `maik-local.js` is capability-based and reads `CAPS[pack].kb` (changed 2026-09-18 from
   Lite-only). The whole-answer wording gate was replaced for these packs by claim-level grounding
