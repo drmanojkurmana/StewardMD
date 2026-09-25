@@ -21,6 +21,10 @@ module (`kits-share.js`, `window.SMD_SHARE`, sheet `#smdShare` z 12045) and one 
 Home tile "Colleagues" (`act:"kxinbox"`, defOn false) appears only when the flag is on. Push taps with
 `data.type === "kits"` open the item (`native-push.js`).
 
+**Addressing a colleague:** by StewardMD ID (`SMD-XXXXXX`) or by the email they sign in with. Most doctors
+have no StewardMD ID until something mints one (ICU groups, ID onboarding), so the Colleagues sheet calls
+`SMD_STEWARD_ID.ensure()` and shows "Your StewardMD ID" with a Copy button; email works meanwhile.
+
 ## Rules (enforced on the server)
 - Identity is the verified Firebase ID token only (`verifiedClaimsFor`); a bare Cf-Access email header
   is NOT accepted here (the older `identify()` still trusts it; see the Explore finding in [[Decisions]]).
@@ -35,17 +39,21 @@ Home tile "Colleagues" (`act:"kxinbox"`, defOn false) appears only when the flag
 - Case-room text goes through `stripIdentifiers` (`functions/_deid.js`) before it is stored.
 - Status machines: referral sent, seen, accepted or declined (recipient) or withdrawn (sender); handover
   sent, seen, acknowledged (needs a read-back) or withdrawn. Final states are final (409).
-- Rate limits per doctor (`_ratelimit.js`, KV): 30 sends, 10 case rooms, 60 posts, 120 history saves,
-  20 publishes an hour. Payloads capped (24 KB message, field caps); router refuses bodies over 64 KB.
+- Rate limits per doctor (`_ratelimit.js`, KV): 30 sends, 10 case rooms, 30 invites, 60 posts, 120
+  history saves, 20 publishes an hour. Sends and invites are counted BEFORE the recipient lookup, so a
+  doctor cannot probe which IDs or emails belong to verified doctors without spending the limit. Payloads capped (24 KB message, field caps); router refuses bodies over 64 KB.
 - Expired items drop out of lists and are deleted on the next list.
 
 ## Turning it on (owner)
-1. Review the code and tests; decide.
-2. Cloudflare Pages env var `KITS_SHARE_ON=1` (production). `FOLLOWCARE_PHI_KEY` must be set (it is, for
-   FollowCare and the queue). Optional: deploy `firestore.rules` (the kx_* lines only document the
-   catch-all deny that already applies).
-3. Client: flag `smd_kits_share` default is OFF; flip the default in `kits-share.js` `flagOn()` (and the
-   Home tile `eligible`) when ready, or test per device with `?share=1`.
+The owner asked to turn it on on 2026-09-25. Two switches, both still OFF:
+1. **Server.** The route needs `KITS_SHARE_ON=1`. **Production is at Cloudflare's 128 text-binding cap**
+   (vars + secrets; see [[Infra]]), so adding this var as a new binding fails every deployment with
+   "Too many text bindings". Either free one binding first (remove a var that equals its code default),
+   or change the gate in `functions/api/kits/[[path]].js` to "on unless `KITS_SHARE_ON` is `"0"`" (no new
+   binding). `FOLLOWCARE_PHI_KEY` and `FIREBASE_SERVICE_ACCOUNT` are already set in production.
+2. **Client.** `smd_kits_share` defaults OFF in `kits-share.js` `flagOn()` and the Home tile `eligible`.
+   Per device: `?share=1` or `localStorage.smd_kits_share = "1"`. Native users need a rebuild either way.
+Optional: deploy `firestore.rules` (the kx_* lines only document the catch-all deny).
 
 ## Tests
 `test/kits-share.test.mjs` (server logic over an in-memory Firestore with the real commit guards:

@@ -58,7 +58,7 @@
   }
 
   /* ------------------------------------------------------------------ sheet */
-  var S = { view: "inbox", tab: "in", list: null, cases: null, cur: null, compose: null, busy: false, unitEdit: null };
+  var S = { view: "inbox", tab: "in", list: null, cases: null, cur: null, compose: null, busy: false, unitEdit: null, me: "" };
   function sheet() {
     var el = D.getElementById("smdShare");
     if (!el) {
@@ -101,9 +101,24 @@
     api("GET", "msg/list").then(function (r) { S.list = r.status === 200 ? r.body : { error: r.body.error }; render(); });
     api("GET", "case/list").then(function (r) { S.cases = r.status === 200 ? r.body.cases : []; render(); });
   }
+  // Your own StewardMD ID, so you can give it to colleagues (minted on first open if you had none).
+  function meHtml() {
+    return S.me ? '<p class="kit-muted sh-me">Your StewardMD ID: <b>' + esc(S.me) + '</b> <button type="button" class="kit-link" data-sh-act="copyid">' + ms("content_copy") + "Copy</button><br>Colleagues can send to this ID or to your sign-in email.</p>"
+      : '<p class="kit-muted sh-me">Colleagues can send to your sign-in email. Your StewardMD ID appears here once it is ready.</p>';
+  }
+  function loadMe() {
+    try { var id = G.SMD_STEWARD_ID && G.SMD_STEWARD_ID.my && G.SMD_STEWARD_ID.my(); if (id) { S.me = id; return; } } catch (e) {}
+    try { if (G.SMD_STEWARD_ID && G.SMD_STEWARD_ID.ensure) G.SMD_STEWARD_ID.ensure({}, function (x) { if (x) { S.me = x; render(); } }); } catch (e) {}
+  }
+  function copyText(t) {
+    var ok = false;
+    try { var ta = D.createElement("textarea"); ta.value = t; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0"; D.body.appendChild(ta); ta.select(); ok = D.execCommand("copy"); D.body.removeChild(ta); } catch (e) {}
+    if (!ok) { try { G.navigator.clipboard.writeText(t); ok = true; } catch (e) {} }
+    toast(ok ? "Copied " + t + "." : "Your StewardMD ID is " + t + ".");
+  }
   function inboxHtml() {
     var tabs = [["in", "Received"], ["out", "Sent"], ["cases", "Case rooms"]];
-    var h = '<div class="kit-row" role="tablist">' + tabs.map(function (t) { return '<button type="button" role="tab" class="kit-seg' + (S.tab === t[0] ? " on" : "") + '" data-sh-act="tab:' + t[0] + '" aria-selected="' + (S.tab === t[0]) + '">' + t[1] + "</button>"; }).join("") + "</div>";
+    var h = meHtml() + '<div class="kit-row" role="tablist">' + tabs.map(function (t) { return '<button type="button" role="tab" class="kit-seg' + (S.tab === t[0] ? " on" : "") + '" data-sh-act="tab:' + t[0] + '" aria-selected="' + (S.tab === t[0]) + '">' + t[1] + "</button>"; }).join("") + "</div>";
     if (S.tab === "cases") {
       h += '<div class="kit-row"><button type="button" class="kit-add" data-sh-act="newcase">' + ms("forum") + "Ask colleagues about a case</button></div>";
       if (!S.cases) return h + '<p class="kit-muted">Loading…</p>';
@@ -159,17 +174,17 @@
       ? kv("Patient", [p.patient && p.patient.name, p.patient && p.patient.age, p.patient && p.patient.sex].filter(Boolean).join(", ")) + kv("Reason", p.reason) + kv("Question", p.question) + (p.kitSummary ? kv("Specialty kit summary", p.kitSummary) : "")
       : kv("Ward or unit", p.unit) + kv("Patients", String((p.rows || []).length));
     return back() + '<h2 class="dl-h">' + (c.kind === "referral" ? "Send the referral in StewardMD" : "Send the handover in StewardMD") + "</h2>" +
-      '<p class="kit-muted">Goes only to the doctor whose StewardMD ID you enter, if their registration is verified. Encrypted, and deleted after ' + (c.kind === "referral" ? "31 days" : "3 days") + ".</p>" +
-      '<section class="kit-card">' + what + "</section>" + field("sh_to", "Colleague's StewardMD ID", c.to || "", "text", "SMD-XXXXXX") +
+      '<p class="kit-muted">Goes only to the doctor whose StewardMD ID or email you enter, if their registration is verified. Encrypted, and deleted after ' + (c.kind === "referral" ? "31 days" : "3 days") + ".</p>" +
+      '<section class="kit-card">' + what + "</section>" + field("sh_to", "Colleague's StewardMD ID or email", c.to || "", "text", "SMD-XXXXXX or name@hospital.in") +
       (c.kind === "referral" ? '<label class="kit-check"><input type="checkbox" id="sh_consent"><span>The patient agreed to this referral being sent to this doctor.</span></label>' : "") +
       '<div class="kit-row"><button type="button" class="kit-add" data-sh-act="send"' + (S.busy ? " disabled" : "") + ">" + ms("send") + "Send</button></div>";
   }
   function send() {
-    var c = S.compose, to = val("sh_to").toUpperCase();
-    if (!/^(SMD-)?[A-Z0-9]{6}$/.test(to)) { toast("Enter the StewardMD ID, like SMD-AB12CD."); return; }
+    var c = S.compose, raw = val("sh_to"), isEmail = EMAIL_RE.test(raw), to = isEmail ? raw.toLowerCase() : raw.toUpperCase();
+    if (!isEmail && !/^(SMD-)?[A-Z0-9]{6}$/.test(to)) { toast("Enter the StewardMD ID (like SMD-AB12CD) or the email your colleague signs in with."); return; }
     if (c.kind === "referral" && !(D.getElementById("sh_consent") || {}).checked) { toast("Confirm the patient agreed to the referral."); return; }
     S.busy = true; render();
-    api("POST", "msg/send", { kind: c.kind, to: { smdId: to }, kitId: c.kitId || "", urgency: c.urgency || "", payload: c.payload }).then(function (r) {
+    api("POST", "msg/send", { kind: c.kind, to: isEmail ? { email: to } : { smdId: to }, kitId: c.kitId || "", urgency: c.urgency || "", payload: c.payload }).then(function (r) {
       S.busy = false;
       if (r.status === 200) { toast(c.kind === "referral" ? "Referral sent." : "Handover sent. You will see when it is acknowledged."); S.compose = null; S.view = "inbox"; S.tab = "out"; loadInbox(); }
       else { c.to = to; render(); toast(errText(r.body.error)); }
@@ -186,7 +201,7 @@
       c.posts.map(function (p) { return '<div class="sh-post' + (p.mine ? " mine" : "") + '"><b>' + esc(p.by) + "</b> <span class=\"kit-muted\">" + esc(fmt(p.at)) + "</span><p>" + esc(p.text).replace(/\n/g, "<br>") + "</p></div>"; }).join("");
     if (k.status === "open") {
       h += field("sh_reply", "Your reply", "", "textarea", "No names, numbers or photos that identify the patient") + '<div class="kit-row"><button type="button" class="kit-add" data-sh-act="reply">' + ms("reply") + "Reply</button></div>";
-      if (k.role === "owner") h += field("sh_inv", "Invite more colleagues (StewardMD IDs, separated by commas)", "", "text", "SMD-AB12CD, SMD-EF34GH") +
+      if (k.role === "owner") h += field("sh_inv", "Invite more colleagues (StewardMD IDs or emails, separated by commas)", "", "text", "SMD-AB12CD, name@hospital.in") +
         '<div class="kit-row"><button type="button" class="kit-pill" data-sh-act="invite">' + ms("person_add") + 'Invite</button><button type="button" class="kit-clear" data-sh-act="closecase">Close the case</button></div>';
     }
     return h;
@@ -195,10 +210,12 @@
     var c = S.compose || {};
     return back() + '<h2 class="dl-h">Ask colleagues about a case</h2><p class="kit-muted">De-identified: no name, hospital number, phone, address or photo. The server removes identifier-like text too. Only the colleagues you invite can read it.</p>' +
       field("sh_title", "Title", c.title || "", "text", "e.g. Recurrent pleural effusion, cytology negative") + field("sh_q", "Your question", "", "textarea", "What would you like their opinion on?") +
-      field("sh_sum", "Summary", c.summary || "", "textarea", "Age, sex, key history, findings and results") + field("sh_inv", "Invite colleagues (StewardMD IDs, separated by commas)", "", "text", "SMD-AB12CD, SMD-EF34GH") +
+      field("sh_sum", "Summary", c.summary || "", "textarea", "Age, sex, key history, findings and results") + field("sh_inv", "Invite colleagues (StewardMD IDs or emails, separated by commas)", "", "text", "SMD-AB12CD, name@hospital.in") +
       '<div class="kit-row"><button type="button" class="kit-add" data-sh-act="createcase"' + (S.busy ? " disabled" : "") + ">" + ms("forum") + "Open the case room</button></div>";
   }
-  function ids(s) { return String(s || "").toUpperCase().split(/[\s,;]+/).filter(function (x) { return /^(SMD-)?[A-Z0-9]{6}$/.test(x); }); }
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // StewardMD IDs or emails, separated by commas or spaces.
+  function ids(s) { return String(s || "").split(/[\s,;]+/).map(function (x) { return EMAIL_RE.test(x) ? x.toLowerCase() : x.toUpperCase(); }).filter(function (x) { return EMAIL_RE.test(x) || /^(SMD-)?[A-Z0-9]{6}$/.test(x); }); }
   var WHY = { recipient_not_found: "no StewardMD doctor with that ID", recipient_not_verified: "registration not verified yet", cannot_send_to_self: "that is your own ID", room_full: "the room is full" };
   function notFoundText(nf) { return nf && nf.length ? " Not added: " + nf.map(function (x) { return x.smdId + " (" + (WHY[x.error] || "could not be added") + ")"; }).join("; ") + "." : ""; }
 
@@ -224,6 +241,7 @@
     var act = b.getAttribute("data-sh-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd === "close") { close(); return; }
     if (cmd === "inbox") { S.view = "inbox"; S.cur = null; loadInbox(); return; }
+    if (cmd === "copyid") { if (S.me) copyText(S.me); return; }
     if (cmd === "tab") { S.tab = arg; render(); return; }
     if (cmd === "msg") { openMsg(arg); return; }
     if (cmd === "case") { openCase(arg); return; }
@@ -301,7 +319,7 @@
   function forgetPatient() { HIST = {}; }   // a new consult: the previous patient's history is dropped
   function compose(opts) { S.compose = { kind: opts.kind, payload: opts.payload || {}, kitId: opts.kitId || "", urgency: opts.urgency || "" }; S.view = "compose"; show(); }
   function newCase(opts) { S.compose = { title: "", summary: (opts && opts.summary) || "", kitId: (opts && opts.kitId) || "" }; S.view = "newcase"; S.tab = "cases"; show(); }
-  function openInbox(tab) { S.view = "inbox"; if (tab) S.tab = tab; show(); loadInbox(); }
+  function openInbox(tab) { S.view = "inbox"; if (tab) S.tab = tab; loadMe(); show(); loadInbox(); }
   function openFromPush(d) {
     if (!flagOn() || !d) return false;
     if (d.caseId) { S.tab = "cases"; show(); openCase(d.caseId); return true; }

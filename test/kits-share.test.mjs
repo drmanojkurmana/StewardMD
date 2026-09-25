@@ -172,3 +172,20 @@ test("router: off unless KITS_SHARE_ON=1, and needs a verified token", async () 
   const src = (await import("node:fs")).readFileSync(new URL("../kits-share.js", import.meta.url), "utf8");
   assert.match(src, /fetch\("\/api\/kits\/" \+ path/, "the client calls a relative /api path (native transport, no CORS)");
 });
+
+test("a colleague can be addressed by sign-in email; lookups are rate-limited before they happen", async () => {
+  const w = world();
+  const r = await K.msgSend(w.ctx("uA"), { ...REF, to: { email: "Bala@City.example" } });
+  assert.equal(r.status, 200);
+  assert.equal(w.docs.get("kx_msgs/" + r.body.id).fields.toLabel, "bala@city.example");
+  assert.equal((await K.msgSend(w.ctx("uA"), { ...REF, to: { email: "nobody@city.example" } })).status, 404);
+  w.limits.block = true;
+  assert.equal((await K.msgSend(w.ctx("uA"), { ...REF, to: { smdId: "SMD-NOPE00" } })).status, 429, "a blocked caller learns nothing about the ID");
+  w.limits.block = false;
+  const c = await K.caseCreate(w.ctx("uA"), { title: "Wound dehiscence", question: "Resuture or VAC?", invite: ["chitra@city.example"] });
+  assert.equal(c.body.invited, 1);
+  const inv = await K.caseInvite(w.ctx("uA"), { id: c.body.id, smdIds: ["bala@city.example", "nobody@city.example"] });
+  assert.equal(inv.body.invited, 1); assert.equal(inv.body.notFound[0].error, "recipient_not_found");
+  w.limits.block = true;
+  assert.equal((await K.caseInvite(w.ctx("uA"), { id: c.body.id, smdIds: ["SMD-CCC333"] })).status, 429);
+});
