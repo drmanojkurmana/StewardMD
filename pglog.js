@@ -28,7 +28,10 @@
     // The module owns its scroll host (matching surgx.js / thorex.js). swipe-back.js needs the root
     // itself to be position:fixed inset:0 (set in pglog.css) so the drag-back gesture moves the
     // whole overlay rather than the inner scroller.
-    el.innerHTML = '<div class="pgl-scroll" id="pglogScroll"></div>';
+    var scrollEl = document.createElement("div");
+    scrollEl.className = "pgl-scroll";
+    scrollEl.id = "pglogScroll";
+    el.appendChild(scrollEl);
     document.body.appendChild(el);
     return el;
   }
