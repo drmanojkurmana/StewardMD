@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "7fe0b57d85fa",
- "count": 130,
+ "version": "30ca5506b0c3",
+ "count": 131,
  "subjects": [
   {
    "key": "emergency",
@@ -21,7 +21,7 @@
   {
    "key": "respiratory",
    "label": "Respiratory Medicine",
-   "count": 5
+   "count": 6
   },
   {
    "key": "infectious-disease",
@@ -1847,6 +1847,28 @@
     "WHO 2024",
     "CDC 2025",
     "CDC / ACIP 2018"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "hospital-acquired-ventilator-pneumonia",
+   "title": "Hospital-acquired and ventilator-associated pneumonia (adult)",
+   "subject": "respiratory",
+   "population": "Adults",
+   "aliases": [
+    "HAP",
+    "VAP",
+    "nosocomial pneumonia",
+    "hospital-acquired pneumonia",
+    "ventilator-associated pneumonia",
+    "MDR pneumonia",
+    "late-onset VAP",
+    "carbapenem-resistant pneumonia"
+   ],
+   "summary": "Send blood and lower respiratory cultures, then start empirical anti-pseudomonal therapy chosen by MDR risk and the local antibiogram, adding a second Gram-negative agent and MRSA cover only when risk or unit resistance justifies it. De-escalate on culture results and treat for 7 days if responding.",
+   "sources": [
+    "IDSA / ATS 2016",
+    "ICMR 2019"
    ],
    "status": "ai_drafted"
   },

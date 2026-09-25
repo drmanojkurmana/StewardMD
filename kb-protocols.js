@@ -16,7 +16,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var CONTENT_V = "7fe0b57d85fa";
+  var CONTENT_V = "30ca5506b0c3";
   var BASE = "/kb/clinical-protocols/";
 
   var KINDS = {

@@ -1,0 +1,102 @@
+{
+ "id": "hospital-acquired-ventilator-pneumonia",
+ "title": "Hospital-acquired and ventilator-associated pneumonia (adult)",
+ "subject": "respiratory",
+ "population": "Adults",
+ "setting": "Ward, ICU",
+ "aliases": ["HAP", "VAP", "nosocomial pneumonia", "hospital-acquired pneumonia", "ventilator-associated pneumonia", "MDR pneumonia", "late-onset VAP", "carbapenem-resistant pneumonia"],
+ "summary": "Send blood and lower respiratory cultures, then start empirical anti-pseudomonal therapy chosen by MDR risk and the local antibiogram, adding a second Gram-negative agent and MRSA cover only when risk or unit resistance justifies it. De-escalate on culture results and treat for 7 days if responding.",
+ "sections": [
+  {
+   "kind": "recognise",
+   "title": "Recognise and assess risk",
+   "items": [
+    "HAP: pneumonia developing 48 hours or more after admission and not incubating at admission. VAP: pneumonia developing more than 48 hours after starting mechanical ventilation.",
+    "Suspect when there is a new or progressive infiltrate plus at least 2 of: fever above 38 C (100.4 F), WBC above 12,000 or below 4000/microL, new purulent or changed sputum, worsening gas exchange (rising FiO2), new or worse cough or dyspnoea, crackles or bronchial breathing, unexplained confusion in the elderly (ICMR).",
+    "MDR risk for VAP: IV antibiotics in the past 90 days, septic shock at onset, ARDS before VAP, 5 or more days in hospital before onset, acute renal replacement therapy before onset. For HAP the consistent risk is IV antibiotics in the past 90 days.",
+    "High mortality risk (HAP): need for ventilatory support because of the pneumonia, or septic shock.",
+    "Common Indian ICU pathogens: Acinetobacter baumannii, Klebsiella pneumoniae, Pseudomonas aeruginosa (often carbapenem-resistant) and MRSA. Consider mimics: atelectasis, pulmonary oedema, ARDS, pulmonary embolism, aspiration pneumonitis."
+   ]
+  },
+  {
+   "kind": "investigations",
+   "title": "Investigations",
+   "items": [
+    "Blood cultures x 2 and a lower respiratory sample before antibiotics, without delaying treatment in unstable patients.",
+    "VAP: non-invasive endotracheal aspirate with semi-quantitative culture is preferred over invasive quantitative sampling (IDSA/ATS); bronchoscopic samples by local expertise. HAP: expectorated or induced sputum, or nasotracheal suction.",
+    "Chest X-ray (CT or lung ultrasound if unclear), CBC, creatinine, electrolytes, LFT, lactate, blood gas.",
+    "Decide to start antibiotics on clinical criteria; do not use procalcitonin to withhold treatment. Procalcitonin with clinical criteria may help stop therapy.",
+    "Know your unit antibiogram: MRSA proportion among S. aureus, and resistance of Gram-negatives to each candidate agent (the thresholds below depend on it)."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Empirical therapy (IDSA/ATS 2016)",
+   "items": [
+    "Every regimen includes one anti-pseudomonal agent: piperacillin-tazobactam, cefepime, ceftazidime, imipenem or meropenem (levofloxacin or aztreonam in beta-lactam allergy).",
+    "Add a second anti-pseudomonal agent from a different class (amikacin, levofloxacin, ciprofloxacin, aztreonam) only if: MDR risk factor, more than 10% of unit Gram-negative isolates resistant to the monotherapy agent, or susceptibility data unavailable. For HAP also if high mortality risk or IV antibiotics in 90 days. Avoid two beta-lactams.",
+    "Add MRSA cover (vancomycin or linezolid) for VAP with an MDR risk factor or unit MRSA above 10 to 20% (or unknown); for HAP with IV antibiotics in 90 days, unit MRSA above 20% (or unknown), or high mortality risk.",
+    "Low-risk HAP (no high mortality risk, no MRSA factors): single agent (piperacillin-tazobactam, cefepime, levofloxacin, imipenem or meropenem).",
+    "Never use an aminoglycoside as the only anti-pseudomonal agent. Consider adjunctive inhaled aminoglycoside or polymyxin for VAP due to Gram-negatives susceptible only to these."
+   ]
+  },
+  {
+   "kind": "treatment",
+   "title": "Indian practice (ICMR 2019)",
+   "items": [
+    "Early onset or minimal prior antibiotics: cefoperazone-sulbactam or piperacillin-tazobactam, alone or with amikacin.",
+    "Late onset or prior antibiotic exposure: meropenem or imipenem-cilastatin plus amikacin; where carbapenem resistance exceeds 20%, carbapenem plus colistin or polymyxin B (consider nebulised colistin with IV colistin).",
+    "Add empirical MRSA cover (linezolid, vancomycin or teicoplanin) where MRSA prevalence exceeds 10 to 20%. Suspected VAP with septic shock and rapid deterioration: cover MRSA and carbapenem-resistant Gram-negatives with the anti-pseudomonal beta-lactam.",
+    "Culture-proven Acinetobacter, Klebsiella or Pseudomonas: one active agent by susceptibility; reserve colistin or polymyxin B for isolates resistant to all other tested drugs. CRE with septic shock: two active agents.",
+    "Levofloxacin can be an oral step-down if susceptible. Do not use faropenem as step-down for carbapenem-susceptible infection; tigecycline is not recommended routinely for VAP."
+   ]
+  },
+  {
+   "kind": "monitoring",
+   "title": "Response, de-escalation and duration",
+   "items": [
+    "Review at 48 to 72 hours: temperature, WBC, oxygenation and FiO2, secretions, haemodynamics, culture results.",
+    "De-escalate to the narrowest active agent once cultures return; stop MRSA or second Gram-negative cover when not supported by cultures.",
+    "Treat for 7 days if there is a good clinical response (IDSA/ATS; ICMR). Longer for immunodeficiency, empyema, lung abscess, cavitation or necrotising pneumonia.",
+    "Dose for renal function; in morbid obesity use dosing weight = (actual + ideal body weight) / 2 (ICMR). Monitor vancomycin levels, and renal function and neurotoxicity with aminoglycosides, colistin or polymyxin B.",
+    "Not improving: look for empyema, abscess, a resistant or unusual organism, another infection source (line, urine, sinusitis, C. difficile) or a non-infectious cause."
+   ]
+  },
+  {
+   "kind": "escalate",
+   "title": "Escalate",
+   "items": [
+    "Septic shock or rising oxygen requirement: ICU, sepsis bundle, early source review.",
+    "Involve infectious diseases or the antimicrobial stewardship team for carbapenem-resistant organisms, polymyxin use or failure of therapy.",
+    "Pleural effusion with sepsis: ultrasound-guided aspiration to exclude empyema."
+   ]
+  },
+  {
+   "kind": "pitfalls",
+   "title": "Pitfalls",
+   "items": [
+    "Treating a positive endotracheal aspirate without clinical or radiological pneumonia (colonisation).",
+    "Using carbapenem plus colistin reflexively in units where resistance is low, or failing to de-escalate.",
+    "Aminoglycoside monotherapy, and underdosing in augmented renal clearance, obesity or with extended infusions not considered.",
+    "Courses beyond 7 days in patients who have responded."
+   ]
+  }
+ ],
+ "drugs": [
+  { "name": "Piperacillin-tazobactam", "dose": "4.5 g IV every 6 hours", "notes": "Anti-pseudomonal beta-lactam. Renal adjustment." },
+  { "name": "Cefepime", "dose": "2 g IV every 8 hours", "notes": "Renal adjustment; neurotoxicity in renal failure." },
+  { "name": "Cefoperazone-sulbactam", "dose": "3 g IV every 12 hours", "notes": "ICMR option for early-onset or low-exposure HAP/VAP." },
+  { "name": "Meropenem", "dose": "1 g IV every 8 hours", "notes": "Imipenem-cilastatin 500 mg IV every 6 hours is an alternative. Renal adjustment." },
+  { "name": "Amikacin", "dose": "15 to 20 mg/kg IV once daily", "notes": "Second Gram-negative agent only, never alone. Monitor levels and creatinine." },
+  { "name": "Levofloxacin", "dose": "750 mg IV or orally once daily", "notes": "Second anti-pseudomonal agent or step-down if susceptible; exclude TB. Renal adjustment." },
+  { "name": "Vancomycin", "dose": "15 mg/kg IV every 8 to 12 hours, adjusted to levels", "notes": "MRSA cover. IDSA/ATS 2016 trough target 15 to 20 mg/L." },
+  { "name": "Linezolid", "dose": "600 mg IV or orally every 12 hours", "notes": "MRSA cover; monitor platelets. Teicoplanin 400 mg IV every 12 hours for 3 doses then 10 mg/kg once daily is an alternative (ICMR)." },
+  { "name": "Colistin (colistimethate)", "dose": "9 million units IV loading dose, then 4.5 million units IV every 12 hours", "notes": "Carbapenem-resistant isolates only (ICMR). Adjust maintenance for renal function; nephrotoxic and neurotoxic." },
+  { "name": "Polymyxin B", "dose": "15,000 to 25,000 units/kg/day IV in 2 divided doses", "notes": "Carbapenem-resistant isolates only (ICMR); no renal adjustment of maintenance dose in most references." }
+ ],
+ "sources": [
+  { "org": "IDSA / ATS", "title": "Management of adults with hospital-acquired and ventilator-associated pneumonia: 2016 clinical practice guidelines", "year": 2016, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4981759/" },
+  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition (HAP/VAP)", "year": 2019, "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines" }
+ ],
+ "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+}
