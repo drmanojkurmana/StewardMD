@@ -184,7 +184,7 @@
       return '<div class="card"><h3>' + EN(c, esc(o.vendor)) + " · " + (Object.prototype.hasOwnProperty.call(stateWords, o.state) ? esc(stateWords[o.state]) : EN(c, esc(o.state))) + "</h3>" +
         '<p class="note">' + (o.location ? esc(T(c, "site.stores.po.forStore", "For store {store}", { store: o.location })) : esc(T(c, "site.stores.po.noStore", "Names no store"))) + "</p>" +
         '<div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.colOrdered", "Ordered")) + "</th><th>" + esc(T(c, "site.stores.colReceived", "Received")) + "</th><th></th></tr>" + o.lines.map(function (l) {
-          var matchItem = d && d.ok ? d.items.filter(function (i) { return i.code === l.item; })[0] : null;
+          var matchItem = d && d.ok && d.items ? d.items.filter(function (i) { return i.code === l.item; })[0] : null;
           var unitSel = '<select id="stPoUnit-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colUnit", "Unit")) + '">' + (matchItem ? unitOptions(c, matchItem, l.unit) : '<option value="' + esc(l.unit) + '">' + EN(c, esc(l.unit)) + "</option>") + "</select>";
           var book = canBook && l.outstanding > 0 ? '<input type="number" min="1" id="stPoQty-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.quantity", "Quantity")) + '"> ' + unitSel + ' <select id="stPoLoc-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colStore", "Store")) + '">' + locs + "</select> " +
             '<button class="btn quiet" type="button" data-st="bookin" data-id="' + id + '" data-po-line="' + esc(l.index) + '" data-item="' + esc(l.item) + '">' + esc(T(c, "site.stores.bookIn", "Book in")) + "</button>" : "";
