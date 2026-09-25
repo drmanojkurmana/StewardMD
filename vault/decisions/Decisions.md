@@ -9209,3 +9209,42 @@ takes the password once per app session and, while unlocked, backs up on change 
 floor; closing the app re-locks it. The backup holds only what exists nowhere else (drafts, queue,
 photographs) — verified entries stay on the server, because copying them into a file the resident
 can edit is how a logbook stops being evidence.
+
+## 2026-09-25 — One profile form, one institution directory
+Reported from a device: "all cities in India not covered and all medical colleges and hospitals not
+covered, and bug can't see and can't search college, and why two times institution is asked, I need
+one unified institution/hospital directory." Four separate faults, three of them real bugs.
+
+1. **Two forms.** `email-auth.js` asked a new doctor at sign-up for name/state/city/hospital against
+   `SMD_GEO` (107 hospitals, 184 cities); `profile-setup.js` then asked the SAME doctor on the next
+   app start for "college / hospital" against `SMD_HOSPITALS` (2,405 entries). Two questions, two
+   answers, two lists that disagreed. `profile-setup.js` is now the only form and asks the whole
+   profile once (name, phone, state, city, institution, degree, speciality). `email-auth.js`
+   delegates to it; its own form, typeahead and save were deleted rather than left as a second copy.
+   Both wrote the same Firestore doc already, so no profile is orphaned.
+
+2. **The college picker never opened.** `profile-setup.js` called the bare global `smdLazy(...)`,
+   but `lazy-load.js` is NOT among the scripts `index.html` loads, so the call threw ReferenceError
+   inside the click handler and nothing happened. The field looked focused and did nothing — that is
+   the "can't see and can't search college" report. It now loads the script itself when the helper
+   is absent. **Never reach for a global the page does not definitely define.**
+
+3. **The picker rows were invisible in dark mode.** `.pfs-opt b` and `.pfs-opt span` took their
+   colour from `--hink` / `--hmut`, the LIGHT theme's near-black, on a card the dark block had
+   already repainted `#111b2e`. Labels were black on black while the `--hbd` borders stayed light,
+   which is exactly what the screenshots showed: bright separator lines and no text. Every colour
+   inside the sheet is now restated under `body.dark`; the harness asserts a contrast ratio >= 4.5
+   (it measures 14.6) so this cannot regress silently.
+
+4. **Coverage.** `institutions-in.js` is the single directory. It does not copy the curated lists —
+   it reads whichever are loaded and merges them de-duplicated on normalised name+city, so the
+   curated data keeps living in one file each (2,462 institutions after the merge). What it adds is
+   the geography those lists lacked: every district headquarters of every state and UT, 1,241
+   entries against the previous 184, with no state left empty.
+
+**What "covered" is allowed to mean.** India has ~780 NMC medical colleges and on the order of
+70,000 hospitals. No bundled list is ever complete, and a picker that silently lacks your hospital
+is worse than one that admits it. So: cities are bounded public geography and are complete;
+institutions are curated and are NOT claimed to be exhaustive; free text is a first-class answer
+that is always offered; and what a doctor types is remembered on that device so the next colleague
+at the same hospital finds it. That last part also shows the owner what the curated list is missing.
