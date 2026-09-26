@@ -19,6 +19,23 @@ function ctx(path, { host = "stewardmd.in", doc = false, method = "GET", env = {
 }
 const text = (r) => r.text();
 
+test("internal directories are 404, on every host - Pages serves the repo root", async () => {
+  /* The repo root IS the Pages site, so a new top-level folder is PUBLIC the moment it is committed
+   * unless _middleware.js blocks it. `design/` was added with the widget work and would have served
+   * design/sheet.html and the variant PNG at stewardmd.in/design/... . The .md catch-all hid half of
+   * it (the philosophy note 404s on extension alone), which is exactly how this goes unnoticed. */
+  for (const host of ["stewardmd.in", "stewardmd.pages.dev"]) {
+    for (const path of ["/design/sheet.html", "/design/ask-maik-widgets-variants.png",
+                        "/vault/Home.md", "/ios/App/App.xcodeproj/project.pbxproj",
+                        "/scripts/build-www.sh", "/.github/workflows/ci.yml"]) {
+      const c = ctx(path, { host });
+      const r = await onRequest(c);
+      assert.equal(r.status, 404, `${host}${path} must not be publicly served`);
+      assert.deepEqual(c.served, [], `${host}${path} must never reach next()`);
+    }
+  }
+});
+
 test("site root -> marketing page even WITHOUT Sec-Fetch-Dest/Accept (the header-drop bug that 404'd it)", async () => {
   for (const req of [ctx("/"), ctx("/", { doc: true })]) {
     const r = await onRequest(req);
