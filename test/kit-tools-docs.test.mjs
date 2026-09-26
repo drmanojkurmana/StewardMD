@@ -147,6 +147,11 @@ test("LA doses, MCCD vague terms and notifiable conditions read from the source 
     r = la("Bupivacaine", 70, "With adrenaline", "0.5%");                 // 2.5 x 70 = 175, SmPC ceiling 150
     assert.equal(r.mg, 150); assert.equal(r.capped, true); assert.equal(r.ml, 30);
     assert.equal(la("Bupivacaine", 50, "With adrenaline", "0.5%").mg, 125);
+    // Prilocaine with adrenaline: 8 mg/kg, not more than 600 mg (Citanest Forte label); 70 x 8 = 560 is under it.
+    const pri = data["la-doses"].drugs.find((x) => x.id === "prilocaine").withAdrenaline;
+    assert.equal(pri.mgPerKg, 8); assert.equal(pri.maxMg, 600); assert.match(pri.ref, /600 mg/);
+    r = la("Prilocaine", 90, "With adrenaline", "2%");
+    assert.equal(r.mg, 560); assert.equal(r.capped, false);
     const T = K._tools["la-dose"];
     assert.match(T.text({ drug: "Levobupivacaine", weight: "60", adr: "Plain", strength: "0.5%" }), /^Local anaesthetic maximum dose \(BJA Education 2020/);
     assert.match(T.text({ drug: "Lidocaine (lignocaine)", weight: "60", adr: "Plain", strength: "1%" }), /^Local anaesthetic maximum dose \(Association of Anaesthetists 2014\)/);

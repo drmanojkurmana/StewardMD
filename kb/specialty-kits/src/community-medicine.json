@@ -19,7 +19,7 @@
     { "id": "cbac_activity", "label": "Physical activity", "type": "select", "opts": ["At least 150 minutes a week (0)", "Less than 150 minutes a week (1)"], "hint": "e.g. 30 minutes a day on 5 days a week" },
     { "id": "cbac_family", "label": "Parent or sibling with high BP, diabetes or heart disease", "type": "select", "opts": ["No (0)", "Yes (2)"] },
     { "id": "waist_measured", "label": "Waist circumference", "type": "number", "unit": "cm", "set": "waist_cm" },
-    { "id": "cbac_score", "label": "CBAC Part A total score", "type": "number", "hint": "A score above 4 means higher NCD risk; screen everyone whatever the score" },
+    { "id": "cbac_score", "label": "CBAC Part A total score", "type": "number", "hint": "A score above 4 (5 or more) means higher NCD risk: prioritise and refer (national MoHFW wording). Some state documents use 4 or more; follow your state's version. Screen everyone whatever the score" },
     { "id": "phq2_score", "label": "PHQ-2 score (CBAC Part D)", "type": "number", "unit": "/6", "hint": "A score above 3 needs assessment for depression" },
     { "id": "known_ncd", "label": "Known NCD and treatment", "type": "text", "hint": "e.g. hypertension on treatment from PHC since 2021" }
    ]
@@ -179,7 +179,7 @@
    "id": "anc-care",
    "title": "Care in pregnancy",
    "target": "diet_lifestyle_advice",
-   "text": "Eat about a quarter more food than usual, including a variety of foods, and use iodised salt. Rest for 2 hours in the day and 8 hours at night. Take the iron-folic acid and calcium tablets exactly as prescribed. Attend every antenatal check-up and plan your delivery in a hospital."
+   "text": "Eat one extra nutritious meal a day (about a quarter more food than usual), including a variety of foods, and use iodised salt. Rest for 2 hours in the day and 8 hours at night. Take the iron-folic acid and calcium tablets exactly as prescribed. Attend every antenatal check-up and plan your delivery in a hospital."
   },
   {
    "id": "anc-danger-signs",

@@ -153,7 +153,7 @@ set nothing), marks the fields touched (so the scribe never overwrites them) and
   ASA text (paywall); surgical pre-op panel includes HIV/HBsAg/HCV (Indian practice); MoHFW 2014 sexual
   violence guideline PDF unreachable (kit uses statements quoted by the Supreme Court 2022 and the UNFPA
   2017 handbook); MCCD modes of dying partly from ICMR-NCDIR 2022, "fever" deliberately not a vague term;
-  CBAC scored per the revised 9 Oct 2020 form (max 12, "above 4" high risk; 2025 module says 4 or more);
+  CBAC scored per the revised 9 Oct 2020 form ("above 4" high risk is the national MoHFW wording; some state documents use 4 or more, and the kit hint and calculator now say so, owner-checked 2026-09-26);
   notifiable list is 24 conditions from a 2009 district copy of the IDSP forms (COVID-19, scrub typhus,
   KFD, Nipah, kala-azar, leprosy left out as unverified); Labour Care Guide choices per WHO 2020;
   PPSv2 copyright and CFS permission to check; HEART troponin cut-offs; CHA2DS2-VA vs VASc; ILAE 2025

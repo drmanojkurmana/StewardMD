@@ -152,3 +152,30 @@ Telugu and Hindi handouts), and asked for everything to be fixed.
 - Already right: ringworm titles; sepsis "pale" (HI safed (pheeki), TE paalipoyi); ANC quarter more food.
 - Declined: nosebleed "5 then 15 minutes"; TE "durada" for scabies (means any itch); adding reasons the English does not give; "Form 6" (not verified in an official source).
 - For clinician look: ANC food advice differs between community-medicine ("a quarter more food") and obgyn ("one extra meal a day").
+
+## Owner source check, 2026-09-26 (resolves the clinician-review points above)
+The owner checked ten open points against primary or high-authority sources and supplied the wording:
+1. Clopidogrel with fibrinolysis: 300 mg load if under 75; at 75 or older, 75 mg with no load (ACC/AHA 2025;
+   ESC 2023 says older than 75). `stemi.json` item and drug entry.
+2. Albumin in sepsis: SSC 2026 suggests crystalloids alone over crystalloids plus albumin (conditional,
+   moderate certainty), a change from 2021; selected roles after large volumes or in cirrhosis; avoid in TBI.
+3. HHS: the "200 to 250 mg/dL until resolution" phrase is a secondary adaptation (Endotext), not a consensus
+   sentence; removed. Kept JBDS 180 to 270 first 24 h; below 250 add dextrose and continue insulin;
+   resolution includes glucose below 250 (2024 consensus).
+4. CBAC: national MoHFW wording is above 4 (5 or more); some state documents (e.g. Maharashtra) use 4 or
+   more. Kit hint and the `cbac` calculator say so (calculators.js token cbac2).
+5. Caesarean consent: scar rupture with planned vaginal birth after caesarean is about 1 in 200 (RCOG
+   "Birth after previous caesarean", checked); 1 in 1,000 with planned repeat caesarean. The old "1 in 98"
+   came from a different RCOG context. te/hi updated; source added.
+6. Mannitol in angle closure: 1 to 2 g/kg IV over about 30 minutes (EGS; 350 to 700 mL of 20% for 70 kg).
+7. Labetalol and diabetes (India pre-eclampsia): kept as FOGSI's listing, labelled; NICE and AHA/ACC 2025 do
+   not treat diabetes as a contraindication, so it reads as a caution (masked hypoglycaemia).
+8. Enteric fever: co-trimoxazole 960 mg twice daily for 2 weeks is a first-line oral option in the NCDC
+   2025 national guideline (owner's reading; the 2025 PDF URL returned 404 from the build environment; the
+   2016 edition, which was read, lists it as the alternative); also an oral step-down. NCDC 2025 source added.
+9. Prilocaine with adrenaline: 8 mg/kg, not more than 600 mg (Citanest Forte label on DailyMed, checked).
+   Only ropivacaine now has no mg ceiling.
+10. Pregnancy food: community-medicine ANC advice now reads "one extra nutritious meal a day (about a quarter
+    more food than usual)", matching the obgyn kit's "extra meal"; te/hi updated.
+Tests after these: unit suite 10,389 of 10,399 (the same 9 pre-existing twin-predict failures, 1 skipped);
+run-specialty-kits-ui 203 PASS; run-kb-protocols-ui ALL PASS; bundle checks OK.

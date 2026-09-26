@@ -15,7 +15,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var DOCS_V = "2974e6d78b78";
+  var DOCS_V = "598e7e3c41bc";
   // Heading for the doctor's own procedure-specific risks on a consent form (the template covers the general ones).
   var RISKS_H = { en: "Other risks discussed for this procedure", te: "ఈ ప్రక్రియకు సంబంధించి వివరించిన ఇతర ప్రమాదాలు", hi: "इस प्रक्रिया के लिए बताए गए अन्य जोखिम" };
 
