@@ -3698,8 +3698,9 @@ test("A DRAFT SUMMARY IS NOT A DOCUMENT, and a signed one is CDA level 1", async
   assert.match(cda.document, /<ClinicalDocument xmlns="urn:hl7-org:v3">/);
   assert.match(cda.document, /code="18842-5"/, "it says it is a discharge summary");
   assert.match(cda.document, /WSQ Ward Hospital/, "and names the custodian");
-  // The author is who SIGNED it, not who exported it.
-  assert.match(cda.document, new RegExp('<id extension="' + idFor(DOCTOR) + '"/>'));
+  // The author is who SIGNED it, not who exported it. OPS-22/F22: an id needs a root too, or the
+  // signer is anonymous to any receiver.
+  assert.match(cda.document, new RegExp('<id root="[^"]+" extension="' + idFor(DOCTOR) + '"/>'));
   assert.match(cda.document, /Community-acquired pneumonia/, "the summary's own words travel");
 
   /* IT CLAIMS LEVEL 1 AND NO MORE. A templateId would assert conformance to a profile this has never
@@ -6330,7 +6331,8 @@ test("HL7 v2: OFF by default; ON, an ADT A01 lands a patient and a visit through
   assert.equal(r.headers.get("x-wardsynq-ack"), "AA");
   const [code, ctl, text] = msa(ack);
   assert.equal(code, "AA"); assert.equal(ctl, "MSG-A01"); assert.match(text, /2 records filed/);
-  assert.match(ack, /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward Hospital\|HIS\|GENHOSP\|\d{14}\|\|ACK\^A01\^ACK\|/, "the ACK is addressed back to the sender");
+  // OPS-03/F3: the timestamp now always carries an explicit offset (+0000: it is UTC), never bare.
+  assert.match(ack, /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward Hospital\|HIS\|GENHOSP\|\d{14}\+0000\|\|ACK\^A01\^ACK\|/, "the ACK is addressed back to the sender");
   const pat = await RECORD.latest(TENANT_ROW.id, "Patient", "hl7v2-his-genhosp-pat-h-77");
   assert.ok(pat, "the patient is on the record under the HL7 feed's own name");
   assert.equal(pat.mrn, "H-77"); assert.equal(pat.meta.source.system, "hl7v2-his-genhosp"); assert.equal(pat.writtenBy.id, "adapter:hl7v2-his-genhosp"); assert.equal(pat.writtenBy.onBehalfOf, idFor(DOCTOR));
@@ -6354,7 +6356,8 @@ test("HL7 v2: OFF by default; ON, an ADT A01 lands a patient and a visit through
   const a03 = await pushHl7(DOCTOR, adt({ event: "A03", controlId: "MSG-A03" }));
   assert.equal(msa(await a03.text())[0], "AA");
   const done = await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-2026-001");
-  assert.equal(done.version, 3); assert.equal(done.status, "finished"); assert.equal(done.periodEnd, "2026-08-10T09:00:00Z");
+  // OPS-03/F3: PV1-45 is bare (no offset) - per HL7 v2.5.1 that is the sender's local time, Asia/Kolkata by default.
+  assert.equal(done.version, 3); assert.equal(done.status, "finished"); assert.equal(done.periodEnd, "2026-08-10T09:00:00+05:30");
   // Exported, the visit is a conformant FHIR Encounter like any other.
   const f = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/hl7v2-his-genhosp-enc-v-2026-001?orgId=${ORG}`)).json();
   assert.equal(f.status, "finished"); assert.equal(f.meta.source, "urn:stewardmd:source:hl7v2-his-genhosp");
