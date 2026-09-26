@@ -2188,7 +2188,13 @@ window.openExternal = function (u) {
 <script src="/rxchoice-flags.js?v=rxc3" defer></script>
 <script src="/rxchoice-core.js?v=rxc3" defer></script>
 <script src="/rxchoice-ui.js?v=rxc5-fr1" defer></script>
-<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1" defer></script>
+<!-- On-demand loader for the heavy vendor bundles (html2canvas, jsPDF). It defines
+     window.smdLazy, which prescription.js needs to export a prescription as JPEG or PDF.
+     It was NEVER referenced here, so smdLazy was undefined: prescription.js fell back to a
+     no-op that resolved without loading anything, html2canvas stayed undefined, and Save as
+     JPEG/PDF did nothing at all. The file is 15 lines and has no dependencies. -->
+<script src="/lazy-load.js?v=ll1"></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
