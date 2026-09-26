@@ -1809,6 +1809,7 @@
     "ward.flowsheet": "Flowsheet",
     "ward.fluid-balance": "Fluid balance",
     "ward.fluid-balance-could-not-be-loaded": "Fluid balance could not be loaded. Do not read this as nothing charted.",
+    "ward.fluid-direction-gaps": "{output} of these {v} hours have no output charted and {intake} have no intake charted. Read this balance as incomplete.",
     "ward.focus-is-on-its-refresh-button": ". Focus is on its refresh button.",
     "ward.follow-up": "Follow-up",
     "ward.follow-up-requested": "Follow-up requested.",

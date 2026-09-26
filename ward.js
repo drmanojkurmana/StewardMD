@@ -4118,7 +4118,10 @@
         "</div>" +
         (b.complete
           ? '<p class="w-hint">' + ms("check_circle") + wTH("ward.every-hour-of-this-period-has", "Every hour of this period has an entry.") + "</p>"
-          : '<p class="w-hint warn">' + ms("error") + (state.balanceSinceAdmission
+          : '<p class="w-hint warn">' + ms("error") + (!b.gaps.length && b.hours.length
+            /* CLIN-24: every hour has an entry, but not in both directions: say which is missing. */
+            ? wTH("ward.fluid-direction-gaps", "{output} of these {v} hours have no output charted and {intake} have no intake charted. Read this balance as incomplete.", { output: esc((b.outputGaps || []).length), intake: esc((b.intakeGaps || []).length), v: esc(b.hours.length) }, "output intake v")
+            : state.balanceSinceAdmission
             ? wTH("ward.of-the-hours-since-admission-have-nothing", "{length} of the {v} hours since admission have nothing charted. Read this balance as incomplete.", { length: esc(b.gaps.length), v: esc(b.gaps.length + b.hours.length) }, "length v")
             : wTH("ward.of-the-last-hours-have-nothing", "{length} of the last {v} hours have nothing charted. Read this balance as incomplete.", { length: esc(b.gaps.length), v: esc(b.gaps.length + b.hours.length) }, "length v")) + "</p>");
     var curDir = state.fluidDir === "output" ? "output" : "intake";
