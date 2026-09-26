@@ -9963,7 +9963,8 @@ turned out to be the main risk. Decisions, each implemented in `scripts/build-an
   and RGGWCH Puducherry 2017 are marked "for internal use only". Extracted, listed in the register with the
   reason, integrated only if the owner obtains permission. Plain "(c) ... all rights reserved" notices on
   public surveillance reports (ICMR, KARS-NET, SGPGIMS newsletters) are not treated as a bar to citing their
-  figures.
+  figures. Exception, on the owner's instruction (2026-09-26): the UCMS Antimicrobial Policy 2026-27 is openly
+  published without a restriction notice and is integrated (`UCMS_GTBH_2025`); the owner takes responsibility.
 - **Figures carried over between editions are cautions** (`copyChecks`): 6+ identical figures making up 75%+
   of those shared, 4+ of them strictly between 0 and 100. NARS-Net 2025 reprints two 2024 series.
 - **Exceptional resistance is a caution** (`unusualReason`): vancomycin in staphylococci under 90%, linezolid

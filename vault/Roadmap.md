@@ -31,7 +31,8 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
       from the cloud proxy (register reason "the website refused the connection from our network").
 - [ ] **Owner decision: held documents.** UCMS & GTB Hospital antibiograms 2023, 2023-24, 2025 (reproduction
       forbidden without the editorial board's permission) and CMC Ludhiana 2012, RGGWCH Puducherry 2017 ("for
-      internal use only") were extracted but are not in the app. Integrate only with permission.
+      internal use only") were extracted but are not in the app. Integrate only with permission. (The UCMS
+      Antimicrobial Policy 2026-27, openly published, was added on the owner's instruction as `UCMS_GTBH_2025`.)
 - [ ] Ask SKIMS, GMC Srinagar, AIIMS Bhopal, RIMS Imphal about figures the rules flag as exceptional (vancomycin
       and linezolid in staphylococci, carbapenems in S. Typhi): likely method (disk diffusion) issues. Ask the
       same laboratories whether their enterococcal "gentamicin" is the high-level (synergy) screen: until they

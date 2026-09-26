@@ -9,7 +9,7 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   region slices (north, south, east, west, central, networks, AIIMS) plus a sweep. Search results are
   US-indexed and some Indian portals refuse connections from the cloud proxy, so "not found" means not
   found from here, not "does not exist".
-- 194 documents found; 65 integrated into 85 source files: 43 institution editions from 18 institutions,
+- 194 documents found; 66 integrated into 86 source files: 44 institution editions from 19 institutions,
   24 network reports (ICMR AMRSN, NARS-Net 2017 to 2025, KARS-NET 2021 to 2025 with 4 districts and the
   Shigella series, TARS-Net, AARSNET), and 18 published hospital studies (shown on their own, never pooled).
 - Not integrated, each with its reason in the register: 37 journal articles (not an institution's
@@ -22,6 +22,10 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
 - Held for permission, extracted but not in the app: UCMS and GTB Hospital antibiograms 2023, 2023-24 and
   2025 ("forbids copying or reproduction without the permission of its editorial board"), CMC Ludhiana
   2012 and RGGWCH Puducherry 2017 ("for internal use only"). Integrate only if the owner gets permission.
+- Added later on the owner's instruction (2026-09-26): the UCMS & GTB Hospital Antimicrobial Policy 2026-27
+  (`UCMS_GTBH_2025`), which is openly published and carries no restriction notice; the owner takes
+  responsibility for its use. Ranked % susceptible lists for 2025 by infection type, no isolate numbers,
+  so its figures are shown grey and never pooled. The three UCMS antibiogram booklets stay held.
 - Regions: north 26 institution editions, west 13, south 3 (plus 12 network reports: TARS-Net, KARS-NET),
   east and North-East 1 (RIMS Imphal 2025; plus AARSNET and studies from Assam and Odisha). No public institutional
   antibiogram was found for West Bengal, Odisha, Bihar, Jharkhand, Tamil Nadu, Karnataka, Gujarat or
