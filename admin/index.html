@@ -492,9 +492,9 @@
       <div class="pane" id="pane-support" data-need-auth>
         <div class="card">
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Support tickets</b>
-            <div class="filters" id="supFilters"><button class="pill on" data-sf="open">Open</button><button class="pill" data-sf="">All</button><button class="pill" data-sf="resolved">Resolved</button></div>
+            <div class="filters" id="supFilters"><button class="pill on" data-sf="open">Open</button><button class="pill" data-sf="bugs">Bugs</button><button class="pill" data-sf="">All</button><button class="pill" data-sf="resolved">Resolved</button></div>
             <button class="ghost" id="supReload" style="padding:7px 11px">Reload</button></div>
-          <div class="hint" style="margin:6px 0 4px">Doctors file requests from the app (Help &amp; support). Each has a unique complaint id. Reply here and they see it in-app.</div>
+          <div class="hint" style="margin:6px 0 4px">Doctors file requests from the app (Help &amp; support) and bug reports by shaking the phone (the app promises a fix within 24 hours). Each has a unique complaint id. Reply here: they get a push and read it in the Bug Report Centre. Resolving a bug deletes its screenshot.</div>
           <div class="msg" id="supMsg"></div><div id="supBox" style="margin-top:12px"></div>
         </div>
       </div>
@@ -1054,18 +1054,23 @@
   // ---- Support tickets ----
   var supFilter="open";
   function supPill(st){ return '<span class="pill'+(st==="resolved"?"":" on")+'" style="pointer-events:none">'+(st==="resolved"?"Resolved":"Open")+'</span>'; }
+  // Bug SLA: the app promises a fix within 24 h of the report (dueAt).
+  function supDue(t){ if(t.kind!=="bug") return ""; if(t.status==="resolved") return '<span class="pill" style="pointer-events:none">Fixed</span>';
+    var left=(t.dueAt||0)-Date.now(), h=Math.ceil(Math.abs(left)/3600000);
+    return '<span class="pill'+(left<=0?' on':'')+'" style="pointer-events:none;'+(left<=0?'background:var(--red);border-color:var(--red)':'')+'">'+(left<=0?("Overdue "+h+" h"):("Due in "+h+" h"))+'</span>'; }
   function supLoad(){
     say("supMsg","","Loading…");
-    api(AI+"/support"+(supFilter?("?status="+supFilter):"")).then(function(x){
+    var bugsOnly=supFilter==="bugs";
+    api(AI+"/support"+(supFilter&&!bugsOnly?("?status="+supFilter):(bugsOnly?"?status=open":""))).then(function(x){
       if(x.s!==200){ say("supMsg","err",forbid(x)); return; }
       say("supMsg","","");
-      var ts=(x.d&&x.d.tickets)||[]; var nb=$("navSupport");
+      var ts=(x.d&&x.d.tickets)||[]; if(bugsOnly) ts=ts.filter(function(t){return t.kind==="bug";}).sort(function(a,b){return (a.dueAt||0)-(b.dueAt||0);}); var nb=$("navSupport");
       if(nb && supFilter==="open"){ nb.textContent=ts.length; nb.classList.toggle("on",ts.length>0); }
       if(!ts.length){ $("supBox").innerHTML='<div class="hint">No tickets.</div>'; return; }
       $("supBox").innerHTML=ts.map(function(t){
         return '<div data-sup="'+esc(t.id)+'" style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer">'+
-          '<div style="flex:1;min-width:0"><b>'+esc(t.subject)+'</b>'+(t.unread?' <span style="color:var(--red)">●</span>':'')+
-          '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+'</div></div>'+supPill(t.status)+'</div>';
+          '<div style="flex:1;min-width:0"><b>'+(t.kind==="bug"?'<span style="color:var(--red)">BUG</span> ':'')+esc(t.subject)+'</b>'+(t.unread?' <span style="color:var(--red)">●</span>':'')+
+          '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+'</div></div>'+supDue(t)+supPill(t.status)+'</div>';
       }).join("");
       Array.prototype.forEach.call($("supBox").querySelectorAll("[data-sup]"),function(el){ el.onclick=function(){ supOpen(el.getAttribute("data-sup")); }; });
     }).catch(function(){ say("supMsg","err","Failed to load."); });
@@ -1081,11 +1086,18 @@
       $("supBox").innerHTML=
         '<button class="ghost" id="supBack" style="padding:6px 10px;margin-bottom:8px">← Back</button>'+
         '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+' · '+esc(((t.platform||"")+" "+(t.build||"")).trim())+'</div>'+
-        '<b style="display:block;margin:4px 0 8px">'+esc(t.subject)+'</b><div>'+thread+'</div>'+
+        '<b style="display:block;margin:4px 0 8px">'+esc(t.subject)+'</b>'+
+        (t.kind==="bug"?('<div class="hint" style="margin-bottom:8px">'+supDue(t)+' '+
+          (t.bug&&t.bug.route?'Screen: <b>'+esc(t.bug.route)+'</b><br>':'')+
+          (t.bug&&t.bug.element?'Pointed at: <b>'+esc(t.bug.element.label||t.bug.element.tag||"")+'</b> <code>'+esc(t.bug.element.sel||"")+'</code><br>':'Whole screen<br>')+
+          (t.bug&&t.bug.screen?'Viewport '+t.bug.screen.w+'x'+t.bug.screen.h+' @'+t.bug.screen.dpr+'x · ':'')+esc((t.bug&&t.bug.ua)||"")+'</div>'+
+          (t.hasShot&&t.status!=="resolved"?'<img id="supShot" alt="Screenshot" style="max-width:260px;border-radius:10px;border:1px solid var(--line);margin-bottom:8px">':'')):'')+
+        '<div>'+thread+'</div>'+
         '<textarea id="supTx" placeholder="Reply to the doctor…" style="min-height:80px"></textarea>'+
         '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="supReplyBtn">Reply</button><button class="primary" id="supResolveBtn">Reply &amp; Resolve</button>'+
         (t.status==="resolved"?'<button class="ghost" id="supReopenBtn">Reopen</button>':'')+'</div><div class="msg" id="supTMsg"></div>';
       $("supBack").onclick=supLoad;
+      var si=$("supShot"); if(si){ tok().then(function(tk){ return fetch(AI+"/support-shot?id="+encodeURIComponent(id),{headers:{"Authorization":"Bearer "+tk}}); }).then(function(r){ return r.ok?r.blob():null; }).then(function(b){ if(b) si.src=URL.createObjectURL(b); else si.remove(); },function(){ si.remove(); }); }
       function send(mode){ var txt=($("supTx").value||"").trim(), body={id:id};
         if(mode==="reply"){ if(!txt){say("supTMsg","err","Enter a reply.");return;} body.text=txt; }
         else if(mode==="resolve"){ body.text=txt; body.resolve=true; } else if(mode==="reopen"){ body.status="open"; }

@@ -10097,3 +10097,15 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Reversible**: `TRIAL_ONCE_ON` off = byte-for-byte the old behaviour (tested). Rollout: set `TRIAL_PEPPER`,
   run the backfill, a week in `shadow`, then `1`.
 
+## 2026-09-26 - Shake to report a bug; Bug Report Centre replaces AgentConnect and My Clinic in the sidebar
+- **Context**: owner asked for shake-to-report with pointing at the problem, server-saved, a 24-hour fix
+  promise, a sidebar Bug Report Centre with developer replies, and AgentConnect + My Clinic removed.
+- **Decision**: a bug is a support ticket of `kind:"bug"` (`_support.js`), not a new store: the owner's
+  existing Support pane, complaint ids and reply thread already existed. `dueAt` = +24 h is shown to both
+  sides. Owner reply sends a push (id only). Screenshot optional, 30-day TTL, deleted on resolve.
+- **Why ticket, not the WardSynQ bug-reports module**: that one is tenant-scoped (hospital record store);
+  a doctor on the consumer app has no tenant.
+- **Sidebar**: only the sidebar rows were removed; AgentConnect (home tile, More sheet) and My Clinic (OPD
+  queue) remain reachable, so nothing is lost. Tour text updated.
+- **Reversible**: `smd_shake_report=0` turns shake off per device; the Centre still has "Report a bug".
+
