@@ -1,7 +1,7 @@
 ---
 tags: [module, clinical, ai]
 status: phase-1-built
-flag: smd_medcore + smd_medcore_shadow (both default OFF)
+flag: smd_medcore (default ON, BETA, deterministic only) + smd_medcore_shadow (default OFF)
 ---
 # Medical Core — Final Implementation Plan
 
@@ -37,12 +37,12 @@ HAZ-ML-02 control is how one of them quietly stops matching. It is one function,
 
 | Step | State | What exists |
 |---|---|---|
-| 1 flags | done | `medcore-flags.js`, both flags OFF, tag `medcore-pre-integration` (local; the tag push is 403 on this credential) |
+| 1 flags | done | `medcore-flags.js`. `smd_medcore` **default ON (BETA)** since 2026-09-26, `smd_medcore_shadow` OFF. Tag `medcore-pre-integration` (local; the tag push is 403 on this credential) |
 | 2 units | done | `medcore/data/units.json` (29 params) + `medcore/medcore-units.js`. HAZ-ML-03 |
 | 3 state | done | `medcore/data/freshness.json` + `medcore/medcore-state.js` (`fromIcuState`). `asOf` leakage control, HAZ-ML-04 |
 | 4 missing | done | `medcore/medcore-missing.js`, unioned with `icu-autoscores.js` `{__missing:[...]}` |
 | 5 changes | done | `medcore/data/change-bands.json` + `medcore/medcore-changes.js` |
-| 6 panel | done | `medcore-boot.js`, one flag-gated card in `icu.js`, `index.html`, `scripts/build-www.sh`, `test/run-medcore-ui.mjs` (19 browser assertions) |
+| 6 panel | done | `medcore-boot.js`, one flag-gated card in `icu.js` (BETA badge), `index.html`, `scripts/build-www.sh`, `test/run-medcore-ui.mjs` (22 browser assertions, both flag directions) |
 | 7 Phase 1 ships | done | this note, `vault/Home.md`, `vault/Flags.md`, `vault/decisions/Decisions.md` |
 | 8 WardSynQ adapter | done | `fromWardSynQ()` reading through `wardsynq-temporal.js` |
 | 9 features | done | `medcore/medcore-features.js` + the banned-feature list. HAZ-ML-01 |
@@ -54,8 +54,17 @@ HAZ-ML-02 control is how one of them quietly stops matching. It is one function,
 | 19 | **wired, nothing to register** | The shadow hands an OK decision to `wardsynq-mlops.js` `recordShadowPrediction`. An abstention is never recorded as a prediction, and today every decision is an abstention |
 | 20 to 21 | not started | The shadow period and the clinician-visible evaluation need an artifact that passed its gates on REAL data. None exists, and `decide()` correctly abstains on every synthetic one |
 
-**What a clinician gets today, with the flag on:** two deterministic lists on the ICU overview,
-"what changed" and "missing information". No probability, no alert, no prediction, nothing written.
+**What a clinician gets today (the flag is now ON by default, labelled BETA):** two deterministic
+lists on the ICU overview, "what changed" and "missing information". No probability, no alert, no
+prediction, nothing written. `?medcore=0` turns it off completely, with no rebuild.
+
+**Not yet in front of anyone.** StewardMD is mobile-only: the phone renders the local `www/`
+bundle, and `stewardmd.in` serves only `/api/*`. Merging to `main` deploys the server side, which
+this work did not touch. Default ON reaches a clinician only after `scripts/build-www.sh` →
+`cap sync` → native rebuild → reinstall, and **a reinstall destroys device-local SURGX notes**.
+
+**Open before it reaches the ward:** `medcore/data/change-bands.json` (~26 thresholds deciding what
+counts as a change worth showing) has never been read by a clinician.
 
 **What is NOT true today:** there is no model a clinician may see, no real training data, no
 calibrated probability in the product, no outcome anybody has approved, and no Medical Core signal

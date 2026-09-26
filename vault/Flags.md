@@ -86,31 +86,41 @@ leaving it present:
 - `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
   a patient record" surface rather than a plausible-looking drug round.
 
-## Medical Core — two flags, both OFF, added 2026-09-19
+## Medical Core — master ON (BETA) since 2026-09-26, model half OFF
 
 Registry: `medcore-flags.js` (repo root), read as query param → localStorage → default. Not in the
 2026-08-26 generated count above, which predates them. Plan: [[Medical Core]].
 
-**Nothing reads either flag yet.** They were created as step 1 of the Medical Core plan (the
-pre-integration step, tag `medcore-pre-integration`), deliberately BEFORE the code they gate, so that
-no later commit adds a switch and a clinical path in the same change. There is no `medcore/`
-runtime, no boot file, no event subscription and no panel, and `medcore-flags.js` is not loaded by
-`index.html`. Turning either flag on today does nothing at all. Pinned by
-`test/medcore-flags.test.mjs`, which fails the moment anything in the app reads them; the commit that
-wires the first consumer is the one that updates that test, naming it.
+Added 2026-09-19 as step 1 of the Medical Core plan (tag `medcore-pre-integration`), deliberately
+BEFORE the code they gate, so that no commit had to add a switch and a clinical path in the same
+change. Both defaulted OFF while there was nothing to enable. On **2026-09-26 the owner turned the
+master flag ON by default, labelled BETA** — see [[Decisions#2026-09-26 Medical Core deterministic
+layer default ON, BETA]].
 
-| Flag | State | Why OFF today | What turning it on will eventually permit |
+**The two halves are now in different states, and that split is the safety property.**
+
+| Flag | State | Why | Scope |
 |---|---|---|---|
-| `smd_medcore` | OFF | Master flag. There is no Medical Core code to reach: no state builder, no features, no model artifact, no validated outcome. Off must be a COMPLETE no-op — not loading the medcore files removes the feature entirely, with no edit to revert. | The deterministic feature layer first (Phase 1: patient state snapshot, "what changed", "missing information", unit and freshness checks), then, only after the Definition of Done in [[Medical Core]] is met, the single calibrated risk line as evidence for an EXISTING recognition prompt. Never its own alert. |
-| `smd_medcore_shadow` | OFF | The observer is BUILT (`medcore/medcore-shadow.js`, 2026-09-19) but has nothing to run: every artifact in the repo is synthetic and `medcore-models.js` refuses them all, so a shadow run records ABSTAIN / MODEL_UNAVAILABLE on every decision. It also requires `smd_medcore`, which is off; consumers ask `SMD_MEDCORE_FLAGS.shadowActive()` rather than reading this flag alone. | Running Medical Core decisions alongside the deterministic path for comparison only. Shadow means the output reaches NOBODY: no panel, no prompt, no notification, no clinician-visible log, no event back onto the bus, as `wardsynq-mlops.js` requires of a model in shadow. The observer attaches to a bus it is handed and modifies no host file, so not loading it removes the change completely. Its ring buffer keeps statuses, reasons and a probability DECILE - never a clinical value and never an identifier. |
+| `smd_medcore` | **ON (BETA)** | The deterministic layer is built, tested and reversible: `medcore/` (units, patient state, missing information, what changed, features, outcomes), `medcore-boot.js`, panel in `icu.js`. It computes nothing a clinician could not compute from the same chart; it only does it faster and says out loud what it could not check. | Patient state, "what changed", "missing information", unit and freshness checks. **No model, no probability.** The panel is labelled BETA, states "no prediction, no alert", states "Not a complete list", and reports its clinical packs as `unapproved`. |
+| `smd_medcore_shadow` | OFF | Nothing to shadow. Every candidate model was REFUSED by `medcore-models.js` — the synthetic ones for provenance, and every one trained on real public ICU data by the admission gates, most importantly `beatsFrequencyProbe` (a measurement-frequency-only probe matched or beat the model). That is hazard HAZ-ML-01 showing up in real data, and it is the reason there is no model to ship. | Running decisions alongside the deterministic path for comparison only. Output reaches NOBODY: no panel, no prompt, no notification, no clinician-visible log, no event back onto the bus, as `wardsynq-mlops.js` requires. Its ring buffer keeps statuses, reasons and a probability DECILE — never a clinical value, never an identifier. |
 
-Neither flag may move to ON in a release build until `scripts/wardsynq-assurance.mjs` reports
-HAZ-ML-01 to HAZ-ML-04 verified and a named clinician has approved `outcomes.json`. That is a
-clinical sign-off, not an engineering one, and no flag in this file can substitute for it.
+**The ON-in-a-release rule, and how the deterministic half clears it.** The rule written here on
+2026-09-19 was: neither flag moves to ON in a release build until `scripts/wardsynq-assurance.mjs`
+reports HAZ-ML-01..04 verified AND a named clinician has approved `outcomes.json`. Assurance now
+carries all four hazard rows and passes. The clinician approval does **not** exist, so the rule is
+met by scope rather than by sign-off: what shipped ON carries no model, and the packs it does read
+declare themselves `unapproved` in the UI where a clinician can see it. The rule stands unchanged
+for `smd_medcore_shadow` and for any artifact admission — **a model still requires the named
+clinical sign-off, and no flag in this file can substitute for it.**
+
+**Open item, tracked not closed:** `medcore/data/change-bands.json` (~26 numbers deciding what counts
+as a change worth showing) has not been read by a clinician. Default ON puts those thresholds in
+front of every user. The panel's "Not a complete list" footer is the mitigation, not the fix.
 
 On the NATIVE app there is no address bar, so the query param is unreachable — set the flag with
-`SMD_MEDCORE_FLAGS.set('smd_medcore', true)` in the WebView console, then reload. A reinstall clears
-`localStorage`, so a flag does NOT survive one.
+`SMD_MEDCORE_FLAGS.set('smd_medcore', false)` in the WebView console, then reload, to turn it off.
+A reinstall clears `localStorage`, so an override does NOT survive one: after a reinstall the
+default (ON) is what you get.
 
 ## Everything, by module
 
