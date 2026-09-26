@@ -94,7 +94,7 @@ places:
 9. **n from the organism table** (`nFrom`): a susceptibility table without its own n takes the exact
    organism count of that stratum, and the screen says so.
 10. **Breakpoints**: `breakpoints` (source key) records the standard as the document states it
-   ("CLSI M100, 33rd edition", "CLSI, edition not stated"); absent = not stated (49 of 84 sources). The source
+   ("CLSI M100, 33rd edition", "CLSI, edition not stated"); absent = not stated (50 of 85 sources). The source
    sheet shows it. `BP_CHANGES` (rules) lists CLSI revisions that move %S without any change in the
    bacteria: fluoroquinolones 2019 (Enterobacterales except Salmonella, P. aeruginosa), polymyxins 2020
    (intermediate and resistant only), piperacillin-tazobactam 2022 (Enterobacterales) and 2023

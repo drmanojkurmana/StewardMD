@@ -9,7 +9,7 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   region slices (north, south, east, west, central, networks, AIIMS) plus a sweep. Search results are
   US-indexed and some Indian portals refuse connections from the cloud proxy, so "not found" means not
   found from here, not "does not exist".
-- 194 documents found; 64 integrated into 84 source files: 42 institution editions from 17 institutions,
+- 194 documents found; 65 integrated into 85 source files: 43 institution editions from 18 institutions,
   24 network reports (ICMR AMRSN, NARS-Net 2017 to 2025, KARS-NET 2021 to 2025 with 4 districts and the
   Shigella series, TARS-Net, AARSNET), and 18 published hospital studies (shown on their own, never pooled).
 - Not integrated, each with its reason in the register: 37 journal articles (not an institution's
@@ -23,9 +23,10 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   2025 ("forbids copying or reproduction without the permission of its editorial board"), CMC Ludhiana
   2012 and RGGWCH Puducherry 2017 ("for internal use only"). Integrate only if the owner gets permission.
 - Regions: north 26 institution editions, west 13, south 3 (plus 12 network reports: TARS-Net, KARS-NET),
-  east none at institution level (AARSNET network; studies from Assam, Odisha). No public institutional
+  east and North-East 1 (RIMS Imphal 2025; plus AARSNET and studies from Assam and Odisha). No public institutional
   antibiogram was found for West Bengal, Odisha, Bihar, Jharkhand, Tamil Nadu, Karnataka, Gujarat or
-  Mumbai; a follow-up search of those states is recorded below when it finishes.
+  Mumbai. A follow-up search of those states was started but stopped by an account usage limit before
+  it reported; rerun it.
 
 ## Extraction and verification
 - Every integrated document was read by one agent and re-read by an independent second agent: a seeded
@@ -33,9 +34,12 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   and in most files every cell, every row n and every count, from page images (brief `VERIFY.md` in the
   session scratchpad). 83 of 84 sources are "double-checked"; 1 is the transcribed ICMR 2024 summary (no
   n, never pooled). Where a second reader corrected a value, the fix is logged in the file's `issues`.
-- Bundle: 2,977 rows (+1,104 derived), 31,066 cells: 29,597 shown, 867 with a caution, 509 intrinsic
-  resistance, 66 not relevant to the specimen, 27 not shown; 785 rows under 30 isolates (shown grey,
-  never pooled); 63 count-table disagreements, each the source's own and listed on its sheet.
+- Bundle: 3,094 rows (+1,110 derived), 32,505 cells: 30,899 shown, 953 with a caution, 548 intrinsic
+  resistance, 78 not relevant to the specimen, 27 not shown; 825 rows under 30 isolates (shown grey,
+  never pooled); 67 count-table disagreements, each the source's own and listed on its sheet.
+- Not finished: RIMS Imphal 2022-23 and 2023-24 were extracted but their second reading was stopped by
+  the usage limit, so they are not in the app (the register says so). Sumandeep Vadodara, SVIMS 2020 H1
+  and GIMSR HIC (archived copies) were not fetched for the same reason.
 - Rules added because of what the documents contained (copied figures across editions, exceptional
   resistance, tetracycline above doxycycline, pus aspirate filed as deep, n from the organism table, other
   species groups, enterococcal high-level gentamicin only when stated, ambiguous cells left out): see the
@@ -47,7 +51,8 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   screens, MRSA/MSSA combination, studies in pools, register honesty, per-institution profiles, notes,
   other-species groups, breakpoint revisions, the data kill switch, cefotaxime/ceftriaxone, exports,
   keyboard access, WISCA wording, the % resistant import check.
-- Round 2: see the end of this note.
+- Round 2 was launched but stopped by the account usage limit before it reported. Run it again
+  (brief `REVIEW.md` in the session scratchpad) before calling the module 10/10.
 
 ## Process slips to know about
 - Early in the census, crawl scripts ran with TLS verification off for about an hour before this was
