@@ -36,6 +36,22 @@
    * degree they do not hold. */
   var DEGREES = ["MBBS", "MD", "MS", "DM", "MCh", "DNB", "DrNB", "Diploma", "Other"];
 
+  /* The Role box (owner, 2026-09-26): who the user is decides which Home tools open for them
+   * (role-features.js). Stored on the profile doc as the KEY (student|intern|resident|doctor); the
+   * form shows the label. A registration verification later overrides the declared role. */
+  var ROLE_OPTS = [
+    { key: "student", label: "Medical student (UG)" }, { key: "intern", label: "Intern" },
+    { key: "resident", label: "PG Resident" }, { key: "doctor", label: "Doctor (practising)" }
+  ];
+  var ROLE_LABELS = ROLE_OPTS.map(function (r) { return r.label; });
+  function roleKey(v) {
+    var s = String(v == null ? "" : v).trim().toLowerCase();
+    for (var i = 0; i < ROLE_OPTS.length; i++) if (s === ROLE_OPTS[i].key || s === ROLE_OPTS[i].label.toLowerCase()) return ROLE_OPTS[i].key;
+    return "";
+  }
+  function roleLabel(v) { var k = roleKey(v); for (var i = 0; i < ROLE_OPTS.length; i++) if (ROLE_OPTS[i].key === k) return ROLE_OPTS[i].label; return ""; }
+  function isTraineeRole(v) { var k = roleKey(v); return k === "student" || k === "intern"; }
+
   /* Broad but finite. Covers the MD/MS/DNB, DM/MCh/DrNB and the common diploma tracks. */
   var SPECIALITIES = [
     "Internal Medicine", "General Surgery", "Paediatrics", "Obstetrics & Gynaecology",
@@ -68,6 +84,7 @@
    * finding the institution, so they are offered but never block a doctor whose hospital is already
    * named. */
   var FIELDS = [
+    { key: "role", label: "I am a", kind: "choice", opts: ROLE_LABELS, ph: "Choose your role", req: true, title: "What best describes you?" },
     { key: "name", label: "Full name", kind: "text", ph: "Dr Jane Doe", req: true },
     { key: "phone", label: "Phone number", kind: "tel", ph: "10-digit mobile number", req: true },
     { key: "state", label: "State / UT", kind: "state", ph: "Choose your state" },
@@ -82,7 +99,9 @@
     var out = [];
     for (var i = 0; i < FIELDS.length; i++) {
       if (!FIELDS[i].req) continue;                 // state/city help the search; they never block
-      var v = d[FIELDS[i].key];
+      // A medical student or intern holds no PG degree or speciality yet: never block them on those.
+      if ((FIELDS[i].key === "degree" || FIELDS[i].key === "speciality") && isTraineeRole(d.role)) continue;
+      var v = FIELDS[i].key === "role" ? roleKey(d.role) : d[FIELDS[i].key];
       if (v == null || String(v).trim() === "") out.push(FIELDS[i].key);
     }
     return out;
@@ -337,7 +356,7 @@
             title = "Choose your state or union territory";
           } else {
             items = f.opts;
-            title = "Choose your " + f.label.toLowerCase();
+            title = f.title || ("Choose your " + f.label.toLowerCase());
           }
           chooser(title, items, draft[k], function (v) {
             if (v) {
@@ -374,7 +393,10 @@
       var btn = el.querySelector("#pfsSave"); btn.disabled = true; btn.textContent = "Saving…";
       /* The SAME doc email-auth.js used to write, with the same keys, so a profile created by
        * either path is one profile. profileComplete is what email-auth's own prompt checks. */
+      var rk = roleKey(draft.role);
+      try { if (rk && window.SMD_ROLE) SMD_ROLE.set(rk); } catch (e) {}
       ref.set({
+        role: rk,
         name: draft.name || "", phone: draft.phone || "",
         state: draft.state || "", city: draft.city || "",
         hospital: draft.hospital || "", degree: draft.degree || "", speciality: draft.speciality || "",
@@ -397,6 +419,7 @@
     if (!ref) { draft = {}; form(true); return; }
     ref.get().then(function (snap) {
       draft = (snap && snap.exists && snap.data()) || {};
+      draft.role = roleLabel(draft.role);
       form(true);
     }).catch(function () { draft = {}; form(true); });
   }
@@ -404,7 +427,7 @@
   /* Tell the rest of the app the clinician's degree and speciality (specialty-kits.js personalises
    * Home, the default kit and MaiK from it). Professional details only, never patient data. */
   function announce(d) {
-    try { document.dispatchEvent(new CustomEvent("smd:profile-loaded", { detail: { degree: (d && d.degree) || "", speciality: (d && d.speciality) || "" } })); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent("smd:profile-loaded", { detail: { degree: (d && d.degree) || "", speciality: (d && d.speciality) || "", role: roleKey(d && d.role) } })); } catch (e) {}
   }
   /* Should we ask? Signed in, not snoozed this app-open, and something is genuinely missing. */
   function needed(cb) {
@@ -429,6 +452,7 @@
     needed(function (yes, d) {
       if (!yes) return;
       draft = d || {};
+      draft.role = roleLabel(draft.role);
       setTimeout(function () { form(true); }, 400);
     });
   }
@@ -452,6 +476,7 @@
 
   window.SMD_PROFILE_SETUP = {
     open: open, needed: needed, missing: missing, close: close,
-    DEGREES: DEGREES, SPECIALITIES: SPECIALITIES, FIELDS: FIELDS
+    DEGREES: DEGREES, SPECIALITIES: SPECIALITIES, FIELDS: FIELDS,
+    ROLE_OPTS: ROLE_OPTS, roleKey: roleKey, roleLabel: roleLabel
   };
 })();

@@ -108,6 +108,24 @@ export async function getUserRecord(env, uid) {
   return summarizeUser((d.users || [])[0]);
 }
 
+// One page of accounts with their parsed custom claims (Identity Toolkit "download accounts",
+// projects.accounts.batchGet). Owner-gated callers only (the Ultimate migration dry run).
+export async function listUsersPage(env, pageToken, maxResults) {
+  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
+  const saToken = await serviceAccountToken(env);
+  const q = "maxResults=" + Math.min(1000, Math.max(1, +maxResults || 500)) + (pageToken ? "&nextPageToken=" + encodeURIComponent(pageToken) : "");
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:batchGet?` + q, {
+    headers: { "Authorization": `Bearer ${saToken}` },
+  });
+  if (!res.ok) throw new Error("list_users_failed: " + res.status);
+  const d = await res.json();
+  const users = (d.users || []).map(function (u) {
+    var claims = {}; try { claims = u.customAttributes ? (JSON.parse(u.customAttributes) || {}) : {}; } catch (e) {}
+    return { uid: u.localId || "", email: (u.email || "").toLowerCase(), claims: claims };
+  });
+  return { users: users, nextPageToken: d.nextPageToken || null };
+}
+
 // Enable/disable a user's sign-in (Firebase Admin accounts:update disableUser). Returns true on success.
 export async function setUserDisabled(env, uid, disabled) {
   const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;

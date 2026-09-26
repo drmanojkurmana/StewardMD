@@ -1,5 +1,6 @@
-/* stt-fallback-route.test.mjs - the real /api/ai/transcribe handler spends the fallback credit only on
- * success and refuses with 402 stt-fallback-exhausted once the month's wallet is used up. */
+/* stt-fallback-route.test.mjs - the real /api/ai/transcribe handler charges dictation credits only on
+ * success, refuses with the top-up body (402 quota-exhausted, feature dict) when they are spent, and asks
+ * an account-less caller to sign in. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
@@ -21,34 +22,28 @@ async function transcribe(env, durationMs, ok) {
     return { status: res.status, body: await res.json() };
   } finally { globalThis.fetch = real; }
 }
-const spent = (kv) => { const k = [...kv._m.keys()].find((x) => x.startsWith("stt:fb:")); return k ? JSON.parse(kv._m.get(k)).spent : 0; };
-// The per-user 3 s rate limit sits in front; clear it between calls so each call reaches the wallet.
-const clearRate = (kv) => { for (const k of [...kv._m.keys()]) if (k.startsWith("maik:rl:")) kv._m.delete(k); };
 const BASE = { AI_PROVIDER: "developer", GEMINI_API_KEY: "k", PRO_FREE_UNTIL: "2000-01-01" };
 
-test("guest (free, Rs 10): one 5-minute fallback succeeds and is charged Rs 6; the next is refused", async () => {
+test("no account: 402 stt-fallback-signin, no model call, no rupees in the message", async () => {
   const kv = fakeKv(), env = Object.assign({ MAIK_KV: kv }, BASE);
-  const a = await transcribe(env, 300000, true);
-  assert.equal(a.status, 200);
-  assert.equal(a.body.transcript, "bp 120 by 80");
-  assert.equal(spent(kv), 600);
-  clearRate(kv);
-  const b = await transcribe(env, 300000, true);
-  assert.equal(b.status, 402);
-  assert.equal(b.body.error, "stt-fallback-exhausted");
-  assert.equal(b.body.allowanceInr, 10);
-  assert.equal(spent(kv), 600, "a refused call spends nothing");
+  let called = false;
+  const real = globalThis.fetch;
+  globalThis.fetch = async (u) => { if (String(u).indexOf("generateContent") >= 0) called = true; return new Response("{}"); };
+  try {
+    const request = new Request("https://stewardmd.in/api/ai/transcribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ audio: "data:audio/webm;base64,AAAA" }) });
+    const res = await onRequest({ request, env, params: { path: ["transcribe"] }, waitUntil: () => {} });
+    const b = await res.json();
+    assert.equal(res.status, 402);
+    assert.equal(b.error, "stt-fallback-signin");
+    assert.ok(!/₹|Rs\s?\d/.test(b.message));
+  } finally { globalThis.fetch = real; }
+  assert.equal(called, false);
 });
 
-test("a failed transcription spends nothing", async () => {
-  const kv = fakeKv(), env = Object.assign({ MAIK_KV: kv }, BASE);
-  try { await transcribe(env, 60000, false); } catch (e) {}
-  assert.equal(spent(kv), 0);
-});
-
-test("kill switch STT_FALLBACK_CREDITS_ON=0: unmetered", async () => {
+test("kill switch STT_FALLBACK_CREDITS_ON=0: guests transcribe unmetered as before", async () => {
   const kv = fakeKv(), env = Object.assign({ MAIK_KV: kv, STT_FALLBACK_CREDITS_ON: "0" }, BASE);
   const a = await transcribe(env, 900000, true);
   assert.equal(a.status, 200);
-  assert.equal(spent(kv), 0);
+  assert.equal(a.body.transcript, "bp 120 by 80");
+  assert.ok(![...kv._m.keys()].some((k) => k.startsWith("quota:dict:")));
 });

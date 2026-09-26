@@ -3,7 +3,7 @@
  * experimental-access gates prefer the person-tier over the device-activation tier when
  * ENTITLEMENTS_ON. Pure derivation + deps-injectable IO so the whole thing is testable offline. */
 import * as FS from "./_fbfirestore.js";
-import { lookupUidByEmail, getUserClaims, lookupUserByUid } from "./_fbadmin.js";
+import { lookupUidByEmail, getUserClaims, lookupUserByUid, listUsersPage, mergeUserClaims } from "./_fbadmin.js";
 import { invalidateBudgetCache, PREMIUM_MODELS, effectiveAllowance } from "./_aibudget.js";
 import { usageKv } from "./_usage.js";
 // Call-time-only cycle: _features.js imports getEntitlement from here; safe because these
@@ -17,24 +17,42 @@ import { cfgFlag } from "./_billingcfg.js";
 export const ROLES = ["pro", "physician", "physician_pro", "resident", "co_resident", "intern", "student"];
 const COLL = "entitlements";
 
-// Signed-in device limit per role (anti-sharing lock). 1 for everyone except co_resident (2-account
-// plan) and physician_pro (cloud multi-device) = 2. Env override DEVICE_LIMIT_<ROLE>. See _devices.js.
-export function deviceLimit(env, role) {
-  const r = normalizeRole(role);
-  const ov = Number(cfgFlag(env, "DEVICE_LIMIT_" + String(r || "").toUpperCase()));
+// Signed-in device limit (anti-sharing lock). Owner 2026-09-26 (vault/Role-Tiers.md section 3 / D1, D6):
+// every plan, Free included, gets TWO devices (one phone + one iPad; the per-class slot is not enforced
+// yet, only the count), except Co-Resident, which is two logins on one subscription with ONE device each.
+// Pass the entitlements RECORD (preferred: keyed on the purchased tier) or, for older callers, a role
+// string. Env override DEVICE_LIMIT_<TIER or ROLE>. See _devices.js.
+export function deviceLimit(env, recordOrRole, now) {
+  const key = limitKey(recordOrRole, now);
+  const ov = Number(cfgFlag(env, "DEVICE_LIMIT_" + String(key || "").toUpperCase()));
   if (Number.isFinite(ov) && ov >= 1) return Math.floor(ov);
-  return (r === "co_resident" || r === "physician_pro") ? 2 : 1;
+  return (key === "coresident" || key === "co_resident") ? 1 : 2;
 }
-// Personal-clinic limit per role. None for Free/trainees; Pro 2, Physician 4, Physician Pro 6.
-// Env override CLINIC_LIMIT_<ROLE>. Beyond the limit = the ₹100/clinic/mo add-on (billed separately).
-export function clinicLimit(env, role) {
-  const r = normalizeRole(role);
-  const ov = Number(cfgFlag(env, "CLINIC_LIMIT_" + String(r || "").toUpperCase()));
-  if (Number.isFinite(ov) && ov >= 0) return Math.floor(ov);
-  if (r === "physician_pro") return 6;
-  if (r === "physician") return 4;
-  if (r === "pro") return 2;
-  return 0;
+// Personal-clinic limit. Owner plan: clinics belong to the practice plans only, so Clinician
+// (physician) 4, Clinician Pro (physicianpro) 6, Ultimate 10, everyone else 0 (Resident Pro included:
+// PG residents may not run a private practice). Plus any active "extra clinic" add-on slots (Rs 139 each).
+// Env override CLINIC_LIMIT_<TIER or ROLE>.
+export function clinicLimit(env, recordOrRole, now) {
+  const key = limitKey(recordOrRole, now);
+  const extra = (recordOrRole && typeof recordOrRole === "object") ? clinicAddonSlots(recordOrRole, now) : 0;
+  const ov = Number(cfgFlag(env, "CLINIC_LIMIT_" + String(key || "").toUpperCase()));
+  if (Number.isFinite(ov) && ov >= 0) return Math.floor(ov) + extra;
+  const base = key === "ultimate" ? 10 : (key === "physicianpro" || key === "physician_pro") ? 6 : key === "physician" ? 4 : 0;
+  return base + extra;
+}
+// A record is keyed on its effective purchased tier, falling back to its role while the account has
+// no paid tier (admin comps set a role only); a bare string is a role (back-compat).
+function limitKey(recordOrRole, now) {
+  if (recordOrRole && typeof recordOrRole === "object") {
+    const t = effectiveTierFor(recordOrRole, now);
+    return t !== "free" ? t : normalizeRole(recordOrRole.role);
+  }
+  return normalizeRole(recordOrRole);
+}
+export function clinicAddonSlots(record, now) {
+  const exp = record && record.clinicAddonExp;
+  if (exp == null || +exp <= (now || Date.now())) return 0;
+  return Math.max(0, Math.floor(+record.clinicAddonSlots || 0));
 }
 
 // ---- Purchase tier (separate from role) ----
@@ -42,8 +60,10 @@ export function clinicLimit(env, role) {
 // tier  = WHAT they paid for, from the plan key the payment carried. Never self-declared.
 // Keeping them apart is the whole point: one Trainee price, three trainee roles, and a PG-logbook
 // gate that needs the role while Scribe needs the tier. `tierExp` null = forever (owner comp).
-export const TIERS = ["free", "trainee", "coresident", "pro", "physician", "physicianpro"];
-const TIER_RANK = { free: 0, trainee: 1, coresident: 2, pro: 3, physician: 4, physicianpro: 5 };
+// "ultimate" (owner 2026-09-26): everything, for friends and testers. NEVER SOLD: tierFromPlanKey refuses
+// it, so only the owner-gated adminSetPlan can write it.
+export const TIERS = ["free", "trainee", "coresident", "pro", "physician", "physicianpro", "ultimate"];
+const TIER_RANK = { free: 0, trainee: 1, coresident: 2, pro: 3, physician: 4, physicianpro: 5, ultimate: 6 };
 const DAY_MS = 86400000;
 
 export function normalizeTier(t) {
@@ -55,7 +75,7 @@ export function normalizeTier(t) {
 export function tierFromPlanKey(planKey) {
   const s = String(planKey || "").trim().toLowerCase();
   const head = s.indexOf(":") < 0 ? s : s.slice(0, s.indexOf(":"));
-  if (!head || head === "tokens" || head === "addon") return null;
+  if (!head || head === "tokens" || head === "addon" || head === "ultimate") return null;
   if (head === "student" || head === "trainee") return "trainee";
   return normalizeTier(head);
 }
@@ -84,6 +104,12 @@ export function purchasePatch(record, planKey, opts, now) {
   const ms = Math.max(1, Math.round(days)) * DAY_MS;
   if (String(planKey || "").trim().toLowerCase() === "addon:onco") {
     return { oncoAddonExp: Math.max(+(record && record.oncoAddonExp) || 0, now) + ms };
+  }
+  // Extra clinic (Rs 139/clinic/month): each purchase adds one slot while the add-on is live and
+  // extends the shared expiry. Before 2026-09-26 this bought nothing but a month of Pro (audit finding 1).
+  if (String(planKey || "").trim().toLowerCase() === "addon:clinic") {
+    const slots = clinicAddonSlots(record, now) + 1;
+    return { clinicAddonSlots: slots, clinicAddonExp: Math.max(+(record && record.clinicAddonExp) || 0, now) + ms };
   }
   const bought = tierFromPlanKey(planKey);
   if (!bought) return null;
@@ -213,7 +239,7 @@ export async function adminLookup(env, body, deps) {
   let used = 0;
   try { if (kv) used = (((await kv.get("maik:m:fb:" + r.uid + ":" + month, "json")) || {}).tokens) || 0; } catch (e) {}
   let cap = 0;
-  try { cap = effectiveAllowance(env, claims.pro === true, rec.role, claims.verified === true, rec, month); } catch (e) {}
+  try { cap = effectiveAllowance(env, claims.pro === true, rec.role, claims.phoneVerified === true, rec, month); } catch (e) {}
   const reg = deps.FEATURE_REGISTRY || FEATURE_REGISTRY;
   const featAllow = deps.featureAllowed || featureAllowed;
   const features = reg.map((e) => ({
@@ -259,6 +285,81 @@ export async function adminClearOverride(env, body, deps) {
   const write = deps.writeEntitlement || writeEntitlement;
   await write(env, r.uid, { ["override_" + feature]: null, updatedBy: (body && body.updatedBy) || null }, deps);
   return { ok: true, uid: r.uid, feature, cleared: true };
+}
+
+// ---- Owner-gated plan admin (audit finding 8, 2026-09-26) ----
+// Sets the PURCHASE tier directly: comps, testers, institution seats, and "ultimate", which no payment
+// path can write. { tier, days } | { tier, expiresAt } | { tier, forever:true }; tier "free" clears it.
+// Unlike a purchase this CAN downgrade: it is the owner correcting a record, not money arriving.
+export async function adminSetPlan(env, body, deps) {
+  deps = deps || {};
+  const tier = normalizeTier(body && body.tier);
+  if (!tier) return { ok: false, error: "bad_tier" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const now = (body && body.now) || Date.now();
+  let tierExp = null;
+  if (tier === "free") tierExp = null;
+  else if (body && body.forever === true) tierExp = null;
+  else if (body && body.expiresAt != null) { tierExp = +body.expiresAt; if (!(tierExp > now)) return { ok: false, error: "bad_expiry" }; }
+  else { const d = nonNegInt(body && body.days); if (!d) return { ok: false, error: "bad_days" }; tierExp = now + d * DAY_MS; }
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { tier, tierExp, updatedBy: (body && body.updatedBy) || null }, deps);
+  // A paid tier must also carry the `pro` claim, which is what every existing Pro gate reads. Never
+  // SHORTEN an existing claim here (it may be a longer paid subscription); "free" leaves it alone
+  // (revoking Pro is the separate, explicit /billing/revoke).
+  if (tier !== "free") {
+    const claimsOf = deps.getUserClaims || getUserClaims;
+    const merge = deps.mergeUserClaims || mergeUserClaims;
+    let cur = {}; try { cur = (await claimsOf(env, r.uid)) || {}; } catch (e) { cur = {}; }
+    const curForever = cur.pro === true && !cur.proExp;
+    const proExp = (curForever || tierExp == null) ? null : Math.max(tierExp, cur.pro === true ? (+cur.proExp || 0) : 0);
+    await merge(env, r.uid, { pro: true, proExp, source: cur.pro === true && cur.source ? cur.source : "plan:" + tier });
+  }
+  await afterWrite(env, r.uid, deps);
+  return { ok: true, uid: r.uid, tier, tierExp };
+}
+
+/* Owner decision 2026-09-26 (D3): every account holding the `pro` claim moves to "ultimate".
+ * REVIEW FIRST: dryRun (the default) only LISTS candidates with how they got Pro; nothing is written
+ * until the owner calls again with { dryRun:false, uids:[...] } naming exactly who to convert. Paying
+ * store/web subscribers (source "subscription"/"iap"/"razorpay"/"phonepe") are listed under `paying`
+ * and are only converted if named explicitly. The `pro` claim is left untouched, so undoing a
+ * conversion is adminSetPlan({ tier:"free" }). tierExp mirrors the claim's proExp (null = forever). */
+const PAYING_SOURCES = ["subscription", "iap", "apple", "google", "razorpay", "phonepe"];
+export async function adminUltimateMigration(env, body, deps) {
+  deps = deps || {};
+  body = body || {};
+  const dryRun = body.dryRun !== false;
+  if (dryRun) {
+    const list = deps.listUsersPage || listUsersPage;
+    const candidates = [], paying = [];
+    let token = body.pageToken || null, pages = 0;
+    do {
+      const pg = await list(env, token, 500);
+      (pg.users || []).forEach((u) => {
+        const c = u.claims || {};
+        if (c.pro !== true) return;
+        const row = { uid: u.uid, email: u.email || null, source: c.source || null, proExp: c.proExp || null };
+        (PAYING_SOURCES.indexOf(String(c.source || "").toLowerCase()) >= 0 ? paying : candidates).push(row);
+      });
+      token = pg.nextPageToken || null; pages++;
+    } while (token && pages < 20);
+    return { ok: true, dryRun: true, candidates, paying, more: !!token, pageToken: token };
+  }
+  const uids = Array.isArray(body.uids) ? body.uids.map(String).filter(Boolean) : [];
+  if (!uids.length) return { ok: false, error: "no_uids" };
+  const claimsOf = deps.getUserClaims || getUserClaims;
+  const write = deps.writeEntitlement || writeEntitlement;
+  const done = [], skipped = [];
+  for (const uid of uids) {
+    const c = (await claimsOf(env, uid)) || {};
+    if (c.pro !== true) { skipped.push({ uid, reason: "not_pro" }); continue; }
+    const tierExp = c.proExp ? +c.proExp : null;
+    await write(env, uid, { tier: "ultimate", tierExp, migratedFrom: "pro-claim", updatedBy: body.updatedBy || null }, deps);
+    await afterWrite(env, uid, deps);
+    done.push({ uid, tierExp });
+  }
+  return { ok: true, dryRun: false, converted: done, skipped };
 }
 
 // ---- Owner-gated AI-budget admin actions (Phase 3) ----

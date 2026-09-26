@@ -20,7 +20,7 @@ import { entitlementFor, grantPro, revokePro, promoUntil, promoActive } from "..
 import { markFirstSeen } from "../../_lifecycle.js";
 import { reconcileVerifiedClaim } from "../../_verify_claim.js";
 import { verifyPurchase, daysFromExpiry, iapConfigured } from "../../_iap.js";
-import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
+import { lookupUidByEmail, lookupUserByUid, getUserClaims } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
@@ -48,7 +48,7 @@ function razorpayCfg(env) {
 
 // Plans — amounts in PAISE (₹1 = 100), env-overridable. See docs/PRICING_PACKAGING.md. `monthly`/`annual`
 // stay as the Pro back-compat keys the current paywall renders; `tiers`/`addons`/`founding` carry the full set.
-function plans(env) {
+export function plans(env) {
   const P = (k, d) => cfgPrice(env, k, d);   // live KV price override > env > default
   return {
     monthly: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), label: "Pro Monthly" },
@@ -56,15 +56,16 @@ function plans(env) {
     tiers: {
       student: { months: 1, amount: P("STUDENT_PRICE_MONTHLY", 19900), annual: P("STUDENT_PRICE_ANNUAL", 199900), regular: P("STUDENT_REGULAR", 39900), label: "Trainee", requiresVerify: true },
       coresident: { months: 1, amount: P("CORESIDENT_PRICE_MONTHLY", 29900), annual: P("CORESIDENT_PRICE_ANNUAL", 299900), regular: P("CORESIDENT_REGULAR", 99900), seats: 2, label: "Co-Resident" },
-      pro: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), annual: P("PRO_PRICE_ANNUAL", 599900), regular: P("PRO_REGULAR", 99900), label: "Pro", popular: true },
-      /* 2026-09-18 owner: the top two tiers come down to ₹749 / ₹899 (were ₹1,499 / ₹2,499). Two rules
-       * this ladder depends on, so don't "tidy" them:
+      pro: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), annual: P("PRO_PRICE_ANNUAL", 499900), regular: P("PRO_REGULAR", 99900), label: "Pro", popular: true },
+      /* Defaults = what production serves (wrangler.toml env, read from /api/billing/plans 2026-09-26):
+       * Rs 1,499 / Rs 2,499. They used to say Rs 749 / Rs 899 (a 2026-09-18 note), so dropping the env var
+       * would have silently halved the price (audit finding 7). Two rules this ladder depends on:
        *  - Every annual is 10x the monthly (two months free). 8x was tested and drops Physician below
        *    the 50% margin floor once the included FollowCare/Scribe quotas are paid for.
        *  - `regular` is the struck-through anchor. Owner 2026-09-26: Physician (Clinician) Rs 3,499 and
        *    Physician Pro (Clinician Pro) Rs 4,999. See vault/Role-Tiers.md section 10. */
-      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 74900), annual: P("PHYSICIAN_PRICE_ANNUAL", 749900), regular: P("PHYSICIAN_REGULAR", 349900), label: "Physician" },
-      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 89900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 899900), regular: P("PHYSICIANPRO_REGULAR", 499900), label: "Physician Pro", premium: true },
+      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 149900), annual: P("PHYSICIAN_PRICE_ANNUAL", 1499900), regular: P("PHYSICIAN_REGULAR", 349900), label: "Physician" },
+      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 249900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 2499900), regular: P("PHYSICIANPRO_REGULAR", 499900), label: "Physician Pro", premium: true },
     },
     addons: {
       onco: { amount: P("ONCO_ADDON_MONTHLY", 8900), label: "Physician Onco" },
@@ -74,14 +75,37 @@ function plans(env) {
     // App Store group so they stack on whatever base plan the doctor already holds. Units + product
     // ids live in functions/_quota.js, which is also what meters them.
     msgTiers: msgTiers(env),
-    tokens: {
-      boost: { mt: 50000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
-      plus: { mt: 250000, amount: P("TOKENS_PLUS", 19900), regular: P("TOKENS_PLUS_REGULAR", 24500), label: "Plus", popular: true },
-      power: { mt: 750000, amount: P("TOKENS_POWER", 49900), regular: P("TOKENS_POWER_REGULAR", 73500), label: "Power" },
-    },
+    tokens: tokenPacks(env, P),
     // Per-patient / per-consult top-up packs (functions/_quota.js owns the units + product ids).
     packs: quotaPacks(env),
     founding: { amount: P("FOUNDING_PRICE_YEAR", 39900), months: 12, seats: P("FOUNDING_SEATS", 500), label: "Founding Doctor (year)" },
+  };
+}
+
+/* MaiK Token packs. Until PACKS_V2_FROM (default 2026-12-26, 3 months after the owner's 2026-09-26
+ * call) the Introductory sizes stay. From then each pack holds fewer tokens at the same price, because
+ * the old sizes sold 2,000 MT for Rs 1 while 2,000 MT is also Rs 1 of our cost: the Power pack lost money
+ * after the App Store fee (audit finding 13; vault/Role-Tiers.md section 10). The fulfilment path reads
+ * the same table, so what is shown is what is credited. Struck anchors only where genuinely higher. */
+export const PACKS_V2_FROM_DEFAULT = Date.parse("2026-12-26T00:00:00+05:30");
+export function packsV2Active(env, now) {
+  const raw = env && env.PACKS_V2_FROM;
+  const at = raw == null || raw === "" ? PACKS_V2_FROM_DEFAULT : (/^\d+$/.test(String(raw)) ? +raw : Date.parse(String(raw)));
+  return (now || Date.now()) >= (Number.isFinite(at) ? at : PACKS_V2_FROM_DEFAULT);
+}
+export function tokenPacks(env, P, now) {
+  P = P || ((k, d) => cfgPrice(env, k, d));
+  if (!packsV2Active(env, now)) {
+    return {
+      boost: { mt: 50000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
+      plus: { mt: 250000, amount: P("TOKENS_PLUS", 19900), regular: P("TOKENS_PLUS_REGULAR", 24500), label: "Plus", popular: true },
+      power: { mt: 750000, amount: P("TOKENS_POWER", 49900), regular: P("TOKENS_POWER_REGULAR", 73500), label: "Power" },
+    };
+  }
+  return {
+    boost: { mt: 10000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
+    plus: { mt: 40000, amount: P("TOKENS_PLUS", 19900), label: "Plus", popular: true },
+    power: { mt: 100000, amount: P("TOKENS_POWER", 49900), label: "Power" },
   };
 }
 
@@ -151,6 +175,15 @@ export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
     return { ok: true, tokens: p.mt, balanceInr: r.balance, email: u.email };
   }
   const m = Math.max(1, +months || 1);
+  /* Add-ons (onco Rs 89, extra clinic Rs 139) buy the add-on, NOT a month of Pro. Before 2026-09-26
+   * they fell through to grantPro below (audit finding 1): the same bug the token packs and Clinic
+   * Messaging tiers already had. They return here, recording only the add-on on the entitlement. */
+  if (/^addon:/i.test(String(planKey || ""))) {
+    let add = null;
+    try { add = await (deps && deps.recordTierPurchase || recordTierPurchase)(env, uid, planKey, { months: m }, deps); } catch (e) { add = null; }
+    if (!add) return { ok: false, reason: "unknown-addon" };
+    return Object.assign({}, add, { ok: true, addon: String(planKey).slice(6).toLowerCase() });
+  }
   const g = await grant(env, uid, { months: m, source });
   // Record WHICH plan was bought (tier / onco add-on). Best-effort: the Pro grant above is the money
   // path and must not fail because the entitlement store blinked — the tier can be reconciled later.
@@ -159,12 +192,26 @@ export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
   return Object.assign({ ok: true }, g, tier ? { tier: tier.tier || null, tierExp: tier.tierExp } : {});
 }
 
+/* The Trainee plan is `requiresVerify` (audit finding 12: declared, never enforced). A web order for
+ * it needs a reviewed account: registration-verified, trainee-verified (student/intern approved by the
+ * owner), or in manual review. Returns the refusal body, or null to proceed. deps: getUserClaims. */
+export async function traineeGate(env, uid, body, deps) {
+  if (!body || body.tier !== "student") return null;
+  let c = {};
+  try { c = (await ((deps && deps.getUserClaims) || getUserClaims)(env, uid)) || {}; } catch (e) { return null; }   // fail-open: never block a payment on a claims read
+  if (c.verified === true || c.traineeVerified === true || (+c.provUntil || 0) > Date.now()) return null;
+  return { error: "verify-first", message: "The Trainee plan is for verified students, interns and residents. Verify your college ID first, then choose the plan." };
+}
+
 // App Store / Play product id -> the same plan key the web checkout issues.
 // in.stewardmd.<tier>.<monthly|annual> and in.stewardmd.addon.<name>; token packs keep their own
 // (consumable) id shape handled at the IAP route.
 export function planKeyFromProductId(productId) {
   const m = /^in\.stewardmd\.([a-z]+)\.([a-z]+)$/.exec(String(productId || "").toLowerCase());
   if (!m) return null;
+  // The app has always sent "in.stewardmd.onco.monthly" for the onco add-on (pro-paywall.js), which the
+  // tier rule below turned into "onco:monthly", a plan nobody sells (audit finding 2). Same product.
+  if (m[1] === "onco") return "addon:onco";
   if (m[1] === "addon") return "addon:" + m[2];
   if (m[2] !== "monthly" && m[2] !== "annual") return null;
   return m[1] + ":" + m[2];
@@ -286,7 +333,7 @@ export async function onRequest(context) {
         signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env),
         quota: quota, quotaOn: quotaOn(env),
         tokens: inrToMt(credits), costCapMt: inrToMt(costCap), mtPerInr: MT_PER_INR,   // MaiK Tokens = what the UI shows
-        role: role || null, clinicLimit: clinicLimit(env, role), deviceLimit: deviceLimit(env, role), deviceLockOn: deviceLockOn(env),
+        role: role || null, clinicLimit: clinicLimit(env, ent || role), deviceLimit: deviceLimit(env, ent || role), deviceLockOn: deviceLockOn(env),
         // Purchase-derived ladder, so the client can render what was actually bought. The onco trial
         // end is advisory only — the trial clock starts server-side on first oncology-AI use.
         tier: effectiveTierFor(ent), tierExp: (ent && ent.tierExp) || null,
@@ -402,6 +449,7 @@ export async function onRequest(context) {
       const uid = rawUid(await identify(request, env));
       if (!uid) return json({ error: "signin-required" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      const tv = await traineeGate(env, uid, body); if (tv) return json(tv, 403);
       const sel = selectAmount(env, body);
       const r = await fetch("https://api.razorpay.com/v1/orders", {
         method: "POST",
@@ -437,6 +485,7 @@ export async function onRequest(context) {
       const uid = rawUid(await identify(request, env));
       if (!uid) return json({ error: "signin-required" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      const tv = await traineeGate(env, uid, body); if (tv) return json(tv, 403);
       const sel = selectAmount(env, body);
       const token = await phonepeToken(env);
       const cfg = phonepeCfg(env);

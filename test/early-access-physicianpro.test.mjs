@@ -49,9 +49,11 @@ test("a per-user featureFlags:false still denies a physicianpro", () => {
   });
 });
 
-test("ROLE_GATES_ON off = allow exactly as today (early access inert)", () => {
-  // defaultRoles: [] on the module keys means nobody without a code, gate off or on.
-  MODULES.forEach((k) => assert.equal(featureAllowed({}, pp(), k, "physician"), false, k));
+// Owner 2026-09-26: early access is grant-only, so it no longer waits for ROLE_GATES_ON. Lower tiers are
+// unchanged with the gate off: defaultRoles [] on the module keys still means nobody without a code.
+test("ROLE_GATES_ON off: physicianpro still granted; lower tiers still need a code", () => {
+  MODULES.forEach((k) => assert.equal(featureAllowed({}, pp(), k, "physician"), true, k));
+  MODULES.forEach((k) => assert.equal(featureAllowed({}, { tier: "physician", tierExp: null }, k, "physician"), false, k));
 });
 
 test("requireFeature: physicianpro granted without a code; a code still works for a lower tier", async () => {

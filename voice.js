@@ -553,7 +553,8 @@
             err === "stt-unavailable" ? "Dictation isn't available on this build of the app." :
             // Local answer engine selected: audio may not go to a cloud transcriber (2026-09-11).
             err === "stt-unavailable-local" ? "Cloud dictation is off while the on-device answer engine is selected. Use Clinical dictation (on the phone), or switch the answer engine to MaiK Cloud in Settings." :
-            err === "stt-fallback-exhausted" ? "This month's cloud dictation credit is used up. Use Clinical dictation (on the phone): it is free and unlimited." :
+            err === "stt-fallback-exhausted" ? "Your dictation credits are used up. Top up, or use Clinical dictation on the phone: it is free and unlimited." :
+            err === "stt-fallback-signin" ? "Sign in and verify your mobile number to use cloud dictation. Clinical dictation on the phone is free." :
             err === "stt-unavailable-offline" ? "No connection for cloud dictation. Use Clinical dictation (on the phone) until the network is back." :
             "Couldn't capture audio — tap to try again.");
         },

@@ -125,7 +125,9 @@ default (ON) is what you get.
 ## Cloud dictation fallback credit (server env), ON since 2026-09-26
 | Switch | Def | Why |
 |---|---|---|
-| `STT_FALLBACK_CREDITS_ON` | **ON** (`"0"` = off) | Owner: the cloud speech-to-text fallback (`/api/ai/transcribe`, used only when the phone cannot transcribe) is cut from its own monthly rupee wallet: Free Rs 10, Pro accounts Rs 50, Clinician / Clinician Pro Rs 100. `functions/_stt_fallback.js`. Sizes: `STT_FALLBACK_PAISE_FREE/PRO/CLINICIAN`. Settable in env or KV `billing:cfg.flags`. |
+| `STT_FALLBACK_CREDITS_ON` | **ON** (`"0"` = off) | Owner: the cloud speech-to-text fallback (`/api/ai/transcribe`, used only when the phone cannot transcribe) spends **dictation credits**, never shown in rupees (1 credit = 10 paise of our cost): Free 100 a month (mobile-verified only), Pro accounts 500, Clinician / Clinician Pro / Ultimate 1,000, then bought packs `dict.300` (Rs 199) / `dict.1000` (Rs 699). `functions/_stt_fallback.js` + the `dict` meter in `functions/_quota.js`. Sizes: `DICT_CREDITS_FREE/PRO/CLINICIAN`. Settable in env or KV `billing:cfg.flags`. |
+| `PACKS_V2_FROM` | 2026-12-26 IST | From this date the MaiK Token packs hold 10k / 40k / 100k MT at the same Rs 49 / 199 / 499 (was 50k / 250k / 750k, the Power pack lost money on iOS). Introductory sizes until then. `tokenPacks()` in `functions/api/billing/[[path]].js`. |
+| `smd_role_gates` (localStorage) | ON (`"0"` = off) | Role box: Home tools locked by the user's role (`role-features.js`). Presentation only; real gates stay server-side. |
 
 ## Everything, by module
 
