@@ -284,5 +284,11 @@ evidence contains. No model runs; the book is downloaded (sha256 must match `mai
   synonyms (SOB, BNP, ORS, PPH, "RA factor" -> rheumatoid factor): slightly WORSE (46.3%).
 - **The ceiling is structural:** 3 passages x 700 chars of a textbook hold about half of what an answer
   needs. The bench does not model the router's curated passage (`withCurated`), which the real app adds
-  when the router matches, so real-app coverage is higher than these numbers. Next levers: pull the
-  treatment chunk that follows an on-topic heading, model `withCurated` in the bench, on-phone rerank.
+  when the router matches, so real-app coverage is higher than these numbers.
+- **Tried next, no gain:** adding the rows that follow an on-topic heading (the book splits a section
+  across consecutive rows under one flat heading) left coverage at 48.3% / 51.9%. Reason: the book text
+  often LACKS the management content. Its status epilepticus section never names lorazepam, a
+  benzodiazepine or levetiracetam (the regimen was a figure, lost in the text export); only 4 of 42,176
+  rows mention status epilepticus with one of those drugs, under unrelated headings. The curated KB
+  (`kb/diseases/seizure_epilepsy.json`) has it, and reaches Lite only through `withCurated` when the
+  router matches. So the next Lite lever is router accuracy and curated content, not BM25 tuning.
