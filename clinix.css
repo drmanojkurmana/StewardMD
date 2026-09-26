@@ -478,6 +478,27 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
    and every accent theme with no duplicate palette. An <img> could not do this. */
 
 #clinixRoot .cx-media--dia { padding: 8px 8px 0; }
+#clinixRoot .cx-media--dual { padding: 8px 8px 0; display: flex; flex-direction: column; }
+#clinixRoot .cx-dia-dual-nav { display: flex; gap: 6px; margin-bottom: 8px; background: var(--cx-subtle); padding: 3px; border-radius: var(--cx-r-ctl); border: 1px solid var(--cx-line); }
+#clinixRoot .cx-dia-dual-btn { flex: 1; padding: 6px 10px; border: none; background: transparent; color: var(--cx-muted); font-family: var(--cx-sans); font-size: 11px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 5px; }
+#clinixRoot .cx-dia-dual-btn--on { background: var(--cx-surface); color: var(--cx-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-weight: 700; }
+#clinixRoot .cx-dia-dual-viewport { width: 100%; overflow: hidden; border-radius: var(--cx-r-card); border: 1px solid var(--cx-line); background: var(--cx-surface); }
+#clinixRoot .cx-dia-dual-track { display: flex; width: 200%; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+#clinixRoot .cx-dia-dual-slide { width: 50%; flex-shrink: 0; box-sizing: border-box; padding: 8px; position: relative; }
+#clinixRoot .cx-dia-art-wrap { position: relative; width: 100%; border-radius: 6px; overflow: hidden; background: #000; border: 1px solid var(--cx-line); }
+#clinixRoot .cx-dia-art-img { display: block; width: 100%; max-height: 280px; object-fit: contain; background: #0d1117; }
+#clinixRoot .cx-dia-art-badge, #clinixRoot .cx-dia-svg-badge { position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; gap: 5px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); pointer-events: none; z-index: 2; }
+#clinixRoot .cx-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+#clinixRoot .cx-badge-dot--interactive { background: #3b82f6; }
+#clinixRoot .cx-dia-art-meta { margin-top: 6px; padding: 4px 6px; }
+#clinixRoot .cx-dia-art-title { font-size: 12px; font-weight: 700; color: var(--cx-ink); }
+#clinixRoot .cx-dia-art-desc { font-size: 11px; color: var(--cx-muted); margin-top: 2px; line-height: 1.35; }
+#clinixRoot .cx-dia-svg-content { position: relative; width: 100%; }
+#clinixRoot .cx-dia-dual-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; padding: 0 4px; }
+#clinixRoot .cx-dia-dual-dots { display: flex; gap: 4px; }
+#clinixRoot .cx-dia-dual-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cx-line); border: none; padding: 0; cursor: pointer; transition: all 0.2s ease; }
+#clinixRoot .cx-dia-dual-dot--on { background: var(--cx-primary); width: 18px; border-radius: 4px; }
+#clinixRoot .cx-dia-dual-hint { font-size: 9px; color: var(--cx-faint); font-weight: 500; text-align: right; }
 #clinixRoot .cx-dia { display: block; width: 100%; height: auto; }
 #clinixRoot .cx-dia text { font-family: var(--cx-sans); font-size: 9px; fill: var(--cx-muted); }
 #clinixRoot .cx-dia-axis { stroke: var(--cx-line); stroke-width: 1.5; }
