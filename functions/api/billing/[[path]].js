@@ -23,7 +23,7 @@ import { verifyPurchase, daysFromExpiry, iapConfigured } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
-import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
+import { identify as usageIdentify, usageKeyFor, usageKv, meterEmail } from "../../_usage.js";
 import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor } from "../../_credits.js";
 import { getEntitlement, writeEntitlement, clinicLimit, deviceLimit, recordTierPurchase, effectiveTierFor, oncoAddonActive } from "../../_entitlements.js";
 import { oncoTrialState } from "../../_features.js";
@@ -261,11 +261,11 @@ export async function onRequest(context) {
       let credits = 0, costCap = 0, role = null;
       try {
         const who = await usageIdentify(request, env);
-        if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); }
+        if (meterEmail(who)) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); }
       } catch (e) {}
       let ent = null;
       try { ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
-      try { const who = await usageIdentify(request, env); if (who && who.email) costCap = await dailyCostCap(env, usageKv(env), who.email, role); } catch (e) {}
+      try { const who = await usageIdentify(request, env); if (meterEmail(who)) costCap = await dailyCostCap(env, usageKv(env), meterEmail(who), role); } catch (e) {}
       // Per-patient quota meters (flagged). Additive: absent entirely when QUOTA_METERS_ON !== "1".
       let quota = null;
       if (quotaOn(env) && uid) {
@@ -510,7 +510,7 @@ export async function onRequest(context) {
         if (r.ok && r.founding && !r.already) {
           try {
             const who = await usageIdentify(request, env);
-            if (who && who.email) { const kv = usageKv(env); await setUserCostCap(kv, who.email, foundingDailyCap(env)); await grantFoundingPool(env, kv, usageKeyFor(who)); }
+            if (meterEmail(who)) { const kv = usageKv(env); await setUserCostCap(kv, meterEmail(who), foundingDailyCap(env)); await grantFoundingPool(env, kv, usageKeyFor(who)); }
           } catch (e) {}
         }
         return json(r, r.ok ? 200 : (r.reason === "signin-required" ? 401 : 404));

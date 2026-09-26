@@ -42,7 +42,7 @@ export async function createTicket(store, who, body, rands, now) {
   while (taken.has(id)) { salt = (salt + 1) >>> 0; id = makeId([rands[0], salt]); }   // vanishingly rare collision
   const ticket = {
     id, owner: (who && who.id) || "anon",
-    email: (who && who.email) || "", name: (who && who.name) || "",
+    email: (who && (who.email || who.accountEmail)) || "", name: (who && who.name) || "",   // contact address, not an identity
     platform: clean(body && body.platform, 16), build: clean(body && body.build, 32),
     subject: subject || "(no subject)", status: "open",
     createdAt: now, updatedAt: now,
