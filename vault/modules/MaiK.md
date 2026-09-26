@@ -48,6 +48,11 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - `functions/api/ai/[[path]].js` — server: `/refine` (router), `/explain` (Gemini), `/research` (web)
 - `kb/ai/steward-ai.browser.js` — client SDK helpers. NOTE: `window.SMD_AI` itself is defined in
   `reasoning.js:3771` and that is its ONLY assignment (verified 2026-08-20) — this file does not set it
+- **KB name gate** (flag `smd_kb_gate`, default ON, "0" = legacy coverage gate; 2026-09-26): a
+  standalone question gets an entry's notes only when it names the entry (name form, `KB_NAMES`
+  synonym, one-word id); otherwise no notes. Add missing synonyms to `KB_NAMES`, then run
+  `test/maik-kb-relevance.test.mjs` (404 labelled questions, must stay at 0 mis-routes) and
+  `node test/run-maik-kb-gate-ui.mjs` (headless Chrome). Decisions 2026-09-26.
 - **Chat skin** (2026-09-04): `body.mkchat`, default ON, `?mkchat=0` off / `?mkchat=1` on (key
   `smd_mkchat`). Presentation-only CSS in home.js (block "MaiK CHAT skin"): unboxed assistant prose,
   no per-answer MAIK label or disclaimer line (the banner is the one disclaimer), 15px text, quiet
