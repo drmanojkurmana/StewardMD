@@ -30,9 +30,15 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
       forbidden without the editorial board's permission) and CMC Ludhiana 2012, RGGWCH Puducherry 2017 ("for
       internal use only") were extracted but are not in the app. Integrate only with permission.
 - [ ] Ask SKIMS, GMC Srinagar, AIIMS Bhopal, RIMS Imphal about figures the rules flag as exceptional (vancomycin
-      and linezolid in staphylococci, carbapenems in S. Typhi): likely method (disk diffusion) issues.
-- [ ] RML Lucknow 2020 and 2021 print numbers of susceptible isolates under "percentage" headings, without the
-      number tested per drug: percentages could be computed if the lab supplies the denominators.
+      and linezolid in staphylococci, carbapenems in S. Typhi): likely method (disk diffusion) issues. Ask the
+      same laboratories whether their enterococcal "gentamicin" is the high-level (synergy) screen: until they
+      say so it is shown as intrinsic resistance.
+- [ ] Dr. RMLIMS Lucknow 2020 and 2021 print numbers of susceptible isolates under "percentage" headings, without
+      the number tested per drug: percentages could be computed if the lab supplies the denominators.
+- [ ] 49 of 84 sources do not state their breakpoint standard or edition; ask the networks (NARS-Net, KARS-NET,
+      ICMR) to print the M100 edition, since trends across 2022 and 2023 move with the breakpoints.
+- [ ] A clinician read of the 18 journal-study notes and focus lines (rewritten 2026-09-26 from the extraction
+      logs; facts unchanged, wording new).
 - [ ] ICMR AMRSN 2017 to 2022 at stratum level (2023 and 2024 are in; 2024's trend tables give the national
       2017 to 2024 series).
 - [ ] ICMR regional-centre (RC) tables: per-centre figures, if ICMR's centre list can be tied to institutions.

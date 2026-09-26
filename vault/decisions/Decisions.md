@@ -9947,3 +9947,28 @@ turned out to be the main risk. Decisions, each implemented in `scripts/build-an
   location-less isolates, or n that is the number tested), and a contradicted row is never a part of a
   combined row, though it still counts as printed.
 - **Profile ids are per institution** (`ABG_<inst>`), so a saved choice survives the next edition.
+
+## 2026-09-26 - Antibiogram review fixes: what decision support may read, and how
+From an early independent review (7/10) of the rebuilt module. Each is implemented with a test; see
+[[Antibiogram]].
+- **Only institutional cumulative antibiograms are pooled or offered as profiles.** Published studies,
+  focus reports, sources with fewer than 3 usable cells and data older than the five most recent years
+  stay out of pools; studies are shown on their own with a "Covers X only" line.
+- **A syndrome never borrows figures from a different world.** Outpatient syndromes never read ICU
+  figures; ICU and ward syndromes fall back to all inpatients before all settings; CNS syndromes never
+  fall back to all-specimen figures; agents that cannot work at the site (urine-only agents outside
+  cystitis, tigecycline for bloodstream or urinary infection, daptomycin for pneumonia, agents that miss
+  the CSF) are left out and named.
+- **Kill switch for decision support** (`smd_abg_data`, default on): off per device, the console,
+  reasoning and antibiotic choice return to the built-in ICMR 2024 national summary. Separate from
+  `smd_abg_v2`, which only changes the screen. The national summary is never shown as a profile's own.
+- **Equivalent agents answer for each other, named**: cefoxitin/oxacillin (staphylococci),
+  cefotaxime/ceftriaxone (identical CLSI and EUCAST breakpoints; not for N. gonorrhoeae, whose
+  breakpoints differ).
+- **Breakpoint revisions are disclosed, not corrected.** Figures are shown as printed; a trend or pool
+  that straddles a CLSI revision (2019 fluoroquinolones, 2020 polymyxins, 2022/2023
+  piperacillin-tazobactam, 2023 aminoglycosides) says a step there can be the breakpoints. Each source
+  records the standard it states (`breakpoints`), or none.
+- **Enterococcal gentamicin is high-level only when the paper says so**; otherwise it stays intrinsic.
+- **Ambiguous cells are left out, not shown with a guess** (RMLIMS 2017 urine Klebsiella/Proteus
+  colistin and ofloxacin: a possible column shift in the source).
