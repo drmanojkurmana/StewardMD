@@ -20,6 +20,7 @@
  * Best-effort by design: every caller is on a read path that must still answer if this fails.
  */
 import { getUserClaims, mergeUserClaims } from "./_fbadmin.js";
+import { trialOnceMode } from "./_trial_ledger.js";
 
 function kv(env) { return (env && (env.CASES_KV || env.GHIS_KV)) || null; }
 const doctorKey = (uid) => "icu:doctor:" + uid;
@@ -47,7 +48,9 @@ export async function reconcileVerifiedClaim(env, uid, deps) {
 
   // Already consistent. verifiedAt is required too: without it accessState() computes a zero-length
   // free week, which is the same "verified but no Pro" symptom by a different route.
-  if (claims && claims.verified === true && claims.verifiedAt) return out;
+  // trialDenied counts as consistent too: that account is verified with no free week on purpose
+  // (_trial_ledger.js), and writing verifiedAt here would hand it the week it was refused.
+  if (claims && claims.verified === true && (claims.verifiedAt || (claims.trialDenied && trialOnceMode(env) === "on"))) return out;
 
   try {
     const merge = (deps && deps.mergeUserClaims) || mergeUserClaims;

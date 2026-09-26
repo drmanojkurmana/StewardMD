@@ -5860,21 +5860,64 @@
   // Self-test push (ICU More → "Send me a test notification"): verifies push delivery on THIS device
   // in one tap, independent of groups/roles. The response tells us if a token is even registered.
   function grpTestPush() {
-    if (window.toast) toast("Sending a test notification…");
-    try {
+    /* A DIAGNOSTIC, not a fire-and-forget. This used to report only what the server said, and the
+     * server can only ever see as far as Apple: it counts a send when APNs returns 200. APNs
+     * returns 200 for a handset whose user has notifications switched OFF, and iOS then discards
+     * the payload silently - so "Test notification sent" was true and useless, and the doctor was
+     * left with a button that always claimed success while nothing ever arrived.
+     *
+     * So the device is asked first, because the last three links in the chain (permission, a
+     * registered token, and whether iOS will even draw a banner right now) are invisible from the
+     * server. Each failure now names itself and says what to do about it. */
+    function say(m) { if (window.toast) toast(m); }
+    function send() {
+      say("Sending a test notification…");
       idToken().then(function (tok) {
-        if (!tok) { if (window.toast) toast("Sign in first, then try the test push"); return; }
+        if (!tok) { say("Sign in first, then try the test push"); return; }
         fetch(grpPushUrl("/api/push/test"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok } })
           .then(function (r) { return r.json(); })
           .then(function (j) {
-            if (!window.toast) return;
-            if (j && j.sent) toast("Test notification sent — check your notifications");
-            else if (j && j.total === 0) toast("No device is registered for push yet. Allow notifications + reopen the app, then retry.");
-            else toast("Couldn't send the test push" + (j && j.error ? " (" + j.error + ")" : ""));
+            if (j && j.sent) {
+              /* Apple took it. If nothing shows now, the cause is on the handset and is one of
+               * these two, so say so rather than leaving the doctor to guess. */
+              say("Apple accepted it. If nothing appears: iOS hides banners while the app is open, and Focus / Do Not Disturb silences them.");
+            } else if (j && j.total === 0) {
+              say("This account has no registered device. Allow notifications, reopen the app, then retry.");
+            } else if (j && j.total) {
+              say("Apple rejected the push for this device. Its token is stale - reopen the app to register again.");
+            } else {
+              say("Couldn't send the test push" + (j && j.error ? " (" + j.error + ")" : ""));
+            }
           })
-          .catch(function () { if (window.toast) toast("Test push failed — check your connection"); });
-      }, function () { if (window.toast) toast("Couldn't get your auth token"); });
-    } catch (e) {}
+          .catch(function () { say("Test push failed - check your connection"); });
+      }, function () { say("Couldn't get your auth token"); });
+    }
+    try {
+      if (!window.SMD_pushDiagnostics) { send(); return; }   // older bundle: behave as before
+      window.SMD_pushDiagnostics().then(function (d) {
+        if (!d || !d.native) { say("Push needs the installed app. A browser tab cannot receive it."); return; }
+        if (!d.plugin) { say("This build shipped without push support. Reinstall the app."); return; }
+        if (d.permission === "denied") {
+          say("Notifications are OFF for StewardMD. Turn them on in iOS Settings → StewardMD → Notifications, then retry.");
+          return;
+        }
+        if (d.permission !== "granted") {
+          // Never been asked. Ask now, then carry on rather than making them tap twice.
+          if (window.SMD_enableNativePush) {
+            window.SMD_enableNativePush().then(function (on) {
+              if (!on) { say("Notifications were not allowed, so nothing can reach this device."); return; }
+              send();
+            }, function () { send(); });
+            return;
+          }
+        }
+        if (!d.token) {
+          say("This device has not finished registering with Apple. Reopen the app, then retry.");
+          return;
+        }
+        send();
+      }, function () { send(); });
+    } catch (e) { send(); }
   }
   // On-demand nudge: re-push a task's reminder to the unit's executor roles (SR/JR/intern), excluding
   // the sender. Only instructing roles reach here (button is role-gated; server re-checks). For a
@@ -9347,6 +9390,10 @@
 
   /* ------------------------------------------------------------- controller */
   var ICU = {
+    /* Test seam: the push self-test, so its branches can be driven in a browser without a real
+     * handset. Every link it reports on (OS permission, a device token, what APNs answered) only
+     * exists at runtime. See test/run-push-diagnostic-ui.mjs. */
+    _testPush: function () { return grpTestPush(); },
     // Roster search: filter the saved-patients sheet in place (by name / diagnosis / bed / StewardMD ID)
     // without a re-render, so the input keeps focus while typing.
     _rosterSearch: function (v) {

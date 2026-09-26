@@ -13,10 +13,11 @@
  * Secret:  VERIFY_ADMIN_TOKEN
  * ---------------------------------------------------------------------------
  */
-import { mergeUserClaims } from "../../_fbadmin.js";
+import { mergeUserClaims, getUserClaims } from "../../_fbadmin.js";
+import { weekPatch, trialOnceMode, backfillLedger, warmTrialMode } from "../../_trial_ledger.js";
 import { clearBudgetCache } from "../../_aibudget.js";
 import { emailVerified, emailFailed } from "../../_email.js";
-import { markVerified, sendProUpsellOnce } from "../../_lifecycle.js";
+import { markVerified, sendProUpsellOnce, getLifecycle } from "../../_lifecycle.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
 
 // Owners who may manage verifications (by Google account email). Override via env.OWNER_EMAILS
@@ -83,11 +84,29 @@ async function actionSigOK(env, uid, action, sig) {
   return d === 0;
 }
 
-async function doApprove(store, env, uid, regNo) {
+export class RegClaimedError extends Error { constructor(owner) { super("registration_already_claimed"); this.owner = owner; } }
+
+async function doApprove(store, env, uid, regNo, opts) {
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
   const reg = String(regNo || rec.regNo || rec.extractedRegNo || "").trim();
+  const once = trialOnceMode(env);
+  // One reg no = one account. Approving a number another account already holds used to move it
+  // silently and start a second free week; now the owner is told, and must pass force to transfer
+  // (a doctor who lost their old sign-in).
+  if (once === "on" && reg && !(opts && opts.force)) {
+    const owner = await store.get(regKey(reg));
+    if (owner && owner !== uid) throw new RegClaimedError(owner);
+  }
   // verifiedAt starts the free Pro week; provUntil is cleared because the review is over.
-  await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), provUntil: null, regNo: reg });   // merge: keep any existing pro claim
+  // TRIAL_ONCE_ON: the week is once per doctor (_trial_ledger.js weekPatch) and never restarts for
+  // the same account (reject -> re-approve reuses the first start).
+  let week = { verifiedAt: Date.now() };
+  if (once !== "off") {
+    let claims = {}; try { claims = (await getUserClaims(env, uid)) || {}; } catch (e) {}
+    let phone = ""; try { const lc = await getLifecycle(env, uid); if (lc && lc.phoneVerifiedAt) phone = lc.phone || ""; } catch (e) {}
+    week = await weekPatch(env, uid, claims, { regNo: reg, phone }, { door: "approve", store, extraFps: rec.trialFps || [] });
+  }
+  await mergeUserClaims(env, uid, { verified: true, provUntil: null, regNo: reg, ...week });   // merge: keep any existing pro claim
   try { await clearBudgetCache(env, uid); } catch (e) {}   // tier changed; the cap is cached ~26h
   try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
   const updated = { ...rec, uid, status: "verified", verified: true, regNo: reg, photoKey: "", approvedBy: "admin", verifiedAt: new Date().toISOString() };
@@ -140,6 +159,7 @@ export async function onRequest(context) {
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const method = request.method;
   const store = kv(env);
+  try { await warmTrialMode(env); } catch (e) {}   // TRIAL_ONCE_ON is a live KV flag
   if (method === "OPTIONS") return new Response(null, { status: 204 });
 
   // ── One-click email action links (GET, HMAC-signed — no admin token needed) ──
@@ -152,7 +172,7 @@ export async function onRequest(context) {
     const reg = url.searchParams.get("reg") || "";
     if (!(await actionSigOK(env, uid, doWhat, sig))) return htmlPage("Invalid or expired link", "This action link could not be verified. Open the admin page instead.");
     try {
-      if (doWhat === "approve") { const d = await doApprove(store, env, uid, reg); return htmlPage("✓ Doctor verified", `${d.email || uid} now has full access${d.regNo ? " (" + d.regNo + ")" : ""}. They'll see it on next sign-in.`); }
+      if (doWhat === "approve") { let d; try { d = await doApprove(store, env, uid, reg); } catch (e) { if (e instanceof RegClaimedError) return htmlPage("Registration already in use", "This registration number belongs to another account. Open the admin page to move it."); throw e; } return htmlPage("✓ Doctor verified", `${d.email || uid} now has full access${d.regNo ? " (" + d.regNo + ")" : ""}. They'll see it on next sign-in.`); }
       if (doWhat === "reject")  { await doReject(store, env, uid); return htmlPage("Access blocked", "This account is blocked until the doctor uploads a valid certificate again."); }
       return htmlPage("Unknown action", "Nothing to do.");
     } catch (e) { return htmlPage("Something went wrong", "Please try again in a moment."); }
@@ -189,7 +209,14 @@ export async function onRequest(context) {
       let body = {}; try { body = await request.json(); } catch (e) {}
       const uid = String(body.uid || "").trim();
       if (!uid) return json({ error: "uid-required" }, 400);
-      return json({ ok: true, doctor: await doApprove(store, env, uid, body.regNo) });
+      try { return json({ ok: true, doctor: await doApprove(store, env, uid, body.regNo, { force: body.force === true }) }); }
+      catch (e) { if (e instanceof RegClaimedError) return json({ error: "registration_already_claimed", ownerUid: e.owner, hint: "send force:true to move it to this account" }, 409); throw e; }
+    }
+
+    // One-shot: seed the one-trial ledger from every existing registration and verified phone, so
+    // nobody who already had a week can take another once TRIAL_ONCE_ON is switched on. Idempotent.
+    if (method === "POST" && seg === "trial-backfill") {
+      return json(await backfillLedger(env, { store }));
     }
 
     if (method === "POST" && seg === "reject") {
