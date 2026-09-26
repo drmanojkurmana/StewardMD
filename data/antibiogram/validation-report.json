@@ -1,5 +1,5 @@
 {
- "version": "63b5211fc76f",
+ "version": "6df808b9d790",
  "generated": "build",
  "countMismatches": [
   {
@@ -9910,6 +9910,237 @@
    "value": 100,
    "action": "caution",
    "why": "the source contradicts itself: printed 34 (100%) susceptible of 35 tested; 34/35 is 97.1%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "cefotaxime",
+   "value": 19,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 19% but its printed counts are 38/185 = 20.5%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "cefazolin",
+   "value": 25,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "cefazolin",
+   "value": 20,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 11,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "pheno": null,
+   "drug": "cefazolin",
+   "value": 50,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 40,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Morganella spp.",
+   "pheno": null,
+   "drug": "cefazolin",
+   "value": 29,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Morganella spp.",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 13,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 100,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 100,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "opd",
+   "org": "CoNS",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 100,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "ward",
+   "org": "CoNS",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 100,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "gentamicin_hl",
+   "value": 45,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 45% but its printed counts are 37/75 = 49.3%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 78,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 78% but its printed counts are 6/7 = 85.7%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "meropenem",
+   "value": 0,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 0% but its printed counts are 1/24 = 4.2%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "other",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "meropenem",
+   "value": 83,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 83% but its printed counts are 117/212 = 55.2%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "other",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "amikacin",
+   "value": 48,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 48% but its printed counts are 13/25 = 52.0%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "other",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "gentamicin_hl",
+   "value": 51,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 51% but its printed counts are 27/47 = 57.4%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": "CR",
+   "drug": "levofloxacin",
+   "value": 15.3,
+   "action": "caution",
+   "why": "the source contradicts itself: printed \"48/31 (15.3)\": more isolates susceptible than tested, so the printed percentage cannot be checked against its counts"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2019",
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": "CS",
+   "drug": "colistin",
+   "value": 25,
+   "action": "caution",
+   "why": "a low figure for colistin or polymyxin B usually reflects the breakpoint system (CLSI has no susceptible category, only intermediate and resistant) rather than resistance; confirm with a broth microdilution MIC"
   },
   {
    "src": "SKNMC_PUNE_2024",
