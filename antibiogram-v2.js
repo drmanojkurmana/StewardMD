@@ -141,7 +141,7 @@
     var word = num(v) + "% " + (st.mode === "r" ? "resistant" : "susceptible");
     var lowTip = low && !(o.lowN || o.noN) ? "tested on " + c.nt + " isolates only" : "";
     // A figure that failed a check is not coloured like a reliable one.
-    if (c.act === "caution") return btn("v2-cau", word + ", caution: failed a data check", num(v) + "*", c.why);
+    if (c.act === "caution") return btn("v2-cau", word + (c.few ? ", caution: from too few institutions to pool" : ", caution: failed a data check"), num(v) + "*", c.why);
     return btn(cls, word + (low ? ", fewer than 30 isolates" : ""), num(v), lowTip);
   }
   function orgLabel(o) {
@@ -193,7 +193,7 @@
       });
       h += "</tbody></table></div>";
       h += '<div class="v2-legend"><span><i class="v2-sw b5"></i>90 or more</span><span><i class="v2-sw b4"></i>80 to 89</span><span><i class="v2-sw b3"></i>60 to 79</span><span><i class="v2-sw b2"></i>40 to 59</span><span><i class="v2-sw b1"></i>under 40</span>' +
-        '<span>(% susceptible)</span><span><b>IR</b> intrinsic resistance</span><span><b>*</b> grey: failed a data check, shown for reference (tap)</span><span><b>!</b> not shown: failed a check (tap)</span><span class="v2-mut">Grey rows: under 30 isolates (CLSI M39), not pooled</span></div>';
+        '<span>(% susceptible)</span><span><b>IR</b> intrinsic resistance</span><span><b>*</b> grey: failed a data check' + (t.pooled ? ", or from fewer than 3 institutions" : "") + ', shown for reference (tap)</span><span><b>!</b> not shown: failed a check (tap)</span><span class="v2-mut">Grey rows: under 30 isolates (CLSI M39), not pooled</span></div>';
     }
     h += wiscaHtml(t);
     h += '<div class="v2-foot"><button class="v2-btn" data-v2="csv">Export CSV</button><button class="v2-btn" data-v2="pdf">' + (nativePdf() ? "Save as PDF" : "Print or save as PDF") + "</button>" +

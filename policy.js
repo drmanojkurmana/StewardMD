@@ -126,12 +126,18 @@
     var I = window.ABG_INDEX; if (!I || !I.sources) return;
     HOSPITALS.push({ id: "INDIA_POOLED", name: "India: all institutions (pooled)", short: "India", type: "region", region: "india", hasPolicy: false, abgScope: "india" });
     var poolFrom = I.stats && I.stats.poolFrom;
-    // A region profile needs at least 3 institutions (by hospital name) with a recent antibiogram:
-    // a "pool" of one or two hospitals is those hospitals, which have their own profiles.
+    // A region profile needs at least 3 institutions (by hospital name) with a recent antibiogram that
+    // contributes usable figures; once the data has loaded, exactly the regions the store pools (a
+    // region whose pool has no figure from 3 institutions is not offered).
+    var st = window.ABG_STORE, storeRegions = null;
+    try { var sc = st && st.scopes ? st.scopes() : []; if (sc.length) storeRegions = sc.filter(function (x) { return /^region:/.test(x.id); }).map(function (x) { return x.id.slice(7); }); } catch (e) {}
     ["north", "south", "east", "west"].forEach(function (rg) {
-      var hosp = {};
-      I.sources.forEach(function (x) { if (x.region === rg && x.kind === "institution" && !x.focus && (!poolFrom || x.year >= poolFrom)) hosp[x.name || x.inst] = 1; });
-      if (Object.keys(hosp).length < 3) return;
+      if (storeRegions) { if (storeRegions.indexOf(rg) < 0) return; }
+      else {
+        var hosp = {};
+        I.sources.forEach(function (x) { if (x.region === rg && x.kind === "institution" && !x.focus && x.usable > 0 && (!poolFrom || x.year >= poolFrom)) hosp[x.name || x.inst] = 1; });
+        if (Object.keys(hosp).length < 3) return;
+      }
       HOSPITALS.push({ id: "REGION_" + rg.toUpperCase(), name: RMETA[rg].name, short: RMETA[rg].short, type: "region", region: rg, hasPolicy: false, abgScope: "region:" + rg });
     });
     // The ICMR profile reads the newest ICMR AMRSN report that carries isolate numbers, else

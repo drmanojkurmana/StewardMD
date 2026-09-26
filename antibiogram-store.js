@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "1cecdcb0b9ea";
+  var ABG_V = "90e6f17dba79";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -124,7 +124,7 @@
     ["north", "south", "east", "west"].forEach(function (r) {
       // A region with fewer than 3 institutions has no pool: its hospitals are listed on their own.
       var nI = poolInstitutions(r);
-      if (nI >= POOL_MIN_K) out.push({ id: "region:" + r, label: REGION_LABEL[r] + ", pooled (" + nI + " institutions)", group: "Pooled", region: r });
+      if (nI >= POOL_MIN_K && poolHasFigures("region:" + r)) out.push({ id: "region:" + r, label: REGION_LABEL[r] + ", pooled (" + nI + " institutions)", group: "Pooled", region: r });
     });
     B.sources.filter(function (s) { return s.kind === "network" && s.latest; }).sort(function (a, b) { return (a.region === "national" ? 0 : 1) - (b.region === "national" ? 0 : 1) || (a.short < b.short ? -1 : 1); })
       .forEach(function (s) { out.push({ id: "src:" + s.id, label: s.short + " " + (s.edLabel || s.year) + (s.verification.status === "transcribed" ? " (summary, no isolate counts)" : ""), group: "Surveillance networks", src: s }); });
@@ -160,10 +160,23 @@
   // Institutions a pooled scope draws on (distinct inst of poolable sources).
   // Counted by hospital name: a hospital's separate series (SGRH's fungal issues, AIIMS Rishikesh's
   // MICU report) are one institution.
+  // Only institutions with at least one usable row (n >= 30 and a figure that passed its checks)
+  // count: SKNMC's lists (all unreliable) or a policy without isolate numbers add nothing to a pool.
   function poolInstitutions(region) {
     var seen = {};
-    (B ? B.sources : []).forEach(function (s) { if (poolable(s) && (!region || s.region === region)) seen[s.name || s.inst] = 1; });
+    (B ? B.sources : []).forEach(function (s) { if (poolable(s) && s.usable > 0 && (!region || s.region === region)) seen[s.name || s.inst] = 1; });
     return Object.keys(seen).length;
+  }
+  // A pooled scope is worth offering only if some stratum has a figure from 3 or more institutions.
+  function poolHasFigures(scope) {
+    var key = "ph|" + scope; if (memo[key] != null) return memo[key];
+    var st = strata(scope), ok = false;
+    Object.keys(st.specs).some(function (sp) {
+      return Object.keys(st.sets).some(function (x) {
+        return (ok = table(scope, sp, x).orgs.some(function (o) { return Object.keys(o.cells).some(function (d) { return o.cells[d].act === "keep"; }); }));
+      });
+    });
+    return (memo[key] = ok);
   }
   function strata(scope) {
     var key = "s|" + scope; if (memo[key]) return memo[key];
@@ -222,14 +235,15 @@
           var kh = Object.keys(hosp).length || p.k;
           cells[d].kh = kh;
           if (kh < POOL_MIN_K) {
-            cells[d].act = "caution";
+            cells[d].act = "caution"; cells[d].few = true;
             cells[d].why = "from " + (kh === 1 ? "one institution" : kh + " institutions") + " only (" + names.join("; ") + "); a pooled figure needs at least " + POOL_MIN_K;
           }
           drugs[d] = 1;
         });
         // Intrinsic resistance is a property of the organism: show it even when pooled.
         g.forEach(function (r) { Object.keys(r.cells).forEach(function (d) { if (r.cells[d].act === "intrinsic" && !cells[d]) { cells[d] = { s: null, act: "intrinsic", why: r.cells[d].why }; drugs[d] = 1; } }); });
-        out.push({ org: g[0].org, pheno: g[0].pheno, cohort: g[0].cohort || null, n: usable.reduce(function (a, r) { return a + r.n; }, 0), k: usable.length, kAll: g.length,
+        var hospRow = {}; usable.forEach(function (r) { hospRow[r.src.name || r.src.inst] = 1; });
+        out.push({ org: g[0].org, pheno: g[0].pheno, cohort: g[0].cohort || null, n: usable.reduce(function (a, r) { return a + r.n; }, 0), k: Object.keys(hospRow).length, kAll: g.length,
           lowOnly: !usable.length, cells: cells, rows: g, pooled: true });
       });
     } else {
@@ -504,23 +518,28 @@
    * Enterobacterales for "all specimens except urine", staphylococci by specimen), so the console
    * and reasoning choose per organism: the first candidate where it has a usable row, else the
    * first where it has any row (shown flagged), else empty. */
+  /* The strata an organism may be read from, in order: {c: candidates, order: [{spec, set, cohort}]}.
+   * A syndrome that asks for a surveillance cohort tries it first, then the ordinary rows. */
+  function candidatesFor(scope, orgName, spec, set, opts) {
+    opts = opts || {};
+    var oc = R.canonOrg(orgName), only = opts.only && oc && opts.only[oc.key];
+    var c = candidates(scope, only || spec, set, opts.noAll), order = [];
+    if (only) c.list = c.list.filter(function (x) { return only.indexOf(x.spec) >= 0; });
+    (opts.cohort ? [opts.cohort, null] : [null]).forEach(function (co) { c.list.forEach(function (x) { order.push({ spec: x.spec, set: x.set, cohort: co }); }); });
+    return { c: c, order: order, only: only };
+  }
   function pickStratumFor(scope, orgName, spec, set, opts) {
     opts = opts || {};
     var oc = R.canonOrg(orgName), only = opts.only && oc && opts.only[oc.key];
     var key = "po|" + scope + "|" + orgName + "|" + [].concat(spec || []).join(",") + "|" + [].concat(set || []).join(",") + "|" + (opts.cohort || "") + "|" + (only ? only.join(",") : "") + "|" + (opts.noAll ? 1 : 0);
     if (memo[key]) return memo[key];
-    var c = candidates(scope, only || spec, set, opts.noAll), pooled = isPooled(scope), res = null, any = null;
-    if (only) c.list = c.list.filter(function (x) { return only.indexOf(x.spec) >= 0; });
-    // A syndrome that asks for a surveillance cohort tries it first, then the ordinary rows.
-    var passes = opts.cohort ? [opts.cohort, null] : [null];
-    for (var p = 0; p < passes.length && !res; p++) {
-      for (var i = 0; i < c.list.length && !res; i++) {
-        var t = table(scope, c.list[i].spec, c.list[i].set), rows = orgRows(t, orgName, passes[p]);
-        if (!rows.length) continue;
-        if (!any) any = { spec: c.list[i].spec, set: c.list[i].set, cohort: passes[p], lowOnly: true };
-        var ok = rows.filter(function (o) { return rowUsable(t, o); });
-        if (ok.length && (!pooled || c.list[i].set === "all" || ok.some(function (o) { return (o.k || 0) >= 3; }))) res = { spec: c.list[i].spec, set: c.list[i].set, cohort: passes[p] };
-      }
+    var cf = candidatesFor(scope, orgName, spec, set, opts), c = cf.c, pooled = isPooled(scope), res = null, any = null;
+    for (var i = 0; i < cf.order.length && !res; i++) {
+      var x = cf.order[i], t = table(scope, x.spec, x.set), rows = orgRows(t, orgName, x.cohort);
+      if (!rows.length) continue;
+      if (!any) any = { spec: x.spec, set: x.set, cohort: x.cohort, lowOnly: true };
+      var ok = rows.filter(function (o) { return rowUsable(t, o); });
+      if (ok.length && (!pooled || x.set === "all" || ok.some(function (o) { return (o.k || 0) >= POOL_MIN_K; }))) res = { spec: x.spec, set: x.set, cohort: x.cohort };
     }
     if (!res) res = any || { spec: (only && only[0]) || c.specs[0] || c.wantSp[0] || "all", set: "all", empty: true, cohort: null };
     if (only) res.only = only;
@@ -550,6 +569,21 @@
     ctx = ctx || {};
     var d = R.canonDrug(drug); if (!d) return null;
     var scope = ctx.scope || "india", st = pickStratumFor(scope, orgName, ctx.spec, ctx.set, ctx);
+    var res = suscAt(scope, orgName, d, st);
+    if (res || !isPooled(scope)) return res;
+    // Pooled: the stratum chosen for the organism may hold this drug only as a figure from fewer than
+    // 3 institutions. Walk on through the syndrome's candidate strata for one that has a pooled figure.
+    var cf = candidatesFor(scope, orgName, ctx.spec, ctx.set, ctx);
+    for (var i = 0; i < cf.order.length; i++) {
+      var x = cf.order[i];
+      if (x.spec === st.spec && x.set === st.set && (x.cohort || null) === (st.cohort || null)) continue;
+      var alt = finish({ spec: x.spec, set: x.set, cohort: x.cohort }, cf.c);
+      res = suscAt(scope, orgName, d, alt);
+      if (res && !res.intrinsic) return res;
+    }
+    return null;
+  }
+  function suscAt(scope, orgName, d, st) {
     var t = table(scope, st.spec, st.set), rows = orgRows(t, orgName, st.cohort);
     if (!rows.length) return null;
     var base = { spec: st.spec, set: st.set, cohort: st.cohort || null, specMatch: st.specMatch, setMatch: st.setMatch, pooled: t.pooled, scope: scope };
@@ -570,10 +604,10 @@
     var cellLow = function (o) { var c = o.cells[d]; return !rowUsable(t, o) || (c.nt != null && c.nt < R.M39_MIN); };
     if (parts.length === 1) {
       var o = parts[0], c = o.cells[d];
-      return extend(extend(base, asOut), { s: c.s, n: c.nt || o.n, k: o.k, lowN: cellLow(o), src: t.pooled ? null : o.rows[0].src.id, org: o.org });
+      return extend(extend(base, asOut), { s: c.s, n: c.nt || o.n, k: t.pooled ? (c.kh || c.k || o.k) : o.k, lowN: cellLow(o), src: t.pooled ? null : o.rows[0].src.id, org: o.org });
     }
     var num = 0, den = 0, k = 0, low = false;
-    parts.forEach(function (o) { var c = o.cells[d], w = c.nt || o.n || 0; num += c.s * w; den += w; k = Math.max(k, o.k || 1); if (cellLow(o)) low = true; });
+    parts.forEach(function (o) { var c = o.cells[d], w = c.nt || o.n || 0; num += c.s * w; den += w; k = Math.max(k, (t.pooled ? (c.kh || c.k) : o.k) || 1); if (cellLow(o)) low = true; });
     if (!den) return null;
     return extend(extend(base, asOut), { s: Math.round(10 * num / den) / 10, n: den, k: k, lowN: low || den < R.M39_MIN, src: t.pooled ? null : parts[0].rows[0].src.id,
       combined: parts.map(function (o) { return R.orgShort(o.org); }) });

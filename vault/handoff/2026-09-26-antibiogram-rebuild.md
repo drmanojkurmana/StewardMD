@@ -72,7 +72,11 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   tigecycline as exceptional. Nice-to-haves addressed: high-level gentamicin outside enterococci, urinary
   agents in ranking, short source summaries with collapsed detail, bundle size, console copy, rotate hint,
   source-watch baseline, page ranges, LHMC conflict. Notes: `scratchpad/abg/review2/REVIEW-NOTES.md`.
-- Round 3: run after the round 2 fixes (brief `REVIEW.md`, output `review3/`).
+- Round 3 (2026-09-26): 7.5/10 (fidelity 9: 52 of 52 cells matched). It found two regressions from the round 2
+  fixes (ranking led by intrinsic zeros; pooled answers halved because the 3-institution rule applied after
+  the stratum was chosen), the West pool offered with no pooled figure, BVDU page 12 Gram-positive rows, and
+  hierarchy contradictions. All fixed the same day (see the module note, "Review round 3"). Notes:
+  `scratchpad/abg/review3/REVIEW-NOTES.md`.
 
 ## Process slips to know about
 - Early in the census, crawl scripts ran with TLS verification off for about an hour before this was
@@ -83,6 +87,6 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
 
 ## Tests
 `node --test test/antibiogram-rules.test.mjs test/antibiogram-build.test.mjs test/antibiogram-store.test.mjs`
-(60 pass) and `node test/run-antibiogram-ui.mjs` (ALL PASS: screen, keyboard, search, exports, breakpoint
+(70 pass) and `node test/run-antibiogram-ui.mjs` (ALL PASS: screen, keyboard, search, exports, breakpoint
 notes, sources, imports, console, reasoning, flag off, kill switch off). CI runs both checks and the UI test
 (`.github/workflows/antibiogram-ui.yml`). Recovery point before the rebuild: `dbc92bad9`.

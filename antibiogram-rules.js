@@ -433,6 +433,7 @@
     if (org === "strep_bhs" && (d === "penicillin" || d === "ampicillin" || d === "amoxicillin") && v < 95) return "penicillin-non-susceptible beta-haemolytic streptococci are essentially unreported; a figure this low needs confirmation";
     if (org === "saureus" && d === "teicoplanin" && v < 90) return "teicoplanin-non-susceptible S. aureus is exceptional; a figure this low usually reflects a method or reporting error and needs confirmation by MIC";
     if (org === "strep_bhs" && (d === "vancomycin" || d === "linezolid") && v < 95) return "vancomycin- or linezolid-non-susceptible beta-haemolytic streptococci are essentially unreported; a figure this low needs confirmation";
+    if (org === "efaecalis" && d === "daptomycin" && v < 90) return "daptomycin-non-susceptible E. faecalis is exceptional; a figure this low needs confirmation by MIC";
     if (o.group === "gpc" && d === "tigecycline" && v < 90) return "tigecycline resistance this common in Gram-positive cocci is exceptional; a figure this low usually reflects a method or reporting error and needs confirmation by MIC";
     if (TYPHOIDAL[org] && (d === "meropenem" || d === "imipenem" || d === "ertapenem") && v < 95) return "carbapenem resistance in typhoidal Salmonella is exceptional; a figure this low needs confirmation";
     return null;
@@ -462,23 +463,31 @@
       // The extractor found the source contradicting itself for this figure (e.g. a printed %
       // that its own printed counts do not give).
       if (conflict[d]) { c.act = "caution"; c.why = "the source contradicts itself: " + conflict[d]; return; }
+      if (HIGH_LEVEL_AG.indexOf(d) >= 0 && ENTEROCOCCI.indexOf(org) < 0) { c.act = "hide"; c.why = "high-level aminoglycoside screening applies to enterococci only"; return; }
+      if (URINE_ONLY.indexOf(d) >= 0 && row.spec && row.spec !== "urine" && row.spec !== "all") { c.act = "hide"; c.why = drugLabel(d) + " is reported for urinary isolates only"; return; }
+      if (NOT_RESPIRATORY.indexOf(d) >= 0 && row.spec === "respiratory") { c.act = "hide"; c.why = "daptomycin is inactivated by lung surfactant"; return; }
+      if (NOT_URINE.indexOf(d) >= 0 && row.spec === "urine") { c.act = "hide"; c.why = drugLabel(d) + " reaches too little concentration in urine to treat a urinary infection"; return; }
       // A table the extraction found internally inconsistent (e.g. levofloxacin 0% beside
       // ciprofloxacin 11% for 953 isolates): every figure in it is shown with a caution, never pooled.
       if (row.unreliable) { c.act = "caution"; c.why = "this table of the source is not internally consistent (" + row.unreliable + "), so none of its figures is used"; return; }
       // A 0 the source itself suggests means "not tested" rather than "all resistant".
       if (untested[d] && v === 0) { c.act = "caution"; c.why = "printed 0, which here probably means not tested rather than all resistant: " + untested[d]; return; }
-      if (HIGH_LEVEL_AG.indexOf(d) >= 0 && ENTEROCOCCI.indexOf(org) < 0) { c.act = "hide"; c.why = "high-level aminoglycoside screening applies to enterococci only"; return; }
-      if (URINE_ONLY.indexOf(d) >= 0 && row.spec && row.spec !== "urine" && row.spec !== "all") { c.act = "hide"; c.why = drugLabel(d) + " is reported for urinary isolates only"; return; }
-      if (NOT_RESPIRATORY.indexOf(d) >= 0 && row.spec === "respiratory") { c.act = "hide"; c.why = "daptomycin is inactivated by lung surfactant"; return; }
-      if (NOT_URINE.indexOf(d) >= 0 && row.spec === "urine") { c.act = "hide"; c.why = drugLabel(d) + " reaches too little concentration in urine to treat a urinary infection"; return; }
       if (isStaph && (pheno === "MRSA" || pheno === "MR") && v > 0 && (STAPH_BL_LABILE.indexOf(d) >= 0 || STAPH_BL_STABLE.indexOf(d) >= 0 || d === "cefoxitin")) {
         c.act = "suppress"; c.why = "methicillin-resistant staphylococci are resistant to beta-lactams (other than ceftaroline) by definition; the printed figure cannot be right"; return;
       }
       if (isStaph && (pheno === "MSSA" || pheno === "MS") && (d === "cefoxitin" || d === "oxacillin") && v < 100) {
         c.act = "suppress"; c.why = "a methicillin-susceptible row cannot be cefoxitin or oxacillin resistant"; return;
       }
-      if (fox != null && d !== "cefoxitin" && d !== "oxacillin" && (STAPH_BL_LABILE.indexOf(d) >= 0 || STAPH_BL_STABLE.indexOf(d) >= 0) && v > fox + 5) {
+      // With methicillin susceptibility at 0 no rounding explains any beta-lactam susceptibility.
+      if (fox != null && d !== "cefoxitin" && d !== "oxacillin" && (STAPH_BL_LABILE.indexOf(d) >= 0 || STAPH_BL_STABLE.indexOf(d) >= 0) && v > fox + (fox === 0 ? 0 : 5)) {
         c.act = "suppress"; c.why = drugLabel(d) + " susceptibility (" + v + "%) is higher than methicillin (cefoxitin/oxacillin) susceptibility (" + fox + "%), which is impossible: methicillin-resistant strains are beta-lactam resistant"; return;
+      }
+      // The other direction: every methicillin-susceptible isolate is susceptible to the
+      // penicillinase-stable beta-lactams, so one of them far below methicillin is not credible.
+      // (Not the methicillin markers themselves, piperacillin alone, which penicillinase-producing
+      // MSSA destroy, or ceftazidime, which is weak against staphylococci.)
+      if (fox != null && STAPH_BL_STABLE.indexOf(d) >= 0 && ["oxacillin", "cloxacillin", "piperacillin", "ceftazidime"].indexOf(d) < 0 && v < fox - 20) {
+        c.act = "caution"; c.why = drugLabel(d) + " susceptibility (" + v + "%) is far below methicillin (cefoxitin/oxacillin) susceptibility (" + fox + "%), but methicillin-susceptible staphylococci are susceptible to it; the source figures disagree"; return;
       }
       if (approx.indexOf(d) >= 0) { c.act = "caution"; c.why = "approximate (read from a chart in the source)"; return; }
       if (!achievable(v, c.nt != null ? c.nt : row.n)) { c.act = "caution"; c.why = "no whole number of the " + (c.nt != null ? c.nt : row.n) + " isolates gives " + v + "%; check the source"; return; }
@@ -488,6 +497,11 @@
       // (or low) "susceptible" is not a resistance rate. MIC by broth microdilution decides.
       if ((d === "colistin" || d === "polymyxin_b") && v < 50 && (orgGroup(org) === "entero" || orgGroup(org) === "nonferm")) {
         c.act = "caution"; c.why = (v === 0 ? "0%" : "a low figure") + " for colistin or polymyxin B usually reflects the breakpoint system (CLSI has no susceptible category, only intermediate and resistant) rather than resistance; confirm with a broth microdilution MIC"; return;
+      }
+      // CLSI (2019 onward) has no susceptible category for daptomycin in E. faecium, only
+      // susceptible-dose-dependent and resistant: a low "susceptible" figure is the breakpoint system.
+      if (d === "daptomycin" && org === "efaecium" && v < 50) {
+        c.act = "caution"; c.why = "CLSI has had no susceptible category for daptomycin in E. faecium since 2019 (only susceptible-dose-dependent and resistant), so a low figure reflects the breakpoints rather than resistance; see the MIC"; return;
       }
       var un = unusualReason(org, d, v);
       if (un) { c.act = "caution"; c.why = un; return; }
@@ -512,8 +526,17 @@
     // (OprD), so it and Acinetobacter get a wider margin. Burkholderia and Stenotrophomonas are
     // left out (imipenem is not a test agent for them).
     var grp = orgGroup(org), isStrep = ORGS[org] && ORGS[org].strep;
-    if (grp === "entero" && PROTEEAE.indexOf(org) < 0) pair("imipenem", "meropenem", 25, "imipenem and meropenem should give similar results for this organism; the source figures disagree");
-    if (org === "paeruginosa" || org === "acinetobacter") pair("imipenem", "meropenem", 30, "imipenem and meropenem rarely differ this much for non-fermenters; the source figures disagree");
+    // When imipenem is the low one, imipenem is the suspect (unstable disks, method): only it is a
+    // caution and meropenem stays usable. Meropenem far below imipenem questions both.
+    function carbapenems(gap, why) {
+      var ci = out.cells.imipenem, cm = out.cells.meropenem;
+      if (!ci || !cm || ci.act !== "keep" || cm.act !== "keep" || !comparable(ci, cm)) return;
+      var txt = " (" + drugLabel("imipenem") + " " + ci.s + "%, " + drugLabel("meropenem") + " " + cm.s + "%)";
+      if (ci.s < cm.s - gap) { ci.act = "caution"; ci.why = why + "; imipenem is the outlier (imipenem disks lose potency, a known cause of false resistance)" + txt; }
+      else if (cm.s < ci.s - gap) { ci.act = cm.act = "caution"; ci.why = cm.why = why + txt; }
+    }
+    if (grp === "entero" && PROTEEAE.indexOf(org) < 0) carbapenems(25, "imipenem and meropenem should give similar results for this organism; the source figures disagree");
+    if (org === "paeruginosa" || org === "acinetobacter") carbapenems(30, "imipenem and meropenem rarely differ this much for non-fermenters; the source figures disagree");
     // Fluoroquinolones: ciprofloxacin and levofloxacin give similar results; for Enterobacterales and
     // staphylococci an isolate susceptible to ciprofloxacin (or ofloxacin) is susceptible to
     // levofloxacin, so levofloxacin cannot be far below them.
@@ -521,6 +544,20 @@
     if (grp === "entero" || (ORGS[org] && ORGS[org].staph)) {
       ["ciprofloxacin", "ofloxacin"].forEach(function (a) { atMost(a, "levofloxacin", 10, "an isolate susceptible to " + drugLabel(a).toLowerCase() + " is also levofloxacin-susceptible, so levofloxacin cannot be this much lower; the source figures disagree"); });
     }
+    // Enterobacterales hierarchy: an isolate susceptible to ceftriaxone or cefotaxime is carbapenem-
+    // susceptible, one susceptible to ertapenem is meropenem-susceptible, one susceptible to
+    // cefuroxime is susceptible to the 3rd-generation cephalosporins, and gentamicin-susceptible
+    // isolates are almost always amikacin-susceptible. A figure far out of that order is an error.
+    if (grp === "entero") {
+      ["ceftriaxone", "cefotaxime"].forEach(function (a) {
+        ["meropenem"].concat(PROTEEAE.indexOf(org) < 0 ? ["imipenem"] : []).forEach(function (b) { atMost(a, b, 20, "an isolate susceptible to " + drugLabel(a).toLowerCase() + " is carbapenem-susceptible, so " + drugLabel(b).toLowerCase() + " cannot be this much lower; the source figures disagree"); });
+      });
+      atMost("ertapenem", "meropenem", 10, "an ertapenem-susceptible isolate is meropenem-susceptible, so meropenem cannot be this much lower; the source figures disagree");
+      ["ceftriaxone", "cefotaxime"].forEach(function (b) { atMost("cefuroxime", b, 10, "a cefuroxime-susceptible isolate is also " + drugLabel(b).toLowerCase() + "-susceptible, so " + drugLabel(b).toLowerCase() + " cannot be this much lower; the source figures disagree"); });
+      atMost("gentamicin", "amikacin", 20, "gentamicin-susceptible Enterobacterales are almost always amikacin-susceptible, so amikacin cannot be this much lower; the source figures disagree");
+    }
+    // Cefoxitin and oxacillin both measure methicillin resistance in staphylococci.
+    if (ORGS[org] && ORGS[org].staph && !pheno) pair("cefoxitin", "oxacillin", 20, "cefoxitin and oxacillin both measure methicillin resistance and should agree; the source figures disagree");
     // Streptococci: penicillin and ampicillin (or amoxicillin) move together.
     if (isStrep) { pair("penicillin", "ampicillin", 25, "penicillin and ampicillin should give similar results for streptococci; the source figures disagree"); pair("penicillin", "amoxicillin", 25, "penicillin and amoxicillin should give similar results for streptococci; the source figures disagree"); }
     // A beta-lactamase inhibitor only adds activity: an ampicillin-susceptible isolate is also
@@ -609,10 +646,16 @@
   function wisca(parts, regimen) {
     var tot = 0, known = 0, lo = 0, hi = 0, detail = [];
     parts.forEach(function (p) { tot += p.n || 0; });
+    // An intrinsic 0 is a known figure only when the drug has a measured figure for some organism
+    // in the mix: vancomycin for a blood ICU mix with no Gram-positive data is unknown, not 0%.
+    var measured = {};
+    regimen.forEach(function (d) {
+      measured[d] = parts.some(function (p) { var a = p.act && p.act[d], v = p.s && p.s[d]; return typeof v === "number" && (!a || a === "keep") && !intrinsicReason(p.org, d); });
+    });
     parts.forEach(function (p) {
       var ss = regimen.map(function (d) {
         var a = p.act && p.act[d];
-        if (a === "intrinsic" || intrinsicReason(p.org, d)) return 0;
+        if (a === "intrinsic" || intrinsicReason(p.org, d)) return measured[d] ? 0 : null;
         var v = p.s && p.s[d];
         return (typeof v === "number" && (!a || a === "keep")) ? v : null;
       });

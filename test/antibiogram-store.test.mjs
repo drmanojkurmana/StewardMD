@@ -322,3 +322,23 @@ test("review round 2: repeated strings are stored once and restored on load; the
   assert.equal(r.table, "Table 3: blood isolates"); assert.equal(r.notes.meropenem, "printed 80*");
   assert.equal(await S9.detail("T_2024"), null, "no fetch in this context: resolves to null, never throws");
 });
+
+test("review round 3: a pooled lookup walks on to the next stratum when the first has fewer than 3 institutions", () => {
+  // Urine inpatients: 2 institutions (caution); urine all settings: 3 institutions (a pool).
+  const mk = (id, sets) => src({ id: id + "_2024", inst: id, institution: id + " Hospital", short: id, region: "north", year: 2024, rows: sets.map(([set, v]) => ({ spec: "urine", set, org: "E. coli", n: 100, s: { ceftriaxone: v } })) });
+  const S10 = load([mk("P", [["inpatient", 20], ["all", 25]]), mk("Q", [["inpatient", 30], ["all", 35]]), mk("R3", [["all", 15]])]);
+  const cell = S10.table("india", "urine", "inpatient").orgs[0].cells.ceftriaxone;
+  assert.equal(cell.act, "caution"); assert.ok(cell.few, "marked as too few institutions, not a failed check");
+  const r = S10.susceptibility("E. coli", "ceftriaxone", { scope: "india", spec: ["urine"], set: ["inpatient"] });
+  assert.ok(r, "an answer from the next stratum");
+  assert.equal(r.set, "all"); assert.equal(r.k, 3); assert.equal(r.s, 25);
+});
+
+test("review round 3: a region is pooled only when 3 institutions contribute usable figures", () => {
+  const w = (id, n) => src({ id: id + "_2024", inst: id, institution: id + " Hospital", short: id, region: "west", year: 2024, rows: [{ spec: "blood", set: "all", org: "E. coli", n, s: { meropenem: 70 } }] });
+  const withLow = load([w("W1", 100), w("W2", 100), w("W3", 10)]);
+  assert.ok(!withLow.scopes().some((x) => x.id === "region:west"), "an institution with only rows under 30 does not count");
+  const three = load([w("W1", 100), w("W2", 100), w("W3", 100)]);
+  const sc = three.scopes().find((x) => x.id === "region:west");
+  assert.ok(sc && /3 institutions/.test(sc.label));
+});

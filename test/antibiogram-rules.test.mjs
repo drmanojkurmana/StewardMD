@@ -363,3 +363,32 @@ test("review round 2: an unreliable table, a 0 that means not tested, and high-l
   assert.equal(row({ org: "saureus", s: { gentamicin_hl: 90 } }).cells.gentamicin_hl.act, "hide");
   assert.equal(row({ org: "efaecalis", s: { gentamicin_hl: 60 } }).cells.gentamicin_hl.act, "keep");
 });
+
+test("review round 3: beta-lactam and aminoglycoside hierarchy, imipenem as the outlier, daptomycin", () => {
+  // SKIMS 2024 urine OPD E. coli: meropenem 23% beside ceftriaxone 87%.
+  assert.equal(row({ org: "ecoli", s: { ceftriaxone: 87, meropenem: 23 } }).cells.meropenem.act, "caution");
+  assert.equal(row({ org: "klebsiella", s: { ertapenem: 60, meropenem: 19 } }).cells.meropenem.act, "caution", "ertapenem above meropenem");
+  assert.equal(row({ org: "ecoli", s: { cefuroxime: 50, ceftriaxone: 25 } }).cells.ceftriaxone.act, "caution", "cefuroxime above ceftriaxone");
+  assert.equal(row({ org: "klebsiella", s: { gentamicin: 45, amikacin: 0 } }).cells.amikacin.act, "caution", "gentamicin above amikacin");
+  assert.equal(row({ org: "ecoli", s: { ceftriaxone: 30, meropenem: 85, ertapenem: 80, cefuroxime: 25, gentamicin: 60, amikacin: 90 } }).cells.meropenem.act, "keep", "a normal profile passes");
+  // Imipenem far below meropenem: only imipenem is questioned.
+  const im = row({ org: "paeruginosa", s: { imipenem: 10, meropenem: 60 } });
+  assert.equal(im.cells.imipenem.act, "caution"); assert.equal(im.cells.meropenem.act, "keep");
+  const mi = row({ org: "paeruginosa", s: { imipenem: 70, meropenem: 20 } });
+  assert.equal(mi.cells.imipenem.act, "caution"); assert.equal(mi.cells.meropenem.act, "caution");
+  // Daptomycin: E. faecium has no susceptible category (CLSI 2019+); E. faecalis below 90 is exceptional.
+  assert.match(row({ org: "efaecium", s: { daptomycin: 0 } }).cells.daptomycin.why, /no susceptible category/);
+  assert.equal(row({ org: "efaecalis", s: { daptomycin: 40 } }).cells.daptomycin.act, "caution");
+  // S. aureus: penicillin cannot exceed an oxacillin of 0; a stable beta-lactam cannot sit far below it.
+  assert.equal(row({ org: "saureus", n: 40, s: { oxacillin: 0, penicillin: 4 } }).cells.penicillin.act, "suppress");
+  assert.equal(row({ org: "saureus", s: { oxacillin: 45, ertapenem: 0 } }).cells.ertapenem.act, "caution");
+  assert.equal(row({ org: "saureus", s: { oxacillin: 45, piperacillin: 5 } }).cells.piperacillin.act, "keep", "penicillinase destroys piperacillin alone");
+});
+
+test("review round 3: WISCA counts an intrinsic 0 only when the drug is measured for some organism in the mix", () => {
+  const onlyGN = [{ org: "ecoli", n: 100, s: { meropenem: 80 }, act: {} }, { org: "klebsiella", n: 100, s: { meropenem: 40 }, act: {} }];
+  assert.equal(R.wisca(onlyGN, ["vancomycin"]).coverage, null, "vancomycin with no Gram-positive data is unknown, not 0%");
+  const mixed = onlyGN.concat([{ org: "saureus", n: 50, s: { vancomycin: 100 }, act: {} }]);
+  const w = R.wisca(mixed, ["vancomycin"]);
+  assert.equal(w.coverage, 20, "with S. aureus measured, the Gram-negatives count as 0: 50*100/250");
+});

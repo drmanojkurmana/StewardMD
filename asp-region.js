@@ -119,7 +119,10 @@
         '<span style="font:800 12px system-ui;color:#fff;background:' + col + ';padding:2px 8px;border-radius:999px;min-width:56px;text-align:center">' + Rv + '% R' + star + '</span></div>' +
         '<div style="height:5px;border-radius:3px;background:var(--line,#eef1f4);margin-top:3px;overflow:hidden"><i style="display:block;height:100%;width:' + Rv + '%;background:' + col + '"></i></div></div>';
     });
-    if (drugs.some(function (d) { return o.cells[d].act === "caution"; })) h += '<div style="font:500 10.5px system-ui;color:var(--slate-soft,#64748b)">* grey: failed a data check (tap for the reason); shown for reference, not used in pooled figures or reasoning.</div>';
+    if (drugs.some(function (d) { return o.cells[d].act === "caution"; })) {
+      var few = drugs.some(function (d) { return o.cells[d].act === "caution" && o.cells[d].few; }), chk = drugs.some(function (d) { return o.cells[d].act === "caution" && !o.cells[d].few; });
+      h += '<div style="font:500 10.5px system-ui;color:var(--slate-soft,#64748b)">* grey: ' + (chk ? "failed a data check" : "") + (chk && few ? ", or " : "") + (few ? "from fewer than 3 institutions, so not a pooled figure" : "") + ' (tap for the reason); shown for reference, not used in pooled figures or reasoning.</div>';
+    }
     if (off.length) h += '<div style="font:500 10.5px/1.4 system-ui;color:var(--slate-soft,#64748b)">Not shown for this syndrome: ' + esc(off.map(function (d) { return st.synDrug(_syn, d); }).join("; ")) + '.</div>';
     return h + '</div>';
   }

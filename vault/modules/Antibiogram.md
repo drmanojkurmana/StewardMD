@@ -208,6 +208,18 @@ it matched, and says so when nothing did.
   amoxicillin more than 10 above amoxicillin-clavulanate or ampicillin-sulbactam. `unusualReason` adds
   S. aureus teicoplanin under 90, beta-haemolytic streptococci vancomycin or linezolid under 95, and
   Gram-positive tigecycline under 90. High-level gentamicin/streptomycin outside enterococci is hidden.
+- **Review round 3 (2026-09-26)**: Enterobacterales hierarchy cautions (ceftriaxone or cefotaxime more than
+  20 above meropenem or imipenem; ertapenem more than 10 above meropenem; cefuroxime more than 10 above
+  ceftriaxone or cefotaxime; gentamicin more than 20 above amikacin). Imipenem far below meropenem questions
+  imipenem only (unstable disks); the reverse questions both. S. aureus: penicillin above an oxacillin of 0 is
+  suppressed; a penicillinase-stable beta-lactam (not piperacillin alone or ceftazidime) more than 20 below
+  methicillin is a caution; cefoxitin/oxacillin must agree within 20. Daptomycin: E. faecium has no
+  susceptible category (CLSI 2019+), E. faecalis under 90 is exceptional. WISCA counts an intrinsic 0 only
+  when the drug is measured for some organism in the mix. Pooled lookups walk on through the syndrome's
+  strata to the first figure from 3 institutions (`candidatesFor`, `suscAt`); institutions count only if
+  they contribute a usable row, and a region is pooled only if some stratum has a pooled figure (the West
+  had none: AIIMS Bhopal, BVDU and SKNMC rarely report the same stratum). Cells from too few institutions
+  carry `few` and say so ("too few institutions", not "failed a data check").
 - **Row flags from the lead**: `unreliable: "what is inconsistent"` makes every figure of a row a caution
   (BVDU Pune 2024 page 12 Gram-negative rows; SKNMC Pune 2024 Pseudomonas lists); `untested: {drug: why}`
   turns a printed 0 that means "not tested" into a caution (RIMS Imphal 2023-24 blood cefazolin).
