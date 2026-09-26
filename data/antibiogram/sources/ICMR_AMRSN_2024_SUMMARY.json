@@ -1,0 +1,432 @@
+{
+ "id": "ICMR_AMRSN_2024_SUMMARY",
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "s": {
+    "piptazo": 41.3,
+    "cefotaxime": 15.8,
+    "ceftazidime": 27.5,
+    "ciprofloxacin": 10.7,
+    "levofloxacin": 15.8,
+    "imipenem": 57.6,
+    "meropenem": 62.9,
+    "amikacin": 72.7,
+    "colistin": 99.5
+   },
+   "q": {
+    "nitrofurantoin": "Good (per ICMR clinical-relevance note)",
+    "fosfomycin": "Good (per ICMR clinical-relevance note)"
+   },
+   "trend": {
+    "ceftazidime": [
+     [
+      2023,
+      19.2
+     ],
+     [
+      2024,
+      27.5
+     ]
+    ],
+    "imipenem": [
+     [
+      2017,
+      81.4
+     ],
+     [
+      2023,
+      62.7
+     ],
+     [
+      2024,
+      57.6
+     ]
+    ],
+    "meropenem": [
+     [
+      2017,
+      73.2
+     ],
+     [
+      2023,
+      66
+     ],
+     [
+      2024,
+      62.9
+     ]
+    ],
+    "amikacin": [
+     [
+      2017,
+      79.2
+     ],
+     [
+      2023,
+      68.2
+     ],
+     [
+      2024,
+      72.5
+     ]
+    ]
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": null,
+   "s": {
+    "piptazo": 26,
+    "cefotaxime": 20.3,
+    "ceftazidime": 23.7,
+    "ciprofloxacin": 20.4,
+    "levofloxacin": 24.8,
+    "imipenem": 31.2,
+    "meropenem": 35.1,
+    "amikacin": 39.9,
+    "colistin": 96.1
+   },
+   "trend": {
+    "piptazo": [
+     [
+      2017,
+      42.6
+     ],
+     [
+      2024,
+      26
+     ]
+    ],
+    "cefotaxime": [
+     [
+      2023,
+      17.3
+     ],
+     [
+      2024,
+      20.3
+     ]
+    ],
+    "ceftazidime": [
+     [
+      2023,
+      18.1
+     ],
+     [
+      2024,
+      23.7
+     ]
+    ],
+    "ciprofloxacin": [
+     [
+      2023,
+      17.1
+     ],
+     [
+      2024,
+      20.4
+     ]
+    ],
+    "levofloxacin": [
+     [
+      2023,
+      17.4
+     ],
+     [
+      2024,
+      24.8
+     ]
+    ],
+    "imipenem": [
+     [
+      2017,
+      58.5
+     ],
+     [
+      2024,
+      31.2
+     ]
+    ],
+    "meropenem": [
+     [
+      2017,
+      48.1
+     ],
+     [
+      2024,
+      35.1
+     ]
+    ],
+    "amikacin": [
+     [
+      2023,
+      34.5
+     ],
+     [
+      2024,
+      39.9
+     ]
+    ]
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": null,
+   "s": {
+    "piptazo": 80,
+    "meropenem": 80,
+    "ertapenem": 80,
+    "amikacin": 78
+   },
+   "approx": [
+    "piptazo",
+    "meropenem",
+    "ertapenem",
+    "amikacin"
+   ],
+   "q": {
+    "amikacin": ">78%",
+    "nitrofurantoin": "Intrinsically reduced"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": null,
+   "s": {
+    "imipenem": 57,
+    "meropenem": 62,
+    "ciprofloxacin": 57
+   },
+   "approx": [
+    "imipenem",
+    "meropenem"
+   ],
+   "q": {
+    "imipenem": "≈ (imipenem-R 43%)",
+    "meropenem": "≈ (meropenem-R 38%)"
+   },
+   "trend": {
+    "imipenem": [
+     [
+      2017,
+      74
+     ],
+     [
+      2024,
+      57
+     ]
+    ],
+    "meropenem": [
+     [
+      2017,
+      68.7
+     ],
+     [
+      2024,
+      62
+     ]
+    ],
+    "ciprofloxacin": [
+     [
+      2017,
+      57.8
+     ],
+     [
+      2022,
+      47.4
+     ],
+     [
+      2024,
+      57
+     ]
+    ]
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": null,
+   "s": {
+    "meropenem": 9,
+    "imipenem": 9,
+    "minocycline": 70
+   },
+   "approx": [
+    "meropenem",
+    "imipenem",
+    "minocycline"
+   ],
+   "q": {
+    "meropenem": "≈ (meropenem-R 91%)",
+    "imipenem": "≈ (carbapenem-R)",
+    "minocycline": "≈70% (most effective after colistin)",
+    "colistin": "Most reliable — salvage/combination",
+    "cotrimoxazole": "Variable"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "s": {},
+   "q": {
+    "cloxacillin": "MSSA-S; MRSA ~53% (methicillin-R, ICMR 2024)",
+    "cefazolin": "MSSA-S; MRSA resistant",
+    "clindamycin": "Active vs MSSA/strep — D-test for inducible MRSA",
+    "vancomycin": "≈100% (hVISA emerging — check MIC)",
+    "teicoplanin": "≈100%",
+    "linezolid": "≈100% (resistance rare)",
+    "daptomycin": "Active (not for lung source)",
+    "doxycycline": "Often active vs CA-MRSA",
+    "cotrimoxazole": "Often active vs MRSA — confirm"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": null,
+   "s": {},
+   "q": {
+    "amoxicillin": "~100% non-meningeal (ICMR 2024)",
+    "ceftriaxone": "~100% non-meningeal",
+    "cefotaxime": "~100% non-meningeal (CSF 7/8 S)",
+    "azithromycin": "Macrolide resistance a concern",
+    "doxycycline": "Generally active",
+    "levofloxacin": "Active"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Haemophilus influenzae",
+   "pheno": null,
+   "n": null,
+   "s": {},
+   "q": {
+    "amoxicillin": "Variable — β-lactamase strains resistant",
+    "amoxiclav": "Active (covers β-lactamase strains)",
+    "ceftriaxone": "Active",
+    "azithromycin": "Active"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Salmonella Typhi",
+   "pheno": null,
+   "n": null,
+   "s": {
+    "azithromycin": 99.5,
+    "ceftriaxone": 98,
+    "cefixime": 97.9,
+    "cotrimoxazole": 97.7
+   },
+   "q": {
+    "ciprofloxacin": ">95% resistant — AVOID"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Shigella sonnei",
+   "pheno": null,
+   "n": 97,
+   "s": {
+    "cefixime": 86.2,
+    "ampicillin": 82.5,
+    "azithromycin": 76.8,
+    "cotrimoxazole": 51.6,
+    "ciprofloxacin": 3.1
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Shigella flexneri",
+   "pheno": null,
+   "n": null,
+   "s": {
+    "azithromycin": 84.4,
+    "cefixime": 74.7,
+    "cotrimoxazole": 53.5,
+    "ampicillin": 27.3,
+    "ciprofloxacin": 6.5
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": null,
+   "s": {
+    "vancomycin": 78
+   },
+   "q": {
+    "vancomycin": "≈ (VRE 22%; faecium 34% vs faecalis 3.4%)",
+    "ampicillin": "Usually S in E. faecalis; often R in E. faecium",
+    "linezolid": "Active (Reserve)",
+    "nitrofurantoin": "Active for cystitis (E. faecalis)"
+   },
+   "trend": {
+    "vancomycin": [
+     [
+      2023,
+      82.5
+     ],
+     [
+      2024,
+      78
+     ]
+    ]
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Shigella sonnei",
+   "n": 97
+  }
+ ],
+ "excluded": [],
+ "kind": "network",
+ "inst": "ICMR_AMRSN",
+ "institution": "ICMR Antimicrobial Resistance Surveillance and Research Network",
+ "short": "ICMR-AMRSN",
+ "city": null,
+ "state": null,
+ "region": "national",
+ "sector": "network",
+ "year": 2024,
+ "period": "January to December 2024",
+ "citation": "ICMR-AMRSN Annual Report 2024 (Table 2.1 and trend summary)",
+ "url": null,
+ "reporting": "%S",
+ "verification": {
+  "status": "transcribed",
+  "note": "typed into app.js from the report summary; isolate counts were not transcribed, so these rows are shown but never pooled"
+ },
+ "notes": "National pooled susceptibility (all specimens except urine/faeces, Table 2.1 & trend summary). Use as a backdrop — local rates differ."
+}

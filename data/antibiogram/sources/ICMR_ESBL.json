@@ -1,0 +1,120 @@
+{
+ "id": "ICMR_ESBL",
+ "kind": "network",
+ "inst": "ICMR_ESBL",
+ "institution": "ICMR multicentric ESBL study (AIIMS Delhi, PGIMER, CMC Vellore, JIPMER)",
+ "short": "ICMR ESBL study",
+ "city": null,
+ "state": null,
+ "region": "national",
+ "sector": "network",
+ "year": 2016,
+ "period": "October 2014 to March 2016",
+ "citation": "Indian J Med Res 2019;149:208-215",
+ "doi": "10.4103/ijmr.IJMR_172_18",
+ "url": "https://doi.org/10.4103/ijmr.IJMR_172_18",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Source: Gautam et al, Indian J Med Res 2019;149:208-215 (ICMR multi-centric ESBL study, 4 tertiary centres: AIIMS Delhi, PGIMER Chandigarh, CMC Vellore, JIPMER Puducherry; Oct 2014-Mar 2016). Study covers ONLY E. coli (341 isolates) and K. pneumoniae (304 isolates) — no P. aeruginosa, A. baumannii, S. aureus, or Enterococcus. Method: Kirby-Bauer disc diffusion, CLSI. Table II reports % SUSCEPTIBLE by centre; Table III reports % RESISTANT (n/N) split by ESBL-producer vs non-ESBL. I derived OVERALL susceptibility by pooling Table III ESBL + non-ESBL resistant counts per drug (s = 100 - pooled %R, from_R:true for all pooled cells). Colistin values taken directly from the printed overall figures in the Results text (E. coli 99% = 271/274; K. pneumoniae 98% = 229/234), not from R. CAVEAT: Table III denominators (e.g. 167+202=369 for E. coli, 98+126=224 for K. pneumoniae) exceed stated collection totals of 341/304, likely reflecting drug-specific tested subsets/classification; per-drug pooled %R is nevertheless computed directly from printed n/N. Individual per-centre susceptibility values are available in Table II if centre-level breakdown is preferred. ESBL prevalence context: CDT dete",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 341,
+   "specimen_as_printed": "all clinical (blood, pus, sputum, body fluids)",
+   "s": {
+    "amikacin": 77.5,
+    "cefotaxime": 39.8,
+    "ceftazidime": 37.9,
+    "cefepime": 40.1,
+    "ciprofloxacin": 41,
+    "cefpodoxime": 33.8,
+    "chloramphenicol": 82.2,
+    "cefoperazone_sulbactam": 68.8,
+    "colistin": 99,
+    "ertapenem": 56.7,
+    "imipenem": 79.4,
+    "meropenem": 78.3,
+    "tetracycline": 42.4,
+    "piptazo": 65.9
+   },
+   "notes": {
+    "amikacin": "pooled Table III ESBL 8/167 + non-ESBL 75/202 = 83/369 R",
+    "cefotaxime": "pooled 99/167 + 123/202 = 222/369 R",
+    "ceftazidime": "pooled 97/167 + 132/202 = 229/369 R",
+    "cefepime": "pooled 92/167 + 129/202 = 221/369 R",
+    "ciprofloxacin": "pooled 56/92 + 111/191 = 167/283 R",
+    "cefpodoxime": "pooled 13/14 + 32/54 = 45/68 R",
+    "chloramphenicol": "pooled 15/62 + 12/90 = 27/152 R",
+    "cefoperazone_sulbactam": "pooled 13/92 + 49/107 = 62/199 R",
+    "colistin": "overall from text: 271/274 susceptible",
+    "ertapenem": "pooled 10/29 + 29/61 = 39/90 R",
+    "imipenem": "pooled 7/167 + 69/202 = 76/369 R",
+    "meropenem": "pooled 14/92 + 48/193 = 62/285 R",
+    "tetracycline": "pooled 58/88 + 52/103 = 110/191 R",
+    "piptazo": "pooled 18/167 + 108/202 = 126/369 R"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 304,
+   "specimen_as_printed": "all clinical (blood, pus, sputum, body fluids)",
+   "s": {
+    "amikacin": 50.9,
+    "cefotaxime": 29.9,
+    "ceftazidime": 29,
+    "cefepime": 30.8,
+    "ciprofloxacin": 48.7,
+    "cefpodoxime": 31.2,
+    "chloramphenicol": 82.1,
+    "cefoperazone_sulbactam": 41.2,
+    "colistin": 98,
+    "ertapenem": 67.2,
+    "imipenem": 54,
+    "meropenem": 46.4,
+    "tetracycline": 77.4,
+    "piptazo": 42.4
+   },
+   "notes": {
+    "amikacin": "pooled 56/98 + 54/126 = 110/224 R",
+    "cefotaxime": "pooled 85/98 + 72/126 = 157/224 R",
+    "ceftazidime": "pooled 83/98 + 76/126 = 159/224 R",
+    "cefepime": "pooled 83/98 + 72/126 = 155/224 R",
+    "ciprofloxacin": "pooled 58/98 + 57/126 = 115/224 R",
+    "cefpodoxime": "pooled 50/53 + 25/56 = 75/109 R",
+    "chloramphenicol": "pooled 9/64 + 16/76 = 25/140 R",
+    "cefoperazone_sulbactam": "pooled 66/90 + 57/119 = 123/209 R",
+    "colistin": "overall from text: 229/234 susceptible",
+    "ertapenem": "pooled 11/53 + 27/63 = 38/116 R",
+    "imipenem": "pooled 43/98 + 60/126 = 103/224 R",
+    "meropenem": "pooled 52/98 + 68/126 = 120/224 R",
+    "tetracycline": "pooled 29/89 + 18/119 = 47/208 R",
+    "piptazo": "pooled 65/98 + 64/126 = 129/224 R"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 341
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 304
+  }
+ ],
+ "excluded": []
+}

@@ -1,0 +1,288 @@
+{
+ "id": "HAYES_URO",
+ "kind": "study",
+ "inst": "HAYES_PRAYAGRAJ",
+ "institution": "Hayes Memorial Mission Hospital",
+ "short": "Hayes Prayagraj",
+ "city": "Prayagraj",
+ "state": "Uttar Pradesh",
+ "region": "north",
+ "sector": "private",
+ "year": 2019,
+ "period": "November 2018 to December 2019",
+ "citation": "Front Microbiol 2022",
+ "doi": "10.3389/fmicb.2022.965053",
+ "url": "https://doi.org/10.3389/fmicb.2022.965053",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Source: Bhargava et al., Front. Microbiol. 2022;13:965053 (Hayes Memorial Mission Hospital, Prayagraj UP). Data from Table 4 (page 6), text-extracted (machine-readable PDF, not scanned). Table 4 reports % susceptible (confirmed by Results text, e.g. 'amikacin was effective against 77.0% of E. coli'; 'imipenem outperformed meropenem by inhibiting 57.4% E. coli'). All values entered as printed %S; no %R conversion needed (from_R=false throughout). NT = not tested (cell omitted). Specimen = clean-catch midstream urine; study period Nov 2018–Dec 2019; 96.0% of isolates MDR. ESBL context: 40.4% of E. coli were ESBL producers; none of K. pneumoniae were ESBL. n per organism from Table 4 column headers. Proteus sp. mapped to Proteus mirabilis (species not specified in study — note added). Enterococcus not split to species → 'Enterococcus'. 'H-gentamycin' (high-concentration gentamicin, Enterococcus 66.7%) recorded as separate token h-gentamicin. Non-canonical drugs kept with lowercase tokens: novobiocin. S. epidermidis (n=8) reported but not in canonical organism list — see unmapped. No A. baumannii in study.",
+ "issues": [
+  "Organism naming over-specification: the extraction labels the second organism 'Proteus mirabilis', but Table 4 and the text report only 'Proteus sp.' (species not identified). All 14 susceptibility values map correctly to the Proteus column; only the top-level name is over-specified. The extraction includes a note acknowledging this, but the displayed name 'Proteus mirabilis' is not supported by t",
+  "No %R->%S conversion issues found: Table 4 prints susceptibility (%S) directly (confirmed by narrative on p5, e.g. vancomycin 100% S. aureus, nitrofurantoin 94.4% Enterococcus, chloramphenicol 83.3/75.0/87.5). All from_R:false flags are correct.",
+  "S. aureus clindamycin s:55.0 is ambiguous in the source (only two values, 55.0% and 62.5%, appear in the clindamycin row across the three gram-positive columns). Accepted as correct because clindamycin is clinically tested against staphylococci (not enterococci, which are intrinsically resistant), making S. aureus 55.0% / S. epidermidis 62.5% the consistent reading; the extraction correctly omits "
+ ],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 183,
+   "specimen_as_printed": "urine",
+   "s": {
+    "amikacin": 77,
+    "gentamicin": 49.7,
+    "ampicillin": 1.1,
+    "amoxiclav": 12.6,
+    "piptazo": 37.7,
+    "ceftazidime": 12,
+    "cefepime": 6.6,
+    "ceftriaxone": 16.9,
+    "cotrimoxazole": 39.8,
+    "imipenem": 57.4,
+    "meropenem": 37.2,
+    "nitrofurantoin": 49.7,
+    "norfloxacin": 4.4,
+    "ciprofloxacin": 3.8
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 23,
+   "specimen_as_printed": "urine",
+   "s": {
+    "amikacin": 73.9,
+    "gentamicin": 56.5,
+    "ampicillin": 8.7,
+    "amoxiclav": 0,
+    "piptazo": 52.2,
+    "ceftazidime": 26.1,
+    "cefepime": 8.7,
+    "ceftriaxone": 26.1,
+    "cotrimoxazole": 34.7,
+    "imipenem": 13,
+    "meropenem": 13,
+    "nitrofurantoin": 21.7,
+    "norfloxacin": 13,
+    "ciprofloxacin": 21.7
+   },
+   "notes": {
+    "amikacin": "study reports 'Proteus sp.', species not specified"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 22,
+   "specimen_as_printed": "urine",
+   "s": {
+    "amikacin": 81.8,
+    "gentamicin": 86.4,
+    "ampicillin": 0,
+    "amoxiclav": 18.2,
+    "piptazo": 45.5,
+    "ceftazidime": 54.5,
+    "cefepime": 22.7,
+    "ceftriaxone": 40.9,
+    "cotrimoxazole": 86.4,
+    "imipenem": 72.7,
+    "meropenem": 40.9,
+    "nitrofurantoin": 13.6,
+    "norfloxacin": 13.6,
+    "ciprofloxacin": 22.7
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 17,
+   "specimen_as_printed": "urine",
+   "s": {
+    "amikacin": 52.9,
+    "gentamicin": 52.9,
+    "ampicillin": 0,
+    "amoxiclav": 5.9,
+    "piptazo": 23.5,
+    "ceftazidime": 17.6,
+    "cefepime": 23.5,
+    "ceftriaxone": 35.3,
+    "cotrimoxazole": 35.3,
+    "imipenem": 29.4,
+    "meropenem": 29.4,
+    "nitrofurantoin": 17.6,
+    "norfloxacin": 0,
+    "ciprofloxacin": 5.9
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter",
+   "pheno": null,
+   "n": 21,
+   "specimen_as_printed": "urine",
+   "s": {
+    "amikacin": 90.5,
+    "gentamicin": 81,
+    "ampicillin": 23.8,
+    "amoxiclav": 4.8,
+    "piptazo": 71.4,
+    "ceftazidime": 33.3,
+    "cefepime": 9.5,
+    "ceftriaxone": 42.9,
+    "cotrimoxazole": 52.4,
+    "imipenem": 57.1,
+    "meropenem": 52.4,
+    "nitrofurantoin": 61.9,
+    "norfloxacin": 23.8,
+    "ciprofloxacin": 28.6
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 21,
+   "specimen_as_printed": "urine",
+   "s": {
+    "amikacin": 76.2,
+    "gentamicin": 81,
+    "tobramycin": 71.4,
+    "piperacillin": 23.8,
+    "piptazo": 71.4,
+    "ceftazidime": 23.8,
+    "cefepime": 38.1,
+    "imipenem": 90.5,
+    "meropenem": 23.8,
+    "nitrofurantoin": 0,
+    "norfloxacin": 66.7,
+    "ciprofloxacin": 71.4
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 18,
+   "specimen_as_printed": "urine",
+   "s": {
+    "ampicillin": 66.7,
+    "penicillin": 33.3,
+    "nitrofurantoin": 94.4,
+    "norfloxacin": 33.3,
+    "ciprofloxacin": 44.4,
+    "erythromycin": 11.1,
+    "gentamicin_hl": 66.7,
+    "tetracycline": 38.9,
+    "teicoplanin": 83.3,
+    "vancomycin": 72.2,
+    "linezolid": 88.9,
+    "chloramphenicol": 83.3
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 20,
+   "specimen_as_printed": "urine",
+   "s": {
+    "cotrimoxazole": 20,
+    "nitrofurantoin": 70,
+    "penicillin": 0,
+    "cefoxitin": 15,
+    "norfloxacin": 10,
+    "ciprofloxacin": 10,
+    "clindamycin": 55,
+    "erythromycin": 5,
+    "netilmicin": 25,
+    "doxycycline": 40,
+    "vancomycin": 100,
+    "chloramphenicol": 75
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 183
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 23
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 22
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter",
+   "n": 21
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 21
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus",
+   "n": 18
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 20
+  }
+ ],
+ "excluded": [
+  {
+   "org": "Escherichia coli",
+   "drug": "ceftazidime-clav",
+   "value": 45.9,
+   "why": "ESBL confirmation disc, not a treatment"
+  },
+  {
+   "org": "Klebsiella pneumoniae",
+   "drug": "ceftazidime-clav",
+   "value": 0,
+   "why": "ESBL confirmation disc, not a treatment"
+  },
+  {
+   "org": "Staphylococcus aureus",
+   "drug": "novobiocin",
+   "value": 70,
+   "why": "identification test for S. saprophyticus, not a treatment"
+  }
+ ]
+}

@@ -23,6 +23,16 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] X-ray ([[ThoreX]]) daily cap — cap belongs at the IMAGE-analysis entry (on-device), not the text `thorex/llm`
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
+## [[Antibiogram]]
+- [ ] Retry the census from an Indian network: AIIMS Bhopal, Jodhpur, Bibinagar, Rajkot, Kalyani and several state
+      health portals refused connections from the cloud proxy (listed in the register with the reason).
+- [ ] Extract remaining downloaded documents marked "downloaded; not yet extracted" in `data/antibiogram/register.json`.
+- [ ] ICMR AMRSN 2017 to 2023 at stratum level (2024's trend tables already give the national 2017 to 2024 series).
+- [ ] ICMR regional-centre (RC) tables: per-centre figures, if ICMR's centre list can be tied to institutions.
+- [ ] Knowledge Library Antibiogram tab still reads `ASP_ABG.national` (in minified app.js); point it at `ABG_STORE`
+      (ICMR scope) when app.js is next rebuilt.
+- [ ] Clinical review of the syndrome-to-specimen map (`SYN` in antibiogram-store.js) by a microbiologist.
+
 ## Modules
 - [ ] **[[RadioAnatome 3D]] device run** — browser-verified only (SwiftShader). Run on the iPhone + Pixel:
       load time over cellular for the LOD default (~12 MB of the 19.6 MB LOD set for the default systems, from R2),

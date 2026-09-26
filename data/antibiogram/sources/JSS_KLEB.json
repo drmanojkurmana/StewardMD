@@ -1,0 +1,75 @@
+{
+ "id": "JSS_KLEB",
+ "kind": "study",
+ "inst": "JSS_MYSURU",
+ "institution": "JSS Medical College and Hospital",
+ "short": "JSS Mysuru",
+ "city": "Mysuru",
+ "state": "Karnataka",
+ "region": "south",
+ "sector": "private",
+ "year": 2023,
+ "period": "2014 to 2023 (2023 figures)",
+ "citation": "Front Microbiol 2025 (PMC12209295)",
+ "doi": null,
+ "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12209295/",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Source: Neelambike Sumana et al., Front. Microbiol. 2025 (JSS Medical College, Mysuru, Karnataka; 1800-bed tertiary care hospital). Retrospective, VITEK-2, CLSI. Scope: K. pneumoniae from URINE only (920 isolates over 2014-2023). This is the ONLY organism with AST data; other uropathogens (E. coli n=9211, Enterococci, P. aeruginosa n=1108, A. baumannii n=192, S. aureus n=161, Proteus) are named with isolate counts only, NO susceptibility data given, so they are not extracted.\n\nCRITICAL DATA-INTEGRITY ISSUE: In Tables 3 and 4 the S and R column headers are SWAPPED/mislabeled. The column labeled 'S' actually holds %RESISTANT. Verified against the paper's own narrative (pp.3,8) and CRKP counts, e.g. table 'S' for carbapenems 2023 = 38.55% while narrative explicitly states carbapenem RESISTANCE 2023 = 38.55% (32/83); same swap confirmed for every drug/year checked (fluoroquinolones, aminoglycosides, amoxiclav, piptazo, all cephalosporins, cotrimoxazole). Therefore true %susceptible = the table's 'R' column = 100 - narrative resistance. All s-values here are DERIVED from the reliable narrative resistance figures (from_R=true).\n\nData is reported PER YEAR (2014-2023), no per-drug pooled d",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 83,
+   "specimen_as_printed": "urine",
+   "s": {
+    "imipenem": 61.5,
+    "meropenem": 61.5,
+    "ertapenem": 61.5,
+    "ciprofloxacin": 59,
+    "amoxiclav": 13.3,
+    "piptazo": 13.3,
+    "cefoperazone_sulbactam": 37.4,
+    "cotrimoxazole": 24.1,
+    "cefepime": 14.5,
+    "ceftriaxone": 10.8,
+    "cefuroxime": 8.4
+   },
+   "notes": {
+    "imipenem": "Pooled carbapenem-class figure (per table footnote). Derived: 100 - 38.55% resistance. Table S/R columns mislabeled/swapped; resistance value confirmed by paper narrative and CRKP counts (32/83).",
+    "meropenem": "Pooled carbapenem-class figure; not species-specific. Derived from 38.55% resistance.",
+    "ertapenem": "Pooled carbapenem-class figure; not species-specific. Derived from 38.55% resistance.",
+    "ciprofloxacin": "Footnote defines fluoroquinolones = ciprofloxacin. Derived: 100 - 40.96% resistance.",
+    "amoxiclav": "Derived: 100 - 86.75% resistance.",
+    "piptazo": "Derived: 100 - 86.75% resistance.",
+    "cefoperazone_sulbactam": "Cefoperazone-sulbactam combination. Derived: 100 - 62.65% resistance.",
+    "cotrimoxazole": "Derived: 100 - 75.90% resistance.",
+    "cefepime": "Derived: 100 - 85.54% resistance.",
+    "ceftriaxone": "Derived: 100 - 89.16% resistance.",
+    "cefuroxime": "Oral cefuroxime axetil. Derived: 100 - 91.57% resistance."
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 83
+  }
+ ],
+ "excluded": [
+  {
+   "org": "Klebsiella pneumoniae",
+   "drug": "aminoglycosides",
+   "value": 30.12,
+   "why": "class-level result, not one drug"
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "id": "KIMS_KLEB",
+ "kind": "study",
+ "inst": "KIMS_BHUBANESWAR",
+ "institution": "Kalinga Institute of Medical Sciences",
+ "short": "KIMS Bhubaneswar",
+ "city": "Bhubaneswar",
+ "state": "Odisha",
+ "region": "east",
+ "sector": "private",
+ "year": 2024,
+ "period": "October 2022 to September 2024",
+ "citation": "Cureus 2025",
+ "doi": "10.7759/cureus.94006",
+ "url": "https://doi.org/10.7759/cureus.94006",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Source: Panigrahi et al., Cureus 2025;17(10):e94006 (KIMS Bhubaneswar). PDF read via PyMuPDF text extraction (pdftoppm/pdftotext unavailable). Data taken from Table 2 (page 10), which prints Sensitive/Intermediate/Resistant counts and percentages for each of 13 drugs across the whole study population and 4 subgroups (ICU, non-ICU, CAI, HAI). I extracted the overall Total (n=7,942) Sensitive % values as printed (%S only; Intermediate not added). Values match the abstract/text (tigecycline 74.79%S, gentamicin 39.45%S, meropenem 34.34%S, piptazo 32.44%S). Note the scope hint 'cipro 78.4%R' corresponds to the Resistant column (6,227, 78.40%R); the reported %S for ciprofloxacin is 19.08% (I:2.50%), so no %R conversion was needed as %S is printed directly. CPS = cefoperazone-sulbactam mapped to non-canonical token 'cefoperazonesulbactam' (distinct from plain cefoperazone). Only organism studied is K. pneumoniae; other Klebsiella species excluded by authors. Subgroup rows (ICU/non-ICU/CAI/HAI) also available in Table 2 but only the overall pooled figures extracted here. VITEK 2, CLSI 2022 breakpoints.",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 7942,
+   "specimen_as_printed": "all clinical (blood, urine, ETT, body fluid, sputum, pus, wound, skin swabs)",
+   "s": {
+    "amoxiclav": 27.4,
+    "piptazo": 32.4,
+    "cefuroxime": 16.9,
+    "ceftriaxone": 19.9,
+    "cefoperazone_sulbactam": 26.4,
+    "cefepime": 20.4,
+    "imipenem": 30.8,
+    "meropenem": 34.3,
+    "amikacin": 25.4,
+    "gentamicin": 39.5,
+    "ciprofloxacin": 19.1,
+    "tigecycline": 74.8,
+    "cotrimoxazole": 25.5
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 7942
+  }
+ ],
+ "excluded": []
+}

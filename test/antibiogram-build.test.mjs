@@ -1,0 +1,130 @@
+/* test/antibiogram-build.test.mjs: scripts/build-antibiogram.mjs, the step between the source
+ * files (one per antibiogram, as read from the document) and the bundle the app shows.
+ * Pins: the schema is strict, % resistant reports are converted and marked, derived rows are
+ * only made when they are complete, a source's own tables are cross-checked, and the committed
+ * bundle is fresh (the same guard CI runs).
+ *
+ * node --test test/antibiogram-build.test.mjs
+ */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { validateSource, checkRow, derive, countChecks, buildBundle, loadAll } from "../scripts/build-antibiogram.mjs";
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const base = (o) => Object.assign({ id: "T_2025", kind: "institution", inst: "T", institution: "Test Hospital", short: "Test", region: "north", sector: "government", year: 2025,
+  citation: "Test antibiogram 2025.", verification: { status: "double-checked", note: "test" }, rows: [], counts: [] }, o);
+
+test("schema: unknown keys, bad drugs, bad values and s+r together all fail", () => {
+  assert.deepEqual(validateSource(base({}), "T_2025.json"), []);
+  const e = validateSource(base({ colour: "red", rows: [{ spec: "blood", set: "all", org: "E. coli", n: 40, s: { notadrug: 50, amikacin: 140 } },
+    { spec: "urine", set: "all", org: "E. coli", n: 40, s: { amikacin: 90 }, r: { amikacin: 10 } }] }), "T_2025.json");
+  assert.ok(e.some((x) => /unknown key "colour"/.test(x)));
+  assert.ok(e.some((x) => /"notadrug" is not canonical/.test(x)));
+  assert.ok(e.some((x) => /amikacin = 140/.test(x)));
+  assert.ok(e.some((x) => /not both/.test(x)));
+  assert.ok(validateSource(base({}), "Other.json").some((x) => /does not match the file name/.test(x)));
+  assert.ok(validateSource(base({ rows: [{ spec: "blood", set: "all", org: "E. coli", n: 40, s: {}, trend: { amikacin: [[2024, 120]] } }] }), "T_2025.json").some((x) => /trend/.test(x)));
+});
+
+test("% resistant reports become 100 - %R and are marked", () => {
+  const src = base({ measure: "R" });
+  const r = checkRow(src, { spec: "blood", set: "all", org: "Klebsiella pneumoniae", n: 300, s: { meropenem: 62.5 }, trend: { meropenem: [[2023, 55], [2024, 62.5]] } });
+  assert.equal(r.cells.meropenem.s, 37.5);
+  assert.equal(r.measure, "R");
+  assert.deepEqual(r.trend.meropenem, [[2023, 45], [2024, 37.5]]);
+  const r2 = checkRow(base({}), { spec: "blood", set: "all", org: "E. coli", n: 300, r: { amikacin: 20 } });
+  assert.equal(r2.cells.amikacin.s, 80);
+  assert.equal(r2.measure, "R");
+});
+
+test("derived S. aureus row: MRSA + MSSA, and MRSA alone only when the counts say there was no MSSA", () => {
+  const src = base({ counts: [{ spec: "pus", set: "icu", org: "Staphylococcus aureus", n: 22 }, { spec: "pus", set: "ward", org: "Staphylococcus aureus", n: 30 }] });
+  const rows = [
+    { spec: "pus", set: "ward", org: "Staphylococcus aureus", pheno: "MRSA", n: 20, s: { vancomycin: 100 } },
+    { spec: "pus", set: "ward", org: "Staphylococcus aureus", pheno: "MSSA", n: 10, s: { vancomycin: 100, cefazolin: 100 } },
+    { spec: "pus", set: "icu", org: "Staphylococcus aureus", pheno: "MRSA", n: 22, s: { vancomycin: 100 } }
+  ].map((r) => checkRow(src, r));
+  const d = derive(rows, src);
+  const ward = d.find((r) => r.spec === "pus" && r.set === "ward" && !r.pheno);
+  assert.equal(ward.n, 30);
+  assert.equal(ward.cells.cefoxitin.s, 33.3, "10 of 30 methicillin-susceptible");
+  assert.equal(ward.cells.cefazolin.s, 33.3, "MRSA counts as 0% for beta-lactams");
+  const icu = d.find((r) => r.spec === "pus" && r.set === "icu" && !r.pheno);
+  assert.ok(icu, "MRSA-only ICU row combined because the count table shows 22 = 22");
+  assert.equal(icu.cells.cefoxitin.s, 0);
+  // Without counts, a lone MRSA row is not turned into an S. aureus row.
+  const d2 = derive([rows[2]], base({}));
+  assert.ok(!d2.some((r) => r.set === "icu" && !r.pheno));
+});
+
+test("derived all-settings rows need every setting (or a count of 0, or under 10% missing)", () => {
+  const counts = [
+    { spec: "urine", set: "ward", org: "E. coli", n: 100 }, { spec: "urine", set: "opd", org: "E. coli", n: 100 }, { spec: "urine", set: "icu", org: "E. coli", n: 40 },
+    { spec: "urine", set: "ward", org: "Klebsiella pneumoniae", n: 50 }, { spec: "urine", set: "opd", org: "Klebsiella pneumoniae", n: 50 }, { spec: "urine", set: "icu", org: "Klebsiella pneumoniae", n: 0 }
+  ];
+  const src = base({ counts });
+  const rows = [
+    { spec: "urine", set: "ward", org: "E. coli", n: 100, s: { amikacin: 90 } },
+    { spec: "urine", set: "opd", org: "E. coli", n: 100, s: { amikacin: 80 } },
+    // E. coli ICU (40 isolates, 17%) not printed: an all-settings E. coli row would be partial.
+    { spec: "urine", set: "ward", org: "Klebsiella pneumoniae", n: 50, s: { amikacin: 60 } },
+    { spec: "urine", set: "opd", org: "Klebsiella pneumoniae", n: 50, s: { amikacin: 70 } }
+    // Klebsiella ICU count 0: complete without it.
+  ].map((r) => checkRow(src, r));
+  const d = derive(rows, src);
+  assert.ok(!d.some((r) => r.org === "ecoli" && r.set === "all"), "E. coli all-settings not derived (17% missing)");
+  const k = d.find((r) => r.org === "klebsiella" && r.set === "all");
+  assert.ok(k);
+  assert.equal(k.cells.amikacin.s, 65);
+  assert.match(k.derived, /no ICU isolates/);
+});
+
+test("derived all-specimens rows never double count: 'all except urine' combines only with urine", () => {
+  const src = base({});
+  const rows = [
+    { spec: "nonurine", set: "all", org: "E. coli", n: 300, s: { amikacin: 70 } },
+    { spec: "blood", set: "all", org: "E. coli", n: 100, s: { amikacin: 60 } },     // already inside nonurine
+    { spec: "urine", set: "all", org: "E. coli", n: 100, s: { amikacin: 90 } }
+  ].map((r) => checkRow(src, r));
+  const all = derive(rows, src).find((r) => r.spec === "all" && r.set === "all");
+  assert.equal(all.n, 400, "300 + 100, blood not added again");
+  assert.equal(all.cells.amikacin.s, 75);
+});
+
+test("ICU device-associated infection rows are never combined with other rows", () => {
+  const src = base({});
+  const rows = [
+    { spec: "blood", set: "icu", org: "E. coli", n: 100, s: { amikacin: 60 }, cohort: "hai" },
+    { spec: "blood", set: "ward", org: "E. coli", n: 100, s: { amikacin: 80 } }
+  ].map((r) => checkRow(src, r));
+  assert.equal(derive(rows, src).length, 0);
+});
+
+test("count checks: a row whose isolates differ from the source's own count table is reported", () => {
+  const src = base({ counts: [{ spec: "pus", set: "ward", org: "Acinetobacter spp.", n: 269 }, { spec: "pus", set: "icu", org: "Acinetobacter spp.", n: 13 }] });
+  const rows = [
+    { spec: "pus", set: "ward", org: "Acinetobacter spp.", n: 209, s: { amikacin: 29.6 } },
+    { spec: "pus", set: "icu", org: "Acinetobacter spp.", n: 13, s: { amikacin: 10.9 } }
+  ].map((r) => checkRow(src, r));
+  const c = countChecks(src, rows);
+  assert.equal(c.length, 1);
+  assert.match(c[0].text, /269 in the organism table, 209 in the antibiogram table/);
+});
+
+test("bundle: deterministic version, compact rows, every cell action counted", () => {
+  const { sources, register, errors } = loadAll();
+  assert.deepEqual(errors, [], "every committed source file validates");
+  const a = buildBundle(sources, register), b = buildBundle(sources, register);
+  assert.equal(a.version, b.version);
+  const s = a.bundle.stats;
+  assert.equal(s.cells, s.act.keep + s.act.caution + s.act.intrinsic + s.act.hide + s.act.suppress);
+  assert.ok(a.bundle.rows.every((r) => Array.isArray(r) && typeof r[0] === "number" && r[0] < a.bundle.sources.length));
+});
+
+test("the committed bundle, index and tokens are fresh (build --check)", () => {
+  const out = execFileSync(process.execPath, [path.join(ROOT, "scripts", "build-antibiogram.mjs"), "--check"], { encoding: "utf8" });
+  assert.match(out, /^OK: antibiogram v [0-9a-f]{12}/);
+});

@@ -1,0 +1,323 @@
+{
+ "id": "EASTPOINT",
+ "kind": "study",
+ "inst": "EASTPOINT_BENGALURU",
+ "institution": "East Point Hospital and Research Center",
+ "short": "East Point Bengaluru",
+ "city": "Bengaluru",
+ "state": "Karnataka",
+ "region": "south",
+ "sector": "private",
+ "year": 2022,
+ "period": "January to June 2022",
+ "citation": "Cureus 2024;16:e60542",
+ "doi": "10.7759/cureus.60542",
+ "url": "https://doi.org/10.7759/cureus.60542",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Cureus 2024 (e60542), East Point Hospital & Research Center, Bangalore; prospective 6-month study Jan-Jun 2022, 357 isolates from 345 inpatient samples (urine/blood/sputum/swab/pus). Tables report \"Antibiotic sensitivity percentage (%)\" i.e. %SUSCEPTIBLE (WHONET, CLSI) — no conversion needed (from_R all false). Table 2 (gram-positive, p4) columns: Ampicillin, Amoxiclav, Cefazolin, Gentamycin, Tetracycline, Ciprofloxacin, Cefotaxime, Erythromycin, Clindamycin, Cefoxitin, Cotrimoxazole, Chloramphenicol, Levofloxacin, Nitrofurantoin, Vancomycin, Teicoplanin. Table 3 (gram-negative, p4) columns: Ampicillin, Piperacillin/tazobactam, Aztreonam, Imipenem, Meropenem, Gentamycin, Amikacin, Ciprofloxacin, Ceftriaxone, Cefuroxime, Clindamycin, Cotrimoxazole, Levofloxacin, Nitrofurantoin, Linezolid. NT (not tested) cells omitted. Study lists \"Klebsiella sp.\" (mapped to Klebsiella pneumoniae, the predominant species per text) and \"Acinetobacter sp.\" (mapped to A. baumannii). Enterococcus not split to species -> \"Enterococcus\". Note: some gram-negative cells are microbiologically implausible as printed (E. coli clindamycin 100% & aztreonam 100%, Pseudomonas clindamycin 100% & nitrofurantoin 100%",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 131,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 25,
+    "piptazo": 88,
+    "aztreonam": 100,
+    "imipenem": 95,
+    "meropenem": 94,
+    "gentamicin": 88,
+    "amikacin": 93,
+    "ciprofloxacin": 41,
+    "ceftriaxone": 39,
+    "cefuroxime": 34,
+    "clindamycin": 100,
+    "cotrimoxazole": 55,
+    "levofloxacin": 26,
+    "nitrofurantoin": 98,
+    "linezolid": 56
+   },
+   "notes": {
+    "aztreonam": "100% as printed; unusually high",
+    "clindamycin": "as printed; clindamycin not clinically relevant for gram-negatives",
+    "linezolid": "as printed; linezolid not relevant for gram-negatives"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 62,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 7,
+    "piptazo": 83,
+    "aztreonam": 100,
+    "imipenem": 88,
+    "meropenem": 89,
+    "gentamicin": 83,
+    "amikacin": 84,
+    "ciprofloxacin": 54,
+    "ceftriaxone": 63,
+    "cefuroxime": 56,
+    "clindamycin": 0,
+    "cotrimoxazole": 67,
+    "levofloxacin": 53,
+    "nitrofurantoin": 76,
+    "linezolid": 100
+   },
+   "notes": {
+    "clindamycin": "as printed; clindamycin not relevant for gram-negatives",
+    "linezolid": "as printed; linezolid not relevant for gram-negatives"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 36,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 12,
+    "piptazo": 85,
+    "aztreonam": 72,
+    "imipenem": 82,
+    "meropenem": 93,
+    "gentamicin": 74,
+    "amikacin": 81,
+    "ciprofloxacin": 60,
+    "ceftriaxone": 0,
+    "cefuroxime": 0,
+    "clindamycin": 100,
+    "cotrimoxazole": 67,
+    "levofloxacin": 80,
+    "nitrofurantoin": 100,
+    "linezolid": 50
+   },
+   "notes": {
+    "clindamycin": "as printed; not relevant for Pseudomonas",
+    "nitrofurantoin": "as printed; not relevant for Pseudomonas",
+    "linezolid": "as printed; not relevant for Pseudomonas"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 3,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 0,
+    "piptazo": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "gentamicin": 0,
+    "amikacin": 0,
+    "ciprofloxacin": 0,
+    "ceftriaxone": 0,
+    "cefuroxime": 0,
+    "cotrimoxazole": 0,
+    "levofloxacin": 0
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 51,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 100,
+    "amoxiclav": 100,
+    "cefazolin": 100,
+    "gentamicin": 83,
+    "tetracycline": 90,
+    "ciprofloxacin": 38,
+    "cefotaxime": 100,
+    "erythromycin": 43,
+    "clindamycin": 74,
+    "cefoxitin": 41,
+    "cotrimoxazole": 6,
+    "chloramphenicol": 96,
+    "levofloxacin": 31,
+    "nitrofurantoin": 100,
+    "teicoplanin": 100
+   },
+   "notes": {
+    "cefoxitin": "41%S cefoxitin implies ~59% MRSA"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 26,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 81,
+    "gentamicin": 33,
+    "tetracycline": 40,
+    "ciprofloxacin": 40,
+    "erythromycin": 50,
+    "clindamycin": 0,
+    "cotrimoxazole": 40,
+    "chloramphenicol": 100,
+    "levofloxacin": 0,
+    "nitrofurantoin": 75,
+    "vancomycin": 82,
+    "teicoplanin": 40
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 11,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 33,
+    "piptazo": 100,
+    "imipenem": 91,
+    "meropenem": 100,
+    "gentamicin": 54,
+    "amikacin": 82,
+    "ciprofloxacin": 29,
+    "ceftriaxone": 63,
+    "cefuroxime": 54,
+    "cotrimoxazole": 50,
+    "levofloxacin": 100,
+    "nitrofurantoin": 0
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Citrobacter",
+   "pheno": null,
+   "n": 8,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 25,
+    "piptazo": 87,
+    "imipenem": 100,
+    "meropenem": 83,
+    "gentamicin": 86,
+    "amikacin": 100,
+    "ciprofloxacin": 60,
+    "ceftriaxone": 100,
+    "cefuroxime": 57,
+    "cotrimoxazole": 71,
+    "levofloxacin": 50,
+    "nitrofurantoin": 100
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Salmonella Typhi",
+   "pheno": null,
+   "n": 1,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 0,
+    "piptazo": 100,
+    "meropenem": 0,
+    "gentamicin": 100,
+    "amikacin": 0,
+    "ciprofloxacin": 100,
+    "ceftriaxone": 0,
+    "cefuroxime": 0,
+    "cotrimoxazole": 100
+   },
+   "notes": {
+    "ampicillin": "n=1 isolate",
+    "piptazo": "n=1",
+    "meropenem": "n=1",
+    "gentamicin": "n=1",
+    "amikacin": "n=1",
+    "ciprofloxacin": "n=1",
+    "ceftriaxone": "n=1",
+    "cefuroxime": "n=1",
+    "cotrimoxazole": "n=1"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "n": 131
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "n": 62
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Pseudomonas aeruginosa",
+   "n": 36
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "n": 3
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Staphylococcus aureus",
+   "n": 51
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Enterococcus",
+   "n": 26
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Proteus mirabilis",
+   "n": 11
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Citrobacter",
+   "n": 8
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Salmonella Typhi",
+   "n": 1
+  }
+ ],
+ "excluded": [
+  {
+   "org": "Staphylococcus aureus",
+   "drug": "vancomycin",
+   "value": 0,
+   "why": "flagged by the original verifier: 0% as printed — implausible for S. aureus; transcribed exactly from Table 2"
+  }
+ ]
+}

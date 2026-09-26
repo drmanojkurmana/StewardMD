@@ -1,0 +1,217 @@
+{
+ "id": "MGJAIPUR_BSI",
+ "kind": "study",
+ "inst": "MGMCH_JAIPUR",
+ "institution": "Mahatma Gandhi Medical College and Hospital",
+ "short": "MG Jaipur",
+ "city": "Jaipur",
+ "state": "Rajasthan",
+ "region": "north",
+ "sector": "private",
+ "year": 2023,
+ "period": "October 2022 to September 2023",
+ "citation": "J Lab Physicians 2024",
+ "doi": "10.25259/JLP_94_2024",
+ "url": "https://doi.org/10.25259/JLP_94_2024",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Text-extracted (pypdf) from JLP 2024;16(4):501-506, Purohit et al, MGMC&H Jaipur BSI study. Values are % SUSCEPTIBLE — both tables headed \"Antimicrobial susceptibility pattern ... (%)\", confirmed by narrative (VAN/LZ/DAP 100% in S. aureus; oxacillin 43.5%S ≈ 100−56.5% MRSA). No %R conversion needed (from_R false everywhere). Table 1 = Gram-positive (cols P OX GEN HLG CIP LE TE COT E CD VAN TEI LZ DAP); Table 2 = Gram-negative (cols CAZ CPM ATR MRP IPM P/T CFS GEN AK CIP LE MIN CL(I) COT CXM CTR ETP AMC). Cells marked NT (not tested) or IR (intrinsically resistant) were omitted, not recorded as 0. Colistin column header explicitly notes (I)=intermediate but value 100 recorded as printed; colistin 100%S across all GNB matches scope hint. Klebsiella spp. mapped to K. pneumoniae (text: K. pneumoniae predominant), Acinetobacter spp.→A. baumannii, Pseudomonas spp.→P. aeruginosa (table labels were 'spp.'). Enterococcus reported combined in table (n=125) though text notes E. faecium 85%/E. faecalis 12.8% — used canonical 'Enterococcus'. CRE 50.2% (269/536), MRSA 56.5% (26/46), VRE 7.2% (9/125) per abstract/results. Non-canonical drug tokens used: penicillin, oxacillin, hlgentamicin (high-l",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 309,
+   "specimen_as_printed": "blood",
+   "s": {
+    "cefepime": 10.4,
+    "meropenem": 12.3,
+    "imipenem": 25.2,
+    "piptazo": 20.1,
+    "cefoperazone_sulbactam": 21,
+    "gentamicin": 27.5,
+    "amikacin": 28.2,
+    "ciprofloxacin": 14.2,
+    "colistin": 100,
+    "cotrimoxazole": 23.3,
+    "cefuroxime": 23.9,
+    "ceftriaxone": 34.6,
+    "ertapenem": 28.5,
+    "amoxiclav": 26.9
+   },
+   "notes": {
+    "colistin": "header marked (I) intermediate"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 191,
+   "specimen_as_printed": "blood",
+   "s": {
+    "cefepime": 37.7,
+    "meropenem": 57.6,
+    "imipenem": 59.7,
+    "piptazo": 39.8,
+    "cefoperazone_sulbactam": 52.9,
+    "gentamicin": 62.8,
+    "amikacin": 78.5,
+    "ciprofloxacin": 3.7,
+    "colistin": 100,
+    "cotrimoxazole": 38.2,
+    "cefuroxime": 13.6,
+    "ceftriaxone": 29.8,
+    "ertapenem": 55.5,
+    "amoxiclav": 24.6
+   },
+   "notes": {
+    "colistin": "header marked (I) intermediate"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 138,
+   "specimen_as_printed": "blood",
+   "s": {
+    "ceftazidime": 6.5,
+    "cefepime": 5.1,
+    "aztreonam": 5.1,
+    "meropenem": 8,
+    "imipenem": 5.1,
+    "piptazo": 7.2,
+    "cefoperazone_sulbactam": 15.2,
+    "gentamicin": 8,
+    "amikacin": 7.2,
+    "ciprofloxacin": 6.5,
+    "levofloxacin": 6.5,
+    "minocycline": 42,
+    "colistin": 100,
+    "cotrimoxazole": 26.1
+   },
+   "notes": {
+    "colistin": "header marked (I) intermediate"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 50,
+   "specimen_as_printed": "blood",
+   "s": {
+    "ceftazidime": 44,
+    "cefepime": 42,
+    "aztreonam": 0,
+    "meropenem": 36,
+    "imipenem": 40,
+    "piptazo": 28,
+    "cefoperazone_sulbactam": 40,
+    "ciprofloxacin": 32,
+    "levofloxacin": 28,
+    "colistin": 100
+   },
+   "notes": {
+    "colistin": "header marked (I) intermediate"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 46,
+   "specimen_as_printed": "blood",
+   "s": {
+    "penicillin": 15.2,
+    "oxacillin": 43.5,
+    "gentamicin": 82.6,
+    "ciprofloxacin": 8.7,
+    "levofloxacin": 15.2,
+    "tetracycline": 89.1,
+    "cotrimoxazole": 80.4,
+    "erythromycin": 34.8,
+    "clindamycin": 67.4,
+    "vancomycin": 100,
+    "teicoplanin": 95.7,
+    "linezolid": 100,
+    "daptomycin": 100
+   },
+   "notes": {
+    "oxacillin": "methicillin marker; MRSA 56.5%"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 125,
+   "specimen_as_printed": "blood",
+   "s": {
+    "penicillin": 12,
+    "gentamicin_hl": 18.4,
+    "ciprofloxacin": 4.8,
+    "levofloxacin": 6.4,
+    "tetracycline": 11.2,
+    "erythromycin": 2.4,
+    "vancomycin": 92.8,
+    "teicoplanin": 93.6,
+    "linezolid": 96.8,
+    "daptomycin": 100
+   },
+   "notes": {
+    "vancomycin": "VRE 7.2%"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 309
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 191
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 138
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 50
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 46
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus",
+   "n": 125
+  }
+ ],
+ "excluded": []
+}

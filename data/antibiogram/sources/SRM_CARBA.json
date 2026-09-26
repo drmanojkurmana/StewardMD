@@ -1,0 +1,108 @@
+{
+ "id": "SRM_CARBA",
+ "kind": "study",
+ "inst": "SRM_CHENNAI",
+ "institution": "SRM Medical College Hospital, Kattankulathur",
+ "short": "SRM Chennai",
+ "city": "Chennai",
+ "state": "Tamil Nadu",
+ "region": "south",
+ "sector": "private",
+ "year": 2024,
+ "period": "July 2022 to July 2024",
+ "citation": "Front Med 2025",
+ "doi": "10.3389/fmed.2025.1571231",
+ "url": "https://doi.org/10.3389/fmed.2025.1571231",
+ "reporting": "%R in the source, converted to %S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Text-readable PDF (Frontiers in Medicine 2025, DOI 10.3389/fmed.2025.1571231), SRM Chennai, Jul 2022-Jul 2024, 8,359 non-duplicate GNB; 24% (2,007) carbapenem-resistant. CRITICAL CAVEAT: All susceptibility values extracted apply ONLY to the carbapenem-resistant (CRO) subset, NOT to all clinical isolates — section 3.6 and Figure 5 explicitly report 'resistance patterns of CROs to various antibacterial agents.' So these %S are far lower than a general antibiogram; the n values used (E.coli 433, K.pneumoniae 733, P.aeruginosa 290, A.baumannii 388) are the carbapenem-resistant isolate counts. Source reports %RESISTANT throughout; I converted every cell to %S = 100 - R (from_R:true). Values taken from narrative text on page 5 (section 3.6); Figure 5 is a heat map image (not machine-readable) and Supplementary Table 2 is not in this PDF, so only the explicitly-printed numeric %R values were extracted. E.coli: CAZ 100%R, TZP 100%R, CIP 98.3%R, FEP 98.3%R, colistin 6.77%R, gentamicin 49.15%R. K.pneumoniae: CAZ 96%R, CIP 94.4%R, FEP 95.2%R, LEV 92.9%R. P.aeruginosa: CIP 94%R, TZP 88%R. A.baumannii: CAZ 96.2%R, TZP 96.2%R, CIP 94.9%R, colistin 7.5%R. Citrobacter and Proteus were described on",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": "CR",
+   "n": 433,
+   "specimen_as_printed": "carbapenem-resistant subset, all clinical",
+   "s": {
+    "ceftazidime": 0,
+    "piptazo": 0,
+    "ciprofloxacin": 1.7,
+    "cefepime": 1.7,
+    "colistin": 93.2,
+    "gentamicin": 50.9
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": "CR",
+   "n": 733,
+   "specimen_as_printed": "carbapenem-resistant subset, all clinical",
+   "s": {
+    "ceftazidime": 4,
+    "ciprofloxacin": 5.6,
+    "cefepime": 4.8,
+    "levofloxacin": 7.1
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": "CR",
+   "n": 290,
+   "specimen_as_printed": "carbapenem-resistant subset, all clinical",
+   "s": {
+    "ciprofloxacin": 6,
+    "piptazo": 12
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": "CR",
+   "n": 388,
+   "specimen_as_printed": "carbapenem-resistant subset, all clinical",
+   "s": {
+    "ceftazidime": 3.8,
+    "piptazo": 3.8,
+    "ciprofloxacin": 5.1,
+    "colistin": 92.5
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 433
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 733
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 290
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 388
+  }
+ ],
+ "excluded": []
+}

@@ -1,0 +1,67 @@
+{
+ "id": "SAVEETHA_URO",
+ "kind": "study",
+ "inst": "SAVEETHA_CHENNAI",
+ "institution": "Saveetha Medical College",
+ "short": "Saveetha Chennai",
+ "city": "Chennai",
+ "state": "Tamil Nadu",
+ "region": "south",
+ "sector": "private",
+ "year": 2024,
+ "period": "2023 to 2024",
+ "citation": "Cureus 2024;16(3):e56632",
+ "doi": "10.7759/cureus.56632",
+ "url": "https://doi.org/10.7759/cureus.56632",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Source: Muthusamy R, Mahesh S, Travasso C. 'Antibiotic Profiling of E. coli Borne UTI Infection in Tertiary Healthcare Settings.' Cureus 16(3):e56632, 2024 (Saveetha Medical College, Chennai). Text extracted with PyMuPDF (6 pages, digital text, fully readable). Study: 80 urine samples from female patients (35-50 yr), 44 UTI-positive, 18 E. coli-positive. ONLY quantitative AST is Table 1 (page 3): zone-of-inhibition in mm for FOUR individual E. coli strains (1B2602, 1B2453, 1B2695, 1R578) with legend '* Sensitive, -- Resistant' (bare numbers without asterisk are ambiguous/not flagged sensitive). This is NOT a percentage-susceptible antibiogram: no %S or %R is printed for any drug across the 18 isolates, and per-drug denominators are only 1-4 strains with inconsistent/partial testing. I therefore did NOT compute or emit any numeric s values (would require fabricating a population statistic from n<=4). All s set null; q captures the printed per-strain qualitative verdict where clear. Methods section names only nitrofurantoin/cephalosporin/cephalexin discs (contradicting the wider drug list in Table 1) and states high resistance to these three, but gives no numeric value. Study is low ",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 18,
+   "specimen_as_printed": "urine (female UTI, 35-50 yr)",
+   "s": {},
+   "q": {
+    "cefepime": "susceptible",
+    "ciprofloxacin": "variable",
+    "gentamicin": "variable",
+    "cotrimoxazole": "resistant",
+    "cefoxitin": "variable",
+    "ceftriaxone": "resistant",
+    "meropenem": "resistant",
+    "amikacin": "resistant",
+    "ampicillin": "resistant",
+    "nitrofurantoin": "resistant"
+   },
+   "notes": {
+    "cefepime": "Per-strain zone-of-inhibition table only (n=4 isolates). 1R578 flagged sensitive (23 mm*). No population %S printed.",
+    "ciprofloxacin": "Per-strain: 1B2695 sensitive (20*), 1B2602 resistant, 1B2453 19 mm (no asterisk). ~1 of 3 tested strains sensitive; no population %S printed.",
+    "gentamicin": "Per-strain: 1B2453 sensitive (27*); 1B2602 (13), 1B2695 (10) not flagged sensitive. ~1 of 3; no population %S printed.",
+    "cotrimoxazole": "Per-strain: 1B2453 and 1B2695 resistant; no strain flagged sensitive. No population %S printed.",
+    "cefoxitin": "Per-strain: 1B2695 sensitive (21*); 1B2602, 1B2453, 1R578 not flagged sensitive. ~1 of 4; no population %S printed.",
+    "ceftriaxone": "Only 1R578 tested (20 mm, not flagged sensitive). No population %S printed.",
+    "meropenem": "Only 1R578 tested (19 mm, not flagged sensitive). No population %S printed.",
+    "amikacin": "Only 1R578 tested (20 mm, not flagged sensitive). No population %S printed.",
+    "ampicillin": "Only 1R578 tested; text states 1R578 resistant to ampicillin (7 mm). No population %S printed.",
+    "nitrofurantoin": "Abstract/discussion state high resistance to nitrofurantoin, cephalosporin, cephalexin, but no numeric %S/%R or count is printed for these methods-listed discs."
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 18
+  }
+ ],
+ "excluded": []
+}

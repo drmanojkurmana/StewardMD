@@ -1,0 +1,83 @@
+{
+ "id": "DOON_CSOM",
+ "kind": "study",
+ "inst": "DOON_DEHRADUN",
+ "institution": "Government Doon Medical College",
+ "short": "Doon MC Dehradun",
+ "city": "Dehradun",
+ "state": "Uttarakhand",
+ "region": "north",
+ "sector": "government",
+ "year": 2024,
+ "period": "August 2022 to January 2024",
+ "citation": "Cureus 2024 (PMC11483178)",
+ "doi": null,
+ "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11483178/",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Cureus 2024 (16(9):e69525), Sammal et al., Govt Doon Medical College, Dehradun; CSOM middle-ear pus, VITEK-2 / CLSI. Susceptibility tables read from PDF text (Tables 2-4, pages 5-6). Source prints Sensitive/Intermediate/Resistant as counts and %; I extracted %Sensitive only (I% NOT added). Total 129 culture-positive isolates. Only P. aeruginosa (Table 2) and S. aureus (Table 3) had full antibiograms; MRSA had a separate table (Table 4) but maps to the same canonical S. aureus so is listed in unmapped rather than merged. MRSA context: 18 MRSA + 23 S. aureus isolates => MRSA ~43.9% of all S. aureus (13.1% of 137 total cases / of 129 positives). AST denominators vary slightly by drug (e.g. piptazo n=38, ceftazidime n=45, imipenem n=44) but % taken exactly as printed. Amikacin for P. aeruginosa (57.8%) is from Discussion narrative, not Table 2.",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 46,
+   "specimen_as_printed": "ear discharge (CSOM)",
+   "s": {
+    "piptazo": 84.2,
+    "ceftazidime": 68.9,
+    "cefoperazone": 61.4,
+    "cefepime": 72.1,
+    "imipenem": 72.7,
+    "meropenem": 72.1,
+    "ciprofloxacin": 37,
+    "levofloxacin": 34.9,
+    "amikacin": 57.8
+   },
+   "notes": {
+    "cefoperazone": "cefoperazone-sulbactam combination",
+    "amikacin": "reported in Discussion text (57.8%, 26 isolates), not in Table 2"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 23,
+   "specimen_as_printed": "ear discharge (CSOM)",
+   "s": {
+    "gentamicin": 86.4,
+    "ciprofloxacin": 4.5,
+    "levofloxacin": 9.1,
+    "cotrimoxazole": 50,
+    "erythromycin": 36.4,
+    "clindamycin": 77.3,
+    "linezolid": 100,
+    "daptomycin": 100,
+    "vancomycin": 90.9,
+    "tetracycline": 90.9
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 46
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 23
+  }
+ ],
+ "excluded": []
+}

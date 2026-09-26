@@ -1,0 +1,338 @@
+{
+ "id": "TARSNET",
+ "kind": "network",
+ "inst": "TARSNET",
+ "institution": "Telangana AMR Surveillance Network (TARS-Net)",
+ "short": "TARS-Net Telangana",
+ "city": "Hyderabad",
+ "state": "Telangana",
+ "region": "south",
+ "sector": "network",
+ "year": 2024,
+ "period": "2024",
+ "citation": "TARS-Net Annual Report 2024 (Osmania Medical College and NCDC; 13 sites)",
+ "doi": null,
+ "url": null,
+ "reporting": "%R in the source, converted to %S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "Source: TARS-Net Telangana State AMR Surveillance Annual Report 2024 (nodal centre Osmania Medical College), 13 sentinel sites, 10 districts, 16,274 isolates (15,674 unique-patient after dedup), Jan 1–Dec 31 2024. Tables report %RESISTANT (%R) per specimen column; ALL s-values here were converted s=100−R (from_R:true). Guidelines: CLSI. Specimen scope for each organism entry is the table's per-specimen N (BLOOD or URINE). I extracted blood (sterile-site benchmark) for all six core organisms, plus urine for E. coli, Klebsiella and Enterococcus (UTI-relevant). Tables 6–11 = S.aureus/Enterococcus/E.coli/Klebsiella/Pseudomonas/Acinetobacter. Report labels genus-level \"Klebsiella species\", \"Pseudomonas species\", \"Acinetobacter species\", \"Enterococcus species\" (species not split) — mapped to K. pneumoniae / P. aeruginosa / A. baumannii as the dominant species and to generic \"Enterococcus\". MRSA context: cefoxitin %R (methicillin surrogate) = 53% in blood, 43% in pus, 100% in OSBF(n=4) for S. aureus; so MRSA ~53% among blood isolates. VRE: Enterococcus vancomycin %R = 3% blood, 0.26% urine, 2% pus. Linezolid 0%R across all specimens for both S.aureus and Enterococcus. Colistin 0%R (100%S)",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 227,
+   "specimen_as_printed": "blood",
+   "s": {
+    "cefoxitin": 47,
+    "gentamicin": 87,
+    "ciprofloxacin": 44,
+    "cotrimoxazole": 72,
+    "clindamycin": 78,
+    "erythromycin": 44,
+    "linezolid": 100,
+    "teicoplanin": 98,
+    "doxycycline": 93
+   },
+   "notes": {
+    "cefoxitin": "methicillin-resistance surrogate; MRSA ~53% in blood; n tested 121"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 290,
+   "specimen_as_printed": "blood",
+   "s": {
+    "ampicillin": 9,
+    "gentamicin": 87,
+    "erythromycin": 27,
+    "linezolid": 100,
+    "vancomycin": 97,
+    "teicoplanin": 87,
+    "doxycycline": 91
+   },
+   "notes": {
+    "gentamicin": "high-level gentamicin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 632,
+   "specimen_as_printed": "urine",
+   "s": {
+    "ampicillin": 31,
+    "gentamicin": 75,
+    "linezolid": 100,
+    "vancomycin": 99.7,
+    "teicoplanin": 79,
+    "doxycycline": 79,
+    "nitrofurantoin": 74,
+    "tetracycline": 33
+   },
+   "notes": {
+    "gentamicin": "high-level gentamicin",
+    "vancomycin": "0.26%R printed"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 295,
+   "specimen_as_printed": "blood",
+   "s": {
+    "ampicillin": 9,
+    "amoxicillin": 29,
+    "piptazo": 69,
+    "cefuroxime": 19,
+    "ceftriaxone": 23,
+    "cefotaxime": 15,
+    "cefepime": 42,
+    "ertapenem": 89,
+    "imipenem": 93,
+    "meropenem": 89,
+    "amikacin": 79,
+    "gentamicin": 74,
+    "ciprofloxacin": 30,
+    "cotrimoxazole": 56,
+    "colistin": 100
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 4775,
+   "specimen_as_printed": "urine",
+   "s": {
+    "ampicillin": 58,
+    "amoxicillin": 34,
+    "cefuroxime": 34,
+    "ceftriaxone": 19,
+    "cefepime": 36,
+    "ertapenem": 68,
+    "ciprofloxacin": 23,
+    "cotrimoxazole": 75,
+    "colistin": 100,
+    "fosfomycin": 78
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 890,
+   "specimen_as_printed": "blood",
+   "s": {
+    "ampicillin": 14,
+    "piptazo": 52,
+    "cefuroxime": 16,
+    "ceftriaxone": 12,
+    "cefotaxime": 9,
+    "cefepime": 35,
+    "ertapenem": 53,
+    "imipenem": 79,
+    "meropenem": 51,
+    "amikacin": 52,
+    "gentamicin": 63,
+    "ciprofloxacin": 49,
+    "cotrimoxazole": 50,
+    "colistin": 100,
+    "doxycycline": 86
+   },
+   "notes": {
+    "ampicillin": "reported as Klebsiella species",
+    "doxycycline": "n tested only 7"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 2152,
+   "specimen_as_printed": "urine",
+   "s": {
+    "ampicillin": 29,
+    "piptazo": 68,
+    "cefuroxime": 21,
+    "ceftriaxone": 30,
+    "cefotaxime": 27,
+    "cefepime": 55,
+    "ertapenem": 83,
+    "imipenem": 93,
+    "meropenem": 76,
+    "amikacin": 76,
+    "gentamicin": 78,
+    "ciprofloxacin": 61,
+    "cotrimoxazole": 66,
+    "colistin": 100,
+    "doxycycline": 64
+   },
+   "notes": {
+    "ampicillin": "reported as Klebsiella species"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 288,
+   "specimen_as_printed": "blood",
+   "s": {
+    "piptazo": 70,
+    "ceftazidime": 45,
+    "aztreonam": 15,
+    "imipenem": 86,
+    "meropenem": 79,
+    "amikacin": 86,
+    "gentamicin": 82,
+    "ciprofloxacin": 78,
+    "colistin": 100
+   },
+   "notes": {
+    "piptazo": "reported as Pseudomonas species"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 495,
+   "specimen_as_printed": "blood",
+   "s": {
+    "ampsulbactam": 17,
+    "piptazo": 44,
+    "ceftazidime": 12,
+    "imipenem": 74,
+    "meropenem": 51,
+    "amikacin": 57,
+    "gentamicin": 59,
+    "ciprofloxacin": 50,
+    "cotrimoxazole": 55,
+    "colistin": 100,
+    "minocycline": 50
+   },
+   "notes": {
+    "ampsulbactam": "reported as Acinetobacter species",
+    "minocycline": "n tested only 28"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 227
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus",
+   "n": 290
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus",
+   "n": 632
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 295
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 4775
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 890
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 2152
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 288
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 495
+  }
+ ],
+ "excluded": [
+  {
+   "org": "Escherichia coli",
+   "drug": "piptazo",
+   "value": 26,
+   "why": "flagged by the original verifier: SUSPECT: 74%R urine vs 31%R blood — implausibly high, likely source error"
+  },
+  {
+   "org": "Escherichia coli",
+   "drug": "cefotaxime",
+   "value": 65,
+   "why": "flagged by the original verifier: 35%R urine vs 85%R blood — inverted vs blood"
+  },
+  {
+   "org": "Escherichia coli",
+   "drug": "imipenem",
+   "value": 36,
+   "why": "flagged by the original verifier: SUSPECT: 64%R urine vs 7%R blood — implausible, likely source error"
+  },
+  {
+   "org": "Escherichia coli",
+   "drug": "meropenem",
+   "value": 65,
+   "why": "flagged by the original verifier: SUSPECT: 35%R urine vs 11%R blood"
+  },
+  {
+   "org": "Escherichia coli",
+   "drug": "amikacin",
+   "value": 12,
+   "why": "flagged by the original verifier: SUSPECT: 88%R urine vs 21%R blood — implausible, likely source error"
+  },
+  {
+   "org": "Escherichia coli",
+   "drug": "gentamicin",
+   "value": 11,
+   "why": "flagged by the original verifier: SUSPECT: 89%R urine vs 26%R blood — implausible, likely source error"
+  },
+  {
+   "org": "Escherichia coli",
+   "drug": "nitrofurantoin",
+   "value": 19,
+   "why": "flagged by the original verifier: SUSPECT: 81%R — implausibly high for E.coli urine, likely source error"
+  }
+ ]
+}

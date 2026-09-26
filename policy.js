@@ -96,53 +96,76 @@
 
   /* ---- Hospital profiles (extensible) ----------------------------------- */
   var HOSPITALS = [
-    { id:"ICMR", name:"ICMR (National) — AMRSN 2024", short:"ICMR", logo:null,
+    { id:"ICMR", name:"ICMR (National): AMRSN 2024", short:"ICMR", logo:null, abgScope:"src:ICMR_AMRSN_2024_SUMMARY",
       policyName:"ICMR National AMR Treatment Guidelines", version:"AMRSN 2024",
-      hasPolicy:false, recommended:true, note:"National guidance — recommended wherever possible. StewardMD already incorporates ICMR/IDSA evidence in each syndrome page." },
+      hasPolicy:false, recommended:true, note:"National guidance, recommended wherever possible. StewardMD already incorporates ICMR/IDSA evidence in each syndrome page." },
     { id:"AIIMS", name:"AIIMS", short:"AIIMS", logo:null, hasPolicy:false },
     { id:"CMC", name:"CMC Vellore", short:"CMC", logo:null, hasPolicy:false },
     { id:"APOLLO", name:"Apollo Hospitals", short:"Apollo", logo:null, hasPolicy:false },
     { id:"MANIPAL", name:"Manipal Hospitals", short:"Manipal", logo:null, hasPolicy:false },
     { id:"NIMS", name:"NIMS Hyderabad", short:"NIMS", logo:null, hasPolicy:false },
-    { id:"CUSTOM", name:"Custom hospital", short:"Custom", logo:null, hasPolicy:false, note:"Import your hospital's antibiogram & policy (coming soon)." },
+    { id:"CUSTOM", name:"Custom hospital", short:"Custom", logo:null, hasPolicy:false, note:"Import your hospital's antibiogram in Antibiogram, My hospital. A hospital antibiotic policy import is not available yet." },
     { id:"GIMSR", name:"GIMSR, Visakhapatnam", short:"GIMSR", logo:"/gimsr-logo.png",
       policyName:"GIMSR Hospital Antimicrobial Policy", version:"HIC-3e · 04.11.2024 (ref NABH/ICMR)",
-      hasPolicy:true, policy:P, watch:WATCH, reserve:RESERVE }
+      hasPolicy:true, policy:P, watch:WATCH, reserve:RESERVE, abgScope:"inst:GIMSR" }
   ];
 
-  /* ---- Regional antibiogram profiles (data-driven from antibiogram-data.js) ---------- *
-   * Adds "South/North/East & NE/West & Central India (regional composite)" plus each
-   * individual study as a drill-down profile, so ONE Active-profile selector drives the
-   * Antibiogram screen and syndrome reasoning everywhere ICMR does. A profile carries only
-   * an `abg` (no `policy`); ICMR stays the default. Studies without per-drug data are skipped. */
-  (function () {
-    var D = window.ABG_DATA; if (!D) return;
-    var RMETA = {
-      south: { name: "South India (regional composite)", short: "South" },
-      north: { name: "North India (regional composite)", short: "North" },
-      east:  { name: "East & NE India (regional composite)", short: "East/NE" },
-      west:  { name: "West & Central India (regional composite)", short: "West/Central" }
-    };
-    ["south", "north", "east", "west"].forEach(function (rg) {
-      var abg = D.region && D.region[rg];
-      if (!abg || !abg.org || !Object.keys(abg.org).length) return;
-      HOSPITALS.push({ id: "REGION_" + rg.toUpperCase(), name: RMETA[rg].name, short: RMETA[rg].short,
-        type: "region", region: rg, hasPolicy: false, abg: abg, sources: abg.sources || [] });
+  /* ---- Antibiogram profiles (data-driven from antibiogram-data.js / antibiogram-store.js) -- *
+   * One Active-profile selector drives the Antibiogram screen, the stewardship console and
+   * syndrome reasoning. Profiles: India pooled, each region pooled, every surveillance network,
+   * the latest edition of every institution or study, and the hospital's own imported
+   * antibiogram ("My hospital", device-local). A profile carries abgScope (an ABG_STORE scope);
+   * ICMR stays the default. Ids of older builds (REGION_SOUTH, ABG_<study id>) still resolve. */
+  var BASE_COUNT = HOSPITALS.length;
+  var RMETA = {
+    north: { name: "North India (pooled)", short: "North" }, south: { name: "South India (pooled)", short: "South" },
+    east: { name: "East & NE India (pooled)", short: "East/NE" }, west: { name: "West & Central India (pooled)", short: "West/Central" }
+  };
+  function buildAbgProfiles() {
+    HOSPITALS.length = BASE_COUNT;
+    var I = window.ABG_INDEX; if (!I || !I.sources) return;
+    HOSPITALS.push({ id: "INDIA_POOLED", name: "India: all institutions (pooled)", short: "India", type: "region", region: "india", hasPolicy: false, abgScope: "india" });
+    ["north", "south", "east", "west"].forEach(function (rg) {
+      if (!I.sources.some(function (x) { return x.region === rg && x.kind !== "network"; })) return;
+      HOSPITALS.push({ id: "REGION_" + rg.toUpperCase(), name: RMETA[rg].name, short: RMETA[rg].short, type: "region", region: rg, hasPolicy: false, abgScope: "region:" + rg });
     });
-    (D.studies || []).forEach(function (st) {
-      if (!st.org || !Object.keys(st.org).length) return;   // e.g. ANDHRA_UTI reported MDR% only
-      HOSPITALS.push({ id: "ABG_" + st.id, name: st.label, short: st.city || st.id,
-        type: "study", region: st.region, credibility: st.credibility, hasPolicy: false, abg: st });
+    // The ICMR profile reads the newest ICMR AMRSN report that carries isolate numbers, else
+    // the transcribed national summary.
+    var icmr = I.sources.filter(function (x) { return x.inst === "ICMR_AMRSN"; })
+      .sort(function (a, b) { return (b.year - a.year) || ((a.verification === "transcribed" ? 1 : 0) - (b.verification === "transcribed" ? 1 : 0)) || (String(b.end || "") > String(a.end || "") ? 1 : -1); })[0];
+    if (icmr) { HOSPITALS[0].abgScope = "src:" + icmr.id; HOSPITALS[0].abgSource = icmr.id; }
+    var latest = {};
+    var ord = function (x) { return String(x.end || (x.year + "-12")); }, perYear = {};
+    I.sources.forEach(function (x) { var k = x.inst + "|" + x.year; perYear[k] = (perYear[k] || 0) + 1; });
+    I.sources.forEach(function (x) { if (x.kind === "network") return; if (!latest[x.inst] || ord(x) > ord(latest[x.inst])) latest[x.inst] = x; });
+    I.sources.forEach(function (x) {
+      if (icmr && x.id === icmr.id) return;                          // that is the ICMR profile
+      if (x.inst === "GIMSR") return;                                 // the GIMSR profile carries it
+      if (x.kind !== "network" && latest[x.inst] !== x) return;       // older editions live in the Antibiogram screen
+      var net = x.kind === "network";
+      HOSPITALS.push({ id: "ABG_" + x.id, name: x.name + " (" + x.year + ")", short: x.city || x.short, type: net ? "network" : "study",
+        label: x.short + (x.city && x.short.indexOf(x.city) < 0 ? ", " + x.city : "") + " (" + (x.kind === "study" ? "study, " : "") + x.year + (perYear[x.inst + "|" + x.year] > 1 ? (+String(x.end).slice(5, 7) <= 6 ? " H1" : " H2") : "") + ")",
+        region: x.region, credibility: net ? 1 : 2, hasPolicy: false, abgScope: net ? "src:" + x.id : "inst:" + x.inst, inst: x.inst });
     });
-  })();
+    var loc = null; try { loc = window.ABG_STORE && window.ABG_STORE.localGet && window.ABG_STORE.localGet(); } catch (e) {}
+    if (loc && loc.rows && loc.rows.length) HOSPITALS.push({ id: "LOCAL", name: (loc.name || "My hospital") + " (this device)", short: "My hospital", type: "local", hasPolicy: false, abgScope: "local" });
+  }
+  buildAbgProfiles();
 
-  var HMAP = {}; HOSPITALS.forEach(function (h) { HMAP[h.id] = h; });
+  var HMAP = {};
+  function rebuildMap() { HMAP = {}; HOSPITALS.forEach(function (h) { HMAP[h.id] = h; }); }
+  rebuildMap();
+  // Legacy ids from before the antibiogram rebuild map to their successors.
+  var ALIAS = { ABG_SGRD_KLEB: "ABG_SGRD_KLEB_2022" };
+  function refreshProfiles() { buildAbgProfiles(); rebuildMap(); }
+  if (window.ABG_STORE && window.ABG_STORE.onReady) window.ABG_STORE.onReady(function () { refreshProfiles(); });
+  try { document.addEventListener("smd:abg-ready", function () { refreshProfiles(); }); } catch (e) {}
 
   var KEY = "stewardmd_hospital";
   function current() {
     var id = null;
     try { id = localStorage.getItem(KEY); } catch (e) {}
-    return HMAP[id] || HMAP.ICMR;
+    return HMAP[id] || HMAP[ALIAS[id]] || HMAP.ICMR;
   }
   function setProfile(id) {
     if (!HMAP[id]) return;
@@ -171,8 +194,13 @@
     "proteus": "Proteus mirabilis", "p. mirabilis": "Proteus mirabilis", "proteus mirabilis": "Proteus mirabilis"
   };
   function canonOrg(name) { var k = String(name || "").toLowerCase().trim(); return ORG_ALIAS[k] || name; }
-  function getAntibiogram() {
-    var h = current();
+  /* ctx (optional): {spec, set} to ask for a specimen (urine for a UTI) and setting. */
+  function getAntibiogram(ctx) {
+    var h = current(), S = window.ABG_STORE;
+    ctx = ctx || {};
+    if (h && h.abgScope && S && S.loaded && S.loaded()) {
+      try { var a = S.legacyAbg(h.abgScope, ctx.spec, ctx.set); if (a && a.org && Object.keys(a.org).length) return a; } catch (e) {}
+    }
     if (h && h.abg) return h.abg;
     if (h && h.id === "GIMSR" && window.ASP_ABG && window.ASP_ABG.hospital) return window.ASP_ABG.hospital;
     return (window.ASP_ABG && window.ASP_ABG.national) || null;
@@ -188,25 +216,73 @@
     var c = o.d[drugKey];
     return (c && c.s != null) ? { s: c.s, src: c.src || null, approx: !!c.approx } : null;
   }
-  function getSusceptibility(orgName, drugKey) {
-    var ab = getAntibiogram();
-    var hit = lookIn(ab, orgName, drugKey) || lookIn(ab, canonOrg(orgName), drugKey);
+  /* {s, n, k, src, spec, set, pooled, intrinsic} from the active profile (validated, at least
+   * 30 isolates), else the ICMR national summary ({..., national:true}), else null. */
+  function getSusceptibility(orgName, drugKey, ctx) {
+    var h = current(), S = window.ABG_STORE;
+    ctx = ctx || {};
+    if (h && h.abgScope && S && S.loaded && S.loaded()) {
+      try {
+        var r = S.susceptibility(orgName, drugKey, { scope: h.abgScope, spec: ctx.spec, set: ctx.set });
+        if (r && r.intrinsic) return { s: 0, intrinsic: true, why: r.why };
+        if (r && !r.lowN) return { s: r.s, n: r.n, k: r.k, src: r.src, spec: r.spec, set: r.set, pooled: r.pooled };
+      } catch (e) {}
+    }
+    var ab = getAntibiogram(ctx);
+    var hit = (h && h.abgScope && S && S.loaded && S.loaded()) ? null : (lookIn(ab, orgName, drugKey) || lookIn(ab, canonOrg(orgName), drugKey));
     if (hit) return hit;
     var nat = window.ASP_ABG && window.ASP_ABG.national;
     var nh = lookIn(nat, orgName, drugKey) || lookIn(nat, canonOrg(orgName), drugKey);
     if (nh) { nh.national = true; return nh; }
     return null;
   }
+  /* Grouped options for every profile picker (reasoning, the console, the Antibiogram screen):
+   * national first, then pooled views, each region's institutions and networks, the hospital's
+   * own import, then hospitals StewardMD holds a policy (or nothing yet) for. */
+  var RGROUP = { north: "North India", south: "South India", east: "East and North-East India", west: "West and Central India" };
+  function optionGroups() {
+    function by(f) { return HOSPITALS.filter(f); }
+    function item(h, label) { return { id: h.id, label: label || h.label || h.name }; }
+    var g = [];
+    g.push({ label: "National", items: by(function (h) { return h.id === "ICMR"; }).map(function (h) { return item(h, h.name + " (default)"); })
+      .concat(by(function (h) { return h.type === "network" && h.region === "national"; }).map(function (h) { return item(h); })) });
+    var pooled = by(function (h) { return h.type === "region"; });
+    if (pooled.length) g.push({ label: "Pooled", items: pooled.map(function (h) { return item(h, h.name); }) });
+    ["north", "south", "east", "west"].forEach(function (rg) {
+      var xs = by(function (h) { return (h.type === "study" || h.type === "network") && h.region === rg; })
+        .sort(function (a, b) { return (a.type === "network" ? 0 : 1) - (b.type === "network" ? 0 : 1) || ((a.label || a.name) < (b.label || b.name) ? -1 : 1); });
+      if (rg === "south" && HMAP.GIMSR) xs.push(HMAP.GIMSR);
+      if (xs.length) g.push({ label: RGROUP[rg], items: xs.map(function (h) { return item(h, h.id === "GIMSR" ? "GIMSR, Visakhapatnam (hospital policy)" : null); }) });
+    });
+    var loc = by(function (h) { return h.type === "local"; });
+    if (loc.length) g.push({ label: "My hospital", items: loc.map(function (h) { return item(h, h.name); }) });
+    var hosp = by(function (h) { return !h.type && h.id !== "ICMR" && h.id !== "GIMSR"; });
+    if (hosp.length) g.push({ label: "Other hospitals (no data yet)", items: hosp.map(function (h) { return item(h, h.name); }) });
+    return g;
+  }
+  function optionsHTML(cur) {
+    function e(x) { return String(x == null ? "" : x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+    cur = cur || current().id;
+    return optionGroups().map(function (g) {
+      return '<optgroup label="' + e(g.label) + '">' + g.items.map(function (it) { return '<option value="' + e(it.id) + '"' + (it.id === cur ? " selected" : "") + '>' + e(it.label) + '</option>'; }).join("") + '</optgroup>';
+    }).join("");
+  }
+  function profileForScope(scope) {
+    for (var i = 0; i < HOSPITALS.length; i++) if (HOSPITALS[i].abgScope === scope && HOSPITALS[i].id !== "GIMSR") return HOSPITALS[i].id;
+    for (i = 0; i < HOSPITALS.length; i++) if (HOSPITALS[i].abgScope === scope) return HOSPITALS[i].id;
+    return null;
+  }
 
   window.HOSPITAL = {
     list: HOSPITALS, current: current, setProfile: setProfile, getPolicy: getPolicy,
     getAntibiogram: getAntibiogram, getSusceptibility: getSusceptibility, canonOrg: canonOrg,
+    profileForScope: profileForScope, refreshProfiles: refreshProfiles, optionGroups: optionGroups, optionsHTML: optionsHTML,
     awareClass: awareClass,
     stewardshipRules: [
       "Prescribe antibiotics only when clinically indicated; send cultures before the first dose.",
       "De-escalate daily and at the earliest opportunity once susceptibilities are available.",
       "Reserve-group agents (colistin, polymyxin B, linezolid, ceftazidime-avibactam, IV fosfomycin, cefiderocol, tigecycline) require prior approval of the Antimicrobial Stewardship Team.",
-      "Use the shortest effective duration — 7–10 days is adequate for most infections.",
+      "Use the shortest effective duration: 7 to 10 days is adequate for most infections.",
       "Avoid piperacillin–tazobactam in septic shock until cephalosporin-resistant bacteraemia is excluded (MERINO)."
     ]
   };

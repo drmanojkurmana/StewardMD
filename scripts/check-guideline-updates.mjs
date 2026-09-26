@@ -3,7 +3,9 @@
  *
  * Every protocol, specialty kit and consent template cites its sources by URL. This script fetches each
  * cited URL and compares it with the committed baseline kb/source-watch.json, so a clinician hears when a
- * cited guideline page moved, broke or changed, instead of finding out from a patient.
+ * cited guideline page moved, broke or changed, instead of finding out from a patient. It also watches
+ * every antibiogram document and the page that lists it (data/antibiogram), so a new hospital or network
+ * edition is noticed.
  *
  *   node scripts/check-guideline-updates.mjs             check against the baseline, write the report
  *   node scripts/check-guideline-updates.mjs --update    also rewrite the baseline (after the report is read)
@@ -42,6 +44,17 @@ export function collectSources(root = ROOT) {
       });
     });
   });
+  // Antibiogram sources and the census register: each document and the web page that lists it
+  // (a new edition appears there first, so a changed listing page is the prompt to look for one).
+  const firstUrl = (t) => { const m = /https?:\/\/[^\s;,)]+/.exec(String(t || "")); return m ? m[0] : null; };
+  const add = (url, id, title) => { if (!url || !/^https?:\/\//.test(url)) return; if (!map.has(url)) map.set(url, []); map.get(url).push({ kind: "antibiogram", id, title }); };
+  const sd = join(root, "data/antibiogram/sources");
+  if (existsSync(sd)) readdirSync(sd).filter((f) => f.endsWith(".json")).sort().forEach((f) => {
+    let j; try { j = JSON.parse(readFileSync(join(sd, f), "utf8")); } catch (e) { return; }
+    add(firstUrl(j.url), j.id, j.institution || ""); add(firstUrl(j.page), j.id, (j.institution || "") + " (page listing its antibiograms)");
+  });
+  const reg = join(root, "data/antibiogram/register.json");
+  if (existsSync(reg)) { try { JSON.parse(readFileSync(reg, "utf8")).forEach((x) => { add(firstUrl(x.page), x.id, (x.institution || "") + " (census: listing page)"); if (!x.integrated) add(firstUrl(x.url), x.id, (x.institution || "") + " (census: not integrated, " + (x.reason || "") + ")"); }); } catch (e) {} }
   return map;
 }
 

@@ -9895,3 +9895,27 @@ KCl 20 to 30 mEq/h and the 2009 HHS glucose target; snakebite notifiable "March 
 needs a named reviewer with a registration number. Before re-applying a later audit, read
 `vault/handoff/2026-09-25-clinical-audit-fixes.md` so declined items are not re-litigated.
 Recovery point: main at `ad26d2523` (before the audit commits).
+
+## 2026-09-26 - Antibiogram rebuilt on one validated file per source document
+The owner rated the old module against SKIMS's published antibiogram (missing) and asked for every Indian
+hospital antibiogram online to be found and integrated, and the module made "10/10". The old data was a
+literature composite: cells spliced from up to five studies under one n, 17 arithmetically impossible
+cells, S. aureus ampicillin 100% susceptible beside 53% MRSA, no specimen or setting strata, no import.
+Decisions:
+- **One file per source document** (`data/antibiogram/sources/<ID>.json`), read from the PDF and compared
+  with the page image; composites are computed, never stored. Each edition is its own file (trends).
+- **Nothing is dropped silently.** Every cell carries an action (keep, intrinsic, hide, suppress,
+  caution) and its reason, shown in the app. Caution cells are grey and never pooled or used by reasoning.
+- **Pooling**: isolate-weighted, latest edition per institution, n >= 30 (CLSI M39), networks never pooled
+  with institutions. Pooled "all settings" = hospital-wide or all-inpatient rows only.
+- **Derived rows only when complete** (count tables consulted); "all specimens except urine" never added
+  to its own subsets.
+- **% resistant reports** are stored as 100 - %R and marked; intermediate counts as susceptible there.
+- **Syndromes get their specimen or nothing**: no urine figures for meningitis; fallback to all specimens
+  is stated on screen.
+- **The hospital's own antibiogram stays on the device** (summary or isolate CSV, first isolate per
+  patient, MRSA expert rule, IDs hashed in memory and never stored).
+- **Census honesty**: "all hospital websites" cannot be crawled exhaustively; the register lists what was
+  searched, found, integrated, and what was not and why.
+Flag `smd_abg_v2` (default ON) restores the previous view; the console and reasoning read the new layer
+either way. See [[Antibiogram]]. Recovery point: branch state before this work, commit `dbc92bad9`.

@@ -1,0 +1,249 @@
+{
+ "id": "ICMR_AMRSN_2023",
+ "kind": "network",
+ "inst": "ICMR_AMRSN",
+ "institution": "ICMR Antimicrobial Resistance Surveillance and Research Network",
+ "short": "ICMR-AMRSN",
+ "city": null,
+ "state": null,
+ "region": "national",
+ "sector": "network",
+ "year": 2023,
+ "period": "January to December 2023",
+ "citation": "ICMR-AMRSN Annual Report 2023",
+ "doi": null,
+ "url": null,
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "SOURCE FILE WAS TRUNCATED: the delivered PDF (9,318,016 bytes) is an incomplete download — no xref/trailer/catalog/page-tree and only the first ~106 content pages survived (physical pages up to ~p71). I recovered it by scanning surviving objects with PyMuPDF, pairing each text content stream with its adjacent /Font resource dict, appending a synthetic Catalog+Pages tree, and repairing with qpdf; the reconstructed doc extracts real text via the fonts' ToUnicode CMaps (not OCR). Chapters 3+ (Enterobacterales trend tables, R&D chapters) fall beyond the truncation point and could NOT be read.\n\nVALUES ARE POOLED FROM COUNTS: All %S values were computed by summing the S/tested counts across the OPD+Ward+ICU columns of the Chapter-2 specimen-wise tables (Section B), so they are exact pooled percentages, not read-off %. Sources by organism: E. coli / K. pneumoniae / A. baumannii / Salmonella Typhi = BLOOD (Tables 2.7, 2.8, 2.9, 2.10); P. aeruginosa = URINE (Table 2.13, no blood table survived); S. aureus = PUS/EXUDATES (Table 2.17); E. faecalis / E. faecium = URINE (Tables 2.14, 2.15). Salmonella Typhi table had only OPD+Ward columns (n=1061). Denominators validate against Table 1.2 isolat",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 3244,
+   "specimen_as_printed": "blood",
+   "s": {
+    "piptazo": 50,
+    "ceftriaxone": 21.9,
+    "imipenem": 68.6,
+    "meropenem": 70.5,
+    "ertapenem": 70.6,
+    "amikacin": 69.1,
+    "ciprofloxacin": 15.4,
+    "levofloxacin": 18.7,
+    "colistin": 99.7,
+    "fosfomycin": 97.8,
+    "minocycline": 84.6,
+    "cotrimoxazole": 49.5
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 2909,
+   "specimen_as_printed": "blood",
+   "s": {
+    "piptazo": 23.8,
+    "ceftriaxone": 16.8,
+    "imipenem": 28.9,
+    "meropenem": 30.3,
+    "ertapenem": 32.8,
+    "amikacin": 34.2,
+    "ciprofloxacin": 16.7,
+    "levofloxacin": 18.7,
+    "colistin": 96.3,
+    "fosfomycin": 60.5,
+    "minocycline": 70,
+    "cotrimoxazole": 39.1
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 2131,
+   "specimen_as_printed": "blood",
+   "s": {
+    "piptazo": 16.2,
+    "ceftazidime": 12,
+    "cefepime": 15.3,
+    "imipenem": 12.4,
+    "meropenem": 14.6,
+    "amikacin": 23.5,
+    "levofloxacin": 17.2,
+    "colistin": 97.3,
+    "minocycline": 74
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 1184,
+   "specimen_as_printed": "urine",
+   "s": {
+    "piptazo": 61.8,
+    "ceftazidime": 42.9,
+    "cefepime": 47.5,
+    "imipenem": 46.4,
+    "meropenem": 50.5,
+    "amikacin": 53.4,
+    "gentamicin": 48.3,
+    "tobramycin": 42.1,
+    "ciprofloxacin": 36.4,
+    "levofloxacin": 28.2,
+    "colistin": 96.9
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 1919,
+   "specimen_as_printed": "pus/exudates",
+   "s": {
+    "cefoxitin": 47.8,
+    "ciprofloxacin": 14.4,
+    "clindamycin": 77.1,
+    "erythromycin": 36.6,
+    "cotrimoxazole": 76.2,
+    "tetracycline": 79.5,
+    "linezolid": 97.7,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "daptomycin": 93,
+    "tigecycline": 100
+   },
+   "notes": {
+    "cefoxitin": "MRSA screen; implies ~52% MRSA",
+    "teicoplanin": "OPD+Ward pooled; ICU too few to report",
+    "daptomycin": "OPD+Ward pooled; ICU too few to report",
+    "tigecycline": "OPD+Ward pooled; ICU too few to report"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 1595,
+   "specimen_as_printed": "urine",
+   "s": {
+    "ampicillin": 66,
+    "penicillin": 40.2,
+    "ciprofloxacin": 11.4,
+    "gentamicin_hl": 44.2,
+    "fosfomycin": 76.2,
+    "nitrofurantoin": 79.7,
+    "linezolid": 96.4,
+    "teicoplanin": 92,
+    "vancomycin": 94.7
+   },
+   "notes": {
+    "gentamicin_hl": "high-level gentamicin (HLAR screen)"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 942,
+   "specimen_as_printed": "urine",
+   "s": {
+    "ampicillin": 16.1,
+    "penicillin": 11.9,
+    "ciprofloxacin": 4.5,
+    "gentamicin_hl": 40,
+    "nitrofurantoin": 37.6,
+    "linezolid": 92.1,
+    "teicoplanin": 73.5,
+    "vancomycin": 73
+   },
+   "notes": {
+    "gentamicin_hl": "high-level gentamicin (HLAR screen)"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella Typhi",
+   "pheno": null,
+   "n": 1061,
+   "specimen_as_printed": "blood",
+   "s": {
+    "ampicillin": 97.7,
+    "ceftriaxone": 97,
+    "cefotaxime": 95.5,
+    "cefixime": 96.6,
+    "azithromycin": 97.3,
+    "chloramphenicol": 98.1,
+    "cotrimoxazole": 97,
+    "ciprofloxacin": 2.1,
+    "levofloxacin": 19.2
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 3244
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 2909
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 2131
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 1184
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 1919
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 1595
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 942
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella Typhi",
+   "n": 1061
+  }
+ ],
+ "excluded": []
+}

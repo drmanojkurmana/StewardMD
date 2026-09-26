@@ -1,0 +1,79 @@
+{
+ "id": "ANDHRA_UTI",
+ "kind": "study",
+ "inst": "AMC_VIZAG",
+ "institution": "Andhra Medical College",
+ "short": "Andhra MC Visakhapatnam",
+ "city": "Visakhapatnam",
+ "state": "Andhra Pradesh",
+ "region": "south",
+ "sector": "government",
+ "year": 2023,
+ "period": "August 2022 to January 2023",
+ "citation": "Int J Curr Pharm Res 2024",
+ "doi": null,
+ "url": null,
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+ },
+ "notes": "PDF read successfully via PyMuPDF (3 pages, text-based, not scanned). The Read tool failed (poppler not installed) but text extraction worked. This paper (Pydi et al., Andhra Medical College, Visakhapatnam; Int J Curr Pharm Res 2024) does NOT contain any numeric antibiogram table. Table 1 gives isolate counts/percentages (n=858 total: 839 GNB + 19 GPC); Table 2 is a comparative isolate-frequency table vs other studies; Fig. 1 gives MDR isolate counts per organism. NO per-organism per-antibiotic %S or %R values are printed anywhere, so every organism has an empty drugs array (counts recorded as metadata only). The only susceptibility info is QUALITATIVE and applies to the pooled MDR-GNB subset (177/839 = 20.62% MDR), NOT to individual organisms: MDR GNB were resistant to cephalosporins (ceftazidime, cefixime, ceftriaxone, ceftazidime+clavulanic acid), carbapenems (imipenem, meropenem), and quinolones (ciprofloxacin, norfloxacin, nalidixic acid, ofloxacin, levofloxacin), and 'most were sensitive to fosfomycin and nitrofurantoin.' These are group-level words without numbers and not mappable to a single canonical organism, so they were deliberately NOT recorded as drug cells to avoid a",
+ "issues": [
+  "The source paper contains NO per-organism per-drug antibiotic susceptibility table (no %S or %R values). It only reports isolate counts (Table 1), an MDR breakdown (Fig. 1), and a comparative isolate-frequency table (Table 2). Susceptibility is described only qualitatively in prose. The extraction's empty drugs[] arrays correctly reflect this — no susceptibility cells were fabricated.",
+  "Organism counts all match Table 1 exactly: E. coli 435, Klebsiella 232, Acinetobacter 105, Pseudomonas 55, Proteus 10, Citrobacter 2, Staph aureus 17, Enterococcus 2. Specimen (urine) and study period (Aug 2022 - Jan 2023) also correct.",
+  "Naming over-specification (not in source, an unsupported inference): source lists genus/'spp' level only. Extraction names 'Klebsiella pneumoniae' (source: 'Klebsiella spp'), 'Acinetobacter baumannii' (source: 'Acinetobacter spp'), 'Pseudomonas aeruginosa' (source: 'Pseudomonas spp'), 'Proteus mirabilis' (source: 'Proteus spp'). No susceptibility data hangs off these names, so no clinical impact, "
+ ],
+ "rows": [],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 435
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 232
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 105
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 55
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 10
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter",
+   "n": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus",
+   "n": 2
+  }
+ ],
+ "excluded": []
+}
