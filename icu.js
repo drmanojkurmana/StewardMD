@@ -1774,7 +1774,11 @@
     if (missing.length) {
       out += '<div class="icu-mc-sub">Missing information</div>';
       out += missing.map(function (m) {
-        var why = m.reason === "STALE" ? ("last " + (m.staleValue != null ? m.staleValue + " " : "") + fmtMins(m.ageMin) + " ago")
+        /* "last 96 9 h ago" ran a value and an age together with nothing between them, so a tired
+         * reader could take "96 9" for one number. The value carries its unit and a comma splits
+         * it from the age: "last 96 %, 9 h ago". A stale entry with no value stays "last 9 h ago". */
+        var why = m.reason === "STALE" ? ("last " + (m.staleValue != null
+            ? m.staleValue + (m.staleUnit ? " " + m.staleUnit : "") + ", " : "") + fmtMins(m.ageMin) + " ago")
           : m.reason === "REFUSED" ? "charted, could not be read"
           : m.reason === "NO_WINDOW" ? "no freshness rule set"
           : "not recorded";
