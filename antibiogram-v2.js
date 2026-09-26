@@ -105,6 +105,7 @@
     var anyR = t.orgs.some(function (o) { return o.measure === "R"; }), hai = t.orgs.some(function (o) { return o.cohort === "hai"; });
     return '<div class="v2-meta"><b>' + esc(src.name || src.short) + "</b>" + (src.city ? ", " + esc(src.city) : "") + (src.period ? " · " + esc(src.period) : " · " + esc(src.year || "")) +
       '<br><span class="v2-mut">' + esc(vs) + ". " + (src.citation ? esc(src.citation) + ". " : "") + "</span>" +
+      (src.focus ? '<br><b>Not a cumulative antibiogram: ' + esc(src.focus) + ".</b> Read it as a snapshot of those isolates only." : "") +
       (anyR ? '<br><span class="v2-mut">This report prints % resistant. % susceptible is shown as 100 minus % resistant, so intermediate results count as susceptible here.</span>' : "") +
       (hai ? '<br><span class="v2-mut">Rows marked ICU HAI come from ICU device-associated infection surveillance (bloodstream, urinary and ventilator-associated infections), not from all ICU isolates.</span>' : "") +
       (src.checks && src.checks.length ? '<br><span class="v2-mut">The source\'s own tables disagree in ' + src.checks.length + " place" + (src.checks.length === 1 ? "" : "s") + ' (see Sources).</span>' : "") +

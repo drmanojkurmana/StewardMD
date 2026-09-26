@@ -1,5 +1,5 @@
 {
- "version": "53a0a8f14d64",
+ "version": "b8dc2416d8bc",
  "generated": "build",
  "countMismatches": [
   {
@@ -123,6 +123,24 @@
    "count": 100,
    "rows": 99,
    "text": "Sterile body fluids, Wards: Escherichia coli 100 in the organism table, 99 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "opd",
+   "org": "cons",
+   "count": 87,
+   "rows": 82,
+   "text": "Pus, wounds and body fluids, Outpatients: Coagulase-negative staphylococci 87 in the organism table, 82 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "ward",
+   "org": "cons",
+   "count": 45,
+   "rows": 44,
+   "text": "Pus, wounds and body fluids, Wards: Coagulase-negative staphylococci 45 in the organism table, 44 in the antibiogram table"
   },
   {
    "src": "SKIMS_2025",
@@ -2040,6 +2058,314 @@
    "value": 97,
    "action": "caution",
    "why": "the source contradicts itself: printed 97% for a row of n = 21; no whole number of 21 or fewer tested isolates gives 97%"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 100,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 43,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 25,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 7,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "colistin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "colistin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "colistin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 8,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 9,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "drug": "penicillin",
+   "value": 11,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 11% for a row of n = 8; no whole number of 8 or fewer tested isolates gives 11%"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "colistin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "colistin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 7,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 3,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 50,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 1,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 8,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "aztreonam",
+   "value": 2,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
   },
   {
    "src": "SKIMS_2025",

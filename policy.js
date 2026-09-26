@@ -143,6 +143,7 @@
       if (x.inst === "ICMR_AMRSN") return;                           // the ICMR profile carries it
       if (x.inst === "GIMSR") return;                                 // the GIMSR profile carries it
       if (latest[x.inst] !== x) return;                               // older editions live in the Antibiogram screen
+      if (x.focus) return;                                            // an outbreak or single-pathogen report is not a hospital profile
       var net = x.kind === "network";
       HOSPITALS.push({ id: "ABG_" + x.id, name: x.name + " (" + x.year + ")", short: x.city || x.short, type: net ? "network" : "study",
         label: x.short + (x.city && x.short.indexOf(x.city) < 0 ? ", " + x.city : "") + " (" + (x.kind === "study" ? "study, " : "") + x.year + (perYear[x.inst + "|" + x.year] > 1 ? (+String(x.end).slice(5, 7) <= 6 ? " H1" : " H2") : "") + ")",
