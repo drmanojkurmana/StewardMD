@@ -12,7 +12,8 @@ shared login: the PG logbook, verification and Rx must name one doctor. (2) UG S
 share one Trainee price; the verified role decides features. (3) Every account holding the `pro`
 claim today moves to a new never-sold **Ultimate** tier (everything, for friends and testers),
 through a reviewed, reversible migration. (4) Every plan, Free included, is limited to one phone +
-one iPad. **Open:** prices (80%-margin model proposed), beta imaging AI for Clinician, WardSynQ
+one iPad. (5) The Free AI and imaging allowance unlocks only after mobile-number verification
+(`phoneVerified`), with one number per account. **Open:** prices (80%-margin model proposed), beta imaging AI for Clinician, WardSynQ
 pricing. Full audit, matrix and price model: [[Role-Tiers]]. **Status:** nothing enforced yet.
 
 ## 2026-09-26 · Medical Core ships its DETERMINISTIC half ON by default as BETA; the model half stays off

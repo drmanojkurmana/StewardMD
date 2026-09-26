@@ -27,7 +27,7 @@ labels** (App Store / Play product IDs are immutable, and paid users already hol
 
 | Owner's plan | Tier key (bought) | Role (verified) | Product ID today | Code price (m / yr) |
 |---|---|---|---|---|
-| Free (verified, no plan) | `free` | any | none | 0 |
+| Free (phone-verified, no plan) | `free` | any | none | 0 |
 | UG Student | `trainee` | `student` | `in.stewardmd.trainee.*` | 199 / 1,999 |
 | Intern | `trainee` | `intern` | same | same |
 | Co-Resident | `coresident` | `co_resident` | `in.stewardmd.coresident.*` | 299 / 2,999 |
@@ -92,6 +92,11 @@ educational mode only (labelled, no clinical action).
 | Clinics included (Rs 139/clinic/mo beyond) | 0 | 0 | 0 | 0 | 0 | 4 | 6 |
 | Clinic data on device + doctor's own Google Drive | - | - | - | - | - | Y | Y |
 | Clinic data on StewardMD cloud (hosted, we hold PHI) | - | - | - | - | - | - | Y |
+
+**Free column = phone-verified accounts only (owner, 2026-09-26).** A signed-in account that has not
+verified its mobile number gets only the zero-cost surfaces: Knowledge Library, calculators, drug
+DB, Scan Meds without cloud OCR, on-device MaiK, free CliniX system. No cloud AI, no imaging reads.
+Guests keep the existing 300 s x 2 sessions per day.
 
 Reasoning behind the non-obvious rows:
 - **Resident Pro gets no clinics / OPD.** PG residents in India are full-time under PGMER and may not
@@ -185,9 +190,14 @@ Verified in code 2026-09-26:
 11. **KardiQ X Learn is behind the KardiQ X AI access code** (`smd_kardiox` def false since
     2026-09-25), so students cannot reach the atlas. Learn must be gated separately from the AI.
 12. `student` plan `requiresVerify:true` is declared but not enforced.
+13. Token packs sell below 40% margin; the Power pack loses money on iOS (section 10).
+14. **One mobile number can verify any number of accounts.** Phone OTP is keyed `otp:phone:<uid>`
+    and `markPhoneVerified` (`functions/_lifecycle.js:58`) stores the number on the account without
+    an index, so nothing stops free-allowance farming. Add a `phone:<hash>` -> uid index (hash only,
+    never the raw number as a key) and refuse a number already bound to another live account.
 
 ## 7. Implementation plan (each phase behind a flag, recovery tag first)
-- **P0 Money and safety bugs (no plan change).** Fix 1, 2, 3, 7 and 13 (token packs re-sized, section 10). Unit tests in
+- **P0 Money and safety bugs (no plan change).** Fix 1, 2, 3, 7, 13 and 14. Unit tests in
   `test/*.test.mjs` for `fulfilPurchase` add-on paths and `doApprove` by role.
 - **P1 Role capture.** Verification chooser: student / intern / resident / doctor. Approve and
   auto-verify write `entitlements.role`. Residents: NMC auto-verify for the registration, plus a PG
@@ -219,6 +229,14 @@ Each client phase: headless-browser test of the paywall and gated tiles per plan
   Clinician Pro + Ultimate skip the code; everyone else needs one.
 - **D6 Free plan devices: TAKEN.** Phone + iPad, same as paid plans.
 - **D7 WardSynQ: owner asked for a price model at 80% margin.** Proposal in section 11.
+- **D8 Free allowance needs phone verification: TAKEN.** The Free cloud AI and imaging allowance
+  unlocks on the `phoneVerified` claim (`functions/api/auth/[[path]].js` phone-verify), not on sign-in.
+  Today the free AI budget keys on registration `verified` (`_aibudget.js`: unverified 0, verified
+  5k tokens); this changes the key to `phoneVerified`. Registration verification still gates the
+  Rx pad and the paid trial. Needs finding 14 first, or one number can unlock many accounts.
+  **Open:** the unverified-account sweep (`_lifecycle.js`, off) removes accounts without
+  REGISTRATION verification at day 7, which would delete phone-verified Free users. Either the
+  sweep spares phone-verified accounts, or Free requires both. Recommendation: spare them.
 
 ## 9. Ultimate (friends and testers)
 - New tier key `ultimate`, ranked above `physicianpro`. **Never sold**: no product ID, not in
@@ -252,7 +270,7 @@ Recalibrate every number from AI Control Center actuals after 30 days of real us
 
 | Plan | Price / month | Annual (web) | Included per month | Cost at full use | Margin iOS | Margin web |
 |---|---|---|---|---|---|---|
-| Free | 0 | - | 10,000 MT (~125 answers), 5 imaging reads | Rs 15 (acquisition) | - | - |
+| Free (phone-verified only) | 0 | - | 10,000 MT (~125 answers), 5 imaging reads | Rs 15 (acquisition) | - | - |
 | Trainee (UG Student / Intern) | **199** | 1,990 | 24,000 MT (~300 answers), 15 imaging reads | Rs 26 | 81.9% | 84.3% |
 | Co-Resident (2 logins) | **299** | 2,990 | 40,000 MT shared (~500 answers), 16 imaging reads shared | Rs 42 | 80.3% | 82.9% |
 | Resident Pro | **599** | 5,990 | 72,000 MT (~900 answers), 50 imaging reads, 40 dictated notes | Rs 84 | 80.5% | 83.1% |
