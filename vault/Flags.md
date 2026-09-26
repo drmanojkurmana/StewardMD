@@ -86,6 +86,15 @@ leaving it present:
 - `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
   a patient record" surface rather than a plausible-looking drug round.
 
+## Clinical Reasoning: `smd_gate_v2` OFF, added 2026-09-26
+
+Not in a registry: read inline in `reasoning.js` `gateV2()` like `smd_reason_v2` / `smd_rank_v2`
+(`?gatev2=1|0` -> `localStorage smd_gate_v2` -> OFF). Not in the 2026-08-26 generated count above.
+
+| Flag | State | What turning it on does |
+|---|---|---|
+| `smd_gate_v2` | OFF | The infection gate reads the app's own "Need antibiotics?" data for the lead infection (viral -> no antibiotics; conditional -> criteria; malaria -> specific therapy), keeps antibiotics with a named reason when a modifier or competing bacterial infection is present, and adds SBP / cirrhosis-GI-bleed rules. Rules are ai_drafted, pending clinician review; owner decision to turn on. See [[Clinical Reasoning]] and `kb/validation/AUDIT-2026-09-26.md`. |
+
 ## Medical Core — master ON (BETA) since 2026-09-26, model half OFF
 
 Registry: `medcore-flags.js` (repo root), read as query param → localStorage → default. Not in the

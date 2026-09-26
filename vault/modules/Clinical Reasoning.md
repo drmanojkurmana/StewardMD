@@ -37,3 +37,30 @@ Curated keys: 69% top-1 / 92% top-3 (491 gold cases). Same cases as chart text: 
 doctor text: 40% / 55%. The text extraction layer is the bottleneck, not the ranker. The infection
 gate ignores `antibioticRelevant`, so viral cases (dengue, URTI, viral meningitis) show
 "empiric antimicrobial therapy is appropriate". `baseline.json` is stale (18 false "regressions").
+
+## Antibiotic gate v2 (`smd_gate_v2`, default OFF, 2026-09-26)
+
+Phase 1 of `kb/validation/PLAN-DX-ABX-10.md`. `reasoning.js` `gateV2()` / `gateV2Apply()`; on with
+`localStorage smd_gate_v2=1` or `?gatev2=1`. Off is the classic gate: 0 differences across 1,580
+case-paths (`test/run-dx-audit.mjs`).
+
+- Reads `window.ASP_DATA[id].needAbx` (from `app.js`, the "Need antibiotics?" dataset the
+  stewardship page already shows) for the lead infection. NO -> `infection_no_abx`, CONDITIONAL ->
+  `infection_conditional`, N/A -> `infection_specific`. `antibioticRelevant` is only a fallback: it is
+  undefined at runtime for most syndromes (the `true` in `kb/treatments/*.json` is a migration default).
+- Keeps antibiotics (class unchanged, reason added to the card) for sepsis physiology,
+  immunosuppression, neutropenia, persistent bacteraemia, or a competing antibiotic-requiring
+  infection (within 30 points, or time-critical at 42+).
+- Can't-miss rules: SBP (`likely` with fever, `rule_out_sbp` otherwise) and `abx_prophylaxis` for GI
+  bleeding in cirrhosis. `renderPolicy` shows no empiric card for prophylaxis.
+- New gate classes must be mapped in `abx-wizard.js` `SEV` (the test checks every class).
+- `SMD_REASON.assess().gate` gains `why`, `rule`, `message` only when v2 changed or explained the gate.
+- Tests: `test/run-gate-v2.mjs` (engine + workspace + wizard, flag on/off), floors for both configs
+  in `kb/validation/dx-floors.json`, CI `.github/workflows/dx-accuracy.yml`.
+- Pre-existing, unrelated failures seen while verifying (identical on the unmodified code):
+  `run-abx-ui.mjs` 3 pill-style CSS checks; `run-dx-workspace-ui.mjs` "empty case has no phantom
+  vertical scroll" (and it hard-codes the macOS Chrome path).
+
+**Gotcha for harnesses:** the KB (`kb/dist/*`) is lazy-loaded after first paint by `kb-loader.js`.
+Wait for `window.SMD_KB_READY` before scoring, or early cases run without it and numbers drift.
+

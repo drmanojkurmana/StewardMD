@@ -39,7 +39,13 @@
     possible: { k: "yellow", label: "Antibiotics optional, narrow", icon: "info" },
     unlikely: { k: "green", label: "No antibiotics needed", icon: "check_circle" },
     noninfective: { k: "green", label: "No antibiotics needed", icon: "check_circle" },
-    none: { k: "none", label: "", icon: "rule" }
+    none: { k: "none", label: "", icon: "rule" },
+    // classes only the smd_gate_v2 engine gate returns (reasoning.js gateV2Apply)
+    infection_no_abx: { k: "green", label: "No antibiotics: supportive care", icon: "check_circle" },
+    infection_conditional: { k: "yellow", label: "Antibiotics only if criteria met", icon: "rule" },
+    infection_specific: { k: "orange", label: "Specific therapy, not antibiotics", icon: "medication" },
+    abx_prophylaxis: { k: "orange", label: "Antibiotic prophylaxis indicated", icon: "medication" },
+    rule_out_sbp: { k: "yellow", label: "Rule out SBP: paracentesis first", icon: "rule" }
   };
   function sevOf(cls) { return SEV[cls] || SEV.none; }
 
@@ -853,7 +859,8 @@
     if (root) root.classList.remove("on");
     document.documentElement.classList.remove("abxw-open");
   }
-  window.ABX_WIZARD = { open: open, close: close };
+  // _sevOf: read-only test seam (test/run-gate-v2.mjs checks every engine gate class has a severity)
+  window.ABX_WIZARD = { open: open, close: close, _sevOf: sevOf };
 
   // DEFAULT ON (MARINAM wizard). Start Case opens the MARINAM wizard unless the
   // user has explicitly opted into the FULL classic engine (complete stewardship

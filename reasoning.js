@@ -971,8 +971,87 @@
     return { inf: inf, ni: ni };
   }
 
+  /* smd_gate_v2 (default OFF): Phase 1 of kb/validation/PLAN-DX-ABX-10.md. ?gatev2=1|0 overrides.
+   * (a) The gate reads what the app's own stewardship dataset already tells the doctor under
+   *     "Need antibiotics?" (ASP_DATA.needAbx) for the leading infection: NO (viral, self-limited),
+   *     CONDITIONAL (only when criteria are met) or N/A (a specific non-antibacterial therapy such
+   *     as an antimalarial). The classic gate said "empiric antimicrobial therapy is appropriate"
+   *     for dengue, URTI and acute bronchitis while the stewardship page for the same diagnosis
+   *     said NO.
+   * (b) Two can't-miss rules that only ever RAISE the gate: SBP in cirrhosis with ascites, and
+   *     antibiotic prophylaxis for GI bleeding in cirrhosis (Baveno VII).
+   * Antibiotics are always KEPT with sepsis physiology, immunosuppression or neutropenia,
+   * persistent bacteraemia, or when an antibiotic-requiring infection scores within 30 points of
+   * the lead or is time-critical at 42+ (e.g. bacterial vs viral meningitis before CSF); the card
+   * then says which, instead of changing class.
+   * The rules are ai_drafted and pending clinician review; off is the classic gate, unchanged. */
+  function gateV2() {
+    try {
+      var q = /[?&]gatev2=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_gate_v2") === "1";
+    } catch (e) { return false; }
+  }
+  var GATE_V2_KEEP = ["hypotension", "lactateElevated", "raised_lactate", "vasopressorRequirement",
+    "immunocompromised", "neutropenia", "absoluteNeutrophilCountLow", "persistentBacteremia"];
+  // YES | NO | CONDITIONAL | SPECIFIC (ASP "N/A": antiparasitic / antiviral, not antibacterial)
+  function abxNeed(r) {
+    var asp = r && (window.ASP_DATA || {})[r.id];
+    if (asp && asp.needAbx) return asp.needAbx === "N/A" ? "SPECIFIC" : asp.needAbx;
+    if (r && r._syn && r._syn.antibioticRelevant === false) return "NO";
+    return "YES";
+  }
+  // the dataset's own rationale, first sentence(s) up to ~200 chars, without em-dashes
+  function abxWhy(r) {
+    var asp = r && (window.ASP_DATA || {})[r.id];
+    var t = String((asp && asp.needAbxWhy) || "").replace(/\s*—\s*/g, ": ");
+    var parts = t.match(/[^.!?]+[.!?]+/g) || (t ? [t] : []), out = "";
+    for (var i = 0; i < parts.length; i++) { if (out && (out + parts[i]).length > 200) break; out += parts[i]; }
+    return out.trim();
+  }
+  function gateV2Apply(g, d, f) {
+    // (b) can't-miss rules. SBP: cirrhosis + ascites with fever -> infection likely; with only
+    // abdominal pain or encephalopathy -> rule it out (diagnostic paracentesis) before deciding.
+    var sbpSign = f.fever || f.rigors, sbpSoft = f.abdominalPain || f.abdominalDiscomfort || f.severeAbdominalPain || f.alteredSensorium || f.asterixis;
+    if (f.liverDisease && f.ascites && (sbpSign || sbpSoft) &&
+        (g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none")) {
+      g.cls = sbpSign ? "likely" : "rule_out_sbp"; g.rule = "sbp";
+      // the stewardship card must be SBP's, never another infection's regimen under an SBP banner
+      g.lead = d.inf.filter(function (x) { return x.id === "SBP"; })[0] || null;
+      return;
+    }
+    if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
+      g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
+      return;
+    }
+    // (a) the lead infection's own antibiotic need
+    if (g.cls !== "very_likely" && g.cls !== "likely") return;
+    var lead = g.lead, need = abxNeed(lead);
+    if (!lead || need === "YES") return;
+    var mods = GATE_V2_KEEP.filter(function (k) { return f[k]; });
+    if (mods.length) { g.rule = "keep_modifier"; g.need = need; g.why = mods.map(function (k) { try { return lbl(k); } catch (e) { return k; } }).join(", "); return; }
+    // A competing infection that DOES need antibiotics keeps them: within 30 points of the lead, or
+    // a time-critical one (decision status red) at 42+. The engine's lead can be wrong (viral
+    // hepatitis leading a leptospirosis or SBP picture); this stops a ranking miss from becoming
+    // "no antibiotics".
+    var rivalYes = null, rivalCond = null;
+    d.inf.forEach(function (x) {
+      if (x === lead || x.score < 42) return;
+      var n = abxNeed(x), close = x.score >= lead.score - 30;
+      var critical = x._syn && x._syn.decision && x._syn.decision.status === "red";
+      if (n === "YES" && (close || critical) && (!rivalYes || x.score > rivalYes.score)) rivalYes = x;
+      else if (n === "CONDITIONAL" && close && !rivalCond) rivalCond = x;
+    });
+    if (rivalYes) { g.rule = "keep_rival"; g.need = need; g.whyFor = rivalYes.name; return; }
+    if (need === "SPECIFIC") { g.cls = "infection_specific"; g.why = abxWhy(lead); }
+    else if (need === "CONDITIONAL") { g.cls = "infection_conditional"; g.why = abxWhy(lead); }
+    else if (rivalCond) { g.cls = "infection_conditional"; g.why = abxWhy(rivalCond); g.whyFor = rivalCond.name; }
+    else { g.cls = "infection_no_abx"; g.why = abxWhy(lead); }
+  }
+
   /* Infection gate — keyed off whether infection LEADS overall */
   function gate(d) {
+    var v2 = gateV2();
     // MAX score across each column — order-independent, so the specificity
     // re-rank (which can change which candidate sits at [0]) leaves the infection
     // gate + antibiotic decision byte-identical to the classic ordering.
@@ -1002,11 +1081,16 @@
     }
     // Febrile neutropenia / fever in an immunocompromised host: low threshold
     // for empiric antibiotics (oncological emergency) — flag infection likely.
-    var febrileNeutropenia = (f.fever || f.rigors) && (f.absoluteNeutrophilCountLow || f.immunocompromised);
+    // v2 also accepts the "Neutropenia (ANC <500)" finding here (the classic override reads only
+    // absoluteNeutrophilCountLow / immunocompromised; the FEBRILE_NEUTROPENIA syndrome itself does
+    // score on neutropenia, so this matters only when that syndrome is not competitive)
+    var febrileNeutropenia = (f.fever || f.rigors) && (f.absoluteNeutrophilCountLow || f.immunocompromised || (v2 && f.neutropenia));
     if (febrileNeutropenia && topInf >= 30 && topInf >= topNi - 8) {
       if (cls === "noninfective" || cls === "unlikely" || cls === "possible") cls = "likely";
     }
-    return { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
+    var out = { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
+    if (v2) gateV2Apply(out, d, f);
+    return out;
   }
   var GATEINFO = {
     very_likely:  { t: "Infection very likely", c: "g-red",    ab: true },
@@ -1014,12 +1098,37 @@
     possible:     { t: "Infection possible",      c: "g-amber",  ab: false },
     unlikely:     { t: "Infection unlikely",      c: "g-teal",   ab: false },
     noninfective: { t: "Non-infectious diagnosis favored", c: "g-green2", ab: false },
-    none:         { t: "Add findings to begin reasoning", c: "g-slate", ab: false }
+    none:         { t: "Add findings to begin reasoning", c: "g-slate", ab: false },
+    // smd_gate_v2 only
+    infection_no_abx:      { t: "Infection likely, antibiotics not indicated", c: "g-teal", ab: false },
+    infection_conditional: { t: "Infection likely, antibiotics only if criteria met", c: "g-amber", ab: true },
+    infection_specific:    { t: "Infection likely, specific therapy (not antibiotics)", c: "g-orange", ab: false },
+    abx_prophylaxis:       { t: "Antibiotic prophylaxis indicated", c: "g-orange", ab: true },
+    rule_out_sbp:          { t: "Rule out spontaneous bacterial peritonitis", c: "g-amber", ab: true }
   };
   function gateMsg(g) {
+    var m = gateMsgRaw(g);
+    // anything smd_gate_v2 wrote or explained is app-facing text without em-dashes; classic text as before
+    return (g.rule || g.why) ? m.replace(/\s*\u2014\s*/g, ": ") : m;
+  }
+  function gateMsgRaw(g) {
+    var lead = g.lead && g.lead.name;
+    // smd_gate_v2: why antibiotics stay on although the lead infection alone would not need them
+    var own = g.need === "SPECIFIC" ? " (its treatment is specific, not antibacterial)" : "";
+    var kept = g.rule === "keep_rival" ? lead + " leads and does not need antibiotics on its own" + own + ", but " + g.whyFor + " is competitive and does: confirm or exclude it before deciding. " :
+      g.rule === "keep_modifier" ? lead + " leads and does not need antibiotics on its own" + own + ", but these change that: " + g.why + ". Cover a bacterial infection empirically and reassess with cultures. " : "";
     switch (g.cls) {
-      case "very_likely": return "Infection leads the differential — empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
-      case "likely": return "Infection is the leading consideration — empiric therapy may be warranted after cultures. Confirm before prescribing.";
+      case "very_likely": return kept + "Infection leads the differential — empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
+      case "likely": return kept + (g.rule === "sbp" ? "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites plus fever, abdominal pain or encephalopathy: do a diagnostic paracentesis now and treat if ascitic neutrophils are 250/mm3 or more (at once if the patient is septic). " : "") +
+        "Infection is the leading consideration — empiric therapy may be warranted after cultures. Confirm before prescribing.";
+      case "infection_no_abx": return (lead ? lead + " leads, and it does not need antibiotics. " : "") + (g.why ? g.why + " " : "") +
+        "Reassess if bacterial features, sepsis or immunosuppression appear.";
+      case "infection_conditional": return (lead ? lead + " leads. " : "") + "Antibiotics only if " + (g.whyFor ? g.whyFor + " criteria are" : "its criteria are") + " met" +
+        (g.why ? ": " + g.why : ".") + " Check them before prescribing.";
+      case "infection_specific": return (lead ? lead + " leads. " : "") + (g.why ? g.why + " " : "") +
+        "Antibiotics only for a proven or strongly suspected bacterial co-infection.";
+      case "rule_out_sbp": return "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and abdominal pain or encephalopathy: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, sepsis or shock develops.";
+      case "abx_prophylaxis": return "Cirrhosis with gastrointestinal bleeding: short-course antibiotic prophylaxis is indicated (for example ceftriaxone 1 g daily for up to 7 days; Baveno VII). It lowers infection, rebleeding and mortality; it is not treatment of a diagnosed infection.";
       case "possible": return "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics.";
       case "unlikely": return "Infection is low on the differential — antibiotics are not recommended yet. Investigate the alternatives.";
       case "noninfective": return "A non-infectious diagnosis currently leads — antibiotics are not recommended. Address the leading diagnosis.";
@@ -1387,13 +1496,14 @@
     L.push("Generated: " + new Date().toLocaleString()); L.push("");
     L.push("Findings: " + (Object.keys(S.f).map(lbl).join(", ") || "—")); L.push("");
     L.push("Infection assessment: " + GATEINFO[g.cls].t); L.push("");
+    if (g.why || g.rule) { L.push(gateMsg(g)); L.push(""); }   // smd_gate_v2 only
     L.push("Infectious differential:");
     d.inf.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " — " + r.score + "/100"); });
     if (!d.inf.length) L.push("  (none)");
     L.push("Non-infectious differential:");
     d.ni.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " — " + r.score + "/100"); });
     if (!d.ni.length) L.push("  (none)");
-    if (GATEINFO[g.cls].ab && g.lead && window.HOSPITAL) {
+    if (GATEINFO[g.cls].ab && g.lead && window.HOSPITAL && g.cls !== "abx_prophylaxis") {
       var pol = window.HOSPITAL.getPolicy(g.lead.id);
       L.push(""); L.push("Leading infectious diagnosis: " + g.lead.name);
       if (pol && pol.entry) {
@@ -2518,7 +2628,8 @@
     var el = root.querySelector("#dxPolicy");
     if (!el) return;
     var info = GATEINFO[g.cls];
-    if (!info.ab || !g.lead || !window.HOSPITAL) { el.innerHTML = ""; return; }
+    // abx_prophylaxis (smd_gate_v2) is not treatment of the lead infection: no empiric-therapy card
+    if (!info.ab || !g.lead || !window.HOSPITAL || g.cls === "abx_prophylaxis") { el.innerHTML = ""; return; }
     var lead = g.lead, pol = window.HOSPITAL.getPolicy(lead.id), h = pol.hospital, e = pol.entry;
     var src = h.logo
       ? '<img class="dx-src-logo" src="' + h.logo + '" alt="GIMSR logo"> <b>' + rIco("check") + ' ' + esc(h.policyName) + '</b> <span>' + esc(h.version || "") + '</span>'
@@ -3828,6 +3939,8 @@
           dominantSystem: Object.keys(S._dom || {}),
           infectious: d.inf.map(mapCand), nonInfectious: d.ni.map(mapCand),
           suggestions: (function () { try { return suggestionKeys(d); } catch (e) { return []; } })() };
+        // smd_gate_v2 only: why the gate moved and the message the workspace shows
+        if (g.why || g.rule) { out.gate.why = g.why || ""; out.gate.rule = g.rule || null; out.gate.message = gateMsg(g); }
       } catch (e) { out = { gate: {}, infectious: [], nonInfectious: [], suggestions: [] }; }
       if (restore) S.f = restore;
       return out;

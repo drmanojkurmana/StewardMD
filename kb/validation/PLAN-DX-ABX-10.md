@@ -3,6 +3,14 @@
 Baseline: `kb/validation/AUDIT-2026-09-26.md`. Harnesses: `test/run-case-validation.mjs`,
 `test/run-dx-audit.mjs`, `test/dx-heldout.json`.
 
+## Status (2026-09-26)
+
+| Phase | State |
+|---|---|
+| 0 Measurement | **Automatable part done.** Split (`kb/validation/splits.json`, `kb/tools/make-validation-splits.mjs`), harness per split + flags + floors (`test/run-dx-audit.mjs`, `kb/validation/dx-floors.json`), CI (`.github/workflows/dx-accuracy.yml`), OPD bench refuses invalid runs. **Still needs people:** held-out set to 300, clinician adjudication of gold antibiotic labels and drug equivalence classes, owner review of the 18 stale-baseline cases before rebaselining `baseline.json`. |
+| 1 Gate safety | **Built behind `smd_gate_v2` (default OFF).** Curated keys: time-critical 49/49, abx-indicated 97%, viral flagged 13 -> 9 of 15. Test `test/run-gate-v2.mjs`. Needs clinician review of the rules and owner approval before default ON. Results in `AUDIT-2026-09-26.md`. |
+| 2 to 6 | Not started. |
+
 ## What "10/10" means (the exit criteria)
 
 A score cannot be self-certified by the people (or models) who tuned the engine. 10/10 means every
@@ -12,12 +20,12 @@ clinicians, and held in CI.
 | Metric | Today | Target |
 |---|---|---|
 | Held-out doctor text: top-1 / top-3 | 40% / 55% | >= 70% / >= 90% |
-| Gold chart text: top-1 / top-3 | 22% / 41% | >= 65% / >= 88% |
-| Curated keys: top-1 / top-3 | 69% / 92% | >= 85% / >= 97% |
+| Gold chart text: top-1 / top-3 | 21% / 41% | >= 65% / >= 88% |
+| Curated keys: top-1 / top-3 | 72% / 94% | >= 85% / >= 97% |
 | Text extraction: recall / precision of gold keys | ~37% / not measured | >= 85% / >= 95% |
-| Gate: abx indicated -> flags abx | 94% keys, 67% text | >= 98% |
-| Gate: time-critical infections flagged | 33/35 keys, 24/35 text | 100%, both paths |
-| Gate: viral / self-limited -> abx | 14/14 | 0 |
+| Gate: abx indicated -> flags abx | 94% keys, 66% text (v2: 97% keys) | >= 98% |
+| Gate: time-critical infections flagged | 47/49 keys, 31/49 text (v2: 49/49 keys) | 100%, both paths |
+| Gate: clean viral / self-limited -> abx | 13/15 (v2: 9/15) | 0 |
 | Gate: abx not indicated -> abx (overcall) | 15% keys, 25% text | <= 5% |
 | Drug choice (clinician-adjudicated, equivalents allowed) | ~79% raw | >= 95% |
 | Dangerous dx-to-drug misses (list in audit, finding 4) | 7 | 0 |
