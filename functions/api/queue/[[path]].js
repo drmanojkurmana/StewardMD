@@ -484,11 +484,13 @@ async function wsqLinkTenantOrg(env, org) {
     let settings = {};
     try { settings = typeof tenant.settings === "string" ? JSON.parse(tenant.settings || "{}") : (tenant.settings || {}); } catch { settings = {}; }
     if (settings.wardsynq && settings.wardsynq.orgId === org.id) return;   // already linked, no write needed
+    if (settings.wardsynq && settings.wardsynq.orgId) return;   // SEC-02: never repoint a tenant another org already owns
     settings.wardsynq = Object.assign({}, settings.wardsynq, { orgId: org.id });
     await env.CONNECT_DB.prepare("UPDATE connect_tenant SET settings=?, updated_at=? WHERE id=?")
       .bind(JSON.stringify(settings), new Date().toISOString(), String(org.connectTenantId)).run();
   } catch (e) { /* best-effort: a missed reciprocal link never blocks the org update itself */ }
 }
+import { tenantLinkRefusal } from "../../_wardsynq/tenant-link.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 import * as ONCO from "../../_onco_store.js";
@@ -7013,6 +7015,8 @@ export async function onRequest(context) {
         /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
         const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
         if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);
+        const linkRefusal = body.connectTenantId ? await tenantLinkRefusal(env, actor, await ORG.getOrg(env, body.orgId), body.connectTenantId) : null;   // SEC-02
+        if (linkRefusal) return json({ ok: false, ...linkRefusal }, linkRefusal.status, request);
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.
@@ -7034,6 +7038,8 @@ export async function onRequest(context) {
       if (seg === "org" && sub === "from-connect") {
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
         if (!body.connectTenantId || !body.connectConnectionId) return json({ ok: false, error: "missing_link" }, 400, request);
+        const fcRefusal = await tenantLinkRefusal(env, actor, null, body.connectTenantId);   // SEC-02
+        if (fcRefusal) return json({ ok: false, ...fcRefusal }, fcRefusal.status, request);
         const o = await ORG.createOrg(env, { name: body.name || "Connected Hospital", mode: "connect", connectorId: "connect" }, actor.id);
         const linked = await ORG.updateOrg(env, o.id, { connectTenantId: body.connectTenantId, connectConnectionId: body.connectConnectionId }, actor.id);
         return json({ ok: true, org: linked }, 200, request);
