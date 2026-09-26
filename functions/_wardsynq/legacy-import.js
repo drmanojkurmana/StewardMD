@@ -29,6 +29,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { parseCsv } from "./hr-attendance.js";
 import { registerPatientRecord } from "./migrate-registration.js";
+import { patientIdForMrn } from "./opd-identity.js";
 import { validateRegistration } from "../_opd_patient.js";
 import { validateTariff } from "../_clinic_billing.js";
 
@@ -197,13 +198,32 @@ async function checkAgainstStore(request, env, ctx, kind, allRows, rows) {
   for (const p of indexed || []) for (const i of p.identifiers || []) if (i && i.system === "legacy-mrn") byLegacy.set(str(i.value).toUpperCase(), p);
   // The NEWEST patients, as the screen says; the list was oldest first, so a recent registration was never compared.
   const pool = (await svc.list("Patient", NAME_POOL, { newest: true })) || [];
+  /* DATA-07: a registration whose chart record was never written (an earlier import stopped between the two
+   * writes) is not a duplicate to leave alone: that is how "import the same file again" never repaired it.
+   * It stays in the plan as a REPAIR: no new registration, only the missing chart record, as the desk's own
+   * duplicate reconcile does. Only when the registration is recognisably THIS row (the same name): a relative
+   * sharing the mobile, or a patient registered before the hospital moved to WardSynQ, stays a duplicate for a
+   * person to check. A read that fails throws, so it is never taken as "no chart". */
+  const noChart = async (mrn, r) => {
+    const id = patientIdForMrn(mrn);
+    if (!id || (await svc.get("Patient", id))) return false;
+    const opd = await ctx.patients.byMrn(mrn);
+    return !!opd && str(opd.name).toLowerCase() === str(r.patient.name).toLowerCase();
+  };
+  const repair = (r, mrn) => Object.assign(r, { repair: mrn, existing: { mrn }, reason: "Registered earlier, but its chart record was never written. Importing writes the chart record; no new MR number is issued." });
   for (const r of live) {
     const known = byLegacy.get(r.legacyMrn.toUpperCase());
     if (known) { Object.assign(r, { status: "matched", existing: { mrn: known.mrn } }); continue; }
     /* The hospital's own numbering makes the legacy number the MR number: one already in use is never written over. */
-    if (ctx.externalMrn && await ctx.patients.byMrn(r.legacyMrn)) { Object.assign(r, { status: "duplicate", existing: { mrn: r.legacyMrn }, reason: "This MR number is already in use at this hospital." }); continue; }
+    if (ctx.externalMrn && await ctx.patients.byMrn(r.legacyMrn)) {
+      if (await noChart(r.legacyMrn, r)) { repair(r, r.legacyMrn); continue; }
+      Object.assign(r, { status: "duplicate", existing: { mrn: r.legacyMrn }, reason: "This MR number is already in use at this hospital." }); continue;
+    }
     const sameMobile = await ctx.patients.mobileTaken(r.patient.mobile);
-    if (sameMobile) { Object.assign(r, { status: "duplicate", existing: { mrn: sameMobile.mrn }, reason: "A patient with this mobile number is already registered." }); continue; }
+    if (sameMobile) {
+      if (await noChart(sameMobile.mrn, r)) { repair(r, sameMobile.mrn); continue; }
+      Object.assign(r, { status: "duplicate", existing: { mrn: sameMobile.mrn }, reason: "A patient with this mobile number is already registered." }); continue;
+    }
     const hit = findCandidates({ name: r.patient.name, dob: r.patient.birthDate, sex: r.patient.gender, identifiers: [] }, pool, { limit: 1 })
       .find((h) => { const agreed = (h.match.breakdown || []).filter((f) => f.agreed).map((f) => f.field); return agreed.includes("name") && agreed.includes("dob"); });
     if (hit) Object.assign(r, { status: "duplicate", existing: { mrn: hit.patient.mrn }, reason: "A patient with the same name and date of birth is already registered." });
@@ -277,13 +297,21 @@ async function importLegacy(request, env, ctx) {
     } else if (kind === "vendors") {
       try { await svc.put(r.vendor, { expectedVersion: 0 }); }
       catch (e) { return stopped(r, e instanceof VersionConflictError ? "A supplier with this name was added meanwhile." : "The supplier was not saved."); }
+    } else if (r.repair) {
+      // The registration exists (the same name, checked above); only its chart record is written, with the legacy number.
+      const opd = await ctx.patients.byMrn(r.repair).catch(() => null);
+      if (!opd) return stopped(r, `MR number ${r.repair} could not be read back, so its chart record was not written.`);
+      const rec = await registerPatientRecord(request, env, { migration: mig, actorDeps: ctx.actorDeps, recordDeps: ctx.recordDeps,
+        registration: { mrn: opd.mrn, mrSource: opd.mrSource, pending: opd.pending, patient: { ...opd, legacyMrn: r.legacyMrn } } }).catch(() => ({ ok: false }));
+      if (!rec.ok) return stopped(r, `MR number ${opd.mrn} still has no chart record; it could not be written.`);
+      r.mrn = opd.mrn;
     } else {
       let reg;
       try { reg = await ctx.patients.register(r.body); } catch { reg = null; }
       if (!reg || !reg.ok) return stopped(r, reg && reg.error === "duplicate" ? "A patient with this mobile number was registered meanwhile." : "The patient was not registered.");
       const rec = await registerPatientRecord(request, env, { migration: mig, actorDeps: ctx.actorDeps, recordDeps: ctx.recordDeps,
         registration: { mrn: reg.mrn, mrSource: reg.mrSource, pending: reg.pending, patient: { ...reg.patient, legacyMrn: r.legacyMrn } } }).catch(() => ({ ok: false }));
-      if (!rec.ok) { written++; return stopped(r, `MR number ${reg.mrn} was issued but its chart record was not written; registering the patient again at the desk repairs it.`); }
+      if (!rec.ok) { written++; return stopped(r, `MR number ${reg.mrn} was issued but its chart record was not written; importing the same file again writes it.`); }
       r.mrn = reg.mrn;
     }
     written++;

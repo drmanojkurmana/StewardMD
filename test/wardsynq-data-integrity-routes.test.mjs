@@ -1,4 +1,4 @@
-import { H, as, seedHospital, admittedPatient, ORG, DOCTOR, NURSE } from "./_wardsynq-alert-harness.mjs";
+import { H, as, seedHospital, admittedPatient, ORG, DOCTOR, NURSE, ADMIN } from "./_wardsynq-alert-harness.mjs";
 /* test/wardsynq-data-integrity-routes.test.mjs - the audit's data-integrity findings that go through the real
  * router (lane C of the 2026-09-26 audit). Each test reproduces the audit demo and fails without its fix.
  *
@@ -159,4 +159,39 @@ test("DATA-08: the downtime sheet shows the newest ward-charted vital of each ki
   const vals = Object.values(page.lastVitals).map((v) => String(v.value));
   assert.ok(vals.includes("82") && vals.includes("130"), "the newest reading of each: " + JSON.stringify(page.lastVitals));
   assert.ok(!vals.includes("120"));
+});
+
+test("DATA-07: a legacy import that stopped between the registration and the chart record is repaired by importing the same file again", async () => {
+  seedHospital();
+  const real = H.RECORD;
+  let armed = true;
+  H.RECORD = new Proxy(real, { get(t, k) {
+    if (k === "append") return async (tenantId, recs, c) => { if (armed && recs.some((r) => r.resourceType === "Patient")) { armed = false; throw new Error("simulated failure writing Patient"); } return t.append(tenantId, recs, c); };
+    const v = t[k]; return typeof v === "function" ? v.bind(t) : v;
+  } });
+  const csv = "mrn,name,mobile,gender,age\nLM-1001,Test Patient,9876543210,male,40\n";
+  const mapping = { legacyMrn: 0, name: 1, mobile: 2, gender: 3, ageYears: 4 };
+  const imp = (extra) => as(ADMIN, "/ward/legacy-import", "POST", { orgId: ORG, kind: "patients", csv, mapping, ...(extra || {}) });
+
+  let r = await imp();
+  r = await imp({ commit: true, confirmCount: r.counts.create, planId: r.planId });
+  assert.equal(r.__status, 502, JSON.stringify(r));
+  assert.equal(r.error, "import_incomplete");
+  assert.equal((await real.latestByType("tenant-wsq", "Patient", 100)).length, 0, "registered, but no chart record");
+
+  const dry = await imp();
+  assert.equal(dry.__status, 200, JSON.stringify(dry));
+  assert.equal(dry.counts.create, 1, "planned as a repair, not left as a duplicate: " + JSON.stringify(dry.rows));
+  assert.equal(dry.counts.duplicate, 0);
+  assert.match(dry.rows[0].reason, /chart record was never written/);
+  const done = await imp({ commit: true, confirmCount: dry.counts.create, planId: dry.planId });
+  assert.equal(done.__status, 200, JSON.stringify(done));
+  const pts = await real.latestByType("tenant-wsq", "Patient", 100);
+  assert.equal(pts.length, 1, "the chart record now exists");
+  assert.ok((pts[0].identifiers || []).some((i) => i.system === "legacy-mrn" && i.value === "LM-1001"), "with the legacy number, the names agreeing");
+  assert.equal(done.rows[0].mrn, pts[0].mrn, "no new MR number issued");
+
+  const again = await imp();
+  assert.equal(again.counts.matched, 1, "a third run finds it by its legacy number");
+  assert.equal(again.counts.create, 0);
 });
