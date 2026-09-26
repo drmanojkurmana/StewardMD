@@ -7566,6 +7566,33 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         '</div></div>';
       bubble("ai", html); scroll();
     }
+    /* A PATIENT CASE (owner, 2026-09-27). "35 year old male, non-healing leg ulcer, RBS 450, platelets
+     * 72K" got the same canned redirect to Dx My Patient three times, "Give me dd" included. Now it
+     * offers the structured tools the way the drug card offers the monograph, and answers on request.
+     * The card shows once per conversation; a message that asks for something ("dd", "management",
+     * "???") is answered at once, and "Answer, don't ask again" (smd_maik_ptask=0) retires the card. */
+    var MAIK_PT_ASK = /\?\?|\b(dd|ddx|d\/d|differentials?|diagnos\w*|causes?|what could|possibilit\w*|likely|answer|explain|tell me|why|manage\w*|treat\w*|rx|work ?up|investigat\w*|next step)\b/i;
+    function maikPtAskOn() { try { return localStorage.getItem("smd_maik_ptask") !== "0"; } catch (e) { return true; } }
+    // Hospital identifiers and emails only; lab values, ages and doses stay (functions/_deid.js also
+    // drops every 4+ digit run, which would eat "platelets 72000").
+    function maikStripIds(s) {
+      return String(s || "").replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, " ")
+        .replace(/\b(?:mrn|uhid|cr\s*no|ipd?\s*(?:no|number)|op\s*(?:no|number)|reg(?:istration)?\s*(?:no|number))\b\.?\s*[:#-]?\s*[a-z]*\d[\w\/-]*/gi, " ")
+        .replace(/\s+/g, " ").trim();
+    }
+    function maikPatientCard(question) {
+      var html = '<div class="maik-dosecard maik-drugask maik-ptask">' +
+        '<div class="maik-dose-h">' + MK.spark + '<span>Patient case</span></div>' +
+        '<div class="maik-dose-note">Work it up in a structured tool, or should I answer here?</div>' +
+        '<div class="maik-dose-acts">' +
+          '<button class="maik-fu maik-dose-go" data-maik-tool="startcase">Start Case</button>' +
+          '<button class="maik-fu maik-dose-go" data-maik-tool="reasoning">Dx My Patient</button>' +
+          '<button class="maik-fu" data-maik-anyway="' + maikEscH(question) + '">Answer here</button>' +
+          '<button class="maik-fu maik-drugask-no" data-maik-anyway="' + maikEscH(question) + '" data-maik-ptnoask="1">Answer, don\'t ask again</button>' +
+        '</div></div>';
+      bubble("ai", html); scroll();
+      try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+    }
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
@@ -7640,9 +7667,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;
       }
       if (route.kind === "patient") {
-        var d = bubble("ai", 'I can help you assess this. Start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings, vitals and labs, and StewardMD’s engine computes the assessment, then MaiK adds commentary on it.');
-        var b = document.createElement("button"); b.className = "maik-chip"; b.style.marginTop = "8px"; b.textContent = "Open Dx My Patient";
-        b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
+        q = maikStripIds(q);   // a hospital ID never reaches the model (the old redirect kept these messages on the phone)
+        if (!fromDrugAsk && !MAIK_PT_ASK.test(q) && !body.querySelector(".maik-ptask") && maikPtAskOn()) { maikPatientCard(q); return; }
       }
       if (route.kind === "clarify") {
         // Mid-conversation, a short unrecognised phrase ("Glasgow-Blatchford", "Rockall", "endoscopy
@@ -8363,6 +8389,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (anyway) {
         ev.preventDefault();
         if (_maikBusy) return;
+        if (anyway.hasAttribute("data-maik-ptnoask")) { try { localStorage.setItem("smd_maik_ptask", "0"); toast("MaiK will answer patient cases directly. Start Case and Dx My Patient stay on the home screen."); } catch (e) {} }
         var aq = anyway.getAttribute("data-maik-anyway") || "";
         var acard = anyway.closest(".maik-dosecard"); if (acard) acard.querySelector(".maik-dose-acts").remove();
         runClinical(aq, aq, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(aq) : aq);

@@ -330,3 +330,15 @@ the curated regimen MaiK Cloud answers from. Now a treatment question's curated 
 Still zero key points: child paracetamol and acute heart failure (router matches nothing), tramadol +
 SSRI, severe pre-eclampsia, acute diarrhoea (the regimen or pearls lack those key points).
 
+## A patient case gets choices, not a redirect (2026-09-27, branch maik-patient-choice)
+Owner transcript: "35 year old male, non-healing leg ulcer, RBS 450, platelets 72K" got the canned
+"Start Dx My Patient or Clinical Reasoning" text three times, "Give me dd" and "???" included. The
+`route.kind === "patient"` branch in `maikSendRest` (home.js) now shows `maikPatientCard`, modelled on the
+drug monograph card: **Start Case** / **Dx My Patient** (existing `data-maik-tool` chips, `ACT.startcase` /
+`ACT.reasoning`), **Answer here** (existing `data-maik-anyway`), **Answer, don't ask again**
+(`smd_maik_ptask=0`). Once per conversation; a message that asks for something (`MAIK_PT_ASK`: dd,
+differential, management, rx, "??") is answered at once. `maikStripIds` drops MRN/UHID/IP/OP/reg numbers
+and emails before a patient case is answered (the redirect used to keep those messages on the phone);
+lab values stay. Tests: `test/maik-patient-card.test.mjs`, `node test/run-maik-patient-card-ui.mjs`
+(headless; sets `window.AI_PROXY = "/api/ai"` because `aiBase()` is "" on plain localhost).
+
