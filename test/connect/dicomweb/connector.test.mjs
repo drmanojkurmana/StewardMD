@@ -76,6 +76,15 @@ test("modality falls back to Modality (00080060) when ModalitiesInStudy (0008006
   assert.equal(bundle.imagingStudies[0].modality, "MR");
 });
 
+test("OPS-23/F23: a multi-modality study (PET/CT) keeps ALL of ModalitiesInStudy, not just Value[0]", async () => {
+  const study = { "0020000D": { vr: "UI", Value: ["1.2.3.4"] }, "00080061": { vr: "CS", Value: ["PT", "CT"] } };
+  const c = ctx({ fetch: async () => new Response(JSON.stringify([study]), { status: 200 }) });
+  const raw = await dicomWebConnector.fetchPatient(c, "P1");
+  const bundle = await dicomWebConnector.normalize(c, raw);
+  // Before the fix, tagValue() kept only Value[0]: modality landed as "PT", CT silently dropped.
+  assert.equal(bundle.imagingStudies[0].modality, "PT,CT");
+});
+
 test("a study missing optional tags -> those fields OMITTED, never fabricated (only id+sourceStudyId present)", async () => {
   const fetchStub = async () => new Response(JSON.stringify([STUDY_MINIMAL]), { status: 200 });
   const c = ctx({ fetch: fetchStub });
