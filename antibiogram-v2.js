@@ -112,7 +112,7 @@
       (hai ? '<br><span class="v2-mut">Rows marked ICU HAI come from ICU device-associated infection surveillance (bloodstream, urinary and ventilator-associated infections), not from all ICU isolates.</span>' : "") +
       (src.checks && src.checks.length ? '<br><span class="v2-mut">The source\'s own tables disagree in ' + src.checks.length + " place" + (src.checks.length === 1 ? "" : "s") + ' (see Sources).</span>' : "") +
       (src.copies && src.copies.length ? '<br><span class="v2-mut">' + src.copies.length + " row" + (src.copies.length === 1 ? " repeats" : "s repeat") + ' another row\'s figures exactly; those figures are shown with a caution (see Sources).</span>' : "") +
-      (src.url ? '<button class="v2-link" data-v2="open-url" data-url="' + esc(src.url) + '">Open the source</button>' : "") +
+      (src.url ? '<br><button class="v2-link" data-v2="open-url" data-url="' + esc(src.url) + '">Open the source</button>' : "") +
       (eds.length > 1 ? ' <span class="v2-mut">Editions: ' + eds.map(function (e) { return esc(e.edLabel || e.year); }).join(", ") + " (tap a cell for the trend)</span>" : "") + "</div>";
   }
   function phenoStrip() {
