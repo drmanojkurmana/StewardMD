@@ -3288,6 +3288,7 @@ export async function onRequest(context) {
       if (sub === "transfusion-bedside-check" && method === "POST") {
         /* CLIN-16: the second checker is an active member of this hospital who treats, gives medicines or works the blood bank. */
         const secondCheckerCheck = async (id) => {
+          if (actor.email && String(id).toLowerCase() === String(actor.email).toLowerCase()) return "self";
           const who = { kind: "witness", id: String(id), email: String(id).indexOf("@") > 0 ? String(id).toLowerCase() : null };
           for (const cap of [CAPS.EMR_TREAT, CAPS.MED_ADMINISTER, CAPS.TRANSFUSION_ISSUE]) if ((await ORG.authorizeOrg(env, who, wOrgId, cap) || {}).ok) return true;
           return false;

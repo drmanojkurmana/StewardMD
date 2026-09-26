@@ -102,6 +102,8 @@ test("bedside check: the first checker is the signed-in user, the second a real 
   const self = await check({ secondCheckerId: idFor(DOCTOR) });
   assert.equal(self.__status, 409, JSON.stringify(self));
   assert.equal(self.code, "SECOND_CHECKER_NOT_INDEPENDENT");
+  const selfEmail = await check({ secondCheckerId: DOCTOR.toUpperCase() });
+  assert.equal(selfEmail.code, "SECOND_CHECKER_NOT_INDEPENDENT", "their own email is still them");
   // A wristband and MRN supplied by the request are not the patient's: the record's MRN is what the scan must match.
   const fakeBand = await check({ secondCheckerId: idFor(NURSE), scannedPatientBarcode: "FAKE-BAND", patient: { id: p.patientId, mrn: "FAKE-BAND", wristbandBarcode: "FAKE-BAND" } });
   assert.equal(fakeBand.__status, 409, JSON.stringify(fakeBand));

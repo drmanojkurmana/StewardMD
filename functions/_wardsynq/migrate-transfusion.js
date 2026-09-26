@@ -244,7 +244,7 @@ async function issueUnit(request, env, ctx) {
  * The two-person bedside check. NO ONE-CLICK TRANSFUSE: two named, different people, a scanned
  * wristband and a scanned unit, compatibility re-derived from the physical bag - the engine's own
  * bedsideCheck() enforces every one of these; this file supplies who and against what (below).
- * ctx: { migration, episodeId, secondCheckerId, secondCheckerCheck(id) -> boolean, scannedPatientBarcode,
+ * ctx: { migration, episodeId, secondCheckerId, secondCheckerCheck(id) -> true | false | "self", scannedPatientBarcode,
  *   scannedUnitId, unitInHand: {unitId, aboGroup, rhD, component, expiresAt} }. checkerId and patient in the
  *   request are ignored.
  */
@@ -261,9 +261,11 @@ async function recordBedsideCheck(request, env, ctx) {
     if (second.toLowerCase() === str(actorId).toLowerCase()) return refuse(409, "SECOND_CHECKER_NOT_INDEPENDENT", "the second check must be performed by a different person from the one signed in");
     if (typeof ctx.secondCheckerCheck !== "function") return { refusal: { ok: false, status: 502, error: "second_checker_check_unavailable", detail: "The second checker could not be checked, so nothing was recorded." } };
     let staff = false;
-    try { staff = (await ctx.secondCheckerCheck(second)) === true; }
+    try { staff = await ctx.secondCheckerCheck(second); }
     catch { return { refusal: { ok: false, status: 502, error: "second_checker_check_failed", detail: "The second checker could not be checked, so nothing was recorded." } }; }
-    if (!staff) return refuse(409, "SECOND_CHECKER_NOT_STAFF", "the second checker is not an active member of this hospital who may check a transfusion");
+    // "self": the name given is the signed-in user under another spelling (their email).
+    if (staff === "self") return refuse(409, "SECOND_CHECKER_NOT_INDEPENDENT", "the second check must be performed by a different person from the one signed in");
+    if (staff !== true) return refuse(409, "SECOND_CHECKER_NOT_STAFF", "the second checker is not an active member of this hospital who may check a transfusion");
     let rec;
     try { rec = await svc.get("Patient", ep.patientId); }
     catch { return { refusal: { ok: false, status: 502, error: "record_read_failed", detail: "The patient record could not be read, so the wristband was not checked." } }; }
