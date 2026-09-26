@@ -70,9 +70,11 @@ struct HomeGlanceProvider: TimelineProvider {
     }
 
     static let sample = GlanceState(
-        criticalCount: 3, topCritical: "K⁺ 6.8 · Bed 12", patientCount: 12, tasksDue: 3,
+        // Shaped exactly as native-watch.js publishes it: analyte · value+units · patient.
+        criticalCount: 3, topCritical: "K⁺ · 6.8 mmol/L · Bed 12", patientCount: 12, tasksDue: 3,
         roundsDone: 8, roundsTotal: 12, censusOccupied: 28, censusTotal: 32, onCall: true, ward: "MICU",
-        watchlistTop: "Bed 12 · NEWS2 9", watchlistNews: 9, updatedAt: Date().timeIntervalSince1970)
+        watchlistTop: "Bed 12 · NEWS2 9", watchlistNews: 9, drugCount: 1592,
+        updatedAt: Date().timeIntervalSince1970)
 }
 
 // MARK: - Widgets

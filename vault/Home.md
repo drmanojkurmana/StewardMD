@@ -50,6 +50,8 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
   PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it
   before touching this.
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
+- [[Widgets]] — iOS home-screen and Lock Screen widgets. Ask MaiK ships three surfaces the
+  owner picks in Edit Widget; read the `topCritical` contract gotcha before touching the parser.
 - [[Email and Lifecycle]] — every email the app sends (one premium template), unsubscribe, the promo series, phone OTP
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
