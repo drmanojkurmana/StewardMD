@@ -21,6 +21,12 @@
  *
  * Nothing here is PHI: it is the doctor's own number, kept only in the OTP record (10-minute TTL)
  * and, once verified, on the lifecycle record.
+ *
+ * One number, one account (audit finding 14, 2026-09-26). The verified number is indexed
+ * phone -> uid (functions/_lifecycle.js phoneIndexKey), keyed by phoneHash(), never the raw digits.
+ * phone-start refuses { error:"phone-in-use" } BEFORE sending a code when the number is bound to a
+ * different live account (deps.checkOwner); phone-verify re-checks and binds (deps.bind) before
+ * the claim is written. The per-number daily-cap key is hashed the same way.
  */
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import { sendSms, smsProvider, smsConfigured } from "./_followcare_sms.js";
@@ -104,11 +110,23 @@ export async function deliverOtp(env, { phone, code, name, channel }) {
 
 /* ── the OTP record rules (pure, KV injected) ────────────────────────────────────────────────── */
 export function otpKey(uid) { return "otp:phone:" + uid; }
-export function capKey(phone) { return "otp:phone:cap:" + phone; }
+/* Hash of the normalised E.164 number, for every KV KEY that is about a number (the cap counter
+ * here, the phone -> uid index in _lifecycle.js). Plain SHA-256 with a fixed domain prefix: the one
+ * keyed secret in the project (CONNECT_HMAC_SALT) is optional and Connect-scoped, and setting or
+ * rotating it later would silently re-key the index and release every bound number. Input is the
+ * digits normalizePhone() returns (country code included); "+" is added so it is E.164 proper. */
+export const PHONE_HASH_PREFIX = "smd-phone-v1:";
+export async function phoneHash(phone) {
+  const d = String(phone || "").replace(/[^\d]/g, "");
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(PHONE_HASH_PREFIX + "+" + d));
+  return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
+}
+export async function capKey(phone) { return "otp:phone:cap:" + (await phoneHash(phone)); }
 function nowS() { return Math.floor(Date.now() / 1000); }
 function gen6() { const a = new Uint32Array(1); crypto.getRandomValues(a); return String(a[0] % 1000000).padStart(6, "0"); }
 
-// deps: { store, deliver(phone, code, name, channel) -> deliverOtp result, defaultCc? }
+// deps: { store, deliver(phone, code, name, channel) -> deliverOtp result, defaultCc?,
+//         checkOwner?(phone) -> { ok } | { ok:false, error:"phone-in-use" } }
 export async function phoneStart(who, body, deps) {
   const store = deps.store;
   const phone = normalizePhone(body && body.phone, deps.defaultCc);
@@ -120,14 +138,21 @@ export async function phoneStart(who, body, deps) {
     return { ok: false, error: "too-soon", retryAfter: RESEND_THROTTLE - (nowS() - existing.sentAt), status: 429 };
   }
   // Per-number daily cap, independent of the account asking.
+  const ck = await capKey(phone);
   let cap = 0;
-  try { cap = +(await store.get(capKey(phone))) || 0; } catch (e) {}
+  try { cap = +(await store.get(ck)) || 0; } catch (e) {}
   if (cap >= DAILY_CAP) return { ok: false, error: "daily-cap", status: 429 };
+  // One number, one account: refuse BEFORE a code is generated, stored or sent.
+  if (deps.checkOwner) {
+    let own = null;
+    try { own = await deps.checkOwner(phone); } catch (e) { own = { ok: false, error: "store-failed" }; }
+    if (!own || !own.ok) return { ok: false, error: (own && own.error) || "phone-in-use", status: own && own.error === "store-failed" ? 500 : 409 };
+  }
   // Same-window re-send keeps the same code (a doctor switching WhatsApp -> SMS must not get two codes).
   const code = (existing && existing.phone === phone && existing.exp > nowS() && existing.code) ? existing.code : gen6();
   const rec = { code, phone, exp: nowS() + TTL, tries: 0, sentAt: nowS() };
   try { await store.put(otpKey(who.uid), JSON.stringify(rec), { expirationTtl: TTL }); } catch (e) { return { ok: false, error: "store-failed", status: 500 }; }
-  try { await store.put(capKey(phone), String(cap + 1), { expirationTtl: 86400 }); } catch (e) {}
+  try { await store.put(ck, String(cap + 1), { expirationTtl: 86400 }); } catch (e) {}
   const d = await deps.deliver(phone, code, who.name || "", channel);
   if (!d || !d.ok) {
     // Soft-fail with 200 so the client can show Resend / SMS instead. Never a 502 (Cloudflare replaces it).
@@ -136,7 +161,9 @@ export async function phoneStart(who, body, deps) {
   return { ok: true, sent: true, channel: d.channel, fellBack: !!d.fellBack, ttl: TTL, to: maskPhone(phone) };
 }
 
-// deps: { store, onVerified(phone) }  -> claim + lifecycle stamp, best-effort
+// deps: { store, bind?(phone) -> { ok } | { ok:false, error }, onVerified(phone) }
+// bind runs after the code matches and BEFORE onVerified (claim + lifecycle stamp, best-effort):
+// a refusal there means the number was taken by another live account since phone-start.
 export async function phoneVerify(who, body, deps) {
   const store = deps.store;
   const code = String((body && body.code) || "").replace(/\D/g, "");
@@ -154,6 +181,11 @@ export async function phoneVerify(who, body, deps) {
     return { ok: false, error: "mismatch", triesLeft: MAX_TRIES - rec.tries, status: 400 };
   }
   try { await store.delete(key); } catch (e) {}
+  if (deps.bind) {
+    let b = null;
+    try { b = await deps.bind(rec.phone); } catch (e) { b = { ok: false, error: "store-failed" }; }
+    if (!b || !b.ok) return { ok: false, error: (b && b.error) || "phone-in-use", status: b && b.error === "store-failed" ? 500 : 409 };
+  }
   if (deps.onVerified) { try { await deps.onVerified(rec.phone); } catch (e) {} }
   return { ok: true, verified: true, to: maskPhone(rec.phone) };
 }

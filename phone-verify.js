@@ -210,6 +210,7 @@
     "too-soon": "A code was just sent. Wait a moment before asking again.",
     "daily-cap": "Too many codes for this number today. Try again tomorrow.",
     "no-channel": "We cannot send codes right now. Please try again later.",
+    "phone-in-use": "This number is already verified on another StewardMD account. Use a different number, or sign in to that account.",
     "send-failed": "The code could not be delivered. Try SMS instead.",
     "mismatch": "That code is not right.",
     "expired": "That code has expired. Send a new one.",

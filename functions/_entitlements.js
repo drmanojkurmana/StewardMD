@@ -249,7 +249,7 @@ export async function adminLookup(env, body, deps) {
   }));
   return { ok: true, uid: r.uid, smdId, email: user.email || null, name: user.displayName || rec.name || null,
     role: rec.role || null, effectiveTiers, overrides: pickOverrides(rec),
-    pro: claims.pro === true, proExp: claims.proExp || null, verified: claims.verified === true, regNo: claims.regNo || null,
+    pro: claims.pro === true, proExp: claims.proExp || null, verified: claims.verified === true, traineeVerified: claims.traineeVerified === true, regNo: claims.regNo || null,
     aiCapTokens: rec.aiCapTokens != null ? rec.aiCapTokens : null,
     aiGrant: rec.aiGrantMonth ? { month: rec.aiGrantMonth, tokens: rec.aiGrantTokens } : null,
     premiumModels: rec.premiumModels || {},

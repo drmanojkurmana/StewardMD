@@ -162,3 +162,40 @@ test("every message is plain and carries no em-dash (app-facing text rule)", () 
     assert.ok(!/\b(402|needsPro|entitlement|claim)\b/.test(e.body), `jargon leaked: ${e.body}`);
   }
 });
+
+/* D8 (owner, 2026-09-26): the Free AI allowance unlocks with a verified MOBILE NUMBER. The server's
+ * quota refusal says reason "phone-unverified"; the fix is the phone sheet, never a price. */
+test("a Free account without a verified mobile is sent to the phone sheet, not a price", () => {
+  const { N } = load({ pro: false });
+  const srv = { error: "quota", needsPro: true, reason: "phone-unverified" };
+  const e = N.explain("maik", srv);
+  assert.equal(e.kind, "phone");
+  assert.equal(e.act, "phone");
+  assert.match(e.cta, /mobile/i);
+  assert.match(e.body, /mobile number/i);
+  assert.match(e.body, /not a payment/i);
+  assert.ok(!/—/.test(e.title + e.body + e.cta), "no em-dash");
+  assert.ok(!/subscribe|price|plan/i.test(e.cta), `CTA must not sell: ${e.cta}`);
+  assert.equal(N.explain("maik", Object.assign({ message: "SERVER COPY" }, srv)).body, "SERVER COPY");
+});
+
+test("the phone button opens SMD_PHONE_VERIFY, and falls back to a toast without it", () => {
+  function withClicks(extra) {
+    const clicks = [];
+    const acted = [];
+    const win = Object.assign({ SMD_PRO: { isProSync: () => false, proState: () => null, openPaywall: () => acted.push(["paywall"]) }, toast: (m) => acted.push(["toast", m]) }, extra(acted));
+    const el = () => { const o = { style: {}, className: "", setAttribute() {}, appendChild() {}, focus() {}, addEventListener(t, fn) { if (t === "click" && o.className === "pn-go") clicks.push(fn); } }; return o; };
+    const doc = { getElementById: () => null, createElement: el, head: { appendChild() {} }, body: { appendChild() {} }, documentElement: { appendChild() {} } };
+    new Function("window", "document", SRC)(win, doc);
+    return { N: win.SMD_PRO_NOTICE, clicks, acted };
+  }
+  const a = withClicks((acted) => ({ SMD_PHONE_VERIFY: { open: () => acted.push(["phone"]) } }));
+  assert.equal(a.N.handle({ error: "quota", needsPro: true, reason: "phone-unverified" }, "maik"), true);
+  a.clicks[0]();
+  assert.deepEqual(a.acted, [["phone"]]);
+  const b = withClicks(() => ({}));
+  b.N.show("maik", { needsPro: true, reason: "phone-unverified" });
+  b.clicks[0]();
+  assert.equal(b.acted[0][0], "toast"); assert.match(b.acted[0][1], /mobile number/);
+  assert.ok(!/—/.test(b.acted[0][1]));
+});

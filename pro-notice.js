@@ -13,6 +13,8 @@
  *                            would have given them free.
  *   review pending        -> nothing to do but wait. Never show them a price.
  *   free week expired     -> now a real paywall is the honest answer.
+ *   mobile not verified   -> (D8, 2026-09-26) the Free AI allowance unlocks with a verified mobile
+ *                            number. The fix is the phone sheet (SMD_PHONE_VERIFY), not a price.
  *   over quota but IS Pro -> not a Pro problem at all; a limit that resets.
  *
  * Reads the reason from the SERVER (the /api/billing/status payload cached by account.js, or the
@@ -20,7 +22,7 @@
  * and the paywall, which is the old behaviour.
  *
  * API
- *   reason()                  -> "pro" | "unverified" | "pending" | "expired" | "none" | "unknown"
+ *   reason()                  -> "pro" | "unverified" | "phone" | "pending" | "expired" | "none" | "unknown"
  *   explain(feature, srv)     -> { title, body, cta, act }   (pure; testable)
  *   show(feature, srv)        -> render the dialog
  *   handle(payload, feature)  -> true if this WAS a Pro refusal and it has been explained
@@ -57,11 +59,13 @@
   }
 
   /* Normalise the server's vocabulary into the four cases the UI actually branches on.
-   * Server sends: reason "unverified" | "verified-week-expired" | "none", plus verified/pendingReview. */
+   * Server sends: reason "unverified" | "phone-unverified" | "verified-week-expired" | "none", plus
+   * verified/pendingReview. */
   function normalise(srv) {
     var s = srv || {};
     if (s.pendingReview) return "pending";
     var r = s.reason;
+    if (r === "phone-unverified") return "phone";
     if (r === "unverified") return "unverified";
     if (r === "verified-week-expired") return "expired";
     if (r === "none") return "none";
@@ -105,6 +109,14 @@
         title: name + " is waiting on your verification",
         body: "You have sent us your proof of registration and our team is reviewing it. You keep full access while we do. We will email you as soon as it is approved.",
         cta: "Got it", act: "dismiss"
+      };
+    }
+    if (r === "phone") {
+      return {
+        kind: r,
+        title: name + " needs a verified mobile number",
+        body: serverMsg || "The free monthly AI allowance unlocks once your mobile number is verified. It takes a minute with a code on WhatsApp or SMS. This is not a payment.",
+        cta: "Verify my mobile number", act: "phone"
       };
     }
     if (r === "unverified") {
@@ -152,6 +164,11 @@
     if (act === "verify" || act === "account") {
       try { if (window.SMD_VERIFY && window.SMD_VERIFY.openPanel) { window.SMD_VERIFY.openPanel(); return; } } catch (e) {}
       toast("Open Settings, then Account and Verification.");
+      return;
+    }
+    if (act === "phone") {
+      try { if (window.SMD_PHONE_VERIFY && window.SMD_PHONE_VERIFY.open) { window.SMD_PHONE_VERIFY.open(); return; } } catch (e) {}
+      toast("Open Settings, then Account, to verify your mobile number.");
       return;
     }
     if (act === "paywall") {
