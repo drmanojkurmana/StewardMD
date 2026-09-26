@@ -69,7 +69,8 @@ function s3Store(cfg, fetchImpl) {
     const extra = body && contentType ? { "content-type": contentType } : {};
     const headers = await signV4({ method, host: base.host, path, headers: extra, payloadHash, amzDate: amzNow(), region, service: "s3", accessKeyId: cfg.accessKeyId, secretAccessKey: cfg.secretAccessKey });
     delete headers.host;   // fetch sets it; it was only needed for the signature
-    return f(base.origin + path, { method, headers, body: body || undefined });
+    // SEC-14: never follow a redirect. The endpoint was checked; wherever it points next was not. A 3xx is a failure.
+    return f(base.origin + path, { method, headers, body: body || undefined, redirect: "manual" });
   }
   return {
     kind: "s3",
