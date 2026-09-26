@@ -573,12 +573,15 @@ class D1Repository {
       const held = await this._identifierOwners(tenantId, wanted);
       const now = new Date().toISOString();
       for (const w of wanted) {
+        // A key an earlier record in this call claims is held too: refused here as an identity conflict
+        // rather than as a raw primary-key failure of the batch (the memory double does the same).
         const owner = held.get(`${w.systemKey}|${w.valueNorm}`);
         if (owner && owner !== w.patientId) {
           throw new IdentityConflictError(`${w.systemKey} ${w.valueNorm} already identifies ${owner}`,
             { systemKey: w.systemKey, valueNorm: w.valueNorm, heldBy: owner, offeredFor: w.patientId });
         }
         if (owner) continue;                                   // already ours, nothing to write
+        held.set(`${w.systemKey}|${w.valueNorm}`, w.patientId);
         stmts.push(this.db
           .prepare("INSERT INTO wardsynq_patient_identifier (tenant_id,system_key,value_norm,patient_id,first_seen) VALUES (?,?,?,?,?)")
           .bind(tenantId, w.systemKey, w.valueNorm, w.patientId, now));
@@ -669,17 +672,22 @@ class D1Repository {
    * OPTIONAL, not in PORT_METHODS: the security review reads the audit trail back. A deployment
    * without it reports the review as unavailable rather than clean. Newest rows win the limit, so a
    * truncated read loses the oldest baseline, never the period under review.
+   *
+   * Every row WardSynQ writes: connector "wardsynq" and its sub-connectors ("wardsynq-offline" for an
+   * offline discard, "wardsynq-hr", ...). Matching only "wardsynq" hid offline decisions from the trail
+   * and the security review on D1 while the memory double showed them (audit DATA-10). Rows of the
+   * Connect product that share this table ("connect", "ghis", "abdm") stay out.
    * @returns {Promise<{events: object[], oldestAt: string|null, truncated: boolean}>}
    */
   async auditTrail(tenantId, opts) {
     const since = String((opts && opts.since) || "");
     const limit = Math.max(1, Math.min(AUDIT_READ_MAX, Number(opts && opts.limit) || AUDIT_READ_MAX));
     const r = await this.db
-      .prepare("SELECT id, ts, actor, action, resource_counts, scope, patient_ref_hash, outcome FROM connect_audit_event WHERE tenant_id=? AND connector_id='wardsynq' AND ts>=? ORDER BY ts DESC LIMIT ?")
+      .prepare("SELECT id, ts, actor, action, resource_counts, scope, patient_ref_hash, outcome FROM connect_audit_event WHERE tenant_id=? AND connector_id LIKE 'wardsynq%' AND ts>=? ORDER BY ts DESC LIMIT ?")
       .bind(tenantId, since, limit + 1).all();
     const rows = r.results || [];
     const o = await this.db
-      .prepare("SELECT MIN(ts) AS oldest FROM connect_audit_event WHERE tenant_id=? AND connector_id='wardsynq'")
+      .prepare("SELECT MIN(ts) AS oldest FROM connect_audit_event WHERE tenant_id=? AND connector_id LIKE 'wardsynq%'")
       .bind(tenantId).first();
     const json = (v) => { try { return v == null ? null : JSON.parse(v); } catch { return null; } };
     return {
