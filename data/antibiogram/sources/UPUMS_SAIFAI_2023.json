@@ -1,0 +1,737 @@
+{
+ "id": "UPUMS_SAIFAI_2023",
+ "kind": "institution",
+ "inst": "UPUMS_SAIFAI",
+ "institution": "Uttar Pradesh University of Medical Sciences, Saifai (Department of Microbiology)",
+ "short": "UPUMS Saifai",
+ "city": "Saifai",
+ "state": "Uttar Pradesh",
+ "region": "north",
+ "sector": "government",
+ "year": 2023,
+ "period": "Not stated in the document; the UPUMS Microbiology notice list titles it 'Antibiogram 2023' (notice dated 1 April 2023; PDF created 2 November 2023, uploaded April 2024)",
+ "published": "2023-11",
+ "url": "https://api.upums.ac.in/pdfs/doc-1712385291529-309714886.pdf",
+ "page": "https://www.upums.ac.in/faculty-of-medicine/Microbiology",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Microbiology, Uttar Pradesh University of Medical Sciences. Antibiogram 2023 (compilers Dr Keshav et al.; approver Dr R K Verma). Saifai, Etawah: UPUMS; 2023.",
+ "reporting": "Percent susceptible shown as bar charts with printed data labels, by specimen (urine, blood, sputum, pus and exudates, body fluids) and organism or organism group, hospital-wide; no isolate numbers per chart. Organism distribution charts by OPD, ward and ICU per specimen (data labels on the urine and body fluid charts only). AST method and breakpoint standard not stated.",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Every recorded value is a printed data label: read from the pages rendered at scale 2 (charts zoomed at scale 3 to 3.5 where needed) and compared with the data labels in the PDF text layer in left-to-right order (all 10 charts agree; the drug names on the x axes are not in the text layer and were read from the images, and the number of drug labels matched the number of bars in every chart). Organism counts on p3 and p19 were read from the zoomed charts; p19 labels missing from the text layer were read from the image."
+ },
+ "notes": "Earlier UPUMS Saifai hospital antibiogram (23 pages, all charts). The document states no data period; the year is taken from the institution's own title for it on the Microbiology notice list ('Antibiogram 2023'), and no end month is given. Per specimen it gives samples received from ICU, OPD and wards (urine 586/471/507; blood 1839/9/426; sputum 164/90/325; pus 59/127/165; body fluids 1355 by fluid type), an organism distribution chart by setting, and percent-susceptible bar charts that are hospital-wide. Only charts for a single organism group with printed data labels are recorded (10 charts): urine Klebsiella; blood, pus and body fluid Acinetobacter, Citrobacter and Pseudomonas. Charts that pool different genera (E. coli with Proteus, Klebsiella with Enterobacter, Enterococcus with CoNS, Acinetobacter with Pseudomonas, and mixed Gram-positive groups) are left out because no organism key represents them and their members differ in intrinsic resistance (for example, the pus E. coli and Proteus chart prints polymyxin B 84.6%, which the Proteus isolates alone could explain). The six sputum charts have no data labels and are left out. Organism counts are recorded from the labelled urine (p3) and body fluid (p19) distribution charts only; the blood, sputum and pus distribution charts have no labels, so the counts cover only part of the isolates. Several printed figures are implausible for the organism (for example ampicillin 35% for blood Citrobacter and 85.7% for blood Klebsiella with Enterobacter); they are recorded as printed where kept, and the build marks intrinsic-resistance pairs. Data quality of this edition is lower than the 2024 edition (UPUMS_SAIFAI_2024), which supersedes it. Page numbers are PDF pages.",
+ "issues": [
+  "Second reader 2026-09-26: all 97 cells (10 charts) and all 45 organism counts re-read against the page images (scale 2.2, charts zoomed at scale 4), each value read before comparing; 0 transcription errors, nothing corrected.",
+  "The 6 intrinsic cells (Citrobacter ampicillin 35% blood and 12.5% pus; Acinetobacter pus ampicillin 35.6% and amoxicillin-clavulanate 23.6%, body fluid ampicillin 33.3% and chloramphenicol 80%) and the caution cell (body fluid Citrobacter chart with two bars labelled Amikacin, 66.6% and 67%) are printed as recorded; the body fluid Staphylococcus counts (0, 2, 6) are rightly left out."
+ ],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": null,
+   "page": 4,
+   "table": "Urine: Antibiotic sensitivity percentages, Klebsiella species",
+   "s": {
+    "norfloxacin": 55.1,
+    "nitrofurantoin": 15.2,
+    "nalidixic_acid": 24,
+    "amoxiclav": 38.3,
+    "cefoperazone_sulbactam": 23.5,
+    "piptazo": 48.7,
+    "amikacin": 66.7,
+    "ceftriaxone": 31.5,
+    "cefixime": 36.5,
+    "tetracycline": 25,
+    "gentamicin": 40,
+    "imipenem": 55,
+    "colistin": 96
+   },
+   "printed": {
+    "norfloxacin": "Norfloxacin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "nalidixic_acid": "Nalidixic Acid",
+    "amoxiclav": "Amoxyclav",
+    "cefoperazone_sulbactam": "Cefoperazone sulbactum",
+    "piptazo": "Piperacillin tazobactum",
+    "amikacin": "Amikacin",
+    "ceftriaxone": "Ceftriaxone",
+    "cefixime": "cefixime",
+    "tetracycline": "Tetracycline",
+    "gentamicin": "Gentamicin",
+    "imipenem": "Imipenem",
+    "colistin": "Colistin"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Blood: Antibiotic sensitivity percentages, Acinetobacter species",
+   "s": {
+    "amikacin": 44,
+    "cefixime": 45,
+    "cefuroxime": 50,
+    "ciprofloxacin": 46,
+    "levofloxacin": 52,
+    "piptazo": 60,
+    "tobramycin": 38,
+    "cefoperazone_sulbactam": 40,
+    "tetracycline": 33,
+    "polymyxin_b": 99,
+    "colistin": 100
+   },
+   "printed": {
+    "amikacin": "amikacin",
+    "cefixime": "cefixime",
+    "cefuroxime": "cefuroxime",
+    "ciprofloxacin": "ciprofloxacin",
+    "levofloxacin": "levofloxacin",
+    "piptazo": "piperacillin tazobactum",
+    "tobramycin": "tobramycin",
+    "cefoperazone_sulbactam": "cefoperazone sulbactum",
+    "tetracycline": "tetracycline",
+    "polymyxin_b": "Polymyxin B",
+    "colistin": "colistin"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter species",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Blood: Antibiotic sensitivity percentages, Citrobacter species",
+   "s": {
+    "cefuroxime": 40,
+    "ceftriaxone": 63.6,
+    "cefixime": 38.5,
+    "amikacin": 83.3,
+    "ampicillin": 35,
+    "tetracycline": 36.8,
+    "cefoperazone_sulbactam": 45.4,
+    "ciprofloxacin": 57.1,
+    "gentamicin": 66.6,
+    "colistin": 100,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "cefuroxime": "cefuroxime",
+    "ceftriaxone": "ceftriaxone",
+    "cefixime": "cefixime",
+    "amikacin": "amikacin",
+    "ampicillin": "ampicillin",
+    "tetracycline": "tetracycline",
+    "cefoperazone_sulbactam": "cefoperazone sulbactum",
+    "ciprofloxacin": "ciprofloxacin",
+    "gentamicin": "gentamicin",
+    "colistin": "Colistin",
+    "polymyxin_b": "Polymyxin B"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Blood: Antibiotic sensitivity percentages, Pseudomonas species",
+   "s": {
+    "amikacin": 55.6,
+    "gentamicin": 66,
+    "ciprofloxacin": 42.8,
+    "levofloxacin": 56,
+    "piptazo": 67,
+    "tobramycin": 81.8,
+    "cefoperazone_sulbactam": 57.3,
+    "colistin": 100,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "levofloxacin": "Levofloxacin",
+    "piptazo": "Piperacillin tazobactum",
+    "tobramycin": "Tobramycin",
+    "cefoperazone_sulbactam": "cefoeprazone sulbactum",
+    "colistin": "colistin",
+    "polymyxin_b": "polymyxin B"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number. Recorded under P. aeruginosa.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter species",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Pus and other exudative samples: Antibiotic sensitivity percentages, Citrobacter species",
+   "s": {
+    "ampicillin": 12.5,
+    "amoxiclav": 25.6,
+    "cefuroxime": 63.3,
+    "ceftriaxone": 37.2,
+    "cefoperazone_sulbactam": 31.1,
+    "gentamicin": 78.8,
+    "amikacin": 55.2,
+    "chloramphenicol": 63.6,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "amoxiclav": "Amoxyclav",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefoperazone_sulbactam": "Cefoperazone sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "chloramphenicol": "Chloramphenicol",
+    "polymyxin_b": "Polymyxin B"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number.",
+   "specimen_as_printed": "PUS and other Exudative Samples"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": null,
+   "page": 17,
+   "table": "Pus and other exudative samples: Antibiotic sensitivity percentages, Non fermenters (Pseudomonas species)",
+   "s": {
+    "cefoperazone_sulbactam": 53.3,
+    "gentamicin": 52.2,
+    "amikacin": 57.1,
+    "aztreonam": 41.4,
+    "ceftazidime": 66.6,
+    "levofloxacin": 89.9,
+    "polymyxin_b": 100,
+    "colistin": 100
+   },
+   "printed": {
+    "cefoperazone_sulbactam": "Cefoperazone sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "aztreonam": "Aztreonam",
+    "ceftazidime": "Ceftazidime",
+    "levofloxacin": "Levofloxacin",
+    "polymyxin_b": "Polymyxin B",
+    "colistin": "Colistin"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number. Printed as \"Non fermenters (Pseudomonas species)\". Recorded under P. aeruginosa.",
+   "specimen_as_printed": "PUS and other Exudative Samples"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": null,
+   "page": 17,
+   "table": "Pus and other exudative samples: Antibiotic sensitivity percentages, Acinetobacter species",
+   "s": {
+    "ampicillin": 35.6,
+    "amoxiclav": 23.6,
+    "cefixime": 60,
+    "ceftriaxone": 43.3,
+    "cefoperazone_sulbactam": 47.3,
+    "amikacin": 57.1,
+    "tobramycin": 58.3,
+    "colistin": 98
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "amoxiclav": "Amoxyclav",
+    "cefixime": "Cefexime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefoperazone_sulbactam": "Cefoperazone sulbactum",
+    "amikacin": "Amikacin",
+    "tobramycin": "Tobramycin",
+    "colistin": "Colistin"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number.",
+   "specimen_as_printed": "PUS and other Exudative Samples"
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Body fluid: Antibiotic sensitivity percentages, Acinetobacter species",
+   "s": {
+    "ampicillin": 33.3,
+    "ceftriaxone": 35.3,
+    "cefixime": 28.5,
+    "cefoperazone_sulbactam": 55,
+    "tetracycline": 37.5,
+    "amikacin": 52,
+    "tobramycin": 78.8,
+    "chloramphenicol": 80
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "cefixime": "Cefexime",
+    "cefoperazone_sulbactam": "Cefoperazone sulbactum",
+    "tetracycline": "Tetracycline",
+    "amikacin": "Amikacin",
+    "tobramycin": "Tobramycin",
+    "chloramphenicol": "Chloramphenicol"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number. Body fluids here include CSF, ascitic, pleural, aspirated, pancreatic and bile, pericardial, peritoneal, synovial, gastric aspirate, BAL and other fluids (sample list on p18).",
+   "specimen_as_printed": "Body fluid"
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Citrobacter species",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Body fluid: Antibiotic sensitivity percentages, Citrobacter species",
+   "s": {
+    "cefixime": 66.6,
+    "ceftriaxone": 28.5,
+    "cefoperazone_sulbactam": 28.5,
+    "piptazo": 43.3,
+    "amikacin": 66.6,
+    "tetracycline": 25.6,
+    "doxycycline": 60.3,
+    "gentamicin": 45.2,
+    "colistin": 100
+   },
+   "printed": {
+    "cefixime": "Cefexime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefoperazone_sulbactam": "Cefoperazone sulbactum",
+    "piptazo": "Piperacillin tazobactum",
+    "amikacin": "Amikacin",
+    "tetracycline": "Tetracycline",
+    "doxycycline": "Doxycycline",
+    "gentamicin": "Gentamicin",
+    "colistin": "Colistin"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number. Two bars are labelled Amikacin (66.6% and 67%); one of them is probably a mislabelled drug. The first is recorded, with a caution. Body fluids here include CSF, ascitic, pleural, aspirated, pancreatic and bile, pericardial, peritoneal, synovial, gastric aspirate, BAL and other fluids (sample list on p18).",
+   "specimen_as_printed": "Body fluid",
+   "conflict": {
+    "amikacin": "the chart has two bars labelled Amikacin, printed 66.6% and 67%; the first is recorded"
+   }
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": null,
+   "page": 22,
+   "table": "Body fluid: Antibiotic sensitivity percentages, Pseudomonas Species",
+   "s": {
+    "ceftazidime": 60.3,
+    "cefepime": 55.5,
+    "piptazo": 70.3,
+    "cefoperazone_sulbactam": 50,
+    "aztreonam": 40.3,
+    "levofloxacin": 58.6,
+    "gentamicin": 66.6,
+    "amikacin": 70.2,
+    "tobramycin": 83.3,
+    "imipenem": 63.5,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "piptazo": "Piperacillin tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone sulbactum",
+    "aztreonam": "Aztreonam",
+    "levofloxacin": "Levofloxacin",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "tobramycin": "Tobramycin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin B"
+   },
+   "note": "Hospital-wide bar chart with printed data labels (read from the labels, not from bar heights); the charts are not split by OPD, ward or ICU and give no isolate number. Printed as \"Pseudomonas Species\". Recorded under P. aeruginosa. Body fluids here include CSF, ascitic, pleural, aspirated, pancreatic and bile, pericardial, peritoneal, synovial, gastric aspirate, BAL and other fluids (sample list on p18).",
+   "specimen_as_printed": "Body fluid"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "E.coli",
+   "n": 56,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "E.coli",
+   "n": 42,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "E.coli",
+   "n": 23,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella",
+   "n": 12,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella",
+   "n": 14,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella",
+   "n": 11,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Citrobacter",
+   "n": 14,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Citrobacter",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Citrobacter",
+   "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter",
+   "n": 0,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus",
+   "n": 0,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus",
+   "n": 22,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus",
+   "n": 38,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus",
+   "n": 27,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "CONS",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "CONS",
+   "n": 0,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "CONS",
+   "n": 0,
+   "page": 3
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Acinetobacter",
+   "n": 0,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Acinetobacter",
+   "n": 4,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "n": 10,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Citrobacter",
+   "n": 2,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Citrobacter",
+   "n": 13,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Citrobacter",
+   "n": 31,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "E.coli",
+   "n": 3,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "E.coli",
+   "n": 11,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "E.coli",
+   "n": 4,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterococcus",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Klebsiella",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Klebsiella",
+   "n": 6,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Klebsiella",
+   "n": 22,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Pseudomonas",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "n": 18,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "n": 103,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Proteus",
+   "n": 0,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Proteus",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Proteus",
+   "n": 0,
+   "page": 19
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Urine 'E.coli And Proteus species' (p4), blood 'E.coli and Proteus species' (p8), pus 'E.coli and Proteus species' (p16), body fluid 'E.coli and Proteus species' (p21)",
+   "why": "one chart pools E. coli with Proteus (intrinsically resistant to colistin, polymyxin B, tetracycline and nitrofurantoin); no canonical organism key for the group, and labelling it E. coli would misstate those drugs"
+  },
+  {
+   "what": "Blood, pus and body fluid 'Klebsiella and Enterobacter species' charts (pp8, 15, 21)",
+   "why": "pools Klebsiella with Enterobacter (AmpC: intrinsically resistant to amoxicillin-clavulanate, cefuroxime and first-generation cephalosporins); no canonical key for the group"
+  },
+  {
+   "what": "Urine 'Enterococcus Species and CONS' (p5)",
+   "why": "pools enterococci with coagulase-negative staphylococci; no canonical key (it also prints cefixime, amikacin and nalidixic acid percentages, which do not apply to enterococci)"
+  },
+  {
+   "what": "Urine 'NON FERMENTERS (Acinetobacter species and Pseudomonas species)' (p5)",
+   "why": "pools Acinetobacter and Pseudomonas (6 and 6 urine isolates on the p3 chart); no canonical key"
+  },
+  {
+   "what": "Gram-positive charts: blood 'Staphylococcus species, Enterococcus and Streptococcus' (p9), pus 'Staphylococcus species' (p15), body fluid 'Staphylococcus species and Enterococcus species' (p22)",
+   "why": "pooled over S. aureus, CoNS and (except pus) enterococci and streptococci; no canonical key and no MRSA split"
+  },
+  {
+   "what": "Sputum charts: E. coli, Klebsiella pneumoniae, Citrobacter spp., Acinetobacter spp., Pseudomonas aeruginosa, Staphylococcus aureus (pp11 to 13)",
+   "why": "no printed data labels; values could only be estimated from bar heights"
+  },
+  {
+   "what": "Organism distribution charts for blood (p6, stacked), sputum (p10) and pus (p14)",
+   "why": "no printed data labels; counts could only be estimated from bar heights"
+  },
+  {
+   "what": "Body fluid 'Staphylococcus' counts (p19: OPD 0, ward 2, ICU 6)",
+   "org": "Staphylococcus",
+   "why": "genus not split into S. aureus and CoNS; no canonical key"
+  },
+  {
+   "what": "Body fluid Citrobacter chart (p20): second bar labelled Amikacin, 67%",
+   "org": "Citrobacter species",
+   "drug": "Amikacin",
+   "value": "67",
+   "why": "duplicate drug label in one chart; the first Amikacin bar (66.6%) is recorded with a conflict entry"
+  }
+ ]
+}

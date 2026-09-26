@@ -222,6 +222,111 @@
     return out;
   }
 
+  /* NO TALK ABOUT THE REFERENCE MATERIAL (owner, 2026-09-26: "why is agent tell the passage yu sent is
+   * irrelavant?"). The doctor never sees the retrieved passages, so an answer never mentions them.
+   * ES5 port of functions/_maik_metatalk.js, MaiK Cloud's safety net: a lead-in ("Based on the text
+   * provided, X") is cut and X kept; a sentence ABOUT the material is dropped; clinical sentences that
+   * only share a word ("passage of meconium", "in the context of sepsis") stay byte for byte.
+   * answer() runs it AFTER the NO_COVERAGE check, which must still see a "not covered" verdict, and
+   * the live paint runs it on settled lines. test/maik-lite-metatalk.test.mjs pins it to the Cloud file.
+   * ponytail: the patterns are copied, not shared (the client is ES5, the server an ES module); the
+   * parity test catches drift. Move both into one kb/ai UMD file if a third caller appears. */
+  var METATALK = (function () {
+    function RX(s) { return new RegExp(s, "i"); }
+    // What the doctor never sends to MaiK Cloud: passages, excerpts, sources, reference material.
+    var PASSAGE = "(?:passages?|excerpts?|snippets?|sources|references|reference\\s+(?:materials?|notes|texts?))";
+    // What a doctor's own question can also be called: meta only with a marker AND a relevance verdict.
+    // ("evidence" and "data" are not here: "the evidence given is not applicable to children" is clinical.)
+    var WEAK = "(?:texts?|context|information|details|notes|documents?|content|knowledge|materials?)";
+    var PROVIDER = "(?:provided|supplied|retrieved|accompanying|included|attached|shared|sent)";
+    var YOU_SENT = "(?:that\\s+)?(?:you|you've|you\\s+have)\\s+(?:sent|provided|shared|supplied|gave|given|included|pasted|attached)";
+    var REL = "(?:(?:is|are|was|were|seems?|appears?)\\s+(?:not\\s+|n't\\s+)?(?:directly\\s+|particularly\\s+|clinically\\s+|entirely\\s+|really\\s+)?(?:ir)?relevant|(?:is|are|was|were)\\s+(?:un|not\\s+)related|not\\s+(?:directly\\s+)?(?:applicable|pertinent)|off[-\\s]topic|focus(?:es|ed)?\\s+(?:on|primarily|mainly|solely|only)|(?:is|are|was|were)\\s+(?:only\\s+|mainly\\s+)?(?:about|limited\\s+to|silent\\s+on)|pertains?\\s+(?:only\\s+)?to|(?:does|do|did)\\s*(?:not|n't)\\s+(?:directly\\s+)?(?:address|answer|cover)\\s+(?:your|the|this)\\s+(?:question|query))";
+    var COVER = "(?:(?:does|do|did)\\s*(?:not|n't)\\s+(?:mention|cover|address|discuss|contain|include|describe|specify|provide|say|state|answer|give)|lacks?|(?:has|have)\\s+no\\b)";
+    var DET = "(?:the|this|that|these|those)";
+
+    var ABOUT_MATERIAL = [
+      // "the provided sources", "the retrieved passages", "the accompanying reference material"
+      RX("\\b" + DET + "\\s+" + PROVIDER + "\\s+(?:stewardmd\\s+)?" + PASSAGE + "\\b"),
+      // "the passage you sent", "sources that you provided", "you sent me a passage"
+      RX("\\b" + PASSAGE + "\\s+" + YOU_SENT + "\\b"),
+      RX("\\b(?:you|you've|you\\s+have)\\s+(?:sent|provided|shared|supplied|given|gave|included|pasted)\\s+(?:me\\s+)?(?:a|an|the|some|these|this|those)\\s+(?:passages?|excerpts?|snippets?|sources|references|reference\\s+materials?)\\b"),
+      // never clinical: excerpts, snippets, "retrieved <anything>", reference/private notes, "the prompt"
+      RX("\\b(?:excerpts?|snippets?|text\\s+chunks?|retrieved\\s+(?:chunks?|passages?|texts?|knowledge|information|materials?|notes|sources|content|evidence|context|data|documents?)|reference\\s+notes|private\\s+notes|internal\\s+notes|my\\s+(?:notes|reference\\s+(?:notes|materials?))|stewardmd\\s+(?:knowledge(?!\\s+base)|notes|materials?|content|texts?)|in\\s+(?:the|this|your)\\s+prompt)\\b"),
+      // a verdict on the material: "the knowledge base does not cover", "the sources do not mention"
+      RX("\\b(?:knowledge\\s+base|reference\\s+(?:materials?|texts?)|(?:the|these|those)\\s+(?:passages?|sources|references))\\s+(?:" + REL + "|" + COVER + ")"),
+      RX("\\b(?:the|these|those|my)\\s+notes\\s+" + REL),   // not COVER: "the notes do not mention allergies" can be the doctor's own notes
+      // a doctor-nameable word only with a marker AND a relevance verdict: "the provided context focuses on"
+      RX("\\b" + DET + "\\s+(?:" + PROVIDER + "|given)\\s+(?:stewardmd\\s+)?" + WEAK + "\\b[^.!?\\n]{0,60}?\\b" + REL),
+      RX("\\b" + WEAK + "\\s+(?:that\\s+)?(?:(?:was|were)\\s+)?(?:you\\s+)?(?:provided|supplied|retrieved|shared|sent|given)\\b[^.!?\\n]{0,60}?\\b" + REL),
+      // "not relevant to your question": no clinical answer says that about its own content
+      RX("\\b(?:not\\s+(?:directly\\s+|particularly\\s+)?(?:relevant|applicable|pertinent|related)|irrelevant|unrelated|off[-\\s]topic)\\s+to\\s+(?:your|the|this)\\s+(?:question|query|request)\\b"),
+    ];
+    // A sentence right after a dropped one that only points back at it.
+    var POINTS_BACK = /^\W*(?:this|that|it|these|those|they|such\s+\w+)\b[^.!?]{0,120}?\b(?:(?:ir)?relevant|applicable|pertinent|(?:un)?related|helpful|useful|off[-\s]topic)\b/i;
+
+    /* Cutting a lead-in / trailing attribution / reporting frame keeps the content, so a false match only
+     * costs a few words of style. The phrase must still name the material ("the text provided", "the
+     * provided context", "the sources"): "Based on the evidence, X" and "In this context, X" are left. */
+    var NP = "(?:(?:the|this|these|those|my|our|your)\\s+)?(?:(?:" + PROVIDER + "|given|above)\\s+)?(?:stewardmd\\s+)?(?:" + PASSAGE + "|" + WEAK + "|data|evidence|knowledge\\s+base)(?:\\s+(?:(?:that\\s+)?(?:(?:was|were)\\s+)?(?:you\\s+)?(?:provided|supplied|retrieved|shared|sent|given)|above))*";
+    var MARKER = RX("\\b(?:provided|supplied|retrieved|accompanying|included|attached|shared|sent|given|above)\\b|\\b(?:passages?|excerpts?|snippets?|sources|references|reference\\s+\\w+|knowledge\\s+base|stewardmd)\\b");
+    var LEAD = RX("^((?:\\*\\*)?)\\s*(?:(?:based|drawing)\\s+(?:on|upon)|according\\s+to|as\\s+(?:per|(?:stated|noted|described|mentioned|outlined|shown|given|indicated|detailed|summari[sz]ed)\\s+in)|per|going\\s+by|from|in)\\s+(" + NP + ")\\s*,\\s*");
+    var TRAIL = RX("\\s*,?\\s*\\(?\\s*(?:as\\s+(?:per|(?:stated|noted|described|mentioned|outlined|indicated)\\s+in)|according\\s+to|based\\s+on|per)\\s+(" + NP + ")\\s*\\)?(?=\\s*(?:\\[\\d+(?:\\s*,\\s*\\d+)*\\]\\s*)*[.!?]?\\s*(?:\\*\\*)?$)");
+    var REPORT = RX("^((?:\\*\\*)?)\\s*(" + NP + ")\\s+(?:also\\s+|clearly\\s+|specifically\\s+)?(?:states|says|notes|mentions|indicates|suggests|explains|confirms|emphasi[sz]es|highlights|specifies|recommends|advises|describes)\\s+that\\s+");
+
+    function cap(s) { return s.replace(/^([^A-Za-z0-9]*)([a-z])/, function (m, p, c) { return p + c.toUpperCase(); }); }
+
+    function rewrite(sent) {
+      var s = sent, m;
+      if ((m = LEAD.exec(s)) && MARKER.test(m[2])) s = m[1] + cap(s.slice(m[0].length));
+      if ((m = REPORT.exec(s)) && MARKER.test(m[2])) s = m[1] + cap(s.slice(m[0].length));
+      if ((m = TRAIL.exec(s)) && MARKER.test(m[1])) s = s.slice(0, m.index) + s.slice(m.index + m[0].length);
+      return s;
+    }
+    function aboutMaterial(sent) { return ABOUT_MATERIAL.some(function (r) { return r.test(sent); }); }
+
+    /* One line of an answer -> the same line without meta-talk ("" when nothing is left). Structure lines
+     * (table rows, headings, fences, the @@ markers) come back untouched, and so does an unchanged line. */
+    function scrubLine(line) {
+      if (!line.trim() || /^\s*(?:\||#|```)/.test(line) || line.indexOf("@@") >= 0) return line;
+      var pm = /^(\s*(?:[-*•]|\d+[.)])\s+)/.exec(line);
+      var prefix = pm ? pm[1] : "", body = line.slice(prefix.length);
+      var out = [];
+      var changed = false, dropped = false, carry = "";
+      // Same sentence boundaries as the server's lookbehind split, without the lookbehind: an older iOS
+      // WebView rejects a lookbehind when it PARSES this file, which would take the whole engine down.
+      var parts = body.replace(/([.!?][)"'\]]*)\s+/g, "$1\u0001").split("\u0001");
+      for (var pi = 0; pi < parts.length; pi++) {
+        var p0 = parts[pi], p = rewrite(p0);
+        // A citation leading into this piece belonged to the sentence just dropped ("... gout. [2] Treat").
+        if (dropped) { var lead = /^(?:\s*\[\d+(?:\s*,\s*\d+)*\])+\s*/.exec(p); if (lead) p = p.slice(lead[0].length); }
+        if (p !== p0) changed = true;
+        // A piece with no words is dropped only when the scrub emptied it or it trails a dropped sentence:
+        // a citation after a KEPT sentence ("... first line for hypertension. [1]") is its provenance.
+        var bare = !p.replace(/\*\*|\[\d+(?:\s*,\s*\d+)*\]|[\s.,;:]/g, "");
+        if (aboutMaterial(p) || (dropped && POINTS_BACK.test(p)) || (bare && (dropped || p !== p0))) {
+          changed = true; dropped = true;
+          // keep **bold** balanced: a dropped piece that opened bold hands it on, one that closed it hands it back
+          if ((p.match(/\*\*/g) || []).length % 2) { if (/^\s*\*\*/.test(p)) carry = "**"; else if (out.length) out[out.length - 1] += "**"; }
+          continue;
+        }
+        dropped = false;
+        out.push(carry + p); carry = "";
+      }
+      if (!changed) return line;
+      return out.length ? prefix + out.join(" ") : "";
+    }
+
+    /* Whole-answer scrub (non-stream path, cache hits). A line emptied by the scrub leaves no hole. */
+    function scrubMetaTalk(text) {
+      if (!text) return text;
+      var kept = [];
+      var lines = String(text).split("\n");
+      for (var li = 0; li < lines.length; li++) { var l = lines[li], s = scrubLine(l); if (s !== "" || l === "") kept.push(s); }
+      return kept.join("\n").replace(/\n{3,}/g, "\n\n");
+    }
+    return { scrub: scrubMetaTalk };
+  })();
+
   /* IMAGE ANSWERS.
    *
    * MedGemma 1.5 and Gemma 4 can see, but only with their projector (mmproj) downloaded alongside the
@@ -1126,7 +1231,16 @@
         }
         return _doneShown + (part ? (_doneShown ? "\n" : "") + part : "");
       }
-      function paintNow() { _paintT = null; _paintDirty = false; _paintLast = Date.now(); if (_detached) return; try { onDelta(streamView(stripReasoning(acc))); } catch (e) {} }
+      // Settled lines lose any talk about the reference material; the line still being written waits.
+      var _mtSrc = null, _mtOut = "";
+      function liveScrub(s) {
+        var cut = s.lastIndexOf("\n");
+        if (cut < 0) return s;
+        var done = s.slice(0, cut);
+        if (done !== _mtSrc) { _mtSrc = done; _mtOut = METATALK.scrub(done); }
+        return _mtOut + s.slice(cut);
+      }
+      function paintNow() { _paintT = null; _paintDirty = false; _paintLast = Date.now(); if (_detached) return; try { onDelta(liveScrub(streamView(stripReasoning(acc)))); } catch (e) {} }
       function paint() {
         _paintDirty = true;
         if (_paintT) return;
@@ -1284,6 +1398,14 @@
         if (grounding && !images.length && !(opts && opts._ungrounded) && NO_COVERAGE.test(text)) {
           return retry({ _ungrounded: true, pack: packId, _grounding: null });
         }
+        // No talk about the reference material (see METATALK). An answer that was ONLY that talk ("the
+        // retrieved passages discuss a different condition") is the same retrieval miss as above.
+        var clean = METATALK.scrub(text);
+        if (!clean.replace(/\s+/g, "")) {
+          if (grounding && !images.length && !(opts && opts._ungrounded)) return retry({ _ungrounded: true, pack: packId, _grounding: null });
+          return { error: EMPTY_ANSWER };
+        }
+        text = clean;
         // RAG safety net: every number/drug the answer states must be backed by the retrieved
         // book text or the question itself. A doctor-supplied figure ("glucose 32 mg/dL") is not
         // a hallucination; anything else the model adds without support is exactly the failure
@@ -2649,7 +2771,7 @@
     // only way to assert WHICH passages were chosen (and that their citation metadata survived) is
     // to call the retriever itself. test/maik-rag-hybrid.test.mjs is the consumer.
     retrieveGrounding: retrieveGrounding, expansionTerms: expansionTerms, rerankPassages: rerankPassages,
-    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
+    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning, scrubMetaTalk: METATALK.scrub,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,

@@ -27,6 +27,10 @@ print dialog on the web.
 - Patient text is escaped everywhere (unit test injects an `<img onerror>`).
 - MLC: an intimation letter to the SHO, not the MLC register entry. MCCD: a draft to copy onto the
   official form; it says so.
+- Consent form has a doctor-entered "Risks specific to this procedure, as discussed" box (field `risks`,
+  added 2026-09-25 after the clinical audit): the templates hold the general risks only. It prints under
+  a heading in the form's language (`RISKS_H`, en/te/hi) just before the declaration; nothing prints when
+  it is empty. The field text itself is whatever the doctor types (not translated).
 
 ## Key files
 - `clinical-docs.js` (`window.SMD_DOCS`: `open({type, ctx, consentId})`, `_bodyHtml`, `_documentHtml`),
@@ -36,7 +40,8 @@ print dialog on the web.
   cataract-surgery, endoscopy, blood-transfusion, hiv-test), `kb/documents/handouts-te.json`,
   `handouts-hi.json` (keys `<kitId>/<adviceId>`), bundled into `kb/documents/documents.json` by
   `scripts/build-documents.mjs` (schema + validator in its header; `--check`, `--validate`). The build
-  syncs `DOCS_V` and the `clinical-docs.js?v=` token.
+  syncs `DOCS_V` and the hash part of the `clinical-docs.js?v=docsN.<hash>` token; bump `docsN` by hand
+  when the code changes (docs3 since the risks box).
 - Tests: `test/kit-tools-docs.test.mjs`, `test/run-specialty-kits-ui.mjs` (documents over the consult).
 
 ## Content status

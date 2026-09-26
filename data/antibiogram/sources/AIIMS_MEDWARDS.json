@@ -1,0 +1,189 @@
+{
+ "id": "AIIMS_MEDWARDS",
+ "kind": "study",
+ "inst": "AIIMS_DELHI_MEDWARDS",
+ "institution": "All India Institute of Medical Sciences, New Delhi (medicine wards and ICU)",
+ "short": "AIIMS Delhi medicine",
+ "city": "New Delhi",
+ "state": "Delhi",
+ "region": "north",
+ "sector": "government",
+ "year": 2019,
+ "period": "2017 to 2019",
+ "citation": "J Lab Physicians 2020",
+ "doi": "10.1055/s-0040-1721161",
+ "url": "https://doi.org/10.1055/s-0040-1721161",
+ "reporting": "%R in the source, converted to %S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Text extracted via pypdf (no page-image OCR needed; born-digital PDF). Method: Figures come from Table 4 (Gram-negative) and Table 5 (Gram-positive), both headed as resistance patterns, converted as 100 minus %R. The resistance reading was confirmed by colistin (0% resistance, matching the text's 'no resistance') and by A. baumannii near 100% resistance to ciprofloxacin, cefotaxime and ceftazidime, consistent with the reported 89% P-XDR. Isolate numbers are from Table 2; the resistance tables have slightly different denominators because some drugs were not tested. Not-tested results were left out (P. aeruginosa amoxiclav; E. faecium amoxiclav and amikacin; S. aureus tetracycline; most Salmonella drugs). E. faecalis (n=2) and Salmonella spp. are not included. Overall about 90% of isolates were drug-resistant and 61% P-XDR (Table 2 totals); no ESBL rate was reported. The study years 2017 to 2019 come from the source document's file name, not its text."
+ },
+ "notes": "Vaithiyam et al. (J Lab Physicians 2020) studied clinical isolates from all specimens in the medicine wards and ICU of AIIMS New Delhi; the years 2017 to 2019 are not confirmed in the paper's text. It covers A. baumannii (92 isolates), K. pneumoniae (86), E. coli (75), P. aeruginosa (22), E. faecium (15) and S. aureus (10). The tables print % resistant, so figures are 100 minus %R and intermediate counts as susceptible. The paper's text quotes some resistance figures as if they were susceptibility (cefoperazone-sulbactam 34.7%, imipenem 43%); the tables are used. Some drugs were tested on fewer isolates than the organism totals. Imipenem and meropenem disagree widely for E. coli (75.7% vs 19.5%) and K. pneumoniae (57% vs 16.3%). MRSA was 70% (7 of 10). Counts for P. aeruginosa, E. faecium and S. aureus are small.",
+ "issues": [
+  "Lead 2026-09-26: its own institution key (AIIMS_DELHI_MEDWARDS, was AIIMS_DELHI): a different study from the same hospital is not an earlier edition of this one."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 92,
+   "specimen_as_printed": "all clinical (medicine wards & ICU)",
+   "s": {
+    "ciprofloxacin": 1.1,
+    "amikacin": 1.1,
+    "netilmicin": 10.6,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "cefoperazone_sulbactam": 65.3,
+    "imipenem": 9.9,
+    "meropenem": 22.8,
+    "amoxiclav": 0,
+    "piptazo": 1.2,
+    "colistin": 100
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 86,
+   "specimen_as_printed": "all clinical (medicine wards & ICU)",
+   "s": {
+    "ciprofloxacin": 3.5,
+    "amikacin": 15.2,
+    "netilmicin": 17,
+    "cefotaxime": 2.4,
+    "ceftazidime": 3.6,
+    "cefoperazone_sulbactam": 27.1,
+    "imipenem": 57,
+    "meropenem": 16.3,
+    "amoxiclav": 0,
+    "piptazo": 14.3,
+    "colistin": 100
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 75,
+   "specimen_as_printed": "all clinical (medicine wards & ICU)",
+   "s": {
+    "ciprofloxacin": 6.4,
+    "amikacin": 59.5,
+    "netilmicin": 64,
+    "cefotaxime": 9.9,
+    "ceftazidime": 12,
+    "cefoperazone_sulbactam": 60.6,
+    "imipenem": 75.7,
+    "meropenem": 19.5,
+    "amoxiclav": 9.4,
+    "piptazo": 13.5,
+    "colistin": 100
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 22,
+   "specimen_as_printed": "all clinical (medicine wards & ICU)",
+   "s": {
+    "ciprofloxacin": 33.4,
+    "amikacin": 31.8,
+    "netilmicin": 30.8,
+    "cefotaxime": 14.3,
+    "ceftazidime": 22.7,
+    "cefoperazone_sulbactam": 36.4,
+    "imipenem": 50,
+    "meropenem": 36.4,
+    "piptazo": 36.4,
+    "colistin": 100
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 15,
+   "specimen_as_printed": "all clinical (medicine wards & ICU)",
+   "s": {
+    "penicillin": 23.1,
+    "ciprofloxacin": 0,
+    "erythromycin": 0,
+    "gentamicin": 0,
+    "linezolid": 93.3,
+    "teicoplanin": 66.7,
+    "vancomycin": 65.9,
+    "tetracycline": 66.7,
+    "cotrimoxazole": 100
+   }
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 10,
+   "specimen_as_printed": "all clinical (medicine wards & ICU)",
+   "s": {
+    "penicillin": 22.3,
+    "amoxiclav": 33.3,
+    "ciprofloxacin": 30,
+    "erythromycin": 33.3,
+    "gentamicin": 50,
+    "amikacin": 77.8,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100,
+    "cotrimoxazole": 40
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "n": 92
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "n": 86
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "n": 75
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Pseudomonas aeruginosa",
+   "n": 22
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Enterococcus faecium",
+   "n": 15
+  },
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Staphylococcus aureus",
+   "n": 10
+  }
+ ],
+ "excluded": [],
+ "focus": "the medicine wards and ICU"
+}

@@ -2161,7 +2161,11 @@ window.openExternal = function (u) {
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
 <script src="/app-check-init.js?v=appcheck4" defer></script>
-<script src="/antibiogram-data.js?v=gold363" defer></script>
+<script src="/antibiogram-data.js?v=abgd1.92d34b99c25e" defer></script>
+<!-- Antibiogram rules + store (v2): validation rules shared with the build, and the data layer that
+     fetches kb/antibiogram/antibiogram.json. Must load before policy.js (profiles) and antibiogram.js. -->
+<script src="/antibiogram-rules.js?v=abgr1.92d34b99c25e" defer></script>
+<script src="/antibiogram-store.js?v=abgs1.92d34b99c25e" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
 <script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1-wsqfu3-tier1-gate1-energy1" defer></script>
@@ -2188,7 +2192,13 @@ window.openExternal = function (u) {
 <script src="/rxchoice-flags.js?v=rxc3" defer></script>
 <script src="/rxchoice-core.js?v=rxc3" defer></script>
 <script src="/rxchoice-ui.js?v=rxc5-fr1" defer></script>
-<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1" defer></script>
+<!-- On-demand loader for the heavy vendor bundles (html2canvas, jsPDF). It defines
+     window.smdLazy, which prescription.js needs to export a prescription as JPEG or PDF.
+     It was NEVER referenced here, so smdLazy was undefined: prescription.js fell back to a
+     no-op that resolved without loading anything, html2canvas stayed undefined, and Save as
+     JPEG/PDF did nothing at all. The file is 15 lines and has no dependencies. -->
+<script src="/lazy-load.js?v=ll1"></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -2209,9 +2219,9 @@ window.openExternal = function (u) {
 <script src="/smd-geo.js?v=gold472" defer></script>
 <script src="/email-auth.js?v=gold474-oneform-energy1" defer></script>
 <script src="/applock.js?v=gold8" defer></script>
-<script src="/policy.js?v=gold363" defer></script>
+<script src="/policy.js?v=gold363-abg8" defer></script>
 <script src="/features.js?v=gold997" defer></script>
-<script src="/calculators.js?v=gold1051-r1d-rail1-find1-kits1-fr1" defer></script>
+<script src="/calculators.js?v=gold1051-r1d-rail1-find1-kits1-fr1-cbac2" defer></script>
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978-sheet1-universal3-cefiderocol1-fr1" defer></script>
@@ -2257,15 +2267,15 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/clinical-docs.css?v=docs2">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1" defer></script>
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6" defer></script>
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
 <script src="/kb-protocols-flags.js?v=kbpf1" defer></script>
-<script src="/kb-protocols.js?v=kbp3.af54c76deb25" defer></script>
+<script src="/kb-protocols.js?v=kbp3.01580d845968" defer></script>
 <!-- Clinical documents (certificates, consent forms, handouts, MLC, MCCD draft). Flag smd_clinical_docs
      (default ON, ?docs=0). Token kept in step with kb/documents/documents.json by scripts/build-documents.mjs. -->
-<script src="/clinical-docs.js?v=docs2.fa0f388bfcd3" defer></script>
+<script src="/clinical-docs.js?v=docs3.598e7e3c41bc" defer></script>
 <!-- Clinical review desk: clinicians approve or comment on AI-drafted protocols, kits and consent templates,
      then export the decisions (applied with scripts/apply-reviews.mjs). Flag smd_review_desk (default ON). -->
 <script src="/review-desk.js?v=rev2" defer></script>
@@ -2277,7 +2287,7 @@ window.openExternal = function (u) {
      specialty-kits.js ?v= token is kept in step with the kit + WHO growth data hashes by
      scripts/build-specialty-kits.mjs. -->
 <script src="/specialty-kits-flags.js?v=kitsf1" defer></script>
-<script src="/specialty-kits.js?v=kits4.a38754a54c" defer></script>
+<script src="/specialty-kits.js?v=kits5.286fc2ed2b" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2307,7 +2317,7 @@ window.openExternal = function (u) {
      DEFAULT OFF, and fails closed until each checkpoint licence + sha256 is pinned. -->
 <script src="/openmed-ner.js?v=ddiaudit20260925" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1-audOff" defer></script>
-<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff-nopass1-literet1" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff-nopass1-litemeta1-literet1" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034-ugib1-audOff" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -2319,10 +2329,10 @@ window.openExternal = function (u) {
 <script src="/kb/ai/ambig-abbrev.js?v=gold1057-lang" defer></script><script src="/kb/ai/maik-brain.js?v=brain-ambig1-find1" defer></script>
 <script src="/kb/ai/maik-evidence.js?v=gold1052-brain-audA" defer></script>
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
-<script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1" defer></script>
+<script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mkclose1" defer></script><script src="/profile-setup.js?v=pfs4-onedir-kits1" defer></script><script src="/phone-verify.js?v=phv4-sheet" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mkclose1" defer></script><script src="/profile-setup.js?v=pfs4-onedir-kits1" defer></script><script src="/phone-verify.js?v=phv4-sheet" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2339,12 +2349,14 @@ window.openExternal = function (u) {
      @capacitor/haptics on native + navigator.vibrate fallback on web. Pref smd_haptics
      (default ON; ?haptics=0 disables). Loads after native-bridge so Capacitor.Plugins exists. -->
 <script src="/haptics.js?v=gold348-hap2" defer></script>
-<script src="/antibiogram.js?v=gold992-rotate-fix-nobooks1" defer></script>
+<script src="/antibiogram-flags.js?v=abgf2" defer></script>
+<script src="/antibiogram-v2.js?v=abgv15" defer></script>
+<script src="/antibiogram.js?v=gold992-rotate-fix-nobooks1-abg4" defer></script>
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
 <script src="/icd.js?v=hardlocal3-us1" defer></script>
 <link rel="stylesheet" href="/search.css?v=us2">
 <script src="/search.js?v=us2-nodash1-kbproto2-kits1" defer></script>
-<script src="/asp-region.js?v=gold363" defer></script>
+<script src="/asp-region.js?v=gold363-abg7" defer></script>
 <script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1-energy1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1-energy1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>

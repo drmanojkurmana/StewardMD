@@ -1,0 +1,3837 @@
+{
+ "id": "AIIMS_BHOPAL_2019",
+ "kind": "institution",
+ "inst": "AIIMS_BHOPAL",
+ "institution": "All India Institute of Medical Sciences, Bhopal",
+ "short": "AIIMS Bhopal",
+ "city": "Bhopal",
+ "state": "Madhya Pradesh",
+ "region": "west",
+ "sector": "government",
+ "year": 2019,
+ "end": "2019-12",
+ "isolates": 3887,
+ "period": "1st September 2018 to December 2019 (16 months)",
+ "published": "2020",
+ "url": "https://aiimsbhopal.edu.in/AIIMSFiles/officialDownload/ICMR_AMR_Report_Hospital_antibiogram_2019-2020.pdf",
+ "page": "https://aiimsbhopal.edu.in/index_controller/officialDownload",
+ "retrieved": "2026-09-26",
+ "citation": "ICMR AMR Project team, Department of Microbiology, All India Institute of Medical Sciences, Bhopal (Karuna T, principal investigator). Antimicrobial Resistance Surveillance Network (AMRSN) ICMR: AIIMS Bhopal Regional Center Surveillance report and Hospital Antibiogram, 1st September 2018 to December 2019. Bhopal: AIIMS Bhopal; 2020.",
+ "reporting": "Percent susceptible with the number susceptible and number tested per drug, by organism group, specimen group (urine, blood, other samples) and location (OPD, ward, ICU), ICMR AMRSN antibiotic panel only; plus percent susceptible (susceptible/tested) of carbapenem-resistant and carbapenem-susceptible subsets of four Gram-negative organisms from all specimens except faeces.",
+ "method": "ICMR AMRSN standard operating procedures and antibiotic panel (disc diffusion and MIC, CLSI; tigecycline and Enterobacterales colistin by EUCAST as listed in the panel); colistin by broth microdilution in selected MDR isolates; first clinical isolate of an organism per patient per 3 months; data entered in i-AMRSS and validated by the ICMR nodal centres; surveillance-programme isolates excluded.",
+ "breakpoints": "CLSI, edition not stated; EUCAST for tigecycline and for colistin in Enterobacterales",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Location-wise tables (pages 35 to 38, 46 to 48, 59 to 62) parsed from the PDF text layer by word positions (rotated drug headers rebuilt from the character stream, susceptible/tested counts wrapped over two lines rejoined); every value then compared by eye with zoomed crops of the rendered pages (scale 3), and every printed percentage re-computed from its printed counts. CR and CS tables (pages 63 and 64) parsed from the text layer and compared value by value with the rendered pages. Counts compared with the antibiogram tables and the location-wise isolation tables on the rendered pages (pages 29, 30, 39, 49, 50). The 49 location-wise charts were matched to their table rows (same percentages), 2026-09-26. The archived PDF opens completely (74 pages)."
+ },
+ "notes": "ICMR AMRSN regional-centre surveillance report and hospital antibiogram of AIIMS Bhopal (ICMR AMR project team, Department of Microbiology), 1st September 2018 to December 2019: 3887 culture-positive isolates as printed, ICMR antibiotic panel only (not every drug the laboratory tested). Rows are the location-wise tables of Section B (whole-number percent susceptible with susceptible/tested counts) for urine, blood and Other samples, each by OPD, ward (printed WD or Ward) and ICU. Organisms are the report's groups: Klebsiella, Enterobacter, Proteus, Morganella, Citrobacter, Acinetobacter, CoNS and Enterococcus rows are genus groups (row notes say which species they contain), Salmonella is typhoidal Salmonella (S. Typhi, S. Paratyphi A, Salmonella spp.), and the blood Klebsiella row is K. pneumoniae only. Other samples means all samples except blood and urine (per the report): superficial infections, lower respiratory tract, deep infections, sterile sites, CSF and other sample types (1018, 291, 129, 78, 16 and 307 isolates in Section A). It is recorded as other specimens (not blood or urine), with specimen_as_printed, and each row's note gives the specimen mix of its location: superficial infections are 430 of 541 OPD, 565 of 1011 ward and only 23 of 288 ICU positive samples in this group (the ICU group is mostly LRT and other sample types). Also recorded: the carbapenem-resistant (CR) and carbapenem-susceptible (CS) subset tables (Section B V) for Acinetobacter, P. aeruginosa, K. pneumoniae and E. coli from all specimens except faeces (spec all), whose colistin figures rest on 1 to 24 selected isolates (mostly marked as broth microdilution in selected MDR isolates). Cells printed -, NT or blank are left out; five cells printed 0% with 0/0 tested are left out (see excluded). Where a printed percentage is not what its printed susceptible/tested counts give, the printed value is kept and marked as a conflict (7 location-table cells, e.g. E. coli ward other-sample meropenem 83% with 117/212 = 55.2%, which its chart also shows as 83%; and K. pneumoniae CR levofloxacin 48/31). The urine Citrobacter and CoNS rows print n smaller than their tested counts (see row notes). Counts: the number of isolates per organism group and location printed in the antibiogram tables (including 0 and groups printed without susceptibility data), plus the organisms outside these groups from the location-wise isolation tables (Serratia, S. maltophilia, B. cepacia, Candida, S. pneumoniae, S. pyogenes printed as Streptococcus pyrogens, Providencia stuartii, and blood ICU Citrobacter). The report states that most groups have fewer than 30 isolates, that ICMR shows results only for at least 20 isolates, and that the antibiogram was valid until March 2021. Page numbers are PDF pages; printed page numbers in Section B are 6 lower. Archived copy used (the live site could not be reached): https://web.archive.org/web/20240629094055id_/https://aiimsbhopal.edu.in/AIIMSFiles/officialDownload/ICMR_AMR_Report_Hospital_antibiogram_2019-2020.pdf.",
+ "issues": [
+  "Second reader 2026-09-26: every cell of the 11 location-wise tables (pages 35 to 38, 46 to 48, 59 to 62) and of the 4 CR and CS tables (pages 63 and 64) re-read from the page images (scale 3, crops of each table half) and written down before comparing with the file: all 835 cells (printed percentage and number tested; the seeded sample of 209 cells from sample_cells.py is part of this), all 86 row n with their setting (OPD, ward and ICU rows: no column or row swaps), and all 118 counts (93 group totals from the antibiogram tables and 25 species lines from the isolation tables on pages 29, 39, 49 and 50, whose columns were also re-added to their printed grand totals of 907, 619, 63, 73, 261, 124, 541, 1011 and 288). 0 transcription errors, nothing corrected.",
+  "Second reader: every printed percentage re-computed from its printed susceptible/tested counts. The 8 conflicts are exactly the cells more than 1 point off, and each is printed that way: E. coli urine OPD cefotaxime 19% (38/185); Enterococcus urine ward high-level gentamicin 45% (37/75); Salmonella blood OPD ampicillin 78% (6/7); K. pneumoniae blood ICU meropenem 0% (1/24); E. coli other-samples ward meropenem 83% (117/212); Enterobacter other-samples ward amikacin 48% (13/25); Enterococcus other-samples ward high-level gentamicin 51% (27/47); K. pneumoniae CR levofloxacin \"48/31 (15.3)\" (15.3% would fit 48/313, so the number tested is rightly left out). Two starred colistin cells are truncated rather than rounded (P. aeruginosa CR 8/9 printed 88, K. pneumoniae CR 14/18 printed 77); under 1 point, so no conflict.",
+  "Second reader: the other cells the validator does not keep are printed as recorded: intrinsic Enterobacter urine cefazolin 25 (OPD, 4/16) and 20 (ward, 2/10), Proteus urine nitrofurantoin 11 (OPD, 1/9) and 0 (ward, 0/6), Morganella urine cefazolin 50 (OPD, 2/4) and 29 (ward, 2/7) and nitrofurantoin 40 (OPD, 2/5) and 13 (ward, 1/8); hidden urine tigecycline 100 for S. aureus (OPD 3/3, ward 1/1) and CoNS (OPD 7/7, ward 1/1); caution E. coli CS colistin 25 (*1/4). No count mismatches. The five 0% (0/0) cells and the 0/0 cells of the CR and CS tables are rightly left out.",
+  "Second reader: the urine Citrobacter and CoNS notes are right: Citrobacter OPD printed n 7 with up to 8 tested (isolation table C. koseri 4, C. freundii 3, Citrobacter spp. 1) and ward n 9 with up to 12 tested (7, 3, 2); CoNS OPD printed n 3 (30% of \"CoNS (n=10)\") with up to 18 tested (isolation table S. epidermidis 9, S. haemolyticus 4, plus S. saprophyticus 3 and Staphylococcus spp. 3) and ward n 7 with 8 tested for 6 of 11 drugs (S. epidermidis 7, S. haemolyticus 1). Every other group n equals the sum of its species lines in the isolation tables.",
+  "Second reader: \"Other samples\" confirmed on the page as all samples except blood and urine (page 15 footnote: \"The Other Category for Antibiogram is All samples except Blood & Urine\"; page 49 header). The per-location mixes quoted in the row notes match Section A pages 14 and 15 and equal the isolation-table grand totals: OPD 541 (superficial infection 430, deep infection 46, LRT 35, other sample types 24, sterile site 5, CSF 1), ward 1011 (superficial infection 565, other sample types 151, LRT 143, deep infection 82, sterile site 61, CSF 8, faeces 1), ICU 288 (other sample types 132, LRT 113, superficial infection 23, sterile site 12, CSF 7, deep infection 1). Specimen keys left as the extractor set them.",
+  "Lead 2026-09-26: \"Other samples\" (all samples except blood and urine; mostly superficial infections in OPD and wards, mostly lower respiratory in the ICU) filed under specimen \"other\" (not blood or urine), not pus; 30 rows and 43 counts moved."
+ ],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 614,
+   "page": 35,
+   "table": "GNB Urine (Section B, printed page 29)",
+   "s": {
+    "amikacin": 79,
+    "cefazolin": 30,
+    "cefotaxime": 19,
+    "ciprofloxacin": 13,
+    "ertapenem": 67,
+    "fosfomycin": 99,
+    "imipenem": 85,
+    "levofloxacin": 24,
+    "meropenem": 86,
+    "nitrofurantoin": 78,
+    "piptazo": 63,
+    "cotrimoxazole": 49
+   },
+   "nt": {
+    "amikacin": 213,
+    "cefazolin": 568,
+    "cefotaxime": 185,
+    "ciprofloxacin": 610,
+    "ertapenem": 534,
+    "fosfomycin": 106,
+    "imipenem": 604,
+    "levofloxacin": 540,
+    "meropenem": 605,
+    "nitrofurantoin": 599,
+    "piptazo": 533,
+    "cotrimoxazole": 567
+   },
+   "conflict": {
+    "cefotaxime": "printed 19% but its printed counts are 38/185 = 20.5%"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 304,
+   "page": 35,
+   "table": "GNB Urine (Section B, printed page 29)",
+   "s": {
+    "amikacin": 59,
+    "cefazolin": 8,
+    "cefotaxime": 2,
+    "ciprofloxacin": 3,
+    "ertapenem": 48,
+    "fosfomycin": 96,
+    "imipenem": 58,
+    "levofloxacin": 8,
+    "meropenem": 58,
+    "nitrofurantoin": 65,
+    "piptazo": 32,
+    "cotrimoxazole": 28
+   },
+   "nt": {
+    "amikacin": 138,
+    "cefazolin": 282,
+    "cefotaxime": 119,
+    "ciprofloxacin": 299,
+    "ertapenem": 233,
+    "fosfomycin": 56,
+    "imipenem": 296,
+    "levofloxacin": 263,
+    "meropenem": 299,
+    "nitrofurantoin": 289,
+    "piptazo": 263,
+    "cotrimoxazole": 286
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 30,
+   "page": 35,
+   "table": "GNB Urine (Section B, printed page 29)",
+   "s": {
+    "amikacin": 50,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 27,
+    "fosfomycin": 100,
+    "imipenem": 37,
+    "levofloxacin": 0,
+    "meropenem": 38,
+    "nitrofurantoin": 69,
+    "piptazo": 22,
+    "cotrimoxazole": 14
+   },
+   "nt": {
+    "amikacin": 10,
+    "cefazolin": 29,
+    "cefotaxime": 16,
+    "ciprofloxacin": 30,
+    "ertapenem": 26,
+    "fosfomycin": 8,
+    "imipenem": 30,
+    "levofloxacin": 28,
+    "meropenem": 29,
+    "nitrofurantoin": 29,
+    "piptazo": 27,
+    "cotrimoxazole": 29
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 119,
+   "page": 35,
+   "table": "GNB Urine (Section B, printed page 29)",
+   "s": {
+    "amikacin": 73,
+    "cefazolin": 42,
+    "cefotaxime": 26,
+    "ciprofloxacin": 29,
+    "ertapenem": 68,
+    "fosfomycin": 69,
+    "imipenem": 83,
+    "levofloxacin": 53,
+    "meropenem": 84,
+    "nitrofurantoin": 28,
+    "piptazo": 54,
+    "cotrimoxazole": 66
+   },
+   "nt": {
+    "amikacin": 37,
+    "cefazolin": 110,
+    "cefotaxime": 42,
+    "ciprofloxacin": 119,
+    "ertapenem": 93,
+    "fosfomycin": 13,
+    "imipenem": 117,
+    "levofloxacin": 105,
+    "meropenem": 118,
+    "nitrofurantoin": 116,
+    "piptazo": 105,
+    "cotrimoxazole": 109
+   },
+   "note": "Printed as \"Klebsiella sps. (n=251)\": a genus group; its location totals equal the sums of K. pneumoniae, K. oxytoca, Klebsiella spp. (and K. (Enterobacter) aerogenes, where listed) in the location-wise isolation table (page 29). The matching chart Ch_A2 (page 30) is titled \"Klebsiella pneumoniae n=104\" but shows these same values.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 117,
+   "page": 35,
+   "table": "GNB Urine (Section B, printed page 29)",
+   "s": {
+    "amikacin": 39,
+    "cefazolin": 16,
+    "cefotaxime": 12,
+    "ciprofloxacin": 9,
+    "ertapenem": 31,
+    "fosfomycin": 80,
+    "imipenem": 28,
+    "levofloxacin": 10,
+    "meropenem": 34,
+    "nitrofurantoin": 19,
+    "piptazo": 21,
+    "cotrimoxazole": 29
+   },
+   "nt": {
+    "amikacin": 49,
+    "cefazolin": 107,
+    "cefotaxime": 51,
+    "ciprofloxacin": 116,
+    "ertapenem": 89,
+    "fosfomycin": 25,
+    "imipenem": 115,
+    "levofloxacin": 100,
+    "meropenem": 116,
+    "nitrofurantoin": 113,
+    "piptazo": 94,
+    "cotrimoxazole": 112
+   },
+   "note": "Printed as \"Klebsiella sps. (n=251)\": a genus group; its location totals equal the sums of K. pneumoniae, K. oxytoca, Klebsiella spp. (and K. (Enterobacter) aerogenes, where listed) in the location-wise isolation table (page 29). The matching chart Ch_B2 (page 32) is titled \"Klebsiella pneumoniae n=117\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 15,
+   "page": 35,
+   "table": "GNB Urine (Section B, printed page 29)",
+   "s": {
+    "amikacin": 0,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "fosfomycin": 60,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 0,
+    "nitrofurantoin": 0,
+    "piptazo": 0,
+    "cotrimoxazole": 7
+   },
+   "nt": {
+    "amikacin": 4,
+    "cefazolin": 14,
+    "cefotaxime": 7,
+    "ciprofloxacin": 15,
+    "ertapenem": 12,
+    "fosfomycin": 5,
+    "imipenem": 15,
+    "levofloxacin": 14,
+    "meropenem": 15,
+    "nitrofurantoin": 15,
+    "piptazo": 14,
+    "cotrimoxazole": 15
+   },
+   "note": "Printed as \"Klebsiella sps. (n=251)\": a genus group; its location totals equal the sums of K. pneumoniae, K. oxytoca, Klebsiella spp. (and K. (Enterobacter) aerogenes, where listed) in the location-wise isolation table (page 29). The matching chart Ch_C2 (page 34) is titled \"Klebsiella pneumoniae n=15\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 18,
+   "page": 35,
+   "table": "GNB Urine (Section B, printed page 29)",
+   "s": {
+    "amikacin": 75,
+    "cefazolin": 25,
+    "cefotaxime": 0,
+    "ciprofloxacin": 22,
+    "ertapenem": 53,
+    "fosfomycin": 100,
+    "imipenem": 94,
+    "levofloxacin": 38,
+    "meropenem": 89,
+    "nitrofurantoin": 38,
+    "piptazo": 47,
+    "cotrimoxazole": 82
+   },
+   "nt": {
+    "amikacin": 4,
+    "cefazolin": 16,
+    "cefotaxime": 3,
+    "ciprofloxacin": 18,
+    "ertapenem": 17,
+    "fosfomycin": 2,
+    "imipenem": 18,
+    "levofloxacin": 16,
+    "meropenem": 18,
+    "nitrofurantoin": 16,
+    "piptazo": 15,
+    "cotrimoxazole": 11
+   },
+   "note": "Printed as \"Enterobacter spp.\"; its location totals equal the sums of Enterobacter spp. and E. cloacae in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 12,
+   "page": 35,
+   "table": "GNB Urine (Section B, printed page 29)",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 20,
+    "cefotaxime": 20,
+    "ciprofloxacin": 17,
+    "ertapenem": 30,
+    "imipenem": 50,
+    "levofloxacin": 27,
+    "meropenem": 50,
+    "nitrofurantoin": 42,
+    "piptazo": 13,
+    "cotrimoxazole": 45
+   },
+   "nt": {
+    "amikacin": 2,
+    "cefazolin": 10,
+    "cefotaxime": 5,
+    "ciprofloxacin": 12,
+    "ertapenem": 10,
+    "imipenem": 12,
+    "levofloxacin": 11,
+    "meropenem": 12,
+    "nitrofurantoin": 12,
+    "piptazo": 8,
+    "cotrimoxazole": 11
+   },
+   "note": "Printed as \"Enterobacter spp.\"; its location totals equal the sums of Enterobacter spp. and E. cloacae in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 12,
+   "page": 36,
+   "table": "GNB Urine (Section B, printed page 30)",
+   "s": {
+    "amikacin": 75,
+    "cefazolin": 36,
+    "cefotaxime": 20,
+    "ciprofloxacin": 8,
+    "ertapenem": 63,
+    "fosfomycin": 100,
+    "imipenem": 42,
+    "levofloxacin": 33,
+    "meropenem": 75,
+    "nitrofurantoin": 11,
+    "piptazo": 82,
+    "cotrimoxazole": 25
+   },
+   "nt": {
+    "amikacin": 4,
+    "cefazolin": 11,
+    "cefotaxime": 5,
+    "ciprofloxacin": 12,
+    "ertapenem": 8,
+    "fosfomycin": 1,
+    "imipenem": 12,
+    "levofloxacin": 12,
+    "meropenem": 12,
+    "nitrofurantoin": 9,
+    "piptazo": 11,
+    "cotrimoxazole": 12
+   },
+   "note": "Printed as \"Proteus Species\"; its location totals equal the sums of P. mirabilis and P. vulgaris in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "n": 7,
+   "page": 36,
+   "table": "GNB Urine (Section B, printed page 30)",
+   "s": {
+    "amikacin": 50,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ciprofloxacin": 29,
+    "ertapenem": 60,
+    "fosfomycin": 50,
+    "imipenem": 14,
+    "levofloxacin": 20,
+    "meropenem": 57,
+    "nitrofurantoin": 0,
+    "piptazo": 67,
+    "cotrimoxazole": 29
+   },
+   "nt": {
+    "amikacin": 4,
+    "cefazolin": 6,
+    "cefotaxime": 2,
+    "ciprofloxacin": 7,
+    "ertapenem": 5,
+    "fosfomycin": 2,
+    "imipenem": 7,
+    "levofloxacin": 5,
+    "meropenem": 7,
+    "nitrofurantoin": 6,
+    "piptazo": 6,
+    "cotrimoxazole": 7
+   },
+   "note": "Printed as \"Proteus Species\"; its location totals equal the sums of P. mirabilis and P. vulgaris in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "n": 5,
+   "page": 36,
+   "table": "GNB Urine (Section B, printed page 30)",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 50,
+    "cefotaxime": 100,
+    "ciprofloxacin": 0,
+    "ertapenem": 80,
+    "fosfomycin": 0,
+    "imipenem": 60,
+    "levofloxacin": 60,
+    "meropenem": 100,
+    "nitrofurantoin": 40,
+    "piptazo": 100,
+    "cotrimoxazole": 25
+   },
+   "nt": {
+    "amikacin": 2,
+    "cefazolin": 4,
+    "cefotaxime": 1,
+    "ciprofloxacin": 5,
+    "ertapenem": 5,
+    "fosfomycin": 1,
+    "imipenem": 5,
+    "levofloxacin": 5,
+    "meropenem": 5,
+    "nitrofurantoin": 5,
+    "piptazo": 5,
+    "cotrimoxazole": 4
+   },
+   "note": "Printed as \"Morganella species\" (Morganella morganii in the location-wise isolation table (page 29)).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Morganella spp.",
+   "n": 10,
+   "page": 36,
+   "table": "GNB Urine (Section B, printed page 30)",
+   "s": {
+    "amikacin": 40,
+    "cefazolin": 29,
+    "ciprofloxacin": 20,
+    "ertapenem": 43,
+    "fosfomycin": 100,
+    "imipenem": 20,
+    "levofloxacin": 20,
+    "meropenem": 40,
+    "nitrofurantoin": 13,
+    "piptazo": 33,
+    "cotrimoxazole": 22
+   },
+   "nt": {
+    "amikacin": 5,
+    "cefazolin": 7,
+    "ciprofloxacin": 10,
+    "ertapenem": 7,
+    "fosfomycin": 1,
+    "imipenem": 10,
+    "levofloxacin": 10,
+    "meropenem": 10,
+    "nitrofurantoin": 8,
+    "piptazo": 9,
+    "cotrimoxazole": 9
+   },
+   "note": "Printed as \"Morganella species\" (Morganella morganii in the location-wise isolation table (page 29)).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "n": 7,
+   "page": 36,
+   "table": "GNB Urine (Section B, printed page 30)",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 14,
+    "cefotaxime": 50,
+    "ciprofloxacin": 38,
+    "ertapenem": 63,
+    "fosfomycin": 100,
+    "imipenem": 86,
+    "levofloxacin": 50,
+    "meropenem": 88,
+    "nitrofurantoin": 75,
+    "piptazo": 88,
+    "cotrimoxazole": 71
+   },
+   "nt": {
+    "amikacin": 1,
+    "cefazolin": 7,
+    "cefotaxime": 4,
+    "ciprofloxacin": 8,
+    "ertapenem": 8,
+    "fosfomycin": 4,
+    "imipenem": 7,
+    "levofloxacin": 8,
+    "meropenem": 8,
+    "nitrofurantoin": 8,
+    "piptazo": 8,
+    "cotrimoxazole": 7
+   },
+   "note": "Printed as \"Citrobacter species\" (C. koseri, C. freundii and Citrobacter spp. in the location-wise isolation table (page 29)). Source inconsistency: the printed n is 7 but up to 8 isolates are printed as tested, and the urine isolation table (page 29) lists 8 OPD Citrobacter isolates (C. koseri 4, C. freundii 3, Citrobacter spp. 1); n recorded as printed.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "n": 9,
+   "page": 36,
+   "table": "GNB Urine (Section B, printed page 30)",
+   "s": {
+    "amikacin": 33,
+    "cefazolin": 10,
+    "cefotaxime": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 50,
+    "fosfomycin": 100,
+    "imipenem": 33,
+    "levofloxacin": 22,
+    "meropenem": 42,
+    "nitrofurantoin": 36,
+    "piptazo": 27,
+    "cotrimoxazole": 27
+   },
+   "nt": {
+    "amikacin": 3,
+    "cefazolin": 10,
+    "cefotaxime": 4,
+    "ciprofloxacin": 12,
+    "ertapenem": 6,
+    "fosfomycin": 2,
+    "imipenem": 12,
+    "levofloxacin": 9,
+    "meropenem": 12,
+    "nitrofurantoin": 11,
+    "piptazo": 11,
+    "cotrimoxazole": 11
+   },
+   "note": "Printed as \"Citrobacter species\" (C. koseri, C. freundii and Citrobacter spp. in the location-wise isolation table (page 29)). Source inconsistency: the printed n is 9 but up to 12 isolates are printed as tested, and the urine isolation table (page 29) lists 12 ward Citrobacter isolates (C. koseri 7, Citrobacter spp. 3, C. freundii 2); n recorded as printed.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 11,
+   "page": 37,
+   "table": "GNB Urine (Section B, printed page 31)",
+   "s": {
+    "cefepime": 50,
+    "ceftazidime": 25,
+    "imipenem": 36,
+    "levofloxacin": 33,
+    "meropenem": 73,
+    "minocycline": 71,
+    "piptazo": 55
+   },
+   "nt": {
+    "cefepime": 10,
+    "ceftazidime": 4,
+    "imipenem": 11,
+    "levofloxacin": 9,
+    "meropenem": 11,
+    "minocycline": 7,
+    "piptazo": 11
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 25,
+   "page": 37,
+   "table": "GNB Urine (Section B, printed page 31)",
+   "s": {
+    "amikacin": 63,
+    "cefepime": 40,
+    "ceftazidime": 27,
+    "imipenem": 8,
+    "levofloxacin": 12,
+    "meropenem": 48,
+    "minocycline": 78,
+    "piptazo": 36
+   },
+   "nt": {
+    "amikacin": 8,
+    "cefepime": 25,
+    "ceftazidime": 11,
+    "imipenem": 25,
+    "levofloxacin": 25,
+    "meropenem": 25,
+    "minocycline": 18,
+    "piptazo": 22
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 3,
+   "page": 37,
+   "table": "GNB Urine (Section B, printed page 31)",
+   "s": {
+    "cefepime": 33,
+    "ceftazidime": 0,
+    "imipenem": 33,
+    "levofloxacin": 0,
+    "meropenem": 33,
+    "minocycline": 67,
+    "piptazo": 33
+   },
+   "nt": {
+    "cefepime": 3,
+    "ceftazidime": 2,
+    "imipenem": 3,
+    "levofloxacin": 3,
+    "meropenem": 3,
+    "minocycline": 3,
+    "piptazo": 3
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 20,
+   "page": 37,
+   "table": "GNB Urine (Section B, printed page 31)",
+   "s": {
+    "amikacin": 82,
+    "cefepime": 89,
+    "ceftazidime": 83,
+    "ciprofloxacin": 75,
+    "gentamicin": 89,
+    "imipenem": 80,
+    "levofloxacin": 70,
+    "meropenem": 70,
+    "piptazo": 87,
+    "tobramycin": 82
+   },
+   "nt": {
+    "amikacin": 11,
+    "cefepime": 19,
+    "ceftazidime": 12,
+    "ciprofloxacin": 20,
+    "gentamicin": 19,
+    "imipenem": 20,
+    "levofloxacin": 20,
+    "meropenem": 20,
+    "piptazo": 15,
+    "tobramycin": 11
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 33,
+   "page": 37,
+   "table": "GNB Urine (Section B, printed page 31)",
+   "s": {
+    "amikacin": 59,
+    "cefepime": 41,
+    "ceftazidime": 47,
+    "ciprofloxacin": 36,
+    "gentamicin": 53,
+    "imipenem": 48,
+    "levofloxacin": 34,
+    "meropenem": 44,
+    "piptazo": 44,
+    "tobramycin": 45
+   },
+   "nt": {
+    "amikacin": 17,
+    "cefepime": 32,
+    "ceftazidime": 17,
+    "ciprofloxacin": 33,
+    "gentamicin": 32,
+    "imipenem": 33,
+    "levofloxacin": 32,
+    "meropenem": 32,
+    "piptazo": 27,
+    "tobramycin": 20
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 5,
+   "page": 37,
+   "table": "GNB Urine (Section B, printed page 31)",
+   "s": {
+    "amikacin": 0,
+    "cefepime": 20,
+    "ceftazidime": 50,
+    "ciprofloxacin": 20,
+    "gentamicin": 40,
+    "imipenem": 20,
+    "levofloxacin": 20,
+    "meropenem": 20,
+    "piptazo": 33,
+    "tobramycin": 50
+   },
+   "nt": {
+    "amikacin": 3,
+    "cefepime": 5,
+    "ceftazidime": 2,
+    "ciprofloxacin": 5,
+    "gentamicin": 5,
+    "imipenem": 5,
+    "levofloxacin": 5,
+    "meropenem": 5,
+    "piptazo": 3,
+    "tobramycin": 2
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 19,
+   "page": 38,
+   "table": "GPC Urine (Section B, printed page 32)",
+   "s": {
+    "cefoxitin": 50,
+    "ciprofloxacin": 26,
+    "clindamycin": 58,
+    "erythromycin": 22,
+    "linezolid": 95,
+    "penicillin": 12,
+    "tetracycline": 88,
+    "teicoplanin": 43,
+    "tigecycline": 100,
+    "cotrimoxazole": 65,
+    "vancomycin": 100,
+    "oxacillin": 100
+   },
+   "nt": {
+    "cefoxitin": 18,
+    "ciprofloxacin": 19,
+    "clindamycin": 19,
+    "erythromycin": 18,
+    "linezolid": 19,
+    "penicillin": 17,
+    "tetracycline": 16,
+    "teicoplanin": 7,
+    "tigecycline": 3,
+    "cotrimoxazole": 17,
+    "vancomycin": 3,
+    "oxacillin": 3
+   },
+   "note": "Not split by methicillin; cefoxitin and oxacillin are separate printed columns.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 6,
+   "page": 38,
+   "table": "GPC Urine (Section B, printed page 32)",
+   "s": {
+    "cefoxitin": 17,
+    "ciprofloxacin": 0,
+    "clindamycin": 33,
+    "erythromycin": 17,
+    "linezolid": 100,
+    "penicillin": 0,
+    "tetracycline": 100,
+    "teicoplanin": 50,
+    "tigecycline": 100,
+    "cotrimoxazole": 67,
+    "vancomycin": 100,
+    "oxacillin": 100
+   },
+   "nt": {
+    "cefoxitin": 6,
+    "ciprofloxacin": 6,
+    "clindamycin": 6,
+    "erythromycin": 6,
+    "linezolid": 6,
+    "penicillin": 6,
+    "tetracycline": 6,
+    "teicoplanin": 2,
+    "tigecycline": 1,
+    "cotrimoxazole": 6,
+    "vancomycin": 1,
+    "oxacillin": 1
+   },
+   "note": "Not split by methicillin; cefoxitin and oxacillin are separate printed columns.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "CoNS",
+   "n": 3,
+   "page": 38,
+   "table": "GPC Urine (Section B, printed page 32)",
+   "s": {
+    "cefoxitin": 25,
+    "ciprofloxacin": 41,
+    "clindamycin": 59,
+    "erythromycin": 33,
+    "linezolid": 100,
+    "penicillin": 6,
+    "tetracycline": 83,
+    "teicoplanin": 44,
+    "tigecycline": 100,
+    "cotrimoxazole": 62,
+    "vancomycin": 100
+   },
+   "nt": {
+    "cefoxitin": 16,
+    "ciprofloxacin": 17,
+    "clindamycin": 17,
+    "erythromycin": 18,
+    "linezolid": 18,
+    "penicillin": 16,
+    "tetracycline": 18,
+    "teicoplanin": 16,
+    "tigecycline": 7,
+    "cotrimoxazole": 13,
+    "vancomycin": 6
+   },
+   "note": "Printed as \"CoNS\" (coagulase-negative staphylococci). Source inconsistency: the printed n is 3 (group \"CoNS (n=10)\") but up to 18 isolates are printed as tested, and the urine isolation table (page 29) lists 13 OPD S. epidermidis and S. haemolyticus isolates (S. epidermidis 9, S. haemolyticus 4), plus S. saprophyticus 3 and Staphylococcus spp. 3; n recorded as printed.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "CoNS",
+   "n": 7,
+   "page": 38,
+   "table": "GPC Urine (Section B, printed page 32)",
+   "s": {
+    "cefoxitin": 13,
+    "ciprofloxacin": 25,
+    "clindamycin": 43,
+    "erythromycin": 13,
+    "linezolid": 88,
+    "penicillin": 0,
+    "tetracycline": 38,
+    "teicoplanin": 14,
+    "tigecycline": 100,
+    "cotrimoxazole": 67,
+    "vancomycin": 100
+   },
+   "nt": {
+    "cefoxitin": 8,
+    "ciprofloxacin": 8,
+    "clindamycin": 7,
+    "erythromycin": 8,
+    "linezolid": 8,
+    "penicillin": 8,
+    "tetracycline": 8,
+    "teicoplanin": 7,
+    "tigecycline": 1,
+    "cotrimoxazole": 6,
+    "vancomycin": 1
+   },
+   "note": "Printed as \"CoNS\" (coagulase-negative staphylococci). Source inconsistency: the printed n is 7 but 8 isolates are printed as tested for most drugs, and the urine isolation table (page 29) lists 8 ward CoNS (S. epidermidis 7, S. haemolyticus 1); n recorded as printed.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 61,
+   "page": 38,
+   "table": "GPC Urine (Section B, printed page 32)",
+   "s": {
+    "ampicillin": 85,
+    "ciprofloxacin": 25,
+    "fosfomycin": 100,
+    "gentamicin_hl": 75,
+    "linezolid": 97,
+    "nitrofurantoin": 97,
+    "teicoplanin": 88,
+    "vancomycin": 95
+   },
+   "nt": {
+    "ampicillin": 52,
+    "ciprofloxacin": 60,
+    "fosfomycin": 7,
+    "gentamicin_hl": 51,
+    "linezolid": 60,
+    "nitrofurantoin": 60,
+    "teicoplanin": 40,
+    "vancomycin": 59
+   },
+   "note": "Printed as \"Enterococcus spp\"; its location totals equal the sums of E. faecalis, E. faecium and Enterococcus spp. (where listed) in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 82,
+   "page": 38,
+   "table": "GPC Urine (Section B, printed page 32)",
+   "s": {
+    "ampicillin": 42,
+    "ciprofloxacin": 1,
+    "fosfomycin": 100,
+    "gentamicin_hl": 45,
+    "linezolid": 91,
+    "nitrofurantoin": 58,
+    "teicoplanin": 84,
+    "vancomycin": 81
+   },
+   "nt": {
+    "ampicillin": 73,
+    "ciprofloxacin": 81,
+    "fosfomycin": 14,
+    "gentamicin_hl": 75,
+    "linezolid": 78,
+    "nitrofurantoin": 80,
+    "teicoplanin": 70,
+    "vancomycin": 81
+   },
+   "conflict": {
+    "gentamicin_hl": "printed 45% but its printed counts are 37/75 = 49.3%"
+   },
+   "note": "Printed as \"Enterococcus spp\"; its location totals equal the sums of E. faecalis, E. faecium and Enterococcus spp. (where listed) in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 8,
+   "page": 38,
+   "table": "GPC Urine (Section B, printed page 32)",
+   "s": {
+    "ampicillin": 14,
+    "ciprofloxacin": 0,
+    "gentamicin_hl": 0,
+    "linezolid": 88,
+    "nitrofurantoin": 71,
+    "teicoplanin": 71,
+    "vancomycin": 63
+   },
+   "nt": {
+    "ampicillin": 7,
+    "ciprofloxacin": 8,
+    "gentamicin_hl": 7,
+    "linezolid": 8,
+    "nitrofurantoin": 7,
+    "teicoplanin": 7,
+    "vancomycin": 8
+   },
+   "note": "Printed as \"Enterococcus spp\"; its location totals equal the sums of E. faecalis, E. faecium and Enterococcus spp. (where listed) in the location-wise isolation table (page 29).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella spp.",
+   "n": 31,
+   "page": 46,
+   "table": "GNB Blood (Section B, printed page 40)",
+   "s": {
+    "ampicillin": 78,
+    "azithromycin": 90,
+    "cefixime": 82,
+    "ceftriaxone": 82,
+    "chloramphenicol": 67,
+    "ciprofloxacin": 48,
+    "cotrimoxazole": 79
+   },
+   "nt": {
+    "ampicillin": 7,
+    "azithromycin": 29,
+    "cefixime": 17,
+    "ceftriaxone": 17,
+    "chloramphenicol": 6,
+    "ciprofloxacin": 29,
+    "cotrimoxazole": 24
+   },
+   "conflict": {
+    "ampicillin": "printed 78% but its printed counts are 6/7 = 85.7%"
+   },
+   "note": "Printed as \"Salmonella Spp.\"; typhoidal: its location totals equal the sums of S. Typhi, S. Paratyphi A and Salmonella spp. in the blood isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella spp.",
+   "n": 26,
+   "page": 46,
+   "table": "GNB Blood (Section B, printed page 40)",
+   "s": {
+    "ampicillin": 70,
+    "azithromycin": 92,
+    "cefixime": 75,
+    "ceftriaxone": 71,
+    "chloramphenicol": 80,
+    "ciprofloxacin": 8,
+    "cotrimoxazole": 85
+   },
+   "nt": {
+    "ampicillin": 20,
+    "azithromycin": 26,
+    "cefixime": 12,
+    "ceftriaxone": 24,
+    "chloramphenicol": 20,
+    "ciprofloxacin": 26,
+    "cotrimoxazole": 26
+   },
+   "note": "Printed as \"Salmonella Spp.\"; typhoidal: its location totals equal the sums of S. Typhi, S. Paratyphi A and Salmonella spp. in the blood isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 6,
+   "page": 46,
+   "table": "GNB Blood (Section B, printed page 40)",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 100,
+    "ciprofloxacin": 0,
+    "ertapenem": 100,
+    "imipenem": 83,
+    "levofloxacin": 17,
+    "meropenem": 83,
+    "piptazo": 50
+   },
+   "nt": {
+    "amikacin": 1,
+    "cefotaxime": 1,
+    "ceftazidime": 2,
+    "ciprofloxacin": 6,
+    "ertapenem": 2,
+    "imipenem": 6,
+    "levofloxacin": 6,
+    "meropenem": 6,
+    "piptazo": 6
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 26,
+   "page": 46,
+   "table": "GNB Blood (Section B, printed page 40)",
+   "s": {
+    "amikacin": 56,
+    "cefotaxime": 17,
+    "ceftazidime": 22,
+    "ciprofloxacin": 12,
+    "ertapenem": 63,
+    "imipenem": 72,
+    "levofloxacin": 22,
+    "meropenem": 80,
+    "piptazo": 58
+   },
+   "nt": {
+    "amikacin": 9,
+    "cefotaxime": 12,
+    "ceftazidime": 9,
+    "ciprofloxacin": 26,
+    "ertapenem": 16,
+    "imipenem": 25,
+    "levofloxacin": 23,
+    "meropenem": 25,
+    "piptazo": 26
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 8,
+   "page": 46,
+   "table": "GNB Blood (Section B, printed page 40)",
+   "s": {
+    "amikacin": 50,
+    "cefotaxime": 17,
+    "ceftazidime": 25,
+    "ciprofloxacin": 0,
+    "ertapenem": 33,
+    "imipenem": 50,
+    "levofloxacin": 0,
+    "meropenem": 38,
+    "piptazo": 43
+   },
+   "nt": {
+    "amikacin": 2,
+    "cefotaxime": 6,
+    "ceftazidime": 4,
+    "ciprofloxacin": 8,
+    "ertapenem": 6,
+    "imipenem": 8,
+    "levofloxacin": 8,
+    "meropenem": 8,
+    "piptazo": 7
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 13,
+   "page": 46,
+   "table": "GNB Blood (Section B, printed page 40)",
+   "s": {
+    "amikacin": 25,
+    "cefotaxime": 14,
+    "ceftazidime": 0,
+    "ciprofloxacin": 8,
+    "ertapenem": 22,
+    "imipenem": 15,
+    "levofloxacin": 36,
+    "meropenem": 31,
+    "piptazo": 23
+   },
+   "nt": {
+    "amikacin": 4,
+    "cefotaxime": 7,
+    "ceftazidime": 5,
+    "ciprofloxacin": 13,
+    "ertapenem": 9,
+    "imipenem": 13,
+    "levofloxacin": 11,
+    "meropenem": 13,
+    "piptazo": 13
+   },
+   "note": "Printed as \"Klebsiella pneumoniae (n=38)\" (species; the blood isolation table lists no other Klebsiella).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 24,
+   "page": 46,
+   "table": "GNB Blood (Section B, printed page 40)",
+   "s": {
+    "amikacin": 10,
+    "cefotaxime": 0,
+    "ceftazidime": 13,
+    "ciprofloxacin": 4,
+    "ertapenem": 5,
+    "imipenem": 4,
+    "levofloxacin": 5,
+    "meropenem": 0,
+    "piptazo": 0
+   },
+   "nt": {
+    "amikacin": 10,
+    "cefotaxime": 14,
+    "ceftazidime": 8,
+    "ciprofloxacin": 24,
+    "ertapenem": 21,
+    "imipenem": 24,
+    "levofloxacin": 19,
+    "meropenem": 24,
+    "piptazo": 20
+   },
+   "conflict": {
+    "meropenem": "printed 0% but its printed counts are 1/24 = 4.2%"
+   },
+   "note": "Printed as \"Klebsiella pneumoniae (n=38)\" (species; the blood isolation table lists no other Klebsiella).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 8,
+   "page": 47,
+   "table": "GNB Blood (Section B, printed page 41)",
+   "s": {
+    "amikacin": 40,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ciprofloxacin": 13,
+    "ertapenem": 17,
+    "imipenem": 25,
+    "levofloxacin": 25,
+    "meropenem": 38,
+    "piptazo": 25
+   },
+   "nt": {
+    "amikacin": 5,
+    "cefotaxime": 4,
+    "ceftazidime": 5,
+    "ciprofloxacin": 8,
+    "ertapenem": 6,
+    "imipenem": 8,
+    "levofloxacin": 8,
+    "meropenem": 8,
+    "piptazo": 4
+   },
+   "note": "Printed as \"Enterobacter spp.\"; its location totals equal the sums of Enterobacter spp. and E. cloacae in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 5,
+   "page": 47,
+   "table": "GNB Blood (Section B, printed page 41)",
+   "s": {
+    "amikacin": 33,
+    "cefepime": 60,
+    "ceftazidime": 100,
+    "imipenem": 20,
+    "levofloxacin": 0,
+    "meropenem": 80,
+    "minocycline": 100,
+    "piptazo": 50
+   },
+   "nt": {
+    "amikacin": 3,
+    "cefepime": 5,
+    "ceftazidime": 2,
+    "imipenem": 5,
+    "levofloxacin": 5,
+    "meropenem": 5,
+    "minocycline": 3,
+    "piptazo": 2
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 49,
+   "page": 47,
+   "table": "GNB Blood (Section B, printed page 41)",
+   "s": {
+    "amikacin": 62,
+    "cefepime": 35,
+    "ceftazidime": 15,
+    "imipenem": 10,
+    "levofloxacin": 15,
+    "meropenem": 41,
+    "minocycline": 84,
+    "piptazo": 33
+   },
+   "nt": {
+    "amikacin": 21,
+    "cefepime": 49,
+    "ceftazidime": 27,
+    "imipenem": 49,
+    "levofloxacin": 48,
+    "meropenem": 49,
+    "minocycline": 32,
+    "piptazo": 39
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 29,
+   "page": 47,
+   "table": "GNB Blood (Section B, printed page 41)",
+   "s": {
+    "amikacin": 0,
+    "cefepime": 3,
+    "ceftazidime": 0,
+    "imipenem": 3,
+    "levofloxacin": 3,
+    "meropenem": 3,
+    "minocycline": 65,
+    "piptazo": 4
+   },
+   "nt": {
+    "amikacin": 8,
+    "cefepime": 29,
+    "ceftazidime": 16,
+    "imipenem": 29,
+    "levofloxacin": 29,
+    "meropenem": 29,
+    "minocycline": 20,
+    "piptazo": 24
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 6,
+   "page": 47,
+   "table": "GNB Blood (Section B, printed page 41)",
+   "s": {
+    "amikacin": 100,
+    "cefepime": 50,
+    "ceftazidime": 100,
+    "ciprofloxacin": 83,
+    "gentamicin": 83,
+    "imipenem": 67,
+    "levofloxacin": 67,
+    "meropenem": 67,
+    "piptazo": 33,
+    "tobramycin": 60
+   },
+   "nt": {
+    "amikacin": 1,
+    "cefepime": 6,
+    "ceftazidime": 1,
+    "ciprofloxacin": 6,
+    "gentamicin": 6,
+    "imipenem": 6,
+    "levofloxacin": 6,
+    "meropenem": 6,
+    "piptazo": 6,
+    "tobramycin": 5
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 7,
+   "page": 47,
+   "table": "GNB Blood (Section B, printed page 41)",
+   "s": {
+    "amikacin": 33,
+    "cefepime": 33,
+    "ceftazidime": 60,
+    "ciprofloxacin": 43,
+    "gentamicin": 50,
+    "imipenem": 29,
+    "levofloxacin": 43,
+    "meropenem": 29,
+    "piptazo": 25,
+    "tobramycin": 25
+   },
+   "nt": {
+    "amikacin": 3,
+    "cefepime": 6,
+    "ceftazidime": 5,
+    "ciprofloxacin": 7,
+    "gentamicin": 6,
+    "imipenem": 7,
+    "levofloxacin": 7,
+    "meropenem": 7,
+    "piptazo": 4,
+    "tobramycin": 4
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 7,
+   "page": 48,
+   "table": "GPC Blood (Section B, printed page 42)",
+   "s": {
+    "cefoxitin": 57,
+    "ciprofloxacin": 14,
+    "clindamycin": 57,
+    "erythromycin": 17,
+    "linezolid": 100,
+    "penicillin": 0,
+    "tetracycline": 83,
+    "cotrimoxazole": 33
+   },
+   "nt": {
+    "cefoxitin": 7,
+    "ciprofloxacin": 7,
+    "clindamycin": 7,
+    "erythromycin": 6,
+    "linezolid": 7,
+    "penicillin": 7,
+    "tetracycline": 6,
+    "cotrimoxazole": 6
+   },
+   "note": "Not split by methicillin.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 40,
+   "page": 48,
+   "table": "GPC Blood (Section B, printed page 42)",
+   "s": {
+    "cefoxitin": 55,
+    "ciprofloxacin": 26,
+    "clindamycin": 65,
+    "erythromycin": 28,
+    "linezolid": 100,
+    "penicillin": 5,
+    "tetracycline": 90,
+    "teicoplanin": 15,
+    "tigecycline": 100,
+    "cotrimoxazole": 59,
+    "vancomycin": 100
+   },
+   "nt": {
+    "cefoxitin": 40,
+    "ciprofloxacin": 39,
+    "clindamycin": 40,
+    "erythromycin": 39,
+    "linezolid": 40,
+    "penicillin": 38,
+    "tetracycline": 40,
+    "teicoplanin": 13,
+    "tigecycline": 2,
+    "cotrimoxazole": 37,
+    "vancomycin": 2
+   },
+   "note": "Not split by methicillin.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 10,
+   "page": 48,
+   "table": "GPC Blood (Section B, printed page 42)",
+   "s": {
+    "cefoxitin": 40,
+    "ciprofloxacin": 40,
+    "clindamycin": 50,
+    "erythromycin": 20,
+    "linezolid": 100,
+    "penicillin": 10,
+    "tetracycline": 80,
+    "teicoplanin": 25,
+    "cotrimoxazole": 56,
+    "vancomycin": 100
+   },
+   "nt": {
+    "cefoxitin": 10,
+    "ciprofloxacin": 10,
+    "clindamycin": 10,
+    "erythromycin": 10,
+    "linezolid": 9,
+    "penicillin": 10,
+    "tetracycline": 10,
+    "teicoplanin": 4,
+    "cotrimoxazole": 9,
+    "vancomycin": 1
+   },
+   "note": "Not split by methicillin.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "CoNS",
+   "n": 21,
+   "page": 48,
+   "table": "GPC Blood (Section B, printed page 42)",
+   "s": {
+    "cefoxitin": 35,
+    "ciprofloxacin": 71,
+    "clindamycin": 71,
+    "erythromycin": 20,
+    "linezolid": 86,
+    "penicillin": 20,
+    "tetracycline": 80,
+    "teicoplanin": 27,
+    "tigecycline": 100,
+    "cotrimoxazole": 75,
+    "vancomycin": 100
+   },
+   "nt": {
+    "cefoxitin": 20,
+    "ciprofloxacin": 21,
+    "clindamycin": 21,
+    "erythromycin": 20,
+    "linezolid": 21,
+    "penicillin": 20,
+    "tetracycline": 20,
+    "teicoplanin": 11,
+    "tigecycline": 3,
+    "cotrimoxazole": 20,
+    "vancomycin": 3
+   },
+   "note": "Printed as \"CoNS\"; its location totals equal the sums of S. epidermidis, S. haemolyticus, S. hominis, S. lugdunensis and Staphylococcus spp. (where listed) in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "CoNS",
+   "n": 73,
+   "page": 48,
+   "table": "GPC Blood (Section B, printed page 42)",
+   "s": {
+    "cefoxitin": 19,
+    "ciprofloxacin": 39,
+    "clindamycin": 53,
+    "erythromycin": 16,
+    "linezolid": 93,
+    "penicillin": 11,
+    "tetracycline": 83,
+    "teicoplanin": 36,
+    "tigecycline": 100,
+    "cotrimoxazole": 44,
+    "vancomycin": 100
+   },
+   "nt": {
+    "cefoxitin": 67,
+    "ciprofloxacin": 70,
+    "clindamycin": 70,
+    "erythromycin": 70,
+    "linezolid": 69,
+    "penicillin": 65,
+    "tetracycline": 69,
+    "teicoplanin": 39,
+    "tigecycline": 14,
+    "cotrimoxazole": 66,
+    "vancomycin": 16
+   },
+   "note": "Printed as \"CoNS\"; its location totals equal the sums of S. epidermidis, S. haemolyticus, S. hominis, S. lugdunensis and Staphylococcus spp. (where listed) in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "CoNS",
+   "n": 30,
+   "page": 48,
+   "table": "GPC Blood (Section B, printed page 42)",
+   "s": {
+    "cefoxitin": 3,
+    "ciprofloxacin": 21,
+    "clindamycin": 24,
+    "erythromycin": 7,
+    "linezolid": 93,
+    "penicillin": 7,
+    "tetracycline": 76,
+    "teicoplanin": 69,
+    "tigecycline": 100,
+    "cotrimoxazole": 37,
+    "vancomycin": 100
+   },
+   "nt": {
+    "cefoxitin": 29,
+    "ciprofloxacin": 29,
+    "clindamycin": 29,
+    "erythromycin": 29,
+    "linezolid": 28,
+    "penicillin": 29,
+    "tetracycline": 29,
+    "teicoplanin": 13,
+    "tigecycline": 8,
+    "cotrimoxazole": 30,
+    "vancomycin": 8
+   },
+   "note": "Printed as \"CoNS\"; its location totals equal the sums of S. epidermidis, S. haemolyticus, S. hominis, S. lugdunensis and Staphylococcus spp. (where listed) in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 14,
+   "page": 48,
+   "table": "GPC Blood (Section B, printed page 42)",
+   "s": {
+    "ampicillin": 20,
+    "gentamicin_hl": 67,
+    "linezolid": 100,
+    "teicoplanin": 71,
+    "vancomycin": 86
+   },
+   "nt": {
+    "ampicillin": 10,
+    "gentamicin_hl": 12,
+    "linezolid": 14,
+    "teicoplanin": 14,
+    "vancomycin": 14
+   },
+   "note": "Printed as \"Enterococcus species\"; its location totals equal the sums of E. faecalis, E. faecium and Enterococcus spp. (where listed) in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 7,
+   "page": 48,
+   "table": "GPC Blood (Section B, printed page 42)",
+   "s": {
+    "ampicillin": 14,
+    "gentamicin_hl": 50,
+    "linezolid": 100,
+    "teicoplanin": 57,
+    "vancomycin": 86
+   },
+   "nt": {
+    "ampicillin": 7,
+    "gentamicin_hl": 6,
+    "linezolid": 7,
+    "teicoplanin": 7,
+    "vancomycin": 7
+   },
+   "note": "Printed as \"Enterococcus species\"; its location totals equal the sums of E. faecalis, E. faecium and Enterococcus spp. (where listed) in the location-wise isolation table (page 39).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 57,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 83,
+    "cefotaxime": 8,
+    "ceftazidime": 23,
+    "ciprofloxacin": 7,
+    "ertapenem": 54,
+    "imipenem": 70,
+    "levofloxacin": 18,
+    "meropenem": 70,
+    "piptazo": 47
+   },
+   "nt": {
+    "amikacin": 12,
+    "cefotaxime": 25,
+    "ceftazidime": 13,
+    "ciprofloxacin": 56,
+    "ertapenem": 41,
+    "imipenem": 57,
+    "levofloxacin": 55,
+    "meropenem": 57,
+    "piptazo": 53
+   },
+   "note": "Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 212,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 64,
+    "cefotaxime": 5,
+    "ceftazidime": 15,
+    "ciprofloxacin": 4,
+    "ertapenem": 37,
+    "imipenem": 52,
+    "levofloxacin": 8,
+    "meropenem": 83,
+    "piptazo": 28
+   },
+   "nt": {
+    "amikacin": 85,
+    "cefotaxime": 106,
+    "ceftazidime": 52,
+    "ciprofloxacin": 212,
+    "ertapenem": 157,
+    "imipenem": 212,
+    "levofloxacin": 206,
+    "meropenem": 212,
+    "piptazo": 187
+   },
+   "conflict": {
+    "meropenem": "printed 83% but its printed counts are 117/212 = 55.2%"
+   },
+   "note": "Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 21,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 57,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 35,
+    "imipenem": 38,
+    "levofloxacin": 5,
+    "meropenem": 38,
+    "piptazo": 11
+   },
+   "nt": {
+    "amikacin": 7,
+    "cefotaxime": 10,
+    "ceftazidime": 6,
+    "ciprofloxacin": 21,
+    "ertapenem": 17,
+    "imipenem": 21,
+    "levofloxacin": 21,
+    "meropenem": 21,
+    "piptazo": 18
+   },
+   "note": "Specimen mix of the ICU Other samples group (288 positive samples, Section A page 14): other sample types 132, LRT 113, superficial infections 23, sterile sites 12, CSF 7, deep infections 1; so only 23 of the 288 are superficial-infection samples.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 58,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 72,
+    "cefotaxime": 13,
+    "ceftazidime": 36,
+    "ciprofloxacin": 24,
+    "ertapenem": 50,
+    "imipenem": 59,
+    "levofloxacin": 41,
+    "meropenem": 57,
+    "piptazo": 49
+   },
+   "nt": {
+    "amikacin": 18,
+    "cefotaxime": 24,
+    "ceftazidime": 14,
+    "ciprofloxacin": 58,
+    "ertapenem": 54,
+    "imipenem": 58,
+    "levofloxacin": 58,
+    "meropenem": 58,
+    "piptazo": 47
+   },
+   "note": "Printed as \"Klebsiella spp. (n=344)\": a genus group; its location totals equal the sums of K. pneumoniae, K. oxytoca, Klebsiella spp. (and K. (Enterobacter) aerogenes, where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 204,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 38,
+    "cefotaxime": 1,
+    "ceftazidime": 13,
+    "ciprofloxacin": 10,
+    "ertapenem": 25,
+    "imipenem": 32,
+    "levofloxacin": 18,
+    "meropenem": 34,
+    "piptazo": 19
+   },
+   "nt": {
+    "amikacin": 61,
+    "cefotaxime": 92,
+    "ceftazidime": 45,
+    "ciprofloxacin": 204,
+    "ertapenem": 159,
+    "imipenem": 204,
+    "levofloxacin": 195,
+    "meropenem": 203,
+    "piptazo": 180
+   },
+   "note": "Printed as \"Klebsiella spp. (n=344)\": a genus group; its location totals equal the sums of K. pneumoniae, K. oxytoca, Klebsiella spp. (and K. (Enterobacter) aerogenes, where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 82,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 21,
+    "cefotaxime": 0,
+    "ceftazidime": 5,
+    "ciprofloxacin": 2,
+    "ertapenem": 9,
+    "imipenem": 15,
+    "levofloxacin": 6,
+    "meropenem": 12,
+    "piptazo": 4
+   },
+   "nt": {
+    "amikacin": 29,
+    "cefotaxime": 43,
+    "ceftazidime": 21,
+    "ciprofloxacin": 82,
+    "ertapenem": 58,
+    "imipenem": 81,
+    "levofloxacin": 78,
+    "meropenem": 81,
+    "piptazo": 74
+   },
+   "note": "Printed as \"Klebsiella spp. (n=344)\": a genus group; its location totals equal the sums of K. pneumoniae, K. oxytoca, Klebsiella spp. (and K. (Enterobacter) aerogenes, where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the ICU Other samples group (288 positive samples, Section A page 14): other sample types 132, LRT 113, superficial infections 23, sterile sites 12, CSF 7, deep infections 1; so only 23 of the 288 are superficial-infection samples.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 24,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 50,
+    "cefotaxime": 25,
+    "ceftazidime": 50,
+    "ciprofloxacin": 29,
+    "ertapenem": 42,
+    "imipenem": 65,
+    "levofloxacin": 57,
+    "meropenem": 75,
+    "piptazo": 37
+   },
+   "nt": {
+    "amikacin": 12,
+    "cefotaxime": 12,
+    "ceftazidime": 6,
+    "ciprofloxacin": 24,
+    "ertapenem": 19,
+    "imipenem": 23,
+    "levofloxacin": 21,
+    "meropenem": 24,
+    "piptazo": 19
+   },
+   "note": "Printed as \"Enterobacter spp.\"; its location totals equal the sums of Enterobacter spp. and E. cloacae in the location-wise isolation table (pages 49 and 50). Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 58,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 48,
+    "cefotaxime": 6,
+    "ceftazidime": 40,
+    "ciprofloxacin": 25,
+    "ertapenem": 42,
+    "imipenem": 48,
+    "levofloxacin": 45,
+    "meropenem": 51,
+    "piptazo": 27
+   },
+   "nt": {
+    "amikacin": 25,
+    "cefotaxime": 32,
+    "ceftazidime": 10,
+    "ciprofloxacin": 56,
+    "ertapenem": 38,
+    "imipenem": 58,
+    "levofloxacin": 55,
+    "meropenem": 57,
+    "piptazo": 51
+   },
+   "conflict": {
+    "amikacin": "printed 48% but its printed counts are 13/25 = 52.0%"
+   },
+   "note": "Printed as \"Enterobacter spp.\"; its location totals equal the sums of Enterobacter spp. and E. cloacae in the location-wise isolation table (pages 49 and 50). Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 9,
+   "page": 59,
+   "table": "GNB Other (Section B, printed page 53)",
+   "s": {
+    "amikacin": 40,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 11,
+    "piptazo": 0
+   },
+   "nt": {
+    "amikacin": 5,
+    "cefotaxime": 5,
+    "ceftazidime": 1,
+    "ciprofloxacin": 9,
+    "ertapenem": 5,
+    "imipenem": 9,
+    "levofloxacin": 9,
+    "meropenem": 9,
+    "piptazo": 7
+   },
+   "note": "Printed as \"Enterobacter spp.\"; its location totals equal the sums of Enterobacter spp. and E. cloacae in the location-wise isolation table (pages 49 and 50). Specimen mix of the ICU Other samples group (288 positive samples, Section A page 14): other sample types 132, LRT 113, superficial infections 23, sterile sites 12, CSF 7, deep infections 1; so only 23 of the 288 are superficial-infection samples.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 21,
+   "page": 60,
+   "table": "GNB Other (Section B, printed page 54)",
+   "s": {
+    "amikacin": 92,
+    "cefotaxime": 22,
+    "ceftazidime": 50,
+    "ciprofloxacin": 35,
+    "ertapenem": 70,
+    "imipenem": 24,
+    "levofloxacin": 43,
+    "meropenem": 76,
+    "piptazo": 72
+   },
+   "nt": {
+    "amikacin": 12,
+    "cefotaxime": 9,
+    "ceftazidime": 10,
+    "ciprofloxacin": 20,
+    "ertapenem": 10,
+    "imipenem": 21,
+    "levofloxacin": 21,
+    "meropenem": 21,
+    "piptazo": 18
+   },
+   "note": "Printed as \"Proteus Species\"; its location totals equal the sums of P. mirabilis and P. vulgaris in the location-wise isolation table (pages 49 and 50). Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "n": 13,
+   "page": 60,
+   "table": "GNB Other (Section B, printed page 54)",
+   "s": {
+    "amikacin": 29,
+    "cefotaxime": 25,
+    "ceftazidime": 50,
+    "ciprofloxacin": 0,
+    "ertapenem": 40,
+    "imipenem": 38,
+    "levofloxacin": 8,
+    "meropenem": 46,
+    "piptazo": 56
+   },
+   "nt": {
+    "amikacin": 7,
+    "cefotaxime": 4,
+    "ceftazidime": 6,
+    "ciprofloxacin": 13,
+    "ertapenem": 10,
+    "imipenem": 13,
+    "levofloxacin": 12,
+    "meropenem": 13,
+    "piptazo": 9
+   },
+   "note": "Printed as \"Proteus Species\"; its location totals equal the sums of P. mirabilis and P. vulgaris in the location-wise isolation table (pages 49 and 50). Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "n": 6,
+   "page": 60,
+   "table": "GNB Other (Section B, printed page 54)",
+   "s": {
+    "amikacin": 0,
+    "cefotaxime": 25,
+    "ceftazidime": 100,
+    "ciprofloxacin": 33,
+    "ertapenem": 80,
+    "imipenem": 50,
+    "levofloxacin": 50,
+    "meropenem": 83,
+    "piptazo": 80
+   },
+   "nt": {
+    "amikacin": 1,
+    "cefotaxime": 4,
+    "ceftazidime": 1,
+    "ciprofloxacin": 6,
+    "ertapenem": 5,
+    "imipenem": 6,
+    "levofloxacin": 6,
+    "meropenem": 6,
+    "piptazo": 5
+   },
+   "note": "Printed as \"Morganella species\" (Morganella morganii in the location-wise isolation table (pages 49 and 50)). Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Morganella spp.",
+   "n": 7,
+   "page": 60,
+   "table": "GNB Other (Section B, printed page 54)",
+   "s": {
+    "amikacin": 33,
+    "cefotaxime": 0,
+    "ceftazidime": 33,
+    "ciprofloxacin": 29,
+    "ertapenem": 33,
+    "imipenem": 29,
+    "levofloxacin": 33,
+    "meropenem": 29,
+    "piptazo": 50
+   },
+   "nt": {
+    "amikacin": 3,
+    "cefotaxime": 2,
+    "ceftazidime": 3,
+    "ciprofloxacin": 7,
+    "ertapenem": 6,
+    "imipenem": 7,
+    "levofloxacin": 6,
+    "meropenem": 7,
+    "piptazo": 6
+   },
+   "note": "Printed as \"Morganella species\" (Morganella morganii in the location-wise isolation table (pages 49 and 50)). Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "n": 5,
+   "page": 60,
+   "table": "GNB Other (Section B, printed page 54)",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 100,
+    "ceftazidime": 100,
+    "ciprofloxacin": 20,
+    "ertapenem": 75,
+    "imipenem": 100,
+    "levofloxacin": 80,
+    "meropenem": 100,
+    "piptazo": 60
+   },
+   "nt": {
+    "amikacin": 3,
+    "cefotaxime": 1,
+    "ceftazidime": 1,
+    "ciprofloxacin": 5,
+    "ertapenem": 4,
+    "imipenem": 5,
+    "levofloxacin": 5,
+    "meropenem": 5,
+    "piptazo": 5
+   },
+   "note": "Printed as \"Citrobacter species\" (C. koseri, C. freundii and Citrobacter spp. in the location-wise isolation table (pages 49 and 50)). Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "n": 26,
+   "page": 60,
+   "table": "GNB Other (Section B, printed page 54)",
+   "s": {
+    "amikacin": 20,
+    "cefotaxime": 0,
+    "ceftazidime": 17,
+    "ciprofloxacin": 12,
+    "ertapenem": 24,
+    "imipenem": 23,
+    "levofloxacin": 18,
+    "meropenem": 23,
+    "piptazo": 13
+   },
+   "nt": {
+    "amikacin": 5,
+    "cefotaxime": 8,
+    "ceftazidime": 6,
+    "ciprofloxacin": 25,
+    "ertapenem": 21,
+    "imipenem": 26,
+    "levofloxacin": 22,
+    "meropenem": 26,
+    "piptazo": 23
+   },
+   "note": "Printed as \"Citrobacter species\" (C. koseri, C. freundii and Citrobacter spp. in the location-wise isolation table (pages 49 and 50)). Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 15,
+   "page": 61,
+   "table": "GNB Other (Section B, printed page 55)",
+   "s": {
+    "amikacin": 50,
+    "cefepime": 43,
+    "ceftazidime": 0,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 50,
+    "minocycline": 78,
+    "piptazo": 42
+   },
+   "nt": {
+    "amikacin": 4,
+    "cefepime": 14,
+    "ceftazidime": 2,
+    "imipenem": 15,
+    "levofloxacin": 15,
+    "meropenem": 14,
+    "minocycline": 9,
+    "piptazo": 12
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 103,
+   "page": 61,
+   "table": "GNB Other (Section B, printed page 55)",
+   "s": {
+    "amikacin": 33,
+    "cefepime": 17,
+    "ceftazidime": 8,
+    "imipenem": 1,
+    "levofloxacin": 1,
+    "meropenem": 21,
+    "minocycline": 53,
+    "piptazo": 17
+   },
+   "nt": {
+    "amikacin": 15,
+    "cefepime": 102,
+    "ceftazidime": 39,
+    "imipenem": 102,
+    "levofloxacin": 102,
+    "meropenem": 103,
+    "minocycline": 77,
+    "piptazo": 96
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 120,
+   "page": 61,
+   "table": "GNB Other (Section B, printed page 55)",
+   "s": {
+    "amikacin": 0,
+    "cefepime": 6,
+    "ceftazidime": 0,
+    "imipenem": 0,
+    "levofloxacin": 1,
+    "meropenem": 3,
+    "minocycline": 65,
+    "piptazo": 5
+   },
+   "nt": {
+    "amikacin": 14,
+    "cefepime": 118,
+    "ceftazidime": 55,
+    "imipenem": 119,
+    "levofloxacin": 117,
+    "meropenem": 120,
+    "minocycline": 97,
+    "piptazo": 105
+   },
+   "note": "Printed as \"Acinetobacter species\"; its location totals equal the sums of A. baumannii, A. baumannii-calcoaceticus complex, Acinetobacter spp. (and A. lwoffii, where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the ICU Other samples group (288 positive samples, Section A page 14): other sample types 132, LRT 113, superficial infections 23, sterile sites 12, CSF 7, deep infections 1; so only 23 of the 288 are superficial-infection samples.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 58,
+   "page": 61,
+   "table": "GNB Other (Section B, printed page 55)",
+   "s": {
+    "amikacin": 64,
+    "cefepime": 73,
+    "ceftazidime": 57,
+    "ciprofloxacin": 58,
+    "gentamicin": 70,
+    "imipenem": 81,
+    "levofloxacin": 60,
+    "meropenem": 66,
+    "piptazo": 60,
+    "tobramycin": 70
+   },
+   "nt": {
+    "amikacin": 33,
+    "cefepime": 56,
+    "ceftazidime": 21,
+    "ciprofloxacin": 57,
+    "gentamicin": 57,
+    "imipenem": 58,
+    "levofloxacin": 58,
+    "meropenem": 58,
+    "piptazo": 47,
+    "tobramycin": 23
+   },
+   "note": "Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 102,
+   "page": 61,
+   "table": "GNB Other (Section B, printed page 55)",
+   "s": {
+    "amikacin": 68,
+    "cefepime": 69,
+    "ceftazidime": 71,
+    "ciprofloxacin": 72,
+    "gentamicin": 77,
+    "imipenem": 81,
+    "levofloxacin": 72,
+    "meropenem": 66,
+    "piptazo": 69,
+    "tobramycin": 73
+   },
+   "nt": {
+    "amikacin": 40,
+    "cefepime": 98,
+    "ceftazidime": 41,
+    "ciprofloxacin": 102,
+    "gentamicin": 99,
+    "imipenem": 101,
+    "levofloxacin": 99,
+    "meropenem": 101,
+    "piptazo": 85,
+    "tobramycin": 64
+   },
+   "note": "Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 18,
+   "page": 61,
+   "table": "GNB Other (Section B, printed page 55)",
+   "s": {
+    "amikacin": 17,
+    "cefepime": 22,
+    "ceftazidime": 13,
+    "ciprofloxacin": 18,
+    "gentamicin": 24,
+    "imipenem": 17,
+    "levofloxacin": 17,
+    "meropenem": 17,
+    "piptazo": 33,
+    "tobramycin": 25
+   },
+   "nt": {
+    "amikacin": 12,
+    "cefepime": 18,
+    "ceftazidime": 8,
+    "ciprofloxacin": 17,
+    "gentamicin": 17,
+    "imipenem": 18,
+    "levofloxacin": 18,
+    "meropenem": 18,
+    "piptazo": 9,
+    "tobramycin": 8
+   },
+   "note": "Specimen mix of the ICU Other samples group (288 positive samples, Section A page 14): other sample types 132, LRT 113, superficial infections 23, sterile sites 12, CSF 7, deep infections 1; so only 23 of the 288 are superficial-infection samples.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 259,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "cefoxitin": 57,
+    "ciprofloxacin": 6,
+    "clindamycin": 77,
+    "erythromycin": 32,
+    "linezolid": 99,
+    "penicillin": 6,
+    "tetracycline": 88,
+    "teicoplanin": 42,
+    "tigecycline": 98,
+    "cotrimoxazole": 52,
+    "vancomycin": 96,
+    "oxacillin": 70
+   },
+   "nt": {
+    "cefoxitin": 251,
+    "ciprofloxacin": 258,
+    "clindamycin": 258,
+    "erythromycin": 255,
+    "linezolid": 255,
+    "penicillin": 233,
+    "tetracycline": 251,
+    "teicoplanin": 113,
+    "tigecycline": 47,
+    "cotrimoxazole": 247,
+    "vancomycin": 47,
+    "oxacillin": 46
+   },
+   "note": "Printed as \"Staphylococcus aures\"; not split by methicillin; cefoxitin and oxacillin are separate printed columns. Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 171,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "cefoxitin": 54,
+    "ciprofloxacin": 8,
+    "clindamycin": 76,
+    "erythromycin": 32,
+    "linezolid": 99,
+    "penicillin": 5,
+    "tetracycline": 87,
+    "teicoplanin": 50,
+    "tigecycline": 100,
+    "cotrimoxazole": 46,
+    "vancomycin": 100,
+    "oxacillin": 70
+   },
+   "nt": {
+    "cefoxitin": 170,
+    "ciprofloxacin": 169,
+    "clindamycin": 170,
+    "erythromycin": 166,
+    "linezolid": 169,
+    "penicillin": 163,
+    "tetracycline": 161,
+    "teicoplanin": 70,
+    "tigecycline": 34,
+    "cotrimoxazole": 166,
+    "vancomycin": 35,
+    "oxacillin": 30
+   },
+   "note": "Printed as \"Staphylococcus aures\"; not split by methicillin; cefoxitin and oxacillin are separate printed columns. Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 4,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "cefoxitin": 100,
+    "ciprofloxacin": 0,
+    "clindamycin": 100,
+    "erythromycin": 25,
+    "linezolid": 75,
+    "penicillin": 25,
+    "tetracycline": 75,
+    "teicoplanin": 50,
+    "tigecycline": 100,
+    "cotrimoxazole": 33,
+    "vancomycin": 100,
+    "oxacillin": 0
+   },
+   "nt": {
+    "cefoxitin": 2,
+    "ciprofloxacin": 4,
+    "clindamycin": 2,
+    "erythromycin": 4,
+    "linezolid": 4,
+    "penicillin": 4,
+    "tetracycline": 4,
+    "teicoplanin": 2,
+    "tigecycline": 1,
+    "cotrimoxazole": 3,
+    "vancomycin": 1,
+    "oxacillin": 1
+   },
+   "note": "Printed as \"Staphylococcus aures\"; not split by methicillin; cefoxitin and oxacillin are separate printed columns. Specimen mix of the ICU Other samples group (288 positive samples, Section A page 14): other sample types 132, LRT 113, superficial infections 23, sterile sites 12, CSF 7, deep infections 1; so only 23 of the 288 are superficial-infection samples.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "CoNS",
+   "n": 23,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "cefoxitin": 23,
+    "ciprofloxacin": 50,
+    "clindamycin": 70,
+    "erythromycin": 26,
+    "linezolid": 100,
+    "penicillin": 5,
+    "tetracycline": 74,
+    "teicoplanin": 25,
+    "tigecycline": 100,
+    "cotrimoxazole": 57,
+    "vancomycin": 100
+   },
+   "nt": {
+    "cefoxitin": 22,
+    "ciprofloxacin": 22,
+    "clindamycin": 23,
+    "erythromycin": 23,
+    "linezolid": 23,
+    "penicillin": 22,
+    "tetracycline": 23,
+    "teicoplanin": 12,
+    "tigecycline": 2,
+    "cotrimoxazole": 21,
+    "vancomycin": 2
+   },
+   "note": "Printed as \"CoNS\"; its location totals equal the sums of S. epidermidis, S. haemolyticus, S. hominis, S. lugdunensis and Staphylococcus spp. (where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "CoNS",
+   "n": 48,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "cefoxitin": 18,
+    "ciprofloxacin": 38,
+    "clindamycin": 59,
+    "erythromycin": 15,
+    "linezolid": 96,
+    "penicillin": 13,
+    "tetracycline": 79,
+    "teicoplanin": 19,
+    "tigecycline": 100,
+    "cotrimoxazole": 58,
+    "vancomycin": 71
+   },
+   "nt": {
+    "cefoxitin": 44,
+    "ciprofloxacin": 48,
+    "clindamycin": 46,
+    "erythromycin": 48,
+    "linezolid": 45,
+    "penicillin": 45,
+    "tetracycline": 48,
+    "teicoplanin": 21,
+    "tigecycline": 6,
+    "cotrimoxazole": 45,
+    "vancomycin": 7
+   },
+   "note": "Printed as \"CoNS\"; its location totals equal the sums of S. epidermidis, S. haemolyticus, S. hominis, S. lugdunensis and Staphylococcus spp. (where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "CoNS",
+   "n": 14,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "cefoxitin": 15,
+    "ciprofloxacin": 50,
+    "clindamycin": 43,
+    "erythromycin": 0,
+    "linezolid": 77,
+    "penicillin": 0,
+    "tetracycline": 86,
+    "teicoplanin": 43,
+    "tigecycline": 100,
+    "cotrimoxazole": 57,
+    "vancomycin": 67
+   },
+   "nt": {
+    "cefoxitin": 13,
+    "ciprofloxacin": 14,
+    "clindamycin": 14,
+    "erythromycin": 14,
+    "linezolid": 13,
+    "penicillin": 14,
+    "tetracycline": 14,
+    "teicoplanin": 7,
+    "tigecycline": 3,
+    "cotrimoxazole": 14,
+    "vancomycin": 3
+   },
+   "note": "Printed as \"CoNS\"; its location totals equal the sums of S. epidermidis, S. haemolyticus, S. hominis, S. lugdunensis and Staphylococcus spp. (where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the ICU Other samples group (288 positive samples, Section A page 14): other sample types 132, LRT 113, superficial infections 23, sterile sites 12, CSF 7, deep infections 1; so only 23 of the 288 are superficial-infection samples.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 14,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "ampicillin": 86,
+    "gentamicin_hl": 71,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "nt": {
+    "ampicillin": 14,
+    "gentamicin_hl": 14,
+    "linezolid": 14,
+    "teicoplanin": 12,
+    "vancomycin": 14
+   },
+   "note": "Printed as \"Enterococcus Species\"; its location totals equal the sums of E. faecalis, E. faecium and Enterococcus spp. (where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the OPD Other samples group (541 positive samples, Section A page 15): superficial infections 430, deep infections 46, LRT 35, other sample types 24, sterile sites 5, CSF 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 50,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "ampicillin": 53,
+    "gentamicin_hl": 51,
+    "linezolid": 93,
+    "teicoplanin": 79,
+    "vancomycin": 88
+   },
+   "nt": {
+    "ampicillin": 40,
+    "gentamicin_hl": 47,
+    "linezolid": 46,
+    "teicoplanin": 39,
+    "vancomycin": 49
+   },
+   "conflict": {
+    "gentamicin_hl": "printed 51% but its printed counts are 27/47 = 57.4%"
+   },
+   "note": "Printed as \"Enterococcus Species\"; its location totals equal the sums of E. faecalis, E. faecium and Enterococcus spp. (where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the ward Other samples group (1011 positive samples, Section A page 15): superficial infections 565, other sample types 151, LRT 143, deep infections 82, sterile sites 61, CSF 8, faeces 1.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 6,
+   "page": 62,
+   "table": "GPC Other (Section B, printed page 56)",
+   "s": {
+    "ampicillin": 0,
+    "gentamicin_hl": 20,
+    "linezolid": 83,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "nt": {
+    "ampicillin": 5,
+    "gentamicin_hl": 5,
+    "linezolid": 6,
+    "teicoplanin": 4,
+    "vancomycin": 6
+   },
+   "note": "Printed as \"Enterococcus Species\"; its location totals equal the sums of E. faecalis, E. faecium and Enterococcus spp. (where listed) in the location-wise isolation table (pages 49 and 50). Specimen mix of the ICU Other samples group (288 positive samples, Section A page 14): other sample types 132, LRT 113, superficial infections 23, sterile sites 12, CSF 7, deep infections 1; so only 23 of the 288 are superficial-infection samples.",
+   "specimen_as_printed": "Other samples (all samples except blood and urine: superficial infections, LRT, deep infections, sterile sites, CSF and other sample types)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": "CR",
+   "n": 203,
+   "page": 63,
+   "table": "Section B V Table 1 (printed page 57)",
+   "s": {
+    "amikacin": 15.2,
+    "cefepime": 2,
+    "ceftazidime": 3.1,
+    "colistin": 100,
+    "imipenem": 0,
+    "levofloxacin": 9.5,
+    "meropenem": 1,
+    "minocycline": 55.7,
+    "piptazo": 3.2
+   },
+   "nt": {
+    "amikacin": 33,
+    "cefepime": 199,
+    "ceftazidime": 96,
+    "colistin": 1,
+    "imipenem": 200,
+    "levofloxacin": 199,
+    "meropenem": 201,
+    "minocycline": 158,
+    "piptazo": 185
+   },
+   "notes": {
+    "colistin": "Marked * in the source: colistin by broth microdilution in selected MDR isolates including carbapenem-resistant ones; the report says to read the number susceptible (1 of 1) rather than the percentage."
+   },
+   "note": "Carbapenem-resistant (CR) subset, all specimens except faeces, all locations. The report does not define CR or CS: its CR rows include isolates susceptible to imipenem or meropenem, and its CS rows include isolates not susceptible to them. Printed as \"Acinetobacter sps.\".",
+   "specimen_as_printed": "all (except faeces) specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": "CS",
+   "n": 73,
+   "page": 63,
+   "table": "Section B V Table 1 (printed page 57)",
+   "s": {
+    "amikacin": 84,
+    "cefepime": 73.6,
+    "ceftazidime": 47.6,
+    "imipenem": 94.5,
+    "levofloxacin": 84.5,
+    "meropenem": 90.4,
+    "minocycline": 97.7,
+    "piptazo": 73.2
+   },
+   "nt": {
+    "amikacin": 25,
+    "cefepime": 72,
+    "ceftazidime": 21,
+    "imipenem": 73,
+    "levofloxacin": 71,
+    "meropenem": 73,
+    "minocycline": 44,
+    "piptazo": 56
+   },
+   "note": "Carbapenem-susceptible (CS) subset, all specimens except faeces, all locations. The report does not define CR or CS: its CR rows include isolates susceptible to imipenem or meropenem, and its CS rows include isolates not susceptible to them. Printed as \"Acinetobacter sps.\".",
+   "specimen_as_printed": "all (except faeces) specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": "CR",
+   "n": 91,
+   "page": 63,
+   "table": "Section B V Table 2 (printed page 57)",
+   "s": {
+    "amikacin": 14,
+    "cefepime": 20.2,
+    "ceftazidime": 17.6,
+    "ciprofloxacin": 17.8,
+    "colistin": 88,
+    "gentamicin": 26.4,
+    "imipenem": 18.9,
+    "levofloxacin": 15.6,
+    "meropenem": 2.2,
+    "piptazo": 11.3,
+    "tobramycin": 19.2
+   },
+   "nt": {
+    "amikacin": 43,
+    "cefepime": 89,
+    "ceftazidime": 34,
+    "ciprofloxacin": 90,
+    "colistin": 9,
+    "gentamicin": 87,
+    "imipenem": 90,
+    "levofloxacin": 90,
+    "meropenem": 90,
+    "piptazo": 62,
+    "tobramycin": 52
+   },
+   "notes": {
+    "colistin": "Marked * in the source: colistin by broth microdilution in selected MDR isolates including carbapenem-resistant ones; the report says to read the number susceptible (8 of 9) rather than the percentage."
+   },
+   "note": "Carbapenem-resistant (CR) subset, all specimens except faeces, all locations. The report does not define CR or CS: its CR rows include isolates susceptible to imipenem or meropenem, and its CS rows include isolates not susceptible to them.",
+   "specimen_as_printed": "all (except faeces) specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": "CS",
+   "n": 151,
+   "page": 63,
+   "table": "Section B V Table 2 (printed page 57)",
+   "s": {
+    "amikacin": 87.3,
+    "cefepime": 88.9,
+    "ceftazidime": 82.9,
+    "ciprofloxacin": 86.7,
+    "gentamicin": 93.9,
+    "imipenem": 100,
+    "levofloxacin": 87.8,
+    "meropenem": 92,
+    "piptazo": 89.7,
+    "tobramycin": 91.7
+   },
+   "nt": {
+    "amikacin": 71,
+    "cefepime": 144,
+    "ceftazidime": 70,
+    "ciprofloxacin": 150,
+    "gentamicin": 147,
+    "imipenem": 151,
+    "levofloxacin": 148,
+    "meropenem": 150,
+    "piptazo": 126,
+    "tobramycin": 84
+   },
+   "note": "Carbapenem-susceptible (CS) subset, all specimens except faeces, all locations. The report does not define CR or CS: its CR rows include isolates susceptible to imipenem or meropenem, and its CS rows include isolates not susceptible to them.",
+   "specimen_as_printed": "all (except faeces) specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": "CR",
+   "n": 342,
+   "page": 64,
+   "table": "Section B V Table 3 (printed page 58)",
+   "s": {
+    "amikacin": 20.7,
+    "cefazolin": 14,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ciprofloxacin": 10.6,
+    "colistin": 77,
+    "ertapenem": 2.7,
+    "imipenem": 10,
+    "levofloxacin": 15.3,
+    "meropenem": 10.1,
+    "nitrofurantoin": 9.3,
+    "piptazo": 6.4,
+    "cotrimoxazole": 25.8
+   },
+   "nt": {
+    "amikacin": 111,
+    "cefazolin": 93,
+    "cefotaxime": 173,
+    "ceftazidime": 65,
+    "ciprofloxacin": 340,
+    "colistin": 18,
+    "ertapenem": 256,
+    "imipenem": 339,
+    "meropenem": 338,
+    "nitrofurantoin": 97,
+    "piptazo": 299,
+    "cotrimoxazole": 93
+   },
+   "conflict": {
+    "levofloxacin": "printed \"48/31 (15.3)\": more isolates susceptible than tested, so the printed percentage cannot be checked against its counts"
+   },
+   "notes": {
+    "colistin": "Marked * in the source: colistin by broth microdilution in selected MDR isolates including carbapenem-resistant ones; the report says to read the number susceptible (14 of 18) rather than the percentage."
+   },
+   "note": "Carbapenem-resistant (CR) subset, all specimens except faeces, all locations. The report does not define CR or CS: its CR rows include isolates susceptible to imipenem or meropenem, and its CS rows include isolates not susceptible to them.",
+   "specimen_as_printed": "all (except faeces) specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": "CS",
+   "n": 205,
+   "page": 64,
+   "table": "Section B V Table 3 (printed page 58)",
+   "s": {
+    "amikacin": 89.1,
+    "cefazolin": 66.3,
+    "cefotaxime": 23.8,
+    "ceftazidime": 52.2,
+    "ciprofloxacin": 65.4,
+    "ertapenem": 83.1,
+    "imipenem": 89.7,
+    "levofloxacin": 76.5,
+    "meropenem": 92.7,
+    "nitrofurantoin": 25.5,
+    "piptazo": 63.4,
+    "cotrimoxazole": 66.3
+   },
+   "nt": {
+    "amikacin": 64,
+    "cefazolin": 101,
+    "cefotaxime": 80,
+    "ceftazidime": 23,
+    "ciprofloxacin": 205,
+    "ertapenem": 166,
+    "imipenem": 204,
+    "levofloxacin": 187,
+    "meropenem": 205,
+    "nitrofurantoin": 106,
+    "piptazo": 172,
+    "cotrimoxazole": 104
+   },
+   "note": "Carbapenem-susceptible (CS) subset, all specimens except faeces, all locations. The report does not define CR or CS: its CR rows include isolates susceptible to imipenem or meropenem, and its CS rows include isolates not susceptible to them.",
+   "specimen_as_printed": "all (except faeces) specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": "CR",
+   "n": 451,
+   "page": 64,
+   "table": "Section B V Table 4 (printed page 58)",
+   "s": {
+    "amikacin": 41.5,
+    "cefazolin": 7.2,
+    "cefotaxime": 0.6,
+    "ceftazidime": 2.4,
+    "ciprofloxacin": 7.6,
+    "colistin": 75,
+    "ertapenem": 4.5,
+    "fosfomycin": 98.4,
+    "imipenem": 28.8,
+    "levofloxacin": 9,
+    "meropenem": 29.7,
+    "nitrofurantoin": 57.6,
+    "piptazo": 10.9,
+    "cotrimoxazole": 23.5
+   },
+   "nt": {
+    "amikacin": 183,
+    "cefazolin": 276,
+    "cefotaxime": 166,
+    "ceftazidime": 42,
+    "ciprofloxacin": 447,
+    "colistin": 24,
+    "ertapenem": 353,
+    "fosfomycin": 64,
+    "imipenem": 448,
+    "levofloxacin": 410,
+    "meropenem": 448,
+    "nitrofurantoin": 283,
+    "piptazo": 376,
+    "cotrimoxazole": 281
+   },
+   "notes": {
+    "colistin": "Colistin 18 of 24 susceptible (no * marker on this cell)."
+   },
+   "note": "Carbapenem-resistant (CR) subset, all specimens except faeces, all locations. The report does not define CR or CS: its CR rows include isolates susceptible to imipenem or meropenem, and its CS rows include isolates not susceptible to them.",
+   "specimen_as_printed": "all (except faeces) specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": "CS",
+   "n": 782,
+   "page": 64,
+   "table": "Section B V Table 4 (printed page 58)",
+   "s": {
+    "amikacin": 90.6,
+    "cefazolin": 38.5,
+    "cefotaxime": 16.1,
+    "ceftazidime": 31,
+    "ciprofloxacin": 33.1,
+    "colistin": 25,
+    "ertapenem": 84.1,
+    "fosfomycin": 98.1,
+    "imipenem": 95.1,
+    "levofloxacin": 38.5,
+    "meropenem": 96.4,
+    "nitrofurantoin": 81.7,
+    "piptazo": 73,
+    "cotrimoxazole": 49.6
+   },
+   "nt": {
+    "amikacin": 255,
+    "cefazolin": 577,
+    "cefotaxime": 298,
+    "ceftazidime": 42,
+    "ciprofloxacin": 776,
+    "colistin": 4,
+    "ertapenem": 647,
+    "fosfomycin": 106,
+    "imipenem": 769,
+    "levofloxacin": 704,
+    "meropenem": 772,
+    "nitrofurantoin": 606,
+    "piptazo": 689,
+    "cotrimoxazole": 575
+   },
+   "notes": {
+    "colistin": "Marked * in the source: colistin by broth microdilution in selected MDR isolates including carbapenem-resistant ones; the report says to read the number susceptible (1 of 4) rather than the percentage."
+   },
+   "note": "Carbapenem-susceptible (CS) subset, all specimens except faeces, all locations. The report does not define CR or CS: its CR rows include isolates susceptible to imipenem or meropenem, and its CS rows include isolates not susceptible to them.",
+   "specimen_as_printed": "all (except faeces) specimens"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 614,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 304,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 30,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 119,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 117,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 15,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 18,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 12,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 0,
+   "page": 35
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 12,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "n": 7,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 1,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "n": 5,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Morganella spp.",
+   "n": 10,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Morganella spp.",
+   "n": 0,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "n": 7,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "n": 9,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 0,
+   "page": 36
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 11,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 25,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 3,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 20,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 33,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 5,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 19,
+   "page": 38
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 6,
+   "page": 38
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 1,
+   "page": 38
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "CoNS",
+   "n": 3,
+   "page": 38
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "CoNS",
+   "n": 7,
+   "page": 38
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "CoNS",
+   "n": 0,
+   "page": 38
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 61,
+   "page": 38
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 82,
+   "page": 38
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 8,
+   "page": 38
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella spp.",
+   "n": 31,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella spp.",
+   "n": 26,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Salmonella spp.",
+   "n": 0,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 6,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 26,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 8,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 1,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 13,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 24,
+   "page": 46
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 0,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 8,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 2,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 5,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 49,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 29,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 0,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 6,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 7,
+   "page": 47
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 7,
+   "page": 48
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 40,
+   "page": 48
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 10,
+   "page": 48
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "CoNS",
+   "n": 21,
+   "page": 48
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "CoNS",
+   "n": 73,
+   "page": 48
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "CoNS",
+   "n": 30,
+   "page": 48
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 1,
+   "page": 48
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 14,
+   "page": 48
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 7,
+   "page": 48
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 57,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 212,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 21,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 58,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 204,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 82,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 24,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 58,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 9,
+   "page": 59
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 21,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "n": 13,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 2,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "n": 6,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Morganella spp.",
+   "n": 7,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Morganella spp.",
+   "n": 1,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "n": 5,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "n": 26,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 3,
+   "page": 60
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 15,
+   "page": 61
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 103,
+   "page": 61
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 120,
+   "page": 61
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 58,
+   "page": 61
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 102,
+   "page": 61
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 18,
+   "page": 61
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 259,
+   "page": 62
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 171,
+   "page": 62
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 4,
+   "page": 62
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "CoNS",
+   "n": 23,
+   "page": 62
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "CoNS",
+   "n": 48,
+   "page": 62
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "CoNS",
+   "n": 14,
+   "page": 62
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 14,
+   "page": 62
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 50,
+   "page": 62
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 6,
+   "page": 62
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Serratia marcescens",
+   "n": 1,
+   "page": 29
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Burkholderia cepacia",
+   "n": 1,
+   "page": 29
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 29
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Serratia marcescens",
+   "n": 1,
+   "page": 29
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Serratia marcescens",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Candida krusei",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Candida albicans",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida parapsilosis",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "n": 1,
+   "page": 39
+  },
+  {
+   "spec": "other",
+   "set": "opd",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 50
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Serratia marcescens",
+   "n": 7,
+   "page": 49
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 4,
+   "page": 49
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Burkholderia cepacia",
+   "n": 3,
+   "page": 50
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Streptococcus pyogenes",
+   "n": 1,
+   "page": 50
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "n": 1,
+   "page": 50
+  },
+  {
+   "spec": "other",
+   "set": "ward",
+   "org": "Providencia stuartii",
+   "n": 1,
+   "page": 50
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 3,
+   "page": 49
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Burkholderia cepacia",
+   "n": 3,
+   "page": 49
+  },
+  {
+   "spec": "other",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 49
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Section B location-wise bar charts Ch_A1 to Ch_C5 (urine pages 30 to 34, blood pages 40 to 45, other samples pages 51 to 58)",
+   "why": "The charts repeat the organism and location rows of the location-wise tables (each chart's data labels are the same set of percentages as its table row, checked for all 49 charts), so the tables were extracted instead. Chart titles name some groups differently: the urine Klebsiella charts are titled K. pneumoniae (OPD n=104) while the table row is Klebsiella sps. (n=119)."
+  },
+  {
+   "what": "Section B VI, pages 65 to 74: AIIMS Bhopal (regional centre) versus rest-of-network average, percent R, I and S for all samples (Salmonella Typhi: blood), 15 organisms",
+   "why": "Regional-centre comparison output of the ICMR i-AMRSS software without isolate numbers (a drug is shown only when at least 20 isolates were tested at the centre and in the rest of the network); the rest-of-network figures are not this hospital's data. The hospital's own location-wise tables with counts were extracted instead."
+  },
+  {
+   "what": "Section A, pages 7 to 26: sample and isolate distribution tables (samples by type, month and location; positive cultures by district, state, age, sex and department; isolates by bacterial group for all specimens and for each specimen type: urine, superficial infection, blood, the Others sample type, LRT, deep infection, sterile site, CSF)",
+   "why": "Not susceptibility tables. The specimen-type isolate tables are not recorded as counts: the antibiogram pools every specimen other than blood and urine into one Other samples group (recorded as other specimens), so separate LRT, deep-infection, sterile-site or CSF counts would overlap it; the location-wise counts of the antibiogram section are recorded instead."
+  },
+  {
+   "what": "Section A pages 17 and 18: VISA 2/90, VRSA 1/90 and VRE 26/239 among isolates tested for vancomycin (all specimens)",
+   "why": "Phenotype prevalence figures, not organism by antibiotic tables."
+  },
+  {
+   "what": "Location-wise isolation tables (pages 29 and 30 urine, 39 blood, 49 and 50 other samples): species lines of organisms that fall inside an antibiogram group",
+   "why": "The isolation tables list species (for example K. pneumoniae, K. oxytoca and K. aerogenes) where the antibiogram tables print one group (Klebsiella sps.), so the group totals printed in the antibiogram tables are recorded as counts instead; recording the species lines under the same organism keys would report false count mismatches. The group totals equal the species sums in every stratum except urine Citrobacter and CoNS (see those rows). Also not recorded: urine OPD Staphylococcus saprophyticus 3 and Staphylococcus spp. 3 (unclear whether counted in the CoNS group), and blood Candida lipolytica 1 (ward) and Candida utilis 1 (ICU), which have no organism key."
+  },
+  {
+   "what": "Section B V CR and CS tables: cells printed 0/0 (-) (colistin in CS Acinetobacter, CS P. aeruginosa and CS K. pneumoniae; fosfomycin in CR and CS K. pneumoniae)",
+   "why": "No isolates tested; left out."
+  },
+  {
+   "org": "Enterobacter spp.",
+   "drug": "fosfomycin",
+   "value": "0% (0/0)",
+   "what": "Urine ward Enterobacter spp., page 35",
+   "why": "Printed 0% with 0/0 isolates tested (none tested), so the 0% is not a result; left out."
+  },
+  {
+   "org": "Morganella spp.",
+   "drug": "cefotaxime",
+   "value": "0% (0/0)",
+   "what": "Urine ward Morganella spp., page 36",
+   "why": "Printed 0% with 0/0 isolates tested (none tested), so the 0% is not a result; left out."
+  },
+  {
+   "org": "Acinetobacter spp.",
+   "drug": "amikacin",
+   "value": "0% (0/0)",
+   "what": "Urine OPD Acinetobacter spp., page 37",
+   "why": "Printed 0% with 0/0 isolates tested (none tested), so the 0% is not a result; left out."
+  },
+  {
+   "org": "Acinetobacter spp.",
+   "drug": "amikacin",
+   "value": "0% (0/0)",
+   "what": "Urine ICU Acinetobacter spp., page 37",
+   "why": "Printed 0% with 0/0 isolates tested (none tested), so the 0% is not a result; left out."
+  },
+  {
+   "org": "Enterococcus spp.",
+   "drug": "fosfomycin",
+   "value": "0% (0/0)",
+   "what": "Urine ICU Enterococcus spp., page 38",
+   "why": "Printed 0% with 0/0 isolates tested (none tested), so the 0% is not a result; left out."
+  }
+ ]
+}

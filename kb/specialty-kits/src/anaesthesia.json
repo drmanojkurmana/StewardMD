@@ -51,6 +51,9 @@
     { "id": "dentition", "label": "Dentition", "type": "select", "opts": ["Normal", "Edentulous", "Removable dentures", "Loose or damaged teeth", "Prominent upper incisors", "Crowns, bridges or implants"] },
     { "id": "dental_details", "label": "Teeth details", "type": "text", "hint": "e.g. loose upper left central incisor, upper denture" },
     { "id": "airway_other", "label": "Other airway features", "type": "text", "hint": "e.g. beard, short thick neck, goitre, facial or neck surgery or radiotherapy" },
+    { "id": "lemon_look", "label": "LEMON L: looks like a difficult airway from outside (e.g. facial trauma, large incisors, beard, large tongue, short thick neck)", "type": "check", "hint": "LEMON: Look externally, Evaluate 3-3-2, Mallampati, Obstruction, Neck mobility (Mallampati and neck movement are above)" },
+    { "id": "lemon_332", "label": "LEMON E: 3-3-2 rule not met (mouth opening under 3 fingers, hyoid to chin under 3 fingers, or thyroid notch to floor of mouth under 2 fingers)", "type": "check" },
+    { "id": "lemon_obstruction", "label": "LEMON O: upper airway obstruction or its signs (e.g. stridor, muffled voice, epiglottitis, peritonsillar abscess, tumour, trauma)", "type": "check" },
     { "id": "difficult_airway_history", "label": "Previous difficult airway", "type": "select", "opts": ["None known", "Yes, documented in records or alert letter", "Yes, reported by the patient"] }
    ]
   },
@@ -129,6 +132,7 @@
     { "id": "pac_outcome", "label": "Pre-anaesthetic check outcome", "type": "select", "opts": ["Fit for the planned procedure", "Fit after optimisation", "Deferred pending investigations or referral", "Not fit at present"] },
     { "id": "technique", "label": "Planned anaesthetic technique", "type": "select", "opts": ["General anaesthesia with tracheal tube", "General anaesthesia with supraglottic airway", "Spinal anaesthesia", "Epidural or combined spinal-epidural", "Peripheral nerve block", "Local anaesthesia with sedation", "Local anaesthesia alone", "Monitored anaesthesia care"] },
     { "id": "analgesia_plan", "label": "Pain relief plan after surgery", "type": "text", "hint": "e.g. multimodal analgesia, wound infiltration, nerve block" },
+    { "id": "la_last_ready", "label": "Local anaesthetic maximum dose worked out, and 20% lipid emulsion and the LAST protocol at hand", "type": "check", "hint": "LAST: stop injecting, call for help; 20% lipid emulsion 1.5 mL/kg IV over 1 min, then 15 mL/kg/h (0.25 mL/kg/min); cumulative maximum 12 mL/kg (AAGBI 2010)" },
     { "id": "apfel", "label": "PONV risk (Apfel score)", "type": "number", "unit": "/4" },
     { "id": "special_requirements", "label": "Special requirements", "type": "text", "hint": "e.g. difficult airway trolley, blood cross-matched, HDU or ICU bed, CPAP after surgery" },
     { "id": "pending", "label": "Investigations or referrals awaited", "type": "text" },
@@ -180,7 +184,9 @@
   { "org": "ESC / ESAIC", "title": "2022 ESC Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery", "year": 2022, "url": "https://academic.oup.com/eurheartj/article/43/39/3826/6675076" },
   { "org": "NICE", "title": "NG45 Routine preoperative tests for elective surgery", "year": 2016, "url": "https://www.nice.org.uk/guidance/ng45" },
   { "org": "Royal College of Anaesthetists and Association of Anaesthetists", "title": "You and your anaesthetic: information to help patients prepare for an anaesthetic, fourth edition", "year": 2014, "url": "https://www.hdft.nhs.uk/wp-content/uploads/2016/02/you-and-your-anaesthetic.pdf" },
-  { "org": "Association of Anaesthetists", "title": "A nomogram for calculating the maximum dose of local anaesthetic (Anaesthesia 2014)", "year": 2014, "url": "https://associationofanaesthetists-publications.onlinelibrary.wiley.com/doi/10.1111/anae.12679" }
+  { "org": "Association of Anaesthetists", "title": "A nomogram for calculating the maximum dose of local anaesthetic (Anaesthesia 2014)", "year": 2014, "url": "https://associationofanaesthetists-publications.onlinelibrary.wiley.com/doi/10.1111/anae.12679" },
+  { "org": "Association of Anaesthetists of Great Britain and Ireland", "title": "AAGBI Safety Guideline: Management of Severe Local Anaesthetic Toxicity", "year": 2010, "url": "https://anaesthetists.org/Portals/0/PDFs/Guidelines%20PDFs/Guideline_management_severe_local_anaesthetic_toxicity_v2_2010_final.pdf" },
+  { "org": "Emergency Medicine Journal", "title": "Reed MJ, Dunn MJG, McKeown DW. Can an airway assessment score predict difficulty at intubation in the emergency department? (LEMON) Emerg Med J 2005; 22: 99 to 102", "year": 2005, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1726680/" }
  ],
  "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
 }

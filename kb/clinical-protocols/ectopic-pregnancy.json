@@ -5,7 +5,7 @@
  "population": "Pregnancy",
  "basis": "international",
  "setting": "Emergency department, early pregnancy unit, gynaecology ward, operating theatre",
- "aliases": ["ectopic", "tubal pregnancy", "ruptured ectopic", "PUL", "pregnancy of unknown location", "methotrexate ectopic", "salpingectomy", "salpingotomy", "EP", "early pregnancy bleeding"],
+ "aliases": ["ectopic", "tubal pregnancy", "ruptured ectopic", "PUL", "pregnancy of unknown location", "methotrexate ectopic", "salpingectomy", "salpingotomy", "EP", "early pregnancy bleeding", "anti-D ectopic", "anti-D miscarriage"],
  "summary": "Suspect ectopic pregnancy in any woman of reproductive age with pain, bleeding or collapse and a positive pregnancy test. Unstable: resuscitate and operate. Stable: transvaginal scan plus serial hCG; single-dose methotrexate 50 mg/m2 for small unruptured ectopics with low hCG, surgery otherwise.",
  "sections": [
   {
@@ -67,8 +67,10 @@
    "kind": "special",
    "title": "Anti-D and follow-up",
    "items": [
-    "NICE 2026: do not give anti-D for ectopic pregnancy at up to 11+6 weeks. Offer anti-D at least 250 IU (50 mcg) IM to RhD-negative women at 12+0 to 12+6 weeks having medical or surgical management. Beyond this, follow routine anti-D guidance for sensitising events.",
-    "Earlier guidance (ACOG 2018; RCOG 2016 for surgically managed cases) gave anti-D more widely and many Indian units still do; follow a written unit policy.",
+    "Under the updated NICE guideline (NG126), anti-D immunoglobulin prophylaxis is no longer routinely offered for ectopic pregnancy or miscarriage at 11+6 weeks' gestation or under, whether medical or surgical management is used.",
+    "Under 12 weeks (up to 11+6 weeks): do not offer anti-D prophylaxis for ectopic pregnancy, miscarriage or threatened miscarriage. Use ultrasound to guide dating if needed.",
+    "12+0 to 12+6 weeks: offer anti-D immunoglobulin prophylaxis (at least 250 IU (50 mcg) IM within 72 hours) to RhD-negative patients having medical or surgical management of an ectopic pregnancy or miscarriage. Beyond this, follow routine anti-D guidance for sensitising events.",
+    "Informed choice and testing: explain that anti-D is a blood product so the patient can make an informed decision, and do not use a Kleihauer test to quantify feto-maternal haemorrhage at these early gestations.",
     "After salpingectomy: urine pregnancy test at 3 weeks. After salpingotomy: serum hCG at 7 days, then weekly until negative.",
     "Non-tubal ectopics (caesarean scar, cervical, interstitial or cornual, ovarian, abdominal) and heterotopic pregnancy need senior or specialist management.",
     "Advise early self-referral for a transvaginal scan in any future pregnancy."
@@ -88,7 +90,7 @@
  ],
  "drugs": [
   { "name": "Methotrexate", "dose": "50 mg/m2 IM single dose; second dose if hCG falls less than 15% between day 4 and day 7", "notes": "Check CBC, creatinine and liver enzymes first. Avoid folic acid, NSAIDs and alcohol. Avoid conception for at least 3 months." },
-  { "name": "Anti-D immunoglobulin", "dose": "At least 250 IU (50 mcg) IM within 72 hours", "notes": "NICE 2026: RhD-negative women at 12+0 to 12+6 weeks having medical or surgical management; not needed up to 11+6 weeks." },
+  { "name": "Anti-D immunoglobulin", "dose": "At least 250 IU (50 mcg) IM within 72 hours", "notes": "NICE NG126: RhD-negative patients at 12+0 to 12+6 weeks having medical or surgical management of ectopic pregnancy or miscarriage. Not offered at 11+6 weeks or under. It is a blood product: discuss it. No Kleihauer test at these gestations." },
   { "name": "Paracetamol", "dose": "1 g orally or IV every 6 hours; maximum 4 g/day (3 g/day if weight below 50 kg or liver disease)", "notes": "Preferred analgesic after methotrexate; avoid NSAIDs." }
  ],
  "sources": [

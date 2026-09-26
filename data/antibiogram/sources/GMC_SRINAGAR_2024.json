@@ -1,0 +1,2194 @@
+{
+ "id": "GMC_SRINAGAR_2024",
+ "kind": "institution",
+ "inst": "GMC_SRINAGAR",
+ "institution": "Government Medical College Srinagar",
+ "short": "GMC Srinagar",
+ "city": "Srinagar",
+ "state": "Jammu and Kashmir",
+ "region": "north",
+ "sector": "government",
+ "year": 2024,
+ "isolates": 3922,
+ "end": "2024-12",
+ "period": "January to December 2024",
+ "published": "2025",
+ "url": "https://www.gmcs.ac.in/Photos/11-28-2510-18-28-GMC-Antibiogram%202024.pdf",
+ "page": "https://www.gmcs.ac.in/InnerPagelevel1.aspx?assid=L1iEAVQeY3I=&pid=ivhnyo1RApo=",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Microbiology, Government Medical College Srinagar. Antibiogram 2024 (January to December 2024). Srinagar: Government Medical College; 2025.",
+ "reporting": "Percent susceptible. Overall tables for Gram-negative (Table 5) and Gram-positive (Table 6) priority pathogens from all specimens and locations, with the number of isolates; blood, urine and pus tables (Tables 7 to 12) by location (IPD, OPD, ICU) with the number of isolates per location. WHO priority pathogens only.",
+ "method": "WHONET aggregate data; one result per patient per specimen type and pathogen (4533 reported isolates deduplicated to 3922 unique patient isolates). AST method and breakpoint standard not stated.",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables 1, 3, 5, 7, 9, 10 and 11 parsed from the PDF text layer (cells assigned by the table ruling lines and word positions); Tables 6, 8 and 12 (incomplete ruling) entered from the text-layer word lines. Every value, n and location label was then compared by eye with the rendered page images (scale 2.5 whole pages; Tables 7, 9 and 11 again at scale 3.2 in two halves each), 2026-09-26."
+ },
+ "notes": "Antibiogram of WHO priority pathogens (Acinetobacter, Pseudomonas, E. coli, Klebsiella, Salmonella, S. aureus, Enterococcus) at GMC Srinagar, deduplicated with WHONET. IPD (inpatient wards) is recorded as ward; ICU is a separate column throughout. Overall Tables 5 and 6 (no specimen or location split) are recorded as all specimens, all settings. The \"Number of isolates\" printed in Tables 5 and 6 (e.g. E. coli 1045, S. aureus 878) is higher for every organism than the counts of Tables 1 and 3 (E. coli 976, S. aureus 775); both are recorded as printed. For E. coli, S. aureus and Enterococcus the Table 5 and 6 numbers match the unlabelled \"By Isolate\" (before deduplication) bars of Figure 3 (about 1045, 878 and 370), so the overall tables may count isolates before deduplication, although the report says the deduplicated file was used for AST; Figure 3 matches neither table for Klebsiella, Pseudomonas or Acinetobacter. Table 6 prints S. aureus co-trimoxazole 100.0, which the pus table (75% and 85%) contradicts (marked as a conflict). The source prints 0 in every drug column of strata with no isolates (e.g. blood OPD), so some printed zeros in small strata may stand for no result; they are kept as printed and zero-isolate rows are not extracted. Every printed 0 was checked by the second reader: a 0 for a drug that no table of this report shows tested for that organism, and a 0 that the January to June 2024 report of the same department contradicts (it prints a higher figure for isolates that are part of the full-year stratum, or \"-\" for the same isolates), is marked as a conflict; the other 0s are for drugs this report shows tested for the organism and may be real. Vancomycin for S. aureus is \"Mic Nd\" or \"Not Done\" everywhere except the urine table, which prints 0 (kept, marked as a conflict). Table 5 prints \"-\" (not tested) for Klebsiella ampicillin-sulbactam and Pseudomonas cefepime, but the blood, urine and pus tables print values for them (mostly 0); those cells are marked as conflicts. Counts: Table 1 (all specimens by location, 3924 isolates including 2 Salmonella), Table 3 (by specimen, all locations; the tracheal aspirate and respiratory sample columns are both recorded as respiratory, so each organism has two respiratory entries), and the strata Tables 7, 10 and 11 print with 0 isolates. Table 1 counts 6 ICU Enterococcus isolates while the blood, urine and pus tables list 3, 4 and 1 ICU isolates. The report states that percentages from more than 30 isolates are considered significant. Burkholderia (blood only) and Proteus mirabilis (pus only) appear in the specimen tables but not in Tables 1 and 3. The January to June 2024 report (GMC_SRINAGAR_2024_H1) also disagrees with some non-zero full-year figures by more than its isolates allow (e.g. blood IPD Burkholderia ceftazidime 73% here against 18.5% for 38 of the 48 isolates there); those figures are kept as printed.",
+ "issues": [
+  "Second reader 2026-09-26: all 510 cells (seeded sample 128), all 60 row n, organisms and settings, and all 63 counts (Tables 1 and 3 and the zero strata) re-read against the page images (whole pages at scale 2.5, table crops at scale 3 to 4) before comparing with the file; 0 transcription errors and no IPD/OPD/ICU swaps (Table 8 lists Enterococcus as IPD, ICU, OPD and S. aureus as IPD, OPD, ICU; both mapped correctly).",
+  "Cells not kept confirmed as printed: 10 intrinsic (Table 5 Pseudomonas co-trimoxazole 100; blood Burkholderia amikacin and gentamicin; urine Pseudomonas ceftriaxone 0; pus Proteus tetracycline 0) and 6 percentages no whole number of isolates gives (urine ICU E. coli fosfomycin 92, urine ICU Klebsiella fosfomycin 70, urine OPD Acinetobacter ampicillin-sulbactam 70, pus ICU E. coli imipenem and meropenem 60, urine IPD S. aureus fosfomycin 98).",
+  "The 13 Table 5 conflicts are confirmed: Table 5 prints \"-\" for Klebsiella ampicillin-sulbactam (the blood, urine and pus tables print 0 in all 8 strata with isolates) and for Pseudomonas cefepime (blood IPD 0 and ICU 0, urine IPD 50, OPD 83, ICU 0; the pus table prints \"-\"). The 2 S. aureus urine vancomycin 0 conflicts are also confirmed (Mic Nd or Not Done in Tables 6, 8 and 12).",
+  "Zeros: the file has 132 printed 0s. 32 are for a drug that no table of this report shows tested for that organism (Table 5 or 6 prints \"-\", blank, IR or Mic Nd, or the organism is not in Table 5 and every one of its rows prints 0); 10 already had a conflict (8 Klebsiella ampicillin-sulbactam, 2 S. aureus vancomycin) and 22 got one: blood ICU E. coli tetracycline; blood IPD and ICU Burkholderia ciprofloxacin, imipenem, meropenem, piperacillin-tazobactam and tetracycline, and ICU amoxicillin-clavulanate; urine Pseudomonas ceftriaxone and fosfomycin (IPD, OPD, ICU); pus IPD and OPD Proteus ampicillin-sulbactam and tetracycline.",
+  "26 more 0s are for drugs this report shows tested, but the January to June 2024 report (same department, its isolates part of the full-year strata) contradicts them; 3 already had a conflict (Pseudomonas cefepime) and 23 got one naming the January to June figure: it prints a figure above 0 for blood ICU E. coli cefepime (100%, n=4), blood ICU P. aeruginosa gentamicin, aztreonam, ciprofloxacin, imipenem, meropenem and piperacillin-tazobactam (n=20 of 25), blood ICU B. cepacia ceftazidime (41.7%, same 28 isolates), urine ICU E. coli imipenem and meropenem (75%, n=4), urine OPD K. pneumoniae amikacin (53.3%, n=15), urine ICU P. aeruginosa imipenem (100%, n=1), blood OPD Enterococcus ampicillin and vancomycin (100%, same single isolate) and urine ICU Enterococcus ampicillin (33.3%, n=3); or it prints \"-\" (not tested) for the same isolates: blood ICU Klebsiella amikacin, gentamicin, ciprofloxacin, meropenem, piperacillin-tazobactam and tetracycline (1 isolate), blood ICU Burkholderia gentamicin (28), blood OPD Enterococcus erythromycin (1).",
+  "The other 74 zeros are for drugs this report shows tested for the organism and are kept without a conflict; the January to June 2024 report also prints 0, prints no result, or has no matching stratum (pus). Doubtful but without evidence either way: urine OPD Pseudomonas ciprofloxacin 0 (n=29, IPD 41), urine OPD S. aureus teicoplanin 0 (n=11, IPD 77), pus OPD Klebsiella amoxicillin-clavulanate, cefepime and imipenem 0 (n=25, with ceftriaxone 9 and meropenem 23), and the other single-isolate rows (the blood ICU Klebsiella isolate shows this report printing 0 for drugs that were not tested).",
+  "Added a conflict to overall S. aureus co-trimoxazole 100.0 (Table 6): the pus table prints 75% (IPD, n=503) and 85% (OPD, n=128).",
+  "Overall isolate numbers: the Table 5 and 6 row notes are correct (E. coli 1045, Klebsiella 904, Pseudomonas 604, Acinetobacter 525, Enterococcus 370, S. aureus 878 against 976, 811, 532, 482, 346 and 775 in Tables 1 and 3, and the Table 6 location splits 283/78/9 and 706/157/15 against 262/78/6 and 610/141/24). Figure 3 (no data labels) measures about 1045 E. coli, 878 S. aureus and 370 Enterococcus isolates before deduplication, so Tables 5 and 6 may be built from the isolates before deduplication; added to notes.",
+  "Not changed, for the lead: non-zero figures that the January to June 2024 report makes impossible if its isolates are part of the full-year strata: blood IPD Burkholderia ceftazidime 73 (18.5%, n=38; at most about 40% possible; row note added), urine ICU E. coli piperacillin-tazobactam 100 (50%, n=4), blood IPD Enterococcus ampicillin 10 (55%, n=30), urine IPD Klebsiella meropenem 70 (K. pneumoniae 9.7%, n=41), urine OPD S. aureus cefoxitin 88 (33.3%, n=3), blood IPD Enterococcus and S. aureus linezolid 100 (93.3% and 96.7%). Blood OPD Acinetobacter has 0 isolates here but 2 in the January to June report.",
+  "Lead 2026-09-26: 25 figures cannot be reconciled with the January to June 2024 report (its isolates are part of this full-year report; the implied July to December share would fall outside 0 to 100%): marked as source conflicts."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 525,
+   "page": 10,
+   "table": "Table 5",
+   "s": {
+    "amikacin": 46.2,
+    "gentamicin": 38.5,
+    "ampsulbactam": 39,
+    "ceftazidime": 38,
+    "ciprofloxacin": 58,
+    "imipenem": 30,
+    "meropenem": 46,
+    "piptazo": 43.9,
+    "tetracycline": 31.4,
+    "cotrimoxazole": 60
+   },
+   "note": "Printed as \"Acinetobacter sp.\". Source inconsistency: this table prints 525 isolates, while Table 1 (by location) and Table 3 (by specimen) count 482.",
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "piptazo": "Piperacillin/Tazobactam",
+    "cotrimoxazole": "Trimethoprim/Sulfamethoxazole"
+   },
+   "conflict": {
+    "cotrimoxazole": "cannot be reconciled with the same hospital's January to June 2024 report (10% of 240 there), whose isolates are part of this full-year figure (60% of 525)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1045,
+   "page": 10,
+   "table": "Table 5",
+   "s": {
+    "amikacin": 57.3,
+    "gentamicin": 53,
+    "ampicillin": 12.6,
+    "amoxiclav": 35,
+    "cefepime": 23,
+    "ceftriaxone": 16.7,
+    "ciprofloxacin": 15.2,
+    "imipenem": 50,
+    "meropenem": 51.7,
+    "piptazo": 40,
+    "cotrimoxazole": 42.9
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin-Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam",
+    "cotrimoxazole": "Trimethoprim/Sulfamethoxazole"
+   },
+   "note": "Source inconsistency: this table prints 1045 isolates, while Table 1 (by location) and Table 3 (by specimen) count 976."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 904,
+   "page": 10,
+   "table": "Table 5",
+   "s": {
+    "amikacin": 25,
+    "gentamicin": 29.1,
+    "amoxiclav": 2.8,
+    "cefepime": 5.6,
+    "ceftriaxone": 12,
+    "ciprofloxacin": 7.9,
+    "cefuroxime": 13,
+    "imipenem": 39,
+    "meropenem": 30,
+    "piptazo": 13,
+    "tetracycline": 57.1,
+    "cotrimoxazole": 20
+   },
+   "note": "Printed as \"Klebsiella Sp.\". Source inconsistency: this table prints 904 isolates, while Table 1 (by location) and Table 3 (by specimen) count 811.",
+   "printed": {
+    "amoxiclav": "Amoxicillin-Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam",
+    "cotrimoxazole": "Trimethoprim/Sulfamethoxazole"
+   },
+   "conflict": {
+    "cefepime": "cannot be reconciled with the same hospital's January to June 2024 report (18% of 360 there), whose isolates are part of this full-year figure (5.6% of 904)",
+    "piptazo": "cannot be reconciled with the same hospital's January to June 2024 report (43.3% of 360 there), whose isolates are part of this full-year figure (13% of 904)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 604,
+   "page": 10,
+   "table": "Table 5",
+   "s": {
+    "amikacin": 58.1,
+    "gentamicin": 41.6,
+    "aztreonam": 64,
+    "ceftazidime": 44.6,
+    "ciprofloxacin": 33.5,
+    "imipenem": 17.9,
+    "meropenem": 51,
+    "piptazo": 74.3,
+    "cotrimoxazole": 100
+   },
+   "note": "Printed as \"Pseudomonas\". Source inconsistency: this table prints 604 isolates, while Table 1 (by location) and Table 3 (by specimen) count 532.",
+   "printed": {
+    "piptazo": "Piperacillin/Tazobactam",
+    "cotrimoxazole": "Trimethoprim/Sulfamethoxazole"
+   },
+   "notes": {
+    "cotrimoxazole": "Printed 100 although P. aeruginosa is intrinsically resistant to co-trimoxazole; kept as printed."
+   },
+   "conflict": {
+    "imipenem": "cannot be reconciled with the same hospital's January to June 2024 report (59.3% of 261 there), whose isolates are part of this full-year figure (17.9% of 604)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 370,
+   "page": 11,
+   "table": "Table 6",
+   "s": {
+    "ampicillin": 16.8,
+    "ciprofloxacin": 14.3,
+    "erythromycin": 9.7,
+    "gentamicin_hl": 57.9,
+    "linezolid": 91.3,
+    "teicoplanin": 75,
+    "vancomycin": 77.8
+   },
+   "note": "Printed as \"Enterococcus sp.\". Table 6 also splits the 370 isolates as inpatients 283, OPD 78, ICU 9 (Table 1 counts 262, 78 and 6). Source inconsistency: this table prints 370 isolates, while Table 1 (by location) and Table 3 (by specimen) count 346.",
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   },
+   "conflict": {
+    "ampicillin": "cannot be reconciled with the same hospital's January to June 2024 report (54.0% of 233 there), whose isolates are part of this full-year figure (16.8% of 370)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 878,
+   "page": 11,
+   "table": "Table 6",
+   "s": {
+    "amikacin": 66.7,
+    "cefoxitin": 39.7,
+    "ciprofloxacin": 13.6,
+    "clindamycin": 59.5,
+    "erythromycin": 26.6,
+    "gentamicin": 83.2,
+    "linezolid": 99,
+    "teicoplanin": 66.7,
+    "cotrimoxazole": 100
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\". Vancomycin printed as \"Mic Nd\" (MIC not done). Table 6 also splits the 878 isolates as inpatients 706, OPD 157, ICU 15 (Table 1 counts 610, 141 and 24). Source inconsistency: this table prints 878 isolates, while Table 1 (by location) and Table 3 (by specimen) count 775.",
+   "printed": {
+    "cotrimoxazole": "Trimethoprim/Sulfamethoxazole"
+   },
+   "conflict": {
+    "cotrimoxazole": "printed 100.0 for 878 isolates, but the pus table (Table 12) prints co-trimoxazole 75% (IPD, n=503) and 85% (OPD, n=128) for S. aureus, so the overall figure cannot be 100%"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 29,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 75,
+    "gentamicin": 67,
+    "amoxiclav": 35,
+    "cefepime": 23,
+    "ceftriaxone": 12,
+    "ciprofloxacin": 16,
+    "imipenem": 36,
+    "meropenem": 41,
+    "piptazo": 33
+   },
+   "printed": {
+    "amoxiclav": "amoxicillin/clavulinic acid",
+    "ceftriaxone": "Ceftrioxone %S",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 6,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 50,
+    "gentamicin": 67,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 67,
+    "ciprofloxacin": 33,
+    "imipenem": 25,
+    "meropenem": 33,
+    "piptazo": 33,
+    "tetracycline": 0
+   },
+   "printed": {
+    "amoxiclav": "amoxicillin/clavulinic acid",
+    "ceftriaxone": "Ceftrioxone %S",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "note": "3 printed values are 0 (amoxicillin-clavulanate, cefepime, tetracycline). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible.",
+   "conflict": {
+    "tetracycline": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Table 5, the blood IPD row and all pus rows leave E. coli tetracycline blank, and no table of this report prints a figure above 0 for it",
+    "cefepime": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints cefepime 100% for blood ICU E. coli (n=4, part of this full-year stratum), which a full-year 0% contradicts",
+    "imipenem": "cannot be reconciled with the same hospital's January to June 2024 report (50% of 4 there), whose isolates are part of this full-year figure (25% of 6)",
+    "meropenem": "cannot be reconciled with the same hospital's January to June 2024 report (100% of 4 there), whose isolates are part of this full-year figure (33% of 6)",
+    "piptazo": "cannot be reconciled with the same hospital's January to June 2024 report (100% of 4 there), whose isolates are part of this full-year figure (33% of 6)"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 44,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 56,
+    "gentamicin": 50,
+    "ampsulbactam": 0,
+    "amoxiclav": 16,
+    "cefepime": 29,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 0,
+    "imipenem": 39,
+    "meropenem": 39,
+    "piptazo": 13,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"Klebsiella sp.\". 3 printed values are 0 (ampicillin-sulbactam, ciprofloxacin, tetracycline). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible.",
+   "printed": {
+    "ampsulbactam": "Ampicillin/sulbactam",
+    "amoxiclav": "amoxicillin/clavulinic acid",
+    "ceftriaxone": "Ceftrioxone %S",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "ampsulbactam": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 0,
+    "gentamicin": 0,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 0,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"Klebsiella sp.\". 11 printed values are 0 (amikacin, gentamicin, ampicillin-sulbactam, amoxicillin-clavulanate, cefepime, ceftriaxone, ciprofloxacin, imipenem, meropenem, piperacillin-tazobactam, tetracycline). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible.",
+   "printed": {
+    "ampsulbactam": "Ampicillin/sulbactam",
+    "amoxiclav": "amoxicillin/clavulinic acid",
+    "ceftriaxone": "Ceftrioxone %S",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "ampsulbactam": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result",
+    "amikacin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints \"-\" (not tested) for amikacin in its single blood ICU K. pneumoniae isolate, and this stratum also has 1 isolate",
+    "gentamicin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints \"-\" (not tested) for gentamicin in its single blood ICU K. pneumoniae isolate, and this stratum also has 1 isolate",
+    "ciprofloxacin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints \"-\" (not tested) for ciprofloxacin in its single blood ICU K. pneumoniae isolate, and this stratum also has 1 isolate",
+    "meropenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints \"-\" (not tested) for meropenem in its single blood ICU K. pneumoniae isolate, and this stratum also has 1 isolate",
+    "piptazo": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints \"-\" (not tested) for piperacillin-tazobactam in its single blood ICU K. pneumoniae isolate, and this stratum also has 1 isolate",
+    "tetracycline": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints \"-\" (not tested) for tetracycline in its single blood ICU K. pneumoniae isolate, and this stratum also has 1 isolate"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 125,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 75,
+    "gentamicin": 70,
+    "aztreonam": 63,
+    "cefepime": 0,
+    "ceftazidime": 54,
+    "ciprofloxacin": 60,
+    "imipenem": 70,
+    "meropenem": 75,
+    "piptazo": 70
+   },
+   "note": "Printed as \"Pseudomonas sp.\".",
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "cefepime": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 25,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 40,
+    "gentamicin": 0,
+    "aztreonam": 0,
+    "cefepime": 0,
+    "ceftazidime": 30,
+    "ciprofloxacin": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 0
+   },
+   "note": "Printed as \"Pseudomonas sp.\". 7 printed values are 0 (gentamicin, aztreonam, cefepime, ciprofloxacin, imipenem, meropenem, piperacillin-tazobactam). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible.",
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "cefepime": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result",
+    "gentamicin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints gentamicin 47.4% for blood ICU P. aeruginosa (n=20, part of this full-year stratum), which a full-year 0% contradicts",
+    "aztreonam": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints aztreonam 85.7% for blood ICU P. aeruginosa (n=20, part of this full-year stratum), which a full-year 0% contradicts",
+    "ciprofloxacin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints ciprofloxacin 100% for blood ICU P. aeruginosa (n=20, part of this full-year stratum), which a full-year 0% contradicts",
+    "imipenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints imipenem 63.6% for blood ICU P. aeruginosa (n=20, part of this full-year stratum), which a full-year 0% contradicts",
+    "meropenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints meropenem 44.4% for blood ICU P. aeruginosa (n=20, part of this full-year stratum), which a full-year 0% contradicts",
+    "piptazo": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints piperacillin-tazobactam 88.9% for blood ICU P. aeruginosa (n=20, part of this full-year stratum), which a full-year 0% contradicts"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Burkholderia spp.",
+   "pheno": null,
+   "n": 48,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 25,
+    "gentamicin": 25,
+    "ceftazidime": 73,
+    "ciprofloxacin": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 0,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"Burkholderia sp.\". 5 printed values are 0 (ciprofloxacin, imipenem, meropenem, piperacillin-tazobactam, tetracycline). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible. The January to June 2024 report of the same department prints ceftazidime 18.5%, ciprofloxacin 25% and meropenem 66.7% for 38 blood IPD B. cepacia isolates; this full-year row (48 isolates) cannot be reconciled with them (ceftazidime 73% is not possible if those 38 isolates are included: at most about 40%).",
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "amikacin": "Printed as shown; aminoglycosides are expected to be inactive against Burkholderia (B. cepacia complex).",
+    "gentamicin": "Printed as shown; aminoglycosides are expected to be inactive against Burkholderia (B. cepacia complex)."
+   },
+   "conflict": {
+    "ciprofloxacin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for ciprofloxacin; the January to June 2024 report of the same department prints ciprofloxacin 25% for blood IPD B. cepacia (n=38, part of this full-year stratum)",
+    "imipenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for imipenem",
+    "meropenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for meropenem; the January to June 2024 report of the same department prints meropenem 66.7% for blood IPD B. cepacia (n=38, part of this full-year stratum)",
+    "piptazo": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for piperacillin-tazobactam",
+    "tetracycline": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for tetracycline",
+    "ceftazidime": "cannot be reconciled with the same hospital's January to June 2024 report (18.5% of 38 there), whose isolates are part of this full-year figure (73% of 48)"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Burkholderia spp.",
+   "pheno": null,
+   "n": 28,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 57,
+    "gentamicin": 0,
+    "amoxiclav": 0,
+    "ceftazidime": 0,
+    "ciprofloxacin": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 0,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"Burkholderia sp.\". 8 printed values are 0 (gentamicin, amoxicillin-clavulanate, ceftazidime, ciprofloxacin, imipenem, meropenem, piperacillin-tazobactam, tetracycline). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible. The January to June 2024 report of the same department prints ceftazidime 41.7%, ciprofloxacin 25% and meropenem 63.6% for 28 blood ICU B. cepacia isolates and \"-\" (not tested) for amikacin, gentamicin and the other drugs; this full-year row has the same 28 isolates but none of those figures.",
+   "printed": {
+    "amoxiclav": "amoxicillin/clavulinic acid",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "amikacin": "Printed as shown; aminoglycosides are expected to be inactive against Burkholderia (B. cepacia complex).",
+    "gentamicin": "Printed as shown; aminoglycosides are expected to be inactive against Burkholderia (B. cepacia complex)."
+   },
+   "conflict": {
+    "ciprofloxacin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for ciprofloxacin; the January to June 2024 report of the same department prints ciprofloxacin 25% for blood ICU B. cepacia (n=28, the same number of isolates)",
+    "imipenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for imipenem; the January to June 2024 report of the same department prints \"-\" (not tested) for blood ICU B. cepacia (n=28, the same number of isolates)",
+    "meropenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for meropenem; the January to June 2024 report of the same department prints meropenem 63.6% for blood ICU B. cepacia (n=28, the same number of isolates)",
+    "piptazo": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for piperacillin-tazobactam; the January to June 2024 report of the same department prints \"-\" (not tested) for blood ICU B. cepacia (n=28, the same number of isolates)",
+    "tetracycline": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Burkholderia is not in Table 5 and every Burkholderia row of the blood table prints 0 for tetracycline; the January to June 2024 report of the same department prints \"-\" (not tested) for blood ICU B. cepacia (n=28, the same number of isolates)",
+    "amoxiclav": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the IPD and OPD Burkholderia rows print \"-\" (not tested) for amoxicillin-clavulanate, and the January to June 2024 report of the same department prints \"-\" for blood ICU B. cepacia (n=28, the same number of isolates)",
+    "ceftazidime": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints ceftazidime 41.7% for blood ICU B. cepacia (n=28, the same number of isolates), which a full-year 0% contradicts",
+    "gentamicin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints \"-\" (not tested) for gentamicin in blood ICU B. cepacia (n=28, the same number of isolates)"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 117,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 58,
+    "gentamicin": 50,
+    "ceftazidime": 36,
+    "ciprofloxacin": 40,
+    "imipenem": 32,
+    "meropenem": 42,
+    "piptazo": 40,
+    "tetracycline": 53
+   },
+   "note": "Printed as \"Acinetobacter sp.\".",
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 38,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "amikacin": 50,
+    "gentamicin": 40,
+    "ceftazidime": 30,
+    "ciprofloxacin": 30,
+    "imipenem": 22,
+    "meropenem": 32,
+    "piptazo": 30,
+    "tetracycline": 43
+   },
+   "note": "Printed as \"Acinetobacter sp.\".",
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "amikacin": "cannot be reconciled with the same hospital's January to June 2024 report (0% of 24 there), whose isolates are part of this full-year figure (50% of 38)",
+    "tetracycline": "cannot be reconciled with the same hospital's January to June 2024 report (0% of 24 there), whose isolates are part of this full-year figure (43% of 38)"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella Typhi",
+   "pheno": null,
+   "n": 2,
+   "page": 12,
+   "table": "Table 7",
+   "s": {
+    "ceftriaxone": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftrioxone %S"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 339,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 80,
+    "gentamicin": 78,
+    "ampicillin": 13,
+    "amoxiclav": 28,
+    "cefepime": 53,
+    "ceftriaxone": 14,
+    "ciprofloxacin": 13,
+    "fosfomycin": 94,
+    "imipenem": 49,
+    "meropenem": 59,
+    "piptazo": 75
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "cefepime": "cannot be reconciled with the same hospital's January to June 2024 report (11.5% of 183 there), whose isolates are part of this full-year figure (53% of 339)"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 151,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 81,
+    "gentamicin": 68,
+    "ampicillin": 15,
+    "amoxiclav": 24,
+    "cefepime": 54,
+    "ceftriaxone": 16,
+    "ciprofloxacin": 17,
+    "fosfomycin": 91,
+    "imipenem": 45,
+    "meropenem": 56,
+    "piptazo": 75
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 6,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 67,
+    "gentamicin": 0,
+    "ampicillin": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 60,
+    "ciprofloxacin": 75,
+    "fosfomycin": 92,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 100
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "fosfomycin": "Printed 92% for 6 isolates, which cannot be produced by 6 or fewer isolates tested; checked on the page, kept as printed (source error)."
+   },
+   "note": "6 printed values are 0 (gentamicin, ampicillin, amoxicillin-clavulanate, cefepime, imipenem, meropenem). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible.",
+   "conflict": {
+    "imipenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints imipenem 75% for urine ICU E. coli (n=4, part of this full-year stratum), which a full-year 0% contradicts",
+    "meropenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints meropenem 75% for urine ICU E. coli (n=4, part of this full-year stratum), which a full-year 0% contradicts",
+    "ceftriaxone": "cannot be reconciled with the same hospital's January to June 2024 report (0% of 4 there), whose isolates are part of this full-year figure (60% of 6)",
+    "piptazo": "cannot be reconciled with the same hospital's January to June 2024 report (50% of 4 there), whose isolates are part of this full-year figure (100% of 6)"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 24,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 67,
+    "gentamicin": 38,
+    "ampsulbactam": 60,
+    "ceftazidime": 30,
+    "ciprofloxacin": 60,
+    "imipenem": 28,
+    "meropenem": 54,
+    "piptazo": 79
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 7,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 67,
+    "gentamicin": 50,
+    "ampsulbactam": 70,
+    "ceftazidime": 40,
+    "ciprofloxacin": 33,
+    "imipenem": 25,
+    "meropenem": 33,
+    "piptazo": 57
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "ampsulbactam": "Printed 70% for 7 isolates, which cannot be produced by 7 or fewer isolates tested; checked on the page, kept as printed (source error)."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 100,
+    "gentamicin": 0,
+    "ampsulbactam": 0,
+    "ceftazidime": 0,
+    "ciprofloxacin": 0,
+    "imipenem": 0,
+    "meropenem": 100,
+    "piptazo": 0
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "note": "6 printed values are 0 (gentamicin, ampicillin-sulbactam, ceftazidime, ciprofloxacin, imipenem, piperacillin-tazobactam). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 97,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 47,
+    "gentamicin": 31,
+    "ampsulbactam": 0,
+    "amoxiclav": 57,
+    "cefepime": 44,
+    "ceftriaxone": 32,
+    "ciprofloxacin": 30,
+    "fosfomycin": 83,
+    "imipenem": 65,
+    "meropenem": 70,
+    "piptazo": 72
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "ampsulbactam": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result",
+    "imipenem": "cannot be reconciled with the same hospital's January to June 2024 report (4.5% of 41 there), whose isolates are part of this full-year figure (65% of 97)",
+    "meropenem": "cannot be reconciled with the same hospital's January to June 2024 report (9.7% of 41 there), whose isolates are part of this full-year figure (70% of 97)",
+    "piptazo": "cannot be reconciled with the same hospital's January to June 2024 report (31.4% of 41 there), whose isolates are part of this full-year figure (72% of 97)"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 30,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 0,
+    "gentamicin": 33,
+    "ampsulbactam": 0,
+    "amoxiclav": 67,
+    "cefepime": 43,
+    "ceftriaxone": 37,
+    "ciprofloxacin": 0,
+    "fosfomycin": 87,
+    "imipenem": 8,
+    "meropenem": 29,
+    "piptazo": 56
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "ampsulbactam": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result",
+    "amikacin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints amikacin 53.3% for urine OPD K. pneumoniae (n=15, part of this full-year stratum), which a full-year 0% contradicts",
+    "amoxiclav": "cannot be reconciled with the same hospital's January to June 2024 report (0% of 15 there), whose isolates are part of this full-year figure (67% of 30)",
+    "imipenem": "cannot be reconciled with the same hospital's January to June 2024 report (20% of 15 there), whose isolates are part of this full-year figure (8% of 30)"
+   },
+   "note": "3 printed values are 0 (amikacin, ampicillin-sulbactam, ciprofloxacin). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 6,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 0,
+    "gentamicin": 0,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "fosfomycin": 70,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 20
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "fosfomycin": "Printed 70% for 6 isolates, which cannot be produced by 6 or fewer isolates tested; checked on the page, kept as printed (source error)."
+   },
+   "conflict": {
+    "ampsulbactam": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result"
+   },
+   "note": "9 printed values are 0 (amikacin, gentamicin, ampicillin-sulbactam, amoxicillin-clavulanate, cefepime, ceftriaxone, ciprofloxacin, imipenem, meropenem). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 71,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 45,
+    "gentamicin": 40,
+    "aztreonam": 69,
+    "cefepime": 50,
+    "ceftazidime": 69,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 41,
+    "fosfomycin": 0,
+    "imipenem": 61,
+    "meropenem": 65,
+    "piptazo": 85
+   },
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "ceftriaxone": "Printed 0 in this table (other tables print IR for P. aeruginosa and ceftriaxone)."
+   },
+   "conflict": {
+    "cefepime": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 50",
+    "ceftriaxone": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Table 5 and the blood and pus tables print IR (intrinsic resistance, not tested) for Pseudomonas and ceftriaxone",
+    "fosfomycin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: no table of this report shows fosfomycin tested for Pseudomonas, and every Pseudomonas row of the urine table prints 0"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 29,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 55,
+    "gentamicin": 50,
+    "aztreonam": 70,
+    "cefepime": 83,
+    "ceftazidime": 46,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "fosfomycin": 0,
+    "imipenem": 14,
+    "meropenem": 56,
+    "piptazo": 77
+   },
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "ceftriaxone": "Printed 0 in this table (other tables print IR for P. aeruginosa and ceftriaxone)."
+   },
+   "conflict": {
+    "cefepime": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 83",
+    "ceftriaxone": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Table 5 and the blood and pus tables print IR (intrinsic resistance, not tested) for Pseudomonas and ceftriaxone",
+    "fosfomycin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: no table of this report shows fosfomycin tested for Pseudomonas, and every Pseudomonas row of the urine table prints 0"
+   },
+   "note": "3 printed values are 0 (ceftriaxone, ciprofloxacin, fosfomycin). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 2,
+   "page": 14,
+   "table": "Table 9",
+   "s": {
+    "amikacin": 0,
+    "gentamicin": 0,
+    "aztreonam": 0,
+    "cefepime": 0,
+    "ceftazidime": 100,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 100,
+    "fosfomycin": 0,
+    "imipenem": 0,
+    "meropenem": 100,
+    "piptazo": 100
+   },
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "ceftriaxone": "Printed 0 in this table (other tables print IR for P. aeruginosa and ceftriaxone)."
+   },
+   "conflict": {
+    "cefepime": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result",
+    "ceftriaxone": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Table 5 and the blood and pus tables print IR (intrinsic resistance, not tested) for Pseudomonas and ceftriaxone",
+    "fosfomycin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: no table of this report shows fosfomycin tested for Pseudomonas, and every Pseudomonas row of the urine table prints 0",
+    "imipenem": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints imipenem 100% for urine ICU P. aeruginosa (n=1, part of this full-year stratum), which a full-year 0% contradicts"
+   },
+   "note": "7 printed values are 0 (amikacin, gentamicin, aztreonam, cefepime, ceftriaxone, fosfomycin, imipenem). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 283,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 74,
+    "gentamicin": 64,
+    "ampicillin": 11,
+    "amoxiclav": 34,
+    "cefepime": 24,
+    "ceftriaxone": 15,
+    "ciprofloxacin": 19,
+    "imipenem": 53,
+    "meropenem": 63,
+    "piptazo": 66
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 42,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 78,
+    "gentamicin": 72,
+    "ampicillin": 12,
+    "amoxiclav": 36,
+    "cefepime": 20,
+    "ceftriaxone": 27,
+    "ciprofloxacin": 17,
+    "imipenem": 70,
+    "meropenem": 73,
+    "piptazo": 80
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 4,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 50,
+    "gentamicin": 50,
+    "ampicillin": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "imipenem": 60,
+    "meropenem": 60,
+    "piptazo": 50
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "imipenem": "Printed 60% for 4 isolates, which cannot be produced by 4 or fewer isolates tested; checked on the page, kept as printed (source error).",
+    "meropenem": "Printed 60% for 4 isolates, which cannot be produced by 4 or fewer isolates tested; checked on the page, kept as printed (source error)."
+   },
+   "note": "5 printed values are 0 (ampicillin, amoxicillin-clavulanate, cefepime, ceftriaxone, ciprofloxacin). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 129,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 60,
+    "gentamicin": 46,
+    "ampsulbactam": 34,
+    "ceftazidime": 42,
+    "ciprofloxacin": 30,
+    "imipenem": 22,
+    "meropenem": 46,
+    "piptazo": 46,
+    "tetracycline": 75
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 15,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 67,
+    "gentamicin": 47,
+    "ampsulbactam": 30,
+    "ceftazidime": 50,
+    "ciprofloxacin": 33,
+    "imipenem": 30,
+    "meropenem": 55,
+    "piptazo": 57,
+    "tetracycline": 50
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 0,
+    "gentamicin": 0,
+    "ampsulbactam": 0,
+    "ceftazidime": 0,
+    "ciprofloxacin": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 100,
+    "tetracycline": 100
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "note": "7 printed values are 0 (amikacin, gentamicin, ampicillin-sulbactam, ceftazidime, ciprofloxacin, imipenem, meropenem). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 399,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 46,
+    "gentamicin": 38,
+    "ampsulbactam": 0,
+    "amoxiclav": 30,
+    "cefepime": 33,
+    "ceftriaxone": 26,
+    "ciprofloxacin": 30,
+    "imipenem": 60,
+    "meropenem": 63,
+    "piptazo": 43,
+    "tetracycline": 64
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "ampsulbactam": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 25,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 28,
+    "gentamicin": 83,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 9,
+    "ciprofloxacin": 20,
+    "imipenem": 0,
+    "meropenem": 23,
+    "piptazo": 54,
+    "tetracycline": 33
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "ampsulbactam": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result"
+   },
+   "note": "4 printed values are 0 (ampicillin-sulbactam, amoxicillin-clavulanate, cefepime, imipenem). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 5,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "gentamicin": 0,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 0,
+    "tetracycline": 0
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "conflict": {
+    "ampsulbactam": "Table 5 (all specimens) prints \"-\" (not tested) for this organism and drug, but this table prints 0; the 0 may stand for no result"
+   },
+   "note": "10 printed values are 0 (gentamicin, ampicillin-sulbactam, amoxicillin-clavulanate, cefepime, ceftriaxone, ciprofloxacin, imipenem, meropenem, piperacillin-tazobactam, tetracycline). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 153,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 63,
+    "gentamicin": 45,
+    "aztreonam": 69,
+    "ceftazidime": 58,
+    "ciprofloxacin": 47,
+    "imipenem": 59,
+    "meropenem": 65,
+    "piptazo": 79
+   },
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 46,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 76,
+    "gentamicin": 50,
+    "aztreonam": 75,
+    "ceftazidime": 60,
+    "ciprofloxacin": 41,
+    "imipenem": 11,
+    "meropenem": 45,
+    "piptazo": 90
+   },
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 2,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 100,
+    "gentamicin": 50,
+    "aztreonam": 100,
+    "ceftazidime": 0,
+    "ciprofloxacin": 100,
+    "imipenem": 50,
+    "meropenem": 0,
+    "piptazo": 0
+   },
+   "printed": {
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "note": "3 printed values are 0 (ceftazidime, meropenem, piperacillin-tazobactam). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 25,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 25,
+    "gentamicin": 40,
+    "ampsulbactam": 0,
+    "amoxiclav": 100,
+    "cefepime": 33,
+    "ceftriaxone": 44,
+    "ciprofloxacin": 16,
+    "imipenem": 33,
+    "meropenem": 57,
+    "piptazo": 94,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"Protues Mirabilis\".",
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "tetracycline": "Printed 0; P. mirabilis is intrinsically resistant to tetracyclines."
+   },
+   "conflict": {
+    "ampsulbactam": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Proteus mirabilis is not in Table 5 and every Proteus row of the pus table prints 0 for ampicillin-sulbactam",
+    "tetracycline": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Proteus mirabilis is not in Table 5 and every Proteus row of the pus table prints 0 for tetracycline"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 1,
+   "page": 16,
+   "table": "Table 11",
+   "s": {
+    "amikacin": 100,
+    "gentamicin": 0,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 0,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"Protues Mirabilis\". 8 printed values are 0 (gentamicin, ampicillin-sulbactam, amoxicillin-clavulanate, cefepime, imipenem, meropenem, piperacillin-tazobactam, tetracycline). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible.",
+   "printed": {
+    "ampsulbactam": "Ampicillin/Salbactum",
+    "amoxiclav": "Amoxicillin-Clavunate",
+    "imipenem": "Impenem",
+    "piptazo": "Piperacillin/Tazobactam"
+   },
+   "notes": {
+    "tetracycline": "Printed 0; P. mirabilis is intrinsically resistant to tetracyclines."
+   },
+   "conflict": {
+    "ampsulbactam": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Proteus mirabilis is not in Table 5 and every Proteus row of the pus table prints 0 for ampicillin-sulbactam",
+    "tetracycline": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: Proteus mirabilis is not in Table 5 and every Proteus row of the pus table prints 0 for tetracycline"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 49,
+   "page": 13,
+   "table": "Table 8",
+   "s": {
+    "ampicillin": 10,
+    "erythromycin": 16,
+    "gentamicin_hl": 55,
+    "linezolid": 100,
+    "vancomycin": 90
+   },
+   "note": "Printed as \"Enterococcus Sp.\".",
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   },
+   "conflict": {
+    "ampicillin": "cannot be reconciled with the same hospital's January to June 2024 report (55% of 30 there), whose isolates are part of this full-year figure (10% of 49)",
+    "linezolid": "cannot be reconciled with the same hospital's January to June 2024 report (93.3% of 30 there), whose isolates are part of this full-year figure (100% of 49)"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 3,
+   "page": 13,
+   "table": "Table 8",
+   "s": {
+    "ampicillin": 0,
+    "erythromycin": 33,
+    "gentamicin_hl": 67,
+    "linezolid": 100,
+    "vancomycin": 100
+   },
+   "note": "Printed as \"Enterococcus Sp.\".",
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 13,
+   "table": "Table 8",
+   "s": {
+    "ampicillin": 0,
+    "erythromycin": 0,
+    "gentamicin_hl": 100,
+    "linezolid": 100,
+    "vancomycin": 0
+   },
+   "note": "Printed as \"Enterococcus Sp.\". 3 printed values are 0 (ampicillin, erythromycin, vancomycin). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible.",
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   },
+   "conflict": {
+    "ampicillin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints ampicillin 100% for blood OPD Enterococcus (n=1, the same number of isolates), which a full-year 0% contradicts",
+    "vancomycin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints vancomycin 100% for blood OPD Enterococcus (n=1, the same number of isolates), which a full-year 0% contradicts",
+    "erythromycin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints \"-\" (not tested) for erythromycin in its single blood OPD Enterococcus isolate, and this stratum also has 1 isolate"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 66,
+   "page": 13,
+   "table": "Table 8",
+   "s": {
+    "cefoxitin": 43,
+    "ciprofloxacin": 43,
+    "clindamycin": 52,
+    "erythromycin": 29,
+    "gentamicin": 84,
+    "linezolid": 100
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\".",
+   "conflict": {
+    "linezolid": "cannot be reconciled with the same hospital's January to June 2024 report (96.7% of 33 there), whose isolates are part of this full-year figure (100% of 66)"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 1,
+   "page": 13,
+   "table": "Table 8",
+   "s": {
+    "cefoxitin": 0,
+    "ciprofloxacin": 0,
+    "clindamycin": 100,
+    "erythromycin": 0,
+    "gentamicin": 0,
+    "linezolid": 100
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\". 4 printed values are 0 (cefoxitin, ciprofloxacin, erythromycin, gentamicin). The source fills strata without isolates with 0, so some of these zeros may stand for no result rather than 0% susceptible."
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 7,
+   "page": 13,
+   "table": "Table 8",
+   "s": {
+    "cefoxitin": 14,
+    "ciprofloxacin": 33,
+    "clindamycin": 43,
+    "erythromycin": 14,
+    "gentamicin": 100,
+    "linezolid": 100
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\"."
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 187,
+   "page": 15,
+   "table": "Table 10",
+   "s": {
+    "ampicillin": 33,
+    "ciprofloxacin": 13,
+    "fosfomycin": 87,
+    "gentamicin_hl": 54,
+    "linezolid": 92,
+    "teicoplanin": 81,
+    "vancomycin": 86
+   },
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   },
+   "conflict": {
+    "ampicillin": "cannot be reconciled with the same hospital's January to June 2024 report (54.6% of 119 there), whose isolates are part of this full-year figure (33% of 187)"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 72,
+   "page": 15,
+   "table": "Table 10",
+   "s": {
+    "ampicillin": 50,
+    "ciprofloxacin": 17,
+    "fosfomycin": 93,
+    "gentamicin_hl": 57,
+    "linezolid": 97,
+    "teicoplanin": 57,
+    "vancomycin": 83
+   },
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 4,
+   "page": 15,
+   "table": "Table 10",
+   "s": {
+    "ampicillin": 0,
+    "ciprofloxacin": 33,
+    "fosfomycin": 75,
+    "gentamicin_hl": 50,
+    "linezolid": 100,
+    "teicoplanin": 0,
+    "vancomycin": 50
+   },
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   },
+   "conflict": {
+    "ampicillin": "the annual report prints 0 where a drug was not tested, so this 0 may mean no result: the January to June 2024 report of the same department prints ampicillin 33.3% for urine ICU Enterococcus (n=3, part of this full-year stratum), which a full-year 0% contradicts",
+    "vancomycin": "cannot be reconciled with the same hospital's January to June 2024 report (100% of 3 there), whose isolates are part of this full-year figure (50% of 4)"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 26,
+   "page": 15,
+   "table": "Table 10",
+   "s": {
+    "cefoxitin": 48,
+    "ciprofloxacin": 38,
+    "fosfomycin": 98,
+    "gentamicin": 70,
+    "linezolid": 100,
+    "teicoplanin": 77,
+    "vancomycin": 0
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\".",
+   "conflict": {
+    "vancomycin": "printed 0, but Tables 6, 8 and 12 report vancomycin for S. aureus as not done (\"Mic Nd\", \"Not Done\"); the 0 is probably a placeholder"
+   },
+   "notes": {
+    "fosfomycin": "Printed 98% for 26 isolates, which cannot be produced by 26 or fewer isolates tested; checked on the page, kept as printed (source error)."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 11,
+   "page": 15,
+   "table": "Table 10",
+   "s": {
+    "cefoxitin": 88,
+    "ciprofloxacin": 100,
+    "fosfomycin": 100,
+    "gentamicin": 71,
+    "linezolid": 100,
+    "teicoplanin": 0,
+    "vancomycin": 0
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\".",
+   "conflict": {
+    "vancomycin": "printed 0, but Tables 6, 8 and 12 report vancomycin for S. aureus as not done (\"Mic Nd\", \"Not Done\"); the 0 is probably a placeholder",
+    "cefoxitin": "cannot be reconciled with the same hospital's January to June 2024 report (33.3% of 3 there), whose isolates are part of this full-year figure (88% of 11)"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 18,
+   "page": 17,
+   "table": "Table 12",
+   "s": {
+    "ampicillin": 13,
+    "gentamicin_hl": 72,
+    "linezolid": 100,
+    "vancomycin": 88
+   },
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 3,
+   "page": 17,
+   "table": "Table 12",
+   "s": {
+    "ampicillin": 100,
+    "gentamicin_hl": 67,
+    "linezolid": 100,
+    "vancomycin": 100
+   },
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 17,
+   "table": "Table 12",
+   "s": {
+    "ampicillin": 0,
+    "gentamicin_hl": 0,
+    "linezolid": 100,
+    "vancomycin": 100
+   },
+   "printed": {
+    "gentamicin_hl": "Gentamicin-High"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 503,
+   "page": 17,
+   "table": "Table 12",
+   "s": {
+    "cefoxitin": 40,
+    "ciprofloxacin": 35,
+    "clindamycin": 59,
+    "erythromycin": 32,
+    "gentamicin": 84,
+    "linezolid": 100,
+    "cotrimoxazole": 75
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\".",
+   "printed": {
+    "cotrimoxazole": "Trimethoprim/Sulfamethoxazole"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 128,
+   "page": 17,
+   "table": "Table 12",
+   "s": {
+    "cefoxitin": 35,
+    "ciprofloxacin": 40,
+    "clindamycin": 73,
+    "erythromycin": 47,
+    "gentamicin": 86,
+    "linezolid": 100,
+    "cotrimoxazole": 85
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\".",
+   "printed": {
+    "cotrimoxazole": "Trimethoprim/Sulfamethoxazole"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 4,
+   "page": 17,
+   "table": "Table 12",
+   "s": {
+    "cefoxitin": 50,
+    "ciprofloxacin": 0,
+    "clindamycin": 50,
+    "erythromycin": 25,
+    "gentamicin": 100,
+    "linezolid": 100,
+    "cotrimoxazole": 0
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\".",
+   "printed": {
+    "cotrimoxazole": "Trimethoprim/Sulfamethoxazole"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 721,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 205,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 50,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas spp.",
+   "n": 372,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "n": 79,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "n": 81,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 608,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 64,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 139,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 309,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 27,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 146,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 610,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 141,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 24,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 262,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 78,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 6,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 496,
+   "page": 9
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 35,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 329,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 33,
+   "page": 9
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 31,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 52,
+   "page": 9
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 102,
+   "page": 9
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 150,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 201,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 52,
+   "page": 9
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 25,
+   "page": 9
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 133,
+   "page": 9
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 45,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 429,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 123,
+   "page": 9
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 10,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 71,
+   "page": 9
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 32,
+   "page": 9
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 155,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 145,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 100,
+   "page": 9
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 49,
+   "page": 9
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 263,
+   "page": 9
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 53,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 22,
+   "page": 9
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 8,
+   "page": 9
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 37,
+   "page": 9
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 74,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 635,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 12,
+   "page": 9
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 17,
+   "page": 9
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 0,
+   "page": 12
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 0,
+   "page": 12
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "n": 0,
+   "page": 12
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Burkholderia spp.",
+   "n": 0,
+   "page": 12
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 0,
+   "page": 12
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella Typhi",
+   "n": 0,
+   "page": 12
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Salmonella Typhi",
+   "n": 0,
+   "page": 12
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 0,
+   "page": 15
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 0,
+   "page": 16
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Table 7, page 12: Escherichia coli OPD row (0 isolates)",
+   "org": "Escherichia coli",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 7, page 12: Klebsiella sp. OPD row (0 isolates)",
+   "org": "Klebsiella sp.",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 7, page 12: Pseudomonas sp. OPD row (0 isolates)",
+   "org": "Pseudomonas sp.",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 7, page 12: Burkholderia sp. OPD row (0 isolates)",
+   "org": "Burkholderia sp.",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 7, page 12: Acinetobacter sp. OPD row (0 isolates)",
+   "org": "Acinetobacter sp.",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 7, page 12: Salmonella Typhi OPD row (0 isolates)",
+   "org": "Salmonella Typhi",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 7, page 12: Salmonella Typhi ICU row (0 isolates)",
+   "org": "Salmonella Typhi",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 11, page 16: Protues Mirabilis ICU row (0 isolates)",
+   "org": "Protues Mirabilis",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 10, page 15: Staphylococcus aureus ss. aureus ICU row (0 isolates)",
+   "org": "Staphylococcus aureus ss. aureus",
+   "why": "no isolates in this stratum; the source fills the row with 0 (or \"-\") as placeholders"
+  },
+  {
+   "what": "Table 2 (page 8): samples received, culture positive and priority pathogens by sample type",
+   "why": "sample-level totals, not organism counts or susceptibility"
+  },
+  {
+   "what": "Figures 1 to 5 (pages 3 to 7) and section 2.6 (page 18: ESBL 80%, CRAB 64%, CRE 48.3%, MRSA 60%, VRE 23.2%)",
+   "why": "demographic charts, a chart duplicating Table 1, and summary resistance rates without organism x drug tables"
+  },
+  {
+   "what": "Tracheal aspirate, sterile body fluid and respiratory sample isolates",
+   "why": "counted in Table 3 only; the document prints no susceptibility table for these specimens"
+  }
+ ]
+}

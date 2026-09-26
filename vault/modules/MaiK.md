@@ -254,6 +254,17 @@ KNOWLEDGE (PRIMARY SOURCE)`); the prompts say prefer, silently skip off-topic no
   `streamGeminiToSSE` now loops inside one pull until it sends something. Before, a network read ending
   mid-frame could hang the SSE. Pinned by `test/maik-no-passage-talk.test.mjs`.
 - Knowledge questions no longer send empty `DETERMINISTIC ENGINE OUTPUT` / `PATIENT` / notes headers.
+- **MaiK Lite too** (branch maik-lite-metatalk): `maik-local.js` carries an ES5 copy (`METATALK`),
+  run in `answer()` AFTER the NO_COVERAGE check (a "not covered" verdict must still re-ask) and on the
+  settled lines of the live paint. An answer that is ONLY talk about the material is treated as the
+  same retrieval miss and re-asked without it. **Gotcha:** no lookbehind in client code, an older iOS
+  WebView rejects it at parse time and the whole engine fails to load; the copy splits sentences
+  without one. `test/maik-lite-metatalk.test.mjs` pins the copy to the Cloud file on the shared
+  cases in `test/fixtures/maik-metatalk-cases.mjs`.
+- **Fixed in both copies (same branch):** a citation after a KEPT sentence ("... first line. [1]") was
+  deleted as a word-less piece, so Lite's claim-checked lines lost their [n] while painting and Cloud
+  lost post-period citations. Now kept; a citation leading into the sentence after a DROPPED one goes
+  with the dropped one.
 
 ## Answer-quality set: 60 cases (2026-09-26, branch maik-eval-cases)
 `test/maik-eval/live-cases.json` grew from 6 to 60 questions across 10 categories (emergency, infection,
