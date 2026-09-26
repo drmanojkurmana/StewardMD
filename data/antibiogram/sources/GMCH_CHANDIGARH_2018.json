@@ -1,0 +1,1250 @@
+{
+ "id": "GMCH_CHANDIGARH_2018",
+ "kind": "institution",
+ "inst": "GMCH_CHANDIGARH",
+ "institution": "Government Medical College and Hospital, Sector 32, Chandigarh (Antibiotic Stewardship Program)",
+ "short": "GMCH-32 Chandigarh",
+ "city": "Chandigarh",
+ "state": "Chandigarh",
+ "region": "north",
+ "sector": "government",
+ "year": 2018,
+ "period": "Six months before the guidebook (printed: isolates 'in the Microbiology laboratory over last 6 months'); months not stated; guidebook PDF dated 6 September 2018, protocols 'valid upto 2020'",
+ "published": "2018-09",
+ "url": "https://gmch.gov.in/sites/default/files/documents/AntibioticBook.pdf",
+ "retrieved": "2026-09-26",
+ "citation": "Antibiotic Stewardship Program, Government Medical College and Hospital, Chandigarh. Antibiotic Prescription Guidebook (syndromic protocols for ICU, wards and OPD, valid up to 2020). Chandigarh: GMCH; 2018.",
+ "reporting": "Syndrome by location boxes (ICU: BSI, UTI, SSTI, pneumonia; wards: BSI, complicated UTI, SSTI; OPD: BSI, complicated UTI, SSTI), each with the total isolates, the most common pathogens with their number and share, and for each pathogen three to four (sometimes more) agents with percent susceptible; agents with the same percentage are printed together as 'Drug(=Drug2=Drug3) (x%)'.",
+ "method": "Disc diffusion, CLSI 2018 (printed on p8: 'based on Disc diffusion method of CLSI-2018 ... not on MIC values').",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Pages are printed rotated 90 degrees; the text was extracted with pdfium (pdfplumber reverses it) and every box was read on the rotated page images at scale 3.5. Each transcribed box text was compared with the text layer (48 of 49 match character for character; the p30 Enterococcus box differs only because the text layer interleaves the organism label, and was checked on the image). Organism numbers sum to each box's printed total in all 10 boxes."
+ },
+ "notes": "Antibiotic Prescription Guidebook of the GMCH-32 Antibiotic Stewardship Program (44 pages; PDF pages 10 to 32 hold the protocol boxes). The document says the recommendations are based on isolates of the last 6 months without naming the months, so no end month is given. For each pathogen only the three to four most susceptible agents are printed (as the guidebook states on p8), so drugs that are missing were not necessarily tested and the printed set favours active agents. Syndromes are recorded as specimens: BSI as blood, UTI and complicated UTI as urine, SSTI as pus, pneumonia as respiratory; ICU as ICU, WARDS as wards, OPD as OPD. Every organism number except S. Typhi (20) is a multiple of 6, and several percentage sets are exact fractions of one sixth of the printed number (for example ICU BSI Acinetobacter n=42 with 71, 57, 43 and 29%, which are 5, 4, 3 and 2 of 7; ICU BSI S. aureus n=30 with 100, 80, 60 and 40%, fifths), which suggests the printed isolate numbers may have been scaled up from a shorter period; they are recorded as printed but may overstate the isolates tested. Counts are the organism numbers of each box (they sum to the printed totals). Enterococcal gentamicin is printed without 'high level'. The OPD SSTI box (p32) carries a 'WARDS MICROBIOLOGY DATA' header, taken as a template error. Data are from 2018; the app keeps them out of pooled views. Page numbers are PDF pages (printed page number plus 4). The printed 'Total no. of isolates' is not used as the isolate number: every value except S. Typhi (20) is a multiple of 6, most percentage sets fit one sixth of it, and the department charts (pp35 to 37) print exactly half of each box number, so the number tested is unknown (second reader's fit analysis, verify/GMCH_CHANDIGARH_2018/fit_table.txt): rows are kept without an isolate number, so they are shown but never pooled or used by reasoning.",
+ "issues": [
+  "Second reader 2026-09-26: all 228 cells, all 49 row n values and all 49 counts re-read against the rotated page images (scale 3.5), each value read before comparing; 0 transcription errors, nothing corrected. The 7 intrinsic cells (enterococcal 'Gentamicin' 17, 50, 42, 50, 50 and 100%, and OPD urine Enterococcus cefotaxime 100%) are printed as recorded.",
+  "Isolate numbers: every printed percentage can come from its row n except OPD urine Klebsiella cefepime 87% (n=36; 31 of 36 is 86.1%). With n/6, 39 of 48 rows fit (S. Typhi, n=20, not divisible), and in several rows n/6 is the smallest number of isolates that gives all printed values (ICU pneumonia Pseudomonas, n=408: 62, 56, 53 and 43% need at least 68 = 408/6). Rows that do not fit n/6: ICU BSI Enterococcus, ICU SSTI Pseudomonas and E. coli, ward BSI S. aureus, Enterococcus, Klebsiella and Pseudomonas, OPD urine E. coli and Klebsiella.",
+  "The source prints a second, different count for the same strata: the department-wise distribution charts (pp35 to 37) give exactly half of each box's organism numbers in their ICU columns (blood 21, 15, 12, 12, 3, 3 against 42, 30, 24, 24, 6, 6; urine and pus likewise) and, summed over departments, for ward blood and for ward plus OPD urine; every label on those charts is a multiple of 3. The only wording about n is 'Total no. of isolates' in each box and 'organisms isolated in the Microbiology laboratory over last 6 months' (p6); nothing says whether isolates, tests or samples were counted. n left as printed.",
+  "Lead 2026-09-26: n set to unknown on 49 rows and 49 counts moved to excluded, on the second reader's evidence that the printed isolate numbers are not the numbers tested."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 132)",
+   "s": {
+    "meropenem": 71,
+    "ciprofloxacin": 57,
+    "tobramycin": 43,
+    "ampsulbactam": 29
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "ciprofloxacin": "Ciprofloxacin",
+    "tobramycin": "Tobramycin",
+    "ampsulbactam": "Ampisulb"
+   },
+   "note": "Printed as: \"Meropenem (71%) / Ciprofloxacin (57%) / Tobramycin (43 %) / Ampisulb(29 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 42 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staph.aureus",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 132)",
+   "s": {
+    "linezolid": 100,
+    "gentamicin": 80,
+    "chloramphenicol": 60,
+    "ciprofloxacin": 60,
+    "cotrimoxazole": 60,
+    "doxycycline": 40
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "gentamicin": "Gentamicin",
+    "chloramphenicol": "Chloramphenicol",
+    "ciprofloxacin": "ciprofloxacin",
+    "cotrimoxazole": "cotrimoxazole",
+    "doxycycline": "Doxycycline"
+   },
+   "note": "Printed as: \"Linezolid (100%) / Gentamicin (80%) / Chloramphenicol(=ciprofloxacin=cotrimoxazole) (60%)/Doxycycline(40%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 30 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 132)",
+   "s": {
+    "meropenem": 75,
+    "amikacin": 50,
+    "tetracycline": 50,
+    "piptazo": 25,
+    "amoxiclav": 25
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "tetracycline": "tetracycline",
+    "piptazo": "Piptazo",
+    "amoxiclav": "Amoxyclav"
+   },
+   "note": "Printed as: \"Meropenem (75%) / Amikacin(=tetracycline) (50%) / Piptazo (=Amoxyclav)(25%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 24 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 132)",
+   "s": {
+    "vancomycin": 100,
+    "linezolid": 100,
+    "tetracycline": 50,
+    "ciprofloxacin": 17,
+    "gentamicin": 17
+   },
+   "printed": {
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "tetracycline": "Tetracycline",
+    "ciprofloxacin": "ciprofloxacin",
+    "gentamicin": "Gentamicin"
+   },
+   "note": "Printed as: \"Vancomycin (=Linezolid) (100%)/Tetracycline(50 %)/ciprofloxacin(=Gentamicin)(17 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Gentamicin is printed without \"high level\"; recorded as gentamicin. Printed n = 24 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 132)",
+   "s": {
+    "meropenem": 100,
+    "piptazo": 100,
+    "ciprofloxacin": 100,
+    "aztreonam": 100
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "piptazo": "Piptazo",
+    "ciprofloxacin": "Ciprofloxacin",
+    "aztreonam": "Aztreonam"
+   },
+   "note": "Printed as: \"Meropenem (=Piptazo=Ciprofloxacin=Aztreonam) (100%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 6 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "E.coli",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 132)",
+   "s": {
+    "amikacin": 100
+   },
+   "printed": {
+    "amikacin": "Amikacin"
+   },
+   "note": "Printed as: \"Amikacin(100 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 6 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Urinary Tract Infections (UTI) Antibiotic Protocols: ICU, ICU microbiology data (total isolates 174)",
+   "s": {
+    "linezolid": 80,
+    "vancomycin": 80,
+    "nitrofurantoin": 70,
+    "penicillin": 70,
+    "tetracycline": 50
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "vancomycin": "Vancomycin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "penicillin": "Penicillin",
+    "tetracycline": "Tetracycline"
+   },
+   "note": "Printed as: \"Linezolid(=Vancomycin) (80 %)/ Nitrofurantoin(=Penicillin***) (70 %)/Tetracycline(50%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 60 (not used; see the file notes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "E.coli",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Urinary Tract Infections (UTI) Antibiotic Protocols: ICU, ICU microbiology data (total isolates 174)",
+   "s": {
+    "nitrofurantoin": 78,
+    "amikacin": 56,
+    "meropenem": 44,
+    "piptazo": 33
+   },
+   "printed": {
+    "nitrofurantoin": "Nitrofurantoin",
+    "amikacin": "Amikacin",
+    "meropenem": "Meropenem",
+    "piptazo": "Piptazo"
+   },
+   "note": "Printed as: \"Nitrofurantoin(78%)/ Amikacin(56%)/ Meropenem(44%)/ Piptazo(33%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 54 (not used; see the file notes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Urinary Tract Infections (UTI) Antibiotic Protocols: ICU, ICU microbiology data (total isolates 174)",
+   "s": {
+    "norfloxacin": 25,
+    "meropenem": 25,
+    "amikacin": 25,
+    "cotrimoxazole": 25
+   },
+   "printed": {
+    "norfloxacin": "Norfloxacin",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "cotrimoxazole": "Cotrimoxazole"
+   },
+   "note": "Printed as: \"Norfloxacin(=Meropenem=Amikacin=Cotrimoxazole) (25%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 24 (not used; see the file notes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Urinary Tract Infections (UTI) Antibiotic Protocols: ICU, ICU microbiology data (total isolates 174)",
+   "s": {
+    "ampsulbactam": 75
+   },
+   "printed": {
+    "ampsulbactam": "Ampisulb"
+   },
+   "note": "Printed as: \"Ampisulb(75%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 24 (not used; see the file notes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Urinary Tract Infections (UTI) Antibiotic Protocols: ICU, ICU microbiology data (total isolates 174)",
+   "s": {
+    "amikacin": 100,
+    "meropenem": 100,
+    "piptazo": 100,
+    "ceftazidime": 100,
+    "aztreonam": 100,
+    "ciprofloxacin": 100
+   },
+   "printed": {
+    "amikacin": "Amikacin",
+    "meropenem": "Meropenem",
+    "piptazo": "Piptazo",
+    "ceftazidime": "Ceftazidime",
+    "aztreonam": "Aztreonam",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Amikacin(= Meropenem=Piptazo= Ceftazidime= Aztreonam=Ciprofloxacin*) (100%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 6 (not used; see the file notes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Staph.aureus",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Urinary Tract Infections (UTI) Antibiotic Protocols: ICU, ICU microbiology data (total isolates 174)",
+   "s": {
+    "nitrofurantoin": 100,
+    "linezolid": 100,
+    "gentamicin": 100
+   },
+   "printed": {
+    "nitrofurantoin": "Nitrofurantoin",
+    "linezolid": "Linezolid",
+    "gentamicin": "Gentamicin"
+   },
+   "note": "Printed as: \"Nitrofurantoin(=Linezolid=Gentamicin) (100%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 6 (not used; see the file notes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 14,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 1128)",
+   "s": {
+    "ciprofloxacin": 83,
+    "meropenem": 60,
+    "aztreonam": 56
+   },
+   "printed": {
+    "ciprofloxacin": "Ciprofloxacin",
+    "meropenem": "Meropenem",
+    "aztreonam": "Aztreonam"
+   },
+   "note": "Printed as: \"Ciprofloxacin(83%)/ Meropenem(60%)/ Aztreonam(56%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 408 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": null,
+   "page": 14,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 1128)",
+   "s": {
+    "ampsulbactam": 43,
+    "tobramycin": 19,
+    "meropenem": 14
+   },
+   "printed": {
+    "ampsulbactam": "Ampisulb",
+    "tobramycin": "Tobramycin",
+    "meropenem": "Meropenem"
+   },
+   "note": "Printed as: \"Ampisulb **(43%) / Tobramycin (19%) / Meropenem (14%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 348 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 14,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 1128)",
+   "s": {
+    "tetracycline": 71,
+    "amikacin": 47,
+    "meropenem": 41
+   },
+   "printed": {
+    "tetracycline": "Tetracycline",
+    "amikacin": "Amikacin",
+    "meropenem": "Meropenem"
+   },
+   "note": "Printed as: \"Tetracycline (71%) / Amikacin (47%)/ Meropenem(41%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 204 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "E.coli",
+   "pheno": null,
+   "n": null,
+   "page": 14,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 1128)",
+   "s": {
+    "meropenem": 91,
+    "amikacin": 79,
+    "tetracycline": 64
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "tetracycline": "Tetracycline"
+   },
+   "note": "Printed as: \"Meropenem (91%) / Amikacin(Piptazo) (79%) / Tetracycline (64%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Piperacillin-tazobactam is printed in brackets after amikacin without \"=\", so only amikacin is recorded. Printed n = 114 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staph.aureus",
+   "pheno": null,
+   "n": null,
+   "page": 14,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 1128)",
+   "s": {
+    "doxycycline": 100,
+    "linezolid": 86,
+    "gentamicin": 57,
+    "cotrimoxazole": 57,
+    "chloramphenicol": 43
+   },
+   "printed": {
+    "doxycycline": "Doxycycline",
+    "linezolid": "Linezolid",
+    "gentamicin": "Gentamicin",
+    "cotrimoxazole": "Cotrimoxazole",
+    "chloramphenicol": "Chloramphenicol"
+   },
+   "note": "Printed as: \"Doxycycline(100%)/ Linezolid(86%)/ Gentamicin(=Cotrimoxazole)(57%)/ Chloramphenicol(43%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 42 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 14,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: ICU, ICU microbiology data (total isolates 1128)",
+   "s": {
+    "vancomycin": 100,
+    "penicillin": 100,
+    "linezolid": 100,
+    "ciprofloxacin": 50,
+    "gentamicin": 50,
+    "erythromycin": 50
+   },
+   "printed": {
+    "vancomycin": "Vancomycin",
+    "penicillin": "Penicillin",
+    "linezolid": "Linezolid",
+    "ciprofloxacin": "Ciprofloxacin",
+    "gentamicin": "Gentamicin",
+    "erythromycin": "Erythromycin"
+   },
+   "note": "Printed as: \"Vancomycin(=Penicillin=Linezolid) (100%)/ Ciprofloxacin(=Gentamicin=Erythromycin)(50%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Gentamicin is printed without \"high level\"; recorded as gentamicin. Printed n = 12 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Pneumonia Antibiotic Protocol: ICU, ICU microbiology data (total isolates 978)",
+   "s": {
+    "meropenem": 62,
+    "ciprofloxacin": 62,
+    "aztreonam": 56,
+    "piptazo": 53,
+    "amikacin": 43
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "ciprofloxacin": "Ciprofloxacin",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piptazo",
+    "amikacin": "Amikacin"
+   },
+   "note": "Printed as: \"Meropenem(=Ciprofloxacin) (62%)/ Aztreonam(56%)/ Piptazo(53%) /Amikacin(43 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 408 (not used; see the file notes).",
+   "specimen_as_printed": "Pneumonia"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Pneumonia Antibiotic Protocol: ICU, ICU microbiology data (total isolates 978)",
+   "s": {
+    "ampsulbactam": 39,
+    "tobramycin": 23,
+    "meropenem": 16,
+    "amikacin": 6
+   },
+   "printed": {
+    "ampsulbactam": "Ampisulb",
+    "tobramycin": "Tobramycin",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin"
+   },
+   "note": "Printed as: \"Ampisulb(39%)/ Tobramycin(23%)/ Meropenem (16%)/Amikacin(6 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 372 (not used; see the file notes).",
+   "specimen_as_printed": "Pneumonia"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Pneumonia Antibiotic Protocol: ICU, ICU microbiology data (total isolates 978)",
+   "s": {
+    "tetracycline": 67,
+    "amikacin": 45,
+    "meropenem": 36,
+    "piptazo": 27
+   },
+   "printed": {
+    "tetracycline": "Tetracycline",
+    "amikacin": "Amikacin",
+    "meropenem": "Meropenem",
+    "piptazo": "Piptazo"
+   },
+   "note": "Printed as: \"Tetracycline(67%)/ Amikacin (45%)/ Meropenem(36%)/Piptazo(27%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 198 (not used; see the file notes).",
+   "specimen_as_printed": "Pneumonia"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staph.aureus",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 402)",
+   "s": {
+    "linezolid": 100,
+    "chloramphenicol": 70,
+    "doxycycline": 59,
+    "ciprofloxacin": 25
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "chloramphenicol": "Chloramphenicol",
+    "doxycycline": "Doxycycline",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Linezolid (100%) / Chloramphenicol (70%) / Doxycycline (59%)/ Ciprofloxacin(25 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 180 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 402)",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 98,
+    "tetracycline": 73,
+    "ciprofloxacin": 72
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "vancomycin": "Vancomycin",
+    "tetracycline": "Tetracycline",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Linezolid (100%) / Vancomycin (98%) / Tetracycline (73%) / Ciprofloxacin (72%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 96 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 402)",
+   "s": {
+    "tetracycline": 50,
+    "meropenem": 12
+   },
+   "printed": {
+    "tetracycline": "Tetracycline",
+    "meropenem": "Meropenem"
+   },
+   "note": "Printed as: \"Tetracycline (50%) / Meropenem (12%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 42 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "E.coli",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 402)",
+   "s": {
+    "amikacin": 100,
+    "meropenem": 83,
+    "piptazo": 83,
+    "tetracycline": 50
+   },
+   "printed": {
+    "amikacin": "Amikacin",
+    "meropenem": "Meropenem",
+    "piptazo": "piptaz",
+    "tetracycline": "Tetracycline"
+   },
+   "note": "Printed as: \"Amikacin (100%)/Meropenem (=piptaz) (83 %)Tetracycline (50 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 36 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 402)",
+   "s": {
+    "amikacin": 50,
+    "ciprofloxacin": 50,
+    "meropenem": 50,
+    "piptazo": 33,
+    "aztreonam": 33,
+    "ceftazidime": 33
+   },
+   "printed": {
+    "amikacin": "Amikacin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "meropenem": "Meropenem",
+    "piptazo": "Piptazo",
+    "aztreonam": "Aztreonam",
+    "ceftazidime": "Ceftazidime"
+   },
+   "note": "Printed as: \"Amikacin(=Ciprofloxacin=Meropenem) (50 %)/Piptazo(=Aztreonam=Ceftazidime) (33 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed \"Psudomonas\". Printed n = 30 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Blood Stream Infections (BSIs) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 402)",
+   "s": {
+    "ampsulbactam": 67,
+    "tobramycin": 67,
+    "meropenem": 33
+   },
+   "printed": {
+    "ampsulbactam": "Ampisulb",
+    "tobramycin": "Tobramycin",
+    "meropenem": "Meropenem"
+   },
+   "note": "Printed as: \"Ampisulb(=Tobramycin)(67 %)/ Meropenem(33 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 18 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSIs)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "E. coli",
+   "pheno": null,
+   "n": null,
+   "page": 22,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 1284)",
+   "s": {
+    "nitrofurantoin": 90,
+    "meropenem": 87,
+    "amikacin": 83,
+    "piptazo": 79
+   },
+   "printed": {
+    "nitrofurantoin": "Nitrofurantoin",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "piptazo": "Piptazo"
+   },
+   "note": "Printed as: \"Nitrofurantoin (90%) / Meropenem (87%) / Amikacin (83%) / Piptazo (79%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 822 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 22,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 1284)",
+   "s": {
+    "meropenem": 64,
+    "amikacin": 56,
+    "piptazo": 56,
+    "nitrofurantoin": 44,
+    "cotrimoxazole": 36
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "piptazo": "Piptazo",
+    "nitrofurantoin": "Nitrofurantoin",
+    "cotrimoxazole": "Cotrimoxazole"
+   },
+   "note": "Printed as: \"Meropenem (64%)/ Amikacin(=Piptazo) (56%) / Nitrofurantoin (44%) / Cotrimoxazole (36%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 150 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 22,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 1284)",
+   "s": {
+    "linezolid": 96,
+    "nitrofurantoin": 92,
+    "vancomycin": 92,
+    "tetracycline": 50,
+    "gentamicin": 42
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Vancomycin",
+    "tetracycline": "Tetracycline",
+    "gentamicin": "Gentamicin"
+   },
+   "note": "Printed as: \"Linezolid(96%)/ Nitrofurantoin(=Vancomycin) (92%)/Tetracycline(50%)/ Gentamicin(42%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Gentamicin is printed without \"high level\"; recorded as gentamicin. Printed n = 144 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": null,
+   "page": 22,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 1284)",
+   "s": {
+    "meropenem": 33,
+    "norfloxacin": 33,
+    "ampsulbactam": 17,
+    "gentamicin": 8
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "norfloxacin": "Norfloxacin",
+    "ampsulbactam": "Ampisulb",
+    "gentamicin": "Gentamicin"
+   },
+   "note": "Printed as: \"Meropenem(=Norfloxacin) (33%)/ Ampisulb(17%)/ Gentamicin(8%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 72 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staph.aureus",
+   "pheno": null,
+   "n": null,
+   "page": 22,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 1284)",
+   "s": {
+    "gentamicin": 100,
+    "linezolid": 90,
+    "nitrofurantoin": 90,
+    "norfloxacin": 90,
+    "ciprofloxacin": 60,
+    "cotrimoxazole": 60
+   },
+   "printed": {
+    "gentamicin": "Gentamicin",
+    "linezolid": "Linezolid",
+    "nitrofurantoin": "Nitrofurantoin",
+    "norfloxacin": "Norfloxacin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "cotrimoxazole": "Cotrimoxazole"
+   },
+   "note": "Printed as: \"Gentamicin(100%)/ Linezolid(=Nitrofurantoin, Norfloxacin)(90%)/ Ciprofloxacin(=Cotrimoxazole) (60%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. \"Linezolid(=Nitrofurantoin, Norfloxacin)(90%)\" is read as all three at 90%. Printed n = 60 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 22,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 1284)",
+   "s": {
+    "amikacin": 100,
+    "imipenem": 100,
+    "piptazo": 100,
+    "ceftazidime": 100,
+    "aztreonam": 100,
+    "ciprofloxacin": 100
+   },
+   "printed": {
+    "amikacin": "Amikacin",
+    "imipenem": "Imipenem",
+    "piptazo": "Piptazo",
+    "ceftazidime": "Ceftazidime",
+    "aztreonam": "Aztreonam",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Amikacin(= Imipenem= Piptazo= Ceftazidime= Aztreonam= Ciprofloxacin) (100%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 36 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Staph.aureus",
+   "pheno": null,
+   "n": null,
+   "page": 24,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 5466)",
+   "s": {
+    "linezolid": 99,
+    "doxycycline": 98,
+    "chloramphenicol": 93,
+    "cotrimoxazole": 88
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "doxycycline": "Doxycycline",
+    "chloramphenicol": "Chloramphenicol",
+    "cotrimoxazole": "Cotrimoxazole"
+   },
+   "note": "Printed as: \"Linezolid(99%)/ Doxycycline(98%)/ Chloramphenicol(93%)/ Cotrimoxazole(88%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 1860 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "E.coli",
+   "pheno": null,
+   "n": null,
+   "page": 24,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 5466)",
+   "s": {
+    "meropenem": 75,
+    "amikacin": 68,
+    "piptazo": 55,
+    "tetracycline": 35
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "piptazo": "Piptazo",
+    "tetracycline": "Tetracycline"
+   },
+   "note": "Printed as: \"Meropenem(75%)/ Amikacin(68%)/ Piptazo(55%)/Tetracycline(35 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 1056 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 24,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 5466)",
+   "s": {
+    "meropenem": 90,
+    "piptazo": 82,
+    "ciprofloxacin": 79,
+    "aztreonam": 77
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "piptazo": "Piptazo",
+    "ciprofloxacin": "Ciprofloxacin",
+    "aztreonam": "Aztreonam"
+   },
+   "note": "Printed as: \"Meropenem(90%)/ Piptazo(82%)/ Ciprofloxacin(79%)/Aztreonam(77 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 810 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 24,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 5466)",
+   "s": {
+    "meropenem": 61,
+    "tetracycline": 57,
+    "amikacin": 57,
+    "piptazo": 55,
+    "ciprofloxacin": 46
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "tetracycline": "Tetracycline",
+    "amikacin": "Amikacin",
+    "piptazo": "Piptazo",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Meropenem(61%) / Tetracycline(=Amikacin)(57%)/ Piptazo(55%)/Ciprofloxacin(46 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 762 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": null,
+   "page": 24,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 5466)",
+   "s": {
+    "ampsulbactam": 43,
+    "tobramycin": 40,
+    "meropenem": 32,
+    "amikacin": 17
+   },
+   "printed": {
+    "ampsulbactam": "Ampisulb",
+    "tobramycin": "Tobramycin",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin"
+   },
+   "note": "Printed as: \"Ampisulb(43%)/ Tobramycin(40%)/ Meropenem (32%)/Amikacin(17 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 690 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 24,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: WARDS, WARDS microbiology data (total isolates 5466)",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 92,
+    "penicillin": 56,
+    "gentamicin": 50
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "vancomycin": "Vancomycin",
+    "penicillin": "Penicillin",
+    "gentamicin": "Gentamicin"
+   },
+   "note": "Printed as: \"Linezolid(100%)/ Vancomycin (92%)/ Penicillin*(56%) / Gentamicin (50%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Gentamicin is printed without \"high level\"; recorded as gentamicin. Printed n = 288 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "S typhi",
+   "pheno": null,
+   "n": null,
+   "page": 28,
+   "table": "Blood Stream Infections (BSI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 20)",
+   "s": {
+    "ceftriaxone": 100,
+    "cefixime": 100,
+    "cefepime": 100,
+    "azithromycin": 100,
+    "ampicillin": 100,
+    "chloramphenicol": 100,
+    "cotrimoxazole": 100,
+    "tetracycline": 100,
+    "tigecycline": 100,
+    "meropenem": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefixime": "Cefixime",
+    "cefepime": "Cefipime",
+    "azithromycin": "Azithromycin",
+    "ampicillin": "Ampicillin",
+    "chloramphenicol": "Chloramphenicol",
+    "cotrimoxazole": "Cotrimoxazole",
+    "tetracycline": "Tetracycline",
+    "tigecycline": "Tigecycline",
+    "meropenem": "Meropenem"
+   },
+   "note": "Printed as: \"Ceftriaxone (=Cefixime=Cefipime=Azithromycin=Ampicillin=Chloramphenicol=Cotrimoxazole=Tetracycline=Tigecycline=Meropenem) (100%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 20 (not used; see the file notes).",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "E coli",
+   "pheno": null,
+   "n": null,
+   "page": 30,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 210)",
+   "s": {
+    "piptazo": 100,
+    "amikacin": 82,
+    "nitrofurantoin": 82,
+    "imipenem": 84,
+    "meropenem": 84,
+    "cefepime": 52
+   },
+   "printed": {
+    "piptazo": "Piptazo",
+    "amikacin": "Amikacin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "imipenem": "Imipenem",
+    "meropenem": "Meropenem",
+    "cefepime": "Cefipime"
+   },
+   "note": "Printed as: \"Piptazo (100%)/Amikacin (=Nitrofurantoin) (82%)/Imipenem (=Meropenem) (84%)/Cefipime (52%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. Printed n = 150 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 30,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 210)",
+   "s": {
+    "piptazo": 100,
+    "amikacin": 100,
+    "imipenem": 100,
+    "cotrimoxazole": 100,
+    "cefepime": 87
+   },
+   "printed": {
+    "piptazo": "Piptazo",
+    "amikacin": "Amikacin",
+    "imipenem": "Imipenem",
+    "cotrimoxazole": "Cotrimoxazole",
+    "cefepime": "Cefipime"
+   },
+   "note": "Printed as: \"Piptazo(=)Amikacin=Imipenem=Cotrimoxazole) (100%)/ Ciprofloxacin(=Nitrofurantoin=Norfloxacin) Cefipime (87%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. \"Piptazo(=)Amikacin=Imipenem=Cotrimoxazole) (100%)\" is read as all four at 100%. Ciprofloxacin, nitrofurantoin and norfloxacin have no percentage of their own and are not recorded; cefepime is printed with 87%. Printed n = 36 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 30,
+   "table": "Complicated Urinary Tract Infections (cUTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 210)",
+   "s": {
+    "vancomycin": 100,
+    "amoxiclav": 100,
+    "cefotaxime": 100,
+    "nitrofurantoin": 100,
+    "linezolid": 100,
+    "penicillin": 75,
+    "gentamicin": 50,
+    "tetracycline": 50,
+    "ciprofloxacin": 25
+   },
+   "printed": {
+    "vancomycin": "Vancomycin",
+    "amoxiclav": "Amoxyclav",
+    "cefotaxime": "Cefotaxime",
+    "nitrofurantoin": "Nitrofurantoin",
+    "linezolid": "Linezolid",
+    "penicillin": "Penicillin",
+    "gentamicin": "Gentamicin",
+    "tetracycline": "Tetracycline",
+    "ciprofloxacin": "Ciproflaxacin"
+   },
+   "note": "Printed as: \"Vancomycin (=Amoxyclav=Cefotaxime (=Nitrofurantoin=Linezolid)(100%)/ Penicillin(75%)/ Gentamicin(=Tetracycline) (50 %)/ Ciproflaxacin(25 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. The bracket after cefotaxime is not closed in the source; all five drugs in the first group are read as 100%. Gentamicin is printed without \"high level\"; recorded as gentamicin. Printed n = 24 (not used; see the file notes).",
+   "specimen_as_printed": "Complicated Urinary Tract Infections (cUTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staph.aureus",
+   "pheno": null,
+   "n": null,
+   "page": 32,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 582)",
+   "s": {
+    "linezolid": 100,
+    "chloramphenicol": 98,
+    "cotrimoxazole": 95,
+    "doxycycline": 95,
+    "gentamicin": 89
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "chloramphenicol": "Chloramphenicol",
+    "cotrimoxazole": "Cotrimoxazole",
+    "doxycycline": "Doxycycline",
+    "gentamicin": "Gentamicin"
+   },
+   "note": "Printed as: \"Linezolid(100%)/Chloramphenicol(98%)/ Cotrimoxazole(=Doxycycline)(95%)/ Gentamicin(89%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. The data header of this box reads \"WARDS MICROBIOLOGY DATA\" although the protocol title and section are OPD and the wards SSTI box (p24) has different data; recorded as OPD. Printed n = 336 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "E.coli",
+   "pheno": null,
+   "n": null,
+   "page": 32,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 582)",
+   "s": {
+    "meropenem": 100,
+    "piptazo": 100,
+    "amikacin": 89,
+    "tetracycline": 50,
+    "cefepime": 50,
+    "cefotaxime": 39,
+    "ceftazidime": 39,
+    "ciprofloxacin": 39
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "piptazo": "Piptazo",
+    "amikacin": "Amikacin",
+    "tetracycline": "Tetracycline",
+    "cefepime": "Cefipime",
+    "cefotaxime": "Cefotaxime",
+    "ceftazidime": "Ceftazidime",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Meropenem(=Piptazo)(100%)/ Amikacin(89%)/ Tetracycline(=Cefipime)(50%)/Cefotaxime(=Ceftazidime=Ciprofloxacin)(39%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. The data header of this box reads \"WARDS MICROBIOLOGY DATA\" although the protocol title and section are OPD and the wards SSTI box (p24) has different data; recorded as OPD. Printed n = 108 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": null,
+   "page": 32,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 582)",
+   "s": {
+    "meropenem": 91,
+    "amikacin": 91,
+    "piptazo": 82,
+    "cefepime": 73,
+    "ciprofloxacin": 64,
+    "tetracycline": 64
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "piptazo": "Piptazo",
+    "cefepime": "Cefipime",
+    "ciprofloxacin": "Ciprofloxacin",
+    "tetracycline": "Tetracycline"
+   },
+   "note": "Printed as: \"Meropenem(=Amikacin)(91%)/ Piptazo(82%)/ Cefipime(73%)/Ciprofloxacin(=Tetracycline)(64 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. The data header of this box reads \"WARDS MICROBIOLOGY DATA\" although the protocol title and section are OPD and the wards SSTI box (p24) has different data; recorded as OPD. Printed n = 66 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 32,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 582)",
+   "s": {
+    "meropenem": 100,
+    "ciprofloxacin": 83,
+    "piptazo": 67,
+    "aztreonam": 67,
+    "amikacin": 67,
+    "ceftazidime": 50
+   },
+   "printed": {
+    "meropenem": "Meropenem",
+    "ciprofloxacin": "Ciprofloxacin",
+    "piptazo": "Piptazo",
+    "aztreonam": "Aztreonam",
+    "amikacin": "Amikacin",
+    "ceftazidime": "Ceftazidime"
+   },
+   "note": "Printed as: \"Meropenem(100%) / Ciprofloxacin(83%)/ Piptazo(=Aztreonam=Amikacin)(67%)/Ceftazidime(50 %)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. The data header of this box reads \"WARDS MICROBIOLOGY DATA\" although the protocol title and section are OPD and the wards SSTI box (p24) has different data; recorded as OPD. Printed n = 36 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": null,
+   "page": 32,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 582)",
+   "s": {
+    "ampsulbactam": 50,
+    "ciprofloxacin": 50,
+    "ceftazidime": 50,
+    "amikacin": 50,
+    "tobramycin": 50,
+    "meropenem": 50
+   },
+   "printed": {
+    "ampsulbactam": "Ampisulb",
+    "ciprofloxacin": "Ciprofloxacin",
+    "ceftazidime": "Ceftazidime",
+    "amikacin": "Amikacin",
+    "tobramycin": "Tobramycin",
+    "meropenem": "Meropenem"
+   },
+   "note": "Printed as: \"Ampisulb(=Ciprofloxacin=Ceftazidime=Amikacin=Tobramycin=Meropenem)(50%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. The data header of this box reads \"WARDS MICROBIOLOGY DATA\" although the protocol title and section are OPD and the wards SSTI box (p24) has different data; recorded as OPD. Printed n = 24 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 32,
+   "table": "Skin and Soft Tissue Infections (SSTI) Antibiotic Protocol: OPD, OPD microbiology data (total isolates 582)",
+   "s": {
+    "linezolid": 100,
+    "penicillin": 100,
+    "gentamicin": 100,
+    "vancomycin": 100,
+    "erythromycin": 50
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "penicillin": "Penicillin",
+    "gentamicin": "Gentamicin",
+    "vancomycin": "Vancomycin",
+    "erythromycin": "Erythromycin"
+   },
+   "note": "Printed as: \"Linezolid(=Penicillin =Gentamicin=Vancomycin)(100%) / Erythromycin (50%)\". A drug named in brackets with \"=\" has the same percentage as the drug before it. The data header of this box reads \"WARDS MICROBIOLOGY DATA\" although the protocol title and section are OPD and the wards SSTI box (p24) has different data; recorded as OPD. Gentamicin is printed without \"high level\"; recorded as gentamicin. Printed n = 12 (not used; see the file notes).",
+   "specimen_as_printed": "Skin and Soft Tissue Infections (SSTI)"
+  }
+ ],
+ "counts": [],
+ "excluded": [
+  {
+   "what": "ICU SSTI E. coli: piperacillin-tazobactam in 'Amikacin(Piptazo) (79%)' (p14)",
+   "org": "E.coli",
+   "drug": "Piptazo",
+   "value": "79",
+   "why": "printed in brackets without the '=' the guidebook uses for equal percentages; only amikacin is recorded"
+  },
+  {
+   "what": "OPD complicated UTI Klebsiella: 'Ciprofloxacin(=Nitrofurantoin=Norfloxacin)' (p30)",
+   "org": "Klebsiella",
+   "why": "printed without a percentage of its own (followed directly by 'Cefipime (87%)'); not recorded"
+  },
+  {
+   "what": "'%' (share of isolates) column of every box",
+   "why": "derived from the organism numbers, which are recorded as counts"
+  },
+  {
+   "what": "Department-wise distribution of organisms, blood, urine and pus (pp35 to 37)",
+   "why": "stacked percentage charts by clinical department (Medicine, Surgery, OBG, Paediatrics, ICU and others), not by the ICU, ward and OPD settings used here; labels cannot be tied to departments reliably"
+  },
+  {
+   "why": "Organism counts (49, the box totals): the same doubtful numbers as the rows' n. The printed 'Total no. of isolates' is not used as the isolate number: every value except S. Typhi (20) is a multiple of 6, most percentage sets fit one sixth of it, and the department charts (pp35 to 37) print exactly half of each box number, so the number tested is unknown."
+  }
+ ]
+}

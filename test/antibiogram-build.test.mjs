@@ -176,6 +176,17 @@ test("figures repeated value for value from an earlier edition become cautions o
   const one = base({ rows: [{ spec: "respiratory", set: "all", org: "Pseudomonas aeruginosa", n: 200, s: Object.assign({}, p) }, { spec: "pus", set: "all", org: "Pseudomonas aeruginosa", n: 100, s: Object.assign({}, p) }] });
   const by2 = new Map([[one.id, one.rows.map((r) => checkRow(one, r))]]);
   assert.equal(copyChecks([one], by2).length, 2);
+  // A partial copy (6 of 7 figures identical) is flagged too; only the identical figures become cautions.
+  const q = Object.assign({}, f, { cefepime: 40 }), q2 = Object.assign({}, f, { cefepime: 55 });
+  const p1 = base({ id: "P_2023", year: 2023, rows: [{ spec: "blood", set: "icu", org: "E. coli", n: 200, s: q }] });
+  const p2 = base({ id: "P_2024", year: 2024, rows: [{ spec: "blood", set: "icu", org: "E. coli", n: 100, s: q2 }] });
+  const by3 = new Map([p1, p2].map((x) => [x.id, x.rows.map((r) => checkRow(x, r))]));
+  const c3 = copyChecks([p1, p2], by3);
+  assert.equal(c3.length, 1);
+  assert.match(c3[0].text, /repeats 6 of 7 figures/);
+  const cells = by3.get("P_2024")[0].cells;
+  assert.equal(cells.cefepime.act, "keep");
+  assert.equal(cells.amikacin.act, "caution");
 });
 
 test("bundle: deterministic version, compact rows, every cell action counted", () => {

@@ -37,7 +37,8 @@
   "Second reader: the 2 cautions are printed that way: Table 7.1 S. aureus oxacillin 1689/4072 (35.9), confirmed at zoom, while Tables 7.2 (Total) and 7.4 (2023) print 1737/4071 (42.7); Table 10.39 E. coli UTI colistin 86/95 (93.5). The 7 intrinsic cells are printed as recorded: C. krusei fluconazole 15/40 (37.5) in Table 8.1 and 6/19 (31.6) in Table 8.2; HAI BSI K. pneumoniae ampicillin 3/136 (1.5), A. baumannii amoxicillin-clavulanate 3/26 (11.5), ampicillin 2/32 (6.3) and ertapenem 2/26 (7.7); HAI UTI K. pneumoniae ampicillin 1/26 (3.9). The 1 hidden cell, HAI UTI E. coli tigecycline 23/25 (92.0) (hidden by the urine tigecycline rule), is printed as recorded. The file has no count tables, so there are no count mismatches.",
   "Second reader: every printed percentage re-computed from its printed counts. Only 6 are 0.5 points or more off, all printed that way and all already recorded: the 2 conflicts above, and as notes HAI BSI K. pneumoniae ampicillin 1.5 (3/136 = 2.2), HAI BSI E. coli tetracycline 30.1 (13/42 = 31.0), Table 7.6 MRSA clindamycin 66.2 (1225/1833 = 66.8) and Table 9.4 levofloxacin 96 (87/90 = 96.7).",
   "Second reader: S. pneumoniae split checked against Tables 9.2 and 9.3 (p210 to 211): the CSF row (n=11) is the meningeal-criteria column, penicillin 3/11 (27.27) and cefotaxime 9/11 (81.80); the blood row's penicillin 62/63 (98.41) and cefotaxime 63/63 (100) are the 63 non-meningeal isolates, and its other six agents and its n=74 are Table 9.3 (all invasive isolates). Values and numbers tested match the page. Two judgement calls, both stated in the row notes and left as they are: the page does not say the 11 meningeal isolates are CSF isolates (meningeal is the breakpoint set), and the 74 invasive isolates include those 11 and come from blood, CSF and sterile fluids (p207), so the blood row stands for all invasive isolates.",
-  "Second reader: stratum calls and note cross-references checked on the pages and correct: Table 6.3 is headed 'All Specimens' but its S. flexneri counts are exactly the OPD plus ward faecal counts of Table 2.23, so stool is right; 'Salmonella spp. Faecal' (Table 1.27: 307 isolates, OPD 96, ward 210, ICU 1) is the group Table 1.28 calls 'Non Typhoidal Salmonella' (307/773 in 2023); Table 5.4 prints S. Paratyphi A levofloxacin 4/19 as 21.1; Table 6.6 has only the V. cholerae column, all (-); Table 10.45 does repeat identical counts across many agents, as its exclusion says."
+  "Second reader: stratum calls and note cross-references checked on the pages and correct: Table 6.3 is headed 'All Specimens' but its S. flexneri counts are exactly the OPD plus ward faecal counts of Table 2.23, so stool is right; 'Salmonella spp. Faecal' (Table 1.27: 307 isolates, OPD 96, ward 210, ICU 1) is the group Table 1.28 calls 'Non Typhoidal Salmonella' (307/773 in 2023); Table 5.4 prints S. Paratyphi A levofloxacin 4/19 as 21.1; Table 6.6 has only the V. cholerae column, all (-); Table 10.45 does repeat identical counts across many agents, as its exclusion says.",
+  "CoNS species rows added 2026-09-26 (antibiogram-rules.js now has species keys): Table 7.10 (p176, 'CoNS isolated from all specimens', no location split; spec all, set all, like its S. saprophyticus row) columns S. haemolyticus (n=2262), S. epidermidis (n=2056) and S. hominis (n=1408), 9 cells each (27 in all) with n/N as printed. First reading from the text layer (pdfplumber words assigned to cells by the table's grid lines), second from the page image (scale 3.4, first three species columns cropped in two halves); the two agreed on all 27 percentages, 27 n/N and 3 n, and every n/N gives its printed percentage. The excluded entry for these columns was removed."
  ],
  "rows": [
   {
@@ -5247,6 +5248,105 @@
   {
    "spec": "all",
    "set": "all",
+   "org": "Staphylococcus haemolyticus",
+   "pheno": null,
+   "n": 2262,
+   "page": 176,
+   "table": "Table 7.10",
+   "s": {
+    "cefoxitin": 11.3,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "erythromycin": 9,
+    "tetracycline": 42.8,
+    "ciprofloxacin": 17.2,
+    "clindamycin": 23.2,
+    "linezolid": 99.3,
+    "cotrimoxazole": 47.4
+   },
+   "nt": {
+    "cefoxitin": 1418,
+    "vancomycin": 2262,
+    "teicoplanin": 735,
+    "erythromycin": 1799,
+    "tetracycline": 1504,
+    "ciprofloxacin": 2262,
+    "clindamycin": 2262,
+    "linezolid": 2262,
+    "cotrimoxazole": 2262
+   },
+   "specimen_as_printed": "All Specimens",
+   "note": "S. haemolyticus column of Table 7.10 (CoNS species); these isolates are also counted in the CoNS rows."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus epidermidis",
+   "pheno": null,
+   "n": 2056,
+   "page": 176,
+   "table": "Table 7.10",
+   "s": {
+    "cefoxitin": 23.7,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "erythromycin": 17.2,
+    "tetracycline": 49.6,
+    "ciprofloxacin": 31.8,
+    "clindamycin": 36.6,
+    "linezolid": 99.6,
+    "cotrimoxazole": 56.5
+   },
+   "nt": {
+    "cefoxitin": 977,
+    "vancomycin": 2056,
+    "teicoplanin": 995,
+    "erythromycin": 1347,
+    "tetracycline": 1057,
+    "ciprofloxacin": 2056,
+    "clindamycin": 2056,
+    "linezolid": 2056,
+    "cotrimoxazole": 2056
+   },
+   "specimen_as_printed": "All Specimens",
+   "note": "S. epidermidis column of Table 7.10 (CoNS species); these isolates are also counted in the CoNS rows."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus hominis",
+   "pheno": null,
+   "n": 1408,
+   "page": 176,
+   "table": "Table 7.10",
+   "s": {
+    "cefoxitin": 20,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "erythromycin": 12.7,
+    "tetracycline": 41.6,
+    "ciprofloxacin": 31.2,
+    "clindamycin": 41.1,
+    "linezolid": 99.8,
+    "cotrimoxazole": 56
+   },
+   "nt": {
+    "cefoxitin": 731,
+    "vancomycin": 1408,
+    "teicoplanin": 567,
+    "erythromycin": 1047,
+    "tetracycline": 827,
+    "ciprofloxacin": 1408,
+    "clindamycin": 1408,
+    "linezolid": 1408,
+    "cotrimoxazole": 1408
+   },
+   "specimen_as_printed": "All Specimens",
+   "note": "S. hominis column of Table 7.10 (CoNS species); these isolates are also counted in the CoNS rows."
+  },
+  {
+   "spec": "all",
+   "set": "all",
    "org": "Staphylococcus saprophyticus",
    "pheno": null,
    "n": 29,
@@ -8305,7 +8405,7 @@
   },
   {
    "what": "Count rows of Tables 2.2 to 2.4: S. haemolyticus, S. hominis and S. epidermidis (blood), S. Typhi (blood OPD 679)",
-   "why": "the CoNS species share the CoNS key, so recording them would add up to a false CoNS count; S. Typhi appears in one location only (the other locations are not printed) and its specimen totals are part B tables"
+   "why": "the CoNS species count lines were left out while the species had no keys (their Table 7.10 susceptibility rows are recorded); S. Typhi appears in one location only (the other locations are not printed) and its specimen totals are part B tables"
   },
   {
    "what": "Table 3.1 column Klebsiella spp. (N=390) and Table 3.14 column Klebsiella spp. (N=32)",
@@ -8349,7 +8449,7 @@
   },
   {
    "what": "Count rows: S. haemolyticus and S. epidermidis (Table 1.3); total staphylococci, MSSA, MRSA, S. haemolyticus, S. epidermidis, S. hominis and Staphylococcus spp. (Table 1.13)",
-   "why": "count rows carry no phenotype and the CoNS species resolve to the CoNS key, so recording them would add to the S. aureus and CoNS counts; the S. aureus and CoNS rows are recorded"
+   "why": "count rows carry no phenotype, so the MSSA and MRSA lines would add to the S. aureus count; the CoNS species count lines were left out while the species had no keys (their susceptibility rows are recorded); the S. aureus and CoNS rows are recorded."
   },
   {
    "what": "Count rows: Klebsiella spp. (Table 1.5), NFGNB group (Table 1.10), Enterococci group total (Table 1.17); the Total and Others columns of Tables 1.5, 1.10 and 1.13, the Total column of Tables 1.3 and 1.17",
@@ -8452,11 +8552,6 @@
   {
    "what": "Tables 7.19A, 7.19B and 7.20 (p188 to 193)",
    "why": "resistance genes and hVISA candidate-gene mutations: molecular tables, not extracted"
-  },
-  {
-   "what": "Table 7.10 columns S. haemolyticus (n=2262), S. epidermidis (n=2056), S. hominis (n=1408)",
-   "org": "CoNS",
-   "why": "these species map to the same canonical organism (coagulase-negative staphylococci) as the Table 7.1 CoNS row for the same stratum (all specimens, all settings); would duplicate that row"
   },
   {
    "what": "Table 7.10 column S. spp. (n=1010)",

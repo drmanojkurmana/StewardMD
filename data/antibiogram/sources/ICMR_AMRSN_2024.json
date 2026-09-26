@@ -28,7 +28,8 @@
   "Second reader: 0 transcription errors found: no wrong value, n, nt, count or trend year, no OPD/ward/ICU column swap, and specimen and setting mapping match each table heading; no table needed a correction re-read.",
   "Second reader: the 6 conflict entries were checked on the page and are correct as written (M. morganii urine amikacin 121/154 (8.6); A. baumannii ward colistin 1927/1997 (69.5); S. maltophilia ceftazidime 21/36 (58.3) in Tables 3.7 and 3.9 vs 2/36 (5.6) in Table 3.8; P. aeruginosa BSI netilmicin 25/57 (38.6); Enterococcus spp. UTI vancomycin 18/98 (81.6); S. aureus UTI clindamycin 6/10 (16.0)).",
   "Second reader: the 14 cells the validator does not keep (7 caution, 5 intrinsic, 2 hidden) are all printed that way, none is a transcription error. The E. faecium count mismatches (OPD 569 vs 570, ward 1791 vs 1793) are printed in Tables 6.14 and 1.3 (source inconsistency, already noted on the rows).",
-  "Second reader: the dropped trend point (K. pneumoniae urine cefazolin 2021, printed 1970/3560 (55.3), identical to amikacin 2021 on p87) is confirmed; the row note still said 'recorded as printed' and now says it was left out. Added a per-drug note for Table 6.14 E. faecalis ICU vancomycin, printed 287/312 (92) with ICU N=303 (source inconsistency; value unchanged)."
+  "Second reader: the dropped trend point (K. pneumoniae urine cefazolin 2021, printed 1970/3560 (55.3), identical to amikacin 2021 on p87) is confirmed; the row note still said 'recorded as printed' and now says it was left out. Added a per-drug note for Table 6.14 E. faecalis ICU vancomycin, printed 287/312 (92) with ICU N=303 (source inconsistency; value unchanged).",
+  "CoNS species rows added 2026-09-26 (antibiogram-rules.js now has species keys): Table 6.10 (p155, 'CoNS isolated from all specimens', no location split; spec all, set all, like its S. saprophyticus row) columns S. haemolyticus (N=1572), S. epidermidis (N=1269) and S. hominis (N=1241), 9 cells each (27 in all) with n/N as printed. First reading from the text layer (pdfplumber words assigned to columns by the table's vertical grid lines), second from the page image (scale 3.2, cropped to the first three species columns, top and bottom halves); the two agreed on all 27 percentages, 27 n/N and 3 N. Every n/N was checked against its printed percentage: all agree except S. epidermidis tetracycline 250/460 printed 54.4 (54.348%, source rounding; per-drug note, recorded as printed). The excluded entry for these columns was removed."
  ],
  "rows": [
   {
@@ -8465,6 +8466,108 @@
   {
    "spec": "all",
    "set": "all",
+   "org": "Staphylococcus haemolyticus",
+   "pheno": null,
+   "n": 1572,
+   "page": 155,
+   "table": "Table 6.10",
+   "s": {
+    "cefoxitin": 19.6,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "erythromycin": 7.5,
+    "tetracycline": 32.2,
+    "ciprofloxacin": 15.4,
+    "clindamycin": 18.9,
+    "linezolid": 97.4,
+    "cotrimoxazole": 43.9
+   },
+   "nt": {
+    "cefoxitin": 607,
+    "vancomycin": 1572,
+    "teicoplanin": 462,
+    "erythromycin": 881,
+    "tetracycline": 684,
+    "ciprofloxacin": 1572,
+    "clindamycin": 1572,
+    "linezolid": 1572,
+    "cotrimoxazole": 1572
+   },
+   "specimen_as_printed": "All Specimens",
+   "note": "S. haemolyticus column of Table 6.10 (CoNS species); these isolates are also counted in the CoNS rows."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus epidermidis",
+   "pheno": null,
+   "n": 1269,
+   "page": 155,
+   "table": "Table 6.10",
+   "s": {
+    "cefoxitin": 20.1,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "erythromycin": 13.8,
+    "tetracycline": 54.4,
+    "ciprofloxacin": 37.4,
+    "clindamycin": 34.8,
+    "linezolid": 99.5,
+    "cotrimoxazole": 54.5
+   },
+   "nt": {
+    "cefoxitin": 443,
+    "vancomycin": 1269,
+    "teicoplanin": 407,
+    "erythromycin": 652,
+    "tetracycline": 460,
+    "ciprofloxacin": 1269,
+    "clindamycin": 1269,
+    "linezolid": 1269,
+    "cotrimoxazole": 1269
+   },
+   "specimen_as_printed": "All Specimens",
+   "notes": {
+    "tetracycline": "printed 250/460 (54.4); 250/460 is 54.348% (source rounding); recorded as printed"
+   },
+   "note": "S. epidermidis column of Table 6.10 (CoNS species); these isolates are also counted in the CoNS rows."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus hominis",
+   "pheno": null,
+   "n": 1241,
+   "page": 155,
+   "table": "Table 6.10",
+   "s": {
+    "cefoxitin": 31.96,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "erythromycin": 15.6,
+    "tetracycline": 24.5,
+    "ciprofloxacin": 30.7,
+    "clindamycin": 41.8,
+    "linezolid": 99.4,
+    "cotrimoxazole": 46.1
+   },
+   "nt": {
+    "cefoxitin": 438,
+    "vancomycin": 1241,
+    "teicoplanin": 180,
+    "erythromycin": 572,
+    "tetracycline": 478,
+    "ciprofloxacin": 1241,
+    "clindamycin": 1241,
+    "linezolid": 1241,
+    "cotrimoxazole": 1241
+   },
+   "specimen_as_printed": "All Specimens",
+   "note": "S. hominis column of Table 6.10 (CoNS species); these isolates are also counted in the CoNS rows."
+  },
+  {
+   "spec": "all",
+   "set": "all",
    "org": "Staphylococcus saprophyticus",
    "pheno": null,
    "n": 43,
@@ -11839,7 +11942,7 @@
   },
   {
    "what": "Count rows: S. haemolyticus (Table 1.3); total staphylococci, MSSA, MRSA, S. haemolyticus, S. epidermidis, S. hominis and Staphylococcus spp. (Table 1.13)",
-   "why": "count rows carry no phenotype and the CoNS species resolve to the CoNS key, so recording them would add to the S. aureus and CoNS counts; the S. aureus and CoNS rows are recorded."
+   "why": "count rows carry no phenotype, so the MSSA and MRSA lines would add to the S. aureus count; the CoNS species count lines were left out while the species had no keys (their susceptibility rows are recorded); the S. aureus and CoNS rows are recorded."
   },
   {
    "what": "Count rows: Enterobacter spp. (Table 1.5), NFGNB group (Table 1.10), Enterococci group total (Table 1.17); the Total and Others columns of Tables 1.5, 1.10 and 1.13",
@@ -11886,11 +11989,6 @@
   {
    "what": "Tables 6.8 and 6.9 cefoxitin and oxacillin trend series (MSSA and MRSA)",
    "why": "these agents define the phenotype; the MRSA series prints non-zero susceptibility for 2017 to 2023 (cefoxitin 0.8 to 3.4%, oxacillin 2.0 to 6.1%), which contradicts the definition; not recorded as trends (2024 values from Table 6.1 are kept)"
-  },
-  {
-   "what": "Table 6.10 columns S. haemolyticus (N=1572), S. epidermidis (N=1269), S. hominis (N=1241)",
-   "org": "CoNS",
-   "why": "species map to the same canonical organism (coagulase-negative staphylococci) as the Table 6.1 CoNS row for the same stratum (all specimens, all settings); would duplicate that row"
   },
   {
    "what": "Table 6.10 column Staphylococcus spp. (N=425)",

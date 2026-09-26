@@ -314,7 +314,9 @@ export function derive(allRows, src, mismatched) {
  * institution (an earlier edition, or another specimen of the same report with a different isolate
  * count) is almost certainly copied, not new data: SKIMS 2023 pus S. aureus OPD repeats 2022,
  * NARS-Net 2025's outpatient and ICU series repeat 2024. The later row's figures (both rows, within
- * one report) become cautions. Needs 6 shared figures, at least 3 different values, not all 0 or 100. */
+ * one report) become cautions. Needs 6 identical figures making up at least 80% of those the two rows
+ * share (a partial copy with one or two figures updated still counts), at least 3 different
+ * values among them, not all 0 or 100. Only the identical figures are flagged. */
 export function copyChecks(sources, checkedBy) {
   const out = [], byInst = {};
   const ord = (s) => (s.end || s.year + "-12");
@@ -328,14 +330,17 @@ export function copyChecks(sources, checkedBy) {
       const a = all[i], b = all[j], same = a.src.id === b.src.id;
       if (same && (a.r.n == null || b.r.n == null || a.r.n === b.r.n)) continue;   // one table printed twice
       const ds = Object.keys(a.k).filter((d) => d in b.k);
-      if (ds.length < 6 || ds.some((d) => a.k[d] !== b.k[d])) continue;
-      const vals = new Set(ds.map((d) => a.k[d]));
-      if (vals.size < 3 || ds.every((d) => a.k[d] === 0 || a.k[d] === 100)) continue;
+      // Whole or partial copies: 6 or more figures, and at least 80% of the shared ones, identical.
+      const eq = ds.filter((d) => a.k[d] === b.k[d]);
+      if (eq.length < 6 || eq.length < 0.8 * ds.length) continue;
+      const vals = new Set(eq.map((d) => a.k[d]));
+      if (vals.size < 3 || eq.every((d) => a.k[d] === 0 || a.k[d] === 100)) continue;
       const flag = same ? [[a, b], [b, a]] : ord(a.src) < ord(b.src) ? [[b, a]] : ord(b.src) < ord(a.src) ? [[a, b]] : [[a, b], [b, a]];
+      const part = eq.length < ds.length ? `${eq.length} of its ${ds.length} shared figures` : `the ${ds.length} figures`;
       flag.forEach(([x, y]) => {
-        const why = `the ${ds.length} figures repeat, value for value, ${same ? "this report's" : "the"} ${label(y.src, y.r)} row: probably carried over, not new data`;
-        ds.forEach((d) => { const c = x.r.cells[d]; if (c.act === "keep") { c.act = "caution"; c.why = why; } });
-        out.push({ src: x.src.id, spec: x.r.spec, set: x.r.set, org: x.r.org, text: `${R.SPECIMENS[x.r.spec].label}, ${R.SETTINGS[x.r.set].label}: ${R.orgLabel(x.r.org)}${x.r.pheno ? " (" + x.r.pheno + ")" : ""} repeats ${ds.length} figures of ${label(y.src, y.r)} exactly` });
+        const why = `${part} repeat, value for value, ${same ? "this report's" : "the"} ${label(y.src, y.r)} row: probably carried over, not new data`;
+        eq.forEach((d) => { const c = x.r.cells[d]; if (c.act === "keep") { c.act = "caution"; c.why = why; } });
+        out.push({ src: x.src.id, spec: x.r.spec, set: x.r.set, org: x.r.org, text: `${R.SPECIMENS[x.r.spec].label}, ${R.SETTINGS[x.r.set].label}: ${R.orgLabel(x.r.org)}${x.r.pheno ? " (" + x.r.pheno + ")" : ""} repeats ${eq.length < ds.length ? eq.length + " of " + ds.length : ds.length} figures of ${label(y.src, y.r)} exactly` });
       });
     }
   });

@@ -105,6 +105,8 @@ try {
   ok(await ev(`/checked twice against the document/.test(document.querySelector('#abgBody').innerText)`), 'verification counts are stated per source');
   await ev(`[...document.querySelectorAll('.v2-src button[data-v2="src"]')].find(b=>/SKIMS/.test(b.textContent))?.click()`);
   ok(await until(`/own tables disagree/i.test(document.querySelector('#abgV2Sheet').innerText)`), "a source's own inconsistencies are shown");
+  // A sheet opened again after another closed must fill the screen (dialog-motion once left scale(0.97) on it).
+  ok(await until(`(()=>{const o=document.querySelector('#abgV2Sheet'),s=o.querySelector('.v2-sh');return getComputedStyle(o).transform==='none'&&Math.abs(s.getBoundingClientRect().bottom-innerHeight)<2})()`), 'the reopened sheet is not scaled and reaches the bottom of the screen');
   await shot('abg-source-sheet');
   await click('#abgV2Sheet [data-v2="sheet-close"]');
 

@@ -1,0 +1,2261 @@
+{
+ "id": "SKIMS_2020",
+ "kind": "institution",
+ "inst": "SKIMS_SRINAGAR",
+ "institution": "Sher-i-Kashmir Institute of Medical Sciences, Srinagar",
+ "short": "SKIMS Srinagar",
+ "city": "Srinagar",
+ "state": "Jammu and Kashmir",
+ "region": "north",
+ "sector": "government",
+ "year": 2020,
+ "end": "2020-12",
+ "period": "2020 (calendar year; \"Antibiogram for the year 2020\")",
+ "published": "2021-06-07",
+ "url": "https://www.skims.ac.in/images/Research/microbiology_antibiogram_2020_07062021.pdf",
+ "page": "https://www.skims.ac.in/index.php/patient-care/antibiogram/5377-antibiogram-for-the-year-2020.html",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Microbiology, Sher-i-Kashmir Institute of Medical Sciences, Soura, Srinagar. Antibiogram for the year 2020. Srinagar: SKIMS; 2021.",
+ "reporting": "Percent susceptible by organism, specimen (blood; pus and body fluids; urine) and location (IPD, OPD, ICU), without the number of isolates per location; organism isolation tables by specimen (totals only).",
+ "method": "Testing according to CLSI M100, 30th ed. (2020); species with test data for fewer than 30 isolates generally excluded (as stated).",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Seven susceptibility tables (pages 7 to 13; drug headers and organism labels are rotated, so the column order and organism of each row group were taken from the rendered pages) parsed from the PDF text layer by word position inside the ruled grid (pdfplumber), then every cell compared by eye with the pages rendered at scale 1.9 to 2.4; organism tables (pages 4 to 6) checked on the images (2026-09-26). A blind re-read of 5 random cells (value read from a crop of header and row before looking at the extracted value) found no differences."
+ },
+ "notes": "Specimen-wise antibiogram with each organism split by IPD (wards), OPD and ICU. The tables print no number of isolates per location, so every row has n null; the organism tables give one total per specimen (no location split), recorded as counts for all settings. \"Pus & body fluids\" is recorded as pus, wounds and body fluids. Cells printed as \"-\", \"IR\", \".\" or left blank are left out; values printed as 0 are recorded as 0. Ticarcillin + clavulanate (clavulanic acid) columns have no drug key and are left out. Headers printed with misspellings are recorded as the drug named: \"Ampicillin + Salbactam\" as ampicillin-sulbactam, \"Cefoperazone - salbactam/salactam\" as cefoperazone-sulbactam, \"Ertapenam\" as ertapenem. Polymyxin B columns are recorded as printed. The blood organism table lists only 2 Enterobacter isolates, so the blood Enterobacter percentages that 2 isolates cannot give are marked as conflicts. Downloaded from the Wayback Machine snapshot web.archive.org/web/20241218223956id_/ of the URL (the SKIMS server refuses scripted downloads).",
+ "issues": [
+  "Second reader 2026-09-26: all 550 cells of the seven susceptibility tables (pages 7 to 13; the seeded sample of 138 plus every other cell), every row's organism and IPD/OPD/ICU label (no n is printed per location, so n stays null) and all 28 organism-table counts (pages 4 to 6) re-read against the page images (scale 3, tables cropped into halves), each value read before comparing. 0 transcription errors in values, settings, organisms or counts; no value corrected.",
+  "Cells not kept by the rules, re-read and printed as recorded: the imipenem and meropenem pairs of pus E. coli IPD (16, 82), OPD (10, 77) and ICU (20, 80) and Klebsiella IPD (15, 52), urine E. coli IPD (21.8, 94) and OPD (32.4, 91) and urine Klebsiella IPD (17, 50), OPD (40, 80) and ICU (0, 100); nitrofurantoin 0 for urine Pseudomonas OPD and Acinetobacter IPD, OPD and ICU (intrinsic); the 12 blood Enterobacter IPD and ICU conflicts against the blood organism table, which prints 2 Enterobacter isolates (page 4, checked).",
+  "Cells printed as \".\" (pus Gram-negative table: ampicillin-sulbactam of Klebsiella ICU, Pseudomonas IPD and OPD and Acinetobacter IPD, OPD and ICU, Acinetobacter OPD ticarcillin-clavulanate and ICU tetracycline; urine: Klebsiella ICU cefoperazone-sulbactam and Acinetobacter ICU tetracycline) are correctly left out, not recorded as 0. No black or grey cell markers in this report (IR is printed as text; the one cell that breaks the row shading, blood Enterococcus ICU ampicillin, prints \"-\"). The 2020 pus and blood Gram-negative figures were also read to check the 2021 report's repeated figures (see SKIMS_2021).",
+  "Also confirmed: the Enterobacter blood OPD row (blank or \"-\") and the all \"-\" rows (blood OPD S. aureus, CoNS, Enterococcus, E. coli and Klebsiella; Burkholderia blood IPD and OPD; Proteus urine ICU) are correctly left out; urine Proteus OPD ertapenem is printed \"100.\" with the \"0\" wrapped onto a second line (100.0, recorded 100). Institution reads \"Sher-i-Kashmir Institute of Medical Sciences, Srinagar\"; the Wayback PDF is complete (13 pages, ends with %%EOF)."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "cefoxitin": 50,
+    "clindamycin": 46.7,
+    "cotrimoxazole": 80,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 6
+   },
+   "printed": {
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-trimoxazole",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "cefoxitin": 0,
+    "clindamycin": 50,
+    "cotrimoxazole": 50,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 0
+   },
+   "printed": {
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-trimoxazole",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "CoNS",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 50,
+    "clindamycin": 41,
+    "cotrimoxazole": 78,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 33.3
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-trimoxazole",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "CoNS",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 33,
+    "clindamycin": 25,
+    "cotrimoxazole": 73,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 7
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-trimoxazole",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "penicillin": 25,
+    "vancomycin": 64.7,
+    "linezolid": 100,
+    "levofloxacin": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "penicillin": 0,
+    "vancomycin": 57,
+    "linezolid": 100,
+    "levofloxacin": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ampicillin": 0,
+    "ceftriaxone": 6.2,
+    "piptazo": 60,
+    "cotrimoxazole": 26.7,
+    "amikacin": 76,
+    "gentamicin": 61,
+    "levofloxacin": 0,
+    "imipenem": 73.3,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ampicillin": 0,
+    "ceftriaxone": 0,
+    "piptazo": 0,
+    "cotrimoxazole": 50,
+    "amikacin": 86,
+    "gentamicin": 66,
+    "levofloxacin": 0,
+    "imipenem": 0,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftriaxone": 0,
+    "piptazo": 0,
+    "cotrimoxazole": 23,
+    "amikacin": 30,
+    "gentamicin": 35,
+    "levofloxacin": 0,
+    "imipenem": 11,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftriaxone": 0,
+    "piptazo": 10,
+    "cotrimoxazole": 42,
+    "amikacin": 25,
+    "gentamicin": 33,
+    "imipenem": 10,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftriaxone": 25,
+    "ceftazidime": 10,
+    "piptazo": 42,
+    "cotrimoxazole": 49,
+    "amikacin": 50,
+    "gentamicin": 55,
+    "levofloxacin": 52,
+    "imipenem": 51,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "conflict": {
+    "ceftriaxone": "printed 25%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "ceftazidime": "printed 10%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "piptazo": "printed 42%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "cotrimoxazole": "printed 49%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "gentamicin": "printed 55%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "levofloxacin": "printed 52%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "imipenem": "printed 51%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations"
+   },
+   "note": "The blood organism table on page 4 gives only 2 Enterobacter isolates in all locations, so figures other than 0, 50 and 100% cannot be right (marked as conflicts); kept as printed."
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftriaxone": 15,
+    "ceftazidime": 0,
+    "piptazo": 18,
+    "cotrimoxazole": 0,
+    "amikacin": 40,
+    "gentamicin": 50,
+    "levofloxacin": 18,
+    "imipenem": 25,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "conflict": {
+    "ceftriaxone": "printed 15%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "piptazo": "printed 18%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "amikacin": "printed 40%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "levofloxacin": "printed 18%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
+    "imipenem": "printed 25%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations"
+   },
+   "note": "The blood organism table on page 4 gives only 2 Enterobacter isolates in all locations, so figures other than 0, 50 and 100% cannot be right (marked as conflicts); kept as printed."
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ampicillin": 80,
+    "ceftriaxone": 100,
+    "cotrimoxazole": 100,
+    "levofloxacin": 0
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "cotrimoxazole": "Co-trimoxazole",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ampicillin": 100,
+    "ceftriaxone": 100,
+    "cotrimoxazole": 100,
+    "levofloxacin": 0
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "cotrimoxazole": "Co-trimoxazole",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Salmonella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ampicillin": 100,
+    "ceftriaxone": 100,
+    "cotrimoxazole": 100,
+    "levofloxacin": 0
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "cotrimoxazole": "Co-trimoxazole",
+    "levofloxacin": "levofloxacin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftazidime": 75,
+    "piptazo": 100,
+    "amikacin": 56,
+    "gentamicin": 56,
+    "levofloxacin": 55,
+    "imipenem": 55,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftazidime": 60,
+    "piptazo": 50,
+    "amikacin": 33,
+    "gentamicin": 40,
+    "levofloxacin": 42,
+    "imipenem": 60,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftazidime": 35,
+    "piptazo": 25,
+    "amikacin": 20,
+    "gentamicin": 25,
+    "levofloxacin": 30,
+    "imipenem": 40,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftriaxone": 0,
+    "ceftazidime": 0,
+    "piptazo": 28,
+    "cotrimoxazole": 33,
+    "amikacin": 21,
+    "gentamicin": 26,
+    "levofloxacin": 16,
+    "imipenem": 25,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftriaxone": 0,
+    "ceftazidime": 0,
+    "ampsulbactam": 14.9,
+    "piptazo": 68.5,
+    "cotrimoxazole": 43,
+    "amikacin": 54.2,
+    "gentamicin": 44.2,
+    "levofloxacin": 47,
+    "imipenem": 66,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "ampsulbactam": "Ampicillin + sulbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftriaxone": 0,
+    "ceftazidime": 12,
+    "ampsulbactam": 0,
+    "piptazo": 8,
+    "cotrimoxazole": 20,
+    "amikacin": 27,
+    "gentamicin": 18,
+    "levofloxacin": 14,
+    "imipenem": 8,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "ampsulbactam": "Ampicillin + sulbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Burkholderia spp.",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (BLOOD)",
+   "s": {
+    "ceftazidime": 99,
+    "cotrimoxazole": 74.6,
+    "levofloxacin": 94,
+    "meropenem": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cotrimoxazole": "Co-trimoxazole",
+    "levofloxacin": "levofloxacin",
+    "meropenem": "Meropenem"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 3,
+    "ampicillin": 0,
+    "cefoxitin": 24.6,
+    "clindamycin": 59.3,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 16,
+    "erythromycin": 25
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 0,
+    "ampicillin": 0,
+    "cefoxitin": 31.4,
+    "clindamycin": 50,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 0,
+    "erythromycin": 24
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 0,
+    "ampicillin": 0,
+    "cefoxitin": 11,
+    "clindamycin": 50,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 0,
+    "erythromycin": 22
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "CoNS",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 11,
+    "cefoxitin": 26,
+    "clindamycin": 36,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 32,
+    "erythromycin": 11
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "CoNS",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 0,
+    "clindamycin": 39,
+    "cotrimoxazole": 100,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 25,
+    "erythromycin": 22.5
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-trimoxazole",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "CoNS",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 0,
+    "clindamycin": 0,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 0,
+    "erythromycin": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "cefoxitin": "Cefoxitin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 35.5,
+    "ampicillin": 32,
+    "vancomycin": 69,
+    "linezolid": 100,
+    "levofloxacin": 0,
+    "erythromycin": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 50,
+    "ampicillin": 58,
+    "vancomycin": 90,
+    "linezolid": 100,
+    "levofloxacin": 25,
+    "erythromycin": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 9,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "penicillin": 0,
+    "ampicillin": 0,
+    "vancomycin": 90,
+    "linezolid": 100,
+    "levofloxacin": 27,
+    "erythromycin": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "levofloxacin",
+    "erythromycin": "Erythromycin"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 10,
+    "ceftazidime": 5,
+    "ampsulbactam": 28.6,
+    "piptazo": 42,
+    "meropenem": 82,
+    "amikacin": 75,
+    "gentamicin": 64,
+    "levofloxacin": 10,
+    "imipenem": 16,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "ampsulbactam": "Ampicillin + Salbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids",
+   "note": "Source inconsistencies, checked on the page image and kept as printed: meropenem 82% and imipenem 16% should agree."
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 0,
+    "ceftazidime": 0,
+    "ampsulbactam": 0,
+    "piptazo": 55,
+    "meropenem": 77,
+    "amikacin": 90,
+    "gentamicin": 90,
+    "levofloxacin": 16,
+    "imipenem": 10,
+    "polymyxin_b": 100,
+    "tetracycline": 50
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "ampsulbactam": "Ampicillin + Salbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "Pus & body fluids",
+   "note": "Source inconsistencies, checked on the page image and kept as printed: meropenem 77% and imipenem 10% should agree."
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 20,
+    "ceftazidime": 0,
+    "ampsulbactam": 0,
+    "piptazo": 20,
+    "meropenem": 80,
+    "amikacin": 40,
+    "gentamicin": 40,
+    "levofloxacin": 20,
+    "imipenem": 20,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "ampsulbactam": "Ampicillin + Salbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids",
+   "note": "Source inconsistencies, checked on the page image and kept as printed: meropenem 80% and imipenem 20% should agree."
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 9.5,
+    "ceftazidime": 0,
+    "ampsulbactam": 0,
+    "piptazo": 22,
+    "meropenem": 52,
+    "amikacin": 40,
+    "gentamicin": 35,
+    "levofloxacin": 10,
+    "imipenem": 15,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "ampsulbactam": "Ampicillin + Salbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids",
+   "note": "Source inconsistencies, checked on the page image and kept as printed: meropenem 52% and imipenem 15% should agree."
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 26,
+    "ceftazidime": 37,
+    "piptazo": 55,
+    "meropenem": 67,
+    "amikacin": 56,
+    "gentamicin": 49,
+    "levofloxacin": 56,
+    "imipenem": 56,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 0,
+    "ceftazidime": 0,
+    "piptazo": 14,
+    "meropenem": 7,
+    "amikacin": 14,
+    "gentamicin": 7,
+    "levofloxacin": 0,
+    "imipenem": 7,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 20,
+    "ceftazidime": 14,
+    "piptazo": 40,
+    "meropenem": 40,
+    "amikacin": 50,
+    "gentamicin": 44,
+    "levofloxacin": 30,
+    "imipenem": 100,
+    "polymyxin_b": 100,
+    "tetracycline": 54
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 13.3,
+    "ceftazidime": 34,
+    "piptazo": 55,
+    "meropenem": 45,
+    "amikacin": 60,
+    "gentamicin": 44,
+    "levofloxacin": 33,
+    "imipenem": 24,
+    "polymyxin_b": 100,
+    "tetracycline": 55
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 0,
+    "ceftazidime": 0,
+    "piptazo": 10,
+    "meropenem": 0,
+    "amikacin": 10,
+    "gentamicin": 0,
+    "levofloxacin": 0,
+    "imipenem": 100,
+    "polymyxin_b": 100,
+    "tetracycline": 88
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftazidime": 41,
+    "piptazo": 50,
+    "meropenem": 61,
+    "amikacin": 40,
+    "gentamicin": 30,
+    "levofloxacin": 27,
+    "imipenem": 30,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftazidime": 64,
+    "piptazo": 80,
+    "meropenem": 80,
+    "amikacin": 59,
+    "gentamicin": 64,
+    "levofloxacin": 50,
+    "imipenem": 50,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftazidime": 25,
+    "piptazo": 25,
+    "meropenem": 20,
+    "amikacin": 20,
+    "gentamicin": 20,
+    "levofloxacin": 0,
+    "imipenem": 0,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 4.3,
+    "ceftazidime": 8.4,
+    "piptazo": 13.5,
+    "meropenem": 21,
+    "amikacin": 24,
+    "gentamicin": 21,
+    "levofloxacin": 12,
+    "imipenem": 15,
+    "polymyxin_b": 100,
+    "tetracycline": 21
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 16,
+    "ceftazidime": 0,
+    "piptazo": 20,
+    "meropenem": 50,
+    "amikacin": 30,
+    "gentamicin": 35,
+    "levofloxacin": 17,
+    "imipenem": 16,
+    "polymyxin_b": 100,
+    "tetracycline": 59
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU's (PUS& BODYFLUIDS)",
+   "s": {
+    "ceftriaxone": 0,
+    "ceftazidime": 0,
+    "piptazo": 11,
+    "meropenem": 10,
+    "amikacin": 25,
+    "gentamicin": 11,
+    "levofloxacin": 0,
+    "imipenem": 15,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin + tazobactam",
+    "meropenem": "Meropenem",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "specimen_as_printed": "Pus & body fluids"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "penicillin": 0,
+    "ampicillin": 0,
+    "cefoxitin": 60,
+    "nitrofurantoin": 100,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "levofloxacin": 50
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "cefoxitin": "Cefoxitin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "Levofloxacin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 33,
+    "nitrofurantoin": 100,
+    "cotrimoxazole": 50,
+    "vancomycin": 100,
+    "linezolid": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "cefoxitin": "Cefoxitin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "cotrimoxazole": "Co-trimoxazole",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "cefoxitin": 50,
+    "nitrofurantoin": 100,
+    "vancomycin": 100,
+    "linezolid": 100
+   },
+   "printed": {
+    "cefoxitin": "Cefoxitin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "penicillin": 25.8,
+    "ampicillin": 29.2,
+    "nitrofurantoin": 89.9,
+    "vancomycin": 66.4,
+    "linezolid": 100,
+    "levofloxacin": 25
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "Levofloxacin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "penicillin": 45,
+    "ampicillin": 44.3,
+    "nitrofurantoin": 83.3,
+    "vancomycin": 98,
+    "linezolid": 100,
+    "levofloxacin": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "Levofloxacin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Percentage susceptibility of gram positive isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "penicillin": 0,
+    "ampicillin": 0,
+    "nitrofurantoin": 33.3,
+    "vancomycin": 83,
+    "linezolid": 100,
+    "levofloxacin": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ampicillin": "Ampicillin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "levofloxacin": "Levofloxacin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "ceftriaxone": 12.5,
+    "cefepime": 29.8,
+    "cefoperazone_sulbactam": 68.6,
+    "ampsulbactam": 25,
+    "piptazo": 71.3,
+    "cotrimoxazole": 42,
+    "amikacin": 83.6,
+    "gentamicin": 76,
+    "levofloxacin": 20.4,
+    "norfloxacin": 16.9,
+    "imipenem": 21.8,
+    "ertapenem": 87.2,
+    "meropenem": 94,
+    "nitrofurantoin": 92.7,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "cefoperazone_sulbactam": "Cefoperazone - salbactam",
+    "ampsulbactam": "Ampicillin + sulbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "norfloxacin": "Norfloxacin",
+    "imipenem": "Imipenem",
+    "ertapenem": "Ertapenam",
+    "meropenem": "Meropenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "note": "Source inconsistencies, checked on the page image and kept as printed: imipenem 21.8% and meropenem 94% should agree."
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "ceftriaxone": 39,
+    "cefepime": 22.8,
+    "cefoperazone_sulbactam": 75,
+    "ampsulbactam": 50,
+    "piptazo": 84.5,
+    "cotrimoxazole": 42.9,
+    "amikacin": 95,
+    "gentamicin": 85,
+    "levofloxacin": 22,
+    "norfloxacin": 18,
+    "imipenem": 32.4,
+    "ertapenem": 85,
+    "meropenem": 91,
+    "nitrofurantoin": 91,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "cefoperazone_sulbactam": "Cefoperazone - salbactam",
+    "ampsulbactam": "Ampicillin + sulbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "norfloxacin": "Norfloxacin",
+    "imipenem": "Imipenem",
+    "ertapenem": "Ertapenam",
+    "meropenem": "Meropenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "note": "Source inconsistencies, checked on the page image and kept as printed: imipenem 32.4% and meropenem 91% should agree."
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "ceftriaxone": 0,
+    "piptazo": 100,
+    "amikacin": 100,
+    "gentamicin": 100,
+    "levofloxacin": 0,
+    "norfloxacin": 0,
+    "imipenem": 50,
+    "ertapenem": 100,
+    "meropenem": 50,
+    "nitrofurantoin": 50,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "piptazo": "Piperacillin + tazobactam",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "norfloxacin": "Norfloxacin",
+    "imipenem": "Imipenem",
+    "ertapenem": "Ertapenam",
+    "meropenem": "Meropenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "ceftriaxone": 0,
+    "cefepime": 10,
+    "cefoperazone_sulbactam": 21.4,
+    "ampsulbactam": 0,
+    "piptazo": 30,
+    "cotrimoxazole": 15,
+    "amikacin": 32.5,
+    "gentamicin": 24.3,
+    "levofloxacin": 15,
+    "norfloxacin": 13,
+    "imipenem": 17,
+    "ertapenem": 34,
+    "meropenem": 50,
+    "nitrofurantoin": 8,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "cefoperazone_sulbactam": "Cefoperazone - salbactam",
+    "ampsulbactam": "Ampicillin + sulbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "norfloxacin": "Norfloxacin",
+    "imipenem": "Imipenem",
+    "ertapenem": "Ertapenam",
+    "meropenem": "Meropenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "note": "Source inconsistencies, checked on the page image and kept as printed: imipenem 17% and meropenem 50% should agree."
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "ceftriaxone": 50,
+    "cefepime": 48,
+    "cefoperazone_sulbactam": 71.4,
+    "ampsulbactam": 0,
+    "piptazo": 73,
+    "cotrimoxazole": 46.7,
+    "amikacin": 71.4,
+    "gentamicin": 64.3,
+    "levofloxacin": 42,
+    "norfloxacin": 36,
+    "imipenem": 40,
+    "ertapenem": 75,
+    "meropenem": 80,
+    "nitrofurantoin": 43,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "cefoperazone_sulbactam": "Cefoperazone - salbactam",
+    "ampsulbactam": "Ampicillin + sulbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "norfloxacin": "Norfloxacin",
+    "imipenem": "Imipenem",
+    "ertapenem": "Ertapenam",
+    "meropenem": "Meropenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "note": "Source inconsistencies, checked on the page image and kept as printed: imipenem 40% and meropenem 80% should agree."
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "ceftriaxone": 0,
+    "cefepime": 0,
+    "ampsulbactam": 0,
+    "piptazo": 50,
+    "cotrimoxazole": 0,
+    "amikacin": 0,
+    "gentamicin": 0,
+    "levofloxacin": 0,
+    "norfloxacin": 0,
+    "imipenem": 0,
+    "ertapenem": 100,
+    "meropenem": 100,
+    "nitrofurantoin": 0,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "ampsulbactam": "Ampicillin + sulbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "norfloxacin": "Norfloxacin",
+    "imipenem": "Imipenem",
+    "ertapenem": "Ertapenam",
+    "meropenem": "Meropenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B"
+   },
+   "note": "Source inconsistencies, checked on the page image and kept as printed: imipenem 0% and meropenem 100% should agree."
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "cefepime": 50,
+    "cefoperazone_sulbactam": 50,
+    "piptazo": 100,
+    "cotrimoxazole": 33,
+    "amikacin": 60,
+    "gentamicin": 80,
+    "levofloxacin": 25,
+    "norfloxacin": 25,
+    "imipenem": 20,
+    "ertapenem": 80,
+    "meropenem": 100
+   },
+   "printed": {
+    "cefepime": "Cefepime",
+    "cefoperazone_sulbactam": "Cefoperazone - salbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "cotrimoxazole": "Co-trimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "norfloxacin": "Norfloxacin",
+    "imipenem": "Imipenem",
+    "ertapenem": "Ertapenam",
+    "meropenem": "Meropenem"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE )",
+   "s": {
+    "ceftriaxone": 100,
+    "cefepime": 0,
+    "cefoperazone_sulbactam": 100,
+    "piptazo": 100,
+    "amikacin": 83,
+    "gentamicin": 50,
+    "levofloxacin": 17,
+    "norfloxacin": 20,
+    "imipenem": 17,
+    "ertapenem": 100,
+    "meropenem": 83
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "cefoperazone_sulbactam": "Cefoperazone - salbactam",
+    "piptazo": "Piperacillin + tazobactam",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "levofloxacin": "levofloxacin",
+    "norfloxacin": "Norfloxacin",
+    "imipenem": "Imipenem",
+    "ertapenem": "Ertapenam",
+    "meropenem": "Meropenem"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 13,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE ), continued",
+   "s": {
+    "ceftazidime": 44,
+    "cefoperazone_sulbactam": 25,
+    "piptazo": 53.3,
+    "aztreonam": 56,
+    "amikacin": 41.2,
+    "gentamicin": 25,
+    "tobramycin": 28,
+    "levofloxacin": 31.2,
+    "imipenem": 41.2,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefoperazone_sulbactam": "Cefoperazone - salactam",
+    "piptazo": "Piperacillin/tazobactam",
+    "aztreonam": "Aztreonam",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "tobramycin": "Tobramycin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 13,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE ), continued",
+   "s": {
+    "ceftazidime": 36,
+    "cefoperazone_sulbactam": 42.9,
+    "piptazo": 75,
+    "aztreonam": 25,
+    "amikacin": 47.1,
+    "gentamicin": 41.2,
+    "tobramycin": 46.2,
+    "levofloxacin": 11.8,
+    "imipenem": 25,
+    "nitrofurantoin": 0,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefoperazone_sulbactam": "Cefoperazone - salactam",
+    "piptazo": "Piperacillin/tazobactam",
+    "aztreonam": "Aztreonam",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "tobramycin": "Tobramycin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 13,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE ), continued",
+   "s": {
+    "amikacin": 75,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "amikacin": "Amikacin",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 13,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE ), continued",
+   "s": {
+    "ceftazidime": 7.7,
+    "piptazo": 31.8,
+    "cotrimoxazole": 44.4,
+    "amikacin": 42.1,
+    "gentamicin": 50,
+    "tobramycin": 60,
+    "imipenem": 27.8,
+    "nitrofurantoin": 0,
+    "polymyxin_b": 100,
+    "tetracycline": 53
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "piptazo": "Piperacillin/tazobactam",
+    "cotrimoxazole": "Cotrimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "tobramycin": "Tobramycin",
+    "imipenem": "Imipenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B",
+    "tetracycline": "Tetracycline"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 13,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE ), continued",
+   "s": {
+    "cefoperazone_sulbactam": 60,
+    "piptazo": 33,
+    "amikacin": 33,
+    "gentamicin": 33.3,
+    "tobramycin": 0,
+    "levofloxacin": 0,
+    "imipenem": 33.3,
+    "nitrofurantoin": 0,
+    "polymyxin_b": 100,
+    "tetracycline": 56
+   },
+   "printed": {
+    "cefoperazone_sulbactam": "Cefoperazone - salactam",
+    "piptazo": "Piperacillin/tazobactam",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "tobramycin": "Tobramycin",
+    "levofloxacin": "levofloxacin",
+    "imipenem": "Imipenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B",
+    "tetracycline": "Tetracycline"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 13,
+   "table": "Percentage susceptibility of gram negative isolates from IPD, OPD and ICU ( URINE ), continued",
+   "s": {
+    "piptazo": 0,
+    "cotrimoxazole": 0,
+    "amikacin": 25,
+    "gentamicin": 0,
+    "tobramycin": 0,
+    "imipenem": 0,
+    "nitrofurantoin": 0,
+    "polymyxin_b": 100
+   },
+   "printed": {
+    "piptazo": "Piperacillin/tazobactam",
+    "cotrimoxazole": "Cotrimoxazole",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamicin",
+    "tobramycin": "Tobramycin",
+    "imipenem": "Imipenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "polymyxin_b": "Polymyxin -B"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 130,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 140,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 2,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella spp.",
+   "n": 64,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 100,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Burkholderia spp.",
+   "n": 304,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 160,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 88,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "CoNS",
+   "n": 400,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 46,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Brucella spp.",
+   "n": 28,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 537,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 464,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 23,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Proteus spp.",
+   "n": 141,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 460,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 389,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 226,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 121,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "CoNS",
+   "n": 209,
+   "page": 5
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Streptococcus spp.",
+   "n": 6,
+   "page": 5
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 664,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 291,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus spp.",
+   "n": 28,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 63,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 26,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 33,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 408,
+   "page": 6
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Ticarcillin + clavulanate / clavulanic acid column in the Gram-negative blood and pus tables (pages 8, 10)",
+   "drug": "ticarcillin-clavulanate",
+   "why": "no canonical drug key"
+  },
+  {
+   "what": "Organism tables: Other Gram Positive (blood, 37), Other Gram Negative (blood, 63), Morganella, Citrobacter, Providentia etc (pus, 24), Others (pus, 45)",
+   "why": "mixed groups with no organism key; counts not recorded"
+  },
+  {
+   "what": "Pages 2 and 3: samples received, and their breakup by IPD, OPD and ICU",
+   "why": "sample totals, not organism counts"
+  },
+  {
+   "what": "Rows with every cell printed as not tested (blood OPD rows of S. aureus, CoNS, Enterococcus, E. coli, Klebsiella and Enterobacter; Burkholderia blood IPD and OPD; Proteus urine ICU)",
+   "why": "every cell printed as not tested"
+  }
+ ]
+}

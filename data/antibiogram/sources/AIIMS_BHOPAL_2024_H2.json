@@ -23,7 +23,7 @@
   "status": "double-checked",
   "note": "Tables 1 to 6 parsed from the PDF text layer by word positions (rotated drug headers rebuilt from characters, trend arrows stripped), count tables re-added by row and by column against their printed totals; every value of every extracted table then compared by eye with the rendered page images (full pages at scale 3 and zoomed crops), 2026-09-26. The archived PDF was re-downloaded and matched the census file byte for byte (MD5)."
  },
- "notes": "Half-yearly hospital antibiogram of AIIMS Bhopal, 1st July to 31st December 2024: 4964 isolates as printed. Rows are hospital-wide (spec all, set all): Tables 5 and 6 pool all specimens and all locations (OPD, IPD, ICU and Emergency), each cell giving percent susceptible over the number of isolates tested; drugs printed as -, NR, IR or R are left out. Counts: Tables 1 and 2 (by specimen, all locations) and Tables 3 and 4 (by location, all specimens) are two views of the same isolates, recorded as spec x all and all x setting, with each organism's Total from Table 1 or 2 as the all x all count; IPD is recorded as ward. The Emergency column and the Others specimen column have no key and are not recorded, nor are cells printed as \"-\", so the recorded location or specimen counts add up to less than each organism's total. Tables 7 and 8 (percent susceptible by specimen for all Gram-negative or all Gram-positive isolates pooled) are not organism-specific and were not extracted. Up and down arrows (a change of more than 5 points from the previous half-year) are not values and are ignored. 3 other printed percentages differ by up to 1 point from any whole number of the isolates printed as tested (the percentage and the tested count appear to use slightly different denominators); these are kept as printed. Archived copy used (the live site could not be reached): https://web.archive.org/web/20250215083642id_/https://aiimsbhopal.edu.in/AIIMSFiles/annexuredImage/Antibiogram_AIIMS_BHopal_Jul-Dec_2024.pdf.",
+ "notes": "Half-yearly hospital antibiogram of AIIMS Bhopal, 1st July to 31st December 2024: 4964 isolates as printed. Rows are hospital-wide (spec all, set all): Tables 5 and 6 pool all specimens and all locations (OPD, IPD, ICU and Emergency), each cell giving percent susceptible over the number of isolates tested; drugs printed as -, NR, IR or R are left out. Counts: Tables 1 and 2 (by specimen, all locations) and Tables 3 and 4 (by location, all specimens) are two views of the same isolates, recorded as spec x all and all x setting, with each organism's Total from Table 1 or 2 as the all x all count; IPD is recorded as ward. The Emergency column and the Others specimen column have no key and are not recorded, nor are cells printed as \"-\", so the recorded location or specimen counts add up to less than each organism's total. Tables 7 and 8 (percent susceptible by specimen for all Gram-negative or all Gram-positive isolates pooled) are not organism-specific and were not extracted. Up and down arrows (a change of more than 5 points from the previous half-year) are not values and are ignored. 6 other printed percentages differ by up to 1 point from any whole number of the isolates printed as tested (the percentage and the tested count appear to use slightly different denominators); these are kept as printed. Archived copy used (the live site could not be reached): https://web.archive.org/web/20250215083642id_/https://aiimsbhopal.edu.in/AIIMSFiles/annexuredImage/Antibiogram_AIIMS_BHopal_Jul-Dec_2024.pdf.",
  "rows": [
   {
    "spec": "all",
@@ -877,6 +877,168 @@
    "notes": {
     "rifampicin": "from the additional-information note under Table 6"
    }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus epidermidis",
+   "n": 105,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 23.5,
+    "levofloxacin": 15.5,
+    "ampicillin": 2.2,
+    "cotrimoxazole": 38.4,
+    "penicillin": 1.0,
+    "teicoplanin": 60.6,
+    "vancomycin": 75.3,
+    "erythromycin": 13.3,
+    "linezolid": 63.3,
+    "tigecycline": 100.0,
+    "daptomycin": 90.4,
+    "doxycycline": 91.9,
+    "tetracycline": 65.7,
+    "clindamycin": 21.2
+   },
+   "nt": {
+    "ciprofloxacin": 98,
+    "levofloxacin": 97,
+    "ampicillin": 46,
+    "cotrimoxazole": 99,
+    "penicillin": 98,
+    "teicoplanin": 99,
+    "vancomycin": 85,
+    "erythromycin": 98,
+    "linezolid": 98,
+    "tigecycline": 65,
+    "daptomycin": 52,
+    "doxycycline": 99,
+    "tetracycline": 99,
+    "clindamycin": 99
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus haemolyticus",
+   "n": 160,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 7,
+    "levofloxacin": 5.0,
+    "ampicillin": 0.0,
+    "cotrimoxazole": 28.4,
+    "penicillin": 1.9,
+    "teicoplanin": 73.9,
+    "vancomycin": 63,
+    "erythromycin": 3.2,
+    "linezolid": 48.1,
+    "tigecycline": 100.0,
+    "daptomycin": 80.6,
+    "doxycycline": 92.1,
+    "tetracycline": 55.3,
+    "clindamycin": 13.1
+   },
+   "nt": {
+    "ciprofloxacin": 158,
+    "levofloxacin": 159,
+    "ampicillin": 91,
+    "cotrimoxazole": 160,
+    "penicillin": 158,
+    "teicoplanin": 159,
+    "vancomycin": 138,
+    "erythromycin": 158,
+    "linezolid": 159,
+    "tigecycline": 83,
+    "daptomycin": 62,
+    "doxycycline": 152,
+    "tetracycline": 159,
+    "clindamycin": 160
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus hominis",
+   "n": 140,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 23.2,
+    "levofloxacin": 18.2,
+    "ampicillin": 12.3,
+    "cotrimoxazole": 38.1,
+    "penicillin": 6.7,
+    "teicoplanin": 62.5,
+    "vancomycin": 68.6,
+    "erythromycin": 4.3,
+    "linezolid": 55.1,
+    "tigecycline": 100.0,
+    "daptomycin": 93.5,
+    "doxycycline": 96.1,
+    "tetracycline": 83.1,
+    "clindamycin": 30.9
+   },
+   "nt": {
+    "ciprofloxacin": 138,
+    "levofloxacin": 137,
+    "ampicillin": 57,
+    "cotrimoxazole": 139,
+    "penicillin": 135,
+    "teicoplanin": 136,
+    "vancomycin": 121,
+    "erythromycin": 138,
+    "linezolid": 138,
+    "tigecycline": 122,
+    "daptomycin": 93,
+    "doxycycline": 127,
+    "tetracycline": 136,
+    "clindamycin": 139
+   },
+   "note": "Printed as \"Staphylococcus hominis ss. hominis\"."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Other CONS",
+   "n": 112,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 54.6,
+    "levofloxacin": 38,
+    "ampicillin": 2.9,
+    "cotrimoxazole": 45.5,
+    "penicillin": 6.6,
+    "teicoplanin": 82.7,
+    "vancomycin": 76.6,
+    "erythromycin": 17,
+    "linezolid": 44.5,
+    "tigecycline": 99.0,
+    "daptomycin": 96.2,
+    "doxycycline": 96.7,
+    "tetracycline": 85.3,
+    "clindamycin": 20.4
+   },
+   "nt": {
+    "ciprofloxacin": 108,
+    "levofloxacin": 108,
+    "ampicillin": 35,
+    "cotrimoxazole": 110,
+    "penicillin": 106,
+    "teicoplanin": 110,
+    "vancomycin": 94,
+    "erythromycin": 106,
+    "linezolid": 110,
+    "tigecycline": 97,
+    "daptomycin": 79,
+    "doxycycline": 92,
+    "tetracycline": 109,
+    "clindamycin": 108
+   },
+   "note": "Printed as \"Other CONS\": coagulase-negative staphylococci other than S. epidermidis, S. haemolyticus and S. hominis, which have their own rows."
   },
   {
    "spec": "all",
@@ -2367,11 +2529,6 @@
  ],
  "excluded": [
   {
-   "org": "Coagulase-negative staphylococci",
-   "what": "Table 6 rows Staphylococcus epidermidis (105), Staphylococcus haemolyticus (160), Staphylococcus hominis ss. hominis (140), Other CONS (112)",
-   "why": "Table 6 reports CoNS by species (S. epidermidis, S. haemolyticus, S. hominis, other CoNS) and has no all-CoNS row. When this file was extracted the four names all resolved to the one CoNS organism key, so these rows were left out; antibiogram-rules.js now has species keys (S. epidermidis, S. haemolyticus, S. hominis, other CoNS), so they can be added in a later pass. Their isolate counts (Tables 2 and 4) are recorded under those species keys."
-  },
-  {
    "what": "Tables 7 and 8 (page 6 and 7)",
    "why": "Tables 7 and 8 give sample-wise consolidated percent susceptibility for all Gram-negative (Table 7) or all Gram-positive (Table 8) isolates pooled together; they are not organism-specific and there is no organism key for a pooled Gram group, so they were not extracted."
   },
@@ -2383,6 +2540,7 @@
  "issues": [
   "Second reader 2026-09-26: every cell of Tables 5 and 6 (310: 222 and 88, including the 5 figures from the notes under the tables) with its printed number tested, all 23 row counts and all 203 count-table entries re-read against page images (crops at scale 3 to 3.5) before comparing; the seeded sample (78 cells: 55 in Table 5, 23 in Table 6) is part of that. 0 transcription errors.",
   "Second reader: the 8 cells not kept (intrinsic: Burkholderia species gentamicin 15.4 and amikacin 15.4, B. pseudomallei gentamicin 0, Morganella, Proteus, Providencia and Pseudomonas minocycline 18, 1.5, 0 and 0, Typhoidal Salmonella cefuroxime 4.4) confirmed as printed.",
-  "Second reader: the 9 counts of the Table 2 and 4 line \"Other CONS\" (112 in all) were filed as \"Coagulase-negative staphylococci\", which now resolves to the all-CoNS key; renamed to \"Other CONS\" as printed (key cons_other). The Table 6 CoNS species rows stay excluded; their reason is updated because the rules now have species keys."
+  "Second reader: the 9 counts of the Table 2 and 4 line \"Other CONS\" (112 in all) were filed as \"Coagulase-negative staphylococci\", which now resolves to the all-CoNS key; renamed to \"Other CONS\" as printed (key cons_other). The Table 6 CoNS species rows stay excluded; their reason is updated because the rules now have species keys.",
+  "CoNS species rows added 2026-09-26 (antibiogram-rules.js now has species keys): Table 6 (page 5) rows Staphylococcus epidermidis (n 105), Staphylococcus haemolyticus (160), Staphylococcus hominis ss. hominis (140) and Other CONS (112), 14 cells each (56 in all) with the number tested; nitrofurantoin and high-level gentamicin are printed as - for all four and left out. Every value was read twice: from the page image (header and CoNS rows cropped at scale 4) and from the PDF text layer (characters assigned to the rotated drug-header columns); the two readings agreed on all 56 percentages, 56 numbers tested and 4 row counts, and both matched the earlier parse (extract/AIIMS_BHOPAL/h2_24_t6.json), opened only after both readings. Row counts equal the Table 2 totals. S. haemolyticus cotrimoxazole 28.4 of 160, teicoplanin 73.9 of 159 and linezolid 48.1 of 159 are about 0.3 points from any whole number of those tested; kept as printed and counted in notes. The excluded entry for these rows was removed."
  ]
 }

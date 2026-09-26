@@ -1,0 +1,994 @@
+{
+ "id": "CMC_LUDHIANA_2012",
+ "kind": "institution",
+ "inst": "CMC_LUDHIANA",
+ "institution": "Christian Medical College and Hospital, Ludhiana",
+ "short": "CMC Ludhiana",
+ "city": "Ludhiana",
+ "state": "Punjab",
+ "region": "north",
+ "sector": "private",
+ "year": 2012,
+ "period": "Not stated; 'Guidelines for Antimicrobial Therapy' printed September 2012 (5th proof), applicable for 2012-2013 and valid till October 2013, so the data precede September 2012",
+ "published": "2012-09",
+ "url": "http://cmcludhiana.in/cmc-hospital-antibiotic-policy2012.pdf",
+ "retrieved": "2026-09-26",
+ "citation": "Christian Medical College and Hospital, Ludhiana. Guidelines for Antimicrobial Therapy (for internal use only; valid till October 2013), Antibiogram, pp. 15 to 19. Ludhiana: CMC; 2012.",
+ "reporting": "Syndrome by location boxes (blood stream infections, urinary tract infections and respiratory/skin soft tissue infections, each for ICU, IPD and OPD): total isolates, the most common pathogens with their number and share, and percent susceptible for selected agents per pathogen; agents sharing a percentage are joined by '/'. AST method not stated.",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Parsed from the PDF text layer (pdfium) and compared value by value with the pages rendered at scale 2.5 and 4 (pp15 to 17); all 168 cells, 28 row n values and 6 box totals agree. The file is the Internet Archive copy (live URL returns 403); it opens fully (43 pages, end-of-file marker present)."
+ },
+ "notes": "Pocket antibiotic policy of CMC Ludhiana (43 pages; antibiogram on PDF pages 15 to 19, same as the printed numbers). OLD DATA: the policy is from 2012 and the data precede it; recorded as year 2012 because no data period is printed (the true data year may be 2011 or 2011-12). The app keeps it out of pooled views. Only selected agents are printed per pathogen, so missing drugs were not necessarily tested. BSI is recorded as blood and UTI as urine; IPD as wards (ICU has its own boxes). For blood the listed pathogens add up to each box total; for urine they do not (42 of 45, 340 of 425, 225 of 301), so the other isolates are unlisted organisms. Counts are the listed pathogen numbers per box. The three 'Respiratory / Skin Soft Tissue infections' boxes (ICU n=169, IPD n=853, OPD n=191; pp18 to 19) pool respiratory and skin and soft tissue isolates, which no specimen key represents, and are left out (see excluded). Retrieved from the Internet Archive snapshot of 23 April 2013 (https://web.archive.org/web/20130423160613id_/http://cmcludhiana.in/cmc-hospital-antibiotic-policy2012.pdf); the live URL returns HTTP 403.",
+ "issues": [
+  "Second reader 2026-09-26: all 168 cells, all 28 row n values and all 28 counts re-read against the page images (pp15 to 17, scale 5), each value read before comparing; 0 transcription errors, nothing corrected.",
+  "The 4 intrinsic cells (Enterococcus urine gentamicin 27% and 35%, Proteus urine nitrofurantoin 70% and 20%) and the suppressed cell (OPD urine S. aureus amoxicillin-clavulanate 75% against cefoxitin 69%) are printed as recorded."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staph aureus",
+   "pheno": null,
+   "n": 20,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - ICU Antibiogram (microbiology data n=36)",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 100,
+    "erythromycin": 65,
+    "cefoxitin": 30,
+    "cotrimoxazole": 45,
+    "amoxiclav": 11
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "vancomycin": "Vancomycin",
+    "erythromycin": "Erythromycin",
+    "cefoxitin": "Cefoxitin",
+    "cotrimoxazole": "Cotrimoxazole",
+    "amoxiclav": "Amoxicillin-Clavulanate"
+   },
+   "note": "Printed as: \"Linezolid/Vancomycin (100%), Erythromycin (65%), Cefoxitin (30%), Cotrimoxazole (45%), Amoxicillin-Clavulanate (11%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 8,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - ICU Antibiogram (microbiology data n=36)",
+   "s": {
+    "polymyxin_b": 88,
+    "amikacin": 88,
+    "imipenem": 75,
+    "piptazo": 75,
+    "cefoperazone_sulbactam": 75,
+    "ciprofloxacin": 75,
+    "aztreonam": 63,
+    "ceftazidime": 38
+   },
+   "printed": {
+    "polymyxin_b": "Polymyxin B",
+    "amikacin": "Amikacin",
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "ciprofloxacin": "Ciprofloxacin",
+    "aztreonam": "Aztreonam",
+    "ceftazidime": "Ceftazidime"
+   },
+   "note": "Printed as: \"Polymyxin B/Amikacin (88%), Imipenem/Piperacillin-Tazobactam/Cefoperazone-Sulbactam/Ciprofloxacin (75%), Aztreonam (63%), Ceftazidime (38%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 6,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - ICU Antibiogram (microbiology data n=36)",
+   "s": {
+    "imipenem": 100,
+    "cefoperazone_sulbactam": 100,
+    "piptazo": 83,
+    "amikacin": 67,
+    "cefotaxime": 50,
+    "ceftriaxone": 50,
+    "ceftazidime": 33,
+    "ciprofloxacin": 33
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "piptazo": "Piperacillin-Tazobactam",
+    "amikacin": "Amikacin",
+    "cefotaxime": "Cefotaxime",
+    "ceftriaxone": "Ceftriaxone",
+    "ceftazidime": "Ceftazidime",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Imipenem/Cefoperazone-Sulbactam (100%), Piperacillin-Tazobactam (83%), Amikacin (67%), Cefotaxime/Ceftriaxone (50%), Ceftazidime/ Ciprofloxacin (33%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Salmonella paratyphi A",
+   "pheno": null,
+   "n": 1,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - ICU Antibiogram (microbiology data n=36)",
+   "s": {
+    "azithromycin": 100,
+    "chloramphenicol": 100,
+    "ceftriaxone": 100
+   },
+   "printed": {
+    "azithromycin": "Azithromycin",
+    "chloramphenicol": "Chloramphinecol",
+    "ceftriaxone": "Ceftriaxone"
+   },
+   "note": "Printed as: \"Azithromycin/Chloramphinecol/Ceftriaxone (100%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": 1,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - ICU Antibiogram (microbiology data n=36)",
+   "s": {
+    "polymyxin_b": 100,
+    "cefoperazone_sulbactam": 100
+   },
+   "printed": {
+    "polymyxin_b": "Polymyxin B",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam"
+   },
+   "note": "Printed as: \"Polymyxin B/Cefoperazone-Sulbactam (100%) 15\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staph aureus",
+   "pheno": null,
+   "n": 115,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - IPD Antibiogram (microbiology data n=372)",
+   "s": {
+    "vancomycin": 96,
+    "linezolid": 92,
+    "cefoxitin": 80,
+    "erythromycin": 65,
+    "amoxiclav": 56,
+    "cotrimoxazole": 49
+   },
+   "printed": {
+    "vancomycin": "Vancomycin",
+    "linezolid": "Linezolid",
+    "cefoxitin": "Cefoxitin",
+    "erythromycin": "Erythromycin",
+    "amoxiclav": "Amoxicillin-Clavulanate",
+    "cotrimoxazole": "Cotrimoxazole"
+   },
+   "note": "Printed as: \"Vancomycin (96%), Linezolid (92%), Cefoxitin (80%) Erythromycin (65%), Amoxicillin-Clavulanate (56%), Cotrimoxazole (49%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes).",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 90,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - IPD Antibiogram (microbiology data n=372)",
+   "s": {
+    "imipenem": 93,
+    "piptazo": 86,
+    "cefoperazone_sulbactam": 85,
+    "amikacin": 82,
+    "ceftriaxone": 37,
+    "cefotaxime": 37,
+    "ciprofloxacin": 37,
+    "ceftazidime": 26
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "amikacin": "Amikacin",
+    "ceftriaxone": "Ceftriaxone",
+    "cefotaxime": "Cefotaxime",
+    "ciprofloxacin": "Ciprofloxacin",
+    "ceftazidime": "Ceftazidime"
+   },
+   "note": "Printed as: \"Imipenem (93%), Piperacillin-Tazobactam (86%), Cefoperazone-Sulbactam (85%), Amikacin (82%), Ceftriaxone /Cefotaxime/Ciprofloxacin (37%), Ceftazidime (26%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes).",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 82,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - IPD Antibiogram (microbiology data n=372)",
+   "s": {
+    "piptazo": 98,
+    "polymyxin_b": 96,
+    "imipenem": 95,
+    "cefoperazone_sulbactam": 95,
+    "amikacin": 89,
+    "ciprofloxacin": 65,
+    "aztreonam": 57,
+    "ceftazidime": 45
+   },
+   "printed": {
+    "piptazo": "Piperacillin-Tazobactam",
+    "polymyxin_b": "Polymyxin",
+    "imipenem": "Imipenem",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "amikacin": "Amikacin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "aztreonam": "Aztreonam",
+    "ceftazidime": "Ceftazidime"
+   },
+   "note": "Printed as: \"Piperacillin-Tazobactam (98%), Polymyxin (96%), Imipenem /Cefoperazone-Sulbactam (95%), Amikacin (89%), Ciprofloxacin (65%), Aztreonam (57%), Ceftazidime (45%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes). \"Polymyxin\" (without B) is recorded as polymyxin B, the agent named in every other box.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella Typhi and Paratyphi",
+   "pheno": null,
+   "n": 51,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - IPD Antibiogram (microbiology data n=372)",
+   "s": {
+    "azithromycin": 100,
+    "chloramphenicol": 100,
+    "ceftriaxone": 96
+   },
+   "printed": {
+    "azithromycin": "Azithromycin",
+    "chloramphenicol": "Chloramphenicol",
+    "ceftriaxone": "Ceftriaxone"
+   },
+   "note": "Printed as: \"Azithromycin/Chloramphenicol (100%), Ceftriaxone (96%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes). Printed \"Salmonella typhi & paratyphi A\".",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": 34,
+   "page": 15,
+   "table": "Blood Stream Infections (BSI) - IPD Antibiogram (microbiology data n=372)",
+   "s": {
+    "polymyxin_b": 100,
+    "cefoperazone_sulbactam": 90,
+    "imipenem": 85,
+    "amikacin": 74,
+    "piptazo": 70,
+    "ciprofloxacin": 65,
+    "ceftazidime": 29
+   },
+   "printed": {
+    "polymyxin_b": "Polymyxin B",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "imipenem": "Imipenem",
+    "amikacin": "Amikacin",
+    "piptazo": "Piperacillin-Tazobactam",
+    "ciprofloxacin": "Ciprofloxacin",
+    "ceftazidime": "Ceftazidime"
+   },
+   "note": "Printed as: \"Polymyxin B (100%), Cefoperazone-Sulbactam (90%), Imipenem (85%), Amikacin (74%), Piperacillin-Tazobactam (70%), Ciprofloxacin (65%), Ceftazidime (29%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes).",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella Typhi and Paratyphi",
+   "pheno": null,
+   "n": 26,
+   "page": 16,
+   "table": "Blood Stream Infections (BSI) - OPD Antibiogram (microbiology data n=49)",
+   "s": {
+    "azithromycin": 100,
+    "ceftriaxone": 100,
+    "chloramphenicol": 88
+   },
+   "printed": {
+    "azithromycin": "Azithromycin",
+    "ceftriaxone": "Ceftriaxone",
+    "chloramphenicol": "Chloramphenicol"
+   },
+   "note": "Printed as: \"Azithromycin/Ceftriaxone (100%), Chloramphenicol (88%)\". Drugs joined by \"/\" share the percentage that follows them. Printed \"Salmonella typhi & paratyphi A\".",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staph aureus",
+   "pheno": null,
+   "n": 8,
+   "page": 16,
+   "table": "Blood Stream Infections (BSI) - OPD Antibiogram (microbiology data n=49)",
+   "s": {
+    "vancomycin": 88,
+    "cefoxitin": 75,
+    "cotrimoxazole": 71,
+    "amoxiclav": 50,
+    "erythromycin": 38
+   },
+   "printed": {
+    "vancomycin": "Vancomycin",
+    "cefoxitin": "Cefoxitin",
+    "cotrimoxazole": "Cotrimoxazole",
+    "amoxiclav": "Augmentin",
+    "erythromycin": "Erythromycin"
+   },
+   "note": "Printed as: \"Vancomycin (88%), Cefoxitin (75%), Cotrimoxazole (71%), Augmentin (50%), Erythromycin (38%)\". Drugs joined by \"/\" share the percentage that follows them. \"Augmentin\" is recorded as amoxicillin-clavulanate.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 7,
+   "page": 16,
+   "table": "Blood Stream Infections (BSI) - OPD Antibiogram (microbiology data n=49)",
+   "s": {
+    "polymyxin_b": 100,
+    "cefoperazone_sulbactam": 100,
+    "imipenem": 86,
+    "piptazo": 86,
+    "amikacin": 86,
+    "ciprofloxacin": 80,
+    "aztreonam": 75,
+    "ceftazidime": 57
+   },
+   "printed": {
+    "polymyxin_b": "Polymyxin B",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "amikacin": "Amikacin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "aztreonam": "Aztreonam",
+    "ceftazidime": "Ceftazidime"
+   },
+   "note": "Printed as: \"Polymyxin B/Cefoperazone-Sulbactam (100%), Imipenem/Piperacillin-Tazobactam/Amikacin (86%), Ciprofloxacin (80%), Aztreonam (75%), Ceftazidime (57%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 6,
+   "page": 16,
+   "table": "Blood Stream Infections (BSI) - OPD Antibiogram (microbiology data n=49)",
+   "s": {
+    "imipenem": 100,
+    "piptazo": 100,
+    "cefoperazone_sulbactam": 100,
+    "amikacin": 83,
+    "ceftriaxone": 50,
+    "cefotaxime": 50,
+    "ciprofloxacin": 50
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "amikacin": "Amikacin",
+    "ceftriaxone": "Ceftriaxone",
+    "cefotaxime": "Cefotaxime",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Imipenem/Piperacillin-Tazobactam/Cefoperazone-Sulbactam (100%), Amikacin (83%), Ceftriaxone /Cefotaxime/Ciprofloxacin (50%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": 2,
+   "page": 16,
+   "table": "Blood Stream Infections (BSI) - OPD Antibiogram (microbiology data n=49)",
+   "s": {
+    "polymyxin_b": 100,
+    "imipenem": 50,
+    "piptazo": 50,
+    "cefoperazone_sulbactam": 50,
+    "amikacin": 50,
+    "ciprofloxacin": 50
+   },
+   "printed": {
+    "polymyxin_b": "Polymyxin B",
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "amikacin": "Amikacin",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Polymyxin B (100%), Imipenem/Piperacillin-Tazobactam/Cefoperazone-Sulbactam/ Amikacin/Ciprofloxacin (50%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Blood Stream Infections (BSI)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "E.coli",
+   "pheno": null,
+   "n": 22,
+   "page": 16,
+   "table": "Urinary Tract Infections (UTI) - ICU Antibiogram (microbiology data n=45)",
+   "s": {
+    "imipenem": 100,
+    "amikacin": 60,
+    "nitrofurantoin": 60,
+    "piptazo": 40,
+    "cefoperazone_sulbactam": 40,
+    "cefotaxime": 20,
+    "ciprofloxacin": 20
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "amikacin": "Amikacin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Piperacillin-Tazobactam",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "cefotaxime": "Cefotaxime",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Imipenem (100%), Amikacin/Nitrofurantoin (60%), Piperacillin-Tazobactam/Cefoperazone-Sulbactam (40%), Cefotaxime/Ciprofloxacin (20%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 13,
+   "page": 16,
+   "table": "Urinary Tract Infections (UTI) - ICU Antibiogram (microbiology data n=45)",
+   "s": {
+    "polymyxin_b": 100,
+    "imipenem": 67,
+    "piptazo": 67,
+    "amikacin": 67,
+    "ciprofloxacin": 33
+   },
+   "printed": {
+    "polymyxin_b": "Polymyxin B",
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "amikacin": "Amikacin",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Polymyxin B (100%), Imipenem/Piperacillin-Tazobactam/Amikacin (67%), Ciprofloxacin (33%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 7,
+   "page": 16,
+   "table": "Urinary Tract Infections (UTI) - ICU Antibiogram (microbiology data n=45)",
+   "s": {
+    "vancomycin": 50,
+    "nitrofurantoin": 50
+   },
+   "printed": {
+    "vancomycin": "Vancomycin",
+    "nitrofurantoin": "Nitrofurantoin"
+   },
+   "note": "Printed as: \"Vancomycin/Nitrofurantoin (50%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "E.coli",
+   "pheno": null,
+   "n": 228,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - IPD Antibiogram (microbiology data n=425)",
+   "s": {
+    "imipenem": 97,
+    "nitrofurantoin": 87,
+    "piptazo": 84,
+    "amikacin": 83,
+    "cefoperazone_sulbactam": 80,
+    "cefotaxime": 42
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Pipercillin-Tazobactam",
+    "amikacin": "Amikacin",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "cefotaxime": "Cefotaxime"
+   },
+   "note": "Printed as: \"Imipenem (97%), Nitrofurantoin (87%), Pipercillin-Tazobactam (84%), Amikacin (83%), Cefoperazone-Sulbactam (80%), Cefotaxime (42%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 52,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - IPD Antibiogram (microbiology data n=425)",
+   "s": {
+    "vancomycin": 86,
+    "nitrofurantoin": 84,
+    "ampicillin": 54,
+    "gentamicin": 27
+   },
+   "printed": {
+    "vancomycin": "Vancomycin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "ampicillin": "Ampicillin",
+    "gentamicin": "Gentamicin"
+   },
+   "note": "Printed as: \"Vancomycin (86%), Nitrofurantoin (84%), Ampicillin (54%), Gentamicin (27%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes). Gentamicin is printed without \"high level\"; recorded as gentamicin.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 35,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - IPD Antibiogram (microbiology data n=425)",
+   "s": {
+    "polymyxin_b": 94,
+    "imipenem": 73,
+    "amikacin": 65,
+    "piptazo": 62,
+    "cefoperazone_sulbactam": 52,
+    "aztreonam": 38,
+    "ciprofloxacin": 36,
+    "cefoperazone": 34
+   },
+   "printed": {
+    "polymyxin_b": "Polymyxin B",
+    "imipenem": "Imipenem",
+    "amikacin": "Amikacin",
+    "piptazo": "Piperacillin-Tazobactam",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "aztreonam": "Aztreonam",
+    "ciprofloxacin": "Ciprofloxacin",
+    "cefoperazone": "Cefoperazone"
+   },
+   "note": "Printed as: \"Polymyxin B (94%), Imipenem (73%), Amikacin (65%), Piperacillin-Tazobactam (62%), Cefoperazone-Sulbactam (52%), Aztreonam (38%), Ciprofloxacin (36%), Cefoperazone (34%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staph aureus",
+   "pheno": null,
+   "n": 13,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - IPD Antibiogram (microbiology data n=425)",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 100,
+    "amoxiclav": 63,
+    "cefoxitin": 62,
+    "erythromycin": 50,
+    "cotrimoxazole": 33
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "vancomycin": "Vancomycin",
+    "amoxiclav": "Augmentin",
+    "cefoxitin": "Cefoxitin",
+    "erythromycin": "Erythromycin",
+    "cotrimoxazole": "Cotrimoxazole"
+   },
+   "note": "Printed as: \"Linezolid/Vancomycin (100%), Augmentin (63%), Cefoxitin (62%), Erythromycin (50%), Cotrimoxazole (33%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes). \"Augmentin\" is recorded as amoxicillin-clavulanate.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus",
+   "pheno": null,
+   "n": 12,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - IPD Antibiogram (microbiology data n=425)",
+   "s": {
+    "imipenem": 100,
+    "piptazo": 100,
+    "cefoperazone_sulbactam": 83,
+    "cefotaxime": 83,
+    "amikacin": 82,
+    "nitrofurantoin": 70,
+    "ceftazidime": 50,
+    "ciprofloxacin": 50
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "cefotaxime": "Cefotaxime",
+    "amikacin": "Amikacin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "ceftazidime": "Ceftazidime",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Imipenem/Piperacillin-Tazobactam (100%), Cefoperazone-Sulbactam/Cefotaxime (83%), Amikacin (82%), Nitrofurantoin (70%), Ceftazidime/Ciprofloxacin (50%)\". Drugs joined by \"/\" share the percentage that follows them. IPD is recorded as wards (ICU has its own boxes).",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "E.coli",
+   "pheno": null,
+   "n": 171,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - OPD Antibiogram (microbiology data n=301)",
+   "s": {
+    "imipenem": 99,
+    "nitrofurantoin": 95,
+    "piptazo": 93,
+    "amikacin": 89,
+    "cefoperazone_sulbactam": 87,
+    "cefotaxime": 55,
+    "ceftazidime": 44,
+    "ciprofloxacin": 37
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Piperacillin-Tazobactam",
+    "amikacin": "Amikacin",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "cefotaxime": "Cefotaxime",
+    "ceftazidime": "Ceftazidime",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "note": "Printed as: \"Imipenem (99%), Nitrofurantoin (95%), Piperacillin-Tazobactam (93%), Amikacin (89%), Cefoperazone-Sulbactam (87%), Cefotaxime (55%), Ceftazidime (44%), Ciprofloxacin (37%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 20,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - OPD Antibiogram (microbiology data n=301)",
+   "s": {
+    "vancomycin": 85,
+    "nitrofurantoin": 69,
+    "ampicillin": 63,
+    "gentamicin": 35
+   },
+   "printed": {
+    "vancomycin": "Vancomycin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "ampicillin": "Ampicillin",
+    "gentamicin": "Gentamicin"
+   },
+   "note": "Printed as: \"Vancomycin (85%), Nitrofurantoin (69%), Ampicillin (63%), Gentamicin (35%)\". Drugs joined by \"/\" share the percentage that follows them. Gentamicin is printed without \"high level\"; recorded as gentamicin.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 16,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - OPD Antibiogram (microbiology data n=301)",
+   "s": {
+    "polymyxin_b": 100,
+    "imipenem": 81,
+    "piptazo": 63,
+    "amikacin": 50,
+    "ciprofloxacin": 44,
+    "cefoperazone_sulbactam": 38,
+    "cefoperazone": 38,
+    "ceftazidime": 25
+   },
+   "printed": {
+    "polymyxin_b": "Polymyxin B",
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "amikacin": "Amikacin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "cefoperazone": "Cefoperazone",
+    "ceftazidime": "Ceftazidime"
+   },
+   "note": "Printed as: \"Polymyxin B (100%), Imipenem (81%), Piperacillin-Tazobactam (63%), Amikacin (50%), Ciprofloxacin (44%), Cefoperazone-Sulbactam/ Cefoperazone (38%), Ceftazidime (25%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staph aureus",
+   "pheno": null,
+   "n": 13,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - OPD Antibiogram (microbiology data n=301)",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 100,
+    "erythromycin": 92,
+    "amoxiclav": 75,
+    "cefoxitin": 69,
+    "cotrimoxazole": 45
+   },
+   "printed": {
+    "linezolid": "Linezolid",
+    "vancomycin": "Vancomycin",
+    "erythromycin": "Erythromycin",
+    "amoxiclav": "Amoxicillin-clavulanate",
+    "cefoxitin": "Cefoxitin",
+    "cotrimoxazole": "Cotrimoxazole"
+   },
+   "note": "Printed as: \"Linezolid/Vancomycin (100%), Erythromycin (92%), Amoxicillin-clavulanate (75%), Cefoxitin (69%), Cotrimoxazole (45%)\". Drugs joined by \"/\" share the percentage that follows them. Amoxicillin-clavulanate (75%) is printed higher than cefoxitin (69%); checked on the page, recorded as printed.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus",
+   "pheno": null,
+   "n": 5,
+   "page": 17,
+   "table": "Urinary Tract Infections (UTI) - OPD Antibiogram (microbiology data n=301)",
+   "s": {
+    "imipenem": 100,
+    "piptazo": 100,
+    "cefoperazone_sulbactam": 100,
+    "cefotaxime": 100,
+    "amikacin": 80,
+    "ceftazidime": 80,
+    "ciprofloxacin": 60,
+    "nitrofurantoin": 20
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "piptazo": "Piperacillin-Tazobactam",
+    "cefoperazone_sulbactam": "Cefoperazone-Sulbactam",
+    "cefotaxime": "Cefotaxime",
+    "amikacin": "Amikacin",
+    "ceftazidime": "Ceftazidime",
+    "ciprofloxacin": "Ciprofloxacin",
+    "nitrofurantoin": "Nitrofurantoin"
+   },
+   "note": "Printed as: \"Imipenem/Piperacillin-Tazobactam/Cefoperazone-Sulbactam/Cefotaxime (100%), Amikacin/ Ceftazidime (80%), Ciprofloxacin (60%), Nitrofurantoin (20%)\". Drugs joined by \"/\" share the percentage that follows them.",
+   "specimen_as_printed": "Urinary Tract Infections (UTI)"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staph aureus",
+   "n": 20,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "n": 8,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "E. coli",
+   "n": 6,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Salmonella paratyphi A",
+   "n": 1,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "n": 1,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staph aureus",
+   "n": 115,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "E. coli",
+   "n": 90,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "n": 82,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 51,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter",
+   "n": 34,
+   "page": 15
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 26,
+   "page": 16
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staph aureus",
+   "n": 8,
+   "page": 16
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas",
+   "n": 7,
+   "page": 16
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "E. coli",
+   "n": 6,
+   "page": 16
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter",
+   "n": 2,
+   "page": 16
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "E.coli",
+   "n": 22,
+   "page": 16
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "n": 13,
+   "page": 16
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus",
+   "n": 7,
+   "page": 16
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "E.coli",
+   "n": 228,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus",
+   "n": 52,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas",
+   "n": 35,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staph aureus",
+   "n": 13,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus",
+   "n": 12,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "E.coli",
+   "n": 171,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus",
+   "n": 20,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas",
+   "n": 16,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staph aureus",
+   "n": 13,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus",
+   "n": 5,
+   "page": 17
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Respiratory / Skin Soft Tissue infections antibiograms: ICU (n=169), IPD (n=853), OPD (n=191) (pp18 to 19; 18 organism rows)",
+   "why": "respiratory and skin and soft tissue isolates are pooled in one table; no specimen key represents that combination, and filing it under respiratory or pus would misstate the specimen"
+  },
+  {
+   "what": "'Prevalance %' column of every box",
+   "why": "derived from the pathogen numbers, which are recorded as counts"
+  }
+ ]
+}
