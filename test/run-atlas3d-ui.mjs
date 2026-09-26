@@ -141,6 +141,9 @@ try {
   await ev(`document.querySelector('#a3dBar [data-a3d-act=undo]').click(); return 1;`);
   ok(await ev(`var s=ATLAS3D._state; return !!s.hidden[` + hit + `] && !!s.faded[` + other + `];`) === true, "Undo after Show all brings both back");
   // saved views: save, change everything, restore, delete
+  // Let any camera glide finish first: the view stores s.cam, and a glide still in flight (slow under
+  // SwiftShader) overwrites the yaw/pitch written below, so the saved camera was a mid-glide frame.
+  ok(await settled(), "the camera has settled before the view is set up");
   await ev(`var s=ATLAS3D._state; s.clip={axis:'z',t:0.4,flip:false}; s.cam.yaw=1.1; s.cam.pitch=0.3; ATLAS3D._select([` + other + `], {kind:'part', i:` + other + `}, {noFocus:true}); return 1;`);
   await ev(`document.querySelector('#a3dBar [data-a3d-act=systems]').click(); return 1;`);
   ok(await until(`return !!document.getElementById('a3dViewName') && !!document.querySelector('#a3dSystems [data-a3d-act=vsave]')`), "Layers panel has a Saved views section");
