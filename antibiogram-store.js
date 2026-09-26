@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "265661722ddc";
+  var ABG_V = "ea98a1f6b02b";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -52,7 +52,7 @@
       });
       return { src: srcs[r[0]], spec: r[1], set: r[2], org: r[3], pheno: r[4], n: r[5], cells: cells, flags: r[7] || [], derived: !!r[8],
         as: x.as || null, q: x.q || null, trend: x.t || null, notes: x.no || null, page: x.p || null, how: x.d || null,
-        measure: fromR ? "R" : "S", table: x.tb || null, cohort: x.co || null, note: x.nn || null, spAs: x.sp || null };
+        measure: fromR ? "R" : "S", table: x.tb || null, cohort: x.co || null, note: x.nn || null, spAs: x.sp || null, nFrom: x.nf ? "counts" : null };
     });
     var counts = (b.counts || []).map(function (c) { return { src: srcs[c[0]], spec: c[1], set: c[2], org: c[3], n: c[4] }; });
     return { version: b.version, sources: srcs, rows: rows, counts: counts, register: b.register || [], census: b.census || null, stats: b.stats || {} };
@@ -194,7 +194,7 @@
       rows.forEach(function (r) {
         Object.keys(r.cells).forEach(function (d) { drugs[d] = 1; });
         out.push({ org: r.org, pheno: r.pheno, n: r.n, k: 1, cells: r.cells, rows: [r], row: r, lowN: r.flags.indexOf("lowN") >= 0, noN: r.flags.indexOf("noN") >= 0, derived: r.derived, how: r.how, as: r.as, q: r.q, notes: r.notes,
-          measure: r.measure, cohort: r.cohort, note: r.note, table: r.table, page: r.page, spAs: r.spAs });
+          measure: r.measure, cohort: r.cohort, note: r.note, table: r.table, page: r.page, spAs: r.spAs, nFrom: r.nFrom });
       });
     }
     out = sortOrgs(out).filter(function (o) { return Object.keys(o.cells).some(function (d) { return o.cells[d].act !== "hide"; }) || o.q; });
@@ -206,7 +206,7 @@
     var t = table(scope, spec, set), o = t.orgs.filter(function (x) { return x.org === org && (x.pheno || null) === (pheno || null); })[0];
     if (!o) return null;
     var c = o.cells[drug] || null, parts = [];
-    o.rows.forEach(function (r) { var rc = r.cells[drug]; if (rc) parts.push({ src: r.src, s: rc.s, act: rc.act, why: rc.why, nt: rc.nt, n: r.n, lowN: r.n != null && r.n < R.M39_MIN, derived: r.derived, page: r.page, note: r.notes && r.notes[drug], spAs: r.spAs }); });
+    o.rows.forEach(function (r) { var rc = r.cells[drug]; if (rc) parts.push({ src: r.src, s: rc.s, act: rc.act, why: rc.why, nt: rc.nt, n: r.n, lowN: r.n != null && r.n < R.M39_MIN, derived: r.derived, page: r.page, note: r.notes && r.notes[drug], spAs: r.spAs, nFrom: r.nFrom }); });
     parts.sort(function (a, b) { return (b.s == null ? -1 : b.s) - (a.s == null ? -1 : a.s); });
     return { org: org, pheno: pheno, drug: drug, cell: c, parts: parts, pooled: t.pooled, n: o.n, k: o.k };
   }

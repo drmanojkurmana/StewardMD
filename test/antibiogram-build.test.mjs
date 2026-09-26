@@ -149,6 +149,14 @@ test("a row whose isolate number its own count table contradicts is never combin
   assert.equal(checks.length, 1);
   assert.equal(derive(rows, src).filter((r) => r.set === "all").length, 1);                     // unguarded: n = 142
   assert.equal(derive(rows, src, new Set(checks.map((c) => c.spec + "|" + c.set + "|" + c.org))).filter((r) => r.set === "all").length, 0);
+  // A printed row whose own n is contradicted still counts as printed: no second, combined row
+  // is made beside it (RIMS Imphal E. faecium all specimens).
+  const src2 = base({ counts: [{ spec: "all", set: "all", org: "E. faecium", n: 259 }, { spec: "urine", set: "all", org: "E. faecium", n: 100 }, { spec: "blood", set: "all", org: "E. faecium", n: 160 }] });
+  const rows2 = [{ spec: "all", set: "all", org: "E. faecium", n: 260, s: { vancomycin: 70 } }, { spec: "urine", set: "all", org: "E. faecium", n: 100, s: { vancomycin: 60 } },
+    { spec: "blood", set: "all", org: "E. faecium", n: 160, s: { vancomycin: 75 } }].map((r) => checkRow(src2, r));
+  const bad2 = new Set(countChecks(src2, rows2).map((c) => c.spec + "|" + c.set + "|" + c.org));
+  assert.ok(bad2.has("all|all|efaecium"));
+  assert.equal(derive(rows2, src2, bad2).filter((r) => r.spec === "all" && r.set === "all").length, 0);
 });
 
 test("a combined row with more isolates than the source's own count for that stratum is not made", () => {

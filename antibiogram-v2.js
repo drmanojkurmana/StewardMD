@@ -270,6 +270,7 @@
           (p.act === "intrinsic" ? '<div class="v2-mut">intrinsic resistance</div>' : '<div class="v2-bar2"><i style="width:' + w + '%"></i><span>' + (typeof p.s === "number" ? num(p.s) + "%" : "") + "</span></div>") +
           (!ok ? '<div class="v2-mut">' + esc(p.act !== "keep" ? (p.why || p.act) : "fewer than 30 isolates: shown, not pooled") + "</div>" : "") +
           (p.spAs ? '<div class="v2-mut">Specimen as printed: ' + esc(p.spAs) + "</div>" : "") +
+          (p.nFrom ? '<div class="v2-mut">Isolate number from the source\'s organism table.</div>' : "") +
           (p.note ? '<div class="v2-mut">Source note: ' + esc(p.note) + "</div>" : "") +
           (p.src.url ? '<button class="v2-link" data-v2="open-url" data-url="' + esc(p.src.url) + '">Open source</button>' : "") + "</li>";
       }).join("") + "</ul>";
@@ -291,6 +292,7 @@
     h += '<div class="v2-mut">' + esc(R0.SPECIMENS[st.spec].label) + ", " + lc(esc(R0.SETTINGS[st.set].label)) + " · " + (o.n != null ? fmtN(o.n) + " isolates" : "isolates not given") + (t.pooled ? " from " + o.k + " institution" + (o.k === 1 ? "" : "s") : "") + "</div>";
     if (o.as && o.as !== R0.orgLabel(o.org)) h += '<div class="v2-mut">Reported as: ' + esc(o.as) + "</div>";
     if (o.spAs) h += '<div class="v2-mut">Specimen as printed: ' + esc(o.spAs) + "</div>";
+    if (o.nFrom) h += '<div class="v2-mut">Isolate number from the source\'s organism table (none is printed beside its susceptibility table).</div>';
     if (o.derived) h += '<div class="v2-note">Combined by StewardMD from the ' + esc(o.how) + ", weighting each by its isolates.</div>";
     if ((t.pooled && o.lowOnly) || (!t.pooled && (o.lowN || o.noN))) h += '<div class="v2-note">Fewer than 30 isolates (or no count given): the percentages are unstable and are not pooled or used by reasoning (CLSI M39).</div>';
     h += '<ul class="v2-parts">' + ds.map(function (d) {

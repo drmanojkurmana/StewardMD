@@ -113,6 +113,14 @@ test("paired agents must agree: cefotaxime vs ceftriaxone, imipenem vs meropenem
   assert.equal(ok.cells.imipenem.act, "keep");
 });
 
+test("tetracycline cannot be far above doxycycline or minocycline (tetracycline-susceptible means both are susceptible)", () => {
+  const c = row({ org: "ecoli", spec: "blood", s: { tetracycline: 98, doxycycline: 54 } }).cells;
+  assert.equal(c.tetracycline.act, "caution");
+  assert.equal(c.doxycycline.act, "caution");
+  const ok = row({ org: "ecoli", spec: "blood", s: { tetracycline: 40, doxycycline: 70 } }).cells;
+  assert.equal(ok.tetracycline.act, "keep");                    // doxycycline above tetracycline is expected
+});
+
 test("CLSI M39: fewer than 30 isolates is flagged; approximate chart readings are cautions", () => {
   assert.ok(row({ org: "ecoli", n: 12, s: { amikacin: 75 } }).flags.includes("lowN"));
   assert.ok(row({ org: "ecoli", n: null, s: { amikacin: 75 } }).flags.includes("noN"));

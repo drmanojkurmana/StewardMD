@@ -1,5 +1,5 @@
 {
- "version": "265661722ddc",
+ "version": "ea98a1f6b02b",
  "generated": "build",
  "countMismatches": [
   {
@@ -57,7 +57,7 @@
    "spec": "pus",
    "set": "all",
    "org": "ecoli",
-   "text": "Pus, wounds and body fluids, All settings: Escherichia coli repeats 6 of 8 figures of GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli exactly"
+   "text": "Pus, wounds and body fluids, All settings: Escherichia coli repeats 6 of 8 figures of GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli (n=424) exactly"
   },
   {
    "src": "GMC_SRINAGAR_2021",
@@ -2420,6 +2420,50 @@
    "why": "carbapenem resistance in typhoidal Salmonella is exceptional; a figure this low needs confirmation"
   },
   {
+   "src": "NARSNET_2018",
+   "spec": "nonurine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "tetracycline",
+   "value": 86,
+   "action": "caution",
+   "why": "a tetracycline-susceptible isolate is also doxycycline-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree (Tetracycline 86%, Doxycycline 68%)"
+  },
+  {
+   "src": "NARSNET_2018",
+   "spec": "nonurine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "doxycycline",
+   "value": 68,
+   "action": "caution",
+   "why": "a tetracycline-susceptible isolate is also doxycycline-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree (Tetracycline 86%, Doxycycline 68%)"
+  },
+  {
+   "src": "NARSNET_2018",
+   "spec": "deep",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "tetracycline",
+   "value": 94,
+   "action": "caution",
+   "why": "a tetracycline-susceptible isolate is also doxycycline-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree (Tetracycline 94%, Doxycycline 77%)"
+  },
+  {
+   "src": "NARSNET_2018",
+   "spec": "deep",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "doxycycline",
+   "value": 77,
+   "action": "caution",
+   "why": "a tetracycline-susceptible isolate is also doxycycline-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree (Tetracycline 94%, Doxycycline 77%)"
+  },
+  {
    "src": "AIIMS_MEDWARDS",
    "spec": "all",
    "set": "inpatient",
@@ -2946,6 +2990,28 @@
    "value": 2,
    "action": "suppress",
    "why": "methicillin-resistant staphylococci are resistant to beta-lactams (other than ceftaroline) by definition; the printed figure cannot be right"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "all",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": "MR",
+   "drug": "tetracycline",
+   "value": 64,
+   "action": "caution",
+   "why": "a tetracycline-susceptible isolate is also doxycycline-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree (Tetracycline 64%, Doxycycline 0%)"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "all",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": "MR",
+   "drug": "doxycycline",
+   "value": 0,
+   "action": "caution",
+   "why": "a tetracycline-susceptible isolate is also doxycycline-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree (Tetracycline 64%, Doxycycline 0%)"
   },
   {
    "src": "AIIMS_RISHIKESH_MICU_2023",
@@ -4639,7 +4705,7 @@
    "drug": "tigecycline",
    "value": 97,
    "action": "caution",
-   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli (n=424) row: probably carried over, not new data"
   },
   {
    "src": "GMC_SRINAGAR_2023_H2",
@@ -4650,7 +4716,7 @@
    "drug": "amikacin",
    "value": 75,
    "action": "caution",
-   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli (n=424) row: probably carried over, not new data"
   },
   {
    "src": "GMC_SRINAGAR_2023_H2",
@@ -4661,7 +4727,7 @@
    "drug": "cefoperazone_sulbactam",
    "value": 68,
    "action": "caution",
-   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli (n=424) row: probably carried over, not new data"
   },
   {
    "src": "GMC_SRINAGAR_2023_H2",
@@ -4672,7 +4738,7 @@
    "drug": "piptazo",
    "value": 58,
    "action": "caution",
-   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli (n=424) row: probably carried over, not new data"
   },
   {
    "src": "GMC_SRINAGAR_2023_H2",
@@ -4683,7 +4749,7 @@
    "drug": "ceftriaxone",
    "value": 22,
    "action": "caution",
-   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli (n=424) row: probably carried over, not new data"
   },
   {
    "src": "GMC_SRINAGAR_2023_H2",
@@ -4694,7 +4760,7 @@
    "drug": "ampsulbactam",
    "value": 7,
    "action": "caution",
-   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli (n=424) row: probably carried over, not new data"
   },
   {
    "src": "GMC_SRINAGAR_2021",
@@ -4917,6 +4983,149 @@
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
   },
   {
+   "src": "LHMC_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "tetracycline",
+   "value": 98,
+   "action": "caution",
+   "why": "a tetracycline-susceptible isolate is also doxycycline-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree (Tetracycline 98%, Doxycycline 54%)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "doxycycline",
+   "value": 54,
+   "action": "caution",
+   "why": "a tetracycline-susceptible isolate is also doxycycline-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree (Tetracycline 98%, Doxycycline 54%)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 24,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 32,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 19,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 21,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 27,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 3,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 3,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 25,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "LHMC_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 2,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
    "src": "MGJAIPUR_BSI",
    "spec": "blood",
    "set": "all",
@@ -5036,6 +5245,127 @@
    "value": 57.9,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGPGIMS_TRAUMA_2022",
+   "spec": "all",
+   "set": "all",
+   "org": "CONS",
+   "pheno": null,
+   "drug": "ampsulbactam",
+   "value": 13,
+   "action": "suppress",
+   "why": "Ampicillin-sulbactam susceptibility (13%) is higher than methicillin (cefoxitin/oxacillin) susceptibility (4%), which is impossible: methicillin-resistant strains are beta-lactam resistant"
+  },
+  {
+   "src": "SGPGIMS_TRAUMA_2022",
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 50,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGPGIMS_TRAUMA_2022",
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGPGIMS_TRAUMA_2022",
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "imipenem",
+   "value": 37,
+   "action": "caution",
+   "why": "imipenem and meropenem should give similar results for this organism; the source figures disagree (Imipenem 37%, Meropenem 11%)"
+  },
+  {
+   "src": "SGPGIMS_TRAUMA_2022",
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "meropenem",
+   "value": 11,
+   "action": "caution",
+   "why": "imipenem and meropenem should give similar results for this organism; the source figures disagree (Imipenem 37%, Meropenem 11%)"
+  },
+  {
+   "src": "SGPGIMS_NICU_2022",
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 66,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGPGIMS_NICU_2022",
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGPGIMS_UROLOGY_2021",
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "imipenem",
+   "value": 34,
+   "action": "caution",
+   "why": "imipenem and meropenem should give similar results for this organism; the source figures disagree (Imipenem 34%, Meropenem 61%)"
+  },
+  {
+   "src": "SGPGIMS_UROLOGY_2021",
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "meropenem",
+   "value": 61,
+   "action": "caution",
+   "why": "imipenem and meropenem should give similar results for this organism; the source figures disagree (Imipenem 34%, Meropenem 61%)"
+  },
+  {
+   "src": "SGPGIMS_UROLOGY_2021",
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 100,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
+  },
+  {
+   "src": "SGPGIMS_UROLOGY_2021",
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 88,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
   },
   {
    "src": "SGRD_KLEB_2022",

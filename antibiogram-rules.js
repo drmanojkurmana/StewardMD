@@ -466,6 +466,14 @@
     }
     if (orgGroup(org) === "entero") pair("cefotaxime", "ceftriaxone", 20, "cefotaxime and ceftriaxone should give nearly the same result; the source figures disagree");
     if (org === "ecoli" || org === "klebsiella") pair("imipenem", "meropenem", 25, "imipenem and meropenem should give similar results for this organism; the source figures disagree");
+    // One direction only: a tetracycline-susceptible isolate is also doxycycline- and
+    // minocycline-susceptible (CLSI M100), so tetracycline cannot be far above either.
+    function atMost(a, b, gap, why) {
+      var ca = out.cells[a], cb = out.cells[b];
+      if (!ca || !cb || ca.act !== "keep" || cb.act !== "keep") return;
+      if (ca.s > cb.s + gap) { ca.act = cb.act = "caution"; ca.why = cb.why = why + " (" + drugLabel(a) + " " + ca.s + "%, " + drugLabel(b) + " " + cb.s + "%)"; }
+    }
+    ["doxycycline", "minocycline"].forEach(function (b) { atMost("tetracycline", b, 15, "a tetracycline-susceptible isolate is also " + drugLabel(b).toLowerCase() + "-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree"); });
     // Warnings that do not change a cell.
     if ((org === "efaecalis" || org === "efaecium" || org === "enterococcus") && typeof s.vancomycin === "number" && typeof s.teicoplanin === "number" && s.vancomycin > s.teicoplanin + 10)
       out.flags.push("vanco>teico");

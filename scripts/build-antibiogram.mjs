@@ -122,17 +122,25 @@ export function validateSource(src, file) {
 }
 
 /* Validated row with canonical organism and cell actions. */
-export function checkRow(src, r) {
+export function checkRow(src, r, countOf) {
   const o = R.canonOrg(r.org);
   const pheno = r.pheno || o.pheno || null;
+  // No isolate number beside the susceptibility table, but the source's own organism table gives
+  // this organism's isolates in exactly this specimen and setting (LHMC 2024): that number is used
+  // and the row says where it came from. Never for a phenotype or a surveillance cohort, whose
+  // isolates are a subset the organism table does not count.
+  let n = r.n == null ? null : r.n, nFrom = null;
+  if (n == null && countOf && countOf.exact && !pheno && !r.cohort && countOf.exact(r.spec, r.set, o.key)) {
+    const c = countOf(r.spec, r.set, o.key); if (c > 0) { n = c; nFrom = "counts"; }
+  }
   // % resistant (r:{}, or s:{} under measure "R") becomes 100 - %R ("not resistant").
   const isR = !!r.r || src.measure === "R";
   const raw = r.r || r.s || {}, s = {};
   Object.keys(raw).forEach((d) => { s[d] = isR ? Math.round(10 * (100 - raw[d])) / 10 : raw[d]; });
   let trend = r.trend || null;
   if (trend && isR) { trend = {}; Object.keys(r.trend).forEach((d) => { trend[d] = r.trend[d].map((p) => [p[0], Math.round(10 * (100 - p[1])) / 10]); }); }
-  const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n: r.n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {} });
-  return { src: src.id, inst: src.inst, year: src.year, spec: r.spec, set: r.set, org: o.key, orgAs: r.org, pheno, n: r.n == null ? null : r.n,
+  const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {} });
+  return { src: src.id, inst: src.inst, year: src.year, spec: r.spec, set: r.set, org: o.key, orgAs: r.org, pheno, n, nFrom,
     cells: v.cells, flags: v.flags, q: r.q || null, trend, notes: r.notes || null, page: r.page || null, derived: null,
     measure: isR ? "R" : "S", table: r.table || null, cohort: r.cohort || null, note: r.note || null, specAs: r.specimen_as_printed || null, nTested: r.n_tested === true };
 }
@@ -206,8 +214,10 @@ export function derive(allRows, src, mismatched) {
   // hospital, so they are never combined with other rows. Nor is a row whose isolate number
   // the source's own count table contradicts (SKIMS 2024 urine Acinetobacter printed 133 and 19
   // under a header of 47): its weight in a combination would be wrong.
+  // Such a row still counts as printed: no combined row is made where the source printed one.
   const bad = mismatched || new Set();
-  const rows = allRows.filter((r) => !r.cohort && !bad.has(r.spec + "|" + r.set + "|" + r.org));
+  const base = allRows.filter((r) => !r.cohort);
+  const rows = base.filter((r) => !bad.has(r.spec + "|" + r.set + "|" + r.org));
   const countOf = countIndex(src || {});
   const key = (r, ...f) => f.map((x) => r[x] == null ? "" : r[x]).join("|");
   const has = (list, r, spec, set, pheno) => list.some((x) => x.src === r.src && x.org === r.org && x.spec === spec && x.set === set && (x.pheno || null) === (pheno || null));
@@ -244,7 +254,7 @@ export function derive(allRows, src, mismatched) {
   rows.filter((r) => (r.org === "saureus" || r.org === "cons") && r.pheno).forEach((r) => { (staph[key(r, "src", "spec", "set", "org")] ||= []).push(r); });
   Object.values(staph).forEach((g) => {
     const g0 = g[0];
-    if (has(rows, g0, g0.spec, g0.set, null)) return;
+    if (has(base, g0, g0.spec, g0.set, null)) return;
     const mr = g.some((r) => isMR(r.pheno)), ms = g.some((r) => isMS(r.pheno));
     if (mr && ms) { const c = combine(g, g0.spec, g0.set, null, "MRSA and MSSA rows"); if (c) out.push(c); return; }
     const total = countOf(g0.spec, g0.set, g0.org), n = g.reduce((a, r) => a + (r.n || 0), 0);
@@ -259,7 +269,7 @@ export function derive(allRows, src, mismatched) {
   // Settings the source reports for a specimen: from its rows and from its count tables (a
   // setting that only appears in the counts still has isolates the rows may be missing).
   const srcSets = {};
-  all.forEach((r) => { if (["ward", "opd", "icu"].includes(r.set)) (srcSets[r.spec] ||= new Set()).add(r.set); });
+  base.concat(out).forEach((r) => { if (["ward", "opd", "icu"].includes(r.set)) (srcSets[r.spec] ||= new Set()).add(r.set); });
   ((src && src.counts) || []).forEach((c) => { if (["ward", "opd", "icu"].includes(c.set) && c.n > 0) (srcSets[c.spec] ||= new Set()).add(c.set); });
   const grp = {};
   all.forEach((r) => { (grp[key(r, "src", "spec", "org", "pheno")] ||= []).push(r); });
@@ -267,13 +277,13 @@ export function derive(allRows, src, mismatched) {
     const g0 = g[0], by = {}; g.forEach((r) => { by[r.set] = r; });
     const reported = Array.from(srcSets[g0.spec] || []);
     const present = ["ward", "opd", "icu"].filter((s) => by[s]);
-    if (!by.all) {
+    if (!by.all && !has(base, g0, g0.spec, "all", g0.pheno)) {
       let parts = present.map((s) => by[s]), missing = reported.filter((s) => !by[s]);
       if (by.inpatient && !by.ward && !by.icu) { parts = [by.inpatient].concat(by.opd ? [by.opd] : []); missing = reported.filter((s) => s === "opd" && !by.opd); }
       const how = parts.length ? complete(all, g0, parts, missing, "set", g0.spec, null, (p) => LBL[p.set || p] || p) : null;
       if (how) { const c = combine(parts, g0.spec, "all", g0.pheno, how); if (c) out.push(c); }
     }
-    if (!by.inpatient && (by.ward || by.icu) && reported.some((s) => s === "ward" || s === "icu")) {
+    if (!by.inpatient && !has(base, g0, g0.spec, "inpatient", g0.pheno) && (by.ward || by.icu) && reported.some((s) => s === "ward" || s === "icu")) {
       const parts = ["ward", "icu"].filter((s) => by[s]).map((s) => by[s]), missing = ["ward", "icu"].filter((s) => !by[s] && reported.includes(s));
       const how = complete(all, g0, parts, missing, "set", g0.spec, null, (p) => LBL[p.set || p] || p);
       if (how) { const c = combine(parts, g0.spec, "inpatient", g0.pheno, how); if (c) out.push(c); }
@@ -287,7 +297,7 @@ export function derive(allRows, src, mismatched) {
   // from its blood and urine ICU rows alone would misstate the ICU (NARS-Net location charts).
   all = rows.concat(out);
   const everySpec = new Set();
-  all.forEach((r) => { if (r.spec !== "all") everySpec.add(r.spec); });
+  base.concat(out).forEach((r) => { if (r.spec !== "all") everySpec.add(r.spec); });
   ((src && src.counts) || []).forEach((c) => { if (c.spec !== "all" && c.n > 0) everySpec.add(c.spec); });
   const srcSpecs = {};
   all.forEach((r) => { srcSpecs[r.set] ||= new Set(everySpec); });
@@ -295,7 +305,7 @@ export function derive(allRows, src, mismatched) {
   all.forEach((r) => { if (r.spec !== "all") (g2[key(r, "src", "set", "org", "pheno")] ||= []).push(r); });
   Object.values(g2).forEach((g) => {
     const g0 = g[0];
-    if (has(all, g0, "all", g0.set, g0.pheno)) return;
+    if (has(all, g0, "all", g0.set, g0.pheno) || has(base, g0, "all", g0.set, g0.pheno)) return;
     const reported = Array.from(srcSpecs[g0.set] || []);
     const split = reported.includes("nonurine");
     const parts = split ? g.filter((r) => r.spec === "nonurine" || r.spec === "urine") : g;
@@ -413,6 +423,7 @@ function compactRow(r, si, whyIdx) {
   if (spAs && sp && spAs.toLowerCase() !== sp.label.toLowerCase() && (sp.names || []).indexOf(spAs.toLowerCase()) < 0) extra.sp = spAs;
   if (r.q) extra.q = r.q; if (r.trend) extra.t = r.trend; if (r.notes) extra.no = r.notes; if (r.page) extra.p = r.page; if (r.derived) extra.d = r.derived;
   if (r.measure === "R") extra.m = "R"; if (r.table) extra.tb = r.table; if (r.cohort) extra.co = r.cohort; if (r.note) extra.nn = r.note;
+  if (r.nFrom) extra.nf = 1;
   if (Object.keys(extra).length) o.push(extra);
   return o;
 }
@@ -453,7 +464,7 @@ export function buildBundle(sources, register, census) {
   const metas = [], rows = [], counts = [], report = [], consistency = [];
   const stats = { sources: 0, rows: 0, derivedRows: 0, cells: 0, act: { keep: 0, intrinsic: 0, hide: 0, suppress: 0, caution: 0 }, lowNRows: 0, noNRows: 0, isolates: 0, countMismatches: 0 };
   const sorted = sources.slice().sort((a, b) => (a.region + a.short + (9999 - a.year)).localeCompare(b.region + b.short + (9999 - b.year)));
-  const checkedBy = new Map(sorted.map((src) => [src.id, (src.rows || []).map((r) => checkRow(src, r))]));
+  const checkedBy = new Map(sorted.map((src) => { const cOf = countIndex(src); return [src.id, (src.rows || []).map((r) => checkRow(src, r, cOf))]; }));
   const copies = copyChecks(sorted, checkedBy);
   sorted.forEach((src) => {
     const si = metas.length;
@@ -534,7 +545,7 @@ function checkFile(path) {
   let j; try { j = JSON.parse(readFileSync(path, "utf8")); } catch (x) { console.error(`${path}: invalid JSON (${x.message})`); process.exit(1); }
   const errs = validateSource(j, path.split("/").pop());
   if (errs.length) { console.error(`${errs.length} schema error(s):\n  ` + errs.join("\n  ")); process.exit(1); }
-  const checked = j.rows.map((r) => checkRow(j, r)), checks = countChecks(j, checked);
+  const cOf = countIndex(j), checked = j.rows.map((r) => checkRow(j, r, cOf)), checks = countChecks(j, checked);
   const derived = derive(checked, j, new Set(checks.map((c) => c.spec + "|" + c.set + "|" + c.org)));
   const act = { keep: 0, intrinsic: 0, hide: 0, suppress: 0, caution: 0 };
   const lines = [];
