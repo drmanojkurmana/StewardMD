@@ -50,7 +50,21 @@ cp "$ROOT/assets/fonts/"*.woff2 "$OUT/assets/fonts/"
 cp "$ROOT/kb/protocols/"*.json "$OUT/kb/protocols/" 2>/dev/null || true
 
 # Nothing under this site is a public page.
-printf '/*\n  X-Robots-Tag: noindex\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Cache-Control: no-store\n/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n' > "$OUT/_headers"
+# OPS-06/F6: this ships the SAME clinical surfaces the StewardMD app ships (ward.js, discharge.js,
+# patient-register.js, the OPD console, the order-safety workstation), but until now had none of the
+# four headers the root _headers file (stewardmd.in) already carries. With no X-Frame-Options/
+# frame-ancestors, an attacker could <iframe> a ward board or a critical-result acknowledgement screen
+# and mount a clickjacking/UI-redress attack against a logged-in clinician (auth here is header/token
+# via localStorage, not cookies, so a framed page still renders the signed-in state). Missing HSTS
+# means a hospital-WiFi downgrade attempt on a first-touch connection is not blocked by the browser.
+# Mirrors the root _headers file's four headers, plus frame-ancestors 'none' (enforced - simple and
+# safe even without a full script-src policy) and a Report-Only CSP derived from what index.html/
+# portal.html actually load (Google Fonts, gstatic Firebase, same-origin /api/* via _worker.js's
+# server-side proxy - never called cross-origin from the browser). Report-Only, not enforced: index.html
+# ships one inline <script> (the SAME reason the root _headers file gives for shipping no CSP there at
+# all), so a script-src CSP here risks breaking the app without a nonce - see "Decisions to confirm".
+CSP_RO="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://www.gstatic.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+printf '/*\n  X-Robots-Tag: noindex\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: strict-origin-when-cross-origin\n  Strict-Transport-Security: max-age=31536000; includeSubDomains\n  Permissions-Policy: geolocation=(), camera=(self), microphone=(self), payment=(), nfc=(self)\n  Content-Security-Policy: frame-ancestors '\''none'\''\n  Content-Security-Policy-Report-Only: %s\n  Cache-Control: no-store\n/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n' "$CSP_RO" > "$OUT/_headers"
 
 echo "built $OUT ($(find "$OUT" -type f | wc -l | tr -d ' ') files)"
 if [ "${1:-}" = "--deploy" ]; then
