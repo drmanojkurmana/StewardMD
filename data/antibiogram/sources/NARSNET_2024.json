@@ -24,6 +24,14 @@
   "note": "Tables 6 to 14 parsed from the PDF text layer (PyMuPDF words grouped into rows by position; %R printed in brackets) and every value then compared by eye with the pages rendered at scale 2.2 and cropped into halves. Location-type bar charts (Figures 7 to 15, all vector): data labels taken from the text layer. Where the category axis is in the text layer (Figures 7, 8, 9, 14, 15) each label was assigned to the nearest category label in x; where the axis labels are drawn as rotated graphics (Figures 10 to 13) the labels were sorted by x and cut into consecutive groups of three, the gaps between groups checked, and the drug names read from the rendered axis. Within a group the left-to-right order is outpatient, inpatient, ICU (the legend order). Every label was then checked against its bar on the rendered chart (colour, position and height); overlapping colistin labels were separated using the text layer. Page numbers are PDF page numbers (1-based)."
  },
  "notes": "Eighth NARS-Net annual report: 54 sentinel sites in 33 states and UTs, priority bacterial pathogens January to December 2024 (first isolate per patient). All figures are percent resistant (intermediate counted as not resistant). Specimens: pus aspirate (PA) is shown as pus; other sterile body fluids (OSBF) as sterile body fluids, although NARS-Net OSBF also includes CSF and broncho-alveolar lavage. Table rows combine all location types (set all). Location rows (outpatient, ward, ICU) come from bar charts with printed data labels; the report adds emergency department isolates to inpatient wards (shown here as wards). The E. coli charts include cefuroxime, which Table 8 lacks. Cells marked x in the source are absent. Salmonella Typhi and Paratyphi are reported separately; pefloxacin has no drug key. Several figures repeat the 2023 report exactly (Enterococcus urine ciprofloxacin, fosfomycin, nitrofurantoin, tetracycline; E. coli pus doxycycline): see the row notes. Candida from blood (1,074 isolates, fungal NRL) has no susceptibility table, so none is recorded (see excluded). The report warns that specimens come mostly from patients not responding to first-line antibiotics, which may skew resistance upward.",
+ "issues": [
+  "Second reader 2026-09-26: all 571 cells (the seeded sample of 143 plus every other cell), the number tested of all 283 table cells, all 52 row n and all 27 Table 3 counts re-read against the page images (scale 2.5, charts zoomed to scale 5 to 8), each value read before comparing; 0 transcription errors, nothing corrected.",
+  "Chart rows (Figures 7 to 15): every data label checked against its bar (legend colour order outpatient, inpatient, ICU, and the drug on the axis) and every location n against the legend; overlapping labels (E. coli urine colistin 0.02, 0.04, 0.10; Enterococcus urine linezolid 0.15, 0.6, 0.8; E. coli blood colistin 0.0, 0.0, 0.3) confirmed with the PDF text layer.",
+  "The 8 caution cells are printed as recorded: S. aureus blood linezolid is 0.06% in Table 6 against 1.0, 0.5 and 1.7% in Figure 7, and Enterococcus urine fosfomycin is 20% in Table 7 against 27, 31 and 26% in Figure 10; both conflict texts are accurate.",
+  "Notes checked against both reports and accurate: Enterococcus urine ciprofloxacin, fosfomycin, nitrofurantoin and tetracycline and E. coli pus doxycycline repeat the 2023 tables exactly; the 2025 Figure 12 repeats this report's outpatient and ICU series. Figures 16 to 18 indeed print no percentage labels.",
+  "Source inconsistency not affecting any recorded value: Figure 11 (E. coli blood) is titled N=3,625 and its three location counts sum to 3,625, while Table 8 gives 3,621 blood isolates and the footnote says 4 isolates had no location type.",
+  "Lead 2026-09-26: \"Pus aspirate (PA)\" (NCDC NARS-Net SOP category, aspirated pus, swabs excluded) filed under specimen \"deep\" (deep infections, aspirates), as for TARS-Net and AARSNET; 6 rows and 6 counts moved from \"pus\"."
+ ],
  "rows": [
   {
    "spec": "blood",
@@ -76,7 +84,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Staphylococcus aureus",
    "pheno": null,
@@ -205,7 +213,7 @@
    "specimen_as_printed": "Blood"
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Enterococcus species",
    "pheno": null,
@@ -396,7 +404,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Escherichia coli",
    "pheno": null,
@@ -650,7 +658,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Klebsiella species",
    "pheno": null,
@@ -706,7 +714,7 @@
     "doxycycline": "Doxycycline"
    },
    "specimen_as_printed": "Pus aspirate (PA)",
-   "note": "The 95% CI column of this group is shifted by one row from cefotaxime onward (e.g. TMP-SMX 57% printed with 0.3 to 0.6); the %R values agree with the report text and are recorded as printed.",
+   "note": "The 95% CI column of this group is offset by one row from the ceftriaxone row down: each printed interval fits the %R and number tested of the next drug (e.g. ceftriaxone 77% is printed with 77.1 to 78.8, which fits cefotaxime 78%; TMP-SMX 57% with 0.3 to 0.6, which fits colistin 0.40%). The %R values agree with their own numbers tested and with the report text and are recorded as printed.",
    "notes": {
     "colistin": "colistin by agar dilution or broth microdilution; only NRL-confirmed resistant isolates are counted as resistant"
    }
@@ -988,7 +996,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Pseudomonas species",
    "pheno": null,
@@ -1239,7 +1247,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Acinetobacter species",
    "pheno": null,
@@ -2358,7 +2366,7 @@
    "page": 21
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Staphylococcus aureus",
    "n": 15846,
@@ -2379,7 +2387,7 @@
    "page": 21
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Enterococcus species",
    "n": 1942,
@@ -2407,7 +2415,7 @@
    "page": 21
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Escherichia coli",
    "n": 13577,
@@ -2435,7 +2443,7 @@
    "page": 21
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Klebsiella species",
    "n": 13576,
@@ -2477,7 +2485,7 @@
    "page": 21
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Pseudomonas species",
    "n": 10513,
@@ -2505,7 +2513,7 @@
    "page": 21
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Acinetobacter species",
    "n": 5801,

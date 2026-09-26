@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "5ccdf137b48f";
+  var ABG_V = "b72d5955bcb5";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -137,7 +137,7 @@
   /* --------------------------------------------------------------- table --- */
   var ORG_ORDER = ["ecoli", "klebsiella", "koxytoca", "kaerogenes", "ecloacae", "enterobacter", "citrobacter", "cfreundii", "ckoseri", "entero_other", "pmirabilis", "proteus", "proteus_other", "ppm", "morganella", "providencia", "pstuartii", "prettgeri", "serratia",
     "salmonella_typhi", "salmonella_paratyphi", "salmonella_enteric", "salmonella_nts", "shigella", "shigella_sonnei", "shigella_flexneri", "vcholerae", "ecoli_dec", "aeromonas", "paeruginosa", "acinetobacter", "steno", "burkholderia", "bcepacia", "bpseudomallei",
-    "hinfluenzae", "mcatarrhalis", "ngonorrhoeae", "nmeningitidis", "saureus", "cons", "ssaprophyticus", "efaecalis", "efaecium", "enterococcus", "spneumoniae", "strep_bhs", "strep_viridans", "streptococcus", "listeria",
+    "hinfluenzae", "mcatarrhalis", "ngonorrhoeae", "nmeningitidis", "saureus", "cons", "sepidermidis", "shaemolyticus", "shominis", "cons_other", "ssaprophyticus", "efaecalis", "efaecium", "enterococcus", "spneumoniae", "strep_bhs", "strep_viridans", "streptococcus", "listeria",
     "candida", "calbicans", "ctropicalis", "cparapsilosis", "cglabrata", "ckrusei", "cauris", "aspergillus", "aflavus", "afumigatus", "aniger"];
   var DRUG_ORDER = ["penicillin", "ampicillin", "amoxicillin", "oxacillin", "cloxacillin", "cefoxitin", "amoxiclav", "ampsulbactam", "piperacillin", "piptazo", "cefazolin", "cephalexin", "cefuroxime", "cefotaxime", "ceftriaxone", "ceftazidime", "cefepime",
     "cefixime", "cefpodoxime", "cefoperazone", "cefoperazone_sulbactam", "ceftazidime_avibactam", "ceftolozane_tazobactam", "ceftaroline", "cefiderocol", "aztreonam", "aztreonam_avibactam", "ertapenem", "imipenem", "meropenem", "doripenem",
@@ -225,13 +225,15 @@
   var PARENT = { efaecalis: "enterococcus", efaecium: "enterococcus", salmonella_typhi: "salmonella_enteric", salmonella_paratyphi: "salmonella_enteric",
     cfreundii: "citrobacter", ckoseri: "citrobacter", pmirabilis: "proteus", proteus_other: "proteus", shigella_sonnei: "shigella", shigella_flexneri: "shigella",
     bcepacia: "burkholderia", bpseudomallei: "burkholderia", calbicans: "candida", ctropicalis: "candida", cparapsilosis: "candida", cglabrata: "candida", ckrusei: "candida", cauris: "candida",
-    aflavus: "aspergillus", afumigatus: "aspergillus", aniger: "aspergillus", ecloacae: "enterobacter", pstuartii: "providencia", prettgeri: "providencia" };
+    aflavus: "aspergillus", afumigatus: "aspergillus", aniger: "aspergillus", ecloacae: "enterobacter", pstuartii: "providencia", prettgeri: "providencia",
+    sepidermidis: "cons", shaemolyticus: "cons", shominis: "cons", cons_other: "cons" };
+  function isCoNS(k) { return k === "cons" || PARENT[k] === "cons"; }
   function mix(scope, spec, set, opts) {
     opts = opts || {};
     var t = table(scope, spec, set), parts = [];
     t.orgs.forEach(function (o) {
       if (o.pheno) return;                                        // phenotype rows are subsets
-      if (opts.excludeCoNS !== false && o.org === "cons" && spec === "blood") return;
+      if (opts.excludeCoNS !== false && isCoNS(o.org) && spec === "blood") return;
       if (!(o.n > 0)) return;
       var s = {}, act = {};
       Object.keys(o.cells).forEach(function (d) { s[d] = o.cells[d].s; act[d] = o.cells[d].act; });
@@ -239,13 +241,30 @@
     });
     var extra = 0;
     if (!t.pooled && B) {
-      var cs = B.counts.filter(function (c) { return scopeRows(scope).some(function (r) { return r.src === c.src; }) && c.spec === spec && (set === "all" || c.set === set); });
-      var byOrg = {};
-      cs.forEach(function (c) { byOrg[c.org] = (byOrg[c.org] || 0) + c.n; });
+      // Per source and organism, the count for exactly this setting; for "all" (or "inpatient")
+      // without one, the sum of the settings it is made of. Summing every line would count a
+      // source that prints an all-settings and a per-setting table twice.
+      var inScope = {}, bySrc = {}, byOrg = {};
+      scopeRows(scope).forEach(function (r) { inScope[r.src] = 1; });
+      B.counts.forEach(function (c) {
+        if (!inScope[c.src] || c.spec !== spec) return;
+        var m = bySrc[c.src] || (bySrc[c.src] = {}), o = m[c.org] || (m[c.org] = {});
+        o[c.set] = (o[c.set] || 0) + c.n;
+      });
+      Object.keys(bySrc).forEach(function (s) {
+        Object.keys(bySrc[s]).forEach(function (org) {
+          var o = bySrc[s][org], n = o[set];
+          if (n == null) {
+            var ps = set === "all" ? (o.inpatient != null ? ["inpatient", "opd"] : ["ward", "icu", "opd"]) : set === "inpatient" ? ["ward", "icu"] : [];
+            ps.forEach(function (p) { if (o[p] != null) n = (n || 0) + o[p]; });
+          }
+          if (n) byOrg[org] = (byOrg[org] || 0) + n;
+        });
+      });
       var covered = {};
       parts.forEach(function (p) { covered[p.org] = 1; if (PARENT[p.org]) covered[PARENT[p.org]] = 1; });
       Object.keys(byOrg).forEach(function (k) {
-        if (opts.excludeCoNS !== false && k === "cons" && spec === "blood") return;
+        if (opts.excludeCoNS !== false && isCoNS(k) && spec === "blood") return;
         if (!covered[k] && !(PARENT[k] && covered[PARENT[k]])) extra += byOrg[k];
       });
     }

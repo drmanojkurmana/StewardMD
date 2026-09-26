@@ -114,6 +114,24 @@ test("count checks: a row whose isolates differ from the source's own count tabl
   assert.match(c[0].text, /269 in the organism table, 209 in the antibiogram table/);
 });
 
+test("count checks: a genus line that means 'other species', or covers species without a row, is not a disagreement", () => {
+  // ICMR prints E. faecalis, E. faecium and "Enterococcus spp." (the rest) as separate lines: no genus check.
+  const a = base({ counts: [{ spec: "urine", set: "all", org: "Enterococcus faecalis", n: 2000 }, { spec: "urine", set: "all", org: "Enterococcus faecium", n: 1234 }, { spec: "urine", set: "all", org: "Enterococcus spp.", n: 204 }] });
+  const ra = [{ spec: "urine", set: "all", org: "Enterococcus faecalis", n: 2000, s: { vancomycin: 90 } }, { spec: "urine", set: "all", org: "Enterococcus faecium", n: 1234, s: { vancomycin: 60 } }].map((r) => checkRow(a, r));
+  assert.equal(countChecks(a, ra).length, 0);
+  // A typhoidal Salmonella count with only a S. Typhi row (Paratyphi counted, not tabulated) is fine...
+  const b = base({ counts: [{ spec: "blood", set: "all", org: "Salmonella Typhi and Paratyphi", n: 623 }] });
+  const rb = [{ spec: "blood", set: "all", org: "Salmonella Typhi", n: 537, s: { ceftriaxone: 99 } }].map((r) => checkRow(b, r));
+  assert.equal(countChecks(b, rb).length, 0);
+  // ...but Typhi + Paratyphi rows must add up to the group count,
+  const rb2 = rb.concat([{ spec: "blood", set: "all", org: "Salmonella Paratyphi A", n: 50, s: { ceftriaxone: 99 } }].map((r) => checkRow(b, r)));
+  assert.match(countChecks(b, rb2)[0].text, /623 in the organism table, 587 in the antibiogram table/);
+  // and species rows can never exceed their genus count.
+  const c = base({ counts: [{ spec: "pus", set: "opd", org: "Enterococcus spp.", n: 16 }] });
+  const rc = [{ spec: "pus", set: "opd", org: "Enterococcus faecalis", n: 12, s: { vancomycin: 90 } }, { spec: "pus", set: "opd", org: "Enterococcus faecium", n: 8, s: { vancomycin: 60 } }].map((r) => checkRow(c, r));
+  assert.match(countChecks(c, rc)[0].text, /16 in the organism table, 20 in the antibiogram table/);
+});
+
 test("bundle: deterministic version, compact rows, every cell action counted", () => {
   const { sources, register, errors } = loadAll();
   assert.deepEqual(errors, [], "every committed source file validates");

@@ -24,6 +24,14 @@
   "note": "Tables 6 to 12 parsed from the PDF text layer (PyMuPDF words grouped into rows by position; E. coli Table 8 cells assigned to specimen columns by x position because one cell is blank) and every value then compared by eye with the pages rendered at scale 2.2 and cropped into halves. Location-type bar charts (Figures 9, 11, 13, 14, 17, 18, all vector): data labels taken from the text layer. Where the category axis is in the text layer (Figures 9, 11, 17, 18) each label was assigned to the nearest category label in x; where the axis labels are rotated graphics (Figures 13, 14) the labels were sorted by x and cut into consecutive groups of three, the gaps between groups checked, and the drug names read from the rendered axis. In this report the bars run ICU, inpatient, outpatient from left to right (checked against the legend colours on every chart). Every label was then checked against its bar on the rendered chart; overlapping colistin labels were separated using the text layer. Trend Figures 7, 8 and 10: labels matched to their year by x position and checked on the page. Page numbers are PDF page numbers (1-based)."
  },
  "notes": "Seventh NARS-Net annual report: 41 sentinel sites in 31 states and UTs, priority bacterial pathogens January to December 2023 (first isolate per patient). All figures are percent resistant (intermediate counted as not resistant). Specimens: pus aspirate (PA) is shown as pus; other sterile body fluids (OSBF) as sterile body fluids, although NARS-Net OSBF also includes CSF and broncho-alveolar lavage. Table rows combine all location types (set all). Location rows (ICU, ward, outpatient) come from blood bar charts with printed data labels; the report adds emergency department isolates to inpatient wards (shown here as wards). Cells marked x or blank in the source are absent. Only S. Typhi has percentages for Salmonella; S. Paratyphi, Shigella and Vibrio cholerae are given as counts (see excluded). No fungal data in this edition. Some figures are repeated exactly in the 2024 report (Enterococcus urine ciprofloxacin, fosfomycin, nitrofurantoin, tetracycline; E. coli pus doxycycline): see the row notes.",
+ "issues": [
+  "Second reader 2026-09-26: all 457 cells (the seeded sample of 114 plus every other cell), the number tested of all 265 table cells, all 42 row n and all 27 Table 3 counts re-read against the page images (scale 2.5, charts zoomed to scale 5 to 6); 0 transcription errors, nothing corrected. For Tables 11 and 12 the extracted values were seen before the page read was finished, so those two tables were also re-parsed independently from the PDF text layer; the page read, the parse and the file agree.",
+  "Chart rows (Figures 9, 11, 13, 14, 17, 18; bars run ICU, inpatient, outpatient in this report): every data label checked against its bar colour and drug and every location n against the legend; overlapping colistin labels (E. coli 0.17, 0.17, 0.0; Klebsiella 0.89, 0.75, 0.44; Pseudomonas 0.14, 0.42, 0.00; Acinetobacter 0.40, 0.33, 0.00) and S. aureus linezolid (0.27, 0.24, 0) confirmed with the PDF text layer.",
+  "The 1 caution cell (S. aureus blood linezolid 0%) is printed as recorded, and its conflict text is accurate: Table 6 prints 0 with a 95% CI of 0.1 to 0.4, Figure 8 and the text (PDF page 29) give 0.2% for 2023, Figure 9 prints 0.27% (ICU) and 0.24% (inpatients).",
+  "Count-table mismatch (Salmonella blood 623 in Table 3 against 537 in the S. Typhi row) is printed that way and consistent: 623 = 537 S. Typhi + 86 S. Paratyphi (Table 10), and S. Paratyphi has counts only, so it has no row.",
+  "Also confirmed: trend labels of Figures 7, 8 and 10 (the Figure 10 labels are partly covered by error bars on the page; the text layer and bar heights give 25, 16, 9, 11, 13 and 19%), the Table 7 and Table 9 title N notes, and the Pseudomonas blood colistin note (text: two isolates, 0.1%).",
+  "Lead 2026-09-26: \"Pus aspirate (PA)\" (NCDC NARS-Net SOP category, aspirated pus, swabs excluded) filed under specimen \"deep\" (deep infections, aspirates), as for TARS-Net and AARSNET; 6 rows and 6 counts moved from \"pus\"."
+ ],
  "rows": [
   {
    "spec": "blood",
@@ -134,7 +142,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Staphylococcus aureus",
    "pheno": null,
@@ -295,7 +303,7 @@
    "note": "Table 7 title prints N=11,072, but its specimen columns (and Table 3) total 14,705 Enterococcus isolates."
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Enterococcus species",
    "pheno": null,
@@ -483,7 +491,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Escherichia coli",
    "pheno": null,
@@ -741,7 +749,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Klebsiella species",
    "pheno": null,
@@ -1010,7 +1018,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Pseudomonas species",
    "pheno": null,
@@ -1258,7 +1266,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Acinetobacter species",
    "pheno": null,
@@ -2028,7 +2036,7 @@
    "page": 24
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Staphylococcus aureus",
    "n": 11340,
@@ -2049,7 +2057,7 @@
    "page": 24
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Enterococcus species",
    "n": 1508,
@@ -2077,7 +2085,7 @@
    "page": 24
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Escherichia coli",
    "n": 9710,
@@ -2105,7 +2113,7 @@
    "page": 24
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Klebsiella species",
    "n": 8700,
@@ -2147,7 +2155,7 @@
    "page": 24
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Pseudomonas species",
    "n": 6870,
@@ -2175,7 +2183,7 @@
    "page": 24
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Acinetobacter species",
    "n": 3865,

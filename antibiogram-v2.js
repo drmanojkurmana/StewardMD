@@ -308,7 +308,7 @@
     var C = D.census || null;
     var h = '<div class="v2"><section class="v2-card"><h3>Where the numbers come from</h3>' +
       "<p>StewardMD searched Indian hospital, medical college and surveillance-network websites for published antibiograms (the census)" +
-      (C && C.websites ? ": at least <b>" + fmtN(C.websites) + "</b> websites checked" + (C.pagesCrawled ? " (" + fmtN(C.pagesCrawled) + " pages crawled)" : "") + (C.searches ? ", " + fmtN(C.searches) + " web searches" : "") : "") + ". " +
+      (C && C.websites ? ": at least <b>" + fmtN(C.websites) + "</b> websites checked" + (C.pagesCrawled ? " (" + fmtN(C.pagesCrawled) + " pages crawled)" : "") + (C.searches ? ", " + fmtN(C.searches) + " search queries logged" : "") : "") + ". " +
       "<b>" + reg.length + "</b> documents found" + (reg.length ? ", <b>" + (reg.length - notInt.length) + "</b> integrated" : "") + ". Integrated sources: <b>" + integrated.length + "</b> (" +
       integrated.filter(function (s) { return s.kind === "institution"; }).length + " institution antibiograms, " + integrated.filter(function (s) { return s.kind === "network"; }).length + " network reports, " +
       integrated.filter(function (s) { return s.kind === "study"; }).length + " published hospital studies), " + fmtN(D.stats.isolates) + " isolates.</p>" +

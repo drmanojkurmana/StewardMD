@@ -24,6 +24,13 @@
   "note": "Tables 6 to 14 parsed from the PDF text layer (PyMuPDF words grouped into rows by position) and every value then compared by eye with the pages rendered at scale 2.2 and cropped into halves. Location-type bar charts (Figures 7 to 10 and 12 to 15, vector): each data label taken from the text layer and assigned to a drug by the nearest category-axis label in x, and to a location by left-to-right order within the group (outpatient, inpatient, ICU, the legend order); every label was then checked against its bar on the rendered chart (bar colour, position and height). Figure 11 is an embedded image: labels read from the image zoomed 1.6 to 5 times, each against its bar. Trend Figures 16 (image) to 18: labels read on the rendered page and matched to their year by x position. Page numbers are PDF page numbers (1-based)."
  },
  "notes": "Ninth NARS-Net annual report: 62 sentinel sites (medical college laboratories) in 34 states and UTs, priority bacterial pathogens January to December 2025 (first isolate per patient). All figures are percent resistant (intermediate counted as not resistant). Specimens: pus aspirate (PA) is shown as pus; other sterile body fluids (OSBF) as sterile body fluids, although NARS-Net OSBF also includes CSF and broncho-alveolar lavage. Table rows combine all location types (set all). Location rows (outpatient, ward, ICU) come from bar charts with printed data labels; the report adds emergency department isolates to inpatient wards (shown here as wards). Cells marked x in the source (drug not in the panel for that specimen) are absent. Salmonella Typhi and Paratyphi A are reported separately; pefloxacin has no drug key. Candida from blood (997 isolates, fungal NRL) has no susceptibility table, so none is recorded (see excluded). The report warns that specimens come mostly from patients not responding to first-line antibiotics, which may skew resistance upward.",
+ "issues": [
+  "Second reader 2026-09-26: all 578 cells (the seeded sample of 144 plus every other cell), the number tested of all 291 table cells, all 52 row n and all 27 Table 3 counts re-read against the page images (scale 2.5, charts zoomed to scale 4 to 10), each value read before comparing; 0 transcription errors, nothing corrected.",
+  "Chart rows (Figures 7 to 15): every data label checked against its bar (legend colour order outpatient, inpatient, ICU, and the drug on the axis) and every location n against the legend. Figure 11 is an embedded image with no text layer: its labels were read from the image zoomed up to 10 times, including the overlapping colistin labels (printed as 0.00.140.0, read as 0.0, 0.14 and 0.0, consistent with the 0.08% of Table 8). The overlapping Figure 12 colistin labels (0.02, 0.06, 0.10) were confirmed with the PDF text layer.",
+  "The 12 caution cells (Enterococcus blood doxycycline, high-level gentamicin and vancomycin, overall and by location) are printed as recorded: Table 7 gives 50%, 3% and 30%, Figure 9 gives 29, 31, 29; 46, 49, 52; and 18, 20, 20. The conflict texts are accurate, and the report text (PDF page 25) states both 30% vancomycin resistance overall and 20% for inpatients and ICU.",
+  "Also confirmed on the pages: the trend labels of Figures 16 to 18, the Figure 12 caution (outpatient and ICU labels identical to the 2024 report for all 17 drugs, inpatient labels and location counts different), the Klebsiella blood CI note, and the Figure 8 tetracycline label that exists in the text layer but is not drawn.",
+  "Lead 2026-09-26: \"Pus aspirate (PA)\" (NCDC NARS-Net SOP category, aspirated pus, swabs excluded) filed under specimen \"deep\" (deep infections, aspirates), as for TARS-Net and AARSNET; 6 rows and 6 counts moved from \"pus\"."
+ ],
  "rows": [
   {
    "spec": "blood",
@@ -147,7 +154,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Staphylococcus aureus",
    "pheno": null,
@@ -315,7 +322,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Enterococcus species",
    "pheno": null,
@@ -499,7 +506,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Escherichia coli",
    "pheno": null,
@@ -765,7 +772,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Klebsiella species",
    "pheno": null,
@@ -1111,7 +1118,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Pseudomonas species",
    "pheno": null,
@@ -1362,7 +1369,7 @@
    }
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Acinetobacter species",
    "pheno": null,
@@ -2485,7 +2492,7 @@
    "page": 17
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Staphylococcus aureus",
    "n": 15677,
@@ -2506,7 +2513,7 @@
    "page": 17
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Enterococcus species",
    "n": 2320,
@@ -2534,7 +2541,7 @@
    "page": 17
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Escherichia coli",
    "n": 14362,
@@ -2562,7 +2569,7 @@
    "page": 17
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Klebsiella species",
    "n": 16379,
@@ -2604,7 +2611,7 @@
    "page": 17
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Pseudomonas species",
    "n": 12739,
@@ -2632,7 +2639,7 @@
    "page": 17
   },
   {
-   "spec": "pus",
+   "spec": "deep",
    "set": "all",
    "org": "Acinetobacter species",
    "n": 6804,

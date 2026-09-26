@@ -20,9 +20,16 @@
  "measure": "S",
  "verification": {
   "status": "double-checked",
-  "note": "Part 1: Part A of the report (chapters 1 to 3). Every table was parsed from the text layer with pdfplumber, every cell was checked arithmetically (printed n/N against the printed %), and every value was then compared by eye against page renders at scale 2.2 to 2.4 (wide tables cut into halves or thirds). Source inconsistencies found this way are recorded as printed with notes (M. morganii urine amikacin, A. baumannii ward colistin, S. maltophilia ceftazidime and others). Part 2: Part B (chapters 4 to 9). Every extracted table was parsed from the PDF text layer by script (pdfplumber tables and text lines, no retyping) and then compared value by value by eye against page images rendered at scale 2.2 to 3.2 and cropped by column group: Tables 4.1, 4.3, 4.4, 5.1 to 5.9, 6.1, 6.2, 6.4 to 6.15, 6.17, 7.1 to 7.4, 8.3, 9.27 to 9.29, 9.39 to 9.41 and 9.44. Every printed n/N was also checked arithmetically against its printed percentage; the source inconsistencies found are recorded as printed with a row or per-drug note."
+  "note": "Part 1: Part A of the report (chapters 1 to 3). Every table was parsed from the text layer with pdfplumber, every cell was checked arithmetically (printed n/N against the printed %), and every value was then compared by eye against page renders at scale 2.2 to 2.4 (wide tables cut into halves or thirds). Source inconsistencies found this way are recorded as printed with notes (M. morganii urine amikacin, A. baumannii ward colistin, S. maltophilia ceftazidime and others). Part 2: Part B (chapters 4 to 9). Every extracted table was parsed from the PDF text layer by script (pdfplumber tables and text lines, no retyping) and then compared value by value by eye against page images rendered at scale 2.2 to 3.2 and cropped by column group: Tables 4.1, 4.3, 4.4, 5.1 to 5.9, 6.1, 6.2, 6.4 to 6.15, 6.17, 7.1 to 7.4, 8.3, 9.27 to 9.29 and 9.39 to 9.41 (Table 9.44, also compared, is excluded: see excluded). Every printed n/N was also checked arithmetically against its printed percentage; the source inconsistencies found are recorded as printed with a row or per-drug note."
  },
  "notes": "ICMR AMRSN 2024, part A: Enterobacterales (chapter 2) and non-fermenting Gram-negative bacilli (chapter 3), plus isolation counts from chapter 1. 99,027 culture-positive isolates from the network's tertiary-care centres. Enterobacterales rows are 'all specimens except urine and faeces' (spec nonurine) by location, urine rows are all locations; non-fermenter rows are 'all samples (except faeces)' (spec all) by location and by specimen. Colistin figures are percent intermediate. CR and CS rows are carbapenem-resistant and carbapenem-susceptible subsets. Counts: Table 1.3 by location (all specimens) and Tables 1.5, 1.10, 1.13 and 1.17 by specimen (all locations); the two sets overlap, so their sum is not an isolate total. CoNS counts are the Table 1.13 CoNS total; Enterococcus spp. counts are the unspeciated group of Table 1.17 (E. faecalis and E. faecium are counted separately). Part B of the ICMR AMRSN 2024 annual report (merged by the lead with Part A, chapters 1 to 3): typhoidal Salmonella, diarrhoeal pathogens, staphylococci and enterococci, fungi, S. pneumoniae (invasive, Table 8.3) and ICU HAI surveillance susceptibility (cohort \"hai\"). Cells printed as \"(-)\" (too few isolates) are left out. Fungal tables print S, I/SDD and R; only S is recorded. Several fungal percentages are printed 0.1 above the count ratio (e.g. 17/18 printed 94.5); recorded as printed. Isolates come from tertiary care hospitals; the report says the data do not reflect community AMR (p5). The ICMR network report for 2024 (21 regional centres; 99,027 culture-positive isolates). Extracted in two parts by table chapter and merged; the transcribed national summary used before this is superseded.",
+ "issues": [
+  "Second reader 2026-09-26: every cell of every extracted table was re-read by eye from page renders (scale 2.5 to 4, cropped by column group) before comparing with the file: all 1,321 cells (the seeded 25% sample of 330 cells from sample_cells.py plus all the rest), all 158 row n, every printed tested count (nt), all 163 isolation counts (Tables 1.3, 1.5, 1.10, 1.13, 1.17) and all 22 trend series year by year (1,290 points, Tables 2.6, 2.7, 2.9, 2.17, 2.18, 3.3, 3.6, 3.9, 3.12, 4.3, 4.4, 5.2, 5.4, 5.5, 5.7, 5.9, 6.4, 6.8, 6.9, 6.11, 6.15, 6.17).",
+  "Second reader: 0 transcription errors found: no wrong value, n, nt, count or trend year, no OPD/ward/ICU column swap, and specimen and setting mapping match each table heading; no table needed a correction re-read.",
+  "Second reader: the 6 conflict entries were checked on the page and are correct as written (M. morganii urine amikacin 121/154 (8.6); A. baumannii ward colistin 1927/1997 (69.5); S. maltophilia ceftazidime 21/36 (58.3) in Tables 3.7 and 3.9 vs 2/36 (5.6) in Table 3.8; P. aeruginosa BSI netilmicin 25/57 (38.6); Enterococcus spp. UTI vancomycin 18/98 (81.6); S. aureus UTI clindamycin 6/10 (16.0)).",
+  "Second reader: the 14 cells the validator does not keep (7 caution, 5 intrinsic, 2 hidden) are all printed that way, none is a transcription error. The E. faecium count mismatches (OPD 569 vs 570, ward 1791 vs 1793) are printed in Tables 6.14 and 1.3 (source inconsistency, already noted on the rows).",
+  "Second reader: the dropped trend point (K. pneumoniae urine cefazolin 2021, printed 1970/3560 (55.3), identical to amikacin 2021 on p87) is confirmed; the row note still said 'recorded as printed' and now says it was left out. Added a per-drug note for Table 6.14 E. faecalis ICU vancomycin, printed 287/312 (92) with ICU N=303 (source inconsistency; value unchanged)."
+ ],
  "rows": [
   {
    "spec": "nonurine",
@@ -2620,7 +2627,7 @@
      ]
     ]
    },
-   "note": "Trend from Table 2.18 (p87, urine); its 2024 column matches Table 2.14 (fosfomycin is in Table 2.14 only). In Table 2.18 the 2021 cefazolin cell (1970/3560, 55.3) is identical to the 2021 amikacin cell, probably a source copying error; recorded as printed.",
+   "note": "Trend from Table 2.18 (p87, urine); its 2024 column matches Table 2.14 (fosfomycin is in Table 2.14 only). In Table 2.18 the 2021 cefazolin cell (1970/3560, 55.3) is identical to the 2021 amikacin cell, probably a source copying error; left out of the trend (see excluded).",
    "specimen_as_printed": "urine"
   },
   {
@@ -9124,6 +9131,9 @@
     "nitrofurantoin": 86,
     "fosfomycin": 54,
     "linezolid": 303
+   },
+   "notes": {
+    "vancomycin": "printed 287/312 (92) while the ICU column N is 303 (source inconsistency); recorded as printed"
    },
    "specimen_as_printed": "All samples"
   },

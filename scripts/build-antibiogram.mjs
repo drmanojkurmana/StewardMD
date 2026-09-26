@@ -301,10 +301,14 @@ export function countChecks(src, checked) {
   const grp = {};
   checked.forEach((r) => { if (r.n != null) (grp[r.spec + "|" + r.set + "|" + r.org] ||= []).push(r); });
   // A count table that lists the genus while the antibiogram gives species (Enterococcus spp. vs
-  // E. faecalis + E. faecium): compare the species rows' sum with the genus count.
+  // E. faecalis + E. faecium): the species rows cannot add up to more than the genus count. They
+  // can add up to less (species without a row, e.g. E. gallinarum), except where the species listed
+  // cover the whole genus (COMPLETE) and each has a row. When the count table lists the species
+  // too, its genus line means "other / not speciated" and is not a total: no check.
   const KIDS = { enterococcus: ["efaecalis", "efaecium"], citrobacter: ["cfreundii", "ckoseri"], proteus: ["pmirabilis", "proteus_other"],
     shigella: ["shigella_sonnei", "shigella_flexneri"], salmonella_enteric: ["salmonella_typhi", "salmonella_paratyphi"], enterobacter: ["ecloacae"], providencia: ["pstuartii", "prettgeri"],
-    candida: ["calbicans", "ctropicalis", "cparapsilosis", "cglabrata", "ckrusei", "cauris"] };
+    candida: ["calbicans", "ctropicalis", "cparapsilosis", "cglabrata", "ckrusei", "cauris"], cons: ["sepidermidis", "shaemolyticus", "shominis", "cons_other"] };
+  const COMPLETE = { proteus: true, salmonella_enteric: true };
   const strata = new Set(checked.map((r) => r.spec + "|" + r.set));
   strata.forEach((ss) => {
     const [spec, set] = ss.split("|");
@@ -313,8 +317,9 @@ export function countChecks(src, checked) {
       const kids = KIDS[genus].map((k) => grp[ss + "|" + k]).filter(Boolean);
       if (!kids.length) return;
       const c = countOf(spec, set, genus); if (c == null) return;
+      if (KIDS[genus].some((k) => countOf(spec, set, k) != null)) return;
       const n = kids.reduce((a, rs) => a + (rs.find((r) => !r.pheno) || rs[0]).n, 0);
-      if (n === c) return;
+      if (n === c || (n < c && !(COMPLETE[genus] && kids.length === KIDS[genus].length))) return;
       out.push({ spec, set, org: genus, count: c, rows: n, text: `${R.SPECIMENS[spec].label}, ${R.SETTINGS[set].label}: ${R.orgLabel(genus)} ${c} in the organism table, ${n} in the antibiogram table (${KIDS[genus].filter((k) => grp[ss + "|" + k]).map((k) => R.orgShort(k)).join(" + ")})` });
     });
   });

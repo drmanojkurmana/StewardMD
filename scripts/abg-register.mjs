@@ -4,8 +4,9 @@
  * Input:  data/antibiogram/census/<slice>.json   what each census search found (one entry per
  *         document: institution, url, page, status, why not downloaded), written during the
  *         census; data/antibiogram/census/overrides.json   the lead's decisions per document
- *         ({id: {integrated?: "<source id>", reason?: "..."}}) for documents that were
- *         downloaded but are not (or not yet) a source, and for merged ids.
+ *         ({id: {integrated?: "<source id>" | ["<id>", ...], reason?: "...", duplicate_of?: "<id>"}})
+ *         for documents that were downloaded but are not (or not yet) a source, merged or split
+ *         ids, and the same document found twice. Entries with the same URL are merged.
  * Output: data/antibiogram/register.json   [{id, institution, short, city, state, region, sector,
  *         type, year, period, url, page, status, integrated, reason, found_via}]
  *         data/antibiogram/census/summary.json   {documents, integrated, websites, pagesCrawled,
@@ -36,8 +37,15 @@ const STATUS_REASON = {
   "not-downloaded": "recorded, not downloaded",
   "record-only": "recorded for reference (outside the scope of Indian institution antibiograms)",
   "timeout": "the website did not respond",
-  "js-challenge": "the website requires a browser challenge"
+  "js-challenge": "the website requires a browser challenge",
+  "blocked-502": "the website returned a server error (HTTP 502)",
+  "tls-cert-expired": "the website's security certificate has expired, so it was not fetched"
 };
+
+function normUrl(u) {
+  if (!u || !/^https?:/i.test(u)) return null;
+  try { const x = new URL(decodeURI(u.trim())); return (x.hostname.replace(/^www\./, "") + x.pathname.replace(/\/+$/, "") + x.search).toLowerCase(); } catch (e) { return u.trim().toLowerCase(); }
+}
 
 export function buildRegister() {
   const files = existsSync(CENSUS) ? readdirSync(CENSUS).filter((f) => f.endsWith(".json") && !/queries|crawled|checked|sites|overrides|summary/.test(f)).sort() : [];
@@ -50,7 +58,8 @@ export function buildRegister() {
       if (!x || typeof x !== "object" || !x.id || x.type === "meta" || /^_/.test(x.id)) return;
       if (x.duplicate_of) return;                                  // the same document under another slice's id
       const o = over[x.id] || {};
-      const integrated = o.integrated || (have.has(x.id) ? x.id : null);
+      if (o.duplicate_of) return;
+      const integrated = o.integrated ? [].concat(o.integrated).join(", ") : (have.has(x.id) ? x.id : null);
       let reason = null;
       if (!integrated) reason = o.reason || STATUS_REASON[x.status] || (x.status === "downloaded" ? "downloaded; not yet extracted" : (x.status || "not integrated"));
       const e = {
@@ -62,6 +71,18 @@ export function buildRegister() {
       if (!seen.has(e.id) || (integrated && !seen.get(e.id).integrated)) seen.set(e.id, e);
     });
   });
+  // The same file found by two slices under different ids (a cross-reference, or UCMS_GTB_2023 and
+  // UCMS_GTBH_2023): one entry, preferring the integrated one, then a slice's own id over an XREF_.
+  const byUrl = new Map();
+  Array.from(seen.values()).forEach((e) => {
+    const u = normUrl(e.url); if (!u) return;
+    const o = byUrl.get(u);
+    if (!o) { byUrl.set(u, e); return; }
+    const better = (e.integrated && !o.integrated) || (!!e.integrated === !!o.integrated && /^XREF_/.test(o.id) && !/^XREF_/.test(e.id));
+    const drop = better ? o : e;
+    seen.delete(drop.id);
+    if (better) byUrl.set(u, e);
+  });
   return Array.from(seen.values()).sort((a, b) => (a.region || "").localeCompare(b.region || "") || (a.institution || "").localeCompare(b.institution || "") || (b.year || 0) - (a.year || 0));
 }
 
@@ -70,24 +91,26 @@ export function buildRegister() {
 export function censusSummary(reg) {
   const domains = new Set(); let pages = 0, searches = 0, navigations = 0;
   const host = (u) => { try { return new URL(/^https?:/.test(u) ? u : "https://" + u).hostname.replace(/^www\./, ""); } catch (e) { return null; } };
-  const countLine = (t) => {
-    const x = String(t || "").trim();
-    if (/^(WS|WebSearch)\b/i.test(x) && !/NOT RUN|budget exhausted|refused/i.test(x)) searches++;
-    else if (/^(NAV|Site search|Navigation|Wayback)\b/i.test(x)) navigations++;
+  // A query log line: "WS: ..." / "NAV: ..." prefixed, or (in a *.queries.json list) a bare
+  // search string. Searches the session budget refused are not counted.
+  const countLine = (t, bareIsSearch) => {
+    const x = String(t || "").trim(); if (!x || /NOT RUN|budget exhausted|refused/i.test(x)) return;
+    if (/^(NAV|Site search|Navigation|Wayback)\b/i.test(x)) navigations++;
+    else if (/^(WS|WebSearch)\b/i.test(x) || bareIsSearch) searches++;
   };
   if (existsSync(CENSUS)) readdirSync(CENSUS).sort().forEach((f) => {
     const full = join(CENSUS, f);
-    if (f.endsWith(".txt")) { readFileSync(full, "utf8").split(/\r?\n/).forEach(countLine); return; }
+    if (f.endsWith(".txt")) { readFileSync(full, "utf8").split(/\r?\n/).forEach((t) => countLine(t, false)); return; }
     if (!f.endsWith(".json") || f === "overrides.json" || f === "summary.json") return;
     let j; try { j = JSON.parse(readFileSync(full, "utf8")); } catch (e) { return; }
     if (/crawled/.test(f) && Array.isArray(j)) { j.forEach((x) => { if (x && x.reachable) { const h = host(x.seed); if (h) domains.add(h); pages += x.pages_crawled || 0; } }); return; }
     if (/checked|sites/.test(f) && Array.isArray(j)) { j.forEach((x) => { const h = x && (x.domain ? host(x.domain) : x.url ? host(x.url) : x.site ? host(x.site) : x.seed ? host(x.seed) : null); if (h) domains.add(h); }); return; }
     if (/queries/.test(f)) {
-      if (Array.isArray(j)) j.forEach(countLine);
+      if (Array.isArray(j)) j.forEach((t) => countLine(t, true));
       else if (j && typeof j === "object") Object.keys(j).forEach((k) => {
         if (!Array.isArray(j[k])) return;
         if (/not_run|refused|exhausted/i.test(k)) return;
-        if (/websearch/i.test(k)) searches += j[k].length; else if (/nav/i.test(k)) navigations += j[k].length; else j[k].forEach(countLine);
+        if (/websearch/i.test(k)) searches += j[k].length; else if (/nav/i.test(k)) navigations += j[k].length; else j[k].forEach((t) => countLine(t, false));
       });
       return;
     }
@@ -95,7 +118,7 @@ export function censusSummary(reg) {
       if (!x || typeof x !== "object") return;
       if (x.url) { const h = host(x.url); if (h) domains.add(h); }
       if (x.page) { const m = /https?:\/\/[^\s;,)]+/.exec(String(x.page)); const h = m && host(m[0]); if (h) domains.add(h); }
-      (x.queries || []).forEach(countLine);
+      (x.queries || []).forEach((t) => countLine(t, false));
     });
   });
   const integrated = reg.filter((x) => x.integrated).length;

@@ -37,7 +37,7 @@ const SOURCES = [
     { spec: "blood", set: "all", org: "E. coli", n: 5000, s: { meropenem: 30 } }] })
 ];
 
-function load() {
+function load(sources) {
   const store = {};
   const g = { console, setTimeout: () => 0, CustomEvent: function () {}, document: { dispatchEvent() {}, addEventListener() {} },
     localStorage: { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } } };
@@ -45,7 +45,7 @@ function load() {
   vm.createContext(g);
   vm.runInContext(fs.readFileSync(path.join(ROOT, "antibiogram-rules.js"), "utf8"), g, { filename: "antibiogram-rules.js" });
   vm.runInContext(fs.readFileSync(path.join(ROOT, "antibiogram-store.js"), "utf8"), g, { filename: "antibiogram-store.js" });
-  g.ABG_STORE._set(buildBundle(SOURCES, []).bundle);
+  g.ABG_STORE._set(buildBundle(sources || SOURCES, []).bundle);
   return g.ABG_STORE;
 }
 const S = load();
@@ -154,6 +154,30 @@ test("WISCA and ranking on a stratum", () => {
   const rk = S.rank("inst:A", "blood", "all", { noReserve: true, minKnown: 1 });
   assert.ok(rk.length > 0);
   assert.ok(rk.every((x) => x.aware !== "R"));
+});
+
+test("WISCA 'no data' share counts each isolate once when a source prints all-settings and per-setting counts", () => {
+  const S2 = load([src({ id: "D_2024", inst: "D", institution: "Delta Hospital", short: "Delta", region: "west", year: 2024,
+    rows: [{ spec: "blood", set: "all", org: "E. coli", n: 100, s: { meropenem: 80 } }],
+    counts: [{ spec: "blood", set: "all", org: "E. coli", n: 100 }, { spec: "blood", set: "ward", org: "E. coli", n: 60 }, { spec: "blood", set: "icu", org: "E. coli", n: 40 },
+      { spec: "blood", set: "all", org: "Pseudomonas aeruginosa", n: 50 }, { spec: "blood", set: "ward", org: "Pseudomonas aeruginosa", n: 30 }, { spec: "blood", set: "icu", org: "Pseudomonas aeruginosa", n: 20 },
+      { spec: "blood", set: "ward", org: "Serratia marcescens", n: 5 }, { spec: "blood", set: "opd", org: "Serratia marcescens", n: 5 }] })]);
+  const w = S2.wisca("inst:D", "blood", "all", ["meropenem"], {});
+  assert.equal(w.noData, 60);          // P. aeruginosa 50 (its all-settings line, not 50 + 30 + 20) + Serratia 5 + 5
+  assert.equal(w.total, 160);
+});
+
+test("CoNS species rows answer for CoNS (combined) and stay out of blood coverage by default", () => {
+  const S3 = load([src({ id: "E_2024", inst: "E", institution: "Epsilon Hospital", short: "Epsilon", region: "east", year: 2024, rows: [
+    { spec: "blood", set: "all", org: "Staphylococcus epidermidis", n: 100, s: { vancomycin: 100, linezolid: 90 } },
+    { spec: "blood", set: "all", org: "Staphylococcus haemolyticus", n: 50, s: { vancomycin: 100, linezolid: 60 } },
+    { spec: "blood", set: "all", org: "E. coli", n: 100, s: { meropenem: 80 } }] })]);
+  const r = S3.susceptibility("Coagulase-negative staphylococci", "linezolid", { scope: "inst:E", spec: "blood", set: "all" });
+  assert.equal(r.n, 150);
+  assert.equal(r.s, 80);
+  assert.deepEqual(JSON.parse(JSON.stringify(r.combined)), ["S. epidermidis", "S. haemolyticus"]);
+  assert.equal(S3.wisca("inst:E", "blood", "all", ["meropenem"], {}).total, 100);
+  assert.equal(S3.wisca("inst:E", "blood", "all", ["meropenem"], { excludeCoNS: false }).total, 250);
 });
 
 test("surveillance cohorts answer only their syndromes; pneumococcal meningitis uses CSF figures or none", () => {
