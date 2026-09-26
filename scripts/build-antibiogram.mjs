@@ -126,7 +126,7 @@ export function checkRow(src, r) {
   const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n: r.n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {} });
   return { src: src.id, inst: src.inst, year: src.year, spec: r.spec, set: r.set, org: o.key, orgAs: r.org, pheno, n: r.n == null ? null : r.n,
     cells: v.cells, flags: v.flags, q: r.q || null, trend, notes: r.notes || null, page: r.page || null, derived: null,
-    measure: isR ? "R" : "S", table: r.table || null, cohort: r.cohort || null, note: r.note || null };
+    measure: isR ? "R" : "S", table: r.table || null, cohort: r.cohort || null, note: r.note || null, specAs: r.specimen_as_printed || null };
 }
 
 /* Isolate-weighted combination of rows (same source, same organism). A drug counts only the
@@ -171,7 +171,7 @@ function countIndex(src) {
     const k = c.spec + "|" + c.set + "|" + o.key; m[k] = (m[k] || 0) + c.n;
     (sets[c.spec] ||= new Set()).add(c.set);
   });
-  return function countOf(spec, set, org) {
+  function countOf(spec, set, org) {
     const k = spec + "|" + set + "|" + org; if (m[k] != null) return m[k];
     const reported = sets[spec]; if (!reported) return null;
     const parts = set === "all" ? ["ward", "opd", "icu"] : set === "inpatient" ? ["ward", "icu"] : null;
@@ -181,7 +181,10 @@ function countIndex(src) {
     // genus, the antibiogram the species): unknown, not zero.
     if (!have.some((s) => m[spec + "|" + s + "|" + org] != null)) return null;
     return have.reduce((a, s) => a + (m[spec + "|" + s + "|" + org] || 0), 0);
-  };
+  }
+  // Whether the count was printed for exactly this setting (not summed from the locations).
+  countOf.exact = (spec, set, org) => m[spec + "|" + set + "|" + org] != null;
+  return countOf;
 }
 
 /* Derived rows. A combination is made only when it is complete: every setting (or specimen)
@@ -361,6 +364,9 @@ export function countChecks(src, checked) {
     const plain = rs.filter((r) => !r.pheno), ph = rs.filter((r) => r.pheno && /^(MRSA|MSSA|MR|MS)$/.test(r.pheno));
     const n = plain.length ? plain[0].n : ph.length >= 2 ? ph.reduce((a, r) => a + r.n, 0) : null;
     if (n == null || n === c) return;
+    // A count summed from the location tables is a floor for "all settings": isolates with no
+    // recorded location (KARS-NET 2021: 877) are in the overall row but in no location column.
+    if (n > c && !countOf.exact(spec, set, org)) return;
     out.push({ spec, set, org, count: c, rows: n, text: `${R.SPECIMENS[spec].label}, ${R.SETTINGS[set].label}: ${R.orgLabel(org)} ${c} in the organism table, ${n} in the antibiogram table` + (ph.length >= 2 && !plain.length ? " (MRSA + MSSA)" : "") });
   });
   return out;
@@ -378,6 +384,10 @@ function compactRow(r, si, whyIdx) {
   const o = [si, r.spec, r.set, r.org, r.pheno || null, r.n, cells, r.flags.length ? r.flags : null, r.derived ? 1 : 0];
   const extra = {};
   if (r.orgAs && R.canonOrg(r.orgAs) && R.orgLabel(r.org) !== r.orgAs) extra.as = r.orgAs;
+  // The specimen as the source printed it, when it is not simply the key's own name
+  // ("Pus aspirate (PA)" under deep infections; "Respiratory/Sterile Body Fluids/Pus/Swab" under pus).
+  const sp = R.SPECIMENS[r.spec], spAs = (r.specAs || "").trim();
+  if (spAs && sp && spAs.toLowerCase() !== sp.label.toLowerCase() && (sp.names || []).indexOf(spAs.toLowerCase()) < 0) extra.sp = spAs;
   if (r.q) extra.q = r.q; if (r.trend) extra.t = r.trend; if (r.notes) extra.no = r.notes; if (r.page) extra.p = r.page; if (r.derived) extra.d = r.derived;
   if (r.measure === "R") extra.m = "R"; if (r.table) extra.tb = r.table; if (r.cohort) extra.co = r.cohort; if (r.note) extra.nn = r.note;
   if (Object.keys(extra).length) o.push(extra);

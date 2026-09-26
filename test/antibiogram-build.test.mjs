@@ -132,6 +132,14 @@ test("count checks: a genus line that means 'other species', or covers species w
   assert.match(countChecks(c, rc)[0].text, /16 in the organism table, 20 in the antibiogram table/);
 });
 
+test("count checks: an all-settings row above its summed location counts is not a disagreement (isolates without a location)", () => {
+  const src = base({ counts: [{ spec: "urine", set: "ward", org: "E. coli", n: 300 }, { spec: "urine", set: "opd", org: "E. coli", n: 500 }] });
+  const up = [{ spec: "urine", set: "all", org: "E. coli", n: 900, s: { amikacin: 90 } }].map((r) => checkRow(src, r));
+  assert.equal(countChecks(src, up).length, 0);
+  const down = [{ spec: "urine", set: "all", org: "E. coli", n: 700, s: { amikacin: 90 } }].map((r) => checkRow(src, r));
+  assert.match(countChecks(src, down)[0].text, /800 in the organism table, 700 in the antibiogram table/);
+});
+
 test("figures repeated value for value from an earlier edition become cautions on the later row only", () => {
   const f = { amikacin: 71, ceftriaxone: 22, meropenem: 64, ciprofloxacin: 32, gentamicin: 58, piptazo: 50 };
   const e1 = base({ id: "T_2023", year: 2023, rows: [{ spec: "urine", set: "opd", org: "E. coli", n: 400, s: Object.assign({}, f) }] });
