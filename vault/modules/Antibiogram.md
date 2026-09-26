@@ -94,7 +94,7 @@ places:
 9. **n from the organism table** (`nFrom`): a susceptibility table without its own n takes the exact
    organism count of that stratum, and the screen says so.
 10. **Breakpoints**: `breakpoints` (source key) records the standard as the document states it
-   ("CLSI M100, 33rd edition", "CLSI, edition not stated"); absent = not stated (50 of 85 sources). The source
+   ("CLSI M100, 33rd edition", "CLSI, edition not stated"); absent = not stated (54 of 108 sources). The source
    sheet shows it. `BP_CHANGES` (rules) lists CLSI revisions that move %S without any change in the
    bacteria: fluoroquinolones 2019 (Enterobacterales except Salmonella, P. aeruginosa), polymyxins 2020
    (intermediate and resistant only), piperacillin-tazobactam 2022 (Enterobacterales) and 2023
@@ -197,6 +197,19 @@ it matched, and says so when nothing did.
   point says "reported as". The WISCA "no data" share uses each source's exact setting count.
 - Order when data change: `node scripts/abg-register.mjs` THEN `node scripts/build-antibiogram.mjs`
   (the register goes into the bundle). Commit `antibiogram-store.js` too: the build writes its ABG_V.
+- **Fungal series**: an institution whose fungal antibiogram is a separate issue (Sir Ganga Ram Hospital's
+  second newsletter issue each year, `SGRH_FUNGAL_<year>`) gets its own `inst` (`SGRH_DELHI_FUNGAL`,
+  short "Sir Ganga Ram Hospital, fungal"). Under the bacterial `inst` a fungal and a bacterial issue of
+  the same year read as "H1"/"H2" editions and the fungal data never becomes "latest". Candida tables
+  are blood, all settings, n = isolates tested; NA, not done and susceptible-dose-dependent cells are left
+  out (C. glabrata fluconazole "0#" too: no susceptible category exists, 0% would read as resistance).
+  Intrinsic: C. krusei fluconazole, Aspergillus fluconazole, Cryptococcus and Trichosporon echinocandins.
+- **Fungi in bacterial charts**: a named fungal species in an organism chart is recorded as a count
+  unless the same panel also prints an unnamed "Fungal isolates" entry (then it is a partial count and
+  goes to `excluded`). SGRH 2013 labels its fungal bar "Candida spp." (recorded).
+- **Sources with no direct link** (SGRH 2012 to 2021 serve PDFs only by POST from
+  sgrh.com/en/publications): `url` null, `page` set; the screen offers "Open the web page that lists it".
+  The register dedupes by URL, so a shared form URL must never be recorded as the document's `url`.
 - ICMR 2024 Table 9.44 (VAP) is excluded on purpose (identical counts repeated across agents, e.g.
   2/81 five times; A. baumannii tigecycline 2.5% vs 75.8% in the bloodstream table).
 

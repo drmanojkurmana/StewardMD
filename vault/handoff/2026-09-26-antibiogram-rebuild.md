@@ -9,8 +9,8 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   region slices (north, south, east, west, central, networks, AIIMS) plus a sweep. Search results are
   US-indexed and some Indian portals refuse connections from the cloud proxy, so "not found" means not
   found from here, not "does not exist".
-- 194 documents found; 66 integrated into 86 source files: 44 institution editions from 19 institutions,
-  24 network reports (ICMR AMRSN, NARS-Net 2017 to 2025, KARS-NET 2021 to 2025 with 4 districts and the
+- 222 documents found; 88 integrated into 108 source files: 66 institution editions from 19 institutions
+  (Sir Ganga Ram Hospital's fungal issues are their own series), 24 network reports (ICMR AMRSN, NARS-Net 2017 to 2025, KARS-NET 2021 to 2025 with 4 districts and the
   Shigella series, TARS-Net, AARSNET), and 18 published hospital studies (shown on their own, never pooled).
 - Not integrated, each with its reason in the register: 37 journal articles (not an institution's
   antibiogram), 28 policies or plans without susceptibility tables, 6 older ICMR editions (their national
@@ -27,23 +27,32 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   responsibility for its use. Ranked % susceptible lists for 2025 by infection type, no isolate numbers,
   so its figures are shown grey and never pooled. The three UCMS antibiogram booklets stay held.
 - Regions: north 26 institution editions, west 13, south 3 (plus 12 network reports: TARS-Net, KARS-NET),
-  east and North-East 1 (RIMS Imphal 2025; plus AARSNET and studies from Assam and Odisha). No public institutional
-  antibiogram was found for West Bengal, Odisha, Bihar, Jharkhand, Tamil Nadu, Karnataka, Gujarat or
-  Mumbai. A follow-up search of those states was started but stopped by an account usage limit before
-  it reported; rerun it.
+  east and North-East 3 (RIMS Imphal 2022-23 to 2024-25; plus AARSNET and studies from Assam and Odisha).
+- Gap-state census (`census/gaps.json`, 41 searches and 7 site navigations, 2026-09-26): still no public
+  institutional antibiogram for West Bengal, Odisha, Bihar, Jharkhand, Tamil Nadu, Karnataka, Gujarat,
+  Mumbai or the smaller North-East states (journal articles only). It found the Sir Ganga Ram Hospital
+  Microbiology Newsletter archive (served only by POST from sgrh.com/en/publications): bacterial
+  antibiograms 2012 to 2021 (no 2018 issue is served) and fungal (Candida) antibiograms 2011 to 2021,
+  all now integrated. Leads it could not open: AIIMS Bhopal Jan-Jun 2025, AIIMS Jodhpur 2018 policy,
+  Gandhi Hospital HICC manual (connections refused; retried 2026-09-26). web.archive.org is unreachable
+  from this network, so the archived-only documents (Sumandeep, GIMSR) stay unread.
 
 ## Extraction and verification
 - Every integrated document was read by one agent and re-read by an independent second agent: a seeded
   random 25% of cells at least (a whole table re-read if more than 2% of its sampled cells were wrong),
   and in most files every cell, every row n and every count, from page images (brief `VERIFY.md` in the
-  session scratchpad). 83 of 84 sources are "double-checked"; 1 is the transcribed ICMR 2024 summary (no
+  session scratchpad). 107 of 108 sources are "double-checked"; 1 is the transcribed ICMR 2024 summary (no
   n, never pooled). Where a second reader corrected a value, the fix is logged in the file's `issues`.
-- Bundle: 3,094 rows (+1,110 derived), 32,505 cells: 30,899 shown, 953 with a caution, 548 intrinsic
-  resistance, 78 not relevant to the specimen, 27 not shown; 825 rows under 30 isolates (shown grey,
-  never pooled); 67 count-table disagreements, each the source's own and listed on its sheet.
-- Not finished: RIMS Imphal 2022-23 and 2023-24 were extracted but their second reading was stopped by
-  the usage limit, so they are not in the app (the register says so). Sumandeep Vadodara, SVIMS 2020 H1
-  and GIMSR HIC (archived copies) were not fetched for the same reason.
+- Bundle: 4,344 rows (+1,889 derived), 44,260 cells: 42,288 shown, 1,059 with a caution, 807 intrinsic
+  resistance, 78 not relevant to the specimen, 28 not shown; 1,475 rows under 30 isolates (shown grey,
+  never pooled); 90 count-table disagreements, each the source's own and listed on its sheet. 3.9 MB
+  (590 KB gzipped), fetched on demand.
+- RIMS Imphal 2022-23 and 2023-24: second reading done (every cell; no errors; one cell left out while
+  two readings disagreed was settled from the vector chart bar), integrated.
+- SGRH 2012 to 2021 (9 bacterial editions, 11 fungal): extracted by three agents plus one for the
+  fungal issues, each re-read by a different agent from the page images (every cell, n, row colour,
+  organism label, header and chart panel): no transcription errors in 8,727 bacterial and 573 fungal
+  cells.
 - Rules added because of what the documents contained (copied figures across editions, exceptional
   resistance, tetracycline above doxycycline, pus aspirate filed as deep, n from the organism table, other
   species groups, enterococcal high-level gentamicin only when stated, ambiguous cells left out): see the
