@@ -740,10 +740,16 @@
    * Zero anchored passages means "not grounded", never "grounded in the wrong chapter". Same model,
    * same speed: this is a filter after search, and it SHRINKS the prompt (700-char passages, a weak
    * third passage dropped), which is where on-device latency actually goes. */
-  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|medical|topic|topics|learn|learning|teach|today|question|questions|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common)$/;
+  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|medical|topic|topics|learn|learning|teach|today|question|questions|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common|adults|hour|hours|minutes|days|weeks|months|outpatient|inpatient|newly|diagnosed|start|starting|isolated|normal|positive|known|flare|safe|causes|interpret|worry|parents|tell|bring|down|decide|slow|progression|step|now|pt|what)$/;
   var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
   var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
   var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
+  // A treatment question prefers passages that talk treatment (scripts/bench-maik-lite-retrieval.mjs,
+  // 2026-09-26: the anchored pool often holds the right chapter's intro and its management passage;
+  // the intro used to win on BM25). GENERIC_Q gained the scaffolding words that were becoming
+  // anchors: "acute severe asthma treatment in adults" grounded on "Diagnostic Criteria for
+  // Cachexia in Adults", and "STEMI management in the first hour" anchored on "hour".
+  var TREAT_TXT = /\b(?:treat(?:ed|ment)?|therapy|management|administer|dos(?:e|es|ing)|mg|first-line|drug of choice|regimen)\b/;
   /** A generation that stopped on its token budget ends mid-sentence. Prose that trails off is cut
    *  back to the last sentence end (kept only if that keeps most of the answer, else an ellipsis);
    *  a list item or heading as the last line is left alone, they legitimately end without a stop. */
@@ -918,6 +924,7 @@
         s *= hasMod ? 1.25 : 0.80;
       }
       if (F.treat && INTRO_HEAD.test(c.p.heading || "")) s *= 0.55;
+      if (F.treat && TREAT_TXT.test(c.hay)) s *= 1.2;
       c.rank = s;
     });
     var kept = cited.filter(function (c) { return c.supported; });

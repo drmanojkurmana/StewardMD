@@ -269,3 +269,20 @@ the answer is right: the grading sheet is still where a clinician marks correct 
   it would fail correct answers. Safety stays with the clinician's grade.
 - `test/maik-eval-cases.test.mjs` pins the shape and fails if a vague non-answer ("monitor closely, dose
   depends on weight, follow local guidelines") passes any clinical case's key points.
+
+## MaiK Lite retrieval bench (2026-09-26, branch maik-lite-retrieval)
+`scripts/bench-maik-lite-retrieval.mjs --book <maik-lite-kb.jsonl> [--router] [--src <copy of maik-local.js>]`
+runs the REAL offline retrieval (`retrieveGrounding`) on the real 42,176-row book for the 54 clinical
+questions in `test/maik-eval/live-cases.json` and counts how many of each case's key points the chosen
+evidence contains. No model runs; the book is downloaded (sha256 must match `maik-lite-kb-store.js`).
+- **Baseline:** 46.9% of key points in the evidence (question only), 50.8% with the router's disease;
+  9 questions grounded on passages with NO key point (STEMI, status epilepticus, acute asthma,
+  organophosphate poisoning, bronchiolitis, acute heart failure, CKD, child paracetamol, tramadol+SSRI).
+- **Shipped:** scaffolding words ("adults", "hour", ...) no longer anchor, and a treatment question
+  prefers passages that talk treatment (`TREAT_TXT`, x1.2): 48.9% / 51.9%, zero-key-point 7 / 6.
+- **Tried, not shipped:** a 10x or 20x wider BM25 pool (no gain alone, costs CPU on the phone); shorthand
+  synonyms (SOB, BNP, ORS, PPH, "RA factor" -> rheumatoid factor): slightly WORSE (46.3%).
+- **The ceiling is structural:** 3 passages x 700 chars of a textbook hold about half of what an answer
+  needs. The bench does not model the router's curated passage (`withCurated`), which the real app adds
+  when the router matches, so real-app coverage is higher than these numbers. Next levers: pull the
+  treatment chunk that follows an on-topic heading, model `withCurated` in the bench, on-phone rerank.
