@@ -16,9 +16,9 @@
  "reporting": "%S",
  "verification": {
   "status": "double-checked",
-  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Text-extracted (pypdf) from JLP 2024;16(4):501-506, Purohit et al, MGMC&H Jaipur BSI study."
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Text-extracted (pypdf) from JLP 2024;16(4):501-506, Purohit et al, MGMC&H Jaipur BSI study. Method: Figures come from Table 1 (Gram-positive) and Table 2 (Gram-negative), both headed as susceptibility; the direction was confirmed by the text (vancomycin, linezolid and daptomycin 100% in S. aureus; oxacillin 43.5% matching 56.5% MRSA)."
  },
- "notes": "Values are % SUSCEPTIBLE, both tables headed \"Antimicrobial susceptibility pattern ... (%)\", confirmed by narrative (VAN/LZ/DAP 100% in S. aureus; oxacillin 43.5%S ≈ 100−56.5% MRSA). No %R conversion needed (from_R false everywhere). Table 1 = Gram-positive (cols P OX GEN HLG CIP LE TE COT E CD VAN TEI LZ DAP); Table 2 = Gram-negative (cols CAZ CPM ATR MRP IPM P/T CFS GEN AK CIP LE MIN CL(I) COT CXM CTR ETP AMC). Cells marked NT (not tested) or IR (intrinsically resistant) were omitted, not recorded as 0. Colistin column header explicitly notes (I)=intermediate but value 100 recorded as printed; colistin 100%S across all GNB matches scope hint. Klebsiella spp. mapped to K. pneumoniae (text: K. pneumoniae predominant), Acinetobacter spp.→A. baumannii, Pseudomonas spp.→P. aeruginosa (table labels were 'spp.'). Enterococcus reported combined in table (n=125) though text notes E. faecium 85%/E. faecalis 12.8%, used canonical 'Enterococcus'. CRE 50.2% (269/536), MRSA 56.5% (26/46), VRE 7.2% (9/125) per abstract/results. Non-canonical drug tokens used: penicillin, oxacillin, hlgentamicin (high-l",
+ "notes": "Purohit et al. (J Lab Physicians 2024) studied blood culture isolates from patients with bloodstream infection at Mahatma Gandhi Medical College and Hospital, Jaipur, October 2022 to September 2023: K. pneumoniae (309), E. coli (191), Acinetobacter (138), Enterococcus (125), P. aeruginosa (50) and S. aureus (46). Figures are % susceptible as printed. Klebsiella, Acinetobacter and Pseudomonas were reported as spp. and are shown under their main species; Enterococcus was not split, though the text gives 85% E. faecium and 12.8% E. faecalis. Colistin is 100% for every Gram-negative organism, printed under a column header marked as intermediate. Drugs not tested or intrinsically resistant were left out, not shown as 0. Enterococcal gentamicin is high-level. CRE was 50.2% (269 of 536), MRSA 56.5% (26 of 46) and VRE 7.2% (9 of 125).",
  "issues": [],
  "rows": [
   {
@@ -213,5 +213,6 @@
    "n": 125
   }
  ],
- "excluded": []
+ "excluded": [],
+ "focus": "blood cultures from patients with bloodstream infection"
 }

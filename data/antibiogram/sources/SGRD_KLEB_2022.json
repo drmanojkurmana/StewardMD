@@ -16,9 +16,9 @@
  "reporting": "%S",
  "verification": {
   "status": "double-checked",
-  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Method: Figures come from Table 2 (page 3), printed as n (%) sensitive, and were checked against the page 4 text. Piperacillin-tazobactam is printed as '1 (3%)' and colistin as '12 (28%)'. MDR and XDR counts in Table 3 are not per drug."
  },
- "notes": "Source: Sharma et al., Cureus 2023;15(3):e36317, SGRD Amritsar, North India. Only K. pneumoniae studied (82 ETA isolates from mechanically ventilated ICU/VAP patients: 40 in Jan-Jun 2018, 42 in Jan-Jun 2022). Data taken from Table 2 (page 3), 'Antibiotic sensitivity pattern in 2018 and 2022', which reports n(%) SENSITIVE, these are %S values, extracted directly (from_R=false throughout). Returned as two organism entries (one per year). Column values verified as susceptibility (not resistance): confirmed against page 4 narrative (e.g. colistin sensitivity 92%->28%, meropenem 15%->2.5%, minocycline 67%->100%). Notable: colistin decline is the study's headline finding; XDR rose 62.5%->71% (from Table 3, page 4). Non-canonical drug tokens used: cefoperazonesulbactam (Cfs, printed abbrev; a combination not in the canonical cefoperazone entry), nalidixicacid. Minocycline 2018 count printed oddly as '26.8 (67%)'; used the 67%. TMP-SMX 2022 printed only as 50% with no isolate count. Ampicillin noted 100% resistant (0% S) both periods in narrative but NOT a row in Table 2, so omitted to avoid fabricating a table cell. No ESBL%/MRSA% figures reported; MDR/XDR classification counts are in Ta",
+ "notes": "Sharma et al. (Cureus 2023) studied Klebsiella pneumoniae from endotracheal aspirates of mechanically ventilated ICU patients with ventilator-associated pneumonia at Sri Guru Ram Das Institute of Medical Sciences and Research, Amritsar. This entry is the January to June 2022 cohort (42 isolates); a separate entry holds January to June 2018 (40). Figures are % susceptible as printed. The paper's headline finding is the fall in colistin susceptibility from 92% in 2018 to 28% in 2022; meropenem fell from 15% to 2.5%, minocycline rose from 67% to 100% and XDR strains rose from 62.5% to 71%. Ampicillin, 100% resistant in both periods by the text, is not in the table and is not shown. No ESBL rate is reported. Cotrimoxazole (50%) is printed without an isolate count.",
  "issues": [
   "Lead 2026-09-26: rows tagged cohort \"hai\" (VAP patients' endotracheal aspirates), so they are not read as all ICU respiratory isolates."
  ],
@@ -64,5 +64,6 @@
    "n": 42
   }
  ],
- "excluded": []
+ "excluded": [],
+ "focus": "Klebsiella pneumoniae from endotracheal aspirates of ICU patients with ventilator-associated pneumonia (January to June 2022)"
 }

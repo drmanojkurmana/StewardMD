@@ -16,9 +16,9 @@
  "reporting": "%R in the source, converted to %S",
  "verification": {
   "status": "double-checked",
-  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Method: Figures are the %R values printed in the section 3.6 text (page 5), converted as 100 minus %R; Figure 5 is a heat map without printed numbers and Supplementary Table 2 was not available. Citrobacter and Proteus were described only qualitatively and are not included. Carbapenem susceptibility of the subset (0% by definition) is not shown. Carbapenem-resistance denominators: A. baumannii 388/808, K. pneumoniae 733/1897, P. aeruginosa 290/1199, Proteus 126/522 (24.1%), E. coli 433/3577, Citrobacter 37/356 (10.39%)."
  },
- "notes": "Text-readable PDF (Frontiers in Medicine 2025, DOI 10.3389/fmed.2025.1571231), SRM Chennai, Jul 2022-Jul 2024, 8,359 non-duplicate GNB; 24% (2,007) carbapenem-resistant. CRITICAL CAVEAT: All susceptibility values extracted apply ONLY to the carbapenem-resistant (CRO) subset, NOT to all clinical isolates, section 3.6 and Figure 5 explicitly report 'resistance patterns of CROs to various antibacterial agents.' So these %S are far lower than a general antibiogram; the n values used (E.coli 433, K.pneumoniae 733, P.aeruginosa 290, A.baumannii 388) are the carbapenem-resistant isolate counts. Source reports %RESISTANT throughout; I converted every cell to %S = 100 - R (from_R:true). Values taken from narrative text on page 5 (section 3.6); Figure 5 is a heat map image (not machine-readable) and Supplementary Table 2 is not in this PDF, so only the explicitly-printed numeric %R values were extracted. E.coli: CAZ 100%R, TZP 100%R, CIP 98.3%R, FEP 98.3%R, colistin 6.77%R, gentamicin 49.15%R. K.pneumoniae: CAZ 96%R, CIP 94.4%R, FEP 95.2%R, LEV 92.9%R. P.aeruginosa: CIP 94%R, TZP 88%R. A.baumannii: CAZ 96.2%R, TZP 96.2%R, CIP 94.9%R, colistin 7.5%R. Citrobacter and Proteus were described on",
+ "notes": "A 2025 Frontiers in Medicine study of 8,359 non-duplicate Gram-negative isolates at SRM Medical College Hospital, Kattankulathur, Chennai, July 2022 to July 2024, tested by VITEK 2; 2,007 (24%) were carbapenem-resistant. Every figure shown is for the carbapenem-resistant isolates alone (E. coli 433, K. pneumoniae 733, P. aeruginosa 290, A. baumannii 388), so the figures are far lower than a general antibiogram would show and must not be read as the hospital's overall susceptibility. The paper prints % resistant, so figures are 100 minus %R and intermediate counts as susceptible. Only the few drugs quoted with numbers in the text are available. Carbapenem resistance was 48% in A. baumannii, 38.6% in K. pneumoniae, 24.18% in P. aeruginosa and 12.1% in E. coli.",
  "issues": [],
  "rows": [
   {
@@ -104,5 +104,6 @@
    "n": 388
   }
  ],
- "excluded": []
+ "excluded": [],
+ "focus": "carbapenem-resistant Gram-negative isolates (2,007 of 8,359)"
 }

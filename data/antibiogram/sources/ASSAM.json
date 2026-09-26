@@ -16,9 +16,9 @@
  "reporting": "%R in the source, converted to %S",
  "verification": {
   "status": "double-checked",
-  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Text-extracted with pymupdf (Read tool could not render PDF; poppler not installed)."
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Text-extracted with pymupdf (Read tool could not render PDF; poppler not installed). Method: Figures come from Table 2 (Gram-negative) and Table 3 (Gram-positive), converted as 100 minus %R. Isolate numbers are the Table 2 column headers; the text on page 9 gives A. baumannii 550 and P. aeruginosa 590. Drugs not done for some organisms (cefepime, tobramycin except Pseudomonas, minocycline except Acinetobacter) were left out. S. aureus vancomycin 100% was entered from the text statement that no VRSA was detected, not from a table. Enterococcal gentamicin is high-level gentamicin (120 µg). Overall carbapenem resistance: Enterobacteriaceae 58.8%, non-fermenters 56.0%."
  },
- "notes": "Das PP et al., J Pure Appl Microbiol 2023;17(3):1591-1604. Assam Medical College & Hospital, Dibrugarh (institution-wide, AMRSN/ICMR site). Study period Oct 2018-Mar 2021. All susceptibility data reported as %RESISTANT (R%) in Table 2 (Gram-negatives) and Table 3 (Gram-positives); every cell converted to %S = 100 - R with from_R:true. Table 2 organisms labelled Klebsiella spp./Proteus spp./Enterobacter spp. mapped to K. pneumoniae/P. mirabilis/E. cloacae with per-cell notes (Klebsiella predominantly K. pneumoniae per abstract). Citrobacter kept as genus. n values taken from Table 2 headers (Acinetobacter n=687, Pseudomonas n=646); note text on p.9 gives slightly different NFGNB counts (A. baumannii n=550, P. aeruginosa n=590). Cefepime, Tobramycin (except Pseudomonas), Minocycline (except Acinetobacter) etc. were ND (not done) for several organisms and omitted. Colistin: MIC-tested on only 261 pooled GN isolates, all susceptible (not organism-specific, so not added per organism). S. aureus vancomycin s=100 added because text states VRSA not detected. MRSA 44.7% = cefoxitin resistance. VRE overall 1",
+ "notes": "Das et al. (J Pure Appl Microbiol 2023) studied all specimens hospital-wide at Assam Medical College and Hospital, Dibrugarh, an ICMR AMRSN site, October 2018 to March 2021: E. coli (2,237), Klebsiella spp. (2,673), Enterobacter spp. (177), Proteus spp. (125), Citrobacter (551), Acinetobacter (687), P. aeruginosa (646), S. aureus (1,786), E. faecium (617) and E. faecalis (200). The spp. groups appear as K. pneumoniae, E. cloacae and P. mirabilis. The tables print % resistant, so figures are 100 minus %R and intermediate counts as susceptible. Nitrofurantoin and fosfomycin are for urinary isolates only; enterococcal gentamicin is high-level. Colistin (261 Gram-negative isolates tested by MIC, all susceptible) and VRE (1.2%, 10 of 817) were reported only in aggregate, so neither is shown per organism. MRSA was 44.7%; S. aureus vancomycin is 100% because no VRSA was found.",
  "issues": [],
  "rows": [
   {
@@ -231,13 +231,13 @@
     "nitrofurantoin": 87.1,
     "ampicillin": 75.5,
     "fosfomycin": 91.7,
-    "gentamicin": 61.5,
-    "teicoplanin": 99.5
+    "teicoplanin": 99.5,
+    "gentamicin_hl": 61.5
    },
    "notes": {
     "nitrofurantoin": "urine isolates only (17/132)",
     "fosfomycin": "urine isolates only (11/132)",
-    "gentamicin": "high-level gentamicin"
+    "gentamicin_hl": "high-level gentamicin"
    }
   },
   {
@@ -252,12 +252,12 @@
     "linezolid": 98.4,
     "nitrofurantoin": 57.5,
     "ampicillin": 31,
-    "gentamicin": 37.3,
-    "teicoplanin": 99.2
+    "teicoplanin": 99.2,
+    "gentamicin_hl": 37.3
    },
    "notes": {
     "nitrofurantoin": "urine isolates only (209/492)",
-    "gentamicin": "high-level gentamicin"
+    "gentamicin_hl": "high-level gentamicin"
    }
   }
  ],

@@ -16,9 +16,9 @@
  "reporting": "%S",
  "verification": {
   "status": "double-checked",
-  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Data from Table 4 (page 6), text-extracted (machine-readable PDF, not scanned)."
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Data from Table 4 (page 6), text-extracted (machine-readable PDF, not scanned). Method: Figures come from Table 4 (page 6), confirmed as susceptibility by the text (for example amikacin 'effective against 77.0% of E. coli'); isolate numbers are the column headers; not-tested results were left out. Ceftazidime-clavulanate (an ESBL confirmation disc) and novobiocin (an identification test) are not shown as treatments. S. epidermidis (n=8) was not included. The S. aureus clindamycin figure (55.0%) is ambiguous in the source row (55.0% and 62.5% across the Gram-positive columns) and was assigned to S. aureus, with 62.5% to S. epidermidis."
  },
- "notes": "Source: Bhargava et al., Front. Microbiol. 2022;13:965053 (Hayes Memorial Mission Hospital, Prayagraj UP). Table 4 reports % susceptible (confirmed by Results text, e.g. 'amikacin was effective against 77.0% of E. coli'; 'imipenem outperformed meropenem by inhibiting 57.4% E. coli'). All values entered as printed %S; no %R conversion needed (from_R=false throughout). NT = not tested (cell omitted). Specimen = clean-catch midstream urine; study period Nov 2018-Dec 2019; 96.0% of isolates MDR. ESBL context: 40.4% of E. coli were ESBL producers; none of K. pneumoniae were ESBL. n per organism from Table 4 column headers. Proteus sp. is filed under the genus (species not stated). Enterococcus not split to species → 'Enterococcus'. 'H-gentamycin' (high-concentration gentamicin, Enterococcus 66.7%) recorded as separate token h-gentamicin. Non-canonical drugs kept with lowercase tokens: novobiocin. S. epidermidis (n=8) reported but not in canonical organism list, see unmapped. No A. baumannii in study.",
+ "notes": "Bhargava et al. (Front Microbiol 2022) studied clean-catch midstream urine isolates at Hayes Memorial Mission Hospital, Prayagraj, November 2018 to December 2019. It covers E. coli (183 isolates), Proteus (23, not speciated), K. pneumoniae (22), Citrobacter (21), P. aeruginosa (21), S. aureus (20), Enterococcus (18, not speciated) and E. cloacae (17). Figures are % susceptible as printed. Of all isolates, 96.0% were multidrug-resistant; 40.4% of E. coli and none of the K. pneumoniae produced ESBL. The enterococcal gentamicin figure is high-concentration gentamicin. Imipenem runs well above meropenem for E. coli (57.4% vs 37.2%), K. pneumoniae (72.7% vs 40.9%) and P. aeruginosa (90.5% vs 23.8%), so read carbapenem figures with care. Apart from E. coli, each organism has 23 isolates or fewer.",
  "issues": [
   "Organism naming over-specification: the extraction labels the second organism 'Proteus mirabilis', but Table 4 and the text report only 'Proteus sp.' (species not identified). All 14 susceptibility values map correctly to the Proteus column; only the top-level name is over-specified. The extraction includes a note acknowledging this, but the displayed name 'Proteus mirabilis' is not supported by t",
   "No %R->%S conversion issues found: Table 4 prints susceptibility (%S) directly (confirmed by narrative on p5, e.g. vancomycin 100% S. aureus, nitrofurantoin 94.4% Enterococcus, chloramphenicol 83.3/75.0/87.5). All from_R:false flags are correct.",
@@ -226,7 +226,7 @@
   {
    "spec": "urine",
    "set": "all",
-   "org": "Proteus mirabilis",
+   "org": "Proteus spp.",
    "n": 23
   },
   {
@@ -285,5 +285,6 @@
    "value": 70,
    "why": "identification test for S. saprophyticus, not a treatment"
   }
- ]
+ ],
+ "focus": "urinary isolates (clean-catch midstream urine)"
 }

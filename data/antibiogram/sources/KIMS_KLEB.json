@@ -17,9 +17,9 @@
  "breakpoints": "CLSI 2022",
  "verification": {
   "status": "double-checked",
-  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: PDF read via PyMuPDF text extraction (pdftoppm/pdftotext unavailable)."
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: PDF read via PyMuPDF text extraction (pdftoppm/pdftotext unavailable). Method: Figures are the overall 'Total' sensitive percentages of Table 2 (page 10), as printed; they match the abstract (tigecycline 74.79%, gentamicin 39.45%, meropenem 34.34%, piperacillin-tazobactam 32.44%)."
  },
- "notes": "Source: Panigrahi et al., Cureus 2025;17(10):e94006 (KIMS Bhubaneswar). Data taken from Table 2 (page 10), which prints Sensitive/Intermediate/Resistant counts and percentages for each of 13 drugs across the whole study population and 4 subgroups (ICU, non-ICU, CAI, HAI). I extracted the overall Total (n=7,942) Sensitive % values as printed (%S only; Intermediate not added). Values match the abstract/text (tigecycline 74.79%S, gentamicin 39.45%S, meropenem 34.34%S, piptazo 32.44%S). Note the scope hint 'cipro 78.4%R' corresponds to the Resistant column (6,227, 78.40%R); the reported %S for ciprofloxacin is 19.08% (I:2.50%), so no %R conversion was needed as %S is printed directly. CPS = cefoperazone-sulbactam mapped to non-canonical token 'cefoperazonesulbactam' (distinct from plain cefoperazone). Only organism studied is K. pneumoniae; other Klebsiella species excluded by authors. Subgroup rows (ICU/non-ICU/CAI/HAI) also available in Table 2 but only the overall pooled figures extracted here. VITEK 2, CLSI 2022 breakpoints.",
+ "notes": "Panigrahi et al. (Cureus 2025) studied Klebsiella pneumoniae from all clinical specimens (blood, urine, endotracheal tube samples, body fluids, sputum, pus, wounds and skin swabs) at Kalinga Institute of Medical Sciences, Bhubaneswar, October 2022 to September 2024; the authors excluded other Klebsiella species. Testing was by VITEK 2 with CLSI 2022 breakpoints. Figures are the overall % susceptible printed for all 7,942 isolates; intermediate results are not counted as susceptible (ciprofloxacin: 19.08% susceptible, 2.50% intermediate, 78.40% resistant). The paper also gives separate figures for ICU, non-ICU, community-acquired and hospital-acquired infections, which are not shown here.",
  "issues": [
   "Lead 2026-09-26: its own institution key (KIMS_BHUBANESWAR_KLEB, was KIMS_BHUBANESWAR): a different study from the same hospital is not an earlier edition of this one."
  ],
@@ -56,5 +56,6 @@
    "n": 7942
   }
  ],
- "excluded": []
+ "excluded": [],
+ "focus": "Klebsiella pneumoniae from all specimens (7,942 isolates)"
 }

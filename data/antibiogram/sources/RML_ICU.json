@@ -17,9 +17,9 @@
  "breakpoints": "CLSI M100 2022",
  "verification": {
   "status": "double-checked",
-  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Susceptibility data is in bar-chart figures (Figure 1 gram-positive, Figure 2 gram-negative), NOT text tables; extracted the printed data-labels from the embedded chart images (rendered via pymupdf)."
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Susceptibility data is in bar-chart figures (Figure 1 gram-positive, Figure 2 gram-negative), NOT text tables; extracted the printed data-labels from the embedded chart images (rendered via pymupdf). Method: Figures are the data labels printed on Figure 1 (Gram-positive) and Figure 2 (Gram-negative); there are no susceptibility tables. The Enterococcus clindamycin bar had no printed value and was left out. Methicillin-resistant CoNS 66%; metallo-beta-lactamase producers among E. coli 60%."
  },
- "notes": "Cureus 2024;16(3):e57356, RML Lucknow, ICU blood cultures, June 2022-June 2023, 669 samples, 213 (31.8%) growth. Charts report %SUSCEPTIBLE (sensitivity), so from_R=false throughout. Enterococcus reported as 'Enterococcus species' (not split) -> mapped to canonical 'Enterococcus'; clindamycin bar for Enterococcus had no printed value so omitted. Acinetobacter reported as 'Acinetobacter species' -> mapped to 'Acinetobacter baumannii' (core organism). Resistance-mechanism context (Table 2/text): MRSA 77.6% of S. aureus (cefoxitin S=22.4 matches), methicillin-resistant CoNS 66%; overall MBL producers 64.3% of gram-negatives (Acinetobacter 71%, K. pneumoniae 65.9%, P. aeruginosa 68.4%, E. coli 60%); ESBL 19.6% overall (K. pneumoniae 26.8%). VITEK 2 / CLSI M100 2022. Testing was for cefoxitin, erythromycin, clindamycin, tetracycline, ciprofloxacin, chloramphenicol, vancomycin, linezolid, gentamicin, teicoplanin, ampicillin-sulbactam, ceftazidime, imipenem, piperacillin-tazobactam, amikacin.",
+ "notes": "A 2024 Cureus study of ICU blood cultures at Dr Ram Manohar Lohia Institute of Medical Sciences, Lucknow, June 2022 to June 2023: 213 of 669 samples (31.8%) grew. Testing was by VITEK 2 with CLSI M100 2022 breakpoints. It covers K. pneumoniae (41), Acinetobacter (38, shown as A. baumannii), S. aureus (20), P. aeruginosa (19) and Enterococcus (9, not speciated), all small numbers. Figures are % susceptible as printed on the paper's bar charts. MRSA was 77.6%; metallo-beta-lactamase producers were 64.3% of Gram-negative isolates (Acinetobacter 71%, P. aeruginosa 68.4%, K. pneumoniae 65.9%) and ESBL producers 19.6% (K. pneumoniae 26.8%). The enterococcal gentamicin figure matches the text's 77.8% high-level gentamicin resistance. Coagulase-negative staphylococci (46 isolates), the commonest isolate, are not included.",
  "issues": [],
  "rows": [
   {
@@ -60,11 +60,11 @@
     "chloramphenicol": 77.8,
     "vancomycin": 84.1,
     "linezolid": 100,
-    "gentamicin": 22.2,
-    "teicoplanin": 62.4
+    "teicoplanin": 62.4,
+    "gentamicin_hl": 22.2
    },
    "notes": {
-    "gentamicin": "text: 77.8% high-level gentamicin-resistant"
+    "gentamicin_hl": "text: 77.8% high-level gentamicin-resistant"
    }
   },
   {
@@ -154,5 +154,6 @@
    "n": 19
   }
  ],
- "excluded": []
+ "excluded": [],
+ "focus": "blood cultures from ICU patients"
 }
