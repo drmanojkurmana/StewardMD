@@ -784,7 +784,10 @@ async function requireOrgOrGlobal(env, actor, orgId, cap, resourceOwnerUid) {
     if (resourceOwnerUid !== undefined && resourceOwnerUid !== null && resourceOwnerUid !== "" && !actor.isOwner && String(resourceOwnerUid) !== String(actor.id)) {
       throw Object.assign(new Error("forbidden"), { status: 403 });
     }
-    requireCap(actor.role, cap); return;
+    /* SEC-07: every signed-in account is a global "doctor", which is not membership of a hospital. The
+     * global role covers only a doctor's own practice (no org by that id, e.g. "manual"); a real org
+     * needs ownership or membership, like every other org route. */
+    if (actor.isOwner || !orgId || !(await ORG.getOrg(env, orgId))) { requireCap(actor.role, cap); return; }
   }
   const az = await ORG.authorizeOrg(env, actor, orgId, cap);
   if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
