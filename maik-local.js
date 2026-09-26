@@ -1011,8 +1011,24 @@
    * to three BM25 book passages. When the router named a disease, its curated text now joins the
    * evidence as one passage (700 chars, the same per-passage cap), inside the SAME budget of
    * RAG.TOPK passages: it takes the third book slot, or stands alone (up to two passages) when the
-   * book had nothing. No router verdict = no curated passage (relevance cannot be shown). */
+   * book had nothing. No router verdict = no curated passage (relevance cannot be shown).
+   *
+   * A TREATMENT question leads with the curated REGIMEN (2026-09-26). pkg.treatment carries the
+   * matched disease's StewardMD regimen (label, steps, doses), the same one MaiK Cloud answers from,
+   * but the curated passage used to be the first 700 chars of the knowledge PEARLS: definitions, ECG,
+   * examination. Measured on the real router + book (scripts/bench-maik-lite-retrieval.mjs --router
+   * real): "STEMI management" got the right disease and zero of aspirin / P2Y12 / reperfusion /
+   * anticoagulant. The regimen's doses also give the claim check something to verify a dose against. */
   var PASSAGE_CHARS = 700;
+  function regimenText(pkg, g) {
+    var t = pkg && pkg.treatment, d = t && t["default"];
+    if (!d || !(d.steps || []).length) return "";
+    if (t.diseaseId && g && g.diseaseId && t.diseaseId !== g.diseaseId) return "";   // another disease's regimen
+    var doses = (d.dosing || []).map(function (x) {
+      return x && x.drug && x.dose ? x.drug + " " + x.dose + (x.route ? " " + x.route : "") + (x.freq ? ", " + x.freq : "") : "";
+    }).filter(Boolean);
+    return cleanPassage((d.regimenLabel ? d.regimenLabel + ". " : "") + d.steps.join(" ") + (doses.length ? " Doses: " + doses.join("; ") + "." : ""));
+  }
   function curatedPassages(pkg) {
     var topic = routerTopic(pkg), gs = (pkg && pkg.grounding) || [];
     if (!topic || !gs.length) return [];
@@ -1020,8 +1036,10 @@
     for (var i = 0; i < gs.length && !g; i++) { var nm = String((gs[i] && gs[i].name) || "").toLowerCase(); if (nm && (nm === t || nm.indexOf(t) !== -1 || t.indexOf(nm) !== -1)) g = gs[i]; }
     g = g || gs[0];
     var body = cleanPassage(((g && g.knowledge) || []).map(function (k) { return (k && (k.text || k)) || ""; }).join(" "));
-    if (body.length < 80) return [];
+    if (body.length < 80) body = "";
     var head = "StewardMD Knowledge Base > " + String(g.name || topic).slice(0, 60), out = [];
+    var rx = TREAT_Q.test(String((pkg && pkg.question) || "")) ? regimenText(pkg, g) : "";
+    if (rx.length >= 80) out.push({ heading: head + " > Management", text: rx.slice(0, PASSAGE_CHARS), curated: true });
     for (var at = 0; at < body.length && out.length < 2; at += PASSAGE_CHARS) out.push({ heading: head, text: body.slice(at, at + PASSAGE_CHARS), curated: true });
     return out;
   }
@@ -2649,7 +2667,7 @@
     // only way to assert WHICH passages were chosen (and that their citation metadata survived) is
     // to call the retriever itself. test/maik-rag-hybrid.test.mjs is the consumer.
     retrieveGrounding: retrieveGrounding, expansionTerms: expansionTerms, rerankPassages: rerankPassages,
-    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
+    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning, curatedPassages: curatedPassages,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,

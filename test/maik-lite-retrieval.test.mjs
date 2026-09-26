@@ -48,3 +48,36 @@ test("a treatment question ranks the passage that talks treatment above an equal
   const asked = L.rerankPassages(pool.map((c) => ({ ...c })), { anchors: ["epilepticus"], expansion: [], mods: [], treat: false, topk: 3 });
   assert.equal(asked[0].rank, asked[1].rank, "a non-treatment question does not get the boost");
 });
+
+// The router's package as buildPackage() makes it for "STEMI management": the matched disease, its
+// knowledge pearls, and its curated regimen (pkg.treatment), trimmed to what curatedPassages reads.
+const PEARLS = [
+  { text: "ACS encompasses unstable angina, NSTEMI, and STEMI, and the term is generally reserved for patients with acute myocardial ischemia." },
+  { text: "An ECG is recommended within 10 minutes of presentation, primarily to identify ST-segment elevation that needs immediate reperfusion." },
+];
+const REGIMEN = { diseaseId: "acs", default: {
+  regimenLabel: "Dual antiplatelet + anticoagulation + reperfusion & secondary prevention",
+  steps: ["Aspirin 300 mg + a second antiplatelet (ticagrelor/clopidogrel); analgesia, oxygen only if hypoxic.",
+    "STEMI: primary PCI (or thrombolysis if PCI unavailable), time-critical."],
+  dosing: [{ drug: "aspirin", dose: "300 mg loading, then 75 mg maintenance", route: "PO", freq: "once daily" }] } };
+const pkgFor = (question, treatment) => ({ question, topicMatch: { matched: true, grounded: "Acute coronary syndrome" },
+  grounding: [{ diseaseId: "acs", name: "Acute coronary syndrome", knowledge: PEARLS }], treatment });
+
+test("a treatment question's curated passage is the StewardMD regimen, ahead of the pearls", () => {
+  const L = load([{ i: 0, headings: ["x"], pages: [1], text: "x" }]);
+  const cur = L.curatedPassages(pkgFor("acute STEMI management in the first hour", REGIMEN));
+  assert.match(cur[0].heading, /Acute coronary syndrome > Management$/);
+  assert.match(cur[0].text, /Aspirin 300 mg/);
+  assert.match(cur[0].text, /primary PCI/);
+  assert.match(cur[0].text, /aspirin 300 mg loading, then 75 mg maintenance PO, once daily/);
+  assert.ok(cur[0].text.length <= 700);
+  assert.match(cur[1].text, /encompasses unstable angina/, "the pearls follow");
+});
+
+test("a question that is not about treatment keeps the pearls; another disease's regimen is never used", () => {
+  const L = load([{ i: 0, headings: ["x"], pages: [1], text: "x" }]);
+  assert.match(L.curatedPassages(pkgFor("what is acute coronary syndrome", REGIMEN))[0].text, /encompasses unstable angina/);
+  const other = { ...REGIMEN, diseaseId: "pulmonary_embolism" };
+  assert.match(L.curatedPassages(pkgFor("acute STEMI management", other))[0].text, /encompasses unstable angina/);
+  assert.match(L.curatedPassages(pkgFor("acute STEMI management", undefined))[0].text, /encompasses unstable angina/);
+});
