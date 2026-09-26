@@ -6,7 +6,7 @@
  "basis": "international",
  "setting": "Operating theatre, recovery, ICU",
  "aliases": ["MH", "MH crisis", "malignant hyperpyrexia", "dantrolene", "hypermetabolic crisis", "masseter spasm", "volatile anaesthetic reaction", "suxamethonium reaction", "RYR1"],
- "summary": "Suspect MH with unexplained rising end-tidal CO2, tachycardia and rigidity after a volatile agent or suxamethonium. Stop triggers, hyperventilate with 100% O2, give dantrolene 2 to 2.5 mg/kg IV every 10 minutes until controlled, cool, treat hyperkalaemia and acidosis, and monitor in critical care for at least 24 hours.",
+ "summary": "Suspect MH with unexplained rising end-tidal CO2, tachycardia and rigidity after a volatile agent or suxamethonium. Stop triggers, hyperventilate with 100% O2, give dantrolene 2.5 mg/kg IV as a rapid bolus and repeat until controlled, cool, treat hyperkalaemia and acidosis, and monitor in critical care for at least 24 hours.",
  "sections": [
   {
    "kind": "recognise",
@@ -28,7 +28,8 @@
     "Stop all triggers. Remove the vaporiser; do not waste time changing the machine or circuit. Insert activated charcoal filters in the inspiratory and expiratory limbs if available.",
     "Hyperventilate with 100% O2 at high fresh gas flow (at least 10 L/min), minute volume 2 to 3 times normal.",
     "Maintain anaesthesia with non-trigger agents (TIVA: propofol, opioids, non-depolarising blockers).",
-    "Give dantrolene 2 to 2.5 mg/kg IV (actual body weight, max 300 mg per dose) through a large-bore line, repeated every 10 minutes until end-tidal CO2 and PaCO2 fall (PaCO2 under 6 kPa with normal minute ventilation) and temperature is falling."
+    "Give dantrolene 2.5 mg/kg IV as a rapid bolus (actual body weight; EMHG 2 to 2.5 mg/kg, max 300 mg per dose) through a large-bore line, giving each syringe as soon as it is ready.",
+    "Then give 1 mg/kg IV every 5 minutes (Association of Anaesthetists 2020), or repeat the full dose every 10 minutes (EMHG 2024), until end-tidal CO2 and PaCO2 fall (under 6 kPa with normal minute ventilation) and core temperature is falling."
    ]
   },
   {
@@ -36,7 +37,7 @@
    "title": "Dantrolene and secondary features",
    "items": [
     "Dantrolene 20 mg vials: reconstitute each with 60 mL sterile water for injection (not saline or glucose); a 70 kg adult needs 7 to 9 vials per dose. Ryanodex 250 mg vials: 5 mL sterile water each. Assign two or more people to mix.",
-    "Up to 1200 mg (60 vials of 20 mg) may be needed in an adult; the usual ceiling of 10 mg/kg may have to be exceeded, but reconsider the diagnosis if there is no response.",
+    "Up to 1200 mg (60 vials of 20 mg) may be needed in an adult. Reappraise the diagnosis at a cumulative 10 mg/kg; if MH is still likely, keep giving dantrolene beyond it with specialist advice.",
     "Cooling: 2000 to 3000 mL of chilled (4 to 8 C) IV crystalloid plus surface cooling; stop active cooling once core temperature is below 38.5 C to avoid overshoot.",
     "Hyperkalaemia (K above 5.9 mmol/L or ECG changes): calcium chloride 10 mg/kg IV (max 2 g) or calcium gluconate, insulin with glucose, salbutamol, and haemofiltration or dialysis if refractory.",
     "Acidosis: ventilate to normocapnia; give sodium bicarbonate 1 to 2 mmol/kg IV if pH is below 7.2.",
@@ -58,7 +59,7 @@
    "kind": "special",
    "title": "Children and special situations",
    "items": [
-    "Children: same weight-based dantrolene dose (2 to 2.5 mg/kg per dose). Hyperkalaemia: insulin 0.1 units/kg IV with glucose (for example 2 mL/kg of 25% dextrose), calcium chloride 10 mg/kg (max 2 g).",
+    "Children: same weight-based dantrolene regimen as adults (2.5 mg/kg, then repeat doses until controlled). Hyperkalaemia: insulin 0.1 units/kg IV with glucose (for example 2 mL/kg of 25% dextrose), calcium chloride 10 mg/kg (max 2 g).",
     "Sudden hyperkalaemic cardiac arrest after suxamethonium in a young boy suggests an undiagnosed myopathy (for example Duchenne): treat the hyperkalaemia with calcium, insulin-glucose and CPR.",
     "Isolated masseter spasm after suxamethonium: abandon volatiles if possible, monitor closely for MH, check CK and urine myoglobin, and refer for investigation."
    ]
@@ -85,7 +86,7 @@
   }
  ],
  "drugs": [
-  { "name": "Dantrolene sodium", "dose": "2 to 2.5 mg/kg IV (actual body weight, max 300 mg per dose), repeat every 10 minutes until controlled", "notes": "Total 10 mg/kg may need to be exceeded (up to about 1200 mg in adults). 20 mg vial plus 60 mL sterile water; Ryanodex 250 mg plus 5 mL sterile water. Same mg/kg in children." },
+  { "name": "Dantrolene sodium", "dose": "2.5 mg/kg IV rapid bolus (actual body weight; EMHG 2 to 2.5 mg/kg, max 300 mg per dose), then 1 mg/kg every 5 minutes (or the full dose every 10 minutes, EMHG) until controlled", "notes": "Reappraise the diagnosis at 10 mg/kg; it may need to be exceeded (up to about 1200 mg in adults). 20 mg vial plus 60 mL sterile water; Ryanodex 250 mg plus 5 mL sterile water. Same mg/kg in children." },
   { "name": "Dantrolene (post-crisis)", "dose": "1 mg/kg IV every 4 to 6 hours for at least 24 hours", "notes": "MHAUS regimen; watch the IV site for thrombophlebitis and extravasation." },
   { "name": "Calcium chloride 10%", "dose": "10 mg/kg IV (max 2 g) for hyperkalaemia with ECG changes", "notes": "Calcium gluconate if calcium chloride is unavailable." },
   { "name": "Insulin with glucose", "dose": "Adult: 10 units regular insulin IV with 50 mL of 50% glucose. Child: 0.1 units/kg with 2 mL/kg of 25% glucose", "notes": "Check glucose hourly." },
@@ -94,6 +95,7 @@
  ],
  "sources": [
   { "org": "European Malignant Hyperthermia Group", "title": "Recognising and managing a malignant hyperthermia crisis (v2024); Br J Anaesth 2025;134:221-3", "year": 2024, "url": "https://www.emhg.org/recommendations-1/2024/11/4/recognising-and-managing-a-malignant-hyperthermia-crisis-v2024" },
+  { "org": "Association of Anaesthetists", "title": "Malignant hyperthermia 2020: guideline from the Association of Anaesthetists (Anaesthesia 2021;76:655-64)", "year": 2020, "url": "https://anaesthetists.org/Guidelines-and-publications/Guidelines/Malignant-hyperthermia-2020" },
   { "org": "MHAUS", "title": "Managing a crisis: emergency treatment for an acute MH event", "year": 2026, "url": "https://www.mhaus.org/healthcare-professionals/managing-a-crisis/" },
   { "org": "MHAUS", "title": "Post acute phase management in PACU or ICU", "year": 2026, "url": "https://www.mhaus.org/healthcare-professionals/after-a-crisis/post-acute-phase/" },
   { "org": "European Malignant Hyperthermia Group", "title": "EMHG recommendations (dantrolene availability 2020; perioperative management of MH-susceptible patients 2021)", "year": 2020, "url": "https://www.emhg.org/recommendations-1" }

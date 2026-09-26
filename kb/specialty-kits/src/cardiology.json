@@ -96,6 +96,20 @@
    ]
   },
   {
+   "id": "hs-troponin",
+   "title": "High-sensitivity troponin, 0 h/1 h or 0 h/2 h (ESC 2023)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "hstn_assay", "label": "Assay", "type": "text", "hint": "manufacturer, troponin T or I; every cut-off is assay-specific" },
+    { "id": "hstn_algorithm", "label": "Algorithm", "type": "select", "opts": ["ESC 0 h/1 h", "ESC 0 h/2 h"], "hint": "0 h/1 h preferred; 0 h/2 h is the alternative (ESC 2023)" },
+    { "id": "hstn_onset", "label": "Chest pain onset to the 0 h sample", "type": "number", "unit": "hours", "hint": "a single very low 0 h value rules out only if chest pain began more than 3 hours before" },
+    { "id": "hstn_0h", "label": "hs-cTn at 0 h", "type": "number", "unit": "ng/L" },
+    { "id": "hstn_1h", "label": "hs-cTn at 1 h or 2 h", "type": "number", "unit": "ng/L" },
+    { "id": "hstn_delta", "label": "Absolute change (delta)", "type": "number", "unit": "ng/L" },
+    { "id": "hstn_result", "label": "Result", "type": "select", "opts": ["Rule-out", "Observe", "Rule-in"], "hint": "use the ESC cut-offs for this assay only, with the clinical picture and ECG; observe: repeat at 3 h and consider echocardiography" }
+   ]
+  },
+  {
    "id": "af-review",
    "title": "Atrial fibrillation review",
    "target": "History_present_illness",
@@ -166,13 +180,13 @@
    "id": "heart-failure-self-care",
    "title": "Looking after yourself with heart failure",
    "target": "diet_lifestyle_advice",
-   "text": "Weigh yourself every morning after passing urine and before breakfast, and write it down. Contact us quickly if your weight goes up over a few days, your feet or legs swell more, you get more breathless, or you cannot lie flat. Avoid very salty foods such as pickles, papad and packaged snacks, and do not use salt substitutes unless your doctor agrees. Take your heart medicines every day and stay as active as you comfortably can."
+   "text": "Weigh yourself every morning after passing urine and before breakfast, and write it down. Contact us quickly if your weight goes up over a few days, your feet or legs swell more, you get more breathless, or lying flat makes you breathless. Avoid very salty foods such as pickles, papad and packaged snacks, and do not use salt substitutes or low-sodium salt unless your doctor agrees, because they contain potassium, which can rise to a dangerous level in the blood with some heart medicines or kidney problems. Take your heart medicines every day and stay as active as you comfortably can."
   },
   {
    "id": "after-heart-attack",
    "title": "Protecting your heart after a heart attack",
    "target": "diet_lifestyle_advice",
-   "text": "Join the cardiac rehabilitation programme if it is offered. Build up to 20 to 30 minutes of activity every day, enough to make you slightly breathless. Eat more fruit, vegetables, whole grains, pulses and fish, and cook with plant oils rather than ghee or butter. Stop smoking completely, keep alcohol low, and keep taking your heart medicines; do not stop them without talking to your doctor."
+   "text": "Join the cardiac rehabilitation programme if it is offered. Build up to 20 to 30 minutes of activity every day, enough to make you slightly breathless. Eat more fruit, vegetables, whole grains, pulses and fish, and cook with oils such as mustard, groundnut, sunflower or sesame oil rather than ghee or butter, and avoid vanaspati (Dalda). Stop smoking completely, keep alcohol low, and keep taking your heart medicines; do not stop them without talking to your doctor."
   },
   {
    "id": "blood-thinner-safety",
@@ -186,7 +200,8 @@
   { "org": "International Journal of Cardiology (Backus BE et al.)", "title": "A prospective validation of the HEART score for chest pain patients at the emergency department", "year": 2013, "url": "https://www.sciencedirect.com/science/article/pii/S016752731300315X" },
   { "org": "NICE", "title": "NG106 Chronic heart failure in adults: diagnosis and management", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng106/chapter/recommendations" },
   { "org": "ESC / EACTS", "title": "2024 ESC Guidelines for the management of atrial fibrillation", "year": 2024, "url": "https://academic.oup.com/eurheartj/article/45/36/3314/7738779" },
-  { "org": "NICE", "title": "NG185 Acute coronary syndromes (including secondary prevention and cardiac rehabilitation)", "year": 2020, "url": "https://www.nice.org.uk/guidance/ng185" }
+  { "org": "NICE", "title": "NG185 Acute coronary syndromes (including secondary prevention and cardiac rehabilitation)", "year": 2020, "url": "https://www.nice.org.uk/guidance/ng185" },
+  { "org": "ESC", "title": "2023 ESC Guidelines for the management of acute coronary syndromes", "year": 2023, "url": "https://academic.oup.com/eurheartj/article/44/38/3720/7243210" }
  ],
  "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
 }

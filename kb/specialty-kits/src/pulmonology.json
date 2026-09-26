@@ -48,7 +48,10 @@
    "target": "respiratory_exam",
    "fields": [
     { "id": "resp_rate", "label": "Respiratory rate", "type": "number", "unit": "/min", "set": "respiratory" },
-    { "id": "spo2_air", "label": "SpO2 on room air", "type": "number", "unit": "%", "set": "spo2" },
+    { "id": "spo2_air", "label": "SpO2 at rest on room air", "type": "number", "unit": "%", "set": "spo2" },
+    { "id": "spo2_oxygen", "label": "If on oxygen: SpO2, flow and device", "type": "text", "hint": "e.g. 94% on 2 L/min by nasal prongs" },
+    { "id": "spo2_exertion", "label": "Lowest SpO2 on exertion, room air", "type": "number", "unit": "%" },
+    { "id": "exertion_test", "label": "Exertion test", "type": "select", "opts": ["1-minute sit-to-stand", "6-minute walk test", "Walk in the clinic", "Stair climb", "Not done: unsafe or SpO2 at rest already low"] },
     { "id": "accessory_muscles", "label": "Using accessory muscles", "type": "check" },
     { "id": "trachea", "label": "Trachea", "type": "select", "opts": ["Central", "Deviated to right", "Deviated to left"] },
     { "id": "expansion", "label": "Chest expansion", "type": "select", "opts": ["Normal and symmetrical", "Reduced on right", "Reduced on left", "Reduced both sides"] },
@@ -57,6 +60,17 @@
     { "id": "added_sounds", "label": "Added sounds", "type": "select", "opts": ["None", "Wheeze", "Fine crackles", "Coarse crackles", "Pleural rub", "Stridor"] },
     { "id": "findings_site", "label": "Side and zones", "type": "text", "hint": "e.g. right lower zone" },
     { "id": "resp_clubbing", "label": "Clubbing", "type": "check" }
+   ]
+  },
+  {
+   "id": "pneumonia-severity",
+   "title": "Pneumonia severity (CRB-65 or CURB-65)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "pn_score_type", "label": "Score used", "type": "select", "opts": ["CRB-65 (community or OPD, no urea)", "CURB-65 (hospital, with urea)"] },
+    { "id": "pn_score", "label": "Score", "type": "number", "hint": "use the CRB-65 or CURB-65 calculator" },
+    { "id": "pn_risk", "label": "30-day mortality risk", "type": "select", "opts": ["Low: CRB-65 0, or CURB-65 0 to 1", "Intermediate: CRB-65 1 to 2, or CURB-65 2", "High: CRB-65 3 to 4, or CURB-65 3 to 5"] },
+    { "id": "pn_place", "label": "Place of care", "type": "select", "opts": ["Home treatment", "Hospital assessment", "Admission", "HDU or ICU assessment"], "hint": "CRB-65 0: consider home care; any other score, especially 2 or more: consider hospital assessment (NICE). Low SpO2 or clinical concern needs hospital assessment whatever the score." }
    ]
   },
   {
@@ -183,7 +197,8 @@
   { "org": "GINA", "title": "Summary Guide for Asthma Management and Prevention (adults, adolescents and children 6 to 11 years), 2025 update", "year": 2025, "url": "https://ginasthma.org/wp-content/uploads/2025/11/GINA-Summary-Guide-2025-WEB_FINAL-WMS.pdf" },
   { "org": "BTS / SIGN (NHS Scotland Right Decisions)", "title": "Acute asthma in adults: severity features and admission (British guideline on the management of asthma, SIGN 158)", "year": 2019, "url": "https://www.rightdecisions.scot.nhs.uk/asthma-pathway-bts-nice-sign-sign-244/managing-acute-asthma/management-of-acute-asthma-in-adults/acute-asthma-in-adults/" },
   { "org": "Central TB Division, MoHFW, Government of India (NTEP)", "title": "Guidelines for Programmatic Management of TB Preventive Treatment in India (four-symptom screen)", "year": 2021, "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/Guidelines-for-Programmatic-Management-of-Tuberculosis-Preventive-Treatment-in-India.pdf" },
-  { "org": "ATS / ERS / JRS / ALAT", "title": "Idiopathic pulmonary fibrosis (an update) and progressive pulmonary fibrosis in adults: an official clinical practice guideline", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9851481/" }
+  { "org": "ATS / ERS / JRS / ALAT", "title": "Idiopathic pulmonary fibrosis (an update) and progressive pulmonary fibrosis in adults: an official clinical practice guideline", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9851481/" },
+  { "org": "NICE", "title": "NG250 Pneumonia: diagnosis and management", "year": 2025, "url": "https://www.nice.org.uk/guidance/ng250" }
  ],
  "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
 }

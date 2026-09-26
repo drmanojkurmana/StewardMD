@@ -23,6 +23,32 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] X-ray ([[ThoreX]]) daily cap — cap belongs at the IMAGE-analysis entry (on-device), not the text `thorex/llm`
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
+## [[Antibiogram]]
+- [ ] **Unfinished (usage limit):** second reading of RIMS Imphal 2022-23 and 2023-24 (extracted, in the session
+      scratchpad `abg/out/`); the gap-state census (WB, Odisha, Bihar, Jharkhand, NE, TN, Karnataka, Gujarat, Mumbai);
+      archived Sumandeep, SVIMS 2020 H1, GIMSR HIC; independent review round 2.
+- [ ] Retry the census from an Indian network: several institute and state health portals refused connections
+      from the cloud proxy (register reason "the website refused the connection from our network").
+- [ ] **Owner decision: held documents.** UCMS & GTB Hospital antibiograms 2023, 2023-24, 2025 (reproduction
+      forbidden without the editorial board's permission) and CMC Ludhiana 2012, RGGWCH Puducherry 2017 ("for
+      internal use only") were extracted but are not in the app. Integrate only with permission.
+- [ ] Ask SKIMS, GMC Srinagar, AIIMS Bhopal, RIMS Imphal about figures the rules flag as exceptional (vancomycin
+      and linezolid in staphylococci, carbapenems in S. Typhi): likely method (disk diffusion) issues. Ask the
+      same laboratories whether their enterococcal "gentamicin" is the high-level (synergy) screen: until they
+      say so it is shown as intrinsic resistance.
+- [ ] Dr. RMLIMS Lucknow 2020 and 2021 print numbers of susceptible isolates under "percentage" headings, without
+      the number tested per drug: percentages could be computed if the lab supplies the denominators.
+- [ ] 50 of 85 sources do not state their breakpoint standard or edition; ask the networks (NARS-Net, KARS-NET,
+      ICMR) to print the M100 edition, since trends across 2022 and 2023 move with the breakpoints.
+- [ ] A clinician read of the 18 journal-study notes and focus lines (rewritten 2026-09-26 from the extraction
+      logs; facts unchanged, wording new).
+- [ ] ICMR AMRSN 2017 to 2022 at stratum level (2023 and 2024 are in; 2024's trend tables give the national
+      2017 to 2024 series).
+- [ ] ICMR regional-centre (RC) tables: per-centre figures, if ICMR's centre list can be tied to institutions.
+- [ ] Knowledge Library Antibiogram tab still reads `ASP_ABG.national` (in minified app.js); point it at `ABG_STORE`
+      (ICMR scope) when app.js is next rebuilt.
+- [ ] Clinical review of the syndrome-to-specimen map (`SYN` in antibiogram-store.js) by a microbiologist.
+
 ## Modules
 - [ ] **[[RadioAnatome 3D]] device run** — browser-verified only (SwiftShader). Run on the iPhone + Pixel:
       load time over cellular for the LOD default (~12 MB of the 19.6 MB LOD set for the default systems, from R2),
@@ -161,6 +187,6 @@ native-speaker check of the Telugu and Hindi consent forms and handouts.
   `KB_NAMES` from those abstains.
 - DONE (PR maik-kb-relevance) **Duplicated KB text**: the server ranks only claims the notes do not
   carry (guideline recommendations); mean 1,196 chars saved per grounded question.
-- **On-device**: the fine-tuned framing ("Reference material ... above") is unchanged and has no meta-talk
-  filter; only `REGEN_NUDGE` stopped asking the model to "say so". Share `_maik_metatalk.js` as a UMD if
-  the owner sees it offline.
+- [x] **On-device** (PR #1245, 2026-09-26): `maik-local.js` runs an ES5 copy of the meta-talk filter,
+  pinned to the Cloud file by a parity test. Move both copies into one kb/ai UMD file if a third caller
+  appears. The fine-tuned framing ("Reference material ... above") is unchanged.

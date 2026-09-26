@@ -1,0 +1,61 @@
+{
+ "id": "KIMS_KLEB",
+ "kind": "study",
+ "inst": "KIMS_BHUBANESWAR_KLEB",
+ "institution": "Kalinga Institute of Medical Sciences",
+ "short": "KIMS Bhubaneswar",
+ "city": "Bhubaneswar",
+ "state": "Odisha",
+ "region": "east",
+ "sector": "private",
+ "year": 2024,
+ "period": "October 2022 to September 2024",
+ "citation": "Cureus 2025",
+ "doi": "10.7759/cureus.94006",
+ "url": "https://doi.org/10.7759/cureus.94006",
+ "reporting": "%S",
+ "breakpoints": "CLSI 2022",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: PDF read via PyMuPDF text extraction (pdftoppm/pdftotext unavailable). Method: Figures are the overall 'Total' sensitive percentages of Table 2 (page 10), as printed; they match the abstract (tigecycline 74.79%, gentamicin 39.45%, meropenem 34.34%, piperacillin-tazobactam 32.44%)."
+ },
+ "notes": "Panigrahi et al. (Cureus 2025) studied Klebsiella pneumoniae from all clinical specimens (blood, urine, endotracheal tube samples, body fluids, sputum, pus, wounds and skin swabs) at Kalinga Institute of Medical Sciences, Bhubaneswar, October 2022 to September 2024; the authors excluded other Klebsiella species. Testing was by VITEK 2 with CLSI 2022 breakpoints. Figures are the overall % susceptible printed for all 7,942 isolates; intermediate results are not counted as susceptible (ciprofloxacin: 19.08% susceptible, 2.50% intermediate, 78.40% resistant). The paper also gives separate figures for ICU, non-ICU, community-acquired and hospital-acquired infections, which are not shown here.",
+ "issues": [
+  "Lead 2026-09-26: its own institution key (KIMS_BHUBANESWAR_KLEB, was KIMS_BHUBANESWAR): a different study from the same hospital is not an earlier edition of this one."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 7942,
+   "specimen_as_printed": "all clinical (blood, urine, ETT, body fluid, sputum, pus, wound, skin swabs)",
+   "s": {
+    "amoxiclav": 27.4,
+    "piptazo": 32.4,
+    "cefuroxime": 16.9,
+    "ceftriaxone": 19.9,
+    "cefoperazone_sulbactam": 26.4,
+    "cefepime": 20.4,
+    "imipenem": 30.8,
+    "meropenem": 34.3,
+    "amikacin": 25.4,
+    "gentamicin": 39.5,
+    "ciprofloxacin": 19.1,
+    "tigecycline": 74.8,
+    "cotrimoxazole": 25.5
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 7942
+  }
+ ],
+ "excluded": [],
+ "focus": "Klebsiella pneumoniae from all specimens (7,942 isolates)"
+}

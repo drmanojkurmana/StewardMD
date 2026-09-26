@@ -1,0 +1,327 @@
+{
+ "id": "ASSAM",
+ "kind": "study",
+ "inst": "AMC_DIBRUGARH",
+ "institution": "Assam Medical College and Hospital",
+ "short": "Assam MC Dibrugarh",
+ "city": "Dibrugarh",
+ "state": "Assam",
+ "region": "east",
+ "sector": "government",
+ "year": 2021,
+ "period": "October 2018 to March 2021",
+ "citation": "J Pure Appl Microbiol 2023",
+ "doi": null,
+ "url": null,
+ "reporting": "%R in the source, converted to %S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Text-extracted with pymupdf (Read tool could not render PDF; poppler not installed). Method: Figures come from Table 2 (Gram-negative) and Table 3 (Gram-positive), converted as 100 minus %R. Isolate numbers are the Table 2 column headers; the text on page 9 gives A. baumannii 550 and P. aeruginosa 590. Drugs not done for some organisms (cefepime, tobramycin except Pseudomonas, minocycline except Acinetobacter) were left out. S. aureus vancomycin 100% was entered from the text statement that no VRSA was detected, not from a table. Enterococcal gentamicin is high-level gentamicin (120 µg). Overall carbapenem resistance: Enterobacteriaceae 58.8%, non-fermenters 56.0%."
+ },
+ "notes": "Das et al. (J Pure Appl Microbiol 2023) studied all specimens hospital-wide at Assam Medical College and Hospital, Dibrugarh, an ICMR AMRSN site, October 2018 to March 2021: E. coli (2,237), Klebsiella spp. (2,673), Enterobacter spp. (177), Proteus spp. (125), Citrobacter (551), Acinetobacter (687), P. aeruginosa (646), S. aureus (1,786), E. faecium (617) and E. faecalis (200). The spp. groups appear as K. pneumoniae, E. cloacae and P. mirabilis. The tables print % resistant, so figures are 100 minus %R and intermediate counts as susceptible. Nitrofurantoin and fosfomycin are for urinary isolates only; enterococcal gentamicin is high-level. Colistin (261 Gram-negative isolates tested by MIC, all susceptible) and VRE (1.2%, 10 of 817) were reported only in aggregate, so neither is shown per organism. MRSA was 44.7%; S. aureus vancomycin is 100% because no VRSA was found.",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 2237,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "amikacin": 55.4,
+    "cefotaxime": 20.2,
+    "ceftazidime": 14.9,
+    "cefazolin": 26.3,
+    "ciprofloxacin": 30,
+    "levofloxacin": 37.1,
+    "ertapenem": 49.8,
+    "imipenem": 47.8,
+    "meropenem": 62.5,
+    "piptazo": 48.4,
+    "nitrofurantoin": 84.7,
+    "cotrimoxazole": 40.7,
+    "fosfomycin": 97.8
+   },
+   "notes": {
+    "nitrofurantoin": "urine isolates only",
+    "fosfomycin": "urine isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 2673,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "amikacin": 57.9,
+    "cefotaxime": 16.2,
+    "ceftazidime": 28.4,
+    "cefazolin": 28.1,
+    "ciprofloxacin": 50.1,
+    "levofloxacin": 61.4,
+    "ertapenem": 50.6,
+    "imipenem": 46.9,
+    "meropenem": 55.9,
+    "piptazo": 43.9,
+    "nitrofurantoin": 52,
+    "cotrimoxazole": 46.7,
+    "fosfomycin": 90
+   },
+   "notes": {
+    "amikacin": "reported as Klebsiella spp.",
+    "nitrofurantoin": "urine isolates only",
+    "fosfomycin": "urine isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 646,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "amikacin": 67.5,
+    "ceftazidime": 53.6,
+    "cefepime": 55.6,
+    "ciprofloxacin": 68.9,
+    "levofloxacin": 66.5,
+    "imipenem": 62.2,
+    "meropenem": 76.8,
+    "piptazo": 67,
+    "tobramycin": 68.8
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 687,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "amikacin": 33.5,
+    "ceftazidime": 13.3,
+    "cefepime": 16.8,
+    "levofloxacin": 42.6,
+    "imipenem": 25.8,
+    "meropenem": 35.1,
+    "minocycline": 84.2,
+    "piptazo": 22.4
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Citrobacter",
+   "pheno": null,
+   "n": 551,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "amikacin": 52.3,
+    "cefotaxime": 8.9,
+    "ceftazidime": 14.3,
+    "ciprofloxacin": 46,
+    "levofloxacin": 58.8,
+    "ertapenem": 51,
+    "imipenem": 41.9,
+    "meropenem": 52.6,
+    "piptazo": 46,
+    "nitrofurantoin": 51.6,
+    "cotrimoxazole": 47,
+    "fosfomycin": 74
+   },
+   "notes": {
+    "nitrofurantoin": "urine isolates only",
+    "fosfomycin": "urine isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 125,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "amikacin": 53,
+    "cefotaxime": 29.4,
+    "ceftazidime": 46,
+    "cefazolin": 37.9,
+    "ciprofloxacin": 67.3,
+    "levofloxacin": 68,
+    "ertapenem": 71.4,
+    "imipenem": 47,
+    "meropenem": 73,
+    "piptazo": 67.3,
+    "nitrofurantoin": 31,
+    "cotrimoxazole": 37.9,
+    "fosfomycin": 93
+   },
+   "notes": {
+    "amikacin": "reported as Proteus spp.",
+    "nitrofurantoin": "urine isolates only",
+    "fosfomycin": "urine isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 177,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "amikacin": 52.9,
+    "cefotaxime": 7.7,
+    "ceftazidime": 15,
+    "ciprofloxacin": 57,
+    "levofloxacin": 73,
+    "ertapenem": 57.6,
+    "imipenem": 32,
+    "meropenem": 55.1,
+    "piptazo": 34.6,
+    "nitrofurantoin": 61.9,
+    "cotrimoxazole": 57.1,
+    "fosfomycin": 81
+   },
+   "notes": {
+    "amikacin": "reported as Enterobacter spp.",
+    "nitrofurantoin": "urine isolates only",
+    "fosfomycin": "urine isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 1786,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "cefoxitin": 55.3,
+    "ciprofloxacin": 36.2,
+    "clindamycin": 66.6,
+    "erythromycin": 27.2,
+    "linezolid": 99.6,
+    "mupirocin": 82.9,
+    "penicillin": 8.4,
+    "tetracycline": 89.2,
+    "cotrimoxazole": 69.4,
+    "vancomycin": 100
+   },
+   "notes": {
+    "cefoxitin": "44.7% MRSA (cefoxitin-R)",
+    "vancomycin": "VRSA not detected during study period"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 200,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ciprofloxacin": 32.6,
+    "linezolid": 99.5,
+    "nitrofurantoin": 87.1,
+    "ampicillin": 75.5,
+    "fosfomycin": 91.7,
+    "teicoplanin": 99.5,
+    "gentamicin_hl": 61.5
+   },
+   "notes": {
+    "nitrofurantoin": "urine isolates only (17/132)",
+    "fosfomycin": "urine isolates only (11/132)",
+    "gentamicin_hl": "high-level gentamicin"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 617,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ciprofloxacin": 12.8,
+    "linezolid": 98.4,
+    "nitrofurantoin": 57.5,
+    "ampicillin": 31,
+    "teicoplanin": 99.2,
+    "gentamicin_hl": 37.3
+   },
+   "notes": {
+    "nitrofurantoin": "urine isolates only (209/492)",
+    "gentamicin_hl": "high-level gentamicin"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 2237
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 2673
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 646
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 687
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Citrobacter",
+   "n": 551
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 125
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 177
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 1786
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 200
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 617
+  }
+ ],
+ "excluded": []
+}
