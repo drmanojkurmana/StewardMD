@@ -7623,7 +7623,7 @@
         '<p class="w-hint warn">' + ms("warning") + wTH("ward.no-one-click-transfuse-both-checkers2", "NO ONE-CLICK TRANSFUSE. Both checkers and both scans are required; compatibility is re-derived from what is scanned, never trusted from the crossmatch record.") + "</p>" +
         '<div class="w-grid">' +
         "<label class=\"w-f\"><span>" + wTH("ward.first-checker-you", "First checker (you)") + "</span><input id=\"wTxChecker1\" type=\"text\" autocomplete=\"off\"></label>" +
-        "<label class=\"w-f\"><span>" + wTH("ward.second-checker-independent", "Second checker (independent)") + "</span><input id=\"wTxChecker2\" type=\"text\" autocomplete=\"off\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.second-checker-independent", "Second checker (independent)") + "</span><input id=\"wTxChecker2\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.second-checker-staff-id", "Their staff ID") + "\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.scan-patient-wristband", "Scan: patient wristband") + "</span><input id=\"wTxScanPatient\" type=\"text\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.scan-unit-label", "Scan: unit label") + "</span><input id=\"wTxScanUnit\" type=\"text\" autocomplete=\"off\"></label>" +
         "</div>" +

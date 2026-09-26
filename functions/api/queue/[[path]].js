@@ -3266,7 +3266,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-request" && method === "POST") {
-        const r = await requestTransfusion(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, encounterId: body.encounterId, component: body.component, units: body.units, indication: body.indication, aboGroup: body.aboGroup, rhD: body.rhD, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await requestTransfusion(request, env, { ...deps, mrn: body.mrn, patientId: body.patientId, encounterId: body.encounterId, component: body.component, units: body.units, indication: body.indication, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* A unit this blood bank registered is crossmatched only while it is on the shelf, and with the group, RhD,
@@ -3286,7 +3286,13 @@ export async function onRequest(context) {
         return json({ ...r, inventory: gate.tracked ? "tracked" : "untracked" }, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-bedside-check" && method === "POST") {
-        const r = await recordBedsideCheck(request, env, { ...deps, episodeId: body.episodeId, checkerId: body.checkerId, secondCheckerId: body.secondCheckerId, scannedPatientBarcode: body.scannedPatientBarcode, scannedUnitId: body.scannedUnitId, patient: body.patient, unitInHand: body.unitInHand, idempotencyKey: body.idempotencyKey || null });
+        /* CLIN-16: the second checker is an active member of this hospital who treats, gives medicines or works the blood bank. */
+        const secondCheckerCheck = async (id) => {
+          const who = { kind: "witness", id: String(id), email: String(id).indexOf("@") > 0 ? String(id).toLowerCase() : null };
+          for (const cap of [CAPS.EMR_TREAT, CAPS.MED_ADMINISTER, CAPS.TRANSFUSION_ISSUE]) if ((await ORG.authorizeOrg(env, who, wOrgId, cap) || {}).ok) return true;
+          return false;
+        };
+        const r = await recordBedsideCheck(request, env, { ...deps, episodeId: body.episodeId, secondCheckerId: body.secondCheckerId, secondCheckerCheck, scannedPatientBarcode: body.scannedPatientBarcode, scannedUnitId: body.scannedUnitId, unitInHand: body.unitInHand, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-start" && method === "POST") {

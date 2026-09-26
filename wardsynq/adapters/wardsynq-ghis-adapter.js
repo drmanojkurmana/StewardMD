@@ -144,6 +144,19 @@ const LAB_CODE_SEED = Object.freeze({
   "potassium (k+)": { code: "2823-3", display: "Potassium" },
   "chloride (cl-)": { code: "2075-0", display: "Chloride" },
   "c-reactive protein (crp)": { code: "1988-5", display: "C-reactive protein" },
+  /* CLIN-09: the patient's blood group, which migrate-transfusion.js reads as the ONLY source of the patient's
+   * ABO/RhD. "Blood Group" on an Indian report is the ABO and Rh result ("B Positive"). */
+  "blood group": { code: "882-1", display: "ABO and Rh group" },
+  "blood grouping": { code: "882-1", display: "ABO and Rh group" },
+  "blood group & rh": { code: "882-1", display: "ABO and Rh group" },
+  "blood group and rh": { code: "882-1", display: "ABO and Rh group" },
+  "abo & rh": { code: "882-1", display: "ABO and Rh group" },
+  "abo and rh": { code: "882-1", display: "ABO and Rh group" },
+  "abo/rh": { code: "882-1", display: "ABO and Rh group" },
+  "abo group": { code: "883-9", display: "ABO group" },
+  "rh type": { code: "10331-7", display: "Rh type" },
+  "rh factor": { code: "10331-7", display: "Rh type" },
+  "rh (d) type": { code: "10331-7", display: "Rh type" },
 });
 
 const norm = (v) => (typeof v === "string" ? v.trim().toLowerCase().replace(/\s+/g, " ") : "");

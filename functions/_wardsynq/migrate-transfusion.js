@@ -55,6 +55,58 @@ function episodeIdFor(patientId, requestedAt) {
   return p && t ? `txn-${p}-${t}` : null;
 }
 
+/* CLIN-09: THE PATIENT'S GROUP IS A LABORATORY RESULT, NEVER A REQUEST FIELD. It was taken from the request
+ * body, so whatever group a caller typed became the patient's group for crossmatch AND the bedside re-check.
+ * It is now read, at every check, from the blood group results on the patient's record (LOINC 882-1 ABO and
+ * Rh, 883-9 ABO, 10331-7 Rh; lab-result.js codes the ward's "Blood Group" test through LAB_CODE_SEED). Every
+ * recorded result must agree: two that disagree, or one that cannot be read, leave the group undetermined,
+ * and the engine then refuses every unit, which is its existing rule for an unknown group. */
+const GROUP_CODES = Object.freeze({ "882-1": "both", "883-9": "abo", "10331-7": "rh" });
+const RH_WORD = /^(\+|-|\+VE|-VE|POS|POSITIVE|NEG|NEGATIVE)$/;
+function parseGrouping(kind, value) {
+  const s = str(value).toUpperCase().replace(/RH\s*\(?D\)?|GROUP|TYPE|:/g, " ").replace(/\s+/g, " ").trim();
+  const rhOf = (w) => (/^(\+|POS)/.test(w) ? "positive" : "negative");
+  if (kind === "abo") return /^(AB|A|B|O)$/.test(s) ? { abo: s } : null;
+  if (kind === "rh") return RH_WORD.test(s) ? { rh: rhOf(s) } : null;
+  // ABO alone is read as ABO alone: the RhD then stays undetermined and red cells are refused on it.
+  const m = /^(AB|A|B|O)(?: ?(\+VE|-VE|\+|-|POSITIVE|NEGATIVE|POS|NEG))?$/.exec(s);
+  return m ? { abo: m[1], ...(m[2] ? { rh: rhOf(m[2]) } : {}) } : null;
+}
+/** PURE. { aboGroup, rhD, results } from the patient's observations, or { aboGroup: null, rhD: null, reason }. */
+function groupingFrom(observations) {
+  const rows = (observations || []).filter((o) => o && GROUP_CODES[str(o.code)] && str(o.codeSystem) === "http://loinc.org"
+    && !["entered-in-error", "cancelled"].includes(str(o.status)));
+  const none = (reason) => ({ aboGroup: null, rhD: null, reason });
+  if (!rows.length) return none("none_recorded");
+  const abo = new Set(), rh = new Set();
+  for (const o of rows) {
+    const g = parseGrouping(GROUP_CODES[str(o.code)], o.value);
+    if (!g) return none("unreadable");
+    if (g.abo) abo.add(g.abo);
+    if (g.rh) rh.add(g.rh);
+  }
+  if (abo.size > 1 || rh.size > 1) return none("discordant");
+  return { aboGroup: [...abo][0] || null, rhD: [...rh][0] || null, results: rows.length };
+}
+/* Read from the store under the service's tenant, not through the caller's read grant: the blood bank role
+ * (TRANSFUSION_ISSUE) must know the recipient's group to crossmatch but holds no Observation read, and must not
+ * be given every result on the chart to get it. Only the derived group leaves this file, and the read is
+ * audited as the caller's. */
+async function recordedGrouping(svc, patientId) {
+  const rows = ((await svc.repository.byPatient(svc.tenantId, "Observation", patientId)) || []).filter((o) => o && GROUP_CODES[str(o.code)]);
+  await svc.repository.auditOnly(svc.tenantId, await svc._audit("record.read", { scope: { resourceType: "Observation", byPatient: true, purpose: "blood-group" }, resourceCounts: { Observation: rows.length }, patientId }));
+  return groupingFrom(rows);
+}
+/* What a crossmatch or bedside check compares against: the recorded group, written onto the episode. */
+async function applyGrouping({ svc, ep }) {
+  let g;
+  try { g = await recordedGrouping(svc, ep.patientId); }
+  catch (e) { return { refusal: { ok: false, status: 502, error: "grouping_unreadable", detail: "The patient's blood group results could not be read, so nothing was checked." } }; }
+  ep.patientAbo = g.aboGroup;
+  ep.patientRhD = g.rhD;
+  return { extra: { grouping: g } };
+}
+
 async function openService(request, env, ctx, need) {
   try {
     const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, need, ctx.actorDeps);
@@ -109,10 +161,12 @@ async function requestTransfusion(request, env, ctx) {
   const current = await svc.get(TYPE, id).catch(() => null);
   if (current) return { ...base, ok: true, written: 0, skipped: "already_requested", ...summary(current) };
 
+  // CLIN-09: never ctx.aboGroup/ctx.rhD. The MRN is the record's where there is one.
+  const [patient, grouping] = await Promise.all([svc.get("Patient", patientId).catch(() => null), recordedGrouping(svc, patientId).catch(() => groupingFrom([]))]);
   let ep;
   try {
     ep = await ENGINE().request(
-      { id: patientId, mrn: str(ctx.mrn), aboGroup: ctx.aboGroup, rhD: ctx.rhD },
+      { id: patientId, mrn: str(patient && patient.mrn) || str(ctx.mrn), aboGroup: grouping.aboGroup, rhD: grouping.rhD },
       { component: ctx.component, units: ctx.units, indication: ctx.indication },
       resolved.actor.id,
     );
@@ -132,7 +186,7 @@ async function requestTransfusion(request, env, ctx) {
  * A shared phase-transition runner: read the current episode, run the engine's method against it,
  * write the result. Every route below is a thin ctx-shaping wrapper around this.
  */
-async function transition(request, env, ctx, run) {
+async function transition(request, env, ctx, run, prepare) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
@@ -145,6 +199,11 @@ async function transition(request, env, ctx, run) {
 
   const current = await svc.get(TYPE, episodeId).catch(() => null);
   if (!current) return { ...base, ok: false, status: 404, error: "episode_not_found", episodeId, written: 0 };
+
+  // prepare({svc, ep, actorId}) -> { refusal } to stop before the engine runs, or { extra } for the response.
+  const prep = prepare ? await prepare({ svc, ep: current, actorId: resolved.actor.id }) : null;
+  if (prep && prep.refusal) return { ...base, ...prep.refusal, episodeId, written: 0, actor: resolved.actor.id };
+  const extra = (prep && prep.extra) || {};
 
   // The engine mutates the episode object IN PLACE and returns it from every phase method except
   // observe() (which returns the observation entry instead). Persist `current` itself - already
@@ -160,20 +219,20 @@ async function transition(request, env, ctx, run) {
     if (e instanceof TransfusionSafetyError && current) {
       try { await svc.put({ ...current, resourceType: TYPE }, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null }); } catch { /* best effort */ }
     }
-    return { ...base, ...writeFailure(e, { episodeId, written: 0, actor: resolved.actor.id }) };
+    return { ...base, ...writeFailure(e, { episodeId, written: 0, actor: resolved.actor.id, ...extra }) };
   }
 
   try {
     const out = await svc.put({ ...current, resourceType: TYPE }, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, ...summary({ ...current, version: out.record.version }), actor: resolved.actor.id };
-  } catch (e) { return { ...base, ...writeFailure(e, { episodeId, written: 0, actor: resolved.actor.id }) }; }
+    return { ...base, ok: true, written: 1, ...summary({ ...current, version: out.record.version }), actor: resolved.actor.id, ...extra };
+  } catch (e) { return { ...base, ...writeFailure(e, { episodeId, written: 0, actor: resolved.actor.id, ...extra }) }; }
 }
 
 /** ctx: { migration, episodeId, unitId, aboGroup, rhD, component, expiresAt, actorDeps, recordDeps } */
 async function recordCrossmatch(request, env, ctx) {
   return transition(request, env, ctx, (engine, ep, actorId) => engine.crossmatch(ep, {
     unitId: str(ctx.unitId), aboGroup: ctx.aboGroup, rhD: ctx.rhD, component: ctx.component, expiresAt: ctx.expiresAt,
-  }, actorId));
+  }, actorId), applyGrouping);
 }
 
 /** ctx: { migration, episodeId, actorDeps, recordDeps } */
@@ -184,16 +243,39 @@ async function issueUnit(request, env, ctx) {
 /**
  * The two-person bedside check. NO ONE-CLICK TRANSFUSE: two named, different people, a scanned
  * wristband and a scanned unit, compatibility re-derived from the physical bag - the engine's own
- * bedsideCheck() enforces every one of these; this file adds no logic, only the write.
- * ctx: { migration, episodeId, checkerId, secondCheckerId, scannedPatientBarcode, scannedUnitId,
- *   patient: {id, mrn, wristbandBarcode}, unitInHand: {unitId, aboGroup, rhD, component, expiresAt} }
+ * bedsideCheck() enforces every one of these; this file supplies who and against what (below).
+ * ctx: { migration, episodeId, secondCheckerId, secondCheckerCheck(id) -> boolean, scannedPatientBarcode,
+ *   scannedUnitId, unitInHand: {unitId, aboGroup, rhD, component, expiresAt} }. checkerId and patient in the
+ *   request are ignored.
  */
 async function recordBedsideCheck(request, env, ctx) {
-  return transition(request, env, ctx, (engine, ep) => engine.bedsideCheck(ep, {
-    checkerId: str(ctx.checkerId), secondCheckerId: str(ctx.secondCheckerId),
+  /* CLIN-16: two typed names let one account complete the two-person check alone. The first checker is the
+   * signed-in user; the second must be a different, active member of this hospital (ctx.secondCheckerCheck,
+   * the controlled-drug witness pattern); the wristband is compared with the patient RECORD, never with the
+   * MRN or band the request sends. The recorded group is re-read (CLIN-09). */
+  let patient = null;
+  const prepare = async ({ svc, ep, actorId }) => {
+    const refuse = (status, code, detail) => ({ refusal: { ok: false, status, error: "transfusion_refused", code, detail } });
+    const second = str(ctx.secondCheckerId);
+    if (!second) return refuse(409, "TWO_PERSON_REQUIRED", "two people must perform the bedside check: name the second checker's staff ID");
+    if (second.toLowerCase() === str(actorId).toLowerCase()) return refuse(409, "SECOND_CHECKER_NOT_INDEPENDENT", "the second check must be performed by a different person from the one signed in");
+    if (typeof ctx.secondCheckerCheck !== "function") return { refusal: { ok: false, status: 502, error: "second_checker_check_unavailable", detail: "The second checker could not be checked, so nothing was recorded." } };
+    let staff = false;
+    try { staff = (await ctx.secondCheckerCheck(second)) === true; }
+    catch { return { refusal: { ok: false, status: 502, error: "second_checker_check_failed", detail: "The second checker could not be checked, so nothing was recorded." } }; }
+    if (!staff) return refuse(409, "SECOND_CHECKER_NOT_STAFF", "the second checker is not an active member of this hospital who may check a transfusion");
+    let rec;
+    try { rec = await svc.get("Patient", ep.patientId); }
+    catch { return { refusal: { ok: false, status: 502, error: "record_read_failed", detail: "The patient record could not be read, so the wristband was not checked." } }; }
+    if (!rec) return { refusal: { ok: false, status: 404, error: "patient_not_found" } };
+    patient = { id: rec.id, mrn: rec.mrn || null, wristbandBarcode: rec.wristbandBarcode || null };
+    return applyGrouping({ svc, ep });
+  };
+  return transition(request, env, ctx, (engine, ep, actorId) => engine.bedsideCheck(ep, {
+    checkerId: actorId, secondCheckerId: str(ctx.secondCheckerId),
     scannedPatientBarcode: ctx.scannedPatientBarcode, scannedUnitId: ctx.scannedUnitId,
-    patient: ctx.patient, unitInHand: ctx.unitInHand,
-  }));
+    patient, unitInHand: ctx.unitInHand,
+  }), prepare);
 }
 
 /** ctx: { migration, episodeId, actorDeps, recordDeps } */
@@ -259,7 +341,7 @@ async function traceBloodUnit(request, env, ctx) {
 }
 
 export {
-  TYPE, episodeIdFor,
+  TYPE, episodeIdFor, groupingFrom,
   requestTransfusion, recordCrossmatch, issueUnit, recordBedsideCheck,
   startTransfusion, recordTransfusionObservation, recordTransfusionReaction, completeTransfusion,
   transfusionQueue, traceBloodUnit,

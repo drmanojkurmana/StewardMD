@@ -3252,6 +3252,7 @@
     "ward.search-this-history-a-drug-a": "Search this history - a drug, a word from a note, a person",
     "ward.searching": "Searching…",
     "ward.second-checker-independent": "Second checker (independent)",
+    "ward.second-checker-staff-id": "Their staff ID",
     "ward.second-language-on-the-print": "Second language on the print",
     "ward.second-nurse": "Second nurse",
     "ward.second-stage": "Second stage",
