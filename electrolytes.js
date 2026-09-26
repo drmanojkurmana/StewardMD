@@ -240,7 +240,7 @@
   var EVIDENCE = ["European Hyponatraemia Guideline 2014 (ESICM/ESE/ERA-EDTA)","KDIGO","Surviving Sepsis Campaign","UpToDate","Harrison's Principles of Internal Medicine","ASPEN (refeeding)","ICMR / ISCCM (where applicable)"];
 
   /* ---------------- state ---------------- */
-  var S = { pt:{}, labs:{}, analyzed:false, results:null, units:"conv" };
+  var S = { pt:{}, labs:{}, analyzed:false, results:null, units:"conv", moreLabs:false, moreRisks:false };
   var root=null;
 
   /* ---------------- UI ---------------- */
@@ -261,6 +261,7 @@
     {k:"creat",l:"Creatinine",u:"mg/dL"},{k:"egfr",l:"eGFR",u:"mL/min"},{k:"glu",l:"Glucose",u:"mg/dL"},
     {k:"ph",l:"pH (ABG)",u:""},{k:"osm",l:"Osmolality",u:"mOsm/kg"}
   ];
+  var PRIMARY_LABS = {na:true,k:true,mg:true,ca:true};
 
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 
@@ -273,6 +274,7 @@
     if(prefill && (prefill.labs || prefill.pt)){
       if(prefill.labs) Object.keys(prefill.labs).forEach(function(k){ var v=parseFloat(prefill.labs[k]); if(!isNaN(v)&&inRange(k,v)) S.labs[k]=v; });
       if(prefill.pt) Object.keys(prefill.pt).forEach(function(k){ if(prefill.pt[k]!=null&&prefill.pt[k]!=="") S.pt[(k==="dx"?"diagnosis":k)]=prefill.pt[k]; });
+      S.moreLabs=LAB_FIELDS.some(function(f){return !PRIMARY_LABS[f.k]&&S.labs[f.k]!=null;});
       S.analyzed=false; S.results=null;
       if(root){ root.innerHTML=view(); }
     }
@@ -295,7 +297,7 @@
     var unit = (S.units==="si"&&CONV[f.k])? CONV[f.k].si : f.u;
     var disp = toDisplay(f.k, S.labs[f.k], S.units);
     if(disp!=null) disp = Math.round(disp*100)/100;
-    return '<label class="ece-f ece-lab"><span>'+esc(f.l)+(unit?' <i>'+esc(unit)+'</i>':'')+'</span><input type="number" step="any" inputmode="decimal" data-lab="'+f.k+'" value="'+esc(disp==null?"":disp)+'"></label>';
+    return '<label class="ece-lab"><span class="ece-lab-name">'+esc(f.l)+'</span><span class="ece-lab-reading"><input type="number" step="any" inputmode="decimal" data-lab="'+f.k+'" value="'+esc(disp==null?"":disp)+'" aria-label="'+esc(f.l)+(unit?' in '+esc(unit):'')+'">'+(unit?'<i>'+esc(unit)+'</i>':'')+'</span></label>';
   }
 
   function view(){
@@ -304,10 +306,15 @@
     +   '<button class="ece-back" data-act="close" aria-label="Back to ICU Dashboard">‹ <span>ICU Dashboard</span></button>'
     + '</div>'
     + '<div class="ece-scroll" id="eceScroll">'
-    +   '<header class="ece-hero"><div class="ece-kicker">ICU / CLINICAL TOOLS</div><h1 class="ece-h1">Electrolyte Correction Engine</h1><p class="ece-sub">Evidence-based ICU electrolyte management</p></header>'
-    +   '<section class="ece-sec"><h3>Patient information</h3><div class="ece-grid">'+PT_FIELDS.map(function(f){return fieldCard(f,S.pt[f.k]);}).join("")+'</div>'
-    +     '<div class="ece-toggles">'+PT_TOGGLES.map(function(t){return '<button type="button" class="ece-tog'+(S.pt[t.k]?" on":"")+'" data-tog="'+t.k+'" aria-pressed="'+(S.pt[t.k]?"true":"false")+'">'+esc(t.l)+'</button>';}).join("")+'</div></section>'
-    +   '<section class="ece-sec"><div class="ece-sec-h"><h3>Electrolytes & labs</h3><div class="ece-units" role="group" aria-label="Lab units"><button type="button" data-units="conv" aria-pressed="'+(S.units!=="si"?"true":"false")+'" class="'+(S.units!=="si"?"on":"")+'">Conventional</button><button type="button" data-units="si" aria-pressed="'+(S.units==="si"?"true":"false")+'" class="'+(S.units==="si"?"on":"")+'">SI</button></div></div><div class="ece-grid">'+LAB_FIELDS.map(function(f){return labCard(f);}).join("")+'</div></section>'
+    +   '<header class="ece-hero"><h1 class="ece-h1">Electrolyte Correction Engine</h1><p class="ece-sub">Patient details, labs and a plan in one place.</p></header>'
+    +   '<section class="ece-sec ece-patient"><h2>Patient information</h2><div class="ece-patient-card">'
+    +     '<div class="ece-patient-key">'+[PT_FIELDS[1],PT_FIELDS[2],PT_FIELDS[0]].map(function(f){return fieldCard(f,S.pt[f.k]);}).join("")+'</div>'
+    +     '<div class="ece-patient-detail">'+PT_FIELDS.slice(3).map(function(f){return fieldCard(f,S.pt[f.k]);}).join("")+'</div>'
+    +   '</div></section>'
+    +   '<section class="ece-sec ece-measurements"><div class="ece-sec-h"><h2>Electrolytes & labs</h2><div class="ece-units" role="group" aria-label="Lab units"><button type="button" data-units="conv" aria-pressed="'+(S.units!=="si"?"true":"false")+'" class="'+(S.units!=="si"?"on":"")+'">Conventional</button><button type="button" data-units="si" aria-pressed="'+(S.units==="si"?"true":"false")+'" class="'+(S.units==="si"?"on":"")+'">SI</button></div></div>'
+    +     '<div class="ece-lab-surface">'+LAB_FIELDS.filter(function(f){return !!PRIMARY_LABS[f.k];}).map(labCard).join("")+'<div class="ece-extra" id="eceExtraLabs"'+(S.moreLabs?'':' hidden')+'>'+LAB_FIELDS.filter(function(f){return !PRIMARY_LABS[f.k];}).map(labCard).join("")+'</div>'
+    +     '<button type="button" class="ece-expand" data-act="more-labs" aria-controls="eceExtraLabs" aria-expanded="'+(S.moreLabs?"true":"false")+'">'+(S.moreLabs?'Show fewer lab values':'Add more lab values')+' <span aria-hidden="true">'+(S.moreLabs?'−':'+')+'</span></button></div></section>'
+    +   '<section class="ece-sec ece-risks"><h2>Risk factors</h2><div class="ece-toggles'+(S.moreRisks?' expanded':'')+'" id="eceRiskFactors" role="group" aria-label="Risk factors">'+PT_TOGGLES.map(function(t){return '<button type="button" class="ece-tog'+(S.pt[t.k]?" on":"")+'" data-tog="'+t.k+'" aria-pressed="'+(S.pt[t.k]?"true":"false")+'">'+(S.pt[t.k]?'✓ ':'')+esc(t.l)+'</button>';}).join("")+'</div><button type="button" class="ece-risk-add" data-act="risk-list" aria-controls="eceRiskFactors" aria-expanded="'+(S.moreRisks?"true":"false")+'">'+(S.moreRisks?'Done adding factors':'+ Add factor')+'</button></section>'
     +   '<div id="eceResults">'+(S.analyzed?results():'')+'</div>'
     +   '<div class="ece-disc">Decision support only — conservative, guideline-referenced values. Verify every dose & rate against local protocol and the clinical context. Pending clinician review.</div>'
     + '</div>'
@@ -323,7 +330,7 @@
   // pure redundant decoration — .ece-chip/.ece-card/.pill already color-code by r.level via CSS
   // (border-left-color, background) — removed rather than kept as a second, AI-flavoured way of
   // saying the same thing the color already says.
-  function chip(r){ var d=disp(r); return '<div class="ece-chip '+r.level+'"><span class="nm">'+esc(r.name)+'</span><span class="vl">'+esc(d.v)+'</span><span class="sv">'+esc(r.severity)+'</span></div>'; }
+  function chip(r){ var d=disp(r); return '<div class="ece-chip '+r.level+'"><span class="nm">'+esc(r.name)+'</span><span class="vl">'+esc(d.v)+' <small>'+esc(d.u)+'</small></span><span class="sv">'+esc(r.severity)+'</span></div>'; }
   function card(r){
     var d=disp(r);
     return '<div class="ece-card '+r.level+'"><div class="ece-card-h"><span>'+esc(r.name)+'</span><b>'+esc(d.v)+' '+esc(d.u)+'</b><em class="pill '+r.level+'">'+esc(r.severity)+'</em></div>'
@@ -334,9 +341,9 @@
 
   function results(){
     var R=S.results; if(!R) return '';
-    var summary='<section class="ece-sec"><h3>Clinical summary</h3><div class="ece-chips">'+R.cards.map(chip).join("")+'</div></section>';
+    var summary='<section class="ece-sec ece-summary"><div class="ece-summary-surface"><h2>Clinical summary</h2><div class="ece-chips">'+R.cards.map(chip).join("")+'</div><button type="button" class="ece-plan-link" data-act="plan">View correction and monitoring plan <span aria-hidden="true">›</span></button></div></section>';
     var warns = R.warnings.length? '<section class="ece-sec"><h3>Clinical warnings</h3>'+R.warnings.map(function(w){return '<div class="ece-warn"><div class="wt">'+esc(w.t)+'</div><div class="wd">'+esc(w.d)+'</div></div>';}).join("")+'</section>' : '';
-    var engine='<section class="ece-sec"><h3>Correction engine</h3>'+R.cards.map(card).join("")+'</section>';
+    var engine='<section class="ece-sec ece-engine"><h3>Correction engine</h3>'+R.cards.map(card).join("")+'</section>';
     var insights = R.insights.length? '<section class="ece-sec"><h3>Smart clinical insights</h3>'+R.insights.map(function(i){return '<div class="ece-ins">'+esc(i)+'</div>';}).join("")+'</section>' : '';
     var mon='<section class="ece-sec"><h3>Monitoring plan</h3><div class="ece-card ok">'+R.monitoring.map(function(m){return '<div class="ece-row"><span class="k">'+esc(m[0])+'</span><span class="v">'+esc(m[1])+'</span></div>';}).join("")+'</div></section>';
     var ev='<section class="ece-sec"><h3>Evidence</h3><div class="ece-ev big">'+EVIDENCE.map(function(e){return '<span>'+esc(e)+'</span>';}).join("")+'</div></section>';
@@ -365,9 +372,12 @@
     root.addEventListener("click",function(e){
       var b=e.target.closest("[data-act],[data-tog],[data-units]"); if(!b) return;
       if(b.hasAttribute("data-units")){ var u=b.getAttribute("data-units"); if(u!==S.units){ readInputs(); S.units=u; root.innerHTML=view(); } return; }
-      if(b.hasAttribute("data-tog")){ var k=b.getAttribute("data-tog"); S.pt[k]=!S.pt[k]; b.classList.toggle("on"); b.setAttribute("aria-pressed",S.pt[k]?"true":"false"); return; }
+      if(b.hasAttribute("data-tog")){ var k=b.getAttribute("data-tog"); S.pt[k]=!S.pt[k]; b.classList.toggle("on"); b.setAttribute("aria-pressed",S.pt[k]?"true":"false"); b.textContent=(S.pt[k]?"✓ ":"")+PT_TOGGLES.filter(function(t){return t.k===k;})[0].l; return; }
       var a=b.getAttribute("data-act");
       if(a==="close") return close();
+      if(a==="more-labs"){ S.moreLabs=!S.moreLabs; var extra=root.querySelector("#eceExtraLabs"); if(extra) extra.hidden=!S.moreLabs; b.setAttribute("aria-expanded",S.moreLabs?"true":"false"); b.innerHTML=(S.moreLabs?'Show fewer lab values':'Add more lab values')+' <span aria-hidden="true">'+(S.moreLabs?'−':'+')+'</span>'; return; }
+      if(a==="risk-list"){ S.moreRisks=!S.moreRisks; var risks=root.querySelector("#eceRiskFactors"); if(risks) risks.classList.toggle("expanded",S.moreRisks); b.setAttribute("aria-expanded",S.moreRisks?"true":"false"); b.textContent=S.moreRisks?'Done adding factors':'+ Add factor'; return; }
+      if(a==="plan"){ var plan=root.querySelector(".ece-engine"); if(plan) plan.scrollIntoView({behavior:"smooth",block:"start"}); return; }
       if(a==="analyze") return analyze();
     });
   }
@@ -379,57 +389,50 @@
     if(document.getElementById("ece-css")) return;
     var st=document.createElement("style"); st.id="ece-css";
     st.textContent=[
-      ".ece{--bg:#fff;--panel:#fff;--ink:#172722;--mut:#576a62;--line:#d8e1dc;--tl:#176b55;--red:#a82932;--amb:#895716;--ok:#376b53;--f:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;inset:0;z-index:940;background:var(--bg);color:var(--ink);font-family:var(--f);display:flex;flex-direction:column;opacity:0;transition:opacity .18s;overflow:hidden;pointer-events:none}",
+      ".ece{--ece-bg:var(--paper,#f7faf6);--ece-surface:var(--panel,#fff);--ece-ink:var(--ink,#19362b);--ece-muted:var(--slate-soft,#63796d);--ece-line:var(--line,#d4e2d7);--ece-accent:var(--teal,#0e6e63);--ece-tint:color-mix(in srgb,var(--ece-accent) 10%,var(--ece-surface));--ece-tint-strong:color-mix(in srgb,var(--ece-accent) 17%,var(--ece-surface));--ece-danger:var(--red,#a82932);--ece-warning:var(--amber,#895716);--ece-ok:var(--green,#376b53);--ece-on-accent:#fff;--ece-font:var(--sans,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif);position:fixed;inset:0;z-index:940;background:var(--ece-bg);color:var(--ece-ink);font-family:var(--ece-font);display:flex;flex-direction:column;opacity:0;transition:opacity .18s;overflow:hidden;pointer-events:none}",
       ".ece.on{opacity:1;pointer-events:auto}",
-      "body.dark .ece,body.v3-dark .ece{--bg:#121b18;--panel:#121b18;--ink:#edf3ef;--mut:#a5b8ac;--line:#34483e;--tl:#8ed8b3;--red:#ff9a9e;--amb:#f1c078;--ok:#9dd3af}",
-      ".ece *{box-sizing:border-box}.ece button,.ece input,.ece select{font-family:var(--f)}",
-      ".ece-top{flex:none;background:var(--bg);padding:calc(10px + env(safe-area-inset-top)) 20px 0}",
-      ".ece-back{display:inline-flex;align-items:center;gap:7px;min-height:44px;border:0;background:none;color:var(--tl);font-size:14px;font-weight:650;cursor:pointer;padding:0 4px}",
-      ".ece-back:focus-visible,.ece-tog:focus-visible,.ece-units button:focus-visible,.ece-go:focus-visible{outline:2px solid var(--tl);outline-offset:3px}",
-      ".ece-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 20px calc(110px + env(safe-area-inset-bottom));scrollbar-gutter:stable}",
-      ".ece-scroll>*{max-width:1060px;margin-left:auto;margin-right:auto}",
-      ".ece-hero{padding:30px 0 28px;border-bottom:1px solid var(--line)}",
-      ".ece-kicker{font-size:11px;font-weight:750;letter-spacing:.12em;color:var(--tl)}",
-      ".ece-h1{font-size:clamp(28px,4vw,40px);line-height:1.12;font-weight:720;letter-spacing:-.035em;margin:14px 0 0}",
-      ".ece-sub{font-size:14px;line-height:1.5;color:var(--mut);margin:9px 0 0;max-width:56ch}",
-      ".ece-sec{padding:25px 0 4px;border-bottom:1px solid var(--line)}",
-      ".ece-sec>h3,.ece-sec-h>h3{font-size:16px;line-height:1.3;font-weight:700;letter-spacing:-.01em;margin:0 0 16px}",
-      ".ece-sec-h{display:flex;align-items:start;justify-content:space-between;gap:16px}",
-      ".ece-units{display:inline-flex;gap:0;border-bottom:1px solid var(--line);flex:none}",
-      ".ece-units button{border:0;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;color:var(--mut);font-size:12px;font-weight:600;padding:2px 10px 9px;min-height:34px;cursor:pointer}",
-      ".ece-units button.on{border-bottom-color:var(--tl);color:var(--ink)}",
-      ".ece-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}",
-      "@media(min-width:700px){.ece-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.ece-lab{grid-column:auto}}",
-      "@media(min-width:960px){.ece-sec:has(.ece-lab) .ece-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}",
-      ".ece-f{display:flex;flex-direction:column;gap:3px;min-width:0;padding:11px 0 12px;border-bottom:1px solid var(--line)}",
-      ".ece-f>span{font-size:12px;font-weight:620;line-height:1.4;color:var(--mut)}.ece-f>span i{font-style:normal;font-weight:450}",
-      ".ece-f input,.ece-f select{border:0;border-radius:0;background:transparent;color:var(--ink);font-size:18px;font-weight:620;line-height:1.3;width:100%;min-height:31px;outline:0;padding:0;font-variant-numeric:tabular-nums}",
-      ".ece-f:focus-within{border-bottom:2px solid var(--tl);padding-bottom:11px}.ece-f:focus-within>span{color:var(--tl)}",
-      ".ece-toggles{display:flex;flex-wrap:wrap;gap:0 22px;margin:16px 0 10px}",
-      ".ece-tog{border:0;border-bottom:2px solid transparent;background:none;color:var(--mut);font-size:13px;font-weight:600;min-height:40px;padding:7px 0;cursor:pointer}",
-      ".ece-tog.on{border-bottom-color:var(--tl);color:var(--tl)}",
-      ".ece-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}",
-      "@media(min-width:700px){.ece-chips{grid-template-columns:repeat(3,minmax(0,1fr))}}",
-      ".ece-chip{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:4px 10px;padding:12px 0;border-bottom:1px solid var(--line);min-width:0}",
-      ".ece-chip .nm{font-size:13px;font-weight:650}.ece-chip .vl{font-size:21px;font-weight:720;letter-spacing:-.025em;font-variant-numeric:tabular-nums;text-align:right}.ece-chip .sv{grid-column:1/-1;font-size:11px;font-weight:650;color:var(--mut)}",
-      ".ece-chip.red .sv,.ece-chip.crit .sv{color:var(--red)}.ece-chip.amber .sv{color:var(--amb)}.ece-chip.ok .sv{color:var(--ok)}",
-      ".ece-card{padding:0 0 18px;margin:0 0 20px;border-bottom:1px solid var(--line)}",
-      ".ece-card:last-child{margin-bottom:0;border-bottom:0}",
-      ".ece-card-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 12px}.ece-card-h>span{font-size:18px;font-weight:710;letter-spacing:-.02em}.ece-card-h>b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}",
-      ".ece-card-h .pill{margin-left:auto;font-size:12px;font-style:normal;font-weight:650;color:var(--mut)}",
-      ".ece-card-h .pill.red,.ece-card-h .pill.crit{color:var(--red)}.ece-card-h .pill.amber{color:var(--amb)}.ece-card-h .pill.ok{color:var(--ok)}",
-      ".ece-row{display:grid;grid-template-columns:minmax(130px,28%) 1fr;gap:14px;padding:9px 0;border-top:1px solid var(--line);font-size:13px;line-height:1.5}",
-      ".ece-row .k{color:var(--mut);font-weight:600}.ece-row .v{min-width:0}.ece-row .v b{color:var(--ink)}",
-      ".ece-ev{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:12px;color:var(--mut)}.ece-ev span{font-size:11px;line-height:1.5}.ece-ev span+span:before{content:'·';margin-right:12px}",
-      ".ece-ev.big{padding-bottom:16px}.ece-ev.big span{font-size:12px}",
-      ".ece-warn{padding:13px 0;border-top:1px solid var(--line)}.ece-warn .wt{font-size:14px;font-weight:700;color:var(--red)}.ece-warn .wd{font-size:13px;line-height:1.5;margin-top:4px}",
-      ".ece-ins{padding:12px 0;border-top:1px solid var(--line);font-size:13px;line-height:1.55}",
-      ".ece-disc{padding:18px 0 8px;font-size:11px;line-height:1.6;color:var(--mut)}",
-      ".ece-cta{flex:none;padding:10px 20px calc(10px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line)}",
-      ".ece-go{display:block;width:min(100%,1060px);margin:auto;border:0;border-radius:4px;background:#176b55;color:#fff;font-size:14px;font-weight:700;min-height:48px;padding:11px 18px;cursor:pointer}",
-      ".ece-go:active{filter:brightness(.9)}",
-      ".ece-toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(10px);background:#172722;color:#fff;font:600 13px var(--f);padding:11px 18px;border-radius:4px;z-index:960;opacity:0;transition:.2s;pointer-events:none}.ece-toast.on{opacity:1;transform:translateX(-50%)}",
-      "@media(max-width:400px){.ece-scroll{padding-left:16px;padding-right:16px}.ece-sec-h{flex-wrap:wrap}.ece-row{grid-template-columns:1fr;gap:2px}.ece-card-h .pill{margin-left:0;width:100%}}",
+      "body.dark .ece,body.v3-dark .ece{--ece-on-accent:#091814;color-scheme:dark}",
+      ".ece *{box-sizing:border-box}.ece button,.ece input,.ece select{font-family:var(--ece-font)}",
+      ".ece-top{flex:none;padding:calc(8px + env(safe-area-inset-top)) 20px 0;background:var(--ece-bg)}",
+      ".ece-back{display:inline-flex;align-items:center;gap:7px;min-height:44px;border:0;background:none;color:var(--ece-accent);font-size:14px;font-weight:700;cursor:pointer;padding:0 4px}",
+      ".ece :is(button,input,select):focus-visible{outline:2px solid var(--ece-accent);outline-offset:3px}",
+      ".ece-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 20px calc(105px + env(safe-area-inset-bottom));scrollbar-gutter:stable}",
+      ".ece-scroll>*{max-width:760px;margin-left:auto;margin-right:auto}",
+      ".ece-hero{padding:23px 0 13px}.ece-h1{max-width:18ch;font-size:clamp(30px,5vw,39px);line-height:1.12;font-weight:740;letter-spacing:-.035em;margin:0}.ece-sub{font-size:14px;line-height:1.5;color:var(--ece-muted);margin:10px 0 0}",
+      ".ece-sec{margin-top:26px}.ece-sec>h2,.ece-sec-h>h2,.ece-sec>h3{font-size:20px;line-height:1.25;letter-spacing:-.02em;font-weight:720;margin:0 0 14px}",
+      ".ece-patient{margin-top:17px}.ece-patient>h2{font-size:15px;color:var(--ece-muted);margin-bottom:10px}",
+      ".ece-patient-card{background:var(--ece-tint);border-radius:18px;padding:16px 18px}",
+      ".ece-patient-key{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-bottom:13px}",
+      ".ece-f{display:flex;flex-direction:column;min-width:0;gap:2px}.ece-f>span{font-size:11px;font-weight:650;color:var(--ece-muted)}.ece-f>span i{font-style:normal;font-weight:450}",
+      ".ece-f input,.ece-f select{border:0;background:transparent;color:var(--ece-ink);width:100%;min-width:0;min-height:32px;padding:0;font-size:16px;font-weight:650;outline:0;font-variant-numeric:tabular-nums}",
+      ".ece-patient-key .ece-f input,.ece-patient-key .ece-f select{font-size:21px;font-weight:720}",
+      ".ece-f:focus-within>span{color:var(--ece-accent)}",
+      ".ece-patient-detail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px;border-top:1px solid var(--ece-line);padding-top:13px}",
+      ".ece-patient-detail .ece-f:last-child{grid-column:1/-1}",
+      ".ece-sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}.ece-sec-h>h2{margin-bottom:13px}",
+      ".ece-units{display:inline-flex;gap:16px;align-items:center;padding-bottom:12px}.ece-units button{border:0;background:none;color:var(--ece-muted);font-size:13px;font-weight:600;min-height:32px;padding:2px 0;cursor:pointer}.ece-units button.on{color:var(--ece-accent);font-weight:750;text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}",
+      ".ece-lab-surface{background:var(--ece-surface);border:1px solid var(--ece-line);border-radius:18px;padding:5px 17px 4px;overflow:hidden}",
+      ".ece-lab{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,auto);align-items:center;gap:12px;min-height:64px;border-bottom:1px solid var(--ece-line);font-size:14px;cursor:text}",
+      ".ece-lab-name{font-weight:650;color:var(--ece-ink)}.ece-lab-reading{display:flex;justify-content:flex-end;align-items:baseline;gap:8px;min-width:0}",
+      ".ece-lab input{border:0;background:transparent;color:var(--ece-ink);width:7ch;min-width:0;padding:7px 0;text-align:right;font-size:20px;font-weight:720;outline:0;font-variant-numeric:tabular-nums}.ece-lab input::-webkit-inner-spin-button{-webkit-appearance:none}",
+      ".ece-lab i{font-size:11px;color:var(--ece-muted);font-style:normal;white-space:nowrap}.ece-lab:focus-within{background:var(--ece-tint)}",
+      ".ece-extra[hidden]{display:none}.ece-expand{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;border:0;background:none;color:var(--ece-accent);font-size:14px;font-weight:700;text-align:left;cursor:pointer;padding:8px 0}.ece-expand span{font-size:21px;font-weight:450}",
+      ".ece-risks>h2{font-size:16px}.ece-toggles{display:inline-flex;flex-wrap:wrap;gap:7px;vertical-align:middle}.ece-toggles:not(.expanded) .ece-tog:not(.on){display:none}",
+      ".ece-tog,.ece-risk-add{border:1px solid var(--ece-line);border-radius:999px;background:var(--ece-surface);color:var(--ece-muted);font-size:12px;font-weight:650;min-height:38px;padding:7px 13px;cursor:pointer}.ece-tog.on{border-color:transparent;background:var(--ece-tint-strong);color:var(--ece-accent)}.ece-risk-add{margin-left:7px;color:var(--ece-accent)}",
+      ".ece-summary-surface{background:var(--ece-tint);border-radius:18px;padding:17px 18px}.ece-summary h2{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ece-muted);margin:0 0 8px}",
+      ".ece-chip{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;column-gap:10px;padding:11px 0;border-bottom:1px solid var(--ece-line)}.ece-chip .nm{font-size:15px;font-weight:700}.ece-chip .vl{font-size:18px;font-weight:730;font-variant-numeric:tabular-nums;text-align:right}.ece-chip .vl small{font-size:11px;font-weight:500;color:var(--ece-muted)}.ece-chip .sv{grid-column:1/-1;font-size:12px;font-weight:650;color:var(--ece-muted);margin-top:3px}",
+      ".ece-chip.red .sv,.ece-chip.crit .sv{color:var(--ece-danger)}.ece-chip.amber .sv{color:var(--ece-warning)}.ece-chip.ok .sv{color:var(--ece-ok)}",
+      ".ece-plan-link{display:block;width:100%;border:0;background:none;color:var(--ece-accent);font-size:13px;font-weight:700;text-align:left;min-height:43px;padding:10px 0 0;cursor:pointer}.ece-plan-link span{font-size:18px;margin-left:4px}",
+      ".ece-card{background:var(--ece-surface);border:1px solid var(--ece-line);border-radius:16px;padding:16px;margin-bottom:12px}.ece-card-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:9px}.ece-card-h>span{font-size:18px;font-weight:720}.ece-card-h>b{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}.ece-card-h .pill{margin-left:auto;font-size:11px;font-style:normal;font-weight:650;color:var(--ece-muted)}",
+      ".ece-card-h .pill.red,.ece-card-h .pill.crit{color:var(--ece-danger)}.ece-card-h .pill.amber{color:var(--ece-warning)}.ece-card-h .pill.ok{color:var(--ece-ok)}",
+      ".ece-row{display:grid;grid-template-columns:minmax(120px,28%) 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--ece-line);font-size:13px;line-height:1.5}.ece-row .k{color:var(--ece-muted);font-weight:650}.ece-row .v{min-width:0}",
+      ".ece-ev{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:12px;color:var(--ece-muted)}.ece-ev span{font-size:11px;line-height:1.5}.ece-ev span+span:before{content:'·';margin-right:12px}.ece-ev.big{padding-bottom:8px}.ece-ev.big span{font-size:12px}",
+      ".ece-warn{background:color-mix(in srgb,var(--ece-danger) 8%,var(--ece-surface));border-radius:12px;padding:12px 14px;margin-bottom:9px}.ece-warn .wt{font-size:14px;font-weight:750;color:var(--ece-danger)}.ece-warn .wd{font-size:13px;line-height:1.5;margin-top:4px}",
+      ".ece-ins{padding:11px 0;border-top:1px solid var(--ece-line);font-size:13px;line-height:1.55}.ece-disc{padding:18px 0 9px;font-size:11px;line-height:1.6;color:var(--ece-muted)}",
+      ".ece-cta{flex:none;padding:10px 20px calc(10px + env(safe-area-inset-bottom));background:var(--ece-bg);border-top:1px solid var(--ece-line)}",
+      ".ece-go{display:block;width:min(100%,760px);margin:auto;border:0;border-radius:14px;background:var(--ece-accent);color:var(--ece-on-accent);font-size:14px;font-weight:730;min-height:50px;padding:10px 16px;cursor:pointer}.ece-go:active{filter:brightness(.92)}",
+      ".ece-toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(10px);background:var(--ece-ink);color:var(--ece-bg);font:600 13px var(--ece-font);padding:11px 18px;border-radius:10px;z-index:960;opacity:0;transition:.2s;pointer-events:none}.ece-toast.on{opacity:1;transform:translateX(-50%)}",
+      "@media(max-width:420px){.ece-scroll{padding-left:16px;padding-right:16px}.ece-patient-card{padding:14px}.ece-patient-key{gap:8px}.ece-lab{grid-template-columns:minmax(0,1fr) minmax(114px,auto)}.ece-row{grid-template-columns:1fr;gap:2px}.ece-card-h .pill{margin-left:0;width:100%}}",
       "@media(prefers-reduced-motion:reduce){.ece,.ece-toast{transition:none}}"
     ].join("\n");
     document.head.appendChild(st);
