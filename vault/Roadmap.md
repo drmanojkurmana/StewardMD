@@ -198,3 +198,13 @@ native-speaker check of the Telugu and Hindi consent forms and handouts.
 - [x] **On-device** (PR #1245, 2026-09-26): `maik-local.js` runs an ES5 copy of the meta-talk filter,
   pinned to the Cloud file by a parity test. Move both copies into one kb/ai UMD file if a third caller
   appears. The fine-tuned framing ("Reference material ... above") is unchanged.
+
+## Clinical Reasoning + Antibiotic engine accuracy
+Plan: `kb/validation/PLAN-DX-ABX-10.md` (baseline audit `kb/validation/AUDIT-2026-09-26.md`). See [[Clinical Reasoning]].
+- [ ] Phase 0: data split, held-out set to 300, adjudicated abx labels, CI gate
+- [ ] Phase 1: gate respects `antibioticRelevant`; can't-miss rules (`smd_gate_v2`)
+- [ ] Phase 2: text extraction synonyms + numeric labs + confirm chips (`smd_nlp_v2`)
+- [ ] Phase 3: base-rate priors, anchors, pertinent negatives, confusion clusters (`smd_rank_v3`)
+- [ ] Phase 4: calibrated confidence (`smd_calib`)
+- [ ] Phase 5: one drug resolver with host modifiers, adjudicated regimens (`smd_rx_v2`)
+- [ ] Phase 6: shadow-mode validation + clinician sign-off
