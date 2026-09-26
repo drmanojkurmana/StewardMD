@@ -452,11 +452,13 @@
   /* G2: what this device holds, on every screen. Hidden only when online with nothing held. */
   function offlineBar(state) {
     var s = state.offline, WO = G.WARD_OFFLINE;
-    if (!s || !WO || (s.online && !s.waiting && !s.conflicts && !s.refused && !s.readFailed && !s.authNeeded)) return '<div id="wOffBar"></div>';
+    if (!s || !WO || (s.online && !s.waiting && !s.conflicts && !s.refused && !s.readFailed && !s.authNeeded && !s.others)) return '<div id="wOffBar"></div>';
     var back = (s.conflicts || 0) + (s.refused || 0);
     return '<div id="wOffBar" class="w-hint warn" role="status">' + ms(s.online ? "sync_problem" : "cloud_off") + "<b>" + esc(WO.label(s, wT).text) + "</b>" +
       (s.waiting ? " &middot; " + wTH("ward.saved-on-this-device-not-yet", "{waiting} saved on this device, not yet sent", { waiting: esc(s.waiting) }, "waiting") : (!s.online ? " &middot; " + wTH("ward.bedside-entries-will-be-kept-on", "bedside entries will be kept on this device") : "")) +
       (s.refused ? " &middot; " + wTH("ward.refused3", "{refused} refused", { refused: esc(s.refused) }, "refused", 1) : "") +
+      // DATA-01: another user's unsent entries, kept on this device for them; never shown or sent as this user.
+      (s.others ? " &middot; " + wTH("ward.offline-others-waiting", "{others} unsent from another user on this device; they send when that person signs in here", { others: esc(s.others) }, "others") : "") +
       ' <button class="w-btn ghost sm" data-w-act="offlinereview">' + (back ? wTH("ward.review2", "Review ({back})", { back: back }, "back") : wTH("ward.show", "Show")) + "</button></div>";
   }
   var OFF_SKIP = /^(orgId|idempotencyKey|expectedVersion|expectedOrderVersion|meta|writtenBy|history|resourceType|patientId|encounterId|id|tenantId|source|patient)$/;

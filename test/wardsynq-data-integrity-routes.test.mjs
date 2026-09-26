@@ -195,3 +195,23 @@ test("DATA-07: a legacy import that stopped between the registration and the cha
   assert.equal(again.counts.matched, 1, "a third run finds it by its legacy number");
   assert.equal(again.counts.create, 0);
 });
+
+test("DATA-04: a vitals save where no reading was written is a failure the outbox keeps, not ok:true", async () => {
+  seedHospital();
+  const p = await admittedPatient();
+  const repo = H.RECORD, realAppend = repo.append.bind(repo);
+  repo.append = async (t, recs, c) => { if (recs.some((r) => r.resourceType === "Observation")) throw new Error("D1_ERROR: Network connection lost."); return realAppend(t, recs, c); };
+  const r = await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: p.encounterId, patientId: p.patientId, vitals: { sbp: "82", pulse: "130" }, recordedAt: new Date(Date.now() - 60000).toISOString(), idempotencyKey: "off-abc-0001" });
+  repo.append = realAppend;
+  assert.equal(r.__status, 502, JSON.stringify(r));
+  assert.equal(r.ok, false);
+  assert.equal(r.written, 0);
+  const { readFileSync } = await import("node:fs");
+  const vm = await import("node:vm");
+  const sb = {}; sb.window = sb; vm.runInNewContext(readFileSync(new URL("../ward-offline.js", import.meta.url), "utf8"), sb);
+  assert.equal(sb.WARD_OFFLINE.classify(r.__status, r), "retry", "the outbox keeps it to send again");
+  // The resend saves them.
+  const again = await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: p.encounterId, patientId: p.patientId, vitals: { sbp: "82", pulse: "130" }, recordedAt: new Date(Date.now() - 60000).toISOString(), idempotencyKey: "off-abc-0001" });
+  assert.equal(again.__status, 200, JSON.stringify(again));
+  assert.equal(again.written, 2);
+});

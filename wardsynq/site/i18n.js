@@ -2600,6 +2600,7 @@
     "ward.offline-offline-waiting": "Offline ({n} waiting)",
     "ward.offline-online": "Online",
     "ward.offline-online-waiting": "Online ({n} waiting)",
+    "ward.offline-others-waiting": "{others} unsent from another user on this device; they send when that person signs in here",
     "ward.offline-order-changed": "CONFLICT: the order changed after this dose was charted. Nothing was recorded. Compare it with the order as it is now.",
     "ward.offline-record-changed": "CONFLICT: this {what} changed on the server after you saw it. Nothing was overwritten.",
     "ward.offline-saved-not-yet-sent": "Saved on this device, not yet sent.",
