@@ -148,6 +148,46 @@
     { "id": "rf_anorectal", "label": "Rectal or abdominal mass, or unexplained anal mass or ulcer", "type": "check" },
     { "id": "rf_hard_lump", "label": "Hard, fixed lump or non-healing ulcer with rolled or everted edge", "type": "check" }
    ]
+  },
+  {
+   "id": "safety-checklist-sign-in",
+   "title": "WHO Surgical Safety Checklist: Sign In (before induction of anaesthesia)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "ssc_in_identity", "label": "Patient has confirmed identity, site, procedure and consent", "type": "check", "hint": "with at least the nurse and anaesthetist" },
+    { "id": "ssc_in_site", "label": "Site marked", "type": "select", "opts": ["Yes", "Not applicable"] },
+    { "id": "ssc_in_anaesthesia", "label": "Anaesthesia machine and medication check complete", "type": "check" },
+    { "id": "ssc_in_oximeter", "label": "Pulse oximeter on the patient and functioning", "type": "check" },
+    { "id": "ssc_in_allergy", "label": "Known allergy", "type": "select", "opts": ["No", "Yes"] },
+    { "id": "ssc_in_airway", "label": "Difficult airway or aspiration risk", "type": "select", "opts": ["No", "Yes, and equipment and assistance available"] },
+    { "id": "ssc_in_blood_loss", "label": "Risk of blood loss over 500 mL (7 mL/kg in children)", "type": "select", "opts": ["No", "Yes, and two IVs or central access and fluids planned"] }
+   ]
+  },
+  {
+   "id": "safety-checklist-time-out",
+   "title": "WHO Surgical Safety Checklist: Time Out (before skin incision)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "ssc_to_team", "label": "All team members have introduced themselves by name and role", "type": "check", "hint": "with the nurse, anaesthetist and surgeon" },
+    { "id": "ssc_to_confirm", "label": "Patient's name, procedure and incision site confirmed", "type": "check" },
+    { "id": "ssc_to_antibiotic", "label": "Antibiotic prophylaxis given within the last 60 minutes", "type": "select", "opts": ["Yes", "Not applicable"] },
+    { "id": "ssc_to_surgeon", "label": "Surgeon: critical or non-routine steps, case duration and anticipated blood loss reviewed", "type": "check" },
+    { "id": "ssc_to_anaesthetist", "label": "Anaesthetist: patient-specific concerns reviewed", "type": "check" },
+    { "id": "ssc_to_nursing", "label": "Nursing team: sterility (including indicator results) confirmed, equipment issues or concerns raised", "type": "check" },
+    { "id": "ssc_to_imaging", "label": "Essential imaging displayed", "type": "select", "opts": ["Yes", "Not applicable"] }
+   ]
+  },
+  {
+   "id": "safety-checklist-sign-out",
+   "title": "WHO Surgical Safety Checklist: Sign Out (before the patient leaves the operating room)",
+   "target": "management_plan",
+   "fields": [
+    { "id": "ssc_out_procedure", "label": "Nurse verbally confirms the name of the procedure", "type": "check", "hint": "with the nurse, anaesthetist and surgeon" },
+    { "id": "ssc_out_counts", "label": "Instrument, sponge and needle counts complete", "type": "check" },
+    { "id": "ssc_out_specimen", "label": "Specimen labelling (labels read aloud, including patient name)", "type": "select", "opts": ["Done", "No specimen"] },
+    { "id": "ssc_out_equipment", "label": "Equipment problems to be addressed", "type": "select", "opts": ["None", "Yes, reported"] },
+    { "id": "ssc_out_recovery", "label": "Key concerns for recovery and management of this patient", "type": "text", "hint": "agreed by the surgeon, anaesthetist and nurse" }
+   ]
   }
  ],
  "investigations": [
@@ -198,6 +238,7 @@
   { "org": "Association of Breast Surgery and partners", "title": "Best practice diagnostic guidelines for patients presenting with breast symptoms", "year": 2010, "url": "https://associationofbreastsurgery.org.uk/media/cvtju1zs/best-practice-diagnostic-guidelines-for-patients-presenting-with-breast-symptoms.pdf" },
   { "org": "HerniaSurge Group", "title": "Update of the international HerniaSurge guidelines for groin hernia management (BJS Open)", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10588975/" },
   { "org": "NICE", "title": "NG125 Surgical site infections: prevention and treatment", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng125" },
+  { "org": "WHO", "title": "Surgical Safety Checklist (revised January 2009)", "year": 2009, "url": "https://www.who.int/docs/default-source/patient-safety/9789241598590-eng-checklist.pdf" },
   { "org": "NHS", "title": "Hernia", "year": 2026, "url": "https://www.nhs.uk/conditions/hernia/" }
  ],
  "review": { "status": "ai_drafted", "compiled": "2026-09-25" }

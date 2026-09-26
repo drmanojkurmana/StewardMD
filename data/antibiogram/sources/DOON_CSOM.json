@@ -1,0 +1,86 @@
+{
+ "id": "DOON_CSOM",
+ "kind": "study",
+ "inst": "DOON_DEHRADUN",
+ "institution": "Government Doon Medical College",
+ "short": "Doon MC Dehradun",
+ "city": "Dehradun",
+ "state": "Uttarakhand",
+ "region": "north",
+ "sector": "government",
+ "year": 2024,
+ "period": "August 2022 to January 2024",
+ "citation": "Cureus 2024 (PMC11483178)",
+ "doi": null,
+ "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11483178/",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Method: Tables 2 to 4 (pages 5 and 6) print sensitive, intermediate and resistant counts and percentages; only % sensitive was entered, as printed. The separate MRSA table (Table 4) was not merged into the S. aureus row. Ceftazidime was tested on 45 P. aeruginosa isolates; amikacin in the discussion rests on 26 isolates."
+ },
+ "notes": "Sammal et al. (Cureus 2024) studied ear discharge from patients with chronic suppurative otitis media at Government Doon Medical College, Dehradun, August 2022 to January 2024: 129 culture-positive isolates, tested by VITEK 2 with CLSI breakpoints. Only P. aeruginosa (46 isolates) and S. aureus (23) have full antibiograms. Figures are % susceptible as printed; intermediate results are not counted as susceptible. The S. aureus figures cover the 23 isolates of the paper's S. aureus table; the 18 MRSA isolates had a separate table and are not included, so MRSA made up about 43.9% of all S. aureus. Some drugs were tested on fewer isolates (for example piperacillin-tazobactam 38, imipenem 44). P. aeruginosa amikacin (57.8%) comes from the paper's discussion, not its table, and the cefoperazone figure is cefoperazone-sulbactam.",
+ "issues": [
+  "Lead 2026-09-26: marked with a focus (one condition, ear discharge in CSOM): shown, never pooled into pus and wound figures, not a profile."
+ ],
+ "rows": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 46,
+   "specimen_as_printed": "ear discharge (CSOM)",
+   "s": {
+    "piptazo": 84.2,
+    "ceftazidime": 68.9,
+    "cefepime": 72.1,
+    "imipenem": 72.7,
+    "meropenem": 72.1,
+    "ciprofloxacin": 37,
+    "levofloxacin": 34.9,
+    "amikacin": 57.8,
+    "cefoperazone_sulbactam": 61.4
+   },
+   "notes": {
+    "amikacin": "reported in Discussion text (57.8%, 26 isolates), not in Table 2",
+    "cefoperazone_sulbactam": "cefoperazone-sulbactam combination"
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 23,
+   "specimen_as_printed": "ear discharge (CSOM)",
+   "s": {
+    "gentamicin": 86.4,
+    "ciprofloxacin": 4.5,
+    "levofloxacin": 9.1,
+    "cotrimoxazole": 50,
+    "erythromycin": 36.4,
+    "clindamycin": 77.3,
+    "linezolid": 100,
+    "daptomycin": 100,
+    "vancomycin": 90.9,
+    "tetracycline": 90.9
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 46
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 23
+  }
+ ],
+ "excluded": [],
+ "focus": "ear discharge of patients with chronic suppurative otitis media"
+}

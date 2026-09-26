@@ -64,6 +64,31 @@
    ]
   },
   {
+   "id": "pre-eclampsia-screening",
+   "title": "Pre-eclampsia screening and aspirin",
+   "target": "pregnancy_comlications",
+   "alert": "Pre-eclampsia risk factor: advise aspirin 75 to 150 mg once daily from 12 weeks until birth for any 1 high-risk factor or more than 1 moderate-risk factor (NICE NG133). FIGO advises taking it at night (about 150 mg from 11 to 14 weeks until 36 weeks). Check BP and urine protein at every visit and follow the pre-eclampsia protocol.",
+   "fields": [
+    { "id": "pe_high_prev_htn", "label": "High risk: hypertensive disease in a previous pregnancy", "type": "check" },
+    { "id": "pe_high_ckd", "label": "High risk: chronic kidney disease", "type": "check" },
+    { "id": "pe_high_autoimmune", "label": "High risk: autoimmune disease such as SLE or antiphospholipid syndrome", "type": "check" },
+    { "id": "pe_high_diabetes", "label": "High risk: type 1 or type 2 diabetes", "type": "check" },
+    { "id": "pe_high_chronic_htn", "label": "High risk: chronic hypertension", "type": "check" },
+    { "id": "pe_mod_first", "label": "Moderate risk: first pregnancy", "type": "check" },
+    { "id": "pe_mod_age", "label": "Moderate risk: age 40 or over", "type": "check" },
+    { "id": "pe_mod_interval", "label": "Moderate risk: pregnancy interval over 10 years", "type": "check" },
+    { "id": "pe_mod_bmi", "label": "Moderate risk: BMI 35 kg/m2 or more at booking", "type": "check" },
+    { "id": "pe_mod_family", "label": "Moderate risk: family history of pre-eclampsia", "type": "check" },
+    { "id": "pe_mod_multiple", "label": "Moderate risk: multi-fetal pregnancy", "type": "check" },
+    { "id": "pe_map", "label": "Mean arterial pressure", "type": "number", "unit": "mmHg", "hint": "diastolic plus one third of the pulse pressure; use the MAP calculator" },
+    { "id": "pe_uta_pi", "label": "Uterine artery pulsatility index (mean), if done", "type": "number", "hint": "at the 11 to 13+6 week scan, where available (FIGO)" },
+    { "id": "pe_plgf", "label": "Serum PlGF (first trimester), if done", "type": "text", "hint": "value and MoM; cut-offs are assay-specific" },
+    { "id": "pe_combined_risk", "label": "First-trimester combined risk of preterm pre-eclampsia", "type": "text", "hint": "from a validated algorithm combining maternal factors, MAP, uterine artery PI and PlGF (FIGO), e.g. 1 in 50" },
+    { "id": "pe_plgf_test", "label": "PlGF-based test for suspected pre-eclampsia (sFlt-1/PlGF ratio or PlGF)", "type": "text", "hint": "20+0 to 36+6 weeks, with clinical assessment, to help rule in or rule out pre-eclampsia; use the assay's own cut-offs (NICE DG49)" },
+    { "id": "pe_aspirin", "label": "Aspirin", "type": "select", "opts": ["Not indicated", "Started today", "Already taking", "Contraindicated", "Declined"], "hint": "NICE NG133: 75 to 150 mg once daily from 12 weeks until birth for 1 high-risk factor or more than 1 moderate-risk factor" }
+   ]
+  },
+  {
    "id": "obstetric-examination",
    "title": "Obstetric examination",
    "target": "per_abdomen_exam",
@@ -139,7 +164,7 @@
   { "label": "Pap smear", "query": "Pap smear" }
  ],
  "protocols": ["routine-antenatal-care", "pre-eclampsia-eclampsia", "postpartum-haemorrhage", "gestational-diabetes", "gestational-diabetes-international", "anaemia-in-pregnancy", "anaemia-in-pregnancy-international", "preterm-labour", "ectopic-pregnancy", "contraception", "heavy-menstrual-bleeding", "polycystic-ovary-syndrome", "menopause", "postpartum-haemorrhage-india", "pre-eclampsia-eclampsia-india"],
- "calculators": ["edd", "ga_crl", "bishop", "iom_weight_gain", "apgar", "epds", "meows", "ctg"],
+ "calculators": ["edd", "ga_crl", "bishop", "map", "iom_weight_gain", "apgar", "epds", "meows", "ctg"],
  "advice": [
   {
    "id": "antenatal-danger-signs",
@@ -164,6 +189,9 @@
   { "org": "WHO", "title": "WHO recommendations on antenatal care for a positive pregnancy experience", "year": 2016, "url": "https://www.who.int/publications/i/item/9789241549912" },
   { "org": "ACOG", "title": "Committee Opinion 700: Methods for estimating the due date", "year": 2017, "url": "https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2017/05/methods-for-estimating-the-due-date" },
   { "org": "NICE", "title": "NG201 Antenatal care", "year": 2021, "url": "https://www.nice.org.uk/guidance/ng201" },
+  { "org": "NICE", "title": "Hypertension in pregnancy: diagnosis and management (NG133)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng133/chapter/recommendations" },
+  { "org": "NICE", "title": "DG49 PLGF-based testing to help diagnose suspected preterm pre-eclampsia", "year": 2022, "url": "https://www.nice.org.uk/guidance/dg49" },
+  { "org": "FIGO", "title": "The FIGO initiative on pre-eclampsia: a pragmatic guide for first-trimester screening and prevention", "year": 2019, "url": "https://obgyn.onlinelibrary.wiley.com/doi/10.1002/ijgo.12802" },
   { "org": "MoHFW, Government of India", "title": "Guidelines for antenatal care and skilled attendance at birth", "year": 2010, "url": "https://nhm.gov.in/images/pdf/programmes/maternal-health/guidelines/sba_guidelines_for_skilled_attendance_at_birth.pdf" }
  ],
  "review": { "status": "ai_drafted", "compiled": "2026-09-25" }

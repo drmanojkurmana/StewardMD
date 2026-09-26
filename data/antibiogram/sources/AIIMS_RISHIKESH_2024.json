@@ -1,0 +1,1319 @@
+{
+ "id": "AIIMS_RISHIKESH_2024",
+ "kind": "institution",
+ "inst": "AIIMS_RISHIKESH",
+ "institution": "All India Institute of Medical Sciences, Rishikesh",
+ "short": "AIIMS Rishikesh",
+ "city": "Rishikesh",
+ "state": "Uttarakhand",
+ "region": "north",
+ "sector": "government",
+ "year": 2024,
+ "period": "Not stated on the hospital antibiogram pages (book pages 104 to 106); the clinical antibiogram section of the same book (page 103) gives June 2024 to November 2024 for the General Medicine ICU clinical antibiogram",
+ "url": "https://aiimsrishikesh.edu.in/images/upload_documents/6%20Hospital%20antibiogram%2023-6-25.pdf",
+ "retrieved": "2026-09-26",
+ "citation": "Singh V, Singh M. AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in blood, urine and pus samples, book pages 104 to 106; Panda PK, Chackappen. General Medicine ICU Clinical Antibiogram (Pocketguide), book page 107. Rishikesh: All India Institute of Medical Sciences, Rishikesh.",
+ "reporting": "Percent susceptible by organism and location (OPD, IPD, and a few rows for OPD and IPD together) for blood, urine and pus, with the total number of isolates per row (no per-drug numbers tested). X marks not tested, intrinsic resistance or minimal isolates; NT and NA also appear. Colistin is given as % intermediate. Plus a General Medicine ICU clinical antibiogram for HAP/VAP (N=30 per organism) that combines laboratory susceptibility with clinical response.",
+ "method": "Not stated. The colistin column is labelled %I, consistent with CLSI breakpoints from 2020 onward (no susceptible category for colistin).",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "read from page images (scanned PDF, no text layer, pages rotated 90 degrees). Pages rendered at scale 5 and 6 and rotated upright. Pass 1 read each table in column groups of 8 to 9 drugs with the row labels, from the scale 5 render; pass 2 re-read it in different column groups of 10 to 14 drugs, split into separate row bands, from the scale 6 render. Every recorded cell agreed between the two passes; the header of each column group was re-checked. The clinical antibiogram (book page 107) was read whole and then in left and right halves at scale 6, with the same result."
+ },
+ "notes": "Hospital antibiogram pocket guide (book pages 103 to 107 of an AIIMS Rishikesh book; the PDF file name carries 23-6-25, presumably its upload date). The blood, urine and pus tables state no data period; the only period in the section is June 2024 to November 2024, given for the General Medicine ICU clinical antibiogram on book page 103, so the year 2024 is an assumption for the hospital tables. Locations: OPD is recorded as outpatients and IPD as all inpatients (set inpatient), because the tables have no separate ICU rows; the only ICU row is the General Medicine ICU clinical antibiogram. Rows printed 'OPD & IPD' are recorded as all settings; the urine S. aureus row prints 'OPD 19 IPD 17' with one row of values and is recorded as all settings with n = 36. Colistin is printed as % intermediate (CLSI has no susceptible category), recorded in the colistin column as the share not resistant. Organism names are printed with misspellings (Klebsilella, Pseudomonas aerogenosa, Stenotrophomas maltopholia, Acinetobacter baumani); each row note gives the printed name. The General Medicine ICU clinical antibiogram (HAP/VAP) is included for Klebsiella pneumoniae only, as a respiratory ICU row tagged as a hospital-acquired infection cohort; its figures combine laboratory results with clinical response. Its Acinetobacter baumannii row repeats, value for value, the August to October 2023 MICU clinical antibiogram (AIIMS_RISHIKESH_MICU_2023) and is left out here.",
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii complex",
+   "pheno": null,
+   "n": 219,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "piptazo": 14,
+    "ceftazidime": 28,
+    "cefepime": 13,
+    "meropenem": 16,
+    "imipenem": 14,
+    "ciprofloxacin": 17,
+    "levofloxacin": 17.3,
+    "cotrimoxazole": 28,
+    "amikacin": 17,
+    "gentamicin": 17,
+    "minocycline": 54,
+    "colistin": 97
+   },
+   "note": "Printed as Acinetobacter baumani complex. IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 25,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "piptazo": 52,
+    "cefuroxime": 5,
+    "ceftriaxone": 11,
+    "ceftazidime": 67,
+    "cefepime": 17,
+    "meropenem": 71,
+    "imipenem": 72,
+    "ertapenem": 58,
+    "ciprofloxacin": 9,
+    "cotrimoxazole": 28,
+    "amikacin": 76,
+    "gentamicin": 42,
+    "colistin": 100
+   },
+   "note": "Fewer than 30 isolates (marked * in the source). Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 124,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "piptazo": 27,
+    "amoxiclav": 22,
+    "cefuroxime": 2.6,
+    "ceftriaxone": 3.4,
+    "cefepime": 14,
+    "meropenem": 47,
+    "imipenem": 51,
+    "ertapenem": 41,
+    "ciprofloxacin": 2,
+    "cotrimoxazole": 22.2,
+    "amikacin": 65,
+    "gentamicin": 66,
+    "colistin": 99
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 14,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "piptazo": 21,
+    "amoxiclav": 17,
+    "cefuroxime": 20,
+    "ceftriaxone": 22,
+    "cefepime": 23,
+    "meropenem": 15,
+    "imipenem": 17,
+    "ertapenem": 20,
+    "ciprofloxacin": 14,
+    "cotrimoxazole": 21.4,
+    "amikacin": 21,
+    "gentamicin": 21,
+    "colistin": 93
+   },
+   "note": "Printed as Klebsilella pneumoniae. Fewer than 30 isolates (marked * in the source). Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 233,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "piptazo": 21,
+    "amoxiclav": 16,
+    "cefuroxime": 8.5,
+    "ceftriaxone": 8.3,
+    "cefepime": 16,
+    "meropenem": 28,
+    "imipenem": 25,
+    "ertapenem": 30,
+    "ciprofloxacin": 9,
+    "cotrimoxazole": 17.5,
+    "amikacin": 25,
+    "gentamicin": 22,
+    "colistin": 93
+   },
+   "note": "Printed as Klebsilella pneumoniae. IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 9,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "piptazo": 44,
+    "ceftazidime": 75,
+    "cefepime": 67,
+    "meropenem": 50,
+    "imipenem": 63,
+    "aztreonam": 20,
+    "ciprofloxacin": 75,
+    "levofloxacin": 42.9,
+    "amikacin": 64,
+    "colistin": 93
+   },
+   "conflict": {
+    "amikacin": "printed 64%, but the row has only 9 isolates and no whole number of 9 or fewer gives 64%",
+    "colistin": "printed 93% (% intermediate), but the row has only 9 isolates and no whole number of 9 or fewer gives 93%"
+   },
+   "note": "Fewer than 30 isolates (marked * in the source). Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out. Printed as Pseudomonas aerogenosa. Amikacin (64%) and colistin (93%) cannot come from 9 isolates; recorded as printed.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 78,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "piptazo": 43,
+    "ceftazidime": 59,
+    "cefepime": 53,
+    "meropenem": 45,
+    "imipenem": 52,
+    "aztreonam": 36.4,
+    "ciprofloxacin": 43,
+    "levofloxacin": 38,
+    "amikacin": 50,
+    "colistin": 91
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out. Printed as Pseudomonas aerogenosa.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Burkholderia cepacia complex",
+   "pheno": null,
+   "n": 32,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "ceftazidime": 56,
+    "meropenem": 67,
+    "levofloxacin": 86.7,
+    "cotrimoxazole": 87.6,
+    "minocycline": 62
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out. Co-trimoxazole (87.6%) cannot come from 32 or fewer isolates; recorded as printed.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Enterobacter cloacae complex",
+   "pheno": null,
+   "n": 33,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "piptazo": 55,
+    "ceftazidime": 40,
+    "cefepime": 50,
+    "meropenem": 64,
+    "imipenem": 64
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella Typhi",
+   "pheno": null,
+   "n": 45,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "ampicillin": 89,
+    "ceftriaxone": 83,
+    "meropenem": 100,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "cotrimoxazole": 95.5,
+    "azithromycin": 62.1
+   },
+   "note": "Location printed as OPD & IPD (one row for both). Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "azithromycin": "as printed (62.1%)"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Stenotrophomonas maltophilia",
+   "pheno": null,
+   "n": 41,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "levofloxacin": 57.9,
+    "cotrimoxazole": 71.1,
+    "minocycline": 88
+   },
+   "note": "Printed as Stenotrophomas maltopholia. IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 34,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "penicillin": 2.9,
+    "ciprofloxacin": 3,
+    "levofloxacin": 2.9,
+    "cotrimoxazole": 50,
+    "gentamicin": 44,
+    "tetracycline": 79,
+    "tigecycline": 100,
+    "erythromycin": 38.2,
+    "cefoxitin": 18,
+    "oxacillin": 16,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "linezolid": 100,
+    "daptomycin": 100
+   },
+   "note": "Location printed as OPD & IPD (one row for both). Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 50,
+   "page": 2,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in BLOOD samples (book page 104)",
+   "s": {
+    "penicillin": 2,
+    "gentamicin_hl": 22,
+    "tigecycline": 100,
+    "vancomycin": 55,
+    "linezolid": 58
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "gentamicin_hl": "printed as High-level Gentamycin"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter baumannii complex",
+   "pheno": null,
+   "n": 55,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 60,
+    "ceftazidime": 45,
+    "cefepime": 30,
+    "meropenem": 67.5,
+    "imipenem": 56,
+    "ciprofloxacin": 29,
+    "levofloxacin": 34.1,
+    "cotrimoxazole": 37,
+    "amikacin": 60,
+    "gentamicin": 54,
+    "minocycline": 74,
+    "colistin": 100
+   },
+   "note": "Printed as Acinetobacter baumani complex. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii complex",
+   "pheno": null,
+   "n": 106,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 24,
+    "ceftazidime": 24,
+    "cefepime": 11,
+    "meropenem": 23.2,
+    "imipenem": 24,
+    "ciprofloxacin": 11,
+    "levofloxacin": 14.9,
+    "cotrimoxazole": 20,
+    "amikacin": 27,
+    "gentamicin": 32,
+    "minocycline": 61,
+    "colistin": 93
+   },
+   "note": "Printed as Acinetobacter baumani complex. IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1033,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 46,
+    "amoxiclav": 34,
+    "cefuroxime": 31,
+    "ceftriaxone": 20,
+    "ceftazidime": 27,
+    "cefepime": 17,
+    "meropenem": 71.3,
+    "imipenem": 67,
+    "ertapenem": 66,
+    "ciprofloxacin": 9,
+    "cotrimoxazole": 27,
+    "amikacin": 57,
+    "gentamicin": 61,
+    "colistin": 99,
+    "fosfomycin": 94,
+    "nitrofurantoin": 87.2
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1106,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 33,
+    "amoxiclav": 25,
+    "cefuroxime": 15,
+    "ceftriaxone": 10,
+    "ceftazidime": 16,
+    "cefepime": 12,
+    "meropenem": 56.8,
+    "imipenem": 54,
+    "ertapenem": 44,
+    "ciprofloxacin": 7,
+    "cotrimoxazole": 22,
+    "amikacin": 53,
+    "gentamicin": 50,
+    "colistin": 98,
+    "fosfomycin": 96,
+    "nitrofurantoin": 86.5
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter cloacae complex",
+   "pheno": null,
+   "n": 45,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 38,
+    "ceftazidime": 33,
+    "cefepime": 34,
+    "meropenem": 60.6,
+    "imipenem": 53,
+    "ertapenem": 49,
+    "ciprofloxacin": 30,
+    "cotrimoxazole": 48,
+    "amikacin": 52,
+    "gentamicin": 57,
+    "colistin": 96
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "Enterobacter cloacae complex",
+   "pheno": null,
+   "n": 55,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 35,
+    "ceftazidime": 22,
+    "cefepime": 31,
+    "meropenem": 51.1,
+    "imipenem": 37,
+    "ciprofloxacin": 35,
+    "cotrimoxazole": 36,
+    "amikacin": 37,
+    "gentamicin": 31,
+    "colistin": 95,
+    "fosfomycin": 82,
+    "nitrofurantoin": 62.5
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 583,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 27,
+    "amoxiclav": 30,
+    "cefuroxime": 30,
+    "ceftriaxone": 18,
+    "ceftazidime": 19,
+    "cefepime": 17,
+    "meropenem": 45.5,
+    "imipenem": 45,
+    "ertapenem": 40,
+    "aztreonam": 26.5,
+    "ciprofloxacin": 15,
+    "cotrimoxazole": 24,
+    "amikacin": 37,
+    "gentamicin": 43,
+    "colistin": 94,
+    "fosfomycin": 72,
+    "nitrofurantoin": 49.9
+   },
+   "note": "Printed as Klebsilella pneumoniae. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 938,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 19,
+    "amoxiclav": 24,
+    "cefuroxime": 19,
+    "ceftriaxone": 9,
+    "ceftazidime": 12,
+    "cefepime": 11,
+    "meropenem": 24.5,
+    "imipenem": 26,
+    "ertapenem": 21,
+    "aztreonam": 15.7,
+    "ciprofloxacin": 9,
+    "cotrimoxazole": 16,
+    "amikacin": 25,
+    "gentamicin": 27,
+    "colistin": 63,
+    "fosfomycin": 72,
+    "nitrofurantoin": 51.6
+   },
+   "note": "Printed as Klebsilella pneumoniae. IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 283,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 48,
+    "ceftazidime": 43,
+    "cefepime": 31,
+    "meropenem": 51.7,
+    "imipenem": 49,
+    "aztreonam": 37.1,
+    "ciprofloxacin": 28,
+    "levofloxacin": 28,
+    "amikacin": 50
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 430,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "piptazo": 31,
+    "ceftazidime": 28,
+    "cefepime": 19,
+    "meropenem": 30.2,
+    "imipenem": 32,
+    "aztreonam": 25.9,
+    "ciprofloxacin": 17,
+    "levofloxacin": 17.4,
+    "amikacin": 32,
+    "colistin": 96
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 51,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "ampicillin": 13,
+    "piptazo": 84,
+    "amoxiclav": 30,
+    "cefuroxime": 17,
+    "ceftriaxone": 23,
+    "ceftazidime": 32,
+    "cefepime": 26,
+    "meropenem": 84.1,
+    "ertapenem": 80,
+    "ciprofloxacin": 20,
+    "cotrimoxazole": 13,
+    "amikacin": 43,
+    "gentamicin": 29,
+    "fosfomycin": 93
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 41,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "ampicillin": 4.8,
+    "piptazo": 78,
+    "amoxiclav": 30,
+    "cefuroxime": 13,
+    "ceftriaxone": 10,
+    "ceftazidime": 19,
+    "cefepime": 15,
+    "meropenem": 74.4,
+    "ertapenem": 68,
+    "ciprofloxacin": 14,
+    "cotrimoxazole": 14,
+    "amikacin": 29,
+    "gentamicin": 20
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 36,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "ciprofloxacin": 15,
+    "levofloxacin": 18,
+    "cotrimoxazole": 52,
+    "gentamicin": 50,
+    "tetracycline": 80,
+    "erythromycin": 50,
+    "cefoxitin": 66,
+    "clindamycin": 73,
+    "vancomycin": 89,
+    "linezolid": 86,
+    "daptomycin": 100,
+    "nitrofurantoin": 100
+   },
+   "note": "Location printed as OPD & IPD (one row for both). Isolates printed as OPD 19 IPD 17 with one row of values; n is their sum (36). Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "CoNS",
+   "pheno": null,
+   "n": 30,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "penicillin": 11,
+    "ampicillin": 57,
+    "ciprofloxacin": 33,
+    "levofloxacin": 40,
+    "cotrimoxazole": 76,
+    "gentamicin": 86,
+    "tetracycline": 67,
+    "cefoxitin": 40,
+    "clindamycin": 44,
+    "vancomycin": 97,
+    "linezolid": 100,
+    "daptomycin": 100,
+    "nitrofurantoin": 100
+   },
+   "note": "Printed as CONS (coagulase-negative staphylococci). Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out. Ampicillin (57%) is printed higher than penicillin (11%) and cefoxitin (40%), which is not possible for staphylococci; recorded as printed.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "CoNS",
+   "pheno": null,
+   "n": 29,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "penicillin": 17,
+    "ciprofloxacin": 46,
+    "levofloxacin": 48.1,
+    "cotrimoxazole": 58,
+    "gentamicin": 65,
+    "tetracycline": 70,
+    "cefoxitin": 50,
+    "clindamycin": 55,
+    "vancomycin": 93,
+    "linezolid": 96.3,
+    "daptomycin": 100,
+    "nitrofurantoin": 100
+   },
+   "note": "Printed as CONS (coagulase-negative staphylococci). IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Fewer than 30 isolates. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 51,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "penicillin": 43,
+    "gentamicin_hl": 20,
+    "vancomycin": 80,
+    "linezolid": 80
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "gentamicin_hl": "printed as High-level Gentamycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 304,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "penicillin": 22,
+    "gentamicin_hl": 21,
+    "vancomycin": 66,
+    "linezolid": 71.4,
+    "nitrofurantoin": 18.9
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "gentamicin_hl": "printed as High-level Gentamycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 110,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "penicillin": 95,
+    "gentamicin_hl": 30,
+    "vancomycin": 98,
+    "linezolid": 94.3,
+    "daptomycin": 97,
+    "nitrofurantoin": 96.2
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "gentamicin_hl": "printed as High-level Gentamycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "inpatient",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 176,
+   "page": 3,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in URINE samples (book page 105)",
+   "s": {
+    "penicillin": 92,
+    "gentamicin_hl": 26.2,
+    "vancomycin": 99,
+    "linezolid": 98.3,
+    "daptomycin": 88,
+    "nitrofurantoin": 96.8
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "gentamicin_hl": "printed as High-level Gentamycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter baumannii complex",
+   "pheno": null,
+   "n": 51,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 40,
+    "ceftazidime": 54,
+    "cefepime": 44,
+    "meropenem": 42,
+    "imipenem": 32,
+    "ciprofloxacin": 29.8,
+    "levofloxacin": 28.9,
+    "cotrimoxazole": 41.7,
+    "amikacin": 41.2,
+    "gentamicin": 40.8,
+    "minocycline": 51.4,
+    "colistin": 99
+   },
+   "note": "Printed as Acinetobacter baumani complex. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out. Colistin (99%) cannot come from 51 or fewer isolates; recorded as printed.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii complex",
+   "pheno": null,
+   "n": 197,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 11.3,
+    "ceftazidime": 26,
+    "cefepime": 11,
+    "meropenem": 6.2,
+    "imipenem": 7.1,
+    "ciprofloxacin": 6.4,
+    "levofloxacin": 7.6,
+    "cotrimoxazole": 14.2,
+    "amikacin": 14.6,
+    "gentamicin": 12.1,
+    "minocycline": 44.6,
+    "colistin": 96.7
+   },
+   "note": "Printed as Acinetobacter baumani complex. IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 86,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 51.9,
+    "amoxiclav": 35,
+    "cefuroxime": 16,
+    "ceftriaxone": 19,
+    "ceftazidime": 17,
+    "cefepime": 24,
+    "meropenem": 71.6,
+    "imipenem": 74.4,
+    "ertapenem": 67.5,
+    "ciprofloxacin": 1.3,
+    "cotrimoxazole": 22.2,
+    "amikacin": 71.9,
+    "gentamicin": 62.6,
+    "colistin": 98.6
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 300,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 21,
+    "amoxiclav": 12,
+    "cefuroxime": 7.5,
+    "ceftriaxone": 6.7,
+    "ceftazidime": 12,
+    "cefepime": 13,
+    "meropenem": 41.1,
+    "imipenem": 45.4,
+    "ertapenem": 33.7,
+    "ciprofloxacin": 2.2,
+    "cotrimoxazole": 18.6,
+    "amikacin": 52.7,
+    "gentamicin": 50.9,
+    "colistin": 99.6
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 59,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 37.9,
+    "amoxiclav": 35,
+    "cefuroxime": 25,
+    "ceftriaxone": 32,
+    "cefepime": 31,
+    "meropenem": 58.2,
+    "imipenem": 50,
+    "ertapenem": 56.9,
+    "ciprofloxacin": 10.9,
+    "cotrimoxazole": 39.2,
+    "amikacin": 56.3,
+    "gentamicin": 51.9,
+    "colistin": 100
+   },
+   "note": "Printed as Klebsilella pneumoniae. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 359,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 11.8,
+    "amoxiclav": 9.2,
+    "cefuroxime": 9.8,
+    "ceftriaxone": 6.3,
+    "cefepime": 8.5,
+    "meropenem": 20.4,
+    "imipenem": 20.1,
+    "ertapenem": 18.4,
+    "aztreonam": 6.9,
+    "ciprofloxacin": 4.5,
+    "cotrimoxazole": 16.7,
+    "amikacin": 24.3,
+    "gentamicin": 25.3,
+    "colistin": 95.5
+   },
+   "note": "Printed as Klebsilella pneumoniae. IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 136,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 47.3,
+    "ceftazidime": 59,
+    "cefepime": 62,
+    "meropenem": 55.4,
+    "imipenem": 62.3,
+    "aztreonam": 53.4,
+    "ciprofloxacin": 39.4,
+    "levofloxacin": 40.6,
+    "amikacin": 36.8,
+    "colistin": 9.8
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out. Printed as Pseudomonas aerogenosa.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate (CLSI has no susceptible category for colistin); 9.8% is printed here against 94.8% for IPD pus isolates; recorded as printed"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "inpatient",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 250,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 32,
+    "ceftazidime": 39,
+    "cefepime": 40,
+    "meropenem": 34.4,
+    "imipenem": 34.6,
+    "aztreonam": 32.2,
+    "ciprofloxacin": 28.2,
+    "levofloxacin": 29.6,
+    "amikacin": 30.8,
+    "colistin": 94.8
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out. Printed as Pseudomonas aerogenosa.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "inpatient",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 43,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 90.5,
+    "amoxiclav": 41,
+    "cefuroxime": 36,
+    "ceftriaxone": 29,
+    "cefepime": 34,
+    "meropenem": 66.7,
+    "imipenem": 25.6,
+    "ertapenem": 78.3,
+    "ciprofloxacin": 11.9,
+    "cotrimoxazole": 14.3,
+    "amikacin": 26.2,
+    "gentamicin": 30.6
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter cloacae complex",
+   "pheno": null,
+   "n": 53,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "piptazo": 28.3,
+    "ceftazidime": 21,
+    "cefepime": 27,
+    "meropenem": 44,
+    "imipenem": 39.6,
+    "ertapenem": 38.5,
+    "ciprofloxacin": 13.7,
+    "cotrimoxazole": 34.6,
+    "amikacin": 49,
+    "gentamicin": 34.6,
+    "colistin": 100
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "notes": {
+    "colistin": "column printed as 'Colistin (%I)': percent intermediate; CLSI has no susceptible category for colistin, so this is the share not resistant"
+   },
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 75,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "penicillin": 4.1,
+    "ciprofloxacin": 1.4,
+    "levofloxacin": 2.7,
+    "cotrimoxazole": 39,
+    "gentamicin": 48.6,
+    "tetracycline": 73,
+    "tigecycline": 100,
+    "erythromycin": 31.3,
+    "cefoxitin": 35,
+    "oxacillin": 58,
+    "clindamycin": 76,
+    "vancomycin": 96,
+    "teicoplanin": 100,
+    "linezolid": 97,
+    "daptomycin": 100
+   },
+   "conflict": {
+    "cefoxitin": "cefoxitin (35%) and oxacillin (58%) both report methicillin susceptibility and should agree; the source figures disagree",
+    "oxacillin": "cefoxitin (35%) and oxacillin (58%) both report methicillin susceptibility and should agree; the source figures disagree"
+   },
+   "note": "Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "inpatient",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 38,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "penicillin": 3.3,
+    "ciprofloxacin": 5.8,
+    "levofloxacin": 3.8,
+    "cotrimoxazole": 48.6,
+    "gentamicin": 45.2,
+    "tetracycline": 89,
+    "tigecycline": 100,
+    "erythromycin": 22.9,
+    "cefoxitin": 48,
+    "oxacillin": 51,
+    "clindamycin": 81,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "linezolid": 97,
+    "daptomycin": 100
+   },
+   "note": "IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "CoNS",
+   "pheno": null,
+   "n": 94,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "penicillin": 5.9,
+    "ciprofloxacin": 27.3,
+    "levofloxacin": 23.3,
+    "cotrimoxazole": 45.4,
+    "gentamicin": 48.2,
+    "tetracycline": 61,
+    "tigecycline": 100,
+    "erythromycin": 19.1,
+    "cefoxitin": 29,
+    "oxacillin": 25,
+    "clindamycin": 56,
+    "vancomycin": 95,
+    "teicoplanin": 100,
+    "linezolid": 96,
+    "daptomycin": 96
+   },
+   "note": "Printed as CONS (coagulase-negative staphylococci). Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "inpatient",
+   "org": "CoNS",
+   "pheno": null,
+   "n": 158,
+   "page": 4,
+   "table": "AIIMS Rishikesh Hospital Antibiogram (Pocketguide): % susceptibility of organisms in PUS samples (book page 106)",
+   "s": {
+    "penicillin": 4.7,
+    "ampicillin": 35,
+    "ciprofloxacin": 17.2,
+    "levofloxacin": 17.5,
+    "cotrimoxazole": 40,
+    "gentamicin": 48.2,
+    "tetracycline": 66,
+    "tigecycline": 100,
+    "erythromycin": 9,
+    "cefoxitin": 18,
+    "oxacillin": 13,
+    "clindamycin": 40,
+    "vancomycin": 96,
+    "teicoplanin": 100,
+    "linezolid": 97,
+    "daptomycin": 98
+   },
+   "note": "Printed as CONS (coagulase-negative staphylococci). IPD, recorded as all inpatients (set inpatient): the tables have no separate ICU rows. Cells marked X (not tested, intrinsic resistance or minimal isolates), NT, NA or blank are left out. Ampicillin (35%) is printed higher than penicillin (4.7%) and cefoxitin (18%), which is not possible for staphylococci; recorded as printed.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 30,
+   "page": 5,
+   "table": "General Medicine ICU Clinical Antibiogram (Pocketguide), HAP/VAP (book page 107)",
+   "s": {
+    "piptazo": 3.33,
+    "meropenem": 6.66,
+    "cotrimoxazole": 3.33,
+    "amikacin": 3.33,
+    "colistin": 33.33,
+    "ceftriaxone": 0,
+    "imipenem": 0,
+    "ceftazidime": 0,
+    "gentamicin": 3.33,
+    "ertapenem": 0,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "tigecycline": 0,
+    "minocycline": 3.33
+   },
+   "cohort": "hai",
+   "note": "Printed as Klebsiella pneumonia (N=30). Clinical antibiogram of the Department of General Medicine ICU for HAP/VAP (time frame June 2024 to November 2024 per book page 103): percentage susceptibility is computed from laboratory results and clinical response (patients susceptible plus patients who responded to an in-vitro resistant antibiotic, minus patients who did not respond to an in-vitro susceptible antibiotic, over the number of isolates), not a laboratory percent susceptible. Drugs marked * (piperacillin-tazobactam, meropenem) may be given empirically for VAP because patients responded despite in-vitro resistance. Among the 30 isolates, 2 were pan-resistant (source footnote). Cells printed '-' are left out.",
+   "notes": {
+    "piptazo": "printed 3.33*",
+    "meropenem": "printed 6.66*",
+    "cotrimoxazole": "blue cell: sensitive but another culture-sensitive antibiotic was given",
+    "gentamicin": "blue cell: sensitive but another culture-sensitive antibiotic was given",
+    "minocycline": "blue cell: sensitive but another culture-sensitive antibiotic was given"
+   },
+   "specimen_as_printed": "HAP/VAP (specimen not stated)"
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Book page 107, General Medicine ICU clinical antibiogram, Acinetobacter baumannii (MC) HAP/VAP row (N=30)",
+   "org": "Acinetobacter baumannii",
+   "why": "every value (piperacillin-tazobactam 0, meropenem 46.66, co-trimoxazole 3.33, amikacin 0, colistin 46.67, ceftriaxone 3, imipenem 0, ceftazidime 0, gentamicin 0, ertapenem 0, ciprofloxacin 0, levofloxacin 6.6) is identical to the August to October 2023 MICU clinical antibiogram, which is recorded in AIIMS_RISHIKESH_MICU_2023; this book gives it a June to November 2024 time frame, so it is left out rather than counted twice under two periods"
+  },
+  {
+   "what": "Cells marked X",
+   "why": "the legend defines X as not tested, intrinsically resistant or minimal isolates tested; no value"
+  },
+  {
+   "what": "Cells printed NT, NA or na (e.g. levofloxacin for E. coli and K. pneumoniae in blood and urine, colistin for P. aeruginosa OPD urine, ceftazidime for K. pneumoniae OPD pus, erythromycin for CoNS IPD urine, fosfomycin and nitrofurantoin for E. cloacae OPD urine, nitrofurantoin for P. mirabilis IPD urine and E. faecium OPD urine)",
+   "why": "not tested or not available; no value"
+  },
+  {
+   "what": "Blank cells (blood: E. cloacae complex ciprofloxacin, co-trimoxazole, amikacin, gentamicin and colistin, S. Typhi chloramphenicol; urine: S. aureus penicillin, CoNS OPD erythromycin)",
+   "why": "no value printed"
+  },
+  {
+   "what": "Book page 107: K. pneumoniae clinical antibiogram cells printed '-' (none) and A. baumannii tigecycline and minocycline '-'",
+   "why": "no value printed"
+  },
+  {
+   "what": "Book page 103: clinical antibiogram method page",
+   "why": "narrative, no susceptibility data"
+  }
+ ],
+ "issues": [
+  "Second reader 2026-09-26: all 537 cells and all 47 rows (organism, specimen, location, n) re-read against the page images (pages rendered at scale 5, rotated upright, cropped into 4 to 5 column groups with the row labels; two cells re-checked at scale 8), each value read before it was compared with the extraction; 0 value, n or stratum errors.",
+  "Setting changed on the lead's instruction: the 24 rows printed IPD were set ward and are now set inpatient (all inpatients), because the blood, urine and pus tables have no separate ICU column, so IPD covers every inpatient. Row notes and the file notes say so. The file has no count tables, so no counts changed. Dedup keys re-checked with the validator: no duplicate rows (the only ICU row is the K. pneumoniae clinical antibiogram, cohort hai).",
+  "Urine S. aureus: the page prints 'OPD 19 IPD 17' in the isolates column with one row of values (confirmed at scale 5); 36 is not printed, it is the extractor's sum of the two, stated in the row note. Kept as n = 36.",
+  "Cells not kept, all as printed: blood OPD P. aeruginosa amikacin 64 and colistin 93 (n = 9, conflicts confirmed), urine OPD CoNS ampicillin 57 and pus IPD CoNS ampicillin 35 (suppressed), pus OPD P. aeruginosa colistin 9.8, pus OPD S. aureus cefoxitin 35 against oxacillin 58, clinical antibiogram K. pneumoniae colistin 33.33.",
+  "Added 2 conflicts the extraction missed (source inconsistencies, values kept as printed): blood IPD B. cepacia complex co-trimoxazole 87.6% with 32 isolates, and pus OPD A. baumannii complex colistin 99% with 51 isolates; neither percentage can come from a whole number of isolates up to the row total.",
+  "The excluded book page 107 A. baumannii clinical row was compared with AIIMS_RISHIKESH_MICU_2023 page 18: all 12 values are identical, so leaving it out is right.",
+  "Lead 2026-09-26: the two conflicts within one point of an achievable figure (B. cepacia co-trimoxazole 87.6 of 32; pus OPD A. baumannii colistin 99 of 51) are dropped: the build tolerates rounding up to one point everywhere else."
+ ]
+}

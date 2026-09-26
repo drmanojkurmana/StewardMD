@@ -1,0 +1,1091 @@
+{
+ "id": "SVIMS_2024",
+ "kind": "institution",
+ "inst": "SVIMS_TIRUPATI",
+ "institution": "Sri Venkateswara Institute of Medical Sciences, Tirupati",
+ "short": "SVIMS Tirupati",
+ "city": "Tirupati",
+ "state": "Andhra Pradesh",
+ "region": "south",
+ "sector": "government",
+ "year": 2024,
+ "isolates": 7962,
+ "end": "2024-06",
+ "period": "July 2023 to June 2024",
+ "url": "https://svimstpt.ap.nic.in/quality_files/Antibiotic-policy-jun2024.pdf",
+ "page": "https://svimstpt.ap.nic.in/quality.html",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Microbiology, SVIMS, SPMC (W), Tirupati. Hospital Antibiotic Policy (July 2023 to June 2024); and Cumulative Antibiogram of Blood Stream Infections (BSIs), July 2023 to June 2024. Tirupati: Sri Venkateswara Institute of Medical Sciences; 2024.",
+ "reporting": "Percent susceptible. Policy: one bar chart per organism with printed data labels and the organism n (specimen base and patient location not stated; recorded as all specimens, all locations). BSI document: tables of % susceptible with number susceptible / number tested (N/D) per organism, blood cultures from adults and children, all locations, with isolate counts per organism.",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Policy charts: the data labels were read from the PDF text layer (pdfplumber word positions) and assigned to bars by x position against the category axis labels (each label sits within 12 pt of its bar centre); every chart was then rendered at scale 2.2 and each label-to-bar assignment and value compared by eye with the image, and the axis labels checked against the legend under each chart. BSI document: every table read from the rendered pages and compared by script with the text layer (percentages, N/D and n: no differences); the pie-chart legend counts on page 2 were read from the text layer and the image."
+ },
+ "notes": "Two SVIMS Tirupati documents for the same period, merged: the Hospital Antibiotic Policy (Department of Microbiology), whose per-organism charts are recorded as all specimens and all locations because the policy does not state its specimen base; and the Cumulative Antibiogram of Blood Stream Infections, July 2023 to June 2024, URL https://svimstpt.ap.nic.in/quality_files/BSI-Jun2024.pdf (Wayback copy https://web.archive.org/web/20251027133308id_/https://svimstpt.ap.nic.in/quality_files/BSI-Jun2024.pdf), recorded as spec blood. Policy downloaded from the Wayback copy https://web.archive.org/web/20251027134705if_/https://svimstpt.ap.nic.in/quality_files/Antibiotic-policy-jun2024.pdf (the live host resets connections). Row page numbers refer to the document named in the row note. isolates (7962) is the sum of the two policy totals, Total GNB (n=5193) and Total GPC (n=2769); the BSI isolates are among them. In the policy, CTZ is defined as ceftriaxone and CFX as cefoxitin. Polymyxin B is reported as % susceptible, although CLSI M100 (2020 onward) has no susceptible category for polymyxins; the documents do not state the AST method or interpretive criteria. BSI isolate counts: CoNS are printed by species (S. haemolyticus 213, S. hominis 191, S. xylosus 7; S. xylosus recorded as coagulase-negative staphylococci). Many BSI rows have fewer than 10 isolates (S. pneumoniae 1, beta-haemolytic streptococci 1, Citrobacter 1, S. Typhi 2, S. maltophilia 2, Morganella 2, Providencia 2, Enterobacter 3, P. mirabilis 9).",
+ "issues": [
+  "Second reader 2026-09-26: all 245 cells (the seeded sample of 61 plus every other cell), all 30 row n values and all 22 BSI isolate counts read from the page images (policy pages 3 to 12, BSI pages 2 to 6, scale 2.5) before comparing with the extraction: 0 transcription errors, nothing corrected; organism, specimen and setting correct on every row.",
+  "Policy charts: an independent word-position parse of the text layer puts every data label of the 11 organism charts (96 labels, 94 recorded) within 8.1 pt of the axis label of its bar (bars 27 to 50 pt apart), and each label was checked on the image against the bar it sits on. The duplicate MER labels are printed as the extraction describes (Klebsiella bars 1 and 3: 60.1 and 47.6; Enterobacter bars 1 and 3: 52.6 and 68.4, with AZT 47.4 on bar 5 where the abbreviation list has polymyxin B); recorded as extracted. BSI tables: every S% and N/D pair read from the images; each organism n equals the page 2 pie legend.",
+  "Cells not kept, each confirmed as printed: 6 conflicts (Klebsiella and Enterobacter meropenem, Enterobacter aztreonam, BSI E. coli co-trimoxazole 32.37 against 61/189, BSI Klebsiella piperacillin-tazobactam 40.07 against 44/108 and polymyxin B 60.01 against 65/108); Enterobacter ceftazidime-avibactam 70.2 (no whole number of 19); polymyxin B cautions E. coli 27.4, Klebsiella 43.7, BSI E. coli 33.33 and BSI Citrobacter 0; intrinsic: Acinetobacter aztreonam 46.4 (printed 46.4%) and 42.64, polymyxin B for Serratia 9.09, Morganella 0, Providencia 0 and P. mirabilis 0.",
+  "No count-table mismatch: the blood CoNS counts (S. haemolyticus 213, S. hominis 191, S. xylosus 7) sum to 411 and there is no blood CoNS row. Source quirks confirmed as printed and noted: Serratia n=189 in the second SPICE table with denominators of 11; MRSA plus MSSA 908 of 934 (policy) and 348 of 353 (BSI)."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 2309,
+   "page": 3,
+   "table": "Policy chart: E.coli (n=2309)",
+   "s": {
+    "meropenem": 75.5,
+    "ceftriaxone": 27.9,
+    "aztreonam": 53.5,
+    "amikacin": 77.6,
+    "gentamicin": 52.1,
+    "ciprofloxacin": 26.1,
+    "cotrimoxazole": 41.2,
+    "ceftazidime_avibactam": 87.8,
+    "piptazo": 64.3,
+    "polymyxin_b": 27.4,
+    "cefoperazone_sulbactam": 68.6
+   },
+   "notes": {
+    "ceftriaxone": "printed CTZ, which the chart legend defines as ceftriaxone"
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella spp",
+   "pheno": null,
+   "n": 1158,
+   "page": 4,
+   "table": "Policy chart: Klebsiella spp (n=1158)",
+   "s": {
+    "meropenem": 60.1,
+    "ceftriaxone": 35.2,
+    "ciprofloxacin": 25.6,
+    "gentamicin": 42.4,
+    "amikacin": 62.1,
+    "cotrimoxazole": 44.6,
+    "cefoperazone_sulbactam": 54.8,
+    "piptazo": 49.1,
+    "ceftazidime_avibactam": 72.1,
+    "polymyxin_b": 43.7
+   },
+   "notes": {
+    "ceftriaxone": "printed CTZ, which the chart legend defines as ceftriaxone"
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations. Two bars are labelled MER: bar 1 (60.1), which is also the MER position in the legend, is recorded as meropenem with a conflict; bar 3 (47.6), where the legend lists aztreonam, is not recorded.",
+   "conflict": {
+    "meropenem": "the chart labels two bars MER: 60.1 (bar 1, the legend MER position) and 47.6 (bar 3, where the legend lists aztreonam)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas spp",
+   "pheno": null,
+   "n": 863,
+   "page": 4,
+   "table": "Policy chart: Pseudomonas spp (n=863)",
+   "s": {
+    "meropenem": 69.1,
+    "aztreonam": 16.2,
+    "ceftazidime_avibactam": 95.3,
+    "gentamicin": 43.7,
+    "ciprofloxacin": 58.6,
+    "piptazo": 73.9,
+    "polymyxin_b": 93.7,
+    "cefoperazone_sulbactam": 66.2
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter spp",
+   "pheno": null,
+   "n": 362,
+   "page": 5,
+   "table": "Policy chart: Acinetobacter spp (n=362)",
+   "s": {
+    "ciprofloxacin": 11.3,
+    "meropenem": 20.4,
+    "aztreonam": 46.4,
+    "gentamicin": 16.9,
+    "amikacin": 25.1,
+    "ceftriaxone": 17.4,
+    "cotrimoxazole": 28.2,
+    "polymyxin_b": 78.2,
+    "piptazo": 19.3,
+    "cefoperazone_sulbactam": 54.4,
+    "ceftazidime_avibactam": 77.8
+   },
+   "notes": {
+    "ceftriaxone": "printed CTZ, which the chart legend defines as ceftriaxone"
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter spp",
+   "pheno": null,
+   "n": 19,
+   "page": 5,
+   "table": "Policy chart: Enterobacter spp (n=19)",
+   "s": {
+    "meropenem": 52.6,
+    "ceftriaxone": 26.3,
+    "ciprofloxacin": 21.1,
+    "aztreonam": 47.4,
+    "amikacin": 26.3,
+    "cefoperazone_sulbactam": 47.4,
+    "cotrimoxazole": 31.6,
+    "ceftazidime_avibactam": 70.2,
+    "piptazo": 42.1,
+    "gentamicin": 21.1
+   },
+   "notes": {
+    "ceftazidime_avibactam": "chart label 70.2 is not a whole number of the 19 isolates (13/19 is 68.4%, 14/19 is 73.7%); recorded as printed",
+    "ceftriaxone": "printed CTZ, which the chart legend defines as ceftriaxone"
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations. Bars 1 and 3 are both labelled MER (52.6 and 68.4) and bar 5 is labelled AZT (47.4), while the legend lists aztreonam third and polymyxin B fifth: bar 1 is recorded as meropenem and bar 5 as aztreonam, both with a conflict; bar 3 is not recorded.",
+   "conflict": {
+    "meropenem": "the chart labels two bars MER: 52.6 (bar 1, the legend MER position) and 68.4 (bar 3, where the legend lists aztreonam)",
+    "aztreonam": "the bar labelled AZT (47.4) sits where the legend lists polymyxin B; the legend puts aztreonam third, on the second bar labelled MER (68.4)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 934,
+   "page": 8,
+   "table": "Policy chart: S.aureus (n=934)",
+   "s": {
+    "ampicillin": 18.2,
+    "vancomycin": 95.3,
+    "ciprofloxacin": 26.6,
+    "cotrimoxazole": 59.5,
+    "erythromycin": 33.7,
+    "linezolid": 94.2,
+    "clindamycin": 46.6,
+    "cefoxitin": 53.1
+   },
+   "notes": {
+    "cefoxitin": "printed CFX, which the chart legend defines as cefoxitin"
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations. The MRSA (n=412) and MSSA (n=496) charts add up to 908, not 934; as printed."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": 412,
+   "page": 9,
+   "table": "Policy chart: MRSA (n=412)",
+   "s": {
+    "vancomycin": 96.1,
+    "ciprofloxacin": 8.5,
+    "cotrimoxazole": 46.4,
+    "erythromycin": 16.5,
+    "linezolid": 94.2,
+    "clindamycin": 30.3
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": 496,
+   "page": 9,
+   "table": "Policy chart: MSSA (n=496)",
+   "s": {
+    "vancomycin": 96.6,
+    "ciprofloxacin": 41.7,
+    "cotrimoxazole": 71.8,
+    "erythromycin": 48.4,
+    "linezolid": 96.4,
+    "clindamycin": 60.5
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 638,
+   "page": 10,
+   "table": "Policy chart: CoNS (n=638)",
+   "s": {
+    "ampicillin": 33.4,
+    "vancomycin": 97.6,
+    "ciprofloxacin": 47.3,
+    "erythromycin": 32.9,
+    "cotrimoxazole": 51.7,
+    "linezolid": 94.8,
+    "clindamycin": 50.2,
+    "cefoxitin": 65
+   },
+   "notes": {
+    "cefoxitin": "printed CFX, which the chart legend defines as cefoxitin"
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 394,
+   "page": 11,
+   "table": "Policy chart: E.faecalis (n=394)",
+   "s": {
+    "amoxiclav": 78.9,
+    "ampicillin": 54.3,
+    "ciprofloxacin": 23.6,
+    "linezolid": 92.6,
+    "erythromycin": 21.3,
+    "penicillin": 49.7,
+    "tetracycline": 22.3,
+    "vancomycin": 85.5
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 472,
+   "page": 12,
+   "table": "Policy chart: E.faecium (n=472)",
+   "s": {
+    "amoxiclav": 33.9,
+    "ampicillin": 21.8,
+    "ciprofloxacin": 11,
+    "linezolid": 89.6,
+    "penicillin": 19.2,
+    "erythromycin": 7.2,
+    "vancomycin": 75,
+    "tetracycline": 14.8
+   },
+   "note": "Hospital Antibiotic Policy, July 2023 to June 2024 (bar chart with printed data labels); the policy does not state the specimen base or patient location, recorded as all specimens and all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 353,
+   "page": 4,
+   "table": "BSI: Antimicrobial Susceptibility profile of S.aureus from BSI",
+   "s": {
+    "ampicillin": 18.98,
+    "cefoxitin": 51.27,
+    "ciprofloxacin": 31.44,
+    "clindamycin": 41.92,
+    "cotrimoxazole": 50.99,
+    "erythromycin": 28.32,
+    "linezolid": 94.05,
+    "vancomycin": 97.16
+   },
+   "nt": {
+    "ampicillin": 353,
+    "cefoxitin": 353,
+    "ciprofloxacin": 353,
+    "clindamycin": 353,
+    "cotrimoxazole": 353,
+    "erythromycin": 353,
+    "linezolid": 353,
+    "vancomycin": 353
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 4); blood cultures, adult and child, all locations. MRSA (n=167) and MSSA (n=181) rows add up to 348, not 353; a VRSA row (n=4) is also printed; as printed."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": 167,
+   "page": 4,
+   "table": "BSI: Antimicrobial Susceptibility profile of S.aureus from BSI (MRSA, MSSA, VRSA table)",
+   "s": {
+    "ciprofloxacin": 10.77,
+    "clindamycin": 22.75,
+    "cotrimoxazole": 35.32,
+    "erythromycin": 11.37,
+    "linezolid": 92.81,
+    "vancomycin": 97.0
+   },
+   "nt": {
+    "ciprofloxacin": 167,
+    "clindamycin": 167,
+    "cotrimoxazole": 167,
+    "erythromycin": 167,
+    "linezolid": 167,
+    "vancomycin": 167
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 4); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": 181,
+   "page": 4,
+   "table": "BSI: Antimicrobial Susceptibility profile of S.aureus from BSI (MRSA, MSSA, VRSA table)",
+   "s": {
+    "ciprofloxacin": 50.27,
+    "clindamycin": 59.11,
+    "cotrimoxazole": 65.74,
+    "erythromycin": 43.64,
+    "linezolid": 96.68,
+    "vancomycin": 97.79
+   },
+   "nt": {
+    "ciprofloxacin": 181,
+    "clindamycin": 181,
+    "cotrimoxazole": 181,
+    "erythromycin": 181,
+    "linezolid": 181,
+    "vancomycin": 181
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 4); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 30,
+   "page": 4,
+   "table": "BSI: Antimicrobial Susceptibility profile of Enterococcus spp from BSI",
+   "s": {
+    "amoxiclav": 76.66,
+    "ampicillin": 50.0,
+    "ciprofloxacin": 40.0,
+    "erythromycin": 33.33,
+    "linezolid": 100,
+    "penicillin": 46.66,
+    "tetracycline": 40.0,
+    "vancomycin": 90.0
+   },
+   "nt": {
+    "amoxiclav": 30,
+    "ampicillin": 30,
+    "ciprofloxacin": 30,
+    "erythromycin": 30,
+    "linezolid": 30,
+    "penicillin": 30,
+    "tetracycline": 30,
+    "vancomycin": 30
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 4); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 56,
+   "page": 4,
+   "table": "BSI: Antimicrobial Susceptibility profile of Enterococcus spp from BSI",
+   "s": {
+    "amoxiclav": 35.71,
+    "ampicillin": 14.28,
+    "ciprofloxacin": 14.28,
+    "erythromycin": 8.92,
+    "linezolid": 96.42,
+    "penicillin": 12.5,
+    "tetracycline": 17.85,
+    "vancomycin": 73.21
+   },
+   "nt": {
+    "amoxiclav": 56,
+    "ampicillin": 56,
+    "ciprofloxacin": 56,
+    "erythromycin": 56,
+    "linezolid": 56,
+    "penicillin": 56,
+    "tetracycline": 56,
+    "vancomycin": 56
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 4); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 1,
+   "page": 4,
+   "table": "BSI: Antimicrobial Susceptibility profile of Streptococcus pneumoniae from BSI",
+   "s": {
+    "chloramphenicol": 0,
+    "cotrimoxazole": 0,
+    "penicillin": 100,
+    "erythromycin": 0,
+    "linezolid": 100,
+    "vancomycin": 100,
+    "levofloxacin": 0
+   },
+   "nt": {
+    "chloramphenicol": 1,
+    "cotrimoxazole": 1,
+    "penicillin": 1,
+    "erythromycin": 1,
+    "linezolid": 1,
+    "vancomycin": 1,
+    "levofloxacin": 1
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 4); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Beta haemolytic Streptococci",
+   "pheno": null,
+   "n": 1,
+   "page": 4,
+   "table": "BSI: Antimicrobial Susceptibility profile of Beta haemolytic Streptococci from BSI",
+   "s": {
+    "erythromycin": 0,
+    "clindamycin": 0,
+    "penicillin": 100
+   },
+   "nt": {
+    "erythromycin": 1,
+    "clindamycin": 1,
+    "penicillin": 1
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 4); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 189,
+   "page": 5,
+   "table": "BSI: Antimicrobial Susceptibility profile of Enterobacteriaceae from BSI (two tables)",
+   "s": {
+    "amikacin": 73.54,
+    "aztreonam": 51.85,
+    "cefoperazone_sulbactam": 68.78,
+    "ceftriaxone": 29.62,
+    "ciprofloxacin": 39.68,
+    "cotrimoxazole": 32.37,
+    "gentamicin": 45.5,
+    "meropenem": 73.01,
+    "piptazo": 65.07,
+    "polymyxin_b": 33.33
+   },
+   "nt": {
+    "amikacin": 189,
+    "aztreonam": 189,
+    "cefoperazone_sulbactam": 189,
+    "ceftriaxone": 189,
+    "ciprofloxacin": 189,
+    "cotrimoxazole": 189,
+    "gentamicin": 189,
+    "meropenem": 189,
+    "piptazo": 189,
+    "polymyxin_b": 189
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 5); blood cultures, adult and child, all locations.",
+   "conflict": {
+    "cotrimoxazole": "printed 32.37% but its printed count is 61/189 = 32.28%"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": 108,
+   "page": 5,
+   "table": "BSI: Antimicrobial Susceptibility profile of Enterobacteriaceae from BSI (two tables)",
+   "s": {
+    "amikacin": 45.37,
+    "aztreonam": 38.88,
+    "cefoperazone_sulbactam": 44.44,
+    "ceftriaxone": 21.29,
+    "ciprofloxacin": 34.25,
+    "cotrimoxazole": 32.4,
+    "gentamicin": 30.55,
+    "meropenem": 49.07,
+    "piptazo": 40.07,
+    "polymyxin_b": 60.01
+   },
+   "nt": {
+    "amikacin": 108,
+    "aztreonam": 108,
+    "cefoperazone_sulbactam": 108,
+    "ceftriaxone": 108,
+    "ciprofloxacin": 108,
+    "cotrimoxazole": 108,
+    "gentamicin": 108,
+    "meropenem": 108,
+    "piptazo": 108,
+    "polymyxin_b": 108
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 5); blood cultures, adult and child, all locations.",
+   "conflict": {
+    "piptazo": "printed 40.07% but its printed count is 44/108 = 40.74%",
+    "polymyxin_b": "printed 60.01% but its printed count is 65/108 = 60.19%"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella Typhi",
+   "pheno": null,
+   "n": 2,
+   "page": 5,
+   "table": "BSI: Antimicrobial Susceptibility profile of Salmonella from BSI",
+   "s": {
+    "ampicillin": 0,
+    "chloramphenicol": 0,
+    "cotrimoxazole": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100
+   },
+   "nt": {
+    "ampicillin": 2,
+    "chloramphenicol": 2,
+    "cotrimoxazole": 2,
+    "ceftriaxone": 2,
+    "ciprofloxacin": 2
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 5); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 94,
+   "page": 5,
+   "table": "BSI: Antimicrobial Susceptibility profile of Pseudomonas from BSI",
+   "s": {
+    "aztreonam": 17.02,
+    "cefoperazone_sulbactam": 70.21,
+    "ceftazidime": 64.89,
+    "ciprofloxacin": 71.27,
+    "gentamicin": 46.8,
+    "meropenem": 73.4,
+    "piptazo": 77.65,
+    "polymyxin_b": 93.61
+   },
+   "nt": {
+    "aztreonam": 94,
+    "cefoperazone_sulbactam": 94,
+    "ceftazidime": 94,
+    "ciprofloxacin": 94,
+    "gentamicin": 94,
+    "meropenem": 94,
+    "piptazo": 94,
+    "polymyxin_b": 94
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 5); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "pheno": null,
+   "n": 2,
+   "page": 5,
+   "table": "BSI: Antimicrobial Susceptibility profile of Stenotrophomonas maltophilia organisms from BSI",
+   "s": {
+    "levofloxacin": 0,
+    "cotrimoxazole": 100
+   },
+   "nt": {
+    "levofloxacin": 2,
+    "cotrimoxazole": 2
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 5); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter spp",
+   "pheno": null,
+   "n": 68,
+   "page": 6,
+   "table": "BSI: Antimicrobial Susceptibility profile of Acinetobacter spp from BSI (two tables)",
+   "s": {
+    "cotrimoxazole": 38.23,
+    "gentamicin": 17.64,
+    "meropenem": 19.11,
+    "piptazo": 20.58,
+    "polymyxin_b": 77.94,
+    "amikacin": 26.47,
+    "aztreonam": 42.64,
+    "cefoperazone_sulbactam": 58.82,
+    "ceftriaxone": 19.11,
+    "ciprofloxacin": 22.05
+   },
+   "nt": {
+    "cotrimoxazole": 68,
+    "gentamicin": 68,
+    "meropenem": 68,
+    "piptazo": 68,
+    "polymyxin_b": 68,
+    "amikacin": 68,
+    "aztreonam": 68,
+    "cefoperazone_sulbactam": 68,
+    "ceftriaxone": 68,
+    "ciprofloxacin": 68
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 6); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Serratia spp",
+   "pheno": null,
+   "n": 11,
+   "page": 6,
+   "table": "BSI: Antimicrobial Susceptibility profile of SPICE organisms from BSI (two tables)",
+   "s": {
+    "amikacin": 54.54,
+    "aztreonam": 27.27,
+    "cefoperazone_sulbactam": 72.72,
+    "ceftriaxone": 18.18,
+    "ciprofloxacin": 81.81,
+    "cotrimoxazole": 0,
+    "gentamicin": 0,
+    "meropenem": 81.81,
+    "piptazo": 90.9,
+    "polymyxin_b": 9.09
+   },
+   "nt": {
+    "amikacin": 11,
+    "aztreonam": 11,
+    "cefoperazone_sulbactam": 11,
+    "ceftriaxone": 11,
+    "ciprofloxacin": 11,
+    "cotrimoxazole": 11,
+    "gentamicin": 11,
+    "meropenem": 11,
+    "piptazo": 11,
+    "polymyxin_b": 11
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 6); blood cultures, adult and child, all locations. The second SPICE table prints n=189 for Serratia spp, but its denominators are 11, as in the first table; n recorded as 11."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Morganella",
+   "pheno": null,
+   "n": 2,
+   "page": 6,
+   "table": "BSI: Antimicrobial Susceptibility profile of SPICE organisms from BSI (two tables)",
+   "s": {
+    "amikacin": 100,
+    "aztreonam": 50.0,
+    "cefoperazone_sulbactam": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "cotrimoxazole": 100,
+    "gentamicin": 100,
+    "meropenem": 100,
+    "piptazo": 100,
+    "polymyxin_b": 0
+   },
+   "nt": {
+    "amikacin": 2,
+    "aztreonam": 2,
+    "cefoperazone_sulbactam": 2,
+    "ceftriaxone": 2,
+    "ciprofloxacin": 2,
+    "cotrimoxazole": 2,
+    "gentamicin": 2,
+    "meropenem": 2,
+    "piptazo": 2,
+    "polymyxin_b": 2
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 6); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Providencia spp",
+   "pheno": null,
+   "n": 2,
+   "page": 6,
+   "table": "BSI: Antimicrobial Susceptibility profile of SPICE organisms from BSI (two tables)",
+   "s": {
+    "amikacin": 100,
+    "aztreonam": 50.0,
+    "cefoperazone_sulbactam": 50.0,
+    "ceftriaxone": 50.0,
+    "ciprofloxacin": 100,
+    "cotrimoxazole": 100,
+    "gentamicin": 100,
+    "meropenem": 100,
+    "piptazo": 50.0,
+    "polymyxin_b": 0
+   },
+   "nt": {
+    "amikacin": 2,
+    "aztreonam": 2,
+    "cefoperazone_sulbactam": 2,
+    "ceftriaxone": 2,
+    "ciprofloxacin": 2,
+    "cotrimoxazole": 2,
+    "gentamicin": 2,
+    "meropenem": 2,
+    "piptazo": 2,
+    "polymyxin_b": 2
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 6); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 9,
+   "page": 6,
+   "table": "BSI: Antimicrobial Susceptibility profile of SPICE organisms from BSI (two tables)",
+   "s": {
+    "amikacin": 44.4,
+    "aztreonam": 77.77,
+    "cefoperazone_sulbactam": 88.88,
+    "ceftriaxone": 33.33,
+    "ciprofloxacin": 55.55,
+    "cotrimoxazole": 0,
+    "gentamicin": 55.55,
+    "meropenem": 100,
+    "piptazo": 100,
+    "polymyxin_b": 0
+   },
+   "nt": {
+    "amikacin": 9,
+    "aztreonam": 9,
+    "cefoperazone_sulbactam": 9,
+    "ceftriaxone": 9,
+    "ciprofloxacin": 9,
+    "cotrimoxazole": 9,
+    "gentamicin": 9,
+    "meropenem": 9,
+    "piptazo": 9,
+    "polymyxin_b": 9
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 6); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter spp",
+   "pheno": null,
+   "n": 1,
+   "page": 6,
+   "table": "BSI: Antimicrobial Susceptibility profile of SPICE organisms from BSI (two tables)",
+   "s": {
+    "amikacin": 100,
+    "aztreonam": 100,
+    "cefoperazone_sulbactam": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "cotrimoxazole": 0,
+    "gentamicin": 0,
+    "meropenem": 100,
+    "piptazo": 100,
+    "polymyxin_b": 0
+   },
+   "nt": {
+    "amikacin": 1,
+    "aztreonam": 1,
+    "cefoperazone_sulbactam": 1,
+    "ceftriaxone": 1,
+    "ciprofloxacin": 1,
+    "cotrimoxazole": 1,
+    "gentamicin": 1,
+    "meropenem": 1,
+    "piptazo": 1,
+    "polymyxin_b": 1
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 6); blood cultures, adult and child, all locations."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter spp",
+   "pheno": null,
+   "n": 3,
+   "page": 6,
+   "table": "BSI: Antimicrobial Susceptibility profile of SPICE organisms from BSI (two tables)",
+   "s": {
+    "amikacin": 33.3,
+    "aztreonam": 33.3,
+    "cefoperazone_sulbactam": 33.3,
+    "ceftriaxone": 33.3,
+    "ciprofloxacin": 33.3,
+    "cotrimoxazole": 0,
+    "gentamicin": 33.3,
+    "meropenem": 33.3,
+    "piptazo": 33.3,
+    "polymyxin_b": 66.6
+   },
+   "nt": {
+    "amikacin": 3,
+    "aztreonam": 3,
+    "cefoperazone_sulbactam": 3,
+    "ceftriaxone": 3,
+    "ciprofloxacin": 3,
+    "cotrimoxazole": 3,
+    "gentamicin": 3,
+    "meropenem": 3,
+    "piptazo": 3,
+    "polymyxin_b": 3
+   },
+   "specimen_as_printed": "Blood stream infections (BSI)",
+   "note": "Cumulative antibiogram of bloodstream infections, July 2023 to June 2024 (separate BSI document, page 6); blood cultures, adult and child, all locations."
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Beta-haemolytic streptococci",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 30,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 56,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 353,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus haemolyticus",
+   "n": 213,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus hominis",
+   "n": 191,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "n": 7,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Streptococcus pneumoniae",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter spp",
+   "n": 68,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Burkholderia",
+   "n": 7,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter spp",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 189,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella",
+   "n": 108,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Morganella",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 9,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Providencia",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas spp",
+   "n": 94,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella typhi",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 11,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Sphingomonas paucimobilis",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 2
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Policy page 3: Total GNB's (n=5193) chart",
+   "why": "all Gram-negative isolates pooled, not one organism; no organism key"
+  },
+  {
+   "what": "Policy page 4: Klebsiella spp chart, bar 3 (labelled MER)",
+   "org": "Klebsiella spp",
+   "value": "47.6",
+   "why": "a second bar labelled MER, in the position where the legend lists aztreonam: drug unclear, not recorded (bar 1, MER 60.1, is recorded as meropenem with a conflict)"
+  },
+  {
+   "what": "Policy page 5: Enterobacter spp chart, bar 3 (labelled MER); polymyxin B",
+   "org": "Enterobacter spp",
+   "value": "68.4",
+   "why": "a second bar labelled MER, in the position where the legend lists aztreonam: drug unclear, not recorded; polymyxin B is in the legend but has no labelled bar (bars 1 and 5 are recorded as meropenem and aztreonam with conflicts)"
+  },
+  {
+   "what": "Policy page 6: Carbapenem resistant Enterobacteriaceae (CRE) chart (n=899)",
+   "value": "CFS 8, AK 35.3, POL-B 86.9, CIP 3.4, GEN 23.6, PTZ 4, TGC 83.9, LF 5.6, CoT 14.5, CZA 87.2",
+   "why": "pooled CRE of several species (E. coli 50.9%, Klebsiella 44.2%, others); no organism key for mixed Enterobacterales"
+  },
+  {
+   "what": "Policy pages 6 and 7: organism-wise distribution of CRE (n=899) and of ESBL producers (n=991)",
+   "why": "share of each organism among resistant isolates, not susceptibility"
+  },
+  {
+   "what": "Policy page 7: SPICE organisms (n=1202) chart",
+   "why": "Serratia, Pseudomonas, Proteus, Providencia, Morganella, Citrobacter and Enterobacter pooled; no organism key"
+  },
+  {
+   "what": "Policy page 8: Total GPC's (n=2769) chart",
+   "why": "all Gram-positive isolates pooled, not one organism; no organism key"
+  },
+  {
+   "what": "Policy pages 10 to 13: VRSA (n=11), MRCoNS (n=211) and VRCoNS (n=7), VRE (n=102) and GPC resistance-pattern charts",
+   "why": "phenotype rates, not organism by drug susceptibility"
+  },
+  {
+   "what": "BSI page 3: MRSA and VRE rates, carbapenemase and ESBL producer proportions",
+   "why": "phenotype rates, not organism by drug susceptibility"
+  },
+  {
+   "what": "BSI page 4: VRSA row (n=4)",
+   "why": "vancomycin-resistant S. aureus subset; not a phenotype row StewardMD keeps"
+  },
+  {
+   "what": "BSI page 2 isolate counts: NFGNB (58), Corynebacterium (2), Non hemolytic Streptococci (19)",
+   "why": "no organism key; counts not recorded"
+  },
+  {
+   "what": "BSI page 2 isolate counts: MRSA (167) and MSSA (181)",
+   "why": "split of the S. aureus count (353), which is recorded; the count table has no phenotype field"
+  }
+ ]
+}

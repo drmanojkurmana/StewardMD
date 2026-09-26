@@ -1,0 +1,290 @@
+{
+ "id": "KARSNET_THIRUVANANTHAPURAM_2024",
+ "kind": "network",
+ "inst": "KARSNET_THIRUVANANTHAPURAM",
+ "institution": "Thiruvananthapuram district AMR hub laboratory (General Hospital Thiruvananthapuram; spoke hospitals reported separately), KARS-Net district antibiogram, Department of Health Services, Kerala",
+ "short": "KARS-NET Thiruvananthapuram",
+ "city": "Thiruvananthapuram",
+ "state": "Kerala",
+ "region": "south",
+ "sector": "government",
+ "year": 2024,
+ "end": "2024-12",
+ "period": "JANUARY 2023- DECEMBER 2024",
+ "url": "https://health.kerala.gov.in/assets/backend/uploads/articles/1782710542_0.pdf",
+ "page": "https://health.kerala.gov.in/thematic-docs",
+ "retrieved": "2026-09-26",
+ "citation": "Kerala Antimicrobial Resistance Strategic Action Plan (KARSAP), Department of Health Services, Kerala. District Antibiogram: Alappuzha, Kottayam, Pathanamthitta, Thrissur and Thiruvananthapuram. Chapter: District Antibiogram, Thiruvananthapuram, January 2023 to December 2024, AMR Hub Lab, General Hospital Thiruvananthapuram, prepared by Dr Renuka M and Dr Ceena V Netto. Thiruvananthapuram: Department of Health Services, Kerala.",
+ "measure": "R",
+ "reporting": "Percent resistant as typed labels on WHONET bar charts, by organism and specimen (pus, urine), hub laboratory isolates, all locations pooled; number tested not printed. Organisms with fewer than 30 isolates given as resistant/tested counts only.",
+ "method": "WHONET (CLSI interpretation; references CLSI M39 5th ed. and M100 33rd and 34th ed.); cefoperazone-sulbactam read by EUCAST; colistin MIC and S. aureus vancomycin MIC not done.",
+ "breakpoints": "CLSI M100, 33rd and 34th editions; EUCAST for cefoperazone-sulbactam",
+ "verification": {
+  "status": "double-checked",
+  "note": "All resistance data are WHONET bar-chart images with percentage labels typed in the text layer. Each label was assigned to a bar by its x position (text layer) and checked on renders at scale 2.2 and scale 4; bar heights were then measured in pixels against the y axis (0 to 100, or 0 to 60 for Chart 4) and compared with the labels: they agree within about 2 points except where a conflict is recorded. Labels that sit between two bars, over duplicate breakpoint bars with different values, or that match no bar were left out (see excluded). Page numbers are 1-based PDF pages of the five-district compilation."
+ },
+ "notes": "District antibiogram of secondary and primary care facilities: rows are from the AMR hub laboratory at General Hospital Thiruvananthapuram (secondary care), 1 January 2023 to 31 December 2024 (two years), from the KARSAP compilation of five district antibiograms. The chapter prints a separate multihospital antibiogram for six spoke hospitals (General Hospital Neyyattinkara, Taluk hospitals Fort, Attingal and Varkala, W&C hospital Thycaud, DMH Peroorkada), which is not included (one row per stratum). All figures are percent resistant read from typed chart labels; the number tested per drug is not printed. Values whose drawn 95% interval spans more than 45 points (roughly a dozen or fewer isolates tested) were left out, as the report itself advises against percentages below 30 isolates.",
+ "issues": [
+  "Second reader 2026-09-26: the 40-cell seeded sample was read blind from the page images (scale 2.5, axis strips at scale 5), then all 84 cells and all 8 row n values were re-read and compared: 0 transcription errors; organism, specimen (pus, urine) and N correct on every row.",
+  "Label-to-bar check on every chart: the bar centres, y-axis ticks and bar heights were measured in pixels at scale 4 and each text-layer label matched to its bar (x-axis drug codes read on zoomed crops, including the two-row staggered codes); all 84 recorded labels sit on the bar of the recorded drug and agree with its height within about 1 point (at most 1.2 points, within the measuring error), apart from the three recorded label/bar conflicts.",
+  "Cautions confirmed as printed: Enterococcus urine erythromycin labelled 94% with the bar at 99.6% (Chart 5); E. coli pus amikacin labelled 35% with the bar at 37.1%, level with gentamicin (Chart 6); E. coli urine ciprofloxacin labelled 60% with the bar at 56.8% (Chart 7); Klebsiella pus cefotaxime 77% against ceftriaxone 50% (Chart 9, both labels match their bars).",
+  "Two excluded-entry reasons reworded for accuracy (no data change): the cefazolin labels can be matched to their bars, the ambiguity is which breakpoint set each bar uses; Chart 8 cefepime is drawn at about 31%, not 32%."
+ ],
+ "rows": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 106,
+   "page": 87,
+   "table": "Chart 4",
+   "r": {
+    "cefoxitin": 33,
+    "gentamicin": 22,
+    "ciprofloxacin": 51,
+    "cotrimoxazole": 5,
+    "clindamycin": 24,
+    "erythromycin": 57,
+    "linezolid": 9
+   },
+   "notes": {
+    "linezolid": "unusually high for S. aureus; the printed label matches the bar"
+   },
+   "note": "AMR hub laboratory, General Hospital Thiruvananthapuram (its own isolates; the six spoke hospitals are reported separately), all locations pooled. WHONET bar chart with typed percentage labels; number tested not printed. Each label was matched to its bar by position (text layer) and checked against the bar height measured on a scale-4 render. Amikacin bar at 0 has no label; vancomycin (MIC not done) and teicoplanin (disc diffusion not accepted) not shown.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 46,
+   "page": 88,
+   "table": "Chart 5",
+   "r": {
+    "ampicillin": 52,
+    "gentamicin_hl": 41,
+    "ciprofloxacin": 95,
+    "erythromycin": 94,
+    "nitrofurantoin": 54,
+    "linezolid": 13,
+    "vancomycin": 15
+   },
+   "conflict": {
+    "erythromycin": "Chart 5 labels erythromycin 94% but draws the bar at about 99 to 100%"
+   },
+   "note": "AMR hub laboratory, General Hospital Thiruvananthapuram (its own isolates; the six spoke hospitals are reported separately), all locations pooled. WHONET bar chart with typed percentage labels; number tested not printed. Each label was matched to its bar by position (text layer) and checked against the bar height measured on a scale-4 render. Printed as Enterococcus sp. GEH = high-level gentamicin; the gentamicin, clindamycin and teicoplanin positions have no bar and no label.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 46,
+   "page": 90,
+   "table": "Chart 6",
+   "r": {
+    "ampicillin": 89,
+    "amoxiclav": 46,
+    "piptazo": 24,
+    "cefuroxime": 88,
+    "ceftazidime": 76,
+    "ceftriaxone": 77,
+    "cefepime": 60,
+    "imipenem": 13,
+    "meropenem": 7,
+    "amikacin": 35,
+    "gentamicin": 37,
+    "ciprofloxacin": 63,
+    "cotrimoxazole": 44,
+    "tetracycline": 45
+   },
+   "notes": {
+    "cefuroxime": "two cefuroxime bars (WHONET breakpoint sets), both drawn and labelled at 88%"
+   },
+   "conflict": {
+    "amikacin": "Chart 6 labels amikacin 35% but draws its bar at the same height as gentamicin (37%)"
+   },
+   "note": "AMR hub laboratory, General Hospital Thiruvananthapuram (its own isolates; the six spoke hospitals are reported separately), all locations pooled. WHONET bar chart with typed percentage labels; number tested not printed. Each label was matched to its bar by position (text layer) and checked against the bar height measured on a scale-4 render.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 813,
+   "page": 90,
+   "table": "Chart 7",
+   "r": {
+    "ampicillin": 79,
+    "amoxiclav": 27,
+    "piptazo": 8,
+    "cefuroxime": 62,
+    "ceftazidime": 55,
+    "cefepime": 46,
+    "imipenem": 7,
+    "meropenem": 2,
+    "amikacin": 21,
+    "gentamicin": 28,
+    "ciprofloxacin": 60,
+    "norfloxacin": 53,
+    "cotrimoxazole": 40,
+    "nitrofurantoin": 11
+   },
+   "notes": {
+    "cefuroxime": "three cefuroxime bars (WHONET breakpoint sets): two at about 62% sharing one 62% label, and one unlabelled bar at 100% whose interval (about 5 to 100%) shows only one or two isolates"
+   },
+   "conflict": {
+    "ciprofloxacin": "Chart 7 labels ciprofloxacin 60% but draws the bar at about 57%"
+   },
+   "note": "AMR hub laboratory, General Hospital Thiruvananthapuram (its own isolates; the six spoke hospitals are reported separately), all locations pooled. WHONET bar chart with typed percentage labels; number tested not printed. Each label was matched to its bar by position (text layer) and checked against the bar height measured on a scale-4 render.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 197,
+   "page": 91,
+   "table": "Chart 8",
+   "r": {
+    "amoxiclav": 31,
+    "piptazo": 19,
+    "cefotaxime": 46,
+    "imipenem": 15,
+    "meropenem": 8,
+    "amikacin": 28,
+    "gentamicin": 28,
+    "ciprofloxacin": 44,
+    "norfloxacin": 37,
+    "cotrimoxazole": 27,
+    "nitrofurantoin": 50,
+    "tetracycline": 17
+   },
+   "note": "AMR hub laboratory, General Hospital Thiruvananthapuram (its own isolates; the six spoke hospitals are reported separately), all locations pooled. WHONET bar chart with typed percentage labels; number tested not printed. Each label was matched to its bar by position (text layer) and checked against the bar height measured on a scale-4 render. Printed as Klebsiella spp. The amikacin and gentamicin labels are printed together (\"28%28%\") over their two bars, both drawn at about 28%.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 53,
+   "page": 92,
+   "table": "Chart 9",
+   "r": {
+    "amoxiclav": 48,
+    "piptazo": 43,
+    "cefazolin": 42,
+    "cefuroxime": 43,
+    "ceftazidime": 54,
+    "ceftriaxone": 50,
+    "cefotaxime": 77,
+    "cefepime": 51,
+    "imipenem": 36,
+    "meropenem": 32,
+    "amikacin": 42,
+    "gentamicin": 38,
+    "ciprofloxacin": 58,
+    "cotrimoxazole": 35
+   },
+   "notes": {
+    "cefazolin": "two cefazolin bars of equal height (about 43%); the 42% label is over the first",
+    "cefuroxime": "two cefuroxime bars of equal height (about 43%); the 43% label is over the first",
+    "ceftriaxone": "the chart draws ceftriaxone (about 51%) far below cefotaxime (about 77%)"
+   },
+   "note": "AMR hub laboratory, General Hospital Thiruvananthapuram (its own isolates; the six spoke hospitals are reported separately), all locations pooled. WHONET bar chart with typed percentage labels; number tested not printed. Each label was matched to its bar by position (text layer) and checked against the bar height measured on a scale-4 render. Printed as Klebsiella spp. The imipenem, meropenem, amikacin and gentamicin labels drift left of their bars; their order and the bar heights fix the assignment.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 38,
+   "page": 94,
+   "table": "Chart 10",
+   "r": {
+    "piptazo": 89,
+    "ceftriaxone": 90,
+    "cefotaxime": 100,
+    "cefepime": 88,
+    "imipenem": 79,
+    "amikacin": 79,
+    "gentamicin": 89,
+    "cotrimoxazole": 83
+   },
+   "note": "AMR hub laboratory, General Hospital Thiruvananthapuram (its own isolates; the six spoke hospitals are reported separately), all locations pooled. WHONET bar chart with typed percentage labels; number tested not printed. Each label was matched to its bar by position (text layer) and checked against the bar height measured on a scale-4 render. Printed as Acinetobacter spp. The 100% label between the cefotaxime and cefepime bars belongs to cefotaxime (drawn at 100%; cefepime has its own 88% label).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 112,
+   "page": 95,
+   "table": "Chart 11",
+   "r": {
+    "piptazo": 12,
+    "ceftazidime": 25,
+    "cefepime": 7,
+    "aztreonam": 21,
+    "imipenem": 17,
+    "meropenem": 14,
+    "tobramycin": 18,
+    "ciprofloxacin": 36
+   },
+   "note": "AMR hub laboratory, General Hospital Thiruvananthapuram (its own isolates; the six spoke hospitals are reported separately), all locations pooled. WHONET bar chart with typed percentage labels; number tested not printed. Each label was matched to its bar by position; the chart has no y axis, and the bar heights are proportional to the labels (about 10.4 pixels per percentage point at scale 4). Amikacin bar (about 17%) unlabelled; gentamicin has no bar.",
+   "specimen_as_printed": "Pus"
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Charts 1 to 3 (isolates by organism from urine 1138, pus 404 and blood 38 isolates)",
+   "why": "bar charts without printed numbers"
+  },
+  {
+   "what": "Tables 1 to 8 (hub organisms under 30 isolates: S. aureus blood 9, Enterococcus pus 18, E. coli blood 21, Klebsiella blood 3, S. Typhi blood 4, Shigella flexneri stool 3, Acinetobacter urine 5, P. aeruginosa urine 27)",
+   "why": "resistant/tested counts only, no percentages"
+  },
+  {
+   "what": "Spoke hospital antibiogram (Charts 12 and 13: E. coli urine 255, Klebsiella urine 51; Tables 9 to 12)",
+   "why": "a separate stratum (six spoke hospitals); the hub rows are recorded"
+  },
+  {
+   "what": "Charts 6 and 7: ceftazidime-avibactam (labelled 100% pus, 78% urine)",
+   "drug": "ceftazidime_avibactam",
+   "why": "drawn intervals (about 5 to 100% and 40 to 97%) show only a few isolates were tested"
+  },
+  {
+   "what": "Chart 6: cefotaxime (labelled 82%) and minocycline (labelled 33%)",
+   "why": "drawn intervals (about 48 to 97% and 2 to 88%) show only a few isolates were tested"
+  },
+  {
+   "what": "Chart 10: cefuroxime (labelled 100%), meropenem (labelled 56%) and minocycline (labelled 50%)",
+   "why": "drawn intervals (about 46 to 100%, 30 to 80% and 20 to 80%) show only a few isolates were tested; cefuroxime also has no CLSI breakpoints for Acinetobacter"
+  },
+  {
+   "what": "Charts 6, 7 and 8: cefazolin",
+   "drug": "cefazolin",
+   "why": "each chart draws two cefazolin bars (two WHONET breakpoint sets) at different heights (Chart 6 labelled 84% and 90%, Chart 7 labelled 66% and 69%, Chart 8 one bar labelled 38% and one unlabelled at about 40%); which bar uses which breakpoints is not stated"
+  },
+  {
+   "what": "Chart 7: ceftriaxone and cefotaxime",
+   "why": "a single 60% label sits between the two bars (both drawn at about 61%); which bar it labels cannot be told"
+  },
+  {
+   "what": "Chart 8: cefuroxime, ceftazidime, ceftriaxone and cefepime",
+   "why": "the two equal cefuroxime bars carry different labels (37% and 35%, the 35% possibly meant for ceftazidime); ceftriaxone is unlabelled; the 39% label near cefepime matches no bar (cefepime drawn at about 31%)"
+  },
+  {
+   "what": "Unlabelled bars (for example ampicillin for Klebsiella, aztreonam for Klebsiella pus, ertapenem and a third cefuroxime bar for E. coli urine, ciprofloxacin and ceftazidime for Acinetobacter)",
+   "why": "no printed value"
+  }
+ ]
+}

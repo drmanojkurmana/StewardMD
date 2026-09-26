@@ -1,0 +1,65 @@
+{
+ "id": "JPNATC_ACINETO",
+ "kind": "study",
+ "inst": "AIIMS_DELHI_JPNATC",
+ "institution": "JPN Apex Trauma Centre, AIIMS New Delhi",
+ "short": "AIIMS Delhi trauma centre",
+ "city": "New Delhi",
+ "state": "Delhi",
+ "region": "north",
+ "sector": "government",
+ "year": 2016,
+ "period": "2012 to 2016",
+ "citation": "J Lab Physicians 2019",
+ "doi": "10.4103/JLP.JLP_72_18",
+ "url": "https://doi.org/10.4103/JLP.JLP_72_18",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Method: The printed 'Total sensitive (%)' column of Table 1 (page 3) was used directly; the table also prints yearly resistant counts with percentages and a total resistance column."
+ },
+ "notes": "Kumari et al. (J Lab Physicians 2019) report five years of surveillance (2012 to 2016) of Acinetobacter from all clinical specimens at the JPN Apex Trauma Centre, AIIMS New Delhi: 3,744 isolates (28.9% of 16,210 isolates); 98.5% were A. baumannii, 1.4% A. lwoffii and 0.1% A. haemolyticus, all shown as A. baumannii. Figures are the paper's pooled total % susceptible for the five years. Colistin (98.2%) is 100 minus the 1.8% (68 isolates) the text reports as resistant by VITEK 2; these could not be retested by broth microdilution. Tigecycline was not tested in 2012, so its figure covers 2013 to 2016. The table's yearly counts add up to about 4,680, more than the 3,744 isolates, so its percentages were used. Ampicillin-sulbactam, minocycline and cefoperazone-sulbactam were not tested.",
+ "issues": [
+  "Lead 2026-09-26: its own institution key (AIIMS_DELHI_JPNATC, was AIIMS_DELHI): a different study from the same hospital is not an earlier edition of this one."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 3744,
+   "specimen_as_printed": "all clinical (trauma centre; 98.5% A. baumannii)",
+   "s": {
+    "amikacin": 8,
+    "cefepime": 5,
+    "ceftazidime": 5,
+    "ciprofloxacin": 4,
+    "gentamicin": 8,
+    "imipenem": 10,
+    "levofloxacin": 20,
+    "meropenem": 10,
+    "piperacillin": 5,
+    "piptazo": 7,
+    "cotrimoxazole": 20,
+    "tigecycline": 92,
+    "colistin": 98.2
+   },
+   "notes": {
+    "amikacin": "Total sensitive column printed (92% R)",
+    "tigecycline": "N/A in 2012; pooled 2013-16",
+    "colistin": "68/3744 (1.8%) colistin resistant per text; s=100-1.8"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "n": 3744
+  }
+ ],
+ "excluded": [],
+ "focus": "Acinetobacter isolates from the JPN Apex Trauma Centre (3,744 isolates, 2012 to 2016)"
+}
