@@ -5,6 +5,20 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-26 · Role box locks Home tools by role; trainees never hold the prescribing claim
+
+**Decision (owner).** A Role box at sign-up and in Profile (Medical student / Intern / PG Resident /
+Doctor) decides which Home tools open; the rest stay visible but locked with an explanation.
+Clinician Pro and Ultimate open the beta imaging AI without a code. Dictation credits are shown only as
+credits (Rs 10 = 100 credits), never in rupees, with buyable packs. All audit bugs fixed
+(vault/Role-Tiers.md section 6).
+**Why the role lock is presentation only.** The declared role is self-reported and changeable, so it
+must never be the thing that stops prescribing or unlocks paid work: those stay on server claims.
+That is also why approved students and interns now get `traineeVerified`, never `verified`.
+**Trade-off.** A user can mis-declare to see more tiles; the tools behind them still enforce their own
+gates. **Status.** Built on branch `claude/role-based-features-audit-9pph8l`; live after merge + native
+rebuild. Open: backfill of the phone index, owner review of legacy trainee approvals.
+
 ## 2026-09-26 · Cloud dictation fallback gets its own monthly credit; Clinician struck prices
 
 **Decision (owner).** The cloud speech-to-text fallback (audio sent to `/api/ai/transcribe` only when

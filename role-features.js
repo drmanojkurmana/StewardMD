@@ -92,7 +92,25 @@
     if (r && r !== declaredRole()) set(r);
   });
 
+  // The server's verified role arrives with /billing/status (account.js keeps it as SMD_PRO.proState()),
+  // after first paint. Adopt it when it appears or changes, so Home re-renders with the right locks.
+  function syncVerified() {
+    try {
+      var st = window.SMD_PRO && SMD_PRO.proState && SMD_PRO.proState(); if (!st) return false;
+      var u = uid(); if (!u) return true;
+      var r = normalize(st.role), prev = normalize(ls("smd_role_verified:" + u));
+      if (r !== prev) setVerified(r);
+      return true;
+    } catch (e) { return false; }
+  }
+  (function watch() {
+    var n = 0, t = setInterval(function () { n++; if (syncVerified() || n > 90) clearInterval(t); }, 1000);
+    try { window.addEventListener("smd:tier", syncVerified); } catch (e) {}
+    try { document.addEventListener("visibilitychange", function () { if (!document.hidden) setTimeout(syncVerified, 1500); }); } catch (e) {}
+  })();
+
   window.SMD_ROLE = {
+    syncVerified: syncVerified,
     ROLES: ROLES, LOCKED: LOCKED, normalize: normalize, current: current, declared: declaredRole,
     verified: verifiedRole, isVerified: isVerified, allows: allows, lockReason: lockReason,
     labelOf: labelOf, set: set, setVerified: setVerified, gatesOn: gatesOn,

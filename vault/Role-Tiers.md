@@ -215,6 +215,25 @@ Verified in code 2026-09-26:
 - **P7 WardSynQ.** Waitlist tile now; tenant plan record + seat check when the owner releases it.
 Each client phase: headless-browser test of the paywall and gated tiles per plan before build.
 
+## 7b. Role box (BUILT 2026-09-26)
+Owner: "create Role box in profile settings and during sign up and show only those features to them
+lock rest of them".
+- **Where:** `profile-setup.js` asks "I am a" first (Medical student (UG) / Intern / PG Resident /
+  Doctor (practising)); students and interns are not asked for a degree or speciality. Profile has a
+  Role row (`home.js` account card). Stored on `users/{uid}/profile/self.role` as the key.
+- **Map:** `role-features.js` (`SMD_ROLE`). Locked per role (everything else open):
+  - Student: PG logbook, Dictate, Documents, Review, Colleagues, Hospital, ICU & Ward, Ward Sync,
+    AgentConnect, Bedside dosing, Insulin, FollowCare, MAiTRI, OPD Queue.
+  - Intern: PG logbook, Review, Colleagues, Ward Sync, AgentConnect, Hospital, FollowCare, MAiTRI, OPD Queue.
+  - PG Resident: FollowCare, MAiTRI, OPD Queue, Review, AgentConnect.
+  - Doctor: PG logbook.
+- **Behaviour:** locked tiles stay on Home, greyed with a lock, after the open ones; a tap explains
+  who the tool is for and offers "Change my role"; search leaves them out. No role = nothing locked.
+- **Source of truth:** the server's verified role (`/billing/status` role) beats the declared one and
+  is not editable in Profile. Presentation only: prescribing, paid features and the PG logbook keep
+  their own server-side gates. Kill switch: localStorage `smd_role_gates="0"`.
+- **Test:** `test/run-role-box-ui.mjs` (18 checks, headless Chromium).
+
 ## 8. Owner decisions (2026-09-26)
 - **D1 Co-Resident: TAKEN.** One subscription, two logins (one per resident), one device per
   login. Keeps the PG logbook, verification and Rx tied to one named doctor. The existing
