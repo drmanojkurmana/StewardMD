@@ -256,7 +256,7 @@ import { askAboutPatient, reviewInteraction, listInteractions, COPILOT as MAIK_C
 import { patientSurveillance, acknowledgeSignal, RULES as SURVEILLANCE_RULES, NOT_BUILT as SURVEILLANCE_NOT_BUILT } from "../../_wardsynq/surveillance.js";
 import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty } from "../../_wardsynq/pathways.js";
-import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
+import { hit as rateHit, ipHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
 // S3 P0: critical results pushed to phones, behind org setting wardsynq.alerts.push.enabled (default off).
 import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders, commsPorts, alertAdmins, alertsEnabled, pushToIdentities } from "../../_wardsynq/alert-deps.js";
@@ -1079,6 +1079,10 @@ export async function onRequest(context) {
 
   try {
     // ---- StewardMD-native staff login (email / PIN) — GHIS-INDEPENDENT (Phase 5), pre-auth ----
+    if (method === "POST" && seg === "auth" && (sub === "pin" || sub === "email" || sub === "mfa")) {   // SEC-15: one address, all sign-in doors
+      const ipRl = await ipHit(env, request, "auth", 60, 60000);
+      if (!ipRl.allowed) return json({ ok: false, error: "rate_limited", retryAfterSeconds: ipRl.retryAfterSeconds, message: "Too many sign-in attempts from this network. Wait a minute and try again." }, 429, request, { "Retry-After": String(ipRl.retryAfterSeconds) });
+    }
     if (method === "POST" && seg === "auth" && (sub === "pin" || sub === "email")) {
       // Every sign-in record names the device it came from, so "Recent sign-ins" can show it.
       const loginAudit = (orgId, identity, action, meta) => ORG.auditLogin(env, orgId, identity, action, [meta, deviceLabel(request.headers.get("user-agent"))].filter(Boolean).join(" · "));
@@ -1112,7 +1116,7 @@ export async function onRequest(context) {
         const nx = nextPinState(auth, Date.now(), ok);
         await ORG.recordMemberPinAttempt(env, auth.orgId, auth.identity, nx);
         await loginAudit(auth.orgId, auth.identity, ok ? "login:pin_ok" : nx.pinLockedUntil ? "login:pin_lockout" : "login:pin_failed", ok ? "" : "attempt " + nx.pinAttempts);
-        if (!ok) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - nx.pinAttempts) }, 401, request);
+        if (!ok) return json({ ok: false, error: "invalid_login" }, 401, request);   // SEC-13: no attemptsLeft, or a known login answers differently from an unknown one
         if (auth.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, auth.orgId, auth.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
         let orgCode = "";
         try { const o = await ORG.getOrg(env, auth.orgId); if (o) orgCode = o.code || ""; } catch (e) {}
@@ -1131,7 +1135,7 @@ export async function onRequest(context) {
       const pNx = nextPassState(m, Date.now(), pOk);
       await ORG.recordMemberPassAttempt(env, m.orgId, m.identity, pNx);
       await loginAudit(m.orgId, m.identity, pOk ? "login:password_ok" : pNx.passLockedUntil ? "login:password_lockout" : "login:password_failed", pOk ? "" : "attempt " + pNx.passAttempts);
-      if (!pOk) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - pNx.passAttempts) }, 401, request);
+      if (!pOk) return json({ ok: false, error: "invalid_login" }, 401, request);   // SEC-13: same shape as an unknown email
       if (m.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, m.orgId, m.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
       return json({ ok: true, token: await mintStaffSession(env, m.orgId, m.identity, Date.now()), orgId: m.orgId, identity: m.identity }, 200, request);
     }
