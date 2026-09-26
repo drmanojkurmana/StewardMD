@@ -225,6 +225,15 @@
       P.map(function (p, i) { return '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3"/><text x="' + p[0].toFixed(1) + '" y="' + (p[1] - 6).toFixed(1) + '" font-size="9" text-anchor="middle">' + num(pts[i].s) + "</text>"; }).join("") +
       "</svg>" + '<div class="v2-mut">' + pts.map(function (p) { return (p.label || p.year) + (p.as ? " (reported as " + esc(p.as) + ")" : "") + (p.reported ? " (from the report's trend table)" : ""); }).join(", ") + "</div>";
   }
+  // What a percentage cannot tell: breakpoint systems and exposure at the site of infection.
+  function drugCaveat(drug, org, spec) {
+    var g = R().orgGroup(org), t = "";
+    if ((drug === "colistin" || drug === "polymyxin_b") && (g === "entero" || g === "nonferm"))
+      t = "CLSI (2020 onward) has no susceptible category for colistin or polymyxin B: a figure here is the share intermediate (wild type, MIC 2 mg/L or less). CLSI advises using them in combination; the 2019 international polymyxin guidelines prefer polymyxin B for systemic infection and colistin for lower urinary infection.";
+    else if ((drug === "tigecycline" || drug === "eravacycline") && spec === "blood")
+      t = "Tigecycline reaches low blood concentrations; IDSA advises against it alone for bloodstream infection.";
+    return t ? '<div class="v2-note">' + esc(t) + "</div>" : "";
+  }
   function cellSheet(scope, org, pheno, drug) {
     var R0 = R(), spec = st.spec, set = st.set;
     var c = S().cell(scope, spec, set, org, pheno || null, drug);
@@ -245,6 +254,7 @@
       h += '<div class="v2-mut">' + (c.pooled ? "Pooled from " + cc.k + " institution" + (cc.k === 1 ? "" : "s") + ", " + fmtN(cc.nt) + " isolates" + (cc.k > 1 ? "; range " + num(cc.min) + " to " + num(cc.max) + "%" : "") : fmtN(cc.nt || c.n) + " isolates tested") + ".</div>";
       if (cc.fromR) h += '<div class="v2-mut">Reported as ' + num(100 - cc.s) + "% resistant; intermediate results are counted as susceptible here.</div>";
       else if (cc.mixR) h += '<div class="v2-mut">Some institutions report % resistant; for those, intermediate results are counted as susceptible.</div>';
+      h += drugCaveat(drug, org, spec);
     } else if (cc && cc.act === "intrinsic") {
       h += '<div class="v2-big b1">Intrinsic resistance</div><p>' + esc(cc.why) + ". This antibiotic should not be used for this organism whatever a laboratory figure says.</p>";
     } else if (cc && cc.why) {

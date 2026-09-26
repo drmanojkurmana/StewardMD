@@ -69,6 +69,12 @@ test("specimen relevance: nitrofurantoin only for urine, daptomycin never for re
   assert.equal(row({ org: "ecoli", spec: "nonurine", s: { nitrofurantoin: 90 } }).cells.nitrofurantoin.act, "hide");
   assert.equal(row({ org: "saureus", spec: "respiratory", s: { daptomycin: 100 } }).cells.daptomycin.act, "hide");
   assert.equal(row({ org: "ecoli", spec: "blood", s: { fosfomycin: 95 } }).cells.fosfomycin.act, "caution");
+  // Too little reaches the urine: tigecycline and moxifloxacin are hidden for urinary isolates only.
+  const u = row({ org: "ecoli", spec: "urine", s: { tigecycline: 97, moxifloxacin: 30, ciprofloxacin: 30 } }).cells;
+  assert.equal(u.tigecycline.act, "hide");
+  assert.equal(u.moxifloxacin.act, "hide");
+  assert.equal(u.ciprofloxacin.act, "keep");
+  assert.equal(row({ org: "ecoli", spec: "blood", s: { tigecycline: 97 } }).cells.tigecycline.act, "keep");
 });
 
 test("staphylococcal phenotypes: MRSA rows cannot be beta-lactam susceptible; MSSA rows cannot be cefoxitin resistant", () => {

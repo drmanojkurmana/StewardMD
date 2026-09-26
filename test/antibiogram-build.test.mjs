@@ -169,7 +169,10 @@ test("bundle: deterministic version, compact rows, every cell action counted", (
   assert.ok(a.bundle.rows.every((r) => Array.isArray(r) && typeof r[0] === "number" && r[0] < a.bundle.sources.length));
 });
 
-test("the committed bundle, index and tokens are fresh (build --check)", () => {
+test("the committed register, bundle, index and tokens are fresh (abg-register --check, build --check)", () => {
+  // The register goes into the bundle: it must be current before the bundle can be.
+  const reg = execFileSync(process.execPath, [path.join(ROOT, "scripts", "abg-register.mjs"), "--check"], { encoding: "utf8" });
+  assert.match(reg, /^OK: register \d+ documents/);
   const out = execFileSync(process.execPath, [path.join(ROOT, "scripts", "build-antibiogram.mjs"), "--check"], { encoding: "utf8" });
   assert.match(out, /^OK: antibiogram v [0-9a-f]{12}/);
 });

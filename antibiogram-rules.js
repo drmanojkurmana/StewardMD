@@ -352,6 +352,9 @@
   var NOT_EFFECTIVE_SS = AMINO_STD.concat(["cefazolin", "cephalexin", "cefuroxime", "cefoxitin"]);
   var URINE_ONLY = ["nitrofurantoin", "norfloxacin"];
   var NOT_RESPIRATORY = ["daptomycin"];
+  // Too little reaches the urine to treat a urinary infection (IDSA 2024 AMR guidance advises
+  // against tigecycline and eravacycline for UTI; moxifloxacin is not renally excreted).
+  var NOT_URINE = ["tigecycline", "eravacycline", "moxifloxacin"];
   var STAPH_BL_LABILE = ["penicillin", "ampicillin", "amoxicillin"];
   var STAPH_BL_STABLE = ["oxacillin", "cloxacillin", "amoxiclav", "ampsulbactam", "piptazo", "cefazolin", "cephalexin", "cefuroxime", "cefotaxime", "ceftriaxone", "ceftazidime", "cefepime", "cefixime", "cefpodoxime", "cefoperazone", "cefoperazone_sulbactam", "piperacillin", "ertapenem", "imipenem", "meropenem", "doripenem", "ceftazidime_avibactam", "ceftolozane_tazobactam", "imipenem_relebactam", "meropenem_vaborbactam", "cefiderocol"];
 
@@ -414,6 +417,7 @@
       if (conflict[d]) { c.act = "caution"; c.why = "the source contradicts itself: " + conflict[d]; return; }
       if (URINE_ONLY.indexOf(d) >= 0 && row.spec && row.spec !== "urine" && row.spec !== "all") { c.act = "hide"; c.why = drugLabel(d) + " is reported for urinary isolates only"; return; }
       if (NOT_RESPIRATORY.indexOf(d) >= 0 && row.spec === "respiratory") { c.act = "hide"; c.why = "daptomycin is inactivated by lung surfactant"; return; }
+      if (NOT_URINE.indexOf(d) >= 0 && row.spec === "urine") { c.act = "hide"; c.why = drugLabel(d) + " reaches too little concentration in urine to treat a urinary infection"; return; }
       if (isStaph && (pheno === "MRSA" || pheno === "MR") && v > 0 && (STAPH_BL_LABILE.indexOf(d) >= 0 || STAPH_BL_STABLE.indexOf(d) >= 0 || d === "cefoxitin")) {
         c.act = "suppress"; c.why = "methicillin-resistant staphylococci are resistant to beta-lactams (other than ceftaroline) by definition; the printed figure cannot be right"; return;
       }

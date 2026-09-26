@@ -1,5 +1,5 @@
 {
- "version": "03baf5cd8c23",
+ "version": "53a0a8f14d64",
  "generated": "build",
  "countMismatches": [
   {
@@ -33,6 +33,96 @@
    "set": "icu",
    "org": "ecoli",
    "text": "Urine, ICU: Escherichia coli repeats 17 figures of NARS-Net 2024 urine, icu, E. coli (n=1784) exactly"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "blood",
+   "set": "icu",
+   "org": "ecoli",
+   "count": 153,
+   "rows": 152,
+   "text": "Blood, ICU: Escherichia coli 153 in the organism table, 152 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "urine",
+   "set": "ward",
+   "org": "efaecalis",
+   "count": 38,
+   "rows": 37,
+   "text": "Urine, Wards: Enterococcus faecalis 38 in the organism table, 37 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "urine",
+   "set": "ward",
+   "org": "ecoli",
+   "count": 498,
+   "rows": 497,
+   "text": "Urine, Wards: Escherichia coli 498 in the organism table, 497 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "ecoli",
+   "count": 220,
+   "rows": 219,
+   "text": "Urine, ICU: Escherichia coli 220 in the organism table, 219 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "paeruginosa",
+   "count": 68,
+   "rows": 67,
+   "text": "Urine, ICU: Pseudomonas aeruginosa 68 in the organism table, 67 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "pus",
+   "set": "ward",
+   "org": "cons",
+   "count": 46,
+   "rows": 45,
+   "text": "Pus, wounds and body fluids, Wards: Coagulase-negative staphylococci 46 in the organism table, 45 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "pus",
+   "set": "opd",
+   "org": "klebsiella",
+   "count": 357,
+   "rows": 356,
+   "text": "Pus, wounds and body fluids, Outpatients: Klebsiella pneumoniae / spp. 357 in the organism table, 356 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "sterile",
+   "set": "opd",
+   "org": "cons",
+   "count": 13,
+   "rows": 12,
+   "text": "Sterile body fluids, Outpatients: Coagulase-negative staphylococci 13 in the organism table, 12 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "klebsiella",
+   "count": 88,
+   "rows": 87,
+   "text": "Sterile body fluids, Wards: Klebsiella pneumoniae / spp. 88 in the organism table, 87 in the antibiogram table"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "ecoli",
+   "count": 100,
+   "rows": 99,
+   "text": "Sterile body fluids, Wards: Escherichia coli 100 in the organism table, 99 in the antibiogram table"
   },
   {
    "src": "SKIMS_2025",
@@ -839,6 +929,28 @@
    "value": 2.3,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 66.7,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 100,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
   },
   {
    "src": "ICMR_AMRSN_2024",
@@ -1829,6 +1941,105 @@
    "value": 10,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "pus",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "minocycline",
+   "value": 8,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "minocycline",
+   "value": 9,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "minocycline",
+   "value": 15,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "drug": "penicillin",
+   "value": 8,
+   "action": "suppress",
+   "why": "Penicillin susceptibility (8%) is higher than methicillin (cefoxitin/oxacillin) susceptibility (0%), which is impossible: methicillin-resistant strains are beta-lactam resistant"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "drug": "penicillin",
+   "value": 97,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 97% for a row of n = 21; no whole number of 21 or fewer tested isolates gives 97%"
+  },
+  {
+   "src": "SGRH_2024",
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 97,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 97% for a row of n = 21; no whole number of 21 or fewer tested isolates gives 97%"
   },
   {
    "src": "SKIMS_2025",
