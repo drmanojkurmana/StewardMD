@@ -492,6 +492,7 @@ async function wsqLinkTenantOrg(env, org) {
 }
 import { tenantLinkRefusal } from "../../_wardsynq/tenant-link.js";
 import { publicOrg } from "../../_opd_org.js";
+import { localUrlProblem } from "../../_wardsynq/maik-gateway.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 import * as ONCO from "../../_onco_store.js";
@@ -7019,6 +7020,8 @@ export async function onRequest(context) {
         /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
         const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
         if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);
+        const maikUrlBad = wb && typeof wb === "object" && wb.maik && typeof wb.maik === "object" ? localUrlProblem(wb.maik.localBaseUrl) : null;   // SEC-08
+        if (maikUrlBad) return json({ ok: false, error: "bad_maik_local_url", message: maikUrlBad + ". Nothing was saved." }, 422, request);
         const linkRefusal = body.connectTenantId ? await tenantLinkRefusal(env, actor, await ORG.getOrg(env, body.orgId), body.connectTenantId) : null;   // SEC-02
         if (linkRefusal) return json({ ok: false, ...linkRefusal }, linkRefusal.status, request);
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
